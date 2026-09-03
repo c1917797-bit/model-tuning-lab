@@ -38,6 +38,22 @@ environment:
     excluded_active_workstream_devices: [4, 5, 6, 7]
 protocol:
   primary_metric: "end-to-end TPOT or throughput at matched quality; router microbenchmark is a diagnostic metric only"
+  diagnostic_block_ab:
+    scope: "single-card Ascend-native MoE block: routing + compact token/expert dispatch + BF16 grouped matmul/SwiGLU/grouped matmul + weighted combine"
+    purpose: "measure whether reduced expert activations can offset Dynamic MoE routing/dispatch overhead before full-model integration"
+    device: "physical NPU0 in the same CANN/torch-npu container for both baseline and candidate"
+    experts: 8
+    hidden_size: 2048
+    expert_intermediate_size: 768
+    token_counts: [128, 512, 2048, 4096]
+    dtype: "bfloat16"
+    baseline: "fixed Top-2 with the same router probabilities, hidden states, expert weights, warmup, and repetitions"
+    candidate: "cumulative-mass Dynamic MoE with top_p=0.4 and physically compacted selected token/expert pairs"
+    repetitions: 5
+    warmup_iterations: 20
+    measured_iterations: 100
+    diagnostic_success_threshold: "median whole-block latency improves >= 5% at one or more representative token counts without a p95 regression at that same point"
+    interpretation_limit: "diagnostic only; cannot satisfy paper acceptance because no real MoE model quality checkpoint is locally available"
   correctness_guardrails:
     - "selected experts are exactly the minimal descending-probability prefix reaching the configured cumulative threshold"
     - "selected routing weights and expert ids match the reference contract on deterministic cases"
@@ -83,6 +99,7 @@ results:
   boundary: {}
   lifecycle: {}
   resources: {}
+  block_ab: {}
 artifacts:
   - type: "command"
     value: "scripts/paper_to_ascend/run_dynamic_moe_npu_smoke.sh 0"

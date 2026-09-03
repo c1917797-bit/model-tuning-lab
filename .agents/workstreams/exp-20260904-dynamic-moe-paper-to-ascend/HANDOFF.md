@@ -83,3 +83,7 @@ python -m unittest discover -s tests -p 'test_dynamic_moe_routing.py'
 ```
 
 Before any new NPU run, prove NPU0-3 remain free in the same session.
+
+## Current A/B request
+
+The user requested a real before/after performance validation. No usable MoE model weights are present locally, and a live attempt to query the paper's Hugging Face checkpoint from this host failed with `Network is unreachable`. The next bounded stage therefore measures a real Ascend-native whole MoE block (routing + compact dispatch + BF16 GMM/SwiGLU/GMM + combine) on physical NPU0. Fixed Top-2 and Dynamic top-p use identical inputs/weights and repeated measurements. This is explicitly diagnostic block-level evidence, not a full-model paper acceptance result.
