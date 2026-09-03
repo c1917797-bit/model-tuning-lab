@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260903-qwen38-prefix-cache-general-eval
-status: planned
+status: baselined
 decision: pending
 hypothesis: "Enabling vLLM prefix caching improves TTFT and end-to-end throughput on repeated-prefix MMLU/GSM8K/HumanEval evaluation traffic without changing answer quality or increasing NPU HBM beyond safe capacity."
 objective: "Improve Qwen3.8-27B vLLM inference efficiency on chicaihong01 while preserving MMLU, HumanEval, and GSM8K correctness."
@@ -11,6 +11,7 @@ git:
   stage_commits:
     - "2ec7f8d9b1b4b53fa5a65be0cdfa84a089315315 planned"
     - "edbc60e6f63c6bf447965c1dfff653cbe73713e8 eval-harness"
+    - "a497c49a264e242e768acf460290f8cda438aabc orientation-data"
 environment:
   source_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
   model_revision: "local:/cache/austinov/Qwen3.8-27B; config_sha256=191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab; weights=18 safetensors/55563006776 bytes"
@@ -68,7 +69,29 @@ protocol:
   repetitions: 3
   command: "scripts/qwen38_general_eval.py against OpenAI-compatible endpoint; fixed cached dataset snapshot"
 results:
-  baseline: {}
+  baseline:
+    repetitions: 3
+    valid_runs: [run1, run2, run3]
+    invalid_runs_preserved: 3
+    wall_s: {median: 441.473954020, mean: 448.657865420, min: 432.213583200, max: 472.286059040, cv_pct: 4.676}
+    output_tokens_per_s: {median: 108.853533855, mean: 107.875256518, min: 103.600347847, max: 111.171887853, cv_pct: 3.596}
+    requests_per_s: {median: 1.162016457, mean: 1.145045248, min: 1.086206104, max: 1.186913184, cv_pct: 4.581}
+    mmlu_accuracy: {median: 0.708771930, min: 0.705263158, max: 0.719298246}
+    gsm8k_accuracy: {median: 0.906250000, min: 0.906250000, max: 0.921875000}
+    humaneval_pass_at_1: {median: 0.609756098, min: 0.585365854, max: 0.615853659}
+    ttft_p50_ms: {median: 1052.193830023, min: 979.048170033, max: 1066.601929953}
+    e2e_p50_ms: {median: 2785.681309993, min: 2569.826620049, max: 3291.624410078}
+    e2e_p95_ms: {median: 26051.193524059, min: 25924.718096014, max: 26918.840997969}
+    errors: 0
+    prefix_cache_hit_rate: 0.0
+    evidence_dir: "/cache/austinov/eval-runs/exp-20260903-qwen38-prefix-cache-general-eval/baseline"
+    run_sha256:
+      run1_json: "64574c5432d186357d97944ac2c441a93550fe1861da9b565a60c0cff4ac6cd0"
+      run1_humaneval: "52ab5b87945a44ec3be787ac073f7837f385c835334d089fb641282c17ab76f7"
+      run2_json: "1c2bed784727116c0dd105e32a9e849b2d22eaccf90b18606e2ee807d38c33a9"
+      run2_humaneval: "bf10c3fa6bf3bda5598e48a42fa91069d9b4eab0fdf448176f75eb613cde3e67"
+      run3_json: "3876fa2658aa58e4a21a177627e9c3fa6255de5c58b26582ece73de10d8d038d"
+      run3_humaneval: "4e2b99dfee8ce6f91c1644a4942479500f85a1137f12924125d80aa6e105fb38"
   candidate: {}
   cold: {}
   steady: {}
