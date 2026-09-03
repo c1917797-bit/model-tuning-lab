@@ -1,8 +1,12 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "handoff-readiness-20260904",
-  "status": "not-ready",
-  "targetParent": null,
-  "sourceCommit": null,
-  "validation": []
+  "status": "ready",
+  "targetParent": "f49c63f8c8f790f8bb79b047cf689f852e1a4682",
+  "sourceCommit": "1cbf003034b6e2e2df4080479fae302b5e4518dd",
+  "validation": [
+    {"command": "./scripts/validate-mst.sh", "result": "PASS (17 skills)"},
+    {"command": "git diff --check", "result": "PASS"}
+  ],
+  "note": "This readiness checkpoint changes workstream metadata only; the validated implementation tree is sourceCommit."
 }
