@@ -10,7 +10,7 @@ EXPECTED_CPUSET=$6
 SNAPSHOT=$7
 
 ROOT=/cache/austinov/eval-runs/exp-20260903-qwen38-prefix-cache-general-eval
-WT=/opt/host/vnf/austinov/worktrees/exp-20260903-qwen38-prefix-cache-general-eval
+WT=/opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-prefix-cache-general-eval-final
 OUT=$ROOT/$PHASE
 IMG=quay.io/ascend/vllm-ascend:v0.23.0
 CLIENT=qwen38_perf_client_${PHASE}_${RUN}
