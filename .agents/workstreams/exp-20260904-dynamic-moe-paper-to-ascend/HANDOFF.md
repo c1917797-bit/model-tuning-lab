@@ -2,7 +2,7 @@
 
 ## Status
 
-- Execution: `in-progress`
+- Execution: `in-progress` (current direct-lowering measurement decided; next optimization loop remains open)
 - Integration: `not-ready`
 - Base: `fbc79c41c37c8900f0623ce8941304e9bfde5cf1`
 - Hardware lease: `chicaihong01 NPU0-3`
@@ -48,6 +48,8 @@ fixed Top-2 router median: 175.645 us
 Interpretation: the target device reproduces the paper's key adaptive-expert behavior on synthetic router distributions, but the dynamic selection operation is roughly 2x the fixed-Top2 router in this microbenchmark. The paper hypothesis is therefore not accepted yet: the next stage must test whether saved expert compute outweighs routing/dispatch overhead end to end.
 
 The subsequent whole-block A/B answered that question for the current direct lowering: it does **not**. At 4096 tokens Dynamic routing reduced token/expert pairs by about 12.8% and accelerated the actual expert GMM stage by about 8.85%, but whole-block median latency increased from 1309.43 us to 2386.40 us (+82.25%). A stage breakdown measured the routing/pair-selection path at 1389.64 us versus 218.465 us for fixed Top-2. The same whole-block regression was present at 128, 512 and 2048 tokens and was stable over five repetitions.
+
+Decision boundary: **reject the current direct sort+cumsum+boolean-compaction lowering**, but do **not** reject the paper itself. The full-model result is `inconclusive`: this host has no usable real MoE checkpoint and could not reach the paper's published Hugging Face weights during the run. The next loop is a bounded/fused `max_k` router targeting the measured routing bottleneck, followed by the same block A/B and then matched-quality full-model A/B once weights are available.
 
 Raw evidence:
 

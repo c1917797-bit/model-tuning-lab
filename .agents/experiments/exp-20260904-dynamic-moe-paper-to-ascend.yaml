@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260904-dynamic-moe-paper-to-ascend
-status: measured
-decision: pending
+status: decided
+decision: inconclusive
 hypothesis: "Replacing fixed Top-2 MoE routing with cumulative-probability dynamic routing can reduce average activated experts while preserving quality, and on Ascend can convert that compute reduction into end-to-end decode/throughput benefit if routing and variable-expert dispatch overhead are controlled."
 objective: "Create and validate a reusable Paper-to-Ascend pipeline, using Dynamic MoE as the first NPU-native exemplar and producing an integration-ready contract for vLLM-Ascend/CANN."
 owner: "chatgpt"
@@ -170,8 +170,8 @@ artifacts:
     value: "/cache/austinov/paper-to-ascend/dynamic-moe-block-ab/full-20260903T223006Z/result.json sha256=6902b1115e4a61eaf4f79ffa7344fe366d0e80f93a0a52e56e41e60669a5fc49"
   - type: "block-ab-breakdown"
     value: "/cache/austinov/paper-to-ascend/dynamic-moe-block-ab/breakdown-20260903T223119Z.json sha256=519b319a89799c19e3253335f3a455484edaf4f48e1150c8a86b0f47742e8aaa"
-decision_reason: ""
+decision_reason: "The current direct Ascend lowering is rejected at the MoE-block level: Dynamic top-p reduced activated expert pairs by about 12-13.5% and improved the 4096-token expert-GMM stage by 8.85%, but full sort+cumsum+boolean compaction made routing about 6.36x slower and whole-block latency regressed by 82-96% across all tested token counts. The paper/full-model claim remains inconclusive because no usable real MoE checkpoint was available locally and the host could not reach the published Hugging Face checkpoint, so matched-quality model/serving A/B was not possible."
 next_loop: "Replace full sort+cumsum+boolean dynamic compaction with a bounded max_k/fused Dynamic MoE router compatible with vLLM-Ascend/CANN; target the measured 1.39 ms routing bottleneck while preserving the observed 8.85% expert-GMM saving, then rerun this same block A/B before full-model quality/performance comparison."
 rollback:
   command: "No production runtime is modified in the planned/reference stage; stop/delete only the isolated test container if used."
-  verified: false
+  verified: true
