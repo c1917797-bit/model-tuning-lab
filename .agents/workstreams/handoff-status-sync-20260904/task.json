@@ -1,0 +1,23 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "handoff-status-sync-20260904",
+  "objective": "Synchronize the global maintainer handoff after the handoff-readiness merge so it states integrated truth rather than the in-progress integration wording captured inside the merge tree.",
+  "targetBranch": "main",
+  "workBranch": "work/handoff-status-sync-20260904",
+  "remote": "origin",
+  "createdAt": "2026-09-04",
+  "owner": "chatgpt",
+  "originalBase": "fbc79c41c37c8900f0623ce8941304e9bfde5cf1",
+  "frozenConstraints": {
+    "AGENTS.md": "sha256:e72e4c92f60b98fdf3222afe6398b480ae2d426318878a14da2b947904723afe",
+    ".agents/git-policy.yaml": "sha256:197a379314f64d6249ca6459b23f0e4f6c15d6a9448b44ee7cfa1280dff69174",
+    ".agents/skills/mst-maintainer-handoff/SKILL.md": "sha256:0fcd4ab232a1c0e3c1adc5f3c787008ae563c005d418e58330537b42110c1d8e"
+  },
+  "dependencies": ["handoff-readiness-20260904"],
+  "claims": [
+    {"kind": "knowledge", "mode": "exclusive", "value": ".agents/HANDOFF.md"}
+  ],
+  "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
