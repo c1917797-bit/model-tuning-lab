@@ -1,7 +1,12 @@
 {
   "schema": "mst-integration-evidence/v1",
   "targetParent": "eb52c68548844b9b8a282e6b5b83aab8b25f7555",
-  "sourceCommit": null,
-  "status": "not-ready",
-  "validation": []
+  "sourceCommit": "ea999afb0c01e7b41bf88b25367717ffd9861987",
+  "status": "ready",
+  "validation": [
+    {"command": "./scripts/validate-mst.sh", "result": "PASS (17 skills)"},
+    {"command": "git diff --check", "result": "PASS"},
+    {"command": "focused Ascend skill and policy checks", "result": "PASS"}
+  ],
+  "note": "This readiness commit changes metadata only; the validated implementation tree is sourceCommit."
 }
