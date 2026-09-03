@@ -11,6 +11,46 @@ selection:
     - Tool adapters do not override AGENTS.md or this registry.
 
 skills:
+  - id: ascend-benchmark-evidence
+    path: .agents/skills/ascend-benchmark-evidence
+    status: experimental
+    purpose: Produce comparable correctness and performance evidence on Ascend NPUs.
+    triggers:
+      - benchmark an inference change
+      - compare an optimization with its baseline
+      - accept or reject a performance claim
+    scope:
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+  - id: ascend-inference-tuning-loop
+    path: .agents/skills/ascend-inference-tuning-loop
+    status: experimental
+    purpose: Run the Git-recorded hypothesis-to-decision tuning flywheel.
+    triggers:
+      - start or resume an inference optimization
+      - record a successful failed rejected or inconclusive attempt
+      - close a tuning experiment
+    scope:
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+  - id: ascend-npu-environment-orientation
+    path: .agents/skills/ascend-npu-environment-orientation
+    status: experimental
+    purpose: Prove the exact Ascend hardware and software execution context.
+    triggers:
+      - establish or refresh a tuning baseline
+      - move an experiment to another host or container
+      - investigate environment or topology drift
+    scope:
+      - configs/**
+      - scripts/**
+      - .agents/experiments/**
   - id: mst-agentsmd-authoring
     path: .agents/skills/mst-agentsmd-authoring
     status: stable

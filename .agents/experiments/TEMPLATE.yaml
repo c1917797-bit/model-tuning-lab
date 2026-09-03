@@ -1,0 +1,43 @@
+schema: model-tuning-experiment/v1
+id: exp-YYYYMMDD-short-name
+status: planned
+decision: pending
+hypothesis: ""
+objective: ""
+owner: ""
+git:
+  branch: work/experiment-name
+  base_commit: ""
+  stage_commits: []
+environment:
+  source_commit: ""
+  model_revision: ""
+  tokenizer_revision: ""
+  dtype_or_quantization: ""
+  framework_versions: {}
+  cann_driver_firmware: {}
+  hardware_topology: {}
+  runtime_topology: {}
+protocol:
+  primary_metric: ""
+  correctness_guardrails: []
+  acceptance_thresholds: []
+  regression_thresholds: []
+  abort_conditions: []
+  warmup: ""
+  repetitions: 0
+  command: ""
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts: []
+decision_reason: ""
+next_loop: ""
+rollback:
+  command: ""
+  verified: false

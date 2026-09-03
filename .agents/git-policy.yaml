@@ -1,5 +1,5 @@
 schema: mst-git-policy/v1
-repository_policy: single_branch_clean_push_after_basic_validation
+repository_policy: commit_implies_push
 status: maintainer-confirmed
 
 options:
@@ -37,3 +37,24 @@ workstream_routing:
     default_active_worktree_budget: 4
     default_stale_after_days: 7
     remote_branch_delete_requires_retention_policy: true
+
+tuning_checkpoint_policy:
+  branch: one_work_branch_per_hypothesis
+  commit_immediately_after:
+    - hypothesis_and_thresholds
+    - baseline
+    - implementation_attempt
+    - correctness_verification
+    - measurement
+    - decision
+    - rollback_or_recovery
+  push_each_commit_to_current_branch: true
+  record_outcomes:
+    - accepted
+    - rejected
+    - inconclusive
+    - failed
+  preserve_negative_history: true
+  failed_active_code_must_be_recovered_before_integration: true
+  integration_merge: no_ff
+  force_push: forbidden
