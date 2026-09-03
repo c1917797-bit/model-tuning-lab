@@ -1,0 +1,30 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "handoff-readiness-20260904",
+  "objective": "Consolidate evidence-backed successes, failures, risks, current active workstream state, and a takeover runbook so Model Tuning Lab is ready for immediate maintainer handoff.",
+  "targetBranch": "main",
+  "workBranch": "work/handoff-readiness-20260904",
+  "remote": "origin",
+  "createdAt": "2026-09-04",
+  "owner": "chatgpt",
+  "originalBase": "f49c63f8c8f790f8bb79b047cf689f852e1a4682",
+  "frozenConstraints": {
+    "AGENTS.md": "sha256:e72e4c92f60b98fdf3222afe6398b480ae2d426318878a14da2b947904723afe",
+    ".agents/git-policy.yaml": "sha256:197a379314f64d6249ca6459b23f0e4f6c15d6a9448b44ee7cfa1280dff69174",
+    ".agents/skills/mst-maintainer-handoff/SKILL.md": "sha256:0fcd4ab232a1c0e3c1adc5f3c787008ae563c005d418e58330537b42110c1d8e",
+    ".agents/skills/mst-parallel-workstreams/SKILL.md": "sha256:1935194fe285e2d2163f66bd915c39f3b5dffc464cdb52a20571738fa868fcee"
+  },
+  "dependencies": [],
+  "claims": [
+    {"kind": "file", "mode": "exclusive", "value": "docs/LESSONS_LEARNED.md"},
+    {"kind": "file", "mode": "exclusive", "value": "docs/RUNBOOK.md"},
+    {"kind": "knowledge", "mode": "shared", "value": ".agents/HANDOFF.md target-owned reconciliation at integration"},
+    {"kind": "knowledge", "mode": "read", "value": "work/exp-20260903-qwen38-prefix-cache-general-eval branch-local state"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
