@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260904-dynamic-moe-paper-to-ascend
-status: planned
+status: verified
 decision: pending
 hypothesis: "Replacing fixed Top-2 MoE routing with cumulative-probability dynamic routing can reduce average activated experts while preserving quality, and on Ascend can convert that compute reduction into end-to-end decode/throughput benefit if routing and variable-expert dispatch overhead are controlled."
 objective: "Create and validate a reusable Paper-to-Ascend pipeline, using Dynamic MoE as the first NPU-native exemplar and producing an integration-ready contract for vLLM-Ascend/CANN."
@@ -8,7 +8,9 @@ owner: "chatgpt"
 git:
   branch: work/exp-20260904-dynamic-moe-paper-to-ascend
   base_commit: "fbc79c41c37c8900f0623ce8941304e9bfde5cf1"
-  stage_commits: []
+  stage_commits:
+    - "planned: ea0c6e69a5a613ed45939be533e110686d78b154"
+    - "attempted: a37d7282a976e90af3e3b943a522cf6eed60f705"
 paper:
   title: "Harder Tasks Need More Experts: Dynamic Routing in MoE Models"
   venue: "ACL 2024"
@@ -53,16 +55,41 @@ protocol:
   repetitions: 3
   command: "python scripts/paper_to_ascend/dynamic_moe_npu_smoke.py --device npu:0 --experts 8 --tokens 4096 --top-p 0.4"
 results:
-  baseline: {}
-  candidate: {}
-  cold: {}
-  steady: {}
+  baseline:
+    router: "fixed Top-2 diagnostic baseline"
+    median_us: 175.645
+    p95_us: 186.28
+  candidate:
+    router: "dynamic cumulative-mass routing, top_p=0.4"
+    correctness: pass
+    mean_activated_experts: 1.75244140625
+    activation_histogram:
+      1: 1228
+      2: 2654
+      3: 214
+    median_us: 362.805
+    p95_us: 376.05
+  cold:
+    first_attempt: "failed before algorithm execution: aclInit error 507008 / SoC version unavailable because driver/DCMI bind mounts were incomplete"
+    recovery: "matched the known-good vLLM container driver/DCMI mounts; rerun succeeded"
+  steady:
+    scope: "router-only microbenchmark; diagnostic, not an end-to-end paper performance decision"
+    tokens: 4096
+    experts: 8
+    top_p: 0.4
+    device: "physical NPU0 mapped as container npu:0"
   boundary: {}
   lifecycle: {}
   resources: {}
-artifacts: []
+artifacts:
+  - type: "command"
+    value: "scripts/paper_to_ascend/run_dynamic_moe_npu_smoke.sh 0"
+  - type: "validation"
+    value: "5 routing unit tests passed in the vllm-ascend v0.23.0 container; Maintainer Skill Tree validation passed; git diff --check passed"
+  - type: "live-evidence"
+    value: "NPU0-3 had no NPU processes before run; NPU4-7 retained the prefix-cache VLLMWorker_TP processes"
 decision_reason: ""
-next_loop: "Run the NPU-native routing smoke/correctness gate on NPU0, then map variable-expert routing/dispatch into vLLM-Ascend fused MoE and CANN ops-transformer."
+next_loop: "Build a bounded max_k dynamic-router prototype compatible with vLLM-Ascend fused MoE dispatch, then profile router+permute+GMM+unpermute on NPU0-3 before attempting a full MoE model quality/performance comparison."
 rollback:
   command: "No production runtime is modified in the planned/reference stage; stop/delete only the isolated test container if used."
   verified: false
