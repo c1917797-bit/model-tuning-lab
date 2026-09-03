@@ -1,0 +1,35 @@
+schema: qwen38-general-eval-protocol/v1
+model: qwen38
+data_root: /cache/austinov/eval-data/general
+sampling:
+  temperature: 0
+  concurrency: 8
+  repetitions: 3
+  mmlu:
+    subjects: all_57
+    measured_per_subject: 5
+    warmup_per_subject: 1
+    fewshot: 5
+  gsm8k:
+    measured: 64
+    warmup: 1
+    fewshot: 8
+  humaneval:
+    measured: 164
+    generation: deterministic_pass_at_1
+quality_gates:
+  candidate_mmlu_accuracy_regression: 0
+  candidate_gsm8k_accuracy_regression: 0
+  candidate_humaneval_pass_at_1_regression: 0
+performance_gate:
+  minimum_improvement_percent: 5
+  primary: aggregate_wall_time_or_output_tokens_per_second
+integration_gate:
+  after_candidate_acceptance:
+    - full_mmlu
+    - full_gsm8k
+    - full_humaneval
+notes:
+  - Raw datasets, model outputs, and execution logs stay outside Git and are referenced by SHA256.
+  - HumanEval generated code is scored only in the locked-down Docker sandbox.
+  - Baseline and candidate run sequentially on the same physical NPU 4-7 set.
