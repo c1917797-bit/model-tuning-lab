@@ -1,0 +1,39 @@
+schema: mst-git-policy/v1
+repository_policy: single_branch_clean_push_after_basic_validation
+status: maintainer-confirmed
+
+options:
+  - id: manual_only
+  - id: checkpoint_commits
+  - id: branch_pr
+  - id: single_branch_clean_push_after_basic_validation
+  - id: commit_implies_push
+
+workstream_routing:
+  mode: nontrivial_branch_first
+  work_branch_prefix: work/
+  direct_primary_allowed_only_if_all:
+    - one maintainer owns the task and no concurrent work overlaps
+    - primary is clean and synchronized with its upstream
+    - change is atomic low-risk short-lived and easy to revert
+    - no protected path architecture contract shared truth release migration security or performance evidence changes
+    - focused validation completes in the same checkpoint
+  branch_required_if_any:
+    - multiple agents tasks filesets or repositories may progress independently
+    - change is multi-file architectural risky long-running or cross-agent
+    - protected path shared truth contract migration release security or performance evidence changes
+    - review handoff drift dependencies claims or resource leases matter
+    - route is uncertain
+  remote_start_checkpoint_required: true
+  detached_worktree_may_author: false
+  integration:
+    source: fetched_remote_workstream
+    actor: serialized_integrator
+    require_latest_target_merged: true
+    require_exact_source_evidence: true
+    default_merge: no_ff
+    force_push: forbidden
+  lifecycle:
+    default_active_worktree_budget: 4
+    default_stale_after_days: 7
+    remote_branch_delete_requires_retention_policy: true

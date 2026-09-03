@@ -1,0 +1,69 @@
+schema: mst/v1
+name: generated-maintainer-skill-tree
+authority: AGENTS.md
+source_pack: repository-transformation-v0.1
+profile: minimal
+
+selection:
+  default_strategy: smallest_relevant_set
+  conflict_resolution:
+    - Prefer narrower path scope.
+    - Tool adapters do not override AGENTS.md or this registry.
+
+skills:
+  - id: mst-agentsmd-authoring
+    path: .agents/skills/mst-agentsmd-authoring
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-experience-ingestion
+    path: .agents/skills/mst-experience-ingestion
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-git-checkpoint-policy
+    path: .agents/skills/mst-git-checkpoint-policy
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-loop-engineering-framework
+    path: .agents/skills/mst-loop-engineering-framework
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-maintainer-handoff
+    path: .agents/skills/mst-maintainer-handoff
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-parallel-workstreams
+    path: .agents/skills/mst-parallel-workstreams
+    status: experimental
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-practice-iteration-planning
+    path: .agents/skills/mst-practice-iteration-planning
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-repo-onboarding
+    path: .agents/skills/mst-repo-onboarding
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-repo-transformation
+    path: .agents/skills/mst-repo-transformation
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-runtime-skill-boundary
+    path: .agents/skills/mst-runtime-skill-boundary
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-skill-governor
+    path: .agents/skills/mst-skill-governor
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-skill-tree-design
+    path: .agents/skills/mst-skill-tree-design
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-tool-adapter-boundary
+    path: .agents/skills/mst-tool-adapter-boundary
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
+  - id: mst-transformation-verification
+    path: .agents/skills/mst-transformation-verification
+    status: stable
+    purpose: Generated from repository-transformation-v0.1.
