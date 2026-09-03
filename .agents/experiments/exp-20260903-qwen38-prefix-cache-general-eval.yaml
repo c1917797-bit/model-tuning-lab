@@ -8,7 +8,9 @@ owner: chatgpt
 git:
   branch: work/exp-20260903-qwen38-prefix-cache-general-eval
   base_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
-  stage_commits: []
+  stage_commits:
+    - "2ec7f8d9b1b4b53fa5a65be0cdfa84a089315315 planned"
+    - "edbc60e6f63c6bf447965c1dfff653cbe73713e8 eval-harness"
 environment:
   source_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
   model_revision: "local:/cache/austinov/Qwen3.8-27B; config_sha256=191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab; weights=18 safetensors/55563006776 bytes"
@@ -28,13 +30,24 @@ environment:
     cpu: "4x Kunpeng-920, 192 cores"
     memory: "2.0 TiB"
     npu: "8x Ascend 910B4, 32 GiB HBM each"
-    baseline_devices: [0, 1, 2, 3]
+    baseline_devices: [4, 5, 6, 7]
     candidate_devices: [4, 5, 6, 7]
   runtime_topology:
     image_digest: "quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
-    baseline_endpoint: "http://127.0.0.1:8100"
+    baseline_endpoint: "http://127.0.0.1:8200"
     baseline_parallelism: "TP=4"
     baseline_prefix_caching: false
+    isolation: "baseline and candidate run serially on physical NPU 4-7; host devices 4-7 are mapped to container logical devices 0-3"
+    target_proof: "baseline worker PIDs 3153485/3153488/3153490/3153492 observed by host npu-smi on physical NPU 4/5/6/7"
+  evaluation_data:
+    mmlu_source: "OpenCompass/AIS-Bench processed MMLU zip"
+    mmlu_zip_sha256: "91d1fe0e3a0dde2e8d8af25f537ee0ec6c6378a499845c80f78f67cbe2d38e9e"
+    mmlu_dev_subjects: 57
+    mmlu_test_subjects: 57
+    gsm8k_train_sha256: "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465"
+    gsm8k_test_sha256: "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14"
+    humaneval_sha256: "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef"
+    prepared_manifest: "/cache/austinov/eval-data/general/manifest.json"
 protocol:
   primary_metric: "aggregate request completion time and output-token throughput on fixed MMLU/HumanEval/GSM8K requests; report per-dataset accuracy/pass@1 plus TTFT/e2e distributions"
   correctness_guardrails:
@@ -51,7 +64,7 @@ protocol:
     - "NPU health != OK or unexpected process appears on candidate devices"
     - "host MemAvailable falls below 20 GiB"
     - "candidate HBM exceeds device capacity or service reports OOM"
-  warmup: "one fixed request per dataset before measured run"
+  warmup: "one fixed request per dataset before each measured run"
   repetitions: 3
   command: "scripts/qwen38_general_eval.py against OpenAI-compatible endpoint; fixed cached dataset snapshot"
 results:

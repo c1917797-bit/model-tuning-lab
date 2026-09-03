@@ -11,8 +11,8 @@ import argparse
 import hashlib
 import json
 import shutil
-import tarfile
 import urllib.request
+import zipfile
 from pathlib import Path
 
 
@@ -20,7 +20,7 @@ SOURCES = {
     "gsm8k_train.jsonl": "https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/train.jsonl",
     "gsm8k_test.jsonl": "https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/test.jsonl",
     "HumanEval.jsonl.gz": "https://raw.githubusercontent.com/openai/human-eval/master/data/HumanEval.jsonl.gz",
-    "mmlu_mirror.tar.gz": "https://codeload.github.com/google-research/crosslingual-knowledge-barriers/tar.gz/refs/heads/main",
+    "mmlu.zip": "http://opencompass.oss-cn-shanghai.aliyuncs.com/datasets/data/mmlu.zip",
 }
 
 
@@ -46,19 +46,16 @@ def extract_mmlu(src: Path, out: Path) -> dict[str, int]:
     for split in ("dev", "test"):
         (out / split).mkdir(parents=True, exist_ok=True)
     counts = {"dev": 0, "test": 0}
-    with tarfile.open(src, "r:gz") as tf:
-        for member in tf.getmembers():
-            if not member.isfile() or not member.name.endswith(".csv") or "MMLU" not in member.name:
+    with zipfile.ZipFile(src) as zf:
+        for member in zf.infolist():
+            if member.is_dir() or not member.filename.endswith(".csv"):
                 continue
-            parts = member.name.split("/")
+            parts = Path(member.filename).parts
             split = next((x for x in ("dev", "test") if x in parts), None)
             if split is None:
                 continue
-            source = tf.extractfile(member)
-            if source is None:
-                continue
-            destination = out / split / Path(member.name).name
-            with destination.open("wb") as f:
+            destination = out / split / Path(member.filename).name
+            with zf.open(member) as source, destination.open("wb") as f:
                 shutil.copyfileobj(source, f)
             counts[split] += 1
     if counts["dev"] < 50 or counts["test"] < 50:
@@ -84,7 +81,7 @@ def main() -> int:
 
     for name in ("gsm8k_train.jsonl", "gsm8k_test.jsonl", "HumanEval.jsonl.gz"):
         shutil.copy2(src / name, prepared / name)
-    mmlu_counts = extract_mmlu(src / "mmlu_mirror.tar.gz", prepared / "mmlu")
+    mmlu_counts = extract_mmlu(src / "mmlu.zip", prepared / "mmlu")
 
     prepared_hashes = {}
     for path in sorted(p for p in prepared.rglob("*") if p.is_file()):
