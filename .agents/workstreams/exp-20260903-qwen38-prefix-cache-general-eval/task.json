@@ -1,0 +1,21 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260903-qwen38-prefix-cache-general-eval",
+  "objective": "Optimize Qwen3.8-27B vLLM inference on chicaihong01 using MMLU, HumanEval, and GSM8K as general correctness/workload baselines; first bounded hypothesis is enabling prefix caching on an isolated NPU4-7 candidate.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260903-qwen38-prefix-cache-general-eval",
+  "remote": "origin",
+  "originalBase": "f49c63f8c8f790f8bb79b047cf689f852e1a4682",
+  "createdAt": "2026-09-03",
+  "owner": "chatgpt",
+  "dependencies": [],
+  "claims": [
+    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260903-qwen38-prefix-cache-general-eval.yaml"},
+    {"kind":"file","mode":"exclusive","value":"scripts/qwen38_general_eval.py"},
+    {"kind":"file","mode":"exclusive","value":"configs/qwen38-general-eval.yaml"},
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 NPU4-7 candidate service"}
+  ],
+  "validationCommands": ["./scripts/validate-mst.sh", "python -m pytest", "git diff --check"],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}

@@ -1,0 +1,70 @@
+schema: model-tuning-experiment/v1
+id: exp-20260903-qwen38-prefix-cache-general-eval
+status: planned
+decision: pending
+hypothesis: "Enabling vLLM prefix caching improves TTFT and end-to-end throughput on repeated-prefix MMLU/GSM8K/HumanEval evaluation traffic without changing answer quality or increasing NPU HBM beyond safe capacity."
+objective: "Improve Qwen3.8-27B vLLM inference efficiency on chicaihong01 while preserving MMLU, HumanEval, and GSM8K correctness."
+owner: chatgpt
+git:
+  branch: work/exp-20260903-qwen38-prefix-cache-general-eval
+  base_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
+  stage_commits: []
+environment:
+  source_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
+  model_revision: "local:/cache/austinov/Qwen3.8-27B; config_sha256=191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab; weights=18 safetensors/55563006776 bytes"
+  tokenizer_revision: "tokenizer.json sha256=0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3"
+  dtype_or_quantization: "bfloat16; no quantization observed"
+  framework_versions:
+    vllm: "0.23.0+empty"
+    vllm_ascend: "0.23.0"
+    torch: "2.10.0+cpu"
+    torch_npu: "2.10.0.post4"
+    transformers: "5.5.4"
+  cann_driver_firmware:
+    driver: "25.2.0"
+    firmware: "7.7.0.3.220"
+  hardware_topology:
+    host: chicaihong01
+    cpu: "4x Kunpeng-920, 192 cores"
+    memory: "2.0 TiB"
+    npu: "8x Ascend 910B4, 32 GiB HBM each"
+    baseline_devices: [0, 1, 2, 3]
+    candidate_devices: [4, 5, 6, 7]
+  runtime_topology:
+    image_digest: "quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
+    baseline_endpoint: "http://127.0.0.1:8100"
+    baseline_parallelism: "TP=4"
+    baseline_prefix_caching: false
+protocol:
+  primary_metric: "aggregate request completion time and output-token throughput on fixed MMLU/HumanEval/GSM8K requests; report per-dataset accuracy/pass@1 plus TTFT/e2e distributions"
+  correctness_guardrails:
+    - "candidate per-dataset score must not regress beyond measurement determinism versus baseline"
+    - "all requests must complete without API errors"
+    - "expected NPU devices must show the serving worker processes"
+  acceptance_thresholds:
+    - "at least 5% improvement in aggregate wall-clock completion time or output-token throughput on repeated-prefix evaluation traffic"
+    - "no dataset accuracy/pass@1 regression"
+  regression_thresholds:
+    - "greater than 2% worse aggregate completion time with comparable conditions"
+    - "any correctness regression"
+  abort_conditions:
+    - "NPU health != OK or unexpected process appears on candidate devices"
+    - "host MemAvailable falls below 20 GiB"
+    - "candidate HBM exceeds device capacity or service reports OOM"
+  warmup: "one fixed request per dataset before measured run"
+  repetitions: 3
+  command: "scripts/qwen38_general_eval.py against OpenAI-compatible endpoint; fixed cached dataset snapshot"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts: []
+decision_reason: ""
+next_loop: ""
+rollback:
+  command: "docker rm -f qwen38_prefix_candidate (candidate only); baseline remains untouched"
+  verified: false
