@@ -1,0 +1,17 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "taskId": "handoff-readiness-20260904",
+  "status": "merged",
+  "targetParent": "f49c63f8c8f790f8bb79b047cf689f852e1a4682",
+  "sourceCommit": "1cbf003034b6e2e2df4080479fae302b5e4518dd",
+  "validation": [
+    {"command": "./scripts/validate-mst.sh", "result": "PASS (17 skills)"},
+    {"command": "git diff --check HEAD", "result": "PASS on final staged merge tree"},
+    {"command": "python -m json.tool on task/integration-evidence/knowledge-proposals", "result": "PASS"},
+    {"command": "python -m pytest", "result": "NOT RUN: host Python has no pytest module installed"}
+  ],
+  "remoteWorkstreamTip": "8619fd49aa10d8996f39889cce90db0d2bdc681c",
+  "mergeCommit": "self",
+  "mergeMode": "no_ff",
+  "note": "The source implementation is sourceCommit; readiness metadata is remoteWorkstreamTip. Required handoff-only final gates passed on the staged merge tree. Pytest availability is recorded honestly as partial validation rather than a PASS."
+}
