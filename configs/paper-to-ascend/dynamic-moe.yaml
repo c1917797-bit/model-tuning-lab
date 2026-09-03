@@ -1,0 +1,25 @@
+paper:
+  title: "Harder Tasks Need More Experts: Dynamic Routing in MoE Models"
+  arxiv: "2403.07652"
+  code: "https://github.com/ZhenweiAn/Dynamic_MoE"
+
+migration:
+  unit: "moe_dynamic_router_and_dispatch"
+  upstream_default_top_p: 0.4
+  target:
+    host: chicaihong01
+    device_ids: [0, 1, 2, 3]
+    stack: "Ascend 910B4 / CANN 9.1 / torch-npu / vllm-ascend 0.23.0"
+
+reference:
+  experts: 8
+  tokens: 4096
+  top_p: 0.4
+  warmup: 20
+  iterations: 100
+
+integration_routes:
+  - "vllm-ascend fused MoE routing/dispatch"
+  - "CANN ops-transformer MoE/GMM/MC2"
+  - "graph-friendly bounded dynamic shapes"
+  - "TileLang/Triton/PyPTO/AscendC only after profiling identifies a missing hot primitive"

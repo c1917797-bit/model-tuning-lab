@@ -1,0 +1,68 @@
+schema: model-tuning-experiment/v1
+id: exp-20260904-dynamic-moe-paper-to-ascend
+status: planned
+decision: pending
+hypothesis: "Replacing fixed Top-2 MoE routing with cumulative-probability dynamic routing can reduce average activated experts while preserving quality, and on Ascend can convert that compute reduction into end-to-end decode/throughput benefit if routing and variable-expert dispatch overhead are controlled."
+objective: "Create and validate a reusable Paper-to-Ascend pipeline, using Dynamic MoE as the first NPU-native exemplar and producing an integration-ready contract for vLLM-Ascend/CANN."
+owner: "chatgpt"
+git:
+  branch: work/exp-20260904-dynamic-moe-paper-to-ascend
+  base_commit: "fbc79c41c37c8900f0623ce8941304e9bfde5cf1"
+  stage_commits: []
+paper:
+  title: "Harder Tasks Need More Experts: Dynamic Routing in MoE Models"
+  venue: "ACL 2024"
+  arxiv: "2403.07652"
+  code_url: "https://github.com/ZhenweiAn/Dynamic_MoE"
+  migration_unit: "MoE router + expert dispatch policy"
+  algorithm_contract: "softmax router probabilities -> descending sort -> minimal prefix whose cumulative mass reaches top_p_threshold -> weighted expert aggregation"
+environment:
+  source_commit: ""
+  model_revision: "paper upstream model weights not yet pinned locally"
+  tokenizer_revision: "paper upstream model weights not yet pinned locally"
+  dtype_or_quantization: "BF16 target; routing smoke uses FP32 probabilities unless overridden"
+  framework_versions:
+    target_stack: "CANN 9.1 / torch-npu / vllm-ascend 0.23.0"
+  cann_driver_firmware:
+    driver: "25.2.0"
+    firmware: "7.7.0.3.220"
+  hardware_topology:
+    host: "chicaihong01"
+    npu: "8 x Ascend 910B4, 32 GiB HBM each"
+  runtime_topology:
+    reserved_for_this_workstream: [0, 1, 2, 3]
+    excluded_active_workstream_devices: [4, 5, 6, 7]
+protocol:
+  primary_metric: "end-to-end TPOT or throughput at matched quality; router microbenchmark is a diagnostic metric only"
+  correctness_guardrails:
+    - "selected experts are exactly the minimal descending-probability prefix reaching the configured cumulative threshold"
+    - "selected routing weights and expert ids match the reference contract on deterministic cases"
+    - "no NaN/Inf and all tokens activate at least one expert"
+    - "full-model candidate quality is no worse than baseline by more than 0.5 absolute percentage points on the frozen evaluation slice"
+  acceptance_thresholds:
+    - "average activated experts < 2.0 on the frozen representative workload"
+    - "at matched quality, steady-state throughput improves >= 5% OR TPOT improves >= 5% versus fixed Top-2"
+  regression_thresholds:
+    - "quality regression > 0.5 absolute percentage points"
+    - "steady-state p95 latency regression > 5% without compensating primary-metric benefit"
+  abort_conditions:
+    - "NPU0-3 are no longer exclusively free for this workstream"
+    - "NPU health is not OK or unexpected HBM/process occupancy appears"
+    - "OOM, NaN/Inf, or routing correctness mismatch"
+  warmup: "router microbench: >=20 iterations; full model: explicit compile/load warmup outside measurement"
+  repetitions: 3
+  command: "python scripts/paper_to_ascend/dynamic_moe_npu_smoke.py --device npu:0 --experts 8 --tokens 4096 --top-p 0.4"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts: []
+decision_reason: ""
+next_loop: "Run the NPU-native routing smoke/correctness gate on NPU0, then map variable-expert routing/dispatch into vLLM-Ascend fused MoE and CANN ops-transformer."
+rollback:
+  command: "No production runtime is modified in the planned/reference stage; stop/delete only the isolated test container if used."
+  verified: false

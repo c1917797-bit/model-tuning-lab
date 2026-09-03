@@ -1,0 +1,30 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260904-dynamic-moe-paper-to-ascend",
+  "objective": "Build a reusable Paper-to-Ascend engineering pipeline using Harder Tasks Need More Experts / Dynamic MoE as the first exemplar, including an NPU-native routing reference, correctness/performance gates, profiling hooks, and integration routes toward vllm-ascend and ops-transformer.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260904-dynamic-moe-paper-to-ascend",
+  "remote": "origin",
+  "originalBase": "fbc79c41c37c8900f0623ce8941304e9bfde5cf1",
+  "createdAt": "2026-09-04",
+  "owner": "chatgpt",
+  "dependencies": [],
+  "claims": [
+    {"kind":"file","mode":"exclusive","value":"src/paper_to_ascend/**"},
+    {"kind":"file","mode":"exclusive","value":"scripts/paper_to_ascend/**"},
+    {"kind":"file","mode":"exclusive","value":"docs/paper-to-ascend/**"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-dynamic-moe-paper-to-ascend.yaml"},
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 NPU0-3 for Dynamic MoE paper reproduction; never use NPU4-7 while prefix-cache workstream owns them"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python -m unittest discover -s tests -p 'test_dynamic_moe_routing.py'",
+    "git diff --check"
+  ],
+  "executionState": "in-progress",
+  "integrationState": "not-ready",
+  "notes": [
+    "Remote main revalidation was attempted on 2026-09-04 but GitHub ls-remote/fetch timed out; branch was created from a clean main whose cached origin/main matched fbc79c4. Revalidate remote before integration.",
+    "NPU0-3 were live-checked free before resource claim; NPU4-7 had four VLLMWorker_TP processes and are excluded."
+  ]
+}
