@@ -1,0 +1,26 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "WS-20260903-ascend-npu-maintainer-skills-v0",
+  "objective": "Establish an Ascend NPU inference-tuning loop where hypotheses, baselines, successful results, failed attempts, and decisions are preserved as staged Git checkpoints.",
+  "targetBranch": "main",
+  "workBranch": "work/ascend-npu-maintainer-skills",
+  "remote": "origin",
+  "originalBase": "eb52c68548844b9b8a282e6b5b83aab8b25f7555",
+  "createdAt": "2026-09-03",
+  "owner": "codex",
+  "dependencies": [],
+  "claims": [
+    {"kind": "file", "mode": "exclusive", "value": "AGENTS.md"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/skills.registry.yaml"},
+    {"kind": "knowledge", "mode": "exclusive", "value": ".agents/HANDOFF.md"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/git-policy.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/skills/ascend-*"},
+    {"kind": "knowledge", "mode": "exclusive", "value": ".agents/experiments/**"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "completed",
+  "integrationState": "merged"
+}

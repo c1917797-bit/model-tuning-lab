@@ -8,4 +8,6 @@ notes:
   - Generated files are now owned by the target repository.
   - Future changes from skillsgit are not automatically authoritative here.
   - Target classification is a minimal single-package Python experiment library.
-  - Repository-specific skills should be added only after repeated practice.
+  - Primary target is model inference optimization on Ascend NPUs.
+  - The tuning flywheel preserves successful and negative outcomes as staged,
+    pushed Git checkpoints.

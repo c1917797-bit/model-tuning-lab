@@ -3,42 +3,44 @@
 ## 0. Status
 
 - Last updated: 2026-09-03.
-- Repository: Model Tuning Lab, a Python workspace for model fine-tuning,
-  inference optimization, and evaluation experiments.
-- Current active track: establish the repository-owned maintainer framework.
+- Repository: Model Tuning Lab, an Ascend NPU model-inference optimization
+  workspace.
+- Current active track: establish a Git-recorded tuning flywheel.
 - Expected git state after completed work: clean worktree, validated checkpoint according to .agents/git-policy.yaml.
 
 ## 1. North Star
 
-This repository uses skillsgit as a Git-native maintainer loop framework:
+This repository uses skillsgit as a Git-native Ascend tuning loop:
 
 ```text
-AGENTS.md -> .agents/HANDOFF.md -> .agents/skills -> validation -> Git history
+orient -> hypothesize -> baseline -> change -> verify -> measure -> decide
+   ^                                                           |
+   +---------------- Git evidence and next loop <---------------+
 ```
 
 ## 2. Current Focus
 
-Bootstrap a minimal maintainer skill tree before model- or hardware-specific
-implementation begins. Keep experimental claims reproducible and keep large or
-sensitive artifacts outside Git.
+Make every tuning stage resumable and auditable. Preserve successful, failed,
+rejected, and inconclusive attempts in pushed Git history while keeping the
+final integrated tree safe.
 
 ## 3. Recent Progress
 
 - Applied skillsgit `repository-transformation-v0.1` with the minimal profile.
-- Added repository-specific maintenance, reproducibility, and artifact rules.
-- Selected a maintainer-confirmed clean-main push policy for this bootstrap.
+- Added Ascend environment, tuning-loop, and benchmark-evidence skills.
+- Added a versioned experiment-record template.
+- Confirmed staged commit-implies-push policy for tuning workstreams.
 
 ## 4. Current Action
 
-Validate, commit, and push the maintainer bootstrap.
+Validate and integrate the Ascend NPU tuning flywheel.
 
 ## 5. Next Actions
 
-1. Define the first concrete model, framework, hardware, and dataset scope.
-2. Add executable training, inference, and evaluation entry points.
-3. Add focused tests and benchmark protocols alongside implementation.
-4. Add repository-specific skills only after repeated maintenance behavior
-   justifies them.
+1. Create the first `.agents/experiments/exp-*.yaml` from the template.
+2. Capture exact Ascend hardware, CANN, driver, framework, and model identity.
+3. Record and push a repeated baseline before changing optimization variables.
+4. Run one bounded hypothesis through the full decision and recovery loop.
 
 ## 6. Validation Commands
 
@@ -57,6 +59,9 @@ git diff --check
 - Do not commit secrets, datasets, weights, checkpoints, or generated outputs.
 - Do not claim a performance improvement without an apples-to-apples protocol
   and captured environment details.
+- Do not discard failed or negative experiments; record their evidence and
+  decision, then recover the active tree in a later commit.
+- Do not merge failed active code into `main`.
 ```
 
 ## 8. Recovery / Resume Commands
