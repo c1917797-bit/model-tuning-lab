@@ -13,6 +13,8 @@
 - Paper: *Harder Tasks Need More Experts: Dynamic Routing in MoE Models*
 - ACL 2024 / arXiv:2403.07652
 - Upstream code: `https://github.com/ZhenweiAn/Dynamic_MoE`
+- Pinned upstream commit: `f56bc20db176f22ab51cb56b7dcb96403fb2cd8a`
+- Local read-only reference: `/home/mtuser/cch/paper-sources/Dynamic_MoE`
 - Upstream behavior to preserve: softmax router probabilities, descending sort, then keep the minimal expert prefix whose cumulative routing mass reaches `top_p_threshold`.
 - Historical upstream default in `MoEConfig`: `top_p_threshold=0.4`.
 

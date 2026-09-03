@@ -16,6 +16,8 @@ paper:
   venue: "ACL 2024"
   arxiv: "2403.07652"
   code_url: "https://github.com/ZhenweiAn/Dynamic_MoE"
+  code_commit: "f56bc20db176f22ab51cb56b7dcb96403fb2cd8a"
+  local_reference_path: "/home/mtuser/cch/paper-sources/Dynamic_MoE"
   migration_unit: "MoE router + expert dispatch policy"
   algorithm_contract: "softmax router probabilities -> descending sort -> minimal prefix whose cumulative mass reaches top_p_threshold -> weighted expert aggregation"
 environment:
