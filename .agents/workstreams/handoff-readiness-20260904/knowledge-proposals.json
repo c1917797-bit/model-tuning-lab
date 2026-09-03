@@ -1,5 +1,16 @@
 {
   "schema": "mst-knowledge-proposals/v1",
   "taskId": "handoff-readiness-20260904",
-  "proposals": []
+  "proposals": [
+    {
+      "kind": "durable-lesson",
+      "target": "docs/LESSONS_LEARNED.md",
+      "summary": "Preserve evidence-backed environment, HugeTLB, Git runtime, source-orientation, profiling, baseline-isolation, and transport lessons; explicitly distinguish observed local incidents from upstream-known profiler risks."
+    },
+    {
+      "kind": "handoff-refresh",
+      "target": ".agents/HANDOFF.md",
+      "summary": "At integration, replace the stale 'establish tuning flywheel' current action with the actual active prefix-cache general-eval workstream, current isolation/resource state, durable lessons/runbook links, and exact resume/validation guidance."
+    }
+  ]
 }
