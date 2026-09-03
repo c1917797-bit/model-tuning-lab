@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260904-dynamic-moe-paper-to-ascend
-status: verified
+status: measured
 decision: pending
 hypothesis: "Replacing fixed Top-2 MoE routing with cumulative-probability dynamic routing can reduce average activated experts while preserving quality, and on Ascend can convert that compute reduction into end-to-end decode/throughput benefit if routing and variable-expert dispatch overhead are controlled."
 objective: "Create and validate a reusable Paper-to-Ascend pipeline, using Dynamic MoE as the first NPU-native exemplar and producing an integration-ready contract for vLLM-Ascend/CANN."
@@ -11,6 +11,8 @@ git:
   stage_commits:
     - "planned: ea0c6e69a5a613ed45939be533e110686d78b154"
     - "attempted: a37d7282a976e90af3e3b943a522cf6eed60f705"
+    - "block-ab-planned: 751779b88a9f1fef6b73baee7f50c22b49ec37f7"
+    - "block-ab-attempted: 4abe3cbff081c4cfd306baba2c34112c63213bf0"
 paper:
   title: "Harder Tasks Need More Experts: Dynamic Routing in MoE Models"
   venue: "ACL 2024"
@@ -99,7 +101,64 @@ results:
   boundary: {}
   lifecycle: {}
   resources: {}
-  block_ab: {}
+  block_ab:
+    scope: "single-card whole MoE block diagnostic on physical Ascend 910B4 NPU0; fixed Top-2 vs Dynamic top-p with identical BF16 expert weights, hidden states per repetition, warmup, and measurement protocol"
+    correctness:
+      fixed_top2_max_abs_error: 0.000030517578125
+      dynamic_top_p_max_abs_error: 0.0000152587890625
+      reference: "per-expert BF16 PyTorch computation using the same selected expert ids/weights"
+    cases:
+      128:
+        fixed_top2_median_us: 957.07
+        dynamic_top_p_median_us: 1776.36
+        median_latency_improvement_pct: -85.603
+        p95_latency_improvement_pct: -83.801
+        mean_activated_experts: 1.7297
+        pair_compute_reduction_pct: 13.516
+        repetition_improvement_range_pct: [-86.17, -84.59]
+      512:
+        fixed_top2_median_us: 960.32
+        dynamic_top_p_median_us: 1818.12
+        median_latency_improvement_pct: -89.325
+        p95_latency_improvement_pct: -89.864
+        mean_activated_experts: 1.7375
+        pair_compute_reduction_pct: 13.125
+        repetition_improvement_range_pct: [-91.81, -87.78]
+      2048:
+        fixed_top2_median_us: 985.00
+        dynamic_top_p_median_us: 1931.16
+        median_latency_improvement_pct: -96.058
+        p95_latency_improvement_pct: -95.327
+        mean_activated_experts: 1.7517
+        pair_compute_reduction_pct: 12.417
+        repetition_improvement_range_pct: [-96.86, -95.03]
+      4096:
+        fixed_top2_median_us: 1309.43
+        dynamic_top_p_median_us: 2386.40
+        median_latency_improvement_pct: -82.248
+        p95_latency_improvement_pct: -82.338
+        mean_activated_experts: 1.7437
+        pair_compute_reduction_pct: 12.815
+        repetition_improvement_range_pct: [-83.55, -81.08]
+    breakdown_4096:
+      route:
+        fixed_top2_median_us: 218.465
+        dynamic_top_p_median_us: 1389.640
+        latency_improvement_pct: -536.093
+      dispatch_prep:
+        fixed_top2_median_us: 290.870
+        dynamic_top_p_median_us: 271.340
+        latency_improvement_pct: 6.714
+      expert_gmm:
+        fixed_top2_median_us: 611.225
+        dynamic_top_p_median_us: 557.140
+        latency_improvement_pct: 8.849
+      combine:
+        fixed_top2_median_us: 516.315
+        dynamic_top_p_median_us: 508.800
+        latency_improvement_pct: 1.456
+    diagnostic_threshold_met: false
+    diagnostic_verdict: "rejected for the current direct sort+cumsum+dynamic-compaction lowering: reduced expert work is real, but routing overhead dominates whole-block latency"
 artifacts:
   - type: "command"
     value: "scripts/paper_to_ascend/run_dynamic_moe_npu_smoke.sh 0"
@@ -107,8 +166,12 @@ artifacts:
     value: "5 routing unit tests passed in the vllm-ascend v0.23.0 container; Maintainer Skill Tree validation passed; git diff --check passed"
   - type: "live-evidence"
     value: "NPU0-3 had no NPU processes before run; NPU4-7 retained the prefix-cache VLLMWorker_TP processes"
+  - type: "block-ab-result"
+    value: "/cache/austinov/paper-to-ascend/dynamic-moe-block-ab/full-20260903T223006Z/result.json sha256=6902b1115e4a61eaf4f79ffa7344fe366d0e80f93a0a52e56e41e60669a5fc49"
+  - type: "block-ab-breakdown"
+    value: "/cache/austinov/paper-to-ascend/dynamic-moe-block-ab/breakdown-20260903T223119Z.json sha256=519b319a89799c19e3253335f3a455484edaf4f48e1150c8a86b0f47742e8aaa"
 decision_reason: ""
-next_loop: "Build a bounded max_k dynamic-router prototype compatible with vLLM-Ascend fused MoE dispatch, then profile router+permute+GMM+unpermute on NPU0-3 before attempting a full MoE model quality/performance comparison."
+next_loop: "Replace full sort+cumsum+boolean dynamic compaction with a bounded max_k/fused Dynamic MoE router compatible with vLLM-Ascend/CANN; target the measured 1.39 ms routing bottleneck while preserving the observed 8.85% expert-GMM saving, then rerun this same block A/B before full-model quality/performance comparison."
 rollback:
   command: "No production runtime is modified in the planned/reference stage; stop/delete only the isolated test container if used."
   verified: false

@@ -151,6 +151,34 @@ This is a **migration-unit verification**, not a paper performance reproduction.
 
 The first container attempt also failed with `aclInit` 507008 because only NPU device nodes were mounted. Matching the working vLLM container's DCMI/driver binds fixed initialization. The pipeline therefore treats container/runtime mapping as a formal environment gate before algorithm diagnosis.
 
+## Whole-block A/B result on 910B4
+
+The next gate ran a real Ascend-native MoE block on physical NPU0. Both sides used the same BF16 expert weights and per-repetition hidden/router inputs. The only policy change was fixed Top-2 versus Dynamic cumulative-mass routing at `top_p=0.4`. The block included compact token/expert dispatch, `npu_moe_init_routing_v2`, two `npu_grouped_matmul` calls with SwiGLU, unpermute, routing weights and token combine.
+
+Five repetitions with 20 warmups and 100 measured iterations per side produced:
+
+| Tokens | Fixed Top-2 median | Dynamic median | Dynamic latency change | Mean experts | Pair compute reduction |
+|---:|---:|---:|---:|---:|---:|
+| 128 | 957.07 us | 1776.36 us | **+85.60% slower** | 1.7297 | 13.52% |
+| 512 | 960.32 us | 1818.12 us | **+89.33% slower** | 1.7375 | 13.13% |
+| 2048 | 985.00 us | 1931.16 us | **+96.06% slower** | 1.7517 | 12.42% |
+| 4096 | 1309.43 us | 2386.40 us | **+82.25% slower** | 1.7437 | 12.82% |
+
+The regression was stable across repetition order. At 4096 tokens each repetition showed an 81.08% to 83.55% slowdown for the Dynamic path.
+
+The 4096-token stage breakdown explains why:
+
+| Stage | Fixed | Dynamic | Dynamic effect |
+|---|---:|---:|---:|
+| routing / pair selection | 218.465 us | 1389.640 us | **536.09% slower** |
+| CANN dispatch/permute preparation | 290.870 us | 271.340 us | 6.71% faster |
+| expert GMM + SwiGLU + GMM | 611.225 us | 557.140 us | **8.85% faster** |
+| unpermute / weighted combine | 516.315 us | 508.800 us | 1.46% faster |
+
+The important result is therefore not that Dynamic MoE's compute-saving idea is false. The device really performs less expert work and the expert GMM stage is measurably faster. The current **full sort + cumsum + boolean compaction lowering is the bottleneck**: routing grows from about 0.22 ms to 1.39 ms and overwhelms the ~9% GMM benefit.
+
+This direct lowering is rejected for performance. The next implementation should preserve a bounded `max_k` representation and fuse or otherwise replace the expensive dynamic selection/compaction path before another whole-block A/B. Full-paper acceptance remains pending because the paper's real model checkpoint is not available locally and this host could not reach Hugging Face during the run.
+
 ## Evidence ladder
 
 ### Gate A — Routing semantics

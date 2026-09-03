@@ -22,9 +22,9 @@
 
 1. `paper-contract`: implemented as documentation/config.
 2. `npu-reference`: NPU-native PyTorch implementation and smoke benchmark added and run on physical NPU0.
-3. `correctness-gate`: NPU-vs-reference routing parity passed for the smoke workload.
-4. `ascend-profile`: script emits router latency/activation statistics; full CANN profiling remains next.
-5. `framework-integration`: planned route to vLLM-Ascend fused MoE / CANN ops-transformer; no production code changed yet.
+3. `correctness-gate`: NPU-vs-reference routing parity passed for both the router smoke and whole-block CANN GMM path.
+4. `ascend-profile`: whole-block A/B measured; the current direct Dynamic lowering is rejected because routing overhead dominates despite lower expert compute.
+5. `framework-integration`: next target is a bounded `max_k`/fused router compatible with vLLM-Ascend fused MoE / CANN ops-transformer; no production code changed yet.
 6. `end-to-end-decision`: pending full model/representative MoE integration.
 
 ## First NPU evidence
@@ -46,6 +46,18 @@ fixed Top-2 router median: 175.645 us
 ```
 
 Interpretation: the target device reproduces the paper's key adaptive-expert behavior on synthetic router distributions, but the dynamic selection operation is roughly 2x the fixed-Top2 router in this microbenchmark. The paper hypothesis is therefore not accepted yet: the next stage must test whether saved expert compute outweighs routing/dispatch overhead end to end.
+
+The subsequent whole-block A/B answered that question for the current direct lowering: it does **not**. At 4096 tokens Dynamic routing reduced token/expert pairs by about 12.8% and accelerated the actual expert GMM stage by about 8.85%, but whole-block median latency increased from 1309.43 us to 2386.40 us (+82.25%). A stage breakdown measured the routing/pair-selection path at 1389.64 us versus 218.465 us for fixed Top-2. The same whole-block regression was present at 128, 512 and 2048 tokens and was stable over five repetitions.
+
+Raw evidence:
+
+```text
+/cache/austinov/paper-to-ascend/dynamic-moe-block-ab/full-20260903T223006Z/result.json
+sha256 6902b1115e4a61eaf4f79ffa7344fe366d0e80f93a0a52e56e41e60669a5fc49
+
+/cache/austinov/paper-to-ascend/dynamic-moe-block-ab/breakdown-20260903T223119Z.json
+sha256 519b319a89799c19e3253335f3a455484edaf4f48e1150c8a86b0f47742e8aaa
+```
 
 ## Concrete integration seams found
 
