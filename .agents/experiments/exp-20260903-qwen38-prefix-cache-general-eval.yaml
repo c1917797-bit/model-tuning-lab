@@ -6,13 +6,14 @@ hypothesis: "Enabling vLLM prefix caching improves TTFT and throughput for exact
 objective: "Improve Qwen3.8-27B vLLM inference efficiency on chicaihong01 while preserving MMLU, HumanEval, and GSM8K correctness."
 owner: chatgpt
 git:
-  branch: work/exp-20260903-qwen38-prefix-cache-general-eval
+  branch: work/exp-20260904-qwen38-prefix-cache-general-eval-final
   base_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
   stage_commits:
     - "2ec7f8d9b1b4b53fa5a65be0cdfa84a089315315 planned"
     - "edbc60e6f63c6bf447965c1dfff653cbe73713e8 eval-harness"
     - "a497c49a264e242e768acf460290f8cda438aabc orientation-data"
     - "80bd4b1f279e3704324a6bdfa68f7bb2cac71058 natural-prompt-correctness-anchor"
+    - "09b77b79b4f4735dd030aa3da69774d6b4cdb6e9 2k40-protocol"
 environment:
   source_commit: f49c63f8c8f790f8bb79b047cf689f852e1a4682
   model_revision: "local:/cache/austinov/Qwen3.8-27B; config_sha256=191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab; weights=18 safetensors/55563006776 bytes"
@@ -36,10 +37,11 @@ environment:
     candidate_devices: [4, 5, 6, 7]
   runtime_topology:
     image_digest: "quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
-    baseline_endpoint: "http://127.0.0.1:8200"
+    baseline_endpoint: "http://127.0.0.1:8210"
+    candidate_endpoint: "http://127.0.0.1:8210"
     baseline_parallelism: "TP=4"
     baseline_prefix_caching: false
-    isolation: "baseline and candidate run serially on physical NPU 4-7; host devices 4-7 are mapped to container logical devices 0-3"
+    isolation: "baseline and candidate run serially on physical NPU 4-7 at dedicated loopback endpoint 127.0.0.1:8210; host devices 4-7 are mapped to container logical devices 0-3"
     target_proof: "baseline worker PIDs 3153485/3153488/3153490/3153492 observed by host npu-smi on physical NPU 4/5/6/7"
   evaluation_data:
     mmlu_source: "OpenCompass/AIS-Bench processed MMLU zip"

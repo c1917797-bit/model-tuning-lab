@@ -1,7 +1,7 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "exp-20260904-qwen38-prefix-cache-general-eval-final",
-  "objective": "Continue the verified Qwen3.8-27B MMLU/HumanEval/GSM8K prefix-cache experiment from baseline checkpoint 80bd4b1 after a shared-worktree protocol collision; finish candidate A/B and decision without changing the frozen general-eval protocol.",
+  "objective": "Continue the Qwen3.8-27B prefix-cache experiment under the user's latest fixed-shape protocol: exact 2048 input tokens and exact 40 output tokens, using MMLU/HumanEval/GSM8K-derived prompts plus the natural-prompt correctness anchor.",
   "targetBranch": "main",
   "workBranch": "work/exp-20260904-qwen38-prefix-cache-general-eval-final",
   "remote": "origin",
@@ -12,11 +12,13 @@
   "claims": [
     {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260903-qwen38-prefix-cache-general-eval.yaml"},
     {"kind":"file","mode":"exclusive","value":"scripts/qwen38_general_eval.py"},
-    {"kind":"file","mode":"exclusive","value":"configs/qwen38-general-eval.yaml"},
-    {"kind":"resource","mode":"exclusive","value":"chicaihong01 NPU4-7 candidate service and dedicated loopback endpoint 127.0.0.1:8210"}
+    {"kind":"file","mode":"exclusive","value":"scripts/prepare_qwen38_perf_2k40.py"},
+    {"kind":"file","mode":"exclusive","value":"scripts/qwen38_perf_2k40.py"},
+    {"kind":"file","mode":"exclusive","value":"scripts/run_qwen38_perf_2k40_once.sh"},
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU4-7 and dedicated loopback endpoint 127.0.0.1:8210"}
   ],
   "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
   "executionState": "started",
   "integrationState": "not-ready",
-  "notes": ["Continuation starts from the pushed baseline checkpoint. The prior local worktree was moved because another AgentWeb session committed an incompatible 2k40 protocol change in the same worktree."]
+  "notes": ["Natural-prompt quality runs from 80bd4b1 are retained as a correctness anchor. The user subsequently changed the performance workload to exact 2048 input tokens and exact 40 output tokens; this latest instruction supersedes the earlier frozen general-eval performance protocol. Snapshot SHA256 is a40b8df38c08d3dc2580b5aa53ff7c5d23702224f82774ed6bff718c35e298f7."]
 }
