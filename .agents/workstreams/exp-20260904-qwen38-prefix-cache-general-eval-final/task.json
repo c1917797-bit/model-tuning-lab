@@ -1,0 +1,22 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260904-qwen38-prefix-cache-general-eval-final",
+  "objective": "Continue the verified Qwen3.8-27B MMLU/HumanEval/GSM8K prefix-cache experiment from baseline checkpoint 80bd4b1 after a shared-worktree protocol collision; finish candidate A/B and decision without changing the frozen general-eval protocol.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260904-qwen38-prefix-cache-general-eval-final",
+  "remote": "origin",
+  "originalBase": "80bd4b1f279e3704324a6bdfa68f7bb2cac71058",
+  "createdAt": "2026-09-04",
+  "owner": "chatgpt",
+  "dependencies": ["exp-20260903-qwen38-prefix-cache-general-eval"],
+  "claims": [
+    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260903-qwen38-prefix-cache-general-eval.yaml"},
+    {"kind":"file","mode":"exclusive","value":"scripts/qwen38_general_eval.py"},
+    {"kind":"file","mode":"exclusive","value":"configs/qwen38-general-eval.yaml"},
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 NPU4-7 candidate service and dedicated loopback endpoint 127.0.0.1:8210"}
+  ],
+  "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
+  "executionState": "started",
+  "integrationState": "not-ready",
+  "notes": ["Continuation starts from the pushed baseline checkpoint. The prior local worktree was moved because another AgentWeb session committed an incompatible 2k40 protocol change in the same worktree."]
+}
