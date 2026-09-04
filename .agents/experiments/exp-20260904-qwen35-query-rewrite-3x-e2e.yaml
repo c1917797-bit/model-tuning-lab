@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: selecting_bf16_nz_matmulallreduce_interaction_recovery
+status: bf16_nz_matmulallreduce_off_ready
 decision: reject_mtp_and_fail_flashcomm1_and_bf16_nz_startup
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -234,6 +234,19 @@ layout_candidate:
   decision_scope: "failed interaction between BF16 FRACTAL_NZ and MatMulAllReduce; no E2E latency result"
   recovery: "exact candidate container stopped and log retained outside Git"
   evidence_boundary: "BF16 layout activation and the interaction failure are proven; this does not establish the performance of FRACTAL_NZ with MatMulAllReduce disabled"
+layout_recovery_candidate:
+  id: bf16_weight_fractal_nz_matmulallreduce_off
+  status: ready_on_npu4_7
+  source_manifest: configs/qwen35-query-rewrite-bf16-nz-mmar-off-candidate.yaml
+  launcher_mode: bf16-nz-mmar-off
+  dtype: BF16
+  quantized: false
+  primary_variable_vs_fixed_original: "additional_config.weight_nz_mode: 1 -> 2"
+  preserved_fixed_original_setting: "additional_config.enable_matmul_allreduce=false"
+  hypothesis: "FRACTAL_NZ can start and improve dense GEMM when it is not passed to aclnnMatmulAllReduce, which requires ND weights"
+  abort: "any startup failure, missing NZ activation, request error, non-natural stop, response-hash mismatch, OOM, or unacceptable tails"
+  orchestration: scripts/run_qwen35_tp4_candidate_vs_original.sh
+  evidence_boundary: "an interaction-recovery hypothesis only; no speed or correctness claim before the real run"
 quantization_constraint:
   allowed: false
   set_by: user

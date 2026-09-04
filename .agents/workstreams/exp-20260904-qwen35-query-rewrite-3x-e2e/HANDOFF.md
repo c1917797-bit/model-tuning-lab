@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `flashcomm1-and-bf16-nz-mmar-failed-selecting-recovery`;
+- Execution: `bf16-nz-mmar-off-ready-on-npu4-7`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -446,7 +446,13 @@ bounded recovery is `weight_nz_mode=2` with MatMulAllReduce disabled: relative
 to the fixed original this changes only the BF16 weight layout, while testing
 whether the startup failure belongs specifically to the fused communication
 path. This variant still needs activation, exact response correctness and real
-E2E evidence before it can enter the best stack.
+  E2E evidence before it can enter the best stack.
+
+The recovery is now implemented as launcher mode `bf16-nz-mmar-off` with
+`configs/qwen35-query-rewrite-bf16-nz-mmar-off-candidate.yaml`. Both the
+environment and additional-config explicitly disable MatMulAllReduce, NZ is
+explicitly mode 2, FlashComm1 is false, and no quantization argument exists.
+Run it through the fixed-original candidate orchestrator on NPU4-7.
 
 ## Baseline evidence correction
 

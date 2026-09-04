@@ -60,3 +60,7 @@ the same way. Quantization is prohibited.
   MatMulAllReduce disabled on physical NPU4-7. That matches the actual fixed
   original setting and isolates the layout variable. Neither prior failed
   path is part of the current best stack.
+
+The recovery launcher mode is `bf16-nz-mmar-off`; it explicitly sets
+MatMulAllReduce false in both the environment and additional config, keeps the
+model in BF16, and changes only `weight_nz_mode` relative to the original.

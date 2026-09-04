@@ -118,6 +118,23 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-bf16-nz-mmar-off-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" bf16-nz-mmar-off \
+  >"$tmp/bf16-nz-mmar-off-fresh.out" 2>"$tmp/bf16-nz-mmar-off-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":false' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":2' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_FLASHCOMM1=0' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_NZ=2' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "BF16 NZ recovery mode unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-flashcomm1-bf16-nz-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" flashcomm1-bf16-nz \
   >"$tmp/stack-fresh.out" 2>"$tmp/stack-fresh.err"

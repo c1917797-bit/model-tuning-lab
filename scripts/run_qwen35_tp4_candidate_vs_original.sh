@@ -23,6 +23,9 @@ case "$candidate_mode" in
   bf16-nz)
     default_config="$repo_root/configs/qwen35-query-rewrite-bf16-nz-candidate.yaml"
     ;;
+  bf16-nz-mmar-off)
+    default_config="$repo_root/configs/qwen35-query-rewrite-bf16-nz-mmar-off-candidate.yaml"
+    ;;
   flashcomm1-bf16-nz)
     default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-bf16-nz-stack.yaml"
     ;;

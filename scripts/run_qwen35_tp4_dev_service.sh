@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|flashcomm1|bf16-nz|flashcomm1-bf16-nz) ;;
+  baseline|mtp|profile|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|flashcomm1|bf16-nz|flashcomm1-bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|profile|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
     exit 64
     ;;
 esac
@@ -35,11 +35,16 @@ profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 flashcomm1_env=0
 weight_nz_env=1
+matmul_allreduce_env=1
 if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
   flashcomm1_env=1
 fi
-if [[ "$mode" == bf16-nz || "$mode" == flashcomm1-bf16-nz ]]; then
+if [[ "$mode" == bf16-nz || "$mode" == bf16-nz-mmar-off ||
+      "$mode" == flashcomm1-bf16-nz ]]; then
   weight_nz_env=2
+fi
+if [[ "$mode" == bf16-nz-mmar-off ]]; then
+  matmul_allreduce_env=0
 fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
@@ -96,6 +101,8 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true,"weight_nz_mode":2}'
     elif [[ "$mode" == flashcomm1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true}'
+    elif [[ "$mode" == bf16-nz-mmar-off ]]; then
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":2}'
     elif [[ "$mode" == bf16-nz ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":2}'
     else
@@ -166,7 +173,7 @@ docker_args=(
   -e TASK_QUEUE_ENABLE=1
   -e TRITON_KERNEL_DUMP=1
   -e TRITON_DUMP_DIR=/cache/efim/triton_dump
-  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1
+  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE="$matmul_allreduce_env"
   -e VLLM_ASCEND_ENABLE_FLASHCOMM1="$flashcomm1_env"
   -e VLLM_ASCEND_ENABLE_NZ="$weight_nz_env"
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
