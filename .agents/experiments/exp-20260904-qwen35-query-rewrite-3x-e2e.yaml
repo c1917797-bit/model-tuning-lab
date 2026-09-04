@@ -148,6 +148,27 @@ operator_candidate:
   upstream_microbenchmark: "11274-token prefill, 5890us -> 4964us (1.186x); not E2E or current-model evidence"
   portability_rule: "adapt minimal hunks to the exact v0.23.0 image source; never overlay the newer full gdn.py; require runtime activation, reference correctness, real query_rewrite A/B, and paired profile"
   expected_role: "cumulative operator treatment, not a standalone route to the 2x TTFT/TPOT objective"
+algorithm_candidate:
+  id: qwen35_27b_w8a8
+  reference_model: Eco-Tech/Qwen3.5-27B-w8a8-mtp
+  source: "vLLM-Ascend 0.23.0 official weekly single-node matrix"
+  runtime_support:
+    quantization: ascend
+    model_type_mapping: qwen3_5
+    packed_modules: [qkv_proj, gate_up_proj, in_proj_qkvz, in_proj_ba]
+    max_context_tested: 133120
+    topology_tested: "TP2/DP1 in the official matrix; current TP4/DP2 remains unverified"
+  local_checkpoint: null
+  local_modelslim: false
+  disk_available: "1.5 TiB"
+  attribution_order:
+    - "W8A8 alone against the immutable BF16 baseline"
+    - "only if W8A8 passes correctness, add qwen3_5_mtp at 3 tokens"
+    - "only if 3-token MTP passes, evaluate 5 tokens"
+    - "then add accepted fused GDN and parameter treatments cumulatively"
+  correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
+  acquisition_rule: "do not silently download or quantize a tens-of-GB checkpoint; first bind an immutable source/revision/hash and preserve the original BF16 model"
+  evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
 next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path using the synchronous-profile fix, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."
 runtime_manifest:

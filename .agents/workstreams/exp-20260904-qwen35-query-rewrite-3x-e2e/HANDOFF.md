@@ -303,3 +303,21 @@ minimal fused-op hunks against the exact image source, keep a feature flag and
 fallback, then require activation proof, reference correctness, real
 query_rewrite A/B and a paired profile. Treat it as one cumulative operator
 treatment, not evidence of the requested 2x result.
+
+## W8A8 cumulative route
+
+The v0.23.0 image has explicit `qwen3_5` ModelSlim packed-module mappings for
+QKV, gate/up, GDN QKVZ and BA projections. Its official weekly matrix runs
+`Eco-Tech/Qwen3.5-27B-w8a8-mtp` with `--quantization ascend`,
+FULL_DECODE_ONLY, 3- or 5-token Qwen3.5 MTP, and contexts through 133120.
+This is the strongest currently identified no-retraining route toward a 2x
+result, but it is not local evidence: the checkpoint and ModelSlim are absent
+on this host, and the official cases use TP2/DP1 rather than final TP4/DP2.
+
+Keep attribution strict: test W8A8 alone first; add MTP 3 only after W8A8
+passes correctness; then MTP 5, fused GDN and parameter treatments one at a
+time on the latest accepted stack. The earlier BF16 one-token MTP rejection
+does not prove the W8A8 3/5-token stack, but it does require a fresh response
+comparison. Do not silently download or generate the tens-of-GB checkpoint:
+bind its source revision and hashes first, preserve the BF16 source, and apply
+the same real query_rewrite correctness and A/B gates.
