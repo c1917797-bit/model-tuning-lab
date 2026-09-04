@@ -94,6 +94,7 @@ def request_one(
         "model": model,
         "prompt": question,
         "temperature": 0,
+        "seed": seed,
         "max_tokens": max_tokens,
         "stream": True,
         "stream_options": {"include_usage": True},
@@ -194,7 +195,7 @@ def main() -> int:
         raise RuntimeError("warmup did not terminate naturally")
     started = time.perf_counter()
     results: list[dict[str, object]] = []
-    errors: list[str] = []
+    errors: list[dict[str, str]] = []
     with concurrent.futures.ThreadPoolExecutor(
         max_workers=args.concurrency
     ) as executor:
@@ -210,11 +211,19 @@ def main() -> int:
             )
             for index, question in enumerate(questions)
         ]
-        for future in futures:
+        for index, future in enumerate(futures):
             try:
                 results.append(future.result())
             except Exception as exc:  # Preserve count/type without prompt data.
-                errors.append(type(exc).__name__)
+                errors.append(
+                    {
+                        "type": type(exc).__name__,
+                        "reason": str(exc),
+                        "question_sha256": hashlib.sha256(
+                            questions[index].encode()
+                        ).hexdigest(),
+                    }
+                )
     wall_s = time.perf_counter() - started
     if not results:
         raise RuntimeError(f"all requests failed: {errors}")
@@ -232,7 +241,14 @@ def main() -> int:
         "requests": len(questions),
         "completed": len(results),
         "errors": len(errors),
-        "error_types": sorted(set(errors)),
+        "error_types": sorted({row["type"] for row in errors}),
+        "error_reasons": {
+            reason: sum(row["reason"] == reason for row in errors)
+            for reason in sorted({row["reason"] for row in errors})
+        },
+        "failed_question_sha256": [
+            row["question_sha256"] for row in errors
+        ],
         "concurrency": args.concurrency,
         "repeat_index": args.repeat_index,
         "max_tokens": "per-request model context remainder",

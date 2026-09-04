@@ -36,19 +36,42 @@
   `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/smoke-c1-r1.json`
   (SHA256
   `f2f959768f28b57d41e394b3be9379e3ef8e6cc65ebc9efea8d9650e0c2ae087`).
-- A 32-record development scaling run for concurrency 1, 5, 8 and 16 is
-  currently active as AgentWeb operation `exec-0000000000000335`.
+- The first 32-record run terminated at concurrency 1: 28/32 completed and four
+  requests raised `RuntimeError`; it did not proceed to 5/8/16. The invalid
+  artifact is
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32/c1-r1.json`
+  (SHA256
+  `a78b13517fe735f44f82f904fe4832e9a9371ad5dad1350f41c66fe8e1193768`).
+  Do not use its latency values as a baseline.
+- Diagnosis found that the harness recorded seed 1024 but omitted it from the
+  request payload, and reduced all internal stream validation failures to only
+  their exception type. The harness now sends the seed and emits only
+  privacy-safe error-reason counts and failed-question SHA256 values.
+- A concurrency-1 diagnostic rerun is active as AgentWeb operation
+  `exec-0000000000000350`, writing to the new immutable
+  `tp4-dev-decodegraph/quick32-v2/c1-r1.json` path.
 
-## Provisional operator candidate
+## Provisional algorithm and operator candidates
 
-The first operator/algorithm treatment to evaluate after freezing the current
-development baseline is the fused GDN prefill path from vLLM-Ascend upstream
-commit `77d13e2c0bfa9862b711b68811889e36b9d56aca`. It replaces the multi-kernel
+The first treatment after freezing the current development baseline is native
+Qwen3.5 MTP speculative decoding. The frozen model is not merely compatible in
+name: 'text_config.mtp_num_hidden_layers=1', and its weight index contains 15
+MTP tensors covering 'mtp.fc', 'mtp.layers.0', 'mtp.norm' and the MTP embedding
+norms. The installed vLLM 0.23.0 'SpeculativeConfig' explicitly declares the
+'qwen3_5_mtp' method. Start with one speculative token, matching the single
+model-provided MTP layer. Accept it only with exact response-hash equality,
+zero errors, measured acceptance evidence and a paired decode profile. This is
+the primary TPOT candidate because a one-layer MTP path can remove target-model
+decode steps; the claim remains unproven until E2E A/B.
+
+The next cumulative treatment is the fused GDN prefill path from vLLM-Ascend
+upstream commit '77d13e2c0bfa9862b711b68811889e36b9d56aca'. It replaces the multi-kernel
 chunk gated delta-rule prefill pipeline with
-`torch_npu.npu_chunk_gated_delta_rule`. Reuse the audited patch from the
+'torch_npu.npu_chunk_gated_delta_rule'. Reuse the audited patch from the
 adjacent GDN workstream, but remeasure under this workstream's 133K,
 prefix-cache-enabled protocol; its historical 41984/no-prefix-cache numbers
-are not comparable.
+are not comparable. The current torch_npu package exposes the fused symbol, but
+runtime applicability and correctness on 910B4 still require an isolated probe.
 
 ## Frozen inputs
 
@@ -127,8 +150,8 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 
 ## Resume
 
-First poll `exec-0000000000000335`, verify the TP4 service and benchmark client
-ownership, and summarize all completed quick32 artifacts. Do not start a second
-client. Preserve NPU4-7. When all eight NPUs are explicitly released, render
+First poll `exec-0000000000000350`, verify the TP4 service and benchmark client
+ownership, and inspect the diagnostic error-reason counts. Do not start a second
+client. Preserve the invalid quick32 artifact and NPU4-7. When all eight NPUs are explicitly released, render
 the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
 its normalized JSON arguments and run the final four-cell original baseline.

@@ -48,9 +48,29 @@ development_runtime:
   endpoint: http://127.0.0.1:10010
   treatments: ["enable_matmul_allreduce=false", "cudagraph_mode=FULL_DECODE_ONLY"]
   smoke: {requests: 1, completed: 1, errors: 0, ttft_p50_ms: 1085.7145600020885, tpot_p50_ms: 41.675420292626015, e2e_p50_ms: 5378.282850142568, artifact_sha256: f2f959768f28b57d41e394b3be9379e3ef8e6cc65ebc9efea8d9650e0c2ae087}
+  invalid_quick32:
+    concurrency: 1
+    completed: 28
+    errors: 4
+    error_type: RuntimeError
+    artifact_sha256: a78b13517fe735f44f82f904fe4832e9a9371ad5dad1350f41c66fe8e1193768
+    disposition: "invalid; harness did not expose the RuntimeError reason and did not send the recorded seed"
+  diagnostic_rerun:
+    operation: exec-0000000000000350
+    output: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v2/c1-r1.json
+    treatments: ["send seed=1024 in every generation request", "record privacy-safe error reason counts and failed question hashes"]
 candidate:
-  primary_variable: "GDN prefill multi-kernel pipeline -> torch_npu.npu_chunk_gated_delta_rule"
-  upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
-  historical_protocol_comparable: false
+  primary_variable: "native Qwen3.5 MTP speculative decoding with one model-provided MTP layer"
+  method: qwen3_5_mtp
+  num_speculative_tokens: 1
+  evidence:
+    model_config: "text_config.mtp_num_hidden_layers=1"
+    weight_index: "15 MTP tensors, including mtp.fc, mtp.layers.0, mtp.norm and MTP embedding norms"
+    runtime: "vLLM 0.23.0 SpeculativeConfig declares qwen3_5_mtp"
+  cumulative_operator:
+    variable: "GDN prefill multi-kernel pipeline -> torch_npu.npu_chunk_gated_delta_rule"
+    upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
+    torch_npu_symbol_present: true
+    historical_protocol_comparable: false
 decision_reason: "Pending. A TP4 development baseline is healthy after two attributable startup compatibility treatments. Final DP2/TP4 baseline and 2x evidence remain unavailable while NPU4-7 are occupied."
-next_loop: "Complete and summarize quick32 without overlapping clients, then integrate and profile the fused GDN prefill candidate under the same TP4 development protocol; acquire NPU0-7 later for final DP2/TP4 A/B."
+next_loop: "Complete and summarize quick32 without overlapping clients, then A/B native qwen3_5_mtp speculative decoding under the same TP4 development protocol; retain it only after exact output-hash correctness and acceptance/profile evidence, then stack fused GDN prefill; acquire NPU0-7 later for final DP2/TP4 A/B."
