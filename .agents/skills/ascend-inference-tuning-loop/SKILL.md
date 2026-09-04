@@ -75,3 +75,13 @@ next loop from evidence, not from an unrecorded intuition.
 - All outcomes include a reason and next-loop recommendation.
 - Failed active changes are recovered before integration.
 - Local branch equals its upstream after every stage checkpoint.
+
+## Candidate Lifecycle Rule
+
+If a candidate is activated by mutating a runtime source tree, installing an
+overlay, or applying a patch at process/container startup, make activation
+idempotent before lifecycle or repeated benchmark testing. A restart must
+either detect and reuse the already-active implementation or recreate a clean
+runtime and apply it once. Treat "patch already applied" separately from
+"candidate implementation failed" and checkpoint the lifecycle fix before
+continuing measurements.

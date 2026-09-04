@@ -16,11 +16,19 @@ real improvement.
 1. Freeze model and tokenizer revisions, dtype or quantization, batch and
    sequence distributions, request concurrency, parallelism, seeds, dataset
    slice, framework settings, compilation or graph mode, and device binding.
+   Freeze workload semantics too: whether prompts are raw or transformed,
+   whether chat templates are applied, and whether outputs stop naturally or
+   use an explicit cap. Do not normalize input/output lengths unless that
+   normalization is part of the maintainer-approved workload contract.
 2. Declare the primary metric and thresholds before running the candidate.
 3. Run correctness gates first: load success, output validity, numerical or
    task-quality tolerance, deterministic checks where applicable, and expected
    NPU execution.
-4. Measure baseline and candidate with the same commands and controlled order.
+4. Before entering the measured window, prove there is exactly the intended
+   benchmark client population. Stop or exclude stale clients from abandoned
+   attempts and record overlapping-client runs as invalid rather than trying
+   to subtract their traffic afterward. Measure baseline and candidate with
+   the same commands and controlled order.
    Use explicit warmups, multiple measured repetitions, and report dispersion.
 5. Separate these evidence classes:
    - cold/startup: import, model load, compile, first token, first request;
@@ -48,6 +56,11 @@ differs. Re-baseline instead.
 - A single warm run cannot establish steady-state performance.
 - Host telemetry cannot prove physical NPU execution.
 - A faster compile cache hit is not a cold-start improvement.
+- A workload that silently changed from raw/natural generation to padded,
+  truncated, forced-length, or ignore-EOS generation is a new benchmark and
+  requires re-baselining.
+- Cancelling an orchestration operation does not prove a spawned benchmark
+  client exited; verify the actual client/container/process set before reuse.
 
 ## Verification
 

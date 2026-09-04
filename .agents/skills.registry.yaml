@@ -19,6 +19,7 @@ skills:
       - benchmark an inference change
       - compare an optimization with its baseline
       - accept or reject a performance claim
+      - freeze raw versus transformed workload input and output semantics
     scope:
       - configs/**
       - scripts/**
@@ -33,6 +34,7 @@ skills:
       - start or resume an inference optimization
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
+      - make a runtime-mutating candidate restart-safe before repeated measurement
     scope:
       - configs/**
       - scripts/**

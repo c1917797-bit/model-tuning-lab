@@ -1,5 +1,5 @@
 id: exp-20260904-qwen38-gdn-native-state-layout
-status: planned
+status: candidate_ready
 branch: work/exp-20260904-qwen38-gdn-native-state-layout
 hypothesis: "Replacing the multi-kernel GDN prefill pipeline with torch_npu.npu_chunk_gated_delta_rule will improve Qwen3.8 latency/throughput on the raw query_rewrite workload across concurrency 1/5/8/16 without numerical regression."
 primary_variable: "GDN prefill implementation: vLLM-Ascend multi-kernel chunk pipeline -> fused torch_npu.npu_chunk_gated_delta_rule"
@@ -27,6 +27,25 @@ candidate:
   patch: patches/qwen38-gdn-state-layout/77d13e2c0-fused-gdn-prefill.patch
   patch_sha256: d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e
   algorithm: "fused CANN chunk gated delta rule for GDN prefill; native [N,Nv,Dv,Dk] state layout"
+  runtime_container: qwen38_gdn_fused_candidate
+  activation_checkpoint: 6ca1780fe8fb45003ef79260c9f3fa6b96be1f43
+  current_state: "healthy candidate service on 127.0.0.1:8210; final raw/natural matched measurement pending"
+history_lessons:
+  - outcome: rejected
+    lesson: "Prefix caching produced material throughput/wall regression on the measured Qwen3.8 workload; preserve it as negative evidence rather than layering more variables onto it."
+    checkpoint: 615699d
+  - outcome: superseded_protocol
+    lesson: "The maintainer-approved business benchmark is the raw query_rewrite questions with natural model termination. 2K normalization and fixed-40 generation were protocol changes, so their performance artifacts are not comparable to the final raw/natural baseline."
+    checkpoints: [66d358f, 81aa086, 78ff0e8]
+  - outcome: invalid_run
+    lesson: "Stopping/cancelling an orchestration job did not guarantee its Docker benchmark client exited; overlapping clients contaminated measurement. Verify zero stale benchmark clients before every measured point."
+  - outcome: lifecycle_fix
+    lesson: "A startup-time git patch must be idempotent. The fused candidate initially failed on restart because the patch was already present; activation now detects the fused symbol and reuses the patched tree."
+    checkpoint: 6ca1780
+  - outcome: environment_fix
+    lesson: "Container-visible NPU remapping can invalidate vllm-ascend topology-based CPU binding; the controlled serving cpuset 0-95 and client cpuset 96-111 are part of the comparison environment."
+  - outcome: infrastructure_workaround
+    lesson: "GitHub smart-HTTP from chicaihong01 is intermittent. A localhost-only native TCP tunnel with per-command http.curloptResolve restored checkpoint pushes without permanent host-network changes."
 acceptance:
   - "single-op output agrees with baseline within BF16/FP32 tolerances"
   - "no API errors across all 357 raw questions at concurrency 1/5/8/16"
