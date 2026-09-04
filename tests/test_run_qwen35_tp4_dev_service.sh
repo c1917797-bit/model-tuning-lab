@@ -179,6 +179,26 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-tp2-dp2-mmar-on-text-only-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  tp2-dp2-mmar-on-text-only \
+  >"$tmp/tp2-dp2-mmar-on-text-only-fresh.out" \
+  2>"$tmp/tp2-dp2-mmar-on-text-only-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '--tensor-parallel-size 2' "$docker_log"
+grep -q -- '--data-parallel-size 2' "$docker_log"
+grep -q -- '--limit-mm-per-prompt {"image":0,"video":0}' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- 'HCCL_BUFFSIZE=512' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "TP2 DP2 text-only candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-ngram-gpu-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" ngram-gpu \
   >"$tmp/ngram-gpu-fresh.out" 2>"$tmp/ngram-gpu-fresh.err"

@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -25,7 +25,8 @@ case "$device_set" in
 esac
 tensor_parallel_size=4
 data_parallel_size=1
-if [[ "$mode" == tp2-dp2-mmar-on ]]; then
+if [[ "$mode" == tp2-dp2-mmar-on ||
+      "$mode" == tp2-dp2-mmar-on-text-only ]]; then
   tensor_parallel_size=2
   data_parallel_size=2
 fi
@@ -136,6 +137,12 @@ serve_args=(
   )"
   --default-chat-template-kwargs '{"enable_thinking":false}'
 )
+
+if [[ "$mode" == tp2-dp2-mmar-on-text-only ]]; then
+  # query_rewrite contains text only. Disable unused image/video capacity so
+  # vLLM does not load or profile the multimodal encoder on 32 GB 910B4 cards.
+  serve_args+=(--limit-mm-per-prompt '{"image":0,"video":0}')
+fi
 
 # torch_npu's external profiler callback must be started and stopped from the
 # same execution thread. vLLM 0.23.0 async scheduling violates that invariant
