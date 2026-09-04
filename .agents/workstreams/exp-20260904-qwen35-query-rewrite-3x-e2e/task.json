@@ -12,6 +12,7 @@
   "claims": [
     {"kind":"file","mode":"exclusive","value":"docs/qwen35-query-rewrite-3x-loop.md"},
     {"kind":"file","mode":"exclusive","value":"configs/qwen35-query-rewrite-baseline.yaml"},
+    {"kind":"file","mode":"exclusive","value":"scripts/qwen35_query_rewrite_bench.py"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-qwen35-query-rewrite-3x-e2e.yaml"},
     {"kind":"resource","mode":"pending-exclusive","value":"chicaihong01 physical NPU0-7 for DP2/TP4 baseline; NPU0-3 and NPU4-7 are currently externally occupied and forbidden"}
   ],

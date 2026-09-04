@@ -51,6 +51,13 @@ continuity; the authoritative goal was revised to 2x on 2026-09-04.
 8. Preserve accepted, rejected, failed and inconclusive results.
 9. After individual treatments pass, run combination and ablation A/B.
 
+The privacy-preserving streaming harness is
+`scripts/qwen35_query_rewrite_bench.py`. One invocation measures one
+concurrency/repetition cell, verifies the frozen dataset hash, and emits
+TTFT/TPOT/E2E/throughput plus response hashes without recording prompts or
+response text. The completion-token budget remains a required explicit
+argument and must be frozen before the original baseline.
+
 The final stack is expected to combine core operators, algorithms and
 configuration. "One variable" applies to each attribution step, not to the
 final candidate.
