@@ -158,6 +158,11 @@ algorithm_candidate:
     packed_modules: [qkv_proj, gate_up_proj, in_proj_qkvz, in_proj_ba]
     max_context_tested: 133120
     topology_tested: "TP2/DP1 in the official matrix; current TP4/DP2 remains unverified"
+  source_manifest: configs/qwen35-query-rewrite-w8a8-candidate.yaml
+  source_revision: 2a084569138db40bd9b6a9d96eafb160e6b913c7
+  source_total_bytes: 36443627736
+  source_file_count: 21
+  source_revision_verified: true
   local_checkpoint: null
   local_modelslim: false
   disk_available: "1.5 TiB"

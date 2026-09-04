@@ -321,3 +321,9 @@ does not prove the W8A8 3/5-token stack, but it does require a fresh response
 comparison. Do not silently download or generate the tens-of-GB checkpoint:
 bind its source revision and hashes first, preserve the BF16 source, and apply
 the same real query_rewrite correctness and A/B gates.
+
+The immutable acquisition identity is now frozen in
+`configs/qwen35-query-rewrite-w8a8-candidate.yaml`: ModelScope revision
+`2a084569138db40bd9b6a9d96eafb160e6b913c7`, 21 files,
+36,443,627,736 bytes, including all nine weight-shard SHA256 values. This is a
+manifest only; no checkpoint was downloaded and no source model was modified.

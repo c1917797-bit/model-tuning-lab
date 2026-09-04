@@ -1,0 +1,46 @@
+schema: qwen35-w8a8-source-manifest/v1
+purpose: immutable acquisition identity only; this file does not authorize download or acceptance
+repository:
+  provider: ModelScope
+  id: Eco-Tech/Qwen3.5-27B-w8a8-mtp
+  revision: 2a084569138db40bd9b6a9d96eafb160e6b913c7
+  revision_verified: true
+  license: Apache-2.0
+  base_model: Qwen/Qwen3.5-27B
+  relation: quantized
+  architecture: Qwen3_5ForConditionalGeneration
+  model_type: qwen3_5
+  total_bytes: 36443627736
+  lfs_bytes: 36443288981
+  weight_shards_bytes: 36423758240
+quantization:
+  format: W8A8
+  runtime_flag: "--quantization ascend"
+  modelslim_commit: 51fbb8a2f3cba234ef6d04e3f04d807dc9082fe2
+  command_reference: "msmodelslim quant --model_path MODEL_PATH --save_path SAVE_PATH --device npu --model_type Qwen3.5-27B --quant_type w8a8 --trust_remote_code True"
+published_accuracy:
+  evidence_scope: external reference only; must not replace query_rewrite correctness
+  mmlupro: {w8a8_percent: 85.94, local_bf16_percent: 86.24}
+  ceval: {w8a8_percent: 91.01, local_bf16_percent: 91.98}
+  gpqa: {w8a8_percent: 84.34, local_bf16_percent: 84.34}
+files:
+  config.json: {bytes: 4134, sha256: f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c}
+  quant_model_description.json: {bytes: 124402, sha256: 25692d6b6b2a68475c7c94f75f9966949648b0bc374470084476b7b5e159bf5d}
+  quant_model_weights.safetensors.index.json: {bytes: 189572, sha256: b57f2e8cfcf25df3e895a061ea0499d0176c20708b684669b93034f28cc716b0}
+  tokenizer.json: {bytes: 12807982, sha256: 5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42}
+  tokenizer_config.json: {bytes: 16710, sha256: 316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8}
+  quant_model_weights-00001-of-00009.safetensors: {bytes: 4291131424, sha256: 98ba0d3aff749f098a37ed3f3cdd85514b5dea4254a4ab8d5555ae621c434f3b}
+  quant_model_weights-00002-of-00009.safetensors: {bytes: 4282977544, sha256: 7aa6faded81eda2090deb8326458c00d8fe48cc7e8d68859593e5b573933866c}
+  quant_model_weights-00003-of-00009.safetensors: {bytes: 4241859528, sha256: d73bd0c76534e2b74d8f498dd203343fe6c8bee513819b16973a9d25beadd075}
+  quant_model_weights-00004-of-00009.safetensors: {bytes: 4241859520, sha256: 265f1440b939ad467f1268945baed590d561858c549ce84e5403c37b7a16d98b}
+  quant_model_weights-00005-of-00009.safetensors: {bytes: 4268288888, sha256: ad11479781aefc6ea93fe05254e0df2b65b6ac3b21aec2856330ee9498f99eb7}
+  quant_model_weights-00006-of-00009.safetensors: {bytes: 4241859528, sha256: da675b292cd0bb4ed551ea1f0e946accb1e954595a5fcb003acf4bca1c96e40c}
+  quant_model_weights-00007-of-00009.safetensors: {bytes: 4241859528, sha256: a592ccde61a40abcda74d67a85469ff183d927fce86ad6c2d0c4348a2af53bef}
+  quant_model_weights-00008-of-00009.safetensors: {bytes: 4071125384, sha256: 6f73bccde05ab1f27f5f1c625e092e24211182a4bb50acd3465b98972155c9b1}
+  quant_model_weights-00009-of-00009.safetensors: {bytes: 2542796896, sha256: 86df42517669a86ad5aac1c49776c5a97b36ab72ccb796da209ec07bd17c9013}
+gates:
+  acquisition: verify every downloaded file against this revision and SHA256 list
+  source_preservation: never modify or replace /cache/austinov/Qwen3.8-27B
+  attribution: benchmark W8A8 without MTP before adding speculative decoding
+  correctness: use the frozen real query_rewrite protocol; external benchmark accuracy is insufficient
+  performance: final acceptance remains DP2/TP4, concurrency [1, 5, 8, 16], three repetitions, TTFT and TPOT at least 2x
