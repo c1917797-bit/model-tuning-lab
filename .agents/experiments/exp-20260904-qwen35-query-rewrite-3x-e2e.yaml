@@ -136,6 +136,18 @@ profile_analysis:
     external_pids: [172441, 172442, 172443, 172444]
   latest_resource_check_utc: "2026-09-04 17:04:48"
   latest_resource_state: "NPU0-3 external p0_ab (PIDs 172441-172444); NPU4-7 external qwen38_gdn_fused_candidate (PIDs 1312892-1312895); untouched"
+operator_candidate:
+  id: fused_gdn_prefill
+  upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
+  upstream_patch_sha256: d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e
+  operator: torch_npu.npu_chunk_gated_delta_rule
+  image_vllm_ascend_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  image_gdn_sha256: d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816
+  runtime_symbol_present: true
+  direct_patch_apply: false
+  upstream_microbenchmark: "11274-token prefill, 5890us -> 4964us (1.186x); not E2E or current-model evidence"
+  portability_rule: "adapt minimal hunks to the exact v0.23.0 image source; never overlay the newer full gdn.py; require runtime activation, reference correctness, real query_rewrite A/B, and paired profile"
+  expected_role: "cumulative operator treatment, not a standalone route to the 2x TTFT/TPOT objective"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
 next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path using the synchronous-profile fix, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."
 runtime_manifest:

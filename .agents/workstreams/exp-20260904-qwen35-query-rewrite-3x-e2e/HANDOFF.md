@@ -287,3 +287,19 @@ external NPU0-3 or NPU4-7 workload. When all eight NPUs are explicitly released,
 render
 the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
 its normalized JSON arguments and run the final four-cell original baseline.
+
+## Fused GDN portability boundary
+
+The frozen upstream fused-prefill patch is commit `77d13e2c0` with SHA256
+`d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e`.
+It reports only a 5890us-to-4964us operator microbenchmark on a different model
+and software baseline. The v0.23.0 image is vLLM-Ascend `5cb98caa` and its
+`gdn.py` SHA256 is
+`d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816`.
+The image exports `torch_npu.npu_chunk_gated_delta_rule`, but the frozen patch
+does not apply cleanly to that source. Do not mount the newer full `gdn.py`
+from `/cache/cch/vllm-ascend`; it contains broader API changes. Port only the
+minimal fused-op hunks against the exact image source, keep a feature flag and
+fallback, then require activation proof, reference correctness, real
+query_rewrite A/B and a paired profile. Treat it as one cumulative operator
+treatment, not evidence of the requested 2x result.
