@@ -102,7 +102,28 @@ results:
       run2_humaneval: "bf10c3fa6bf3bda5598e48a42fa91069d9b4eab0fdf448176f75eb613cde3e67"
       run3_json: "3876fa2658aa58e4a21a177627e9c3fa6255de5c58b26582ece73de10d8d038d"
       run3_humaneval: "4e2b99dfee8ce6f91c1644a4942479500f85a1137f12924125d80aa6e105fb38"
-  baseline: {}
+  baseline:
+    protocol: "exact 2048 input tokens / exact 40 output tokens; concurrency 8; 513 requests; Prefix Cache OFF"
+    repetitions: 3
+    valid_runs: [run1, run2, run3]
+    errors: 0
+    wall_s: {median: 239.733832180, mean: 241.590198740, min: 239.636544090, max: 245.400219950, cv_pct: 1.1153}
+    requests_per_s: {median: 2.139873189, mean: 2.123692601, min: 2.090462674, max: 2.140741939, cv_pct: 1.1066}
+    input_tokens_per_s: {median: 4382.460291258, mean: 4349.322446092, min: 4281.267556378, max: 4384.239490641, cv_pct: 1.1066}
+    output_tokens_per_s: {median: 85.594927564, mean: 84.947704025, min: 83.618506961, max: 85.629677552, cv_pct: 1.1066}
+    total_tokens_per_s: {median: 4468.055218821, mean: 4434.270150117, min: 4364.886063338, max: 4469.869168192, cv_pct: 1.1066}
+    ttft_p50_ms: {median: 2363.811659976, min: 2363.396679983, max: 2364.611560013}
+    ttft_p95_ms: {median: 2382.693693950, min: 2377.338176058, max: 2387.115925946}
+    e2e_p50_ms: {median: 3718.403449981, min: 3718.369519920, max: 3718.918430037}
+    e2e_p95_ms: {median: 3742.424545996, min: 3731.925529987, max: 3744.240198052}
+    evidence_dir: "/cache/austinov/eval-runs/exp-20260903-qwen38-prefix-cache-general-eval/perf2k40_baseline"
+    run_sha256:
+      run1_json: "3b0cff897092730ec5d7ae0591326810be12cc65b0e478c55f4001af23d7fed4"
+      run2_json: "129a96fa5cc25b581a2496c9a863360fd27f8f633d9b19b3f6b5d9b3ab6ac403"
+      run3_json: "18ae7c0105526c11c65b9075c9c1f6e73909d91a3705151ea5a864933f086467"
+      run1_resources: "befd5fc82690c43bf1cd59672927ad06d697cad4157d3518cc03236b31d89e71"
+      run2_resources: "79d9c623086351578a9b8fed6609369096623c6c8a08835bf707627662354e20"
+      run3_resources: "919c0bf26865c69cbe38f202d81bd5a1efe7f46f9de0fc1cda59d185b524eca6"
   candidate: {}
   cold: {}
   steady: {}

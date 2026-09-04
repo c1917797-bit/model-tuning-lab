@@ -8,4 +8,5 @@
 - Hardware claim: physical NPU4-7; do not use NPU0-3 for this experiment.
 - Isolation guard: physical NPU4-7 must contain exactly the four VLLM workers belonging to the measured server container. Recurring unrelated NPU0 probes are recorded in resource evidence but do not invalidate a run by themselves; server/client CPU cpusets remain fixed.
 - Dedicated A/B endpoint: 127.0.0.1:8210 to prevent unrelated local clients from using the experiment service.
-- Run three clean 2k40 baseline repetitions (Prefix Cache OFF), checkpoint+push, then three clean candidate repetitions (Prefix Cache ON), followed by natural-prompt correctness verification and decision.
+- Prefix Cache OFF 2k40 baseline is complete with three valid runs and zero errors. Median: wall 239.733832s, 2.139873 req/s, 85.594928 output tok/s, 4468.055219 total tok/s, TTFT p50 2363.812ms, E2E p50 3718.403ms. Run-to-run throughput CV is ~1.11%.
+- Next: checkpoint+push this baseline evidence, then run three clean Prefix Cache ON candidate repetitions on the same NPU4-7 / CPU0-95 / 8210 setup, followed by natural-prompt correctness verification and decision.
