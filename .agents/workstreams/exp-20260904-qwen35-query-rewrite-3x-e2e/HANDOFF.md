@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `flashcomm1-failed-bf16-nz-next-on-npu4-7`;
+- Execution: `flashcomm1-and-bf16-nz-mmar-failed-selecting-recovery`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -36,6 +36,17 @@
   (SHA256
   `35ef543dd9ab29d127ce01b2556b6abf8b0a46e9068320f7a97d4e69cf59e692`).
   The exact container was stopped; NPU4-7 remain the assigned candidate set.
+- BF16 `weight_nz_mode=2` was then really launched alone on NPU4-7 as run
+  `bf16-nz-fixedorig-npu4-7-20260904T1838Z`. All four workers proved NZ and
+  MatMulAllReduce active and loaded 12.8785 GB of weights each, but
+  `aclnnMatmulAllReduce` rejected its `x2` input because it was
+  `FRACTAL_NZ` instead of the required `ND` format. No benchmark cell ran.
+- BF16 NZ failure evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/bf16-nz-fixedorig-npu4-7-20260904T1838Z/service.log`
+  (SHA256
+  `0756f2a7770166afa54d4e4ff08178be13d6b81287a28fa861ec9e1b3ddf82b9`).
+  The exact container was stopped. The next bounded recovery is NZ with
+  MatMulAllReduce disabled, matching that setting in the fixed original.
 
 ## Authoritative comparison and stacking policy
 
@@ -419,16 +430,23 @@ correctness plus 2x decision report and hashes. Its trap stops only the exact
 container it started; the underlying launcher rejects any existing process on
 the selected physical device set.
 
-The next candidate is BF16 weight `FRACTAL_NZ`, isolated as
+The next candidate was BF16 weight `FRACTAL_NZ`, isolated as
 `weight_nz_mode=2` in
 `configs/qwen35-query-rewrite-bf16-nz-candidate.yaml` and launcher mode
 `bf16-nz`. This is not quantization: exact-image source applies
 `maybe_trans_nz` inside `AscendUnquantizedLinearMethod` and continues
 through `unquantized_gemm`. Mode 1 leaves BF16 weights in ND, while mode 2
-converts eligible non-conv1d weights. Do not stack it with the failed
-FlashComm1 path. In particular, require startup and correctness
-proof with the canonical MatMulAllReduce path because their interaction is not
-proven by static inspection.
+converts eligible non-conv1d weights. The real launch proved the previously
+unknown interaction negative: `aclnnMatmulAllReduce` requires the weight
+input in ND and rejected FRACTAL_NZ before readiness. Do not stack it with the
+failed FlashComm1 path.
+
+The fixed original actually used MatMulAllReduce disabled. Therefore the next
+bounded recovery is `weight_nz_mode=2` with MatMulAllReduce disabled: relative
+to the fixed original this changes only the BF16 weight layout, while testing
+whether the startup failure belongs specifically to the fused communication
+path. This variant still needs activation, exact response correctness and real
+E2E evidence before it can enter the best stack.
 
 ## Baseline evidence correction
 

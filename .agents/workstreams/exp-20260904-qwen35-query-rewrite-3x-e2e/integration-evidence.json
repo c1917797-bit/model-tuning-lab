@@ -24,6 +24,10 @@
     {
       "gate": "flashcomm1-startup",
       "result": "FAIL (preserved): FlashComm1 and MatMulAllReduce activation were logged, but Qwen3.5 TP4 GDN graph construction failed with symbolic s59 versus ceil(s59/4) shape mismatch before readiness; no benchmark cell ran and the candidate is excluded from the stack"
+    },
+    {
+      "gate": "bf16-nz-with-matmulallreduce-startup",
+      "result": "FAIL (preserved): all TP workers activated weight_nz_mode=2 and MatMulAllReduce, but aclnnMatmulAllReduce rejected FRACTAL_NZ x2 because it requires ND; no benchmark cell ran"
     }
   ]
 }

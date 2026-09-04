@@ -53,5 +53,10 @@ the same way. Quantization is prohibited.
   unsplit symbolic sequence length with a sequence-parallel `ceil(s/4)`
   buffer. No E2E measurement exists, so this is not a claimed latency
   regression and not a rejection of the paper-level method.
-- The next isolated treatment is BF16 `weight_nz_mode=2` on physical NPU4-7.
-  FlashComm1 is not part of the current best stack.
+- BF16 `weight_nz_mode=2` with MatMulAllReduce enabled also failed before
+  readiness: the layout conversion activated, but `aclnnMatmulAllReduce`
+  requires its `x2` input in ND rather than FRACTAL_NZ.
+- The next isolated recovery is BF16 `weight_nz_mode=2` with
+  MatMulAllReduce disabled on physical NPU4-7. That matches the actual fixed
+  original setting and isolates the layout variable. Neither prior failed
+  path is part of the current best stack.

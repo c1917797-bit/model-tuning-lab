@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: testing_bf16_weight_fractal_nz
-decision: reject_mtp_and_fail_flashcomm1_startup
+status: selecting_bf16_nz_matmulallreduce_interaction_recovery
+decision: reject_mtp_and_fail_flashcomm1_and_bf16_nz_startup
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -213,7 +213,7 @@ communication_candidate:
   evidence_boundary: "startup activation and failure are proven; no benchmark cell ran and no speed claim is valid"
 layout_candidate:
   id: bf16_weight_fractal_nz
-  status: ready_next_on_npu4_7
+  status: failed_startup_with_matmulallreduce
   source_manifest: configs/qwen35-query-rewrite-bf16-nz-candidate.yaml
   launcher_mode: bf16-nz
   dtype: BF16
@@ -224,7 +224,16 @@ layout_candidate:
   hardware_scope: "non-310P policy includes Ascend 910B4"
   interaction_risk: "compatibility and performance with canonical MatmulAllreduceRowParallelOp are not established by static source; startup, operator activation, HBM and correctness are mandatory"
   required_gates: ["startup", "BF16/NZ activation proof", "zero request errors", "exact response correctness", "TP4 quick32 versus fixed original", "candidate profile", "cumulative-stack comparison"]
-  evidence_boundary: "this is a BF16 storage/layout and kernel-selection candidate, not quantization; no performance claim before real A/B"
+  run_id: bf16-nz-fixedorig-npu4-7-20260904T1838Z
+  operation_id: exec-000000000000056e
+  output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/bf16-nz-fixedorig-npu4-7-20260904T1838Z
+  service_log_sha256: 0756f2a7770166afa54d4e4ff08178be13d6b81287a28fa861ec9e1b3ddf82b9
+  activation_proof: "all TP workers logged weight_nz_mode=2 and enable_matmul_allreduce=true; 12.8785 GB of weights loaded per worker"
+  failure: "aclnnMatmulAllReduce rejected FRACTAL_NZ parameter x2 with EZ0017 because the fused communication operator requires ND; EngineCore failed before readiness"
+  exit_status: 70
+  decision_scope: "failed interaction between BF16 FRACTAL_NZ and MatMulAllReduce; no E2E latency result"
+  recovery: "exact candidate container stopped and log retained outside Git"
+  evidence_boundary: "BF16 layout activation and the interaction failure are proven; this does not establish the performance of FRACTAL_NZ with MatMulAllReduce disabled"
 quantization_constraint:
   allowed: false
   set_by: user
@@ -261,8 +270,8 @@ rejected_algorithm_candidate:
   correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
   acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
-decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. FlashComm1 is failed at startup on this Qwen3.5 TP4 path because sequence-parallel shape rewriting is incompatible with the GDN graph during KV-cache initialization; it is not eligible for the stack. Reject all quantization routes by explicit user constraint. Reuse quick32-v3 as the user-designated fixed original; no baseline rerun is pending."
-next_loop: "Run BF16 FRACTAL_NZ alone on the user-assigned physical NPU4-7 against the fixed original. Retain it only after startup, activation, exact response correctness and E2E gates. Continue adding only accepted BF16 parameter, semantics-preserving algorithm and operator treatments to the best stack; do not retry or stack FlashComm1 unchanged."
+decision_reason: "Reject one-token Qwen3.5 MTP for correctness and latency regressions. FlashComm1 failed at startup because its sequence-parallel shape rewriting is incompatible with the Qwen3.5 GDN graph. BF16 FRACTAL_NZ with MatMulAllReduce enabled also failed at startup because aclnnMatmulAllReduce requires its weight input in ND. Reject all quantization routes by explicit user constraint. No new E2E result exists for either startup failure."
+next_loop: "Test BF16 FRACTAL_NZ with MatMulAllReduce disabled on physical NPU4-7. This isolates weight_nz_mode 1 -> 2 relative to the actual fixed original, which already used enable_matmul_allreduce=false, and directly tests whether the observed format conflict is limited to the fused communication path. Keep it out of the best stack unless startup, activation, exact response correctness and E2E gates pass."
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
