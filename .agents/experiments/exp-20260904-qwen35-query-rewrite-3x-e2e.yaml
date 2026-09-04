@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp4_mtp_rejected_profile_baseline_next
+status: profile_waiting_for_npu0_3
 decision: reject_mtp
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -40,7 +40,7 @@ operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
 resources:
   required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
-  current: "NPU0-3 are free after the completed MTP experiment; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  current: "NPU0-3 externally occupied by qwen36_27b_dk64_treatment_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -96,5 +96,12 @@ candidate:
     upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
     torch_npu_symbol_present: true
     historical_protocol_comparable: false
+profiling_attempt:
+  state: waiting_for_npu0_3
+  container: qwen35_query_rewrite_tp4_dev_profile
+  result: "startup failed before serving: Triton Ascend get_arch returned NULL during Qwen3.5 architecture inspection after an external workload acquired NPU0-3"
+  external_owner_npu0_3: "qwen36_27b_dk64_treatment_npu0_3 (7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac)"
+  cleanup: "failed profile container retained; workstream readiness observer terminated; no workstream process remains on NPU0-3"
+  recovery: "require explicit exclusive NPU0-3 ownership; use a new immutable profile container name and output directory"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
-next_loop: "Relaunch accepted non-MTP TP4 with torch profiler configured; profile a fixed real query_rewrite request and rank actual prefill/decode hotspots before selecting the next cumulative operator or configuration treatment. Acquire NPU0-7 later for final DP2/TP4 A/B."
+next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."

@@ -2,13 +2,19 @@
 
 ## State
 
-- Execution: `tp4-mtp-rejected-profile-baseline-next`; integration: `not-ready`.
+- Execution: `profile-waiting-for-npu0-3`; integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Physical NPU0-3 are currently assigned to this workstream's
-  `qwen35_query_rewrite_tp4_dev_mtp` completed experiment on loopback port 10010. The
-  completed baseline container `qwen35_query_rewrite_tp4_dev_decodegraph` is
-  stopped and retained with its logs.
+- Physical NPU0-3 are externally owned by
+  `qwen36_27b_dk64_treatment_npu0_3`
+  (`7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac`).
+  Do not stop, restart, inspect inside, or otherwise perturb it.
+- The attempted workstream profile container
+  `qwen35_query_rewrite_tp4_dev_profile` exited before serving when Triton
+  Ascend `get_arch()` returned NULL during Qwen3.5 architecture inspection.
+  The failed container is retained; its readiness observer was terminated and
+  no workstream process remains on NPU0-3. This is a resource-ownership race,
+  not valid profile evidence.
 - Physical NPU4-7 are owned by `qwen38_gdn_fused_candidate` on loopback port 8210. Do not stop, restart, inspect inside, or otherwise perturb it.
 - The frozen DP2/TP4 baseline requires all eight NPUs, so no final baseline has
   started. The running TP4 service is a development baseline only and must not
@@ -194,9 +200,12 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 ## Resume
 
 The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
-artifacts. Relaunch the accepted non-MTP TP4 configuration with explicit
-torch-profiler configuration and profile a fixed real request. Do not treat
-`VLLM_ASCEND_PTO_CHUNK_GDN` as a treatment. Do not perturb NPU4-7. When all
-eight NPUs are explicitly released, render
+artifacts. Wait for explicit exclusive ownership of NPU0-3, then launch the
+accepted non-MTP TP4 configuration under a new immutable profile container name
+and output directory, with explicit torch-profiler configuration, and profile a
+fixed real request. Do not reuse the failed profile container as evidence. Do
+not treat `VLLM_ASCEND_PTO_CHUNK_GDN` as a treatment. Do not perturb either
+external NPU0-3 or NPU4-7 workload. When all eight NPUs are explicitly released,
+render
 the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
 its normalized JSON arguments and run the final four-cell original baseline.
