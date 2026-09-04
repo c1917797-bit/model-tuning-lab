@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Execution: `started`; integration: `not-ready`.
+- Execution: `completed`; integration: `ready`.
 - Branch: `work/maintainer-chicaihong01-bootstrap-20260904`.
 - Base: `origin/main@44153ca7e773d2635209a973079c4c59c3e67119`.
 
@@ -22,17 +22,20 @@ it, and raise the repository-specific active worktree budget from four to eight.
 - Confirmed `chicaihong01/ma` is reachable through AWMCP.
 - Confirmed the canonical repository and live Ascend environment on the host.
 - Created this isolated workstream from a synchronized `origin/main`.
+- Added and registered `chicaihong01-host-maintenance`.
+- Routed target-host work from `AGENTS.md` and raised the worktree budget to eight.
+- Validation passed with 18 maintainer skills.
 
 ## 4. Current Action
 
-Create and validate the host bootstrap knowledge without storing the operator
-verification value in Git.
+Integrate the exact validated remote workstream tip into a clean synchronized
+`main` using the serialized no-fast-forward gate.
 
 ## 5. Next Actions
 
-1. Add the skill and registry/AGENTS routing.
-2. Change the repository worktree budget to eight.
-3. Validate, push, mark ready, and integrate serially.
+1. Fetch the remote workstream and verify its exact ready tip.
+2. Merge it into current `main` without fast-forwarding.
+3. Re-run validation on the final tree, push `main`, and reclaim this worktree.
 
 ## 6. Validation Commands
 

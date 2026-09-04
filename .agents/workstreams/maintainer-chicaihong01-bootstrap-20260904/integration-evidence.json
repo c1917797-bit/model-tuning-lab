@@ -1,11 +1,16 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "maintainer-chicaihong01-bootstrap-20260904",
-  "status": "not-ready",
+  "status": "ready",
   "targetParent": "44153ca7e773d2635209a973079c4c59c3e67119",
-  "sourceCommit": null,
-  "validation": [],
-  "remoteWorkstreamTip": null,
+  "sourceCommit": "1be4d9c",
+  "validation": [
+    {"command": "./scripts/validate-mst.sh", "result": "PASS (18 skills)"},
+    {"command": "host bootstrap required-field checks", "result": "PASS"},
+    {"command": "worktree budget policy check", "result": "PASS (8)"},
+    {"command": "git diff --check", "result": "PASS"}
+  ],
+  "remoteWorkstreamTip": "self",
   "mergeCommit": null,
   "mergeMode": "no_ff"
 }
