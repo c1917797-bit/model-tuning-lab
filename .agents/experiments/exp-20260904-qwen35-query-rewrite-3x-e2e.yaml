@@ -103,5 +103,11 @@ profiling_attempt:
   external_owner_npu0_3: "qwen36_27b_dk64_treatment_npu0_3 (7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac)"
   cleanup: "failed profile container retained; workstream readiness observer terminated; no workstream process remains on NPU0-3"
   recovery: "require explicit exclusive NPU0-3 ownership; use a new immutable profile container name and output directory"
+profile_analysis:
+  tool: scripts/analyze_ascend_profile.py
+  schema: qwen35-ascend-profile-hotspots/v1
+  validation: "zero-dependency fixture assertions, py_compile, and 15298-row historical Ascend kernel_details.csv smoke passed"
+  semantics: "category shares and top kernels use summed kernel duration; never interpret as wall time because streams may overlap"
+  source_finding: "Qwen3.5 prefill uses a multi-kernel chunk GDN pipeline while decode uses npu_recurrent_gated_delta_rule; select the next treatment only from the new paired profile"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
 next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."

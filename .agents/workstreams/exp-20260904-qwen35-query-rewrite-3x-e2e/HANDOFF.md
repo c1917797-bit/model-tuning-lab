@@ -197,6 +197,23 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 4. model-level correctness under DP2/TP4;
 5. query_rewrite E2E A/B and paired profile evidence.
 
+## Profile analysis readiness
+
+- `scripts/analyze_ascend_profile.py` recursively discovers Ascend
+  `kernel_details.csv` files, records each input SHA256, and emits
+  `qwen35-ascend-profile-hotspots/v1` JSON with category shares and raw top
+  kernels. It groups the complete GDN prefill pipeline rather than treating
+  only `ChunkGatedDeltaRule` as the cost.
+- Validation passed with a zero-dependency fixture, `py_compile`, and a
+  15,298-row historical Ascend profile smoke. Summed kernel duration is
+  explicitly marked as **not wall time** because streams can overlap; TTFT and
+  TPOT remain authoritative only in the E2E benchmark artifacts.
+- Current source routing is phase-specific: prefill uses the chunk GDN
+  pipeline (including chunk rule, recompute, merge and transpose kernels);
+  decode uses the AscendC `npu_recurrent_gated_delta_rule` custom operator.
+  The next treatment must be chosen from the new fixed-request profile, not
+  inferred from historical profiles belonging to another run.
+
 ## Resume
 
 The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
