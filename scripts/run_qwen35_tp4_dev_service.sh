@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -13,23 +13,24 @@ esac
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 device_set="${DEVICE_SET:-4-7}"
 case "$device_set" in
-  0-3)
-    physical_npus=(0 1 2 3)
-    physical_npu_csv="0,1,2,3"
-    cpuset_cpus="96-191"
-    ;;
   4-7)
     physical_npus=(4 5 6 7)
     physical_npu_csv="4,5,6,7"
     cpuset_cpus="0-95"
     ;;
   *)
-    echo "DEVICE_SET must be 0-3 or 4-7" >&2
+    echo "DEVICE_SET must be 4-7 for this workstream" >&2
     exit 64
     ;;
 esac
+tensor_parallel_size=4
+data_parallel_size=1
+if [[ "$mode" == tp2-dp2-mmar-on ]]; then
+  tensor_parallel_size=2
+  data_parallel_size=2
+fi
 device_tag="${device_set//-/_}"
-container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}_$device_tag}"
+container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp${tensor_parallel_size}_dp${data_parallel_size}_${mode}_$device_tag}"
 port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
@@ -101,8 +102,8 @@ serve_args=(
   vllm serve /cache/austinov/Qwen3.8-27B
   --host 127.0.0.1
   --port "$port"
-  --tensor-parallel-size 4
-  --data-parallel-size 1
+  --tensor-parallel-size "$tensor_parallel_size"
+  --data-parallel-size "$data_parallel_size"
   --seed 1024
   --served-model-name Qwen3-5/Qwen3.5-27B
   --max-num-seqs 16

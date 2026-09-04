@@ -22,18 +22,18 @@ cat >"$mock_bin/npu-smi" <<'MOCK'
 #!/usr/bin/env bash
 cat <<'INFO'
 | NPU     Chip              | Process id    | Process name             | Process memory(MB)      |
-| 0       0                 | 4111982       | VLLMWorker_TP            | 27952                   |
+| 4       0                 | 4111982       | VLLMWorker_TP            | 27952                   |
 INFO
 MOCK
 chmod +x "$mock_bin/npu-smi"
 
 set +e
-PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi"   DEVICE_SET=0-3 CONTAINER_NAME=guard-test-occupied   PROFILE_DIR="$tmp/profile-occupied"   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile   >"$tmp/occupied.out" 2>"$tmp/occupied.err"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi"   DEVICE_SET=4-7 CONTAINER_NAME=guard-test-occupied   PROFILE_DIR="$tmp/profile-occupied"   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile   >"$tmp/occupied.out" 2>"$tmp/occupied.err"
 rc=$?
 set -e
 if [[ "$rc" != 42 ]]; then cat "$tmp/occupied.err" >&2; fi
 [[ "$rc" == 42 ]]
-grep -q "physical NPU0-3 are not idle" "$tmp/occupied.err"
+grep -q "physical NPU4-7 are not idle" "$tmp/occupied.err"
 [[ ! -e "$docker_log" ]]
 
 cat >"$mock_bin/npu-smi" <<'MOCK'
@@ -93,6 +93,8 @@ grep -q -- '--no-async-scheduling' "$docker_log"
 grep -q -- '"enable_matmul_allreduce":false' "$docker_log"
 grep -q -- '"enable_flashcomm1":false' "$docker_log"
 grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- '--tensor-parallel-size 4' "$docker_log"
+grep -q -- '--data-parallel-size 1' "$docker_log"
 grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0' "$docker_log"
 if grep -Eq '(^| )--async-scheduling( |$)' "$docker_log"; then
   echo "MMAR-off profile mode unexpectedly enabled async scheduling" >&2
@@ -153,6 +155,25 @@ grep -q -- 'VLLM_ASCEND_ENABLE_FLASHCOMM1=0' "$docker_log"
 grep -q -- 'VLLM_ASCEND_ENABLE_NZ=1' "$docker_log"
 if grep -q -- '--quantization' "$docker_log"; then
   echo "MatMulAllReduce candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-tp2-dp2-mmar-on-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" tp2-dp2-mmar-on \
+  >"$tmp/tp2-dp2-mmar-on-fresh.out" 2>"$tmp/tp2-dp2-mmar-on-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '--tensor-parallel-size 2' "$docker_log"
+grep -q -- '--data-parallel-size 2' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_FLASHCOMM1=0' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_NZ=1' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "TP2 DP2 MMAR candidate unexpectedly enabled quantization" >&2
   exit 1
 fi
 

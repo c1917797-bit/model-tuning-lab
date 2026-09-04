@@ -12,7 +12,7 @@ base_url="http://127.0.0.1:$port"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
 original_dir="${ORIGINAL_BASELINE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v3}"
 device_tag="${device_set//-/_}"
-candidate_container="${CANDIDATE_CONTAINER:-qwen35_tp4_${candidate_mode}_${device_tag}_$run_id}"
+candidate_container="${CANDIDATE_CONTAINER:-qwen35_${candidate_mode}_${device_tag}_$run_id}"
 active_container=""
 active_log=""
 
@@ -25,6 +25,9 @@ case "$candidate_mode" in
     ;;
   mmar-on)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-candidate.yaml"
+    ;;
+  tp2-dp2-mmar-on)
+    default_config="$repo_root/configs/qwen35-query-rewrite-tp2-dp2-mmar-on-candidate.yaml"
     ;;
   selective-ffn-nz)
     default_config="$repo_root/configs/qwen35-query-rewrite-selective-ffn-nz-candidate.yaml"
@@ -47,8 +50,8 @@ case "$candidate_mode" in
     ;;
 esac
 case "$device_set" in
-  0-3|4-7) ;;
-  *) echo "DEVICE_SET must be 0-3 or 4-7" >&2; exit 64 ;;
+  4-7) ;;
+  *) echo "DEVICE_SET must be 4-7 for this workstream" >&2; exit 64 ;;
 esac
 candidate_config="${CANDIDATE_CONFIG:-$default_config}"
 
@@ -166,6 +169,6 @@ if [[ -f "$output_root/speculative-metrics-after.prom" ]]; then
     >>"$output_root/SHA256SUMS"
 fi
 
-echo "completed TP4 candidate versus fixed original baseline: $output_root"
+echo "completed candidate versus fixed original baseline: $output_root"
 echo "candidate matrix status: $candidate_run_status (0=complete)"
 echo "decision analyzer status: $decision_status (0=2x target, 2=iterate, 3=hold correctness, 4=reject runtime)"
