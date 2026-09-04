@@ -714,18 +714,26 @@ and do not quantize.
 
 Exact vLLM-Ascend source lives at
 /cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz on branch
-work/exp-20260904-qwen35-selective-ffn-nz, commit 9c59f131, based on v0.23.0
+work/exp-20260904-qwen35-selective-ffn-nz, commit 71c25ec9, based on v0.23.0
 commit 5cb98caa. It adds default-off
-VLLM_ASCEND_ENABLE_DENSE_FFN_NZ=1 behavior for suffixes
-.mlp.gate_up_proj and .mlp.down_proj only. Attention and recurrent weights
-stay ND and global weight_nz_mode remains 1. Focused container tests passed:
-the selective utils test and all eight linear tests. Push to the upstream
-GitHub remote is blocked by missing host credentials; the local commit is the
-authoritative checkpoint.
+VLLM_ASCEND_ENABLE_DENSE_FFN_NZ=1 behavior for .mlp.gate_up_proj only.
+.mlp.down_proj stays ND because it crosses MatmulAllReduce; attention and
+recurrent weights also stay ND and global weight_nz_mode remains 1. The
+selective policy test passed after this correction; all eight earlier linear
+tests remain valid. Push to the upstream GitHub remote is blocked by missing
+host credentials; the local commit is the authoritative checkpoint.
 
 The model-tuning launcher mode is selective-ffn-nz. It is hard-restricted to
-physical NPU4-7, verifies source commit 9c59f131, and read-only overlays only
+physical NPU4-7, verifies source commit 71c25ec9, and read-only overlays only
 envs.py, utils.py and ops/linear.py into the exact image source tree.
 Rollback is unset the feature flag/remove those three overlays. The next
-action is one immutable quick32 E2E run at concurrency 1/5/8/16 against the
-fixed original. Then profile only if the E2E candidate is retained.
+first E2E attempt, operation exec-0000000000000758, rejected both-NZ during
+graph-capture warmup: aclnnMatmulAllReduce requires down_proj x2 in ND and
+returned 161002/EZ0017 for FRACTAL_NZ. No requests were measured. Evidence is
+hashed under selective-ffn-nz-fixedorig-npu4-7-20260904T2218Z. The task-owned
+container was stopped; physical NPU4-7 were released and external NPU0-3 PIDs
+1031654-1031657 were unchanged.
+
+Retry only gate/up NZ with down_proj ND and MMAR retained. Run immutable
+quick32 at concurrency 1/5/8/16 against the fixed original. Profile only if
+the corrected E2E candidate is retained.

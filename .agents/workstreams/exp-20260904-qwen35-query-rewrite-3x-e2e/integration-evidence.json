@@ -107,7 +107,11 @@
     },
     {
       "gate": "selective-dense-ffn-nz-integration",
-      "result": "PASS static/unit: vLLM-Ascend v0.23.0 worktree commit 9c59f131 adds a default-off flag limited to dense MLP gate/up and down weights; focused container tests passed 1 policy test and 8 linear tests"
+      "result": "PASS static/unit: vLLM-Ascend v0.23.0 worktree commit 71c25ec9 adds a default-off flag limited to dense MLP gate/up weights; down projection is explicitly ND for MMAR; focused policy test passed and the prior 8 linear tests remain valid"
+    },
+    {
+      "gate": "selective-dense-ffn-nz-first-e2e",
+      "result": "REJECT startup: operation exec-0000000000000758 reached graph-capture warmup but aclnnMatmulAllReduce rejected down_proj x2 in FRACTAL_NZ (161002/EZ0017). No requests were measured; evidence is hashed under selective-ffn-nz-fixedorig-npu4-7-20260904T2218Z; NPU4-7 were released and NPU0-3 remained untouched."
     }
   ]
 }

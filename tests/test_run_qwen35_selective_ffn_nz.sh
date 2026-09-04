@@ -7,7 +7,7 @@ orchestrator="$repo_root/scripts/run_qwen35_tp4_candidate_vs_original.sh"
 config="$repo_root/configs/qwen35-query-rewrite-selective-ffn-nz-candidate.yaml"
 
 grep -q 'selective-ffn-nz is restricted to physical NPU4-7' "$service"
-grep -q 'selective_ffn_nz_commit="9c59f131"' "$service"
+grep -q 'selective_ffn_nz_commit="71c25ec9"' "$service"
 grep -q 'VLLM_ASCEND_ENABLE_DENSE_FFN_NZ="$selective_ffn_nz_env"' "$service"
 grep -q '/vllm-workspace/vllm-ascend/vllm_ascend' "$service"
 grep -q 'selective-ffn-nz)' "$orchestrator"

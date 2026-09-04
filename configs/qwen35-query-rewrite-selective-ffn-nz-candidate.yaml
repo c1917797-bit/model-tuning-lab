@@ -54,12 +54,12 @@ benchmark:
   target_ttft_ratio: 0.5
   target_tpot_ratio: 0.5
 candidate:
-  id: selective-dense-ffn-nz
+  id: selective-dense-gate-up-nz
   dtype: bfloat16
   quantized: false
-  primary_variable_vs_fixed_original: "only dense MLP gate/up and down weights: ND -> NZ"
+  primary_variable_vs_fixed_original: "only dense MLP gate/up weights: ND -> NZ; down remains ND for MMAR"
   source_worktree: /cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz
-  source_commit: 9c59f131
+  source_commit: 71c25ec9
   weight_nz_mode: 1
   enable_dense_ffn_nz: true
   enable_matmul_allreduce: true
