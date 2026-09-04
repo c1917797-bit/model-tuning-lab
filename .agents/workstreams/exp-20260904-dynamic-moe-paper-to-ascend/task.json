@@ -13,8 +13,7 @@
     {"kind":"file","mode":"exclusive","value":"src/paper_to_ascend/**"},
     {"kind":"file","mode":"exclusive","value":"scripts/paper_to_ascend/**"},
     {"kind":"file","mode":"exclusive","value":"docs/paper-to-ascend/**"},
-    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-dynamic-moe-paper-to-ascend.yaml"},
-    {"kind":"resource","mode":"exclusive","value":"chicaihong01 NPU0-3 for Dynamic MoE paper reproduction; never use NPU4-7 while prefix-cache workstream owns them"}
+    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-dynamic-moe-paper-to-ascend.yaml"}
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
@@ -25,6 +24,7 @@
   "integrationState": "not-ready",
   "notes": [
     "Remote main revalidation was attempted on 2026-09-04 but GitHub ls-remote/fetch timed out; branch was created from a clean main whose cached origin/main matched fbc79c4. Revalidate remote before integration.",
-    "NPU0-3 were live-checked free before resource claim; NPU4-7 had four VLLMWorker_TP processes and are excluded."
+    "NPU0-3 were live-checked free before resource claim; NPU4-7 had four VLLMWorker_TP processes and are excluded.",
+    "The NPU0-3 lease was released on 2026-09-04 when the maintainer redirected the active Paper-to-Ascend work toward the installed dense Qwen3.5-27B checkpoint. Resume Dynamic MoE only after acquiring a fresh resource lease."
   ]
 }

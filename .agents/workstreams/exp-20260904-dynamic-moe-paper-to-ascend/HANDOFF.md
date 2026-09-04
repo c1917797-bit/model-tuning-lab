@@ -5,7 +5,7 @@
 - Execution: `in-progress` (current direct-lowering measurement decided; next optimization loop remains open)
 - Integration: `not-ready`
 - Base: `fbc79c41c37c8900f0623ce8941304e9bfde5cf1`
-- Hardware lease: `chicaihong01 NPU0-3`
+- Hardware lease: released; acquire and live-prove a fresh lease before resuming
 - Do not use NPU4-7; they are owned by the active prefix-cache workstream.
 
 ## Paper exemplar
@@ -96,7 +96,8 @@ npu-smi info
 python -m unittest discover -s tests -p 'test_dynamic_moe_routing.py'
 ```
 
-Before any new NPU run, prove NPU0-3 remain free in the same session.
+Before any new NPU run, acquire a fresh resource lease and prove the selected
+devices remain free in the same session.
 
 ## Current A/B request
 
