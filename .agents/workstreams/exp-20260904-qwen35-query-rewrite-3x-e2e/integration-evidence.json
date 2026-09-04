@@ -64,6 +64,18 @@
     {
       "gate": "resource-ownership-clarification",
       "result": "PASS: physical NPU4-7 are assigned to this workstream; physical NPU0-3 remain external and untouched"
+    },
+    {
+      "gate": "fixed-runtime-full-model-msprof",
+      "result": "PASS: operation exec-0000000000000680 profiled TP0/physical NPU4 for one real 1810-input/104-output query; 162448 rows show whole-request MatMul 64.105% and collective 16.434%, while the post-prefill window shows MatMulV2 70.702% and AllReduce 10.530%; artifacts are privacy-safe and diagnostic-only"
+    },
+    {
+      "gate": "profile-resource-release",
+      "result": "PASS: task workers exited and NPU4-7 returned idle; the external NPU0-3 worker PIDs 1031654-1031657 remained unchanged"
+    },
+    {
+      "gate": "ngram-gpu-candidate-readiness",
+      "result": "PASS static: exact v0.23.0 image supports async ngram_gpu through npu_ngram_spec_decode and ships an Ascend 910B binary; launcher preserves BF16, MMAR-off, NZ1 and FlashComm1-off, and emits speculative counters after E2E"
     }
   ]
 }

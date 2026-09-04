@@ -158,6 +158,23 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-ngram-gpu-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" ngram-gpu \
+  >"$tmp/ngram-gpu-fresh.out" 2>"$tmp/ngram-gpu-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":false' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0' "$docker_log"
+grep -q -- '"method":"ngram_gpu"' "$docker_log"
+grep -q -- '"num_speculative_tokens":5' "$docker_log"
+grep -q -- '"prompt_lookup_min":2' "$docker_log"
+grep -q -- '"prompt_lookup_max":5' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "NPU prompt-lookup candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-flashcomm1-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" flashcomm1 \
   >"$tmp/flashcomm1-fresh.out" 2>"$tmp/flashcomm1-fresh.err"

@@ -29,4 +29,14 @@ set -e
 [[ "$status" == 64 ]]
 grep -q "unsupported CANDIDATE_MODE" "$scratch/unknown.err"
 
+set +e
+RUN_ID=test OUTPUT_ROOT="$scratch/ngram-future" CANDIDATE_MODE=ngram-gpu \
+  CANDIDATE_CONFIG="$scratch/missing-ngram.yaml" \
+  "$repo_root/scripts/run_qwen35_tp4_candidate_vs_original.sh" \
+  >"$scratch/ngram.out" 2>"$scratch/ngram.err"
+status=$?
+set -e
+[[ "$status" == 66 ]]
+grep -q "candidate config does not exist" "$scratch/ngram.err"
+
 echo "PASS: TP4 fixed-original candidate guards"

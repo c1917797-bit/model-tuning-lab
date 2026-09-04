@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
     exit 64
     ;;
 esac
@@ -44,7 +44,7 @@ if [[ "$mode" == bf16-nz || "$mode" == bf16-nz-mmar-off ||
   weight_nz_env=2
 fi
 if [[ "$mode" == profile-mmar-off || "$mode" == profile-msprof-mmar-off ||
-      "$mode" == control-mmar-off ||
+      "$mode" == control-mmar-off || "$mode" == ngram-gpu ||
       "$mode" == bf16-nz-mmar-off ]]; then
   matmul_allreduce_env=0
 fi
@@ -105,7 +105,8 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true}'
     elif [[ "$mode" == profile-mmar-off ||
             "$mode" == profile-msprof-mmar-off ||
-            "$mode" == control-mmar-off ]]; then
+            "$mode" == control-mmar-off ||
+            "$mode" == ngram-gpu ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":1}'
     elif [[ "$mode" == bf16-nz-mmar-off ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":2}'
@@ -134,6 +135,12 @@ fi
 
 if [[ "$mode" == mtp ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1}')
+fi
+if [[ "$mode" == ngram-gpu ]]; then
+  # Prompt Lookup Decoding is training-free and lossless under target-model
+  # verification. Keep proposal generation on NPU so async scheduling remains
+  # enabled and the CPU proposer does not become a host-side bottleneck.
+  serve_args+=(--speculative-config '{"method":"ngram_gpu","num_speculative_tokens":5,"prompt_lookup_min":2,"prompt_lookup_max":5}')
 fi
 
 if [[ "$mode" == profile || "$mode" == profile-mmar-off ]]; then

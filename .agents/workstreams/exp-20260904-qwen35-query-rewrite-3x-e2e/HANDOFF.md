@@ -587,3 +587,54 @@ operation exec-000000000000066f completed dynamic start, stop, quit and
 export. The analyzer parsed 41,119 calls from the exported op-summary. The
 smoke container self-cleaned and NPU4 returned idle. Profiler timings remain
 diagnostic only and must never replace the frozen non-profile E2E metrics.
+
+## Fixed-runtime profile result
+
+Operation exec-0000000000000680 completed the first valid full-model CANN
+dynamic profile. Run fixed-runtime-msprof-tp0-npu4-7-20260904T2043Z attached
+to TP0, logical device 0 / physical NPU4, while TP4 executed one real record-0
+request with 1810 prompt tokens and 104 completion tokens. The exported
+op_summary has SHA256
+3350ab8564e00f3cb1f549823445d411efa0dddc52f7c6739c961f68a0cb4d5f and
+162,448 rows.
+
+Whole-request summed rank-0 kernel duration attributes 64.1054% to MatMul,
+16.4343% to collectives, 2.0516% to recurrent GDN, 1.0429% to the chunk-GDN
+prefill family, and 1.1085% to attention. After the detected prefill boundary,
+MatMulV2 is 70.702%, AllReduce 10.530%, and recurrent GDN 2.406%. The dominant
+decode shapes are the TP-sharded FFN projections: 1x5120 by 8704x5120 and
+1x4352 by 5120x4352.
+
+One 173830.04us AllReduce occurred before the detected prefill window and
+should not be reported as steady collective latency. Across 13,803 AllReduce
+rows, p50/p95 are 22.86/23.70us. All profile sums remain diagnostic and are
+not wall time. The profiler-inflated request TTFT/TPOT are never compared with
+the immutable E2E baseline.
+
+The task workers exited after export. NPU4-7 returned idle and the pre-existing
+external NPU0-3 PIDs 1031654-1031657 remained unchanged. request.json contains
+hashes, counts and timings only, with no raw response text.
+
+## Next paper treatment: NPU Prompt Lookup Decoding
+
+The profile demotes fused GDN from the first optimization slot. Its complete
+prefill family is only 1.0429% of whole-request summed kernel time, whereas
+steady decode is dominated by small-batch GEMM. MTP is already rejected, so
+the next bounded training-free algorithm is the reference-verification idea
+from LLMA (arXiv:2304.04487), specialized as Apoorv Saxena's code-level Prompt
+Lookup Decoding method and implemented by the exact image's existing ngram_gpu
+path. Prompt Lookup Decoding itself is a code release, not arXiv:2311.04934;
+that identifier belongs to the unrelated Prompt Cache paper.
+
+Launcher mode ngram-gpu uses five speculative tokens with n-gram lengths 2-5.
+The exact v0.23.0 source dispatches it to
+torch.ops._C_ascend.npu_ngram_spec_decode and ships a 910B kernel binary.
+This also preserves async scheduling; the CPU ngram proposer would force an
+incompatible scheduler change. The treatment keeps BF16, MMAR off, NZ1,
+FlashComm1 off, TP4, graph policy, prefix caching, seed and request protocol.
+
+Run scripts/run_qwen35_tp4_candidate_vs_original.sh with
+CANDIDATE_MODE=ngram-gpu, a unique RUN_ID and a new absolute OUTPUT_ROOT.
+Require zero errors, natural stops, privacy-safe labeled-reference quality,
+speculative acceptance counters and the fixed-original 1/5/8/16 comparison.
+Reject or retune if accepted spans do not offset verification overhead.

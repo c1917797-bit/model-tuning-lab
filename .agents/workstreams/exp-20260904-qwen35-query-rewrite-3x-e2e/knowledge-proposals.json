@@ -67,6 +67,18 @@
       "status": "accepted-local",
       "lesson": "For a long-lived Ascend inference service whose framework profiler lifecycle is broken, set PROFILING_MODE=dynamic before startup and use msprof attach to bracket a real request. In TP workloads collect one worker/device at a time, keep the profile diagnostic-only, and export op_summary for hotspot ranking.",
       "evidence": "NPU4 smoke operation exec-000000000000066f completed start/stop/quit and export; one op_summary contained 41119 operator calls"
+    },
+    {
+      "id": "separate-profile-startup-outliers-from-steady-decode",
+      "status": "accepted-local",
+      "lesson": "Rank hotspot totals by request phase before choosing an optimization. Dynamic attach captured one 173830us AllReduce before the detected prefill window, while steady AllReduce p50/p95 were only 22.86/23.70us. The outlier is evidence of startup or synchronization cost, not a representative collective kernel latency.",
+      "evidence": "Full-model run fixed-runtime-msprof-tp0-npu4-7-20260904T2043Z; op_summary SHA256 3350ab8564e00f3cb1f549823445d411efa0dddc52f7c6739c961f68a0cb4d5f"
+    },
+    {
+      "id": "profile-ranked-training-free-speculation",
+      "status": "accepted-local",
+      "lesson": "When dense decode is dominated by low-batch GEMMs, test training-free verified multi-token execution before rewriting a low-share state-space operator. On vLLM-Ascend use the NPU ngram proposer when async scheduling is frozen; the CPU ngram proposer is incompatible with async scheduling.",
+      "evidence": "Post-prefill rank-0 window: MatMulV2 70.702%, AllReduce 10.530%, recurrent GDN 2.406%; exact image dispatches ngram_gpu to npu_ngram_spec_decode"
     }
   ]
 }

@@ -17,6 +17,9 @@ active_container=""
 active_log=""
 
 case "$candidate_mode" in
+  ngram-gpu)
+    default_config="$repo_root/configs/qwen35-query-rewrite-ngram-gpu-candidate.yaml"
+    ;;
   control-mmar-off)
     default_config="$repo_root/configs/qwen35-query-rewrite-control-mmar-off-candidate.yaml"
     ;;
@@ -108,6 +111,12 @@ python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
   --run-id "$run_id" \
   --output-root "$output_root/candidate"
 
+if [[ "$candidate_mode" == ngram-gpu ]]; then
+  curl --fail --silent --max-time 10 "$base_url/metrics" |
+    awk '/spec_decode|speculative/ {print}' \
+      >"$output_root/speculative-metrics-after.prom"
+fi
+
 docker logs "$candidate_container" >"$active_log" 2>&1 || true
 docker stop --time 30 "$candidate_container" >/dev/null
 active_container=""
@@ -137,6 +146,10 @@ sha256sum \
   "$output_root/candidate/c8-r1.json" \
   "$output_root/candidate/c16-r1.json" \
   "$output_root/decision.json" >"$output_root/SHA256SUMS"
+if [[ -f "$output_root/speculative-metrics-after.prom" ]]; then
+  sha256sum "$output_root/speculative-metrics-after.prom" \
+    >>"$output_root/SHA256SUMS"
+fi
 
 echo "completed TP4 candidate versus fixed original baseline: $output_root"
 echo "decision analyzer status: $decision_status (0=2x target, 2=iterate, 3=reject correctness)"

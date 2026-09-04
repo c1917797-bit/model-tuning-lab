@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: fixed_runtime_profile_ready_on_npu4_7
-decision: hold_matmulallreduce_outside_stack_and_profile_fixed_runtime
+status: ngram_gpu_candidate_ready_on_npu4_7
+decision: run_npu_prompt_lookup_after_fixed_runtime_profile
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -353,8 +353,8 @@ rejected_algorithm_candidate:
   correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
   acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
-decision_reason: "MTP and BF16 NZ variants remain rejected. The no-op NPU4-7 control proved that cross-run exact hashes and much of the apparent fixed-original speedup are not attributable to MMAR. MMAR stays outside the accepted stack: same-device TPOT gain is only 0-5.3%, c1-c8 TTFT gain is 2.4-8.6%, the large c16 TTFT signal requires repeat/profile, and semantic correctness remains fail-closed. Quantization remains prohibited."
-next_loop: "Capture a fixed-runtime, MMAR-off CANN msprof profile on assigned physical NPU4-7, rank real prefill/decode/operator bottlenecks, and select the next paper/operator treatment. Future E2E candidates keep the immutable original as performance denominator but add privacy-safe labeled-reference quality aggregates; exact response hashes remain a reproducibility diagnostic."
+decision_reason: "The real fixed-runtime CANN profile closes the earlier evidence gap. Across the complete request, MatMul is 64.105% and collectives 16.434% of summed rank-0 kernel duration. In the post-prefill window, MatMulV2 rises to 70.702% and AllReduce is 10.530%; GDN decode itself is 2.406%. MTP, MMAR, FlashComm1 and BF16 NZ remain outside the stack. The next bounded treatment is lossless training-free Prompt Lookup Decoding through the image's existing 910B ngram_gpu operator, keeping the fixed-original MMAR-off/BF16 runtime."
+next_loop: "Launch ngram-gpu on assigned physical NPU4-7, require startup and NPU operator activation, run the immutable first-32 concurrency 1/5/8/16 matrix, record speculative acceptance counters plus privacy-safe labeled-reference quality, and compare with the hash-locked original. Reject or retune if accepted spans do not offset target verification cost."
 fixed_runtime_profile:
   status: msprof_dynamic_ready_after_torch_api_failure
   service_mode: profile-msprof-mmar-off
@@ -376,6 +376,45 @@ fixed_runtime_profile:
     output_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-smokes/msprof-dynamic-smoke2-npu4-20260904T2028Z
     result: "dynamic socket attach plus start/stop/quit and export succeeded; analyzer parsed one op_summary CSV with 41119 operator calls"
     collection_rule: "TP4 must be profiled one worker/device at a time; first full-model capture targets TP0/logical device 0 mapped from physical NPU4"
+  full_model_capture:
+    operation_id: exec-0000000000000680
+    run_id: fixed-runtime-msprof-tp0-npu4-7-20260904T2043Z
+    status: completed
+    profile_rank: 0
+    physical_device: 4
+    request: "record 0; 1810 prompt tokens; 104 completion tokens; finish_reason=stop"
+    profile_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/fixed-runtime-msprof-tp0-npu4-7-20260904T2043Z
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/fixed-runtime-msprof-tp0-npu4-7-20260904T2043Z
+    op_summary_sha256: 3350ab8564e00f3cb1f549823445d411efa0dddc52f7c6739c961f68a0cb4d5f
+    rows: 162448
+    summed_kernel_duration_us: 3454433.18
+    whole_request_categories:
+      matmul: {duration_us: 2214478.8, share_pct: 64.1054, calls: 32742}
+      collective: {duration_us: 567710.42, share_pct: 16.4343, calls: 13910}
+      gdn_decode: {duration_us: 70870.22, share_pct: 2.0516, calls: 5040}
+      gdn_prefill: {duration_us: 36025.4, share_pct: 1.0429, calls: 480}
+      attention: {duration_us: 38290.94, share_pct: 1.1085, calls: 1712}
+    post_prefill_window:
+      matmul_v2: {duration_us: 2062931.4, share_pct: 70.702, calls: 31721}
+      allreduce: {duration_us: 307255.9, share_pct: 10.530, calls: 13416}
+      recurrent_gdn: {duration_us: 70194.18, share_pct: 2.406, calls: 4992}
+    allreduce_distribution: {calls: 13803, p50_us: 22.86, p95_us: 23.70, startup_outlier_us: 173830.04}
+    resource_release: "exact task workers exited; physical NPU4-7 returned idle; external NPU0-3 PIDs 1031654-1031657 remained unchanged"
+    privacy: "request.json contains hashes, token counts and timings only; no response text key"
+    evidence_boundary: "kernel-duration sums and profiler request latency are diagnostic only, not wall time or E2E acceptance evidence"
+algorithm_candidate_after_profile:
+  id: npu_prompt_lookup_decoding
+  status: ready_for_bounded_e2e
+  paper: "Inference with Reference: Lossless Acceleration of Large Language Models (LLMA), arXiv:2304.04487"
+  specialization: "Apoorv Saxena Prompt Lookup Decoding n-gram reference retrieval; code release, not an arXiv paper"
+  source_manifest: configs/qwen35-query-rewrite-ngram-gpu-candidate.yaml
+  launcher_mode: ngram-gpu
+  speculative_config: '{"method":"ngram_gpu","num_speculative_tokens":5,"prompt_lookup_min":2,"prompt_lookup_max":5}'
+  target_runtime: "BF16, MMAR off, NZ1, FlashComm1 off, async scheduling on"
+  exact_image_evidence: "vLLM-Ascend 0.23.0 dispatches ngram_gpu to torch.ops._C_ascend.npu_ngram_spec_decode and ships an Ascend 910B kernel binary"
+  rationale: "accepted spans can amortize the dominant small-batch FFN GEMMs and frequent TP collectives without retraining or a draft checkpoint"
+  required_gates: [startup, operator_activation, zero_errors, natural_stop, speculative_acceptance, privacy_safe_reference_quality, fixed_original_e2e]
+  evidence_boundary: "source support and profiling establish eligibility, not a performance result"
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
