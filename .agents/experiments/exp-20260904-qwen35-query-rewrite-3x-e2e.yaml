@@ -97,12 +97,15 @@ candidate:
     torch_npu_symbol_present: true
     historical_protocol_comparable: false
 profiling_attempt:
-  state: waiting_for_npu0_3
-  container: qwen35_query_rewrite_tp4_dev_profile
-  result: "startup failed before serving: Triton Ascend get_arch returned NULL during Qwen3.5 architecture inspection after an external workload acquired NPU0-3"
-  external_owner_npu0_3: "qwen36_27b_dk64_treatment_npu0_3 (7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac)"
-  cleanup: "failed profile container retained; workstream readiness observer terminated; no workstream process remains on NPU0-3"
-  recovery: "service launcher now hard-fails if NPU0-3 have any process or if the profile directory already exists; require explicit exclusive ownership and new immutable names"
+  state: offline_rank0_evidence_recovered
+  operation: exec-000000000000044d
+  run_id: tp4-baseline-v5-20260904T172357Z
+  request: "record 31, 1845 prompt tokens, one completion token, finish_reason=stop, HTTP 200"
+  scheduler: "async_scheduling=False was proven in the real service log"
+  result: "/stop_profile still returned HTTP 500 and killed the worker, disproving async scheduling as the root cause"
+  raw_root: "/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v5-20260904T172357Z"
+  capture: "/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/tp4-baseline-v5-20260904T172357Z"
+  recovery: "offline msprof export completed for rank0 without NPU access; do not retry the same HTTP profiler path unchanged"
 profile_analysis:
   request_driver: scripts/run_qwen35_profile_request.py
   request_schema: qwen35-query-rewrite-profile-request/v1
@@ -129,13 +132,34 @@ profile_analysis:
     commit: 439be7d7b789b468c1b41b527cd2735f39639f72
     behavior: "profile mode uses synchronous scheduling; baseline and MTP retain --async-scheduling"
     validation: "bash syntax, mock resource guards, and explicit profile/baseline argv isolation passed"
-    runtime_validation: "pending; guarded v3 could not start because NPU0-3 were externally acquired"
+    runtime_validation: "completed and rejected as a fix: v5 proved async_scheduling=False, but /stop_profile still returned HTTP 500"
   guarded_retry:
     operation: exec-0000000000000422
     result: "exit 42 before docker run because NPU0-3 were acquired by p0_ab"
     external_pids: [172441, 172442, 172443, 172444]
-  latest_resource_check_utc: "2026-09-04 17:04:48"
-  latest_resource_state: "NPU0-3 external p0_ab (PIDs 172441-172444); NPU4-7 external qwen38_gdn_fused_candidate (PIDs 1312892-1312895); untouched"
+  recovered_v5_rank0:
+    csv: "/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v5-20260904T172357Z/rank0_161_20260904173316340_ascend_pt/PROF_000001_20260904173316481_00000161JKNANPPL/mindstudio_profiler_output/op_summary_20260904173719.csv"
+    csv_sha256: 7a6578f697f00d9f0267b990931e6ec1770a064f1deb18c2e7ad7fa26163073f
+    export_log_sha256: d0072c5153aea060f67356722185ff1c52b8c9c9fdc8031fd8f035b0c9adf71c
+    rows: 6453
+    summed_task_duration_us: 4545998.78
+    wall_span_us: 4789837
+    hcom_allreduce: {duration_us: 4299824.02, share_pct: 94.585, calls: 237, avg_us: 18142.717}
+    matmul_v3: {duration_us: 96978.8, share_pct: 2.133, calls: 256}
+    matmul_v2: {duration_us: 29743.86, share_pct: 0.654, calls: 304}
+    evidence_boundary: "diagnostic rank0 attribution only; profiler overhead distorts absolute time and this cannot accept TTFT/TPOT"
+  latest_resource_check_utc: "2026-09-04 17:37:30"
+  latest_resource_state: "NPU0-3 external qwen36_hypic_pdc_baseline_npu0_3 (8371abb7731a6c4ba0d01a566c4c10ab27552ca9a26f476ec22229fe226c0d1e); NPU4-7 external qwen38_gdn_fused_candidate (e6e72d7a006971d4dcfe48c1b2046f45017acc450958d0c5ffa9b1d970af66b9); untouched"
+parameter_candidate:
+  id: bf16_matmul_allreduce_fusion
+  dtype: BF16
+  primary_variable: "additional_config.enable_matmul_allreduce: false -> true"
+  launcher_mode: matmul-allreduce
+  rationale: "recovered v5 rank0 profile attributes 94.585% of summed task duration to 237 hcom_allReduce_ calls; the old environment variable was ignored because the active additional_config explicitly set enable_matmul_allreduce=false"
+  isolation: "all other TP4 development launch arguments remain unchanged"
+  required_gates: ["source activation proof", "real query_rewrite correctness", "repeated TP4 A/B", "paired profile", "final DP2/TP4 A/B"]
+  evidence_boundary: "the profiler result prioritizes this candidate but does not predict or prove an E2E speedup"
+  execution_state: "ready, but blocked until NPU0-3 are explicitly idle"
 operator_candidate:
   id: fused_gdn_prefill
   upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca

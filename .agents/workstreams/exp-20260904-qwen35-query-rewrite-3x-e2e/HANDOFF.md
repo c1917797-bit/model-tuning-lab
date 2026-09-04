@@ -271,6 +271,27 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 
 ## Resume
 
+The real TP4 v5 profile attempt used record 31 (1845 prompt tokens, one
+completion token) and proved `async_scheduling=False`, but `/stop_profile`
+still returned HTTP 500 and killed the worker. This rejects the async scheduler
+as the root cause; do not retry the same HTTP profiler path unchanged. The raw
+rank0 data was nevertheless exported offline with `msprof`. Its immutable
+`op_summary` CSV SHA256 is
+`7a6578f697f00d9f0267b990931e6ec1770a064f1deb18c2e7ad7fa26163073f`.
+Across 6,453 rows, `hcom_allReduce_` accounts for 4,299,824.02 us, 94.585%
+of summed task duration, over 237 calls. This is diagnostic-only profiler
+attribution, not wall time or acceptance evidence.
+
+The next isolated BF16 parameter treatment is
+`additional_config.enable_matmul_allreduce: false -> true`, exposed by
+`scripts/run_qwen35_tp4_dev_service.sh matmul-allreduce`. The previously set
+`VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1` did not activate this path because
+the actual runtime additional config remained false. Require source activation
+proof, real query_rewrite correctness, repeated TP4 A/B, a paired profile and
+final DP2/TP4 A/B. Do not run it while the current external
+`qwen36_hypic_pdc_baseline_npu0_3` or `qwen38_gdn_fused_candidate`
+containers own NPU0-7.
+
 The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
 artifacts. Wait for explicit exclusive ownership of NPU0-3, then launch the
 accepted non-MTP TP4 configuration under a new immutable profile container name

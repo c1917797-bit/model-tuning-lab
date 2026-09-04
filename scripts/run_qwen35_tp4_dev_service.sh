@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile) ;;
+  baseline|mtp|profile|matmul-allreduce) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile}" >&2
+    echo "usage: $0 {baseline|mtp|profile|matmul-allreduce}" >&2
     exit 64
     ;;
 esac
@@ -38,6 +38,11 @@ if [[ -n "$occupied" ]]; then
   exit 42
 fi
 
+matmul_allreduce=false
+if [[ "$mode" == matmul-allreduce ]]; then
+  matmul_allreduce=true
+fi
+
 serve_args=(
   vllm serve /cache/austinov/Qwen3.8-27B
   --host 127.0.0.1
@@ -56,7 +61,7 @@ serve_args=(
   --mamba-cache-dtype bfloat16
   --mamba-ssm-cache-dtype bfloat16
   --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
-  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":false}'
+  --additional-config "{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":${matmul_allreduce}}"
   --default-chat-template-kwargs '{"enable_thinking":false}'
 )
 
