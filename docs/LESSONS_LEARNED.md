@@ -219,3 +219,39 @@ capture:
 
 Negative results are part of the tuning knowledge base. Preserve them in pushed
 history while recovering failed active code before integration.
+
+## 6. Paper-to-Ascend lessons from Dynamic MoE
+
+### 6.1 A theoretically useful compute reduction can still lose end to end
+
+On physical Ascend 910B4, Dynamic MoE reduced token/expert pairs by about 12.8%
+at the 4096-token case and the actual expert GMM stage became about 8.85% faster.
+However, the direct `sort + cumsum + boolean compaction` routing path was about
+6.36x slower than fixed Top-2 routing in the stage breakdown. Whole-block median
+latency regressed by roughly 82-96% across 128, 512, 2048, and 4096 tokens.
+
+**Lesson:** measure the whole migration unit. Saved FLOPs or faster GMM is not a
+performance win when selection/packing overhead dominates. Profile before
+lowering further; for dynamic routing, a bounded/fused router is the next
+credible path, not more GMM tuning.
+
+### 6.2 Reject the implementation at the scope actually measured
+
+The direct Dynamic MoE lowering was rejected. The paper itself was not: a
+matched full-model MoE checkpoint was unavailable, so the full-model result was
+recorded as `inconclusive`.
+
+**Lesson:** keep `implementation`, `operator/block`, and `full-model` decision
+scopes separate. Never promote a valid negative result beyond the evidence it
+actually covers.
+
+### 6.3 Architecture applicability is a gate before paper selection
+
+The current installed target is dense. Dynamic MoE was valuable as a pipeline
+exemplar, but its production mechanism is not the active model architecture.
+
+**Lesson:** before spending NPU time on a paper, prove that the installed model
+contains the required mechanism and that the method targets an observed
+bottleneck. For dense inference, prefer methods such as exact speculative/MTP,
+attention/KV/decode improvements, or other inference-time techniques that do
+not require retraining unless retraining is explicitly in scope.

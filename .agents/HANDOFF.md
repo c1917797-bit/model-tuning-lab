@@ -5,9 +5,11 @@
 - Last updated: 2026-09-04.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide` with pushed evidence and recovery checkpoints.
-- Current active tuning workstream: `work/exp-20260903-qwen38-prefix-cache-general-eval` at recorded tip `a497c49`; it is branch-local `started / not-ready`, not integrated truth.
-- Current handoff-readiness workstream is being integrated from fetched remote `origin/work/handoff-readiness-20260904@8619fd49aa10d8996f39889cce90db0d2bdc681c`.
-- Live snapshot on 2026-09-04: `qwen38_eval_baseline` listened on `127.0.0.1:8200`; physical NPU4-7 hosted its four TP workers; `qwen38_eval_client_run1` was running; NPU0-3 had no NPU processes; port 8100 was not listening; ordinary `MemAvailable` was about 64 GiB while `Hugetlb` remained about 1.9 TiB. Re-check all runtime facts before acting.
+- Active branch-local tuning workstreams (not integrated truth):
+  - `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend@07d723a`: dense-model Paper-to-Ascend, `planned / not-ready`, claims physical NPU0-3 and loopback port 8220.
+  - `work/exp-20260904-qwen38-prefix-cache-general-eval-final@5d28f45`: fixed 2k40 Prefix Cache A/B, `started / not-ready`, claims physical NPU4-7 and loopback port 8210; Prefix Cache OFF baseline is complete and candidate is next.
+- Superseded audit work: Dynamic MoE direct lowering is retained remotely at `work/exp-20260904-dynamic-moe-paper-to-ascend@55cc0a2`; its local worktree was reclaimed after the NPU lease was released. Do not merge that implementation into `main`.
+- Runtime/process/device facts can change independently of Git; re-check all NPU, container, port, memory, and competing-process state before acting.
 - Durable takeover guidance: `docs/LESSONS_LEARNED.md` and `docs/RUNBOOK.md`.
 - Handoff/docs integration validation: Maintainer Skill Tree PASS (17 skills), full merge diff check PASS, workstream JSON parse checks PASS. `python -m pytest` was attempted but could not run because the host Python environment does not have the `pytest` module installed; no test PASS is claimed.
 
@@ -23,7 +25,10 @@ orient -> hypothesize -> baseline -> change -> verify -> measure -> decide
 
 ## 2. Current Focus
 
-Finish the isolated Qwen3.8-27B prefix-cache experiment without contaminating its baseline. The workstream intentionally stopped using the historical NPU0-3/8100 service after an unrelated ablation runner changed it. Baseline and candidate are to run serially on the same physical NPU4-7 environment, with MMLU, GSM8K, and HumanEval correctness/workload snapshots frozen by hash.
+Maintain two isolated tracks without cross-contamination:
+
+1. **Dense Paper-to-Ascend:** evaluate exact speculative decoding using the installed dense checkpoint's built-in Qwen3.5 MTP head. The primary variable is speculation OFF -> `qwen3_5_mtp` with three speculative tokens; baseline/candidate must run on physical NPU0-3 / port 8220 with exact-match correctness and repeated throughput/TPOT evidence.
+2. **Prefix Cache A/B:** complete the frozen 2048-input/40-output protocol on physical NPU4-7 / port 8210. Prefix Cache OFF baseline is already recorded; next run is Prefix Cache ON followed by natural-prompt correctness and decision.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -41,22 +46,24 @@ Keep the distinction between three kinds of knowledge explicit:
 - Verified the vLLM-Ascend container provides `torch_npu.profiler`, `msprof`, and `asys`, and that the vLLM-Ascend profiler source uses Level1 + PipeUtilization.
 - In the active prefix-cache workstream, added the general-eval harness, froze model/eval-data identity, established an isolated 8200/NPU4-7 baseline, and proved the target worker processes on those physical devices.
 - Added durable success/failure history and maintainer takeover procedures in `docs/LESSONS_LEARNED.md` and `docs/RUNBOOK.md`.
+- Built a Paper-to-Ascend exemplar around Dynamic MoE and obtained a real negative result: the dynamic policy reduced token/expert pairs and accelerated expert GMM, but direct sort+cumsum+boolean compaction made whole-block latency much worse. The implementation was rejected, the paper/full-model conclusion remained inconclusive, and the workstream was superseded when the active installed target was confirmed to be dense.
+- Selected a dense-compatible next paper direction: exact speculative decoding backed by the checkpoint's built-in MTP head, with immutable model/runtime identities and acceptance/abort thresholds recorded before baseline.
 
 ## 4. Current Action
 
-Resume the active prefix-cache workstream from its branch-local handoff. At the latest live snapshot, the isolated baseline service and an evaluation client were running on NPU4-7. Do not start another workload on NPU4-7 or stop that service until the active experiment state is re-checked.
+Read both active branch-local handoffs before touching hardware. NPU0-3/8220 belongs to the Dense MTP experiment; NPU4-7/8210 belongs to the Prefix Cache experiment. Re-prove both leases and current processes before starting/stopping anything.
 
-The experiment hypothesis is that enabling vLLM prefix caching improves repeated-prefix TTFT and aggregate completion/throughput without quality regression. The experiment record requires three repeated measurements and serial baseline/candidate isolation on the same physical devices.
+For the user's latest Paper-to-Ascend direction, continue the Dense MTP workstream from its `planned` checkpoint: live orientation, fresh baseline on NPU0-3, exact-match correctness gate, then candidate A/B. Do not mutate vLLM/vLLM-Ascend source unless profiling shows the built-in path is insufficient.
 
 ## 5. Next Actions
 
-1. Read `.agents/workstreams/exp-20260903-qwen38-prefix-cache-general-eval/HANDOFF.md` and `.agents/experiments/exp-20260903-qwen38-prefix-cache-general-eval.yaml` in its worktree.
-2. Re-run live orientation: container identity, 8200 readiness, NPU4-7 worker proof, NPU health/HBM, host ordinary memory, and competing processes. Do not rely on the snapshot above.
-3. Complete and record the required repeated baseline measurements; checkpoint and push the baseline stage before changing prefix caching.
-4. Stop the baseline cleanly, run the prefix-cache candidate serially on the same physical NPU4-7 environment, verify correctness, measure the same protocol, and decide accepted/rejected/inconclusive/failed.
-5. If performance remains unexplained after the bounded hypothesis, capture a clean steady-state Decode profile and rank timeline/kernel/HCCL bottlenecks before changing `vllm-ascend` or `ops-transformer` code.
-6. Treat Qwen3-32B and HugeTLB release as separate future work: re-prove free devices and pass the Hugepage safety gate in `docs/RUNBOOK.md` before any memory-pool change.
-7. Update the relevant branch-local handoff at every non-trivial stop; reconcile this global handoff only during serialized integration.
+1. Dense MTP: read `.agents/workstreams/exp-20260904-qwen35-dense-mtp-paper-to-ascend/HANDOFF.md` and its experiment YAML, then re-prove NPU0-3/8220 isolation and run the declared fresh baseline before enabling speculation.
+2. Dense MTP: compare speculation OFF vs `qwen3_5_mtp` with the exact frozen request protocol, three repetitions, greedy exact-match correctness, acceptance rate, throughput, TTFT/TPOT, and HBM evidence; checkpoint every stage.
+3. Prefix Cache: read `.agents/workstreams/exp-20260904-qwen38-prefix-cache-general-eval-final/HANDOFF.md`; re-prove NPU4-7/8210 isolation, then run the three Prefix Cache ON repetitions against the already-recorded OFF baseline and perform natural-prompt correctness verification.
+4. Keep the two tracks resource-isolated and never compare measurements across materially different model/runtime identities.
+5. If either bounded method fails, preserve the negative result and profile the measured hot path before selecting another paper or changing low-level code.
+6. Treat Qwen3-32B and HugeTLB release as separate future work: pass the Hugepage safety gate before any memory-pool change.
+7. Reconcile global handoff/lessons only during serialized integration; branch-local progress remains branch-local truth until merged.
 
 ## 6. Validation Commands
 
@@ -75,6 +82,9 @@ For tuning evidence, also run the exact benchmark/profiling commands declared in
 - Do not overwrite global HANDOFF just to announce unmerged branch progress.
 - Do not ignore workstream claims or resource leases; NPU4-7 currently belongs to the active prefix-cache experiment until live state proves otherwise.
 - Do not claim an improvement without an apples-to-apples repeated protocol and correctness evidence.
+- Do not choose a paper by novelty alone. First prove that its required model mechanism exists in the installed checkpoint/runtime and that it addresses a measured bottleneck.
+- Do not apply MoE-only optimizations to the current dense model just because the algorithm showed theoretical compute savings.
+- Do not convert a rejected implementation into a rejected-paper claim; keep implementation, block-level, and full-model decision scopes explicit.
 - Do not discard rejected, inconclusive, or failed experiments; recover active code in later checkpoints while preserving evidence.
 - Do not merge failed active code into main.
 - Do not release the 1 GiB HugeTLB pool merely because many pages look free; identify OVS/DPDK/VNF consumers and define rollback first.
@@ -98,3 +108,12 @@ git diff --check
 ```
 
 If a `work/*` branch is active, read its `.agents/workstreams/<task-id>/task.json` and branch-local `HANDOFF.md` before touching files or hardware resources.
+
+Active worktrees at this handoff:
+
+```text
+/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-dense-mtp-paper-to-ascend
+/opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-prefix-cache-general-eval-final
+```
+
+Dynamic MoE is audit-only on its retained remote branch; recreate a worktree from that remote branch only if a future MoE target justifies reopening it.

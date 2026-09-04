@@ -224,3 +224,27 @@ What is only a known risk?
 What validation actually ran?
 What is the next safe high-value action?
 ```
+
+## 11. Paper-to-Ascend applicability gate
+
+Before opening a paper implementation workstream, answer these in Git:
+
+1. **Architecture fit:** does the installed checkpoint actually contain the
+   mechanism the paper needs (for example MTP head, MoE experts, quantization
+   metadata, sparse structure, or compatible attention form)?
+2. **Inference-time fit:** can the method be tested without retraining under the
+   user's current scope? If retraining is required, stop unless explicitly
+   authorized.
+3. **Bottleneck fit:** what measured Decode/Prefill/kernel/system bottleneck is
+   the paper expected to improve?
+4. **Production path:** does the installed vLLM/vLLM-Ascend/CANN stack already
+   expose a usable implementation seam? Prefer built-in exact paths before
+   authoring new kernels.
+5. **Decision scope:** predeclare whether the first result is router/operator,
+   block, or full-model evidence; never overstate a narrower result.
+6. **Resource isolation:** reserve a concrete NPU/port/CPU set and prove it live
+   before baseline and candidate runs.
+
+For the current dense target, the active Paper-to-Ascend candidate is exact
+speculative decoding using the checkpoint's built-in Qwen3.5 MTP head. Dynamic
+MoE remains a superseded audit exemplar, not an active optimization path.

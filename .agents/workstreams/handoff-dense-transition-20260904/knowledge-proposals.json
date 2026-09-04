@@ -1,0 +1,23 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "taskId": "handoff-dense-transition-20260904",
+  "proposals": [
+    {
+      "kind": "accepted-durable-lesson",
+      "source": "work/exp-20260904-dynamic-moe-paper-to-ascend@55cc0a2",
+      "target": "docs/LESSONS_LEARNED.md",
+      "summary": "Record the measured Dynamic MoE direct-lowering regression, its expert-GMM partial win, and the strict implementation-vs-paper decision boundary."
+    },
+    {
+      "kind": "accepted-runbook-rule",
+      "source": "dense-transition review",
+      "target": "docs/RUNBOOK.md",
+      "summary": "Add architecture/inference-time/bottleneck applicability checks before selecting a Paper-to-Ascend method."
+    },
+    {
+      "kind": "accepted-handoff-refresh",
+      "target": ".agents/HANDOFF.md",
+      "summary": "Expose Dense MTP on NPU0-3/8220 and Prefix Cache on NPU4-7/8210 as concurrent branch-local work, and mark Dynamic MoE audit-only/superseded for the current dense target."
+    }
+  ]
+}

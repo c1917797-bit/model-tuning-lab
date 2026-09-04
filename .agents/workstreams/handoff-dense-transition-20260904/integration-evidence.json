@@ -1,0 +1,17 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "taskId": "handoff-dense-transition-20260904",
+  "status": "merged",
+  "targetParent": "fbc79c41c37c8900f0623ce8941304e9bfde5cf1",
+  "sourceCommit": "e8e1db1f56a3d378bd98d79918d7cdfcd0d6294f",
+  "validation": [
+    {"command": "./scripts/validate-mst.sh", "result": "PASS (17 skills)"},
+    {"command": "python json parse of workstream state", "result": "PASS"},
+    {"command": "global HANDOFF required-section order check", "result": "PASS"},
+    {"command": "git diff --check", "result": "PASS"}
+  ],
+  "remoteWorkstreamTip": "fc23e322e36b0cc63efb71f66b2a46aa56b034af",
+  "mergeCommit": "self",
+  "mergeMode": "no_ff",
+  "note": "sourceCommit is the validated handoff/docs implementation; remoteWorkstreamTip is the fetched ready metadata commit. Integration used a no-fast-forward merge from that exact remote source after confirming main had zero drift. Final gates are run on the staged merge tree before the merge commit is created."
+}
