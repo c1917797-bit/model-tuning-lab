@@ -197,6 +197,8 @@ communication_candidate:
   interaction_boundary: "canonical MatMulAllReduce remains enabled; row-parallel dispatch prefers MatmulAllreduceRowParallelOp, while FlashComm1 still changes eligible sequence-parallel paths"
   graph_caveat: "official guidance says FlashComm1 capture sizes should be TP-size multiples; first isolate only the switch with the frozen capture list, then test a separately attributable capture-size treatment if activation or graph behavior requires it"
   required_gates: ["startup and activation proof", "zero request errors", "response correctness", "TP4 1/5/8/16 A/B", "paired profile", "DP2/TP4 final A/B"]
+  orchestration: scripts/run_qwen35_tp4_flashcomm1_ab.sh
+  orchestration_semantics: "immutable sequential baseline/candidate services on NPU0-3, exact-container cleanup, complete 12-cell matrices, container config/log capture, correctness and 2x decision report"
   evidence_boundary: "source and official model guidance establish plausibility only; no current-model speedup is claimed"
 quantization_constraint:
   allowed: false

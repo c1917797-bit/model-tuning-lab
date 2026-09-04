@@ -365,6 +365,13 @@ multiples; if runtime activation or graph behavior requires that change, treat
 it as a separate cumulative parameter treatment rather than silently combining
 variables.
 
+Use `scripts/run_qwen35_tp4_flashcomm1_ab.sh` for the real TP4 decision. It
+requires unique `RUN_ID` and absolute new `OUTPUT_ROOT`, starts the
+canonical baseline and candidate sequentially, records each container inspect
+and log, runs all 1/5/8/16 by three-repetition cells, and emits a correctness
+plus 2x decision report and hashes. Its trap stops only the exact container it
+started; the underlying launcher still rejects any existing NPU0-3 process.
+
 ## Baseline evidence correction
 
 The prior TP4 `quick32-v3` metrics remain valid only for comparisons among
