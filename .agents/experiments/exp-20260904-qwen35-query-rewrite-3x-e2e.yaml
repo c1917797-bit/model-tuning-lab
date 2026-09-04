@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: oriented
+status: tp4_development_baseline
 decision: pending
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -40,7 +40,17 @@ operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
 resources:
   required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
-  current: "NPU0-3 externally occupied by qwen36_27b_hypic_baseline_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  current: "NPU0-3 owned by this workstream's qwen35_query_rewrite_tp4_dev_decodegraph service; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
-decision_reason: "Pending. The goal was revised from 3x to 2x on 2026-09-04. Orientation is complete; the original baseline is blocked until NPU0-7 can be exclusively acquired."
-next_loop: "Acquire NPU0-7 without disturbing existing workloads, freeze request rendering and output policy, then collect the four-concurrency original baseline."
+development_runtime:
+  topology: "TP4 on physical NPU0-3; development evidence only"
+  container: qwen35_query_rewrite_tp4_dev_decodegraph
+  endpoint: http://127.0.0.1:10010
+  treatments: ["enable_matmul_allreduce=false", "cudagraph_mode=FULL_DECODE_ONLY"]
+  smoke: {requests: 1, completed: 1, errors: 0, ttft_p50_ms: 1085.7145600020885, tpot_p50_ms: 41.675420292626015, e2e_p50_ms: 5378.282850142568, artifact_sha256: f2f959768f28b57d41e394b3be9379e3ef8e6cc65ebc9efea8d9650e0c2ae087}
+candidate:
+  primary_variable: "GDN prefill multi-kernel pipeline -> torch_npu.npu_chunk_gated_delta_rule"
+  upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
+  historical_protocol_comparable: false
+decision_reason: "Pending. A TP4 development baseline is healthy after two attributable startup compatibility treatments. Final DP2/TP4 baseline and 2x evidence remain unavailable while NPU4-7 are occupied."
+next_loop: "Complete and summarize quick32 without overlapping clients, then integrate and profile the fused GDN prefill candidate under the same TP4 development protocol; acquire NPU0-7 later for final DP2/TP4 A/B."
