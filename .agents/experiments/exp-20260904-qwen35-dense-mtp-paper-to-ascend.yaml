@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-dense-mtp-paper-to-ascend
-status: planned
+status: baselined
 decision: pending
 objective: Improve decode throughput and TPOT for the installed dense Qwen3.5-27B without retraining.
 hypothesis: The checkpoint's built-in MTP head can propose tokens cheaply enough that exact speculative verification reduces serial target-model decode steps on Ascend 910B4.
@@ -36,7 +36,7 @@ workload:
   prompt_tokens: 256
   output_tokens: 256
   requests: 64
-  concurrency: [1, 8]
+  concurrency: [8]
   ignore_eos: true
   seed: 20260904
   repetitions: 3
@@ -45,7 +45,7 @@ metrics:
   primary: output_tokens_per_second
   secondary: [request_throughput, ttft_p50, ttft_p95, tpot_p50, tpot_p95, acceptance_rate, hbm_peak]
 thresholds:
-  accept: "median output_tokens_per_second improves >= 5% at concurrency 1 or 8, no tested concurrency regresses > 3%, and correctness passes"
+  accept: "median output_tokens_per_second improves >= 5% at concurrency 8 and correctness passes"
   regress: "median output throughput regresses > 3% or TPOT p95 regresses > 5%"
   abort: "NPU4-7 state changes, competing NPU0-3 process appears, MemAvailable < 8 GiB, HBM > 31.5 GiB/device, server errors, or correctness mismatch"
 correctness:
@@ -57,3 +57,13 @@ artifacts:
 rollback:
   command: "docker rm -f qwen35_dense_mtp_ab if it exists"
   safe_tree: "no vLLM or vLLM-Ascend production source mutation"
+baseline:
+  note: "Scope was narrowed before candidate measurement to the serving-representative concurrency 8 point; concurrency 1 was not measured."
+  output_tokens_per_second_runs: [163.08773518485415, 163.98764732787873, 165.08495139659382]
+  output_tokens_per_second_median: 163.98764732787873
+  request_throughput_median: 0.6405767473745263
+  median_ttft_ms: 1163.8450699974783
+  median_tpot_ms: 44.4029558039106
+  p99_tpot_ms: 47.5471049979256
+  artifact_summary: /cache/austinov/paper-to-ascend/qwen35-dense-mtp/baseline/summary.json
+  correctness_reference: /cache/austinov/paper-to-ascend/qwen35-dense-mtp/baseline/canary.json
