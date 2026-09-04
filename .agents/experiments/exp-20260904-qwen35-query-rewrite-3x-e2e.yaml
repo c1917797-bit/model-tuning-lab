@@ -354,15 +354,28 @@ rejected_algorithm_candidate:
   acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
 decision_reason: "MTP and BF16 NZ variants remain rejected. The no-op NPU4-7 control proved that cross-run exact hashes and much of the apparent fixed-original speedup are not attributable to MMAR. MMAR stays outside the accepted stack: same-device TPOT gain is only 0-5.3%, c1-c8 TTFT gain is 2.4-8.6%, the large c16 TTFT signal requires repeat/profile, and semantic correctness remains fail-closed. Quantization remains prohibited."
-next_loop: "Capture a fixed-runtime, MMAR-off profile on assigned NPU4-7, then rank the real prefill/decode/operator bottlenecks before selecting the next paper/operator treatment. Future E2E candidates keep the immutable original as performance denominator but add the new privacy-safe labeled-reference quality aggregates; exact response hashes remain a reproducibility diagnostic."
+next_loop: "Capture a fixed-runtime, MMAR-off CANN msprof profile on assigned physical NPU4-7, rank real prefill/decode/operator bottlenecks, and select the next paper/operator treatment. Future E2E candidates keep the immutable original as performance denominator but add privacy-safe labeled-reference quality aggregates; exact response hashes remain a reproducibility diagnostic."
 fixed_runtime_profile:
-  status: ready
-  service_mode: profile-mmar-off
-  orchestrator: scripts/capture_qwen35_tp4_profile.sh
+  status: msprof_dynamic_ready_after_torch_api_failure
+  service_mode: profile-msprof-mmar-off
+  orchestrator: scripts/capture_qwen35_tp4_msprof.sh
   physical_devices: [4, 5, 6, 7]
   runtime_switches: "enable_matmulallreduce=false; weight_nz_mode=1; enable_flashcomm1=false"
-  scheduler_caveat: "async scheduling is disabled only because torch_npu start/stop profiler callbacks must execute on the same thread; profile timing is diagnostic, not E2E latency evidence"
+  scheduler_semantics: "preserve async scheduling; set PROFILING_MODE=dynamic before service startup and attach CANN msprof to one TP worker at a time"
   privacy: "request artifact stores hashes and timings only; raw query and response text are not written"
+  torch_api_attempt:
+    run_id: fixed-runtime-mmar-off-npu4-7-20260904T2004Z
+    operation_id: exec-0000000000000659
+    status: failed_profiler_lifecycle
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/fixed-runtime-mmar-off-npu4-7-20260904T2004Z
+    failure: "vLLM 0.23.0 lazily creates each TP worker torch_npu profiler in the profile RPC path, but the CANN external init callback must run in the same thread as registerClient; start logged a thread mismatch and stop killed TP0, canceled the multiprocess executor, and returned HTTP 500"
+    evidence_boundary: "the request completed but no usable kernel_details.csv was emitted; disabling async scheduling did not repair the profiler callback thread invariant"
+  msprof_dynamic_smoke:
+    operation_id: exec-000000000000066f
+    profile_device: 4
+    output_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-smokes/msprof-dynamic-smoke2-npu4-20260904T2028Z
+    result: "dynamic socket attach plus start/stop/quit and export succeeded; analyzer parsed one op_summary CSV with 41119 operator calls"
+    collection_rule: "TP4 must be profiled one worker/device at a time; first full-model capture targets TP0/logical device 0 mapped from physical NPU4"
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1

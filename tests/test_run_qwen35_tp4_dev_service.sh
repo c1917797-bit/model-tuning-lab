@@ -68,6 +68,22 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-profile-msprof-mmar-off-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  profile-msprof-mmar-off \
+  >"$tmp/profile-msprof-mmar-off-fresh.out" \
+  2>"$tmp/profile-msprof-mmar-off-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- 'PROFILING_MODE=dynamic' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":false' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0' "$docker_log"
+if grep -q -- '--profiler-config.profiler' "$docker_log"; then
+  echo "msprof mode unexpectedly enabled the vLLM torch profiler" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-profile-mmar-off-fresh \
   PROFILE_DIR="$tmp/profile-mmar-off-fresh" \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile-mmar-off \

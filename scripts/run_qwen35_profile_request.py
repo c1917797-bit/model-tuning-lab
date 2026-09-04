@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture one isolated real query_rewrite request under the vLLM profiler."""
+"""Capture one isolated real query_rewrite request under a bounded profiler."""
 
 from __future__ import annotations
 
@@ -44,8 +44,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", required=True)
     parser.add_argument("--dataset", type=Path, required=True)
     parser.add_argument("--dataset-sha256", required=True)
-    parser.add_argument("--profile-index", type=int, default=31)
-    parser.add_argument("--warmup-index", type=int, default=0)
+    parser.add_argument("--profile-index", type=int, default=0)
+    parser.add_argument("--warmup-index", type=int, default=31)
+    parser.add_argument(
+        "--control-mode",
+        choices=("vllm-api", "external-msprof"),
+        default="vllm-api",
+    )
+    parser.add_argument("--external-ready-file", type=Path)
+    parser.add_argument("--external-go-file", type=Path)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--seed", type=int, default=1024)
     parser.add_argument("--timeout", type=float, default=600)
@@ -55,6 +62,16 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if args.control_mode == "external-msprof":
+        if args.external_ready_file is None or args.external_go_file is None:
+            raise ValueError(
+                "external-msprof requires --external-ready-file and "
+                "--external-go-file"
+            )
+        if args.external_ready_file.exists() or args.external_go_file.exists():
+            raise ValueError("external profiler synchronization path exists")
+    elif args.external_ready_file is not None or args.external_go_file is not None:
+        raise ValueError("external synchronization files require external-msprof")
     actual_hash = hashlib.sha256(args.dataset.read_bytes()).hexdigest()
     if actual_hash != args.dataset_sha256:
         raise ValueError(
@@ -108,6 +125,7 @@ def main() -> int:
         "dataset": str(args.dataset),
         "dataset_sha256": actual_hash,
         "run_id": args.run_id,
+        "control_mode": args.control_mode,
         "seed": args.seed,
         "warmup": {
             "record_index": args.warmup_index,
@@ -130,13 +148,25 @@ def main() -> int:
     exit_code = 0
     started = False
     try:
-        report["start_profile"] = post_control(
-            args.base_url, "/start_profile", args.timeout
-        )
-        started = report["start_profile"]["status"] == 200
-        if not started:
-            raise RuntimeError("start_profile did not return HTTP 200")
-        report["result"] = request_one(
+        if args.control_mode == "vllm-api":
+            report["start_profile"] = post_control(
+                args.base_url, "/start_profile", args.timeout
+            )
+            started = report["start_profile"]["status"] == 200
+            if not started:
+                raise RuntimeError("start_profile did not return HTTP 200")
+        else:
+            assert args.external_ready_file is not None
+            assert args.external_go_file is not None
+            args.external_ready_file.parent.mkdir(parents=True, exist_ok=True)
+            args.external_ready_file.write_text("ready\n", encoding="utf-8")
+            deadline = time.monotonic() + args.timeout
+            while not args.external_go_file.exists():
+                if time.monotonic() >= deadline:
+                    raise TimeoutError("external profiler did not signal go")
+                time.sleep(0.1)
+            started = True
+        profile_result = request_one(
             args.base_url,
             args.model,
             profile_question,
@@ -147,13 +177,17 @@ def main() -> int:
                 args.run_id, "profile", actual_hash, args.profile_index
             ),
         )
+        # The benchmark helper retains text only for in-process semantic
+        # aggregation. Profile artifacts must never persist the raw response.
+        profile_result.pop("_response_text", None)
+        report["result"] = profile_result
         if report["result"]["finish_reason"] != "stop":
             raise RuntimeError("profile request did not terminate naturally")
     except Exception as exc:
         report["error_type"] = type(exc).__name__
         exit_code = 2
     finally:
-        if started:
+        if started and args.control_mode == "vllm-api":
             try:
                 report["stop_profile"] = post_control(
                     args.base_url, "/stop_profile", args.timeout

@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|profile-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
+  baseline|mtp|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|profile-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
     exit 64
     ;;
 esac
@@ -43,7 +43,8 @@ if [[ "$mode" == bf16-nz || "$mode" == bf16-nz-mmar-off ||
       "$mode" == flashcomm1-bf16-nz ]]; then
   weight_nz_env=2
 fi
-if [[ "$mode" == profile-mmar-off || "$mode" == control-mmar-off ||
+if [[ "$mode" == profile-mmar-off || "$mode" == profile-msprof-mmar-off ||
+      "$mode" == control-mmar-off ||
       "$mode" == bf16-nz-mmar-off ]]; then
   matmul_allreduce_env=0
 fi
@@ -102,7 +103,9 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true,"weight_nz_mode":2}'
     elif [[ "$mode" == flashcomm1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true}'
-    elif [[ "$mode" == profile-mmar-off || "$mode" == control-mmar-off ]]; then
+    elif [[ "$mode" == profile-mmar-off ||
+            "$mode" == profile-msprof-mmar-off ||
+            "$mode" == control-mmar-off ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":1}'
     elif [[ "$mode" == bf16-nz-mmar-off ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":2}'
@@ -182,5 +185,12 @@ docker_args=(
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )
+
+if [[ "$mode" == profile-msprof-mmar-off ]]; then
+  # CANN dynamic attach is initialized with the application, then msprof
+  # controls the bounded collection window by worker PID. This avoids vLLM
+  # 0.23.0's broken lazy torch-profiler initialization on a different thread.
+  docker_args+=(-e PROFILING_MODE=dynamic)
+fi
 
 docker "${docker_args[@]}" quay.io/ascend/vllm-ascend:v0.23.0 "${serve_args[@]}"

@@ -554,3 +554,36 @@ decision reports, not a reason to rerun baseline. Every candidate must match
 the original first-32/one-repeat/request semantics and pass the hash-locked
 analyzer. MTP remains rejected because it regressed and changed response
 hashes.
+
+## Fixed-runtime profiler handoff
+
+Physical NPU4-7 are assigned to this workstream and are the only accelerators
+that may be used here. Physical NPU0-3 remain occupied by an external TP4
+workload and must not be stopped, reset, remapped, or included in a launch.
+Inside the task container, physical NPU4-7 are mapped to logical device 0-3.
+
+The first fixed-runtime profile attempt used vLLM 0.23.0's torch profiler API
+through /start_profile and /stop_profile. It failed even with async scheduling
+disabled. The exact image source creates TorchProfilerWrapper lazily from
+GPUWorker.profile(), which runs through a multiprocess RPC path. CANN then
+reported that its external init callback ran on a different thread from
+registerClient. /start_profile returned 200, the real request completed, but
+/stop_profile killed TP0, canceled the executor and returned 500. Preserve the
+failed run at fixed-runtime-mmar-off-npu4-7-20260904T2004Z; do not retry this
+unchanged API path.
+
+The stable replacement is CANN dynamic attach. Service mode
+profile-msprof-mmar-off preserves the fixed-runtime MMAR-off/NZ1/
+FlashComm1-off settings and async scheduling, but sets PROFILING_MODE=dynamic
+before model startup. The orchestrator scripts/capture_qwen35_tp4_msprof.sh
+resolves one TP worker PID, attaches msprof, brackets only the real
+query_rewrite request with interactive start/stop, exports op_summary_*.csv,
+and emits privacy-safe hotspots. Ascend's multi-device restriction means one
+TP rank is collected at a time; start with TP0, which is logical device 0 /
+physical NPU4.
+
+A single-card constant-memory matmul smoke on physical NPU4 proved this path:
+operation exec-000000000000066f completed dynamic start, stop, quit and
+export. The analyzer parsed 41,119 calls from the exported op-summary. The
+smoke container self-cleaned and NPU4 returned idle. Profiler timings remain
+diagnostic only and must never replace the frozen non-profile E2E metrics.

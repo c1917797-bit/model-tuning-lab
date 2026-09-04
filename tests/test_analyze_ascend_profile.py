@@ -41,7 +41,33 @@ def test_aggregate_fixture():
         assert categories["gdn_prefill"]["share_pct"] == 25.0
 
 
+def test_msprof_fixture():
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "mindstudio_profiler_output" / "op_summary_test.csv"
+        path.parent.mkdir(parents=True)
+        with path.open("w", newline="") as stream:
+            writer = csv.DictWriter(
+                stream, fieldnames=["Op Name", "Task Duration(us)"]
+            )
+            writer.writeheader()
+            writer.writerows(
+                [
+                    {"Op Name": "MatMulV2_ND", "Task Duration(us)": "40.5"},
+                    {"Op Name": "hcom_allReduce", "Task Duration(us)": "9.5"},
+                ]
+            )
+        result = analyze([tmp], top=2)
+        assert result["summary"]["total_kernel_duration_us"] == 50.0
+        assert result["files"][0]["source_format"] == "cann-msprof-op-summary"
+        categories = {
+            row["name"]: row for row in result["summary"]["categories"]
+        }
+        assert categories["matmul"]["duration_us"] == 40.5
+        assert categories["collective"]["duration_us"] == 9.5
+
+
 if __name__ == "__main__":
     test_category_precedence()
     test_aggregate_fixture()
+    test_msprof_fixture()
     print("PASS: analyze_ascend_profile")

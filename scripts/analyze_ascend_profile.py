@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Aggregate Ascend torch-profiler kernel_details.csv into optimization hotspots."""
+"""Aggregate Ascend torch-profiler or msprof operator CSVs into hotspots."""
 
 from __future__ import annotations
 
@@ -13,7 +13,8 @@ from pathlib import Path
 from typing import Iterable
 
 SCHEMA = "qwen35-ascend-profile-hotspots/v1"
-DURATION_COLUMN = "Duration(us)"
+TORCH_COLUMNS = ("Name", "Duration(us)")
+MSPROF_COLUMNS = ("Op Name", "Task Duration(us)")
 CATEGORY_RULES = (
     ("collective", re.compile(r"hcom_|allreduce|all_reduce|reduce_scatter|allgather|all_gather", re.I)),
     ("gdn_prefill", re.compile(r"chunkgateddeltarule|chunk_gated|recompute_w_u|merge_16x16|chunkfwdo|solve_tril", re.I)),
@@ -48,10 +49,14 @@ def discover(inputs: Iterable[str]) -> list[Path]:
     found: set[Path] = set()
     for raw in inputs:
         path = Path(raw)
-        if path.is_file() and path.name == "kernel_details.csv":
+        if path.is_file() and (
+            path.name == "kernel_details.csv"
+            or path.name.startswith("op_summary_") and path.suffix == ".csv"
+        ):
             found.add(path.resolve())
         elif path.is_dir():
             found.update(p.resolve() for p in path.rglob("kernel_details.csv"))
+            found.update(p.resolve() for p in path.rglob("op_summary_*.csv"))
     return sorted(found)
 
 
@@ -62,16 +67,23 @@ def parse_file(path: Path) -> dict:
     skipped_rows = 0
     with path.open(newline="", encoding="utf-8-sig") as stream:
         reader = csv.DictReader(stream)
-        required = {"Name", DURATION_COLUMN}
-        if not required.issubset(reader.fieldnames or []):
-            raise ValueError(f"{path}: missing columns {sorted(required)}")
+        fields = set(reader.fieldnames or [])
+        if set(TORCH_COLUMNS).issubset(fields):
+            name_column, duration_column = TORCH_COLUMNS
+            source_format = "torch-kernel-details"
+        elif set(MSPROF_COLUMNS).issubset(fields):
+            name_column, duration_column = MSPROF_COLUMNS
+            source_format = "cann-msprof-op-summary"
+        else:
+            expected = [list(TORCH_COLUMNS), list(MSPROF_COLUMNS)]
+            raise ValueError(f"{path}: missing one supported column set {expected}")
         for row in reader:
             try:
-                duration = float(row[DURATION_COLUMN])
+                duration = float(row[duration_column])
             except (TypeError, ValueError):
                 skipped_rows += 1
                 continue
-            name = row["Name"].strip() or "<unnamed>"
+            name = row[name_column].strip() or "<unnamed>"
             category = categorize(name)
             kernels[name][0] += 1
             kernels[name][1] += duration
@@ -81,6 +93,7 @@ def parse_file(path: Path) -> dict:
     return {
         "path": str(path),
         "sha256": sha256(path),
+        "source_format": source_format,
         "total_kernel_duration_us": total_us,
         "kernel_calls": sum(int(v[0]) for v in kernels.values()),
         "unique_kernels": len(kernels),
@@ -107,7 +120,9 @@ def ranked(entries: dict[str, list[float]], total_us: float, limit: int | None =
 def analyze(inputs: Iterable[str], top: int) -> dict:
     paths = discover(inputs)
     if not paths:
-        raise FileNotFoundError("no kernel_details.csv found")
+        raise FileNotFoundError(
+            "no kernel_details.csv or op_summary_*.csv found"
+        )
     combined_kernels: dict[str, list[float]] = defaultdict(lambda: [0, 0.0])
     combined_categories: dict[str, list[float]] = defaultdict(lambda: [0, 0.0])
     parsed = []
@@ -141,7 +156,11 @@ def analyze(inputs: Iterable[str], top: int) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("inputs", nargs="+", help="profile directories or kernel_details.csv files")
+    parser.add_argument(
+        "inputs",
+        nargs="+",
+        help="profile directories, kernel_details.csv, or op_summary_*.csv files",
+    )
     parser.add_argument("--top", type=int, default=30)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

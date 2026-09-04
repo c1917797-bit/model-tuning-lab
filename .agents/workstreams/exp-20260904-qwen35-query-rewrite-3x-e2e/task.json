@@ -15,12 +15,12 @@
     {"kind":"file","mode":"exclusive","value":"scripts/qwen35_query_rewrite_bench.py"},
     {"kind":"file","mode":"exclusive","value":"scripts/analyze_qwen35_query_rewrite_ab.py"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-qwen35-query-rewrite-3x-e2e.yaml"},
-    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU4-7 for one TP4 candidate; map to logical 0-3 in-container and reuse the immutable original baseline"}
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU4-7 for this workstream; map to logical 0-3 in-container, never touch external NPU0-3, and reuse the immutable original baseline"}
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
     "git diff --check"
   ],
-  "executionState": "fixed-runtime-profile-ready-on-npu4-7",
+  "executionState": "cann-msprof-fixed-runtime-profile-ready-on-npu4-7",
   "integrationState": "not-ready"
 }

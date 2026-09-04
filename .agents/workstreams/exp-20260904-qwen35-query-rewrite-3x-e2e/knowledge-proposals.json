@@ -55,6 +55,18 @@
       "status": "accepted-local",
       "lesson": "Continue reporting every candidate against the owner-designated fixed denominator, but also use a same-device no-op control for causal attribution. In this run the fixed-original comparison suggested large MMAR gains, while the same-device control reduced net TPOT gain to 0-5.3% and c1-c8 TTFT gain to 2.4-8.6%.",
       "evidence": "MMAR run mmar-on-fixedorig-npu4-7-20260904T1921Z versus control run control-mmar-off-fixedorig-npu4-7-20260904T1943Z"
+    },
+    {
+      "id": "vllm-torch-profile-api-thread-boundary",
+      "status": "accepted-local",
+      "lesson": "On vLLM 0.23.0 multiprocess TP, disabling async scheduling is not sufficient to make torch_npu profiling safe. The worker profiler is lazily constructed through a profile RPC thread, while CANN requires external profiler initialization on the registerClient thread. Preserve the failure and switch the collection mechanism rather than weakening inference semantics.",
+      "evidence": "Run fixed-runtime-mmar-off-npu4-7-20260904T2004Z; operation exec-0000000000000659; /stop_profile returned 500 after TP0 exited and the executor was canceled"
+    },
+    {
+      "id": "cann-msprof-dynamic-attach-fallback",
+      "status": "accepted-local",
+      "lesson": "For a long-lived Ascend inference service whose framework profiler lifecycle is broken, set PROFILING_MODE=dynamic before startup and use msprof attach to bracket a real request. In TP workloads collect one worker/device at a time, keep the profile diagnostic-only, and export op_summary for hotspot ranking.",
+      "evidence": "NPU4 smoke operation exec-000000000000066f completed start/stop/quit and export; one op_summary contained 41119 operator calls"
     }
   ]
 }

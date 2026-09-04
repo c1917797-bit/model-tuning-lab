@@ -52,6 +52,18 @@
     {
       "gate": "semantic-correctness-harness",
       "result": "PASS static validation: future runs record only aggregate answer exact-match and normalized character-similarity metrics; raw prompts, references and responses remain absent from artifacts"
+    },
+    {
+      "gate": "fixed-runtime-torch-profiler",
+      "result": "FAIL (preserved): vLLM 0.23.0 created torch_npu profilers through a TP worker RPC thread that differed from registerClient; /stop_profile killed TP0, canceled the executor, returned HTTP 500, and emitted no usable kernel CSV"
+    },
+    {
+      "gate": "cann-msprof-dynamic-smoke",
+      "result": "PASS: on assigned physical NPU4, a constant-memory matmul process created a dynamic socket; msprof attach start/stop/quit and export succeeded, and the analyzer parsed 41119 operator calls from op_summary"
+    },
+    {
+      "gate": "resource-ownership-clarification",
+      "result": "PASS: physical NPU4-7 are assigned to this workstream; physical NPU0-3 remain external and untouched"
     }
   ]
 }
