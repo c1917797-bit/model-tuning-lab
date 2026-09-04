@@ -9,4 +9,6 @@
 - Isolation guard: physical NPU4-7 must contain exactly the four VLLM workers belonging to the measured server container. Recurring unrelated NPU0 probes are recorded in resource evidence but do not invalidate a run by themselves; server/client CPU cpusets remain fixed.
 - Dedicated A/B endpoint: 127.0.0.1:8210 to prevent unrelated local clients from using the experiment service.
 - Prefix Cache OFF 2k40 baseline is complete with three valid runs and zero errors. Median: wall 239.733832s, 2.139873 req/s, 85.594928 output tok/s, 4468.055219 total tok/s, TTFT p50 2363.812ms, E2E p50 3718.403ms. Run-to-run throughput CV is ~1.11%.
-- Next: checkpoint+push this baseline evidence, then run three clean Prefix Cache ON candidate repetitions on the same NPU4-7 / CPU0-95 / 8210 setup, followed by natural-prompt correctness verification and decision.
+- Prefix Cache ON completed three valid runs and is rejected. Candidate median wall time 300.338s vs baseline 239.734s (+25.28%); output throughput 68.323 vs 85.595 tok/s (-20.18%).
+- Recovery is in progress: the Prefix Cache ON candidate is stopped and the OFF baseline is restarting on 127.0.0.1:8210.
+- Latest user direction supersedes further parameter tuning: the next hypothesis is an operator/algorithm-level GDN state-layout optimization. Primary workload is `/home/mtuser/cch/query_rewrite.jsonl`; do not expose raw dataset text in logs or handoffs.

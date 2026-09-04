@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260903-qwen38-prefix-cache-general-eval
-status: planned
-decision: pending
+status: decided
+decision: rejected
 hypothesis: "Enabling vLLM prefix caching improves TTFT and throughput for exact 2048-input-token / 40-output-token traffic derived from MMLU/GSM8K/HumanEval prompts without changing answer quality or increasing NPU HBM beyond safe capacity."
 objective: "Improve Qwen3.8-27B vLLM inference efficiency on chicaihong01 while preserving MMLU, HumanEval, and GSM8K correctness."
 owner: chatgpt
@@ -124,15 +124,32 @@ results:
       run1_resources: "befd5fc82690c43bf1cd59672927ad06d697cad4157d3518cc03236b31d89e71"
       run2_resources: "79d9c623086351578a9b8fed6609369096623c6c8a08835bf707627662354e20"
       run3_resources: "919c0bf26865c69cbe38f202d81bd5a1efe7f46f9de0fc1cda59d185b524eca6"
-  candidate: {}
+  candidate:
+    protocol: "exact 2048 input tokens / exact 40 output tokens; concurrency 8; 513 requests; Prefix Cache ON"
+    repetitions: 3
+    valid_runs: [run1, run2, run3]
+    errors: 0
+    wall_s: {median: 300.338451790, min: 288.074497640, max: 339.976902560}
+    requests_per_s: {median: 1.708072999, min: 1.508926036, max: 1.780789359}
+    output_tokens_per_s: {median: 68.322919951, min: 60.357041450, max: 71.231574360}
+    total_tokens_per_s: {median: 3566.456421468, min: 3150.637563712, max: 3718.288181618}
+    ttft_p50_ms: {median: 1954.387050006, min: 1944.811969995, max: 2828.045970062}
+    e2e_p50_ms: {median: 4548.834959976, min: 4192.286500009, max: 4564.587739995}
+    wall_regression_vs_baseline_pct: 25.28
+    output_throughput_regression_vs_baseline_pct: 20.18
+    evidence_dir: "/cache/austinov/eval-runs/exp-20260903-qwen38-prefix-cache-general-eval/perf2k40_candidate"
+    run_sha256:
+      run1_json: "307fa3f3ff5f9fb3fc029b342378f7bb84520e1ea95a84e574d8a3080c48b3f1"
+      run2_json: "989eced1de31262e97529188f5ff81e9bb891cc5c6a7dd0e57e214c29872cc27"
+      run3_json: "285e161fa35b78692fad3b37f761e85d8dce165f2ebfc30b361d66a31c54d7a3"
   cold: {}
   steady: {}
   boundary: {}
   lifecycle: {}
   resources: {}
 artifacts: []
-decision_reason: ""
-next_loop: ""
+decision_reason: "Rejected. Prefix Cache ON missed the predeclared >=5% improvement threshold and exceeded the >2% regression threshold: median wall time regressed from 239.734s to 300.338s (+25.28%) and median output throughput fell from 85.595 to 68.323 tok/s (-20.18%) on the same exact-2048/40 workload."
+next_loop: "Close recovery by restoring Prefix Cache OFF, then start a separate operator-level GDN state-layout experiment using /home/mtuser/cch/query_rewrite.jsonl as the primary workload."
 rollback:
-  command: "docker rm -f qwen38_prefix_candidate (candidate only); baseline remains untouched"
+  command: "stop qwen38_2k40_candidate and restart qwen38_2k40_baseline on 127.0.0.1:8210"
   verified: false
