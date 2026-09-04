@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp4_mtp_candidate_starting
-decision: pending
+status: tp4_mtp_rejected_profile_baseline_next
+decision: reject_mtp
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -40,7 +40,7 @@ operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
 resources:
   required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
-  current: "NPU0-3 owned by this workstream's qwen35_query_rewrite_tp4_dev_decodegraph service; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  current: "NPU0-3 are free after the completed MTP experiment; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -74,6 +74,15 @@ development_runtime:
     container: qwen35_query_rewrite_tp4_dev_mtp
     readiness_operation: exec-0000000000000370
     treatment: '{"method":"mtp","num_speculative_tokens":1}'
+    quick32:
+      operation: exec-000000000000037d
+      result: rejected
+      reason: "Response hashes diverged and TTFT/TPOT regressed at every concurrency."
+      cells:
+        1: {completed: 32, errors: 0, response_mismatches: 16, ttft_p50_ms: 1166.9920400017872, ttft_speedup: 0.7954885536540999, tpot_p50_ms: 41.915055202420305, tpot_speedup: 0.9178521020817522, artifact_sha256: b57d8aa8346b8cebc1ce7c58163f0d25d8eab834091f2a1ede48fffccf8e6568}
+        5: {completed: 32, errors: 0, response_mismatches: 20, ttft_p50_ms: 1389.0516150277108, ttft_speedup: 0.7863390590401035, tpot_p50_ms: 62.28108963129712, tpot_speedup: 0.8643240402091309, artifact_sha256: 1fd71a7d6bd5aa5a5629383d6528ea584cfa3be32760fa398fca01d493ef8337}
+        8: {completed: 32, errors: 0, response_mismatches: 21, ttft_p50_ms: 1408.5856000892818, ttft_speedup: 0.7683676554197452, tpot_p50_ms: 72.40855466667327, tpot_speedup: 0.9338236931637337, artifact_sha256: 59bd1765d13ab5137fc4b7c4c83635788fb606271daecd6737b302ddf1e2d61a}
+        16: {completed: 32, errors: 0, response_mismatches: 18, ttft_p50_ms: 10619.897514930926, ttft_speedup: 0.1953945998085963, tpot_p50_ms: 109.75812224158452, tpot_speedup: 0.7362700280936901, artifact_sha256: 67bcd90ad027b21b8fdbc25bdddfb21c3b4f86256ad4d24902cb7052dbcc7035}
 candidate:
   primary_variable: "native Qwen3.5 MTP speculative decoding with one model-provided MTP layer"
   method: qwen3_5_mtp
@@ -87,5 +96,5 @@ candidate:
     upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
     torch_npu_symbol_present: true
     historical_protocol_comparable: false
-decision_reason: "Pending. A TP4 development baseline is healthy after two attributable startup compatibility treatments. Final DP2/TP4 baseline and 2x evidence remain unavailable while NPU4-7 are occupied."
-next_loop: "Complete and summarize quick32 without overlapping clients, then A/B native qwen3_5_mtp speculative decoding under the same TP4 development protocol; retain it only after exact output-hash correctness and acceptance/profile evidence, then stack fused GDN prefill; acquire NPU0-7 later for final DP2/TP4 A/B."
+decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
+next_loop: "Relaunch accepted non-MTP TP4 with torch profiler configured; profile a fixed real query_rewrite request and rank actual prefill/decode hotspots before selecting the next cumulative operator or configuration treatment. Acquire NPU0-7 later for final DP2/TP4 A/B."

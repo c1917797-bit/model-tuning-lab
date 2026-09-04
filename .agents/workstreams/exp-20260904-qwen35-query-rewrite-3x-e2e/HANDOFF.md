@@ -2,11 +2,11 @@
 
 ## State
 
-- Execution: `tp4-mtp-candidate-starting`; integration: `not-ready`.
+- Execution: `tp4-mtp-rejected-profile-baseline-next`; integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Physical NPU0-3 are currently assigned to this workstream's
-  `qwen35_query_rewrite_tp4_dev_mtp` startup on loopback port 10010. The
+  `qwen35_query_rewrite_tp4_dev_mtp` completed experiment on loopback port 10010. The
   completed baseline container `qwen35_query_rewrite_tp4_dev_decodegraph` is
   stopped and retained with its logs.
 - Physical NPU4-7 are owned by `qwen38_gdn_fused_candidate` on loopback port 8210. Do not stop, restart, inspect inside, or otherwise perturb it.
@@ -72,6 +72,27 @@
 - The MTP candidate uses the same TP4 command plus only
   `{"method":"mtp","num_speculative_tokens":1}`. Readiness is tracked by
   AgentWeb operation `exec-0000000000000370`.
+
+- MTP quick32-v1 completed under AgentWeb operation
+  `exec-000000000000037d` in 762.12 s. Every cell completed 32/32 with zero
+  transport errors and natural `stop`, but exact output hashes diverged.
+
+  | concurrency | TTFT baseline -> MTP | speedup | TPOT baseline -> MTP | speedup | mismatches | artifact SHA256 |
+  |---:|---:|---:|---:|---:|---:|---|
+  | 1 | 928.33 -> 1166.99 ms | 0.795x | 38.47 -> 41.92 ms | 0.918x | 16/32 | `b57d8aa8346b8cebc1ce7c58163f0d25d8eab834091f2a1ede48fffccf8e6568` |
+  | 5 | 1092.27 -> 1389.05 ms | 0.786x | 53.83 -> 62.28 ms | 0.864x | 20/32 | `1fd71a7d6bd5aa5a5629383d6528ea584cfa3be32760fa398fca01d493ef8337` |
+  | 8 | 1082.31 -> 1408.59 ms | 0.768x | 67.62 -> 72.41 ms | 0.934x | 21/32 | `59bd1765d13ab5137fc4b7c4c83635788fb606271daecd6737b302ddf1e2d61a` |
+  | 16 | 2075.07 -> 10619.90 ms | 0.195x | 80.81 -> 109.76 ms | 0.736x | 18/32 | `67bcd90ad027b21b8fdbc25bdddfb21c3b4f86256ad4d24902cb7052dbcc7035` |
+
+  Decision: **reject MTP from the cumulative stack**. It fails correctness and
+  regresses TTFT and TPOT at every measured concurrency.
+- Source inspection proved `VLLM_ASCEND_PTO_CHUNK_GDN=1` has no reader in the
+  installed vLLM/vLLM-Ascend source and is an inert legacy variable.
+  Qwen3.5 actually binds to `AscendGatedDeltaNetAttention._forward_core`;
+  decode uses the AscendC recurrent GDN op and prefill uses mixed chunk GDN.
+- Torch/NPU profiling requires `--profiler-config.profiler=torch` and
+  `--profiler-config.torch_profiler_dir=<dir>`. No comparable profile exists
+  yet for this workload.
 
 ## Provisional algorithm and operator candidates
 
@@ -172,9 +193,10 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 
 ## Resume
 
-Poll `exec-0000000000000370`. If MTP becomes ready, run one correctness smoke
-and then the same four-cell quick32 protocol into a distinct MTP directory.
-Preserve all baseline and invalid artifacts and do not perturb NPU4-7. When all
+The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
+artifacts. Relaunch the accepted non-MTP TP4 configuration with explicit
+torch-profiler configuration and profile a fixed real request. Do not treat
+`VLLM_ASCEND_PTO_CHUNK_GDN` as a treatment. Do not perturb NPU4-7. When all
 eight NPUs are explicitly released, render
 the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
 its normalized JSON arguments and run the final four-cell original baseline.
