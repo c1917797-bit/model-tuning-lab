@@ -33,6 +33,8 @@ def load_cell(root: Path, concurrency: int, repetition: int) -> dict:
         raise ValueError(f"{path}: benchmark contains request errors")
     if row.get("completed") != row.get("requests"):
         raise ValueError(f"{path}: incomplete request set")
+    if row.get("finish_reasons") != {"stop": row["requests"]}:
+        raise ValueError(f"{path}: requests did not all terminate naturally")
     for metric in ("ttft_ms", "tpot_ms", "e2e_ms"):
         if not isinstance(row.get(metric, {}).get("p50"), (int, float)):
             raise ValueError(f"{path}: missing {metric}.p50")

@@ -55,8 +55,11 @@ The privacy-preserving streaming harness is
 `scripts/qwen35_query_rewrite_bench.py`. One invocation measures one
 concurrency/repetition cell, verifies the frozen dataset hash, and emits
 TTFT/TPOT/E2E/throughput plus response hashes without recording prompts or
-response text. The completion-token budget remains a required explicit
-argument and must be frozen before the original baseline.
+response text. It follows the maintainer-approved historical protocol: raw
+`question` strings, temperature 0, natural EOS, and per-request
+`max_tokens = max_model_len - real_prompt_tokens` resolved through
+`/tokenize` before the measured window. Fixed-40 and normalized-2K protocols
+are superseded and must not be mixed with this baseline.
 
 `scripts/analyze_qwen35_query_rewrite_ab.py` is the fail-closed decision
 gate. It requires all 24 artifacts (baseline/candidate × concurrency 1/5/8/16

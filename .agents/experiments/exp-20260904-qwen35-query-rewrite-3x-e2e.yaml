@@ -23,6 +23,8 @@ workload:
   repetitions: 3
   warmup: "per concurrency, excluded from measurement"
   seed: 1024
+  prompt_mode: raw_question
+  generation: "temperature 0, natural EOS, per-request max_tokens equals the model-context remainder returned by /tokenize"
 metrics:
   primary: [ttft_p50_ms, tpot_p50_ms]
   secondary: [ttft_p95_ms, ttft_p99_ms, tpot_p95_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
