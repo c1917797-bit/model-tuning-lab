@@ -127,3 +127,8 @@ runtime_manifest:
   frozen_baseline_source_sha256: 66537701d07cdb837d3d8a2589d23852232b8f9c4d49b70849d36b2c8bab0bd0
   frozen_baseline_runtime_sha256: e74fcb3444bbc94d5c71086b279b4c08d94295b17499700b7b8c75aa0098b7c6
   purpose: "fail-closed DP2/TP4 topology, benchmark-grid, request-semantics, target-ratio, argv, and environment drift control"
+benchmark_matrix:
+  tool: scripts/run_qwen35_benchmark_matrix.py
+  schema: qwen35-query-rewrite-matrix-run/v1
+  cells: 12
+  policy: "immutable output root; sequential full-dataset cells; zero errors; complete response hashes; natural stop; atomic progress/failure manifest"

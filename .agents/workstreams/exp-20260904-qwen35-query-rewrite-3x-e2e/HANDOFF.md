@@ -185,6 +185,15 @@ acceptance ratios remain 0.5. The manifest hashes both source YAML and
 normalized runtime payload, preventing command drift when all eight NPUs
 become available.
 
+`scripts/run_qwen35_benchmark_matrix.py` executes the complete frozen
+1/5/8/16 × three-repetition matrix against one already healthy service. It
+checks the dataset hash before creating output, refuses an existing run
+directory, validates every cell's model/data/concurrency/repetition identity,
+requires zero errors, a complete request/hash set and natural stop for every
+request, and checkpoints an atomic run manifest after each cell. A failed run
+is retained with its exact failed cell and exception type; it is never silently
+resumed or overwritten.
+
 `scripts/analyze_qwen35_query_rewrite_ab.py` is the fail-closed decision
 gate. It requires all 24 artifacts (baseline/candidate × concurrency 1/5/8/16
 × repetitions 1/2/3), identical model/data/request identities, zero errors,
