@@ -122,12 +122,14 @@ profile_analysis:
     run_id: tp4-baseline-v2-20260904T1653Z
     request: "record 31, 1845 prompt tokens, one completion token, finish_reason=stop, HTTP 200"
     result: "invalid profile: /stop_profile returned HTTP 500; no kernel_details.csv emitted"
-    root_cause: "vLLM 0.23.0 async scheduling moved torch_npu external profiler callbacks across threads, cancelled the multiprocess response queue, and killed EngineCore"
+    observed_failure: "torch_npu reported that its external init callback did not run on the registerClient thread; /stop_profile then cancelled the multiprocess response queue and killed EngineCore"
+    root_cause_hypothesis: "vLLM 0.23.0 async scheduling changes the profiler callback thread between start and stop"
     evidence: "/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/tp4-baseline-v2"
   scheduler_fix:
     commit: 439be7d7b789b468c1b41b527cd2735f39639f72
     behavior: "profile mode uses synchronous scheduling; baseline and MTP retain --async-scheduling"
     validation: "bash syntax, mock resource guards, and explicit profile/baseline argv isolation passed"
+    runtime_validation: "pending; guarded v3 could not start because NPU0-3 were externally acquired"
   guarded_retry:
     operation: exec-0000000000000422
     result: "exit 42 before docker run because NPU0-3 were acquired by p0_ab"

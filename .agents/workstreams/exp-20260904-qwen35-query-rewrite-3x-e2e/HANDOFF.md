@@ -275,10 +275,11 @@ The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
 artifacts. Wait for explicit exclusive ownership of NPU0-3, then launch the
 accepted non-MTP TP4 configuration under a new immutable profile container name
 and output directory, with explicit torch-profiler configuration, and profile a
-fixed real request. Commit `439be7d` makes profile mode synchronous because the
-real v2 attempt completed its request but `/stop_profile` returned HTTP 500 after
-torch_npu's external callback changed threads under async scheduling; it emitted
-no `kernel_details.csv` and is invalid. The v3 launch operation
+fixed real request. Commit `439be7d` makes profile mode synchronous as the
+leading fix hypothesis: the real v2 attempt completed its request but
+`/stop_profile` returned HTTP 500 after torch_npu reported that its external
+callback ran on a different thread. It emitted no `kernel_details.csv` and is
+invalid. The fix still requires runtime validation because the v3 launch operation
 `exec-0000000000000422` then exited 42 before Docker because `p0_ab` acquired
 NPU0-3. Do not reuse either failed attempt's paths as evidence. Do
 not treat `VLLM_ASCEND_PTO_CHUNK_GDN` as a treatment. Do not perturb either
