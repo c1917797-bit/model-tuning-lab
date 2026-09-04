@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: profile_blocked_external_npu0_3
+status: waiting_for_canonical_baseline_npu0_3
 decision: reject_mtp
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -40,7 +40,7 @@ operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
 resources:
   required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
-  current: "NPU0-3 externally occupied by p0_ab; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  current: "NPU0-3 externally occupied by qwen36_hypic_pdc_baseline_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -64,12 +64,18 @@ development_runtime:
     harness_resolution: "TTFT begins at the first choice/token event, including an empty-text EOS token"
   valid_quick32_baseline:
     protocol: "TP4 development, first 32 frozen records, one repetition"
+    evidence_scope: "internally valid only for comparisons between development variants that also forced enable_matmul_allreduce=false; not the canonical user baseline and not a denominator for final 2x acceptance"
     operation: exec-0000000000000360
     cells:
       1: {completed: 32, errors: 0, ttft_p50_ms: 928.3288100268692, tpot_p50_ms: 38.47182152641416, artifact_sha256: ac39bc922b43d9472fe41f89bae25a0190cf20817147230f8725f151e3ce413a}
       5: {completed: 32, errors: 0, ttft_p50_ms: 1092.2655399190262, tpot_p50_ms: 53.83104301874974, artifact_sha256: 68d2a3020bb52594e13560dd608afca1d611d61a37383aa94062bfe78784f7ae}
       8: {completed: 32, errors: 0, ttft_p50_ms: 1082.3116149986163, tpot_p50_ms: 67.61682393548094, artifact_sha256: 4f9799a128128b1e34dca498256833c45f52373cd2486b4acd9298030d7d58ce}
       16: {completed: 32, errors: 0, ttft_p50_ms: 2075.0706249382347, tpot_p50_ms: 80.8116157463221, artifact_sha256: 085c0a43a7a720ba42f1d83bf2ebacebb64e515d24bb3f040eabd5c046f777e4}
+  canonical_baseline:
+    status: missing_waiting_for_npu0_3
+    topology: "TP4 development first, then required DP2/TP4 all-eight-NPU formal matrix"
+    invariant: "enable_matmul_allreduce=true in both environment and additional_config"
+    reason: "the prior quick32 and v5 profile explicitly forced the switch false and cannot represent the user's original baseline"
   mtp_candidate:
     container: qwen35_query_rewrite_tp4_dev_mtp
     readiness_operation: exec-0000000000000370

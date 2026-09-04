@@ -364,3 +364,15 @@ primary variable. The official guide warns that capture sizes should be TP-size
 multiples; if runtime activation or graph behavior requires that change, treat
 it as a separate cumulative parameter treatment rather than silently combining
 variables.
+
+## Baseline evidence correction
+
+The prior TP4 `quick32-v3` metrics remain valid only for comparisons among
+the old development variants that all forced
+`enable_matmul_allreduce=false`. They are **not** the canonical user baseline
+and must never be used as the denominator for the 2x acceptance claim. The
+canonical baseline still needs to be captured with MatMulAllReduce explicitly
+true, first as TP4 development evidence and finally as the full DP2/TP4
+1/5/8/16 by three-repetition matrix. MTP remains rejected because it both
+regressed against its paired development control and changed response hashes;
+that rejection does not promote the old control to canonical status.
