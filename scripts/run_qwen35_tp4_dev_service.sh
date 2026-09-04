@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
+  baseline|mtp|profile|profile-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|profile|profile-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
     exit 64
     ;;
 esac
@@ -43,7 +43,8 @@ if [[ "$mode" == bf16-nz || "$mode" == bf16-nz-mmar-off ||
       "$mode" == flashcomm1-bf16-nz ]]; then
   weight_nz_env=2
 fi
-if [[ "$mode" == control-mmar-off || "$mode" == bf16-nz-mmar-off ]]; then
+if [[ "$mode" == profile-mmar-off || "$mode" == control-mmar-off ||
+      "$mode" == bf16-nz-mmar-off ]]; then
   matmul_allreduce_env=0
 fi
 
@@ -101,7 +102,7 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true,"weight_nz_mode":2}'
     elif [[ "$mode" == flashcomm1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true}'
-    elif [[ "$mode" == control-mmar-off ]]; then
+    elif [[ "$mode" == profile-mmar-off || "$mode" == control-mmar-off ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":1}'
     elif [[ "$mode" == bf16-nz-mmar-off ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false,"weight_nz_mode":2}'
@@ -119,7 +120,7 @@ serve_args=(
 # at /stop_profile and cancels the multiprocess response queue. Profiling is
 # diagnostic-only, so preserve async scheduling for performance candidates and
 # use the synchronous scheduler only for the isolated profiler service.
-if [[ "$mode" == profile ]]; then
+if [[ "$mode" == profile || "$mode" == profile-mmar-off ]]; then
   # Omitting --async-scheduling is not sufficient in vLLM 0.23.0: the
   # effective default can still enable it.  Force the diagnostic service onto
   # the synchronous scheduler so the profiler lifecycle invariant is testable.
@@ -132,7 +133,7 @@ if [[ "$mode" == mtp ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1}')
 fi
 
-if [[ "$mode" == profile ]]; then
+if [[ "$mode" == profile || "$mode" == profile-mmar-off ]]; then
   if [[ -e "$profile_dir" ]]; then
     echo "refusing to reuse profile directory: $profile_dir" >&2
     exit 44

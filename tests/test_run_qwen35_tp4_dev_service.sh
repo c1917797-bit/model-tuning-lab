@@ -68,6 +68,23 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-profile-mmar-off-fresh \
+  PROFILE_DIR="$tmp/profile-mmar-off-fresh" \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile-mmar-off \
+  >"$tmp/profile-mmar-off-fresh.out" 2>"$tmp/profile-mmar-off-fresh.err"
+grep -q -- '--profiler-config.profiler torch' "$docker_log"
+grep -q -- '--no-async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":false' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0' "$docker_log"
+if grep -Eq '(^| )--async-scheduling( |$)' "$docker_log"; then
+  echo "MMAR-off profile mode unexpectedly enabled async scheduling" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-baseline-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" baseline \
   >"$tmp/baseline-fresh.out" 2>"$tmp/baseline-fresh.err"

@@ -13,6 +13,7 @@ profile_dir="${PROFILE_DIR:?set PROFILE_DIR to a new absolute directory}"
 artifact_dir="${ARTIFACT_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/${run_id}}"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
 profile_flush_timeout="${PROFILE_FLUSH_TIMEOUT_SECONDS:-600}"
+profile_mode="${PROFILE_MODE:-profile-mmar-off}"
 request_artifact="${artifact_dir}/request.json"
 hotspot_artifact="${artifact_dir}/hotspots.json"
 service_log="${artifact_dir}/service.log"
@@ -31,6 +32,10 @@ if [[ -e "$profile_dir" || -e "$artifact_dir" ]]; then
   echo "artifact_dir=$artifact_dir" >&2
   exit 44
 fi
+case "$profile_mode" in
+  profile|profile-mmar-off) ;;
+  *) echo "PROFILE_MODE must be profile or profile-mmar-off" >&2; exit 64 ;;
+esac
 
 mkdir -p "$artifact_dir"
 started=0
@@ -44,7 +49,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-env CONTAINER_NAME="$container_name" PORT="$port" PROFILE_DIR="$profile_dir" "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile
+env CONTAINER_NAME="$container_name" PORT="$port" PROFILE_DIR="$profile_dir" "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" "$profile_mode"
 started=1
 
 deadline=$((SECONDS + readiness_timeout))

@@ -7,6 +7,17 @@ trap 'rm -rf "$scratch"' EXIT
 mkdir -p "$scratch/profile" "$scratch/artifact"
 
 set +e
+env PROFILE_RUN_ID=test CONTAINER_NAME=test-profile PROFILE_MODE=invalid \
+  PROFILE_DIR="$scratch/new-invalid-profile" \
+  ARTIFACT_DIR="$scratch/new-invalid-artifact" \
+  "$repo_root/scripts/capture_qwen35_tp4_profile.sh" \
+  >/dev/null 2>"$scratch/invalid-mode.err"
+status=$?
+set -e
+[[ "$status" == 64 ]]
+grep -q "PROFILE_MODE must be profile or profile-mmar-off" "$scratch/invalid-mode.err"
+
+set +e
 env PROFILE_RUN_ID=test CONTAINER_NAME=test-profile PROFILE_DIR="$scratch/profile" ARTIFACT_DIR="$scratch/new-artifact" "$repo_root/scripts/capture_qwen35_tp4_profile.sh" >/dev/null 2>"$scratch/existing-profile.err"
 status=$?
 set -e

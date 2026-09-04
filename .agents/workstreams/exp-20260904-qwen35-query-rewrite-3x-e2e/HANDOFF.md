@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `fixed-runtime-profile-next-after-control-calibration`;
+- Execution: `fixed-runtime-profile-ready-on-npu4-7`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -111,6 +111,11 @@
   The service log SHA256 is
   `6d3b7a82b31be3ab55d10107e68cd14c064bb2fdef90afe1567534692987c0bc`.
   NPU4-7 were released; NPU0-3 workers remained untouched.
+- Fixed-runtime profiling is implemented as service mode
+  `profile-mmar-off`; `capture_qwen35_tp4_profile.sh` selects it by default.
+  It preserves MMAR off/NZ1/FlashComm1 off, disables async scheduling only for
+  the profiler lifecycle, uses NPU4-7, and still enforces new output paths and
+  the device idle guard.
 
 ## Authoritative comparison and stacking policy
 

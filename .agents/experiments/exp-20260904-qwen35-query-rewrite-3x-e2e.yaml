@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: fixed_runtime_profile_next_after_control_calibration
+status: fixed_runtime_profile_ready_on_npu4_7
 decision: hold_matmulallreduce_outside_stack_and_profile_fixed_runtime
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -355,6 +355,14 @@ rejected_algorithm_candidate:
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
 decision_reason: "MTP and BF16 NZ variants remain rejected. The no-op NPU4-7 control proved that cross-run exact hashes and much of the apparent fixed-original speedup are not attributable to MMAR. MMAR stays outside the accepted stack: same-device TPOT gain is only 0-5.3%, c1-c8 TTFT gain is 2.4-8.6%, the large c16 TTFT signal requires repeat/profile, and semantic correctness remains fail-closed. Quantization remains prohibited."
 next_loop: "Capture a fixed-runtime, MMAR-off profile on assigned NPU4-7, then rank the real prefill/decode/operator bottlenecks before selecting the next paper/operator treatment. Future E2E candidates keep the immutable original as performance denominator but add the new privacy-safe labeled-reference quality aggregates; exact response hashes remain a reproducibility diagnostic."
+fixed_runtime_profile:
+  status: ready
+  service_mode: profile-mmar-off
+  orchestrator: scripts/capture_qwen35_tp4_profile.sh
+  physical_devices: [4, 5, 6, 7]
+  runtime_switches: "enable_matmulallreduce=false; weight_nz_mode=1; enable_flashcomm1=false"
+  scheduler_caveat: "async scheduling is disabled only because torch_npu start/stop profiler callbacks must execute on the same thread; profile timing is diagnostic, not E2E latency evidence"
+  privacy: "request artifact stores hashes and timings only; raw query and response text are not written"
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
