@@ -477,6 +477,21 @@ That candidate is now implemented as launcher mode `mmar-on` and
 NZ mode 1, FlashComm1 false and BF16/no quantization. Run it with the
 fixed-original orchestrator on physical NPU4-7.
 
+### Active resource handoff
+
+The user confirmed that physical NPU4-7 are assigned to this workstream;
+continue to leave NPU0-3 untouched. At 2026-09-04 18:59 UTC, a separate
+self-bounded `/cache/austinov/p0/pin_ab_47.sh` A/B acquired NPU4-7 through
+container `p0_ab`. Do not interrupt it: the runner tests `PIN_META=0/1`
+and removes its own container after both treatments.
+
+AWMCP operation `exec-00000000000005d7` watches the exact host runner PID
+`1087333` and reports the post-release NPU snapshot. A second operation,
+`exec-00000000000005e6`, waits for that same PID, rejects an occupied port
+10010, and then launches the real `mmar-on` candidate on NPU4-7. Poll the
+second operation for the benchmark result. The service launcher still performs
+its own NPU idle guard before Docker, so the two workloads cannot overlap.
+
 ## Baseline evidence correction
 
 The prior TP4 `quick32-v3` metrics are now the user-designated fixed
