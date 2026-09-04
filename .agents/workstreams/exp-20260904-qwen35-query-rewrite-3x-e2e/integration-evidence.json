@@ -1,0 +1,17 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
+  "status": "not-ready-resource-blocked",
+  "targetParent": "main",
+  "sourceCommit": null,
+  "validation": [
+    {
+      "gate": "orientation",
+      "result": "PASS: model and dataset identities frozen; NPU ownership observed"
+    },
+    {
+      "gate": "runtime-isolation",
+      "result": "BLOCKED: NPU4-7 are externally occupied, so the eight-card DP2/TP4 baseline cannot start"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+schema: ascend-inference-experiment/v1
+id: exp-20260904-qwen35-query-rewrite-3x-e2e
+status: oriented
+decision: pending
+objective: "Reduce Qwen3.5-27B TTFT and TPOT to one third of the immutable original baseline on real query_rewrite traffic."
+environment:
+  host: chicaihong01
+  hardware: "8 x Ascend 910B4"
+  topology: "DP2 / TP4"
+  model_path: /cache/austinov/Qwen3.8-27B
+  model_architecture: Qwen3_5ForConditionalGeneration
+  model_config_sha256: 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab
+  tokenizer_config_sha256: b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27
+  weight_index_sha256: 77042094076611b69791a610065f28b7013b8c621795fa86ddccc8bac7d1b9df
+dataset:
+  path: /cache/cch/query_rewrite.jsonl
+  sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  bytes: 3305726
+  records: 357
+  confidential_fields: [question, answer]
+workload:
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  warmup: "per concurrency, excluded from measurement"
+  seed: 1024
+metrics:
+  primary: [ttft_p50_ms, tpot_p50_ms]
+  secondary: [ttft_p95_ms, ttft_p99_ms, tpot_p95_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
+final_thresholds:
+  ttft: "candidate <= original baseline / 3 at concurrency 1, 5, 8 and 16"
+  tpot: "candidate <= original baseline / 3 at concurrency 1, 5, 8 and 16"
+  correctness: "business correctness passes and request errors equal zero"
+loop:
+  attribution: "add one primary treatment to the latest accepted stack"
+  cumulative: "combine accepted operators, algorithms and parameters"
+  comparison: "compare each treatment with both the previous accepted stack and the original baseline"
+operator_gate:
+  requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
+resources:
+  required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
+  current: "NPU0-3 free; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
+decision_reason: "Pending. Orientation is complete; the original baseline is blocked until NPU0-7 can be exclusively acquired."
+next_loop: "Acquire NPU0-7 without disturbing existing workloads, freeze request rendering and output policy, then collect the four-concurrency original baseline."

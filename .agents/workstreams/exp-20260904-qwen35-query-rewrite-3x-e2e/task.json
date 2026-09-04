@@ -1,0 +1,24 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
+  "objective": "Improve Qwen3.5-27B TTFT and TPOT by 3x on the frozen query_rewrite workload through cumulative parameter, algorithm, and operator optimizations with operator changes integrated into vLLM-Ascend and verified end to end.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260904-qwen35-query-rewrite-3x-e2e",
+  "remote": "origin",
+  "originalBase": "21915616ebbdb2af704896d90c0b3459dff42c5a",
+  "createdAt": "2026-09-04",
+  "owner": "codex",
+  "dependencies": [],
+  "claims": [
+    {"kind":"file","mode":"exclusive","value":"docs/qwen35-query-rewrite-3x-loop.md"},
+    {"kind":"file","mode":"exclusive","value":"configs/qwen35-query-rewrite-baseline.yaml"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-qwen35-query-rewrite-3x-e2e.yaml"},
+    {"kind":"resource","mode":"pending-exclusive","value":"chicaihong01 physical NPU0-7 for DP2/TP4 baseline; NPU4-7 currently externally occupied and forbidden"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "oriented-resource-blocked",
+  "integrationState": "not-ready"
+}
