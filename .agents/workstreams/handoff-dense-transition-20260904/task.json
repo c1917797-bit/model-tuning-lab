@@ -1,0 +1,24 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "handoff-dense-transition-20260904",
+  "objective": "Consolidate current tuning knowledge after the Dynamic MoE negative result and redirect the canonical maintainer handoff toward the active dense-model MTP and prefix-cache workstreams without misrepresenting unmerged work as integrated truth.",
+  "targetBranch": "main",
+  "workBranch": "work/handoff-dense-transition-20260904",
+  "remote": "origin",
+  "originalBase": "fbc79c41c37c8900f0623ce8941304e9bfde5cf1",
+  "createdAt": "2026-09-04",
+  "owner": "chatgpt",
+  "dependencies": [],
+  "claims": [
+    {"kind":"knowledge","mode":"exclusive","value":".agents/HANDOFF.md"},
+    {"kind":"knowledge","mode":"exclusive","value":"docs/LESSONS_LEARNED.md"},
+    {"kind":"knowledge","mode":"exclusive","value":"docs/RUNBOOK.md"}
+  ],
+  "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
+  "executionState": "started",
+  "integrationState": "not-ready",
+  "notes": [
+    "Read active branch-local handoffs instead of copying unmerged product state into main as shipped truth.",
+    "Dynamic MoE is retained remotely as a superseded audit branch; active dense MTP and prefix-cache branches remain independent and unmerged."
+  ]
+}
