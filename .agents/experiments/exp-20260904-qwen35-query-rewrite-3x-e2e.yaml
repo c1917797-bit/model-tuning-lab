@@ -59,6 +59,9 @@ development_runtime:
     operation: exec-0000000000000350
     output: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v2/c1-r1.json
     treatments: ["send seed=1024 in every generation request", "record privacy-safe error reason counts and failed question hashes"]
+    result: "28 completed, 4 EOS-only streams initially classified as errors"
+    eos_probe: "all four had one choice event, completion_tokens=1, finish_reason=stop and zero visible characters"
+    harness_resolution: "TTFT begins at the first choice/token event, including an empty-text EOS token"
 candidate:
   primary_variable: "native Qwen3.5 MTP speculative decoding with one model-provided MTP layer"
   method: qwen3_5_mtp

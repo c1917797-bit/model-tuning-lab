@@ -105,7 +105,7 @@ def request_one(
         headers={"Content-Type": "application/json"},
     )
     started = time.perf_counter()
-    first_content_at: float | None = None
+    first_token_at: float | None = None
     output_parts: list[str] = []
     completion_tokens: int | None = None
     prompt_tokens: int | None = None
@@ -126,20 +126,23 @@ def request_one(
                     "completion_tokens", completion_tokens
                 )
             for choice in event.get("choices", []):
+                if first_token_at is None:
+                    # An EOS-only completion is still a real first token. Its
+                    # streamed text is empty, but usage reports one completion
+                    # token and finish_reason=stop.
+                    first_token_at = time.perf_counter()
                 content = choice.get("text")
                 if content:
-                    if first_content_at is None:
-                        first_content_at = time.perf_counter()
                     output_parts.append(content)
                 if choice.get("finish_reason") is not None:
                     finish_reason = str(choice["finish_reason"])
     ended = time.perf_counter()
-    if first_content_at is None:
-        raise RuntimeError("stream completed without content")
+    if first_token_at is None:
+        raise RuntimeError("stream completed without a token event")
     if not completion_tokens or completion_tokens < 1:
         raise RuntimeError("stream did not report positive completion_tokens")
-    ttft_s = first_content_at - started
-    generation_s = ended - first_content_at
+    ttft_s = first_token_at - started
+    generation_s = ended - first_token_at
     tpot_s = generation_s / max(completion_tokens - 1, 1)
     output = "".join(output_parts)
     return {

@@ -50,6 +50,12 @@
 - A concurrency-1 diagnostic rerun is active as AgentWeb operation
   `exec-0000000000000350`, writing to the new immutable
   `tp4-dev-decodegraph/quick32-v2/c1-r1.json` path.
+- That rerun reproduced the same four cases and classified all of them as
+  `stream completed without content`. A targeted privacy-safe SSE probe then
+  proved each was a valid EOS-only completion: one choice event,
+  `completion_tokens=1`, `finish_reason=stop`, zero visible characters and
+  no HTTP/service error. The harness now defines TTFT at the first choice/token
+  event, including EOS, rather than the first non-empty text fragment.
 
 ## Provisional algorithm and operator candidates
 
@@ -150,8 +156,9 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 
 ## Resume
 
-First poll `exec-0000000000000350`, verify the TP4 service and benchmark client
-ownership, and inspect the diagnostic error-reason counts. Do not start a second
-client. Preserve the invalid quick32 artifact and NPU4-7. When all eight NPUs are explicitly released, render
+Verify no benchmark client remains, validate the EOS-token harness fix, and run
+the four-cell quick32 scaling check into a new immutable output directory. Do
+not overwrite either invalid quick32 artifact or perturb NPU4-7. When all eight
+NPUs are explicitly released, render
 the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
 its normalized JSON arguments and run the final four-cell original baseline.
