@@ -2,7 +2,7 @@ schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
 status: oriented
 decision: pending
-objective: "Reduce Qwen3.5-27B TTFT and TPOT to one third of the immutable original baseline on real query_rewrite traffic."
+objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
   hardware: "8 x Ascend 910B4"
@@ -27,8 +27,8 @@ metrics:
   primary: [ttft_p50_ms, tpot_p50_ms]
   secondary: [ttft_p95_ms, ttft_p99_ms, tpot_p95_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
 final_thresholds:
-  ttft: "candidate <= original baseline / 3 at concurrency 1, 5, 8 and 16"
-  tpot: "candidate <= original baseline / 3 at concurrency 1, 5, 8 and 16"
+  ttft: "candidate <= original baseline / 2 at concurrency 1, 5, 8 and 16"
+  tpot: "candidate <= original baseline / 2 at concurrency 1, 5, 8 and 16"
   correctness: "business correctness passes and request errors equal zero"
 loop:
   attribution: "add one primary treatment to the latest accepted stack"
@@ -38,7 +38,7 @@ operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
 resources:
   required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
-  current: "NPU0-3 free; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  current: "NPU0-3 externally occupied by qwen36_27b_hypic_baseline_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
-decision_reason: "Pending. Orientation is complete; the original baseline is blocked until NPU0-7 can be exclusively acquired."
+decision_reason: "Pending. The goal was revised from 3x to 2x on 2026-09-04. Orientation is complete; the original baseline is blocked until NPU0-7 can be exclusively acquired."
 next_loop: "Acquire NPU0-7 without disturbing existing workloads, freeze request rendering and output policy, then collect the four-concurrency original baseline."

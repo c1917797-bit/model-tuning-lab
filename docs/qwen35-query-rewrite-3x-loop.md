@@ -1,4 +1,4 @@
-# Qwen3.5-27B query_rewrite 3x E2E Loop
+# Qwen3.5-27B query_rewrite 2x E2E Loop
 
 The optimization target is the complete serving path, not an isolated kernel.
 The final candidate may combine core operators, inference algorithms and
@@ -21,6 +21,6 @@ An operator result is not complete until the operator is selected at runtime
 inside Qwen3.5-27B on vLLM-Ascend and produces a valid improvement on
 `/cache/cch/query_rewrite.jsonl`.
 
-Final success requires TTFT and TPOT at or below one third of the original
+Final success requires TTFT and TPOT at or below one half of the original
 baseline for concurrency 1, 5, 8 and 16, with correct business outputs, zero
 request errors, safe HBM, and acceptable tail latency.

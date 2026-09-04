@@ -11,7 +11,7 @@
     },
     {
       "gate": "runtime-isolation",
-      "result": "BLOCKED: NPU4-7 are externally occupied, so the eight-card DP2/TP4 baseline cannot start"
+      "result": "BLOCKED: NPU0-3 and NPU4-7 are externally occupied by separate workloads, so the eight-card DP2/TP4 baseline cannot start"
     }
   ]
 }

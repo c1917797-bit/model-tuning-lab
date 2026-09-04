@@ -1,11 +1,12 @@
-# Qwen3.5-27B query_rewrite 3x E2E Optimization
+# Qwen3.5-27B query_rewrite 2x E2E Optimization
 
 ## State
 
 - Execution: `oriented-resource-blocked`; integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Physical NPU0-3 are currently free.
+- Physical NPU0-3 are currently owned by
+  `qwen36_27b_hypic_baseline_npu0_3`. Do not perturb it.
 - Physical NPU4-7 are owned by `qwen38_gdn_fused_candidate` on loopback port 8210. Do not stop, restart, inspect inside, or otherwise perturb it.
 - The frozen DP2/TP4 baseline requires all eight NPUs, so no valid baseline has started.
 
@@ -27,9 +28,12 @@
 ## Measurement target
 
 Measure concurrency 1, 5, 8 and 16 with three valid warm repetitions per
-cell. The final target is TTFT and TPOT no greater than one third of the
+cell. The final target is TTFT and TPOT no greater than one half of the
 original baseline at every concurrency, with zero request errors, passing
 business correctness, and no unacceptable p95/p99 regression.
+
+The workstream identifier retains the original `3x` label for audit
+continuity; the authoritative goal was revised to 2x on 2026-09-04.
 
 ## Optimization loop
 
@@ -67,7 +71,8 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 ## Resume
 
 First re-run `npu-smi info`, container device-map inspection, port checks and
-CPU ownership checks. Start nothing until NPU4-7 are explicitly released.
+CPU ownership checks. Start nothing until both NPU0-3 and NPU4-7 are explicitly
+released.
 Then render the exact command from
 `configs/qwen35-query-rewrite-baseline.yaml`, freeze its normalized JSON
 arguments and run the four-cell original baseline.
