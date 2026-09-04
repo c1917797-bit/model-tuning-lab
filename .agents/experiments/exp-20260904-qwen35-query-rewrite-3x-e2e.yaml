@@ -132,3 +132,8 @@ benchmark_matrix:
   schema: qwen35-query-rewrite-matrix-run/v1
   cells: 12
   policy: "immutable output root; sequential full-dataset cells; zero errors; complete response hashes; natural stop; atomic progress/failure manifest"
+final_baseline_service:
+  tool: scripts/run_qwen35_dp2tp4_baseline_service.sh
+  image: quay.io/ascend/vllm-ascend:v0.23.0
+  resource_gate: "hard fail before manifest render or Docker run when any NPU0-7 process exists"
+  identity_gate: "new container name and immutable runtime manifest path required"

@@ -194,6 +194,15 @@ request, and checkpoints an atomic run manifest after each cell. A failed run
 is retained with its exact failed cell and exception type; it is never silently
 resumed or overwritten.
 
+`scripts/run_qwen35_dp2tp4_baseline_service.sh` is the final-baseline
+service entry point. It refuses an existing container or manifest, parses the
+authoritative `npu-smi` process table and exits before rendering or Docker
+when any physical NPU0-7 is occupied. On an idle host it renders the frozen
+runtime manifest, passes its exact environment and argv to the fixed
+`quay.io/ascend/vllm-ascend:v0.23.0` image, and exposes all eight devices.
+Mocked occupied and idle-path tests prove both the ownership gate and the
+rendered DP2/TP4/device/environment command.
+
 `scripts/analyze_qwen35_query_rewrite_ab.py` is the fail-closed decision
 gate. It requires all 24 artifacts (baseline/candidate × concurrency 1/5/8/16
 × repetitions 1/2/3), identical model/data/request identities, zero errors,

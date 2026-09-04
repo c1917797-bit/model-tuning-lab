@@ -44,7 +44,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-CONTAINER_NAME="$container_name" PORT="$port" PROFILE_DIR="$profile_dir" +  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile
+env CONTAINER_NAME="$container_name" PORT="$port" PROFILE_DIR="$profile_dir" "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile
 started=1
 
 deadline=$((SECONDS + readiness_timeout))
@@ -67,7 +67,7 @@ openapi="$(curl --fail --silent --max-time 30 "$base_url/openapi.json")"
 grep -q '"/start_profile"' <<<"$openapi" || { echo "missing /start_profile" >&2; exit 72; }
 grep -q '"/stop_profile"' <<<"$openapi" || { echo "missing /stop_profile" >&2; exit 72; }
 
-PYTHONPATH="$repo_root/scripts${PYTHONPATH:+:$PYTHONPATH}" +python3 "$repo_root/scripts/run_qwen35_profile_request.py" +  --base-url "$base_url" +  --model "$model" +  --dataset "$dataset" +  --dataset-sha256 "$dataset_sha256" +  --run-id "$run_id" +  --output "$request_artifact"
+env PYTHONPATH="$repo_root/scripts${PYTHONPATH:+:$PYTHONPATH}" python3 "$repo_root/scripts/run_qwen35_profile_request.py" --base-url "$base_url" --model "$model" --dataset "$dataset" --dataset-sha256 "$dataset_sha256" --run-id "$run_id" --output "$request_artifact"
 
 deadline=$((SECONDS + profile_flush_timeout))
 while (( SECONDS < deadline )); do
@@ -81,5 +81,5 @@ if ! find "$profile_dir" -type f -name kernel_details.csv -print -quit | grep -q
   exit 73
 fi
 
-python3 "$repo_root/scripts/analyze_ascend_profile.py" +  "$profile_dir" --output "$hotspot_artifact"
+python3 "$repo_root/scripts/analyze_ascend_profile.py" "$profile_dir" --output "$hotspot_artifact"
 sha256sum "$request_artifact" "$hotspot_artifact"
