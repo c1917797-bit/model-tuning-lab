@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `matmulallreduce-only-rejected-correctness-and-tpot`;
+- Execution: `control-mmar-off-ready-on-npu4-7`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -80,6 +80,11 @@
   switches (MMAR off, NZ mode 1, FlashComm1 off). It does not replace or
   relabel the immutable original; it calibrates run/device drift before the
   next operator or algorithm candidate is credited.
+- The control is implemented as launcher mode `control-mmar-off` with
+  `configs/qwen35-query-rewrite-control-mmar-off-candidate.yaml`. It keeps
+  BF16, MMAR off, NZ mode 1, FlashComm1 off, TP4 and the frozen request
+  protocol. It is an attribution control only: the fixed quick32-v3 artifacts
+  remain the sole performance denominator and are not rerun or relabeled.
 
 ## Authoritative comparison and stacking policy
 

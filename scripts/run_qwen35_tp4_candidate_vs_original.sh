@@ -17,6 +17,9 @@ active_container=""
 active_log=""
 
 case "$candidate_mode" in
+  control-mmar-off)
+    default_config="$repo_root/configs/qwen35-query-rewrite-control-mmar-off-candidate.yaml"
+    ;;
   mmar-on)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-candidate.yaml"
     ;;

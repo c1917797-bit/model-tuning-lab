@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: matmulallreduce_only_rejected_control_attribution_next
+status: control_mmar_off_ready_on_npu4_7
 decision: reject_mtp_flashcomm1_bf16_nz_and_matmulallreduce_only
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -286,6 +286,20 @@ matmulallreduce_only_candidate:
   decision_scope: "reject from cumulative stack: exact-hash correctness failed and TPOT never reached 2x, although TTFT p50 exceeded 2x in every cell"
   recovery: "candidate container stopped cleanly; NPU4-7 released; NPU0-3 workers untouched"
   evidence_boundary: "shows MMAR activation plus large TTFT and moderate TPOT deltas, but different device sets and hash drift require a no-op control before causal attribution"
+fixed_runtime_control_candidate:
+  id: bf16_fixed_runtime_control_on_npu4_7
+  status: ready
+  source_manifest: configs/qwen35-query-rewrite-control-mmar-off-candidate.yaml
+  launcher_mode: control-mmar-off
+  dtype: BF16
+  quantized: false
+  role: attribution_control
+  treatment_vs_fixed_original: "none in runtime switches; fresh process on assigned physical NPU4-7"
+  settings: "enable_matmulallreduce=false; weight_nz_mode=1; enable_flashcomm1=false"
+  performance_denominator: "immutable quick32-v3; this control does not replace or relabel it"
+  purpose: "quantify device/run drift in response hashes and latency before crediting MMAR or the next operator/algorithm treatment"
+  orchestration: scripts/run_qwen35_tp4_candidate_vs_original.sh
+  abort: "startup failure, activation mismatch, request error, non-natural stop, OOM, or unacceptable tails"
 quantization_constraint:
   allowed: false
   set_by: user
