@@ -2,12 +2,12 @@
 
 ## State
 
-- Execution: `profile-waiting-for-npu0-3`; integration: `not-ready`.
+- Execution: `profile-blocked-external-npu0-3`; integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Physical NPU0-3 are externally owned by
-  `qwen36_27b_dk64_treatment_npu0_3`
-  (`7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac`).
+- Physical NPU0-3 are externally owned by `p0_ab`
+  (`cd07d22999ba42890bdb1a5773406415fc8fd4564783812cfe3d66ecb3e4d8e2`,
+  PIDs 172441-172444 as of 2026-09-04 17:04:48 UTC).
   Do not stop, restart, inspect inside, or otherwise perturb it.
 - `scripts/run_qwen35_tp4_dev_service.sh` now refuses to start if
   `npu-smi` reports any process on NPU0-3 (exit 42), and profile mode refuses
@@ -275,7 +275,12 @@ The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
 artifacts. Wait for explicit exclusive ownership of NPU0-3, then launch the
 accepted non-MTP TP4 configuration under a new immutable profile container name
 and output directory, with explicit torch-profiler configuration, and profile a
-fixed real request. Do not reuse the failed profile container as evidence. Do
+fixed real request. Commit `439be7d` makes profile mode synchronous because the
+real v2 attempt completed its request but `/stop_profile` returned HTTP 500 after
+torch_npu's external callback changed threads under async scheduling; it emitted
+no `kernel_details.csv` and is invalid. The v3 launch operation
+`exec-0000000000000422` then exited 42 before Docker because `p0_ab` acquired
+NPU0-3. Do not reuse either failed attempt's paths as evidence. Do
 not treat `VLLM_ASCEND_PTO_CHUNK_GDN` as a treatment. Do not perturb either
 external NPU0-3 or NPU4-7 workload. When all eight NPUs are explicitly released,
 render

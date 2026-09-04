@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: profile_waiting_for_npu0_3
+status: profile_blocked_external_npu0_3
 decision: reject_mtp
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -40,7 +40,7 @@ operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
 resources:
   required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
-  current: "NPU0-3 externally occupied by qwen36_27b_dk64_treatment_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  current: "NPU0-3 externally occupied by p0_ab; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -117,10 +117,25 @@ profile_analysis:
   source_finding: "Qwen3.5 prefill uses a multi-kernel chunk GDN pipeline while decode uses npu_recurrent_gated_delta_rule; select the next treatment only from the new paired profile"
   orchestration: scripts/capture_qwen35_tp4_profile.sh
   orchestration_guards: "requires unique immutable run/container/profile paths, checks health and OpenAPI endpoints, waits for kernel_details.csv, hashes artifacts, and stops only its own exact container"
-  latest_resource_check_utc: "2026-09-04 16:43:31"
-  latest_resource_state: "NPU0-3 external qwen36_27b_dk64_treatment_npu0_3; NPU4-7 external qwen38_gdn_fused_candidate; untouched"
+  failed_real_attempt:
+    operation: exec-000000000000040a
+    run_id: tp4-baseline-v2-20260904T1653Z
+    request: "record 31, 1845 prompt tokens, one completion token, finish_reason=stop, HTTP 200"
+    result: "invalid profile: /stop_profile returned HTTP 500; no kernel_details.csv emitted"
+    root_cause: "vLLM 0.23.0 async scheduling moved torch_npu external profiler callbacks across threads, cancelled the multiprocess response queue, and killed EngineCore"
+    evidence: "/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/tp4-baseline-v2"
+  scheduler_fix:
+    commit: 439be7d7b789b468c1b41b527cd2735f39639f72
+    behavior: "profile mode uses synchronous scheduling; baseline and MTP retain --async-scheduling"
+    validation: "bash syntax, mock resource guards, and explicit profile/baseline argv isolation passed"
+  guarded_retry:
+    operation: exec-0000000000000422
+    result: "exit 42 before docker run because NPU0-3 were acquired by p0_ab"
+    external_pids: [172441, 172442, 172443, 172444]
+  latest_resource_check_utc: "2026-09-04 17:04:48"
+  latest_resource_state: "NPU0-3 external p0_ab (PIDs 172441-172444); NPU4-7 external qwen38_gdn_fused_candidate (PIDs 1312892-1312895); untouched"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
-next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."
+next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path using the synchronous-profile fix, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
