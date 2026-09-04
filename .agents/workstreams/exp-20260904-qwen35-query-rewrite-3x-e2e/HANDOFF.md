@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `bf16-nz-mmar-off-ready-on-npu4-7`;
+- Execution: `bf16-nz-rejected-selecting-mmar-only`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -47,6 +47,18 @@
   `0756f2a7770166afa54d4e4ff08178be13d6b81287a28fa861ec9e1b3ddf82b9`).
   The exact container was stopped. The next bounded recovery is NZ with
   MatMulAllReduce disabled, matching that setting in the fixed original.
+- The NZ recovery run completed all four real cells with 32/32 requests, zero
+  errors and natural stops. It improved TTFT by 2.03x/2.00x/1.97x at
+  concurrency 1/5/8, but concurrency-16 TTFT regressed to 0.58x. TPOT improved
+  only 1.33x-1.54x. Exact response hashes differed for 19/18/15/18 requests,
+  so the analyzer returned `reject-correctness` and the treatment is excluded
+  from the stack.
+- NZ recovery decision:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/bf16-nz-mmar-off-fixedorig-npu4-7-20260904T1845Z/decision.json`
+  (SHA256
+  `323ee9620294fba17bfd678e30bab5012512e211c9016303e9c8ef0ddb2b791a`).
+  The service log SHA256 is
+  `bc6bb41f630cdaa2c2d44496e43ce591586d53566cb974d0066d379f08cfd438`.
 
 ## Authoritative comparison and stacking policy
 
@@ -448,11 +460,17 @@ whether the startup failure belongs specifically to the fused communication
 path. This variant still needs activation, exact response correctness and real
   E2E evidence before it can enter the best stack.
 
-The recovery is now implemented as launcher mode `bf16-nz-mmar-off` with
+The recovery was implemented as launcher mode `bf16-nz-mmar-off` with
 `configs/qwen35-query-rewrite-bf16-nz-mmar-off-candidate.yaml`. Both the
 environment and additional-config explicitly disable MatMulAllReduce, NZ is
 explicitly mode 2, FlashComm1 is false, and no quantization argument exists.
-Run it through the fixed-original candidate orchestrator on NPU4-7.
+The real run proves this combination starts and can reduce low-concurrency
+TTFT, but its response hashes and concurrency-16 behavior reject it.
+
+The next bounded candidate is MatMulAllReduce enabled alone with NZ mode 1 and
+FlashComm1 disabled. This is a valid single-variable treatment relative to the
+actual fixed original, which forced MatMulAllReduce false, and it targets the
+profiled AllReduce bottleneck without either failed interaction.
 
 ## Baseline evidence correction
 

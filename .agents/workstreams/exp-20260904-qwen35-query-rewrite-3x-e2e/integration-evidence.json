@@ -28,6 +28,10 @@
     {
       "gate": "bf16-nz-with-matmulallreduce-startup",
       "result": "FAIL (preserved): all TP workers activated weight_nz_mode=2 and MatMulAllReduce, but aclnnMatmulAllReduce rejected FRACTAL_NZ x2 because it requires ND; no benchmark cell ran"
+    },
+    {
+      "gate": "bf16-nz-matmulallreduce-off-e2e",
+      "result": "REJECT: four 32/32 zero-error natural-stop cells completed, but exact response hashes differed 19/18/15/18 times, TPOT improved only 1.33-1.54x, and c16 TTFT regressed to 0.58x"
     }
   ]
 }

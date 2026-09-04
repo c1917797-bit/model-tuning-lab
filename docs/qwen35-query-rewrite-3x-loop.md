@@ -64,3 +64,8 @@ the same way. Quantization is prohibited.
 The recovery launcher mode is `bf16-nz-mmar-off`; it explicitly sets
 MatMulAllReduce false in both the environment and additional config, keeps the
 model in BF16, and changes only `weight_nz_mode` relative to the original.
+
+The real recovery run is rejected. It achieved about 2x TTFT at c1/c5 and
+1.97x at c8, but c16 TTFT regressed, TPOT reached only 1.33-1.54x, and
+15-19 response hashes changed in every cell. The next isolated treatment is
+MatMulAllReduce enabled alone with NZ mode 1 and FlashComm1 disabled.

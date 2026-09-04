@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: bf16_nz_matmulallreduce_off_ready
-decision: reject_mtp_and_fail_flashcomm1_and_bf16_nz_startup
+status: selecting_matmulallreduce_only_candidate
+decision: reject_mtp_flashcomm1_and_bf16_nz_variants
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -236,7 +236,7 @@ layout_candidate:
   evidence_boundary: "BF16 layout activation and the interaction failure are proven; this does not establish the performance of FRACTAL_NZ with MatMulAllReduce disabled"
 layout_recovery_candidate:
   id: bf16_weight_fractal_nz_matmulallreduce_off
-  status: ready_on_npu4_7
+  status: rejected_correctness_and_target
   source_manifest: configs/qwen35-query-rewrite-bf16-nz-mmar-off-candidate.yaml
   launcher_mode: bf16-nz-mmar-off
   dtype: BF16
@@ -246,7 +246,20 @@ layout_recovery_candidate:
   hypothesis: "FRACTAL_NZ can start and improve dense GEMM when it is not passed to aclnnMatmulAllReduce, which requires ND weights"
   abort: "any startup failure, missing NZ activation, request error, non-natural stop, response-hash mismatch, OOM, or unacceptable tails"
   orchestration: scripts/run_qwen35_tp4_candidate_vs_original.sh
-  evidence_boundary: "an interaction-recovery hypothesis only; no speed or correctness claim before the real run"
+  run_id: bf16-nz-mmar-off-fixedorig-npu4-7-20260904T1845Z
+  operation_id: exec-0000000000000592
+  output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/bf16-nz-mmar-off-fixedorig-npu4-7-20260904T1845Z
+  decision_sha256: 323ee9620294fba17bfd678e30bab5012512e211c9016303e9c8ef0ddb2b791a
+  service_log_sha256: bc6bb41f630cdaa2c2d44496e43ce591586d53566cb974d0066d379f08cfd438
+  correctness: "32/32 zero-error natural-stop requests in every cell, but exact response hashes differed for 19/18/15/18 requests at concurrency 1/5/8/16"
+  measurements:
+    - {concurrency: 1, ttft_original_ms: 928.328810, ttft_candidate_ms: 457.557880, ttft_improvement_x: 2.028877, tpot_original_ms: 38.471822, tpot_candidate_ms: 28.819004, tpot_improvement_x: 1.334946}
+    - {concurrency: 5, ttft_original_ms: 1092.265540, ttft_candidate_ms: 545.965800, ttft_improvement_x: 2.000612, tpot_original_ms: 53.831043, tpot_candidate_ms: 38.532020, tpot_improvement_x: 1.397047}
+    - {concurrency: 8, ttft_original_ms: 1082.311615, ttft_candidate_ms: 548.160110, ttft_improvement_x: 1.974444, tpot_original_ms: 67.616824, tpot_candidate_ms: 43.855234, tpot_improvement_x: 1.541819}
+    - {concurrency: 16, ttft_original_ms: 2075.070625, ttft_candidate_ms: 3561.369225, ttft_improvement_x: 0.582661, tpot_original_ms: 80.811616, tpot_candidate_ms: 57.435735, tpot_improvement_x: 1.406992}
+  decision_scope: "reject from cumulative stack: exact-hash correctness failed, TPOT never reached 2x, and concurrency-16 TTFT regressed"
+  recovery: "candidate container stopped cleanly; NPU4-7 released; artifacts retained outside Git"
+  evidence_boundary: "proves a large low-concurrency TTFT benefit and moderate TPOT benefit under this one run, but the candidate is not acceptable"
 quantization_constraint:
   allowed: false
   set_by: user
@@ -283,8 +296,8 @@ rejected_algorithm_candidate:
   correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
   acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
-decision_reason: "Reject one-token Qwen3.5 MTP for correctness and latency regressions. FlashComm1 failed at startup because its sequence-parallel shape rewriting is incompatible with the Qwen3.5 GDN graph. BF16 FRACTAL_NZ with MatMulAllReduce enabled also failed at startup because aclnnMatmulAllReduce requires its weight input in ND. Reject all quantization routes by explicit user constraint. No new E2E result exists for either startup failure."
-next_loop: "Test BF16 FRACTAL_NZ with MatMulAllReduce disabled on physical NPU4-7. This isolates weight_nz_mode 1 -> 2 relative to the actual fixed original, which already used enable_matmul_allreduce=false, and directly tests whether the observed format conflict is limited to the fused communication path. Keep it out of the best stack unless startup, activation, exact response correctness and E2E gates pass."
+decision_reason: "Reject one-token Qwen3.5 MTP for correctness and latency regressions. FlashComm1 failed at startup on the GDN shape boundary. BF16 FRACTAL_NZ with MatMulAllReduce enabled failed its ND-format startup gate. FRACTAL_NZ with MatMulAllReduce disabled started and improved low-concurrency TTFT by about 2x and TPOT by 1.33-1.54x, but changed 15-19 response hashes and regressed concurrency-16 TTFT, so it is rejected. Quantization remains prohibited."
+next_loop: "Measure MatMulAllReduce enabled by itself with weight_nz_mode=1 and FlashComm1 disabled against the fixed original, whose actual setting was MatMulAllReduce false. It directly targets the measured AllReduce bottleneck while avoiding both known interaction failures. Require exact response hashes and all four TTFT/TPOT cells before stacking."
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
