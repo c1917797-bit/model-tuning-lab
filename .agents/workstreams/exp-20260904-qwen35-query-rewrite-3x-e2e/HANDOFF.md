@@ -782,3 +782,11 @@ The benchmark finalization script's literal Bash array escaping bug was fixed
 and covered by a regression guard. The four measured cells were not rerun.
 Both task containers exited, physical NPU4-7 are idle, and external NPU0-3
 worker PIDs 1031654-1031657 are unchanged.
+
+## Checkpoint publication status
+
+Maintainer evidence and script fixes were committed locally as a29aa43. The
+subsequent HTTPS push to origin failed because chicaihong01 has no GitHub
+username/credential available. Do not retry unchanged. The local worktree and
+branch are authoritative until credentials are provisioned; verify the final
+HEAD recorded by the next checkpoint before handoff.
