@@ -1,0 +1,31 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "maintainer-chicaihong01-bootstrap-20260904",
+  "objective": "Make a fresh clone immediately usable for safe maintenance of the machine-bound chicaihong01 repository through AWMCP, without storing connection credentials in Git, and raise the repository worktree budget to eight.",
+  "targetBranch": "main",
+  "workBranch": "work/maintainer-chicaihong01-bootstrap-20260904",
+  "remote": "origin",
+  "originalBase": "44153ca7e773d2635209a973079c4c59c3e67119",
+  "createdAt": "2026-09-04",
+  "owner": "codex",
+  "frozenConstraints": {
+    "AGENTS.md": "sha256:e72e4c92f60b98fdf3222afe6398b480ae2d426318878a14da2b947904723afe",
+    ".agents/skills.registry.yaml": "sha256:6b74179692149ee237c44b5530bfa2c5e612b336c320fea3fec85692c09b23e6",
+    ".agents/git-policy.yaml": "sha256:197a379314f64d6249ca6459b23f0e4f6c15d6a9448b44ee7cfa1280dff69174"
+  },
+  "dependencies": [],
+  "claims": [
+    {"kind":"file","mode":"exclusive","value":"AGENTS.md"},
+    {"kind":"file","mode":"exclusive","value":".agents/skills.registry.yaml"},
+    {"kind":"file","mode":"exclusive","value":".agents/git-policy.yaml"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/chicaihong01-host-maintenance/SKILL.md"},
+    {"kind":"knowledge","mode":"shared","value":".agents/HANDOFF.md"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python -m json.tool .agents/workstreams/maintainer-chicaihong01-bootstrap-20260904/task.json",
+    "git diff --check"
+  ],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
