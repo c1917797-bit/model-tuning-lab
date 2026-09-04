@@ -1,0 +1,63 @@
+schema: qwen35-query-rewrite-runtime/v1
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+host: 127.0.0.1
+port: 10010
+environment:
+  ASCEND_RT_VISIBLE_DEVICES: "0,1,2,3"
+  HCCL_BUFFSIZE: "512"
+  OMP_PROC_BIND: "false"
+  OMP_NUM_THREADS: "1"
+  TASK_QUEUE_ENABLE: "1"
+  TRITON_KERNEL_DUMP: "1"
+  TRITON_DUMP_DIR: /cache/efim/triton_dump
+  VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE: "1"
+  VLLM_ASCEND_ENABLE_FLASHCOMM1: "0"
+  VLLM_ASCEND_ENABLE_NZ: "1"
+  VLLM_ASCEND_PTO_CHUNK_GDN: "1"
+  VLLM_LOGGING_LEVEL: DEBUG
+serve:
+  data_parallel_size: 1
+  tensor_parallel_size: 4
+  seed: 1024
+  max_num_seqs: 16
+  max_model_len: 133000
+  max_num_batched_tokens: 32768
+  trust_remote_code: true
+  gpu_memory_utilization: 0.90
+  enable_prefix_caching: true
+  mamba_cache_mode: align
+  mamba_cache_dtype: bfloat16
+  mamba_ssm_cache_dtype: bfloat16
+  async_scheduling: true
+  quantization: null
+  additional_config:
+    enable_cpu_binding: true
+    enable_matmul_allreduce: true
+    enable_flashcomm1: false
+    weight_nz_mode: 1
+  default_chat_template_kwargs:
+    enable_thinking: false
+  compilation_config:
+    cudagraph_mode: FULL_DECODE_ONLY
+    cudagraph_capture_sizes: [1, 2, 4, 6, 8, 10, 12, 14, 16, 32, 64, 128, 256, 384, 512, 640, 768, 896, 1024, 1280, 1536, 1792, 2048, 2304, 2560, 2816, 3072, 3328, 3456, 3584]
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  slice: first_32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 1
+  prompt_mode: raw_question
+  generation: natural_eos
+  max_tokens: per_request_model_context_remainder
+  target_ttft_ratio: 0.5
+  target_tpot_ratio: 0.5
+candidate:
+  id: bf16-matmul-allreduce-on
+  dtype: bfloat16
+  quantized: false
+  primary_variable_vs_fixed_original: "enable_matmul_allreduce: false -> true"
+  weight_nz_mode: 1
+  enable_flashcomm1: false
+  physical_devices: [4, 5, 6, 7]
+  logical_devices: [0, 1, 2, 3]

@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `bf16-nz-rejected-selecting-mmar-only`;
+- Execution: `matmulallreduce-only-ready-on-npu4-7`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -471,6 +471,11 @@ The next bounded candidate is MatMulAllReduce enabled alone with NZ mode 1 and
 FlashComm1 disabled. This is a valid single-variable treatment relative to the
 actual fixed original, which forced MatMulAllReduce false, and it targets the
 profiled AllReduce bottleneck without either failed interaction.
+
+That candidate is now implemented as launcher mode `mmar-on` and
+`configs/qwen35-query-rewrite-mmar-on-candidate.yaml`. It explicitly keeps
+NZ mode 1, FlashComm1 false and BF16/no quantization. Run it with the
+fixed-original orchestrator on physical NPU4-7.
 
 ## Baseline evidence correction
 

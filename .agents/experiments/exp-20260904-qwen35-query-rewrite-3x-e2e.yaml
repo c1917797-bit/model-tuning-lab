@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: selecting_matmulallreduce_only_candidate
+status: matmulallreduce_only_ready_on_npu4_7
 decision: reject_mtp_flashcomm1_and_bf16_nz_variants
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -159,11 +159,11 @@ profile_analysis:
   latest_resource_state: "NPU0-3 external qwen36_hypic_pdc_baseline_npu0_3 (8371abb7731a6c4ba0d01a566c4c10ab27552ca9a26f476ec22229fe226c0d1e); NPU4-7 external qwen38_gdn_fused_candidate (e6e72d7a006971d4dcfe48c1b2046f45017acc450958d0c5ffa9b1d970af66b9); untouched"
 parameter_candidate:
   id: bf16_matmul_allreduce_fusion
-  status: rejected_as_already_in_canonical_baseline
+  status: ready_against_fixed_original
   dtype: BF16
   primary_variable: "additional_config.enable_matmul_allreduce: false -> true"
   rationale: "recovered v5 rank0 profile attributes 94.585% of summed task duration to 237 hcom_allReduce_ calls, but v5 was a non-canonical development variant that explicitly forced the flag false"
-  rejection_reason: "the user-provided canonical baseline already sets VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1; v0.23.0 falls back to that environment variable when the additional config key is absent, so enabling it is not an optimization over the baseline"
+  policy_correction: "the user-designated fixed original quick32-v3 actually forced enable_matmul_allreduce=false; after that artifact was selected as the common denominator, true is a valid single-variable candidate despite the user's earlier intended launch configuration"
   source_activation:
     image: quay.io/ascend/vllm-ascend:v0.23.0
     config: "ascend_config.py resolves additional_config.enable_matmul_allreduce before the legacy environment variable"
@@ -173,7 +173,9 @@ parameter_candidate:
     applicability: "dense Qwen3.5 row-parallel projections are in scope; runtime logs/profile must still prove actual activation"
   required_gates: ["source activation proof", "real query_rewrite correctness", "TP4 quick32 versus fixed original", "candidate profile"]
   evidence_boundary: "the profiler result prioritizes this candidate but does not predict or prove an E2E speedup"
-  execution_state: "do not benchmark as a candidate; baseline/profile launchers now explicitly set both environment and additional config true"
+  source_manifest: configs/qwen35-query-rewrite-mmar-on-candidate.yaml
+  launcher_mode: mmar-on
+  execution_state: "ready on physical NPU4-7 with weight_nz_mode=1 and FlashComm1 disabled"
 operator_candidate:
   id: fused_gdn_prefill
   upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca

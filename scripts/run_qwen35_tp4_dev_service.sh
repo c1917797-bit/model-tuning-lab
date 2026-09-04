@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
+  baseline|mtp|profile|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|profile|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
     exit 64
     ;;
 esac

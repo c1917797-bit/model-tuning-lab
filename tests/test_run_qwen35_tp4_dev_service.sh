@@ -91,6 +91,23 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-mmar-on-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" mmar-on \
+  >"$tmp/mmar-on-fresh.out" 2>"$tmp/mmar-on-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_FLASHCOMM1=0' "$docker_log"
+grep -q -- 'VLLM_ASCEND_ENABLE_NZ=1' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "MatMulAllReduce candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-flashcomm1-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" flashcomm1 \
   >"$tmp/flashcomm1-fresh.out" 2>"$tmp/flashcomm1-fresh.err"
