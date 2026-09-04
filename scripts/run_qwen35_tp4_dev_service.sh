@@ -65,7 +65,12 @@ serve_args=(
 # at /stop_profile and cancels the multiprocess response queue. Profiling is
 # diagnostic-only, so preserve async scheduling for performance candidates and
 # use the synchronous scheduler only for the isolated profiler service.
-if [[ "$mode" != profile ]]; then
+if [[ "$mode" == profile ]]; then
+  # Omitting --async-scheduling is not sufficient in vLLM 0.23.0: the
+  # effective default can still enable it.  Force the diagnostic service onto
+  # the synchronous scheduler so the profiler lifecycle invariant is testable.
+  serve_args+=(--no-async-scheduling)
+else
   serve_args+=(--async-scheduling)
 fi
 
