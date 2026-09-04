@@ -1,0 +1,59 @@
+schema: ascend-inference-experiment/v1
+id: exp-20260904-qwen35-dense-mtp-paper-to-ascend
+status: planned
+decision: pending
+objective: Improve decode throughput and TPOT for the installed dense Qwen3.5-27B without retraining.
+hypothesis: The checkpoint's built-in MTP head can propose tokens cheaply enough that exact speculative verification reduces serial target-model decode steps on Ascend 910B4.
+paper:
+  primary: "Fast Inference from Transformers via Speculative Decoding"
+  arxiv: "2211.17192"
+  model_specific_mechanism: "Qwen3.5 built-in multi-token prediction head"
+selection_evidence:
+  model: "config declares mtp_num_hidden_layers=1; weight index contains 15 mtp tensors"
+  source: "vLLM 0.23.0 and vLLM-Ascend source include qwen3_5_mtp config, model, and Ascend forward patches"
+  profile: "historical decode captures are dominated by repeated MatMul and TP communication; exact MTP targets the number of serial target forwards"
+primary_variable: "speculative_config off -> {method:qwen3_5_mtp,num_speculative_tokens:3,enforce_eager:true}"
+environment:
+  host: chicaihong01
+  hardware: "4 x Ascend 910B4, physical NPU0-3; NPU4-7 excluded"
+  cpu_affinity: "96-191"
+  endpoint: "127.0.0.1:8220"
+  model_path: /cache/austinov/Qwen3.8-27B
+  model_config_sha256: 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab
+  tokenizer_config_sha256: b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27
+  weight_index_sha256: 77042094076611b69791a610065f28b7013b8c621795fa86ddccc8bac7d1b9df
+  dtype: bfloat16
+  tensor_parallel_size: 4
+  image: "quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
+  vllm_commit: 0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665
+  vllm_ascend_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  torch: 2.10.0+cpu
+  torch_npu: 2.10.0.post4
+  cann: 9.1.0
+  driver: 25.2.0
+workload:
+  backend: vllm_bench_serve_openai
+  prompt_tokens: 256
+  output_tokens: 256
+  requests: 64
+  concurrency: [1, 8]
+  ignore_eos: true
+  seed: 20260904
+  repetitions: 3
+  warmup_requests: 8
+metrics:
+  primary: output_tokens_per_second
+  secondary: [request_throughput, ttft_p50, ttft_p95, tpot_p50, tpot_p95, acceptance_rate, hbm_peak]
+thresholds:
+  accept: "median output_tokens_per_second improves >= 5% at concurrency 1 or 8, no tested concurrency regresses > 3%, and correctness passes"
+  regress: "median output throughput regresses > 3% or TPOT p95 regresses > 5%"
+  abort: "NPU4-7 state changes, competing NPU0-3 process appears, MemAvailable < 8 GiB, HBM > 31.5 GiB/device, server errors, or correctness mismatch"
+correctness:
+  greedy_exact_match_prompts: 8
+  requirements: "baseline and MTP text and completion token counts match exactly at temperature 0; zero request errors; physical NPU0-3 execution proven"
+artifacts:
+  root: /cache/austinov/paper-to-ascend/qwen35-dense-mtp
+  retention: "raw JSON/log/profile external to Git; summaries and SHA256 in Git"
+rollback:
+  command: "docker rm -f qwen35_dense_mtp_ab if it exists"
+  safe_tree: "no vLLM or vLLM-Ascend production source mutation"
