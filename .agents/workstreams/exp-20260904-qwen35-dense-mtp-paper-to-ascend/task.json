@@ -1,0 +1,32 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260904-qwen35-dense-mtp-paper-to-ascend",
+  "objective": "Select and land the highest-value no-retraining Paper-to-Ascend inference optimization for the installed dense Qwen3.5-27B checkpoint on vLLM-Ascend 0.23.0, with correctness, repeated A/B benchmarks, profiling, decision, and durable handoff.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260904-qwen35-dense-mtp-paper-to-ascend",
+  "remote": "origin",
+  "originalBase": "fbc79c41c37c8900f0623ce8941304e9bfde5cf1",
+  "createdAt": "2026-09-04",
+  "owner": "codex",
+  "frozenConstraints": {
+    "AGENTS.md": "sha256:e72e4c92f60b98fdf3222afe6398b480ae2d426318878a14da2b947904723afe",
+    ".agents/git-policy.yaml": "sha256:197a379314f64d6249ca6459b23f0e4f6c15d6a9448b44ee7cfa1280dff69174",
+    ".agents/skills/ascend-inference-tuning-loop/SKILL.md": "sha256:f9c7d1768d757b8363858a26211549cfd904a631682ffc4f85d1beef735f786d",
+    ".agents/skills/ascend-benchmark-evidence/SKILL.md": "sha256:fdb67e8ff31b74a42b60d6a27a95c17f646c4f7741755cdca42bf87a497d48a0"
+  },
+  "dependencies": [],
+  "claims": [
+    {"kind":"file","mode":"exclusive","value":"docs/paper-to-ascend/qwen35-dense-mtp.md"},
+    {"kind":"file","mode":"exclusive","value":"configs/paper-to-ascend/qwen35-dense-mtp.yaml"},
+    {"kind":"file","mode":"exclusive","value":"scripts/paper_to_ascend/qwen35_dense_mtp_*"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-qwen35-dense-mtp-paper-to-ascend.yaml"},
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU0-3 and loopback port 8220; NPU4-7 and port 8210 excluded"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python -m unittest discover -s tests -p 'test_qwen35_dense_mtp_*.py'",
+    "git diff --check"
+  ],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
