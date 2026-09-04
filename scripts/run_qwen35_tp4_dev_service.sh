@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp) ;;
+  baseline|mtp|profile) ;;
   *)
-    echo "usage: $0 {baseline|mtp}" >&2
+    echo "usage: $0 {baseline|mtp|profile}" >&2
     exit 64
     ;;
 esac
@@ -13,6 +13,7 @@ esac
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}}"
 port="${PORT:-10010}"
+profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
   echo "refusing to replace existing container: $container_name" >&2
@@ -44,6 +45,14 @@ serve_args=(
 
 if [[ "$mode" == mtp ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1}')
+fi
+
+if [[ "$mode" == profile ]]; then
+  mkdir -p "$profile_dir"
+  serve_args+=(
+    --profiler-config.profiler torch
+    --profiler-config.torch_profiler_dir "$profile_dir"
+  )
 fi
 
 docker_args=(
