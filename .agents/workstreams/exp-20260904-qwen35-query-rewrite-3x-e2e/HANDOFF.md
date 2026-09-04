@@ -234,6 +234,11 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
   isolated request, waits for `kernel_details.csv`, analyzes it, records
   artifact hashes, and stops only the exact container it started while
   retaining the stopped container and logs. Existing output paths are rejected.
+- `scripts/compare_ascend_profiles.py` compares normalized baseline and
+  candidate hotspot reports by category, kernel duration, calls, and
+  microseconds per call. It rejects identical source profiles, hashes both
+  reports, and labels every ratio diagnostic-only/non-acceptance evidence.
+  Formal speed decisions remain exclusively in the frozen E2E A/B gate.
 - At 2026-09-04 16:43:31 UTC, NPU0-3 remained owned by
   `qwen36_27b_dk64_treatment_npu0_3` (PIDs 4111982-4111985) and NPU4-7 by
   `qwen38_gdn_fused_candidate` (PIDs 1312892-1312895). Neither was touched.
