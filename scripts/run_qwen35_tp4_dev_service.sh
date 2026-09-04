@@ -46,4 +46,37 @@ if [[ "$mode" == mtp ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1}')
 fi
 
-docker run -d +  --name "$container_name" +  --network host +  --cpuset-cpus 96-191 +  --device /dev/davinci0 +  --device /dev/davinci1 +  --device /dev/davinci2 +  --device /dev/davinci3 +  --device /dev/davinci_manager +  --device /dev/devmm_svm +  --device /dev/hisi_hdc +  -v /usr/local/Ascend/driver/lib64:/usr/local/Ascend/driver/lib64 +  -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info +  -v /etc/ascend_install.info:/etc/ascend_install.info +  -v /usr/local/dcmi:/usr/local/dcmi +  -v /usr/local/Ascend/driver/tools/hccn_tool:/usr/local/Ascend/driver/tools/hccn_tool +  -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi +  -v /cache/austinov:/cache/austinov +  -v /cache/cch:/cache/cch:ro +  -v "$repo_root":/experiment:ro +  -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 +  -e HCCL_BUFFSIZE=512 +  -e OMP_PROC_BIND=false +  -e OMP_NUM_THREADS=1 +  -e TASK_QUEUE_ENABLE=1 +  -e TRITON_KERNEL_DUMP=1 +  -e TRITON_DUMP_DIR=/cache/efim/triton_dump +  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0 +  -e VLLM_ASCEND_PTO_CHUNK_GDN=1 +  -e VLLM_LOGGING_LEVEL=DEBUG +  quay.io/ascend/vllm-ascend:v0.23.0 +  "${serve_args[@]}"
+docker_args=(
+  run -d
+  --name "$container_name"
+  --network host
+  --cpuset-cpus 96-191
+  --device /dev/davinci0
+  --device /dev/davinci1
+  --device /dev/davinci2
+  --device /dev/davinci3
+  --device /dev/davinci_manager
+  --device /dev/devmm_svm
+  --device /dev/hisi_hdc
+  -v /usr/local/Ascend/driver/lib64:/usr/local/Ascend/driver/lib64
+  -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info
+  -v /etc/ascend_install.info:/etc/ascend_install.info
+  -v /usr/local/dcmi:/usr/local/dcmi
+  -v /usr/local/Ascend/driver/tools/hccn_tool:/usr/local/Ascend/driver/tools/hccn_tool
+  -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi
+  -v /cache/austinov:/cache/austinov
+  -v /cache/cch:/cache/cch:ro
+  -v "$repo_root":/experiment:ro
+  -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3
+  -e HCCL_BUFFSIZE=512
+  -e OMP_PROC_BIND=false
+  -e OMP_NUM_THREADS=1
+  -e TASK_QUEUE_ENABLE=1
+  -e TRITON_KERNEL_DUMP=1
+  -e TRITON_DUMP_DIR=/cache/efim/triton_dump
+  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0
+  -e VLLM_ASCEND_PTO_CHUNK_GDN=1
+  -e VLLM_LOGGING_LEVEL=DEBUG
+)
+
+docker "${docker_args[@]}" quay.io/ascend/vllm-ascend:v0.23.0 "${serve_args[@]}"
