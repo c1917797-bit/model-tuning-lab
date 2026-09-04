@@ -1,0 +1,26 @@
+id: exp-20260904-qwen38-gdn-native-state-layout
+status: planned
+branch: work/exp-20260904-qwen38-gdn-native-state-layout
+hypothesis: "Teaching the AscendC GDN prefill kernel to read/write the persistent SSM cache in its native [N,H,V,K] layout will remove two full transpose+contiguous state copies per GDN prefill layer and improve Qwen3.8 2K->40 latency/throughput without numerical regression."
+primary_variable: "GDN state layout handling in chunk_gated_delta_rule_fwd_h host API + AscendC load/store + Python integration"
+workload:
+  source: /home/mtuser/cch/query_rewrite.jsonl
+  source_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  snapshot: /cache/austinov/eval-data/query_rewrite_2k40.v1.jsonl
+  snapshot_sha256: fd2670e7f56eed2f4764cbad9bad31e2d64545148d7834a1af374f32586d8d71
+  requests: 357
+  input_tokens: 2048
+  output_tokens: 40
+  concurrency: 8
+baseline:
+  prefix_cache: false
+  endpoint: http://127.0.0.1:8210
+  physical_npus: [4,5,6,7]
+acceptance:
+  - "single-op output agrees with baseline within BF16/FP32 tolerances"
+  - "no API errors and all 357 requests remain exactly 2048/40"
+  - "median wall time or output-token throughput improves >= 5% over matched operator-baseline runs"
+abort:
+  - "unexpected process appears on NPU4-7"
+  - "MemAvailable < 20 GiB"
+  - "NPU error/OOM"
