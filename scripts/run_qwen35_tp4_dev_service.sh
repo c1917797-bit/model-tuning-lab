@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|flashcomm1|bf16-nz) ;;
+  baseline|mtp|profile|flashcomm1|bf16-nz|flashcomm1-bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|flashcomm1|bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|profile|flashcomm1|bf16-nz|flashcomm1-bf16-nz}" >&2
     exit 64
     ;;
 esac
@@ -15,6 +15,14 @@ container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}}"
 port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
+flashcomm1_env=0
+weight_nz_env=1
+if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
+  flashcomm1_env=1
+fi
+if [[ "$mode" == bf16-nz || "$mode" == flashcomm1-bf16-nz ]]; then
+  weight_nz_env=2
+fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
   echo "refusing to replace existing container: $container_name" >&2
@@ -57,7 +65,9 @@ serve_args=(
   --mamba-ssm-cache-dtype bfloat16
   --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
   --additional-config "$(
-    if [[ "$mode" == flashcomm1 ]]; then
+    if [[ "$mode" == flashcomm1-bf16-nz ]]; then
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true,"weight_nz_mode":2}'
+    elif [[ "$mode" == flashcomm1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true}'
     elif [[ "$mode" == bf16-nz ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":2}'
@@ -127,8 +137,8 @@ docker_args=(
   -e TRITON_KERNEL_DUMP=1
   -e TRITON_DUMP_DIR=/cache/efim/triton_dump
   -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1
-  -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0
-  -e VLLM_ASCEND_ENABLE_NZ=1
+  -e VLLM_ASCEND_ENABLE_FLASHCOMM1="$flashcomm1_env"
+  -e VLLM_ASCEND_ENABLE_NZ="$weight_nz_env"
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )

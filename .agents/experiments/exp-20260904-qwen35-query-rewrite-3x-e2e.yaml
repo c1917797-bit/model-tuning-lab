@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: waiting_for_canonical_baseline_npu0_3
+status: waiting_for_candidate_npu0_3
 decision: reject_mtp
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -20,7 +20,7 @@ dataset:
   confidential_fields: [question, answer]
 workload:
   concurrency: [1, 5, 8, 16]
-  repetitions: 3
+  repetitions: 1
   warmup: "per concurrency, excluded from measurement"
   seed: 1024
   prompt_mode: raw_question
@@ -35,11 +35,11 @@ final_thresholds:
 loop:
   attribution: "add one primary treatment to the latest accepted stack"
   cumulative: "combine accepted operators, algorithms and parameters"
-  comparison: "compare each treatment with both the previous accepted stack and the original baseline"
+  comparison: "run each candidate alone and compare it with the user-designated fixed original quick32-v3 baseline; add accepted treatments to the current best cumulative stack"
 operator_gate:
-  requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_e2e_ab, paired_profile]
+  requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_fixed_original_comparison, candidate_profile]
 resources:
-  required: "physical NPU0-7 exclusive for the frozen DP2/TP4 baseline"
+  required: "physical NPU0-3 exclusive for one TP4 candidate; the original baseline is reused and NPU4-7 must remain untouched"
   current: "NPU0-3 externally occupied by qwen36_hypic_pdc_baseline_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
@@ -62,9 +62,10 @@ development_runtime:
     result: "28 completed, 4 EOS-only streams initially classified as errors"
     eos_probe: "all four had one choice event, completion_tokens=1, finish_reason=stop and zero visible characters"
     harness_resolution: "TTFT begins at the first choice/token event, including an empty-text EOS token"
-  valid_quick32_baseline:
+  fixed_original_baseline:
     protocol: "TP4 development, first 32 frozen records, one repetition"
-    evidence_scope: "internally valid only for comparisons between development variants that also forced enable_matmul_allreduce=false; not the canonical user baseline and not a denominator for final 2x acceptance"
+    evidence_scope: "user-designated immutable common denominator for every subsequent candidate and the final 2x decision"
+    runtime_caveat: "this run forced enable_matmul_allreduce=false; retain that fact in every decision report instead of relaunching the baseline"
     operation: exec-0000000000000360
     cells:
       1: {completed: 32, errors: 0, ttft_p50_ms: 928.3288100268692, tpot_p50_ms: 38.47182152641416, artifact_sha256: ac39bc922b43d9472fe41f89bae25a0190cf20817147230f8725f151e3ce413a}
@@ -72,10 +73,10 @@ development_runtime:
       8: {completed: 32, errors: 0, ttft_p50_ms: 1082.3116149986163, tpot_p50_ms: 67.61682393548094, artifact_sha256: 4f9799a128128b1e34dca498256833c45f52373cd2486b4acd9298030d7d58ce}
       16: {completed: 32, errors: 0, ttft_p50_ms: 2075.0706249382347, tpot_p50_ms: 80.8116157463221, artifact_sha256: 085c0a43a7a720ba42f1d83bf2ebacebb64e515d24bb3f040eabd5c046f777e4}
   canonical_baseline:
-    status: missing_waiting_for_npu0_3
-    topology: "TP4 development first, then required DP2/TP4 all-eight-NPU formal matrix"
-    invariant: "enable_matmul_allreduce=true in both environment and additional_config"
-    reason: "the prior quick32 and v5 profile explicitly forced the switch false and cannot represent the user's original baseline"
+    status: superseded_by_user_designated_fixed_original
+    topology: "TP4 on physical NPU0-3"
+    invariant: "reuse the exact quick32-v3 bytes and verify their four SHA256 values"
+    reason: "the user explicitly selected the previously collected quick32-v3 run as the permanent baseline; paired or formal baseline reruns are no longer required"
   mtp_candidate:
     container: qwen35_query_rewrite_tp4_dev_mtp
     readiness_operation: exec-0000000000000370
@@ -123,7 +124,7 @@ profile_analysis:
   comparison_semantics: "diagnostic attribution only; kernel sums are not wall time and cannot accept TTFT/TPOT"
   validation: "zero-dependency fixture assertions, py_compile, and 15298-row historical Ascend kernel_details.csv smoke passed"
   semantics: "category shares and top kernels use summed kernel duration; never interpret as wall time because streams may overlap"
-  source_finding: "Qwen3.5 prefill uses a multi-kernel chunk GDN pipeline while decode uses npu_recurrent_gated_delta_rule; select the next treatment only from the new paired profile"
+  source_finding: "Qwen3.5 prefill uses a multi-kernel chunk GDN pipeline while decode uses npu_recurrent_gated_delta_rule; use candidate-only profiles for attribution and fixed-original E2E artifacts for performance decisions"
   orchestration: scripts/capture_qwen35_tp4_profile.sh
   orchestration_guards: "requires unique immutable run/container/profile paths, checks health and OpenAPI endpoints, waits for kernel_details.csv, hashes artifacts, and stops only its own exact container"
   failed_real_attempt:
@@ -170,7 +171,7 @@ parameter_candidate:
     kernel: "with reduce_results and TP size > 1, the BF16 path calls torch_npu.npu_mm_all_reduce_base"
     current_topology: "TP4 satisfies the TP size > 1 activation condition"
     applicability: "dense Qwen3.5 row-parallel projections are in scope; runtime logs/profile must still prove actual activation"
-  required_gates: ["source activation proof", "real query_rewrite correctness", "repeated TP4 A/B", "paired profile", "final DP2/TP4 A/B"]
+  required_gates: ["source activation proof", "real query_rewrite correctness", "TP4 quick32 versus fixed original", "candidate profile"]
   evidence_boundary: "the profiler result prioritizes this candidate but does not predict or prove an E2E speedup"
   execution_state: "do not benchmark as a candidate; baseline/profile launchers now explicitly set both environment and additional config true"
 operator_candidate:
@@ -183,7 +184,7 @@ operator_candidate:
   runtime_symbol_present: true
   direct_patch_apply: false
   upstream_microbenchmark: "11274-token prefill, 5890us -> 4964us (1.186x); not E2E or current-model evidence"
-  portability_rule: "adapt minimal hunks to the exact v0.23.0 image source; never overlay the newer full gdn.py; require runtime activation, reference correctness, real query_rewrite A/B, and paired profile"
+  portability_rule: "adapt minimal hunks to the exact v0.23.0 image source; never overlay the newer full gdn.py; require runtime activation, reference correctness, real query_rewrite comparison with the fixed original, and candidate profiling"
   expected_role: "cumulative operator treatment, not a standalone route to the 2x TTFT/TPOT objective"
 communication_candidate:
   id: bf16_flashcomm1
@@ -196,9 +197,9 @@ communication_candidate:
   applicability: "vLLM-Ascend v0.23.0 Qwen3 dense documentation and Qwen3.5 guidance identify high-concurrency TP as the target workload; current TP4 concurrency 5/8/16 overlaps that regime"
   interaction_boundary: "canonical MatMulAllReduce remains enabled; row-parallel dispatch prefers MatmulAllreduceRowParallelOp, while FlashComm1 still changes eligible sequence-parallel paths"
   graph_caveat: "official guidance says FlashComm1 capture sizes should be TP-size multiples; first isolate only the switch with the frozen capture list, then test a separately attributable capture-size treatment if activation or graph behavior requires it"
-  required_gates: ["startup and activation proof", "zero request errors", "response correctness", "TP4 1/5/8/16 A/B", "paired profile", "DP2/TP4 final A/B"]
-  orchestration: scripts/run_qwen35_tp4_flashcomm1_ab.sh
-  orchestration_semantics: "immutable sequential baseline/candidate services on NPU0-3, exact-container cleanup, complete 12-cell matrices, container config/log capture, correctness and 2x decision report"
+  required_gates: ["startup and activation proof", "zero request errors", "response correctness", "TP4 quick32 versus fixed original", "candidate profile"]
+  orchestration: scripts/run_qwen35_tp4_candidate_vs_original.sh
+  orchestration_semantics: "launch only the candidate on NPU0-3, run one immutable first-32 cell at concurrency 1/5/8/16, stop only that container, compare with hash-locked quick32-v3"
   evidence_boundary: "source and official model guidance establish plausibility only; no current-model speedup is claimed"
 layout_candidate:
   id: bf16_weight_fractal_nz
@@ -212,7 +213,7 @@ layout_candidate:
   source_activation: "utils._should_trans_nz returns true for BF16/FP16 only at mode 2; ops/linear.py applies maybe_trans_nz to non-conv1d unquantized linear weights"
   hardware_scope: "non-310P policy includes Ascend 910B4"
   interaction_risk: "compatibility and performance with canonical MatmulAllreduceRowParallelOp are not established by static source; startup, operator activation, HBM and correctness are mandatory"
-  required_gates: ["startup", "BF16/NZ activation proof", "zero request errors", "exact response correctness", "TP4 A/B", "paired profile", "cumulative-stack A/B", "DP2/TP4 final A/B"]
+  required_gates: ["startup", "BF16/NZ activation proof", "zero request errors", "exact response correctness", "TP4 quick32 versus fixed original", "candidate profile", "cumulative-stack comparison"]
   evidence_boundary: "this is a BF16 storage/layout and kernel-selection candidate, not quantization; no performance claim before real A/B"
 quantization_constraint:
   allowed: false
@@ -250,8 +251,8 @@ rejected_algorithm_candidate:
   correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
   acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
-decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Reject all quantization routes by explicit user constraint. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
-next_loop: "Continue only with BF16 parameter, algorithm, and operator treatments. The v5 runtime proved async_scheduling=False but /stop_profile still failed, so do not retry that profiler endpoint unchanged; recover and analyze any parseable raw v5 data or use an offline/worker-safe profiling path. Acquire NPU0-7 later for final DP2/TP4 A/B."
+decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Reject all quantization routes by explicit user constraint. Reuse quick32-v3 as the user-designated fixed original; no baseline rerun is pending."
+next_loop: "When NPU0-3 are free, run FlashComm1 and BF16 NZ separately against the fixed original, retain accepted treatments, then run the cumulative flashcomm1-bf16-nz stack. Continue adding only BF16 parameter, algorithm, and operator treatments to the best accepted stack. Do not touch NPU4-7."
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
@@ -268,3 +269,18 @@ final_baseline_service:
   image: quay.io/ascend/vllm-ascend:v0.23.0
   resource_gate: "hard fail before manifest render or Docker run when any NPU0-7 process exists"
   identity_gate: "new container name and immutable runtime manifest path required"
+fixed_original_comparison:
+  policy: user_designated_fixed_original_quick32_v3
+  baseline_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v3
+  protocol: "TP4 NPU0-3, first 32 frozen records, one repetition, concurrency 1/5/8/16, seed 1024, natural EOS"
+  candidate_runner: scripts/run_qwen35_candidate_quick32.py
+  decision_analyzer: scripts/analyze_qwen35_candidate_vs_original.py
+  orchestration: scripts/run_qwen35_tp4_candidate_vs_original.sh
+  baseline_rerun: false
+  correctness: "zero errors, 32/32 natural stops, exact per-request response SHA256 equality"
+cumulative_stack:
+  policy: "one new treatment per attribution step; final result is the current best accepted parameter + algorithm + operator stack"
+  first_stack: flashcomm1-bf16-nz
+  source_manifest: configs/qwen35-query-rewrite-flashcomm1-bf16-nz-stack.yaml
+  launcher_mode: flashcomm1-bf16-nz
+  quantized: false

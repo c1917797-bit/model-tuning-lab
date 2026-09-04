@@ -2,12 +2,14 @@
 
 ## State
 
-- Execution: `profile-blocked-external-npu0-3`; integration: `not-ready`.
+- Execution: `fixed-original-locked-waiting-for-candidate-npu0-3`;
+  integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Physical NPU0-3 are externally owned by `p0_ab`
-  (`cd07d22999ba42890bdb1a5773406415fc8fd4564783812cfe3d66ecb3e4d8e2`,
-  PIDs 172441-172444 as of 2026-09-04 17:04:48 UTC).
+- Physical NPU0-3 are externally owned by
+  `qwen36_hypic_pdc_baseline_npu0_3`
+  (`8371abb7731a`, PIDs 435224-435227 as of
+  2026-09-04 17:53:27 UTC).
   Do not stop, restart, inspect inside, or otherwise perturb it.
 - `scripts/run_qwen35_tp4_dev_service.sh` now refuses to start if
   `npu-smi` reports any process on NPU0-3 (exit 42), and profile mode refuses
@@ -20,9 +22,36 @@
   no workstream process remains on NPU0-3. This is a resource-ownership race,
   not valid profile evidence.
 - Physical NPU4-7 are owned by `qwen38_gdn_fused_candidate` on loopback port 8210. Do not stop, restart, inspect inside, or otherwise perturb it.
-- The frozen DP2/TP4 baseline requires all eight NPUs, so no final baseline has
-  started. The running TP4 service is a development baseline only and must not
-  be substituted for final DP2/TP4 evidence.
+- No baseline rerun is pending. The user designated the existing TP4
+  `quick32-v3` artifacts as the immutable original denominator. Future
+  runs need only exclusive NPU0-3 for one candidate; NPU4-7 remain forbidden.
+
+## Authoritative comparison and stacking policy
+
+This section supersedes later historical text that asks for a paired baseline,
+three repetitions, all eight NPUs, or a new canonical baseline.
+
+- Original: `tp4-dev-decodegraph/quick32-v3`, first 32 frozen records,
+  one repetition, concurrency 1/5/8/16, seed 1024, natural EOS.
+- The four original file hashes are embedded in
+  `scripts/analyze_qwen35_candidate_vs_original.py`. A hash mismatch
+  invalidates the run.
+- Run only the candidate with
+  `scripts/run_qwen35_tp4_candidate_vs_original.sh`. It starts one
+  exact TP4 container on NPU0-3, runs four candidate cells, records the
+  container/log/config hashes, stops only that container, then compares with
+  the stored original.
+- Correctness remains fail-closed: 32/32 completed, zero errors, natural stop,
+  and exact per-request response hashes. Analyzer exit status is 0 for the 2x
+  target, 2 for continue iterating, and 3 for correctness rejection.
+- A treatment is isolated for attribution, then accepted treatments are added
+  to the current best stack. Every single treatment and cumulative stack uses
+  the same original denominator. The first supported cumulative mode is
+  `flashcomm1-bf16-nz`; it combines two BF16 paths and is not
+  quantization.
+- Preserve the known caveat: quick32-v3 forced
+  `enable_matmul_allreduce=false`. The user accepted it as the common
+  denominator, so report the caveat but do not relaunch or relabel it.
 
 ## TP4 development evidence
 
@@ -78,7 +107,7 @@
   | 8 | 1082.31 ms | 67.62 ms | `4f9799a128128b1e34dca498256833c45f52373cd2486b4acd9298030d7d58ce` |
   | 16 | 2075.07 ms | 80.81 ms | `085c0a43a7a720ba42f1d83bf2ebacebb64e515d24bb3f040eabd5c046f777e4` |
 
-  These are development A/B anchors only, not the final DP2/TP4 baseline.
+  These are the user-designated immutable original baseline.
 - The MTP candidate uses the same TP4 command plus only
   `{"method":"mtp","num_speculative_tokens":1}`. Readiness is tracked by
   AgentWeb operation `exec-0000000000000370`.
@@ -143,8 +172,9 @@ runtime applicability and correctness on 910B4 still require an isolated probe.
 
 ## Measurement target
 
-Measure concurrency 1, 5, 8 and 16 with three valid warm repetitions per
-cell. The final target is TTFT and TPOT no greater than one half of the
+Measure the first 32 records once at concurrency 1, 5, 8 and 16 for each
+candidate, with one excluded warmup per cell. The final target is TTFT and
+TPOT no greater than one half of the
 original baseline at every concurrency, with zero request errors, passing
 business correctness, and no unacceptable p95/p99 regression.
 
@@ -153,19 +183,20 @@ continuity; the authoritative goal was revised to 2x on 2026-09-04.
 
 ## Optimization loop
 
-1. Acquire explicit exclusive ownership of physical NPU0-7.
+1. Acquire explicit exclusive ownership of physical NPU0-3; never touch NPU4-7.
 2. Freeze request rendering, output policy, seed and service/runtime identity.
-3. Record the original DP2/TP4 baseline for concurrency 1/5/8/16.
+3. Verify, but do not rerun, the hash-locked original quick32-v3 artifacts.
 4. Profile Prefill, Decode, GDN, MatMul/AllReduce, Attention, scheduling,
    graph coverage, layout conversion and host synchronization.
 5. Add one attributable treatment to the latest accepted stack: operator,
    algorithm, or parameter.
 6. Verify reference, microbenchmark, vLLM-Ascend integration, model
    correctness and query_rewrite E2E behavior.
-7. Compare both against the immediately previous accepted stack and the
-   immutable original baseline.
+7. Compare the treatment or cumulative stack against the immutable original.
+   Use the retained single-treatment/ablation history to explain attribution.
 8. Preserve accepted, rejected, failed and inconclusive results.
-9. After individual treatments pass, run combination and ablation A/B.
+9. Add each accepted treatment to the current best stack and repeat until both
+   TTFT and TPOT reach 2x at all four concurrencies.
 
 The privacy-preserving streaming harness is
 `scripts/qwen35_query_rewrite_bench.py`. One invocation measures one
@@ -203,12 +234,12 @@ runtime manifest, passes its exact environment and argv to the fixed
 Mocked occupied and idle-path tests prove both the ownership gate and the
 rendered DP2/TP4/device/environment command.
 
-`scripts/analyze_qwen35_query_rewrite_ab.py` is the fail-closed decision
-gate. It requires all 24 artifacts (baseline/candidate × concurrency 1/5/8/16
-× repetitions 1/2/3), identical model/data/request identities, zero errors,
-complete request sets and exact response-hash equality. It emits
-`final-target-met` only when both median-of-run-p50 TTFT and TPOT ratios are
-at most 0.5 in every concurrency cell.
+`scripts/analyze_qwen35_candidate_vs_original.py` is the authoritative
+decision gate. It verifies the four fixed baseline SHA256 values and requires
+four candidate artifacts (concurrency 1/5/8/16 × repetition 1), identical
+model/data/request identities, zero errors, complete natural-stop request sets
+and exact response-hash equality. It emits `final-target-met` only when
+both TTFT and TPOT ratios are at most 0.5 in every concurrency cell.
 
 The final stack is expected to combine core operators, algorithms and
 configuration. "One variable" applies to each attribution step, not to the
@@ -225,7 +256,8 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 2. repeated operator benchmark;
 3. feature-flagged integration into vLLM-Ascend;
 4. model-level correctness under DP2/TP4;
-5. query_rewrite E2E A/B and paired profile evidence.
+5. query_rewrite quick32 versus fixed-original E2E evidence and a
+   candidate-only diagnostic profile.
 
 ## Profile analysis readiness
 
@@ -314,10 +346,10 @@ invalid. The fix still requires runtime validation because the v3 launch operati
 `exec-0000000000000422` then exited 42 before Docker because `p0_ab` acquired
 NPU0-3. Do not reuse either failed attempt's paths as evidence. Do
 not treat `VLLM_ASCEND_PTO_CHUNK_GDN` as a treatment. Do not perturb either
-external NPU0-3 or NPU4-7 workload. When all eight NPUs are explicitly released,
-render
-the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
-its normalized JSON arguments and run the final four-cell original baseline.
+external NPU0-3 or NPU4-7 workload. Do not wait for or acquire NPU4-7. When
+NPU0-3 are explicitly released, run one candidate at a time with
+`scripts/run_qwen35_tp4_candidate_vs_original.sh`; the original
+baseline is never relaunched.
 
 ## Fused GDN portability boundary
 
@@ -332,7 +364,8 @@ does not apply cleanly to that source. Do not mount the newer full `gdn.py`
 from `/cache/cch/vllm-ascend`; it contains broader API changes. Port only the
 minimal fused-op hunks against the exact image source, keep a feature flag and
 fallback, then require activation proof, reference correctness, real
-query_rewrite A/B and a paired profile. Treat it as one cumulative operator
+query_rewrite comparison with the fixed original and a candidate profile.
+Treat it as one cumulative operator
 treatment, not evidence of the requested 2x result.
 
 ## Quantization route — prohibited
@@ -365,12 +398,13 @@ multiples; if runtime activation or graph behavior requires that change, treat
 it as a separate cumulative parameter treatment rather than silently combining
 variables.
 
-Use `scripts/run_qwen35_tp4_flashcomm1_ab.sh` for the real TP4 decision. It
-requires unique `RUN_ID` and absolute new `OUTPUT_ROOT`, starts the
-canonical baseline and candidate sequentially, records each container inspect
-and log, runs all 1/5/8/16 by three-repetition cells, and emits a correctness
-plus 2x decision report and hashes. Its trap stops only the exact container it
-started; the underlying launcher still rejects any existing NPU0-3 process.
+Use `scripts/run_qwen35_tp4_candidate_vs_original.sh` for the real TP4
+decision. It requires unique `RUN_ID` and absolute new
+`OUTPUT_ROOT`, starts only the selected candidate, records its
+container inspect and log, runs first-32 once at 1/5/8/16, and emits a
+correctness plus 2x decision report and hashes. Its trap stops only the exact
+container it started; the underlying launcher rejects any existing NPU0-3
+process.
 
 The next queued candidate is BF16 weight `FRACTAL_NZ`, isolated as
 `weight_nz_mode=2` in
@@ -385,12 +419,10 @@ proven by static inspection.
 
 ## Baseline evidence correction
 
-The prior TP4 `quick32-v3` metrics remain valid only for comparisons among
-the old development variants that all forced
-`enable_matmul_allreduce=false`. They are **not** the canonical user baseline
-and must never be used as the denominator for the 2x acceptance claim. The
-canonical baseline still needs to be captured with MatMulAllReduce explicitly
-true, first as TP4 development evidence and finally as the full DP2/TP4
-1/5/8/16 by three-repetition matrix. MTP remains rejected because it both
-regressed against its paired development control and changed response hashes;
-that rejection does not promote the old control to canonical status.
+The prior TP4 `quick32-v3` metrics are now the user-designated fixed
+original denominator for the 2x goal. They forced
+`enable_matmul_allreduce=false`; this remains a mandatory caveat in
+decision reports, not a reason to rerun baseline. Every candidate must match
+the original first-32/one-repeat/request semantics and pass the hash-locked
+analyzer. MTP remains rejected because it regressed and changed response
+hashes.

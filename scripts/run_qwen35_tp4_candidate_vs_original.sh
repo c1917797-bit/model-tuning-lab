@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+run_id="${RUN_ID:?set RUN_ID to a unique immutable id}"
+output_root="${OUTPUT_ROOT:?set OUTPUT_ROOT to a new absolute directory}"
+candidate_mode="${CANDIDATE_MODE:-flashcomm1}"
+candidate_id="${CANDIDATE_ID:-$candidate_mode}"
+port="${PORT:-10010}"
+base_url="http://127.0.0.1:$port"
+readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
+original_dir="${ORIGINAL_BASELINE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v3}"
+candidate_container="${CANDIDATE_CONTAINER:-qwen35_tp4_${candidate_mode}_$run_id}"
+active_container=""
+active_log=""
+
+case "$candidate_mode" in
+  flashcomm1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-candidate.yaml"
+    ;;
+  bf16-nz)
+    default_config="$repo_root/configs/qwen35-query-rewrite-bf16-nz-candidate.yaml"
+    ;;
+  flashcomm1-bf16-nz)
+    default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-bf16-nz-stack.yaml"
+    ;;
+  *)
+    echo "unsupported CANDIDATE_MODE: $candidate_mode" >&2
+    exit 64
+    ;;
+esac
+candidate_config="${CANDIDATE_CONFIG:-$default_config}"
+
+case "$output_root" in
+  /*) ;;
+  *) echo "OUTPUT_ROOT must be absolute" >&2; exit 64 ;;
+esac
+if [[ -e "$output_root" ]]; then
+  echo "refusing to reuse immutable output root: $output_root" >&2
+  exit 44
+fi
+if [[ ! -f "$candidate_config" ]]; then
+  echo "candidate config does not exist: $candidate_config" >&2
+  exit 66
+fi
+if docker container inspect "$candidate_container" >/dev/null 2>&1; then
+  echo "refusing to replace existing container: $candidate_container" >&2
+  exit 41
+fi
+
+mkdir -p "$output_root"
+
+cleanup() {
+  local status=$?
+  if [[ -n "$active_container" ]] &&
+     docker container inspect "$active_container" >/dev/null 2>&1; then
+    docker logs "$active_container" >"$active_log" 2>&1 || true
+    docker stop --time 30 "$active_container" >/dev/null || true
+  fi
+  exit "$status"
+}
+trap cleanup EXIT INT TERM
+
+wait_for_health() {
+  local deadline=$((SECONDS + readiness_timeout))
+  while (( SECONDS < deadline )); do
+    if [[ "$(docker inspect -f '{{.State.Running}}' "$candidate_container" 2>/dev/null || true)" != true ]]; then
+      echo "$candidate_container exited before readiness" >&2
+      return 70
+    fi
+    if curl --fail --silent --max-time 5 "$base_url/health" >/dev/null; then
+      return 0
+    fi
+    sleep 5
+  done
+  echo "$candidate_container did not become healthy within ${readiness_timeout}s" >&2
+  return 71
+}
+
+active_container="$candidate_container"
+active_log="$output_root/service.log"
+env CONTAINER_NAME="$candidate_container" PORT="$port" \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" "$candidate_mode"
+wait_for_health
+docker inspect "$candidate_container" >"$output_root/container-inspect.json"
+
+python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
+  --base-url "$base_url" \
+  --candidate-id "$candidate_id" \
+  --candidate-mode "$candidate_mode" \
+  --candidate-config "$candidate_config" \
+  --run-id "$run_id" \
+  --output-root "$output_root/candidate"
+
+docker logs "$candidate_container" >"$active_log" 2>&1 || true
+docker stop --time 30 "$candidate_container" >/dev/null
+active_container=""
+active_log=""
+
+set +e
+python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
+  --original-dir "$original_dir" \
+  --candidate-dir "$output_root/candidate" \
+  --candidate-id "$candidate_id" \
+  --target-ratio 0.5 \
+  --output "$output_root/decision.json"
+decision_status=$?
+set -e
+if [[ "$decision_status" != 0 && "$decision_status" != 2 &&
+      "$decision_status" != 3 ]]; then
+  echo "candidate analyzer failed with status $decision_status" >&2
+  exit "$decision_status"
+fi
+
+sha256sum \
+  "$output_root/container-inspect.json" \
+  "$output_root/candidate/candidate-run.json" \
+  "$output_root/candidate/c1-r1.json" \
+  "$output_root/candidate/c5-r1.json" \
+  "$output_root/candidate/c8-r1.json" \
+  "$output_root/candidate/c16-r1.json" \
+  "$output_root/decision.json" >"$output_root/SHA256SUMS"
+
+echo "completed TP4 candidate versus fixed original baseline: $output_root"
+echo "decision analyzer status: $decision_status (0=2x target, 2=iterate, 3=reject correctness)"

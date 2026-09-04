@@ -1,7 +1,7 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "status": "not-ready-resource-blocked",
+  "status": "not-ready-waiting-for-candidate-evidence",
   "targetParent": "main",
   "sourceCommit": null,
   "validation": [
@@ -10,8 +10,16 @@
       "result": "PASS: model and dataset identities frozen; NPU ownership observed"
     },
     {
+      "gate": "fixed-original",
+      "result": "PASS: user-designated TP4 quick32-v3 reference locked by four artifact SHA256 values; future candidates use first 32 records, one repetition and concurrency 1/5/8/16"
+    },
+    {
+      "gate": "cumulative-policy",
+      "result": "PASS: treatments are measured individually for attribution, accepted treatments are added to the current best BF16 stack, and every stack is compared with the same original"
+    },
+    {
       "gate": "runtime-isolation",
-      "result": "BLOCKED: NPU0-3 and NPU4-7 are externally occupied by separate workloads, so the eight-card DP2/TP4 baseline cannot start"
+      "result": "WAITING: NPU0-3 are externally occupied, so no candidate may start; NPU4-7 are explicitly out of scope and must remain untouched"
     }
   ]
 }

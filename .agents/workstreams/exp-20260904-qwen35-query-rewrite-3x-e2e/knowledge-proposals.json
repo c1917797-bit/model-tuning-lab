@@ -1,5 +1,24 @@
 {
   "schema": "mst-knowledge-proposals/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "proposals": []
+  "proposals": [
+    {
+      "id": "fixed-original-baseline-reuse",
+      "status": "accepted-local",
+      "lesson": "When the owner designates an existing real-workload baseline, lock the exact artifact hashes and run only new candidates. Preserve runtime differences as an explicit caveat; do not silently relabel the old configuration.",
+      "evidence": "quick32-v3 completed 32/32 natural-stop requests with zero errors at concurrency 1, 5, 8 and 16"
+    },
+    {
+      "id": "cumulative-stack-with-attribution",
+      "status": "accepted-local",
+      "lesson": "One variable is an attribution step, not a final-stack constraint. Measure a treatment alone, retain it only after correctness and performance gates, add it to the current best stack, and keep ablations while comparing every stack with the same original.",
+      "evidence": "FlashComm1, BF16 FRACTAL_NZ and their non-quantized cumulative launcher/config are isolated"
+    },
+    {
+      "id": "correctness-before-speed",
+      "status": "accepted-local",
+      "lesson": "Natural EOS includes empty-text EOS-only completions; benchmark TTFT from the first token event. Reject an optimization even when transport succeeds if response hashes diverge.",
+      "evidence": "The harness correction recovered four valid EOS-only requests; Qwen3.5 MTP was rejected with 16-21 response mismatches and latency regressions"
+    }
+  ]
 }

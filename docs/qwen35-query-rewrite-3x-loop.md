@@ -7,14 +7,14 @@ treatment, then retained or removed before the next treatment is added.
 
 ```text
 orient
--> freeze original DP2/TP4 baseline
+-> lock original TP4 quick32-v3 baseline by SHA256
 -> profile TTFT/TPOT critical paths
--> optimize and integrate a core operator
--> add an inference algorithm
--> tune runtime parameters
--> combine accepted treatments
--> run ablations
--> verify concurrency 1/5/8/16 against the immutable original baseline
+-> measure one parameter / algorithm / operator treatment
+-> reject regressions or correctness failures
+-> add an accepted treatment to the current best stack
+-> measure the cumulative stack against the same original baseline
+-> retain single-treatment and ablation evidence for attribution
+-> repeat until both metrics reach 2x at concurrency 1/5/8/16
 ```
 
 An operator result is not complete until the operator is selected at runtime
@@ -24,3 +24,17 @@ inside Qwen3.5-27B on vLLM-Ascend and produces a valid improvement on
 Final success requires TTFT and TPOT at or below one half of the original
 baseline for concurrency 1, 5, 8 and 16, with correct business outputs, zero
 request errors, safe HBM, and acceptable tail latency.
+
+The user-designated original denominator is the immutable TP4
+`quick32-v3` run: first 32 records, one repetition, seed 1024 and natural EOS.
+Every candidate uses exactly that request protocol and runs by itself; the
+original service is not relaunched. The four original artifacts and their
+SHA256 values are hard-coded into the decision analyzer. A candidate result is
+invalid if any baseline hash, dataset identity, request count, termination
+reason or response hash check fails.
+
+"One treatment" is an attribution rule, not a final-stack restriction. For
+example, FlashComm1 and BF16 FRACTAL_NZ are first measured separately. If both
+are accepted, `flashcomm1-bf16-nz` measures their cumulative effect. Later
+accepted algorithms and feature-flagged operators are added to that best stack
+the same way. Quantization is prohibited.
