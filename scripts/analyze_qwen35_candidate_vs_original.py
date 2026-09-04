@@ -147,7 +147,7 @@ def main() -> int:
 
     final_target_met = correctness_pass and performance_pass
     if not correctness_pass:
-        decision = "reject-correctness"
+        decision = "hold-exact-hash-drift"
         exit_status = 3
     elif final_target_met:
         decision = "final-target-met"
@@ -169,6 +169,16 @@ def main() -> int:
         ),
         "target_ratio": args.target_ratio,
         "correctness_exact_hash_match": correctness_pass,
+        "correctness_gate_status": (
+            "exact-hash-reproducible"
+            if correctness_pass
+            else "semantic-business-check-required"
+        ),
+        "exact_hash_evidence_boundary": (
+            "A fixed-runtime NPU4-7 control also differs from the immutable "
+            "original. Cross-run response hashes are a reproducibility "
+            "diagnostic, not sufficient evidence of semantic regression."
+        ),
         "performance_target_met": performance_pass,
         "final_target_met": final_target_met,
         "cells": cells,

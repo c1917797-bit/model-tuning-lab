@@ -1,7 +1,7 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "status": "not-ready-control-attribution-required",
+  "status": "not-ready-profile-and-semantic-gate-required",
   "targetParent": "main",
   "sourceCommit": null,
   "validation": [
@@ -40,6 +40,18 @@
     {
       "gate": "resource-release",
       "result": "PASS: the exact MMAR container self-cleaned, NPU4-7 have no running process, and the four pre-existing NPU0-3 VLLM workers were not touched"
+    },
+    {
+      "gate": "fixed-runtime-control",
+      "result": "PASS for calibration: a no-op BF16/MMAR-off/NZ1/FlashComm1-off control completed all four cells on NPU4-7; it showed 15/15/19/16 response-hash differences versus the immutable original, proving cross-run exact hashes are not a calibrated semantic gate"
+    },
+    {
+      "gate": "matmulallreduce-same-device-attribution",
+      "result": "HOLD: versus the NPU4-7 control, MMAR improved TPOT only 1.000-1.053x and c1-c8 TTFT only 1.02-1.09x; c16 TTFT showed 6.41x but requires repeat/profile because the single control cell was highly variable"
+    },
+    {
+      "gate": "semantic-correctness-harness",
+      "result": "PASS static validation: future runs record only aggregate answer exact-match and normalized character-similarity metrics; raw prompts, references and responses remain absent from artifacts"
     }
   ]
 }

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
+import difflib
 import hashlib
 import json
 import math
@@ -58,6 +59,28 @@ def load_questions(path: Path, limit: int) -> list[str]:
     if not questions:
         raise ValueError("dataset contains no questions")
     return questions
+
+
+def load_answers(path: Path, limit: int) -> list[str]:
+    answers: list[str] = []
+    with path.open(encoding="utf-8") as stream:
+        for line_number, line in enumerate(stream, start=1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            answer = row.get("answer")
+            if not isinstance(answer, str):
+                raise ValueError(f"record {line_number} has no string answer")
+            answers.append(answer)
+            if limit and len(answers) >= limit:
+                break
+    if not answers:
+        raise ValueError("dataset contains no answers")
+    return answers
+
+
+def normalize_reference_text(value: str) -> str:
+    return " ".join(value.split())
 
 
 def token_info(
@@ -156,6 +179,9 @@ def request_one(
         "completion_tokens": completion_tokens,
         "finish_reason": finish_reason,
         "response_sha256": hashlib.sha256(output.encode()).hexdigest(),
+        # Kept only in process memory for privacy-safe aggregate reference
+        # metrics. It is removed before the JSON artifact is assembled.
+        "_response_text": output,
     }
 
 
@@ -185,6 +211,9 @@ def main() -> int:
             f"got {actual_hash}"
         )
     questions = load_questions(args.dataset, args.limit)
+    answers = load_answers(args.dataset, args.limit)
+    if len(answers) != len(questions):
+        raise ValueError("question and answer counts differ")
     token_limits = [
         token_info(args.base_url, args.model, question, args.timeout)
         for question in questions
@@ -219,7 +248,9 @@ def main() -> int:
         ]
         for index, future in enumerate(futures):
             try:
-                results.append(future.result())
+                row = future.result()
+                row["_request_index"] = index
+                results.append(row)
             except Exception as exc:  # Preserve count/type without prompt data.
                 errors.append(
                     {
@@ -234,6 +265,22 @@ def main() -> int:
     if not results:
         raise RuntimeError(f"all requests failed: {errors}")
     completion_tokens = sum(int(row["completion_tokens"]) for row in results)
+    raw_exact_matches = 0
+    normalized_exact_matches = 0
+    reference_similarity: list[float] = []
+    for row in results:
+        request_index = int(row.pop("_request_index"))
+        response_text = str(row.pop("_response_text"))
+        answer = answers[request_index]
+        normalized_response = normalize_reference_text(response_text)
+        normalized_answer = normalize_reference_text(answer)
+        raw_exact_matches += response_text == answer
+        normalized_exact_matches += normalized_response == normalized_answer
+        reference_similarity.append(
+            difflib.SequenceMatcher(
+                None, normalized_answer, normalized_response, autojunk=False
+            ).ratio()
+        )
     finish_reasons: dict[str, int] = {}
     for row in results:
         reason = str(row["finish_reason"])
@@ -274,6 +321,13 @@ def main() -> int:
         "pretokenized_prompt_tokens": summarize(
             [float(item[0]) for item in token_limits]
         ),
+        "reference_quality": {
+            "reference_field": "answer",
+            "raw_exact_matches": raw_exact_matches,
+            "normalized_whitespace_exact_matches": normalized_exact_matches,
+            "normalized_character_similarity": summarize(reference_similarity),
+            "privacy": "aggregate metrics only; no question, answer, or response text stored",
+        },
         "response_sha256": [row["response_sha256"] for row in results],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

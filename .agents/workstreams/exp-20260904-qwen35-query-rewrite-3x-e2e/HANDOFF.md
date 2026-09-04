@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `control-mmar-off-ready-on-npu4-7`;
+- Execution: `fixed-runtime-profile-next-after-control-calibration`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -85,6 +85,32 @@
   BF16, MMAR off, NZ mode 1, FlashComm1 off, TP4 and the frozen request
   protocol. It is an attribution control only: the fixed quick32-v3 artifacts
   remain the sole performance denominator and are not rerun or relabeled.
+- The control completed as
+  `control-mmar-off-fixedorig-npu4-7-20260904T1943Z` under AWMCP operation
+  `exec-000000000000063b`. It reproduced the original runtime switches and
+  completed every cell 32/32 with zero errors and natural stops. Its TTFT p50
+  was 449.81/530.76/542.48/5903.78 ms and TPOT p50 was
+  28.76/39.02/46.39/55.03 ms at concurrency 1/5/8/16.
+- The control itself differed from the immutable original in 15/15/19/16
+  response hashes. Therefore cross-run exact-hash equality is not a calibrated
+  semantic correctness gate for this workload. Keep it as a reproducibility
+  diagnostic and fail closed until aggregate reference-quality metrics pass.
+  Future benchmark artifacts now add privacy-safe raw/whitespace-normalized
+  exact-answer counts and normalized character-similarity summaries; they
+  never store question, answer or response text.
+- Relative to the same-device control, MMAR changed TTFT by
+  1.04x/1.02x/1.09x/6.41x and TPOT by
+  1.004x/1.000x/1.019x/1.053x. The c16 TTFT signal is large but comes from a
+  single highly variable control cell; repeat/profile it before credit. MMAR
+  remains outside the accepted stack because its net TPOT gain is at most
+  5.3% and semantic correctness has not passed.
+- Control evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/control-mmar-off-fixedorig-npu4-7-20260904T1943Z/decision.json`
+  (SHA256
+  `ff77a6fc8aadbf6d0561834b9f42a12a562cee76f5da4c4a6f9ae68eaf803b39`).
+  The service log SHA256 is
+  `6d3b7a82b31be3ab55d10107e68cd14c064bb2fdef90afe1567534692987c0bc`.
+  NPU4-7 were released; NPU0-3 workers remained untouched.
 
 ## Authoritative comparison and stacking policy
 

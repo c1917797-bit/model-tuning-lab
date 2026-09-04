@@ -66,7 +66,8 @@ with tempfile.TemporaryDirectory() as directory:
     )
     assert result.returncode == 3
     report = json.loads(report_path.read_text(encoding="utf-8"))
-    assert report["decision"] == "reject-correctness"
+    assert report["decision"] == "hold-exact-hash-drift"
     assert report["correctness_exact_hash_match"] is False
+    assert report["correctness_gate_status"] == "semantic-business-check-required"
 
 print("PASS: fixed-original analyzer")

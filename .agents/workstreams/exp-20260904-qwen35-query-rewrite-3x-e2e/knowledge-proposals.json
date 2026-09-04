@@ -43,6 +43,18 @@
       "status": "accepted-local",
       "lesson": "When a nominally semantics-preserving communication switch changes exact response hashes and produces a large TTFT shift across a different physical device set, do not credit the whole delta to the switch. Keep the owner-designated original immutable, but run a no-op control candidate on the assigned devices to quantify run/device drift before accepting correctness criteria or performance attribution.",
       "evidence": "MMAR-only run mmar-on-fixedorig-npu4-7-20260904T1921Z completed all cells but mismatched 17/20/17/15 response hashes; decision SHA256 870c8f04911b838670d4e0414b3846d14fa7cb2cb0774b15230a573f681ecc0b"
+    },
+    {
+      "id": "cross-run-hash-is-reproducibility-not-semantic-correctness",
+      "status": "accepted-local",
+      "lesson": "If a no-op control with the same model, seed and runtime switches changes many output hashes, exact equality to a historical run is not a calibrated semantic correctness gate. Keep the hashes as a diagnostic, fail closed, and add privacy-safe aggregate comparison to labeled references before accepting a treatment.",
+      "evidence": "Control run control-mmar-off-fixedorig-npu4-7-20260904T1943Z differed from the original in 15/15/19/16 hashes; control decision SHA256 ff77a6fc8aadbf6d0561834b9f42a12a562cee76f5da4c4a6f9ae68eaf803b39"
+    },
+    {
+      "id": "fixed-denominator-can-overstate-treatment-effect",
+      "status": "accepted-local",
+      "lesson": "Continue reporting every candidate against the owner-designated fixed denominator, but also use a same-device no-op control for causal attribution. In this run the fixed-original comparison suggested large MMAR gains, while the same-device control reduced net TPOT gain to 0-5.3% and c1-c8 TTFT gain to 2.4-8.6%.",
+      "evidence": "MMAR run mmar-on-fixedorig-npu4-7-20260904T1921Z versus control run control-mmar-off-fixedorig-npu4-7-20260904T1943Z"
     }
   ]
 }
