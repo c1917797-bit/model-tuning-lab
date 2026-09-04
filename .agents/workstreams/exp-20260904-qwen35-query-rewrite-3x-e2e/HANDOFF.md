@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `matmulallreduce-only-ready-on-npu4-7`;
+- Execution: `matmulallreduce-only-rejected-correctness-and-tpot`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -59,6 +59,27 @@
   `323ee9620294fba17bfd678e30bab5012512e211c9016303e9c8ef0ddb2b791a`).
   The service log SHA256 is
   `bc6bb41f630cdaa2c2d44496e43ce591586d53566cb974d0066d379f08cfd438`.
+- MatMulAllReduce enabled alone completed all four real NPU4-7 cells as run
+  `mmar-on-fixedorig-npu4-7-20260904T1921Z`. Every cell completed 32/32
+  requests with zero transport errors and natural stops. Against the immutable
+  original, TTFT p50 improved 2.14x/2.11x/2.17x/2.25x at concurrency
+  1/5/8/16, but TPOT p50 improved only 1.34x/1.38x/1.49x/1.55x. Exact response
+  hashes differed for 17/20/17/15 requests, so the authoritative decision is
+  `reject-correctness`; do not add MMAR to the cumulative stack.
+- MMAR decision evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-fixedorig-npu4-7-20260904T1921Z/decision.json`
+  (SHA256
+  `870c8f04911b838670d4e0414b3846d14fa7cb2cb0774b15230a573f681ecc0b`).
+  The service log SHA256 is
+  `8ddc953a33dd994646d7214336a5a0a9b7d752d7fffc8e1b98f38120e1e610c0`.
+  The exact candidate container self-cleaned; NPU4-7 have no running process,
+  while the pre-existing NPU0-3 VLLM workers remained untouched.
+- Because a nominally semantics-preserving MMAR switch still changed exact
+  hashes and showed a large TTFT p50 shift, the next attribution step is a
+  no-op BF16 control candidate on NPU4-7 matching the fixed original runtime
+  switches (MMAR off, NZ mode 1, FlashComm1 off). It does not replace or
+  relabel the immutable original; it calibrates run/device drift before the
+  next operator or algorithm candidate is credited.
 
 ## Authoritative comparison and stacking policy
 
@@ -472,25 +493,21 @@ FlashComm1 disabled. This is a valid single-variable treatment relative to the
 actual fixed original, which forced MatMulAllReduce false, and it targets the
 profiled AllReduce bottleneck without either failed interaction.
 
-That candidate is now implemented as launcher mode `mmar-on` and
+That candidate was implemented as launcher mode `mmar-on` and
 `configs/qwen35-query-rewrite-mmar-on-candidate.yaml`. It explicitly keeps
-NZ mode 1, FlashComm1 false and BF16/no quantization. Run it with the
-fixed-original orchestrator on physical NPU4-7.
+NZ mode 1, FlashComm1 false and BF16/no quantization. Its real run met the TTFT
+p50 target but missed the TPOT target and exact-hash gate, so it is rejected.
 
 ### Active resource handoff
 
 The user confirmed that physical NPU4-7 are assigned to this workstream;
-continue to leave NPU0-3 untouched. At 2026-09-04 18:59 UTC, a separate
-self-bounded `/cache/austinov/p0/pin_ab_47.sh` A/B acquired NPU4-7 through
-container `p0_ab`. Do not interrupt it: the runner tests `PIN_META=0/1`
-and removes its own container after both treatments.
-
-AWMCP operation `exec-00000000000005d7` watches the exact host runner PID
-`1087333` and reports the post-release NPU snapshot. A second operation,
-`exec-00000000000005e6`, waits for that same PID, rejects an occupied port
-10010, and then launches the real `mmar-on` candidate on NPU4-7. Poll the
-second operation for the benchmark result. The service launcher still performs
-its own NPU idle guard before Docker, so the two workloads cannot overlap.
+continue to leave NPU0-3 untouched. The separate bounded
+`/cache/austinov/p0/pin_ab_47.sh` run completed and self-cleaned. Watcher
+operation `exec-00000000000005d7` proved NPU4-7 were released without
+disturbing the NPU0-3 workers. Deferred operation
+`exec-00000000000005e6` then ran the complete MMAR candidate and also
+self-cleaned. The post-run snapshot shows no process on NPU4-7 and the same
+four pre-existing VLLM worker PIDs on NPU0-3.
 
 ## Baseline evidence correction
 

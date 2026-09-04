@@ -37,6 +37,12 @@
       "status": "accepted-local",
       "lesson": "A treatment can deliver a real median win in part of the matrix and still be rejected. BF16 FRACTAL_NZ with MatMulAllReduce disabled roughly halved c1/c5 TTFT, but it changed exact outputs, missed the TPOT target, and regressed c16 TTFT. Preserve the useful locality signal without promoting the treatment to the cumulative stack.",
       "evidence": "Run bf16-nz-mmar-off-fixedorig-npu4-7-20260904T1845Z; decision SHA256 323ee9620294fba17bfd678e30bab5012512e211c9016303e9c8ef0ddb2b791a"
+    },
+    {
+      "id": "semantics-preserving-switch-needs-control-attribution",
+      "status": "accepted-local",
+      "lesson": "When a nominally semantics-preserving communication switch changes exact response hashes and produces a large TTFT shift across a different physical device set, do not credit the whole delta to the switch. Keep the owner-designated original immutable, but run a no-op control candidate on the assigned devices to quantify run/device drift before accepting correctness criteria or performance attribution.",
+      "evidence": "MMAR-only run mmar-on-fixedorig-npu4-7-20260904T1921Z completed all cells but mismatched 17/20/17/15 response hashes; decision SHA256 870c8f04911b838670d4e0414b3846d14fa7cb2cb0774b15230a573f681ecc0b"
     }
   ]
 }

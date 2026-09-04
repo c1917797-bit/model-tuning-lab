@@ -1,7 +1,7 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "status": "not-ready-waiting-for-candidate-evidence",
+  "status": "not-ready-control-attribution-required",
   "targetParent": "main",
   "sourceCommit": null,
   "validation": [
@@ -32,6 +32,14 @@
     {
       "gate": "bf16-nz-matmulallreduce-off-e2e",
       "result": "REJECT: four 32/32 zero-error natural-stop cells completed, but exact response hashes differed 19/18/15/18 times, TPOT improved only 1.33-1.54x, and c16 TTFT regressed to 0.58x"
+    },
+    {
+      "gate": "matmulallreduce-only-e2e",
+      "result": "REJECT: four 32/32 zero-error natural-stop cells completed; TTFT p50 improved 2.14-2.25x, but TPOT p50 improved only 1.34-1.55x and exact response hashes differed 17/20/17/15 times"
+    },
+    {
+      "gate": "resource-release",
+      "result": "PASS: the exact MMAR container self-cleaned, NPU4-7 have no running process, and the four pre-existing NPU0-3 VLLM workers were not touched"
     }
   ]
 }
