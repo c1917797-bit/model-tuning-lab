@@ -1,5 +1,16 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "handoff-dense-transition-20260904",
-  "status": "pending"
+  "status": "ready",
+  "targetParent": "fbc79c41c37c8900f0623ce8941304e9bfde5cf1",
+  "sourceCommit": "e8e1db1f56a3d378bd98d79918d7cdfcd0d6294f",
+  "validation": [
+    {"command": "./scripts/validate-mst.sh", "result": "PASS (17 skills)"},
+    {"command": "python json parse of workstream state", "result": "PASS"},
+    {"command": "global HANDOFF required-section order check", "result": "PASS"},
+    {"command": "git diff --check", "result": "PASS"}
+  ],
+  "remoteWorkstreamTip": "self",
+  "mergeMode": "no_ff",
+  "note": "sourceCommit is the validated handoff/docs implementation. This ready checkpoint changes metadata only; the integrator must bind remoteWorkstreamTip and final validation to the fetched ready commit."
 }

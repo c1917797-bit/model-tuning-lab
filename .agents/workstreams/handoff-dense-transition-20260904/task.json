@@ -15,8 +15,8 @@
     {"kind":"knowledge","mode":"exclusive","value":"docs/RUNBOOK.md"}
   ],
   "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
-  "executionState": "started",
-  "integrationState": "not-ready",
+  "executionState": "completed",
+  "integrationState": "ready",
   "notes": [
     "Read active branch-local handoffs instead of copying unmerged product state into main as shipped truth.",
     "Dynamic MoE is retained remotely as a superseded audit branch; active dense MTP and prefix-cache branches remain independent and unmerged."
