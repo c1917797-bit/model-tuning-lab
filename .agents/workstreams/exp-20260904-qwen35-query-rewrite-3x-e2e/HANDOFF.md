@@ -346,3 +346,21 @@ historical research provenance; it is not an executable candidate.
 The remaining route is cumulative BF16 optimization: attributable runtime
 parameters, semantics-preserving inference algorithms, and native/fused Ascend
 operators, each behind the frozen correctness and real query_rewrite E2E gates.
+
+## Next BF16 communication candidate
+
+FlashComm1 is the next real candidate, not Fused MC2. The exact v0.23.0 source
+and model guide describe FlashComm1 as a sequence-parallel communication path
+for dense Qwen3/high-concurrency TP, decomposing traditional AllReduce into
+ReduceScatter and AllGather. It is isolated in
+`configs/qwen35-query-rewrite-flashcomm1-candidate.yaml` and launcher mode
+`flashcomm1`; canonical MatMulAllReduce remains enabled. Fused MC2 is routed
+through MoE code and is out of scope for this dense model. `enable_prefill_mc2`
+is also not selected because its documented recommended
+`max_num_batched_tokens=TP*512` conflicts with the frozen 32768 baseline.
+
+First run FlashComm1 with the frozen graph capture list to preserve a single
+primary variable. The official guide warns that capture sizes should be TP-size
+multiples; if runtime activation or graph behavior requires that change, treat
+it as a separate cumulative parameter treatment rather than silently combining
+variables.
