@@ -53,4 +53,26 @@ if [[ "$rc" != 44 ]]; then cat "$tmp/profile.err" >&2; fi
 grep -q "refusing to reuse profile directory" "$tmp/profile.err"
 [[ ! -e "$docker_log" ]]
 
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-profile-fresh \
+  PROFILE_DIR="$tmp/profile-fresh" \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile \
+  >"$tmp/profile-fresh.out" 2>"$tmp/profile-fresh.err"
+grep -q -- '--profiler-config.profiler torch' "$docker_log"
+if grep -q -- '--async-scheduling' "$docker_log"; then
+  echo "profile mode unexpectedly enabled async scheduling" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-baseline-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" baseline \
+  >"$tmp/baseline-fresh.out" 2>"$tmp/baseline-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+if grep -q -- '--profiler-config.profiler' "$docker_log"; then
+  echo "baseline mode unexpectedly enabled profiling" >&2
+  exit 1
+fi
+
 echo "PASS: run_qwen35_tp4_dev_service guards"

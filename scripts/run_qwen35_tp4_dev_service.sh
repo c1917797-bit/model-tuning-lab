@@ -58,8 +58,16 @@ serve_args=(
   --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
   --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":false}'
   --default-chat-template-kwargs '{"enable_thinking":false}'
-  --async-scheduling
 )
+
+# torch_npu's external profiler callback must be started and stopped from the
+# same execution thread. vLLM 0.23.0 async scheduling violates that invariant
+# at /stop_profile and cancels the multiprocess response queue. Profiling is
+# diagnostic-only, so preserve async scheduling for performance candidates and
+# use the synchronous scheduler only for the isolated profiler service.
+if [[ "$mode" != profile ]]; then
+  serve_args+=(--async-scheduling)
+fi
 
 if [[ "$mode" == mtp ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1}')
