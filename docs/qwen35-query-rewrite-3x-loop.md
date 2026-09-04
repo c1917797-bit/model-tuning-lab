@@ -33,6 +33,11 @@ SHA256 values are hard-coded into the decision analyzer. A candidate result is
 invalid if any baseline hash, dataset identity, request count, termination
 reason or response hash check fails.
 
+The original ran on physical NPU0-3. Current candidates use the user-assigned
+physical NPU4-7, mapped to logical devices 0-3 inside the container. Both sets
+are Ascend 910B4; the decision artifact and container inspect preserve this
+device-index caveat.
+
 "One treatment" is an attribution rule, not a final-stack restriction. For
 example, FlashComm1 and BF16 FRACTAL_NZ are first measured separately. If both
 are accepted, `flashcomm1-bf16-nz` measures their cumulative effect. Later

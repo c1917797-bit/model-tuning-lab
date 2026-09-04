@@ -6,11 +6,10 @@
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Physical NPU0-3 are externally owned by
-  `qwen36_hypic_pdc_baseline_npu0_3`
-  (`8371abb7731a`, PIDs 435224-435227 as of
-  2026-09-04 17:53:27 UTC).
-  Do not stop, restart, inspect inside, or otherwise perturb it.
+- The user assigned physical NPU4-7 to this task. The old
+  `qwen38_gdn_fused_candidate` service was idle but used a
+  non-comparable 41,984/16,384/no-prefix-cache protocol; it was retained for
+  audit and stopped. Use NPU4-7 for current candidates.
 - `scripts/run_qwen35_tp4_dev_service.sh` now refuses to start if
   `npu-smi` reports any process on NPU0-3 (exit 42), and profile mode refuses
   to reuse an existing output directory (exit 44). Mock-only tests prove both
@@ -21,10 +20,10 @@
   The failed container is retained; its readiness observer was terminated and
   no workstream process remains on NPU0-3. This is a resource-ownership race,
   not valid profile evidence.
-- Physical NPU4-7 are owned by `qwen38_gdn_fused_candidate` on loopback port 8210. Do not stop, restart, inspect inside, or otherwise perturb it.
+- Physical NPU0-3 are not required for the current loop.
 - No baseline rerun is pending. The user designated the existing TP4
   `quick32-v3` artifacts as the immutable original denominator. Future
-  runs need only exclusive NPU0-3 for one candidate; NPU4-7 remain forbidden.
+  runs use exclusive physical NPU4-7 for one candidate.
 
 ## Authoritative comparison and stacking policy
 
@@ -38,7 +37,7 @@ three repetitions, all eight NPUs, or a new canonical baseline.
   invalidates the run.
 - Run only the candidate with
   `scripts/run_qwen35_tp4_candidate_vs_original.sh`. It starts one
-  exact TP4 container on NPU0-3, runs four candidate cells, records the
+  exact TP4 container on physical NPU4-7, runs four candidate cells, records the
   container/log/config hashes, stops only that container, then compares with
   the stored original.
 - Correctness remains fail-closed: 32/32 completed, zero errors, natural stop,
@@ -183,7 +182,7 @@ continuity; the authoritative goal was revised to 2x on 2026-09-04.
 
 ## Optimization loop
 
-1. Acquire explicit exclusive ownership of physical NPU0-3; never touch NPU4-7.
+1. Acquire explicit exclusive ownership of the user-assigned physical NPU4-7.
 2. Freeze request rendering, output policy, seed and service/runtime identity.
 3. Verify, but do not rerun, the hash-locked original quick32-v3 artifacts.
 4. Profile Prefill, Decode, GDN, MatMul/AllReduce, Attention, scheduling,
@@ -403,8 +402,8 @@ decision. It requires unique `RUN_ID` and absolute new
 `OUTPUT_ROOT`, starts only the selected candidate, records its
 container inspect and log, runs first-32 once at 1/5/8/16, and emits a
 correctness plus 2x decision report and hashes. Its trap stops only the exact
-container it started; the underlying launcher rejects any existing NPU0-3
-process.
+container it started; the underlying launcher rejects any existing process on
+the selected physical device set.
 
 The next queued candidate is BF16 weight `FRACTAL_NZ`, isolated as
 `weight_nz_mode=2` in

@@ -19,7 +19,7 @@
     },
     {
       "gate": "runtime-isolation",
-      "result": "WAITING: NPU0-3 are externally occupied, so no candidate may start; NPU4-7 are explicitly out of scope and must remain untouched"
+      "result": "PASS: the user assigned physical NPU4-7 to this task; the old non-comparable fused-GDN service was retained for audit and stopped, and the candidate launcher maps physical 4-7 to logical 0-3"
     }
   ]
 }

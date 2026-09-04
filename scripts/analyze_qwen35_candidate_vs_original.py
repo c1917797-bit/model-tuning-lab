@@ -84,6 +84,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--candidate-dir", type=Path, required=True)
     parser.add_argument("--candidate-id", required=True)
+    parser.add_argument(
+        "--candidate-device-set", choices=("0-3", "4-7"), default="4-7"
+    )
     parser.add_argument("--target-ratio", type=float, default=0.5)
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
@@ -156,6 +159,8 @@ def main() -> int:
         "schema": "qwen35-candidate-vs-fixed-original-decision/v1",
         "comparison_policy": "user-designated-fixed-original-quick32-v3",
         "candidate_id": args.candidate_id,
+        "candidate_physical_device_set": args.candidate_device_set,
+        "original_physical_device_set": "0-3",
         "identity": EXPECTED_IDENTITY,
         "original_runtime_caveat": (
             "quick32-v3 forced enable_matmul_allreduce=false; candidates may "

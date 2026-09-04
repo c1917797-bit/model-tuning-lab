@@ -74,6 +74,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-url", required=True)
     parser.add_argument("--candidate-id", required=True)
     parser.add_argument("--candidate-mode", required=True)
+    parser.add_argument("--device-set", choices=("0-3", "4-7"), default="4-7")
     parser.add_argument("--candidate-config", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--output-root", type=Path, required=True)
@@ -109,6 +110,7 @@ def main() -> int:
         "comparison_policy": "user-designated-fixed-original-quick32-v3",
         "candidate_id": args.candidate_id,
         "candidate_mode": args.candidate_mode,
+        "physical_device_set": args.device_set,
         "candidate_config": str(args.candidate_config),
         "candidate_config_sha256": sha256(args.candidate_config),
         "run_id": args.run_id,

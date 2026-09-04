@@ -39,8 +39,8 @@ loop:
 operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_fixed_original_comparison, candidate_profile]
 resources:
-  required: "physical NPU0-3 exclusive for one TP4 candidate; the original baseline is reused and NPU4-7 must remain untouched"
-  current: "NPU0-3 externally occupied by qwen36_hypic_pdc_baseline_npu0_3; NPU4-7 externally occupied by qwen38_gdn_fused_candidate"
+  required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
+  current: "the prior qwen38_gdn_fused_candidate on NPU4-7 was verified idle, retained for audit, and stopped; NPU0-3 is not used"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -284,3 +284,10 @@ cumulative_stack:
   source_manifest: configs/qwen35-query-rewrite-flashcomm1-bf16-nz-stack.yaml
   launcher_mode: flashcomm1-bf16-nz
   quantized: false
+candidate_device_policy:
+  physical_devices: [4, 5, 6, 7]
+  container_visible_devices: [0, 1, 2, 3]
+  topology: TP4
+  cpu_set: 0-95
+  original_baseline_physical_devices: [0, 1, 2, 3]
+  caveat: "original and candidate use different physical indices but the same Ascend 910B4 SKU; preserve this in decision artifacts"

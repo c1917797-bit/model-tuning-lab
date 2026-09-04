@@ -6,11 +6,13 @@ run_id="${RUN_ID:?set RUN_ID to a unique immutable id}"
 output_root="${OUTPUT_ROOT:?set OUTPUT_ROOT to a new absolute directory}"
 candidate_mode="${CANDIDATE_MODE:-flashcomm1}"
 candidate_id="${CANDIDATE_ID:-$candidate_mode}"
+device_set="${DEVICE_SET:-4-7}"
 port="${PORT:-10010}"
 base_url="http://127.0.0.1:$port"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
 original_dir="${ORIGINAL_BASELINE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v3}"
-candidate_container="${CANDIDATE_CONTAINER:-qwen35_tp4_${candidate_mode}_$run_id}"
+device_tag="${device_set//-/_}"
+candidate_container="${CANDIDATE_CONTAINER:-qwen35_tp4_${candidate_mode}_${device_tag}_$run_id}"
 active_container=""
 active_log=""
 
@@ -28,6 +30,10 @@ case "$candidate_mode" in
     echo "unsupported CANDIDATE_MODE: $candidate_mode" >&2
     exit 64
     ;;
+esac
+case "$device_set" in
+  0-3|4-7) ;;
+  *) echo "DEVICE_SET must be 0-3 or 4-7" >&2; exit 64 ;;
 esac
 candidate_config="${CANDIDATE_CONFIG:-$default_config}"
 
@@ -79,7 +85,7 @@ wait_for_health() {
 
 active_container="$candidate_container"
 active_log="$output_root/service.log"
-env CONTAINER_NAME="$candidate_container" PORT="$port" \
+env CONTAINER_NAME="$candidate_container" PORT="$port" DEVICE_SET="$device_set" \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" "$candidate_mode"
 wait_for_health
 docker inspect "$candidate_container" >"$output_root/container-inspect.json"
@@ -88,6 +94,7 @@ python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
   --base-url "$base_url" \
   --candidate-id "$candidate_id" \
   --candidate-mode "$candidate_mode" \
+  --device-set "$device_set" \
   --candidate-config "$candidate_config" \
   --run-id "$run_id" \
   --output-root "$output_root/candidate"
@@ -102,6 +109,7 @@ python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
   --original-dir "$original_dir" \
   --candidate-dir "$output_root/candidate" \
   --candidate-id "$candidate_id" \
+  --candidate-device-set "$device_set" \
   --target-ratio 0.5 \
   --output "$output_root/decision.json"
 decision_status=$?

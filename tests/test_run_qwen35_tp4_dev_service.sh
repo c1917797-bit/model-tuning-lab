@@ -28,11 +28,12 @@ MOCK
 chmod +x "$mock_bin/npu-smi"
 
 set +e
-PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi"   CONTAINER_NAME=guard-test-occupied   PROFILE_DIR="$tmp/profile-occupied"   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile   >"$tmp/occupied.out" 2>"$tmp/occupied.err"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi"   DEVICE_SET=0-3 CONTAINER_NAME=guard-test-occupied   PROFILE_DIR="$tmp/profile-occupied"   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile   >"$tmp/occupied.out" 2>"$tmp/occupied.err"
 rc=$?
 set -e
+if [[ "$rc" != 42 ]]; then cat "$tmp/occupied.err" >&2; fi
 [[ "$rc" == 42 ]]
-grep -q "NPU0-3 are not idle" "$tmp/occupied.err"
+grep -q "physical NPU0-3 are not idle" "$tmp/occupied.err"
 [[ ! -e "$docker_log" ]]
 
 cat >"$mock_bin/npu-smi" <<'MOCK'
@@ -74,6 +75,11 @@ grep -q -- '--async-scheduling' "$docker_log"
 grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
 grep -q -- '"enable_flashcomm1":false' "$docker_log"
 grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- '--cpuset-cpus 0-95' "$docker_log"
+grep -q -- '--device /dev/davinci4:/dev/davinci0' "$docker_log"
+grep -q -- '--device /dev/davinci5:/dev/davinci1' "$docker_log"
+grep -q -- '--device /dev/davinci6:/dev/davinci2' "$docker_log"
+grep -q -- '--device /dev/davinci7:/dev/davinci3' "$docker_log"
 if grep -q -- '--no-async-scheduling' "$docker_log"; then
   echo "baseline mode unexpectedly disabled async scheduling" >&2
   exit 1

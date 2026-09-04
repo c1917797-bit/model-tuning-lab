@@ -11,7 +11,25 @@ case "$mode" in
 esac
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}}"
+device_set="${DEVICE_SET:-4-7}"
+case "$device_set" in
+  0-3)
+    physical_npus=(0 1 2 3)
+    physical_npu_csv="0,1,2,3"
+    cpuset_cpus="96-191"
+    ;;
+  4-7)
+    physical_npus=(4 5 6 7)
+    physical_npu_csv="4,5,6,7"
+    cpuset_cpus="0-95"
+    ;;
+  *)
+    echo "DEVICE_SET must be 0-3 or 4-7" >&2
+    exit 64
+    ;;
+esac
+device_tag="${device_set//-/_}"
+container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}_$device_tag}"
 port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
@@ -31,17 +49,26 @@ fi
 
 npu_snapshot="$("$npu_smi_bin" info)"
 occupied="$(
-  awk -F '|' '
-    $2 ~ /^[[:space:]]*[0-3][[:space:]]+[0-9]+[[:space:]]*$/ &&
+  awk -F '|' -v wanted="$physical_npu_csv" '
+    BEGIN {
+      split(wanted, ids, ",")
+      for (item in ids) {
+        selected[ids[item]] = 1
+      }
+    }
+    $2 ~ /^[[:space:]]*[0-7][[:space:]]+[0-9]+[[:space:]]*$/ &&
     $3 ~ /^[[:space:]]*[0-9]+[[:space:]]*$/ {
       gsub(/[[:space:]]/, "", $2)
       gsub(/[[:space:]]/, "", $3)
-      print "NPU" substr($2, 1, 1) ":pid=" $3
+      npu = substr($2, 1, 1)
+      if (selected[npu]) {
+        print "NPU" npu ":pid=" $3
+      }
     }
   ' <<<"$npu_snapshot"
 )"
 if [[ -n "$occupied" ]]; then
-  echo "refusing to start: NPU0-3 are not idle" >&2
+  echo "refusing to start: physical NPU$device_set are not idle" >&2
   echo "$occupied" >&2
   exit 42
 fi
@@ -108,15 +135,18 @@ if [[ "$mode" == profile ]]; then
   )
 fi
 
+device_args=()
+for index in "${!physical_npus[@]}"; do
+  physical_id="${physical_npus[$index]}"
+  device_args+=(--device "/dev/davinci$physical_id:/dev/davinci$index")
+done
+
 docker_args=(
   run -d
   --name "$container_name"
   --network host
-  --cpuset-cpus 96-191
-  --device /dev/davinci0
-  --device /dev/davinci1
-  --device /dev/davinci2
-  --device /dev/davinci3
+  --cpuset-cpus "$cpuset_cpus"
+  "${device_args[@]}"
   --device /dev/davinci_manager
   --device /dev/devmm_svm
   --device /dev/hisi_hdc
