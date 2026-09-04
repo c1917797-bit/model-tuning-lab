@@ -1,0 +1,26 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "taskId": "exp-20260904-dynamic-moe-paper-to-ascend",
+  "proposals": [
+    {
+      "kind": "durable-lesson",
+      "target": "docs/LESSONS_LEARNED.md",
+      "summary": "Dynamic MoE on 910B4 reduced token/expert pairs by about 12.8% and accelerated expert GMM by about 8.85%, but direct sort+cumsum+boolean-compaction made whole-block latency 82-96% worse. Optimize/fuse routing before judging benefit from expert-compute savings."
+    },
+    {
+      "kind": "durable-lesson",
+      "target": "docs/LESSONS_LEARNED.md",
+      "summary": "Separate implementation rejection from paper rejection: the direct lowering was rejected, while the full-model paper result remained inconclusive because no usable real MoE checkpoint was available."
+    },
+    {
+      "kind": "runbook-rule",
+      "target": "docs/RUNBOOK.md",
+      "summary": "Paper-to-Ascend must first check architecture applicability. Do not prioritize MoE-specific methods for an installed dense model; prefer inference-time methods whose required mechanism exists in the local checkpoint/runtime."
+    },
+    {
+      "kind": "handoff-refresh",
+      "target": ".agents/HANDOFF.md",
+      "summary": "Record Dynamic MoE as superseded/audit-only for the current dense objective and point maintainers to the active dense MTP and prefix-cache workstreams."
+    }
+  ]
+}

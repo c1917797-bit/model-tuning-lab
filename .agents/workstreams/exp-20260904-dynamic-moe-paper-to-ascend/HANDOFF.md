@@ -2,10 +2,10 @@
 
 ## Status
 
-- Execution: `in-progress` (current direct-lowering measurement decided; next optimization loop remains open)
-- Integration: `not-ready`
+- Execution: `completed` for the bounded direct-lowering experiment
+- Integration: `superseded` for the current dense-model objective; retain the branch for audit, do not merge the current implementation
 - Base: `fbc79c41c37c8900f0623ce8941304e9bfde5cf1`
-- Hardware lease: released; acquire and live-prove a fresh lease before resuming
+- Hardware lease: released; no runtime/process dependency remains on this worktree
 - Do not use NPU4-7; they are owned by the active prefix-cache workstream.
 
 ## Paper exemplar
@@ -96,8 +96,17 @@ npu-smi info
 python -m unittest discover -s tests -p 'test_dynamic_moe_routing.py'
 ```
 
-Before any new NPU run, acquire a fresh resource lease and prove the selected
-devices remain free in the same session.
+Before any future revival, create/resume a fresh MoE-specific tuning loop,
+acquire a new resource lease, and re-prove the selected devices in the same
+session. Do not treat this branch as an active hardware owner.
+
+## Closure / retention
+
+- Current direct implementation outcome: `rejected` at block level.
+- Paper/full-model outcome: `inconclusive`, not disproven.
+- Superseded because the installed target model is dense and the active Paper-to-Ascend direction changed to dense-model inference methods.
+- Keep the remote branch plus external artifacts/hashes for audit and possible future MoE reuse.
+- Do not merge the current implementation into `main`; reuse the pipeline and lessons only.
 
 ## Current A/B request
 

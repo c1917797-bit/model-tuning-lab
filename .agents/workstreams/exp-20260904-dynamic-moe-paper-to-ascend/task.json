@@ -20,11 +20,12 @@
     "python -m unittest discover -s tests -p 'test_dynamic_moe_routing.py'",
     "git diff --check"
   ],
-  "executionState": "in-progress",
-  "integrationState": "not-ready",
+  "executionState": "completed",
+  "integrationState": "superseded",
   "notes": [
     "Remote main revalidation was attempted on 2026-09-04 but GitHub ls-remote/fetch timed out; branch was created from a clean main whose cached origin/main matched fbc79c4. Revalidate remote before integration.",
     "NPU0-3 were live-checked free before resource claim; NPU4-7 had four VLLMWorker_TP processes and are excluded.",
-    "The NPU0-3 lease was released on 2026-09-04 when the maintainer redirected the active Paper-to-Ascend work toward the installed dense Qwen3.5-27B checkpoint. Resume Dynamic MoE only after acquiring a fresh resource lease."
+    "The NPU0-3 lease was released on 2026-09-04 when the maintainer redirected the active Paper-to-Ascend work toward the installed dense Qwen3.5-27B checkpoint. Resume Dynamic MoE only after acquiring a fresh resource lease.",
+    "Superseded for the current installed dense-model objective after preserving the negative direct-lowering result. Keep the remote branch and raw artifact hashes for audit; do not integrate the current Dynamic MoE implementation into main."
   ]
 }
