@@ -58,6 +58,13 @@ TTFT/TPOT/E2E/throughput plus response hashes without recording prompts or
 response text. The completion-token budget remains a required explicit
 argument and must be frozen before the original baseline.
 
+`scripts/analyze_qwen35_query_rewrite_ab.py` is the fail-closed decision
+gate. It requires all 24 artifacts (baseline/candidate × concurrency 1/5/8/16
+× repetitions 1/2/3), identical model/data/request identities, zero errors,
+complete request sets and exact response-hash equality. It emits
+`final-target-met` only when both median-of-run-p50 TTFT and TPOT ratios are
+at most 0.5 in every concurrency cell.
+
 The final stack is expected to combine core operators, algorithms and
 configuration. "One variable" applies to each attribution step, not to the
 final candidate.
