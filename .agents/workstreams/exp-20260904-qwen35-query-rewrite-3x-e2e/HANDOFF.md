@@ -838,3 +838,35 @@ reject TP2/DP2 under the fixed serving-capacity contract, and continue the
 TPOT loop from the retained stack. TTFT already meets the 2x target at all
 four concurrency points; TPOT remains 1.343x/1.380x/1.486x/1.546x versus the
 fixed original and is still the open objective.
+
+### Text-only TP2/DP2 recovery also rejected
+
+The follow-up mode `tp2-dp2-mmar-on-text-only` preserved HCCL_BUFFSIZE=512
+and every text-capacity parameter, but set image/video limits to zero because
+the query_rewrite benchmark is text only. Runtime activation was explicit:
+all supported multimodal limits were zero and vLLM entered text-only mode.
+This removed the earlier visual-encoder OOM and reduced the four task workers
+to about 29,067-29,068 MiB HBM during initialization.
+
+The topology still cannot satisfy the frozen 133k text capacity. The exact
+memory profile was 25.17 GiB weights, 1.92 GiB torch peak increase and
+0.50 GiB non-torch forward increase, for 27.59 GiB non-KV memory. At
+`gpu_memory_utilization=0.90`, calculated KV memory was -1.05 GiB and both
+DP engines rejected startup with `No available memory for the cache blocks`.
+No request ran.
+
+A higher utilization is not a sound recovery for the frozen capacity. Even
+using the full reported 29.49 GiB as a conservative upper bound leaves only
+1.90 GiB before graph memory. Existing TP4 evidence needs about 2.15 GiB for
+one 133k request (10.77 GiB / 5.01 maximum concurrency); TP2 cannot require
+less per rank than TP4. Therefore the fixed text capacity is infeasible
+without reducing model length/batch capacity, offloading, or quantization.
+Those are outside this candidate; quantization is explicitly prohibited.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/startup-gates/tp2-dp2-mmar-on-text-only-npu4-7-20260904T2345Z`;
+SHA256SUMS digest
+`7785a1f932bf4c4d9cc577b7179ce30560485a2039c6c8b10af53c253a161d2d`.
+The exact container was stopped. NPU4-7 are idle at 2866-2867 MiB and
+external NPU0-3 PIDs 1031654-1031657 are unchanged. Do not retry TP2/DP2
+again unless the user explicitly changes the serving-capacity contract.

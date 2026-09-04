@@ -570,5 +570,23 @@ tp2_dp2_mmar_topology_candidate:
     peak_hbm_mib: "32593-32594 on physical NPU4-7"
     measured_requests: 0
     sha256sums_sha256: f38d2e484f3354e5820854cc39662acb529f8700c46877d583bf0e657a3006e8
+  text_only_retry:
+    source_manifest: configs/qwen35-query-rewrite-tp2-dp2-mmar-on-text-only-candidate.yaml
+    implementation_commit: dc8753f
+    run_id: tp2-dp2-mmar-on-text-only-npu4-7-20260904T2345Z
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/startup-gates/tp2-dp2-mmar-on-text-only-npu4-7-20260904T2345Z
+    readiness_operation: exec-0000000000000817
+    activation: "runtime logged all supported multimodal limits set to zero and text-only mode"
+    outcome: rejected_no_available_kv_cache
+    memory_profile:
+      weights_gib: 25.17
+      torch_peak_increase_gib: 1.92
+      non_torch_forward_increase_gib: 0.50
+      total_non_kv_cache_gib: 27.59
+      available_kv_cache_gib_at_0_90: -1.05
+    conservative_capacity_bound: "29.49 GiB total minus 27.59 GiB non-KV leaves at most 1.90 GiB before graph; TP4 evidence already requires about 2.15 GiB for one 133k request, so TP2 cannot satisfy the fixed text capacity even at theoretical 100% utilization"
+    measured_requests: 0
+    sha256sums_sha256: 7785a1f932bf4c4d9cc577b7179ce30560485a2039c6c8b10af53c253a161d2d
+    capability_tradeoff: "image/video serving disabled; valid only for the text-only query_rewrite workload"
   decision: "reject TP2/DP2 under the immutable 133000 max-model-len, 32768 max-batched-tokens and max-num-seqs 16 capacity contract; do not run E2E"
   recovery: "exact probe container stopped; physical NPU4-7 returned to 2865-2866 MiB idle HBM; external NPU0-3 PIDs 1031654-1031657 unchanged"
