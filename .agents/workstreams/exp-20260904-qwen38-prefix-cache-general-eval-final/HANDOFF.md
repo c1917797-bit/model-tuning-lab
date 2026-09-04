@@ -5,6 +5,7 @@
 - Fixed performance snapshot: `/cache/austinov/eval-data/general/perf_2k40.v2.jsonl`, SHA256 `a40b8df38c08d3dc2580b5aa53ff7c5d23702224f82774ed6bff718c35e298f7`, 513 requests derived from MMLU/GSM8K/HumanEval prompts.
 - Padding does not manufacture a shared prefix: original prompt remains first; each short prompt gets unique deterministic right-padding token IDs.
 - Candidate variable only: Prefix Cache OFF -> ON.
-- Hardware claim: physical NPU4-7; do not use NPU0-3.
+- Hardware claim: physical NPU4-7; do not use NPU0-3 for this experiment.
+- Isolation guard: physical NPU4-7 must contain exactly the four VLLM workers belonging to the measured server container. Recurring unrelated NPU0 probes are recorded in resource evidence but do not invalidate a run by themselves; server/client CPU cpusets remain fixed.
 - Dedicated A/B endpoint: 127.0.0.1:8210 to prevent unrelated local clients from using the experiment service.
 - Run three clean 2k40 baseline repetitions (Prefix Cache OFF), checkpoint+push, then three clean candidate repetitions (Prefix Cache ON), followed by natural-prompt correctness verification and decision.

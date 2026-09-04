@@ -35,12 +35,32 @@ echo "$START" > "$OUT/$RUN.started_at"
   echo concurrency=8
 } > "$OUT/$RUN.environment.txt"
 
-N03=$(npu-smi info 2>/dev/null | awk '/\| [0-3] +0 +\|/{n++} END{print n+0}')
 HC=$(curl -s -o /dev/null -w '%{http_code}' --max-time 3 "$ENDPOINT/health" 2>/dev/null || true)
 MEM=$(awk '/MemAvailable/{print $2}' /proc/meminfo)
 CPUSET=$(docker inspect "$SERVER" --format '{{.HostConfig.CpusetCpus}}' 2>/dev/null || true)
-if [ "$N03" -ne 0 ] || [ "$HC" != 200 ] || [ "$MEM" -lt $((20*1024*1024)) ] || [ "$CPUSET" != "$EXPECTED_CPUSET" ]; then
-  echo "preflight npu03=$N03 health=$HC mem=$MEM cpuset=$CPUSET expected=$EXPECTED_CPUSET"
+SERVER_CID=$(docker inspect "$SERVER" --format '{{.Id}}' 2>/dev/null || true)
+
+target_devices_ok() {
+  [ -n "$SERVER_CID" ] || return 1
+  for DEV in 4 5 6 7; do
+    ROWS=$(npu-smi info 2>/dev/null | awk -F'|' -v dev="$DEV" '
+      {
+        f=$2; gsub(/^[ \t]+|[ \t]+$/, "", f); split(f,a,/[ \t]+/)
+        pid=$3; name=$4
+        gsub(/^[ \t]+|[ \t]+$/, "", pid); gsub(/^[ \t]+|[ \t]+$/, "", name)
+        if (a[1] == dev && pid ~ /^[0-9]+$/) print pid "|" name
+      }')
+    [ "$(printf '%s\n' "$ROWS" | sed '/^$/d' | wc -l)" -eq 1 ] || return 1
+    PID=${ROWS%%|*}
+    NAME=${ROWS#*|}
+    [ "$NAME" = "VLLMWorker_TP" ] || return 1
+    grep -q "$SERVER_CID" "/proc/$PID/cgroup" 2>/dev/null || return 1
+  done
+}
+
+if [ "$HC" != 200 ] || [ "$MEM" -lt $((20*1024*1024)) ] || [ "$CPUSET" != "$EXPECTED_CPUSET" ] || ! target_devices_ok; then
+  N03=$(npu-smi info 2>/dev/null | awk -F'|' '{f=$2; gsub(/^[ \t]+|[ \t]+$/, "", f); split(f,a,/[ \t]+/); pid=$3; gsub(/^[ \t]+|[ \t]+$/, "", pid); if (a[1] ~ /^[0-3]$/ && pid ~ /^[0-9]+$/) n++} END{print n+0}')
+  echo "preflight target_npu_ok=no background_npu03=$N03 health=$HC mem=$MEM cpuset=$CPUSET expected=$EXPECTED_CPUSET"
   exit 70
 fi
 
@@ -63,10 +83,11 @@ while [ "$(docker inspect -f '{{.State.Running}}' "$CLIENT" 2>/dev/null || echo 
     grep -E 'MemAvailable|MemFree|Cached' /proc/meminfo
     npu-smi info 2>/dev/null | tail -34
   } >> "$OUT/$RUN.resources.log"
-  N03=$(npu-smi info 2>/dev/null | awk '/\| [0-3] +0 +\|/{n++} END{print n+0}')
+  N03=$(npu-smi info 2>/dev/null | awk -F'|' '{f=$2; gsub(/^[ \t]+|[ \t]+$/, "", f); split(f,a,/[ \t]+/); pid=$3; gsub(/^[ \t]+|[ \t]+$/, "", pid); if (a[1] ~ /^[0-3]$/ && pid ~ /^[0-9]+$/) n++} END{print n+0}')
+  echo "$TS background_npu_0_3_processes=$N03" >> "$OUT/$RUN.resources.log"
   MEM=$(awk '/MemAvailable/{print $2}' /proc/meminfo)
   HC=$(curl -s -o /dev/null -w '%{http_code}' --max-time 2 "$ENDPOINT/health" 2>/dev/null || true)
-  if [ "$N03" -ne 0 ]; then echo "$TS external_npu_0_3_activity" >> "$OUT/$RUN.contaminated"; echo "$TS guard_abort_external_npu_0_3" > "$OUT/$RUN.aborted"; ABORT=75; docker rm -f "$CLIENT" >/dev/null 2>&1 || true; break; fi
+  if ! target_devices_ok; then echo "$TS unexpected_target_npu_4_7_activity" >> "$OUT/$RUN.contaminated"; echo "$TS guard_abort_target_npu_4_7" > "$OUT/$RUN.aborted"; ABORT=79; docker rm -f "$CLIENT" >/dev/null 2>&1 || true; break; fi
   if [ "$MEM" -lt $((20*1024*1024)) ]; then echo "$TS guard_abort_low_mem memavail_kb=$MEM" > "$OUT/$RUN.aborted"; ABORT=76; docker rm -f "$CLIENT" >/dev/null 2>&1 || true; break; fi
   if [ "$HC" != 200 ]; then echo "$TS guard_abort_health=$HC" > "$OUT/$RUN.aborted"; ABORT=77; docker rm -f "$CLIENT" >/dev/null 2>&1 || true; break; fi
   sleep 5

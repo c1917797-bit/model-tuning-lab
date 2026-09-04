@@ -64,6 +64,7 @@ protocol:
     - "all requests must complete without API errors"
     - "expected NPU devices must show the serving worker processes"
     - "every performance request must report prompt_tokens=2048 and completion_tokens=40"
+    - "physical NPU4-7 must remain exclusively owned by the measured serving container; activity on non-target NPU0-3 is sampled as background evidence rather than an automatic invalidation"
   acceptance_thresholds:
     - "at least 5% improvement in aggregate wall-clock completion time or output-token throughput on exact 2048/40 evaluation-derived traffic"
     - "no dataset accuracy/pass@1 regression"
@@ -71,7 +72,7 @@ protocol:
     - "greater than 2% worse aggregate completion time with comparable conditions"
     - "any correctness regression"
   abort_conditions:
-    - "NPU health != OK or unexpected process appears on candidate devices"
+    - "NPU health != OK or any process other than the measured serving container appears on physical NPU4-7"
     - "host MemAvailable falls below 20 GiB"
     - "candidate HBM exceeds device capacity or service reports OOM"
   warmup: "one fixed 2048/40 request per dataset before each measured run"
