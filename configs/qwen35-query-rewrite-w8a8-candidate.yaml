@@ -1,4 +1,7 @@
 schema: qwen35-w8a8-source-manifest/v1
+status: prohibited
+execution_allowed: false
+rejection_reason: "user explicitly prohibited quantization; retain this file only as historical research provenance"
 purpose: immutable acquisition identity only; this file does not authorize download or acceptance
 repository:
   provider: ModelScope

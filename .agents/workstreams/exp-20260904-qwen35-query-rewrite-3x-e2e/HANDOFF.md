@@ -304,26 +304,14 @@ fallback, then require activation proof, reference correctness, real
 query_rewrite A/B and a paired profile. Treat it as one cumulative operator
 treatment, not evidence of the requested 2x result.
 
-## W8A8 cumulative route
+## Quantization route — prohibited
 
-The v0.23.0 image has explicit `qwen3_5` ModelSlim packed-module mappings for
-QKV, gate/up, GDN QKVZ and BA projections. Its official weekly matrix runs
-`Eco-Tech/Qwen3.5-27B-w8a8-mtp` with `--quantization ascend`,
-FULL_DECODE_ONLY, 3- or 5-token Qwen3.5 MTP, and contexts through 133120.
-This is the strongest currently identified no-retraining route toward a 2x
-result, but it is not local evidence: the checkpoint and ModelSlim are absent
-on this host, and the official cases use TP2/DP1 rather than final TP4/DP2.
+The user explicitly prohibited quantization. Keep the current model and all
+accepted candidates in BF16. Do not download, generate, load, benchmark, or
+accept W8A8, INT8, FP8, weight-only, or activation-quantized checkpoints.
+The file configs/qwen35-query-rewrite-w8a8-candidate.yaml is retained only as
+historical research provenance; it is not an executable candidate.
 
-Keep attribution strict: test W8A8 alone first; add MTP 3 only after W8A8
-passes correctness; then MTP 5, fused GDN and parameter treatments one at a
-time on the latest accepted stack. The earlier BF16 one-token MTP rejection
-does not prove the W8A8 3/5-token stack, but it does require a fresh response
-comparison. Do not silently download or generate the tens-of-GB checkpoint:
-bind its source revision and hashes first, preserve the BF16 source, and apply
-the same real query_rewrite correctness and A/B gates.
-
-The immutable acquisition identity is now frozen in
-`configs/qwen35-query-rewrite-w8a8-candidate.yaml`: ModelScope revision
-`2a084569138db40bd9b6a9d96eafb160e6b913c7`, 21 files,
-36,443,627,736 bytes, including all nine weight-shard SHA256 values. This is a
-manifest only; no checkpoint was downloaded and no source model was modified.
+The remaining route is cumulative BF16 optimization: attributable runtime
+parameters, semantics-preserving inference algorithms, and native/fused Ascend
+operators, each behind the frozen correctness and real query_rewrite E2E gates.

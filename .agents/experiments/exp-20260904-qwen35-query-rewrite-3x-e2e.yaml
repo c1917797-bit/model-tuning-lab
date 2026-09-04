@@ -148,8 +148,22 @@ operator_candidate:
   upstream_microbenchmark: "11274-token prefill, 5890us -> 4964us (1.186x); not E2E or current-model evidence"
   portability_rule: "adapt minimal hunks to the exact v0.23.0 image source; never overlay the newer full gdn.py; require runtime activation, reference correctness, real query_rewrite A/B, and paired profile"
   expected_role: "cumulative operator treatment, not a standalone route to the 2x TTFT/TPOT objective"
-algorithm_candidate:
+quantization_constraint:
+  allowed: false
+  set_by: user
+  set_at_utc: "2026-09-04"
+  scope: "all performance candidates and final acceptance"
+  prohibited:
+    - "W8A8"
+    - "INT8"
+    - "FP8"
+    - "weight-only quantization"
+    - "activation quantization"
+  invariant: "retain the current BF16 model dtype; do not download, convert, load, benchmark, or accept a quantized checkpoint"
+rejected_algorithm_candidate:
   id: qwen35_27b_w8a8
+  status: rejected
+  reason: "user explicitly prohibited quantization"
   reference_model: Eco-Tech/Qwen3.5-27B-w8a8-mtp
   source: "vLLM-Ascend 0.23.0 official weekly single-node matrix"
   runtime_support:
@@ -166,16 +180,12 @@ algorithm_candidate:
   local_checkpoint: null
   local_modelslim: false
   disk_available: "1.5 TiB"
-  attribution_order:
-    - "W8A8 alone against the immutable BF16 baseline"
-    - "only if W8A8 passes correctness, add qwen3_5_mtp at 3 tokens"
-    - "only if 3-token MTP passes, evaluate 5 tokens"
-    - "then add accepted fused GDN and parameter treatments cumulatively"
+  execution: "prohibited; manifest retained only as historical research provenance"
   correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
-  acquisition_rule: "do not silently download or quantize a tens-of-GB checkpoint; first bind an immutable source/revision/hash and preserve the original BF16 model"
+  acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
-decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
-next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path using the synchronous-profile fix, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."
+decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Reject all quantization routes by explicit user constraint. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
+next_loop: "Continue only with BF16 parameter, algorithm, and operator treatments. The v5 runtime proved async_scheduling=False but /stop_profile still failed, so do not retry that profiler endpoint unchanged; recover and analyze any parseable raw v5 data or use an offline/worker-safe profiling path. Acquire NPU0-7 later for final DP2/TP4 A/B."
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1
