@@ -112,5 +112,9 @@ profile_analysis:
   validation: "zero-dependency fixture assertions, py_compile, and 15298-row historical Ascend kernel_details.csv smoke passed"
   semantics: "category shares and top kernels use summed kernel duration; never interpret as wall time because streams may overlap"
   source_finding: "Qwen3.5 prefill uses a multi-kernel chunk GDN pipeline while decode uses npu_recurrent_gated_delta_rule; select the next treatment only from the new paired profile"
+  orchestration: scripts/capture_qwen35_tp4_profile.sh
+  orchestration_guards: "requires unique immutable run/container/profile paths, checks health and OpenAPI endpoints, waits for kernel_details.csv, hashes artifacts, and stops only its own exact container"
+  latest_resource_check_utc: "2026-09-04 16:43:31"
+  latest_resource_state: "NPU0-3 external qwen36_27b_dk64_treatment_npu0_3; NPU4-7 external qwen38_gdn_fused_candidate; untouched"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
 next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."

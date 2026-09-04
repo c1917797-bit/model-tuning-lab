@@ -227,6 +227,16 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
   decode uses the AscendC `npu_recurrent_gated_delta_rule` custom operator.
   The next treatment must be chosen from the new fixed-request profile, not
   inferred from historical profiles belonging to another run.
+- `scripts/capture_qwen35_tp4_profile.sh` is the fail-closed one-shot
+  orchestration entry point. It requires explicit unique run/container/profile
+  identities, delegates the NPU0-3 ownership guard to the service launcher,
+  waits for health, verifies both profiler endpoints in OpenAPI, captures the
+  isolated request, waits for `kernel_details.csv`, analyzes it, records
+  artifact hashes, and stops only the exact container it started while
+  retaining the stopped container and logs. Existing output paths are rejected.
+- At 2026-09-04 16:43:31 UTC, NPU0-3 remained owned by
+  `qwen36_27b_dk64_treatment_npu0_3` (PIDs 4111982-4111985) and NPU4-7 by
+  `qwen38_gdn_fused_candidate` (PIDs 1312892-1312895). Neither was touched.
 
 ## Resume
 
