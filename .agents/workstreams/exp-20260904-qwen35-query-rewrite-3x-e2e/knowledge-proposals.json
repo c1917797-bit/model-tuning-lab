@@ -79,6 +79,24 @@
       "status": "accepted-local",
       "lesson": "When dense decode is dominated by low-batch GEMMs, test training-free verified multi-token execution before rewriting a low-share state-space operator. On vLLM-Ascend use the NPU ngram proposer when async scheduling is frozen; the CPU ngram proposer is incompatible with async scheduling.",
       "evidence": "Post-prefill rank-0 window: MatMulV2 70.702%, AllReduce 10.530%, recurrent GDN 2.406%; exact image dispatches ngram_gpu to npu_ngram_spec_decode"
+    },
+    {
+      "id": "speculation-acceptance-economics-before-retune",
+      "status": "accepted-local",
+      "lesson": "Use per-position acceptance counters to decide whether speculative retuning is economically possible. If first-position acceptance is already far below the break-even cost of one extra verified token, reducing k cannot rescue the method and another full matrix would waste accelerator time.",
+      "evidence": "ngram-gpu run accepted only 14.809% of first positions and 6.934% of all draft tokens; c1 TPOT was 4.82x slower"
+    },
+    {
+      "id": "ngram-gpu-async-concurrency-stall",
+      "status": "accepted-local",
+      "lesson": "Treat a concurrency stall as a runtime rejection, not a long-tail latency sample. Capture engine counters, request state and logs before stopping the exact candidate container, preserve partial completed requests as observed-only evidence, and do not run higher-concurrency cells after the engine stops making progress.",
+      "evidence": "At c5 the ngram_gpu engine froze after 25/32 completions with four Running requests and repeated Poller timed out messages for more than three minutes; no OOM occurred"
+    },
+    {
+      "id": "partial-matrix-needs-terminal-decision",
+      "status": "accepted-local",
+      "lesson": "A failed benchmark matrix must still close with a machine-readable terminal decision and checksums. The runner must preserve the workload exit status, finalize logs and metrics, classify missing cells as not-run, and produce reject-runtime-failure rather than leaving an ambiguous artifact directory.",
+      "evidence": "Failure-finalizer tests cover a 25/32 c5 cell plus absent c8/c16 cells and require analyzer exit 4 with decision reject-runtime-failure"
     }
   ]
 }

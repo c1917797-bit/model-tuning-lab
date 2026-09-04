@@ -638,3 +638,48 @@ CANDIDATE_MODE=ngram-gpu, a unique RUN_ID and a new absolute OUTPUT_ROOT.
 Require zero errors, natural stops, privacy-safe labeled-reference quality,
 speculative acceptance counters and the fixed-original 1/5/8/16 comparison.
 Reject or retune if accepted spans do not offset verification overhead.
+
+## NPU Prompt Lookup real result
+
+The bounded `ngram-gpu` candidate ran on assigned physical NPU4-7 in BF16
+with MMAR off, NZ1, FlashComm1 off and async scheduling preserved. Run
+`ngram-gpu-fixedorig-npu4-7-20260904T2048Z` completed c1, then failed at c5.
+
+At c1, 32/32 requests completed with zero errors. TTFT p50 was 781.240 ms
+versus 928.329 ms original (1.188x better), but TPOT p50 was 185.297 ms
+versus 38.472 ms (4.82x slower). At c5, 25/32 completed before the engine
+stalled. The observed subset had TTFT 1626.369 ms and TPOT 412.783 ms, with
+TPOT 7.67x slower than the original. c8 and c16 were not run.
+
+Stall evidence was captured before intervention: four requests remained
+Running, the generation counter froze at 17,686, and EngineCore repeatedly
+logged `Poller timed out` for more than three minutes. There was no OOM.
+Speculative counters recorded 13,087 draft steps, 65,435 draft tokens and
+4,538 accepted tokens (6.934%). First-position acceptance was only 14.809%,
+so even k=1 cannot pay for one extra target token. Do not retune this method.
+
+The terminal decision is `reject-runtime-failure`. Decision SHA256 is
+`09d43a3715bbd2bc266f94dca5f5468aa62735027bb73383df4d1cc13ed484ab`; the
+run-level SHA256SUMS digest is
+`9bebf07aa270e5cc3c1e54c712f9572d474cf7eac147a497284f2a1dd039579a`.
+All artifacts are under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/ngram-gpu-fixedorig-npu4-7-20260904T2048Z`.
+
+The failure-finalization path is now hardened: partial cells are preserved as
+observed-only evidence, missing cells become `not-run`, the analyzer returns
+exit 4 with a terminal rejection, and the orchestrator hashes only artifacts
+that exist. Static and unit tests cover this path.
+
+The exact candidate container exited after evidence capture. Physical NPU4-7
+are idle and remain assigned to this task; external NPU0-3 PIDs
+1031654-1031657 were unchanged.
+
+## Next handoff action
+
+Proceed to the profile-ranked dense FFN operator lane. Inspect exact
+vLLM-Ascend 0.23.0 source plus `/cache/cch` operator-generation assets for a
+BF16 shape-specialized or fused gate/up-SwiGLU-down path targeting the measured
+decode projections `1x5120 x 8704x5120` and `1x4352 x 5120x4352`. Before E2E,
+require reference correctness, repeated operator microbenchmarks and a
+feature flag. E2E must reuse the immutable quick32-v3 denominator and only
+physical NPU4-7.

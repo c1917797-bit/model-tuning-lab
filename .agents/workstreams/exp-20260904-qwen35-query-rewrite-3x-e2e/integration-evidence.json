@@ -1,7 +1,7 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "status": "not-ready-profile-and-semantic-gate-required",
+  "status": "not-ready-next-dense-ffn-operator-required",
   "targetParent": "main",
   "sourceCommit": null,
   "validation": [
@@ -76,6 +76,22 @@
     {
       "gate": "ngram-gpu-candidate-readiness",
       "result": "PASS static: exact v0.23.0 image supports async ngram_gpu through npu_ngram_spec_decode and ships an Ascend 910B binary; launcher preserves BF16, MMAR-off, NZ1 and FlashComm1-off, and emits speculative counters after E2E"
+    },
+    {
+      "gate": "ngram-gpu-real-e2e",
+      "result": "REJECT runtime: c1 completed 32/32 but TPOT was 4.82x slower; c5 stalled after 25/32 and its observed subset was 7.67x slower; c8/c16 were not run after the failure"
+    },
+    {
+      "gate": "ngram-gpu-acceptance-economics",
+      "result": "REJECT retune: only 4538/65435 draft tokens (6.934%) and 1938/13087 first positions (14.809%) were accepted, so shrinking the draft window to one token still cannot repay verification overhead"
+    },
+    {
+      "gate": "failed-candidate-finalization",
+      "result": "PASS static: the orchestrator preserves a failed candidate status, collects logs and metrics, stops only the exact candidate container, calls the analyzer in incomplete mode, emits reject-runtime-failure, and hashes only artifacts that exist"
+    },
+    {
+      "gate": "ngram-gpu-resource-release",
+      "result": "PASS: stall evidence was captured before the exact candidate container was stopped; physical NPU4-7 returned idle and external NPU0-3 PIDs 1031654-1031657 were unchanged"
     }
   ]
 }

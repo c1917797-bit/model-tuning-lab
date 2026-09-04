@@ -102,6 +102,7 @@ env CONTAINER_NAME="$candidate_container" PORT="$port" DEVICE_SET="$device_set" 
 wait_for_health
 docker inspect "$candidate_container" >"$output_root/container-inspect.json"
 
+set +e
 python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
   --base-url "$base_url" \
   --candidate-id "$candidate_id" \
@@ -110,6 +111,8 @@ python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
   --candidate-config "$candidate_config" \
   --run-id "$run_id" \
   --output-root "$output_root/candidate"
+candidate_run_status=$?
+set -e
 
 if [[ "$candidate_mode" == ngram-gpu ]]; then
   curl --fail --silent --max-time 10 "$base_url/metrics" |
@@ -123,33 +126,42 @@ active_container=""
 active_log=""
 
 set +e
+analyzer_extra=()
+if [[ "$candidate_run_status" != 0 ]]; then
+  analyzer_extra+=(--allow-incomplete)
+fi
 python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
   --original-dir "$original_dir" \
   --candidate-dir "$output_root/candidate" \
   --candidate-id "$candidate_id" \
   --candidate-device-set "$device_set" \
+  --candidate-run "$output_root/candidate/candidate-run.json" \
   --target-ratio 0.5 \
-  --output "$output_root/decision.json"
+  --output "$output_root/decision.json" \
+  "\${analyzer_extra[@]}"
 decision_status=$?
 set -e
 if [[ "$decision_status" != 0 && "$decision_status" != 2 &&
-      "$decision_status" != 3 ]]; then
+      "$decision_status" != 3 && "$decision_status" != 4 ]]; then
   echo "candidate analyzer failed with status $decision_status" >&2
   exit "$decision_status"
 fi
 
-sha256sum \
-  "$output_root/container-inspect.json" \
-  "$output_root/candidate/candidate-run.json" \
-  "$output_root/candidate/c1-r1.json" \
-  "$output_root/candidate/c5-r1.json" \
-  "$output_root/candidate/c8-r1.json" \
-  "$output_root/candidate/c16-r1.json" \
-  "$output_root/decision.json" >"$output_root/SHA256SUMS"
+artifacts=(
+  "$output_root/container-inspect.json"
+  "$output_root/candidate/candidate-run.json"
+  "$output_root/decision.json"
+)
+for concurrency in 1 5 8 16; do
+  cell="$output_root/candidate/c\${concurrency}-r1.json"
+  [[ ! -f "$cell" ]] || artifacts+=("$cell")
+done
+sha256sum "\${artifacts[@]}" >"$output_root/SHA256SUMS"
 if [[ -f "$output_root/speculative-metrics-after.prom" ]]; then
   sha256sum "$output_root/speculative-metrics-after.prom" \
     >>"$output_root/SHA256SUMS"
 fi
 
 echo "completed TP4 candidate versus fixed original baseline: $output_root"
-echo "decision analyzer status: $decision_status (0=2x target, 2=iterate, 3=reject correctness)"
+echo "candidate matrix status: $candidate_run_status (0=complete)"
+echo "decision analyzer status: $decision_status (0=2x target, 2=iterate, 3=hold correctness, 4=reject runtime)"

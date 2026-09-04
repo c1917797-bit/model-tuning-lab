@@ -70,4 +70,51 @@ with tempfile.TemporaryDirectory() as directory:
     assert report["correctness_exact_hash_match"] is False
     assert report["correctness_gate_status"] == "semantic-business-check-required"
 
+    for concurrency in (1, 5, 8, 16):
+        path = candidate / f"c{concurrency}-r1.json"
+        if path.exists():
+            path.unlink()
+    shutil.copyfile(ORIGINAL / "c1-r1.json", candidate / "c1-r1.json")
+    partial = json.loads((ORIGINAL / "c5-r1.json").read_text())
+    partial["completed"] = 25
+    partial["errors"] = 7
+    partial["finish_reasons"] = {"stop": 25}
+    partial["response_sha256"] = partial["response_sha256"][:25]
+    partial["error_types"] = ["RuntimeError"]
+    partial["error_reasons"] = {"stream stalled": 7}
+    (candidate / "c5-r1.json").write_text(json.dumps(partial))
+    candidate_run = root / "candidate-run.json"
+    candidate_run.write_text(
+        json.dumps(
+            {
+                "status": "failed",
+                "failed_cell": {"concurrency": 5, "repetition": 1},
+            }
+        )
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--candidate-dir",
+            str(candidate),
+            "--candidate-id",
+            "runtime-failure-fixture",
+            "--candidate-run",
+            str(candidate_run),
+            "--allow-incomplete",
+            "--output",
+            str(report_path),
+        ],
+        check=False,
+    )
+    assert result.returncode == 4
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["decision"] == "reject-runtime-failure"
+    assert report["runtime_gate_met"] is False
+    assert report["candidate_run_status"] == "failed"
+    assert report["cells"]["5"]["completed_requests"] == 25
+    assert report["cells"]["8"]["status"] == "not-run"
+    assert report["correctness_gate_status"] == "not-evaluable-runtime-failure"
+
 print("PASS: fixed-original analyzer")

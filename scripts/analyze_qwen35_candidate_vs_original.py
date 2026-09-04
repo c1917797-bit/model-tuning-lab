@@ -39,7 +39,13 @@ def cell_path(root: Path, concurrency: int) -> Path:
     return root / f"c{concurrency}-r1.json"
 
 
-def load_cell(root: Path, concurrency: int, *, original: bool) -> dict:
+def load_cell(
+    root: Path,
+    concurrency: int,
+    *,
+    original: bool,
+    require_success: bool = True,
+) -> dict:
     path = cell_path(root, concurrency)
     if original:
         actual_digest = digest_file(path)
@@ -54,21 +60,27 @@ def load_cell(root: Path, concurrency: int, *, original: bool) -> dict:
         "schema": "qwen35-query-rewrite-benchmark/v1",
         "concurrency": concurrency,
         "repeat_index": 1,
-        "errors": 0,
         "natural_eos": True,
         **EXPECTED_IDENTITY,
     }
+    if require_success:
+        expected["errors"] = 0
     for key, value in expected.items():
         if row.get(key) != value:
             raise ValueError(
                 f"{path}: {key} must be {value!r}, got {row.get(key)!r}"
             )
-    if row.get("completed") != 32:
+    if require_success and row.get("completed") != 32:
         raise ValueError(f"{path}: completed must be 32")
-    if row.get("finish_reasons") != {"stop": 32}:
+    if require_success and row.get("finish_reasons") != {"stop": 32}:
         raise ValueError(f"{path}: all requests must terminate naturally")
     hashes = row.get("response_sha256")
-    if not isinstance(hashes, list) or len(hashes) != 32:
+    expected_hashes = 32 if require_success else row.get("completed")
+    if (
+        not isinstance(hashes, list)
+        or not isinstance(expected_hashes, int)
+        or len(hashes) != expected_hashes
+    ):
         raise ValueError(f"{path}: invalid response hash set")
     for metric in ("ttft_ms", "tpot_ms", "e2e_ms"):
         value = row.get(metric, {}).get("p50")
@@ -88,6 +100,16 @@ def parse_args() -> argparse.Namespace:
         "--candidate-device-set", choices=("0-3", "4-7"), default="4-7"
     )
     parser.add_argument("--target-ratio", type=float, default=0.5)
+    parser.add_argument(
+        "--allow-incomplete",
+        action="store_true",
+        help="emit a reject-runtime-failure decision for partial matrices",
+    )
+    parser.add_argument(
+        "--candidate-run",
+        type=Path,
+        help="optional candidate-run.json status manifest",
+    )
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
 
@@ -101,18 +123,48 @@ def main() -> int:
     artifact_sha256: dict[str, str] = {}
     correctness_pass = True
     performance_pass = True
+    runtime_pass = True
     for concurrency in CONCURRENCIES:
         original_path = cell_path(args.original_dir, concurrency)
         candidate_path = cell_path(args.candidate_dir, concurrency)
         original = load_cell(args.original_dir, concurrency, original=True)
-        candidate = load_cell(args.candidate_dir, concurrency, original=False)
+        artifact_sha256[f"original/c{concurrency}-r1.json"] = digest_file(
+            original_path
+        )
+        if not candidate_path.exists():
+            if not args.allow_incomplete:
+                raise FileNotFoundError(candidate_path)
+            runtime_pass = False
+            performance_pass = False
+            correctness_pass = False
+            cells[str(concurrency)] = {
+                "status": "not-run",
+                "measurement_valid": False,
+                "runtime_gate_met": False,
+                "performance_target_met": False,
+                "correctness_exact_hash_match": None,
+            }
+            continue
+        candidate = load_cell(
+            args.candidate_dir,
+            concurrency,
+            original=False,
+            require_success=not args.allow_incomplete,
+        )
+        candidate_success = (
+            candidate.get("errors") == 0
+            and candidate.get("completed") == 32
+            and candidate.get("finish_reasons") == {"stop": 32}
+            and len(candidate["response_sha256"]) == 32
+        )
+        runtime_pass = runtime_pass and candidate_success
         mismatches = sum(
             left != right
             for left, right in zip(
                 original["response_sha256"], candidate["response_sha256"]
             )
         )
-        cell_correct = mismatches == 0
+        cell_correct = mismatches == 0 if candidate_success else None
         correctness_pass = correctness_pass and cell_correct
         original_ttft = float(original["ttft_ms"]["p50"])
         candidate_ttft = float(candidate["ttft_ms"]["p50"])
@@ -120,12 +172,19 @@ def main() -> int:
         candidate_tpot = float(candidate["tpot_ms"]["p50"])
         ttft_ratio = candidate_ttft / original_ttft
         tpot_ratio = candidate_tpot / original_tpot
-        cell_performance_pass = (
+        cell_performance_pass = candidate_success and (
             ttft_ratio <= args.target_ratio
             and tpot_ratio <= args.target_ratio
         )
         performance_pass = performance_pass and cell_performance_pass
         cells[str(concurrency)] = {
+            "status": "complete" if candidate_success else "failed",
+            "measurement_valid": candidate_success,
+            "runtime_gate_met": candidate_success,
+            "completed_requests": candidate.get("completed"),
+            "errors": candidate.get("errors"),
+            "error_types": candidate.get("error_types", []),
+            "error_reasons": candidate.get("error_reasons", {}),
             "original_ttft_p50_ms": original_ttft,
             "candidate_ttft_p50_ms": candidate_ttft,
             "ttft_ratio": ttft_ratio,
@@ -134,19 +193,34 @@ def main() -> int:
             "candidate_tpot_p50_ms": candidate_tpot,
             "tpot_ratio": tpot_ratio,
             "tpot_improvement_x": original_tpot / candidate_tpot,
-            "response_hash_mismatches": mismatches,
+            "response_hash_mismatches_observed": mismatches,
+            # Preserve the v1 complete-cell field for existing consumers. Partial
+            # cells additionally carry the explicit observed qualifier above.
+            "response_hash_mismatches": mismatches if candidate_success else None,
             "correctness_exact_hash_match": cell_correct,
             "performance_target_met": cell_performance_pass,
         }
-        artifact_sha256[f"original/c{concurrency}-r1.json"] = digest_file(
-            original_path
-        )
         artifact_sha256[f"candidate/c{concurrency}-r1.json"] = digest_file(
             candidate_path
         )
 
-    final_target_met = correctness_pass and performance_pass
-    if not correctness_pass:
+    candidate_run = None
+    candidate_run_path = args.candidate_run
+    if candidate_run_path is None:
+        default_candidate_run = args.candidate_dir / "candidate-run.json"
+        if default_candidate_run.exists():
+            candidate_run_path = default_candidate_run
+    if candidate_run_path is not None and candidate_run_path.exists():
+        candidate_run = json.loads(candidate_run_path.read_text(encoding="utf-8"))
+        artifact_sha256["candidate/candidate-run.json"] = digest_file(
+            candidate_run_path
+        )
+
+    final_target_met = runtime_pass and correctness_pass and performance_pass
+    if not runtime_pass:
+        decision = "reject-runtime-failure"
+        exit_status = 4
+    elif not correctness_pass:
         decision = "hold-exact-hash-drift"
         exit_status = 3
     elif final_target_met:
@@ -168,9 +242,23 @@ def main() -> int:
             "these immutable artifacts as the common performance denominator."
         ),
         "target_ratio": args.target_ratio,
-        "correctness_exact_hash_match": correctness_pass,
+        "runtime_gate_met": runtime_pass,
+        "runtime_gate_status": (
+            "complete-matrix" if runtime_pass else "partial-or-failed-matrix"
+        ),
+        "candidate_run_status": (
+            candidate_run.get("status") if candidate_run is not None else None
+        ),
+        "candidate_failed_cell": (
+            candidate_run.get("failed_cell") if candidate_run is not None else None
+        ),
+        "correctness_exact_hash_match": (
+            correctness_pass if runtime_pass else None
+        ),
         "correctness_gate_status": (
-            "exact-hash-reproducible"
+            "not-evaluable-runtime-failure"
+            if not runtime_pass
+            else "exact-hash-reproducible"
             if correctness_pass
             else "semantic-business-check-required"
         ),

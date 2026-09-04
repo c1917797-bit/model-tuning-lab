@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: ngram_gpu_candidate_ready_on_npu4_7
-decision: run_npu_prompt_lookup_after_fixed_runtime_profile
+status: ngram_gpu_rejected_select_dense_ffn_operator
+decision: reject_npu_prompt_lookup_for_low_acceptance_and_concurrency_stall
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -353,8 +353,8 @@ rejected_algorithm_candidate:
   correctness_gate: "zero request errors plus the workstream's frozen response/correctness comparison; reject semantic drift even if performance improves"
   acquisition_rule: "do not download or generate this checkpoint"
   evidence_boundary: "official coverage proves a supported candidate path, not current query_rewrite accuracy or a 2x speedup"
-decision_reason: "The real fixed-runtime CANN profile closes the earlier evidence gap. Across the complete request, MatMul is 64.105% and collectives 16.434% of summed rank-0 kernel duration. In the post-prefill window, MatMulV2 rises to 70.702% and AllReduce is 10.530%; GDN decode itself is 2.406%. MTP, MMAR, FlashComm1 and BF16 NZ remain outside the stack. The next bounded treatment is lossless training-free Prompt Lookup Decoding through the image's existing 910B ngram_gpu operator, keeping the fixed-original MMAR-off/BF16 runtime."
-next_loop: "Launch ngram-gpu on assigned physical NPU4-7, require startup and NPU operator activation, run the immutable first-32 concurrency 1/5/8/16 matrix, record speculative acceptance counters plus privacy-safe labeled-reference quality, and compare with the hash-locked original. Reject or retune if accepted spans do not offset target verification cost."
+decision_reason: "Reject NPU Prompt Lookup Decoding. The real BF16 candidate completed c1 but made TPOT 4.82x slower; at c5 the observed subset was 7.67x slower and the engine stalled after 25/32 requests. Only 6.934% of drafted tokens and 14.809% of first draft positions were accepted, so even k=1 cannot repay target verification cost. The exact candidate container was stopped only after stall evidence was captured; physical NPU4-7 returned idle and external NPU0-3 PIDs were unchanged."
+next_loop: "Do not retune prompt lookup. Inspect the exact vLLM-Ascend 0.23.0 dense FFN path and /cache/cch operator-generation assets for a BF16 shape-specialized or fused gate/up-SwiGLU-down treatment targeting the profiled 1x5120 by 8704x5120 and 1x4352 by 5120x4352 decode projections. Require reference correctness, repeated operator microbenchmarks, feature-flagged E2E integration, the immutable query_rewrite comparison, and candidate profiling on assigned physical NPU4-7."
 fixed_runtime_profile:
   status: msprof_dynamic_ready_after_torch_api_failure
   service_mode: profile-msprof-mmar-off
@@ -404,7 +404,7 @@ fixed_runtime_profile:
     evidence_boundary: "kernel-duration sums and profiler request latency are diagnostic only, not wall time or E2E acceptance evidence"
 algorithm_candidate_after_profile:
   id: npu_prompt_lookup_decoding
-  status: ready_for_bounded_e2e
+  status: rejected_runtime_failure
   paper: "Inference with Reference: Lossless Acceleration of Large Language Models (LLMA), arXiv:2304.04487"
   specialization: "Apoorv Saxena Prompt Lookup Decoding n-gram reference retrieval; code release, not an arXiv paper"
   source_manifest: configs/qwen35-query-rewrite-ngram-gpu-candidate.yaml
@@ -415,6 +415,22 @@ algorithm_candidate_after_profile:
   rationale: "accepted spans can amortize the dominant small-batch FFN GEMMs and frequent TP collectives without retraining or a draft checkpoint"
   required_gates: [startup, operator_activation, zero_errors, natural_stop, speculative_acceptance, privacy_safe_reference_quality, fixed_original_e2e]
   evidence_boundary: "source support and profiling establish eligibility, not a performance result"
+  real_run:
+    operation_id: exec-00000000000006a5
+    run_id: ngram-gpu-fixedorig-npu4-7-20260904T2048Z
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/ngram-gpu-fixedorig-npu4-7-20260904T2048Z
+    devices: "physical NPU4-7 mapped to logical 0-3"
+    c1: {completed: 32, errors: 0, ttft_p50_ms: 781.239985, ttft_improvement_x: 1.1883, tpot_p50_ms: 185.297136, tpot_improvement_x: 0.20762}
+    c5_observed: {completed: 25, errors: 7, ttft_p50_ms: 1626.369080, ttft_improvement_x: 0.6716, tpot_p50_ms: 412.782999, tpot_improvement_x: 0.13041}
+    c8: not_run_after_runtime_failure
+    c16: not_run_after_runtime_failure
+    acceptance: {draft_sequences: 13087, draft_tokens: 65435, accepted_tokens: 4538, accepted_token_pct: 6.934, first_position_accepted: 1938, first_position_pct: 14.809, accepted_extra_tokens_per_draft_step: 0.3468}
+    failure: "at c5 generation froze after 25/32 completions with four requests still Running and repeated Poller timed out messages for more than three minutes; no OOM occurred"
+    decision: reject-runtime-failure
+    decision_sha256: 09d43a3715bbd2bc266f94dca5f5468aa62735027bb73383df4d1cc13ed484ab
+    sha256sums_sha256: 9bebf07aa270e5cc3c1e54c712f9572d474cf7eac147a497284f2a1dd039579a
+    resource_release: "exact candidate container exited; NPU4-7 idle; external NPU0-3 PIDs 1031654-1031657 unchanged"
+    followup: "retuning is rejected because first-position acceptance is already only 14.809%; proceed to the profile-ranked dense FFN operator lane"
 runtime_manifest:
   tool: scripts/render_qwen35_runtime.py
   schema: qwen35-query-rewrite-runtime-manifest/v1

@@ -56,3 +56,25 @@ natural EOS and the first-32 query protocol.
 Reject or retune if acceptance is too low to offset verification overhead.
 Do not promote it merely because the method is lossless in theory; target
 runtime correctness and the frozen business-quality gate remain mandatory.
+
+## Real Ascend result and decision
+
+The real BF16 TP4 run on assigned physical NPU4-7 rejected this treatment.
+At concurrency 1, all 32 requests completed naturally and TTFT improved by
+1.188x, but TPOT regressed from 38.472 ms to 185.297 ms, or 4.82x slower.
+At concurrency 5, only 25 of 32 requests completed before generation stopped
+making progress for more than three minutes. The observed subset had 1626.369
+ms TTFT and 412.783 ms TPOT, making TPOT 7.67x slower than the original.
+Concurrency 8 and 16 were not run after the runtime failure.
+
+The mechanism is clear from the captured counters. Of 65,435 drafted tokens,
+only 4,538 were accepted (6.934%). First-position acceptance was 1,938 of
+13,087 draft steps (14.809%), and each draft step yielded only 0.3468 accepted
+extra tokens. Even a one-token draft cannot justify an extra verification
+token at this acceptance rate, so retuning the window is rejected.
+
+The stall evidence, service log, partial cells, decision and checksums are in
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/ngram-gpu-fixedorig-npu4-7-20260904T2048Z`.
+The exact container was stopped after evidence capture; NPU4-7 returned idle
+and external NPU0-3 were untouched. The next paper-to-Ascend lane is a BF16
+dense FFN operator treatment selected from the measured decode shapes.

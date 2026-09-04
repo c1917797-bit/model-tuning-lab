@@ -72,3 +72,26 @@ MatMulAllReduce enabled alone with NZ mode 1 and FlashComm1 disabled.
 
 The isolated launcher mode is `mmar-on`. Relative to the real fixed original
 it changes only MatMulAllReduce false to true and keeps the BF16 ND layout.
+
+The same-device no-op control showed that the large fixed-original MMAR delta
+was mostly run/device drift: net TPOT improvement was only 0-5.3% and c1-c8
+TTFT improvement was only 2.4-8.6%. MMAR remains outside the accepted stack.
+
+A full-model CANN dynamic profile then ranked the decode opportunity. In the
+post-prefill window, MatMulV2 represented 70.702% of summed kernel duration,
+AllReduce 10.530%, and recurrent GDN 2.406%. The dominant TP-sharded dense FFN
+decode shapes were 1x5120 by 8704x5120 and 1x4352 by 5120x4352.
+
+NPU Prompt Lookup Decoding was tested as the next training-free algorithm and
+is rejected. Concurrency 1 TPOT was 4.82x slower. Concurrency 5 stalled after
+25/32 requests and its observed TPOT was 7.67x slower; c8/c16 were not run.
+Only 6.934% of draft tokens and 14.809% of first draft positions were accepted,
+so retuning to a smaller draft window is not economically justified.
+
+A partial matrix is now a terminal state, not an abandoned directory. The
+runner preserves the candidate failure, captures logs and metrics, stops the
+exact candidate container, classifies missing cells as not-run, emits
+`reject-runtime-failure`, and hashes only artifacts that exist. The next loop
+is a profile-ranked BF16 dense FFN operator with reference correctness,
+repeated microbenchmarks, feature-flagged vLLM-Ascend integration and E2E
+measurement on assigned physical NPU4-7.
