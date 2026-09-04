@@ -8,7 +8,7 @@ workload:
   source_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
   requests: 357
   prompt_mode: raw_question
-  output_tokens: 40
+  output: "natural model generation until EOS; no min_tokens/ignore_eos; safety cap 8192 and any finish_reason=length invalidates the run"
   concurrency: [1, 5, 8, 16]
 baseline:
   prefix_cache: false
