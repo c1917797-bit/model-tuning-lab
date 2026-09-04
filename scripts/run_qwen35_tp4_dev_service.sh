@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -41,6 +41,7 @@ flashcomm1_env=0
 weight_nz_env=1
 matmul_allreduce_env=1
 selective_ffn_nz_env=0
+hccl_op_expansion_mode=""
 if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
   flashcomm1_env=1
 fi
@@ -66,6 +67,9 @@ if [[ "$mode" == selective-ffn-nz ]]; then
     exit 45
   fi
   selective_ffn_nz_env=1
+fi
+if [[ "$mode" == mmar-on-hccl-aiv ]]; then
+  hccl_op_expansion_mode=AIV
 fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
@@ -218,6 +222,10 @@ docker_args=(
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )
+
+if [[ -n "$hccl_op_expansion_mode" ]]; then
+  docker_args+=(-e HCCL_OP_EXPANSION_MODE="$hccl_op_expansion_mode")
+fi
 
 if [[ "$mode" == selective-ffn-nz ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend

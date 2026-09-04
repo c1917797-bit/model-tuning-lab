@@ -26,6 +26,9 @@ case "$candidate_mode" in
   mmar-on)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-candidate.yaml"
     ;;
+  mmar-on-hccl-aiv)
+    default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-hccl-aiv-candidate.yaml"
+    ;;
   tp2-dp2-mmar-on)
     default_config="$repo_root/configs/qwen35-query-rewrite-tp2-dp2-mmar-on-candidate.yaml"
     ;;
