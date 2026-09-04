@@ -282,15 +282,16 @@ Across 6,453 rows, `hcom_allReduce_` accounts for 4,299,824.02 us, 94.585%
 of summed task duration, over 237 calls. This is diagnostic-only profiler
 attribution, not wall time or acceptance evidence.
 
-The next isolated BF16 parameter treatment is
-`additional_config.enable_matmul_allreduce: false -> true`, exposed by
-`scripts/run_qwen35_tp4_dev_service.sh matmul-allreduce`. The previously set
-`VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1` did not activate this path because
-the actual runtime additional config remained false. Require source activation
-proof, real query_rewrite correctness, repeated TP4 A/B, a paired profile and
-final DP2/TP4 A/B. Do not run it while the current external
-`qwen36_hypic_pdc_baseline_npu0_3` or `qwen38_gdn_fused_candidate`
-containers own NPU0-7.
+Do **not** treat MatMul+AllReduce enablement as a candidate over the canonical
+baseline. Exact-image unit tests and `AscendConfig._get_config_value` prove
+that the user-provided `VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1` is used when
+the additional-config key is absent. The v5 TP4 development profile instead
+explicitly forced both sources false, so its 94.585% AllReduce attribution is
+useful failure evidence but is not a profile of the canonical baseline.
+The baseline YAML and TP4 baseline/profile launchers now explicitly set
+`enable_matmul_allreduce=true` to eliminate fallback ambiguity. Re-profile
+that canonical configuration when NPU0-3 are free before selecting a new
+treatment.
 
 Offline inspection of the exact `quay.io/ascend/vllm-ascend:v0.23.0`
 image confirms the activation chain: `ascend_config.py` gives the explicit

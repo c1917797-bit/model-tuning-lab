@@ -30,6 +30,7 @@ serve:
   async_scheduling: true
   additional_config:
     enable_cpu_binding: true
+    enable_matmul_allreduce: true
   default_chat_template_kwargs:
     enable_thinking: false
   compilation_config:

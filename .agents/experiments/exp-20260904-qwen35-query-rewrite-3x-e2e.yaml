@@ -152,11 +152,11 @@ profile_analysis:
   latest_resource_state: "NPU0-3 external qwen36_hypic_pdc_baseline_npu0_3 (8371abb7731a6c4ba0d01a566c4c10ab27552ca9a26f476ec22229fe226c0d1e); NPU4-7 external qwen38_gdn_fused_candidate (e6e72d7a006971d4dcfe48c1b2046f45017acc450958d0c5ffa9b1d970af66b9); untouched"
 parameter_candidate:
   id: bf16_matmul_allreduce_fusion
+  status: rejected_as_already_in_canonical_baseline
   dtype: BF16
   primary_variable: "additional_config.enable_matmul_allreduce: false -> true"
-  launcher_mode: matmul-allreduce
-  rationale: "recovered v5 rank0 profile attributes 94.585% of summed task duration to 237 hcom_allReduce_ calls; the old environment variable was ignored because the active additional_config explicitly set enable_matmul_allreduce=false"
-  isolation: "all other TP4 development launch arguments remain unchanged"
+  rationale: "recovered v5 rank0 profile attributes 94.585% of summed task duration to 237 hcom_allReduce_ calls, but v5 was a non-canonical development variant that explicitly forced the flag false"
+  rejection_reason: "the user-provided canonical baseline already sets VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1; v0.23.0 falls back to that environment variable when the additional config key is absent, so enabling it is not an optimization over the baseline"
   source_activation:
     image: quay.io/ascend/vllm-ascend:v0.23.0
     config: "ascend_config.py resolves additional_config.enable_matmul_allreduce before the legacy environment variable"
@@ -166,7 +166,7 @@ parameter_candidate:
     applicability: "dense Qwen3.5 row-parallel projections are in scope; runtime logs/profile must still prove actual activation"
   required_gates: ["source activation proof", "real query_rewrite correctness", "repeated TP4 A/B", "paired profile", "final DP2/TP4 A/B"]
   evidence_boundary: "the profiler result prioritizes this candidate but does not predict or prove an E2E speedup"
-  execution_state: "ready, but blocked until NPU0-3 are explicitly idle"
+  execution_state: "do not benchmark as a candidate; baseline/profile launchers now explicitly set both environment and additional config true"
 operator_candidate:
   id: fused_gdn_prefill
   upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca

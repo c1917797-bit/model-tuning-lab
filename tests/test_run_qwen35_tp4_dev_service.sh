@@ -71,24 +71,13 @@ PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" 
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" baseline \
   >"$tmp/baseline-fresh.out" 2>"$tmp/baseline-fresh.err"
 grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
 if grep -q -- '--no-async-scheduling' "$docker_log"; then
   echo "baseline mode unexpectedly disabled async scheduling" >&2
   exit 1
 fi
 if grep -q -- '--profiler-config.profiler' "$docker_log"; then
   echo "baseline mode unexpectedly enabled profiling" >&2
-  exit 1
-fi
-
-: >"$docker_log"
-PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
-  CONTAINER_NAME=guard-test-matmul-allreduce-fresh \
-  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" matmul-allreduce \
-  >"$tmp/matmul-allreduce-fresh.out" 2>"$tmp/matmul-allreduce-fresh.err"
-grep -q -- '--async-scheduling' "$docker_log"
-grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
-if grep -q -- '--profiler-config.profiler' "$docker_log"; then
-  echo "matmul-allreduce mode unexpectedly enabled profiling" >&2
   exit 1
 fi
 
