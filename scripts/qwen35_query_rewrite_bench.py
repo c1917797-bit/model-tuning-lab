@@ -89,6 +89,7 @@ def request_one(
     max_tokens: int,
     seed: int,
     timeout: float,
+    cache_salt: str | None = None,
 ) -> dict[str, object]:
     payload = {
         "model": model,
@@ -99,6 +100,8 @@ def request_one(
         "stream": True,
         "stream_options": {"include_usage": True},
     }
+    if cache_salt is not None:
+        payload["cache_salt"] = cache_salt
     request = urllib.request.Request(
         base_url.rstrip("/") + "/v1/completions",
         data=json.dumps(payload).encode(),

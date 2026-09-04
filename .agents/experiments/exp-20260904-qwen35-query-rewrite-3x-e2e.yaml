@@ -104,6 +104,9 @@ profiling_attempt:
   cleanup: "failed profile container retained; workstream readiness observer terminated; no workstream process remains on NPU0-3"
   recovery: "require explicit exclusive NPU0-3 ownership; use a new immutable profile container name and output directory"
 profile_analysis:
+  request_driver: scripts/run_qwen35_profile_request.py
+  request_schema: qwen35-query-rewrite-profile-request/v1
+  cache_isolation: "different warmup/profile records plus a run-unique cache_salt prevent prefix-cache hits from hiding prefill"
   tool: scripts/analyze_ascend_profile.py
   schema: qwen35-ascend-profile-hotspots/v1
   validation: "zero-dependency fixture assertions, py_compile, and 15298-row historical Ascend kernel_details.csv smoke passed"

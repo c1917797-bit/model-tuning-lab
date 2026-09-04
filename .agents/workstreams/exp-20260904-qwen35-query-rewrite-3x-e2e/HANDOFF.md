@@ -199,6 +199,16 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 
 ## Profile analysis readiness
 
+- `scripts/run_qwen35_profile_request.py` performs an unprofiled warmup on
+  record 0, calls the service's `/start_profile` endpoint, profiles record 31,
+  and always calls `/stop_profile` after a successful start. Warmup and
+  profile use distinct, run-unique `cache_salt` values so prefix caching
+  cannot hide the profiled prefill. Its artifact stores dataset, question and
+  response hashes but no raw confidential text, and marks profiler timings as
+  non-performance evidence.
+- Use a unique `--run-id` for every capture. The service must expose both
+  profiler endpoints; HTTP 404 means profiler configuration was not active.
+  Never run this driver concurrently with a formal TTFT/TPOT cell.
 - `scripts/analyze_ascend_profile.py` recursively discovers Ascend
   `kernel_details.csv` files, records each input SHA256, and emits
   `qwen35-ascend-profile-hotspots/v1` JSON with category shares and raw top
