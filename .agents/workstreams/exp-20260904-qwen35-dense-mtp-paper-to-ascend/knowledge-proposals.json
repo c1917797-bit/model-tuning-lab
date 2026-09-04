@@ -1,5 +1,24 @@
 {
   "schema": "mst-knowledge-proposals/v1",
   "taskId": "exp-20260904-qwen35-dense-mtp-paper-to-ascend",
-  "proposals": []
+  "proposals": [
+    {
+      "title": "Require same-session physical NPU ownership proof for every A/B arm",
+      "scope": "ascend-benchmark-evidence",
+      "evidence": "A diagnostic baseline completed while a pre-existing NPU0-3 vLLM workload was later found; the candidate then failed device inspection.",
+      "proposal": "Before baseline and candidate separately, record host npu-smi process ownership, container host-to-container device maps, ports, and HBM. Invalidate the arm if exclusivity is not proven."
+    },
+    {
+      "title": "Separate algorithm savings from routing and serving overhead",
+      "scope": "ascend-inference-tuning-loop",
+      "evidence": "Dynamic MoE reduced expert work and sped up expert GMM, yet routing overhead caused an 82-96% whole-block regression; Prefix Cache also regressed its real traffic shape.",
+      "proposal": "Require end-to-end repeated A/B plus stage profiling before accepting a paper optimization, even when a microkernel or compute-count metric improves."
+    },
+    {
+      "title": "Classify invalid and failed runs without erasing them",
+      "scope": "mst-maintainer-handoff",
+      "evidence": "The MTP baseline is useful diagnostic evidence but cannot support a decision because resource isolation failed.",
+      "proposal": "Handoffs should retain paths and observed numbers while marking validity, failure phase, safety action, and exact rerun gate."
+    }
+  ]
 }

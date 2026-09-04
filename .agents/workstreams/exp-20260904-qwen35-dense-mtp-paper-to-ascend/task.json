@@ -27,6 +27,6 @@
     "python -m unittest discover -s tests -p 'test_qwen35_dense_mtp_*.py'",
     "git diff --check"
   ],
-  "executionState": "started",
+  "executionState": "blocked-resource",
   "integrationState": "not-ready"
 }

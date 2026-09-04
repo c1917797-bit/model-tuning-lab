@@ -1,12 +1,83 @@
 # Qwen3.5 Dense MTP Paper-to-Ascend
 
-- State: `started / not-ready`.
+## State
+
+- Execution: `blocked-resource`; integration: `not-ready`; decision: `inconclusive`.
+- Branch: `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend`.
 - Base: `origin/main@fbc79c41c37c8900f0623ce8941304e9bfde5cf1`.
-- Resource lease: physical NPU0-3 and loopback port 8220 only.
-- Exclusion: do not stop, restart, inspect inside, or otherwise perturb the
-  existing physical NPU4-7 workload or its port 8210 service.
-- Current candidate: exact speculative decoding with the checkpoint's built-in
-  Qwen3.5 MTP head; confirm selection against historical Decode profiling and
-  installed vLLM/vLLM-Ascend 0.23.0 source before implementation.
-- Resume: complete source/profile selection evidence, declare the experiment
-  thresholds, then baseline on a fresh NPU0-3 service.
+- Latest local checkpoint before this handoff update: `5b0f328`.
+- No experiment container remains. Port 8220 is not owned after cleanup.
+- Do not stop or change `qwen38_paper_baseline_npu0_3` (physical NPU0-3,
+  port 8211) or `qwen38_gdn_fused_candidate` (physical NPU4-7, port 8210).
+
+## Selected method and readiness
+
+The candidate is distribution-preserving speculative decoding with the
+checkpoint's built-in Qwen3.5 MTP head. It requires no retraining or external
+draft checkpoint. Selection is backed by the local model's
+`mtp_num_hidden_layers=1`, 15 MTP tensors, installed vLLM/vLLM-Ascend
+`qwen3_5_mtp` source paths, and historical Decode profiles dominated by
+repeated MatMul and TP communication.
+
+Frozen candidate delta:
+
+```text
+baseline: FULL_DECODE_ONLY graph, speculative decoding off
+candidate: --enforce-eager --speculative-config
+           '{"method":"qwen3_5_mtp","num_speculative_tokens":3}'
+```
+
+## Evidence obtained
+
+- A diagnostic concurrency-8 baseline completed three 64-request repetitions:
+  output throughput 163.088 / 163.988 / 165.085 tok/s; median 163.988 tok/s.
+- Median request throughput was 0.6406 req/s; median TPOT was 44.403 ms.
+- Eight deterministic greedy outputs were captured as the correctness reference.
+- Raw evidence is under
+  `/cache/austinov/paper-to-ascend/qwen35-dense-mtp/baseline`.
+- Treat all baseline numbers as non-decisional: a pre-existing NPU0-3 workload
+  was discovered afterward, so exclusive ownership was not proven.
+- The candidate made zero measured requests. Its first start failed before
+  weight load when the model-inspection subprocess could not query Ascend
+  device count/architecture; NPU0-3 were already occupied.
+
+## Exact resume sequence
+
+1. Confirm an owner has explicitly released either physical NPU0-3 or NPU4-7.
+2. Run host `npu-smi info`, container device-map inspection, port checks, and
+   process ownership checks in the same session. Do not infer availability from
+   container age or an idle API alone.
+3. Wait at least 20 seconds after worker teardown and re-check HBM/processes.
+4. Use a fresh endpoint and run baseline then candidate serially on the same
+   physical devices. Repeat concurrency 8 three times with 256 input and 256
+   output tokens, 64 requests, seed 20260904, and eight warmups.
+5. Compare the eight greedy canary texts and completion-token counts exactly.
+6. Record speculative acceptance metrics and collect comparable steady Decode
+   profiles for both arms before deciding.
+7. Accept only for at least 5% median output-throughput improvement with exact
+   correctness; otherwise reject or retain inconclusive with the observed gate.
+
+## Historical maintainer lessons
+
+- Prefix Cache: a plausible feature can regress the actual traffic shape.
+  On exact 2048/40, concurrency-8 traffic it reduced output throughput by
+  20.18% and increased wall time by 25.28%; workload-specific repeated A/B beats
+  feature-level intuition.
+- Dynamic MoE: reduced compute is not end-to-end speedup. Expert pairs fell
+  about 12-13.5% and expert GMM improved 8.85%, but sort/cumsum/compaction made
+  routing 6.36x slower and whole-block latency 82-96% worse. Profile the glue,
+  not only the target kernel.
+- Dynamic MoE environment recovery: mapping device nodes alone was insufficient;
+  driver/DCMI binds from a known-good vLLM container were required.
+- This MTP attempt: prove physical-device exclusivity immediately before every
+  arm. A benchmark that completes under contention is evidence to retain, but
+  not evidence from which to make a production decision.
+- Preserve failed starts and invalid runs with an explicit validity label;
+  never silently average them into successful repetitions.
+
+## Validation and rollback
+
+- Repository validation: `./scripts/validate-mst.sh` and `git diff --check`.
+- Rollback for this workstream is complete: `qwen35_dense_mtp_ab` was removed.
+- Large artifacts remain outside Git and are referenced from the experiment
+  record; hashes should be regenerated after the final uncontended run.

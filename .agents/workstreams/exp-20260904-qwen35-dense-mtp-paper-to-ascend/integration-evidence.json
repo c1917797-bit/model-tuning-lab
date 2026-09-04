@@ -1,8 +1,21 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-dense-mtp-paper-to-ascend",
-  "status": "not-ready",
+  "status": "not-ready-resource-blocked",
   "targetParent": null,
-  "sourceCommit": null,
-  "validation": []
+  "sourceCommit": "5b0f328",
+  "validation": [
+    {
+      "command": "./scripts/validate-mst.sh",
+      "result": "PASS before baseline checkpoint"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS before baseline checkpoint"
+    },
+    {
+      "gate": "runtime-isolation",
+      "result": "FAIL: physical NPU0-3 and NPU4-7 are occupied by pre-existing workloads; no candidate A/B or fresh comparative profile is valid"
+    }
+  ]
 }
