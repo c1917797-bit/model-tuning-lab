@@ -1,0 +1,32 @@
+schema: qwen35-query-rewrite-runtime/v1
+status: planned-unverified
+inherits: configs/qwen35-query-rewrite-baseline.yaml
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+treatment:
+  dimension: algorithm
+  name: native_qwen35_mtp
+  speculative_config:
+    method: mtp
+    num_speculative_tokens: 1
+  rationale:
+    model_config: "text_config.mtp_num_hidden_layers=1"
+    weights: "15 indexed MTP tensors are present"
+    runtime: "vLLM 0.23.0 and vLLM-Ascend register Qwen3_5MTP"
+  invariants:
+    - "mamba_cache_mode remains align; Qwen3_5MTP rejects all mode"
+    - "async_scheduling remains enabled; MTP is an allowed speculative method"
+    - "all non-treatment baseline arguments and environment values remain frozen"
+  acceptance:
+    - exact_response_hash_equality
+    - zero_request_errors
+    - speculative_acceptance_profile
+    - paired_query_rewrite_e2e
+    - no_unacceptable_p95_or_p99_regression
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  target_ttft_ratio: 0.5
+  target_tpot_ratio: 0.5
