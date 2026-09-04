@@ -20,6 +20,10 @@
     {
       "gate": "runtime-isolation",
       "result": "PASS: the user assigned physical NPU4-7 to this task; the old non-comparable fused-GDN service was retained for audit and stopped, and the candidate launcher maps physical 4-7 to logical 0-3"
+    },
+    {
+      "gate": "flashcomm1-startup",
+      "result": "FAIL (preserved): FlashComm1 and MatMulAllReduce activation were logged, but Qwen3.5 TP4 GDN graph construction failed with symbolic s59 versus ceil(s59/4) shape mismatch before readiness; no benchmark cell ran and the candidate is excluded from the stack"
     }
   ]
 }

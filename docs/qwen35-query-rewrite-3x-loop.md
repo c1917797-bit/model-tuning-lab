@@ -43,3 +43,15 @@ example, FlashComm1 and BF16 FRACTAL_NZ are first measured separately. If both
 are accepted, `flashcomm1-bf16-nz` measures their cumulative effect. Later
 accepted algorithms and feature-flagged operators are added to that best stack
 the same way. Quantization is prohibited.
+
+## Current durable decisions
+
+- MTP is rejected: it changed 16-21 of 32 response hashes and regressed both
+  metrics at every measured concurrency.
+- FlashComm1 is failed at startup for the unchanged vLLM-Ascend 0.23.0
+  Qwen3.5 TP4 path. Activation succeeded, but GDN graph construction mixed an
+  unsplit symbolic sequence length with a sequence-parallel `ceil(s/4)`
+  buffer. No E2E measurement exists, so this is not a claimed latency
+  regression and not a rejection of the paper-level method.
+- The next isolated treatment is BF16 `weight_nz_mode=2` on physical NPU4-7.
+  FlashComm1 is not part of the current best stack.

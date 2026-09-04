@@ -2,7 +2,7 @@
 
 ## State
 
-- Execution: `fixed-original-locked-waiting-for-candidate-npu0-3`;
+- Execution: `flashcomm1-failed-bf16-nz-next-on-npu4-7`;
   integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
@@ -24,6 +24,18 @@
 - No baseline rerun is pending. The user designated the existing TP4
   `quick32-v3` artifacts as the immutable original denominator. Future
   runs use exclusive physical NPU4-7 for one candidate.
+- FlashComm1 was really launched on physical NPU4-7 as run
+  `flashcomm1-fixedorig-npu4-7-20260904T1816Z`. The v0.23.0 runtime proved
+  both FlashComm1 and MatMulAllReduce active, then all four TP workers failed
+  before readiness: the Qwen3.5 GDN graph attempted to place symbolic length
+  `s59` into a sequence-parallel `ceil(s59/4)` buffer. No benchmark cell
+  ran. Treat this as a runtime-compatibility failure, exclude FlashComm1 from
+  the cumulative stack, and do not retry it unchanged.
+- Immutable failure evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm1-fixedorig-npu4-7-20260904T1816Z/service.log`
+  (SHA256
+  `35ef543dd9ab29d127ce01b2556b6abf8b0a46e9068320f7a97d4e69cf59e692`).
+  The exact container was stopped; NPU4-7 remain the assigned candidate set.
 
 ## Authoritative comparison and stacking policy
 
@@ -379,9 +391,9 @@ The remaining route is cumulative BF16 optimization: attributable runtime
 parameters, semantics-preserving inference algorithms, and native/fused Ascend
 operators, each behind the frozen correctness and real query_rewrite E2E gates.
 
-## Next BF16 communication candidate
+## FlashComm1 decision and next BF16 candidate
 
-FlashComm1 is the next real candidate, not Fused MC2. The exact v0.23.0 source
+FlashComm1 was the first real candidate, not Fused MC2. The exact v0.23.0 source
 and model guide describe FlashComm1 as a sequence-parallel communication path
 for dense Qwen3/high-concurrency TP, decomposing traditional AllReduce into
 ReduceScatter and AllGather. It is isolated in
@@ -391,11 +403,13 @@ through MoE code and is out of scope for this dense model. `enable_prefill_mc2`
 is also not selected because its documented recommended
 `max_num_batched_tokens=TP*512` conflicts with the frozen 32768 baseline.
 
-First run FlashComm1 with the frozen graph capture list to preserve a single
-primary variable. The official guide warns that capture sizes should be TP-size
-multiples; if runtime activation or graph behavior requires that change, treat
-it as a separate cumulative parameter treatment rather than silently combining
-variables.
+The real NPU4-7 launch proved the switch active. The runtime automatically
+removed graph sizes 1, 2, 6, 10 and 14 because sequence parallelism requires
+TP4 multiples, then failed during KV-cache initialization with a symbolic
+`s59` versus `ceil(s59/4)` assignment mismatch on every TP worker.
+FlashComm1 therefore failed the startup gate. This is not latency evidence and
+does not reject the general communication method; it rejects this unchanged
+v0.23.0 Qwen3.5 TP4 integration.
 
 Use `scripts/run_qwen35_tp4_candidate_vs_original.sh` for the real TP4
 decision. It requires unique `RUN_ID` and absolute new
@@ -405,14 +419,14 @@ correctness plus 2x decision report and hashes. Its trap stops only the exact
 container it started; the underlying launcher rejects any existing process on
 the selected physical device set.
 
-The next queued candidate is BF16 weight `FRACTAL_NZ`, isolated as
+The next candidate is BF16 weight `FRACTAL_NZ`, isolated as
 `weight_nz_mode=2` in
 `configs/qwen35-query-rewrite-bf16-nz-candidate.yaml` and launcher mode
 `bf16-nz`. This is not quantization: exact-image source applies
 `maybe_trans_nz` inside `AscendUnquantizedLinearMethod` and continues
 through `unquantized_gemm`. Mode 1 leaves BF16 weights in ND, while mode 2
-converts eligible non-conv1d weights. Do not stack it with FlashComm1 until
-each has an attributable result. In particular, require startup and correctness
+converts eligible non-conv1d weights. Do not stack it with the failed
+FlashComm1 path. In particular, require startup and correctness
 proof with the canonical MatMulAllReduce path because their interaction is not
 proven by static inspection.
 

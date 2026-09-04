@@ -19,6 +19,12 @@
       "status": "accepted-local",
       "lesson": "Natural EOS includes empty-text EOS-only completions; benchmark TTFT from the first token event. Reject an optimization even when transport succeeds if response hashes diverge.",
       "evidence": "The harness correction recovered four valid EOS-only requests; Qwen3.5 MTP was rejected with 16-21 response mismatches and latency regressions"
+    },
+    {
+      "id": "flashcomm1-qwen35-tp4-startup-gate",
+      "status": "accepted-local",
+      "lesson": "A documented dense communication optimization is not stack-eligible until the target architecture survives graph construction. On Qwen3.5 TP4, FlashComm1 activated sequence parallelism and normalized graph sizes, but the GDN graph retained an unsplit symbolic sequence length and failed before readiness. Classify this as an implementation/runtime failure, not a performance regression or rejection of the general method.",
+      "evidence": "Run flashcomm1-fixedorig-npu4-7-20260904T1816Z; service.log SHA256 35ef543dd9ab29d127ce01b2556b6abf8b0a46e9068320f7a97d4e69cf59e692; operation exec-000000000000053a exited 70 before any benchmark cell"
     }
   ]
 }
