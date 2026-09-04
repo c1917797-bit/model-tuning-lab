@@ -790,3 +790,51 @@ subsequent HTTPS push to origin failed because chicaihong01 has no GitHub
 username/credential available. Do not retry unchanged. The local worktree and
 branch are authoritative until credentials are provisioned; verify the final
 HEAD recorded by the next checkpoint before handoff.
+
+## MMAR-on dynamic profile and topology decision
+
+The valid MMAR-enabled CANN dynamic profile is
+`tp4-mmar-on-msprof-20260904T2313Z` (operation
+`exec-00000000000007b8`). It used the retained BF16 stack on physical
+NPU4-7: MMAR on, NZ1, FlashComm1 off, async scheduling on and
+FULL_DECODE_ONLY. Record 0 completed with 1810 prompt tokens, 104 completion
+tokens and natural stop. The exported op-summary has 162,448 rows and SHA256
+`148f86b18d797d6f623b49812ed228d721ddf1fdd52468fc7fadc421fc9c3d6d`.
+
+Summed rank-0 kernel duration is collective dominated: 64.8641% collective
+and 24.5622% matmul. `MatmulAllReduceMc2AicpuKernel` accounts for 48.1673%
+and `MatmulAllReduce` for another 16.5999%, each with 13,696 calls. These
+sums overlap across streams and are diagnostic only; the profiler-inflated
+request timing is not an E2E acceptance result.
+
+The exact vLLM-Ascend Qwen3.5 dense guidance recommends the smallest TP that
+fits and using remaining devices for DP because larger TP adds per-layer
+AllReduce. On the four assigned 910B4 cards, the bounded translation was
+TP4/DP1 -> TP2/DP2 while retaining MMAR and all other current settings.
+Launcher/config support was added and validated in local commit `4794324`.
+Both launcher and candidate orchestrator are now hard-restricted to physical
+NPU4-7 so this workstream cannot launch on NPU0-3.
+
+The startup gate `tp2-dp2-mmar-on-npu4-7-20260904T2330Z` rejected the
+candidate before E2E. All four task cards reached 32,593-32,594 MiB HBM.
+During `determine_available_memory -> profile_run`, multimodal encoder
+attention then tried to allocate another 258 MiB with only 173.92 MiB free
+and raised `torch.OutOfMemoryError`. No benchmark request ran, so there is
+no latency claim. Do not weaken the immutable capacity contract
+(`max_model_len=133000`, `max_num_batched_tokens=32768`,
+`max_num_seqs=16`) merely to make this candidate start; treat any capacity
+retune as a separate product tradeoff, not a performance win.
+
+Hashed startup evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/startup-gates/tp2-dp2-mmar-on-npu4-7-20260904T2330Z`.
+The SHA256SUMS digest is
+`f38d2e484f3354e5820854cc39662acb529f8700c46877d583bf0e657a3006e8`.
+The exact probe container was stopped. NPU4-7 returned to 2865-2866 MiB idle
+HBM with no running processes; external NPU0-3 worker PIDs
+1031654-1031657 remained unchanged.
+
+Final topology decision: retain TP4/DP1 plus MMAR as the current best stack,
+reject TP2/DP2 under the fixed serving-capacity contract, and continue the
+TPOT loop from the retained stack. TTFT already meets the 2x target at all
+four concurrency points; TPOT remains 1.343x/1.380x/1.486x/1.546x versus the
+fixed original and is still the open objective.

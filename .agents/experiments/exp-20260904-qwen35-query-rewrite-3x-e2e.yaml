@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_retained_selective_dense_ffn_nz_rejected_tpot_target_open
-decision: retain_matmulallreduce_reject_gate_up_nz_and_iterate_tpot
+status: mmar_retained_tp2_dp2_rejected_oom_tpot_target_open
+decision: retain_matmulallreduce_reject_gate_up_nz_and_tp2_dp2_then_iterate_tpot
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -523,3 +523,52 @@ candidate_device_policy:
   cpu_set: 0-95
   original_baseline_physical_devices: [0, 1, 2, 3]
   caveat: "original and candidate use different physical indices but the same Ascend 910B4 SKU; preserve this in decision artifacts"
+mmar_enabled_dynamic_profile:
+  operation_id: exec-00000000000007b8
+  run_id: tp4-mmar-on-msprof-20260904T2313Z
+  status: completed
+  profile_rank: 0
+  physical_device: 4
+  request: "record 0; 1810 prompt tokens; 104 completion tokens; finish_reason=stop"
+  profile_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-mmar-on-msprof-20260904T2313Z
+  artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/tp4-mmar-on-msprof-20260904T2313Z
+  op_summary_sha256: 148f86b18d797d6f623b49812ed228d721ddf1fdd52468fc7fadc421fc9c3d6d
+  rows: 162448
+  summed_kernel_duration_us: 6375492
+  whole_request_categories:
+    collective: {share_pct: 64.8641}
+    matmul: {share_pct: 24.5622}
+    copy_transpose: {share_pct: 1.6967}
+    normalization: {share_pct: 1.5074}
+    gdn_decode: {share_pct: 1.0843}
+    attention: {share_pct: 0.6176}
+    gdn_prefill: {share_pct: 0.5748}
+  dominant_kernels:
+    - {name: MatmulAllReduceMc2AicpuKernel, share_pct: 48.1673, calls: 13696}
+    - {name: aclnnMatmul_MatMulCommon_MatMulV2, share_pct: 23.4808, calls: 18811}
+    - {name: MatmulAllReduce, share_pct: 16.5999, calls: 13696}
+  activation: "enable_matmul_allreduce=true; weight_nz_mode=1; enable_flashcomm1=false; async_scheduling=true"
+  decision: "prioritize communication/topology after MMAR; do not spend the next treatment on more FFN weight layout"
+  evidence_boundary: "summed per-rank kernel duration is diagnostic and overlaps across streams; profiled TTFT/TPOT are not acceptance metrics"
+tp2_dp2_mmar_topology_candidate:
+  source_manifest: configs/qwen35-query-rewrite-tp2-dp2-mmar-on-candidate.yaml
+  launcher_mode: tp2-dp2-mmar-on
+  implementation_commit: 4794324
+  primary_variable_vs_retained_mmar: "TP4/DP1 -> TP2/DP2"
+  retained_stack: "BF16; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; no quantization"
+  rationale: "MMAR-on profile is collective dominated; exact Qwen3.5 dense guidance prefers the smallest TP that fits and DP for throughput"
+  startup_gate:
+    run_id: tp2-dp2-mmar-on-npu4-7-20260904T2330Z
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/startup-gates/tp2-dp2-mmar-on-npu4-7-20260904T2330Z
+    readiness_operation: exec-00000000000007ea
+    outcome: rejected_npu_out_of_memory
+    failure_stage: determine_available_memory/profile_run/multimodal_encoder_attention
+    attempted_allocation_mib: 258
+    reported_capacity_gib: 29.49
+    reported_allocated_gib: 28.90
+    reported_free_mib: 173.92
+    peak_hbm_mib: "32593-32594 on physical NPU4-7"
+    measured_requests: 0
+    sha256sums_sha256: f38d2e484f3354e5820854cc39662acb529f8700c46877d583bf0e657a3006e8
+  decision: "reject TP2/DP2 under the immutable 133000 max-model-len, 32768 max-batched-tokens and max-num-seqs 16 capacity contract; do not run E2E"
+  recovery: "exact probe container stopped; physical NPU4-7 returned to 2865-2866 MiB idle HBM; external NPU0-3 PIDs 1031654-1031657 unchanged"
