@@ -12,6 +12,8 @@ container_name="${CONTAINER_NAME:?set CONTAINER_NAME to a new unique name}"
 profile_dir="${PROFILE_DIR:?set PROFILE_DIR to a new absolute directory}"
 artifact_dir="${ARTIFACT_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/${run_id}}"
 profile_rank="${PROFILE_RANK:-0}"
+profile_mode="${PROFILE_MODE:-profile-msprof-mmar-off}"
+device_set="${DEVICE_SET:-4-7}"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
 control_timeout="${PROFILE_CONTROL_TIMEOUT_SECONDS:-180}"
 profile_flush_timeout="${PROFILE_FLUSH_TIMEOUT_SECONDS:-600}"
@@ -23,6 +25,7 @@ export_log="${artifact_dir}/msprof-export.log"
 ready_file="${artifact_dir}/request-ready"
 go_file="${artifact_dir}/request-go"
 control_fifo="${artifact_dir}/msprof-control.fifo"
+profile_metadata="${artifact_dir}/profile-metadata.json"
 
 case "$profile_dir" in
   /*) ;;
@@ -36,6 +39,14 @@ case "$profile_rank" in
   0|1|2|3) ;;
   *) echo "PROFILE_RANK must be one of 0, 1, 2, 3" >&2; exit 64 ;;
 esac
+case "$profile_mode" in
+  profile-msprof-mmar-off|profile-msprof-mmar-on) ;;
+  *) echo "PROFILE_MODE must be profile-msprof-mmar-off or profile-msprof-mmar-on" >&2; exit 64 ;;
+esac
+if [[ "$device_set" != 4-7 ]]; then
+  echo "DEVICE_SET must be 4-7 for this workstream" >&2
+  exit 64
+fi
 if [[ -e "$profile_dir" || -e "$artifact_dir" ]]; then
   echo "refusing to reuse immutable output path" >&2
   echo "profile_dir=$profile_dir" >&2
@@ -44,6 +55,27 @@ if [[ -e "$profile_dir" || -e "$artifact_dir" ]]; then
 fi
 
 mkdir -p "$profile_dir" "$artifact_dir"
+python3 - "$profile_metadata" "$run_id" "$profile_mode" "$device_set" "$profile_rank" "$container_name" "$profile_dir" <<'PY'
+import json
+import sys
+
+path, run_id, profile_mode, device_set, profile_rank, container_name, profile_dir = sys.argv[1:]
+with open(path, "w", encoding="utf-8") as handle:
+    json.dump(
+        {
+            "run_id": run_id,
+            "profile_mode": profile_mode,
+            "device_set": device_set,
+            "profile_rank": int(profile_rank),
+            "container_name": container_name,
+            "profile_dir": profile_dir,
+        },
+        handle,
+        indent=2,
+        sort_keys=True,
+    )
+    handle.write("\n")
+PY
 started=0
 request_pid=
 msprof_pid=
@@ -66,7 +98,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-env CONTAINER_NAME="$container_name" PORT="$port" "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile-msprof-mmar-off
+env CONTAINER_NAME="$container_name" PORT="$port" DEVICE_SET="$device_set" "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" "$profile_mode"
 started=1
 docker inspect "$container_name" >"${artifact_dir}/container-inspect.json"
 
@@ -180,5 +212,5 @@ fi
 
 python3 "$repo_root/scripts/analyze_ascend_profile.py" "$profile_dir" --output "$hotspot_artifact"
 docker logs "$container_name" >"$service_log" 2>&1
-sha256sum "$request_artifact" "$hotspot_artifact" "$msprof_log" "$export_log" "$service_log" >"${artifact_dir}/SHA256SUMS"
+sha256sum "$request_artifact" "$hotspot_artifact" "$msprof_log" "$export_log" "$service_log" "$profile_metadata" "${artifact_dir}/container-inspect.json" "${artifact_dir}/profile-target.txt" >"${artifact_dir}/SHA256SUMS"
 cat "$hotspot_artifact"

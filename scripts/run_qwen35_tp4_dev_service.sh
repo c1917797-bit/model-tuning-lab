@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -220,10 +220,12 @@ if [[ "$mode" == selective-ffn-nz ]]; then
   )
 fi
 
-if [[ "$mode" == profile-msprof-mmar-off ]]; then
+if [[ "$mode" == profile-msprof-mmar-off ||
+      "$mode" == profile-msprof-mmar-on ]]; then
   # CANN dynamic attach is initialized with the application, then msprof
   # controls the bounded collection window by worker PID. This avoids vLLM
   # 0.23.0's broken lazy torch-profiler initialization on a different thread.
+  # The on mode intentionally falls through the normal MMAR-enabled config.
   docker_args+=(-e PROFILING_MODE=dynamic)
 fi
 
