@@ -292,6 +292,15 @@ final DP2/TP4 A/B. Do not run it while the current external
 `qwen36_hypic_pdc_baseline_npu0_3` or `qwen38_gdn_fused_candidate`
 containers own NPU0-7.
 
+Offline inspection of the exact `quay.io/ascend/vllm-ascend:v0.23.0`
+image confirms the activation chain: `ascend_config.py` gives the explicit
+additional config precedence, `ops/linear_op.py` selects
+`MatmulAllreduceRowParallelOp` for row-parallel layers, and TP>1 with
+reduction enabled calls `torch_npu.npu_mm_all_reduce_base`. TP4 therefore
+meets the static activation conditions for dense Qwen3.5. Runtime operator/log
+evidence remains mandatory; static source inspection is not a performance
+result.
+
 The MTP route is complete and rejected. Preserve all baseline, invalid and MTP
 artifacts. Wait for explicit exclusive ownership of NPU0-3, then launch the
 accepted non-MTP TP4 configuration under a new immutable profile container name

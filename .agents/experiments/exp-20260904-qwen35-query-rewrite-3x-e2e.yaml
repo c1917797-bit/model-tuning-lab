@@ -157,6 +157,13 @@ parameter_candidate:
   launcher_mode: matmul-allreduce
   rationale: "recovered v5 rank0 profile attributes 94.585% of summed task duration to 237 hcom_allReduce_ calls; the old environment variable was ignored because the active additional_config explicitly set enable_matmul_allreduce=false"
   isolation: "all other TP4 development launch arguments remain unchanged"
+  source_activation:
+    image: quay.io/ascend/vllm-ascend:v0.23.0
+    config: "ascend_config.py resolves additional_config.enable_matmul_allreduce before the legacy environment variable"
+    dispatch: "ops/linear_op.py selects MatmulAllreduceRowParallelOp for row-parallel layers when the flag is true"
+    kernel: "with reduce_results and TP size > 1, the BF16 path calls torch_npu.npu_mm_all_reduce_base"
+    current_topology: "TP4 satisfies the TP size > 1 activation condition"
+    applicability: "dense Qwen3.5 row-parallel projections are in scope; runtime logs/profile must still prove actual activation"
   required_gates: ["source activation proof", "real query_rewrite correctness", "repeated TP4 A/B", "paired profile", "final DP2/TP4 A/B"]
   evidence_boundary: "the profiler result prioritizes this candidate but does not predict or prove an E2E speedup"
   execution_state: "ready, but blocked until NPU0-3 are explicitly idle"
