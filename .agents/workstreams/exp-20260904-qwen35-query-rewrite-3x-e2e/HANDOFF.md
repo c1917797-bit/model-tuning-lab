@@ -177,6 +177,14 @@ response text. It follows the maintainer-approved historical protocol: raw
 `/tokenize` before the measured window. Fixed-40 and normalized-2K protocols
 are superseded and must not be mixed with this baseline.
 
+`scripts/render_qwen35_runtime.py` validates the frozen final baseline
+contract and renders a canonical argv/environment manifest. It fail-closes
+unless topology is DP2/TP4 on NPU0-7, the benchmark grid is 1/5/8/16 × three
+repetitions, request semantics remain raw-question/natural-EOS, and both
+acceptance ratios remain 0.5. The manifest hashes both source YAML and
+normalized runtime payload, preventing command drift when all eight NPUs
+become available.
+
 `scripts/analyze_qwen35_query_rewrite_ab.py` is the fail-closed decision
 gate. It requires all 24 artifacts (baseline/candidate × concurrency 1/5/8/16
 × repetitions 1/2/3), identical model/data/request identities, zero errors,

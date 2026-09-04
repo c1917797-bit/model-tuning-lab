@@ -121,3 +121,9 @@ profile_analysis:
   latest_resource_state: "NPU0-3 external qwen36_27b_dk64_treatment_npu0_3; NPU4-7 external qwen38_gdn_fused_candidate; untouched"
 decision_reason: "Reject one-token Qwen3.5 MTP: 16-21 of 32 response hashes changed and both TTFT and TPOT regressed at every TP4 development concurrency. Final DP2/TP4 evidence remains unavailable while NPU4-7 are occupied."
 next_loop: "Wait for explicit exclusive ownership of NPU0-3, then launch a new immutable non-MTP TP4 profile container/path, profile a fixed real query_rewrite request, and rank actual prefill/decode hotspots. Acquire NPU0-7 later for final DP2/TP4 A/B."
+runtime_manifest:
+  tool: scripts/render_qwen35_runtime.py
+  schema: qwen35-query-rewrite-runtime-manifest/v1
+  frozen_baseline_source_sha256: 66537701d07cdb837d3d8a2589d23852232b8f9c4d49b70849d36b2c8bab0bd0
+  frozen_baseline_runtime_sha256: e74fcb3444bbc94d5c71086b279b4c08d94295b17499700b7b8c75aa0098b7c6
+  purpose: "fail-closed DP2/TP4 topology, benchmark-grid, request-semantics, target-ratio, argv, and environment drift control"
