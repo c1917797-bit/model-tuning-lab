@@ -34,7 +34,7 @@ workstream_routing:
     default_merge: no_ff
     force_push: forbidden
   lifecycle:
-    default_active_worktree_budget: 4
+    default_active_worktree_budget: 8
     default_stale_after_days: 7
     remote_branch_delete_requires_retention_policy: true
 

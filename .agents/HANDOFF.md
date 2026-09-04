@@ -5,6 +5,10 @@
 - Last updated: 2026-09-04.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide` with pushed evidence and recovery checkpoints.
+- Fresh clones route machine-bound work through
+  `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP,
+  prove the direct target, then enter the canonical target-host repository.
+- The repository-specific active worktree budget is eight.
 - Active branch-local tuning workstreams (not integrated truth):
   - `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend@07d723a`: dense-model Paper-to-Ascend, `planned / not-ready`, claims physical NPU0-3 and loopback port 8220.
   - `work/exp-20260904-qwen38-prefix-cache-general-eval-final@5d28f45`: fixed 2k40 Prefix Cache A/B, `started / not-ready`, claims physical NPU4-7 and loopback port 8210; Prefix Cache OFF baseline is complete and candidate is next.
@@ -91,6 +95,8 @@ For tuning evidence, also run the exact benchmark/profiling commands declared in
 - Do not assume a container is ready because it exists; prove listener and NPU workers in the same session.
 - Do not disable TLS verification to repair Git.
 - Do not commit credentials, SSH material, shell history, private certificates, datasets, model weights, checkpoints, or large generated profiler outputs.
+- Do not commit or print the AWMCP verification value; obtain it through the
+  approved runtime channel and pass it only in the connector `verify` field.
 ```
 
 ## 8. Recovery / Resume Commands
