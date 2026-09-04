@@ -18,6 +18,9 @@
     {"kind": "knowledge", "mode": "exclusive", "value": ".agents/HANDOFF.md"}
   ],
   "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
-  "executionState": "started",
-  "integrationState": "not-ready"
+  "executionState": "completed",
+  "integrationState": "superseded",
+  "notes": [
+    "Superseded on 2026-09-04 before implementation: the maintainer redirected active work to a new dense-model Paper-to-Ascend experiment, whose eventual serialized integration will reconcile the global handoff against fresher truth."
+  ]
 }
