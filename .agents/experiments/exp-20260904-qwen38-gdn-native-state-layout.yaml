@@ -1,5 +1,5 @@
 id: exp-20260904-qwen38-gdn-native-state-layout
-status: planned
+status: baselined
 branch: work/exp-20260904-qwen38-gdn-native-state-layout
 hypothesis: "Replacing the multi-kernel GDN prefill pipeline with torch_npu.npu_chunk_gated_delta_rule will fuse chunk scan/WY/solve/state handling, consume the persistent [N,H,V,K] state layout directly, and improve Qwen3.8 2K->40 latency/throughput without numerical regression."
 primary_variable: "GDN prefill implementation: vLLM-Ascend multi-kernel chunk pipeline -> fused torch_npu.npu_chunk_gated_delta_rule"
@@ -16,6 +16,20 @@ baseline:
   prefix_cache: false
   endpoint: http://127.0.0.1:8210
   physical_npus: [4,5,6,7]
+  repetitions: 3
+  valid_runs: [run1, run2, run3]
+  errors: 0
+  evidence_dir: /cache/austinov/eval-runs/exp-20260904-qwen38-gdn-native-state-layout/baseline
+  wall_s: {median: 168.052760650, min: 166.868698760, max: 174.959438080}
+  requests_per_s: {median: 2.124332850, min: 2.040472946, max: 2.139406627}
+  output_tokens_per_s: {median: 84.973314004, min: 81.618917829, max: 85.576265088}
+  total_tokens_per_s: {median: 4435.606991022, min: 4260.507510654, max: 4467.081037603}
+  ttft_p50_ms: {median: 2367.751720012, min: 2242.774090031, max: 2372.735540033}
+  e2e_p50_ms: {median: 3716.139900032, min: 3590.846760082, max: 3720.585549949}
+  run_sha256:
+    run1: 63a2a2c017272b4873b96bcf06cbdc9b98b3bc4fa4121d14956995c67f714a68
+    run2: 0904900691f35a4292a2ca5322f5e350738d524bcc0b195969065a69963341d3
+    run3: f4a03b163103050377a9bc4d15f2693c704ad819c0ea24a31b9c1e2acb89c34d
 candidate:
   upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
   patch: patches/qwen38-gdn-state-layout/77d13e2c0-fused-gdn-prefill.patch
