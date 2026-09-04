@@ -2,11 +2,13 @@
 
 ## State
 
-- Execution: `tp4-development-baseline-running`; integration: `not-ready`.
+- Execution: `tp4-mtp-candidate-starting`; integration: `not-ready`.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Physical NPU0-3 are currently owned by this workstream's
-  `qwen35_query_rewrite_tp4_dev_decodegraph` service on loopback port 10010.
+- Physical NPU0-3 are currently assigned to this workstream's
+  `qwen35_query_rewrite_tp4_dev_mtp` startup on loopback port 10010. The
+  completed baseline container `qwen35_query_rewrite_tp4_dev_decodegraph` is
+  stopped and retained with its logs.
 - Physical NPU4-7 are owned by `qwen38_gdn_fused_candidate` on loopback port 8210. Do not stop, restart, inspect inside, or otherwise perturb it.
 - The frozen DP2/TP4 baseline requires all eight NPUs, so no final baseline has
   started. The running TP4 service is a development baseline only and must not
@@ -56,6 +58,20 @@
   `completion_tokens=1`, `finish_reason=stop`, zero visible characters and
   no HTTP/service error. The harness now defines TTFT at the first choice/token
   event, including EOS, rather than the first non-empty text fragment.
+- The corrected quick32-v3 scaling run completed all four cells with 32/32
+  natural-stop responses and zero errors:
+
+  | concurrency | TTFT p50 | TPOT p50 | artifact SHA256 |
+  |---:|---:|---:|---|
+  | 1 | 928.33 ms | 38.47 ms | `ac39bc922b43d9472fe41f89bae25a0190cf20817147230f8725f151e3ce413a` |
+  | 5 | 1092.27 ms | 53.83 ms | `68d2a3020bb52594e13560dd608afca1d611d61a37383aa94062bfe78784f7ae` |
+  | 8 | 1082.31 ms | 67.62 ms | `4f9799a128128b1e34dca498256833c45f52373cd2486b4acd9298030d7d58ce` |
+  | 16 | 2075.07 ms | 80.81 ms | `085c0a43a7a720ba42f1d83bf2ebacebb64e515d24bb3f040eabd5c046f777e4` |
+
+  These are development A/B anchors only, not the final DP2/TP4 baseline.
+- The MTP candidate uses the same TP4 command plus only
+  `{"method":"mtp","num_speculative_tokens":1}`. Readiness is tracked by
+  AgentWeb operation `exec-0000000000000370`.
 
 ## Provisional algorithm and operator candidates
 
@@ -156,9 +172,9 @@ worktree, and preserve existing dirty work. An operator is accepted only after:
 
 ## Resume
 
-Verify no benchmark client remains, validate the EOS-token harness fix, and run
-the four-cell quick32 scaling check into a new immutable output directory. Do
-not overwrite either invalid quick32 artifact or perturb NPU4-7. When all eight
-NPUs are explicitly released, render
+Poll `exec-0000000000000370`. If MTP becomes ready, run one correctness smoke
+and then the same four-cell quick32 protocol into a distinct MTP directory.
+Preserve all baseline and invalid artifacts and do not perturb NPU4-7. When all
+eight NPUs are explicitly released, render
 the exact command from `configs/qwen35-query-rewrite-baseline.yaml`, freeze
 its normalized JSON arguments and run the final four-cell original baseline.
