@@ -102,7 +102,7 @@ profiling_attempt:
   result: "startup failed before serving: Triton Ascend get_arch returned NULL during Qwen3.5 architecture inspection after an external workload acquired NPU0-3"
   external_owner_npu0_3: "qwen36_27b_dk64_treatment_npu0_3 (7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac)"
   cleanup: "failed profile container retained; workstream readiness observer terminated; no workstream process remains on NPU0-3"
-  recovery: "require explicit exclusive NPU0-3 ownership; use a new immutable profile container name and output directory"
+  recovery: "service launcher now hard-fails if NPU0-3 have any process or if the profile directory already exists; require explicit exclusive ownership and new immutable names"
 profile_analysis:
   request_driver: scripts/run_qwen35_profile_request.py
   request_schema: qwen35-query-rewrite-profile-request/v1

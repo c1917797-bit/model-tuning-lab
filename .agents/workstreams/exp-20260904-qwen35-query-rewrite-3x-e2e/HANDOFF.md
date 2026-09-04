@@ -9,6 +9,10 @@
   `qwen36_27b_dk64_treatment_npu0_3`
   (`7aded35a49e4720688f65c9c88744249113ec28d150683d262438074c78dc9ac`).
   Do not stop, restart, inspect inside, or otherwise perturb it.
+- `scripts/run_qwen35_tp4_dev_service.sh` now refuses to start if
+  `npu-smi` reports any process on NPU0-3 (exit 42), and profile mode refuses
+  to reuse an existing output directory (exit 44). Mock-only tests prove both
+  failures occur before `docker run`; never bypass these guards.
 - The attempted workstream profile container
   `qwen35_query_rewrite_tp4_dev_profile` exited before serving when Triton
   Ascend `get_arch()` returned NULL during Qwen3.5 architecture inspection.

@@ -14,10 +14,28 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}}"
 port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
+npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
   echo "refusing to replace existing container: $container_name" >&2
   exit 41
+fi
+
+npu_snapshot="$("$npu_smi_bin" info)"
+occupied="$(
+  awk -F '|' '
+    $2 ~ /^[[:space:]]*[0-3][[:space:]]+[0-9]+[[:space:]]*$/ &&
+    $3 ~ /^[[:space:]]*[0-9]+[[:space:]]*$/ {
+      gsub(/[[:space:]]/, "", $2)
+      gsub(/[[:space:]]/, "", $3)
+      print "NPU" substr($2, 1, 1) ":pid=" $3
+    }
+  ' <<<"$npu_snapshot"
+)"
+if [[ -n "$occupied" ]]; then
+  echo "refusing to start: NPU0-3 are not idle" >&2
+  echo "$occupied" >&2
+  exit 42
 fi
 
 serve_args=(
@@ -48,6 +66,10 @@ if [[ "$mode" == mtp ]]; then
 fi
 
 if [[ "$mode" == profile ]]; then
+  if [[ -e "$profile_dir" ]]; then
+    echo "refusing to reuse profile directory: $profile_dir" >&2
+    exit 44
+  fi
   mkdir -p "$profile_dir"
   serve_args+=(
     --profiler-config.profiler torch
