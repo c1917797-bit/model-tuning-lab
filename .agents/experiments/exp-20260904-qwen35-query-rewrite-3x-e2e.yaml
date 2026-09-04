@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: selective_dense_ffn_nz_ready_for_e2e
-decision: promote_selective_dense_ffn_nz_from_microbenchmark_to_e2e
+status: mmar_retained_selective_dense_ffn_nz_rejected_tpot_target_open
+decision: retain_matmulallreduce_reject_gate_up_nz_and_iterate_tpot
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -72,10 +72,29 @@ selective_dense_ffn_nz:
       operation: exec-0000000000000758
       result: "reject-startup-incompatibility; aclnnMatmulAllReduce requires down_proj x2 ND, not FRACTAL_NZ"
       measured_requests: 0
-    gate_up_only_retry: pending
+    gate_up_only_retry:
+      artifact: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/gate-up-nz-fixedorig-npu4-7-20260904T2232Z
+      operation: exec-0000000000000778
+      result: completed
+      requests: {1: "32/32", 5: "32/32", 8: "32/32", 16: "32/32"}
+      errors: 0
+      natural_stops: 128
+      versus_fixed_original:
+        1: {ttft_p50_ms: 446.29347999580204, ttft_speedup: 2.080085978481248, tpot_p50_ms: 28.882160042526156, tpot_speedup: 1.3320271568943653}
+        5: {ttft_p50_ms: 505.3761249873787, ttft_speedup: 2.161292324496541, tpot_p50_ms: 38.92755808802609, tpot_speedup: 1.3828517806594163}
+        8: {ttft_p50_ms: 503.9792850147933, ttft_speedup: 2.1475319466093676, tpot_p50_ms: 44.39307109496971, tpot_speedup: 1.52313913562837}
+        16: {ttft_p50_ms: 534.1933199670166, ttft_speedup: 3.8844937729029607, tpot_p50_ms: 54.94162664521451, tpot_speedup: 1.470863181175232}
+      automated_decision: "hold-exact-hash-drift; cross-run hashes are diagnostic, not a calibrated semantic gate"
+      semantic_control:
+        artifact: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/correctness-controls/mmar-on-c1-quality-npu4-7-20260904T2300Z
+        operation: exec-000000000000079d
+        result: "PASS correctness: candidate and MMAR control both 32/32 zero-error natural-stop; both have 6 normalized-whitespace exact matches and mean normalized character similarity 0.1875"
+      incremental_tpot_vs_mmar: {1: 0.9918, 5: 1.0022, 8: 1.0252, 16: 0.9513, geomean: 0.9923}
+      stack_decision: "reject gate/up NZ from cumulative stack: correctness passed, but it did not improve TPOT over MMAR"
+      artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "the prior qwen38_gdn_fused_candidate on NPU4-7 was verified idle, retained for audit, and stopped; NPU0-3 is not used"
+  current: "physical NPU4-7 are idle after the correctness control; external NPU0-3 worker PIDs 1031654-1031657 are unchanged and were not used"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"

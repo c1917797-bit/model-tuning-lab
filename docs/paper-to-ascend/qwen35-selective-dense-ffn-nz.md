@@ -65,6 +65,39 @@ fused communication boundary without an E2E compatibility gate. The retry
 therefore keeps the independently profitable gate/up NZ treatment and leaves
 down_proj ND while retaining MMAR.
 
+## Corrected E2E result and decision
+
+The gate/up-only retry completed the full immutable quick32 matrix on physical
+NPU4-7. Every cell completed 32/32 requests with zero errors and natural stop.
+
+| Concurrency | TTFT p50 ms | TTFT vs original | TPOT p50 ms | TPOT vs original |
+|---:|---:|---:|---:|---:|
+| 1 | 446.293 | 2.080x | 28.882 | 1.332x |
+| 5 | 505.376 | 2.161x | 38.928 | 1.383x |
+| 8 | 503.979 | 2.148x | 44.393 | 1.523x |
+| 16 | 534.193 | 3.884x | 54.942 | 1.471x |
+
+The fixed-original comparison proves the cumulative MMAR plus gate/up-NZ
+runtime is faster, but it does not attribute all of that gain to the layout
+treatment. Against the already measured MMAR-only candidate, gate/up NZ
+changed TPOT by 0.992x, 1.002x, 1.025x and 0.951x; the geometric mean is
+0.992x, or about 0.8% slower. Its c16 TTFT improvement is not consistent with
+c1/c5/c8 and is treated as a single-run outlier rather than operator evidence.
+
+Cross-run response hashes drift even for the no-treatment control, so the
+automated decision remains hold-exact-hash-drift. A separate correctness-only
+c1 control used the same BF16, MMAR-on, NZ1, no-quantization runtime and the
+same 32 records. Control and candidate both completed 32/32 with zero errors,
+six normalized-whitespace exact matches and mean normalized character
+similarity 0.1875. Together with bit-identical operator microbench outputs,
+this passes the correctness gate without storing any raw question, answer or
+response text.
+
+The final stack decision is therefore: keep MMAR as the current best treatment
+and reject gate/up NZ from the cumulative stack because it provides no
+incremental TPOT gain. Preserve the implementation and failure evidence for
+future kernels, but do not enable the feature flag in the next E2E stack.
+
 ## Integration contract
 
 - vLLM-Ascend base: 5cb98caa (v0.23.0)
@@ -75,6 +108,6 @@ down_proj ND while retaining MMAR.
 - quantization: none
 - rollback: unset the flag and remove the three read-only source overlays
 
-E2E acceptance still requires 32/32 successful natural-stop requests at
-concurrency 1/5/8/16, privacy-safe correctness review, comparison with the
-immutable quick32-v3 baseline, and retained-candidate profiling.
+The E2E and privacy-safe correctness gates are complete. Candidate profiling
+is skipped because the layout treatment was not retained; the next loop should
+start from MMAR and target the remaining TPOT gap.

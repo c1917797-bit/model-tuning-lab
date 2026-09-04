@@ -1,7 +1,7 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "status": "not-ready-next-dense-ffn-operator-required",
+  "status": "not-ready-mmar-retained-tpot-target-open",
   "targetParent": "main",
   "sourceCommit": null,
   "validation": [
@@ -112,6 +112,26 @@
     {
       "gate": "selective-dense-ffn-nz-first-e2e",
       "result": "REJECT startup: operation exec-0000000000000758 reached graph-capture warmup but aclnnMatmulAllReduce rejected down_proj x2 in FRACTAL_NZ (161002/EZ0017). No requests were measured; evidence is hashed under selective-ffn-nz-fixedorig-npu4-7-20260904T2218Z; NPU4-7 were released and NPU0-3 remained untouched."
+    },
+    {
+      "gate": "selective-dense-gate-up-nz-corrected-e2e",
+      "result": "PASS runtime: operation exec-0000000000000778 completed all c1/c5/c8/c16 quick32 cells with 32/32 requests, zero errors and natural stop. Versus the fixed original, TTFT improved 2.080-3.884x and TPOT improved 1.332-1.523x, so the 2x TPOT target remains open."
+    },
+    {
+      "gate": "selective-dense-gate-up-nz-business-correctness",
+      "result": "PASS: a same-runtime BF16/MMAR-on/NZ1/no-quantization c1 control (exec-000000000000079d) and the candidate both completed 32/32 with zero errors; both recorded 6 normalized-whitespace exact matches and mean normalized character similarity 0.1875. Isolated real-weight microbench outputs were bit-identical to ND."
+    },
+    {
+      "gate": "selective-dense-gate-up-nz-incremental-decision",
+      "result": "REJECT from cumulative stack: versus the existing MMAR candidate, incremental TPOT speedups were 0.992x/1.002x/1.025x/0.951x (0.992x geometric mean). The c16 TTFT improvement is a single-run outlier and cannot offset the absent TPOT benefit."
+    },
+    {
+      "gate": "candidate-finalization-regression",
+      "result": "PASS: literal Bash array/loop-variable escaping was fixed, static regression guards were added, the completed E2E artifacts were finalized without rerunning, and decision/semantic review/service/cell artifacts all pass SHA256 verification."
+    },
+    {
+      "gate": "post-control-resource-release",
+      "result": "PASS: both task containers exited; physical NPU4-7 have no running process and external NPU0-3 PIDs 1031654-1031657 remain unchanged."
     }
   ]
 }

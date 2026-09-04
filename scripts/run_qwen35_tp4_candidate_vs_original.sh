@@ -141,7 +141,7 @@ python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
   --candidate-run "$output_root/candidate/candidate-run.json" \
   --target-ratio 0.5 \
   --output "$output_root/decision.json" \
-  "\${analyzer_extra[@]}"
+  "${analyzer_extra[@]}"
 decision_status=$?
 set -e
 if [[ "$decision_status" != 0 && "$decision_status" != 2 &&
@@ -152,14 +152,15 @@ fi
 
 artifacts=(
   "$output_root/container-inspect.json"
+  "$output_root/service.log"
   "$output_root/candidate/candidate-run.json"
   "$output_root/decision.json"
 )
 for concurrency in 1 5 8 16; do
-  cell="$output_root/candidate/c\${concurrency}-r1.json"
+  cell="$output_root/candidate/c${concurrency}-r1.json"
   [[ ! -f "$cell" ]] || artifacts+=("$cell")
 done
-sha256sum "\${artifacts[@]}" >"$output_root/SHA256SUMS"
+sha256sum "${artifacts[@]}" >"$output_root/SHA256SUMS"
 if [[ -f "$output_root/speculative-metrics-after.prom" ]]; then
   sha256sum "$output_root/speculative-metrics-after.prom" \
     >>"$output_root/SHA256SUMS"

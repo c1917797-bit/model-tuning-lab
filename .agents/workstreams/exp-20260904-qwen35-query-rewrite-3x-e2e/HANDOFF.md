@@ -737,3 +737,48 @@ container was stopped; physical NPU4-7 were released and external NPU0-3 PIDs
 Retry only gate/up NZ with down_proj ND and MMAR retained. Run immutable
 quick32 at concurrency 1/5/8/16 against the fixed original. Profile only if
 the corrected E2E candidate is retained.
+
+## Selective dense gate/up NZ final E2E decision
+
+The corrected gate/up-only service started successfully on assigned physical
+NPU4-7 and operation exec-0000000000000778 completed every immutable quick32
+cell. c1/c5/c8/c16 each finished 32/32 requests with zero errors and all
+finish reasons were natural stop.
+
+Versus the fixed original, TTFT p50 improved 2.080x/2.161x/2.148x/3.884x and
+TPOT p50 improved 1.332x/1.383x/1.523x/1.471x. The 2x TTFT target is met, but
+the 2x TPOT target is not.
+
+Do not attribute the full fixed-original difference to gate/up NZ. Against the
+already measured MMAR-only candidate, its incremental TPOT speedups are
+0.992x/1.002x/1.025x/0.951x, with 0.992x geometric mean. The c16 TTFT delta is
+an unpaired single-run outlier; c1 and c8 slightly regress.
+
+Correctness is separately resolved. Operation exec-000000000000079d ran a
+correctness-only c1 control on the same physical NPU4-7, same 32 records,
+BF16, MMAR enabled, NZ1 and no quantization, with gate/up selective NZ absent.
+Control and candidate both completed 32/32 with zero errors and natural stop;
+both have six normalized-whitespace exact matches and normalized character
+similarity mean 0.1875. The candidate raw-exact count is 4 versus control 5,
+but the difference disappears under whitespace normalization. Combined with
+the isolated real-weight bit-identical microbenchmark, the business
+correctness gate passes.
+
+Final decision: retain MMAR as the current best stack, reject gate/up NZ from
+the cumulative stack for absent incremental TPOT benefit, and continue the
+loop from MMAR. Do not enable VLLM_ASCEND_ENABLE_DENSE_FFN_NZ in the next E2E
+candidate. The implementation remains default-off and preserved as reusable
+operator evidence.
+
+Artifacts:
+
+- candidate: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/gate-up-nz-fixedorig-npu4-7-20260904T2232Z
+- correctness control: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/correctness-controls/mmar-on-c1-quality-npu4-7-20260904T2300Z
+- automated decision SHA256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018
+- semantic review SHA256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17
+- candidate SHA256SUMS digest: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3
+
+The benchmark finalization script's literal Bash array escaping bug was fixed
+and covered by a regression guard. The four measured cells were not rerun.
+Both task containers exited, physical NPU4-7 are idle, and external NPU0-3
+worker PIDs 1031654-1031657 are unchanged.
