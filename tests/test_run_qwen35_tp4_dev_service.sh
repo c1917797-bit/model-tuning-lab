@@ -73,6 +73,7 @@ PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" 
 grep -q -- '--async-scheduling' "$docker_log"
 grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
 grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
 if grep -q -- '--no-async-scheduling' "$docker_log"; then
   echo "baseline mode unexpectedly disabled async scheduling" >&2
   exit 1
@@ -92,6 +93,20 @@ grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
 grep -q -- '"enable_flashcomm1":true' "$docker_log"
 if grep -q -- '--profiler-config.profiler' "$docker_log"; then
   echo "flashcomm1 mode unexpectedly enabled profiling" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-bf16-nz-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" bf16-nz \
+  >"$tmp/bf16-nz-fresh.out" 2>"$tmp/bf16-nz-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":2' "$docker_log"
+if grep -q -- '--profiler-config.profiler' "$docker_log"; then
+  echo "bf16-nz mode unexpectedly enabled profiling" >&2
   exit 1
 fi
 

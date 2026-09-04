@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|profile|flashcomm1) ;;
+  baseline|mtp|profile|flashcomm1|bf16-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|profile|flashcomm1}" >&2
+    echo "usage: $0 {baseline|mtp|profile|flashcomm1|bf16-nz}" >&2
     exit 64
     ;;
 esac
@@ -59,8 +59,10 @@ serve_args=(
   --additional-config "$(
     if [[ "$mode" == flashcomm1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true}'
+    elif [[ "$mode" == bf16-nz ]]; then
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":2}'
     else
-      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}'
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1}'
     fi
   )"
   --default-chat-template-kwargs '{"enable_thinking":false}'
@@ -126,6 +128,7 @@ docker_args=(
   -e TRITON_DUMP_DIR=/cache/efim/triton_dump
   -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1
   -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0
+  -e VLLM_ASCEND_ENABLE_NZ=1
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )

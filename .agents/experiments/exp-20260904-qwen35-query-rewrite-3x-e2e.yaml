@@ -200,6 +200,20 @@ communication_candidate:
   orchestration: scripts/run_qwen35_tp4_flashcomm1_ab.sh
   orchestration_semantics: "immutable sequential baseline/candidate services on NPU0-3, exact-container cleanup, complete 12-cell matrices, container config/log capture, correctness and 2x decision report"
   evidence_boundary: "source and official model guidance establish plausibility only; no current-model speedup is claimed"
+layout_candidate:
+  id: bf16_weight_fractal_nz
+  status: queued_after_flashcomm1
+  source_manifest: configs/qwen35-query-rewrite-bf16-nz-candidate.yaml
+  launcher_mode: bf16-nz
+  dtype: BF16
+  quantized: false
+  primary_variable: "additional_config.weight_nz_mode: 1 -> 2"
+  mechanism: "AscendUnquantizedLinearMethod converts BF16 linear weights to ACL_FORMAT_FRACTAL_NZ after loading; inference continues through unquantized_gemm"
+  source_activation: "utils._should_trans_nz returns true for BF16/FP16 only at mode 2; ops/linear.py applies maybe_trans_nz to non-conv1d unquantized linear weights"
+  hardware_scope: "non-310P policy includes Ascend 910B4"
+  interaction_risk: "compatibility and performance with canonical MatmulAllreduceRowParallelOp are not established by static source; startup, operator activation, HBM and correctness are mandatory"
+  required_gates: ["startup", "BF16/NZ activation proof", "zero request errors", "exact response correctness", "TP4 A/B", "paired profile", "cumulative-stack A/B", "DP2/TP4 final A/B"]
+  evidence_boundary: "this is a BF16 storage/layout and kernel-selection candidate, not quantization; no performance claim before real A/B"
 quantization_constraint:
   allowed: false
   set_by: user

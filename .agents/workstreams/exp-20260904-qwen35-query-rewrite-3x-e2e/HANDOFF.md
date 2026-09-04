@@ -372,6 +372,17 @@ and log, runs all 1/5/8/16 by three-repetition cells, and emits a correctness
 plus 2x decision report and hashes. Its trap stops only the exact container it
 started; the underlying launcher still rejects any existing NPU0-3 process.
 
+The next queued candidate is BF16 weight `FRACTAL_NZ`, isolated as
+`weight_nz_mode=2` in
+`configs/qwen35-query-rewrite-bf16-nz-candidate.yaml` and launcher mode
+`bf16-nz`. This is not quantization: exact-image source applies
+`maybe_trans_nz` inside `AscendUnquantizedLinearMethod` and continues
+through `unquantized_gemm`. Mode 1 leaves BF16 weights in ND, while mode 2
+converts eligible non-conv1d weights. Do not stack it with FlashComm1 until
+each has an attributable result. In particular, require startup and correctness
+proof with the canonical MatMulAllReduce path because their interaction is not
+proven by static inspection.
+
 ## Baseline evidence correction
 
 The prior TP4 `quick32-v3` metrics remain valid only for comparisons among
