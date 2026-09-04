@@ -1,13 +1,13 @@
 id: exp-20260904-qwen38-gdn-native-state-layout
 status: planned
 branch: work/exp-20260904-qwen38-gdn-native-state-layout
-hypothesis: "Teaching the AscendC GDN prefill kernel to read/write the persistent SSM cache in its native [N,H,V,K] layout will remove two full transpose+contiguous state copies per GDN prefill layer and improve Qwen3.8 2K->40 latency/throughput without numerical regression."
-primary_variable: "GDN state layout handling in chunk_gated_delta_rule_fwd_h host API + AscendC load/store + Python integration"
+hypothesis: "Replacing the multi-kernel GDN prefill pipeline with torch_npu.npu_chunk_gated_delta_rule will fuse chunk scan/WY/solve/state handling, consume the persistent [N,H,V,K] state layout directly, and improve Qwen3.8 2K->40 latency/throughput without numerical regression."
+primary_variable: "GDN prefill implementation: vLLM-Ascend multi-kernel chunk pipeline -> fused torch_npu.npu_chunk_gated_delta_rule"
 workload:
   source: /home/mtuser/cch/query_rewrite.jsonl
   source_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
-  snapshot: /cache/austinov/eval-data/query_rewrite_2k40.v1.jsonl
-  snapshot_sha256: fd2670e7f56eed2f4764cbad9bad31e2d64545148d7834a1af374f32586d8d71
+  snapshot: /cache/austinov/eval-data/query_rewrite_2k40.v2.jsonl
+  snapshot_sha256: c75685461f0eb9669a1c1ec31c90d427191abc48c9c83ad977801298564282ca
   requests: 357
   input_tokens: 2048
   output_tokens: 40
@@ -16,6 +16,11 @@ baseline:
   prefix_cache: false
   endpoint: http://127.0.0.1:8210
   physical_npus: [4,5,6,7]
+candidate:
+  upstream_commit: 77d13e2c0bfa9862b711b68811889e36b9d56aca
+  patch: patches/qwen38-gdn-state-layout/77d13e2c0-fused-gdn-prefill.patch
+  patch_sha256: d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e
+  algorithm: "fused CANN chunk gated delta rule for GDN prefill; native [N,Nv,Dv,Dk] state layout"
 acceptance:
   - "single-op output agrees with baseline within BF16/FP32 tolerances"
   - "no API errors and all 357 requests remain exactly 2048/40"
