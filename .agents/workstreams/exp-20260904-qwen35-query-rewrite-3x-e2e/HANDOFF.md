@@ -683,3 +683,49 @@ decode projections `1x5120 x 8704x5120` and `1x4352 x 5120x4352`. Before E2E,
 require reference correctness, repeated operator microbenchmarks and a
 feature flag. E2E must reuse the immutable quick32-v3 denominator and only
 physical NPU4-7.
+
+## Selective dense FFN NZ checkpoint
+
+The dense FFN lane now has a valid operator microbenchmark and a
+feature-flagged vLLM-Ascend integration. The paper-level design basis is
+DeepSpeed Inference (arXiv:2207.00032): for small-batch inference, specialize
+GEMM scheduling/layout and only fuse regions whose measured economics justify
+the extra implementation. On this host, the profile shows post-prefill
+MatMulV2 at 70.702% while SwiGLU is only 0.9623% of summed kernel time, so the
+first port targets weight layout rather than full FFN fusion.
+
+Preserve the first microbenchmark directory
+ffn-bf16-layout-npu4-20260904T220321Z as invalid/no-op evidence: internal
+formats were disabled and both requested NZ tensors remained format 2. The
+corrected run is ffn-bf16-layout-npu4-20260904T220321Z-v2, operation
+exec-0000000000000722. It explicitly enabled internal formats and aborted
+unless NZ tensors reported format 29.
+
+The valid run used Qwen3.5 layer-0 real BF16 weights, TP4 rank-0 gate/up
+[8704,5120] and down [5120,4352], M=1/5/8/16, 20 warmups, 100 timed
+iterations and five rotated-order repeats. Converting both FFN projections to
+NZ produced speedups 1.0803x, 1.0837x, 1.0841x and 1.0905x respectively
+(1.0846x geometric mean). Every output was bit-identical to ND. Gate/up-only
+NZ reached 1.0529x geometric mean; down-only reached 1.0269x.
+
+The installed npu_ffn feasibility control failed exactly as its API contract
+predicts: BF16 SwiGLU without experts is unsupported. Do not switch to FP16
+and do not quantize.
+
+Exact vLLM-Ascend source lives at
+/cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz on branch
+work/exp-20260904-qwen35-selective-ffn-nz, commit 9c59f131, based on v0.23.0
+commit 5cb98caa. It adds default-off
+VLLM_ASCEND_ENABLE_DENSE_FFN_NZ=1 behavior for suffixes
+.mlp.gate_up_proj and .mlp.down_proj only. Attention and recurrent weights
+stay ND and global weight_nz_mode remains 1. Focused container tests passed:
+the selective utils test and all eight linear tests. Push to the upstream
+GitHub remote is blocked by missing host credentials; the local commit is the
+authoritative checkpoint.
+
+The model-tuning launcher mode is selective-ffn-nz. It is hard-restricted to
+physical NPU4-7, verifies source commit 9c59f131, and read-only overlays only
+envs.py, utils.py and ops/linear.py into the exact image source tree.
+Rollback is unset the feature flag/remove those three overlays. The next
+action is one immutable quick32 E2E run at concurrency 1/5/8/16 against the
+fixed original. Then profile only if the E2E candidate is retained.

@@ -26,6 +26,9 @@ case "$candidate_mode" in
   mmar-on)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-candidate.yaml"
     ;;
+  selective-ffn-nz)
+    default_config="$repo_root/configs/qwen35-query-rewrite-selective-ffn-nz-candidate.yaml"
+    ;;
   flashcomm1)
     default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-candidate.yaml"
     ;;

@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|control-mmar-off|mmar-on|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -33,9 +33,12 @@ container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp4_dev_${mode}_$device_t
 port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
+selective_ffn_nz_root="${SELECTIVE_FFN_NZ_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz}"
+selective_ffn_nz_commit="9c59f131"
 flashcomm1_env=0
 weight_nz_env=1
 matmul_allreduce_env=1
+selective_ffn_nz_env=0
 if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
   flashcomm1_env=1
 fi
@@ -47,6 +50,20 @@ if [[ "$mode" == profile-mmar-off || "$mode" == profile-msprof-mmar-off ||
       "$mode" == control-mmar-off || "$mode" == ngram-gpu ||
       "$mode" == bf16-nz-mmar-off ]]; then
   matmul_allreduce_env=0
+fi
+if [[ "$mode" == selective-ffn-nz ]]; then
+  if [[ "$device_set" != 4-7 ]]; then
+    echo "selective-ffn-nz is restricted to physical NPU4-7" >&2
+    exit 43
+  fi
+  actual_ref="$(
+    git -c safe.directory="$selective_ffn_nz_root" -C "$selective_ffn_nz_root" rev-parse --short=8 HEAD
+  )"
+  if [[ "$actual_ref" != "$selective_ffn_nz_commit" ]]; then
+    echo "selective FFN NZ source must be $selective_ffn_nz_commit, got $actual_ref" >&2
+    exit 45
+  fi
+  selective_ffn_nz_env=1
 fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
@@ -189,9 +206,19 @@ docker_args=(
   -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE="$matmul_allreduce_env"
   -e VLLM_ASCEND_ENABLE_FLASHCOMM1="$flashcomm1_env"
   -e VLLM_ASCEND_ENABLE_NZ="$weight_nz_env"
+  -e VLLM_ASCEND_ENABLE_DENSE_FFN_NZ="$selective_ffn_nz_env"
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )
+
+if [[ "$mode" == selective-ffn-nz ]]; then
+  image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
+  docker_args+=(
+    -v "$selective_ffn_nz_root/vllm_ascend/envs.py:$image_source_root/envs.py:ro"
+    -v "$selective_ffn_nz_root/vllm_ascend/utils.py:$image_source_root/utils.py:ro"
+    -v "$selective_ffn_nz_root/vllm_ascend/ops/linear.py:$image_source_root/ops/linear.py:ro"
+  )
+fi
 
 if [[ "$mode" == profile-msprof-mmar-off ]]; then
   # CANN dynamic attach is initialized with the application, then msprof

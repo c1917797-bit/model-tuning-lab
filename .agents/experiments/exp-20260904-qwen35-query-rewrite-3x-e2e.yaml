@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: ngram_gpu_rejected_select_dense_ffn_operator
-decision: reject_npu_prompt_lookup_for_low_acceptance_and_concurrency_stall
+status: selective_dense_ffn_nz_ready_for_e2e
+decision: promote_selective_dense_ffn_nz_from_microbenchmark_to_e2e
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -38,6 +38,34 @@ loop:
   comparison: "run each candidate alone and compare it with the user-designated fixed original quick32-v3 baseline; add accepted treatments to the current best cumulative stack"
 operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_fixed_original_comparison, candidate_profile]
+selective_dense_ffn_nz:
+  paper_basis: "DeepSpeed Inference (arXiv:2207.00032): optimize small-batch inference GEMM scheduling/layout and fuse only when measured economics justify it"
+  profile_basis: "post-prefill MatMulV2 is 70.702% of summed rank-0 kernel duration; TP4 gate/up and down shapes dominate"
+  invalid_microbenchmark:
+    artifact: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/ffn-bf16-layout-npu4-20260904T220321Z
+    disposition: "invalid for layout attribution because requested NZ tensors remained format 2 (ND); preserved as no-op evidence"
+  valid_microbenchmark:
+    artifact: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/ffn-bf16-layout-npu4-20260904T220321Z-v2
+    operation: exec-0000000000000722
+    protocol: "real layer-0 BF16 weights, TP4 rank-0 shards, M=1/5/8/16, 20 warmup + 100 measured iterations, five rotated-order repeats"
+    actual_formats: {nd: 2, nz: 29}
+    both_nz_speedup: {1: 1.0803, 5: 1.0837, 8: 1.0841, 16: 1.0905, geomean: 1.0846}
+    gate_up_nz_geomean_speedup: 1.0529
+    correctness: "all M/layout cells were bit-identical to ND reference"
+    decision: promote_both_ffn_weights_nz_to_e2e
+  rejected_fusion:
+    operator: torch_npu.npu_ffn
+    reason: "v0.23.0 runtime rejects BF16 SwiGLU without experts; FP16 substitution and quantization are disallowed"
+  implementation:
+    worktree: /cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz
+    branch: work/exp-20260904-qwen35-selective-ffn-nz
+    commit: 9c59f131
+    upstream_push: "blocked: host has no GitHub credentials; local commit is authoritative"
+    flag: VLLM_ASCEND_ENABLE_DENSE_FFN_NZ=1
+    scope: ["*.mlp.gate_up_proj", "*.mlp.down_proj"]
+    rollback: "unset the flag and remove the three read-only source overlays"
+    validation: "py_compile; test_utils selective policy 1 passed; test_linear 8 passed"
+  e2e: pending
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
   current: "the prior qwen38_gdn_fused_candidate on NPU4-7 was verified idle, retained for audit, and stopped; NPU0-3 is not used"

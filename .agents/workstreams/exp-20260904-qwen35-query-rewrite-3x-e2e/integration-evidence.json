@@ -92,6 +92,22 @@
     {
       "gate": "ngram-gpu-resource-release",
       "result": "PASS: stall evidence was captured before the exact candidate container was stopped; physical NPU4-7 returned idle and external NPU0-3 PIDs 1031654-1031657 were unchanged"
+    },
+    {
+      "gate": "dense-ffn-layout-microbenchmark-validity",
+      "result": "PASS: the corrected run required actual format 29, used real layer-0 BF16 TP4 weights at M=1/5/8/16, five rotated repeats, and bit-identical outputs; the earlier no-op format-2 run is explicitly invalid"
+    },
+    {
+      "gate": "selective-dense-ffn-nz-economics",
+      "result": "PROMOTE to E2E: both FFN projections in NZ improved the full gate/up-SwiGLU-down block by 1.080-1.091x across all measured M values (1.0846x geometric mean)"
+    },
+    {
+      "gate": "bf16-npu-ffn-feasibility",
+      "result": "REJECT implementation: aclnnFFNV2 rejects BF16 SwiGLU without experts; dtype substitution and quantization remain forbidden"
+    },
+    {
+      "gate": "selective-dense-ffn-nz-integration",
+      "result": "PASS static/unit: vLLM-Ascend v0.23.0 worktree commit 9c59f131 adds a default-off flag limited to dense MLP gate/up and down weights; focused container tests passed 1 policy test and 8 linear tests"
     }
   ]
 }
