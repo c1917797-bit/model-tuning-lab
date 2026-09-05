@@ -232,6 +232,22 @@
     {
       "gate": "mmar-add-rmsnorm-graphmodule-contract-fix",
       "result": "PASS source regression: c5496ef722b48bb00627efddcb47ef7497292b2a normalizes through GraphModule.graph while retaining direct Graph support. The official vLLM-Ascend 0.23.0 image passed 4/4 focused tests including the actual runtime object contract; py_compile and diff checks pass, and binary hashes are unchanged."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-launcher-source-pin",
+      "result": "PASS fail-closed: the first retry after c5496 exited 45 before Docker because the launcher still pinned 081953. No NPU was used; maintainer commit d45fd814 fixed and tested the source pin."
+    },
+    {
+      "gate": "assigned-device-race-guard-pf",
+      "result": "HOLD without interference: operation exec-0000000000000c61 exited 48 before Docker because bounded external profiler p0_pf reserved physical NPU4-7. Both p0_pf configurations later produced TRACE_OK and PWPROF_DONE; NPU0-3 worker PIDs 1225486-1225489 remained unchanged."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-sixth-live-post-export-topology",
+      "result": "REJECT invalid activation before readiness: operation exec-0000000000000c81 compiled source c5496 on physical NPU4-7 without crashing, but every TP rank reported Normalized 0 and Fused 64 in (1,16), while (17,32768) stayed inapplicable. The exact task container was stopped before benchmark traffic. Evidence root is mmar-add-rmsnorm-v8-20260905T102046Z and service.log SHA256 is cd3efc93bac855c1e04244ac97193b41a947edcafbfe090e909f98d9a76253b1."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-post-export-copy-fix",
+      "result": "PASS source regression: official-image reproduction proves Dynamo setitem becomes aten.copy_.default, with dynamic output[:n] represented as aten.slice.Tensor plus copy_. Source 573ea294 normalizes both exported direct-copy and full first-axis slice-copy forms, rejects partial shape copies, retains Graph and GraphModule coverage, and passes 7/7 focused tests plus py_compile and diff checks."
     }
   ]
 }

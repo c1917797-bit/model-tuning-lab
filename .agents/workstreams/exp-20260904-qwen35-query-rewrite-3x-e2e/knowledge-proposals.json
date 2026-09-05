@@ -175,6 +175,12 @@
       "status": "accepted-local",
       "lesson": "Trigger: a graph helper passes direct torch.fx.Graph unit tests but fails only inside the compiler pass manager. Action: inspect the actual manager/backend call boundary, support the concrete GraphModule contract explicitly, and add a regression test using that exact object type before another accelerator run. Destination: future update to the Ascend graph-fusion validation checklist.",
       "evidence": "Verification: operation exec-0000000000000c25 failed before readiness because npugraph_ex passed a GraphModule named <lambda> and the helper accessed .nodes directly; source c5496ef7 uses GraphModule.graph and the official 0.23.0 image passed 4/4 focused tests including the new contract case."
+    },
+    {
+      "id": "graph-pass-tests-must-match-post-export-topology",
+      "status": "accepted-local",
+      "lesson": "Trigger: a mutation-normalization pass accepts the correct GraphModule object but still reports zero rewrites in the live backend. Action: reproduce the source assignment through both Dynamo and torch.export, test the post-export aten topology used by the backend, and retain shape and consumer guards before another accelerator run. Destination: future update to the Ascend graph-fusion validation checklist.",
+      "evidence": "Verification: v8 compiled without the prior GraphModule exception but all ranks reported Normalized 0/Fused 64. In the official 0.23.0 image, output[:n]=value changed from operator.setitem in Dynamo to aten.slice.Tensor plus aten.copy_.default after export. Source 573ea294 covers both exported copy forms, rejects partial slices and passes 7/7 focused tests."
     }
   ]
 }

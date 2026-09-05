@@ -1683,3 +1683,40 @@ container reservations, `npu-smi` and port 10010, then launch source
 copies and 128 fused patterns per TP rank in `(1,16)`; require
 `(17,32768) applicable=False`; only then accept the frozen c1/c5/c8/c16
 latency matrix. NPU0-3 must remain untouched.
+
+## Sixth live activation rejection and post-export copy fix
+
+After `p0_pf` completed both profiler stages with `TRACE_OK` and
+`PWPROF_DONE`, operation `exec-0000000000000c81` launched
+`fused-tail-v8-20260905T102046Z` on physical NPU4-7. Source `c5496ef7`
+compiled without the prior GraphModule exception and the large range correctly
+reported `(17,32768) applicable=False`. However, every TP rank reported
+`Normalized 0` and only `Fused 64` for `(1,16)`. The exact task container
+was stopped before readiness and before any query_rewrite benchmark traffic.
+
+Immutable evidence root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v8-20260905T102046Z`
+
+Service-log SHA256:
+`cd3efc93bac855c1e04244ac97193b41a947edcafbfe090e909f98d9a76253b1`.
+
+A minimal official-image reproduction exposed the second contract mismatch:
+`output[:n] = value` is `operator.setitem` in the Dynamo graph, but becomes
+`aten.slice.Tensor` plus `aten.copy_.default` after export; a direct full
+assignment becomes `aten.copy_.default`. Source commit
+`573ea2940bdc546923c698de16ea49465e6976f5` now handles both exported forms,
+requires full destination/value shape equality, rejects partial first-axis
+slices, and still accepts both Graph and GraphModule inputs. The minimal
+official vLLM-Ascend 0.23.0 overlay passed 7/7 focused tests in 8.52 seconds;
+py_compile and diff checks pass. The Python-only change leaves both pinned
+binary hashes unchanged.
+
+The next live v9 run is queued behind external `p0_ov`, which owns NPU4-7 for
+a bounded four-configuration/two-repeat overlap A/B chain. A second bounded
+`mc2` chain is already waiting behind it. Do not stop or modify either chain.
+Wait for `OVERLAP_AB_DONE` and `MC2_AB_DONE`, then recheck container
+reservations, the NPU process table and port 10010. Launch a fresh immutable
+root with source `573ea294`; require 64 normalized copies plus 128 fused
+patterns per rank before accepting correctness or latency. NPU0-3 remain
+strictly out of scope.
