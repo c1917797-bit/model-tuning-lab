@@ -252,6 +252,10 @@
     {
       "gate": "npu-container-reservation-docker-cli-compatibility",
       "result": "PASS fix and regression: Docker inspect formatting options now precede the container id in the v9 queue, serving launcher, and fused-tail microbenchmark guard. Queue and launcher shell tests, MST validation, and diff checks pass. A real conflict probe detected /p0_mc and created neither a task directory nor container."
+    },
+    {
+      "gate": "guarded-v9-queue-corrected-restart",
+      "result": "PASS orchestration: the old waiting PID 283507 was verified as this task's queue and stopped before MC2 completion; no v9 container existed. Exactly one corrected waiter was started as operation exec-0000000000000060, PID 579462, and is running without NPU allocation."
     }
   ]
 }

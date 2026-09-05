@@ -1756,7 +1756,9 @@ contract. Focused queue/launcher tests and MST validation pass; a real probe
 then detected `/p0_mc` and exited 48 without creating a task directory or
 container.
 
-Operation `exec-0000000000000004` captured the old function definitions and
-must be terminated before it can launch. Restart exactly one guarded v9 queue
-from the corrected checkpoint, verify the new operation is running, and record
-its operation id here. Do not allow the old and new waiters to coexist.
+Operation `exec-0000000000000004` captured the old function definitions.
+Its exact waiter PID 283507 was verified and terminated before the MC2 marker
+existed; no v9 candidate container or output root existed. Exactly one
+corrected queue is now active as operation `exec-0000000000000060`, PID
+579462. It is confirmed running without NPU allocation. Poll operation 0060
+and do not launch another v9 queue.
