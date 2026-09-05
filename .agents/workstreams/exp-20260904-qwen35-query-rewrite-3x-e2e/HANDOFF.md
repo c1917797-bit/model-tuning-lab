@@ -1804,12 +1804,16 @@ tests were added. A no-NPU official-image pytest attempt could not import
 `torch_npu` without physical device mappings, so those new tests are not
 claimed as executed. The unchanged extension and kernel hashes remain pinned.
 
-The v10 launcher pin, resource queue and shell mocks pass. The queue waits for
-`R15_DONE` before checking a four-observation stable idle window, preventing
-it from taking NPU4-7 during `p0_r15` inter-configuration gaps. A ShortGPT
+The v10 launcher pin, resource queue and shell mocks pass. Exactly one queue is
+active as operation `exec-00000000000000e6`. It waits for `R15_DONE`
+before checking a four-observation stable idle window, preventing it from
+taking NPU4-7 during `p0_r15` inter-configuration gaps. Poll this operation
+and do not start another v10 queue. A ShortGPT
 diagnostic launch attempt `exec-00000000000000c8` was independently rejected
 with exit 48 before Docker because `p0_r15` reserved NPU4-7; its empty output
 root is not evidence and must not be reused. Run v10 first. Only if all four
 ranks report `Normalized 64 / Fused 128` may benchmark traffic begin. After
 v10 terminates, resume the separate ShortGPT workstream on the same guarded
-resource set.
+resource set. Maintainer commit
+`89231ac7b7087e61a2ae131f8f7903ceb2c54a00` contains the v9 evidence,
+v10 source pin, queue, tests, and this resume protocol.

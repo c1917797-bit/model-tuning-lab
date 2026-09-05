@@ -271,7 +271,7 @@
     },
     {
       "gate": "p0-r15-noninterference-and-v10-queue",
-      "result": "PASS fail-closed: ShortGPT diagnostic exec-00000000000000c8 exited 48 before Docker when p0_r15 reserved physical NPU4-7. The prepared v10 queue waits for R15_DONE before a four-observation stable idle window, so it cannot take the cards during external inter-configuration gaps; its shell mock and the shared service guard test pass. NPU0-3 remain untouched."
+      "result": "PASS fail-closed: ShortGPT diagnostic exec-00000000000000c8 exited 48 before Docker when p0_r15 reserved physical NPU4-7. Exactly one v10 queue, exec-00000000000000e6, now waits for R15_DONE before a four-observation stable idle window, so it cannot take the cards during external inter-configuration gaps; its shell mock and the shared service guard test pass. NPU0-3 remain untouched."
     }
   ]
 }
