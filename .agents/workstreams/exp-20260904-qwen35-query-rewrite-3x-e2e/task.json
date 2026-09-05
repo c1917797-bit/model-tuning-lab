@@ -32,6 +32,6 @@
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "git diff --check"
   ],
-    "executionState": "tp8-baseline-v5-complete-mtp-local-argmax-v2-running",
-    "integrationState": "source-2d08abd5-verified-comparable-tp8-e2e-active"
+    "executionState": "tp8-baseline-v5-complete-mtp-local-argmax-v2-invalid-startup-resources-idle",
+    "integrationState": "handoff-ready-source-2d08abd5-needs-memory-bounded-tp8-repair"
 }

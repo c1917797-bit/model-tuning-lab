@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp8_user_baseline_complete_tp8_mtp_local_argmax_running
-decision: pending_tp8_mtp_local_argmax_repeated_e2e
+status: tp8_user_baseline_complete_mtp_v2_invalid_startup_resources_idle
+decision: retain_tp8_baseline_repair_mtp_dummy_run_memory_before_e2e
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -94,7 +94,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-authorized physical NPU0-7 exclusive while the comparable TP8 candidate is active"
-  current: "TP8 MTP local-argmax v2 owns physical NPU0-7 under exact-container cleanup; the completed TP8 baseline released all devices before this launch."
+  current: "TP8 MTP local-argmax v2 exited 137 before readiness with zero requests; its exact cleanup completed and physical NPU0-7 are idle."
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -1324,8 +1324,8 @@ tp8_user_baseline_reconstruction:
     runtime_proof: "service log proves vLLM-Ascend 0.23.0, BF16, TP8/PP1/DP1/DCP1, quantization=None, speculative_config=None, disable_custom_all_reduce=true and Ascend enable_matmul_allreduce=true on all eight workers"
     resource_release: "container exited 0 at 2026-09-05T19:23:02Z; no matrix/benchmark process and no NPU0-7 process remained before candidate launch"
 mtp_local_argmax_candidate:
-  stage: comparable_tp8_v2_startup
-  status: running
+  stage: comparable_tp8_v2_invalid_startup
+  status: repair_required
   paper_to_ascend_basis: "lossless speculative decoding for greedy inference, with target-model verification; reduce draft sampling overhead through exact vocabulary-parallel local argmax"
   hypothesis: "A single Qwen3.5 MTP draft token can reduce target decode steps, while local argmax avoids gathering the full draft vocabulary logits across TP ranks."
   primary_variable: "speculation disabled -> Qwen3.5 MTP k=1 with use_local_argmax_reduction=true"
@@ -1361,13 +1361,17 @@ mtp_local_argmax_candidate:
       container: qwen35_tp8_mtp_local_argmax_20260905T192433Z
       primary_variable: "baseline speculation disabled -> Qwen3.5 MTP k=1 with use_local_argmax_reduction=true"
       comparison: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z/matrix/baseline-summary.json
-      state: "started after baseline exited 0 and NPU0-7 process table was empty; readiness and activation pending"
+      state: "INVALID startup-resource failure: full-logits dummy run exhausted the viable memory envelope; exit 137 with OOMKilled=false; zero requests and no performance decision"
+      result_marker: "requests=0; result=invalid-startup-oom-full-logits-dummy-run"
+      artifacts: "service.log, container inspection/final state, before/after NPU snapshots, result marker and SHA256SUMS are preserved under output_root"
+      resource_release: "exact container absent; no matching host process; NPU0-7 process table empty"
+      disposition: "Do not score as an algorithm slowdown and do not relaunch unchanged. Avoid materializing full draft logits or otherwise bound dummy-run memory, then repeat activation gates."
   correctness_gate: "target-model verification, 32/32 requests with zero errors and natural stop in each c1/c5/c8/c16 cell; inspect service activation and speculative acceptance metrics"
   performance_gate: "compare every frozen cell with the immutable original and retained stack; promote only if correctness passes and cumulative performance moves toward both 2x targets"
   resource_state:
-    observed_at_utc: "2026-09-05T19:24:39Z"
-    owner: "qwen35_tp8_mtp_local_argmax_20260905T192433Z on physical NPU0-7"
-    protected: "do not stop or compete with the active TP8 MTP candidate on any device"
-    action: "monitor startup, prove MTP/local-argmax activation and eight workers, then run the repeated c1/c5/c8/c16 matrix and analyze it against TP8 baseline v5"
+    observed_at_utc: "2026-09-05T19:36:00Z"
+    owner: "none; physical NPU0-7 idle"
+    protected: "recheck live ownership before every launch; do not infer availability from this snapshot"
+    action: "implement a memory-bounded MTP dummy-run/local-argmax repair, then prove startup and activation before repeated E2E traffic"
   intended_evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/
   rollback: "keep the retained non-speculative stack; remove the read-only patch overlay and speculative-config by selecting the retained mode"

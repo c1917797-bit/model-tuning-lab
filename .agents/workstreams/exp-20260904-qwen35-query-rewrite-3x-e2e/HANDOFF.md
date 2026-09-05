@@ -2,6 +2,13 @@
 
 ## State
 
+Authoritative current handoff: see `LESSONS.md`. TP8 baseline v5 is complete
+and hash-locked. The comparable TP8 MTP local-argmax v2 attempt is no longer
+running: it failed before readiness in the full-logits dummy run, produced zero
+requests, exited 137 with `OOMKilled=false`, and released NPU0-7. Treat it as
+an invalid startup-resource attempt, not an algorithm performance result.
+NPU0-7 were idle at the latest live check; recheck ownership before launching.
+
 - Execution: `v11-diagnostics-queued-behind-protected-p0-r16`;
   integration: `shortgpt-remove8-held-semantic-regression`.
 - Current resource state supersedes older idle snapshots below: the protected
