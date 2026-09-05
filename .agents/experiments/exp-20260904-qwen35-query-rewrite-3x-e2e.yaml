@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: retained_stack_unchanged_flashcomm1_v3_rejected
-decision: reject_flashcomm1_v3_retain_current_stack
+status: mtp_local_argmax_k1_ready_waiting_for_npu4_7
+decision: pending_mtp_local_argmax_k1_e2e_retain_current_stack
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -1281,3 +1281,31 @@ flashcomm1_gdn_shape_candidate:
       hashes: {candidate_run_sha256: 948f864e4719b545371c5ae84686a798de07970ba96cf9d889089cce6d2b935b, decision_sha256: f53d5ec404cd5c979a5a658ac2ad1b053781657fd0d631e4a3e4c34a8e1159df, service_log_sha256: e15c3fdaf381aa766628738486613a87557af874565015127905cf92e001fe38, manifest_sha256: 6185e523604f88c282fa59d1b84491a2dcaf839b62d1dbe8b06985fcff75193d}
       resource_release: "exact v3 container exited 0; physical NPU4-7 released; NPU0-3 untouched"
   handoff: "Retain BF16 TP4 MMAR plus NZ1 and dense gate/up prefetch-0.1 with FlashComm1 disabled. Do not relaunch v1-v3 unchanged. Reuse the source commits only if a future implementation removes the sequence-parallel latency regression and passes every frozen cell."
+mtp_local_argmax_candidate:
+  stage: implementation_verified
+  status: ready_waiting_for_npu4_7
+  paper_to_ascend_basis: "lossless speculative decoding for greedy inference, with target-model verification; reduce draft sampling overhead through exact vocabulary-parallel local argmax"
+  hypothesis: "A single Qwen3.5 MTP draft token can reduce target decode steps, while local argmax avoids gathering the full draft vocabulary logits across TP ranks."
+  primary_variable: "speculation disabled -> Qwen3.5 MTP k=1 with use_local_argmax_reduction=true"
+  retained_stack: "BF16 TP4/DP1, MatMulAllReduce enabled, weight_nz_mode=1, dense gate/up prefetch_ratio=0.1, async scheduling, FULL_DECODE_ONLY, HCCL_BUFFSIZE=512"
+  quantization: false
+  source:
+    base: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+    worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax
+    branch: work/exp-20260905-qwen35-mtp-local-argmax
+    commit: 2d08abd56466360b56738d5c48858dc32ddd1f6b
+    change: "Add Qwen3_5MTP.get_top_tokens delegation to its existing LogitsProcessor and lm_head."
+    upstream_push: "blocked once with HTTP 403 to vllm-project/vllm-ascend; do not retry unchanged; the clean local DCO commit is authoritative"
+  validation:
+    source: "py_compile and git diff --check passed; exact v0.23.0 image focused test: 3 passed"
+    launcher: "bash syntax, service guard test, candidate guard test, YAML assertions, maintainer skill-tree validation and git diff --check passed"
+    ruff: "not available in the exact v0.23.0 image; no ruff result claimed"
+  correctness_gate: "target-model verification, 32/32 requests with zero errors and natural stop in each c1/c5/c8/c16 cell; inspect service activation and speculative acceptance metrics"
+  performance_gate: "compare every frozen cell with the immutable original and retained stack; promote only if correctness passes and cumulative performance moves toward both 2x targets"
+  resource_state:
+    observed_at_utc: "2026-09-05T18:15:51Z"
+    blocker: "p0_r17 is running and reserves physical NPU4-7; each card has a live VLLMWorker_TP using about 16.1 GB"
+    protected: "independent VLLM workers are live on NPU0-3; never touch them"
+    action: "do not stop p0_r17; launch only after authoritative container/device/port checks prove NPU4-7 released"
+  intended_evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/
+  rollback: "keep the retained non-speculative stack; remove the read-only patch overlay and speculative-config by selecting the retained mode"

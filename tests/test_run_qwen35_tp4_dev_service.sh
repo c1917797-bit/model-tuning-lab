@@ -406,6 +406,24 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-mtp-local-argmax-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" mtp-local-argmax \
+  >"$tmp/mtp-local-argmax-fresh.out" 2>"$tmp/mtp-local-argmax-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"weight_prefetch_config":{"enabled":true' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+grep -q -- '"method":"mtp"' "$docker_log"
+grep -q -- '"num_speculative_tokens":1' "$docker_log"
+grep -q -- '"use_local_argmax_reduction":true' "$docker_log"
+grep -q -- '/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax/vllm_ascend/patch/worker/patch_qwen3_5.py:/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py:ro' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "MTP local-argmax candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-ngram-gpu-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" ngram-gpu \
   >"$tmp/ngram-gpu-fresh.out" 2>"$tmp/ngram-gpu-fresh.err"

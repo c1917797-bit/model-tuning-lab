@@ -21,8 +21,9 @@
     "./scripts/validate-mst.sh",
     "python3 -m py_compile scripts/benchmark_qwen35_mmar_add_rmsnorm.py",
     "bash -n scripts/run_qwen35_mmar_add_rmsnorm_microbench.sh",
-    "bash -n scripts/run_qwen35_tp4_dev_service.sh",
-    "bash tests/test_run_qwen35_tp4_dev_service.sh",
+        "bash -n scripts/run_qwen35_tp4_dev_service.sh",
+        "bash tests/test_run_qwen35_tp4_dev_service.sh",
+        "bash tests/test_run_qwen35_tp4_flashcomm1_ab.sh",
     "bash -n scripts/queue_qwen35_fused_tail_v9.sh",
     "bash tests/test_queue_qwen35_fused_tail_v9.sh",
     "bash -n scripts/queue_qwen35_fused_tail_v10.sh",
@@ -31,6 +32,6 @@
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "git diff --check"
   ],
-  "executionState": "v9-rejected-before-traffic-v10-queue-exec-e6-waiting-p0-r15",
-  "integrationState": "default-off-source-4424cc24-pinned-one-v10-queue-waits-for-r15-done-and-stable-idle"
+    "executionState": "mtp-local-argmax-k1-ready-waiting-for-p0-r17-release",
+    "integrationState": "source-2d08abd5-and-launcher-verified-e2e-pending"
 }

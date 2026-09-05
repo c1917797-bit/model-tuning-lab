@@ -2103,3 +2103,46 @@ The retained result remains TTFT 2.1896x/2.2271x/2.1976x/2.3161x and TPOT
 relaunch FlashComm1 v1-v3 unchanged. A future sequence-parallel attempt must
 first explain and remove the measured TPOT tax, then pass all four frozen
 cells before it can replace the retained stack.
+
+## MTP k=1 local-argmax readiness checkpoint
+
+The next primary treatment is exact Qwen3.5 MTP speculative decoding with one
+draft token, stacked on the retained BF16 TP4/DP1 MMAR, NZ1, dense gate/up
+prefetch-0.1, async-scheduling and FULL_DECODE_ONLY configuration. It does not
+use quantization or retraining. The additional local-argmax path is exact for
+the frozen temperature-0 query_rewrite workload: each TP rank computes its
+local vocabulary maximum, and only value/index pairs are reduced instead of
+gathering the full draft logits. Target-model verification remains the
+correctness authority.
+
+The isolated vLLM-Ascend 0.23.0 source worktree is
+`/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax`, branch
+`work/exp-20260905-qwen35-mtp-local-argmax`, exact clean DCO commit
+`2d08abd56466360b56738d5c48858dc32ddd1f6b`, based on
+`5cb98caaadeff42b5b62b996e34bb2aaa29d20fd`. The change adds
+`Qwen3_5MTP.get_top_tokens` by delegating to the model's existing
+`LogitsProcessor` and `lm_head`. Py-compile and diff checks passed, and the
+focused test in the exact release image passed 3 tests. The first whole-tree
+image mount hid packaged build metadata and was an invalid test setup; the
+corrected read-only file overlays passed. Ruff is absent from that image, so
+no Ruff result is claimed. One push attempt to the public upstream returned
+HTTP 403; do not retry unchanged. The local commit is the handoff authority.
+
+The umbrella launcher now exposes `CANDIDATE_MODE=mtp-local-argmax`, pins the
+exact source commit, mounts only `patch_qwen3_5.py` read-only, keeps the
+retained stack, and supplies
+`{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}`.
+Syntax, launcher guard tests, YAML parsing/assertions, maintainer skill-tree
+validation and diff checks pass. The candidate remains default-off.
+
+At 2026-09-05T18:15:51Z, `p0_r17` was authoritatively running with physical
+NPU4-7 reserved; live VLLMWorker_TP processes used about 16.1 GB on each card.
+Independent workloads were also live on NPU0-3. Do not stop `p0_r17` and
+never touch NPU0-3. Before launching, prove that `p0_r17` is terminal,
+NPU4-7 have no processes or competing container reservations, and port 10010
+is free. Then run the fixed c1/c5/c8/c16 query_rewrite candidate against the
+immutable original baseline, capturing local-argmax activation, draft and
+accepted-token metrics, zero-error/natural-stop correctness, decision JSON,
+hashes and final resource release. Promote only if all correctness gates pass
+and the cumulative result improves the retained stack toward both 2x targets;
+otherwise reject it and preserve the retained non-speculative configuration.

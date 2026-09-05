@@ -39,4 +39,17 @@ set -e
 [[ "$status" == 66 ]]
 grep -q "candidate config does not exist" "$scratch/ngram.err"
 
+set +e
+RUN_ID=test OUTPUT_ROOT="$scratch/mtp-local-argmax-future" \
+  CANDIDATE_MODE=mtp-local-argmax \
+  CANDIDATE_CONFIG="$scratch/missing-mtp-local-argmax.yaml" \
+  "$repo_root/scripts/run_qwen35_tp4_candidate_vs_original.sh" \
+  >"$scratch/mtp-local-argmax.out" 2>"$scratch/mtp-local-argmax.err"
+status=$?
+set -e
+[[ "$status" == 66 ]]
+grep -q "candidate config does not exist" "$scratch/mtp-local-argmax.err"
+grep -q 'qwen35-query-rewrite-mtp-local-argmax-candidate.yaml' \
+  "$repo_root/scripts/run_qwen35_tp4_candidate_vs_original.sh"
+
 echo "PASS: TP4 fixed-original candidate guards"

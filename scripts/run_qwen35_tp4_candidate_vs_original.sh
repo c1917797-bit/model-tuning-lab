@@ -19,6 +19,9 @@ active_container=""
 active_log=""
 
 case "$candidate_mode" in
+  mtp-local-argmax)
+    default_config="$repo_root/configs/qwen35-query-rewrite-mtp-local-argmax-candidate.yaml"
+    ;;
   ngram-gpu)
     default_config="$repo_root/configs/qwen35-query-rewrite-ngram-gpu-candidate.yaml"
     ;;
@@ -182,7 +185,8 @@ python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
 candidate_run_status=$?
 set -e
 
-if [[ "$candidate_mode" == ngram-gpu ]]; then
+if [[ "$candidate_mode" == ngram-gpu ||
+      "$candidate_mode" == mtp-local-argmax ]]; then
   curl --fail --silent --max-time 10 "$base_url/metrics" |
     awk '/spec_decode|speculative/ {print}' \
       >"$output_root/speculative-metrics-after.prom"
