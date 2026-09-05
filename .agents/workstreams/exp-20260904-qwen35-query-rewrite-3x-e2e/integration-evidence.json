@@ -147,7 +147,11 @@
     },
     {
       "gate": "flashcomm2-qwen35-hybrid-integration",
-      "result": "REJECT after three bounded implementation attempts: projection selection fix and rank-preserving communication handling all reached the same torch.compile GDN copy_ rank mismatch before service readiness. No E2E latency claim is valid; future work requires an architecture-aware padding/graph contract."
+      "result": "PASS runtime integration after symbolic projection-local padding: source 65f780ee reached health readiness, completed every FULL capture size, and served 128/128 BF16 requests with zero errors on physical NPU4-7."
+    },
+    {
+      "gate": "flashcomm2-oproj1-four-cell-e2e",
+      "result": "REJECT performance and correctness promotion: versus the retained MMAR stack, TTFT regressed 5.21-9.33% and TPOT regressed 4.58-8.16% across c1/c5/c8/c16. Exact response hashes also require semantic business review, so FlashComm2 remains off."
     },
     {
       "gate": "hccl-buffsize-1024-e2e",
@@ -155,7 +159,7 @@
     },
     {
       "gate": "final-resource-and-handoff",
-      "result": "PASS: all task containers exited, physical NPU4-7 are idle, the existing NPU0-3 workload remains active and untouched, all new evidence manifests verify, source worktrees are clean, and the target-open platform prerequisite is documented for the next maintainer."
+      "result": "PASS: all task containers exited; this work used only physical NPU4-7, mapped to logical 0-3 inside the containers; no unscoped device was touched; all new evidence manifests verify; source worktrees are clean; and the target-open platform prerequisite is documented for the next maintainer."
     }
   ]
 }

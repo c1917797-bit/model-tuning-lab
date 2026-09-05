@@ -1338,5 +1338,76 @@ mmar-on-weight-prefetch-gateup-0p1
 
 Rollback to the original runtime by selecting the baseline launcher/config and
 leaving source overlays disabled. Physical NPU4-7 are idle after the final
-run. NPU0-3 continue to host the pre-existing workload and were not touched.
+run. This work used only physical NPU4-7, mapped to logical 0-3 inside its
+containers; no unscoped device was touched.
 All new microbenchmark, FlashComm2 and HCCL1024 SHA256 manifests verify.
+
+## FlashComm2 runtime recovery and final E2E decision
+
+This supersedes the earlier startup-only conclusion without changing the
+retained production stack. The first three source attempts correctly exposed a
+hybrid-model graph-contract problem, but they were not the final feasibility
+boundary.
+
+The source branch was advanced through three bounded fixes:
+
+- dc48edac flattened the all-to-all send buffer to match the one-dimensional
+  receive buffer. Compilation passed, then FULL capture failed on a stale
+  padding specialization.
+- 5b334581 derived padding from the selected projection's actual input rows.
+  Capture still failed because the Python conditional specialized the pad away.
+- 65f780ee made projection-local padding symbolic and unconditional, sliced the
+  output back to the unpadded row count, and restored arbitrary leading
+  dimensions.
+
+Commit 65f780ee passed 7/7 focused tests in the official vLLM-Ascend 0.23.0
+image, reached health readiness, completed every configured FULL capture size,
+and served 128/128 BF16 requests with zero errors and natural stops on physical
+NPU4-7. This proves the implementation is runnable.
+
+The four-cell E2E result nevertheless rejects it from the cumulative stack:
+
+| Concurrency | FlashComm2 TTFT p50 | FlashComm2 TPOT p50 | TTFT vs retained | TPOT vs retained |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 446.049560 ms | 31.186542 ms | 5.2065% slower | 8.1591% slower |
+| 5 | 529.244360 ms | 40.589775 ms | 7.9129% slower | 6.8814% slower |
+| 8 | 538.441695 ms | 47.400653 ms | 9.3308% slower | 7.3732% slower |
+| 16 | 949.527025 ms | 54.298669 ms | 5.9816% slower | 4.5764% slower |
+
+Exact response hashes differ from the immutable original in 19/16/16/15 cases.
+Because calibrated same-runtime controls also drift, this is recorded as
+semantic-business-check-required rather than a proven numerical regression.
+It does not block the performance rejection, and no correctness promotion is
+claimed.
+
+Evidence:
+
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-symbolicpad-oproj1-mmar-prefetch-0p1-20260905T043000Z
+
+Candidate config SHA256:
+5f3340843ba97397f5b92e77a4f0b90d6b61df92127a7ce7fbb6b6dfe5854d90
+
+Candidate run SHA256:
+b66421bcceed114fe4ac7d20e122a4f1070c66d61783485527e4aeb653786812
+
+Decision SHA256:
+a997750518e0d2ad50b2697017457be6fd414f6953a080b549fc51f08fb515fd
+
+SHA256SUMS digest:
+32d5a4d30844da7172d9d9d202c89b8f8f2f25df2271fbd36d978f4c7ca9bf18
+
+Source worktree:
+
+/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
+
+Source branch:
+
+work/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
+
+Source HEAD:
+
+65f780eeadfe9486ccc2eb0f6b7507e778e27da9
+
+Final decision: keep FlashComm1/2 off and retain
+mmar-on-weight-prefetch-gateup-0p1. TTFT remains above 2x in all cells; TPOT
+remains open at 1.33425x-1.55639x.

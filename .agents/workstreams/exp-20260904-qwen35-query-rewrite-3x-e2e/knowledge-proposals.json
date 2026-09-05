@@ -105,10 +105,16 @@
       "evidence": "NPU4-7 BF16 microbenchmark across two real projection shapes and nine decode M values measured separate/fused geometric speedup 0.469982; SHA256SUMS 2c5d82d989d963ad3f55b1bcbc15d94445d8fc36c06f459bf5e576afc714933a"
     },
     {
-      "id": "hybrid-model-communication-padding-is-global",
+      "id": "hybrid-model-flashcomm-needs-symbolic-projection-padding",
       "status": "accepted-local",
-      "lesson": "A projection-local FlashComm integration can still alter a hybrid model's global TP padding and symbolic graph contract. On alternating self-attention and GDN layers, exclude-by-name and rank restoration are insufficient when the framework-level padding assumptions leak into GDN graph capture.",
-      "evidence": "Three source commits f20cd648, d3346ad1 and e161bbff reached the same qwen_gdn_linear_attn.py copy_ rank mismatch before readiness"
+      "lesson": "For Qwen3.5 hybrid attention/GDN, a projection-local FlashComm path must flatten its send buffer, derive padding from the selected projection's local row count, keep the pad operation symbolic and unconditional through torch.compile, slice back to the unpadded row count, and restore arbitrary leading dimensions. Global token padding, exclude-by-name, or a Python conditional each leave a graph-capture failure.",
+      "evidence": "dc48edac fixed all-to-all buffer rank, 5b334581 exposed compile specialization, and 65f780ee passed health plus every FULL capture size on NPU4-7; official-image focused tests passed 7/7"
+    },
+    {
+      "id": "flashcomm-runtime-success-is-not-performance-success",
+      "status": "accepted-local",
+      "lesson": "Treat communication-feature startup and E2E promotion as separate gates. FlashComm2 OProj1 can be made graph-safe on this stack and still lose to retained fused MMAR in every concurrency cell; successful capture is implementation evidence, not a performance claim.",
+      "evidence": "flashcomm2-symbolicpad-oproj1-mmar-prefetch-0p1-20260905T043000Z completed 128/128 requests, but regressed retained TTFT by 5.21-9.33% and TPOT by 4.58-8.16%; SHA256SUMS digest 32d5a4d30844da7172d9d9d202c89b8f8f2f25df2271fbd36d978f4c7ca9bf18"
     },
     {
       "id": "communication-buffer-tuning-is-topology-specific",

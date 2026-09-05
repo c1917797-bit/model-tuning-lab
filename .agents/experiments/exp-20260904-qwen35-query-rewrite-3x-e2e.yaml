@@ -918,7 +918,7 @@ mmar_decode_policy_microbenchmark:
     hashes: {result_sha256: d2c7097f5a89f5da1838068525695844a903a3250d11e651307d0e758fc06ddb, container_log_sha256: 9638ca07afa4546c294c11342a2a7ed296cebcb5b3c1256848f928991ee96bdc, sha256sums_sha256: 2c5d82d989d963ad3f55b1bcbc15d94445d8fc36c06f459bf5e576afc714933a}
   decision: "retain fused MMAR in decode; do not replace it with separate MatMul plus AllReduce on the measured 910B4 TP4 shapes"
 flashcomm2_candidate:
-  status: rejected_after_three_startup_attempts
+  status: runtime_recovered_but_rejected_on_e2e_performance
   paper_system_basis: "FlashComm2-style communication overlap targets tensor-parallel projection communication without retraining or quantization"
   retained_stack: "BF16; TP4/DP1; MMAR; gate/up prefetch ratio 0.1; NZ1; async; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512"
   source_worktree: /cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
@@ -928,8 +928,34 @@ flashcomm2_candidate:
     - {commit: d3346ad104af3069d52477df44913db00af9c34f, treatment: "exclude linear_attn.out_proj and keep it on MMAR", result: "same GDN symbolic copy_ rank mismatch", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-selfattn-oproj2-mmar-prefetch-0p1-20260905T030100Z, decision_sha256: 1896e8d7164edf97bf03465e438dd9b146fac310c14d5b1c69fa254b93d26dad, sha256sums_sha256: c764696c7d3c0e05e9717c86660212d9416a4fdf7dfc264c4e294418ee734853}
     - {commit: e161bbff4f5064c87c8a2c4c6c6f412cc9805dd5, treatment: "flatten arbitrary FlashComm2 leading dimensions and restore rank after all-gather", result: "same GDN symbolic copy_ rank mismatch", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-rankrestore-oproj2-mmar-prefetch-0p1-20260905T030600Z, decision_sha256: 5e7c447e98d931e90f9473a816dfbb5cffb6afc288e81e9e3f0e0aa255b8b3b8, sha256sums_sha256: 327b28953da7f8cace9f7a2b0953c390dc2d82a0115accddaa29689f7aadf199}
   validation: "official-image focused unit test: 4 passed; py_compile and git diff --check passed; source worktree clean"
-  performance_boundary: "no service reached readiness, so no TTFT or TPOT claim is valid"
-  decision: "reject this FlashComm2 integration route for Qwen3.5 hybrid attention/GDN in vLLM-Ascend 0.23.0; a future retry requires an architecture-aware global padding/graph contract, not another local projection patch"
+  startup_phase_performance_boundary: "the first three source attempts did not reach readiness, so no latency claim from those attempts is valid"
+  startup_phase_decision: "the first three attempts proved that exclude-by-name and rank restoration were insufficient; the next retry had to repair buffer shape and the dynamic projection-local padding contract"
+  recovery_attempts:
+    - {commit: dc48edac1a9b932382923d8a4f7d1676464751c3, treatment: "flatten the FlashComm2 all-to-all send buffer to match the one-dimensional receive buffer", result: "torch.compile succeeded; FULL capture then failed because padding remained specialized to a static/global token count", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-flatbuf-oproj1-mmar-prefetch-0p1-20260905T041200Z}
+    - {commit: 5b3345812973264fa82bd0812b31b70c15607c9d, treatment: "derive communication padding from the projection input rows", result: "same capture failure because a Python conditional specialized away padding for the compile example", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-localrows-oproj1-mmar-prefetch-0p1-20260905T042100Z}
+    - {commit: 65f780eeadfe9486ccc2eb0f6b7507e778e27da9, treatment: "keep projection-local padding symbolic and unconditional, slice back to the unpadded row count, and restore arbitrary leading dimensions", result: "PASS service readiness and all FULL capture sizes on physical NPU4-7", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-symbolicpad-oproj1-mmar-prefetch-0p1-20260905T043000Z}
+  recovered_validation: "official-image focused unit tests: 7 passed; py_compile, YAML parse, bash -n, launcher tests and git diff --check passed; source worktree clean"
+  real_run:
+    operation_id: exec-0000000000000a5e
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-symbolicpad-oproj1-mmar-prefetch-0p1-20260905T043000Z
+    requests: {c1: "32/32", c5: "32/32", c8: "32/32", c16: "32/32"}
+    errors: 0
+    natural_stops: 128
+    quantized: false
+    p50_ms:
+      c1: {ttft: 446.049560, tpot: 31.186542}
+      c5: {ttft: 529.244360, tpot: 40.589775}
+      c8: {ttft: 538.441695, tpot: 47.400653}
+      c16: {ttft: 949.527025, tpot: 54.298669}
+    speedup_vs_fixed_original:
+      ttft: {c1: 2.081223, c5: 2.063821, c8: 2.010081, c16: 2.185373}
+      tpot: {c1: 1.233603, c5: 1.326222, c8: 1.426496, c16: 1.488280}
+    regression_vs_retained_percent:
+      ttft: {c1: 5.2065, c5: 7.9129, c8: 9.3308, c16: 5.9816}
+      tpot: {c1: 8.1591, c5: 6.8814, c8: 7.3732, c16: 4.5764}
+    correctness: "128/128 requests completed with natural stop and zero errors; exact response hashes differ in 19/16/16/15 cases versus the immutable original, so the candidate remains semantic-business-check-required; calibrated same-runtime controls also drift and no correctness promotion is claimed"
+    hashes: {candidate_config_sha256: 5f3340843ba97397f5b92e77a4f0b90d6b61df92127a7ce7fbb6b6dfe5854d90, candidate_run_sha256: b66421bcceed114fe4ac7d20e122a4f1070c66d61783485527e4aeb653786812, decision_sha256: a997750518e0d2ad50b2697017457be6fd414f6953a080b549fc51f08fb515fd, service_log_sha256: 89df7821ab5dda019a86a1f0527f009b8aba3a3c5c808e76b97b2621acfea06e, sha256sums_sha256: 32d5a4d30844da7172d9d9d202c89b8f8f2f25df2271fbd36d978f4c7ca9bf18}
+  decision: "reject from the cumulative stack: runtime integration is now proven, but FlashComm2 OProj1 regresses both TTFT and TPOT in every concurrency cell versus the retained MMAR stack; keep FlashComm1/2 off"
 hccl_buff1024_candidate:
   source_manifest: configs/qwen35-query-rewrite-mmar-prefetch-0p1-hccl-buff1024-candidate.yaml
   launcher_mode: mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024
@@ -968,7 +994,7 @@ final_maintainer_decision:
     tpot: {c1: 1.33425, c5: 1.41748, c8: 1.53167, c16: 1.55639}
   threshold_status: {ttft: "PASS all four cells", tpot: "OPEN all four cells"}
   profile_ceiling: "one MMAR-enabled rank-0 profile attributes 48.214% of summed operator time to MatmulAllReduceMc2AicpuKernel, 23.504% to MatMulV2 and 16.616% to MatmulAllReduce; 13696 MMAR calls over 107 decode steps imply about 128 row-parallel MMAR calls per step"
-  exhausted_routes: ["training-free ngram speculation", "MTP", "FlashComm1", "FlashComm2 after three implementation attempts", "global and selective NZ", "TP2/PP2", "TP2/DP2 at 133K and 32K", "static kernel", "TASK_QUEUE_ENABLE=2", "HCCL_BUFFSIZE=1024", "separate MatMul plus AllReduce decode policy"]
+  exhausted_routes: ["training-free ngram speculation", "MTP", "FlashComm1", "FlashComm2 OProj1 after symbolic-padding runtime recovery and four-cell E2E regression", "global and selective NZ", "TP2/PP2", "TP2/DP2 at 133K and 32K", "static kernel", "TASK_QUEUE_ENABLE=2", "HCCL_BUFFSIZE=1024", "separate MatMul plus AllReduce decode policy"]
   goal_boundary: "the 2x TPOT target is not met and must not be claimed; on this exact vLLM-Ascend 0.23.0/CANN/910B4 stack, another large gain requires an upstream architecture-aware reduction or overlap of the 128 serialized row-parallel collective paths, or a separately approved model/serving-contract change"
   handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
-  resources: "all task containers exited; physical NPU4-7 idle; NPU0-3 existing workload untouched"
+  resources: "all task containers exited; this work used only physical NPU4-7 mapped to logical 0-3 inside the container; no unscoped device was touched"
