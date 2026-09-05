@@ -204,6 +204,26 @@
     {
       "gate": "assigned-device-race-guard-hccl",
       "result": "HOLD without interference: external p0_hc started after the failed task container stopped and explicitly owns /dev/davinci4..7 for a bounded default/AIV HCCL comparison. The task will wait for parent exit and HCCL_AB2_DONE; NPU0-3 remain untouched."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-third-live-graph",
+      "result": "PASS runtime activation: after the dispatcher-target and default enable_npugraph_ex pass-manager fixes, all four TP ranks fused 64 decode MMAR+Add+RMSNorm patterns in compile range (1,16), while (17,32768) remained outside scope. The immutable integration-check SHA256 is a00c7be3c48fe823fb7c49455394e2dbe07cb0a09f934f9f171738f441a1716a."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-fourth-four-cell-e2e",
+      "result": "REJECT performance, preserve integration: operation exec-0000000000000ba3 completed 128/128 zero-error natural-stop requests with 64 fused patterns per rank. TTFT improved 2.173x/2.166x/2.105x/2.887x versus the immutable original, but TPOT improved only 1.255x/1.334x/1.388x/1.639x and misses 2x in every cell. The retained stack remains unchanged; decision SHA256 is 9dc31fa5bfa08ec00c839ac8b5a12493df787ae036eede971389ab719a3dff49 and SHA256SUMS digest is 2ca1afa9c590031a118ee026849bde03000109decdabf3cf890d7630ca33cb73."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-real-msprof",
+      "result": "PASS diagnostic: TP0 dynamic msprof on one real request recorded 155728 kernel calls. Fused MatmulAllReduceAddRmsNorm had 6720 calls while 6976 unfused MatmulAllReduce and 6976 standalone AddRmsNormBias calls remained, proving roughly half of the 128 layer tails were fused. Collective kernels account for 66.4559% and matmul 23.2408% of summed kernel duration; sums are diagnostic, not wall time. op_summary SHA256 is 3ead56d434d43e5fe4e94cf29494de6231c544463938812b89c1c9c1d166c744."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-full-attention-tail-normalization",
+      "result": "PASS source correctness: source 081953bd1ee1e897f03fb31c6223bb00608773fd safely normalizes only full-shape MMAR-to-preallocated-output copies whose consumers are the expected residual/RMS tails. Focused official-image tests passed 3/3, py_compile and diff checks passed, and the Python-only patch leaves the pinned extension and kernel hashes unchanged."
+    },
+    {
+      "gate": "assigned-device-race-guard-pw",
+      "result": "HOLD without interference: v5 attempt exec-0000000000000bf3 exited 48 before docker launch because p0_pw began a real TP4 workload and reserves physical NPU4-7. The task did not stop or modify it; external NPU0-3 worker PIDs 1225486-1225489 remained unchanged. Relaunch only into a fresh output root after p0_pw exits and both container-reservation and npu-smi checks are clear."
     }
   ]
 }

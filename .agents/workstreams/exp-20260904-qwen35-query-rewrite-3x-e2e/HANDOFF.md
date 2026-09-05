@@ -2,8 +2,12 @@
 
 ## State
 
-- Execution: `fixed-runtime-profile-ready-on-npu4-7`;
-  integration: `not-ready`.
+- Execution: `full-attention-tail-normalization-verified-v5-e2e-waiting-for-p0-pw-release`;
+  integration: `default-off-source-pinned-v5-e2e-pending`.
+- Current resource state supersedes older idle snapshots below: `p0_pw` is a
+  real TP4 workload on physical NPU4-7. Do not stop or modify it. The v5 guard
+  exited before `docker run`; wait for natural release and require both Docker
+  reservations and `npu-smi` to be clear before using a fresh run ID.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - The user assigned physical NPU4-7 to this task. The old
@@ -1585,3 +1589,65 @@ and NPU4-7 have no process should the dispatcher-target candidate be relaunched
 into a new immutable output root. Require positive configuration,
 registration, '(1,16) applicable=True', '(17,32768) applicable=False' and
 fused-op-count evidence before accepting any latency.
+
+## Third activation, fourth E2E, profile, and v5 resume point
+
+The dispatcher-target correction alone was not the last activation fix. Source
+`8c7f7d03e92a177d9c0678b993ece5ac9f5f2254` also wires the default
+`enable_npugraph_ex` dispatcher path through `GraphFusionPassManager`. The v3
+live graph then reported 64 fused decode MMAR+Add+RMSNorm patterns on every TP
+rank in compile range `(1,16)`; `(17,32768)` remained intentionally
+inapplicable. Integration-check SHA256 is
+`a00c7be3c48fe823fb7c49455394e2dbe07cb0a09f934f9f171738f441a1716a`.
+
+Operation `exec-0000000000000ba3` completed the frozen v4 c1/c5/c8/c16 matrix
+with 32/32 requests, zero errors and natural stops in every cell:
+
+| Concurrency | TTFT p50 | TPOT p50 | TTFT vs original | TPOT vs original |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 427.284340 ms | 30.663734 ms | 2.172625x | 1.254636x |
+| 5 | 504.170205 ms | 40.364770 ms | 2.166462x | 1.333615x |
+| 8 | 514.147375 ms | 48.704635 ms | 2.105061x | 1.388304x |
+| 16 | 718.708065 ms | 49.311666 ms | 2.887223x | 1.638793x |
+
+This proves real E2E integration but rejects v4 on performance: TPOT misses 2x
+in all four cells and c1/c5/c8 TPOT is worse than the retained cumulative
+stack. Cross-run exact hashes still require semantic business review if a
+future candidate is promoted; calibrated same-runtime controls also drift, so
+hashes alone are not a proven semantic regression. Evidence root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v4-20260905T075844Z`
+
+Decision SHA256 is
+`9dc31fa5bfa08ec00c839ac8b5a12493df787ae036eede971389ab719a3dff49`;
+SHA256SUMS digest is
+`2ca1afa9c590031a118ee026849bde03000109decdabf3cf890d7630ca33cb73`.
+
+The follow-up TP0 dynamic msprof (`exec-0000000000000bbb`) explains why the
+1.85x isolated tail microbenchmark did not transfer fully. One real request
+recorded 6720 fused kernels but also 6976 unfused MMAR and 6976 standalone
+AddRmsNormBias calls. The saved graph showed that MLP-down tails were direct,
+while attention tails copied the full MMAR output into a preallocated tensor
+before the residual/RMS consumers. Collective kernels account for 66.4559% and
+matmul for 23.2408% of summed kernel duration. These sums are diagnostic only,
+not wall time. The exported op_summary SHA256 is
+`3ead56d434d43e5fe4e94cf29494de6231c544463938812b89c1c9c1d166c744`.
+
+Source HEAD `081953bd1ee1e897f03fb31c6223bb00608773fd` safely normalizes only
+full-shape attention MMAR copies whose destination has no unrelated consumer,
+allowing those tails to reach the existing fusion. Focused tests in the
+official 0.23.0 image passed 3/3 in 16.05 seconds; py_compile and diff checks
+passed. The patch is Python-only, so the extension remains
+`6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23`
+and the kernel library remains
+`6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a`.
+Maintainer commit `77aec0a685b2b450f3da2704eea5c692455c172d` pins this source.
+
+The first v5 launch attempt (`exec-0000000000000bf3`) was correctly rejected
+with exit 48 before Docker launch because `p0_pw` began a real workload and
+reserved `/dev/davinci4..7`. Do not stop it. Do not reuse the already-created
+`mmar-add-rmsnorm-v5-20260905T084211Z` output root. When `p0_pw` naturally
+exits, recheck Docker reservations and `npu-smi`, generate a fresh run ID/root,
+and launch `mmar-on-weight-prefetch-gateup-0p1-fused-tail`. Require 128 fused
+patterns per rank in `(1,16)` before accepting any c1/c5/c8/c16 latency. Keep
+NPU0-3 untouched.

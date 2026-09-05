@@ -151,6 +151,24 @@
       "status": "accepted-local",
       "lesson": "Promote a communication-tail fusion to model integration only after every profiled projection shape and captured decode batch size passes both output checks and no latency cell regresses. A favorable average cannot waive a single incorrect or slower cell.",
       "evidence": "Corrected TP4 BF16 MMAR+Add+RMSNorm run passed all 18 cells, delivered 1.851721x geometric-mean speedup and a 1.706554x minimum, with immutable result SHA256 0dfe46d44c907e513e8fa2a0a6bc48e2c26c39fc981bfe30cc5f2fa29cb2d8ac."
+    },
+    {
+      "id": "graph-fusion-needs-positive-activation-proof",
+      "status": "accepted-local",
+      "lesson": "Trigger: a custom graph pass compiles and the service becomes ready. Action: before accepting any E2E latency, require pass configuration, registration, range applicability, positive match count and generated-graph fused-op evidence; API availability or a clean compile is insufficient. Destination: future update to the Ascend benchmark-evidence skill's runtime activation gate.",
+      "evidence": "Verification: two ready/compiled attempts retained 0 fused ops because kwargs and dispatcher targets did not match; after both fixes and the enable_npugraph_ex pass-manager correction, every TP rank reported 64 fused patterns and integration-check SHA256 a00c7be3c48fe823fb7c49455394e2dbe07cb0a09f934f9f171738f441a1716a."
+    },
+    {
+      "id": "partial-fusion-needs-kernel-count-attribution",
+      "status": "accepted-local",
+      "lesson": "Trigger: a graph fusion is active but whole-model latency gains are smaller than its isolated microbenchmark. Action: use a real-request profile to count fused and unfused kernels, then inspect the saved graph shape for the missing path; keep summed kernel durations diagnostic-only. Destination: future update to the Ascend benchmark-evidence skill's profiling section.",
+      "evidence": "Verification: fused-tail msprof recorded 6720 fused MMAR+Add+RMS calls but also 6976 unfused MMAR and 6976 AddRmsNormBias calls; graph inspection traced the remaining attention tails through a full-tensor preallocation copy, leading to source 081953bd."
+    },
+    {
+      "id": "release-image-tests-need-minimal-source-overlay",
+      "status": "accepted-local",
+      "lesson": "Trigger: validate a source-only Python patch against an installed release image whose repository dependencies may not match the checkout. Action: overlay only the changed package module and focused test, not the entire source tree, while keeping the released binary extension fixed. Destination: host-development tool-adapter note for release-image source validation.",
+      "evidence": "Verification: mounting the whole checkout exposed unrelated npugraph/torchair dependency skew; the minimal module overlay in the official vLLM-Ascend 0.23.0 image passed all 3 focused normalization tests in 16.05 seconds."
     }
   ]
 }

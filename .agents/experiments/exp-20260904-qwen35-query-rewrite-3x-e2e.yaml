@@ -999,7 +999,7 @@ final_maintainer_decision:
   handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
   resources: "all task containers exited; this work used only physical NPU4-7 mapped to logical 0-3 inside the container; no unscoped device was touched"
 mmar_add_rmsnorm_decode_candidate:
-  status: dispatcher_target_matcher_pinned_e2e_waiting_for_p0_hccl_release
+  status: full_attention_tail_normalization_pinned_e2e_waiting_for_p0_pw_release
   rationale: "target the two serialized row-parallel tails per layer by fusing MMAR, residual add and the following GemmaRMSNorm without retraining or quantization"
   framework_boundary: "the built-in vLLM-Ascend custom pass is default-off and applies only above 512 tokens, so the candidate uses the CANN 9.1 general ACLNN operator for decode M=1-16"
   implementation:
@@ -1041,9 +1041,13 @@ mmar_add_rmsnorm_decode_candidate:
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
     source_commit: 081953bd1ee1e897f03fb31c6223bb00608773fd
+    previous_partial_fusion_commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
+    full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies only when all destination consumers are the expected residual/RMS tail; this makes attention tails match the same fusion as direct MLP-down tails"
+    focused_validation: "official vLLM-Ascend 0.23.0 image with only the changed module overlaid: 3 passed in 16.05s; py_compile and diff checks pass; ruff unavailable and not claimed"
+    binary_boundary: "Python-only change; extension SHA256 remains 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23 and kernel library SHA256 remains 6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
   e2e_queue:
@@ -1064,5 +1068,30 @@ mmar_add_rmsnorm_decode_candidate:
     second_live_graph_sha256: 643b6c2083432929f281e45f010ed9af2cb06e4925b6acc11b804dc05efee5f6
     dispatcher_target_fix_commit: c36980d335d1f493cba824e489dd4828218a5f99
     third_retry_blocker: "external p0_hc owns /dev/davinci4..7 for a bounded HCCL default/AIV comparison; watcher exec-0000000000000b79 waits for parent exit plus HCCL_AB2_DONE"
-    next: "after p0_hc naturally finishes, retry into a new immutable output root; require configure/registration/range logs and a positive fused-op count before accepting any E2E cell"
+    third_live_graph_output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v3-20260905T074703Z
+    third_live_graph_result: "PASS activation after the default enable_npugraph_ex dispatcher path was wired to GraphFusionPassManager: every TP rank fused 64 patterns in (1,16); large range remained inapplicable"
+    third_live_graph_sha256: a00c7be3c48fe823fb7c49455394e2dbe07cb0a09f934f9f171738f441a1716a
+    fourth_e2e_operation: exec-0000000000000ba3
+    fourth_e2e_output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v4-20260905T075844Z
+    fourth_e2e_result: "REJECT performance, preserve integration: 128/128 zero-error natural-stop requests; TTFT passes 2x in all cells, TPOT reaches only 1.255x/1.334x/1.388x/1.639x versus immutable original; 64 fused patterns per rank cover only half the layer tails"
+    fourth_e2e_p50_ms:
+      c1: {ttft: 427.284340, tpot: 30.663734}
+      c5: {ttft: 504.170205, tpot: 40.364770}
+      c8: {ttft: 514.147375, tpot: 48.704635}
+      c16: {ttft: 718.708065, tpot: 49.311666}
+    fourth_e2e_hashes: {candidate_run_sha256: ae73617f3527944f82207737419e9fde9f4a59ce0df66c4cce64fbfae8e1723b, decision_sha256: 9dc31fa5bfa08ec00c839ac8b5a12493df787ae036eede971389ab719a3dff49, service_log_sha256: b8f1edb0c57e4a679683394b3924fe01aa089862e41638bb6e41e70777483226, sha256sums_sha256: 2ca1afa9c590031a118ee026849bde03000109decdabf3cf890d7630ca33cb73}
+    fifth_attempt_operation: exec-0000000000000bf3
+    fifth_attempt_output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v5-20260905T084211Z
+    fifth_attempt_result: "guarded before docker launch with exit 48 when p0_pw began a real TP4 workload reserving /dev/davinci4..7; never reuse this already-created output root"
+    current_blocker: "p0_pw is actively using physical NPU4-7; do not stop or modify it. NPU0-3 external workers remain untouched"
+    next: "after p0_pw naturally exits and both container reservations and npu-smi are clear, generate a fresh run ID/output root and rerun v5; require 128 fused patterns per rank in (1,16) before accepting frozen c1/c5/c8/c16 latency"
+  fused_tail_profile:
+    operation_id: exec-0000000000000bbb
+    run_id: fused-tail-msprof-20260905T081711Z
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/fused-tail-msprof-20260905T081711Z
+    request_boundary: "one real 1810-input/104-output natural-stop request on TP0/physical NPU4; profiler TTFT/TPOT are not benchmark evidence"
+    coverage: "6720 fused MMAR+Add+RMS kernels versus 6976 unfused MMAR and 6976 AddRmsNormBias calls; approximately half the 128 layer tails fused"
+    categories_pct: {collective: 66.4559, matmul: 23.2408, copy_transpose: 1.9429, normalization: 1.0973, gdn_decode: 1.0348}
+    measurement_boundary: "6738323.28 us is a sum across possibly overlapping streams and must not be used as wall time or added to TTFT/TPOT"
+    hashes: {op_summary_sha256: 3ead56d434d43e5fe4e94cf29494de6231c544463938812b89c1c9c1d166c744, hotspots_sha256: c8d81443548d021de0e607b123c4eec6ef4bf45d5bdc951736ca7f6e6d4ffbf7, sha256sums_sha256: 04028b1bc91e596675448a5df96bfd701f95ef9de254c6a1ded2720b9af26f2b}
   promotion_gate: "graph pass must match, service correctness must pass, then all frozen c1/c5/c8/c16 cells must improve versus the immutable original and retained stack"
