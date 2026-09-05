@@ -1063,6 +1063,6 @@ mmar_add_rmsnorm_decode_candidate:
     second_live_graph_result: "invalid integration attempt: both compile ranges completed, but rank-0 still contained fused=0, MMAR=704 and AddRMSNorm=767; the exact task container was stopped before benchmarking and the output contains an immutable integration-check record"
     second_live_graph_sha256: 643b6c2083432929f281e45f010ed9af2cb06e4925b6acc11b804dc05efee5f6
     dispatcher_target_fix_commit: c36980d335d1f493cba824e489dd4828218a5f99
-    third_retry_blocker: "external p0_hc owns /dev/davinci4..7 for a bounded HCCL default/AIV comparison; watcher exec-0000000000000b70 waits for parent exit plus HCCL_AB2_DONE"
+    third_retry_blocker: "external p0_hc owns /dev/davinci4..7 for a bounded HCCL default/AIV comparison; watcher exec-0000000000000b79 waits for parent exit plus HCCL_AB2_DONE"
     next: "after p0_hc naturally finishes, retry into a new immutable output root; require configure/registration/range logs and a positive fused-op count before accepting any E2E cell"
   promotion_gate: "graph pass must match, service correctness must pass, then all frozen c1/c5/c8/c16 cells must improve versus the immutable original and retained stack"

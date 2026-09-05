@@ -1579,7 +1579,7 @@ guards, YAML parsing and diff checks pass. Maintainer pin commit
 
 A new external container 'p0_hc' then reserved '/dev/davinci4..7' for a bounded
 HCCL default/AIV comparison. Do not stop or modify it. Watcher
-'exec-0000000000000b70' waits for its parent to exit and for
+'exec-0000000000000b79' waits for its parent to exit and for
 'HCCL_AB2_DONE' in '/cache/austinov/p0/hccl_ab2.log'. Only after both are true
 and NPU4-7 have no process should the dispatcher-target candidate be relaunched
 into a new immutable output root. Require positive configuration,
