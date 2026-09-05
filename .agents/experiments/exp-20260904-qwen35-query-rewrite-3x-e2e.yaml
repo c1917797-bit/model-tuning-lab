@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: operator_path_exhausted_tpot_target_open_handoff_ready
-decision: retain_matmulallreduce_and_subcap_gateup_prefetch_escalate_decode_collective_path
+status: v9_activation_rejected_symbolic_full_slice_fix_v10_ready_behind_p0_r15
+decision: retain_current_stack_validate_v10_then_resume_shortgpt
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -94,7 +94,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "physical NPU4-7 are idle after the final HCCL1024 candidate; external NPU0-3 VLLM workers remain active and were not used"
+  current: "external p0_r15 is actively using physical NPU4-7; wait for R15_DONE and a stable idle window; NPU0-3 remain out of scope"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -999,7 +999,7 @@ final_maintainer_decision:
   handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
   resources: "all task containers exited; this work used only physical NPU4-7 mapped to logical 0-3 inside the container; no unscoped device was touched"
 mmar_add_rmsnorm_decode_candidate:
-  status: exported_copy_normalizer_fixed_v8_rejected_v9_queued_behind_p0_overlap
+  status: v9_rejected_before_traffic_symbolic_full_slice_fix_v10_ready
   rationale: "target the two serialized row-parallel tails per layer by fusing MMAR, residual add and the following GemmaRMSNorm without retraining or quantization"
   framework_boundary: "the built-in vLLM-Ascend custom pass is default-off and applies only above 512 tokens, so the candidate uses the CANN 9.1 general ACLNN operator for decode M=1-16"
   implementation:
@@ -1040,13 +1040,13 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: 573ea2940bdc546923c698de16ea49465e6976f5
+    source_commit: 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39
     previous_partial_fusion_commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
     full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies only when all destination consumers are the expected residual/RMS tail; this makes attention tails match the same fusion as direct MLP-down tails"
-    focused_validation: "official vLLM-Ascend 0.23.0 image with only the changed module overlaid: 7 passed in 8.52s, covering Graph, GraphModule, exported direct copy, exported dynamic slice-copy and partial-slice rejection; py_compile and diff checks pass; ruff unavailable and not claimed"
+    focused_validation: "source 573ea previously passed 7/7 official-image tests; source 4424cc adds open-ended symbolic-first-axis acceptance plus bounded-slice rejection tests and passes py_compile/diff checks. No-device pytest remained blocked at torch_npu import, so execution of the two new tests is not claimed"
     binary_boundary: "Python-only change; extension SHA256 remains 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23 and kernel library SHA256 remains 6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
@@ -1098,18 +1098,32 @@ mmar_add_rmsnorm_decode_candidate:
     post_export_root_cause: "the npugraph_ex backend receives an exported mutation topology: direct output assignment is aten.copy_.default and dynamic output[:n] is aten.slice.Tensor plus aten.copy_.default, not the Dynamo-level operator.setitem used by the first synthetic tests"
     post_export_fix_commit: 573ea2940bdc546923c698de16ea49465e6976f5
     post_export_fix_validation: "official 0.23.0 minimal overlay passed 7/7 focused tests in 8.52s; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
-    current_blocker: "external p0_ov owns physical NPU4-7 for a bounded four-configuration/two-repeat overlap A/B chain, followed by the already queued mc2 comparison; do not stop or modify either chain. The user reconfirmed NPU4-7 are assigned to this optimization, while NPU0-3 external workers remain untouched"
+    current_blocker: "external p0_r15 owns physical NPU4-7 for four configurations with two long repeats; it may release devices between configurations, so do not race it. Wait for R15_DONE plus a stable idle window. NPU0-3 remain untouched"
     guarded_v9_queue:
-      operation_id: exec-0000000000000004
+      operation_id: exec-0000000000000060
       superseded_operation_id: exec-0000000000000cbb
       recovery: "the direct AgentWeb manager restarted and lost the old operation journal; exact process and output-root checks proved the waiter was gone and no v9 candidate had launched, so one replacement queue was started after a second duplicate guard"
       maintainer_commit: a0231e958c1106a2e0a500e0991a12ff6bb2ec83
       script: scripts/queue_qwen35_fused_tail_v9.sh
       test: tests/test_queue_qwen35_fused_tail_v9.sh
-      state: "recovered queue running without NPU allocation; last observation had neither completion marker and overlap_ab was on its sequence-parallel configuration"
+      state: "completed with exit 72 after a real BF16 launch; positive activation gate failed before query traffic"
       gate: "require OVERLAP_AB_DONE and MC2_AB_DONE, then four consecutive 15-second checks with no NPU4-7 container reservation, no NPU4-7 process and no listener on port 10010; the underlying launcher repeats its own guards"
-      duplicate_policy: "poll this operation and do not launch another v9 queue"
-    next: "poll exec-0000000000000004; after its guarded launch, require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix"
+      duplicate_policy: "terminal; do not relaunch v9"
+    v9_activation:
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v9-20260905T125017Z
+      result: "REJECT before traffic: four ranks each reported Normalized 0 and Fused 64 rather than 64 and 128; large range was correctly inapplicable"
+      integration_check_sha256: 246c0328669486df48968fc2bba137a26b70bda498bbc35e151d873b14b90cf0
+      service_log_sha256: 6a51f35128178a9981f68dc39ea7fb9049f58bee40199bc5779898da00368d62
+    symbolic_full_slice_fix:
+      source_commit: 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39
+      scope: "allow different symbolic first-axis names only for open-ended axis-0 full slices with matching rank/trailing dimensions and LayerNorm-only semantic consumers"
+      validation: "py_compile and diff checks pass; two focused tests added; no-device pytest blocked at torch_npu import and is not claimed"
+    guarded_v10_queue:
+      script: scripts/queue_qwen35_fused_tail_v10.sh
+      test: tests/test_queue_qwen35_fused_tail_v10.sh
+      state: "ready but not started"
+      gate: "wait for R15_DONE, then four stable idle checks before launch; the underlying launcher repeats reservation and npu-smi guards"
+    next: "start exactly one v10 queue; require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix; resume ShortGPT after v10 releases NPU4-7"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

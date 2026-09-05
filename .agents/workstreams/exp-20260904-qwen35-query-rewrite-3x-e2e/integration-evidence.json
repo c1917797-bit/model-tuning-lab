@@ -260,6 +260,18 @@
     {
       "gate": "v9-positive-activation-before-traffic",
       "result": "PASS static: the E2E launcher now snapshots the live service log and requires exactly four rank records each for range (1,16) applicable, 64 normalized copies, 128 fused tails, and range (17,32768) inapplicable before sending benchmark requests. Failed activation exits 72 and preserves a hashed machine-readable check."
+    },
+    {
+      "gate": "v9-live-positive-activation",
+      "result": "REJECT safely before traffic: operation exec-0000000000000060 launched one BF16 non-quantized TP4 service on physical NPU4-7 after all guards passed. Every rank reported Normalized 0 and Fused 64 rather than 64 and 128; the large range was correctly inapplicable. Exit 72 preserved integration-check SHA256 246c0328669486df48968fc2bba137a26b70bda498bbc35e151d873b14b90cf0 and service-log SHA256 6a51f35128178a9981f68dc39ea7fb9049f58bee40199bc5779898da00368d62; no benchmark request ran."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-symbolic-full-slice-fix",
+      "result": "PASS static with explicit boundary: source 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39 accepts different symbolic first-axis spellings only for open-ended full axis-0 copies whose rank/trailing dimensions and LayerNorm-only users are safe. py_compile and diff checks pass and two tests were added; no-device official-image pytest was blocked at torch_npu import, so execution of those tests is not claimed."
+    },
+    {
+      "gate": "p0-r15-noninterference-and-v10-queue",
+      "result": "PASS fail-closed: ShortGPT diagnostic exec-00000000000000c8 exited 48 before Docker when p0_r15 reserved physical NPU4-7. The prepared v10 queue waits for R15_DONE before a four-observation stable idle window, so it cannot take the cards during external inter-configuration gaps; its shell mock and the shared service guard test pass. NPU0-3 remain untouched."
     }
   ]
 }

@@ -2,12 +2,13 @@
 
 ## State
 
-- Execution: `full-attention-tail-normalization-verified-v5-e2e-waiting-for-p0-pw-release`;
-  integration: `default-off-source-pinned-v5-e2e-pending`.
-- Current resource state supersedes older idle snapshots below: `p0_pw` is a
-  real TP4 workload on physical NPU4-7. Do not stop or modify it. The v5 guard
-  exited before `docker run`; wait for natural release and require both Docker
-  reservations and `npu-smi` to be clear before using a fresh run ID.
+- Execution: `v9-activation-rejected-before-traffic-v10-source-fix-ready`;
+  integration: `default-off-source-4424cc24-pinned-v10-queue-ready`.
+- Current resource state supersedes older idle snapshots below: `p0_r15` is a
+  real TP4 workload on physical NPU4-7. It runs four configurations with two
+  long repeats and may release the devices briefly between configurations.
+  Do not stop, modify, or race it. Require `R15_DONE` plus a stable Docker,
+  `npu-smi`, and port-idle window before launching v10.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - The user assigned physical NPU4-7 to this task. The old
@@ -1768,3 +1769,47 @@ the live log and requires exactly four rank observations for each of:
 `(1, 16) applicable=True`, `Normalized 64`, `Fused 128`, and
 `(17, 32768) applicable=False`. Any mismatch exits 72 before query traffic
 and preserves `integration-check.json`, its source log, and hashes.
+
+## v9 rejection, symbolic full-slice fix, and v10 resume point
+
+Corrected queue operation `exec-0000000000000060` waited for both prior
+external chains and four stable idle checks, then launched exactly one v9
+container on physical NPU4-7 at 2026-09-05T12:50:17Z. The service loaded the
+BF16 model with `quantization=None` and compiled both intended ranges.
+Every TP rank reported `(1,16) applicable=True`, `Normalized 0`, and
+`Fused 64`; all four also reported `(17,32768) applicable=False`.
+
+The positive activation gate rejected the run with exit 72 before any
+query_rewrite benchmark request. The exact container then exited and no
+candidate cell or decision file was created. Immutable evidence root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v9-20260905T125017Z`
+
+The integration-check SHA256 is
+`246c0328669486df48968fc2bba137a26b70bda498bbc35e151d873b14b90cf0`;
+the snapshotted service log SHA256 is
+`6a51f35128178a9981f68dc39ea7fb9049f58bee40199bc5779898da00368d62`.
+This is an integration rejection, not latency evidence, and the retained
+stack remains unchanged.
+
+Source inspection showed that the exported open-ended `output[:]` copy can
+carry different symbolic names for the destination, slice, and MMAR first
+dimension. Source commit
+`4424cc24ecfa355ce2b17ab48e04fb6fc4944e39` accepts that case only when it
+is an open-ended axis-0 slice, ranks and trailing dimensions match, and all
+semantic destination users are the expected residual/RMS tail. A bounded
+slice with different symbolic first dimensions is still rejected. The Python
+files pass `py_compile` and `git diff --check`; two focused regression
+tests were added. A no-NPU official-image pytest attempt could not import
+`torch_npu` without physical device mappings, so those new tests are not
+claimed as executed. The unchanged extension and kernel hashes remain pinned.
+
+The v10 launcher pin, resource queue and shell mocks pass. The queue waits for
+`R15_DONE` before checking a four-observation stable idle window, preventing
+it from taking NPU4-7 during `p0_r15` inter-configuration gaps. A ShortGPT
+diagnostic launch attempt `exec-00000000000000c8` was independently rejected
+with exit 48 before Docker because `p0_r15` reserved NPU4-7; its empty output
+root is not evidence and must not be reused. Run v10 first. Only if all four
+ranks report `Normalized 64 / Fused 128` may benchmark traffic begin. After
+v10 terminates, resume the separate ShortGPT workstream on the same guarded
+resource set.

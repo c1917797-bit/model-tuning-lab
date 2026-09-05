@@ -1,6 +1,6 @@
 schema: qwen35-query-rewrite-candidate/v1
 name: mmar-add-rmsnorm-decode
-status: e2e-integration-ready
+status: symbolic-full-slice-fix-ready-for-v10
 model: Qwen3.5-27B
 runtime: vLLM-Ascend 0.23.0
 hardware: Ascend 910B4 TP4
@@ -24,7 +24,7 @@ treatment:
 source:
   worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
   branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-  commit: 573ea2940bdc546923c698de16ea49465e6976f5
+  commit: 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39
   extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
 first_real_run:
   evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z
@@ -48,5 +48,5 @@ corrected_real_run:
   sha256sums_sha256: b26ff6be069bb74c9eb278cdc9fa39ad5298ec7668a4ebfb8ea90c392573062e
 resource_state:
   assigned_devices: "physical NPU4-7"
-  observation: "external p0_ov is running a bounded overlap A/B chain on NPU4-7; v9 must wait for the overlap and chained mc2 jobs to finish naturally"
+  observation: "external p0_r15 is running a bounded four-configuration/two-repeat chain on NPU4-7; v10 must wait for R15_DONE and a stable idle window"
   safety: "exact-name monitor allowlist plus npu-smi process guard; never use NPU0-3"
