@@ -10,6 +10,8 @@ device_set="${DEVICE_SET:-4-7}"
 port="${PORT:-10010}"
 base_url="http://127.0.0.1:$port"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
+expected_normalized="${EXPECTED_FUSED_TAIL_NORMALIZED:-64}"
+expected_fused="${EXPECTED_FUSED_TAIL_FUSED:-128}"
 original_dir="${ORIGINAL_BASELINE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v3}"
 device_tag="${device_set//-/_}"
 candidate_container="${CANDIDATE_CONTAINER:-qwen35_${candidate_mode}_${device_tag}_$run_id}"
@@ -155,7 +157,7 @@ if [[ "$candidate_mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; the
   activation_json="$output_root/integration-check.json"
   docker logs "$candidate_container" >"$activation_log" 2>&1
   set +e
-  python3 "$repo_root/scripts/check_qwen35_fused_tail_activation.py" --log "$activation_log" --output "$activation_json" --expected-ranks 4 --expected-normalized 64 --expected-fused 128
+  python3 "$repo_root/scripts/check_qwen35_fused_tail_activation.py" --log "$activation_log" --output "$activation_json" --expected-ranks 4 --expected-normalized "$expected_normalized" --expected-fused "$expected_fused"
   activation_status=$?
   set -e
   sha256sum "$activation_log" "$activation_json" >"$output_root/activation-SHA256SUMS"
