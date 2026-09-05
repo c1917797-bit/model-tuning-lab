@@ -272,7 +272,7 @@ PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" 
 grep -q -- '"fuse_decode_mmar_add_rmsnorm":true' "$docker_log"
 grep -q -- '"compile_ranges_endpoints":\[16,32768\]' "$docker_log"
 grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
-grep -q -- 'VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT=f0f5688daf68a575063c17b1e48de6ed2febe98f' "$docker_log"
+grep -q -- 'VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT=369bd1f627be033c3d4de162cf5e7f5c8b6453b2' "$docker_log"
 grep -q -- 'decode_mmar_add_rmsnorm_fusion_pass.py' "$docker_log"
 grep -q -- 'vllm_ascend_C.cpython-312-aarch64-linux-gnu.so' "$docker_log"
 if grep -q -- '--quantization' "$docker_log"; then

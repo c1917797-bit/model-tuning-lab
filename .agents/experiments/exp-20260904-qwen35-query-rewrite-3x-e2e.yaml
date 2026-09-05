@@ -1008,7 +1008,7 @@ mmar_add_rmsnorm_decode_candidate:
     test: tests/test_benchmark_qwen35_mmar_add_rmsnorm.py
     source_worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
     source_branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-    source_commit: f0f5688daf68a575063c17b1e48de6ed2febe98f
+    source_commit: 369bd1f627be033c3d4de162cf5e7f5c8b6453b2
     extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
     meta_registration:
       commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
@@ -1040,7 +1040,7 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: f0f5688daf68a575063c17b1e48de6ed2febe98f
+    source_commit: 369bd1f627be033c3d4de162cf5e7f5c8b6453b2
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"

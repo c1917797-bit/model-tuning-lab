@@ -175,7 +175,7 @@
     },
     {
       "gate": "mmar-add-rmsnorm-default-off-integration",
-      "result": "PASS static/launcher: source f0f5688d adds an explicit default-false graph flag, restricts the pass to non-SP compile ranges of 1-16 tokens, and pins the custom extension and kernel hashes in a read-only official-image overlay. Runtime graph-match and E2E gates remain pending."
+      "result": "PASS static/launcher: source 369bd1f6 adds an explicit default-false graph flag, restricts the pass to the split non-SP compile range 1-16, avoids an unscoped npugraph global replacement, and pins the custom extension and kernel hashes in a read-only official-image overlay. Runtime graph-match and E2E gates remain pending."
     },
     {
       "gate": "assigned-device-race-guard",
