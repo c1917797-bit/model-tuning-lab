@@ -71,7 +71,9 @@ candidate:
   primary_variable: flashcomm1_sequence_parallelism
   compatibility_fix:
     source_root: /cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape
-    source_commit: 68683e2b7c0eb47bbb49685ed079b49003a13189
-    file: vllm_ascend/ops/gdn.py
+    source_commit: faed93717a61003cc2daf0abdbffdd61981a4bac
+    files:
+      - vllm_ascend/ops/gdn.py
+      - vllm_ascend/ops/linear_op.py
   physical_devices: [4, 5, 6, 7]
   logical_devices: [0, 1, 2, 3]
