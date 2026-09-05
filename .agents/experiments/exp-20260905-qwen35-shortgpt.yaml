@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260905-qwen35-shortgpt
-status: prepared_waiting
+status: queued_waiting
 decision: pending
 hypothesis: "Removing Qwen3.5 decoder blocks with the lowest real-workload Block Influence can reduce both prefill and decode work without retraining; stacked with the retained runtime and fused-tail operator, the reduction may close the remaining TPOT gap while preserving query_rewrite business quality."
 objective: "Reach at least 2x median TTFT and 2x median TPOT versus the immutable original at concurrency 1, 5, 8, and 16, using cumulative non-quantized parameter, algorithm, and operator improvements."
@@ -23,6 +23,10 @@ git:
     - 7b1fdbaaf8d5411a5e5101150a276141328510c2
     - ef8c82c4e0333b6ae0f3d6c22cfdeae045a6a880
     - 84d0bd470e11c9617efee4b16990d370d85b7482
+    - 1b1d41397b637c4c1da9f77de7762dbbbf07fed5
+    - 7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a
+    - bef101fe31e372eb6e3219289419476b58b22aaa
+    - 284623b08cb02dd47ffac956d315625d94c44e24
 environment:
   source_commit: 54a6bb40ac83771538b3c859bcf9c55e2e51854a
   model_revision: "/cache/austinov/Qwen3.8-27B (config model_type qwen3_5; config SHA256 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab)"
@@ -81,8 +85,16 @@ results:
   steady: {}
   boundary: {}
   lifecycle:
-    phase: prepared_waiting_for_v10_and_p0_r15
+    phase: bi_queued_behind_v10_and_p0_r15
     dependency: "only active guarded fused-tail v10 queue exec-00000000000000f7; superseded exec-00000000000000e6 timed out without a host waiter; f7 waits for protected p0_r15 R15_DONE and stable NPU4-7 idle"
+    shortgpt_queue:
+      operation_id: exec-0000000000000131
+      host_pid: 1474376
+      predecessor_pid: 1298706
+      predecessor_start_ticks: 115030322
+      state: "exactly one active asynchronous BI waiter"
+      gate: "require R15_DONE, exact predecessor termination, then four stable Docker/npu-smi/port-10020 idle checks before a fresh BI diagnostic"
+      duplicate_policy: "poll exec-0000000000000131 and do not start another ShortGPT BI queue"
   resources:
     allowed: "physical NPU4-7 when idle"
     prohibited: "physical NPU0-3 and all existing workloads"
@@ -91,7 +103,7 @@ artifacts:
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json
 decision_reason: "Pending target-device Block Influence, correctness, E2E benchmark, and profiling."
-next_loop: "Poll only fused-tail v10 operation exec-00000000000000f7 without duplicating its waiter; after it releases NPU4-7, collect fresh Qwen3.5 Block Influence on real query_rewrite inputs, freeze the first conservative layer-removal candidate, and select a valid same-runtime control according to whether v10 produced a complete matrix."
+next_loop: "Poll fused-tail v10 operation exec-00000000000000f7 and the exactly one serialized ShortGPT BI operation exec-0000000000000131; do not duplicate either waiter. When BI completes, inspect its immutable analysis and hashes, freeze the first conservative layer-removal candidate, and select a valid same-runtime control according to whether v10 produced a complete matrix."
 rollback:
   command: "Unset VLLM_ASCEND_QWEN35_SKIP_LAYERS and VLLM_ASCEND_QWEN35_BI_DIR; remove the source overlay; relaunch the retained pinned stack."
   verified: false
