@@ -1,0 +1,41 @@
+schema: qwen35-query-rewrite-runtime/v1
+role: tp8_mtp_local_argmax_candidate
+baseline_config: configs/qwen35-query-rewrite-tp8-user-baseline.yaml
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+runtime:
+  image: quay.io/ascend/vllm-ascend:v0.23.0
+  dtype: bfloat16
+  quantization: null
+  tensor_parallel_size: 8
+  pipeline_parallel_size: 1
+  data_parallel_size: 1
+  decode_context_parallel_size: 1
+  physical_devices: [0, 1, 2, 3, 4, 5, 6, 7]
+  speculative_config:
+    method: mtp
+    num_speculative_tokens: 1
+    use_local_argmax_reduction: true
+candidate:
+  id: tp8-mtp-local-argmax-k1
+  primary_variable_vs_baseline: "speculation disabled -> exact Qwen3.5 MTP k=1 with vocab-parallel local argmax"
+  retraining: false
+  quantized: false
+  source:
+    repository: /cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax
+    commit: 2d08abd56466360b56738d5c48858dc32ddd1f6b
+    patch: vllm_ascend/patch/worker/patch_qwen3_5.py
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  requests_per_cell: 32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  generation: natural_eos
+  target_speedup: {ttft: 2.0, tpot: 2.0}
+correctness:
+  target_model_verification: required
+  completed_per_cell: 32
+  errors_per_cell: 0
+  finish_reasons_per_cell: {stop: 32}
+  maximum_similarity_regression: 0.02

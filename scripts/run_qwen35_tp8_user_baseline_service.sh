@@ -5,6 +5,30 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 container_name="${CONTAINER_NAME:?set an immutable CONTAINER_NAME}"
 port="${PORT:-10010}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
+runtime_role="${RUNTIME_ROLE:-baseline}"
+mtp_local_argmax_root="${MTP_LOCAL_ARGMAX_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax}"
+mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-2d08abd56466360b56738d5c48858dc32ddd1f6b}"
+
+case "$runtime_role" in
+  baseline|mtp-local-argmax) ;;
+  *) echo "unsupported RUNTIME_ROLE: $runtime_role" >&2; exit 64 ;;
+esac
+
+if [[ "$runtime_role" == mtp-local-argmax ]]; then
+  actual_ref="$(
+    git -c safe.directory="$mtp_local_argmax_root" \
+      -C "$mtp_local_argmax_root" rev-parse HEAD
+  )"
+  if [[ "$actual_ref" != "$mtp_local_argmax_commit" ]]; then
+    echo "Qwen3.5 MTP local-argmax source must be $mtp_local_argmax_commit, got $actual_ref" >&2
+    exit 45
+  fi
+  mtp_patch="$mtp_local_argmax_root/vllm_ascend/patch/worker/patch_qwen3_5.py"
+  if [[ ! -f "$mtp_patch" ]]; then
+    echo "Qwen3.5 MTP local-argmax patch is missing: $mtp_patch" >&2
+    exit 46
+  fi
+fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
   echo "refusing to replace existing container: $container_name" >&2
@@ -81,6 +105,14 @@ serve_args=(
   --async-scheduling
 )
 
+runtime_mount_args=()
+if [[ "$runtime_role" == mtp-local-argmax ]]; then
+  serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}')
+  runtime_mount_args+=(
+    -v "$mtp_patch:/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py:ro"
+  )
+fi
+
 docker run -d \
   --name "$container_name" \
   --network host \
@@ -98,6 +130,7 @@ docker run -d \
   -v /cache/austinov:/cache/austinov \
   -v /cache/cch:/cache/cch:ro \
   -v "$repo_root":/experiment:ro \
+  "${runtime_mount_args[@]}" \
   -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
   -e HCCL_BUFFSIZE=512 \
   -e OMP_PROC_BIND=false \

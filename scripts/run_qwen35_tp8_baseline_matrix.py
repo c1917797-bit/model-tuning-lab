@@ -34,6 +34,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-url", required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
+    parser.add_argument("--role", choices=("baseline", "candidate"), default="baseline")
     parser.add_argument("--repetitions", type=int, default=3)
     parser.add_argument("--timeout", type=float, default=600)
     parser.add_argument("--benchmark-script", type=Path, default=Path(__file__).with_name("qwen35_query_rewrite_bench.py"))
@@ -53,10 +54,11 @@ def main() -> int:
             raise RuntimeError("service health check failed")
 
     args.output_root.mkdir(parents=True)
-    state_path = args.output_root / "baseline-run.json"
+    state_path = args.output_root / f"{args.role}-run.json"
     state = {
-        "schema": "qwen35-query-rewrite-tp8-baseline-run/v1",
+        "schema": f"qwen35-query-rewrite-tp8-{args.role}-run/v1",
         "status": "running",
+        "role": args.role,
         "run_id": args.run_id,
         "model": MODEL,
         "dataset": str(DATASET),
@@ -121,7 +123,7 @@ def main() -> int:
         raise
 
     summary = {
-        "schema": "qwen35-query-rewrite-tp8-baseline-summary/v1",
+        "schema": f"qwen35-query-rewrite-tp8-{args.role}-summary/v1",
         "aggregation": "median across repetitions of each cell-level value; latency uses each repetition's request-level p50",
         "cells": {},
     }
@@ -132,12 +134,16 @@ def main() -> int:
             "e2e_p50_ms": statistics.median(report["e2e_ms"]["p50"] for report in reports),
             "request_throughput_rps": statistics.median(report["request_throughput"] for report in reports),
             "output_token_throughput_tps": statistics.median(report["output_token_throughput"] for report in reports),
+            "raw_exact_matches": statistics.median(report["reference_quality"]["raw_exact_matches"] for report in reports),
+            "normalized_whitespace_exact_matches": statistics.median(report["reference_quality"]["normalized_whitespace_exact_matches"] for report in reports),
+            "normalized_character_similarity_mean": statistics.median(report["reference_quality"]["normalized_character_similarity"]["mean"] for report in reports),
             "repeat_files": [str(args.output_root / f"c{concurrency}-r{repeat}.json") for repeat in range(1, args.repetitions + 1)],
         }
-    write_json(args.output_root / "baseline-summary.json", summary)
+    summary_path = args.output_root / f"{args.role}-summary.json"
+    write_json(summary_path, summary)
     state["status"] = "completed"
     state["completed_unix_s"] = time.time()
-    state["summary_sha256"] = sha256(args.output_root / "baseline-summary.json")
+    state["summary_sha256"] = sha256(summary_path)
     write_json(state_path, state)
     print(json.dumps(summary, sort_keys=True))
     return 0
