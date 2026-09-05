@@ -47,7 +47,7 @@ selective_ffn_nz_commit="71c25ec9"
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
 flashcomm2_mmar_commit="65f780ee"
 flashcomm1_gdn_root="${FLASHCOMM1_GDN_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape}"
-flashcomm1_gdn_commit="${FLASHCOMM1_GDN_COMMIT:-faed93717a61003cc2daf0abdbffdd61981a4bac}"
+flashcomm1_gdn_commit="${FLASHCOMM1_GDN_COMMIT:-dc7ebdd55421d543e2e87398c2d601742d4a8336}"
 mmar_add_rmsnorm_root="${MMAR_ADD_RMSNORM_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm}"
 mmar_add_rmsnorm_commit="${MMAR_ADD_RMSNORM_COMMIT:-bca160315fd29f0ecbf3b1fc69ee7af410f7d11c}"
 mmar_add_rmsnorm_extension="$mmar_add_rmsnorm_root/build-mmar-add-rmsnorm/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so"
@@ -391,6 +391,7 @@ fi
 if [[ "$mode" == flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1 ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
   docker_args+=(
+    -v "$flashcomm1_gdn_root/vllm_ascend/ascend_forward_context.py:$image_source_root/ascend_forward_context.py:ro"
     -v "$flashcomm1_gdn_root/vllm_ascend/ops/gdn.py:$image_source_root/ops/gdn.py:ro"
     -v "$flashcomm1_gdn_root/vllm_ascend/ops/linear_op.py:$image_source_root/ops/linear_op.py:ro"
     -e VLLM_ASCEND_FLASHCOMM1_GDN_SOURCE_COMMIT="$flashcomm1_gdn_commit"
