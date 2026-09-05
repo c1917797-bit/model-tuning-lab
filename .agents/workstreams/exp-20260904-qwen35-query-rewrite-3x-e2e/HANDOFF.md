@@ -1828,3 +1828,10 @@ direct-module runtime smoke passes head/tail sampling, identity influence,
 JSONL output, and distributed-rank precedence without allocating an NPU.
 Real NPU BI collection remains the integration gate after v10 releases physical
 NPU4-7.
+
+That handoff is now executable without a scheduling gap: the only ShortGPT BI
+waiter is asynchronous operation `exec-0000000000000131`, host PID
+`1474376`. It is bound to the live v10 PID `1298706` and Linux start tick
+`115030322`; it requires `R15_DONE`, exact predecessor termination, and four
+stable Docker/`npu-smi`/port-10020 idle checks before starting a fresh BI
+root. Poll it after v10 and never start a duplicate.

@@ -1128,10 +1128,15 @@ mmar_add_rmsnorm_decode_candidate:
       duplicate_policy: "poll exec-00000000000000f7 and do not start another v10 queue"
     shortgpt_resume:
       source_commit: 54a6bb40ac83771538b3c859bcf9c55e2e51854a
-      maintainer_commit: 7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a
+      maintainer_commit: 284623b08cb02dd47ffac956d315625d94c44e24
       diagnostic_hardening: "Block Influence uses deterministic prompt head-and-tail sampling and initialized distributed rank zero, reducing shared-prefix and duplicate-TP-rank bias"
       validation: "MST 18 skills, host tools, BI/fused service guards, JSON/YAML and diff checks pass; exact 0.23.0 image passes 9/9 focused CPU tests with backend autoload disabled, plus a direct-module runtime smoke for sampling, identity influence, JSONL output and rank precedence; real-NPU BI remains pending"
-    next: "continue polling the exactly one active v10 queue; require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix; resume fresh ShortGPT BI after v10 releases NPU4-7"
+      queued_operation: exec-0000000000000131
+      queued_host_pid: 1474376
+      predecessor_identity: "pid 1298706, start_ticks 115030322"
+      queue_gate: "require R15_DONE, exact v10 predecessor termination, then four stable Docker/npu-smi/port-10020 idle checks before fresh BI"
+      duplicate_policy: "poll exec-0000000000000131; do not start another ShortGPT BI queue"
+    next: "continue polling the exactly one active v10 queue and the exactly one serialized ShortGPT BI queue; require v10 activation 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only correctness-passing frozen c1/c5/c8/c16 evidence; inspect and freeze the fresh BI result after its queued operation completes"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z
