@@ -19,6 +19,10 @@ case "$candidate_mode" in
     runtime_role=tp4-dp2-mtp-local-argmax
     candidate_id=tp4-dp2-mtp-local-argmax-k1
     ;;
+  tp4-dp2-fullpiece-user)
+    runtime_role=tp4-dp2-fullpiece-user
+    candidate_id=tp4-dp2-fullpiece-user
+    ;;
   *)
     echo "unsupported CANDIDATE_MODE: $candidate_mode" >&2
     exit 64

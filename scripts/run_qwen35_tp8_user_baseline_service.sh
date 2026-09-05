@@ -11,7 +11,7 @@ mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-37d32edf5a2626b4b6b1c6ed57fc
 mtp_num_speculative_tokens="${MTP_NUM_SPECULATIVE_TOKENS:-1}"
 
 case "$runtime_role" in
-  baseline|mtp-local-argmax|tp4-dp2|tp4-dp2-mtp-local-argmax) ;;
+  baseline|mtp-local-argmax|tp4-dp2|tp4-dp2-mtp-local-argmax|tp4-dp2-fullpiece-user) ;;
   *) echo "unsupported RUNTIME_ROLE: $runtime_role" >&2; exit 64 ;;
 esac
 
@@ -97,6 +97,13 @@ for physical_id in 0 1 2 3 4 5 6 7; do
   device_args+=(--device "/dev/davinci$physical_id:/dev/davinci$physical_id")
 done
 
+compilation_config='{"mode":3,"custom_ops":["all"],"ir_enable_torch_wrap":false,"splitting_ops":[],"compile_sizes":[],"compile_ranges_endpoints":[8096],"inductor_compile_config":{"enable_auto_functionalized_v2":false,"size_asserts":false,"alignment_asserts":false,"scalar_asserts":false,"combo_kernels":true,"benchmark_combo_kernel":true},"inductor_passes":{},"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[1,2,4,8,16,24,32],"use_inductor_graph_partition":false,"pass_config":{"fuse_norm_quant":true,"fuse_act_quant":true,"fuse_attn_quant":false,"enable_sp":false,"fuse_gemm_comms":false,"fuse_allreduce_rms":false,"fuse_rope_kvcache_cat_mla":false,"fuse_act_padding":false},"max_cudagraph_capture_size":32,"dynamic_shapes_config":{"type":"backed","evaluate_guards":false,"assume_32_bit_indexing":false},"fast_moe_cold_start":true}'
+runtime_env_args=()
+if [[ "$runtime_role" == tp4-dp2-fullpiece-user ]]; then
+  compilation_config='{"cudagraph_mode":"FULL_AND_PIECEWISE","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
+  runtime_env_args+=(-e VLLM_ASCEND_PTO_CHUNK_GDN=1)
+fi
+
 serve_args=(
   vllm serve /cache/austinov/Qwen3.8-27B
   --host 127.0.0.1
@@ -117,7 +124,7 @@ serve_args=(
   --mamba-cache-dtype bfloat16
   --mamba-ssm-cache-dtype bfloat16
   --disable-custom-all-reduce
-  --compilation-config '{"mode":3,"custom_ops":["all"],"ir_enable_torch_wrap":false,"splitting_ops":[],"compile_sizes":[],"compile_ranges_endpoints":[8096],"inductor_compile_config":{"enable_auto_functionalized_v2":false,"size_asserts":false,"alignment_asserts":false,"scalar_asserts":false,"combo_kernels":true,"benchmark_combo_kernel":true},"inductor_passes":{},"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[1,2,4,8,16,24,32],"use_inductor_graph_partition":false,"pass_config":{"fuse_norm_quant":true,"fuse_act_quant":true,"fuse_attn_quant":false,"enable_sp":false,"fuse_gemm_comms":false,"fuse_allreduce_rms":false,"fuse_rope_kvcache_cat_mla":false,"fuse_act_padding":false},"max_cudagraph_capture_size":32,"dynamic_shapes_config":{"type":"backed","evaluate_guards":false,"assume_32_bit_indexing":false},"fast_moe_cold_start":true}'
+  --compilation-config "$compilation_config"
   --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}'
   --default-chat-template-kwargs '{"enable_thinking":false}'
   --async-scheduling
@@ -160,5 +167,6 @@ docker run -d \
   -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1 \
   -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0 \
   -e VLLM_LOGGING_LEVEL=DEBUG \
+  "${runtime_env_args[@]}" \
   quay.io/ascend/vllm-ascend:v0.23.0 \
   "${serve_args[@]}"
