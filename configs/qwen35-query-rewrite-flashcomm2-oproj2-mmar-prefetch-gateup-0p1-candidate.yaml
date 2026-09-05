@@ -64,7 +64,7 @@ candidate:
   dtype: bfloat16
   quantized: false
   source_worktree: /cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
-  source_commit: 5b3345812973264fa82bd0812b31b70c15607c9d
+  source_commit: 65f780eeadfe9486ccc2eb0f6b7507e778e27da9
   retained_stack: [matmul_allreduce, weight_nz_mode_1, gate_up_prefetch_0p1, async_scheduling, full_decode_only]
   primary_variable_vs_current_best: "attention o_proj communication: MMAR -> FlashComm2 ODP2/OTP2"
   rationale: "reduce the communication-dominated attention output projection without regressing the faster MMAR MLP down projection"
