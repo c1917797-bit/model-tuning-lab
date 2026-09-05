@@ -1,4 +1,6 @@
 schema: ascend-inference-experiment/v1
+approved_loop_contract: .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/LOOP.md
+protocol_audit_status: required_before_performance_promotion
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
 status: tp8_user_baseline_complete_mtp_v2_invalid_startup_resources_idle
 decision: retain_tp8_baseline_repair_mtp_dummy_run_memory_before_e2e

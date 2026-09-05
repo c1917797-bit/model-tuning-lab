@@ -1,5 +1,11 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+Current approved protocol: see `LOOP.md`. It supersedes historical TP4-only
+instructions below. Two TP8 baseline groups are required: MTP OFF and ON.
+Last observed MTP v3 operation `exec-0000000000000474` was running; its c1-r1
+completed 32/32 requests with zero errors. Re-poll before any runtime action.
+Do not infer semantic correctness or goal achievement from request success.
+
 ## State
 
 Authoritative current handoff: see `LESSONS.md`. TP8 baseline v5 is complete
