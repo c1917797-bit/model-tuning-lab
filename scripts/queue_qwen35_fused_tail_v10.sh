@@ -13,6 +13,7 @@ port="${PORT:-10010}"
 run_label="${RUN_LABEL:-fused-tail-v10}"
 output_label="${OUTPUT_LABEL:-mmar-add-rmsnorm-v10}"
 candidate_id="${CANDIDATE_ID:-mmar-add-rmsnorm-decode-v10}"
+protected_chain_label="${PROTECTED_CHAIN_LABEL:-p0_r15}"
 wait_timeout_seconds="${WAIT_TIMEOUT_SECONDS:-14400}"
 poll_seconds="${POLL_SECONDS:-15}"
 stable_idle_checks="${STABLE_IDLE_CHECKS:-4}"
@@ -93,7 +94,7 @@ resources_are_idle() {
 }
 
 deadline=$((SECONDS + wait_timeout_seconds))
-log "waiting for $r15_marker without touching NPU0-3 or p0_r15"
+log "waiting for $r15_marker without touching NPU0-3 or $protected_chain_label"
 while ! external_chain_is_done; do
   if (( SECONDS >= deadline )); then
     echo "timed out waiting for external completion marker" >&2
