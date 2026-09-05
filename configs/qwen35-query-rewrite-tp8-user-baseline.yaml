@@ -23,10 +23,39 @@ runtime:
   mamba_ssm_cache_dtype: bfloat16
   speculative_config: null
   compilation_config:
+    mode: 3
+    custom_ops: [all]
+    ir_enable_torch_wrap: false
+    splitting_ops: []
+    compile_sizes: []
     cudagraph_mode: FULL_DECODE_ONLY
     compile_ranges_endpoints: [8096]
     cudagraph_capture_sizes: [1, 2, 4, 8, 16, 24, 32]
     cudagraph_num_of_warmups: 1
+    max_cudagraph_capture_size: 32
+    use_inductor_graph_partition: false
+    inductor_compile_config:
+      enable_auto_functionalized_v2: false
+      size_asserts: false
+      alignment_asserts: false
+      scalar_asserts: false
+      combo_kernels: true
+      benchmark_combo_kernel: true
+    pass_config:
+      fuse_norm_quant: true
+      fuse_act_quant: true
+      fuse_attn_quant: false
+      enable_sp: false
+      fuse_gemm_comms: false
+      fuse_allreduce_rms: false
+      fuse_rope_kvcache_cat_mla: false
+      fuse_act_padding: false
+    dynamic_shapes_config:
+      type: backed
+      evaluate_guards: false
+      assume_32_bit_indexing: false
+    fast_moe_cold_start: true
+    static_all_moe_layers: []
   additional_config:
     enable_cpu_binding: true
     enable_matmul_allreduce: false
