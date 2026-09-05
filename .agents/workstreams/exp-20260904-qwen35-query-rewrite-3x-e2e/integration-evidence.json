@@ -192,6 +192,18 @@
     {
       "gate": "assigned-device-race-guard-cadence",
       "result": "PASS fail-closed: retry exec-0000000000000b45 exited 48 before launch when external p0_cd reserved NPU4-7. The task did not stop or modify that bounded cadence sweep and still did not touch NPU0-3."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-second-live-graph",
+      "result": "REJECT invalid integration: operation exec-0000000000000b53 compiled both ranges from source 5182fe9c, but rank-0 still contained fused=0, MMAR=704 and AddRMSNorm=767. The exact task container was stopped before benchmark traffic; integration-check.json SHA256 is 643b6c2083432929f281e45f010ed9af2cb06e4925b6acc11b804dc05efee5f6."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-dispatcher-target-correction",
+      "result": "PASS static: the live graph calls torch.ops.npu.npu_mm_all_reduce_base with bias=None. Source c36980d3 registers against that dispatcher target directly and logs configuration, registration, compile-range applicability and match count; py_compile, launcher guards, YAML parsing and diff checks pass."
+    },
+    {
+      "gate": "assigned-device-race-guard-hccl",
+      "result": "HOLD without interference: external p0_hc started after the failed task container stopped and explicitly owns /dev/davinci4..7 for a bounded default/AIV HCCL comparison. The task will wait for parent exit and HCCL_AB2_DONE; NPU0-3 remain untouched."
     }
   ]
 }

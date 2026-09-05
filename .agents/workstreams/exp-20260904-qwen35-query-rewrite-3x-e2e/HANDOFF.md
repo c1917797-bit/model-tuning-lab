@@ -1546,3 +1546,42 @@ new output root only after that parent exits, the marker exists, and NPU4-7
 have no processes. Before allowing the four-cell matrix to continue, require a
 positive fused-op count in the generated AOT; otherwise stop only the exact
 task container, preserve diagnostics, and iterate again.
+
+## Second live-graph rejection and dispatcher-target correction
+
+After 'p0_cd' naturally completed, operation
+'exec-0000000000000b53' launched the second live-graph attempt as
+'fused-tail-v2-20260905T070801Z' on physical NPU4-7. The official v0.23.0
+image loaded BF16 TP4 with quantization disabled, the pinned flag enabled, and
+compile ranges '(1,16)' and '(17,32768)'. Both ranges compiled, but the
+rank-0 computation graph still contained zero fused operators, 704 direct MMAR
+occurrences and 767 AddRMSNorm occurrences. Counts across all four rank cache
+trees were zero, 2816 and 3068 respectively. No benchmark result from this
+attempt is valid. The exact task container was stopped before serving the
+four-cell matrix.
+
+Immutable diagnostic record:
+
+'/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v2-20260905T070801Z/integration-check.json'
+
+SHA256:
+'643b6c2083432929f281e45f010ed9af2cb06e4925b6acc11b804dc05efee5f6'
+
+The saved graph confirms the production target is the dispatcher node
+'torch.ops.npu.npu_mm_all_reduce_base(..., bias=None)'. Source commit
+'c36980d335d1f493cba824e489dd4828218a5f99' now registers the pattern against
+that exact dispatcher op rather than the 'torch_npu' Python wrapper. It also
+logs pass configuration and registration, in addition to range applicability
+and final match count, so the next run can distinguish disabled pass,
+registration mismatch and a zero-match graph. Static compilation, launcher
+guards, YAML parsing and diff checks pass. Maintainer pin commit
+'7b809a11b026f72c597bd296ba7f20b439d838a4' selects this source.
+
+A new external container 'p0_hc' then reserved '/dev/davinci4..7' for a bounded
+HCCL default/AIV comparison. Do not stop or modify it. Watcher
+'exec-0000000000000b70' waits for its parent to exit and for
+'HCCL_AB2_DONE' in '/cache/austinov/p0/hccl_ab2.log'. Only after both are true
+and NPU4-7 have no process should the dispatcher-target candidate be relaunched
+into a new immutable output root. Require positive configuration,
+registration, '(1,16) applicable=True', '(17,32768) applicable=False' and
+fused-op-count evidence before accepting any latency.
