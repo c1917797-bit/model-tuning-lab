@@ -7,6 +7,7 @@ output_root="${OUTPUT_ROOT:?set a new absolute OUTPUT_ROOT}"
 baseline_summary="${BASELINE_SUMMARY:?set the immutable TP8 baseline summary}"
 container_name="${CONTAINER_NAME:-qwen35_tp8_mtp_local_argmax_$run_id}"
 port="${PORT:-10010}"
+mtp_num_speculative_tokens="${MTP_NUM_SPECULATIVE_TOKENS:-1}"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-2400}"
 active_container=""
 
@@ -35,6 +36,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 CONTAINER_NAME="$container_name" PORT="$port" RUNTIME_ROLE=mtp-local-argmax \
+  MTP_NUM_SPECULATIVE_TOKENS="$mtp_num_speculative_tokens" \
   "$repo_root/scripts/run_qwen35_tp8_user_baseline_service.sh"
 active_container="$container_name"
 
@@ -76,7 +78,7 @@ set +e
 python3 "$repo_root/scripts/analyze_qwen35_tp8_candidate.py" \
   --baseline-summary "$baseline_summary" \
   --candidate-summary "$output_root/matrix/candidate-summary.json" \
-  --candidate-id "tp8-mtp-local-argmax-k1" \
+  --candidate-id "tp8-mtp-local-argmax-k$mtp_num_speculative_tokens" \
   --target-speedup 2.0 \
   --output "$output_root/decision.json"
 decision_status=$?

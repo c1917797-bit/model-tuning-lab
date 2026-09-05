@@ -8,6 +8,7 @@ npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 runtime_role="${RUNTIME_ROLE:-baseline}"
 mtp_local_argmax_root="${MTP_LOCAL_ARGMAX_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax}"
 mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd}"
+mtp_num_speculative_tokens="${MTP_NUM_SPECULATIVE_TOKENS:-1}"
 
 case "$runtime_role" in
   baseline|mtp-local-argmax|tp4-dp2|tp4-dp2-mtp-local-argmax) ;;
@@ -23,6 +24,10 @@ if [[ "$runtime_role" == tp4-dp2* ]]; then
 fi
 if [[ "$runtime_role" == *mtp-local-argmax ]]; then
   uses_mtp=true
+  if [[ ! "$mtp_num_speculative_tokens" =~ ^[1-9][0-9]*$ ]]; then
+    echo "MTP_NUM_SPECULATIVE_TOKENS must be a positive integer" >&2
+    exit 65
+  fi
   actual_ref="$(
     git -c safe.directory="$mtp_local_argmax_root" \
       -C "$mtp_local_argmax_root" rev-parse HEAD
@@ -120,7 +125,7 @@ serve_args=(
 
 runtime_mount_args=()
 if [[ "$uses_mtp" == true ]]; then
-  serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}')
+  serve_args+=(--speculative-config "{\"method\":\"mtp\",\"num_speculative_tokens\":$mtp_num_speculative_tokens,\"use_local_argmax_reduction\":true}")
   runtime_mount_args+=(
     -v "$mtp_patch:/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py:ro"
     -v "$proposer_patch:/vllm-workspace/vllm-ascend/vllm_ascend/spec_decode/llm_base_proposer.py:ro"

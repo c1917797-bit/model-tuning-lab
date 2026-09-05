@@ -1,0 +1,33 @@
+schema: qwen35-query-rewrite-runtime/v1
+role: tp8_mtp_local_argmax_k3_candidate
+baseline_config: configs/qwen35-query-rewrite-tp8-user-baseline.yaml
+parent_candidate: configs/qwen35-query-rewrite-tp8-mtp-local-argmax.yaml
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+runtime:
+  image: quay.io/ascend/vllm-ascend:v0.23.0
+  dtype: bfloat16
+  quantization: null
+  tensor_parallel_size: 8
+  data_parallel_size: 1
+  physical_devices: [0, 1, 2, 3, 4, 5, 6, 7]
+  speculative_config:
+    method: mtp
+    num_speculative_tokens: 3
+    use_local_argmax_reduction: true
+candidate:
+  id: tp8-mtp-local-argmax-k3
+  primary_variable_vs_mtp_on_baseline: "num_speculative_tokens 1 -> 3"
+  hypothesis: "amortize MTP draft and verification overhead while k1 acceptance is high"
+  correctness_first: true
+  abort_on: [startup_failure, oom, request_error, semantic_regression]
+  source_commit: 37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  requests_per_cell: 32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  generation: natural_eos
+  compare_to: [mtp_off_frozen_baseline, mtp_on_k1_baseline]
+  final_target_speedup_vs_mtp_off: {ttft: 2.0, tpot: 2.0}
