@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mtp_local_argmax_k1_ready_waiting_for_npu4_7
-decision: pending_mtp_local_argmax_k1_e2e_retain_current_stack
+status: tp8_user_baseline_running_mtp_local_argmax_attempt_interrupted
+decision: pending_tp8_baseline_and_comparable_mtp_retry_retain_current_stack
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -1282,7 +1282,7 @@ flashcomm1_gdn_shape_candidate:
       resource_release: "exact v3 container exited 0; physical NPU4-7 released; NPU0-3 untouched"
   handoff: "Retain BF16 TP4 MMAR plus NZ1 and dense gate/up prefetch-0.1 with FlashComm1 disabled. Do not relaunch v1-v3 unchanged. Reuse the source commits only if a future implementation removes the sequence-parallel latency regression and passes every frozen cell."
 tp8_user_baseline_reconstruction:
-  state: planned_and_launcher_verified
+  state: exact_compilation_config_corrected_before_traffic
   reason: "The user identified an earlier TP8/DP1 baseline with c1 TTFT about 139 ms and TPOT about 22 ms; the later TP4/DP1 quick32 baseline is not a valid substitute."
   model: /cache/austinov/Qwen3.8-27B
   model_alias: Qwen3-5/Qwen3.5-27B
@@ -1305,9 +1305,12 @@ tp8_user_baseline_reconstruction:
     evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/resource-handoffs/tp8-baseline-20260905T182200Z
     safety: "all eight physical devices had no running process before launch preparation"
   comparison_boundary: "Do not claim performance relative to the TP8 baseline until all repeated cells complete under the reconstructed protocol."
+  attempts:
+    v1: "resource gate rejected because a concurrent MTP local-argmax candidate had reserved NPU4-7; no TP8 container was created"
+    v2: "stopped before readiness and before benchmark traffic after effective-config inspection found custom_ops and pass_config had inherited defaults rather than the user-supplied explicit values"
 mtp_local_argmax_candidate:
-  stage: implementation_verified
-  status: ready_waiting_for_npu4_7
+  stage: first_e2e_attempt_interrupted
+  status: retry_pending_after_tp8_baseline
   paper_to_ascend_basis: "lossless speculative decoding for greedy inference, with target-model verification; reduce draft sampling overhead through exact vocabulary-parallel local argmax"
   hypothesis: "A single Qwen3.5 MTP draft token can reduce target decode steps, while local argmax avoids gathering the full draft vocabulary logits across TP ranks."
   primary_variable: "speculation disabled -> Qwen3.5 MTP k=1 with use_local_argmax_reduction=true"
@@ -1324,12 +1327,24 @@ mtp_local_argmax_candidate:
     source: "py_compile and git diff --check passed; exact v0.23.0 image focused test: 3 passed"
     launcher: "bash syntax, service guard test, candidate guard test, YAML assertions, maintainer skill-tree validation and git diff --check passed"
     ruff: "not available in the exact v0.23.0 image; no ruff result claimed"
+  attempts:
+    v1:
+      operation_id: exec-00000000000005c4
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mtp-local-argmax-k1-20260905T181915Z
+      result: "INVALID external interruption before readiness; no benchmark traffic or performance decision"
+      startup_evidence: "SpeculativeConfig MTP k=1 and use_local_argmax_reduction=true parsed; Qwen3_5MTP resolved; four workers loaded weights only on physical NPU4-7; draft ACL graph wrapped; graph capture reached 5/9"
+      activation_limit: "The explicit local-argmax runtime log was not reached before interruption, so activation remains unproven."
+      termination: "Docker event: SIGTERM at 18:25:24Z, SIGKILL 60 seconds later; container exit 137 with OOMKilled=false and no Python/NPU traceback"
+      requests: 0
+      service_log_sha256: 9d825a2bc5bebdb0852b81678d7f5edc7f2af3af38f713182d4de2b424a25776
+      resource_release: "NPU process table proved all four candidate workers gone after termination"
+      disposition: "Do not score as an algorithm failure and do not rerun the TP4 shape unchanged while the user-authorized TP8 baseline defines the new comparison boundary."
   correctness_gate: "target-model verification, 32/32 requests with zero errors and natural stop in each c1/c5/c8/c16 cell; inspect service activation and speculative acceptance metrics"
   performance_gate: "compare every frozen cell with the immutable original and retained stack; promote only if correctness passes and cumulative performance moves toward both 2x targets"
   resource_state:
-    observed_at_utc: "2026-09-05T18:15:51Z"
-    blocker: "p0_r17 is running and reserves physical NPU4-7; each card has a live VLLMWorker_TP using about 16.1 GB"
-    protected: "independent VLLM workers are live on NPU0-3; never touch them"
-    action: "do not stop p0_r17; launch only after authoritative container/device/port checks prove NPU4-7 released"
+    observed_at_utc: "2026-09-05T18:28:22Z"
+    blocker: "qwen35_tp8_user_baseline_v2_20260905T182800Z is running and reserves physical NPU0-7 for the user-authorized TP8 baseline reconstruction"
+    protected: "do not stop or compete with the TP8 baseline on any device"
+    action: "wait for the TP8 baseline to complete and release all devices; use its repeated result as the immutable denominator, then adapt MTP local-argmax to a comparable TP8 candidate"
   intended_evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/
   rollback: "keep the retained non-speculative stack; remove the read-only patch overlay and speculative-config by selecting the retained mode"

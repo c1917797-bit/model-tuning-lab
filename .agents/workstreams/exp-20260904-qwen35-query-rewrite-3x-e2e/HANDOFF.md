@@ -2177,3 +2177,32 @@ The config and launch path are
 `scripts/run_qwen35_tp8_user_baseline.sh`. The TP4/DP1 improvement ratios are
 superseded as user-facing goal evidence until this repeated TP8 baseline is
 complete.
+
+## MTP local-argmax v1 interrupted before traffic
+
+The first physical-NPU attempt was
+`exec-00000000000005c4`, with immutable output root
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mtp-local-argmax-k1-20260905T181915Z`.
+It started only after `p0_r17`, the NPU process table, competing container
+reservations and port 10010 were checked. Four workers appeared only on
+physical NPU4-7; NPU0-3 had no candidate process.
+
+Startup parsed MTP k=1 and `use_local_argmax_reduction=true`, resolved
+`Qwen3_5MTP`, loaded the target and draft weights, wrapped the draft model
+with the ACL graph wrapper, allocated the KV cache, and reached 5/9 decode
+graph captures. Before readiness, Docker sent SIGTERM at 18:25:24Z and
+SIGKILL 60 seconds later. The container exited 137 with
+`OOMKilled=false`; the service log contains no Python or NPU traceback.
+No request ran, no candidate-run or decision JSON exists, and the explicit
+local-argmax runtime activation message was not reached. This is therefore an
+invalid externally interrupted attempt, not an algorithm-performance result.
+The preserved service log SHA256 is
+`9d825a2bc5bebdb0852b81678d7f5edc7f2af3af38f713182d4de2b424a25776`.
+The NPU process table subsequently proved the candidate workers were gone.
+
+At 18:27:49Z, the user-authorized TP8 baseline container
+`qwen35_tp8_user_baseline_v2_20260905T182800Z` started and reserved physical
+NPU0-7. Do not stop or compete with it. Once that repeated baseline finishes,
+use it as the immutable denominator and adapt MTP local-argmax to a comparable
+TP8 configuration before retrying; do not present the interrupted TP4 start
+or the older TP4 ratios as evidence against the restored TP8 baseline.

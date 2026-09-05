@@ -32,6 +32,6 @@
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "git diff --check"
   ],
-    "executionState": "mtp-local-argmax-k1-ready-waiting-for-p0-r17-release",
-    "integrationState": "source-2d08abd5-and-launcher-verified-e2e-pending"
+    "executionState": "tp8-baseline-running-mtp-v1-externally-interrupted-no-traffic",
+    "integrationState": "source-2d08abd5-verified-comparable-tp8-e2e-pending"
 }
