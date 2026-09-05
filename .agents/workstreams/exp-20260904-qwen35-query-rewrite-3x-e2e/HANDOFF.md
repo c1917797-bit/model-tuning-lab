@@ -939,3 +939,36 @@ It is hard-restricted to physical NPU4-7 and contains no quantization. Compare
 the complete quick32 matrix to the fixed original for the user-facing target,
 but retain it cumulatively only if it improves TPOT over MMAR-only. Rollback
 is selecting `mmar-on` or removing `weight_prefetch_config`.
+
+## Dense gate-up 18 MB weight prefetch rejected
+
+Operation `exec-000000000000086e` completed the real quick32 matrix on
+physical NPU4-7. Container inspection and the service log confirm that the
+isolated dense MLP gate/up prefetch config was active together with retained
+MMAR, NZ1, async scheduling and FULL_DECODE_ONLY. No quantization was used.
+
+c1/c5/c8/c16 each completed 32/32 requests with zero errors and all 128
+finish reasons were natural stop. TTFT p50 versus the fixed original was
+428.822/507.430/517.075/703.415 ms, or
+2.165x/2.153x/2.093x/2.950x faster. TPOT p50 was
+28.852/38.914/47.314/52.815 ms, or
+1.333x/1.383x/1.429x/1.530x faster than the fixed original.
+
+The cumulative gate fails. Against MMAR-only, incremental TPOT was
+0.993x/1.002x/0.962x/0.990x with 0.9866x geometric mean, about 1.34% slower;
+c8 regressed 3.81%. The c16 TTFT improvement is not sufficient to retain a
+candidate that regresses the still-open TPOT objective. Final decision:
+retain MMAR-only and reject the 18 MB prefetch treatment.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-weight-prefetch-gateup-fixedorig-npu4-7-20260905T001741Z`.
+All SHA256SUMS entries verify. The decision SHA256 is
+`0bf2914afd2e8f1d6aeeb283f967619bf128fec513e933d78bb3c8fec2c46ccd`;
+the SHA256SUMS digest is
+`ef77e98e3396aa7a97bb7779436ac183b68b6cb6f67fd810a5a6b57d5fd19cca`.
+
+The exact candidate container exited. Physical NPU4-7 are idle at
+2866-2867 MiB, and external NPU0-3 PIDs 1031654-1031657 are unchanged.
+If weight prefetch is revisited, use a sub-cap ratio such as 0.1 so the
+prefetched prefix is below the 18 MB cap; ratios at or above about 0.2 are
+effectively the same cap for this approximately 89 MB gate/up shard.

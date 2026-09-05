@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_weight_prefetch_gateup_ready_tpot_target_open
-decision: retain_matmulallreduce_then_test_isolated_dense_gateup_weight_prefetch
+status: mmar_retained_weight_prefetch_gateup_18mb_rejected_tpot_target_open
+decision: retain_matmulallreduce_reject_gateup_18mb_prefetch_then_tune_bounded_prefetch_size
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -626,7 +626,8 @@ hccl_aiv_candidate:
 weight_prefetch_gateup_candidate:
   source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-candidate.yaml
   launcher_mode: mmar-on-weight-prefetch-gateup
-  status: ready_for_real_e2e
+  implementation_commit: 327c8f6
+  status: rejected_no_incremental_tpot
   primary_variable_vs_retained_mmar: "dense MLP gate_up weight prefetch off -> on; ratio 1.0, runtime-capped at 18 MB"
   retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
   isolated_config: "attn qkv/o=0; MoE gate_up=0; dense MLP gate_up=1.0; dense MLP down=0"
@@ -634,3 +635,31 @@ weight_prefetch_gateup_candidate:
   evidence_boundary: "18 MB is only part of the approximately 89 MB gate/up weight; accept only on completed E2E correctness and incremental TPOT improvement versus retained MMAR"
   devices: "physical NPU4-7 only; NPU0-3 prohibited"
   rollback: "remove weight_prefetch_config or select mmar-on; retained MMAR checkpoint remains unchanged"
+  real_run:
+    operation_id: exec-000000000000086e
+    run_id: mmar-on-weight-prefetch-gateup-fixedorig-npu4-7-20260905T001741Z
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-weight-prefetch-gateup-fixedorig-npu4-7-20260905T001741Z
+    activation: "container inspect and service log confirm TP4/DP1, BF16, MMAR on, NZ1, FlashComm1 off, async scheduling, FULL_DECODE_ONLY and isolated dense MLP gate_up prefetch ratio 1.0; no quantization"
+    requests: {1: "32/32", 5: "32/32", 8: "32/32", 16: "32/32"}
+    errors: 0
+    natural_stops: 128
+    versus_fixed_original:
+      1: {ttft_p50_ms: 428.821830, ttft_speedup: 2.16484, tpot_p50_ms: 28.852227, tpot_speedup: 1.33341}
+      5: {ttft_p50_ms: 507.430380, ttft_speedup: 2.15254, tpot_p50_ms: 38.914166, tpot_speedup: 1.38333}
+      8: {ttft_p50_ms: 517.074725, ttft_speedup: 2.09314, tpot_p50_ms: 47.314442, tpot_speedup: 1.42909}
+      16: {ttft_p50_ms: 703.415260, ttft_speedup: 2.94999, tpot_p50_ms: 52.815105, tpot_speedup: 1.53009}
+    incremental_tpot_vs_mmar: {1: 0.99278, 5: 1.00250, 8: 0.96195, 16: 0.98961, geomean: 0.986593}
+    incremental_ttft_vs_mmar: {1: 1.01281, 5: 1.02161, 8: 0.96639, 16: 1.31015}
+    automated_decision: "hold-exact-hash-drift; fixed-runtime cross-run drift is already calibrated, so use natural-stop/error/reference-quality evidence for the performance decision"
+    reference_quality:
+      1: {raw_exact: 4, whitespace_exact: 5, mean_normalized_char_similarity: 0.15625}
+      5: {raw_exact: 4, whitespace_exact: 6, mean_normalized_char_similarity: 0.1875}
+      8: {raw_exact: 4, whitespace_exact: 8, mean_normalized_char_similarity: 0.25}
+      16: {raw_exact: 4, whitespace_exact: 5, mean_normalized_char_similarity: 0.15625}
+    artifact_hashes:
+      candidate_config_sha256: ecb0057468c8bc4461b7e549b2ad2e525f8390b44972df2423326e7fc52739ee
+      decision_sha256: 0bf2914afd2e8f1d6aeeb283f967619bf128fec513e933d78bb3c8fec2c46ccd
+      service_log_sha256: 4e64364b622cff1f8e81aa7b54227783ca741f45c1c10322f509f7944c4bb044
+      sha256sums_sha256: ef77e98e3396aa7a97bb7779436ac183b68b6cb6f67fd810a5a6b57d5fd19cca
+  decision: "reject 18 MB gate/up prefetch from the cumulative stack: TPOT geometric mean is 1.34% slower than retained MMAR-only, including a 3.81% regression at c8; retain MMAR-only"
+  recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2866-2867 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
