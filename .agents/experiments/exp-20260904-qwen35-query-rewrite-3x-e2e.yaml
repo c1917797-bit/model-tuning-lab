@@ -1130,7 +1130,7 @@ mmar_add_rmsnorm_decode_candidate:
       source_commit: 54a6bb40ac83771538b3c859bcf9c55e2e51854a
       maintainer_commit: 7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a
       diagnostic_hardening: "Block Influence uses deterministic prompt head-and-tail sampling and initialized distributed rank zero, reducing shared-prefix and duplicate-TP-rank bias"
-      validation: "MST 18 skills, host tools, BI/fused service guards, JSON/YAML and diff checks pass; runtime source unit tests remain pending because host Python lacks PyTorch and pytest"
+      validation: "MST 18 skills, host tools, BI/fused service guards, JSON/YAML and diff checks pass; exact 0.23.0 image passes 9/9 focused CPU tests with backend autoload disabled, plus a direct-module runtime smoke for sampling, identity influence, JSONL output and rank precedence; real-NPU BI remains pending"
     next: "continue polling the exactly one active v10 queue; require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix; resume fresh ShortGPT BI after v10 releases NPU4-7"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb

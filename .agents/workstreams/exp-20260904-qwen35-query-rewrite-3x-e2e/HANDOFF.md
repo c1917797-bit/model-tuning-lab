@@ -1822,7 +1822,9 @@ resource set. Its source is pinned at
 the prompt head and tail and obtains rank zero from the initialized distributed
 process group before falling back to launcher variables, avoiding shared-prefix
 and duplicate-TP-rank bias. The ShortGPT maintainer workstream checkpoint is
-`7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a`; its static/service/MST checks
-pass, while host-side runtime unit execution remains unavailable because system
-Python lacks PyTorch and pytest. Real NPU BI collection is therefore the next
-runtime validation after v10 releases physical NPU4-7.
+`7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a`. The exact 0.23.0 image passes
+all 9 focused source tests with device-backend autoload disabled, and a separate
+direct-module runtime smoke passes head/tail sampling, identity influence,
+JSONL output, and distributed-rank precedence without allocating an NPU.
+Real NPU BI collection remains the integration gate after v10 releases physical
+NPU4-7.
