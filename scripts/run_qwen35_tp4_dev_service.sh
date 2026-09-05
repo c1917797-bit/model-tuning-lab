@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
@@ -29,7 +29,8 @@ pipeline_parallel_size=1
 if [[ "$mode" == tp2-dp2-mmar-on ||
       "$mode" == tp2-dp2-mmar-on-text-only ||
       "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384 ||
-      "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ]]; then
+      "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ||
+      "$mode" == tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95 ]]; then
   tensor_parallel_size=2
   data_parallel_size=2
 elif [[ "$mode" == tp2-pp2-mmar-on-weight-prefetch-gateup-0p1 ]]; then
@@ -50,6 +51,8 @@ selective_ffn_nz_env=0
 hccl_op_expansion_mode=""
 task_queue_enable=1
 max_num_batched_tokens=32768
+max_model_len=133000
+gpu_memory_utilization=0.90
 if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
   flashcomm1_env=1
 fi
@@ -86,6 +89,11 @@ if [[ "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384 ]]
   max_num_batched_tokens=16384
 elif [[ "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ]]; then
   max_num_batched_tokens=8192
+fi
+if [[ "$mode" == tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95 ]]; then
+  max_num_batched_tokens=8192
+  max_model_len=32768
+  gpu_memory_utilization=0.95
 fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
@@ -129,10 +137,10 @@ serve_args=(
   --seed 1024
   --served-model-name Qwen3-5/Qwen3.5-27B
   --max-num-seqs 16
-  --max-model-len 133000
+  --max-model-len "$max_model_len"
   --max-num-batched-tokens "$max_num_batched_tokens"
   --trust-remote-code
-  --gpu-memory-utilization 0.90
+  --gpu-memory-utilization "$gpu_memory_utilization"
   --enable-prefix-caching
   --mamba-cache-mode align
   --mamba-cache-dtype bfloat16
@@ -145,7 +153,8 @@ serve_args=(
           "$mode" == mmar-on-weight-prefetch-gateup-0p1-taskqueue2 ||
           "$mode" == tp2-pp2-mmar-on-weight-prefetch-gateup-0p1 ||
           "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384 ||
-          "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ]]; then
+          "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ||
+          "$mode" == tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":1.0,"down":0.0}}}}'
@@ -171,7 +180,8 @@ serve_args=(
 
 if [[ "$mode" == tp2-dp2-mmar-on-text-only ||
       "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384 ||
-      "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ]]; then
+      "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ||
+      "$mode" == tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95 ]]; then
   # query_rewrite contains text only. Disable unused image/video capacity so
   # vLLM does not load or profile the multimodal encoder on 32 GB 910B4 cards.
   serve_args+=(--limit-mm-per-prompt '{"image":0,"video":0}')
