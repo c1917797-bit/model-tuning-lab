@@ -20,6 +20,12 @@ ORIGINAL_SHA256 = {
     8: "4f9799a128128b1e34dca498256833c45f52373cd2486b4acd9298030d7d58ce",
     16: "085c0a43a7a720ba42f1d83bf2ebacebb64e515d24bb3f040eabd5c046f777e4",
 }
+RETAINED_TPOT_P50_MS = {
+    1: 28.833944,
+    5: 37.976465,
+    8: 44.145683,
+    16: 51.922470,
+}
 EXPECTED_IDENTITY = {
     "model": "Qwen3-5/Qwen3.5-27B",
     "dataset_sha256": (
@@ -149,6 +155,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-exact-match-drop", type=int, default=1)
     parser.add_argument(
+        "--require-retained-tpot-improvement",
+        action="store_true",
+        help="require candidate TPOT p50 below the pinned retained stack in every cell",
+    )
+    parser.add_argument(
         "--allow-incomplete",
         action="store_true",
         help="emit a reject-runtime-failure decision for partial matrices",
@@ -180,6 +191,7 @@ def main() -> int:
     semantic_quality_pass = True
     semantic_control_enabled = args.semantic_control_dir is not None
     performance_pass = True
+    retained_tpot_pass = True
     runtime_pass = True
     for concurrency in CONCURRENCIES:
         original_path = cell_path(args.original_dir, concurrency)
@@ -193,6 +205,7 @@ def main() -> int:
                 raise FileNotFoundError(candidate_path)
             runtime_pass = False
             performance_pass = False
+            retained_tpot_pass = False
             correctness_pass = False
             semantic_quality_pass = False
             cells[str(concurrency)] = {
@@ -285,6 +298,17 @@ def main() -> int:
         candidate_tpot = float(candidate["tpot_ms"]["p50"])
         ttft_ratio = candidate_ttft / original_ttft
         tpot_ratio = candidate_tpot / original_tpot
+        retained_tpot = RETAINED_TPOT_P50_MS[concurrency]
+        cell_retained_tpot_pass = (
+            candidate_success
+            and (
+                not args.require_retained_tpot_improvement
+                or candidate_tpot < retained_tpot
+            )
+        )
+        retained_tpot_pass = (
+            retained_tpot_pass and cell_retained_tpot_pass
+        )
         cell_performance_pass = candidate_success and (
             ttft_ratio <= args.target_ratio
             and tpot_ratio <= args.target_ratio
@@ -304,6 +328,12 @@ def main() -> int:
             "ttft_improvement_x": original_ttft / candidate_ttft,
             "original_tpot_p50_ms": original_tpot,
             "candidate_tpot_p50_ms": candidate_tpot,
+            "retained_tpot_p50_ms": retained_tpot,
+            "retained_tpot_improvement_x": retained_tpot / candidate_tpot,
+            "retained_tpot_improvement_required": (
+                args.require_retained_tpot_improvement
+            ),
+            "retained_tpot_improvement_met": cell_retained_tpot_pass,
             "tpot_ratio": tpot_ratio,
             "tpot_improvement_x": original_tpot / candidate_tpot,
             "response_hash_mismatches_observed": mismatches,
@@ -331,7 +361,12 @@ def main() -> int:
             candidate_run_path
         )
 
-    final_target_met = runtime_pass and correctness_pass and performance_pass
+    final_target_met = (
+        runtime_pass
+        and correctness_pass
+        and performance_pass
+        and retained_tpot_pass
+    )
     if not runtime_pass:
         decision = "reject-runtime-failure"
         exit_status = 4
@@ -418,6 +453,11 @@ def main() -> int:
             else None
         ),
         "performance_target_met": performance_pass,
+        "retained_tpot_improvement_met": (
+            retained_tpot_pass
+            if args.require_retained_tpot_improvement
+            else None
+        ),
         "final_target_met": final_target_met,
         "cells": cells,
         "artifact_sha256": artifact_sha256,

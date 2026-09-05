@@ -214,7 +214,10 @@ if [[ "$candidate_run_status" != 0 ]]; then
 fi
 if [[ "$candidate_mode" == shortgpt-retained ||
       "$candidate_mode" == shortgpt-fused-tail ]]; then
-  analyzer_extra+=(--semantic-control-dir "$semantic_control_dir")
+  analyzer_extra+=(
+    --semantic-control-dir "$semantic_control_dir"
+    --require-retained-tpot-improvement
+  )
 fi
 python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
   --original-dir "$original_dir" \

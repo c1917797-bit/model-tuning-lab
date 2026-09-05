@@ -114,6 +114,7 @@ with tempfile.TemporaryDirectory() as directory:
             "semantic-pass-fixture",
             "--semantic-control-dir",
             str(control),
+            "--require-retained-tpot-improvement",
             "--output",
             str(report_path),
         ],
@@ -124,6 +125,7 @@ with tempfile.TemporaryDirectory() as directory:
     assert report["decision"] == "final-target-met"
     assert report["correctness_exact_hash_match"] is False
     assert report["semantic_quality_gate_met"] is True
+    assert report["retained_tpot_improvement_met"] is True
     assert len(report["artifact_sha256"]) == 12
 
     degraded = json.loads(
@@ -143,6 +145,7 @@ with tempfile.TemporaryDirectory() as directory:
             "semantic-fail-fixture",
             "--semantic-control-dir",
             str(control),
+            "--require-retained-tpot-improvement",
             "--output",
             str(report_path),
         ],
