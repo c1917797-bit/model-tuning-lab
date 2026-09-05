@@ -47,4 +47,11 @@ grep -qx 'CANDIDATE_ID=mmar-add-rmsnorm-decode-v10' "$tmp_dir/capture"
 grep -qx 'DEVICE_SET=4-7' "$tmp_dir/capture"
 grep -qx 'PORT=10010' "$tmp_dir/capture"
 
+: >"$tmp_dir/capture"
+env PATH="$tmp_dir/bin:$PATH" R15_LOG="$tmp_dir/r15.log" OUTPUT_PARENT="$tmp_dir/output" LAUNCHER="$tmp_dir/bin/launcher" DOCKER_BIN="$tmp_dir/bin/docker" NPU_SMI_BIN="$tmp_dir/bin/npu-smi" SS_BIN="$tmp_dir/bin/ss" WAIT_TIMEOUT_SECONDS=5 POLL_SECONDS=0 STABLE_IDLE_CHECKS=2 IDLE_CHECK_INTERVAL_SECONDS=0 RUN_LABEL=fused-tail-v11-diagnostics OUTPUT_LABEL=mmar-add-rmsnorm-v11-diagnostics CANDIDATE_ID=mmar-add-rmsnorm-decode-v11-diagnostics STAMP_OVERRIDE=20260905T145000Z CAPTURE_FILE="$tmp_dir/capture" "$repo_root/scripts/queue_qwen35_fused_tail_v10.sh"
+
+grep -qx 'RUN_ID=fused-tail-v11-diagnostics-20260905T145000Z' "$tmp_dir/capture"
+grep -qx "OUTPUT_ROOT=$tmp_dir/output/mmar-add-rmsnorm-v11-diagnostics-20260905T145000Z" "$tmp_dir/capture"
+grep -qx 'CANDIDATE_ID=mmar-add-rmsnorm-decode-v11-diagnostics' "$tmp_dir/capture"
+
 echo "queue_qwen35_fused_tail_v10: PASS"

@@ -10,6 +10,9 @@ docker_bin="${DOCKER_BIN:-docker}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 ss_bin="${SS_BIN:-ss}"
 port="${PORT:-10010}"
+run_label="${RUN_LABEL:-fused-tail-v10}"
+output_label="${OUTPUT_LABEL:-mmar-add-rmsnorm-v10}"
+candidate_id="${CANDIDATE_ID:-mmar-add-rmsnorm-decode-v10}"
 wait_timeout_seconds="${WAIT_TIMEOUT_SECONDS:-14400}"
 poll_seconds="${POLL_SECONDS:-15}"
 stable_idle_checks="${STABLE_IDLE_CHECKS:-4}"
@@ -119,8 +122,8 @@ while (( stable < stable_idle_checks )); do
 done
 
 stamp="${STAMP_OVERRIDE:-$(date -u +%Y%m%dT%H%M%SZ)}"
-run_id="fused-tail-v10-$stamp"
-output_root="$output_parent/mmar-add-rmsnorm-v10-$stamp"
+run_id="$run_label-$stamp"
+output_root="$output_parent/$output_label-$stamp"
 log "launching $run_id into immutable root $output_root"
 
-exec env RUN_ID="$run_id" OUTPUT_ROOT="$output_root" CANDIDATE_MODE="mmar-on-weight-prefetch-gateup-0p1-fused-tail" CANDIDATE_ID="mmar-add-rmsnorm-decode-v10" DEVICE_SET="4-7" PORT="$port" READINESS_TIMEOUT_SECONDS="${READINESS_TIMEOUT_SECONDS:-1800}" "$launcher"
+exec env RUN_ID="$run_id" OUTPUT_ROOT="$output_root" CANDIDATE_MODE="mmar-on-weight-prefetch-gateup-0p1-fused-tail" CANDIDATE_ID="$candidate_id" DEVICE_SET="4-7" PORT="$port" READINESS_TIMEOUT_SECONDS="${READINESS_TIMEOUT_SECONDS:-1800}" "$launcher"
