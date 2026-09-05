@@ -2,17 +2,18 @@
 
 ## State
 
-- Execution: `shortgpt-bi-running-on-assigned-npu4-7`;
-  integration: `v10-rejected-before-traffic-live-graph-preserved`.
+- Execution: `v11-diagnostics-queued-behind-protected-p0-r16`;
+  integration: `shortgpt-remove8-held-semantic-regression`.
 - Current resource state supersedes older idle snapshots below: the protected
   `p0_r15` chain ended after its FlashComm2 configuration failed both guarded
   startup attempts and wrote `R15_DONE` at 2026-09-05T13:49:39Z. Queue
   operation `exec-00000000000000f7` then passed its four-observation idle
   gate and launched exactly one v10 container on assigned physical NPU4-7 at
   13:50:44Z. Its positive activation gate later rejected the run with exit 72
-  before query traffic. The serialized ShortGPT BI queue then passed the
-  guarded handoff and now owns NPU4-7. NPU0-3 remain out of scope. Do not
-  start a duplicate BI process or relaunch v10 unchanged.
+  before query traffic. ShortGPT BI and its same-runtime control later passed,
+  but remove8 failed the semantic gate. A single v11 diagnostics queue now
+  waits for protected `p0_r16` to write `R16_DONE`; NPU0-3 remain out of
+  scope. Do not start a duplicate queue or relaunch v10 unchanged.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - The user assigned physical NPU4-7 to this task. The old
@@ -1891,3 +1892,36 @@ to move those aside after readiness and collect a fresh deterministic
 passes its coverage and rank-stability gates, freeze one layer set, launch a
 fresh retained-stack semantic control first, and only then run correctness
 plus the fixed c1/c5/c8/c16 query_rewrite matrix.
+
+## ShortGPT terminal decision and v11 diagnostics queue
+
+The ShortGPT paragraph above is historical. BI completed with all 64 layers,
+2,048 formal observations, and minimum four-split Spearman
+`0.9989926739926738`. The unpruned same-runtime control completed 128/128
+requests. Frozen remove8 operation `exec-0000000000000195` also completed
+128/128 requests and improved retained TPOT in every concurrency cell, but
+c1/c8/c16 each lost `0.03125` mean normalized character similarity versus
+control, exceeding the frozen `0.02` threshold. Its decision is
+`hold-semantic-quality-regression`; it is not in the retained stack and
+remove16/remove20 are forbidden. Evidence and hashes are in the separate
+`exp-20260905-qwen35-shortgpt` workstream at maintainer checkpoint
+`3680183`.
+
+Operator source `5816eff11812fd9d54a1b433ca3d5ee1aad490f3`
+adds rejection diagnostics only; fusion semantics and the M<=16 guard are
+unchanged. The exact 0.23.0 image passes 9/9 focused tests. The launcher can
+pin this explicit commit, and the generalized queue-label path plus resource
+guards pass their shell tests.
+
+Direct v11 attempt `exec-00000000000001ed` exited 48 before Docker creation
+because protected `/p0_r16` already reserved physical NPU4-7. Exactly one
+replacement queue, `exec-00000000000001fe`, now waits for
+`/cache/austinov/p0/r16.log` to contain `R16_DONE`, then requires four
+stable Docker/NPU/port-10010 idle observations. It will launch immutable root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v11-diagnostics-20260905T145100Z`
+
+The unchanged positive gate still requires Normalized 64 and Fused 128 per
+rank and rejects before query traffic otherwise. Poll operation 01fe only;
+do not interrupt `p0_r16`, do not start another v11 queue, and do not touch
+NPU0-3.

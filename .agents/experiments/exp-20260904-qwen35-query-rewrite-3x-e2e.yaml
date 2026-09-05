@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: v10_activation_rejected_before_traffic_shortgpt_bi_running
-decision: retain_current_stack_reject_v10_activation_continue_shortgpt_bi
+status: shortgpt_remove8_held_v11_diagnostics_queued_after_r16
+decision: retain_current_stack_reject_shortgpt_queue_operator_diagnostics
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -94,7 +94,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "v10 exited 72 after its positive activation gate failed before traffic; the serialized ShortGPT BI operation exec-0000000000000131 passed the guarded handoff and now exclusively uses assigned physical NPU4-7; NPU0-3 remain out of scope"
+  current: "ShortGPT remove8 is terminal hold-semantic-quality-regression. Protected p0_r16 owns physical NPU4-7; the only v11 diagnostics queue exec-00000000000001fe waits for R16_DONE and four stable idle observations. NPU0-3 remain out of scope."
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -1098,7 +1098,7 @@ mmar_add_rmsnorm_decode_candidate:
     post_export_root_cause: "the npugraph_ex backend receives an exported mutation topology: direct output assignment is aten.copy_.default and dynamic output[:n] is aten.slice.Tensor plus aten.copy_.default, not the Dynamo-level operator.setitem used by the first synthetic tests"
     post_export_fix_commit: 573ea2940bdc546923c698de16ea49465e6976f5
     post_export_fix_validation: "official 0.23.0 minimal overlay passed 7/7 focused tests in 8.52s; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
-    current_blocker: "v10 is terminal and rejected before traffic because the required 64 normalized copies and 128 fused tails per rank were not observed; no operator E2E matrix exists. ShortGPT BI now owns assigned physical NPU4-7; NPU0-3 remain untouched"
+    current_blocker: "ShortGPT remove8 failed the semantic-quality gate and is excluded. v10 still lacks 64 attention-copy rewrites per rank. Protected p0_r16 owns NPU4-7, so v11 rejection diagnostics are queued behind its explicit R16_DONE marker; NPU0-3 remain untouched."
     guarded_v9_queue:
       operation_id: exec-0000000000000060
       superseded_operation_id: exec-0000000000000cbb
@@ -1146,9 +1146,20 @@ mmar_add_rmsnorm_decode_candidate:
       predecessor_identity: "pid 1298706, start_ticks 115030322"
       queue_gate: "require R15_DONE, exact v10 predecessor termination, then four stable Docker/npu-smi/port-10020 idle checks before fresh BI"
       live_root: /cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/bi-20260905T135854Z
-      live_state: "guarded handoff completed; one BF16 non-quantized eager TP4 service is starting on assigned physical NPU4-7. Rank-0 wrote 64 startup BI records before health readiness; the runner will archive startup records and collect a fresh 32-prompt diagnostic after readiness"
-      duplicate_policy: "poll exec-0000000000000131; do not start another ShortGPT BI queue"
-    next: "poll only the serialized ShortGPT BI operation; after completion verify collection/analysis hashes and stability gates, freeze the chosen layer set only if BI is reproducible, then run a fresh retained-stack semantic control before correctness and frozen c1/c5/c8/c16 E2E. Do not relaunch v10 unchanged"
+      live_state: "terminal: BI and same-runtime control passed, but remove8 decision is hold-semantic-quality-regression because c1/c8/c16 each exceeded the 0.02 mean-similarity-drop limit"
+      duplicate_policy: "terminal; do not run remove16/remove20 and keep ShortGPT default off"
+    v11_diagnostics:
+      source_commit: 5816eff11812fd9d54a1b433ca3d5ee1aad490f3
+      source_scope: "rejection counters only; no fusion eligibility change"
+      validation: "py_compile, diff check, and 9/9 focused tests pass in the exact 0.23.0 image"
+      failed_direct_operation: exec-00000000000001ed
+      failed_direct_result: "exit 48 before Docker because protected /p0_r16 reserved physical NPU4-7"
+      queued_operation: exec-00000000000001fe
+      protected_marker: "/cache/austinov/p0/r16.log:R16_DONE"
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v11-diagnostics-20260905T145100Z
+      gate: "after R16_DONE, require four stable Docker/npu-smi/port-10010 idle checks; then require Normalized 64/Fused 128 per rank before any query traffic"
+      duplicate_policy: "poll exec-00000000000001fe only; never interrupt p0_r16 or start another v11 queue"
+    next: "Poll only v11 diagnostics queue exec-00000000000001fe. If activation still fails, use its rejection counters to patch only the proven guard, re-run focused tests, and repeat activation-only. Do not run ShortGPT remove16/remove20 or enable the operator for E2E until Normalized 64/Fused 128 passes on all ranks."
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

@@ -283,7 +283,15 @@
     },
     {
       "gate": "shortgpt-bi-guarded-live-handoff",
-      "result": "PASS orchestration/startup: serialized operation exec-0000000000000131 observed exact v10 termination and four stable idle checks, then started one BF16 non-quantized eager TP4 BI service on assigned physical NPU4-7 using fresh root bi-20260905T135854Z. Rank 0 wrote 64 startup observations before health readiness; the runner will archive those records and collect 32 fresh real prompts before analysis. NPU0-3 remain untouched and duplicate launch is forbidden."
+      "result": "PASS target-device selection: exec-0000000000000131 completed 32/32 prompts, covered all 64 layers with 2,048 formal observations, and achieved minimum four-split Spearman 0.9989926739926738. The frozen remove8 contract SHA256 is 7b4980e5e7c69ed65ddaaf72ce64287710c15cc75d117c0cce09c939c51ed17e."
+    },
+    {
+      "gate": "shortgpt-remove8-terminal-decision",
+      "result": "HOLD correctness: exec-0000000000000195 completed 128/128 requests and improved retained TPOT in all cells, but c1/c8/c16 each lost 0.03125 mean normalized character similarity versus the same-runtime control, exceeding the 0.02 limit. It reached only 1.5103x/1.6110x/1.6980x/1.6389x TPOT versus original. Stop remove16/remove20 and keep ShortGPT default off."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-v11-diagnostics-queue",
+      "result": "ACTIVE fail-closed: source 5816eff11812fd9d54a1b433ca3d5ee1aad490f3 adds rejection counters without changing fusion eligibility and passes 9/9 focused exact-image tests. Direct attempt exec-00000000000001ed exited 48 before Docker because /p0_r16 reserved NPU4-7. The only replacement, exec-00000000000001fe, waits for R16_DONE and four stable idle observations before activation-only launch; NPU0-3 remain untouched."
     }
   ]
 }

@@ -187,6 +187,12 @@
       "status": "accepted-local",
       "lesson": "Trigger: a tested container-reservation guard behaves differently on the live host. Action: place docker inspect options before the object id, run a real conflict probe, and restart any waiting queue that captured the old function body. Destination: future chicaihong01 resource-guard regression guidance.",
       "evidence": "The live ShortGPT guard probe showed that inspect ID --format TEMPLATE is parsed incorrectly on this Docker CLI. inspect --format TEMPLATE ID detected /p0_mc and exited 48 before creating an output directory or container; the v9 queue, service launcher, and microbenchmark guard were corrected."
+    },
+    {
+      "id": "stable-block-ranking-is-not-a-correctness-gate",
+      "status": "accepted-local",
+      "lesson": "Trigger: a no-retraining layer-removal method has a highly stable importance ranking and improves latency. Action: still compare with an unpruned same-runtime control using business-quality metrics and stop the ladder at the first semantic regression. Destination: inference-time algorithm promotion guidance.",
+      "evidence": "Qwen3.5 remove8 used a BI ranking with minimum Spearman 0.9989926739926738 and improved retained TPOT in all four cells, but c1/c8/c16 each lost 0.03125 mean normalized character similarity versus control, so the 0.02 gate held it and prevented remove16/remove20."
     }
   ]
 }
