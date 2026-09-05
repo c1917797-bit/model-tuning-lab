@@ -454,6 +454,8 @@ grep -q -- '"enable_flashcomm2_parallel_size":2' "$docker_log"
 grep -q -- '"weight_nz_mode":1' "$docker_log"
 grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
 grep -q -- '/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp/vllm_ascend/ops/linear_op.py:/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear_op.py:ro' "$docker_log"
+grep -q -- '/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp/vllm_ascend/ascend_forward_context.py:/vllm-workspace/vllm-ascend/vllm_ascend/ascend_forward_context.py:ro' "$docker_log"
+grep -q -- '/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp/vllm_ascend/platform.py:/vllm-workspace/vllm-ascend/vllm_ascend/platform.py:ro' "$docker_log"
 if grep -q -- '--quantization' "$docker_log"; then
   echo "FlashComm2/MMAR stack unexpectedly enabled quantization" >&2
   exit 1

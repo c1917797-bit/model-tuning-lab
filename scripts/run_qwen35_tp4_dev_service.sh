@@ -45,7 +45,7 @@ npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 selective_ffn_nz_root="${SELECTIVE_FFN_NZ_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz}"
 selective_ffn_nz_commit="71c25ec9"
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
-flashcomm2_mmar_commit="e161bbff"
+flashcomm2_mmar_commit="d0f40278"
 flashcomm1_env=0
 weight_nz_env=1
 matmul_allreduce_env=1
@@ -296,6 +296,8 @@ if [[ "$mode" == flashcomm2-oproj2-mmar-prefetch-gateup-0p1 ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
   docker_args+=(
     -v "$flashcomm2_mmar_root/vllm_ascend/ops/linear_op.py:$image_source_root/ops/linear_op.py:ro"
+    -v "$flashcomm2_mmar_root/vllm_ascend/ascend_forward_context.py:$image_source_root/ascend_forward_context.py:ro"
+    -v "$flashcomm2_mmar_root/vllm_ascend/platform.py:$image_source_root/platform.py:ro"
   )
 fi
 
