@@ -49,7 +49,7 @@ protocol:
     - "Block Influence samples are missing, non-finite, or ranking is not stable enough to freeze."
   warmup: "Use the existing frozen query_rewrite harness protocol; record exact warmup in run metadata."
   repetitions: 32
-  command: "PENDING after Block Influence collection scripts and layer-set freeze"
+  command: "Start an eager diagnostic service with a fresh VLLM_ASCEND_QWEN35_BI_DIR, clear only that task-owned directory after readiness, run scripts/collect_qwen35_shortgpt_bi.py, then run scripts/analyze_qwen35_shortgpt_bi.py; exact launcher remains pending NPU4-7 availability."
 results:
   baseline:
     immutable_original_p50_ms:
@@ -67,7 +67,7 @@ results:
   steady: {}
   boundary: {}
   lifecycle:
-    phase: planned
+    phase: bi_host_tools_ready
     dependency: "guarded fused-tail v9 queue exec-0000000000000004"
   resources:
     allowed: "physical NPU4-7 when idle"

@@ -5,7 +5,7 @@
 - Workstream: `exp-20260905-qwen35-shortgpt`
 - Maintainer branch: `work/exp-20260905-qwen35-shortgpt`
 - Dependency: `exp-20260904-qwen35-query-rewrite-3x-e2e`
-- Current phase: planned; wait for the guarded fused-tail v9 queue and for physical NPU4-7 to become idle.
+- Current phase: Block Influence collection/analysis host tools are ready; wait for the guarded fused-tail v9 queue and for physical NPU4-7 to become idle.
 - Goal remains open: every concurrency cell must reach at least 2x TTFT and 2x TPOT versus the immutable original baseline.
 
 ## Scope and resource boundary
@@ -35,6 +35,8 @@ Retained stack is BF16 TP4/DP1, MatMulAllReduce on, dense gate/up prefetch ratio
 ShortGPT is the next inference-time algorithm candidate because it removes low-influence decoder blocks without retraining. Qwen3.5 has 64 hybrid layers, repeating three linear-attention/GDN layers and one full-attention layer, so no layer list is copied from Llama results. Measure Block Influence on the real query_rewrite distribution first, then freeze a Qwen3.5-specific removal ladder.
 
 The source worktree is `/cache/cch/.worktrees/exp-20260905-qwen35-shortgpt-vllm`, branch `work/exp-20260905-qwen35-shortgpt`, local commit `18c4d061529d226dd0d699d9e3e1df16dadf29d7`. It adds default-off Block Influence recording and default-off layer skipping. Static validation passed. Push to `vllm-project/vllm-ascend` is blocked by GitHub 403 for the current account; do not retry unchanged. The local commit is therefore an explicit dependency until a writable fork or maintainer remote is supplied.
+
+Host-side tools are `scripts/collect_qwen35_shortgpt_bi.py` and `scripts/analyze_qwen35_shortgpt_bi.py`. The collector sends one-token completions sequentially and writes only hashes, counts, status, and timing. The analyzer validates all 64 layers, computes token-weighted influence, ranks globally and by layer type, checks split-ranking Spearman stability, and emits the predeclared 8/16/20-layer planning sets only when the evidence is stable. Launch the diagnostic service in eager mode, point BI output at a fresh task-owned directory, and clear only that directory after readiness so startup probes cannot enter the ranking.
 
 ## Execution loop
 

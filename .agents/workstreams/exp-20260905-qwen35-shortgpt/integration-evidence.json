@@ -15,6 +15,10 @@
       "result": "BLOCKED external: push to vllm-project/vllm-ascend was rejected with HTTP 403 for the current account. The local source commit is preserved and clean; obtain a writable remote before upstream handoff."
     },
     {
+      "gate": "block-influence-host-tooling",
+      "result": "PASS static: privacy-safe sequential collection and 64-layer weighted/stability analysis tools pass py_compile, dependency-free regression checks, MST validation, and diff checks. Target-device data remains pending."
+    },
+    {
       "gate": "npu-scope",
       "result": "PLANNED fail-closed: use only physical NPU4-7 after both container-reservation and npu-smi checks are clear; do not touch NPU0-3 or interrupt any existing NPU4-7 workload."
     },
