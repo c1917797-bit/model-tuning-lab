@@ -14,6 +14,7 @@ from scripts.analyze_qwen35_shortgpt_bi import (
     summarize,
 )
 from scripts.collect_qwen35_shortgpt_bi import load_questions
+from scripts.freeze_qwen35_shortgpt_layer_set import freeze
 
 
 def main() -> None:
@@ -61,6 +62,22 @@ def main() -> None:
             report["candidate_sets_lowest_global_influence"][0]["layers"]
             == [0, 1]
         )
+
+        analysis = Path(directory) / "analysis.json"
+        report["schema"] = "qwen35-shortgpt-bi-analysis/v1"
+        report["expected_layers"] = 64
+        report["candidate_sets_lowest_global_influence"].append(
+            {
+                "removed_layer_count": 8,
+                "layers": list(range(8)),
+                "env_spec": "0-7",
+            }
+        )
+        analysis.write_text(json.dumps(report), encoding="utf-8")
+        frozen = freeze(analysis, 8)
+        assert frozen["status"] == "frozen"
+        assert frozen["layers"] == list(range(8))
+        assert frozen["env_spec"] == "0-7"
 
     assert compress_layers([1, 2, 3, 5, 8, 9]) == "1-3,5,8-9"
     print("PASS: Qwen3.5 ShortGPT host tools")

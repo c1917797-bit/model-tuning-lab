@@ -28,6 +28,16 @@
       "value": "scripts/analyze_qwen35_shortgpt_bi.py"
     },
     {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": "scripts/freeze_qwen35_shortgpt_layer_set.py"
+    },
+    {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": "scripts/run_qwen35_shortgpt_fused_service.sh"
+    },
+    {
       "kind": "resource",
       "mode": "exclusive",
       "value": "chicaihong01 physical NPU4-7 only when idle; map to logical 0-3 in-container; never use NPU0-3; never stop or alter an existing NPU4-7 workload"
@@ -35,17 +45,21 @@
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
-    "python3 -m py_compile scripts/collect_qwen35_shortgpt_bi.py scripts/analyze_qwen35_shortgpt_bi.py tests/test_qwen35_shortgpt_tools.py",
+    "python3 -m py_compile scripts/collect_qwen35_shortgpt_bi.py scripts/analyze_qwen35_shortgpt_bi.py scripts/freeze_qwen35_shortgpt_layer_set.py tests/test_qwen35_shortgpt_tools.py",
     "python3 tests/test_qwen35_shortgpt_tools.py",
     "bash -n scripts/run_qwen35_shortgpt_bi_service.sh",
     "bash -n scripts/run_qwen35_shortgpt_bi_diagnostic.sh",
     "bash tests/test_run_qwen35_shortgpt_bi_service.sh",
+    "bash -n scripts/run_qwen35_shortgpt_fused_service.sh",
+    "bash tests/test_run_qwen35_shortgpt_fused_service.sh",
+    "python3 -m py_compile scripts/check_qwen35_fused_tail_activation.py",
+    "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/task.json",
     "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json",
     "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json",
     "python3 -c 'import yaml,sys; yaml.safe_load(sys.stdin)' < .agents/experiments/exp-20260905-qwen35-shortgpt.yaml",
     "git diff --check"
   ],
-  "executionState": "bi-diagnostic-ready-awaiting-v9-and-npu4-7-idle",
-  "integrationState": "source-probe-local-commit-default-off-upstream-push-blocked"
+  "executionState": "bi-diagnostic-and-frozen-candidate-harness-ready-awaiting-v9-and-npu4-7-idle",
+  "integrationState": "source-probe-local-commit-default-off-combined-fused-tail-e2e-prepared-upstream-source-push-blocked"
 }

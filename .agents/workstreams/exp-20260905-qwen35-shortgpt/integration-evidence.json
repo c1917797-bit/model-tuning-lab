@@ -23,6 +23,14 @@
       "result": "PASS static and live conflict gate: the pinned eager TP4 launcher maps only physical NPU4-7, refuses container reservations, NPU processes, ports, reused output paths, source drift, and model-config drift, quarantines startup records, and never enables quantization. A real probe detected /p0_mc and exited 48 before directory or container creation. NPU inference remains pending."
     },
     {
+      "gate": "shortgpt-layer-set-freeze",
+      "result": "PASS static: the freeze helper accepts only a stability-passing 64-layer BI analysis and an 8/16/20 planning point, then binds the exact layer list to analysis, source, and model hashes without replacing an existing artifact."
+    },
+    {
+      "gate": "shortgpt-plus-fused-tail-e2e-harness",
+      "result": "PASS static: the service validates the frozen layer contract, source/model/binary hashes and NPU4-7 resource boundary, mounts ShortGPT plus fused-tail sources and binaries, enables no quantization, and preserves the retained stack. The candidate runner requires 64-N normalized and 128-2N fused patterns per rank before benchmark traffic."
+    },
+    {
       "gate": "npu-scope",
       "result": "PLANNED fail-closed: use only physical NPU4-7 after both container-reservation and npu-smi checks are clear; do not touch NPU0-3 or interrupt any existing NPU4-7 workload."
     },
