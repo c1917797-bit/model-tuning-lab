@@ -1126,7 +1126,12 @@ mmar_add_rmsnorm_decode_candidate:
       state: "exactly one active asynchronous waiter; the superseded synchronous launch timed out after 30 seconds without leaving a process or allocating an NPU"
       gate: "wait for R15_DONE, then four stable idle checks before launch; the underlying launcher repeats reservation and npu-smi guards"
       duplicate_policy: "poll exec-00000000000000f7 and do not start another v10 queue"
-    next: "start exactly one v10 queue; require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix; resume ShortGPT after v10 releases NPU4-7"
+    shortgpt_resume:
+      source_commit: 54a6bb40ac83771538b3c859bcf9c55e2e51854a
+      maintainer_commit: 7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a
+      diagnostic_hardening: "Block Influence uses deterministic prompt head-and-tail sampling and initialized distributed rank zero, reducing shared-prefix and duplicate-TP-rank bias"
+      validation: "MST 18 skills, host tools, BI/fused service guards, JSON/YAML and diff checks pass; runtime source unit tests remain pending because host Python lacks PyTorch and pytest"
+    next: "continue polling the exactly one active v10 queue; require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix; resume fresh ShortGPT BI after v10 releases NPU4-7"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

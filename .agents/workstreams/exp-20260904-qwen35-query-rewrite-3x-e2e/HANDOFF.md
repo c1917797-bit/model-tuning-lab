@@ -1817,6 +1817,12 @@ with exit 48 before Docker because `p0_r15` reserved NPU4-7; its empty output
 root is not evidence and must not be reused. Run v10 first. Only if all four
 ranks report `Normalized 64 / Fused 128` may benchmark traffic begin. After
 v10 terminates, resume the separate ShortGPT workstream on the same guarded
-resource set. Maintainer commit
-`89231ac7b7087e61a2ae131f8f7903ceb2c54a00` contains the v9 evidence,
-v10 source pin, queue, tests, and this resume protocol.
+resource set. Its source is pinned at
+`54a6bb40ac83771538b3c859bcf9c55e2e51854a`: the diagnostic now samples both
+the prompt head and tail and obtains rank zero from the initialized distributed
+process group before falling back to launcher variables, avoiding shared-prefix
+and duplicate-TP-rank bias. The ShortGPT maintainer workstream checkpoint is
+`7ca6b5ed9c73c5e0762652be4d1d525f6dffe15a`; its static/service/MST checks
+pass, while host-side runtime unit execution remains unavailable because system
+Python lacks PyTorch and pytest. Real NPU BI collection is therefore the next
+runtime validation after v10 releases physical NPU4-7.
