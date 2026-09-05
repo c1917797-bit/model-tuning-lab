@@ -25,6 +25,8 @@
     "bash tests/test_run_qwen35_tp4_dev_service.sh",
     "bash -n scripts/queue_qwen35_fused_tail_v9.sh",
     "bash tests/test_queue_qwen35_fused_tail_v9.sh",
+    "python3 -m py_compile scripts/check_qwen35_fused_tail_activation.py",
+    "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "git diff --check"
   ],
   "executionState": "exported-copy-normalizer-fixed-v8-rejected-v9-docker-guard-fixed-queue-exec-0060",

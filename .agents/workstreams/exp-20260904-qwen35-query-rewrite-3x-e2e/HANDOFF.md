@@ -1762,3 +1762,9 @@ existed; no v9 candidate container or output root existed. Exactly one
 corrected queue is now active as operation `exec-0000000000000060`, PID
 579462. It is confirmed running without NPU allocation. Poll operation 0060
 and do not launch another v9 queue.
+
+The v9 E2E path now has a pre-traffic positive activation gate. It snapshots
+the live log and requires exactly four rank observations for each of:
+`(1, 16) applicable=True`, `Normalized 64`, `Fused 128`, and
+`(17, 32768) applicable=False`. Any mismatch exits 72 before query traffic
+and preserves `integration-check.json`, its source log, and hashes.

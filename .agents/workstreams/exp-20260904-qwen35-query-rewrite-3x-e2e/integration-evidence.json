@@ -256,6 +256,10 @@
     {
       "gate": "guarded-v9-queue-corrected-restart",
       "result": "PASS orchestration: the old waiting PID 283507 was verified as this task's queue and stopped before MC2 completion; no v9 container existed. Exactly one corrected waiter was started as operation exec-0000000000000060, PID 579462, and is running without NPU allocation."
+    },
+    {
+      "gate": "v9-positive-activation-before-traffic",
+      "result": "PASS static: the E2E launcher now snapshots the live service log and requires exactly four rank records each for range (1,16) applicable, 64 normalized copies, 128 fused tails, and range (17,32768) inapplicable before sending benchmark requests. Failed activation exits 72 and preserves a hashed machine-readable check."
     }
   ]
 }

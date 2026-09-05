@@ -150,6 +150,21 @@ env CONTAINER_NAME="$candidate_container" PORT="$port" DEVICE_SET="$device_set" 
 wait_for_health
 docker inspect "$candidate_container" >"$output_root/container-inspect.json"
 
+if [[ "$candidate_mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; then
+  activation_log="$output_root/service-before-benchmark.log"
+  activation_json="$output_root/integration-check.json"
+  docker logs "$candidate_container" >"$activation_log" 2>&1
+  set +e
+  python3 "$repo_root/scripts/check_qwen35_fused_tail_activation.py" --log "$activation_log" --output "$activation_json" --expected-ranks 4 --expected-normalized 64 --expected-fused 128
+  activation_status=$?
+  set -e
+  sha256sum "$activation_log" "$activation_json" >"$output_root/activation-SHA256SUMS"
+  if [[ "$activation_status" != 0 ]]; then
+    echo "fused-tail activation gate failed with status $activation_status" >&2
+    exit 72
+  fi
+fi
+
 set +e
 python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
   --base-url "$base_url" \
@@ -201,6 +216,13 @@ artifacts=(
   "$output_root/candidate/candidate-run.json"
   "$output_root/decision.json"
 )
+if [[ -f "$output_root/integration-check.json" ]]; then
+  artifacts+=(
+    "$output_root/service-before-benchmark.log"
+    "$output_root/integration-check.json"
+    "$output_root/activation-SHA256SUMS"
+  )
+fi
 for concurrency in 1 5 8 16; do
   cell="$output_root/candidate/c${concurrency}-r1.json"
   [[ ! -f "$cell" ]] || artifacts+=("$cell")
