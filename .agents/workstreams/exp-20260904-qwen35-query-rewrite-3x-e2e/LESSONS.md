@@ -1,6 +1,6 @@
 # Qwen3.5-27B performance optimization lessons and handoff
 
-Updated: 2026-09-05
+Updated: 2026-09-06
 
 ## Authoritative state
 
@@ -8,8 +8,8 @@ Updated: 2026-09-05
 - Immutable comparison: BF16 TP8/DP1 baseline v5 on physical NPU0-7 and the first 32 records of `/cache/cch/query_rewrite.jsonl`, repeated three times at c1/c5/c8/c16.
 - Baseline evidence: `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z`.
 - Baseline summary SHA256: `e3e03a5f1a5ce8d3e2d5f35ccf6a410d5d96555ad9012ba5881fd9227246639d`.
-- Current resources: NPU0-7 idle. Previously paused p0/qwen36 schedulers were not restarted.
-- Current decision: retain the non-speculative TP8 baseline as denominator. No TP8 optimization is promoted yet.
+- Current resources at 2026-09-05T22:10:07Z: NPU0-3 idle; external p0_r19 occupies NPU4-7 with four VLLM workers. The eight-card candidate is not running.
+- Current decision: retain the non-speculative TP8 baseline as denominator. Reject MTP k=1 and k=3; no TP8 optimization is promoted yet.
 
 ## What succeeded
 
@@ -42,6 +42,8 @@ Updated: 2026-09-05
 | MTP local-argmax v1 | Externally interrupted before readiness, zero requests | Invalid experiment, not algorithm evidence |
 | MTP local-argmax TP8 v2 | Full-logits dummy-run memory pressure; exit 137, `OOMKilled=false`, zero requests; all cards released | Startup-resource failure, not performance evidence. Next design must avoid materializing full draft logits or reduce dummy-run memory |
 | MTP local-argmax TP8 k1 v3 | Valid 12-cell run; logged acceptance 85.32%, but TTFT speedup was 0.868x-0.934x and TPOT 0.965x-1.054x | Reject k1 performance; test depth 3 as a new primary variable |
+| MTP local-argmax TP8 k3 screen | Valid first repetition, 128/128 requests, 66.39% token acceptance; c16 TTFT/TPOT speedups collapsed to 0.153x/0.321x | Reject at fail-fast screen; deeper speculation overloads high concurrency |
+| Legacy exact TP4/DP2 FULL_AND_PIECEWISE launcher | Model-inspection subprocess could not obtain the Ascend device/arch and exited before model load | Preserve failure; retry only through the proven device-mapping launcher |
 | Edited launcher while it was executing | Matrix and shutdown completed, then changed script bytes caused a postprocessing parse error | Wait for terminal state or create a versioned successor; never edit an executing script |
 
 ## Rules learned
@@ -62,9 +64,9 @@ Updated: 2026-09-05
 1. Read this file, then the latest section of `HANDOFF.md`, the experiment YAML, and `task.json`.
 2. Recheck `git status`, exact branch/HEAD, containers, host processes and the NPU0-7 process table. Recorded idle state is never sufficient.
 3. Verify the TP8 baseline summary hash before computing any ratio.
-4. Highest-value bounded next step: validate source commit `37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd`, which mounts both the Qwen3.5 MTP model patch and the Ascend proposer patch so dummy run cannot bypass local argmax; then prove startup, local-argmax activation and speculative acceptance before benchmark traffic.
-5. If that repair changes more than the draft-token selection path, start a new experiment attempt and state the expanded primary variable explicitly.
-6. Run the complete repeated matrix, correctness, profiling and decision gates. Promote only an additive treatment that improves both TTFT and TPOT across the frozen cells.
+4. Obtain explicit approval before stopping p0_r19; do not bypass the guard while it owns NPU4-7.
+5. Start RUNTIME_ROLE=tp4-dp2-fullpiece-user through scripts/run_qwen35_tp8_user_baseline_service.sh, then run one complete c1/c5/c8/c16 screen.
+6. Only if the screen passes predeclared latency/non-regression gates, run the remaining repetitions and full correctness, profiling and decision gates.
 
 ## Recovery and rollback
 
@@ -76,6 +78,9 @@ Updated: 2026-09-05
 - MTP v2 failure evidence:
   `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k1-20260905T192433Z`.
 - MTP source checkpoint: `/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax`, commit `37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd`.
+- MTP k3 screen evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k3-v2-20260905T215000Z; screen-decision SHA256 6c8698f8a52c1db91f5062f781e085b85101d5372ea7bbf283c544ea9f25ec95.
+- User TP4/DP2 candidate integration: commit a625b2b, config configs/qwen35-query-rewrite-tp4-dp2-fullpiece-user.yaml.
+- Legacy-launcher failure evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-dp2-fullpiece-user-20260905T220500Z.
 - Rollback is the non-speculative TP8 baseline. Do not restart paused external workloads unless the user requests it.
 
 ## Parameter provenance and attribution

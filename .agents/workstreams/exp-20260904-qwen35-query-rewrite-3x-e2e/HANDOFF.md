@@ -2270,3 +2270,39 @@ The currently active immutable k=3 evidence root is
 It uses the already-ready TP8 service on NPU0-7 and operation
 `exec-00000000000004b7`; do not edit its executing scripts or launch a
 competing service.
+
+## MTP k=3 screen rejection and TP4/DP2 recovery boundary
+
+MTP local-argmax k=3 completed one full c1/c5/c8/c16 screen on physical
+NPU0-7: 128/128 requests, zero errors and natural stop. Prometheus counters
+record 19,571 accepted of 29,481 drafted tokens (66.39%), with accepted counts
+8,103/6,477/4,991 at draft positions 0/1/2. The latency screen was:
+
+| concurrency | TTFT ms | TTFT speedup | TPOT ms | TPOT speedup |
+|---:|---:|---:|---:|---:|
+| 1 | 1017.58 | 0.874x | 23.54 | 1.506x |
+| 5 | 1263.15 | 0.814x | 43.46 | 1.101x |
+| 8 | 1293.01 | 0.807x | 52.31 | 1.163x |
+| 16 | 12866.99 | 0.153x | 215.67 | 0.321x |
+
+The all-concurrency gate therefore rejects k=3 without two additional
+repetitions. The exact benchmark PID and container were stopped through guarded
+targets, and NPU0-7 were proven process-free afterward. Evidence root:
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k3-v2-20260905T215000Z.
+The screen-decision SHA256 is
+6c8698f8a52c1db91f5062f781e085b85101d5372ea7bbf283c544ea9f25ec95.
+
+The first exact user-config TP4/DP2 FULL_AND_PIECEWISE attempt used the legacy
+run_qwen35_dp2tp4_baseline_service.sh path and failed before model load:
+the architecture-inspection subprocess could not obtain the Ascend device
+target. Preserve it as launcher failure, not performance evidence, under
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-dp2-fullpiece-user-20260905T220500Z.
+
+Commit a625b2b integrates the same user stack as the default-off
+tp4-dp2-fullpiece-user runtime role into the device-mapping launcher already
+proven by TP8 and MTP. Syntax, YAML, diff and the 18-skill maintainer tree pass.
+At 2026-09-05T22:10:07Z, p0_r19 was again running on NPU4-7 while NPU0-3
+were idle. The resource guard correctly rejected the new eight-card launch.
+Do not stop p0_r19 without renewed explicit approval. Once approved, start
+the new role, pass readiness/graph activation, then run one c1/c5/c8/c16
+screen before deciding whether two more repetitions are justified.
