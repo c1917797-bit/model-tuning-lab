@@ -19,7 +19,7 @@ ss_bin="${SS_BIN:-ss}"
 source_root="${SHORTGPT_SOURCE_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-shortgpt-vllm}"
 source_commit="${SHORTGPT_SOURCE_COMMIT:-18c4d061529d226dd0d699d9e3e1df16dadf29d7}"
 fused_root="${FUSED_BUILD_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm}"
-fused_source_commit=573ea2940bdc546923c698de16ea49465e6976f5
+fused_source_commit=4424cc24ecfa355ce2b17ab48e04fb6fc4944e39
 custom_extension="$fused_root/build-mmar-add-rmsnorm/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so"
 custom_kernels="$fused_root/build-mmar-add-rmsnorm/lib/libvllm_ascend_kernels.so"
 custom_extension_sha256=6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
@@ -168,10 +168,10 @@ docker_args=(
   -v "$repo_root":/experiment:ro
   -v "$source_root/vllm_ascend/patch/worker/patch_qwen3_5.py:$image_source_root/patch/worker/patch_qwen3_5.py:ro"
   -v "$source_root/vllm_ascend/patch/worker/qwen35_shortgpt.py:$image_source_root/patch/worker/qwen35_shortgpt.py:ro"
-  -v "$source_root/vllm_ascend/ascend_config.py:$image_source_root/ascend_config.py:ro"
-  -v "$source_root/vllm_ascend/compilation/compiler_interface.py:$image_source_root/compilation/compiler_interface.py:ro"
-  -v "$source_root/vllm_ascend/compilation/graph_fusion_pass_manager.py:$image_source_root/compilation/graph_fusion_pass_manager.py:ro"
-  -v "$source_root/vllm_ascend/compilation/passes/decode_mmar_add_rmsnorm_fusion_pass.py:$image_source_root/compilation/passes/decode_mmar_add_rmsnorm_fusion_pass.py:ro"
+  -v "$fused_root/vllm_ascend/ascend_config.py:$image_source_root/ascend_config.py:ro"
+  -v "$fused_root/vllm_ascend/compilation/compiler_interface.py:$image_source_root/compilation/compiler_interface.py:ro"
+  -v "$fused_root/vllm_ascend/compilation/graph_fusion_pass_manager.py:$image_source_root/compilation/graph_fusion_pass_manager.py:ro"
+  -v "$fused_root/vllm_ascend/compilation/passes/decode_mmar_add_rmsnorm_fusion_pass.py:$image_source_root/compilation/passes/decode_mmar_add_rmsnorm_fusion_pass.py:ro"
   -v "$custom_extension:$image_source_root/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so:ro"
   -v "$custom_kernels:$image_source_root/lib/libvllm_ascend_kernels.so:ro"
   -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3

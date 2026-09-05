@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260905-qwen35-shortgpt
-status: planned
+status: prepared_waiting
 decision: pending
 hypothesis: "Removing Qwen3.5 decoder blocks with the lowest real-workload Block Influence can reduce both prefill and decode work without retraining; stacked with the retained runtime and fused-tail operator, the reduction may close the remaining TPOT gap while preserving query_rewrite business quality."
 objective: "Reach at least 2x median TTFT and 2x median TPOT versus the immutable original at concurrency 1, 5, 8, and 16, using cumulative non-quantized parameter, algorithm, and operator improvements."
@@ -14,6 +14,13 @@ git:
     - 92856507294f69796e6326c08dbdbaf583142348
     - 5cd8e0e0849b7e24c7a1bde1b45dc96d9ec40316
     - c033270ec6d0646da57418488196362ee58ed3f8
+    - 88a705ea8773bd14a17ade2f62dec41f60a815b6
+    - ba793700f4c57a11a554e3f7c2db3cec66f1c4f1
+    - 4354a238dccac9c3b386b18e5b48fea89e48aee7
+    - 2b77158e464cdd02d375676f059b8c61bdab1db7
+    - fda58fdfe83f4b9725bda985cb6248ee3b9ea989
+    - 119ba721a592342b0bb22d6922ac0799bfde3dd7
+    - 7b1fdbaaf8d5411a5e5101150a276141328510c2
 environment:
   source_commit: 18c4d061529d226dd0d699d9e3e1df16dadf29d7
   model_revision: "/cache/austinov/Qwen3.8-27B (config model_type qwen3_5; config SHA256 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab)"
@@ -54,7 +61,7 @@ protocol:
     - "Block Influence samples are missing, non-finite, or ranking is not stable enough to freeze."
   warmup: "Use the existing frozen query_rewrite harness protocol; record exact warmup in run metadata."
   repetitions: 32
-  command: "First run scripts/run_qwen35_shortgpt_bi_diagnostic.sh and freeze a passing layer set. If fused-tail v9 is accepted, run CANDIDATE_MODE=shortgpt-fused-tail; otherwise run CANDIDATE_MODE=shortgpt-retained first. In both cases set the frozen SHORTGPT_LAYER_SET_FILE/SHA256 and SEMANTIC_CONTROL_DIR to the completed unpruned fused-tail v9 candidate directory."
+  command: "Wait for the only active fused-tail v10 queue exec-00000000000000f7 to become terminal, then run a fresh scripts/run_qwen35_shortgpt_bi_diagnostic.sh and freeze a passing layer set. If v10 is accepted, run CANDIDATE_MODE=shortgpt-fused-tail and use its completed unpruned candidate directory as SEMANTIC_CONTROL_DIR. If v10 is rejected or has no candidate matrix, first produce a fresh unpruned shortgpt-retained control matrix, then run CANDIDATE_MODE=shortgpt-retained against that control. Never use v9, timed-out exec-00000000000000e6, or the empty failed BI root as a semantic control."
 results:
   baseline:
     immutable_original_p50_ms:
@@ -72,8 +79,8 @@ results:
   steady: {}
   boundary: {}
   lifecycle:
-    phase: bi_and_combined_e2e_harness_ready
-    dependency: "guarded fused-tail v9 queue exec-0000000000000060"
+    phase: prepared_waiting_for_v10_and_p0_r15
+    dependency: "only active guarded fused-tail v10 queue exec-00000000000000f7; superseded exec-00000000000000e6 timed out without a host waiter; f7 waits for protected p0_r15 R15_DONE and stable NPU4-7 idle"
   resources:
     allowed: "physical NPU4-7 when idle"
     prohibited: "physical NPU0-3 and all existing workloads"
@@ -82,7 +89,7 @@ artifacts:
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json
 decision_reason: "Pending target-device Block Influence, correctness, E2E benchmark, and profiling."
-next_loop: "Finish fused-tail v9; if the TPOT goal remains open, collect Qwen3.5 Block Influence on real query_rewrite inputs and freeze the first conservative layer-removal candidate."
+next_loop: "Poll only fused-tail v10 operation exec-00000000000000f7 without duplicating its waiter; after it releases NPU4-7, collect fresh Qwen3.5 Block Influence on real query_rewrite inputs, freeze the first conservative layer-removal candidate, and select a valid same-runtime control according to whether v10 produced a complete matrix."
 rollback:
   command: "Unset VLLM_ASCEND_QWEN35_SKIP_LAYERS and VLLM_ASCEND_QWEN35_BI_DIR; remove the source overlay; relaunch the retained pinned stack."
   verified: false

@@ -4,7 +4,7 @@
   "gates": [
     {
       "gate": "workstream-start",
-      "result": "PASS planned: a separate maintainer branch and branch-local handoff isolate ShortGPT work from the active fused-tail v9 queue."
+      "result": "PASS planned: a separate maintainer branch and branch-local handoff isolate ShortGPT work from the umbrella operator loop and its only active fused-tail v10 queue."
     },
     {
       "gate": "source-default-off-integration",
@@ -20,7 +20,7 @@
     },
     {
       "gate": "block-influence-diagnostic-launcher",
-      "result": "PASS static and live conflict gate: the pinned eager TP4 launcher maps only physical NPU4-7, refuses container reservations, NPU processes, ports, reused output paths, source drift, and model-config drift, quarantines startup records, and never enables quantization. A real probe detected /p0_mc and exited 48 before directory or container creation. NPU inference remains pending."
+      "result": "PASS static and live conflict gate: the pinned eager TP4 launcher maps only physical NPU4-7, refuses container reservations, NPU processes, ports, reused output paths, source drift, and model-config drift, quarantines startup records, and never enables quantization. A real attempt (exec-00000000000000c8) detected protected p0_r15 ownership and exited 48 before Docker creation. Its empty bi-20260905T125900Z root is not evidence and is permanently excluded from reuse. NPU inference remains pending."
     },
     {
       "gate": "shortgpt-layer-set-freeze",
@@ -28,11 +28,23 @@
     },
     {
       "gate": "shortgpt-plus-fused-tail-e2e-harness",
-      "result": "PASS static: the service validates the frozen layer contract, source/model/binary hashes and NPU4-7 resource boundary, mounts the pinned ShortGPT and default-off fused-tail sources and binaries, enables no quantization, and preserves the retained stack. It supports explicit shortgpt-retained and shortgpt-fused-tail modes; only the fused mode enables the operator and requires 64-N normalized and 128-2N fused patterns per rank before benchmark traffic."
+      "result": "PASS static: the service validates the frozen layer contract, source/model/binary hashes and NPU4-7 resource boundary, separately pins ShortGPT hooks at 18c4d061529d226dd0d699d9e3e1df16dadf29d7 and compiler/fusion files at operator fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39, enables no quantization, and preserves the retained stack. It supports explicit shortgpt-retained and shortgpt-fused-tail modes; only the fused mode enables the operator and requires 64-N normalized and 128-2N fused patterns per rank before benchmark traffic."
     },
     {
       "gate": "npu-scope",
-      "result": "PLANNED fail-closed: use only physical NPU4-7 after both container-reservation and npu-smi checks are clear; do not touch NPU0-3 or interrupt any existing NPU4-7 workload."
+      "result": "PASS resource guard / PENDING allocation: physical NPU4-7 are assigned to this task but protected p0_r15 currently owns them. Wait for its explicit R15_DONE terminal marker and stable idle checks; do not touch NPU0-3 or interrupt any existing NPU4-7 workload."
+    },
+    {
+      "gate": "fused-tail-v9-dependency",
+      "result": "REJECTED safely: exec-0000000000000060 observed 0 normalized and 64 fused decode patterns per TP rank versus the required 64/128, exited 72 before benchmark traffic, and produced no candidate matrix or valid semantic-control directory."
+    },
+    {
+      "gate": "fused-tail-v10-dependency",
+      "result": "ACTIVE guarded queue: the first v10 launch exec-00000000000000e6 hit its 30-second synchronous timeout without leaving a host waiter or allocating an NPU. Replacement asynchronous operation exec-00000000000000f7 is the only active waiter. It pins source fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39 and must wait for p0_r15 R15_DONE plus four stable idle checks before allocating NPU4-7; do not duplicate it."
+    },
+    {
+      "gate": "semantic-control-selection",
+      "result": "PLANNED fail-closed: use the completed unpruned v10 matrix only if v10 produces one; otherwise produce a fresh unpruned retained matrix. Never use rejected v9 or the empty failed BI root as the same-runtime control."
     },
     {
       "gate": "block-influence-real-workload",
