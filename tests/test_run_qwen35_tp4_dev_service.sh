@@ -266,6 +266,7 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  MMAR_ADD_RMSNORM_COMMIT=5816eff11812fd9d54a1b433ca3d5ee1aad490f3 \
   CONTAINER_NAME=guard-test-mmar-add-rmsnorm-fused-tail-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
   mmar-on-weight-prefetch-gateup-0p1-fused-tail \
@@ -274,7 +275,7 @@ PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" 
 grep -q -- '"fuse_decode_mmar_add_rmsnorm":true' "$docker_log"
 grep -q -- '"compile_ranges_endpoints":\[16,32768\]' "$docker_log"
 grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
-grep -q -- 'VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT=4424cc24ecfa355ce2b17ab48e04fb6fc4944e39' "$docker_log"
+grep -q -- 'VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT=5816eff11812fd9d54a1b433ca3d5ee1aad490f3' "$docker_log"
 grep -q -- 'compiler_interface.py' "$docker_log"
 grep -q -- 'decode_mmar_add_rmsnorm_fusion_pass.py' "$docker_log"
 grep -q -- 'vllm_ascend_C.cpython-312-aarch64-linux-gnu.so' "$docker_log"
