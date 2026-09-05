@@ -6,11 +6,11 @@ output_root="${OUTPUT_ROOT:?set OUTPUT_ROOT to a new absolute directory}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 container_name="${CONTAINER_NAME:-qwen35_mmar_add_rmsnorm_microbench_npu4_7}"
 source_root="${CUSTOM_VLLM_ASCEND_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm}"
-source_commit="0af938b233b583e338d4587933e7c8ef494bd5b4"
+source_commit="4cc7cd7fb03b796fcd090a373b9c087f5ace8de5"
 build_root="$source_root/build-mmar-add-rmsnorm"
 custom_extension="$build_root/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so"
 custom_kernels="$build_root/lib/libvllm_ascend_kernels.so"
-custom_extension_sha256="80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0"
+custom_extension_sha256="6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23"
 custom_kernels_sha256="6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
 
 case "$output_root" in

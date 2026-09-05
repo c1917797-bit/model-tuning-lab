@@ -14,6 +14,14 @@ cat >"$mock_bin/docker" <<'MOCK'
 if [[ "${1:-}" == container && "${2:-}" == inspect ]]; then
   exit 1
 fi
+if [[ "${1:-}" == ps && "${2:-}" == -q ]]; then
+  printf '%s' "${MOCK_DOCKER_RUNNING_IDS:-}"
+  exit 0
+fi
+if [[ "${1:-}" == inspect && "${2:-}" == mock-reservation ]]; then
+  printf '%s\n' '/p0_aff /dev/davinci4 /dev/davinci5 /dev/davinci6 /dev/davinci7'
+  exit 0
+fi
 printf '%s\n' "$*" >>"$DOCKER_LOG"
 MOCK
 chmod +x "$mock_bin/docker"
@@ -26,6 +34,23 @@ cat <<'INFO'
 INFO
 MOCK
 chmod +x "$mock_bin/npu-smi"
+
+set +e
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" \
+  MOCK_DOCKER_RUNNING_IDS=mock-reservation NPU_SMI_BIN="$mock_bin/npu-smi" \
+  DEVICE_SET=4-7 CONTAINER_NAME=guard-test-container-reservation \
+  PROFILE_DIR="$tmp/profile-container-reservation" \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile \
+  >"$tmp/container-reservation.out" 2>"$tmp/container-reservation.err"
+rc=$?
+set -e
+if [[ "$rc" != 48 ]]; then cat "$tmp/container-reservation.err" >&2; fi
+[[ "$rc" == 48 ]]
+grep -q "a running container reserves physical NPU4-7" \
+  "$tmp/container-reservation.err"
+grep -q "/p0_aff /dev/davinci4" "$tmp/container-reservation.err"
+[[ ! -e "$docker_log" ]]
+[[ ! -e "$tmp/profile-container-reservation" ]]
 
 set +e
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi"   DEVICE_SET=4-7 CONTAINER_NAME=guard-test-occupied   PROFILE_DIR="$tmp/profile-occupied"   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile   >"$tmp/occupied.out" 2>"$tmp/occupied.err"

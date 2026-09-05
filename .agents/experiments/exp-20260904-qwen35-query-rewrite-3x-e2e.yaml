@@ -1008,10 +1008,16 @@ mmar_add_rmsnorm_decode_candidate:
     test: tests/test_benchmark_qwen35_mmar_add_rmsnorm.py
     source_worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
     source_branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-    source_commit: 0af938b233b583e338d4587933e7c8ef494bd5b4
-    extension_sha256: 80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0
+    source_commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
+    extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
+    meta_registration:
+      commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
+      build_operation_id: exec-0000000000000acb
+      result: "PASS: torch_binding_meta.cpp compiled and the extension relinked; runtime Meta dispatch remains part of the clean-NPU graph integration gate"
   first_real_run:
     operation_id: exec-0000000000000ab4
+    source_commit: 0af938b233b583e338d4587933e7c8ef494bd5b4
+    extension_sha256: 80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0
     evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z
     protocol: "TP4 BF16, two profiled projection shapes, M=1/2/4/6/8/10/12/14/16, 20 warmups, 100 iterations, five alternating repeats"
     geomean_candidate_speedup_vs_control: 1.833735997159005
@@ -1023,6 +1029,8 @@ mmar_add_rmsnorm_decode_candidate:
     input_scale: "std=0.1 for x, weight and residual, matching the upstream operator example"
     status: waiting_for_unreserved_npu4_7
     invalid_attempts: [exec-0000000000000ab6, exec-0000000000000ab8]
-    blocker: "external p0_aff container explicitly reserves /dev/davinci4..7; aclInit returned Resource_Busy before measurement"
-    safety: "do not stop or modify p0_aff; NPU0-3 also remain occupied"
+    blocker: "p0_aff is actively running a separate profiling/benchmark sequence and explicitly reserves /dev/davinci4..7; aclInit returned Resource_Busy before measurement"
+    resource_scope: "the user confirmed physical NPU4-7 are assigned to this optimization; NPU0-3 remain prohibited"
+    safety: "do not interrupt an active p0_aff run without explicit coordination; resume when the assigned cards are released"
+    launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   promotion_gate: "all 18 cells correct, geometric mean >=1.02x, minimum >=1.0x, then and only then integrate default-off into Qwen3.5 and run frozen c1/c5/c8/c16 E2E"

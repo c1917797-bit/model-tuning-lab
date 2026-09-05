@@ -1422,15 +1422,22 @@ not use quantization.
 
 The official vLLM-Ascend 0.23.0 custom fusion is not the candidate: its pass is
 disabled by default and hard-gated to compile ranges starting above 512, so it
-cannot cover decode M=1-16. Instead, source commit
+cannot cover decode M=1-16. Source commit
 `0af938b233b583e338d4587933e7c8ef494bd5b4` exposes CANN 9.1
-`aclnnMatmulAllReduceAddRmsNorm` through a default-off custom binding. The
-isolated source worktree is:
+`aclnnMatmulAllReduceAddRmsNorm` through a default-off custom binding.
+Follow-up commit `4cc7cd7fb03b796fcd090a373b9c087f5ace8de5` adds the
+symbolic Meta implementation required by graph compilation; its C++ object
+compiled and the extension relinked successfully in operation
+`exec-0000000000000acb`. The isolated source worktree is:
 
 `/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm`
 
 The pinned extension SHA256 is
-`80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0`.
+`6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23`.
+The first completed microbenchmark predates the Meta-only follow-up and used
+commit `0af938b2` with extension SHA256
+`80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0`;
+the eager runtime path is unchanged.
 
 A first real TP4 run completed all 18 Qwen decode shape cells on physical
 NPU4-7. Every cell was faster than the retained tail, with 1.833736x geometric
@@ -1451,8 +1458,11 @@ The harness now matches the official operator sample's model-like 0.1 input
 scale. That rerun has not completed: after the first run, external container
 `p0_aff` started a Qwen3.8-27B TP4 service and explicitly reserved
 `/dev/davinci4..7`. Two later attempts failed in `aclInit` with Resource_Busy
-before any candidate measurement. Do not stop or modify that container. A
-container-device reservation guard has been added because `npu-smi` can briefly
+before any candidate measurement. The user has confirmed that physical NPU4-7
+are assigned to this optimization, but `p0_aff` is actively executing another
+profiling/benchmark sequence on those cards; do not interrupt an active run
+without explicit coordination. Container-device reservation guards now protect
+both the microbenchmark and main E2E launchers because `npu-smi` can briefly
 show no process while a container is initializing.
 
 Resume only when both the container reservation check and `npu-smi` report

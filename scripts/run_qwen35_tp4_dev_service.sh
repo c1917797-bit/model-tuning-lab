@@ -117,6 +117,21 @@ if docker container inspect "$container_name" >/dev/null 2>&1; then
   exit 41
 fi
 
+# npu-smi can briefly report no device process while another container is
+# starting its runtime. Treat a running container that reserves any assigned
+# physical device as occupied before checking the process table.
+container_reservations="$(
+  for running_id in $(docker ps -q); do
+    docker inspect "$running_id" --format \
+      '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}'
+  done | awk '$0 ~ /\/dev\/davinci[4-7]([[:space:]]|$)/'
+)"
+if [[ -n "$container_reservations" ]]; then
+  echo "refusing to start: a running container reserves physical NPU$device_set" >&2
+  echo "$container_reservations" >&2
+  exit 48
+fi
+
 npu_snapshot="$("$npu_smi_bin" info)"
 occupied="$(
   awk -F '|' -v wanted="$physical_npu_csv" '

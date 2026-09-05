@@ -23,8 +23,8 @@ treatment:
 source:
   worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
   branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-  commit: 0af938b233b583e338d4587933e7c8ef494bd5b4
-  extension_sha256: 80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0
+  commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
+  extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
 first_real_run:
   evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z
   correctness_input_scale: "std=1 on both matmul operands; diagnostic only and not model-like"
