@@ -8,7 +8,7 @@
     },
     {
       "gate": "source-default-off-integration",
-      "result": "PASS static: local vLLM-Ascend commit 54a6bb40ac83771538b3c859bcf9c55e2e51854a adds opt-in Block Influence recording and opt-in layer skipping, samples prompt head and tail, and prefers initialized distributed rank zero; py_compile and diff checks pass. Runtime unit execution is pending because host Python lacks PyTorch and pytest."
+      "result": "PASS focused source validation: local vLLM-Ascend commit 54a6bb40ac83771538b3c859bcf9c55e2e51854a adds opt-in Block Influence recording and opt-in layer skipping, samples prompt head and tail, and prefers initialized distributed rank zero. Py_compile/diff checks and 9/9 exact-image CPU tests pass; a direct-module runtime smoke validates sampling, identity influence, JSONL output, and rank precedence. Real-NPU BI remains pending."
     },
     {
       "gate": "source-remote-checkpoint",
