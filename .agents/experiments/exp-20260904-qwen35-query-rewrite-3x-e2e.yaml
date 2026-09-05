@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_retained_tp2_dp2_rejected_oom_tpot_target_open
-decision: retain_matmulallreduce_reject_gate_up_nz_and_tp2_dp2_then_iterate_tpot
+status: mmar_retained_hccl_aiv_rejected_tpot_target_open
+decision: retain_matmulallreduce_reject_tp2_dp2_gate_up_nz_and_hccl_aiv_then_iterate_tpot
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -590,3 +590,36 @@ tp2_dp2_mmar_topology_candidate:
     capability_tradeoff: "image/video serving disabled; valid only for the text-only query_rewrite workload"
   decision: "reject TP2/DP2 under the immutable 133000 max-model-len, 32768 max-batched-tokens and max-num-seqs 16 capacity contract; do not run E2E"
   recovery: "exact probe container stopped; physical NPU4-7 returned to 2865-2866 MiB idle HBM; external NPU0-3 PIDs 1031654-1031657 unchanged"
+hccl_aiv_candidate:
+  source_manifest: configs/qwen35-query-rewrite-mmar-on-hccl-aiv-candidate.yaml
+  launcher_mode: mmar-on-hccl-aiv
+  implementation_commit: 71b295d
+  primary_variable_vs_retained_mmar: "HCCL_OP_EXPANSION_MODE unset -> AIV"
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
+  rationale: "the MMAR-on rank-0 profile attributes 64.8641% of summed kernel duration to collective kernels, so test the available HCCL operator-expansion implementation before custom operator work"
+  real_run:
+    operation_id: exec-0000000000000834
+    run_id: mmar-on-hccl-aiv-fixedorig-npu4-7-20260904T2353Z
+    artifact_dir: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-hccl-aiv-fixedorig-npu4-7-20260904T2353Z
+    requests: {1: "32/32", 5: "32/32", 8: "32/32", 16: "32/32"}
+    errors: 0
+    natural_stops: 128
+    versus_fixed_original:
+      1: {ttft_p50_ms: 439.077555, ttft_speedup: 2.1143, tpot_p50_ms: 28.829636, tpot_speedup: 1.33445}
+      5: {ttft_p50_ms: 513.830705, ttft_speedup: 2.1257, tpot_p50_ms: 40.397246, tpot_speedup: 1.33254}
+      8: {ttft_p50_ms: 508.960855, ttft_speedup: 2.1265, tpot_p50_ms: 45.755394, tpot_speedup: 1.47779}
+      16: {ttft_p50_ms: 955.469085, ttft_speedup: 2.1718, tpot_p50_ms: 52.906697, tpot_speedup: 1.52744}
+    incremental_tpot_vs_mmar: {1: 0.99356, 5: 0.96569, 8: 0.99472, 16: 0.98790, geomean: 0.985398}
+    incremental_ttft_vs_mmar: {1: 0.98915, 5: 1.00888, 8: 0.98179, 16: 0.96453}
+    automated_decision: "hold-exact-hash-drift; cross-run response hashes remain diagnostic because fixed-runtime output drift was already calibrated separately"
+    reference_quality:
+      1: {raw_exact: 5, whitespace_exact: 6, mean_normalized_char_similarity: 0.1875}
+      5: {raw_exact: 4, whitespace_exact: 6, mean_normalized_char_similarity: 0.1875}
+      8: {raw_exact: 4, whitespace_exact: 7, mean_normalized_char_similarity: 0.21875}
+      16: {raw_exact: 5, whitespace_exact: 5, mean_normalized_char_similarity: 0.15625}
+    artifact_hashes:
+      decision_sha256: de05c9281c5e710e8f1bdc485b2fa2cfa1b6d245b08ba80ebf3d4641f1e586d4
+      service_log_sha256: d9453f418c77abe08ed5e387f463b456a01b0558c126fcb213b0f47fddb001d2
+      sha256sums_sha256: 82f601478bc58a7c7f68282a8d136639cb6e07f2d766e4d588ae1afc21947e3b
+  decision: "reject HCCL AIV from the cumulative stack: all requests completed, but TPOT geometric mean is 1.46% slower than retained MMAR-only and the 2x TPOT target remains unmet"
+  recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2866-2867 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"

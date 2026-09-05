@@ -870,3 +870,47 @@ SHA256SUMS digest
 The exact container was stopped. NPU4-7 are idle at 2866-2867 MiB and
 external NPU0-3 PIDs 1031654-1031657 are unchanged. Do not retry TP2/DP2
 again unless the user explicitly changes the serving-capacity contract.
+
+## HCCL AIV communication candidate rejected
+
+The next one-variable communication treatment kept the retained BF16
+TP4/DP1 MMAR stack unchanged and set `HCCL_OP_EXPANSION_MODE=AIV`. It used
+physical NPU4-7 only, retained HCCL_BUFFSIZE=512, NZ1, FlashComm1 off, async
+scheduling and FULL_DECODE_ONLY, and did not use quantization.
+
+Operation `exec-0000000000000834` completed all four immutable quick32
+cells. c1/c5/c8/c16 each finished 32/32 requests with zero errors and natural
+stop. TTFT p50 versus the fixed original was 439.078/513.831/508.961/955.469
+ms, or 2.114x/2.126x/2.127x/2.172x faster. TPOT p50 was
+28.830/40.397/45.755/52.907 ms, or 1.334x/1.333x/1.478x/1.527x faster than
+the fixed original.
+
+The cumulative decision is based on the retained MMAR-only stack, not the
+original. AIV's incremental TPOT speedups were
+0.994x/0.966x/0.995x/0.988x, with 0.9854x geometric mean: about 1.46% slower.
+Incremental TTFT was 0.989x/1.009x/0.982x/0.965x. Therefore reject AIV and
+continue from MMAR-only; TTFT still meets the 2x goal, while TPOT remains
+open.
+
+The analyzer's exact cross-run hash gate reported hold, but fixed-runtime
+hash drift is already calibrated and the AIV treatment changes communication
+scheduling only. All 128 requests completed naturally with no error. The
+recorded reference-quality summaries are preserved in the experiment YAML;
+this is sufficient to classify the run as a performance rejection rather
+than an unproven runtime failure.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-hccl-aiv-fixedorig-npu4-7-20260904T2353Z`.
+The decision SHA256 is
+`de05c9281c5e710e8f1bdc485b2fa2cfa1b6d245b08ba80ebf3d4641f1e586d4`;
+the SHA256SUMS digest is
+`82f601478bc58a7c7f68282a8d136639cb6e07f2d766e4d588ae1afc21947e3b`.
+The exact candidate container exited. Physical NPU4-7 are idle at
+2866-2867 MiB with no running processes; external NPU0-3 PIDs
+1031654-1031657 remain unchanged.
+
+Next, inspect the relocated `/cache/cch` operator-generation assets for a
+feature-flagged, BF16, shape-specialized MatMulAllReduce or compatible
+row-parallel projection treatment. Require isolated correctness and repeated
+microbenchmarks before E2E. Do not revisit TP2/DP2, FlashComm1, prompt lookup,
+MTP, gate/up NZ or AIV unchanged.
