@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: taskqueue2_candidate_ready_tpot_target_open
-decision: test_taskqueue2_on_retained_matmulallreduce_and_subcap_gateup_prefetch
+status: taskqueue2_rejected_tpot_target_open
+decision: retain_matmulallreduce_and_subcap_gateup_prefetch_then_iterate_tpot
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -809,7 +809,7 @@ static_kernel_candidate:
 taskqueue2_candidate:
   source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-taskqueue2-candidate.yaml
   launcher_mode: mmar-on-weight-prefetch-gateup-0p1-taskqueue2
-  status: ready
+  status: rejected_startup_incompatibility
   primary_variable_vs_retained: "TASK_QUEUE_ENABLE: 1 -> 2"
   retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; dense gate/up prefetch ratio 0.1; HCCL_BUFFSIZE=512; no quantization"
   evidence_basis:
@@ -819,3 +819,20 @@ taskqueue2_candidate:
   isolation_validation: "candidate runtime YAML differs from the retained runtime only in TASK_QUEUE_ENABLE; shell guards and launch mock passed"
   execution_policy: "physical NPU4-7 only; compare all four quick32 cells to both the immutable original and the retained cumulative stack"
   rollback: "select launcher mode mmar-on-weight-prefetch-gateup-0p1, which restores TASK_QUEUE_ENABLE=1"
+  real_run:
+    operation_id: exec-000000000000090e
+    run_id: mmar-prefetch-0p1-taskqueue2-fixedorig-npu4-7-20260905T014744Z
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-prefetch-0p1-taskqueue2-fixedorig-npu4-7-20260905T014744Z
+    activation: "container inspection confirmed TASK_QUEUE_ENABLE=2 with ASCEND_RT_VISIBLE_DEVICES=0,1,2,3; runtime remained BF16 TP4/DP1 with MMAR and gate/up prefetch ratio 0.1; quantization=None"
+    failure_stage: "FULL_DECODE_ONLY NPU graph capture before service readiness"
+    failure: "torch_npu explicitly rejected TASK_QUEUE_ENABLE=2 during NPU graph capture and required TASK_QUEUE_ENABLE=1/0; all four workers reported ERR00007 PTA feature not supported"
+    measured_requests: 0
+    performance_boundary: "no HTTP health and no request ran, so no TTFT or TPOT claim is valid"
+    oom_killed: false
+    hashes:
+      candidate_config_sha256: 425dee8144446bd4b019c7bc5dafcbefd673f6621cc4c1e97973468e1381077c
+      service_log_sha256: 9a960f9984c13f132e8d996a481d26d643438bb1432d9ebf9f9915fd0cc4af1e
+      decision_sha256: dcb66e2534867bde7d8fc02c3e0101099231c4b77cffc63ea33752750de0e207
+      sha256sums_sha256: 926e6c1d77a218fabde8354ed32382f0aa9402c65206efb12daaca8dea3a371c
+  decision: "reject TASK_QUEUE_ENABLE=2 from the cumulative graph-mode stack; retain TASK_QUEUE_ENABLE=1 and do not retry level 2 without removing graph capture as a separately justified tradeoff"
+  recovery: "the exact candidate container was stopped; physical NPU4-7 returned idle with no process; external NPU0-3 PIDs 1031654-1031657 were unchanged"

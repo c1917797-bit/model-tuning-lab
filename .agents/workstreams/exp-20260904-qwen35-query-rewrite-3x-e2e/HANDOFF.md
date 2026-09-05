@@ -1150,3 +1150,33 @@ Shell syntax, launch mocks and a structural comparison prove that the runtime
 diff is only `TASK_QUEUE_ENABLE: 1 -> 2`. It uses no quantization and is
 restricted to physical NPU4-7. Roll back by selecting the retained
 `mmar-on-weight-prefetch-gateup-0p1` mode.
+
+## TASK_QUEUE_ENABLE=2 rejected at graph-capture startup gate
+
+Operation `exec-000000000000090e` activated
+`TASK_QUEUE_ENABLE=2` in the exact candidate container, retained BF16
+TP4/DP1, MMAR, gate/up prefetch ratio 0.1 and `quantization=None`, then
+failed before service readiness. During FULL_DECODE_ONLY graph capture,
+`torch_npu` explicitly raised:
+`Do not support TASK_QUEUE_ENABLE = 2 during NPU graph capture, please
+export TASK_QUEUE_ENABLE=1/0`, followed by `ERR00007 PTA feature not
+supported` on all four workers.
+
+No HTTP health check succeeded and no benchmark request ran. This is a
+startup/runtime compatibility rejection, not a performance result; make no
+TTFT or TPOT claim for level 2. Do not combine level 2 with the retained graph
+mode again. Removing graph capture to accommodate it would be a second major
+variable and would discard a proven optimization, so it is not the immediate
+recovery path.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-prefetch-0p1-taskqueue2-fixedorig-npu4-7-20260905T014744Z`.
+All SHA256SUMS entries verify. Candidate config SHA256 is
+`425dee8144446bd4b019c7bc5dafcbefd673f6621cc4c1e97973468e1381077c`;
+decision SHA256 is
+`dcb66e2534867bde7d8fc02c3e0101099231c4b77cffc63ea33752750de0e207`;
+SHA256SUMS SHA256 is
+`926e6c1d77a218fabde8354ed32382f0aa9402c65206efb12daaca8dea3a371c`.
+The exact candidate container was stopped. NPU4-7 are idle and external
+NPU0-3 PIDs 1031654-1031657 remain unchanged. Retain
+`TASK_QUEUE_ENABLE=1`.
