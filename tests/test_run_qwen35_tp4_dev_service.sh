@@ -203,6 +203,32 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-mmar-on-weight-prefetch-gateup-0p1-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  mmar-on-weight-prefetch-gateup-0p1 \
+  >"$tmp/mmar-on-weight-prefetch-gateup-0p1-fresh.out" \
+  2>"$tmp/mmar-on-weight-prefetch-gateup-0p1-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '--tensor-parallel-size 4' "$docker_log"
+grep -q -- '--data-parallel-size 1' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- '"weight_prefetch_config":{"enabled":true' "$docker_log"
+grep -q -- '"attn":{"qkv":0.0,"o":0.0}' "$docker_log"
+grep -q -- '"moe":{"gate_up":0.0}' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+if grep -q -- 'HCCL_OP_EXPANSION_MODE=AIV' "$docker_log"; then
+  echo "MMAR gate-up 0.1 prefetch candidate unexpectedly enabled HCCL AIV" >&2
+  exit 1
+fi
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "MMAR gate-up 0.1 prefetch candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-tp2-dp2-mmar-on-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" tp2-dp2-mmar-on \
   >"$tmp/tp2-dp2-mmar-on-fresh.out" 2>"$tmp/tp2-dp2-mmar-on-fresh.err"

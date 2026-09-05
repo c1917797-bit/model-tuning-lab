@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_retained_weight_prefetch_gateup_18mb_rejected_tpot_target_open
-decision: retain_matmulallreduce_reject_gateup_18mb_prefetch_then_tune_bounded_prefetch_size
+status: mmar_weight_prefetch_gateup_0p1_ready_tpot_target_open
+decision: retain_matmulallreduce_then_test_subcap_gateup_prefetch
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -663,3 +663,13 @@ weight_prefetch_gateup_candidate:
       sha256sums_sha256: ef77e98e3396aa7a97bb7779436ac183b68b6cb6f67fd810a5a6b57d5fd19cca
   decision: "reject 18 MB gate/up prefetch from the cumulative stack: TPOT geometric mean is 1.34% slower than retained MMAR-only, including a 3.81% regression at c8; retain MMAR-only"
   recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2866-2867 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
+weight_prefetch_gateup_0p1_candidate:
+  source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml
+  launcher_mode: mmar-on-weight-prefetch-gateup-0p1
+  status: ready_for_real_e2e
+  primary_variable_vs_rejected_18mb_prefetch: "dense MLP gate_up prefetch ratio 1.0 -> 0.1"
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
+  rationale: "the 18 MB-capped treatment regressed c8 TPOT by 3.81%; ratio 0.1 reduces the copied prefix below the cap to test CMO/bandwidth contention without changing any other variable"
+  devices: "physical NPU4-7 only; NPU0-3 prohibited"
+  acceptance: "complete 32/32 natural-stop matrix and incremental TPOT geometric mean above retained MMAR with no material cell regression"
+  rollback: "select mmar-on; the retained MMAR checkpoint is unchanged"

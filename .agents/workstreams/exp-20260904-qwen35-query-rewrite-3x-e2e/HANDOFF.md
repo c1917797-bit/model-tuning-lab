@@ -972,3 +972,13 @@ The exact candidate container exited. Physical NPU4-7 are idle at
 If weight prefetch is revisited, use a sub-cap ratio such as 0.1 so the
 prefetched prefix is below the 18 MB cap; ratios at or above about 0.2 are
 effectively the same cap for this approximately 89 MB gate/up shard.
+
+## Sub-cap gate-up prefetch follow-up ready
+
+The bounded follow-up changes only dense MLP gate/up prefetch ratio from 1.0
+to 0.1, reducing the prefetched prefix from the 18 MB cap to about 8.9 MB.
+All other retained MMAR settings and explicit zeros for attention, MoE and
+down-projection prefetch are unchanged. Launcher mode is
+`mmar-on-weight-prefetch-gateup-0p1`; it remains restricted to physical
+NPU4-7 and contains no quantization. Accept only if the full quick32 matrix
+improves TPOT cumulatively over MMAR without a material cell regression.
