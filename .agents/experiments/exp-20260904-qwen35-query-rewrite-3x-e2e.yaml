@@ -1040,7 +1040,7 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: 369bd1f627be033c3d4de162cf5e7f5c8b6453b2
+    source_commit: 5182fe9cbed58faa480a24cce3a439a7fada3767
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
@@ -1050,5 +1050,13 @@ mmar_add_rmsnorm_decode_candidate:
     first_attempt_operation: exec-0000000000000b07
     result: "guarded before launch; p0_ck began a separate NPU4-7 chunk sweep after the successful microbenchmark"
     output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-20260905T055023Z
-    next: "retry into a new immutable output root when p0_ck naturally releases NPU4-7"
+    first_live_graph_operation: exec-0000000000000b2d
+    first_live_graph_output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-20260905T063300Z
+    first_live_graph_result: "invalid integration attempt: compile ranges (1,16) and (17,32768) were real, but fused-op count was zero in both computation_graph.py and AOT; the exact task container was stopped during c1 and the finalized matrix is reject-runtime-failure"
+    first_live_graph_hashes: {decision_sha256: 4a181470e6083da0f0386bb62cfef00500a25cc7dd86fd8ea4ddff1cc9e57256, service_log_sha256: 1be97aa2ca6eb56077be30f60d6bb81bb49b448e0ead0e52940318888cbd9869, sha256sums_sha256: 8a35d576a6a7063ff29a7be442ed24c76804ef32dc728834c3681629d2075f35}
+    live_graph_root_cause: "the real FX graph leaves npu_mm_all_reduce_base reduce_op at its wrapper default and records only bias=None; the pattern explicitly supplied reduce_op=sum, so Inductor kwargs did not match"
+    matcher_fix_commit: 5182fe9cbed58faa480a24cce3a439a7fada3767
+    second_retry_operation: exec-0000000000000b45
+    second_retry_result: "guarded before launch; p0_cd began a separate two-point cadence sweep on NPU4-7"
+    next: "retry into a new immutable output root after p0_cd writes CADENCE_DONE; require a positive fused-op count before accepting any E2E cell"
   promotion_gate: "graph pass must match, service correctness must pass, then all frozen c1/c5/c8/c16 cells must improve versus the immutable original and retained stack"

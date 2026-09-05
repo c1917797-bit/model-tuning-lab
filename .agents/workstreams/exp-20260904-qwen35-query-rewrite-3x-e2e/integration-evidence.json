@@ -180,6 +180,18 @@
     {
       "gate": "assigned-device-race-guard",
       "result": "PASS fail-closed: the first E2E attempt exited 48 without launching when a new p0_ck workload reserved NPU4-7. The task did not stop it, did not create performance evidence, and still did not touch NPU0-3."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-first-live-graph",
+      "result": "REJECT invalid integration: operation exec-0000000000000b2d proved compile ranges (1,16) and (17,32768), but computation_graph.py and AOT contained zero fused ops while retaining separate MMAR and AddRMSNorm. The exact task container was stopped during c1; the finalized output is a runtime-failure record, not performance evidence."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-live-graph-root-cause",
+      "result": "PASS diagnosis/fix: the live FX node leaves reduce_op at the npu_mm_all_reduce_base wrapper default and records only bias=None; the pattern had an extra explicit reduce_op=sum kwarg. Source commit 5182fe9c removes that mismatch, logs range applicability, and is pinned by the tested launcher."
+    },
+    {
+      "gate": "assigned-device-race-guard-cadence",
+      "result": "PASS fail-closed: retry exec-0000000000000b45 exited 48 before launch when external p0_cd reserved NPU4-7. The task did not stop or modify that bounded cadence sweep and still did not touch NPU0-3."
     }
   ]
 }
