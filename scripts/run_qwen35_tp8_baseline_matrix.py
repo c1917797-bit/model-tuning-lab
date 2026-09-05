@@ -36,6 +36,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--role", choices=("baseline", "candidate"), default="baseline")
     parser.add_argument("--repetitions", type=int, default=3)
+    parser.add_argument("--tensor-parallel-size", type=int, default=8)
+    parser.add_argument("--data-parallel-size", type=int, default=1)
     parser.add_argument("--timeout", type=float, default=600)
     parser.add_argument("--benchmark-script", type=Path, default=Path(__file__).with_name("qwen35_query_rewrite_bench.py"))
     return parser.parse_args()
@@ -47,6 +49,10 @@ def main() -> int:
         raise FileExistsError(f"refusing to reuse output directory: {args.output_root}")
     if args.repetitions < 1:
         raise ValueError("repetitions must be positive")
+    if args.tensor_parallel_size < 1 or args.data_parallel_size < 1:
+        raise ValueError("parallel sizes must be positive")
+    if args.tensor_parallel_size * args.data_parallel_size != 8:
+        raise ValueError("this eight-device matrix requires TP * DP == 8")
     if sha256(DATASET) != DATASET_SHA256:
         raise ValueError("query_rewrite dataset SHA256 mismatch")
     with urllib.request.urlopen(args.base_url.rstrip("/") + "/health", timeout=30) as response:
@@ -55,8 +61,13 @@ def main() -> int:
 
     args.output_root.mkdir(parents=True)
     state_path = args.output_root / f"{args.role}-run.json"
+    topology = (
+        "tp8"
+        if (args.tensor_parallel_size, args.data_parallel_size) == (8, 1)
+        else f"tp{args.tensor_parallel_size}-dp{args.data_parallel_size}"
+    )
     state = {
-        "schema": f"qwen35-query-rewrite-tp8-{args.role}-run/v1",
+        "schema": f"qwen35-query-rewrite-{topology}-{args.role}-run/v1",
         "status": "running",
         "role": args.role,
         "run_id": args.run_id,
@@ -64,8 +75,8 @@ def main() -> int:
         "dataset": str(DATASET),
         "dataset_sha256": DATASET_SHA256,
         "physical_devices": list(range(8)),
-        "tensor_parallel_size": 8,
-        "data_parallel_size": 1,
+        "tensor_parallel_size": args.tensor_parallel_size,
+        "data_parallel_size": args.data_parallel_size,
         "quantization": None,
         "concurrencies": list(CONCURRENCIES),
         "repetitions": args.repetitions,
@@ -123,7 +134,9 @@ def main() -> int:
         raise
 
     summary = {
-        "schema": f"qwen35-query-rewrite-tp8-{args.role}-summary/v1",
+        "schema": f"qwen35-query-rewrite-{topology}-{args.role}-summary/v1",
+        "tensor_parallel_size": args.tensor_parallel_size,
+        "data_parallel_size": args.data_parallel_size,
         "aggregation": "median across repetitions of each cell-level value; latency uses each repetition's request-level p50",
         "cells": {},
     }

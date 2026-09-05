@@ -10,11 +10,19 @@ mtp_local_argmax_root="${MTP_LOCAL_ARGMAX_ROOT:-/cache/cch/.worktrees/exp-202609
 mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-2d08abd56466360b56738d5c48858dc32ddd1f6b}"
 
 case "$runtime_role" in
-  baseline|mtp-local-argmax) ;;
+  baseline|mtp-local-argmax|tp4-dp2|tp4-dp2-mtp-local-argmax) ;;
   *) echo "unsupported RUNTIME_ROLE: $runtime_role" >&2; exit 64 ;;
 esac
 
-if [[ "$runtime_role" == mtp-local-argmax ]]; then
+uses_mtp=false
+tensor_parallel_size=8
+data_parallel_size=1
+if [[ "$runtime_role" == tp4-dp2* ]]; then
+  tensor_parallel_size=4
+  data_parallel_size=2
+fi
+if [[ "$runtime_role" == *mtp-local-argmax ]]; then
+  uses_mtp=true
   actual_ref="$(
     git -c safe.directory="$mtp_local_argmax_root" \
       -C "$mtp_local_argmax_root" rev-parse HEAD
@@ -83,9 +91,9 @@ serve_args=(
   vllm serve /cache/austinov/Qwen3.8-27B
   --host 127.0.0.1
   --port "$port"
-  --tensor-parallel-size 8
+  --tensor-parallel-size "$tensor_parallel_size"
   --pipeline-parallel-size 1
-  --data-parallel-size 1
+  --data-parallel-size "$data_parallel_size"
   --seed 1024
   --served-model-name Qwen3-5/Qwen3.5-27B
   --max-num-seqs 16
@@ -106,7 +114,7 @@ serve_args=(
 )
 
 runtime_mount_args=()
-if [[ "$runtime_role" == mtp-local-argmax ]]; then
+if [[ "$uses_mtp" == true ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}')
   runtime_mount_args+=(
     -v "$mtp_patch:/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py:ro"

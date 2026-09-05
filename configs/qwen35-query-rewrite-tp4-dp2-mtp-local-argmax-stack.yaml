@@ -1,0 +1,29 @@
+schema: qwen35-query-rewrite-runtime/v1
+role: tp4_dp2_mtp_local_argmax_stack
+inherits:
+  - configs/qwen35-query-rewrite-tp4-dp2-vs-tp8.yaml
+  - configs/qwen35-query-rewrite-tp8-mtp-local-argmax.yaml
+runtime:
+  dtype: bfloat16
+  quantization: null
+  tensor_parallel_size: 4
+  data_parallel_size: 2
+  physical_devices: [0, 1, 2, 3, 4, 5, 6, 7]
+  speculative_config:
+    method: mtp
+    num_speculative_tokens: 1
+    use_local_argmax_reduction: true
+candidate:
+  id: tp4-dp2-mtp-local-argmax-k1
+  retained_stack: [tp4_dp2_topology]
+  added_treatment: "exact Qwen3.5 MTP k=1 with vocab-parallel local argmax"
+  retraining: false
+  quantized: false
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  requests_per_cell: 32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  generation: natural_eos
+  target_speedup: {ttft: 2.0, tpot: 2.0}

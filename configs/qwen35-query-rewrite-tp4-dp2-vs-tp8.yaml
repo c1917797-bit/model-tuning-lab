@@ -1,0 +1,34 @@
+schema: qwen35-query-rewrite-runtime/v1
+role: tp4_dp2_topology_candidate
+baseline_config: configs/qwen35-query-rewrite-tp8-user-baseline.yaml
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+runtime:
+  image: quay.io/ascend/vllm-ascend:v0.23.0
+  dtype: bfloat16
+  quantization: null
+  tensor_parallel_size: 4
+  pipeline_parallel_size: 1
+  data_parallel_size: 2
+  decode_context_parallel_size: 1
+  physical_devices: [0, 1, 2, 3, 4, 5, 6, 7]
+  speculative_config: null
+candidate:
+  id: tp4-dp2-vs-tp8
+  primary_variable_vs_baseline: "TP8/DP1 -> TP4/DP2 on the same eight physical devices"
+  rationale: "halve each tensor-parallel communication group and distribute concurrent requests across two replicas while preserving the 133K capacity contract"
+  retraining: false
+  quantized: false
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  requests_per_cell: 32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  generation: natural_eos
+  target_speedup: {ttft: 2.0, tpot: 2.0}
+correctness:
+  completed_per_cell: 32
+  errors_per_cell: 0
+  finish_reasons_per_cell: {stop: 32}
+  maximum_similarity_regression: 0.02
