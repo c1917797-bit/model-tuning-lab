@@ -1720,3 +1720,19 @@ reservations, the NPU process table and port 10010. Launch a fresh immutable
 root with source `573ea294`; require 64 normalized copies plus 128 fused
 patterns per rank before accepting correctness or latency. NPU0-3 remain
 strictly out of scope.
+
+## Guarded v9 queue
+
+The user reconfirmed that physical NPU4-7 are assigned to this optimization;
+physical NPU0-3 remain out of scope. Maintainer commit
+`a0231e958c1106a2e0a500e0991a12ff6bb2ec83` adds the tested queue entry point
+`scripts/queue_qwen35_fused_tail_v9.sh`. Its focused shell test passes. The
+queue requires both external completion markers and then four consecutive
+15-second checks showing no NPU4-7 container reservation, no NPU4-7 process and
+no listener on port 10010. It finally invokes the existing launcher, which
+repeats its own reservation and process guards.
+
+Operation `exec-0000000000000cbb` is the one active queue. Poll that operation;
+do not launch a duplicate. At the last observation, `overlap_ab` had entered
+its second configuration while neither completion marker was present, so v9
+had not created a container or used any NPU.
