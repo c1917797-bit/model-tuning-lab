@@ -44,3 +44,10 @@ Use one primary hypothesis per attribution run. A coupled algorithm/operator imp
 - Machine-readable companion: baseline-comparison.csv under the experiment evidence root; raw JSON remains immutable.
 - Add optimization rows or a separate cumulative table only after full verification.
 
+## User-provided cumulative parameter candidate
+- Preserve the 2026-09-06 user report that TP4/DP2, CPU binding, async scheduling and FULL_AND_PIECEWISE with the supplied capture-size list may have produced useful gains on this model family.
+- Evaluate it after the active TP8 MTP-depth experiment as a complete BF16/no-quantization E2E candidate on physical NPU0-7 with the same query_rewrite records and c1/c5/c8/c16 protocol.
+- Compare every result to the immutable TP8/DP1 MTP-OFF denominator; also report capacity/throughput separately because DP2 changes replica topology.
+- Attribute cautiously: MatMulAllReduce is already active in the denominator; TASK_QUEUE_ENABLE=1, HCCL_BUFFSIZE=512, OMP settings, prefix caching, mamba cache dtypes and async scheduling are retained context, not automatically new gains.
+- Source inspection of installed vLLM-Ascend 0.23.0 found no reader for VLLM_ASCEND_PTO_CHUNK_GDN. Preserve it as provenance, but do not claim activation or credit without a real reader/dispatch proof.
+- FULL_AND_PIECEWISE previously encountered startup/graph failures in related combinations. Apply readiness and graph-activation gates before traffic, preserve any failure log, and do not silently fall back.

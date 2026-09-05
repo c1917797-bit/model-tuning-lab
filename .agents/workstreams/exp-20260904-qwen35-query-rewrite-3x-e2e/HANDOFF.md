@@ -2241,3 +2241,32 @@ baseline runtime and workload setting is preserved. It currently owns
 physical NPU0-7. Do not stop or compete with it. Next, prove readiness,
 eight-worker and local-argmax activation, then complete the repeated matrix,
 correctness, speculative-acceptance, decision and artifact-hash gates.
+
+## User-provided TP4/DP2 FULL_AND_PIECEWISE candidate
+
+On 2026-09-06 the user supplied a previously explored configuration believed
+to have some benefit. Its distinguishing runtime shape is TP4/DP2 across
+physical NPU0-7, max_num_seqs 16, max_model_len 133000,
+max_num_batched_tokens 32768, prefix caching, aligned BF16 Mamba caches,
+async scheduling, CPU binding, and FULL_AND_PIECEWISE capture with the explicit
+size list through 3584. The environment also includes HCCL_BUFFSIZE=512,
+TASK_QUEUE_ENABLE=1, OMP_NUM_THREADS=1, OMP_PROC_BIND=false,
+MatMulAllReduce enabled, and Triton dump/debug settings.
+
+This is queued immediately after the active TP8 MTP k=3 experiment. It is a
+candidate, not a replacement baseline, and must run the same immutable
+query_rewrite c1/c5/c8/c16 repeated protocol against the original TP8/DP1
+MTP-OFF denominator. Report latency and capacity separately because DP2
+changes topology. MatMulAllReduce and several environment settings are already
+present in the denominator, so any gain cannot be credited to them without an
+ablation. Installed 0.23.0 source inspection found no reader for
+VLLM_ASCEND_PTO_CHUNK_GDN; retain that variable only as historical provenance
+unless runtime dispatch proves otherwise. Related FULL_AND_PIECEWISE attempts
+have previously failed graph/startup gates, so this retry must fail closed and
+preserve activation or failure evidence.
+
+The currently active immutable k=3 evidence root is
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k3-v2-20260905T215000Z`.
+It uses the already-ready TP8 service on NPU0-7 and operation
+`exec-00000000000004b7`; do not edit its executing scripts or launch a
+competing service.

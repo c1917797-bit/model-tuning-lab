@@ -77,3 +77,14 @@ Updated: 2026-09-05
   `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k1-20260905T192433Z`.
 - MTP source checkpoint: `/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax`, commit `37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd`.
 - Rollback is the non-speculative TP8 baseline. Do not restart paused external workloads unless the user requests it.
+
+## Parameter provenance and attribution
+
+- A user-reported configuration is valuable hypothesis evidence, but it must
+  remain a candidate until reproduced on the frozen workload.
+- TP4/DP2 changes both per-request execution and aggregate capacity; always
+  report latency and throughput separately against TP8/DP1.
+- Do not credit environment variables that are already active in the baseline
+  or have no installed-source reader. Require actual runtime activation.
+- Never edit a shell script while an existing shell process may still be
+  reading it. Create a versioned successor or wait for the process to finish.
