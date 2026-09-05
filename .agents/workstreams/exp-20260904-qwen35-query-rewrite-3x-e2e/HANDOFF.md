@@ -2042,3 +2042,64 @@ Do not relaunch partial fused-tail or widen its final dependency chain without
 a new whole-model economic argument. Select the next TPOT treatment from the
 retained profile's dominant collective/matmul cost and the operator assets
 under `/cache/cch`, use only physical NPU4-7, and preserve NPU0-3.
+
+## FlashComm1 GDN shape repair and terminal v3 decision
+
+FlashComm1 was revisited because the retained profile attributes most summed
+kernel duration to communication. The work was isolated in
+/cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape.
+Three DCO commits make the implementation testable on vLLM-Ascend 0.23.0:
+
+- 68683e2b7c0eb47bbb49685ed079b49003a13189 sizes the GDN output copy for
+  a sequence-parallel destination.
+- faed93717a61003cc2daf0abdbffdd61981a4bac makes SequenceRowParallelOp
+  take precedence over MMAR when FlashComm1 is enabled.
+- dc7ebdd55421d543e2e87398c2d601742d4a8336 keeps dense FlashComm1 enabled
+  for every non-empty batch, avoiding profile/capture/replay shape changes.
+
+The exact release image passed all 30 focused CPU tests. Real v1
+exec-0000000000000367 exposed the selector-precedence bug before traffic.
+Real v2 exec-0000000000000378 then exposed the num_tokens > 1000 threshold
+mismatch during 16-token graph capture. Neither attempt produced performance
+evidence.
+
+Real v3 exec-000000000000039d used BF16 TP4/DP1 on physical NPU4-7 only.
+The log proves SequenceRowParallelOp for self-attention o_proj, GDN out_proj
+and MLP down_proj, and FULL decode graph capture completed for 16/12/8/4
+tokens. All 128 query_rewrite requests completed with zero errors and natural
+stop:
+
+| Concurrency | Candidate TTFT/TPOT ms | Versus original | Versus retained |
+|---:|---:|---:|---:|
+| 1 | 536.273185 / 36.193100 | 1.731074x / 1.062960x | 26.49% / 25.52% slower |
+| 5 | 614.038010 / 44.613011 | 1.778824x / 1.206622x | 25.20% / 17.48% slower |
+| 8 | 611.372915 / 50.434046 | 1.770297x / 1.340698x | 24.14% / 14.24% slower |
+| 16 | 610.802965 / 59.312175 | 3.397283x / 1.362479x | 31.83% faster / 14.23% slower |
+
+The terminal maintainer decision is reject-performance. The c16 TTFT gain is
+real but cannot compensate for TPOT regression in every cell and TTFT
+regression in c1/c5/c8. FlashComm1 therefore remains disabled in the retained
+stack. The analyzer output hold-exact-hash-drift is not a promotion decision:
+cross-run hashes already drift in the fixed-runtime control, while the
+all-cell performance failure is independently decisive.
+
+Immutable v3 root:
+
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm1-gdn-shape-mmar-prefetch-0p1-v3-20260905T172500Z
+
+Key SHA256 values are candidate-run
+948f864e4719b545371c5ae84686a798de07970ba96cf9d889089cce6d2b935b,
+decision
+f53d5ec404cd5c979a5a658ac2ad1b053781657fd0d631e4a3e4c34a8e1159df,
+service log
+e15c3fdaf381aa766628738486613a87557af874565015127905cf92e001fe38,
+and manifest
+6185e523604f88c282fa59d1b84491a2dcaf839b62d1dbe8b06985fcff75193d.
+The exact v3 container exited 0, physical NPU4-7 are released, and NPU0-3
+were untouched.
+
+The retained result remains TTFT 2.1896x/2.2271x/2.1976x/2.3161x and TPOT
+1.3343x/1.4175x/1.5317x/1.5564x versus original at c1/c5/c8/c16. Do not
+relaunch FlashComm1 v1-v3 unchanged. A future sequence-parallel attempt must
+first explain and remove the measured TPOT tax, then pass all four frozen
+cells before it can replace the retained stack.

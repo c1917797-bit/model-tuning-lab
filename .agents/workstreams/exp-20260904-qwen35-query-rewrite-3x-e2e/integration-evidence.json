@@ -312,6 +312,14 @@
     {
       "gate": "mmar-add-rmsnorm-v17-partial-e2e",
       "result": "REJECT performance: exec-0000000000000327 passed the deliberate partial activation threshold at Normalized 48/Fused 112 on every rank and completed 128/128 zero-error requests on physical NPU4-7, but TTFT regressed 3.86%-10.39% and TPOT regressed 4.57%-7.78% versus the retained stack in every cell. The exact container exited 0, NPU4-7 are idle, and NPU0-3 were untouched."
+    },
+    {
+      "gate": "flashcomm1-gdn-shape-v1-v2",
+      "result": "REJECT safely before traffic: exec-0000000000000367 exposed MMAR selector precedence returning a full-token result to a sequence-parallel GDN buffer; after that fix, exec-0000000000000378 exposed dense FlashComm1's num_tokens>1000 threshold changing the compiled graph shape at 16-token capture. No benchmark request ran in either attempt."
+    },
+    {
+      "gate": "flashcomm1-gdn-shape-v3-e2e",
+      "result": "REJECT performance after valid integration: source dc7ebdd passed 30 focused exact-image tests, all three row-parallel paths selected SequenceRowParallelOp, all FULL decode capture sizes succeeded, and exec-000000000000039d completed 128/128 zero-error natural-stop requests on physical NPU4-7. Versus retained, TPOT regressed 14.23%-25.52% in all cells; TTFT regressed 24.14%-26.49% at c1/c5/c8 despite improving 31.83% at c16. The exact container exited 0 and NPU0-3 were untouched."
     }
   ]
 }

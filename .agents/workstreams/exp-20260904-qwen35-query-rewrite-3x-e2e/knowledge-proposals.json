@@ -193,6 +193,18 @@
       "status": "accepted-local",
       "lesson": "Trigger: a no-retraining layer-removal method has a highly stable importance ranking and improves latency. Action: still compare with an unpruned same-runtime control using business-quality metrics and stop the ladder at the first semantic regression. Destination: inference-time algorithm promotion guidance.",
       "evidence": "Qwen3.5 remove8 used a BI ranking with minimum Spearman 0.9989926739926738 and improved retained TPOT in all four cells, but c1/c8/c16 each lost 0.03125 mean normalized character similarity versus control, so the 0.02 gate held it and prevented remove16/remove20."
+    },
+    {
+      "id": "sequence-parallel-graph-shape-must-be-batch-invariant",
+      "status": "accepted-local",
+      "lesson": "Trigger: sequence parallelism is enabled for a compiled dense model. Action: keep the communication mode and output shape invariant across profiling, graph capture and replay; a token-count threshold inside forward context can compile a local-shard destination and later feed it a full-token result. Destination: future vLLM-Ascend FlashComm1 integration checklist.",
+      "evidence": "FlashComm1 v2 compiled with num_tokens>1000 enabled but disabled the mode at 16-token capture, producing a 16-row source for a 4-row TP-local destination. Source dc7ebdd made enablement invariant for non-empty dense batches; 30 focused tests and every 16/12/8/4 real capture passed."
+    },
+    {
+      "id": "communication-feature-activation-is-not-performance-proof",
+      "status": "accepted-local",
+      "lesson": "Trigger: a communication optimization finally activates and passes graph capture after source repairs. Action: run the frozen E2E matrix and compare against both original and retained stacks; reject if any required latency metric regresses, even when one high-concurrency cell improves dramatically. Destination: Ascend inference optimization promotion guidance.",
+      "evidence": "FlashComm1 v3 proved SequenceRowParallelOp activation and completed 128/128 requests. It improved c16 TTFT 31.83% versus retained, but TPOT regressed 14.23%-25.52% in every cell and TTFT regressed 24.14%-26.49% at c1/c5/c8, so the retained stack was preserved."
     }
   ]
 }

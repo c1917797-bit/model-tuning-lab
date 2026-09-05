@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: retained_stack_unchanged_v17_fused_tail_rejected
-decision: reject_v17_partial_fused_tail_retain_current_stack
+status: retained_stack_unchanged_flashcomm1_v3_rejected
+decision: reject_flashcomm1_v3_retain_current_stack
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -1238,3 +1238,46 @@ mmar_add_rmsnorm_decode_candidate:
     measurement_boundary: "6738323.28 us is a sum across possibly overlapping streams and must not be used as wall time or added to TTFT/TPOT"
     hashes: {op_summary_sha256: 3ead56d434d43e5fe4e94cf29494de6231c544463938812b89c1c9c1d166c744, hotspots_sha256: c8d81443548d021de0e607b123c4eec6ef4bf45d5bdc951736ca7f6e6d4ffbf7, sha256sums_sha256: 04028b1bc91e596675448a5df96bfd701f95ef9de254c6a1ded2720b9af26f2b}
   promotion_gate: "graph pass must match, service correctness must pass, then all frozen c1/c5/c8/c16 cells must improve versus the immutable original and retained stack"
+flashcomm1_gdn_shape_candidate:
+  scope: "BF16 non-quantized TP4/DP1 candidate stacked on retained MMAR, NZ1, dense gate/up prefetch-0.1, async scheduling and FULL_DECODE_ONLY; physical NPU4-7 only"
+  source_worktree: /cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape
+  source_commits:
+    gdn_output_copy: 68683e2b7c0eb47bbb49685ed079b49003a13189
+    selector_priority: faed93717a61003cc2daf0abdbffdd61981a4bac
+    stable_dense_graph_shape: dc7ebdd55421d543e2e87398c2d601742d4a8336
+  focused_tests: "30 passed in the exact vLLM-Ascend 0.23.0 image with TORCH_DEVICE_BACKEND_AUTOLOAD=0"
+  attempts:
+    v1:
+      operation_id: exec-0000000000000367
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm1-gdn-shape-mmar-prefetch-0p1-v1-20260905T170000Z
+      result: "REJECT before traffic: MMAR selector precedence still returned a full-token tensor to the FlashComm1-local GDN output buffer"
+    v2:
+      operation_id: exec-0000000000000378
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm1-gdn-shape-mmar-prefetch-0p1-v2-20260905T171500Z
+      result: "REJECT before traffic: large-profile compilation enabled dense FlashComm1, but the num_tokens>1000 runtime threshold disabled it during 16-token graph capture and wrote 16 rows into a 4-row sequence-parallel buffer"
+    v3:
+      operation_id: exec-000000000000039d
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm1-gdn-shape-mmar-prefetch-0p1-v3-20260905T172500Z
+      activation: "PASS: self-attention o_proj, GDN out_proj and MLP down_proj selected SequenceRowParallelOp; FULL decode graph capture passed for 16/12/8/4 tokens"
+      requests: {c1: "32/32", c5: "32/32", c8: "32/32", c16: "32/32"}
+      errors: 0
+      aggregate_quality: "all cells raw exact 5, normalized whitespace exact 6, normalized character similarity mean 0.1875; exact response hashes remain a cross-run diagnostic"
+      candidate_p50_ms:
+        c1: {ttft: 536.273185, tpot: 36.193100}
+        c5: {ttft: 614.038010, tpot: 44.613011}
+        c8: {ttft: 611.372915, tpot: 50.434046}
+        c16: {ttft: 610.802965, tpot: 59.312175}
+      versus_fixed_original_speedup:
+        c1: {ttft: 1.731074, tpot: 1.062960}
+        c5: {ttft: 1.778824, tpot: 1.206622}
+        c8: {ttft: 1.770297, tpot: 1.340698}
+        c16: {ttft: 3.397283, tpot: 1.362479}
+      change_vs_retained_percent:
+        c1: {ttft: 26.49, tpot: 25.52}
+        c5: {ttft: 25.20, tpot: 17.48}
+        c8: {ttft: 24.14, tpot: 14.24}
+        c16: {ttft: -31.83, tpot: 14.23}
+      decision: "reject-performance: c16 TTFT improves versus retained, but TPOT regresses in all four cells and TTFT regresses in c1/c5/c8; keep FlashComm1 off in the retained stack"
+      hashes: {candidate_run_sha256: 948f864e4719b545371c5ae84686a798de07970ba96cf9d889089cce6d2b935b, decision_sha256: f53d5ec404cd5c979a5a658ac2ad1b053781657fd0d631e4a3e4c34a8e1159df, service_log_sha256: e15c3fdaf381aa766628738486613a87557af874565015127905cf92e001fe38, manifest_sha256: 6185e523604f88c282fa59d1b84491a2dcaf839b62d1dbe8b06985fcff75193d}
+      resource_release: "exact v3 container exited 0; physical NPU4-7 released; NPU0-3 untouched"
+  handoff: "Retain BF16 TP4 MMAR plus NZ1 and dense gate/up prefetch-0.1 with FlashComm1 disabled. Do not relaunch v1-v3 unchanged. Reuse the source commits only if a future implementation removes the sequence-parallel latency regression and passes every frozen cell."
