@@ -287,6 +287,28 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-tp2-dp2-mmar-prefetch-text-only-bt16384-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384 \
+  >"$tmp/tp2-dp2-mmar-prefetch-text-only-bt16384-fresh.out" \
+  2>"$tmp/tp2-dp2-mmar-prefetch-text-only-bt16384-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '--tensor-parallel-size 2' "$docker_log"
+grep -q -- '--data-parallel-size 2' "$docker_log"
+grep -q -- '--max-model-len 133000' "$docker_log"
+grep -q -- '--max-num-batched-tokens 16384' "$docker_log"
+grep -q -- '--limit-mm-per-prompt {"image":0,"video":0}' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"weight_prefetch_config":{"enabled":true' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+grep -q -- 'TASK_QUEUE_ENABLE=1' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "TP2 DP2 batched-token candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-ngram-gpu-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" ngram-gpu \
   >"$tmp/ngram-gpu-fresh.out" 2>"$tmp/ngram-gpu-fresh.err"

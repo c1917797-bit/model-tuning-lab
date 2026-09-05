@@ -50,6 +50,9 @@ case "$candidate_mode" in
   tp2-dp2-mmar-on-text-only)
     default_config="$repo_root/configs/qwen35-query-rewrite-tp2-dp2-mmar-on-text-only-candidate.yaml"
     ;;
+  tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384)
+    default_config="$repo_root/configs/qwen35-query-rewrite-tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384-candidate.yaml"
+    ;;
   selective-ffn-nz)
     default_config="$repo_root/configs/qwen35-query-rewrite-selective-ffn-nz-candidate.yaml"
     ;;
