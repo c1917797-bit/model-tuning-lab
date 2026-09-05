@@ -71,9 +71,17 @@ if [[ "$actual_source_commit" != "$source_commit" ]]; then
   echo "ShortGPT source must be $source_commit, got $actual_source_commit" >&2
   exit 45
 fi
+if [[ -n "$(git -c safe.directory="$source_root" -C "$source_root" status --porcelain --untracked-files=no)" ]]; then
+  echo "ShortGPT source has tracked modifications; refusing unpinned service" >&2
+  exit 45
+fi
 actual_fused_commit="$(git -c safe.directory="$fused_root" -C "$fused_root" rev-parse HEAD)"
 if [[ "$actual_fused_commit" != "$fused_source_commit" ]]; then
   echo "fused build source must be $fused_source_commit, got $actual_fused_commit" >&2
+  exit 45
+fi
+if [[ -n "$(git -c safe.directory="$fused_root" -C "$fused_root" status --porcelain --untracked-files=no)" ]]; then
+  echo "fused build source has tracked modifications; refusing unpinned service" >&2
   exit 45
 fi
 if [[ "$(sha256sum "$custom_extension" | awk '{print $1}')" != "$custom_extension_sha256" ]]; then

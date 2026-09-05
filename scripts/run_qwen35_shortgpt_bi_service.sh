@@ -38,6 +38,10 @@ if [[ "$actual_source_commit" != "$source_commit" ]]; then
   echo "ShortGPT source must be $source_commit, got $actual_source_commit" >&2
   exit 45
 fi
+if [[ -n "$(git -c safe.directory="$source_root" -C "$source_root" status --porcelain --untracked-files=no)" ]]; then
+  echo "ShortGPT source has tracked modifications; refusing unpinned diagnostic" >&2
+  exit 45
+fi
 actual_model_hash="$(sha256sum "$model_root/config.json" | awk '{print $1}')"
 if [[ "$actual_model_hash" != "$model_config_sha256" ]]; then
   echo "model config hash mismatch: $actual_model_hash" >&2
