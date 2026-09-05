@@ -229,6 +229,25 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-mmar-on-weight-prefetch-gateup-0p1-taskqueue2-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  mmar-on-weight-prefetch-gateup-0p1-taskqueue2 \
+  >"$tmp/mmar-on-weight-prefetch-gateup-0p1-taskqueue2-fresh.out" \
+  2>"$tmp/mmar-on-weight-prefetch-gateup-0p1-taskqueue2-fresh.err"
+grep -q -- '--async-scheduling' "$docker_log"
+grep -q -- '--tensor-parallel-size 4' "$docker_log"
+grep -q -- '--data-parallel-size 1' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"weight_prefetch_config":{"enabled":true' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+grep -q -- 'TASK_QUEUE_ENABLE=2' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "TASK_QUEUE_ENABLE=2 candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-tp2-dp2-mmar-on-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" tp2-dp2-mmar-on \
   >"$tmp/tp2-dp2-mmar-on-fresh.out" 2>"$tmp/tp2-dp2-mmar-on-fresh.err"

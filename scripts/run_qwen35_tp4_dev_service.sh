@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -46,6 +46,7 @@ weight_nz_env=1
 matmul_allreduce_env=1
 selective_ffn_nz_env=0
 hccl_op_expansion_mode=""
+task_queue_enable=1
 if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
   flashcomm1_env=1
 fi
@@ -74,6 +75,9 @@ if [[ "$mode" == selective-ffn-nz ]]; then
 fi
 if [[ "$mode" == mmar-on-hccl-aiv ]]; then
   hccl_op_expansion_mode=AIV
+fi
+if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-taskqueue2 ]]; then
+  task_queue_enable=2
 fi
 
 if docker container inspect "$container_name" >/dev/null 2>&1; then
@@ -130,6 +134,7 @@ serve_args=(
     if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-static-kernel ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"enable_npugraph_ex":true,"enable_static_kernel":true}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ||
+          "$mode" == mmar-on-weight-prefetch-gateup-0p1-taskqueue2 ||
           "$mode" == tp2-pp2-mmar-on-weight-prefetch-gateup-0p1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup ]]; then
@@ -224,7 +229,7 @@ docker_args=(
   -e HCCL_BUFFSIZE=512
   -e OMP_PROC_BIND=false
   -e OMP_NUM_THREADS=1
-  -e TASK_QUEUE_ENABLE=1
+  -e TASK_QUEUE_ENABLE="$task_queue_enable"
   -e TRITON_KERNEL_DUMP=1
   -e TRITON_DUMP_DIR=/cache/efim/triton_dump
   -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE="$matmul_allreduce_env"

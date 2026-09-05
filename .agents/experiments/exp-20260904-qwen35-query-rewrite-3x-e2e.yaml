@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_plus_gateup_prefetch_0p1_retained_tpot_target_open
-decision: retain_matmulallreduce_and_subcap_gateup_prefetch_then_iterate_tpot
+status: taskqueue2_candidate_ready_tpot_target_open
+decision: test_taskqueue2_on_retained_matmulallreduce_and_subcap_gateup_prefetch
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -806,3 +806,16 @@ static_kernel_candidate:
       sha256sums_sha256: d7bca4880afdce8d77075a5c0b60ffe60f8eb8125a9f15958e6f51fc685550bd
   decision: "reject static kernel from the cumulative production stack: TPOT improves 5.47% geometrically, but c16 TTFT regresses 501.83% versus retained and loses the immutable-original TTFT target; retain TP4 MMAR plus gate/up prefetch ratio 0.1"
   recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2865-2866 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
+taskqueue2_candidate:
+  source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-taskqueue2-candidate.yaml
+  launcher_mode: mmar-on-weight-prefetch-gateup-0p1-taskqueue2
+  status: ready
+  primary_variable_vs_retained: "TASK_QUEUE_ENABLE: 1 -> 2"
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; dense gate/up prefetch ratio 0.1; HCCL_BUFFSIZE=512; no quantization"
+  evidence_basis:
+    profile: "MMAR-enabled rank-0 capture is dominated by the fused communication path; attention and GDN decode are not the next priority"
+    documentation: "vLLM-Ascend 0.23.0 performance tuning guide recommends TASK_QUEUE_ENABLE=2 to optimize operator delivery queue"
+    risk: "the documented tradeoff is a higher memory peak; require clean NPU ownership, startup, HBM, HTTP health and natural-stop smoke gates"
+  isolation_validation: "candidate runtime YAML differs from the retained runtime only in TASK_QUEUE_ENABLE; shell guards and launch mock passed"
+  execution_policy: "physical NPU4-7 only; compare all four quick32 cells to both the immutable original and the retained cumulative stack"
+  rollback: "select launcher mode mmar-on-weight-prefetch-gateup-0p1, which restores TASK_QUEUE_ENABLE=1"

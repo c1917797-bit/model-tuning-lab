@@ -1127,3 +1127,26 @@ SHA256SUMS SHA256 is
 `d7bca4880afdce8d77075a5c0b60ffe60f8eb8125a9f15958e6f51fc685550bd`.
 The exact candidate container exited. NPU4-7 are idle at 2865-2866 MiB with
 no running processes, and external NPU0-3 PIDs 1031654-1031657 are unchanged.
+
+## TASK_QUEUE_ENABLE=2 cumulative candidate ready
+
+The retained service log proves that enhanced NPU graph compilation was
+already active by default with `enable_npugraph_ex=true` and
+`enable_static_kernel=false`. Therefore do not run a duplicate explicit
+npugraph-ex candidate: the rejected static experiment changed only static
+kernel behavior.
+
+The next bounded parameter treatment keeps the retained TP4 BF16 MMAR plus
+dense gate/up-prefetch-0.1 stack and changes only `TASK_QUEUE_ENABLE` from
+1 to 2. The exact vLLM-Ascend 0.23.0 performance-tuning guide recommends level
+2 to optimize the operator-delivery queue, which is applicable to the current
+communication-dominated decode profile. The documented risk is higher memory
+peak, so startup, HBM, health and natural-stop smoke are fail-closed gates.
+
+Launcher mode is
+`mmar-on-weight-prefetch-gateup-0p1-taskqueue2`; manifest is
+`configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-taskqueue2-candidate.yaml`.
+Shell syntax, launch mocks and a structural comparison prove that the runtime
+diff is only `TASK_QUEUE_ENABLE: 1 -> 2`. It uses no quantization and is
+restricted to physical NPU4-7. Roll back by selecting the retained
+`mmar-on-weight-prefetch-gateup-0p1` mode.
