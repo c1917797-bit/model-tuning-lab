@@ -20,7 +20,7 @@
     },
     {
       "gate": "block-influence-diagnostic-launcher",
-      "result": "PASS static: the pinned eager TP4 launcher maps only physical NPU4-7, refuses container reservations, NPU processes, ports, reused output paths, source drift, and model-config drift, quarantines startup records, and never enables quantization. Real NPU execution is pending."
+      "result": "PASS static and live conflict gate: the pinned eager TP4 launcher maps only physical NPU4-7, refuses container reservations, NPU processes, ports, reused output paths, source drift, and model-config drift, quarantines startup records, and never enables quantization. A real probe detected /p0_mc and exited 48 before directory or container creation. NPU inference remains pending."
     },
     {
       "gate": "npu-scope",

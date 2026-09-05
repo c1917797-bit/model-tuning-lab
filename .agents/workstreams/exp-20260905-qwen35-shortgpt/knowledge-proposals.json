@@ -19,6 +19,12 @@
       "status": "proposed",
       "lesson": "A prefill-only ShortGPT shortcut cannot improve decode TPOT. For this goal, the selected layer set must be skipped in both prefill and decode while preserving the decoder's deferred residual representation.",
       "evidence": "Source implementation returns the unchanged hidden-state/residual pair for opted-in layers; target-device correctness and E2E evidence are pending."
+    },
+    {
+      "id": "docker-inspect-flags-before-object-on-chicaihong01",
+      "status": "accepted-local",
+      "lesson": "Place Docker inspect formatting flags before the container id in resource guards. On this host, putting --format after the id is parsed as another object and can turn a safe reservation check into an early generic failure.",
+      "evidence": "The first live conflict probe exited 1 with four 'No such object' errors; the corrected order detected /p0_mc and exited 48 without creating a directory or container."
     }
   ]
 }

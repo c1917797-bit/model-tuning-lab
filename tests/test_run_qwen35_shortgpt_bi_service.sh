@@ -17,7 +17,8 @@ if [[ "${1:-}" == ps && "${2:-}" == -q ]]; then
   printf '%s' "${MOCK_DOCKER_RUNNING_IDS:-}"
   exit 0
 fi
-if [[ "${1:-}" == inspect && "${2:-}" == reservation ]]; then
+if [[ "${1:-}" == inspect && "${2:-}" == --format &&
+      "${*: -1}" == reservation ]]; then
   echo '/foreign /dev/davinci4 /dev/davinci5 /dev/davinci6 /dev/davinci7'
   exit 0
 fi

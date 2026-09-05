@@ -50,7 +50,7 @@ fi
 
 container_reservations="$(
   for running_id in $("$docker_bin" ps -q); do
-    "$docker_bin" inspect "$running_id" --format +      '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}'
+    "$docker_bin" inspect --format '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}' "$running_id"
   done | awk -v ignored_csv="$reservation_ignore_names" '
     BEGIN {
       split(ignored_csv, ignored_names, ",")
@@ -153,4 +153,4 @@ serve_args=(
   --no-async-scheduling
 )
 
-"$docker_bin" "${docker_args[@]}" +  quay.io/ascend/vllm-ascend:v0.23.0 "${serve_args[@]}"
+"$docker_bin" "${docker_args[@]}" quay.io/ascend/vllm-ascend:v0.23.0 "${serve_args[@]}"

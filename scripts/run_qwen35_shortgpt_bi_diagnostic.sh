@@ -44,7 +44,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-QWEN35_BI_DIR="$bi_dir" CONTAINER_NAME="$container_name" PORT="$port" +  "$service_launcher" >"$output_root/container-id.txt"
+QWEN35_BI_DIR="$bi_dir" CONTAINER_NAME="$container_name" PORT="$port" "$service_launcher" >"$output_root/container-id.txt"
 started=1
 
 ready=0
@@ -76,7 +76,7 @@ fi
 shopt -u nullglob
 
 set +e
-python3 "$collector" +  --base-url "http://127.0.0.1:$port" +  --model "$model_name" +  --dataset "$dataset" +  --dataset-sha256 "$dataset_sha256" +  --limit 32 +  --seed 1024 +  --source-commit "$source_commit" +  --output "$output_root/collection.json"
+python3 "$collector" --base-url "http://127.0.0.1:$port" --model "$model_name" --dataset "$dataset" --dataset-sha256 "$dataset_sha256" --limit 32 --seed 1024 --source-commit "$source_commit" --output "$output_root/collection.json"
 collect_rc=$?
 set -e
 
@@ -85,7 +85,7 @@ docker rm -f "$container_name" >/dev/null
 started=0
 
 set +e
-python3 "$analyzer" "$bi_dir" +  --output "$output_root/analysis.json" +  --expected-layers 64 +  --stability-splits 4 +  --candidate-sizes 8,16,20 +  --min-observations-per-layer 8 +  --min-spearman 0.80
+python3 "$analyzer" "$bi_dir" --output "$output_root/analysis.json" --expected-layers 64 --stability-splits 4 --candidate-sizes 8,16,20 --min-observations-per-layer 8 --min-spearman 0.80
 analysis_rc=$?
 set -e
 
