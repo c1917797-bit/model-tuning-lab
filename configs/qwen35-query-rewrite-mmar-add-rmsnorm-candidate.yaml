@@ -1,12 +1,12 @@
 schema: qwen35-query-rewrite-candidate/v1
 name: mmar-add-rmsnorm-decode
-status: microbenchmark-correctness-rerun-pending
+status: e2e-integration-ready
 model: Qwen3.5-27B
 runtime: vLLM-Ascend 0.23.0
 hardware: Ascend 910B4 TP4
 quantized: false
 retained_stack:
-  launcher_mode: mmar-on-weight-prefetch-gateup-0p1
+  launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
   precision: bfloat16
   tensor_parallel_size: 4
   data_parallel_size: 1
@@ -23,7 +23,7 @@ treatment:
 source:
   worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
   branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-  commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
+  commit: f0f5688daf68a575063c17b1e48de6ed2febe98f
   extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
 first_real_run:
   evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z
@@ -34,11 +34,18 @@ first_real_run:
   result_sha256: 04f0da791e526a943f8293be2df2549591cc50e4fb12989f9598b79231e85388
   sha256sums_sha256: d0e3a600ec35c2b892d434ae1c3df8fddcbb09d27385513df683de13d806ad42
 promotion_gate:
-  - repeat with model-like std=0.1 inputs after physical NPU4-7 are unreserved
-  - both add and normalized outputs pass the declared BF16 tolerance in every cell
-  - geometric mean speedup is at least 1.02 and no cell regresses
-  - only then implement the default-off model graph integration and run the frozen c1/c5/c8/c16 E2E matrix
+  - default-off model graph integration matches at least one decode pattern
+  - service correctness smoke passes before performance evidence is accepted
+  - run the frozen c1/c5/c8/c16 E2E matrix against the immutable original baseline
+corrected_real_run:
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-corrected-meta-20260905T054401Z
+  correctness_pass: true
+  geomean_speedup: 1.851720752074333
+  minimum_speedup: 1.706553873896168
+  decision: promote-fused-tail-to-e2e
+  result_sha256: 0dfe46d44c907e513e8fa2a0a6bc48e2c26c39fc981bfe30cc5f2fa29cb2d8ac
+  sha256sums_sha256: b26ff6be069bb74c9eb278cdc9fa39ad5298ec7668a4ebfb8ea90c392573062e
 resource_state:
-  blocked_by_external_container: p0_aff
-  observation: "p0_aff started after the first completed run and explicitly reserves /dev/davinci4..7"
-  safety: "do not stop or modify p0_aff; NPU0-3 also remain occupied"
+  assigned_devices: "physical NPU4-7"
+  observation: "NPU4-7 are idle after p0_aff completed; two verified idle monitor/admin containers only mount device files"
+  safety: "exact-name monitor allowlist plus npu-smi process guard; never use NPU0-3"
