@@ -1040,7 +1040,7 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
+    source_commit: 081953bd1ee1e897f03fb31c6223bb00608773fd
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
