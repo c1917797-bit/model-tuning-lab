@@ -10,7 +10,7 @@
 
 ## Scope and resource boundary
 
-- Model: dense hybrid Qwen3.5-27B at `/softwarePlatform/c00879303/Qwen3-5/Qwen3.5-27B/`.
+- Model: dense hybrid Qwen3.5-27B at the current-host path `/cache/austinov/Qwen3.8-27B`. The directory name is historical; `config.json` identifies `qwen3_5`, 64 layers, hidden size 5120, SHA256 `191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab`. The previously supplied `/softwarePlatform/c00879303/Qwen3-5/Qwen3.5-27B/` path is absent on this host.
 - Runtime: vLLM/vLLM-Ascend 0.23.0, BF16, TP4/DP1, no quantization.
 - Workload: real `/cache/cch/query_rewrite.jsonl`; the former `/home/mtuser/cch` location is obsolete.
 - Frozen concurrency matrix: 1, 5, 8, 16.
@@ -36,7 +36,7 @@ ShortGPT is the next inference-time algorithm candidate because it removes low-i
 
 The source worktree is `/cache/cch/.worktrees/exp-20260905-qwen35-shortgpt-vllm`, branch `work/exp-20260905-qwen35-shortgpt`, local commit `18c4d061529d226dd0d699d9e3e1df16dadf29d7`. It adds default-off Block Influence recording and default-off layer skipping. Static validation passed. Push to `vllm-project/vllm-ascend` is blocked by GitHub 403 for the current account; do not retry unchanged. The local commit is therefore an explicit dependency until a writable fork or maintainer remote is supplied.
 
-Host-side tools are `scripts/collect_qwen35_shortgpt_bi.py` and `scripts/analyze_qwen35_shortgpt_bi.py`. The collector sends one-token completions sequentially and writes only hashes, counts, status, and timing. The analyzer validates all 64 layers, computes token-weighted influence, ranks globally and by layer type, checks split-ranking Spearman stability, and emits the predeclared 8/16/20-layer planning sets only when the evidence is stable. Launch the diagnostic service in eager mode, point BI output at a fresh task-owned directory, and clear only that directory after readiness so startup probes cannot enter the ranking.
+Host-side tools are `scripts/collect_qwen35_shortgpt_bi.py` and `scripts/analyze_qwen35_shortgpt_bi.py`. The collector sends one-token completions sequentially and writes only hashes, counts, status, and timing. The analyzer validates all 64 layers, computes token-weighted influence, ranks globally and by layer type, checks split-ranking Spearman stability, and emits the predeclared 8/16/20-layer planning sets only when the evidence is stable. `scripts/run_qwen35_shortgpt_bi_service.sh` launches the pinned eager TP4 diagnostic and fails closed on any NPU4-7 reservation/process or port conflict. `scripts/run_qwen35_shortgpt_bi_diagnostic.sh` waits for readiness, quarantines startup observations, collects 32 real prompts from dataset SHA256 `a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e`, stops only its exact container, analyzes the ranking, and hashes the artifacts.
 
 ## Execution loop
 

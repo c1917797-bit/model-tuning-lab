@@ -11,8 +11,8 @@ git:
   stage_commits: []
 environment:
   source_commit: 18c4d061529d226dd0d699d9e3e1df16dadf29d7
-  model_revision: /softwarePlatform/c00879303/Qwen3-5/Qwen3.5-27B/
-  tokenizer_revision: /softwarePlatform/c00879303/Qwen3-5/Qwen3.5-27B/
+  model_revision: "/cache/austinov/Qwen3.8-27B (config model_type qwen3_5; config SHA256 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab)"
+  tokenizer_revision: /cache/austinov/Qwen3.8-27B
   dtype_or_quantization: "bfloat16; quantization forbidden"
   framework_versions:
     vllm: "0.23.0 family; confirm exact image package before run"
@@ -49,7 +49,7 @@ protocol:
     - "Block Influence samples are missing, non-finite, or ranking is not stable enough to freeze."
   warmup: "Use the existing frozen query_rewrite harness protocol; record exact warmup in run metadata."
   repetitions: 32
-  command: "Start an eager diagnostic service with a fresh VLLM_ASCEND_QWEN35_BI_DIR, clear only that task-owned directory after readiness, run scripts/collect_qwen35_shortgpt_bi.py, then run scripts/analyze_qwen35_shortgpt_bi.py; exact launcher remains pending NPU4-7 availability."
+  command: "scripts/run_qwen35_shortgpt_bi_diagnostic.sh (only after fused-tail v9 leaves the final TPOT goal open and NPU4-7 are idle)"
 results:
   baseline:
     immutable_original_p50_ms:
@@ -67,7 +67,7 @@ results:
   steady: {}
   boundary: {}
   lifecycle:
-    phase: bi_host_tools_ready
+    phase: bi_diagnostic_ready
     dependency: "guarded fused-tail v9 queue exec-0000000000000004"
   resources:
     allowed: "physical NPU4-7 when idle"

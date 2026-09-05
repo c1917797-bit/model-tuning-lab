@@ -37,12 +37,15 @@
     "./scripts/validate-mst.sh",
     "python3 -m py_compile scripts/collect_qwen35_shortgpt_bi.py scripts/analyze_qwen35_shortgpt_bi.py tests/test_qwen35_shortgpt_tools.py",
     "python3 tests/test_qwen35_shortgpt_tools.py",
+    "bash -n scripts/run_qwen35_shortgpt_bi_service.sh",
+    "bash -n scripts/run_qwen35_shortgpt_bi_diagnostic.sh",
+    "bash tests/test_run_qwen35_shortgpt_bi_service.sh",
     "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/task.json",
     "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json",
     "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json",
     "python3 -c 'import yaml,sys; yaml.safe_load(sys.stdin)' < .agents/experiments/exp-20260905-qwen35-shortgpt.yaml",
     "git diff --check"
   ],
-  "executionState": "bi-host-tools-ready-awaiting-v9-and-npu4-7-idle",
+  "executionState": "bi-diagnostic-ready-awaiting-v9-and-npu4-7-idle",
   "integrationState": "source-probe-local-commit-default-off-upstream-push-blocked"
 }
