@@ -21,6 +21,7 @@ Updated: 2026-09-05
 | Selective NZ mode | Demonstrated that layout changes can help dense FFN, but compatibility must be scoped per linear path | Reuse the selective approach, not blanket NZ |
 | Exact-container and device guards | Prevented competing workloads and made cleanup/recovery auditable | Mandatory for every run |
 | Three-repeat aggregation | Exposed cold-start/high-concurrency variance, especially c16 TTFT | Mandatory; never promote from one cell or one repetition |
+| TP8 MTP local-argmax repair | Avoided the full-logits startup OOM, completed 384/384 requests, and proved speculative activation | Use this source base for bounded depth tuning |
 | Profiling before implementation | Identified collective and matmul as dominant categories and prevented blind operator work | Continue profile-guided selection |
 
 ## What failed and why
@@ -40,6 +41,8 @@ Updated: 2026-09-05
 | Fused MMAR+Add+RMS tail v1-v17 | Multiple matcher, dispatcher, graph contract and partial-coverage failures; final cumulative E2E did not justify promotion | Do not resume old variants unchanged; require whole-model economics before more fusion work |
 | MTP local-argmax v1 | Externally interrupted before readiness, zero requests | Invalid experiment, not algorithm evidence |
 | MTP local-argmax TP8 v2 | Full-logits dummy-run memory pressure; exit 137, `OOMKilled=false`, zero requests; all cards released | Startup-resource failure, not performance evidence. Next design must avoid materializing full draft logits or reduce dummy-run memory |
+| MTP local-argmax TP8 k1 v3 | Valid 12-cell run; logged acceptance 85.32%, but TTFT speedup was 0.868x-0.934x and TPOT 0.965x-1.054x | Reject k1 performance; test depth 3 as a new primary variable |
+| Edited launcher while it was executing | Matrix and shutdown completed, then changed script bytes caused a postprocessing parse error | Wait for terminal state or create a versioned successor; never edit an executing script |
 
 ## Rules learned
 

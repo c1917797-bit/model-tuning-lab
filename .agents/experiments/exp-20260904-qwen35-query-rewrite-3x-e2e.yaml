@@ -2,8 +2,8 @@ schema: ascend-inference-experiment/v1
 approved_loop_contract: .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/LOOP.md
 protocol_audit_status: required_before_performance_promotion
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp8_user_baseline_complete_mtp_v2_invalid_startup_resources_idle
-decision: retain_tp8_baseline_repair_mtp_dummy_run_memory_before_e2e
+status: tp8_dual_baselines_complete_mtp_k1_rejected_k3_ready
+decision: retain_mtp_off_denominator_reject_mtp_k1_start_k3_depth_tuning
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -34,6 +34,26 @@ final_thresholds:
   ttft: "candidate <= original baseline / 2 at concurrency 1, 5, 8 and 16"
   tpot: "candidate <= original baseline / 2 at concurrency 1, 5, 8 and 16"
   correctness: "business correctness passes and request errors equal zero"
+dual_tp8_baselines:
+  mtp_off:
+    run_id: tp8-user-baseline-v5-20260905T184600Z
+    summary_sha256: e3e03a5f1a5ce8d3e2d5f35ccf6a410d5d96555ad9012ba5881fd9227246639d
+  mtp_on:
+    run_id: tp8-mtp-local-argmax-k1-v3-20260905T205300Z
+    source_commit: 37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd
+    summary_sha256: cd0e31e37f3e6c8a3eda9801480e3e951c4a61f44c0b5cbad7211f0d9a03ef17
+    requests: "384/384; zero errors; natural stop"
+    acceptance_ratio_logged: 0.853191
+    acceptance_coverage: "lower bound from 164 complete log intervals; last partial interval may be missing"
+    decision: rejected_performance
+    speedup_vs_off:
+      1: {ttft: 0.9341411842, tpot: 1.0536150188}
+      5: {ttft: 0.8678738443, tpot: 0.9649254796}
+      8: {ttft: 0.8737588178, tpot: 1.0433793423}
+      16: {ttft: 0.9056751834, tpot: 1.0025026436}
+  comparison:
+    markdown: .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/BASELINE_COMPARISON.md
+    csv: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-dual-baseline-20260905T213000Z/baseline-comparison.csv
 loop:
   attribution: "add one primary treatment to the latest accepted stack"
   cumulative: "combine accepted operators, algorithms and parameters"
@@ -96,7 +116,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-authorized physical NPU0-7 exclusive while the comparable TP8 candidate is active"
-  current: "TP8 MTP local-argmax v2 exited 137 before readiness with zero requests; its exact cleanup completed and physical NPU0-7 are idle."
+  current: "TP8 MTP local-argmax k1 v3 completed all 12 cells and its exact container exited; recheck NPU0-7 before k3."
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"

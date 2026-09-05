@@ -1,19 +1,19 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
 Current approved protocol: see `LOOP.md`. It supersedes historical TP4-only
-instructions below. Two TP8 baseline groups are required: MTP OFF and ON.
-Last observed MTP v3 operation `exec-0000000000000474` was running; its c1-r1
-completed 32/32 requests with zero errors. Re-poll before any runtime action.
-Do not infer semantic correctness or goal achievement from request success.
+instructions below. Both TP8 baseline groups are complete; see
+`BASELINE_COMPARISON.md`. Operation `exec-0000000000000474` completed all
+12 cells and 384/384 requests, then failed only in postprocessing because its
+executing script was edited in place. Postprocessing was recovered manually.
+Never edit a script while its process is executing.
 
 ## State
 
-Authoritative current handoff: see `LESSONS.md`. TP8 baseline v5 is complete
-and hash-locked. The comparable TP8 MTP local-argmax v2 attempt is no longer
-running: it failed before readiness in the full-logits dummy run, produced zero
-requests, exited 137 with `OOMKilled=false`, and released NPU0-7. Treat it as
-an invalid startup-resource attempt, not an algorithm performance result.
-NPU0-7 were idle at the latest live check; recheck ownership before launching.
+Authoritative current handoff: see `LESSONS.md` and `LOOP.md`. MTP OFF v5
+remains the immutable denominator. MTP ON local-argmax k1 v3 completed 12/12
+cells with zero errors and natural stops. It regressed TTFT at every concurrency
+and its TPOT result was mixed, so k1 is rejected for performance. The next
+bounded treatment is k1 -> k3. Recheck NPU0-7 before launch.
 
 - Execution: `v11-diagnostics-queued-behind-protected-p0-r16`;
   integration: `shortgpt-remove8-held-semantic-regression`.
