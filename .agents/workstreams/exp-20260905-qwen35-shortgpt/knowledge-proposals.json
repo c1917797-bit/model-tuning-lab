@@ -12,7 +12,7 @@
       "id": "default-off-paper-probe-before-pruning",
       "status": "accepted-local",
       "lesson": "Land observability and the opt-in execution hook default off before spending NPU time. This preserves the serving path, gives a reversible integration seam, and separates measurement overhead from the pruning treatment.",
-      "evidence": "Local vLLM-Ascend commit 18c4d061529d226dd0d699d9e3e1df16dadf29d7 passes py_compile, diff checks, parser smoke, and an identity Block Influence smoke."
+      "evidence": "Local vLLM-Ascend commit 54a6bb40ac83771538b3c859bcf9c55e2e51854a passes py_compile and diff checks. It deterministically samples prompt head and tail and prefers the initialized distributed rank. Runtime unit execution remains pending because host Python lacks PyTorch and pytest."
     },
     {
       "id": "permanent-skip-required-for-tpot",

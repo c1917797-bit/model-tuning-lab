@@ -8,7 +8,7 @@
     },
     {
       "gate": "source-default-off-integration",
-      "result": "PASS static: local vLLM-Ascend commit 18c4d061529d226dd0d699d9e3e1df16dadf29d7 adds opt-in Block Influence recording and opt-in layer skipping; py_compile, diff checks, parser smoke, and identity metric smoke pass."
+      "result": "PASS static: local vLLM-Ascend commit 54a6bb40ac83771538b3c859bcf9c55e2e51854a adds opt-in Block Influence recording and opt-in layer skipping, samples prompt head and tail, and prefers initialized distributed rank zero; py_compile and diff checks pass. Runtime unit execution is pending because host Python lacks PyTorch and pytest."
     },
     {
       "gate": "source-remote-checkpoint",
@@ -28,7 +28,7 @@
     },
     {
       "gate": "shortgpt-plus-fused-tail-e2e-harness",
-      "result": "PASS static: the service validates the frozen layer contract, source/model/binary hashes and NPU4-7 resource boundary, separately pins ShortGPT hooks at 18c4d061529d226dd0d699d9e3e1df16dadf29d7 and compiler/fusion files at operator fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39, enables no quantization, and preserves the retained stack. It supports explicit shortgpt-retained and shortgpt-fused-tail modes; only the fused mode enables the operator and requires 64-N normalized and 128-2N fused patterns per rank before benchmark traffic."
+      "result": "PASS static: the service validates the frozen layer contract, source/model/binary hashes and NPU4-7 resource boundary, separately pins ShortGPT hooks at 54a6bb40ac83771538b3c859bcf9c55e2e51854a and compiler/fusion files at operator fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39, enables no quantization, and preserves the retained stack. It supports explicit shortgpt-retained and shortgpt-fused-tail modes; only the fused mode enables the operator and requires 64-N normalized and 128-2N fused patterns per rank before benchmark traffic."
     },
     {
       "gate": "npu-scope",

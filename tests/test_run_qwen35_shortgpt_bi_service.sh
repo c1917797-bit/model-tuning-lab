@@ -42,7 +42,7 @@ MOCK
 chmod +x "$mock_bin/ss"
 
 source_root=/cache/cch/.worktrees/exp-20260905-qwen35-shortgpt-vllm
-source_commit=18c4d061529d226dd0d699d9e3e1df16dadf29d7
+source_commit=54a6bb40ac83771538b3c859bcf9c55e2e51854a
 
 set +e
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" MOCK_DOCKER_RUNNING_IDS=reservation DOCKER_BIN="$mock_bin/docker" NPU_SMI_BIN="$mock_bin/npu-smi" SS_BIN="$mock_bin/ss" SHORTGPT_SOURCE_ROOT="$source_root" SHORTGPT_SOURCE_COMMIT="$source_commit" BI_ALLOWED_ROOT="$tmp" QWEN35_BI_DIR="$tmp/busy/bi" "$repo_root/scripts/run_qwen35_shortgpt_bi_service.sh" >"$tmp/busy.out" 2>"$tmp/busy.err"

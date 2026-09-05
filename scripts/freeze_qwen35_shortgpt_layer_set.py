@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-SOURCE_COMMIT = "18c4d061529d226dd0d699d9e3e1df16dadf29d7"
+SOURCE_COMMIT = "54a6bb40ac83771538b3c859bcf9c55e2e51854a"
 MODEL_CONFIG_SHA256 = (
     "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab"
 )

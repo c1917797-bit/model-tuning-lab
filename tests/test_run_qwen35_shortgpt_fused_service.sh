@@ -43,7 +43,7 @@ cat >"$layer_set" <<'JSON'
 {
   "schema": "qwen35-shortgpt-layer-set/v1",
   "status": "frozen",
-  "source_commit": "18c4d061529d226dd0d699d9e3e1df16dadf29d7",
+  "source_commit": "54a6bb40ac83771538b3c859bcf9c55e2e51854a",
   "model_config_sha256": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
   "removed_layer_count": 8,
   "layers": [0, 1, 2, 3, 4, 5, 6, 7],
@@ -94,7 +94,7 @@ fi
 
 >"$docker_log"
 env "${common_env[@]}" CONTAINER_NAME=shortgpt-retained-control-ready "$repo_root/scripts/run_qwen35_shortgpt_fused_service.sh" shortgpt-retained-control >"$tmp/control.out" 2>"$tmp/control.err"
-grep -q -- 'VLLM_ASCEND_QWEN35_SHORTGPT_COMMIT=18c4d061529d226dd0d699d9e3e1df16dadf29d7' "$docker_log"
+grep -q -- 'VLLM_ASCEND_QWEN35_SHORTGPT_COMMIT=54a6bb40ac83771538b3c859bcf9c55e2e51854a' "$docker_log"
 if grep -q -- 'VLLM_ASCEND_QWEN35_SKIP_LAYERS' "$docker_log"; then
   echo "ShortGPT retained control unexpectedly enabled layer skipping" >&2
   exit 1
