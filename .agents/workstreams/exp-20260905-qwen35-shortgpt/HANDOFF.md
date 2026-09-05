@@ -5,7 +5,7 @@
 - Workstream: `exp-20260905-qwen35-shortgpt`
 - Maintainer branch: `work/exp-20260905-qwen35-shortgpt`
 - Dependency: `exp-20260904-qwen35-query-rewrite-3x-e2e`
-- Current phase: real-NPU Block Influence passed and the conservative 8-layer set is frozen. Fused-tail v10 was rejected before traffic, so exactly one unpruned same-runtime retained-control job, `exec-0000000000000170`, now runs on assigned physical NPU4-7 before the first pruned candidate.
+- Current phase: real-NPU Block Influence and the same-runtime unpruned control passed. The conservative remove8 candidate completed the full matrix but is held for semantic-quality regression; the ShortGPT removal ladder is stopped and remove16/remove20 must not run.
 - Goal remains open: every concurrency cell must reach at least 2x TTFT and 2x TPOT versus the immutable original baseline.
 
 ## Scope and resource boundary
@@ -121,3 +121,40 @@ Poll this job only. After 128/128 requests, zero errors, natural stops, and
 artifact hashes verify, run one `shortgpt-retained` remove8 matrix using this
 directory as `SEMANTIC_CONTROL_DIR`. Any semantic gate failure stops the
 layer-removal ladder; only a passing remove8 result may justify remove16.
+
+## Terminal remove8 result
+
+The state above is historical. The unpruned same-runtime control operation
+`exec-0000000000000170` completed 128/128 requests with zero errors and
+natural stops. Its immutable root is:
+
+`/cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/controls/shortgpt-retained-control-20260905T140700Z`
+
+The frozen remove8 candidate then ran exactly once as operation
+`exec-0000000000000195` on physical NPU4-7. It completed 128/128 requests
+with zero errors and natural stops, and `sha256sum -c SHA256SUMS` passes for
+all evidence. Candidate root:
+
+`/cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/candidates/shortgpt-remove8-retained-20260905T142300Z`
+
+| Concurrency | TTFT ms | TPOT ms | TTFT vs original | TPOT vs original | TPOT vs retained |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 383.790945 | 25.472695 | 2.4188x | 1.5103x | 1.1320x |
+| 5 | 446.791540 | 33.415236 | 2.4447x | 1.6110x | 1.1365x |
+| 8 | 480.657530 | 39.820311 | 2.2517x | 1.6980x | 1.1086x |
+| 16 | 830.367945 | 49.309838 | 2.4990x | 1.6389x | 1.0530x |
+
+Although the candidate improved retained TPOT in every cell, it missed the
+2x TPOT goal in every cell. More importantly, c1, c8, and c16 each reduced
+mean normalized character similarity by `0.03125` versus the same-runtime
+control, beyond the frozen `0.02` limit. The analyzer decision is
+`hold-semantic-quality-regression`; do not merge the layer removal and do
+not escalate to remove16/remove20. Rollback is already proven by the
+default-off unpruned control. The exact task container exited 0 and all eight
+NPUs had no running process after the run.
+
+Next maintainer action: retain the accepted parameter stack, keep ShortGPT
+default off, and continue the operator track. Fused-tail v10 proved that all
+64 direct MLP tails match per TP rank while the 64 attention-copy tails do
+not normalize; diagnose that copy boundary without relaxing correctness,
+then repeat the activation-only gate before any E2E traffic.

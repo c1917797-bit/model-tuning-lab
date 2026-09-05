@@ -48,7 +48,7 @@
     },
     {
       "gate": "semantic-control-selection",
-      "result": "ACTIVE target-device control: v10 produced no matrix, so exactly one default-off unpruned shortgpt-retained-control run, exec-0000000000000170, is running on assigned physical NPU4-7. It omits skip-layer variables and fused-tail configuration and must complete before the pruned remove8 run."
+      "result": "PASS target-device control: exec-0000000000000170 completed 128/128 requests with zero errors and natural stops on physical NPU4-7. The unpruned run omitted skip-layer variables and fused-tail configuration; all hashes verify under shortgpt-retained-control-20260905T140700Z."
     },
     {
       "gate": "block-influence-real-workload",
@@ -56,7 +56,7 @@
     },
     {
       "gate": "shortgpt-correctness-and-e2e",
-      "result": "PENDING: frozen removal ladder, same-runtime semantic control, c1/c5/c8/c16 Ascend benchmark, profile, and terminal decision."
+      "result": "HOLD correctness: exec-0000000000000195 completed all four 32-request cells with zero errors and natural stops. Remove8 improved retained TPOT in every cell (1.1320x/1.1365x/1.1086x/1.0530x), but c1/c8/c16 each lost 0.03125 mean normalized character similarity versus the same-runtime control, exceeding the 0.02 gate. It also reached only 1.5103x/1.6110x/1.6980x/1.6389x TPOT versus original. Decision hold-semantic-quality-regression; stop the removal ladder and do not run remove16/remove20."
     }
   ]
 }

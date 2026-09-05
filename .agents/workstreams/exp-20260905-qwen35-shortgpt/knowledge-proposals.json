@@ -4,9 +4,9 @@
   "proposals": [
     {
       "id": "hybrid-shortgpt-needs-workload-specific-bi",
-      "status": "proposed",
+      "status": "accepted-local",
       "lesson": "For a hybrid decoder such as Qwen3.5, do not transplant a pruned-layer list from a homogeneous Llama-family model. Measure Block Influence on the real workload, report rankings by layer type, and freeze the candidate set before E2E testing.",
-      "evidence": "Qwen3.5-27B has 64 layers in a repeating three-linear-attention plus one-full-attention pattern; target-device Block Influence evidence is pending."
+      "evidence": "The physical-NPU4-7 run collected 2,048 observations across all 64 layers and achieved minimum four-split Spearman 0.9989926739926738, producing the frozen Qwen3.5-specific remove8 set 3,4,5,7,8,9,12,13."
     },
     {
       "id": "default-off-paper-probe-before-pruning",
@@ -16,15 +16,21 @@
     },
     {
       "id": "permanent-skip-required-for-tpot",
-      "status": "proposed",
+      "status": "accepted-local",
       "lesson": "A prefill-only ShortGPT shortcut cannot improve decode TPOT. For this goal, the selected layer set must be skipped in both prefill and decode while preserving the decoder's deferred residual representation.",
-      "evidence": "Source implementation returns the unchanged hidden-state/residual pair for opted-in layers; target-device correctness and E2E evidence are pending."
+      "evidence": "The remove8 implementation skipped the same layers in prefill and decode and improved retained TPOT in all cells by 1.0530x to 1.1365x, although the candidate was held by the independent semantic gate."
     },
     {
       "id": "docker-inspect-flags-before-object-on-chicaihong01",
       "status": "accepted-local",
       "lesson": "Place Docker inspect formatting flags before the container id in resource guards. On this host, putting --format after the id is parsed as another object and can turn a safe reservation check into an early generic failure.",
       "evidence": "The first live conflict probe exited 1 with four 'No such object' errors; the corrected order detected /p0_mc and exited 48 without creating a directory or container."
+    },
+    {
+      "id": "stable-block-influence-does-not-prove-business-quality",
+      "status": "accepted-local",
+      "lesson": "A highly stable Block Influence ranking is a candidate-selection signal, not a correctness proof. Require a same-runtime unpruned control and stop the pruning ladder at the first semantic regression even when every latency cell improves.",
+      "evidence": "Remove8 used a ranking with minimum Spearman 0.9989926739926738 and improved retained TPOT in all four cells, yet c1/c8/c16 each lost 0.03125 mean normalized character similarity versus control. The 0.02 gate correctly held the candidate and prevented remove16/remove20."
     }
   ]
 }

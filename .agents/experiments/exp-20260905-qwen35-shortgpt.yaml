@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260905-qwen35-shortgpt
-status: block_influence_passed_remove8_frozen_retained_control_running
-decision: pending_same_runtime_control_then_remove8
+status: remove8_completed_held_semantic_regression
+decision: hold_semantic_quality_regression_stop_pruning_ladder
 hypothesis: "Removing Qwen3.5 decoder blocks with the lowest real-workload Block Influence can reduce both prefill and decode work without retraining; stacked with the retained runtime and fused-tail operator, the reduction may close the remaining TPOT gap while preserving query_rewrite business quality."
 objective: "Reach at least 2x median TTFT and 2x median TPOT versus the immutable original at concurrency 1, 5, 8, and 16, using cumulative non-quantized parameter, algorithm, and operator improvements."
 owner: codex
@@ -100,13 +100,49 @@ results:
     layers: [3, 4, 5, 7, 8, 9, 12, 13]
     env_spec: "3-5,7-9,12-13"
     policy: "first conservative planning point; do not freeze or run 16/20 until remove8 passes semantic and incremental TPOT gates"
-  candidate: {}
+  semantic_control:
+    operation_id: exec-0000000000000170
+    evidence_root: /cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/controls/shortgpt-retained-control-20260905T140700Z
+    requests: {planned: 128, completed: 128, errors: 0, natural_stops: 128}
+    p50_ms:
+      c1: {ttft: 433.796945, tpot: 28.830083}
+      c5: {ttft: 517.825620, tpot: 39.335280}
+      c8: {ttft: 562.663085, tpot: 46.084061}
+      c16: {ttft: 6120.941460, tpot: 51.759449}
+    hashes_verified: true
+  candidate:
+    operation_id: exec-0000000000000195
+    id: shortgpt-remove8-retained
+    evidence_root: /cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/candidates/shortgpt-remove8-retained-20260905T142300Z
+    requests: {planned: 128, completed: 128, errors: 0, natural_stops: 128}
+    hashes_verified: true
+    p50_ms:
+      c1: {ttft: 383.790945, tpot: 25.472695}
+      c5: {ttft: 446.791540, tpot: 33.415236}
+      c8: {ttft: 480.657530, tpot: 39.820311}
+      c16: {ttft: 830.367945, tpot: 49.309838}
+    speedup_vs_original:
+      c1: {ttft: 2.418840, tpot: 1.510316}
+      c5: {ttft: 2.444687, tpot: 1.610973}
+      c8: {ttft: 2.251731, tpot: 1.698049}
+      c16: {ttft: 2.498977, tpot: 1.638854}
+    tpot_speedup_vs_retained:
+      c1: 1.131955
+      c5: 1.136501
+      c8: 1.108622
+      c16: 1.052984
+    semantic_mean_similarity_drop:
+      c1: 0.03125
+      c5: 0.0
+      c8: 0.03125
+      c16: 0.03125
+    decision: hold-semantic-quality-regression
   cold: {}
   steady: {}
   boundary: {}
   lifecycle:
-    phase: same_runtime_retained_control_running
-    dependency: "v10 is terminal exit 72 before traffic and cannot serve as a semantic control; Block Influence is complete and remove8 is frozen"
+    phase: remove8_terminal_held_return_to_operator_track
+    dependency: "v10 is terminal exit 72 before traffic; Block Influence and the same-runtime control passed, but remove8 failed the semantic-quality gate"
     shortgpt_queue:
       operation_id: exec-0000000000000131
       host_pid: 1474376
@@ -120,9 +156,15 @@ results:
       run_id: shortgpt-retained-control-20260905T140700Z
       output_root: /cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/controls/shortgpt-retained-control-20260905T140700Z
       mode: shortgpt-retained-control
-      state: "exactly one active asynchronous job on assigned physical NPU4-7"
+      state: "terminal success; 128/128 requests, zero errors, natural stops, hashes verified"
       purpose: "fresh unpruned same-runtime semantic and latency control because v10 produced no benchmark matrix"
-      duplicate_policy: "poll exec-0000000000000170; do not launch the remove8 candidate until this control is complete and verified"
+      duplicate_policy: "terminal immutable control; do not rerun without a new declared reason"
+    remove8_candidate:
+      operation_id: exec-0000000000000195
+      run_id: shortgpt-remove8-retained-20260905T142300Z
+      output_root: /cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/candidates/shortgpt-remove8-retained-20260905T142300Z
+      state: "terminal hold-semantic-quality-regression"
+      ladder_policy: "stop; do not run remove16/remove20"
   resources:
     allowed: "physical NPU4-7 when idle"
     prohibited: "physical NPU0-3 and all existing workloads"
@@ -130,8 +172,8 @@ artifacts:
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/HANDOFF.md
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json
   - .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json
-decision_reason: "Real target-device Block Influence passed coverage and stability and remove8 is frozen, but no ShortGPT performance or quality claim is allowed until the active unpruned same-runtime control and the subsequent pruned matrix complete."
-next_loop: "Poll only retained-control operation exec-0000000000000170. Verify its 128 requests, zero errors, natural stops, decision and hashes; then run exactly one shortgpt-retained remove8 candidate with the frozen contract and that control directory. Escalate to 16/20 only after remove8 passes semantic correctness and improves TPOT versus retained in every concurrency cell."
+decision_reason: "Remove8 completed the real NPU4-7 matrix and improved retained TPOT in every cell, but failed the frozen semantic-quality threshold at c1, c8, and c16 and missed the 2x TPOT target in every cell. The candidate is not retained and the pruning ladder stops."
+next_loop: "Keep ShortGPT default off and retain the accepted parameter stack. Continue the operator workstream by diagnosing why fused-tail v10 matches 64 direct MLP tails per rank but normalizes zero of 64 attention-copy tails; require a successful activation-only gate before any E2E traffic."
 rollback:
   command: "Unset VLLM_ASCEND_QWEN35_SKIP_LAYERS and VLLM_ASCEND_QWEN35_BI_DIR; remove the source overlay; relaunch the retained pinned stack."
-  verified: false
+  verified: true
