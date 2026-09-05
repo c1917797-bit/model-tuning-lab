@@ -63,6 +63,8 @@ Unset `VLLM_ASCEND_QWEN35_SKIP_LAYERS` and `VLLM_ASCEND_QWEN35_BI_DIR`, remove t
 
 ## Known external state
 
-- The guarded fused-tail v9 queue is operation `exec-0000000000000004` and must not be duplicated.
+- The only guarded fused-tail v9 queue is corrected operation `exec-0000000000000060`, host PID `579462`; it is waiting without NPU allocation and must not be duplicated. The superseded operation `exec-0000000000000004` was terminated after its Docker reservation probe was found to use invalid CLI argument ordering.
 - External NPU4-7 chains may still be running. Their containers, scripts, logs, and processes are out of scope and must not be changed.
+- Maintainer commit `c033270ec6d0646da57418488196362ee58ed3f8` contains the frozen ShortGPT plus fused-tail E2E harness and is locally clean. This branch is three commits ahead of `origin/work/exp-20260905-qwen35-shortgpt@d1ec5b06fcef562b00c1c947c3cc901bff253978`; a bounded 25-second push attempt timed out with no output, so remote publication remains pending.
+- The umbrella workstream is likewise three local commits ahead of its upstream checkpoint because the same Git transport is hanging. Do not claim either branch is pushed until local HEAD and upstream are verified equal.
 - The global `.agents/HANDOFF.md` is integrated truth; keep branch-local progress here until integration.
