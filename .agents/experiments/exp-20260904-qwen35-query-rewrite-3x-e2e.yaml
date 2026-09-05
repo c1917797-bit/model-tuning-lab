@@ -1043,7 +1043,7 @@ mmar_add_rmsnorm_decode_candidate:
     source_commit: f0f5688daf68a575063c17b1e48de6ed2febe98f
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
-    scope: "non-SP compile ranges with 1-16 tokens only"
+    scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
   e2e_queue:

@@ -15,6 +15,7 @@ treatment:
   control: npu_mm_all_reduce_base + npu_add_rms_norm
   candidate: CANN aclnnMatmulAllReduceAddRmsNorm
   target_paths_per_decode_step: 128
+  compile_ranges_endpoints: [16, 32768]
   shapes:
     - "[M,1536]x[1536,5120]"
     - "[M,4352]x[4352,5120]"

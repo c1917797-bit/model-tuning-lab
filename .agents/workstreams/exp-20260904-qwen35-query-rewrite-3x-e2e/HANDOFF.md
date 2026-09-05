@@ -1488,6 +1488,9 @@ SHA256SUMS digest is
 Source HEAD `f0f5688daf68a575063c17b1e48de6ed2febe98f` adds the
 default-off `ascend_compilation_config.fuse_decode_mmar_add_rmsnorm` pass. It
 is restricted to non-sequence-parallel compile ranges from 1 through 16 tokens.
+The candidate explicitly sets compile range endpoints `[16,32768]`; without
+that split vLLM 0.23.0 creates one `(1,32768)` range and the guarded pass would
+correctly remain inactive.
 Launcher mode `mmar-on-weight-prefetch-gateup-0p1-fused-tail` pins the source,
 extension and kernel hashes and overlays them read-only on the official 0.23.0
 image. Roll back by selecting `mmar-on-weight-prefetch-gateup-0p1`.

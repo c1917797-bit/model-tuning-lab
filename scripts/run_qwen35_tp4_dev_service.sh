@@ -211,7 +211,13 @@ serve_args=(
   --mamba-cache-mode align
   --mamba-cache-dtype bfloat16
   --mamba-ssm-cache-dtype bfloat16
-  --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
+  --compilation-config "$(
+    if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; then
+      printf '%s' '{"cudagraph_mode":"FULL_DECODE_ONLY","compile_ranges_endpoints":[16,32768],"cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
+    else
+      printf '%s' '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
+    fi
+  )"
   --additional-config "$(
     if [[ "$mode" == flashcomm2-oproj1-mmar-prefetch-gateup-0p1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"enable_flashcomm2_parallel_size":1,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'

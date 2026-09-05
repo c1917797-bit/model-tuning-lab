@@ -270,6 +270,7 @@ PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" 
   >"$tmp/mmar-add-rmsnorm-fused-tail-fresh.out" \
   2>"$tmp/mmar-add-rmsnorm-fused-tail-fresh.err"
 grep -q -- '"fuse_decode_mmar_add_rmsnorm":true' "$docker_log"
+grep -q -- '"compile_ranges_endpoints":\[16,32768\]' "$docker_log"
 grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
 grep -q -- 'VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT=f0f5688daf68a575063c17b1e48de6ed2febe98f' "$docker_log"
 grep -q -- 'decode_mmar_add_rmsnorm_fusion_pass.py' "$docker_log"
