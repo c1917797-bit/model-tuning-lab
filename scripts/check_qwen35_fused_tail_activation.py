@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
+import re
 from pathlib import Path
 
 
@@ -16,6 +18,10 @@ SMALL_TRUE = (
 LARGE_FALSE = (
     "Decode MMAR+Add+RMSNorm compile_range=(17, 32768) "
     "applicable=False"
+)
+DIAGNOSTICS_RE = re.compile(
+    r"MMAR copy normalization diagnostics=(\{[^}]*\}) "
+    r"copy_targets=(\{[^}]*\})"
 )
 
 
@@ -38,6 +44,14 @@ def check(
         "expected_normalized_line": text.count(normalized_line),
         "expected_fused_line": text.count(fused_line),
     }
+    diagnostics = []
+    for match in DIAGNOSTICS_RE.finditer(text):
+        diagnostics.append(
+            {
+                "rejections": ast.literal_eval(match.group(1)),
+                "copy_targets": ast.literal_eval(match.group(2)),
+            }
+        )
     passed = all(value == expected_ranks for value in counts.values())
     return {
         "schema": "qwen35-fused-tail-activation/v1",
@@ -50,6 +64,7 @@ def check(
             "fused_per_rank": expected_fused,
         },
         "counts": counts,
+        "diagnostics": diagnostics,
     }
 
 
