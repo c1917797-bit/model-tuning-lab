@@ -89,6 +89,39 @@ def load_cell(
     return row
 
 
+def load_reference_quality(path: Path, row: dict) -> dict:
+    quality = row.get("reference_quality")
+    if not isinstance(quality, dict):
+        raise ValueError(f"{path}: missing reference_quality")
+    if quality.get("reference_field") != "answer":
+        raise ValueError(f"{path}: reference_quality must use answer")
+    result = {
+        "raw_exact_matches": quality.get("raw_exact_matches"),
+        "normalized_whitespace_exact_matches": quality.get(
+            "normalized_whitespace_exact_matches"
+        ),
+    }
+    for key, value in result.items():
+        if not isinstance(value, int) or not 0 <= value <= 32:
+            raise ValueError(f"{path}: invalid reference_quality.{key}")
+    similarity = quality.get("normalized_character_similarity")
+    if not isinstance(similarity, dict):
+        raise ValueError(
+            f"{path}: missing normalized_character_similarity"
+        )
+    for metric in ("mean", "p50"):
+        value = similarity.get(metric)
+        if (
+            not isinstance(value, (int, float))
+            or not 0.0 <= float(value) <= 1.0
+        ):
+            raise ValueError(
+                f"{path}: invalid normalized_character_similarity.{metric}"
+            )
+        result[f"similarity_{metric}"] = float(value)
+    return result
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -100,6 +133,21 @@ def parse_args() -> argparse.Namespace:
         "--candidate-device-set", choices=("0-3", "4-7"), default="4-7"
     )
     parser.add_argument("--target-ratio", type=float, default=0.5)
+    parser.add_argument(
+        "--semantic-control-dir",
+        type=Path,
+        help=(
+            "same-runtime unpruned control containing privacy-safe aggregate "
+            "reference-quality metrics"
+        ),
+    )
+    parser.add_argument(
+        "--max-mean-similarity-drop", type=float, default=0.02
+    )
+    parser.add_argument(
+        "--max-p50-similarity-drop", type=float, default=0.02
+    )
+    parser.add_argument("--max-exact-match-drop", type=int, default=1)
     parser.add_argument(
         "--allow-incomplete",
         action="store_true",
@@ -118,10 +166,19 @@ def main() -> int:
     args = parse_args()
     if not 0 < args.target_ratio <= 1:
         raise ValueError("target ratio must be in (0, 1]")
+    if not 0 <= args.max_mean_similarity_drop <= 1:
+        raise ValueError("mean similarity drop must be in [0, 1]")
+    if not 0 <= args.max_p50_similarity_drop <= 1:
+        raise ValueError("p50 similarity drop must be in [0, 1]")
+    if not 0 <= args.max_exact_match_drop <= 32:
+        raise ValueError("exact-match drop must be in [0, 32]")
 
     cells: dict[str, dict] = {}
     artifact_sha256: dict[str, str] = {}
     correctness_pass = True
+    exact_hash_pass = True
+    semantic_quality_pass = True
+    semantic_control_enabled = args.semantic_control_dir is not None
     performance_pass = True
     runtime_pass = True
     for concurrency in CONCURRENCIES:
@@ -137,6 +194,7 @@ def main() -> int:
             runtime_pass = False
             performance_pass = False
             correctness_pass = False
+            semantic_quality_pass = False
             cells[str(concurrency)] = {
                 "status": "not-run",
                 "measurement_valid": False,
@@ -164,7 +222,62 @@ def main() -> int:
                 original["response_sha256"], candidate["response_sha256"]
             )
         )
-        cell_correct = mismatches == 0 if candidate_success else None
+        cell_exact = mismatches == 0 if candidate_success else None
+        exact_hash_pass = exact_hash_pass and bool(cell_exact)
+        semantic_quality = None
+        if semantic_control_enabled and candidate_success:
+            control_path = cell_path(args.semantic_control_dir, concurrency)
+            control = load_cell(
+                args.semantic_control_dir,
+                concurrency,
+                original=False,
+            )
+            control_quality = load_reference_quality(control_path, control)
+            candidate_quality = load_reference_quality(
+                candidate_path, candidate
+            )
+            mean_drop = (
+                control_quality["similarity_mean"]
+                - candidate_quality["similarity_mean"]
+            )
+            p50_drop = (
+                control_quality["similarity_p50"]
+                - candidate_quality["similarity_p50"]
+            )
+            raw_exact_drop = (
+                control_quality["raw_exact_matches"]
+                - candidate_quality["raw_exact_matches"]
+            )
+            normalized_exact_drop = (
+                control_quality["normalized_whitespace_exact_matches"]
+                - candidate_quality[
+                    "normalized_whitespace_exact_matches"
+                ]
+            )
+            cell_semantic_pass = (
+                mean_drop <= args.max_mean_similarity_drop
+                and p50_drop <= args.max_p50_similarity_drop
+                and raw_exact_drop <= args.max_exact_match_drop
+                and normalized_exact_drop <= args.max_exact_match_drop
+            )
+            semantic_quality_pass = (
+                semantic_quality_pass and cell_semantic_pass
+            )
+            semantic_quality = {
+                "control": control_quality,
+                "candidate": candidate_quality,
+                "mean_similarity_drop": mean_drop,
+                "p50_similarity_drop": p50_drop,
+                "raw_exact_match_drop": raw_exact_drop,
+                "normalized_exact_match_drop": normalized_exact_drop,
+                "gate_met": cell_semantic_pass,
+            }
+            artifact_sha256[
+                f"semantic-control/c{concurrency}-r1.json"
+            ] = digest_file(control_path)
+            cell_correct = cell_semantic_pass
+        else:
+            cell_correct = cell_exact
         correctness_pass = correctness_pass and cell_correct
         original_ttft = float(original["ttft_ms"]["p50"])
         candidate_ttft = float(candidate["ttft_ms"]["p50"])
@@ -197,7 +310,9 @@ def main() -> int:
             # Preserve the v1 complete-cell field for existing consumers. Partial
             # cells additionally carry the explicit observed qualifier above.
             "response_hash_mismatches": mismatches if candidate_success else None,
-            "correctness_exact_hash_match": cell_correct,
+            "correctness_exact_hash_match": cell_exact,
+            "semantic_quality": semantic_quality,
+            "correctness_gate_met": cell_correct,
             "performance_target_met": cell_performance_pass,
         }
         artifact_sha256[f"candidate/c{concurrency}-r1.json"] = digest_file(
@@ -221,7 +336,11 @@ def main() -> int:
         decision = "reject-runtime-failure"
         exit_status = 4
     elif not correctness_pass:
-        decision = "hold-exact-hash-drift"
+        decision = (
+            "hold-semantic-quality-regression"
+            if semantic_control_enabled
+            else "hold-exact-hash-drift"
+        )
         exit_status = 3
     elif final_target_met:
         decision = "final-target-met"
@@ -242,6 +361,20 @@ def main() -> int:
             "these immutable artifacts as the common performance denominator."
         ),
         "target_ratio": args.target_ratio,
+        "semantic_control_dir": (
+            str(args.semantic_control_dir)
+            if args.semantic_control_dir is not None
+            else None
+        ),
+        "semantic_quality_thresholds": (
+            {
+                "max_mean_similarity_drop": args.max_mean_similarity_drop,
+                "max_p50_similarity_drop": args.max_p50_similarity_drop,
+                "max_exact_match_drop": args.max_exact_match_drop,
+            }
+            if semantic_control_enabled
+            else None
+        ),
         "runtime_gate_met": runtime_pass,
         "runtime_gate_status": (
             "complete-matrix" if runtime_pass else "partial-or-failed-matrix"
@@ -253,19 +386,36 @@ def main() -> int:
             candidate_run.get("failed_cell") if candidate_run is not None else None
         ),
         "correctness_exact_hash_match": (
-            correctness_pass if runtime_pass else None
+            exact_hash_pass if runtime_pass else None
+        ),
+        "semantic_quality_gate_met": (
+            semantic_quality_pass
+            if runtime_pass and semantic_control_enabled
+            else None
         ),
         "correctness_gate_status": (
             "not-evaluable-runtime-failure"
             if not runtime_pass
+            else "same-runtime-reference-quality-within-bounds"
+            if semantic_control_enabled and correctness_pass
+            else "semantic-quality-regression"
+            if semantic_control_enabled
             else "exact-hash-reproducible"
-            if correctness_pass
+            if exact_hash_pass
             else "semantic-business-check-required"
         ),
         "exact_hash_evidence_boundary": (
             "A fixed-runtime NPU4-7 control also differs from the immutable "
             "original. Cross-run response hashes are a reproducibility "
             "diagnostic, not sufficient evidence of semantic regression."
+        ),
+        "semantic_quality_evidence_boundary": (
+            "When semantic_control_dir is set, the correctness gate compares "
+            "privacy-safe aggregate answer similarity and exact-match counts "
+            "with an unpruned control from the same runtime. No question, "
+            "reference answer, or response text is written to artifacts."
+            if semantic_control_enabled
+            else None
         ),
         "performance_target_met": performance_pass,
         "final_target_met": final_target_met,

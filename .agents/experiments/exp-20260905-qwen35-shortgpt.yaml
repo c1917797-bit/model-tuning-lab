@@ -54,7 +54,7 @@ protocol:
     - "Block Influence samples are missing, non-finite, or ranking is not stable enough to freeze."
   warmup: "Use the existing frozen query_rewrite harness protocol; record exact warmup in run metadata."
   repetitions: 32
-  command: "First run scripts/run_qwen35_shortgpt_bi_diagnostic.sh. Freeze a passing planning point with scripts/freeze_qwen35_shortgpt_layer_set.py. Then run scripts/run_qwen35_tp4_candidate_vs_original.sh with CANDIDATE_MODE=shortgpt-fused-tail and the frozen SHORTGPT_LAYER_SET_FILE/SHA256."
+  command: "First run scripts/run_qwen35_shortgpt_bi_diagnostic.sh. Freeze a passing planning point with scripts/freeze_qwen35_shortgpt_layer_set.py. Then run scripts/run_qwen35_tp4_candidate_vs_original.sh with CANDIDATE_MODE=shortgpt-fused-tail, the frozen SHORTGPT_LAYER_SET_FILE/SHA256, and SEMANTIC_CONTROL_DIR pointing at the completed unpruned fused-tail v9 candidate directory."
 results:
   baseline:
     immutable_original_p50_ms:

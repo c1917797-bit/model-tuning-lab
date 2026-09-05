@@ -47,6 +47,7 @@
     "./scripts/validate-mst.sh",
     "python3 -m py_compile scripts/collect_qwen35_shortgpt_bi.py scripts/analyze_qwen35_shortgpt_bi.py scripts/freeze_qwen35_shortgpt_layer_set.py tests/test_qwen35_shortgpt_tools.py",
     "python3 tests/test_qwen35_shortgpt_tools.py",
+    "python3 tests/test_analyze_qwen35_candidate_vs_original.py",
     "bash -n scripts/run_qwen35_shortgpt_bi_service.sh",
     "bash -n scripts/run_qwen35_shortgpt_bi_diagnostic.sh",
     "bash tests/test_run_qwen35_shortgpt_bi_service.sh",

@@ -70,6 +70,89 @@ with tempfile.TemporaryDirectory() as directory:
     assert report["correctness_exact_hash_match"] is False
     assert report["correctness_gate_status"] == "semantic-business-check-required"
 
+    control = root / "semantic-control"
+    semantic_candidate = root / "semantic-candidate"
+    control.mkdir()
+    semantic_candidate.mkdir()
+    quality = {
+        "reference_field": "answer",
+        "raw_exact_matches": 24,
+        "normalized_whitespace_exact_matches": 25,
+        "normalized_character_similarity": {
+            "mean": 0.94,
+            "p50": 0.95,
+        },
+    }
+    for concurrency in (1, 5, 8, 16):
+        source = ORIGINAL / f"c{concurrency}-r1.json"
+        control_payload = json.loads(source.read_text(encoding="utf-8"))
+        control_payload["reference_quality"] = quality
+        (control / source.name).write_text(json.dumps(control_payload))
+        candidate_payload = json.loads(source.read_text(encoding="utf-8"))
+        candidate_payload["ttft_ms"]["p50"] *= 0.49
+        candidate_payload["tpot_ms"]["p50"] *= 0.49
+        candidate_payload["response_sha256"] = ["1" * 64] * 32
+        candidate_payload["reference_quality"] = {
+            **quality,
+            "raw_exact_matches": 23,
+            "normalized_whitespace_exact_matches": 24,
+            "normalized_character_similarity": {
+                "mean": 0.925,
+                "p50": 0.935,
+            },
+        }
+        (semantic_candidate / source.name).write_text(
+            json.dumps(candidate_payload)
+        )
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--candidate-dir",
+            str(semantic_candidate),
+            "--candidate-id",
+            "semantic-pass-fixture",
+            "--semantic-control-dir",
+            str(control),
+            "--output",
+            str(report_path),
+        ],
+        check=False,
+    )
+    assert result.returncode == 0
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["decision"] == "final-target-met"
+    assert report["correctness_exact_hash_match"] is False
+    assert report["semantic_quality_gate_met"] is True
+    assert len(report["artifact_sha256"]) == 12
+
+    degraded = json.loads(
+        (semantic_candidate / "c5-r1.json").read_text(encoding="utf-8")
+    )
+    degraded["reference_quality"]["normalized_character_similarity"][
+        "mean"
+    ] = 0.80
+    (semantic_candidate / "c5-r1.json").write_text(json.dumps(degraded))
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--candidate-dir",
+            str(semantic_candidate),
+            "--candidate-id",
+            "semantic-fail-fixture",
+            "--semantic-control-dir",
+            str(control),
+            "--output",
+            str(report_path),
+        ],
+        check=False,
+    )
+    assert result.returncode == 3
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["decision"] == "hold-semantic-quality-regression"
+    assert report["semantic_quality_gate_met"] is False
+
     for concurrency in (1, 5, 8, 16):
         path = candidate / f"c{concurrency}-r1.json"
         if path.exists():
