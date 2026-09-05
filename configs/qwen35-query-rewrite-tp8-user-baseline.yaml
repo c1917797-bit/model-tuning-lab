@@ -55,7 +55,7 @@ runtime:
       evaluate_guards: false
       assume_32_bit_indexing: false
     fast_moe_cold_start: true
-    static_all_moe_layers: []
+    static_all_moe_layers: []  # effective default; not accepted as a CLI input
   additional_config:
     enable_cpu_binding: true
     enable_matmul_allreduce: false
