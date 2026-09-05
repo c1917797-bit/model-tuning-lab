@@ -1100,14 +1100,16 @@ mmar_add_rmsnorm_decode_candidate:
     post_export_fix_validation: "official 0.23.0 minimal overlay passed 7/7 focused tests in 8.52s; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
     current_blocker: "external p0_ov owns physical NPU4-7 for a bounded four-configuration/two-repeat overlap A/B chain, followed by the already queued mc2 comparison; do not stop or modify either chain. The user reconfirmed NPU4-7 are assigned to this optimization, while NPU0-3 external workers remain untouched"
     guarded_v9_queue:
-      operation_id: exec-0000000000000cbb
+      operation_id: exec-0000000000000004
+      superseded_operation_id: exec-0000000000000cbb
+      recovery: "the direct AgentWeb manager restarted and lost the old operation journal; exact process and output-root checks proved the waiter was gone and no v9 candidate had launched, so one replacement queue was started after a second duplicate guard"
       maintainer_commit: a0231e958c1106a2e0a500e0991a12ff6bb2ec83
       script: scripts/queue_qwen35_fused_tail_v9.sh
       test: tests/test_queue_qwen35_fused_tail_v9.sh
-      state: "running without NPU allocation; last observation had neither completion marker and overlap_ab was on configuration 2"
+      state: "recovered queue running without NPU allocation; last observation had neither completion marker and overlap_ab was on its sequence-parallel configuration"
       gate: "require OVERLAP_AB_DONE and MC2_AB_DONE, then four consecutive 15-second checks with no NPU4-7 container reservation, no NPU4-7 process and no listener on port 10010; the underlying launcher repeats its own guards"
       duplicate_policy: "poll this operation and do not launch another v9 queue"
-    next: "poll exec-0000000000000cbb; after its guarded launch, require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix"
+    next: "poll exec-0000000000000004; after its guarded launch, require 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only a correctness-passing frozen c1/c5/c8/c16 matrix"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

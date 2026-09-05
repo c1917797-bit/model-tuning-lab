@@ -1732,7 +1732,14 @@ queue requires both external completion markers and then four consecutive
 no listener on port 10010. It finally invokes the existing launcher, which
 repeats its own reservation and process guards.
 
-Operation `exec-0000000000000cbb` is the one active queue. Poll that operation;
-do not launch a duplicate. At the last observation, `overlap_ab` had entered
-its second configuration while neither completion marker was present, so v9
-had not created a container or used any NPU.
+The direct AgentWeb manager restarted after operation
+`exec-0000000000000cbb` was armed. Its journal then returned
+`operation_not_found`; an exact process check found no queue or candidate
+launcher, and no v9 output root had been created. External `p0_ov` still owned
+NPU4-7, so this was a lost waiter rather than a partial candidate launch.
+
+Recovery operation `exec-0000000000000004` is now the one active queue. It
+was started only after a second exact duplicate check and is confirmed
+running without NPU allocation. Poll this operation and do not launch another
+v9 queue. At recovery time neither completion marker was present and
+`overlap_ab` was still on its sequence-parallel configuration.
