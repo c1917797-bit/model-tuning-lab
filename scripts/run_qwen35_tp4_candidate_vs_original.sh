@@ -18,7 +18,7 @@ active_log=""
 service_launcher="$repo_root/scripts/run_qwen35_tp4_dev_service.sh"
 
 case "$candidate_mode" in
-  shortgpt-fused-tail)
+  shortgpt-retained|shortgpt-fused-tail)
     default_config="${SHORTGPT_LAYER_SET_FILE:?set SHORTGPT_LAYER_SET_FILE}"
     semantic_control_dir="${SEMANTIC_CONTROL_DIR:?set SEMANTIC_CONTROL_DIR to the completed unpruned fused-tail v9 candidate directory}"
     service_launcher="${CANDIDATE_SERVICE_LAUNCHER:-$repo_root/scripts/run_qwen35_shortgpt_fused_service.sh}"
@@ -115,7 +115,8 @@ if [[ ! -f "$candidate_config" ]]; then
   echo "candidate config does not exist: $candidate_config" >&2
   exit 66
 fi
-if [[ "$candidate_mode" == shortgpt-fused-tail &&
+if [[ ( "$candidate_mode" == shortgpt-retained ||
+        "$candidate_mode" == shortgpt-fused-tail ) &&
       ! -d "$semantic_control_dir" ]]; then
   echo "semantic control directory does not exist: $semantic_control_dir" >&2
   exit 66
@@ -211,7 +212,8 @@ analyzer_extra=()
 if [[ "$candidate_run_status" != 0 ]]; then
   analyzer_extra+=(--allow-incomplete)
 fi
-if [[ "$candidate_mode" == shortgpt-fused-tail ]]; then
+if [[ "$candidate_mode" == shortgpt-retained ||
+      "$candidate_mode" == shortgpt-fused-tail ]]; then
   analyzer_extra+=(--semantic-control-dir "$semantic_control_dir")
 fi
 python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \

@@ -82,4 +82,12 @@ if grep -q -- '--quantization' "$docker_log"; then
   echo "ShortGPT fused service unexpectedly enabled quantization" >&2
   exit 1
 fi
+>"$docker_log"
+env "${common_env[@]}" CONTAINER_NAME=shortgpt-retained-ready "$repo_root/scripts/run_qwen35_shortgpt_fused_service.sh" shortgpt-retained >"$tmp/retained.out" 2>"$tmp/retained.err"
+grep -q -- 'VLLM_ASCEND_QWEN35_SKIP_LAYERS=0-7' "$docker_log"
+grep -q -- '"fuse_decode_mmar_add_rmsnorm":false' "$docker_log"
+if grep -q -- '"fuse_decode_mmar_add_rmsnorm":true' "$docker_log"; then
+  echo "ShortGPT retained service unexpectedly enabled fused tail" >&2
+  exit 1
+fi
 echo "PASS: Qwen3.5 ShortGPT plus fused-tail service guard"

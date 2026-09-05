@@ -2,10 +2,13 @@
 set -euo pipefail
 
 mode="${1:-shortgpt-fused-tail}"
-if [[ "$mode" != shortgpt-fused-tail ]]; then
-  echo "usage: $0 shortgpt-fused-tail" >&2
-  exit 64
-fi
+case "$mode" in
+  shortgpt-retained|shortgpt-fused-tail) ;;
+  *)
+    echo "usage: $0 {shortgpt-retained|shortgpt-fused-tail}" >&2
+    exit 64
+    ;;
+esac
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 container_name="${CONTAINER_NAME:-qwen35_shortgpt_fused_npu4_7}"
@@ -181,6 +184,11 @@ docker_args=(
   -e VLLM_ASCEND_QWEN35_SHORTGPT_COMMIT="$source_commit"
   -e VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT="$fused_source_commit"
 )
+if [[ "$mode" == shortgpt-fused-tail ]]; then
+  additional_config='{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_decode_mmar_add_rmsnorm":true}}'
+else
+  additional_config='{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_decode_mmar_add_rmsnorm":false}}'
+fi
 serve_args=(
   vllm serve "$model_root"
   --host 127.0.0.1
@@ -199,7 +207,7 @@ serve_args=(
   --mamba-cache-dtype bfloat16
   --mamba-ssm-cache-dtype bfloat16
   --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","compile_ranges_endpoints":[16,32768],"cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
-  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_decode_mmar_add_rmsnorm":true}}'
+  --additional-config "$additional_config"
   --default-chat-template-kwargs '{"enable_thinking":false}'
   --async-scheduling
 )
