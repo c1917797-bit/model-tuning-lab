@@ -181,6 +181,12 @@
       "status": "accepted-local",
       "lesson": "Trigger: a mutation-normalization pass accepts the correct GraphModule object but still reports zero rewrites in the live backend. Action: reproduce the source assignment through both Dynamo and torch.export, test the post-export aten topology used by the backend, and retain shape and consumer guards before another accelerator run. Destination: future update to the Ascend graph-fusion validation checklist.",
       "evidence": "Verification: v8 compiled without the prior GraphModule exception but all ranks reported Normalized 0/Fused 64. In the official 0.23.0 image, output[:n]=value changed from operator.setitem in Dynamo to aten.slice.Tensor plus aten.copy_.default after export. Source 573ea294 covers both exported copy forms, rejects partial slices and passes 7/7 focused tests."
+    },
+    {
+      "id": "docker-inspect-option-order-is-part-of-resource-safety",
+      "status": "accepted-local",
+      "lesson": "Trigger: a tested container-reservation guard behaves differently on the live host. Action: place docker inspect options before the object id, run a real conflict probe, and restart any waiting queue that captured the old function body. Destination: future chicaihong01 resource-guard regression guidance.",
+      "evidence": "The live ShortGPT guard probe showed that inspect ID --format TEMPLATE is parsed incorrectly on this Docker CLI. inspect --format TEMPLATE ID detected /p0_mc and exited 48 before creating an output directory or container; the v9 queue, service launcher, and microbenchmark guard were corrected."
     }
   ]
 }

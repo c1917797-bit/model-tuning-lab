@@ -18,11 +18,13 @@ if [[ "${1:-}" == ps && "${2:-}" == -q ]]; then
   printf '%s' "${MOCK_DOCKER_RUNNING_IDS:-}"
   exit 0
 fi
-if [[ "${1:-}" == inspect && "${2:-}" == mock-reservation ]]; then
+if [[ "${1:-}" == inspect && "${2:-}" == --format &&
+      "${*: -1}" == mock-reservation ]]; then
   printf '%s\n' '/p0_aff /dev/davinci4 /dev/davinci5 /dev/davinci6 /dev/davinci7'
   exit 0
 fi
-if [[ "${1:-}" == inspect && "${2:-}" == mock-benign-monitor ]]; then
+if [[ "${1:-}" == inspect && "${2:-}" == --format &&
+      "${*: -1}" == mock-benign-monitor ]]; then
   printf '%s\n' '/vllm-ep-310p-research-910b-monitor /dev/davinci4 /dev/davinci5 /dev/davinci6 /dev/davinci7'
   exit 0
 fi

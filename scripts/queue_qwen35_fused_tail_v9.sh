@@ -53,7 +53,7 @@ has_external_completion_markers() {
 container_reservations() {
   local running_id
   for running_id in $("$docker_bin" ps -q); do
-    "$docker_bin" inspect "$running_id" --format '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}'
+    "$docker_bin" inspect --format '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}' "$running_id"
   done | awk -v ignored_csv="$reservation_ignore_names" '
     BEGIN {
       split(ignored_csv, ignored_names, ",")

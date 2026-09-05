@@ -248,6 +248,10 @@
     {
       "gate": "mmar-add-rmsnorm-post-export-copy-fix",
       "result": "PASS source regression: official-image reproduction proves Dynamo setitem becomes aten.copy_.default, with dynamic output[:n] represented as aten.slice.Tensor plus copy_. Source 573ea294 normalizes both exported direct-copy and full first-axis slice-copy forms, rejects partial shape copies, retains Graph and GraphModule coverage, and passes 7/7 focused tests plus py_compile and diff checks."
+    },
+    {
+      "gate": "npu-container-reservation-docker-cli-compatibility",
+      "result": "PASS fix and regression: Docker inspect formatting options now precede the container id in the v9 queue, serving launcher, and fused-tail microbenchmark guard. Queue and launcher shell tests, MST validation, and diff checks pass. A real conflict probe detected /p0_mc and created neither a task directory nor container."
     }
   ]
 }

@@ -1743,3 +1743,20 @@ was started only after a second exact duplicate check and is confirmed
 running without NPU allocation. Poll this operation and do not launch another
 v9 queue. At recovery time neither completion marker was present and
 `overlap_ab` was still on its sequence-parallel configuration.
+
+## Docker reservation guard correction
+
+A live fail-closed probe on 2026-09-05 found that this host's Docker CLI parses
+`docker inspect ID --format TEMPLATE` incorrectly: it treats the template as
+another object. The earlier shell mocks had accepted that order, so the
+waiting v9 queue and its service launcher would have failed after the external
+chain completed. The queue, service launcher and fused-tail microbenchmark now
+use `docker inspect --format TEMPLATE ID`, and the mock reproduces that live
+contract. Focused queue/launcher tests and MST validation pass; a real probe
+then detected `/p0_mc` and exited 48 without creating a task directory or
+container.
+
+Operation `exec-0000000000000004` captured the old function definitions and
+must be terminated before it can launch. Restart exactly one guarded v9 queue
+from the corrected checkpoint, verify the new operation is running, and record
+its operation id here. Do not allow the old and new waiters to coexist.

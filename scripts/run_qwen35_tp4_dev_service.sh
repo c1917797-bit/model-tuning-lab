@@ -149,8 +149,7 @@ fi
 reservation_ignore_names="${NPU_RESERVATION_IGNORE_NAMES-/vllm-ep-310p-research-910b-monitor,/vllm-19.1-Qwen3.5-4B-1065}"
 container_reservations="$(
   for running_id in $(docker ps -q); do
-    docker inspect "$running_id" --format \
-      '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}'
+    docker inspect --format '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}' "$running_id"
   done | awk -v ignored_csv="$reservation_ignore_names" '
     BEGIN {
       split(ignored_csv, ignored_names, ",")
