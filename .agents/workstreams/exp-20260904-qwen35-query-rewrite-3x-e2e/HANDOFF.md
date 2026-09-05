@@ -1180,3 +1180,60 @@ SHA256SUMS SHA256 is
 The exact candidate container was stopped. NPU4-7 are idle and external
 NPU0-3 PIDs 1031654-1031657 remain unchanged. Retain
 `TASK_QUEUE_ENABLE=1`.
+
+## TP2/DP2 capacity probes and 32K conditional tier rejected
+
+The retained BF16 TP4/DP1 MMAR plus gate/up-prefetch-0.1 stack was translated
+to TP2/DP2 on physical NPU4-7 without quantization. Two 133K text-only startup
+probes were run before changing the serving contract. With
+`max_num_batched_tokens=16384`, each worker used 26.64 GiB outside KV cache
+and reported -0.10 GiB available KV. With 8192, non-KV memory fell to
+26.16 GiB and available KV rose to 0.38 GiB, but one 133000-token request needs
+4.30 GiB; vLLM estimated a maximum model length of only 6912. Both runs served
+zero requests. Their decision and log hashes are sealed under:
+
+- `tp2-dp2-prefetch0p1-text-bt16384-fixedorig-npu4-7-20260905T022500Z`
+  (SHA256SUMS digest
+  `487e2c03e84f85344b8747fed478802db8a0f8b14deb44805e2adf2d6b0d7b98`);
+- `tp2-dp2-prefetch0p1-text-bt8192-fixedorig-npu4-7-20260905T023000Z`
+  (SHA256SUMS digest
+  `9579bbbb2417e23e95de9cff5720c65f4f80aff1cf5ce26210d527de177e9012`).
+
+A final bounded conditional experiment reduced the context contract to 32768,
+kept batch tokens at 8192, and set utilization to 0.95. This was explicitly a
+composite recovery experiment, not a capability-equivalent single-variable
+claim. It started successfully: 1.85 GiB KV cache and 51,492 KV tokens per DP
+engine, 1.57 nominal 32K concurrency, all 9 FULL decode graphs captured, both
+API servers healthy.
+
+All four quick32 cells completed 32/32 requests with zero errors and all 128
+finish reasons were natural stop. TTFT/TPOT p50 in milliseconds were:
+
+| concurrency | TTFT | TTFT vs original | TPOT | TPOT vs original |
+|---:|---:|---:|---:|---:|
+| 1 | 433.673 | 2.141x | 47.854 | 0.804x |
+| 5 | 521.514 | 2.094x | 53.443 | 1.007x |
+| 8 | 543.193 | 1.992x | 55.959 | 1.208x |
+| 16 | 3510.405 | 0.591x | 62.782 | 1.287x |
+
+Compared with the retained TP4 stack, TPOT regressed
+65.96%/40.73%/26.76%/20.91%, and c16 TTFT regressed 291.81%. Aggregate
+reference quality remained in the calibrated run-to-run band (raw exact
+4/4/4/4, whitespace-normalized exact 5/6/6/6, normalized-character similarity
+mean 0.15625/0.1875/0.1875/0.1875). Exact hash drift remains diagnostic; no
+semantic promotion is needed because the performance and capability gates
+already reject the candidate.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp2-dp2-prefetch0p1-text-ctx32k-bt8192-gmu0p95-fixedorig-npu4-7-20260905T024000Z`.
+All SHA256SUMS entries verify; the SHA256SUMS digest is
+`bf754de82f92bf22dc2988559524bae2335edf5df81fe906ba3a631090521d5e`.
+The exact container exited 0. NPU4-7 are idle, and external NPU0-3 PIDs
+1031654-1031657 are unchanged.
+
+Authoritative decision: reject TP2/DP2 for both the 133K production contract
+and the 32K conditional tier. Retain the 133K TP4/DP1 MMAR plus sub-cap
+gate/up-prefetch-0.1 stack. Do not scan smaller batch-token values or lower
+context again; the next loop must target the communication-dominated
+MatMulAllReduce/row-parallel operator path while preserving the current
+service contract.

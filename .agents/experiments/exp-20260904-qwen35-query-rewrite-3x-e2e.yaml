@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: taskqueue2_rejected_tpot_target_open
+status: tp2_dp2_32k_rejected_tpot_target_open
 decision: retain_matmulallreduce_and_subcap_gateup_prefetch_then_iterate_tpot
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -836,3 +836,63 @@ taskqueue2_candidate:
       sha256sums_sha256: 926e6c1d77a218fabde8354ed32382f0aa9402c65206efb12daaca8dea3a371c
   decision: "reject TASK_QUEUE_ENABLE=2 from the cumulative graph-mode stack; retain TASK_QUEUE_ENABLE=1 and do not retry level 2 without removing graph capture as a separately justified tradeoff"
   recovery: "the exact candidate container was stopped; physical NPU4-7 returned idle with no process; external NPU0-3 PIDs 1031654-1031657 were unchanged"
+tp2_dp2_text_capacity_probes:
+  status: rejected_133k_capacity
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; dense gate/up prefetch ratio 0.1; HCCL_BUFFSIZE=512; no quantization"
+  devices: "physical NPU4-7 only; NPU0-3 prohibited"
+  batch_tokens_16384:
+    source_manifest: configs/qwen35-query-rewrite-tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384-candidate.yaml
+    operation_id: exec-0000000000000922
+    run_id: tp2-dp2-prefetch0p1-text-bt16384-fixedorig-npu4-7-20260905T022500Z
+    result: reject_startup_capacity
+    memory_gib_per_worker: {weights: 25.17, peak_activation_increase: 0.97, non_torch_forward_increase: 0.50, total_non_kv: 26.64, available_kv: -0.10}
+    measured_requests: 0
+    hashes: {decision_sha256: 0a3bb67edcc8f3d53b8a4492de31f3bb50f2a57be548b8b3a1eec39b4e2f7a85, service_log_sha256: c09302ef3928f9e213c8a1d9e32dfc3090c69901aa43d8f2677bfa65a28fb570, sha256sums_sha256: 487e2c03e84f85344b8747fed478802db8a0f8b14deb44805e2adf2d6b0d7b98}
+  batch_tokens_8192:
+    source_manifest: configs/qwen35-query-rewrite-tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192-candidate.yaml
+    operation_id: exec-000000000000092b
+    run_id: tp2-dp2-prefetch0p1-text-bt8192-fixedorig-npu4-7-20260905T023000Z
+    result: reject_startup_capacity
+    memory_gib_per_worker: {weights: 25.17, peak_activation_increase: 0.49, non_torch_forward_increase: 0.50, total_non_kv: 26.16, available_kv: 0.38, required_kv_for_133000: 4.30}
+    estimated_max_model_len: 6912
+    measured_requests: 0
+    hashes: {decision_sha256: 8b2a1d7fcf289655cbfbd3b0c48cc7fff3d4bd6947b010f2e677c7ead43f9d21, service_log_sha256: ab74c3b644f0a8b90432c7e4a3aa4cb97e8661ce51b5e146ddc1b7ed5eb3317f, sha256sums_sha256: 9579bbbb2417e23e95de9cff5720c65f4f80aff1cf5ce26210d527de177e9012}
+  decision: "stop lowering max_num_batched_tokens for the 133K TP2/DP2 tier: 8192 already leaves only 0.38 GiB KV versus 4.30 GiB required for one request"
+tp2_dp2_32k_conditional_candidate:
+  source_manifest: configs/qwen35-query-rewrite-tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95-candidate.yaml
+  launcher_mode: tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95
+  status: rejected_performance_and_capability_tradeoff
+  primary_treatment: "TP4/DP1 133K -> TP2/DP2 32K text-only service tier with max_num_batched_tokens=8192 and gpu_memory_utilization=0.95"
+  treatment_scope: "composite recovery experiment after the 133K capacity proof; not single-switch attribution and not capability-equivalent to the immutable original"
+  retained_unchanged: "BF16; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; dense gate/up prefetch ratio 0.1; HCCL_BUFFSIZE=512; no quantization"
+  real_run:
+    operation_id: exec-0000000000000933
+    run_id: tp2-dp2-prefetch0p1-text-ctx32k-bt8192-gmu0p95-fixedorig-npu4-7-20260905T024000Z
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp2-dp2-prefetch0p1-text-ctx32k-bt8192-gmu0p95-fixedorig-npu4-7-20260905T024000Z
+    startup:
+      health_http: 200
+      memory_gib_per_worker: {weights: 25.17, peak_activation_increase: 0.49, non_torch_forward_increase: 0.50, graph: 0.50, available_kv: 1.85}
+      kv_cache_tokens_per_dp_engine: 51492
+      max_concurrency_at_32768: 1.57
+      graph_capture: "9/9 FULL decode graphs captured"
+    requests: {c1: "32/32", c5: "32/32", c8: "32/32", c16: "32/32"}
+    errors: 0
+    natural_stops: 128
+    p50_ms:
+      c1: {ttft: 433.673275, tpot: 47.853652}
+      c5: {ttft: 521.514430, tpot: 53.443331}
+      c8: {ttft: 543.192975, tpot: 55.959283}
+      c16: {ttft: 3510.404585, tpot: 62.782047}
+    speedup_vs_fixed_original:
+      ttft: {c1: 2.140618, c5: 2.094411, c8: 1.992499, c16: 0.591120}
+      tpot: {c1: 0.803947, c5: 1.007255, c8: 1.208322, c16: 1.287177}
+    incremental_vs_retained_stack:
+      ttft: {c1: 0.977638, c5: 0.940409, c8: 0.906655, c16: 0.255223}
+      tpot: {c1: 0.602544, c5: 0.710593, c8: 0.788889, c16: 0.827027}
+    correctness_boundary:
+      result: "runtime/business smoke passed; all requests completed naturally with zero errors"
+      reference_quality: "raw exact 4/4/4/4; whitespace-normalized exact 5/6/6/6; normalized-character similarity mean 0.15625/0.1875/0.1875/0.1875"
+      exact_hash_note: "14/16/19/17 cross-run response-hash mismatches remain a reproducibility diagnostic under the calibrated control; no promotion is requested because performance already rejects the candidate"
+    hashes: {candidate_config_sha256: 26f5d042880b9db2f6c5af070c2a6b30dc09610a865028a195955cb68fdf893b, candidate_run_sha256: 9486e7f1179efd1bf40de37739635338ba055ab497d32bc252a0864837c37ff0, decision_sha256: 3ff15714c53ebc2e11d146c7d54bcbc90486ff45f0456205874d8f0f666a3874, service_log_sha256: 1f9d4b92ac7bc0f0ad7dfb6a63e8a37ba6d70df8deb98cd8dba0118c75d9c195, sha256sums_sha256: bf754de82f92bf22dc2988559524bae2335edf5df81fe906ba3a631090521d5e}
+  decision: "reject TP2/DP2 even as a 32K conditional tier: TPOT regresses 65.96%/40.73%/26.76%/20.91% versus retained, c8 misses the original TTFT target narrowly, c16 TTFT regresses 291.81%, and the context contract is reduced from 133K to 32K"
+  recovery: "exact candidate container exited 0; physical NPU4-7 are idle; external NPU0-3 worker PIDs 1031654-1031657 remain unchanged"
