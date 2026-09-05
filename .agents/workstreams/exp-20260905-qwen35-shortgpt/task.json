@@ -61,6 +61,6 @@
     "python3 -c 'import yaml,sys; yaml.safe_load(sys.stdin)' < .agents/experiments/exp-20260905-qwen35-shortgpt.yaml",
     "git diff --check"
   ],
-  "executionState": "prepared-awaiting-only-v10-queue-and-protected-p0-r15-completion-before-fresh-bi",
-  "integrationState": "v9-rejected-before-traffic-v10-source-fix-queued-shortgpt-default-off-and-e2e-gates-ready-upstream-source-push-blocked"
+  "executionState": "bi-diagnostic-frozen-candidate-and-default-off-retained-control-ready-awaiting-only-v10-queue-and-protected-p0-r15-completion",
+  "integrationState": "v9-rejected-before-traffic-v10-source-fix-queued-shortgpt-and-operator-sources-separately-pinned-e2e-gates-ready-upstream-source-push-blocked"
 }
