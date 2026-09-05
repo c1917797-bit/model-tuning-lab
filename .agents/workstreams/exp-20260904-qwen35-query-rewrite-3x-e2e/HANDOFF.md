@@ -1034,3 +1034,36 @@ Run the fail-closed startup and memory gate first. Continue to the immutable
 quick32 comparison only after service health and a natural-stop smoke pass.
 The launcher is hard-restricted to physical NPU4-7. Rollback is selecting
 `mmar-on-weight-prefetch-gateup-0p1`; there is no source overlay.
+
+## TP2/PP2 topology rejected by c1 fail-fast gate
+
+Operation `exec-00000000000008a4` proved that TP2/PP2 starts successfully:
+the runtime accepted TP2/PP2/DP1, async scheduling, MMAR and dense gate/up
+prefetch ratio 0.1, and MMAR layer logs reported `tp_size=2`. No quantization
+was active. PP0/PP1 weights occupied about 13.09/14.27 GiB per rank and left
+about 9.45/8.26 GiB for KV cache; the service exposed 510572 KV tokens and
+returned HTTP 200.
+
+The complete c1 cell was a hard performance rejection: 32/32 requests, zero
+errors and all natural stops, but TTFT p50 was 465.656 ms and TPOT p50 was
+48.082 ms. Relative to the retained TP4 stack this is 9.83% slower TTFT and
+66.75% slower TPOT. Relative to the immutable original it is only 1.994x TTFT
+and 0.800x TPOT, so the candidate cannot satisfy the all-concurrency 2x goal.
+The result confirms that pipeline serialization overwhelms the smaller TP
+collective at concurrency 1.
+
+The exact candidate container was deliberately stopped at the start of c5
+under the fail-fast policy; c8/c16 were not run. Consequently, the four c5
+responses and 28 post-stop client errors are invalid for performance. The
+generated `decision.json` mechanically labels this as runtime failure, but
+the authoritative decision is c1 performance rejection, not a spontaneous
+service crash.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp2-pp2-mmar-prefetch-0p1-fixedorig-npu4-7-20260905T005727Z`.
+Every SHA256SUMS entry verifies; the c1 artifact SHA256 is
+`bbde9f2586a7f5f493e583bdfd50ac98bd974000b6e5f67c178502eaa224afce`
+and the SHA256SUMS digest is
+`7d712223d6f9517f259e08f72866a71092fca05c5e4774861dea70bf44debe50`.
+Physical NPU4-7 returned idle at 2865-2866 MiB, while external NPU0-3 PIDs
+1031654-1031657 remained unchanged. Retain TP4 MMAR plus ratio-0.1 prefetch.

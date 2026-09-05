@@ -709,7 +709,7 @@ weight_prefetch_gateup_0p1_candidate:
 tp2_pp2_mmar_prefetch_candidate:
   source_manifest: configs/qwen35-query-rewrite-tp2-pp2-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml
   launcher_mode: tp2-pp2-mmar-on-weight-prefetch-gateup-0p1
-  status: ready_for_startup_gate
+  status: rejected_c1_tpot_regression_fail_fast
   primary_variable_vs_retained_stack: "TP4/PP1 -> TP2/PP2 on the same physical NPU4-7"
   retained_stack: "BF16; MatMulAllReduce on; gate/up prefetch ratio 0.1; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
   rationale: "MMAR profile is collective dominated; TP2/PP2 preserves one-quarter model weights per rank unlike rejected TP2/DP2, while reducing the tensor-parallel group from four cards to two"
@@ -717,3 +717,37 @@ tp2_pp2_mmar_prefetch_candidate:
   devices: "physical NPU4-7 only; NPU0-3 prohibited"
   gates: ["startup and memory capacity", "zero-error smoke with natural stop", "full quick32 correctness", "fixed-original TTFT/TPOT", "incremental comparison to retained TP4 stack"]
   rollback: "select mmar-on-weight-prefetch-gateup-0p1; no source overlay or model files are changed"
+  implementation_commit: b332b8e
+  real_run:
+    operation_id: exec-00000000000008a4
+    run_id: tp2-pp2-mmar-prefetch-0p1-fixedorig-npu4-7-20260905T005727Z
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp2-pp2-mmar-prefetch-0p1-fixedorig-npu4-7-20260905T005727Z
+    startup:
+      activation: "runtime accepted TP2/PP2/DP1, async scheduling, MMAR and gate/up prefetch ratio 0.1; MMAR layer logs report tp_size=2; no quantization"
+      weights_gib: {pp0: 13.09, pp1: 14.27}
+      available_kv_cache_gib: {pp0: 9.45, pp1: 8.26}
+      model_context_capacity: "510572 KV tokens, or 3.84 concurrent 133000-token requests"
+      health_http: 200
+    c1:
+      completed: 32
+      errors: 0
+      natural_stops: 32
+      ttft_p50_ms: 465.655570
+      tpot_p50_ms: 48.082006
+      speedup_vs_fixed_original: {ttft: 1.993595, tpot: 0.800129}
+      incremental_vs_retained_tp4: {ttft: 0.910491, tpot: 0.599683}
+      regression_vs_retained_tp4_pct: {ttft: 9.8308, tpot: 66.7549}
+    fail_fast:
+      reason: "the c1 cell materially regressed both retained-stack metrics and made TPOT slower than the immutable original; the all-concurrency 2x goal was therefore impossible"
+      action: "stopped only the exact candidate container at the start of c5 and did not run c8/c16"
+      analyzer_note: "decision.json mechanically says reject-runtime-failure because the intentional stop interrupted c5; the authoritative rejection is the already-complete c1 performance gate, not a spontaneous runtime crash"
+      invalid_partial_c5: "4/32 completed and 28 client errors after the operator-initiated stop; do not use for performance"
+    hashes:
+      candidate_config_sha256: f04b830534586ba9cb8de9ac5803bb27e302a4eba28d9abff27f8bfab43b2fb6
+      c1_sha256: bbde9f2586a7f5f493e583bdfd50ac98bd974000b6e5f67c178502eaa224afce
+      candidate_run_sha256: 55082fd1edc0b8301e1b86dbd6a378d5eb866f75c9c54bdbc490eb1807130f2f
+      decision_sha256: d3ac51ebb83457086d1f28d3231e1752ef7c87647e1be682a8d0e4c6f7ae1c20
+      service_log_sha256: 6b24cffc06abd9ce91cae526bb9b125f1106232ef283cc0fe39df3f09c6bc9bd
+      sha256sums_sha256: 7d712223d6f9517f259e08f72866a71092fca05c5e4774861dea70bf44debe50
+  decision: "reject TP2/PP2 from the cumulative stack; pipeline serialization dominates c1 decode and TPOT regresses 66.75% versus retained TP4"
+  recovery: "exact candidate container stopped; physical NPU4-7 returned idle at 2865-2866 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
