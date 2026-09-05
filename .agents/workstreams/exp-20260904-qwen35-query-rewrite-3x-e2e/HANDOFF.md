@@ -1503,3 +1503,46 @@ the microbenchmark finished. Do not stop it. Retry the frozen c1/c5/c8/c16 run
 in a new immutable output directory when that sweep releases NPU4-7. Runtime
 graph-match, service correctness, E2E latency and candidate profiling are still
 open, so the retained stack and the TPOT decision have not changed yet.
+
+## First live-graph rejection and matcher correction
+
+The queued E2E launch proceeded after 'p0_ck' naturally completed. Operation
+'exec-0000000000000b2d' loaded the pinned extension, kept quantization disabled,
+and proved that vLLM created compile ranges '(1,16)' and '(17,32768)'. It did
+not prove operator integration: both the saved 'computation_graph.py' and final
+AOT binary contained zero
+'npu_matmul_all_reduce_add_rms_norm' occurrences while the separate MMAR and
+AddRMSNorm operators remained. The exact task container was stopped during c1
+to avoid wasting the assigned cards. The orchestrator finalized the partial
+matrix as 'reject-runtime-failure'; none of its latency is promotion evidence.
+
+Immutable failure evidence:
+
+'/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-20260905T063300Z'
+
+Decision SHA256:
+'4a181470e6083da0f0386bb62cfef00500a25cc7dd86fd8ea4ddff1cc9e57256'
+
+Service-log SHA256:
+'1be97aa2ca6eb56077be30f60d6bb81bb49b448e0ead0e52940318888cbd9869'
+
+SHA256SUMS digest:
+'8a35d576a6a7063ff29a7be442ed24c76804ef32dc728834c3681629d2075f35'
+
+The saved live FX graph exposed the exact mismatch. Production
+'MatmulAllreduceRowParallelOp' leaves 'reduce_op' at the torch_npu wrapper
+default and records only 'bias=None'; the candidate pattern explicitly supplied
+'reduce_op="sum"'. Inductor treats kwargs as pattern structure, so it could not
+match. Source commit '5182fe9cbed58faa480a24cce3a439a7fada3767'
+removes the redundant kwarg, adds compile-range applicability logging, and is
+now pinned by launcher commit '0a687d85752bbd0b66885cf6f7f26cd86bdfefa1'.
+Static compilation, launcher guards and YAML parsing pass.
+
+The immediate retry ('exec-0000000000000b45') was again rejected before launch
+because external container 'p0_cd' started a bounded cadence sweep on NPU4-7.
+Do not stop it. Its parent is '/cache/austinov/p0/cadence.sh'; it tests 16384
+and 32768, writes 'CADENCE_DONE', and removes its own container. Resume into a
+new output root only after that parent exits, the marker exists, and NPU4-7
+have no processes. Before allowing the four-cell matrix to continue, require a
+positive fused-op count in the generated AOT; otherwise stop only the exact
+task container, preserve diagnostics, and iterate again.
