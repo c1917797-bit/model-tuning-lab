@@ -272,6 +272,10 @@
     {
       "gate": "p0-r15-noninterference-and-v10-queue",
       "result": "PASS fail-closed: ShortGPT diagnostic exec-00000000000000c8 exited 48 before Docker when p0_r15 reserved physical NPU4-7. The first v10 launch exec-00000000000000e6 hit its 30-second synchronous tool timeout without leaving a host waiter or allocating an NPU. Exactly one replacement asynchronous queue, exec-00000000000000f7, now waits for R15_DONE before a four-observation stable idle window, so it cannot take the cards during external inter-configuration gaps; its shell mock and the shared service guard test pass. NPU0-3 remain untouched."
+    },
+    {
+      "gate": "p0-r15-completion-and-v10-live-handoff",
+      "result": "PASS noninterference/startup: p0_r15 completed and wrote R15_DONE after two FlashComm2 startup validation failures. Operation exec-00000000000000f7 then passed four stable idle observations and launched exactly one BF16, non-quantized v10 container at 2026-09-05T13:50:44Z on assigned physical NPU4-7. All four TP workers loaded 12.8735 GB of weights each; readiness, live fusion activation, correctness and E2E measurements remain pending. NPU0-3 were untouched."
     }
   ]
 }

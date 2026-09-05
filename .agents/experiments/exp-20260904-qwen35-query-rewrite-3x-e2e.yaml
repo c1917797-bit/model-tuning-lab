@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: v9_activation_rejected_symbolic_full_slice_fix_v10_ready_behind_p0_r15
+status: v10_live_bf16_loading_after_guarded_handoff
 decision: retain_current_stack_validate_v10_then_resume_shortgpt
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
@@ -94,7 +94,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "external p0_r15 is actively using physical NPU4-7; wait for R15_DONE and a stable idle window; NPU0-3 remain out of scope"
+  current: "p0_r15 wrote R15_DONE after its second FlashComm2 startup failure; guarded v10 operation exec-00000000000000f7 passed four stable idle checks and now exclusively owns assigned physical NPU4-7; NPU0-3 remain out of scope"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -1098,7 +1098,7 @@ mmar_add_rmsnorm_decode_candidate:
     post_export_root_cause: "the npugraph_ex backend receives an exported mutation topology: direct output assignment is aten.copy_.default and dynamic output[:n] is aten.slice.Tensor plus aten.copy_.default, not the Dynamo-level operator.setitem used by the first synthetic tests"
     post_export_fix_commit: 573ea2940bdc546923c698de16ea49465e6976f5
     post_export_fix_validation: "official 0.23.0 minimal overlay passed 7/7 focused tests in 8.52s; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
-    current_blocker: "external p0_r15 owns physical NPU4-7 for four configurations with two long repeats; it may release devices between configurations, so do not race it. Wait for R15_DONE plus a stable idle window. NPU0-3 remain untouched"
+    current_blocker: "no external resource blocker: p0_r15 ended and wrote R15_DONE; v10 is now loading/compiling on assigned physical NPU4-7. Runtime activation and E2E evidence remain pending; NPU0-3 remain untouched"
     guarded_v9_queue:
       operation_id: exec-0000000000000060
       superseded_operation_id: exec-0000000000000cbb
@@ -1123,7 +1123,7 @@ mmar_add_rmsnorm_decode_candidate:
       superseded_operation_id: exec-00000000000000e6
       script: scripts/queue_qwen35_fused_tail_v10.sh
       test: tests/test_queue_qwen35_fused_tail_v10.sh
-      state: "exactly one active asynchronous waiter; the superseded synchronous launch timed out after 30 seconds without leaving a process or allocating an NPU"
+      state: "exactly one active asynchronous operation; after R15_DONE and four stable idle checks it launched mmar-add-rmsnorm-v10-20260905T135044Z at 2026-09-05T13:50:44Z; all four TP workers loaded 12.8735 GB BF16 weights with quantization=None, while readiness and activation remain pending"
       gate: "wait for R15_DONE, then four stable idle checks before launch; the underlying launcher repeats reservation and npu-smi guards"
       duplicate_policy: "poll exec-00000000000000f7 and do not start another v10 queue"
     shortgpt_resume:
@@ -1136,7 +1136,7 @@ mmar_add_rmsnorm_decode_candidate:
       predecessor_identity: "pid 1298706, start_ticks 115030322"
       queue_gate: "require R15_DONE, exact v10 predecessor termination, then four stable Docker/npu-smi/port-10020 idle checks before fresh BI"
       duplicate_policy: "poll exec-0000000000000131; do not start another ShortGPT BI queue"
-    next: "continue polling the exactly one active v10 queue and the exactly one serialized ShortGPT BI queue; require v10 activation 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only correctness-passing frozen c1/c5/c8/c16 evidence; inspect and freeze the fresh BI result after its queued operation completes"
+    next: "continue polling the exactly one active v10 operation and the exactly one serialized ShortGPT BI queue; require v10 activation 64 normalized copies and 128 fused patterns per rank in (1,16), require (17,32768) applicable=False, then accept only correctness-passing frozen c1/c5/c8/c16 evidence; inspect and freeze the fresh BI result after its queued operation completes"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

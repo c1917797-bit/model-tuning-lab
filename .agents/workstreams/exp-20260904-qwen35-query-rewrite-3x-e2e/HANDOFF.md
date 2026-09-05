@@ -2,13 +2,15 @@
 
 ## State
 
-- Execution: `v9-activation-rejected-before-traffic-v10-source-fix-ready`;
-  integration: `default-off-source-4424cc24-pinned-v10-queue-ready`.
-- Current resource state supersedes older idle snapshots below: `p0_r15` is a
-  real TP4 workload on physical NPU4-7. It runs four configurations with two
-  long repeats and may release the devices briefly between configurations.
-  Do not stop, modify, or race it. Require `R15_DONE` plus a stable Docker,
-  `npu-smi`, and port-idle window before launching v10.
+- Execution: `v10-live-bf16-loading-on-assigned-npu4-7`;
+  integration: `default-off-source-4424cc24-pinned-v10-running`.
+- Current resource state supersedes older idle snapshots below: the protected
+  `p0_r15` chain ended after its FlashComm2 configuration failed both guarded
+  startup attempts and wrote `R15_DONE` at 2026-09-05T13:49:39Z. Queue
+  operation `exec-00000000000000f7` then passed its four-observation idle
+  gate and launched exactly one v10 container on assigned physical NPU4-7 at
+  13:50:44Z. NPU0-3 remain out of scope. Do not start a duplicate v10 or
+  ShortGPT BI process.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - The user assigned physical NPU4-7 to this task. The old
@@ -1809,11 +1811,17 @@ hashes remain pinned.
 The v10 launcher pin, resource queue and shell mocks pass. The first launch,
 `exec-00000000000000e6`, was submitted with a 30-second synchronous wait and
 terminated on that tool timeout without leaving a host waiter or allocating an
-NPU. Exactly one replacement queue is active as operation
-`exec-00000000000000f7` in the asynchronous job lane. It waits for `R15_DONE`
-before checking a four-observation stable idle window, preventing it from
-taking NPU4-7 during `p0_r15` inter-configuration gaps. Poll this operation
-and do not start another v10 queue. A ShortGPT
+NPU. Exactly one replacement operation,
+`exec-00000000000000f7`, remains active in the asynchronous job lane.
+`p0_r15` completed after both FlashComm2 startup attempts failed the runtime
+constraint that parallel size 4 cannot equal/exceed global TP4, then wrote
+`R15_DONE`. The v10 queue observed that marker, passed all four stable idle
+checks, and launched
+`mmar-add-rmsnorm-v10-20260905T135044Z` on physical NPU4-7. By
+2026-09-05T13:53:31Z all four TP workers had loaded 12.8735 GB of BF16 weights
+each with `quantization=None`; service readiness, the 64-normalized/128-fused
+activation gate, correctness and benchmark traffic are still pending. Poll
+operation f7 and do not start another v10 queue. A ShortGPT
 diagnostic launch attempt `exec-00000000000000c8` was independently rejected
 with exit 48 before Docker because `p0_r15` reserved NPU4-7; its empty output
 root is not evidence and must not be reused. Run v10 first. Only if all four
