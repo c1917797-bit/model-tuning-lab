@@ -2,15 +2,17 @@
 
 ## State
 
-- Execution: `v10-live-bf16-loading-on-assigned-npu4-7`;
-  integration: `default-off-source-4424cc24-pinned-v10-running`.
+- Execution: `shortgpt-bi-running-on-assigned-npu4-7`;
+  integration: `v10-rejected-before-traffic-live-graph-preserved`.
 - Current resource state supersedes older idle snapshots below: the protected
   `p0_r15` chain ended after its FlashComm2 configuration failed both guarded
   startup attempts and wrote `R15_DONE` at 2026-09-05T13:49:39Z. Queue
   operation `exec-00000000000000f7` then passed its four-observation idle
   gate and launched exactly one v10 container on assigned physical NPU4-7 at
-  13:50:44Z. NPU0-3 remain out of scope. Do not start a duplicate v10 or
-  ShortGPT BI process.
+  13:50:44Z. Its positive activation gate later rejected the run with exit 72
+  before query traffic. The serialized ShortGPT BI queue then passed the
+  guarded handoff and now owns NPU4-7. NPU0-3 remain out of scope. Do not
+  start a duplicate BI process or relaunch v10 unchanged.
 - Branch: `work/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Worktree: `/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - The user assigned physical NPU4-7 to this task. The old
@@ -1845,3 +1847,47 @@ waiter is asynchronous operation `exec-0000000000000131`, host PID
 `115030322`; it requires `R15_DONE`, exact predecessor termination, and four
 stable Docker/`npu-smi`/port-10020 idle checks before starting a fresh BI
 root. Poll it after v10 and never start a duplicate.
+
+## v10 terminal evidence and live ShortGPT BI
+
+This section supersedes the pending-state sentences immediately above.
+Operation `exec-00000000000000f7` is terminal with exit 72. The real BF16,
+non-quantized TP4 service reached the positive activation gate on assigned
+physical NPU4-7, but every rank reported `(1,16) applicable=True`,
+`Normalized 0`, and `Fused 64`, instead of the required 64 normalized copies
+and 128 fused tails per rank. Every rank correctly kept `(17,32768)`
+inapplicable. The gate sent zero query_rewrite requests, so there is no v10
+latency matrix and the retained stack is unchanged.
+
+Immutable v10 evidence root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v10-20260905T135044Z`
+
+Hashes:
+
+- `integration-check.json`:
+  `fe6b7c528bba5f50029590d753c563eb2f009e4548de90a980a8a3ebad7a8946`
+- `service-before-benchmark.log`:
+  `3c6c10e3524e1b9ddeee6d8fa60e95ca26f101ac5e4956d78b02bebe5b120820`
+- preserved real rank-0 `computation_graph.py`:
+  `74fd420a59549557ab632c9c42fe9d830b58a0c482fd1ee67546235c58f8aae7`
+- `activation-SHA256SUMS`:
+  `a11398e69832a5fdb799d03e5c17fb9f682a67a13c8d91f33ab0d690f2589108`
+
+The 1,039,860-byte read-only graph copy is
+`live-computation-graph-rank0.py` in that root. It proves the actual GDN and
+full-attention MMAR destination topology and following residual/RMS users,
+but it does not yet prove which matcher guard rejected the second 64 tails.
+Do not patch that path by inference alone and do not relaunch v10 unchanged.
+
+The only current accelerator job is serialized ShortGPT BI operation
+`exec-0000000000000131`, using fresh root
+`/cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/bi-20260905T135854Z`.
+It passed the predecessor and four-observation idle gates, then started one
+BF16, non-quantized eager TP4 service on physical NPU4-7. Rank 0 emitted 64
+startup BI observations during model initialization; the runner is designed
+to move those aside after readiness and collect a fresh deterministic
+32-prompt sample before analysis. Poll this operation only. If analysis
+passes its coverage and rank-stability gates, freeze one layer set, launch a
+fresh retained-stack semantic control first, and only then run correctness
+plus the fixed c1/c5/c8/c16 query_rewrite matrix.

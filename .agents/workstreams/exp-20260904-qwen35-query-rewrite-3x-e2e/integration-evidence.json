@@ -276,6 +276,14 @@
     {
       "gate": "p0-r15-completion-and-v10-live-handoff",
       "result": "PASS noninterference/startup: p0_r15 completed and wrote R15_DONE after two FlashComm2 startup validation failures. Operation exec-00000000000000f7 then passed four stable idle observations and launched exactly one BF16, non-quantized v10 container at 2026-09-05T13:50:44Z on assigned physical NPU4-7. All four TP workers loaded 12.8735 GB of weights each; readiness, live fusion activation, correctness and E2E measurements remain pending. NPU0-3 were untouched."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-v10-positive-activation",
+      "result": "REJECT safely before traffic: operation exec-00000000000000f7 ended with exit 72 after every TP rank reported (1,16) applicable=True, Normalized 0 and Fused 64 rather than the required Normalized 64 and Fused 128; every rank correctly kept (17,32768) inapplicable. Zero query_rewrite requests ran. integration-check SHA256 is fe6b7c528bba5f50029590d753c563eb2f009e4548de90a980a8a3ebad7a8946, service-before-benchmark SHA256 is 3c6c10e3524e1b9ddeee6d8fa60e95ca26f101ac5e4956d78b02bebe5b120820, and the preserved live rank-0 graph SHA256 is 74fd420a59549557ab632c9c42fe9d830b58a0c482fd1ee67546235c58f8aae7."
+    },
+    {
+      "gate": "shortgpt-bi-guarded-live-handoff",
+      "result": "PASS orchestration/startup: serialized operation exec-0000000000000131 observed exact v10 termination and four stable idle checks, then started one BF16 non-quantized eager TP4 BI service on assigned physical NPU4-7 using fresh root bi-20260905T135854Z. Rank 0 wrote 64 startup observations before health readiness; the runner will archive those records and collect 32 fresh real prompts before analysis. NPU0-3 remain untouched and duplicate launch is forbidden."
     }
   ]
 }
