@@ -1040,13 +1040,13 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39
+    source_commit: d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8
     previous_partial_fusion_commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
-    full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies only when all destination consumers are the expected residual/RMS tail; this makes attention tails match the same fusion as direct MLP-down tails"
-    focused_validation: "source 4424cc passes py_compile/diff checks and all 9 focused fusion-pass tests in the exact 0.23.0 image with device-backend autoload disabled and torch_npu/dynamo on PYTHONPATH; coverage includes open-ended symbolic-first-axis acceptance and bounded-slice rejection without allocating an NPU"
+    full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies, including the real functionalized slice-copy-slice_scatter bookkeeping chain, only when all semantic consumers are the expected residual/RMS tail"
+    focused_validation: "source d0c0fbd passes py_compile/diff checks and all 11 focused fusion-pass tests in the exact 0.23.0 image; coverage includes functional slice_scatter, symbolic full slices, partial-shape rejection and unrelated-user rejection without allocating an NPU"
     binary_boundary: "Python-only change; extension SHA256 remains 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23 and kernel library SHA256 remains 6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
@@ -1098,7 +1098,7 @@ mmar_add_rmsnorm_decode_candidate:
     post_export_root_cause: "the npugraph_ex backend receives an exported mutation topology: direct output assignment is aten.copy_.default and dynamic output[:n] is aten.slice.Tensor plus aten.copy_.default, not the Dynamo-level operator.setitem used by the first synthetic tests"
     post_export_fix_commit: 573ea2940bdc546923c698de16ea49465e6976f5
     post_export_fix_validation: "official 0.23.0 minimal overlay passed 7/7 focused tests in 8.52s; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
-    current_blocker: "ShortGPT remove8 failed the semantic-quality gate and is excluded. v10 still lacks 64 attention-copy rewrites per rank. Protected p0_r16 owns NPU4-7, so v11 rejection diagnostics are queued behind its explicit R16_DONE marker; NPU0-3 remain untouched."
+    current_blocker: "ShortGPT remove8 remains excluded. v12 proved all 64 functional-copy candidates were rejected at slice_scatter bookkeeping. Source d0c0fbd fixes that exact topology; v13 is the only live activation/E2E operation on physical NPU4-7. NPU0-3 remain untouched."
     guarded_v9_queue:
       operation_id: exec-0000000000000060
       superseded_operation_id: exec-0000000000000cbb
@@ -1158,8 +1158,33 @@ mmar_add_rmsnorm_decode_candidate:
       protected_marker: "/cache/austinov/p0/r16.log:R16_DONE"
       output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v11-diagnostics-20260905T145100Z
       gate: "after R16_DONE, require four stable Docker/npu-smi/port-10010 idle checks; then require Normalized 64/Fused 128 per rank before any query traffic"
-      duplicate_policy: "poll exec-00000000000001fe only; never interrupt p0_r16 or start another v11 queue"
-    next: "Poll only v11 diagnostics queue exec-00000000000001fe. If activation still fails, use its rejection counters to patch only the proven guard, re-run focused tests, and repeat activation-only. Do not run ShortGPT remove16/remove20 or enable the operator for E2E until Normalized 64/Fused 128 passes on all ranks."
+      state: "terminal exit 72 before traffic: every rank counted 128 MMAR and 64 aten.copy.default nodes; the old matcher counted no copy candidates"
+      hashes: {integration_check_sha256: 4842411703e5dfb0ea4b77934b14ce5c109a6654b785a20a914c3febd96dcc66, service_before_benchmark_sha256: 93795ca2b55b137540ac6a0cebdbf511d0051a5e27fdbe4ee7fc71f4ec4e535e, activation_manifest_sha256: fb855dcb22a3571376a82cde43cb3297dc127438c4cdcd69662dc1f7ee992cab}
+      duplicate_policy: "terminal; do not relaunch v11"
+    v12_activation:
+      operation_id: exec-0000000000000286
+      source_commit: 91602b1a21dc17ede35223d6ab91367b38ff0cfa
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v12-functional-copy-20260905T154011Z
+      state: "terminal exit 72 before traffic: each rank recognized 64 functional copy candidates but rejected all 64 as unrelated users; Normalized 0/Fused 64"
+      root_cause: "functionalization inserts slice_scatter between aten.copy.default and the following residual/RMS users"
+      hashes: {integration_check_sha256: 7036fcff2d8fe1255546178d0aee05f0df027fbbedf341157751554ae0bedb50, service_before_benchmark_sha256: 93c0e53d32e3b06476d36460cccdd946373e2dbe330a654a10d88284a974c793, activation_manifest_sha256: f76de4238299f45c1a93e3a52aa3abe25caec29be261b07abe1575f6ef07918f}
+    functional_slice_scatter_fix:
+      source_commit: d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8
+      maintainer_pin_commit: d7a91f2a6f7a66157ee2a675042374cd2266a682
+      scope: "accept exactly one full-shape axis-0 slice-copy-slice_scatter update with residual/RMS-only semantic users; preserve partial-shape and unrelated-user rejection"
+      validation: "py_compile and diff checks pass; exact 0.23.0 image passes 11/11 focused tests"
+    p0_r17_fail_fast:
+      result: "stopped exact process group and container after CANN proved commTurn=4 invalid and the script would retry 4/8/16; this auxiliary random-input sweep was not target evidence"
+      recovery: "container p0_r17 remains present as Exited (137); no files were deleted"
+    v13_live:
+      operation_id: exec-00000000000002cb
+      source_commit: d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8
+      launched_at: "2026-09-05T15:52:44Z"
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v13-slice-scatter-20260905T155244Z
+      state: "live on physical NPU4-7; activation gate and formal matrix pending"
+      gate: "require Normalized 64/Fused 128 on all four ranks before c1/c5/c8/c16 query traffic"
+      resource_scope: "physical NPU4-7 only; NPU0-3 protected"
+    next: "Poll only v13 operation exec-00000000000002cb. If the activation gate passes, let its correctness and full frozen query_rewrite matrix finish naturally; do not launch a duplicate or touch NPU0-3."
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

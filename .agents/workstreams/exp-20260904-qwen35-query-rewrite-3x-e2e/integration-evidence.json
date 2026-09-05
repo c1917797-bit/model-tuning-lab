@@ -291,7 +291,23 @@
     },
     {
       "gate": "mmar-add-rmsnorm-v11-diagnostics-queue",
-      "result": "ACTIVE fail-closed: source 5816eff11812fd9d54a1b433ca3d5ee1aad490f3 adds rejection counters without changing fusion eligibility and passes 9/9 focused exact-image tests. Direct attempt exec-00000000000001ed exited 48 before Docker because /p0_r16 reserved NPU4-7. The only replacement, exec-00000000000001fe, waits for R16_DONE and four stable idle observations before activation-only launch; NPU0-3 remain untouched."
+      "result": "REJECT safely before traffic: exec-00000000000001fe ended exit 72; each rank saw 128 MMAR nodes and 64 aten.copy.default nodes but no mutable-copy candidate. Immutable hashes are recorded in the experiment YAML."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-v12-functional-copy",
+      "result": "REJECT safely before traffic: exec-0000000000000286 ended exit 72; each rank recognized all 64 functional copies but rejected every one at the unrelated-user guard because the real graph includes functional slice_scatter bookkeeping. Normalized 0/Fused 64; no query request ran."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-functional-slice-scatter-fix",
+      "result": "PASS focused source validation: d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8 accepts only one full-shape axis-0 slice-copy-slice_scatter chain with residual/RMS-only consumers. Py-compile/diff checks and 11/11 exact-image tests pass; maintainer pin is d7a91f2a6f7a66157ee2a675042374cd2266a682."
+    },
+    {
+      "gate": "p0-r17-invalid-auxiliary-fail-fast",
+      "result": "PASS scope control: after CANN proved commTurn=4 invalid and the auxiliary random-input sweep would retry invalid 4/8/16 cases, its exact process group and container were stopped. The recoverable container remains Exited (137); NPU0-3 and task evidence were untouched."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-v13-live",
+      "result": "ACTIVE: exec-00000000000002cb is the only v13 operation, using physical NPU4-7 and immutable root mmar-add-rmsnorm-v13-slice-scatter-20260905T155244Z. It must pass Normalized 64/Fused 128 on all four ranks before formal query_rewrite traffic."
     }
   ]
 }

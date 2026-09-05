@@ -1925,3 +1925,53 @@ The unchanged positive gate still requires Normalized 64 and Fused 128 per
 rank and rejects before query traffic otherwise. Poll operation 01fe only;
 do not interrupt `p0_r16`, do not start another v11 queue, and do not touch
 NPU0-3.
+
+## v11/v12 terminal diagnosis and live v13
+
+The v11 diagnostics queue is terminal with exit 72 before query traffic.
+Each rank saw 128 MMAR nodes and 64 `aten.copy.default` nodes, but no copy
+candidate under the old mutable-copy matcher. Immutable root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v11-diagnostics-20260905T145100Z`
+
+Its integration-check, snapshotted service log and activation-manifest
+SHA256 values are respectively
+`4842411703e5dfb0ea4b77934b14ce5c109a6654b785a20a914c3febd96dcc66`,
+`93795ca2b55b137540ac6a0cebdbf511d0051a5e27fdbe4ee7fc71f4ec4e535e`
+and
+`fb855dcb22a3571376a82cde43cb3297dc127438c4cdcd69662dc1f7ee992cab`.
+
+Source `91602b1a21dc17ede35223d6ab91367b38ff0cfa` recognized functional
+copy nodes and passed 11/11 focused tests, but real v12 then proved the next
+guard: all 64 candidates per rank were rejected as unrelated users. v12 is
+terminal exit 72 with zero query traffic at:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v12-functional-copy-20260905T154011Z`
+
+The v12 integration-check, service snapshot and activation-manifest SHA256
+values are
+`7036fcff2d8fe1255546178d0aee05f0df027fbbedf341157751554ae0bedb50`,
+`93c0e53d32e3b06476d36460cccdd946373e2dbe330a654a10d88284a974c793`
+and
+`f76de4238299f45c1a93e3a52aa3abe25caec29be261b07abe1575f6ef07918f`.
+
+The preserved Dynamo graph and the v12 counters establish the real
+functionalized chain as `slice -> copy -> slice_scatter`. Source
+`d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8` handles that bookkeeping
+only for one full-shape axis-0 update with the expected residual/RMS semantic
+users. Py-compile, diff checks and all 11 exact-image tests pass. Maintainer
+commit `d7a91f2a6f7a66157ee2a675042374cd2266a682` pins it.
+
+An unrelated `p0_r17` auxiliary sweep attempted invalid
+`commTurn=4/8/16`; CANN requires zero in this topology. Its retry loop was
+stopped by exact process group and container after the first decisive error.
+The container remains recoverable as `Exited (137)`; nothing was deleted.
+
+Exactly one v13 operation, `exec-00000000000002cb`, is active on physical
+NPU4-7. It launched at 2026-09-05T15:52:44Z into:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v13-slice-scatter-20260905T155244Z`
+
+Poll operation 02cb only. Do not launch a duplicate and do not touch NPU0-3.
+The launcher must observe Normalized 64 and Fused 128 on all four ranks before
+it sends any c1/c5/c8/c16 query_rewrite traffic.
