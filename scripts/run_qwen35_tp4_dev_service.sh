@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|flashcomm1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
     ;;
 esac
@@ -25,10 +25,14 @@ case "$device_set" in
 esac
 tensor_parallel_size=4
 data_parallel_size=1
+pipeline_parallel_size=1
 if [[ "$mode" == tp2-dp2-mmar-on ||
       "$mode" == tp2-dp2-mmar-on-text-only ]]; then
   tensor_parallel_size=2
   data_parallel_size=2
+elif [[ "$mode" == tp2-pp2-mmar-on-weight-prefetch-gateup-0p1 ]]; then
+  tensor_parallel_size=2
+  pipeline_parallel_size=2
 fi
 device_tag="${device_set//-/_}"
 container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp${tensor_parallel_size}_dp${data_parallel_size}_${mode}_$device_tag}"
@@ -108,6 +112,7 @@ serve_args=(
   --host 127.0.0.1
   --port "$port"
   --tensor-parallel-size "$tensor_parallel_size"
+  --pipeline-parallel-size "$pipeline_parallel_size"
   --data-parallel-size "$data_parallel_size"
   --seed 1024
   --served-model-name Qwen3-5/Qwen3.5-27B
@@ -122,7 +127,8 @@ serve_args=(
   --mamba-ssm-cache-dtype bfloat16
   --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
   --additional-config "$(
-    if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ]]; then
+    if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ||
+          "$mode" == tp2-pp2-mmar-on-weight-prefetch-gateup-0p1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":1.0,"down":0.0}}}}'

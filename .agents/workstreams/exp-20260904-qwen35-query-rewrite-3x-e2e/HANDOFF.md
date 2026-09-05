@@ -1019,3 +1019,18 @@ MiB with no running processes. External NPU0-3 PIDs 1031654-1031657 were
 unchanged. Rollback remains selecting launcher mode `mmar-on`; do not retest
 prefetch ratios at or above about 0.2 because they hit the same 18 MB cap that
 was already rejected.
+
+## TP2/PP2 cumulative topology candidate ready
+
+The next bounded candidate changes only the parallel topology from TP4/PP1 to
+TP2/PP2 on physical NPU4-7. It retains BF16, MMAR, gate/up prefetch ratio 0.1,
+NZ1, async scheduling and FULL_DECODE_ONLY, and uses no quantization. Unlike
+the rejected TP2/DP2 route, pipeline parallelism keeps approximately one
+quarter of model weights per rank instead of replicating the full model per
+TP2 replica. The exact vLLM-Ascend 0.23.0 source has four-card TP2/PP2 E2E
+coverage and explicit async-scheduling pipeline handling.
+
+Run the fail-closed startup and memory gate first. Continue to the immutable
+quick32 comparison only after service health and a natural-stop smoke pass.
+The launcher is hard-restricted to physical NPU4-7. Rollback is selecting
+`mmar-on-weight-prefetch-gateup-0p1`; there is no source overlay.

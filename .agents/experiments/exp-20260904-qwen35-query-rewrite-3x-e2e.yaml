@@ -706,3 +706,14 @@ weight_prefetch_gateup_0p1_candidate:
       sha256sums_sha256: df47028cfaad83112d8e9624453d77f4387246499e5fe30b8560408bd50e445f
   decision: "retain provisionally as the new cumulative stack: incremental TPOT geometric mean is 1.01445x over MMAR-only, c5/c8/c16 improve and the sole c1 regression is 0.66%; TTFT also improves 1.03104x geometrically; the final 2x TPOT target remains open"
   recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2866 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
+tp2_pp2_mmar_prefetch_candidate:
+  source_manifest: configs/qwen35-query-rewrite-tp2-pp2-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml
+  launcher_mode: tp2-pp2-mmar-on-weight-prefetch-gateup-0p1
+  status: ready_for_startup_gate
+  primary_variable_vs_retained_stack: "TP4/PP1 -> TP2/PP2 on the same physical NPU4-7"
+  retained_stack: "BF16; MatMulAllReduce on; gate/up prefetch ratio 0.1; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
+  rationale: "MMAR profile is collective dominated; TP2/PP2 preserves one-quarter model weights per rank unlike rejected TP2/DP2, while reducing the tensor-parallel group from four cards to two"
+  source_eligibility: "exact vLLM-Ascend 0.23.0 tree contains four-card TP2/PP2 E2E coverage and explicit async-scheduling plus pipeline handling"
+  devices: "physical NPU4-7 only; NPU0-3 prohibited"
+  gates: ["startup and memory capacity", "zero-error smoke with natural stop", "full quick32 correctness", "fixed-original TTFT/TPOT", "incremental comparison to retained TP4 stack"]
+  rollback: "select mmar-on-weight-prefetch-gateup-0p1; no source overlay or model files are changed"
