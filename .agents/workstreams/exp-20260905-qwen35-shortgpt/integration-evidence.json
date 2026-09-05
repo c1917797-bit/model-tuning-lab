@@ -40,11 +40,11 @@
     },
     {
       "gate": "fused-tail-v10-dependency",
-      "result": "ACTIVE guarded queue: the first v10 launch exec-00000000000000e6 hit its 30-second synchronous timeout without leaving a host waiter or allocating an NPU. Replacement asynchronous operation exec-00000000000000f7 is the only active waiter. It pins source fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39 and must wait for p0_r15 R15_DONE plus four stable idle checks before allocating NPU4-7; do not duplicate it."
+      "result": "ACTIVE guarded queue: the first v10 launch exec-00000000000000e6 hit its 30-second synchronous timeout without leaving a host waiter or allocating an NPU. Replacement asynchronous operation exec-00000000000000f7 is the only active waiter. It pins source fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39, whose exact-image 9/9 focused fusion-pass tests now execute successfully, and must wait for p0_r15 R15_DONE plus four stable idle checks before allocating NPU4-7; do not duplicate it."
     },
     {
       "gate": "shortgpt-bi-after-v10-queue",
-      "result": "ACTIVE guarded queue: asynchronous operation exec-0000000000000131 (host PID 1474376) is the only ShortGPT BI waiter. It binds predecessor PID 1298706 plus start tick 115030322, requires R15_DONE and exact predecessor termination, then requires four stable Docker/npu-smi/port-10020 idle checks before launching a fresh BI root. Queue shell mock passes; do not duplicate it."
+      "result": "ACTIVE guarded queue: asynchronous operation exec-0000000000000131 (host PID 1474376) is the only ShortGPT BI waiter. It binds predecessor PID 1298706 plus start tick 115030322, requires R15_DONE and exact predecessor termination, then requires four stable Docker/npu-smi/port-10020 idle checks before launching a fresh BI root. Queue shell mock passes both blocked-live-predecessor and released-predecessor paths; do not duplicate it."
     },
     {
       "gate": "semantic-control-selection",
