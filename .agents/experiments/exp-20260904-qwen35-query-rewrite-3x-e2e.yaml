@@ -1046,7 +1046,7 @@ mmar_add_rmsnorm_decode_candidate:
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
     full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies only when all destination consumers are the expected residual/RMS tail; this makes attention tails match the same fusion as direct MLP-down tails"
-    focused_validation: "source 573ea previously passed 7/7 official-image tests; source 4424cc adds open-ended symbolic-first-axis acceptance plus bounded-slice rejection tests and passes py_compile/diff checks. No-device pytest remained blocked at torch_npu import, so execution of the two new tests is not claimed"
+    focused_validation: "source 4424cc passes py_compile/diff checks and all 9 focused fusion-pass tests in the exact 0.23.0 image with device-backend autoload disabled and torch_npu/dynamo on PYTHONPATH; coverage includes open-ended symbolic-first-axis acceptance and bounded-slice rejection without allocating an NPU"
     binary_boundary: "Python-only change; extension SHA256 remains 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23 and kernel library SHA256 remains 6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
@@ -1117,7 +1117,7 @@ mmar_add_rmsnorm_decode_candidate:
     symbolic_full_slice_fix:
       source_commit: 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39
       scope: "allow different symbolic first-axis names only for open-ended axis-0 full slices with matching rank/trailing dimensions and LayerNorm-only semantic consumers"
-      validation: "py_compile and diff checks pass; two focused tests added; no-device pytest blocked at torch_npu import and is not claimed"
+      validation: "py_compile and diff checks pass; exact 0.23.0 image passes 9/9 focused fusion-pass tests with device-backend autoload disabled and torch_npu/dynamo on PYTHONPATH, including symbolic-open-slice acceptance and bounded-slice rejection"
     guarded_v10_queue:
       operation_id: exec-00000000000000f7
       superseded_operation_id: exec-00000000000000e6

@@ -1799,10 +1799,12 @@ dimension. Source commit
 is an open-ended axis-0 slice, ranks and trailing dimensions match, and all
 semantic destination users are the expected residual/RMS tail. A bounded
 slice with different symbolic first dimensions is still rejected. The Python
-files pass `py_compile` and `git diff --check`; two focused regression
-tests were added. A no-NPU official-image pytest attempt could not import
-`torch_npu` without physical device mappings, so those new tests are not
-claimed as executed. The unchanged extension and kernel hashes remain pinned.
+files pass `py_compile` and `git diff --check`. The exact 0.23.0 image now
+passes all 9 focused fusion-pass tests with device-backend autoload disabled
+and the image's `torch_npu/dynamo` compatibility package on `PYTHONPATH`;
+this includes the new symbolic-open-slice acceptance and bounded-slice
+rejection cases without allocating an NPU. The unchanged extension and kernel
+hashes remain pinned.
 
 The v10 launcher pin, resource queue and shell mocks pass. The first launch,
 `exec-00000000000000e6`, was submitted with a 30-second synchronous wait and

@@ -267,7 +267,7 @@
     },
     {
       "gate": "mmar-add-rmsnorm-symbolic-full-slice-fix",
-      "result": "PASS static with explicit boundary: source 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39 accepts different symbolic first-axis spellings only for open-ended full axis-0 copies whose rank/trailing dimensions and LayerNorm-only users are safe. py_compile and diff checks pass and two tests were added; no-device official-image pytest was blocked at torch_npu import, so execution of those tests is not claimed."
+      "result": "PASS focused source validation with explicit boundary: source 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39 accepts different symbolic first-axis spellings only for open-ended full axis-0 copies whose rank/trailing dimensions and LayerNorm-only users are safe. Py_compile/diff checks and all 9 focused fusion-pass tests pass in the exact 0.23.0 image with device-backend autoload disabled and torch_npu/dynamo on PYTHONPATH; this includes symbolic-open-slice acceptance and bounded-slice rejection without allocating an NPU."
     },
     {
       "gate": "p0-r15-noninterference-and-v10-queue",
