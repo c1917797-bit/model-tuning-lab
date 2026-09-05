@@ -23,8 +23,10 @@ candidate:
   quantized: false
   source:
     repository: /cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax
-    commit: 2d08abd56466360b56738d5c48858dc32ddd1f6b
-    patch: vllm_ascend/patch/worker/patch_qwen3_5.py
+    commit: 37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd
+    patches:
+      - vllm_ascend/patch/worker/patch_qwen3_5.py
+      - vllm_ascend/spec_decode/llm_base_proposer.py
 benchmark:
   dataset: /cache/cch/query_rewrite.jsonl
   dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e

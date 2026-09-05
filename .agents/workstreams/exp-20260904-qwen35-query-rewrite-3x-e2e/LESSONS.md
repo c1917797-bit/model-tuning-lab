@@ -59,7 +59,7 @@ Updated: 2026-09-05
 1. Read this file, then the latest section of `HANDOFF.md`, the experiment YAML, and `task.json`.
 2. Recheck `git status`, exact branch/HEAD, containers, host processes and the NPU0-7 process table. Recorded idle state is never sufficient.
 3. Verify the TP8 baseline summary hash before computing any ratio.
-4. Highest-value bounded next step: repair MTP k=1 so the draft path does not materialize full vocabulary logits during dummy run, then prove startup, local-argmax activation and speculative acceptance before benchmark traffic.
+4. Highest-value bounded next step: validate source commit `37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd`, which mounts both the Qwen3.5 MTP model patch and the Ascend proposer patch so dummy run cannot bypass local argmax; then prove startup, local-argmax activation and speculative acceptance before benchmark traffic.
 5. If that repair changes more than the draft-token selection path, start a new experiment attempt and state the expanded primary variable explicitly.
 6. Run the complete repeated matrix, correctness, profiling and decision gates. Promote only an additive treatment that improves both TTFT and TPOT across the frozen cells.
 
@@ -72,6 +72,5 @@ Updated: 2026-09-05
   - `scripts/run_qwen35_tp8_user_baseline.sh`
 - MTP v2 failure evidence:
   `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k1-20260905T192433Z`.
-- MTP source checkpoint: `/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax`, commit `2d08abd56466360b56738d5c48858dc32ddd1f6b`.
+- MTP source checkpoint: `/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax`, commit `37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd`.
 - Rollback is the non-speculative TP8 baseline. Do not restart paused external workloads unless the user requests it.
-

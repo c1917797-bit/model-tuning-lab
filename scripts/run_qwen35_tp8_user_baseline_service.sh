@@ -7,7 +7,7 @@ port="${PORT:-10010}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 runtime_role="${RUNTIME_ROLE:-baseline}"
 mtp_local_argmax_root="${MTP_LOCAL_ARGMAX_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax}"
-mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-2d08abd56466360b56738d5c48858dc32ddd1f6b}"
+mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd}"
 
 case "$runtime_role" in
   baseline|mtp-local-argmax|tp4-dp2|tp4-dp2-mtp-local-argmax) ;;
@@ -32,9 +32,14 @@ if [[ "$runtime_role" == *mtp-local-argmax ]]; then
     exit 45
   fi
   mtp_patch="$mtp_local_argmax_root/vllm_ascend/patch/worker/patch_qwen3_5.py"
+  proposer_patch="$mtp_local_argmax_root/vllm_ascend/spec_decode/llm_base_proposer.py"
   if [[ ! -f "$mtp_patch" ]]; then
     echo "Qwen3.5 MTP local-argmax patch is missing: $mtp_patch" >&2
     exit 46
+  fi
+  if [[ ! -f "$proposer_patch" ]]; then
+    echo "Ascend proposer local-argmax patch is missing: $proposer_patch" >&2
+    exit 47
   fi
 fi
 
@@ -118,6 +123,7 @@ if [[ "$uses_mtp" == true ]]; then
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}')
   runtime_mount_args+=(
     -v "$mtp_patch:/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py:ro"
+    -v "$proposer_patch:/vllm-workspace/vllm-ascend/vllm_ascend/spec_decode/llm_base_proposer.py:ro"
   )
 fi
 
