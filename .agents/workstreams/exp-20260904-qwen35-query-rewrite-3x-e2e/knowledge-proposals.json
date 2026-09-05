@@ -139,6 +139,18 @@
       "status": "accepted-local",
       "lesson": "An idle npu-smi process table is not sufficient for safe allocation while another container is starting. Check running containers' HostConfig device reservations first, then check npu-smi, and fail closed without stopping an unowned container.",
       "evidence": "p0_aff reserved /dev/davinci4..7 while npu-smi briefly showed no process; two later task starts failed aclInit with Resource_Busy before measurement."
+    },
+    {
+      "id": "verified-monitor-reservations-need-exact-exceptions",
+      "status": "accepted-local",
+      "lesson": "Long-lived monitor/admin containers may mount all device files without owning an NPU runtime. Allow only exact operator-verified container names through the reservation layer, then retain the npu-smi process gate; never use a broad device-mount exception.",
+      "evidence": "The two allowed containers had run for 13 hours and 11 days with only sleep/idle shell processes, while a newly created p0_ck workload was still rejected with exit 48."
+    },
+    {
+      "id": "decode-fusion-promotion-needs-every-shape-correct",
+      "status": "accepted-local",
+      "lesson": "Promote a communication-tail fusion to model integration only after every profiled projection shape and captured decode batch size passes both output checks and no latency cell regresses. A favorable average cannot waive a single incorrect or slower cell.",
+      "evidence": "Corrected TP4 BF16 MMAR+Add+RMSNorm run passed all 18 cells, delivered 1.851721x geometric-mean speedup and a 1.706554x minimum, with immutable result SHA256 0dfe46d44c907e513e8fa2a0a6bc48e2c26c39fc981bfe30cc5f2fa29cb2d8ac."
     }
   ]
 }

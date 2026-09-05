@@ -168,6 +168,18 @@
     {
       "gate": "dynamic-device-reservation-safety",
       "result": "PASS fail-closed: external container p0_aff started after the first run and reserves /dev/davinci4..7. Two corrected attempts stopped at aclInit Resource_Busy without measurements; the launcher now checks running-container device mappings before npu-smi and must not stop or modify p0_aff."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-corrected-microbenchmark",
+      "result": "PASS and PROMOTE to E2E: all 18 physical-NPU4-7 TP4 BF16 cells passed both add and normalized outputs; geometric-mean speedup is 1.851721x and the minimum cell is 1.706554x."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-default-off-integration",
+      "result": "PASS static/launcher: source f0f5688d adds an explicit default-false graph flag, restricts the pass to non-SP compile ranges of 1-16 tokens, and pins the custom extension and kernel hashes in a read-only official-image overlay. Runtime graph-match and E2E gates remain pending."
+    },
+    {
+      "gate": "assigned-device-race-guard",
+      "result": "PASS fail-closed: the first E2E attempt exited 48 without launching when a new p0_ck workload reserved NPU4-7. The task did not stop it, did not create performance evidence, and still did not touch NPU0-3."
     }
   ]
 }

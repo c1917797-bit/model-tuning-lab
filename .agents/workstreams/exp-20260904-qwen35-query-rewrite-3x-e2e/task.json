@@ -23,6 +23,6 @@
     "bash -n scripts/run_qwen35_mmar_add_rmsnorm_microbench.sh",
     "git diff --check"
   ],
-  "executionState": "mmar-add-rmsnorm-promising-microbenchmark-correctness-rerun-waiting-for-unreserved-npu4-7",
-  "integrationState": "not-ready-target-open"
+  "executionState": "mmar-add-rmsnorm-correctness-and-microbenchmark-passed-e2e-waiting-for-p0-ck-release",
+  "integrationState": "default-off-source-ready-e2e-pending"
 }

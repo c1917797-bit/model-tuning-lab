@@ -999,7 +999,7 @@ final_maintainer_decision:
   handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
   resources: "all task containers exited; this work used only physical NPU4-7 mapped to logical 0-3 inside the container; no unscoped device was touched"
 mmar_add_rmsnorm_decode_candidate:
-  status: microbenchmark_correctness_rerun_pending
+  status: corrected_microbenchmark_passed_e2e_queued
   rationale: "target the two serialized row-parallel tails per layer by fusing MMAR, residual add and the following GemmaRMSNorm without retraining or quantization"
   framework_boundary: "the built-in vLLM-Ascend custom pass is default-off and applies only above 512 tokens, so the candidate uses the CANN 9.1 general ACLNN operator for decode M=1-16"
   implementation:
@@ -1008,7 +1008,7 @@ mmar_add_rmsnorm_decode_candidate:
     test: tests/test_benchmark_qwen35_mmar_add_rmsnorm.py
     source_worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
     source_branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-    source_commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
+    source_commit: f0f5688daf68a575063c17b1e48de6ed2febe98f
     extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
     meta_registration:
       commit: 4cc7cd7fb03b796fcd090a373b9c087f5ace8de5
@@ -1027,10 +1027,28 @@ mmar_add_rmsnorm_decode_candidate:
     hashes: {result_sha256: 04f0da791e526a943f8293be2df2549591cc50e4fb12989f9598b79231e85388, container_log_sha256: 330536b2671256a51b087e224a7cc97191e3c099552a7bedeae51d187f551153, sha256sums_sha256: d0e3a600ec35c2b892d434ae1c3df8fddcbb09d27385513df683de13d806ad42}
   corrected_rerun:
     input_scale: "std=0.1 for x, weight and residual, matching the upstream operator example"
-    status: waiting_for_unreserved_npu4_7
+    status: passed
+    operation_id: exec-0000000000000af1
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-corrected-meta-20260905T054401Z
+    correctness_pass: true
+    geomean_candidate_speedup_vs_control: 1.851720752074333
+    minimum_candidate_speedup_vs_control: 1.706553873896168
+    decision: promote-fused-tail-to-e2e
+    hashes: {result_sha256: 0dfe46d44c907e513e8fa2a0a6bc48e2c26c39fc981bfe30cc5f2fa29cb2d8ac, container_log_sha256: ea323bccb1e1345a439d527d121ef4738975b2fc5da72ca01cf26aafea6e3895, sha256sums_sha256: b26ff6be069bb74c9eb278cdc9fa39ad5298ec7668a4ebfb8ea90c392573062e}
     invalid_attempts: [exec-0000000000000ab6, exec-0000000000000ab8]
-    blocker: "p0_aff is actively running a separate profiling/benchmark sequence and explicitly reserves /dev/davinci4..7; aclInit returned Resource_Busy before measurement"
     resource_scope: "the user confirmed physical NPU4-7 are assigned to this optimization; NPU0-3 remain prohibited"
-    safety: "do not interrupt an active p0_aff run without explicit coordination; resume when the assigned cards are released"
+    safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
-  promotion_gate: "all 18 cells correct, geometric mean >=1.02x, minimum >=1.0x, then and only then integrate default-off into Qwen3.5 and run frozen c1/c5/c8/c16 E2E"
+  graph_integration:
+    source_commit: f0f5688daf68a575063c17b1e48de6ed2febe98f
+    flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
+    default: false
+    scope: "non-SP compile ranges with 1-16 tokens only"
+    launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
+    rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
+  e2e_queue:
+    first_attempt_operation: exec-0000000000000b07
+    result: "guarded before launch; p0_ck began a separate NPU4-7 chunk sweep after the successful microbenchmark"
+    output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-20260905T055023Z
+    next: "retry into a new immutable output root when p0_ck naturally releases NPU4-7"
+  promotion_gate: "graph pass must match, service correctness must pass, then all frozen c1/c5/c8/c16 cells must improve versus the immutable original and retained stack"

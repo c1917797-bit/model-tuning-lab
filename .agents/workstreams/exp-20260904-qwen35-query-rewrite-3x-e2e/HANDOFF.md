@@ -1471,3 +1471,30 @@ Promote to model integration only if both outputs pass in every cell, geometric
 mean speedup is at least 1.02, and no cell regresses. Until that happens, the
 retained E2E stack and all reported TTFT/TPOT values remain unchanged; the 2x
 TPOT goal is still open.
+
+## Decode fused-tail promotion and current queue state
+
+This supersedes the preceding checkpoint. The corrected physical-NPU4-7 TP4
+BF16 run passed both outputs in all 18 shape/batch cells. Geometric-mean speedup
+is 1.851721x and the slowest cell still improves by 1.706554x. Evidence:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-corrected-meta-20260905T054401Z`
+
+Result SHA256 is
+`0dfe46d44c907e513e8fa2a0a6bc48e2c26c39fc981bfe30cc5f2fa29cb2d8ac`.
+SHA256SUMS digest is
+`b26ff6be069bb74c9eb278cdc9fa39ad5298ec7668a4ebfb8ea90c392573062e`.
+
+Source HEAD `f0f5688daf68a575063c17b1e48de6ed2febe98f` adds the
+default-off `ascend_compilation_config.fuse_decode_mmar_add_rmsnorm` pass. It
+is restricted to non-sequence-parallel compile ranges from 1 through 16 tokens.
+Launcher mode `mmar-on-weight-prefetch-gateup-0p1-fused-tail` pins the source,
+extension and kernel hashes and overlays them read-only on the official 0.23.0
+image. Roll back by selecting `mmar-on-weight-prefetch-gateup-0p1`.
+
+The first E2E attempt (`exec-0000000000000b07`) correctly exited 48 before
+launch because `p0_ck` began a separate three-point chunk sweep on NPU4-7 after
+the microbenchmark finished. Do not stop it. Retry the frozen c1/c5/c8/c16 run
+in a new immutable output directory when that sweep releases NPU4-7. Runtime
+graph-match, service correctness, E2E latency and candidate profiling are still
+open, so the retained stack and the TPOT decision have not changed yet.
