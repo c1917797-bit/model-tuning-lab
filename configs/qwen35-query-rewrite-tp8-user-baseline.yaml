@@ -58,7 +58,7 @@ runtime:
     static_all_moe_layers: []  # effective default; not accepted as a CLI input
   additional_config:
     enable_cpu_binding: true
-    enable_matmul_allreduce: false
+    enable_matmul_allreduce: true
     enable_flashcomm1: false
 environment:
   ASCEND_RT_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
@@ -68,7 +68,7 @@ environment:
   TASK_QUEUE_ENABLE: "1"
   TRITON_KERNEL_DUMP: "1"
   TRITON_DUMP_DIR: /cache/efim/triton_dump
-  VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE: "0"
+  VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE: "1"
   VLLM_LOGGING_LEVEL: DEBUG
 benchmark:
   dataset: /cache/cch/query_rewrite.jsonl

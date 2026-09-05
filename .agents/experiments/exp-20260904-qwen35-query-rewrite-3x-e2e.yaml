@@ -1308,6 +1308,9 @@ tp8_user_baseline_reconstruction:
   attempts:
     v1: "resource gate rejected because a concurrent MTP local-argmax candidate had reserved NPU4-7; no TP8 container was created"
     v2: "stopped before readiness and before benchmark traffic after effective-config inspection found custom_ops and pass_config had inherited defaults rather than the user-supplied explicit values"
+    v3: "argument parsing rejected the read-only effective field static_all_moe_layers; no model load or benchmark traffic"
+    v4: "stopped during the first c1 request and invalidated after the observed generation rate exposed that Ascend MMAR had been disabled; the user's earlier original environment explicitly enables VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1, which is independent of disable_custom_all_reduce and pass_config.fuse_gemm_comms=false"
+  matmul_allreduce: "enabled for the reconstructed original baseline from the user's supplied original environment; retain disable_custom_all_reduce=true and pass_config.fuse_gemm_comms=false as separate settings"
 mtp_local_argmax_candidate:
   stage: first_e2e_attempt_interrupted
   status: retry_pending_after_tp8_baseline

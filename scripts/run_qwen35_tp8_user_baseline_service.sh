@@ -76,7 +76,7 @@ serve_args=(
   --mamba-ssm-cache-dtype bfloat16
   --disable-custom-all-reduce
   --compilation-config '{"mode":3,"custom_ops":["all"],"ir_enable_torch_wrap":false,"splitting_ops":[],"compile_sizes":[],"compile_ranges_endpoints":[8096],"inductor_compile_config":{"enable_auto_functionalized_v2":false,"size_asserts":false,"alignment_asserts":false,"scalar_asserts":false,"combo_kernels":true,"benchmark_combo_kernel":true},"inductor_passes":{},"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[1,2,4,8,16,24,32],"use_inductor_graph_partition":false,"pass_config":{"fuse_norm_quant":true,"fuse_act_quant":true,"fuse_attn_quant":false,"enable_sp":false,"fuse_gemm_comms":false,"fuse_allreduce_rms":false,"fuse_rope_kvcache_cat_mla":false,"fuse_act_padding":false},"max_cudagraph_capture_size":32,"dynamic_shapes_config":{"type":"backed","evaluate_guards":false,"assume_32_bit_indexing":false},"fast_moe_cold_start":true}'
-  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":false,"enable_flashcomm1":false}'
+  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}'
   --default-chat-template-kwargs '{"enable_thinking":false}'
   --async-scheduling
 )
@@ -105,7 +105,7 @@ docker run -d \
   -e TASK_QUEUE_ENABLE=1 \
   -e TRITON_KERNEL_DUMP=1 \
   -e TRITON_DUMP_DIR=/cache/efim/triton_dump \
-  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=0 \
+  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1 \
   -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0 \
   -e VLLM_LOGGING_LEVEL=DEBUG \
   quay.io/ascend/vllm-ascend:v0.23.0 \
