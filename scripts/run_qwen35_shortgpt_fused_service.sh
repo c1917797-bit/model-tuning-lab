@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-shortgpt-fused-tail}"
 case "$mode" in
-  shortgpt-retained|shortgpt-fused-tail) ;;
+  shortgpt-retained-control|shortgpt-retained|shortgpt-fused-tail) ;;
   *)
-    echo "usage: $0 {shortgpt-retained|shortgpt-fused-tail}" >&2
+    echo "usage: $0 {shortgpt-retained-control|shortgpt-retained|shortgpt-fused-tail}" >&2
     exit 64
     ;;
 esac
@@ -26,21 +26,28 @@ custom_extension_sha256=6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab5843447
 custom_kernels_sha256=6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a
 model_root="${MODEL_ROOT:-/cache/austinov/Qwen3.8-27B}"
 model_config_sha256="${MODEL_CONFIG_SHA256:-191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab}"
-layer_set_file="${SHORTGPT_LAYER_SET_FILE:?set SHORTGPT_LAYER_SET_FILE to a frozen JSON artifact}"
-layer_set_sha256="${SHORTGPT_LAYER_SET_SHA256:?set SHORTGPT_LAYER_SET_SHA256}"
+layer_set_file="${SHORTGPT_LAYER_SET_FILE:-}"
+layer_set_sha256="${SHORTGPT_LAYER_SET_SHA256:-}"
 reservation_ignore_names="${NPU_RESERVATION_IGNORE_NAMES-/vllm-ep-310p-research-910b-monitor,/vllm-19.1-Qwen3.5-4B-1065}"
 
-if [[ ! -f "$layer_set_file" ]]; then
-  echo "frozen layer-set file does not exist: $layer_set_file" >&2
-  exit 44
-fi
-actual_layer_set_sha256="$(sha256sum "$layer_set_file" | awk '{print $1}')"
-if [[ "$actual_layer_set_sha256" != "$layer_set_sha256" ]]; then
-  echo "frozen layer-set hash mismatch" >&2
-  exit 46
-fi
-mapfile -t layer_metadata < <(
-  python3 - "$layer_set_file" "$source_commit" "$model_config_sha256" <<'PY'
+removed_layer_count=0
+layer_spec=""
+if [[ "$mode" != shortgpt-retained-control ]]; then
+  if [[ -z "$layer_set_file" || -z "$layer_set_sha256" ]]; then
+    echo "set SHORTGPT_LAYER_SET_FILE and SHORTGPT_LAYER_SET_SHA256 for a pruned mode" >&2
+    exit 64
+  fi
+  if [[ ! -f "$layer_set_file" ]]; then
+    echo "frozen layer-set file does not exist: $layer_set_file" >&2
+    exit 44
+  fi
+  actual_layer_set_sha256="$(sha256sum "$layer_set_file" | awk '{print $1}')"
+  if [[ "$actual_layer_set_sha256" != "$layer_set_sha256" ]]; then
+    echo "frozen layer-set hash mismatch" >&2
+    exit 46
+  fi
+  mapfile -t layer_metadata < <(
+    python3 - "$layer_set_file" "$source_commit" "$model_config_sha256" <<'PY'
 import json
 import sys
 
@@ -62,9 +69,10 @@ if layers != sorted(set(layers)) or any(layer < 0 or layer >= 64 for layer in la
 print(count)
 print(payload["env_spec"])
 PY
-)
-removed_layer_count="${layer_metadata[0]}"
-layer_spec="${layer_metadata[1]}"
+  )
+  removed_layer_count="${layer_metadata[0]}"
+  layer_spec="${layer_metadata[1]}"
+fi
 
 actual_source_commit="$(git -c safe.directory="$source_root" -C "$source_root" rev-parse HEAD)"
 if [[ "$actual_source_commit" != "$source_commit" ]]; then
@@ -186,12 +194,16 @@ docker_args=(
   -e VLLM_ASCEND_ENABLE_NZ=1
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
-  -e VLLM_ASCEND_QWEN35_SKIP_LAYERS="$layer_spec"
-  -e VLLM_ASCEND_QWEN35_REMOVED_LAYER_COUNT="$removed_layer_count"
-  -e VLLM_ASCEND_QWEN35_LAYER_SET_SHA256="$layer_set_sha256"
   -e VLLM_ASCEND_QWEN35_SHORTGPT_COMMIT="$source_commit"
   -e VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT="$fused_source_commit"
 )
+if [[ "$mode" != shortgpt-retained-control ]]; then
+  docker_args+=(
+    -e VLLM_ASCEND_QWEN35_SKIP_LAYERS="$layer_spec"
+    -e VLLM_ASCEND_QWEN35_REMOVED_LAYER_COUNT="$removed_layer_count"
+    -e VLLM_ASCEND_QWEN35_LAYER_SET_SHA256="$layer_set_sha256"
+  )
+fi
 if [[ "$mode" == shortgpt-fused-tail ]]; then
   additional_config='{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_decode_mmar_add_rmsnorm":true}}'
 else

@@ -16,11 +16,16 @@ candidate_container="${CANDIDATE_CONTAINER:-qwen35_${candidate_mode}_${device_ta
 active_container=""
 active_log=""
 service_launcher="$repo_root/scripts/run_qwen35_tp4_dev_service.sh"
+semantic_control_dir=""
 
 case "$candidate_mode" in
+  shortgpt-retained-control)
+    default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml"
+    service_launcher="${CANDIDATE_SERVICE_LAUNCHER:-$repo_root/scripts/run_qwen35_shortgpt_fused_service.sh}"
+    ;;
   shortgpt-retained|shortgpt-fused-tail)
     default_config="${SHORTGPT_LAYER_SET_FILE:?set SHORTGPT_LAYER_SET_FILE}"
-    semantic_control_dir="${SEMANTIC_CONTROL_DIR:?set SEMANTIC_CONTROL_DIR to the completed unpruned fused-tail v9 candidate directory}"
+    semantic_control_dir="${SEMANTIC_CONTROL_DIR:?set SEMANTIC_CONTROL_DIR to a completed unpruned same-runtime candidate directory}"
     service_launcher="${CANDIDATE_SERVICE_LAUNCHER:-$repo_root/scripts/run_qwen35_shortgpt_fused_service.sh}"
     ;;
   ngram-gpu)

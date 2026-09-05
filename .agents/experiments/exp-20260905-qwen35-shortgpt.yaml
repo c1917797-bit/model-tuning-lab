@@ -61,7 +61,7 @@ protocol:
     - "Block Influence samples are missing, non-finite, or ranking is not stable enough to freeze."
   warmup: "Use the existing frozen query_rewrite harness protocol; record exact warmup in run metadata."
   repetitions: 32
-  command: "Wait for the only active fused-tail v10 queue exec-00000000000000f7 to become terminal, then run a fresh scripts/run_qwen35_shortgpt_bi_diagnostic.sh and freeze a passing layer set. If v10 is accepted, run CANDIDATE_MODE=shortgpt-fused-tail and use its completed unpruned candidate directory as SEMANTIC_CONTROL_DIR. If v10 is rejected or has no candidate matrix, first produce a fresh unpruned shortgpt-retained control matrix, then run CANDIDATE_MODE=shortgpt-retained against that control. Never use v9, timed-out exec-00000000000000e6, or the empty failed BI root as a semantic control."
+  command: "Wait for the only active fused-tail v10 queue exec-00000000000000f7 to become terminal, then run a fresh scripts/run_qwen35_shortgpt_bi_diagnostic.sh and freeze a passing layer set. If v10 is accepted, run CANDIDATE_MODE=shortgpt-fused-tail and use its completed unpruned candidate directory as SEMANTIC_CONTROL_DIR. If v10 is rejected or has no candidate matrix, first run CANDIDATE_MODE=shortgpt-retained-control without layer-set variables, then run CANDIDATE_MODE=shortgpt-retained against that completed control. Never use v9, timed-out exec-00000000000000e6, or the empty failed BI root as a semantic control."
 results:
   baseline:
     immutable_original_p50_ms:

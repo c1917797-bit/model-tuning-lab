@@ -91,4 +91,16 @@ if grep -q -- 'fuse_decode_mmar_add_rmsnorm' "$docker_log"; then
   echo "ShortGPT retained service unexpectedly configured fused tail" >&2
   exit 1
 fi
+
+>"$docker_log"
+env "${common_env[@]}" CONTAINER_NAME=shortgpt-retained-control-ready "$repo_root/scripts/run_qwen35_shortgpt_fused_service.sh" shortgpt-retained-control >"$tmp/control.out" 2>"$tmp/control.err"
+grep -q -- 'VLLM_ASCEND_QWEN35_SHORTGPT_COMMIT=18c4d061529d226dd0d699d9e3e1df16dadf29d7' "$docker_log"
+if grep -q -- 'VLLM_ASCEND_QWEN35_SKIP_LAYERS' "$docker_log"; then
+  echo "ShortGPT retained control unexpectedly enabled layer skipping" >&2
+  exit 1
+fi
+if grep -q -- 'fuse_decode_mmar_add_rmsnorm' "$docker_log"; then
+  echo "ShortGPT retained control unexpectedly configured fused tail" >&2
+  exit 1
+fi
 echo "PASS: Qwen3.5 ShortGPT plus fused-tail service guard"

@@ -44,7 +44,7 @@
     },
     {
       "gate": "semantic-control-selection",
-      "result": "PLANNED fail-closed: use the completed unpruned v10 matrix only if v10 produces one; otherwise produce a fresh unpruned retained matrix. Never use rejected v9 or the empty failed BI root as the same-runtime control."
+      "result": "PASS static / PENDING NPU: use the completed unpruned v10 matrix only if v10 produces one; otherwise CANDIDATE_MODE=shortgpt-retained-control loads the pinned ShortGPT source but omits all skip-layer variables and fused-tail configuration to produce a fresh unpruned retained matrix. The service guard verifies this default-off boundary. Never use rejected v9 or the empty failed BI root as the same-runtime control."
     },
     {
       "gate": "block-influence-real-workload",
