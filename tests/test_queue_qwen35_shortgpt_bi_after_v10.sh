@@ -14,6 +14,15 @@ printf '%s\n' '#!/usr/bin/env bash' '[[ "$1" == -lntH ]]' >"$tmp_dir/bin/ss"
 printf '%s\n' '#!/usr/bin/env bash' 'set -euo pipefail' '{' '  printf "OUTPUT_ROOT=%s\n" "$OUTPUT_ROOT"' '  printf "CONTAINER_NAME=%s\n" "$CONTAINER_NAME"' '  printf "PORT=%s\n" "$PORT"' '} >"$CAPTURE_FILE"' >"$tmp_dir/bin/launcher"
 chmod +x "$tmp_dir/bin/"*
 
+self_start_ticks="$(awk '{print $22}' "/proc/$$/stat")"
+set +e
+env PATH="$tmp_dir/bin:$PATH" R15_LOG="$tmp_dir/r15.log" PREDECESSOR_PID="$$" PREDECESSOR_START_TICKS="$self_start_ticks" OUTPUT_PARENT="$tmp_dir/output" LAUNCHER="$tmp_dir/bin/launcher" DOCKER_BIN="$tmp_dir/bin/docker" NPU_SMI_BIN="$tmp_dir/bin/npu-smi" SS_BIN="$tmp_dir/bin/ss" WAIT_TIMEOUT_SECONDS=1 POLL_SECONDS=0 STABLE_IDLE_CHECKS=2 IDLE_CHECK_INTERVAL_SECONDS=0 STAMP_OVERRIDE=blocked CAPTURE_FILE="$tmp_dir/blocked-capture" "$repo_root/scripts/queue_qwen35_shortgpt_bi_after_v10.sh" >"$tmp_dir/blocked.out" 2>"$tmp_dir/blocked.err"
+blocked_rc=$?
+set -e
+[[ "$blocked_rc" -eq 75 ]]
+grep -q 'timed out waiting for protected predecessor chain' "$tmp_dir/blocked.err"
+[[ ! -e "$tmp_dir/blocked-capture" ]]
+
 env PATH="$tmp_dir/bin:$PATH" R15_LOG="$tmp_dir/r15.log" PREDECESSOR_PID=99999999 PREDECESSOR_START_TICKS=1 OUTPUT_PARENT="$tmp_dir/output" LAUNCHER="$tmp_dir/bin/launcher" DOCKER_BIN="$tmp_dir/bin/docker" NPU_SMI_BIN="$tmp_dir/bin/npu-smi" SS_BIN="$tmp_dir/bin/ss" WAIT_TIMEOUT_SECONDS=5 POLL_SECONDS=0 STABLE_IDLE_CHECKS=2 IDLE_CHECK_INTERVAL_SECONDS=0 STAMP_OVERRIDE=20260905T150000Z CAPTURE_FILE="$tmp_dir/capture" "$repo_root/scripts/queue_qwen35_shortgpt_bi_after_v10.sh"
 
 grep -qx "OUTPUT_ROOT=$tmp_dir/output/bi-20260905T150000Z" "$tmp_dir/capture"
