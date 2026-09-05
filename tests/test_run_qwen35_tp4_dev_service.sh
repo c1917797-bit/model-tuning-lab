@@ -22,6 +22,10 @@ if [[ "${1:-}" == inspect && "${2:-}" == mock-reservation ]]; then
   printf '%s\n' '/p0_aff /dev/davinci4 /dev/davinci5 /dev/davinci6 /dev/davinci7'
   exit 0
 fi
+if [[ "${1:-}" == inspect && "${2:-}" == mock-benign-monitor ]]; then
+  printf '%s\n' '/vllm-ep-310p-research-910b-monitor /dev/davinci4 /dev/davinci5 /dev/davinci6 /dev/davinci7'
+  exit 0
+fi
 printf '%s\n' "$*" >>"$DOCKER_LOG"
 MOCK
 chmod +x "$mock_bin/docker"
@@ -53,7 +57,12 @@ grep -q "/p0_aff /dev/davinci4" "$tmp/container-reservation.err"
 [[ ! -e "$tmp/profile-container-reservation" ]]
 
 set +e
-PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi"   DEVICE_SET=4-7 CONTAINER_NAME=guard-test-occupied   PROFILE_DIR="$tmp/profile-occupied"   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile   >"$tmp/occupied.out" 2>"$tmp/occupied.err"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" \
+  MOCK_DOCKER_RUNNING_IDS=mock-benign-monitor NPU_SMI_BIN="$mock_bin/npu-smi" \
+  DEVICE_SET=4-7 CONTAINER_NAME=guard-test-occupied \
+  PROFILE_DIR="$tmp/profile-occupied" \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile \
+  >"$tmp/occupied.out" 2>"$tmp/occupied.err"
 rc=$?
 set -e
 if [[ "$rc" != 42 ]]; then cat "$tmp/occupied.err" >&2; fi
@@ -79,7 +88,8 @@ if [[ "$rc" != 44 ]]; then cat "$tmp/profile.err" >&2; fi
 grep -q "refusing to reuse profile directory" "$tmp/profile.err"
 [[ ! -e "$docker_log" ]]
 
-PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" \
+  MOCK_DOCKER_RUNNING_IDS=mock-benign-monitor NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-profile-fresh \
   PROFILE_DIR="$tmp/profile-fresh" \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" profile \

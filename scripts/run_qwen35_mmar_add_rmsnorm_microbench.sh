@@ -28,12 +28,24 @@ fi
 
 # npu-smi can briefly report no device process while another container is
 # starting its runtime. Treat any running container with a matching device
-# reservation as occupied before checking the process table.
+# reservation as occupied before checking the process table. The two exact
+# names below are long-lived, operator-verified monitor/admin shells: they only
+# mount device files and have no NPU runtime process. An explicit empty override
+# disables this host-local allowlist.
+reservation_ignore_names="${NPU_RESERVATION_IGNORE_NAMES-/vllm-ep-310p-research-910b-monitor,/vllm-19.1-Qwen3.5-4B-1065}"
 container_reservations="$(
   for running_id in $(docker ps -q); do
     docker inspect "$running_id" --format \
       '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}'
-  done | awk '$0 ~ /\/dev\/davinci[4-7]([[:space:]]|$)/'
+  done | awk -v ignored_csv="$reservation_ignore_names" '
+    BEGIN {
+      split(ignored_csv, ignored_names, ",")
+      for (item in ignored_names) {
+        ignored[ignored_names[item]] = 1
+      }
+    }
+    $0 ~ /\/dev\/davinci[4-7]([[:space:]]|$)/ && !($1 in ignored)
+  '
 )"
 if [[ -n "$container_reservations" ]]; then
   echo "refusing to start: a running container reserves physical NPU4-7" >&2
