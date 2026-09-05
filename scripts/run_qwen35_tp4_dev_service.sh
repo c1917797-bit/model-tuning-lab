@@ -375,7 +375,8 @@ if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; then
   )
 fi
 
-if [[ "$mode" == profile-msprof-mmar-off ||
+if [[ "${ENABLE_DYNAMIC_PROFILING:-0}" == 1 ||
+      "$mode" == profile-msprof-mmar-off ||
       "$mode" == profile-msprof-mmar-on ]]; then
   # CANN dynamic attach is initialized with the application, then msprof
   # controls the bounded collection window by worker PID. This avoids vLLM

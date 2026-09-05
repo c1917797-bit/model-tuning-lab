@@ -40,8 +40,8 @@ case "$profile_rank" in
   *) echo "PROFILE_RANK must be one of 0, 1, 2, 3" >&2; exit 64 ;;
 esac
 case "$profile_mode" in
-  profile-msprof-mmar-off|profile-msprof-mmar-on) ;;
-  *) echo "PROFILE_MODE must be profile-msprof-mmar-off or profile-msprof-mmar-on" >&2; exit 64 ;;
+  profile-msprof-mmar-off|profile-msprof-mmar-on|mmar-on-weight-prefetch-gateup-0p1-fused-tail) ;;
+  *) echo "PROFILE_MODE must be profile-msprof-mmar-off, profile-msprof-mmar-on, or mmar-on-weight-prefetch-gateup-0p1-fused-tail" >&2; exit 64 ;;
 esac
 if [[ "$device_set" != 4-7 ]]; then
   echo "DEVICE_SET must be 4-7 for this workstream" >&2
@@ -98,7 +98,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-env CONTAINER_NAME="$container_name" PORT="$port" DEVICE_SET="$device_set" "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" "$profile_mode"
+env CONTAINER_NAME="$container_name" PORT="$port" DEVICE_SET="$device_set" ENABLE_DYNAMIC_PROFILING=1 "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" "$profile_mode"
 started=1
 docker inspect "$container_name" >"${artifact_dir}/container-inspect.json"
 
