@@ -1082,3 +1082,48 @@ source threshold excludes token counts below 513 and the corresponding CANN
 operator API is marked for deprecation. XliteGraph is also not eligible in the
 current image because the `xlite` package is absent. For static kernel, require
 an activation log plus a valid c1 cell before allowing the rest of quick32.
+
+## Static decode kernel rejected at high concurrency
+
+Operation `exec-00000000000008c9` completed the full quick32 matrix on
+physical NPU4-7. The runtime accepted the retained TP4 BF16 MMAR plus
+gate/up-prefetch-0.1 stack with `enable_npugraph_ex=true` and
+`enable_static_kernel=true`; `quantization=None`. The compiler explicitly
+reported that static-shape kernels would accelerate aclgraph execution,
+generated static run packages, captured all 9/9 FULL decode graphs in 418
+seconds, and then served HTTP health 200.
+
+All c1/c5/c8/c16 cells completed 32/32 requests with zero errors and all 128
+finish reasons were natural stop. TTFT p50 was
+432.649/499.907/506.878/5391.965 ms. TPOT p50 was
+27.067/35.523/43.181/48.853 ms. Relative to the immutable original, TTFT
+speedup was 2.146x/2.185x/2.135x/0.385x and TPOT speedup was
+1.421x/1.515x/1.566x/1.654x.
+
+Static kernels improve retained-stack TPOT by
+1.065x/1.069x/1.022x/1.063x, or 1.05471x geometric mean. However, TTFT is
+0.980x/0.981x/0.972x/0.166x versus retained, only 0.62767x geometrically.
+The c16 TTFT p50 regression is 501.83%. It is not explained by a longer
+candidate answer stream: static c16 produced 7038 completion tokens in
+47.134 s versus retained 7283 tokens in 46.201 s. All static gears had already
+been captured before service readiness. The evidence therefore shows
+material high-concurrency first-token queueing, not a valid trade for the
+already-achieved all-cell TTFT goal.
+
+The analyzer records `hold-exact-hash-drift`, consistent with the previously
+calibrated cross-run nondeterminism. That is not the rejection reason: every
+request completed naturally without runtime error, and reference-quality
+summaries remain in the observed run-to-run band. The authoritative
+maintainer decision is to reject static kernel on performance and retain TP4
+MMAR plus gate/up prefetch ratio 0.1.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-prefetch-0p1-static-kernel-fixedorig-npu4-7-20260905T011539Z`.
+Every SHA256SUMS entry verifies. Candidate config SHA256 is
+`b21d908a05602e80b0b1d00f1b8af32a559b5fcdbc79d3c39398639a4af0cc34`;
+decision SHA256 is
+`f7ff3380dddf1072e67c43ed4de50d69f9875b052bb74945399cc5ea2592ac54`;
+SHA256SUMS SHA256 is
+`d7bca4880afdce8d77075a5c0b60ffe60f8eb8125a9f15958e6f51fc685550bd`.
+The exact candidate container exited. NPU4-7 are idle at 2865-2866 MiB with
+no running processes, and external NPU0-3 PIDs 1031654-1031657 are unchanged.

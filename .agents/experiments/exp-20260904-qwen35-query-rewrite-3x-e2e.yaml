@@ -754,7 +754,7 @@ tp2_pp2_mmar_prefetch_candidate:
 static_kernel_candidate:
   source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-static-kernel-candidate.yaml
   launcher_mode: mmar-on-weight-prefetch-gateup-0p1-static-kernel
-  status: ready_for_startup_gate
+  status: rejected_high_concurrency_ttft
   primary_variable_vs_retained_stack: "ascend_compilation_config.enable_static_kernel false -> true"
   retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; gate/up prefetch ratio 0.1; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
   rationale: "the exact 0.23.0 compiler supports static binaries for captured decode shapes; test whether reducing runtime launch/dispatch overhead improves TPOT after topology and layout lanes plateaued"
@@ -762,3 +762,47 @@ static_kernel_candidate:
   devices: "physical NPU4-7 only; NPU0-3 prohibited"
   gates: ["static-kernel activation proof", "startup and capacity", "c1 fail-fast correctness and performance", "full quick32 only after c1 incremental retention"]
   rollback: "select mmar-on-weight-prefetch-gateup-0p1; no source overlay or model files are changed"
+  implementation_commit: 3f84c85
+  real_run:
+    operation_id: exec-00000000000008c9
+    run_id: mmar-prefetch-0p1-static-kernel-fixedorig-npu4-7-20260905T011539Z
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-prefetch-0p1-static-kernel-fixedorig-npu4-7-20260905T011539Z
+    activation: "runtime accepted TP4/DP1 BF16 with MMAR, gate/up prefetch ratio 0.1, FULL_DECODE_ONLY, enable_npugraph_ex=true and enable_static_kernel=true; compiler log explicitly says static shape kernel will accelerate aclgraph execution; quantization=None"
+    startup:
+      graph_capture: "9/9 decode FULL graphs captured successfully"
+      graph_capture_seconds: 418
+      static_compile_note: "each captured gear produced a static run package; the first package reported 27/28 JSON files compiled successfully"
+      health_http: 200
+      kv_cache_tokens: 665738
+    requests: {1: "32/32", 5: "32/32", 8: "32/32", 16: "32/32"}
+    errors: 0
+    natural_stops: 128
+    p50_ms:
+      c1: {ttft: 432.649325, tpot: 27.067151}
+      c5: {ttft: 499.906690, tpot: 35.522902}
+      c8: {ttft: 506.877840, tpot: 43.180686}
+      c16: {ttft: 5391.964665, tpot: 48.852577}
+    speedup_vs_fixed_original:
+      ttft: {c1: 2.145684, c5: 2.184939, c8: 2.135251, c16: 0.384845}
+      tpot: {c1: 1.421347, c5: 1.515390, c8: 1.565904, c16: 1.654194}
+    incremental_vs_retained_stack:
+      ttft: {c1: 0.979951, c5: 0.981056, c8: 0.971612, c16: 0.166161, geometric_mean: 0.627668}
+      tpot: {c1: 1.065274, c5: 1.069070, c8: 1.022348, c16: 1.062840, geometric_mean: 1.054711}
+    c16_boundary:
+      observation: "TTFT p50 regressed 501.83% versus the retained stack despite all static gears being captured before service readiness, zero runtime errors and fewer completion tokens than the retained c16 run"
+      retained_completion_tokens: 7283
+      candidate_completion_tokens: 7038
+      retained_wall_seconds: 46.200915
+      candidate_wall_seconds: 47.134395
+      interpretation: "high-concurrency first-token queueing is materially worse; do not trade the already-achieved all-cell TTFT target for median TPOT gains"
+    correctness:
+      exact_hash_note: "cross-run exact hash drift remains diagnostic under the established fixed-runtime calibration; all requests completed naturally with zero errors and reference-quality summaries remain within the observed run-to-run band"
+      automated_decision: "hold-exact-hash-drift; authoritative maintainer decision is performance rejection due the c16 TTFT gate"
+    hashes:
+      candidate_config_sha256: b21d908a05602e80b0b1d00f1b8af32a559b5fcdbc79d3c39398639a4af0cc34
+      candidate_run_sha256: 2274e603856300caeda242d629ea483d1ce32c2378a40fa5b710c68ec967541f
+      decision_sha256: f7ff3380dddf1072e67c43ed4de50d69f9875b052bb74945399cc5ea2592ac54
+      service_log_sha256: da56a705792ab0913e8eb27a38529b047afaca9e9406ae5a59e797c0ea45fddd
+      sha256sums_sha256: d7bca4880afdce8d77075a5c0b60ffe60f8eb8125a9f15958e6f51fc685550bd
+  decision: "reject static kernel from the cumulative production stack: TPOT improves 5.47% geometrically, but c16 TTFT regresses 501.83% versus retained and loses the immutable-original TTFT target; retain TP4 MMAR plus gate/up prefetch ratio 0.1"
+  recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2865-2866 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
