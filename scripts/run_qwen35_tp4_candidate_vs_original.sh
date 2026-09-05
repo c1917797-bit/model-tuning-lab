@@ -79,6 +79,9 @@ case "$candidate_mode" in
   flashcomm1)
     default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-candidate.yaml"
     ;;
+  flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1-candidate.yaml"
+    ;;
   bf16-nz)
     default_config="$repo_root/configs/qwen35-query-rewrite-bf16-nz-candidate.yaml"
     ;;

@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
     exit 64
@@ -46,6 +46,8 @@ selective_ffn_nz_root="${SELECTIVE_FFN_NZ_ROOT:-/cache/cch/.worktrees/exp-202609
 selective_ffn_nz_commit="71c25ec9"
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
 flashcomm2_mmar_commit="65f780ee"
+flashcomm1_gdn_root="${FLASHCOMM1_GDN_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape}"
+flashcomm1_gdn_commit="${FLASHCOMM1_GDN_COMMIT:-68683e2b7c0eb47bbb49685ed079b49003a13189}"
 mmar_add_rmsnorm_root="${MMAR_ADD_RMSNORM_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm}"
 mmar_add_rmsnorm_commit="${MMAR_ADD_RMSNORM_COMMIT:-bca160315fd29f0ecbf3b1fc69ee7af410f7d11c}"
 mmar_add_rmsnorm_extension="$mmar_add_rmsnorm_root/build-mmar-add-rmsnorm/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so"
@@ -62,7 +64,8 @@ task_queue_enable=1
 max_num_batched_tokens=32768
 max_model_len=133000
 gpu_memory_utilization=0.90
-if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ]]; then
+if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ||
+      "$mode" == flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1 ]]; then
   flashcomm1_env=1
 fi
 if [[ "$mode" == bf16-nz || "$mode" == bf16-nz-mmar-off ||
@@ -95,6 +98,16 @@ if [[ "$mode" == flashcomm2-oproj1-mmar-prefetch-gateup-0p1 ||
   )"
   if [[ "$actual_ref" != "$flashcomm2_mmar_commit" ]]; then
     echo "FlashComm2/MMAR source must be $flashcomm2_mmar_commit, got $actual_ref" >&2
+    exit 45
+  fi
+fi
+if [[ "$mode" == flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1 ]]; then
+  actual_ref="$(
+    git -c safe.directory="$flashcomm1_gdn_root" \
+      -C "$flashcomm1_gdn_root" rev-parse HEAD
+  )"
+  if [[ "$actual_ref" != "$flashcomm1_gdn_commit" ]]; then
+    echo "FlashComm1 GDN source must be $flashcomm1_gdn_commit, got $actual_ref" >&2
     exit 45
   fi
 fi
@@ -236,6 +249,8 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":1.0,"down":0.0}}}}'
+    elif [[ "$mode" == flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1 ]]; then
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == flashcomm1-bf16-nz ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":true,"weight_nz_mode":2}'
     elif [[ "$mode" == flashcomm1 ]]; then
@@ -371,6 +386,13 @@ if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; then
     -v "$mmar_add_rmsnorm_extension:$image_source_root/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so:ro"
     -v "$mmar_add_rmsnorm_kernels:$image_source_root/lib/libvllm_ascend_kernels.so:ro"
     -e VLLM_ASCEND_CUSTOM_EXTENSION_COMMIT="$mmar_add_rmsnorm_commit"
+  )
+fi
+if [[ "$mode" == flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1 ]]; then
+  image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
+  docker_args+=(
+    -v "$flashcomm1_gdn_root/vllm_ascend/ops/gdn.py:$image_source_root/ops/gdn.py:ro"
+    -e VLLM_ASCEND_FLASHCOMM1_GDN_SOURCE_COMMIT="$flashcomm1_gdn_commit"
   )
 fi
 
