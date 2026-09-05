@@ -1975,3 +1975,70 @@ NPU4-7. It launched at 2026-09-05T15:52:44Z into:
 Poll operation 02cb only. Do not launch a duplicate and do not touch NPU0-3.
 The launcher must observe Normalized 64 and Fused 128 on all four ranks before
 it sends any c1/c5/c8/c16 query_rewrite traffic.
+
+## v13-v17 terminal fused-tail decision
+
+The v13 paragraph above is historical. Operations v13 through v16 all ended
+at the positive activation gate without sending query traffic. v13 and v14
+remained at Normalized 0/Fused 64 per rank. Source
+`9f99ed9d89e14e33129e071e1f245067db70cd73` added detach traversal and
+v15 reached Normalized 48/Fused 112. The stricter nested-replay source
+`4cde6b28bdffa0b3daffef1dd4512ef6cd5ee4d5` retained that coverage in
+v16; bounded diagnostics proved the last 16 copies are dependency-ordered
+functional updates, not ordinary transparent view bookkeeping.
+
+The evidence SHA256 triples
+`integration-check/service-before-benchmark/activation-SHA256SUMS` are:
+
+- v13: `e25a42422904cc6fe7d407fd44b957dc973cd307e92fbdb0ae7294880e1ef272` /
+  `3dfe2b59769a1be93382ba5614765665c4cf30b1fc9bb85f7ed96f1f2d4a0cf2` /
+  `6e481578dfbd4ef5980def9c61da7b61388e5228a5d6e829fd347e4e4e50d70b`
+- v14: `2a1ac932a8b2c1e397acfe518e33e0c47697e8cb2b6aca7f70e111c6c6ca7834` /
+  `af0705df0be70d0a1ef4efbfc4c2361068fb295fcfed1a155b35111f72cf323c` /
+  `555a2295f85301dc6e3d981730ae2e5a4e1728520a1253d66affa62b66d2ffbe`
+- v15: `f6f1d9d19512cd6991c86f146673c369602be35a20f429350db3b2170b289116` /
+  `19eaa809aa40ca2ddd36ac7269f4965bb8cc516fbb78b0e25cde599ccf82991f` /
+  `9bbb9e63569ca5b52b8dd21ef6132171b9ccc7766c6d7cf011823f873e597b66`
+- v16: `a24baeb15cd9dca8a098029e341917d4f5b136ccc81b8046fc4c1c0ceca8595b` /
+  `5dda5f60b46f30fca8377e386b3a987b470358966c04675df12b6a01352b6cc6` /
+  `5a4eda6bc00cba252004bd96a69aaa3d3e718ca62ea86d1bb24b6bbbac9e5c90`
+
+v17 deliberately lowered the gate to the proven partial coverage and then
+completed the real frozen query_rewrite matrix on BF16 TP4 physical NPU4-7:
+
+| Concurrency | Candidate TTFT/TPOT ms | Versus original | Versus retained |
+|---:|---:|---:|---:|
+| 1 | 449.154935 / 31.077882 | 2.066834x / 1.237916x | 5.94% / 7.78% slower |
+| 5 | 509.351810 / 39.713187 | 2.144423x / 1.355495x | 3.86% / 4.57% slower |
+| 8 | 537.380605 / 46.910598 | 2.014050x / 1.441398x | 9.12% / 6.26% slower |
+| 16 | 988.995720 / 55.591584 | 2.098159x / 1.453666x | 10.39% / 7.07% slower |
+
+All 128 requests completed with zero runtime errors, and all four ranks
+reported Normalized 48/Fused 112. Nevertheless both metrics regress versus
+the retained stack in every cell, so the maintainer decision is
+`reject-performance`. The analyzer's `hold-exact-hash-drift` output is
+not the final stack decision: the fixed-runtime control already established
+that cross-run hashes drift and require a same-runtime semantic review, while
+the all-cell performance regression is independently decisive.
+
+Immutable v17 root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v17-partial-e2e-20260905T164000Z`
+
+Key hashes are integration
+`200a3892a4a56ee8cf701b03a26e6a8759bf1a87a5ec568a9e767927727c09ae`,
+service snapshot
+`e50cc4c423a02fbf4ba97fcd60457483af1ce9ea4154cf9e778b88fe152d1d1c`,
+candidate-run
+`9fb8bcbc04c0a9c1bdaec6522a728e56c4d7b84ac14a6b5843513e23f9281673`
+and decision
+`0a09bcabfad414e6825b51f1c0e2c7bde5757bccc142f8398c61ef5faa288416`.
+The exact v17 container exited 0 and physical NPU4-7 are idle. The
+pre-existing VLLM workers on NPU0-3 were not touched.
+
+The retained result is unchanged: TTFT 2.1896x/2.2271x/2.1976x/2.3161x and
+TPOT 1.3343x/1.4175x/1.5317x/1.5564x versus original at c1/c5/c8/c16.
+Do not relaunch partial fused-tail or widen its final dependency chain without
+a new whole-model economic argument. Select the next TPOT treatment from the
+retained profile's dominant collective/matmul cost and the operator assets
+under `/cache/cch`, use only physical NPU4-7, and preserve NPU0-3.

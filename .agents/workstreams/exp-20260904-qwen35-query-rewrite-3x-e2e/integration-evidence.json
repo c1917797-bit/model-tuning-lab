@@ -306,8 +306,12 @@
       "result": "PASS scope control: after CANN proved commTurn=4 invalid and the auxiliary random-input sweep would retry invalid 4/8/16 cases, its exact process group and container were stopped. The recoverable container remains Exited (137); NPU0-3 and task evidence were untouched."
     },
     {
-      "gate": "mmar-add-rmsnorm-v13-live",
-      "result": "ACTIVE: exec-00000000000002cb is the only v13 operation, using physical NPU4-7 and immutable root mmar-add-rmsnorm-v13-slice-scatter-20260905T155244Z. It must pass Normalized 64/Fused 128 on all four ranks before formal query_rewrite traffic."
+      "gate": "mmar-add-rmsnorm-v13-v16-activation",
+      "result": "REJECT safely before traffic: v13/v14 stayed at Normalized 0/Fused 64 per rank; detach-aware v15 and bounded nested-replay v16 reached Normalized 48/Fused 112 but not the full 64/128 gate. All immutable roots and hashes are recorded in the experiment YAML."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-v17-partial-e2e",
+      "result": "REJECT performance: exec-0000000000000327 passed the deliberate partial activation threshold at Normalized 48/Fused 112 on every rank and completed 128/128 zero-error requests on physical NPU4-7, but TTFT regressed 3.86%-10.39% and TPOT regressed 4.57%-7.78% versus the retained stack in every cell. The exact container exited 0, NPU4-7 are idle, and NPU0-3 were untouched."
     }
   ]
 }

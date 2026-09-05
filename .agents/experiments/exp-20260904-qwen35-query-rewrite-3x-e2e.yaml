@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: shortgpt_remove8_held_v11_diagnostics_queued_after_r16
-decision: retain_current_stack_reject_shortgpt_queue_operator_diagnostics
+status: retained_stack_unchanged_v17_fused_tail_rejected
+decision: reject_v17_partial_fused_tail_retain_current_stack
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -94,7 +94,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "ShortGPT remove8 is terminal hold-semantic-quality-regression. Protected p0_r16 owns physical NPU4-7; the only v11 diagnostics queue exec-00000000000001fe waits for R16_DONE and four stable idle observations. NPU0-3 remain out of scope."
+  current: "v17 completed and self-cleaned; physical NPU4-7 are idle. The pre-existing VLLM workers on NPU0-3 remain untouched and out of scope."
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -1040,13 +1040,13 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8
+    source_commit: bca160315fd29f0ecbf3b1fc69ee7af410f7d11c
     previous_partial_fusion_commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
     full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies, including the real functionalized slice-copy-slice_scatter bookkeeping chain, only when all semantic consumers are the expected residual/RMS tail"
-    focused_validation: "source d0c0fbd passes py_compile/diff checks and all 11 focused fusion-pass tests in the exact 0.23.0 image; coverage includes functional slice_scatter, symbolic full slices, partial-shape rejection and unrelated-user rejection without allocating an NPU"
+    focused_validation: "source bca160 passes py_compile/diff checks and all 13 focused fusion-pass tests in the exact 0.23.0 image; coverage includes functional slice_scatter, detach traversal, bounded nested replay, symbolic full slices, partial-shape rejection and unrelated-user rejection without allocating an NPU"
     binary_boundary: "Python-only change; extension SHA256 remains 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23 and kernel library SHA256 remains 6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
@@ -1098,7 +1098,7 @@ mmar_add_rmsnorm_decode_candidate:
     post_export_root_cause: "the npugraph_ex backend receives an exported mutation topology: direct output assignment is aten.copy_.default and dynamic output[:n] is aten.slice.Tensor plus aten.copy_.default, not the Dynamo-level operator.setitem used by the first synthetic tests"
     post_export_fix_commit: 573ea2940bdc546923c698de16ea49465e6976f5
     post_export_fix_validation: "official 0.23.0 minimal overlay passed 7/7 focused tests in 8.52s; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
-    current_blocker: "ShortGPT remove8 remains excluded. v12 proved all 64 functional-copy candidates were rejected at slice_scatter bookkeeping. Source d0c0fbd fixes that exact topology; v13 is the only live activation/E2E operation on physical NPU4-7. NPU0-3 remain untouched."
+    current_blocker: "v17 proved that 112 fused tails per rank regress both TTFT and TPOT versus the retained stack in every concurrency cell. Do not widen the last 16 dependency-ordered copies or relaunch this route without a new profile-backed whole-model economic argument."
     guarded_v9_queue:
       operation_id: exec-0000000000000060
       superseded_operation_id: exec-0000000000000cbb
@@ -1176,15 +1176,58 @@ mmar_add_rmsnorm_decode_candidate:
     p0_r17_fail_fast:
       result: "stopped exact process group and container after CANN proved commTurn=4 invalid and the script would retry 4/8/16; this auxiliary random-input sweep was not target evidence"
       recovery: "container p0_r17 remains present as Exited (137); no files were deleted"
-    v13_live:
+    v13_activation:
       operation_id: exec-00000000000002cb
       source_commit: d0c0fbd69ca1d19c8f5910f9ece8a5a9fbb65ef8
       launched_at: "2026-09-05T15:52:44Z"
       output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v13-slice-scatter-20260905T155244Z
-      state: "live on physical NPU4-7; activation gate and formal matrix pending"
+      state: "terminal exit 72 before traffic: each rank saw copy candidates 64, functional-slice-scatter rejects 16, unrelated-user rejects 48, Normalized 0/Fused 64"
       gate: "require Normalized 64/Fused 128 on all four ranks before c1/c5/c8/c16 query traffic"
       resource_scope: "physical NPU4-7 only; NPU0-3 protected"
-    next: "Poll only v13 operation exec-00000000000002cb. If the activation gate passes, let its correctness and full frozen query_rewrite matrix finish naturally; do not launch a duplicate or touch NPU0-3."
+      hashes: {integration_check_sha256: e25a42422904cc6fe7d407fd44b957dc973cd307e92fbdb0ae7294880e1ef272, service_before_benchmark_sha256: 3dfe2b59769a1be93382ba5614765665c4cf30b1fc9bb85f7ed96f1f2d4a0cf2, activation_manifest_sha256: 6e481578dfbd4ef5980def9c61da7b61388e5228a5d6e829fd347e4e4e50d70b}
+    v14_activation:
+      operation_id: exec-00000000000002e0
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v14-replay-views-20260905T160152Z
+      state: "terminal exit 72 before traffic: bounded replay diagnostics separated 16 input mismatches and 48 multi-scatter dependency chains; Normalized 0/Fused 64"
+      hashes: {integration_check_sha256: 2a1ac932a8b2c1e397acfe518e33e0c47697e8cb2b6aca7f70e111c6c6ca7834, service_before_benchmark_sha256: af0705df0be70d0a1ef4efbfc4c2361068fb295fcfed1a155b35111f72cf323c, activation_manifest_sha256: 555a2295f85301dc6e3d981730ae2e5a4e1728520a1253d66affa62b66d2ffbe}
+    v15_activation:
+      operation_id: exec-00000000000002f5
+      source_commit: 9f99ed9d89e14e33129e071e1f245067db70cd73
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v15-detach-traversal-20260905T161322Z
+      state: "terminal exit 72 before traffic, but real progress: detach-aware traversal normalized 48 copies and fused 112 tails per rank; 16 dependency-ordered copies remained unrelated"
+      hashes: {integration_check_sha256: f6f1d9d19512cd6991c86f146673c369602be35a20f429350db3b2170b289116, service_before_benchmark_sha256: 19eaa809aa40ca2ddd36ac7269f4965bb8cc516fbb78b0e25cde599ccf82991f, activation_manifest_sha256: 9bbb9e63569ca5b52b8dd21ef6132171b9ccc7766c6d7cf011823f873e597b66}
+    v16_activation:
+      operation_id: exec-0000000000000317
+      source_commit: 4cde6b28bdffa0b3daffef1dd4512ef6cd5ee4d5
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v16-nested-replay-20260905T162939Z
+      state: "terminal exit 72 before traffic: strict nested replay support retained Normalized 48/Fused 112; the remaining 16 were a distinct dependency-order topology"
+      hashes: {integration_check_sha256: a24baeb15cd9dca8a098029e341917d4f5b136ccc81b8046fc4c1c0ceca8595b, service_before_benchmark_sha256: 5dda5f60b46f30fca8377e386b3a987b470358966c04675df12b6a01352b6cc6, activation_manifest_sha256: 5a4eda6bc00cba252004bd96a69aaa3d3e718ca62ea86d1bb24b6bbbac9e5c90}
+    v17_e2e:
+      operation_id: exec-0000000000000327
+      source_commit: bca160315fd29f0ecbf3b1fc69ee7af410f7d11c
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v17-partial-e2e-20260905T164000Z
+      activation: "PASS at the deliberately partial threshold: every rank Normalized 48/Fused 112; the 17-32768 range remained inapplicable"
+      requests: {c1: "32/32", c5: "32/32", c8: "32/32", c16: "32/32"}
+      errors: 0
+      candidate_p50_ms:
+        c1: {ttft: 449.154935, tpot: 31.077882}
+        c5: {ttft: 509.351810, tpot: 39.713187}
+        c8: {ttft: 537.380605, tpot: 46.910598}
+        c16: {ttft: 988.995720, tpot: 55.591584}
+      versus_fixed_original_speedup:
+        c1: {ttft: 2.066834, tpot: 1.237916}
+        c5: {ttft: 2.144423, tpot: 1.355495}
+        c8: {ttft: 2.014050, tpot: 1.441398}
+        c16: {ttft: 2.098159, tpot: 1.453666}
+      regression_vs_retained_percent:
+        c1: {ttft: 5.94, tpot: 7.78}
+        c5: {ttft: 3.86, tpot: 4.57}
+        c8: {ttft: 9.12, tpot: 6.26}
+        c16: {ttft: 10.39, tpot: 7.07}
+      decision: "reject performance from cumulative stack; exact hashes remain only a cross-run diagnostic because the fixed-runtime control also drifts"
+      hashes: {integration_check_sha256: 200a3892a4a56ee8cf701b03a26e6a8759bf1a87a5ec568a9e767927727c09ae, service_before_benchmark_sha256: e50cc4c423a02fbf4ba97fcd60457483af1ce9ea4154cf9e778b88fe152d1d1c, activation_manifest_sha256: 47cf9a6b13a8e4411b8ab7210ebdd36d0f0c94581d78cd2db32d8cce954c2e18, candidate_run_sha256: 9fb8bcbc04c0a9c1bdaec6522a728e56c4d7b84ac14a6b5843513e23f9281673, decision_sha256: 0a09bcabfad414e6825b51f1c0e2c7bde5757bccc142f8398c61ef5faa288416}
+      resource_release: "exact v17 container exited 0; NPU4-7 have no running process; pre-existing NPU0-3 VLLM workers were untouched"
+    next: "Keep the retained BF16 TP4 MMAR plus gate/up prefetch-0.1 stack. Do not relaunch partial fused-tail or widen the final dependency chain without new whole-model economics; choose the next TPOT treatment from retained-profile hotspots and /cache/cch operator assets, with physical NPU4-7 only."
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z
