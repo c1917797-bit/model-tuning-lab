@@ -35,6 +35,9 @@ case "$candidate_mode" in
   mmar-on-weight-prefetch-gateup-0p1)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml"
     ;;
+  mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024)
+    default_config="$repo_root/configs/qwen35-query-rewrite-mmar-prefetch-0p1-hccl-buff1024-candidate.yaml"
+    ;;
   mmar-on-weight-prefetch-gateup-0p1-taskqueue2)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-taskqueue2-candidate.yaml"
     ;;
@@ -61,6 +64,9 @@ case "$candidate_mode" in
     ;;
   selective-ffn-nz)
     default_config="$repo_root/configs/qwen35-query-rewrite-selective-ffn-nz-candidate.yaml"
+    ;;
+  flashcomm2-oproj2-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm2-oproj2-mmar-prefetch-gateup-0p1-candidate.yaml"
     ;;
   flashcomm1)
     default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-candidate.yaml"

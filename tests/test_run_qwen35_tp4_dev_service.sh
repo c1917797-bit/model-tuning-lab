@@ -424,4 +424,39 @@ if grep -q -- '--profiler-config.profiler' "$docker_log"; then
   exit 1
 fi
 
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-mmar-prefetch-hccl-buff1024-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024 \
+  >"$tmp/mmar-prefetch-hccl-buff1024.out" \
+  2>"$tmp/mmar-prefetch-hccl-buff1024.err"
+grep -q -- 'HCCL_BUFFSIZE=1024' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "HCCL buffer candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-flashcomm2-oproj2-mmar-prefetch-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  flashcomm2-oproj2-mmar-prefetch-gateup-0p1 \
+  >"$tmp/flashcomm2-oproj2-mmar-prefetch.out" \
+  2>"$tmp/flashcomm2-oproj2-mmar-prefetch.err"
+grep -q -- '--tensor-parallel-size 4' "$docker_log"
+grep -q -- '--data-parallel-size 1' "$docker_log"
+grep -q -- '"enable_matmul_allreduce":true' "$docker_log"
+grep -q -- '"enable_flashcomm1":false' "$docker_log"
+grep -q -- '"enable_flashcomm2_parallel_size":2' "$docker_log"
+grep -q -- '"weight_nz_mode":1' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+grep -q -- '/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp/vllm_ascend/ops/linear_op.py:/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear_op.py:ro' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "FlashComm2/MMAR stack unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
 echo "PASS: run_qwen35_tp4_dev_service guards"
