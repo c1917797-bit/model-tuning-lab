@@ -5,7 +5,7 @@
 - Workstream: `exp-20260905-qwen35-shortgpt`
 - Maintainer branch: `work/exp-20260905-qwen35-shortgpt`
 - Dependency: `exp-20260904-qwen35-query-rewrite-3x-e2e`
-- Current phase: Block Influence collection/analysis host tools are ready. The fused-tail v9 activation gate rejected the candidate before benchmark traffic; one guarded v10 queue waits for the protected `p0_r15` chain, and one strictly serialized BI queue waits for that exact v10 process to terminate before checking NPU4-7 idle.
+- Current phase: real-NPU Block Influence passed and the conservative 8-layer set is frozen. Fused-tail v10 was rejected before traffic, so exactly one unpruned same-runtime retained-control job, `exec-0000000000000170`, now runs on assigned physical NPU4-7 before the first pruned candidate.
 - Goal remains open: every concurrency cell must reach at least 2x TTFT and 2x TPOT versus the immutable original baseline.
 
 ## Scope and resource boundary
@@ -72,3 +72,52 @@ Unset `VLLM_ASCEND_QWEN35_SKIP_LAYERS` and `VLLM_ASCEND_QWEN35_BI_DIR`, remove t
 - Maintainer implementation history through `7b1fdbaaf8d5411a5e5101150a276141328510c2` includes semantic-quality gating, operator attribution, incremental TPOT acceptance, retained-config preservation, and dirty-source rejection in addition to the original frozen harness. Subsequent local checkpoints `ef8c82c4e0333b6ae0f3d6c22cfdeae045a6a880` and `84d0bd470e11c9617efee4b16990d370d85b7482` pin the v10 operator source and make the retained semantic-control fallback executable. The branch remains ahead of the last verified upstream, `origin/work/exp-20260905-qwen35-shortgpt@d1ec5b06fcef562b00c1c947c3cc901bff253978`; a bounded 25-second push attempt timed out with no output, so remote publication remains pending.
 - The umbrella workstream is also ahead of its upstream checkpoint because the same Git transport is hanging. Do not claim either branch is pushed until local HEAD and upstream are verified equal.
 - The global `.agents/HANDOFF.md` is integrated truth; keep branch-local progress here until integration.
+
+## Real-NPU BI result, frozen remove8 contract, and active control
+
+The latest state supersedes the queued/pending bullets above. Serialized
+operation `exec-0000000000000131` passed the exact predecessor and four-idle-
+observation gates, used only physical NPU4-7, completed successfully, and
+printed `SHORTGPT_BI_READY`. Fresh immutable root:
+
+`/cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/bi-20260905T135854Z`
+
+The diagnostic completed 32/32 real query_rewrite prompts with zero request
+errors. It quarantined 64 initialization observations and retained 2,048
+formal records: 64 layers times 32 observations. All layers met coverage.
+Four split rankings had minimum pairwise Spearman
+`0.9989926739926738` versus the required `0.8`, so
+`ready_to_freeze=true`. The privacy boundary holds: prompts and completions
+are omitted from the artifacts.
+
+Hashes:
+
+- `analysis.json`:
+  `597ab1c057f8c40abeee47e83bfcb2d80a6c1ca1b15337a7703f03236f4996a7`
+- `collection.json`:
+  `79fbb819bf250fa9f36c22122ab6bc304fb0c38edd05b4870c2c197043dff520`
+- `service.log`:
+  `75e569e922aef99415b26760aec88df58b91e5798337b9b6d3252db6b6cf3f65`
+- `SHA256SUMS`:
+  `d0accabf8a910045b998d2344e4a1b76420f6a2e0ad5298bfc8c13619721f16a`
+
+The first conservative layer contract removes
+`3,4,5,7,8,9,12,13` (`3-5,7-9,12-13`). It is read-only, binds the exact BI
+analysis/source/model identities, and has SHA256
+`7b4980e5e7c69ed65ddaaf72ce64287710c15cc75d117c0cce09c939c51ed17e`:
+
+`/cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/layer-sets/shortgpt-bi-20260905T135854Z-remove8.json`
+
+Do not run or freeze 16/20 layers yet. The v10 operator ended with exit 72
+before traffic and supplied no valid semantic-control directory. Therefore
+exactly one unpruned `shortgpt-retained-control` job is active as operation
+`exec-0000000000000170`, run
+`shortgpt-retained-control-20260905T140700Z`, on assigned physical NPU4-7.
+Its output root is:
+
+`/cache/austinov/eval-runs/exp-20260905-qwen35-shortgpt/controls/shortgpt-retained-control-20260905T140700Z`
+
+Poll this job only. After 128/128 requests, zero errors, natural stops, and
+artifact hashes verify, run one `shortgpt-retained` remove8 matrix using this
+directory as `SEMANTIC_CONTROL_DIR`. Any semantic gate failure stops the
+layer-removal ladder; only a passing remove8 result may justify remove16.

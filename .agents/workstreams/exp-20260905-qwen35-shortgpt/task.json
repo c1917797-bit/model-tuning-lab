@@ -61,6 +61,6 @@
     "python3 -c 'import yaml,sys; yaml.safe_load(sys.stdin)' < .agents/experiments/exp-20260905-qwen35-shortgpt.yaml",
     "git diff --check"
   ],
-  "executionState": "bi-diagnostic-frozen-candidate-and-default-off-retained-control-ready-awaiting-only-v10-queue-and-protected-p0-r15-completion",
-  "integrationState": "v9-rejected-before-traffic-v10-source-fix-queued-shortgpt-and-operator-sources-separately-pinned-e2e-gates-ready-upstream-source-push-blocked"
+  "executionState": "block-influence-passed-remove8-frozen-retained-control-exec-0000000000000170-running",
+  "integrationState": "v10-rejected-before-traffic-shortgpt-real-npu-bi-hashed-and-stable-same-runtime-control-running-upstream-source-push-blocked"
 }

@@ -40,19 +40,19 @@
     },
     {
       "gate": "fused-tail-v10-dependency",
-      "result": "ACTIVE guarded queue: the first v10 launch exec-00000000000000e6 hit its 30-second synchronous timeout without leaving a host waiter or allocating an NPU. Replacement asynchronous operation exec-00000000000000f7 is the only active waiter. It pins source fix 4424cc24ecfa355ce2b17ab48e04fb6fc4944e39, whose exact-image 9/9 focused fusion-pass tests now execute successfully, and must wait for p0_r15 R15_DONE plus four stable idle checks before allocating NPU4-7; do not duplicate it."
+      "result": "REJECTED safely before traffic: exec-00000000000000f7 reached the real BF16 TP4 activation gate after guarded handoff, but every rank reported Normalized 0 and Fused 64 rather than 64/128. It exited 72 with zero benchmark requests, so it cannot serve as ShortGPT semantic control."
     },
     {
       "gate": "shortgpt-bi-after-v10-queue",
-      "result": "ACTIVE guarded queue: asynchronous operation exec-0000000000000131 (host PID 1474376) is the only ShortGPT BI waiter. It binds predecessor PID 1298706 plus start tick 115030322, requires R15_DONE and exact predecessor termination, then requires four stable Docker/npu-smi/port-10020 idle checks before launching a fresh BI root. Queue shell mock passes both blocked-live-predecessor and released-predecessor paths; do not duplicate it."
+      "result": "PASS target-device execution: exec-0000000000000131 passed the predecessor and four stable idle gates, used only physical NPU4-7, completed 32/32 real prompts with zero errors, quarantined 64 startup observations, recorded 2048 formal layer observations, hashed every artifact, and printed SHORTGPT_BI_READY."
     },
     {
       "gate": "semantic-control-selection",
-      "result": "PASS static / PENDING NPU: use the completed unpruned v10 matrix only if v10 produces one; otherwise CANDIDATE_MODE=shortgpt-retained-control loads the pinned ShortGPT source but omits all skip-layer variables and fused-tail configuration to produce a fresh unpruned retained matrix. The service guard verifies this default-off boundary. Never use rejected v9 or the empty failed BI root as the same-runtime control."
+      "result": "ACTIVE target-device control: v10 produced no matrix, so exactly one default-off unpruned shortgpt-retained-control run, exec-0000000000000170, is running on assigned physical NPU4-7. It omits skip-layer variables and fused-tail configuration and must complete before the pruned remove8 run."
     },
     {
       "gate": "block-influence-real-workload",
-      "result": "PENDING: collect and stabilize Qwen3.5-specific layer rankings on query_rewrite before selecting any removal set."
+      "result": "PASS and FREEZE: all 64 layers have 32 observations; four-way split ranking has minimum Spearman 0.9989926739926738 versus required 0.8. analysis SHA256 is 597ab1c057f8c40abeee47e83bfcb2d80a6c1ca1b15337a7703f03236f4996a7. The conservative remove8 contract selects layers 3,4,5,7,8,9,12,13 and is read-only with SHA256 7b4980e5e7c69ed65ddaaf72ce64287710c15cc75d117c0cce09c939c51ed17e."
     },
     {
       "gate": "shortgpt-correctness-and-e2e",
