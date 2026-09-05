@@ -1,7 +1,7 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "status": "not-ready-mmar-retained-tpot-target-open",
+  "status": "handoff-ready-not-promotable-tpot-target-open",
   "targetParent": "main",
   "sourceCommit": null,
   "validation": [
@@ -132,6 +132,30 @@
     {
       "gate": "post-control-resource-release",
       "result": "PASS: both task containers exited; physical NPU4-7 have no running process and external NPU0-3 PIDs 1031654-1031657 remain unchanged."
+    },
+    {
+      "gate": "retained-cumulative-stack",
+      "result": "PASS correctness and E2E: BF16 TP4/DP1, MMAR, gate/up prefetch ratio 0.1, NZ1, async, FULL_DECODE_ONLY and HCCL_BUFFSIZE=512 completed 32/32 zero-error natural-stop requests in every cell. TTFT speedup versus the immutable original is 2.190x/2.227x/2.198x/2.316x; TPOT is 1.334x/1.417x/1.532x/1.556x, so only the TTFT target is met."
+    },
+    {
+      "gate": "mmar-hotspot-profile",
+      "result": "PASS diagnostic: the MMAR-enabled profile assigns 48.214% of summed operator time to MatmulAllReduceMc2AicpuKernel, 23.504% to MatMulV2 and 16.616% to MatmulAllReduce. 13696 MMAR calls over 107 decode steps imply about 128 serialized row-parallel calls per step."
+    },
+    {
+      "gate": "mmar-separate-decode-policy",
+      "result": "REJECT on real NPU4-7 microbenchmark: for both exact Qwen3.5 TP4 decode projection shapes and M=1/2/4/6/8/10/12/14/16, separate MatMul plus AllReduce delivered only 0.46998x geometric-mean throughput relative to fused MMAR; no measured bypass range exists."
+    },
+    {
+      "gate": "flashcomm2-qwen35-hybrid-integration",
+      "result": "REJECT after three bounded implementation attempts: projection selection fix and rank-preserving communication handling all reached the same torch.compile GDN copy_ rank mismatch before service readiness. No E2E latency claim is valid; future work requires an architecture-aware padding/graph contract."
+    },
+    {
+      "gate": "hccl-buffsize-1024-e2e",
+      "result": "REJECT mixed regression: all four cells completed 32/32 with zero errors, but versus retained HCCL_BUFFSIZE=512 it improved both TTFT and TPOT only at c16 and regressed at least one metric at c1/c5/c8."
+    },
+    {
+      "gate": "final-resource-and-handoff",
+      "result": "PASS: all task containers exited, physical NPU4-7 are idle, the existing NPU0-3 workload remains active and untouched, all new evidence manifests verify, source worktrees are clean, and the target-open platform prerequisite is documented for the next maintainer."
     }
   ]
 }

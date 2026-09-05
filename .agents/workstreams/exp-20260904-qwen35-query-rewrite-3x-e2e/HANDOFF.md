@@ -1237,3 +1237,106 @@ gate/up-prefetch-0.1 stack. Do not scan smaller batch-token values or lower
 context again; the next loop must target the communication-dominated
 MatMulAllReduce/row-parallel operator path while preserving the current
 service contract.
+
+## Final operator loop and handoff checkpoint
+
+The remaining communication hypothesis was tested rather than inferred from
+API wording. Official current CANN documentation describes MC2 as disabled for
+incremental scenarios, but the exact vLLM-Ascend 0.23.0 stack uses fused MMAR
+during decode. A new TP4 BF16 microbenchmark therefore compared fused MMAR
+against separate MatMul plus AllReduce on physical NPU4-7 for the two profiled
+Qwen3.5 decode projection shapes, M=1/2/4/6/8/10/12/14/16, with 20 warmups,
+100 measured iterations and five alternating repeats.
+
+Separate execution achieved only 0.469982x geometric-mean performance versus
+fused MMAR, with a minimum of 0.367575x. In other words, fused MMAR is about
+2.13x faster and there is no measured small-M bypass range. Retain fused MMAR.
+Evidence and checksums are under:
+
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-policy-bf16-tp4-npu4-7-20260905T031000Z
+
+The next operator route integrated FlashComm2-style overlap into the retained
+stack in a dedicated source worktree. Three signed-off source commits were
+tested: initial Qwen3.5 projection selection, exclusion of linear_attn.out_proj,
+and arbitrary-leading-rank flatten/restore. Every attempt failed at the same
+torch.compile profile-run in qwen_gdn_linear_attn.py:342: a rank-1 destination
+versus rank-3 source copy_ mismatch. No service reached readiness and no E2E
+latency result is valid. This is an architecture-contract failure for the
+hybrid self-attention/GDN model, not evidence against FlashComm2 generally.
+Do not make another projection-local patch; a retry requires an architecture-aware
+global TP padding and symbolic graph design.
+
+Source worktree:
+
+/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
+
+Branch and clean HEAD:
+
+work/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
+e161bbff4f5064c87c8a2c4c6c6f412cc9805dd5
+
+The final bounded parameter experiment changed only HCCL_BUFFSIZE from 512 to
+1024 while retaining BF16 TP4/DP1, MMAR, gate/up prefetch 0.1, NZ1, async
+scheduling, FULL_DECODE_ONLY, 133K context and no quantization. It completed
+all 128 requests with zero errors and natural stops:
+
+| concurrency | TTFT p50 ms | TPOT p50 ms | TTFT vs original | TPOT vs original |
+|---:|---:|---:|---:|---:|
+| 1 | 437.137 | 28.806 | 2.124x | 1.336x |
+| 5 | 495.111 | 38.670 | 2.206x | 1.392x |
+| 8 | 495.836 | 44.256 | 2.183x | 1.528x |
+| 16 | 872.205 | 50.093 | 2.379x | 1.613x |
+
+It improved both metrics only at c16 and regressed at least one metric at
+c1/c5/c8 versus HCCL_BUFFSIZE=512. Reject it and retain 512. The evidence
+root is:
+
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-prefetch-0p1-hccl-buff1024-20260905T031500Z
+
+### Retained production candidate
+
+The retained non-quantized stack is BF16 TP4/DP1, MatMulAllReduce on, NZ1,
+FlashComm1/2 off, async scheduling, FULL_DECODE_ONLY, HCCL_BUFFSIZE=512,
+dense gate/up weight prefetch ratio 0.1, max model length 133000.
+
+| concurrency | TTFT p50 ms | TTFT speedup | TPOT p50 ms | TPOT speedup |
+|---:|---:|---:|---:|---:|
+| 1 | 423.975 | 2.190x | 28.834 | 1.334x |
+| 5 | 490.437 | 2.227x | 37.976 | 1.417x |
+| 8 | 492.489 | 2.198x | 44.146 | 1.532x |
+| 16 | 895.936 | 2.316x | 51.922 | 1.556x |
+
+TTFT meets the 2x target in all four cells. TPOT remains open in all four
+cells and must not be described as complete.
+
+### Measured platform prerequisite
+
+The decisive profile contains 13,696 MMAR calls over 107 decode steps, about
+128 row-parallel MMAR calls per step. Summed operator time is 48.214% in
+MatmulAllReduceMc2AicpuKernel, 23.504% in MatMulV2 and 16.616% in
+MatmulAllReduce. Raw fused MMAR is already faster than the separate fallback,
+so the missing TPOT gain cannot be obtained by toggling fusion off.
+
+A further material TPOT step now requires one of the following, with a fresh
+microbenchmark and E2E gate: an upstream architecture-aware implementation
+that reduces or overlaps those 128 serialized row-parallel collective paths;
+or a separately approved change to model architecture, precision, training,
+or the 133K serving contract. None of those broader changes is authorized by
+this workstream. Do not resume by scanning HCCL buffer sizes, smaller contexts,
+static kernel, TASK_QUEUE_ENABLE=2, TP2 topologies, ngram speculation, or
+projection-local FlashComm patches; each is already closed by evidence.
+
+### Resume and rollback
+
+Maintainer worktree:
+
+/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e
+
+Retained launcher mode:
+
+mmar-on-weight-prefetch-gateup-0p1
+
+Rollback to the original runtime by selecting the baseline launcher/config and
+leaving source overlays disabled. Physical NPU4-7 are idle after the final
+run. NPU0-3 continue to host the pre-existing workload and were not touched.
+All new microbenchmark, FlashComm2 and HCCL1024 SHA256 manifests verify.

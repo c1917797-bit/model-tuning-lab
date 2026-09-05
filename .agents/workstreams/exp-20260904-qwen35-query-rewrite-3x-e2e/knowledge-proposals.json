@@ -97,6 +97,30 @@
       "status": "accepted-local",
       "lesson": "A failed benchmark matrix must still close with a machine-readable terminal decision and checksums. The runner must preserve the workload exit status, finalize logs and metrics, classify missing cells as not-run, and produce reject-runtime-failure rather than leaving an ambiguous artifact directory.",
       "evidence": "Failure-finalizer tests cover a 25/32 c5 cell plus absent c8/c16 cells and require analyzer exit 4 with decision reject-runtime-failure"
+    },
+    {
+      "id": "documentation-claim-needs-target-shape-measurement",
+      "status": "accepted-local",
+      "lesson": "When current operator documentation and framework policy disagree, benchmark the exact model shapes on the target topology before changing the serving path. A documented incremental-scenario boundary did not make separate MatMul plus AllReduce competitive for Qwen3.5 TP4 decode.",
+      "evidence": "NPU4-7 BF16 microbenchmark across two real projection shapes and nine decode M values measured separate/fused geometric speedup 0.469982; SHA256SUMS 2c5d82d989d963ad3f55b1bcbc15d94445d8fc36c06f459bf5e576afc714933a"
+    },
+    {
+      "id": "hybrid-model-communication-padding-is-global",
+      "status": "accepted-local",
+      "lesson": "A projection-local FlashComm integration can still alter a hybrid model's global TP padding and symbolic graph contract. On alternating self-attention and GDN layers, exclude-by-name and rank restoration are insufficient when the framework-level padding assumptions leak into GDN graph capture.",
+      "evidence": "Three source commits f20cd648, d3346ad1 and e161bbff reached the same qwen_gdn_linear_attn.py copy_ rank mismatch before readiness"
+    },
+    {
+      "id": "communication-buffer-tuning-is-topology-specific",
+      "status": "accepted-local",
+      "lesson": "Do not transfer a larger HCCL buffer recommendation from multi-node or different-hardware examples without a full workload matrix. On single-node 910B4 TP4, 1024 MB helped c16 but regressed at least one retained metric at c1, c5 and c8, so the all-cell stack stays at 512 MB.",
+      "evidence": "Run mmar-prefetch-0p1-hccl-buff1024-20260905T031500Z completed 128 natural-stop requests; incremental decision SHA256 bd362658448226471d1a4ac11a386d621a7db02c51263c15871582c7d59686f5"
+    },
+    {
+      "id": "goal-ceiling-requires-upstream-prerequisite",
+      "status": "accepted-local",
+      "lesson": "After parameter, topology, compiler, speculative and projection-communication routes are exhausted, stop scanning low-leverage switches. Preserve the best stack and hand off the measured structural prerequisite: reduce or overlap the roughly 128 serialized row-parallel collective paths per decode step while preserving the model and 133K serving contract.",
+      "evidence": "Retained TPOT gains plateau at 1.334x-1.556x while the MMAR profile attributes 48.214% to its AICPU control kernel and counts 13696 calls over 107 decode steps"
     }
   ]
 }

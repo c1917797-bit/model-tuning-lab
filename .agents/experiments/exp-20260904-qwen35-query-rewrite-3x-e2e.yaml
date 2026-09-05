@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp2_dp2_32k_rejected_tpot_target_open
-decision: retain_matmulallreduce_and_subcap_gateup_prefetch_then_iterate_tpot
+status: operator_path_exhausted_tpot_target_open_handoff_ready
+decision: retain_matmulallreduce_and_subcap_gateup_prefetch_escalate_decode_collective_path
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -94,7 +94,7 @@ selective_dense_ffn_nz:
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
   required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "physical NPU4-7 are idle after the correctness control; external NPU0-3 worker PIDs 1031654-1031657 are unchanged and were not used"
+  current: "physical NPU4-7 are idle after the final HCCL1024 candidate; external NPU0-3 VLLM workers remain active and were not used"
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -896,3 +896,79 @@ tp2_dp2_32k_conditional_candidate:
     hashes: {candidate_config_sha256: 26f5d042880b9db2f6c5af070c2a6b30dc09610a865028a195955cb68fdf893b, candidate_run_sha256: 9486e7f1179efd1bf40de37739635338ba055ab497d32bc252a0864837c37ff0, decision_sha256: 3ff15714c53ebc2e11d146c7d54bcbc90486ff45f0456205874d8f0f666a3874, service_log_sha256: 1f9d4b92ac7bc0f0ad7dfb6a63e8a37ba6d70df8deb98cd8dba0118c75d9c195, sha256sums_sha256: bf754de82f92bf22dc2988559524bae2335edf5df81fe906ba3a631090521d5e}
   decision: "reject TP2/DP2 even as a 32K conditional tier: TPOT regresses 65.96%/40.73%/26.76%/20.91% versus retained, c8 misses the original TTFT target narrowly, c16 TTFT regresses 291.81%, and the context contract is reduced from 133K to 32K"
   recovery: "exact candidate container exited 0; physical NPU4-7 are idle; external NPU0-3 worker PIDs 1031654-1031657 remain unchanged"
+mmar_decode_policy_microbenchmark:
+  status: rejected_separate_decode_policy
+  rationale: "official current CANN documentation states that incremental scenarios do not enable MC2, while vLLM-Ascend 0.23.0 uses fused MatMulAllReduce in decode; directly test the exact decode shapes instead of inferring from documentation"
+  implementation:
+    benchmark: scripts/benchmark_qwen35_mmar_policy.py
+    runner: scripts/run_qwen35_mmar_policy_microbench.sh
+    test: tests/test_benchmark_qwen35_mmar_policy.py
+  real_run:
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-policy-bf16-tp4-npu4-7-20260905T031000Z
+    devices: "physical NPU4-7, logical 0-3, TP4"
+    dtype: bfloat16
+    quantized: false
+    shapes: ["[M,1536]x[1536,5120]", "[M,4352]x[4352,5120]"]
+    m_values: [1, 2, 4, 6, 8, 10, 12, 14, 16]
+    protocol: "20 warmup, 100 measured iterations, five alternating repeats, max-rank latency"
+    geomean_separate_speedup_vs_fused: 0.4699823378010628
+    minimum_separate_speedup_vs_fused: 0.36757503687814486
+    interpretation: "separate MatMul plus AllReduce is about 2.13x slower geometrically than fused MMAR, so there is no decode-bypass threshold in the measured range"
+    correctness_boundary: "the two paths use different BF16 collective accumulation orders; strict allclose was not universal, so output comparison is diagnostic and no candidate was promoted"
+    hashes: {result_sha256: d2c7097f5a89f5da1838068525695844a903a3250d11e651307d0e758fc06ddb, container_log_sha256: 9638ca07afa4546c294c11342a2a7ed296cebcb5b3c1256848f928991ee96bdc, sha256sums_sha256: 2c5d82d989d963ad3f55b1bcbc15d94445d8fc36c06f459bf5e576afc714933a}
+  decision: "retain fused MMAR in decode; do not replace it with separate MatMul plus AllReduce on the measured 910B4 TP4 shapes"
+flashcomm2_candidate:
+  status: rejected_after_three_startup_attempts
+  paper_system_basis: "FlashComm2-style communication overlap targets tensor-parallel projection communication without retraining or quantization"
+  retained_stack: "BF16; TP4/DP1; MMAR; gate/up prefetch ratio 0.1; NZ1; async; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512"
+  source_worktree: /cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
+  source_branch: work/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp
+  attempts:
+    - {commit: f20cd6480e0c2d2540428200d831a3c7107135c5, treatment: "FlashComm2 selected Qwen3.5 out projections", result: "torch.compile profile-run failed at GDN copy_ with rank-1 destination and rank-3 source", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-oproj2-mmar-prefetch-0p1-20260905T025108Z, decision_sha256: 876d8dad374b95df79cfe5cfe5640c55a01be223ccaed355a569bf09c43b2c95, sha256sums_sha256: 1761d26b7cf72d8246e3b218f7deef2fa8321e4aa465f1e5faf2c16ce403938c}
+    - {commit: d3346ad104af3069d52477df44913db00af9c34f, treatment: "exclude linear_attn.out_proj and keep it on MMAR", result: "same GDN symbolic copy_ rank mismatch", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-selfattn-oproj2-mmar-prefetch-0p1-20260905T030100Z, decision_sha256: 1896e8d7164edf97bf03465e438dd9b146fac310c14d5b1c69fa254b93d26dad, sha256sums_sha256: c764696c7d3c0e05e9717c86660212d9416a4fdf7dfc264c4e294418ee734853}
+    - {commit: e161bbff4f5064c87c8a2c4c6c6f412cc9805dd5, treatment: "flatten arbitrary FlashComm2 leading dimensions and restore rank after all-gather", result: "same GDN symbolic copy_ rank mismatch", evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/flashcomm2-rankrestore-oproj2-mmar-prefetch-0p1-20260905T030600Z, decision_sha256: 5e7c447e98d931e90f9473a816dfbb5cffb6afc288e81e9e3f0e0aa255b8b3b8, sha256sums_sha256: 327b28953da7f8cace9f7a2b0953c390dc2d82a0115accddaa29689f7aadf199}
+  validation: "official-image focused unit test: 4 passed; py_compile and git diff --check passed; source worktree clean"
+  performance_boundary: "no service reached readiness, so no TTFT or TPOT claim is valid"
+  decision: "reject this FlashComm2 integration route for Qwen3.5 hybrid attention/GDN in vLLM-Ascend 0.23.0; a future retry requires an architecture-aware global padding/graph contract, not another local projection patch"
+hccl_buff1024_candidate:
+  source_manifest: configs/qwen35-query-rewrite-mmar-prefetch-0p1-hccl-buff1024-candidate.yaml
+  launcher_mode: mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024
+  status: rejected_mixed_regression
+  primary_variable_vs_retained: "HCCL_BUFFSIZE 512 -> 1024"
+  rationale: "bound one final communication parameter candidate after MMAR profiling; retain all model, algorithm, operator, graph and precision settings"
+  real_run:
+    operation_id: exec-00000000000009cf
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-prefetch-0p1-hccl-buff1024-20260905T031500Z
+    requests: {c1: "32/32", c5: "32/32", c8: "32/32", c16: "32/32"}
+    errors: 0
+    natural_stops: 128
+    quantized: false
+    p50_ms:
+      c1: {ttft: 437.137325, tpot: 28.805592}
+      c5: {ttft: 495.110715, tpot: 38.669681}
+      c8: {ttft: 495.836300, tpot: 44.256150}
+      c16: {ttft: 872.204515, tpot: 50.092517}
+    speedup_vs_fixed_original:
+      ttft: {c1: 2.12365, c5: 2.20610, c8: 2.18280, c16: 2.37911}
+      tpot: {c1: 1.33557, c5: 1.39207, c8: 1.52785, c16: 1.61325}
+    candidate_over_retained_ratio:
+      ttft: {c1: 1.031044344, c5: 1.009530302, c8: 1.006797507, c16: 0.973512548}
+      tpot: {c1: 0.999016715, c5: 1.018253833, c8: 1.002502319, c16: 0.964756044}
+    hashes: {incremental_decision_sha256: bd362658448226471d1a4ac11a386d621a7db02c51263c15871582c7d59686f5, incremental_sha256sums_sha256: d0c451574287058927a194780e3d18b1b61752a0362461cdf0d3f85af557b586, sha256sums_sha256: aca2faa5b63bad9c2a9f83edb04cdbc9cfe205ad3e6762e8ac31b98ec0f4dc8d}
+  decision: "reject: it improves both metrics only at c16 and regresses at least one metric at c1/c5/c8; retain HCCL_BUFFSIZE=512"
+final_maintainer_decision:
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1/2 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; dense gate/up weight prefetch ratio 0.1; max model length 133000; no quantization"
+  retained_p50_ms:
+    c1: {ttft: 423.975290, tpot: 28.833944}
+    c5: {ttft: 490.436705, tpot: 37.976465}
+    c8: {ttft: 492.488605, tpot: 44.145683}
+    c16: {ttft: 895.935565, tpot: 51.922470}
+  speedup_vs_fixed_original:
+    ttft: {c1: 2.18958, c5: 2.22713, c8: 2.19764, c16: 2.31609}
+    tpot: {c1: 1.33425, c5: 1.41748, c8: 1.53167, c16: 1.55639}
+  threshold_status: {ttft: "PASS all four cells", tpot: "OPEN all four cells"}
+  profile_ceiling: "one MMAR-enabled rank-0 profile attributes 48.214% of summed operator time to MatmulAllReduceMc2AicpuKernel, 23.504% to MatMulV2 and 16.616% to MatmulAllReduce; 13696 MMAR calls over 107 decode steps imply about 128 row-parallel MMAR calls per step"
+  exhausted_routes: ["training-free ngram speculation", "MTP", "FlashComm1", "FlashComm2 after three implementation attempts", "global and selective NZ", "TP2/PP2", "TP2/DP2 at 133K and 32K", "static kernel", "TASK_QUEUE_ENABLE=2", "HCCL_BUFFSIZE=1024", "separate MatMul plus AllReduce decode policy"]
+  goal_boundary: "the 2x TPOT target is not met and must not be claimed; on this exact vLLM-Ascend 0.23.0/CANN/910B4 stack, another large gain requires an upstream architecture-aware reduction or overlap of the 128 serialized row-parallel collective paths, or a separately approved model/serving-contract change"
+  handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
+  resources: "all task containers exited; physical NPU4-7 idle; NPU0-3 existing workload untouched"
