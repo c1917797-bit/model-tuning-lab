@@ -68,6 +68,9 @@ case "$candidate_mode" in
   flashcomm2-oproj2-mmar-prefetch-gateup-0p1)
     default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm2-oproj2-mmar-prefetch-gateup-0p1-candidate.yaml"
     ;;
+  flashcomm2-oproj1-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm2-oproj1-mmar-prefetch-gateup-0p1-candidate.yaml"
+    ;;
   flashcomm1)
     default_config="$repo_root/configs/qwen35-query-rewrite-flashcomm1-candidate.yaml"
     ;;
