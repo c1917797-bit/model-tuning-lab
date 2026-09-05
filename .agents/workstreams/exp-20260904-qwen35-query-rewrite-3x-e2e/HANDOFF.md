@@ -982,3 +982,40 @@ down-projection prefetch are unchanged. Launcher mode is
 `mmar-on-weight-prefetch-gateup-0p1`; it remains restricted to physical
 NPU4-7 and contains no quantization. Accept only if the full quick32 matrix
 improves TPOT cumulatively over MMAR without a material cell regression.
+
+## Sub-cap gate-up prefetch provisionally retained
+
+Operation `exec-0000000000000884` completed the full quick32 matrix on
+physical NPU4-7. Container inspection and the service log confirm that dense
+MLP gate/up prefetch ratio 0.1 was active with the retained MMAR, NZ1, async
+scheduling and FULL_DECODE_ONLY stack. No quantization was used.
+
+c1/c5/c8/c16 each completed 32/32 requests with zero errors and all 128 finish
+reasons were natural stop. TTFT p50 was
+423.975/490.437/492.489/895.936 ms, or
+2.190x/2.227x/2.198x/2.316x faster than the immutable original. TPOT p50 was
+28.834/37.976/44.146/51.922 ms, or
+1.334x/1.417x/1.532x/1.556x faster than the immutable original.
+
+Against retained MMAR-only, incremental TPOT was
+0.9934x/1.0272x/1.0310x/1.0066x with 1.01445x geometric mean, about 1.45%
+faster. The sole regression is c1 TPOT at 0.66%, while c5/c8/c16 improve.
+Incremental TTFT geometric mean is 1.03104x, about 3.10% faster. This satisfies
+the candidate's cumulative retention gate, so ratio 0.1 is provisionally
+retained as the new stack. The final 2x TPOT objective remains open in every
+cell; no completion claim is made.
+
+Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-weight-prefetch-gateup-0p1-fixedorig-npu4-7-20260905T003601Z`.
+All SHA256SUMS entries verify. Candidate config SHA256 is
+`3b939c7350e29fb72f2a0c200a966473cc30e54b36dbc6725ac4ae8e49f1d851`;
+decision SHA256 is
+`d41bcdba2a3d1cb964062348d9a43271814bd07859aadb183b24c5db6a90865d`;
+the SHA256SUMS digest is
+`df47028cfaad83112d8e9624453d77f4387246499e5fe30b8560408bd50e445f`.
+
+The exact candidate container exited. Physical NPU4-7 returned idle at 2866
+MiB with no running processes. External NPU0-3 PIDs 1031654-1031657 were
+unchanged. Rollback remains selecting launcher mode `mmar-on`; do not retest
+prefetch ratios at or above about 0.2 because they hit the same 18 MB cap that
+was already rejected.

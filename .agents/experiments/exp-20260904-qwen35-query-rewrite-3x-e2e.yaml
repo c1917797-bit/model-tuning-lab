@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_weight_prefetch_gateup_0p1_ready_tpot_target_open
-decision: retain_matmulallreduce_then_test_subcap_gateup_prefetch
+status: mmar_plus_gateup_prefetch_0p1_retained_tpot_target_open
+decision: retain_matmulallreduce_and_subcap_gateup_prefetch_then_iterate_tpot
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -666,10 +666,43 @@ weight_prefetch_gateup_candidate:
 weight_prefetch_gateup_0p1_candidate:
   source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml
   launcher_mode: mmar-on-weight-prefetch-gateup-0p1
-  status: ready_for_real_e2e
+  status: retained_provisional_incremental_tpot
   primary_variable_vs_rejected_18mb_prefetch: "dense MLP gate_up prefetch ratio 1.0 -> 0.1"
   retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
   rationale: "the 18 MB-capped treatment regressed c8 TPOT by 3.81%; ratio 0.1 reduces the copied prefix below the cap to test CMO/bandwidth contention without changing any other variable"
   devices: "physical NPU4-7 only; NPU0-3 prohibited"
   acceptance: "complete 32/32 natural-stop matrix and incremental TPOT geometric mean above retained MMAR with no material cell regression"
   rollback: "select mmar-on; the retained MMAR checkpoint is unchanged"
+  implementation_commit: 1dada05
+  real_run:
+    operation_id: exec-0000000000000884
+    run_id: mmar-on-weight-prefetch-gateup-0p1-fixedorig-npu4-7-20260905T003601Z
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-on-weight-prefetch-gateup-0p1-fixedorig-npu4-7-20260905T003601Z
+    activation: "container inspect and service log confirm dense gate/up ratio 0.1 with retained MMAR, NZ1, async scheduling and FULL_DECODE_ONLY; no quantization"
+    requests: 128
+    errors: 0
+    natural_stops: 128
+    p50_ms:
+      c1: {ttft: 423.975290, tpot: 28.833944}
+      c5: {ttft: 490.436705, tpot: 37.976465}
+      c8: {ttft: 492.488605, tpot: 44.145683}
+      c16: {ttft: 895.935565, tpot: 51.922470}
+    speedup_vs_fixed_original:
+      ttft: {c1: 2.18958, c5: 2.22713, c8: 2.19764, c16: 2.31609}
+      tpot: {c1: 1.33425, c5: 1.41748, c8: 1.53167, c16: 1.55639}
+    incremental_vs_mmar:
+      ttft: {c1: 1.024385, c5: 1.057004, c8: 1.014632, c16: 1.028624, geometric_mean: 1.031042}
+      tpot: {c1: 0.993412, c5: 1.027249, c8: 1.030995, c16: 1.006623, geometric_mean: 1.014453}
+    reference_quality:
+      exact_hash_note: "cross-run exact hash drift remains diagnostic under the established calibration; runtime completion, zero errors, natural stops and reference similarity are the business-correctness evidence"
+      raw_exact_matches: {c1: 5, c5: 4, c8: 4, c16: 4}
+      whitespace_normalized_matches: {c1: 6, c5: 5, c8: 5, c16: 5}
+      character_similarity_mean: {c1: 0.1875, c5: 0.15625, c8: 0.15625, c16: 0.15625}
+    hashes:
+      candidate_config_sha256: 3b939c7350e29fb72f2a0c200a966473cc30e54b36dbc6725ac4ae8e49f1d851
+      candidate_run_sha256: df6d928430a536e3805a71c99e6d72e1fe3519d8cd63400237ad4bab96a05f1e
+      decision_sha256: d41bcdba2a3d1cb964062348d9a43271814bd07859aadb183b24c5db6a90865d
+      service_log_sha256: 04fb89ac47e60c497daab487aa82341a24d3ae6950b005ec6c15526feb5045f2
+      sha256sums_sha256: df47028cfaad83112d8e9624453d77f4387246499e5fe30b8560408bd50e445f
+  decision: "retain provisionally as the new cumulative stack: incremental TPOT geometric mean is 1.01445x over MMAR-only, c5/c8/c16 improve and the sole c1 regression is 0.66%; TTFT also improves 1.03104x geometrically; the final 2x TPOT target remains open"
+  recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2866 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
