@@ -1281,6 +1281,30 @@ flashcomm1_gdn_shape_candidate:
       hashes: {candidate_run_sha256: 948f864e4719b545371c5ae84686a798de07970ba96cf9d889089cce6d2b935b, decision_sha256: f53d5ec404cd5c979a5a658ac2ad1b053781657fd0d631e4a3e4c34a8e1159df, service_log_sha256: e15c3fdaf381aa766628738486613a87557af874565015127905cf92e001fe38, manifest_sha256: 6185e523604f88c282fa59d1b84491a2dcaf839b62d1dbe8b06985fcff75193d}
       resource_release: "exact v3 container exited 0; physical NPU4-7 released; NPU0-3 untouched"
   handoff: "Retain BF16 TP4 MMAR plus NZ1 and dense gate/up prefetch-0.1 with FlashComm1 disabled. Do not relaunch v1-v3 unchanged. Reuse the source commits only if a future implementation removes the sequence-parallel latency regression and passes every frozen cell."
+tp8_user_baseline_reconstruction:
+  state: planned_and_launcher_verified
+  reason: "The user identified an earlier TP8/DP1 baseline with c1 TTFT about 139 ms and TPOT about 22 ms; the later TP4/DP1 quick32 baseline is not a valid substitute."
+  model: /cache/austinov/Qwen3.8-27B
+  model_alias: Qwen3-5/Qwen3.5-27B
+  runtime: vLLM-Ascend 0.23.0
+  physical_devices: [0, 1, 2, 3, 4, 5, 6, 7]
+  parallelism: {tensor_parallel_size: 8, pipeline_parallel_size: 1, data_parallel_size: 1, decode_context_parallel_size: 1}
+  dtype: bfloat16
+  quantization: null
+  speculative_config: null
+  disable_custom_all_reduce: true
+  graph: {mode: FULL_DECODE_ONLY, compile_ranges_endpoints: [8096], capture_sizes: [1, 2, 4, 8, 16, 24, 32], warmups: 1}
+  workload: {dataset: /cache/cch/query_rewrite.jsonl, dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e, requests_per_cell: 32, concurrency: [1, 5, 8, 16], repetitions: 3, generation: natural_eos}
+  primary_metrics: [request_throughput, output_token_throughput, ttft_p50_ms, tpot_p50_ms, e2e_p50_ms]
+  config: configs/qwen35-query-rewrite-tp8-user-baseline.yaml
+  service_launcher: scripts/run_qwen35_tp8_user_baseline_service.sh
+  matrix_runner: scripts/run_qwen35_tp8_baseline_matrix.py
+  orchestrator: scripts/run_qwen35_tp8_user_baseline.sh
+  resource_handoff:
+    result: "The user explicitly authorized pausing the existing workloads to start TP8. qwen36_hypic_nocache_baseline_npu0_3 had already exited; p0_r17 was stopped after evidence capture."
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/resource-handoffs/tp8-baseline-20260905T182200Z
+    safety: "all eight physical devices had no running process before launch preparation"
+  comparison_boundary: "Do not claim performance relative to the TP8 baseline until all repeated cells complete under the reconstructed protocol."
 mtp_local_argmax_candidate:
   stage: implementation_verified
   status: ready_waiting_for_npu4_7

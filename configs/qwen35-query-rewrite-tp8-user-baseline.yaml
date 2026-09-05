@@ -1,0 +1,52 @@
+schema: qwen35-query-rewrite-runtime/v1
+role: user_reconstructed_tp8_baseline
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+runtime:
+  image: quay.io/ascend/vllm-ascend:v0.23.0
+  dtype: bfloat16
+  quantization: null
+  tensor_parallel_size: 8
+  pipeline_parallel_size: 1
+  data_parallel_size: 1
+  decode_context_parallel_size: 1
+  disable_custom_all_reduce: true
+  max_model_len: 133000
+  max_num_seqs: 16
+  max_num_batched_tokens: 32768
+  seed: 1024
+  enable_prefix_caching: true
+  enable_chunked_prefill: true
+  async_scheduling: true
+  mamba_cache_mode: align
+  mamba_cache_dtype: bfloat16
+  mamba_ssm_cache_dtype: bfloat16
+  speculative_config: null
+  compilation_config:
+    cudagraph_mode: FULL_DECODE_ONLY
+    compile_ranges_endpoints: [8096]
+    cudagraph_capture_sizes: [1, 2, 4, 8, 16, 24, 32]
+    cudagraph_num_of_warmups: 1
+  additional_config:
+    enable_cpu_binding: true
+    enable_matmul_allreduce: false
+    enable_flashcomm1: false
+environment:
+  ASCEND_RT_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
+  HCCL_BUFFSIZE: "512"
+  OMP_PROC_BIND: "false"
+  OMP_NUM_THREADS: "1"
+  TASK_QUEUE_ENABLE: "1"
+  TRITON_KERNEL_DUMP: "1"
+  TRITON_DUMP_DIR: /cache/efim/triton_dump
+  VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE: "0"
+  VLLM_LOGGING_LEVEL: DEBUG
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  requests_per_cell: 32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  generation: natural_eos
+  metrics: [request_throughput, output_token_throughput, ttft_ms, tpot_ms, e2e_ms]
+  note: "Do not compare to TP4/DP1 until this reconstructed TP8 baseline completes."

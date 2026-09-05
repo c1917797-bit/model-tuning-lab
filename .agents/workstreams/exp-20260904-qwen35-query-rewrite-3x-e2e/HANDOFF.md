@@ -2146,3 +2146,34 @@ accepted-token metrics, zero-error/natural-stop correctness, decision JSON,
 hashes and final resource release. Promote only if all correctness gates pass
 and the cumulative result improves the retained stack toward both 2x targets;
 otherwise reject it and preserve the retained non-speculative configuration.
+
+## User-authorized TP8/DP1 baseline reconstruction
+
+The user corrected the comparison boundary: the historical production baseline
+was TP8/DP1, not the later TP4/DP1 quick32 baseline. The user supplied the
+effective vLLM 0.23.0 engine configuration and reported historical c1 TTFT near
+139 ms and TPOT near 22 ms. Those historical numbers are context only until a
+same-host, same-dataset run reproduces them.
+
+The reconstructed baseline keeps BF16 and quantization=None, uses physical
+NPU0-7 as TP8/PP1/DP1/DCP1, disables custom all-reduce and Ascend MMAR, keeps
+prefix caching, chunked prefill, async scheduling, max model length 133000, and
+uses FULL_DECODE_ONLY with compile endpoint 8096 and capture sizes
+1/2/4/8/16/24/32. It runs 32 immutable query_rewrite requests at c1/c5/c8/c16
+for three repetitions and records request throughput, output-token throughput,
+TTFT, TPOT and E2E latency.
+
+The user explicitly authorized pausing the occupied workloads to make all eight
+cards available. `qwen36_hypic_nocache_baseline_npu0_3` had already exited;
+`p0_r17` was stopped after preserving logs and container inspection under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/resource-handoffs/tp8-baseline-20260905T182200Z`.
+The device process table then proved NPU0-7 idle. Do not resume either workload
+until the TP8 baseline container exits and device release is re-proven.
+
+The config and launch path are
+`configs/qwen35-query-rewrite-tp8-user-baseline.yaml`,
+`scripts/run_qwen35_tp8_user_baseline_service.sh`,
+`scripts/run_qwen35_tp8_baseline_matrix.py`, and
+`scripts/run_qwen35_tp8_user_baseline.sh`. The TP4/DP1 improvement ratios are
+superseded as user-facing goal evidence until this repeated TP8 baseline is
+complete.
