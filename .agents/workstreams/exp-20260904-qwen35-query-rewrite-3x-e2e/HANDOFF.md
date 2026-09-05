@@ -914,3 +914,28 @@ feature-flagged, BF16, shape-specialized MatMulAllReduce or compatible
 row-parallel projection treatment. Require isolated correctness and repeated
 microbenchmarks before E2E. Do not revisit TP2/DP2, FlashComm1, prompt lookup,
 MTP, gate/up NZ or AIV unchanged.
+
+## Dense gate-up weight-prefetch candidate ready
+
+The relocated source and operator assets were inspected before another
+compile attempt. On 910B4, the available MatMulAllReduce V2/V3 sources do not
+expose a new execution mode: V2 fixes commTurn=0/streamMode=1, while V3 uses
+AI CPU on Atlas A2 and reserves CCU for Ascend 950. The fused
+MatMulAllReduceAddRmsNorm path is deprecated and its current graph pass does
+not cover decode sizes or the retained fused MMAR node. FlashComm2 is
+prefill-oriented and loses its row-parallel branch whenever MMAR is enabled.
+
+The next bounded candidate therefore uses vLLM-Ascend 0.23.0's existing
+dense weight-prefetch path. It keeps the retained BF16 TP4/DP1 MMAR stack and
+enables only dense MLP gate/up prefetch at ratio 1.0. Runtime caps the copied
+prefix at 18 MB; attention, MoE and dense down-projection prefetch are
+explicitly disabled. This path is eligible when decode token count is below
+500 and starts from the preceding row-parallel o_proj completion, so it
+targets the immutable c1/c5/c8/c16 TPOT cells without removing MMAR.
+
+Launcher mode is `mmar-on-weight-prefetch-gateup`; manifest is
+`configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-candidate.yaml`.
+It is hard-restricted to physical NPU4-7 and contains no quantization. Compare
+the complete quick32 matrix to the fixed original for the user-facing target,
+but retain it cumulatively only if it improves TPOT over MMAR-only. Rollback
+is selecting `mmar-on` or removing `weight_prefetch_config`.

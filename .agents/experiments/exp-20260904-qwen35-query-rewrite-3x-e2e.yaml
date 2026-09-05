@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: mmar_retained_hccl_aiv_rejected_tpot_target_open
-decision: retain_matmulallreduce_reject_tp2_dp2_gate_up_nz_and_hccl_aiv_then_iterate_tpot
+status: mmar_weight_prefetch_gateup_ready_tpot_target_open
+decision: retain_matmulallreduce_then_test_isolated_dense_gateup_weight_prefetch
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
@@ -623,3 +623,14 @@ hccl_aiv_candidate:
       sha256sums_sha256: 82f601478bc58a7c7f68282a8d136639cb6e07f2d766e4d588ae1afc21947e3b
   decision: "reject HCCL AIV from the cumulative stack: all requests completed, but TPOT geometric mean is 1.46% slower than retained MMAR-only and the 2x TPOT target remains unmet"
   recovery: "exact candidate container exited; physical NPU4-7 returned idle at 2866-2867 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
+weight_prefetch_gateup_candidate:
+  source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-candidate.yaml
+  launcher_mode: mmar-on-weight-prefetch-gateup
+  status: ready_for_real_e2e
+  primary_variable_vs_retained_mmar: "dense MLP gate_up weight prefetch off -> on; ratio 1.0, runtime-capped at 18 MB"
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
+  isolated_config: "attn qkv/o=0; MoE gate_up=0; dense MLP gate_up=1.0; dense MLP down=0"
+  rationale: "vLLM-Ascend 0.23.0 explicitly activates dense MLP prefetch below 500 tokens and starts gate/up prefetch from the preceding o_proj completion; this targets c1/c5/c8/c16 decode and remains stackable with MMAR"
+  evidence_boundary: "18 MB is only part of the approximately 89 MB gate/up weight; accept only on completed E2E correctness and incremental TPOT improvement versus retained MMAR"
+  devices: "physical NPU4-7 only; NPU0-3 prohibited"
+  rollback: "remove weight_prefetch_config or select mmar-on; retained MMAR checkpoint remains unchanged"
