@@ -24,7 +24,7 @@ treatment:
 source:
   worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
   branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
-  commit: c36980d335d1f493cba824e489dd4828218a5f99
+  commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
   extension_sha256: 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23
 first_real_run:
   evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z

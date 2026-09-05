@@ -47,7 +47,7 @@ selective_ffn_nz_commit="71c25ec9"
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
 flashcomm2_mmar_commit="65f780ee"
 mmar_add_rmsnorm_root="${MMAR_ADD_RMSNORM_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm}"
-mmar_add_rmsnorm_commit="c36980d335d1f493cba824e489dd4828218a5f99"
+mmar_add_rmsnorm_commit="8c7f7d03e92a177d9c0678b993ece5ac9f5f2254"
 mmar_add_rmsnorm_extension="$mmar_add_rmsnorm_root/build-mmar-add-rmsnorm/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so"
 mmar_add_rmsnorm_kernels="$mmar_add_rmsnorm_root/build-mmar-add-rmsnorm/lib/libvllm_ascend_kernels.so"
 mmar_add_rmsnorm_extension_sha256="6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23"
@@ -366,6 +366,7 @@ if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
   docker_args+=(
     -v "$mmar_add_rmsnorm_root/vllm_ascend/ascend_config.py:$image_source_root/ascend_config.py:ro"
+    -v "$mmar_add_rmsnorm_root/vllm_ascend/compilation/compiler_interface.py:$image_source_root/compilation/compiler_interface.py:ro"
     -v "$mmar_add_rmsnorm_root/vllm_ascend/compilation/graph_fusion_pass_manager.py:$image_source_root/compilation/graph_fusion_pass_manager.py:ro"
     -v "$mmar_add_rmsnorm_root/vllm_ascend/compilation/passes/decode_mmar_add_rmsnorm_fusion_pass.py:$image_source_root/compilation/passes/decode_mmar_add_rmsnorm_fusion_pass.py:ro"
     -v "$mmar_add_rmsnorm_extension:$image_source_root/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so:ro"
