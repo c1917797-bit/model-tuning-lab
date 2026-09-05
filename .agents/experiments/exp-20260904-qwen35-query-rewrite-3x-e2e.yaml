@@ -1,12 +1,12 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp8_user_baseline_running_mtp_local_argmax_attempt_interrupted
-decision: pending_tp8_baseline_and_comparable_mtp_retry_retain_current_stack
+status: tp8_user_baseline_complete_tp8_mtp_local_argmax_running
+decision: pending_tp8_mtp_local_argmax_repeated_e2e
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
   hardware: "8 x Ascend 910B4"
-  topology: "DP2 / TP4"
+  topology: "authoritative comparison boundary TP8 / DP1 on physical NPU0-7; historical retained stack TP4 / DP1"
   model_path: /cache/austinov/Qwen3.8-27B
   model_architecture: Qwen3_5ForConditionalGeneration
   model_config_sha256: 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab
@@ -20,7 +20,7 @@ dataset:
   confidential_fields: [question, answer]
 workload:
   concurrency: [1, 5, 8, 16]
-  repetitions: 1
+  repetitions: 3
   warmup: "per concurrency, excluded from measurement"
   seed: 1024
   prompt_mode: raw_question
@@ -35,7 +35,7 @@ final_thresholds:
 loop:
   attribution: "add one primary treatment to the latest accepted stack"
   cumulative: "combine accepted operators, algorithms and parameters"
-  comparison: "run each candidate alone and compare it with the user-designated fixed original quick32-v3 baseline; add accepted treatments to the current best cumulative stack"
+  comparison: "compare every new candidate with the immutable repeated TP8/DP1 v5 baseline; retain the TP4/DP1 quick32 history only for attribution and never mix it into the current goal denominator"
 operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_fixed_original_comparison, candidate_profile]
 selective_dense_ffn_nz:
@@ -93,8 +93,8 @@ selective_dense_ffn_nz:
       stack_decision: "reject gate/up NZ from cumulative stack: correctness passed, but it did not improve TPOT over MMAR"
       artifact_hashes: {decision_sha256: b178d4d8e264cfb63206fd20bc7177aaa1770de657f25c24f1f1ef8e32601018, semantic_review_sha256: 704bf6abfe2d8c6f4185fc1b84d6f86159c76d11eadadd5e3ff7f7e5732f3b17, sha256sums_sha256: 0edc12637a83fabed38462132fc4235186e4f8bdb96c2d8f3cb2078bbf14a2c3}
 resources:
-  required: "user-assigned physical NPU4-7 exclusive for one TP4 candidate; the original baseline is reused"
-  current: "v17 completed and self-cleaned; physical NPU4-7 are idle. The pre-existing VLLM workers on NPU0-3 remain untouched and out of scope."
+  required: "user-authorized physical NPU0-7 exclusive while the comparable TP8 candidate is active"
+  current: "TP8 MTP local-argmax v2 owns physical NPU0-7 under exact-container cleanup; the completed TP8 baseline released all devices before this launch."
   abort: "any competing process, ownership ambiguity, NPU health failure, OOM, request error, or correctness failure"
 development_runtime:
   topology: "TP4 on physical NPU0-3; development evidence only"
@@ -1282,7 +1282,7 @@ flashcomm1_gdn_shape_candidate:
       resource_release: "exact v3 container exited 0; physical NPU4-7 released; NPU0-3 untouched"
   handoff: "Retain BF16 TP4 MMAR plus NZ1 and dense gate/up prefetch-0.1 with FlashComm1 disabled. Do not relaunch v1-v3 unchanged. Reuse the source commits only if a future implementation removes the sequence-parallel latency regression and passes every frozen cell."
 tp8_user_baseline_reconstruction:
-  state: exact_compilation_config_corrected_before_traffic
+  state: complete_hash_locked
   reason: "The user identified an earlier TP8/DP1 baseline with c1 TTFT about 139 ms and TPOT about 22 ms; the later TP4/DP1 quick32 baseline is not a valid substitute."
   model: /cache/austinov/Qwen3.8-27B
   model_alias: Qwen3-5/Qwen3.5-27B
@@ -1304,20 +1304,32 @@ tp8_user_baseline_reconstruction:
     result: "The user explicitly authorized pausing the existing workloads to start TP8. qwen36_hypic_nocache_baseline_npu0_3 had already exited; p0_r17 was stopped after evidence capture."
     evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/resource-handoffs/tp8-baseline-20260905T182200Z
     safety: "all eight physical devices had no running process before launch preparation"
-  comparison_boundary: "Do not claim performance relative to the TP8 baseline until all repeated cells complete under the reconstructed protocol."
+  comparison_boundary: "This completed repeated TP8/DP1 v5 run is the immutable denominator for every subsequent goal claim; do not mix the superseded TP4 quick32 baseline into its ratios."
   attempts:
     v1: "resource gate rejected because a concurrent MTP local-argmax candidate had reserved NPU4-7; no TP8 container was created"
     v2: "stopped before readiness and before benchmark traffic after effective-config inspection found custom_ops and pass_config had inherited defaults rather than the user-supplied explicit values"
     v3: "argument parsing rejected the read-only effective field static_all_moe_layers; no model load or benchmark traffic"
     v4: "stopped during the first c1 request and invalidated after the observed generation rate exposed that Ascend MMAR had been disabled; the user's earlier original environment explicitly enables VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1, which is independent of disable_custom_all_reduce and pass_config.fuse_gemm_comms=false"
   matmul_allreduce: "enabled for the reconstructed original baseline from the user's supplied original environment; retain disable_custom_all_reduce=true and pass_config.fuse_gemm_comms=false as separate settings"
+  completed_v5:
+    operation_context: "user-authorized TP8 baseline orchestration; exact container qwen35_tp8_user_baseline_v5_20260905T184600Z exited 0"
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z
+    summary_sha256: e3e03a5f1a5ce8d3e2d5f35ccf6a410d5d96555ad9012ba5881fd9227246639d
+    cells:
+      1: {ttft_p50_ms: 889.6935649681836, tpot_p50_ms: 35.44999756511724, e2e_p50_ms: 6620.613820035942, request_throughput_rps: 0.1072316100058482, output_token_throughput_tps: 25.26813198150019}
+      5: {ttft_p50_ms: 1028.5828999476507, tpot_p50_ms: 47.84147698010216, e2e_p50_ms: 9466.0381549038, request_throughput_rps: 0.321984148720151, output_token_throughput_tps: 72.58730152709904}
+      8: {ttft_p50_ms: 1043.8838100526482, tpot_p50_ms: 60.820694251715395, e2e_p50_ms: 14191.700530005619, request_throughput_rps: 0.38855601973247933, output_token_throughput_tps: 79.12897973079778}
+      16: {ttft_p50_ms: 1966.4463000372052, tpot_p50_ms: 69.30495443140234, e2e_p50_ms: 21638.606084976345, request_throughput_rps: 0.5024814853443543, output_token_throughput_tps: 112.97982147039468}
+    correctness: "PASS: 12/12 cells; 384/384 requests; zero errors; 384 natural stop responses; frozen dataset hash and 32 privacy-safe response hashes per cell verified"
+    runtime_proof: "service log proves vLLM-Ascend 0.23.0, BF16, TP8/PP1/DP1/DCP1, quantization=None, speculative_config=None, disable_custom_all_reduce=true and Ascend enable_matmul_allreduce=true on all eight workers"
+    resource_release: "container exited 0 at 2026-09-05T19:23:02Z; no matrix/benchmark process and no NPU0-7 process remained before candidate launch"
 mtp_local_argmax_candidate:
-  stage: first_e2e_attempt_interrupted
-  status: retry_pending_after_tp8_baseline
+  stage: comparable_tp8_v2_startup
+  status: running
   paper_to_ascend_basis: "lossless speculative decoding for greedy inference, with target-model verification; reduce draft sampling overhead through exact vocabulary-parallel local argmax"
   hypothesis: "A single Qwen3.5 MTP draft token can reduce target decode steps, while local argmax avoids gathering the full draft vocabulary logits across TP ranks."
   primary_variable: "speculation disabled -> Qwen3.5 MTP k=1 with use_local_argmax_reduction=true"
-  retained_stack: "BF16 TP4/DP1, MatMulAllReduce enabled, weight_nz_mode=1, dense gate/up prefetch_ratio=0.1, async scheduling, FULL_DECODE_ONLY, HCCL_BUFFSIZE=512"
+  retained_stack: "baseline-equivalent BF16 TP8/DP1, Ascend MatMulAllReduce enabled, custom all-reduce disabled, async scheduling, FULL_DECODE_ONLY, HCCL_BUFFSIZE=512"
   quantization: false
   source:
     base: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
@@ -1342,12 +1354,20 @@ mtp_local_argmax_candidate:
       service_log_sha256: 9d825a2bc5bebdb0852b81678d7f5edc7f2af3af38f713182d4de2b424a25776
       resource_release: "NPU process table proved all four candidate workers gone after termination"
       disposition: "Do not score as an algorithm failure and do not rerun the TP4 shape unchanged while the user-authorized TP8 baseline defines the new comparison boundary."
+    v2:
+      operation_id: exec-000000000000063a
+      run_id: tp8-mtp-local-argmax-k1-20260905T192433Z
+      output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k1-20260905T192433Z
+      container: qwen35_tp8_mtp_local_argmax_20260905T192433Z
+      primary_variable: "baseline speculation disabled -> Qwen3.5 MTP k=1 with use_local_argmax_reduction=true"
+      comparison: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z/matrix/baseline-summary.json
+      state: "started after baseline exited 0 and NPU0-7 process table was empty; readiness and activation pending"
   correctness_gate: "target-model verification, 32/32 requests with zero errors and natural stop in each c1/c5/c8/c16 cell; inspect service activation and speculative acceptance metrics"
   performance_gate: "compare every frozen cell with the immutable original and retained stack; promote only if correctness passes and cumulative performance moves toward both 2x targets"
   resource_state:
-    observed_at_utc: "2026-09-05T18:28:22Z"
-    blocker: "qwen35_tp8_user_baseline_v2_20260905T182800Z is running and reserves physical NPU0-7 for the user-authorized TP8 baseline reconstruction"
-    protected: "do not stop or compete with the TP8 baseline on any device"
-    action: "wait for the TP8 baseline to complete and release all devices; use its repeated result as the immutable denominator, then adapt MTP local-argmax to a comparable TP8 candidate"
+    observed_at_utc: "2026-09-05T19:24:39Z"
+    owner: "qwen35_tp8_mtp_local_argmax_20260905T192433Z on physical NPU0-7"
+    protected: "do not stop or compete with the active TP8 MTP candidate on any device"
+    action: "monitor startup, prove MTP/local-argmax activation and eight workers, then run the repeated c1/c5/c8/c16 matrix and analyze it against TP8 baseline v5"
   intended_evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/
   rollback: "keep the retained non-speculative stack; remove the read-only patch overlay and speculative-config by selecting the retained mode"

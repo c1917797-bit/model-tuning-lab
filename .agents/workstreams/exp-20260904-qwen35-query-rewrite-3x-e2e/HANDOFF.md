@@ -2156,7 +2156,7 @@ effective vLLM 0.23.0 engine configuration and reported historical c1 TTFT near
 same-host, same-dataset run reproduces them.
 
 The reconstructed baseline keeps BF16 and quantization=None, uses physical
-NPU0-7 as TP8/PP1/DP1/DCP1, disables custom all-reduce and Ascend MMAR, keeps
+NPU0-7 as TP8/PP1/DP1/DCP1, disables custom all-reduce and enables Ascend MMAR, keeps
 prefix caching, chunked prefill, async scheduling, max model length 133000, and
 uses FULL_DECODE_ONLY with compile endpoint 8096 and capture sizes
 1/2/4/8/16/24/32. It runs 32 immutable query_rewrite requests at c1/c5/c8/c16
@@ -2167,16 +2167,34 @@ The user explicitly authorized pausing the occupied workloads to make all eight
 cards available. `qwen36_hypic_nocache_baseline_npu0_3` had already exited;
 `p0_r17` was stopped after preserving logs and container inspection under
 `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/resource-handoffs/tp8-baseline-20260905T182200Z`.
-The device process table then proved NPU0-7 idle. Do not resume either workload
-until the TP8 baseline container exits and device release is re-proven.
+The device process table then proved NPU0-7 idle. The final v5 baseline
+container exited 0 at 2026-09-05T19:23:02Z, and device release was re-proven
+before the comparable TP8 MTP candidate started.
 
 The config and launch path are
 `configs/qwen35-query-rewrite-tp8-user-baseline.yaml`,
 `scripts/run_qwen35_tp8_user_baseline_service.sh`,
 `scripts/run_qwen35_tp8_baseline_matrix.py`, and
 `scripts/run_qwen35_tp8_user_baseline.sh`. The TP4/DP1 improvement ratios are
-superseded as user-facing goal evidence until this repeated TP8 baseline is
-complete.
+superseded as user-facing goal evidence. The repeated TP8 baseline is now the
+immutable denominator.
+
+The valid v5 evidence root is
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z`;
+`matrix/baseline-summary.json` has SHA256
+`e3e03a5f1a5ce8d3e2d5f35ccf6a410d5d96555ad9012ba5881fd9227246639d`.
+All 12 cells completed 32/32 requests with zero errors and natural stop:
+
+| concurrency | TTFT p50 | TPOT p50 | E2E p50 | output tok/s |
+|---:|---:|---:|---:|---:|
+| 1 | 889.69 ms | 35.45 ms | 6620.61 ms | 25.27 |
+| 5 | 1028.58 ms | 47.84 ms | 9466.04 ms | 72.59 |
+| 8 | 1043.88 ms | 60.82 ms | 14191.70 ms | 79.13 |
+| 16 | 1966.45 ms | 69.30 ms | 21638.61 ms | 112.98 |
+
+The service log proves vLLM-Ascend 0.23.0, BF16, no quantization,
+speculation disabled, TP8/PP1/DP1/DCP1, custom all-reduce disabled and Ascend
+MatMulAllReduce enabled on all eight workers.
 
 ## MTP local-argmax v1 interrupted before traffic
 
@@ -2200,9 +2218,13 @@ The preserved service log SHA256 is
 `9d825a2bc5bebdb0852b81678d7f5edc7f2af3af38f713182d4de2b424a25776`.
 The NPU process table subsequently proved the candidate workers were gone.
 
-At 18:27:49Z, the user-authorized TP8 baseline container
-`qwen35_tp8_user_baseline_v2_20260905T182800Z` started and reserved physical
-NPU0-7. Do not stop or compete with it. Once that repeated baseline finishes,
-use it as the immutable denominator and adapt MTP local-argmax to a comparable
-TP8 configuration before retrying; do not present the interrupted TP4 start
-or the older TP4 ratios as evidence against the restored TP8 baseline.
+After v5 completed and released NPU0-7, the comparable TP8 retry started under
+AgentWeb operation `exec-000000000000063a`. Its immutable output root is
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k1-20260905T192433Z`
+and its exact container is
+`qwen35_tp8_mtp_local_argmax_20260905T192433Z`. It changes only speculation
+OFF to Qwen3.5 MTP k=1 with `use_local_argmax_reduction=true`; every other
+baseline runtime and workload setting is preserved. It currently owns
+physical NPU0-7. Do not stop or compete with it. Next, prove readiness,
+eight-worker and local-argmax activation, then complete the repeated matrix,
+correctness, speculative-acceptance, decision and artifact-hash gates.
