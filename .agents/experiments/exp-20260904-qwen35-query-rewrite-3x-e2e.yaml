@@ -998,3 +998,31 @@ final_maintainer_decision:
   goal_boundary: "the 2x TPOT target is not met and must not be claimed; on this exact vLLM-Ascend 0.23.0/CANN/910B4 stack, another large gain requires an upstream architecture-aware reduction or overlap of the 128 serialized row-parallel collective paths, or a separately approved model/serving-contract change"
   handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
   resources: "all task containers exited; this work used only physical NPU4-7 mapped to logical 0-3 inside the container; no unscoped device was touched"
+mmar_add_rmsnorm_decode_candidate:
+  status: microbenchmark_correctness_rerun_pending
+  rationale: "target the two serialized row-parallel tails per layer by fusing MMAR, residual add and the following GemmaRMSNorm without retraining or quantization"
+  framework_boundary: "the built-in vLLM-Ascend custom pass is default-off and applies only above 512 tokens, so the candidate uses the CANN 9.1 general ACLNN operator for decode M=1-16"
+  implementation:
+    benchmark: scripts/benchmark_qwen35_mmar_add_rmsnorm.py
+    runner: scripts/run_qwen35_mmar_add_rmsnorm_microbench.sh
+    test: tests/test_benchmark_qwen35_mmar_add_rmsnorm.py
+    source_worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
+    source_branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
+    source_commit: 0af938b233b583e338d4587933e7c8ef494bd5b4
+    extension_sha256: 80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0
+  first_real_run:
+    operation_id: exec-0000000000000ab4
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z
+    protocol: "TP4 BF16, two profiled projection shapes, M=1/2/4/6/8/10/12/14/16, 20 warmups, 100 iterations, five alternating repeats"
+    geomean_candidate_speedup_vs_control: 1.833735997159005
+    minimum_candidate_speedup_vs_control: 1.6391946607386902
+    correctness_pass: false
+    correctness_note: "diagnostic std=1 operands caused large BF16 add_out accumulation differences; normalized output max_abs remained <=0.046875; no promotion"
+    hashes: {result_sha256: 04f0da791e526a943f8293be2df2549591cc50e4fb12989f9598b79231e85388, container_log_sha256: 330536b2671256a51b087e224a7cc97191e3c099552a7bedeae51d187f551153, sha256sums_sha256: d0e3a600ec35c2b892d434ae1c3df8fddcbb09d27385513df683de13d806ad42}
+  corrected_rerun:
+    input_scale: "std=0.1 for x, weight and residual, matching the upstream operator example"
+    status: waiting_for_unreserved_npu4_7
+    invalid_attempts: [exec-0000000000000ab6, exec-0000000000000ab8]
+    blocker: "external p0_aff container explicitly reserves /dev/davinci4..7; aclInit returned Resource_Busy before measurement"
+    safety: "do not stop or modify p0_aff; NPU0-3 also remain occupied"
+  promotion_gate: "all 18 cells correct, geometric mean >=1.02x, minimum >=1.0x, then and only then integrate default-off into Qwen3.5 and run frozen c1/c5/c8/c16 E2E"

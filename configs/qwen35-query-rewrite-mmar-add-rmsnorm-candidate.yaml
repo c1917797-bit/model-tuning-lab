@@ -1,0 +1,44 @@
+schema: qwen35-query-rewrite-candidate/v1
+name: mmar-add-rmsnorm-decode
+status: microbenchmark-correctness-rerun-pending
+model: Qwen3.5-27B
+runtime: vLLM-Ascend 0.23.0
+hardware: Ascend 910B4 TP4
+quantized: false
+retained_stack:
+  launcher_mode: mmar-on-weight-prefetch-gateup-0p1
+  precision: bfloat16
+  tensor_parallel_size: 4
+  data_parallel_size: 1
+  max_model_len: 133000
+treatment:
+  control: npu_mm_all_reduce_base + npu_add_rms_norm
+  candidate: CANN aclnnMatmulAllReduceAddRmsNorm
+  target_paths_per_decode_step: 128
+  shapes:
+    - "[M,1536]x[1536,5120]"
+    - "[M,4352]x[4352,5120]"
+  m_values: [1, 2, 4, 6, 8, 10, 12, 14, 16]
+  gemma_gamma_semantics: "effective gamma = 1 + checkpoint weight"
+source:
+  worktree: /cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm
+  branch: work/exp-20260905-qwen35-mmar-add-rmsnorm
+  commit: 0af938b233b583e338d4587933e7c8ef494bd5b4
+  extension_sha256: 80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0
+first_real_run:
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z
+  correctness_input_scale: "std=1 on both matmul operands; diagnostic only and not model-like"
+  geomean_speedup: 1.833735997159005
+  minimum_speedup: 1.6391946607386902
+  correctness_pass: false
+  result_sha256: 04f0da791e526a943f8293be2df2549591cc50e4fb12989f9598b79231e85388
+  sha256sums_sha256: d0e3a600ec35c2b892d434ae1c3df8fddcbb09d27385513df683de13d806ad42
+promotion_gate:
+  - repeat with model-like std=0.1 inputs after physical NPU4-7 are unreserved
+  - both add and normalized outputs pass the declared BF16 tolerance in every cell
+  - geometric mean speedup is at least 1.02 and no cell regresses
+  - only then implement the default-off model graph integration and run the frozen c1/c5/c8/c16 E2E matrix
+resource_state:
+  blocked_by_external_container: p0_aff
+  observation: "p0_aff started after the first completed run and explicitly reserves /dev/davinci4..7"
+  safety: "do not stop or modify p0_aff; NPU0-3 also remain occupied"

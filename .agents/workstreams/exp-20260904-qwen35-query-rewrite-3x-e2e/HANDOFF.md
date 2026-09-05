@@ -1411,3 +1411,53 @@ Source HEAD:
 Final decision: keep FlashComm1/2 off and retain
 mmar-on-weight-prefetch-gateup-0p1. TTFT remains above 2x in all cells; TPOT
 remains open at 1.33425x-1.55639x.
+
+## Decode MMAR + Add + RMSNorm fusion checkpoint
+
+The next bounded operator candidate targets the measured structural bottleneck
+directly: fuse each row-parallel `MatMulAllReduce` result with the following
+residual add and GemmaRMSNorm. Qwen3.5 requires the effective RMS gamma to be
+`1 + checkpoint weight`; the microbenchmark preserves that contract and does
+not use quantization.
+
+The official vLLM-Ascend 0.23.0 custom fusion is not the candidate: its pass is
+disabled by default and hard-gated to compile ranges starting above 512, so it
+cannot cover decode M=1-16. Instead, source commit
+`0af938b233b583e338d4587933e7c8ef494bd5b4` exposes CANN 9.1
+`aclnnMatmulAllReduceAddRmsNorm` through a default-off custom binding. The
+isolated source worktree is:
+
+`/cache/cch/.worktrees/exp-20260905-qwen35-mmar-add-rmsnorm-vllm`
+
+The pinned extension SHA256 is
+`80690af0f21d913e1a27f956883382ad02808ef718a20817672af929c5ea37e0`.
+
+A first real TP4 run completed all 18 Qwen decode shape cells on physical
+NPU4-7. Every cell was faster than the retained tail, with 1.833736x geometric
+mean speedup and 1.639195x minimum speedup. This is a performance signal, not a
+promotion: the first harness used standard-deviation-1 values for both matmul
+operands. The resulting large BF16 accumulation magnitude caused several
+`add_out` comparisons to fail even though normalized-output maximum absolute
+error stayed at or below 0.046875. Its immutable evidence is:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-add-rmsnorm-bf16-tp4-npu4-7-20260905T052100Z`
+
+Result SHA256 is
+`04f0da791e526a943f8293be2df2549591cc50e4fb12989f9598b79231e85388`;
+SHA256SUMS digest is
+`d0e3a600ec35c2b892d434ae1c3df8fddcbb09d27385513df683de13d806ad42`.
+
+The harness now matches the official operator sample's model-like 0.1 input
+scale. That rerun has not completed: after the first run, external container
+`p0_aff` started a Qwen3.8-27B TP4 service and explicitly reserved
+`/dev/davinci4..7`. Two later attempts failed in `aclInit` with Resource_Busy
+before any candidate measurement. Do not stop or modify that container. A
+container-device reservation guard has been added because `npu-smi` can briefly
+show no process while a container is initializing.
+
+Resume only when both the container reservation check and `npu-smi` report
+NPU4-7 free. Run the corrected microbenchmark into a new immutable directory.
+Promote to model integration only if both outputs pass in every cell, geometric
+mean speedup is at least 1.02, and no cell regresses. Until that happens, the
+retained E2E stack and all reported TTFT/TPOT values remain unchanged; the 2x
+TPOT goal is still open.

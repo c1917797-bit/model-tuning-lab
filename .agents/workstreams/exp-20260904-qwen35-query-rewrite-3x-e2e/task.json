@@ -19,8 +19,10 @@
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
+    "python3 -m py_compile scripts/benchmark_qwen35_mmar_add_rmsnorm.py",
+    "bash -n scripts/run_qwen35_mmar_add_rmsnorm_microbench.sh",
     "git diff --check"
   ],
-  "executionState": "flashcomm2-runtime-recovered-performance-rejected-tpot-target-open-handoff-ready",
+  "executionState": "mmar-add-rmsnorm-promising-microbenchmark-correctness-rerun-waiting-for-unreserved-npu4-7",
   "integrationState": "not-ready-target-open"
 }

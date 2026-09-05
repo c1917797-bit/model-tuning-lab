@@ -160,6 +160,14 @@
     {
       "gate": "final-resource-and-handoff",
       "result": "PASS: all task containers exited; this work used only physical NPU4-7, mapped to logical 0-3 inside the containers; no unscoped device was touched; all new evidence manifests verify; source worktrees are clean; and the target-open platform prerequisite is documented for the next maintainer."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-first-real-microbenchmark",
+      "result": "HOLD correctness, PROMISING performance: all 18 TP4 decode cells ran on physical NPU4-7 and improved by 1.833736x geometric mean with a 1.639195x minimum, but unrealistic std=1 matmul operands caused add_out BF16 comparisons to fail; no E2E promotion is allowed until the corrected std=0.1 rerun passes every cell."
+    },
+    {
+      "gate": "dynamic-device-reservation-safety",
+      "result": "PASS fail-closed: external container p0_aff started after the first run and reserves /dev/davinci4..7. Two corrected attempts stopped at aclInit Resource_Busy without measurements; the launcher now checks running-container device mappings before npu-smi and must not stop or modify p0_aff."
     }
   ]
 }

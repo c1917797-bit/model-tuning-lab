@@ -127,6 +127,18 @@
       "status": "accepted-local",
       "lesson": "After parameter, topology, compiler, speculative and projection-communication routes are exhausted, stop scanning low-leverage switches. Preserve the best stack and hand off the measured structural prerequisite: reduce or overlap the roughly 128 serialized row-parallel collective paths per decode step while preserving the model and 133K serving contract.",
       "evidence": "Retained TPOT gains plateau at 1.334x-1.556x while the MMAR profile attributes 48.214% to its AICPU control kernel and counts 13696 calls over 107 decode steps"
+    },
+    {
+      "id": "fused-tail-microbenchmark-must-match-model-scale",
+      "status": "accepted-local",
+      "lesson": "For BF16 communication-fusion correctness, use model-like operand scales before interpreting absolute error. Standard-deviation-1 values on both sides of a wide matmul amplify accumulation-order differences; preserve that run as diagnostic and require a correctly scaled rerun before E2E promotion.",
+      "evidence": "The first MMAR+Add+RMSNorm run measured 1.833736x geometric speedup but failed add_out checks with std=1 operands while normalized output max_abs stayed <=0.046875; upstream samples use std=0.1."
+    },
+    {
+      "id": "container-reservation-precedes-npu-process-visibility",
+      "status": "accepted-local",
+      "lesson": "An idle npu-smi process table is not sufficient for safe allocation while another container is starting. Check running containers' HostConfig device reservations first, then check npu-smi, and fail closed without stopping an unowned container.",
+      "evidence": "p0_aff reserved /dev/davinci4..7 while npu-smi briefly showed no process; two later task starts failed aclInit with Resource_Busy before measurement."
     }
   ]
 }
