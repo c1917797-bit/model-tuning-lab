@@ -1804,8 +1804,11 @@ tests were added. A no-NPU official-image pytest attempt could not import
 `torch_npu` without physical device mappings, so those new tests are not
 claimed as executed. The unchanged extension and kernel hashes remain pinned.
 
-The v10 launcher pin, resource queue and shell mocks pass. Exactly one queue is
-active as operation `exec-00000000000000e6`. It waits for `R15_DONE`
+The v10 launcher pin, resource queue and shell mocks pass. The first launch,
+`exec-00000000000000e6`, was submitted with a 30-second synchronous wait and
+terminated on that tool timeout without leaving a host waiter or allocating an
+NPU. Exactly one replacement queue is active as operation
+`exec-00000000000000f7` in the asynchronous job lane. It waits for `R15_DONE`
 before checking a four-observation stable idle window, preventing it from
 taking NPU4-7 during `p0_r15` inter-configuration gaps. Poll this operation
 and do not start another v10 queue. A ShortGPT
