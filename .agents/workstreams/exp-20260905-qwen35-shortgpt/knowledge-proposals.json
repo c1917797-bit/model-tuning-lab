@@ -1,0 +1,24 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "taskId": "exp-20260905-qwen35-shortgpt",
+  "proposals": [
+    {
+      "id": "hybrid-shortgpt-needs-workload-specific-bi",
+      "status": "proposed",
+      "lesson": "For a hybrid decoder such as Qwen3.5, do not transplant a pruned-layer list from a homogeneous Llama-family model. Measure Block Influence on the real workload, report rankings by layer type, and freeze the candidate set before E2E testing.",
+      "evidence": "Qwen3.5-27B has 64 layers in a repeating three-linear-attention plus one-full-attention pattern; target-device Block Influence evidence is pending."
+    },
+    {
+      "id": "default-off-paper-probe-before-pruning",
+      "status": "accepted-local",
+      "lesson": "Land observability and the opt-in execution hook default off before spending NPU time. This preserves the serving path, gives a reversible integration seam, and separates measurement overhead from the pruning treatment.",
+      "evidence": "Local vLLM-Ascend commit 18c4d061529d226dd0d699d9e3e1df16dadf29d7 passes py_compile, diff checks, parser smoke, and an identity Block Influence smoke."
+    },
+    {
+      "id": "permanent-skip-required-for-tpot",
+      "status": "proposed",
+      "lesson": "A prefill-only ShortGPT shortcut cannot improve decode TPOT. For this goal, the selected layer set must be skipped in both prefill and decode while preserving the decoder's deferred residual representation.",
+      "evidence": "Source implementation returns the unchanged hidden-state/residual pair for opted-in layers; target-device correctness and E2E evidence are pending."
+    }
+  ]
+}

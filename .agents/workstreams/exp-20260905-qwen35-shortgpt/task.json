@@ -1,0 +1,46 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260905-qwen35-shortgpt",
+  "objective": "Measure Qwen3.5-27B block influence on the real query_rewrite workload, select and validate a no-retraining ShortGPT layer-removal ladder, and combine any accepted layer set with the retained inference stack and fused-tail operator so that every frozen concurrency cell reaches at least 2x TTFT and 2x TPOT versus the immutable original baseline without quantization.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260905-qwen35-shortgpt",
+  "remote": "origin",
+  "originalBase": "e49f6febacd724f8397984bd7027949e2fe549ce",
+  "createdAt": "2026-09-05",
+  "owner": "codex",
+  "dependencies": [
+    "exp-20260904-qwen35-query-rewrite-3x-e2e"
+  ],
+  "claims": [
+    {
+      "kind": "knowledge",
+      "mode": "exclusive",
+      "value": ".agents/experiments/exp-20260905-qwen35-shortgpt.yaml"
+    },
+    {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": "scripts/collect_qwen35_shortgpt_bi.py"
+    },
+    {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": "scripts/analyze_qwen35_shortgpt_bi.py"
+    },
+    {
+      "kind": "resource",
+      "mode": "exclusive",
+      "value": "chicaihong01 physical NPU4-7 only when idle; map to logical 0-3 in-container; never use NPU0-3; never stop or alter an existing NPU4-7 workload"
+    }
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/task.json",
+    "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json",
+    "python3 -m json.tool .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json",
+    "python3 -c 'import yaml,sys; yaml.safe_load(sys.stdin)' < .agents/experiments/exp-20260905-qwen35-shortgpt.yaml",
+    "git diff --check"
+  ],
+  "executionState": "planned-awaiting-v9-and-npu4-7-idle",
+  "integrationState": "source-probe-local-commit-default-off-upstream-push-blocked"
+}

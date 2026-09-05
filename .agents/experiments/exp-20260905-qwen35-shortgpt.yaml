@@ -1,0 +1,83 @@
+schema: model-tuning-experiment/v1
+id: exp-20260905-qwen35-shortgpt
+status: planned
+decision: pending
+hypothesis: "Removing Qwen3.5 decoder blocks with the lowest real-workload Block Influence can reduce both prefill and decode work without retraining; stacked with the retained runtime and fused-tail operator, the reduction may close the remaining TPOT gap while preserving query_rewrite business quality."
+objective: "Reach at least 2x median TTFT and 2x median TPOT versus the immutable original at concurrency 1, 5, 8, and 16, using cumulative non-quantized parameter, algorithm, and operator improvements."
+owner: codex
+git:
+  branch: work/exp-20260905-qwen35-shortgpt
+  base_commit: e49f6febacd724f8397984bd7027949e2fe549ce
+  stage_commits: []
+environment:
+  source_commit: 18c4d061529d226dd0d699d9e3e1df16dadf29d7
+  model_revision: /softwarePlatform/c00879303/Qwen3-5/Qwen3.5-27B/
+  tokenizer_revision: /softwarePlatform/c00879303/Qwen3-5/Qwen3.5-27B/
+  dtype_or_quantization: "bfloat16; quantization forbidden"
+  framework_versions:
+    vllm: "0.23.0 family; confirm exact image package before run"
+    vllm_ascend: "0.23.0"
+  cann_driver_firmware:
+    status: measure_before_run
+  hardware_topology:
+    host: chicaihong01
+    accelerator: "4x Ascend 910B4, physical NPU4-7 only"
+    prohibited: "physical NPU0-3"
+  runtime_topology:
+    tensor_parallel_size: 4
+    data_parallel_size: 1
+    container_visible_devices: "physical 4,5,6,7 mapped to logical 0,1,2,3"
+protocol:
+  primary_metric: "p50 TTFT and p50 TPOT at each frozen concurrency cell"
+  correctness_guardrails:
+    - "ShortGPT and Block Influence features are default off and preserve the unmodified path when unset."
+    - "32/32 requests, zero errors, natural stop, and valid response schema in every measured cell."
+    - "Same-runtime unpruned control plus privacy-safe semantic review shows no material query_rewrite business-quality regression."
+    - "No quantization, model retraining, or unscoped NPU use."
+  acceptance_thresholds:
+    - "Against immutable original: TTFT speedup >= 2.0x at concurrency 1, 5, 8, and 16."
+    - "Against immutable original: TPOT speedup >= 2.0x at concurrency 1, 5, 8, and 16."
+    - "Against retained stack: TPOT improves in every concurrency cell before a layer set is promoted."
+    - "Correctness guardrails all pass."
+  regression_thresholds:
+    - "Reject any layer set with material semantic-quality regression."
+    - "Reject any final stack that misses either 2x target in any concurrency cell."
+  abort_conditions:
+    - "Docker reservation or npu-smi shows physical NPU4-7 are in use."
+    - "Any command would access physical NPU0-3 or stop an unowned workload."
+    - "Service startup, graph capture, or request completion fails."
+    - "Block Influence samples are missing, non-finite, or ranking is not stable enough to freeze."
+  warmup: "Use the existing frozen query_rewrite harness protocol; record exact warmup in run metadata."
+  repetitions: 32
+  command: "PENDING after Block Influence collection scripts and layer-set freeze"
+results:
+  baseline:
+    immutable_original_p50_ms:
+      c1: {ttft: 928.328810, tpot: 38.471822}
+      c5: {ttft: 1092.265540, tpot: 53.831043}
+      c8: {ttft: 1082.311615, tpot: 67.616824}
+      c16: {ttft: 2075.070625, tpot: 80.811616}
+    retained_speedup:
+      c1: {ttft: 2.18958, tpot: 1.33425}
+      c5: {ttft: 2.22713, tpot: 1.41748}
+      c8: {ttft: 2.19764, tpot: 1.53167}
+      c16: {ttft: 2.31609, tpot: 1.55639}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle:
+    phase: planned
+    dependency: "guarded fused-tail v9 queue exec-0000000000000004"
+  resources:
+    allowed: "physical NPU4-7 when idle"
+    prohibited: "physical NPU0-3 and all existing workloads"
+artifacts:
+  - .agents/workstreams/exp-20260905-qwen35-shortgpt/HANDOFF.md
+  - .agents/workstreams/exp-20260905-qwen35-shortgpt/integration-evidence.json
+  - .agents/workstreams/exp-20260905-qwen35-shortgpt/knowledge-proposals.json
+decision_reason: "Pending target-device Block Influence, correctness, E2E benchmark, and profiling."
+next_loop: "Finish fused-tail v9; if the TPOT goal remains open, collect Qwen3.5 Block Influence on real query_rewrite inputs and freeze the first conservative layer-removal candidate."
+rollback:
+  command: "Unset VLLM_ASCEND_QWEN35_SKIP_LAYERS and VLLM_ASCEND_QWEN35_BI_DIR; remove the source overlay; relaunch the retained pinned stack."
+  verified: false

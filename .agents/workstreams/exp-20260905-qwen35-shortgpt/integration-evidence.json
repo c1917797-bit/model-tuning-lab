@@ -1,0 +1,30 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "taskId": "exp-20260905-qwen35-shortgpt",
+  "gates": [
+    {
+      "gate": "workstream-start",
+      "result": "PASS planned: a separate maintainer branch and branch-local handoff isolate ShortGPT work from the active fused-tail v9 queue."
+    },
+    {
+      "gate": "source-default-off-integration",
+      "result": "PASS static: local vLLM-Ascend commit 18c4d061529d226dd0d699d9e3e1df16dadf29d7 adds opt-in Block Influence recording and opt-in layer skipping; py_compile, diff checks, parser smoke, and identity metric smoke pass."
+    },
+    {
+      "gate": "source-remote-checkpoint",
+      "result": "BLOCKED external: push to vllm-project/vllm-ascend was rejected with HTTP 403 for the current account. The local source commit is preserved and clean; obtain a writable remote before upstream handoff."
+    },
+    {
+      "gate": "npu-scope",
+      "result": "PLANNED fail-closed: use only physical NPU4-7 after both container-reservation and npu-smi checks are clear; do not touch NPU0-3 or interrupt any existing NPU4-7 workload."
+    },
+    {
+      "gate": "block-influence-real-workload",
+      "result": "PENDING: collect and stabilize Qwen3.5-specific layer rankings on query_rewrite before selecting any removal set."
+    },
+    {
+      "gate": "shortgpt-correctness-and-e2e",
+      "result": "PENDING: frozen removal ladder, same-runtime semantic control, c1/c5/c8/c16 Ascend benchmark, profile, and terminal decision."
+    }
+  ]
+}
