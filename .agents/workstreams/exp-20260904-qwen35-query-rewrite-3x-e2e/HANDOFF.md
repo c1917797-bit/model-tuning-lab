@@ -1067,3 +1067,18 @@ and the SHA256SUMS digest is
 `7d712223d6f9517f259e08f72866a71092fca05c5e4774861dea70bf44debe50`.
 Physical NPU4-7 returned idle at 2865-2866 MiB, while external NPU0-3 PIDs
 1031654-1031657 remained unchanged. Retain TP4 MMAR plus ratio-0.1 prefetch.
+
+## Static decode-kernel candidate ready
+
+The next bounded operator/compiler treatment retains the TP4 MMAR plus
+ratio-0.1 gate/up prefetch stack and changes only
+`ascend_compilation_config.enable_static_kernel` from false to true. The
+exact vLLM-Ascend 0.23.0 compiler scopes static binaries to captured decode
+gears, which matches the fixed 1/2/4/6/8/10/12/14/16 serving shapes. It uses
+BF16 and no quantization and is restricted to physical NPU4-7.
+
+Do not force the existing matmul-allreduce-add-RMSNorm pass into decode: its
+source threshold excludes token counts below 513 and the corresponding CANN
+operator API is marked for deprecation. XliteGraph is also not eligible in the
+current image because the `xlite` package is absent. For static kernel, require
+an activation log plus a valid c1 cell before allowing the rest of quick32.

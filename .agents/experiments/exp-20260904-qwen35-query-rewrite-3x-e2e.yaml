@@ -751,3 +751,14 @@ tp2_pp2_mmar_prefetch_candidate:
       sha256sums_sha256: 7d712223d6f9517f259e08f72866a71092fca05c5e4774861dea70bf44debe50
   decision: "reject TP2/PP2 from the cumulative stack; pipeline serialization dominates c1 decode and TPOT regresses 66.75% versus retained TP4"
   recovery: "exact candidate container stopped; physical NPU4-7 returned idle at 2865-2866 MiB with no running processes; external NPU0-3 PIDs 1031654-1031657 unchanged"
+static_kernel_candidate:
+  source_manifest: configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-static-kernel-candidate.yaml
+  launcher_mode: mmar-on-weight-prefetch-gateup-0p1-static-kernel
+  status: ready_for_startup_gate
+  primary_variable_vs_retained_stack: "ascend_compilation_config.enable_static_kernel false -> true"
+  retained_stack: "BF16; TP4/DP1; MatMulAllReduce on; gate/up prefetch ratio 0.1; NZ1; FlashComm1 off; async scheduling; FULL_DECODE_ONLY; HCCL_BUFFSIZE=512; no quantization"
+  rationale: "the exact 0.23.0 compiler supports static binaries for captured decode shapes; test whether reducing runtime launch/dispatch overhead improves TPOT after topology and layout lanes plateaued"
+  source_boundary: "allreduce+RMSNorm fusion is inapplicable below 513 tokens and its CANN API is deprecated; XliteGraph is unavailable because the image has no xlite package"
+  devices: "physical NPU4-7 only; NPU0-3 prohibited"
+  gates: ["static-kernel activation proof", "startup and capacity", "c1 fail-fast correctness and performance", "full quick32 only after c1 incremental retention"]
+  rollback: "select mmar-on-weight-prefetch-gateup-0p1; no source overlay or model files are changed"
