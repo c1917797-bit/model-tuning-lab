@@ -999,7 +999,7 @@ final_maintainer_decision:
   handoff_state: "ready: immutable baseline, accepted stack, rejected candidates, hashes, source branches, rollback and next prerequisite are documented"
   resources: "all task containers exited; this work used only physical NPU4-7 mapped to logical 0-3 inside the container; no unscoped device was touched"
 mmar_add_rmsnorm_decode_candidate:
-  status: full_attention_tail_normalization_pinned_e2e_waiting_for_p0_pw_release
+  status: graphmodule_contract_fixed_v5_retry_waiting_for_new_p0_pw_release
   rationale: "target the two serialized row-parallel tails per layer by fusing MMAR, residual add and the following GemmaRMSNorm without retraining or quantization"
   framework_boundary: "the built-in vLLM-Ascend custom pass is default-off and applies only above 512 tokens, so the candidate uses the CANN 9.1 general ACLNN operator for decode M=1-16"
   implementation:
@@ -1040,13 +1040,13 @@ mmar_add_rmsnorm_decode_candidate:
     safety: "the launcher precisely ignores two verified idle monitor/admin containers but still checks all other container reservations and the npu-smi process table"
     launcher_guard: "both the microbenchmark and main E2E launchers reject running-container device reservations before consulting npu-smi"
   graph_integration:
-    source_commit: 081953bd1ee1e897f03fb31c6223bb00608773fd
+    source_commit: c5496ef722b48bb00627efddcb47ef7497292b2a
     previous_partial_fusion_commit: 8c7f7d03e92a177d9c0678b993ece5ac9f5f2254
     flag: ascend_compilation_config.fuse_decode_mmar_add_rmsnorm
     default: false
     scope: "non-SP compile range 1-16 only; candidate splits endpoints at 16 and 32768 so the 17-32768 path stays unfused"
     full_attention_tail_normalization: "safely bypass full-shape MMAR-to-preallocated-output copies only when all destination consumers are the expected residual/RMS tail; this makes attention tails match the same fusion as direct MLP-down tails"
-    focused_validation: "official vLLM-Ascend 0.23.0 image with only the changed module overlaid: 3 passed in 16.05s; py_compile and diff checks pass; ruff unavailable and not claimed"
+    focused_validation: "official vLLM-Ascend 0.23.0 image with only the changed module overlaid: 4 passed in 8.84s, including the real GraphModule input contract; py_compile and diff checks pass; ruff unavailable and not claimed"
     binary_boundary: "Python-only change; extension SHA256 remains 6006e113bf7f52ba5561d9847dbdcc6960b89eff56228d5ab584344719347d23 and kernel library SHA256 remains 6a9fc72a66a6055eb522a251fa48632b0ba257f22fb8f91a2deedc05e03e8b6a"
     launcher_mode: mmar-on-weight-prefetch-gateup-0p1-fused-tail
     rollback: "select mmar-on-weight-prefetch-gateup-0p1 and remove the source/extension overlays"
@@ -1083,8 +1083,14 @@ mmar_add_rmsnorm_decode_candidate:
     fifth_attempt_operation: exec-0000000000000bf3
     fifth_attempt_output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v5-20260905T084211Z
     fifth_attempt_result: "guarded before docker launch with exit 48 when p0_pw began a real TP4 workload reserving /dev/davinci4..7; never reuse this already-created output root"
-    current_blocker: "p0_pw is actively using physical NPU4-7; do not stop or modify it. NPU0-3 external workers remain untouched"
-    next: "after p0_pw naturally exits and both container reservations and npu-smi are clear, generate a fresh run ID/output root and rerun v5; require 128 fused patterns per rank in (1,16) before accepting frozen c1/c5/c8/c16 latency"
+    fifth_live_compile_operation: exec-0000000000000c25
+    fifth_live_compile_output_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v5-20260905T091405Z
+    fifth_live_compile_result: "REJECT invalid integration before readiness: npugraph_ex passed a GraphModule named <lambda> to the range-scoped pass, while the new normalizer treated it as a raw Graph and raised AttributeError on .nodes; no benchmark traffic ran"
+    fifth_live_compile_service_log_sha256: 6c52ea291d4f7e11ac3ddb1591426235b0d9f891d1611b4f12f0bcaf7e1e7de3
+    runtime_contract_fix_commit: c5496ef722b48bb00627efddcb47ef7497292b2a
+    runtime_contract_fix_validation: "official 0.23.0 image minimal overlay passed 4/4 focused tests, including GraphModule input; py_compile and diff checks pass; extension and kernel hashes remain unchanged"
+    current_blocker: "a new external p0_pw container f18fbb8ba358 started at 09:23 and actively owns physical NPU4-7; do not stop or modify it. NPU0-3 external workers remain untouched"
+    next: "after the new p0_pw naturally exits and both container reservations and npu-smi are clear, generate another fresh run ID/output root and rerun source c5496ef7; require 64 normalized copies and 128 fused patterns per rank in (1,16) before accepting frozen c1/c5/c8/c16 latency"
   fused_tail_profile:
     operation_id: exec-0000000000000bbb
     run_id: fused-tail-msprof-20260905T081711Z

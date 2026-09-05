@@ -224,6 +224,14 @@
     {
       "gate": "assigned-device-race-guard-pw",
       "result": "HOLD without interference: v5 attempt exec-0000000000000bf3 exited 48 before docker launch because p0_pw began a real TP4 workload and reserves physical NPU4-7. The task did not stop or modify it; external NPU0-3 worker PIDs 1225486-1225489 remained unchanged. Relaunch only into a fresh output root after p0_pw exits and both container-reservation and npu-smi checks are clear."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-fifth-live-graphmodule-contract",
+      "result": "REJECT invalid integration before readiness: operation exec-0000000000000c25 used only physical NPU4-7 and loaded all weights, but npugraph_ex supplied a GraphModule named <lambda> to the range-scoped pass while the new normalizer expected a raw Graph. Compilation raised AttributeError on .nodes, no benchmark request ran, and service.log SHA256 is 6c52ea291d4f7e11ac3ddb1591426235b0d9f891d1611b4f12f0bcaf7e1e7de3."
+    },
+    {
+      "gate": "mmar-add-rmsnorm-graphmodule-contract-fix",
+      "result": "PASS source regression: c5496ef722b48bb00627efddcb47ef7497292b2a normalizes through GraphModule.graph while retaining direct Graph support. The official vLLM-Ascend 0.23.0 image passed 4/4 focused tests including the actual runtime object contract; py_compile and diff checks pass, and binary hashes are unchanged."
     }
   ]
 }

@@ -1651,3 +1651,35 @@ exits, recheck Docker reservations and `npu-smi`, generate a fresh run ID/root,
 and launch `mmar-on-weight-prefetch-gateup-0p1-fused-tail`. Require 128 fused
 patterns per rank in `(1,16)` before accepting any c1/c5/c8/c16 latency. Keep
 NPU0-3 untouched.
+
+## Fifth live compile rejection and GraphModule contract fix
+
+After the first `p0_pw` run naturally released NPU4-7, operation
+`exec-0000000000000c25` launched
+`fused-tail-v5-20260905T091405Z` on physical NPU4-7. The model loaded in BF16
+with quantization disabled, but compilation failed before readiness. The
+npugraph_ex hook passes a `torch.fx.GraphModule` (display name `<lambda>`) to
+the range-scoped pass; the attention-copy normalizer had only been tested with
+a direct `torch.fx.Graph` and accessed `.nodes` on the module. No query_rewrite
+benchmark request ran, so this attempt is integration-failure evidence only.
+
+Immutable evidence root:
+
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/mmar-add-rmsnorm-v5-20260905T091405Z`
+
+Service-log SHA256:
+`6c52ea291d4f7e11ac3ddb1591426235b0d9f891d1611b4f12f0bcaf7e1e7de3`.
+
+Source commit `c5496ef722b48bb00627efddcb47ef7497292b2a` now accepts either
+`Graph` or `GraphModule` and mutates the module's underlying `.graph`.
+The official vLLM-Ascend 0.23.0 image passed 4/4 focused tests in 8.84 seconds,
+including the exact GraphModule input case; py_compile and diff checks pass.
+The patch is Python-only, so both pinned binary hashes are unchanged.
+
+A new external `p0_pw` container `f18fbb8ba358` started at 09:23 and currently
+owns physical NPU4-7. Do not stop or modify it. When it exits naturally, verify
+container reservations, `npu-smi` and port 10010, then launch source
+`c5496ef7` into another fresh immutable root. Require 64 normalized attention
+copies and 128 fused patterns per TP rank in `(1,16)`; require
+`(17,32768) applicable=False`; only then accept the frozen c1/c5/c8/c16
+latency matrix. NPU0-3 must remain untouched.

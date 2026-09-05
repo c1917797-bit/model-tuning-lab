@@ -169,6 +169,12 @@
       "status": "accepted-local",
       "lesson": "Trigger: validate a source-only Python patch against an installed release image whose repository dependencies may not match the checkout. Action: overlay only the changed package module and focused test, not the entire source tree, while keeping the released binary extension fixed. Destination: host-development tool-adapter note for release-image source validation.",
       "evidence": "Verification: mounting the whole checkout exposed unrelated npugraph/torchair dependency skew; the minimal module overlay in the official vLLM-Ascend 0.23.0 image passed all 3 focused normalization tests in 16.05 seconds."
+    },
+    {
+      "id": "graph-pass-tests-must-match-manager-object-contract",
+      "status": "accepted-local",
+      "lesson": "Trigger: a graph helper passes direct torch.fx.Graph unit tests but fails only inside the compiler pass manager. Action: inspect the actual manager/backend call boundary, support the concrete GraphModule contract explicitly, and add a regression test using that exact object type before another accelerator run. Destination: future update to the Ascend graph-fusion validation checklist.",
+      "evidence": "Verification: operation exec-0000000000000c25 failed before readiness because npugraph_ex passed a GraphModule named <lambda> and the helper accessed .nodes directly; source c5496ef7 uses GraphModule.graph and the official 0.23.0 image passed 4/4 focused tests including the new contract case."
     }
   ]
 }
