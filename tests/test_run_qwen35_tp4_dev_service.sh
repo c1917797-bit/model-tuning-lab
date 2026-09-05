@@ -309,6 +309,25 @@ fi
 
 : >"$docker_log"
 PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
+  CONTAINER_NAME=guard-test-tp2-dp2-mmar-prefetch-text-only-bt8192-fresh \
+  "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" \
+  tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 \
+  >"$tmp/tp2-dp2-mmar-prefetch-text-only-bt8192-fresh.out" \
+  2>"$tmp/tp2-dp2-mmar-prefetch-text-only-bt8192-fresh.err"
+grep -q -- '--tensor-parallel-size 2' "$docker_log"
+grep -q -- '--data-parallel-size 2' "$docker_log"
+grep -q -- '--max-model-len 133000' "$docker_log"
+grep -q -- '--max-num-batched-tokens 8192' "$docker_log"
+grep -q -- '--limit-mm-per-prompt {"image":0,"video":0}' "$docker_log"
+grep -q -- '"weight_prefetch_config":{"enabled":true' "$docker_log"
+grep -q -- '"mlp":{"gate_up":0.1,"down":0.0}' "$docker_log"
+if grep -q -- '--quantization' "$docker_log"; then
+  echo "TP2 DP2 8192-token candidate unexpectedly enabled quantization" >&2
+  exit 1
+fi
+
+: >"$docker_log"
+PATH="$mock_bin:$PATH" DOCKER_LOG="$docker_log" NPU_SMI_BIN="$mock_bin/npu-smi" \
   CONTAINER_NAME=guard-test-ngram-gpu-fresh \
   "$repo_root/scripts/run_qwen35_tp4_dev_service.sh" ngram-gpu \
   >"$tmp/ngram-gpu-fresh.out" 2>"$tmp/ngram-gpu-fresh.err"
