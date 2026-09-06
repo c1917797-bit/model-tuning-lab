@@ -316,3 +316,22 @@ median gains cannot promote a treatment for this objective.
 - Evidence report SHA256:
   `92b42c33c4449ee5f788b93e8337f8bd9becbe6a44e993140acabf8d2b673224`.
   Do not retry this route unchanged.
+
+## MMAR layout and production logging screens
+
+- A transpose view is not automatically an MMAR bottleneck on 910B4. Making
+  the TP-local weight physically contiguous in `[K,N]` produced only
+  `1.009789x` geometric-mean speedup and included a `0.994723x` regression.
+  Require both the aggregate gate and every-cell non-regression before paying
+  integration or checkpoint-conversion cost.
+- Lowering vLLM logging from DEBUG to INFO looked attractive because the old
+  service log was debug-heavy, but the real c16 median-of-three regressed from
+  `6796.297/69.560 ms` to `10352.929/104.020 ms` for TTFT/TPOT P95. Reject the
+  setting as a performance ingredient on this frozen stack.
+- Prefix caching makes run order observable. A cache-salted diagnostic run is
+  useful for exposing uncached behavior but is not comparable with the frozen
+  unsalted denominator. Label it diagnostic and never mix it into promotion
+  arithmetic.
+- The query_rewrite generation config is stochastic and completion-token counts
+  vary across repeats. Keep the median-of-three rule and report all per-run P95
+  values; do not select a favorable repeat.

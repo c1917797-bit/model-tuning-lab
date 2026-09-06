@@ -2777,3 +2777,38 @@ The goal remains incomplete: no non-speculative TPOT P50 cell reaches 2x and
 the semantic `精读无损` gate is still unproven. Resume from the gate/up-only
 prefetch stack and select a BF16-compatible Ascend MMAR/dense-matmul treatment
 using the existing CANN profile; do not retry down prefetch unchanged.
+
+## MMAR weight-layout probe rejected
+
+Real BF16 TP4-local shapes on physical Ascend 910B4 NPU0-3 compared the live
+contiguous `[N,K]` parameter consumed as `weight.t()` with a pre-transposed
+contiguous `[K,N]` MMAR weight. Correctness passed, but the eight-cell geometric
+mean speedup was only `1.009789x` (range `0.994723x-1.033737x`), below the
+predeclared `>=1.02x` gate and with one regressing cell. Reject before E2E and
+do not integrate the extra layout/copy path unchanged. Evidence:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-weight-layout-npu03-v1/report.json`,
+SHA256 `173f0cb4e90f843194448a8eab2cd2e900b62cb005fb4ea88ab100f374f8b643`.
+
+## INFO production-log candidate rejected
+
+The retained TP4/NPU0-3 stack was relaunched with exactly one intended change:
+`VLLM_LOGGING_LEVEL=DEBUG -> INFO`; `TRITON_KERNEL_DUMP=1`, BF16, 133K,
+MMAR, NZ1, gate/up prefetch 0.1, down prefetch 0.0, GDN projection fusion,
+async scheduling, and `speculative_config=None` were preserved. Three c16
+query_rewrite runs completed 96/96 requests with zero errors and natural EOS.
+Their per-run P95 pairs `(TTFT ms, TPOT ms)` were
+`(10352.929,104.020)`, `(18348.233,144.167)`, and
+`(6762.540,69.736)`; median-of-three was `10352.929/104.020`, versus the
+retained stack's `6796.297/69.560`. This is a `52.33%` TTFT and `49.54%`
+TPOT regression, so the candidate is rejected and no c5/c8 expansion is
+justified. A salted diagnostic c1 run is retained only as supporting evidence;
+its TPOT P95 was neutral (`28.287 ms`), while its TTFT is not comparable to
+the frozen unsalted contract.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-proj-fusion-prodlog-info-v1-20260906T175100Z`.
+The candidate was stopped after evidence capture and the retained DEBUG stack
+was restarted as `qwen35_gdn_proj_fusion_npu03_v1` on physical NPU0-3.
+NPU4-7 were not allocated or modified. The dataset SHA256 is
+`a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e`;
+the weak/sparse `answer` field still cannot prove `精读无损`.

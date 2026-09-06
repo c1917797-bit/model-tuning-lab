@@ -1785,3 +1785,42 @@ qwen35_mmar_x3_residual_probe_v2:
   decision: "reject-x3-residual-before-e2e"
   resource_isolation: "online candidate remained healthy on NPU0-3; external NPU4-7 workload was untouched"
   next: "do not retry x3 residual fusion unchanged; target MMAR call count or overlap without adding per-layer residual scaling"
+
+qwen35_mmar_weight_layout_probe_v1:
+  status: rejected_before_e2e
+  evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-weight-layout-npu03-v1/report.json
+  report_sha256: 173f0cb4e90f843194448a8eab2cd2e900b62cb005fb4ea88ab100f374f8b643
+  runtime: "Ascend 910B4 physical NPU0-3, TP4, BF16, no quantization"
+  shapes: "K=1536/4352, M=1/5/8/16"
+  candidate: "pre-transposed contiguous [K,N] MMAR weight versus live-style contiguous [N,K] weight.t()"
+  correctness_pass: true
+  geomean_speedup: 1.0097886
+  minimum_speedup: 0.994723
+  maximum_speedup: 1.033737
+  gate: ">=1.02 geometric mean and no cell regression"
+  decision: "reject before integration and E2E"
+
+qwen35_prodlog_info_v1:
+  status: rejected_after_c16_three_repeat_screen
+  run_id: tp4-npu03-qwen35-gdn-proj-fusion-prodlog-info-v1-20260906T175100Z
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-proj-fusion-prodlog-info-v1-20260906T175100Z
+  primary_variable: "VLLM_LOGGING_LEVEL DEBUG -> INFO; all retained serving/model/operator settings unchanged"
+  c16_p95_runs:
+    r1: {ttft_ms: 10352.929300, tpot_ms: 104.020169}
+    r2: {ttft_ms: 18348.233159, tpot_ms: 144.167086}
+    r3: {ttft_ms: 6762.540452, tpot_ms: 69.736040}
+  c16_median_p95: {ttft_ms: 10352.929300, tpot_ms: 104.020169}
+  retained_c16_median_p95: {ttft_ms: 6796.297304, tpot_ms: 69.560100}
+  incremental_regression: {ttft_percent: 52.33, tpot_percent: 49.54}
+  requests: "96/96; zero errors; all natural stops"
+  c1_diagnostic: "salted run only; TPOT P95 28.286721 ms; TTFT not comparable to unsalted frozen contract"
+  hashes:
+    c1_diagnostic_sha256: 25dfde37bfae40ee5333712fa9971c7a1f14a644d8ebf096e5f6dfa8598c1230
+    c16_r1_sha256: 89bb872df5874de21cbc3553f56b01d15fa2be362d4119dfcca83d1f4182cdf8
+    c16_r2_sha256: eacc9fa539363754224140ba7a7ab5fda92302c7b0139a2f69d85a56de8be6a9
+    c16_r3_sha256: e00134e34de0c2bd07f94bc696d6b06af11164249db0939cfce903353458d62c
+    container_sha256: 6de4fccfc368cabd26bc61ef3b8141b14e14225b2e0bb4fca78140112896af85
+    service_log_sha256: ccd261adb800b541749a9a37ac4a93e96fbf418be8e7604230b8bd2f2f84d984
+  decision: "reject; do not expand to c5/c8 or retry unchanged"
+  resource_release: "INFO candidate stopped and removed; retained DEBUG stack restarted on NPU0-3; NPU4-7 untouched"
+  next: "continue from retained GDN projection fusion + gate/up prefetch stack; target a profile-backed Ascend decode/collective change"
