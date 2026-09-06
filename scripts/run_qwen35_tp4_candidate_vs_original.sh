@@ -10,6 +10,7 @@ device_set="${DEVICE_SET:-4-7}"
 port="${PORT:-10010}"
 base_url="http://127.0.0.1:$port"
 readiness_timeout="${READINESS_TIMEOUT_SECONDS:-1800}"
+repetitions="${REPETITIONS:-1}"
 expected_normalized="${EXPECTED_FUSED_TAIL_NORMALIZED:-64}"
 expected_fused="${EXPECTED_FUSED_TAIL_FUSED:-128}"
 original_dir="${ORIGINAL_BASELINE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-dev-decodegraph/quick32-v3}"
@@ -196,7 +197,8 @@ python3 "$repo_root/scripts/run_qwen35_candidate_quick32.py" \
   --device-set "$device_set" \
   --candidate-config "$candidate_config" \
   --run-id "$run_id" \
-  --output-root "$output_root/candidate"
+  --output-root "$output_root/candidate" \
+  --repetitions "$repetitions"
 candidate_run_status=$?
 set -e
 
@@ -261,8 +263,10 @@ if [[ -f "$output_root/integration-check.json" ]]; then
   )
 fi
 for concurrency in 1 5 8 16; do
-  cell="$output_root/candidate/c${concurrency}-r1.json"
-  [[ ! -f "$cell" ]] || artifacts+=("$cell")
+  for repetition in $(seq 1 "$repetitions"); do
+    cell="$output_root/candidate/c${concurrency}-r${repetition}.json"
+    [[ ! -f "$cell" ]] || artifacts+=("$cell")
+  done
 done
 sha256sum "${artifacts[@]}" >"$output_root/SHA256SUMS"
 if [[ -f "$output_root/speculative-metrics-after.prom" ]]; then

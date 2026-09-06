@@ -25,12 +25,12 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def validate_cell(path: Path, concurrency: int) -> dict:
+def validate_cell(path: Path, concurrency: int, repetition: int) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     expected = {
         "schema": "qwen35-query-rewrite-benchmark/v1",
         "concurrency": concurrency,
-        "repeat_index": 1,
+        "repeat_index": repetition,
         "dataset_sha256": DATASET_SHA256,
         "model": MODEL,
         "seed": 1024,
@@ -79,6 +79,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--timeout", type=float, default=600)
+    parser.add_argument("--repetitions", type=int, default=1)
     parser.add_argument(
         "--benchmark-script",
         type=Path,
@@ -89,6 +90,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if args.repetitions < 1:
+        raise ValueError("--repetitions must be positive")
     if args.output_root.exists():
         raise FileExistsError(
             f"refusing to reuse candidate directory: {args.output_root}"
@@ -118,9 +121,9 @@ def main() -> int:
         "dataset": str(DATASET),
         "dataset_sha256": actual_dataset_hash,
         "request_limit": 32,
-        "repetitions": 1,
+        "repetitions": args.repetitions,
         "concurrencies": list(CONCURRENCIES),
-        "planned_cells": 4,
+        "planned_cells": len(CONCURRENCIES) * args.repetitions,
         "completed_cells": [],
         "failed_cell": None,
         "started_unix_s": time.time(),
@@ -128,50 +131,57 @@ def main() -> int:
     }
     write_state(state_path, state)
     active_concurrency: int | None = None
+    active_repetition: int | None = None
     try:
         for active_concurrency in CONCURRENCIES:
-            output = args.output_root / f"c{active_concurrency}-r1.json"
-            command = [
-                sys.executable,
-                str(args.benchmark_script),
-                "--base-url",
-                args.base_url,
-                "--model",
-                MODEL,
-                "--dataset",
-                str(DATASET),
-                "--dataset-sha256",
-                actual_dataset_hash,
-                "--concurrency",
-                str(active_concurrency),
-                "--repeat-index",
-                "1",
-                "--seed",
-                "1024",
-                "--limit",
-                "32",
-                "--timeout",
-                str(args.timeout),
-                "--output",
-                str(output),
-            ]
-            subprocess.run(command, check=True)
-            validated = validate_cell(output, active_concurrency)
-            state["completed_cells"].append(
-                {
-                    "concurrency": active_concurrency,
-                    "repetition": 1,
-                    "path": str(output),
-                    "sha256": sha256(output),
-                    "requests": validated["requests"],
-                }
-            )
-            write_state(state_path, state)
+            for active_repetition in range(1, args.repetitions + 1):
+                output = (
+                    args.output_root
+                    / f"c{active_concurrency}-r{active_repetition}.json"
+                )
+                command = [
+                    sys.executable,
+                    str(args.benchmark_script),
+                    "--base-url",
+                    args.base_url,
+                    "--model",
+                    MODEL,
+                    "--dataset",
+                    str(DATASET),
+                    "--dataset-sha256",
+                    actual_dataset_hash,
+                    "--concurrency",
+                    str(active_concurrency),
+                    "--repeat-index",
+                    str(active_repetition),
+                    "--seed",
+                    "1024",
+                    "--limit",
+                    "32",
+                    "--timeout",
+                    str(args.timeout),
+                    "--output",
+                    str(output),
+                ]
+                subprocess.run(command, check=True)
+                validated = validate_cell(
+                    output, active_concurrency, active_repetition
+                )
+                state["completed_cells"].append(
+                    {
+                        "concurrency": active_concurrency,
+                        "repetition": active_repetition,
+                        "path": str(output),
+                        "sha256": sha256(output),
+                        "requests": validated["requests"],
+                    }
+                )
+                write_state(state_path, state)
     except Exception as error:
         state["status"] = "failed"
         state["failed_cell"] = {
             "concurrency": active_concurrency,
-            "repetition": 1,
+            "repetition": active_repetition,
             "error_type": type(error).__name__,
         }
         state["completed_unix_s"] = time.time()
