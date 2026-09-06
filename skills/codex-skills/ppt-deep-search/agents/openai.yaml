@@ -1,0 +1,4 @@
+interface:
+  display_name: "PPT Deep Search"
+  short_description: "Human-in-the-loop Source Understanding review before PPT generation"
+  default_prompt: "Use $ppt-deep-search to research source material and produce source_understanding_review.html before generating a PPT."

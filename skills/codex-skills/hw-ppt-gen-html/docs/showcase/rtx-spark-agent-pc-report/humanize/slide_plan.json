@@ -1,0 +1,277 @@
+[
+  {
+    "slide_id": "S01",
+    "role": "hook",
+    "title": "RTX Spark Agent PC：本地个人 AI 计算报告",
+    "message": "﻿ <",
+    "visible_content": [
+      "﻿ <",
+      "!-- SOURCE: D:\\Agent Repo\\Mozhi-s-AgentWorkspace\\skills\\hw-ppt-gen-html\\forward-tests\\rtx-spark-agent-pc-repor"
+    ],
+    "speaker_intent": "抓住注意力：先把观众从信息疲劳里拉出来。",
+    "media": {
+      "image": {
+        "needed": true,
+        "kind": "gpt-photo",
+        "purpose": "Set emotional anchor for the opening page",
+        "slot": "hook-image-16x9",
+        "asset_path": "assets/s01-image.png",
+        "prompt_hint": "Slide title: RTX Spark Agent PC：本地个人 AI 计算报告 | Slide message: ﻿ < | Page role: Open the deck. Set emotional anchor. | Asset guidance: Image: must be visually anchored, no Chinese text in the image (Chinese labels go in the slide layout).",
+        "aspect_ratio": "16:9",
+        "max_size_kb": 200
+      },
+      "diagram": {
+        "needed": false,
+        "kind": "none"
+      },
+      "video": {
+        "needed": false,
+        "kind": "none"
+      }
+    },
+    "layout_hint": "S01-cover-hero",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S02",
+    "role": "context",
+    "title": "NVIDIA DGX Spark / DGX Station for Windows",
+    "message": "Source URL: https://www.nvidia.com/en-us/p",
+    "visible_content": [
+      "Source URL: https://www.nvidia.com/en-us/p",
+      "roducts/workstations/dgx-spark/ Official page title: Personal AI Supercomputer Powered by Blackwell | NVIDIA D"
+    ],
+    "speaker_intent": "建立共同背景：说明为什么现在要听这件事。",
+    "media": {
+      "image": {
+        "needed": false,
+        "kind": "none"
+      },
+      "diagram": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Show the system relationship or scope",
+        "slot": "context-diagram-21x9",
+        "asset_path": "assets/s02-diagram.svg",
+        "prompt_hint": "Slide title: NVIDIA DGX Spark / DGX Station for Windows | Slide message: Source URL: https://www.nvidia.com/en-us/p | Page role: Establish common ground. Show system / scope. | Asset guidance: Diagram: render as inline SVG or HTML table, deterministic, no text overflow."
+      },
+      "video": {
+        "needed": false,
+        "kind": "none"
+      }
+    },
+    "layout_hint": "S04-context-system",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S03",
+    "role": "tension",
+    "title": "Page Header",
+    "message": "Page Header",
+    "visible_content": [
+      "Page Header",
+      "!NVIDIA DGX Spark hero image(images/image-01-hero-dgx-spark.jpg) Original image URL: https://www.nvidia.com/co"
+    ],
+    "speaker_intent": "制造认知张力：指出旧理解和真实问题之间的差距。",
+    "media": {
+      "image": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Show before/after or contradiction visually",
+        "slot": "tension-image-16x9",
+        "asset_path": "assets/s03-image.svg",
+        "prompt_hint": "Slide title: Page Header | Slide message: Page Header | Page role: Highlight the gap or contradiction. | Asset guidance: Image: must be visually anchored, no Chinese text in the image (Chinese labels go in the slide layout).",
+        "aspect_ratio": "16:9",
+        "max_size_kb": 200
+      },
+      "diagram": {
+        "needed": false,
+        "kind": "none"
+      },
+      "video": {
+        "needed": false,
+        "kind": "none"
+      }
+    },
+    "layout_hint": "S06-tension-comparison",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S04",
+    "role": "method",
+    "title": "Overview",
+    "message": "Overview",
+    "visible_content": [
+      "Overview"
+    ],
+    "speaker_intent": "给出方法：把复杂信息变成可执行路径。",
+    "media": {
+      "image": {
+        "needed": false,
+        "kind": "none"
+      },
+      "diagram": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Diagram the process / decision tree / flow",
+        "slot": "method-diagram-21x9",
+        "asset_path": "assets/s04-diagram.svg",
+        "prompt_hint": "Slide title: Overview | Slide message: Overview | Page role: Walk through the process / decision tree. | Asset guidance: Diagram: render as inline SVG or HTML table, deterministic, no text overflow."
+      },
+      "video": {
+        "needed": true,
+        "kind": "remotion-clip",
+        "duration_s": 10,
+        "purpose": "8-12s process clip that walks through the method",
+        "slot": "method-video-16x9",
+        "asset_path": "assets/s04-video.mp4",
+        "prompt_hint": "Slide title: Overview | Slide message: Overview | Page role: Walk through the process / decision tree. | Asset guidance: Short loop clip (8-12s), deterministic motion, no narration.",
+        "aspect_ratio": "16:9"
+      }
+    },
+    "layout_hint": "S07-process-21x9",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S05",
+    "role": "proof",
+    "title": "Desktop Agent Computer",
+    "message": "Powered by the NVIDIA GB10 Grace Blackwell",
+    "visible_content": [
+      "Powered by the NVIDIA GB10 Grace Blackwell",
+      "Superchip, NVIDIA DGX Spark is described as a complete platform for local autonomous agents. NVIDIA emphasizes"
+    ],
+    "speaker_intent": "给出证据：用案例、步骤或指标证明它不是口号。",
+    "media": {
+      "image": {
+        "needed": true,
+        "kind": "screenshot",
+        "purpose": "Screenshot evidence of the real UI or result",
+        "slot": "proof-image-16x9",
+        "asset_path": "assets/s05-image.png",
+        "prompt_hint": "Slide title: Desktop Agent Computer | Slide message: Powered by the NVIDIA GB10 Grace Blackwell | Page role: Show evidence: real UI, screenshots, before/after. | Asset guidance: Image: must be visually anchored, no Chinese text in the image (Chinese labels go in the slide layout).",
+        "aspect_ratio": "16:9",
+        "max_size_kb": 200
+      },
+      "diagram": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Diagram the comparison or supporting structure",
+        "slot": "proof-diagram-21x9",
+        "asset_path": "assets/s05-diagram.svg",
+        "prompt_hint": "Slide title: Desktop Agent Computer | Slide message: Powered by the NVIDIA GB10 Grace Blackwell | Page role: Show evidence: real UI, screenshots, before/after. | Asset guidance: Diagram: render as inline SVG or HTML table, deterministic, no text overflow."
+      },
+      "video": {
+        "needed": true,
+        "kind": "remotion-clip",
+        "duration_s": 8,
+        "purpose": "Short before/after or result clip",
+        "slot": "proof-video-16x9",
+        "asset_path": "assets/s05-video.mp4",
+        "prompt_hint": "Slide title: Desktop Agent Computer | Slide message: Powered by the NVIDIA GB10 Grace Blackwell | Page role: Show evidence: real UI, screenshots, before/after. | Asset guidance: Short loop clip (8-12s), deterministic motion, no narration.",
+        "aspect_ratio": "16:9"
+      }
+    },
+    "layout_hint": "S12-proof-metrics",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S06",
+    "role": "takeaway",
+    "title": "Build Local AI Agents Faster with NVIDIA DGX Spa",
+    "message": "A DGX OS update is described as adding str",
+    "visible_content": [
+      "A DGX OS update is described as adding str",
+      "eamlined NemoClaw installation, latest state-of-the-art open models, and up to 1.9x inference speedups to acce"
+    ],
+    "speaker_intent": "收束行动：让观众带走一句可复述的方法。",
+    "media": {
+      "image": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Visual summary that reinforces the closing judgment",
+        "slot": "takeaway-image-16x9",
+        "asset_path": "assets/s06-image.svg",
+        "prompt_hint": "Slide title: Build Local AI Agents Faster with NVIDIA DGX Spark | Slide message: A DGX OS update is described as adding str | Page role: Close the deck. Reinforce the judgment. | Asset guidance: Image: must be visually anchored, no Chinese text in the image (Chinese labels go in the slide layout).",
+        "aspect_ratio": "16:9",
+        "max_size_kb": 200
+      },
+      "diagram": {
+        "needed": false,
+        "kind": "none"
+      },
+      "video": {
+        "needed": false,
+        "kind": "none"
+      }
+    },
+    "layout_hint": "S22-takeaway",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S07",
+    "role": "takeaway",
+    "title": "NVIDIA Announces NemoClaw for OpenClaw Community",
+    "message": "NemoClaw is described as adding security a",
+    "visible_content": [
+      "NemoClaw is described as adding security a",
+      "nd privacy to run secure, always-on AI assistants on NVIDIA RTX PCs, DGX Station, and DGX Spark. Related link "
+    ],
+    "speaker_intent": "收束行动：让观众带走一句可复述的方法。",
+    "media": {
+      "image": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Visual summary that reinforces the closing judgment",
+        "slot": "takeaway-image-16x9",
+        "asset_path": "assets/s07-image.svg",
+        "prompt_hint": "Slide title: NVIDIA Announces NemoClaw for OpenClaw Community | Slide message: NemoClaw is described as adding security a | Page role: Close the deck. Reinforce the judgment. | Asset guidance: Image: must be visually anchored, no Chinese text in the image (Chinese labels go in the slide layout).",
+        "aspect_ratio": "16:9",
+        "max_size_kb": 200
+      },
+      "diagram": {
+        "needed": false,
+        "kind": "none"
+      },
+      "video": {
+        "needed": false,
+        "kind": "none"
+      }
+    },
+    "layout_hint": "S22-takeaway",
+    "recommended_renderer": "html-ppt"
+  },
+  {
+    "slide_id": "S08",
+    "role": "takeaway",
+    "title": "Run Autonomous Agents More Safely",
+    "message": "Run Autonomous Agents More Safely",
+    "visible_content": [
+      "Run Autonomous Agents More Safely",
+      "!NemoClaw / safer autonomous agents banner(images/image-02-nemoclaw-banner.jpg) Original image URL: https://ww"
+    ],
+    "speaker_intent": "收束行动：让观众带走一句可复述的方法。",
+    "media": {
+      "image": {
+        "needed": true,
+        "kind": "svg-html",
+        "purpose": "Visual summary that reinforces the closing judgment",
+        "slot": "takeaway-image-16x9",
+        "asset_path": "assets/s08-image.svg",
+        "prompt_hint": "Slide title: Run Autonomous Agents More Safely | Slide message: Run Autonomous Agents More Safely | Page role: Close the deck. Reinforce the judgment. | Asset guidance: Image: must be visually anchored, no Chinese text in the image (Chinese labels go in the slide layout).",
+        "aspect_ratio": "16:9",
+        "max_size_kb": 200
+      },
+      "diagram": {
+        "needed": false,
+        "kind": "none"
+      },
+      "video": {
+        "needed": false,
+        "kind": "none"
+      }
+    },
+    "layout_hint": "S22-takeaway",
+    "recommended_renderer": "html-ppt"
+  }
+]

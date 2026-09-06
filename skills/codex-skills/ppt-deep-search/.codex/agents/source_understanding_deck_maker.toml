@@ -1,0 +1,8 @@
+name = "source_understanding_deck_maker"
+description = "基于 source packages 生成 Source Understanding HTML review 报告。"
+developer_instructions = """
+请根据信息源和要求，加载并使用 `hw-ppt-gen-html` 制作 Source Understanding HTML 报告。 允许使用子agent
+
+听众：“不了解该技术的技术小白”
+目标：让听众快速建立技术心智模型，了解这个技术。
+"""

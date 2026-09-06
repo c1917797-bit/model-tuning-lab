@@ -1,0 +1,164 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTX Spark Agent PC：本地个人 AI 计算报告</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5b6475;
+      --line: #d9dee8;
+      --paper: #f7f8fb;
+      --panel: #ffffff;
+      --accent: #76b900;
+      --accent-dark: #2f5f1e;
+      --blue: #1c5d99;
+      --amber: #a35f00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.62;
+      letter-spacing: 0;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+    header {
+      background: linear-gradient(115deg, #111827 0%, #1f2937 52%, #355f25 100%);
+      color: #fff;
+      padding: 64px 0 52px;
+    }
+    .eyebrow { color: #b7f36f; font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+    h1 { font-size: 52px; line-height: 1.08; margin: 0 0 20px; max-width: 900px; }
+    .lede { font-size: 21px; max-width: 860px; color: #e6edf7; margin: 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: center; }
+    .hero-img { width: 100%; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,.35); background: #111; }
+    main { padding: 40px 0 70px; }
+    section { margin: 34px 0; }
+    .section-title { font-size: 30px; margin: 0 0 16px; line-height: 1.25; }
+    .section-note { color: var(--muted); font-size: 17px; margin: 0 0 18px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card, .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+    .card h3, .panel h3 { margin: 0 0 10px; font-size: 20px; }
+    .metric { font-size: 34px; font-weight: 800; color: var(--accent-dark); margin-bottom: 4px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+    figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption { padding: 12px 16px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #eef3f9; font-weight: 700; }
+    tr:last-child td { border-bottom: 0; }
+    .callout { border-left: 5px solid var(--accent); background: #f0f7e9; padding: 18px 22px; border-radius: 6px; }
+    .risk { border-left-color: var(--amber); background: #fff6e8; }
+    ul { margin: 10px 0 0; padding-left: 22px; }
+    li { margin: 6px 0; }
+    .source-list { font-size: 15px; color: var(--muted); }
+    footer { color: var(--muted); border-top: 1px solid var(--line); padding-top: 20px; margin-top: 44px; }
+    @media (max-width: 860px) {
+      h1 { font-size: 36px; }
+      .hero-grid, .two-col, .cards { grid-template-columns: 1fr; }
+      .wrap { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Forward-test report · rtx-spark-agent-pc-report · 2026-08-03</div>
+        <h1>RTX Spark 把个人电脑从工具推向本地 Agent 计算节点</h1>
+        <p class="lede">NVIDIA 把 Blackwell RTX GPU、Grace CPU、统一内存、CUDA/RTX 软件栈和 Windows 原生 Agent 协作放进轻薄笔记本与小型桌面设备。核心变化不是“又一代高性能 PC”，而是让创作者、开发者和玩家在本机运行更重的 AI 工作流。</p>
+      </div>
+      <img class="hero-img" src="assets/rtx-spark-hero.jpg" alt="NVIDIA RTX Spark 笔记本主视觉">
+    </div>
+  </header>
+  <main class="wrap">
+    <section>
+      <h2 class="section-title">一句话判断</h2>
+      <div class="callout">
+        RTX Spark 的产品叙事把 PC 定位从“启动应用的终端”转为“可在本地执行 Agent、创作和游戏工作负载的个人 AI 计算平台”。它的可信度来自三层证据：芯片规格、软件栈与 Windows 安全协作、OEM 生态落地。
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">为什么现在值得关注</h2>
+      <p class="section-note">网页证据显示 NVIDIA 同时在消费级 RTX Spark 和桌面 DGX Spark 上讲同一条主线：本地 Agent 需要更大的统一内存、更强 AI 算力和可控的安全边界。</p>
+      <div class="cards">
+        <div class="card"><div class="metric">1 PFLOP</div><h3>FP4 AI 性能</h3><p>RTX Spark 与 DGX Spark 材料都强调 Blackwell 架构提供 petaFLOP 级本地 AI 计算。</p></div>
+        <div class="card"><div class="metric">128 GB</div><h3>统一内存</h3><p>产品页把统一内存作为本地大模型、长上下文和创作工作流的关键约束突破。</p></div>
+        <div class="card"><div class="metric">120B</div><h3>本地模型规模</h3><p>NVIDIA Newsroom 材料称 RTX Spark 可运行 120B 参数 LLM，并支持最高 100 万 tokens 上下文。</p></div>
+      </div>
+    </section>
+
+    <section class="two-col">
+      <figure>
+        <img src="assets/rtx-spark-agents.jpeg" alt="用户与 AI Agent PC 协同工作的画面">
+        <figcaption>RTX Spark 产品页把 Agent PC 描述为从工具变成队友：本地执行任务、生成资源、写代码。</figcaption>
+      </figure>
+      <div class="panel">
+        <h2 class="section-title">产品承诺的三段式结构</h2>
+        <ul>
+          <li><strong>硬件层：</strong>Blackwell RTX GPU、Grace CPU、FP4 Tensor Cores、统一内存和高能效封装。</li>
+          <li><strong>软件层：</strong>CUDA、RTX、TensorRT、OptiX、DLSS、NVIDIA AI 软件栈和 Windows 原生 Agent 基础设施。</li>
+          <li><strong>生态层：</strong>Adobe、Blackmagic、Blender、ComfyUI、llama.cpp、Xbox 等创作、AI 和游戏生态共同背书。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">RTX Spark 与 DGX Spark 的边界</h2>
+      <table>
+        <thead><tr><th>维度</th><th>RTX Spark</th><th>DGX Spark</th><th>读者应如何理解</th></tr></thead>
+        <tbody>
+          <tr><td>目标设备</td><td>轻薄 RTX 笔记本和小型桌面 PC</td><td>桌面级个人 AI 超级计算机</td><td>前者面向主力 PC，后者更像本地 AI 工作站。</td></tr>
+          <tr><td>核心叙事</td><td>个人 Agent、创作和游戏一体化</td><td>构建并运行本地自治 Agent</td><td>两者共享本地 Agent 方向，但场景密度不同。</td></tr>
+          <tr><td>关键约束</td><td>便携、全日续航、Windows 体验和 OEM 供给</td><td>大模型、playbook、DGX OS、开发栈</td><td>采购决策要按移动性、预算和模型规模拆开。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="two-col">
+      <div class="panel">
+        <h2 class="section-title">对三类人最直接的含义</h2>
+        <ul>
+          <li><strong>创作者：</strong>12K 4:2:2 视频、AI 加速 Photoshop/Premiere、ComfyUI 等工作流更适合本地试错。</li>
+          <li><strong>AI 开发者：</strong>本地运行模型、Agent 和长上下文任务，减少对云端 token 资源的依赖。</li>
+          <li><strong>玩家与图形用户：</strong>RTX、DLSS、Reflex 和光追仍是平台吸引力的一部分，不是与 Agent 叙事分离的副线。</li>
+        </ul>
+      </div>
+      <figure>
+        <img src="assets/dgx-spark-hero.jpg" alt="NVIDIA DGX Spark 桌面设备主视觉">
+        <figcaption>DGX Spark 页面把同一套本地 Agent 逻辑推向桌面工作站场景。</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2 class="section-title">证据边界</h2>
+      <div class="callout risk">
+        本报告只依据 forward-test 中已捕获的 NVIDIA 产品页、DGX Spark 页面和 NVIDIA Newsroom 文本。页面中的上市时间、OEM 机型和性能承诺属于厂商发布口径；没有独立跑分、价格、续航实测或第三方安全审计，因此不能把它当成购买建议或性能结论。
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">下一步判断框架</h2>
+      <table>
+        <thead><tr><th>要问的问题</th><th>为什么重要</th><th>当前证据状态</th></tr></thead>
+        <tbody>
+          <tr><td>本地 Agent 是否真的需要 128GB 统一内存？</td><td>决定它是刚需工作站还是高端概念卖点。</td><td>NVIDIA 给出模型规模和上下文口径，但缺少第三方 workload 测试。</td></tr>
+          <tr><td>Windows 安全 primitives 与 OpenShell 如何落地？</td><td>Agent 运行在主力设备上，权限和隐私边界比算力更关键。</td><td>新闻稿说明方向，缺少应用层实测。</td></tr>
+          <tr><td>OEM 供给、价格和散热是否支撑长期使用？</td><td>决定从发布叙事进入真实采购的可行性。</td><td>已有 ASUS、Dell、HP、Lenovo、Surface、MSI 等名单，细节仍待发布。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p><strong>来源：</strong>NVIDIA RTX Spark 产品页、NVIDIA Newsroom 2026-05-31 新闻稿、NVIDIA DGX Spark 产品页；素材来自 `forward-tests/rtx-spark-agent-pc-report/sources/web/`。</p>
+      <p>Humanize 规划摘要已归档在 `humanize/`；导出脚本：`skills/hw-ppt-gen-html/scripts/render_html_report.py`。</p>
+    </footer>
+  </main>
+</body>
+</html>

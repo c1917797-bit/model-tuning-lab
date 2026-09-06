@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-08-03T03:45:53+00:00",
+  "title": "RTX Spark Agent PC：本地个人 AI 计算报告",
+  "source": "skills/hw-ppt-gen-html/forward-tests/rtx-spark-agent-pc-report/sources/web/",
+  "primary_renderer": "html-ppt",
+  "routes": [
+    {
+      "id": "html-ppt",
+      "stage": "produce",
+      "purpose": "根据Humanize PPT契约生成主deck或候选预览。",
+      "reason": "用户指定 renderer=html-ppt。",
+      "command_file": "commands/html-ppt-agent.md",
+      "status": "planned",
+      "display_name": "HTML PPT Studio",
+      "skill_name": "html-ppt",
+      "expected_inputs": [
+        "deck_brief.md",
+        "slide_plan.json",
+        "speaker_intent.md",
+        "asset_manifest.md"
+      ],
+      "expected_outputs": [
+        "outputs/html-ppt/index.html",
+        "outputs/html-ppt/render_report.md"
+      ]
+    },
+    {
+      "id": "qa",
+      "stage": "control",
+      "purpose": "检查契约、路径、人感、AI草稿痕迹和交付完整性。",
+      "reason": "所有Humanize PPT运行必须经过QA。",
+      "command_file": "commands/qa-agent.md",
+      "status": "pass",
+      "display_name": "Humanize PPT Brief-Mode QA",
+      "skill_name": "humanize-ppt",
+      "expected_inputs": [
+        "router_plan.json",
+        "run_manifest.json",
+        "outputs/"
+      ],
+      "expected_outputs": [
+        "outputs/qa/qa_report.md",
+        "outputs/qa/fix_list.md",
+        "outputs/qa/final_manifest.json"
+      ],
+      "actual_output": "humanize/outputs/qa/qa_report.md"
+    }
+  ],
+  "qa_status": "pass",
+  "files": [
+    "asset_manifest.md",
+    "ast_outline.md",
+    "commands\\html-ppt-agent.md",
+    "commands\\qa-agent.md",
+    "deck_brief.md",
+    "outputs\\qa\\final_manifest.json",
+    "outputs\\qa\\fix_list.md",
+    "outputs\\qa\\qa_report.md",
+    "renderer_registry.json",
+    "router_plan.json",
+    "run_manifest.json",
+    "slide_plan.json",
+    "speaker_intent.md",
+    "style_brief.md",
+    "video_slots.json"
+  ]
+}

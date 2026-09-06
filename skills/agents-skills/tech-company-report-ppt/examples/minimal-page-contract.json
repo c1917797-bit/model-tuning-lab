@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Technology Platform Insight",
+    "subtitle": "Three-zone PPT skill smoke test",
+    "language": "en"
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Technology Platform Insight",
+      "subtitle": "Three-zone PPT skill smoke test"
+    },
+    {
+      "type": "agenda",
+      "title": "Agenda",
+      "items": ["Overview", "Core Capability", "Opportunity Summary"],
+      "current": "Overview"
+    },
+    {
+      "type": "standard",
+      "title": "System capability becomes a callable platform interface",
+      "bottomConclusion": "The key deliverable is not a decorative page, but a stable interface story with editable title and conclusion.",
+      "middleImage": "image2-middle/slide-03.png"
+    },
+    {
+      "type": "table",
+      "title": "Opportunity summary: capability, platform change, and planning direction",
+      "bottomConclusion": "Editable tables are reserved for text that will likely be revised after review.",
+      "columns": ["Capability", "Platform Change", "Planning Direction"],
+      "rows": [
+        ["Model API", "System models open to Apps", "Unified model calling kit"],
+        ["App Schema", "App content becomes semantic", "Entity and intent schema"],
+        ["Performance Loop", "Metrics drive optimization", "Observe, locate, fix, verify"]
+      ]
+    }
+  ]
+}

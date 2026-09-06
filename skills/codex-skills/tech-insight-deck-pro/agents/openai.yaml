@@ -1,0 +1,4 @@
+interface:
+  display_name: "技术洞察演示文稿 Pro"
+  short_description: "先审阅趋势大纲与完整内容，再生成逻辑连贯的技术洞察PPT"
+  default_prompt: "使用 $tech-insight-deck-pro 为指定主题完成研究，先输出 Markdown 和 HTML 预览供我确认，确认后再生成 PPT。"

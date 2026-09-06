@@ -1,0 +1,15 @@
+schema_version: 1
+name: web-article-capture
+title: 网页正文采集
+description: 抽取浏览器渲染后的网页正文和正文图片，生成下游 Agent 可复用的 source package。
+entry: docs/index.md
+nav:
+  - title: 能力展示
+    path: docs/reference.md
+  - title: 使用方式
+    path: docs/usage.md
+  - title: 依赖说明
+    path: docs/dependencies.md
+  - title: 架构概览
+    path: docs/index.md
+status: bootstrap

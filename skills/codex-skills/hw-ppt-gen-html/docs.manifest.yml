@@ -1,0 +1,15 @@
+schema_version: 1
+name: hw-ppt-gen-html
+title: HTML PPT / HTML Report Skill Wrapper
+description: HTML PPT / HTML Report Skill 的 workspace 接入 wrapper，支持 Deck 与滚动分析报告的生成、导出和视觉 QA。
+entry: docs/index.md
+nav:
+  - title: 能力展示
+    path: docs/reference.md
+  - title: 使用方式
+    path: docs/usage.md
+  - title: 依赖说明
+    path: docs/dependencies.md
+  - title: 架构概览
+    path: docs/index.md
+status:

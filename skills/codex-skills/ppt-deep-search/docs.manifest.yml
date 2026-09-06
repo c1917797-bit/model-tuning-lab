@@ -1,0 +1,15 @@
+schema_version: 1
+name: ppt-deep-search
+title: PPT 来源理解
+description: 在生成 PPT 前生成 Source Understanding HTML，审阅来源证据、技术理解和边界。
+entry: docs/index.md
+nav:
+  - title: 能力展示
+    path: docs/reference.md
+  - title: 使用方式
+    path: docs/usage.md
+  - title: 依赖说明
+    path: docs/dependencies.md
+  - title: 架构概览
+    path: docs/architecture_design.md
+status: active
