@@ -297,3 +297,22 @@ median gains cannot promote a treatment for this objective.
 - The sparse/weak `answer` field cannot prove `精读无损`. Promotion
   requires deterministic paired baseline/candidate semantic equivalence;
   stochastic aggregate reference metrics remain diagnostic only.
+
+## MMAR x3 residual fusion rejection
+
+- For `npu_mm_all_reduce_base`, `x3` is part of the reduced value rather
+  than a post-reduction local residual. A TP-replicated residual is therefore
+  multiplied by world size when passed unchanged.
+- The only direct semantics-preserving TP4 form tested here divides the
+  residual by four on every rank before MMAR. Include that division in the
+  timed candidate; precomputing it outside the measured path would hide a
+  real per-layer cost.
+- Real BF16 910B4 NPU0-3 results passed numerical correctness after scaling,
+  but `MMAR(x3=residual/4) + RMSNorm` achieved only 0.655224x geometric
+  mean speed versus `MMAR + AddRMSNorm`, with a 0.635134x worst cell.
+- Reject before E2E. API availability and apparent operator-count reduction
+  do not justify integration when cross-rank semantics require an extra
+  elementwise transform and the viable sequence is slower.
+- Evidence report SHA256:
+  `92b42c33c4449ee5f788b93e8337f8bd9becbe6a44e993140acabf8d2b673224`.
+  Do not retry this route unchanged.

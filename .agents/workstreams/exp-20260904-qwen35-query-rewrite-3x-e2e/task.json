@@ -20,6 +20,7 @@
   "validationCommands": [
     "./scripts/validate-mst.sh",
     "python3 -m py_compile scripts/benchmark_qwen35_mmar_add_rmsnorm.py",
+    "python3 -m py_compile scripts/benchmark_qwen35_mmar_x3_residual.py",
     "bash -n scripts/run_qwen35_mmar_add_rmsnorm_microbench.sh",
         "bash -n scripts/run_qwen35_tp4_dev_service.sh",
         "bash tests/test_run_qwen35_tp4_dev_service.sh",
@@ -32,6 +33,6 @@
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "git diff --check"
   ],
-    "executionState": "gdn-projection-fusion-three-repeat-p95-complete-on-npu0-3",
-    "integrationState": "branch-local-iterate-performance-p95-not-promoted"
+    "executionState": "mmar-x3-residual-microbench-rejected-on-npu0-3",
+    "integrationState": "branch-local-iterate-performance-x3-not-promoted"
 }

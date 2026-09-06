@@ -1766,3 +1766,22 @@ qwen35_gdn_projection_fusion_nospec_v1:
   resource_isolation: "candidate is the only workload on NPU0-3; external NPU4-7 untouched; foreign watch03.sh supervisor stopped and remaining cells conflict-guarded"
   interim_decision: "do not promote: median-of-three P95 misses the all-cell 2x target and 精读无损 is unproven"
   next: "run deterministic paired semantic equivalence if retaining this ingredient, then stack a profile-backed non-speculative decode/TPOT treatment and remeasure P95"
+
+qwen35_mmar_x3_residual_probe_v2:
+  status: rejected_before_e2e
+  operation_ids:
+    invalid_port_collision: exec-000000000000064a
+    authoritative_v2: exec-000000000000064c
+  evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-x3-residual-npu03-v2/report.json
+  report_sha256: 92b42c33c4449ee5f788b93e8337f8bd9becbe6a44e993140acabf8d2b673224
+  runtime: "Ascend 910B4 physical NPU0-3, TP4 HCCL, BF16, no quantization"
+  shapes: "M=1/5/8/16; K=1536/4352; N=5120; 20 warmups, 100 iterations, five alternating-order repeats"
+  control: "npu_mm_all_reduce_base + npu_add_rms_norm"
+  candidate: "npu_mm_all_reduce_base(x3=residual/world_size) + npu_rms_norm, including residual scaling cost"
+  semantics: "x3 participates in all-reduce; unchanged replicated residual is wrong, residual/world_size restores TP semantics"
+  correctness_pass: true
+  geomean_candidate_speedup_vs_control: 0.6552238011698837
+  minimum_candidate_speedup_vs_control: 0.6351343806973315
+  decision: "reject-x3-residual-before-e2e"
+  resource_isolation: "online candidate remained healthy on NPU0-3; external NPU4-7 workload was untouched"
+  next: "do not retry x3 residual fusion unchanged; target MMAR call count or overlap without adding per-layer residual scaling"

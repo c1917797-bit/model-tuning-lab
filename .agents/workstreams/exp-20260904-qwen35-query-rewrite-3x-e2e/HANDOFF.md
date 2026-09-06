@@ -1,6 +1,39 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
-## Current checkpoint — 2026-09-06 GDN projection fusion
+## Current checkpoint — 2026-09-06 MMAR x3 residual probe
+
+The retained candidate and frozen denominator are unchanged. The latest
+profile-guided treatment was screened at operator level and rejected before
+E2E:
+
+- `torch_npu.npu_mm_all_reduce_base` exposes `x3`, but `x3` participates in
+  the cross-rank reduction. Passing Qwen3.5's replicated residual directly
+  therefore adds it once per TP rank and is numerically wrong.
+- The semantics-preserving TP4 form contributes `residual / 4` on every rank
+  and then runs standalone RMSNorm. A real BF16 910B4 microbenchmark on
+  physical NPU0-3 passed correctness for all Qwen3.5 decode cells
+  M=1/5/8/16 and K=1536/4352, N=5120.
+- Despite correctness, the viable sequence reached only 0.655224x geometric
+  mean speed versus `MMAR + AddRMSNorm`; its worst cell was 0.635134x.
+  Decision: `reject-x3-residual-before-e2e`.
+- Evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-x3-residual-npu03-v2/report.json`,
+  SHA256
+  `92b42c33c4449ee5f788b93e8337f8bd9becbe6a44e993140acabf8d2b673224`.
+- The first orchestration attempt (operation `exec-000000000000064a`)
+  stopped before timing because its HCCL socket port overlapped the live
+  service. It is invalid evidence. The isolated-port rerun is operation
+  `exec-000000000000064c`.
+- Service `qwen35_gdn_proj_fusion_npu03_v1` remains healthy on port 10012.
+  NPU0-3 contain only this task's four TP workers; NPU4-7 retain the external
+  workload and were not modified.
+
+Do not integrate or retry x3 residual fusion unchanged. Resume from the
+retained GDN projection fusion candidate and select a mechanism that reduces
+or overlaps the approximately 128 decode MMAR calls rather than adding a
+per-layer residual scaling kernel. The primary P95 gaps remain unchanged.
+
+## Previous checkpoint — 2026-09-06 GDN projection fusion
 
 This checkpoint supersedes stale resource and resume statements below.
 
