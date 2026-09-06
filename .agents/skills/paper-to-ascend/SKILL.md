@@ -49,6 +49,10 @@ For performance work, also use:
 - `ascend-inference-tuning-loop`
 - `ascend-benchmark-evidence`
 
+When the paper or benchmark touches CANN/operator/kernel/profiler behavior,
+HCCL communication, memory movement, or unexplained low-level regressions, also
+use `ascend-cannbot-profiler` before changing low-level code.
+
 This skill chooses whether the paper deserves an experiment; the Ascend skills
 make the experiment reproducible and evidence-bound.
 

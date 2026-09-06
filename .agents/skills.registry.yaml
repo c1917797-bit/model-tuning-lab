@@ -40,6 +40,26 @@ skills:
       - src/**
       - tests/**
       - .agents/experiments/**
+  - id: ascend-cannbot-profiler
+    path: .agents/skills/ascend-cannbot-profiler
+    status: experimental
+    purpose: Use cannbot/CANN profiler and operator evidence to explain Ascend inference bottlenecks before low-level changes.
+    triggers:
+      - cannbot-skills
+      - CANN profiler
+      - Ascend operator profiling
+      - msprof or asys analysis
+      - kernel bottleneck on Ascend
+      - HCCL communication analysis
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: ascend-inference-tuning-loop
     path: .agents/skills/ascend-inference-tuning-loop
     status: experimental
