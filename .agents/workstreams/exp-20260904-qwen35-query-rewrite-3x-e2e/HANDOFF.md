@@ -2812,3 +2812,23 @@ was restarted as `qwen35_gdn_proj_fusion_npu03_v1` on physical NPU0-3.
 NPU4-7 were not allocated or modified. The dataset SHA256 is
 `a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e`;
 the weak/sparse `answer` field still cannot prove `精读无损`.
+
+## Deterministic paired quality gate
+
+The dataset audit found that all 357 `answer` fields are empty, so a new
+deterministic paired-output protocol replaced the invalid reference-similarity
+claim. The TP4 cumulative control and retained candidate each completed 16/16
+length-quantile samples with temperature 0, seed 1024, identical prompts, and
+natural EOS.
+
+Automatic comparison found 11/16 byte-identical and 12/16
+whitespace-normalized-identical responses. Manual review of the five remaining
+pairs found no material semantic regression: one was only empty/whitespace/EOS
+representation, while four retained the same final intent, facts, and
+constraints with only reason wording, punctuation, or word order changes.
+
+Decision: sampled paired semantic gate passes 16/16 for the retained GDN
+projection fusion plus gate/up prefetch stack. This is not a proof over the
+full 357-row corpus. See `QUALITY_GATE_V1.md` for evidence paths, hashes,
+rulings, and the distinction between this TP4 quality control and the frozen
+TP8 MTP-off performance denominator.

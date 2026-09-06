@@ -1824,3 +1824,31 @@ qwen35_prodlog_info_v1:
   decision: "reject; do not expand to c5/c8 or retry unchanged"
   resource_release: "INFO candidate stopped and removed; retained DEBUG stack restarted on NPU0-3; NPU4-7 untouched"
   next: "continue from retained GDN projection fusion + gate/up prefetch stack; target a profile-backed Ascend decode/collective change"
+
+qwen35_paired_quality_gate_v1:
+  status: passed_sampled_semantic_gate
+  evidence_boundary: "TP4 cumulative quality control versus retained TP4 candidate; not the immutable TP8 MTP-off performance denominator and not a full-corpus proof"
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  dataset_rows: 357
+  nonempty_answer_rows: 0
+  protocol: "16 question-length-quantile samples; identical prompts and indices; temperature=0; seed=1024; natural EOS required"
+  completion: "baseline 16/16 natural stops; candidate 16/16 natural stops"
+  automatic:
+    exact: "11/16"
+    whitespace_normalized_exact: "12/16"
+    similarity: {min: 0.409044, mean: 0.926438, median: 1.0, max: 1.0}
+  manual_review:
+    reviewed_indices: [26, 189, 252, 301, 338]
+    equivalent: "5/5"
+    material_regressions: 0
+    overall_sampled_equivalence: "16/16"
+  decision: "pass sampled paired semantic gate for retained GDN projection fusion plus gate/up prefetch stack; do not generalize beyond sampled scope"
+  hashes:
+    baseline_capture_sha256: 83f39689e0b08bc71fc2d642f96b0374f23707ad71822e0a3eb26367d4d2d10c
+    candidate_capture_sha256: ed951e6e74f30c774965ba8413ca93307eb6fb7d7ae477101065e2d87ff5f367
+    automatic_comparison_sha256: a059fc91476afd813a16554820b4636ba6ae1f6e2db85b3fbc140b704bad52d9
+    raw_review_sha256: ec42c224f46d7ad054ef39be8297913b62eabccea3f0d89a1c87194b26701c30
+  tracked_report: .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/QUALITY_GATE_V1.md
+  tooling_commit: 7b022a4
+  next: "retain this quality evidence while continuing the all-cell 2x P95 performance loop; re-run paired quality whenever semantics-affecting code changes"

@@ -335,3 +335,21 @@ median gains cannot promote a treatment for this objective.
 - The query_rewrite generation config is stochastic and completion-token counts
   vary across repeats. Keep the median-of-three rule and report all per-run P95
   values; do not select a favorable repeat.
+
+## Quality evidence when references are empty
+
+- Audit the reference field before trusting aggregate quality metrics. Here,
+  all 357 `answer` values were empty, so reference similarity could not prove
+  `精读无损`.
+- Use a deterministic paired baseline/candidate capture with identical prompt
+  indices, temperature 0, fixed seed, natural EOS, and hashed raw outputs.
+- Exact match is a useful first gate but not the semantic decision. Five of 16
+  samples differed byte-for-byte; manual inspection showed all final task
+  outputs were equivalent, with only whitespace, compact reason wording,
+  punctuation, or word order changes.
+- Record the evidence boundary. Passing 16 length-quantile samples supports the
+  retained stack but does not prove equivalence over every dataset row or
+  arbitrary production traffic.
+- Keep the quality control separate from the performance denominator. The TP4
+  cumulative control isolates algorithm/operator semantics; the immutable TP8
+  MTP-off baseline remains the performance denominator.
