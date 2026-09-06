@@ -160,3 +160,23 @@ Updated: 2026-09-06
   the launcher, followed by container mount inspection and evidence checksums.
 - Focus the next profile on non-speculative c16 decode, MMAR and dense-FFN
   execution. Do not spend further runs tuning draft depth or acceptance.
+
+## Ascend-native evidence boundary and current bottleneck
+
+- This is an Ascend 910B4 optimization loop. CUDA-only implementations,
+  CUDA/GPU measurements, and cross-platform extrapolations are discovery
+  inputs at most; they are never acceptance evidence.
+- Retained evidence must prove the exact vLLM-Ascend 0.23.0/CANN runtime,
+  physical NPU assignment, BF16, `quantization=None`, and
+  `speculative_config=None`.
+- Dynamic CANN profiling after the GDN gate/up prefetch change still attributes
+  64.9357% of summed kernel duration to collectives and 24.4934% to matmul.
+  `MatmulAllReduceMc2AicpuKernel` alone contributes 48.1818%.
+- Summed kernel duration is not E2E wall time because streams overlap. Use it
+  to select the next hypothesis, then require real query_rewrite A/B evidence.
+- The built-in sequence-parallel compiler pass is not automatically a win:
+  default dense activation starts at 1000 tokens and its pattern expects an
+  all-reduce plus AddRMSNormBias graph. Prove Qwen3.5 graph matching, MMAR
+  interaction, numerical equality, and runtime activation before benchmarking.
+- NPU0-3 are the experiment cards; do not disturb the external workload on
+  NPU4-7.

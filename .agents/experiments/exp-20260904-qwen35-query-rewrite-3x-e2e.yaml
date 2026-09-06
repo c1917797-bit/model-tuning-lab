@@ -1613,3 +1613,33 @@ qwen35_gdn_gateup_prefetch_nospec_v1:
     container_inspect_sha256: 54610a77a294e29aad330215f4eb4297b30f3d75de2c8aee2b3de037a5265163
   resource_release: "candidate container stopped; NPU0-3 released; NPU4-7 external workload unchanged"
   next: "profile non-speculative decode on c16 and target the remaining TPOT/MMAR or dense FFN bottleneck; retain this prefetch treatment only as an ingredient pending repeatability"
+
+ascend_native_policy_20260906:
+  status: active_user_constraint
+  target_stack: "Qwen3.5-27B on vLLM-Ascend 0.23.0/CANN and Ascend 910B4"
+  acceptance_rule: "only real NPU correctness, E2E benchmark and profiling evidence can establish a gain"
+  excluded_as_completion_evidence: [cuda_only_kernel, gpu_only_benchmark, cross_platform_extrapolation, source_only_claim]
+  retained_runtime_contract: "physical NPU0-3, BF16, quantization=None, speculative_config=None"
+  isolation: "do not affect the external workload on physical NPU4-7"
+
+qwen35_gdn_gateup_prefetch_nospec_msprof_v1:
+  status: profiled
+  operation_id: exec-00000000000002d6
+  run_id: tp4-npu03-qwen35-gdn-prefetch0p1-nospec-msprof-v1-20260906T131000Z
+  profile_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-npu03-qwen35-gdn-prefetch0p1-nospec-msprof-v1-20260906T131000Z
+  capture_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/tp4-npu03-qwen35-gdn-prefetch0p1-nospec-msprof-v1-20260906T131000Z
+  runtime: "Ascend 910B4, physical NPU0-3, TP4/DP1, BF16, quantization=None, speculative_config=None"
+  request: "one real query_rewrite request after warmup: 1810 prompt tokens, 104 completion tokens, natural stop"
+  evidence_boundary: "rank0 dynamic CANN diagnostic; summed kernel duration is not wall time because streams overlap"
+  kernel_calls: 162448
+  unique_kernels: 284
+  summed_kernel_duration_us: 6390948
+  categories_pct: {collective: 64.9357, matmul: 24.4934, normalization: 1.5045, gdn_decode: 1.0842, causal_conv1d: 0.6407, attention: 0.6173, gdn_prefill: 0.5666}
+  top_kernels_pct: {MatmulAllReduceMc2AicpuKernel: 48.1818, aclnnMatmul_MatMulCommon_MatMulV2: 23.4185, MatmulAllReduce: 16.6553, AddRmsNormBias: 0.9604}
+  hashes:
+    op_summary_sha256: 45b376e3401961dd3ffb90a92fa7fb45e5c4d185aacf4177011c25ef62c19dc0
+    hotspots_sha256: bd1bcc80ee1e71626055b36d292893564774b8288cb26ad96d8edf18b8648fdb
+    request_sha256: de5684f21f0ddcedd942abad84cf15ba833f27e47fdce75f631bf5d328fbb64e
+    sha256sums_sha256: 70d3970357698a311ee81c1e73326cdcfa99f043c3042dd09a3fbba9dfa9e2ba
+  next: "prove exact Qwen3.5 graph applicability and MMAR interaction for a lossless Ascend communication/graph transformation before a narrow real E2E screen"
+  resource_release: "profiling container stopped; NPU0-3 released; NPU4-7 external workload unchanged"

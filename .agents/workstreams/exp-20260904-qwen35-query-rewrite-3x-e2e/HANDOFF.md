@@ -2535,3 +2535,32 @@ Decision SHA256:
 `d4c7529b6bcd4594f93caf69671cb552994798e793c7139e0da2f0bef77a3e75`.
 All `SHA256SUMS` entries verify, the candidate container stopped, NPU0-3 are
 free, and the external NPU4-7 workload was unchanged.
+
+## Ascend-native boundary and non-speculative profile
+
+This optimization is Ascend-only. Acceptance evidence must come from the
+Qwen3.5-27B vLLM-Ascend 0.23.0/CANN stack on Ascend 910B4; CUDA-only kernels,
+GPU benchmark extrapolation, or a source-only claim cannot establish a gain.
+Every retained run must also prove BF16, `quantization=None`,
+`speculative_config=None`, and the assigned physical NPU set in its runtime
+artifacts.
+
+Dynamic CANN profiling of the conforming prefetch candidate completed as
+`tp4-npu03-qwen35-gdn-prefetch0p1-nospec-msprof-v1-20260906T131000Z`.
+Rank 0 was attached after warmup and served one real query_rewrite request
+(1810 prompt tokens, 104 completion tokens, natural stop). The summed kernel
+duration is diagnostic rather than wall time because NPU streams overlap.
+
+Of 6,390,948 us summed kernel duration, collectives account for 64.9357% and
+matmul for 24.4934%. `MatmulAllReduceMc2AicpuKernel` contributes 48.1818%,
+ordinary matmul 23.4185%, and `MatmulAllReduce` 16.6553%. The next hypothesis
+must therefore target Ascend MMAR/HCCL execution or an Ascend graph
+transformation that reduces or overlaps these serialized row-parallel paths.
+Do not disable retained MMAR or launch sequence parallelism until exact
+vLLM-Ascend graph matching and runtime activation are proved.
+
+Profile root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-npu03-qwen35-gdn-prefetch0p1-nospec-msprof-v1-20260906T131000Z`.
+The op-summary SHA256 is
+`45b376e3401961dd3ffb90a92fa7fb45e5c4d185aacf4177011c25ef62c19dc0`;
+all manifest entries verify. NPU0-3 were released and NPU4-7 were unchanged.
