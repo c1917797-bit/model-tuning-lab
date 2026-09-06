@@ -2,13 +2,13 @@ schema: ascend-inference-experiment/v1
 approved_loop_contract: .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/LOOP.md
 protocol_audit_status: required_before_performance_promotion
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
-status: tp8_dual_baselines_complete_mtp_k1_rejected_k3_ready
-decision: retain_mtp_off_denominator_reject_mtp_k1_start_k3_depth_tuning
+status: non_spec_gdn_gateup_retained_down_prefetch_rejected_continue_tpot_optimization
+decision: retain_gdn_gateup_prefetch_reject_down_prefetch_continue_ascend_mmar_dense_matmul
 objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
   hardware: "8 x Ascend 910B4"
-  topology: "authoritative comparison boundary TP8 / DP1 on physical NPU0-7; historical retained stack TP4 / DP1"
+  topology: "authoritative iteration boundary TP4 / DP1 on physical NPU0-3; physical NPU4-7 are protected external workload"
   model_path: /cache/austinov/Qwen3.8-27B
   model_architecture: Qwen3_5ForConditionalGeneration
   model_config_sha256: 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab
@@ -57,7 +57,7 @@ dual_tp8_baselines:
 loop:
   attribution: "add one primary treatment to the latest accepted stack"
   cumulative: "combine accepted operators, algorithms and parameters"
-  comparison: "compare every new candidate with the immutable repeated TP8/DP1 v5 baseline; retain the TP4/DP1 quick32 history only for attribution and never mix it into the current goal denominator"
+  comparison: "compare every new candidate with the immutable MTP-off TP4/DP1 NPU0-3 baseline whose service log proves speculative_config=None"
 operator_gate:
   requirements: [reference_correctness, repeated_microbenchmark, feature_flagged_vllm_ascend_integration, model_correctness, query_rewrite_fixed_original_comparison, candidate_profile]
 selective_dense_ffn_nz:
@@ -1678,3 +1678,35 @@ qwen35_bf16_dense_npu_ffn_applicability_20260906:
   source_operations: [exec-000000000000037b, exec-000000000000037c]
   resource_release: "no NPU workload was started; physical NPU0-3 remained idle and NPU4-7 external workload was untouched"
   next: "continue with a BF16-compatible Ascend MMAR/dense-matmul transformation; do not retry npu_ffn SwiGLU unless target CANN adds BF16 gated activation support"
+
+qwen35_gdn_gateup_down_prefetch_nospec_v1:
+  status: rejected_from_retained_stack
+  operation_id: exec-0000000000000388
+  run_id: tp4-npu03-qwen35-gdn-gateup-down-prefetch0p1-nospec-v1-20260906T151000Z
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-gateup-down-prefetch0p1-nospec-v1-20260906T151000Z
+  implementation_commit: 5d55ab4fec6d54d64d345b35b05e98b79828f452
+  primary_variable: "on top of retained Qwen3.5 dense gate/up prefetch 0.1, change mlp.down prefetch ratio from 0.0 to 0.1"
+  runtime: "Ascend 910B4, physical NPU0-3, vLLM-Ascend 0.23.0/CANN 9.1.0, TP4/DP1, BF16, quantization=None, speculative_config=None, async scheduling, FULL_DECODE_ONLY"
+  matrix: "one screen repetition at c1/c5/c8/c16; 128/128 requests, zero errors, all natural stops"
+  speedup_vs_frozen_mtp_off:
+    c1: {ttft: {p50: 2.143015, p95: 0.155450, p99: 0.095341}, tpot: {p50: 1.223535, p95: 1.236996, p99: 1.608866}}
+    c5: {ttft: {p50: 2.052521, p95: 1.796953, p99: 1.425016}, tpot: {p50: 1.362598, p95: 1.438652, p99: 1.623544}}
+    c8: {ttft: {p50: 2.064745, p95: 2.225745, p99: 2.225551}, tpot: {p50: 1.392923, p95: 1.726077, p99: 1.794066}}
+    c16: {ttft: {p50: 3.824454, p95: 2.040846, p99: 2.040603}, tpot: {p50: 1.338940, p95: 1.389066, p99: 0.568452}}
+  incremental_p50_ratio_vs_gateup_only:
+    c1: {ttft: 1.050648, tpot: 0.999619}
+    c5: {ttft: 1.012264, tpot: 1.003938}
+    c8: {ttft: 0.975947, tpot: 0.972532}
+    c16: {ttft: 1.822900, tpot: 0.947899}
+  decision: "reject down prefetch from the retained stack: TPOT P50 remains below 2x in every cell, regresses incrementally at c8/c16, and c16 TPOT P99 regresses versus the frozen baseline; the single-run c16 TTFT gain is not sufficient for promotion"
+  quality_gate: "unproven because query_rewrite answer fields are not a meaningful nonempty semantic reference"
+  hashes:
+    config_sha256: 127af920cef85e79934c9419a4f9e9622f425fa623ab144e78754173c79bcee2
+    decision_sha256: a390075b67d6357d0e99f1456fc6a8ed34e5b6dc34efa0a6ff5ce5690972d077
+    service_log_sha256: 609c2eda2269c0fa6b8d05b5526b08fbf4f67f54890360845133517b7b11409f
+    c1_sha256: 190789ce4f886a48274df08a7cfe5cd97e68600e2828eef8a1e08c8199141680
+    c5_sha256: 79ae47cadd6c2cc8efc6c7f5afbeb01f1f88946ae412ea04be6e82d3b88a874f
+    c8_sha256: edfc64368e14e121e6468c8050b8018dfbc8676e211e750dde167ddac89d4720
+    c16_sha256: 82b926e89b73165e1891214e1f1ebb6091a0229f44d0194e0251ec130a612018
+  resource_release: "all manifest hashes verify; exact candidate container and matching processes are absent; NPU0-3 are free; external NPU4-7 workload remained running and untouched"
+  next: "retain gate/up-only prefetch, revert down prefetch to 0.0, and target the profiled Ascend decode bottleneck with a BF16-compatible MMAR/dense-matmul change"

@@ -5,13 +5,13 @@ Updated: 2026-09-06
 ## Authoritative state
 
 - Goal: improve both TTFT and TPOT by 2x without quantization, using cumulative parameter, algorithm and operator treatments.
-- Immutable comparison: BF16 TP8/DP1 baseline v5 on physical NPU0-7 and the first 32 records of `/cache/cch/query_rewrite.jsonl`, repeated three times at c1/c5/c8/c16.
-- Baseline evidence: `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z`.
-- Baseline summary SHA256: `e3e03a5f1a5ce8d3e2d5f35ccf6a410d5d96555ad9012ba5881fd9227246639d`.
-- Current resources after suffix-k15 c1 fail-fast: the exact candidate container exited 0, matching task processes are absent, and NPU0-3 have no running processes. NPU4-7 remain outside this run's scope even when an instantaneous process snapshot is idle.
-- Current decision: reject suffix decoding on the current vLLM-Ascend 0.23.0 integration; retain the frozen non-speculative denominator and return to graph-compatible MMAR/matmul work.
-- Latest TP4/NPU0-3 tail-aware screen `tp4-npu03-mmar-prefetch0p1-hccl1024-static-kernel-v1` completed 128/128 requests with zero errors and natural EOS. It is rejected from promotion: TTFT p50 reaches 2x only at c1/c5, TPOT p50 is only 1.30x-1.42x, and p99 TPOT regresses at c5/c8/c16. Tail-aware decision SHA256: `54c0b690ca3e2c53794457711fa2585d20797365133b17f13e3eb0e955f4fa0a`.
-- The independent local Qwen3.5-4B BF16 draft route is exhausted for vLLM-Ascend 0.23.0. Suffix Decoding was then rejected by a complete c1 P50/P95/P99 fail-fast: synchronous scheduling plus uncaptured speculative batches overwhelmed its 30.18% token acceptance.
+- Immutable comparison: frozen BF16 TP4/DP1 MTP-off baseline on physical NPU0-3 and the first 32 records of `/cache/cch/query_rewrite.jsonl`; its service log proves `speculative_config=None`.
+- Baseline evidence: `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp4dp1-npu03-ref-v1`.
+- Baseline summary SHA256: `cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4`.
+- Current resources after the down-prefetch screen: the exact candidate container and matching processes are absent, NPU0-3 have no running processes, and the external NPU4-7 workload remains running and untouched.
+- Current decision: retain non-speculative Qwen3.5 dense gate/up prefetch 0.1 as a TTFT ingredient; reject adding down-projection prefetch 0.1 and continue with BF16-compatible Ascend MMAR/dense-matmul work.
+- Latest TP4/NPU0-3 screen `tp4-npu03-qwen35-gdn-gateup-down-prefetch0p1-nospec-v1-20260906T151000Z` completed 128/128 requests with zero errors and natural EOS. TPOT P50 speedup is only 1.224x-1.393x, c16 TPOT P99 regresses to 0.568x, and the decision SHA256 is `a390075b67d6357d0e99f1456fc6a8ed34e5b6dc34efa0a6ff5ce5690972d077`.
+- Speculative decoding is prohibited. All MTP, draft-model, suffix, ngram and local-argmax results are history only and cannot be retained or used as completion evidence.
 
 ## What succeeded
 
@@ -70,10 +70,10 @@ Updated: 2026-09-06
 
 1. Read this file, then the latest section of `HANDOFF.md`, the experiment YAML, and `task.json`.
 2. Recheck `git status`, exact branch/HEAD, containers, host processes and the NPU0-7 process table. Recorded idle state is never sufficient.
-3. Verify the TP8 baseline summary hash before computing any ratio.
-4. Obtain explicit approval before stopping p0_r19; do not bypass the guard while it owns NPU4-7.
-5. Start RUNTIME_ROLE=tp4-dp2-fullpiece-user through scripts/run_qwen35_tp8_user_baseline_service.sh, then run one complete c1/c5/c8/c16 screen.
-6. Only if the screen passes predeclared latency/non-regression gates, run the remaining repetitions and full correctness, profiling and decision gates.
+3. Verify the frozen TP4/NPU0-3 MTP-off baseline summary hash before computing any ratio.
+4. Recheck NPU0-3 are idle before use and never stop, restart, or otherwise modify the external NPU4-7 workload.
+5. Resume from the retained gate/up-only prefetch stack with `mlp.down=0.0`; prove Ascend activation and correctness for one BF16-compatible MMAR/dense-matmul treatment before running c1/c5/c8/c16.
+6. Only if the screen passes the predeclared latency and tail gates, run three repetitions plus a meaningful paired semantic-quality gate and candidate profiling.
 
 ## Recovery and rollback
 
@@ -88,7 +88,7 @@ Updated: 2026-09-06
 - MTP k3 screen evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp8-mtp-local-argmax-k3-v2-20260905T215000Z; screen-decision SHA256 6c8698f8a52c1db91f5062f781e085b85101d5372ea7bbf283c544ea9f25ec95.
 - User TP4/DP2 candidate integration: commit a625b2b, config configs/qwen35-query-rewrite-tp4-dp2-fullpiece-user.yaml.
 - Legacy-launcher failure evidence: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-dp2-fullpiece-user-20260905T220500Z.
-- Rollback is the non-speculative TP8 baseline. Do not restart paused external workloads unless the user requests it.
+- Rollback is the frozen non-speculative TP4/NPU0-3 baseline. Never modify the external NPU4-7 workload.
 
 ## Parameter provenance and attribution
 
@@ -237,3 +237,22 @@ Updated: 2026-09-06
   that already violates the frozen BF16 and “精读无损” contracts.
 - Retry only after the target CANN/torch_npu runtime explicitly supports BF16
   gated FFN fusion; a CUDA implementation or an FP16 result is not evidence.
+
+## Down-projection prefetch does not close decode
+
+- Adding `mlp.down=0.1` on top of the retained Qwen3.5 gate/up prefetch
+  completed a real Ascend 910B4 c1/c5/c8/c16 screen with 128/128 requests,
+  zero errors, natural EOS, BF16, `quantization=None`, and
+  `speculative_config=None`.
+- TPOT P50 speedup versus the frozen baseline remained only 1.224x, 1.363x,
+  1.393x and 1.339x. Relative to gate/up-only prefetch, c8 and c16 TPOT P50
+  regressed to about 0.973x and 0.948x.
+- c16 TTFT P50 improved strongly in this single run, but one median cannot
+  override TPOT regressions, c16 TPOT P99 at 0.568x, or the required
+  three-repeat promotion gate.
+- Prefetch each projection independently. Retain gate/up 0.1, restore down
+  to 0.0, and do not retry the same down-prefetch ratio without a new
+  Ascend profile mechanism explaining why decode economics should change.
+- The remaining gap is the profiled collective/matmul path. Candidate
+  selection must stay within vLLM-Ascend/CANN/910B4 and pass BF16 correctness
+  before E2E; CUDA kernels remain discovery input only.

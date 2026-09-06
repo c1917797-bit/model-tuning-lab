@@ -2639,3 +2639,45 @@ The source checks were operations `exec-000000000000037b` and
 for this BF16 dense model unless the installed CANN API adds BF16 gated
 activation support. Physical NPU0-3 remained idle, and the external workload
 on NPU4-7 was not modified.
+
+## Down-projection prefetch screen rejected
+
+Run
+`tp4-npu03-qwen35-gdn-gateup-down-prefetch0p1-nospec-v1-20260906T151000Z`
+completed on real Ascend 910B4 NPU0-3. It changed one variable on top of the
+retained non-speculative stack: `mlp.down` prefetch ratio `0.0 -> 0.1`.
+The engine log proves vLLM-Ascend 0.23.0, CANN 9.1.0, TP4/DP1,
+`device_config=npu`, BF16, `quantization=None`, and
+`speculative_config=None`.
+
+All c1/c5/c8/c16 cells completed: 128/128 requests, zero errors, and all
+natural stops.
+
+| Concurrency | TTFT speedup P50/P95/P99 | TPOT speedup P50/P95/P99 |
+|---:|---:|---:|
+| 1 | 2.143x / 0.155x / 0.095x | 1.224x / 1.237x / 1.609x |
+| 5 | 2.053x / 1.797x / 1.425x | 1.363x / 1.439x / 1.624x |
+| 8 | 2.065x / 2.226x / 2.226x | 1.393x / 1.726x / 1.794x |
+| 16 | 3.824x / 2.041x / 2.041x | 1.339x / 1.389x / 0.568x |
+
+Decision: reject down-projection prefetch from the retained stack. Relative
+to gate/up-only prefetch, TPOT P50 changes by about 1.000x, 1.004x, 0.973x,
+and 0.948x at c1/c5/c8/c16. The single-run c16 TTFT improvement does not
+offset the primary decode regressions, the c16 TPOT P99 regression, or the
+lack of three-repeat evidence. Retain gate/up-only prefetch and restore
+`mlp.down=0.0`.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-gateup-down-prefetch0p1-nospec-v1-20260906T151000Z`.
+Decision SHA256:
+`a390075b67d6357d0e99f1456fc6a8ed34e5b6dc34efa0a6ff5ce5690972d077`.
+Service log SHA256:
+`609c2eda2269c0fa6b8d05b5526b08fbf4f67f54890360845133517b7b11409f`.
+All manifest entries verify. The exact container and matching processes are
+absent, NPU0-3 are free, and the external NPU4-7 workload remains running and
+untouched.
+
+The goal remains incomplete: no non-speculative TPOT P50 cell reaches 2x and
+the semantic `精读无损` gate is still unproven. Resume from the gate/up-only
+prefetch stack and select a BF16-compatible Ascend MMAR/dense-matmul treatment
+using the existing CANN profile; do not retry down prefetch unchanged.
