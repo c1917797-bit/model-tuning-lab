@@ -2616,3 +2616,26 @@ treatment against a profile share of about 0.5666%, so it is not a credible
 route to the outstanding TPOT P50 target. The source worktree was left
 unmodified and uncommitted, NPU0 was released after the probe, and the existing
 NPU4-7 workload was not touched.
+
+## Ascend BF16 dense FFN fusion applicability rejection
+
+The next profile-guided candidate was CANN's native `torch_npu.npu_ffn`
+operator, not a CUDA analogue. The installed vLLM-Ascend 0.23.0 image exposes
+the API, and the CANN operator source documents Atlas A2/910B4 support.
+Qwen3.5-27B uses BF16, hidden size 5120, intermediate size 17408, and a
+SwiGLU MLP; under TP4 the first fused projection would therefore require
+`N1 = 2 * K2`.
+
+The authoritative `npu_ffn` API contract rejects that combination:
+`swiglu/geglu/reglu` fusion is supported only for the no-expert FP16
+high-performance path. BF16 non-quantized execution supports
+`silu/gelu/relu` with `N1 = K2`, which is not Qwen3.5's gated MLP.
+Changing to FP16 or replacing SwiGLU would violate the frozen BF16 and
+lossless-semantic contracts. This is therefore `rejected-applicability`
+before allocating NPU time; no E2E performance claim is made.
+
+The source checks were operations `exec-000000000000037b` and
+`exec-000000000000037c`. Do not retry `npu_ffn(..., activation="swiglu")`
+for this BF16 dense model unless the installed CANN API adds BF16 gated
+activation support. Physical NPU0-3 remained idle, and the external workload
+on NPU4-7 was not modified.

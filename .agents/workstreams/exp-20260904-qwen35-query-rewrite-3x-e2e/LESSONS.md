@@ -222,3 +222,18 @@ Updated: 2026-09-06
 - Do not integrate or benchmark the current fused-GDN patch unchanged. A retry
   requires a CANN/operator precision fix or a predeclared, quality-justified
   tolerance change; neither is authorized by the current “精读无损” goal.
+
+## BF16 dense FFN fusion applicability
+
+- CANN `npu_ffn` is available on Atlas A2/910B4 and supports BF16 for
+  non-gated activations, but availability alone does not make it compatible
+  with Qwen3.5.
+- The operator contract restricts `swiglu/geglu/reglu` to the no-expert FP16
+  high-performance path. Qwen3.5-27B requires BF16 SwiGLU with
+  `N1 = 2 * K2`; the supported BF16 `silu` path instead requires
+  `N1 = K2`.
+- Reject at the static applicability gate when an operator would require a
+  dtype or activation change. Do not spend NPU time benchmarking a candidate
+  that already violates the frozen BF16 and “精读无损” contracts.
+- Retry only after the target CANN/torch_npu runtime explicitly supports BF16
+  gated FFN fusion; a CUDA implementation or an FP16 result is not evidence.

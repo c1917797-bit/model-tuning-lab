@@ -1667,3 +1667,14 @@ qwen35_gdn_prefetch_sequence_parallel_probe_v1:
     sha256sums_sha256: 718355accf230244126b881cdff04b03e52ccf9a6dafd76e534857c6ad711a19
   resource_release: "probe container stopped; NPU0-3 released; NPU4-7 external workload remained running and untouched"
   next: "do not repeat enable_sp with MMAR unchanged; choose an Ascend-native MMAR/HCCL treatment whose activation can be proved without losing c1 graph coverage"
+
+qwen35_bf16_dense_npu_ffn_applicability_20260906:
+  status: rejected_applicability
+  candidate: "CANN torch_npu.npu_ffn for the dense Qwen3.5 MLP"
+  target: "Ascend 910B4/A2, vLLM-Ascend 0.23.0, BF16, TP4"
+  model_contract: "hidden_size=5120, intermediate_size=17408, SwiGLU, BF16, no quantization, speculative_config=None"
+  operator_contract: "BF16 non-quantized npu_ffn supports silu/gelu/relu with N1=K2; gated swiglu/geglu/reglu fusion requires no-expert FP16 high-performance mode and N1=2*K2"
+  decision: "reject before NPU benchmark because satisfying the operator contract would change dtype or activation and violate 精读无损"
+  source_operations: [exec-000000000000037b, exec-000000000000037c]
+  resource_release: "no NPU workload was started; physical NPU0-3 remained idle and NPU4-7 external workload was untouched"
+  next: "continue with a BF16-compatible Ascend MMAR/dense-matmul transformation; do not retry npu_ffn SwiGLU unless target CANN adds BF16 gated activation support"
