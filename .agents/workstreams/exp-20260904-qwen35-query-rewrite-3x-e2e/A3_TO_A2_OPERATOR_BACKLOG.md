@@ -71,3 +71,10 @@ Evidence manifest SHA256:
 `21deab1aa598edb04bfd38f6c88bd30118c3a6b1f04ed244e68cc403d12f964f`.
 Therefore the P0 implementation must preserve or improve fusion rather than
 replacing MMAR with the existing unfused sequence.
+
+The follow-up selective screen also rejects ordinary matmul plus all-reduce
+for attention/GDN `o_proj/out_proj`: TPOT P95 regressed 14.224519% while
+the activated graph retained 384 MMAR occurrences for the complementary
+family. Keep MMAR on this smaller projection family. The source control lives
+at commit `5d2c6e648f75bac11774a1e2886c8b7a65c4c9a2`; this is screening
+infrastructure, not a promoted optimization.

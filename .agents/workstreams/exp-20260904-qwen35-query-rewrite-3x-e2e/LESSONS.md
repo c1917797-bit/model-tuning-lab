@@ -385,3 +385,16 @@ median gains cannot promote a treatment for this objective.
   MMAR; do not merely decompose it.
 - Evidence manifest SHA256:
   `21deab1aa598edb04bfd38f6c88bd30118c3a6b1f04ed244e68cc403d12f964f`.
+
+## Selective MMAR shape-family isolation
+
+- An all-off result can hide opposing family effects, so add a source-level
+  prefix control and prove activation from the compiled graph before drawing
+  shape-specific conclusions.
+- For this stack, disabling MMAR only for attention/GDN `o_proj/out_proj`
+  was decisively worse: c1 TTFT P95 +1.168625% and TPOT P95 +14.224519%.
+  The graph retained 384 MMAR occurrences, so this was not an accidental
+  global disable.
+- Preserve MMAR for the smaller attention/GDN output projection shape. The
+  complementary MLP down-projection screen remains the only unresolved
+  selective decomposition branch.

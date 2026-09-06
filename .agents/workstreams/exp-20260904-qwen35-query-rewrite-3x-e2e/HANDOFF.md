@@ -2953,3 +2953,25 @@ The exact rejected container
 was stopped. The retained MMAR-enabled mode was restarted as
 `qwen35_gdn_proj_fusion_npu03_v4` on physical NPU0-3; NPU4-7 were not
 modified.
+
+## Selective attention/GDN MMAR-off screen rejected
+
+A prefix-selective vLLM-Ascend control was implemented in source commit
+`5d2c6e648f75bac11774a1e2886c8b7a65c4c9a2` with four passing unit tests.
+The first real screen kept MMAR for MLP down projections and routed only
+attention/GDN `o_proj/out_proj` through ordinary matmul plus all-reduce.
+
+The c1 screen completed 32/32 real query_rewrite requests with zero errors,
+32 natural stops, TTFT P95 6371.730095427483 ms and TPOT P95
+32.33907336178116 ms. Against the retained 6298.128575/28.311849 ms
+reference this regressed TTFT by 1.168625% and TPOT by 14.224519%.
+The graph contained 384 MMAR and 768 all-reduce occurrences, proving that
+the selective control activated. Reject this direction unchanged.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-proj-fusion-mmar-attn-off-nospec-screen-v1`.
+Graph SHA256:
+`0602d2c7e7c479b7821e8c988123f868e3b9a168a9852657c0746e46c9bcffac`.
+Manifest SHA256:
+`9588d485594c611ac72a2fb27f0aa0622a9dd8aa5a0ab1c05b59506bc8849da1`.
+The complementary MLP-down-only fallback is now running on physical NPU0-3.
