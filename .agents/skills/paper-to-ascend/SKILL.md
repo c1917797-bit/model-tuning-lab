@@ -83,6 +83,12 @@ exact speculative decoding using the checkpoint's built-in Qwen3.5 MTP head.
 Dynamic MoE is retained as a superseded audit exemplar, not an active
 optimization path for the dense target.
 
+This is not a permanent architecture restriction. Dense is only the current
+verified target at this handoff. Future MoE, quantization, sparse, multimodal,
+or retraining-based work is allowed when the user selects that target and live
+environment orientation proves the matching checkpoint, runtime, and resources
+exist.
+
 For dense inference, prefer methods such as exact speculative/MTP,
 attention/KV/decode improvements, or other inference-time techniques that do
 not require retraining unless retraining is explicitly in scope.
