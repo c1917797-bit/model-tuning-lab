@@ -1,0 +1,48 @@
+{
+  "container_image": "quay.io/ascend/vllm-ascend:v0.23.0",
+  "container_image_digest": "sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a",
+  "model": "Qwen3.8-27B",
+  "checkpoint_sha256_manifest": "REQUIRED_BEFORE_FREEZE",
+  "tensor_parallel_size": 4,
+  "host_npus": [0, 1, 2, 3],
+  "cpu_set": "112-191",
+  "max_num_seqs": 16,
+  "max_model_len": 41984,
+  "max_num_batched_tokens": 16384,
+  "kv_cache_memory_bytes": 14495514624,
+  "prefix_caching": false,
+  "cudagraph_mode": "FULL_DECODE_ONLY",
+  "performance_sampling": {
+    "seed": 0,
+    "temperature": 0,
+    "ignore_eos": true
+  },
+  "quality_generation": {
+    "seed": 0,
+    "temperature": 0,
+    "ignore_eos": false,
+    "enable_thinking": false,
+    "trust_remote_code": false,
+    "prediction_postprocessor": "extract_non_reasoning_content"
+  },
+  "phase_lifecycle": {
+    "health_200_before_each_phase": true,
+    "restart_same_group_between_performance_and_quality": true,
+    "performance_repetitions": 3,
+    "quality_repetitions": 3
+  },
+  "benchmark_environment": {
+    "VLLM_ASCEND_GDN_RRQR_CAPTURE_ENABLE": null,
+    "VLLM_ASCEND_GDN_RRQR_CAPTURE_DIR": null,
+    "VLLM_ASCEND_GDN_RRQR_MAX_TOKENS": null,
+    "VLLM_ASCEND_GDN_RRQR_MAX_CAPTURES_PER_LAYER": null
+  },
+  "load_matrix": [
+    {"name": "decode", "input_tokens": 361, "output_tokens": 32},
+    {"name": "long_prefill", "input_tokens": 4801, "output_tokens": 8}
+  ],
+  "concurrency": "REQUIRED_BEFORE_FREEZE",
+  "request_rate": "REQUIRED_BEFORE_FREEZE",
+  "warmup_policy": "REQUIRED_BEFORE_FREEZE",
+  "metric_parser_version": "REQUIRED_BEFORE_FREEZE"
+}

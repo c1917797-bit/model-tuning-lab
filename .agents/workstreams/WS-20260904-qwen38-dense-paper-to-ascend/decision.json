@@ -1,0 +1,22 @@
+{
+  "schema": "workstream-decision/v1",
+  "status": "reject",
+  "subject": "Qwen3.6-27B GDN Dk128->64 speed oracle on Ascend 910B4",
+  "rationale": [
+    "The source and Dk64 checkpoints both loaded real weights and the treatment exercised head_k_dim=64.",
+    "On the exact 361-input/32-output ignore_eos warm7 workload, median TPOT was 369.1616 ms/token for baseline and 369.1632 ms/token for Dk64: no measurable decode gain.",
+    "Because the performance gate failed before quality qualification, DRRQR construction and native profiling are not justified for this Qwen3.6 target. No accuracy-lossless claim is made."
+  ],
+  "required_for_adopt": [
+    "a materially different implementation or workload hypothesis that first clears the warm performance gate",
+    "G1-G4 orthogonal ablation with three repetitions and mean/std",
+    "second compatible GDN model",
+    "true DRRQR",
+    "correctness and broader quality",
+    "clean warm A/B",
+    "hash-bound profile correlation for G1 versus the unique winning group on both models, with capture disabled and matching frozen/config/treatment bindings",
+    "capture cleanup"
+  ],
+  "accuracy_wording_rule": "Only say accuracy lossless within measured NPU noise on this frozen suite after aggregate, per-dataset/category, deterministic canary, and variance gates pass. A generic 1-2pp threshold alone is insufficient for structural pruning.",
+  "integration_state": "not-ready"
+}

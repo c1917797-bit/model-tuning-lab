@@ -1,0 +1,68 @@
+{
+  "schema": "hypic-previous-practice-reference/v1",
+  "source": {
+    "description": "User-supplied Hypic v0.8.5 manual piercing report, batch_size=32,.txt",
+    "sha256": "c07f0c5b5193377a6ad11d4519a3caf5390d3b3acece9e6e5c50a9ba3ee84504",
+    "provenance": "external reference supplied in the Codex conversation; the original Windows path is not a path on chicaihong01"
+  },
+  "environment": {
+    "model": "Qwen3.5-27B",
+    "tensor_parallel": 2,
+    "vllm_ascend": "0.23.0rc1",
+    "hypic": "0.8.5",
+    "comparison": "HYPIC-only versus no-prefix-cache baseline",
+    "performance_shape": {
+      "input_tokens": 32768,
+      "output_tokens": 1024,
+      "requests": 40,
+      "concurrency": 16
+    },
+    "quality_repetitions": 3
+  },
+  "reported_measurements": {
+    "ttft_ms": {
+      "baseline": 49389.7,
+      "treatment": 26395.3,
+      "reported_change_pct": -46.6
+    },
+    "tpot_ms": {
+      "baseline": 89.87,
+      "treatment": 73.30,
+      "reported_change_pct": -18.4
+    },
+    "output_tokens_per_second": {
+      "baseline": 102.27,
+      "treatment": 141.63,
+      "reported_change_pct": 38.5
+    },
+    "batch_duration_s": {
+      "baseline": 400.5,
+      "treatment": 289.2,
+      "reported_change_pct": -27.8
+    },
+    "quality_accuracy_pct": {
+      "niah_plus": {
+        "baseline": 92.50,
+        "treatment": 92.50,
+        "change_pp": 0.0
+      },
+      "longbench_v2": {
+        "baseline": 54.33,
+        "treatment": 55.38,
+        "change_pp": 1.05
+      },
+      "gsm8k": {
+        "baseline": 98.67,
+        "treatment": 98.50,
+        "change_pp": -0.17
+      },
+      "ceval": {
+        "baseline": 32.47,
+        "treatment": 32.59,
+        "change_pp": 0.12,
+        "excluded_from_current_run": true
+      }
+    }
+  },
+  "comparison_boundary": "External experience, not an apples-to-apples denominator. The active historical-ruler reproduction matches the no-prefix-cache versus Hypic-only question but uses Qwen3.6-27B, TP4, four 910B4 cards and the current image instead of Qwen3.5-27B, TP2 and two 910C cards. The completed PDC+Hypic versus PDC-only experiment is a separate question. Compare direction and relative deltas only; never pool absolute latency, throughput or quality."
+}

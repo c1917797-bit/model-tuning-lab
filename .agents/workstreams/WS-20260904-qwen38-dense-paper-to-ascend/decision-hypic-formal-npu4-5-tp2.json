@@ -1,0 +1,26 @@
+{
+  "schema": "paper-to-ascend-decision/v1",
+  "decision_id": "hypic-qwen36-formal-npu4-5-tp2-20260906",
+  "status": "pending-waiting-for-resource",
+  "current_decision": "no-decision",
+  "reason": "The fresh two-card TP2 baseline and treatment have not produced measurements. The long-running controller is safely waiting because external container p0_mp currently occupies NPU4-7.",
+  "allowed_claims": [
+    "The employee successful practice used two Ascend 910C cards and TP2.",
+    "The current formal case uses two free Ascend 910B4 cards, host NPU4-5, and TP2.",
+    "The current case has a new baseline, new treatment and new artifact root and does not reuse TP4 measurements.",
+    "The preflight and controller self-test passed."
+  ],
+  "forbidden_claims": [
+    "The employee gain has reproduced.",
+    "Hypic improves or regresses Qwen3.6-27B TP2.",
+    "Qwen3.5-27B and Qwen3.6-27B absolute results are directly interchangeable.",
+    "TP4 baseline evidence can be pooled with this TP2 case."
+  ],
+  "next_gate": "Start the controller, complete fresh baseline and treatment performance and quality, verify Hypic hot-path evidence, then render the hash-bound decision.",
+  "integration_state": "not-ready",
+  "publish": {
+    "commit": false,
+    "push": false,
+    "reason": "No Git identity fabrication or push is authorized."
+  }
+}

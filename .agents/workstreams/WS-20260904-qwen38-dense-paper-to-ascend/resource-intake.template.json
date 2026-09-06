@@ -1,0 +1,32 @@
+{
+  "schema": "paper-to-ascend-resource-intake/v1",
+  "benchmark_bundle": {
+    "path": "REQUIRED_ABSOLUTE_PATH",
+    "sha256": "REQUIRED_TREE_OR_FILE_SHA256"
+  },
+  "datasets": [
+    {"name": "NIAH+", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"},
+    {"name": "LongBench v2", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"},
+    {"name": "GSM8K", "path": "/cache/austinov/eval-data/general/prepared/gsm8k_test.jsonl", "sha256": "REQUIRED"},
+    {"name": "CEval", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"}
+  ],
+  "evaluation_assets": [
+    {"id": "longbenchv2_gen", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"},
+    {"id": "vllm_api_general_chat", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"},
+    {"id": "performance_driver", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"},
+    {"id": "quality_postprocessor", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"},
+    {"id": "metric_parser", "path": "REQUIRED_ABSOLUTE_PATH", "sha256": "REQUIRED"}
+  ],
+  "drrqr": {
+    "implementation": null,
+    "checkpoints": [
+      {"model_id": "qwen38-27b", "path": "REQUIRED_OR_NULL", "sha256": "REQUIRED_OR_NULL"},
+      {"model_id": "qwen35-4b", "path": "REQUIRED_OR_NULL", "sha256": "REQUIRED_OR_NULL"}
+    ]
+  },
+  "provenance": {
+    "owner": "REQUIRED",
+    "version_or_commit": "REQUIRED",
+    "received_at_utc": "REQUIRED"
+  }
+}

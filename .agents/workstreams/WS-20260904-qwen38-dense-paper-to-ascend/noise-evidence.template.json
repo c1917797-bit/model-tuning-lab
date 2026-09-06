@@ -1,0 +1,15 @@
+{
+  "schema": "paper-to-ascend-g1-noise/v1",
+  "fixture_only": false,
+  "method": "max_within_cell_range_pp",
+  "expected_repetitions": 3,
+  "noise_threshold_pp": "REQUIRED_MAX_WITHIN_CELL_RANGE_PP",
+  "source_quality_results": "REQUIRED_ABSOLUTE_PATH",
+  "source_quality_results_sha256": "REQUIRED",
+  "global_bindings": {
+    "frozen_inputs_sha256": "REQUIRED",
+    "invariant_config_sha256": "REQUIRED",
+    "treatment_matrix_sha256": "REQUIRED"
+  },
+  "observations": []
+}

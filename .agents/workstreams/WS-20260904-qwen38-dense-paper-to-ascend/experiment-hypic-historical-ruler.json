@@ -1,0 +1,71 @@
+{
+  "schema": "paper-to-ascend-experiment/v1",
+  "experiment_id": "hypic-qwen36-historical-ruler-20260905",
+  "status": "paused-by-operator",
+  "objective": "Reproduce the employee no-prefix-cache versus Hypic-only workload on the current Qwen3.6-27B TP4 environment without pooling it with PDC coexistence evidence.",
+  "target": {
+    "model": "Qwen3.6-27B",
+    "checkpoint": "/cache/efim/Qwen3.6-27B",
+    "tensor_parallel": 4,
+    "accelerator": "Ascend 910B4",
+    "host_devices": [0, 1, 2, 3],
+    "cpu_set": "112-191",
+    "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "hypic_version": "0.8.5",
+    "hypic_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f"
+  },
+  "arms": {
+    "baseline": "native prefix cache disabled; Hypic disabled",
+    "treatment": "native prefix cache disabled; Hypic enabled",
+    "only_algorithm_switch": "VLLM_ASCEND_HYPIC_ENABLE"
+  },
+  "performance_ruler": {
+    "input_tokens": 32768,
+    "shared_prefix_tokens": 16384,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "warmup_requests": 2,
+    "ignore_eos": true,
+    "repetitions_per_arm": 3
+  },
+  "quality_ruler": {
+    "dataset_selection_source": "operator-supplied successful Hypic practice",
+    "datasets": ["LongBench-v2", "GSM8K"],
+    "temperature": 0,
+    "seed": 0,
+    "thinking": false,
+    "ignore_eos": false,
+    "max_output_tokens": 1024,
+    "concurrency": 32,
+    "repetitions_per_arm_and_dataset": 3,
+    "ceval": "listed in the successful practice but excluded by operator",
+    "niah_plus": "listed in the successful practice but not runnable; authoritative files absent and no substitution allowed"
+  },
+  "isolation": {
+    "allowed": "host NPU0-3 and CPU112-191 only",
+    "forbidden": "host NPU4-7 and every workload mapped to them",
+    "baseline_container": "qwen36_hypic_nocache_baseline_npu0_3",
+    "treatment_container": "qwen36_hypic_only_npu0_3",
+    "port": 8223,
+    "simultaneous_arms": false
+  },
+  "progress": {
+    "baseline_performance": "3 of 3 complete and validated",
+    "baseline_longbenchv2": "1 of 3 complete and validated",
+    "baseline_gsm8k": "0 of 3",
+    "treatment_performance": "0 of 3",
+    "treatment_longbenchv2": "0 of 3",
+    "treatment_gsm8k": "0 of 3",
+    "profile": "not collected",
+    "next_incomplete_unit": "baseline LongBench-v2 run 2"
+  },
+  "controller": {
+    "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/resume_hypic_historical_reproduction.sh",
+    "last_operation_id": "exec-00000000000005b0",
+    "last_operation_state": "terminated-by-operator-pause",
+    "resume_requires": "explicit operator instruction"
+  },
+  "interpretation_boundary": "Historical Qwen3.5-27B TP2 results are comparable by direction and relative delta only. No treatment result exists yet for the current Qwen3.6-27B TP4 experiment.",
+  "topology_change_rule": "Card count and tensor parallelism are frozen. A two-card TP2 attempt is a separate feasibility experiment with new baseline, artifact root and decision; it must not resume or pool this TP4 evidence."
+}

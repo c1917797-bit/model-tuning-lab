@@ -1,0 +1,114 @@
+{
+  "payload": {
+    "model": "qwen36-27b-hypic-baseline",
+    "prompt": "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. ",
+    "temperature": 0,
+    "seed": 1234,
+    "max_tokens": 32,
+    "ignore_eos": true,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "rows": [
+    {
+      "phase": "warmup",
+      "run": 1,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2529.004849959165,
+      "e2e_ms": 13957.25229009986,
+      "tpot_ms": 368.653143230345,
+      "sha256": "cf33d80ff1b235d9119217004dd536c523e1d0b06f8be41b0a669ceb5b6e15d1"
+    },
+    {
+      "phase": "warmup",
+      "run": 2,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2551.600969862193,
+      "e2e_ms": 13983.788749901578,
+      "tpot_ms": 368.7802509690124,
+      "sha256": "da8c502c701c65de48eb434d86383181a35baded2f8aa580468c48c3791cc767"
+    },
+    {
+      "phase": "steady",
+      "run": 1,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2137.1075599454343,
+      "e2e_ms": 13979.915590025485,
+      "tpot_ms": 382.0260654864532,
+      "sha256": "34efa981471479fc1eed7b3f03604f0c4e4bbddf7b36ddf8b7d21fb199839bfc"
+    },
+    {
+      "phase": "steady",
+      "run": 2,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2623.7569900695235,
+      "e2e_ms": 14092.06943004392,
+      "tpot_ms": 369.9455625798193,
+      "sha256": "cf33d80ff1b235d9119217004dd536c523e1d0b06f8be41b0a669ceb5b6e15d1"
+    },
+    {
+      "phase": "steady",
+      "run": 3,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2587.714649969712,
+      "e2e_ms": 14051.799269858748,
+      "tpot_ms": 369.80918128674307,
+      "sha256": "cf33d80ff1b235d9119217004dd536c523e1d0b06f8be41b0a669ceb5b6e15d1"
+    },
+    {
+      "phase": "steady",
+      "run": 4,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2575.7896997965872,
+      "e2e_ms": 14019.800319802016,
+      "tpot_ms": 369.1616329034009,
+      "sha256": "cf33d80ff1b235d9119217004dd536c523e1d0b06f8be41b0a669ceb5b6e15d1"
+    },
+    {
+      "phase": "steady",
+      "run": 5,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2639.813550049439,
+      "e2e_ms": 14067.938670050353,
+      "tpot_ms": 368.64919741938434,
+      "sha256": "cf33d80ff1b235d9119217004dd536c523e1d0b06f8be41b0a669ceb5b6e15d1"
+    },
+    {
+      "phase": "steady",
+      "run": 6,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2571.708499919623,
+      "e2e_ms": 14000.025139888749,
+      "tpot_ms": 368.655375482875,
+      "sha256": "da8c502c701c65de48eb434d86383181a35baded2f8aa580468c48c3791cc767"
+    },
+    {
+      "phase": "steady",
+      "run": 7,
+      "prompt_tokens": 361,
+      "output_tokens": 32,
+      "ttft_ms": 2531.633510021493,
+      "e2e_ms": 13971.86236991547,
+      "tpot_ms": 369.0396406417412,
+      "sha256": "cf33d80ff1b235d9119217004dd536c523e1d0b06f8be41b0a669ceb5b6e15d1"
+    }
+  ],
+  "summary": {
+    "ttft_median_ms": 2575.7896997965872,
+    "tpot_median_ms": 369.1616329034009,
+    "e2e_median_ms": 14019.800319802016,
+    "tpot_mean_ms": 371.040950828631,
+    "tpot_stdev_ms": 4.870633225338361,
+    "all_outputs_identical": false
+  }
+}

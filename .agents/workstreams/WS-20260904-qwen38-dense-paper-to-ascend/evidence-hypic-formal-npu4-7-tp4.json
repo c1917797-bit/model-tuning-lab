@@ -1,0 +1,31 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "hypic-qwen36-formal-npu4-7-tp4-20260906",
+  "status": "diagnostic-invalid-hot-path-budget-deadlock",
+  "last_verified_at": "2026-09-06T11:18:48Z",
+  "resource_evidence": {"owned_lane": "NPU4-7", "tensor_parallel": 4, "cpu_set": "0-95", "port": 8224, "protected_lane": "NPU0-3 unchanged"},
+  "baseline": {
+    "performance": {
+      "runs": [
+        {"run": 1, "duration_s": 342.8165725301951, "ttft_mean_ms": 40871.2523232738, "tpot_mean_ms": 76.04278536729778, "output_tokens_per_second": 119.4808048446732, "sha256": "62512a8ff7422b4328f4093bbfe8f3ab1bc8a2fa1a0875528abfaefad85f9be2"},
+        {"run": 2, "duration_s": 318.5113322502002, "ttft_mean_ms": 37493.44473773963, "tpot_mean_ms": 72.57074434287438, "output_tokens_per_second": 128.59825021178426, "sha256": "941f0b8d2903e9ee65d75facdccab8835a077dd7993434f8934e5ba1156014af"},
+        {"run": 3, "duration_s": 318.5222764899954, "ttft_mean_ms": 37486.25636725919, "tpot_mean_ms": 72.56801312023234, "output_tokens_per_second": 128.5938316508501, "sha256": "c7dc6192a67d37878b802fa35b174fe077e6946b976b8a2ca009ec42764a7f3a"}
+      ],
+      "mean": {"duration_s": 326.61672709013027, "ttft_mean_ms": 38616.984476090875, "tpot_mean_ms": 73.72718094346817, "output_tokens_per_second": 125.55762890243585}
+    },
+    "longbenchv2": {
+      "runs": [
+        {"run": 1, "accuracy_pct": 45.669291338582674, "correct": 58, "requests": 127, "failed": 0, "details_sha256": "517cb276a920b2a2cf09fdbe39a92c9e3aa784ea9d0b5c2edf9606c4942804e8"},
+        {"run": 2, "accuracy_pct": 48.818897637795274, "correct": 62, "requests": 127, "failed": 0, "details_sha256": "cba734cf27625477e165758243ed2b39c05bcba039b638c5c3a71a71fc34cafb"},
+        {"run": 3, "accuracy_pct": 46.45669291338583, "correct": 59, "requests": 127, "failed": 0, "details_sha256": "c1a64e8010a95ae37967d769123ac120b96377a2a3cf184f61c5a75e25436a1e"}
+      ],
+      "mean_accuracy_pct": 46.98162729658793,
+      "population_stddev_pp": 1.3383253316516495,
+      "range_pp": 3.1496062992126
+    },
+    "gsm8k": {"status": "complete", "runs": [{"run": 1, "requests": 1319, "successful": 1319, "failed": 0, "correct": 1268, "accuracy_pct": 96.13343442001516, "details_sha256": "43c0fdc5f79e1548ba1c00fca24938a4745955ae7d3b822ee8018188b1517d5c", "summary_sha256": "1d8592f5b6585df36b430901b9be0a3e43320d084f13f2d129304b33e667ffe8"}, {"run": 2, "requests": 1319, "successful": 1319, "failed": 0, "correct": 1266, "accuracy_pct": 95.98180439727066, "details_sha256": "61a3ea0c286f7086afaaa9fec9850c8ebfc8d07159a7757830191b231349e425", "summary_sha256": "7a8cd83e112f145b7a49d0dbf075aff66cc12cea4298d23b1da870085adafebe"}, {"run": 3, "requests": 1319, "successful": 1319, "failed": 0, "correct": 1269, "accuracy_pct": 96.20924943138742, "details_sha256": "35898d35a286f0b9ec095dff34a24b969fb2141eba5873206c2c06849fe5aa71", "summary_sha256": "f6b210481a45fc332ef5608a7f35ccf43b372e08ff329857c325c29d7c34f71a"}]}
+  },
+  "treatment": {"status": "diagnostic-run1-rejected", "container": "qwen36_hypic_only_npu4_7_tp4", "started_at": "2026-09-06T10:43:24Z", "finished_at": "2026-09-06T10:58:05Z", "requests": 40, "successful": 40, "failed": 0, "fixed_output_tokens": 1024, "duration_s": 347.4392451301683, "ttft_mean_ms": 41574.92898427881, "tpot_mean_ms": 76.69862251589257, "output_tokens_per_second": 117.89111499092256, "hot_path_verified": false, "materialization_ready": true, "verified_hot_requests": 0, "verified_skipped_tokens": 0, "missing_required_signals": ["scheduler_hot_path", "worker_hot_path", "physical_kv_layout", "complete_hybrid_repair", "position_independent_scheduler", "position_independent_kv_grouped_replay", "position_independent_gdn_vectorized", "mixed_batch_native_decode_isolated"], "root_cause": "physical replay demand was 16392 tokens but max_num_batched_tokens was 16384; the strict gate correctly rejected a materialization-only run", "artifacts": {"performance_json_sha256": "88172812f9b9a89b2153bd9a95a2491c0bf33256bc465a7077b7f9b236c32d1f", "performance_log_sha256": "acc547bcfc0ba74268a406d6a8f17bb0461a15370e3318f32f163db7ddb9809f", "hypic_evidence_sha256": "a6236c023da7c300a2bbb9dec281b6d7fa487c0ee5f889663721b646508ff879"}},
+  "profiling": {"status": "not-started", "rule": "conditional on completed performance and quality gates"},
+  "prohibited_inference": "No HYPIC benefit, regression or historical reproduction claim is authorized until both arms complete and the final hashes pass audit."
+}

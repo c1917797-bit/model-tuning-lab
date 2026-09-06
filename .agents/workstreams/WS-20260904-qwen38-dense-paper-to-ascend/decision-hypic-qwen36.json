@@ -1,0 +1,46 @@
+{
+  "schema": "paper-to-ascend-decision/v1",
+  "decision_id": "hypic-qwen36-pdc-coexistence-20260904",
+  "status": "final",
+  "current_decision": "reject-adoption",
+  "adoption": "rejected-for-current-configuration",
+  "confirmed": [
+    "Qwen3.6-27B checkpoint is complete and serves with TP4.",
+    "Both formal performance arms completed 40 of 40 requests with 1024 output tokens.",
+    "Hypic strict runtime hooks and the intended C1/C2 hot path activated.",
+    "Treatment improved mean TTFT by 16.8893 percent and throughput by 1.0473 percent versus the PDC-only baseline.",
+    "A warmed PDC baseline is itself not output-hash deterministic for the pathological repeated prompt.",
+    "The reproducible PDC-baseline active semantic relocation canary passed at 32768 input tokens and returned ZEBRA-41729.",
+    "The identical PDC+Hypic active semantic relocation canary passed with matching prompt, public-segment and response hashes.",
+    "The verified PDC-only rank0 native profile completed with zero profiler and workload exit codes and 228 non-empty profile files.",
+    "PDC baseline LongBench-v2 and GSM8K each completed three repetitions with zero failed requests.",
+    "PDC+Hypic LongBench-v2 completed three 127-of-127 zero-failure runs at 48.031496, 44.094488 and 44.881890 percent accuracy; mean 45.669291 percent, population standard deviation 1.700982pp and range 3.937008pp.",
+    "The LongBench-v2 treatment mean is +0.524934pp over the baseline mean, only 22.2 percent of the baseline 2.362205pp repeated-run range; matching-run deltas change sign, so this is not a demonstrated quality improvement.",
+    "PDC+Hypic GSM8K run1 completed 1319 of 1319 requests with zero failures, 1271 correct and 96.360879 percent accuracy; its details and summary hashes are preserved.",
+    "PDC+Hypic GSM8K run2 completed 1319 of 1319 requests with zero failures, 1267 correct and 96.057619 percent accuracy; its details and summary hashes are preserved.",
+    "PDC+Hypic GSM8K run3 completed 1319 of 1319 requests with zero failures, 1264 correct and 95.830174 percent accuracy. The treatment three-run mean is 96.082891 percent, population standard deviation 0.217395pp, range 0.530705pp and -0.176902pp versus the baseline mean.",
+    "The PDC+Hypic rank0 native profiler exited zero and preserved 234 non-empty payload files totaling 184536157 bytes from a strict 4-of-4 successful fixed-output capture stimulus.",
+    "The treatment profile keeps the raw benchmark exit code 1 because algorithm coexistence acceptance remained false; capture success was not used to claim algorithm success.",
+    "All four exact experiment containers are exited, no owned evaluator/controller/profiler process remains, and the non-volatile final evidence audit passed with zero errors."
+  ],
+  "failed_or_open_gates": [
+    "The observed throughput and duration gains are about one percent and do not reproduce the magnitude of the prior Qwen3.5/TP2/Hypic-only result.",
+    "Weighted TPOT is effectively flat.",
+    "Full coexistence verification is false because mixed_decode_latency_protection and mixed_decode_grouped_reclaim signals are missing.",
+    "Exact baseline-treatment output hashes differ, while baseline repeat nondeterminism prevents attributing the mismatch solely to Hypic.",
+    "PDC baseline and PDC+Hypic LongBench-v2 and GSM8K three-run evidence are complete with zero request failures. The treatment GSM8K mean delta is within baseline repeated-run range, but its run3 matching delta is -0.682335pp and treatment range exceeds baseline range, so an accuracy-lossless claim is not authorized.",
+    "NIAH+ is blocked because the authoritative NeedleBench data files are absent.",
+    "Both native profiles are complete, but the treatment capture itself confirms incomplete coexistence rather than resolving it.",
+    "Paper C3 distributed scatter/transfer is not implemented in this single-instance test."
+  ],
+  "interim_rule": "Final fail-closed rule: do not claim deployable, accuracy-lossless, paper-complete, or equal to the prior result for this configuration.",
+  "next_gate": "None for the current configuration. Reopen only for a materially different implementation that restores every coexistence signal, adds authoritative NIAH+ evidence, and repeats the frozen A/B ruler.",
+  "final_rationale": "Reject adoption: TTFT improved materially, but throughput and duration improved only about one percent, TPOT was flat, full coexistence and paper C3 are absent, and the available repeated quality evidence does not establish losslessness.",
+  "comparison_record": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic-current-vs-previous-comparison.json",
+  "final_evidence_audit": {
+    "path": "/cache/cch/hypic-qwen36-piercing-20260904/final-evidence-audit.json",
+    "sha256": "078d0626afe615debb5eae829b754c4c30844740dad667155f5a81bfce20bf1c",
+    "ok": true,
+    "errors": 0
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "hypic-qwen36-pdc-coexistence-20260904",
+  "evidence": [
+    {
+      "id": "formal-pdc-baseline",
+      "path": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-baseline/native_prefix_baseline.run2.json",
+      "sha256": "98ad182273fb0affe2ae88fcbbfc4e0ac4659af6e8f0a626922ae335cb756adc",
+      "interpretation": "Authoritative PDC-only baseline: 40/40 complete, 40960 generated tokens."
+    },
+    {
+      "id": "formal-pdc-hypic-treatment",
+      "path": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-hypic/pdc_hypic_treatment.run1.json",
+      "sha256": "aa2420bed5712813ddfff6744fb5c870deaf56f135a2ffd6b3bd35886ebe9b61",
+      "interpretation": "Authoritative PDC+Hypic treatment: 40/40 complete, intended C1/C2 hot path active."
+    },
+    {
+      "id": "hypic-runtime-events",
+      "path": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-hypic/hypic-evidence.jsonl",
+      "sha256": "32f2135dd2099ef87847d8cc7cad3fbee0e263628e727fbc390eb15935b18e2b",
+      "interpretation": "Materialization and hybrid repair succeeded without recorded failure, but full coexistence signals are incomplete."
+    },
+    {
+      "id": "treatment-independent-verification",
+      "path": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-hypic/independent-verification.json",
+      "sha256": "f8117aba079914d726159a451f28d9b01b08b872efa6da4a6bb03b331e392c56",
+      "interpretation": "Independent count/hash/metric verification of the treatment artifact."
+    },
+    {
+      "id": "previous-real-practice-reference",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic-previous-practice-reference.json",
+      "sha256": "3cd4e298945acaf26df7aaaa2d32974ef6cebb9f6fbe850c519746762fb57784",
+      "source_path": "C:/Users/Huawei/Desktop/batch_size=32,.txt",
+      "source_sha256": "c07f0c5b5193377a6ad11d4519a3caf5390d3b3acece9e6e5c50a9ba3ee84504",
+      "interpretation": "Historical Qwen3.5/TP2 real measurement used for relative-delta context only."
+    },
+    {
+      "id": "current-versus-previous-comparison",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic-current-vs-previous-comparison.json",
+      "sha256": "f4b81af65be4bf3f511b19fd331b4b2223647ae04f30acc5528c2cc08f81d635",
+      "interpretation": "Machine-readable comparison of the current real Qwen3.6 measurements with the supplied real Qwen3.5 report, with the non-apples-to-apples boundary made explicit."
+    },
+    {
+      "id": "pdc-baseline-active-semantic-canary",
+      "path": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-baseline/active_semantic_canary_reproducible.json",
+      "sha256": "9193e45cf414bcb380676bdc872b0e59063166e90e6fcff52a73d478c59e3cbc",
+      "interpretation": "Exact 32768-token active relocation ruler passed on the PDC baseline and returned ZEBRA-41729; prompt and public-segment hashes are preserved for the treatment comparison."
+    },
+    {
+      "id": "pdc-hypic-active-semantic-canary",
+      "path": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-hypic/active_semantic_canary_reproducible.json",
+      "sha256": "d3e7128978a887a75cd376e087fbbd8fbcb94cfb8813f736fd8f6513e3e50b66",
+      "interpretation": "The exact 32768-token active relocation ruler passed on PDC+Hypic and returned ZEBRA-41729 with prompt, public-segment and response hashes identical to the baseline canary."
+    },
+    {
+      "id": "pdc-baseline-longbench-v2-run1",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/longbenchv2.run1.jsonl",
+      "details_sha256": "3e6957c2d54fc29d98e57da5f84647ebc22b6f372b02cccc4a554572040f8f30",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/longbenchv2.run1.summary.json",
+      "summary_sha256": "c0fc5a14bfdbeca9273e19ce304821664d94d2cfc763fa35a607f1f48094d02a",
+      "interpretation": "127/127 successful, 56 correct, 44.09448818897638%."
+    },
+    {
+      "id": "pdc-baseline-longbench-v2-run2",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/longbenchv2.run2.jsonl",
+      "details_sha256": "c169dffaf3f4ea54506018db00568b7425370f68ff3938f2bdd9b60e6f702a69",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/longbenchv2.run2.summary.json",
+      "summary_sha256": "74dfdd04787aa4eddb439550ad83c3f27c9ec8f98d3e7d96ef1e2136116bc9d9",
+      "interpretation": "127/127 successful, 57 correct, 44.881889763779526%."
+    },
+    {
+      "id": "pdc-baseline-longbench-v2-run3",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/longbenchv2.run3.jsonl",
+      "details_sha256": "175af6ed8a9620f5319373cb7cfb583c1b32cff4a86611c7b9e2932b673f1e72",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/longbenchv2.run3.summary.json",
+      "summary_sha256": "92a597c6d71a9fb3ea8e36594b198c4c31865a78d47ce48f4b0a175b527fb193",
+      "interpretation": "127/127 successful, 59 correct, 46.45669291338583%."
+    },
+    {
+      "id": "pdc-baseline-gsm8k-run1",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/gsm8k.run1.jsonl",
+      "details_sha256": "40254422ed6e221a6bde0349bbf610cb83ae86c8a26cf4380cad072c5b6d9e91",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/gsm8k.run1.summary.json",
+      "summary_sha256": "a260a095b52457fa9cb2039f0161c294c97ab9f7838d00cb87fa7d19892dab02",
+      "interpretation": "1319/1319 successful, 1269 correct, 96.20924943138742%; 24 responses reached the 1024-token cap."
+    },
+    {
+      "id": "pdc-baseline-gsm8k-run2",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/gsm8k.run2.jsonl",
+      "details_sha256": "4439d1536722b7413db397428c0a1a5b587d2193490ab53238ddda1f2b1b237a",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/gsm8k.run2.summary.json",
+      "summary_sha256": "fc00cdf0386e74521e71bdce7ef7e531045ad2bfb7d28825ed45bb712d7fd982",
+      "interpretation": "1319/1319 successful, 1267 correct, 96.0576194086429%; 25 responses reached the 1024-token cap."
+    },
+    {
+      "id": "pdc-baseline-gsm8k-run3",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/gsm8k.run3.jsonl",
+      "details_sha256": "b72e8e579e985cb40bac940032a0504e3f152e40805a73ff5142d39b663513b4",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-baseline/gsm8k.run3.summary.json",
+      "summary_sha256": "00528e2a5b9a99c822d8c2234150109b39a9bce4caa9a85f66f0bbd0165ab733",
+      "interpretation": "1319/1319 successful, 1273 correct, 96.51250947687642%; 23 responses reached the 1024-token cap."
+    },
+    {
+      "id": "pdc-baseline-native-profile",
+      "manifest_path": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline/profile-manifest.json",
+      "manifest_sha256": "f1ec0d5d7a8257f8e7033e61233edc1975ac5a7d7cc47a0312f641232c79aa5b",
+      "workload_path": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline/profile-workload.json",
+      "workload_sha256": "85dc8b447f8e46e4ac84d00bac64610c1b5269e9d21c5428f4f400b174b5a211",
+      "interpretation": "Verified rank0 dynamic native profile: profiler and workload both exited zero, 4/4 workload requests completed, and 228 non-empty profile files totaling 175150491 bytes were preserved."
+    },
+    {
+      "id": "pdc-hypic-native-profile",
+      "manifest_path": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic/profile-manifest.json",
+      "manifest_sha256": "3adbf72f2da13a25d37796b30e873abb46e5d79503dac89624bb62a0142623f6",
+      "workload_path": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic/profile-workload.json",
+      "workload_sha256": "81b4beb0d3bc4cd220c9a118627c8183dcac5067286a2a979d7bef2a55a90fd3",
+      "interpretation": "Verified rank0 dynamic native capture: profiler exited zero; 4/4 fixed-output workload requests succeeded; 234 non-empty profile files totaling 184536157 bytes were preserved. The raw benchmark exit remains 1 and algorithm acceptance remains false because coexistence signals are incomplete."
+    },
+    {
+      "id": "pdc-hypic-longbench-v2-run1",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/longbenchv2.run1.jsonl",
+      "details_sha256": "4fa3bd52a3767a713688c12c1205a34972f2d4b33444cbc941e0ba36ab4cb454",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/longbenchv2.run1.summary.json",
+      "summary_sha256": "f6b05215981c3bfd1a5f6f61cbc00d09d66a1e6ce32cef102256874b9e5e9cfc",
+      "interpretation": "127/127 successful, 61 correct, 48.031496062992126%; provisional +3.937007874015748pp versus matching baseline run1 and not a final quality conclusion."
+    },
+    {
+      "id": "pdc-hypic-longbench-v2-run2",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/longbenchv2.run2.jsonl",
+      "details_sha256": "dca7acb5b93d772a5bd9a3cf8e85ecd487a8a5ce4087df59bd0a166cbafb1971",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/longbenchv2.run2.summary.json",
+      "summary_sha256": "c611b31a890119f2089a0104e6fbfe8d275272d84c5875e1662e9cbe1d9b6b7c",
+      "interpretation": "127/127 successful, 56 correct, 44.09448818897638%; -0.7874015748031482pp versus matching baseline run2 and not a final quality conclusion."
+    },
+    {
+      "id": "pdc-hypic-longbench-v2-run3",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/longbenchv2.run3.jsonl",
+      "details_sha256": "08cae3155c1bf19dcbadf69e9396e8ab9c4d9058bff54e02474e27cbf255a841",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/longbenchv2.run3.summary.json",
+      "summary_sha256": "c5c8391d0da62ed32a10da494f14e0e27cf93e8154da0d59eae219873dbb011d",
+      "interpretation": "127/127 successful, 57 correct, 44.881889763779526%. The three-run treatment mean is 45.669291%, +0.524934pp versus baseline mean but within baseline repeated-run noise."
+    },
+    {
+      "id": "pdc-hypic-gsm8k-run1",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/gsm8k.run1.jsonl",
+      "details_sha256": "8beba588a38cb9c3d721015c28ba4b1a19978479721ee4404406acea9dee2223",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/gsm8k.run1.summary.json",
+      "summary_sha256": "19458d4064d49a113c13932397c60248c55017061cc207ebe8a63be3b6412494",
+      "interpretation": "1319/1319 successful, zero failed, 1271 correct, 96.36087945413192%; run2 and run3 remain required before comparison."
+    },
+    {
+      "id": "pdc-hypic-gsm8k-run2",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/gsm8k.run2.jsonl",
+      "details_sha256": "588af4ca94f2798525abe594c5d2417158e0133574245ac4f7fa8cf6c833011d",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/gsm8k.run2.summary.json",
+      "summary_sha256": "6c956557c5e67fd9086aecf8fca6340529f1b3a76f4d1ba9e6c534abdeceba07",
+      "interpretation": "1319/1319 successful, zero failed, 1267 correct, 96.0576194086429%; the provisional treatment two-run mean is 96.20924943138742%, and run3 remains required before comparison."
+    },
+    {
+      "id": "pdc-hypic-gsm8k-run3",
+      "details_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/gsm8k.run3.jsonl",
+      "details_sha256": "86c05189a09e5d121f1a4d76a967247a6e4b1511e2aa88c6a33d6158b9203c7f",
+      "summary_path": "/cache/cch/hypic-qwen36-piercing-20260904/quality/pdc-hypic/gsm8k.run3.summary.json",
+      "summary_sha256": "920634e74427174a552fd8cbf89ebb31328539b4fda2062bc6919af0062554cc",
+      "interpretation": "1319/1319 successful, zero failed, 1264 correct, 95.83017437452615%. The three-run treatment mean is 96.08289107910032%, -0.17690169320192695pp versus baseline mean and within its 0.454890pp repeated-run range; the run3 matching delta is -0.682335pp, so no accuracy-lossless claim is authorized."
+    },
+    {
+      "id": "native-profile-recovery",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/profile-failure-20260905.json",
+      "sha256": "18a35cd3929de62ed29a32445ab67365292a08709f4be13c1227ba033575d281",
+      "interpretation": "Preserves four fail-closed profiling attempts, including the distinction between successful capture traffic and failed algorithm coexistence acceptance, plus the profile-only clone recovery contract."
+    }
+  ],
+  "blocked_evidence": [
+    {
+      "id": "niah-plus",
+      "reason": "Expected authoritative PaulGrahamEssays.jsonl, zh_finance.jsonl and needles.jsonl are absent under the delivered NeedleBench tree.",
+      "policy": "Do not synthesize or substitute data."
+    }
+  ]
+}

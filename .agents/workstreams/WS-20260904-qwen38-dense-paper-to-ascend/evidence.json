@@ -1,0 +1,339 @@
+{
+  "schema": "workstream-evidence/v1",
+  "facts": [
+    {
+      "id": "qwen36-real-ab",
+      "claim": "Qwen3.6-27B real-weight baseline and Dk64 speed oracle both completed the exact 361-input/32-output ignore_eos warm7 workload. Baseline median TPOT was 369.1616 ms/token and treatment median TPOT was 369.1632 ms/token; the decode delta is effectively zero and slightly negative.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/qwen36-baseline-361in-32out-warm7.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/qwen36-dk64-361in-32out-warm7.json",
+        "/cache/efim/Qwen3.6-27B-gdn-dk64-speed-oracle/speed_oracle_manifest.json"
+      ],
+      "interpretation": "Reject this candidate for Qwen3.6-27B. The performance gate failed, so profiling and DRRQR quality qualification were intentionally not pursued; no quality or accuracy-lossless claim is made."
+    },
+    {
+      "id": "layout",
+      "claim": "48 GDN layers; packed width 10240 becomes 8192 at Dk64."
+    },
+    {
+      "id": "conversion",
+      "claim": "Both derived manifests record 16 changed shards and 96 changed tensors.",
+      "paths": [
+        "/cache/austinov/Qwen3.8-27B-gdn-dk64-speed-oracle/speed_oracle_manifest.json",
+        "/cache/austinov/Qwen3.8-27B-gdn-dk64-l1/l1_pruning_manifest.json"
+      ]
+    },
+    {
+      "id": "speed",
+      "claim": "Dk64 warm 361-in/32-out median TPOT 34.3817 ms/token over 7 runs; mean 35.1825.",
+      "path": "/tmp/qwen38_paper_dk64_warm7.txt",
+      "interpretation": "hardware feasibility only"
+    },
+    {
+      "id": "profile",
+      "claim": "Baseline rank0: MatMulV2+V3 about 70.9%; largest share is unaffected MLP; GDN 5120->4096 projection appeared 1824 times; recurrent/chunk/conv roughly another 10%.",
+      "paths": [
+        "/cache/austinov/qwen38-paper-profiles/baseline",
+        "/cache/austinov/qwen38-paper-profiles/dk64"
+      ]
+    },
+    {
+      "id": "l1-quality",
+      "claim": "L1 micro-probe passed 13/20.",
+      "path": "/tmp/qwen38_quality_l1.json",
+      "interpretation": "failed preliminary quality gate; not DRRQR"
+    },
+    {
+      "id": "l1-invalid-perf",
+      "claim": "L1 timing was about 0.38 s/token and is contaminated/inconclusive.",
+      "path": "/tmp/qwen38_paper_l1_warm7.txt"
+    },
+    {
+      "id": "fixed-ruler-tools",
+      "claim": "Offline G1-G4 x3 fixture validation passed; incomplete dataset freeze correctly exited 2 and named missing CEval, LongBench v2 and NIAH+.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/freeze_test_contract.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/summarize_ablation.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/fixtures/ablation-valid.jsonl"
+      ],
+      "interpretation": "The reusable contract now fails closed before an incomplete or non-orthogonal experiment can be summarized."
+    },
+    {
+      "id": "fixed-ruler-negative-guards",
+      "claim": "Verified that the freeze tool rejects unresolved REQUIRED runtime fields, and the summarizer rejects both a missing G4 cell and fewer than two models.",
+      "interpretation": "An incomplete single-model or partial ablation cannot silently become a valid final summary."
+    },
+    {
+      "id": "quality-gate-fixtures",
+      "claim": "The quality gate emitted the scoped lossless wording for a complete passing A/B/C fixture and withheld it when G3 exceeded the supplied noise threshold and changed its deterministic canary.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/fixtures/quality-pass.jsonl",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/fixtures/quality-fail.jsonl"
+      ]
+    },
+    {
+      "id": "decision-render-fixtures",
+      "claim": "The decision renderer selected G4 on a complete two-model all-metric/quality passing fixture and returned iterate when the quality artifact failed.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/render_decision.py",
+      "interpretation": "A performance-only win, a single-model result, or a non-unique metric winner cannot produce an adoption recommendation."
+    },
+    {
+      "id": "one-shot-pipeline-fixtures",
+      "claim": "The one-shot pipeline produced adopt/G4 with the two-model passing fixtures and produced a persisted iterate decision with exit 2 for the failing quality fixture.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/run_analysis_pipeline.py",
+      "interpretation": "Performance and quality inputs are explicit and independently auditable; quality failure cannot suppress the final iterate artifact."
+    },
+    {
+      "id": "current-environment-preflight",
+      "claim": "Read-only preflight verified image digest, 8x 910B4 layout, healthy baseline on host NPU0-3/CPU112-191 and protected workload on host NPU4-7/CPU0-95; both lanes are occupied.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/CURRENT_ENV_MANUAL_PIERCING.md",
+      "interpretation": "No service was changed. Full manual piercing remains blocked until NPU0-3 replacement is explicitly authorized and missing experiment inputs are frozen."
+    },
+    {
+      "id": "piercing-readiness-negative-guard",
+      "claim": "The read-only readiness checker exited 2 and reported ten blockers for the current incomplete inputs, including the running NPU0-3 baseline, missing frozen inputs, true DRRQR, second model, and unresolved native switch.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/preflight_piercing.py",
+      "interpretation": "The one-shot workflow cannot progress to service mutation through this gate without explicit ownership authorization and complete frozen inputs."
+    },
+    {
+      "id": "native-and-second-model-discovery",
+      "claim": "Read-only inventory selected local Qwen3.5-4B as a same-architecture different-size model and identified the fused CANN GDN prefill patch as the concrete native treatment.",
+      "paths": [
+        "/cache/Qwen3.5-4B/config.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/treatment-matrix.json"
+      ],
+      "interpretation": "The G2 variable and second-model candidate are no longer abstract, but neither is promotable until runtime activation and model-specific DRRQR evidence exist."
+    },
+    {
+      "id": "treatment-matrix-verification",
+      "claim": "Offline verification passed for two same-architecture different-size model inventories, all indexed weight shards, the exact native patch SHA256/operator, and the orthogonal G1-G4 switch matrix.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_treatment_matrix.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/treatment-verification.json"
+      ],
+      "interpretation": "Qwen3.8-27B has 18 total indexed weight shards while prior conversion manifests touched 16; these are different quantities. Qwen3.5-4B has 2 indexed shards."
+    },
+    {
+      "id": "drrqr-and-frozen-input-binding-guards",
+      "claim": "Preflight v2 re-verifies the treatment matrix, rejects the speed-oracle as DRRQR, requires a source-config-hash-bound DRRQR manifest for every matrix model, and verifies the exact four frozen dataset names, files, sizes, hashes, and runtime-config hashes.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/preflight_piercing.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/drrqr-manifest.template.json"
+      ],
+      "interpretation": "The controlled negative run exited 2 with 25 explicit blockers; directory naming, stale freeze manifests, arbitrary native strings, and wrong-source checkpoints cannot satisfy readiness."
+    },
+    {
+      "id": "drrqr-artifact-integrity-guards",
+      "claim": "Preflight v3 additionally re-hashes calibration data, DRRQR selection evidence, checkpoint config and index; requires every indexed output shard to exist and be non-empty; and validates all-GDN-layer coverage, positive tensor count, Dk64, and converter version.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/preflight_piercing.py",
+      "interpretation": "The controlled invalid-checkpoint run exited 2 with 40 explicit blockers, proving a hand-written manifest without its referenced artifacts cannot pass."
+    },
+    {
+      "id": "fixed-suite-local-inventory",
+      "claim": "Historical pre-delivery search found no local NIAH+, LongBench v2 or CEval data. This observation is superseded for LongBench v2 by the later received-resource intake, but remains relevant to the provenance trail.",
+      "paths": [
+        "/cache/cch/cann-recipes-infer/benchmark/evalscope_scripts/eval_longbench.py",
+        "/cache/austinov/eval-data/general/prepared/gsm8k_test.jsonl"
+      ],
+      "interpretation": "Dataset freeze must remain blocked. Do not silently substitute the LongBench harness, legacy LongBench data, or header-file false positives for the exact requested datasets."
+    },
+    {
+      "id": "bounded-rrqr-capture-hook",
+      "claim": "The experiment-only post-conv Q/K hook now runs only on the prefill path, requires VLLM_ASCEND_GDN_RRQR_CAPTURE_ENABLE=1 plus a capture directory, and defaults to one capture per layer and TP rank with a lock-protected reservation before CPU copy/write.",
+      "path": "vllm_ascend/ops/gdn.py",
+      "interpretation": "Host py_compile and an isolated function-body contract passed: a directory alone produced zero files, and two armed calls for the same layer/rank produced exactly one capture. No container, model service or NPU was used. Full real-tensor runtime capture remains an execution gate."
+    },
+    {
+      "id": "successful-practice-phase-isolation",
+      "claim": "The supplied successful batch-size-32 HYPIC record separated fixed-length performance generation from deterministic quality generation and restarted the identical group service between phases before three quality repetitions.",
+      "interpretation": "The current contract now distinguishes performance ignore_eos=true from quality ignore_eos=false, disables thinking for quality, applies non-reasoning postprocessing, requires health 200 per phase, and records service/config identity. Old IPs, device IDs, ports and user paths were not copied."
+    },
+    {
+      "id": "similar-environment-path-verification",
+      "claim": "The employee-practice absolute paths were checked read-only on chicaihong01 and are absent. The current host contains the EvalScope CEval adapter declaring modelscope/ceval-exam and its upstream archive URL, but no matching dataset cache was found.",
+      "paths": [
+        "/cache/austinov/p0/eval_env/lib/python3.9/site-packages/evalscope/benchmarks/ceval/ceval_adapter.py",
+        "/cache/austinov/p0/eval_env/lib/python3.9/site-packages/evalscope/benchmarks/ceval/ceval_exam.py"
+      ],
+      "interpretation": "The environments are workflow-compatible, not path-identical. Installed evaluation code is not frozen dataset evidence."
+    },
+    {
+      "id": "capture-and-phase-preflight-guards",
+      "claim": "The persistent RRQR capture verifier passed, the expanded incomplete-input preflight failed closed with 40 blockers, and an explicitly armed capture environment was rejected.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_rrqr_capture_hook.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/preflight_piercing.py"
+      ],
+      "interpretation": "Capture cleanup and performance/quality phase separation are executable guards rather than documentation-only advice."
+    },
+    {
+      "id": "resource-intake-verifier",
+      "claim": "The read-only resource intake verifier accepted a complete synthetic bundle and rejected the unresolved delivery template with 14 explicit errors.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/resource-intake.template.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_resource_intake.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/RESOURCE_REQUEST.md"
+      ],
+      "interpretation": "Centrally found resources can now be accepted by exact names, provenance and file/tree hashes before they enter the frozen ruler; empty paths, symlinks, hash drift and incomplete DRRQR alternatives fail closed."
+    },
+    {
+      "id": "lifecycle-plan-verifier",
+      "claim": "The non-executing lifecycle verifier accepted a complete synthetic two-model x G1-G4 plan and rendered 8 cells / 104 ordered phases; the unresolved template was rejected with 56 explicit errors.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/lifecycle-plan.template.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_lifecycle_plan.py"
+      ],
+      "interpretation": "A future one-shot executor can consume only a fully resolved plan that preserves three repetitions, inter-phase restart/health checks, NPU0-3/CPU112-191, disabled capture, all eight cells and no protected-lane tokens. This verifier itself executes no plan commands."
+    },
+    {
+      "id": "one-shot-lifecycle-executor",
+      "claim": "The lifecycle executor completed a full dry-run of 8 cells / 121 emitted events and rejected execute mode when the ready preflight report was not hash-bound to the plan.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/execute_lifecycle_plan.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_lifecycle_plan.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/preflight_piercing.py"
+      ],
+      "interpretation": "Dry-run is the default. Execute mode additionally requires exact NPU0-3 authorization, a ready preflight, and SHA256 equality for the preflight report, runtime config, frozen inputs and treatment matrix; commands use argv without a shell. No real command was executed in validation."
+    },
+    {
+      "id": "one-shot-failure-cleanup-and-freshness",
+      "claim": "Fault injection proved both performance-phase and quality-phase failures still invoke the cell's exact docker stop command; preflight now emits a timezone-aware timestamp and execute mode rejects reports older than the configured maximum age (default 300 seconds).",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/execute_lifecycle_plan.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/preflight_piercing.py"
+      ],
+      "interpretation": "A failed benchmark does not intentionally leave its service running, and a hash-bound but stale readiness observation cannot authorize a later execution. Tests used injected functions only; no Docker or NPU command ran."
+    },
+    {
+      "id": "lifecycle-command-surface-guard",
+      "claim": "The lifecycle verifier accepted Python/ais_bench evaluation commands and rejected a malicious docker performance command, protected health port 8210 and duplicate service identity in one controlled negative fixture.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_lifecycle_plan.py",
+      "interpretation": "Only exact docker start/stop of the current paper-prefixed service is allowed for lifecycle mutation; warmup/performance/quality entrypoints are restricted to Python or ais_bench, health is loopback-only with an explicit non-protected port, and service names are unique."
+    },
+    {
+      "id": "quality-suite-and-noise-binding-guards",
+      "claim": "The quality gate now defaults to the exact NIAH+/LongBench v2/GSM8K/CEval set, requires at least two models, and hashes a non-empty repeated-G1 noise evidence file. It rejected the one-dataset fixture without explicit fixture mode and rejected a one-model input.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/run_analysis_pipeline.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/fixtures/noise-evidence.json"
+      ],
+      "interpretation": "A partial suite, single-model run or unbound numeric noise threshold cannot produce the real lossless claim. Dataset override requires explicit fixture mode, whose claim is scoped as fixture-only; the hardened pass/fail pipelines still produced adopt/G4 and iterate respectively."
+    },
+    {
+      "id": "quality-canary-schema-guards",
+      "claim": "The production quality gate now rejects a missing deterministic_canary_output_tokens field, any canary length other than exactly 512, a non-canonical deterministic_canary_sha256 value, and non-finite quality scores.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+      "interpretation": "A controlled production-mode replay of the symbolic fixture exited 2 and reported both the missing token-count and malformed-digest errors; the explicitly isolated fixture-mode replay still passed six G1-versus-treatment decisions. Condition C can no longer be inferred from defaults or labels that merely look equal."
+    },
+    {
+      "id": "quality-frozen-ruler-bindings",
+      "claim": "Production quality rows now require canonical hashes for frozen inputs, invariant config, treatment matrix, checkpoint manifest, service config, deterministic canary inputs and per-sample evidence; the gate enforces global ruler identity plus stable checkpoint, service and per-model/dataset canary-input identities.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/result-row.template.json"
+      ],
+      "interpretation": "A synthetic complete production suite covering two models, four exact datasets, G1-G4 and three repetitions passed with 24 decisions. Changing one row to a different frozen-input hash made the same suite fail closed. Quality evidence from different rulers can no longer be combined into a lossless claim."
+    },
+    {
+      "id": "decision-cross-artifact-binding",
+      "claim": "Performance summaries now expose canonical frozen-input, invariant-config and treatment-matrix bindings, and the Step-6 decision renderer requires exact equality with the quality-gate bindings before adoption.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/summarize_ablation.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/render_decision.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/run_analysis_pipeline.py"
+      ],
+      "interpretation": "A controlled render with matching production-shaped bindings adopted the fixture winner; changing only the quality frozen-input binding forced iterate with an explicit bindings-differ blocker. Explicit fixture mode remains isolated and is propagated to both summarization and quality evaluation."
+    },
+    {
+      "id": "performance-completeness-and-scope-guards",
+      "claim": "Performance summarization now requires all five fixed metrics to be numeric, finite and domain-valid on every warm row; exactly three non-duplicate run rows per cell; and advertises the fixed metric contract. Final rendering requires that exact metric set and an exact performance-versus-quality model/dataset scope match.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/summarize_ablation.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/render_decision.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/TROUBLESHOOTING.md"
+      ],
+      "interpretation": "Controlled negatives separately removed TTFT, duplicated a run row, removed batch delay from every summary cell, and removed one model from the quality decision scope. All four cases failed closed; the unmodified full pipeline still adopted only its explicitly fixture-scoped winner."
+    },
+    {
+      "id": "no-average-masked-performance-regression",
+      "claim": "Step-6 adoption now requires the unique average-dominant group to meet the configured minimum improvement in every individual model/dataset/metric cell, and records the worst observed improvement for each group and metric.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/render_decision.py",
+      "interpretation": "A controlled G4 result retained positive average TTFT improvement after one cell was set to -1% and another to +20%, but the renderer forced iterate and reported the local below-threshold cell. Negative and non-finite minimum thresholds are rejected."
+    },
+    {
+      "id": "recomputed-g1-noise-threshold",
+      "claim": "Production condition-B evidence now requires structured G1-only observations for every quality model/dataset cell, exactly three unique runs, the same frozen/config/treatment bindings, exact per-run score equality with the quality result G1 rows, and noise_threshold_pp equal to the recomputed maximum within-cell score range.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/noise-evidence.template.json"
+      ],
+      "interpretation": "A complete synthetic two-model/four-dataset production document recomputed to 1pp and passed. CLI-versus-document threshold mismatch, frozen-input binding mismatch, and a substituted G1 score that preserved the same 1pp range all failed closed. Fixture-only noise evidence is rejected in production."
+    },
+    {
+      "id": "one-shot-g1-noise-evidence-builder",
+      "claim": "The noise builder extracts warm G1 rows directly from the complete quality JSONL, validates two models, the exact four datasets, three unique runs and canonical ruler hashes, computes the maximum within-cell range, and records the source file SHA256.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/build_g1_noise_evidence.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/noise-evidence.template.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py"
+      ],
+      "interpretation": "An end-to-end synthetic run built 24 G1 observations with a 1pp threshold and passed the production quality gate. Appending even a blank line to the source quality JSONL after generation caused an explicit source-file SHA256 drift rejection."
+    },
+    {
+      "id": "one-shot-production-analysis-with-noise-build",
+      "claim": "The offline analysis pipeline can invoke the G1 noise builder, load the computed threshold, and run performance summary, quality gate and final decision without a manually transcribed threshold.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/run_analysis_pipeline.py",
+      "interpretation": "A synthetic full production matrix completed the one-command path and adopted G4 while emitting hash-bound noise evidence with a 1pp threshold. The same build flag was rejected under fixture mode."
+    },
+    {
+      "id": "lifecycle-execution-journal-and-resume",
+      "claim": "Execute mode now requires an atomic lifecycle journal, records running/failed/complete state and marks a cell complete only after both performance and restarted quality phases finish. Resume accepts only running/failed journals bound to the exact plan and preflight whose completed cells are an exact plan prefix.",
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/execute_lifecycle_plan.py",
+      "interpretation": "Offline fault injection completed cell A, failed cell B, recorded only A as complete, then resumed by skipping A and executing B/C before marking the journal complete. Contract tests also rejected a different plan hash, a non-prefix completion list and complete status. The cell executor was injected; no lifecycle command, Docker action or NPU workload was executed."
+    },
+    {
+      "id": "performance-quality-phase-and-service-binding",
+      "claim": "Production performance rows require phase=performance and quality rows require phase=quality; both phases enforce the exact G1-G4 native/DRRQR switches; checkpoint and service instance identities must be stable at their declared scopes; and Step 6 requires identical service-config and checkpoint-manifest bindings across the restarted performance and quality lifecycles.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/result-row.template.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/summarize_ablation.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evaluate_quality_gate.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/render_decision.py"
+      ],
+      "interpretation": "A complete production-shaped pipeline passed. Relabeling one quality row as performance and flipping one G1 native switch each failed the quality gate; changing an otherwise stable quality service config or checkpoint manifest forced iterate at the respective cross-phase binding check."
+    },
+    {
+      "id": "native-profile-evidence-verifier",
+      "claim": "The profile verifier requires a G1/candidate pair for at least two models, one canonical profile workload hash and frozen ruler bindings, absolute non-symlink artifact files with verified SHA256, profiler enabled, capture disabled, positive counters and per-model target-region operator-time improvement.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/profile-evidence.template.json",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_profile_evidence.py"
+      ],
+      "interpretation": "A synthetic two-model G1-versus-G3 profile set with real temporary artifact files and 20% target-region reductions passed. Armed capture and the unresolved template failed closed. This is verifier evidence only; real DRRQR profile collection remains open and no NPU was used."
+    },
+    {
+      "id": "migrated-root-and-received-resource-intake",
+      "claim": "After the user moved the host root to /cache/cch, both stale Git worktree pointer files were updated to the exact new paths and Git status became readable again. The supplied benchmark 3.1 archive, expanded AIS Bench 3.1.0 tree, LongBench v2 data, GSM8K test data, model config, postprocessor and dataset loader/metric were located and hashed read-only.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/received-resource-inventory.json",
+        "/cache/cch/benchmark-3.1-20260119-master.zip",
+        "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2",
+        "/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl"
+      ],
+      "interpretation": "This partially closes the resource blocker. CEval has only configuration and its expected formal_ceval tree is absent; NeedleBench v2 code is not yet authoritative NIAH+ data; true DRRQR remains absent. No workload was changed."
+    },
+    {
+      "id": "profile-bound-step6-adoption-gate",
+      "claim": "Production one-shot analysis now requires profile evidence, verifies it before rendering, and permits adoption only when the verified candidate equals the unique all-metric performance winner and covers the exact same model set and frozen ruler bindings.",
+      "paths": [
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_profile_evidence.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/run_analysis_pipeline.py",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/render_decision.py"
+      ],
+      "interpretation": "The fixture pipeline still selected G4 without production profile input. Production mode rejected a missing profile; a production-shaped G4 profile with matching two-model bindings adopted; changing only the profile candidate to G3 forced iterate. These were offline synthetic tests and used no NPU."
+    }
+  ]
+}

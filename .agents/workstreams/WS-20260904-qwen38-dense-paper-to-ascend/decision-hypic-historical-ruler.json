@@ -1,0 +1,24 @@
+{
+  "schema": "paper-to-ascend-decision/v1",
+  "decision_id": "hypic-qwen36-historical-ruler-20260905",
+  "status": "pending-paused",
+  "current_decision": "no-decision",
+  "reason": "Only the no-cache baseline performance phase and baseline LongBench-v2 run1 are complete. The Hypic-only treatment has not been measured.",
+  "allowed_claims": [
+    "The current no-cache baseline has three valid performance repetitions.",
+    "Baseline LongBench-v2 run1 is complete and hash-verified.",
+    "The resumable controller can continue at the next incomplete unit after explicit operator authorization.",
+    "The employee and current environments differ in model version, accelerator generation, card count and tensor-parallel degree.",
+    "The current case is frozen as TP4 on host NPU0-3."
+  ],
+  "forbidden_claims": [
+    "Hypic improves or regresses current Qwen3.6-27B performance.",
+    "The employee gain has or has not reproduced.",
+    "Current quality is lossless.",
+    "PDC coexistence results answer the no-cache historical-ruler question.",
+    "A two-card TP2 launch can resume or reuse the current TP4 baseline."
+  ],
+  "next_gate": "Explicit operator resume, then complete both arms and render the hash-bound comparison.",
+  "integration_state": "not-ready",
+  "publish": {"commit": false, "push": false, "reason": "No fabricated Git identity or push is authorized."}
+}
