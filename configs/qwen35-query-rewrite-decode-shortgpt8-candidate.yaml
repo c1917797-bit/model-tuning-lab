@@ -1,0 +1,23 @@
+schema: qwen35-query-rewrite-candidate/v1
+id: decode-shortgpt8
+status: source-ready-unverified-on-npu
+model: /cache/austinov/Qwen3.8-27B
+hardware: Ascend 910B4 NPU0-3
+runtime: vllm-ascend-0.23.0
+precision: bfloat16
+quantization: null
+speculative_decoding: false
+base_candidate: tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1
+primary_variable:
+  env: VLLM_ASCEND_QWEN35_DECODE_SKIP_LAYERS
+  control: unset
+  candidate: 3-5,7-9,12-13
+selection_provenance: real Block Influence ranking from the prior ShortGPT workstream
+semantic_scope: preserve all layers for prefill and mixed batches; skip selected layers only for decode
+adapter_commit: 0f28129ef8716c36999d63796061cc654d854306
+gates:
+  - source helper tests and py_compile
+  - paired 16-sample deterministic semantic review
+  - c1 and c16 P95 performance screen
+  - three-repeat c1/c5/c8/c16 P95 matrix only after prior gates pass
+evidence_policy: no performance claim without raw 910B4 output, runtime activation proof, manifest, and SHA256
