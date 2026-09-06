@@ -1545,3 +1545,36 @@ mtp_k3_local_argmax_tp4_candidate:
   hashes: {c1: 83e442667517a2d7bf64149b87d3b3d23f201b89a9fae77e6f4e5d193d6fda84, c5: c525a0e1a08ccf2c369ab460eb3dfa7e84ce16c9c59907f730f2bdb0b1cc65d2, c8: 29322a124c49a0bedc18f61b9976b98b677e02a58e926ea8939b066515cd14a1, c16: aba0f5b1910acd29fa6f7329b9df5c8345533054d03a3fd192c9958da75708ad, decision: 647dee9bf76eb4b045a34e03013d045479349359301a4574ed23958f164bd0da, metrics: 8fc92d99f8ce0cd9e88a6dbff44bc754a046d220b967d89fc1e8dd7544d7a69b, service_log: 8bcad7a1d4ee54460e33ba01710add484cef684f83ac1cd1d8e2026cb05cdf8e}
   resource_release: "candidate container stopped; NPU0-3 have no running processes; NPU4-7 external workload remained running"
   next: "profile c16 MTP draft/verify scheduling and establish a meaningful paired semantic-quality gate before stacking the next change"
+
+mtp_k3_bt40960_tp4_candidate:
+  status: rejected_as_final_iterate_performance
+  run_id: tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-bt40960-v1-20260906T120316Z
+  operation_id: exec-0000000000000284
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-bt40960-v1-20260906T120316Z
+  primary_variable: "max_num_batched_tokens 32768 -> 40960"
+  retained_stack: "BF16 TP4/DP1 on NPU0-3; MTP k3 local argmax, async scheduling, FULL_DECODE_ONLY, MMAR, NZ1 and dense gate/up prefetch 0.1"
+  comparison_baseline: "frozen MTP-off TP4/NPU0-3 baseline; service log proves speculative_config=None"
+  matrix: "c1/c5/c8/c16, three repetitions each, 384/384 requests, zero errors, all natural stops"
+  acceptance: {draft_tokens: 83688, accepted_tokens: 55147, rate: 0.6589597301876035}
+  speedup_vs_frozen_mtp_off:
+    c1:
+      ttft_p50_p95_p99: [1.865437, 1.825470, 1.808916]
+      tpot_p50_p95_p99: [2.471253, 2.477240, 1.508082]
+    c5:
+      ttft_p50_p95_p99: [1.755005, 1.884940, 1.937249]
+      tpot_p50_p95_p99: [2.212882, 1.628695, 1.698242]
+    c8:
+      ttft_p50_p95_p99: [1.662137, 1.808584, 1.808241]
+      tpot_p50_p95_p99: [2.096723, 1.718244, 1.965476]
+    c16:
+      ttft_p50_p95_p99: [1.437568, 1.514291, 1.514326]
+      tpot_p50_p95_p99: [1.844966, 1.194438, 0.430793]
+  decision: "iterate-performance; 40960 is not retained as a final setting because no TTFT cell reaches 2x and c16 TPOT P99 regresses severely"
+  quality_gate: "unproven; transport success and target-verified drafts do not prove semantic quality"
+  hashes:
+    decision_sha256: 1ab379995199b7a1f99e7633d8e4f17f6756dd0816e87c6a097be969c6011df0
+    sha256sums_sha256: 4deef4bba4fe9062f68462156e64b90d07352948749c7a2143f3923469385770
+    metrics_sha256: be135d03adf7658694272ab4e387cf65c9c76fb6fd1e5d31c444c8714c41102f
+  resource_release: "candidate container stopped; NPU0-3 released; NPU4-7 external workload remained unchanged"
+  baseline_policy: "iterate only against frozen MTP-off baseline; after the 2x and semantic gates pass, measure a same-protocol MTP-on baseline for final attribution"
+  next: "profile c16 draft/verify and short-completion TPOT tails; select the next graph-compatible algorithm/operator treatment rather than increasing batched-token budget again"

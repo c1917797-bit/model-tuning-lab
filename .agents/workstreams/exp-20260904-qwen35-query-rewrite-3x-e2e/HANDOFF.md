@@ -2457,3 +2457,40 @@ The launcher now selects the TP4 analyzer when the frozen TP4/NPU0-3 baseline
 directory is explicit, preserving rather than bypassing provenance checks.
 Next profile c16 speculative scheduling and create a paired semantic-quality
 gate; do not claim the 2x/精读无损 goal yet.
+
+## TP4 MTP k3 plus batched-token budget 40960
+
+Run `tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-bt40960-v1-20260906T120316Z`
+completed all 12 cells on physical NPU0-3: three repetitions at each of
+c1/c5/c8/c16, 384/384 requests, zero errors and all natural stops. The
+candidate container stopped cleanly, NPU0-3 were released, and the external
+NPU4-7 workload remained unchanged. All entries in `SHA256SUMS` verify.
+
+The denominator is the frozen MTP-off TP4/NPU0-3 baseline. Its engine log
+explicitly records `speculative_config=None`; plugin registration messages
+mentioning MTP do not mean that MTP was enabled.
+
+| Concurrency | TTFT speedup P50/P95/P99 | TPOT speedup P50/P95/P99 |
+|---:|---:|---:|
+| 1 | 1.865x / 1.825x / 1.809x | 2.471x / 2.477x / 1.508x |
+| 5 | 1.755x / 1.885x / 1.937x | 2.213x / 1.629x / 1.698x |
+| 8 | 1.662x / 1.809x / 1.808x | 2.097x / 1.718x / 1.965x |
+| 16 | 1.438x / 1.514x / 1.514x | 1.845x / 1.194x / 0.431x |
+
+MTP accepted 55,147 of 83,688 draft tokens (65.90%). Raising
+`max_num_batched_tokens` from 32,768 to 40,960 improves several warmed and
+high-load medians, but it does not close the TTFT gap and c16 TPOT P99 becomes
+highly unstable. Decision: `iterate-performance`; do not promote 40,960 as
+the final setting or repeat this budget increase without new profile evidence.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-bt40960-v1-20260906T120316Z`.
+Decision SHA256:
+`1ab379995199b7a1f99e7633d8e4f17f6756dd0816e87c6a097be969c6011df0`.
+
+The user-approved comparison policy is now two-stage: during optimization,
+compare only with the frozen MTP-off baseline; after a candidate passes the
+2x performance and semantic-quality gates, run a same-protocol MTP-on baseline
+for final attribution. The next action is c16 draft/verify and short-output
+TPOT-tail profiling, followed by one graph-compatible algorithm/operator
+change. 精读无损 remains unproven.

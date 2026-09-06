@@ -117,3 +117,28 @@ Updated: 2026-09-06
 - Greedy response hashes vary across the existing baseline repetitions, so
   hashes are diagnostics, not proof of semantic equivalence. 精读无损 still
   requires a meaningful paired reference or calibrated judge.
+
+## BT40960 tail-aware result and baseline policy
+
+- The authoritative iteration denominator is now the frozen TP4/NPU0-3
+  MTP-off baseline. Its engine log proves `speculative_config=None`.
+- Compare candidates only with that MTP-off denominator while tuning. Measure
+  a same-protocol MTP-on baseline only after the 2x performance and semantic
+  gates pass, so final attribution separates ordinary MTP benefit from the
+  cumulative optimized stack.
+- Raising `max_num_batched_tokens` from 32,768 to 40,960 is not sufficient.
+  Across three repetitions it reaches 2x only for TPOT P50 at c1/c5/c8 and
+  TPOT P95 at c1; no TTFT percentile reaches 2x.
+- c16 TPOT P99 speedup is only 0.431x even though c16 TTFT P95/P99 improve to
+  about 1.514x. Scheduler budget tuning can move prefill tails without solving
+  decode-tail instability.
+- Three repetitions materially changed the conclusion relative to a one-pass
+  screen. Do not promote a candidate from a single repetition, especially at
+  c16.
+- A TPOT outlier on very short completions can dominate P99 because the
+  denominator contains few inter-token intervals. Preserve the user-visible
+  aggregate P95/P99, and add output-length-stratified diagnostics during
+  profiling instead of deleting or silently filtering those requests.
+- Retain MTP k3 local argmax as an algorithm component, revert the batched-token
+  budget hypothesis to unaccepted, and profile c16 draft/verify scheduling plus
+  short-completion tails before selecting the next operator change.
