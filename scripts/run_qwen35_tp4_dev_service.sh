@@ -61,6 +61,9 @@ qwen35_gdn_proj_fusion_root="${QWEN35_GDN_PROJ_FUSION_ROOT:-/cache/cch/.worktree
 qwen35_gdn_proj_fusion_commit="${QWEN35_GDN_PROJ_FUSION_COMMIT:-685fdf22098fb3a0aa8d582dda57063773606a02}"
 qwen35_gdn_proj_fusion_attn_sha256=6aaf29f585d92d92e9d251fef899884f6cae32800a13cd24675b549f68573643
 qwen35_gdn_proj_fusion_model_sha256=277e9d74db7baeb5a9c7d09bb37c83cdc676ed069c386e4ac8ef18bd059a4661
+qwen35_gdn_proj_fusion_ascend_root="${QWEN35_GDN_PROJ_FUSION_ASCEND_ROOT:-/cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion-ascend}"
+qwen35_gdn_proj_fusion_ascend_commit="${QWEN35_GDN_PROJ_FUSION_ASCEND_COMMIT:-d98e37ebb72acd71b5a35222fd7ab7f8049d41cb}"
+qwen35_gdn_proj_fusion_ascend_gdn_sha256=00afaeee464f247626d2f88d8ff88fc3ecf0cdb9925ef732ea969890ab6d22d6
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
 flashcomm2_mmar_commit="65f780ee"
 flashcomm1_gdn_root="${FLASHCOMM1_GDN_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape}"
@@ -150,6 +153,18 @@ if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ]]; then
   }
   [[ "$(sha256sum "$qwen35_gdn_proj_fusion_root/vllm/model_executor/models/qwen3_5.py" | awk '{print $1}')" == "$qwen35_gdn_proj_fusion_model_sha256" ]] || {
     echo "Qwen3.5 GDN projection-fusion model hash mismatch" >&2
+    exit 47
+  }
+  actual_ref="$(
+    git -c safe.directory="$qwen35_gdn_proj_fusion_ascend_root" \
+      -C "$qwen35_gdn_proj_fusion_ascend_root" rev-parse HEAD
+  )"
+  [[ "$actual_ref" == "$qwen35_gdn_proj_fusion_ascend_commit" ]] || {
+    echo "Qwen3.5 GDN Ascend fusion source must be $qwen35_gdn_proj_fusion_ascend_commit, got $actual_ref" >&2
+    exit 45
+  }
+  [[ "$(sha256sum "$qwen35_gdn_proj_fusion_ascend_root/vllm_ascend/ops/gdn.py" | awk '{print $1}')" == "$qwen35_gdn_proj_fusion_ascend_gdn_sha256" ]] || {
+    echo "Qwen3.5 GDN Ascend fusion patch hash mismatch" >&2
     exit 47
   }
 fi
@@ -551,11 +566,14 @@ if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ]]; then
   vllm_source_root=/vllm-workspace/vllm/vllm
+  image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
   docker_args+=(
     -v "$qwen35_gdn_proj_fusion_root/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py:$vllm_source_root/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py:ro"
     -v "$qwen35_gdn_proj_fusion_root/vllm/model_executor/models/qwen3_5.py:$vllm_source_root/model_executor/models/qwen3_5.py:ro"
+    -v "$qwen35_gdn_proj_fusion_ascend_root/vllm_ascend/ops/gdn.py:$image_source_root/ops/gdn.py:ro"
     -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1
     -e VLLM_ASCEND_QWEN35_GDN_PROJ_FUSION_COMMIT="$qwen35_gdn_proj_fusion_commit"
+    -e VLLM_ASCEND_QWEN35_GDN_PROJ_FUSION_ASCEND_COMMIT="$qwen35_gdn_proj_fusion_ascend_commit"
   )
 fi
 if [[ "$mode" == mtp-local-argmax ||
