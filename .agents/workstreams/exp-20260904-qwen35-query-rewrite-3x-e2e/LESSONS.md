@@ -198,3 +198,27 @@ Updated: 2026-09-06
 - Do not repeat `enable_sp=true` with MMAR unchanged. The next candidate must
   be Ascend-native, preserve BF16/no-quantization/no-speculation semantics, and
   prove its CANN/MMAR/HCCL activation before the c1/c5/c8/c16 matrix.
+
+## Fused GDN prefill precision rejection
+
+- A callable Ascend operator is not sufficient evidence for a lossless
+  optimization. `torch_npu.npu_chunk_gated_delta_rule` executed successfully
+  on physical 910B4 NPU0 with the Qwen3.5 TP4-local head geometry
+  `Nk=4, Nv=12, Dk=Dv=128`, but correctness still had to pass its own golden.
+- Use the operator repository's reference when an isolated vLLM wrapper cannot
+  reproduce the installed runtime registration cleanly. The authoritative
+  check here is
+  `/cache/cch/ops-transformer/attention/chunk_gated_delta_rule/tests/pytest/chunk_gated_delta_rule_golden.py`,
+  not a CUDA comparison or a source-only assertion.
+- The supplied BF16 golden at `B=1, T=64` returned `FAILED` for both output
+  and recurrent state. Output maximum absolute error was about `0.002604`
+  and state maximum absolute error about `0.000928`; the golden's normalized
+  maximum-relative-error ratios were `19.977` vs a `5` limit and `60.381`
+  vs a `5` limit respectively.
+- Reject before E2E when the semantic gate fails. This candidate also addresses
+  only GDN prefill, which the retained profile attributes to about `0.5666%`
+  of summed kernel duration, so it cannot plausibly close the missing TPOT
+  P50 gap even if its precision is later repaired.
+- Do not integrate or benchmark the current fused-GDN patch unchanged. A retry
+  requires a CANN/operator precision fix or a predeclared, quality-justified
+  tolerance change; neither is authorized by the current “精读无损” goal.

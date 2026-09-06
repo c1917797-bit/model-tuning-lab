@@ -2589,3 +2589,30 @@ The manifest SHA256 is
 `718355accf230244126b881cdff04b03e52ccf9a6dafd76e534857c6ad711a19`.
 All entries verify. The probe container was stopped, NPU0-3 were released, and
 the external NPU4-7 workload remained running and untouched.
+
+## Ascend fused GDN prefill precision gate
+
+The uncommitted source candidate in
+`/cache/cch/.worktrees/WS-20260904-qwen35-v023-fused-gdn` adds an optional
+`torch_npu.npu_chunk_gated_delta_rule` prefill path. Its availability smoke
+and a real Qwen3.5 TP4-local shape probe both executed on physical Ascend 910B4
+NPU0. The shape probe returned output `(1, 64, 12, 128)` and final state
+`(1, 12, 128, 128)` (operation `exec-0000000000000364`).
+
+The authoritative operator-repository BF16 golden was then run at
+`B=1, T=64, Nk=4, Nv=12, Dk=Dv=128` from
+`/cache/cch/ops-transformer/attention/chunk_gated_delta_rule/tests/pytest/chunk_gated_delta_rule_golden.py`
+(operation `exec-0000000000000368`). It returned `FAILED` for both output
+and recurrent state:
+
+| Tensor | Max absolute error at reported worst index | Max-relative-error ratio | Golden limit |
+|---|---:|---:|---:|
+| output | 0.00260362 | 19.977 | 5 |
+| final state | 0.000927791 | 60.381 | 5 |
+
+Decision: `rejected-correctness`. Do not merge, integrate, or run an E2E
+matrix for this fused-GDN candidate unchanged. It is additionally a prefill-only
+treatment against a profile share of about 0.5666%, so it is not a credible
+route to the outstanding TPOT P50 target. The source worktree was left
+unmodified and uncommitted, NPU0 was released after the probe, and the existing
+NPU4-7 workload was not touched.
