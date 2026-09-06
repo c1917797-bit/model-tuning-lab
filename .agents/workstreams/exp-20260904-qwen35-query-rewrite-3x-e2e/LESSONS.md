@@ -142,3 +142,21 @@ Updated: 2026-09-06
 - Retain MTP k3 local argmax as an algorithm component, revert the batched-token
   budget hypothesis to unaccepted, and profile c16 draft/verify scheduling plus
   short-completion tails before selecting the next operator change.
+
+## Non-speculative Qwen3.5 GDN prefetch result
+
+- The user now prohibits speculative decoding. This overrides earlier notes
+  that retained MTP: require `speculative_config=None` for every future
+  candidate and for final validation.
+- Completing the Qwen3.5 prefetch lifecycle matters. Extending gate/up prefetch
+  across the 48 linear-attention/GDN layers raised TTFT P50 above 2x in all
+  c1/c5/c8/c16 screen cells while preserving BF16 numerical equality.
+- The same treatment did not solve decode: TPOT P50 speedup was only
+  1.224x-1.432x. Treat prefetch as a TTFT ingredient, not a complete stack.
+- c1 TTFT P95/P99 regressed even while P50 improved. A warm/cold or graph-state
+  hypothesis must be tested with preserved repeated evidence; never delete the
+  cold observation or promote from the median alone.
+- Operator provenance requires both a pinned source commit and file hashes in
+  the launcher, followed by container mount inspection and evidence checksums.
+- Focus the next profile on non-speculative c16 decode, MMAR and dense-FFN
+  execution. Do not spend further runs tuning draft depth or acceptance.

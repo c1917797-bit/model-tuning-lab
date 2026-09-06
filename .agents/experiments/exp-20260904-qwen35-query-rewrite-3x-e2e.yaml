@@ -1578,3 +1578,38 @@ mtp_k3_bt40960_tp4_candidate:
   resource_release: "candidate container stopped; NPU0-3 released; NPU4-7 external workload remained unchanged"
   baseline_policy: "iterate only against frozen MTP-off baseline; after the 2x and semantic gates pass, measure a same-protocol MTP-on baseline for final attribution"
   next: "profile c16 draft/verify and short-completion TPOT tails; select the next graph-compatible algorithm/operator treatment rather than increasing batched-token budget again"
+
+non_speculative_policy_20260906:
+  status: active_user_constraint
+  rule: "do not enable speculative decoding in candidates or final validation"
+  effective_runtime_contract: "speculative_config=None"
+  excluded_from_retained_stack: [mtp, draft_model, suffix, ngram_gpu, local_argmax_speculation]
+  historical_speculative_runs: "retain only as rejected/history evidence; never use as target-completion evidence"
+  comparison_baseline: "frozen MTP-off TP4/NPU0-3 baseline"
+
+qwen35_gdn_gateup_prefetch_nospec_v1:
+  status: iterate_performance
+  operation_id: exec-00000000000002c2
+  run_id: tp4-npu03-qwen35-gdn-prefetch0p1-nospec-v1-20260906T125239Z
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-prefetch0p1-nospec-v1-20260906T125239Z
+  operator_source_root: /cache/cch/.worktrees/exp-20260906-qwen35-gdn-gateup-prefetch
+  operator_source_commit: 82a2dce763eb39c285744f6fc36e37728471a1c7
+  integration_commit: 474d4f5
+  primary_variable: "extend dense gate/up prefetch lifecycle from self_attn output to Qwen3.5 linear_attn output and complete it after GemmaRMSNorm"
+  runtime: "Ascend 910B4, physical NPU0-3, TP4/DP1, BF16, quantization=None, speculative_config=None, async scheduling, FULL_DECODE_ONLY"
+  validation: "focused unit tests 3/3 passed; NPU0 BF16 prefetch smoke at batches 1/5/8/16 is bitwise equal with max_abs_error=0"
+  matrix: "one screen repetition at c1/c5/c8/c16; 128/128 requests, zero errors, all natural stops"
+  speedup_vs_frozen_mtp_off:
+    c1: {ttft: {p50: 2.039708, p95: 0.156556, p99: 0.097384}, tpot: {p50: 1.224002, p95: 1.349652, p99: 2.023325}}
+    c5: {ttft: {p50: 2.027653, p95: 1.558396, p99: 1.224026}, tpot: {p50: 1.357254, p95: 1.319735, p99: 1.488637}}
+    c8: {ttft: {p50: 2.115632, p95: 9.530609, p99: 9.525728}, tpot: {p50: 1.432264, p95: 2.192017, p99: 2.976590}}
+    c16: {ttft: {p50: 2.098005, p95: 1.888181, p99: 1.887819}, tpot: {p50: 1.412534, p95: 1.980974, p99: 1.778742}}
+  decision: "iterate-performance: all TTFT P50 cells exceed 2x, but no TPOT P50 cell reaches 2x and c1 TTFT tails regress"
+  quality_gate: "unproven because query_rewrite answer fields are not a meaningful nonempty semantic reference"
+  hashes:
+    decision_sha256: d4c7529b6bcd4594f93caf69671cb552994798e793c7139e0da2f0bef77a3e75
+    sha256sums_sha256: 0d5d7a1955eb68e92d36fd69974dc5525f6c7ae7ee2345849048241b2c0f4b27
+    service_log_sha256: 928edc2294b7e344e0035b85a218027914ed0e1def7752c1b1fddac429b82d0d
+    container_inspect_sha256: 54610a77a294e29aad330215f4eb4297b30f3d75de2c8aee2b3de037a5265163
+  resource_release: "candidate container stopped; NPU0-3 released; NPU4-7 external workload unchanged"
+  next: "profile non-speculative decode on c16 and target the remaining TPOT/MMAR or dense FFN bottleneck; retain this prefetch treatment only as an ingredient pending repeatability"

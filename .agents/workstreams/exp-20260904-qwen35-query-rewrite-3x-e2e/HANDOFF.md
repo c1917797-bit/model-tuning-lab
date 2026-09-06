@@ -2494,3 +2494,44 @@ compare only with the frozen MTP-off baseline; after a candidate passes the
 for final attribution. The next action is c16 draft/verify and short-output
 TPOT-tail profiling, followed by one graph-compatible algorithm/operator
 change. 精读无损 remains unproven.
+
+## Non-speculative constraint and Qwen3.5 GDN prefetch screen
+
+The user subsequently prohibited speculative decoding. This supersedes the
+two-stage MTP policy above: all future candidates and final validation must
+show `speculative_config=None`. MTP, draft-model, suffix, ngram and local-argmax
+speculation remain historical evidence only and must not be stacked or used to
+claim completion.
+
+The first conforming operator candidate is
+`tp4-npu03-qwen35-gdn-prefetch0p1-nospec-v1-20260906T125239Z`. It extends the
+existing CANN/torch_npu dense gate/up prefetch trigger from `self_attn.o_proj`
+to Qwen3.5 `linear_attn.out_proj`, uses the model layer-index helper, and closes
+the prefetch lifecycle after `GemmaRMSNorm`. Source commit is
+`82a2dce763eb39c285744f6fc36e37728471a1c7`; integration commit is `474d4f5`.
+Focused unit tests passed 3/3, and an NPU0 BF16 smoke at batches 1/5/8/16 was
+bitwise equal with maximum absolute error 0.
+
+The real Ascend TP4 screen completed 128/128 requests with zero errors and all
+natural stops. Runtime proof records NPU0-3, BF16, `quantization=None` and
+`speculative_config=None`.
+
+| Concurrency | TTFT speedup P50/P95/P99 | TPOT speedup P50/P95/P99 |
+|---:|---:|---:|
+| 1 | 2.040x / 0.157x / 0.097x | 1.224x / 1.350x / 2.023x |
+| 5 | 2.028x / 1.558x / 1.224x | 1.357x / 1.320x / 1.489x |
+| 8 | 2.116x / 9.531x / 9.526x | 1.432x / 2.192x / 2.977x |
+| 16 | 2.098x / 1.888x / 1.888x | 1.413x / 1.981x / 1.779x |
+
+Decision: `iterate-performance`. The operator treatment clears TTFT P50 at all
+four concurrency levels, but no TPOT P50 cell reaches 2x and c1 TTFT P95/P99
+regress sharply. Do not promote from this single repetition. Profile the
+non-speculative c16 decode path and target MMAR/dense-FFN TPOT next. Quality
+remains unproven because the dataset reference-answer field is not meaningful.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-prefetch0p1-nospec-v1-20260906T125239Z`.
+Decision SHA256:
+`d4c7529b6bcd4594f93caf69671cb552994798e793c7139e0da2f0bef77a3e75`.
+All `SHA256SUMS` entries verify, the candidate container stopped, NPU0-3 are
+free, and the external NPU4-7 workload was unchanged.
