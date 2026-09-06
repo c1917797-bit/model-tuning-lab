@@ -1,5 +1,29 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+## Hard gate — real-data-only reporting
+
+All reported measurements and conclusions in this workstream must be
+traceable to real execution output, inspected source, or an immutable evidence
+artifact. Never fabricate, interpolate, extrapolate, or silently substitute a
+missing value.
+
+- Performance claims require the raw benchmark artifact, the exact baseline
+  artifact, the comparison protocol, and a verified SHA256.
+- Correctness claims require captured outputs or a named deterministic check.
+  A missing or empty reference field is not positive correctness evidence.
+- Profiling claims require the profiler export and its hash; summed kernel time
+  must not be relabeled as wall-clock latency.
+- Source-only hypotheses and operator documentation are labeled
+  `unverified` until a real Ascend 910B4 run produces evidence.
+- Failed, partial, contaminated, or non-comparable runs remain recorded as
+  invalid/rejected evidence and must not contribute performance numbers.
+- If the evidence cannot be recovered or independently verified, report
+  `unknown` or `not measured`; do not infer a number.
+
+The currently retained performance matrix and paired quality gate already
+follow this rule; their evidence roots and SHA256 values are recorded below
+and in `QUALITY_GATE_V1.md`.
+
 ## Current checkpoint — 2026-09-06 MMAR x3 residual probe
 
 The retained candidate and frozen denominator are unchanged. The latest
