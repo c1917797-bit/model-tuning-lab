@@ -53,6 +53,9 @@ case "$candidate_mode" in
   mmar-on-weight-prefetch-gateup-0p1)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-candidate.yaml"
     ;;
+  qwen35-gdn-gateup-prefetch-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-qwen35-gdn-gateup-prefetch-0p1-candidate.yaml"
+    ;;
   mmar-on-weight-prefetch-gateup-0p1-fused-tail)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-add-rmsnorm-candidate.yaml"
     ;;

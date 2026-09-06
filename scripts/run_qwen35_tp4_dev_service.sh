@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|...}" >&2
     exit 64
@@ -53,6 +53,10 @@ mtp_qwen_patch_sha256=d0b0ce744a0ada28ff8a773fce596ca2b2617e01875e5a254e7e32a62f
 mtp_proposer_patch_sha256=753a67c644dcb2654ba7d63e0e0abb609e935a90f59b9ea153dbbb8f09a6dc99
 selective_ffn_nz_root="${SELECTIVE_FFN_NZ_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz}"
 selective_ffn_nz_commit="71c25ec9"
+qwen35_gdn_prefetch_root="${QWEN35_GDN_PREFETCH_ROOT:-/cache/cch/.worktrees/exp-20260906-qwen35-gdn-gateup-prefetch}"
+qwen35_gdn_prefetch_commit="${QWEN35_GDN_PREFETCH_COMMIT:-82a2dce763eb39c285744f6fc36e37728471a1c7}"
+qwen35_gdn_prefetch_weight_sha256=a6b6c41e0524c5eabb79c5d54dda24d66d96dfed0420829a8cda0aab7c8c0269
+qwen35_gdn_prefetch_layernorm_sha256=5eadde6bc398050ef2dac524bbb20e5ae4340801b92dd44830078103291d7e15
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
 flashcomm2_mmar_commit="65f780ee"
 flashcomm1_gdn_root="${FLASHCOMM1_GDN_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape}"
@@ -105,6 +109,24 @@ if [[ "$mode" == selective-ffn-nz ]]; then
     exit 45
   fi
   selective_ffn_nz_env=1
+fi
+if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ]]; then
+  actual_ref="$(
+    git -c safe.directory="$qwen35_gdn_prefetch_root" \
+      -C "$qwen35_gdn_prefetch_root" rev-parse HEAD
+  )"
+  [[ "$actual_ref" == "$qwen35_gdn_prefetch_commit" ]] || {
+    echo "Qwen3.5 GDN prefetch source must be $qwen35_gdn_prefetch_commit, got $actual_ref" >&2
+    exit 45
+  }
+  [[ "$(sha256sum "$qwen35_gdn_prefetch_root/vllm_ascend/ops/weight_prefetch.py" | awk '{print $1}')" == "$qwen35_gdn_prefetch_weight_sha256" ]] || {
+    echo "Qwen3.5 GDN weight-prefetch patch hash mismatch" >&2
+    exit 47
+  }
+  [[ "$(sha256sum "$qwen35_gdn_prefetch_root/vllm_ascend/ops/layernorm.py" | awk '{print $1}')" == "$qwen35_gdn_prefetch_layernorm_sha256" ]] || {
+    echo "Qwen3.5 GDN layernorm patch hash mismatch" >&2
+    exit 47
+  }
 fi
 if [[ "$mode" == mtp-local-argmax ||
       "$mode" == mtp-k3-local-argmax-mmar-prefetch-gateup-0p1 ]]; then
@@ -311,6 +333,7 @@ serve_args=(
             "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"enable_npugraph_ex":true,"enable_static_kernel":true}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ||
+          "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
           "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ||
           "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
           "$mode" == suffix-k16-mmar-prefetch-gateup-0p1 ||
@@ -482,6 +505,14 @@ if [[ "$mode" == selective-ffn-nz ]]; then
     -v "$selective_ffn_nz_root/vllm_ascend/envs.py:$image_source_root/envs.py:ro"
     -v "$selective_ffn_nz_root/vllm_ascend/utils.py:$image_source_root/utils.py:ro"
     -v "$selective_ffn_nz_root/vllm_ascend/ops/linear.py:$image_source_root/ops/linear.py:ro"
+  )
+fi
+if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ]]; then
+  image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
+  docker_args+=(
+    -v "$qwen35_gdn_prefetch_root/vllm_ascend/ops/weight_prefetch.py:$image_source_root/ops/weight_prefetch.py:ro"
+    -v "$qwen35_gdn_prefetch_root/vllm_ascend/ops/layernorm.py:$image_source_root/ops/layernorm.py:ro"
+    -e VLLM_ASCEND_QWEN35_GDN_PREFETCH_COMMIT="$qwen35_gdn_prefetch_commit"
   )
 fi
 if [[ "$mode" == mtp-local-argmax ||
