@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|qwen35-gdn-gateup-down-prefetch-0p1|qwen35-gdn-prefetch0p1-sp-pass|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|qwen35-gdn-gateup-prefetch-0p1-proj-fusion|qwen35-gdn-gateup-down-prefetch-0p1|qwen35-gdn-prefetch0p1-sp-pass|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|...}" >&2
     exit 64
@@ -57,6 +57,10 @@ qwen35_gdn_prefetch_root="${QWEN35_GDN_PREFETCH_ROOT:-/cache/cch/.worktrees/exp-
 qwen35_gdn_prefetch_commit="${QWEN35_GDN_PREFETCH_COMMIT:-82a2dce763eb39c285744f6fc36e37728471a1c7}"
 qwen35_gdn_prefetch_weight_sha256=a6b6c41e0524c5eabb79c5d54dda24d66d96dfed0420829a8cda0aab7c8c0269
 qwen35_gdn_prefetch_layernorm_sha256=5eadde6bc398050ef2dac524bbb20e5ae4340801b92dd44830078103291d7e15
+qwen35_gdn_proj_fusion_root="${QWEN35_GDN_PROJ_FUSION_ROOT:-/cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion}"
+qwen35_gdn_proj_fusion_commit="${QWEN35_GDN_PROJ_FUSION_COMMIT:-685fdf22098fb3a0aa8d582dda57063773606a02}"
+qwen35_gdn_proj_fusion_attn_sha256=6aaf29f585d92d92e9d251fef899884f6cae32800a13cd24675b549f68573643
+qwen35_gdn_proj_fusion_model_sha256=277e9d74db7baeb5a9c7d09bb37c83cdc676ed069c386e4ac8ef18bd059a4661
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
 flashcomm2_mmar_commit="65f780ee"
 flashcomm1_gdn_root="${FLASHCOMM1_GDN_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-flashcomm1-gdn-shape}"
@@ -111,6 +115,7 @@ if [[ "$mode" == selective-ffn-nz ]]; then
   selective_ffn_nz_env=1
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
+      "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ||
       "$mode" == qwen35-gdn-gateup-down-prefetch-0p1 ||
       "$mode" == qwen35-gdn-prefetch0p1-sp-pass ]]; then
   actual_ref="$(
@@ -127,6 +132,24 @@ if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
   }
   [[ "$(sha256sum "$qwen35_gdn_prefetch_root/vllm_ascend/ops/layernorm.py" | awk '{print $1}')" == "$qwen35_gdn_prefetch_layernorm_sha256" ]] || {
     echo "Qwen3.5 GDN layernorm patch hash mismatch" >&2
+    exit 47
+  }
+fi
+if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ]]; then
+  actual_ref="$(
+    git -c safe.directory="$qwen35_gdn_proj_fusion_root" \
+      -C "$qwen35_gdn_proj_fusion_root" rev-parse HEAD
+  )"
+  [[ "$actual_ref" == "$qwen35_gdn_proj_fusion_commit" ]] || {
+    echo "Qwen3.5 GDN projection-fusion source must be $qwen35_gdn_proj_fusion_commit, got $actual_ref" >&2
+    exit 45
+  }
+  [[ "$(sha256sum "$qwen35_gdn_proj_fusion_root/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py" | awk '{print $1}')" == "$qwen35_gdn_proj_fusion_attn_sha256" ]] || {
+    echo "Qwen3.5 GDN projection-fusion attention hash mismatch" >&2
+    exit 47
+  }
+  [[ "$(sha256sum "$qwen35_gdn_proj_fusion_root/vllm/model_executor/models/qwen3_5.py" | awk '{print $1}')" == "$qwen35_gdn_proj_fusion_model_sha256" ]] || {
+    echo "Qwen3.5 GDN projection-fusion model hash mismatch" >&2
     exit 47
   }
 fi
@@ -340,6 +363,7 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.1}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ||
           "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
+          "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ||
           "$mode" == qwen35-gdn-prefetch0p1-sp-pass ||
           "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ||
           "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
@@ -515,6 +539,7 @@ if [[ "$mode" == selective-ffn-nz ]]; then
   )
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
+      "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ||
       "$mode" == qwen35-gdn-gateup-down-prefetch-0p1 ||
       "$mode" == qwen35-gdn-prefetch0p1-sp-pass ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
@@ -522,6 +547,15 @@ if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
     -v "$qwen35_gdn_prefetch_root/vllm_ascend/ops/weight_prefetch.py:$image_source_root/ops/weight_prefetch.py:ro"
     -v "$qwen35_gdn_prefetch_root/vllm_ascend/ops/layernorm.py:$image_source_root/ops/layernorm.py:ro"
     -e VLLM_ASCEND_QWEN35_GDN_PREFETCH_COMMIT="$qwen35_gdn_prefetch_commit"
+  )
+fi
+if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ]]; then
+  vllm_source_root=/vllm-workspace/vllm/vllm
+  docker_args+=(
+    -v "$qwen35_gdn_proj_fusion_root/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py:$vllm_source_root/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py:ro"
+    -v "$qwen35_gdn_proj_fusion_root/vllm/model_executor/models/qwen3_5.py:$vllm_source_root/model_executor/models/qwen3_5.py:ro"
+    -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1
+    -e VLLM_ASCEND_QWEN35_GDN_PROJ_FUSION_COMMIT="$qwen35_gdn_proj_fusion_commit"
   )
 fi
 if [[ "$mode" == mtp-local-argmax ||
