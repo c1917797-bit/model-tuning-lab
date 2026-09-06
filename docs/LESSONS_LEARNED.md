@@ -255,3 +255,63 @@ contains the required mechanism and that the method targets an observed
 bottleneck. For dense inference, prefer methods such as exact speculative/MTP,
 attention/KV/decode improvements, or other inference-time techniques that do
 not require retraining unless retraining is explicitly in scope.
+
+## 7. User skill portability lessons
+
+### 7.1 Real skills must be versioned separately from plugin wishlists
+
+On 2026-09-06, the maintainer first captured a plugin list in
+`configs/maintainer-plugins.md`. That was useful metadata, but it did not make a
+fresh machine inherit the user's actual runtime skills. The real portable state
+was later captured from the local user skill roots into:
+
+```text
+skills/codex-skills/
+skills/agents-skills/
+```
+
+**Lesson:** a plugin list is not a skill backup. For fresh-machine continuity,
+copy the actual user skill directories and include a manifest that explains how
+to restore them.
+
+### 7.2 Keep system skills and generated caches out of the portable snapshot
+
+The user skill sync deliberately excluded `.codex/skills/.system`, because those
+skills are product/runtime-owned rather than maintainer-owned. A first push also
+failed because `ppt-deep-search/docs/showcase/latest/` contained local showcase
+outputs with Git LFS pointers whose objects were missing locally.
+
+The final successful snapshot kept real skill definitions, references, scripts,
+templates, and required assets, while excluding the generated showcase cache.
+
+**Lesson:** preserve the executable skill body, not every local artifact under a
+skill folder. Exclude runtime-owned `.system` content and generated media caches
+that can break clone/push portability.
+
+### 7.3 Verify Git LFS before pushing a skill snapshot
+
+The failed push surfaced as missing/corrupt local LFS objects. The successful
+recovery path was:
+
+```text
+git lfs ls-files
+remove generated LFS-backed showcase cache from the index
+record the exclusion in .gitignore and SKILLS_SYNC_MANIFEST.md
+amend the snapshot commit
+push main
+```
+
+**Lesson:** before declaring a skill backup portable, run `git lfs ls-files` and
+make sure every tracked LFS object is intentional and available. Do not use an
+incomplete LFS push as the default recovery path.
+
+### 7.4 The portable handoff command should be one command block
+
+The durable restore path is now recorded in `SKILLS_SYNC_MANIFEST.md` and
+`scripts/restore-user-skills.ps1`. It clones the repository, then copies
+`skills/codex-skills/*` to `%USERPROFILE%\.codex\skills\` and
+`skills/agents-skills/*` to `%USERPROFILE%\.agents\skills\`.
+
+**Lesson:** future maintainers should leave a copy-pasteable restore command and
+a repository script, not only prose. This is the difference between a memory aid
+and a usable handoff.
