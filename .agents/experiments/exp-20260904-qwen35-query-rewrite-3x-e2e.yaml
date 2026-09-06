@@ -1518,3 +1518,30 @@ suffix_candidate:
       decision: "reject-performance-c1-failfast; do not retune suffix depth without a graph-compatible scheduler/runtime implementation"
       hashes: {c1_sha256: 37ebb85038327c7b57976964e145902b8860c939d89c83622ebe4545ff28e53f, decision_sha256: 01d5a94bc3cafacac12dbaa3c74db798d1f866f27585b1d30e030b90c6afbb46, service_log_sha256: 71810580d69601d86f3ec803bdc30bbb788f4689a0de3697becf06bef6506804, metrics_sha256: 4b770e7e5b0f84b185fcc7ce3ed663ae62ff48a6b0e537ce9607688dd5e25fff}
       resource_release: "exact container exited 0; matching benchmark/orchestrator processes absent; NPU0-3 have no running processes"
+
+mtp_k3_local_argmax_tp4_candidate:
+  run_id: tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-v1-20260906T113059Z
+  operation_id: exec-000000000000023e
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-v1-20260906T113059Z
+  source_commit: 37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd
+  source_validation: "exact vLLM-Ascend 0.23.0 image focused local-argmax test passed; 1 passed"
+  runtime: "BF16, no quantization, no retraining, TP4/DP1 on physical NPU0-3, async scheduling, FULL_DECODE_ONLY, MMAR, NZ1, dense gate/up prefetch 0.1"
+  matrix: "c1/c5/c8/c16, one 32-request screen per cell, 128/128 completed, zero errors, all natural stops"
+  acceptance: {draft_tokens: 26487, accepted_tokens: 17524, rate: 0.6616075818325971}
+  p50_speedup_vs_frozen_tp4_npu03:
+    c1: {ttft: 1.86292425592442, tpot: 2.4839333179598215}
+    c5: {ttft: 1.6642553218688214, tpot: 2.255318435839853}
+    c8: {ttft: 1.5826534357735185, tpot: 2.049296075082554}
+    c16: {ttft: 1.2643432613335326, tpot: 1.4890258135172982}
+  p95_p99_result: "target not met; TTFT tails regress at c1/c8/c16 and TPOT p99 regresses at c16"
+  throughput_speedup:
+    c1: {request: 1.978300058991327, output_token: 1.653306256446258}
+    c5: {request: 1.6821744226966195, output_token: 1.7352778539127274}
+    c8: {request: 1.823668373808916, output_token: 1.6538626878287436}
+    c16: {request: 1.3795890905139156, output_token: 1.4770052785604006}
+  decision: "iterate-performance; retain MTP k3 as a promising decode component, but it is not an accepted final stack"
+  quality_gate: "unproven: target verification, zero errors and natural EOS are necessary but the dataset answer field is not a meaningful semantic reference"
+  analyzer_note: "generic analyzer rejected the explicitly selected baseline because it pinned another baseline's hashes; the TP4/NPU0-3 analyzer produced the authoritative decision"
+  hashes: {c1: 83e442667517a2d7bf64149b87d3b3d23f201b89a9fae77e6f4e5d193d6fda84, c5: c525a0e1a08ccf2c369ab460eb3dfa7e84ce16c9c59907f730f2bdb0b1cc65d2, c8: 29322a124c49a0bedc18f61b9976b98b677e02a58e926ea8939b066515cd14a1, c16: aba0f5b1910acd29fa6f7329b9df5c8345533054d03a3fd192c9958da75708ad, decision: 647dee9bf76eb4b045a34e03013d045479349359301a4574ed23958f164bd0da, metrics: 8fc92d99f8ce0cd9e88a6dbff44bc754a046d220b967d89fc1e8dd7544d7a69b, service_log: 8bcad7a1d4ee54460e33ba01710add484cef684f83ac1cd1d8e2026cb05cdf8e}
+  resource_release: "candidate container stopped; NPU0-3 have no running processes; NPU4-7 external workload remained running"
+  next: "profile c16 MTP draft/verify scheduling and establish a meaningful paired semantic-quality gate before stacking the next change"

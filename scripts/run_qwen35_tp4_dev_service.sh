@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|...}" >&2
     exit 64
@@ -48,7 +48,9 @@ port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 mtp_local_argmax_root="${MTP_LOCAL_ARGMAX_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax}"
-mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-2d08abd56466360b56738d5c48858dc32ddd1f6b}"
+mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd}"
+mtp_qwen_patch_sha256=d0b0ce744a0ada28ff8a773fce596ca2b2617e01875e5a254e7e32a62fdf7d4b
+mtp_proposer_patch_sha256=753a67c644dcb2654ba7d63e0e0abb609e935a90f59b9ea153dbbb8f09a6dc99
 selective_ffn_nz_root="${SELECTIVE_FFN_NZ_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-selective-ffn-nz}"
 selective_ffn_nz_commit="71c25ec9"
 flashcomm2_mmar_root="${FLASHCOMM2_MMAR_ROOT:-/cache/cch/.worktrees/exp-20260904-qwen35-flashcomm2-oproj-mmar-mlp}"
@@ -104,7 +106,8 @@ if [[ "$mode" == selective-ffn-nz ]]; then
   fi
   selective_ffn_nz_env=1
 fi
-if [[ "$mode" == mtp-local-argmax ]]; then
+if [[ "$mode" == mtp-local-argmax ||
+      "$mode" == mtp-k3-local-argmax-mmar-prefetch-gateup-0p1 ]]; then
   actual_ref="$(
     git -c safe.directory="$mtp_local_argmax_root" \
       -C "$mtp_local_argmax_root" rev-parse HEAD
@@ -113,6 +116,14 @@ if [[ "$mode" == mtp-local-argmax ]]; then
     echo "Qwen3.5 MTP local-argmax source must be $mtp_local_argmax_commit, got $actual_ref" >&2
     exit 45
   fi
+  [[ "$(sha256sum "$mtp_local_argmax_root/vllm_ascend/patch/worker/patch_qwen3_5.py" | awk '{print $1}')" == "$mtp_qwen_patch_sha256" ]] || {
+    echo "Qwen3.5 MTP patch hash mismatch" >&2
+    exit 47
+  }
+  [[ "$(sha256sum "$mtp_local_argmax_root/vllm_ascend/spec_decode/llm_base_proposer.py" | awk '{print $1}')" == "$mtp_proposer_patch_sha256" ]] || {
+    echo "Ascend local-argmax proposer patch hash mismatch" >&2
+    exit 47
+  }
 fi
 if [[ "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ]]; then
   [[ -f "$draft4b_model/config.json" &&
@@ -304,6 +315,7 @@ serve_args=(
           "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
           "$mode" == suffix-k16-mmar-prefetch-gateup-0p1 ||
           "$mode" == mtp-local-argmax ||
+          "$mode" == mtp-k3-local-argmax-mmar-prefetch-gateup-0p1 ||
           "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024 ||
           "$mode" == mmar-on-weight-prefetch-gateup-0p1-taskqueue2 ||
           "$mode" == tp2-pp2-mmar-on-weight-prefetch-gateup-0p1 ||
@@ -368,6 +380,12 @@ if [[ "$mode" == mtp-local-argmax ]]; then
   # Greedy query_rewrite requests can use an exact vocab-parallel argmax:
   # gather one value/index pair per TP rank instead of full draft logits.
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}')
+fi
+if [[ "$mode" == mtp-k3-local-argmax-mmar-prefetch-gateup-0p1 ]]; then
+  # The repaired proposer honors local argmax and avoids full draft logits.
+  # Three target-verified drafts are the only primary change from the retained
+  # MMAR + dense gate/up prefetch stack.
+  serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":3,"use_local_argmax_reduction":true}')
 fi
 if [[ "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ]]; then
   # A separate BF16 Qwen3.5-4B proposer is verified by the 27B target. TP4 is
@@ -466,10 +484,13 @@ if [[ "$mode" == selective-ffn-nz ]]; then
     -v "$selective_ffn_nz_root/vllm_ascend/ops/linear.py:$image_source_root/ops/linear.py:ro"
   )
 fi
-if [[ "$mode" == mtp-local-argmax ]]; then
+if [[ "$mode" == mtp-local-argmax ||
+      "$mode" == mtp-k3-local-argmax-mmar-prefetch-gateup-0p1 ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
   docker_args+=(
     -v "$mtp_local_argmax_root/vllm_ascend/patch/worker/patch_qwen3_5.py:$image_source_root/patch/worker/patch_qwen3_5.py:ro"
+    -v "$mtp_local_argmax_root/vllm_ascend/spec_decode/llm_base_proposer.py:$image_source_root/spec_decode/llm_base_proposer.py:ro"
+    -e VLLM_ASCEND_MTP_LOCAL_ARGMAX_COMMIT="$mtp_local_argmax_commit"
   )
 fi
 if [[ "$mode" == flashcomm2-oproj1-mmar-prefetch-gateup-0p1 ||

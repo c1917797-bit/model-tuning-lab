@@ -19,6 +19,9 @@ active_container=""
 active_log=""
 
 case "$candidate_mode" in
+  mtp-k3-local-argmax-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-mtp-k3-local-argmax-mmar-prefetch-gateup-0p1-candidate.yaml"
+    ;;
   suffix-k15-mmar-prefetch-gateup-0p1)
     default_config="$repo_root/configs/qwen35-query-rewrite-suffix-k15-mmar-prefetch-gateup-0p1-candidate.yaml"
     ;;
@@ -198,6 +201,7 @@ candidate_run_status=$?
 set -e
 
 if [[ "$candidate_mode" == ngram-gpu ||
+      "$candidate_mode" == mtp-k3-local-argmax-mmar-prefetch-gateup-0p1 ||
       "$candidate_mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
       "$candidate_mode" == suffix-k16-mmar-prefetch-gateup-0p1 ||
       "$candidate_mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ||
@@ -217,15 +221,24 @@ analyzer_extra=()
 if [[ "$candidate_run_status" != 0 ]]; then
   analyzer_extra+=(--allow-incomplete)
 fi
-python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
-  --original-dir "$original_dir" \
-  --candidate-dir "$output_root/candidate" \
-  --candidate-id "$candidate_id" \
-  --candidate-device-set "$device_set" \
-  --candidate-run "$output_root/candidate/candidate-run.json" \
-  --target-ratio 0.5 \
-  --output "$output_root/decision.json" \
-  "${analyzer_extra[@]}"
+if [[ "$original_dir" == */baselines/tp4dp1-npu03-ref-v1 ]]; then
+  python3 "$repo_root/scripts/analyze_qwen35_tp4_npu03_candidate.py" \
+    --baseline-summary "$original_dir/baseline-summary.json" \
+    --candidate-dir "$output_root/candidate" \
+    --candidate-id "$candidate_id" \
+    --target-speedup 2.0 \
+    --output "$output_root/decision.json"
+else
+  python3 "$repo_root/scripts/analyze_qwen35_candidate_vs_original.py" \
+    --original-dir "$original_dir" \
+    --candidate-dir "$output_root/candidate" \
+    --candidate-id "$candidate_id" \
+    --candidate-device-set "$device_set" \
+    --candidate-run "$output_root/candidate/candidate-run.json" \
+    --target-ratio 0.5 \
+    --output "$output_root/decision.json" \
+    "${analyzer_extra[@]}"
+fi
 decision_status=$?
 set -e
 if [[ "$decision_status" != 0 && "$decision_status" != 2 &&

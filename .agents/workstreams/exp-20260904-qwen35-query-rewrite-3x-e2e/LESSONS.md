@@ -100,3 +100,20 @@ Updated: 2026-09-06
   or have no installed-source reader. Require actual runtime activation.
 - Never edit a shell script while an existing shell process may still be
   reading it. Create a versioned successor or wait for the process to finish.
+
+## TP4 MTP k3 local-argmax lessons
+
+- Repaired target-verified MTP k3 is the first TP4 candidate in this loop to
+  exceed 2x TPOT P50 at c1, c5 and c8; retain it as a stack component.
+- A 66.16% token acceptance rate is not sufficient to guarantee high-load
+  benefit: c16 TPOT P50 reached only 1.489x and TPOT P99 regressed to 0.979x.
+- Always inspect TTFT and TPOT P95/P99. P50-only reporting would have hidden
+  TTFT tail regressions at c1, c8 and c16.
+- The first c1 screen after graph capture can include cold tail behavior.
+  Preserve it as E2E evidence; use repeated warmed runs only as an explicitly
+  separate attribution experiment, never by deleting the cold observation.
+- An analyzer's frozen hashes are baseline-specific. Route an explicitly
+  selected TP4/NPU0-3 baseline to its matching hash-verifying analyzer.
+- Greedy response hashes vary across the existing baseline repetitions, so
+  hashes are diagnostics, not proof of semantic equivalence. 精读无损 still
+  requires a meaningful paired reference or calibrated judge.

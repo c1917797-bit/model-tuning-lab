@@ -2424,3 +2424,36 @@ row-parallel MMAR paths per decode step. Reinspect the exact installed MMAR
 source and `/cache/cch` operator-generation assets before proposing a new
 shape-specialized kernel; do not repeat commTurn, separate MatMul+AllReduce,
 FlashComm, static-kernel or fused-tail variants already rejected above.
+
+## TP4 MTP k3 local-argmax full screen
+
+Run `tp4-npu03-mtp-k3-local-argmax-mmar-prefetch0p1-v1-20260906T113059Z`
+completed all c1/c5/c8/c16 cells on physical NPU0-3: 128/128 requests, zero
+errors and natural stops. NPU4-7 remained owned by
+`qwen36_hypic_nocache_baseline_npu4_7_tp4_b40960` and was not touched.
+The exact-image focused test for commit
+`37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd` passed before launch.
+
+| Concurrency | TTFT speedup P50/P95/P99 | TPOT speedup P50/P95/P99 |
+|---:|---:|---:|
+| 1 | 1.863x / 0.153x / 0.148x | 2.484x / 1.237x / 1.156x |
+| 5 | 1.664x / 1.100x / 1.130x | 2.255x / 1.517x / 1.787x |
+| 8 | 1.583x / 0.977x / 0.977x | 2.049x / 1.661x / 1.898x |
+| 16 | 1.264x / 0.920x / 0.920x | 1.489x / 1.081x / 0.979x |
+
+MTP accepted 17,524 of 26,487 draft tokens (66.16%). This is strong evidence
+that repaired local-argmax MTP k3 is a useful decode component: TPOT P50
+exceeded 2x at c1/c5/c8. It is not the final accepted stack because c16 TPOT,
+all TTFT P50 values, and several P95/P99 cells miss the 2x target. The quality
+gate remains unproven because `query_rewrite` has no meaningful nonempty
+reference answers; target verification and transport success do not alone
+prove 精读无损.
+
+The generic analyzer failed after the valid matrix because its immutable hash
+table belongs to another baseline. The authoritative TP4/NPU0-3 decision is
+`decision-tp4-npu03.json`, SHA256
+`647dee9bf76eb4b045a34e03013d045479349359301a4574ed23958f164bd0da`.
+The launcher now selects the TP4 analyzer when the frozen TP4/NPU0-3 baseline
+directory is explicit, preserving rather than bypassing provenance checks.
+Next profile c16 speculative scheduling and create a paired semantic-quality
+gate; do not claim the 2x/精读无损 goal yet.
