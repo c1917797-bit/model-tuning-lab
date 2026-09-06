@@ -24,6 +24,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repeats", type=int, default=7)
     parser.add_argument("--master-port", type=int, default=29711)
     parser.add_argument("--seed", type=int, default=1024)
+    parser.add_argument(
+        "--schema",
+        default="qwen35-mmar-hccl-buffer-microbenchmark/v1",
+    )
+    parser.add_argument("--label")
     return parser.parse_args()
 
 
@@ -129,7 +134,8 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
 
     if rank == 0:
         result = {
-            "schema": "qwen35-mmar-hccl-buffer-microbenchmark/v1",
+            "schema": args.schema,
+            "label": args.label,
             "shape_source": (
                 "real 910B4 rank-0 op_summary; each decode shape occurred "
                 "6720 times in the profiled request"
@@ -148,6 +154,18 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                 "torch_npu": torch_npu.__version__,
                 "hccl_buffsize": os.environ.get("HCCL_BUFFSIZE"),
                 "task_queue_enable": os.environ.get("TASK_QUEUE_ENABLE"),
+                "mmar_m1_core_num": os.environ.get(
+                    "ASCEND_MATMUL_ALLREDUCE_M1_CORE_NUM"
+                ),
+                "ascend_custom_opp_path": os.environ.get(
+                    "ASCEND_CUSTOM_OPP_PATH"
+                ),
+                "operator_commit": os.environ.get(
+                    "QWEN35_MMAR_OPERATOR_COMMIT"
+                ),
+                "package_sha256": os.environ.get(
+                    "QWEN35_MMAR_PACKAGE_SHA256"
+                ),
             },
         }
         if args.output.exists():
