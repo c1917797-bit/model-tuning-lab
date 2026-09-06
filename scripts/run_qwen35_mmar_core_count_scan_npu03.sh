@@ -8,8 +8,13 @@ custom_opp_env="${CUSTOM_OPP_ENV:?set CUSTOM_OPP_ENV to the vendor set_env.bash}
 operator_commit="${OPERATOR_COMMIT:?set OPERATOR_COMMIT}"
 package_sha256="${PACKAGE_SHA256:?set PACKAGE_SHA256}"
 core_values="${MMAR_M1_CORE_VALUES:-8 12 16 24}"
+device_cooldown_seconds="${MMAR_DEVICE_COOLDOWN_SECONDS:-30}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
 image="${VLLM_ASCEND_IMAGE:-quay.io/ascend/vllm-ascend:v0.23.0}"
+[[ "$device_cooldown_seconds" =~ ^[0-9]+$ ]] || {
+  echo "MMAR_DEVICE_COOLDOWN_SECONDS must be a non-negative integer" >&2
+  exit 64
+}
 
 for path in "$output_root" "$custom_opp_root" "$custom_opp_env"; do
   case "$path" in
@@ -54,9 +59,11 @@ printf '%s\n' "$npu_snapshot" >"$output_root/npu-before.txt"
   echo "custom_opp_env=$custom_opp_env"
   echo "image=$image"
   echo "core_values=$core_values"
+  echo "device_cooldown_seconds=$device_cooldown_seconds"
 } >"$output_root/provenance.txt"
 
 labels="default $core_values"
+label_count="$(wc -w <<<"$labels")"
 index=0
 for label in $labels; do
   if [[ "$label" != default && ! "$label" =~ ^[0-9]+$ ]]; then
@@ -99,13 +106,16 @@ for label in $labels; do
     "${core_args[@]}" \
     "$image" \
     bash -lc "source '$custom_opp_env'; exec python3 /experiment/scripts/benchmark_qwen35_mmar_hccl_buffer.py \
-      --schema qwen35-mmar-core-count-microbenchmark/v1 \
+      --schema qwen35-mmar-core-count-microbenchmark/v2 \
       --label '$label' \
       --output '$output_root/core-$label.json' \
       --master-port '$((29831 + index))'"
   docker logs "$container_name" >"$output_root/core-$label.log" 2>&1 || true
   docker rm "$container_name" >/dev/null
   index=$((index + 1))
+  if [[ "$index" -lt "$label_count" ]]; then
+    sleep "$device_cooldown_seconds"
+  fi
 done
 
 python3 "$repo_root/scripts/evaluate_qwen35_mmar_core_count.py" \

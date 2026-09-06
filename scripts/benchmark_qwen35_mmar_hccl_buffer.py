@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import platform
 import statistics
@@ -87,6 +88,8 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
         dist.all_reduce(reference)
         torch.npu.synchronize()
         difference = (fused_output.float() - reference.float()).abs()
+        reference_l2 = float(torch.linalg.vector_norm(reference.float()).item())
+        difference_l2 = float(torch.linalg.vector_norm(difference).item())
         local = {
             "allclose": bool(
                 torch.allclose(
@@ -95,6 +98,10 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
             ),
             "max_abs": float(difference.max().item()),
             "mean_abs": float(difference.mean().item()),
+            "relative_l2": (
+                difference_l2 / reference_l2 if reference_l2 > 0.0 else math.inf
+            ),
+            "output_fp32": fused_output.float().cpu().reshape(-1).tolist(),
         }
         gathered: list[dict[str, Any] | None] = [None] * world_size
         dist.all_gather_object(gathered, local)
@@ -128,7 +135,15 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                             for item in gathered
                             if item is not None
                         ),
+                        "max_rank_relative_l2": max(
+                            float(item["relative_l2"])
+                            for item in gathered
+                            if item is not None
+                        ),
                     },
+                    "output_by_rank": [
+                        item["output_fp32"] for item in gathered if item is not None
+                    ],
                 }
             )
 
@@ -175,7 +190,26 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
             json.dumps(result, indent=2, sort_keys=True) + "\n",
             encoding="utf-8",
         )
-        print(json.dumps(result, sort_keys=True))
+        print(
+            json.dumps(
+                {
+                    "schema": result["schema"],
+                    "label": result["label"],
+                    "output": str(args.output),
+                    "cells": [
+                        {
+                            "m": cell["m"],
+                            "k": cell["k"],
+                            "n": cell["n"],
+                            "median_max_rank_us": cell["median_max_rank_us"],
+                            "correctness": cell["correctness"],
+                        }
+                        for cell in cells
+                    ],
+                },
+                sort_keys=True,
+            )
+        )
     dist.destroy_process_group()
 
 
