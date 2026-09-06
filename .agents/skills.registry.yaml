@@ -86,6 +86,83 @@ skills:
       - configs/**
       - scripts/**
       - .agents/experiments/**
+  - id: paper-ingestion
+    path: .agents/skills/paper-ingestion
+    status: experimental
+    purpose: Extract a paper into implementable inference hypotheses and prerequisites before Ascend work begins.
+    triggers:
+      - ingest a paper for Ascend
+      - paper mechanism extraction
+      - read paper for implementation
+      - 论文机制拆解
+    scope:
+      - docs/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: ascend-architecture-fit
+    path: .agents/skills/ascend-architecture-fit
+    status: experimental
+    purpose: Verify whether a paper method fits the selected Ascend checkpoint, runtime, and serving stack.
+    triggers:
+      - architecture fit
+      - checkpoint fit for paper
+      - model mechanism verification
+      - 架构适配
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: ascend-source-map
+    path: .agents/skills/ascend-source-map
+    status: experimental
+    purpose: Map paper mechanisms to concrete vLLM, vLLM-Ascend, CANN, operator, launch, or system seams before editing.
+    triggers:
+      - map paper to source
+      - find Ascend implementation seam
+      - vLLM-Ascend source mapping
+      - 论文到源码映射
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: ascend-canary-implementation
+    path: .agents/skills/ascend-canary-implementation
+    status: experimental
+    purpose: Implement the first minimal one-variable Ascend inference canary before full benchmarks or broad source changes.
+    triggers:
+      - Ascend canary implementation
+      - minimal paper implementation
+      - one-variable inference canary
+      - 最小可验证实现
+    scope:
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: paper-to-ascend-reporting
+    path: .agents/skills/paper-to-ascend-reporting
+    status: experimental
+    purpose: Produce handoff-ready Paper-to-Ascend evidence reports with scoped decisions and next loops.
+    triggers:
+      - Paper-to-Ascend report
+      - summarize paper implementation result
+      - paper experiment handoff
+      - 论文落地报告
+    scope:
+      - docs/**
+      - .agents/HANDOFF.md
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: paper-to-ascend
     path: .agents/skills/paper-to-ascend
     status: experimental

@@ -60,24 +60,29 @@ make the experiment reproducible and evidence-bound.
 
 1. Read `AGENTS.md`, `.agents/HANDOFF.md`, and any active branch-local
    workstream handoff before using host resources.
-2. Summarize the paper mechanism in terms of the current runtime: required model
-   feature, changed inference stage, expected reduced work, and possible new
-   overhead.
-3. Prove the applicability gate with live or repository evidence. Record
+2. Use `paper-ingestion` to extract the paper mechanism, prerequisites,
+   expected speed path, possible overhead, and first candidate hypothesis.
+3. Use `ascend-architecture-fit` to prove the selected model/checkpoint/runtime
+   actually supports the paper's required mechanism, or stop with a scoped
+   `does-not-fit`, `requires-retraining`, or `inconclusive` decision.
+4. Use `ascend-source-map` to map the mechanism to the smallest real
+   configuration or source seam before editing. Prefer existing exact paths.
+5. Prove the applicability gate with live or repository evidence. Record
    unknowns explicitly.
-4. Choose one primary variable for the first experiment. Keep unrelated paper
+6. Choose one primary variable for the first experiment. Keep unrelated paper
    ideas for later loops.
-5. Create or resume one `work/*` branch and one experiment record using
+7. Create or resume one `work/*` branch and one experiment record using
    `.agents/experiments/TEMPLATE.yaml`.
-6. Freeze baseline conditions before implementation: model/tokenizer identity,
+8. Freeze baseline conditions before implementation: model/tokenizer identity,
    dtype or quantization, workload, parallelism, container/runtime versions,
    CANN/driver/firmware, physical NPU IDs, port, and launch command.
-7. Measure baseline first. Only then enable the paper-derived candidate.
-8. Run correctness and target-device checks before accepting any performance
-   result.
-9. Decide as `accepted`, `rejected`, `inconclusive`, or `failed`, and record the
-   exact scope of the decision plus the next loop.
-10. Preserve negative results as pushed history. Recover failed active code
+9. Measure baseline first. Only then use `ascend-canary-implementation` for the
+   smallest one-variable candidate, followed by correctness and target-device
+   checks before any full benchmark.
+10. Decide as `accepted`, `rejected`, `inconclusive`, or `failed`, and use
+    `paper-to-ascend-reporting` to record the exact scope, recovery state,
+    evidence, and next loop.
+11. Preserve negative results as pushed history. Recover failed active code
     before integration, but do not erase the evidence.
 
 ## Current repository guidance
