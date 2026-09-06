@@ -49,6 +49,11 @@ For performance work, also use:
 - `ascend-inference-tuning-loop`
 - `ascend-benchmark-evidence`
 
+When the task is to reproduce a prior paper/practice result, historical ruler,
+or adoption claim, use `paper-to-ascend-reproduction` to freeze the scientific
+question, one-switch A/B denominator, mechanism activation gate, resumability,
+and independent audit boundary.
+
 When the paper or benchmark touches CANN/operator/kernel/profiler behavior,
 HCCL communication, memory movement, or unexplained low-level regressions, also
 use `ascend-cannbot-profiler` before changing low-level code.
@@ -112,6 +117,10 @@ not require retraining unless retraining is explicitly in scope.
   or resource ownership drifts; re-isolate and re-baseline.
 - Saved FLOPs, faster local GMM, or a single warm run is not enough. Accept only
   correctness-first, apples-to-apples repeated evidence.
+- HYPIC showed that historical reproduction needs a named denominator, one
+  treatment switch, activation proof, repeated performance and quality units,
+  resumable per-sample artifacts, and an independent fail-closed audit before
+  adoption.
 
 ## Do not do
 

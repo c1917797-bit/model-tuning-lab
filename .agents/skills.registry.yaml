@@ -149,6 +149,26 @@ skills:
       - tests/**
       - .agents/experiments/**
       - .agents/workstreams/**
+  - id: paper-to-ascend-reproduction
+    path: .agents/skills/paper-to-ascend-reproduction
+    status: experimental
+    purpose: Reproduce prior paper/practice results on Ascend with frozen one-switch A/B evidence and fail-closed audit.
+    triggers:
+      - paper reproduction on Ascend
+      - historical benchmark reproduction
+      - reproduce prior paper result
+      - HYPIC reproduction
+      - paper-to-ascend reproduction
+      - 论文复现实验
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: paper-to-ascend-reporting
     path: .agents/skills/paper-to-ascend-reporting
     status: experimental
