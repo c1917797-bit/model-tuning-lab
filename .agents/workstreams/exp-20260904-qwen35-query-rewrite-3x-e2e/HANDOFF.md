@@ -1,5 +1,45 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+## Current checkpoint — 2026-09-06 decode-only ShortGPT screen
+
+The decode-only eight-layer skip candidate is rejected by an early real
+Ascend 910B4 performance screen. This is a valid performance failure, not a
+request failure: c1 and c16 each completed 32/32 requests with zero errors and
+all natural stops. The comparison is same-repetition against the retained
+GDN-projection-fusion plus gate/up-prefetch stack; it is deliberately a
+one-repeat screen rather than a formal median-of-three A/B.
+
+| Concurrency | Candidate TTFT P95 | Retained TTFT P95 | Candidate TPOT P95 | Retained TPOT P95 |
+|---:|---:|---:|---:|---:|
+| 1 | 11733.070 ms | 6298.129 ms | 36.747 ms | 28.312 ms |
+| 16 | 18098.233 ms | 6796.297 ms | 160.800 ms | 67.777 ms |
+
+At c1 the candidate regresses TTFT P95 by 86.29% and TPOT P95 by 29.79%.
+At c16 it regresses TTFT P95 by 166.30% and TPOT P95 by 137.25%.
+Do not expand this implementation to c5/c8 or three repetitions, and do not
+repeat it unchanged. The prior 16-sample paired semantic review found no
+material loss, but that bounded quality result cannot override the performance
+rejection.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-decode-shortgpt8-nospec-screen-v1-20260906T200500Z`.
+Decision SHA256:
+`cee506499a940ec8c9e6cb17695888e10f9a4b4f54e7e8b686d8adccedfd363b`.
+Manifest SHA256:
+`cff09fdc93d0c5eaf00a3a8564d8099a55ce31836a9fd0aa420893fbe3d069cc`.
+All manifest entries verify.
+
+The candidate container is
+`qwen35_decode_shortgpt8_npu03_v1` with exact ID
+`b94b2b5a16b75cbb7c40e6511aa44b757e7dcc27ef43db4afe62d1b88cabadd1`
+on physical NPU0-3. Before replacing it, stop only this guarded ID. The next
+candidate should return to the retained stack and target the existing
+ASCEND910B BF16 `MatmulAllReduce` path: the real profile attributes 64.9357%
+of summed kernel duration to collectives and about 128 row-parallel MMAR calls
+per decode step. Presence of the layer-skip environment and mounted source is
+not runtime activation proof; any future algorithmic revisit must add direct
+skip-branch activation evidence before allocating a full matrix.
+
 ## Hard gate — real-data-only reporting
 
 All reported measurements and conclusions in this workstream must be
