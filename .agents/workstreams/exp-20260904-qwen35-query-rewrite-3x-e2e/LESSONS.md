@@ -396,5 +396,12 @@ median gains cannot promote a treatment for this objective.
   The graph retained 384 MMAR occurrences, so this was not an accidental
   global disable.
 - Preserve MMAR for the smaller attention/GDN output projection shape. The
-  complementary MLP down-projection screen remains the only unresolved
-  selective decomposition branch.
+  complementary MLP down-projection screen also failed: c1 TTFT P95
+  regressed 0.199734% and TPOT P95 regressed 0.077779%, despite an activated
+  graph with 320 MMAR and 768 ordinary all-reduce occurrences.
+- Selective decomposition is now closed for both real projection families.
+  Do not retry prefix variants unchanged. The next operator experiment must
+  improve the A2 MMAR kernel/tiling itself, preserve BF16 semantics, and pass
+  exact-shape microbench correctness before E2E.
+- MLP-down screen manifest SHA256:
+  `78e15989e9fcb9580428c702fc83fed65535b93db22455953ca3f8ac8d6886d8`.

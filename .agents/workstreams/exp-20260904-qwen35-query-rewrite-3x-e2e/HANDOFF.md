@@ -2974,4 +2974,25 @@ Graph SHA256:
 `0602d2c7e7c479b7821e8c988123f868e3b9a168a9852657c0746e46c9bcffac`.
 Manifest SHA256:
 `9588d485594c611ac72a2fb27f0aa0622a9dd8aa5a0ab1c05b59506bc8849da1`.
-The complementary MLP-down-only fallback is now running on physical NPU0-3.
+
+## Selective MLP down-projection MMAR-off screen rejected
+
+The complementary screen retained MMAR for attention/GDN
+`o_proj/out_proj` and routed only MLP `down_proj` through ordinary
+matmul plus all-reduce. It completed 32/32 real c1 query_rewrite requests
+with zero errors, 32 natural stops, TTFT P95 6310.708106448874 ms and TPOT
+P95 28.333869803263084 ms. Against the retained 6298.128575/28.311849 ms
+reference, both metrics regressed: TTFT +0.199734% and TPOT +0.077779%.
+
+The graph contained 320 `npu_mm_all_reduce_base` and 768 `all_reduce`
+occurrences, proving selective activation. Reject by fail-fast; do not expand
+to c16 or the full matrix. Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-proj-fusion-mmar-down-off-nospec-screen-v1`.
+All manifest entries verify; SHA256 of `SHA256SUMS` is
+`78e15989e9fcb9580428c702fc83fed65535b93db22455953ca3f8ac8d6886d8`.
+The exact candidate container exited cleanly and the retained stack was
+restarted as `qwen35_gdn_proj_fusion_npu03_v5` on physical NPU0-3.
+
+Both selective decomposition branches are now closed. Preserve MMAR for both
+real shape families and continue with a materially new A2/910B4 MMAR kernel
+or tiling implementation.

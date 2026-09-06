@@ -78,3 +78,12 @@ the activated graph retained 384 MMAR occurrences for the complementary
 family. Keep MMAR on this smaller projection family. The source control lives
 at commit `5d2c6e648f75bac11774a1e2886c8b7a65c4c9a2`; this is screening
 infrastructure, not a promoted optimization.
+
+The complementary MLP `down_proj` selective fallback is also rejected.
+Its real c1 TTFT/TPOT P95 regressed 0.199734%/0.077779%; the rank-0 graph
+retained 320 MMAR and exposed 768 ordinary all-reduce occurrences. Evidence
+manifest SHA256:
+`78e15989e9fcb9580428c702fc83fed65535b93db22455953ca3f8ac8d6886d8`.
+This closes all existing MMAR-decomposition variants. P0 is now strictly a
+materially new ASCEND910B arch22 MMAR kernel/tiling optimization for the
+observed BF16 M=1 shapes, not another enable/disable or prefix split.
