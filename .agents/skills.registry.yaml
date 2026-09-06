@@ -66,6 +66,26 @@ skills:
       - configs/**
       - scripts/**
       - .agents/experiments/**
+  - id: paper-to-ascend
+    path: .agents/skills/paper-to-ascend
+    status: experimental
+    purpose: Gate and translate a research paper into a bounded Ascend NPU inference optimization workstream.
+    triggers:
+      - Paper-to-Ascend
+      - papertoAscend
+      - adapt a paper to Ascend inference
+      - implement a paper on Ascend
+      - 论文迁移到 Ascend
+      - 把论文方法落到 Ascend
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: mst-agentsmd-authoring
     path: .agents/skills/mst-agentsmd-authoring
     status: stable
