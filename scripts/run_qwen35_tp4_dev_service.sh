@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|qwen35-gdn-prefetch0p1-sp-pass|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|qwen35-gdn-gateup-down-prefetch-0p1|qwen35-gdn-prefetch0p1-sp-pass|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|...}" >&2
     exit 64
@@ -111,6 +111,7 @@ if [[ "$mode" == selective-ffn-nz ]]; then
   selective_ffn_nz_env=1
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
+      "$mode" == qwen35-gdn-gateup-down-prefetch-0p1 ||
       "$mode" == qwen35-gdn-prefetch0p1-sp-pass ]]; then
   actual_ref="$(
     git -c safe.directory="$qwen35_gdn_prefetch_root" \
@@ -335,6 +336,8 @@ serve_args=(
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-static-kernel ||
             "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"enable_npugraph_ex":true,"enable_static_kernel":true}}'
+    elif [[ "$mode" == qwen35-gdn-gateup-down-prefetch-0p1 ]]; then
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.1}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ||
           "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
           "$mode" == qwen35-gdn-prefetch0p1-sp-pass ||
@@ -512,6 +515,7 @@ if [[ "$mode" == selective-ffn-nz ]]; then
   )
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
+      "$mode" == qwen35-gdn-gateup-down-prefetch-0p1 ||
       "$mode" == qwen35-gdn-prefetch0p1-sp-pass ]]; then
   image_source_root=/vllm-workspace/vllm-ascend/vllm_ascend
   docker_args+=(
