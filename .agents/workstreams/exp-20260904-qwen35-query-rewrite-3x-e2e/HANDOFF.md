@@ -2564,3 +2564,28 @@ Profile root:
 The op-summary SHA256 is
 `45b376e3401961dd3ffb90a92fa7fb45e5c4d185aacf4177011c25ef62c19dc0`;
 all manifest entries verify. NPU0-3 were released and NPU4-7 were unchanged.
+
+## Ascend sequence-parallel activation probe
+
+The retained MMAR stack was tested with the vLLM-Ascend sequence-parallel
+compiler pass enabled and `sp_min_token_num=1`. This was an activation probe,
+not a formal A/B. One private real query_rewrite sample completed on physical
+Ascend 910B4 NPU0-3 with 1810 prompt tokens, 104 completion tokens, natural
+stop, zero errors, BF16 float weights, `quantization=None`, and
+`speculative_config=None`.
+
+The rank-0 compiled-graph symbol inventory contains 704 occurrences of
+`npu_mm_all_reduce_base` and 767 of `npu_add_rms_norm_bias`, but zero
+`reduce_scatter` and zero `all_gather`. This confirms the retained MMAR
+path remains opaque to the sequence-parallel pattern; enabling the pass did
+not produce the intended Ascend collective transformation. It also removed
+capture sizes 1, 2, 6, 10 and 14 under TP4, creating an avoidable c1 graph
+coverage risk.
+
+Decision: `rejected-activation`; do not spend a formal benchmark matrix on
+this combination and do not repeat it unchanged. Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/activation-probes/tp4-npu03-gdn-prefetch0p1-sp-pass-v1-20260906T1348Z`.
+The manifest SHA256 is
+`718355accf230244126b881cdff04b03e52ccf9a6dafd76e534857c6ad711a19`.
+All entries verify. The probe container was stopped, NPU0-3 were released, and
+the external NPU4-7 workload remained running and untouched.

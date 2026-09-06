@@ -180,3 +180,21 @@ Updated: 2026-09-06
   interaction, numerical equality, and runtime activation before benchmarking.
 - NPU0-3 are the experiment cards; do not disturb the external workload on
   NPU4-7.
+
+## Sequence-parallel activation failure on the retained Ascend stack
+
+- A configured compiler pass is not an activated optimization. Require
+  compiled-graph or runtime-kernel evidence before launching an A/B matrix.
+- With `VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1`, Qwen3.5 row-parallel layers
+  compile to the opaque Ascend `npu_mm_all_reduce_base` path. The tested
+  sequence-parallel pass did not materialize `reduce_scatter` or
+  `all_gather`.
+- Enabling sequence parallelism under TP4 removed non-multiple-of-four graph
+  capture sizes, including c1. Even if a high-token prefill pattern later
+  matches, this side effect must be weighed against TTFT and tail risk.
+- Fail fast at the activation gate. One real private query is sufficient to
+  prove graph shape and runtime constraints; it is not sufficient for a
+  performance claim.
+- Do not repeat `enable_sp=true` with MMAR unchanged. The next candidate must
+  be Ascend-native, preserve BF16/no-quantization/no-speculation semantics, and
+  prove its CANN/MMAR/HCCL activation before the c1/c5/c8/c16 matrix.

@@ -1643,3 +1643,27 @@ qwen35_gdn_gateup_prefetch_nospec_msprof_v1:
     sha256sums_sha256: 70d3970357698a311ee81c1e73326cdcfa99f043c3042dd09a3fbba9dfa9e2ba
   next: "prove exact Qwen3.5 graph applicability and MMAR interaction for a lossless Ascend communication/graph transformation before a narrow real E2E screen"
   resource_release: "profiling container stopped; NPU0-3 released; NPU4-7 external workload unchanged"
+
+qwen35_gdn_prefetch_sequence_parallel_probe_v1:
+  status: rejected_activation
+  run_id: tp4-npu03-gdn-prefetch0p1-sp-pass-v1-20260906T1348Z
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/activation-probes/tp4-npu03-gdn-prefetch0p1-sp-pass-v1-20260906T1348Z
+  runtime: "Ascend 910B4, physical NPU0-3, TP4/DP1, BF16 float model, quantization=None, speculative_config=None, vLLM-Ascend compiler"
+  isolated_variable: "pass_config.enable_sp=true with sp_min_token_num=1 while retaining MMAR and the GDN gate/up prefetch ingredient"
+  activation_request: "one private real query_rewrite sample: 1810 prompt tokens, 104 completion tokens, natural stop, zero errors"
+  activation_request_metrics_diagnostic_only: {ttft_ms: 421.397530, tpot_ms: 31.138076}
+  compiled_graph_symbols_rank0:
+    npu_mm_all_reduce_base: 704
+    npu_add_rms_norm_bias: 767
+    reduce_scatter: 0
+    all_gather: 0
+  capture_side_effect: "TP4 sequence-parallel configuration removed capture sizes 1, 2, 6, 10 and 14 because they are not multiples of four"
+  decision: "reject before A/B: retained MMAR remains opaque in the compiled Ascend graph, so the sequence-parallel pass did not materialize reduce-scatter/all-gather"
+  hashes:
+    request_sha256: f88035c1377aae2d972ea697a3a26af221a6c0ebc2ceb6dc68555a1be0ef618e
+    service_log_sha256: c3d532807fb6e55e853c274b84396d4bb00fd0665fb6846aef90f9490cef1c37
+    container_inspect_sha256: 69a78f1f83bf400ac7a068ce197ac77330a49f3a36271bf32ed85d804f91612c
+    graph_symbol_counts_sha256: 8d2194ddc0cdd32c731fdf0baf9891832173fdfff757ab6807970ce18bc42384
+    sha256sums_sha256: 718355accf230244126b881cdff04b03e52ccf9a6dafd76e534857c6ad711a19
+  resource_release: "probe container stopped; NPU0-3 released; NPU4-7 external workload remained running and untouched"
+  next: "do not repeat enable_sp with MMAR unchanged; choose an Ascend-native MMAR/HCCL treatment whose activation can be proved without losing c1 graph coverage"
