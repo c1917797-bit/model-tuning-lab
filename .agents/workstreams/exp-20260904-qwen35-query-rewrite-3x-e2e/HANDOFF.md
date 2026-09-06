@@ -1,5 +1,36 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+## Current checkpoint — 2026-09-07 A2 operator triage
+
+The retained candidate and immutable MTP-off denominator remain unchanged.
+Two new profile-guided screens were completed without claiming unmeasured E2E
+performance:
+
+- A real BF16 TP4 NPU0-3 microbenchmark tested `HCCL_BUFFSIZE` 64, 128,
+  256 and the retained 512 on the two exact Qwen3.5 decode MMAR shapes.
+  None of 64/128/256 improved both shapes by the predefined 1.02x gate, so
+  they were rejected before E2E and 512 remains retained.
+- A materially different sequence-parallel probe disabled opaque MMAR before
+  enabling the compiler pass. The compiled graph contained 832 ordinary
+  `all_reduce` occurrences but zero `reduce_scatter` and zero
+  `all_gather`; activation therefore failed and the candidate was rejected
+  before a latency matrix.
+- Activation evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/activation-probes/tp4-npu03-gdn-proj-sp-mmaroff-v1-20260907T000000Z`.
+  The graph SHA256 is
+  `cbc36a6bd1aa4cf89ed872e5fe12b981502841f3520388e006880cf6ffbf4d68`.
+- The failed candidate was stopped by exact name. The retained stack was
+  relaunched as `qwen35_gdn_proj_fusion_npu03_v3` on port 10012 and
+  physical NPU0-3; wait for HTTP readiness before using it. NPU4-7 were not
+  modified.
+
+Operator direction is recorded in `A3_TO_A2_OPERATOR_BACKLOG.md`. The only
+A3-only operator with a direct dense-model analogue is `FFN`, but using it
+requires a new A2 BF16 gated-SwiGLU implementation and remains unverified.
+The highest-value near-term task is still the existing A2/910B4
+`MatmulAllReduce` path, because the retained profile attributes 64.9357% of
+summed kernel duration to collectives and 48.1818% to its AICPU kernel.
+
 ## Current checkpoint — 2026-09-06 decode-only ShortGPT screen
 
 The decode-only eight-layer skip candidate is rejected by an early real

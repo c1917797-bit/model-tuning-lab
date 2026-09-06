@@ -353,3 +353,19 @@ median gains cannot promote a treatment for this objective.
 - Keep the quality control separate from the performance denominator. The TP4
   cumulative control isolates algorithm/operator semantics; the immutable TP8
   MTP-off baseline remains the performance denominator.
+
+## HCCL-buffer and MMAR-off sequence-parallel screens
+
+- A communication tuning parameter must pass every important real shape, not
+  only a geometric mean. `HCCL_BUFFSIZE` 64/128/256 each failed the
+  predefined 1.02x all-shape gate against 512 on the two exact BF16 decode
+  MMAR shapes, so none justified an E2E run.
+- Exposing ordinary all-reduce nodes is still not sequence-parallel
+  activation. With MMAR disabled, the compiled graph had 832 `all_reduce`
+  occurrences but no `reduce_scatter` or `all_gather`.
+- Stop at the activation gate and preserve the graph plus hashes. Do not turn
+  an absent graph rewrite into a performance claim.
+- Repository product tables are eligibility evidence, not performance
+  evidence. For this dense model, A3-only expert-routing and disaggregated
+  worker operators are contract-mismatched; the only direct dense analogue,
+  `FFN`, still needs a new A2 BF16 gated-SwiGLU contract.

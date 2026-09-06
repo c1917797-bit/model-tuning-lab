@@ -1,6 +1,6 @@
 # Atlas A3 to A2/910B4 operator backlog
 
-Status date: 2026-09-06. This document records source-derived eligibility and
+Status date: 2026-09-07. This document records source-derived eligibility and
 prior real measurements. It does not claim performance for an unbenchmarked
 operator port.
 
@@ -21,11 +21,29 @@ Evidence root:
 | Priority | Operator or path | Repository support evidence | Applicability to current dense TP4 service | Decision |
 |---|---|---|---|---|
 | P0 | `MatmulAllReduce` A2/910B4 BF16 kernel and tiling | `/cache/cch/ops-transformer/mc2/matmul_all_reduce/README.md` marks Atlas A2 supported and Atlas A3 unsupported; API source selects `ASCEND910B` and AICPU mode | Directly matches the dominant real profile path | Optimize the existing A2 path; this is not an A3 port. Benchmark exact Qwen row-parallel shapes before E2E |
+| P1 | `FFN` A3 kernel ported as an A2-native BF16 dense SwiGLU specialization | `ffn/ffn/README.md` marks Atlas A3 supported and A2 unsupported; its no-expert form computes two matmuls with activation | Structurally relevant to the dense MLP, but the installed A2 contract does not support Qwen3.5's BF16 gated SwiGLU shape | Worth implementing only as a new A2 BF16 gated kernel plus vLLM graph integration. It is unverified and secondary to MMAR because collectives dominate the real profile |
 | P1 | `AttentionToFFN` | README marks Atlas A3 supported and Atlas A2 unsupported; inputs include expert IDs, expert-rank tables and separate Attention/FFN workers | Not directly applicable to this dense model, which has no routed experts or disaggregated FFN workers | Do not port for the current loop. Reconsider only with an explicit attention/FFN-disaggregation architecture experiment |
 | P1 | `FFNToAttention` | README marks Atlas A3 supported and Atlas A2 unsupported; function sends FFN-worker tokens to Attention workers and uses expert offsets | Same mismatch as `AttentionToFFN` | Do not port for the current loop |
 | P2 | `RecurrentGatedDeltaRule` and `ChunkGatedDeltaRule` | Both READMEs already mark Atlas A2 supported | Relevant to Qwen3.5 GDN, but not an A3-to-A2 gap; current real profile attributes only 1.0842% to GDN decode | Keep as a later micro-optimization after MMAR |
 | Reject repeat | `MatmulAllReduceAddRmsNorm` and inplace variant | READMEs already mark Atlas A2 supported and Atlas A3 unsupported | Direct fusion shape is relevant, but the v13-v17 integration series already produced an all-cell E2E regression | Do not repeat unchanged; require a materially different graph match or kernel implementation |
 | Out of scope | `FusedCausalConv1d` | README supports Ascend 950 and marks both Atlas A3 and A2 unsupported | Current causal-conv profile share is 0.6407%, and this is not an A3 port | Do not prioritize for the current target |
+| Out of scope | A3-only MoE/disaggregation MC2 family: `BatchMatMulReduceScatterAlltoAll`, `AlltoAllAllGatherBatchMatMul`, `AttentionToFFN`, `FFNToAttention`, `MoeDistribute*`, `AlltoAllvGroupedMatMul` | Repository READMEs mark A3 supported and A2 unsupported | Contracts require routed experts, all-to-all, or separate Attention/FFN workers; none appears in the retained dense TP4 graph | Do not port for this goal |
+
+## 2026-09-07 activation and parameter screens
+
+- Lowering `HCCL_BUFFSIZE` from the retained 512 to 64/128/256 did not pass
+  the exact-shape NPU0-3 MMAR microbenchmark gate. No candidate improved both
+  real decode shapes by at least 1.02x; retain 512 and do not spend an E2E
+  matrix on these values.
+- Disabling MMAR and enabling the sequence-parallel compiler pass exposed 832
+  ordinary `all_reduce` nodes, but produced zero `reduce_scatter` and zero
+  `all_gather` nodes in the rank-0 compiled graph. Reject before E2E: the
+  optimization did not activate.
+- Sequence-parallel activation evidence:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/activation-probes/tp4-npu03-gdn-proj-sp-mmaroff-v1-20260907T000000Z`.
+- The practical P0 operator task remains a materially new A2/910B4 MMAR
+  implementation that reduces AICPU/HCCL overhead for M=1 decode, rather than
+  another compiler flag or an A3 expert-routing port.
 
 ## What to change if operator development is available
 
