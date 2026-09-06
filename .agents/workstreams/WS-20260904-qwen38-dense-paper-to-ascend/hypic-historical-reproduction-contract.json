@@ -1,0 +1,136 @@
+{
+  "schema": "hypic-historical-reproduction-contract/v1",
+  "experiment_id": "hypic-qwen36-historical-ruler-20260905",
+  "status": "paused-by-operator",
+  "controller_operation_id": "exec-00000000000005b0",
+  "controller_operation_status": "terminated-by-operator-pause",
+  "paused_at": "2026-09-05T18:16:20Z",
+  "resume_requires": "explicit operator instruction",
+  "superseded_controller_attempts": [
+    {
+      "operation_id": "exec-0000000000000505",
+      "status": "stopped-before-performance",
+      "reason": "Post-launch audit found the NPU0-3 empty-state parser selected the separator column rather than the PID column.",
+      "impact": "The baseline was still starting; no performance or quality request had begun. The exact controller was terminated, its cleanup trap stopped only the exact baseline container, and NPU0-3 were verified empty.",
+      "recovery": "Correct the parser, repeat the no-side-effect self-test, and launch operation exec-000000000000050d."
+    },
+    {
+      "operation_id": "exec-000000000000050d",
+      "status": "failed-before-quality-request",
+      "reason": "The serialized quality evaluator argv contained eleven literal plus arguments and was rejected by argument parsing.",
+      "impact": "All three baseline performance runs were already complete. No quality request started and cleanup stopped only the exact baseline container.",
+      "recovery": "Repair both serialized command blocks, run syntax, literal-argument and no-side-effect checks, then resume."
+    },
+    {
+      "operation_id": "exec-0000000000000562",
+      "status": "failed-after-valid-longbenchv2-run1",
+      "reason": "The in-memory verifier expected total while the producer summary schema uses requests.",
+      "impact": "Baseline LongBench-v2 run1 completed 127/127 with zero failures and was independently hash-verified before cleanup.",
+      "recovery": "Update the verifier, validate the completed artifact and resume idempotently so run1 is skipped."
+    }
+  ],
+  "objective": "Automatically rerun the employee HYPIC-only versus no-prefix-cache experiment under the operator-selected current Qwen3.6-27B environment and compare every measured result with the supplied real measurements.",
+  "historical_source": {
+    "record": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic-previous-practice-reference.json",
+    "source_sha256": "c07f0c5b5193377a6ad11d4519a3caf5390d3b3acece9e6e5c50a9ba3ee84504",
+    "historical_model": "Qwen3.5-27B",
+    "historical_tensor_parallel": 2,
+    "historical_accelerator_count": 2
+  },
+  "current_target": {
+    "model": "Qwen3.6-27B",
+    "checkpoint": "/cache/efim/Qwen3.6-27B",
+    "tensor_parallel": 4,
+    "accelerator": "Ascend 910B4",
+    "host_devices": [0, 1, 2, 3],
+    "cpu_set": "112-191",
+    "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "hypic_version": "0.8.5",
+    "hypic_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f"
+  },
+  "comparison": {
+    "baseline": "HYPIC disabled and native prefix caching disabled",
+    "treatment": "HYPIC enabled and native prefix caching disabled",
+    "only_algorithm_switch": "VLLM_ASCEND_HYPIC_ENABLE",
+    "native_prefix_cache": false,
+    "hypic_prefix_cache_coexistence": false
+  },
+  "performance_ruler": {
+    "tool": "/cache/cch/hypic_vllm_ascend-v0.8.5/tools/benchmark_shared_prefix.py",
+    "tool_sha256": "cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822",
+    "input_tokens": 32768,
+    "shared_prefix_tokens": 16384,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "warmup_requests": 2,
+    "ignore_eos": true,
+    "repetitions_per_arm": 3
+  },
+  "quality_ruler": {
+    "tool": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py",
+    "tool_sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0",
+    "dataset_selection_source": "operator-supplied successful Hypic practice",
+    "datasets": {
+      "longbenchv2": {
+        "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json",
+        "sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+        "samples": 127
+      },
+      "gsm8k": {
+        "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl",
+        "sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+        "samples": 1319
+      }
+    },
+    "temperature": 0,
+    "seed": 0,
+    "enable_thinking": false,
+    "ignore_eos": false,
+    "max_output_tokens": 1024,
+    "concurrency": 32,
+    "repetitions_per_arm": 3,
+    "ceval": "listed in the successful practice but excluded by operator for this reproduction",
+    "niah_plus": "listed in the successful practice but not runnable because the authoritative source files were never present; no substitution is allowed"
+  },
+  "lifecycle": [
+    "baseline performance x3",
+    "stop baseline",
+    "restart identical baseline for quality",
+    "baseline LongBench-v2 x3 and GSM8K x3",
+    "stop baseline",
+    "HYPIC-only performance x3 with a strict hot-path gate on run1",
+    "stop HYPIC-only",
+    "restart identical HYPIC-only for quality",
+    "HYPIC-only LongBench-v2 x3 and GSM8K x3",
+    "stop HYPIC-only",
+    "render and hash the final comparison"
+  ],
+  "isolation": {
+    "allowed": "host NPU0-3 and CPU112-191 only",
+    "forbidden": "host NPU4-7 and every workload mapped to them",
+    "baseline_container": "qwen36_hypic_nocache_baseline_npu0_3",
+    "treatment_container": "qwen36_hypic_only_npu0_3",
+    "port": 8223,
+    "simultaneous_arms": false,
+    "git_identity_may_be_fabricated": false,
+    "push_allowed": false
+  },
+  "output_root": "/cache/cch/hypic-qwen36-historical-reproduction-20260905",
+  "current_progress": {
+    "baseline_performance": "3 of 3 complete",
+    "baseline_longbenchv2": "1 of 3 complete",
+    "baseline_gsm8k": "0 of 3",
+    "treatment_performance": "0 of 3",
+    "treatment_longbenchv2": "0 of 3",
+    "treatment_gsm8k": "0 of 3",
+    "next_incomplete_unit": "baseline LongBench-v2 run2"
+  },
+  "records": {
+    "experiment": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/experiment-hypic-historical-ruler.json",
+    "evidence": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evidence-hypic-historical-ruler.json",
+    "decision": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/decision-hypic-historical-ruler.json",
+    "retrospective": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/MAINTAINER_RETROSPECTIVE.md"
+  },
+  "interpretation_boundary": "This reproduces the employee workload and cache denominator on the operator-selected Qwen3.6-27B TP4 target. Because the employee measurement used Qwen3.5-27B TP2 on two accelerators, matching direction is comparable but identical absolute values are not expected or claimed."
+}

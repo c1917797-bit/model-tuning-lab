@@ -1,0 +1,129 @@
+{
+  "schema": "knowledge-proposals/v1",
+  "proposals": [
+    {
+      "title": "Separate speed-oracle and quality evidence",
+      "lesson": "Structural feasibility cannot support adoption."
+    },
+    {
+      "title": "Attribute matmul shapes",
+      "lesson": "Aggregate matmul time overstates paper-addressable cost when MLP dominates."
+    },
+    {
+      "title": "Exclude cold ACL graph samples",
+      "lesson": "Compile/capture outliers are not steady state."
+    },
+    {
+      "title": "Keep capture out of benchmarks",
+      "lesson": "CPU copies and per-layer torch.save can dominate latency; capture must be bounded and disabled for A/B."
+    },
+    {
+      "title": "Resolve host/container device mapping",
+      "lesson": "Container NPU0-3 may be host NPU4-7; isolate by host device paths and CPU sets."
+    },
+    {
+      "title": "Use direct fixed streaming when bench stalls",
+      "lesson": "Direct requests produced controllable TTFT/E2E/TPOT."
+    },
+    {
+      "title": "Keep one frozen ruler across algorithms",
+      "lesson": "Dataset hashes, samples, prompts, load, image, runtime arguments, repetitions and metric parser stay fixed; only the declared algorithm switch changes."
+    },
+    {
+      "title": "Noise-level accuracy claims need measured noise",
+      "lesson": "A generic 1-2pp band is a prior, not proof. Measure baseline nondeterminism and reject aggregate averages that hide per-dataset or critical-category cliffs."
+    },
+    {
+      "title": "Require orthogonal G1-G4 ablations",
+      "lesson": "Baseline, native-only, algorithm-only and combined groups reveal interaction effects; each paired comparison changes exactly one switch."
+    },
+    {
+      "title": "Generalization requires a second model",
+      "lesson": "One checkpoint can prove local feasibility but not model-version independence; repeat on a compatible different-size architecture."
+    },
+    {
+      "title": "Restart between performance and quality",
+      "lesson": "Within each frozen group, run performance after health/warmup, stop, restart the identical configuration, verify health again, then run three quality repetitions so profiler, compilation, cache and capture state cannot contaminate accuracy evidence."
+    },
+    {
+      "title": "Separate performance and quality generation semantics",
+      "lesson": "Fixed-load performance may require ignore_eos=true, while quality must honor EOS with deterministic temperature=0, thinking disabled and non-reasoning postprocessing. A single global sampling block silently invalidates one phase."
+    },
+    {
+      "title": "Use an active semantic relocation canary for Hypic",
+      "lesson": "Exact output hashes are not a sufficient correctness oracle when the warmed PDC baseline is itself nondeterministic. Preserve the full prompt and segment hashes, warm a public segment at one position, reuse it at another, and assert the task answer on both arms."
+    },
+    {
+      "title": "Name the cache baseline before comparing Hypic gains",
+      "lesson": "Hypic-only versus no prefix cache and PDC+Hypic versus PDC-only answer different questions. Model version, tensor parallel degree and cache baseline can change both absolute latency and relative gain; historical deltas are context, not a pooled A/B."
+    },
+    {
+      "title": "Separate hot-path activation from coexistence completeness",
+      "lesson": "Materialization, combined hits and repair events prove useful code ran, but adoption must still fail closed when required latency-protection or grouped-reclaim signals are absent."
+    },
+    {
+      "title": "Persist model outputs and re-score without regeneration",
+      "lesson": "A resumable per-sample JSONL lets a corrected dependency-free scorer re-evaluate exact model outputs after a long run, avoiding both lost accelerator time and mixed response/scorer provenance."
+    },
+    {
+      "title": "Audit concurrent JSONL progress by the real identity field",
+      "lesson": "Concurrent completions arrive out of index order and optional sample_id may be null. Verify parseability, unique non-null index values, duplicate count and per-row ok status; raw line count or an optional identifier alone can falsely suggest corruption or a stall."
+    },
+    {
+      "title": "Self-test serialized shell controllers before arming them",
+      "lesson": "bash -n proves syntax only. Transport or patch serialization can leave syntactically valid stray arguments, especially around line continuations. Run a read-only self-test that exercises hashes, exact container invariants and actual device-process ownership before a controller is allowed to change workload state."
+    },
+    {
+      "title": "Enable CANN dynamic attach before service launch",
+      "lesson": "msprof attach requires PROFILING_MODE=dynamic at service startup and a dynamic_profiling_socket for the selected worker PID. Use a profile-only clone with a single audited environment delta so completed performance and quality evidence remains uncontaminated."
+    },
+    {
+      "title": "Preserve stdin for interactive tools inside docker exec",
+      "lesson": "An interactive command started by docker exec needs -i or controller input is discarded. Missing -i can look like a hung exporter while the tool loops on EOF; bound the wait and clean up only the experiment-owned profile container."
+    },
+    {
+      "title": "Normalize missing-container probes",
+      "lesson": "docker inspect may emit an empty line before returning failure. Capture and validate its output, then emit one canonical absent state; do not compare raw command-substitution text to a sentinel."
+    },
+    {
+      "title": "Freeze append-only runtime evidence only after its producer stops",
+      "lesson": "A runtime-event JSONL may continue changing after performance while canaries, quality or a profile clone use the same evidence sink. Mark the recorded hash as live-producer volatile during execution, then stop every experiment-owned producer, compute the final digest and require a strict evidence audit before decision closure."
+    },
+    {
+      "title": "Do not restart a live concurrent evaluator during its long tail",
+      "lesson": "Out-of-order concurrent completions can leave a small final batch waiting on legitimately long generations. If the exact controller and evaluator PID remain live within the declared per-request timeout, preserve the run and wait for its summary instead of launching duplicates or truncating the evidence."
+    },
+    {
+      "title": "Separate profiling stimulus success from algorithm acceptance",
+      "lesson": "A benchmark may complete every bounded request and produce a valid native profile yet exit nonzero because semantic or coexistence acceptance fails. Preserve the raw benchmark exit and missing gates, independently verify request counts, zero failures, fixed output and per-result success for capture validity, and never reinterpret capture success as algorithm acceptance."
+    },
+    {
+      "title": "Make operator pause a first-class durable state",
+      "lesson": "A paused accelerator workstream must persist its terminal controller operation, last complete unit, exact owned resource state and resume command. Task and experiment contracts must not remain marked running."
+    },
+    {
+      "title": "Version producer and verifier schemas together",
+      "lesson": "Before a long run, exercise the result verifier against a real producer fixture. A field rename such as total to requests must fail in static validation rather than after expensive evidence completes."
+    },
+    {
+      "title": "Keep one decision ledger per scientific question",
+      "lesson": "Dk64 feasibility, PDC coexistence and no-cache historical reproduction use different treatments and denominators. Preserve separate experiment, evidence and decision records and never let an incomplete track inherit another track's conclusion."
+    },
+    {
+      "title": "Treat hardware topology as part of the experiment identity",
+      "lesson": "An algorithm may run on two or four cards, but card count, accelerator generation and tensor parallelism change memory headroom, operator shapes, communication and performance. A TP2 probe cannot reuse a TP4 baseline; create a new experiment, evidence root and decision."
+    },
+    {
+      "title": "Budget seam tokens before claiming a position-independent replay",
+      "lesson": "The physical admission budget must cover the private suffix plus the seam sink. With a 16384-token suffix and seam_sink=8 the minimum is 16392, not 16384. Require this arithmetic in controller self-test, keep the corrected budget identical across A/B arms, start a new artifact root when it changes, and retain a strict hot-path gate so materialization-only traffic cannot masquerade as an optimization result."
+    },
+    {
+      "title": "Separate direction reproduction from absolute reproduction",
+      "lesson": "When model version, accelerator generation or tensor parallelism differs from a historical success, compare effect direction and approximate magnitude under a fresh same-denominator A/B. Never present absolute latency equality or pool the old baseline."
+    },
+    {
+      "title": "Make an independent raw-artifact audit the completion boundary",
+      "lesson": "A renderer's complete status is insufficient. Before adoption, independently verify every planned performance and quality unit, raw row counts, complete unique indexes, zero failures, response and artifact hashes, evaluator and dataset identity, mechanism activation, and resource release."
+    }
+  ]
+}

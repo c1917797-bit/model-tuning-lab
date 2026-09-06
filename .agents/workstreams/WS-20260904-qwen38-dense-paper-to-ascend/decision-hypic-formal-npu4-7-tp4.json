@@ -1,0 +1,18 @@
+{
+  "schema": "paper-to-ascend-decision/v1",
+  "decision_id": "hypic-qwen36-formal-npu4-7-tp4-20260906",
+  "status": "iterate-invalid-hot-path",
+  "current_decision": "no-decision",
+  "reason": "All nine baseline units completed, but HYPIC performance run1 had zero verified replay hits because the 16384 scheduler budget was eight tokens below the 16392 physical replay demand. The strict hot-path gate rejected that treatment result; it is diagnostic evidence only.",
+  "allowed_claims": [
+    "The current formal case uses Qwen3.6-27B, four Ascend 910B4 cards, host NPU4-7 and TP4.",
+    "The baseline is no-prefix-cache and HYPIC-disabled; the treatment changes only VLLM_ASCEND_HYPIC_ENABLE.",
+    "All three baseline performance, LongBench-v2 and GSM8K repetitions completed with zero request failures.",
+    "The first treatment request batch completed 40/40 but is not an accepted A/B measurement because hot_path_verified was false.",
+    "The employee absolute TP2/910C values are not interchangeable with this TP4/910B4 case."
+  ],
+  "forbidden_claims": ["The employee gain has reproduced.", "HYPIC improves or regresses this Qwen3.6-27B TP4 case.", "Baseline-only measurements prove an A/B result."],
+  "next_gate": "Run a new clean baseline and treatment under the identical max_num_batched_tokens=40960 invariant, require hot_path_verified on every treatment performance repetition, then complete quality, rendering and hash audit.",
+  "integration_state": "not-ready",
+  "publish": {"commit": false, "push": false, "reason": "No Git identity fabrication or push is authorized."}
+}

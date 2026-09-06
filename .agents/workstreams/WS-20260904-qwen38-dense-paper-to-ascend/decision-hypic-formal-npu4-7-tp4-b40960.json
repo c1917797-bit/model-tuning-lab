@@ -1,0 +1,73 @@
+{
+  "schema": "paper-to-ascend-decision/v1",
+  "decision_id": "hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906",
+  "status": "complete",
+  "current_decision": "adopt-for-the-frozen-qwen36-27b-tp4-workload-with-quality-guardrails",
+  "reason": "All 18 frozen-ruler units passed an independent fail-closed audit. Against no prefix cache, HYPIC reduced mean TTFT by 43.6345%, TPOT by 18.9911%, and duration by 26.6028%, while increasing output throughput by 36.0663%. Strict treatment hot-path evidence passed. LongBench-v2 changed by -0.2625pp and GSM8K by -0.1516pp; both deltas are smaller than the corresponding observed baseline three-run ranges (5.5118pp and 0.3791pp). This supports adoption for this exact workload with continued quality monitoring, not a universal lossless or topology-independent claim.",
+  "historical_comparison": {
+    "employee_scope": "Qwen3.5-27B, TP2, 2x Ascend 910C, HYPIC 0.8.5",
+    "current_scope": "Qwen3.6-27B, TP4, 4x Ascend 910B4, HYPIC 0.8.5",
+    "employee_delta_pct": {
+      "ttft": -46.6,
+      "tpot": -18.4,
+      "output_throughput": 38.5,
+      "duration": -27.8
+    },
+    "current_delta_pct": {
+      "ttft": -43.63447512683103,
+      "tpot": -18.99108291418369,
+      "output_throughput": 36.066291634029724,
+      "duration": -26.602831422417992
+    },
+    "conclusion": "The performance direction and approximate magnitude reproduced; absolute-value identity is out of scope because model, hardware generation and tensor parallelism differ."
+  },
+  "quality": {
+    "longbenchv2": {
+      "baseline_mean_pct": 46.19422572178477,
+      "treatment_mean_pct": 45.93175853018372,
+      "delta_pp": -0.26246719160104703,
+      "baseline_range_pp": 5.511811023622045,
+      "interpretation": "within measured baseline repeat variability"
+    },
+    "gsm8k": {
+      "baseline_mean_pct": 96.15870609047259,
+      "treatment_mean_pct": 96.00707606772808,
+      "delta_pp": -0.15163002274451287,
+      "baseline_range_pp": 0.37907505686125376,
+      "interpretation": "closely reproduces the employee -0.17pp point estimate and is within measured baseline repeat variability"
+    }
+  },
+  "allowed_claims": [
+    "The current Qwen3.6-27B TP4 no-cache versus HYPIC-only case completed 18 of 18 planned units with zero audit errors.",
+    "The two arms used the same 40960 physical token budget and differed only by VLLM_ASCEND_HYPIC_ENABLE.",
+    "The employee performance direction and approximate magnitude reproduced on the current, different topology.",
+    "No material quality regression was observed relative to measured baseline repeat ranges on LongBench-v2 and GSM8K."
+  ],
+  "forbidden_claims": [
+    "The current absolute latency or accuracy values are identical to the employee Qwen3.5-27B TP2 result.",
+    "HYPIC is lossless for every dataset, model, topology or traffic shape.",
+    "The rejected 16384-budget experiment or the separate PDC-coexistence profile can be pooled into this A/B."
+  ],
+  "evidence": {
+    "summary": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-summary.json",
+    "summary_sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e",
+    "report": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/HISTORICAL_REPRODUCTION_REPORT.md",
+    "report_sha256": "f30ac5decb07145f78ee41a038874aaf3c059423f16ed73df0ea617fcd5fcb79",
+    "audit": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-evidence-audit.json",
+    "accepted_units": 18,
+    "expected_units": 18,
+    "audit_errors": []
+  },
+  "resource_release": {
+    "baseline_container": "exited; running=false; oom=false",
+    "treatment_container": "exited; running=false; oom=false",
+    "port_8224": "released"
+  },
+  "next_gate": "Maintainer review and repetition on a new model/topology must create a new experiment identity and fresh baseline.",
+  "integration_state": "ready-for-maintainer-review",
+  "publish": {
+    "commit": "authorized after final repository validation",
+    "push": "authorized only to https://github.com/c1917797-bit/model-tuning-lab",
+    "identity": "use existing configured Git identity; do not fabricate"
+  }
+}

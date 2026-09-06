@@ -1,0 +1,93 @@
+{
+  "schema": "paper-to-ascend-received-resource-inventory/v1",
+  "observed_at_utc": "2026-09-04T14:00:00Z",
+  "new_host_root": "/cache/cch",
+  "benchmark": {
+    "archive": {
+      "path": "/cache/cch/benchmark-3.1-20260119-master.zip",
+      "size_bytes": 18821937,
+      "entry_count": 2332,
+      "sha256": "53b32ea10856dd0a419d2a0d512b71ab10d9ad463fa7c67c3d7b2982e350433e"
+    },
+    "expanded_path": "/cache/cch/hhs-aisbench",
+    "declared_version": "3.1.0",
+    "git_commit": null,
+    "status": "accepted_archive_and_expanded_tree_located",
+    "note": "The expanded directory has no Git metadata and contains separately populated dataset files; the archive SHA is authoritative for the supplied source bundle."
+  },
+  "datasets": {
+    "LongBench v2": {
+      "status": "located_and_hashed",
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2",
+      "kind": "directory",
+      "file_count": 5,
+      "size_bytes": 967594975,
+      "sha256": "cda594daf5aca08e1740f7deece67cc6b167eeea216d38c0eb7d18e9ab1700d7",
+      "selected_by_config": "data.json"
+    },
+    "GSM8K": {
+      "status": "located_and_hashed",
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl",
+      "kind": "file",
+      "size_bytes": 749738,
+      "sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14"
+    },
+    "NIAH+": {
+      "status": "code_only_data_missing",
+      "candidate_name": "NeedleBench v2",
+      "config_path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/configs/datasets/needlebench_v2",
+      "config_file_count": 32,
+      "config_size_bytes": 105354,
+      "config_sha256": "05f09c985fa8f300901ceb5f2fd24910d5fe677b70b22c10e36418577ea9f4d5",
+      "note": "No authoritative NIAH+ corpus/generator inputs and no mapping from NIAH+ to this candidate were supplied."
+    },
+    "CEval": {
+      "status": "config_only_data_missing",
+      "expected_path": "/cache/cch/hhs-aisbench/ais_bench/datasets/ceval/formal_ceval",
+      "config_path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/configs/datasets/ceval/ceval_gen_5_shot_str.py",
+      "config_sha256": "b57bb6eda834952392cd487bf40be99a435aea1bb39338854c8a3f66b7b7d7ab",
+      "split": "val",
+      "few_shot": 5
+    }
+  },
+  "evaluation_assets": {
+    "longbenchv2_entry": {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/configs/datasets/longbenchv2/longbenchv2_gen.py",
+      "sha256": "c9e34b64c9ee3fbff02542ed7fc0ea91322e88e9cbf6c084dcaacd88b10a2379"
+    },
+    "longbenchv2_full_config": {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/configs/datasets/longbenchv2/longbenchv2_gen_75fbba.py",
+      "sha256": "2c778820162d50b0411ee4bbcbbff8b6537e90ecf5d4866e5c003858fb70a913"
+    },
+    "vllm_api_general_chat": {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/configs/models/vllm_api/vllm_api_general_chat.py",
+      "sha256": "dafed54db8b5b841a64a38bc69acee24dee36e9ccfd576386d56aeb28d03d492"
+    },
+    "quality_postprocessor": {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/utils/postprocess/model_postprocessors.py",
+      "sha256": "4809fdf2cb7a29a111d819b87073bfcbb88b11dc1187509a5fe58f393fe9acbf"
+    },
+    "longbenchv2_loader_and_metric": {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/benchmark/datasets/longbenchv2.py",
+      "sha256": "f5660a0e019c75f7550dd5e1b18faeb002aac03418c85432cda2708eb217b8e7"
+    }
+  },
+  "unaccepted_archives": [
+    {
+      "path": "/cache/cch/qwen3-32b-pdmix.zip",
+      "size_bytes": 2847137792,
+      "sha256": "ef36d4d02b36184b1cfcfed586408787bb7477f82f1cd7158f89b8bbdec3fa51",
+      "status": "invalid_or_incomplete_zip",
+      "diagnostic": "ZIP central directory reports 3833946091 missing bytes and attempts to seek before the beginning of the file; no sibling .zNN or .part files were found.",
+      "accepted_for_drrqr": false
+    }
+  ],
+  "still_missing": [
+    "authoritative NIAH+ data/generator inputs and exact construction matrix",
+    "CEval formal_ceval data tree",
+    "true DRRQR implementation or both model checkpoints; qwen3-32b-pdmix.zip is incomplete and is not accepted",
+    "employee performance driver and exact runtime values where not encoded in the supplied bundle",
+    "source owner/provenance beyond user-provided placement"
+  ],
+  "full_resource_intake_valid": false
+}

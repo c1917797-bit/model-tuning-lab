@@ -1,0 +1,50 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "hypic-qwen36-historical-ruler-20260905",
+  "status": "partial-valid-paused",
+  "baseline_performance": {
+    "runs": [
+      {"run": 1, "artifact": "/cache/cch/hypic-qwen36-historical-reproduction-20260905/no-cache/performance.run1.json", "sha256": "c15b55462c9c27138410f28a498f1cf8a48dc0dd836b83f62b703f02cd28e6dc", "successful_requests": 40, "failed_requests": 0, "duration_s": 1407.618124090135, "ttft_mean_ms": 48417.82346973196, "tpot_weighted_ms": 415.4430098433588, "output_tokens_per_second": 29.098801229542264},
+      {"run": 2, "artifact": "/cache/cch/hypic-qwen36-historical-reproduction-20260905/no-cache/performance.run2.json", "sha256": "c47a5ce311971ebf7013ca9d3877df0cdb655187f63fcfde86f228b44dcbf1e2", "successful_requests": 40, "failed_requests": 0, "duration_s": 1378.7459243000485, "ttft_mean_ms": 42207.405620999634, "tpot_weighted_ms": 410.68125803470576, "output_tokens_per_second": 29.708156722779993},
+      {"run": 3, "artifact": "/cache/cch/hypic-qwen36-historical-reproduction-20260905/no-cache/performance.run3.json", "sha256": "8fca38f5c2a5bbf6b0d792401f88c8b495e8786d4c3c1352548320fa5d2bb96a", "successful_requests": 40, "failed_requests": 0, "duration_s": 1373.6110106999986, "ttft_mean_ms": 41949.86784176435, "tpot_weighted_ms": 409.5935266808277, "output_tokens_per_second": 29.819213504357826}
+    ],
+    "mean": {"duration_s": 1386.6583530300607, "ttft_mean_ms": 44191.69897749865, "tpot_weighted_ms": 411.90593151963077, "output_tokens_per_second": 29.542057152226693}
+  },
+  "baseline_quality": {
+    "longbenchv2_run1": {
+      "summary_artifact": "/cache/cch/hypic-qwen36-historical-reproduction-20260905/quality/no-cache/longbenchv2.run1.summary.json",
+      "summary_sha256": "68256cfe469302a33805b9dbb7d362ec0235a77cf92f009a3537d88df6cbd8f1",
+      "details_artifact": "/cache/cch/hypic-qwen36-historical-reproduction-20260905/quality/no-cache/longbenchv2.run1.jsonl",
+      "details_sha256": "bae9efdf3193861066b8bff5e0ccabefcc8a4945a37defaf2ddfb0e1b1c36853",
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 57,
+      "accuracy_pct": 44.881889763779526,
+      "finish_reasons": {"stop": 75, "length": 52},
+      "unique_response_hashes": 127
+    }
+  },
+  "pause_audit": {
+    "paused_at": "2026-09-05T18:16:20Z",
+    "verified_at": "2026-09-05T21:12:20Z",
+    "controller_operation": "exec-00000000000005b0",
+    "controller": "not running",
+    "evaluator": "not running",
+    "baseline_container": "exited",
+    "treatment_container": "created-never-started",
+    "port_8223": "no listener",
+    "host_npu_0_3_device_users": "none at static revalidation",
+    "next_artifact": "absent"
+  },
+  "missing": [
+    "baseline LongBench-v2 runs 2-3",
+    "baseline GSM8K runs 1-3",
+    "treatment performance runs 1-3",
+    "treatment LongBench-v2 runs 1-3",
+    "treatment GSM8K runs 1-3",
+    "treatment hot-path acceptance evidence",
+    "current historical-ruler comparison and final decision"
+  ],
+  "prohibited_inference": "Do not compute or report a current Hypic improvement from baseline-only evidence."
+}

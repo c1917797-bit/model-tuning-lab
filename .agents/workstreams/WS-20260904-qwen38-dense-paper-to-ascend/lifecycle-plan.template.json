@@ -1,0 +1,29 @@
+{
+  "schema": "paper-to-ascend-lifecycle-plan/v1",
+  "preflight_report_sha256": "REQUIRED",
+  "runtime_config_sha256": "REQUIRED",
+  "frozen_inputs_sha256": "REQUIRED",
+  "treatment_matrix_sha256": "REQUIRED",
+  "host_npus": [0, 1, 2, 3],
+  "cpu_set": "112-191",
+  "performance_repetitions": 3,
+  "quality_repetitions": 3,
+  "restart_between_phases": true,
+  "health_200_before_each_phase": true,
+  "capture_environment": {
+    "VLLM_ASCEND_GDN_RRQR_CAPTURE_ENABLE": null,
+    "VLLM_ASCEND_GDN_RRQR_CAPTURE_DIR": null,
+    "VLLM_ASCEND_GDN_RRQR_MAX_TOKENS": null,
+    "VLLM_ASCEND_GDN_RRQR_MAX_CAPTURES_PER_LAYER": null
+  },
+  "cells": [
+    {"model_id":"qwen38-27b","group":"G1","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen38-27b","group":"G2","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen38-27b","group":"G3","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen38-27b","group":"G4","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen35-4b","group":"G1","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen35-4b","group":"G2","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen35-4b","group":"G3","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]},
+    {"model_id":"qwen35-4b","group":"G4","service_name":"REQUIRED","service_config_sha256":"REQUIRED","start_argv":["REQUIRED"],"stop_argv":["REQUIRED"],"health_url":"REQUIRED","warmup_argv":["REQUIRED"],"performance_argv":["REQUIRED"],"quality_argv":["REQUIRED"]}
+  ]
+}
