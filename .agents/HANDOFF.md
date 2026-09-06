@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-06.
+- Last updated: 2026-09-04.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide` with pushed evidence and recovery checkpoints.
 - Fresh clones route machine-bound work through
@@ -15,8 +15,7 @@
 - Superseded audit work: Dynamic MoE direct lowering is retained remotely at `work/exp-20260904-dynamic-moe-paper-to-ascend@55cc0a2`; its local worktree was reclaimed after the NPU lease was released. Do not merge that implementation into `main`.
 - Runtime/process/device facts can change independently of Git; re-check all NPU, container, port, memory, and competing-process state before acting.
 - Durable takeover guidance: `docs/LESSONS_LEARNED.md` and `docs/RUNBOOK.md`.
-- User-skill portability snapshot is integrated on `main` at `74360f4`: restore with `scripts/restore-user-skills.ps1`; see `SKILLS_SYNC_MANIFEST.md`.
-- Handoff/docs integration validation: Maintainer Skill Tree PASS (18 skills) on a temporary LF-normalized validation copy, `git diff --check` PASS, user-skill restore script syntax PASS, and temporary restore smoke PASS for `ywqppt`, `ywqpptpro`, and `deep-research`. Direct WSL execution of `scripts/validate-mst.sh` on the Windows checkout is blocked by pre-existing CRLF line endings; no repository code behavior test PASS is claimed.
+- Handoff/docs integration validation: Maintainer Skill Tree PASS (17 skills), full merge diff check PASS, workstream JSON parse checks PASS. `python -m pytest` was attempted but could not run because the host Python environment does not have the `pytest` module installed; no test PASS is claimed.
 
 ## 1. North Star
 
@@ -53,11 +52,8 @@ Keep the distinction between three kinds of knowledge explicit:
 - Added durable success/failure history and maintainer takeover procedures in `docs/LESSONS_LEARNED.md` and `docs/RUNBOOK.md`.
 - Built a Paper-to-Ascend exemplar around Dynamic MoE and obtained a real negative result: the dynamic policy reduced token/expert pairs and accelerated expert GMM, but direct sort+cumsum+boolean compaction made whole-block latency much worse. The implementation was rejected, the paper/full-model conclusion remained inconclusive, and the workstream was superseded when the active installed target was confirmed to be dense.
 - Selected a dense-compatible next paper direction: exact speculative decoding backed by the checkpoint's built-in MTP head, with immutable model/runtime identities and acceptance/abort thresholds recorded before baseline.
-- Integrated the real user-skill snapshot from `.codex/skills` and `.agents/skills`, including `ywqppt` and `ywqpptpro`; excluded product-owned `.system` skills and generated LFS-backed showcase cache.
 
 ## 4. Current Action
-
-For user-skill restore or portability work, use `SKILLS_SYNC_MANIFEST.md` and `scripts/restore-user-skills.ps1`; run `git lfs ls-files` before pushing any refreshed snapshot.
 
 Read both active branch-local handoffs before touching hardware. NPU0-3/8220 belongs to the Dense MTP experiment; NPU4-7/8210 belongs to the Prefix Cache experiment. Re-prove both leases and current processes before starting/stopping anything.
 
@@ -65,16 +61,16 @@ For the user's latest Paper-to-Ascend direction, continue the Dense MTP workstre
 
 ## 5. Next Actions
 
-1. User skill portability: no action needed unless refreshing the snapshot; if refreshing, resync user skill roots, keep `.system` and generated caches out of Git, validate, commit, and push.
-2. Dense MTP: read `.agents/workstreams/exp-20260904-qwen35-dense-mtp-paper-to-ascend/HANDOFF.md` and its experiment YAML, then re-prove NPU0-3/8220 isolation and run the declared fresh baseline before enabling speculation.
-3. Dense MTP: compare speculation OFF vs `qwen3_5_mtp` with the exact frozen request protocol, three repetitions, greedy exact-match correctness, acceptance rate, throughput, TTFT/TPOT, and HBM evidence; checkpoint every stage.
-4. Prefix Cache: read `.agents/workstreams/exp-20260904-qwen38-prefix-cache-general-eval-final/HANDOFF.md`; re-prove NPU4-7/8210 isolation, then run the three Prefix Cache ON repetitions against the already-recorded OFF baseline and perform natural-prompt correctness verification.
-5. Keep the two tracks resource-isolated and never compare measurements across materially different model/runtime identities.
-6. If either bounded method fails, preserve the negative result and profile the measured hot path before selecting another paper or changing low-level code.
-7. Treat Qwen3-32B and HugeTLB release as separate future work: pass the Hugepage safety gate before any memory-pool change.
-8. Reconcile global handoff/lessons only during serialized integration; branch-local progress remains branch-local truth until merged.
+1. Dense MTP: read `.agents/workstreams/exp-20260904-qwen35-dense-mtp-paper-to-ascend/HANDOFF.md` and its experiment YAML, then re-prove NPU0-3/8220 isolation and run the declared fresh baseline before enabling speculation.
+2. Dense MTP: compare speculation OFF vs `qwen3_5_mtp` with the exact frozen request protocol, three repetitions, greedy exact-match correctness, acceptance rate, throughput, TTFT/TPOT, and HBM evidence; checkpoint every stage.
+3. Prefix Cache: read `.agents/workstreams/exp-20260904-qwen38-prefix-cache-general-eval-final/HANDOFF.md`; re-prove NPU4-7/8210 isolation, then run the three Prefix Cache ON repetitions against the already-recorded OFF baseline and perform natural-prompt correctness verification.
+4. Keep the two tracks resource-isolated and never compare measurements across materially different model/runtime identities.
+5. If either bounded method fails, preserve the negative result and profile the measured hot path before selecting another paper or changing low-level code.
+6. Treat Qwen3-32B and HugeTLB release as separate future work: pass the Hugepage safety gate before any memory-pool change.
+7. Reconcile global handoff/lessons only during serialized integration; branch-local progress remains branch-local truth until merged.
 
 ## 6. Validation Commands
+
 ```text
 ./scripts/validate-mst.sh
 python -m pytest

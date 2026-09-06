@@ -248,38 +248,3 @@ Before opening a paper implementation workstream, answer these in Git:
 For the current dense target, the active Paper-to-Ascend candidate is exact
 speculative decoding using the checkpoint's built-in Qwen3.5 MTP head. Dynamic
 MoE remains a superseded audit exemplar, not an active optimization path.
-
-## 12. User skill restore on a fresh machine
-
-The repository now carries a user-skill snapshot for maintainer portability. It
-is separate from product-owned system skills and from the plugin wishlist.
-
-Fresh Windows restore path:
-
-```powershell
-git clone https://github.com/c1917797-bit/model-tuning-lab.git
-powershell -ExecutionPolicy Bypass -File .\model-tuning-lab\scripts\restore-user-skills.ps1
-```
-
-Manual equivalent:
-
-```powershell
-Copy-Item -Recurse -Force .\model-tuning-lab\skills\codex-skills\* "$env:USERPROFILE\.codex\skills\"
-Copy-Item -Recurse -Force .\model-tuning-lab\skills\agents-skills\* "$env:USERPROFILE\.agents\skills\"
-```
-
-Before updating the snapshot again:
-
-1. Sync only user-owned skill roots, not `.codex/skills/.system`.
-2. Keep generated showcase/cache outputs out of Git unless intentionally needed.
-3. Run `git lfs ls-files`; investigate any result before push.
-4. Update `SKILLS_SYNC_MANIFEST.md` with included and excluded paths.
-5. Validate with `./scripts/validate-mst.sh` and `git diff --check`.
-6. Commit and push under the repository checkpoint policy.
-
-Current known aliases included in the snapshot:
-
-```text
-ywqppt
-ywqpptpro
-```

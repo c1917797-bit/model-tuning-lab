@@ -20,11 +20,3 @@
 本快照保留真实用户技能的 `SKILL.md`、`agents/`、`references/`、`scripts/`、模板和必要资源，目标是让新机器克隆本仓库后可以直接恢复用户态技能。
 
 已排除 `skills/codex-skills/ppt-deep-search/docs/showcase/latest/`。该目录是本机生成的展示缓存，包含缺失的 Git LFS 展示资源，不影响 skill 的调用和维护。
-
-## 一条命令恢复（Windows）
-
-```powershell
-git clone https://github.com/c1917797-bit/model-tuning-lab.git; powershell -ExecutionPolicy Bypass -File .\model-tuning-lab\scripts\restore-user-skills.ps1
-```
-
-该脚本会创建 `%USERPROFILE%\.codex\skills` 和 `%USERPROFILE%\.agents\skills`，然后覆盖同步仓库中的用户态 skill 快照。
