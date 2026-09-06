@@ -369,3 +369,19 @@ median gains cannot promote a treatment for this objective.
   evidence. For this dense model, A3-only expert-routing and disaggregated
   worker operators are contract-mismatched; the only direct dense analogue,
   `FFN`, still needs a new A2 BF16 gated-SwiGLU contract.
+
+## MMAR-off real E2E result
+
+- Graph activation alone is not a win. Disabling MMAR produced the intended
+  ordinary graph (0 MMAR, 832 all-reduce occurrences), but the real c1
+  32-request screen regressed TTFT P95 by 0.527248% and TPOT P95 by
+  0.220490% versus the retained stack.
+- This closes the simple `MMAR off` branch: do not retry it unchanged or
+  infer that the large profiled AICPU share means ordinary matmul plus
+  all-reduce must be faster.
+- The evidence sharpens the P0 task. Improve the existing A2/910B4 MMAR
+  implementation for the exact M=1 BF16 shapes, or create a materially
+  different fusion that removes launch/memory overhead while preserving
+  MMAR; do not merely decompose it.
+- Evidence manifest SHA256:
+  `21deab1aa598edb04bfd38f6c88bd30118c3a6b1f04ed244e68cc403d12f964f`.

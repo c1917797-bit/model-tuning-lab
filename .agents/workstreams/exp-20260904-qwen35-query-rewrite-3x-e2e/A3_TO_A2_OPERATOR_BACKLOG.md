@@ -61,3 +61,13 @@ to the exact BF16 TP4 Qwen3.5 row-parallel shapes observed in the trace:
 
 No source-only result in this file is performance evidence. Promotion still
 requires real 910B4 E2E data and the semantic quality gate.
+
+## MMAR-off E2E closure
+
+A real MMAR-off E2E screen rejected simple decomposition. The activated
+rank-0 graph had zero MMAR and 832 ordinary all-reduce occurrences, yet c1
+TTFT/TPOT P95 regressed by 0.527248%/0.220490% versus the retained stack.
+Evidence manifest SHA256:
+`21deab1aa598edb04bfd38f6c88bd30118c3a6b1f04ed244e68cc403d12f964f`.
+Therefore the P0 implementation must preserve or improve fusion rather than
+replacing MMAR with the existing unfused sequence.

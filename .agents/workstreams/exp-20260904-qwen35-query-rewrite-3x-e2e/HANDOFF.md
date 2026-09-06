@@ -2927,3 +2927,29 @@ projection fusion plus gate/up prefetch stack. This is not a proof over the
 full 357-row corpus. See `QUALITY_GATE_V1.md` for evidence paths, hashes,
 rulings, and the distinction between this TP4 quality control and the frozen
 TP8 MTP-off performance denominator.
+
+## MMAR-off E2E screen rejected
+
+The retained TP4/NPU0-3 stack was screened with one intended graph change:
+`enable_matmul_allreduce=true -> false`. The ordinary FULL_DECODE_ONLY
+rank-0 graph proves activation: it contains zero
+`npu_mm_all_reduce_base`/zero `matmul_all_reduce` occurrences and 832
+`all_reduce` occurrences. Its SHA256 is
+`cbc36a6bd1aa4cf89ed872e5fe12b981502841f3520388e006880cf6ffbf4d68`.
+
+The real query_rewrite c1 screen completed 32/32 requests with zero errors,
+32 natural stop finishes, TTFT P95 6331.334766501095 ms and TPOT P95
+28.374273561977503 ms. Against the retained same-screen reference
+6298.128575/28.311849 ms, this regressed TTFT by 0.527248% and TPOT by
+0.220490%. Reject by the fail-fast rule; do not expand this unchanged
+candidate to c16 or the full matrix.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-qwen35-gdn-proj-fusion-mmaroff-nospec-screen-v1-20260907T001500Z`.
+All manifest entries verify; SHA256 of `SHA256SUMS` is
+`21deab1aa598edb04bfd38f6c88bd30118c3a6b1f04ed244e68cc403d12f964f`.
+The exact rejected container
+`9ba137984b01029d893ae972bee2cfd6795c8aa4e6fdd4a29be8ead82168767a`
+was stopped. The retained MMAR-enabled mode was restarted as
+`qwen35_gdn_proj_fusion_npu03_v4` on physical NPU0-3; NPU4-7 were not
+modified.
