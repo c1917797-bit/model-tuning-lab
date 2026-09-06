@@ -6,7 +6,12 @@ User approved protocol refinement on 2026-09-06. This contract supersedes older 
 - Exactly two baseline groups: TP8/DP1 MTP OFF and TP8/DP1 MTP ON (k=1, local-argmax implementation explicitly identified).
 - Physical NPU0-7; installed model and tokenizer fingerprints, BF16, no quantization; real /cache/cch/query_rewrite.jsonl.
 - Fixed first 32 records, c1/c5/c8/c16, three repetitions, identical raw completion prompts, sampling and natural-EOS policy.
-- Final requirement at EACH concurrency: TTFT p50 <= MTP OFF / 2 AND TPOT p50 <= MTP OFF / 2. Report the median of three per-run p50 values and each repetition separately.
+- User-updated final requirement at EACH concurrency: primary TTFT p95 <=
+  MTP OFF p95 / 2 AND primary TPOT p95 <= MTP OFF p95 / 2. Aggregate each
+  cell as the median of the three per-run p95 values and report every
+  repetition separately. Keep p50 as a secondary central-tendency diagnostic
+  and p99 as a tail-risk guard; neither substitutes for the p95 acceptance
+  gate.
 - Preserve original v5 artifacts and denominator. Also report marginal change versus latest accepted stack and MTP ON reference.
 - If a timing or comparability defect requires a revised protocol, retain original results; collect matched OFF and ON supplements under a new protocol version. Never compare revised measurements to old values as proof of speedup.
 

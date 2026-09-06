@@ -8,12 +8,27 @@ Updated: 2026-09-06
 - Immutable comparison: frozen BF16 TP4/DP1 MTP-off baseline on physical NPU0-3 and the first 32 records of `/cache/cch/query_rewrite.jsonl`; its service log proves `speculative_config=None`.
 - Baseline evidence: `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp4dp1-npu03-ref-v1`.
 - Baseline summary SHA256: `cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4`.
-- Current resources after the down-prefetch screen: the exact candidate container and matching processes are absent, NPU0-3 have no running processes, and the external NPU4-7 workload remains running and untouched.
-- Current decision: retain non-speculative Qwen3.5 dense gate/up prefetch 0.1 as a TTFT ingredient; reject adding down-projection prefetch 0.1 and continue with BF16-compatible Ascend MMAR/dense-matmul work.
-- Latest TP4/NPU0-3 screen `tp4-npu03-qwen35-gdn-gateup-down-prefetch0p1-nospec-v1-20260906T151000Z` completed 128/128 requests with zero errors and natural EOS. TPOT P50 speedup is only 1.224x-1.393x, c16 TPOT P99 regresses to 0.568x, and the decision SHA256 is `a390075b67d6357d0e99f1456fc6a8ed34e5b6dc34efa0a6ff5ce5690972d077`.
+- Primary acceptance metric is now P95: both TTFT P95 and TPOT P95 must
+  improve by 2x at c1/c5/c8/c16. P50 is secondary and P99 is a risk guard.
+- Current resources: GDN projection-fusion service
+  `qwen35_gdn_proj_fusion_npu03_v1` owns physical NPU0-3 and port 10012;
+  the external NPU4-7 workload remains running and untouched.
+- Current decision: projection fusion is `iterate-performance / not
+  promoted`. Three repetitions completed 384/384 requests with zero errors
+  and natural stops. Median-of-three P95 speedups at c1/c5/c8/c16 are TTFT
+  2.206x/1.938x/1.930x/1.910x and TPOT
+  1.381x/1.651x/1.753x/1.980x, so the required all-cell 2x gate fails.
+  Semantic quality also remains unproven.
+- Retained fallback remains non-speculative Qwen3.5 dense gate/up prefetch
+  0.1 with `mlp.down=0.0`; down-projection prefetch stays rejected.
 - Speculative decoding is prohibited. All MTP, draft-model, suffix, ngram and local-argmax results are history only and cannot be retained or used as completion evidence.
 
 ## What succeeded
+
+P95, not P50, is the governing performance statistic. The projection-fusion
+candidate improved TTFT P50 beyond 2x in every cell, yet failed TTFT P95 in
+c5/c8/c16 and failed TPOT P95 in every cell. This is the concrete reason
+median gains cannot promote a treatment for this objective.
 
 | Treatment or practice | Evidence-backed lesson | Disposition |
 |---|---|---|
@@ -256,3 +271,29 @@ Updated: 2026-09-06
 - The remaining gap is the profiled collective/matmul path. Candidate
   selection must stay within vLLM-Ascend/CANN/910B4 and pass BF16 correctness
   before E2E; CUDA kernels remain discovery input only.
+
+## GDN input-projection fusion: operator win, P95 result still open
+
+- Merge the separate Qwen3.5 linear-attention `qkvz` and `ba`
+  projections. A real 910B4 BF16 microbench measured 3.046x-3.085x at
+  TP4-local M=1/5/8/16 with max absolute error `2.44140625e-4`.
+- Never translate that operator result into an E2E claim. Screen r1 primary
+  TTFT P95 speedups are 0.153x/1.906x/1.930x/1.910x and TPOT P95 speedups
+  are 1.379x/1.264x/1.753x/2.032x. Most P95 gates fail.
+- A vLLM model-attribute refactor is incomplete on Ascend until the
+  vLLM-Ascend wrapper contract is updated. The first service failed because
+  the wrapper expected `in_proj_qkvz`; the adapter must consume
+  `in_proj_qkvzba` and reconstruct qkvz/ba for the existing AscendC path.
+- New shapes can trigger first-use dynamic compilation. Preserve cold r1,
+  then use r2/r3 to characterize hot P95; do not hide cold cost or substitute
+  a favorable P50 for the user-selected P95 gate.
+- Isolation includes restart supervisors. `watch03.sh` reappeared with
+  PPID 1 while NPU0-3 still contained only the intended TP workers. Verify
+  exact cmdline, stop only that supervisor, guard every cell, and invalidate
+  measurements if a second device process appears.
+- Provenance: vLLM `685fdf22098fb3a0aa8d582dda57063773606a02`;
+  Ascend adapter `d98e37ebb72acd71b5a35222fd7ab7f8049d41cb`;
+  integration `f58e3e964141747d4b62ef749dc25cea270c2ee4`.
+- The sparse/weak `answer` field cannot prove `精读无损`. Promotion
+  requires deterministic paired baseline/candidate semantic equivalence;
+  stochastic aggregate reference metrics remain diagnostic only.

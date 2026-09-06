@@ -28,11 +28,11 @@ workload:
   prompt_mode: raw_question
   generation: "temperature 0, natural EOS, per-request max_tokens equals the model-context remainder returned by /tokenize"
 metrics:
-  primary: [ttft_p50_ms, tpot_p50_ms]
-  secondary: [ttft_p95_ms, ttft_p99_ms, tpot_p95_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
+  primary: [ttft_p95_ms, tpot_p95_ms]
+  secondary: [ttft_p50_ms, tpot_p50_ms, ttft_p99_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
 final_thresholds:
-  ttft: "candidate <= original baseline / 2 at concurrency 1, 5, 8 and 16"
-  tpot: "candidate <= original baseline / 2 at concurrency 1, 5, 8 and 16"
+  ttft: "median of three per-run TTFT P95 values <= original baseline P95 / 2 at concurrency 1, 5, 8 and 16"
+  tpot: "median of three per-run TPOT P95 values <= original baseline P95 / 2 at concurrency 1, 5, 8 and 16"
   correctness: "business correctness passes and request errors equal zero"
 dual_tp8_baselines:
   mtp_off:
@@ -1710,3 +1710,59 @@ qwen35_gdn_gateup_down_prefetch_nospec_v1:
     c16_sha256: 82b926e89b73165e1891214e1f1ebb6091a0229f44d0194e0251ec130a612018
   resource_release: "all manifest hashes verify; exact candidate container and matching processes are absent; NPU0-3 are free; external NPU4-7 workload remained running and untouched"
   next: "retain gate/up-only prefetch, revert down prefetch to 0.0, and target the profiled Ascend decode bottleneck with a BF16-compatible MMAR/dense-matmul change"
+
+qwen35_gdn_projection_fusion_nospec_v1:
+  status: iterate_performance_not_promoted
+  primary_acceptance: "at every c1/c5/c8/c16 cell, median-of-three per-run TTFT P95 and TPOT P95 must each improve by at least 2x versus frozen MTP-OFF; P50 is secondary and P99 is a risk guard"
+  run_id: tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1-20260906T161500Z
+  operation_ids: {screen_r1: exec-0000000000000413, hot_r2_r3: exec-0000000000000425}
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1-20260906T161500Z
+  hypothesis: "merge Qwen3.5 GDN qkvz and ba input projections to remove one launch/read path per linear-attention layer without retraining, quantization, or speculation"
+  primary_variable: "separate qkvz plus ba projections -> one merged qkvzba projection; retain gate/up prefetch 0.1 and mlp.down=0.0"
+  runtime: "Ascend 910B4, physical NPU0-3, vLLM-Ascend 0.23.0/CANN, TP4/DP1, BF16, quantization=None, speculative_config=None, async scheduling, FULL_DECODE_ONLY"
+  source:
+    vllm_worktree: /cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion
+    vllm_commit: 685fdf22098fb3a0aa8d582dda57063773606a02
+    qwen_gdn_linear_attn_sha256: 6aaf29f585d92d92e9d251fef899884f6cae32800a13cd24675b549f68573643
+    qwen3_5_sha256: 277e9d74db7baeb5a9c7d09bb37c83cdc676ed069c386e4ac8ef18bd059a4661
+    vllm_ascend_worktree: /cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion-ascend
+    vllm_ascend_commit: d98e37ebb72acd71b5a35222fd7ab7f8049d41cb
+    ascend_gdn_adapter_sha256: 00afaeee464f247626d2f88d8ff88fc3ecf0cdb9925ef732ea969890ab6d22d6
+    integration_commit: f58e3e964141747d4b62ef749dc25cea270c2ee4
+  first_startup_failure: "vLLM-Ascend gdn.py accessed removed in_proj_qkvz; failed before readiness and required the pinned Ascend adapter"
+  operator_microbench:
+    device: "physical Ascend 910B4 NPU0"
+    protocol: "BF16 K=5120, N=4096+24, M=1/5/8/16, 20 warmups, 100 iterations, five rotated-order repeats"
+    speedup_range: "3.04591x-3.08468x"
+    max_abs_error: 0.000244140625
+    report: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/gdn-projection-fusion-npu0-v1/report.json
+    report_sha256: fd66a8bef633ecfce6560ed5e6f96632573384596698f177b839101ee099c3f7
+    evidence_boundary: "operator selection only; not E2E proof"
+  screen_r1:
+    matrix: "c1/c5/c8/c16, 32 requests each; 128/128 complete, zero errors, all natural stops"
+    speedup_vs_frozen_mtp_off:
+      c1: {ttft: {p50: 2.139315, p95: 0.153431, p99: 0.093714}, tpot: {p50: 1.252192, p95: 1.379137, p99: 1.745502}}
+      c5: {ttft: {p50: 2.051971, p95: 1.905728, p99: 1.352204}, tpot: {p50: 1.383236, p95: 1.263605, p99: 1.514333}}
+      c8: {ttft: {p50: 2.110041, p95: 1.930063, p99: 1.929917}, tpot: {p50: 1.485565, p95: 1.752699, p99: 1.664389}}
+      c16: {ttft: {p50: 2.668907, p95: 1.909847, p99: 1.909318}, tpot: {p50: 1.509442, p95: 2.031900, p99: 1.852968}}
+    hashes:
+      c1_sha256: 692a1ab9427fa1bd7fdc57536469e62f197c868e4cbbbec8fa81d9c8dd529d84
+      c5_sha256: 4e0b93514e1e15b5e24bbadc6a8bc7350d9f72ad9b52c8dbe4f04d268d539e17
+      c8_sha256: a59432aab99d30ac363ea3a3244f084c9d89bffe3b879703d7c38731236d5170
+      c16_sha256: b930ca5bd46cced35cfc15f6b8fff29ca3d842402a1afdae55fb4a1e8001d018
+      service_log_sha256: 4c9116b8464a3ecebad7132f374ce13e8d9a96fd27eb697b9c7db6f70aa9a659
+  final_three_repeat_p95:
+    requests: "384/384; zero errors; all natural stops"
+    aggregation: "median of the three per-run P95 values"
+    speedup_vs_frozen_mtp_off:
+      c1: {ttft_p95: 2.205635, tpot_p95: 1.380880}
+      c5: {ttft_p95: 1.938439, tpot_p95: 1.650948}
+      c8: {ttft_p95: 1.930063, tpot_p95: 1.752699}
+      c16: {ttft_p95: 1.909847, tpot_p95: 1.979821}
+    decision: "iterate-performance: all-cell 2x P95 target not met"
+    decision_sha256: 69cec251d2b63648c2804452d914f121ff6994087e34957e90f28800ccaa4570
+    final_manifest_sha256: 1ecd8a648622d8d9810664effdcd30044ad56f570495af97db3af83207401caa
+  quality_gate: "unproven: answer field is not a complete semantic oracle; deterministic paired equivalence is required"
+  resource_isolation: "candidate is the only workload on NPU0-3; external NPU4-7 untouched; foreign watch03.sh supervisor stopped and remaining cells conflict-guarded"
+  interim_decision: "do not promote: median-of-three P95 misses the all-cell 2x target and 精读无损 is unproven"
+  next: "run deterministic paired semantic equivalence if retaining this ingredient, then stack a profile-backed non-speculative decode/TPOT treatment and remeasure P95"

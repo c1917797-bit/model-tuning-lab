@@ -32,6 +32,6 @@
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "git diff --check"
   ],
-    "executionState": "tp8-baseline-v5-complete-mtp-local-argmax-v2-invalid-startup-resources-idle",
-    "integrationState": "handoff-ready-source-2d08abd5-needs-memory-bounded-tp8-repair"
+    "executionState": "gdn-projection-fusion-three-repeat-p95-complete-on-npu0-3",
+    "integrationState": "branch-local-iterate-performance-p95-not-promoted"
 }

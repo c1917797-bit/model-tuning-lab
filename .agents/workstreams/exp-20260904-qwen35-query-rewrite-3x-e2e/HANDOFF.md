@@ -1,5 +1,68 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+## Current checkpoint — 2026-09-06 GDN projection fusion
+
+This checkpoint supersedes stale resource and resume statements below.
+
+- Goal remains open: primary TTFT P95 and TPOT P95 must both improve by 2x
+  at c1/c5/c8/c16 on the frozen query_rewrite workload, and semantic quality
+  must satisfy `精读无损`. P50 is secondary and P99 is a risk guard.
+  Quantization, retraining, and every form of speculative decoding are
+  prohibited.
+- Immutable denominator:
+  `baselines/tp4dp1-npu03-ref-v1`, summary SHA256
+  `cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4`.
+- Active Ascend-only treatment: fuse Qwen3.5 GDN `qkvz` and `ba` input
+  projections while retaining BF16 TP4/DP1, MMAR, NZ1, dense gate/up
+  prefetch 0.1, async scheduling, FULL_DECODE_ONLY, and
+  `speculative_config=None`.
+- vLLM source worktree
+  `/cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion`
+  is clean at `685fdf22098fb3a0aa8d582dda57063773606a02`.
+  vLLM-Ascend adapter worktree
+  `/cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion-ascend`
+  is clean at `d98e37ebb72acd71b5a35222fd7ab7f8049d41cb`.
+- The first service attempt failed before readiness because
+  `vllm_ascend/ops/gdn.py` still accessed the removed
+  `in_proj_qkvz` attribute. The adapter commit above consumes
+  `in_proj_qkvzba` and reconstructs the existing Ascend qkvz/ba contract.
+  Do not run the vLLM patch without this adapter.
+- Real 910B4 operator microbench on physical NPU0 measured 3.046x-3.085x
+  median projection speedup at M=1/5/8/16, max BF16 absolute error
+  `2.44140625e-4`. Evidence:
+  `operator-microbench/gdn-projection-fusion-npu0-v1/report.json`, SHA256
+  `fd66a8bef633ecfce6560ed5e6f96632573384596698f177b839101ee099c3f7`.
+  This is operator evidence only.
+- Service `qwen35_gdn_proj_fusion_npu03_v1` is live on port 10012 and
+  physical NPU0-3. Its engine log proves vLLM-Ascend 0.23.0,
+  `device_config=npu`, BF16, TP4/DP1, `quantization=None`, and
+  `speculative_config=None`. NPU4-7 carry the external
+  `qwen36_hypic_only_npu4_7_tp4_b40960` workload and must not be modified.
+- All r1/r2/r3 repetitions completed: 384/384 requests, zero errors, all
+  natural stops. Operation `exec-0000000000000425` ended successfully.
+  Using the required median of the three per-run P95 values, TTFT P95
+  speedup is 2.206x/1.938x/1.930x/1.910x and TPOT P95 speedup is
+  1.381x/1.651x/1.753x/1.980x at c1/c5/c8/c16. The candidate therefore
+  fails the primary all-cell 2x gate. P50 is secondary and cannot override
+  this P95 decision.
+- Machine-readable decision `decision.json` SHA256 is
+  `69cec251d2b63648c2804452d914f121ff6994087e34957e90f28800ccaa4570`;
+  final manifest SHA256 is
+  `1ecd8a648622d8d9810664effdcd30044ad56f570495af97db3af83207401caa`.
+  Evidence root:
+  `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1-20260906T161500Z`.
+- A foreign `/cache/austinov/p0/watch03.sh` supervisor reappeared with
+  PPID 1 during r1. It had not created a second NPU0-3 process and the live
+  device table contained only the intended four TP workers. It was verified
+  by exact cmdline and stopped. Remaining cells have a conflict guard; exit
+  46 means preserve partial evidence and re-orient.
+
+Resume from the `iterate-performance` decision. Keep the live service only
+for the paired deterministic semantic gate or a directly stacked successor;
+otherwise stop only the exact candidate container and verify NPU0-3 release.
+The next hypothesis must primarily improve decode/TPOT P95 while preserving
+the TTFT gains. Do not push unless the user explicitly requests it.
+
 Current approved protocol: see `LOOP.md`. It supersedes historical TP4-only
 instructions below. Both TP8 baseline groups are complete; see
 `BASELINE_COMPARISON.md`. Operation `exec-0000000000000474` completed all
