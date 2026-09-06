@@ -40,13 +40,13 @@ case "$profile_rank" in
   *) echo "PROFILE_RANK must be one of 0, 1, 2, 3" >&2; exit 64 ;;
 esac
 case "$profile_mode" in
-  profile-msprof-mmar-off|profile-msprof-mmar-on|mmar-on-weight-prefetch-gateup-0p1-fused-tail) ;;
-  *) echo "PROFILE_MODE must be profile-msprof-mmar-off, profile-msprof-mmar-on, or mmar-on-weight-prefetch-gateup-0p1-fused-tail" >&2; exit 64 ;;
+  profile-msprof-mmar-off|profile-msprof-mmar-on|mmar-on-weight-prefetch-gateup-0p1-fused-tail|qwen35-gdn-gateup-prefetch-0p1) ;;
+  *) echo "unsupported PROFILE_MODE: $profile_mode" >&2; exit 64 ;;
 esac
-if [[ "$device_set" != 4-7 ]]; then
-  echo "DEVICE_SET must be 4-7 for this workstream" >&2
-  exit 64
-fi
+case "$device_set" in
+  0-3|4-7) ;;
+  *) echo "DEVICE_SET must be 0-3 or 4-7 for this workstream" >&2; exit 64 ;;
+esac
 if [[ -e "$profile_dir" || -e "$artifact_dir" ]]; then
   echo "refusing to reuse immutable output path" >&2
   echo "profile_dir=$profile_dir" >&2
