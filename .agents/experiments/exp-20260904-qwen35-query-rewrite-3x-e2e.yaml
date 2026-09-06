@@ -1397,3 +1397,124 @@ mtp_local_argmax_candidate:
     action: "implement a memory-bounded MTP dummy-run/local-argmax repair, then prove startup and activation before repeated E2E traffic"
   intended_evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/
   rollback: "keep the retained non-speculative stack; remove the read-only patch overlay and speculative-config by selecting the retained mode"
+tp4_npu03_tail_aware_static_hccl1024_screen:
+  status: rejected_performance
+  operation_id: exec-0000000000000147
+  run_id: tp4-npu03-mmar-prefetch0p1-hccl1024-static-kernel-v1
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-mmar-prefetch0p1-hccl1024-static-kernel-v1
+  physical_devices: [0, 1, 2, 3]
+  primary_variable: "retained MMAR plus gate/up prefetch 0.1 -> add HCCL_BUFFSIZE=1024 and Ascend static kernel"
+  protocol: "first 32 frozen query_rewrite records, c1/c5/c8/c16, one screen repetition, natural EOS, BF16, no quantization"
+  requests: {c1: "32/32", c5: "32/32", c8: "32/32", c16: "32/32"}
+  errors: 0
+  latency_speedup_vs_frozen_tp4_npu03:
+    c1: {ttft: {p50: 2.069725, p95: 0.148819, p99: 0.093864}, tpot: {p50: 1.303089, p95: 1.283296, p99: 1.702380}}
+    c5: {ttft: {p50: 2.072181, p95: 1.218712, p99: 1.252621}, tpot: {p50: 1.401091, p95: 1.123800, p99: 0.909971}}
+    c8: {ttft: {p50: 1.993996, p95: 0.990396, p99: 0.990365}, tpot: {p50: 1.419074, p95: 1.170905, p99: 0.459250}}
+    c16: {ttft: {p50: 0.519884, p95: 1.016138, p99: 1.016127}, tpot: {p50: 1.417521, p95: 0.928802, p99: 0.462455}}
+  decision: "reject/iterate: no cell passes both TTFT and TPOT across P50/P95/P99; tail_non_regression=false in every cell"
+  quality_gate: "unproven because query_rewrite answer fields are not a meaningful nonempty reference set"
+  hashes:
+    frozen_baseline_summary_sha256: cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4
+    tail_decision_sha256: 54c0b690ca3e2c53794457711fa2585d20797365133b17f13e3eb0e955f4fa0a
+draft4b_k3_candidate:
+  status: startup_contract_repaired_retry_ready
+  source_manifest: configs/qwen35-query-rewrite-draft4b-k3-mmar-prefetch-gateup-0p1-candidate.yaml
+  launcher_mode: draft4b-k3-mmar-prefetch-gateup-0p1
+  primary_variable: "speculation disabled -> independent Qwen3.5-4B BF16 draft with k=3 and TP4"
+  method: "lossless draft-and-verify speculative decoding; target 27B remains authoritative"
+  target_model: /cache/austinov/Qwen3.8-27B
+  draft_model: /cache/Qwen3.5-4B
+  draft_model_hashes:
+    config_sha256: ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670
+    tokenizer_config_sha256: 316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8
+    weight_index_sha256: cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d
+  memory_boundary: "explicit 5 GB target KV cache budget; retain max_model_len=133000 and max_num_seqs=16"
+  validation: "bash syntax, YAML parse, git diff check and occupied-device guard passed; guard refused before container creation"
+  gates: [startup_memory, runtime_activation, draft_acceptance, c1_fail_fast, c1_c5_c8_c16_p50_p95_p99, meaningful_business_quality]
+  attempts:
+    v1:
+      operation_id: exec-000000000000018c
+      run_id: tp4-npu03-draft4b-k3-mmar-prefetch0p1-v1-20260906T0954Z
+      evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-draft4b-k3-mmar-prefetch0p1-v1-20260906T0954Z
+      result: "INVALID startup-contract failure; zero benchmark requests and no performance decision"
+      root_cause: "vLLM 0.23.0 unconditionally applied SpeculativeConfig.hf_config_override to the explicit Qwen3.5-4B draft, converted qwen3_5 into qwen3_5_mtp, then failed loading hidden-size 2560 weights into target-sized 5120 tensors"
+      exit_code: 70
+      service_log_sha256: 56afd1627a698f60c5922330a2259fd78a1415794a72858cc727863d17f67393
+      resource_release: "physical NPU0-3 have no running processes; NPU4-7 protected workload unchanged"
+    v2:
+      operation_id: exec-00000000000001c7
+      run_id: tp4-npu03-draft4b-k3-mmar-prefetch0p1-v2-20260906T1014Z
+      evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-draft4b-k3-mmar-prefetch0p1-v2-20260906T1014Z
+      result: "INVALID unsupported-runtime contract; zero benchmark requests and no performance decision"
+      progress: "pinned config fix succeeded: engine reports method=draft_model and resolves the normal Qwen3_5ForConditionalGeneration architecture"
+      blocker: "vLLM 0.23.0 generic DraftModelProposer rejects all M-RoPE draft models before weight loading; its padded extra-slot kernel explicitly lacks M-RoPE output-position support"
+      exit_code: 70
+      service_log_sha256: 58c9e4928d657bba3215df347c64da54a2d07a83945c4207808d0fc23c60f6e2
+      disposition: "exhaust this route for the current version; do not bypass the assertion without implementing and testing three-axis position expansion and slot mapping"
+  contract_fix:
+    root: /cache/cch/.worktrees/exp-20260906-vllm-draft-model-contract-fix
+    base_commit: 0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665
+    commit: e132e799a681ed10160ed86dbd216ed6035e96dc
+    speculative_py_sha256: a1d14995e80d9b82f37585e95b0b532d4c6d7bd42c36b4e6cc0e8363c5402cca
+    scope: "for explicit method=draft_model only, keep the complete causal-LM architecture; retain the existing MTP override for all MTP methods"
+    validation: "py_compile and git diff --check passed; exact-image runtime startup is the next activation gate"
+  resource_state: "physical NPU0-3 released after v1; recheck exact live ownership before retry and never touch NPU4-7"
+suffix_candidate:
+  status: rejected_k15_c1_performance
+  operation_id: exec-00000000000001f3
+  active_run_id: tp4-npu03-suffix-k15-sync-mmar-prefetch0p1-v3-20260906T1041Z
+  active_evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k15-sync-mmar-prefetch0p1-v3-20260906T1041Z
+  source_manifest: configs/qwen35-query-rewrite-suffix-k15-mmar-prefetch-gateup-0p1-candidate.yaml
+  launcher_mode: suffix-k15-mmar-prefetch-gateup-0p1
+  physical_devices: [0, 1, 2, 3]
+  paper_to_ascend_basis: "Suffix Decoding, arXiv:2411.04975; training-free adaptive suffix proposals verified by the unchanged target"
+  primary_variable: "async non-speculative baseline -> synchronous suffix decoding with 15 draft tokens and effective decode threshold 16"
+  retained_stack: "BF16 TP4 MMAR plus gate/up prefetch 0.1, NZ1, HCCL_BUFFSIZE=512 and FULL_DECODE_ONLY; synchronous scheduling is a required integration cost"
+  text_only_boundary: "query_rewrite has no image/video inputs; multimodal capacity is disabled, but semantic quality still requires a trusted external reference"
+  gates: [startup, runtime_activation, speculative_acceptance, c1_fail_fast, c1_c5_c8_c16_p50_p95_p99, meaningful_business_quality]
+  protected_resources: "never touch NPU4-7 or qwen36_hypic_nocache_baseline_npu4_7_tp4"
+  attempts:
+    v1:
+      operation_id: exec-00000000000001dc
+      run_id: tp4-npu03-suffix-k16-mmar-prefetch0p1-v1-20260906T1020Z
+      evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k16-mmar-prefetch0p1-v1-20260906T1020Z
+      result: "INVALID startup compatibility failure; zero benchmark requests and no performance decision"
+      blocker: "vLLM 0.23.0 rejects async scheduling with suffix decoding before model workers start"
+      exit_code: 70
+      service_log_sha256: 79657365c4e2d835ea094e31575171fd6c89efaa0e8c64965811d52c7e1f58ca
+      disposition: "retry with explicit --no-async-scheduling and count synchronous scheduling in E2E economics"
+    v2:
+      operation_id: exec-00000000000001e9
+      run_id: tp4-npu03-suffix-k16-sync-mmar-prefetch0p1-v2-20260906T1033Z
+      evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k16-sync-mmar-prefetch0p1-v2-20260906T1033Z
+      result: "INVALID Ascend attention compatibility failure; zero benchmark requests and no performance decision"
+      scheduler: synchronous
+      blocker: "16 drafts plus the current token produced decode_threshold=17, exceeding the Ascend fused TND attention limit of 16"
+      exit_code: 70
+      service_log_sha256: a98c8d8580d5d9c9ac3af721e72e9ac2d685266a42dce55bf075ed554a8235cc
+      disposition: "retry with 15 drafts so the effective threshold is exactly 16; do not bypass the attention assertion"
+    v3:
+      operation_id: exec-00000000000001f3
+      run_id: tp4-npu03-suffix-k15-sync-mmar-prefetch0p1-v3-20260906T1041Z
+      evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k15-sync-mmar-prefetch0p1-v3-20260906T1041Z
+      state: terminal_rejected_c1_fail_fast
+      scheduler: synchronous
+      num_speculative_tokens: 15
+      effective_decode_threshold: 16
+      matrix: "c1/c5/c8/c16; TTFT and TPOT P50/P95/P99"
+      readiness: "PASS: compile, 547368-token KV cache, five FULL decode graphs, API health and first real requests"
+      runtime_config: "BF16, quantization=None, TP4 on physical NPU0-3, target-verified suffix proposals"
+      requests: "c1 32/32, zero errors, 32 natural stops; c5/c8/c16 intentionally not run"
+      suffix_acceptance: {draft_tokens: 11949, accepted_tokens: 3606, rate: 0.3017881705639615}
+      c1_latency_ms:
+        ttft: {p50: 419.054360, p95: 5949.487583, p99: 6257.816269}
+        tpot: {p50: 138.442927, p95: 158.124439, p99: 159.432076}
+      c1_speedup_vs_frozen_tp4_npu03:
+        ttft: {p50: 2.194054, p95: 0.162422, p99: 0.155617}
+        tpot: {p50: 0.255123, p95: 0.246932, p99: 0.367951}
+      throughput: {request_rps: 0.026784200080120325, output_token_tps: 6.725345238867713}
+      diagnosis: "Suffix requires synchronous scheduling and real speculative batches ran outside captured decode graphs; 30.18% acceptance could not amortize target verification. TTFT p50 improved, but TTFT tails and all TPOT percentiles regressed catastrophically."
+      decision: "reject-performance-c1-failfast; do not retune suffix depth without a graph-compatible scheduler/runtime implementation"
+      hashes: {c1_sha256: 37ebb85038327c7b57976964e145902b8860c939d89c83622ebe4545ff28e53f, decision_sha256: 01d5a94bc3cafacac12dbaa3c74db798d1f866f27585b1d30e030b90c6afbb46, service_log_sha256: 71810580d69601d86f3ec803bdc30bbb788f4689a0de3697becf06bef6506804, metrics_sha256: 4b770e7e5b0f84b185fcc7ce3ed663ae62ff48a6b0e537ce9607688dd5e25fff}
+      resource_release: "exact container exited 0; matching benchmark/orchestrator processes absent; NPU0-3 have no running processes"

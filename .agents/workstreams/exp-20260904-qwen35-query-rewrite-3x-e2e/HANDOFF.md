@@ -2306,3 +2306,121 @@ were idle. The resource guard correctly rejected the new eight-card launch.
 Do not stop p0_r19 without renewed explicit approval. Once approved, start
 the new role, pass readiness/graph activation, then run one c1/c5/c8/c16
 screen before deciding whether two more repetitions are justified.
+
+## NPU0-3 tail gate and external-draft recovery
+
+The TP4/NPU0-3 baseline is frozen at
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp4dp1-npu03-ref-v1`.
+For every c1/c5/c8/c16 cell, candidate decisions now require TTFT and TPOT
+P50/P95/P99; median-only gains cannot promote a candidate. The static-kernel
+plus HCCL 1024 screen completed 128/128 requests but was rejected because no
+cell passed both metrics across all three percentiles, and TPOT P99 regressed
+at c5/c8/c16. Decision SHA256:
+`54c0b690ca3e2c53794457711fa2585d20797365133b17f13e3eb0e955f4fa0a`.
+
+External Qwen3.5-4B draft attempt v1 is preserved under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-draft4b-k3-mmar-prefetch0p1-v1-20260906T0954Z`.
+It failed before traffic because vLLM 0.23.0 rewrote an explicit Qwen3.5
+`draft_model` into `qwen3_5_mtp`, then tried to load hidden-size 2560 draft
+weights into hidden-size 5120 MTP tensors. This is an invalid startup-contract
+run, not performance evidence. The service log SHA256 is
+`56afd1627a698f60c5922330a2259fd78a1415794a72858cc727863d17f67393`.
+
+The isolated vLLM worktree
+`/cache/cch/.worktrees/exp-20260906-vllm-draft-model-contract-fix` at commit
+`e132e799a681ed10160ed86dbd216ed6035e96dc` fixes only the explicit
+`method=draft_model` branch; MTP behavior is unchanged. Its overlaid
+`vllm/config/speculative.py` SHA256 is
+`a1d14995e80d9b82f37585e95b0b532d4c6d7bd42c36b4e6cc0e8363c5402cca`.
+The launcher validates both commit and file hash before creating a container.
+On resume, recheck that NPU0-3 are idle and NPU4-7 still belong to the protected
+workload, then launch a unique v2 evidence root. First prove the service log
+reports `method=draft_model`, the normal Qwen3.5 causal-LM architecture, and
+successful target plus draft loading. Only then run c1 fail-fast and the full
+P50/P95/P99 matrix. Do not rerun ngram_gpu or MP_FFN MP2 unchanged.
+
+The repaired draft v2 subsequently proved `method=draft_model` and the normal
+Qwen3.5 causal-LM architecture, then stopped at the next genuine contract:
+generic DraftModelProposer does not support M-RoPE, and its padded extra-slot
+copy kernel emits only one-dimensional positions. Preserve v2 under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-draft4b-k3-mmar-prefetch0p1-v2-20260906T1014Z`;
+service-log SHA256 is
+`58c9e4928d657bba3215df347c64da54a2d07a83945c4207808d0fc23c60f6e2`.
+Do not bypass the assertion: a correct implementation must expand, update and
+slot-map all three M-RoPE axes and needs independent semantic tests.
+
+Suffix Decoding v1 from arXiv:2411.04975 ended before model-worker startup:
+vLLM 0.23.0 rejects suffix proposals when async scheduling is enabled. Preserve
+operation `exec-00000000000001dc` and evidence root
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k16-mmar-prefetch0p1-v1-20260906T1020Z`;
+the service-log SHA256 is
+`79657365c4e2d835ea094e31575171fd6c89efaa0e8c64965811d52c7e1f58ca`.
+This is an invalid integration run, not performance evidence.
+
+The successor uses explicit `--no-async-scheduling`. That scheduler change is
+required by the method and must be charged to its E2E result. The method remains
+training-free, loads no draft model, and every proposal is verified by the
+unchanged 27B target. It retains BF16 TP4 MMAR, NZ1 and gate/up prefetch 0.1 on
+NPU0-3. Its decision must include TTFT and TPOT P50/P95/P99 for all c1/c5/c8/c16
+cells plus speculative acceptance counters; zero errors and natural EOS are
+necessary runtime gates, not proof of business semantic quality.
+
+Suffix v2 is active as operation `exec-00000000000001e9`, run
+`tp4-npu03-suffix-k16-sync-mmar-prefetch0p1-v2-20260906T1033Z`, under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k16-sync-mmar-prefetch0p1-v2-20260906T1033Z`.
+Before launch, the exact `orch_try.sh` process and `p0_try` container that
+had auto-restarted on NPU0-3 were stopped; NPU4-7 remained untouched.
+
+Suffix v2 then loaded all 18 target-model shards successfully but failed at KV
+attention initialization: 16 draft tokens plus the current token yielded
+`decode_threshold=17`, while Ascend fused TND attention permits at most 16.
+It completed as exit 70 with zero requests; service-log SHA256 is
+`a98c8d8580d5d9c9ac3af721e72e9ac2d685266a42dce55bf075ed554a8235cc`.
+The bounded successor uses 15 draft tokens, giving effective threshold 16.
+It is active as operation `exec-00000000000001f3`, run
+`tp4-npu03-suffix-k15-sync-mmar-prefetch0p1-v3-20260906T1041Z`.
+Readiness passed: the target compiled, exposed a 547,368-token KV cache,
+captured all five FULL decode graphs, became healthy and began the real c1
+query_rewrite traffic. Do not edit either executing launcher until this
+operation is terminal.
+
+## Suffix-k15 c1 terminal rejection
+
+Operation `exec-00000000000001f3` is terminal after a guarded c1 fail-fast.
+The complete c1 artifact contains 32/32 requests, zero errors and 32 natural
+stops. A separate watcher verified the exact runner start time and container
+ID, waited until the JSON was parseable with `completed=32`, saved Prometheus
+and service logs, then stopped only this experiment before c5 began. The
+container exited 0; matching task processes are absent and NPU0-3 are released.
+
+Against frozen TP4/NPU0-3 baseline SHA256
+`cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4`,
+the complete c1 result is:
+
+| Metric | Baseline P50/P95/P99 ms | Suffix P50/P95/P99 ms | Speedup P50/P95/P99 |
+|---|---:|---:|---:|
+| TTFT | 919.428 / 966.326 / 973.824 | 419.054 / 5949.488 / 6257.816 | 2.194x / 0.162x / 0.156x |
+| TPOT | 35.320 / 39.046 / 58.663 | 138.443 / 158.124 / 159.432 | 0.255x / 0.247x / 0.368x |
+
+Suffix accepted 3,606 of 11,949 drafted tokens (30.18%). The service exposed
+captured normal decode graphs, but actual variable speculative batches ran
+with graph mode NONE; the method also required synchronous scheduling. The
+acceptance rate could not amortize these integration costs. This is a terminal
+performance rejection for the current implementation, not a semantic failure
+of target verification. Do not try k3/k5/k15 variants unchanged; resume only
+after a concrete implementation keeps async scheduling and captured graph
+execution.
+
+Evidence root:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/tp4-npu03-suffix-k15-sync-mmar-prefetch0p1-v3-20260906T1041Z`.
+SHA256: c1 `37ebb85038327c7b57976964e145902b8860c939d89c83622ebe4545ff28e53f`,
+decision `01d5a94bc3cafacac12dbaa3c74db798d1f866f27585b1d30e030b90c6afbb46`,
+service log `71810580d69601d86f3ec803bdc30bbb788f4689a0de3697becf06bef6506804`,
+Prometheus snapshot `4b770e7e5b0f84b185fcc7ce3ed663ae62ff48a6b0e537ce9607688dd5e25fff`.
+
+The next optimization must preserve asynchronous scheduling and decode graph
+execution. Existing profile evidence points to the roughly 128 serialized
+row-parallel MMAR paths per decode step. Reinspect the exact installed MMAR
+source and `/cache/cch` operator-generation assets before proposing a new
+shape-specialized kernel; do not repeat commTurn, separate MatMul+AllReduce,
+FlashComm, static-kernel or fused-tail variants already rejected above.

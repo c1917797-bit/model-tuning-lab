@@ -8,8 +8,10 @@ Updated: 2026-09-06
 - Immutable comparison: BF16 TP8/DP1 baseline v5 on physical NPU0-7 and the first 32 records of `/cache/cch/query_rewrite.jsonl`, repeated three times at c1/c5/c8/c16.
 - Baseline evidence: `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp8-user-baseline-v5-20260905T184600Z`.
 - Baseline summary SHA256: `e3e03a5f1a5ce8d3e2d5f35ccf6a410d5d96555ad9012ba5881fd9227246639d`.
-- Current resources at 2026-09-05T22:10:07Z: NPU0-3 idle; external p0_r19 occupies NPU4-7 with four VLLM workers. The eight-card candidate is not running.
-- Current decision: retain the non-speculative TP8 baseline as denominator. Reject MTP k=1 and k=3; no TP8 optimization is promoted yet.
+- Current resources after suffix-k15 c1 fail-fast: the exact candidate container exited 0, matching task processes are absent, and NPU0-3 have no running processes. NPU4-7 remain outside this run's scope even when an instantaneous process snapshot is idle.
+- Current decision: reject suffix decoding on the current vLLM-Ascend 0.23.0 integration; retain the frozen non-speculative denominator and return to graph-compatible MMAR/matmul work.
+- Latest TP4/NPU0-3 tail-aware screen `tp4-npu03-mmar-prefetch0p1-hccl1024-static-kernel-v1` completed 128/128 requests with zero errors and natural EOS. It is rejected from promotion: TTFT p50 reaches 2x only at c1/c5, TPOT p50 is only 1.30x-1.42x, and p99 TPOT regresses at c5/c8/c16. Tail-aware decision SHA256: `54c0b690ca3e2c53794457711fa2585d20797365133b17f13e3eb0e955f4fa0a`.
+- The independent local Qwen3.5-4B BF16 draft route is exhausted for vLLM-Ascend 0.23.0. Suffix Decoding was then rejected by a complete c1 P50/P95/P99 fail-fast: synchronous scheduling plus uncaptured speculative batches overwhelmed its 30.18% token acceptance.
 
 ## What succeeded
 
@@ -43,6 +45,11 @@ Updated: 2026-09-06
 | MTP local-argmax TP8 v2 | Full-logits dummy-run memory pressure; exit 137, `OOMKilled=false`, zero requests; all cards released | Startup-resource failure, not performance evidence. Next design must avoid materializing full draft logits or reduce dummy-run memory |
 | MTP local-argmax TP8 k1 v3 | Valid 12-cell run; logged acceptance 85.32%, but TTFT speedup was 0.868x-0.934x and TPOT 0.965x-1.054x | Reject k1 performance; test depth 3 as a new primary variable |
 | MTP local-argmax TP8 k3 screen | Valid first repetition, 128/128 requests, 66.39% token acceptance; c16 TTFT/TPOT speedups collapsed to 0.153x/0.321x | Reject at fail-fast screen; deeper speculation overloads high concurrency |
+| Independent Qwen3.5-4B draft v1 | vLLM applied the MTP config override despite explicit `method=draft_model`; loading 2560-hidden draft weights into 5120-hidden MTP tensors failed before traffic | Startup-contract failure, not performance evidence. Preserve v1 and retry only with the pinned explicit-draft architecture fix |
+| Independent Qwen3.5-4B draft v2 | Config repair worked, then generic DraftModelProposer rejected M-RoPE; the extra-slot expansion kernel is one-dimensional | Exhaust for vLLM-Ascend 0.23.0. Do not bypass the assertion without a tested three-axis position/slot implementation |
+| Suffix Decoding v1 with async scheduling | vLLM 0.23.0 rejected this proposer/scheduler combination before worker startup | Retry only with explicit synchronous scheduling and charge that compatibility change to the candidate's E2E result |
+| Suffix Decoding v2 with 16 drafts | Ascend fused TND attention counts the current token too, producing threshold 17 above its limit of 16 | Bound suffix drafts at 15 so the effective threshold is 16; preserve the assertion |
+| Suffix Decoding v3 with 15 drafts | c1 completed 32/32 with no errors, but TPOT P50/P95/P99 speedups were only 0.255x/0.247x/0.368x and TTFT P95/P99 only 0.162x/0.156x | Reject at c1 fail-fast. Do not retune depth until suffix can retain async scheduling and captured decode graphs |
 | Legacy exact TP4/DP2 FULL_AND_PIECEWISE launcher | Model-inspection subprocess could not obtain the Ascend device/arch and exited before model load | Preserve failure; retry only through the proven device-mapping launcher |
 | Edited launcher while it was executing | Matrix and shutdown completed, then changed script bytes caused a postprocessing parse error | Wait for terminal state or create a versioned successor; never edit an executing script |
 

@@ -3,9 +3,9 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|mtp-local-argmax|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
-    echo "usage: $0 {baseline|mtp|mtp-local-argmax|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-off|profile-msprof-mmar-on|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz}" >&2
+    echo "usage: $0 {baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|...}" >&2
     exit 64
     ;;
 esac
@@ -13,13 +13,18 @@ esac
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 device_set="${DEVICE_SET:-4-7}"
 case "$device_set" in
+  0-3)
+    physical_npus=(0 1 2 3)
+    physical_npu_csv="0,1,2,3"
+    cpuset_cpus="0-95"
+    ;;
   4-7)
     physical_npus=(4 5 6 7)
     physical_npu_csv="4,5,6,7"
     cpuset_cpus="0-95"
     ;;
   *)
-    echo "DEVICE_SET must be 4-7 for this workstream" >&2
+    echo "DEVICE_SET must be 0-3 or 4-7 for this workstream" >&2
     exit 64
     ;;
 esac
@@ -66,6 +71,12 @@ task_queue_enable=1
 max_num_batched_tokens=32768
 max_model_len=133000
 gpu_memory_utilization=0.90
+draft4b_model=/cache/Qwen3.5-4B
+draft4b_config_sha256=ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670
+draft4b_index_sha256=cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d
+draft_model_fix_root=/cache/cch/.worktrees/exp-20260906-vllm-draft-model-contract-fix
+draft_model_fix_commit=e132e799a681ed10160ed86dbd216ed6035e96dc
+draft_model_fix_sha256=a1d14995e80d9b82f37585e95b0b532d4c6d7bd42c36b4e6cc0e8363c5402cca
 if [[ "$mode" == flashcomm1 || "$mode" == flashcomm1-bf16-nz ||
       "$mode" == flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1 ]]; then
   flashcomm1_env=1
@@ -102,6 +113,33 @@ if [[ "$mode" == mtp-local-argmax ]]; then
     echo "Qwen3.5 MTP local-argmax source must be $mtp_local_argmax_commit, got $actual_ref" >&2
     exit 45
   fi
+fi
+if [[ "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ]]; then
+  [[ -f "$draft4b_model/config.json" &&
+     -f "$draft4b_model/model.safetensors.index.json" ]] || {
+    echo "missing pinned Qwen3.5-4B draft model at $draft4b_model" >&2
+    exit 66
+  }
+  [[ "$(sha256sum "$draft4b_model/config.json" | awk '{print $1}')" == "$draft4b_config_sha256" ]] || {
+    echo "Qwen3.5-4B draft config hash mismatch" >&2
+    exit 65
+  }
+  [[ "$(sha256sum "$draft4b_model/model.safetensors.index.json" | awk '{print $1}')" == "$draft4b_index_sha256" ]] || {
+    echo "Qwen3.5-4B draft weight-index hash mismatch" >&2
+    exit 65
+  }
+  actual_ref="$(
+    git -c safe.directory="$draft_model_fix_root" \
+      -C "$draft_model_fix_root" rev-parse HEAD
+  )"
+  [[ "$actual_ref" == "$draft_model_fix_commit" ]] || {
+    echo "vLLM draft-model contract fix must be $draft_model_fix_commit, got $actual_ref" >&2
+    exit 45
+  }
+  [[ "$(sha256sum "$draft_model_fix_root/vllm/config/speculative.py" | awk '{print $1}')" == "$draft_model_fix_sha256" ]] || {
+    echo "vLLM draft-model contract fix hash mismatch" >&2
+    exit 47
+  }
 fi
 if [[ "$mode" == flashcomm2-oproj1-mmar-prefetch-gateup-0p1 ||
       "$mode" == flashcomm2-oproj2-mmar-prefetch-gateup-0p1 ]]; then
@@ -143,7 +181,8 @@ fi
 if [[ "$mode" == mmar-on-hccl-aiv ]]; then
   hccl_op_expansion_mode=AIV
 fi
-if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024 ]]; then
+if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024 ||
+      "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel ]]; then
   hccl_buffsize=1024
 fi
 if [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-taskqueue2 ]]; then
@@ -175,14 +214,22 @@ reservation_ignore_names="${NPU_RESERVATION_IGNORE_NAMES-/vllm-ep-310p-research-
 container_reservations="$(
   for running_id in $(docker ps -q); do
     docker inspect --format '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}' "$running_id"
-  done | awk -v ignored_csv="$reservation_ignore_names" '
+  done | awk -v ignored_csv="$reservation_ignore_names" -v wanted="$physical_npu_csv" '
     BEGIN {
       split(ignored_csv, ignored_names, ",")
       for (item in ignored_names) {
         ignored[ignored_names[item]] = 1
       }
+      split(wanted, ids, ",")
+      for (item in ids) selected[ids[item]] = 1
     }
-    $0 ~ /\/dev\/davinci[4-7]([[:space:]]|$)/ && !($1 in ignored)
+    {
+      reserved = 0
+      for (id in selected) {
+        if ($0 ~ ("/dev/davinci" id "([[:space:]]|$)")) reserved = 1
+      }
+      if (reserved && !($1 in ignored)) print
+    }
   '
 )"
 if [[ -n "$container_reservations" ]]; then
@@ -249,9 +296,13 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"enable_flashcomm2_parallel_size":2,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_decode_mmar_add_rmsnorm":true}}'
-    elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-static-kernel ]]; then
+    elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-static-kernel ||
+            "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"enable_npugraph_ex":true,"enable_static_kernel":true}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1 ||
+          "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ||
+          "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
+          "$mode" == suffix-k16-mmar-prefetch-gateup-0p1 ||
           "$mode" == mtp-local-argmax ||
           "$mode" == mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024 ||
           "$mode" == mmar-on-weight-prefetch-gateup-0p1-taskqueue2 ||
@@ -285,6 +336,8 @@ serve_args=(
 )
 
 if [[ "$mode" == tp2-dp2-mmar-on-text-only ||
+      "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
+      "$mode" == suffix-k16-mmar-prefetch-gateup-0p1 ||
       "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384 ||
       "$mode" == tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192 ||
       "$mode" == tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95 ]]; then
@@ -298,10 +351,11 @@ fi
 # at /stop_profile and cancels the multiprocess response queue. Profiling is
 # diagnostic-only, so preserve async scheduling for performance candidates and
 # use the synchronous scheduler only for the isolated profiler service.
-if [[ "$mode" == profile || "$mode" == profile-mmar-off ]]; then
+if [[ "$mode" == profile || "$mode" == profile-mmar-off || "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 || "$mode" == suffix-k16-mmar-prefetch-gateup-0p1 ]]; then
   # Omitting --async-scheduling is not sufficient in vLLM 0.23.0: the
-  # effective default can still enable it.  Force the diagnostic service onto
-  # the synchronous scheduler so the profiler lifecycle invariant is testable.
+  # effective default can still enable it.  Force profiling onto the
+  # synchronous scheduler, and do the same for suffix decoding because vLLM
+  # 0.23.0 rejects that proposer when async scheduling is enabled.
   serve_args+=(--no-async-scheduling)
 else
   serve_args+=(--async-scheduling)
@@ -314,6 +368,25 @@ if [[ "$mode" == mtp-local-argmax ]]; then
   # Greedy query_rewrite requests can use an exact vocab-parallel argmax:
   # gather one value/index pair per TP rank instead of full draft logits.
   serve_args+=(--speculative-config '{"method":"mtp","num_speculative_tokens":1,"use_local_argmax_reduction":true}')
+fi
+if [[ "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ]]; then
+  # A separate BF16 Qwen3.5-4B proposer is verified by the 27B target. TP4 is
+  # required by vLLM 0.23.0 when the target is TP4. Reserve model headroom by
+  # bounding target KV memory without changing the 133K serving contract.
+  serve_args+=(
+    --kv-cache-memory=5000000000
+    --speculative-config '{"model":"/cache/Qwen3.5-4B","method":"draft_model","num_speculative_tokens":3,"draft_tensor_parallel_size":4}'
+  )
+fi
+if [[ "$mode" == suffix-k16-mmar-prefetch-gateup-0p1 ]]; then
+  # Suffix Decoding is training-free and target-verified. It adapts proposal
+  # depth to repeated prompt/generated suffixes and does not load another model.
+  serve_args+=(--speculative-config '{"method":"suffix","num_speculative_tokens":16}')
+fi
+if [[ "$mode" == suffix-k15-mmar-prefetch-gateup-0p1 ]]; then
+  # Ascend's fused TND attention accepts a decode threshold of at most 16.
+  # The threshold includes the current token, so at most 15 suffix drafts fit.
+  serve_args+=(--speculative-config '{"method":"suffix","num_speculative_tokens":15}')
 fi
 if [[ "$mode" == ngram-gpu ]]; then
   # Prompt Lookup Decoding is training-free and lossless under target-model
@@ -372,6 +445,14 @@ docker_args=(
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )
+
+if [[ "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ]]; then
+  docker_args+=(
+    -v "$draft4b_model:$draft4b_model:ro"
+    -v "$draft_model_fix_root/vllm/config/speculative.py:/vllm-workspace/vllm/vllm/config/speculative.py:ro"
+    -e VLLM_DRAFT_MODEL_CONFIG_FIX_COMMIT="$draft_model_fix_commit"
+  )
+fi
 
 if [[ -n "$hccl_op_expansion_mode" ]]; then
   docker_args+=(-e HCCL_OP_EXPANSION_MODE="$hccl_op_expansion_mode")

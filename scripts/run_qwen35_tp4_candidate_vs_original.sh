@@ -19,6 +19,15 @@ active_container=""
 active_log=""
 
 case "$candidate_mode" in
+  suffix-k15-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-suffix-k15-mmar-prefetch-gateup-0p1-candidate.yaml"
+    ;;
+  suffix-k16-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-suffix-k16-mmar-prefetch-gateup-0p1-candidate.yaml"
+    ;;
+  draft4b-k3-mmar-prefetch-gateup-0p1)
+    default_config="$repo_root/configs/qwen35-query-rewrite-draft4b-k3-mmar-prefetch-gateup-0p1-candidate.yaml"
+    ;;
   mtp-local-argmax)
     default_config="$repo_root/configs/qwen35-query-rewrite-mtp-local-argmax-candidate.yaml"
     ;;
@@ -45,6 +54,9 @@ case "$candidate_mode" in
     ;;
   mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-prefetch-0p1-hccl-buff1024-candidate.yaml"
+    ;;
+  mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel)
+    default_config="$repo_root/configs/qwen35-query-rewrite-mmar-prefetch-0p1-hccl-buff1024-static-kernel-candidate.yaml"
     ;;
   mmar-on-weight-prefetch-gateup-0p1-taskqueue2)
     default_config="$repo_root/configs/qwen35-query-rewrite-mmar-on-weight-prefetch-gateup-0p1-taskqueue2-candidate.yaml"
@@ -100,8 +112,8 @@ case "$candidate_mode" in
     ;;
 esac
 case "$device_set" in
-  4-7) ;;
-  *) echo "DEVICE_SET must be 4-7 for this workstream" >&2; exit 64 ;;
+  0-3|4-7) ;;
+  *) echo "DEVICE_SET must be 0-3 or 4-7 for this workstream" >&2; exit 64 ;;
 esac
 candidate_config="${CANDIDATE_CONFIG:-$default_config}"
 
@@ -186,6 +198,9 @@ candidate_run_status=$?
 set -e
 
 if [[ "$candidate_mode" == ngram-gpu ||
+      "$candidate_mode" == suffix-k15-mmar-prefetch-gateup-0p1 ||
+      "$candidate_mode" == suffix-k16-mmar-prefetch-gateup-0p1 ||
+      "$candidate_mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ||
       "$candidate_mode" == mtp-local-argmax ]]; then
   curl --fail --silent --max-time 10 "$base_url/metrics" |
     awk '/spec_decode|speculative/ {print}' \
