@@ -20,13 +20,13 @@
     {"kind":"file","mode":"exclusive","value":"configs/paper-to-ascend/qwen35-dense-mtp.yaml"},
     {"kind":"file","mode":"exclusive","value":"scripts/paper_to_ascend/qwen35_dense_mtp_*"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-qwen35-dense-mtp-paper-to-ascend.yaml"},
-    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU0-3 and loopback port 8220; NPU4-7 and port 8210 excluded"}
+    {"kind":"resource","mode":"exclusive","value":"no active NPU or port lease while the MTP candidate is superseded; acquire a fresh explicit lease only for a new non-speculative Paper-to-Ascend experiment"}
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
     "python -m unittest discover -s tests -p 'test_qwen35_dense_mtp_*.py'",
     "git diff --check"
   ],
-  "executionState": "blocked-resource",
+  "executionState": "superseded-policy-select-new-nonspec-paper",
   "integrationState": "not-ready"
 }

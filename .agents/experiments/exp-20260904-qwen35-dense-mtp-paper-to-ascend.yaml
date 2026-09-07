@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260904-qwen35-dense-mtp-paper-to-ascend
-status: attempted
-decision: inconclusive
+status: superseded_policy
+decision: rejected_policy
 objective: Improve decode throughput and TPOT for the installed dense Qwen3.5-27B without retraining.
 hypothesis: The checkpoint's built-in MTP head can propose tokens cheaply enough that exact speculative verification reduces serial target-model decode steps on Ascend 910B4.
 paper:
@@ -75,4 +75,4 @@ attempt:
   candidate_measurements: 0
   fresh_candidate_profile: not_collected
 decision_reason: "Inconclusive due to resource isolation failure. The selected MTP method remains implementation-ready, but no uncontended device set was available. The collected baseline is explicitly non-decisional and no candidate throughput claim is made."
-next_loop: "When one physical four-NPU set is explicitly released, re-prove exclusive ownership, wait for worker teardown, then rerun baseline and qwen3_5_mtp candidate serially with the frozen concurrency-8 protocol, exact-output canary, acceptance metrics, and comparable Decode profiles."
+next_loop: "Do not resume MTP/speculative decoding under the current user constraint. Preserve this experiment as historical evidence, release its NPU/port claims, and create a new workstream/experiment for a non-speculative, no-retraining, no-quantization inference-time paper selected from a measured dense Qwen3.5/vLLM-Ascend bottleneck. Hand any viable implementation to the separate query_rewrite performance workstream for its independent E2E gate."

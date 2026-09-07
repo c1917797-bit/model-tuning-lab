@@ -1,12 +1,32 @@
 # Qwen3.5 Dense MTP Paper-to-Ascend
 
+## Maintainer task boundary — 2026-09-07
+
+This branch is the Paper-to-Ascend research/migration track, not the active
+Qwen3.5 production performance loop. It owns paper selection, mechanism
+applicability, a bounded Ascend prototype, and a paper-level accept/reject
+record. It does not own the frozen `query_rewrite.jsonl` denominator, the
+c1/c5/c8/c16 1.5x P95 stop gate, or the final serving-stack decision; those
+belong to `exp-20260904-qwen35-query-rewrite-3x-e2e`.
+
+The selected MTP/speculative-decoding candidate is now superseded by the
+user's no-MTP/no-speculative constraint. Preserve its inconclusive baseline
+and failed-start evidence as history, but do not resume or present it as the
+current Qwen3.5 optimization task. This workstream has no active NPU or port
+lease. Its next valid loop is to select a non-speculative, no-retraining,
+no-quantization inference-time paper whose mechanism addresses a measured
+dense Qwen3.5/vLLM-Ascend bottleneck. Any resulting implementation is a
+candidate input to the performance workstream and must pass that workstream's
+independent baseline, quality, and delivery-contract gates.
+
 ## State
 
-- Execution: `blocked-resource`; integration: `not-ready`; decision: `inconclusive`.
+- Execution: `superseded-policy`; integration: `not-ready`; decision:
+  `rejected-policy` for the MTP candidate.
 - Branch: `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend`.
 - Base: `origin/main@fbc79c41c37c8900f0623ce8941304e9bfde5cf1`.
 - Latest local checkpoint before this handoff update: `5b0f328`.
-- No experiment container remains. Port 8220 is not owned after cleanup.
+- No experiment container remains. This workstream owns no NPU or port lease.
 - Do not stop or change `qwen38_paper_baseline_npu0_3` (physical NPU0-3,
   port 8211) or `qwen38_gdn_fused_candidate` (physical NPU4-7, port 8210).
 
