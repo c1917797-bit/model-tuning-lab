@@ -3420,3 +3420,23 @@ exit 48 from the container-reservation check and created no test container,
 proving the guard runs before both the process-table fallback and Docker
 creation. This prevents a race when the external workers briefly disappear
 between restarts.
+
+## 2026-09-07 bounded-MMAR handoff audit
+
+The final runtime-only monkeypatch deliberately decomposes MMAR only for
+compile ranges whose token count is greater than 512 and at most 16384.
+Decode-sized ranges at or below 512 and the maximum range above 16384 retain
+the original MMAR path. This boundary aligns the successor with the isolated
+910B4 operator proof at M=4096/8192/16384 and does not extend the fused
+AllReduce+RMSNorm route into the maximum range associated with the earlier
+full-service timeout. This is static control-flow evidence only; real TP4
+startup must still prove per-rank range applicability and rewrite counts
+before correctness or performance traffic.
+
+At 2026-09-07T15:35:25Z, direct host evidence still showed
+`vllm-ep-310p-research-910b-monitor` running since 13:38:15Z with TP workers
+2684511 and 2684512 consuming about 28103/28102 MiB on physical NPU0/1.
+Physical NPU2-7 had no running process and port 10010 was not listening.
+Because the container reserves device nodes 0-7, the TP4 launcher must remain
+fail-closed until the container exits or the user explicitly authorizes
+stopping it.
