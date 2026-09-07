@@ -17,6 +17,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--minimum-speedup", type=float, default=1.02)
+    parser.add_argument("--selected-k", type=int)
+    parser.add_argument("--nonselected-minimum-speedup", type=float, default=0.98)
     parser.add_argument("--correctness-envelope-factor", type=float, default=2.0)
     return parser.parse_args()
 
@@ -102,10 +104,17 @@ def main() -> int:
         speedup = float(baseline_cell["median_max_rank_us"]) / float(
             candidate_cell["median_max_rank_us"]
         )
+        required_speedup = (
+            args.minimum_speedup
+            if args.selected_k is None or shape[1] == args.selected_k
+            else args.nonselected_minimum_speedup
+        )
         cells[key] = {
             "default_median_max_rank_us": baseline_cell["median_max_rank_us"],
             "online_median_max_rank_us": candidate_cell["median_max_rank_us"],
             "speedup_vs_default": speedup,
+            "required_speedup": required_speedup,
+            "speedup_gate_passes": speedup >= required_speedup,
             "candidate_vs_default": comparison,
             "thresholds_from_default_reference_error": thresholds,
             "metric_passes": metric_passes,
@@ -118,13 +127,18 @@ def main() -> int:
     minimum_shape_speedup = min(
         float(cell["speedup_vs_default"]) for cell in cells.values()
     )
-    passes = correct and minimum_shape_speedup >= args.minimum_speedup
+    speedup_gate_passes = all(
+        bool(cell["speedup_gate_passes"]) for cell in cells.values()
+    )
+    passes = correct and speedup_gate_passes
     decision = {
         "schema": "qwen35-mmar-online-tiling-decision/v1",
         "baseline": str(default_path),
         "candidate": str(online_path),
         "required_shapes": [list(shape) for shape in SHAPES],
         "minimum_speedup": args.minimum_speedup,
+        "selected_k": args.selected_k,
+        "nonselected_minimum_speedup": args.nonselected_minimum_speedup,
         "correctness_envelope_factor": args.correctness_envelope_factor,
         "correctness_policy": (
             "candidate fused output must remain within the configured factor "
@@ -135,6 +149,7 @@ def main() -> int:
         "cells": cells,
         "correct": correct,
         "minimum_shape_speedup": minimum_shape_speedup,
+        "speedup_gate_passes": speedup_gate_passes,
         "passes_e2e_gate": passes,
         "decision": "promote-to-e2e" if passes else "reject",
     }

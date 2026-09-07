@@ -12,6 +12,7 @@ baseline_sha256="${BASELINE_PACKAGE_SHA256:?set BASELINE_PACKAGE_SHA256}"
 candidate_commit="${CANDIDATE_OPERATOR_COMMIT:?set CANDIDATE_OPERATOR_COMMIT}"
 candidate_sha256="${CANDIDATE_PACKAGE_SHA256:?set CANDIDATE_PACKAGE_SHA256}"
 cooldown="${MMAR_DEVICE_COOLDOWN_SECONDS:-30}"
+selected_k="${MMAR_ONLINE_TILING_K:-}"
 image="${VLLM_ASCEND_IMAGE:-quay.io/ascend/vllm-ascend:v0.23.0}"
 
 case "$output_root" in /cache/austinov/*) ;; *) echo "invalid OUTPUT_ROOT" >&2; exit 64;; esac
@@ -22,6 +23,10 @@ for path in "$baseline_opp_env" "$candidate_opp_env"; do
   [[ -f "$path" ]] || { echo "missing OPP environment: $path" >&2; exit 66; }
 done
 [[ ! -e "$output_root" ]] || { echo "refusing to reuse output root" >&2; exit 44; }
+if [[ -n "$selected_k" && ! "$selected_k" =~ ^[1-9][0-9]*$ ]]; then
+  echo "MMAR_ONLINE_TILING_K must be a positive integer" >&2
+  exit 64
+fi
 
 npu_snapshot="$(npu-smi info)"
 occupied="$(awk -F '|' '$2 ~ /^[[:space:]]*[0-3][[:space:]]+[0-9]+[[:space:]]*$/ && $3 ~ /^[[:space:]]*[0-9]+[[:space:]]*$/ {print $3}' <<<"$npu_snapshot")"
@@ -37,6 +42,7 @@ printf '%s\n' "$npu_snapshot" >"$output_root/npu-before.txt"
   echo "candidate_package_sha256=$candidate_sha256"
   echo "candidate_opp_root=$candidate_opp_root"
   echo "candidate_env_ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING=1"
+  echo "candidate_env_ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING_K=${selected_k:-unset}"
   echo "warmup=40"
   echo "iterations=200"
   echo "repeats=7"
@@ -56,6 +62,9 @@ for label in default online; do
     commit="$candidate_commit"
     sha256="$candidate_sha256"
     online_args=(-e ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING=1)
+    if [[ -n "$selected_k" ]]; then
+      online_args+=(-e "ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING_K=$selected_k")
+    fi
   fi
   container_name="qwen35_mmar_frozen_ab_${label}_npu03"
   ! docker container inspect "$container_name" >/dev/null 2>&1 || {
@@ -93,8 +102,11 @@ for label in default online; do
   [[ "$label" != default ]] || sleep "$cooldown"
 done
 
-python3 "$repo_root/scripts/evaluate_qwen35_mmar_online_tiling.py" \
-  --root "$output_root" --minimum-speedup 1.02
+evaluate_args=(--root "$output_root" --minimum-speedup 1.02)
+if [[ -n "$selected_k" ]]; then
+  evaluate_args+=(--selected-k "$selected_k" --nonselected-minimum-speedup 0.98)
+fi
+python3 "$repo_root/scripts/evaluate_qwen35_mmar_online_tiling.py" "${evaluate_args[@]}"
 npu-smi info >"$output_root/npu-after.txt"
 sha256sum "$output_root"/*.json "$output_root"/*.log \
   "$output_root"/npu-before.txt "$output_root"/npu-after.txt \
