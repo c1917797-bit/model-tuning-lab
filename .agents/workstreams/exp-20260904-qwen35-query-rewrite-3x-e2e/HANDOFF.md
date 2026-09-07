@@ -3144,3 +3144,19 @@ Manifest SHA256:
 `77d157bfe13e4db02e875e3c7bb1c80baad810ded6e7d800fcc5afaae578aa2d`.
 The benchmark containers exited, NPU0-3 were released, and NPU4-7 were not
 modified.
+
+## A2-native BF16 dense SwiGLU FFN candidate declared
+
+After the selective K4352 MMAR path failed its operator gate, the next
+materially different candidate targets the local dense MLP chain. Qwen3.5-27B
+TP4 uses `[M,5120] x [5120,8704]`, SwiGLU to `[M,4352]`, then
+`[M,4352] x [4352,5120]` for M=1/5/8/16.
+
+The upstream FFN README marks A2 unsupported, but `ffn_def.cpp` registers
+`ascend910b`; its high-performance SwiGLU contract is FP16-only. Treat this
+as a feasibility question, not support evidence. Create an isolated worktree
+from `ops-transformer@0684247214bae5abb5cb6dc7d90b34a6ad401cdd`.
+Phase 0 must build a 910B package and prove BF16 SwiGLU starts. Phase 1 must
+show deterministic correctness and at least 1.10x latency improvement at
+every M before vLLM integration. The final TP all-reduce remains required.
+No quantization, retraining, MTP, speculative decoding, or NPU4-7 use.

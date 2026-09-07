@@ -103,3 +103,16 @@ AllReduce/Commit/Wait/Finalize cost, or amortize it through a materially new
 fusion with positive whole-model economics. Full launch participation, BF16
 equivalence, TP4 correctness, and exact-shape microbench gates remain
 mandatory.
+
+## Active FFN feasibility branch
+
+The next materially different branch tests whether the source-level
+`ascend910b` registration can support a dense BF16 SwiGLU specialization,
+despite the README marking A2 unsupported and the existing high-performance
+SwiGLU contract as FP16-only. This is not yet a supported port or performance
+claim.
+
+The exact TP4-local shapes are M in 1/5/8/16, K1=5120, N1=8704, K2=4352 and
+N2=5120. Require deterministic correctness and at least 1.10x latency
+improvement over the current local three-op chain before vLLM integration.
+The row-parallel all-reduce remains required after the local FFN output.

@@ -1930,3 +1930,26 @@ qwen35_mmar_online_hccl_k4352_v2:
   decision: "reject before E2E: K4352 was correct but 1.010220x missed the predeclared 1.02x operator threshold"
   resource_release: "benchmark containers exited; NPU0-3 released; NPU4-7 workload untouched"
   next: "do not retry the K-only online-tiling filter unchanged; broaden operator screening to real M=1/5/8/16 scheduler shapes and target a material HCCL lifecycle/launch reduction"
+
+qwen35_a2_bf16_dense_swiglu_ffn_v1:
+  status: planned_feasibility
+  hypothesis: "an A2-native dense BF16 SwiGLU FFN can reuse the A3 FFN operator structure to eliminate gate/up intermediate launch and memory traffic before the row-parallel down projection"
+  primary_variable: "current merged gate/up matmul -> silu_and_mul -> down matmul chain versus one native dense FFN operator; retain the final TP all-reduce outside phase 1"
+  exact_local_shapes:
+    input: "[M,5120]"
+    merged_gate_up_weight: "[5120,8704]"
+    swiglu_output: "[M,4352]"
+    down_weight: "[4352,5120]"
+    m_values: [1, 5, 8, 16]
+  source_contract:
+    repository: /cache/cch/ops-transformer
+    base_commit: 0684247214bae5abb5cb6dc7d90b34a6ad401cdd
+    observation: "README marks A2 unsupported while ffn_def.cpp registers ascend910b; upstream SwiGLU high-performance contract is FP16-only, so BF16 support must be proven"
+    worktree: /cache/cch/.worktrees/exp-20260907-qwen35-a2-bf16-dense-ffn
+    branch: work/exp-20260907-qwen35-a2-bf16-dense-ffn
+  constraints: "physical 910B4 NPU0-3 only; BF16; no quantization, retraining, MTP or speculative decoding; NPU4-7 excluded"
+  phase0_gate: "build an isolated ascend910b FFN package and prove the exact BF16 SwiGLU contract starts"
+  phase1_gate: "for M=1/5/8/16, deterministic numerical equivalence and >=1.10x median latency versus the exact unfused local FFN chain"
+  integration_gate: "only after phase1, add an opt-in vLLM graph rewrite, prove activation, retain final TP all-reduce, and run c1/c16 P95 fail-fast"
+  abort: "stop on unsupported BF16/910B contract, correctness failure, any phase1 shape below 1.10x, or E2E P95 regression"
+  rollback: "do not load the isolated package or enable the opt-in graph rewrite; preserve the retained stack"
