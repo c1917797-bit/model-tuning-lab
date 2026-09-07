@@ -3321,3 +3321,37 @@ same FX graph fed both compile ranges. Consequently the short range did not
 retain MMAR as designed. Any successor must perform range-specific graph
 rewriting (for example decomposing MMAR only in the selected prefill range),
 not a Python shape branch inside `apply_impl`.
+
+## 2026-09-07 target and delivery-contract update
+
+The current stop gate supersedes earlier 2x/3x targets: at every c1/c5/c8/c16
+cell, the median of three real `query_rewrite.jsonl` runs must show both TTFT
+P95 and TPOT P95 speedup `>=1.5x` versus the frozen MTP-off baseline. Report
+P99 as a tail-risk guard and P50 as secondary evidence. Quantization,
+retraining, speculative decoding and MTP remain excluded.
+
+All deliverable changes must be runtime Python monkeypatches. Do not modify or
+overlay vLLM source, and do not use vLLM-Ascend source overlays for final E2E
+evidence. The current implementation is
+`scripts/qwen35_ascend_monkeypatch/sitecustomize.py` (SHA256
+`28091a36b6737470cfcecb70520d1dfe49f122531511b5cfcad16b566d165897`),
+mounted read-only by `scripts/run_qwen35_tp4_dev_service.sh`. It defers all
+Ascend imports until vLLM's device-less model inspection completes, then
+installs the compile-range, bounded-MMAR, GDN prefetch and RMSNorm hooks.
+
+The earlier `qwen35_prefill_range_npu03_20260907t4` source-overlay activation
+proved the three compile ranges and 128 bounded-MMAR rewrites per TP rank, but
+is noncompliant with the monkeypatch-only delivery contract and is not final
+performance evidence. Monkeypatch attempts t6/t7/t8 failed before API startup:
+t6/t7 exposed premature Ascend import; t8 confirmed that merely preserving the
+image's CANN `PYTHONPATH` was insufficient. These failures have no performance
+claim. The deferred-import implementation has passed host `py_compile` but has
+not yet reached an NPU activation gate.
+
+Execution is currently waiting on NPU0-3 availability. The externally started
+container `vllm-ep-310p-research-910b-monitor` runs a TP2 quantized Qwen3 job
+on physical NPU0-1. It mounts device nodes 0-7 even though `npu-smi` shows no
+process on NPU2-7; stopping it was not authorized by the no-impact NPU4-7
+boundary. Do not bypass this guard. Resume by obtaining explicit approval to
+stop that all-device container, or wait until NPU0-1 are released, then launch
+the deferred monkeypatch candidate on NPU0-3 and run correctness before E2E.

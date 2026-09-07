@@ -3,7 +3,7 @@ set -euo pipefail
 
 mode="${1:-}"
 case "$mode" in
-  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|qwen35-gdn-gateup-prefetch-0p1-proj-fusion|qwen35-gdn-proj-fusion-prefill-ar-rms|qwen35-gdn-proj-fusion-inplace-tail|qwen35-gdn-gateup-down-prefetch-0p1|qwen35-gdn-prefetch0p1-sp-pass|qwen35-gdn-proj-fusion-sp-mmar-off|qwen35-gdn-proj-fusion-mmar-off|qwen35-gdn-proj-fusion-mmar-down-off|qwen35-gdn-proj-fusion-mmar-attn-off|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
+  baseline|mtp|mtp-local-argmax|mtp-k3-local-argmax-mmar-prefetch-gateup-0p1|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|profile|profile-mmar-off|profile-msprof-mmar-on|profile-msprof-mmar-off|control-mmar-off|mmar-on|mmar-on-hccl-aiv|mmar-on-weight-prefetch-gateup|mmar-on-weight-prefetch-gateup-0p1|qwen35-gdn-gateup-prefetch-0p1|qwen35-gdn-gateup-prefetch-0p1-proj-fusion|qwen35-gdn-prefetch0p1-prefill-ar-rms|qwen35-gdn-proj-fusion-prefill-ar-rms|qwen35-gdn-proj-fusion-inplace-tail|qwen35-gdn-gateup-down-prefetch-0p1|qwen35-gdn-prefetch0p1-sp-pass|qwen35-gdn-proj-fusion-sp-mmar-off|qwen35-gdn-proj-fusion-mmar-off|qwen35-gdn-proj-fusion-mmar-down-off|qwen35-gdn-proj-fusion-mmar-attn-off|mmar-on-weight-prefetch-gateup-0p1-fused-tail|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024|mmar-on-weight-prefetch-gateup-0p1-hccl-buff1024-static-kernel|mmar-on-weight-prefetch-gateup-0p1-taskqueue2|mmar-on-weight-prefetch-gateup-0p1-static-kernel|tp2-pp2-mmar-on-weight-prefetch-gateup-0p1|tp2-dp2-mmar-on|tp2-dp2-mmar-on-text-only|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt16384|tp2-dp2-mmar-on-weight-prefetch-gateup-0p1-text-only-bt8192|tp2-dp2-mmar-prefetch-0p1-text-ctx32k-bt8192-gmu0p95|flashcomm1|flashcomm1-gdn-shape-mmar-prefetch-gateup-0p1|flashcomm2-oproj1-mmar-prefetch-gateup-0p1|flashcomm2-oproj2-mmar-prefetch-gateup-0p1|bf16-nz|bf16-nz-mmar-off|flashcomm1-bf16-nz|selective-ffn-nz) ;;
   *)
     echo "usage: $0 {baseline|mtp|mtp-local-argmax|draft4b-k3-mmar-prefetch-gateup-0p1|suffix-k15-mmar-prefetch-gateup-0p1|suffix-k16-mmar-prefetch-gateup-0p1|ngram-gpu|...}" >&2
     exit 64
@@ -11,6 +11,8 @@ case "$mode" in
 esac
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+monkeypatch_root="$repo_root/scripts/qwen35_ascend_monkeypatch"
+monkeypatch_sha256=28091a36b6737470cfcecb70520d1dfe49f122531511b5cfcad16b566d165897
 device_set="${DEVICE_SET:-4-7}"
 case "$device_set" in
   0-3)
@@ -80,9 +82,12 @@ selective_mmar_commit="${SELECTIVE_MMAR_COMMIT:-5d2c6e648f75bac11774a1e2886c8b7a
 selective_mmar_envs_sha256=6d4942f6d8558f80287cb8e2fa448a6b768d9f839bb315161e637c2cfe259781
 selective_mmar_linear_op_sha256=273bde805a20051c837a5f0b2cfac5314b8c51322075573874bad9c795053372
 prefill_ar_rms_root="${PREFILL_AR_RMS_ROOT:-/cache/cch/.worktrees/exp-20260907-qwen35-prefill-allreduce-rms}"
-prefill_ar_rms_commit="${PREFILL_AR_RMS_COMMIT:-74b83e11f563af47baa4d298bd0725d49ac4bc2c}"
-prefill_ar_rms_envs_sha256=c62f374c55e30f944c21882b9dd87ed18bac24915f1651af21af382fb027ae4a
-prefill_ar_rms_linear_op_sha256=cda216d68a89cdaffabca9200dec5fc3a9bdbaf22a768526c2b515a927c2f2c0
+prefill_ar_rms_commit="${PREFILL_AR_RMS_COMMIT:-e5652087a60c5c3cdca2eb366df8d1c15e675c3e}"
+prefill_ar_rms_envs_sha256=fcdf6050d2126499bc050a6c67d2fe761537175551d06e3314434d660e29dc5f
+prefill_ar_rms_linear_op_sha256=ddeea54d702aac1ee7a3c74c954e58e754167b5550e63d5774e8dd159f4fef28
+prefill_ar_rms_ascend_config_sha256=58ded6dff27d9aca257dbabdbfda9fcc0aabd90dea112c65f11ba697002a9b8e
+prefill_ar_rms_pass_manager_sha256=031e18a3a2f22142e5ad36f27fdb792dc2b73060d32137715eec0269b9a5d20d
+prefill_ar_rms_decompose_pass_sha256=9d4bc0dfde1d907cd138746dd60868995d380fc2e2ad7b910af4aa82bc14054c
 qwen35_gdn_proj_fusion_root="${QWEN35_GDN_PROJ_FUSION_ROOT:-/cache/cch/.worktrees/exp-20260906-qwen35-gdn-projection-fusion}"
 qwen35_gdn_proj_fusion_commit="${QWEN35_GDN_PROJ_FUSION_COMMIT:-685fdf22098fb3a0aa8d582dda57063773606a02}"
 qwen35_gdn_proj_fusion_attn_sha256=6aaf29f585d92d92e9d251fef899884f6cae32800a13cd24675b549f68573643
@@ -107,6 +112,7 @@ selective_ffn_nz_env=0
 selective_mmar_down_off_env=0
 selective_mmar_attn_off_env=0
 prefill_ar_rms_threshold=0
+prefill_ar_rms_max_tokens=0
 hccl_op_expansion_mode=""
 hccl_buffsize=512
 task_queue_enable=1
@@ -171,7 +177,16 @@ if [[ "$mode" == qwen35-gdn-proj-fusion-mmar-down-off ||
     selective_mmar_attn_off_env=1
   fi
 fi
-if [[ "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ]]; then
+if [[ "$mode" == qwen35-gdn-prefetch0p1-prefill-ar-rms ||
+      "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ]]; then
+  [[ -f "$monkeypatch_root/sitecustomize.py" ]] || {
+    echo "missing Qwen3.5 Ascend monkeypatch package" >&2
+    exit 66
+  }
+  [[ "$(sha256sum "$monkeypatch_root/sitecustomize.py" | awk '{print $1}')" == "$monkeypatch_sha256" ]] || {
+    echo "Qwen3.5 Ascend monkeypatch hash mismatch" >&2
+    exit 47
+  }
   actual_ref="$(
     git -c safe.directory="$prefill_ar_rms_root" -C "$prefill_ar_rms_root" rev-parse HEAD
   )"
@@ -187,10 +202,24 @@ if [[ "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ]]; then
     echo "prefill AllReduce-RMS linear-op hash mismatch" >&2
     exit 47
   }
+  [[ "$(sha256sum "$prefill_ar_rms_root/vllm_ascend/ascend_config.py" | awk '{print $1}')" == "$prefill_ar_rms_ascend_config_sha256" ]] || {
+    echo "prefill AllReduce-RMS Ascend-config hash mismatch" >&2
+    exit 47
+  }
+  [[ "$(sha256sum "$prefill_ar_rms_root/vllm_ascend/compilation/graph_fusion_pass_manager.py" | awk '{print $1}')" == "$prefill_ar_rms_pass_manager_sha256" ]] || {
+    echo "prefill AllReduce-RMS pass-manager hash mismatch" >&2
+    exit 47
+  }
+  [[ "$(sha256sum "$prefill_ar_rms_root/vllm_ascend/compilation/passes/mmar_prefill_decompose_pass.py" | awk '{print $1}')" == "$prefill_ar_rms_decompose_pass_sha256" ]] || {
+    echo "prefill AllReduce-RMS decompose-pass hash mismatch" >&2
+    exit 47
+  }
   prefill_ar_rms_threshold=512
+  prefill_ar_rms_max_tokens=16384
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||
       "$mode" == qwen35-gdn-gateup-prefetch-0p1-proj-fusion ||
+      "$mode" == qwen35-gdn-prefetch0p1-prefill-ar-rms ||
       "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ||
       "$mode" == qwen35-gdn-proj-fusion-inplace-tail ||
       "$mode" == qwen35-gdn-gateup-down-prefetch-0p1 ||
@@ -457,8 +486,9 @@ serve_args=(
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"enable_flashcomm2_parallel_size":1,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
     elif [[ "$mode" == flashcomm2-oproj2-mmar-prefetch-gateup-0p1 ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"enable_flashcomm2_parallel_size":2,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}}}'
-    elif [[ "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ]]; then
-      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_allreduce_rms":true}}'
+    elif [[ "$mode" == qwen35-gdn-prefetch0p1-prefill-ar-rms ||
+            "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ]]; then
+      printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"enable_npugraph_ex":false,"fuse_allreduce_rms":true}}'
     elif [[ "$mode" == mmar-on-weight-prefetch-gateup-0p1-fused-tail ||
             "$mode" == qwen35-gdn-proj-fusion-inplace-tail ]]; then
       printf '%s' '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false,"weight_nz_mode":1,"weight_prefetch_config":{"enabled":true,"prefetch_ratio":{"attn":{"qkv":0.0,"o":0.0},"moe":{"gate_up":0.0},"mlp":{"gate_up":0.1,"down":0.0}}},"ascend_compilation_config":{"fuse_decode_mmar_add_rmsnorm":true}}'
@@ -628,6 +658,7 @@ docker_args=(
   -e VLLM_ASCEND_DISABLE_MMAR_DOWN_PROJ="$selective_mmar_down_off_env"
   -e VLLM_ASCEND_DISABLE_MMAR_ATTN_OUT_PROJ="$selective_mmar_attn_off_env"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD="$prefill_ar_rms_threshold"
+  -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$prefill_ar_rms_max_tokens"
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
 )
@@ -675,7 +706,17 @@ if [[ "$mode" == qwen35-gdn-proj-fusion-prefill-ar-rms ]]; then
   docker_args+=(
     -v "$prefill_ar_rms_root/vllm_ascend/envs.py:$image_source_root/envs.py:ro"
     -v "$prefill_ar_rms_root/vllm_ascend/ops/linear_op.py:$image_source_root/ops/linear_op.py:ro"
+    -v "$prefill_ar_rms_root/vllm_ascend/ascend_config.py:$image_source_root/ascend_config.py:ro"
+    -v "$prefill_ar_rms_root/vllm_ascend/compilation/graph_fusion_pass_manager.py:$image_source_root/compilation/graph_fusion_pass_manager.py:ro"
+    -v "$prefill_ar_rms_root/vllm_ascend/compilation/passes/mmar_prefill_decompose_pass.py:$image_source_root/compilation/passes/mmar_prefill_decompose_pass.py:ro"
     -e VLLM_ASCEND_PREFILL_AR_RMS_COMMIT="$prefill_ar_rms_commit"
+  )
+fi
+if [[ "$mode" == qwen35-gdn-prefetch0p1-prefill-ar-rms ]]; then
+  docker_args+=(
+    -v "$monkeypatch_root:/opt/qwen35-ascend-monkeypatch:ro"
+    -e PYTHONPATH=/opt/qwen35-ascend-monkeypatch:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:
+    -e QWEN35_ASCEND_MONKEYPATCH=1
   )
 fi
 if [[ "$mode" == qwen35-gdn-gateup-prefetch-0p1 ||

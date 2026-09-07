@@ -1992,3 +1992,28 @@ qwen35_prefill_allreduce_rms_v1:
   decision: "reject before service correctness and E2E: activation timed out and the Python routing branch failed to preserve decode MMAR; no performance claim"
   recovery: "failed service released NPU0-3; NPU4-7 untouched"
   next: "replace Python shape routing with compile-range-specific graph rewriting; preserve MMAR in decode and require an operator latency gate before service reactivation"
+
+current_contract_20260907:
+  stop_gate: "for every c1/c5/c8/c16 cell, median-of-three TTFT P95 speedup >=1.5x and TPOT P95 speedup >=1.5x versus frozen MTP-off baseline"
+  reporting: "P95 primary; P99 tail-risk guard; P50 secondary"
+  exclusions: [quantization, retraining, speculative_decoding, mtp]
+  delivery: "runtime Python monkeypatch only; no vLLM modifications and no source overlays in final E2E evidence"
+  monkeypatch:
+    path: scripts/qwen35_ascend_monkeypatch/sitecustomize.py
+    sha256: 28091a36b6737470cfcecb70520d1dfe49f122531511b5cfcad16b566d165897
+    behavior: "defer Ascend runtime patch activation until parent-process model inspection succeeds; then install compile-range, bounded-MMAR, GDN prefetch and RMSNorm hooks"
+    validation: "host py_compile passed; NPU activation not yet reached"
+  historical_activation:
+    container: qwen35_prefill_range_npu03_20260907t4
+    result: "source-overlay feasibility only: three compile ranges and 128 MMAR decompositions per rank"
+    admissible_for_final_e2e: false
+  failed_monkeypatch_starts:
+    - {container: qwen35_monkeypatch_prefill_npu03_20260907t6, result: "model inspection failed after premature Ascend import"}
+    - {container: qwen35_monkeypatch_prefill_npu03_20260907t7, result: "same pre-API failure; no performance claim"}
+    - {container: qwen35_monkeypatch_prefill_npu03_20260907t8, result: "CANN PYTHONPATH preserved but import remained premature; no performance claim"}
+  resource_blocker:
+    container: vllm-ep-310p-research-910b-monitor
+    observed_workload: "TP2 quantized Qwen3 on physical NPU0-1"
+    declared_devices: "0-7"
+    safety_boundary: "do not stop without explicit approval because its device declaration includes NPU4-7"
+  next: "after safe NPU0-3 release, launch deferred monkeypatch candidate, audit mounts/log hits, run correctness smoke, then real c1 quick gate and c1/c5/c8/c16 median-of-three E2E"
