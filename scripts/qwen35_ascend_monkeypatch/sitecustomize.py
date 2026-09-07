@@ -22,7 +22,22 @@ _RUNTIME_TARGETS = {
     "vllm_ascend.ops.weight_prefetch",
 }
 _TARGETS = {"vllm.model_executor.models.registry"}
-_RUNTIME_ACTIVE = False
+
+
+def _is_multiprocessing_child(argv) -> bool:
+    return (
+        "--multiprocessing-fork" in argv
+        or any("multiprocessing.spawn" in arg for arg in argv)
+        or any("multiprocessing.forkserver" in arg for arg in argv)
+    )
+
+
+_MULTIPROCESSING_CHILD = _is_multiprocessing_child(
+    getattr(sys, "orig_argv", ())
+)
+_RUNTIME_ACTIVE = _MULTIPROCESSING_CHILD
+if _MULTIPROCESSING_CHILD:
+    _TARGETS.update(_RUNTIME_TARGETS)
 
 
 def _notice(message: str) -> None:
@@ -275,4 +290,6 @@ if _ENABLED:
     for _name in sorted(_TARGETS):
         if _name in sys.modules:
             _PATCHERS[_name](sys.modules[_name])
+    if _MULTIPROCESSING_CHILD:
+        _notice("runtime hooks enabled for multiprocessing child")
     _notice("import hooks installed")

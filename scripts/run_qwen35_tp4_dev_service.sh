@@ -12,7 +12,7 @@ esac
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 monkeypatch_root="$repo_root/scripts/qwen35_ascend_monkeypatch"
-monkeypatch_sha256=28091a36b6737470cfcecb70520d1dfe49f122531511b5cfcad16b566d165897
+monkeypatch_sha256=9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8
 device_set="${DEVICE_SET:-4-7}"
 case "$device_set" in
   0-3)

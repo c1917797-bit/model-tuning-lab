@@ -24,18 +24,28 @@ class _LazyRegisteredModel:
         return "inspected"
 
 
-def _load_patch_module():
+def _load_patch_module(orig_argv=None):
     registry = ModuleType(REGISTRY_NAME)
     registry._LazyRegisteredModel = _LazyRegisteredModel
     sys.modules[REGISTRY_NAME] = registry
     os.environ["QWEN35_ASCEND_MONKEYPATCH"] = "1"
-    spec = importlib.util.spec_from_file_location(
-        "_qwen35_deferred_activation_probe", PATCH_PATH
-    )
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    had_orig_argv = hasattr(sys, "orig_argv")
+    saved_orig_argv = getattr(sys, "orig_argv", None)
+    if orig_argv is not None:
+        sys.orig_argv = orig_argv
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "_qwen35_deferred_activation_probe", PATCH_PATH
+        )
+        assert spec is not None and spec.loader is not None
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
+    finally:
+        if had_orig_argv:
+            sys.orig_argv = saved_orig_argv
+        elif hasattr(sys, "orig_argv"):
+            del sys.orig_argv
 
 
 def _test_compile_ranges(module) -> None:
@@ -264,6 +274,21 @@ def main() -> None:
     _test_weight_prefetch(module)
     _test_layernorm_postprocess(module)
     _test_graph_manager(module)
+    child = _load_patch_module(
+        [
+            "python3",
+            "-c",
+            "from multiprocessing.spawn import spawn_main; spawn_main()",
+            "--multiprocessing-fork",
+        ]
+    )
+    assert child._MULTIPROCESSING_CHILD
+    assert child._RUNTIME_ACTIVE
+    assert child._RUNTIME_TARGETS <= child._TARGETS
+    assert child._is_multiprocessing_child(
+        ["python3", "-c", "from multiprocessing.forkserver import main; main()"]
+    )
+    assert not child._is_multiprocessing_child(["python3", "vllm", "serve"])
     print("PASS: deferred runtime monkeypatch contract")
 
 
