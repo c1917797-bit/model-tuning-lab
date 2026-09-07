@@ -426,3 +426,26 @@ median gains cannot promote a treatment for this objective.
 - Evidence roots are the v2 and v3 full-sync scans recorded in HANDOFF.md;
   package SHA256 is
   `420275e89e83d2e42b82152fc52db87f470b2a5372c7a8d7746200b31569c640`.
+
+## Online HCCL tiling: operator gain, E2E rejection
+
+- A correct M=1 microbenchmark win is not enough for a dynamic serving
+  workload. Online HCCL tiling improved the two profiled M=1 MMAR shapes by
+  2.35% and 4.52%, but the full query_rewrite matrix regressed against the
+  retained stack at every concurrency.
+- Preserve cold observations. The first c1 and c5 repetitions showed large
+  first-use tails; r2/r3 recovered, proving a lifecycle/cache effect rather
+  than permission to delete the cold runs.
+- Prove custom-operator activation from loaded worker mappings or kernel
+  evidence. Environment variables and mounted directories alone are
+  insufficient; here all four TP workers mapped the custom op-api, tiling and
+  proto libraries.
+- Match operator screening to the real scheduler shape distribution. Before
+  another MMAR tiling E2E run, benchmark M=1/5/8/16 and measure tiling-cache
+  hit/miss plus HCCL AllReduce/Commit/Wait/Finalize cost. Do not extrapolate
+  from M=1.
+- Reject this implementation unchanged. Median P95 speedups versus the frozen
+  baseline were TTFT 2.118/1.913/1.792/1.739x and TPOT
+  1.371/1.628/1.728/1.243x at c1/c5/c8/c16, all worse than the retained
+  candidate. Evidence manifest SHA256:
+  a9672a6ca7a4c29973daf09ff1f3d0cf81680d48d3166508311b838100c986a2.

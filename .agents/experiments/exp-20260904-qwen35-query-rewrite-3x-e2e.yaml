@@ -1852,3 +1852,45 @@ qwen35_paired_quality_gate_v1:
   tracked_report: .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/QUALITY_GATE_V1.md
   tooling_commit: 7b022a4
   next: "retain this quality evidence while continuing the all-cell 2x P95 performance loop; re-run paired quality whenever semantics-affecting code changes"
+
+qwen35_mmar_online_hccl_tiling_v1:
+  status: rejected_after_full_e2e
+  operation_id: exec-00000000000001a4
+  run_id: tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-mmar-online-tiling-nospec-v1-20260907T014000Z
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-mmar-online-tiling-nospec-v1-20260907T014000Z
+  primary_variable: "replace the frozen arch22 MMAR tiling path with opt-in online-compiled HCCL tiling; retain the complete non-speculative GDN projection-fusion plus gate/up-prefetch stack"
+  runtime: "Ascend 910B4 physical NPU0-3, vLLM-Ascend 0.23.0/CANN, TP4/DP1, BF16, quantization=None, speculative_config=None"
+  source:
+    operator_worktree: /cache/cch/.worktrees/exp-20260907-qwen35-mmar-arch22
+    operator_commit: 2e637229708f881f7ee9cbd81793363a86cb1f3b
+    package_sha256: ed801ca2403264823425859d208c575c9bb2de20799b59069fd97a29ff0d1bf9
+    integration_commit: 2c3383d
+  activation: "all four TP worker process maps contained the package op-api, tiling and proto libraries"
+  operator_microbench:
+    protocol: "frozen predecessor package versus online package, TP4 BF16, physical NPU0-3, M=1, N=5120"
+    k1536: {frozen_us: 84.03975, candidate_us: 82.11010, speedup: 1.023500763}
+    k4352: {frozen_us: 83.67610, candidate_us: 80.05965, speedup: 1.045171944}
+    correctness: "complete fused candidate output within frozen predecessor BF16 error envelope"
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-online-tiling-frozen-ab-v3-20260907T013000Z
+  e2e:
+    requests: "384/384; zero errors; all natural stops"
+    aggregation: "median of three per-run request-level P95 values"
+    speedup_vs_frozen_mtp_off:
+      c1: {ttft_p95: 2.118032, tpot_p95: 1.370730}
+      c5: {ttft_p95: 1.913080, tpot_p95: 1.628058}
+      c8: {ttft_p95: 1.792036, tpot_p95: 1.727894}
+      c16: {ttft_p95: 1.738706, tpot_p95: 1.243401}
+    retained_speedup:
+      c1: {ttft_p95: 2.205635, tpot_p95: 1.380880}
+      c5: {ttft_p95: 1.938439, tpot_p95: 1.650948}
+      c8: {ttft_p95: 1.930063, tpot_p95: 1.752699}
+      c16: {ttft_p95: 1.909847, tpot_p95: 1.979821}
+  hashes:
+    decision_sha256: ecf600fd34402c5262f2cc81d7d095f25da7a452e79e92dda9450d84bcef0504
+    manifest_sha256: a9672a6ca7a4c29973daf09ff1f3d0cf81680d48d3166508311b838100c986a2
+    service_log_sha256: cdffa2caac022820cc91fbbb1d868fce66952bbca77056e379a94597994fd8e1
+    container_inspect_sha256: 6b361a068c2d42ea64f38ef80c8fcc53fd88f7c173417b7080601de64a3bb28d
+  quality_gate: "not promoted: operator numerical guard passed and E2E transport was valid, but empty dataset answer fields cannot prove full 精读无损"
+  decision: "reject: operator M=1 micro gains did not survive E2E; all cells miss at least one 2x gate and regress versus the retained stack, with severe c16 TPOT tail regression"
+  recovery: "candidate container exited normally; stale mlpbig.service and p0_w were stopped after identity verification; NPU0-3 free; NPU4-7 not modified"
+  next: "do not retry online tiling unchanged; instrument online-tiling cache and HCCL lifecycle across real M=1/5/8/16 shapes, then require a multi-shape operator gate before E2E"

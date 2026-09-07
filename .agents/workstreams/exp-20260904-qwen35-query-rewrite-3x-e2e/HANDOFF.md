@@ -1,5 +1,57 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+## Current checkpoint — 2026-09-07 online HCCL tiling E2E rejection
+
+The retained GDN projection-fusion plus gate/up-prefetch stack remains the
+best candidate. An opt-in arch22 MatmulAllReduce online-HCCL-tiling package
+passed the exact-shape operator gate but failed the real query_rewrite E2E
+gate and must not be stacked.
+
+- Operator commit: 2e637229708f881f7ee9cbd81793363a86cb1f3b; package SHA256:
+  ed801ca2403264823425859d208c575c9bb2de20799b59069fd97a29ff0d1bf9.
+- Frozen-package versus online-package BF16 TP4 microbench on physical
+  NPU0-3 improved M=1 K1536/N5120 from 84.03975 to 82.11010 us
+  (1.023501x) and K4352/N5120 from 83.67610 to 80.05965 us
+  (1.045172x). Complete fused outputs stayed within the frozen BF16
+  error envelope.
+- Microbench evidence:
+  /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-online-tiling-frozen-ab-v3-20260907T013000Z.
+- Real E2E operation exec-00000000000001a4 completed 12/12 cells,
+  384/384 requests, zero errors and all natural stops on physical NPU0-3.
+  The custom op-api, tiling and proto libraries were present in all four TP
+  worker process maps, proving runtime loading rather than an
+  environment-only claim.
+
+Median-of-three P95 speedups versus the immutable MTP-off baseline:
+
+| Concurrency | TTFT P95 | TPOT P95 | Retained TTFT P95 | Retained TPOT P95 |
+|---:|---:|---:|---:|---:|
+| 1 | 2.118032x | 1.370730x | 2.205635x | 1.380880x |
+| 5 | 1.913080x | 1.628058x | 1.938439x | 1.650948x |
+| 8 | 1.792036x | 1.727894x | 1.930063x | 1.752699x |
+| 16 | 1.738706x | 1.243401x | 1.909847x | 1.979821x |
+
+Decision: rejected. Every cell misses at least one 2x gate and every cell is
+worse than the retained candidate. The largest incremental regression is c16
+TPOT P95: 69.56010 ms to 110.75796 ms. Cold first repetitions also showed
+large TTFT/TPOT tails, so the operator-only M=1 gain did not survive
+dynamic-shape scheduling and online-tiling lifecycle costs.
+
+E2E evidence root:
+/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-mmar-online-tiling-nospec-v1-20260907T014000Z.
+Decision SHA256:
+ecf600fd34402c5262f2cc81d7d095f25da7a452e79e92dda9450d84bcef0504.
+SHA256SUMS SHA256:
+a9672a6ca7a4c29973daf09ff1f3d0cf81680d48d3166508311b838100c986a2.
+
+Recovery is complete: the rejected candidate container exited normally.
+The unrelated mlpbig.service and recreated p0_w workload were stopped after
+exact identity checks; NPU0-3 are free. This workstream did not start, stop,
+or modify any NPU4-7 workload. Do not retry online HCCL tiling unchanged.
+The next loop should first instrument tiling-cache hit/miss and HCCL lifecycle
+costs for real M=1/5/8/16 decode shapes, then require a multi-shape operator
+gate before another E2E matrix.
+
 ## Current checkpoint — 2026-09-07 A2 operator triage
 
 The retained candidate and immutable MTP-off denominator remain unchanged.
