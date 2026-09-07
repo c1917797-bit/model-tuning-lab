@@ -3160,3 +3160,37 @@ Phase 0 must build a 910B package and prove BF16 SwiGLU starts. Phase 1 must
 show deterministic correctness and at least 1.10x latency improvement at
 every M before vLLM integration. The final TP all-reduce remains required.
 No quantization, retraining, MTP, speculative decoding, or NPU4-7 use.
+
+## A2 BF16 dense SwiGLU feasibility closed at M=1 gate
+
+The isolated operator branch
+`work/exp-20260907-qwen35-a2-bf16-swiglu-gated-mlp` at commit
+`f0a5a5c` replaces the unavailable private `ExecMmOp` dependency with
+self-contained MM1, SwiGLU and MM2 stages. Physical 910B4 NPU0 tests used the
+exact TP4-local BF16 M=1 shape, deterministic sparse nonzero data, 20 warmups,
+100 iterations and five repeats.
+
+Both the candidate and a process-isolated system ACLNN
+`MatMul -> SwiGLU -> MatMul` baseline produced four expected nonzero outputs
+with zero maximum absolute error against the BF16-rounded analytic reference.
+The system baseline median was `197.9728 us`; candidate v1 was `180.2859 us`,
+or `1.098104733x`. This misses the predeclared `1.10x` promotion gate, so
+do not integrate it into vLLM or extend the M=5/8/16 matrix.
+
+A follow-up that reduced the SwiGLU stage launch count to its three M=1 tiles
+preserved correctness but regressed to `206.3268 us`; it was reverted.
+Candidate v1 package SHA256 is
+`f19d80d998d1db084fe201533b8aacaa0627d08efcd723abcc744431dbe1c1b9`.
+Rejected v2 package SHA256 is
+`9a65281c2431be1f5cc88c8dfcb80c3d45fdc5184586cc9bcdcfe8e6a03b9e21`.
+Full harness and decision details are in
+`experimental/ffn/swiglu_gated_mlp/docs/QWEN35_A2_BF16_FEASIBILITY.md`
+on the operator branch.
+
+Harness lesson: do not mix system `libopapi` and custom `libcust_opapi` in
+one process, and execute each system ACLNN executor before constructing the
+next stage. Both unsafe patterns produced heap corruption.
+
+The old `p0` workload was repeatedly relaunched on NPU0-3 by an external
+mechanism during this screen. Exact competing containers were stopped or
+reversibly renamed to create clean measurement windows. NPU4-7 were not used.
