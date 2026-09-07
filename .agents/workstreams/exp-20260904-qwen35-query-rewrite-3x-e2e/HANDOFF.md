@@ -616,6 +616,12 @@ secondary evidence. Older artifacts produced by this script with a 0.5/P50
 gate are historical and must not be mistaken for the current acceptance
 decision.
 
+The decision gate consumes the matrix runner's canonical
+`c<concurrency>/repeat-<index>.json` layout and `matrix-run.json` status
+manifest. It retains read compatibility with historical flat
+`c<concurrency>-r<index>.json` candidate directories. The synthetic contract
+test exercises the canonical layout and a missing-third-repeat failure.
+
 The final stack is expected to combine core operators, algorithms and
 configuration. "One variable" applies to each attribution step, not to the
 final candidate.

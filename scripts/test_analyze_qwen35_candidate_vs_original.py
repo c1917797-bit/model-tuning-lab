@@ -49,6 +49,7 @@ def _row(concurrency: int, repeat_index: int, p95: float, p99: float) -> dict:
 
 
 def _write(path: Path, row: dict) -> str:
+    path.parent.mkdir(parents=True, exist_ok=True)
     payload = json.dumps(row, sort_keys=True) + "\n"
     path.write_text(payload, encoding="utf-8")
     return hashlib.sha256(payload.encode()).hexdigest()
@@ -84,7 +85,9 @@ def main() -> None:
                 ((60.0, 90.0), (65.0, 95.0), (70.0, 110.0)), start=1
             ):
                 _write(
-                    candidate_dir / f"c{concurrency}-r{repeat_index}.json",
+                    candidate_dir
+                    / f"c{concurrency}"
+                    / f"repeat-{repeat_index}.json",
                     _row(concurrency, repeat_index, p95, p99),
                 )
         module.ORIGINAL_SHA256 = original_hashes
@@ -118,7 +121,7 @@ def main() -> None:
             assert cell["candidate_median_ttft_p99_ms"] == 95.0
             assert cell["p99_guard_met"]
 
-        (candidate_dir / "c16-r3.json").unlink()
+        (candidate_dir / "c16" / "repeat-3.json").unlink()
         status, report = _run(
             module,
             [

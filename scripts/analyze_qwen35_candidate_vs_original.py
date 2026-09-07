@@ -36,8 +36,20 @@ def digest_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def cell_path(root: Path, concurrency: int, repeat_index: int = 1) -> Path:
-    return root / f"c{concurrency}-r{repeat_index}.json"
+def cell_path(
+    root: Path,
+    concurrency: int,
+    repeat_index: int = 1,
+    *,
+    original: bool = False,
+) -> Path:
+    legacy = root / f"c{concurrency}-r{repeat_index}.json"
+    if original:
+        return legacy
+    matrix_native = root / f"c{concurrency}" / f"repeat-{repeat_index}.json"
+    if matrix_native.exists() or not legacy.exists():
+        return matrix_native
+    return legacy
 
 
 def load_cell(
@@ -48,7 +60,9 @@ def load_cell(
     original: bool,
     require_success: bool = True,
 ) -> dict:
-    path = cell_path(root, concurrency, repeat_index)
+    path = cell_path(
+        root, concurrency, repeat_index, original=original
+    )
     if original:
         actual_digest = digest_file(path)
         expected_digest = ORIGINAL_SHA256[concurrency]
@@ -139,7 +153,9 @@ def main() -> int:
     performance_pass = True
     runtime_pass = True
     for concurrency in CONCURRENCIES:
-        original_path = cell_path(args.original_dir, concurrency, 1)
+        original_path = cell_path(
+            args.original_dir, concurrency, 1, original=True
+        )
         original = load_cell(
             args.original_dir, concurrency, 1, original=True
         )
@@ -285,9 +301,11 @@ def main() -> int:
     candidate_run = None
     candidate_run_path = args.candidate_run
     if candidate_run_path is None:
-        default_candidate_run = args.candidate_dir / "candidate-run.json"
-        if default_candidate_run.exists():
-            candidate_run_path = default_candidate_run
+        for manifest_name in ("matrix-run.json", "candidate-run.json"):
+            default_candidate_run = args.candidate_dir / manifest_name
+            if default_candidate_run.exists():
+                candidate_run_path = default_candidate_run
+                break
     if candidate_run_path is not None and candidate_run_path.exists():
         candidate_run = json.loads(candidate_run_path.read_text(encoding="utf-8"))
         artifact_sha256["candidate/candidate-run.json"] = digest_file(
