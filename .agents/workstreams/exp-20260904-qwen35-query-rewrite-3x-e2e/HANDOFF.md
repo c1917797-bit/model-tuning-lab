@@ -1,5 +1,15 @@
 # Qwen3.5-27B query_rewrite 2x E2E Optimization
 
+## Current action — selective K4352 online-HCCL screen
+
+The next bounded loop is planned, not yet measured. Modify the opt-in arch22
+online-HCCL path so it can be restricted to M=1, K=4352 only. K=4352 had the
+larger operator gain (1.045172x), while enabling both K families regressed
+every E2E cell. First prove K=1536 stays on the frozen path and K=4352 remains
+numerically correct and at least 1.02x faster. Only then run one c1 and one c16
+query_rewrite screen against the retained stack; abort on any primary P95
+regression. Do not allocate NPU4-7.
+
 ## Current checkpoint — 2026-09-07 online HCCL tiling E2E rejection
 
 The retained GDN projection-fusion plus gate/up-prefetch stack remains the

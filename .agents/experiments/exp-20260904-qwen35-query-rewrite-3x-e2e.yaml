@@ -1894,3 +1894,16 @@ qwen35_mmar_online_hccl_tiling_v1:
   decision: "reject: operator M=1 micro gains did not survive E2E; all cells miss at least one 2x gate and regress versus the retained stack, with severe c16 TPOT tail regression"
   recovery: "candidate container exited normally; stale mlpbig.service and p0_w were stopped after identity verification; NPU0-3 free; NPU4-7 not modified"
   next: "do not retry online tiling unchanged; instrument online-tiling cache and HCCL lifecycle across real M=1/5/8/16 shapes, then require a multi-shape operator gate before E2E"
+
+qwen35_mmar_online_hccl_k4352_v2:
+  status: planned
+  hypothesis: "the K4352 M=1 family carries the stronger 4.52% micro gain, while enabling online HCCL tiling for both K1536 and K4352 causes serving-tail regression; restricting activation to K4352 may retain useful decode savings without the K1536 lifecycle cost"
+  primary_variable: "ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING applies to both M=1 K families -> opt-in K filter selecting only K=4352"
+  retained_stack: "GDN qkvzba projection fusion plus gate/up prefetch 0.1, TP4/DP1 BF16, quantization=None, speculative_config=None"
+  hardware: "physical Ascend 910B4 NPU0-3 only; NPU4-7 excluded"
+  correctness_gate: "complete fused BF16 output must remain within the frozen predecessor error envelope for K1536 and K4352; K1536 must prove frozen-path selection"
+  operator_gate: "K4352 speedup >=1.02x and K1536 no material change versus frozen package under repeated TP4 measurement"
+  e2e_screen: "only after operator gate, one real query_rewrite c1 and c16 run; 32 requests per cell, zero errors, natural EOS"
+  abort: "stop before expansion on any correctness failure, activation ambiguity, or TTFT/TPOT P95 regression versus the retained same-protocol stack"
+  promotion: "only a non-regressing c1/c16 screen may expand to the required c1/c5/c8/c16 median-of-three matrix"
+  rollback: "unset the K filter and use the frozen predecessor package; stop only the exact candidate container and verify NPU0-3 release"
