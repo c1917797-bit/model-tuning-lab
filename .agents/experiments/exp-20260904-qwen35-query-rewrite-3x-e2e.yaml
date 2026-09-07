@@ -1896,7 +1896,7 @@ qwen35_mmar_online_hccl_tiling_v1:
   next: "do not retry online tiling unchanged; instrument online-tiling cache and HCCL lifecycle across real M=1/5/8/16 shapes, then require a multi-shape operator gate before E2E"
 
 qwen35_mmar_online_hccl_k4352_v2:
-  status: planned
+  status: rejected_at_operator_gate
   hypothesis: "the K4352 M=1 family carries the stronger 4.52% micro gain, while enabling online HCCL tiling for both K1536 and K4352 causes serving-tail regression; restricting activation to K4352 may retain useful decode savings without the K1536 lifecycle cost"
   primary_variable: "ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING applies to both M=1 K families -> opt-in K filter selecting only K=4352"
   retained_stack: "GDN qkvzba projection fusion plus gate/up prefetch 0.1, TP4/DP1 BF16, quantization=None, speculative_config=None"
@@ -1907,3 +1907,26 @@ qwen35_mmar_online_hccl_k4352_v2:
   abort: "stop before expansion on any correctness failure, activation ambiguity, or TTFT/TPOT P95 regression versus the retained same-protocol stack"
   promotion: "only a non-regressing c1/c16 screen may expand to the required c1/c5/c8/c16 median-of-three matrix"
   rollback: "unset the K filter and use the frozen predecessor package; stop only the exact candidate container and verify NPU0-3 release"
+  source:
+    operator_worktree: /cache/cch/.worktrees/exp-20260907-qwen35-mmar-arch22
+    operator_commit: c1533e5
+    package: /cache/cch/.worktrees/exp-20260907-qwen35-mmar-arch22/build_out/cann-ops-transformer-qwen35_mmar_online_k4352_arch22_transformer_linux-aarch64.run
+    package_sha256: e44c6fd0c06221bfc8387026d5411f796e9ba1ecf6e9876efc95900cfc619c85
+    isolated_install: /cache/cch/qwen35-mmar-online-k4352-arch22-custom-opp-v2
+    host_ut: "109/109 passed; exec-0000000000000206"
+    build: "completed; exec-0000000000000207"
+    evidence_tooling_commits: [98ed306, e55b407, e8b8f64]
+  evidence:
+    root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-online-k4352-selective-frozen-ab-v2-20260907T032000Z
+    protocol: "TP4 BF16, physical NPU0-3, 40 warmups, 200 measured iterations, seven repeats, median maximum-rank latency"
+    correctness: "passed against fixed-rank-order CPU FP32 sum of rank-local NPU BF16 matmul outputs under twice the frozen-package error envelope"
+    k1536: {frozen_us: 84.3907, candidate_us: 85.17585, speedup: 0.990782012, correct: true, required_speedup: 0.98}
+    k4352: {frozen_us: 81.8983, candidate_us: 81.06975, speedup: 1.010220212, correct: true, required_speedup: 1.02}
+    decision_sha256: e5c7daf492937d2ec6d9c34c0f309dee9eb195c96b296914deefbcc530d52539
+    manifest_sha256: 77d157bfe13e4db02e875e3c7bb1c80baad810ded6e7d800fcc5afaae578aa2d
+  diagnostic_v1:
+    root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-online-k4352-selective-frozen-ab-v1-20260907T031500Z
+    boundary: "preserved but not promotion evidence: its cross-launch HCCL-order-sensitive correctness check contradicted the documented error-envelope policy"
+  decision: "reject before E2E: K4352 was correct but 1.010220x missed the predeclared 1.02x operator threshold"
+  resource_release: "benchmark containers exited; NPU0-3 released; NPU4-7 workload untouched"
+  next: "do not retry the K-only online-tiling filter unchanged; broaden operator screening to real M=1/5/8/16 scheduler shapes and target a material HCCL lifecycle/launch reduction"

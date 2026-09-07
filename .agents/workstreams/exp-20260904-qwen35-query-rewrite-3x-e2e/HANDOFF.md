@@ -3104,3 +3104,43 @@ Immutable evidence:
 
 Both runner operations exited successfully, all evidence manifests were
 generated, NPU0-3 were released, and the workload on NPU4-7 was unchanged.
+
+## Selective K4352 online-HCCL tiling rejected at operator gate
+
+Operator commit `c1533e5` added
+`ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING_K` so the online-HCCL tiling path
+could be restricted to the stronger profiled M=1, K=4352, N=5120 family
+while K=1536 retained the frozen path. The official host suite passed
+109/109. Build operation `exec-0000000000000207` produced the isolated
+910B4 package with SHA256
+`e44c6fd0c06221bfc8387026d5411f796e9ba1ecf6e9876efc95900cfc619c85`;
+it is installed under
+`/cache/cch/qwen35-mmar-online-k4352-arch22-custom-opp-v2`.
+
+The first microbench evidence root is preserved as a diagnostic only. Its
+evaluator compared fused outputs from independent HCCL process launches,
+which is sensitive to BF16 reduction order and did not implement its own
+documented error-envelope policy. Evidence tooling commits `e55b407` and
+`e8b8f64` added a fixed-rank-order CPU FP32 sum of rank-local NPU BF16
+matmul outputs and repaired the metric mapping. The v2 run then provided the
+authoritative operator decision:
+
+| Shape | Frozen median max-rank | Candidate | Speedup | Correct | Gate |
+|---|---:|---:|---:|:---:|:---:|
+| M1 K1536 N5120 | 84.39070 us | 85.17585 us | 0.990782x | yes | pass >=0.98x |
+| M1 K4352 N5120 | 81.89830 us | 81.06975 us | 1.010220x | yes | fail >=1.02x |
+
+Protocol was physical NPU0-3, TP4 BF16, 40 warmups, 200 measured iterations,
+seven repeats, and median maximum-rank latency. Both shapes passed the
+deterministic correctness envelope, but K4352 missed the predeclared
+performance threshold. Reject before E2E and do not retry this K-only filter
+unchanged.
+
+Immutable evidence:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-online-k4352-selective-frozen-ab-v2-20260907T032000Z`.
+Decision SHA256:
+`e5c7daf492937d2ec6d9c34c0f309dee9eb195c96b296914deefbcc530d52539`.
+Manifest SHA256:
+`77d157bfe13e4db02e875e3c7bb1c80baad810ded6e7d800fcc5afaae578aa2d`.
+The benchmark containers exited, NPU0-3 were released, and NPU4-7 were not
+modified.

@@ -449,3 +449,24 @@ median gains cannot promote a treatment for this objective.
   1.371/1.628/1.728/1.243x at c1/c5/c8/c16, all worse than the retained
   candidate. Evidence manifest SHA256:
   a9672a6ca7a4c29973daf09ff1f3d0cf81680d48d3166508311b838100c986a2.
+
+## Selective online-HCCL tiling and deterministic correctness
+
+- Restricting online tiling to K=4352 removed the broad K1536 exposure but did
+  not produce a repeatable material operator win. Under seven repeats, K4352
+  improved only 1.010220x and missed the declared 1.02x threshold; stop before
+  spending an E2E matrix.
+- Do not use fused-output differences from separate HCCL process launches as
+  the sole BF16 correctness oracle. Reduction order can differ between
+  launches. Likewise, an independently launched HCCL all-reduce reference is
+  diagnostic rather than deterministic.
+- A stronger microbench oracle gathers each rank-local NPU BF16 matmul output
+  and sums those values on CPU in fixed rank order using FP32. Compare both
+  frozen and candidate fused outputs to that same deterministic contract, then
+  apply the predeclared frozen-error envelope.
+- Preserve failed evaluator evidence rather than rewriting it. The v1 root
+  records the policy mismatch; the separate v2 root records the corrected
+  deterministic decision and hashes.
+- Do not retry the K-only filter unchanged. The next MMAR attempt must cover
+  real scheduler M=1/5/8/16 shapes before E2E and make a material change to
+  HCCL lifecycle, launch count, or overlap rather than another narrow selector.
