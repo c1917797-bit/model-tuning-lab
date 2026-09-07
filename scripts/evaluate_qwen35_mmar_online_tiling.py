@@ -90,7 +90,12 @@ def main() -> int:
             raise RuntimeError(f"online lacks four-rank output evidence for {shape}")
         cross_launch_comparison = output_error(baseline_cell, candidate_cell)
         reference = baseline_cell["deterministic_correctness"]
-        comparison = candidate_cell["deterministic_correctness"]
+        candidate_deterministic = candidate_cell["deterministic_correctness"]
+        comparison = {
+            "max_abs": float(candidate_deterministic["max_abs"]),
+            "mean_abs": float(candidate_deterministic["max_rank_mean_abs"]),
+            "relative_l2": float(candidate_deterministic["max_rank_relative_l2"]),
+        }
         thresholds = {
             "max_abs": args.correctness_envelope_factor * float(reference["max_abs"]),
             "mean_abs": args.correctness_envelope_factor
