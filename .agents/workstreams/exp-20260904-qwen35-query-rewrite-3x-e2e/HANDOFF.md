@@ -3401,3 +3401,13 @@ against the same-runtime retained cumulative control. Byte-identical responses
 pass automatically; otherwise manually review every differing pair and require
 zero material regressions. The earlier 16/16 sampled pass remains control
 history and must not be generalized to the final candidate.
+
+The authoritative performance analyzer accepts an optional
+`--quality-decision` JSON only after validating schema
+`qwen35-quality-human-decision/v1`, candidate id, dataset hash, same-runtime
+control scope, at least 32 samples, all samples equivalent, zero material
+regressions, reviewer/time metadata, every differing pair reviewed, and the
+SHA256 of baseline capture, candidate capture and paired comparison. Without
+this evidence, a performance-passing candidate with cross-run hash drift is
+`hold-quality-unproven`; a performance miss remains `iterate` and does not
+trigger unnecessary manual review.

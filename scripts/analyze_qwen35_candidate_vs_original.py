@@ -106,6 +106,74 @@ def load_cell(
     return row
 
 
+def load_quality_decision(path: Path, candidate_id: str) -> dict:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    expected = {
+        "schema": "qwen35-quality-human-decision/v1",
+        "candidate_id": candidate_id,
+        "dataset_sha256": EXPECTED_IDENTITY["dataset_sha256"],
+        "control_scope": "same-runtime-retained-cumulative-control",
+        "decision": "pass",
+        "material_regressions": 0,
+    }
+    for key, value in expected.items():
+        if payload.get(key) != value:
+            raise ValueError(
+                f"{path}: {key} must be {value!r}, got {payload.get(key)!r}"
+            )
+    samples = payload.get("samples")
+    if not isinstance(samples, int) or samples < 32:
+        raise ValueError(f"{path}: samples must be at least 32")
+    if payload.get("equivalent_samples") != samples:
+        raise ValueError(f"{path}: every sample must be equivalent")
+    if not payload.get("reviewer") or not payload.get("reviewed_at_utc"):
+        raise ValueError(f"{path}: reviewer and reviewed_at_utc are required")
+    verified_artifacts = {}
+    for name in ("baseline_capture", "candidate_capture", "comparison"):
+        record = payload.get(name)
+        if not isinstance(record, dict):
+            raise ValueError(f"{path}: missing {name} artifact")
+        artifact_path = Path(str(record.get("path", "")))
+        expected_sha256 = record.get("sha256")
+        if not artifact_path.is_file():
+            raise ValueError(f"{path}: missing {name} file {artifact_path}")
+        actual_sha256 = digest_file(artifact_path)
+        if actual_sha256 != expected_sha256:
+            raise ValueError(
+                f"{path}: {name} SHA256 mismatch; "
+                f"expected {expected_sha256}, got {actual_sha256}"
+            )
+        verified_artifacts[name] = {
+            "path": str(artifact_path),
+            "sha256": actual_sha256,
+        }
+    comparison = json.loads(
+        Path(verified_artifacts["comparison"]["path"]).read_text(
+            encoding="utf-8"
+        )
+    )
+    if comparison.get("schema") != "qwen35-quality-paired-comparison/v1":
+        raise ValueError(f"{path}: invalid paired comparison schema")
+    if comparison.get("dataset_sha256") != EXPECTED_IDENTITY["dataset_sha256"]:
+        raise ValueError(f"{path}: paired comparison dataset mismatch")
+    if comparison.get("samples") != samples:
+        raise ValueError(f"{path}: paired comparison sample count mismatch")
+    expected_differences = samples - int(comparison.get("exact_matches", -1))
+    if payload.get("reviewed_differences") != expected_differences:
+        raise ValueError(f"{path}: not every differing response was reviewed")
+    return {
+        "path": str(path),
+        "sha256": digest_file(path),
+        "samples": samples,
+        "equivalent_samples": payload["equivalent_samples"],
+        "material_regressions": payload["material_regressions"],
+        "reviewed_differences": payload["reviewed_differences"],
+        "reviewer": payload["reviewer"],
+        "reviewed_at_utc": payload["reviewed_at_utc"],
+        "artifacts": verified_artifacts,
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -133,6 +201,11 @@ def parse_args() -> argparse.Namespace:
         "--candidate-run",
         type=Path,
         help="optional candidate-run.json status manifest",
+    )
+    parser.add_argument(
+        "--quality-decision",
+        type=Path,
+        help="paired human quality decision used when exact hashes drift",
     )
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
@@ -312,19 +385,29 @@ def main() -> int:
             candidate_run_path
         )
 
-    final_target_met = runtime_pass and correctness_pass and performance_pass
+    quality_decision = None
+    quality_pass = correctness_pass
+    if args.quality_decision is not None:
+        quality_decision = load_quality_decision(
+            args.quality_decision, args.candidate_id
+        )
+        artifact_sha256["quality/decision.json"] = quality_decision["sha256"]
+        quality_pass = True
+    final_target_met = runtime_pass and quality_pass and performance_pass
     if not runtime_pass:
         decision = "reject-runtime-failure"
         exit_status = 4
-    elif not correctness_pass:
-        decision = "hold-exact-hash-drift"
+    elif not performance_pass:
+        decision = "iterate"
+        exit_status = 2
+    elif not quality_pass:
+        decision = "hold-quality-unproven"
         exit_status = 3
     elif final_target_met:
         decision = "final-target-met"
         exit_status = 0
     else:
-        decision = "iterate"
-        exit_status = 2
+        raise AssertionError("unreachable decision state")
     report = {
         "schema": "qwen35-candidate-vs-fixed-original-decision/v2",
         "comparison_policy": "user-designated-fixed-original-quick32-v3",
@@ -354,12 +437,16 @@ def main() -> int:
         "correctness_exact_hash_match": (
             correctness_pass if runtime_pass else None
         ),
+        "quality_gate_met": quality_pass if runtime_pass else None,
+        "quality_decision": quality_decision,
         "correctness_gate_status": (
             "not-evaluable-runtime-failure"
             if not runtime_pass
+            else "paired-human-review-pass"
+            if quality_decision is not None
             else "exact-hash-reproducible"
             if correctness_pass
-            else "semantic-business-check-required"
+            else "paired-human-review-required"
         ),
         "exact_hash_evidence_boundary": (
             "A fixed-runtime NPU4-7 control also differs from the immutable "

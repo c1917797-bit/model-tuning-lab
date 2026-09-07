@@ -142,6 +142,103 @@ def main() -> None:
         assert report["decision"] == "reject-runtime-failure"
         assert not report["runtime_gate_met"]
         assert len(report["cells"]["16"]["missing_artifacts"]) == 1
+
+        _write(
+            candidate_dir / "c16" / "repeat-3.json",
+            _row(16, 3, 70.0, 110.0),
+        )
+        for concurrency in module.CONCURRENCIES:
+            for repeat_index in range(1, 4):
+                path = (
+                    candidate_dir
+                    / f"c{concurrency}"
+                    / f"repeat-{repeat_index}.json"
+                )
+                row = json.loads(path.read_text())
+                row["response_sha256"][0] = "review-required"
+                _write(path, row)
+        status, report = _run(
+            module,
+            [
+                "--original-dir",
+                str(original_dir),
+                "--candidate-dir",
+                str(candidate_dir),
+                "--candidate-id",
+                "synthetic-reviewed",
+                "--candidate-device-set",
+                "0-3",
+                "--output",
+                str(output),
+            ],
+        )
+        assert status == 3
+        assert report["decision"] == "hold-quality-unproven"
+
+        baseline_capture = root / "baseline-capture.json"
+        candidate_capture = root / "candidate-capture.json"
+        comparison_path = root / "paired-comparison.json"
+        baseline_sha = _write(baseline_capture, {"capture": "baseline"})
+        candidate_sha = _write(candidate_capture, {"capture": "candidate"})
+        comparison_sha = _write(
+            comparison_path,
+            {
+                "schema": "qwen35-quality-paired-comparison/v1",
+                "dataset_sha256": module.EXPECTED_IDENTITY["dataset_sha256"],
+                "samples": 32,
+                "exact_matches": 20,
+            },
+        )
+        quality_decision = root / "quality-decision.json"
+        _write(
+            quality_decision,
+            {
+                "schema": "qwen35-quality-human-decision/v1",
+                "candidate_id": "synthetic-reviewed",
+                "dataset_sha256": module.EXPECTED_IDENTITY["dataset_sha256"],
+                "control_scope": "same-runtime-retained-cumulative-control",
+                "samples": 32,
+                "equivalent_samples": 32,
+                "material_regressions": 0,
+                "reviewed_differences": 12,
+                "reviewer": "synthetic-test",
+                "reviewed_at_utc": "2026-09-07T00:00:00+00:00",
+                "decision": "pass",
+                "baseline_capture": {
+                    "path": str(baseline_capture),
+                    "sha256": baseline_sha,
+                },
+                "candidate_capture": {
+                    "path": str(candidate_capture),
+                    "sha256": candidate_sha,
+                },
+                "comparison": {
+                    "path": str(comparison_path),
+                    "sha256": comparison_sha,
+                },
+            },
+        )
+        status, report = _run(
+            module,
+            [
+                "--original-dir",
+                str(original_dir),
+                "--candidate-dir",
+                str(candidate_dir),
+                "--candidate-id",
+                "synthetic-reviewed",
+                "--candidate-device-set",
+                "0-3",
+                "--quality-decision",
+                str(quality_decision),
+                "--output",
+                str(output),
+            ],
+        )
+        assert status == 0
+        assert report["decision"] == "final-target-met"
+        assert report["quality_gate_met"]
+        assert report["correctness_gate_status"] == "paired-human-review-pass"
     print("PASS: repeated P95/P99 decision contract")
 
 
