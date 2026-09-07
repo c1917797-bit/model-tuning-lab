@@ -1,0 +1,63 @@
+{
+  "schema": "maintainer-knowledge-proposals/v1",
+  "experiment_id": "state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+  "status": "proposed-for-maintainer-review",
+  "claim_boundary": "These proposals encode verified process lessons from a completed frozen experiment. They do not generalize the negative Dk64/Dk96 result beyond the tested Qwen3.6-27B Ascend TP4 serving workload.",
+  "proposals": [
+    {
+      "id": "derive-layer-set-from-model-config",
+      "proposal": "For hybrid-attention models, derive the treatment layer set from the checkpoint's declared layer_types and validate its cardinality. Never infer layer IDs from the count alone.",
+      "evidence": "Qwen3.6-27B exposes 48 linear-attention layers among 64 total layers, with non-contiguous IDs because every fourth layer is full attention."
+    },
+    {
+      "id": "capture-post-convolution-qk",
+      "proposal": "For DRRQR reproduction, capture the post-convolution Q and K activations that define the paper's channel-selection matrix, and audit the full layer x TP-rank x sample Cartesian product before conversion.",
+      "evidence": "The accepted capture contains exactly 3072 artifacts = 48 x 4 x 16, with indexes 0-15 present for every layer/rank pair."
+    },
+    {
+      "id": "separate-paper-exact-from-platform-adaptation",
+      "proposal": "Record unavailable paper resources explicitly and give any substitute calibration corpus a new, hash-bound adaptation identity. Do not describe adapted calibration as paper-exact.",
+      "evidence": "FineWeb-Edu was unavailable; the experiment uses a frozen 16x2048-token LongBench-v2 adaptation with its own SHA256."
+    },
+    {
+      "id": "activation-before-benefit",
+      "proposal": "Require a real-weight smoke proving both checkpoint shape and the intended runtime kernel/dimension before collecting A/B metrics.",
+      "evidence": "The accepted smoke returned HTTP 200 and exact response ASCEND_DRRQR_OK while the runtime logged head_k_dim=64."
+    },
+    {
+      "id": "quality-gated-pruning-fallback",
+      "proposal": "Treat the paper's 50% state reduction as the primary hypothesis, not a guaranteed operating point. If repeated quality loss exceeds the observed baseline repeat range, evaluate 20-30% pruning as a separately identified treatment.",
+      "evidence": "The operator predeclared Dk96 (25% pruning) as the first fallback; no fallback result may be pooled with Dk64."
+    },
+    {
+      "id": "do-not-compare-cross-platform-speedup",
+      "proposal": "Keep paper training microbenchmarks, colleague serving references and current Ascend serving results in separate denominators; compare direction only when model, hardware, topology and workload differ.",
+      "evidence": "The paper's 1.32x result is an H100 sequence-mixer training microbenchmark, while this experiment is full-model vLLM serving on four Ascend 910B4 cards."
+    },
+    {
+      "id": "orchestration-failure-taxonomy",
+      "proposal": "Before labeling an algorithm failure, record whether the model loaded, whether measurement began, and whether the error belongs to shell quoting, packaging, source-image ABI, resource collision, runtime activation or scientific outcome.",
+      "evidence": "Multiple rejected attempts failed before measurement; the repaired Dk64 smoke and baseline performance later succeeded under the same scientific hypothesis."
+    },
+    {
+      "id": "gate-profile-after-quality",
+      "proposal": "Run expensive native profiling only after the candidate passes every preregistered quality gate. If quality fails, record profiling as intentionally skipped rather than missing.",
+      "evidence": "Dk96 failed GSM8K by 0.303260 pp versus a 0.151630 pp baseline range, so the frozen protocol rejected it without consuming a second baseline/treatment profiling cycle."
+    },
+    {
+      "id": "report-mean-and-repeat-separation",
+      "proposal": "Report favorable means and repeat separation as distinct facts. Never promote an overlapping three-run mean change to a stable acceleration claim.",
+      "evidence": "Dk96 changed TTFT -0.401006%, TPOT -0.442686%, output throughput +0.380717% and duration -0.327093%, but every baseline/treatment three-run interval overlapped."
+    },
+    {
+      "id": "retain-negative-operating-points",
+      "proposal": "Preserve failed pruning ratios as first-class decisions. A milder fallback is a new treatment, not a replacement for an inconvenient primary result.",
+      "evidence": "Dk64 (50%) and Dk96 (25%) were independently built and measured. Both passed structural/runtime audits and LongBench-v2, but both failed the frozen GSM8K gate and remain separately traceable."
+    },
+    {
+      "id": "mechanism-feasibility-is-not-benefit-reproduction",
+      "proposal": "Separate four conclusions: source identity, mechanism activation, measured platform effect and adoption. Successful conversion/loading proves feasibility, not paper-exact benefit.",
+      "evidence": "Official Strong RRQR selection produced valid Dk64/Dk96 checkpoints and real Ascend service responses, while quality failed and the paper's H100 training microbenchmark was not a same-denominator serving comparison."
+    }
+  ]
+}

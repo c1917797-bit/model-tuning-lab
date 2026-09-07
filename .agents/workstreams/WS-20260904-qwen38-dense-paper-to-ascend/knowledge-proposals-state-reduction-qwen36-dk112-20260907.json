@@ -1,0 +1,37 @@
+{
+  "schema": "knowledge-proposals/v1",
+  "experiment_id": "state-reduction-qwen36-dk112-quality-first-20260907",
+  "status": "candidate-lessons-not-yet-promoted",
+  "historical_successes_to_reuse": [
+    "Hash paper code, model config/index, calibration token IDs, captures, checkpoint manifest, evaluator and every accepted result.",
+    "Derive hybrid linear-attention layer IDs from text_config.layer_types; Qwen3.6 linear layers are not a contiguous 0-47 range.",
+    "Use bounded double-opt-in post-convolution capture and prove exact layer/rank/sample coverage before selection.",
+    "Keep baseline and derived checkpoint separate; hardlink unchanged shards and atomically replace changed shards.",
+    "Require real-weight health plus an exact completion and runtime head_k_dim evidence before benchmark.",
+    "Report every repetition and dispersion, and release the exact NPU/container/port lane at phase end."
+  ],
+  "historical_failures_to_preserve": [
+    "Dk64 50% and Dk96 25% both crossed the frozen GSM8K variability boundary; a favorable LongBench mean cannot hide a failed dataset.",
+    "Dk64 and Dk96 mean serving directions were favorable but all three-run ranges overlapped; point improvements are not stable-benefit evidence.",
+    "The delivered calibration used LongBench-v2 rather than paper-original FineWeb-Edu and overlaps an evaluation family; it is an explicit adaptation and a generalization risk.",
+    "Profiling after a failed quality gate cannot rescue adoption and was correctly skipped.",
+    "Changing pruning ratio, calibration, recovery training or runtime identity requires a new experiment and fresh baseline."
+  ],
+  "new_quality_first_proposals": [
+    {
+      "lesson": "After a quality failure, move to the nearest hardware-aligned conservative dimension before adding recovery training.",
+      "application": "Dk112 removes 16 of 128 channels (12.5%) after Dk96 failed; it retains a native aligned shape while reducing perturbation.",
+      "promotion_gate": "Promote only if repeated Dk112 evidence changes the decision."
+    },
+    {
+      "lesson": "Run quality before expensive performance/profile phases when prior candidates already failed quality.",
+      "application": "Fresh baseline quality and Dk112 quality precede performance. A dataset failure stops the experiment.",
+      "promotion_gate": "Independent artifact audit must confirm all quality rows, indexes and hashes."
+    },
+    {
+      "lesson": "LoRA recovery is the paper-supported path to recover accuracy, but it is not a free post-processing step.",
+      "application": "If Dk112 fails or its speedup is below noise, require a separate training-capable environment, non-evaluation recovery data, merged adapter checkpoint and a new baseline/treatment identity.",
+      "promotion_gate": "Do not recommend LoRA execution until training data, framework, NPU memory feasibility and evaluation non-leakage are proven."
+    }
+  ]
+}

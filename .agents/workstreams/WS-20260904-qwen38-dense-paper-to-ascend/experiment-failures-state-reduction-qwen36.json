@@ -1,0 +1,136 @@
+{
+  "schema": "paper-to-ascend-failure-ledger/v1",
+  "experiment_id": "state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+  "rule": "A failed orchestration, packaging or source/image compatibility attempt is not evidence that DRRQR fails.",
+  "failures": [
+    {
+      "stage": "capture launcher construction",
+      "symptom": "A literal plus sign from a malformed patch reached the shell script.",
+      "measurement_started": false,
+      "npu_workload_started": false,
+      "classification": "orchestration-authoring failure",
+      "recovery": "Repair with a structured patch, run shell syntax/static checks, then relaunch under the same frozen experiment identity."
+    },
+    {
+      "stage": "capture Docker launch",
+      "symptom": "Collapsed line continuations produced an invalid Docker image reference.",
+      "measurement_started": false,
+      "npu_workload_started": false,
+      "classification": "orchestration quoting failure",
+      "recovery": "Use Bash argument arrays for docker run instead of continuation-sensitive command assembly."
+    },
+    {
+      "stage": "plugin editable install",
+      "symptom": "PEP 517 dependency resolution attempted unavailable triton-ascend==3.2.2.",
+      "measurement_started": false,
+      "npu_workload_started": false,
+      "classification": "offline packaging failure",
+      "recovery": "Use the image-compatible minimal install path without dependency resolution."
+    },
+    {
+      "stage": "capture runtime source mount",
+      "symptom": "Mounting a newer worktree gdn.py into the frozen image failed to import vllm.third_party.flash_linear_attention.",
+      "measurement_started": false,
+      "classification": "source-image ABI mismatch",
+      "recovery": "Keep the frozen image's compatible GDN implementation and inject only the minimal bounded capture hook."
+    },
+    {
+      "stage": "checkpoint conversion",
+      "symptom": "The initial converter assumed linear-attention layers were numbered contiguously 0-47.",
+      "measurement_started": false,
+      "classification": "model-structure assumption defect",
+      "evidence": "Qwen3.6-27B has 64 transformer layers; every fourth layer is full attention, so the 48 linear-attention IDs are non-contiguous.",
+      "recovery": "Derive and validate the exact linear layer IDs from text_config.layer_types before mapping captures or mutating tensors."
+    },
+    {
+      "stage": "Dk64 smoke launcher",
+      "symptom": "Continuation collapse again produced an invalid Docker reference.",
+      "measurement_started": false,
+      "npu_workload_started": false,
+      "classification": "orchestration quoting failure",
+      "recovery": "Replace the launch command with a Bash array; the repaired smoke later exited 0 and is the accepted attempt."
+    },
+    {
+      "stage": "repository validation",
+      "symptom": "git diff --check reported 'Not a git repository' when the remote executor did not honor the requested cwd.",
+      "measurement_started": "not applicable",
+      "classification": "remote-executor working-directory semantic",
+      "recovery": "Pass explicit --git-dir=/cache/cch/vllm-ascend/.git/worktrees/WS-20260904-qwen38-dense-paper-to-ascend and --work-tree=/cache/cch/.worktrees/WS-20260904-qwen38-dense-paper-to-ascend; diff --check then exits 0."
+    },
+    {
+      "stage": "read-only progress probe",
+      "symptom": "A complete shell command was initially passed as the executable name and failed with spawn: No such file.",
+      "measurement_started": "already-running experiment was only observed",
+      "experiment_impact": "none; the authoritative controller remained live and was not restarted",
+      "classification": "remote-executor command-shape error",
+      "recovery": "Invoke /bin/sh with -lc and pass the shell line as a separate argument."
+    },
+    {
+      "stage": "incomplete summary render",
+      "symptom": "The first validation invocation omitted the required --root argument and exited 2.",
+      "measurement_started": "not applicable",
+      "experiment_impact": "none; raw artifacts were not changed",
+      "classification": "post-processing invocation error",
+      "recovery": "Rerun with the exact output root and --allow-incomplete while required treatment/profile artifacts are still absent."
+    },
+    {
+      "stage": "performance aggregate validation",
+      "symptom": "The first read-only validation script requested output_throughput_tok_s and duration_s, while the recorded schema uses output_tokens_per_second and benchmark_duration_s; it exited 1 after reading baseline rows.",
+      "measurement_started": "performance collection was already complete",
+      "experiment_impact": "none; all six raw performance JSON files remained unchanged",
+      "classification": "post-processing schema-field error",
+      "recovery": "Inspect the actual summary keys and rerun the validator with the recorded field names; corrected validation exited 0 and verified every run as 40/40 with exact 1024-token outputs."
+    },
+    {
+      "stage": "handoff progress timestamp",
+      "symptom": "An interim handoff edit initially used a manually rounded observation time instead of an authoritative host timestamp.",
+      "measurement_started": "the quality controller remained live",
+      "experiment_impact": "none; no raw artifact, request or controller state was changed",
+      "classification": "post-processing provenance error",
+      "recovery": "Read UTC time from the target host, replace the rounded value with 2026-09-06T23:31:02Z, and describe the asynchronously increasing row count as a verified lower bound rather than an exact current count."
+    },
+    {
+      "stage": "Dk96 converter CLI discovery",
+      "symptom": "Invoking the converter with host python3 --help imported numpy before argparse and exited because numpy is absent on the host.",
+      "measurement_started": false,
+      "npu_workload_started": false,
+      "experiment_impact": "none; no destination directory existed and no checkpoint file was written",
+      "classification": "host dependency mismatch during read-only CLI discovery",
+      "recovery": "Run the same script in the frozen vLLM Ascend image mounted on /cache; --help exited 0 and exposed the exact converter arguments."
+    },
+    {
+      "stage": "Dk64 final quality aggregate audit",
+      "symptom": "The first combined shell command embedded literal backslash-n sequences in python3 -c and exited with SyntaxError before reading artifacts.",
+      "measurement_started": "all Dk64 measurements were already complete",
+      "experiment_impact": "none; the command was read-only and subsequent independent checks found every raw artifact unchanged",
+      "classification": "post-processing shell quoting error",
+      "recovery": "Pass the multiline Python program as a direct argument rather than through shell interpolation; rerun independently alongside container and NPU4-7 release checks."
+    },
+    {
+      "stage": "Dk96 quality launcher",
+      "symptom": "Operation exec-0000000000000c15 exited 2 after 20 ms because the submitted path inserted a nonexistent scripts directory before state_reduction_formal_runner.py.",
+      "measurement_started": false,
+      "npu_workload_started": false,
+      "experiment_impact": "none; no container, dataset row or raw measurement was started or changed, and NPU4-7 remained empty",
+      "classification": "remote launcher path error",
+      "recovery": "Verify the runner with test -f, confirm no matching controller and no process on NPU4-7, then launch the same frozen quality phase from the actual workstream path as operation exec-0000000000000c1b."
+    },
+    {
+      "stage": "incomplete final-report rendering during Dk96 quality",
+      "symptom": "A newly added raw-quality table iterated over GSM8K before the three Dk96 GSM8K aggregate existed and raised KeyError.",
+      "measurement_started": "the independent quality controller remained live",
+      "experiment_impact": "none; the command only read accepted artifacts and attempted to overwrite derived summary/report files",
+      "classification": "post-processing incomplete-state handling defect",
+      "recovery": "Render raw dataset tables only when both baseline and candidate three-run aggregates exist, then rerun py_compile, allow-incomplete rendering and diff checks."
+    },
+    {
+      "stage": "maintainer handoff validation",
+      "symptom": "The first read-only handoff validator assumed a nonexistent top-level state_reduction key and exited with KeyError.",
+      "measurement_started": "all experiments were already complete",
+      "npu_workload_started": false,
+      "experiment_impact": "none; the command only parsed task.json and did not modify raw or derived experiment artifacts",
+      "classification": "post-processing schema-path error",
+      "recovery": "Enumerate the actual task.json keys, select state_reduction_piercing explicitly, and rerun the same read-only consistency and hash checks."
+    }
+  ]
+}

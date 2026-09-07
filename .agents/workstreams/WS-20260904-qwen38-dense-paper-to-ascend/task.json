@@ -1,28 +1,28 @@
 {
   "task_id": "WS-20260904-qwen38-dense-paper-to-ascend",
-  "objective": "Maintain auditable Paper-to-Ascend experiments for Qwen3.6-27B on Ascend 910B4, including the operator-selected four-card TP4 no-cache versus Hypic-only reproduction derived from the employee success practice.",
+  "objective": "Maintain auditable Paper-to-Ascend experiments for Qwen3.6-27B on Ascend 910B4, including the completed HYPIC reproduction, the rejected Dk64/Dk96 DRRQR validation, and the active quality-first Dk112 follow-up.",
   "target_branch": "main",
   "workstream_branch": "work/WS-20260904-qwen38-dense-paper-to-ascend",
   "original_base": "222677fc719c7014879b161ed1dd3ed3276d7a5d",
-  "execution_state": "hypic-reproduction-complete",
-  "integration_state": "ready-for-maintainer-review",
-  "decision": "adopt-hypic-for-frozen-qwen36-27b-tp4-workload-with-quality-guardrails",
-  "decision_reason": "The Dk64 and PDC-coexistence decisions remain rejected and preserved as separate scientific questions. The corrected 40960-budget no-cache versus HYPIC-only TP4 reproduction completed 18/18 independently audited units. HYPIC changed mean TTFT by -43.6345%, TPOT by -18.9911%, output throughput by +36.0663%, and duration by -26.6028%, closely reproducing the employee performance direction and magnitude. LongBench-v2 changed by -0.2625pp and GSM8K by -0.1516pp; both are within measured baseline repeat ranges. Adoption is authorized for this frozen workload with quality monitoring, not as a universal lossless claim.",
+  "execution_state": "drrqr-dk112-checkpoint-audited-awaiting-npu-authorization",
+  "integration_state": "not-ready-active-experiment",
+  "decision": "dk64-dk96-rejection-preserved; dk112-quality-first-pending",
+  "decision_reason": "The completed Dk64/Dk96 decision is immutable: both failed the frozen GSM8K gate and neither established repeat-separated serving benefit. A separately preregistered Dk112 candidate now tests only 12.5% aligned Q/K reduction with a fresh baseline. No Dk112 quality or performance claim is allowed before its independent gates complete.",
   "resource_claims": {
-    "host_npu_0_3": "externally owned active Qwen3.5 workload; do not enter, inspect inside, stop, restart, reconfigure or use its port",
-    "host_npu_4_7": "formal HYPIC TP4 case complete; both exact experiment containers are exited and the lane is released",
-    "cpu_0_95": "formal HYPIC TP4 case complete; the experiment no longer claims this CPU set",
-    "experiment_topology": "formal case is Qwen3.6-27B TP4 on exactly host NPU4-7 with a fresh baseline and artifact root; preserved TP2 and prior TP4 evidence are not pooled",
-    "other_cpu_sets": "no claim; do not alter workloads outside the exact Hypic containers"
+    "host_npu_0_3": "protected and outside this experiment; do not enter, stop, restart, reconfigure or use its ports even when an outer read-only status reports the cards idle",
+    "host_npu_4_7": "not currently claimed; Dk112 checkpoint build/audit are complete and used no NPU. Do not start smoke, quality, performance or profiling without explicit renewed authorization",
+    "cpu_0_95": "allowed only while an exact Dk112 experiment container is running; not claimed by the checkpoint build",
+    "experiment_topology": "Dk112 follow-up is a fresh Qwen3.6-27B TP4 identity on exactly host NPU4-7, CPU0-95, port8226 and HCCL27020-27120; prior Dk64/Dk96 and HYPIC evidence are not pooled",
+    "other_cpu_sets": "no claim; do not alter workloads outside the exact experiment containers"
   },
   "boundaries": [
     "Never alter the active workload on NPU0-3.",
-    "Operate only the two exact formal containers on NPU4-7; never alter the NPU0-3 workload.",
+    "Operate only exact paper-prefixed formal containers on NPU4-7; never alter the NPU0-3 workload.",
     "Do not pool this fresh TP4 case with preserved TP2 or earlier TP4 artifacts; their baselines and evidence ledgers are separate.",
     "Do not modify /cache/austinov/Qwen3.8-27B in place.",
     "Fixed-first-channel is speed evidence only; L1 is not DRRQR.",
     "Exclude cold compile/graph samples.",
-    "Use only the existing configured Git identity; final push is authorized only to https://github.com/c1917797-bit/model-tuning-lab."
+    "Do not fabricate Git identity and do not push from this workstream."
   ],
   "completed_gates": [
     "paper/source/model feasibility",
@@ -47,17 +47,19 @@
     "profile evidence template and verifier require hash-bound G1/candidate native exports, disabled capture, identical profile workload, at least two models and target-region improvement on each model",
     "production Step-6 analysis now requires verified profile evidence whose candidate equals the unique performance winner and whose model scope and frozen/config/treatment bindings exactly match the performance and quality evidence",
     "corrected-budget formal HYPIC-only performance completed three accepted 40/40 fixed-output repetitions; run1 passed the complete strict hot-path evidence gate and the three-run deltas closely reproduce the employee reference",
-    "formal HYPIC historical reproduction completed 18/18 independently audited units; quality deltas are within measured baseline repeat ranges, both experiment containers exited without OOM, and port8224 was released"
+    "formal HYPIC historical reproduction completed 18/18 independently audited units; quality deltas are within measured baseline repeat ranges, both experiment containers exited without OOM, and port8224 was released",
+    "formal DRRQR baseline, Dk64 and Dk96 each completed three performance runs and six repeated quality runs under one frozen TP4 serving contract",
+    "Dk64 and Dk96 quality, performance, checkpoint and resource-release evidence passed independent count/index/hash audits; both treatments were rejected by the GSM8K gate",
+    "final state-reduction summary and sample-style report completed with errors=0; final-evidence-audit verified 9 performance runs, 18 quality summaries/details and released NPU4-7/port8225",
+    "completed DRRQR continuation heartbeat deleted so the experiment cannot be unintentionally restarted by that monitor"
   ],
   "separate_drrqr_track_open_gates": [
-    "materialize and hash authoritative NIAH+ data if it is retained in the frozen suite; CEval is explicitly excluded by operator decision",
-    "confirm the operator-selected /cache/efim/Qwen3.6-27B baseline reaches readiness and record its exact checkpoint/config identity before collecting evidence",
-    "freeze the already-defined G1-G4 contract after datasets and runtime config are complete",
-    "prove the selected native G2 fused-GDN operator actually activates at runtime on both models",
-    "true DRRQR checkpoint",
-    "baseline-vs-DRRQR correctness and quality",
-    "clean A/B and a hash-bound profile of G1 versus the eventual unique winner on both models",
-    "separate DRRQR decision"
+    "Dk64/Dk96 remain complete and rejected; their profiling skip remains intentional",
+    "Dk112 checkpoint build, structural audit and real-weight activation smoke",
+    "fresh Dk128 baseline and Dk112 repeated quality; stop immediately if either dataset fails",
+    "conditional repeated performance and native profiling only after quality passes",
+    "LoRA recovery or any calibration change remains a separate future identity",
+    "NIAH+ remains unavailable and CEval remains excluded; neither is silently substituted"
   ],
   "test_contract": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/test-contract.json",
   "resource_request": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/RESOURCE_REQUEST.md",
@@ -68,7 +70,7 @@
   "profile_evidence_template": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/profile-evidence.template.json",
   "completion_audit": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/COMPLETION_AUDIT.md",
   "loop_guide": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/PIERCING_LOOP.md",
-  "next_action": "Review the final HYPIC decision and reusable paper-to-Ascend skill. Any new model, hardware topology, cache baseline or traffic shape must start a new experiment identity and collect a fresh same-denominator baseline.",
+  "next_action": "Checkpoint and runner are ready. After explicit renewed authority for NPU4-7, run the exact Dk112 real-weight smoke with state_reduction_dk112_runner.py. If it passes, execute fresh baseline and treatment quality first; do not run performance/profile if either dataset fails.",
   "hypic_piercing": {
     "objective": "Reproduce the employee HYPIC v0.8.5 serving result on the complete Qwen3.6-27B checkpoint using a fresh no-cache versus HYPIC-only TP4 ruler on host NPU4-7, while preserving separate PDC-coexistence and earlier invalid-budget decisions.",
     "status": "formal-npu4-7-budget40960-reproduction-complete",
@@ -301,5 +303,243 @@
       "ceval": "excluded by operator",
       "niah_plus": "authoritative files absent"
     }
+  },
+  "state_reduction_piercing": {
+    "objective": "Validate The Key to State Reduction in Linear Attention: A Rank-based Perspective on Qwen3.6-27B using official Strong RRQR channel selection and a same-denominator Ascend TP4 serving A/B.",
+    "status": "complete-reject-dk64-and-dk96",
+    "resource_lane": "host NPU4-7, container-visible 0-3, TP4, CPU0-95, port8225; released after final audit; NPU0-3 protected and not inspected",
+    "output_root": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+    "checkpoint": "/cache/cch/Qwen3.6-27B-gdn-drrqr-dk96",
+    "completed": [
+      "frozen adapted 16x2048-token calibration corpus",
+      "3072-file complete Q/K capture audit",
+      "48-layer official Strong-RRQR Dk64 checkpoint",
+      "real-weight Ascend Dk64 health/completion smoke",
+      "baseline performance 3/3 repetitions, all 40/40 fixed-output requests accepted",
+      "baseline quality 6/6 repetitions accepted: LongBench-v2 3/3 and GSM8K 3/3",
+      "Dk64 treatment performance 3/3 repetitions, all 40/40 fixed-output requests accepted",
+      "Dk64 treatment quality 6/6 repetitions independently accepted; LongBench-v2 passed but GSM8K failed the preregistered variability gate",
+      "Dk64 treatment container exited 0 without OOM and NPU4-7 were released",
+      "independent official Strong-RRQR Dk96 checkpoint build and structural audit",
+      "real-weight Dk96 Ascend smoke with exact response and head_k_dim=96 runtime evidence",
+      "Dk96 treatment performance 3/3 repetitions, all 40/40 fixed-output requests accepted; all mean directions favorable but baseline and Dk96 three-run ranges overlap"
+      ,"Dk96 treatment quality 6/6 repetitions independently accepted; LongBench-v2 passed but GSM8K failed the preregistered variability gate"
+      ,"final report and evidence audit completed; profiling intentionally skipped by the preregistered failed-quality rule"
+    ],
+    "current_operation": {
+      "operation_id": "exec-0000000000000c1b",
+      "phase": "complete",
+      "active_unit": null,
+      "last_verified_at": "2026-09-07T04:37:39.503821+00:00",
+      "observed_progress": "Operation exited 0 after all six Dk96 quality repetitions. GSM8K runs were 1265/1319, 1268/1319 and 1266/1319; the mean loss of 0.303260 pp exceeds the baseline range 0.151630 pp. Final summary completed with errors=0 and the resource/evidence audit verified true.",
+      "route": "peer_direct",
+      "target_peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35"
+    },
+    "accepted_treatment_quality_runs": {
+      "longbenchv2_run1": {
+        "requests": 127,
+        "successful": 127,
+        "failed": 0,
+        "correct": 63,
+        "accuracy_pct": 49.60629921259842,
+        "summary_sha256": "4396f56d515d2da5054b849c82757221d769ac183ec44d16df51d9527289046d",
+        "details_sha256": "5250567dfb8c4e5467e79e5d5f599bc4161e499432dabfda7f3d32e83f6079c5"
+      },
+      "longbenchv2_run2": {
+        "requests": 127,
+        "successful": 127,
+        "failed": 0,
+        "correct": 59,
+        "accuracy_pct": 46.45669291338583,
+        "summary_sha256": "11aa6e11f133adef83234807b69fa743a202db0606bb9fee0fdcdd982ebfb5c8",
+        "details_sha256": "9cd5e4c2b93003a9f44cc9d9f0ea5dcd9943147f5a1356f990a5b3ec7638ec2e"
+      },
+      "longbenchv2_run3": {
+        "requests": 127,
+        "successful": 127,
+        "failed": 0,
+        "correct": 62,
+        "accuracy_pct": 48.818897637795274,
+        "summary_sha256": "3821194a84c9c3eb4830a810aff349919fcef82b02db565b1161b18d7991b6af",
+        "details_sha256": "0ae2e181bdb0e0910b66fc62736532f543603715c2e16ad9698f3360e935b59a"
+      },
+      "gsm8k_run1": {
+        "requests": 1319,
+        "successful": 1319,
+        "failed": 0,
+        "correct": 1269,
+        "accuracy_pct": 96.20924943138742,
+        "summary_sha256": "fab6abc4d9d53507831197951135a44854bb1e8eb3e7de9823adffee639e906d",
+        "details_sha256": "87045034f4144e8f25d707783c90bca3268560915f491c04bac896f1edd0a035"
+      },
+      "gsm8k_run2": {
+        "requests": 1319,
+        "successful": 1319,
+        "failed": 0,
+        "correct": 1267,
+        "accuracy_pct": 96.0576194086429,
+        "summary_sha256": "5929311e641cbbf32361b425b31fd137e4f9e759da1a08111ef9587d84d4c56d",
+        "details_sha256": "e72b72c3d623ae1236095a1f7256fd9bdcc11697d4366059bc8abb2c4237f274"
+      },
+      "gsm8k_run3": {
+        "requests": 1319,
+        "successful": 1319,
+        "failed": 0,
+        "correct": 1267,
+        "accuracy_pct": 96.0576194086429,
+        "summary_sha256": "bd62db3b496746471c76bf3d16bf55ccb3a5e076edc028e31a1bd66d7e71a508",
+        "details_sha256": "98925497b09f93df524a28058475e7b8a6d03a762ec12c91f1dfbf023b114314"
+      }
+    },
+    "treatment_quality_partial_aggregate": {
+      "longbenchv2": {
+        "three_run_mean_accuracy_pct": 48.29396325459317,
+        "sample_sd_pp": 1.6391070861938024,
+        "range_pp": 3.149606299212593,
+        "delta_vs_baseline_pp": 2.6246719160104988,
+        "predeclared_quality_gate_pass": true
+      },
+      "gsm8k": {
+        "three_run_mean_accuracy_pct": 96.10816274955775,
+        "sample_sd_pp": 0.08754363444877358,
+        "range_pp": 0.15163002274451287,
+        "delta_vs_baseline_pp": -0.20217336365934102,
+        "baseline_range_pp": 0.15163002274449866,
+        "predeclared_quality_gate_pass": false
+      }
+    },
+    "accepted_dk96_quality_runs": {
+      "longbenchv2_run1": {
+        "requests": 127,
+        "successful": 127,
+        "failed": 0,
+        "correct": 60,
+        "accuracy_pct": 47.24409448818898,
+        "summary_sha256": "005f533016d8c63e68e77f664036f1d50cd76fd643f9d4c328e3c2d42a58b728",
+        "details_sha256": "63f717d4bec3a3fbca2af77b7b5d5d8b51a0007fbdc86541e1d55e6be7c77d66",
+        "exact_index_audit": true
+      },
+      "gsm8k_run3": {
+        "requests": 1319,
+        "successful": 1319,
+        "failed": 0,
+        "correct": 1266,
+        "accuracy_pct": 95.98180439727066,
+        "summary_sha256": "c836f122866709835377dfbb5e2e60964adac6dda8baa28c3ccd80ff9a37231d",
+        "details_sha256": "5e11e9cbffe39d3262fc6dd88df5fd5a622404f9670bc4a70ec71776cd59df29",
+        "exact_index_audit": true
+      },
+      "longbenchv2_run2": {
+        "requests": 127,
+        "successful": 127,
+        "failed": 0,
+        "correct": 66,
+        "accuracy_pct": 51.968503937007874,
+        "summary_sha256": "826c51296dd7f31bb8f68448a7ae65f79a3acda3eb3a36c6a3749ff68aaeb3a9",
+        "details_sha256": "8f83c0477ed486a115bc9d4a90b8edad4085b2e109bf76d1704b23b28316e71d",
+        "exact_index_audit": true
+      },
+      "longbenchv2_run3": {
+        "requests": 127,
+        "successful": 127,
+        "failed": 0,
+        "correct": 62,
+        "accuracy_pct": 48.818897637795274,
+        "summary_sha256": "acbc12b9f7aa71a7436b2c3ae882c0110d5934a60d4839df0c2af6507355e256",
+        "details_sha256": "59773f08263dd4366e1ccd5a12b0ac32bf5bed0b19ebabbb01af3da1fcb63ffc",
+        "exact_index_audit": true
+      },
+      "gsm8k_run1": {
+        "requests": 1319,
+        "successful": 1319,
+        "failed": 0,
+        "correct": 1265,
+        "accuracy_pct": 95.90598938589841,
+        "summary_sha256": "b11d73a90aa7af15752f99b7fa7e32deee75ed37874353dcdae8553e9633dd12",
+        "details_sha256": "6bdc392670d17a05a196356c4251d2857fc0951c1365ae3edf762a93a5205ac4",
+        "exact_index_audit": true
+      },
+      "gsm8k_run2": {
+        "requests": 1319,
+        "successful": 1319,
+        "failed": 0,
+        "correct": 1268,
+        "accuracy_pct": 96.13343442001516,
+        "summary_sha256": "19b6d7ae20f2bdb28315f5ae932bac842877486b0893a23972c666a7027ba751",
+        "details_sha256": "6fffa04b79357e1cc9d179550e44b849732a3c1bcbb0cf03e751e5c10a3e08f9",
+        "exact_index_audit": true
+      }
+    },
+    "dk96_quality_partial_aggregate": {
+      "longbenchv2": {
+        "three_run_mean_accuracy_pct": 49.343832020997375,
+        "sample_sd_pp": 2.405551545908577,
+        "range_pp": 4.724409448818896,
+        "delta_vs_baseline_pp": 3.674540682414701,
+        "baseline_range_pp": 3.937007874015748,
+        "predeclared_quality_gate_pass": true
+      },
+      "gsm8k": {
+        "three_run_mean_accuracy_pct": 96.00707606772808,
+        "sample_sd_pp": 0.11580934280909323,
+        "range_pp": 0.2274450341167551,
+        "delta_vs_baseline_pp": -0.3032600459944206,
+        "baseline_range_pp": 0.15163002274449866,
+        "predeclared_quality_gate_pass": false
+      }
+    },
+    "performance_three_run_means": {
+      "baseline": {
+        "ttft_mean_ms": 38456.89009033182,
+        "tpot_mean_ms": 73.62882260916483,
+        "output_tokens_per_second": 125.81913394499912,
+        "benchmark_duration_s": 325.90221148659475
+      },
+      "drrqr_dk64": {
+        "ttft_mean_ms": 37411.85490474066,
+        "tpot_mean_ms": 71.69947852370143,
+        "output_tokens_per_second": 129.2305042791354,
+        "benchmark_duration_s": 317.429595243341
+      },
+      "drrqr_dk96": {
+        "ttft_mean_ms": 38302.67557491703,
+        "tpot_mean_ms": 73.3028780859339,
+        "output_tokens_per_second": 126.29814862991877,
+        "benchmark_duration_s": 324.83620704330195,
+        "run_sha256": [
+          "32a7d0136b98ac66056dd897c3516e14a8cc5af7a3f87ae5c649d0650f40e694",
+          "91bcc4632fb251f95fe8ae422ae00b20ac8a3df76cc51b27803be4ae223b3190",
+          "9e95f1c810a44e00bd33132cddfa2b5046d5e57906708dc3c8eecf2d848fdfc6"
+        ]
+      },
+      "relative_change_percent": {
+        "ttft": -2.717419903524343,
+        "tpot": -2.6203652551999967,
+        "output_throughput": 2.711328736078844,
+        "duration": -2.5997418687667473
+      },
+      "relative_change_percent_drrqr_dk96": {
+        "ttft": -0.40100620388716646,
+        "tpot": -0.4426860467300675,
+        "output_throughput": 0.38071688295688855,
+        "duration": -0.32709334460608863
+      },
+      "interpretation": "All mean directions are favorable, but baseline and treatment three-run ranges overlap; do not claim a repeat-separated stable serving benefit."
+    },
+    "records": {
+      "experiment": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/experiment-state-reduction-qwen36-formal-npu4-7-tp4.json",
+      "evidence": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evidence-state-reduction-qwen36-formal-npu4-7-tp4.json",
+      "decision": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/decision-state-reduction-qwen36-formal-npu4-7-tp4.json",
+      "runner": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/state_reduction_formal_runner.py",
+      "native_profile_runner": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/state_reduction_native_profile.py",
+      "failure_ledger": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/experiment-failures-state-reduction-qwen36.json",
+      "knowledge_proposals": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/knowledge-proposals-state-reduction-qwen36.json"
+      ,"summary": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/state-reduction-summary.json"
+      ,"report": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/STATE_REDUCTION_PIERCING_REPORT.md"
+      ,"final_evidence_audit": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/final-evidence-audit.json"
+      ,"maintainer_retrospective": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/MAINTAINER_RETROSPECTIVE.md"
+    },
+    "claim_boundary": "It is valid to claim mechanism feasibility and the measured frozen-workload results. It is not valid to claim paper-exact reproduction, stable serving acceleration, losslessness or adoption. The paper's H100 training microbenchmark is not a same-denominator comparison.",
+    "resume_command": "No resume is required: operation exec-0000000000000c1b completed successfully. For audit rerender only: python3 /cache/cch/.worktrees/WS-20260904-qwen38-dense-paper-to-ascend/.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/summarize_state_reduction_formal.py --root /cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906"
   }
 }

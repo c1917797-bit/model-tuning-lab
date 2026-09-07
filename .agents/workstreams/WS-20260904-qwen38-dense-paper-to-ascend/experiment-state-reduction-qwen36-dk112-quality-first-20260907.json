@@ -1,0 +1,87 @@
+{
+  "schema": "paper-to-ascend-experiment/v1",
+  "experiment_id": "state-reduction-qwen36-dk112-quality-first-20260907",
+  "status": "checkpoint-audited-awaiting-authorized-npu-smoke",
+  "supersedes": null,
+  "follows_rejected_experiment": "state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+  "scientific_question": "Does a conservative DRRQR reduction of every Qwen3.6-27B GDN Q/K head from Dk128 to Dk112 preserve quality under a fresh frozen baseline and produce a repeat-separated serving benefit on four Ascend 910B4 NPUs?",
+  "claim_target": "no-material-regression-observed plus repeat-separated performance benefit; lossless-proven is not claimed unless exact equality is established by the frozen contract",
+  "paper": {
+    "title": "The Key to State Reduction in Linear Attention: A Rank-based Perspective",
+    "arxiv": "2602.04852v2",
+    "official_repository": "https://github.com/camail-official/LinearAttentionPruning",
+    "official_commit": "919d8667d951c385e08510bc1267c2e7049a4f56",
+    "official_rrqr_sha256": "fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62"
+  },
+  "scope": {
+    "model": "Qwen3.6-27B",
+    "source_checkpoint": "/cache/efim/Qwen3.6-27B",
+    "source_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "source_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+    "accelerator": "4 x Ascend 910B4",
+    "host_npus": [4, 5, 6, 7],
+    "container_visible_npus": [0, 1, 2, 3],
+    "tensor_parallel_size": 4,
+    "cpu_set": "0-95",
+    "port": 8226,
+    "hccl_port_range": "27020-27120",
+    "artifact_root": "/cache/cch/state-reduction-qwen36-dk112-quality-first-20260907"
+  },
+  "resource_boundaries": {
+    "allowed": ["host NPU4-7", "CPU0-95", "port8226", "exact qwen36_dk112_qf_* containers"],
+    "forbidden": ["host NPU0-3", "unrelated containers, processes, ports and files"],
+    "preflight_observation": "All NPU0-7 were empty on 2026-09-07; this does not expand authority beyond NPU4-7.",
+    "release_requirement": "Exact experiment containers exited, port8226 closed, host NPU4-7 empty"
+  },
+  "treatment": {
+    "baseline": "unmodified Qwen3.6-27B, linear_key_head_dim=128",
+    "candidate": "official Strong RRQR channel selection, linear_key_head_dim=112",
+    "pruning_fraction": 0.125,
+    "single_primary_switch": "checkpoint identity only",
+    "reason": "Dk64 (50%) and Dk96 (25%) failed the prior GSM8K gate; Dk112 is the next 16-channel-aligned conservative point.",
+    "recovery_finetuning": "excluded from this zero-shot identity; any LoRA recovery is a new treatment and experiment"
+  },
+  "calibration": {
+    "frozen_token_ids": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/calibration/longbenchv2-16x2048-tokenids.jsonl",
+    "frozen_token_ids_sha256": "d146eede2a438154ea8c1bf9785dffa12f8a81e56fa370ff48be4d924e908111",
+    "capture_root": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/calibration/captures",
+    "capture_files": 3072,
+    "claim_boundary": "The frozen calibration is the documented LongBench-v2 adaptation, not FineWeb-Edu. Reuse changes only pruning ratio and avoids a second uncontrolled calibration change."
+  },
+  "execution_order": [
+    "materialize and structurally audit Dk112 checkpoint",
+    "real-weight Dk112 smoke and mechanism activation",
+    "fresh baseline quality: LongBench-v2 and GSM8K, three repetitions each",
+    "Dk112 quality: identical datasets and repetitions",
+    "stop if any quality gate fails",
+    "fresh baseline and Dk112 performance, three repetitions each",
+    "profile both arms only if quality passes and a performance candidate remains"
+  ],
+  "quality_contract": {
+    "datasets": ["LongBench-v2:127", "GSM8K:1319"],
+    "repetitions": 3,
+    "seed": 0,
+    "temperature": 0,
+    "thinking": false,
+    "ignore_eos": false,
+    "gate": "For each dataset, baseline mean minus treatment mean must not exceed the fresh baseline three-run range.",
+    "language": "Passing supports no-material-regression-observed, not lossless-proven."
+  },
+  "performance_contract": {
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "warmups": 2,
+    "repetitions": 3,
+    "gate": "Output throughput mean must improve and duration mean must decrease; a validated benefit additionally requires non-overlapping complete three-run ranges in the beneficial direction."
+  },
+  "stop_conditions": [
+    "any unexpected NPU4-7 or port8226 owner",
+    "checkpoint structural or real-weight smoke failure",
+    "any quality dataset crosses its fresh baseline variability boundary",
+    "measurement identity drift",
+    "OOM, partial result set or artifact hash mismatch"
+  ],
+  "next_if_rejected": "Do not try another zero-shot ratio opportunistically. Open a separately preregistered LoRA-recovery experiment with non-evaluation training data, or conclude that the measurable zero-shot operating point is below the current end-to-end serving noise floor."
+}

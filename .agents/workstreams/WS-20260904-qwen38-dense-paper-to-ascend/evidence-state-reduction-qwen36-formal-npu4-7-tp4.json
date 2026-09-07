@@ -1,0 +1,101 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+  "status": "complete-verified-reject-dk64-and-dk96",
+  "verified": [
+    {
+      "claim": "Host NPU4-7 were empty before experiment allocation.",
+      "evidence": "npu-smi info -t proc-mem -i 4/5/6/7 each returned 'No process in device'.",
+      "verified_at_utc": "2026-09-06T18:45:00Z"
+    },
+    {
+      "claim": "The target checkpoint is complete enough for indexed loading.",
+      "evidence": "/cache/efim/Qwen3.6-27B contains config, tokenizer, one index and 15 non-empty safetensors shards; apparent size 52G."
+    },
+    {
+      "claim": "The official implementation was acquired without local modification.",
+      "evidence": "official repository HEAD 919d8667d951c385e08510bc1267c2e7049a4f56; rrqr.py SHA256 fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62"
+    },
+    {
+      "claim": "The frozen adapted calibration corpus contains exactly sixteen 2048-token samples.",
+      "evidence": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/calibration/longbenchv2-16x2048-tokenids.jsonl; 16 rows; SHA256 d146eede2a438154ea8c1bf9785dffa12f8a81e56fa370ff48be4d924e908111"
+    },
+    {
+      "claim": "Capture remains disabled until the post-readiness sentinel exists and is bounded per layer/rank.",
+      "evidence": "verify_rrqr_capture_hook.py passed after sentinel hardening; py_compile and git diff --check passed."
+    },
+    {
+      "claim": "Real post-convolution Q/K calibration capture is complete and structurally exhaustive for the target model.",
+      "evidence": "3072 .pt artifacts: 48 actual linear-attention layer IDs x four TP ranks x 16 sample indexes; every layer/rank has indexes 0-15 with no missing, duplicate or unparsed file. The non-contiguous layer IDs were derived from text_config.layer_types rather than assumed to be 0-47."
+    },
+    {
+      "claim": "A checkpoint using the official Strong RRQR selection implementation was materialized without modifying the baseline.",
+      "evidence": "/cache/cch/Qwen3.6-27B-gdn-drrqr-dk64/drrqr_manifest.json SHA256 2eaa9a14fffe3dc0cd37906e08bee857be7c9ce2ed761f693a99a0ef02d90c0d; 48 layers, 96 tensors and six shards changed; unchanged shards are hardlinks; source config/index hashes remained unchanged."
+    },
+    {
+      "claim": "The Dk64 checkpoint loads and executes the intended head_k_dim=64 GDN path on four Ascend cards.",
+      "evidence": "Smoke operation exec-0000000000000aa5 exited 0; health and completion returned HTTP 200; response was exactly ASCEND_DRRQR_OK; service log recorded 'Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=64)'."
+    },
+    {
+      "claim": "The baseline performance arm completed three accepted repetitions under the frozen contract.",
+      "evidence": "Operation exec-0000000000000ab4 exited 0. Each repetition completed 40/40 requests, zero failures and exactly 1024 output tokens per request. Three-run means: TTFT 38456.890090 ms, TPOT 73.628823 ms, output throughput 125.819134 tok/s, measured duration 325.902211 s."
+    },
+    {
+      "claim": "The baseline quality arm completed all six accepted repetitions and defines the measured quality variability gate.",
+      "evidence": "Operation exec-0000000000000acd exited 0. LongBench-v2 runs were 56/127, 61/127 and 57/127 (mean 45.669291%, sample SD 2.083269 pp, range 3.937008 pp). GSM8K runs were 1269/1319, 1271/1319 and 1271/1319 (mean 96.310336%, sample SD 0.087544 pp, range 0.151630 pp). Every summary reports zero failures. Summary SHA256 values: LongBench-v2 5591870c20c0bc1f6e9381c5b40fffffbcc9e9d1bbfaf74b8cab53bf87253a1a, c6bce4d1463c4aee9575d6fe06267fafaa2b52a0d691830cbe1032734f6ec4c9, 063b9d759e0211d50e21864b803aca26cb2fd81e7acb8662b70d2674a2316e7c; GSM8K 94392142c5b7312187690ca622033848f600b72c456801a464557cea759d3e10, 4f4fcf8908c2ea31ae15e9a72baa08e930d35a3eefdd912f60b5d82713471282, cd389007886cf81470db5f28a2f3d95db33da3cf851f334ba8ddf636bf07bd91."
+    },
+    {
+      "claim": "The Dk64 treatment performance arm completed three accepted repetitions under the identical frozen serving workload.",
+      "evidence": "Operation exec-0000000000000b2a exited 0. Each repetition completed 40/40 requests, zero failures and exactly 1024 output tokens per request. Run SHA256 values: d5a165c19ca9de6c8fe49521031f6b439bc211633f5b006760e9fd41113de717, 60828beb8b975f7a617ab4a864dbaada5e40117fd9914515dbb1035887a19b1d and 17bc2e3f569bb07c524a329d22cb0540771cbb75b57b5301f54213961e1ac1d8. Three-run means: TTFT 37411.854905 ms, TPOT 71.699479 ms, output throughput 129.230504 tok/s, measured duration 317.429595 s. Relative mean changes versus baseline were -2.717420%, -2.620365%, +2.711329% and -2.599742%, respectively; all three-run ranges overlap, so stable repeat separation is not established."
+    },
+    {
+      "claim": "The Dk64 quality operation is live on the isolated resource lane, resumable, and all three LongBench-v2 repetitions were independently accepted.",
+      "evidence": "Operation exec-0000000000000b5a was verified running via peer_direct routing to the intended peer. Container mapping is host NPU4-7 to container 0-3 with CPU0-95. LongBench-v2 runs completed 127/127 with zero failures: run1 63 correct (49.606299%), summary/details SHA256 4396f56d515d2da5054b849c82757221d769ac183ec44d16df51d9527289046d / 5250567dfb8c4e5467e79e5d5f599bc4161e499432dabfda7f3d32e83f6079c5; run2 59 correct (46.456693%), 11aa6e11f133adef83234807b69fa743a202db0606bb9fee0fdcdd982ebfb5c8 / 9cd5e4c2b93003a9f44cc9d9f0ea5dcd9943147f5a1356f990a5b3ec7638ec2e; run3 62 correct (48.818898%), 3821194a84c9c3eb4830a810aff349919fcef82b02db565b1161b18d7991b6af / 0ae2e181bdb0e0910b66fc62736532f543603715c2e16ad9698f3360e935b59a. Independent audits confirmed exact indexes 0-126, nonempty response hashes and hash agreement. Three-run mean 48.293963%, sample SD 1.639107 pp, delta versus baseline +2.624672 pp; LongBench-v2 passes the preregistered quality gate. GSM8K run1 completed 1319/1319 with zero failures and 1269 correct (96.209249%); exact indexes 0-1318 and hash agreement were independently verified; summary/details SHA256 fab6abc4d9d53507831197951135a44854bb1e8eb3e7de9823adffee639e906d / 87045034f4144e8f25d707783c90bca3268560915f491c04bac896f1edd0a035. GSM8K run2 completed 1319/1319 with zero failures and 1267 correct (96.057619%); exact indexes and hash agreement were independently verified; summary/details SHA256 5929311e641cbbf32361b425b31fd137e4f9e759da1a08111ef9587d84d4c56d / e72b72c3d623ae1236095a1f7256fd9bdcc11697d4366059bc8abb2c4237f274. GSM8K run3 then started."
+    },
+    {
+      "claim": "Dk64 completed all repeated quality units but failed the preregistered GSM8K variability gate.",
+      "evidence": "Quality operation exec-0000000000000b5a exited 0 after 7,792,093 ms. GSM8K runs were 1269/1319, 1267/1319 and 1267/1319; each had 1319/1319 successful requests, zero errors, exact indexes 0-1318 and matching summary/detail hashes. Run3 summary/details SHA256 bd62db3b496746471c76bf3d16bf55ccb3a5e076edc028e31a1bd66d7e71a508 / 98925497b09f93df524a28058475e7b8a6d03a762ec12c91f1dfbf023b114314. Treatment mean 96.108163% was 0.202173 pp below baseline mean 96.310336%, exceeding the observed baseline range 0.151630 pp. LongBench-v2 passed with +2.624672 pp. The Dk64 container exited 0, OOMKilled=false, and NPU4-7 each reported no process."
+    },
+    {
+      "claim": "The preregistered independent Dk96 fallback build started only after Dk64 failed quality.",
+      "evidence": "Operation exec-0000000000000be9 uses the same baseline, 3072 captures, frozen calibration and official RRQR file in the same image, with new_head_k_dim=96 as the only algorithm parameter change; destination /cache/cch/Qwen3.6-27B-gdn-drrqr-dk96 was verified absent before start."
+    },
+    {
+      "claim": "The Dk96 checkpoint and real-weight Ascend activation passed independent audits.",
+      "evidence": "Build operation exec-0000000000000be9 exited 0. Manifest SHA256 a8f8f162f15fb6e4717ed509927d93c549a2ef01eca4c88e45e75cdf900b16fc declares target_head_k_dim=96, 48 exact non-contiguous linear-attention layers, 96 changed tensors and six changed shards. Independent checks found the sole config difference linear_key_head_dim 128->96, identical weight_map, all nine unmodified shards hardlinked, no changed shard hardlinked, and all 96 actual tensor shapes matching the manifest. Smoke operation exec-0000000000000bf0 exited 0; response was exactly ASCEND_DRRQR_OK; service log recorded head_k_dim=96; health/completion/service SHA256 6f250b26b3f55671d0530ab4d066629f7385a8f7e7ff73ab6aaf67009d634db1 / 031c4ff503bd3f16b9556e6175f14c3a2aa808026fe171bd288728a6818341c0 / 1cd67310096767ae530bf1b3ee630403e1a5767c8b74a417de5424d3f199926e. Container exited 0, OOMKilled=false, and NPU4-7 were empty after cleanup."
+    },
+    {
+      "claim": "The Dk96 treatment performance arm completed three accepted repetitions under the frozen serving workload.",
+      "evidence": "Operation exec-0000000000000bf2 exited 0. Every repetition completed 40/40 requests, zero failures and exactly 1024 output tokens per request. Run SHA256 values: 32a7d0136b98ac66056dd897c3516e14a8cc5af7a3f87ae5c649d0650f40e694, 91bcc4632fb251f95fe8ae422ae00b20ac8a3df76cc51b27803be4ae223b3190 and 9e95f1c810a44e00bd33132cddfa2b5046d5e57906708dc3c8eecf2d848fdfc6. Three-run means: TTFT 38302.675575 ms, TPOT 73.302878 ms, output throughput 126.298149 tok/s, measured duration 324.836207 s. Relative mean changes versus baseline were -0.401006%, -0.442686%, +0.380717% and -0.327093%; every baseline and Dk96 raw three-run interval overlaps, so repeat-separated serving benefit is not established. The performance container exited 0 without OOM, and NPU4-7 were empty before corrected quality operation exec-0000000000000c1b started. Attempt exec-0000000000000c15 was a 20 ms pre-runtime path error and produced no measurement."
+    },
+    {
+      "claim": "Dk96 LongBench-v2 run1 completed and passed independent artifact integrity checks.",
+      "evidence": "Run1 recorded 60/127 correct = 47.24409448818898%, with 127/127 successful requests and zero failures. Independent parsing found exactly 127 unique ok indexes equal to 0-126. Details SHA256 63f717d4bec3a3fbca2af77b7b5d5d8b51a0007fbdc86541e1d55e6be7c77d66 matched the summary record; summary SHA256 is 005f533016d8c63e68e77f664036f1d50cd76fd643f9d4c328e3c2d42a58b728. Operation exec-0000000000000c1b then advanced to LongBench-v2 run2."
+    },
+    {
+      "claim": "Dk96 LongBench-v2 run2 completed and passed independent artifact integrity checks.",
+      "evidence": "Run2 recorded 66/127 correct = 51.968503937007874%, with 127/127 successful requests and zero failures. Independent parsing found exactly 127 unique ok indexes equal to 0-126. Details SHA256 8f83c0477ed486a115bc9d4a90b8edad4085b2e109bf76d1704b23b28316e71d matched the summary record; summary SHA256 is 826c51296dd7f31bb8f68448a7ae65f79a3acda3eb3a36c6a3749ff68aaeb3a9. Operation exec-0000000000000c1b then advanced to LongBench-v2 run3."
+    },
+    {
+      "claim": "All three Dk96 LongBench-v2 repetitions completed, passed independent integrity audit and passed the preregistered dataset gate.",
+      "evidence": "Run3 recorded 62/127 correct = 48.818897637795274%, with 127/127 successful requests, zero failures and exact unique indexes 0-126. Details SHA256 59773f08263dd4366e1ccd5a12b0ac32bf5bed0b19ebabbb01af3da1fcb63ffc matched the summary record; summary SHA256 is acbc12b9f7aa71a7436b2c3ae882c0110d5934a60d4839df0c2af6507355e256. Across runs 60/127, 66/127 and 62/127, mean accuracy is 49.343832%, sample SD 2.405552 pp and delta versus baseline is +3.674541 pp, so LongBench-v2 passes. Operation exec-0000000000000c1b advanced to GSM8K run1."
+    },
+    {
+      "claim": "Dk96 GSM8K run1 completed and passed independent artifact integrity checks.",
+      "evidence": "Run1 recorded 1265/1319 correct = 95.90598938589841%, with 1319/1319 successful requests and zero failures. Independent parsing found exactly 1319 unique ok indexes equal to 0-1318. Details SHA256 6bdc392670d17a05a196356c4251d2857fc0951c1365ae3edf762a93a5205ac4 matched the summary record; summary SHA256 is b11d73a90aa7af15752f99b7fa7e32deee75ed37874353dcdae8553e9633dd12. This single run is not a gate decision; operation exec-0000000000000c1b advanced to run2."
+    },
+    {
+      "claim": "Dk96 GSM8K run2 completed and passed independent artifact integrity checks.",
+      "evidence": "Run2 recorded 1268/1319 correct = 96.13343442001516%, with 1319/1319 successful requests and zero failures. Independent parsing found exactly 1319 unique ok indexes equal to 0-1318. Details SHA256 6fffa04b79357e1cc9d179550e44b849732a3c1bcbb0cf03e751e5c10a3e08f9 matched the summary record; summary SHA256 is 19b6d7ae20f2bdb28315f5ae932bac842877486b0893a23972c666a7027ba751. The final gate still requires run3; operation exec-0000000000000c1b advanced to run3."
+    },
+    {
+      "claim": "Dk96 completed all repeated quality units but failed the preregistered GSM8K variability gate.",
+      "evidence": "Operation exec-0000000000000c1b exited 0 after 7,988,385 ms. GSM8K runs were 1265/1319, 1268/1319 and 1266/1319; each had 1319/1319 successful requests, zero errors, exact indexes 0-1318 and matching summary/detail hashes. Run3 summary/details SHA256 c836f122866709835377dfbb5e2e60964adac6dda8baa28c3ccd80ff9a37231d / 5e11e9cbffe39d3262fc6dd88df5fd5a622404f9670bc4a70ec71776cd59df29. Dk96 mean 96.007076% was 0.303260 pp below baseline mean 96.310336%, exceeding the baseline range 0.151630 pp. LongBench-v2 passed with +3.674541 pp. The Dk96 container exited 0 without OOM."
+    },
+    {
+      "claim": "The final report, derived summary and resource-release audit are complete and internally consistent.",
+      "evidence": "The final summarizer returned status=complete, decision=reject-dk64-and-dk96-under-frozen-quality-gate and errors=0. final-evidence-audit.json verified true with 9 performance runs, 18 quality summaries, 18 detail files, Dk96 container exited 0/OOMKilled=false, NPU4-7 empty and port8225 free; NPU0-3 were not inspected. Summary/report/audit SHA256 are 7f6ebb0e3fb667b173f9eacd8e4c31fcd3db0f829bab45adeabc0c5a39a9ed5e / 0915a8b4fb3f9fb3333665d313e5bdd57bb08a2b9e75095a8525bbca2fc4dc91 / 6e9990a64d4bd2d311e88553a845fcfec070c8c2407c9d1230b144fa6e47ede1."
+    }
+  ],
+  "pending": []
+}

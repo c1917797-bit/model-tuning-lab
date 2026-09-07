@@ -1,0 +1,213 @@
+{
+  "schema": "paper-to-ascend-experiment/v1",
+  "experiment_id": "state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+  "status": "complete-reject-dk64-and-dk96",
+  "paper": {
+    "title": "The Key to State Reduction in Linear Attention: A Rank-based Perspective",
+    "arxiv": "2602.04852v2",
+    "official_repository": "https://github.com/camail-official/LinearAttentionPruning",
+    "official_commit": "919d8667d951c385e08510bc1267c2e7049a4f56"
+  },
+  "scientific_question": "Does paper-aligned DRRQR reduction of Qwen3.6-27B GDN per-head Q/K dimension from 128 to 64, or the preregistered independent Dk96 fallback if Dk64 fails quality, improve complete-model serving performance on four Ascend 910B4 NPUs while retaining quality on the frozen delivered suite?",
+  "scope": {
+    "model": "Qwen3.6-27B",
+    "source_checkpoint": "/cache/efim/Qwen3.6-27B",
+    "source_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "source_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+    "source_tokenizer_config_sha256": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+    "accelerator": "4 x Ascend 910B4",
+    "host_npus": [4, 5, 6, 7],
+    "container_visible_npus": [0, 1, 2, 3],
+    "tensor_parallel_size": 4,
+    "cpu_set": "0-95",
+    "memory_limit": "48g",
+    "port": 8225,
+    "hccl_port_range": "26910-27010"
+  },
+  "resource_boundaries": {
+    "allowed": ["host NPU4-7", "CPU0-95", "port8225", "exact paper-prefixed experiment containers"],
+    "forbidden": ["host NPU0-3", "the external Qwen3.5 service and its port", "unrelated containers and processes"],
+    "release_requirement": "All exact experiment containers exited, port8225 closed, host NPU4-7 empty"
+  },
+  "treatment": {
+    "baseline": "unmodified Qwen3.6-27B, linear_key_head_dim=128",
+    "algorithm": "DRRQR with joint Q/K per-head selection",
+    "algorithm_head_k_dim": 64,
+    "fallback_algorithm_head_k_dim": 96,
+    "single_primary_switch": "checkpoint identity only",
+    "old_speed_oracle_excluded": true,
+    "l1_checkpoint_excluded": true,
+    "recovery_finetuning": "not part of the primary pre-RFT A/B; if needed it requires a separate treatment identity"
+  },
+  "calibration": {
+    "paper_original": "FineWeb-Edu, 16 batches, batch size 1, sequence length 2048",
+    "paper_original_available_locally": false,
+    "ascend_adaptation": "first 16 source-ordered rows of delivered LongBench-v2 data.json, tokenized with the target model and truncated to exactly 2048 tokens",
+    "source_dataset": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json",
+    "source_dataset_sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+    "frozen_token_ids": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/calibration/longbenchv2-16x2048-tokenids.jsonl",
+    "frozen_token_ids_sha256": "d146eede2a438154ea8c1bf9785dffa12f8a81e56fa370ff48be4d924e908111",
+    "samples": 16,
+    "tokens_per_sample": 2048,
+    "claim_boundary": "This is a documented platform adaptation and is not the paper's FineWeb-Edu calibration corpus."
+  },
+  "performance_contract": {
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "ignore_eos": true,
+    "warmups": 2,
+    "measured_repetitions": 3,
+    "metrics": ["TTFT", "TPOT", "E2E", "output_tokens_per_second", "duration", "batch_delay"]
+  },
+  "quality_contract": {
+    "datasets": {
+      "LongBench-v2": {
+        "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json",
+        "sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+        "rows": 127
+      },
+      "GSM8K": {
+        "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl",
+        "sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+        "rows": 1319
+      }
+    },
+    "repetitions": 3,
+    "seed": 0,
+    "temperature": 0,
+    "thinking": false,
+    "ignore_eos": false,
+    "ceval": "excluded by prior operator decision",
+    "niah_plus": "not run because authoritative delivered data is absent; no substitute"
+  },
+  "decision_contract": {
+    "frozen_before_treatment_measurement": true,
+    "primary_treatment": "Dk128 to Dk64, 50% Q/K state reduction",
+    "quality_gate": "For each dataset, baseline mean accuracy minus treatment mean accuracy must be no greater than that dataset's observed baseline three-run accuracy range.",
+    "quality_gate_reason": "Use measured repeat variability from the same model, evaluator and runtime contract rather than an invented universal tolerance.",
+    "serving_benefit_gate": "Treatment mean output_tokens_per_second must exceed baseline mean and treatment mean benchmark_duration_s must be below baseline mean. Report all TTFT and TPOT changes without selectively omitting regressions.",
+    "robustness_label": "Call a performance effect repeat-separated only when the complete baseline and treatment three-run ranges do not overlap in the beneficial direction; otherwise call it an observed mean change.",
+    "profile_gate": "A final adoption decision requires a same-workload native baseline-versus-selected-treatment profile or an explicit documented profiling limitation; paper H100 training microbenchmark numbers are contextual only.",
+    "fallback": "If Dk64 fails any dataset quality gate, reject Dk64 for the frozen workload and evaluate Dk96 (25% pruning) as a new treatment identity. A roughly 20% option may follow only after runtime shape/alignment validation.",
+    "forbidden": "Do not average across datasets to hide a failed dataset, do not pool HYPIC evidence, and do not claim paper-exact reproduction because the calibration corpus is adapted."
+  },
+  "runtime_identity": {
+    "vllm_ascend_git_head": "fde48fd743ce277361e4a743a5e2e97d02912875",
+    "capture_source_sha256": "fb476fd51b3b3456f9bee4620cabc6cf404ef78230fc9d94bb4c8661c633d82d",
+    "official_rrqr_source_sha256": "fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62",
+    "container_image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "container_image_digest": "quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
+  },
+  "execution_progress": {
+    "capture": {
+      "status": "complete",
+      "artifacts": 3072,
+      "coverage": "48 linear-attention layer IDs x 4 TP ranks x 16 samples",
+      "capture_root": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/calibration"
+    },
+    "drrqr_dk64_checkpoint": {
+      "status": "complete",
+      "path": "/cache/cch/Qwen3.6-27B-gdn-drrqr-dk64",
+      "manifest": "/cache/cch/Qwen3.6-27B-gdn-drrqr-dk64/drrqr_manifest.json",
+      "manifest_sha256": "2eaa9a14fffe3dc0cd37906e08bee857be7c9ce2ed761f693a99a0ef02d90c0d",
+      "changed_layers": 48,
+      "changed_tensors": 96,
+      "changed_shards": 6,
+      "unchanged_shards_hardlinked": true
+    },
+    "ascend_smoke": {
+      "status": "complete",
+      "operation_id": "exec-0000000000000aa5",
+      "health_http_status": 200,
+      "completion_http_status": 200,
+      "exact_response": "ASCEND_DRRQR_OK",
+      "runtime_kernel_evidence": "Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=64)"
+    },
+    "baseline_performance": {
+      "status": "complete",
+      "operation_id": "exec-0000000000000ab4",
+      "accepted_runs": 3,
+      "requests_per_run": 40,
+      "failed_requests": 0,
+      "mean": {
+        "ttft_ms": 38456.89009033182,
+        "tpot_ms": 73.62882260916483,
+        "output_tokens_per_second": 125.81913394499912,
+        "benchmark_duration_s": 325.90221148659475
+      },
+      "sample_standard_deviation": {
+        "ttft_ms": 1818.9738487530847,
+        "tpot_ms": 1.88416753282451,
+        "output_tokens_per_second": 5.030646886318252,
+        "benchmark_duration_s": 13.338445170849656
+      }
+    },
+    "baseline_quality": {
+      "status": "complete",
+      "operation_id": "exec-0000000000000acd",
+      "accepted_runs": 6,
+      "longbenchv2_mean_accuracy_pct": 45.669291338582674,
+      "gsm8k_mean_accuracy_pct": 96.31033611372251,
+      "resume_behavior": "per-sample JSONL; only indexes without an accepted ok=true row are retried"
+    },
+    "drrqr_dk64_formal": {
+      "status": "complete-rejected-by-gsm8k-gate",
+      "performance_operation_id": "exec-0000000000000b2a",
+      "quality_operation_id": "exec-0000000000000b5a",
+      "longbenchv2_gate_pass": true,
+      "gsm8k_gate_pass": false,
+      "decision": "reject Dk64 for the frozen workload"
+    },
+    "drrqr_dk96_checkpoint": {
+      "status": "complete",
+      "path": "/cache/cch/Qwen3.6-27B-gdn-drrqr-dk96",
+      "manifest_sha256": "a8f8f162f15fb6e4717ed509927d93c549a2ef01eca4c88e45e75cdf900b16fc",
+      "changed_layers": 48,
+      "changed_tensors": 96,
+      "changed_shards": 6,
+      "unchanged_shards_hardlinked": true
+    },
+    "drrqr_dk96_performance": {
+      "status": "complete",
+      "operation_id": "exec-0000000000000bf2",
+      "accepted_runs": 3,
+      "requests_per_run": 40,
+      "failed_requests": 0,
+      "repeat_separated": false
+    },
+    "drrqr_dk96_quality": {
+      "status": "complete-rejected-by-gsm8k-gate",
+      "operation_id": "exec-0000000000000c1b",
+      "longbenchv2_runs_complete": 3,
+      "longbenchv2_mean_accuracy_pct": 49.343832020997375,
+      "longbenchv2_delta_vs_baseline_pp": 3.674540682414701,
+      "longbenchv2_gate_pass": true,
+      "gsm8k_runs_complete": 3,
+      "gsm8k_run1_correct": 1265,
+      "gsm8k_run1_accuracy_pct": 95.90598938589841,
+      "gsm8k_run2_correct": 1268,
+      "gsm8k_run2_accuracy_pct": 96.13343442001516,
+      "gsm8k_run3_correct": 1266,
+      "gsm8k_run3_accuracy_pct": 95.98180439727066,
+      "gsm8k_mean_accuracy_pct": 96.00707606772808,
+      "gsm8k_delta_vs_baseline_pp": -0.3032600459944206,
+      "gsm8k_baseline_range_pp": 0.15163002274449866,
+      "gsm8k_gate_pass": false,
+      "decision": "reject Dk96 for the frozen workload; profiling not started by preregistered rule",
+      "resume_behavior": "per-sample JSONL; only indexes without an accepted ok=true row are retried"
+    },
+    "finalization": {
+      "quality_operation_id": "exec-0000000000000c1b",
+      "quality_operation_exit_code": 0,
+      "quality_operation_duration_ms": 7988385,
+      "summary": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/state-reduction-summary.json",
+      "report": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/STATE_REDUCTION_PIERCING_REPORT.md",
+      "final_evidence_audit": "/cache/cch/state-reduction-qwen36-formal-npu4-7-tp4-20260906/final-evidence-audit.json",
+      "final_evidence_audit_verified": true,
+      "resource_release": "Dk96 container exited 0, OOMKilled=false; NPU4-7 empty; port8225 free; NPU0-3 not inspected"
+    }
+  },
+  "created_at_utc": "2026-09-06T18:56:29Z"
+}

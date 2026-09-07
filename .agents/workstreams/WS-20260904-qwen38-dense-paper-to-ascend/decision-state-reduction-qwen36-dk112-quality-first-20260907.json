@@ -1,0 +1,17 @@
+{
+  "schema": "workstream-decision/v1",
+  "experiment_id": "state-reduction-qwen36-dk112-quality-first-20260907",
+  "status": "pending",
+  "reason": "Dk112 checkpoint construction and structural audit passed, but no authorized NPU runtime, quality or performance measurement exists yet.",
+  "allowed_claims": [
+    "Dk112 is a preregistered conservative candidate following rejected Dk64 and Dk96 experiments.",
+    "The Dk112 checkpoint has the intended Dk128-to-Dk112 structural transformation across all 48 GDN layers."
+  ],
+  "forbidden_claims": [
+    "Dk112 preserves quality.",
+    "Dk112 improves serving performance.",
+    "DRRQR is lossless on Qwen3.6-27B.",
+    "The paper has been reproduced exactly."
+  ],
+  "next_gate": "After explicit resource authorization, run the real-weight Dk112 smoke on exactly NPU4-7; then run fresh baseline and treatment quality before performance."
+}

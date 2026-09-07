@@ -107,6 +107,15 @@ def main() -> int:
             assert not list(Path(directory).glob("*.pt")), "directory alone armed capture"
 
             os.environ["VLLM_ASCEND_GDN_RRQR_CAPTURE_ENABLE"] = "1"
+            capture(
+                tensor,
+                prefix="layer.0",
+                tp_rank=0,
+                local_key_dim=2,
+                head_k_dim=2,
+            )
+            assert not list(Path(directory).glob("*.pt")), "capture armed without sentinel"
+            (Path(directory) / ".armed").touch()
             for _ in range(2):
                 capture(
                     tensor,

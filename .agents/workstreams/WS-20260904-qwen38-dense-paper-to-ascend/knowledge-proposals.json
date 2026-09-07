@@ -124,6 +124,22 @@
     {
       "title": "Make an independent raw-artifact audit the completion boundary",
       "lesson": "A renderer's complete status is insufficient. Before adoption, independently verify every planned performance and quality unit, raw row counts, complete unique indexes, zero failures, response and artifact hashes, evaluator and dataset identity, mechanism activation, and resource release."
+    },
+    {
+      "title": "Derive hybrid treatment layers from model configuration",
+      "lesson": "For hybrid-attention checkpoints, derive and validate the treatment layer IDs from the declared layer_types. A correct layer count does not imply contiguous layer numbering."
+    },
+    {
+      "title": "Name calibration substitutions as platform adaptations",
+      "lesson": "When the paper's calibration corpus is unavailable, freeze and hash the substitute under a new adaptation identity. Mechanism testing may proceed, but the result is not paper-exact reproduction."
+    },
+    {
+      "title": "Gate expensive profiling after correctness",
+      "lesson": "If the candidate fails a preregistered quality gate, record profiling as intentionally skipped. Profiling a rejected candidate is a new diagnostic question, not missing evidence for the completed adoption decision."
+    },
+    {
+      "title": "Preserve negative operating points",
+      "lesson": "A milder pruning ratio is a separate treatment. Retain both primary and fallback results so a later candidate cannot overwrite an inconvenient quality failure or inherit its evidence."
     }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "schema": "workstream-decision/v1",
+  "experiment_id": "state-reduction-qwen36-formal-npu4-7-tp4-20260906",
+  "status": "reject",
+  "reason": "Dk64 (50% state reduction) and the preregistered independent Dk96 fallback (25%) are structurally valid and execute on Ascend, but both fail the frozen GSM8K baseline-variability gate. Dk64 loses 0.202173 pp and Dk96 loses 0.303260 pp versus a baseline three-run range of 0.151630 pp. Dk96's serving means move favorably by only 0.33-0.44%, while all raw three-run intervals overlap. Neither treatment is adoptable for this frozen workload. Native profiling was intentionally not started because the quality gate failed.",
+  "allowed_claims": [
+    "The official paper and code identity have been verified.",
+    "A local calibration adaptation is explicitly frozen and is not represented as FineWeb-Edu.",
+    "NPU4-7 were free at the recorded preflight.",
+    "The Dk64 treatment changes 48 linear-attention layers and executes head_k_dim=64 on Ascend.",
+    "The baseline and Dk64 performance arms each have three accepted 40/40 fixed-output repetitions.",
+    "Dk64 performance mean directions are favorable, but their repeated ranges overlap and stable separation is not established.",
+    "All six Dk64 quality repetitions are complete and independently hash/count/index audited.",
+    "Dk64 passes the LongBench-v2 gate but fails the GSM8K baseline-variability gate and is rejected for adoption.",
+    "The independent Dk96 checkpoint changes the same 48 linear-attention layers to head_k_dim=96 and passed structural and real-weight Ascend smoke audits.",
+    "The baseline and Dk96 performance arms each have three accepted 40/40 fixed-output repetitions; Dk96 mean directions are slightly favorable but every repeated range overlaps.",
+    "Dk96 LongBench-v2 has three complete, exact-index and hash-audited repetitions and passes its preregistered dataset gate.",
+    "Dk96 GSM8K has three complete, exact-index and hash-audited repetitions and fails its preregistered dataset gate.",
+    "The paper mechanism is feasible on this Qwen3.6/Ascend stack, but neither paper-exact reproduction nor a stable serving benefit was established.",
+    "The final evidence audit verified all expected artifacts and resource release."
+  ],
+  "forbidden_claims": [
+    "The paper has been reproduced.",
+    "DRRQR generally improves or preserves Qwen3.6-27B quality.",
+    "Dk64 establishes a stable Ascend serving improvement.",
+    "Dk64 is lossless or adoptable.",
+    "Dk96 is lossless or adoptable.",
+    "The paper's H100 training sequence-mixer 1.32x is directly comparable to this Ascend full-model serving experiment.",
+    "The absence of profiling after a failed quality gate proves anything about operator-level speed."
+  ],
+  "next_gate": "No gate remains for this frozen experiment. Maintainer review may accept the rejection and knowledge proposals. LoRA recovery, another calibration corpus or another pruning ratio requires a new experiment identity."
+}

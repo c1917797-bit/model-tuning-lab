@@ -1,0 +1,33 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "state-reduction-qwen36-dk112-quality-first-20260907",
+  "status": "checkpoint-audited-runtime-evidence-pending",
+  "accepted": [
+    {
+      "claim": "The Dk112 checkpoint was built by the pinned Strong RRQR converter without NPU use.",
+      "evidence": "Build operation exec-0000000000000cb7 exited 0 after 190904 ms; manifest SHA256 033eac4d29e12e9f219b213f12a15ebd3217e183f353c43c2200bb47f149243a."
+    },
+    {
+      "claim": "The derived checkpoint has the intended bounded structural difference.",
+      "evidence": "/cache/cch/state-reduction-qwen36-dk112-quality-first-20260907/checkpoint-structural-audit.json, SHA256 0d9efd2418d9b34e3ef16b78949c366d79992b587bc53cc6110b7fd058e6a12c; audit operation exec-0000000000000cbb exited 0 and verified Dk112, 48 layers, 96 tensors, six rewritten shards and nine unchanged hardlinked shards."
+    },
+    {
+      "claim": "The Dk112 runner is offline-valid at the syntax and diff level.",
+      "evidence": "Operation exec-0000000000000cbc: py_compile and git diff --check exited 0."
+    }
+  ],
+  "pending": [
+    "Dk112 real-weight smoke and head_k_dim=112 activation",
+    "fresh baseline quality repetitions",
+    "Dk112 quality repetitions",
+    "quality-gate decision",
+    "conditional performance and profiling evidence",
+    "resource-release audit"
+  ],
+  "forbidden_evidence_reuse": [
+    "Do not reuse the prior experiment's baseline as the fresh Dk112 baseline.",
+    "Do not pool Dk64 or Dk96 measurements with Dk112.",
+    "Do not use LongBench calibration membership as proof of generalization."
+  ],
+  "blocked_action": "NPU4-7 smoke/quality/performance were not started because the current task scope excludes operating that workload. Explicit renewed authorization is required."
+}
