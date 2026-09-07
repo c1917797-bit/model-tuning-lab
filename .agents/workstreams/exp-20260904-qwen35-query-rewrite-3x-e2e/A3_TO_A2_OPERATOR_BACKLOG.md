@@ -87,3 +87,19 @@ manifest SHA256:
 This closes all existing MMAR-decomposition variants. P0 is now strictly a
 materially new ASCEND910B arch22 MMAR kernel/tiling optimization for the
 observed BF16 M=1 shapes, not another enable/disable or prefix split.
+
+## M=1 matmul-core scan closure
+
+The first P0 kernel experiment is also closed. Reducing the physical launch
+width violated arch22 Mc2SyncAll/HCCL participation and corrupted output.
+After separating full launch width from matmul `usedCoreNum`, real NPU0-3
+scans covered 8, 12, 16, 18, 20 and 22 matmul cores. None passed correctness
+plus the 1.02x all-shape gate; correct candidates regressed at least one of
+the K=1536/K=4352 shapes.
+
+Do not repeat core-count tuning. The remaining P0 implementation target is the
+fixed M=1 HCCL orchestration path itself: reduce or overlap the
+AllReduce/Commit/Wait/Finalize cost, or amortize it through a materially new
+fusion with positive whole-model economics. Full launch participation, BF16
+equivalence, TP4 correctness, and exact-shape microbench gates remain
+mandatory.

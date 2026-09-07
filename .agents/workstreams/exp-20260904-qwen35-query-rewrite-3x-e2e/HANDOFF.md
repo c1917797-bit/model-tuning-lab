@@ -2996,3 +2996,49 @@ restarted as `qwen35_gdn_proj_fusion_npu03_v5` on physical NPU0-3.
 Both selective decomposition branches are now closed. Preserve MMAR for both
 real shape families and continue with a materially new A2/910B4 MMAR kernel
 or tiling implementation.
+
+## ASCEND910B M=1 MMAR core-count experiment rejected
+
+The first source experiment reduced the physical kernel launch width together
+with the matmul core count. Real NPU0-3 validation showed severe output
+corruption (candidate maximum absolute errors reached 304 and 536), because
+the arch22 kernel executes Mc2SyncAll and HCCL post-processing on every
+launched block. That implementation is invalid and must not be reused.
+
+Operator commit `138a920157995613eb58c8ce9de7ec9f1f51633e` repaired the
+contract by preserving the full platform launch width and changing only the
+matmul tiling core count for M=1. The official host suite passed 109/109.
+The resulting isolated package has SHA256
+`420275e89e83d2e42b82152fc52db87f470b2a5372c7a8d7746200b31569c640`
+and is installed under
+`/cache/cch/qwen35-mmar-fullsync-arch22-custom-opp-v1`.
+
+Two real BF16 TP4 scans then ran on physical NPU0-3 with 40 warmups, 200
+iterations, seven repeats, median maximum-rank latency, no quantization, and
+the exact profiled M=1 shapes. Correctness compares the complete fused output
+with the frozen default output under twice the default fused-vs-unfused BF16
+error envelope.
+
+| Matmul cores | Correct | K1536 speedup | K4352 speedup | Decision |
+|---:|:---:|---:|---:|---|
+| 8 | yes | 0.974754x | 0.914781x | reject performance |
+| 12 | yes | 1.036689x | 0.898306x | reject performance |
+| 16 | no | 0.994298x | 0.986970x | reject correctness/performance |
+| 18 | yes | 0.947797x | 0.988617x | reject performance |
+| 20 | yes | 0.977601x | 0.972847x | reject performance |
+| 22 | no | 0.997346x | 1.008609x | reject correctness/performance |
+
+No label passed the predefined requirement that both shapes be correct and at
+least 1.02x faster. Do not spend an E2E matrix on any of these settings and do
+not repeat launch-width reduction. The experiment establishes that the
+remaining M=1 cost is not solved by allocating fewer matmul cores; the next
+kernel treatment must reduce or overlap the per-call HCCL
+AllReduce/Commit/Wait/Finalize path while retaining full sync participation.
+
+Immutable evidence:
+
+- `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-fullsync-core-scan-v2-20260907T000800Z`
+- `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-fullsync-core-scan-v3-20260907T001000Z`
+
+Both runner operations exited successfully, all evidence manifests were
+generated, NPU0-3 were released, and the workload on NPU4-7 was unchanged.

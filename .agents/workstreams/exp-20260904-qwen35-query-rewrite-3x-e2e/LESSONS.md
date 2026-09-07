@@ -405,3 +405,24 @@ median gains cannot promote a treatment for this objective.
   exact-shape microbench correctness before E2E.
 - MLP-down screen manifest SHA256:
   `78e15989e9fcb9580428c702fc83fed65535b93db22455953ca3f8ac8d6886d8`.
+
+## M=1 MMAR core-count and launch-participation lesson
+
+- On arch22, every launched block participates in `Mc2SyncAll` and HCCL
+  post-processing. Reducing `blockDim` together with matmul cores is not a
+  performance tuning shortcut; it produced grossly corrupted outputs on real
+  910B4 hardware.
+- Preserve the full platform launch width. If matmul tiling uses fewer cores,
+  keep launch participation separate from `usedCoreNum` and prove complete
+  fused-output correctness against the frozen default.
+- A broad real scan of 8/12/16/18/20/22 matmul cores found no candidate that
+  was both correct and at least 1.02x faster on the two profiled M=1 shapes.
+  The only isolated gain, 1.036689x for 12 cores at K=1536, came with a
+  0.898306x result at K=4352 and is unusable for the shared Qwen path.
+- Do not repeat core-count or physical launch-width tuning unchanged. The
+  dominant opportunity is fixed per-call HCCL orchestration
+  (AllReduce/Commit/Wait/Finalize), or a materially different fusion that
+  amortizes it while preserving BF16 semantics and full synchronization.
+- Evidence roots are the v2 and v3 full-sync scans recorded in HANDOFF.md;
+  package SHA256 is
+  `420275e89e83d2e42b82152fc52db87f470b2a5372c7a8d7746200b31569c640`.
