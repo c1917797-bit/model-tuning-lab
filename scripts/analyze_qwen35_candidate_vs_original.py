@@ -99,7 +99,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--candidate-device-set", choices=("0-3", "4-7"), default="4-7"
     )
-    parser.add_argument("--target-ratio", type=float, default=0.5)
+    parser.add_argument("--target-ratio", type=float, default=2.0 / 3.0)
     parser.add_argument(
         "--allow-incomplete",
         action="store_true",

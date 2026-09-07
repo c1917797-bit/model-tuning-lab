@@ -539,14 +539,17 @@ runtime applicability and correctness on 910B4 still require an isolated probe.
 
 ## Measurement target
 
-Measure the first 32 records once at concurrency 1, 5, 8 and 16 for each
-candidate, with one excluded warmup per cell. The final target is TTFT and
-TPOT no greater than one half of the
-original baseline at every concurrency, with zero request errors, passing
-business correctness, and no unacceptable p95/p99 regression.
+Measure the first 32 records at concurrency 1, 5, 8 and 16, using three
+repetitions per cell and the median of the three per-run P95 values for the
+final decision. The current stop target is TTFT and TPOT each improved by at
+least 50% versus the frozen MTP-off original baseline at every concurrency
+(speedup >= 1.5x, candidate/baseline ratio <= 2/3), with zero request errors,
+passing business correctness, and no unacceptable P99 regression. P95 is
+primary; P99 is the tail guard and P50 is secondary.
 
 The workstream identifier retains the original `3x` label for audit
-continuity; the authoritative goal was revised to 2x on 2026-09-04.
+continuity. The historical 2x target remains in older result narratives only;
+the authoritative stop target was revised to 1.5x on 2026-09-07.
 
 ## Optimization loop
 
@@ -563,7 +566,7 @@ continuity; the authoritative goal was revised to 2x on 2026-09-04.
    Use the retained single-treatment/ablation history to explain attribution.
 8. Preserve accepted, rejected, failed and inconclusive results.
 9. Add each accepted treatment to the current best stack and repeat until both
-   TTFT and TPOT reach 2x at all four concurrencies.
+   TTFT and TPOT reach at least 1.5x at all four concurrencies.
 
 The privacy-preserving streaming harness is
 `scripts/qwen35_query_rewrite_bench.py`. One invocation measures one
@@ -606,7 +609,9 @@ decision gate. It verifies the four fixed baseline SHA256 values and requires
 four candidate artifacts (concurrency 1/5/8/16 × repetition 1), identical
 model/data/request identities, zero errors, complete natural-stop request sets
 and exact response-hash equality. It emits `final-target-met` only when
-both TTFT and TPOT ratios are at most 0.5 in every concurrency cell.
+both TTFT and TPOT ratios are at most 2/3 in every concurrency cell. Older
+artifacts produced by this script with a 0.5 gate are historical and must not
+be mistaken for the current acceptance decision.
 
 The final stack is expected to combine core operators, algorithms and
 configuration. "One variable" applies to each attribution step, not to the

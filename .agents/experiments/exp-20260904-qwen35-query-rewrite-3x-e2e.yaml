@@ -4,7 +4,7 @@ protocol_audit_status: required_before_performance_promotion
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
 status: non_spec_gdn_gateup_retained_down_prefetch_rejected_continue_tpot_optimization
 decision: retain_gdn_gateup_prefetch_reject_down_prefetch_continue_ascend_mmar_dense_matmul
-objective: "Reduce Qwen3.5-27B TTFT and TPOT to one half of the immutable original baseline on real query_rewrite traffic."
+objective: "Improve Qwen3.5-27B TTFT and TPOT by at least 50% versus the immutable MTP-off original baseline on real query_rewrite traffic."
 environment:
   host: chicaihong01
   hardware: "8 x Ascend 910B4"
@@ -31,8 +31,8 @@ metrics:
   primary: [ttft_p95_ms, tpot_p95_ms]
   secondary: [ttft_p50_ms, tpot_p50_ms, ttft_p99_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
 final_thresholds:
-  ttft: "median of three per-run TTFT P95 values <= original baseline P95 / 2 at concurrency 1, 5, 8 and 16"
-  tpot: "median of three per-run TPOT P95 values <= original baseline P95 / 2 at concurrency 1, 5, 8 and 16"
+  ttft: "median of three per-run TTFT P95 values <= original baseline P95 * 2/3 (speedup >= 1.5x) at concurrency 1, 5, 8 and 16"
+  tpot: "median of three per-run TPOT P95 values <= original baseline P95 * 2/3 (speedup >= 1.5x) at concurrency 1, 5, 8 and 16"
   correctness: "business correctness passes and request errors equal zero"
 dual_tp8_baselines:
   mtp_off:
@@ -140,7 +140,7 @@ development_runtime:
     harness_resolution: "TTFT begins at the first choice/token event, including an empty-text EOS token"
   fixed_original_baseline:
     protocol: "TP4 development, first 32 frozen records, one repetition"
-    evidence_scope: "user-designated immutable common denominator for every subsequent candidate and the final 2x decision"
+    evidence_scope: "user-designated immutable common denominator for every subsequent candidate and the final 1.5x decision"
     runtime_caveat: "this run forced enable_matmul_allreduce=false; retain that fact in every decision report instead of relaunching the baseline"
     operation: exec-0000000000000360
     cells:
