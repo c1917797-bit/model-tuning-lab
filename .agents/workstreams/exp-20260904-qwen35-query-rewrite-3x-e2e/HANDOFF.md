@@ -3392,3 +3392,12 @@ before `MatmulAllReduceAddRMSNormPass` when enabled, and is not duplicated
 when already present. This closes the pure-Python control-flow/configuration
 gap behind t5-t8, but it does not replace the pending real 910B4 startup,
 correctness, profiling, or E2E gates.
+
+The historical paired-quality evidence was revalidated on 2026-09-07: all
+four recorded SHA256 values still match and each raw/derived file is mode
+`0600`. The dataset audit again found 357/357 empty `answer` fields. For the
+final bounded-MMAR monkeypatch, capture 32 question-length-quantile samples
+against the same-runtime retained cumulative control. Byte-identical responses
+pass automatically; otherwise manually review every differing pair and require
+zero material regressions. The earlier 16/16 sampled pass remains control
+history and must not be generalized to the final candidate.

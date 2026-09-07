@@ -35,6 +35,15 @@ final_thresholds:
   ttft: "median of three per-run TTFT P95 values <= original baseline P95 * 2/3 (speedup >= 1.5x) at concurrency 1, 5, 8 and 16"
   tpot: "median of three per-run TPOT P95 values <= original baseline P95 * 2/3 (speedup >= 1.5x) at concurrency 1, 5, 8 and 16"
   correctness: "business correctness passes and request errors equal zero"
+quality_gate:
+  protocol: "paired final monkeypatch candidate versus the same-runtime retained cumulative control"
+  sample_count: 32
+  selection: "question-character-length quantiles over all 357 dataset rows"
+  invariants: ["temperature 0", "seed 1024", "identical prompts and sample indices", "natural EOS"]
+  privacy: "raw prompts and responses stay under /cache with mode 0600 and are never committed"
+  automatic_pass: "all 32 responses are byte-identical"
+  manual_pass: "when any response differs, every differing pair is reviewed for retained intent, facts, constraints, completeness and readability; material regressions must equal zero"
+  evidence_boundary: "all 357 answer fields are empty, so answer similarity and cross-run response hashes alone cannot prove 精读无损"
 dual_tp8_baselines:
   mtp_off:
     run_id: tp8-user-baseline-v5-20260905T184600Z
