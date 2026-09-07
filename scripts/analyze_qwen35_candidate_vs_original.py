@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare one quick32 candidate with the immutable user-designated baseline."""
+"""Compare a repeated quick32 candidate with the immutable frozen baseline."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from statistics import median
 
 CONCURRENCIES = (1, 5, 8, 16)
 DEFAULT_ORIGINAL_DIR = Path(
@@ -35,18 +36,19 @@ def digest_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def cell_path(root: Path, concurrency: int) -> Path:
-    return root / f"c{concurrency}-r1.json"
+def cell_path(root: Path, concurrency: int, repeat_index: int = 1) -> Path:
+    return root / f"c{concurrency}-r{repeat_index}.json"
 
 
 def load_cell(
     root: Path,
     concurrency: int,
+    repeat_index: int = 1,
     *,
     original: bool,
     require_success: bool = True,
 ) -> dict:
-    path = cell_path(root, concurrency)
+    path = cell_path(root, concurrency, repeat_index)
     if original:
         actual_digest = digest_file(path)
         expected_digest = ORIGINAL_SHA256[concurrency]
@@ -59,7 +61,7 @@ def load_cell(
     expected = {
         "schema": "qwen35-query-rewrite-benchmark/v1",
         "concurrency": concurrency,
-        "repeat_index": 1,
+        "repeat_index": repeat_index,
         "natural_eos": True,
         **EXPECTED_IDENTITY,
     }
@@ -83,9 +85,10 @@ def load_cell(
     ):
         raise ValueError(f"{path}: invalid response hash set")
     for metric in ("ttft_ms", "tpot_ms", "e2e_ms"):
-        value = row.get(metric, {}).get("p50")
-        if not isinstance(value, (int, float)) or value <= 0:
-            raise ValueError(f"{path}: invalid {metric}.p50")
+        for percentile in ("p50", "p95", "p99"):
+            value = row.get(metric, {}).get(percentile)
+            if not isinstance(value, (int, float)) or value <= 0:
+                raise ValueError(f"{path}: invalid {metric}.{percentile}")
     return row
 
 
@@ -100,6 +103,13 @@ def parse_args() -> argparse.Namespace:
         "--candidate-device-set", choices=("0-3", "4-7"), default="4-7"
     )
     parser.add_argument("--target-ratio", type=float, default=2.0 / 3.0)
+    parser.add_argument("--repetitions", type=int, default=3)
+    parser.add_argument(
+        "--p99-max-ratio",
+        type=float,
+        default=1.0,
+        help="maximum candidate/baseline ratio for median per-run P99",
+    )
     parser.add_argument(
         "--allow-incomplete",
         action="store_true",
@@ -118,6 +128,10 @@ def main() -> int:
     args = parse_args()
     if not 0 < args.target_ratio <= 1:
         raise ValueError("target ratio must be in (0, 1]")
+    if args.repetitions <= 0:
+        raise ValueError("repetitions must be positive")
+    if args.p99_max_ratio <= 0:
+        raise ValueError("P99 maximum ratio must be positive")
 
     cells: dict[str, dict] = {}
     artifact_sha256: dict[str, str] = {}
@@ -125,15 +139,61 @@ def main() -> int:
     performance_pass = True
     runtime_pass = True
     for concurrency in CONCURRENCIES:
-        original_path = cell_path(args.original_dir, concurrency)
-        candidate_path = cell_path(args.candidate_dir, concurrency)
-        original = load_cell(args.original_dir, concurrency, original=True)
+        original_path = cell_path(args.original_dir, concurrency, 1)
+        original = load_cell(
+            args.original_dir, concurrency, 1, original=True
+        )
         artifact_sha256[f"original/c{concurrency}-r1.json"] = digest_file(
             original_path
         )
-        if not candidate_path.exists():
+        repetitions = []
+        missing_paths = []
+        for repeat_index in range(1, args.repetitions + 1):
+            candidate_path = cell_path(
+                args.candidate_dir, concurrency, repeat_index
+            )
+            if not candidate_path.exists():
+                missing_paths.append(str(candidate_path))
+                continue
+            candidate = load_cell(
+                args.candidate_dir,
+                concurrency,
+                repeat_index,
+                original=False,
+                require_success=not args.allow_incomplete,
+            )
+            candidate_success = (
+                candidate.get("errors") == 0
+                and candidate.get("completed") == 32
+                and candidate.get("finish_reasons") == {"stop": 32}
+                and len(candidate["response_sha256"]) == 32
+            )
+            mismatches = sum(
+                left != right
+                for left, right in zip(
+                    original["response_sha256"],
+                    candidate["response_sha256"],
+                )
+            )
+            repetitions.append(
+                {
+                    "repeat_index": repeat_index,
+                    "success": candidate_success,
+                    "response_hash_mismatches": mismatches,
+                    "ttft_p50_ms": float(candidate["ttft_ms"]["p50"]),
+                    "tpot_p50_ms": float(candidate["tpot_ms"]["p50"]),
+                    "ttft_p95_ms": float(candidate["ttft_ms"]["p95"]),
+                    "tpot_p95_ms": float(candidate["tpot_ms"]["p95"]),
+                    "ttft_p99_ms": float(candidate["ttft_ms"]["p99"]),
+                    "tpot_p99_ms": float(candidate["tpot_ms"]["p99"]),
+                }
+            )
+            artifact_sha256[
+                f"candidate/c{concurrency}-r{repeat_index}.json"
+            ] = digest_file(candidate_path)
+        if missing_paths:
             if not args.allow_incomplete:
-                raise FileNotFoundError(candidate_path)
+                raise FileNotFoundError(missing_paths[0])
             runtime_pass = False
             performance_pass = False
             correctness_pass = False
@@ -143,56 +203,77 @@ def main() -> int:
                 "runtime_gate_met": False,
                 "performance_target_met": False,
                 "correctness_exact_hash_match": None,
+                "missing_artifacts": missing_paths,
+                "repetitions": repetitions,
             }
             continue
-        candidate = load_cell(
-            args.candidate_dir,
-            concurrency,
-            original=False,
-            require_success=not args.allow_incomplete,
-        )
-        candidate_success = (
-            candidate.get("errors") == 0
-            and candidate.get("completed") == 32
-            and candidate.get("finish_reasons") == {"stop": 32}
-            and len(candidate["response_sha256"]) == 32
-        )
+        candidate_success = all(row["success"] for row in repetitions)
         runtime_pass = runtime_pass and candidate_success
         mismatches = sum(
-            left != right
-            for left, right in zip(
-                original["response_sha256"], candidate["response_sha256"]
-            )
+            row["response_hash_mismatches"] for row in repetitions
         )
         cell_correct = mismatches == 0 if candidate_success else None
-        correctness_pass = correctness_pass and cell_correct
-        original_ttft = float(original["ttft_ms"]["p50"])
-        candidate_ttft = float(candidate["ttft_ms"]["p50"])
-        original_tpot = float(original["tpot_ms"]["p50"])
-        candidate_tpot = float(candidate["tpot_ms"]["p50"])
+        correctness_pass = correctness_pass and bool(cell_correct)
+        original_ttft_p50 = float(original["ttft_ms"]["p50"])
+        candidate_ttft_p50 = median(
+            row["ttft_p50_ms"] for row in repetitions
+        )
+        original_tpot_p50 = float(original["tpot_ms"]["p50"])
+        candidate_tpot_p50 = median(
+            row["tpot_p50_ms"] for row in repetitions
+        )
+        original_ttft = float(original["ttft_ms"]["p95"])
+        candidate_ttft = median(row["ttft_p95_ms"] for row in repetitions)
+        original_tpot = float(original["tpot_ms"]["p95"])
+        candidate_tpot = median(row["tpot_p95_ms"] for row in repetitions)
+        original_ttft_p99 = float(original["ttft_ms"]["p99"])
+        candidate_ttft_p99 = median(
+            row["ttft_p99_ms"] for row in repetitions
+        )
+        original_tpot_p99 = float(original["tpot_ms"]["p99"])
+        candidate_tpot_p99 = median(
+            row["tpot_p99_ms"] for row in repetitions
+        )
         ttft_ratio = candidate_ttft / original_ttft
         tpot_ratio = candidate_tpot / original_tpot
+        ttft_p99_ratio = candidate_ttft_p99 / original_ttft_p99
+        tpot_p99_ratio = candidate_tpot_p99 / original_tpot_p99
+        p99_guard_met = (
+            ttft_p99_ratio <= args.p99_max_ratio
+            and tpot_p99_ratio <= args.p99_max_ratio
+        )
         cell_performance_pass = candidate_success and (
             ttft_ratio <= args.target_ratio
             and tpot_ratio <= args.target_ratio
+            and p99_guard_met
         )
         performance_pass = performance_pass and cell_performance_pass
         cells[str(concurrency)] = {
             "status": "complete" if candidate_success else "failed",
             "measurement_valid": candidate_success,
             "runtime_gate_met": candidate_success,
-            "completed_requests": candidate.get("completed"),
-            "errors": candidate.get("errors"),
-            "error_types": candidate.get("error_types", []),
-            "error_reasons": candidate.get("error_reasons", {}),
-            "original_ttft_p50_ms": original_ttft,
-            "candidate_ttft_p50_ms": candidate_ttft,
-            "ttft_ratio": ttft_ratio,
-            "ttft_improvement_x": original_ttft / candidate_ttft,
-            "original_tpot_p50_ms": original_tpot,
-            "candidate_tpot_p50_ms": candidate_tpot,
-            "tpot_ratio": tpot_ratio,
-            "tpot_improvement_x": original_tpot / candidate_tpot,
+            "repetitions": repetitions,
+            "original_ttft_p50_ms": original_ttft_p50,
+            "candidate_median_ttft_p50_ms": candidate_ttft_p50,
+            "ttft_p50_ratio": candidate_ttft_p50 / original_ttft_p50,
+            "original_tpot_p50_ms": original_tpot_p50,
+            "candidate_median_tpot_p50_ms": candidate_tpot_p50,
+            "tpot_p50_ratio": candidate_tpot_p50 / original_tpot_p50,
+            "original_ttft_p95_ms": original_ttft,
+            "candidate_median_ttft_p95_ms": candidate_ttft,
+            "ttft_p95_ratio": ttft_ratio,
+            "ttft_p95_improvement_x": original_ttft / candidate_ttft,
+            "original_tpot_p95_ms": original_tpot,
+            "candidate_median_tpot_p95_ms": candidate_tpot,
+            "tpot_p95_ratio": tpot_ratio,
+            "tpot_p95_improvement_x": original_tpot / candidate_tpot,
+            "original_ttft_p99_ms": original_ttft_p99,
+            "candidate_median_ttft_p99_ms": candidate_ttft_p99,
+            "ttft_p99_ratio": ttft_p99_ratio,
+            "original_tpot_p99_ms": original_tpot_p99,
+            "candidate_median_tpot_p99_ms": candidate_tpot_p99,
+            "tpot_p99_ratio": tpot_p99_ratio,
+            "p99_guard_met": p99_guard_met,
             "response_hash_mismatches_observed": mismatches,
             # Preserve the v1 complete-cell field for existing consumers. Partial
             # cells additionally carry the explicit observed qualifier above.
@@ -200,9 +281,6 @@ def main() -> int:
             "correctness_exact_hash_match": cell_correct,
             "performance_target_met": cell_performance_pass,
         }
-        artifact_sha256[f"candidate/c{concurrency}-r1.json"] = digest_file(
-            candidate_path
-        )
 
     candidate_run = None
     candidate_run_path = args.candidate_run
@@ -230,7 +308,7 @@ def main() -> int:
         decision = "iterate"
         exit_status = 2
     report = {
-        "schema": "qwen35-candidate-vs-fixed-original-decision/v1",
+        "schema": "qwen35-candidate-vs-fixed-original-decision/v2",
         "comparison_policy": "user-designated-fixed-original-quick32-v3",
         "candidate_id": args.candidate_id,
         "candidate_physical_device_set": args.candidate_device_set,
@@ -242,6 +320,9 @@ def main() -> int:
             "these immutable artifacts as the common performance denominator."
         ),
         "target_ratio": args.target_ratio,
+        "repetitions": args.repetitions,
+        "aggregation": "median of per-run P95/P99 values",
+        "p99_max_ratio": args.p99_max_ratio,
         "runtime_gate_met": runtime_pass,
         "runtime_gate_status": (
             "complete-matrix" if runtime_pass else "partial-or-failed-matrix"
