@@ -622,6 +622,14 @@ manifest. It retains read compatibility with historical flat
 `c<concurrency>-r<index>.json` candidate directories. The synthetic contract
 test exercises the canonical layout and a missing-third-repeat failure.
 
+For the current NPU0-3 TP4 loop, invoke the matrix runner with
+`--experiment-contract .agents/experiments/exp-20260904-qwen35-query-rewrite-3x-e2e.yaml`
+and `--model Qwen3-5/Qwen3.5-27B`. This path is intentionally independent of
+the historical DP2/TP4 eight-device runtime renderer. It hash-locks the
+experiment contract and fail-closes unless the matrix is c1/c5/c8/c16 x three
+repetitions, seed 1024 and 32 requests per cell. The runner passes both
+`--seed 1024` and `--limit 32` explicitly to the streaming benchmark.
+
 The final stack is expected to combine core operators, algorithms and
 configuration. "One variable" applies to each attribution step, not to the
 final candidate.

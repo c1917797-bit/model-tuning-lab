@@ -23,6 +23,7 @@ dataset:
 workload:
   concurrency: [1, 5, 8, 16]
   repetitions: 3
+  requests_per_cell: 32
   warmup: "per concurrency, excluded from measurement"
   seed: 1024
   prompt_mode: raw_question
