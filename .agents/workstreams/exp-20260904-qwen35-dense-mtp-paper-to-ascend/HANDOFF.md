@@ -30,7 +30,7 @@ independent baseline, quality, and delivery-contract gates.
 - Do not stop or change `qwen38_paper_baseline_npu0_3` (physical NPU0-3,
   port 8211) or `qwen38_gdn_fused_candidate` (physical NPU4-7, port 8210).
 
-## Selected method and readiness
+## Historical selected method
 
 The candidate is distribution-preserving speculative decoding with the
 checkpoint's built-in Qwen3.5 MTP head. It requires no retraining or external
@@ -61,7 +61,12 @@ candidate: --enforce-eager --speculative-config
   weight load when the model-inspection subprocess could not query Ascend
   device count/architecture; NPU0-3 were already occupied.
 
-## Exact resume sequence
+## Historical resume sequence (superseded; do not execute)
+
+The sequence below records what would have been required to complete the MTP
+experiment before the policy change. It is audit history only. The current
+resume action is the non-speculative paper-selection loop in the task-boundary
+section above.
 
 1. Confirm an owner has explicitly released either physical NPU0-3 or NPU4-7.
 2. Run host `npu-smi info`, container device-map inspection, port checks, and
