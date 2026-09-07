@@ -88,8 +88,9 @@ def main() -> int:
             raise RuntimeError(f"default lacks four-rank output evidence for {shape}")
         if len(candidate_cell.get("output_by_rank", [])) != 4:
             raise RuntimeError(f"online lacks four-rank output evidence for {shape}")
-        comparison = output_error(baseline_cell, candidate_cell)
-        reference = baseline_cell["correctness"]
+        cross_launch_comparison = output_error(baseline_cell, candidate_cell)
+        reference = baseline_cell["deterministic_correctness"]
+        comparison = candidate_cell["deterministic_correctness"]
         thresholds = {
             "max_abs": args.correctness_envelope_factor * float(reference["max_abs"]),
             "mean_abs": args.correctness_envelope_factor
@@ -115,11 +116,13 @@ def main() -> int:
             "speedup_vs_default": speedup,
             "required_speedup": required_speedup,
             "speedup_gate_passes": speedup >= required_speedup,
-            "candidate_vs_default": comparison,
+            "candidate_vs_default_diagnostic": cross_launch_comparison,
+            "baseline_deterministic_reference_error": reference,
+            "candidate_deterministic_reference_error": comparison,
             "thresholds_from_default_reference_error": thresholds,
             "metric_passes": metric_passes,
-            "baseline_reference_diagnostic": baseline_cell["correctness"],
-            "candidate_reference_diagnostic": candidate_cell["correctness"],
+            "baseline_hccl_reference_diagnostic": baseline_cell["correctness"],
+            "candidate_hccl_reference_diagnostic": candidate_cell["correctness"],
             "correct": all(metric_passes.values()),
         }
 
@@ -132,7 +135,7 @@ def main() -> int:
     )
     passes = correct and speedup_gate_passes
     decision = {
-        "schema": "qwen35-mmar-online-tiling-decision/v1",
+        "schema": "qwen35-mmar-online-tiling-decision/v2",
         "baseline": str(default_path),
         "candidate": str(online_path),
         "required_shapes": [list(shape) for shape in SHAPES],
@@ -141,10 +144,11 @@ def main() -> int:
         "nonselected_minimum_speedup": args.nonselected_minimum_speedup,
         "correctness_envelope_factor": args.correctness_envelope_factor,
         "correctness_policy": (
-            "candidate fused output must remain within the configured factor "
-            "of the frozen predecessor fused-vs-unfused BF16 error envelope; "
-            "per-run unfused-reference allclose is diagnostic because its HCCL "
-            "reduction order is not stable across separate process launches"
+            "candidate fused output versus a fixed-rank-order CPU FP32 sum of "
+            "rank-local NPU BF16 matmul outputs must remain within the configured "
+            "factor of the frozen predecessor error envelope; cross-launch fused "
+            "output differences and HCCL all-reduce references are diagnostic "
+            "because HCCL reduction order is not stable across process launches"
         ),
         "cells": cells,
         "correct": correct,

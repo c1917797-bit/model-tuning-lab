@@ -91,7 +91,7 @@ for label in default online; do
     -e QWEN35_MMAR_PACKAGE_SHA256="$sha256" \
     "${online_args[@]}" "$image" \
     bash -lc "source '$opp_env'; exec python3 /experiment/scripts/benchmark_qwen35_mmar_hccl_buffer.py \
-      --schema qwen35-mmar-online-tiling-frozen-ab/v1 --label '$label' \
+      --schema qwen35-mmar-online-tiling-frozen-ab/v2 --label '$label' \
       --output '$output_root/$label.json' --warmup 40 --iterations 200 --repeats 7 \
       --master-port '$([[ "$label" == default ]] && echo 29931 || echo 29932)'" \
     >"$output_root/$label.log" 2>&1

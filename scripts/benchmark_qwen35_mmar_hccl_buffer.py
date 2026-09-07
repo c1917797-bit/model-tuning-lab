@@ -84,12 +84,38 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
             )
 
         fused_output = fused()
-        reference = torch.matmul(x, weight)
+        local_product = torch.matmul(x, weight)
+        local_product_fp32 = local_product.float().cpu()
+        local_products: list[list[float] | None] = [None] * world_size
+        dist.all_gather_object(
+            local_products, local_product_fp32.reshape(-1).tolist()
+        )
+        deterministic_reference = torch.zeros_like(local_product_fp32)
+        for product in local_products:
+            if product is None:
+                raise RuntimeError("missing rank-local matmul output")
+            deterministic_reference.add_(
+                torch.tensor(product, dtype=torch.float32).reshape_as(
+                    deterministic_reference
+                )
+            )
+
+        reference = local_product
         dist.all_reduce(reference)
         torch.npu.synchronize()
-        difference = (fused_output.float() - reference.float()).abs()
+        fused_output_fp32 = fused_output.float().cpu()
+        difference = (fused_output_fp32 - reference.float().cpu()).abs()
         reference_l2 = float(torch.linalg.vector_norm(reference.float()).item())
         difference_l2 = float(torch.linalg.vector_norm(difference).item())
+        deterministic_difference = (
+            fused_output_fp32 - deterministic_reference
+        ).abs()
+        deterministic_reference_l2 = float(
+            torch.linalg.vector_norm(deterministic_reference).item()
+        )
+        deterministic_difference_l2 = float(
+            torch.linalg.vector_norm(deterministic_difference).item()
+        )
         local = {
             "allclose": bool(
                 torch.allclose(
@@ -101,7 +127,14 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
             "relative_l2": (
                 difference_l2 / reference_l2 if reference_l2 > 0.0 else math.inf
             ),
-            "output_fp32": fused_output.float().cpu().reshape(-1).tolist(),
+            "deterministic_max_abs": float(deterministic_difference.max().item()),
+            "deterministic_mean_abs": float(deterministic_difference.mean().item()),
+            "deterministic_relative_l2": (
+                deterministic_difference_l2 / deterministic_reference_l2
+                if deterministic_reference_l2 > 0.0
+                else math.inf
+            ),
+            "output_fp32": fused_output_fp32.reshape(-1).tolist(),
         }
         gathered: list[dict[str, Any] | None] = [None] * world_size
         dist.all_gather_object(gathered, local)
@@ -137,6 +170,27 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                         ),
                         "max_rank_relative_l2": max(
                             float(item["relative_l2"])
+                            for item in gathered
+                            if item is not None
+                        ),
+                    },
+                    "deterministic_correctness": {
+                        "reference": (
+                            "rank-local NPU BF16 matmul outputs converted to "
+                            "FP32 and summed on CPU in fixed rank order"
+                        ),
+                        "max_abs": max(
+                            float(item["deterministic_max_abs"])
+                            for item in gathered
+                            if item is not None
+                        ),
+                        "max_rank_mean_abs": max(
+                            float(item["deterministic_mean_abs"])
+                            for item in gathered
+                            if item is not None
+                        ),
+                        "max_rank_relative_l2": max(
+                            float(item["deterministic_relative_l2"])
                             for item in gathered
                             if item is not None
                         ),
