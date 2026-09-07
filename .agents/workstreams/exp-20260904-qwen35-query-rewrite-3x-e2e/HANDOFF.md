@@ -3369,6 +3369,9 @@ runtime targets, and repeated successful inspection remains idempotent. It
 also verifies ordered insertion of the 512/16384 compile boundaries, fallback
 to the original non-linear-attention prefetch path, bounded gate/up prefetch
 for the linear-attention path, and RMSNorm postprocessing only when residual
-is absent. This closes the pure-Python control-flow/configuration gap behind
-t5-t8, but it does not replace the pending real 910B4 startup, correctness,
-profiling, or E2E gates.
+is absent. The graph-manager probe additionally proves that bounded MMAR is
+not inserted when AllReduce+RMS fusion is disabled, is inserted immediately
+before `MatmulAllReduceAddRMSNormPass` when enabled, and is not duplicated
+when already present. This closes the pure-Python control-flow/configuration
+gap behind t5-t8, but it does not replace the pending real 910B4 startup,
+correctness, profiling, or E2E gates.

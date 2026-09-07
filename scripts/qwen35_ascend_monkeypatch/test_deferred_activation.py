@@ -170,6 +170,75 @@ def _test_layernorm_postprocess(module) -> None:
     assert postprocess == [no_residual]
 
 
+def _test_graph_manager(module) -> None:
+    created = []
+
+    class BeforePass:
+        pass
+
+    class MatmulAllReduceAddRMSNormPass:
+        pass
+
+    class AfterPass:
+        pass
+
+    class MmarPass:
+        _qwen35_mmar_prefill_monkeypatch = True
+
+        def __init__(self, config):
+            self.config = config
+            created.append(self)
+
+    class GraphFusionPassManager:
+        def configure(self, config):
+            self.ascend_compilation_config = config
+            self.passes = [
+                BeforePass(),
+                MatmulAllReduceAddRMSNormPass(),
+                AfterPass(),
+            ]
+            if config.get("existing_mmar", False):
+                self.passes.insert(1, MmarPass(config))
+
+    original_factory = module._make_mmar_pass
+    module._make_mmar_pass = lambda: MmarPass
+    try:
+        fake = SimpleNamespace(GraphFusionPassManager=GraphFusionPassManager)
+        module._patch_graph_manager(fake)
+    finally:
+        module._make_mmar_pass = original_factory
+
+    enabled_config = {"fuse_allreduce_rms": True}
+    manager = GraphFusionPassManager()
+    manager.configure(enabled_config)
+    assert [type(item).__name__ for item in manager.passes] == [
+        "BeforePass",
+        "MmarPass",
+        "MatmulAllReduceAddRMSNormPass",
+        "AfterPass",
+    ]
+    assert created[-1].config is enabled_config
+
+    manager = GraphFusionPassManager()
+    manager.configure({"fuse_allreduce_rms": False})
+    assert not any(
+        getattr(item, "_qwen35_mmar_prefill_monkeypatch", False)
+        for item in manager.passes
+    )
+
+    count_before = len(created)
+    manager = GraphFusionPassManager()
+    manager.configure({"fuse_allreduce_rms": True, "existing_mmar": True})
+    assert len(created) == count_before + 1
+    assert (
+        sum(
+            bool(getattr(item, "_qwen35_mmar_prefill_monkeypatch", False))
+            for item in manager.passes
+        )
+        == 1
+    )
+
+
 def main() -> None:
     module = _load_patch_module()
     assert module._ENABLED
@@ -194,7 +263,8 @@ def main() -> None:
     _test_compile_ranges(module)
     _test_weight_prefetch(module)
     _test_layernorm_postprocess(module)
-    print("PASS: runtime hooks activate only after successful model inspection")
+    _test_graph_manager(module)
+    print("PASS: deferred runtime monkeypatch contract")
 
 
 if __name__ == "__main__":
