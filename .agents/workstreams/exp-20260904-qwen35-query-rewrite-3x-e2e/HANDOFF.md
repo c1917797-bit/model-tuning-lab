@@ -3306,3 +3306,18 @@ Service-log SHA256 is
 container-inspect SHA256 is
 `19b05f60bd4cf9d7db5963b251fb08bb1ca654c2f4907884efec3215a37f6d63`.
 The failed container released NPU0-3; NPU4-7 were not modified.
+
+Follow-up isolation narrowed the boundary. The repository's A2 TP4 fused-op
+test was parameterized at signed-off commit `b462358b17debeef767d27a7ce3292b1101a0eaa`.
+At the exact Qwen3.5 row-parallel shape K=4352/N=5120, BF16 correctness passed
+at M=4096, 8192 and 16384 with one warmup and one measured invocation. Thus
+the activation failure is not evidence that the operator is universally
+unsupported on 910B4. Evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-probes/tp4-npu03-qwen35-ar-rms-shape-boundary-v1-20260907T1042Z`.
+
+The implementation still remains rejected: the maximum-shape Dynamo trace
+specialized the Python token-count branch to ordinary GEMM+AllReduce, and the
+same FX graph fed both compile ranges. Consequently the short range did not
+retain MMAR as designed. Any successor must perform range-specific graph
+rewriting (for example decomposing MMAR only in the selected prefill range),
+not a Python shape branch inside `apply_impl`.

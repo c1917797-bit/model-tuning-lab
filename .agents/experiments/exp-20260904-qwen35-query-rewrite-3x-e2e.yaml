@@ -1975,11 +1975,20 @@ qwen35_prefill_allreduce_rms_v1:
     api_ready: false
     chat_smoke: not_run
     e2e: not_run
+  implementation_audit:
+    finding: "maximum-shape Dynamo tracing specialized the Python token branch to ordinary GEMM+AllReduce; both compile ranges consumed that same FX graph, so decode did not retain MMAR"
+    consequence: "candidate violates its own shape-selective routing contract independent of the startup timeout"
+  operator_probe:
+    commit: b462358b17debeef767d27a7ce3292b1101a0eaa
+    protocol: "TP4 BF16, physical NPU0-3, exact K=4352/N=5120, one warmup plus one measured fused and golden invocation"
+    results: {m4096: passed, m8192: passed, m16384: passed}
+    evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-probes/tp4-npu03-qwen35-ar-rms-shape-boundary-v1-20260907T1042Z
+    boundary: "proves numerical execution at three isolated shapes; does not prove whole-model startup, latency benefit, or M32768 safety"
   evidence:
     root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/activation-probes/tp4-npu03-qwen35-prefill-ar-rms-v1-20260907T1012Z
     service_log_sha256: c40943f3aee9f9259c39728d200d77476a02f5c5d04f328b0db60fe7a7216104
     container_inspect_sha256: 19b05f60bd4cf9d7db5963b251fb08bb1ca654c2f4907884efec3215a37f6d63
     source_commit_record_sha256: 01fd2f4b7712168ab66bd191c7813765b818091f0c0b5e4ba86bf5d220e06a37
-  decision: "reject before correctness and E2E; no performance claim"
+  decision: "reject before service correctness and E2E: activation timed out and the Python routing branch failed to preserve decode MMAR; no performance claim"
   recovery: "failed service released NPU0-3; NPU4-7 untouched"
-  next: "do not retry unchanged; isolate exact long-prefill fused operator execution on 910B4 before any service reactivation"
+  next: "replace Python shape routing with compile-range-specific graph rewriting; preserve MMAR in decode and require an operator latency gate before service reactivation"
