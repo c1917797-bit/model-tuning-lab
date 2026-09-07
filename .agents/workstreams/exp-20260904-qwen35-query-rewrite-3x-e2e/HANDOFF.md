@@ -5,10 +5,11 @@
 ### 0. Status
 
 - Workstream: `exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Branch-local state: blocked on NPU0-3 availability; not integrated.
+- Branch-local state: active; NPU0-3 were proven free in the current AWMCP
+  session; not integrated.
 - Current branch checkpoint before this update: `aa6c886a2ce5`.
-- Latest user stop gate supersedes the historical 2x/3x labels: median of
-  three per-run P95 values must show at least 1.5x speedup for both TTFT and
+- Latest user stop gate supersedes the historical 1.5x/3x labels: median of
+  three per-run P95 values must show at least 2x speedup for both TTFT and
   TPOT at c1/c5/c8/c16 versus the frozen MTP-off baseline.
 - Final delivery is BF16, no quantization, no retraining, no MTP/speculative
   decoding, and runtime Python monkeypatch only.
@@ -23,11 +24,11 @@ acceptance decision.
 
 ### 2. Current Focus
 
-Activate and measure the source-overlay-free monkeypatch candidate in
-`scripts/qwen35_ascend_monkeypatch/sitecustomize.py`. It combines the
-retained dense gate/up prefetch treatment with range-specific bounded-MMAR
-rewriting and built-in AllReduce+RMSNorm fusion. The first gate is real TP4
-startup and per-rank activation on physical NPU0-3.
+Do not retry the rejected bounded-MMAR t11 stack unchanged. Select a materially
+new ASCEND910B decode MMAR/HCCL lifecycle implementation, gate it first on the
+exact BF16 M=1 row-parallel shapes, and only then integrate it through the
+source-overlay-free runtime monkeypatch. The retained dense projection-fusion
+plus gate/up-prefetch stack and frozen MTP-off denominator remain unchanged.
 
 ### 3. Recent Progress
 
@@ -45,25 +46,28 @@ startup and per-rank activation on physical NPU0-3.
 
 ### 4. Current Action
 
-Wait for a valid NPU0-3 lease. The unrelated container
-`vllm-ep-310p-research-910b-monitor` currently runs a TP2/EP W8A8
-Qwen3-30B-A3B service on physical NPU0/1 while reserving device nodes 0-7.
-Do not stop it without explicit authorization. The launcher intentionally
-fails closed on this reservation.
+The current AWMCP session proved direct host execution works and that physical
+NPU0-3 have no NPU processes, no active Qwen3.5 container, and no listener
+owned by this workstream. NPU4-7 remain occupied by the unrelated
+`qwen38_drrqr_baseline_exact_host4_7_tp4_20260907_v6` service on port 8227
+and are protected. Before every new launch, re-prove this ownership snapshot.
 
 ### 5. Next Actions
 
-1. Re-prove container, port, process, and physical NPU ownership.
-2. When NPU0-3 are released or stopping the conflicting container is
-   explicitly authorized, launch
-   `qwen35-gdn-prefetch0p1-prefill-ar-rms` on physical NPU0-3.
-3. Require API readiness, all four TP workers, deferred hook activation,
-   compile ranges and per-rank bounded-MMAR rewrite evidence.
-4. Run a fixed-input correctness smoke, then one real c1 fail-fast.
+1. Re-prove container, port, process, and physical NPU ownership immediately
+   before allocation; use only NPU0-3 and an unclaimed port.
+2. Select a materially new ASCEND910B decode MMAR/HCCL lifecycle candidate;
+   do not repeat bounded-MMAR t11, online tiling, core-count, buffer-size,
+   x3-residual, prefill AllReduce+RMSNorm, or ShortGPT unchanged.
+3. Gate the candidate on exact M=1 row-parallel BF16 K=1536/4352, N=5120
+   correctness and a predeclared multi-shape performance threshold.
+4. Only after the operator gate passes, integrate it through the runtime
+   monkeypatch and require API readiness, four TP workers, activation evidence,
+   a fixed-input correctness smoke, and one real c1/c16 fail-fast screen.
 5. On a passing screen, run c1/c5/c8/c16 x three repetitions, analyze P95/P99,
    capture paired semantic outputs when hashes differ, and profile the final
    candidate.
-6. Accept only after all eight 1.5x P95 gates and the quality gate pass;
+6. Accept only after all eight 2x P95 gates and the quality gate pass;
    otherwise record the failure and recover to the retained safe stack.
 
 ### 6. Validation Commands
