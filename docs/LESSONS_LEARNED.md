@@ -346,3 +346,43 @@ classified, repaired or superseded, and revalidated.
 activation, performance, quality, profiling, adoption, and generalization. A
 valid operational failure should stop or repair the run, not become a fake paper
 conclusion.
+
+## 8. Qwen3.5 parallel-task boundary
+
+### 8.1 Paper migration and production performance are different decisions
+
+Two Qwen3.5 tasks shared the model family, Ascend 910B4 host, vLLM-Ascend
+runtime, and initially the same NPU lane. That similarity caused the historical
+dense-MTP Paper-to-Ascend experiment to be described as if it were the active
+production optimization loop. The tasks actually use different workloads,
+metrics, acceptance gates, implementation policies, and evidence scopes.
+
+The performance workstream owns the frozen real `query_rewrite.jsonl`
+denominator, c1/c5/c8/c16 repeated P95/P99 evidence, semantic-quality gate,
+and final serving-stack decision. Paper-to-Ascend owns paper selection,
+architecture/source fit, bounded Ascend implementation, and paper-level
+mechanism evidence. A paper result can enter the performance loop only as a
+new candidate; it cannot inherit or replace the production baseline.
+
+The old MTP paper candidate is now policy-rejected because the active user
+constraint forbids MTP/speculative decoding. Its invalid contested baseline,
+failed startup, and selection rationale remain useful history, but it owns no
+current hardware lease.
+
+**Reusable rule:** every parallel task needs a unique task ID, branch, workload,
+metric gate, evidence root, implementation boundary, and resource lease.
+Shared model and hardware do not make two experiments comparable.
+
+### 8.2 Near-target and negative evidence must keep their scope
+
+The historical Qwen3.5 GDN projection-fusion plus gate/up-prefetch stack
+reached median-of-three P95 speedups of
+2.206x/1.938x/1.930x/1.910x for TTFT and
+1.381x/1.651x/1.753x/1.980x for TPOT at c1/c5/c8/c16. This passes seven of
+the eight current 1.5x latency cells, but c1 TPOT misses and the implementation
+used source overlays. It therefore selects the next hypothesis but is not a
+compliant production result.
+
+**Reusable rule:** retain successful ingredients and failed treatments, but
+never widen a microbenchmark, sampled-quality, source-overlay, or paper-level
+result into a final serving claim.

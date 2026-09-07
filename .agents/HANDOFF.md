@@ -9,6 +9,17 @@
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide`, with pushed evidence, negative-result retention, and explicit recovery checkpoints.
 - Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
 - The repository-specific active worktree budget is eight.
+- Two Qwen3.5 branch-local tracks are deliberately separate and are not
+  integrated product truth:
+  - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
+    performance loop. Its current user gate is TTFT P95 and TPOT P95 >=1.5x
+    at c1/c5/c8/c16 versus the frozen TP4 MTP-off `query_rewrite` baseline.
+    BF16, no quantization/retraining/MTP/speculation, and runtime-monkeypatch
+    delivery are mandatory. It is blocked on a valid NPU0-3 lease.
+  - `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend` is the paper
+    migration/research track. Its old MTP candidate is policy-rejected, owns
+    no NPU/port lease, and must select a new non-speculative paper before any
+    further experiment.
 - Local Git state alone does not prove current target-host runtime state. Re-check NPU, container, port, memory, process, controller, and worktree ownership before touching hardware.
 - Validation in this maintenance turn: Git status/log checks passed; `git diff --check` on the documentation update passed; a CRLF-tolerant Maintainer Skill Tree structure check passed with 26 skills. `./scripts/validate-mst.sh` was attempted on Windows and failed on CRLF shell-script parsing before repository checks; `python -m pytest` was attempted with the local Python 3.9 and failed because `pytest` is not installed. Run full validation on the Linux target before claiming execution readiness.
 
@@ -29,6 +40,10 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
 1. **Paper-to-Ascend pipeline:** `paper-to-ascend` now routes through paper ingestion, architecture fit, source mapping, canary implementation, benchmark evidence, CANN/profiler attribution when needed, reproduction mode, and reporting.
 2. **HYPIC reproduction pattern:** historical/practice-result reproduction uses `paper-to-ascend-reproduction` with a frozen one-switch A/B denominator, mechanism activation evidence, resumable artifacts, and independent fail-closed audit.
 3. **Target-host safety:** `chicaihong01-host-maintenance` remains the gate for any live device work. Runtime state is not inherited from this local clone.
+4. **Qwen3.5 two-track boundary:** Paper-to-Ascend may produce a bounded
+   candidate and mechanism evidence, but only the separate `query_rewrite`
+   performance workstream owns its frozen denominator, final quality gate,
+   serving delivery contract, and performance acceptance decision.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -47,6 +62,10 @@ Keep the distinction between three kinds of knowledge explicit:
 - Built a Dynamic MoE Paper-to-Ascend exemplar and preserved a useful negative result: local expert GMM improved, but routing/packing overhead dominated whole-block latency. The implementation was rejected while the paper/full-model claim remained inconclusive.
 - Integrated HYPIC reproduction lessons: a changed environment can reproduce direction and approximate magnitude only with a fresh same-denominator A/B, mechanism activation proof, repeated performance/quality units, resumable raw artifacts, and independent audit.
 - Expanded the Paper-to-Ascend skill system with `paper-ingestion`, `ascend-architecture-fit`, `ascend-source-map`, `ascend-canary-implementation`, `paper-to-ascend-reporting`, `ascend-cannbot-profiler`, and `paper-to-ascend-reproduction`.
+- Separated the active Qwen3.5 performance loop from the historical dense-MTP
+  Paper-to-Ascend experiment. The MTP paper candidate is no longer an allowed
+  implementation route for the performance objective and no longer claims
+  NPU0-3.
 
 ## 4. Current Action
 
@@ -56,18 +75,30 @@ For a new maintainer, start by treating this repository as ready for handoff but
 2. If the next task touches `chicaihong01`, use `chicaihong01-host-maintenance` before any remote or NPU action.
 3. If the next task is another paper/practice result, start with `paper-to-ascend`; for historical reproduction or adoption claims, include `paper-to-ascend-reproduction` and its evidence contract.
 4. Before using any claimed NPU/port lane, read the relevant target-host branch-local handoff and prove current ownership in the same session.
+5. For Qwen3.5 work, identify the task ID before acting: paper selection and
+   mechanism migration go to the Paper-to-Ascend workstream; cumulative
+   `query_rewrite` serving optimization and final acceptance go to the
+   performance workstream.
 
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
 2. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
-3. For future Paper-to-Ascend work, choose the narrow route:
+3. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
+   proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
+   activation gate, fixed-input correctness, c1 fail-fast, then the
+   c1/c5/c8/c16 x three-repeat matrix.
+4. For Qwen3.5 Paper-to-Ascend, do not resume the old MTP experiment. Select a
+   non-speculative, no-retraining, no-quantization paper from a measured dense
+   bottleneck and treat its result as candidate input, not final performance
+   evidence.
+5. For future Paper-to-Ascend work, choose the narrow route:
    - new paper idea: `paper-ingestion` -> `ascend-architecture-fit` -> `ascend-source-map` -> canary;
    - prior success or historical ruler: `paper-to-ascend-reproduction`;
    - low-level kernel/operator/profiler question: `ascend-cannbot-profiler`;
    - final result: `paper-to-ascend-reporting`.
-4. Do not reuse HYPIC absolute numbers across model, accelerator generation, TP degree, cache denominator, or capacity-budget changes. Create a fresh experiment, baseline, and artifact root.
-5. Re-run full validation on the Linux target before claiming the handoff is execution-ready.
+6. Do not reuse HYPIC absolute numbers across model, accelerator generation, TP degree, cache denominator, or capacity-budget changes. Create a fresh experiment, baseline, and artifact root.
+7. Re-run full validation on the Linux target before claiming the handoff is execution-ready.
 
 ## 6. Validation Commands
 
@@ -94,6 +125,11 @@ For tuning evidence, also run the exact benchmark/profiling/audit commands decla
 - Do not apply architecture-specific methods to an incompatible checkpoint.
 - Do not convert a rejected implementation into a rejected-paper claim; keep implementation, operator/block, service, full-model, and adoption scopes separate.
 - Do not pool HYPIC, Dynamic MoE, prefix-cache, PDC coexistence, or other experiments across different denominators or scientific questions.
+- Do not pool the Qwen3.5 Paper-to-Ascend c8 synthetic protocol with the
+  frozen `query_rewrite` c1/c5/c8/c16 performance denominator.
+- Do not treat a paper-level mechanism success as a production serving win;
+  the performance workstream must independently prove activation, quality,
+  P95/P99, throughput, and resource safety.
 - Do not discard rejected, inconclusive, or failed experiments; recover active code while preserving evidence.
 - Do not merge failed active code into main.
 - Do not release the 1 GiB HugeTLB pool merely because many pages look free; identify OVS/DPDK/VNF consumers and define rollback first.
@@ -121,3 +157,11 @@ git diff --check
 If a `work/*` branch is active, read its `.agents/workstreams/<task-id>/task.json`, branch-local `HANDOFF.md`, experiment/evidence/decision ledgers, and exact audit/resume commands before acting.
 
 HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.
+
+Qwen3.5-specific takeover reminder: on chicaihong01 read both target-host
+branch-local handoffs before acting:
+
+```text
+/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e/.agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/HANDOFF.md
+/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-dense-mtp-paper-to-ascend/.agents/workstreams/exp-20260904-qwen35-dense-mtp-paper-to-ascend/HANDOFF.md
+```
