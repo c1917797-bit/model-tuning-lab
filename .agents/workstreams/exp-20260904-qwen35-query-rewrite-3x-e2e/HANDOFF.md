@@ -3360,3 +3360,11 @@ process on NPU2-7; stopping it was not authorized by the no-impact NPU4-7
 boundary. Do not bypass this guard. Resume by obtaining explicit approval to
 stop that all-device container, or wait until NPU0-1 are released, then launch
 the deferred monkeypatch candidate on NPU0-3 and run correctness before E2E.
+
+The device-free contract probe
+`scripts/qwen35_ascend_monkeypatch/test_deferred_activation.py` passes. It
+proves that a synthetic model-inspection failure is propagated without
+activating any Ascend runtime target, a successful inspection activates all
+runtime targets, and repeated successful inspection remains idempotent. This
+closes the pure-Python control-flow gap behind t5-t8, but it does not replace
+the pending real 910B4 startup, correctness, profiling, or E2E gates.
