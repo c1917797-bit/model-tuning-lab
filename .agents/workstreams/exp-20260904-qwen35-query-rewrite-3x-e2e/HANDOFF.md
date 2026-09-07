@@ -3411,3 +3411,12 @@ SHA256 of baseline capture, candidate capture and paired comparison. Without
 this evidence, a performance-passing candidate with cross-run hash drift is
 `hold-quality-unproven`; a performance miss remains `iterate` and does not
 trigger unnecessary manual review.
+
+The TP4 launcher no longer ignores
+`vllm-ep-310p-research-910b-monitor` in its default container-reservation
+gate. That container now auto-starts workers and cannot be treated as an idle
+monitor shell. A fail-closed probe with `NPU_SMI_BIN=/bin/false` returned
+exit 48 from the container-reservation check and created no test container,
+proving the guard runs before both the process-table fallback and Docker
+creation. This prevents a race when the external workers briefly disappear
+between restarts.
