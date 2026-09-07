@@ -1,7 +1,7 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "objective": "Improve Qwen3.5-27B TTFT and TPOT by 2x on the frozen query_rewrite workload through cumulative parameter, algorithm, and operator optimizations with operator changes integrated into vLLM-Ascend and verified end to end. The workstream identifier retains its original 3x label for audit continuity.",
+  "objective": "Improve Qwen3.5-27B TTFT P95 and TPOT P95 by at least 1.5x at concurrency 1, 5, 8, and 16 on the frozen query_rewrite workload, with BF16 semantic quality preserved. No quantization, retraining, MTP, speculative decoding, vLLM source edits, or final source overlays. The workstream identifier retains its historical 3x label for audit continuity.",
   "targetBranch": "main",
   "workBranch": "work/exp-20260904-qwen35-query-rewrite-3x-e2e",
   "remote": "origin",
@@ -15,7 +15,7 @@
     {"kind":"file","mode":"exclusive","value":"scripts/qwen35_query_rewrite_bench.py"},
     {"kind":"file","mode":"exclusive","value":"scripts/analyze_qwen35_query_rewrite_ab.py"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/experiments/exp-20260904-qwen35-query-rewrite-3x-e2e.yaml"},
-    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU0-7 for the active TP8/DP1 comparison; exact-container cleanup only; never compete with an existing workload"}
+    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU0-3 only when an exclusive live lease is proven; NPU4-7 excluded; exact-container cleanup only; never compete with an existing workload"}
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
@@ -32,8 +32,11 @@
     "bash tests/test_queue_qwen35_fused_tail_v10.sh",
     "python3 -m py_compile scripts/check_qwen35_fused_tail_activation.py",
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
+    "python3 scripts/qwen35_ascend_monkeypatch/test_deferred_activation.py",
+    "python3 scripts/test_analyze_qwen35_candidate_vs_original.py",
+    "python3 -m py_compile scripts/run_qwen35_benchmark_matrix.py",
     "git diff --check"
   ],
-    "executionState": "prodlog-info-c16-three-repeat-rejected-retained-stack-restarting-on-npu0-3",
-    "integrationState": "branch-local-iterate-performance-weight-layout-and-prodlog-info-not-promoted"
+    "executionState": "blocked-resource-final-runtime-monkeypatch-awaiting-npu0-3-activation",
+    "integrationState": "branch-local-final-monkeypatch-not-promoted"
 }

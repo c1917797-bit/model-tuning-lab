@@ -1,4 +1,111 @@
-# Qwen3.5-27B query_rewrite 2x E2E Optimization
+# Qwen3.5-27B query_rewrite E2E Optimization
+
+## Maintainer takeover snapshot
+
+### 0. Status
+
+- Workstream: `exp-20260904-qwen35-query-rewrite-3x-e2e`.
+- Branch-local state: blocked on NPU0-3 availability; not integrated.
+- Current branch checkpoint before this update: `aa6c886a2ce5`.
+- Latest user stop gate supersedes the historical 2x/3x labels: median of
+  three per-run P95 values must show at least 1.5x speedup for both TTFT and
+  TPOT at c1/c5/c8/c16 versus the frozen MTP-off baseline.
+- Final delivery is BF16, no quantization, no retraining, no MTP/speculative
+  decoding, and runtime Python monkeypatch only.
+
+### 1. North Star
+
+Deliver a reproducible Qwen3.5-27B Ascend 910B4 serving stack whose real
+`query_rewrite.jsonl` TTFT and TPOT tails meet the current stop gate without
+semantic-quality loss. This workstream owns the production performance claim;
+Paper-to-Ascend may propose methods but does not own this denominator or its
+acceptance decision.
+
+### 2. Current Focus
+
+Activate and measure the source-overlay-free monkeypatch candidate in
+`scripts/qwen35_ascend_monkeypatch/sitecustomize.py`. It combines the
+retained dense gate/up prefetch treatment with range-specific bounded-MMAR
+rewriting and built-in AllReduce+RMSNorm fusion. The first gate is real TP4
+startup and per-rank activation on physical NPU0-3.
+
+### 3. Recent Progress
+
+- Frozen the first 32 records of `/cache/cch/query_rewrite.jsonl`, SHA256
+  `a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e`.
+- Locked c1/c5/c8/c16 x three repetitions, median per-run P95 decisions, P99
+  tail guard, P50 secondary reporting, and a paired semantic-quality gate.
+- Historical GDN projection fusion plus gate/up prefetch produced P95 speedups
+  TTFT 2.206x/1.938x/1.930x/1.910x and TPOT
+  1.381x/1.651x/1.753x/1.980x. It is useful hypothesis evidence but is not
+  final because it used source overlays; c1 TPOT also misses the current 1.5x
+  gate.
+- Device-free monkeypatch activation, pass ordering, matrix contract, and
+  decision-gate tests pass.
+
+### 4. Current Action
+
+Wait for a valid NPU0-3 lease. The unrelated container
+`vllm-ep-310p-research-910b-monitor` currently runs a TP2/EP W8A8
+Qwen3-30B-A3B service on physical NPU0/1 while reserving device nodes 0-7.
+Do not stop it without explicit authorization. The launcher intentionally
+fails closed on this reservation.
+
+### 5. Next Actions
+
+1. Re-prove container, port, process, and physical NPU ownership.
+2. When NPU0-3 are released or stopping the conflicting container is
+   explicitly authorized, launch
+   `qwen35-gdn-prefetch0p1-prefill-ar-rms` on physical NPU0-3.
+3. Require API readiness, all four TP workers, deferred hook activation,
+   compile ranges and per-rank bounded-MMAR rewrite evidence.
+4. Run a fixed-input correctness smoke, then one real c1 fail-fast.
+5. On a passing screen, run c1/c5/c8/c16 x three repetitions, analyze P95/P99,
+   capture paired semantic outputs when hashes differ, and profile the final
+   candidate.
+6. Accept only after all eight 1.5x P95 gates and the quality gate pass;
+   otherwise record the failure and recover to the retained safe stack.
+
+### 6. Validation Commands
+
+```text
+./scripts/validate-mst.sh
+python3 scripts/qwen35_ascend_monkeypatch/test_deferred_activation.py
+python3 scripts/test_analyze_qwen35_candidate_vs_original.py
+python3 -m py_compile scripts/run_qwen35_benchmark_matrix.py
+bash -n scripts/run_qwen35_tp4_dev_service.sh
+git diff --check
+```
+
+### 7. Do Not Do
+
+- Do not confuse this workstream with
+  `exp-20260904-qwen35-dense-mtp-paper-to-ascend`; that branch used a
+  different c8 synthetic protocol and its MTP candidate is excluded here.
+- Do not use MTP, speculative decoding, quantization, retraining, or vLLM
+  source edits.
+- Do not use source overlays as final E2E evidence.
+- Do not stop or modify NPU4-7 workloads.
+- Do not promote one-repeat, P50-only, transport-only, or unreviewed
+  hash-drift evidence.
+- Do not stage the entire dirty worktree; unrelated pre-existing paths remain.
+
+### 8. Recovery / Resume Commands
+
+```text
+git status --short --branch
+git log -8 --decorate --oneline
+sed -n '1,180p' .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/HANDOFF.md
+cat .agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/task.json
+docker inspect vllm-ep-310p-research-910b-monitor
+npu-smi info
+ss -lntp
+./scripts/validate-mst.sh
+git diff --check
+```
+
+The sections below are the preserved chronological experiment log. They are
+history, not the current resume point.
 
 ## Current action — selective K4352 online-HCCL screen
 

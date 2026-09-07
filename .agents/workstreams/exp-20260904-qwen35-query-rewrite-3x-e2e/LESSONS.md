@@ -1,34 +1,38 @@
 # Qwen3.5-27B performance optimization lessons and handoff
 
-Updated: 2026-09-06
+Updated: 2026-09-07
 
 ## Authoritative state
 
-- Goal: improve both TTFT and TPOT by 2x without quantization, using cumulative parameter, algorithm and operator treatments.
+- Goal: improve both TTFT P95 and TPOT P95 by at least 1.5x at
+  c1/c5/c8/c16 without quantization, retraining, MTP or speculative decoding.
+  The workstream's historical 2x/3x label is retained only for audit continuity.
 - Immutable comparison: frozen BF16 TP4/DP1 MTP-off baseline on physical NPU0-3 and the first 32 records of `/cache/cch/query_rewrite.jsonl`; its service log proves `speculative_config=None`.
 - Baseline evidence: `/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp4dp1-npu03-ref-v1`.
 - Baseline summary SHA256: `cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4`.
-- Primary acceptance metric is now P95: both TTFT P95 and TPOT P95 must
-  improve by 2x at c1/c5/c8/c16. P50 is secondary and P99 is a risk guard.
-- Current resources: GDN projection-fusion service
-  `qwen35_gdn_proj_fusion_npu03_v1` owns physical NPU0-3 and port 10012;
-  the external NPU4-7 workload remains running and untouched.
-- Current decision: projection fusion is `iterate-performance / not
-  promoted`. Three repetitions completed 384/384 requests with zero errors
-  and natural stops. Median-of-three P95 speedups at c1/c5/c8/c16 are TTFT
-  2.206x/1.938x/1.930x/1.910x and TPOT
-  1.381x/1.651x/1.753x/1.980x, so the required all-cell 2x gate fails.
-  Semantic quality also remains unproven.
-- Retained fallback remains non-speculative Qwen3.5 dense gate/up prefetch
-  0.1 with `mlp.down=0.0`; down-projection prefetch stays rejected.
+- Primary acceptance metric is P95 over three repetitions. P50 is secondary
+  and P99 is a non-regression guard.
+- Current resources: no valid NPU0-3 lease. The unrelated
+  `vllm-ep-310p-research-910b-monitor` container runs a TP2/EP W8A8 service
+  on NPU0/1 and reserves device nodes 0-7. NPU4-7 must remain untouched.
+- Current decision: the historical projection-fusion stack is retained only
+  as hypothesis evidence. Its median-of-three P95 speedups at c1/c5/c8/c16
+  are TTFT 2.206x/1.938x/1.930x/1.910x and TPOT
+  1.381x/1.651x/1.753x/1.980x. Seven of eight current latency gates pass, but
+  c1 TPOT misses 1.5x and the source-overlay implementation is not a compliant
+  final deliverable.
+- Pending final candidate is a runtime-only monkeypatch stacking dense gate/up
+  prefetch 0.1 with bounded-MMAR decomposition and AllReduce+RMSNorm fusion.
+  It has passed device-free control-flow tests but has no final NPU E2E claim.
 - Speculative decoding is prohibited. All MTP, draft-model, suffix, ngram and local-argmax results are history only and cannot be retained or used as completion evidence.
 
 ## What succeeded
 
-P95, not P50, is the governing performance statistic. The projection-fusion
-candidate improved TTFT P50 beyond 2x in every cell, yet failed TTFT P95 in
-c5/c8/c16 and failed TPOT P95 in every cell. This is the concrete reason
-median gains cannot promote a treatment for this objective.
+P95, not P50, is the governing performance statistic. The historical
+projection-fusion candidate passes seven of the eight current 1.5x latency
+cells, but c1 TPOT reaches only 1.381x and its source-overlay delivery violates
+the final monkeypatch-only contract. Near-target evidence selects the next
+hypothesis; it does not justify promotion.
 
 | Treatment or practice | Evidence-backed lesson | Disposition |
 |---|---|---|
@@ -70,7 +74,9 @@ median gains cannot promote a treatment for this objective.
 
 ## Rules learned
 
-1. Compare only against TP8 baseline v5 with the same dataset hash, prompt path, generation policy, concurrency and three-repeat aggregation.
+1. Compare only against the frozen TP4/NPU0-3 MTP-off baseline with the same
+   dataset hash, prompt path, generation policy, concurrency and three-repeat
+   aggregation.
 2. Change one primary treatment per attribution run, then stack only accepted treatments.
 3. Microbench and profiling results select candidates; they never prove E2E improvement.
 4. Correctness and activation gates precede performance. A request-free startup failure cannot be scored as a slowdown.
@@ -79,7 +85,9 @@ median gains cannot promote a treatment for this objective.
 7. Preserve exact logs, config, container inspection, NPU snapshots, result marker and SHA256SUMS under a unique evidence root.
 8. Never reuse an output directory, bypass the device-idle guard, kill by broad process pattern, or compete with an existing workload.
 9. Cross-run response hashes are diagnostics, not a calibrated semantic gate; retain aggregate reference-quality checks and privacy-safe hashes.
-10. Historical TP4 results guide hypotheses only. They are not part of the current TP8 goal denominator.
+10. Historical source-overlay TP4 results guide hypotheses only. Final
+    completion requires the runtime-only monkeypatch on the frozen TP4
+    denominator.
 
 ## Resume entry point
 
