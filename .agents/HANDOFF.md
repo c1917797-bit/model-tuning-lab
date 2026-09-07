@@ -66,6 +66,11 @@ Keep the distinction between three kinds of knowledge explicit:
   Paper-to-Ascend experiment. The MTP paper candidate is no longer an allowed
   implementation route for the performance objective and no longer claims
   NPU0-3.
+- Completed the runtime-only bounded-MMAR activation gate on physical NPU0-3.
+  All four TP workers activated the monkeypatch and the c1 three-repeat screen
+  achieved `1.9128x` TTFT P95 but only `1.2085x` TPOT P95 versus the frozen
+  MTP-off baseline. The candidate was rejected before full-matrix expansion;
+  NPU0-3 were released and the unrelated NPU4-7 workload was untouched.
 
 ## 4. Current Action
 
@@ -84,10 +89,11 @@ For a new maintainer, start by treating this repository as ready for handoff but
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
 2. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
-3. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
-   proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
-   activation gate, fixed-input correctness, c1 fail-fast, then the
-   c1/c5/c8/c16 x three-repeat matrix.
+3. For the Qwen3.5 performance loop, read branch commit
+   `c71de549b3ee32030799d66198786d8619aba3c1`. Do not retry the rejected
+   bounded-MMAR stack unchanged. Prove NPU0-3 ownership, then gate a materially
+   new ASCEND910B decode MMAR/HCCL lifecycle implementation on exact BF16 M=1
+   shapes before another E2E launch.
 4. For Qwen3.5 Paper-to-Ascend, do not resume the old MTP experiment. Select a
    non-speculative, no-retraining, no-quantization paper from a measured dense
    bottleneck and treat its result as candidate input, not final performance
