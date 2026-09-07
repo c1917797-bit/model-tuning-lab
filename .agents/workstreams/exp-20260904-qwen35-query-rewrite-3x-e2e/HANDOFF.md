@@ -3547,3 +3547,40 @@ Physical NPU2-7 had no running process and port 10010 was not listening.
 Because the container reserves device nodes 0-7, the TP4 launcher must remain
 fail-closed until the container exits or the user explicitly authorizes
 stopping it.
+
+## 2026-09-07 final runtime-monkeypatch activation and c1 decision
+
+The external all-device blocker exited and four consecutive checks showed
+NPU0-3 idle. Candidate `t11` then ran on physical 910B4 NPU0-3 only. Commit
+`ebe9b69aad45a24fa79437705f00ebbeed977e55` fixes the missing worker-process
+activation; the final `sitecustomize.py` SHA256 is
+`9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8`.
+All four TP workers installed the prefetch/RMSNorm/GraphFusion hooks, inserted
+the bounded-MMAR pass, and each decomposed 128 MMAR nodes in the 513-16384
+prefill range. The service reached `/v1/models`; a fixed-input smoke completed
+1/1 with zero errors and natural EOS. Mount inspection proved that no vLLM or
+vLLM-Ascend source tree was overlaid.
+
+The c1 frozen workload completed three repetitions, 96/96 requests, with zero
+errors and all natural stops. Median-of-three TTFT P95 was `505.1956 ms`, a
+`1.9128x` speedup over the frozen MTP-off baseline `966.3259 ms`. Median TPOT
+P95 was `32.3098 ms`, only `1.2085x` versus baseline `39.0459 ms`; the 1.5x
+gate requires at most `26.0306 ms`, leaving about `19.43%` additional latency
+reduction. The first repetition also had a warmup-like TTFT tail (P95
+`6247.5032 ms`), while repetitions 2/3 were `505.1956/498.2918 ms`; retain all
+three rather than deleting the adverse run.
+
+Therefore reject this stack before c5/c8/c16 expansion, 32-sample semantic
+capture, or profiling. It proves compliant runtime-only activation and strong
+TTFT, but does not meet the user's TPOT stop gate. Immutable evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/runtime-monkeypatch-bounded-mmar-t11-20260907T1838Z`.
+The exact t11 container was stopped after evidence capture and exited 0;
+NPU0-3 were idle afterward. An unrelated workload that started on NPU4-7
+during the screen was not stopped or modified.
+
+Do not retry t11 unchanged. Existing parameter/topology/decomposition routes
+are already closed by real evidence, and the A2 BF16 SwiGLU prototype's
+`1.0981x` local gain is too small to close this E2E gap. The next admissible
+step is a materially new ASCEND910B decode MMAR/HCCL lifecycle implementation,
+first gated on exact BF16 M=1 row-parallel shapes and only then integrated by
+runtime monkeypatch.

@@ -2010,9 +2010,9 @@ current_contract_20260907:
   delivery: "runtime Python monkeypatch only; no vLLM modifications and no source overlays in final E2E evidence"
   monkeypatch:
     path: scripts/qwen35_ascend_monkeypatch/sitecustomize.py
-    sha256: 28091a36b6737470cfcecb70520d1dfe49f122531511b5cfcad16b566d165897
+    sha256: 9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8
     behavior: "defer Ascend runtime patch activation until parent-process model inspection succeeds; then install compile-range, bounded-MMAR, GDN prefetch and RMSNorm hooks"
-    validation: "host py_compile passed; NPU activation not yet reached"
+    validation: "device-free contract test passed; multiprocessing children now activate runtime hooks; real NPU activation and c1 three-repeat screen completed in t11"
   historical_activation:
     container: qwen35_prefill_range_npu03_20260907t4
     result: "source-overlay feasibility only: three compile ranges and 128 MMAR decompositions per rank"
@@ -2027,3 +2027,28 @@ current_contract_20260907:
     declared_devices: "0-7"
     safety_boundary: "do not stop without explicit approval because its device declaration includes NPU4-7"
   next: "after safe NPU0-3 release, launch deferred monkeypatch candidate, audit mounts/log hits, run correctness smoke, then real c1 quick gate and c1/c5/c8/c16 median-of-three E2E"
+
+runtime_monkeypatch_bounded_mmar_t11_20260907:
+  status: rejected_at_c1_p95_gate
+  commit: ebe9b69aad45a24fa79437705f00ebbeed977e55
+  container: qwen35_monkeypatch_prefill_npu03_20260907t11
+  container_id: c87fb7af3487a7f0b53ba69680f921a6307795ef80e4eff6a7155cb31c4f1fcb
+  runtime: "physical Ascend 910B4 NPU0-3; TP4/DP1; BF16; quantization=None; speculative_config=None; vLLM 0.23.0"
+  delivery_audit: "only the experiment worktree and scripts/qwen35_ascend_monkeypatch were mounted read-only; no vLLM or vLLM-Ascend source overlay"
+  activation: "all four TP workers enabled multiprocessing-child runtime hooks, installed GDN gate/up prefetch and RMSNorm hooks, installed GraphFusionPassManager and inserted bounded MMAR; each rank decomposed 128 MMAR nodes for the 513-16384 prefill range"
+  smoke: "1/1 completed, zero errors, natural EOS; 1810 prompt tokens and 104 completion tokens"
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/candidates/runtime-monkeypatch-bounded-mmar-t11-20260907T1838Z
+  c1_repetitions:
+    r1: {ttft_p95_ms: 6247.503157099709, ttft_p99_ms: 9844.398103465799, tpot_p95_ms: 37.371806043665856, tpot_p99_ms: 38.2444337522611}
+    r2: {ttft_p95_ms: 505.1955755101517, ttft_p99_ms: 515.783212936949, tpot_p95_ms: 32.30984314544706, tpot_p99_ms: 36.52329542674124}
+    r3: {ttft_p95_ms: 498.29176398925483, ttft_p99_ms: 513.2949767564423, tpot_p95_ms: 29.01236186963468, tpot_p99_ms: 35.135644649769276}
+  c1_median_of_three:
+    ttft_p95_ms: 505.1955755101517
+    ttft_p95_speedup: 1.912777828
+    tpot_p95_ms: 32.30984314544706
+    tpot_p95_speedup: 1.208482466
+  gate: "TTFT P95 passes 1.5x; TPOT P95 misses 1.5x and requires about 19.43% additional latency reduction from 32.3098 ms to at most 26.0306 ms"
+  decision: "reject before c5/c8/c16 expansion, semantic capture and candidate profiling; bounded prefill MMAR does not close the c1 decode TPOT gap"
+  environment_note: "an unrelated workload began using NPU4-7 during the screen; it was not stopped or modified, and the candidate remained confined to NPU0-3"
+  resource_release: "t11 stopped after exact ID verification and exited 0; NPU0-3 idle afterward; NPU4-7 workload untouched"
+  next: "do not retry this stack unchanged; pursue a materially new ASCEND910B decode MMAR/HCCL lifecycle optimization with an exact-shape operator gate before another E2E launch"
