@@ -3276,3 +3276,33 @@ MLP prefetch implementation conflicts with the feature removal in
 `e77502ef715f612f2cc6f3c833174431f26cb765`; and the inplace MMAR candidate
 is excluded because it failed the real E2E gate. The target repository product
 code remains unchanged.
+
+## Long-prefill AllReduce+RMSNorm candidate rejected at activation
+
+The isolated vLLM-Ascend branch
+`work/exp-20260907-qwen35-prefill-allreduce-rms` at signed commit
+`74b83e11f563af47baa4d298bd0725d49ac4bc2c` adds an opt-in token threshold
+to `MatmulAllreduceRowParallelOp`. With threshold 512, decode-sized graphs
+retain the existing MMAR path while long-prefill graphs use ordinary BF16
+GEMM plus TP AllReduce so the built-in `MatmulAllReduceAddRMSNormPass` can
+attempt fusion. Focused CPU unit tests passed `14/14`; `ruff` was unavailable
+in the image, so no lint claim is made.
+
+The real TP4 activation used physical 910B4 NPU0-3 and stacked the retained
+GDN projection fusion plus dense gate/up prefetch 0.1. Configuration evidence
+confirmed `fuse_allreduce_rms=True`, and compilation split into `(1,512)` and
+`(513,32768)`; both graphs compiled. During the subsequent maximum-shape
+profile run, TP0 hit ACL error `507014`: AICore execution timed out in stream
+synchronization. Engine startup failed before `/v1/models`, chat smoke,
+correctness, or E2E benchmarking. Therefore this candidate is rejected at
+the activation gate and produces no performance claim. Do not retry the same
+910B4 long-prefill fusion unchanged; first isolate the fused operator at the
+exact long-prefill shape and prove bounded execution plus numerical output.
+
+Immutable evidence:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/activation-probes/tp4-npu03-qwen35-prefill-ar-rms-v1-20260907T1012Z`.
+Service-log SHA256 is
+`c40943f3aee9f9259c39728d200d77476a02f5c5d04f328b0db60fe7a7216104`;
+container-inspect SHA256 is
+`19b05f60bd4cf9d7db5963b251fb08bb1ca654c2f4907884efec3215a37f6d63`.
+The failed container released NPU0-3; NPU4-7 were not modified.
