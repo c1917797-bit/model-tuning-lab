@@ -59,6 +59,9 @@ case "$candidate_mode" in
   qwen35-gdn-gateup-prefetch-0p1-proj-fusion)
     default_config="$repo_root/configs/qwen35-query-rewrite-gdn-proj-fusion-prefetch0p1-mmar-online-tiling-candidate.yaml"
     ;;
+  qwen35-gdn-proj-fusion-inplace-tail)
+    default_config="$repo_root/configs/qwen35-query-rewrite-gdn-proj-fusion-prefetch0p1-mmar-online-tiling-candidate.yaml"
+    ;;
   qwen35-gdn-gateup-down-prefetch-0p1)
     default_config="$repo_root/configs/qwen35-query-rewrite-qwen35-gdn-gateup-down-prefetch-0p1-candidate.yaml"
     ;;

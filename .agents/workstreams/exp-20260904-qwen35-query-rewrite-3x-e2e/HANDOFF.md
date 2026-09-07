@@ -3194,3 +3194,65 @@ next stage. Both unsafe patterns produced heap corruption.
 The old `p0` workload was repeatedly relaunched on NPU0-3 by an external
 mechanism during this screen. Exact competing containers were stopped or
 reversibly renamed to create clean measurement windows. NPU4-7 were not used.
+
+## A2 inplace MMAR+Add+RMSNorm integrated and rejected by E2E gate
+
+The isolated vLLM-Ascend branch
+`work/exp-20260907-qwen35-a2-inplace-mmar-rms` at commit
+`7ffb081dbbc1069c2d3b4ad19a212752e5e06b73` binds
+`aclnnInplaceMatmulAllReduceAddRmsNorm` as
+`npu_inplace_matmul_all_reduce_add_rms_norm`. The graph pass requires the
+residual to be an exclusive internal node and enables the inplace pattern only
+for compile range `(1,8)`; range `(9,32768)` is deliberately excluded.
+The custom extension SHA256 is
+`7ef5fa67833b84226f8f40fcc7ac916b9bdfc8a2f7d6b26704fdf61e6ec41d9b`.
+The focused unit suite passed 15 tests.
+
+Physical NPU0-3 TP4 BF16 microbench covered the two Qwen3.5-27B row-parallel
+families at M=1/5/8/16. All eight cells were correct and returned the residual
+alias on every rank. M=1/5/8 speedups were 1.044x-1.068x, while both M=16
+shapes were approximately 1.000x; this is why the integration caps the
+inplace pass at eight tokens. Immutable microbench evidence:
+
+- `/cache/cch/eval-runs/exp-20260907-qwen35-a2-inplace-mmar-rms/a2-inplace-mmar-rms-m1-v1-20260907T073500Z`
+- `/cache/cch/eval-runs/exp-20260907-qwen35-a2-inplace-mmar-rms/a2-inplace-mmar-rms-m1-5-8-16-v2-20260907T074000Z`
+
+The main service runner now contains an isolated
+`qwen35-gdn-proj-fusion-inplace-tail` mode. It stacks the retained Qwen3.5
+GDN projection fusion, dense gate/up prefetch ratio 0.1, MMAR online tiling,
+and the new inplace tail pass. At real service compilation each TP rank
+normalized 48 copies and fused 111 patterns for range `(1,8)`; each rank
+reported `applicable=False` for `(9,32768)`.
+
+One initial launch is diagnostic-only: the unrelated
+`vllm-ep-310p-research-910b-monitor` container had all eight NPU devices and
+the manager devices mounted, causing an official-image control probe to report
+`device_count=0` and `rtGetSocVersion` failure. Stopping that sleep-only
+container restored `device_count=4` and target `Ascend910B4`. No performance
+claim is derived from the failed launch.
+
+The authoritative single-repeat E2E screen used physical NPU0-3, the frozen
+`/cache/cch/query_rewrite.jsonl` SHA256
+`a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e`,
+32 natural-EOS requests per c1/c5/c8/c16 cell, and no quantization, MTP,
+speculative decoding, or retraining. All 128 requests completed without
+runtime errors.
+
+| Concurrency | P95 TTFT | vs frozen baseline | P95 TPOT | vs frozen baseline |
+|---:|---:|---:|---:|---:|
+| c1 | 6115.848 ms | 0.158x | 33.420 ms | 1.168x |
+| c5 | 7501.345 ms | 1.590x | 52.152 ms | 1.393x |
+| c8 | 6298.099 ms | 2.020x | 69.599 ms | 1.580x |
+| c16 | 6559.411 ms | 1.979x | 80.888 ms | 1.703x |
+
+Relative to the retained best, P95 TPOT regressed by 18.2%, 18.5%, 11.0%,
+and 16.3% at c1/c5/c8/c16. TTFT improved only at c8/c16 by 4.5%/3.5%;
+c5 regressed 21.9%, and c1 developed a severe long tail. Therefore reject
+this stack before a three-repeat promotion run and retain
+`qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1` as best.
+
+Immutable E2E evidence:
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-npu03-qwen35-gdn-proj-fusion-inplace-tail-nospec-v2-20260907T082700Z`.
+The generated decision is `iterate-performance`; its quality gate remains
+`unproven` because the dataset answer fields do not establish full
+`精读无损`. Do not retry this exact inplace stack unchanged.
