@@ -8,6 +8,11 @@
 - Branch-local state: active; NPU0-3 were proven free in the current AWMCP
   session; not integrated.
 - Current branch checkpoint before this update: `aa6c886a2ce5`.
+- Takeover checkpoint `e711dd9` is pushed and equals the workstream upstream.
+- The worktree still contains pre-existing modified benchmark/profile scripts
+  and untracked historical handoff/config/prefetch files. They were not staged
+  or altered by the takeover. Inspect ownership path by path; never use
+  `git add -A` or treat a dirty worktree as disposable.
 - Latest user stop gate supersedes the historical 1.5x/3x labels: median of
   three per-run P95 values must show at least 2x speedup for both TTFT and
   TPOT at c1/c5/c8/c16 versus the frozen MTP-off baseline.
