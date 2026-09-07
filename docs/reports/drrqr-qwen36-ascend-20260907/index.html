@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DRRQR 状态降维方法在 Qwen3.6-27B 与 4×Ascend 910B4 上的论文穿刺、证据与决策报告">
+  <title>DRRQR × Qwen3.6-27B：论文到昇腾实验室穿刺报告</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #667085;
+      --paper: #f5f7fb;
+      --panel: #ffffff;
+      --line: #d9e0ea;
+      --navy: #11223f;
+      --blue: #2f6fed;
+      --cyan: #12a3b4;
+      --green: #16845b;
+      --green-soft: #eaf8f1;
+      --amber: #b66700;
+      --amber-soft: #fff7e7;
+      --red: #c53b3b;
+      --red-soft: #fff0ef;
+      --violet: #6941c6;
+      --shadow: 0 18px 48px rgba(17, 34, 63, .10);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+      line-height: 1.68;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    header {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(circle at 83% 20%, rgba(36, 202, 216, .28), transparent 28%),
+        radial-gradient(circle at 12% 90%, rgba(104, 65, 198, .32), transparent 34%),
+        linear-gradient(125deg, #0d1930 0%, #162f57 58%, #0d5664 100%);
+      padding: 74px 0 58px;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .10;
+      background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+      background-size: 42px 42px;
+      pointer-events: none;
+    }
+    .hero { position: relative; z-index: 1; display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; align-items: center; }
+    .eyebrow { color: #7ee9ef; font-size: 14px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 14px 0 18px; font-size: clamp(42px, 5.3vw, 70px); line-height: 1.05; letter-spacing: -.04em; }
+    .lede { margin: 0; max-width: 830px; color: #dce7f7; font-size: 20px; }
+    .hero-card { border: 1px solid rgba(255,255,255,.18); border-radius: 18px; padding: 24px; background: rgba(8,22,43,.48); backdrop-filter: blur(8px); }
+    .hero-card .label { color: #99ecf0; font-size: 13px; font-weight: 800; }
+    .hero-card .big { margin: 6px 0 12px; font-size: 42px; font-weight: 850; line-height: 1; }
+    .hero-card p { margin: 0; color: #cfdaea; }
+    nav { background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 4; box-shadow: 0 6px 22px rgba(17,34,63,.05); }
+    nav .wrap { display: flex; gap: 20px; overflow-x: auto; padding-top: 13px; padding-bottom: 13px; white-space: nowrap; }
+    nav a { color: #3d4b64; font-size: 14px; font-weight: 700; }
+    main { padding: 26px 0 74px; }
+    section { scroll-margin-top: 74px; margin: 38px 0; }
+    .kicker { color: var(--blue); font-size: 13px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin: 6px 0 12px; font-size: 34px; line-height: 1.2; letter-spacing: -.02em; }
+    h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.35; }
+    p { margin: 0 0 12px; }
+    .note { color: var(--muted); font-size: 16px; }
+    .panel, .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .panel { padding: 26px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 22px; }
+    .card p:last-child { margin-bottom: 0; }
+    .metric { color: var(--blue); font-size: 36px; font-weight: 850; line-height: 1.1; }
+    .status { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 5px 11px; font-size: 12px; font-weight: 850; }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .rejected { color: var(--red); background: var(--red-soft); }
+    .pending { color: var(--amber); background: var(--amber-soft); }
+    .verified { color: var(--green); background: var(--green-soft); }
+    .callout { border: 1px solid #bcd0ff; border-left: 6px solid var(--blue); border-radius: 12px; background: #eef4ff; padding: 20px 22px; }
+    .callout strong { color: #123e9e; }
+    .callout.warn { border-color: #f0cf95; border-left-color: var(--amber); background: var(--amber-soft); }
+    .callout.danger { border-color: #f1c1be; border-left-color: var(--red); background: var(--red-soft); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .method-map { padding: 24px; overflow: hidden; }
+    .method-map svg { width: 100%; height: auto; display: block; }
+    .formula { margin-top: 18px; padding: 18px; border: 1px dashed #9bb2d7; border-radius: 12px; background: #f8fbff; text-align: center; font-family: Cambria, "Times New Roman", serif; font-size: 20px; overflow-wrap: anywhere; }
+    .chain { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+    .chain .step { position: relative; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: white; }
+    .chain .step:not(:last-child)::after { content: "→"; position: absolute; right: -13px; top: 35%; color: var(--blue); font-size: 24px; font-weight: 900; z-index: 2; }
+    .step b { display: block; margin-bottom: 5px; color: var(--navy); }
+    .step span { color: var(--muted); font-size: 14px; }
+    .arch-strip { display: grid; grid-template-columns: repeat(16, 1fr); gap: 5px; margin-top: 18px; }
+    .arch-strip span { height: 34px; border-radius: 6px; background: var(--cyan); display: grid; place-items: center; color: white; font-size: 10px; font-weight: 800; }
+    .arch-strip span:nth-child(4n) { background: var(--violet); }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; background: white; border: 1px solid var(--line); border-radius: 14px; }
+    th, td { padding: 14px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #edf2f8; color: #31405a; font-size: 14px; }
+    tr:last-child td { border-bottom: 0; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .good { color: var(--green); font-weight: 800; }
+    .bad { color: var(--red); font-weight: 800; }
+    .neutral { color: var(--amber); font-weight: 800; }
+    .chart { display: grid; gap: 15px; margin-top: 18px; }
+    .bar-row { display: grid; grid-template-columns: 116px 1fr 94px; gap: 12px; align-items: center; }
+    .bar-label { font-weight: 750; }
+    .track { height: 16px; border-radius: 999px; background: #e8edf5; overflow: hidden; }
+    .fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+    .fill.red { background: linear-gradient(90deg, #ef7871, var(--red)); }
+    .bar-value { text-align: right; font-variant-numeric: tabular-nums; font-weight: 800; }
+    .decision-lane { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .decision-card { padding: 22px; border-top: 5px solid var(--line); }
+    .decision-card.reject { border-top-color: var(--red); }
+    .decision-card.wait { border-top-color: var(--amber); }
+    .decision-card .dim { color: var(--muted); font-size: 14px; }
+    .timeline { position: relative; margin-left: 12px; padding-left: 28px; border-left: 2px solid #b9c7da; }
+    .event { position: relative; margin: 0 0 18px; padding: 18px 20px; background: white; border: 1px solid var(--line); border-radius: 12px; }
+    .event::before { content: ""; position: absolute; left: -36px; top: 23px; width: 14px; height: 14px; border-radius: 50%; background: var(--blue); border: 4px solid var(--paper); }
+    .event time { color: var(--blue); font-size: 13px; font-weight: 850; }
+    details { background: white; border: 1px solid var(--line); border-radius: 12px; margin: 12px 0; overflow: hidden; }
+    summary { padding: 16px 18px; cursor: pointer; font-weight: 800; background: #f8fafc; }
+    details > div { padding: 0 18px 18px; }
+    pre { margin: 14px 0 0; padding: 18px; border-radius: 11px; color: #d6e4ff; background: #101b2f; overflow-x: auto; font: 13px/1.58 "Cascadia Code", Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+    code { font-family: "Cascadia Code", Consolas, monospace; font-size: .92em; }
+    .hash { font-family: "Cascadia Code", Consolas, monospace; font-size: 12px; overflow-wrap: anywhere; color: #3e4c65; }
+    .evidence-list { list-style: none; padding: 0; margin: 0; }
+    .evidence-list li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .evidence-list li:last-child { border-bottom: 0; }
+    .footer { margin-top: 48px; padding: 26px 0 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    @media (max-width: 900px) {
+      .hero, .grid-2, .cards, .decision-lane, .chain { grid-template-columns: 1fr; }
+      .chain .step:not(:last-child)::after { display: none; }
+      .hero-card { margin-top: 8px; }
+      .bar-row { grid-template-columns: 96px 1fr 78px; }
+      h2 { font-size: 29px; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      header { padding: 52px 0 42px; }
+      h1 { font-size: 40px; }
+      .lede { font-size: 17px; }
+      .panel { padding: 18px; }
+      th, td { padding: 10px 9px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow">Paper-to-Ascend · Evidence-backed delivery · 2026-09-07</div>
+        <h1>DRRQR × Qwen3.6-27B</h1>
+        <p class="lede">把线性注意力的低秩假设变成可部署的 Q/K 结构化降维，并在 4×Ascend 910B4 上用冻结 A/B、重复测量和质量门限判断：机制可行，但 Dk64/Dk96 当前不可采用；Dk112 等待正式运行。</p>
+      </div>
+      <div class="hero-card">
+        <div class="label">当前最终判断</div>
+        <div class="big">2 Reject · 1 Pending</div>
+        <p>Dk64、Dk96：质量门失败。Dk112：checkpoint 已审计，NPU 证据尚缺。没有稳定端到端收益，也没有 paper-exact reproduction。</p>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="报告目录">
+    <div class="wrap">
+      <a href="#verdict">结论</a><a href="#principle">核心原理</a><a href="#fit">架构适配</a><a href="#protocol">实验协议</a><a href="#performance">性能</a><a href="#quality">质量</a><a href="#dk112">Dk112</a><a href="#comparison">HYPIC 对比</a><a href="#lessons">经验与陷阱</a><a href="#recovery">恢复命令</a><a href="#evidence">证据入口</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="verdict">
+      <div class="kicker">Executive verdict</div>
+      <h2>先给结论：代码路径通了，收益结论没有通过</h2>
+      <p class="note">这里刻意把“方法能跑”“性能均值变好”“满足采用条件”分开。三者不是一回事。</p>
+      <div class="decision-lane">
+        <article class="card decision-card reject">
+          <span class="status rejected">REJECTED</span>
+          <h3>Dk64 · 50% 降维</h3>
+          <p class="dim">head_k_dim 128 → 64</p>
+          <p>性能均值约改善 2.6%–2.7%，但重复区间重叠；GSM8K 下降 0.202 pp，超过基线波动门限。</p>
+        </article>
+        <article class="card decision-card reject">
+          <span class="status rejected">REJECTED</span>
+          <h3>Dk96 · 25% 降维</h3>
+          <p class="dim">head_k_dim 128 → 96</p>
+          <p>性能均值仅改善 0.3%–0.4%，重复区间重叠；GSM8K 下降 0.303 pp，质量门失败。</p>
+        </article>
+        <article class="card decision-card wait">
+          <span class="status pending">PENDING</span>
+          <h3>Dk112 · 12.5% 降维</h3>
+          <p class="dim">head_k_dim 128 → 112</p>
+          <p>checkpoint 与结构审计通过；尚未启动 NPU smoke、fresh baseline quality、treatment quality、performance 或 profile。</p>
+        </article>
+      </div>
+      <div class="callout danger" style="margin-top:20px"><strong>允许的最高层级结论：</strong>DRRQR 结构化状态降维机制能适配 Qwen3.6-27B 的 GDN 层并在昇腾真实权重路径执行。<strong>不允许</strong>说论文已完整复现、算法无损、Dk64/Dk96 可采用，或已建立稳定 serving benefit。</div>
+    </section>
+
+    <section id="principle">
+      <div class="kicker">Mechanism</div>
+      <h2>核心点：用“保秩的结构化选列”缩小递归状态</h2>
+      <div class="grid-2">
+        <div class="panel method-map">
+          <svg viewBox="0 0 720 430" role="img" aria-labelledby="method-title method-desc">
+            <title id="method-title">DRRQR 状态降维原理图</title>
+            <desc id="method-desc">从低秩 Q/K 激活，经 Strong RRQR 选择代表通道，Q 和 K 同步裁剪，将状态矩阵 key 轴从 128 缩小到 r。</desc>
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#2f6fed"/><stop offset="1" stop-color="#12a3b4"/></linearGradient>
+              <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#6680a8"/></marker>
+            </defs>
+            <rect x="18" y="30" width="190" height="150" rx="18" fill="#edf4ff" stroke="#8cb0f6"/>
+            <text x="113" y="60" text-anchor="middle" font-size="20" font-weight="800" fill="#173665">校准激活 Q / K</text>
+            <g fill="#2f6fed">
+              <rect x="43" y="84" width="16" height="72" rx="3"/><rect x="67" y="96" width="16" height="60" rx="3"/><rect x="91" y="77" width="16" height="79" rx="3"/><rect x="115" y="110" width="16" height="46" rx="3"/><rect x="139" y="88" width="16" height="68" rx="3"/><rect x="163" y="120" width="16" height="36" rx="3"/>
+            </g>
+            <text x="113" y="170" text-anchor="middle" font-size="13" fill="#5c6f8d">有效低秩 · 通道冗余</text>
+            <line x1="214" y1="105" x2="276" y2="105" stroke="#6680a8" stroke-width="3" marker-end="url(#arrow)"/>
+            <rect x="282" y="30" width="170" height="150" rx="18" fill="#f1ecff" stroke="#aa91e9"/>
+            <text x="367" y="60" text-anchor="middle" font-size="20" font-weight="800" fill="#493180">Strong RRQR</text>
+            <path d="M319 91 h96 M319 115 h74 M319 139 h52" stroke="#6941c6" stroke-width="12" stroke-linecap="round"/>
+            <text x="367" y="170" text-anchor="middle" font-size="13" fill="#6c5b8a">选出保列空间的代表通道</text>
+            <line x1="458" y1="105" x2="520" y2="105" stroke="#6680a8" stroke-width="3" marker-end="url(#arrow)"/>
+            <rect x="526" y="30" width="176" height="150" rx="18" fill="#e9fbf8" stroke="#75cbbf"/>
+            <text x="614" y="60" text-anchor="middle" font-size="20" font-weight="800" fill="#14584f">Q/K 同步裁剪</text>
+            <rect x="553" y="84" width="122" height="22" rx="6" fill="url(#g1)"/>
+            <rect x="553" y="116" width="92" height="22" rx="6" fill="url(#g1)"/>
+            <text x="614" y="166" text-anchor="middle" font-size="13" fill="#3b746e">同一索引 · dense 对齐</text>
+            <line x1="118" y1="207" x2="118" y2="257" stroke="#6680a8" stroke-width="3" marker-end="url(#arrow)"/>
+            <line x1="612" y1="207" x2="612" y2="257" stroke="#6680a8" stroke-width="3" marker-end="url(#arrow)"/>
+            <rect x="23" y="264" width="215" height="132" rx="18" fill="#fff" stroke="#bdc8d8"/>
+            <text x="130" y="296" text-anchor="middle" font-size="18" font-weight="800" fill="#243550">原状态 Sₜ</text>
+            <rect x="57" y="318" width="146" height="48" rx="7" fill="#dbe7f8" stroke="#7d96bb"/>
+            <text x="130" y="348" text-anchor="middle" font-size="18" fill="#314766">dᵥ × 128</text>
+            <rect x="494" y="264" width="215" height="132" rx="18" fill="#fff" stroke="#72c5b8"/>
+            <text x="601" y="296" text-anchor="middle" font-size="18" font-weight="800" fill="#14584f">降维状态 S′ₜ</text>
+            <rect x="539" y="318" width="124" height="48" rx="7" fill="#c9f0e8" stroke="#3da695"/>
+            <text x="601" y="348" text-anchor="middle" font-size="18" fill="#17695d">dᵥ × r</text>
+            <line x1="244" y1="330" x2="483" y2="330" stroke="#2f6fed" stroke-width="4" marker-end="url(#arrow)"/>
+            <text x="364" y="312" text-anchor="middle" font-size="17" font-weight="800" fill="#2f6fed">状态、权重、相关计算同步变小</text>
+            <text x="364" y="359" text-anchor="middle" font-size="14" fill="#667085">r = 64 / 96 / 112</text>
+          </svg>
+        </div>
+        <div class="panel">
+          <h3>它到底在优化什么？</h3>
+          <p>线性注意力或 Gated DeltaNet 用递归状态承载历史信息。状态矩阵的一条轴由 key dimension <code>d_k</code> 决定。若 Q/K 激活的有效秩明显低于 <code>d_k</code>，就有机会删掉冗余通道。</p>
+          <p><strong>DRRQR/Strong RRQR 的角色</strong>不是直接“加速”，而是在校准激活上选出尽量保持列空间的一组通道；真正让部署栈变小的是后续对 Q/K 权重、配置与状态形状做一致的结构化切片。</p>
+          <div class="formula">S<sub>t</sub> ∈ ℝ<sup>dᵥ×dₖ</sup>　→　Q′ = QP, K′ = KP　→　S′<sub>t</sub> ∈ ℝ<sup>dᵥ×r</sup>, r &lt; dₖ</div>
+          <div class="callout" style="margin-top:18px"><strong>一句话：</strong>先用 rank-revealing QR 决定“哪些 Q/K 通道最值得留下”，再同步裁剪，让 recurrent state 真正从 128 缩到 r。</div>
+        </div>
+      </div>
+      <div class="chain">
+        <div class="step"><b>1 · 低秩假设</b><span>训练后的 Q/K 表征存在冗余，校准激活的有效秩小于原维度。</span></div>
+        <div class="step"><b>2 · 保秩选列</b><span>Strong RRQR 选择更能保持激活子空间的通道，而非机械取前 r 维。</span></div>
+        <div class="step"><b>3 · 结构化裁剪</b><span>同一索引同步作用于 Q 与 K，保持 dense、轴对齐的运行形态。</span></div>
+        <div class="step"><b>4 · 端到端验证</b><span>只有精度门、重复性能与热路径证据同时通过，才能谈采用。</span></div>
+      </div>
+    </section>
+
+    <section id="fit">
+      <div class="kicker">Architecture fit</div>
+      <h2>为什么能穿刺 Qwen3.6-27B，又为什么上限可能不大</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>模型内的作用范围</h3>
+          <p>64 层中，48 层是 GDN/线性注意力，16 层是 full attention；每 4 层为 <strong>3×GDN + 1×Full Attention</strong>。本次只改变 48 个 GDN 层的 Q/K 相关张量，共 96 tensors。</p>
+          <div class="arch-strip" aria-label="Qwen3.6-27B 64 层结构示意，每四层中前三层为 GDN，第四层为全注意力">
+            <span>G</span><span>G</span><span>G</span><span>F</span><span>G</span><span>G</span><span>G</span><span>F</span><span>G</span><span>G</span><span>G</span><span>F</span><span>G</span><span>G</span><span>G</span><span>F</span>
+          </div>
+          <p class="note" style="margin-top:10px">示意为 16 个四层组中的代表片段；G=GDN，F=Full Attention。</p>
+        </div>
+        <div class="panel">
+          <h3>收益成立的四个必要条件</h3>
+          <ol>
+            <li><strong>秩：</strong>校准激活确实有可剪冗余。</li>
+            <li><strong>质量：</strong>被删除通道对目标任务不关键。</li>
+            <li><strong>执行：</strong>昇腾算子真实消费变小的 <code>head_k_dim</code>，不是只改配置。</li>
+            <li><strong>系统：</strong>节省大于全注意力、MLP、通信、调度与框架开销。</li>
+          </ol>
+          <div class="callout warn"><strong>关键认识：</strong>Dk 减半不等于整模型时间减半。它只缩小部分层、部分张量和部分算子；端到端增益天然会被 Amdahl 定律压缩。</div>
+        </div>
+      </div>
+      <table style="margin-top:20px">
+        <thead><tr><th>对象</th><th>冻结身份 / 结构</th><th>证据边界</th></tr></thead>
+        <tbody>
+          <tr><td>论文</td><td><em>The Key to State Reduction in Linear Attention: A Rank-based Perspective</em>，arXiv 2602.04852v2</td><td>本报告验证其机制在目标栈上的可行性，不等同论文训练配置复现。</td></tr>
+          <tr><td>官方实现</td><td><code>camail-official/LinearAttentionPruning</code> @ <code>919d8667…</code></td><td class="hash">rrqr.py SHA256 fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62</td></tr>
+          <tr><td>校准</td><td>LongBench-v2 前 16 条 × 2048 target-model tokens</td><td class="bad">不是 FineWeb-Edu；有 evaluation-family overlap 风险，禁止声称 paper-exact。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="protocol">
+      <div class="kicker">Frozen protocol</div>
+      <h2>实验设计：先冻结标尺，再只改变 Dk</h2>
+      <div class="cards">
+        <div class="card"><div class="metric">4×</div><h3>Ascend 910B4 · TP4</h3><p>host NPU4-7，容器内 0-3；CPU0-95；正式端口 8225。设备映射是协议，不是备注。</p></div>
+        <div class="card"><div class="metric">3×</div><h3>每 arm 重复</h3><p>性能每 arm 3 runs；质量每数据集 3 runs。比较均值，也检查原始区间是否分离。</p></div>
+        <div class="card"><div class="metric">3072</div><h3>校准 capture 文件</h3><p>48 layers × 4 ranks × 16 samples，数量和索引完整性都进入独立审计。</p></div>
+      </div>
+      <table style="margin-top:20px">
+        <thead><tr><th>协议维度</th><th>冻结值</th><th>为什么重要</th></tr></thead>
+        <tbody>
+          <tr><td>性能流量</td><td>32768 input / 1024 output / 40 requests / concurrency 16 / 2 warmups</td><td>保证 baseline、Dk64、Dk96 的请求形状一致。</td></tr>
+          <tr><td>质量评测</td><td>LongBench-v2 127；GSM8K 1319；seed 0；temperature 0；thinking off</td><td>确定性解码仍可能受系统路径影响，所以保留 3 次重复。</td></tr>
+          <tr><td>排除项</td><td>CEval 按用户决定排除；NIAH+ 因无权威文件不运行</td><td>不使用替代数据填洞，也不把缺失项写成通过。</td></tr>
+          <tr><td>质量门</td><td>baseline mean − treatment mean ≤ baseline 3-run range</td><td>用实测基线波动定义容忍范围，不发明通用阈值。</td></tr>
+          <tr><td>唯一算法变量</td><td><code>head_k_dim</code>：128 → 64 或 96</td><td>将差异归因限制在状态 key 维度。</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn" style="margin-top:20px"><strong>资源隔离：</strong>NPU0-3 是受保护的外部 lane。本实验只获准使用 host NPU4-7；容器内必须写 0-3。任何未来续跑都要在同一会话重新验证卡、端口、容器、进程和 controller 归属。</div>
+    </section>
+
+    <section id="performance">
+      <div class="kicker">Serving performance</div>
+      <h2>均值方向有利，但重复区间没有拉开</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Dk64 相对 baseline</h3>
+          <div class="chart" aria-label="Dk64 性能相对变化图">
+            <div class="bar-row"><span class="bar-label">TTFT</span><div class="track"><div class="fill" style="width:90.6%"></div></div><span class="bar-value good">−2.717%</span></div>
+            <div class="bar-row"><span class="bar-label">TPOT</span><div class="track"><div class="fill" style="width:87.3%"></div></div><span class="bar-value good">−2.620%</span></div>
+            <div class="bar-row"><span class="bar-label">吞吐</span><div class="track"><div class="fill" style="width:90.4%"></div></div><span class="bar-value good">+2.711%</span></div>
+            <div class="bar-row"><span class="bar-label">时长</span><div class="track"><div class="fill" style="width:86.7%"></div></div><span class="bar-value good">−2.600%</span></div>
+          </div>
+          <p class="note" style="margin-top:14px">视觉条仅表达变化量相对 3% 的尺度，不是绝对性能。四项 raw 3-run intervals 均与 baseline 重叠。</p>
+        </div>
+        <div class="panel">
+          <h3>Dk96 相对 baseline</h3>
+          <div class="chart" aria-label="Dk96 性能相对变化图">
+            <div class="bar-row"><span class="bar-label">TTFT</span><div class="track"><div class="fill" style="width:13.4%"></div></div><span class="bar-value neutral">−0.401%</span></div>
+            <div class="bar-row"><span class="bar-label">TPOT</span><div class="track"><div class="fill" style="width:14.8%"></div></div><span class="bar-value neutral">−0.443%</span></div>
+            <div class="bar-row"><span class="bar-label">吞吐</span><div class="track"><div class="fill" style="width:12.7%"></div></div><span class="bar-value neutral">+0.381%</span></div>
+            <div class="bar-row"><span class="bar-label">时长</span><div class="track"><div class="fill" style="width:10.9%"></div></div><span class="bar-value neutral">−0.327%</span></div>
+          </div>
+          <p class="note" style="margin-top:14px">变化落在约 0.3%–0.4%，更接近系统噪声尺度；四项区间全部重叠。</p>
+        </div>
+      </div>
+      <table style="margin-top:20px">
+        <thead><tr><th>Arm</th><th class="num">TTFT ms ↓</th><th class="num">TPOT ms ↓</th><th class="num">Output tok/s ↑</th><th class="num">Duration s ↓</th><th>结论</th></tr></thead>
+        <tbody>
+          <tr><td>Baseline</td><td class="num">38,456.890</td><td class="num">73.629</td><td class="num">125.819</td><td class="num">325.902</td><td>参照</td></tr>
+          <tr><td>Dk64</td><td class="num good">37,411.855</td><td class="num good">71.699</td><td class="num good">129.231</td><td class="num good">317.430</td><td class="neutral">均值有利，区间重叠</td></tr>
+          <tr><td>Dk96</td><td class="num neutral">38,302.676</td><td class="num neutral">73.303</td><td class="num neutral">126.298</td><td class="num neutral">324.836</td><td class="neutral">变化很小，区间重叠</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="quality">
+      <div class="kicker">Correctness first</div>
+      <h2>真正阻断采用的是 GSM8K，而不是性能</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>LongBench-v2：两组均通过</h3>
+          <table>
+            <thead><tr><th>Arm</th><th class="num">三次均值</th><th class="num">对 baseline</th><th>Gate</th></tr></thead>
+            <tbody>
+              <tr><td>Baseline</td><td class="num">45.669291%</td><td class="num">—</td><td>range 3.937008 pp</td></tr>
+              <tr><td>Dk64</td><td class="num">48.293963%</td><td class="num good">+2.624672 pp</td><td class="good">PASS</td></tr>
+              <tr><td>Dk96</td><td class="num">49.343832%</td><td class="num good">+3.674541 pp</td><td class="good">PASS</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top:12px">由于校准样本来自 LongBench-v2 家族，这里的正向变化不能被当作无偏泛化证明。</p>
+        </div>
+        <div class="panel">
+          <h3>GSM8K：两组均失败</h3>
+          <table>
+            <thead><tr><th>Arm</th><th class="num">三次均值</th><th class="num">对 baseline</th><th>Gate</th></tr></thead>
+            <tbody>
+              <tr><td>Baseline</td><td class="num">96.310336%</td><td class="num">—</td><td>range 0.151630 pp</td></tr>
+              <tr><td>Dk64</td><td class="num">96.108163%</td><td class="num bad">−0.202173 pp</td><td class="bad">FAIL</td></tr>
+              <tr><td>Dk96</td><td class="num">96.007076%</td><td class="num bad">−0.303260 pp</td><td class="bad">FAIL</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top:12px">下降幅度分别超过 baseline 三次 range，因此不是按预注册规则可接受的“基线内波动”。</p>
+        </div>
+      </div>
+      <div class="callout danger" style="margin-top:20px"><strong>决策逻辑：</strong>质量门优先于性能门。即使 Dk64 的性能均值好看，只要冻结 workload 的任一关键数据集失败，就不能进入 adoption；profiling 也按预注册计划停止，避免为已失败候选继续消耗资源。</div>
+    </section>
+
+    <section id="dk112">
+      <div class="kicker">Next scientific loop</div>
+      <h2>Dk112：不是“补一个数字”，而是新的质量优先实验</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <span class="status verified">STRUCTURE VERIFIED</span>
+          <h3 style="margin-top:12px">更保守的 12.5% 裁剪</h3>
+          <ul>
+            <li><strong>实验 ID：</strong><code>state-reduction-qwen36-dk112-quality-first-20260907</code></li>
+            <li><strong>目标：</strong>128 → 112，只删 16 个 Q/K 通道。</li>
+            <li><strong>构建：</strong><code>exec-0000000000000cb7</code>，exit 0，190,904 ms。</li>
+            <li><strong>结构：</strong>48 layers、96 tensors、6 rewritten shards、9 hardlinked shards。</li>
+            <li><strong>Runner：</strong><code>py_compile</code> 与 <code>git diff --check</code> 已通过。</li>
+          </ul>
+          <p class="hash"><strong>Manifest:</strong> 033eac4d29e12e9f219b213f12a15ebd3217e183f353c43c2200bb47f149243a</p>
+          <p class="hash"><strong>Audit:</strong> 0d9efd2418d9b34e3ef16b78949c366d79992b587bc53cc6110b7fd058e6a12c</p>
+        </div>
+        <div class="panel">
+          <span class="status pending">RUNTIME EVIDENCE PENDING</span>
+          <h3 style="margin-top:12px">必须按这个顺序继续</h3>
+          <div class="timeline">
+            <div class="event"><time>GATE 1</time><h3>真实权重 smoke</h3><p>验证服务健康、输出、NPU worker 与日志中的 <code>head_k_dim=112</code>。</p></div>
+            <div class="event"><time>GATE 2</time><h3>Fresh baseline + Dk112 quality</h3><p>不能复用旧 baseline；两个数据集都通过，最多支持“未观察到实质退化”。</p></div>
+            <div class="event"><time>GATE 3</time><h3>条件式 performance</h3><p>仅质量通过才跑同协议的重复性能；区间要有可解释分离。</p></div>
+            <div class="event"><time>GATE 4</time><h3>必要时 profile</h3><p>用于解释算子级节省是否被系统开销吞没，不替代端到端数据。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <div class="kicker">Do not pool unlike mechanisms</div>
+      <h2>为什么同事的 HYPIC 能有 30%+，DRRQR 当前只有零点几到 2.7%</h2>
+      <table>
+        <thead><tr><th>维度</th><th>同事 HYPIC 成功实践</th><th>本次 DRRQR 穿刺</th><th>为什么不能直接类比</th></tr></thead>
+        <tbody>
+          <tr><td>核心机制</td><td>位置无关缓存/复用，减少重复 prefill 工作</td><td>缩小 GDN 的 key/state 维度</td><td>一个跳过大量重复计算，一个只压缩部分算子维度。</td></tr>
+          <tr><td>模型/设备</td><td>Qwen3.5-27B，2×Ascend 910C，TP2</td><td>Qwen3.6-27B，4×Ascend 910B4，TP4</td><td>模型、硬件代际、卡数、TP 和通信成本均不同。</td></tr>
+          <tr><td>报告性能</td><td>TTFT −46.6%，TPOT −18.4%，throughput +38.5%，duration −27.8%</td><td>Dk64 约 2.6%–2.7%；Dk96 约 0.3%–0.4%，且区间重叠</td><td>HYPIC 命中服务主路径；DRRQR 只影响模型的一部分状态计算。</td></tr>
+          <tr><td>当前决策</td><td>同 denominator 的历史标尺复现已支持采用（带质量护栏）</td><td>Dk64/Dk96 被拒；Dk112 pending</td><td>科学问题不同，证据不可合并、绝对数不可借用。</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:20px"><strong>同事文档真正有用的部分</strong>不是那组数字，而是完整实验结构：固定 denominator、只切一个开关、严格热路径证明、重复性能与质量、可恢复 JSONL、独立 hash/count/index 审计。这个结构已经被吸收到本次 Paper-to-Ascend 流程。</div>
+    </section>
+
+    <section id="lessons">
+      <div class="kicker">Reusable knowledge</div>
+      <h2>哪些经验可以迁移到下一篇论文</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>继续复用的成功做法</h3>
+          <ul>
+            <li>冻结论文/代码 commit、关键文件 SHA、模型、镜像、数据、prompt、scorer、traffic shape 与资源 lane。</li>
+            <li>把“结构审计、真实权重 smoke、质量、性能、profile、最终审计”拆成依赖门。</li>
+            <li>持久化逐样本结果，只续跑未接受的 index；服务中断不抛弃已经验真的行。</li>
+            <li>比较重复分布而不只看均值；以 baseline 实测波动定义质量门。</li>
+            <li>保存 rejected、failed、inconclusive 结果，不把失败代码留在最终安全树。</li>
+            <li>结论分层：机制、实现、算子、服务、全模型、adoption 各自有独立证据。</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>这次暴露的高风险陷阱</h3>
+          <ul>
+            <li><strong>校准偏差：</strong>LongBench 家族校准后，LongBench 增益不能证明泛化。</li>
+            <li><strong>强度误判：</strong>更小剪枝比率不必然更高精度；Dk96 的 GSM8K 反而比 Dk64 更差。</li>
+            <li><strong>均值幻觉：</strong>2.7% 的均值变化若区间重叠，不能写成稳定收益。</li>
+            <li><strong>设备映射：</strong>host 4-7 在容器内是 0-3；写错会在启动前失败或伤及其他任务。</li>
+            <li><strong>路径失败：</strong>launcher 多写一个不存在的 <code>scripts/</code> 组件时应归类为 orchestration failure，不能算算法失败。</li>
+            <li><strong>无损夸大：</strong>通过有限门限最多是“未观察到实质退化”，不是数学或通用意义的 lossless。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="kicker">Exact resume</div>
+      <h2>精确恢复与续跑命令</h2>
+      <div class="callout warn"><strong>前置条件：</strong>以下 NPU 命令只有在重新明确授权使用 host NPU4-7，且同会话证明 lane 空闲、端口无冲突、无权威 controller 在运行后才能执行。不得操作 NPU0-3。</div>
+      <details open>
+        <summary>Dk112 第一个运行命令：仅 smoke</summary>
+        <div><pre>cd /cache/cch/.worktrees/WS-20260904-qwen38-dense-paper-to-ascend
+python3 .agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/state_reduction_dk112_runner.py \
+  --arm drrqr-dk112 \
+  --phase smoke</pre></div>
+      </details>
+      <details>
+        <summary>Dk112 checkpoint 只读重审</summary>
+        <div><pre>sha256sum /cache/cch/Qwen3.6-27B-gdn-drrqr-dk112/drrqr_manifest.json
+python3 - &lt;&lt;'PY'
+import json
+from pathlib import Path
+p = Path('/cache/cch/Qwen3.6-27B-gdn-drrqr-dk112/drrqr_manifest.json')
+x = json.loads(p.read_text())
+assert x['target_head_k_dim'] == 112
+assert x['changed_layers'] == 48
+assert x['changed_tensor_count'] == 96
+assert len(x['changed_shards']) == 6
+print('Dk112 manifest structural gate: PASS')
+PY</pre></div>
+      </details>
+      <details>
+        <summary>恢复顺序（不可跳门）</summary>
+        <div><pre>1. 重新证明 host NPU4-7、CPU0-95、port 8226、HCCL 27020-27120 可用
+2. 运行 drrqr-dk112 smoke，并验证 head_k_dim=112 热路径
+3. 运行 fresh baseline quality（LongBench-v2 + GSM8K，3 次）
+4. 运行 Dk112 quality（同协议，3 次）
+5. 两数据集均通过 baseline-variability gate 后，才运行 performance
+6. 仅在需要解释端到端结果时运行 native profile
+7. 最终 hash/count/index/resource-release audit
+8. 更新 experiment / evidence / decision / HANDOFF，不覆盖 Dk64/Dk96 负结果</pre></div>
+      </details>
+    </section>
+
+    <section id="evidence">
+      <div class="kicker">Traceability</div>
+      <h2>证据入口与哈希</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>正式 Dk64 / Dk96</h3>
+          <ul class="evidence-list">
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/HANDOFF.md">Workstream HANDOFF</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/MAINTAINER_RETROSPECTIVE.md">Maintainer retrospective</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/experiment-state-reduction-qwen36-formal-npu4-7-tp4.json">Experiment record</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evidence-state-reduction-qwen36-formal-npu4-7-tp4.json">Evidence ledger</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/decision-state-reduction-qwen36-formal-npu4-7-tp4.json">Decision ledger</a></li>
+          </ul>
+          <p class="hash" style="margin-top:14px"><strong>Dk64 manifest</strong><br>2eaa9a14fffe3dc0cd37906e08bee857be7c9ce2ed761f693a99a0ef02d90c0d</p>
+          <p class="hash"><strong>Dk96 manifest</strong><br>a8f8f162f15fb6e4717ed509927d93c549a2ef01eca4c88e45e75cdf900b16fc</p>
+        </div>
+        <div class="panel">
+          <h3>Dk112 quality-first 回合</h3>
+          <ul class="evidence-list">
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/experiment-state-reduction-qwen36-dk112-quality-first-20260907.json">Experiment record</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/evidence-state-reduction-qwen36-dk112-quality-first-20260907.json">Evidence ledger</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/decision-state-reduction-qwen36-dk112-quality-first-20260907.json">Decision ledger</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/knowledge-proposals-state-reduction-qwen36-dk112-20260907.json">Knowledge proposals</a></li>
+            <li><a href="../../../.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/state_reduction_dk112_runner.py">Dk112 runner</a></li>
+          </ul>
+          <p class="hash" style="margin-top:14px"><strong>Dk112 manifest</strong><br>033eac4d29e12e9f219b213f12a15ebd3217e183f353c43c2200bb47f149243a</p>
+          <p class="hash"><strong>Dk112 structural audit</strong><br>0d9efd2418d9b34e3ef16b78949c366d79992b587bc53cc6110b7fd058e6a12c</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:20px"><strong>报告性质：</strong>本 HTML 是 experiment/evidence/decision ledgers 的可读交付层，不替代 JSON 记录。未包含模型权重、数据集、凭据、原始 profiler trace 或大日志。</div>
+    </section>
+
+    <footer class="footer">
+      <p><strong>交付版本：</strong>DRRQR Qwen3.6-27B Paper-to-Ascend Report · 2026-09-07</p>
+      <p><strong>仓库分支：</strong><code>work/drrqr-dk112-handoff-20260907</code> · 历史交接 commit <code>ba7601be849770480117754b61b598d7d7bbafbb</code></p>
+      <p>结论遵循 correctness-first、重复测量、fail-closed 审计和 scope-bounded decision。Dk112 后续实验必须使用新鲜 baseline，不得与 Dk64/Dk96 混池。</p>
+    </footer>
+  </main>
+</body>
+</html>
