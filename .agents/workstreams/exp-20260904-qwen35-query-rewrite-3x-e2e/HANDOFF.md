@@ -3256,3 +3256,23 @@ Immutable E2E evidence:
 The generated decision is `iterate-performance`; its quality gate remains
 `unproven` because the dataset answer fields do not establish full
 `精读无损`. Do not retry this exact inplace stack unchanged.
+
+## vllm-ascend-lab upstream-preparation audit
+
+The user-created repository was cloned to `/cache/cch/vllm-ascend-lab`.
+Its remote is `https://github.com/c1917797-bit/vllm-ascend-lab.git`, and
+the local preparation branch
+`work/qwen35-27b-910b4-upstream-prep` starts from
+`main@203ae3eb0a734c3a7ba638d84e116bcca24b1a09`. Nothing has been pushed.
+
+The complete Chinese portability matrix and maintainer quality gate are in:
+
+`/cache/cch/vllm-ascend-lab/.agents/workstreams/qwen35-27b-910b4-upstream-prep/HANDOFF.md`
+
+Key decision: no existing optimization commit is safe to cherry-pick wholesale
+onto the current repository main. The GDN projection fusion requires a current
+vLLM-side rebase plus a minimal vllm-ascend backend change; the retained dense
+MLP prefetch implementation conflicts with the feature removal in
+`e77502ef715f612f2cc6f3c833174431f26cb765`; and the inplace MMAR candidate
+is excluded because it failed the real E2E gate. The target repository product
+code remains unchanged.
