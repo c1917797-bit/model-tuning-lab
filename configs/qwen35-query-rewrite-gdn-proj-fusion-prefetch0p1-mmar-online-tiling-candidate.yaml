@@ -1,0 +1,43 @@
+schema: qwen35-query-rewrite-runtime/v1
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+host: 127.0.0.1
+topology: TP4-DP1
+physical_devices: [0, 1, 2, 3]
+dtype: bfloat16
+quantization: null
+retraining: false
+speculative_decoding: false
+base_candidate:
+  id: qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1
+  gdn_projection_fusion: true
+  dense_gate_up_prefetch_ratio: 0.1
+  matmul_allreduce: true
+operator_candidate:
+  method: arch22-online-hccl-tiling
+  environment:
+    ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING: "1"
+  isolated_opp_root: /cache/cch/qwen35-mmar-online-arch22-custom-opp-v1
+  isolated_opp_env: /cache/cch/qwen35-mmar-online-arch22-custom-opp-v1/vendors/qwen35_mmar_online_arch22_transformer_transformer/bin/set_env.bash
+  operator_commit: 2e637229708f881f7ee9cbd81793363a86cb1f3b
+  package_sha256: ed801ca2403264823425859d208c575c9bb2de20799b59069fd97a29ff0d1bf9
+microbenchmark:
+  evidence_root: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/tp4-npu03-mmar-m1-online-tiling-frozen-ab-v3-20260907T013000Z
+  required_shapes:
+    - [1, 1536, 5120]
+    - [1, 4352, 5120]
+  minimum_shape_speedup: 1.0235007629999233
+  decision: promote-to-e2e
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  slice: first_32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 3
+  primary_percentile: p95
+  target_ttft_speedup: 2.0
+  target_tpot_speedup: 2.0
+correctness:
+  runtime_gate: 32/32 requests, zero errors, natural EOS for every cell
+  operator_gate: candidate fused output within frozen predecessor BF16 error envelope
+  semantic_gate: paired response comparison against retained base candidate

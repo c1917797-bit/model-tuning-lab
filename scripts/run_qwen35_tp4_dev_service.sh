@@ -47,6 +47,24 @@ container_name="${CONTAINER_NAME:-qwen35_query_rewrite_tp${tensor_parallel_size}
 port="${PORT:-10010}"
 profile_dir="${PROFILE_DIR:-/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profiles/tp4-baseline-v1}"
 npu_smi_bin="${NPU_SMI_BIN:-npu-smi}"
+custom_opp_root="${CUSTOM_OPP_ROOT:-}"
+custom_opp_env="${CUSTOM_OPP_ENV:-}"
+online_hccl_tiling="${ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING:-0}"
+custom_opp_operator_commit="${CUSTOM_OPP_OPERATOR_COMMIT:-}"
+custom_opp_package_sha256="${CUSTOM_OPP_PACKAGE_SHA256:-}"
+if [[ -n "$custom_opp_root" || -n "$custom_opp_env" ]]; then
+  [[ -d "$custom_opp_root" ]] || { echo "missing CUSTOM_OPP_ROOT: $custom_opp_root" >&2; exit 66; }
+  [[ -f "$custom_opp_env" ]] || { echo "missing CUSTOM_OPP_ENV: $custom_opp_env" >&2; exit 66; }
+  case "$custom_opp_env" in
+    "$custom_opp_root"/*) ;;
+    *) echo "CUSTOM_OPP_ENV must be inside CUSTOM_OPP_ROOT" >&2; exit 64 ;;
+  esac
+fi
+case "$online_hccl_tiling" in 0|1) ;; *) echo "invalid online-HCCL-tiling switch" >&2; exit 64;; esac
+if [[ "$online_hccl_tiling" == 1 && -z "$custom_opp_env" ]]; then
+  echo "online HCCL tiling requires an isolated custom OPP" >&2
+  exit 64
+fi
 mtp_local_argmax_root="${MTP_LOCAL_ARGMAX_ROOT:-/cache/cch/.worktrees/exp-20260905-qwen35-mtp-local-argmax}"
 mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-37d32edf5a2626b4b6b1c6ed57fcad8d3ed9c8cd}"
 mtp_qwen_patch_sha256=d0b0ce744a0ada28ff8a773fce596ca2b2617e01875e5a254e7e32a62fdf7d4b
@@ -580,6 +598,15 @@ docker_args=(
   -e VLLM_LOGGING_LEVEL=DEBUG
 )
 
+if [[ -n "$custom_opp_env" ]]; then
+  docker_args+=(
+    -e CUSTOM_OPP_ENV="$custom_opp_env"
+    -e ASCEND_MATMUL_ALLREDUCE_ONLINE_TILING="$online_hccl_tiling"
+    -e QWEN35_MMAR_OPERATOR_COMMIT="$custom_opp_operator_commit"
+    -e QWEN35_MMAR_PACKAGE_SHA256="$custom_opp_package_sha256"
+  )
+fi
+
 if [[ "$mode" == draft4b-k3-mmar-prefetch-gateup-0p1 ]]; then
   docker_args+=(
     -v "$draft4b_model:$draft4b_model:ro"
@@ -690,4 +717,9 @@ if [[ "${ENABLE_DYNAMIC_PROFILING:-0}" == 1 ||
   docker_args+=(-e PROFILING_MODE=dynamic)
 fi
 
-docker "${docker_args[@]}" quay.io/ascend/vllm-ascend:v0.23.0 "${serve_args[@]}"
+if [[ -n "$custom_opp_env" ]]; then
+  docker "${docker_args[@]}" quay.io/ascend/vllm-ascend:v0.23.0 \
+    bash -lc 'source "$CUSTOM_OPP_ENV"; exec "$@"' -- "${serve_args[@]}"
+else
+  docker "${docker_args[@]}" quay.io/ascend/vllm-ascend:v0.23.0 "${serve_args[@]}"
+fi
