@@ -21,6 +21,21 @@ For performance work, always include:
 
 ## 2. Current resource warning at this handoff
 
+At the 2026-09-07 live check, the unrelated
+`vllm-ep-310p-research-910b-monitor` container was not an idle monitor. It
+ran a TP2/EP W8A8 Qwen3-30B-A3B vLLM service on physical NPU0/1 while mapping
+device nodes NPU0-7. It is not part of either Qwen3.5 workstream and blocks a
+safe NPU0-3 TP4 launch. Do not stop it without explicit owner/user
+authorization; re-check its exact container ID, command, process tree, and NPU
+workers because this snapshot can expire.
+
+The Qwen3.5 performance workstream may use physical NPU0-3 only after an
+exclusive live lease is proven. The Qwen3.5 Paper-to-Ascend workstream
+currently owns no NPU or port lease. NPU4-7 remain excluded from both tasks
+unless a future explicit lease changes that boundary.
+
+Historical resource snapshot follows.
+
 At the 2026-09-04 live check:
 
 - `qwen38_eval_baseline` was serving on `127.0.0.1:8200`.
