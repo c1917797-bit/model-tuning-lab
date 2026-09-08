@@ -2092,3 +2092,27 @@ qwen35_mmar_async_finalize_operator_gate_v1:
   next: "do not retry async Finalize unchanged; use the preserved source diff and evidence to design a materially different decode lifecycle treatment, with an error-envelope stress invariant rather than bitwise HCCL digest identity"
   rollback: "do not load the candidate OPP or set its opt-in environment flag; one-shot containers exit and the base image remains unchanged"
   promotion: "only an accepted operator gate may proceed to runtime-monkeypatch integration, c1/c16 fail-fast E2E, full c1/c5/c8/c16 repetitions, and the 32-sample semantic gate"
+
+runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
+  status: planned
+  hypothesis: "the historically retained Qwen3.5 GDN qkvz+ba projection fusion and linear-attention gate/up prefetch can meet the revised 40% TTFT and 20% TPOT P95 targets when delivered without source overlays as an exact runtime monkeypatch"
+  primary_variable: "three read-only vLLM/vLLM-Ascend source overlays -> equivalent deferred Python monkeypatch; retained TP4 BF16 MMAR and gate/up prefetch ratio 0.1 stay fixed; bounded-MMAR prefill decomposition is disabled"
+  historical_performance_basis:
+    c1: {ttft_p95_speedup: 2.205635, tpot_p95_speedup: 1.380880}
+    c5: {ttft_p95_speedup: 1.938439, tpot_p95_speedup: 1.650948}
+    c8: {ttft_p95_speedup: 1.930063, tpot_p95_speedup: 1.752699}
+    c16: {ttft_p95_speedup: 1.909847, tpot_p95_speedup: 1.979821}
+    boundary: "historical source-overlay evidence only; it motivates t12 but cannot accept the runtime-only delivery"
+  implementation_scope:
+    vllm_qwen_gdn: "construct fused MergedColumnParallelLinear and expose project_qkvz_ba at runtime"
+    vllm_weight_loader: "select six-way fused checkpoint shard mapping when in_proj_qkvzba exists"
+    vllm_ascend_gdn: "consume the fused qkvzba projection in the existing Ascend forward path"
+    prefetch: "retain the already activated linear-attention gate/up prefetch and RMSNorm lifecycle hooks"
+    bounded_mmar: "disabled by leaving VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD at zero"
+  static_gate: "device-free contract tests prove deferred activation, exact eligibility, fused module replacement, six-way weight mapping, Ascend forward projection selection, idempotence, and no activation in model-inspection subprocesses"
+  activation_gate: "all four TP workers install the intended hooks, load weights, reach /v1/models, complete a fixed natural-EOS smoke, and mount no vLLM or vLLM-Ascend source file"
+  performance_gate: "c1/c16 fail-fast first; then three repetitions at c1/c5/c8/c16; TTFT P95 reduction >=40% and TPOT P95 reduction >=20% in every cell versus frozen MTP-off baseline"
+  quality_gate: "32 length-quantile paired same-runtime samples; identical prompts/seed/temperature; all differences reviewed; zero material regressions"
+  resources: "physical NPU0-3 only under cooperative lease; NPU4-7 excluded; one-shot container lifecycle; original image identity checked before and after"
+  rollback: "unset QWEN35_ASCEND_MONKEYPATCH and VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS, unmount the read-only patch directory, and stop only the exact t12 container"
+  promotion: "copy only the byte-verified, fully validated runtime plugin and evidence manifest to qwen35-vllm-ascend-patch; do not update the final PR before all gates pass"
