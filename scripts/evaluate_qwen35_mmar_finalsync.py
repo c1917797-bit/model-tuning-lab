@@ -17,6 +17,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--per-shape-minimum-speedup", type=float, default=1.0)
     parser.add_argument("--geomean-minimum-speedup", type=float, default=1.02)
     parser.add_argument("--correctness-envelope-factor", type=float, default=2.0)
+    parser.add_argument("--output-name", default="decision.json")
     return parser.parse_args()
 
 def load(path: Path) -> dict[str, Any]:
@@ -76,7 +77,9 @@ def main() -> int:
         "performance_pass": all(cell["per_shape_perf_pass"] for cell in cells.values()) and geomean_speedup >= args.geomean_minimum_speedup,
     }
     decision["accepted"] = decision["correctness_pass"] and decision["performance_pass"]
-    output = args.root / "decision.json"
+    if Path(args.output_name).name != args.output_name:
+        raise ValueError("--output-name must be a file name, not a path")
+    output = args.root / args.output_name
     if output.exists():
         raise FileExistsError(f"refusing to overwrite {output}")
     output.write_text(json.dumps(decision, indent=2, sort_keys=True) + "\n", encoding="utf-8")
