@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate frozen baseline versus opt-in M=1 MMAR async finalize."""
+"""Evaluate the frozen baseline versus opt-in M=1 MMAR async finalize."""
 
 from __future__ import annotations
 

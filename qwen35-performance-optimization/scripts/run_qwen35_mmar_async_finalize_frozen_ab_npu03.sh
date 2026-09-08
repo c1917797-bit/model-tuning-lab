@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+bundle_root="$repo_root/qwen35-performance-optimization"
 output_root="${OUTPUT_ROOT:?set OUTPUT_ROOT to a new absolute directory under /cache/austinov}"
 baseline_opp_root="${BASELINE_OPP_ROOT:?set BASELINE_OPP_ROOT}"
 baseline_opp_env="${BASELINE_OPP_ENV:?set BASELINE_OPP_ENV}"
@@ -122,7 +123,7 @@ for label in default candidate; do
     -e QWEN35_MMAR_OPERATOR_COMMIT="$commit" \
     -e QWEN35_MMAR_PACKAGE_SHA256="$sha256" \
     "${candidate_args[@]}" "$image" \
-    bash -lc "source '$opp_env'; exec python3 /experiment/scripts/benchmark_qwen35_mmar_async_finalize.py \
+    bash -lc "source '$opp_env'; exec python3 /experiment/qwen35-performance-optimization/scripts/benchmark_qwen35_mmar_async_finalize.py \
       --label '$label' --output '$output_root/$label.json' \
       --warmup 40 --iterations 200 --repeats 7 \
       --stress-calls 5000 --stress-batch 250 --master-port '$master_port'" \
@@ -131,7 +132,7 @@ for label in default candidate; do
 done
 
 set +e
-python3 "$repo_root/scripts/evaluate_qwen35_mmar_async_finalize.py" --root "$output_root"
+python3 "$bundle_root/scripts/evaluate_qwen35_mmar_async_finalize.py" --root "$output_root"
 decision_rc=$?
 set -e
 npu-smi info >"$output_root/npu-after.txt"

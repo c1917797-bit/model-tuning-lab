@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gate the opt-in M=1 MMAR async-finalize path on the two real decode shapes."""
+"""Benchmark the opt-in M=1 MMAR async-finalize path on real decode shapes."""
 
 from __future__ import annotations
 
