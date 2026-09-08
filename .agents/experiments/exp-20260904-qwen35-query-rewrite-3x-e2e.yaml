@@ -2115,7 +2115,7 @@ runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
   quality_gate: "32 length-quantile paired same-runtime samples; identical prompts/seed/temperature; all differences reviewed; zero material regressions"
   resources: "physical NPU0-3 only under cooperative lease; NPU4-7 excluded; one-shot container lifecycle; original image identity checked before and after"
   implementation:
-    repository_commit: "pending attempted-stage checkpoint"
+    repository_commit: 0f5582c28b38f9b158280b9ad25bb7f255df96cd
     patch_path: qwen35-performance-optimization/runtime-monkeypatch/sitecustomize.py
     patch_sha256: 8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
     launcher: qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh
