@@ -13,8 +13,8 @@
   and untracked historical handoff/config/prefetch files. They were not staged
   or altered by the takeover. Inspect ownership path by path; never use
   `git add -A` or treat a dirty worktree as disposable.
-- Latest user stop gate supersedes the historical 1.5x/3x labels: median of
-  three per-run P95 values must show at least 2x speedup for both TTFT and
+- Latest user stop gate supersedes the historical 1.5x/2x/3x labels: median
+  of three per-run P95 values must show at least 40% lower TTFT and 20% lower
   TPOT at c1/c5/c8/c16 versus the frozen MTP-off baseline.
 - Final delivery is BF16, no quantization, no retraining, no MTP/speculative
   decoding, and runtime Python monkeypatch only.
@@ -29,11 +29,11 @@ acceptance decision.
 
 ### 2. Current Focus
 
-Do not retry the rejected bounded-MMAR t11 stack unchanged. Select a materially
-new ASCEND910B decode MMAR/HCCL lifecycle implementation, gate it first on the
-exact BF16 M=1 row-parallel shapes, and only then integrate it through the
-source-overlay-free runtime monkeypatch. The retained dense projection-fusion
-plus gate/up-prefetch stack and frozen MTP-off denominator remain unchanged.
+Activate the attempted t12 source-overlay-free runtime monkeypatch for the
+historically retained GDN qkvz/ba projection fusion plus gate/up prefetch 0.1.
+First require four-worker activation, API readiness, an unchanged-image/mount
+audit, and a fixed natural-EOS smoke. Then run c1/c16 fail-fast before the
+full repeated matrix and 32-sample same-runtime semantic gate.
 
 ### 3. Recent Progress
 
@@ -59,20 +59,17 @@ and are protected. Before every new launch, re-prove this ownership snapshot.
 
 ### 5. Next Actions
 
-1. Re-prove container, port, process, and physical NPU ownership immediately
-   before allocation; use only NPU0-3 and an unclaimed port.
-2. Select a materially new ASCEND910B decode MMAR/HCCL lifecycle candidate;
-   do not repeat bounded-MMAR t11, online tiling, core-count, buffer-size,
-   x3-residual, prefill AllReduce+RMSNorm, or ShortGPT unchanged.
-3. Gate the candidate on exact M=1 row-parallel BF16 K=1536/4352, N=5120
-   correctness and a predeclared multi-shape performance threshold.
-4. Only after the operator gate passes, integrate it through the runtime
-   monkeypatch and require API readiness, four TP workers, activation evidence,
-   a fixed-input correctness smoke, and one real c1/c16 fail-fast screen.
+1. Re-prove container, port, process, memory and physical NPU ownership
+   immediately before allocation; use only NPU0-3 and an unclaimed port.
+2. Run the t12 runtime-only launcher under its full-lifetime cooperative lease;
+   do not add vLLM or vLLM-Ascend source overlays and do not touch NPU4-7.
+3. Require API readiness, all four TP worker activation markers, fused weight
+   loading, a fixed-input natural-EOS smoke, and image/mount evidence.
+4. Run one c1 and one c16 fail-fast screen against the frozen denominator.
 5. On a passing screen, run c1/c5/c8/c16 x three repetitions, analyze P95/P99,
    capture paired semantic outputs when hashes differ, and profile the final
    candidate.
-6. Accept only after all eight 2x P95 gates and the quality gate pass;
+6. Accept only after all eight 40%/20% P95 gates and the quality gate pass;
    otherwise record the failure and recover to the retained safe stack.
 
 ### 6. Validation Commands

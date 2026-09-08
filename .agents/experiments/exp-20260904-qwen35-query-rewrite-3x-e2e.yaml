@@ -2094,7 +2094,7 @@ qwen35_mmar_async_finalize_operator_gate_v1:
   promotion: "only an accepted operator gate may proceed to runtime-monkeypatch integration, c1/c16 fail-fast E2E, full c1/c5/c8/c16 repetitions, and the 32-sample semantic gate"
 
 runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
-  status: planned
+  status: attempted
   hypothesis: "the historically retained Qwen3.5 GDN qkvz+ba projection fusion and linear-attention gate/up prefetch can meet the revised 40% TTFT and 20% TPOT P95 targets when delivered without source overlays as an exact runtime monkeypatch"
   primary_variable: "three read-only vLLM/vLLM-Ascend source overlays -> equivalent deferred Python monkeypatch; retained TP4 BF16 MMAR and gate/up prefetch ratio 0.1 stay fixed; bounded-MMAR prefill decomposition is disabled"
   historical_performance_basis:
@@ -2114,5 +2114,13 @@ runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
   performance_gate: "c1/c16 fail-fast first; then three repetitions at c1/c5/c8/c16; TTFT P95 reduction >=40% and TPOT P95 reduction >=20% in every cell versus frozen MTP-off baseline"
   quality_gate: "32 length-quantile paired same-runtime samples; identical prompts/seed/temperature; all differences reviewed; zero material regressions"
   resources: "physical NPU0-3 only under cooperative lease; NPU4-7 excluded; one-shot container lifecycle; original image identity checked before and after"
+  implementation:
+    repository_commit: "pending attempted-stage checkpoint"
+    patch_path: qwen35-performance-optimization/runtime-monkeypatch/sitecustomize.py
+    patch_sha256: 8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
+    launcher: qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh
+    launcher_contract: "holds /cache/austinov/.locks/npu0-3.lock for the complete --rm container lifetime; refuses device/container/port conflicts, MemAvailable below 48 GiB, image identity drift, patch drift, and artifact-directory reuse"
+    source_overlay_count: 0
+    activation_state: "pending real Ascend 910B4 TP4 service startup"
   rollback: "unset QWEN35_ASCEND_MONKEYPATCH and VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS, unmount the read-only patch directory, and stop only the exact t12 container"
   promotion: "copy only the byte-verified, fully validated runtime plugin and evidence manifest to qwen35-vllm-ascend-patch; do not update the final PR before all gates pass"

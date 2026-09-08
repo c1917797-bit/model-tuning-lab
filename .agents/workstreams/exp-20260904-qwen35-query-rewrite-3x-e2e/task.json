@@ -33,10 +33,13 @@
     "python3 -m py_compile scripts/check_qwen35_fused_tail_activation.py",
     "python3 tests/test_check_qwen35_fused_tail_activation.py",
     "python3 scripts/qwen35_ascend_monkeypatch/test_deferred_activation.py",
+    "bash -n qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh",
+    "bash qwen35-performance-optimization/tests/test_run_qwen35_gdn_runtime_t12_npu03.sh",
+    "python3 qwen35-performance-optimization/runtime-monkeypatch/test_gdn_projection_fusion.py",
     "python3 scripts/test_analyze_qwen35_candidate_vs_original.py",
     "python3 -m py_compile scripts/run_qwen35_benchmark_matrix.py",
     "git diff --check"
   ],
-    "executionState": "planned-runtime-only-gdn-projection-fusion-t12-static-gate",
+    "executionState": "attempted-runtime-only-gdn-projection-fusion-t12-awaiting-npu-activation",
     "integrationState": "branch-local-final-monkeypatch-not-promoted"
 }
