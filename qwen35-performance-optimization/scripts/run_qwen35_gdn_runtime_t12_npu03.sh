@@ -12,7 +12,13 @@ patch_sha256=8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
-container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_npu03}"
+variant="${VARIANT:-candidate}"
+case "$variant" in
+  candidate) patch_enabled=1 ;;
+  control) patch_enabled=0 ;;
+  *) echo "VARIANT must be candidate or control" >&2; exit 64 ;;
+esac
+container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 port="${PORT:-10010}"
 lease_path="${NPU_LEASE_PATH:-/cache/austinov/.locks/npu0-3.lock}"
 minimum_mem_available_kb="${MIN_MEM_AVAILABLE_KB:-50331648}"
@@ -95,6 +101,7 @@ mem_available_kb="$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)"
 }
 
 mkdir -p "$OUTPUT_ROOT"
+printf '%s\n' "$variant" >"$OUTPUT_ROOT/variant.txt"
 printf '%s\n' "$patch_sha256  $patch_file" >"$OUTPUT_ROOT/patch.sha256"
 printf '%s\n' "$image_id" >"$OUTPUT_ROOT/image-id.before.txt"
 printf '%s\n' "$image_digest" >"$OUTPUT_ROOT/image-digest.before.txt"
@@ -111,7 +118,11 @@ python_path='/opt/qwen35-t12-monkeypatch:/usr/local/Ascend/ascend-toolkit/latest
 docker_args=(
   run --rm
   --name "$container_name"
+  --label com.c1917797.qwen35-t12=1
+  --label com.c1917797.qwen35-variant="$variant"
+  --label com.c1917797.qwen35-output-root="$OUTPUT_ROOT"
   --network host
+  --shm-size 64g
   --cpuset-cpus 0-95
   --device /dev/davinci0
   --device /dev/davinci1
@@ -147,8 +158,8 @@ docker_args=(
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
-  -e QWEN35_ASCEND_MONKEYPATCH=1
-  -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1
+  -e QWEN35_ASCEND_MONKEYPATCH="$patch_enabled"
+  -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$patch_enabled"
   -e PYTHONPATH="$python_path"
 )
 serve_args=(

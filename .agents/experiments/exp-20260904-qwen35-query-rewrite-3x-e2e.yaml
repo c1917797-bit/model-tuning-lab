@@ -27,7 +27,7 @@ workload:
   warmup: "per concurrency, excluded from measurement"
   seed: 1024
   prompt_mode: raw_question
-  generation: "temperature 0, natural EOS, per-request max_tokens equals the model-context remainder returned by /tokenize"
+  generation: "temperature 0, natural EOS, per-request max_tokens equals the model-context remainder returned by /tokenize; every warmup and measured request uses a run-unique cache_salt so repeated cells cannot reuse prefix-cache entries"
 metrics:
   primary: [ttft_p95_ms, tpot_p95_ms]
   secondary: [ttft_p50_ms, tpot_p50_ms, ttft_p99_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
@@ -37,11 +37,11 @@ final_thresholds:
   correctness: "same-runtime paired semantic quality gate passes with zero material regressions and request errors equal zero"
 quality_gate:
   protocol: "paired final monkeypatch candidate versus the same-runtime retained cumulative control"
-  sample_count: 32
-  selection: "question-character-length quantiles over all 357 dataset rows"
+  sample_count: 357
+  selection: "all 357 frozen dataset rows; the 32-row length-quantile subset is an early canary only"
   invariants: ["temperature 0", "seed 1024", "identical prompts and sample indices", "natural EOS"]
   privacy: "raw prompts and responses stay under /cache with mode 0600 and are never committed"
-  automatic_pass: "all 32 responses are byte-identical"
+  automatic_pass: "all 357 responses are byte-identical"
   manual_pass: "when any response differs, every differing pair is reviewed for retained intent, facts, constraints, completeness and readability; material regressions must equal zero"
   evidence_boundary: "all 357 answer fields are empty, so answer similarity and cross-run response hashes alone cannot prove 精读无损"
 dual_tp8_baselines:
@@ -2121,9 +2121,29 @@ runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
     patch_path: qwen35-performance-optimization/runtime-monkeypatch/sitecustomize.py
     patch_sha256: 8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
     launcher: qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh
+    activation_capture: qwen35-performance-optimization/scripts/capture_qwen35_gdn_t12_activation.sh
+    activation_checker: qwen35-performance-optimization/scripts/check_qwen35_gdn_t12_activation.py
+    acceptance_analyzer: qwen35-performance-optimization/scripts/analyze_qwen35_current_targets.py
+    reviewed_plan: qwen35-performance-optimization/VALIDATION_PLAN.md
+    installation_contract: "inside an ephemeral base-image container, run install_editable.sh before vLLM startup; it is equivalent to pip install --no-deps -e . but also disables index access and build isolation for offline reproducibility; source load_patch.sh, then exec the unchanged vLLM serve command; never docker commit"
+    offline_install_evidence:
+      failed_plain_pip_operation: exec-0000000000000786
+      failed_plain_pip_reason: "pip 26 attempted to download an isolated setuptools build dependency while the no-device container had no network"
+      no_build_isolation_probe_operation: exec-0000000000000788
+      packaged_installer_operation: exec-0000000000000789
+      packaged_installer_result: "PASS_OFFLINE_NO_DEVICE_INSTALLER in the exact v0.23.0 image with network=none and no NPU devices"
+      reviewed_offline_suite_operation: exec-00000000000007a1
+      reviewed_offline_suite_result: "all syntax, projection fusion, dual-variant activation, 40/20 P95, all-357 quality, cache-isolation, exact-stop, JSON/YAML, MST and diff checks passed"
     launcher_contract: "holds /cache/austinov/.locks/npu0-3.lock for the complete --rm container lifetime; refuses device/container/port conflicts, MemAvailable below 48 GiB, image identity drift, patch drift, and artifact-directory reuse"
     source_overlay_count: 0
     activation_state: "waiting for the external NPU0-3 owner to release its live workload; do not stop or bypass it"
+    latest_resource_check:
+      operation: exec-00000000000007a0
+      checked_at_utc: "2026-09-08T14:40:29Z"
+      npu0_3: "external vllm-ep-310p-research-910b-monitor; four VLLMWorker_TP processes 520084-520087"
+      npu4_7: "protected external workload; four VLLMWorker_TP processes 816932-816935"
+      mem_available_kb: 36513068
+      decision: "do not allocate; both card groups are active and memory is below the 48 GiB launcher gate"
     activation_attempts:
       - operation_id: exec-0000000000000778
         result: "launcher failed before artifact-directory creation or docker run"

@@ -1,55 +1,63 @@
-# Final Qwen3.5 Runtime Monkeypatch
+# Qwen3.5 t12 Runtime Monkeypatch Candidate
 
-This directory contains the source-overlay-free Python runtime deliverable
-that produced the accepted c1 TTFT result:
+This directory contains a source-overlay-free Python candidate for the
+unchanged vLLM-Ascend 0.23.0 image. It is not yet the final commercial
+deliverable: offline installation and contract tests pass, while live
+activation, repeated performance, and full quality gates remain pending.
 
-- TTFT P95: `966.3259 ms` to `505.1956 ms`;
-- TTFT reduction: `47.7%` (`1.9128x` speedup);
-- TPOT P95: `39.0459 ms` to `32.3098 ms`;
-- workload: frozen c1, three repetitions, 96/96 successful requests;
-- hardware: four Ascend 910B4 devices with TP4;
-- model: Qwen3.5-27B;
-- runtime: vLLM-Ascend 0.23.0, MTP disabled.
+The candidate installs five coordinated runtime changes:
 
-The file is copied byte-for-byte from the verified workstream implementation
-at commit `ebe9b69aad45a24fa79437705f00ebbeed977e55`. Its expected SHA256 is:
+- fused Qwen3.5 GDN qkvz/ba projection construction;
+- six-way checkpoint weight mapping into the fused projection;
+- Ascend GDN forward consumption of the fused outputs;
+- linear-attention gate/up weight prefetch;
+- Gemma RMSNorm prefetch postprocessing.
 
-```text
-9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8  sitecustomize.py
-```
+The bounded-MMAR fallback used by historical t11 is disabled. The expected
+sitecustomize.py SHA256 is:
 
-## Activation
+    8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
 
-Mount this directory read-only into the unchanged container and prepend the
-mount to the container's existing `PYTHONPATH`:
+## Editable installation
 
-```bash
-docker run --rm \
-  -v "$PWD/qwen35-performance-optimization/runtime-monkeypatch:/opt/qwen35-final-monkeypatch:ro" \
-  -e QWEN35_ASCEND_MONKEYPATCH=1 \
-  -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=513 \
-  -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=16384 \
-  -e PYTHONPATH="/opt/qwen35-final-monkeypatch:<preserve-the-image-pythonpath>" \
-  quay.io/ascend/vllm-ascend:v0.23.0 \
-  <the-existing-vllm-command>
-```
+Run this before starting vLLM workers:
 
-`sitecustomize.py` is imported automatically by Python. It defers Ascend/vLLM
-imports until the relevant worker modules are available, then installs the
-compile-range, bounded-MMAR, GDN prefetch, and RMSNorm/graph-fusion hooks.
+    cd /path/to/runtime-monkeypatch
+    ./install_editable.sh
+    source ./load_patch.sh
+    ./run_with_patch.sh vllm serve /path/to/model <existing arguments>
 
-Do not replace `<preserve-the-image-pythonpath>` with an empty value: retain
-the original image's CANN and vLLM Python paths exactly. The maintained
-`scripts/run_qwen35_tp4_dev_service.sh` launcher already applies the proven
-mount and environment configuration.
+install_editable.sh uses the familiar editable-install model, but adds
+--no-index and --no-build-isolation. This matters with pip 26 in the pinned
+image: plain pip install --no-deps -e . tried to download an isolated
+setuptools build dependency, while the maintained installer passed with no
+network and no NPU devices.
 
-## Boundary
+The installation changes only the disposable container writable layer and the
+editable Python path. It does not modify the image and must never be followed
+by docker commit. Installing after vLLM workers have already started does not
+retroactively patch those processes; recreate or restart the service after
+installation.
 
-This package is accepted for the revised c1 TTFT >=40% improvement criterion.
-It is not validated at c5/c8/c16 and is not the async-finalize C++ candidate.
-Re-run a same-environment frozen A/B before carrying its performance claim to
-different CANN, model, TP, device, or serving configurations.
+## Current evidence boundary
 
-The package makes no image-layer change: no package installation, vLLM source
-overlay, `docker commit`, quantization, retraining, MTP, or speculative
-decoding is used.
+Passed:
+
+- Python and shell syntax;
+- static projection-fusion contract tests;
+- activation-checker positive and negative fixtures;
+- offline editable installation in the exact v0.23.0 image with network=none
+  and no NPU device mapping.
+
+Pending:
+
+- four-rank live activation on physical NPU0-3;
+- fresh same-environment MTP-off control;
+- c1/c5/c8/c16, three repeats, TTFT P95 reduction at least 40%;
+- c1/c5/c8/c16, three repeats, TPOT P95 reduction at least 20%;
+- paired quality validation over all 357 frozen rows.
+
+Historical t11 reached a 47.7% c1 TTFT P95 reduction but only a 17.3% TPOT P95
+reduction. Those measurements are provenance, not a t12 performance claim.
+
+See ../VALIDATION_PLAN.md for the ordered gates and rollback boundary.

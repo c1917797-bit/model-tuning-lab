@@ -185,6 +185,20 @@ def request_one(
     }
 
 
+def request_cache_salt(
+    prefix: str,
+    concurrency: int,
+    repeat_index: int,
+    request_index: int | str,
+) -> str | None:
+    if not prefix:
+        return None
+    return (
+        f"{prefix}:c{concurrency}:r{repeat_index}:"
+        f"request:{request_index}"
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", required=True)
@@ -196,6 +210,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=1024)
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--timeout", type=float, default=600)
+    parser.add_argument(
+        "--cache-salt-prefix",
+        default="",
+        help="run-unique prefix that prevents cross-cell prefix-cache hits",
+    )
     parser.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
 
@@ -225,6 +244,12 @@ def main() -> int:
         token_limits[0][1],
         args.seed,
         args.timeout,
+        request_cache_salt(
+            args.cache_salt_prefix,
+            args.concurrency,
+            args.repeat_index,
+            "warmup",
+        ),
     )
     if warmup["finish_reason"] != "stop":
         raise RuntimeError("warmup did not terminate naturally")
@@ -243,6 +268,12 @@ def main() -> int:
                 token_limits[index][1],
                 args.seed,
                 args.timeout,
+                request_cache_salt(
+                    args.cache_salt_prefix,
+                    args.concurrency,
+                    args.repeat_index,
+                    index,
+                ),
             )
             for index, question in enumerate(questions)
         ]
@@ -307,6 +338,8 @@ def main() -> int:
         "max_tokens": "per-request model context remainder",
         "natural_eos": True,
         "seed": args.seed,
+        "cache_salt_prefix": args.cache_salt_prefix,
+        "prefix_cache_isolation": bool(args.cache_salt_prefix),
         "wall_s": wall_s,
         "request_throughput": len(results) / wall_s,
         "output_token_throughput": completion_tokens / wall_s,

@@ -50,6 +50,7 @@ def validate_cell(
     dataset_sha256: str,
     model: str,
     requests: int,
+    cache_salt_prefix: str,
 ) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     expected = {
@@ -61,6 +62,8 @@ def validate_cell(
         "requests": requests,
         "errors": 0,
         "natural_eos": True,
+        "cache_salt_prefix": cache_salt_prefix,
+        "prefix_cache_isolation": True,
     }
     for key, value in expected.items():
         if payload.get(key) != value:
@@ -210,6 +213,8 @@ def main() -> int:
         "planned_cells": 12,
         "requests_per_cell": limit,
         "seed": seed,
+        "cache_salt_prefix": args.run_id,
+        "prefix_cache_isolation": True,
         "completed_cells": [],
         "failed_cell": None,
         "started_unix_s": time.time(),
@@ -240,6 +245,8 @@ def main() -> int:
                 str(limit),
                 "--timeout",
                 str(args.timeout),
+                "--cache-salt-prefix",
+                args.run_id,
                 "--output",
                 str(cell["output"]),
             ]
@@ -251,6 +258,7 @@ def main() -> int:
                 dataset_sha256=actual_dataset_hash,
                 model=model,
                 requests=limit,
+                cache_salt_prefix=args.run_id,
             )
             state["completed_cells"].append(
                 {

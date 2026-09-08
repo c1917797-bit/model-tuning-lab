@@ -61,6 +61,22 @@ creation. The corrected launcher then refused startup with exit 48 because
 NPU4-7 remain protected. Recheck the live resource state and resume only after
 NPU0-3 and all container declarations are genuinely released.
 
+The follow-up plan audit completed the environment-independent preparation.
+Plain pip 26 editable install was intentionally tested offline and failed in
+operation exec-0000000000000786 because build isolation tried to reach PyPI.
+The maintained install_editable.sh instead disables index access and build
+isolation; operation exec-0000000000000789 passed in the exact official image
+with network=none and zero NPU devices. The reviewed offline suite
+exec-00000000000007a1 passed projection-fusion, dual control/candidate
+activation, independent 0.60 TTFT and 0.80 TPOT P95 thresholds, all-357-row
+quality, prefix-cache isolation, exact-container stop, syntax, JSON/YAML, MST,
+and diff checks. VALIDATION_PLAN.md is now the authoritative ordered plan.
+
+The latest resource snapshot, exec-00000000000007a0 at
+2026-09-08T14:40:29Z, still showed the same external NPU0-3 owner (PIDs
+520084-520087), a protected NPU4-7 workload (PIDs 816932-816935), and only
+36513068 kB MemAvailable. Do not allocate until these conditions clear.
+
 ### 5. Next Actions
 
 1. Re-prove container, port, process, memory and physical NPU ownership
@@ -70,16 +86,23 @@ NPU0-3 and all container declarations are genuinely released.
    vLLM-Ascend source overlays and do not touch NPU4-7.
 3. Require API readiness, all four TP worker activation markers, fused weight
    loading, a fixed-input natural-EOS smoke, and image/mount evidence.
-4. Recheck the complete environment fingerprint. If it materially drifted,
-   run a same-session MTP-off control. Run a small paired semantic canary, then
-   one c1 and one c16 screen. Treat near-threshold/cold-tail results as
-   inconclusive until enough repetitions resolve them; reject early only on a
-   clear material miss.
-5. On a passing screen, run c1/c5/c8/c16 x three repetitions, analyze P95/P99,
-   capture paired semantic outputs when hashes differ, and profile the final
-   candidate.
-6. Accept only after all eight 40%/20% P95 gates and the quality gate pass;
-   otherwise record the failure and recover to the retained safe stack.
+4. Because the environment has materially drifted, collect a fresh
+   same-environment MTP-off control as the primary denominator. Keep the
+   immutable historical baseline only as a continuity reference.
+5. Run a 32-row paired semantic canary, then c1/c16 fail-fast screens. Treat
+   near-threshold/cold-tail results as inconclusive until enough repetitions
+   resolve them; reject early only on a clear material miss.
+6. On a passing screen, run control and candidate at c1/c5/c8/c16 x three
+   repetitions. Use
+   qwen35-performance-optimization/scripts/analyze_qwen35_current_targets.py:
+   TTFT P95 ratio must be <=0.60 and TPOT P95 ratio <=0.80 in every cell.
+7. Run the final paired quality capture over all 357 frozen rows. Byte-exact
+   outputs pass automatically; review every difference and reject any material
+   regression. The empty answer field limits the claim to paired no-regression
+   on this workload.
+8. Promote to the standalone PR only after all eight P95 gates, activation,
+   provenance, full quality, and tail-risk review pass. Otherwise preserve the
+   failure and recover to the retained safe stack.
 
 ### 6. Validation Commands
 
