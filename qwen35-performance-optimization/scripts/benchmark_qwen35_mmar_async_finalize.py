@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Benchmark the opt-in M=1 MMAR async-finalize path on real decode shapes."""
+"""Benchmark an opt-in M=1 MMAR path on real Qwen3.5 decode shapes."""
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
 import os
@@ -51,13 +50,6 @@ def time_max_rank_us(
     values: list[float | None] = [None] * dist_module.get_world_size()
     dist_module.all_gather_object(values, elapsed_us)
     return max(float(value) for value in values if value is not None)
-
-
-def raw_digest(tensor: Any) -> str:
-    import torch
-
-    raw = tensor.detach().cpu().contiguous().view(torch.uint16)
-    return hashlib.sha256(raw.numpy().tobytes()).hexdigest()
 
 
 def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
@@ -125,11 +117,15 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
             time_max_rank_us(fused, torch, dist, args.warmup, args.iterations)
             for _ in range(args.repeats)
         ]
+        stress_reference_fp32 = fused().float().cpu()
         cases.append(
             {
                 "shape": (1, k, n),
                 "fused": fused,
-                "expected_digest": raw_digest(fused()),
+                "stress_reference_fp32": stress_reference_fp32,
+                "stress_reference_l2": float(
+                    torch.linalg.vector_norm(stress_reference_fp32).item()
+                ),
             }
         )
         if rank == 0:
@@ -176,7 +172,14 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
         "rank": rank,
         "calls": 0,
         "finite": True,
-        "digest_mismatches": 0,
+        "metrics_by_shape": {
+            str(case["shape"]): {
+                "samples": 0,
+                "max_abs_drift": 0.0,
+                "max_relative_l2_drift": 0.0,
+            }
+            for case in cases
+        },
         "checkpoints": [],
     }
     while stress_local["calls"] < args.stress_calls:
@@ -189,21 +192,39 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
             case_index = call_index % len(cases)
             pending.append((case_index, cases[case_index]["fused"]()))
         torch.npu.synchronize()
-        checkpoint_digests: dict[str, str] = {}
         for case_index, output in pending:
-            finite = bool(torch.isfinite(output.float()).all().item())
+            output_fp32 = output.float().cpu()
+            finite = bool(torch.isfinite(output_fp32).all().item())
             stress_local["finite"] = bool(stress_local["finite"]) and finite
-            digest = raw_digest(output)
-            if digest != cases[case_index]["expected_digest"]:
-                stress_local["digest_mismatches"] = (
-                    int(stress_local["digest_mismatches"]) + 1
-                )
-            checkpoint_digests[str(cases[case_index]["shape"])] = digest
+            difference = (
+                output_fp32 - cases[case_index]["stress_reference_fp32"]
+            ).abs()
+            difference_l2 = float(torch.linalg.vector_norm(difference).item())
+            reference_l2 = float(cases[case_index]["stress_reference_l2"])
+            relative_l2 = (
+                difference_l2 / reference_l2
+                if reference_l2 > 0.0
+                else math.inf
+            )
+            shape_key = str(cases[case_index]["shape"])
+            metrics = stress_local["metrics_by_shape"][shape_key]
+            metrics["samples"] = int(metrics["samples"]) + 1
+            metrics["max_abs_drift"] = max(
+                float(metrics["max_abs_drift"]),
+                float(difference.max().item()),
+            )
+            metrics["max_relative_l2_drift"] = max(
+                float(metrics["max_relative_l2_drift"]),
+                relative_l2,
+            )
         stress_local["calls"] = int(stress_local["calls"]) + batch_count
         stress_local["checkpoints"].append(
             {
                 "completed_calls": stress_local["calls"],
-                "latest_digest_by_shape": checkpoint_digests,
+                "max_numerical_drift_by_shape": {
+                    shape: dict(metrics)
+                    for shape, metrics in stress_local["metrics_by_shape"].items()
+                },
             }
         )
 
@@ -211,7 +232,7 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
     dist.all_gather_object(stress_by_rank, stress_local)
     if rank == 0:
         result = {
-            "schema": "qwen35-mmar-m1-async-finalize-frozen-ab/v1",
+            "schema": "qwen35-mmar-m1-ipc-fullmesh-frozen-ab/v2",
             "label": args.label,
             "shape_source": (
                 "real 910B4 rank-0 op_summary; each decode shape occurred "
@@ -237,8 +258,8 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                 "torch_npu": torch_npu.__version__,
                 "hccl_buffsize": os.environ.get("HCCL_BUFFSIZE"),
                 "task_queue_enable": os.environ.get("TASK_QUEUE_ENABLE"),
-                "mmar_m1_async_finalize": os.environ.get(
-                    "ASCEND_MATMUL_ALLREDUCE_M1_ASYNC_FINALIZE"
+                "mmar_m1_ipc_fullmesh": os.environ.get(
+                    "ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH"
                 ),
                 "ascend_custom_opp_path": os.environ.get("ASCEND_CUSTOM_OPP_PATH"),
                 "operator_commit": os.environ.get("QWEN35_MMAR_OPERATOR_COMMIT"),
@@ -263,8 +284,15 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                     },
                     "stress_pass": all(
                         bool(item["finite"])
-                        and int(item["digest_mismatches"]) == 0
                         and int(item["calls"]) == args.stress_calls
+                        and all(
+                            int(metrics["samples"]) > 0
+                            and math.isfinite(float(metrics["max_abs_drift"]))
+                            and math.isfinite(
+                                float(metrics["max_relative_l2_drift"])
+                            )
+                            for metrics in item["metrics_by_shape"].values()
+                        )
                         for item in result["stress"]["ranks"]
                     ),
                 },

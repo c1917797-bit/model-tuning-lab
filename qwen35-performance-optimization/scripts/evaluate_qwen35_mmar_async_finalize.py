@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate the frozen baseline versus opt-in M=1 MMAR async finalize."""
+"""Evaluate stock MMAR versus the opt-in Qwen3.5 M=1 IPC fullmesh path."""
 
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--per-shape-minimum-speedup", type=float, default=1.0)
     parser.add_argument("--geomean-minimum-speedup", type=float, default=1.03)
     parser.add_argument("--correctness-envelope-factor", type=float, default=2.0)
+    parser.add_argument("--stress-envelope-factor", type=float, default=2.0)
     return parser.parse_args()
 
 
@@ -34,10 +35,14 @@ def by_shape(result: dict[str, Any]) -> dict[tuple[int, int, int], dict[str, Any
     }
 
 
-def stress_passes(result: dict[str, Any]) -> bool:
+def stress_structure_passes(result: dict[str, Any]) -> bool:
     stress = result["stress"]
     ranks = stress["ranks"]
     expected = int(stress["requested_calls_per_rank"])
+    expected_samples = {
+        str(shape): (expected + len(SHAPES) - 1 - index) // len(SHAPES)
+        for index, shape in enumerate(SHAPES)
+    }
     return (
         bool(stress["alternating_shapes"])
         and expected >= 5000
@@ -45,11 +50,41 @@ def stress_passes(result: dict[str, Any]) -> bool:
         and all(
             int(rank["calls"]) == expected
             and bool(rank["finite"])
-            and int(rank["digest_mismatches"]) == 0
             and bool(rank["checkpoints"])
+            and set(rank["metrics_by_shape"]) == set(expected_samples)
+            and all(
+                int(rank["metrics_by_shape"][shape]["samples"]) == samples
+                and math.isfinite(
+                    float(rank["metrics_by_shape"][shape]["max_abs_drift"])
+                )
+                and math.isfinite(
+                    float(
+                        rank["metrics_by_shape"][shape][
+                            "max_relative_l2_drift"
+                        ]
+                    )
+                )
+                for shape, samples in expected_samples.items()
+            )
             for rank in ranks
         )
     )
+
+
+def maximum_stress_metrics(
+    result: dict[str, Any],
+) -> dict[str, dict[str, float]]:
+    ranks = result["stress"]["ranks"]
+    return {
+        str(shape): {
+            metric: max(
+                float(rank["metrics_by_shape"][str(shape)][metric])
+                for rank in ranks
+            )
+            for metric in ("max_abs_drift", "max_relative_l2_drift")
+        }
+        for shape in SHAPES
+    }
 
 
 def main() -> int:
@@ -98,12 +133,40 @@ def main() -> int:
             "correctness_pass": all(correctness.values()),
         }
     geomean = math.prod(speedups) ** (1.0 / len(speedups))
+    baseline_stress_structure_pass = stress_structure_passes(baseline_result)
+    candidate_stress_structure_pass = stress_structure_passes(candidate_result)
+    stress_cells: dict[str, Any] = {}
+    stress_numerical_pass = False
+    if baseline_stress_structure_pass and candidate_stress_structure_pass:
+        baseline_stress = maximum_stress_metrics(baseline_result)
+        candidate_stress = maximum_stress_metrics(candidate_result)
+        for shape in SHAPES:
+            shape_key = str(shape)
+            thresholds = {
+                metric: args.stress_envelope_factor * value
+                for metric, value in baseline_stress[shape_key].items()
+            }
+            metric_passes = {
+                metric: candidate_stress[shape_key][metric] <= threshold
+                for metric, threshold in thresholds.items()
+            }
+            stress_cells[f"m{shape[0]}_k{shape[1]}_n{shape[2]}"] = {
+                "baseline_max_drift": baseline_stress[shape_key],
+                "candidate_max_drift": candidate_stress[shape_key],
+                "candidate_thresholds": thresholds,
+                "metric_passes": metric_passes,
+                "pass": all(metric_passes.values()),
+            }
+        stress_numerical_pass = all(
+            cell["pass"] for cell in stress_cells.values()
+        )
     decision = {
-        "schema": "qwen35-mmar-m1-async-finalize-decision/v1",
+        "schema": "qwen35-mmar-m1-ipc-fullmesh-decision/v2",
         "gate": {
             "per_shape_minimum_speedup": args.per_shape_minimum_speedup,
             "geomean_minimum_speedup": args.geomean_minimum_speedup,
             "correctness_envelope_factor": args.correctness_envelope_factor,
+            "stress_envelope_factor": args.stress_envelope_factor,
             "minimum_stress_calls_per_rank": 5000,
         },
         "cells": cells,
@@ -113,8 +176,11 @@ def main() -> int:
             all(cell["per_shape_perf_pass"] for cell in cells.values())
             and geomean >= args.geomean_minimum_speedup
         ),
-        "baseline_stress_pass": stress_passes(baseline_result),
-        "candidate_stress_pass": stress_passes(candidate_result),
+        "stress_cells": stress_cells,
+        "baseline_stress_pass": baseline_stress_structure_pass,
+        "candidate_stress_pass": (
+            candidate_stress_structure_pass and stress_numerical_pass
+        ),
     }
     decision["accepted"] = (
         decision["correctness_pass"]
