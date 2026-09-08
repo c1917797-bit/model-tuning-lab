@@ -3915,3 +3915,61 @@ UT build/run pass in a no-network, no-NPU disposable container. A v2 package
 rebuild is in progress; rerun the same operator A/B only after recording its
 new SHA256. Do not start E2E unless K1536 remains faster, K4352 is no slower,
 the geomean is at least 1.03x, and the revised numerical stress gate passes.
+
+## 2026-09-08 IPC fullmesh v2 lifecycle rejection
+
+The K1536-only v2 operator package was successfully rebuilt from ops-transformer
+commit `ac474366a52f43068934426c8b647f26af8291d3`. Its package path is
+`/cache/cch/.worktrees/exp-20260908-qwen35-mmar-ipc-fullmesh/build_out/cann-ops-transformer-qwen35_mmar_ipc_fullmesh_v2_linux-aarch64.run`
+and its SHA256 is
+`a55b4c51f9499a72cdbfc0aabe44f2fcf9b1773b2e88e514dc273e747f3a8203`.
+It was installed in a no-network, no-NPU disposable container into the
+task-private directory
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-v2-opp`. The official image ID and
+repo digest remained unchanged.
+
+The benchmark/evaluator now use a numerical stress envelope instead of invalid
+byte-exact BF16 digest equality. Each rank checks 5000 alternating calls for
+finite results, exact call/sample counts, maximum absolute drift, and maximum
+relative-L2 drift. Candidate stress is bounded by 2x the matching stock-control
+envelope. This protocol is committed as `ef02837`.
+
+The first v2 attempt under
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v2-20260908-2125` is invalid
+as candidate-kernel evidence. The package installer had recorded
+`/candidate-out` in its environment file, while that launcher revision mounted
+the OPP at a different container path. Consequently the candidate environment
+requested the feature but the custom OPP directory was not visible. Do not use
+that attempt's performance numbers. The mount path and a mandatory candidate
+OPP visibility preflight were fixed in model-lab commit `b2fd0d6`.
+
+The corrected real run is under
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v2r2-20260908-2130`.
+The official stock control completed the full 5000-call/rank protocol and
+reported K1536/K4352 medians of `81.7098/84.9358 us`. The corrected candidate
+had the OPP mounted read-only at `/candidate-out`, the feature gate enabled,
+four live workers bound only to physical NPU0-3, and no access to NPU4-7.
+However, it did not produce `candidate.json` after more than 16 minutes,
+whereas the stock side completed in tens of seconds. The AWMCP operation lasted
+`1103.110 s` before the exact task-owned container was stopped after checking
+its ID, image, devices, mounts, and command. This is a material lifecycle and
+sustained-throughput failure, so v2 is rejected and must not advance to E2E or
+the standalone PR.
+
+The rejection record and post-stop evidence are
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v2r2-20260908-2130/EARLY_STOP_REASON.txt`
+and
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v2r2-20260908-2130/SHA256SUMS-EARLY-STOP`,
+with SHA256 values
+`57081d2a0746e542e6195ccc742f42282e5799f450ccba7cf219ccf5a9aff5b2`
+and
+`a2f8a0ee420fc003c60325a8d943e1d35e9e11ef9a3ae6fdf809c45f75bf174e`.
+After stop, NPU0-3 had no processes, the cooperative lease was obtainable, and
+the unrelated NPU4-7 workload remained untouched.
+
+Do not rerun this binary-flag IPC fullmesh implementation unchanged. The
+maintained stress harness now writes per-rank JSONL progress after each batch
+and imposes a 600-second per-side hard timeout so future lifecycle failures
+retain partial evidence and release resources sooner. A successor must use a
+materially different bounded synchronization/lifecycle design or return to a
+native HCCL/MMAR path; it must pass this operator gate before any E2E run.

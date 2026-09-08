@@ -9,6 +9,7 @@ candidate_opp_env="${CANDIDATE_OPP_ENV:?set CANDIDATE_OPP_ENV}"
 candidate_commit="${CANDIDATE_OPERATOR_COMMIT:?set CANDIDATE_OPERATOR_COMMIT}"
 candidate_sha256="${CANDIDATE_PACKAGE_SHA256:?set CANDIDATE_PACKAGE_SHA256}"
 cooldown="${MMAR_DEVICE_COOLDOWN_SECONDS:-30}"
+benchmark_timeout="${MMAR_BENCHMARK_TIMEOUT_SECONDS:-600}"
 image="${VLLM_ASCEND_IMAGE:-quay.io/ascend/vllm-ascend:v0.23.0}"
 lease_file="/cache/austinov/.locks/npu0-3.lock"
 
@@ -105,6 +106,7 @@ launcher_sha256="$(sha256sum "$bundle_root/scripts/run_qwen35_mmar_async_finaliz
   echo "stress_calls_per_rank=5000"
   echo "stress_batch=250"
   echo "cooldown_seconds=$cooldown"
+  echo "per_side_hard_timeout_seconds=$benchmark_timeout"
 } >"$output_root/provenance.txt"
 
 for label in default candidate; do
@@ -129,7 +131,7 @@ for label in default candidate; do
     echo "existing container: $container_name" >&2
     exit 41
   }
-  timeout --signal=TERM --kill-after=60s 1800s docker run --rm --name "$container_name" --network host --cpuset-cpus 0-95 \
+  timeout --signal=TERM --kill-after=60s "${benchmark_timeout}s" docker run --rm --name "$container_name" --network host --cpuset-cpus 0-95 \
     --device /dev/davinci0 --device /dev/davinci1 \
     --device /dev/davinci2 --device /dev/davinci3 \
     --device /dev/davinci_manager --device /dev/devmm_svm --device /dev/hisi_hdc \
@@ -168,6 +170,6 @@ final_image_id="$(docker image inspect --format '{{.Id}}' "$image")"
 final_image_digests="$(docker image inspect --format '{{json .RepoDigests}}' "$image")"
 [[ "$final_image_id" == "$image_id" ]] || { echo "image ID changed" >&2; exit 47; }
 [[ "$final_image_digests" == "$image_digests" ]] || { echo "image digest changed" >&2; exit 47; }
-sha256sum "$output_root"/*.json "$output_root"/*.log "$output_root"/*.txt >"$output_root/SHA256SUMS"
+sha256sum "$output_root"/*.json "$output_root"/*.jsonl "$output_root"/*.log "$output_root"/*.txt >"$output_root/SHA256SUMS"
 echo "completed official-stock vs opt-in IPC-fullmesh A/B: $output_root"
 exit "$decision_rc"

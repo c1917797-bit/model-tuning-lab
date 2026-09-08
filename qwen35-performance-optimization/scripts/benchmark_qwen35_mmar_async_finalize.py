@@ -69,6 +69,11 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
     hcomm_info = backend.get_hccl_comm_name(rank)
     cases: list[dict[str, Any]] = []
     cells: list[dict[str, Any]] = []
+    progress_output = args.output.with_name(
+        f"{args.output.stem}.rank{rank}.progress.jsonl"
+    )
+    if progress_output.exists():
+        raise FileExistsError(f"refusing to overwrite {progress_output}")
 
     for shape_index, (k, n) in enumerate(SHAPES):
         generator = torch.Generator(device="cpu")
@@ -218,15 +223,17 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                 relative_l2,
             )
         stress_local["calls"] = int(stress_local["calls"]) + batch_count
-        stress_local["checkpoints"].append(
-            {
-                "completed_calls": stress_local["calls"],
-                "max_numerical_drift_by_shape": {
-                    shape: dict(metrics)
-                    for shape, metrics in stress_local["metrics_by_shape"].items()
-                },
-            }
-        )
+        checkpoint = {
+            "rank": rank,
+            "completed_calls": stress_local["calls"],
+            "max_numerical_drift_by_shape": {
+                shape: dict(metrics)
+                for shape, metrics in stress_local["metrics_by_shape"].items()
+            },
+        }
+        stress_local["checkpoints"].append(checkpoint)
+        with progress_output.open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(checkpoint, sort_keys=True) + "\n")
 
     stress_by_rank: list[dict[str, Any] | None] = [None] * world_size
     dist.all_gather_object(stress_by_rank, stress_local)
@@ -306,6 +313,11 @@ def main() -> int:
     args = parse_args()
     if args.output.exists():
         raise FileExistsError(f"refusing to overwrite {args.output}")
+    stale_progress = list(
+        args.output.parent.glob(f"{args.output.stem}.rank*.progress.jsonl")
+    )
+    if stale_progress:
+        raise FileExistsError(f"refusing to overwrite {stale_progress}")
     if args.label == "candidate":
         if os.environ.get("ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH") != "1":
             raise RuntimeError("candidate IPC fullmesh gate is not enabled")
