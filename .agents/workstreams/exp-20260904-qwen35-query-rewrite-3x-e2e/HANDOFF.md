@@ -3593,3 +3593,36 @@ are already closed by real evidence, and the A2 BF16 SwiGLU prototype's
 step is a materially new ASCEND910B decode MMAR/HCCL lifecycle implementation,
 first gated on exact BF16 M=1 row-parallel shapes and only then integrated by
 runtime monkeypatch.
+
+## 2026-09-08 takeover checkpoint
+
+AWMCP direct execution on `chicaihong01/ma` is working. The earlier
+`runtimeChildren=0` / gateway-only diagnosis is no longer a valid blocker.
+At 2026-09-08T06:50:58Z, `npu-smi info` showed all eight physical 910B4
+devices healthy with zero AICore load and no NPU processes. Docker had no
+running containers; no Qwen/vLLM/benchmark/controller process or serving port
+was present. NPU4-7 remain protected despite being idle.
+
+The model worktree branch is synchronized with its remote at the maintained
+handoff checkpoint. Preserve the documented pre-existing modified and
+untracked files; never stage them with a broad add. The isolated operator
+worktree
+`/cache/cch/.worktrees/exp-20260907-qwen35-a2-bf16-swiglu-gated-mlp`
+is clean at `3fbd8c2ba6fe8129b0c08231dee9f8b7fc6d0448`. Its origin is
+`https://gitcode.com/cann/ops-transformer.git`, and the local experiment
+branch has no configured upstream.
+
+The latest user gate is authoritative: TTFT P95 and TPOT P95 must each reach
+2x at c1/c5/c8/c16. Historical 1.5x/50% passages are provenance only. The
+current A2 BF16 dense SwiGLU v1 remains rejected at `1.098104733x` versus its
+predeclared `1.10x` operator gate; its three-stage launcher and FP32 SwiGLU
+temporary-buffer path were re-inspected, but no new build or NPU run was
+started in this checkpoint. Do not round it upward or rerun it unchanged.
+
+Safe continuation is: implement a materially different exact-M=1 BF16
+candidate in the isolated operator worktree, recheck NPU/process/container/
+port ownership immediately before using physical NPU0, require correctness
+before latency, and promote only if the registered microbenchmark gate passes.
+If it passes, integrate through the runtime Python monkeypatch and run c1/c16
+fail-fast before the full c1/c5/c8/c16 three-repeat screen. Preserve raw
+artifacts, protocol and SHA256 for every decision.
