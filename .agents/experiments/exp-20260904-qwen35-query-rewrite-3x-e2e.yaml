@@ -2110,9 +2110,11 @@ runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
     prefetch: "retain the already activated linear-attention gate/up prefetch and RMSNorm lifecycle hooks"
     bounded_mmar: "disabled by leaving VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD at zero"
   static_gate: "device-free contract tests prove deferred activation, exact eligibility, fused module replacement, six-way weight mapping, Ascend forward projection selection, idempotence, and no activation in model-inspection subprocesses"
-  activation_gate: "all four TP workers install the intended hooks, load weights, reach /v1/models, complete a fixed natural-EOS smoke, and mount no vLLM or vLLM-Ascend source file"
-  performance_gate: "c1/c16 fail-fast first; then three repetitions at c1/c5/c8/c16; TTFT P95 reduction >=40% and TPOT P95 reduction >=20% in every cell versus frozen MTP-off baseline"
-  quality_gate: "32 length-quantile paired same-runtime samples; identical prompts/seed/temperature; all differences reviewed; zero material regressions"
+  activation_gate: "all four TP workers install the intended hooks, load weights, reach /v1/models, complete a fixed natural-EOS smoke, prove process-to-physical-NPU0-3 binding, and mount no vLLM or vLLM-Ascend source file"
+  comparability_gate: "recheck source, image, driver, CANN, model, tokenizer, launch config, workload hash, device binding, host competition and cache policy against the frozen denominator; if any material field drifted, run a fresh same-session MTP-off control before making a performance claim"
+  early_quality_canary: "before performance traffic, run a small representative paired same-runtime semantic canary; abort on any obvious material regression, but do not substitute it for the final 32-sample gate"
+  performance_gate: "screen one c1 and one c16 repetition first; expand directly only on a clear pass, reject early only on a clear material miss, and treat near-threshold or cold-tail results as inconclusive until repetitions resolve them; final decision uses three repetitions at c1/c5/c8/c16 with TTFT P95 reduction >=40% and TPOT P95 reduction >=20% in every cell"
+  quality_gate: "after the performance gate, 32 length-quantile paired same-runtime samples; identical prompts/seed/temperature; all differences reviewed; zero material regressions"
   resources: "physical NPU0-3 only under cooperative lease; NPU4-7 excluded; one-shot container lifecycle; original image identity checked before and after"
   implementation:
     repository_commit: 0f5582c28b38f9b158280b9ad25bb7f255df96cd
@@ -2121,12 +2123,17 @@ runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
     launcher: qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh
     launcher_contract: "holds /cache/austinov/.locks/npu0-3.lock for the complete --rm container lifetime; refuses device/container/port conflicts, MemAvailable below 48 GiB, image identity drift, patch drift, and artifact-directory reuse"
     source_overlay_count: 0
-    activation_state: "pending real Ascend 910B4 TP4 service startup"
+    activation_state: "waiting for the external NPU0-3 owner to release its live workload; do not stop or bypass it"
     activation_attempts:
       - operation_id: exec-0000000000000778
         result: "launcher failed before artifact-directory creation or docker run"
         exit_code: 2
         error: "generated shell continuations contained literal plus arguments"
         resource_effect: "no container created; NPU0-3 remained idle; cooperative lease released; NPU4-7 untouched"
+      - operation_id: exec-000000000000077d
+        result: "resource gate refused before artifact-directory creation or docker run"
+        exit_code: 48
+        blocker: "vllm-ep-310p-research-910b-monitor declared physical NPU0-3 and started four VLLMWorker_TP processes"
+        resource_effect: "no t12 container created; cooperative lease released; external owner and NPU4-7 were untouched"
   rollback: "unset QWEN35_ASCEND_MONKEYPATCH and VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS, unmount the read-only patch directory, and stop only the exact t12 container"
   promotion: "copy only the byte-verified, fully validated runtime plugin and evidence manifest to qwen35-vllm-ascend-patch; do not update the final PR before all gates pass"

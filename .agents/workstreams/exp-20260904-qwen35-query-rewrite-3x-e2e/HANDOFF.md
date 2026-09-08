@@ -5,10 +5,11 @@
 ### 0. Status
 
 - Workstream: `exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Branch-local state: active; NPU0-3 were proven free in the current AWMCP
-  session; not integrated.
-- Current branch checkpoint before this update: `aa6c886a2ce5`.
-- Takeover checkpoint `e711dd9` is pushed and equals the workstream upstream.
+- Branch-local state: active; not integrated. At 2026-09-08T13:59Z the
+  external `vllm-ep-310p-research-910b-monitor` workload owned physical
+  NPU0-3, so t12 correctly remained stopped at its resource gate.
+- Latest pushed checkpoint is `5b8567b` on
+  `pr/qwen35-mmar-async-finalize-gate`.
 - The worktree still contains pre-existing modified benchmark/profile scripts
   and untracked historical handoff/config/prefetch files. They were not staged
   or altered by the takeover. Inspect ownership path by path; never use
@@ -51,21 +52,29 @@ full repeated matrix and 32-sample same-runtime semantic gate.
 
 ### 4. Current Action
 
-The current AWMCP session proved direct host execution works and that physical
-NPU0-3 have no NPU processes, no active Qwen3.5 container, and no listener
-owned by this workstream. NPU4-7 remain occupied by the unrelated
-`qwen38_drrqr_baseline_exact_host4_7_tp4_20260907_v6` service on port 8227
-and are protected. Before every new launch, re-prove this ownership snapshot.
+The current AWMCP session proves direct host execution works. A first t12
+launcher attempt exposed and fixed a generated-shell defect before Docker
+creation. The corrected launcher then refused startup with exit 48 because
+`vllm-ep-310p-research-910b-monitor` had appeared and started four
+`VLLMWorker_TP` processes on physical NPU0-3 (PIDs 520084-520087, about
+27.9 GiB process memory each). Do not stop or bypass this external owner.
+NPU4-7 remain protected. Recheck the live resource state and resume only after
+NPU0-3 and all container declarations are genuinely released.
 
 ### 5. Next Actions
 
 1. Re-prove container, port, process, memory and physical NPU ownership
    immediately before allocation; use only NPU0-3 and an unclaimed port.
-2. Run the t12 runtime-only launcher under its full-lifetime cooperative lease;
-   do not add vLLM or vLLM-Ascend source overlays and do not touch NPU4-7.
+2. Wait for the external NPU0-3 owner to exit, then run the t12 runtime-only
+   launcher under its full-lifetime cooperative lease; do not add vLLM or
+   vLLM-Ascend source overlays and do not touch NPU4-7.
 3. Require API readiness, all four TP worker activation markers, fused weight
    loading, a fixed-input natural-EOS smoke, and image/mount evidence.
-4. Run one c1 and one c16 fail-fast screen against the frozen denominator.
+4. Recheck the complete environment fingerprint. If it materially drifted,
+   run a same-session MTP-off control. Run a small paired semantic canary, then
+   one c1 and one c16 screen. Treat near-threshold/cold-tail results as
+   inconclusive until enough repetitions resolve them; reject early only on a
+   clear material miss.
 5. On a passing screen, run c1/c5/c8/c16 x three repetitions, analyze P95/P99,
    capture paired semantic outputs when hashes differ, and profile the final
    candidate.

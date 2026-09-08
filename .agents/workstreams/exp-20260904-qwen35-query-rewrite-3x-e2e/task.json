@@ -40,6 +40,6 @@
     "python3 -m py_compile scripts/run_qwen35_benchmark_matrix.py",
     "git diff --check"
   ],
-    "executionState": "attempted-runtime-only-gdn-projection-fusion-t12-awaiting-npu-activation",
+    "executionState": "attempted-runtime-only-gdn-projection-fusion-t12-waiting-for-external-npu0-3-lease",
     "integrationState": "branch-local-final-monkeypatch-not-promoted"
 }
