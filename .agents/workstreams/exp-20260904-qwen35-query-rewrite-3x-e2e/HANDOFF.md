@@ -3643,3 +3643,42 @@ The surviving requirement remains a materially different implementation that
 removes a stage launch or fuses useful work into a matmul epilogue, or a new
 decode MMAR/HCCL lifecycle candidate. The operator source is restored to the
 v1 behavior after evidence capture.
+
+## 2026-09-08 M=1 MMAR final-sync lifecycle screen
+
+The arch22 lifecycle hypothesis that the final full-core `Mc2SyncAll` after
+the notify core's AllReduce Wait may be redundant was implemented as an
+opt-in, defense-in-depth exact-shape path. It applied only to BF16 `M=1`,
+one tile, no tail, and no add input; the pre-Commit synchronization remained
+unchanged. The candidate operator commit was
+`93d16030dfa8158492057051ffb60651b37d0a43`; package SHA256 was
+`0596becb0a5494cdcd89c8d7b97764f3edd0ab5f233e2af8d4604182f718883a`.
+
+The original `quay.io/ascend/vllm-ascend:v0.23.0` image was not modified.
+Build and benchmark containers were one-shot `--rm` instances. The custom
+package was installed only into the separate host path
+`/cache/cch/qwen35-mmar-finalsync-v1-custom-opp` and mounted read-only for
+the candidate run. No `docker commit` or in-image package install occurred.
+
+The frozen TP4 screen used physical NPU0-3 only, 40 warmups, 200 iterations,
+seven repeats, and median max-rank latency. Both exact decode shapes passed
+the deterministic fixed-rank CPU FP32 correctness envelope. Performance was
+`1.0110449702x` for `(1,1536,5120)` and `1.0128751734x` for
+`(1,4352,5120)`; geometric mean was `1.0119596580x`, below the registered
+`1.02x` promotion gate. Reject without E2E expansion and do not retry this
+final-sync-only route unchanged.
+
+Immutable evidence is under
+`/cache/austinov/qwen35-query-rewrite/operator-microbench/20260908T0745Z-mmar-finalsync-v1`.
+`decision-frozen-envelope.json` is authoritative and
+`SHA256SUMS.corrected` covers it. Retain the original `decision.json`: a
+runner/evaluator timing race caused it to require a generic BF16 `allclose`
+flag in addition to the frozen deterministic envelope. That audit issue did
+not change the rejection because the independent performance gate failed.
+
+Operator commit `ce55db9` reverted the candidate implementation while
+preserving history; `ec5ad3e` records the negative evidence. The model
+worktree adds a reusable frozen runner and evaluator in commits
+`ead3ea1`, `c489017`, `aa51766`, and `9d35d12`; pre-existing dirty
+files were not staged. After the run, no containers remained and all NPU0-7
+reported no running processes. NPU4-7 were never mapped.
