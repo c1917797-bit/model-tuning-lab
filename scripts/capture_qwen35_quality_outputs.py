@@ -161,6 +161,10 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if args.output.exists():
+        raise FileExistsError(
+            f"refusing to replace quality capture: {args.output}"
+        )
     actual_hash = hashlib.sha256(args.dataset.read_bytes()).hexdigest()
     if actual_hash != args.dataset_sha256:
         raise ValueError(

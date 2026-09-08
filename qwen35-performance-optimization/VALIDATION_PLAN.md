@@ -55,7 +55,10 @@ environment drift.
 7. **Full performance gate.** Run both control and candidate at
    c1/c5/c8/c16 with three repetitions and 32 requests per cell. Decide from
    the median of the three per-run P95 values using
-   analyze_qwen35_current_targets.py. P50 and P99 are diagnostics; a
+   the root-level `scripts/run_qwen35_benchmark_matrix.py` and
+   `qwen35-performance-optimization/scripts/analyze_qwen35_current_targets.py`.
+   Each matrix must use a fresh output root and a unique run id. P50 and P99
+   are diagnostics; a
    repeatable P99 increase above 10% is a commercial tail-risk flag requiring
    investigation even when the P95 target passes. Use a run-unique cache salt
    for every warmup and measured request so repeated prompts cannot turn later
@@ -64,6 +67,11 @@ environment drift.
    and candidate with temperature 0, seed 1024, identical prompts, and natural
    EOS. Byte-identical output is an automatic pass. If any output differs,
    review every differing pair; any material loss rejects the candidate.
+   Use the root-level `scripts/capture_qwen35_quality_outputs.py` with
+   `--sample-count 357`, then `scripts/compare_qwen35_quality_outputs.py`
+   and the fail-closed
+   `qwen35-performance-optimization/scripts/check_qwen35_full_quality.py`.
+   All capture, comparison, and review paths must be new and non-reused.
    Because the dataset answer fields are empty, the claim remains bounded to
    paired no-regression evidence on this frozen workload.
 9. **Promotion gate.** Copy the exact validated patch bytes into the

@@ -39,6 +39,8 @@ with tempfile.TemporaryDirectory() as directory:
         "requests": 2,
         "completed": 2,
         "finish_reasons": {"stop": 2},
+        "cache_salt_prefix": "control-run",
+        "prefix_cache_isolation": True,
         "response_sha256": ["b" * 64, "c" * 64],
     }
     artifact.write_text(json.dumps(payload))
@@ -48,6 +50,8 @@ with tempfile.TemporaryDirectory() as directory:
         repetition=2,
         dataset_sha256="a" * 64,
         model="model",
+        requests=2,
+        cache_salt_prefix="control-run",
     )
     assert validated["completed"] == 2
     payload["errors"] = 1
@@ -59,6 +63,8 @@ with tempfile.TemporaryDirectory() as directory:
             repetition=2,
             dataset_sha256="a" * 64,
             model="model",
+            requests=2,
+            cache_salt_prefix="control-run",
         )
     except ValueError as error:
         assert "errors must be 0" in str(error)

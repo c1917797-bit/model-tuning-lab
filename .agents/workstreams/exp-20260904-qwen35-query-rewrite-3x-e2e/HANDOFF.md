@@ -114,6 +114,14 @@ must use a fresh one-shot `--rm` container and must compare the recorded image
 identity before and after the run.
 The complete corrected offline suite, including the strengthened no-mutation
 launcher contract, passed together in exec-00000000000007d0.
+The root-level matrix regression test had drifted behind the required
+32-request/cache-salt validation API and failed in exec-00000000000007d7.
+It was corrected, and the quality capture/comparison tools now fail closed
+instead of replacing an existing artifact. A new offline contract covers
+length-stratified selection, paired comparison, restricted mode 0600 outputs,
+manual-review routing, and overwrite refusal. The matrix, capture/comparison,
+all-357 decision, current 40/20 analyzer, cache-isolation, syntax, and diff
+gates passed together in the final rerun exec-00000000000007db.
 
 The latest resource snapshot, exec-00000000000007b6 at
 2026-09-08T14:57:58Z, still showed the external

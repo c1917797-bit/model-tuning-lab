@@ -44,6 +44,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    for output in (args.report_json, args.review_md):
+        if output.exists():
+            raise FileExistsError(
+                f"refusing to replace quality comparison output: {output}"
+            )
     baseline = load(args.baseline)
     candidate = load(args.candidate)
     for key in ("dataset_sha256", "model", "seed", "temperature"):
