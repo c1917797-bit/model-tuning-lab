@@ -22,7 +22,13 @@ environment drift.
 
 1. **Offline package gate.** Check syntax, patch SHA256, weight mapping,
    activation-checker fixtures, and an editable install inside the pinned
-   official image with no NPU devices and no index access.
+   official image with no NPU devices and no index access. Run
+   `tests/test_official_image_source_contract.sh` to parse the exact embedded
+   vLLM and vLLM-Ascend sources and verify every required class, method,
+   signature, and exact source-replacement anchor. A full Qwen GDN import is
+   not a no-device test in this image because Triton queries the Ascend SoC
+   during import; an `rtGetSocVersion` failure without mounted devices is an
+   environment boundary, not compatibility evidence.
 2. **Resource gate.** Immediately before allocation, prove physical NPU0-3
    have no process and no container declaration, NPU4-7 stay excluded, the
    chosen port is free, at least 48 GiB memory is available, and the

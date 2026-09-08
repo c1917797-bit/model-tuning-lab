@@ -45,6 +45,7 @@ Passed:
 
 - Python and shell syntax;
 - static projection-fusion contract tests;
+- exact official-image source-contract validation without network or devices;
 - activation-checker positive and negative fixtures;
 - offline editable installation in the exact v0.23.0 image with network=none
   and no NPU device mapping.
@@ -59,5 +60,10 @@ Pending:
 
 Historical t11 reached a 47.7% c1 TTFT P95 reduction but only a 17.3% TPOT P95
 reduction. Those measurements are provenance, not a t12 performance claim.
+
+Run `../tests/test_official_image_source_contract.sh` on the host to detect
+class, method, signature, or exact source-anchor drift in the pinned image.
+This intentionally does not import the Qwen GDN stack: that import initializes
+the Triton Ascend target and therefore belongs to the live NPU activation gate.
 
 See ../VALIDATION_PLAN.md for the ordered gates and rollback boundary.

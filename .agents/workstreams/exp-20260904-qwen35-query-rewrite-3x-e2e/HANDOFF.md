@@ -34,7 +34,7 @@ Activate the attempted t12 source-overlay-free runtime monkeypatch for the
 historically retained GDN qkvz/ba projection fusion plus gate/up prefetch 0.1.
 First require four-worker activation, API readiness, an unchanged-image/mount
 audit, and a fixed natural-EOS smoke. Then run c1/c16 fail-fast before the
-full repeated matrix and 32-sample same-runtime semantic gate.
+full repeated matrix and all-357-row same-runtime semantic gate.
 
 ### 3. Recent Progress
 
@@ -72,10 +72,26 @@ activation, independent 0.60 TTFT and 0.80 TPOT P95 thresholds, all-357-row
 quality, prefix-cache isolation, exact-container stop, syntax, JSON/YAML, MST,
 and diff checks. VALIDATION_PLAN.md is now the authoritative ordered plan.
 
-The latest resource snapshot, exec-00000000000007a0 at
-2026-09-08T14:40:29Z, still showed the same external NPU0-3 owner (PIDs
-520084-520087), a protected NPU4-7 workload (PIDs 816932-816935), and only
-36513068 kB MemAvailable. Do not allocate until these conditions clear.
+A deeper no-device probe (exec-00000000000007a6) activated the import hooks
+and AscendConfig patch, then reached the expected environment boundary:
+importing the Qwen GDN stack made Triton query the Ascend SoC and failed with
+rtGetSocVersion because the container deliberately had no NPU devices. This is
+not a compatibility pass or a patch failure. A new read-only source-contract
+gate now parses the exact vLLM/vLLM-Ascend files in the pinned official image,
+checks every required class/method/signature and both exact replacement
+anchors, and emits their SHA256 values. It passed with no network, a read-only
+container, and no devices in exec-00000000000007b0. The wider offline suite
+also passed; its wrapper later returned nonzero only because an MST command
+used the wrong path, and the correct ./scripts/validate-mst.sh independently
+passed all 18 skills in exec-00000000000007b3.
+
+The latest resource snapshot, exec-00000000000007b6 at
+2026-09-08T14:57:58Z, still showed the external
+vllm-ep-310p-research-910b-monitor container on physical NPU0-3, now with PIDs
+920761-920764 and 28108 MiB process memory per card. MemAvailable recovered to
+53581356 kB and ports 3057/10010 were not listening. NPU4-7 reported no NPU
+processes, but remain protected and outside this workstream. Do not allocate
+until NPU0-3 and every associated container declaration are genuinely clear.
 
 ### 5. Next Actions
 
@@ -83,7 +99,10 @@ The latest resource snapshot, exec-00000000000007a0 at
    immediately before allocation; use only NPU0-3 and an unclaimed port.
 2. Wait for the external NPU0-3 owner to exit, then run the t12 runtime-only
    launcher under its full-lifetime cooperative lease; do not add vLLM or
-   vLLM-Ascend source overlays and do not touch NPU4-7.
+   vLLM-Ascend source overlays and do not touch NPU4-7. Never edit or replace
+   the host/image vLLM-Ascend 0.23.0 tree, never overwrite its site-packages,
+   and never use docker commit. Load the plugin only in a newly created,
+   disposable container; rollback is recreation without the plugin.
 3. Require API readiness, all four TP worker activation markers, fused weight
    loading, a fixed-input natural-EOS smoke, and image/mount evidence.
 4. Because the environment has materially drifted, collect a fresh
@@ -123,6 +142,9 @@ git diff --check
 - Do not use MTP, speculative decoding, quantization, retraining, or vLLM
   source edits.
 - Do not use source overlays as final E2E evidence.
+- Do not edit, overwrite, commit, or otherwise mutate the existing
+  vLLM-Ascend 0.23.0 image/source installation. The final plugin must remain
+  removable and isolated to a disposable container.
 - Do not stop or modify NPU4-7 workloads.
 - Do not promote one-repeat, P50-only, transport-only, or unreviewed
   hash-drift evidence.

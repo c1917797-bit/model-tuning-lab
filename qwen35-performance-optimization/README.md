@@ -11,6 +11,9 @@ workstream on Ascend 910B4 and vLLM-Ascend 0.23.0.
 - use BF16 TP4 on physical NPU0-3 only;
 - do not use quantization, retraining, MTP, speculative decoding, vLLM source
   edits, final source overlays, or base-image mutation.
+- never alter the host or image copy of vLLM-Ascend 0.23.0; load the patch from
+  a read-only mount in a newly created disposable container, and roll back by
+  recreating that container without the patch.
 
 ## Current candidate
 
