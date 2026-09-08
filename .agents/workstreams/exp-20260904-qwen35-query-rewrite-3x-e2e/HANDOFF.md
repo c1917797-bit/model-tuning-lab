@@ -3870,3 +3870,48 @@ Do not run c5/c8, a full three-repeat matrix, or the all-357 quality gate for
 t12. Do not promote its runtime patch to the standalone PR. The next candidate
 must be materially different and must target the decode TPOT/MMAR-HCCL
 lifecycle; gate exact BF16 M=1 row-parallel shapes before another E2E launch.
+
+## 2026-09-08 Qwen3.5 M=1 IPC fullmesh operator gate
+
+A materially different custom-operator candidate was developed in the isolated
+ops-transformer worktree
+`/cache/cch/.worktrees/exp-20260908-qwen35-mmar-ipc-fullmesh`. The first
+package was built from commit `7fd584f`, entirely inside disposable
+`--rm --network none` containers based on the unchanged official
+`quay.io/ascend/vllm-ascend:v0.23.0` image. The package SHA256 is
+`57257cb946cadab0311a4728e3df610589954527032489b6bff510b381c9076d`.
+It was installed only into a task-private cache and mounted read-only for the
+candidate run; no image, site-packages, host vLLM, or vLLM-Ascend source was
+modified.
+
+The frozen stock-control versus opt-in operator A/B ran under the cooperative
+NPU0-3 lease. K1536 improved from `88.24195` to `80.71865 us`
+(`1.09320x`), while K4352 regressed from `84.60845` to
+`85.73960 us` (`0.98681x`). Geometric-mean speedup was `1.03864x`.
+Both shapes passed the predeclared numerical correctness envelope, but the
+candidate failed the per-shape no-regression rule and therefore was not
+promoted to E2E.
+
+Both stock and candidate also failed the old byte-identical digest stress
+invariant (11972 and 18968 aggregate mismatches respectively) while their
+numerical correctness envelopes passed. Treat exact BF16 digest repeatability
+as an invalid HCCL stress invariant; a successor evaluator must retain
+finite/output-count checks and compare every checkpoint with a frozen numerical
+tolerance instead.
+
+Evidence is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-20260908-2055`.
+Decision SHA256 is
+`ff105e0d2d296077a35a1071ce45bf3fe0da1201c5be33d122b1ca7b9ee4321f`;
+the manifest SHA256 is
+`12021c69816205dc3c6d4644bd7663aa4462b54b39731df451f80217b20aa47f`.
+All one-shot benchmark containers exited, the lease was released, and NPU4-7
+were never mounted.
+
+The measured shape-selective correction is commit `ac47436`: enable the new
+fullmesh path only for K1536 and retain the stock HCCL path for K4352 and all
+other shapes. The focused eligibility test and the full matmul_all_reduce host
+UT build/run pass in a no-network, no-NPU disposable container. A v2 package
+rebuild is in progress; rerun the same operator A/B only after recording its
+new SHA256. Do not start E2E unless K1536 remains faster, K4352 is no slower,
+the geomean is at least 1.03x, and the revised numerical stress gate passes.
