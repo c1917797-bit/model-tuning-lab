@@ -306,6 +306,21 @@ def main() -> int:
     args = parse_args()
     if args.output.exists():
         raise FileExistsError(f"refusing to overwrite {args.output}")
+    if args.label == "candidate":
+        if os.environ.get("ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH") != "1":
+            raise RuntimeError("candidate IPC fullmesh gate is not enabled")
+        custom_opp_roots = [
+            Path(item)
+            for item in os.environ.get("ASCEND_CUSTOM_OPP_PATH", "").split(":")
+            if item
+        ]
+        if not custom_opp_roots or not all(
+            path.is_dir() for path in custom_opp_roots
+        ):
+            raise RuntimeError(
+                "candidate ASCEND_CUSTOM_OPP_PATH is absent or inaccessible: "
+                f"{custom_opp_roots}"
+            )
     import torch.multiprocessing as mp
 
     mp.spawn(worker, args=(4, args), nprocs=4, join=True)

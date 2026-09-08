@@ -15,6 +15,27 @@ lease_file="/cache/austinov/.locks/npu0-3.lock"
 case "$output_root" in /cache/austinov/*) ;; *) echo "invalid OUTPUT_ROOT" >&2; exit 64;; esac
 [[ -d "$candidate_opp_root" ]] || { echo "missing OPP root: $candidate_opp_root" >&2; exit 66; }
 [[ -f "$candidate_opp_env" ]] || { echo "missing OPP environment: $candidate_opp_env" >&2; exit 66; }
+case "$candidate_opp_env" in
+  "$candidate_opp_root"/*)
+    candidate_opp_env_relative="${candidate_opp_env#"$candidate_opp_root"/}"
+    ;;
+  *)
+    echo "candidate OPP environment must be below its OPP root" >&2
+    exit 66
+    ;;
+esac
+candidate_opp_container_root="/candidate-out"
+candidate_opp_container_env="$candidate_opp_container_root/$candidate_opp_env_relative"
+case "$candidate_opp_env_relative" in
+  */bin/set_env.bash)
+    candidate_opp_vendor_relative="${candidate_opp_env_relative%/bin/set_env.bash}"
+    ;;
+  *)
+    echo "unexpected candidate OPP environment layout" >&2
+    exit 66
+    ;;
+esac
+candidate_opp_container_vendor="$candidate_opp_container_root/$candidate_opp_vendor_relative"
 [[ ! -e "$output_root" ]] || { echo "refusing to reuse output root" >&2; exit 44; }
 
 mkdir -p /cache/austinov/.locks
@@ -98,9 +119,9 @@ for label in default candidate; do
   else
     commit="$candidate_commit"
     sha256="$candidate_sha256"
-    opp_mount_args=(-v "$candidate_opp_root:$candidate_opp_root:ro")
+    opp_mount_args=(-v "$candidate_opp_root:$candidate_opp_container_root:ro")
     candidate_args=(-e ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH=1)
-    run_prefix="source '$candidate_opp_env'; "
+    run_prefix="test -f '$candidate_opp_container_env'; test -d '$candidate_opp_container_vendor'; source '$candidate_opp_container_env'; "
     master_port=29954
   fi
   container_name="qwen35_mmar_ipc_fullmesh_${label}_npu03"
