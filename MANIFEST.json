@@ -1,0 +1,41 @@
+{
+  "schema": "qwen35-vllm-ascend-runtime-patch/v1",
+  "candidate": "runtime-monkeypatch-bounded-mmar-t11",
+  "status": "accepted_for_c1_ttft_40pct_only",
+  "source_commit": "ebe9b69aad45a24fa79437705f00ebbeed977e55",
+  "sitecustomize_sha256": "9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8",
+  "model": "Qwen3.5-27B",
+  "framework": "vLLM-Ascend 0.23.0",
+  "image": "quay.io/ascend/vllm-ascend:v0.23.0",
+  "hardware": "Ascend 910B4",
+  "tensor_parallel_size": 4,
+  "mtp": false,
+  "activation": {
+    "QWEN35_ASCEND_MONKEYPATCH": "1",
+    "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD": "513",
+    "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS": "16384"
+  },
+  "acceptance": {
+    "scope": "c1",
+    "metric": "TTFT P95",
+    "minimum_reduction_fraction": 0.4,
+    "baseline_ms": 966.3259,
+    "candidate_ms": 505.1956,
+    "measured_reduction_fraction": 0.4772,
+    "speedup": 1.9128
+  },
+  "secondary_metric": {
+    "metric": "TPOT P95",
+    "baseline_ms": 39.0459,
+    "candidate_ms": 32.3098,
+    "measured_reduction_fraction": 0.1725,
+    "speedup": 1.2085
+  },
+  "limitations": [
+    "load before the vLLM Python process starts",
+    "not validated at c5, c8, or c16",
+    "not a 40 percent TPOT improvement claim",
+    "the t11 candidate has request/smoke correctness but not its own 32-sample semantic-quality decision",
+    "re-baseline when the environment changes"
+  ]
+}
