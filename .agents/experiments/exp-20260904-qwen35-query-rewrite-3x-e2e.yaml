@@ -2122,5 +2122,11 @@ runtime_monkeypatch_gdn_projection_fusion_t12_20260908:
     launcher_contract: "holds /cache/austinov/.locks/npu0-3.lock for the complete --rm container lifetime; refuses device/container/port conflicts, MemAvailable below 48 GiB, image identity drift, patch drift, and artifact-directory reuse"
     source_overlay_count: 0
     activation_state: "pending real Ascend 910B4 TP4 service startup"
+    activation_attempts:
+      - operation_id: exec-0000000000000778
+        result: "launcher failed before artifact-directory creation or docker run"
+        exit_code: 2
+        error: "generated shell continuations contained literal plus arguments"
+        resource_effect: "no container created; NPU0-3 remained idle; cooperative lease released; NPU4-7 untouched"
   rollback: "unset QWEN35_ASCEND_MONKEYPATCH and VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS, unmount the read-only patch directory, and stop only the exact t12 container"
   promotion: "copy only the byte-verified, fully validated runtime plugin and evidence manifest to qwen35-vllm-ascend-patch; do not update the final PR before all gates pass"

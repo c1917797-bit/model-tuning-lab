@@ -6,7 +6,8 @@ runner="$root/qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12
 [[ -x "$runner" || -f "$runner" ]]
 
 grep -Fq 'flock -n 9' "$runner"
-grep -Fq 'docker run --rm' "$runner"
+grep -Fq 'run --rm' "$runner"
+! grep -Eq '(^|[[:space:]])\+([[:space:]]|$)' "$runner"
 grep -Fq -- '--device /dev/davinci0' "$runner"
 grep -Fq -- '--device /dev/davinci3' "$runner"
 ! grep -Fq -- '--device /dev/davinci4' "$runner"
