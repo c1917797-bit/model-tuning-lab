@@ -10,13 +10,16 @@ esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 
 actual_marker="$(
-  docker inspect --format '{{index .Config.Labels "com.c1917797.qwen35-t12"}}' +    "$container_name"
+  docker inspect --format '{{index .Config.Labels "com.c1917797.qwen35-t12"}}' \
+    "$container_name"
 )"
 actual_variant="$(
-  docker inspect --format '{{index .Config.Labels "com.c1917797.qwen35-variant"}}' +    "$container_name"
+  docker inspect --format '{{index .Config.Labels "com.c1917797.qwen35-variant"}}' \
+    "$container_name"
 )"
 actual_output_root="$(
-  docker inspect --format '{{index .Config.Labels "com.c1917797.qwen35-output-root"}}' +    "$container_name"
+  docker inspect --format '{{index .Config.Labels "com.c1917797.qwen35-output-root"}}' \
+    "$container_name"
 )"
 if [[ "$actual_marker" != 1 ||
       "$actual_variant" != "$variant" ||

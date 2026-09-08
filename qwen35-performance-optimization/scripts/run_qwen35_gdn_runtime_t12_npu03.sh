@@ -116,7 +116,7 @@ additional_config='{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"en
 python_path='/opt/qwen35-t12-monkeypatch:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:'
 
 docker_args=(
-  run --rm
+  run -d --rm
   --name "$container_name"
   --label com.c1917797.qwen35-t12=1
   --label com.c1917797.qwen35-variant="$variant"
@@ -184,10 +184,30 @@ serve_args=(
   --async-scheduling
 )
 
+container_id="$(
+  docker "${docker_args[@]}" "$image_ref" "${serve_args[@]}"
+)"
+printf '%s\n' "$container_id" >"$OUTPUT_ROOT/container-id.txt"
+printf '%s\n' "$$" >"$OUTPUT_ROOT/supervisor-pid.txt"
+
+# Keep both the cooperative lease and a complete service log until this exact
+# one-shot container exits. The launcher itself is intended to run under a
+# detached host supervisor (for example nohup) so an AWMCP request deadline
+# cannot release the lease while the container remains live.
+docker logs --follow "$container_id" >"$OUTPUT_ROOT/service.log" 2>&1 &
+log_follower_pid=$!
+
 set +e
-docker "${docker_args[@]}" "$image_ref" "${serve_args[@]}" >"$OUTPUT_ROOT/service.log" 2>&1
-service_rc=$?
+service_rc="$(docker wait "$container_id")"
+wait_rc=$?
+wait "$log_follower_pid"
+log_rc=$?
 set -e
+if [[ "$wait_rc" -ne 0 || ! "$service_rc" =~ ^[0-9]+$ ]]; then
+  printf 'docker wait failed: rc=%s output=%s\n' "$wait_rc" "$service_rc" >&2
+  service_rc=125
+fi
+printf '%s\n' "$log_rc" >"$OUTPUT_ROOT/log-follower.exit-code"
 
 printf '%s\n' "$service_rc" >"$OUTPUT_ROOT/service.exit-code"
 npu-smi info >"$OUTPUT_ROOT/npu-smi.after.txt" 2>&1 || true

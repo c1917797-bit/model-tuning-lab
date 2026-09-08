@@ -3721,3 +3721,98 @@ remained unchanged.
 Do not retry the async-finalize flag unchanged. The next step is a materially
 different decode MMAR/HCCL lifecycle design, gated first at the same exact
 M=1 row-parallel shapes before any runtime monkeypatch or E2E launch.
+
+## 2026-09-08 fresh-control pass and t12 activation failure
+
+The fresh same-runtime control was launched from the immutable official
+`quay.io/ascend/vllm-ascend:v0.23.0` image on physical NPU0-3 only. Its
+four-rank control activation check passed, a fixed-input smoke ended by natural
+EOS, and the length-stratified control quality capture completed 32/32 with
+zero errors and all `finish_reason=stop`. The quality capture
+`quality-control-32-v2.json` has SHA256
+`e6c972fc9e66bec3db603c68953df17c3412da73062271c7e8f6cf119399d518`.
+The control c1/c16 fail-fast run completed 64/64 requests with zero errors and
+all natural stops. Its c1 TTFT/TPOT P95 values were
+`5886.084607406519/33.07643135806403 ms`; c16 values were
+`26454.28582704626/142.68609716508064 ms`. The corresponding raw-result
+SHA256 values are
+`8b55a818f8bb6e4a14a6d312306c33396583ab6e3be5ec00f27088953cbd4011`
+and
+`ca61497d6a7f38b5b4b5391dc2906cacdb0d4fa0c3f640bce739bb0c7f0c4631`.
+Control evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/t12-fresh-control-20260908T165300Z`.
+
+Candidate `t12` used the same image and protocol with the runtime patch
+mounted read-only at `/opt/qwen35-t12-monkeypatch` and injected only through
+`PYTHONPATH`. The API became ready and process/device inspection proved four
+TP workers bound one each to physical NPU0-3, no NPU4-7 device mapping, and no
+vLLM or vLLM-Ascend source overlay. However, the required worker activation
+gate failed: every rank had zero evidence for the Ascend forward hook, fused
+gate/up prefetch, GDN construction/projection fusion, multiprocessing-child
+activation, RMSNorm postprocess, and fused weight mapping. The service log
+contains only the parent-process import-hook/deferred-activation messages.
+Therefore no candidate smoke, semantic comparison, or performance traffic was
+run, and there is no t12 performance claim.
+
+The rejected candidate evidence is under
+`/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/t12-candidate-20260908T173500Z`.
+Key SHA256 values are: activation report
+`cd1e3513d110477a94d5e7aea0d9540eed00cf6ebba438dad0f75390cd56f375`,
+container inspect
+`43692d60e010028356cfc7a60bdfb2aa3b9bca220ae0dda2d54d68e2b0890025`,
+container top
+`e1ce641d5c463c07c244e75c67b98ab69eeeab40934aa0fc612b2c6071fd57c3`,
+NPU snapshot
+`74f606ab9e7b4304f1cb590fa06bb854d6301b53a19fbc0828d7b69923470cfe`,
+model endpoint
+`124d8ea84c9d9c50200cc2d026e8b4a336974e3d1f5474be009942dde95777be`,
+and service log
+`1f302e40f70e44533d5013d11061a07aa206e7ef10f00093dd43d13168c86154`.
+
+After exact container-ID, task-label, variant, and output-root checks, candidate
+`7d24c9c987fb9ff45f42a1fbb06776d6c94d93abc3c23e2bfb277a39a8da33f0`
+was stopped and its `--rm` container disappeared. NPU0-3 then had no running
+process or active container device declaration, port 10010 was free,
+MemAvailable was 84108868 kB, and the cooperative
+`/cache/austinov/.locks/npu0-3.lock` lease could be acquired. The unrelated
+`drrqr_qwen38_energy_preflight_20260908` container remains untouched and maps
+only physical NPU4-7. The official image identity remains
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`
+with repo digest
+`sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
+
+Do not rerun t12 unchanged. The next admissible loop is device-free diagnosis
+of the worker spawn/import lifecycle, followed by a fresh real activation-only
+retry. Only if all four ranks emit every required marker may the successor
+advance to smoke, paired quality, c1/c16 fail-fast, and the full matrix.
+
+### Correction: the first t12 report was an observability failure
+
+Post-stop comparison found that both the successful fresh control and the t12
+candidate host-side `service.log` stopped growing at the same model-registry
+inspection point, before EngineCore and TP workers existed. The containers
+nevertheless reached API readiness and served traffic. Therefore the
+`cd1e3513...` activation report proves that its selected log source had no
+worker markers; it does **not** prove that the candidate workers failed to
+activate the patch. Treat that report as invalid activation evidence and do
+not use it to accept or reject t12 performance.
+
+The root cause was the t12 launcher using an AWMCP-attached foreground
+`docker run` stream. The execution channel stopped relaying logs while the
+container remained alive. The launcher now starts the same `--rm` container
+detached, follows its Docker log backend, waits for that exact container, and
+keeps fd 9's cooperative NPU0-3 lease for the complete lifetime. Activation
+capture now snapshots `docker logs` directly. The maintained stop script's
+three malformed inspect invocations were also corrected, and its test now
+executes the exact label/variant/output-root path with a fake Docker function.
+
+All launcher/capture/stop syntax checks, their contract tests, the activation
+checker, the exact official-image source contract, editable-install contract,
+runtime fusion contract, current 40/20 analyzer contract, all-357 quality
+contract, cache-isolation contract, Maintainer Skill Tree validator, and
+`git diff --check` pass. A device-free live Docker probe also proved the
+detached `--rm` + log-follow + wait lifecycle and preserved its exit code.
+The next real step is one fresh candidate activation-only run with a detached
+supervisor and live Docker-log evidence; do not modify the runtime patch bytes
+until that observation distinguishes a true lifecycle failure from the earlier
+false negative.

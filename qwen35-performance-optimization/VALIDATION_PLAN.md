@@ -37,7 +37,11 @@ environment drift.
    cooperative lease is held for the complete container lifetime.
 3. **Fresh control.** Start the unchanged image with the same model, TP4,
    dtype, generation protocol, and MTP/speculation disabled. Capture image,
-   environment, mount, worker, NPU, service-log, and SHA256 evidence. Use the
+   environment, mount, worker, NPU, service-log, and SHA256 evidence. Activation
+   markers must be captured from the live container logging backend
+   (`docker logs`), not solely from an AWMCP-attached foreground stream. The
+   detached launcher supervisor must retain the NPU0-3 cooperative lease while
+   it follows logs and waits for the exact one-shot container to exit. Use the
    same guarded launcher with VARIANT=control so the only treatment difference
    is the disabled versus enabled runtime patch. The activation checker must
    prove both the absence of hook markers for control and four-rank presence
