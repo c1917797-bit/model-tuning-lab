@@ -3760,3 +3760,12 @@ handoff. If every gate passes, integrate only through the runtime Python
 monkeypatch, then run c1/c16 fail-fast before the full c1/c5/c8/c16
 three-repeat matrix. The current user target remains 2x P95 TTFT and 2x P95
 TPOT at every concurrency; older 1.5x passages are historical only.
+
+The complete runner preflight was then exercised once while NPU0-3 remained
+occupied. It exited 42 with `physical NPU0-3 are occupied` in 1.1 seconds,
+before creating the requested output directory or any benchmark container.
+The cooperative lock was released, the candidate container query returned
+empty, and the base image ID/RepoDigest remained unchanged. A device-free
+logic probe also proved that the stress evaluator accepts four clean
+5000-call rank records and rejects a single-rank digest mismatch. These are
+safety/control-flow checks only, not NPU correctness or performance evidence.
