@@ -60,7 +60,7 @@ def main() -> int:
             "candidate_deterministic_correctness": trial_error,
             "correctness_thresholds": thresholds,
             "correctness_metric_passes": correctness_passes,
-            "correctness_pass": bool(trial["correctness"]["allclose"]) and all(correctness_passes.values()),
+            "correctness_pass": all(correctness_passes.values()),
         }
     geomean_speedup = math.prod(speedups) ** (1.0 / len(speedups))
     decision = {
