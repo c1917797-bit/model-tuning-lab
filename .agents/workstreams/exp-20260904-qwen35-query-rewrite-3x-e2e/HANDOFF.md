@@ -85,6 +85,18 @@ also passed; its wrapper later returned nonzero only because an MST command
 used the wrong path, and the correct ./scripts/validate-mst.sh independently
 passed all 18 skills in exec-00000000000007b3.
 
+The historical implementation-equivalence audit is now explicit. The t12
+runtime behavior was compared against the retained measured source commits:
+vLLM GDN construction/weight mapping 685fdf22098fb3a0aa8d582dda57063773606a02,
+vLLM-Ascend fused forward d98e37ebb72acd71b5a35222fd7ab7f8049d41cb,
+and the dense prefetch lifecycle 82a2dce7. Device-free tests now cover fused
+and fallback construction, six-way mapping, Ascend forward selection,
+linear-attention gate/up prefetch, Gemma RMSNorm postprocessing, and disabled
+bounded-MMAR behavior. The complete source plus behavioral contract passed
+inside the exact pinned, read-only, network-none, no-device official image in
+exec-00000000000007c0. This strengthens implementation provenance but does not
+replace live activation, output-quality, or performance evidence.
+
 The latest resource snapshot, exec-00000000000007b6 at
 2026-09-08T14:57:58Z, still showed the external
 vllm-ep-310p-research-910b-monitor container on physical NPU0-3, now with PIDs

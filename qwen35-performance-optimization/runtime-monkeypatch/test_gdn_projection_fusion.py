@@ -6,6 +6,8 @@ from __future__ import annotations
 import importlib.util
 import os
 from pathlib import Path
+import sys
+from types import ModuleType
 from types import SimpleNamespace
 
 
@@ -60,9 +62,10 @@ def test_projection_construction(patch):
             vllm_config,
             prefix="",
             gqa_interleaved_layout=False,
+            quant_config=None,
         ):
             self.gqa_interleaved_layout = gqa_interleaved_layout
-            self.quant_config = None
+            self.quant_config = quant_config
             self.hidden_size = 5120
             self.key_dim = 1024
             self.value_dim = 1024
@@ -91,6 +94,16 @@ def test_projection_construction(patch):
     qkvz, ba = attention.project_qkvz_ba(FakeTensor((1, 5120)))
     assert qkvz.size(-1) == 1024
     assert ba.size(-1) == 32
+
+    fallback = QwenGatedDeltaNetAttention(
+        None,
+        None,
+        prefix="layers.1.linear_attn",
+        quant_config=object(),
+    )
+    assert not fallback.fuse_qwen35_gdn_projections
+    assert hasattr(fallback, "in_proj_qkvz")
+    assert hasattr(fallback, "in_proj_ba")
 
 
 def test_weight_mapping(patch):
@@ -161,12 +174,137 @@ def test_bounded_mmar_disabled(patch):
     )
 
 
+def test_linear_attention_gate_up_prefetch(patch):
+    calls = []
+
+    class FakeWeight:
+        @property
+        def data(self):
+            return self
+
+        def element_size(self):
+            return 2
+
+        def numel(self):
+            return 1000
+
+    weight = FakeWeight()
+    layer = SimpleNamespace(
+        mlp=SimpleNamespace(gate_up_proj=SimpleNamespace(weight=weight))
+    )
+
+    class WeightPrefetchMethod:
+        MLP_GATE_UP = "gate_up"
+
+        def __init__(self):
+            self.mlp = SimpleNamespace(prefetch_ratio={self.MLP_GATE_UP: 0.1})
+
+        def _maybe_prefetch_mlp_gate_up_weight_preprocess(
+            self, x_dependency, forward_context, curr_layer_prefix
+        ):
+            return ("original", curr_layer_prefix)
+
+    fake = SimpleNamespace(
+        WeightPrefetchMethod=WeightPrefetchMethod,
+        _EXTRA_CTX=SimpleNamespace(
+            model_instance=SimpleNamespace(
+                model=SimpleNamespace(layers=[layer])
+            ),
+            prefetch_mlp_gate_up_proj=False,
+        ),
+        MAX_PREFETCH_WEIGHT_SIZE=128,
+        torch=SimpleNamespace(
+            ops=SimpleNamespace(
+                vllm=SimpleNamespace(
+                    prefetch_preprocess=lambda **kwargs: calls.append(kwargs)
+                )
+            )
+        ),
+    )
+
+    module_names = (
+        "vllm",
+        "vllm.model_executor",
+        "vllm.model_executor.models",
+        "vllm.model_executor.models.utils",
+    )
+    saved_modules = {name: sys.modules.get(name) for name in module_names}
+    try:
+        for name in module_names[:-1]:
+            module = ModuleType(name)
+            module.__path__ = []
+            sys.modules[name] = module
+        utils = ModuleType(module_names[-1])
+        utils.extract_layer_index = lambda prefix: int(prefix.split(".")[2])
+        sys.modules[module_names[-1]] = utils
+
+        patch._patch_weight_prefetch(fake)
+        method = WeightPrefetchMethod()
+        dependency = object()
+        method._maybe_prefetch_mlp_gate_up_weight_preprocess(
+            dependency,
+            object(),
+            "model.layers.0.linear_attn.o_proj",
+        )
+        assert calls == [
+            {
+                "weight": weight,
+                "start_flag": dependency,
+                "max_weight_size": 128,
+            }
+        ]
+        assert fake._EXTRA_CTX.prefetch_mlp_gate_up_proj
+        assert (
+            method._maybe_prefetch_mlp_gate_up_weight_preprocess(
+                dependency,
+                object(),
+                "model.layers.0.self_attn.o_proj",
+            )
+            == ("original", "model.layers.0.self_attn.o_proj")
+        )
+        assert len(calls) == 1
+    finally:
+        for name, saved in saved_modules.items():
+            if saved is None:
+                sys.modules.pop(name, None)
+            else:
+                sys.modules[name] = saved
+
+
+def test_gemma_rmsnorm_prefetch_postprocess(patch):
+    calls = []
+
+    class AscendGemmaRMSNorm:
+        def forward_oot(self, x, residual=None):
+            if residual is not None:
+                return x, residual
+            return x
+
+    prefetch = SimpleNamespace(
+        maybe_prefetch_mlp_weight_postprocess=lambda result: calls.append(result)
+    )
+    fake = SimpleNamespace(
+        AscendGemmaRMSNorm=AscendGemmaRMSNorm,
+        get_weight_prefetch_method=lambda: prefetch,
+    )
+    patch._patch_layernorm(fake)
+    norm = AscendGemmaRMSNorm()
+    output = object()
+    assert norm.forward_oot(output) is output
+    assert calls == [output]
+    residual = object()
+    assert norm.forward_oot(output, residual) == (output, residual)
+    assert calls == [output]
+
+
 def main():
     patch = load_patch()
     test_projection_construction(patch)
     test_weight_mapping(patch)
     test_ascend_forward_selection(patch)
     test_bounded_mmar_disabled(patch)
+    test_linear_attention_gate_up_prefetch(patch)
+    test_gemma_rmsnorm_prefetch_postprocess(patch)
     print("PASS: runtime-only GDN projection fusion contract")
 
 

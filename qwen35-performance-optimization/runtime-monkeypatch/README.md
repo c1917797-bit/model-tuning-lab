@@ -46,6 +46,9 @@ Passed:
 - Python and shell syntax;
 - static projection-fusion contract tests;
 - exact official-image source-contract validation without network or devices;
+- device-free behavior checks for fused/fallback projection construction,
+  weight mapping, Ascend forward selection, linear-attention gate/up prefetch,
+  and Gemma RMSNorm prefetch postprocessing;
 - activation-checker positive and negative fixtures;
 - offline editable installation in the exact v0.23.0 image with network=none
   and no NPU device mapping.

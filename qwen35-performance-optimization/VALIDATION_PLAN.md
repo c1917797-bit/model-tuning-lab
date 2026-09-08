@@ -24,8 +24,10 @@ environment drift.
    activation-checker fixtures, and an editable install inside the pinned
    official image with no NPU devices and no index access. Run
    `tests/test_official_image_source_contract.sh` to parse the exact embedded
-   vLLM and vLLM-Ascend sources and verify every required class, method,
-   signature, and exact source-replacement anchor. A full Qwen GDN import is
+   vLLM and vLLM-Ascend sources, verify every required class, method,
+   signature, and exact source-replacement anchor, and exercise the complete
+   device-free patch behavior under the image's own Python runtime. A full
+   Qwen GDN import is
    not a no-device test in this image because Triton queries the Ascend SoC
    during import; an `rtGetSocVersion` failure without mounted devices is an
    environment boundary, not compatibility evidence.
