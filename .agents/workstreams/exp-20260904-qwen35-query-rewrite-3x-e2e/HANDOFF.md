@@ -4013,3 +4013,42 @@ slot0 although generation 1 had been published in slot1. The next experimental
 revision reloads the local published generation from the shared control window
 on every reducer core after the local-core barrier. It must be rebuilt under a
 new package SHA and repeat the same operator gate before any E2E work.
+
+## 2026-09-08 IPC fullmesh v3fix1 lifecycle rejection
+
+The local-generation reload was implemented and committed in the isolated
+ops-transformer worktree as
+`899da25f743d24e44cd27f7e364937d275311ddf`. It was rebuilt without network or
+NPU access in a disposable official-image container. The resulting package
+SHA256 is
+`27de1939dc2256cb6802dd7268f339d9120130ac93664bd9f4d0e9385afb0bf7`
+and it was installed only to the task-private
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-v3fix1-opp` directory. The OPP and
+experiment source were mounted read-only; the official vLLM-Ascend 0.23.0
+image remained unchanged.
+
+The frozen gate is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v3fix1-r1-20260908-2305`.
+The stock side again completed all four ranks and all 5000 alternating
+K1536/K4352 calls per rank. The candidate started four processes on physical
+NPU0-3, but after more than two minutes it still had no `candidate.json`, no
+per-rank progress JSONL, and only the four allocator-initialization warnings in
+its log. Each rank retained about 1274 MiB of HBM with zero AICore activity.
+Therefore the generation reload was a real source defect but not the root cause
+of the first-collective stall. The candidate was rejected before Python
+monkeypatch integration or E2E validation.
+
+After exact container-ID verification, only the task-owned candidate container
+was stopped. NPU0-3 have no processes, the cooperative lease is obtainable,
+ports 29953/29954 are free, and the unrelated NPU4-7 workload remains
+untouched. The rejection-record SHA256 is
+`00d48b31a7fe700166a4f5bdbff63ea0f2d2388306c3b6c8f67ab696383b83aa`;
+the early-stop manifest SHA256 is
+`1b6eea9f2452d7bf9eab86075ba731d45819a9c0211df0f10ac1817b3d414813`.
+
+Do not rerun v3fix1 unchanged and do not place it in the final PR. Before
+another NPU launch, add a bounded, host-observable phase marker that separates
+window initialization, remote payload publication, peer-generation wait, and
+the local-core barrier. If the remote scalar-control primitive is the blocked
+phase, abandon this ad-hoc IPC protocol and return to a native HCCL/MMAR
+lifecycle hook rather than accumulating unverified monkeypatch code.
