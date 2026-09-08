@@ -4,8 +4,11 @@ from __future__ import annotations
 
 import importlib.abc
 import importlib.machinery
+import functools
+import inspect
 import os
 import sys
+import textwrap
 from types import ModuleType
 
 # vLLM inspects model classes in a device-less python -m registry subprocess.
@@ -20,6 +23,9 @@ _RUNTIME_TARGETS = {
     "vllm_ascend.compilation.graph_fusion_pass_manager",
     "vllm_ascend.ops.layernorm",
     "vllm_ascend.ops.weight_prefetch",
+    "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn",
+    "vllm.model_executor.models.qwen3_5",
+    "vllm_ascend.ops.gdn",
 }
 _TARGETS = {"vllm.model_executor.models.registry"}
 
@@ -42,6 +48,143 @@ if _MULTIPROCESSING_CHILD:
 
 def _notice(message: str) -> None:
     print(f"[qwen35-monkeypatch] {message}", file=sys.stderr, flush=True)
+
+
+def _gdn_projection_fusion_enabled() -> bool:
+    return os.getenv("VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS", "0") == "1"
+
+
+def _replace_function_block(function, old: str, new: str, label: str):
+    source = textwrap.dedent(inspect.getsource(function))
+    if source.count(old) != 1:
+        raise RuntimeError(
+            f"{label}: expected exactly one compatible v0.23.0 source block"
+        )
+    namespace = dict(function.__globals__)
+    exec(
+        compile(source.replace(old, new), function.__code__.co_filename, "exec"),
+        namespace,
+    )
+    patched = namespace[function.__name__]
+    patched.__module__ = function.__module__
+    patched.__qualname__ = function.__qualname__
+    return patched
+
+
+def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
+    if not _gdn_projection_fusion_enabled():
+        return
+    cls = module.QwenGatedDeltaNetAttention
+    if getattr(cls, "_qwen35_projection_fusion_monkeypatched", False):
+        return
+    original_init = cls.__init__
+
+    @functools.wraps(original_init)
+    def __init__(self, *args, **kwargs):
+        bound = inspect.signature(original_init).bind(self, *args, **kwargs)
+        bound.apply_defaults()
+        original_init(self, *args, **kwargs)
+        if self.gqa_interleaved_layout or self.quant_config is not None:
+            self.fuse_qwen35_gdn_projections = False
+            return
+        prefix = bound.arguments["prefix"]
+        fused = module.MergedColumnParallelLinear(
+            input_size=self.hidden_size,
+            output_sizes=[
+                self.key_dim,
+                self.key_dim,
+                self.value_dim,
+                self.value_dim,
+                self.num_v_heads,
+                self.num_v_heads,
+            ],
+            bias=False,
+            quant_config=None,
+            prefix=f"{prefix}.in_proj_qkvzba",
+        )
+        for name in ("in_proj_qkvz", "in_proj_ba"):
+            if hasattr(self, name):
+                delattr(self, name)
+        self.in_proj_qkvzba = fused
+        self.fuse_qwen35_gdn_projections = True
+        self.disable_tp_for_ba_proj = False
+
+    def project_qkvz_ba(self, hidden_states):
+        if hasattr(self, "in_proj_qkvzba"):
+            qkvzba, _ = self.in_proj_qkvzba(hidden_states)
+            qkvz_size = (
+                self.key_dim * 2 + self.value_dim * 2
+            ) // self.tp_size
+            ba_size = (self.num_v_heads * 2) // self.tp_size
+            return qkvzba.split([qkvz_size, ba_size], dim=-1)
+        mixed_qkvz, _ = self.in_proj_qkvz(hidden_states)
+        ba, _ = self.in_proj_ba(hidden_states)
+        return mixed_qkvz, ba
+
+    cls.__init__ = __init__
+    cls.project_qkvz_ba = project_qkvz_ba
+    cls._qwen35_projection_fusion_monkeypatched = True
+    _notice("patched Qwen3.5 GDN fused projection construction")
+
+
+def _patch_qwen35_model(module: ModuleType) -> None:
+    if not _gdn_projection_fusion_enabled():
+        return
+    cls = module.Qwen3_5Model
+    if getattr(cls, "_qwen35_projection_weight_loader_monkeypatched", False):
+        return
+    old = """    params_dict = dict(self.named_parameters())
+    loaded_params: set[str] = set()
+"""
+    new = """    params_dict = dict(self.named_parameters())
+    if any(".in_proj_qkvzba." in name for name in params_dict):
+        stacked_params_mapping = [
+            ("in_proj_qkvzba", "in_proj_qkv", (0, 1, 2)),
+            ("in_proj_qkvzba", "in_proj_z", 3),
+            ("in_proj_qkvzba", "in_proj_b", 4),
+            ("in_proj_qkvzba", "in_proj_a", 5),
+            ("qkv_proj", "q_proj", "q"),
+            ("qkv_proj", "k_proj", "k"),
+            ("qkv_proj", "v_proj", "v"),
+            ("gate_up_proj", "gate_proj", 0),
+            ("gate_up_proj", "up_proj", 1),
+        ]
+    loaded_params: set[str] = set()
+"""
+    cls.load_weights = _replace_function_block(
+        cls.load_weights, old, new, "Qwen3_5Model.load_weights"
+    )
+    cls._qwen35_projection_weight_loader_monkeypatched = True
+    _notice("patched Qwen3.5 six-way fused projection weight mapping")
+
+
+def _patch_ascend_gdn(module: ModuleType) -> None:
+    if not _gdn_projection_fusion_enabled():
+        return
+    cls = module.AscendGatedDeltaNetAttention
+    if getattr(cls, "_qwen35_projection_forward_monkeypatched", False):
+        return
+    old = """    num_tokens = hidden_states.size(0)
+    if hasattr(self, "in_proj_qkv"):
+"""
+    new = """    num_tokens = hidden_states.size(0)
+    if hasattr(self, "in_proj_qkvzba"):
+        mixed_qkvz, ba = self.project_qkvz_ba(hidden_states)
+        num_tokens = mixed_qkvz.size(0)
+        qkv_size = (self.key_dim * 2 + self.value_dim) // self.tp_size
+        z_size = self.value_dim // self.tp_size
+        mixed_qkv, z = mixed_qkvz.split([qkv_size, z_size], dim=-1)
+        z = z.reshape(z.size(0), -1, self.head_v_dim)
+        b, a = self._split_ba_for_tp(ba)
+        b = b.contiguous()
+        a = a.contiguous()
+    elif hasattr(self, "in_proj_qkv"):
+"""
+    cls.forward = _replace_function_block(
+        cls.forward, old, new, "AscendGatedDeltaNetAttention.forward"
+    )
+    cls._qwen35_projection_forward_monkeypatched = True
+    _notice("patched Ascend GDN fused projection forward path")
 
 
 def _activate_runtime_patches() -> None:
@@ -172,6 +315,9 @@ def _make_mmar_pass():
 
 
 def _patch_graph_manager(module: ModuleType) -> None:
+    if int(os.getenv("VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD", "0")) <= 0:
+        _notice("bounded MMAR pass disabled")
+        return
     cls = module.GraphFusionPassManager
     if getattr(cls, "_qwen35_mmar_pass_monkeypatched", False):
         return
@@ -253,8 +399,11 @@ def _patch_layernorm(module: ModuleType) -> None:
 
 _PATCHERS = {
     "vllm.model_executor.models.registry": _patch_model_registry,
+    "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn": _patch_qwen_gdn_linear_attn,
+    "vllm.model_executor.models.qwen3_5": _patch_qwen35_model,
     "vllm_ascend.ascend_config": _patch_ascend_config,
     "vllm_ascend.compilation.graph_fusion_pass_manager": _patch_graph_manager,
+    "vllm_ascend.ops.gdn": _patch_ascend_gdn,
     "vllm_ascend.ops.layernorm": _patch_layernorm,
     "vllm_ascend.ops.weight_prefetch": _patch_weight_prefetch,
 }
