@@ -3816,3 +3816,57 @@ The next real step is one fresh candidate activation-only run with a detached
 supervisor and live Docker-log evidence; do not modify the runtime patch bytes
 until that observation distinguishes a true lifecycle failure from the earlier
 false negative.
+
+## 2026-09-08 t12 live activation, quality canary, and fail-fast rejection
+
+The detached-launcher retry proved that t12 really activates as a runtime-only
+Python monkeypatch. The candidate used the unchanged official
+`quay.io/ascend/vllm-ascend:v0.23.0` image, with one read-only patch mount at
+`/opt/qwen35-t12-monkeypatch` and `PYTHONPATH/sitecustomize` injection. No
+vLLM or vLLM-Ascend source overlay or site-packages mutation was present.
+All four TP workers emitted the required Ascend-forward, GDN-construction,
+six-way weight-mapping, gate/up-prefetch, RMSNorm-postprocess, and child-process
+activation markers. The activation report passed with SHA256
+`4c1b813ed7067846c61181df0bb357a00352b8c1a71b639849e3805a1122e2d9`.
+A fixed request returned `测试完成。` with natural EOS; the response SHA256 is
+`b87b0abe0dd69097a7bb34b3d872e654c8962f52bd75e58f9f0a4fd3e4079b99`.
+
+The 32-row candidate canary completed 32/32 with zero errors and all natural
+stops. Twenty-six outputs were byte-identical. All six differing outputs parsed
+as the required JSON schema, retained exactly equal normalized intent fields,
+and differed only in non-material reasoning action wording/decomposition.
+The bounded ruling is 32/32 equivalent with zero material regression; it is not
+the final all-357 quality claim. Candidate, comparison, and review SHA256 values
+are respectively
+`f6153f6f9207ad3f4294d8c1e622796edafee397f80695595c6f7c8c4573bdc3`,
+`bd96f4f44bf8ca2f23122c01f6f54af47f2cc363d80945ad39b981019dff90d8`,
+and `b28318b4124e08a2849c94c07b497dd011b001a042ef9f34ab2504bac68f67af`.
+
+t12 failed the c1/c16 performance screen and must not be promoted. The first
+candidate repetition completed 64/64 requests with zero errors and all natural
+stops. At c1, TTFT/TPOT P95 were
+`5975.258520024363/31.48183910719429 ms`; at c16 they were
+`24444.67402099399/146.5942505229616 ms`. A second warm-state repetition
+removed the cold TTFT tail but confirmed the material TPOT miss: c1
+`839.9137019645423/28.346323423342312 ms`, and c16
+`15047.676655452233/183.2641146187761 ms`. The c16 TPOT is worse than the
+fresh-control `142.68609716508064 ms` in both repetitions, by about 2.7% and
+28.4%, so the failure is repeatable and far outside the required 20% reduction.
+The warm c1/c16 raw SHA256 values are
+`ebf4a88f640b567fb83840a782b877730b883f7bd8b74ef49da4e9e7b0e09c89`
+and `1710a26712f3479485033f8922053100defcf0b65b66a5795fc0750aaef4c466`.
+Do not compare the warm candidate TTFT directly with the cold first control
+repetition or attribute process warmup to the patch.
+
+After exact label, variant, name, and output-root checks, the maintained stop
+script stopped only
+`qwen35_gdn_runtime_t12_candidate_npu03_20260908t1758`; the one-shot
+`--rm` container disappeared. Physical NPU0-3 have no running processes and
+the cooperative lease is obtainable. The unrelated NPU4-7 workers remain
+untouched. The official image ID remains
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`.
+
+Do not run c5/c8, a full three-repeat matrix, or the all-357 quality gate for
+t12. Do not promote its runtime patch to the standalone PR. The next candidate
+must be materially different and must target the decode TPOT/MMAR-HCCL
+lifecycle; gate exact BF16 M=1 row-parallel shapes before another E2E launch.
