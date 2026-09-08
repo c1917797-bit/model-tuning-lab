@@ -7,6 +7,17 @@ separate
 [`ops-transformer-lab`](https://github.com/c1917797-bit/ops-transformer-lab)
 repository.
 
+## Accepted c1 runtime deliverable
+
+The bounded-MMAR runtime monkeypatch under `runtime-monkeypatch/` is the final
+deliverable for the user-approved c1 TTFT threshold of at least 40% reduction.
+On the frozen c1 protocol, median-of-three TTFT P95 changed from
+`966.3259 ms` to `505.1956 ms`, a `47.7%` reduction (`1.9128x` speedup).
+
+TPOT P95 changed from `39.0459 ms` to `32.3098 ms`, a `17.3%` reduction.
+The result is therefore accepted only for the revised c1 TTFT criterion. It is
+not evidence for c5/c8/c16, and it does not claim a 40% TPOT reduction.
+
 ## Current candidate
 
 The current candidate evaluates an opt-in asynchronous HCCL finalize path for
