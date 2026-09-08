@@ -3973,3 +3973,43 @@ and imposes a 600-second per-side hard timeout so future lifecycle failures
 retain partial evidence and release resources sooner. A successor must use a
 materially different bounded synchronization/lifecycle design or return to a
 native HCCL/MMAR path; it must pass this operator gate before any E2E run.
+
+## 2026-09-08 IPC fullmesh v3 first-collective rejection
+
+The binary ready/consumed protocol was replaced by a monotonic generation
+counter and two parity-selected payload slots in ops-transformer commit
+`b1752e09e3e67e58d44779b83f307c70c21be839`. The new layout has an explicit
+data/control bounds check, publishes each generation after its payload, accepts
+a later generation safely, and removes the old clear-to-zero acknowledgement
+phase. The no-network/no-NPU build succeeded in a disposable official-image
+container. The resulting package SHA256 is
+`96d9497a97f42934a32358064269284deb2d076390838a0da3acabe205a1384d`.
+It was installed only to the task-private
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-v3-opp` directory.
+
+The frozen operator gate is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v3r1-20260908-2219`.
+The official stock side completed all four ranks and the 5000-call alternating
+stress, with K1536/K4352 median max-rank latency of
+`83.5294/95.7014 us`. The v3 candidate created four processes on physical
+NPU0-3 but did not emit `candidate.json`, any per-rank progress file, or the
+post-init distributed-barrier warning after more than two minutes. The exact
+owned candidate container was stopped after its container, NPU, and process
+state was captured. The supervisor's exit 137 is from that intentional stop.
+No owned container remains; NPU0-3, ports 29953/29954, and the cooperative
+lease are released; the external NPU4-7 workload and official image were not
+modified.
+
+The rejection and manifest SHA256 values are
+`aa12fbb418867b9dc64d78cd828cd238dfcd05eb786e3afcff4ca6c5896c8401`
+and
+`f1d171e5b03725aaae1c7a17b1c7e15c5ffef33c20fda7ed733ea9668e0f26c1`.
+Do not rerun these exact v3 bytes or promote them.
+
+Postmortem source inspection found a direct first-collective defect:
+`Exchange()` runs only on AIV0 and updated that kernel instance's private
+`generation_`, while every other reducer core retained zero and selected
+slot0 although generation 1 had been published in slot1. The next experimental
+revision reloads the local published generation from the shared control window
+on every reducer core after the local-core barrier. It must be rebuilt under a
+new package SHA and repeat the same operator gate before any E2E work.
