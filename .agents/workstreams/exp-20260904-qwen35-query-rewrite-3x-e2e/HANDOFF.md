@@ -3626,3 +3626,20 @@ before latency, and promote only if the registered microbenchmark gate passes.
 If it passes, integrate through the runtime Python monkeypatch and run c1/c16
 fail-fast before the full c1/c5/c8/c16 three-repeat screen. Preserve raw
 artifacts, protocol and SHA256 for every decision.
+
+Two additional exact-M=1 BF16 SwiGLU screens completed on physical NPU0.
+Both preserved the analytic nonzero correctness check with zero absolute and
+relative error, but both regressed and were reverted. A 128-column fine-tile
+variant produced 34 vector tiles and a `213.3410 us` median, 18.33% slower
+than v1. An M=1 single-buffer variant retained the original three tiles but
+produced a `208.2670 us` median, 15.52% slower than v1. Package SHA256 values
+and all five repeats are recorded in operator commit
+`18b94451d96d771aa86c6d6ec4c6882dbb2a7c1a`; the intermediate evidence
+commit is `46eea30ac4aa263cfd77304029ee46c4cbbf5b7c`.
+
+These results close AIV tile-count and queue-buffer tuning for this staged
+operator. Do not sweep adjacent tile sizes or disable double buffering again.
+The surviving requirement remains a materially different implementation that
+removes a stage launch or fuses useful work into a matmul epilogue, or a new
+decode MMAR/HCCL lifecycle candidate. The operator source is restored to the
+v1 behavior after evidence capture.
