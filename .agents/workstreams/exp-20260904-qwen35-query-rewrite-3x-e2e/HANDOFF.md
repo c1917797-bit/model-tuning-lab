@@ -5,15 +5,11 @@
 ### 0. Status
 
 - Workstream: `exp-20260904-qwen35-query-rewrite-3x-e2e`.
-- Branch-local state: active; not integrated. At 2026-09-08T13:59Z the
-  external `vllm-ep-310p-research-910b-monitor` workload owned physical
-  NPU0-3, so t12 correctly remained stopped at its resource gate.
-- Latest pushed checkpoint is `5b8567b` on
-  `pr/qwen35-mmar-async-finalize-gate`.
-- The worktree still contains pre-existing modified benchmark/profile scripts
-  and untracked historical handoff/config/prefetch files. They were not staged
-  or altered by the takeover. Inspect ownership path by path; never use
-  `git add -A` or treat a dirty worktree as disposable.
+- Branch-local state: active; not integrated. The latest implementation
+  checkpoint is `d1393e8`; the local branch is ahead of
+  `origin/pr/qwen35-mmar-async-finalize-gate` (`bc2f641`). Do not push these
+  local checkpoints until the final candidate passes live activation,
+  performance, and quality gates.
 - Latest user stop gate supersedes the historical 1.5x/2x/3x labels: median
   of three per-run P95 values must show at least 40% lower TTFT and 20% lower
   TPOT at c1/c5/c8/c16 versus the frozen MTP-off baseline.
@@ -44,9 +40,9 @@ full repeated matrix and all-357-row same-runtime semantic gate.
   tail guard, P50 secondary reporting, and a paired semantic-quality gate.
 - Historical GDN projection fusion plus gate/up prefetch produced P95 speedups
   TTFT 2.206x/1.938x/1.930x/1.910x and TPOT
-  1.381x/1.651x/1.753x/1.980x. It is useful hypothesis evidence but is not
-  final because it used source overlays; c1 TPOT also misses the current 1.5x
-  gate.
+  1.381x/1.651x/1.753x/1.980x. It is useful hypothesis evidence but not a
+  final claim because it used source overlays and lacks a fresh
+  same-environment control for t12.
 - Device-free monkeypatch activation, pass ordering, matrix contract, and
   decision-gate tests pass.
 
@@ -122,14 +118,20 @@ length-stratified selection, paired comparison, restricted mode 0600 outputs,
 manual-review routing, and overwrite refusal. The matrix, capture/comparison,
 all-357 decision, current 40/20 analyzer, cache-isolation, syntax, and diff
 gates passed together in the final rerun exec-00000000000007db.
+The same matrix, quality capture/comparison, all-357 decision, 40/20 analyzer,
+and cache-isolation gates also passed inside the exact pinned official
+vLLM-Ascend 0.23.0 image in exec-00000000000007e1, using a network-none,
+read-only, no-device one-shot container.
 
-The latest resource snapshot, exec-00000000000007b6 at
-2026-09-08T14:57:58Z, still showed the external
-vllm-ep-310p-research-910b-monitor container on physical NPU0-3, now with PIDs
-920761-920764 and 28108 MiB process memory per card. MemAvailable recovered to
-53581356 kB and ports 3057/10010 were not listening. NPU4-7 reported no NPU
-processes, but remain protected and outside this workstream. Do not allocate
-until NPU0-3 and every associated container declaration are genuinely clear.
+The latest resource snapshot, exec-00000000000007dd at
+2026-09-08T15:43:52Z, still showed
+`vllm-ep-310p-research-910b-monitor` on physical NPU0-3 with PIDs
+920761-920764 and 28110 MiB process memory per card. The unrelated
+`drrqr_qwen38_energy_preflight_20260908` workload now owns NPU4-7 with PIDs
+1061008-1061011 and 28190 MiB per card. MemAvailable was only 26556212 kB,
+below the 48 GiB launcher gate, while port 10010 was free. Do not stop either
+external owner, do not touch NPU4-7, and do not allocate until NPU0-3,
+container declarations, and host-memory gates are all genuinely clear.
 
 ### 5. Next Actions
 
