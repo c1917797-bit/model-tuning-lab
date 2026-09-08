@@ -15,8 +15,6 @@ EXPECTED_IMAGE_ID = (
 )
 EXPECTED_MODEL_ID = "Qwen3-5/Qwen3.5-27B"
 EXPECTED_ENV = {
-    "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD": "0",
-    "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS": "0",
     "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
     "VLLM_ASCEND_ENABLE_FLASHCOMM1": "0",
     "VLLM_ASCEND_ENABLE_NZ": "1",
@@ -28,7 +26,6 @@ REQUIRED_MARKERS = {
     "ascend_forward": "patched Ascend GDN fused projection forward path",
     "gate_up_prefetch": "patched linear-attention gate/up prefetch",
     "rmsnorm_postprocess": "patched Gemma RMSNorm prefetch postprocess",
-    "bounded_mmar_disabled": "bounded MMAR pass disabled",
 }
 NPU_PROCESS_RE = re.compile(
     r"^\|\s*([0-7])\s+\d+\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|",

@@ -91,11 +91,29 @@ vLLM GDN construction/weight mapping 685fdf22098fb3a0aa8d582dda57063773606a02,
 vLLM-Ascend fused forward d98e37ebb72acd71b5a35222fd7ab7f8049d41cb,
 and the dense prefetch lifecycle 82a2dce7. Device-free tests now cover fused
 and fallback construction, six-way mapping, Ascend forward selection,
-linear-attention gate/up prefetch, Gemma RMSNorm postprocessing, and disabled
-bounded-MMAR behavior. The complete source plus behavioral contract passed
+linear-attention gate/up prefetch, and Gemma RMSNorm postprocessing. The
+rejected bounded-MMAR/compile-range implementation is now absent from t12
+rather than merely disabled. The complete source plus behavioral contract passed
 inside the exact pinned, read-only, network-none, no-device official image in
 exec-00000000000007c0. This strengthens implementation provenance but does not
 replace live activation, output-quality, or performance evidence.
+
+The rejected bounded-MMAR and compile-range code was then physically removed
+from t12, producing sitecustomize SHA256
+`aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b`.
+The focused runtime, analyzer, quality, activation, cache-isolation, launcher,
+editable-install, official-image source-contract, and exact-stop gates passed
+in exec-00000000000007c7; that bundled command exited 127 only after those
+passes because it referenced the MST validator under the wrong subdirectory.
+The actual root-level MST validator, manifest JSON validation, and
+`git diff --check` then passed in exec-00000000000007cb. The launcher contract
+also requires the experiment and monkeypatch mounts to be read-only, forbids
+vLLM/vLLM-Ascend source overlays, and forbids `docker commit` or `docker cp`.
+The pinned base image and host vLLM-Ascend 0.23.0 remain immutable; live work
+must use a fresh one-shot `--rm` container and must compare the recorded image
+identity before and after the run.
+The complete corrected offline suite, including the strengthened no-mutation
+launcher contract, passed together in exec-00000000000007d0.
 
 The latest resource snapshot, exec-00000000000007b6 at
 2026-09-08T14:57:58Z, still showed the external

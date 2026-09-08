@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
+patch_sha256=aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -154,8 +154,6 @@ docker_args=(
   -e VLLM_ASCEND_ENABLE_DENSE_FFN_NZ=0
   -e VLLM_ASCEND_DISABLE_MMAR_DOWN_PROJ=0
   -e VLLM_ASCEND_DISABLE_MMAR_ATTN_OUT_PROJ=0
-  -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0
-  -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
   -e QWEN35_ASCEND_MONKEYPATCH="$patch_enabled"

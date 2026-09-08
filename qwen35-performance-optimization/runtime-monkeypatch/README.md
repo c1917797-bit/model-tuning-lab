@@ -13,10 +13,11 @@ The candidate installs five coordinated runtime changes:
 - linear-attention gate/up weight prefetch;
 - Gemma RMSNorm prefetch postprocessing.
 
-The bounded-MMAR fallback used by historical t11 is disabled. The expected
+The rejected bounded-MMAR fallback from historical t11 is not present in t12.
+The base runtime's ordinary MMAR remains enabled. The expected
 sitecustomize.py SHA256 is:
 
-    8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
+    aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
 
 ## Editable installation
 

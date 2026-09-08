@@ -7,7 +7,7 @@ fi
 
 patch_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 patch_file="$patch_root/sitecustomize.py"
-expected_sha=8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1
+expected_sha=aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
 actual_sha="$(sha256sum "$patch_file" | awk '{print $1}')"
 
 if [[ "$actual_sha" != "$expected_sha" ]]; then
@@ -26,7 +26,5 @@ fi
 
 export QWEN35_ASCEND_MONKEYPATCH=1
 export VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1
-export VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0
-export VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0
 
 echo "Qwen3.5 t12 candidate patch loaded: $expected_sha" >&2

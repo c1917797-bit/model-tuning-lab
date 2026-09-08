@@ -2,7 +2,7 @@
   "schema": "qwen35-runtime-monkeypatch/v2",
   "candidate": "runtime-monkeypatch-gdn-projection-fusion-t12",
   "status": "offline_contracts_passed_live_validation_pending",
-  "sitecustomize_sha256": "8d2d403f17843ed2e40d2e768b61bc1faa55fa9fce9d1fcd58af810567aa89e1",
+  "sitecustomize_sha256": "aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b",
   "model": "Qwen3.5-27B",
   "framework": "vLLM-Ascend 0.23.0",
   "image": "quay.io/ascend/vllm-ascend:v0.23.0",
@@ -31,6 +31,10 @@
     "vllm_ascend_prefetch_lifecycle_commit": "82a2dce7",
     "scope": "source and device-free behavioral equivalence; live t12 evidence pending"
   },
+  "excluded_historical_paths": [
+    "bounded MMAR prefill decomposition",
+    "AscendConfig compile-range monkeypatch"
+  ],
   "acceptance_targets": {
     "concurrency": [1, 5, 8, 16],
     "repetitions": 3,
