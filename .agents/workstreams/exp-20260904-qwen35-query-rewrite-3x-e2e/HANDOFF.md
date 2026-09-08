@@ -3593,3 +3593,40 @@ are already closed by real evidence, and the A2 BF16 SwiGLU prototype's
 step is a materially new ASCEND910B decode MMAR/HCCL lifecycle implementation,
 first gated on exact BF16 M=1 row-parallel shapes and only then integrated by
 runtime monkeypatch.
+
+## 2026-09-08 target update and async-finalize operator decision
+
+The current user target supersedes the historical 1.5x/2x/3x thresholds:
+at every c1/c5/c8/c16 cell, median-of-three TTFT P95 must be at least 40%
+lower and TPOT P95 at least 20% lower than the frozen MTP-off baseline.
+Final acceptance still requires the 32-sample same-runtime paired semantic
+gate with every differing pair reviewed and zero material regressions.
+
+The frozen TP4 BF16 M=1 operator A/B ran on physical NPU0-3 under the
+cooperative lease. Baseline versus opt-in async-finalize latency was
+81.5492 -> 81.2656 us (1.0035x) for K1536 and
+78.30915 -> 84.1352 us (0.9308x) for K4352. The geometric mean was
+0.9664x; correctness remained inside the predeclared 2x baseline error
+envelope, but the candidate failed both the per-shape no-regression and
+1.03x gates. Reject it before runtime or E2E integration.
+
+Both baseline and candidate also failed bitwise digest stability during the
+5000-call stress stage while all outputs remained finite. This demonstrates
+that byte-identical BF16 HCCL results are not a valid stress invariant for
+this operator; successors must use a frozen numerical error envelope. This
+does not rescue the candidate because its measured K4352 and geometric-mean
+performance already fail.
+
+Immutable evidence is
+/cache/austinov/qwen35-query-rewrite/operator-microbench/tp4-npu03-mmar-m1-asyncfinalize-frozen-ab-v1-20260908T131500Z.
+Decision SHA256 is
+b19221c680a1ad9d4e9312f1d5b3510c58e364b0a2ce42da75982f903058d66d;
+the SHA256 manifest hash is
+fc1c8a6ceb151f73a426080fc12bee010458008bc88419708dbcdd69af078c2e.
+Both one-shot containers exited, the NPU0-3 lease and ports were released,
+NPU0-3 were idle, NPU4-7 were not touched, and the base image identity
+remained unchanged.
+
+Do not retry the async-finalize flag unchanged. The next step is a materially
+different decode MMAR/HCCL lifecycle design, gated first at the same exact
+M=1 row-parallel shapes before any runtime monkeypatch or E2E launch.

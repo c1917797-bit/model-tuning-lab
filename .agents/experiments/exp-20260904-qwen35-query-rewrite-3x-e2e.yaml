@@ -2064,7 +2064,7 @@ current_contract_20260908:
   delivery: "runtime Python monkeypatch only; external custom OPP may be packaged separately after exact operator, E2E and quality verification; no base-image mutation"
 
 qwen35_mmar_async_finalize_operator_gate_v1:
-  status: planned
+  status: rejected_at_operator_gate
   hypothesis: "deferring the M=1 MMAR completion synchronization until the output is consumed can reduce decode collective lifecycle latency without changing BF16 outputs"
   primary_variable: "frozen full-sync arch22 custom OPP versus the opt-in async-finalize custom OPP; all other image, HCCL, topology, shapes and benchmark settings remain fixed"
   shapes: ["M=1 K=1536 N=5120 BF16 TP4", "M=1 K=4352 N=5120 BF16 TP4"]
@@ -2075,5 +2075,20 @@ qwen35_mmar_async_finalize_operator_gate_v1:
     baseline_package_sha256: 420275e89e83d2e42b82152fc52db87f470b2a5372c7a8d7746200b31569c640
     candidate_commit: 375c342574b95aca390c047b772df7d424ca4a19
     candidate_package_sha256: 1abbcb8877345bdf52041eaae87107f084e985955d87a77ccddd1af8a003e37d
+  evidence:
+    operation_id: exec-0000000000000749
+    root: /cache/austinov/qwen35-query-rewrite/operator-microbench/tp4-npu03-mmar-m1-asyncfinalize-frozen-ab-v1-20260908T131500Z
+    protocol: "TP4 BF16 on physical NPU0-3; 40 warmups, 200 measured iterations, seven repeats; median maximum-rank latency; 5000 alternating-shape stress calls per rank"
+    k1536: {baseline_us: 81.5492, candidate_us: 81.2656, speedup: 1.0034897915, correctness_pass: true}
+    k4352: {baseline_us: 78.30915, candidate_us: 84.1352, speedup: 0.9307537154, correctness_pass: true}
+    geomean_speedup: 0.9664377123
+    performance_pass: false
+    correctness_envelope_pass: true
+    stress_observation: "all outputs remained finite, but bitwise digest stability failed for both frozen baseline and candidate; baseline mismatched 3940/5000 calls per rank and candidate mismatched 4997-5000/5000, so bitwise digest equality is not a valid standalone BF16 HCCL reduction invariant"
+    decision_sha256: b19221c680a1ad9d4e9312f1d5b3510c58e364b0a2ce42da75982f903058d66d
+    sha256sums_sha256: fc1c8a6ceb151f73a426080fc12bee010458008bc88419708dbcdd69af078c2e
+  decision: "reject before runtime-monkeypatch integration: K4352 regressed 6.93%, geometric-mean speedup was 0.9664x, and the candidate missed both the no-regression and 1.03x promotion gates"
+  resource_release: "both one-shot containers exited; NPU0-3 lease and ports 29943/29944 released; NPU0-3 verified idle; NPU4-7 untouched; vLLM-Ascend image ID and repository digest unchanged"
+  next: "do not retry async Finalize unchanged; use the preserved source diff and evidence to design a materially different decode lifecycle treatment, with an error-envelope stress invariant rather than bitwise HCCL digest identity"
   rollback: "do not load the candidate OPP or set its opt-in environment flag; one-shot containers exit and the base image remains unchanged"
   promotion: "only an accepted operator gate may proceed to runtime-monkeypatch integration, c1/c16 fail-fast E2E, full c1/c5/c8/c16 repetitions, and the 32-sample semantic gate"
