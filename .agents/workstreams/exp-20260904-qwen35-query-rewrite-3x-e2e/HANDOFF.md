@@ -3682,3 +3682,81 @@ worktree adds a reusable frozen runner and evaluator in commits
 `ead3ea1`, `c489017`, `aa51766`, and `9d35d12`; pre-existing dirty
 files were not staged. After the run, no containers remained and all NPU0-7
 reported no running processes. NPU4-7 were never mapped.
+
+## 2026-09-08 M=1 MMAR asynchronous-Finalize build checkpoint
+
+A materially different decode lifecycle candidate is implemented in the
+isolated operator worktree
+`/cache/cch/.worktrees/exp-20260907-qwen35-mmar-arch22`. It keeps the explicit
+AllReduce handle Wait and full `Mc2SyncAll`, but for the exact eligible BF16
+M=1 shapes switches only `Hccl::Finalize` to the asynchronous form. The opt-in
+environment variable is
+`ASCEND_MATMUL_ALLREDUCE_M1_ASYNC_FINALIZE=1`; default behavior and all
+non-target shapes remain unchanged. Online HCCL tiling and this candidate are
+mutually excluded.
+
+The plan commit is `378ded7963fdfc88beaf856396e13e00c0de63f2`, the candidate
+source commit is `375c342574b95aca390c047b772df7d424ca4a19`, and the build
+checkpoint commit is `93cfc6293be53d9efd2d455928147be9a71fe036`. Host tiling
+unit tests passed 110/110 in a device-free disposable container. The package
+was built successfully and its archive/dependency check passed in another
+device-free `--rm` container:
+
+- package:
+  `/cache/cch/.worktrees/exp-20260907-qwen35-mmar-arch22/build_out/cann-ops-transformer-qwen35_mmar_asyncfinalize_v1_linux-aarch64.run`
+- SHA256:
+  `1abbcb8877345bdf52041eaae87107f084e985955d87a77ccddd1af8a003e37d`
+- external host install:
+  `/cache/cch/qwen35-mmar-asyncfinalize-v1-custom-opp`
+- environment file:
+  `/cache/cch/qwen35-mmar-asyncfinalize-v1-custom-opp/vendors/qwen35_mmar_asyncfinalize_v1_transformer/bin/set_env.bash`
+
+The host installer first refused its generic shared-library architecture
+parser for `libcust_opmaster_rt2.0.so`. Inspection showed it had created only
+the new candidate directory skeleton. Retrying only that fresh directory with
+the installer's documented `--force` option succeeded; an independent
+in-image dependency check then exited 0. This did not modify the image: the
+original image ID remains
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`
+and its RepoDigest remains
+`sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
+No `docker commit` or in-image persistent install occurred.
+
+The frozen runner, benchmark and evaluator are committed at
+`8113d7895196da53e7482f0df5e134e5360bb7f3`. They require both exact shapes
+to be non-regressing, at least `1.03x` geometric-mean speedup, the candidate
+deterministic error envelope to remain within `2x` the baseline, and 5000
+alternating-shape calls per rank with finite, stable output digests. They hold
+a cooperative NPU0-3 lock, fail closed on physical process/container/port
+conflicts, use only one-shot containers, and verify the image identity again
+afterward.
+
+Do not run that gate yet. The fresh preflight found physical NPU0-3 occupied
+by `vllm-ep-310p-research-910b-monitor`, which maps only
+`/dev/davinci0` through `/dev/davinci3` and currently runs Qwen3-30B-A3B TP4
+from `/cache/k00972398/vLLM_EP_310P` on port 3057. At the snapshot its four
+workers were PIDs 2322628-2322631 and consumed about 28108 MiB per card.
+Physical NPU4-7 remained occupied by the protected
+`qwen38_thinking_baseline_host4_7_tp4_20260908` workload. Neither external
+container was changed.
+
+When NPU0-3 are released, repeat the full process/container/device/port claim
+check immediately, then run the frozen A/B with:
+
+- baseline root:
+  `/cache/cch/qwen35-mmar-fullsync-arch22-custom-opp-v1`
+- baseline environment:
+  `/cache/cch/qwen35-mmar-fullsync-arch22-custom-opp-v1/vendors/qwen35_mmar_fullsync_arch22_transformer/bin/set_env.bash`
+- baseline commit:
+  `138a920157995613eb58c8ce9de7ec9f1f51633e`
+- baseline package SHA256:
+  `420275e89e83d2e42b82152fc52db87f470b2a5372c7a8d7746200b31569c640`
+- candidate values from this checkpoint and a new immutable output directory
+  under `/cache/austinov/qwen35-query-rewrite/operator-microbench`.
+
+If any operator gate fails, preserve raw artifacts and SHA256, reject without
+E2E, revert the candidate source in a recovery commit, and update this
+handoff. If every gate passes, integrate only through the runtime Python
+monkeypatch, then run c1/c16 fail-fast before the full c1/c5/c8/c16
+three-repeat matrix. The current user target remains 2x P95 TTFT and 2x P95
+TPOT at every concurrency; older 1.5x passages are historical only.
