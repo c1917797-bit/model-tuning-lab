@@ -3781,6 +3781,52 @@ only physical NPU4-7. The official image identity remains
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
 
+## 2026-09-08 IPC fullmesh v5 fresh-epoch rejection
+
+The package-specific fresh logical epoch diagnostic was committed in the
+isolated ops-transformer worktree as
+`a1a009e39b285f372118a7b3e1dd8668e774c70b`. It changes only the control
+magic from the v3/v4 value to a new G3 value and documents that this is not a
+production session protocol; the reducer-generation reload and paired HCCL
+finalization remain present. A no-network, no-NPU, read-only-rootfs disposable
+official-image build completed successfully. The resulting package SHA256 is
+`9819d5522215b11cb54cb7eb28e151ec9b271d1f71353107e29b6dcc23c1b9e2`
+and the packaged kernel was explicitly inspected to prove the G3 magic. It was
+installed only to
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-v5-fresh-epoch-opp`.
+
+The real frozen gate is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v5-fresh-epoch-r1-20260908-2325`.
+The official stock side completed all four ranks and every rank's 5000-call
+alternating-shape stress. The candidate then started on physical NPU0-3, but
+after more than two minutes still had no result or progress file, only four
+allocator warnings, about 1273-1274 MiB HBM per rank, and zero AICore
+utilization. The exact owned container
+`a70fd50e8e4e90e6c992365153701ab4fef0e687e6e6ac597b7458d5d8db6ec3`
+was identity-checked, captured, and stopped; operation
+`exec-00000000000009e4` terminated with the expected intentional-stop exit
+137.
+
+All evidence-manifest entries verify. The rejection-record SHA256 is
+`54f2c8e55eb57b0144b1b370e7468dbbcee82482808f395999635102ace17338`
+and the manifest SHA256 is
+`01c8229d2f939b1c26ae6051f3cbf55f9edcd0467f2885f49d794f25ef0e8592`.
+The exact package is preserved inside the evidence directory.
+
+This controlled result excludes stale control words selected solely by the
+old v3/v4 magic as a sufficient explanation. Do not rerun v5 unchanged and do
+not promote it. The next differential must return to the once-completing v1
+binary ready/consumed protocol, give it a fresh magic, and pair the custom path
+with HCCL finalization. Initially retain v1's exact two-shape eligibility to
+reproduce that known-good control; if it completes, test K1536-only switching
+as a separate lifecycle experiment. This sequence distinguishes the
+generation/double-buffer protocol from shape-selective custom/stock switching.
+
+After the intentional stop, NPU0-3 had no processes, the cooperative lease was
+obtainable, ports 29953/29954 were free, and MemAvailable was about 80.1 GiB.
+The external container declaring only physical NPU4-7 remained untouched, and
+the official image ID and repo digest remained unchanged.
+
 Do not rerun t12 unchanged. The next admissible loop is device-free diagnosis
 of the worker spawn/import lifecycle, followed by a fresh real activation-only
 retry. Only if all four ranks emit every required marker may the successor
