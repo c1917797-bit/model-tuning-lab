@@ -4052,3 +4052,54 @@ window initialization, remote payload publication, peer-generation wait, and
 the local-core barrier. If the remote scalar-control primitive is the blocked
 phase, abandon this ad-hoc IPC protocol and return to a native HCCL/MMAR
 lifecycle hook rather than accumulating unverified monkeypatch code.
+
+## 2026-09-08 IPC fullmesh v4 lifecycle-finalize rejection
+
+Source inspection found that the custom IPC return path initialized the native
+HCCL object but did not pair that initialization with `Finalize()`. The minimal
+pairing fix was committed in the isolated ops-transformer worktree as
+`f5dadbe79a9767c4547a4704aa5cd7f9030a289b`. It was built without network or
+NPU access in a disposable, read-only-rootfs container based on the unchanged
+official vLLM-Ascend 0.23.0 image. The exact package SHA256 is
+`9c8f62873effe93b9e68b196690f79fa80bc6654d303524e15db6c24d34f1138`.
+It was installed only into the task-private
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-v4-lifecycle-opp` directory.
+
+The frozen gate is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v4-lifecycle-r1-20260908-2310`.
+The stock side completed all four ranks and 5000 alternating calls per rank.
+The candidate started four processes on physical NPU0-3, but after more than
+two minutes produced neither `candidate.json` nor any progress JSONL. Each
+rank remained at about 1274 MiB HBM with zero AICore activity and only the four
+allocator warnings in the log. The exact task-owned container
+`d0d65a3e1dd4b51aa91a4fbc0a0542e6fd4cb0d4b4723606b6a04cd60b39d380`
+was stopped after identity and runtime-state capture; operation
+`exec-00000000000009ce` then terminated with the expected exit 137.
+
+The complete evidence manifest verifies, and the exact package is preserved in
+that immutable evidence directory. Adding `Finalize()` did not change the
+pre-result stall, so the failure occurs before the new finalization path. A
+v1-to-v2 source differential proves that the only functional change between
+the once-successful binary protocol and the first lifecycle hang was excluding
+K4352 from the custom path. Fixed control-window magic values also fail to
+identify a newly created communicator and can retain stale control words across
+process/container lifetimes. Because v3fix1 and v4 reused the v3 magic after a
+failed v3 run, stale logical-session state is now the highest-information
+controlled hypothesis.
+
+Do not rerun v4 unchanged and do not promote it. The next diagnostic revision
+must change the control magic to create a fresh logical epoch while retaining
+the generation reload and paired HCCL finalization. This package-specific magic
+bump is diagnostic only, not a production lifecycle design. If it completes,
+replace it with a real rank-coordinated session epoch/reset and add
+cross-container restart stress. If it still stalls, test the known-working v1
+binary protocol under a fresh magic plus paired finalization to isolate the
+generation protocol from stale-window state.
+
+After v4 stop, NPU0-3 had no running processes, the cooperative lease was
+obtainable, ports 29953/29954 were free, and MemAvailable was about 80.1 GiB.
+The unrelated external container still declared only physical NPU4-7. The
+official image remained
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`
+with repo digest
+`sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
