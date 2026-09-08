@@ -1,7 +1,7 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "objective": "Improve Qwen3.5-27B TTFT P95 and TPOT P95 by at least 2x at concurrency 1, 5, 8, and 16 on the frozen query_rewrite workload, with BF16 semantic quality preserved. No quantization, retraining, MTP, speculative decoding, vLLM source edits, or final source overlays. The workstream identifier retains its historical 3x label for audit continuity.",
+  "objective": "Reduce Qwen3.5-27B TTFT P95 by at least 40% and TPOT P95 by at least 20% at concurrency 1, 5, 8, and 16 on the frozen query_rewrite workload, with BF16 semantic quality preserved by the same-runtime paired gate. No quantization, retraining, MTP, speculative decoding, vLLM source edits, or final source overlays. The workstream identifier retains its historical 3x label for audit continuity.",
   "targetBranch": "main",
   "workBranch": "work/exp-20260904-qwen35-query-rewrite-3x-e2e",
   "remote": "origin",
@@ -37,6 +37,6 @@
     "python3 -m py_compile scripts/run_qwen35_benchmark_matrix.py",
     "git diff --check"
   ],
-    "executionState": "active-npu0-3-proven-free-awaiting-new-decode-mmar-hccl-operator-gate",
+    "executionState": "planned-new-40pct-ttft-20pct-tpot-quality-preserved-target-awaiting-async-finalize-operator-gate",
     "integrationState": "branch-local-final-monkeypatch-not-promoted"
 }

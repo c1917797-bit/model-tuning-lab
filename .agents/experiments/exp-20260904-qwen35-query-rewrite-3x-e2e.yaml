@@ -4,7 +4,7 @@ protocol_audit_status: required_before_performance_promotion
 id: exp-20260904-qwen35-query-rewrite-3x-e2e
 status: non_spec_gdn_gateup_retained_down_prefetch_rejected_continue_tpot_optimization
 decision: retain_gdn_gateup_prefetch_reject_down_prefetch_continue_ascend_mmar_dense_matmul
-objective: "Improve Qwen3.5-27B TTFT and TPOT by at least 50% versus the immutable MTP-off original baseline on real query_rewrite traffic."
+objective: "Reduce Qwen3.5-27B TTFT P95 by at least 40% and TPOT P95 by at least 20% versus the immutable MTP-off original baseline on real query_rewrite traffic, with semantic quality preserved."
 environment:
   host: chicaihong01
   hardware: "8 x Ascend 910B4"
@@ -32,9 +32,9 @@ metrics:
   primary: [ttft_p95_ms, tpot_p95_ms]
   secondary: [ttft_p50_ms, tpot_p50_ms, ttft_p99_ms, tpot_p99_ms, request_throughput, output_token_throughput, errors, hbm_peak]
 final_thresholds:
-  ttft: "median of three per-run TTFT P95 values <= original baseline P95 * 2/3 (speedup >= 1.5x) at concurrency 1, 5, 8 and 16"
-  tpot: "median of three per-run TPOT P95 values <= original baseline P95 * 2/3 (speedup >= 1.5x) at concurrency 1, 5, 8 and 16"
-  correctness: "business correctness passes and request errors equal zero"
+  ttft: "median of three per-run TTFT P95 values <= original baseline P95 * 0.60 (latency reduction >= 40%; speedup >= 1.6667x) at concurrency 1, 5, 8 and 16"
+  tpot: "median of three per-run TPOT P95 values <= original baseline P95 * 0.80 (latency reduction >= 20%; speedup >= 1.25x) at concurrency 1, 5, 8 and 16"
+  correctness: "same-runtime paired semantic quality gate passes with zero material regressions and request errors equal zero"
 quality_gate:
   protocol: "paired final monkeypatch candidate versus the same-runtime retained cumulative control"
   sample_count: 32
@@ -2052,3 +2052,28 @@ runtime_monkeypatch_bounded_mmar_t11_20260907:
   environment_note: "an unrelated workload began using NPU4-7 during the screen; it was not stopped or modified, and the candidate remained confined to NPU0-3"
   resource_release: "t11 stopped after exact ID verification and exited 0; NPU0-3 idle afterward; NPU4-7 workload untouched"
   next: "do not retry this stack unchanged; pursue a materially new ASCEND910B decode MMAR/HCCL lifecycle optimization with an exact-shape operator gate before another E2E launch"
+
+current_contract_20260908:
+  supersedes: "performance thresholds in current_contract_20260907 and earlier 1.5x/2x/3x historical targets"
+  stop_gate:
+    ttft: "at every c1/c5/c8/c16 cell, median-of-three TTFT P95 latency reduction >=40% versus frozen MTP-off baseline"
+    tpot: "at every c1/c5/c8/c16 cell, median-of-three TPOT P95 latency reduction >=20% versus frozen MTP-off baseline"
+    quality: "32-sample same-runtime paired semantic gate passes; every differing pair reviewed; zero material regressions"
+  reporting: "P95 primary; P99 tail-risk guard; P50 secondary"
+  exclusions: [quantization, retraining, speculative_decoding, mtp]
+  delivery: "runtime Python monkeypatch only; external custom OPP may be packaged separately after exact operator, E2E and quality verification; no base-image mutation"
+
+qwen35_mmar_async_finalize_operator_gate_v1:
+  status: planned
+  hypothesis: "deferring the M=1 MMAR completion synchronization until the output is consumed can reduce decode collective lifecycle latency without changing BF16 outputs"
+  primary_variable: "frozen full-sync arch22 custom OPP versus the opt-in async-finalize custom OPP; all other image, HCCL, topology, shapes and benchmark settings remain fixed"
+  shapes: ["M=1 K=1536 N=5120 BF16 TP4", "M=1 K=4352 N=5120 BF16 TP4"]
+  operator_gate: "both shapes non-regressing, geometric-mean speedup >=1.03x, deterministic error envelope within 2x baseline, and 5000 alternating-shape calls per rank remain finite with stable digests"
+  resource_gate: "physical NPU0-3 only under /cache/austinov/.locks/npu0-3.lock; NPU4-7 excluded; ports 29943/29944; one-shot --rm containers"
+  source:
+    baseline_commit: 138a920157995613eb58c8ce9de7ec9f1f51633e
+    baseline_package_sha256: 420275e89e83d2e42b82152fc52db87f470b2a5372c7a8d7746200b31569c640
+    candidate_commit: 375c342574b95aca390c047b772df7d424ca4a19
+    candidate_package_sha256: 1abbcb8877345bdf52041eaae87107f084e985955d87a77ccddd1af8a003e37d
+  rollback: "do not load the candidate OPP or set its opt-in environment flag; one-shot containers exit and the base image remains unchanged"
+  promotion: "only an accepted operator gate may proceed to runtime-monkeypatch integration, c1/c16 fail-fast E2E, full c1/c5/c8/c16 repetitions, and the 32-sample semantic gate"
