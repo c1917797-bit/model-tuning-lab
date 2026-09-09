@@ -6,6 +6,9 @@ profile: minimal
 
 selection:
   default_strategy: smallest_relevant_set
+  project_roots:
+    - projects/*
+  project_rule: Root maintainer skills apply recursively; the nearest project AGENTS.md may only narrow project-specific boundaries.
   conflict_resolution:
     - Prefer narrower path scope.
     - Tool adapters do not override AGENTS.md or this registry.
@@ -230,7 +233,16 @@ skills:
   - id: mst-practice-iteration-planning
     path: .agents/skills/mst-practice-iteration-planning
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Link fixed long-term acceptance through a medium-term milestone to bounded evidence-driven short-term iterations.
+    triggers:
+      - align long medium and short goals
+      - choose or revise the next validation iteration
+      - review progress after decisive or inconclusive evidence
+    scope:
+      - AGENTS.md
+      - projects/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: mst-repo-onboarding
     path: .agents/skills/mst-repo-onboarding
     status: stable

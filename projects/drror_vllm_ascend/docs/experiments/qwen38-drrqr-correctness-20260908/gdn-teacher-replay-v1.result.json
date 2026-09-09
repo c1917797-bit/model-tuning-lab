@@ -1,0 +1,75 @@
+{
+  "schema": "drrqr-real-teacher-replay-checkpoint/v1",
+  "status": "failed_no_candidate_admitted",
+  "operation": {
+    "id": "exec-0000000000000006",
+    "trace_id": "c41adbc4-9efe-4e62-9b52-9aadf1361ab1",
+    "note": "Remote exec numbering restarted between capture and replay; retain trace identity and artifact hashes.",
+    "exit_code": 1,
+    "duration_seconds": 40.556
+  },
+  "physical_npu": 4,
+  "report": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-replay-v1/report.json",
+    "sha256": "eb6aa7e8af0234554951b01a808da566fda02994317519a500357b3d586ba79b"
+  },
+  "script_sha256": "46fdfe7894e087cd47c10327b683dfc081a041afdcea400c87485c5918087e95",
+  "coverage": {
+    "variant": "dense128",
+    "sequence": "teacher-0",
+    "rank": 0,
+    "layer": 0,
+    "phase": "prefill",
+    "executed_trajectories": 1,
+    "executed_steps": 1,
+    "candidate_trajectories": 0,
+    "decode_graph_executed": false
+  },
+  "results": {
+    "output_vs_capture_max_abs": 0,
+    "full_state_vs_capture_max_abs": 0,
+    "actual_post_rms_vs_capture_max_abs": 0,
+    "output_cpu_pass": true,
+    "full_state_cpu_pass": false,
+    "full_state_cpu": {
+      "rtol": 0.01,
+      "atol": 0.01,
+      "max_abs": 0.09392929077148438,
+      "relative_l2": 0.0032895154650029474,
+      "normalized_max": 0.0031437039645358838
+    }
+  },
+  "secondary_error": {
+    "top_level_status": "failed_runtime_evidence",
+    "library_error": "replay native library absent/changed from teacher evidence",
+    "primary_numerical_error_preserved": true,
+    "note": "Mapped libraries were not stored before the matcher failed. Exact cause is under read-only investigation, not assumed to be harmless."
+  },
+  "preserved_archive": {
+    "path": "/drrqr-results/gdn-teacher-replay-v1/dense128.teacher-0.rank0.layer0.step0.pt",
+    "sha256": "9d5c91ea9ebfd262294e09cb152aa09f33e81faf169327cebdcfb1e7aa7e03d8"
+  },
+  "readonly_element_diagnosis": {
+    "operation": "exec-000000000000000f",
+    "elements": 196608,
+    "failed_elements": 43,
+    "failed_elements_by_value_head": {
+      "3": 24,
+      "4": 8,
+      "5": 9,
+      "7": 2
+    },
+    "largest_threshold_ratio": 4.755835056304932,
+    "claim": "Narrows diagnosis, does not relax or pass the original criterion."
+  },
+  "postflight": {
+    "npu_operation": "exec-0000000000000009",
+    "container_top_operation": "exec-0000000000000008",
+    "own_npu_processes": 0,
+    "container_remaining": "original bash only"
+  },
+  "decision": "Preserve failure. Determine whether reference inputs or chunk intermediate finite precision account for the dense-only discrepancy. Do not attribute it to DRRQR, lower thresholds, reclassify historical dense accuracy, or launch candidate performance.",
+  "new_throughput_result": null,
+  "new_task_accuracy_result": null,
+  "joint_acceptance": false
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "drrqr-gdn-teacher-capture-checkpoint/v1",
+  "status": "collected_replay_not_yet_admitted",
+  "mainline": "DRRQR algorithm and targeted Ascend operator adaptation; not an alternative acceleration route.",
+  "service_operation": "exec-00000000000006fb",
+  "collector_operation": "exec-00000000000006fd",
+  "service_exit_code": 0,
+  "collector_exit_code": 0,
+  "elapsed_service_seconds": 218.81714248657227,
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "postflight": {
+    "npu_operation": "exec-0000000000000718",
+    "container_top_operation": "exec-000000000000071a",
+    "own_npu_processes": 0,
+    "own_container_remaining": "original bash only"
+  },
+  "capture": {
+    "requests": 2,
+    "input_tokens": 128,
+    "output_tokens": 9,
+    "decode_steps": 8,
+    "layers": [
+      0,
+      12,
+      25,
+      38,
+      50,
+      62
+    ],
+    "ranks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "expected_records": 432,
+    "collector_completed": true,
+    "no_thinking": true,
+    "ignore_eos": true,
+    "claim": "Local dense-driven tensor collection only; not benchmark or final accuracy."
+  },
+  "artifacts": {
+    "root": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-capture-v2",
+    "teacher-collector.json": "479fbf0e02399d7244c4f785455eff03a80bf0f1d796b83d151a3152d4901c48",
+    "service-exit.json": "c85e41a7c9c9fd247fa1c06581b18e0c08048974e1662e97e55038aa04388650",
+    "service-manifest.json": "2b82a45a0c2537e0333467040c6905afbe15248cd5b40d18e36585dacc7e0736",
+    "service.log": "9404dfcbe84b63785c4fa1ae7c5da6467a81e72355b54ade506315c7ffbfddae"
+  },
+  "initial_audit": {
+    "operation": "exec-000000000000071b",
+    "exit_code": 1,
+    "report": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-capture-v2-audit-v1/report.json",
+    "failure": "source outside audited roots",
+    "cause": "Auditor did not admit the real torch.compiler.disable wrapper at torch/_dynamo/eval_frame.py, despite recording its unwrapped Ascend chunk source.",
+    "numerical_failure": false,
+    "action": "Verify exact wrapper and unwrapped identities, amend only this source check, retain failed report, re-audit existing capture in a fresh directory. No model recapture or numerical tolerance change."
+  },
+  "replay_prelaunch_correction": "Real Ascend gdn.py decode imports generic vLLM l2norm_fwd; prefill chunk imports the Ascend l2norm. Replay must preserve the distinct observed entries; actual capture query/key byte checks remain required.",
+  "performance_result": null,
+  "task_accuracy_result": null,
+  "joint_acceptance": false
+}

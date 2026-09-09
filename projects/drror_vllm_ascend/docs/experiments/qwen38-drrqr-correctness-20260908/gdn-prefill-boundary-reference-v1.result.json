@@ -1,0 +1,49 @@
+{
+  "schema": "drrqr-gdn-boundary-diagnostic-checkpoint/v1",
+  "decision": "single_boundary_rounding_not_sufficient_original_gate_failed",
+  "claim": "CPU diagnosis of immutable NPU artifact, not new NPU correctness, algorithm fidelity, performance or accuracy result",
+  "operation": {
+    "execId": "exec-0000000000000091",
+    "exitCode": 0,
+    "duration_seconds": 4.236,
+    "npu_executions": 0
+  },
+  "source": {
+    "path": "/cache/cch/drror_vllm_ascend/tools/diagnose_gdn_chunk_boundary.py",
+    "sha256": "4611bcd9ed2d39e4a918ecf9d532b1db527cde8fac182faec4e59bcad44be18e"
+  },
+  "report": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-prefill-boundary-reference-v1/report.json",
+    "sha256": "4ae85f24da951b737f5e72ec1415c98aa4338566fe0cfc8a30e9f35485adb57e"
+  },
+  "artifact": {
+    "path": "/drrqr-results/gdn-prefill-boundary-reference-v1/boundary-reference.pt",
+    "sha256": "168c77d40a9b5b8b13478a85768031ed494ed3d0fd6c610fc405f852113a6c82",
+    "size_bytes": 3934933
+  },
+  "original_reference_state_bytes": true,
+  "original_reference_output_bytes": true,
+  "split_without_rounding_state_bytes": true,
+  "split_without_rounding_output_bytes": true,
+  "original": {
+    "exceeded": 43,
+    "max_abs": 0.09392929077148438,
+    "relative_l2": 0.0032895154650029474,
+    "allclose": false
+  },
+  "boundary_only": {
+    "exceeded": 47,
+    "old_retained": 41,
+    "old_resolved": 2,
+    "new_violations": 6,
+    "max_abs": 0.0934295654296875,
+    "relative_l2": 0.0033393794122924462,
+    "allclose": false
+  },
+  "gate": {
+    "rtol": 0.01,
+    "atol": 0.01,
+    "unchanged": true,
+    "candidate_admitted": false
+  }
+}

@@ -15,6 +15,19 @@ test -f .agents/skills.registry.yaml || fail "missing .agents/skills.registry.ya
 test -f .agents/HANDOFF.md || fail "missing .agents/HANDOFF.md"
 test -d .agents/skills || fail "missing .agents/skills directory"
 
+if [ -d projects ]; then
+  test -f projects/registry.yaml || fail "projects/ exists without projects/registry.yaml"
+  grep -q '^schema: model-tuning-lab/projects/v1$' projects/registry.yaml ||
+    fail "projects/registry.yaml has an unexpected schema"
+  for project_dir in projects/*; do
+    [ -d "$project_dir" ] || continue
+    test -f "$project_dir/PROJECT.md" || fail "$project_dir missing PROJECT.md"
+    test -f "$project_dir/AGENTS.md" || fail "$project_dir missing AGENTS.md"
+    grep -q '../../.agents/skills.registry.yaml' "$project_dir/AGENTS.md" ||
+      fail "$project_dir/AGENTS.md does not reference the shared maintainer registry"
+  done
+fi
+
 
 # Current handoff shape: this is the fast resume surface for future agents.
 for section in   "## 0. Status"   "## 1. North Star"   "## 2. Current Focus"   "## 3. Recent Progress"   "## 4. Current Action"   "## 5. Next Actions"   "## 6. Validation Commands"   "## 7. Do Not Do"   "## 8. Recovery / Resume Commands"

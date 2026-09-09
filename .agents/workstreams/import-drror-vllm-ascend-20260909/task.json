@@ -42,11 +42,10 @@
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
-    "python -m pytest",
     "python -m pytest projects/drror_vllm_ascend/tests",
     "git diff --check",
     "git merge-base --is-ancestor 7eec54c9caacad3f37f80a493e01171ec8f62003 HEAD"
   ],
-  "executionState": "started",
+  "executionState": "in-progress-history-imported-path-adaptation-pending",
   "integrationState": "not-ready"
 }

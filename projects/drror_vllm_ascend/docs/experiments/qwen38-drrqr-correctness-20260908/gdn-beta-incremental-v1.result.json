@@ -1,0 +1,162 @@
+{
+  "schema": "drrqr-beta-incremental-checkpoint/v1",
+  "decision": "incremental_bytes_consistent_but_runtime_identity_failed_no_admission",
+  "scope": "Incremental diagnostic only: CPU-prequantized beta versus NPU beta transform on one fixed real teacher input trajectory. Original FP32-reference qualification failed. No performance admission, task-accuracy claim, full-model recovery or portable speedup.",
+  "report": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-beta-incremental-v1/report.json",
+    "sha256": "99844fef5fe7d3fd326c9efeb7a1c62382f1da7cdbb8a67da7ccfd33b7dd75b7"
+  },
+  "execution": {
+    "launch_invocations": 1,
+    "operation_id": null,
+    "exit_code": null,
+    "acknowledgement_issue": "Caller route check failed before retaining the launch response. Original command handle/exit code were not recovered. Do not infer a backend cause or invent a handle.",
+    "recovery": "No launch retry. Exact target/peer_direct filesystem read found completed immutable report and nine tensor archives. Docker top showed only original bash; NPU4-7 had no process.",
+    "postflight_ops": [
+      "exec-00000000000000c4",
+      "exec-00000000000000c7",
+      "exec-00000000000000c8"
+    ],
+    "physical_device": 4,
+    "logical_device": 0
+  },
+  "source": {
+    "path": "/cache/cch/drror_vllm_ascend/tools/probe_gdn_beta_incremental.py",
+    "sha256": "d80f04797bfd1bd412f6c8d36db17238581ae51a7836dc5b2bfd18f08c5cbee5",
+    "replay_helper_sha256": "56e0d2de14df9c177d607f785d856b00434384bb364ca598972d5457a042c8dd"
+  },
+  "software_tests": {
+    "exec_id": "exec-00000000000000b3",
+    "exit_code": 0,
+    "passed": 69,
+    "scope": "18 new CPU/mock +51 replay; not NPU admission"
+  },
+  "protocol": {
+    "group": [
+      "teacher-0",
+      0,
+      0
+    ],
+    "dk": 64,
+    "slots": 4,
+    "lanes": [
+      "A_eager",
+      "B_eager",
+      "A_graph",
+      "B_graph"
+    ],
+    "prefill_tokens": 128,
+    "decode_steps": 8,
+    "graph_warmups": 3,
+    "slot_relocation": "own prior slot to step%4 before each decode; not scheduler replay",
+    "beta_A": "CPU FP32(beta_base)*FP32(train_r) then BF16 before NPU upload",
+    "beta_B": "same FP32 multiply/BF16 cast on NPU; decode transform inside graph",
+    "reference": "A_eager; finite byte equality only, no replacement FP32 qualification",
+    "retry_count": 0,
+    "max_seconds": 600,
+    "hard_deadline": "parent must enforce an own-process timeout for a stuck native call"
+  },
+  "incremental": {
+    "steps": 9,
+    "lanes": 4,
+    "boolean_checks": 262,
+    "all_checks_true": true,
+    "graph_prefill_reset_bytes": true,
+    "graph_cleanup_errors": {},
+    "artifacts": [
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step0.pt",
+        "sha256": "694f626d592e129434b7bf057e0279245c49e4e51f9b19315636c3b231495689",
+        "size_bytes": 9477415
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step1.pt",
+        "sha256": "e89917fec416873560e8797521a240f3411854c3fb1b10a0ca0448eccff415b3",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step2.pt",
+        "sha256": "e097d23f0251690d193b52ea73830c681319ef94efdb7416cc0102ad0bdbfbc8",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step3.pt",
+        "sha256": "c1ec07e9a59bc1421074b2841c0e929e56b498f58355b77dc984e9374f890bf1",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step4.pt",
+        "sha256": "a80b3d7e36f3a628827608769c2d937f3110bee58058419556430c140c317777",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step5.pt",
+        "sha256": "ba10ddfc9cbc6cefc3de65325f8c5fd173be5674628f706bf25bc4c123790b86",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step6.pt",
+        "sha256": "f8f6ede3d66d08880801cfec51b20585a8b73bfa8b258da909b0bde00547c88e",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step7.pt",
+        "sha256": "7f04841be4fa35ccf2067c29d27332f6c55dc17ed76d5c47d59bf98704e0d744",
+        "size_bytes": 6322727
+      },
+      {
+        "path": "/drrqr-results/gdn-beta-incremental-v1/step8.pt",
+        "sha256": "c6906cd96ded9e94adf2fa84aada1a8dd1e0022d09b699919df69aaff6c7ed6e",
+        "size_bytes": 6322727
+      }
+    ]
+  },
+  "runtime_identity": {
+    "passed": false,
+    "teacher_libraries_matching": 6,
+    "extra_libraries": [
+      {
+        "raw_path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+        "resolved_path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+        "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069",
+        "current_sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069",
+        "teacher_sha256": null,
+        "in_teacher": false,
+        "matched": false,
+        "reason": "canonical_path_not_in_teacher"
+      },
+      {
+        "raw_path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_impl/ai_core/tbe/op_tiling/lib/linux/aarch64/libcust_opmaster_rt2.0.so",
+        "resolved_path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_impl/ai_core/tbe/op_tiling/lib/linux/aarch64/libcust_opmaster_rt2.0.so",
+        "sha256": "68221652dffb7fa13351616ecdf4e3445425697452fed29ae147f0cc335b02c1",
+        "current_sha256": "68221652dffb7fa13351616ecdf4e3445425697452fed29ae147f0cc335b02c1",
+        "teacher_sha256": null,
+        "in_teacher": false,
+        "matched": false,
+        "reason": "canonical_path_not_in_teacher"
+      },
+      {
+        "raw_path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_proto/lib/linux/aarch64/libcust_opsproto_rt2.0.so",
+        "resolved_path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_proto/lib/linux/aarch64/libcust_opsproto_rt2.0.so",
+        "sha256": "f8308be503301621117cd421e411240a077dc4fcf04972321e403e7efc818010",
+        "current_sha256": "f8308be503301621117cd421e411240a077dc4fcf04972321e403e7efc818010",
+        "teacher_sha256": null,
+        "in_teacher": false,
+        "matched": false,
+        "reason": "canonical_path_not_in_teacher"
+      }
+    ],
+    "classification": "Three additional CANN batch_invariant libraries, not a same-hash alternate kernels path. Loading cause and device symbol resolution unproven; strict gate unchanged."
+  },
+  "original_report_check": {
+    "path": "/drrqr-results/gdn-teacher-replay-v1/report.json",
+    "expected_sha256": "eb6aa7e8af0234554951b01a808da566fda02994317519a500357b3d586ba79b",
+    "sha256": "eb6aa7e8af0234554951b01a808da566fda02994317519a500357b3d586ba79b",
+    "unchanged": true
+  },
+  "original_qualification_passed": false,
+  "performance_admitted": false,
+  "accuracy_result": null,
+  "throughput_result": null,
+  "next": "Read-only attribution of additional vendor-library loading and unresolved chunk arithmetic; keep work subordinate to the DRRQR beta/rank candidate."
+}

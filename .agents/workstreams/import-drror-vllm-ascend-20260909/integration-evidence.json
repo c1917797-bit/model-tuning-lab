@@ -1,8 +1,25 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "import-drror-vllm-ascend-20260909",
-  "status": "not-ready-start-checkpoint",
+  "status": "not-ready-path-adaptation-pending",
   "targetParent": "0881de79ec6ad6623e277a38ab544704fa304b34",
-  "sourceCommit": null,
-  "validation": []
+  "sourceCommit": "7eec54c9caacad3f37f80a493e01171ec8f62003",
+  "validation": [
+    {
+      "command": "./scripts/validate-mst.sh",
+      "result": "PASS: 26 shared maintainer skills"
+    },
+    {
+      "gate": "source-tree-import",
+      "result": "PASS: 197 source files retained; only AGENTS.md and README.md intentionally adapted; PROJECT.md added"
+    },
+    {
+      "command": "pytest against the 33 committed source test files in the Python 3.12 container",
+      "result": "PASS: 451 passed"
+    },
+    {
+      "command": "pytest from projects/drror_vllm_ascend in the copied monorepo tree",
+      "result": "KNOWN FOLLOW-UP: 450 passed, 1 failed because run_layerwise_service.py enforces the old absolute root"
+    }
+  ]
 }

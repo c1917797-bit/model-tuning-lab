@@ -1,0 +1,16 @@
+schema: model-tuning-lab/projects/v1
+maintainer_registry: .agents/skills.registry.yaml
+layout:
+  root: projects
+  project_instructions: AGENTS.md
+  project_manifest: PROJECT.md
+
+projects:
+  - id: drror_vllm_ascend
+    path: projects/drror_vllm_ascend
+    status: active-research
+    kind: python-plugin
+    source_repository: https://github.com/c1917797-bit/drror_vllm_ascend.git
+    source_branch: research/qwen38-drrqr-correctness-20260908
+    source_commit: 7eec54c9caacad3f37f80a493e01171ec8f62003
+    history: retained-as-merge-parent

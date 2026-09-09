@@ -30,7 +30,23 @@ shared maintenance system for this and future imported projects.
    and a secrets/large-artifact review.
 6. Push the ready workstream. A serialized integrator alone may update `main`.
 
+## Import checkpoint evidence
+
+- Root Maintainer Skill Tree validation passes with 26 shared skills.
+- The imported index contains all 197 source files. Only `AGENTS.md` and
+  `README.md` differ intentionally, and `PROJECT.md` is the only added
+  project file.
+- The 33 committed source test files pass in the existing Python 3.12
+  container: 451 passed.
+- From the relocated monorepo path, 450 pass and one test fails because
+  `run_layerwise_service.py` still enforces the old standalone absolute
+  repository root. This is a known path-adaptation item, not an algorithm
+  regression, and does not block the user-requested history import checkpoint.
+- Root `tests/` contains only `.gitkeep`; a root pytest invocation therefore
+  collects no tests and is not an acceptance gate.
+
 ## Resume point
 
-Validate and push the start checkpoint. Do not begin protected or product edits
-until the remote workstream checkpoint exists.
+Commit and push the full-history import. Then adapt active tool roots to derive
+the project path from `__file__`, rerun relocated tests, and prepare the
+workstream for serialized integration.

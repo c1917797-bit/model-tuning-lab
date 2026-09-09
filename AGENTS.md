@@ -11,11 +11,17 @@ Canonical sources:
 - Current handoff: `.agents/HANDOFF.md`
 - Maintainer skills: `.agents/skills/**/SKILL.md`
 - Experiment records: `.agents/experiments/**`
+- Project catalog: `projects/registry.yaml`
+- Project-specific boundaries: `projects/*/AGENTS.md`
+
+The root Maintainer Skill Tree applies to every project. A project-local
+`AGENTS.md` may narrow product, resource, or validation boundaries but must
+not duplicate or override the shared maintainer skills.
 
 Before changing code:
 
-1. Identify the task type and target path.
-2. Read `.agents/HANDOFF.md` for current status and next actions.
+1. Identify the task type, project, and target path.
+2. Read `.agents/HANDOFF.md` and the nearest project `AGENTS.md`.
 3. For work bound to `chicaihong01`, use
    `chicaihong01-host-maintenance` before remote or NPU actions.
 4. Select the smallest relevant maintainer skills.
