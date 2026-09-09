@@ -23,7 +23,7 @@ import sys
 import time
 import zipfile
 
-ROOT = Path("/cache/cch/drror_vllm_ascend")
+ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = Path("/drrqr-results")
 MODEL = "/cache/austinov/Qwen3.8-27B"
 REFERENCE = RESULT_ROOT / "profile-first-v1/baseline/service-manifest.json"

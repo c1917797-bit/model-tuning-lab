@@ -56,6 +56,25 @@ def valid_ids(ids, length=None):
             and all(type(token) is int and token >= 0 for token in ids))
 
 
+def validate_layers(value):
+    if (not isinstance(value, list) or not 1 <= len(value) <= 48
+            or any(type(layer) is not int or not 0 <= layer <= 63 for layer in value)
+            or value != sorted(set(value))):
+        raise ValueError("layers must be 1..48 sorted unique model layer IDs in [0, 63]")
+    return list(value)
+
+
+def parse_layers(value):
+    try:
+        layers = [int(item) for item in value.split(",")]
+    except (AttributeError, ValueError) as error:
+        raise argparse.ArgumentTypeError("layers must be comma-separated integers") from error
+    try:
+        return validate_layers(layers)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError(str(error)) from error
+
+
 def token_hash(ids):
     if not valid_ids(ids):
         raise ValueError("expected nonempty flat nonnegative integer token IDs")
@@ -121,13 +140,14 @@ def make_prompt(tokenizer, text):
     raise ValueError("bounded user-content padding cannot produce exactly 128 full-template IDs")
 
 
-def prepare(output_dir, calibration, tokenizer=None):
+def prepare(output_dir, calibration, tokenizer=None, layers=None):
     output = absolute_path(output_dir)
     calibration = absolute_path(calibration)
     output.mkdir(parents=False, exist_ok=False)
     receipt = {"schema": SCHEMA, "status": "failed", "script_sha256": digest(__file__)}
     try:
         old_hashes = read_old_calibration(calibration)
+        layers = validate_layers(list(LAYERS) if layers is None else layers)
         if tokenizer is None:
             from transformers import AutoTokenizer
             tokenizer = AutoTokenizer.from_pretrained(
@@ -143,7 +163,7 @@ def prepare(output_dir, calibration, tokenizer=None):
                               "padding_context_repetitions": padding_count})
         manifest = {
             "schema": SCHEMA, "model": MODEL, "served_model": SERVED_MODEL,
-            "layers": LAYERS, "tp_size": TP_SIZE, "input_tokens": INPUT_TOKENS,
+            "layers": layers, "tp_size": TP_SIZE, "input_tokens": INPUT_TOKENS,
             "decode_steps": DECODE_STEPS, "output_tokens": OUTPUT_TOKENS,
             "no_thinking": True, "sequences": sequences,
             "chat_template": {"tokenize": True, "return_dict": False,
@@ -179,12 +199,13 @@ def load_manifest(path, expected):
         raise ValueError("teacher manifest SHA256 mismatch")
     manifest = json.loads(raw)
     required = {"schema": SCHEMA, "model": MODEL, "served_model": SERVED_MODEL,
-                "layers": LAYERS, "tp_size": TP_SIZE, "input_tokens": INPUT_TOKENS,
+                "tp_size": TP_SIZE, "input_tokens": INPUT_TOKENS,
                 "decode_steps": DECODE_STEPS, "output_tokens": OUTPUT_TOKENS,
                 "no_thinking": True, "synthetic_text": True}
     if (any(manifest.get(key) != value for key, value in required.items())
             or manifest.get("no_thinking") is not True or manifest.get("synthetic_text") is not True):
         raise ValueError("teacher manifest fixed protocol mismatch")
+    validate_layers(manifest.get("layers"))
     if manifest.get("chat_template") != {
             "tokenize": True, "return_dict": False, "add_generation_prompt": True,
             "enable_thinking": False}:
@@ -289,7 +310,10 @@ def validate_response(result):
     return ids, scores
 
 
-def verify_workers(capture, sequence, nonce, output_ids):
+def verify_workers(capture, sequence, nonce, output_ids, layers=None):
+    layers = validate_layers(list(LAYERS) if layers is None else layers)
+    layer_count = len(layers)
+    record_count = 9 * layer_count
     worker_failures(capture)
     expected_inputs = [sequence["input_ids"]] + [[token] for token in output_ids[:DECODE_STEPS]]
     records = []
@@ -300,17 +324,19 @@ def verify_workers(capture, sequence, nonce, output_ids):
         raw = path.read_bytes()
         item = json.loads(raw)
         required = {"schema": SCHEMA, "sequence_id": sequence["id"], "rank": rank,
-                    "nonce": nonce, "steps": 9, "layers": 6, "records": 54,
+                    "nonce": nonce, "steps": 9, "layers": layer_count,
+                    "records": record_count, "layer_ids": layers,
                     "input_ids_per_step": expected_inputs}
         if (any(item.get(key) != value for key, value in required.items())
                 or any(type(item.get(key)) is not int for key in ("rank", "steps", "layers", "records"))
                 or not isinstance(item.get("input_ids_per_step"), list)
                 or any(not valid_ids(ids, INPUT_TOKENS if step == 0 else 1)
                        for step, ids in enumerate(item.get("input_ids_per_step", [])))
-                or ("layer_ids" in item and item["layer_ids"] != LAYERS)):
+                ):
             raise ValueError("worker completion/trajectory mismatch: " + str(path))
         records.append({"path": str(path), "sha256": digest_bytes(raw),
-                        "rank": rank, "steps": 9, "layers": 6, "records": 54})
+                        "rank": rank, "steps": 9, "layers": layer_count,
+                        "records": record_count})
     return records
 
 
@@ -380,7 +406,7 @@ def run(service_dir, manifest_path, manifest_sha):
             response_path = capture / f'{sequence["id"]}.response.json'
             publish(response_path, response_record)
             ids, scores = validate_response(response)
-            workers = verify_workers(capture, sequence, arm["nonce"], ids)
+            workers = verify_workers(capture, sequence, arm["nonce"], ids, manifest["layers"])
             report["results"].append({
                 **arm, "token_ids": ids, "token_ids_sha256": token_hash(ids),
                 "selected_logprobs": scores, "response_path": str(response_path),
@@ -424,13 +450,16 @@ def main(argv=None):
     prepare_parser = commands.add_parser("prepare")
     prepare_parser.add_argument("--output-dir", type=Path, required=True)
     prepare_parser.add_argument("--calibration", type=Path, required=True)
+    prepare_parser.add_argument("--layers", type=parse_layers,
+                                default=list(LAYERS),
+                                help="comma-separated frozen model layer IDs")
     run_parser = commands.add_parser("run")
     run_parser.add_argument("--service-dir", type=Path, required=True)
     run_parser.add_argument("--manifest", type=Path, required=True)
     run_parser.add_argument("--manifest-sha256", required=True)
     args = parser.parse_args(argv)
     if args.command == "prepare":
-        result = prepare(args.output_dir, args.calibration)
+        result = prepare(args.output_dir, args.calibration, layers=args.layers)
     else:
         result = run(args.service_dir, args.manifest, args.manifest_sha256)
     print(json.dumps({"status": result["status"], "manifest_sha256": result.get("manifest_sha256")},
@@ -440,4 +469,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main()
-

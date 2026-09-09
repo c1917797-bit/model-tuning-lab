@@ -16,7 +16,7 @@ import torch
 
 SCHEMA = "gdn-teacher-capture-v1"
 AUDIT_SCHEMA = "gdn-teacher-evidence-audit/v1"
-ROOT = Path("/cache/cch/drror_vllm_ascend")
+ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = Path("/drrqr-results")
 WORKER = ROOT / "tools/gdn_teacher_capture_worker.py"
 COLLECTOR = ROOT / "tools/collect_gdn_teacher.py"
@@ -123,13 +123,23 @@ def check_positions(value, step):
     require(ids_ok(value, len(expected)) and value == expected, "position trajectory mismatch")
 
 
+def manifest_layers(doc):
+    value = doc.get("layers")
+    require(isinstance(value, list) and 1 <= len(value) <= 48, "manifest layers")
+    require(all(type(layer) is int and 0 <= layer <= 63 for layer in value),
+            "manifest layer IDs")
+    require(value == sorted(set(value)), "manifest layers must be sorted and unique")
+    return tuple(value)
+
+
 def check_manifest(doc):
     expected = {"schema": SCHEMA, "model": MODEL, "served_model": "qwen3.8",
-                "layers": list(LAYERS), "tp_size": 4, "input_tokens": 128,
+                "tp_size": 4, "input_tokens": 128,
                 "decode_steps": 8, "output_tokens": 9, "no_thinking": True,
                 "synthetic_text": True}
     for key, value in expected.items():
         require(type(doc.get(key)) is type(value) and doc[key] == value, "manifest " + key)
+    manifest_layers(doc)
     require(doc.get("chat_template") == {"tokenize": True, "return_dict": False,
             "add_generation_prompt": True, "enable_thinking": False}, "full no-thinking template")
     old = doc.get("old_calibration", {})
@@ -175,7 +185,7 @@ def identity(record, identities, *, expected_path=None, expected_sha=None, libra
     return record
 
 
-def check_ready(ready, rank, manifest_sha, worker_sha, identities):
+def check_ready(ready, rank, manifest_sha, worker_sha, identities, layers=LAYERS):
     require(ready.get("schema") == SCHEMA and ready.get("rank") == rank
             and ready.get("local_rank") == rank and ready.get("manifest_sha256") == manifest_sha,
             "rank ready binding")
@@ -194,7 +204,7 @@ def check_ready(ready, rank, manifest_sha, worker_sha, identities):
         identity(ready.get(key), identities, allow_chunk_wrapper=(key == "chunk"))
     require("npu_recurrent_gated_delta_rule" in ready.get("native_schema", ""), "native operator schema")
     layer_rows = ready.get("layers")
-    require(isinstance(layer_rows, list) and [x.get("layer") for x in layer_rows] == list(LAYERS),
+    require(isinstance(layer_rows, list) and [x.get("layer") for x in layer_rows] == list(layers),
             "ready layer topology")
     for row in layer_rows:
         require(str(row.get("prefix", "")).endswith(f'.layers.{row["layer"]}.linear_attn'),
@@ -369,10 +379,10 @@ def check_record(record, sequence, rank, layer, step, nonce, manifest_sha, norm_
     return tensors["state_final"], record["state_metadata"], tensors["norm_weight"]
 
 
-def check_file_list(files, capture, sid, rank):
+def check_file_list(files, capture, sid, rank, layers=LAYERS):
     names = [f"{sid}.rank{rank}.layer{layer}.step{step}.pt"
-             for step in range(9) for layer in LAYERS]
-    require(isinstance(files, list) and len(files) == 54
+             for step in range(9) for layer in layers]
+    require(isinstance(files, list) and len(files) == 9 * len(layers)
             and [x.get("file") for x in files] == names, "file order/name/coverage mismatch")
     result = []
     for entry, filename in zip(files, names):
@@ -386,10 +396,11 @@ def check_file_list(files, capture, sid, rank):
     return result
 
 
-def check_inventory(capture, names):
-    require(len(names) == 432 and len(set(names)) == 432
+def check_inventory(capture, names, layers=LAYERS):
+    expected_count = 2 * 4 * 9 * len(layers)
+    require(len(names) == expected_count and len(set(names)) == expected_count
             and set(names) == {path.name for path in capture.glob("*.pt")},
-            "exact 432 archive inventory")
+            "exact archive inventory")
 
 
 def load_record(path, expected):
@@ -408,6 +419,7 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
                 and path.name != "armed.json", "unfinished/failed/armed capture evidence")
     manifest_path = regular(manifest_path)
     manifest = bound_json(manifest_path, manifest_sha)
+    layers = manifest_layers(manifest)
     sequences = check_manifest(manifest)
     receipt_path = service / "teacher-collector.json"
     receipt = bound_json(receipt_path, collector_receipt_sha)
@@ -453,7 +465,7 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
         path = regular(capture / f"rank{rank}.ready.json")
         raw = path.read_bytes()
         doc = json.loads(raw)
-        ready[rank] = check_ready(doc, rank, manifest_sha, worker_sha, identities)
+        ready[rank] = check_ready(doc, rank, manifest_sha, worker_sha, identities, layers)
         native_schemas.append(doc["native_schema"])
         ready_hashes.append({"path": str(path), "sha256": sha_bytes(raw)})
     require(len(set(native_schemas)) == 1, "native operator schema differs between ranks")
@@ -496,11 +508,13 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
             complete_path = capture / f"{sid}.rank{rank}.complete.json"
             require(worker_result.get("path") == str(complete_path)
                     and all(worker_result.get(key) == value
-                            for key, value in (("steps", 9), ("layers", 6), ("records", 54))),
+                            for key, value in (("steps", 9), ("layers", len(layers)),
+                                               ("records", 9 * len(layers)))),
                     "collector worker completion coverage")
             complete = bound_json(complete_path, worker_result.get("sha256"))
             expected = {"schema": SCHEMA, "sequence_id": sid, "nonce": nonce, "rank": rank,
-                        "steps": 9, "layers": 6, "records": 54, "layer_ids": list(LAYERS),
+                        "steps": 9, "layers": len(layers), "records": 9 * len(layers),
+                        "layer_ids": list(layers),
                         "manifest_sha256": manifest_sha,
                         "input_ids_per_step": [sequence["input_ids"]] + [[x] for x in ids[:8]]}
             require(all(complete.get(key) == value for key, value in expected.items()),
@@ -512,14 +526,16 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
             for entry in libraries:
                 identity(entry, identities, library=True)
             files = complete.get("files")
-            require(isinstance(files, list) and len(files) == 54, "54 files per sequence/rank")
-            for path, checksum, layer, step in check_file_list(files, capture, sid, rank):
+            require(isinstance(files, list) and len(files) == 9 * len(layers),
+                    "files per sequence/rank")
+            for path, checksum, layer, step in check_file_list(
+                    files, capture, sid, rank, layers):
                 require(path.name not in expected_files, "duplicate archive across completions")
                 expected_files.add(path.name)
                 archives.append((path, checksum, sequence, rank, layer, step, nonce))
             complete_evidence.append({"path": str(complete_path), "sha256": worker_result["sha256"],
-                                      "records": 54})
-    check_inventory(capture, [row[0].name for row in archives])
+                                      "records": 9 * len(layers)})
+    check_inventory(capture, [row[0].name for row in archives], layers)
     require(results[0]["nonce"] != results[1]["nonce"], "two sequences reuse nonce")
     previous_states, cache_metadata, norm_weights = {}, {}, {}
     file_reports = []
@@ -540,7 +556,8 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
         "collector_receipt": {"path": str(receipt_path), "sha256": collector_receipt_sha},
         "service_manifest": {"path": str(service_path), "sha256": service_sha},
         "ready_reports": ready_hashes, "complete_reports": complete_evidence,
-        "archive_count": 432, "files": file_reports, "identities": list(identities.values()),
+        "archive_count": len(archives), "files": file_reports,
+        "identities": list(identities.values()),
         "native_schema": native_schemas[0],
         "checks": {"full_coverage": True, "token_trajectory": True,
                    "state_continuity_bytes": True, "effective_prefill_byte_zero": True,

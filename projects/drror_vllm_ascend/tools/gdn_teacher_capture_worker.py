@@ -1,7 +1,7 @@
 """Bounded, eager dense GDN teacher observer. Never use captured timings as performance.
 
 All operator calls are passed through unchanged; only CPU snapshots and protocol
-checks are added. Frozen TP4, two prompts, six layers, one prefill + eight decode.
+checks are added. Frozen TP4, two prompts, manifest-bound layers, one prefill + eight decode.
 This is local fidelity input collection, not a full-model accuracy experiment.
 """
 from __future__ import annotations
@@ -35,13 +35,21 @@ def ids_sha256(ids):
     return hashlib.sha256(json.dumps(ids, separators=(",", ":")).encode()).hexdigest()
 
 
+def validate_layers(value):
+    require(isinstance(value, list) and 1 <= len(value) <= 48, "manifest layers")
+    require(all(type(layer) is int and 0 <= layer <= 63 for layer in value),
+            "manifest layer IDs")
+    require(value == sorted(set(value)), "manifest layers must be sorted and unique")
+    return list(value)
+
+
 def validate_manifest(doc):
     require(isinstance(doc, dict) and doc.get("schema") == SCHEMA, "manifest schema")
     expected = {"model": MODEL, "tp_size": 4, "input_tokens": 128,
                 "decode_steps": 8, "output_tokens": 9, "no_thinking": True}
     for key, value in expected.items():
         require(type(doc.get(key)) is type(value) and doc[key] == value, "manifest " + key)
-    require(doc.get("layers") == LAYERS, "manifest layers")
+    validate_layers(doc.get("layers"))
     sequences = doc.get("sequences")
     require(isinstance(sequences, list) and len(sequences) == 2, "two sequences required")
     for index, seq in enumerate(sequences):
@@ -139,6 +147,7 @@ class GdnTeacherCaptureWorker(NPUWorker):
             require(self._manifest_hash == os.environ["DRRQR_GDN_TEACHER_MANIFEST_SHA256"],
                     "manifest binding")
             self._manifest = validate_manifest(json.loads(raw))
+            self._layers = list(self._manifest["layers"])
             report = {"schema": SCHEMA, "rank": self.rank, "local_rank": self.local_rank,
                       "worker": file_identity(__file__), "manifest_sha256": self._manifest_hash}
             report["observer_helper"] = source_identity(LayerwiseProbeWorker)
@@ -181,12 +190,12 @@ class GdnTeacherCaptureWorker(NPUWorker):
                 layer = int(match[1])
                 require(layer not in modules, "duplicate layer")
                 modules[layer] = module
-        require(len(modules) == 48 and set(LAYERS) <= modules.keys(), "GDN layer topology")
+        require(len(modules) == 48 and set(self._layers) <= modules.keys(), "GDN layer topology")
         report["model_class"] = source_identity(type(model))
         report["model_forward"] = source_identity(model.forward)
         report["layers"] = []
         self._norm_info = {}
-        for layer in LAYERS:
+        for layer in self._layers:
             module = modules[layer]
             require((module.tp_size, module.tp_rank, module.head_k_dim, module.head_v_dim,
                      module.num_k_heads, module.num_v_heads, module.num_spec)
@@ -272,7 +281,9 @@ class GdnTeacherCaptureWorker(NPUWorker):
             return None
         frame = self._frame
         require(self._current is None and not self._pending, "unfinished core/norm")
-        require(frame["layers"] == LAYERS and len(frame["records"]) == 6, "incomplete/duplicate layers")
+        layer_count = len(self._layers)
+        require(frame["layers"] == self._layers and len(frame["records"]) == layer_count,
+                "incomplete/duplicate layers")
         sid = frame["sequence_id"]
         self._tokens.setdefault(sid, []).append(frame["input_ids"])
         self._receipts.setdefault(sid, []).extend(frame["records"])
@@ -282,7 +293,8 @@ class GdnTeacherCaptureWorker(NPUWorker):
                 self._libraries = loaded_libraries()
             write_json(self._teacher_dir / f"{sid}.rank{self.rank}.complete.json",
                        {"schema": SCHEMA, "sequence_id": sid, "nonce": frame["nonce"],
-                        "rank": self.rank, "steps": 9, "layers": 6, "layer_ids": LAYERS,
+                        "rank": self.rank, "steps": 9, "layers": layer_count,
+                        "layer_ids": self._layers,
                         "records": len(self._receipts[sid]), "files": self._receipts[sid],
                         "input_ids_per_step": self._tokens[sid],
                         "manifest_sha256": self._manifest_hash, "loaded_libraries": self._libraries,
@@ -297,7 +309,8 @@ class GdnTeacherCaptureWorker(NPUWorker):
             from vllm.forward_context import get_forward_context
             require(self._current is None and not self._pending, "nested/pending core")
             frame = self._frame
-            require(len(frame["layers"]) < 6 and layer == LAYERS[len(frame["layers"])],
+            require(len(frame["layers"]) < len(self._layers)
+                    and layer == self._layers[len(frame["layers"])],
                     "selected layer order")
             metadata = get_forward_context().attn_metadata
             require(isinstance(metadata, dict) and module.prefix in metadata, "attention metadata")
