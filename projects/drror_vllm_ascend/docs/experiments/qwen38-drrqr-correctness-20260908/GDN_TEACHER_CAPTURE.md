@@ -49,6 +49,34 @@ passing (26.07 seconds of pytest execution, 14 deprecation warnings). The paused
 native build/codegen tests were explicitly excluded. These CPU/mock passes do
 not override the failed real-NPU prefill-reference gate.
 
+The distinct captured-dense-reference replay is now resolved. Its first isolated
+container attempt is retained as invalid environment evidence: a second container
+mapped physical NPU4-7 while the dedicated container already owned them, so CANN
+device enumeration aborted before any numerical trajectory. The report SHA256 is
+35047cd0718b0b4470a464af771f5e0fe652bcd05d699cbff113d95c12ad7c2f;
+it supports no algorithm claim. A bounded repair ran the committed source copy
+inside the already-audited dedicated container and used a fresh v2 output.
+
+The v2 replay completed all 144 trajectories (dense128, energy64 and beta64 over
+48 layer/rank/sequence groups). Every trajectory, full-state continuation,
+eager/NPUGraph byte check, graph reset, beta transform, dense capture replay and
+candidate numerical gate passed. Fixed beta improved the global post-RMS
+relative-L2 mean from 0.2936645543 to 0.2610229455, a ratio of
+0.8888472975, which passes the global 0.9 threshold. It nevertheless failed
+the frozen robustness gate: 5/144 layer/rank/sequence windows exceeded 1.05,
+with the worst late-decode ratio 1.3546492282 at layer62/rank2/teacher-1.
+Therefore fixed retained-key beta is rejected for model integration; this does
+not reject other compensation functions or DRRQR.
+
+The valid report SHA256 is
+ef3df3559bd0ae234c79dda6bafd643177bb412020cb31d8988d0a98150ef3a2;
+token-fidelity SHA256 is
+4f55edde266cf6a26203d3838f49aabeff846e7c529d5d9c7dd600b99dabe384.
+The compact committed summary is
+gdn-teacher-captured-reference.v2.summary.json. Postflight found no NPU
+process and only the original container bash. No accuracy or endpoint
+performance test was run.
+
 The next one-case NPU diagnosis ran only Ascend prefill L2(raw_K), not a model,
 chunk or candidate replay. Actual BF16 K exactly matched CPU-normalized K; the
 original FP32 reference state was reproduced byte-for-byte and all 43 original
@@ -137,7 +165,7 @@ chunked/padded or unbound requests. Four-rank completion reports must each prove
 the API's actual first eight generated token IDs. A passing launcher or CPU test
 alone cannot satisfy capture admission. Preserve failed/partial evidence.
 
-## Next decision, not yet a result
+## Frozen replay decision contract
 
 Replay dense128, original energy64, and fixed per-head beta-compensated64 from
 zero state on the same captured dense-driven layer inputs. Each candidate must

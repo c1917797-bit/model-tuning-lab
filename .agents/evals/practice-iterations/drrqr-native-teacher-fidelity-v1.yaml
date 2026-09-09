@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-native-teacher-fidelity-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-09
-validated_commit: pending
+validated_commit: 9431aa21a509da716ad5bff351517efc87152818
 
 stage_goal: Decide whether fixed retained-key beta compensation merits DRRQR model integration by replaying frozen real-model trajectories against the captured dense teacher.
 
@@ -35,4 +35,22 @@ validation_commands:
   - git diff --check
   - docker run a fresh read-only source and writable result container on physical NPU4 with a 1800-second external timeout
 
-lessons_ingested: []
+result:
+  outcome: rejected
+  evidence_level: real captured-tensor NPU trajectory screen
+  claim_ceiling: Fixed retained-key beta is not admitted for model integration under the frozen six-layer local-fidelity gate; no task-accuracy or endpoint-performance claim.
+  report_sha256: ef3df3559bd0ae234c79dda6bafd643177bb412020cb31d8988d0a98150ef3a2
+  global_beta_over_energy_ratio: 0.8888472974558843
+  failed_group_windows: 5
+  next_decision: Generate and replay aligned layerwise Dk alternatives using teacher sensitivity before implementing mixed-Dk runtime support.
+
+lessons_ingested:
+  - lesson: A compensation can improve the global mean while causing unacceptable localized late-window regressions; retain both global and group-window gates.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
+    severity: high
+  - lesson: A running container that already maps an Ascend device can make a second correctly mapped container fail device enumeration even when npu-smi reports no compute process.
+    destination: .agents/skills/ascend-npu-environment-orientation/SKILL.md
+    severity: high
+  - lesson: The practice-iteration template and validator must share the same schema and validated_commit field.
+    destination: .agents/skills/mst-practice-iteration-planning/SKILL.md
+    severity: medium

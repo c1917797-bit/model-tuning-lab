@@ -1,0 +1,61 @@
+{
+  "schema": "drrqr-gdn-captured-reference-summary/v1",
+  "date": "2026-09-09",
+  "status": "fixed_retained_key_beta_rejected_local_fidelity",
+  "claim_boundary": "Real captured-dense local GDN trajectory fidelity on six sampled layers and four TP ranks. This is not task accuracy, endpoint performance, exact StrongRRQR reproduction, or cross-environment validation.",
+  "source": {
+    "commit": "9431aa21a509da716ad5bff351517efc87152818",
+    "script_sha256": "3695cd8d312839a79884feb013dc87f325d864d229f322d9151fa8d93e0b7e98",
+    "replay_helper_sha256": "56e0d2de14df9c177d607f785d856b00434384bb364ca598972d5457a042c8dd"
+  },
+  "invalid_environment_attempt": {
+    "classification": "invalid",
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-captured-reference-v1/report.json",
+    "sha256": "35047cd0718b0b4470a464af771f5e0fe652bcd05d699cbff113d95c12ad7c2f",
+    "phase": "runtime_init",
+    "external_exit_code": 133,
+    "reason": "A second container mapped physical NPU4-7 while the dedicated container already owned those mappings; device enumeration failed before numerical execution.",
+    "algorithm_claim": "none"
+  },
+  "valid_execution": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-captured-reference-v2/report.json",
+    "sha256": "ef3df3559bd0ae234c79dda6bafd643177bb412020cb31d8988d0a98150ef3a2",
+    "token_fidelity_path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-captured-reference-v2/token-fidelity.json",
+    "token_fidelity_sha256": "4f55edde266cf6a26203d3838f49aabeff846e7c529d5d9c7dd600b99dabe384",
+    "physical_npus_observed": [4],
+    "container_visible_devices": [0, 1, 2, 3],
+    "duration_seconds": 394.509,
+    "trajectory_count": 144,
+    "all_trajectories_passed": true,
+    "all_graphs_reset": true,
+    "dense_capture_gate_passed": true,
+    "candidate_numerical_gate_passed": true
+  },
+  "fidelity": {
+    "global": {
+      "energy64_mean_relative_l2": 0.29366455430278493,
+      "beta64_mean_relative_l2": 0.26102294545061716,
+      "beta64_over_energy64": 0.8888472974558843,
+      "limit": 0.9,
+      "passed": true
+    },
+    "group_window_limit": 1.05,
+    "group_window_count": 144,
+    "failed_group_window_count": 5,
+    "failed_group_windows": [
+      {"sequence_id": "teacher-1", "rank": 2, "layer": 62, "window": "decode_late", "ratio": 1.3546492282191827},
+      {"sequence_id": "teacher-0", "rank": 0, "layer": 0, "window": "decode_late", "ratio": 1.1026310061024003},
+      {"sequence_id": "teacher-1", "rank": 1, "layer": 0, "window": "prefill_late", "ratio": 1.0820409521020566},
+      {"sequence_id": "teacher-1", "rank": 0, "layer": 0, "window": "decode_late", "ratio": 1.0773957132411278},
+      {"sequence_id": "teacher-0", "rank": 1, "layer": 0, "window": "prefill_late", "ratio": 1.0535317080927666}
+    ],
+    "passed": false
+  },
+  "decision": {
+    "fixed_beta_model_integration_admitted": false,
+    "performance_admitted": false,
+    "task_accuracy_admitted": false,
+    "next_candidate_family": "teacher-sensitivity-driven aligned layerwise Dk",
+    "next_required_evidence": "Generate and replay aligned width alternatives before implementing mixed-Dk cache/runtime integration."
+  }
+}

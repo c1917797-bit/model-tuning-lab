@@ -24,14 +24,24 @@ proof that the intended NPU path executed.
 5. Record hardware identity: Ascend product, device count and IDs, visible
    devices, memory capacity, interconnect or HCCL topology, NUMA/CPU affinity,
    and power/clock mode when observable.
-6. Record runtime identity: host versus container boundary, mounts, cache and
+6. Inventory device ownership before launching: inspect every running
+   container's exact host-to-container device mappings, not only npu-smi
+   compute-process rows. A running container can retain ownership of a mapped
+   Ascend device while npu-smi reports no active compute process. Do not start
+   a second container over the same physical devices; use the already-audited
+   container, or explicitly quiesce and release the first container under the
+   task's safety policy.
+7. Record runtime identity: host versus container boundary, mounts, cache and
    storage locations, environment-variable names and non-secret values, launch
    command, and process-to-device binding.
-7. Run a minimal inference canary and capture a controlled-side event proving
+8. Before the workload, probe device count and set the intended logical device
+   inside the exact target container. Treat device-enumeration/resource-busy
+   failures as invalid environment evidence, not model or algorithm results.
+9. Run a minimal inference canary and capture a controlled-side event proving
    the intended NPU device executed the workload.
-8. Compare with the previous baseline. If any material field drifted, declare
+10. Compare with the previous baseline. If any material field drifted, declare
    the old and new measurements non-comparable until re-baselined.
-9. Commit and push the orientation or re-baseline stage.
+11. Commit and push the orientation or re-baseline stage.
 
 ## Safety Boundaries
 
@@ -41,6 +51,8 @@ proof that the intended NPU path executed.
 - Do not modify drivers, firmware, clocks, power limits, or system services
   without explicit authorization and a rollback plan.
 - Treat host, container, framework, and physical device as separate authorities.
+- Do not infer that a physical device is available from an empty npu-smi
+  process table alone; container device ownership is a separate gate.
 
 ## Output
 
@@ -53,5 +65,7 @@ commit that established the baseline.
 - Every identity field is present or explicitly marked unavailable.
 - Source and image identities are immutable hashes, not mutable labels alone.
 - The canary identifies the expected physical NPU and execution process.
+- No other running container maps the experiment's physical device set, or the
+  experiment explicitly reuses the single audited owner container.
 - No secret or large binary artifact is staged.
 - The orientation checkpoint is clean, committed, and pushed.

@@ -9,6 +9,13 @@ description: Use after a real repository transformation or maintenance session t
 
 Turn real practice experience into structured maintainer skills.
 
+Skills are durable procedural memory, not a dump of run-specific state.
+Reusable triggers, guards, and decision rules belong in skills; the current
+candidate and resume action belong in `.agents/HANDOFF.md`; bounded decisions
+belong in practice-iteration YAML; measurements and immutable identities belong
+in experiment/evidence records. Together these Git-tracked layers, rather than
+chat history, form the maintainer's recoverable long-term memory.
+
 The rule is:
 
 ```text
@@ -93,7 +100,9 @@ or turn a corrected error into a permanent constraint.
 7. Update .agents/skills.registry.yaml for new or changed skills.
 8. Add or update an eval/example when the lesson can be tested.
 9. Run mst-transformation-verification.
-10. If the repository has a confirmed git checkpoint policy, commit and push after validation.
+10. Reconcile the active iteration and `.agents/HANDOFF.md` with the new
+    evidence so the next session cannot resume an obsolete candidate.
+11. If the repository has a confirmed git checkpoint policy, commit and push after validation.
 
 ## Ingestion quality gate
 
@@ -121,6 +130,8 @@ Do not:
 - create broad skills from one isolated event,
 - store raw chat transcripts as rules,
 - duplicate the same lesson across many skills,
+- leave the active iteration or handoff pointing at a superseded decision,
+- depend on an uncommitted chat conclusion for the next resume action,
 - hide tool-specific behavior inside canonical skills,
 - convert an invalid run into evidence that an algorithm improved or regressed,
 - promote a single screen or local check into a general success rule,

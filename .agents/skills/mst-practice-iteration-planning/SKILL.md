@@ -24,25 +24,35 @@ evidence to choose the next iteration without silently weakening the objective.
 
 ## Workflow
 
-1. **State the goal chain** — long-term objective, current acceptance gap,
+1. **Reconstruct durable state** — on every resumed tuning session, read the
+   repository `AGENTS.md`, `.agents/HANDOFF.md`, the active practice-iteration
+   YAML, its cited experiment/evidence records, and current Git status/log.
+   Treat chat context as a navigation hint only. When chat, Git records, and
+   live runtime state differ, prefer immutable evidence and re-prove mutable
+   runtime facts before acting.
+2. **State the goal chain** — long-term objective, current acceptance gap,
    medium-term milestone, and the short-term decision needed next.
-2. **Inventory authoritative evidence** — what exists, what is missing, what
+3. **Inventory authoritative evidence** — what exists, what is missing, what
    changed since the last iteration, and which earlier assumptions were
    invalidated.
-3. **Choose the next iteration from the gap** — each iteration must be:
+4. **Choose the next iteration from the gap** — each iteration must be:
    - Small enough to validate in one pass (typically 1-3 file changes or 1 structural change).
    - Large enough to be a coherent unit (not "rename one variable").
    - Independently verifiable with explicit pass criteria.
    - Bound to deciding evidence, a budget or stop rule, and explicit actions
      for pass, failure, and inconclusive outcomes.
-4. **Write the iteration plan** as a YAML file (see Output Format).
-5. **Execute each iteration**, running validation after each.
-6. **Review the goal chain** at the deciding result or budget limit, before
+5. **Write the iteration plan** as a YAML file (see Output Format).
+6. **Execute each iteration**, running validation after each.
+7. **Review the goal chain** at the deciding result or budget limit, before
    changing branch or substantially expanding cost, and at handoff. Record
    evidence, uncertainty, changed judgment, and the next decision.
-7. **Replan from the review**, not merely from unfinished backlog items.
+8. **Persist the review before continuing** — update the iteration outcome,
+   evidence identities and next decision; update `.agents/HANDOFF.md` when the
+   active candidate, acceptance gap, runtime hazard, or resume action changed.
+   A future maintainer must be able to resume from Git without the chat.
+9. **Replan from the review**, not merely from unfinished backlog items.
    Negative evidence counts when it eliminates or redirects a candidate.
-8. **Ingest reusable lessons** with `mst-experience-ingestion`; keep
+10. **Ingest reusable lessons** with `mst-experience-ingestion`; keep
    project-specific constraints in the owning project.
 
 ## Output format
@@ -104,6 +114,8 @@ If an iteration requires more than 5 file changes or 2 structural changes, split
   covered by the recorded validation.
 - Every iteration links its short-term decision to a current gap and
   medium-term milestone without weakening the long-term objective.
+- The active iteration and handoff agree on the current candidate, deciding
+  evidence, and next action; neither depends on an unrecorded chat conclusion.
 - Deciding evidence, budget, and pass/failure/inconclusive actions are explicit.
 - Every `lessons_ingested` entry has a `destination` and `severity`.
 - The `stage_goal` is a single sentence.
@@ -121,5 +133,6 @@ Do not:
 - extend a diagnostic chain after its budget without a changed decision,
 - skip the validation repo and update skillsgit directly,
 - record lessons without classifying their destination,
+- use chat history as the authoritative experiment ledger or resume state,
 - create iterations without machine-checkable pass criteria,
 - or treat the plan as immutable (replan after each iteration based on findings).

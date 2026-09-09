@@ -2,13 +2,26 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-07.
+- Last updated: 2026-09-09.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide`, with pushed evidence, negative-result retention, and explicit recovery checkpoints.
 - Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
 - The repository-specific active worktree budget is eight.
+- Active Qwen3.8 DRRQR worktree:
+  /opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-gdn-native-state-layout
+  on branch work/drror-objective-loop-skill-20260909. The frozen dense
+  performance baseline is 135.142469917 output tok/s and the fixed +10 percent
+  target is 148.656716909 output tok/s. The best comparable energy-Dk64 screen
+  is +4.752041 percent; it is not accepted.
+- The real captured-teacher fixed-beta screen is complete and rejected:
+  144/144 dense128/energy64/beta64 trajectories passed numerical and graph
+  gates, but beta64 failed 5/144 robustness windows despite a 0.888847 global
+  error ratio. Report SHA256:
+  ef3df3559bd0ae234c79dda6bafd643177bb412020cb31d8988d0a98150ef3a2.
+  No accuracy or endpoint-performance run followed. Resume from
+  drrqr-aligned-width-replay-v1, not from fixed beta.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -44,6 +57,11 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
    candidate and mechanism evidence, but only the separate `query_rewrite`
    performance workstream owns its frozen denominator, final quality gate,
    serving delivery contract, and performance acceptance decision.
+5. **Qwen3.8 DRRQR:** keep algorithm selection primary. The next bounded
+   decision is an aligned Dk48/Dk64/Dk80 real-teacher width curve. Do not
+   implement mixed-Dk cache/runtime support until that curve admits a concrete
+   candidate; do not run final accuracy before a candidate survives numerical
+   and fixed-1024-token endpoint screening.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -72,6 +90,9 @@ Keep the distinction between three kinds of knowledge explicit:
 For a new maintainer, start by treating this repository as ready for handoff but not as proof of live host state.
 
 1. Read `AGENTS.md`, this handoff, `docs/RUNBOOK.md`, and `docs/LESSONS_LEARNED.md`.
+   For Qwen3.8 DRRQR also read the project AGENTS.md, frozen baseline contract,
+   GDN_TEACHER_CAPTURE.md, the captured-reference v2 summary, and the active
+   drrqr-aligned-width-replay-v1 iteration YAML.
 2. If the next task touches `chicaihong01`, use `chicaihong01-host-maintenance` before any remote or NPU action.
 3. If the next task is another paper/practice result, start with `paper-to-ascend`; for historical reproduction or adoption claims, include `paper-to-ascend-reproduction` and its evidence contract.
 4. Before using any claimed NPU/port lane, read the relevant target-host branch-local handoff and prove current ownership in the same session.
@@ -83,22 +104,27 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
-3. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
+2. For Qwen3.8 DRRQR, execute the bounded aligned-width iteration: prepare
+   immutable energy-kernel Dk48/Dk80 plans, qualify their software contracts,
+   and run one combined six-layer captured-teacher replay in the existing
+   audited dedicated container. A passing width curve admits full-layer
+   sensitivity capture, not mixed-cache implementation or an accuracy claim.
+3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
+4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
    activation gate, fixed-input correctness, c1 fail-fast, then the
    c1/c5/c8/c16 x three-repeat matrix.
-4. For Qwen3.5 Paper-to-Ascend, do not resume the old MTP experiment. Select a
+5. For Qwen3.5 Paper-to-Ascend, do not resume the old MTP experiment. Select a
    non-speculative, no-retraining, no-quantization paper from a measured dense
    bottleneck and treat its result as candidate input, not final performance
    evidence.
-5. For future Paper-to-Ascend work, choose the narrow route:
+6. For future Paper-to-Ascend work, choose the narrow route:
    - new paper idea: `paper-ingestion` -> `ascend-architecture-fit` -> `ascend-source-map` -> canary;
    - prior success or historical ruler: `paper-to-ascend-reproduction`;
    - low-level kernel/operator/profiler question: `ascend-cannbot-profiler`;
    - final result: `paper-to-ascend-reporting`.
-6. Do not reuse HYPIC absolute numbers across model, accelerator generation, TP degree, cache denominator, or capacity-budget changes. Create a fresh experiment, baseline, and artifact root.
-7. Re-run full validation on the Linux target before claiming the handoff is execution-ready.
+7. Do not reuse HYPIC absolute numbers across model, accelerator generation, TP degree, cache denominator, or capacity-budget changes. Create a fresh experiment, baseline, and artifact root.
+8. Re-run full validation on the Linux target before claiming the handoff is execution-ready.
 
 ## 6. Validation Commands
 
@@ -134,6 +160,9 @@ For tuning evidence, also run the exact benchmark/profiling/audit commands decla
 - Do not merge failed active code into main.
 - Do not release the 1 GiB HugeTLB pool merely because many pages look free; identify OVS/DPDK/VNF consumers and define rollback first.
 - Do not assume a container is ready because it exists; prove listener, health, real request, and NPU workers in the same session.
+- Do not start a second container over physical NPUs already mapped into a
+  running container merely because npu-smi shows no compute process. Inspect
+  container device ownership and reuse the single audited owner when safe.
 - Do not disable TLS verification to repair Git.
 - Do not commit credentials, SSH material, shell history, private certificates, datasets, model weights, checkpoints, raw profiler traces, or large generated outputs.
 ```
@@ -155,6 +184,16 @@ git diff --check
 ```
 
 If a `work/*` branch is active, read its `.agents/workstreams/<task-id>/task.json`, branch-local `HANDOFF.md`, experiment/evidence/decision ledgers, and exact audit/resume commands before acting.
+
+Qwen3.8 DRRQR-specific resume files:
+
+```text
+.agents/evals/practice-iterations/drrqr-aligned-width-replay-v1.yaml
+projects/drror_vllm_ascend/AGENTS.md
+projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
+projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
+projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-captured-reference.v2.summary.json
+```
 
 HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.
 

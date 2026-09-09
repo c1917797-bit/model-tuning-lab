@@ -86,6 +86,7 @@ skills:
       - establish or refresh a tuning baseline
       - move an experiment to another host or container
       - investigate environment or topology drift
+      - reuse devices already mapped into a running container
     scope:
       - configs/**
       - scripts/**
