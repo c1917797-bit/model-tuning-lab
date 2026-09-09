@@ -1,7 +1,33 @@
 {
   "schema": "mst-integration-evidence/v1",
   "task_id": "consolidate-worktrees-20260909",
-  "status": "not_validated",
+  "status": "validated",
   "target_parent": "80ff89386c8edbe9435da3cecda11b91661c11aa",
-  "worktree_audit": "in_progress"
+  "source_commits": [
+    "977b795",
+    "eb8f6b7",
+    "7a79193"
+  ],
+  "validation": [
+    "./scripts/validate-mst.sh",
+    "git diff --check",
+    "JSON parse of workstream control files",
+    "upstream divergence and remote reachability audit"
+  ],
+  "worktree_audit": {
+    "before": 8,
+    "after_integration": 5,
+    "reclaimed": [
+      "exp-20260904-qwen35-dense-mtp-paper-to-ascend",
+      "exp-20260904-qwen38-prefix-cache-general-eval-final",
+      "consolidate-worktrees-20260909"
+    ],
+    "retained": {
+      "exp-20260904-qwen35-query-rewrite-3x-e2e": "dirty active performance workstream",
+      "pr-qwen35-mmar-async-finalize-gate": "dirty active PR validation workstream",
+      "exp-20260905-qwen35-shortgpt": "clean but goal open and not integration-ready",
+      "exp-20260904-qwen38-gdn-native-state-layout": "clean DRRQR/objective import with path adaptation pending"
+    }
+  },
+  "resource_actions": "none; no NPU, container, port, process, or model resource was changed"
 }
