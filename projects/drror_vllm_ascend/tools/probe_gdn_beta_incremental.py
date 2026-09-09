@@ -14,10 +14,10 @@ import traceback
 
 import torch
 
-ROOT = Path("/cache/cch/drror_vllm_ascend")
+ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = Path("/drrqr-results")
 REPLAY_SOURCE = ROOT / "tools/replay_gdn_teacher.py"
-REPLAY_SHA256 = "56e0d2de14df9c177d607f785d856b00434384bb364ca598972d5457a042c8dd"
+REPLAY_SHA256 = "d864aecf4ca98cbf4b451542d1757e36aa853997055c8d7c653b7f1d4f2faa80"
 ORIGINAL_REPLAY = RESULT_ROOT / "gdn-teacher-replay-v1/report.json"
 ORIGINAL_REPLAY_SHA256 = "eb6aa7e8af0234554951b01a808da566fda02994317519a500357b3d586ba79b"
 ORIGINAL_SCRIPT_SHA256 = "46fdfe7894e087cd47c10327b683dfc081a041afdcea400c87485c5918087e95"

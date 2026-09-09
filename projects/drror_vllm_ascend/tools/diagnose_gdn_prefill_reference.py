@@ -15,9 +15,9 @@ import traceback
 os.environ["TORCH_DEVICE_BACKEND_AUTOLOAD"] = "0"
 import torch
 
-ROOT = Path("/cache/cch/drror_vllm_ascend")
+ROOT = Path(__file__).resolve().parents[1]
 RESULTS = Path("/drrqr-results")
-REPLAY_SHA = "56e0d2de14df9c177d607f785d856b00434384bb364ca598972d5457a042c8dd"
+REPLAY_SHA = "d864aecf4ca98cbf4b451542d1757e36aa853997055c8d7c653b7f1d4f2faa80"
 DATA = {
     "audit": ("gdn-teacher-capture-v2-audit-v2/report.json",
               "88ad45924021635e3d485b57ad14c7cf3e993836eb9dee5a3e465d0da0994777"),

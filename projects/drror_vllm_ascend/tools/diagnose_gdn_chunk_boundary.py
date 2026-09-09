@@ -15,12 +15,12 @@ import traceback
 os.environ["TORCH_DEVICE_BACKEND_AUTOLOAD"] = "0"
 import torch
 
-ROOT = Path("/cache/cch/drror_vllm_ascend")
+ROOT = Path(__file__).resolve().parents[1]
 RESULTS = Path("/drrqr-results")
 OUTPUT = RESULTS / "gdn-prefill-boundary-reference-v1"
 SOURCES = {
     "gdn_golden_parity": "1a2d1a61040a58a6f0c1d90cdbf0fc17058f3273eaef8b3d1b80116c97d92cb9",
-    "validate_gdn_teacher_capture": "fd9b4f30d47d6f1763683f6dfa62a533c7c365ab73a7503de628445194e2e6f7",
+    "validate_gdn_teacher_capture": "a3e55fdb31f60894853532602628780a488901310a6717d22fde0983833e0efb",
 }
 INPUTS = {
     "audit": ("gdn-teacher-capture-v2-audit-v2/report.json",
