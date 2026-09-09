@@ -60,11 +60,29 @@ does not fuse the TP4 final all-reduce. Substituting it and then doing a
 separate all-reduce would repeat the already-rejected MMAR decomposition, where
 the official fused MMAR was roughly 2x faster for the real M=1 shapes.
 
-Candidate B therefore advances only as a **custom device-boundary fusion**
-concept. Before any OPP implementation, its first executable gate must prove a
-BF16 TP4 M=1 stock-chain baseline and demonstrate that a supported dav-2201
-implementation can recover at least the additional ~8.3 us/layer required by
-the 1.15x chain gate. If that cannot be shown, reject Candidate B without E2E.
+Follow-up timestamp pairing closes that boundary-only route. Every one of the
+6,720 M=1 `SwiGlu` rows per rank was paired to the immediately following M=1
+K4352 `MatmulAllReduce` row. The observed gap is only about 1.30-1.31 us/layer
+on average, with p50 1.25 us, p95 about 1.5-1.75 us, and a maximum of 3.0 us.
+Across 64 layers this is only about 83-84 us/decode step, far below the roughly
+0.53 ms/decode step extra saving required by the 1.15x chain gate.
+
+Therefore **reject a boundary-only custom OPP before implementation**. A future
+dense-tail operator would have to materially reduce MMAR-side device work, not
+just erase the activation-to-MMAR dispatch gap.
+
+The previously measured local fused-FFN prototype is also insufficient as the
+main money patch: 197.9728 -> 180.2859 us saves 17.6869 us/layer, or about
+1.132 ms/token across 64 layers. Against the latest c1 control TPOT of 31.754
+ms, a 20% target requires about 6.351 ms/token of saving, so that local fusion
+covers only about 17.8% of the required reduction. It remains a possible
+stackable micro-optimization, not the primary candidate.
+
+Source inspection also closes the obvious HCCL-server shortcut: on A2/
+Ascend 910B4, MatmulAllReduce V1/V2/V3 all select the AICPU HCCL server; CCU
+selection is gated to the A5/dav-3510 path. V2 adds x3 and V3 adds commMode,
+but neither supplies a different supported 910B4 server lifecycle. The x3
+route was already rejected by measured evidence.
 
 NPU0-3 were observed process-free during this checkpoint, but the workstream
 handoff still requires a valid lease. No model service or NPU benchmark was
