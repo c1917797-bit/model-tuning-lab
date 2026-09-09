@@ -183,4 +183,55 @@ def test_frozen_helpers_and_claim_ceiling_are_explicit():
     assert "throughput" in candidate.CLAIM
     assert "Not exact StrongRRQR" in candidate.CLAIM
     source = SOURCE.read_text(encoding="utf-8")
-    assert 'in ("width_curve_pass", "width_curve_failed")' in source
+    assert '"width_shard_pass"' in source
+
+
+def test_budget_and_interrupt_are_inconclusive_not_numerical_failures():
+    assert candidate.run_error_status(
+        TimeoutError("budget"), "energy48"
+    ) == "inconclusive_budget_exhausted"
+    assert candidate.run_error_status(
+        InterruptedError("signal"), "energy64"
+    ) == "inconclusive_interrupted"
+    assert candidate.run_error_status(
+        ValueError("gate"), "energy80"
+    ) == "failed_candidate_numerical"
+
+
+def test_completed_trajectory_requires_all_nine_passing_steps():
+    row = {"passed": True, "steps": [{"passed": True}] * 9}
+    assert candidate.completed_trajectory(row) is True
+    assert candidate.completed_trajectory({**row, "steps": row["steps"][:-1]}) is False
+    assert candidate.completed_trajectory({**row, "passed": None}) is False
+
+
+def test_prior_dense_report_requires_complete_passing_group_matrix():
+    group = ("teacher-0", 0, 0)
+    bindings = {"manifest": {"sha256": "a" * 64}}
+    row = {
+        "sequence_id": group[0],
+        "rank": group[1],
+        "layer": group[2],
+        "variant": "dense128",
+        "passed": True,
+        "steps": [{"passed": True}] * 9,
+    }
+    document = {
+        "schema": "drrqr-captured-teacher-width-curve/v1",
+        "status": "inconclusive_budget_exhausted",
+        "captured_reference_helper_sha256": candidate.CAPTURED_SHA256,
+        "dense_capture_gate_passed": True,
+        "bindings": bindings,
+        "trajectories": [row],
+        "script_sha256": "b" * 64,
+    }
+    result = candidate.validate_prior_dense_report(
+        document, "c" * 64, bindings, [group]
+    )
+    assert result["trajectory_count"] == 1
+    changed = copy.deepcopy(document)
+    changed["trajectories"][0]["steps"].pop()
+    with pytest.raises(ValueError, match="complete passing dense"):
+        candidate.validate_prior_dense_report(
+            changed, "c" * 64, bindings, [group]
+        )

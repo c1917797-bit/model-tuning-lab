@@ -40,6 +40,7 @@ CLAIM = (
     "energy-selector Dk48/Dk64/Dk80. Not exact StrongRRQR reproduction, "
     "full-model accuracy, timing, throughput, or portability acceptance."
 )
+SHARD_VARIANTS = ("energy48", "energy64", "energy80")
 
 
 def require(value, message):
@@ -53,6 +54,68 @@ def checksum(path):
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def completed_trajectory(row):
+    steps = row.get("steps")
+    return (
+        row.get("passed") is True
+        and isinstance(steps, list)
+        and len(steps) == 9
+        and all(step.get("passed") is True for step in steps)
+    )
+
+
+def run_error_status(error, current_variant):
+    if isinstance(error, TimeoutError):
+        return "inconclusive_budget_exhausted"
+    if isinstance(error, InterruptedError):
+        return "inconclusive_interrupted"
+    if current_variant == "dense128":
+        return "blocked_dense_capture_replay"
+    if current_variant:
+        return "failed_candidate_numerical"
+    return "failed_admission"
+
+
+def validate_prior_dense_report(document, expected_sha256, bindings, groups):
+    require(
+        document.get("schema") == "drrqr-captured-teacher-width-curve/v1"
+        and document.get("dense_capture_gate_passed") is True,
+        "prior dense report did not pass its dense capture gate",
+    )
+    require(
+        document.get("captured_reference_helper_sha256") == CAPTURED_SHA256,
+        "prior dense report used a different captured-reference helper",
+    )
+    require(
+        document.get("bindings") == bindings,
+        "prior dense report bindings differ from this shard",
+    )
+    dense = [
+        row for row in document.get("trajectories", [])
+        if row.get("variant") == "dense128"
+    ]
+    expected = {
+        (group[0], group[1], group[2])
+        for group in groups
+    }
+    observed = {
+        (row.get("sequence_id"), row.get("rank"), row.get("layer"))
+        for row in dense
+    }
+    require(
+        len(dense) == len(groups)
+        and observed == expected
+        and all(completed_trajectory(row) for row in dense),
+        "prior dense report lacks the complete passing dense trajectory matrix",
+    )
+    return {
+        "sha256": expected_sha256,
+        "script_sha256": document.get("script_sha256"),
+        "trajectory_count": len(dense),
+        "status": document.get("status"),
+    }
 
 
 def load_captured_reference():
@@ -511,7 +574,16 @@ def run_trajectory(
         return token_rows
     except BaseException as error:
         row.update(
-            passed=False,
+            passed=(
+                None
+                if isinstance(error, (TimeoutError, InterruptedError))
+                else False
+            ),
+            outcome=(
+                "incomplete"
+                if isinstance(error, (TimeoutError, InterruptedError))
+                else "failed"
+            ),
             error=repr(error),
             traceback=traceback.format_exc(),
         )
@@ -553,6 +625,14 @@ def main(argv=None):
     ):
         parser.add_argument("--" + key, required=True)
     parser.add_argument("--max-seconds", type=int, default=5400)
+    parser.add_argument(
+        "--variant",
+        choices=("all",) + SHARD_VARIANTS,
+        default="all",
+        help="Run the complete matrix or one candidate-width shard.",
+    )
+    parser.add_argument("--prior-dense-report", type=Path)
+    parser.add_argument("--prior-dense-report-sha256")
     args = parser.parse_args(argv)
 
     require(
@@ -585,7 +665,16 @@ def main(argv=None):
         "performance_admitted": False,
         "task_accuracy_admitted": False,
         "protocol": {
-            "variants": list(VARIANT_DK),
+            "variants": (
+                list(VARIANT_DK)
+                if args.variant == "all"
+                else [args.variant]
+            ),
+            "execution_mode": (
+                "complete_matrix"
+                if args.variant == "all"
+                else "candidate_width_shard"
+            ),
             "groups": 0,
             "input_tokens": 128,
             "decode_steps": 8,
@@ -688,8 +777,32 @@ def main(argv=None):
             for rank in range(4)
             for layer in bound.layers
         ]
+        selected_variants = (
+            list(VARIANT_DK)
+            if args.variant == "all"
+            else [args.variant]
+        )
+        if args.variant != "all":
+            require(
+                args.prior_dense_report is not None
+                and args.prior_dense_report_sha256 is not None,
+                "candidate shard requires a prior dense report and SHA256",
+            )
+            prior_dense = captured.bound_json(
+                args.prior_dense_report,
+                args.prior_dense_report_sha256,
+            )
+            report["prior_dense_evidence"] = validate_prior_dense_report(
+                prior_dense,
+                args.prior_dense_report_sha256,
+                report["bindings"],
+                groups,
+            )
+            report["dense_capture_gate_passed"] = True
+            save()
         fidelity = {}
-        for variant, dk in VARIANT_DK.items():
+        for variant in selected_variants:
+            dk = VARIANT_DK[variant]
             current_variant = variant
             if variant != "dense128":
                 require(
@@ -730,9 +843,10 @@ def main(argv=None):
                 report["dense_capture_gate_passed"] = True
                 save()
         require(
-            len(report["trajectories"]) == len(VARIANT_DK) * 2 * 4 * len(bound.layers)
-            and all(row["passed"] for row in report["trajectories"]),
-            "all dense and width trajectories must complete",
+            len(report["trajectories"])
+            == len(selected_variants) * 2 * 4 * len(bound.layers)
+            and all(completed_trajectory(row) for row in report["trajectories"]),
+            "all selected trajectories must complete",
         )
         report["candidate_numerical_gate_passed"] = True
         rows = [
@@ -745,7 +859,6 @@ def main(argv=None):
             }
             for key, value in sorted(fidelity.items())
         ]
-        report["fidelity"] = fidelity_screen(rows, bound.layers)
         fidelity_path = output / "token-fidelity.json"
         with fidelity_path.open("x", encoding="utf-8") as stream:
             json.dump(rows, stream, allow_nan=False)
@@ -753,22 +866,20 @@ def main(argv=None):
             "path": str(fidelity_path),
             "sha256": checksum(fidelity_path),
         }
-        report["full_layer_capture_admitted"] = report["fidelity"]["passed"]
-        report["status"] = (
-            "width_curve_pass"
-            if report["fidelity"]["passed"]
-            else "width_curve_failed"
-        )
+        if args.variant == "all":
+            report["fidelity"] = fidelity_screen(rows, bound.layers)
+            report["full_layer_capture_admitted"] = report["fidelity"]["passed"]
+            report["status"] = (
+                "width_curve_pass"
+                if report["fidelity"]["passed"]
+                else "width_curve_failed"
+            )
+        else:
+            report["status"] = "width_shard_pass"
         report["phase"] = "complete"
     except BaseException as error:
         report.update(
-            status=(
-                "blocked_dense_capture_replay"
-                if current_variant == "dense128"
-                else "failed_candidate_numerical"
-                if current_variant
-                else "failed_admission"
-            ),
+            status=run_error_status(error, current_variant),
             error=repr(error),
             traceback=traceback.format_exc(),
         )
@@ -784,7 +895,11 @@ def main(argv=None):
                 )
             except BaseException as error:
                 report["library_observation_error"] = repr(error)
-                if report["status"] in ("width_curve_pass", "width_curve_failed"):
+                if report["status"] in (
+                    "width_curve_pass",
+                    "width_curve_failed",
+                    "width_shard_pass",
+                ):
                     report["status"] = "failed_runtime_evidence"
                     report["full_layer_capture_admitted"] = False
         report["completed_unix_ns"] = time.time_ns()
@@ -797,7 +912,11 @@ def main(argv=None):
         ),
         flush=True,
     )
-    return 0 if report["status"] == "width_curve_pass" else 1
+    return (
+        0
+        if report["status"] in ("width_curve_pass", "width_shard_pass")
+        else 1
+    )
 
 
 if __name__ == "__main__":

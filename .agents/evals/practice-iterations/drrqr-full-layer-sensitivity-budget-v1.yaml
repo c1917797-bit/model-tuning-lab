@@ -2,7 +2,7 @@ schema: mst-practice-iteration/v1
 id: drrqr-full-layer-sensitivity-budget-v1
 repository: model-tuning-lab
 status: in_progress
-date: 2026-09-09
+date: 2026-09-10
 validated_commit: pending
 
 stage_goal: Use a frozen all-48-layer dense teacher to decide whether an aligned Dk48/Dk64/Dk80 layerwise allocation can improve DRRQR fidelity at no more state cost than uniform Dk64.
@@ -13,17 +13,24 @@ goal_chain:
   medium_term_milestone: A numerically defensible, portable aligned layerwise DRRQR plan whose total state-width budget is no greater than uniform Dk64 and whose real-teacher fidelity justifies mixed-width cache/runtime implementation.
   short_term_decision: Capture and audit all 48 linear-attention layers under the frozen two-sequence teacher protocol, replay Dk48/Dk64/Dk80, and accept or reject an equal-or-lower-cost layerwise allocation using only predeclared trajectory errors.
   deciding_evidence: All 3456 teacher records and all width replays must pass identity, state-continuity, native eager and NPUGraph gates. The selected layer map must use only 16-aligned Dk48/Dk64/Dk80, have sum(Dk) no greater than 48 times 64, improve aggregate post-RMS relative-L2 by at least 10 percent versus uniform Dk64, and have no layer-rank-sequence window worsen by more than 5 percent.
-  budget_or_stop_rule: One all-layer TP4 teacher capture/audit on physical NPU4-7 and one combined replay on physical NPU4. Capture remains bounded to 3600 seconds; after the first full-layer replay processed 186 trajectories in 537.54 seconds, revise only the replay wall-clock bound to 5400 seconds so the predeclared 1536-trajectory matrix can complete. Preserve the interrupted partial run, allow one corrected full replay, and do not change state-budget or fidelity thresholds. No mixed-cache implementation, endpoint benchmark, profiling expansion, or accuracy run in this iteration.
+  budget_or_stop_rule: One all-layer TP4 teacher capture/audit on physical NPU4-7 and one combined replay on physical NPU4. Capture remains bounded to 3600 seconds. The corrected combined replay reached its unchanged 5400-second hard bound after 694 of 1536 trajectories, including the complete 384-trajectory dense128 gate and 309 complete energy48 trajectories; all 693 completed trajectories passed and the one incomplete row stopped only on timeout. Preserve that report as inconclusive, not candidate-numerical failure. Repair the demonstrated orchestration defect with exactly three deterministic candidate-width shards on physical NPU4, each bounded to 5400 seconds and bound to the hash-verified complete dense128 evidence from the combined replay, then independently merge all three complete shards under the original completeness, state-budget and fidelity thresholds. No mixed-cache implementation, endpoint benchmark, profiling expansion, or accuracy run in this iteration.
   on_pass: Implement the exact selected aligned layer groups in the plugin-owned weight slicing, cache allocation, scheduler and graph-key path, beginning with all-Dk64 equivalence and explicit portability contracts.
   on_failure: Reject equal-cost simple Dk48/Dk64/Dk80 layer allocation for the current energy selector and return to selector or recurrence-compensation design using the preserved all-layer teacher evidence.
   on_inconclusive: Preserve partial evidence and repair only a demonstrated capture, identity, runtime, or audit defect without changing the state budget or fidelity thresholds.
 
-changes: []
+changes:
+  - Correct timeout and signal termination to inconclusive statuses instead of candidate numerical failures.
+  - Add deterministic energy48, energy64 and energy80 shard execution that reuses only a complete hash-bound dense128 gate.
+  - Add an independent fail-closed shard merger that requires identical source, input and dense-evidence identities before applying the frozen fidelity gate.
 
 validation_commands:
   - ./scripts/validate-mst.sh
   - git diff --check
   - frozen all-layer teacher capture and independent evidence audit on physical NPU4-7
-  - one predeclared all-layer Dk48/Dk64/Dk80 replay on physical NPU4
+  - preserved combined replay report SHA256 53034d11638e368c632f25cb80b92a93a68072765ba73eea5917363c8dafce15
+  - three deterministic all-layer candidate-width shards on physical NPU4
+  - independent complete-shard merge under the original fidelity thresholds
 
-lessons_ingested: []
+lessons_ingested:
+  - A hard wall-clock timeout is inconclusive evidence even when it occurs inside a candidate trajectory; do not map exception location to algorithm failure.
+  - Once a complete dense semantic replay is hash-bound, bounded candidate shards can reuse that scoped gate without rerunning dense or weakening candidate numerical checks.
