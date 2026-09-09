@@ -4570,3 +4570,31 @@ separate matmul plus all-reduce for decode TPOT. The official fused path is
 roughly 2x faster than the explicit decomposition for both real M=1 shapes.
 The remaining TPOT opportunity needs a materially different lifecycle or
 operator design, not just replacing MMAR with ordinary all-reduce.
+
+## 2026-09-09 fresh GDN projection-fusion operator check
+
+To revalidate the strongest TTFT-side primitive in the current environment, the
+existing `scripts/benchmark_qwen35_gdn_projection_fusion.py` microbenchmark was
+run in a disposable official vLLM-Ascend 0.23.0 container with only physical
+NPU0 exposed while holding the cooperative NPU0-3 lease. No runtime patch,
+custom OPP, source overlay, or image mutation was used.
+
+The verified artifact root is
+`/cache/austinov/qwen35-gdn-projection-fusion-fresh-20260909T104335Z`; all
+entries in `SHA256SUMS` verified. The run exited cleanly and the post-run NPU
+snapshot showed no NPU0-7 processes. The fresh operator geomean speedup was
+`2.9508864879608154x`, with all correctness checks passing. Per-shape medians:
+
+| M | Separate qkvz+ba | Fused qkvzba | Speedup | Max abs error |
+|---:|---:|---:|---:|---:|
+| 1 | 101.7682 us | 34.3293 us | 2.96447x | 0.0 |
+| 5 | 101.3305 us | 34.3905 us | 2.94647x | 0.0 |
+| 8 | 99.0103 us | 33.7711 us | 2.93181x | 0.0 |
+| 16 | 99.0124 us | 33.4398 us | 2.96091x | 0.000244140625 |
+
+This confirms that GDN projection fusion remains a valid TTFT-side ingredient
+in the current environment, but it is not a service-level performance pass and
+does not establish the TPOT >=20% target. The standalone PR repository still
+contains the older t11 bounded-MMAR package; do not treat it as equivalent to
+the current t12/GDN runtime patch until the exact bytes are synchronized and
+the live gates pass.
