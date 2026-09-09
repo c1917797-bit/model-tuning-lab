@@ -28,6 +28,12 @@ SOURCES = {
     "weight_prefetch": Path(
         "/vllm-workspace/vllm-ascend/vllm_ascend/ops/weight_prefetch.py"
     ),
+    "linear": Path(
+        "/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear.py"
+    ),
+    "linear_op": Path(
+        "/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear_op.py"
+    ),
 }
 
 REQUIRED_METHODS = {
@@ -52,6 +58,22 @@ REQUIRED_METHODS = {
             }
         }
     },
+    "linear": {
+        "AscendRowParallelLinear": {
+            "__init__": {"self", "input_size", "output_size", "prefix"},
+            "forward": {"self", "input_"},
+        }
+    },
+    "linear_op": {
+        "MatmulAllreduceRowParallelOp": {
+            "__init__": {"self", "layer"},
+            "apply_impl": {"self", "input_"},
+        }
+    },
+}
+
+REQUIRED_FUNCTIONS = {
+    "linear_op": {"_get_row_parallel_op": {"prefix", "layer"}},
 }
 
 EXACT_METHOD_ANCHORS = {
@@ -62,6 +84,21 @@ EXACT_METHOD_ANCHORS = {
     ("ascend_gdn", "AscendGatedDeltaNetAttention", "forward"): (
         "    num_tokens = hidden_states.size(0)\n"
         '    if hasattr(self, "in_proj_qkv"):\n'
+    ),
+    ("linear", "AscendRowParallelLinear", "forward"): (
+        "    if self.custom_op is not None:\n"
+        "        return self.custom_op.apply(input_)\n"
+    ),
+    ("linear_op", "MatmulAllreduceRowParallelOp", "apply_impl"): (
+        "    if self.reduce_results and self.tp_size > 1:\n"
+        "        output = torch_npu.npu_mm_all_reduce_base(\n"
+    ),
+}
+
+EXACT_FUNCTION_ANCHORS = {
+    ("linear_op", "_get_row_parallel_op"): (
+        "    if matmul_allreduce_enable():\n"
+        "        return MatmulAllreduceRowParallelOp(layer)\n"
     ),
 }
 
@@ -80,6 +117,22 @@ def _methods(class_node: ast.ClassDef) -> dict[str, ast.FunctionDef | ast.AsyncF
         for node in class_node.body
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
     }
+
+
+def _functions(tree: ast.Module) -> dict[str, ast.FunctionDef | ast.AsyncFunctionDef]:
+    return {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+
+
+def _node_source(source: str, node: ast.FunctionDef | ast.AsyncFunctionDef) -> str:
+    return textwrap.dedent(
+        "".join(
+            source.splitlines(keepends=True)[node.lineno - 1 : node.end_lineno]
+        )
+    )
 
 
 def _arguments(method: ast.FunctionDef | ast.AsyncFunctionDef) -> set[str]:
@@ -126,13 +179,7 @@ def main() -> int:
                 anchor_key = (logical_name, class_name, method_name)
                 if anchor_key in EXACT_METHOD_ANCHORS:
                     method = methods[method_name]
-                    method_source = textwrap.dedent(
-                        "".join(
-                            source.splitlines(keepends=True)[
-                                method.lineno - 1 : method.end_lineno
-                            ]
-                        )
-                    )
+                    method_source = _node_source(source, method)
                     anchor = EXACT_METHOD_ANCHORS[anchor_key]
                     count = method_source.count(anchor)
                     if count != 1:
@@ -140,6 +187,30 @@ def main() -> int:
                             f"{logical_name}.{class_name}.{method_name}: "
                             f"expected exact v0.23.0 anchor once, found {count}"
                         )
+
+    for logical_name, required_functions in REQUIRED_FUNCTIONS.items():
+        source, tree = parsed[logical_name]
+        functions = _functions(tree)
+        for function_name, required_args in required_functions.items():
+            if function_name not in functions:
+                raise AssertionError(
+                    f"{logical_name}: missing function {function_name}"
+                )
+            function = functions[function_name]
+            missing_args = required_args - _arguments(function)
+            if missing_args:
+                raise AssertionError(
+                    f"{logical_name}.{function_name}: "
+                    f"missing arguments {sorted(missing_args)}"
+                )
+            anchor = EXACT_FUNCTION_ANCHORS.get((logical_name, function_name))
+            if anchor is not None:
+                count = _node_source(source, function).count(anchor)
+                if count != 1:
+                    raise AssertionError(
+                        f"{logical_name}.{function_name}: "
+                        f"expected exact v0.23.0 anchor once, found {count}"
+                    )
 
     if "MergedColumnParallelLinear" not in parsed["qwen_gdn"][0]:
         raise AssertionError("qwen_gdn: MergedColumnParallelLinear is unavailable")

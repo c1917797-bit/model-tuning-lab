@@ -4408,3 +4408,71 @@ official image remained
 `sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
+
+## 2026-09-09 CANNBot workflow audit and exact-control restart
+
+The user supplied `/cache/cch/cannbot-skills`, `/cache/cch/ops-transformer`,
+and `/cache/cch/vllm-ascend`. The inspected source identities are CANNBot
+`d5e0d44b7a1d2e90c5f0b9fb62970fb3bac89ec3`, official ops-transformer
+`0684247214bae5abb5cb6dc7d90b34a6ad401cdd`, and the local vLLM-Ascend
+checkout `222677fc719c7014879b161ed1dd3ed3276d7a5d`. The last checkout is `main`
+and does not contain the v0.23.0 MMAR integration class, so it is not an
+authority for the pinned image. The official image source contract now also
+parses `linear.py` and `linear_op.py` and proves the complete
+`AscendRowParallelLinear -> _get_row_parallel_op ->
+MatmulAllreduceRowParallelOp -> npu_mm_all_reduce_base` seam. The expanded
+no-network, no-NPU contract test passed against the pinned image.
+
+CANNBot is a gated analysis/development workflow, not a black-box operator
+generator. The existing t11/t12, AICPU-first, and IPC fullmesh runs are legacy
+evidence and must not be relabeled as formal CANNBot rounds. A formal current
+round still needs exact-control baseline metadata, a new round0 profile,
+perf-breakdown, candidate-source records, and only then a Plan dashboard. The
+required BF16 operator gate uses elementwise mixed tolerance
+`atol=rtol=2^-6`, matched ratio at least 0.99, and max absolute error at most
+1.0. The earlier AICPU-first max-absolute results 1.25/2.0 do not establish
+that gate. The 32-row semantic canary remains bounded evidence; the all-357
+paired gate is still required, and the dataset's empty answer fields prevent
+an external-ground-truth accuracy claim.
+
+The v7 diagnostic at ops-transformer commit `299c0ef` built successfully in a
+disposable, no-network, no-NPU official-image container. The generated package
+is
+`/cache/cch/.worktrees/exp-20260908-qwen35-mmar-ipc-fullmesh/build_out/cann-ops-transformer-qwen35_mmar_ipc_fullmesh_v7_no_finalize_transformer_linux-aarch64.run`
+with whole-file SHA256
+`c39c51b62dcb7ad5b932a3841706b639636a1bdf62747d86e9140ffb801e8393`.
+Its self-extractor reports an internal payload SHA256
+`4e31aa62a080678f0d22780020151c2d426b47eb49d0b95bb57f21c508595cae`;
+these are different identities and must not be interchanged. It was installed
+only into
+`/cache/cch/qwen35-mmar-ipc-fullmesh-v7-no-finalize-custom-opp` by a
+no-network, no-NPU, read-only-rootfs disposable container. The base image was
+not modified.
+
+Do not promote or blindly rerun v7. Source audit found unbalanced HCCL
+lifecycle, an unproven claim on the HCCL window's final 1 MiB, fixed-magic
+restart/ABA risk, non-global error decisions, scalar `GetValue/SetValue`
+polling in the hot path, three full-core barriers, and no restart/fault/multi-
+stream coverage. Existing v4 evidence already stalled before Finalize, so
+"Finalize is the root cause" is not established. The next operator decision
+must first decompose the exact BF16 TP4 shapes `[M,1536] x [1536,5120]` and
+`[M,4352] x [4352,5120]` into MatMul-only, AllReduce-only, official fused
+MMAR, exchange-only, and reduce-only costs using per-rank msprof evidence.
+
+At 2026-09-09 08:40 UTC, the live resource gate proved NPU0-3 had no process
+or running-container declaration, port 10010 was free, the cooperative lease
+was obtainable, and MemAvailable exceeded 48 GiB. The only running accelerator
+container declared physical NPU4-7. A fresh control was therefore started on
+physical NPU0-3 as the exact one-shot container
+`qwen35_cannbot_round0_control_npu03`, supervised under
+`/cache/austinov/qwen35-cannbot-round0-control-20260909T0845Z`. It uses the
+unchanged official vLLM-Ascend 0.23.0 image with the patch disabled and no
+custom OPP. API readiness passed, all four workers are present, and the fixed
+smoke returned `测试完成。` with natural EOS; response SHA256 is
+`f898333f9851fc10d1b0a44c18c3f24b447f4ed25900b3415e8bc7be464dd499`.
+The frozen c1/32 control measurement is currently operation
+`exec-0000000000000b96`. Do not restart it or launch a second NPU0-3 owner.
+After it completes, verify its artifact before c16. Then stop only this exact
+container or use it to prepare the exact-control profiling transition; never
+attach the rejected dynamic `/stop_profile` path to this production-style
+service.
