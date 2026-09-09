@@ -19,10 +19,10 @@ completes Qwen3.5 performance or accuracy acceptance.
 
 ## Current action
 
-Push this start checkpoint, then create a deliberate two-parent merge whose
-second parent is the exact source HEAD. Keep the source tree identical under
-the project prefix except for explicitly documented project-level governance
-additions or adaptations.
+The start checkpoint is pushed. A deliberate two-parent import merge is being
+prepared with the exact source HEAD as its second parent. The 10 tracked source
+files are staged byte-for-byte under the project prefix; project governance
+files and registry metadata are explicit additions.
 
 ## Next actions
 

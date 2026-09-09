@@ -14,3 +14,14 @@ projects:
     source_branch: research/qwen38-drrqr-correctness-20260908
     source_commit: 7eec54c9caacad3f37f80a493e01171ec8f62003
     history: retained-as-merge-parent
+  - id: qwen35_vllm_ascend_patch
+    path: projects/qwen35_vllm_ascend_patch
+    status: active-research
+    kind: python-runtime-monkeypatch
+    source_repository: https://github.com/c1917797-bit/qwen35-vllm-ascend-patch.git
+    source_branch: feature/qwen35-validated-runtime-patch
+    source_commit: c61f5f984e13e2ca37fd410783b7e97f960a57f3
+    source_tree: 64eb17532737d46e1ea825cb7d75468ea2f91630
+    source_commit_count: 3
+    history: retained-as-merge-parent
+    import_commit: pending-followup
