@@ -35,6 +35,24 @@ real improvement.
 8. Classify the result using `ascend-inference-tuning-loop` and commit/push the
    measurement stage even when it fails or shows no benefit.
 
+## Translation and progression gates
+
+Operator or microbenchmark speedup is mechanism evidence, not a service result.
+Before predicting E2E impact, record the real service shapes, affected calls,
+covered fraction, baseline and candidate per-call delta, overlap or critical
+path, and an optimistic maximum service-level benefit. Then measure the same
+candidate bytes in the service.
+
+Separate diagnostic instrumentation from the candidate treatment. Profiled or
+instrumented timing may select a hypothesis, but must not be reported as the
+candidate's performance result unless the instrumentation overhead is isolated.
+
+Use a predeclared fail-fast progression: first run correctness and representative
+low/high boundary concurrency. Expand to the full repetition matrix only when
+every primary metric passes its progression threshold and no safety, quality,
+or tail-risk gate fails. Preserve the stopped result; do not consume a full
+matrix to reconfirm a clearly missed gate.
+
 ## Comparability Gate
 
 Do not compare results when material source, model, hardware, driver, firmware,
@@ -48,12 +66,20 @@ differs. Re-baseline instead.
 - A single warm run cannot establish steady-state performance.
 - Host telemetry cannot prove physical NPU execution.
 - A faster compile cache hit is not a cold-start improvement.
+- Matching response bytes are strong deterministic evidence, but they are not
+  automatically full semantic accuracy when generation is stochastic, natural
+  stopping differs, or the reference dataset lacks ground-truth answers. State
+  the exact quality claim the oracle supports.
 
 ## Verification
 
 - Baseline and candidate environment fingerprints match.
 - Correctness gates pass before a performance win is accepted.
 - Commands, thresholds, repetitions, and exclusions are recorded.
+- Candidate bytes, activation evidence, and diagnostic overhead treatment are
+  recorded.
+- Microbenchmark claims include an E2E translation bound and are not relabeled
+  as service wins.
 - Cold, steady, boundary, lifecycle, and resources are reported separately or
   explicitly marked out of scope.
 - Raw artifact hashes resolve and no protected data is committed.

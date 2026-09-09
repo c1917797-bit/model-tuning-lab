@@ -32,11 +32,12 @@ skills:
   - id: ascend-benchmark-evidence
     path: .agents/skills/ascend-benchmark-evidence
     status: experimental
-    purpose: Produce comparable correctness and performance evidence on Ascend NPUs.
+    purpose: Produce comparable Ascend evidence with correctness, E2E translation, and fail-fast progression gates.
     triggers:
       - benchmark an inference change
       - compare an optimization with its baseline
       - accept or reject a performance claim
+      - translate an operator microbenchmark to service impact
     scope:
       - configs/**
       - scripts/**
@@ -46,7 +47,7 @@ skills:
   - id: ascend-cannbot-profiler
     path: .agents/skills/ascend-cannbot-profiler
     status: experimental
-    purpose: Use cannbot/CANN profiler and operator evidence to explain Ascend inference bottlenecks before low-level changes.
+    purpose: Use cannbot/CANN critical-path and collective-lifecycle evidence before low-level Ascend changes.
     triggers:
       - cannbot-skills
       - CANN profiler
@@ -54,6 +55,7 @@ skills:
       - msprof or asys analysis
       - kernel bottleneck on Ascend
       - HCCL communication analysis
+      - custom multi-rank collective lifecycle
     scope:
       - AGENTS.md
       - docs/**
@@ -66,11 +68,12 @@ skills:
   - id: ascend-inference-tuning-loop
     path: .agents/skills/ascend-inference-tuning-loop
     status: experimental
-    purpose: Run the Git-recorded hypothesis-to-decision tuning flywheel.
+    purpose: Run the Git-recorded tuning flywheel with opportunity admission and closed-route learning.
     triggers:
       - start or resume an inference optimization
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
+      - bound recoverable E2E opportunity before implementation
     scope:
       - configs/**
       - scripts/**
@@ -139,11 +142,12 @@ skills:
   - id: ascend-canary-implementation
     path: .agents/skills/ascend-canary-implementation
     status: experimental
-    purpose: Implement the first minimal one-variable Ascend inference canary before full benchmarks or broad source changes.
+    purpose: Implement a minimal Ascend canary with exact runtime-path and per-process activation proof.
     triggers:
       - Ascend canary implementation
       - minimal paper implementation
       - one-variable inference canary
+      - runtime monkeypatch activation proof
       - 最小可验证实现
     scope:
       - configs/**
