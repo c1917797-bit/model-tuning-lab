@@ -2,9 +2,11 @@
 
 ## 0. Status
 
-- Execution: started; integration: not-ready.
+- Execution: in-progress; integration: not-ready.
 - Branch: work/qwen35-experience-ingestion-20260909.
 - Base: origin/main at 31c43a4c249c9d4c597372f47d989a7c10b2c9c4.
+- Resume checkpoint: 88dc4f3e8568892de2d80f7ec503b61a0b14620c;
+  its existing six-file lesson update was validated and pushed in this turn.
 
 ## 1. North Star
 
@@ -25,8 +27,10 @@ reference answers.
 
 ## 4. Current Action
 
-Update the four narrow Ascend skills and the concise lessons ledger, then run
-the full Maintainer Skill Tree validation.
+Audit historical claims against artifacts; add a compact takeover packet,
+structured lesson/evidence ledgers, warmup-generalization safeguards and
+executable verification. Preserve all dirty performance-workstream material.
+No NPU service mutation is part of this documentation task.
 
 ## 5. Next Actions
 

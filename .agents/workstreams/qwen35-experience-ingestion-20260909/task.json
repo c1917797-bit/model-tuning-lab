@@ -20,13 +20,28 @@
     {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-benchmark-evidence/SKILL.md"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-inference-tuning-loop/SKILL.md"},
     {"kind":"file","mode":"exclusive","value":"docs/LESSONS_LEARNED.md"},
-    {"kind":"knowledge","mode":"shared","value":".agents/HANDOFF.md"}
+    {"kind":"knowledge","mode":"shared","value":".agents/HANDOFF.md"},
+    {"kind":"file","mode":"exclusive","value":"docs/handovers/qwen35-mtp-off/"},
+    {"kind":"file","mode":"exclusive","value":".agents/evals/transformation-cases/qwen35-evidence-handoff.yaml"},
+    {"kind":"file","mode":"exclusive","value":"scripts/validate_qwen35_handoff.py"},
+    {"kind":"file","mode":"exclusive","value":"tests/test_qwen35_handoff.py"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills.registry.yaml:ascend-benchmark-evidence,ascend-inference-tuning-loop"}
   ],
   "validationCommands": [
     "./scripts/validate-mst.sh",
     "python3 -m json.tool .agents/workstreams/qwen35-experience-ingestion-20260909/task.json",
     "git diff --check"
   ],
-  "executionState": "started",
-  "integrationState": "not-ready"
+  "executionState": "in-progress",
+  "integrationState": "not-ready",
+  "resumeSource": "88dc4f3e8568892de2d80f7ec503b61a0b14620c",
+  "dependencyScope": "The performance workstream is a read-only evidence dependency, not a prerequisite to claim performance completion. Its dirty runtime files are excluded from this documentation workstream.",
+  "resourceLeases": [],
+  "boundaries": [
+    "Do not modify, stage, reset or clean the dirty performance worktree.",
+    "Do not start, stop or benchmark any NPU service during handoff preparation.",
+    "Do not update global HANDOFF or main with unmerged progress.",
+    "Preserve verified artifact hashes, uncertainty, missing evidence and original denominators.",
+    "Keep credential values, raw prompts, weights and raw profiles outside Git."
+  ]
 }
