@@ -1,8 +1,9 @@
-schema: practice-iteration/v1
+schema: mst-practice-iteration/v1
 id: drrqr-native-teacher-fidelity-v1
 repository: model-tuning-lab
 status: in_progress
 date: 2026-09-09
+validated_commit: pending
 
 stage_goal: Decide whether fixed retained-key beta compensation merits DRRQR model integration by replaying frozen real-model trajectories against the captured dense teacher.
 

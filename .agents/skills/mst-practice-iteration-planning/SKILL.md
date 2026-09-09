@@ -50,11 +50,12 @@ evidence to choose the next iteration without silently weakening the objective.
 Each iteration is recorded in `.agents/evals/practice-iterations/<id>.yaml`:
 
 ```yaml
-schema: practice-iteration/v1
+schema: mst-practice-iteration/v1
 id: <descriptive-slug>
 repository: <target-repo-name>
 status: done | in_progress | blocked
 date: YYYY-MM-DD
+validated_commit: pending  # replace with the validated implementation/evidence commit when done
 
 stage_goal: <one sentence>
 
@@ -98,6 +99,9 @@ If an iteration requires more than 5 file changes or 2 structural changes, split
 ## Verification
 
 - Every iteration has at least one `validation_commands` entry.
+- `validated_commit` is `pending` only while work is in progress; completed
+  iterations identify the immutable implementation or evidence commit actually
+  covered by the recorded validation.
 - Every iteration links its short-term decision to a current gap and
   medium-term milestone without weakening the long-term objective.
 - Deciding evidence, budget, and pass/failure/inconclusive actions are explicit.
