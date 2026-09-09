@@ -2,24 +2,28 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-07.
+- Last updated: 2026-09-09.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
-- Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
+- Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction,
+  the expanded Paper-to-Ascend pipeline, and tightened Ascend opportunity,
+  runtime-path, evidence, collective-lifecycle, and container-state gates.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide`, with pushed evidence, negative-result retention, and explicit recovery checkpoints.
 - Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
 - The repository-specific active worktree budget is eight.
-- Two Qwen3.5 branch-local tracks are deliberately separate and are not
+- Active Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
-    performance loop. Its current user gate is TTFT P95 and TPOT P95 >=1.5x
-    at c1/c5/c8/c16 versus the frozen TP4 MTP-off `query_rewrite` baseline.
+    performance loop. Its current user gate is at least 40% lower TTFT P95 and
+    at least 20% lower TPOT P95 at c1/c5/c8/c16 versus the frozen TP4 MTP-off
+    `query_rewrite` baseline, with zero material quality regressions.
     BF16, no quantization/retraining/MTP/speculation, and runtime-monkeypatch
     delivery are mandatory. It is blocked on a valid NPU0-3 lease.
-  - `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend` is the paper
-    migration/research track. Its old MTP candidate is policy-rejected, owns
-    no NPU/port lease, and must select a new non-speculative paper before any
-    further experiment.
+  - The old dense-MTP and prefix-cache candidates are superseded. Their remote
+    branches retain negative evidence, but their worktrees were reclaimed and
+    rejected code was not merged into `main`.
+  - `work/drror-objective-loop-skill-20260909` retains imported DRRQR/objective
+    history for adaptation; it is not integration-ready and remains branch-local.
 - Local Git state alone does not prove current target-host runtime state. Re-check NPU, container, port, memory, process, controller, and worktree ownership before touching hardware.
 - Validation in this maintenance turn: Git status/log checks passed; `git diff --check` on the documentation update passed; a CRLF-tolerant Maintainer Skill Tree structure check passed with 26 skills. `./scripts/validate-mst.sh` was attempted on Windows and failed on CRLF shell-script parsing before repository checks; `python -m pytest` was attempted with the local Python 3.9 and failed because `pytest` is not installed. Run full validation on the Linux target before claiming execution readiness.
 
@@ -52,6 +56,13 @@ Keep the distinction between three kinds of knowledge explicit:
 3. live host state that must be re-proven each session.
 
 ## 3. Recent Progress
+
+- Consolidated target-host worktrees from eight to five: every committed
+  checkpoint was pushed, two superseded experiment worktrees were safely
+  reclaimed, and the transient consolidation worktree was removed after
+  integration. Dirty or not-ready worktrees were preserved.
+- Isolated and integrated only the three validated maintainer-skill commits
+  from a history-coupled branch. DRRQR/project imports remain branch-local.
 
 - Integrated the Ascend maintainer skills, experiment schema, workstream policy, and commit-implies-push tuning flywheel.
 - Diagnosed low ordinary memory as a roughly 1.9 TiB 1 GiB HugeTLB reservation rather than ordinary process consumption; no risky hugepage release was performed.
@@ -88,16 +99,17 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
+2. Inventory the four retained non-main worktrees on the target host. Read each
+   `task.json` and `HANDOFF.md` before touching files, containers, ports,
+   processes, or NPUs.
 3. For the Qwen3.5 performance loop, read branch commit
    `c71de549b3ee32030799d66198786d8619aba3c1`. Do not retry the rejected
    bounded-MMAR stack unchanged. Prove NPU0-3 ownership, then gate a materially
    new ASCEND910B decode MMAR/HCCL lifecycle implementation on exact BF16 M=1
    shapes before another E2E launch.
-4. For Qwen3.5 Paper-to-Ascend, do not resume the old MTP experiment. Select a
-   non-speculative, no-retraining, no-quantization paper from a measured dense
-   bottleneck and treat its result as candidate input, not final performance
-   evidence.
+4. Do not recreate or resume the old MTP or prefix-cache worktrees. Their remote
+   branches are evidence archives. Any new paper candidate requires a new
+   workstream and must be non-speculative, no-retraining, and no-quantization.
 5. For future Paper-to-Ascend work, choose the narrow route:
    - new paper idea: `paper-ingestion` -> `ascend-architecture-fit` -> `ascend-source-map` -> canary;
    - prior success or historical ruler: `paper-to-ascend-reproduction`;
@@ -164,10 +176,9 @@ If a `work/*` branch is active, read its `.agents/workstreams/<task-id>/task.jso
 
 HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.
 
-Qwen3.5-specific takeover reminder: on chicaihong01 read both target-host
-branch-local handoffs before acting:
+Qwen3.5-specific takeover reminder: on chicaihong01 read the active target-host
+branch-local handoff before acting:
 
 ```text
 /opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e/.agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/HANDOFF.md
-/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-dense-mtp-paper-to-ascend/.agents/workstreams/exp-20260904-qwen35-dense-mtp-paper-to-ascend/HANDOFF.md
 ```

@@ -80,6 +80,12 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 
 - Re-prove physical NPU/process/container ownership in the same session as each
   action. HTTP health or container existence alone is insufficient.
+- Report container device declarations together with container state. By
+  default, running containers and live processes are active occupancy claims;
+  exited containers are historical provenance that still requires owner and
+  cleanup review but does not by itself prove current device use. If the user
+  or experiment contract explicitly says any declaration blocks allocation,
+  apply that stricter gate without reinterpretation.
 - Treat NPU0-3, NPU4-7, ports, and running services as leased resources, not
   permanent assignments.
 - Do not stop, restart, or replace a workload until its owning workstream and
@@ -107,6 +113,8 @@ the workstream upstream. Serialized integration alone updates `main`.
 - AWMCP response proves the intended direct target.
 - Commands run from the canonical target repository.
 - Live Git, container, port, memory, and NPU state are captured before mutation.
+- Container occupancy reports include state and identify whether the default
+  active-claim rule or an explicitly stricter declaration rule was applied.
 - No verification value or other credential appears in tracked files or diffs.
 - `./scripts/validate-mst.sh` and `git diff --check` pass.
 
