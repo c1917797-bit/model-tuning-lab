@@ -77,6 +77,24 @@ gdn-teacher-captured-reference.v2.summary.json. Postflight found no NPU
 process and only the original container bash. No accuracy or endpoint
 performance test was run.
 
+The subsequent aligned-width replay completed once inside the same audited
+dedicated container on logical0 (physical4). Dense128, energy48, energy64 and
+energy80 each completed 48/48 trajectories; all 192 trajectories and all 1728
+prefill/decode steps passed native eager, full-state and NPUGraph byte gates.
+The aggregate post-RMS relative-L2 means were 0.4080521737, 0.2936645543 and
+0.2059228392 for Dk48, Dk64 and Dk80. The curve was monotonic, and the Dk80
+to Dk64 ratio was 0.7012178902, exceeding the required 15 percent improvement.
+All 144 robustness windows passed; the worst ratio was 1.0264260557, below
+the frozen 1.05 limit. The valid report SHA256 is
+f635211b4e06dea25a9cf16aa047e403fe6c5ab4fda2506d45bc554882338803 and
+the token-fidelity SHA256 is
+26660a65d1edab252dae6a2ab4aaa6b4fdf3d46a5efc23b9decf4c3f9a9eb522.
+Postflight found no NPU process. This result admits an all-48-layer teacher
+sensitivity capture and equal-cost aligned-width allocation study only. It
+does not admit mixed-cache implementation, endpoint performance, task
+accuracy, exact StrongRRQR, or portability claims. See
+gdn-teacher-width-curve.v1.summary.json.
+
 The next one-case NPU diagnosis ran only Ascend prefill L2(raw_K), not a model,
 chunk or candidate replay. Actual BF16 K exactly matched CPU-normalized K; the
 original FP32 reference state was reproduced byte-for-byte and all 43 original

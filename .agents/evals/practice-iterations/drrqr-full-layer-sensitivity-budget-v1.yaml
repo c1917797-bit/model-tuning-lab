@@ -1,0 +1,29 @@
+schema: mst-practice-iteration/v1
+id: drrqr-full-layer-sensitivity-budget-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-09
+validated_commit: pending
+
+stage_goal: Use a frozen all-48-layer dense teacher to decide whether an aligned Dk48/Dk64/Dk80 layerwise allocation can improve DRRQR fidelity at no more state cost than uniform Dk64.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: The six-layer aligned-width replay passed numerics and showed Dk80 reduces global local-fidelity error by 29.878211 percent versus Dk64, but it does not reveal all-layer sensitivity or establish an equal-cost heterogeneous plan, endpoint speed, task accuracy, or portability.
+  medium_term_milestone: A numerically defensible, portable aligned layerwise DRRQR plan whose total state-width budget is no greater than uniform Dk64 and whose real-teacher fidelity justifies mixed-width cache/runtime implementation.
+  short_term_decision: Capture and audit all 48 linear-attention layers under the frozen two-sequence teacher protocol, replay Dk48/Dk64/Dk80, and accept or reject an equal-or-lower-cost layerwise allocation using only predeclared trajectory errors.
+  deciding_evidence: All 3456 teacher records and all width replays must pass identity, state-continuity, native eager and NPUGraph gates. The selected layer map must use only 16-aligned Dk48/Dk64/Dk80, have sum(Dk) no greater than 48 times 64, improve aggregate post-RMS relative-L2 by at least 10 percent versus uniform Dk64, and have no layer-rank-sequence window worsen by more than 5 percent.
+  budget_or_stop_rule: One all-layer TP4 teacher capture/audit on physical NPU4-7 and one combined replay on physical NPU4, each bounded to 3600 seconds with no automatic retry; no mixed-cache implementation, endpoint benchmark, profiling expansion, or accuracy run in this iteration.
+  on_pass: Implement the exact selected aligned layer groups in the plugin-owned weight slicing, cache allocation, scheduler and graph-key path, beginning with all-Dk64 equivalence and explicit portability contracts.
+  on_failure: Reject equal-cost simple Dk48/Dk64/Dk80 layer allocation for the current energy selector and return to selector or recurrence-compensation design using the preserved all-layer teacher evidence.
+  on_inconclusive: Preserve partial evidence and repair only a demonstrated capture, identity, runtime, or audit defect without changing the state budget or fidelity thresholds.
+
+changes: []
+
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - frozen all-layer teacher capture and independent evidence audit on physical NPU4-7
+  - one predeclared all-layer Dk48/Dk64/Dk80 replay on physical NPU4
+
+lessons_ingested: []

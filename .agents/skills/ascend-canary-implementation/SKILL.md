@@ -22,6 +22,12 @@ Ascend path.
    before custom source changes.
 4. Run a small deterministic workload first. Prove load, request success,
    output validity, and the intended physical NPU/process execution.
+   For structured dimension or state pruning, replay at least one aligned
+   width below and above the current candidate on the same real captured
+   trajectories before investing in heterogeneous runtime support. Require a
+   monotonic aggregate fidelity curve and retain layer/rank/sequence window
+   gates; a passing local curve admits broader sensitivity capture only, not
+   endpoint performance or task accuracy.
 5. Compare against a tiny baseline under the same environment fingerprint before
    any larger benchmark.
 6. If correctness fails, classify the stage as `failed` and recover active code.

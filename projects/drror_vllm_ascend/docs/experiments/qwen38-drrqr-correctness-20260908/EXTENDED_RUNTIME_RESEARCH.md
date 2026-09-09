@@ -87,6 +87,15 @@ one pair only. TTFT improvement 3.529799%; TPOT improvement 3.955922%.
 Current accuracy preflight: 39.370% (50/127), compared with historical baseline
 mean 45.407%, at max_tokens=1024. Final 2048 evaluation and GSM8K remain missing.
 
+The aligned real-teacher Dk48/Dk64/Dk80 width curve now passes its bounded NPU
+gate. All 192 trajectories and 1728 steps passed native eager/state/NPUGraph
+checks. Mean post-RMS relative-L2 was 0.408052174, 0.293664554 and 0.205922839;
+Dk80/Dk64 was 0.701218 and all 144 local windows stayed within the 1.05 limit.
+This admits full-48-layer sensitivity capture and equal-cost layer allocation,
+not mixed-cache implementation, endpoint performance, accuracy or portability.
+Report SHA256:
+f635211b4e06dea25a9cf16aa047e403fe6c5ab4fda2506d45bc554882338803.
+
 On resumption, npu-smi showed no processes on physical NPU4–7 and docker inspect
 confirmed host devices 4,5,6,7 map to container devices 0,1,2,3 in
 drrqr_qwen38_energy_preflight_20260908. Recheck before new NPU work.

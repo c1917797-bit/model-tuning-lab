@@ -141,11 +141,12 @@ skills:
   - id: ascend-canary-implementation
     path: .agents/skills/ascend-canary-implementation
     status: experimental
-    purpose: Implement the first minimal one-variable Ascend inference canary before full benchmarks or broad source changes.
+    purpose: Implement the first minimal one-variable Ascend inference canary, including aligned-width fidelity screens for structural pruning, before full benchmarks or broad source changes.
     triggers:
       - Ascend canary implementation
       - minimal paper implementation
       - one-variable inference canary
+      - aligned-width pruning canary
       - 最小可验证实现
     scope:
       - configs/**

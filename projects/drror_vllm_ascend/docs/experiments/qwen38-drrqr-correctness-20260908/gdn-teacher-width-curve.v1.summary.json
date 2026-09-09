@@ -1,0 +1,72 @@
+{
+  "schema": "drrqr-gdn-width-curve-summary/v1",
+  "date": "2026-09-09",
+  "status": "accepted_for_full_layer_sensitivity_capture",
+  "claim_boundary": "Real captured-dense local GDN trajectory fidelity on six sampled layers and four TP ranks. This is not a mixed-width runtime implementation, task accuracy, endpoint performance, exact StrongRRQR reproduction, or cross-environment validation.",
+  "source": {
+    "commit": "64af0558f0859ca2c18636d13bd8ca994e8860a4",
+    "script_sha256": "706a74bf4b0fa60b38722842af064000c3c794c4ae04cf697475cc28f89182fc",
+    "captured_reference_helper_sha256": "3695cd8d312839a79884feb013dc87f325d864d229f322d9151fa8d93e0b7e98"
+  },
+  "plans": {
+    "48": {
+      "sha256": "17e9d4bc7caae32a082aa25bd4cae3d69c548c27e5c030ceea3818544f92c433",
+      "selection_objective": "energy-kernel"
+    },
+    "64": {
+      "sha256": "b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c",
+      "selection_objective": "energy-kernel"
+    },
+    "80": {
+      "sha256": "934ef84ddea2ab0544ac0146d1ab4c3a8fd47d53e97cde6222a3ac2b2ca648ae",
+      "selection_objective": "energy-kernel"
+    }
+  },
+  "valid_execution": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-width-curve-v1/report.json",
+    "sha256": "f635211b4e06dea25a9cf16aa047e403fe6c5ab4fda2506d45bc554882338803",
+    "token_fidelity_path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-width-curve-v1/token-fidelity.json",
+    "token_fidelity_sha256": "26660a65d1edab252dae6a2ab4aaa6b4fdf3d46a5efc23b9decf4c3f9a9eb522",
+    "physical_npus_observed": [4],
+    "container_visible_devices": [0, 1, 2, 3],
+    "duration_seconds": 504.7691095,
+    "trajectory_count": 192,
+    "step_count": 1728,
+    "all_trajectories_passed": true,
+    "all_steps_passed": true,
+    "dense_capture_gate_passed": true,
+    "candidate_numerical_gate_passed": true,
+    "loaded_library_count": 9
+  },
+  "fidelity": {
+    "global_mean_relative_l2": {
+      "energy48": 0.4080521736866692,
+      "energy64": 0.29366455430278493,
+      "energy80": 0.20592283920632326
+    },
+    "aggregate_monotonic_48_64_80": true,
+    "energy80_over_energy64": 0.7012178902395045,
+    "energy80_global_ratio_limit": 0.85,
+    "group_window_ratio_limit": 1.05,
+    "group_window_count": 144,
+    "failed_group_window_count": 0,
+    "worst_group_window": {
+      "sequence_id": "teacher-1",
+      "rank": 1,
+      "layer": 0,
+      "window": "prefill_late",
+      "energy64_mean": 0.07565787667408586,
+      "energy80_mean": 0.07765721593750641,
+      "ratio": 1.026426055703799
+    },
+    "passed": true
+  },
+  "decision": {
+    "full_layer_sensitivity_capture_admitted": true,
+    "mixed_width_runtime_implementation_admitted": false,
+    "performance_admitted": false,
+    "task_accuracy_admitted": false,
+    "next_candidate_family": "equal-or-lower-state-cost aligned layerwise Dk48/Dk64/Dk80",
+    "next_required_evidence": "Capture and audit all 48 linear-attention layers, then solve and replay a layerwise map with sum(Dk) no greater than uniform Dk64."
+  }
+}

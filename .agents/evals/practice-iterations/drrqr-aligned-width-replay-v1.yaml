@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-aligned-width-replay-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-09
-validated_commit: pending
+validated_commit: 64af0558f0859ca2c18636d13bd8ca994e8860a4
 
 stage_goal: Determine whether aligned Dk48 and Dk80 provide a stable real-teacher fidelity curve that justifies full-layer sensitivity capture and a portable mixed-width DRRQR candidate.
 
@@ -36,4 +36,27 @@ validation_commands:
   - git diff --check
   - one predeclared physical-NPU4 replay in the existing audited dedicated container
 
-lessons_ingested: []
+result:
+  outcome: accepted_for_full_layer_sensitivity_capture
+  evidence_level: real captured-tensor NPU aligned-width trajectory screen
+  claim_ceiling: Aligned energy-selector Dk48, Dk64 and Dk80 form a numerically valid monotonic local-fidelity curve on the frozen six-layer teacher protocol; this admits full-layer sensitivity capture only, not mixed-cache integration, endpoint performance, task accuracy, exact StrongRRQR reproduction, or portability acceptance.
+  report_sha256: f635211b4e06dea25a9cf16aa047e403fe6c5ab4fda2506d45bc554882338803
+  token_fidelity_sha256: 26660a65d1edab252dae6a2ab4aaa6b4fdf3d46a5efc23b9decf4c3f9a9eb522
+  trajectory_count: 192
+  step_count: 1728
+  global_mean_relative_l2:
+    energy48: 0.4080521736866692
+    energy64: 0.29366455430278493
+    energy80: 0.20592283920632326
+  energy80_over_energy64: 0.7012178902395045
+  failed_group_windows: 0
+  worst_group_window_ratio: 1.026426055703799
+  next_decision: Capture and audit all 48 linear-attention layers, then solve an equal-or-lower-state-cost aligned Dk48/Dk64/Dk80 allocation before implementing mixed-width runtime support.
+
+lessons_ingested:
+  - lesson: For structural dimension or state pruning, a lower/current/higher aligned-width replay on identical real trajectories should precede heterogeneous runtime work; monotonic global fidelity and local-window gates admit broader sensitivity capture but do not establish performance or accuracy.
+    destination: .agents/skills/ascend-canary-implementation/SKILL.md
+    severity: high
+  - lesson: Preserve the local-screen claim ceiling even when every native eager and NPUGraph trajectory passes; the next gate is full-layer allocation under an explicit state-cost budget.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
+    severity: high

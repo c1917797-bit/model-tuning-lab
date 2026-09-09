@@ -22,6 +22,14 @@
   ef3df3559bd0ae234c79dda6bafd643177bb412020cb31d8988d0a98150ef3a2.
   No accuracy or endpoint-performance run followed. Resume from
   drrqr-aligned-width-replay-v1, not from fixed beta.
+- The aligned Dk48/Dk64/Dk80 captured-teacher screen is complete and accepted
+  for full-layer sensitivity capture. All 192 trajectories and 1728 steps
+  passed native eager/state/NPUGraph gates. Global mean relative-L2 was
+  0.408052174/0.293664554/0.205922839, Dk80/Dk64 was 0.701218, and all 144
+  local windows passed with a worst ratio of 1.026426. Report SHA256:
+  f635211b4e06dea25a9cf16aa047e403fe6c5ab4fda2506d45bc554882338803.
+  This is not endpoint performance or accuracy. Resume from
+  drrqr-full-layer-sensitivity-budget-v1.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -57,11 +65,12 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
    candidate and mechanism evidence, but only the separate `query_rewrite`
    performance workstream owns its frozen denominator, final quality gate,
    serving delivery contract, and performance acceptance decision.
-5. **Qwen3.8 DRRQR:** keep algorithm selection primary. The next bounded
-   decision is an aligned Dk48/Dk64/Dk80 real-teacher width curve. Do not
-   implement mixed-Dk cache/runtime support until that curve admits a concrete
-   candidate; do not run final accuracy before a candidate survives numerical
-   and fixed-1024-token endpoint screening.
+5. **Qwen3.8 DRRQR:** keep algorithm selection primary. The aligned
+   Dk48/Dk64/Dk80 six-layer real-teacher curve passed. The next bounded
+   decision is an all-48-layer capture plus equal-or-lower-cost layerwise
+   allocation. Do not implement mixed-Dk cache/runtime support until that
+   allocation passes; do not run final accuracy before a candidate survives
+   numerical and fixed-1024-token endpoint screening.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -104,11 +113,13 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. For Qwen3.8 DRRQR, execute the bounded aligned-width iteration: prepare
-   immutable energy-kernel Dk48/Dk80 plans, qualify their software contracts,
-   and run one combined six-layer captured-teacher replay in the existing
-   audited dedicated container. A passing width curve admits full-layer
-   sensitivity capture, not mixed-cache implementation or an accuracy claim.
+2. For Qwen3.8 DRRQR, execute
+   drrqr-full-layer-sensitivity-budget-v1: capture and audit all 48
+   linear-attention layers, replay aligned Dk48/Dk64/Dk80, and solve a
+   layerwise plan whose sum(Dk) is no greater than uniform Dk64. Require at
+   least 10 percent aggregate local-fidelity improvement and no local window
+   regression above 5 percent. This stage still does not admit endpoint or
+   accuracy claims.
 3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
 4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
@@ -189,10 +200,12 @@ Qwen3.8 DRRQR-specific resume files:
 
 ```text
 .agents/evals/practice-iterations/drrqr-aligned-width-replay-v1.yaml
+.agents/evals/practice-iterations/drrqr-full-layer-sensitivity-budget-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-captured-reference.v2.summary.json
+projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-width-curve.v1.summary.json
 ```
 
 HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.
