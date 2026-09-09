@@ -30,10 +30,13 @@
   "validationCommands": [
     "./scripts/validate-mst.sh",
     "python3 -m json.tool .agents/workstreams/qwen35-experience-ingestion-20260909/task.json",
+    "python3 scripts/validate_qwen35_handoff.py",
+    "python3 tests/test_qwen35_handoff.py",
+    "python3 scripts/validate_qwen35_handoff.py --verify-artifacts",
     "git diff --check"
   ],
-  "executionState": "in-progress",
-  "integrationState": "not-ready",
+  "executionState": "completed",
+  "integrationState": "needs-revalidation",
   "resumeSource": "88dc4f3e8568892de2d80f7ec503b61a0b14620c",
   "dependencyScope": "The performance workstream is a read-only evidence dependency, not a prerequisite to claim performance completion. Its dirty runtime files are excluded from this documentation workstream.",
   "resourceLeases": [],

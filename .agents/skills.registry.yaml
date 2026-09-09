@@ -36,6 +36,9 @@ skills:
       - compare an optimization with its baseline
       - accept or reject a performance claim
       - translate an operator microbenchmark to service impact
+      - evaluate startup warmup without held-out dataset leakage
+      - separate cold steady unseen-shape and compile-cache evidence
+      - audit denominator percentile and dirty-source provenance
     scope:
       - configs/**
       - scripts/**
@@ -72,6 +75,8 @@ skills:
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
       - bound recoverable E2E opportunity before implementation
+      - correct a historical claim whose evidence scope was overstated
+      - distinguish speedup from percentage latency reduction
     scope:
       - configs/**
       - scripts/**

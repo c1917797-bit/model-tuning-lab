@@ -1,7 +1,21 @@
 {
   "schema": "mst-knowledge-proposals/v1",
   "taskId": "qwen35-experience-ingestion-20260909",
+  "structuredLessonLedger": "docs/handovers/qwen35-mtp-off/lessons.json",
+  "integrationDecision": "pending-target-owner-review",
   "proposals": [
+    {
+      "kind": "existing-skill-update",
+      "source": "Audited T14 control repetitions and incomplete T15",
+      "target": ".agents/skills/ascend-benchmark-evidence/SKILL.md",
+      "summary": "Freeze independent warmup policies, test unseen content and shapes, separate startup/cache costs and enforce denominator/percentile/dirty-byte provenance."
+    },
+    {
+      "kind": "eval-or-verification-case",
+      "source": "Recovered artifact and handoff-state mismatches",
+      "target": ".agents/evals/transformation-cases/qwen35-evidence-handoff.yaml",
+      "summary": "Executable guards reject warm-control, P50, source-overlay, incomplete-matrix, missing-quality and near-miss promotion; preserve explicit claim corrections."
+    },
     {
       "kind": "existing-skill-update",
       "source": "Qwen3.5 runtime monkeypatch activation failures",

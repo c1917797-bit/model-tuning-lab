@@ -1,0 +1,29 @@
+schema: mst-transformation-case/v1
+id: qwen35-evidence-handoff
+source: model-tuning-lab/qwen35-performance-delivery
+scope: maintainer-knowledge-and-handoff-only
+performance_acceptance_claim: false
+lessons_ingested:
+  - exact-runtime-worker-activation
+  - overlap-safe-profiler-accounting
+  - buffer-ownership-and-collective-lifecycle
+  - empty-reference-quality-boundary
+  - independent-warmup-and-heldout-shapes
+  - denominator-percentile-and-dirty-source-provenance
+  - do-not-round-microbenchmark-near-misses
+  - distinguish-historical-ingredient-from-final-delivery
+  - correct-incomplete-fused-operator-attribution
+  - recover-exec-without-inventing-root-cause
+  - preserve-dirty-files-and-check-upstream
+  - service-exit-is-not-experiment-completion
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - python3 scripts/validate_qwen35_handoff.py
+  - python3 tests/test_qwen35_handoff.py
+  - python3 scripts/validate_qwen35_handoff.py --verify-artifacts
+  - git diff --check
+expected:
+  lessons: 12
+  performance_accepted: false
+  no_npu_workload_changes: true
+  private_backups_outside_git: true

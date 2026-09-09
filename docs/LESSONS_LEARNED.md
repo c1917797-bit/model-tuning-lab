@@ -387,6 +387,9 @@ ingredients and hypotheses but is not a compliant production result.
 never widen a microbenchmark, sampled-quality, source-overlay, or paper-level
 result into a final serving claim.
 
+Current evidence-audited takeover packet: `docs/handovers/qwen35-mtp-off/README.md`.
+Its runtime snapshot is timestamped, not a permanent resource assignment.
+
 ### 8.3 A live runtime path must be proven in the worker
 
 One diagnostic monkeypatch targeted a historically plausible scheduler class,
@@ -434,3 +437,30 @@ gate.
 different pair against intent, facts, constraints, completeness, and
 readability. Call the result task-specific paired semantic no-regression, not
 external-reference accuracy.
+
+### 8.7 Warm-control replay is diagnostic, not a shipped treatment
+
+Two recovered T14 control artifacts differ sharply in TTFT P95. The second
+window records an unchanged count of compiled NPU binaries. This supports
+investigating compilation/cache state, but neither a controlled warmup
+treatment nor held-out generalization has been demonstrated. Runtime DEBUG
+logging and output-length differences must remain visible as possible timing
+confounders. The dataset has 357 rows and no nonempty reference answers.
+
+**Reusable rule:** freeze an independent warmup policy, test unseen content and
+unseen execution shapes, isolate prefix-cache reuse, and report startup cost
+alongside matched-state service results. See the benchmark-evidence skill.
+
+### 8.8 Recover the evidence, not the previous narrative
+
+A historical baseline summary contains P50 values, while current acceptance
+uses P95 from raw repetitions. T14 and t12 are distinct controls and cannot
+silently replace the historical or user-designated reference. A small
+name-filtered RMS result does not identify all fused gated-normalization work.
+Likewise, an executor spawn error alone does not identify a broken NPU or
+prove that the target host was never reached.
+
+**Reusable rule:** preserve per-artifact hashes, exact percentile and
+denominator IDs, scoped uncertainty and correction history. Recover dirty
+files privately; commit only the owning workstream's reviewed files. The
+takeover packet includes executable checks against these recurring mistakes.

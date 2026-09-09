@@ -35,6 +35,36 @@ real improvement.
 8. Classify the result using `ascend-inference-tuning-loop` and commit/push the
    measurement stage even when it fails or shows no benefit.
 
+## Warmup, specialization and generalization
+
+Treat startup warmup as a deployment treatment, not automatically as faster
+model arithmetic. Freeze a bounded synthetic/development warmup policy before
+examining held-out evaluation inputs or their exact length list. Do not replay
+the evaluation corpus to manufacture a generalization claim.
+
+Report time-to-ready, warmup cost, first unseen-shape latency and steady-state
+latency separately. Compare matched process/cache states and controlled run
+order; a second control repetition is not a candidate. When warmup itself is
+the variable, include its startup and resource cost rather than silently
+excluding it from the comparison.
+
+Separate executable/compile caches from prompt KV/prefix caches. Use distinct
+warmup and measured-request cache salts and verify the observed cache behavior.
+Test both unseen contents and unseen shape/batch/concurrency combinations with
+the same frozen policy. Same-content or same-shape replay proves neither.
+
+New compilation files and slow requests are correlation evidence until
+request/phase timestamps and compilation events are aligned. Inspect the real
+specialization key and dispatch path: an already-dynamic length parameter does
+not exclude specialization through another compile-time parameter. Do not
+change compiler safety settings or remove specializations without a bounded
+correctness/performance experiment on the pinned runtime.
+
+Keep historical references and fresh same-environment controls as distinct
+denominator IDs. Read P95 from the raw repetition results, not a P50 summary.
+Fingerprint dirty source bytes, launcher and patch hashes as well as Git HEAD;
+equal commits alone do not prove equal deployed code.
+
 ## Quality-oracle scope
 
 Name the strongest oracle the dataset actually supports:

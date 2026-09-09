@@ -1,0 +1,67 @@
+{
+  "schema": "qwen35-handoff/v1",
+  "snapshot_utc": "2026-09-09T21:43:08Z",
+  "performance_status": "not-achieved",
+  "target": {
+    "model": "Qwen3.5-27B",
+    "dtype": "BF16",
+    "tp": 4,
+    "dp": 1,
+    "mtp": false,
+    "speculation": false,
+    "quantization": false,
+    "retraining": false,
+    "concurrencies": [1, 5, 8, 16],
+    "repetitions": 3,
+    "ttft_max_ratio": 0.60,
+    "tpot_max_ratio": 0.80,
+    "quality_rows": 357,
+    "material_quality_regressions_allowed": 0,
+    "aggregation": "median of three per-run P95 values"
+  },
+  "runtime_snapshot_is_lease": false,
+  "session_proofs": {
+    "absolute_shell_probe": "exec-000000000000100f",
+    "inventory": "exec-0000000000001018",
+    "preservation": "exec-000000000000102a",
+    "contract_and_artifact_validation": "exec-0000000000001035",
+    "login_shell_remote_reference_probe": "exec-0000000000001038",
+    "scope_checkpoint_push": "exec-000000000000103b",
+    "operation_handles_are_not_durable_artifacts": true
+  },
+  "dataset_nonempty_answers": 0,
+  "delivery_branch": "work/qwen35-performance-delivery",
+  "delivery_head": "0ff5757798d1eb7e1c2fd15bf23e224fa97e7478",
+  "delivery_worktree_clean": false,
+  "dirty_tracked_files": 11,
+  "untracked_files": 6,
+  "preservation_root": "/cache/austinov/handoffs/qwen35-mtp-off-20260909T214308Z",
+  "patch_sha256": "c7f2cc9a68d2573a669fe724a84fa354649d564d60ec7331cf2f407ae9bbb5d7",
+  "t15": {
+    "root": "/cache/austinov/qwen35-t15-prewarm-control-20260909T193758Z",
+    "benchmark_json_found_in_inspected_root": false,
+    "service_exit_code": 0,
+    "experiment_complete": false,
+    "heldout_generalization": "not-measured"
+  },
+  "records": [
+    {"id":"t12-control","evidence_id":"E-T12-CONTROL","role":"control","concurrency":1,"repeat":1,"completed":32,"errors":0,"ttft_p95_ms":6502.636359154712,"tpot_p95_ms":31.753852729764557},
+    {"id":"t12-candidate","evidence_id":"E-T12-CANDIDATE","role":"candidate","concurrency":1,"repeat":1,"completed":32,"errors":0,"ttft_p95_ms":5697.694213467184,"tpot_p95_ms":31.641106860819235},
+    {"id":"t14-r1","evidence_id":"E-T14-R1","role":"control","concurrency":1,"repeat":1,"completed":32,"errors":0,"ttft_p95_ms":6461.675341508817,"tpot_p95_ms":35.4047039989382},
+    {"id":"t14-r2","evidence_id":"E-T14-R2","role":"control","concurrency":1,"repeat":2,"completed":32,"errors":0,"ttft_p95_ms":840.4602645663545,"tpot_p95_ms":28.96897023566286}
+  ],
+  "evidence": [
+    {"id":"E-HIST-BASE","path":"/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/baselines/tp4dp1-npu03-ref-v1/baseline-summary.json","sha256":"cef6713367f387fd67c15c2cc0bdf071c33f58846b8ef9a041a489186aa0d9d4","scope":"historical identity; summary contains P50, not P95"},
+    {"id":"E-P95-AUDIT","path":"/cache/austinov/handoffs/qwen35-mtp-off-20260909T214308Z/baseline-p95-audit.json","sha256":"9cc5f382c63e4c709e1e9a02e08ae90bb322e3e2a6164c64bd98fd52aaf1bd5e","scope":"read-only recomputation from 12 historical raw files; not a new baseline"},
+    {"id":"E-T12-CONTROL","path":"/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z/failfast-control/c1-r1.json","sha256":"68508b6881386af2c6a9b9459b517120f486e45c04486982191faa0c07662b70","scope":"single c1 control"},
+    {"id":"E-T12-CANDIDATE","path":"/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z/failfast-candidate/c1-r1.json","sha256":"6f79e8ab5458cef709278bd48e0ade004dbffb1a1c8107e13076364541516d92","scope":"single c1 screen; not final acceptance"},
+    {"id":"E-T14-R1","path":"/cache/austinov/qwen35-t14-tail-control-20260909T173936Z/c1-r1.json","sha256":"a03308885599fd4bf01e9304733e816bec97576be9e75a4db1a46b70c9676d33","scope":"control; not candidate"},
+    {"id":"E-T14-R2","path":"/cache/austinov/qwen35-t14-tail-control-20260909T173936Z/c1-r2.json","sha256":"0a0db4f4628d39e960555f4d64a9decc023b638c9b05637084297a39ac3fef23","scope":"later control repetition; cold/warm diagnostic only"},
+    {"id":"E-X3","path":"/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/operator-microbench/mmar-x3-residual-npu03-v2/report.json","sha256":"92b42c33c4449ee5f788b93e8337f8bd9becbe6a44e993140acabf8d2b673224","scope":"operator correctness pass, performance rejected"},
+    {"id":"E-GDN","path":"/cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/tp4-npu03-qwen35-gdn-proj-fusion-prefetch0p1-nospec-v1-20260906T161500Z/decision.json","sha256":"69cec251d2b63648c2804452d914f121ff6994087e34957e90f28800ccaa4570","scope":"historical source-overlay ingredient; historical gate not met"},
+    {"id":"E-SWIGLU","path":"/cache/cch/.worktrees/exp-20260907-qwen35-a2-bf16-swiglu-gated-mlp/experimental/ffn/swiglu_gated_mlp/docs/QWEN35_A2_BF16_FEASIBILITY.md","sha256":"a53ef956c4eaa949dd513ca01bafa690f13ef91bce287bef0b1154c3ac5d4fdc","scope":"historical sparse-correctness microbenchmark note; rejected"},
+    {"id":"E-T13-PLAN","path":"/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery/qwen35-performance-optimization/T13_CANDIDATE_PLAN.md","sha256":"f29420198f4e52c1d1a926e4b5d488a2315a1a8abaeb7b00f58e05b609d8a8b5","scope":"source record of activation and closed routes; no new device measurement"},
+    {"id":"E-T13-BUDGET","path":"/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery/qwen35-performance-optimization/T13_DENSE_TAIL_BUDGET.md","sha256":"aba0aa67ce202bd75945e73262f41e114ade44c913f823503958a6ffc0149783","scope":"offline opportunity estimate; not E2E speedup"},
+    {"id":"E-PRESERVATION","path":"/cache/austinov/handoffs/qwen35-mtp-off-20260909T214308Z/preservation.json","sha256":"dd2aaceae859aa2c8842ad9de57eb92a82a6522fada03c8d669e905ea5a74629","scope":"private dirty-file recovery inventory; same-host backup only"}
+  ]
+}

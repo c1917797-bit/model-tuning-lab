@@ -56,6 +56,22 @@ candidate may select the next hypothesis, but only the exact delivery bytes
 under the final container, topology, workload, and quality contract can pass.
 Do not silently transfer a historical denominator to a fresh-control run.
 
+## Evidence corrections and scope
+
+Keep a structured record of corrected claims: original statement, verified
+evidence, corrected scope and required next test. An incomplete operator-name
+filter cannot prove that an unrecognized fused kernel has negligible cost.
+Source inspection is not a device result; successful execution is not a
+performance acceptance; a missing operation handle is not proof of workload
+failure or completion. Preserve contrary evidence rather than smoothing it
+into a successful narrative.
+
+Use candidate/baseline latency ratios for gates. A 40% latency reduction means
+a ratio at most 0.60 (speedup at least 1/0.60), while a 20% reduction means at
+most 0.80 (speedup at least 1.25). Do not interpret a 1.20x speedup as a 20%
+latency reduction, round a near miss into a pass, or mix historical thresholds
+with the current contract.
+
 ## Stage Checkpoints
 
 Commit and immediately push each coherent stage:
