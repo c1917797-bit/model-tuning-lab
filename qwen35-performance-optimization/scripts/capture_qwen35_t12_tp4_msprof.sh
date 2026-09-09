@@ -32,7 +32,7 @@ done
 [[ -d "$profile_dir" ]] || { echo "missing PROFILE_DIR" >&2; exit 66; }
 [[ ! -e "$artifact_dir" ]] || { echo "refusing to reuse ARTIFACT_DIR" >&2; exit 44; }
 unexpected_profile_entry="$(
-  find "$profile_dir" -mindepth 1 -maxdepth 1 +    ! \( -type d \( -name rank0 -o -name rank1 -o -name rank2 -o -name rank3 \) \) +    -print -quit
+  find "$profile_dir" -mindepth 1 -maxdepth 1 ! \( -type d \( -name rank0 -o -name rank1 -o -name rank2 -o -name rank3 \) \) -print -quit
 )"
 [[ -z "$unexpected_profile_entry" ]] || {
   echo "refusing PROFILE_DIR with unexpected content: $unexpected_profile_entry" >&2

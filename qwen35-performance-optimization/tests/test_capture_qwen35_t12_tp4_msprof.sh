@@ -22,8 +22,17 @@ grep -Fq 'for rank in 0 1 2 3' "$capture"
 grep -Fq 'performance_evidence": False' "$capture"
 grep -Fq 'refusing PROFILE_DIR with unexpected content' "$capture"
 grep -Fq 'refusing non-empty rank profile directory' "$capture"
-! grep -Eq 'docker[[:space:]]+(run|stop|commit|cp)([[:space:]]|$)' "$capture"
-! grep -Fq -- '--device /dev/davinci4' "$capture"
-! grep -Fq '+  ' "$capture"
+if grep -Eq 'docker[[:space:]]+(run|stop|commit|cp)([[:space:]]|$)' "$capture"; then
+  echo 'capture script contains a forbidden Docker mutation' >&2
+  exit 1
+fi
+if grep -Fq -- '--device /dev/davinci4' "$capture"; then
+  echo 'capture script mentions protected NPU4' >&2
+  exit 1
+fi
+if grep -Fq '+  ' "$capture"; then
+  echo 'capture script contains a stray patch marker' >&2
+  exit 1
+fi
 
 echo 'PASS: t12 TP4 msprof attach contract'
