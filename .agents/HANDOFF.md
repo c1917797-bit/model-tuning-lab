@@ -7,7 +7,7 @@
 - Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide`, with pushed evidence, negative-result retention, and explicit recovery checkpoints.
-- Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
+- Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve the live `chicaihong01` manager topology through AWMCP, prefer `ma`, use a target-proven sibling only after topology refresh when needed, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
 - The repository-specific active worktree budget is eight.
 - Active Qwen3.8 DRRQR worktree:
   /opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-gdn-native-state-layout
@@ -100,8 +100,9 @@ For a new maintainer, start by treating this repository as ready for handoff but
 
 1. Read `AGENTS.md`, this handoff, `docs/RUNBOOK.md`, and `docs/LESSONS_LEARNED.md`.
    For Qwen3.8 DRRQR also read the project AGENTS.md, frozen baseline contract,
-   GDN_TEACHER_CAPTURE.md, the captured-reference v2 summary, and the active
-   drrqr-aligned-width-replay-v1 iteration YAML.
+   GDN_TEACHER_CAPTURE.md, the captured-reference v2 and aligned-width
+   summaries, and the active drrqr-full-layer-sensitivity-budget-v1 iteration
+   YAML.
 2. If the next task touches `chicaihong01`, use `chicaihong01-host-maintenance` before any remote or NPU action.
 3. If the next task is another paper/practice result, start with `paper-to-ascend`; for historical reproduction or adoption claims, include `paper-to-ascend-reproduction` and its evidence contract.
 4. Before using any claimed NPU/port lane, read the relevant target-host branch-local handoff and prove current ownership in the same session.

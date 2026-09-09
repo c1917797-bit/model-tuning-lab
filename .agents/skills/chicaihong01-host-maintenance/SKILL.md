@@ -12,7 +12,8 @@ the canonical target-host checkout and live machine state produce authoritative
 code, runtime, and performance evidence.
 
 ## Canonical target
-- AWMCP topology path: `chicaihong01/ma`.
+- Preferred AWMCP topology path: `chicaihong01/ma`. Resolve it live every
+  session; the label is not a durable peer ID.
 - Canonical target repository:
   `/opt/host/vnf/austinov/model-tuning-lab`.
 - Compatibility path:
@@ -38,10 +39,12 @@ arguments. A clone intentionally does not contain the credential.
    skills.
 2. Confirm the AWMCP connector is available and obtain `AWMCP_VERIFY` through
    the approved runtime channel.
-3. Call AWMCP topology `tree` with merged scope and select the exact
-   `chicaihong01/ma` node.
+3. Call AWMCP topology `tree` and `get` for the live `chicaihong01`
+   manager nodes. Prefer `chicaihong01/ma`.
 4. Resolve its current concrete peer ID. Never hardcode a peer ID from an older
-   session.
+   session. If `ma` is missing or unresponsive, refresh topology before using
+   `mb` or `mc`; accept a sibling control plane only after direct-route
+   target proof and the same canonical repository/system identity are verified.
 5. Load the AWMCP `host-development` skill contract before its first action.
 6. Run `a_status` against the resolved peer.
 7. Accept the target only when the response identifies the intended peer and
@@ -115,4 +118,6 @@ the workstream upstream. Serialized integration alone updates `main`.
 Preserve exact AWMCP errors. Refresh topology after routing drift and retry only
 when the response marks the failure retryable. A control-plane timeout is not
 proof of host, command, container, or NPU failure; do not mutate the machine to
-compensate for an unproven diagnosis.
+compensate for an unproven diagnosis. When an existing operation is bound to a
+specific peer, keep polling that peer; switching control planes does not prove
+the operation stopped and never authorizes restarting the workload.
