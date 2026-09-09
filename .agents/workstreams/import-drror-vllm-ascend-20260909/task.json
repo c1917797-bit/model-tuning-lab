@@ -1,0 +1,52 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "import-drror-vllm-ascend-20260909",
+  "objective": "Import drror_vllm_ascend into an extensible projects/ layout while retaining its committed Git history and using the root Model Tuning Lab maintainer skills.",
+  "targetBranch": "main",
+  "workBranch": "work/import-drror-vllm-ascend-20260909",
+  "remote": "origin",
+  "originalBase": "0881de79ec6ad6623e277a38ab544704fa304b34",
+  "createdAt": "2026-09-09",
+  "owner": "codex",
+  "frozenConstraints": {
+    "AGENTS.md": "sha256:020aa2d10873a8459e5c8237751485dc2102907a8aa0d663b8db56062f395401",
+    ".agents/git-policy.yaml": "sha256:0d160291a1e02b75d9aa1157ddc800b2ea5e4c6a49734d0479fca39d0b6b5a43",
+    ".agents/skills/mst-practice-iteration-planning/SKILL.md": "sha256:54295bab146e7c055f5fa0cb073a20ba051b76303c01ed55fff9b3af9b20f625",
+    ".agents/skills/mst-parallel-workstreams/SKILL.md": "sha256:1935194fe285e2d2163f66bd915c39f3b5dffc464cdb52a20571738fa868fcee"
+  },
+  "source": {
+    "repository": "/cache/cch/drror_vllm_ascend",
+    "remote": "https://github.com/c1917797-bit/drror_vllm_ascend.git",
+    "branch": "research/qwen38-drrqr-correctness-20260908",
+    "commit": "7eec54c9caacad3f37f80a493e01171ec8f62003",
+    "tree": "9fcefa3b84e1c79b5ac283eb39dd8cbb75362555",
+    "historyPolicy": "retain full committed history as a second parent; do not squash",
+    "uncommittedInputs": [
+      "AGENTS.md goal-alignment rule: migrate into shared maintainer skill and project-local boundary"
+    ],
+    "excludedUntrackedInputs": [
+      "native/",
+      "tests/test_native_build_gate.py",
+      "tests/test_native_codegen_gate.py"
+    ]
+  },
+  "dependencies": [],
+  "claims": [
+    {"kind": "file", "mode": "exclusive", "value": "projects/drror_vllm_ascend/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/README.md"},
+    {"kind": "file", "mode": "exclusive", "value": "AGENTS.md"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/skills/mst-practice-iteration-planning/SKILL.md"},
+    {"kind": "file", "mode": "shared", "value": ".agents/skills.registry.yaml"},
+    {"kind": "strategy", "mode": "exclusive", "value": "monorepo project layout and full-history import contract"},
+    {"kind": "resource", "mode": "exclusive", "value": "no NPU, container, port, or model resource is used by this repository-only import"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python -m pytest",
+    "python -m pytest projects/drror_vllm_ascend/tests",
+    "git diff --check",
+    "git merge-base --is-ancestor 7eec54c9caacad3f37f80a493e01171ec8f62003 HEAD"
+  ],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
