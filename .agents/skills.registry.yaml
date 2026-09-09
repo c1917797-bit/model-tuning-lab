@@ -66,10 +66,11 @@ skills:
   - id: ascend-inference-tuning-loop
     path: .agents/skills/ascend-inference-tuning-loop
     status: experimental
-    purpose: Run the Git-recorded hypothesis-to-decision tuning flywheel.
+    purpose: Run a goal-linked Ascend tuning flywheel through ordered evidence layers, scoped decisions, recovery, and learning.
     triggers:
       - start or resume an inference optimization
       - record a successful failed rejected or inconclusive attempt
+      - distinguish invalid runtime evidence from an algorithm result
       - close a tuning experiment
     scope:
       - configs/**
@@ -213,7 +214,11 @@ skills:
   - id: mst-experience-ingestion
     path: .agents/skills/mst-experience-ingestion
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Convert accepted, rejected, failed, invalid, and inconclusive practice into correctly scoped durable rules.
+    triggers:
+      - ingest successful or failed project experience
+      - supersede a disproved historical conclusion
+      - promote a reusable loop or evidence rule
   - id: mst-git-checkpoint-policy
     path: .agents/skills/mst-git-checkpoint-policy
     status: stable
@@ -221,7 +226,11 @@ skills:
   - id: mst-loop-engineering-framework
     path: .agents/skills/mst-loop-engineering-framework
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Build durable non-drifting loops and recommend goal/evidence composition for medium- and long-term engineering.
+    triggers:
+      - design a multi-iteration medium or long-term engineering loop
+      - prevent goal drift across sessions
+      - define evidence promotion and outcome routing
   - id: mst-maintainer-handoff
     path: .agents/skills/mst-maintainer-handoff
     status: stable

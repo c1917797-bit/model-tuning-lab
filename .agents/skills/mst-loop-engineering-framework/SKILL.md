@@ -1,6 +1,6 @@
 ---
 name: mst-loop-engineering-framework
-description: Use when designing or maintaining a Git-backed loop engineering framework with skills, handoff state, validation, checkpoints, worktrees, connectors, and maker/checker separation.
+description: Use when designing or maintaining a Git-backed loop engineering framework, especially for medium- or long-term objectives that need repeated evidence-driven iterations without goal drift.
 ---
 
 # Loop Engineering Framework
@@ -21,6 +21,83 @@ memory/state spine   -> .agents/HANDOFF.md + agents/<id>/work/* + Git history
 ```
 
 The key rule is: the agent forgets, the repository does not.
+
+## Recommended composition for medium- and long-term goals
+
+Use loop engineering by default when the objective needs more than one
+evidence-producing iteration, crosses sessions, or has separate correctness,
+performance, quality, portability, or integration gates. This recommendation
+does not authorize a scheduler, heartbeat, unattended execution, extra
+resources, or a broader objective.
+
+Compose rather than duplicate:
+
+~~~text
+mst-loop-engineering-framework      durable state, non-drift, resume/stop
+mst-practice-iteration-planning     long -> medium -> short goal chain
+domain loop                         ordered technical gates and decisions
+evidence skill                      comparable measurement and claim scope
+mst-experience-ingestion            reusable learning from every outcome
+~~~
+
+The objective loop is:
+
+~~~text
+orient actual state and path
+  -> restate fixed long-term acceptance and current gap
+  -> choose one medium-term hypothesis or capability
+  -> admit one bounded short-term experiment
+  -> pass only the evidence gate needed for its next claim
+  -> classify outcome and claim scope
+  -> promote, repair, reject, pivot, or stop
+  -> checkpoint state and select the next loop from evidence
+~~~
+
+Before starting an iteration, answer four questions in durable state:
+
+1. Which unchanged long-term acceptance condition is still open?
+2. Which medium-term hypothesis could close a material part of that gap?
+3. What smallest short-term result would change the next decision?
+4. Which pass, failure, invalid, or inconclusive result ends this iteration?
+
+If the fourth answer is missing, the task is activity rather than an
+engineering loop.
+
+## Claim and evidence promotion
+
+Promote claims one level at a time. A lower layer may admit the next experiment
+but cannot prove a higher-layer outcome:
+
+~~~text
+orientation/identity
+  -> local or ABI correctness
+  -> target-runtime numerical correctness
+  -> real integration-path correctness
+  -> end-to-end performance
+  -> task quality / acceptance
+  -> repeated and cross-environment support
+~~~
+
+For each result record both evidence_level and claim_ceiling. Examples:
+storage-layout parity does not prove cache-manager integration; an operator
+microbenchmark does not prove service throughput; one paired screen does not
+prove repeated acceptance; successful execution on one environment does not
+prove portable speedup.
+
+Treat outcome classes differently:
+
+- accepted: promote only the claim covered by the predeclared gate.
+- rejected: valid evidence rules out the tested candidate or configuration,
+  not an entire technique family unless the test was designed for that claim.
+- failed: implementation, correctness, or safety did not pass; recover the
+  active tree and decide whether to repair or abandon the candidate.
+- invalid: the execution path, comparison, or measurement was not trustworthy;
+  preserve the diagnostic lesson but do not count it as algorithm evidence.
+- inconclusive: run one bounded disambiguation only when its result changes a
+  decision; otherwise stop or choose a different hypothesis.
+
+Code, reports, commits, pushes, and an extensive handoff are checkpoints, not
+promotion evidence for the product objective.
 
 ## Parallel workstream routing
 
@@ -65,17 +142,22 @@ Reference practice case: in one target repository, the agent over-weighted older
 
 ## Design workflow
 
-1. Define the loop purpose, bounded objective, and stop condition.
-2. If the loop is cross-component or architectural, pass the Architecture Orientation Gate.
-3. Write or select the smallest skills that preserve project-specific intent.
-4. Add a current handoff snapshot so the next agent can resume.
-5. Add backlog/checkpoint/budget state if the loop spans sessions.
-6. Add validation gates that can reject a false "done" claim.
-7. Decide whether parallel work requires `mst-parallel-workstreams`; do not use
+1. Define the fixed long-term acceptance, current gap, medium-term hypothesis,
+   bounded short-term decision, and stop condition.
+2. Select mst-practice-iteration-planning and the domain/evidence skills when
+   the objective needs repeated technical iterations.
+3. If the loop is cross-component or architectural, pass the Architecture Orientation Gate.
+4. Write or select the smallest skills that preserve project-specific intent.
+5. Add a current handoff snapshot so the next agent can resume.
+6. Add backlog/checkpoint/budget state if the loop spans sessions.
+7. Add validation gates that can reject a false "done" claim and state each
+   gate's claim ceiling.
+8. Decide whether parallel work requires mst-parallel-workstreams; do not use
    parallel branches without its branch-local state and integration boundary.
-8. Split maker and checker instructions when the loop will run unattended.
-9. Update handoff/backlog before entering the next loop.
-10. Commit and push coherent validated iterations so Git becomes the audit log.
+9. Split maker and checker instructions when the loop will run unattended.
+10. Classify the outcome, update the goal chain, and ingest reusable lessons.
+11. Update handoff/backlog before entering the next loop.
+12. Commit and push coherent validated iterations so Git becomes the audit log.
 
 ## Repository artifacts
 
@@ -121,6 +203,9 @@ A loop framework is not validated by a clever prompt. It is validated when:
 - registry and filesystem skills match;
 - handoff has the required sections;
 - current tasks have pass criteria;
+- medium- or long-term tasks link fixed acceptance, current gap, medium-term
+  hypothesis, short-term decision, and bounded stop rule;
+- each evidence record states its evidence level and claim ceiling;
 - architecture/topology claims have an orientation gate and at least one drift-prevention check;
 - a fresh agent can orient, pick the next action, run validation, and commit/push without hidden context;
 - the checker can independently reject a bad result;
@@ -139,4 +224,8 @@ Do not:
 - keep an impressive handoff that is not tied to validation evidence;
 - make architecture claims from stale docs while ignoring recent commits or deployment topology;
 - enter the next loop with a changed objective but unchanged handoff;
+- treat invalid execution or a non-comparable measurement as negative algorithm
+  evidence;
+- generalize one configuration's failure to every candidate in the family;
+- let a lower evidence layer prove a higher-layer acceptance claim;
 - or let automated speed replace engineering judgement.
