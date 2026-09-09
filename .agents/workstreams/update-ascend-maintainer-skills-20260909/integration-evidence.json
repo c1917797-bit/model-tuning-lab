@@ -1,9 +1,18 @@
 {
   "schema": "mst-integration-evidence/v1",
   "task_id": "update-ascend-maintainer-skills-20260909",
-  "status": "not_validated",
+  "status": "validated",
   "base": "93b3ae4659a1bc0e926998608a55efc96e174d8e",
-  "maintainer_structure": "pending",
-  "content_review": "pending",
+  "maintainer_structure": "passed_26_skills",
+  "git_diff_check": "passed",
+  "json_validation": "passed",
+  "content_review": "passed_trigger_action_destination_verification",
+  "updated_skills": [
+    "ascend-inference-tuning-loop",
+    "ascend-canary-implementation",
+    "ascend-benchmark-evidence",
+    "ascend-cannbot-profiler",
+    "chicaihong01-host-maintenance"
+  ],
   "performance_claim": "none; this workstream updates process guidance only"
 }
