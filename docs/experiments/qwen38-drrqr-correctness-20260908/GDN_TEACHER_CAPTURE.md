@@ -61,6 +61,37 @@ or thresholds. The original failed implementation is saved in local commit
 440251e; its push and a read-only remote check timed out, so remote publication
 is unconfirmed. No automatic repeated push or experiment retry was started.
 
+The frozen chunk source has additional finite-precision boundaries: intermediate
+H, W/U, v_new and its decayed variant use BF16 storage although the final state
+ABI is FP32. This source evidence is not resolved device-binary attribution.
+A CPU-only counterfactual using the immutable failed NPU artifact reproduced the
+original state/output bytes and all 43 violations. Splitting recurrence 64+64
+without rounding also preserved bytes. Rounding only S64 through BF16 left 41
+old violations, removed 2 and introduced 6 (47 total); the original gate still
+failed. Therefore a single cross-chunk H rounding is not a sufficient explanation.
+See gdn-prefill-boundary-reference-v1.result.json. Do not replace the reference
+or loosen its tolerance on this basis. A separate real-input incremental probe
+is being prepared to compare CPU-prequantized beta with NPU beta transformation,
+including eager/graph state checks; it is not full qualification or performance
+admission and does not overturn this failed replay.
+
+That single beta incremental NPU run completed in gdn-beta-incremental-v1:
+four independent prefills and four private state lanes through eight decode
+steps, including two decode graphs, matched finite bytes for beta, output,
+full state and actual post-RMS. Both B lanes also matched the CPU FP32 product;
+graph reset, persistent metadata and unselected slots passed. Prefill was eager,
+not a prefill-graph qualification. The 69 related CPU/mock tests also passed.
+However the run remains failed_runtime_evidence: all six teacher library paths
+and hashes matched, but three additional CANN batch_invariant vendor libraries
+were mapped. Their loading cause is not yet attributed; no whitelist change or
+same-hash shortcut is allowed. The launch caller lost its acknowledgement before
+retaining a handle; completion was recovered by target-verified read-only report,
+artifact hashes and process checks, without a second launch. No execution handle,
+process duration or exit code is invented. See gdn-beta-incremental-v1.result.json.
+The original dense reference gate remains failed and unmodified. These local
+incremental bytes do not admit candidate performance, prove beta fidelity, or
+establish task accuracy or portability. Postflight found no task NPU process.
+
 ## Admission frozen before the first service launch
 
 Phase: performance-first candidate selection, with numerical correctness first.

@@ -108,6 +108,8 @@ Dk64: 405504 bytes; Dk128: 801792 bytes
 
 This explicitly uses the real service's FP32 state, not a hypothetical BF16
 budget. Physical padding, pool pages, reserved slots and fragmentation are extra.
+The external cache dtype does not specify internal arithmetic precision;
+workspace/intermediate storage and its traffic must be budgeted separately.
 Full-attention KV, V/output projections, MLP and many TP collective payloads do
 not shrink merely because GDN Dk shrinks.
 
@@ -164,6 +166,8 @@ validate only the capabilities it consumes:
   layout, strides, padding and mutable-state alias contract;
 - sequence-length and slot-index ABI, invalid-slot semantics, supported
   prefill/decode paths and graph modes;
+- internal storage and accumulator/reduction dtypes, cast locations and rounding
+  modes, chunk size/boundaries, and prefill/decode numerical execution policies;
 - exact beta rounding pipeline, normalization/scale and gated-RMS semantics;
 - cache group/page constraints and TP partition/collective requirements;
 - implementation identity and the corresponding numerical qualification.
@@ -172,6 +176,37 @@ Dispatch only to a qualified implementation for that combination. If unavailable
 reject the candidate or use an explicitly labelled correct fallback; never
 silently reinterpret Dk, dtype or padding. Keep the mathematical reference and
 plan stable while backend adapters vary.
+
+### Precision contract: external FP32 state is not all-FP32 execution
+
+Frozen source for the current BF16-input/FP32-state Ascend chunk path specifies
+64-token chunks, BF16 W/U intermediates, and BF16 non-final H between chunks.
+The update epilogue promotes H for FP32 decay/addition, then uses CAST_RINT for
+non-final H storage; the final-state FP32 branch writes its FP32 update directly.
+The V-new epilogue forms U-WH in FP32, stores v_new in BF16, and separately forms
+the decay-weighted value from the unrounded FP32 residual before another BF16
+store. Therefore a 128-token all-FP32 unrolled recurrence is an independent
+mathematical reference, not the same finite-precision implementation simply
+because both expose FP32 final state.
+
+The adapter contract must distinguish operand/intermediate storage from actual
+accumulation precision, and record which operations round before reuse. State ABI
+or a FP32 workspace alone cannot establish every dot-product's precision; leave
+unspecified compiler/backend arithmetic explicitly unverified. Chunk boundaries,
+rounding policies and cast placement are implementation properties separate from
+logical DRRQR coordinates/rank and recurrence. A backend change to these properties
+requires a new numerical qualification and corresponding dispatch/graph identity,
+not an unnoticed change to the reference or beta-compensation semantics.
+
+These source facts do not establish the cause or magnitude of all observed
+numerical differences, resolve the executing device binary, or establish any
+performance/accuracy benefit. The original failed gate, report, reference and
+thresholds remain unchanged and failed; no post-hoc tolerance relaxation follows.
+Use separate incremental controls for an algorithm transform on a fixed backend
+and for a backend implementation change with a fixed logical plan. Such controls
+can help attribution but cannot replace complete numerical qualification or final
+paired task-accuracy acceptance. Any precision-aware diagnostic must be separately
+named/versioned; it must not retroactively turn the original failed gate into a pass.
 
 Plan/cache identity must distinguish selected coordinates/order, per-layer logical
 ranks, head mapping, beta coefficients/state representation and normalization
@@ -229,6 +264,12 @@ alternative-algorithm proposal, benchmark or NPU run:
 - `tools/gdn_golden_parity.py::_decode_golden`: independent FP32 recurrence.
 - Frozen `vllm_ascend/ops/gdn.py` and `ops/layernorm.py`: actual Ascend
   normalization/recurrent dispatch and gated-RMS order/epsilon.
+- Precision source audit: frozen `ops/triton/fla/chunk.py` (64-token path and
+  BF16 W/U conversion), `wy_fast.py` (W/U stores), and
+  `csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/` entry plus
+  `arch22/gemm/kernel/gdn_fwd_h_kernel.hpp` and `arch22/epilogue/block/`
+  `block_epilogue_gdn_fwdh_{update,vnew}.hpp` (BF16 H/v_new and explicit casts).
+  These are source-level contracts, not complete binary-resolution evidence.
 - `FINDINGS.md`, `HETEROGENEOUS_HYBRID_POOL_AUDIT.md` and
   `HETEROGENEOUS_STATE_ABI_V5.md`: invalid padded decode history, hybrid-pool
   alias constraints, and the distinction between native storage qualification
@@ -238,4 +279,3 @@ alternative-algorithm proposal, benchmark or NPU run:
 
 All implementation remains plugin-local. No original runtime, image, reference
 repository or resource boundary is changed by this document.
-
