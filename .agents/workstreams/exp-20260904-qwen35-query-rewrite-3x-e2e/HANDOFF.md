@@ -4543,3 +4543,30 @@ target-port listener, MemAvailable about 83.9 GiB, and only the unrelated
 `drrqr_qwen38_energy_preflight_20260908` container still running. Do not infer
 future availability from this snapshot; re-run the full resource gate before
 any new container allocation.
+
+## 2026-09-09 official MMAR component breakdown
+
+Commit 354dc97 adds `benchmark_qwen35_mmar_components.py`, a four-rank NPU0-3
+microbenchmark that measures the official fused MMAR path against explicit
+matmul-only and matmul-plus-all-reduce paths for the two real Qwen3.5 decode
+row-parallel shapes. It does not load any monkeypatch or custom OPP and ran in
+the unchanged official vLLM-Ascend 0.23.0 image with the repo mounted read-only.
+
+The verified artifact root is
+`/cache/austinov/qwen35-mmar-components-official-20260909T103515Z`; all entries
+in `SHA256SUMS` verified. `components.json` SHA256 is
+`69fab79b24cc607c52129a1948ef03c49b7227174d3a335ed559b4502ff8d117`.
+The one-shot container exited and post-run `npu-smi` showed no NPU0-7 processes.
+
+Median max-rank latency over seven repeats:
+
+| Shape | MatMul only | MatMul + all_reduce | Official fused MMAR |
+|---|---:|---:|---:|
+| M1 K1536 N5120 | 25.0362 us | 186.5505 us | 85.66455 us |
+| M1 K4352 N5120 | 22.65895 us | 179.7428 us | 87.1936 us |
+
+Decision: do not pursue a simple decomposition of official fused MMAR into
+separate matmul plus all-reduce for decode TPOT. The official fused path is
+roughly 2x faster than the explicit decomposition for both real M=1 shapes.
+The remaining TPOT opportunity needs a materially different lifecycle or
+operator design, not just replacing MMAR with ordinary all-reduce.
