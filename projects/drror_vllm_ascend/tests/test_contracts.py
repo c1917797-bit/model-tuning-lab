@@ -685,14 +685,21 @@ class PrepareTests(unittest.TestCase):
             },
         }
 
-    def test_three_ratios_follow_official_floor_rule(self):
+    def test_supported_aligned_ratios_follow_official_floor_rule(self):
         self.assertEqual(
             [prepare._target_dim(128, ratio) for ratio in (0.2, 0.3, 0.5)],
             [102, 89, 64],
         )
         self.assertEqual(
-            [prepare._target_dim(128, ratio) for ratio in (0.125, 0.25, 0.5)],
-            [112, 96, 64],
+            [
+                prepare._target_dim(128, ratio)
+                for ratio in prepare.ALIGNED_PRUNING_RATIOS
+            ],
+            [112, 96, 80, 64, 48],
+        )
+        self.assertEqual(
+            prepare.ALIGNED_PRUNING_RATIOS,
+            (0.125, 0.25, 0.375, 0.5, 0.625),
         )
 
     def test_official_qwen38_revision_hashes_are_pinned(self):

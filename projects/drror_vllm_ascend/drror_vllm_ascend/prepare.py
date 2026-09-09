@@ -39,6 +39,7 @@ SCOPE = (
     "rewritten. Capture and input hashes establish identity but do not by "
     "themselves establish quality, performance, or paper-exact reproduction."
 )
+ALIGNED_PRUNING_RATIOS = (0.125, 0.25, 0.375, 0.5, 0.625)
 
 
 def selection_method(selection_objective: str) -> tuple[str, bool]:
@@ -352,7 +353,7 @@ def main() -> None:
         "--pruning-ratio",
         type=float,
         required=True,
-        choices=(0.125, 0.25, 0.5),
+        choices=ALIGNED_PRUNING_RATIOS,
     )
     parser.add_argument("--tp-size", type=int, default=4)
     parser.add_argument("--captures-per-rank", type=int, default=16)

@@ -23,7 +23,7 @@ changes:
     description: Extend immutable energy-kernel plan preparation to aligned Dk48 and Dk80 and bind their provenance.
     files:
       - projects/drror_vllm_ascend/drror_vllm_ascend/prepare.py
-      - projects/drror_vllm_ascend/tests/test_prepare.py
+      - projects/drror_vllm_ascend/tests/test_contracts.py
   - type: validation
     description: Add a captured-teacher width-curve replay reusing frozen runtime helpers without changing historical reports.
     files:
@@ -31,7 +31,7 @@ changes:
       - projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_width_curve.py
 
 validation_commands:
-  - python3 -m pytest projects/drror_vllm_ascend/tests/test_prepare.py projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_width_curve.py
+  - python3 -m pytest projects/drror_vllm_ascend/tests/test_contracts.py projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_width_curve.py
   - ./scripts/validate-mst.sh
   - git diff --check
   - one predeclared physical-NPU4 replay in the existing audited dedicated container
