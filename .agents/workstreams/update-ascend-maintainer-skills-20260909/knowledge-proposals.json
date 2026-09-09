@@ -1,0 +1,36 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "task_id": "update-ascend-maintainer-skills-20260909",
+  "proposals": [
+    {
+      "trigger": "Before implementing an inference optimization candidate",
+      "changed_action": "Estimate its recoverable non-overlapped wall-time against the remaining target gap and verify the exact pinned runtime path",
+      "destination": "ascend-inference-tuning-loop and ascend-canary-implementation",
+      "verification": "Candidate record contains opportunity bound, exact runtime source identity, per-process activation proof, and negative-off evidence"
+    },
+    {
+      "trigger": "After a candidate stalls, times out, or fails before producing a benchmark result",
+      "changed_action": "Record the exact bytes and failure phase, close unchanged retries, and require a successor experiment to target that phase",
+      "destination": "ascend-inference-tuning-loop and ascend-cannbot-profiler",
+      "verification": "Closed-route ledger and phase markers show that any successor changed both hypothesis and test"
+    },
+    {
+      "trigger": "When operator or profiler evidence is used to predict service performance",
+      "changed_action": "Use critical-path or union time, covered call fraction, and an E2E impact bound rather than summed overlapping durations",
+      "destination": "ascend-benchmark-evidence and ascend-cannbot-profiler",
+      "verification": "Evidence packet separates per-call delta, covered calls, overlap, maximum E2E benefit, and observed service result"
+    },
+    {
+      "trigger": "When validating a custom multi-rank collective candidate",
+      "changed_action": "Prove chip-route support, lifecycle balance, fresh epochs, restart safety, progress, timeouts, and all-rank error propagation before E2E",
+      "destination": "ascend-cannbot-profiler",
+      "verification": "Bounded multi-rank canary records phase markers and completes repeated fresh-process restart trials"
+    },
+    {
+      "trigger": "When a host safety gate sees container device declarations",
+      "changed_action": "Distinguish running active claims from exited historical provenance unless the user explicitly requires any declaration to block",
+      "destination": "chicaihong01-host-maintenance",
+      "verification": "Occupancy report includes container state and states whether the default or stricter policy was applied"
+    }
+  ]
+}

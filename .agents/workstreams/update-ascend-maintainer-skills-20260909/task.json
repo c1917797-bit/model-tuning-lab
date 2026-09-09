@@ -1,0 +1,37 @@
+{
+  "schema": "mst-workstream/v1",
+  "task_id": "update-ascend-maintainer-skills-20260909",
+  "objective": "Ingest reusable success and failure lessons from the Qwen3.5 Ascend optimization work into the existing maintainer skills.",
+  "owner": "codex",
+  "created_at": "2026-09-09T15:00:00Z",
+  "target_branch": "work/import-qwen35-vllm-ascend-patch-20260909",
+  "work_branch": "work/update-ascend-maintainer-skills-20260909",
+  "remote": "origin",
+  "original_base": "93b3ae4659a1bc0e926998608a55efc96e174d8e",
+  "execution_state": "started",
+  "integration_state": "not_ready",
+  "dependencies": [
+    "Qwen3.5 optimization evidence recorded in existing experiment handoffs"
+  ],
+  "claims": {
+    "exclusive": [
+      ".agents/skills/ascend-inference-tuning-loop",
+      ".agents/skills/ascend-benchmark-evidence",
+      ".agents/skills/ascend-cannbot-profiler",
+      ".agents/skills/ascend-canary-implementation",
+      ".agents/skills/chicaihong01-host-maintenance",
+      ".agents/skills.registry.yaml"
+    ],
+    "shared": [
+      ".agents/evals/practice-iterations"
+    ]
+  },
+  "resource_leases": [],
+  "validation_commands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check",
+    "python3 -m json.tool .agents/workstreams/update-ascend-maintainer-skills-20260909/task.json",
+    "python3 -m json.tool .agents/workstreams/update-ascend-maintainer-skills-20260909/knowledge-proposals.json",
+    "python3 -m json.tool .agents/workstreams/update-ascend-maintainer-skills-20260909/integration-evidence.json"
+  ]
+}
