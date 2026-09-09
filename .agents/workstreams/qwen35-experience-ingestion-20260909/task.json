@@ -1,0 +1,32 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "qwen35-experience-ingestion-20260909",
+  "objective": "Distill verified Qwen3.5 Ascend optimization successes, failures, profiling lessons, runtime-patch activation rules, quality boundaries, and collective-safety gates into the Maintainer Skill Tree.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen35-experience-ingestion-20260909",
+  "remote": "origin",
+  "originalBase": "31c43a4c249c9d4c597372f47d989a7c10b2c9c4",
+  "createdAt": "2026-09-09",
+  "owner": "codex",
+  "frozenConstraints": {
+    "AGENTS.md": "sha256:020aa2d10873a8459e5c8237751485dc2102907a8aa0d663b8db56062f395401",
+    ".agents/skills.registry.yaml": "sha256:83ce52ba456364bed864c91bbaf52c122dce180c51acf74433ba9011a745c113",
+    ".agents/git-policy.yaml": "sha256:0d160291a1e02b75d9aa1157ddc800b2ea5e4c6a49734d0479fca39d0b6b5a43"
+  },
+  "dependencies": ["work/qwen35-performance-delivery"],
+  "claims": [
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-canary-implementation/SKILL.md"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-cannbot-profiler/SKILL.md"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-benchmark-evidence/SKILL.md"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-inference-tuning-loop/SKILL.md"},
+    {"kind":"file","mode":"exclusive","value":"docs/LESSONS_LEARNED.md"},
+    {"kind":"knowledge","mode":"shared","value":".agents/HANDOFF.md"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python3 -m json.tool .agents/workstreams/qwen35-experience-ingestion-20260909/task.json",
+    "git diff --check"
+  ],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
