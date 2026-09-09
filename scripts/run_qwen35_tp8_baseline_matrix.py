@@ -51,8 +51,9 @@ def main() -> int:
         raise ValueError("repetitions must be positive")
     if args.tensor_parallel_size < 1 or args.data_parallel_size < 1:
         raise ValueError("parallel sizes must be positive")
-    if args.tensor_parallel_size * args.data_parallel_size != 8:
-        raise ValueError("this eight-device matrix requires TP * DP == 8")
+    device_count = args.tensor_parallel_size * args.data_parallel_size
+    if device_count != 8 and (args.tensor_parallel_size, args.data_parallel_size) != (4, 1):
+        raise ValueError("supported topologies: eight devices or TP4/DP1 on NPU0-3")
     if sha256(DATASET) != DATASET_SHA256:
         raise ValueError("query_rewrite dataset SHA256 mismatch")
     with urllib.request.urlopen(args.base_url.rstrip("/") + "/health", timeout=30) as response:
@@ -74,7 +75,7 @@ def main() -> int:
         "model": MODEL,
         "dataset": str(DATASET),
         "dataset_sha256": DATASET_SHA256,
-        "physical_devices": list(range(8)),
+        "physical_devices": list(range(device_count)),
         "tensor_parallel_size": args.tensor_parallel_size,
         "data_parallel_size": args.data_parallel_size,
         "quantization": None,

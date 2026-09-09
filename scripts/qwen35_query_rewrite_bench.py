@@ -197,6 +197,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--timeout", type=float, default=600)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--diagnostic-request-metrics", action="store_true")
+    parser.add_argument("--diagnostic-cache-salt", default=None)
     return parser.parse_args()
 
 
@@ -204,6 +206,8 @@ def main() -> int:
     args = parse_args()
     if args.concurrency not in (1, 5, 8, 16):
         raise ValueError("concurrency must be one of 1, 5, 8, 16")
+    if args.diagnostic_cache_salt and not args.diagnostic_request_metrics:
+        raise ValueError("cache salt is restricted to diagnostic runs")
     actual_hash = hashlib.sha256(args.dataset.read_bytes()).hexdigest()
     if actual_hash != args.dataset_sha256:
         raise ValueError(
@@ -225,6 +229,7 @@ def main() -> int:
         token_limits[0][1],
         args.seed,
         args.timeout,
+        cache_salt=args.diagnostic_cache_salt,
     )
     if warmup["finish_reason"] != "stop":
         raise RuntimeError("warmup did not terminate naturally")
@@ -243,6 +248,7 @@ def main() -> int:
                 token_limits[index][1],
                 args.seed,
                 args.timeout,
+                cache_salt=args.diagnostic_cache_salt,
             )
             for index, question in enumerate(questions)
         ]
@@ -268,9 +274,18 @@ def main() -> int:
     raw_exact_matches = 0
     normalized_exact_matches = 0
     reference_similarity: list[float] = []
+    diagnostic_rows = []
     for row in results:
         request_index = int(row.pop("_request_index"))
         response_text = str(row.pop("_response_text"))
+        if args.diagnostic_request_metrics:
+            diagnostic_rows.append({
+                "request_index": request_index,
+                **{key: row[key] for key in (
+                    "ttft_ms", "tpot_ms", "e2e_ms", "prompt_tokens",
+                    "completion_tokens", "finish_reason", "response_sha256",
+                )},
+            })
         answer = answers[request_index]
         normalized_response = normalize_reference_text(response_text)
         normalized_answer = normalize_reference_text(answer)
@@ -330,6 +345,9 @@ def main() -> int:
         },
         "response_sha256": [row["response_sha256"] for row in results],
     }
+    if args.diagnostic_request_metrics:
+        report["diagnostic_request_metrics"] = diagnostic_rows
+        report["diagnostic_cache_salt"] = args.diagnostic_cache_salt
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n",

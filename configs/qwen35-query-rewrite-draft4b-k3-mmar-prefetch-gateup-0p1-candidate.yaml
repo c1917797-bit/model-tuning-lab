@@ -1,0 +1,77 @@
+schema: qwen35-query-rewrite-runtime/v1
+model: /cache/austinov/Qwen3.8-27B
+served_model_name: Qwen3-5/Qwen3.5-27B
+host: 127.0.0.1
+port: 10010
+environment:
+  ASCEND_RT_VISIBLE_DEVICES: "0,1,2,3"
+  HCCL_BUFFSIZE: "512"
+  OMP_PROC_BIND: "false"
+  OMP_NUM_THREADS: "1"
+  TASK_QUEUE_ENABLE: "1"
+  VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE: "1"
+  VLLM_ASCEND_ENABLE_FLASHCOMM1: "0"
+  VLLM_ASCEND_ENABLE_NZ: "1"
+  VLLM_LOGGING_LEVEL: DEBUG
+serve:
+  data_parallel_size: 1
+  tensor_parallel_size: 4
+  seed: 1024
+  max_num_seqs: 16
+  max_model_len: 133000
+  max_num_batched_tokens: 32768
+  kv_cache_memory_bytes: 5000000000
+  trust_remote_code: true
+  enable_prefix_caching: true
+  mamba_cache_mode: align
+  mamba_cache_dtype: bfloat16
+  mamba_ssm_cache_dtype: bfloat16
+  async_scheduling: true
+  dtype: bfloat16
+  quantization: null
+  additional_config:
+    enable_cpu_binding: true
+    enable_matmul_allreduce: true
+    enable_flashcomm1: false
+    weight_nz_mode: 1
+    weight_prefetch_config:
+      enabled: true
+      prefetch_ratio:
+        attn: {qkv: 0.0, o: 0.0}
+        moe: {gate_up: 0.0}
+        mlp: {gate_up: 0.1, down: 0.0}
+  compilation_config:
+    cudagraph_mode: FULL_DECODE_ONLY
+    cudagraph_capture_sizes: [1, 2, 4, 6, 8, 10, 12, 14, 16, 32, 64, 128, 256, 384, 512, 640, 768, 896, 1024, 1280, 1536, 1792, 2048, 2304, 2560, 2816, 3072, 3328, 3456, 3584]
+  speculative_config:
+    model: /cache/Qwen3.5-4B
+    method: draft_model
+    num_speculative_tokens: 3
+    draft_tensor_parallel_size: 4
+    model_config_sha256: ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670
+    weight_index_sha256: cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d
+  implementation_overlay:
+    purpose: "preserve explicit Qwen3.5 causal-LM draft architecture instead of rewriting it as an MTP head"
+    root: /cache/cch/.worktrees/exp-20260906-vllm-draft-model-contract-fix
+    base_commit: 0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665
+    commit: e132e799a681ed10160ed86dbd216ed6035e96dc
+    speculative_py_sha256: a1d14995e80d9b82f37585e95b0b532d4c6d7bd42c36b4e6cc0e8363c5402cca
+benchmark:
+  dataset: /cache/cch/query_rewrite.jsonl
+  dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+  slice: first_32
+  concurrency: [1, 5, 8, 16]
+  repetitions: 1
+  generation: natural_eos
+  percentiles: [p50, p95, p99]
+  target_ttft_speedup: 2.0
+  target_tpot_speedup: 2.0
+candidate:
+  id: draft4b-k3-mmar-prefetch-gateup-0p1-npu03
+  primary_variable: "speculation disabled -> independent Qwen3.5-4B BF16 draft, k=3, TP4"
+  paper_to_ascend_method: "lossless draft-and-verify speculative decoding"
+  correctness_contract: "greedy target-model verification; zero errors and natural EOS are runtime gates, business quality remains separate"
+  quantized: false
+  retrained: false
+  physical_devices: [0, 1, 2, 3]
+  logical_devices: [0, 1, 2, 3]

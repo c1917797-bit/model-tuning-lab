@@ -11,13 +11,20 @@ mtp_local_argmax_commit="${MTP_LOCAL_ARGMAX_COMMIT:-37d32edf5a2626b4b6b1c6ed57fc
 mtp_num_speculative_tokens="${MTP_NUM_SPECULATIVE_TOKENS:-1}"
 
 case "$runtime_role" in
-  baseline|mtp-local-argmax|tp4-dp2|tp4-dp2-mtp-local-argmax|tp4-dp2-fullpiece-user) ;;
+  baseline|mtp-local-argmax|tp4-dp1-npu03|tp4-dp1-npu03-mtp-local-argmax|tp4-dp2|tp4-dp2-mmar-off|tp4-dp2-mtp-local-argmax|tp4-dp2-fullpiece-user|tp4-dp2-fullpiece-bounded) ;;
   *) echo "unsupported RUNTIME_ROLE: $runtime_role" >&2; exit 64 ;;
 esac
 
 uses_mtp=false
+device_last=7
+visible_devices=0,1,2,3,4,5,6,7
 tensor_parallel_size=8
 data_parallel_size=1
+if [[ "$runtime_role" == tp4-dp1-npu03 || "$runtime_role" == tp4-dp1-npu03-mtp-local-argmax ]]; then
+  tensor_parallel_size=4
+  device_last=3
+  visible_devices=0,1,2,3
+fi
 if [[ "$runtime_role" == tp4-dp2* ]]; then
   tensor_parallel_size=4
   data_parallel_size=2
@@ -57,12 +64,12 @@ reservation_ignore_names="${NPU_RESERVATION_IGNORE_NAMES-/vllm-ep-310p-research-
 container_reservations="$(
   for running_id in $(docker ps -q); do
     docker inspect --format '{{.Name}} {{range .HostConfig.Devices}}{{.PathOnHost}} {{end}}' "$running_id"
-  done | awk -v ignored_csv="$reservation_ignore_names" '
+  done | awk -v ignored_csv="$reservation_ignore_names" -v last="$device_last" '
     BEGIN {
       split(ignored_csv, ignored_names, ",")
       for (item in ignored_names) ignored[ignored_names[item]] = 1
     }
-    $0 ~ /\/dev\/davinci[0-7]([[:space:]]|$)/ && !($1 in ignored)
+    $0 ~ ("/dev/davinci[0-" last "]([[:space:]]|$)") && !($1 in ignored)
   '
 )"
 if [[ -n "$container_reservations" ]]; then
@@ -73,12 +80,12 @@ fi
 
 npu_snapshot="$("$npu_smi_bin" info)"
 occupied="$(
-  awk -F '|' '
+  awk -F '|' -v last="$device_last" '
     $2 ~ /^[[:space:]]*[0-7][[:space:]]+[0-9]+[[:space:]]*$/ &&
     $3 ~ /^[[:space:]]*[0-9]+[[:space:]]*$/ {
       gsub(/[[:space:]]/, "", $2)
       gsub(/[[:space:]]/, "", $3)
-      print "NPU" substr($2, 1, 1) ":pid=" $3
+      if (substr($2, 1, 1) + 0 <= last) print "NPU" substr($2, 1, 1) ":pid=" $3
     }
   ' <<<"$npu_snapshot"
 )"
@@ -93,15 +100,36 @@ if ss -ltn | awk '{print $4}' | grep -Eq ":${port}$"; then
 fi
 
 device_args=()
-for physical_id in 0 1 2 3 4 5 6 7; do
+for physical_id in $(seq 0 "$device_last"); do
   device_args+=(--device "/dev/davinci$physical_id:/dev/davinci$physical_id")
 done
 
 compilation_config='{"mode":3,"custom_ops":["all"],"ir_enable_torch_wrap":false,"splitting_ops":[],"compile_sizes":[],"compile_ranges_endpoints":[8096],"inductor_compile_config":{"enable_auto_functionalized_v2":false,"size_asserts":false,"alignment_asserts":false,"scalar_asserts":false,"combo_kernels":true,"benchmark_combo_kernel":true},"inductor_passes":{},"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[1,2,4,8,16,24,32],"use_inductor_graph_partition":false,"pass_config":{"fuse_norm_quant":true,"fuse_act_quant":true,"fuse_attn_quant":false,"enable_sp":false,"fuse_gemm_comms":false,"fuse_allreduce_rms":false,"fuse_rope_kvcache_cat_mla":false,"fuse_act_padding":false},"max_cudagraph_capture_size":32,"dynamic_shapes_config":{"type":"backed","evaluate_guards":false,"assume_32_bit_indexing":false},"fast_moe_cold_start":true}'
 runtime_env_args=()
+case "${ENABLE_DYNAMIC_PROFILING:-0}" in
+  0) ;;
+  1)
+    # Diagnostic runs only: attach msprof separately by worker PID.
+    # Never use profiled request latency for benchmark acceptance.
+    runtime_env_args+=(-e PROFILING_MODE=dynamic)
+    ;;
+  *) echo "ENABLE_DYNAMIC_PROFILING must be 0 or 1" >&2; exit 64 ;;
+esac
 if [[ "$runtime_role" == tp4-dp2-fullpiece-user ]]; then
   compilation_config='{"cudagraph_mode":"FULL_AND_PIECEWISE","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
   runtime_env_args+=(-e VLLM_ASCEND_PTO_CHUNK_GDN=1)
+fi
+
+if [[ "$runtime_role" == tp4-dp2-fullpiece-bounded ]]; then
+  compilation_config='{"cudagraph_mode":"FULL_AND_PIECEWISE","cudagraph_capture_sizes":[1,2,4,8,16,2048],"max_cudagraph_capture_size":2048}'
+  runtime_env_args+=(-e VLLM_ASCEND_PTO_CHUNK_GDN=1)
+fi
+
+mmar_enabled=1
+mmar_json=true
+if [[ "$runtime_role" == tp4-dp2-mmar-off ]]; then
+  mmar_enabled=0
+  mmar_json=false
 fi
 
 serve_args=(
@@ -125,7 +153,7 @@ serve_args=(
   --mamba-ssm-cache-dtype bfloat16
   --disable-custom-all-reduce
   --compilation-config "$compilation_config"
-  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}'
+  --additional-config "{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":$mmar_json,\"enable_flashcomm1\":false}"
   --default-chat-template-kwargs '{"enable_thinking":false}'
   --async-scheduling
 )
@@ -138,6 +166,24 @@ if [[ "$uses_mtp" == true ]]; then
     -v "$proposer_patch:/vllm-workspace/vllm-ascend/vllm_ascend/spec_decode/llm_base_proposer.py:ro"
   )
 fi
+
+case "${QWEN35_GATEUP_PREFETCH_CANDIDATE:-0}" in
+  0) ;;
+  1)
+    if [[ "$runtime_role" != tp4-dp2 ]]; then
+      echo "prefetch candidate requires plain tp4-dp2 role" >&2; exit 64
+    fi
+    case "${QWEN35_PREFETCH_INCLUDE_LINEAR:-0}" in
+      0|1) ;;
+      *) echo "QWEN35_PREFETCH_INCLUDE_LINEAR must be 0 or 1" >&2; exit 64 ;;
+    esac
+    runtime_env_args+=(-e QWEN35_GATEUP_PREFETCH_CANDIDATE=1
+      -e "QWEN35_PREFETCH_INCLUDE_LINEAR=${QWEN35_PREFETCH_INCLUDE_LINEAR:-0}")
+    # Fresh-container-only patch; preserve image and baseline defaults.
+    serve_args=(bash -c 'set -e; git -C /vllm-workspace/vllm-ascend apply --check /experiment/scripts/qwen35_prefetch_load_hook.patch; git -C /vllm-workspace/vllm-ascend apply /experiment/scripts/qwen35_prefetch_load_hook.patch; exec "$@"' -- "${serve_args[@]}")
+    ;;
+  *) echo "QWEN35_GATEUP_PREFETCH_CANDIDATE must be 0 or 1" >&2; exit 64 ;;
+esac
 
 docker run -d \
   --name "$container_name" \
@@ -157,14 +203,14 @@ docker run -d \
   -v /cache/cch:/cache/cch:ro \
   -v "$repo_root":/experiment:ro \
   "${runtime_mount_args[@]}" \
-  -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+  -e "ASCEND_RT_VISIBLE_DEVICES=$visible_devices" \
   -e HCCL_BUFFSIZE=512 \
   -e OMP_PROC_BIND=false \
   -e OMP_NUM_THREADS=1 \
   -e TASK_QUEUE_ENABLE=1 \
   -e TRITON_KERNEL_DUMP=1 \
   -e TRITON_DUMP_DIR=/cache/efim/triton_dump \
-  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1 \
+  -e "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=$mmar_enabled" \
   -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0 \
   -e VLLM_LOGGING_LEVEL=DEBUG \
   "${runtime_env_args[@]}" \

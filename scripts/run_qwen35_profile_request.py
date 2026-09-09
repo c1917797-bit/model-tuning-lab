@@ -46,6 +46,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dataset-sha256", required=True)
     parser.add_argument("--profile-index", type=int, default=0)
     parser.add_argument("--warmup-index", type=int, default=31)
+    parser.add_argument("--skip-warmup", action="store_true")
     parser.add_argument(
         "--control-mode",
         choices=("vllm-api", "external-msprof"),
@@ -99,7 +100,7 @@ def main() -> int:
     profile_tokens, profile_max = token_info(
         args.base_url, args.model, profile_question, args.timeout
     )
-    warmup = request_one(
+    warmup = {"finish_reason": "skipped", "response_sha256": None} if args.skip_warmup else request_one(
         args.base_url,
         args.model,
         warmup_question,
@@ -110,7 +111,7 @@ def main() -> int:
             args.run_id, "warmup", actual_hash, args.warmup_index
         ),
     )
-    if warmup["finish_reason"] != "stop":
+    if not args.skip_warmup and warmup["finish_reason"] != "stop":
         raise RuntimeError("warmup did not terminate naturally")
 
     report = {
@@ -166,6 +167,7 @@ def main() -> int:
                     raise TimeoutError("external profiler did not signal go")
                 time.sleep(0.1)
             started = True
+        report["request_start_unix_s"] = time.time()
         profile_result = request_one(
             args.base_url,
             args.model,
@@ -179,6 +181,7 @@ def main() -> int:
         )
         # The benchmark helper retains text only for in-process semantic
         # aggregation. Profile artifacts must never persist the raw response.
+        report["request_end_unix_s"] = time.time()
         profile_result.pop("_response_text", None)
         report["result"] = profile_result
         if report["result"]["finish_reason"] != "stop":

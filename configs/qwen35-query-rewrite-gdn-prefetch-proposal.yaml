@@ -1,0 +1,52 @@
+schema: qwen35-optimization-proposal/v1
+status: planned-not-implemented
+source_audit:
+  norm: Qwen3_5RMSNorm aliases GemmaRMSNorm
+  norm_cleanup: AscendGemmaRMSNorm has no prefetch postprocess in either branch
+  remaining_cleanup: AscendSiluAndMul calls MLP_DOWN preprocess then postprocess
+  unresolved: verify layer context initialization and zero-down-ratio behavior before extending trigger
+  caution: ordinary AscendRMSNorm cleanup does not establish Qwen3.5 cleanup
+candidate: gdn-gateup-prefetch-coverage
+hypothesis: >-
+  Extend existing dense gate/up prefetch to linear_attn.out_proj so the
+  48 linear-attention layers are eligible alongside 16 full-attention layers.
+  Prefetch may reduce gate/up weight-read stalls; this is not a proven speedup.
+evidence:
+  profile: /cache/austinov/eval-runs/exp-20260904-qwen35-query-rewrite-3x-e2e/profile-captures/tp4-dp2-dual-tp0-20260906T0109Z
+  op_summary_sha256: a9e68c64d5102d6f5248f95df88d38f65023b1c14a5dd76ca2fe8f4624a6dbcd
+  gateup_shape: [1, 5120, 8704]
+  gateup_matmul_summed_us: 974935.48
+  caveat: summed operator duration is not wall latency; one profiled request
+treatment:
+  topology: TP4-DP2
+  physical_devices: [0, 1, 2, 3, 4, 5, 6, 7]
+  dtype: bfloat16
+  quantization: null
+  training: false
+  gateup_prefetch_ratio: 0.1
+  other_prefetch_ratios: 0.0
+  new_trigger: linear_attn.out_proj
+  preserve: [existing token limit, maximum prefetch bytes, dependency tensor, original full-attention trigger]
+  default: disabled
+attribution:
+  control: same TP4-DP2 plus stock gateup prefetch 0.1
+  treatment: same control plus GDN trigger coverage
+  final_denominator: immutable TP8-DP1 MTP-OFF baseline v5
+  note: do not credit coverage separately from enabling prefetch without a matched control
+verification:
+  - Test only the intended linear_attn.out_proj prefix is newly eligible.
+  - Verify dynamic layer context and prefetch cleanup for every eligible layer.
+  - Verify numerical agreement of patched versus unpatched path at identical inputs.
+  - Prove prefetch dispatch and layer coverage on device; flags alone are insufficient.
+  - Use first 32 real query_rewrite records at c1,c5,c8,c16, three repeats.
+  - Keep empty-reference similarity out of semantic acceptance decisions.
+  - Profile separately from latency benchmark.
+screen:
+  targeted_tpot_speedup_min: 1.05
+  ttft_regression_max_fraction: 0.05
+  errors: 0
+  quality: must pass independently meaningful numerical/output checks
+final_goal:
+  ttft_speedup_min_each_concurrency: 2.0
+  tpot_speedup_min_each_concurrency: 2.0
+rollback: disable candidate switch and remove candidate-only mount on next service start; retain evidence

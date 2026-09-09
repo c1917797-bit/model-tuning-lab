@@ -1,0 +1,18 @@
+--- a/vllm_ascend/worker/model_runner_v1.py
++++ b/vllm_ascend/worker/model_runner_v1.py
+@@ -3734,3 +3734,15 @@
+             self.model: nn.Module = get_model(vllm_config=self.vllm_config)
++            import os as _prefetch_os
++            if _prefetch_os.environ.get("QWEN35_GATEUP_PREFETCH_CANDIDATE", "0") == "1":
++                import sys as _prefetch_sys
++                _prefetch_sys.path.insert(0, "/experiment/scripts")
++                from qwen35_gateup_prefetch_hooks import install as _install_prefetch
++                self._candidate_prefetch_handles = _install_prefetch(
++                    self.model, enabled=True, ratio=0.1,
++                    include_linear=_prefetch_os.environ.get("QWEN35_PREFETCH_INCLUDE_LINEAR", "0") == "1",
++                )
++                logger.info("Candidate gate/up prefetch hooks installed: %d", len(self._candidate_prefetch_handles))
++                if len(self._candidate_prefetch_handles) not in (16, 64):
++                    raise RuntimeError("Unexpected candidate prefetch coverage")
+             for name, _ in self.model.named_parameters():
+                 # sinks is a kind of parameter in attention

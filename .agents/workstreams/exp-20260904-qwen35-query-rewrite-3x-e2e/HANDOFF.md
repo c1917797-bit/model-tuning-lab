@@ -4,6 +4,14 @@
 
 ### 0. Status
 
+- Archive decision (2026-09-09): this worktree is superseded by the unified
+  `work/qwen35-performance-delivery` branch. Its committed MMAR/final-sync
+  results and the previously uncommitted prefetch/provenance material are
+  retained as historical evidence only. The prefetch material was not promoted
+  because it lacks the current activation, performance, and quality gates.
+- There is no active resource lease. Do not recreate this worktree or run from
+  this archived checkpoint.
+
 - Workstream: `exp-20260904-qwen35-query-rewrite-3x-e2e`.
 - Branch-local state: active; NPU0-3 were proven free in the current AWMCP
   session; not integrated.
