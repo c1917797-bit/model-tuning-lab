@@ -14,11 +14,17 @@ The candidate installs five coordinated runtime changes:
 - linear-attention gate/up weight prefetch;
 - Gemma RMSNorm prefetch postprocessing.
 
+It also contains an opt-in t13 diagnostic hook for the DyntraLBScheduler. The
+diagnostic hook is disabled by default and is activated only with
+`QWEN35_ASCEND_DIAGNOSTICS=1`; it emits privacy-safe scheduler aggregates such
+as scheduled-token counts, queue sizes, prefill counts, and schedule-call wall
+time. This is for bottleneck attribution only and is not a performance claim.
+
 The rejected bounded-MMAR fallback from historical t11 is not present in t12.
 The base runtime's ordinary MMAR remains enabled. The expected
 sitecustomize.py SHA256 is:
 
-    aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
+    9b8c1ef97d55384cad44ccdd5a904179e81471f98417359b9ef6c272e80304f2
 
 ## Editable installation
 

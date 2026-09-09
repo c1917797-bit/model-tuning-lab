@@ -2,7 +2,7 @@
   "schema": "qwen35-runtime-monkeypatch/v2",
   "candidate": "runtime-monkeypatch-gdn-projection-fusion-t12",
   "status": "live_activation_passed_performance_gate_failed",
-  "sitecustomize_sha256": "aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b",
+  "sitecustomize_sha256": "9b8c1ef97d55384cad44ccdd5a904179e81471f98417359b9ef6c272e80304f2",
   "model": "Qwen3.5-27B",
   "framework": "vLLM-Ascend 0.23.0",
   "image": "quay.io/ascend/vllm-ascend:v0.23.0",
@@ -23,7 +23,8 @@
     "six-way fused checkpoint weight mapping",
     "Ascend GDN fused projection forward path",
     "linear-attention gate/up weight prefetch",
-    "Gemma RMSNorm prefetch postprocess"
+    "Gemma RMSNorm prefetch postprocess",
+    "opt-in DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1"
   ],
   "historical_implementation_provenance": {
     "vllm_gdn_projection_commit": "685fdf22098fb3a0aa8d582dda57063773606a02",

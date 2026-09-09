@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import importlib.util
 import os
+import contextlib
+import io
 from pathlib import Path
 import sys
 from types import ModuleType
@@ -284,6 +286,59 @@ def test_gemma_rmsnorm_prefetch_postprocess(patch):
     assert calls == [output]
 
 
+def test_scheduler_diagnostics_opt_in(patch):
+    class Output:
+        def __init__(self):
+            self.num_scheduled_tokens = {"r0": 3, "r1": 5}
+            self.scheduled_new_reqs = [object()]
+            self.scheduled_cached_reqs = SimpleNamespace(req_ids=["r0", "r1"])
+
+    class Request:
+        def __init__(self, is_prefill_chunk: bool):
+            self.is_prefill_chunk = is_prefill_chunk
+
+    class DyntraLBScheduler:
+        def __init__(self):
+            self.current_step = 0
+            self.running = [Request(True), Request(False)]
+            self.waiting = [object(), object(), object()]
+            self.prefill_capacity_bound = False
+
+        def schedule(self, throttle_prefills: bool = False):
+            self.current_step += 1
+            return Output()
+
+    fake = SimpleNamespace(DyntraLBScheduler=DyntraLBScheduler)
+
+    saved = os.environ.get("QWEN35_ASCEND_DIAGNOSTICS")
+    try:
+        os.environ["QWEN35_ASCEND_DIAGNOSTICS"] = "0"
+        patch._patch_dyntra_scheduler(fake)
+        assert not getattr(DyntraLBScheduler, "_qwen35_diagnostics_monkeypatched", False)
+
+        os.environ["QWEN35_ASCEND_DIAGNOSTICS"] = "1"
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            patch._patch_dyntra_scheduler(fake)
+            scheduler = DyntraLBScheduler()
+            output = scheduler.schedule(throttle_prefills=True)
+        assert isinstance(output, Output)
+        assert getattr(DyntraLBScheduler, "_qwen35_diagnostics_monkeypatched")
+        text = stderr.getvalue()
+        assert "patched DyntraLBScheduler diagnostics" in text
+        assert "diagnostic scheduler step=1" in text
+        assert "tokens=8" in text
+        assert "new=1" in text
+        assert "cached=2" in text
+        assert "prefill_after=1" in text
+        assert "throttle_prefills=True" in text
+    finally:
+        if saved is None:
+            os.environ.pop("QWEN35_ASCEND_DIAGNOSTICS", None)
+        else:
+            os.environ["QWEN35_ASCEND_DIAGNOSTICS"] = saved
+
+
 def main():
     patch = load_patch()
     test_projection_construction(patch)
@@ -291,6 +346,7 @@ def main():
     test_ascend_forward_selection(patch)
     test_linear_attention_gate_up_prefetch(patch)
     test_gemma_rmsnorm_prefetch_postprocess(patch)
+    test_scheduler_diagnostics_opt_in(patch)
     print("PASS: runtime-only GDN projection fusion contract")
 
 
