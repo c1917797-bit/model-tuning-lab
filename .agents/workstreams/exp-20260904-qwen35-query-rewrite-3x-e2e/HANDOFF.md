@@ -4598,3 +4598,20 @@ does not establish the TPOT >=20% target. The standalone PR repository still
 contains the older t11 bounded-MMAR package; do not treat it as equivalent to
 the current t12/GDN runtime patch until the exact bytes are synchronized and
 the live gates pass.
+
+## 2026-09-09 t12 standalone-runtime validation update
+
+- Safety/resource gate: ran on chicaihong01-mb via AWMCP; physical NPU0-3 only. NPU4-7 were not mounted into the qwen35 control/candidate containers and were left untouched. Official vLLM-Ascend 0.23.0 image was used read-only; no docker commit/cp, no site-packages/source overlay mutation.
+- Control fresh service artifact root: `/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z`.
+  - Activation/identity passed earlier for official image + physical NPU0-3 only.
+  - Smoke: `/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z/smoke-c1-limit1.json`, 1/1 completed, 0 errors, natural EOS, TTFT P95 844.243 ms, TPOT P95 28.916 ms.
+  - Fail-fast c1/32: `/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z/failfast-control/c1-r1.json`, 32/32 completed, 0 errors, natural EOS, TTFT P95 6502.636 ms, TPOT P95 31.754 ms.
+  - Fail-fast c16/32: `/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z/failfast-control/c16-r1.json`, 32/32 completed, 0 errors, natural EOS, TTFT P95 29313.635 ms, TPOT P95 159.775 ms.
+- Candidate standalone service artifact root: `/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z`.
+  - Candidate startup/activation passed: `/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z/activation-check.json` confirms official image, physical NPU0-3 present, physical NPU4-7 absent from container, not privileged, patch mount read-only, no vLLM source overlays, operator mount read-only, marker counts present for multiprocessing child, RMSNorm postprocess, gate/up prefetch, GDN construction, six-way weight mapping, ascend forward.
+  - Smoke: `/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z/smoke-c1-limit1.json`, 1/1 completed, 0 errors, natural EOS, TTFT P95 825.815 ms, TPOT P95 28.318 ms; response SHA matched control smoke.
+  - Fail-fast c1/32: `/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z/failfast-candidate/c1-r1.json`, 32/32 completed, 0 errors, natural EOS, TTFT P95 5697.694 ms, TPOT P95 31.641 ms.
+  - c1/32 delta vs same-run control: TTFT P95 reduced 12.38%, TPOT P95 reduced 0.36%. This misses the current target (TTFT >=40%, TPOT >=20%), so t12 must NOT be advanced to c16/full matrix as a successful candidate.
+- Decision: t12 standalone candidate is request-correct and activation-correct but performance-insufficient under the current target. Do not claim goal completion from t12. The standalone PR branch remains useful as a packaging/loader baseline, but no final performance PR should claim t12 meets the target.
+- Next action: inspect generated artifacts and code paths to identify why GDN microbench speedup does not translate to c1 P95/TPOT. Prioritize M=1 decode path and lifecycle/overhead attribution before creating t13. Avoid repeating closed routes (down-proj NZ, online HCCL tiling, K4352-only tiling, HCCL_BUFFSIZE variants, MMAR x3 residual, ShortGPT layer skip, bounded-MMAR t11).
+
