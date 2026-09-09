@@ -1,0 +1,37 @@
+schema: practice-iteration/v1
+id: drrqr-native-teacher-fidelity-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-09
+
+stage_goal: Decide whether fixed retained-key beta compensation merits DRRQR model integration by replaying frozen real-model trajectories against the captured dense teacher.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: The best comparable screen is 4.752041 percent above the frozen dense baseline and energy-Dk64 loses task accuracy; fixed beta has only synthetic NPU evidence while the original real replay stopped on an independent FP32 oracle mismatch after reproducing captured dense bytes.
+  medium_term_milestone: A numerically defensible DRRQR accuracy-recovery candidate that is worth model integration and a fixed-1024-token endpoint screen.
+  short_term_decision: Accept or reject fixed per-head retained-key beta compensation for model integration using immutable real Q/K/V/g/beta/state and post-RMS teacher captures.
+  deciding_evidence: The captured-reference replay must re-prove dense capture and graph/state integrity, bind the prior synthetic beta numerical gate, and show beta64 improves mean post-RMS relative L2 by at least 10 percent versus energy64 without any layer/rank/sequence window worsening by more than 5 percent.
+  budget_or_stop_rule: One implementation-and-test stage and one NPU replay on physical NPU4 within 1800 seconds, with no automatic retry and no relaxation or rewriting of the failed original FP32-oracle report.
+  on_pass: Integrate the exact beta transform into the plugin model path, qualify prefill/decode numerics, and run one fixed-1024-token endpoint performance screen before any final accuracy test.
+  on_failure: Reject fixed beta compensation for this selector and use the same frozen teacher evidence to prioritize a layerwise logical-rank allocation.
+  on_inconclusive: Preserve the failure and repair only a demonstrated execution or evidence-binding defect within the same bounded protocol; otherwise return to DRRQR candidate selection.
+
+changes:
+  - type: validation
+    description: Add a distinct captured-dense-reference replay instead of weakening the historical independent-FP32-oracle gate.
+    files:
+      - projects/drror_vllm_ascend/tools/replay_gdn_teacher_captured_reference.py
+      - projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_captured_reference.py
+  - type: docs
+    description: Record the decision, artifact hashes, evidence ceiling, and next DRRQR loop after the bounded replay.
+    files:
+      - projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
+
+validation_commands:
+  - python3 -m pytest projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_captured_reference.py
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - docker run a fresh read-only source and writable result container on physical NPU4 with a 1800-second external timeout
+
+lessons_ingested: []
