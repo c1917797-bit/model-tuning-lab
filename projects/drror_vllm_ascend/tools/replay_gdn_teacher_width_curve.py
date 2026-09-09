@@ -25,7 +25,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = Path("/drrqr-results")
 CAPTURED_PATH = ROOT / "tools/replay_gdn_teacher_captured_reference.py"
-CAPTURED_SHA256 = "47ca033ac9e792118b6fd884ae8e6b1a77a4589e65f7eda808a24e78d0216c42"
+CAPTURED_SHA256 = "acf2942bff22926e15a2e310e9629175fcbc6d002c2d947ae026cb4829f31bb4"
 VARIANT_DK = {
     "dense128": 128,
     "energy48": 48,

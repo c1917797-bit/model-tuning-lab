@@ -2,6 +2,7 @@
 import importlib.util
 import json
 from pathlib import Path
+import shutil
 
 import pytest
 import torch
@@ -342,6 +343,65 @@ def test_source_and_library_identity_hashes(tmp_path, monkeypatch):
         audit.identity(row, {}, expected_path=path)
     with pytest.raises(ValueError, match="shared object"):
         audit.identity(row, {}, library=True)
+
+
+def capture_source_fixture(root):
+    tools = root / "tools"
+    tools.mkdir(parents=True)
+    names = {
+        "worker": "gdn_teacher_capture_worker.py",
+        "collector": "collect_gdn_teacher.py",
+        "observer_helper": "layerwise_probe_worker.py",
+        "wrapper": "run_gdn_teacher_capture.py",
+        "shared_helper": "run_layerwise_service.py",
+    }
+    paths = {}
+    for role, name in names.items():
+        path = tools / name
+        path.write_text("immutable " + role)
+        paths[role] = path
+    service = {
+        "worker": str(paths["worker"]),
+        "worker_sha256": audit.file_sha(paths["worker"]),
+        "wrapper_sha256": audit.file_sha(paths["wrapper"]),
+        "shared_helper_sha256": audit.file_sha(paths["shared_helper"]),
+    }
+    return paths, service
+
+
+def test_capture_source_bundle_accepts_moved_identical_root(tmp_path, monkeypatch):
+    monkeypatch.setattr(audit, "RESULT_ROOT", tmp_path)
+    monkeypatch.setattr(audit, "HELPER_SHA", None)
+    first_paths, _ = capture_source_fixture(tmp_path / "source-a")
+    second = tmp_path / "source-b"
+    shutil.copytree(first_paths["worker"].parents[1], second)
+    paths = {role: second / "tools" / path.name for role, path in first_paths.items()}
+    service = {
+        "worker": str(paths["worker"]),
+        "worker_sha256": audit.file_sha(paths["worker"]),
+        "wrapper_sha256": audit.file_sha(paths["wrapper"]),
+        "shared_helper_sha256": audit.file_sha(paths["shared_helper"]),
+    }
+    monkeypatch.setattr(audit, "HELPER_SHA", audit.file_sha(paths["observer_helper"]))
+    bundle = audit.capture_source_bundle(
+        service, audit.file_sha(paths["collector"]), audit.file_sha(paths["worker"]))
+    assert bundle["root"] == second
+    assert bundle["paths"] == paths
+
+
+def test_capture_source_bundle_rejects_content_or_role_drift(tmp_path, monkeypatch):
+    monkeypatch.setattr(audit, "RESULT_ROOT", tmp_path)
+    paths, service = capture_source_fixture(tmp_path / "source")
+    monkeypatch.setattr(audit, "HELPER_SHA", audit.file_sha(paths["observer_helper"]))
+    paths["wrapper"].write_text("changed wrapper")
+    with pytest.raises(ValueError, match="capture source role content: wrapper"):
+        audit.capture_source_bundle(
+            service, audit.file_sha(paths["collector"]), audit.file_sha(paths["worker"]))
+    paths["wrapper"].write_text("immutable wrapper")
+    wrong = dict(service, worker=str(paths["collector"]))
+    with pytest.raises(ValueError, match="capture worker role"):
+        audit.capture_source_bundle(
+            wrong, audit.file_sha(paths["collector"]), audit.file_sha(paths["worker"]))
 
 
 def test_main_failure_receipt_and_fresh_output_only(tmp_path, monkeypatch):

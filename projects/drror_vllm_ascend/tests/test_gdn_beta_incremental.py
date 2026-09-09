@@ -43,7 +43,7 @@ def test_protocol_and_frozen_helpers_are_explicit():
     assert probe.GROUP == ("teacher-0", 0, 0)
     assert probe.LANES == ("A_eager", "B_eager", "A_graph", "B_graph")
     assert (probe.SLOTS, probe.DK, probe.DECODE_STEPS) == (4, 64, 8)
-    assert probe.REPLAY_SHA256 == "d864aecf4ca98cbf4b451542d1757e36aa853997055c8d7c653b7f1d4f2faa80"
+    assert probe.REPLAY_SHA256 == "28c735121249e37fbbc6d03436e6b10a659f72152a3cdfe7370633615b4fa9f9"
     assert probe.ORIGINAL_REPLAY_SHA256 == "eb6aa7e8af0234554951b01a808da566fda02994317519a500357b3d586ba79b"
     assert "Original FP32-reference qualification failed" in probe.CLAIM
     assert "No performance admission" in probe.CLAIM

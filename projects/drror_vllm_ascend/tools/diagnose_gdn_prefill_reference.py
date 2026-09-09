@@ -17,7 +17,7 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = Path("/drrqr-results")
-REPLAY_SHA = "d864aecf4ca98cbf4b451542d1757e36aa853997055c8d7c653b7f1d4f2faa80"
+REPLAY_SHA = "28c735121249e37fbbc6d03436e6b10a659f72152a3cdfe7370633615b4fa9f9"
 DATA = {
     "audit": ("gdn-teacher-capture-v2-audit-v2/report.json",
               "88ad45924021635e3d485b57ad14c7cf3e993836eb9dee5a3e465d0da0994777"),

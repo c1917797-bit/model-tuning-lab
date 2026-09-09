@@ -158,7 +158,7 @@ def check_manifest(doc):
 
 
 def identity(record, identities, *, expected_path=None, expected_sha=None, library=False,
-             allow_chunk_wrapper=False):
+             allow_chunk_wrapper=False, source_roots=None):
     require(isinstance(record, dict), "missing file identity")
     path = regular(record.get("path", ""))
     if expected_path is not None:
@@ -168,7 +168,8 @@ def identity(record, identities, *, expected_path=None, expected_sha=None, libra
     elif allow_chunk_wrapper and str(path) == CHUNK_DISABLE_WRAPPER["path"]:
         require(record == CHUNK_DISABLE_WRAPPER, "frozen chunk disable wrapper binding")
     else:
-        require(any(path.is_relative_to(root) for root in SOURCE_ROOTS), "source outside audited roots")
+        roots = SOURCE_ROOTS if source_roots is None else source_roots
+        require(any(path.is_relative_to(root) for root in roots), "source outside audited roots")
     expected = record.get("sha256")
     require(isinstance(expected, str) and HASH.fullmatch(expected), "invalid identity hash")
     if expected_sha is not None:
@@ -181,16 +182,50 @@ def identity(record, identities, *, expected_path=None, expected_sha=None, libra
         identities[key] = {"path": key, "sha256": expected, "size_bytes": path.stat().st_size,
                            "kind": "mapped_library" if library else "source"}
     if "unwrapped" in record:
-        identity(record["unwrapped"], identities)
+        identity(record["unwrapped"], identities, source_roots=source_roots)
     return record
 
 
-def check_ready(ready, rank, manifest_sha, worker_sha, identities, layers=LAYERS):
+def capture_source_bundle(service_doc, collector_sha, worker_sha):
+    """Bind capture-time tools by immutable role/hash, independent of replay checkout."""
+    worker = regular(service_doc.get("worker", ""))
+    require(worker.name == "gdn_teacher_capture_worker.py"
+            and worker.parent.name == "tools", "capture worker role")
+    root = directory(worker.parent.parent)
+    require(RESULT_ROOT.resolve() in root.parents, "capture source must be below /drrqr-results")
+    paths = {
+        "worker": worker,
+        "collector": root / "tools/collect_gdn_teacher.py",
+        "observer_helper": root / "tools/layerwise_probe_worker.py",
+        "wrapper": root / "tools/run_gdn_teacher_capture.py",
+        "shared_helper": root / "tools/run_layerwise_service.py",
+    }
+    hashes = {
+        "worker": worker_sha,
+        "collector": collector_sha,
+        "observer_helper": HELPER_SHA,
+        "wrapper": service_doc.get("wrapper_sha256"),
+        "shared_helper": service_doc.get("shared_helper_sha256"),
+    }
+    require(service_doc.get("worker_sha256") == worker_sha, "capture worker hash binding")
+    for role, path in paths.items():
+        require(path.is_file() and not path.is_symlink(), "capture source role missing: " + role)
+        expected = hashes[role]
+        require(isinstance(expected, str) and HASH.fullmatch(expected), "capture source role hash: " + role)
+        require(file_sha(path) == expected, "capture source role content: " + role)
+    return {"root": root, "paths": paths, "hashes": hashes,
+            "source_roots": (root / "tools",) + SOURCE_ROOTS[1:]}
+
+
+def check_ready(ready, rank, manifest_sha, worker_sha, identities, layers=LAYERS, *,
+                worker=WORKER, helper=HELPER, source_roots=None):
     require(ready.get("schema") == SCHEMA and ready.get("rank") == rank
             and ready.get("local_rank") == rank and ready.get("manifest_sha256") == manifest_sha,
             "rank ready binding")
-    identity(ready.get("worker"), identities, expected_path=WORKER, expected_sha=worker_sha)
-    identity(ready.get("observer_helper"), identities, expected_path=HELPER, expected_sha=HELPER_SHA)
+    identity(ready.get("worker"), identities, expected_path=worker, expected_sha=worker_sha,
+             source_roots=source_roots)
+    identity(ready.get("observer_helper"), identities, expected_path=helper,
+             expected_sha=HELPER_SHA, source_roots=source_roots)
     protocol = ready.get("protocol", {})
     require(protocol == {"tensor_parallel_size": 4, "pipeline_parallel_size": 1,
             "enable_prefix_caching": False, "speculative_config": None,
@@ -199,9 +234,10 @@ def check_ready(ready, rank, manifest_sha, worker_sha, identities, layers=LAYERS
     sources = ready.get("runtime_sources")
     require(isinstance(sources, dict) and bool(sources), "runtime source evidence absent")
     for value in sources.values():
-        identity(value, identities)
+        identity(value, identities, source_roots=source_roots)
     for key in ("parent_worker", "model_class", "model_forward", "chunk", "l2norm"):
-        identity(ready.get(key), identities, allow_chunk_wrapper=(key == "chunk"))
+        identity(ready.get(key), identities, allow_chunk_wrapper=(key == "chunk"),
+                 source_roots=source_roots)
     require("npu_recurrent_gated_delta_rule" in ready.get("native_schema", ""), "native operator schema")
     layer_rows = ready.get("layers")
     require(isinstance(layer_rows, list) and [x.get("layer") for x in layer_rows] == list(layers),
@@ -210,11 +246,11 @@ def check_ready(ready, rank, manifest_sha, worker_sha, identities, layers=LAYERS
         require(str(row.get("prefix", "")).endswith(f'.layers.{row["layer"]}.linear_attn'),
                 "ready layer prefix")
         for key in ("core", "rearrange"):
-            identity(row.get(key), identities)
+            identity(row.get(key), identities, source_roots=source_roots)
         norm = row.get("norm", {})
         for key in ("class", "forward", "dispatched_forward"):
             require(key in norm, "actual dispatched norm source absent")
-            identity(norm[key], identities)
+            identity(norm[key], identities, source_roots=source_roots)
         attrs = norm.get("attributes", {})
         require(attrs.get("eps") == 1e-6 and attrs.get("group_size") is None
                 and attrs.get("norm_before_gate") is True, "frozen norm attributes")
@@ -431,17 +467,21 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
     require(receipt.get("protocol") == {"requests": 2, "sequential": True, "input_tokens": 128,
             "output_tokens": 9, "decode_steps": 8, "ignore_eos": True, "no_thinking": True,
             "health_seconds": 900, "request_retries": 0}, "collector fixed protocol")
-    identities = {}
-    identity({"path": str(COLLECTOR), "sha256": collector_sha}, identities, expected_path=COLLECTOR)
-    identity({"path": str(WORKER), "sha256": worker_sha}, identities, expected_path=WORKER)
     service_path = service / "service-manifest.json"
     service_sha = receipt.get("service_manifest_sha256")
     service_doc = bound_json(service_path, service_sha)
+    source = capture_source_bundle(service_doc, collector_sha, worker_sha)
+    source_paths, source_roots = source["paths"], source["source_roots"]
+    identities = {}
+    identity({"path": str(source_paths["collector"]), "sha256": collector_sha}, identities,
+             expected_path=source_paths["collector"], source_roots=source_roots)
+    identity({"path": str(source_paths["worker"]), "sha256": worker_sha}, identities,
+             expected_path=source_paths["worker"], source_roots=source_roots)
     require(service_doc.get("schema") == "drrqr-gdn-teacher-service/v1"
             and service_doc.get("capture_manifest") == str(manifest_path)
             and service_doc.get("capture_manifest_sha256") == manifest_sha
             and service_doc.get("capture_manifest_schema") == SCHEMA
-            and service_doc.get("worker") == str(WORKER)
+            and service_doc.get("worker") == str(source_paths["worker"])
             and service_doc.get("worker_sha256") == worker_sha
             and service_doc.get("variant") == "dense128"
             and service_doc.get("model") == MODEL
@@ -456,16 +496,21 @@ def audit(service_dir, manifest_path, manifest_sha, collector_receipt_sha, colle
             and observer.get("DRRQR_GDN_TEACHER_DIR") == str(capture), "observer environment binding")
     regular(service / "stop.request")
     # Launcher source itself is checked through its recorded source identity.
-    identity({"path": str(ROOT / "tools/run_gdn_teacher_capture.py"),
-              "sha256": service_doc.get("wrapper_sha256")}, identities)
-    identity({"path": str(ROOT / "tools/run_layerwise_service.py"),
-              "sha256": service_doc.get("shared_helper_sha256")}, identities)
+    identity({"path": str(source_paths["wrapper"]),
+              "sha256": service_doc.get("wrapper_sha256")}, identities,
+             source_roots=source_roots)
+    identity({"path": str(source_paths["shared_helper"]),
+              "sha256": service_doc.get("shared_helper_sha256")}, identities,
+             source_roots=source_roots)
     ready, ready_hashes, native_schemas = {}, [], []
     for rank in range(4):
         path = regular(capture / f"rank{rank}.ready.json")
         raw = path.read_bytes()
         doc = json.loads(raw)
-        ready[rank] = check_ready(doc, rank, manifest_sha, worker_sha, identities, layers)
+        ready[rank] = check_ready(
+            doc, rank, manifest_sha, worker_sha, identities, layers,
+            worker=source_paths["worker"], helper=source_paths["observer_helper"],
+            source_roots=source_roots)
         native_schemas.append(doc["native_schema"])
         ready_hashes.append({"path": str(path), "sha256": sha_bytes(raw)})
     require(len(set(native_schemas)) == 1, "native operator schema differs between ranks")
