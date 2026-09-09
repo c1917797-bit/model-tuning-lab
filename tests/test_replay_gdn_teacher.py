@@ -256,14 +256,16 @@ def test_bad_receipt_stops_before_runtime_and_saves_admission_failure(tmp_path, 
     assert (tmp_path / "result/report.json").read_bytes() == previous
 
 
-def mock_bound():
+def mock_bound(tmp_path):
     from types import SimpleNamespace
     plan, stats = frozen_fixture()
     entries = {
         (f"teacher-{s}", rank, layer, step): {"file": str(step), "sha256": "c" * 64}
         for s in range(2) for rank in range(4) for layer in LAYERS for step in range(9)
     }
-    library = {"path": "/mock/libcust_opapi.so", "sha256": "d" * 64}
+    library_path = tmp_path / "libcust_opapi.so"
+    library_path.write_bytes(b"mock native library, never loaded")
+    library = {"path": str(library_path), "sha256": replay.checksum(library_path)}
     return SimpleNamespace(
         binding={"mock": True}, plan=plan, stats=stats, capture=Path("/mock"),
         entries=entries, audit=SimpleNamespace(load_record=lambda path, sha: (int(path.name), 0)),
@@ -271,13 +273,17 @@ def mock_bound():
                  "identities": [dict(library, kind="mapped_library")]}), library
 
 
-@pytest.mark.parametrize("dense_failure", (True, False))
-def test_main_dense_gate_order_and_failure_attribution(tmp_path, monkeypatch, dense_failure):
+@pytest.mark.parametrize("failure_variant", ("dense128", "energy64", None))
+@pytest.mark.parametrize("library_mismatch", (False, True))
+def test_main_dense_gate_order_and_failure_attribution(
+        tmp_path, monkeypatch, failure_variant, library_mismatch):
     import json
     from types import SimpleNamespace
     monkeypatch.setenv("ASCEND_RT_VISIBLE_DEVICES", "0,1,2,3")
     monkeypatch.setattr(replay, "RESULT_ROOT", tmp_path)
-    bound, library = mock_bound()
+    bound, library = mock_bound(tmp_path)
+    if library_mismatch:
+        bound.receipt["identities"][0]["sha256"] = "f" * 64
     monkeypatch.setattr(replay, "bind_inputs", lambda args: bound)
 
     def initialize(report, phase):
@@ -289,9 +295,8 @@ def test_main_dense_gate_order_and_failure_attribution(tmp_path, monkeypatch, de
     def trajectory(records, variant, keep, r12, runtime, group, out, report, save, phase):
         assert records == list(range(9))
         calls.append((variant, group))
-        if dense_failure:
-            assert variant == "dense128"
-            raise ValueError("mock dense output/state gate failed")
+        if variant == failure_variant:
+            raise ValueError("mock " + variant + " output/state gate failed")
         report["trajectories"].append({"variant": variant, "passed": True})
         value = {"dense128": 0.0, "energy64": 0.5, "beta64": 0.4}[variant]
         return [{"position": position, "relative_l2": value} for position in range(136)]
@@ -300,17 +305,28 @@ def test_main_dense_gate_order_and_failure_attribution(tmp_path, monkeypatch, de
     monkeypatch.setattr(replay, "run_trajectory", trajectory)
     status = replay.main(main_args(tmp_path, "a" * 64))
     result = json.loads((tmp_path / "result/report.json").read_text())
-    if dense_failure:
-        assert status == 1 and result["status"] == "blocked_dense_replay"
-        assert calls == [("dense128", ("teacher-0", 0, 0))]
-        assert not result["dense_gate_passed"] and not result["candidate_numerical_gate_passed"]
+    if failure_variant is not None:
+        expected = "blocked_dense_replay" if failure_variant == "dense128" else "failed_candidate_numerical"
+        assert status == 1 and result["status"] == expected
+        assert calls[-1] == (failure_variant, ("teacher-0", 0, 0))
+        assert len(calls) == (1 if failure_variant == "dense128" else 49)
+        assert result["dense_gate_passed"] == (failure_variant != "dense128")
+        assert not result["candidate_numerical_gate_passed"]
+        assert result["error"] == repr(ValueError("mock " + failure_variant + " output/state gate failed"))
         assert "fidelity" not in result
     else:
-        assert status == 0 and result["status"] == "local_fidelity_screen_pass"
+        assert status == (1 if library_mismatch else 0)
+        assert result["status"] == ("failed_runtime_evidence" if library_mismatch
+                                    else "local_fidelity_screen_pass")
         assert [x[0] for x in calls] == ["dense128"] * 48 + ["energy64"] * 48 + ["beta64"] * 48
         assert result["dense_gate_passed"] and result["candidate_numerical_gate_passed"]
         assert result["fidelity"]["passed"]
         assert "not" in result["claim"].lower() and "throughput" in result["claim"].lower()
+    assert result["loaded_libraries"] == [library]
+    assert result["runtime_evidence_passed"] == (not library_mismatch)
+    if library_mismatch:
+        assert "library_error" in result
+        assert result["library_checks"][0]["reason"] == "teacher_hash_mismatch"
 
 
 def test_real_trajectory_control_uses_private_zero_state_and_eight_ordered_steps(tmp_path, monkeypatch):
@@ -522,3 +538,67 @@ def test_prefill_keeps_chunk_internal_qk_norm_and_zero_initial_state(monkeypatch
     assert observed["cu_seqlens"].tolist() == [0, 128]
     assert observed["beta"] is result["beta"]
     assert torch.equal(final, chunk_state.transpose(-1, -2).contiguous())
+
+
+def library_fixture(tmp_path):
+    canonical = tmp_path / "libcust_opapi.so"
+    canonical.write_bytes(b"CPU fixture library bytes, never loaded")
+    observed = {"path": str(canonical), "sha256": replay.checksum(canonical)}
+    teacher = [dict(observed, kind="mapped_library")]
+    return canonical, observed, teacher
+
+
+def test_library_observations_saved_first_and_canonical_symlink_checked(tmp_path):
+    canonical, observed, teacher = library_fixture(tmp_path)
+    alias = tmp_path / "libcust_opapi-alias.so"
+    alias.symlink_to(canonical)
+    raw = dict(observed, path=str(alias))
+    report, saved = {}, []
+    replay.check_runtime_libraries([raw], teacher, report, lambda: saved.append(copy.deepcopy(report)))
+    assert saved[0]["loaded_libraries"] == [raw] and saved[0]["library_checks"] == []
+    assert saved[0]["runtime_evidence_passed"] is False
+    assert report["runtime_evidence_passed"] is True
+    row = report["library_checks"][0]
+    assert row["raw_path"] == str(alias) and row["resolved_path"] == str(canonical)
+    assert row["in_teacher"] and row["matched"]
+    assert row["sha256"] == row["current_sha256"] == row["teacher_sha256"] == observed["sha256"]
+
+
+def test_unknown_same_hash_copy_is_rejected_and_all_observations_retained(tmp_path):
+    canonical, observed, teacher = library_fixture(tmp_path)
+    unknown = tmp_path / "other/libcust_opapi.so"
+    unknown.parent.mkdir()
+    unknown.write_bytes(canonical.read_bytes())
+    assert not unknown.is_symlink() and replay.checksum(unknown) == observed["sha256"]
+    raw = [dict(observed, path=str(unknown)), observed]
+    report = {}
+    with pytest.raises(ValueError, match="see library_checks"):
+        replay.check_runtime_libraries(raw, teacher, report, lambda: None)
+    assert report["loaded_libraries"] == raw and not report["runtime_evidence_passed"]
+    assert len(report["library_checks"]) == 2
+    assert report["library_checks"][0]["reason"] == "canonical_path_not_in_teacher"
+    assert report["library_checks"][1]["matched"] is True
+
+
+@pytest.mark.parametrize("damage,reason", (
+    ("missing", "inspection_failed"), ("observed_hash", "observed_hash_changed"),
+    ("teacher_hash", "teacher_hash_mismatch"),
+))
+def test_library_failure_reason_and_observed_hash_are_preserved(tmp_path, damage, reason):
+    canonical, observed, teacher = library_fixture(tmp_path)
+    if damage == "missing":
+        observed["path"] = str(tmp_path / "missing/libcust_opapi.so")
+    elif damage == "observed_hash":
+        canonical.write_bytes(b"changed after observation")
+    else:
+        teacher[0]["sha256"] = "f" * 64
+    report = {}
+    with pytest.raises(ValueError, match="see library_checks"):
+        replay.check_runtime_libraries([observed], teacher, report, lambda: None)
+    row = report["library_checks"][0]
+    assert report["loaded_libraries"] == [observed]
+    assert row["sha256"] == observed["sha256"]
+    assert row["reason"] == reason and not row["matched"]
+    assert not report["runtime_evidence_passed"]
+    if damage == "missing":
+        assert "error" in row

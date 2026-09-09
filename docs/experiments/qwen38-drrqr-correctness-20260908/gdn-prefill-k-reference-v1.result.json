@@ -1,0 +1,116 @@
+{
+  "schema": "drrqr-prefill-k-reference-checkpoint/v1",
+  "status": "diagnosis_complete_original_replay_still_failed",
+  "operation": {
+    "id": "exec-0000000000000054",
+    "trace_id": "72376d16-3e55-41fd-9698-3625e98f9b4c",
+    "exit_code": 0,
+    "duration_seconds": 26.195
+  },
+  "physical_npu": 4,
+  "diagnostic_l2_calls": 1,
+  "report": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-prefill-k-reference-v1/report.json",
+    "sha256": "0876c5c5315590f157f3c59146bad487ff293a2419fa27629c8acfe06da88aa9"
+  },
+  "script_sha256": "2488f840fe896c89f58e36d7f544e848aa8d7566d3f206c0c700ceaaf61e032a",
+  "replay_helper_sha256": "56e0d2de14df9c177d607f785d856b00434384bb364ca598972d5457a042c8dd",
+  "original_cpu_state_reproduced_bytes": true,
+  "npu_k_matches_cpu_bytes": true,
+  "k_different_elements_by_key_head": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "native_vs_original_cpu": {
+    "shape_matches": true,
+    "dtype_matches": true,
+    "finite": true,
+    "allclose": false,
+    "passed": false,
+    "max_abs": 0.09392929077148438,
+    "relative_l2": 0.0032895154650029474,
+    "normalized_max": 0.0031437039645358838,
+    "rtol": 0.01,
+    "atol": 0.01,
+    "exceeded_elements": 43,
+    "exceeded_by_value_head": [
+      0,
+      0,
+      0,
+      24,
+      8,
+      9,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "native_vs_actual_k_cpu": {
+    "shape_matches": true,
+    "dtype_matches": true,
+    "finite": true,
+    "allclose": false,
+    "passed": false,
+    "max_abs": 0.09392929077148438,
+    "relative_l2": 0.0032895154650029474,
+    "normalized_max": 0.0031437039645358838,
+    "rtol": 0.01,
+    "atol": 0.01,
+    "exceeded_elements": 43,
+    "exceeded_by_value_head": [
+      0,
+      0,
+      0,
+      24,
+      8,
+      9,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+    ],
+    "original_violations_still_exceeded": 43,
+    "new_violations": 0
+  },
+  "conclusion": "Actual BF16 K normalization does not explain the saved dense prefill state discrepancy. The original unchanged gate still fails. Investigate chunk intermediate arithmetic/rounding versus sequential FP32 reference; no candidate attribution or criterion widening.",
+  "artifacts": {
+    "actual_k": {
+      "path": "/drrqr-results/gdn-prefill-k-reference-v1/actual-k.pt",
+      "sha256": "f0c60d201169384f308bd46760662aef4f2b1d1c9648be75498cd8a4154795af",
+      "size_bytes": 132713
+    },
+    "references": {
+      "path": "/drrqr-results/gdn-prefill-k-reference-v1/references.pt",
+      "sha256": "8c4b3f479d8b5544a392e55426248d1e13ef8b3125cda3e553d49eca924415b6",
+      "size_bytes": 1706017
+    }
+  },
+  "not_executed": [
+    "model",
+    "chunk",
+    "native recurrence",
+    "candidate",
+    "graph"
+  ],
+  "postflight": {
+    "npu_operation": "exec-000000000000005c",
+    "container_top_operation": "exec-000000000000005b",
+    "own_npu_processes": 0,
+    "container_remaining": "original bash only"
+  },
+  "publication": {
+    "preceding_local_checkpoint": "440251e",
+    "push_operation": "exec-000000000000003b",
+    "push_status": "120-second timeout; remote update unconfirmed",
+    "read_only_remote_check_operation": "exec-0000000000000044",
+    "read_only_remote_check_status": "30-second timeout; no repeated push started"
+  },
+  "joint_acceptance": false
+}

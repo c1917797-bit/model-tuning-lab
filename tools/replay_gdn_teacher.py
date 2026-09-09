@@ -471,6 +471,47 @@ def run_trajectory(records, variant, keep, r12, runtime, group, out, report, sav
         save()
 
 
+def check_runtime_libraries(libraries, teacher_identities, report, save):
+    """Persist observations before strict canonical-path and byte-identity checks."""
+    report["loaded_libraries"] = libraries
+    report["library_checks"] = []
+    report["runtime_evidence_passed"] = False
+    report["library_scope"] = "mapped-file hashes, not proof of same-name ACLNN symbol resolution"
+    save()
+    teacher = {item["path"]: item["sha256"] for item in teacher_identities
+               if item["kind"] == "mapped_library"}
+    for item in libraries:
+        row = {"raw_path": item["path"], "resolved_path": None, "sha256": item["sha256"],
+               "current_sha256": None, "teacher_sha256": None,
+               "in_teacher": False, "matched": False, "reason": "inspection_failed"}
+        report["library_checks"].append(row)
+        try:
+            raw_path = Path(item["path"])
+            require(raw_path.is_absolute(), "mapped library path must be absolute")
+            resolved = raw_path.resolve(strict=True)
+            require(resolved.is_file(), "mapped library must resolve to a regular file")
+            row.update(resolved_path=str(resolved), current_sha256=checksum(resolved),
+                       in_teacher=str(resolved) in teacher, teacher_sha256=teacher.get(str(resolved)))
+            if item["sha256"] != row["current_sha256"]:
+                row["reason"] = "observed_hash_changed"
+            elif not row["in_teacher"]:
+                row["reason"] = "canonical_path_not_in_teacher"
+            elif item["sha256"] != row["teacher_sha256"]:
+                row["reason"] = "teacher_hash_mismatch"
+            else:
+                row.update(matched=True, reason="canonical_path_and_sha256_match")
+        except Exception as error:
+            row["error"] = repr(error)
+        finally:
+            save()
+    require(any("libcust_opapi" in item["raw_path"] for item in report["library_checks"]),
+            "mapped native opapi absent")
+    require(all(item["matched"] for item in report["library_checks"]),
+            "replay native library absent/changed from teacher evidence; see library_checks")
+    report["runtime_evidence_passed"] = True
+    save()
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ("audit-report", "manifest", "energy-plan", "retained-stats", "output-dir"):
@@ -569,17 +610,11 @@ def main(argv=None):
         if runtime is not None:
             try:
                 libraries = runtime.probe.loaded_libraries()
-                require(any("libcust_opapi" in x["path"] for x in libraries), "mapped native opapi absent")
-                teacher_libraries = {x["path"]: x["sha256"] for x in bound.receipt["identities"]
-                                     if x["kind"] == "mapped_library"}
-                for item in libraries:
-                    require(item["path"] in teacher_libraries
-                            and item["sha256"] == teacher_libraries[item["path"]],
-                            "replay native library absent/changed from teacher evidence")
-                report["loaded_libraries"] = libraries
-                report["library_scope"] = "mapped-file hashes, not proof of same-name ACLNN symbol resolution"
+                check_runtime_libraries(libraries, bound.receipt["identities"], report, save)
             except BaseException as error:
-                report.update(status="failed_runtime_evidence", library_error=repr(error))
+                report.update(runtime_evidence_passed=False, library_error=repr(error))
+                if report["status"] == "local_fidelity_screen_pass":
+                    report["status"] = "failed_runtime_evidence"
         report["completed_unix_ns"] = time.time_ns()
         save()
         for sig, handler in previous_handlers.items():

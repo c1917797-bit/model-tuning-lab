@@ -49,6 +49,18 @@ passing (26.07 seconds of pytest execution, 14 deprecation warnings). The paused
 native build/codegen tests were explicitly excluded. These CPU/mock passes do
 not override the failed real-NPU prefill-reference gate.
 
+The next one-case NPU diagnosis ran only Ascend prefill L2(raw_K), not a model,
+chunk or candidate replay. Actual BF16 K exactly matched CPU-normalized K; the
+original FP32 reference state was reproduced byte-for-byte and all 43 original
+violations remained after substituting the observed K. Thus normalization does
+not explain this saved discrepancy. The unchanged reference gate remains failed;
+chunk intermediate rounding/accumulation is the next narrow source investigation.
+See gdn-prefill-k-reference-v1.result.json. Later replay changes only preserve
+raw/canonical library evidence and the primary failure; they do not change math
+or thresholds. The original failed implementation is saved in local commit
+440251e; its push and a read-only remote check timed out, so remote publication
+is unconfirmed. No automatic repeated push or experiment retry was started.
+
 ## Admission frozen before the first service launch
 
 Phase: performance-first candidate selection, with numerical correctness first.
