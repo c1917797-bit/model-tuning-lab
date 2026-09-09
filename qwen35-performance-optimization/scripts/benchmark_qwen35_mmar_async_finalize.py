@@ -15,6 +15,22 @@ from typing import Any, Callable
 
 
 SHAPES = ((1536, 5120), (4352, 5120))
+CANDIDATE_FEATURE_ENVS = (
+    "ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH",
+    "ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST",
+)
+
+
+def require_single_candidate_feature() -> str:
+    enabled = [
+        name for name in CANDIDATE_FEATURE_ENVS if os.environ.get(name) == "1"
+    ]
+    if len(enabled) != 1:
+        raise RuntimeError(
+            "candidate gate requires exactly one enabled feature environment; "
+            f"enabled={enabled}"
+        )
+    return enabled[0]
 
 
 def parse_args() -> argparse.Namespace:
@@ -238,6 +254,11 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
     stress_by_rank: list[dict[str, Any] | None] = [None] * world_size
     dist.all_gather_object(stress_by_rank, stress_local)
     if rank == 0:
+        candidate_feature_env = (
+            require_single_candidate_feature()
+            if args.label == "candidate"
+            else None
+        )
         result = {
             "schema": "qwen35-mmar-m1-ipc-fullmesh-frozen-ab/v2",
             "label": args.label,
@@ -267,6 +288,12 @@ def worker(rank: int, world_size: int, args: argparse.Namespace) -> None:
                 "task_queue_enable": os.environ.get("TASK_QUEUE_ENABLE"),
                 "mmar_m1_ipc_fullmesh": os.environ.get(
                     "ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH"
+                ),
+                "candidate_feature_env": candidate_feature_env,
+                "candidate_feature_value": (
+                    os.environ.get(candidate_feature_env)
+                    if candidate_feature_env is not None
+                    else None
                 ),
                 "ascend_custom_opp_path": os.environ.get("ASCEND_CUSTOM_OPP_PATH"),
                 "operator_commit": os.environ.get("QWEN35_MMAR_OPERATOR_COMMIT"),
@@ -319,8 +346,7 @@ def main() -> int:
     if stale_progress:
         raise FileExistsError(f"refusing to overwrite {stale_progress}")
     if args.label == "candidate":
-        if os.environ.get("ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH") != "1":
-            raise RuntimeError("candidate IPC fullmesh gate is not enabled")
+        require_single_candidate_feature()
         custom_opp_roots = [
             Path(item)
             for item in os.environ.get("ASCEND_CUSTOM_OPP_PATH", "").split(":")
