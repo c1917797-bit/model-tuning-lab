@@ -32,7 +32,13 @@ real improvement.
    and excluded runs with reasons.
 7. Store concise summaries in Git and store raw logs/traces externally with
    checksums and retention information.
-8. Classify the result using `ascend-inference-tuning-loop` and commit/push the
+8. For capture/replay workflows, keep the capture-time absolute path as
+   provenance metadata, but bind scientific source identity to an allowed
+   immutable source root, the file's fixed relative role, and its content
+   checksum. Do not require the replay checkout path to equal the capture
+   checkout path. Re-audit the raw capture after moving or re-materializing the
+   source snapshot, and reject missing roles or any checksum drift.
+9. Classify the result using `ascend-inference-tuning-loop` and commit/push the
    measurement stage even when it fails or shows no benefit.
 
 ## Comparability Gate
@@ -54,6 +60,8 @@ differs. Re-baseline instead.
 - Baseline and candidate environment fingerprints match.
 - Correctness gates pass before a performance win is accepted.
 - Commands, thresholds, repetitions, and exclusions are recorded.
+- Capture evidence remains independently auditable from a different checkout;
+  relocation changes provenance location, not a hash-bound source identity.
 - Cold, steady, boundary, lifecycle, and resources are reported separately or
   explicitly marked out of scope.
 - Raw artifact hashes resolve and no protected data is committed.
