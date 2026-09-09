@@ -8,12 +8,17 @@ candidate_opp_root="${CANDIDATE_OPP_ROOT:?set CANDIDATE_OPP_ROOT}"
 candidate_opp_env="${CANDIDATE_OPP_ENV:?set CANDIDATE_OPP_ENV}"
 candidate_commit="${CANDIDATE_OPERATOR_COMMIT:?set CANDIDATE_OPERATOR_COMMIT}"
 candidate_sha256="${CANDIDATE_PACKAGE_SHA256:?set CANDIDATE_PACKAGE_SHA256}"
+candidate_feature_env="${CANDIDATE_FEATURE_ENV:?set CANDIDATE_FEATURE_ENV}"
 cooldown="${MMAR_DEVICE_COOLDOWN_SECONDS:-30}"
 benchmark_timeout="${MMAR_BENCHMARK_TIMEOUT_SECONDS:-600}"
 image="${VLLM_ASCEND_IMAGE:-quay.io/ascend/vllm-ascend:v0.23.0}"
 lease_file="/cache/austinov/.locks/npu0-3.lock"
 
 case "$output_root" in /cache/austinov/*) ;; *) echo "invalid OUTPUT_ROOT" >&2; exit 64;; esac
+case "$candidate_feature_env" in
+  ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH|ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST) ;;
+  *) echo "unsupported candidate feature environment: $candidate_feature_env" >&2; exit 64;;
+esac
 [[ -d "$candidate_opp_root" ]] || { echo "missing OPP root: $candidate_opp_root" >&2; exit 66; }
 [[ -f "$candidate_opp_env" ]] || { echo "missing OPP environment: $candidate_opp_env" >&2; exit 66; }
 case "$candidate_opp_env" in
@@ -99,7 +104,8 @@ launcher_sha256="$(sha256sum "$bundle_root/scripts/run_qwen35_mmar_async_finaliz
   echo "benchmark_sha256=$benchmark_sha256"
   echo "evaluator_sha256=$evaluator_sha256"
   echo "launcher_sha256=$launcher_sha256"
-  echo "candidate_env_ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH=1"
+  echo "candidate_feature_env=$candidate_feature_env"
+  echo "candidate_feature_value=1"
   echo "stress_gate=numerical max-abs and relative-L2 envelope versus stock"
   echo "warmup=40"
   echo "iterations=200"
@@ -123,11 +129,11 @@ for label in default candidate; do
     commit="$candidate_commit"
     sha256="$candidate_sha256"
     opp_mount_args=(-v "$candidate_opp_root:$candidate_opp_container_root:ro")
-    candidate_args=(-e ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH=1)
+    candidate_args=(-e "$candidate_feature_env=1")
     run_prefix="test -f '$candidate_opp_container_env'; test -d '$candidate_opp_container_vendor'; export ASCEND_CUSTOM_OPP_PATH='$candidate_opp_container_vendor'; export LD_LIBRARY_PATH='$candidate_opp_container_vendor/op_api/lib':\${LD_LIBRARY_PATH:-}; "
     master_port=29954
   fi
-  container_name="qwen35_mmar_ipc_fullmesh_${label}_npu03"
+  container_name="qwen35_mmar_candidate_${label}_npu03"
   ! docker container inspect "$container_name" >/dev/null 2>&1 || {
     echo "existing container: $container_name" >&2
     exit 41
@@ -194,5 +200,5 @@ final_image_digests="$(docker image inspect --format '{{json .RepoDigests}}' "$i
 [[ "$final_image_id" == "$image_id" ]] || { echo "image ID changed" >&2; exit 47; }
 [[ "$final_image_digests" == "$image_digests" ]] || { echo "image digest changed" >&2; exit 47; }
 sha256sum "$output_root"/*.json "$output_root"/*.jsonl "$output_root"/*.log "$output_root"/*.txt >"$output_root/SHA256SUMS"
-echo "completed official-stock vs opt-in IPC-fullmesh A/B: $output_root"
+echo "completed official-stock vs opt-in MMAR candidate A/B: $output_root"
 exit "$decision_rc"
