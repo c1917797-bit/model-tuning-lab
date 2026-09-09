@@ -4530,3 +4530,16 @@ This checkpoint is evidence and tooling only. It is not an E2E performance pass,
 does not promote t12 or the rejected IPC operators, and does not change the
 final gate: TTFT P95 at least 40% lower and TPOT P95 at least 20% lower at
 c1/c5/c8/c16 with zero material quality regression.
+
+The owned profiling control container
+`qwen35_cannbot_round0_profile_control_npu03` was later inspected exactly: ID
+`b6de6e049a71a92a3b5bc6635006309ad517b4806cf832b3bd455c2e836cac1c`, variant
+`control`, output root
+`/cache/austinov/qwen35-cannbot-round0-profile-control-service-20260909T092151Z`,
+official image ID `sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`,
+and only physical NPU0-3 device mounts. It was stopped through the maintained
+identity-checking stop script. Post-stop state showed no NPU0-7 processes, no
+target-port listener, MemAvailable about 83.9 GiB, and only the unrelated
+`drrqr_qwen38_energy_preflight_20260908` container still running. Do not infer
+future availability from this snapshot; re-run the full resource gate before
+any new container allocation.
