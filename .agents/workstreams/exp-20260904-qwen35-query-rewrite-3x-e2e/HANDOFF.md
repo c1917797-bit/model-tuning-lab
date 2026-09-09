@@ -3781,6 +3781,38 @@ only physical NPU4-7. The official image identity remains
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
 
+## 2026-09-09 native MMAR AICPU-first candidate build
+
+The ad-hoc IPC v1-v6 line remains closed. A lower-risk native lifecycle
+candidate was created in the isolated ops-transformer worktree
+`/cache/cch/.worktrees/exp-20260909-qwen35-mmar-aicpu-first` on branch
+`work/exp-20260909-qwen35-mmar-aicpu-first`. Commit
+`41515133cadc7e2de54bb6f2297887bfefc7e4ad` keeps the stock MMAR kernel and,
+only when `ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST=1`, changes `commOrder` from
+MM-first to AICPU-first for the exact BF16 TP4 decode shapes M=1,
+K in {1536,4352}, N=5120, with no bias/add and one tile/no tail. All other
+shapes and the default-without-env path remain stock.
+
+The host-only gate ran inside a disposable official-image container with no
+network and no NPU devices and passed 107/107 tests. Build dependencies were
+copied to the task-private
+`/cache/cch/qwen35-mmar-aicpu-first-deps-20260909` cache so the shared cache was
+not mutated. The candidate package build is running in another no-network,
+no-NPU, read-only-rootfs official-image container under AWMCP operation
+`exec-0000000000000a7f`; poll this exact operation rather than restarting it.
+The generated wheel target was resumed with `--no-build-isolation` because
+the image already contains setuptools/wheel and the default target attempted
+an unnecessary PyPI download. No official image files were changed.
+
+The frozen operator A/B launcher was generalized in model-lab commit
+`5c4f776a61da4b8426a8758a1cbd87a17b444def`. `CANDIDATE_FEATURE_ENV` is now
+required and restricted to the retained IPC name or the new AICPU-first name;
+syntax, negative whitelist validation, `git diff --check`, and all 18
+Maintainer Skill Tree checks pass. After the package completes, record its
+SHA256, install it only into a task-private OPP directory, then re-run the full
+resource gate before any physical NPU0-3 operator A/B. Do not start E2E unless
+both K1536 and K4352 pass correctness, stress, and the frozen performance gate.
+
 ## 2026-09-09 IPC fullmesh v6 v1-protocol reproduction rejection
 
 The v6 diagnostic restored the exact once-successful v1 binary
