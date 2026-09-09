@@ -21,7 +21,7 @@ independent baseline, quality, and delivery-contract gates.
 
 ## State
 
-- Execution: `superseded-policy`; integration: `not-ready`; decision:
+- Execution: `completed-superseded-policy`; integration: `superseded`; decision:
   `rejected-policy` for the MTP candidate.
 - Branch: `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend`.
 - Base: `origin/main@fbc79c41c37c8900f0623ce8941304e9bfde5cf1`.
@@ -104,5 +104,10 @@ section above.
 
 - Repository validation: `./scripts/validate-mst.sh` and `git diff --check`.
 - Rollback for this workstream is complete: `qwen35_dense_mtp_ab` was removed.
+- The 2026-09-09 consolidation audit found a clean, pushed worktree with no
+  process CWD, command-line reference, container mount, NPU/port lease, or
+  active experiment container. The remote branch retains all negative evidence
+  and is eligible for worktree reclamation without merging the superseded MTP
+  candidate into `main`.
 - Large artifacts remain outside Git and are referenced from the experiment
   record; hashes should be regenerated after the final uncontended run.
