@@ -1,0 +1,90 @@
+{
+  "schema": "drrqr-frozen-baseline/v1",
+  "baseline_id": "qwen38-dense-common-optimized-npu4-7-v1",
+  "status": "frozen_development_performance_baseline",
+  "frozen_at": "2026-09-09",
+  "claim_scope": "Reusable development and candidate-screening baseline; the source run is one measured dense run and is not itself final three-run repeatability or task-accuracy acceptance.",
+  "performance": {
+    "output_tokens_per_second": 135.14246991715385,
+    "ttft_mean_ms": 34693.57763297157,
+    "tpot_mean_ms": 69.43622686534793,
+    "benchmark_duration_s": 303.08754919981584,
+    "ten_percent_target_tokens_per_second": 148.65671690886924,
+    "requests": 40,
+    "successful_requests": 40,
+    "output_tokens": 40960
+  },
+  "workload_contract": {
+    "input_tokens": 32768,
+    "prefix_tokens": 16384,
+    "output_tokens_per_request": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "warmup_requests": 2,
+    "timeout_seconds": 1800,
+    "finish_reason": "length"
+  },
+  "service_contract": {
+    "model": "/cache/austinov/Qwen3.8-27B",
+    "served_model_name": "qwen3.8",
+    "dtype": "bfloat16",
+    "tensor_parallel_size": 4,
+    "max_model_len": 40960,
+    "max_num_batched_tokens": 40960,
+    "max_num_seqs": 32,
+    "gpu_memory_utilization": 0.9,
+    "prefix_caching": false,
+    "async_scheduling": true,
+    "cudagraph_mode": "FULL_DECODE_ONLY",
+    "physical_npus": [4, 5, 6, 7],
+    "container_npus": [0, 1, 2, 3],
+    "container_image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+  },
+  "common_optimization_contract": {
+    "plugin_version": "0.1.9",
+    "drrqr_enabled": false,
+    "conv_layout": "packed",
+    "prefill_mc2": true,
+    "prefill_mc2_mixed": true,
+    "hccl_op_expansion_mode": "AIV",
+    "lccl_deterministic": "0",
+    "wheel_sha256": "049ac88312f262ec7a193b4ad77245583122ffa3a0d77d16ccc38699809e4fae",
+    "build_manifest_sha256": "11d09b682a1b4f17669e7e097d4a79ffa2b550cdacbfca3656ad2ddb4dc3009e",
+    "gdn_source_sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
+  },
+  "evidence": {
+    "comparison_report": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/dk64-vs-dense-common-optimized.json",
+    "comparison_report_sha256": "d222aa3a39fa0933c8f2c72d0fba405aae6aa32fcc95e5823d3911092ffdffbd",
+    "service_manifest": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/baseline-mixed-on/service-manifest.json",
+    "service_manifest_sha256": "7b4fa18a66dc306095d6e21ad4b86648003a5dcd56ad1c5b62c6c2262fae830a",
+    "raw_performance_sha256": "9bf3a9206b68b741fa642f2609b5e993f7797f6cf00d2360bffa31972de4e80e",
+    "benchmark_driver_sha256": "cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822",
+    "benchmark_client_sha256": "b7c8969ae1fd651ede09332681885cf293419a14990c3c8f5b21bca7d204ae64"
+  },
+  "reuse_policy": {
+    "default": "Reuse without rerunning dense when all material baseline fields match.",
+    "candidate_only_change": "A candidate-only algorithm, selector, cache, or operator change does not invalidate this baseline when DRRQR-disabled dispatch and the common dense path are proven unchanged.",
+    "must_rebaseline_if": [
+      "model or tokenizer content changes",
+      "container image, driver, firmware, CANN, vLLM, or vLLM-Ascend execution identity changes",
+      "a code or configuration change can affect the DRRQR-disabled dense path",
+      "common optimization flags change",
+      "device mapping, tensor parallelism, power or clock mode, or relevant topology changes",
+      "workload tokens, requests, concurrency, warmup, scheduling, graph mode, or benchmark client changes",
+      "artifact integrity or environment comparability cannot be proved"
+    ],
+    "drift_check": "Before each comparison, compare the current manifest to this contract. Rebaseline only on a listed material mismatch; do not rerun dense merely because a new candidate is tested."
+  },
+  "accuracy_baseline": {
+    "status": "not_yet_frozen_for_final_protocol",
+    "required_protocol": "Current same-stack dense, thinking disabled, max_tokens=2048, normal EOS, LongBench-v2 and GSM8K.",
+    "historical_longbench_v2_percent_runs": [
+      44.8818897638,
+      46.4566929134,
+      44.8818897638
+    ],
+    "historical_longbench_v2_percent_mean": 45.406824147,
+    "historical_claim": "Context only; different configuration and therefore not the frozen final accuracy baseline.",
+    "reuse_after_creation": "Once the current same-stack accuracy baseline and hashes are recorded, reuse it under the same material-change rules instead of rerunning it for every candidate."
+  }
+}

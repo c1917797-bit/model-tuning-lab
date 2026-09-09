@@ -40,6 +40,25 @@ deliver reproducible 10%+ end-to-end throughput gain without accuracy decline. A
 baseline and candidate use max_tokens=2048; the separate fixed-output performance protocol
 uses 1024. Preserve historical results and label invalid or non-comparable evidence.
 
+## Frozen baseline reuse
+
+Use
+`docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json`
+as the fixed development performance baseline. Do not rerun dense for every
+candidate. Before comparison, verify the current environment and dense-path
+manifest against that contract. Candidate-only changes proven inactive when
+DRRQR is disabled keep the baseline valid. Rebaseline only for a listed material
+change affecting the model, runtime identity, dense path, common optimization,
+device/topology, or workload protocol.
+
+The frozen performance reference is 135.14246991715385 output tok/s,
+34693.57763297157 ms mean TTFT, and 69.43622686534793 ms mean TPOT. The fixed
+10% target is 148.65671690886924 output tok/s. This is a reusable single-run
+development baseline, not retroactive three-run final acceptance. The current
+same-stack final-protocol accuracy baseline remains a one-time missing artifact;
+historical LongBench-v2 runs are context only. After that accuracy artifact is
+created, reuse it under the same material-change policy.
+
 ## Mainline experiment admission and scope control
 
 The user's latest steering is algorithm-first: adapt DRRQR selectors, rank
