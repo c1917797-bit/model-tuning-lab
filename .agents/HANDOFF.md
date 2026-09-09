@@ -10,18 +10,22 @@
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
 - Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide`, with pushed evidence, negative-result retention, and explicit recovery checkpoints.
 - Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
-- The repository-specific active worktree budget is eight.
-- Active Qwen3.5 branch-local tracks are deliberately separate and are not
-  integrated product truth:
-  - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
+- The repository has two long-lived business workstreams. A hypothesis does not
+  receive a permanent worktree; it stays inside its owning task and is archived
+  immediately after a terminal decision.
+- Active branch-local work is not integrated product truth:
+  - `work/qwen35-performance-delivery` owns the Qwen3.5 production
     performance loop. Its current user gate is at least 40% lower TTFT P95 and
     at least 20% lower TPOT P95 at c1/c5/c8/c16 versus the frozen TP4 MTP-off
     `query_rewrite` baseline, with zero material quality regressions.
     BF16, no quantization/retraining/MTP/speculation, and runtime-monkeypatch
     delivery are mandatory. It is blocked on a valid NPU0-3 lease.
-  - The old dense-MTP and prefix-cache candidates are superseded. Their remote
-    branches retain negative evidence, but their worktrees were reclaimed and
-    rejected code was not merged into `main`.
+  - `work/drror-objective-loop-skill-20260909` owns the DRRQR/Objective
+    optimization task. Its current captured-teacher fidelity iteration is
+    in progress and must remain isolated from Qwen3.5 delivery.
+  - The old dense-MTP, prefix-cache, ShortGPT, and duplicate query-rewrite
+    candidates are superseded. Immutable remote tags retain their evidence;
+    rejected code is not merged into `main`.
   - `work/drror-objective-loop-skill-20260909` retains imported DRRQR/objective
     history for adaptation; it is not integration-ready and remains branch-local.
 - Local Git state alone does not prove current target-host runtime state. Re-check NPU, container, port, memory, process, controller, and worktree ownership before touching hardware.
@@ -57,6 +61,15 @@ Keep the distinction between three kinds of knowledge explicit:
 
 ## 3. Recent Progress
 
+- Normalized the Qwen3.5 task onto
+  `work/qwen35-performance-delivery` at
+  `/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery`. The
+  scheduler-diagnostic checkpoint is pushed, while unvalidated prefetch and
+  terminal ShortGPT material are preserved under archive tags.
+- Two archived local worktrees are temporarily retained only because exited
+  experiment containers still declare their old paths as mounts. Do not remove
+  those worktrees or containers until exact ownership and restart requirements
+  are reviewed.
 - Consolidated target-host worktrees from eight to five: every committed
   checkpoint was pushed, two superseded experiment worktrees were safely
   reclaimed, and the transient consolidation worktree was removed after
@@ -99,9 +112,8 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. Inventory the four retained non-main worktrees on the target host. Read each
-   `task.json` and `HANDOFF.md` before touching files, containers, ports,
-   processes, or NPUs.
+2. Start from `docs/ACTIVE_WORKSTREAMS.md`. Resume only one of the two
+   canonical task branches; archived experiment worktrees are not active work.
 3. For the Qwen3.5 performance loop, read branch commit
    `c71de549b3ee32030799d66198786d8619aba3c1`. Do not retry the rejected
    bounded-MMAR stack unchanged. Prove NPU0-3 ownership, then gate a materially
