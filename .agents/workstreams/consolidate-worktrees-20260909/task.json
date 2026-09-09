@@ -1,0 +1,32 @@
+{
+  "schema": "mst-workstream/v1",
+  "task_id": "consolidate-worktrees-20260909",
+  "objective": "Audit all active worktrees, integrate only validated ready changes, publish retained checkpoints, and reclaim only clean merged or superseded worktrees.",
+  "owner": "codex",
+  "created_at": "2026-09-09T16:00:00Z",
+  "target_branch": "main",
+  "work_branch": "work/consolidate-worktrees-20260909",
+  "remote": "origin",
+  "original_base": "80ff89386c8edbe9435da3cecda11b91661c11aa",
+  "execution_state": "started",
+  "integration_state": "not_ready",
+  "dependencies": [],
+  "claims": {
+    "exclusive": [
+      ".agents/HANDOFF.md",
+      ".agents/workstreams/consolidate-worktrees-20260909"
+    ],
+    "shared": [
+      ".agents/workstreams",
+      ".agents/skills",
+      ".agents/skills.registry.yaml"
+    ]
+  },
+  "resource_leases": [],
+  "validation_commands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check",
+    "git status --short --branch",
+    "git worktree list --porcelain"
+  ]
+}
