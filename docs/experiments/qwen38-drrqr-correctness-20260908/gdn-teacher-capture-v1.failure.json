@@ -1,0 +1,60 @@
+{
+  "schema": "gdn-teacher-capture-failure/v1",
+  "status": "startup_failed_no_capture",
+  "phase": "real-model teacher collection for DRRQR algorithm screening",
+  "service_operation": "exec-0000000000000672",
+  "collector_operation": "exec-0000000000000675",
+  "service_directory": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/gdn-teacher-capture-v1",
+  "service_launcher_sha256": "68db6bdc53ad519c74b51a003e26273f72bea8c1efb527fca6e3c3e42542db39",
+  "worker_sha256": "006eded430a6eb9516e8a5014100ec52540ede27977716ff8d58774e5978f830",
+  "collector_sha256": "6c37d8700e066a7975437ab69623771c4596e58a30edb873b4243f85f885c724",
+  "manifest_sha256": "5fb48269fb6919af73040938d35ba82090ae820a41ee61dc440183acf3ec1b12",
+  "failure": {
+    "owner": "new plugin-owned teacher launcher",
+    "stage": "determine_available_memory/warmup communication",
+    "invalid_setting": "HCCL_DETERMINISTIC=0",
+    "native_error": "Expected value: true, false or strict",
+    "numerical_failure": false
+  },
+  "actual": {
+    "model_loaded_tp_ranks": 4,
+    "ready_reports": 4,
+    "requests_sent": 0,
+    "tensor_archives": 0,
+    "candidate_fidelity_result": null,
+    "performance_result": null,
+    "accuracy_result": null
+  },
+  "cleanup": {
+    "manual_stop_operation": "exec-000000000000068c",
+    "signals": [
+      "SIGTERM",
+      "SIGKILL"
+    ],
+    "service_exit_code": -9,
+    "group_remaining": false,
+    "elapsed_seconds": 276.84255146980286,
+    "docker_top_only_bash": true,
+    "physical_npu4_7_no_processes": true,
+    "postflight_operations": [
+      "exec-0000000000000696",
+      "exec-000000000000069c"
+    ],
+    "unrelated_npu0_3_processes_not_modified": true
+  },
+  "evidence": {
+    "service.log": "df970298c8a3e6cbcd987c7cb353c8539f0aa2501c211dca455565dcc57e9af0",
+    "service-manifest.json": "d456393925be25a4e8a803e02ec4ee7d83e82ff024aa0cc0551edf5d3d282881",
+    "teacher-collector.json": "81e124b0b9c6894a1df508353b548b5fd7a42e668b6e3cdc258a6eef33f03f16",
+    "service-exit.json": "b7ee570f970aef61c57f98a5385223b730ac53b24efdf07201f4cd0fb4a922d8"
+  },
+  "correction": {
+    "launcher_sha256": "89f8c2b9618c98e9f5dff01236c368c6cb3ed7df115759c8518d0704c556b847",
+    "change": "remove HCCL_DETERMINISTIC/LCCL_DETERMINISTIC overrides; record unset rather than guessing numeric booleans",
+    "mock_tests": 18,
+    "npu_runtime_validation": "pending targeted TP4 communication smoke",
+    "original_failure_retained": true
+  },
+  "claim": "This failure changes the next launch action only; it is not evidence for or against beta compensation, pruning quality, throughput, or final accuracy."
+}
+

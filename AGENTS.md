@@ -39,6 +39,48 @@ changes are authorized when they enable or improve a concrete DRRQR candidate;
 generic operator development is not an independent completion target. Continue
 to apply any general optimization equally to the contemporaneous dense control.
 
+The user explicitly reaffirmed the DRRQR-only mainline after an off-scope MTP
+recommendation. Do not substitute MTP, speculative decoding, quantization or
+another acceleration algorithm for this objective without explicit new direction.
+At experiment admission, result interpretation, and next-step selection, check:
+(1) the work directly enables DRRQR or tests a named DRRQR algorithm/operator
+change against an observed limitation; (2) the deciding evidence advances the
+same 10% end-to-end throughput/no-accuracy-loss objective; (3) numerical/storage
+or local-fidelity evidence is not reported as throughput/task-accuracy success.
+State this link concisely in progress updates. If the link is absent, defer the
+branch and return to the mainline. Label official StrongRRQR and energy-selector
+variants separately; neither a variant nor a generic optimization is evidence
+of exact paper reproduction. These are workflow checkpoints, not authorization
+for a scheduled/background automation.
+
+The user also requires performance portability across Ascend environments.
+Portability is a design-time requirement, not something to postpone until a
+second machine is available. For each proposed algorithm/operator change,
+explain the model-level reasoning, the saved versus added compute/memory/data-
+movement costs, the backend capability assumptions, and the conditions under
+which the benefit may disappear. Separate algorithm semantics and rank budgets
+from backend implementation; distinguish logical Dk from physical alignment,
+stride and padding. Do not silently hard-code the current chip/runtime's
+incidental behavior into the algorithm. Keep a consistent mathematical reference
+and explicit backend capability dispatch. Compatibility fallback preserves
+correctness but is not evidence of a performance gain. Frozen paths and source
+hashes in experiment probes establish reproducibility, not a portable public
+interface. Do not fit algorithms to the new local screening prompts. Review
+these design obligations now; cross-environment tests later check the reasoning
+rather than substitute for it. A missing second machine does not pause in-scope
+design or current-environment DRRQR experiments.
+Keep the primary same-stack paired target (10%+ throughput, no accuracy loss)
+and additionally require measured positive throughput gain against each admitted
+environment's own contemporaneous dense baseline. Define the supported hardware,
+runtime and workload matrix with the user; a second environment is not yet
+specified. Running successfully, a portable interface, CPU tests, or primary-host
+results do not satisfy cross-environment performance acceptance. Each supported
+environment needs relevant NPU numerical checks, paired end-to-end measurements
+with TTFT/TPOT, and the final accuracy requirements. Unavailable or untested
+environments remain explicitly unverified. Do not claim universal speedup across
+arbitrary hardware/software/workloads or access other devices without resolving
+the user's intended target and existing resource boundaries.
+
 Before each experiment state its performance-first phase, concrete hypothesis, deciding
 evidence, and bounded run/time budget. After completion report the evidence and return to
 the mainline. No automatic unbounded retry/search or new acceptance criteria.
