@@ -3781,6 +3781,45 @@ only physical NPU4-7. The official image identity remains
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
 
+## 2026-09-09 AICPU-first package completed and isolated OPP installed
+
+The exact asynchronous package build operation
+`exec-0000000000000a7f` completed successfully with exit code 0 after
+2,204,513 ms. The canonical package is
+`/cache/cch/.worktrees/exp-20260909-qwen35-mmar-aicpu-first/build_out/cann-ops-transformer-qwen35_mmar_aicpu_first_transformer_linux-aarch64.run`,
+size 19,185,696 bytes, SHA256
+`8e22ab5d7b0c5b7eb88a393bc452a60fc377df434e1b8f70986a48723b67c84a`.
+It corresponds to the clean ops-transformer commit
+`41515133cadc7e2de54bb6f2297887bfefc7e4ad`.
+
+The package was installed without network or NPU devices in a disposable,
+read-only-rootfs container based on the unchanged official vLLM-Ascend 0.23.0
+image. The only writable mount was the new task-private directory
+`/cache/austinov/qwen35-mmar-aicpu-first-41515133-8e22ab5d-opp`.
+The installation contains 710 files and 53,452,086 bytes; the SHA256 over the
+sorted per-file SHA256 manifest stream is
+`d324d27a6bb0c957af968d83f8642b94bfb6cb56f9ad0f8402313fb65b434edb`.
+No image, host CANN path, vLLM-Ascend source, or site-packages was modified.
+
+The generated `set_env.bash` contains the installer-container path
+`/install`, so it must not be sourced in the runtime container. The frozen
+launcher already avoids that defect: it mounts the task-private OPP root
+read-only at `/candidate-out` and derives
+`ASCEND_CUSTOM_OPP_PATH=/candidate-out/vendors/qwen35_mmar_aicpu_first_transformer_transformer`
+plus its relocatable `op_api/lib` path. A no-network, no-NPU,
+read-only-rootfs official-image preflight imported torch 2.10.0 and torch_npu
+2.10.0.post4 with that relocated path and passed.
+
+Next, perform the full live resource gate before acquiring NPU0-3: inspect all
+active worktrees and claims, NPU0-7 processes, running-container device
+declarations and privileged state, ports 29953/29954, MemAvailable >= 48 GiB,
+and the cooperative NPU0-3 lease. Only if every gate passes, run the frozen
+stock-versus-AICPU-first operator A/B with
+`CANDIDATE_FEATURE_ENV=ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST`. Do not begin
+Python monkeypatch integration or model E2E unless both K1536 and K4352 pass
+correctness, 5000-call-per-rank stress, no per-shape regression, and >=1.03x
+geometric-mean speedup.
+
 ## 2026-09-09 native MMAR AICPU-first candidate build
 
 The ad-hoc IPC v1-v6 line remains closed. A lower-risk native lifecycle
