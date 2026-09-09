@@ -39,8 +39,8 @@
     },
     {
       "kind": "resource",
-      "mode": "exclusive",
-      "value": "chicaihong01 physical NPU4-7 only when idle; map to logical 0-3 in-container; never use NPU0-3; never stop or alter an existing NPU4-7 workload"
+      "mode": "historical",
+      "value": "No active lease; the completed experiment formerly used chicaihong01 physical NPU4-7"
     }
   ],
   "validationCommands": [
@@ -61,6 +61,6 @@
     "python3 -c 'import yaml,sys; yaml.safe_load(sys.stdin)' < .agents/experiments/exp-20260905-qwen35-shortgpt.yaml",
     "git diff --check"
   ],
-  "executionState": "block-influence-passed-remove8-frozen-retained-control-exec-0000000000000170-running",
-  "integrationState": "v10-rejected-before-traffic-shortgpt-real-npu-bi-hashed-and-stable-same-runtime-control-running-upstream-source-push-blocked"
+  "executionState": "completed-semantic-quality-regression",
+  "integrationState": "superseded-archived"
 }

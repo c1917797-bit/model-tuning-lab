@@ -158,3 +158,11 @@ default off, and continue the operator track. Fused-tail v10 proved that all
 64 direct MLP tails match per TP rank while the 64 attention-copy tails do
 not normalize; diagnose that copy boundary without relaxing correctness,
 then repeat the activation-only gate before any E2E traffic.
+
+## Archive decision — 2026-09-09
+
+This hypothesis is terminal and superseded by the unified Qwen3.5 performance
+delivery workstream. The semantic regression prevents promotion, there is no
+active resource lease, and the branch remains an immutable negative-evidence
+archive. Do not recreate this worktree or merge the ShortGPT candidate into
+`main`.
