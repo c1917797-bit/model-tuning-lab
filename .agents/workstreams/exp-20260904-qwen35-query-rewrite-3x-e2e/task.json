@@ -3,7 +3,7 @@
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
   "objective": "Reduce Qwen3.5-27B TTFT P95 by at least 40% and TPOT P95 by at least 20% at concurrency 1, 5, 8, and 16 on the frozen query_rewrite workload, with BF16 semantic quality preserved by the same-runtime paired gate. No quantization, retraining, MTP, speculative decoding, vLLM source edits, or final source overlays. The workstream identifier retains its historical 3x label for audit continuity.",
   "targetBranch": "main",
-  "workBranch": "work/exp-20260904-qwen35-query-rewrite-3x-e2e",
+  "workBranch": "work/qwen35-performance-delivery",
   "remote": "origin",
   "originalBase": "21915616ebbdb2af704896d90c0b3459dff42c5a",
   "createdAt": "2026-09-04",
@@ -47,6 +47,6 @@
     "python3 qwen35-performance-optimization/tests/test_qwen35_benchmark_cache_isolation.py",
     "git diff --check"
   ],
-    "executionState": "t12-runtime-monkeypatch-rejected-repeatable-c16-tpot-regression-resources-released",
+    "executionState": "active-t13-scheduler-diagnostics-checkpointed",
     "integrationState": "branch-local-final-monkeypatch-not-promoted"
 }

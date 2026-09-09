@@ -22,6 +22,7 @@ _ENABLED = (
 _RUNTIME_TARGETS = {
     "vllm_ascend.ops.layernorm",
     "vllm_ascend.ops.weight_prefetch",
+    "vllm.v1.core.sched.scheduler",
     "vllm_ascend.core.dyntra_lb_scheduler",
     "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn",
     "vllm.model_executor.models.qwen3_5",
@@ -277,23 +278,26 @@ def _patch_layernorm(module: ModuleType) -> None:
     _notice("patched Gemma RMSNorm prefetch postprocess")
 
 
-def _patch_dyntra_scheduler(module: ModuleType) -> None:
+def _patch_scheduler_class(cls, label: str) -> None:
     if not _diagnostics_enabled():
         return
-    cls = module.DyntraLBScheduler
     if getattr(cls, "_qwen35_diagnostics_monkeypatched", False):
         return
     original = cls.schedule
     interval = _diagnostics_interval()
 
     @functools.wraps(original)
-    def schedule(self, throttle_prefills: bool = False):
+    def schedule(self, *args, **kwargs):
         before_running = len(getattr(self, "running", ()))
         before_waiting = len(getattr(self, "waiting", ()))
+        throttle_prefills = kwargs.get("throttle_prefills")
+        if throttle_prefills is None and args:
+            throttle_prefills = args[0]
         started = time.perf_counter()
-        output = original(self, throttle_prefills)
+        output = original(self, *args, **kwargs)
         elapsed_us = (time.perf_counter() - started) * 1_000_000.0
-        step = int(getattr(self, "current_step", 0))
+        step = int(getattr(self, "_qwen35_diagnostics_step", 0)) + 1
+        setattr(self, "_qwen35_diagnostics_step", step)
         if step <= 5 or step % interval == 0:
             num_tokens = getattr(output, "num_scheduled_tokens", {}) or {}
             total_tokens = sum(int(value) for value in num_tokens.values())
@@ -308,11 +312,12 @@ def _patch_dyntra_scheduler(module: ModuleType) -> None:
                 if getattr(request, "is_prefill_chunk", False)
             )
             _notice(
-                "diagnostic scheduler step=%s elapsed_us=%.3f "
+                "diagnostic scheduler=%s step=%s elapsed_us=%.3f "
                 "tokens=%s new=%s cached=%s running_before=%s "
                 "waiting_before=%s running_after=%s prefill_after=%s "
                 "throttle_prefills=%s prefill_capacity_bound=%s"
                 % (
+                    label,
                     step,
                     elapsed_us,
                     total_tokens,
@@ -330,11 +335,20 @@ def _patch_dyntra_scheduler(module: ModuleType) -> None:
 
     cls.schedule = schedule
     cls._qwen35_diagnostics_monkeypatched = True
-    _notice("patched DyntraLBScheduler diagnostics")
+    _notice(f"patched {label} diagnostics")
+
+
+def _patch_vllm_scheduler(module: ModuleType) -> None:
+    _patch_scheduler_class(module.Scheduler, "vllm.v1.core.sched.scheduler.Scheduler")
+
+
+def _patch_dyntra_scheduler(module: ModuleType) -> None:
+    _patch_scheduler_class(module.DyntraLBScheduler, "DyntraLBScheduler")
 
 
 _PATCHERS = {
     "vllm.model_executor.models.registry": _patch_model_registry,
+    "vllm.v1.core.sched.scheduler": _patch_vllm_scheduler,
     "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn": _patch_qwen_gdn_linear_attn,
     "vllm.model_executor.models.qwen3_5": _patch_qwen35_model,
     "vllm_ascend.ops.gdn": _patch_ascend_gdn,

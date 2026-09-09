@@ -5,6 +5,10 @@
 ### 0. Status
 
 - Workstream: `exp-20260904-qwen35-query-rewrite-3x-e2e`.
+- Canonical branch: `work/qwen35-performance-delivery`; canonical worktree:
+  `/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery`.
+- This is the only active Qwen3.5 performance worktree. The historical
+  query-rewrite and ShortGPT worktrees are archived and must not be recreated.
 - Branch-local state: active; not integrated. The latest implementation
   checkpoint is `d1393e8`; the local branch is ahead of
   `origin/pr/qwen35-mmar-async-finalize-gate` (`bc2f641`). Do not push these
@@ -4641,3 +4645,38 @@ the live gates pass.
   in commit `e3f08d2` to state the true evidence boundary: t12 live activation
   and smoke passed, but current performance gate failed and promotion is not
   allowed.
+
+## 2026-09-09 t13 real-scheduler diagnostic result
+
+- The first diagnostic hook targeted only the historical
+  `vllm_ascend.core.dyntra_lb_scheduler.DyntraLBScheduler`, but the pinned
+  vLLM-Ascend 0.23.0 service actually executes
+  `vllm.v1.core.sched.scheduler.Scheduler`. The runtime-only patch now hooks
+  both classes when present. The corrected hook was proven live in EngineCore;
+  this fixes diagnostic coverage but is not itself a performance treatment.
+- Live candidate root:
+  `/cache/austinov/qwen35-t13-scheduler-diagnostics-vllm-scheduler-retry2-20260909T123217Z`.
+  The disposable container used only physical NPU0-3, the patch was mounted
+  read-only, and the official image identity remained unchanged. Smoke was
+  1/1 successful with natural EOS and the historical-control response SHA256.
+- Frozen c1/32 artifact:
+  `failfast-candidate/c1-r1.json`, SHA256
+  `6314b18e4e8b2d685ad0a0c84c247a38c149d0881cb9f552f71fac981d563d05`.
+  It completed 32/32 requests with zero errors and natural EOS. TTFT P95 was
+  6485.460 ms and TPOT P95 was 28.540 ms.
+- Pair decision artifact:
+  `failfast-candidate/c1-r1-decision.json`, SHA256
+  `55fcfeaa814ae02734339086e5aa008c3a8abdf740133dc0d7363b1b4dd70e39`.
+  Against the exact t12 fresh control, TTFT P95 improved only 0.264% and TPOT
+  P95 improved 10.122%; decision is `iterate`, so do not run c16 or the full
+  matrix for this diagnostic candidate.
+- Across 947 sampled scheduler calls, all-call P95 was 222.84 us. Decode-only
+  calls were n=940, mean 187.05 us, P95 220.36 us, P99 244.52 us, max 286.98
+  us. Prefill calls were n=7, mean 415.39 us and max 566.02 us. This rules out
+  Python `Scheduler.schedule()` itself as the missing multi-millisecond TPOT
+  opportunity; the next candidate must instrument and change the per-token NPU
+  execution/collective lifecycle instead.
+- The owned one-shot service was stopped through the identity-checking stop
+  script. Post-stop `npu-smi` showed no running process on NPU0-7. This is only
+  a point-in-time snapshot; re-run the complete resource gate before starting
+  the next experiment.

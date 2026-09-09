@@ -326,7 +326,7 @@ def test_scheduler_diagnostics_opt_in(patch):
         assert getattr(DyntraLBScheduler, "_qwen35_diagnostics_monkeypatched")
         text = stderr.getvalue()
         assert "patched DyntraLBScheduler diagnostics" in text
-        assert "diagnostic scheduler step=1" in text
+        assert "diagnostic scheduler=DyntraLBScheduler step=1" in text
         assert "tokens=8" in text
         assert "new=1" in text
         assert "cached=2" in text

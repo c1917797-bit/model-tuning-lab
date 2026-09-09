@@ -1,96 +1,111 @@
 {
-  "schema": "qwen35-runtime-monkeypatch/v2",
-  "candidate": "runtime-monkeypatch-gdn-projection-fusion-t12",
-  "status": "live_activation_passed_performance_gate_failed",
-  "sitecustomize_sha256": "9b8c1ef97d55384cad44ccdd5a904179e81471f98417359b9ef6c272e80304f2",
-  "model": "Qwen3.5-27B",
-  "framework": "vLLM-Ascend 0.23.0",
-  "image": "quay.io/ascend/vllm-ascend:v0.23.0",
-  "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
-  "image_digest": "sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a",
+  "acceptance_targets": {
+    "concurrency": [
+      1,
+      5,
+      8,
+      16
+    ],
+    "material_quality_regressions_max": 0,
+    "quality_rows": 357,
+    "repetitions": 3,
+    "tpot_p95_reduction_fraction_min": 0.2,
+    "ttft_p95_reduction_fraction_min": 0.4
+  },
   "base_image_mutation": false,
-  "host_vllm_ascend_mutation": false,
-  "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
+  "candidate": "runtime-monkeypatch-gdn-projection-fusion-t12",
+  "excluded_historical_paths": [
+    "bounded MMAR prefill decomposition",
+    "AscendConfig compile-range monkeypatch"
+  ],
+  "framework": "vLLM-Ascend 0.23.0",
   "hardware": "Ascend 910B4",
-  "tensor_parallel_size": 4,
-  "physical_devices": [0, 1, 2, 3],
-  "protected_devices": [4, 5, 6, 7],
+  "historical_implementation_provenance": {
+    "scope": "source and device-free behavioral equivalence; live t12 evidence recorded",
+    "vllm_ascend_gdn_forward_commit": "d98e37ebb72acd71b5a35222fd7ab7f8049d41cb",
+    "vllm_ascend_prefetch_lifecycle_commit": "82a2dce7",
+    "vllm_gdn_projection_commit": "685fdf22098fb3a0aa8d582dda57063773606a02"
+  },
+  "historical_t11_reference_only": {
+    "disposition": "not final because TPOT missed the current 20 percent target",
+    "tpot_p95_ms": {
+      "baseline": 39.0459,
+      "candidate": 32.3098,
+      "reduction_fraction": 0.1725
+    },
+    "ttft_p95_ms": {
+      "baseline": 966.3259,
+      "candidate": 505.1956,
+      "reduction_fraction": 0.4772
+    }
+  },
+  "host_vllm_ascend_mutation": false,
+  "image": "quay.io/ascend/vllm-ascend:v0.23.0",
+  "image_digest": "sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a",
+  "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "live_validation": {
+    "activation": "passed_on_physical_npu0_3_read_only_patch_mount",
+    "candidate_artifact_root": "/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z",
+    "control_artifact_root": "/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z",
+    "failfast_c1_32": {
+      "candidate_tpot_p95_ms": 31.641106860819235,
+      "candidate_ttft_p95_ms": 5697.694213467184,
+      "completed": 32,
+      "control_tpot_p95_ms": 31.753852729764557,
+      "control_ttft_p95_ms": 6502.636359154712,
+      "errors": 0,
+      "natural_eos": true,
+      "response_hash_compared_count": 32,
+      "response_hash_equal_count": 16,
+      "tpot_p95_reduction_fraction": 0.0035506201374940153,
+      "ttft_p95_reduction_fraction": 0.12378704593472971
+    },
+    "performance": "failed_current_acceptance_target",
+    "promotion_allowed": false,
+    "quality": "not_promoted_response_hash_mismatch_requires_paired_review",
+    "smoke": {
+      "completed": 1,
+      "errors": 0,
+      "natural_eos": true,
+      "response_sha256_matched_control": true
+    }
+  },
+  "model": "Qwen3.5-27B",
   "mtp": false,
-  "speculative_decoding": false,
+  "offline_validation": {
+    "activation_checker_fixture": "passed",
+    "install_network": "none",
+    "npu_devices_exposed": 0,
+    "official_image_install_operation": "exec-0000000000000789",
+    "official_image_no_device_offline_install": "passed",
+    "official_image_read_only_source_contract": "passed",
+    "static_contracts": "passed"
+  },
+  "physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "protected_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
+  "schema": "qwen35-runtime-monkeypatch/v2",
+  "sitecustomize_sha256": "45dbb02879989244e833e525694e7aeeeca4b8768c327ab20e3041055b773640",
   "source_overlays": 0,
+  "speculative_decoding": false,
+  "status": "live_activation_passed_performance_gate_failed",
+  "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
     "six-way fused checkpoint weight mapping",
     "Ascend GDN fused projection forward path",
     "linear-attention gate/up weight prefetch",
     "Gemma RMSNorm prefetch postprocess",
-    "opt-in DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1"
-  ],
-  "historical_implementation_provenance": {
-    "vllm_gdn_projection_commit": "685fdf22098fb3a0aa8d582dda57063773606a02",
-    "vllm_ascend_gdn_forward_commit": "d98e37ebb72acd71b5a35222fd7ab7f8049d41cb",
-    "vllm_ascend_prefetch_lifecycle_commit": "82a2dce7",
-    "scope": "source and device-free behavioral equivalence; live t12 evidence recorded"
-  },
-  "excluded_historical_paths": [
-    "bounded MMAR prefill decomposition",
-    "AscendConfig compile-range monkeypatch"
-  ],
-  "acceptance_targets": {
-    "concurrency": [1, 5, 8, 16],
-    "repetitions": 3,
-    "ttft_p95_reduction_fraction_min": 0.4,
-    "tpot_p95_reduction_fraction_min": 0.2,
-    "quality_rows": 357,
-    "material_quality_regressions_max": 0
-  },
-  "offline_validation": {
-    "static_contracts": "passed",
-    "activation_checker_fixture": "passed",
-    "official_image_no_device_offline_install": "passed",
-    "official_image_read_only_source_contract": "passed",
-    "official_image_install_operation": "exec-0000000000000789",
-    "install_network": "none",
-    "npu_devices_exposed": 0
-  },
-  "live_validation": {
-    "activation": "passed_on_physical_npu0_3_read_only_patch_mount",
-    "control_artifact_root": "/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z",
-    "candidate_artifact_root": "/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z",
-    "smoke": {
-      "completed": 1,
-      "errors": 0,
-      "natural_eos": true,
-      "response_sha256_matched_control": true
-    },
-    "failfast_c1_32": {
-      "completed": 32,
-      "errors": 0,
-      "natural_eos": true,
-      "control_ttft_p95_ms": 6502.636359154712,
-      "candidate_ttft_p95_ms": 5697.694213467184,
-      "ttft_p95_reduction_fraction": 0.12378704593472971,
-      "control_tpot_p95_ms": 31.753852729764557,
-      "candidate_tpot_p95_ms": 31.641106860819235,
-      "tpot_p95_reduction_fraction": 0.0035506201374940155,
-      "response_hash_equal_count": 16,
-      "response_hash_compared_count": 32
-    },
-    "performance": "failed_current_acceptance_target",
-    "quality": "not_promoted_response_hash_mismatch_requires_paired_review",
-    "promotion_allowed": false
-  },
-  "historical_t11_reference_only": {
-    "ttft_p95_ms": {
-      "baseline": 966.3259,
-      "candidate": 505.1956,
-      "reduction_fraction": 0.4772
-    },
-    "tpot_p95_ms": {
-      "baseline": 39.0459,
-      "candidate": 32.3098,
-      "reduction_fraction": 0.1725
-    },
-    "disposition": "not final because TPOT missed the current 20 percent target"
-  }
+    "opt-in vLLM Scheduler and DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1"
+  ]
 }
