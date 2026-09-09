@@ -31,10 +31,20 @@ done
 [[ -d "$expected_output_root" ]] || { echo "missing EXPECTED_OUTPUT_ROOT" >&2; exit 66; }
 [[ -d "$profile_dir" ]] || { echo "missing PROFILE_DIR" >&2; exit 66; }
 [[ ! -e "$artifact_dir" ]] || { echo "refusing to reuse ARTIFACT_DIR" >&2; exit 44; }
-if find "$profile_dir" -mindepth 1 -print -quit | grep -q .; then
-  echo "refusing non-empty PROFILE_DIR" >&2
+unexpected_profile_entry="$(
+  find "$profile_dir" -mindepth 1 -maxdepth 1 +    ! \( -type d \( -name rank0 -o -name rank1 -o -name rank2 -o -name rank3 \) \) +    -print -quit
+)"
+[[ -z "$unexpected_profile_entry" ]] || {
+  echo "refusing PROFILE_DIR with unexpected content: $unexpected_profile_entry" >&2
   exit 44
-fi
+}
+for rank in 0 1 2 3; do
+  rank_dir="$profile_dir/rank${rank}"
+  if [[ -d "$rank_dir" ]] && find "$rank_dir" -mindepth 1 -print -quit | grep -q .; then
+    echo "refusing non-empty rank profile directory: $rank_dir" >&2
+    exit 44
+  fi
+done
 [[ "$port" =~ ^[0-9]+$ ]] || { echo "invalid PORT" >&2; exit 64; }
 
 mkdir -p "$artifact_dir"
