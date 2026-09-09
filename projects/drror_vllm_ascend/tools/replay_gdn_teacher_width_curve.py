@@ -25,7 +25,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = Path("/drrqr-results")
 CAPTURED_PATH = ROOT / "tools/replay_gdn_teacher_captured_reference.py"
-CAPTURED_SHA256 = "3695cd8d312839a79884feb013dc87f325d864d229f322d9151fa8d93e0b7e98"
+CAPTURED_SHA256 = "47ca033ac9e792118b6fd884ae8e6b1a77a4589e65f7eda808a24e78d0216c42"
 VARIANT_DK = {
     "dense128": 128,
     "energy48": 48,
@@ -586,7 +586,7 @@ def main(argv=None):
         "task_accuracy_admitted": False,
         "protocol": {
             "variants": list(VARIANT_DK),
-            "groups": 48,
+            "groups": 0,
             "input_tokens": 128,
             "decode_steps": 8,
             "prefill": "eager from private zero state",
@@ -629,6 +629,8 @@ def main(argv=None):
         captured = load_captured_reference()
         replay = captured.load_replay()
         bound = replay.bind_inputs(args)
+        report["protocol"]["groups"] = 2 * 4 * len(bound.layers)
+        report["protocol"]["layers"] = list(bound.layers)
         plans = {
             64: bind_width_plan(
                 args.energy_plan,
@@ -684,7 +686,7 @@ def main(argv=None):
             (f"teacher-{sequence}", rank, layer)
             for sequence in range(2)
             for rank in range(4)
-            for layer in replay.LAYERS
+            for layer in bound.layers
         ]
         fidelity = {}
         for variant, dk in VARIANT_DK.items():
@@ -728,7 +730,7 @@ def main(argv=None):
                 report["dense_capture_gate_passed"] = True
                 save()
         require(
-            len(report["trajectories"]) == 192
+            len(report["trajectories"]) == len(VARIANT_DK) * 2 * 4 * len(bound.layers)
             and all(row["passed"] for row in report["trajectories"]),
             "all dense and width trajectories must complete",
         )
@@ -743,7 +745,7 @@ def main(argv=None):
             }
             for key, value in sorted(fidelity.items())
         ]
-        report["fidelity"] = fidelity_screen(rows, replay.LAYERS)
+        report["fidelity"] = fidelity_screen(rows, bound.layers)
         fidelity_path = output / "token-fidelity.json"
         with fidelity_path.open("x", encoding="utf-8") as stream:
             json.dump(rows, stream, allow_nan=False)

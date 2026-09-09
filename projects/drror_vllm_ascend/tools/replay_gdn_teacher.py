@@ -19,13 +19,13 @@ from unittest.mock import patch
 
 import torch
 
-ROOT = Path("/cache/cch/drror_vllm_ascend")
+ROOT = Path(__file__).resolve().parents[1]
 RESULT_ROOT = Path("/drrqr-results")
 LAYERS = (0, 12, 25, 38, 50, 62)
 VARIANTS = ("dense128", "energy64", "beta64")
 PLAN_SHA256 = "b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c"
 STATS_SHA256 = "8882d60948ed773bb200303a1878d43441bda105bac4090e776b34ad684ceb7b"
-AUDITOR_SHA256 = "fd9b4f30d47d6f1763683f6dfa62a533c7c365ab73a7503de628445194e2e6f7"
+AUDITOR_SHA256 = "a3e55fdb31f60894853532602628780a488901310a6717d22fde0983833e0efb"
 GOLDEN_SHA256 = "1a2d1a61040a58a6f0c1d90cdbf0fc17058f3273eaef8b3d1b80116c97d92cb9"
 PROBE_SHA256 = "86c31fb67503226ed7ba6daf3c1d7a56db8e15d803eca764d64ac08772aded83"
 CALIBRATION_SHA256 = "81748f94c4eff0ad5e4053eb7c4a30b1a397a82d45676a8b0b42394bd612bd47"
@@ -212,6 +212,9 @@ def bind_inputs(args):
             and receipt.get("auditor_sha256") == AUDITOR_SHA256, "passed validator receipt required")
     manifest = audit.bound_json(args.manifest, args.manifest_sha256)
     audit.check_manifest(manifest)
+    layers = audit.manifest_layers(manifest)
+    require(set(LAYERS) <= set(layers),
+            "manifest must retain the frozen six coefficient-audit layers")
     require(receipt.get("manifest") == {"path": str(args.manifest), "sha256": args.manifest_sha256},
             "explicit capture manifest differs from validator")
     service_file = audit.regular(receipt["service_manifest"]["path"])
@@ -239,8 +242,8 @@ def bind_inputs(args):
         require(key not in entries, "duplicate audit archive")
         entries[key] = row
     expected = {(f"teacher-{s}", r, layer, step)
-                for s in range(2) for r in range(4) for layer in LAYERS for step in range(9)}
-    require(set(entries) == expected, "432 archive coverage")
+                for s in range(2) for r in range(4) for layer in layers for step in range(9)}
+    require(set(entries) == expected, "manifest-bound archive coverage")
     binding = {"audit": {"path": str(args.audit_report), "sha256": args.audit_sha256},
                "manifest": receipt["manifest"], "energy_plan": {"path": str(args.energy_plan), "sha256": PLAN_SHA256},
                "retained_stats": {"path": str(args.retained_stats), "sha256": STATS_SHA256},
@@ -248,7 +251,7 @@ def bind_inputs(args):
                "coefficient_source": "train_k_mean only; frozen old calibration rows 0..11",
                "audit_rechecked_before_npu": True}
     return SimpleNamespace(audit=audit, receipt=receipt, capture=service_dir / "teacher-capture",
-                           entries=entries, plan=plan, stats=stats, binding=binding)
+                           entries=entries, plan=plan, stats=stats, layers=layers, binding=binding)
 
 
 def init_runtime(report, phase):
