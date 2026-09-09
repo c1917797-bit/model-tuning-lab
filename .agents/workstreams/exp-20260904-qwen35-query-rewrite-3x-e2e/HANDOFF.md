@@ -3848,15 +3848,33 @@ physical NPU4-7 remains untouched. The official image remains
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
 
-Do not rerun the AICPU-first t12 bytes unchanged. The next candidate must
-remove a materially larger part of the decode MMAR/HCCL lifecycle rather than
-only selecting another launch path. Resume the IPC-fullmesh investigation with
-the predeclared fresh logical-epoch diagnostic: retain generation reload and
-paired HCCL finalization, bump the package-specific control magic, add bounded
-host-observable phase markers, rebuild under a new SHA, and repeat the exact
-BF16 M=1 operator gate before any E2E launch. If it still stalls, test the
-known-completing v1 binary protocol with fresh magic plus paired finalization
-to isolate generation protocol from stale-window state.
+Do not rerun the AICPU-first t12 bytes unchanged. A current-state audit found
+that the previously prescribed IPC follow-ups had already run before this
+handoff update. Fresh-epoch generation-protocol v5
+(`a1a009e39b285f372118a7b3e1dd8668e774c70b`, package SHA256
+`9819d5522215b11cb54cb7eb28e151ec9b271d1f71353107e29b6dcc23c1b9e2`)
+still produced no candidate result or progress with zero AICore activity.
+The controlled v1 binary-protocol reproduction v6
+(`4118b10633d5e6861114541b0e75d36a086e7416`, package SHA256
+`66a868f6a1a2b004d0b885f9d3070c57e541ba60985edf1e0c90c7962c332a43`)
+loaded correctly on its valid r2 attempt but also produced no result or
+per-rank progress, this time with all four NPUs at 100% AICore. Evidence roots
+are
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v5-fresh-epoch-r1-20260908-2325`
+and
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v6-v1-repro-r2-20260909-0026`.
+Both exact candidates were stopped and released NPU0-3 without touching the
+external NPU4-7 workload.
+
+The only functional kernel delta from the once-completing v1 source to v6 is
+the fresh magic plus an added notify-core `hccl_.Finalize()` after the custom
+fullmesh process. The next bounded diagnostic is therefore v7 at ops-transformer
+commit `299c0ef`: retain the v1 binary handshake, use a new magic, and omit
+that added finalization. This diagnostic is not promotable even if it
+completes; it must first prove or disprove finalization as the first-collective
+blocker. A production successor must then pair lifecycle safely and pass
+alternating eligible/ineligible shapes plus cross-container restart stress
+before any E2E launch.
 
 ## 2026-09-09 AICPU-first package completed and isolated OPP installed
 
