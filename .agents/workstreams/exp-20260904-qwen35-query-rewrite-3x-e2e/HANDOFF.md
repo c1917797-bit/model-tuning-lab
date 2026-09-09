@@ -3781,6 +3781,64 @@ only physical NPU4-7. The official image identity remains
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
 
+## 2026-09-09 IPC fullmesh v6 v1-protocol reproduction rejection
+
+The v6 diagnostic restored the exact once-successful v1 binary
+ready/consumed protocol for both K1536 and K4352, retained paired
+`HcclFinalize`, and used a fresh package-specific control magic. The
+ops-transformer source commit is
+`4118b10633d5e6861114541b0e75d36a086e7416`. It passed all 107 host unit
+tests and was built without network or NPU access in a disposable official
+image container. The package is
+`cann-ops-transformer-qwen35_mmar_ipc_fullmesh_v6_transformer_linux-aarch64.run`
+with SHA256
+`66a868f6a1a2b004d0b885f9d3070c57e541ba60985edf1e0c90c7962c332a43`.
+It was installed only into the task-private
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-v6-v1-repro-opp` directory.
+
+The first frozen attempt under
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v6-v1-repro-r1-20260909-0024`
+is invalid candidate evidence: the packaged environment file contained its
+installer-container absolute path. The stock control completed, but candidate
+preflight correctly rejected the inaccessible path before NPU execution. The
+launcher now derives relocatable `ASCEND_CUSTOM_OPP_PATH` and
+`LD_LIBRARY_PATH` values from the read-only mounted vendor root instead of
+sourcing the packaged absolute-path environment file. `bash -n` and a
+no-NPU, read-only-rootfs official-image smoke verified that fix.
+
+The corrected real run is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v6-v1-repro-r2-20260909-0026`.
+Its official stock control completed all four ranks and 5000 alternating calls
+per rank, with K1536/K4352 median max-rank latency of
+`85.2019/86.36265 us`. The candidate then loaded the relocatable read-only
+OPP and started four workers on physical NPU0-3. It produced no
+`candidate.json` and no per-rank progress JSONL for more than two minutes
+while all four NPUs remained at 100% AICore. Only initialization and
+distributed-barrier output appeared in the log. After capturing exact
+container, log, process, and NPU state, the task-owned disposable container
+`fdbd91a5ce46e948aef1801b32911cad4a7135a5436f49886246662f61b47d1d`
+was stopped; the supervisor's exit 137 is expected.
+
+The rejection record SHA256 is
+`e8f0c98afa5775598f906e8447699d70058c3384ac0ccf519233a32c0bffd178`;
+the complete evidence-manifest SHA256 is
+`753475d7ab53ef78c522f51fe257ea3cc5e9b0416146e1a07cb7f6b7cf07f3bf`.
+The exact package is also preserved in that evidence directory. NPU0-3 were
+released, NPU4-7 and the unrelated external workload were untouched, and the
+official vLLM-Ascend 0.23.0 image was not modified.
+
+This result rejects stale control magic, the generation protocol alone, and
+missing finalization as sufficient explanations: even the restored v1
+protocol with a fresh magic and paired finalization stalls in a fresh
+container. Do not rerun these exact v6 bytes, do not integrate them into the
+Python monkeypatch, and do not place them in the standalone PR. Before another
+operator build, compare the retained v1 package/build identity against v6 and,
+only if exact historical bytes are available, use the old v1 package as one
+bounded cross-container restart diagnostic. Otherwise abandon the ad-hoc IPC
+protocol and return to a native HCCL/MMAR lifecycle implementation with a
+host-observable bounded synchronization design. Any successor must pass the
+same numerical/performance/lifecycle operator gate before E2E activation.
+
 ## 2026-09-08 IPC fullmesh v5 fresh-epoch rejection
 
 The package-specific fresh logical epoch diagnostic was committed in the

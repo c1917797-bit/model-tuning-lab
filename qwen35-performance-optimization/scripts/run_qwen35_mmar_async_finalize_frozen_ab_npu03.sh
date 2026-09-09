@@ -94,6 +94,7 @@ launcher_sha256="$(sha256sum "$bundle_root/scripts/run_qwen35_mmar_async_finaliz
   echo "candidate_operator_commit=$candidate_commit"
   echo "candidate_package_sha256=$candidate_sha256"
   echo "candidate_opp_root=$candidate_opp_root"
+  echo "candidate_opp_loading=relocated read-only vendor root; packaged absolute install paths are not sourced"
   echo "protocol_commit=$protocol_commit"
   echo "benchmark_sha256=$benchmark_sha256"
   echo "evaluator_sha256=$evaluator_sha256"
@@ -123,7 +124,7 @@ for label in default candidate; do
     sha256="$candidate_sha256"
     opp_mount_args=(-v "$candidate_opp_root:$candidate_opp_container_root:ro")
     candidate_args=(-e ASCEND_MATMUL_ALLREDUCE_M1_IPC_FULLMESH=1)
-    run_prefix="test -f '$candidate_opp_container_env'; test -d '$candidate_opp_container_vendor'; source '$candidate_opp_container_env'; "
+    run_prefix="test -f '$candidate_opp_container_env'; test -d '$candidate_opp_container_vendor'; export ASCEND_CUSTOM_OPP_PATH='$candidate_opp_container_vendor'; export LD_LIBRARY_PATH='$candidate_opp_container_vendor/op_api/lib':\${LD_LIBRARY_PATH:-}; "
     master_port=29954
   fi
   container_name="qwen35_mmar_ipc_fullmesh_${label}_npu03"
