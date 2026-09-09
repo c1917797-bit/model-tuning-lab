@@ -3,8 +3,10 @@ set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 runner="$root/qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh"
+starter="$root/qwen35-performance-optimization/scripts/start_qwen35_gdn_runtime_t12_supervised.sh"
 capture="$root/qwen35-performance-optimization/scripts/capture_qwen35_gdn_t12_activation.sh"
 [[ -x "$runner" || -f "$runner" ]]
+[[ -x "$starter" || -f "$starter" ]]
 
 grep -Fq 'flock -n 9' "$runner"
 grep -Fq 'run -d --rm' "$runner"
@@ -41,5 +43,9 @@ grep -Fq 'aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b' "$ru
 grep -Fq 'qwen35_gdn_runtime_t12_${variant}_npu03' "$capture"
 grep -Fq 'docker logs "$container_name"' "$capture"
 grep -Fq -- '--log "$OUTPUT_ROOT/container-logs.live.txt"' "$capture"
+grep -Fq 'nohup setsid "$launcher"' "$starter"
+grep -Fq 'kill -0 "$supervisor_pid"' "$starter"
+grep -Fq 'refusing to reuse supervisor artifacts' "$starter"
+! grep -Eq 'docker[[:space:]]+(run|stop|commit|cp)([[:space:]]|$)' "$starter"
 
 echo 'PASS: t12 NPU0-3 runtime-only launcher contract'
