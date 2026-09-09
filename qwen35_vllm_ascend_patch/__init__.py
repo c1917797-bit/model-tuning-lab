@@ -9,8 +9,8 @@ import os
 from pathlib import Path
 
 
-__version__ = "0.1.0"
-EXPECTED_SHA256 = "9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8"
+__version__ = "0.2.0"
+EXPECTED_SHA256 = "aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b"
 
 
 def main() -> int:

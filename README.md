@@ -10,29 +10,31 @@ the base image.
 
 ## Validated result
 
-Frozen c1 protocol, TP4 on physical NPU0-3, three repetitions and 96/96
-successful requests:
+This branch now packages the current t12/GDN runtime patch bytes from
+`model-tuning-lab`. It is not a final promoted candidate yet: live standalone
+activation, c1/c5/c8/c16 x3 performance, and all-357 paired quality validation
+are still pending.
 
-| Metric | Baseline | Patched | Change |
-| --- | ---: | ---: | ---: |
-| TTFT P95 | 966.3259 ms | 505.1956 ms | 47.7% lower / 1.9128x |
-| TPOT P95 | 39.0459 ms | 32.3098 ms | 17.3% lower / 1.2085x |
+Fresh operator evidence confirms the core TTFT-side primitive still works in
+the current environment:
 
-The patch is accepted for the revised c1 TTFT reduction threshold of at least
-40%. It is not validated at c5/c8/c16 and does not claim a 40% TPOT reduction.
+| Scope | Result |
+| --- | ---: |
+| GDN qkvz+ba projection fusion geomean | 2.9509x |
+| Correctness | all checked rows passed |
+| Artifact | `/cache/austinov/qwen35-gdn-projection-fusion-fresh-20260909T104335Z` |
+
+This is a single-NPU operator microbenchmark, not an end-to-end serving claim.
 
 ## Quality evidence boundary
 
-The t11 run completed a fixed-input 1/1 smoke and 96/96 benchmark requests
-with zero errors and natural EOS. That proves service/request correctness, not
-full semantic accuracy. A historical paired gate for the retained GDN fusion
-plus gate/up-prefetch stack found 16/16 sampled outputs semantically equivalent
-with zero material regressions (11/16 byte-identical and 12/16 identical after
-whitespace normalization), but it is not a candidate-specific quality gate for
-t11. All 357 dataset `answer` fields are empty, so no reference-answer accuracy
-score is available. Before a production quality claim, run the registered
-same-runtime 32-sample paired semantic gate and require 32/32 equivalence with
-zero material regressions.
+The current package has device-free source/behavioral contracts and operator
+correctness evidence. It does not yet have standalone live activation or a full
+same-runtime semantic gate. Before a production quality claim, run the
+registered 32-sample canary and then the all-357 paired quality gate with zero
+material regressions. All 357 dataset `answer` fields are empty, so the claim is
+bounded to paired no-regression on this workload rather than external answer
+accuracy.
 
 ## Install and load order
 
@@ -84,7 +86,7 @@ install it without dependency resolution:
 ```bash
 docker exec -it qwen35_vllm_ascend_patch bash
 cd /cache/cch/qwen35-vllm-ascend-patch
-git pull --ff-only origin main
+git pull --ff-only origin feature/qwen35-validated-runtime-patch
 python3 -m pip install --no-deps -e .
 ```
 
@@ -99,8 +101,7 @@ Still inside the same container shell:
 
 ```bash
 export QWEN35_ASCEND_MONKEYPATCH=1
-export VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=513
-export VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=16384
+export VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1
 
 python3 -m qwen35_vllm_ascend_patch
 vllm serve <model-path> --tensor-parallel-size 4 <other-validated-arguments>
@@ -113,25 +114,24 @@ For a no-install development fallback, source `load_patch.sh` or run a command
 through `run_with_patch.sh`. Those helpers prepend this repository to the
 existing `PYTHONPATH` rather than replacing it.
 
-The exact bounded-MMAR gate is:
+The exact GDN-fusion activation gate is:
 
 ```text
 QWEN35_ASCEND_MONKEYPATCH=1
-VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=513
-VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=16384
+VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1
 ```
 
 Python imports `sitecustomize.py` automatically at interpreter startup. The
 patch defers Ascend/vLLM imports until the worker modules become available,
-then installs the compile-range, bounded-MMAR, GDN prefetch, RMSNorm, and graph
-fusion hooks in every TP worker.
+then installs GDN projection-fusion, fused weight mapping, Ascend-forward,
+prefetch, and RMSNorm postprocess hooks in every TP worker.
 
 ## Integrity
 
 Expected `sitecustomize.py` SHA256:
 
 ```text
-9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8
+aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
 ```
 
 Run the device-free contract test:

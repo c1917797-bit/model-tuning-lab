@@ -12,7 +12,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SHA256 = "9c8e74ae5ba9adaf74628d74c3361d2e8bcb86792ff1d4c54eca00381e1b92a8"
+EXPECTED_SHA256 = "aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b"
 
 
 def main() -> int:
@@ -22,8 +22,9 @@ def main() -> int:
 
     manifest = json.loads((ROOT / "MANIFEST.json").read_text(encoding="utf-8"))
     assert manifest["sitecustomize_sha256"] == digest
-    assert manifest["status"] == "accepted_for_c1_ttft_40pct_only"
-    assert any("32-sample" in item for item in manifest["limitations"])
+    assert manifest["status"] == "offline_contracts_passed_live_validation_pending"
+    assert "bounded MMAR prefill decomposition" in manifest["excluded_historical_paths"]
+    assert manifest["activation"]["VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS"] == "1"
 
     environment = os.environ.copy()
     environment.update(manifest["activation"])
@@ -35,8 +36,8 @@ def main() -> int:
             sys.executable,
             "-c",
             (
-                "import sitecustomize; "
-                "assert sitecustomize.__file__.endswith('/sitecustomize.py'); "
+                "from pathlib import Path; import sitecustomize; "
+                "assert Path(sitecustomize.__file__).name == 'sitecustomize.py'; "
                 "print('activation_import_ok')"
             ),
         ],
