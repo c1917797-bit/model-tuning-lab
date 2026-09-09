@@ -43,7 +43,11 @@ grep -Fq -- '-e PROFILING_MODE=dynamic' "$runner"
 grep -Fq -- '-v /cache/austinov/Qwen3.8-27B:/cache/austinov/Qwen3.8-27B:ro' "$runner"
 ! grep -Eq 'docker[[:space:]]+(commit|cp)([[:space:]]|$)' "$runner"
 grep -Fq 'sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1' "$runner"
-grep -Fq 'aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b' "$runner"
+grep -Fq '9b8c1ef97d55384cad44ccdd5a904179e81471f98417359b9ef6c272e80304f2' "$runner"
+grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS:-0' "$runner"
+grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS_INTERVAL:-32' "$runner"
+grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS="$qwen35_diagnostics"' "$runner"
+grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS_INTERVAL="$qwen35_diagnostics_interval"' "$runner"
 grep -Fq 'qwen35_gdn_runtime_t12_${variant}_npu03' "$capture"
 grep -Fq 'docker logs "$container_name"' "$capture"
 grep -Fq -- '--log "$OUTPUT_ROOT/container-logs.live.txt"' "$capture"
@@ -63,6 +67,14 @@ if OUTPUT_ROOT="$probe_root" ENABLE_DYNAMIC_PROFILING=2 bash "$runner" >/dev/nul
 fi
 if OUTPUT_ROOT="$probe_root" ENABLE_DYNAMIC_PROFILING=1 PROFILE_DIR=/tmp/qwen35-profile bash "$runner" >/dev/null 2>&1; then
   echo 'runner accepted PROFILE_DIR outside /cache/austinov' >&2
+  exit 1
+fi
+if OUTPUT_ROOT="$probe_root" QWEN35_ASCEND_DIAGNOSTICS=2 bash "$runner" >/dev/null 2>&1; then
+  echo 'runner accepted invalid QWEN35_ASCEND_DIAGNOSTICS value' >&2
+  exit 1
+fi
+if OUTPUT_ROOT="$probe_root" QWEN35_ASCEND_DIAGNOSTICS_INTERVAL=0 bash "$runner" >/dev/null 2>&1; then
+  echo 'runner accepted invalid QWEN35_ASCEND_DIAGNOSTICS_INTERVAL value' >&2
   exit 1
 fi
 

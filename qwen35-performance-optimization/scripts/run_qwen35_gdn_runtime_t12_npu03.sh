@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
+patch_sha256=9b8c1ef97d55384cad44ccdd5a904179e81471f98417359b9ef6c272e80304f2
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -31,6 +31,8 @@ lease_path="${NPU_LEASE_PATH:-/cache/austinov/.locks/npu0-3.lock}"
 minimum_mem_available_kb="${MIN_MEM_AVAILABLE_KB:-50331648}"
 enable_dynamic_profiling="${ENABLE_DYNAMIC_PROFILING:-0}"
 profile_dir="${PROFILE_DIR:-}"
+qwen35_diagnostics="${QWEN35_ASCEND_DIAGNOSTICS:-0}"
+qwen35_diagnostics_interval="${QWEN35_ASCEND_DIAGNOSTICS_INTERVAL:-32}"
 : "${OUTPUT_ROOT:?set OUTPUT_ROOT to a new directory under /cache/austinov}"
 
 case "$OUTPUT_ROOT" in
@@ -58,6 +60,14 @@ case "$enable_dynamic_profiling" in
     ;;
   *) echo "ENABLE_DYNAMIC_PROFILING must be 0 or 1" >&2; exit 64 ;;
 esac
+case "$qwen35_diagnostics" in
+  0|1) ;;
+  *) echo "QWEN35_ASCEND_DIAGNOSTICS must be 0 or 1" >&2; exit 64 ;;
+esac
+[[ "$qwen35_diagnostics_interval" =~ ^[0-9]+$ && "$qwen35_diagnostics_interval" -ge 1 ]] || {
+  echo "QWEN35_ASCEND_DIAGNOSTICS_INTERVAL must be a positive integer" >&2
+  exit 64
+}
 [[ "$port" =~ ^[0-9]+$ ]] || { echo "invalid PORT: $port" >&2; exit 64; }
 [[ -f "$patch_file" ]] || { echo "missing runtime patch: $patch_file" >&2; exit 66; }
 [[ "$(sha256sum "$patch_file" | awk '{print $1}')" == "$patch_sha256" ]] || {
@@ -249,6 +259,8 @@ docker_args=(
   -e VLLM_ASCEND_PTO_CHUNK_GDN=1
   -e VLLM_LOGGING_LEVEL=DEBUG
   -e QWEN35_ASCEND_MONKEYPATCH="$patch_enabled"
+  -e QWEN35_ASCEND_DIAGNOSTICS="$qwen35_diagnostics"
+  -e QWEN35_ASCEND_DIAGNOSTICS_INTERVAL="$qwen35_diagnostics_interval"
   -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$patch_enabled"
   -e PYTHONPATH="$python_path"
   "${operator_env_args[@]}"
