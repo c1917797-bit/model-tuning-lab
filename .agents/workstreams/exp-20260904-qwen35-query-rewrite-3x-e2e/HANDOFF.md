@@ -3781,6 +3781,83 @@ only physical NPU4-7. The official image identity remains
 with repo digest
 `sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
 
+## 2026-09-09 M=1 MMAR AICPU-first t12 E2E rejection
+
+The native MMAR tiler candidate from isolated ops-transformer commit
+`41515133cadc7e2de54bb6f2297887bfefc7e4ad` routes only the exact TP4 BF16
+M=1, N=5120, K={1536,4352} decode shapes to the AICPU launch path when
+`ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST=1`. The package is
+`/cache/cch/.worktrees/exp-20260909-qwen35-mmar-aicpu-first/build_out/cann-ops-transformer-qwen35_mmar_aicpu_first_transformer_linux-aarch64.run`
+with SHA256
+`8e22ab5d7b0c5b7eb88a393bc452a60fc377df434e1b8f70986a48723b67c84a`.
+It was installed only in the task-private
+`/cache/austinov/qwen35-mmar-aicpu-first-41515133-8e22ab5d-opp` tree, whose
+content hash is
+`d324d27a6bb0c957af968d83f8642b94bfb6cb56f9ad0f8402313fb65b434edb`.
+The OPP and Python patch were mounted read-only into disposable containers;
+the official vLLM-Ascend image and its site-packages were not modified.
+
+The frozen operator gate is
+`/cache/austinov/qwen35-mmar-aicpu-first-gate-r2-20260909-0200`.
+K1536 improved from `87.22235` to `82.2055 us` (`1.061028x`) and K4352
+from `87.19345` to `81.52685 us` (`1.069506x`), for a `1.065259x`
+geometric mean. Numerical correctness and the four-rank 5000 alternating
+calls/rank stress gate passed, so the candidate advanced to E2E.
+
+The same-environment fresh control is
+`/cache/austinov/qwen35-t12-aicpu-first-control-r2-20260909-064538`.
+Its first fail-fast measurements were c1 TTFT/TPOT P95
+`6310.576018947177/29.10703386078306 ms` and c16
+`30092.57700643502/210.99100931006572 ms`. These TTFT values contain
+pronounced cold/dynamic-compile tails and are not interchangeable with the
+historical warm t11 denominator.
+
+The candidate evidence root is
+`/cache/austinov/qwen35-t12-aicpu-first-candidate-r1-20260909-0713`.
+Four-rank activation passed; activation-report SHA256 is
+`c1d96b2e03f48c0afb0348a24f5f77a4c359d0b73c0cdab24bdcaafd650e1f38`.
+The fixed-input smoke ended naturally. The 32-row canary completed 32/32 with
+zero errors and natural EOS. Twenty-four outputs were byte-identical. Manual
+paired review ruled all eight differences equivalent or better, including row
+324 where the candidate correctly retained the immediately preceding
+`国际新闻` intent omitted by control. Material regressions are zero within
+this bounded canary; this is not an all-357 quality claim. Comparison and
+semantic-review SHA256 values are
+`a0ce98fc811b97571fff6eaf25ff5482c6e1b9faa2aa157e0e4b00918ea5ac58`
+and
+`af3ee8d17ed790b5b34d7f7489a508a9321f2a99910dd464adc764783bc60c50`.
+
+The candidate failed the c1/c16 performance screen. Candidate c1 TTFT/TPOT
+P95 were `6254.625632124953/28.447333361038996 ms`, reductions of only
+`0.8866%` and `2.2663%` versus control. Candidate c16 values were
+`29623.049810994416/202.77910649954953 ms`, reductions of only `1.5603%`
+and `3.8920%`. Raw c1/c16 SHA256 values are
+`bde5acc1bb34980bf3249477e660b3c2bf9545326864b074ffe29cac22c46ec2`
+and
+`95050f3ec65d5c1e2ef123a4d1ed92e12e782817a7dac98f470d233f50b588e7`.
+The result is far below the required 40% TTFT and 20% TPOT reductions, so do
+not run c5/c8, the three-repeat matrix, or all-357 quality for this candidate.
+Do not promote these operator bytes or this t12 combination.
+
+The identity-checked maintained stop completed normally: the candidate
+`--rm` container and supervisor are absent, service and log-follower exit
+codes are both zero, the cooperative lease and ports 10010/29953/29954 are
+free, and NPU0-3 have no processes. The external container declaring only
+physical NPU4-7 remains untouched. The official image remains
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`
+with repo digest
+`sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a`.
+
+Do not rerun the AICPU-first t12 bytes unchanged. The next candidate must
+remove a materially larger part of the decode MMAR/HCCL lifecycle rather than
+only selecting another launch path. Resume the IPC-fullmesh investigation with
+the predeclared fresh logical-epoch diagnostic: retain generation reload and
+paired HCCL finalization, bump the package-specific control magic, add bounded
+host-observable phase markers, rebuild under a new SHA, and repeat the exact
+BF16 M=1 operator gate before any E2E launch. If it still stalls, test the
+known-completing v1 binary protocol with fresh magic plus paired finalization
+to isolate generation protocol from stale-window state.
+
 ## 2026-09-09 AICPU-first package completed and isolated OPP installed
 
 The exact asynchronous package build operation
