@@ -1,9 +1,10 @@
 # Qwen3.5 t12 Runtime Monkeypatch Candidate
 
 This directory contains a source-overlay-free Python candidate for the
-unchanged vLLM-Ascend 0.23.0 image. It is not yet the final commercial
-deliverable: offline installation and contract tests pass, while live
-activation, repeated performance, and full quality gates remain pending.
+unchanged vLLM-Ascend 0.23.0 image. It is not the final commercial performance
+deliverable: offline installation and contract tests pass, and live activation
+plus smoke passed on physical NPU0-3, but the c1/32 fail-fast performance gate
+missed the current TTFT >=40% and TPOT >=20% targets.
 
 The candidate installs five coordinated runtime changes:
 
@@ -54,7 +55,20 @@ Passed:
 - offline editable installation in the exact v0.23.0 image with network=none
   and no NPU device mapping.
 
-Pending:
+Live evidence now recorded:
+
+- activation passed in a disposable official-image container on physical NPU0-3;
+- no physical NPU4-7 devices were mounted into the candidate container;
+- the patch was mounted read-only and injected through Python path mechanics;
+- fixed-input smoke completed 1/1 with natural EOS and the same response hash
+  as control;
+- c1/32 fail-fast completed 32/32 with natural EOS, but only reduced TTFT P95
+  from 6502.636 ms to 5697.694 ms (12.38%) and TPOT P95 from 31.754 ms to
+  31.641 ms (0.36%);
+- only 16/32 response hashes matched the paired control run, so this candidate
+  must not be promoted as precision-lossless without deeper paired review.
+
+Still pending for a final money patch:
 
 - four-rank live activation on physical NPU0-3;
 - fresh same-environment MTP-off control;
@@ -64,6 +78,9 @@ Pending:
 
 Historical t11 reached a 47.7% c1 TTFT P95 reduction but only a 17.3% TPOT P95
 reduction. Those measurements are provenance, not a t12 performance claim.
+The latest standalone t12 run reached only 12.38% TTFT P95 reduction and 0.36%
+TPOT P95 reduction at c1/32, so t12 is a validated loader/activation baseline,
+not the final optimization.
 
 Run `../tests/test_official_image_source_contract.sh` on the host to detect
 class, method, signature, or exact source-anchor drift in the pinned image.

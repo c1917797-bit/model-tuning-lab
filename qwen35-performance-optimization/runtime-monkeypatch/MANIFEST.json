@@ -1,7 +1,7 @@
 {
   "schema": "qwen35-runtime-monkeypatch/v2",
   "candidate": "runtime-monkeypatch-gdn-projection-fusion-t12",
-  "status": "offline_contracts_passed_live_validation_pending",
+  "status": "live_activation_passed_performance_gate_failed",
   "sitecustomize_sha256": "aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b",
   "model": "Qwen3.5-27B",
   "framework": "vLLM-Ascend 0.23.0",
@@ -29,7 +29,7 @@
     "vllm_gdn_projection_commit": "685fdf22098fb3a0aa8d582dda57063773606a02",
     "vllm_ascend_gdn_forward_commit": "d98e37ebb72acd71b5a35222fd7ab7f8049d41cb",
     "vllm_ascend_prefetch_lifecycle_commit": "82a2dce7",
-    "scope": "source and device-free behavioral equivalence; live t12 evidence pending"
+    "scope": "source and device-free behavioral equivalence; live t12 evidence recorded"
   },
   "excluded_historical_paths": [
     "bounded MMAR prefill decomposition",
@@ -53,9 +53,30 @@
     "npu_devices_exposed": 0
   },
   "live_validation": {
-    "activation": "not_run_external_npu0_3_owner",
-    "performance": "not_run",
-    "quality": "not_run",
+    "activation": "passed_on_physical_npu0_3_read_only_patch_mount",
+    "control_artifact_root": "/cache/austinov/qwen35-gdn-runtime-t12-control-standalone-20260909T110844Z",
+    "candidate_artifact_root": "/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z",
+    "smoke": {
+      "completed": 1,
+      "errors": 0,
+      "natural_eos": true,
+      "response_sha256_matched_control": true
+    },
+    "failfast_c1_32": {
+      "completed": 32,
+      "errors": 0,
+      "natural_eos": true,
+      "control_ttft_p95_ms": 6502.636359154712,
+      "candidate_ttft_p95_ms": 5697.694213467184,
+      "ttft_p95_reduction_fraction": 0.12378704593472971,
+      "control_tpot_p95_ms": 31.753852729764557,
+      "candidate_tpot_p95_ms": 31.641106860819235,
+      "tpot_p95_reduction_fraction": 0.0035506201374940155,
+      "response_hash_equal_count": 16,
+      "response_hash_compared_count": 32
+    },
+    "performance": "failed_current_acceptance_target",
+    "quality": "not_promoted_response_hash_mismatch_requires_paired_review",
     "promotion_allowed": false
   },
   "historical_t11_reference_only": {
