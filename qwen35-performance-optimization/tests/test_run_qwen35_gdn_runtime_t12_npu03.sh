@@ -34,6 +34,10 @@ grep -Fq 'd324d27a6bb0c957af968d83f8642b94bfb6cb56f9ad0f8402313fb65b434edb' "$ru
 grep -Fq 'qwen35-performance-optimization/runtime-monkeypatch' "$runner"
 grep -Fq -- '-v "$repo_root":/experiment:ro' "$runner"
 grep -Fq -- '-v "$patch_root":/opt/qwen35-t12-monkeypatch:ro' "$runner"
+grep -Fq 'ENABLE_DYNAMIC_PROFILING:-0' "$runner"
+grep -Fq 'PROFILE_DIR requires ENABLE_DYNAMIC_PROFILING=1' "$runner"
+grep -Fq -- '-v "$profile_dir:/profile:rw"' "$runner"
+grep -Fq -- '-e PROFILING_MODE=dynamic' "$runner"
 ! grep -Eq '/vllm-workspace/(vllm|vllm-ascend)/.*\.py:ro' "$runner"
 ! grep -Fq -- '-v /cache/austinov:/cache/austinov' "$runner"
 grep -Fq -- '-v /cache/austinov/Qwen3.8-27B:/cache/austinov/Qwen3.8-27B:ro' "$runner"
@@ -47,5 +51,19 @@ grep -Fq 'nohup setsid "$launcher"' "$starter"
 grep -Fq 'kill -0 "$supervisor_pid"' "$starter"
 grep -Fq 'refusing to reuse supervisor artifacts' "$starter"
 ! grep -Eq 'docker[[:space:]]+(run|stop|commit|cp)([[:space:]]|$)' "$starter"
+
+probe_root="/cache/austinov/qwen35-profile-contract-probe-$$"
+if OUTPUT_ROOT="$probe_root" PROFILE_DIR=/cache/austinov/unexpected-profile bash "$runner" >/dev/null 2>&1; then
+  echo 'runner accepted PROFILE_DIR while dynamic profiling was disabled' >&2
+  exit 1
+fi
+if OUTPUT_ROOT="$probe_root" ENABLE_DYNAMIC_PROFILING=2 bash "$runner" >/dev/null 2>&1; then
+  echo 'runner accepted invalid ENABLE_DYNAMIC_PROFILING value' >&2
+  exit 1
+fi
+if OUTPUT_ROOT="$probe_root" ENABLE_DYNAMIC_PROFILING=1 PROFILE_DIR=/tmp/qwen35-profile bash "$runner" >/dev/null 2>&1; then
+  echo 'runner accepted PROFILE_DIR outside /cache/austinov' >&2
+  exit 1
+fi
 
 echo 'PASS: t12 NPU0-3 runtime-only launcher contract'

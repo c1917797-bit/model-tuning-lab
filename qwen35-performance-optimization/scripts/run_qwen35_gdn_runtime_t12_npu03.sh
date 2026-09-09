@@ -29,6 +29,8 @@ container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 port="${PORT:-10010}"
 lease_path="${NPU_LEASE_PATH:-/cache/austinov/.locks/npu0-3.lock}"
 minimum_mem_available_kb="${MIN_MEM_AVAILABLE_KB:-50331648}"
+enable_dynamic_profiling="${ENABLE_DYNAMIC_PROFILING:-0}"
+profile_dir="${PROFILE_DIR:-}"
 : "${OUTPUT_ROOT:?set OUTPUT_ROOT to a new directory under /cache/austinov}"
 
 case "$OUTPUT_ROOT" in
@@ -39,6 +41,23 @@ esac
   echo "refusing to reuse OUTPUT_ROOT: $OUTPUT_ROOT" >&2
   exit 44
 }
+case "$enable_dynamic_profiling" in
+  0) [[ -z "$profile_dir" ]] || {
+       echo "PROFILE_DIR requires ENABLE_DYNAMIC_PROFILING=1" >&2
+       exit 64
+     } ;;
+  1)
+    case "$profile_dir" in
+      /cache/austinov/*) ;;
+      *) echo "PROFILE_DIR must be a new directory under /cache/austinov" >&2; exit 64 ;;
+    esac
+    [[ ! -e "$profile_dir" ]] || {
+      echo "refusing to reuse PROFILE_DIR: $profile_dir" >&2
+      exit 44
+    }
+    ;;
+  *) echo "ENABLE_DYNAMIC_PROFILING must be 0 or 1" >&2; exit 64 ;;
+esac
 [[ "$port" =~ ^[0-9]+$ ]] || { echo "invalid PORT: $port" >&2; exit 64; }
 [[ -f "$patch_file" ]] || { echo "missing runtime patch: $patch_file" >&2; exit 66; }
 [[ "$(sha256sum "$patch_file" | awk '{print $1}')" == "$patch_sha256" ]] || {
@@ -156,6 +175,13 @@ mem_available_kb="$(awk '/^MemAvailable:/ {print $2}' /proc/meminfo)"
 }
 
 mkdir -p "$OUTPUT_ROOT"
+profile_mount_args=()
+profile_env_args=()
+if [[ "$enable_dynamic_profiling" == 1 ]]; then
+  mkdir -p "$profile_dir"
+  profile_mount_args=(-v "$profile_dir:/profile:rw")
+  profile_env_args=(-e PROFILING_MODE=dynamic)
+fi
 printf '%s\n' "$variant" >"$OUTPUT_ROOT/variant.txt"
 printf '%s\n' "$patch_sha256  $patch_file" >"$OUTPUT_ROOT/patch.sha256"
 printf '%s\n' "$image_id" >"$OUTPUT_ROOT/image-id.before.txt"
@@ -206,6 +232,7 @@ docker_args=(
   -v "$repo_root":/experiment:ro
   -v "$patch_root":/opt/qwen35-t12-monkeypatch:ro
   "${operator_mount_args[@]}"
+  "${profile_mount_args[@]}"
   -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3
   -e HCCL_BUFFSIZE=512
   -e OMP_PROC_BIND=false
@@ -225,6 +252,7 @@ docker_args=(
   -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$patch_enabled"
   -e PYTHONPATH="$python_path"
   "${operator_env_args[@]}"
+  "${profile_env_args[@]}"
 )
 serve_args=(
   vllm serve /cache/austinov/Qwen3.8-27B
