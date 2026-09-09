@@ -86,7 +86,12 @@ if "PROFILING_MODE=dynamic" not in env:
 if expected_variant == "control":
     if "QWEN35_ASCEND_MONKEYPATCH=0" not in env:
         raise SystemExit("control unexpectedly enables monkeypatch")
-    if labels.get("com.c1917797.qwen35-operator-feature") != "none":
+    expected_operator_labels = {
+        "com.c1917797.qwen35-operator-feature": "disabled",
+        "com.c1917797.qwen35-operator-commit": "official-stock",
+        "com.c1917797.qwen35-operator-package-sha256": "not-applicable",
+    }
+    if any(labels.get(key) != value for key, value in expected_operator_labels.items()):
         raise SystemExit("control unexpectedly mounts a custom operator")
 PY
 
