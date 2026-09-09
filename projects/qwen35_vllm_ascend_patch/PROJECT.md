@@ -10,6 +10,7 @@ Qwen3.5-27B on Ascend 910B4 with vLLM-Ascend 0.23.0.
 - Imported branch: `feature/qwen35-validated-runtime-patch`
 - Imported commit: `c61f5f984e13e2ca37fd410783b7e97f960a57f3`
 - Imported tree: `64eb17532737d46e1ea825cb7d75468ea2f91630`
+- Import merge: `d62a79ca208370604cb91a697f9f2d7c164d5d65`
 - Source history: all 3 commits are retained because the exact source commit
   is the second parent of the import merge. This is not a squash or a file-only
   copy.
@@ -46,7 +47,8 @@ Repository import is not performance or accuracy acceptance.
   `/cache/cch/qwen35-vllm-ascend-patch`; monorepo deployment guidance should
   later use this project directory or an explicit read-only mount.
 - Run the project contract from this directory and add a root-level test entry
-  if the monorepo adopts a unified test runner.
+  if the monorepo adopts a unified test runner. The current direct contract
+  invocation passed during import.
 - Synchronize only a future candidate that passes the declared live
   activation, performance, and quality gates; do not silently copy experimental
   worktree bytes into this project.

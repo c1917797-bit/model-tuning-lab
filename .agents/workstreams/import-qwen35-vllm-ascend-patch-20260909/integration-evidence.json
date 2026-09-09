@@ -1,7 +1,15 @@
 {
   "schema": "mst-integration-evidence/v1",
   "task_id": "import-qwen35-vllm-ascend-patch-20260909",
-  "status": "merge-prepared",
-  "target_parent": "b4962e414aa21fb319b3935dc0d7125b94b058f7",
-  "source_parent": "c61f5f984e13e2ca37fd410783b7e97f960a57f3"
+  "status": "validated",
+  "import_base": "b4962e414aa21fb319b3935dc0d7125b94b058f7",
+  "import_merge": "d62a79ca208370604cb91a697f9f2d7c164d5d65",
+  "target_parent": "f6f7032ee6c9a60b31d01fb3fcbc2d71c4dce747",
+  "source_parent": "c61f5f984e13e2ca37fd410783b7e97f960a57f3",
+  "source_tree": "64eb17532737d46e1ea825cb7d75468ea2f91630",
+  "source_commit_count": 3,
+  "source_tree_equivalence": "passed_with_only_documented_AGENTS.md_and_PROJECT.md_additions",
+  "maintainer_structure": "passed_26_skills",
+  "project_contract": "passed_device_free",
+  "performance_and_full_quality_acceptance": "not_run_by_import"
 }
