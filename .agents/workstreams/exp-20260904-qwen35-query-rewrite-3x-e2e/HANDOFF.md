@@ -4476,3 +4476,26 @@ After it completes, verify its artifact before c16. Then stop only this exact
 container or use it to prepare the exact-control profiling transition; never
 attach the rejected dynamic `/stop_profile` path to this production-style
 service.
+
+## 2026-09-09 exact TP4 profile checkpoint (supersedes running-control note)
+
+Capture code is at 9f90d62. Completed profile evidence is under
+`/cache/austinov/qwen35-cannbot-round0-msprof-control-artifacts-20260909T092151Z-retry3`.
+On takeover, all 24 entries in its SHA256SUMS passed verification. The combined
+report contains four rank CSV identities and 649792 kernel rows, with no skipped
+rows in any rank. Summed kernel durations attribute 49.0643% to
+MatmulAllReduceMc2AicpuKernel and 21.4179% to MatmulAllReduce. This is a hotspot
+ranking, not wall-time attribution: streams can overlap and AICPU duration may
+include waiting. It does not prove that removing AICPU work yields that E2E gain.
+Next analysis must separate per-rank decode shapes and correlate timelines before
+selecting the next lifecycle candidate. Preserve the rejected v7 restrictions.
+
+The profiling control `qwen35_cannbot_round0_profile_control_npu03` was observed
+running at takeover, ID b6de6e049a71; it is distinct from the earlier control.
+Its service output root is
+`/cache/austinov/qwen35-cannbot-round0-profile-control-service-20260909T092151Z`.
+Do not launch another owner until its exact labels, live work, devices and lease
+are checked and it is released through the identity-checking stop script.
+The previous no-NPU package-test call lost its response; no test PASS is claimed.
+PR #1 in qwen35-vllm-ascend-patch remains the existing f12341f package, not the
+new profile code. Full repeated performance and all-357 quality gates remain open.
