@@ -3839,6 +3839,41 @@ protocol and return to a native HCCL/MMAR lifecycle implementation with a
 host-observable bounded synchronization design. Any successor must pass the
 same numerical/performance/lifecycle operator gate before E2E activation.
 
+## 2026-09-09 retained v1 cross-container restart rejection
+
+The exact historical v1 package remained available with SHA256
+`57257cb946cadab0311a4728e3df610589954527032489b6bff510b381c9076d`,
+so one bounded cross-container restart diagnostic was run instead of another
+source rebuild. Evidence is
+`/cache/austinov/qwen35-mmar-ipc-fullmesh-gate-v1-crossrestart-r1-20260909-0042`.
+The official stock control completed four ranks and 5000 alternating calls per
+rank, with K1536/K4352 median max-rank latency of
+`92.02975/88.24715 us`. The retained v1 candidate loaded its read-only OPP
+and started four workers on physical NPU0-3, but emitted neither
+`candidate.json` nor any progress JSONL before the 180-second hard timeout.
+Its log contained only allocator initialization warnings and observed AICore
+utilization remained 0%.
+
+This rejects the historical v1 package as a stable fresh-container lifecycle
+implementation in the current environment. The once-observed v1 speedup is
+real historical evidence but is not reproducible enough for promotion. Close
+the ad-hoc IPC fullmesh v1-v6 line; do not rerun or include any of those
+packages in the Python integration or standalone PR. The rejection-record
+SHA256 is
+`bb6075b1a214c2fcdae3548ed3c80a4619168b8a0a17758b2d0bc6dbf2d15250`;
+the manifest SHA256 is
+`bb607bad844275dae5fc1ba154bef77f0464ac87643c338d3833ee985f0d2a41`.
+
+The timeout also exposed a harness defect: killing a blocking `docker run`
+client did not stop the daemon-owned container. After exact identity and
+evidence capture, only the task-owned residual container was stopped. The
+launcher now labels each disposable container with owner, output root, and
+side; after any timeout/error it validates those labels and the image before
+stopping only that residual container. A no-network, no-NPU, read-only-rootfs
+smoke reproduced exit 137 and verified the labeled container was removed.
+NPU0-3 and the cooperative lease are released, NPU4-7 were untouched, and the
+official image identity remains unchanged.
+
 ## 2026-09-08 IPC fullmesh v5 fresh-epoch rejection
 
 The package-specific fresh logical epoch diagnostic was committed in the

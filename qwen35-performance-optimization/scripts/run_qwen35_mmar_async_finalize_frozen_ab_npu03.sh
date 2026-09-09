@@ -132,7 +132,12 @@ for label in default candidate; do
     echo "existing container: $container_name" >&2
     exit 41
   }
-  timeout --signal=TERM --kill-after=60s "${benchmark_timeout}s" docker run --rm --name "$container_name" --network host --cpuset-cpus 0-95 \
+  set +e
+  timeout --signal=TERM --kill-after=60s "${benchmark_timeout}s" docker run --rm --name "$container_name" \
+    --label com.model-tuning-lab.owner=qwen35-mmar-async-finalize-gate \
+    --label "com.model-tuning-lab.output_root=$output_root" \
+    --label "com.model-tuning-lab.side=$label" \
+    --network host --cpuset-cpus 0-95 \
     --device /dev/davinci0 --device /dev/davinci1 \
     --device /dev/davinci2 --device /dev/davinci3 \
     --device /dev/davinci_manager --device /dev/devmm_svm --device /dev/hisi_hdc \
@@ -156,6 +161,23 @@ for label in default candidate; do
       --warmup 40 --iterations 200 --repeats 7 \
       --stress-calls 5000 --stress-batch 250 --master-port '$master_port'" \
       >"$output_root/$label.log" 2>&1
+  run_rc=$?
+  set -e
+  if docker container inspect "$container_name" >/dev/null 2>&1; then
+    owner_label="$(docker inspect --format '{{index .Config.Labels "com.model-tuning-lab.owner"}}' "$container_name")"
+    output_label="$(docker inspect --format '{{index .Config.Labels "com.model-tuning-lab.output_root"}}' "$container_name")"
+    side_label="$(docker inspect --format '{{index .Config.Labels "com.model-tuning-lab.side"}}' "$container_name")"
+    image_label="$(docker inspect --format '{{.Config.Image}}' "$container_name")"
+    [[ "$owner_label" == qwen35-mmar-async-finalize-gate &&
+       "$output_label" == "$output_root" &&
+       "$side_label" == "$label" &&
+       "$image_label" == "$image" ]] || {
+      echo "refusing to clean unexpected container: $container_name" >&2
+      exit 49
+    }
+    docker stop --time 30 "$container_name" >/dev/null
+  fi
+  [[ "$run_rc" -eq 0 ]] || exit "$run_rc"
   [[ "$label" != default ]] || sleep "$cooldown"
 done
 
