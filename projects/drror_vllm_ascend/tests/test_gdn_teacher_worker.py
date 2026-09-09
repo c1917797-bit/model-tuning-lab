@@ -47,6 +47,7 @@ def worker(teacher, tmp_path, monkeypatch):
     obj.rank = obj.local_rank = 0
     obj._teacher_dir = tmp_path
     obj._manifest = manifest(teacher)
+    obj._layers = list(obj._manifest["layers"])
     obj._manifest_hash = "a" * 64
     obj._frame = obj._current = obj._libraries = None
     for name in ("_pending", "_last_state", "_steps", "_nonces", "_tokens",
@@ -141,7 +142,7 @@ def test_manifest_accepts_exact_bounded_protocol(teacher):
 
 @pytest.mark.parametrize("key,value", [
     ("tp_size", True), ("input_tokens", 127), ("decode_steps", 9),
-    ("output_tokens", 8), ("no_thinking", 1), ("layers", [0]),
+    ("output_tokens", 8), ("no_thinking", 1), ("layers", [0, 0]),
     ("model", "/another/model"), ("schema", "other"),
 ])
 def test_manifest_rejects_protocol_drift(teacher, key, value):
@@ -149,6 +150,13 @@ def test_manifest_rejects_protocol_drift(teacher, key, value):
     doc[key] = value
     with pytest.raises(RuntimeError, match="manifest"):
         teacher.validate_manifest(doc)
+
+
+def test_manifest_accepts_frozen_dynamic_layer_set(teacher):
+    doc = manifest(teacher)
+    doc["layers"] = list(range(48))
+    assert len(doc["layers"]) == 48
+    assert teacher.validate_manifest(doc)["layers"] == doc["layers"]
 
 
 @pytest.mark.parametrize("mutation", ["hash", "boolean_token", "duplicate", "count"])

@@ -264,10 +264,10 @@ def test_archive_sha_precedes_weights_only_loading(tmp_path, monkeypatch):
     assert result["text"] == "trusted local fixture" and size == path.stat().st_size
 
 
-def file_list(capture, sid, rank):
+def file_list(capture, sid, rank, layers=audit.LAYERS):
     return [{"file": f"{sid}.rank{rank}.layer{layer}.step{step}.pt",
              "path": str(capture / f"{sid}.rank{rank}.layer{layer}.step{step}.pt"), "sha256": SHA}
-            for step in range(9) for layer in audit.LAYERS]
+            for step in range(9) for layer in layers]
 
 
 def test_exact_432_inventory_and_complete_file_order(tmp_path):
@@ -286,6 +286,21 @@ def test_exact_432_inventory_and_complete_file_order(tmp_path):
     (tmp_path / "unexpected.pt").touch()
     with pytest.raises(ValueError):
         audit.check_inventory(tmp_path, names)
+
+
+def test_dynamic_layer_inventory_and_order(tmp_path):
+    layers = tuple(range(48))
+    assert len(layers) == 48
+    names = []
+    for sid in ("teacher-0", "teacher-1"):
+        for rank in range(4):
+            files = file_list(tmp_path, sid, rank, layers)
+            entries = audit.check_file_list(files, tmp_path, sid, rank, layers)
+            assert len(entries) == 432
+            for path, _, _, _ in entries:
+                path.touch()
+                names.append(path.name)
+    audit.check_inventory(tmp_path, names, layers)
 
 
 @pytest.mark.parametrize("kind", ["duplicate", "path_escape", "hash", "missing", "order"])

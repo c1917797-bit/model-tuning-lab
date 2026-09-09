@@ -64,13 +64,15 @@ def response_data():
             "usage": {"prompt_tokens": 128, "completion_tokens": 9}}
 
 
-def worker_completions(capture, sequence, ids, *, bad_rank=None, missing_rank=None):
+def worker_completions(capture, sequence, ids, *, layers=None, bad_rank=None, missing_rank=None):
+    layers = list(collector.LAYERS if layers is None else layers)
     arm = json.loads((capture / "armed.json").read_text())
     for rank in range(4):
         if rank == missing_rank:
             continue
         data = {"schema": collector.SCHEMA, "sequence_id": sequence["id"], "rank": rank,
-                "nonce": arm["nonce"], "steps": 9, "layers": 6, "records": 54,
+                "nonce": arm["nonce"], "steps": 9, "layers": len(layers),
+                "records": 9 * len(layers), "layer_ids": layers,
                 "input_ids_per_step": [sequence["input_ids"]] + [[x] for x in ids[:8]]}
         if rank == bad_rank:
             data["input_ids_per_step"][-1] = [999]
@@ -155,7 +157,7 @@ def test_old_calibration_format_hash_and_internal_ids(tmp_path):
 
 @pytest.mark.parametrize("field,value", [
     ("decode_steps", 9), ("output_tokens", 8), ("no_thinking", False), ("no_thinking", 1),
-    ("layers", [0]), ("tp_size", 1), ("model", "/other")])
+    ("layers", [0, 0]), ("tp_size", 1), ("model", "/other")])
 def test_manifest_protocol_fails_closed(tmp_path, field, value):
     data = manifest_data()
     data[field] = value
@@ -163,6 +165,14 @@ def test_manifest_protocol_fails_closed(tmp_path, field, value):
     write_json(path, data)
     with pytest.raises(ValueError):
         collector.load_manifest(path, collector.digest(path))
+
+
+def test_manifest_accepts_frozen_dynamic_layer_set(tmp_path):
+    data = manifest_data()
+    data["layers"] = list(range(48))
+    path = tmp_path / "manifest.json"
+    write_json(path, data)
+    assert collector.load_manifest(path, collector.digest(path))["layers"] == data["layers"]
 
 
 def test_manifest_sequence_hash_and_duplicate_fail_closed(tmp_path):
@@ -311,4 +321,3 @@ def test_absolute_paths_reject_symlinks(tmp_path):
     alias.symlink_to(real, target_is_directory=True)
     with pytest.raises(ValueError):
         collector.absolute_path(alias)
-
