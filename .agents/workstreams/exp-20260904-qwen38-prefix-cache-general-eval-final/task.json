@@ -15,10 +15,10 @@
     {"kind":"file","mode":"exclusive","value":"scripts/prepare_qwen38_perf_2k40.py"},
     {"kind":"file","mode":"exclusive","value":"scripts/qwen38_perf_2k40.py"},
     {"kind":"file","mode":"exclusive","value":"scripts/run_qwen38_perf_2k40_once.sh"},
-    {"kind":"resource","mode":"exclusive","value":"chicaihong01 physical NPU4-7 and dedicated loopback endpoint 127.0.0.1:8210"}
+    {"kind":"resource","mode":"historical","value":"No active lease; the completed experiment formerly used chicaihong01 physical NPU4-7 and 127.0.0.1:8210"}
   ],
   "validationCommands": ["./scripts/validate-mst.sh", "git diff --check"],
-  "executionState": "started",
-  "integrationState": "not-ready",
+  "executionState": "completed-rejected-superseded",
+  "integrationState": "superseded",
   "notes": ["Natural-prompt quality runs from 80bd4b1 are retained as a correctness anchor. The user subsequently changed the performance workload to exact 2048 input tokens and exact 40 output tokens; this latest instruction supersedes the earlier frozen general-eval performance protocol. Snapshot SHA256 is a40b8df38c08d3dc2580b5aa53ff7c5d23702224f82774ed6bff718c35e298f7."]
 }
