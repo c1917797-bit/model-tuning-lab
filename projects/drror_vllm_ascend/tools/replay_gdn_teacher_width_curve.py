@@ -552,14 +552,14 @@ def main(argv=None):
         "plan-dk80-sha256",
     ):
         parser.add_argument("--" + key, required=True)
-    parser.add_argument("--max-seconds", type=int, default=1800)
+    parser.add_argument("--max-seconds", type=int, default=5400)
     args = parser.parse_args(argv)
 
     require(
         os.environ.get("ASCEND_RT_VISIBLE_DEVICES") == "0,1,2,3",
         "audited four-device namespace required; replay uses logical npu0",
     )
-    require(1 <= args.max_seconds <= 1800, "bounded 1..1800-second replay")
+    require(1 <= args.max_seconds <= 5400, "bounded 1..5400-second replay")
     output = args.output_dir
     require(
         output.is_absolute()
