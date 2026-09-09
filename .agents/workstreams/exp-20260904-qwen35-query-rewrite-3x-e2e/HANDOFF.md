@@ -4499,3 +4499,34 @@ are checked and it is released through the identity-checking stop script.
 The previous no-NPU package-test call lost its response; no test PASS is claimed.
 PR #1 in qwen35-vllm-ascend-patch remains the existing f12341f package, not the
 new profile code. Full repeated performance and all-357 quality gates remain open.
+
+## 2026-09-09 MMAR timeline analysis checkpoint
+
+Commit 080b5b5 adds a no-device timeline analyzer and a findings note for the
+completed four-rank msprof control profile. The analyzer intentionally uses only
+Python standard-library modules because the host Python is missing `unittest`;
+its synthetic self-test passed via a direct `python3 -B -c` invocation, avoiding
+that environment gap. `gh` is still not installed, so PR updates must use git
+push plus the GitHub compare page rather than GitHub CLI.
+
+The verified timeline report is
+`/cache/austinov/qwen35-cannbot-round0-timeline-20260909-v1.json`, SHA256
+`32239a5d4e40a3541012015b921e213f12e5c77903c340b581245404946a2e77`.
+It parses the four raw `op_summary` CSV files from
+`/cache/austinov/qwen35-cannbot-round0-msprof-control-20260909T092151Z` and
+records each CSV SHA256. The result confirms that `MatmulAllReduce` and
+`MatmulAllReduceMc2AicpuKernel` intervals overlap heavily; their durations must
+not be summed as removable wall time.
+
+The cross-rank timing is now more specific: decode M=1 MMAR start spread is
+small (`1,1536` mean 7.996 us, p95 12.120 us; `1,4352` mean 5.146 us, p95
+8.050 us, each over 6720 occurrences), while prefill shapes show millisecond-
+scale start skew (`1536,1536` p95 6929.155 us and `274,1536` p95 8163.175 us)
+with near-simultaneous end spread around 4-6 us. Therefore the next candidate
+should not blindly retune every decode MMAR launch parameter; first investigate
+prefill/collective lifecycle or scheduler arrival gap with causal evidence.
+
+This checkpoint is evidence and tooling only. It is not an E2E performance pass,
+does not promote t12 or the rejected IPC operators, and does not change the
+final gate: TTFT P95 at least 40% lower and TPOT P95 at least 20% lower at
+c1/c5/c8/c16 with zero material quality regression.
