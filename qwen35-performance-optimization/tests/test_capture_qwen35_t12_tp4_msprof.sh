@@ -22,5 +22,6 @@ grep -Fq 'for rank in 0 1 2 3' "$capture"
 grep -Fq 'performance_evidence": False' "$capture"
 ! grep -Eq 'docker[[:space:]]+(run|stop|commit|cp)([[:space:]]|$)' "$capture"
 ! grep -Fq -- '--device /dev/davinci4' "$capture"
+! grep -Fq '+  ' "$capture"
 
 echo 'PASS: t12 TP4 msprof attach contract'

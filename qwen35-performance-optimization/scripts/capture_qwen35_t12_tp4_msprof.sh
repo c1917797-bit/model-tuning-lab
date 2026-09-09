@@ -149,7 +149,7 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-env PYTHONPATH="$repo_root/scripts${PYTHONPATH:+:$PYTHONPATH}" +  python3 "$repo_root/scripts/run_qwen35_profile_request.py" +  --base-url "$base_url" +  --model "$model" +  --dataset "$dataset" +  --dataset-sha256 "$dataset_sha256" +  --run-id "$run_id" +  --control-mode external-msprof +  --external-ready-file "$ready_file" +  --external-go-file "$go_file" +  --timeout "$request_timeout" +  --output "$request_artifact" >"$request_log" 2>&1 &
+env PYTHONPATH="$repo_root/scripts${PYTHONPATH:+:$PYTHONPATH}" python3 "$repo_root/scripts/run_qwen35_profile_request.py" --base-url "$base_url" --model "$model" --dataset "$dataset" --dataset-sha256 "$dataset_sha256" --run-id "$run_id" --control-mode external-msprof --external-ready-file "$ready_file" --external-go-file "$go_file" --timeout "$request_timeout" --output "$request_artifact" >"$request_log" 2>&1 &
 request_pid=$!
 
 deadline=$((SECONDS + request_timeout))
@@ -253,7 +253,7 @@ for rank in 0 1 2 3; do
     }
   python3 "$repo_root/scripts/analyze_ascend_profile.py" "$profile_dir/rank${rank}" --output "$artifact_dir/rank${rank}-hotspots.json"
 done
-python3 "$repo_root/scripts/analyze_ascend_profile.py" +  "$profile_dir" --output "$artifact_dir/combined-hotspots.json"
+python3 "$repo_root/scripts/analyze_ascend_profile.py" "$profile_dir" --output "$artifact_dir/combined-hotspots.json"
 docker logs "$container_name" >"$artifact_dir/service.log" 2>&1
 
 python3 - "$artifact_dir" "$run_id" "$expected_variant" "$profile_dir" <<'PY'
