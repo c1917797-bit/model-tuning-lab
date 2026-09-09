@@ -1,11 +1,29 @@
 {
   "schema": "mst-integration-evidence/v1",
   "taskId": "qwen35-experience-ingestion-20260909",
-  "status": "not-ready",
+  "status": "needs-revalidation",
   "targetParent": "31c43a4c249c9d4c597372f47d989a7c10b2c9c4",
-  "sourceCommit": null,
-  "validation": [],
-  "remoteWorkstreamTip": null,
+  "sourceCommit": "eb3279b23ae6c12c3bd9d8a5607c79181c74f6cc",
+  "sourceTree": "9bdf81f8f86605b5ad21af1a836be7fbfadcfee9",
+  "sourceScope": "validated and pushed content checkpoint; receipt-only successor still requires exact-final-source validation before main integration",
+  "validation": [
+    {"command":"./scripts/validate-mst.sh","result":"passed","skills":26},
+    {"command":"python3 scripts/validate_qwen35_handoff.py","result":"passed","lessons":12,"evidenceFiles":12},
+    {"command":"python3 tests/test_qwen35_handoff.py","result":"passed","regressionChecks":15},
+    {"command":"python3 scripts/validate_qwen35_handoff.py --verify-artifacts","result":"passed","scope":"12 indexed files, 12 historical raw file hashes, private patch and 6 untracked backups"},
+    {"command":"python3 -m py_compile scripts/validate_qwen35_handoff.py tests/test_qwen35_handoff.py","result":"passed"},
+    {"command":"JSON parsing, git diff --check and git diff --cached --check","result":"passed"}
+  ],
+  "validationOperation": "exec-000000000000103d",
+  "validationLog": "/cache/austinov/handoffs/qwen35-mtp-off-20260909T214308Z/content-validation.log",
+  "remoteWorkstreamTip": "eb3279b23ae6c12c3bd9d8a5607c79181c74f6cc",
+  "remoteEqualityAtContentCheckpoint": "0 0",
+  "performanceAccepted": false,
+  "integrationBlockers": [
+    "Target owner must reconcile knowledge proposals and global HANDOFF.",
+    "Fetch and validate the exact final remote source and latest main before integration.",
+    "The separate performance workstream remains dirty and its T15/full performance gates are incomplete."
+  ],
   "mergeCommit": null,
   "mergeMode": "no_ff"
 }

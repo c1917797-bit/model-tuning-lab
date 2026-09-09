@@ -11,6 +11,11 @@
 - Expanded-scope checkpoint ebd6383dd19c20edfd9432f3f2573e42d5b3fd08 was also
   pushed. The final content checkpoint is bound in integration-evidence.json;
   verify actual HEAD/upstream before continuing.
+- Validated content checkpoint:
+  `eb3279b23ae6c12c3bd9d8a5607c79181c74f6cc` (pushed).
+  Content tree: `9bdf81f8f86605b5ad21af1a836be7fbfadcfee9`.
+  The later receipt-only checkpoint does not waive final-source validation
+  before integration; no main or performance merge is claimed.
 
 ## 1. North Star
 
