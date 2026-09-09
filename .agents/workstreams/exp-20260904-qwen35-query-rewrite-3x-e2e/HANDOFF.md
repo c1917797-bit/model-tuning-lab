@@ -4615,3 +4615,29 @@ the live gates pass.
 - Decision: t12 standalone candidate is request-correct and activation-correct but performance-insufficient under the current target. Do not claim goal completion from t12. The standalone PR branch remains useful as a packaging/loader baseline, but no final performance PR should claim t12 meets the target.
 - Next action: inspect generated artifacts and code paths to identify why GDN microbench speedup does not translate to c1 P95/TPOT. Prioritize M=1 decode path and lifecycle/overhead attribution before creating t13. Avoid repeating closed routes (down-proj NZ, online HCCL tiling, K4352-only tiling, HCCL_BUFFSIZE variants, MMAR x3 residual, ShortGPT layer skip, bounded-MMAR t11).
 
+## 2026-09-09 t13 planning and fail-fast evaluator update
+
+- `unittest` and GitHub CLI are not blockers. The host Python lacks `unittest`,
+  so new validation helpers must use direct Python assertions or shell checks.
+  `gh` is not installed, but PR work can proceed with `git push` plus the GitHub
+  compare page/API; do not install extra host tooling merely to compensate.
+- Added `qwen35-performance-optimization/T13_CANDIDATE_PLAN.md` in commit
+  `7cc5dd4`. It records the evidence-driven t13 boundary: do not promote t12,
+  do not blindly retune decode MMAR launches, do not assume Ascend 950/dav-3510
+  APACE/AIV+URMA MC2 routes are supported on Ascend 910B4/dav-2201, and only
+  generate a new operator after a requirements note proves chip-route support,
+  precision oracle, L2-flushed perf protocol, read-only OPP loading, and c1/c16
+  fail-fast benefit.
+- Added `qwen35-performance-optimization/scripts/evaluate_qwen35_failfast_pair.py`
+  and its no-`unittest` contract test in commit `0e46e40`. The test passed with
+  `python3 qwen35-performance-optimization/tests/test_evaluate_qwen35_failfast_pair.py`.
+- The evaluator was run on the latest standalone t12 c1/32 artifacts and wrote
+  `/cache/austinov/qwen35-gdn-runtime-t12-candidate-standalone-20260909T1127Z/failfast-candidate/c1-r1-decision.json`,
+  SHA256 `92c173f7b6391f238e3e2615615129ad464ef3ffd2904a6f3460746984272656`.
+  Decision is `iterate`: TTFT P95 reduction 12.38%, TPOT P95 reduction 0.36%,
+  response hashes 16/32 equal. This standardized artifact should be referenced
+  instead of hand-calculating whether t12 can advance.
+- Also updated `runtime-monkeypatch/MANIFEST.json` and `runtime-monkeypatch/README.md`
+  in commit `e3f08d2` to state the true evidence boundary: t12 live activation
+  and smoke passed, but current performance gate failed and promotion is not
+  allowed.
