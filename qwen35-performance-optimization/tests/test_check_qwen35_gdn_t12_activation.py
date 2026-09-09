@@ -29,6 +29,17 @@ def main() -> None:
             [
                 "QWEN35_ASCEND_MONKEYPATCH=1",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
+                f"{checker.EXPECTED_OPERATOR_FEATURE_ENV}=1",
+                f"ASCEND_CUSTOM_OPP_PATH={checker.EXPECTED_OPERATOR_VENDOR}",
+                (
+                    "LD_LIBRARY_PATH="
+                    f"{checker.EXPECTED_OPERATOR_VENDOR}/op_api/lib:/image/lib"
+                ),
+                f"QWEN35_MMAR_OPERATOR_COMMIT={checker.EXPECTED_OPERATOR_COMMIT}",
+                (
+                    "QWEN35_MMAR_PACKAGE_SHA256="
+                    f"{checker.EXPECTED_OPERATOR_PACKAGE_SHA256}"
+                ),
             ]
         )
         env.append("PYTHONPATH=/opt/qwen35-t12-monkeypatch:/image/python:")
@@ -60,7 +71,12 @@ def main() -> None:
                                 "Source": "/host/runtime-monkeypatch",
                                 "Destination": "/opt/qwen35-t12-monkeypatch",
                                 "RW": False,
-                            }
+                            },
+                            {
+                                "Source": "/host/aicpu-first-opp",
+                                "Destination": checker.EXPECTED_OPERATOR_ROOT,
+                                "RW": False,
+                            },
                         ],
                     }
                 ]
@@ -100,6 +116,27 @@ def main() -> None:
             if value.startswith("VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=")
             else value
             for value in control_env
+            if not value.startswith(
+                (
+                    f"{checker.EXPECTED_OPERATOR_FEATURE_ENV}=",
+                    "ASCEND_CUSTOM_OPP_PATH=",
+                    "QWEN35_MMAR_OPERATOR_COMMIT=",
+                    "QWEN35_MMAR_PACKAGE_SHA256=",
+                )
+            )
+        ]
+        control[0]["Config"]["Env"] = [
+            value
+            for value in control[0]["Config"]["Env"]
+            if not (
+                value.startswith("LD_LIBRARY_PATH=")
+                and checker.EXPECTED_OPERATOR_ROOT in value
+            )
+        ]
+        control[0]["Mounts"] = [
+            mount
+            for mount in control[0]["Mounts"]
+            if mount["Destination"] != checker.EXPECTED_OPERATOR_ROOT
         ]
         inspect.write_text(json.dumps(control), encoding="utf-8")
         log.write_text("unpatched control service\n", encoding="utf-8")

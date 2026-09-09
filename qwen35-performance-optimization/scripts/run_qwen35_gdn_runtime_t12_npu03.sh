@@ -12,6 +12,13 @@ patch_sha256=aaa4f27c244d68b6f628325b521d703abde0f05973459b1f4517d1fad1cabe1b
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
+operator_feature_env=ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST
+operator_commit=41515133cadc7e2de54bb6f2297887bfefc7e4ad
+operator_package_sha256=8e22ab5d7b0c5b7eb88a393bc452a60fc377df434e1b8f70986a48723b67c84a
+operator_tree_sha256=d324d27a6bb0c957af968d83f8642b94bfb6cb56f9ad0f8402313fb65b434edb
+operator_vendor=qwen35_mmar_aicpu_first_transformer_transformer
+operator_container_root=/opt/qwen35-mmar-aicpu-first-opp
+operator_container_vendor="$operator_container_root/vendors/$operator_vendor"
 variant="${VARIANT:-candidate}"
 case "$variant" in
   candidate) patch_enabled=1 ;;
@@ -47,6 +54,54 @@ grep -Fxq "$image_digest" <<<"$actual_image_digests" || {
   echo "base image digest mismatch" >&2
   exit 47
 }
+operator_mount_args=()
+operator_env_args=()
+operator_feature_label=disabled
+operator_commit_label=official-stock
+operator_package_label=not-applicable
+if [[ "$variant" == candidate ]]; then
+  : "${CANDIDATE_OPP_ROOT:?set CANDIDATE_OPP_ROOT for candidate}"
+  : "${CANDIDATE_OPERATOR_COMMIT:?set CANDIDATE_OPERATOR_COMMIT for candidate}"
+  : "${CANDIDATE_PACKAGE_SHA256:?set CANDIDATE_PACKAGE_SHA256 for candidate}"
+  [[ "$CANDIDATE_OPERATOR_COMMIT" == "$operator_commit" ]] || {
+    echo "candidate operator commit mismatch" >&2
+    exit 47
+  }
+  [[ "$CANDIDATE_PACKAGE_SHA256" == "$operator_package_sha256" ]] || {
+    echo "candidate operator package SHA256 mismatch" >&2
+    exit 47
+  }
+  [[ -f "$CANDIDATE_OPP_ROOT/vendors/$operator_vendor/bin/set_env.bash" ]] || {
+    echo "candidate OPP layout is incomplete" >&2
+    exit 66
+  }
+  actual_operator_tree_sha256="$(
+    find "$CANDIDATE_OPP_ROOT" -type f -print0 |
+      sort -z |
+      xargs -0 sha256sum |
+      sha256sum |
+      awk '{print $1}'
+  )"
+  [[ "$actual_operator_tree_sha256" == "$operator_tree_sha256" ]] || {
+    echo "candidate OPP tree SHA256 mismatch" >&2
+    exit 47
+  }
+  image_ld_library_path="$(
+    docker image inspect "$image_ref" --format '{{range .Config.Env}}{{println .}}{{end}}' |
+      sed -n 's/^LD_LIBRARY_PATH=//p'
+  )"
+  operator_mount_args=(-v "$CANDIDATE_OPP_ROOT:$operator_container_root:ro")
+  operator_env_args=(
+    -e "ASCEND_CUSTOM_OPP_PATH=$operator_container_vendor"
+    -e "LD_LIBRARY_PATH=$operator_container_vendor/op_api/lib:${image_ld_library_path}"
+    -e "$operator_feature_env=1"
+    -e "QWEN35_MMAR_OPERATOR_COMMIT=$operator_commit"
+    -e "QWEN35_MMAR_PACKAGE_SHA256=$operator_package_sha256"
+  )
+  operator_feature_label="$operator_feature_env"
+  operator_commit_label="$operator_commit"
+  operator_package_label="$operator_package_sha256"
+fi
 [[ -f /cache/austinov/Qwen3.8-27B/config.json ]] || {
   echo "missing frozen Qwen3.5-27B model" >&2
   exit 66
@@ -106,6 +161,13 @@ printf '%s\n' "$patch_sha256  $patch_file" >"$OUTPUT_ROOT/patch.sha256"
 printf '%s\n' "$image_id" >"$OUTPUT_ROOT/image-id.before.txt"
 printf '%s\n' "$image_digest" >"$OUTPUT_ROOT/image-digest.before.txt"
 git -C "$repo_root" rev-parse HEAD >"$OUTPUT_ROOT/repository-commit.txt"
+{
+  echo "feature=$operator_feature_label"
+  echo "operator_commit=$operator_commit_label"
+  echo "package_sha256=$operator_package_label"
+  echo "expected_tree_sha256=$operator_tree_sha256"
+  echo "loading=relocated read-only OPP; packaged set_env.bash is not sourced"
+} >"$OUTPUT_ROOT/operator-opp.txt"
 docker ps --no-trunc >"$OUTPUT_ROOT/docker-ps.before.txt"
 printf '%s\n' "$npu_snapshot" >"$OUTPUT_ROOT/npu-smi.before.txt"
 ss -lntp >"$OUTPUT_ROOT/ports.before.txt"
@@ -121,6 +183,9 @@ docker_args=(
   --label com.c1917797.qwen35-t12=1
   --label com.c1917797.qwen35-variant="$variant"
   --label com.c1917797.qwen35-output-root="$OUTPUT_ROOT"
+  --label com.c1917797.qwen35-operator-feature="$operator_feature_label"
+  --label com.c1917797.qwen35-operator-commit="$operator_commit_label"
+  --label com.c1917797.qwen35-operator-package-sha256="$operator_package_label"
   --network host
   --shm-size 64g
   --cpuset-cpus 0-95
@@ -131,16 +196,16 @@ docker_args=(
   --device /dev/davinci_manager
   --device /dev/devmm_svm
   --device /dev/hisi_hdc
-  -v /usr/local/Ascend/driver/lib64:/usr/local/Ascend/driver/lib64
-  -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info
-  -v /etc/ascend_install.info:/etc/ascend_install.info
-  -v /usr/local/dcmi:/usr/local/dcmi
-  -v /usr/local/Ascend/driver/tools/hccn_tool:/usr/local/Ascend/driver/tools/hccn_tool
-  -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi
-  -v /cache/austinov:/cache/austinov
-  -v /cache/cch:/cache/cch:ro
+  -v /usr/local/Ascend/driver/lib64:/usr/local/Ascend/driver/lib64:ro
+  -v /usr/local/Ascend/driver/version.info:/usr/local/Ascend/driver/version.info:ro
+  -v /etc/ascend_install.info:/etc/ascend_install.info:ro
+  -v /usr/local/dcmi:/usr/local/dcmi:ro
+  -v /usr/local/Ascend/driver/tools/hccn_tool:/usr/local/Ascend/driver/tools/hccn_tool:ro
+  -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro
+  -v /cache/austinov/Qwen3.8-27B:/cache/austinov/Qwen3.8-27B:ro
   -v "$repo_root":/experiment:ro
   -v "$patch_root":/opt/qwen35-t12-monkeypatch:ro
+  "${operator_mount_args[@]}"
   -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3
   -e HCCL_BUFFSIZE=512
   -e OMP_PROC_BIND=false
@@ -159,6 +224,7 @@ docker_args=(
   -e QWEN35_ASCEND_MONKEYPATCH="$patch_enabled"
   -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$patch_enabled"
   -e PYTHONPATH="$python_path"
+  "${operator_env_args[@]}"
 )
 serve_args=(
   vllm serve /cache/austinov/Qwen3.8-27B

@@ -14,6 +14,16 @@ EXPECTED_IMAGE_ID = (
     "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 )
 EXPECTED_MODEL_ID = "Qwen3-5/Qwen3.5-27B"
+EXPECTED_OPERATOR_FEATURE_ENV = "ASCEND_MATMUL_ALLREDUCE_M1_AICPU_FIRST"
+EXPECTED_OPERATOR_COMMIT = "41515133cadc7e2de54bb6f2297887bfefc7e4ad"
+EXPECTED_OPERATOR_PACKAGE_SHA256 = (
+    "8e22ab5d7b0c5b7eb88a393bc452a60fc377df434e1b8f70986a48723b67c84a"
+)
+EXPECTED_OPERATOR_ROOT = "/opt/qwen35-mmar-aicpu-first-opp"
+EXPECTED_OPERATOR_VENDOR = (
+    f"{EXPECTED_OPERATOR_ROOT}/vendors/"
+    "qwen35_mmar_aicpu_first_transformer_transformer"
+)
 EXPECTED_ENV = {
     "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
     "VLLM_ASCEND_ENABLE_FLASHCOMM1": "0",
@@ -111,6 +121,41 @@ def check(
     env_checks["patch_first_on_pythonpath"] = python_path.startswith(
         "/opt/qwen35-t12-monkeypatch:"
     )
+    if variant == "candidate":
+        env_checks.update(
+            {
+                "operator_feature_enabled": (
+                    env.get(EXPECTED_OPERATOR_FEATURE_ENV) == "1"
+                ),
+                "operator_commit": (
+                    env.get("QWEN35_MMAR_OPERATOR_COMMIT")
+                    == EXPECTED_OPERATOR_COMMIT
+                ),
+                "operator_package_sha256": (
+                    env.get("QWEN35_MMAR_PACKAGE_SHA256")
+                    == EXPECTED_OPERATOR_PACKAGE_SHA256
+                ),
+                "operator_opp_path": (
+                    env.get("ASCEND_CUSTOM_OPP_PATH")
+                    == EXPECTED_OPERATOR_VENDOR
+                ),
+                "operator_library_first": env.get(
+                    "LD_LIBRARY_PATH", ""
+                ).startswith(f"{EXPECTED_OPERATOR_VENDOR}/op_api/lib:"),
+            }
+        )
+    else:
+        env_checks.update(
+            {
+                "operator_feature_absent": (
+                    EXPECTED_OPERATOR_FEATURE_ENV not in env
+                ),
+                "operator_opp_absent": (
+                    EXPECTED_OPERATOR_ROOT
+                    not in env.get("ASCEND_CUSTOM_OPP_PATH", "")
+                ),
+            }
+        )
 
     host_devices = {
         item.get("PathOnHost")
@@ -134,6 +179,11 @@ def check(
         for item in mounts
         if item.get("Destination") == "/opt/qwen35-t12-monkeypatch"
     ]
+    operator_mounts = [
+        item
+        for item in mounts
+        if item.get("Destination") == EXPECTED_OPERATOR_ROOT
+    ]
     forbidden_mounts = [
         item
         for item in mounts
@@ -146,6 +196,12 @@ def check(
         "patch_mount_read_only": len(patch_mounts) == 1
         and not patch_mounts[0].get("RW", True),
         "no_vllm_source_overlays": not forbidden_mounts,
+        "operator_mount": (
+            len(operator_mounts) == 1
+            and not operator_mounts[0].get("RW", True)
+            if variant == "candidate"
+            else not operator_mounts
+        ),
     }
 
     top_pids = _top_pids(top_text)
@@ -213,6 +269,7 @@ def check(
             "image_id": inspect.get("Image"),
             "host_devices": sorted(value for value in host_devices if value),
             "patch_mounts": patch_mounts,
+            "operator_mounts": operator_mounts,
             "forbidden_mounts": forbidden_mounts,
             "npu_processes": npu_processes,
             "container_pids": sorted(top_pids),
