@@ -35,6 +35,25 @@ real improvement.
 8. Classify the result using `ascend-inference-tuning-loop` and commit/push the
    measurement stage even when it fails or shows no benefit.
 
+## Quality-oracle scope
+
+Name the strongest oracle the dataset actually supports:
+
+- reference-answer metrics require populated, trustworthy reference answers;
+- deterministic byte equality is strong evidence for identical execution but
+  not a substitute for semantic review when valid reduction order, natural
+  stopping, or runtime scheduling changes bytes;
+- when reference answers are absent, use same-runtime paired control/candidate
+  review over frozen indexes and state the claim as task-specific semantic
+  no-regression, not general accuracy preservation.
+
+For paired review, automatically accept byte-identical rows and review every
+different pair for retained intent, facts, constraints, completeness, and
+readability. Record row identities, capture hashes, reviewer/time metadata,
+request errors, finish reasons, and the number of material regressions. A
+small canary may advance a candidate but cannot stand in for the declared
+full-corpus promotion gate.
+
 ## Translation and progression gates
 
 Operator or microbenchmark speedup is mechanism evidence, not a service result.
@@ -83,3 +102,4 @@ differs. Re-baseline instead.
 - Cold, steady, boundary, lifecycle, and resources are reported separately or
   explicitly marked out of scope.
 - Raw artifact hashes resolve and no protected data is committed.
+- The reported precision or quality claim does not exceed the dataset oracle.

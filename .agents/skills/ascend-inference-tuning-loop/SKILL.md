@@ -50,6 +50,12 @@ Verify the mechanism against the exact pinned image and live import path before
 editing. A historical checkout, similarly named class, test stub, or old source
 map is not proof of the runtime object used by the service.
 
+Treat a promising ingredient and a promotable final stack as different states.
+An isolated operator speedup, a source-overlay service win, or a near-target
+candidate may select the next hypothesis, but only the exact delivery bytes
+under the final container, topology, workload, and quality contract can pass.
+Do not silently transfer a historical denominator to a fresh-control run.
+
 ## Stage Checkpoints
 
 Commit and immediately push each coherent stage:
@@ -89,6 +95,11 @@ bounded test that targets the recorded failure phase. Fixing a visible defect
 does not establish root cause until the failure phase or measured outcome
 changes. Keep the old route closed when a fix leaves the original stall,
 timeout, correctness failure, or performance result unchanged.
+
+For a repeated low-level failure, maintain a phase table across versions:
+candidate hash, first/last completed phase per rank, device utilization,
+timeout/error state, and cleanup result. A later version is new evidence only
+when it changes a material mechanism or moves the observed failure boundary.
 
 ## Git and Artifact Rules
 

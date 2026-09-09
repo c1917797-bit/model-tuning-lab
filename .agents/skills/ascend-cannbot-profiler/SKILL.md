@@ -90,9 +90,15 @@ Re-prove this in the actual container/session before a new claim.
 - Treat summed operator or kernel durations across overlapping streams as
   hotspot-ranking evidence, not removable wall time. Use timeline union,
   serialization gaps, or critical-path evidence for an opportunity bound.
+- Build interval unions by phase, rank, stream, shape, and dependency scope.
+  When an AICPU envelope contains an AI Core interval, report the envelope and
+  contained work separately and never add their percentages.
 - An AICPU or communication duration can include waiting. Correlate its start,
   end, dependent kernels, and cross-rank spread before labeling it compute or
   launch overhead.
+- Compare isolated operator latency with the same operator's full-model
+  envelope. A large gap is lifecycle/queue/context evidence, not proof that the
+  isolated kernel bytes are slow.
 - Do not claim a kernel/operator root cause from host telemetry alone.
 - Do not compare profiler captures across drifted model, workload, container,
   CANN, driver, firmware, power mode, or device topology.
@@ -118,11 +124,20 @@ Re-prove this in the actual container/session before a new claim.
 Before service E2E, a custom multi-rank collective must pass a bounded
 fresh-process canary that records per-rank phase markers and proves:
 
-1. communicator initialization and finalization are balanced;
-2. all ranks make progress or produce one globally visible error;
-3. every wait has a timeout and a diagnosable failure phase;
-4. fresh logical epochs prevent stale-state, restart, and ABA reuse;
-5. repeated start/stop and crash-recovery trials do not inherit prior state.
+1. every communication and control buffer has explicit allocation,
+   registration, ownership, size, lifetime, and exclusivity proof;
+2. communicator initialization and finalization are balanced;
+3. all ranks make progress or produce one globally visible error decision;
+4. every wait has a timeout and a diagnosable per-rank phase marker;
+5. fresh communicator/session/launch epochs prevent stale-state, restart, and
+   ABA reuse;
+6. repeated start/stop, eligible-to-stock alternation, multi-stream use, and
+   crash-recovery trials do not inherit or corrupt prior state.
+
+Do not treat an unused-looking tail of an HCCL window as candidate-owned
+workspace. Bounds safety is not ownership. Do not use scalar debug-style
+global-memory polling in a production hot path without a measured and
+supported synchronization contract.
 
 If the canary stalls, record exact candidate bytes and the last completed phase,
 clean up only owned resources, and close unchanged retries. A source fix is not

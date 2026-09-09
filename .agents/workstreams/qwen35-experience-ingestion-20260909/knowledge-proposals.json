@@ -1,5 +1,36 @@
 {
   "schema": "mst-knowledge-proposals/v1",
   "taskId": "qwen35-experience-ingestion-20260909",
-  "proposals": []
+  "proposals": [
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.5 runtime monkeypatch activation failures",
+      "target": ".agents/skills/ascend-canary-implementation/SKILL.md",
+      "summary": "Require pinned-image live-symbol resolution plus parent/worker/rank execution proof and a disabled control."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.5 MMAR round0 and IPC fullmesh failures",
+      "target": ".agents/skills/ascend-cannbot-profiler/SKILL.md",
+      "summary": "Require overlap-safe interval unions, isolated-versus-service envelope comparison, explicit buffer ownership, epochs, global rank decisions, and lifecycle stress."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.5 paired query-rewrite quality gates",
+      "target": ".agents/skills/ascend-benchmark-evidence/SKILL.md",
+      "summary": "Limit quality claims to the strongest available oracle and require complete paired review when reference answers are absent."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.5 repeated candidate and denominator history",
+      "target": ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+      "summary": "Separate promising ingredients from promotable final bytes and record phase-boundary movement across successor failures."
+    },
+    {
+      "kind": "example-repository-pattern",
+      "source": "Qwen3.5 optimization practice",
+      "target": "docs/LESSONS_LEARNED.md",
+      "summary": "Record runtime-path, profiler-overlap, collective-ownership, quality-oracle, and evidence-scope lessons without claiming the final target."
+    }
+  ]
 }

@@ -35,6 +35,25 @@ Ascend path.
    benchmark rather than expanding the change blindly.
 10. Record the canary result, limitations, artifact paths/hashes, and next step.
 
+## Runtime monkeypatch proof
+
+A runtime monkeypatch has two independent gates:
+
+1. installation proof: the intended package bytes and import hook are present;
+2. execution proof: the exact live class or function is patched in every
+   relevant engine, worker, and tensor-parallel rank, and the hot path executes
+   it during a real request.
+
+Parent-process import messages do not prove child-worker activation. Resolve
+the real object from the pinned image and live process before choosing a patch
+target. If historical and live scheduler or operator classes differ, patching
+the historical class is a diagnostic failure, not a runtime optimization.
+
+Activation evidence should include process/rank identity, target symbol,
+candidate hash, bounded call or shape counters, and an off-control where the
+same request succeeds without the marker. Keep prompt contents and generated
+text out of diagnostic logs.
+
 ## Acceptance to scale
 
 Only scale to repeated benchmark when:
@@ -45,6 +64,8 @@ Only scale to repeated benchmark when:
   does not;
 - correctness guardrails pass;
 - target NPU execution is proven in the same session;
+- the activation report distinguishes launcher/parent evidence from
+  engine/worker/rank evidence;
 - rollback is known;
 - the next benchmark protocol is frozen.
 

@@ -378,11 +378,59 @@ Shared model and hardware do not make two experiments comparable.
 The historical Qwen3.5 GDN projection-fusion plus gate/up-prefetch stack
 reached median-of-three P95 speedups of
 2.206x/1.938x/1.930x/1.910x for TTFT and
-1.381x/1.651x/1.753x/1.980x for TPOT at c1/c5/c8/c16. This passes seven of
-the eight current 1.5x latency cells, but c1 TPOT misses and the implementation
-used source overlays. It therefore selects the next hypothesis but is not a
-compliant production result.
+1.381x/1.651x/1.753x/1.980x for TPOT at c1/c5/c8/c16. The current acceptance
+contract instead requires at least 40% lower TTFT and 20% lower TPOT at every
+cell. The historical implementation also used source overlays, so it selects
+ingredients and hypotheses but is not a compliant production result.
 
 **Reusable rule:** retain successful ingredients and failed treatments, but
 never widen a microbenchmark, sampled-quality, source-overlay, or paper-level
 result into a final serving claim.
+
+### 8.3 A live runtime path must be proven in the worker
+
+One diagnostic monkeypatch targeted a historically plausible scheduler class,
+but the pinned service executed a different vLLM scheduler. Parent-process
+import messages were visible while tensor-parallel workers had no activation
+evidence. Correcting the target produced per-rank evidence and showed scheduler
+time was only hundreds of microseconds, ruling it out as the missing
+multi-millisecond opportunity.
+
+**Reusable rule:** inspect the pinned image and live process, then require
+activation and bounded hot-path counters from every engine, worker, and rank.
+Launcher or parent import success is not execution proof.
+
+### 8.4 Overlapping profiler rows are not additive savings
+
+The round0 profile showed a long MMAR AICPU envelope that contained the MMAR
+AI Core interval. Summing both made the apparent opportunity larger than the
+decode wall time. Unioning intervals by rank, stream, phase, and shape exposed
+the real envelope and a large gap between isolated MMAR and full-model MMAR.
+
+**Reusable rule:** use critical-path or interval-union accounting. Treat
+AICPU, AI Core, and communication durations as overlapping views until their
+dependency and containment relationships are proven.
+
+### 8.5 Collective safety begins with ownership, not bounds
+
+The experimental IPC fullmesh line passed some host checks but repeatedly
+stalled at different phases. Its design used an unused-looking tail of an HCCL
+window without an explicit ownership contract, fixed control magic, local-only
+error status, unbalanced lifecycle variants, and scalar memory polling.
+
+**Reusable rule:** a custom collective needs explicit buffer allocation and
+registration, fresh session and launch epochs, balanced communicator lifecycle,
+one globally visible rank decision, bounded waits, phase markers, restart and
+fault-injection tests. Being inside an address range does not prove ownership.
+
+### 8.6 Empty reference answers bound the precision claim
+
+The frozen query-rewrite dataset has no populated reference answers. A paired
+32-row canary can prove zero material regression for those reviewed rows, but
+it cannot prove general model accuracy or replace the full 357-row promotion
+gate.
+
+**Reusable rule:** byte-identical pairs pass automatically; review every
+different pair against intent, facts, constraints, completeness, and
+readability. Call the result task-specific paired semantic no-regression, not
+external-reference accuracy.
