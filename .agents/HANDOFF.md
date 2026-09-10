@@ -149,6 +149,19 @@
   Do not retry nearby dense-prefill transition variants or optimize a state
   proxy alone. The next bounded algorithmic direction is an explicit low-cost
   decode-tail/output correction with static foldability and Ascend cost gates.
+- The drrqr-tail-dot-recurrent-compensation-v1 iteration is complete and
+  rejected. Its fixed, data-independent 64-to-16 signed Walsh-Hadamard tail
+  sketch preserved the Dk64 recurrent state bitwise and kept a five-eighths
+  dense Q/K projection-width cost model, but decode post-RMS worsened 5.583663
+  percent, prefill post-RMS worsened 5.857686 percent, only 51/96 heads were
+  non-worse, and the worst head ratio was 3.672526. The full project suite
+  passed 505 tests. No NPU replay, integration, endpoint benchmark or task
+  accuracy followed. Report SHA256:
+  ecca3e9d2b16eaad16108f672879bec66eefede46f8216340da65b5f6a18f9ab.
+  Do not tune the sketch seed or width. The evidence points away from the
+  instantaneous tail dot and toward historical reads from discarded state
+  columns; any next candidate must represent that term under a bounded aligned
+  state/projection budget.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

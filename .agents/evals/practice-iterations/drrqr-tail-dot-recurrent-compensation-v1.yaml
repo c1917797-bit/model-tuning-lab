@@ -1,0 +1,95 @@
+schema: mst-practice-iteration/v1
+id: drrqr-tail-dot-recurrent-compensation-v1
+repository: model-tuning-lab
+status: rejected
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Determine whether a fixed 16-dimensional sketch of discarded Q/K coordinates can restore the instantaneous recurrent update direction enough to improve energy-Dk64 decode fidelity while preserving a credible Ascend speed path.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 provides 4.752041 percent endpoint gain but has unresolved accuracy loss. DPDT improved state fidelity by 59.985923 percent while worsening decode post-RMS fidelity by 2.183104 percent, proving that state-only correction is insufficient.
+  medium_term_milestone: Produce a numerically admitted Dk64 recurrent candidate whose correction can be statically folded into projections and fused without restoring dense recurrent state.
+  short_term_decision: Compare frozen energy-Dk64 against one analytic, non-fitted tail-dot correction over development captures 0-11.
+  deciding_evidence: Require at least 15 percent lower aggregate decode post-RMS relative-L2, non-worse aggregate prefill post-RMS, bitwise-identical recurrent state to energy-Dk64, at least 72 of 96 layer/rank/head groups non-worse, no group worse by more than 5 percent, finite outputs, exact baseline-plan identity and static cost gates.
+  budget_or_stop_rule: One implementation and one frozen CPU replay. No parameter sweep, fitting, captures 12-15, NPU use, integration, endpoint benchmark or task accuracy.
+  on_pass: Freeze the transform and correction contract, collect a new untouched admission capture, then validate an opt-in plugin implementation on native Ascend before a fixed-1024-token endpoint screen.
+  on_failure: Preserve and reject the analytic tail-dot correction without weakening gates; use the headwise failures to decide whether a bounded historical-state sketch is justified.
+  on_inconclusive: Fix only a demonstrated implementation, metric-window, identity or arithmetic defect and rerun once with unchanged gates.
+
+algorithm_contract:
+  name: Tail-Dot Recurrent Compensation
+  abbreviation: TDRC
+  recurrent_coordinates: Frozen energy-Dk64 coordinates.
+  tail_coordinates: All 64 discarded local coordinates.
+  tail_transform: Fixed 64-by-16 signed Walsh-Hadamard orthoprojector scaled by sqrt(64/16), deterministically keyed by layer, rank and key head; no data fitting.
+  recurrence:
+    persistent_state_width: 64
+    state_update: Exactly the existing energy-Dk64 update.
+    correction: Add beta times the Dk64 residual times the difference between sketched 128-width and Dk64 normalized q-dot-k coefficients.
+    correction_scope: Operator output only; never feed the correction into recurrent state.
+  arithmetic_reference: FP32 recurrence and correction with the same BF16 output boundary as the existing replay.
+  portability: The transform is mathematical and statically foldable into Q/K projection weights; it contains no chip addresses, timing constants or private runtime replacement.
+
+ascend_cost_contract:
+  persistent_state_ratio_vs_dense: 0.5
+  qk_projection_width_ratio_vs_dense: 0.625
+  recurrent_width: 64
+  tail_sketch_width: 16
+  alignment: Both recurrent and tail widths are multiples of 16.
+  extra_decode_work: One 16-element dot/norm estimate plus one value-width residual axpy per token; target implementation must fuse this with the DRRQR decode path.
+  generic_dense_optimization: Any non-candidate-specific optimization must also be applied to dense.
+  claim_boundary: Passing CPU replay is numerical admission only and cannot establish NPU throughput, task accuracy or cross-environment speedup.
+
+inputs:
+  capture_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/rich-state-calibration-capture-v1
+  capture_audit_sha256: edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5
+  archive_set_sha256: d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20
+  baseline_plan_sha256: b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c
+  development_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  prohibited_indices: [12, 13, 14, 15]
+
+changes:
+  - Added a deterministic signed Walsh-Hadamard tail sketch and analytic instantaneous recurrent-output correction without fitting.
+  - Added focused transform, partition, coefficient and state-identity tests; the full project suite passed 505 tests.
+  - Preserved the immutable rejected result at /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/tdrc-development-v1.
+
+result:
+  operation_id: exec-0000000000000237
+  report_sha256: ecca3e9d2b16eaad16108f672879bec66eefede46f8216340da65b5f6a18f9ab
+  started_sha256: e568af7a298d966c7f94ac4cb6229cd76d33f32081a03f5b6e8d2885e52234f4
+  status: rejected
+  decode_post_rms_improvement: -0.05583663102446623
+  prefill_post_rms_ratio: 1.0585768568815546
+  nonworse_heads: 51
+  total_heads: 96
+  worst_head_ratio: 3.67252629292818
+  passed_gates:
+    - exact frozen energy plan
+    - aligned Dk64 and tail16
+    - half-dense persistent state
+    - five-eighths dense Q/K projection width
+    - recurrent state bitwise identical to energy-Dk64
+    - finite outputs and state
+  failed_gates:
+    - decode post-RMS worsened 5.583663 percent instead of improving at least 15 percent
+    - prefill post-RMS worsened 5.857686 percent
+    - only 51 of 96 heads were non-worse
+    - worst head was 267.252629 percent worse
+  decision: Reject TDRC v1. Do not tune the sketch seed or width and do not admit it to NPU replay, integration, endpoint benchmarking or task accuracy.
+validation_commands:
+  - focused tests for transform geometry, determinism, state identity, correction formula and fail-closed plan geometry
+  - full project software test suite
+  - one CPU replay over development indices 0-11
+  - independent report audit
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - The output metric, not a state proxy, is the deciding numerical target.
+  - A correction must retain the Dk64 persistent-state saving and expose a static projection/fusion path.
+  - No teacher fitting, LoRA, distillation or prompt-specific parameter search is allowed in this iteration.
+  - Restoring only an estimate of the current-token tail q-dot-k coefficient does not repair energy-Dk64 output fidelity even when recurrent state is bitwise unchanged.
+  - The dominant missing term is more consistent with historical reads from discarded state columns than with the instantaneous self-update coefficient.
+  - Any next correction must represent historical tail state explicitly under a bounded aligned state and projection budget; do not retry tail-dot seed or width variants.
