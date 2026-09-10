@@ -79,10 +79,11 @@ def install_prefill_patch(gdn_module, config: DrrqrConfig) -> None:
                 note="Kernel return observed; asynchronous device completion requires request success",
             )
             reported = True
-            # Evidence is fail-closed only for the first successful call.
-            # Restore the exact audited binding so subsequent prefill work has
-            # no Python dispatch-wrapper overhead.
-            gdn_module.chunk_gated_delta_rule = original
+            # A production-length diagnostic must retain the binding for every
+            # GDN layer in its one explicitly armed request. Normal treatment
+            # restores the audited binding after the first successful call.
+            if not config.prefill_diagnostic:
+                gdn_module.chunk_gated_delta_rule = original
         return result
 
     dispatch._drror_prefill_config = identity

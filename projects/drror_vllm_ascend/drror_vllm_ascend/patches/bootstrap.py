@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import importlib.metadata
 import inspect
 import logging
@@ -176,6 +177,18 @@ def apply_patches(config: DrrqrConfig) -> None:
         verify_worker()
         from .layerwise import install_layerwise_cache_guard
         install_layerwise_cache_guard(NPUModelRunner, config, plan)
+        if config.prefill_diagnostic:
+            from .prefill_diagnostic import install_prefill_diagnostic
+
+            chunk_module = importlib.import_module(
+                "vllm_ascend.ops.triton.fla.chunk"
+            )
+            install_prefill_diagnostic(
+                QwenGatedDeltaNetAttention,
+                gdn,
+                chunk_module,
+                config,
+            )
         install_decode_observer(QwenGatedDeltaNetAttention, gdn, config)
 
     # Patch the top-level loader, which receives one complete checkpoint

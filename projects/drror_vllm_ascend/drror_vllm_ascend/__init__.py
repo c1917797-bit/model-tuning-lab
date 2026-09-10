@@ -7,7 +7,7 @@ import logging
 from .diagnostics import configure_package_logging, emit_evidence
 from .envs import DrrqrConfig, get_config
 
-__version__ = "0.1.11"
+__version__ = "0.1.12"
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +36,8 @@ def register() -> None:
         conv_layout=config.conv_layout,
         prefill_mc2=config.prefill_mc2,
         prefill_mc2_mixed=config.prefill_mc2_mixed,
+        prefill_diagnostic=config.prefill_diagnostic,
+        prefill_diagnostic_tokens=config.prefill_diagnostic_tokens,
     )
     logger.info(
         "DRRQR plugin build active: version=%s module=%s plan=%s",

@@ -55,6 +55,8 @@ class DrrqrConfig:
     conv_layout: bool = False
     prefill_mc2: bool = False
     prefill_mc2_mixed: bool = False
+    prefill_diagnostic: bool = False
+    prefill_diagnostic_tokens: int = 32768
 
 
 def get_config() -> DrrqrConfig:
@@ -64,6 +66,10 @@ def get_config() -> DrrqrConfig:
         conv_layout=_bool_env("VLLM_ASCEND_DRRQR_CONV_LAYOUT", False),
         prefill_mc2=_bool_env("VLLM_ASCEND_DRRQR_PREFILL_MC2", False),
         prefill_mc2_mixed=_bool_env("VLLM_ASCEND_DRRQR_PREFILL_MC2_MIXED", False),
+        prefill_diagnostic=_bool_env("VLLM_ASCEND_DRRQR_PREFILL_DIAGNOSTIC", False),
+        prefill_diagnostic_tokens=_positive_int_env(
+            "VLLM_ASCEND_DRRQR_PREFILL_DIAGNOSTIC_TOKENS", 32768
+        ),
         strict=_bool_env("VLLM_ASCEND_DRRQR_STRICT", True),
         require_runtime_hooks=_bool_env(
             "VLLM_ASCEND_DRRQR_REQUIRE_RUNTIME_HOOKS",
@@ -81,6 +87,10 @@ def get_config() -> DrrqrConfig:
     )
     if config.prefill_mc2_mixed and not config.prefill_mc2:
         raise ValueError("mixed-batch MC2 requires VLLM_ASCEND_DRRQR_PREFILL_MC2")
+    if config.prefill_diagnostic and not config.enable:
+        raise ValueError("prefill diagnostics require VLLM_ASCEND_DRRQR_ENABLE")
+    if config.prefill_diagnostic and not config.evidence_file:
+        raise ValueError("prefill diagnostics require VLLM_ASCEND_DRRQR_EVIDENCE_FILE")
     if config.enable and config.capture_enable:
         raise ValueError("DRRQR treatment and capture modes are mutually exclusive")
     if config.conv_layout and config.capture_enable:

@@ -36,7 +36,7 @@ from drror_vllm_ascend.plan import (
 
 class EnvironmentTests(unittest.TestCase):
     def test_runtime_version_matches_release(self):
-        self.assertEqual(plugin.__version__, "0.1.11")
+        self.assertEqual(plugin.__version__, "0.1.12")
 
     def test_disabled_is_inert_and_capture_requires_hashes(self):
         with mock.patch.dict(os.environ, {}, clear=True):
