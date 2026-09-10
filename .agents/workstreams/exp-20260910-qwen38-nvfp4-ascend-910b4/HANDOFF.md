@@ -3,10 +3,13 @@
 ## Status
 
 - Dedicated worktree: `/opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4`.
-- Stock vLLM-Ascend 0.23.0 has a ModelSlim loader, but it cannot directly load
-  this official ModelOpt mixed checkpoint: it expects
-  `quant_model_description.json`, while the checkpoint supplies
-  `hf_quant_config.json`.
+- The fixed image's vLLM core can parse this official checkpoint through
+  `modelopt_mixed` and already handles its Qwen3.5 prefix aliases. Do not
+  translate it into the separate ModelSlim `quant_model_description.json`
+  format.
+- The actual blocker is that the Ascend platform does not list
+  `modelopt_mixed` as supported, and vLLM core's selected per-layer methods are
+  GPU implementations rather than Ascend execution methods.
 - The checkpoint is mixed precision: 193 dense NVFP4 layers at group size 16
   and 208 FP8 layers. The fixed image registers `W4A16_MXFP4` only for MoE and
   defaults that path to group size 32; no dense group-16 registration exists.
@@ -49,9 +52,10 @@
 1. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
    Re-audit before any device action and never stop those workloads.
-2. The fixed image needs an external, fail-closed config adapter plus a dense
-   W4A16 group-16 scheme. The exact AscendC adapter/kernel is not implemented
-   yet. The existing FP8 mapping must also be validated because this checkpoint
+2. The fixed image needs an external, fail-closed ModelOpt method adapter plus
+   dense NVFP4 group-16 and calibrated FP8 Ascend execution methods. The exact
+   AscendC adapter/kernel is not implemented yet. The FP8 path must also be
+   validated because this checkpoint
    has 208 FP8 layers; it is not an all-FP4 model.
 3. Two pushes of the latest local commits failed with a transient GitHub TLS
    receive error. The commits and unpushed operator spec remain safe locally;
@@ -59,10 +63,9 @@
 
 ## Next actions
 
-1. Implement and unit-test the fail-closed in-memory translation from the
-   checkpoint's `hf_quant_config.json`; do not create or edit files in the
-   checkpoint or image. Then register the dense group-16 scheme in an external
-   plugin.
+1. Reuse and unit-test vLLM core's `ModelOptMixedPrecisionConfig` layer
+   resolution, then implement a guarded external plugin which enables the
+   method only for this contract and returns Ascend-specific per-layer methods.
 2. Inspect the existing ops-transformer A16F4 implementation against the
    validated group-16 contract, then implement the smallest viable group-16
    stream-dequant + BF16 Cube path. Build only inside the fixed image with
@@ -96,8 +99,8 @@
   `31c1dd3c007d2daca930d927d6217ade2a96ba42826bfd3ae8073c22d7f0c4d7`.
 - Fixed-image ModelSlim/registry/API audit:
   `exec-000000000000003a` through `exec-0000000000000045`; recorded in
-  `runtime-compatibility-evidence.json`. It proves that an external config
-  adapter and dense group-16 scheme are required. It is device-free evidence,
+  `runtime-compatibility-evidence.json`. It proves that an external execution
+  method adapter and dense group-16 scheme are required. It is device-free evidence,
   not an NPU support or speed claim.
 - Mixed NVFP4/FP8 checkpoint inspector: host `exec-000000000000004b` and
   fixed-image read-only mount `exec-000000000000004d`; 193/193 NVFP4 and

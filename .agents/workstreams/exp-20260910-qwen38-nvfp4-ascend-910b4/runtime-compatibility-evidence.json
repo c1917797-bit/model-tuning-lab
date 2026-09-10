@@ -32,11 +32,20 @@
     "present_quantization_files": [
       "hf_quant_config.json"
     ],
-    "missing_runtime_native_file": "quant_model_description.json"
+    "modelopt_config_file": "hf_quant_config.json"
   },
   "fixed_image_findings": {
     "modelslim_config_filename": "quant_model_description.json",
     "modelslim_hf_quant_config_reader": false,
+    "vllm_core_modelopt_mixed_reader": true,
+    "vllm_core_qwen35_prefix_aliases": true,
+    "ascend_platform_supported_quantization": [
+      "ascend",
+      "compressed-tensors",
+      "fp8",
+      "deepseek_v4_fp8"
+    ],
+    "ascend_platform_modelopt_mixed_supported": false,
     "registered_schemes": {
       "W4A16_MXFP4": [
         "moe"
@@ -65,15 +74,16 @@
     "loadable_without_plugin": false,
     "fail_closed": true,
     "reasons": [
-      "The checkpoint supplies ModelOpt hf_quant_config.json, while the fixed image ModelSlim path reads quant_model_description.json.",
+      "vLLM core can parse the checkpoint's hf_quant_config.json as modelopt_mixed, but the Ascend platform does not list modelopt_mixed as supported quantization.",
+      "The vLLM core ModelOpt methods select GPU kernels, so parsing support alone is not an Ascend execution implementation.",
       "The checkpoint's NVFP4 tensors are dense linear weights with group size 16, while the fixed image registers W4A16_MXFP4 only for MoE and defaults to group size 32.",
       "The checkpoint is mixed precision, so an adapter must preserve and validate both the 193 NVFP4 layers and the 208 FP8 layers.",
       "Presence of torch_npu API symbols does not establish that their FP4 execution path is supported or fast on Ascend 910B4."
     ],
     "minimum_plugin_work": [
-      "Translate the ModelOpt mixed-precision layer description without modifying the checkpoint or image.",
-      "Register a dense W4A16_MXFP4 group-16 scheme through a read-only mounted plugin.",
-      "Preserve the existing FP8 layer semantics and reject any unmapped or mixed packed shard.",
+      "Enable modelopt_mixed only inside the read-only mounted plugin and retain vLLM core's existing hf_quant_config parser and Qwen prefix resolution.",
+      "Replace the GPU ModelOpt per-layer methods with Ascend implementations for dense NVFP4 group-16 and calibrated per-tensor FP8.",
+      "Preserve all 401 per-layer assignments and reject any unmapped or mixed packed shard.",
       "Pass an on-device operator correctness gate before model startup and performance testing."
     ]
   },
@@ -89,7 +99,14 @@
     "exec-0000000000000044",
     "exec-0000000000000045",
     "exec-0000000000000049",
-    "exec-000000000000004d"
+    "exec-000000000000004d",
+    "exec-0000000000000053",
+    "exec-0000000000000054",
+    "exec-0000000000000055",
+    "exec-0000000000000056",
+    "exec-0000000000000057",
+    "exec-0000000000000058",
+    "exec-0000000000000059"
   ],
   "scope_limit": "This is a device-free source/runtime compatibility audit. It is not an NPU correctness, accuracy, or performance result."
 }

@@ -8,26 +8,30 @@ Qwen3.8-27B-NVFP4 checkpoint and the immutable vLLM-Ascend 0.23.0 image.
 The checkpoint is not a single-format FP4 model. Its ModelOpt description
 contains 193 dense NVFP4 layers and 208 FP8 layers. NVFP4 uses group size 16.
 
-The fixed image has a ModelSlim configuration loader, but it reads
-`quant_model_description.json`. The official checkpoint instead contains
-`hf_quant_config.json`. The fixed image also registers `W4A16_MXFP4` only for
-MoE layers, with group size 32 as its default. Qwen3.8 needs dense linear,
-group-16 loading. Therefore, changing a serve flag cannot make the checkpoint
-load correctly.
+The fixed image's vLLM core already parses `hf_quant_config.json` through its
+`modelopt_mixed` config, including Qwen3.5 prefix aliases and per-layer
+FP8/NVFP4 selection. That parser should be reused, not translated into the
+separate Ascend ModelSlim `quant_model_description.json` format.
+
+The Ascend platform does not list `modelopt_mixed` as supported, and vLLM
+core's selected ModelOpt methods target GPU kernels. The fixed image also
+registers its Ascend `W4A16_MXFP4` method only for MoE layers, with group size
+32 as its default. Qwen3.8 needs dense linear, group-16 execution. Therefore,
+changing a serve flag cannot make the checkpoint run correctly.
 
 ## Plugin boundary
 
 The deliverable must be an external, read-only mounted plugin. It may:
 
-1. parse `hf_quant_config.json` in memory;
-2. translate every checkpoint layer to an explicit runtime scheme;
-3. register a dense `W4A16_MXFP4` group-16 implementation;
-4. reuse a fixed-image FP8 path only after tensor and numerical validation;
+1. retain vLLM core's `ModelOptMixedPrecisionConfig` parsing and layer lookup;
+2. enable `modelopt_mixed` only within the plugin's guarded activation path;
+3. replace the GPU per-layer methods with Ascend dense NVFP4 group-16 and
+   calibrated per-tensor FP8 implementations;
+4. reuse fixed-image building blocks only after tensor and numerical validation;
 5. reject startup before allocating model weights when any layer is unmapped.
 
-It must not create or overwrite `quant_model_description.json`, edit the
-checkpoint, modify site-packages, overlay framework sources, or commit a
-container.
+It must not create or overwrite a quantization description, edit the checkpoint,
+modify site-packages, overlay framework sources, or commit a container.
 
 ## Fail-closed gates
 
