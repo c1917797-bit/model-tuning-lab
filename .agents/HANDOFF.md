@@ -41,13 +41,16 @@
   de807118e7146c1a1d8dcce6111c3229a6e0d8916a163b3644d0496fd9d0057f.
   Allocation report SHA256:
   20739274c3b18408231b93d89c3ca9f7133ec945176dc9a0898e4bdfdd5dae50.
-- Active next iteration: drrqr-cosine-selector-screen-v1. It first compares
-  the supported kernel-normalized StrongRRQR Dk64 selector with energy-Dk64 on
-  the frozen normalized-QK proxy. Only a proxy improvement of at least ten
-  percent admits one full-layer native-NPU teacher replay; only an NPU
-  post-RMS improvement of at least ten percent with no local window worsening
-  above five percent admits a later aligned-Dk48 experiment. This is an
-  algorithm-selector branch, not endpoint, profiling, cache, or accuracy work.
+- The drrqr-cosine-selector-screen-v1 iteration is complete and rejected at
+  its CPU pre-screen. Kernel-normalized StrongRRQR Dk64 produced normalized-QK
+  RMSE 0.034322883 versus 0.023197267 for energy-Dk64, a 47.960894 percent
+  worsening across 768 frozen capture files and all 48 linear-attention
+  layers. No NPU replay was admitted or started. Report SHA256:
+  71d2a657f6fd8c9fb5b1392f0ea13eef086aba1434b9f297011d4f23e4453305.
+  Resume by designing one recurrence-aware coordinate objective against the
+  preserved teacher trajectories, not by retrying cosine StrongRRQR,
+  implementing heterogeneous cache, or starting generic operator/profiling
+  work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

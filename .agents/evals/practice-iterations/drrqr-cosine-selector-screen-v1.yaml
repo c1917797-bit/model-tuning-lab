@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-cosine-selector-screen-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-10
 validated_commit: pending
 
@@ -20,10 +20,9 @@ goal_chain:
 
 changes:
   - type: validation
-    description: Add a hash-bound selector comparison that reuses the complete energy64 token-fidelity evidence and the existing native replay path.
+    description: Reuse the frozen normalized-QK proxy to enforce the predeclared NPU admission gate; no new replay code was created after the selector failed that gate.
     files:
-      - projects/drror_vllm_ascend/tools/replay_gdn_teacher_selector.py
-      - projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_selector.py
+      - projects/drror_vllm_ascend/tools/qk_kernel_fidelity.py
 
 validation_commands:
   - python3 -m pytest projects/drror_vllm_ascend/tests
@@ -32,4 +31,21 @@ validation_commands:
   - deterministic normalized-QK proxy over capture indexes 0,4,8,12
   - at most one candidate-only native-NPU replay on physical NPU4 after proxy admission
 
-lessons_ingested: []
+result:
+  outcome: rejected_at_proxy
+  evidence_level: deterministic all-layer frozen post-convolution Q/K geometry proxy
+  claim_ceiling: Kernel-normalized StrongRRQR Dk64 is rejected as the next native-NPU teacher-replay candidate because it worsens the predeclared normalized-QK proxy. This does not reject DRRQR, energy-Dk64, a recurrence-aware coordinate objective, endpoint performance, task accuracy, or portability.
+  report_sha256: 71d2a657f6fd8c9fb5b1392f0ea13eef086aba1434b9f297011d4f23e4453305
+  capture_file_count: 768
+  layer_count: 48
+  capture_indices: [0, 4, 8, 12]
+  energy_dk64_qk_score_rmse: 0.023197266681469923
+  cosine_dk64_qk_score_rmse: 0.034322883279864894
+  cosine_relative_rmse_change: 0.4796089449315233
+  npu_replay_admitted: false
+  next_decision: Design a recurrence-aware coordinate objective that can be evaluated against the preserved native teacher trajectories before any model integration, profiling, cache, endpoint, or accuracy work.
+
+lessons_ingested:
+  - lesson: A paper-derived or kernel-normalized selector is not privileged over a simpler selector; enforce a frozen executed-geometry proxy before consuming NPU time, while preserving the proxy claim ceiling.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/ALGORITHM_AUDIT_BOUND.md
+    severity: high

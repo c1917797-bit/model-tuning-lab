@@ -65,6 +65,14 @@ official-raw (QK score RMSE 0.0231973 versus 0.0359613) but that proxy is not a
 downstream accuracy result. Its available LongBench-v2 preflight remains below
 the unpruned baseline.
 
+A later all-48-layer frozen proxy also compared energy-Dk64 with the supported
+kernel-normalized StrongRRQR Dk64 selector. Energy remained at RMSE
+0.0231972667 while kernel-normalized StrongRRQR reached 0.0343228833, a
+47.960894% worsening. It therefore failed its predeclared NPU-admission gate
+and no native teacher replay was run. This rejects that selector candidate,
+not DRRQR or a recurrence-aware coordinate objective. Report SHA256:
+71d2a657f6fd8c9fb5b1392f0ea13eef086aba1434b9f297011d4f23e4453305.
+
 Changing the coordinate selector while keeping Dk64 leaves all runtime tensor
 shapes unchanged. Therefore it may recover accuracy but cannot close the
 measured performance gap from +4.752041% to the required >=10% throughput.
