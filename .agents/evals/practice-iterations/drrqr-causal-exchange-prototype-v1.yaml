@@ -1,0 +1,35 @@
+schema: mst-practice-iteration/v1
+id: drrqr-causal-exchange-prototype-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Decide whether bounded train-only coordinate exchanges can improve causal normalized-kernel fidelity while preserving the Q/K marginal energy of energy-Dk64.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 reaches only 4.752041 percent endpoint throughput gain and remains below historical dense quality; StrongRRQR and diagonal causal-energy selectors both failed frozen proxy gates, with the latter losing Q marginal energy and worsening held-out RMSE by 251.754350 percent.
+  medium_term_milestone: A backend-independent Dk64 coordinate map with materially better recurrence-facing fidelity that can justify native teacher replay and later Dk48 testing.
+  short_term_decision: On six frozen representative linear-attention layers and all TP ranks/heads, apply at most four deterministic train-only swaps per head from the energy-Dk64 map, minimizing exact causal normalized-QK error under explicit Q and K retained-energy floors, then evaluate untouched captures 12 through 15.
+  deciding_evidence: Held-out causal normalized-QK RMSE must improve by at least 10 percent versus the unchanged energy-Dk64 map, while aggregate and every head retain at least 98 percent of the baseline Q and K marginal energy on the training captures.
+  budget_or_stop_rule: One standalone prototype tool, focused tests, captures 0-11 for search and 12-15 for the decision, six layers 0,12,25,38,50,62, 16 deterministic training tokens and 64 held-out tokens per capture, candidate pools of at most 12 removals by low joint energy and 12 additions by high full-kernel alignment, and at most four accepted swaps per head. No NPU, model service, profiling, cache change, or task accuracy.
+  on_pass: Implement the selector in immutable plan preparation for all 48 layers and predeclare a full held-out proxy before any NPU replay.
+  on_failure: Reject bounded marginal-preserving exchange and move to direct dense-state/output sensitivity using calibration capture rather than teacher-prompt fitting.
+  on_inconclusive: Preserve the evidence and repair only a demonstrated capture, identity, implementation, or evaluation defect without changing thresholds.
+
+changes:
+  - type: algorithm
+    description: Add a bounded representative-layer prototype for marginal-preserving causal normalized-kernel coordinate exchange.
+    files:
+      - projects/drror_vllm_ascend/tools/prototype_causal_exchange_selector.py
+      - projects/drror_vllm_ascend/tests/test_prototype_causal_exchange_selector.py
+
+validation_commands:
+  - python3 -m pytest projects/drror_vllm_ascend/tests/test_prototype_causal_exchange_selector.py
+  - python3 -m pytest projects/drror_vllm_ascend/tests
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - one deterministic CPU prototype run against frozen captures and the energy-Dk64 plan
+
+lessons_ingested: []

@@ -58,8 +58,10 @@
   retained only 0.535215 mean Q energy despite 0.777442 mean K energy. No NPU
   replay was admitted or started. Report SHA256:
   77e08035e819c6d680da929687cb8b65d5ce5a45df3784b4914c90c34df5bad9.
-  Resume with a bounded covariance-aware or direct state-sensitivity objective
-  that explicitly preserves both Q and K marginals; do not promote this
+  The active next iteration is drrqr-causal-exchange-prototype-v1: on six
+  representative layers, try at most four train-only coordinate exchanges per
+  head that directly reduce causal normalized-QK error while retaining at least
+  98 percent of each baseline Q and K marginal. Do not promote the rejected
   diagonal surrogate, mixed cache, or generic operator work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
