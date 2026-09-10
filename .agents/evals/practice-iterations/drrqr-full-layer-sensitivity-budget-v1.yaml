@@ -3,7 +3,7 @@ id: drrqr-full-layer-sensitivity-budget-v1
 repository: model-tuning-lab
 status: done
 date: 2026-09-10
-validated_commit: pending
+validated_commit: 947de134f11d473e2cf44d5e3eb7b5c32fdfcf08
 
 stage_goal: Use a frozen all-48-layer dense teacher to decide whether an aligned Dk48/Dk64/Dk80 layerwise allocation can improve DRRQR fidelity at no more state cost than uniform Dk64.
 
