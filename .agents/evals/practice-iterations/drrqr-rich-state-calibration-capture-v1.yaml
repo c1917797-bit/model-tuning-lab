@@ -1,0 +1,38 @@
+schema: mst-practice-iteration/v1
+id: drrqr-rich-state-calibration-capture-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Produce a bounded, hash-bound dense GDN state and post-RMS calibration corpus that can train and independently gate a direct recurrence-sensitivity DRRQR selector.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 reaches only 4.752041 percent endpoint gain and remains below historical dense quality, while paper StrongRRQR, diagonal causal energy, and two bounded Q/K-only exchange objectives all failed frozen gates; the latest safe exchange improved held-out QK proxy only 2.268935 percent.
+  medium_term_milestone: A direct dense-state and post-RMS sensitivity objective trained on non-evaluation calibration data, with untouched held-out calibration trajectories, that can select a numerically defensible Dk64 map before Dk48 and endpoint screening.
+  short_term_decision: Generalize the pass-through dense GDN observer to capture 16 existing non-evaluation calibration sequences as exact 128-token raw-ID prompts with one prefill and eight decode steps on six representative layers, preserving indices 0-11 for later selector fitting and 12-15 for later admission only.
+  deciding_evidence: All four ranks must produce exactly 16 sequences times 9 steps times 6 layers, or 3456 hash-bound tensor archives, with exact request-token binding, zero prefill state, byte-identical state continuity and cache propagation, operator-to-norm binding, finite tensors, dense source/library identity and postflight cleanup; any missing or mismatched item rejects the capture.
+  budget_or_stop_rule: Implement only the manifest/collector, worker adapter and minimally parameterized audited launcher with focused and full software tests. After a fresh live orientation, allow one dense eager TP4 service on physical NPU4-7 for at most 1800 seconds and one sequential collector with no request retry. No DRRQR candidate, profiling, endpoint benchmark or task accuracy runs in this iteration.
+  on_pass: Freeze the capture hashes and create a separate CPU selector-analysis iteration that fits only indices 0-11 and makes its decision only on indices 12-15.
+  on_failure: Preserve partial evidence, classify launcher, runtime, identity, storage or numerical failure precisely, clean only the owned process group and repair only the demonstrated defect before any rerun.
+  on_inconclusive: Preserve partial evidence and do not infer algorithm quality; re-prove the live handle/process state before deciding whether any retry is authorized.
+
+changes:
+  - type: algorithm_evidence
+    description: Add a non-evaluation raw-token sensitivity manifest/collector and a separately identified observer adapter without altering the historic teacher-capture contract.
+    files:
+      - projects/drror_vllm_ascend/tools/collect_gdn_sensitivity_calibration.py
+      - projects/drror_vllm_ascend/tools/gdn_sensitivity_capture_worker.py
+      - projects/drror_vllm_ascend/tools/run_gdn_teacher_capture.py
+      - projects/drror_vllm_ascend/tests/test_gdn_sensitivity_capture.py
+
+validation_commands:
+  - python3 -m pytest projects/drror_vllm_ascend/tests/test_gdn_sensitivity_capture.py
+  - python3 -m pytest projects/drror_vllm_ascend/tests
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - live host, container, port, memory and physical NPU4-7 ownership preflight
+  - one bounded dense capture and independent archive audit
+
+lessons_ingested: []

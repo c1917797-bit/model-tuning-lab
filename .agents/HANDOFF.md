@@ -70,9 +70,14 @@
   aggregate held-out RMSE improved only 2.268935 percent, far below the 10
   percent gate. No NPU replay was admitted. Report SHA256:
   c110a0dc37b7b0eed976dc81c5f0bfc2ab873f738f9fb4f3cac1f239b2fb6300.
-  Stop Q/K-only selector tuning. The next bounded iteration must design a rich
-  non-evaluation calibration capture for direct dense state/post-RMS
-  sensitivity without fitting to the two preserved teacher prompts.
+  Stop Q/K-only selector tuning. The active
+  drrqr-rich-state-calibration-capture-v1 iteration will adapt the existing
+  pass-through observer to the 16 frozen non-evaluation calibration rows:
+  exact 128-token raw-ID prompts, indices 0-11 reserved for later fitting and
+  12-15 for later admission, one prefill plus eight decode steps, six layers
+  and all ranks. It must pass software gates and a fresh physical-NPU4-7
+  ownership preflight before one bounded dense capture; it is not a candidate,
+  performance run or accuracy test.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
