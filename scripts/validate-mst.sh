@@ -98,6 +98,15 @@ if [ -d .agents/evals/practice-iterations ]; then
   done
 fi
 
+# Grep-based shape checks do not detect malformed YAML. Parse every repository
+# YAML file when the maintenance runtime provides PyYAML; keep a visible warning
+# on minimal clones instead of pretending syntax was checked.
+if command -v python3 >/dev/null 2>&1 && python3 -c 'import yaml' >/dev/null 2>&1; then
+  python3 -c 'import pathlib, yaml; files = sorted(pathlib.Path(".").glob("**/*.yaml")); [yaml.safe_load(path.read_text(encoding="utf-8")) for path in files]'
+else
+  warn "python3 with PyYAML unavailable; YAML syntax was not parsed"
+fi
+
 if [ -d templates/skills ]; then
   for template_file in $(find templates/skills -name '*.SKILL.md' -type f | sort); do
     head -n 1 "$template_file" | grep -q '^---$' || fail "$template_file missing YAML frontmatter delimiter"

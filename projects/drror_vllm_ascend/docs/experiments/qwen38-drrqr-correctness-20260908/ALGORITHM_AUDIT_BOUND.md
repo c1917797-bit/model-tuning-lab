@@ -88,7 +88,12 @@ arithmetic than uniform Dk64. See `LAYERWISE_ENERGY_BUDGET.md`.
   still below the throughput gate.
 - Do not implement heterogeneous per-layer Dk from the current proxy: its exact
   same-budget gain is only0.097074pp and it cannot supply missing throughput.
-- The present same-stack, no-LoRA branch has not met the joint target. A valid
-  next branch must introduce a Dk64-specific runtime mechanism with at least
-  about five additional percentage points of end-to-end throughput headroom, or
-  the target/allowed training scope must change.
+- The present same-stack, no-LoRA branch has not met the joint target.
+- Historical conclusion, superseded: this audit previously required the next
+  branch to be a Dk64-specific runtime mechanism. That restriction is not
+  current project policy and must not be used to block algorithm-first selector,
+  rank-budget, or recurrence-compensation work.
+- Current boundary: test a named DRRQR algorithm change first. Modify cache or
+  operators only when the change enables that concrete candidate or addresses
+  its measured Ascend bottleneck; then prove the integrated path and paired
+  endpoint headroom before final task-accuracy testing.

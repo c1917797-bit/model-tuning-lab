@@ -27,7 +27,12 @@ Ascend path.
    trajectories before investing in heterogeneous runtime support. Require a
    monotonic aggregate fidelity curve and retain layer/rank/sequence window
    gates; a passing local curve admits broader sensitivity capture only, not
-   endpoint performance or task accuracy.
+   endpoint performance or task accuracy. Before implementing a heterogeneous
+   budget, solve the complete constrained allocation over every admitted layer:
+   the lower-cost width must itself satisfy all local regression gates, and the
+   selected map must meet the aggregate gain at the declared total cost. A
+   monotonic lower/current/higher curve can still yield no feasible mixed plan
+   when every lower-cost layer violates a local gate.
 5. Compare against a tiny baseline under the same environment fingerprint before
    any larger benchmark.
 6. If correctness fails, classify the stage as `failed` and recover active code.

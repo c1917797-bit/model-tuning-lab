@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-full-layer-sensitivity-budget-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-10
 validated_commit: pending
 
@@ -31,6 +31,44 @@ validation_commands:
   - three deterministic all-layer candidate-width shards on physical NPU4
   - independent complete-shard merge under the original fidelity thresholds
 
+result:
+  outcome: rejected
+  evidence_level: all-48-layer captured-teacher native-NPU trajectory and constrained-allocation screen
+  claim_ceiling: The energy selector has a valid monotonic Dk48/Dk64/Dk80 full-layer fidelity curve, but no Dk48 layer satisfies the frozen five-percent local-window regression gate. Therefore no equal-or-lower-cost heterogeneous plan improves on uniform Dk64; this rejects the simple layer-width allocation only, not DRRQR, exact StrongRRQR, endpoint performance, task accuracy, or portability.
+  combined_timeout_report_sha256: 53034d11638e368c632f25cb80b92a93a68072765ba73eea5917363c8dafce15
+  shard_report_sha256:
+    energy48: c854abff7e26d97ccc6b3cd7873dbed2a8aed83f43838d71581b65938bc4577d
+    energy64: 99181117d0813d0551442d40f7f3be9a820231893f861585b997bdec07c8f4ff
+    energy80: ca9e44a5da9e430f9bc440a6d74bd942fdbe960e4077fe06d9526934f1f43a19
+  merged_report_sha256: de807118e7146c1a1d8dcce6111c3229a6e0d8916a163b3644d0496fd9d0057f
+  allocation_report_sha256: 20739274c3b18408231b93d89c3ca9f7133ec945176dc9a0898e4bdfdd5dae50
+  candidate_trajectory_count: 1152
+  candidate_step_count: 10368
+  global_mean_relative_l2:
+    energy48: 0.48571405575316307
+    energy64: 0.3439181998102832
+    energy80: 0.23843076125384707
+  energy80_over_energy64: 0.6932775333942008
+  failed_energy80_group_windows: 0
+  worst_energy80_group_window_ratio: 1.026426055703799
+  safe_layer_counts:
+    energy48: 0
+    energy64: 48
+    energy80: 48
+  selected_assignment_counts:
+    energy48: 0
+    energy64: 48
+    energy80: 0
+  selected_improvement_fraction: 0.0
+  next_decision: Use the preserved all-layer teacher evidence to test a named selector or recurrence-compensation change before any mixed-cache implementation, endpoint benchmark, profiling expansion, or final accuracy run.
+
 lessons_ingested:
-  - A hard wall-clock timeout is inconclusive evidence even when it occurs inside a candidate trajectory; do not map exception location to algorithm failure.
-  - Once a complete dense semantic replay is hash-bound, bounded candidate shards can reuse that scoped gate without rerunning dense or weakening candidate numerical checks.
+  - lesson: A hard wall-clock timeout is inconclusive evidence even when it occurs inside a candidate trajectory; do not map exception location to algorithm failure.
+    destination: .agents/skills/ascend-inference-tuning-loop/SKILL.md
+    severity: high
+  - lesson: Once a complete dense semantic replay is hash-bound, bounded candidate shards can reuse that scoped gate without rerunning dense or weakening candidate numerical checks.
+    destination: .agents/skills/ascend-benchmark-evidence/SKILL.md
+    severity: medium
+  - lesson: A monotonic lower/current/higher width curve does not establish a feasible heterogeneous budget; each lower-cost layer must pass the local regression gate before it can pay for a higher-cost layer.
+    destination: .agents/skills/ascend-canary-implementation/SKILL.md
+    severity: high

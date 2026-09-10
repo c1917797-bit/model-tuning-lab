@@ -28,8 +28,19 @@
   0.408052174/0.293664554/0.205922839, Dk80/Dk64 was 0.701218, and all 144
   local windows passed with a worst ratio of 1.026426. Report SHA256:
   f635211b4e06dea25a9cf16aa047e403fe6c5ab4fda2506d45bc554882338803.
-  This is not endpoint performance or accuracy. Resume from
-  drrqr-full-layer-sensitivity-budget-v1.
+  This is not endpoint performance or accuracy.
+- The promoted all-48-layer Dk48/Dk64/Dk80 replay and exact constrained
+  allocation are complete. All 1152 candidate trajectories and 10368 steps
+  passed native-NPU replay, but no Dk48 layer passed the frozen five-percent
+  local-window gate. Under the uniform-Dk64 total state budget the only
+  feasible assignment is all 48 layers at Dk64, with zero aggregate fidelity
+  improvement. This rejects only the simple equal-cost energy-selector
+  layerwise-width plan. It does not reject DRRQR, exact StrongRRQR, a named
+  recurrence-compensation design, endpoint performance, task accuracy, or
+  portability. Merged report SHA256:
+  de807118e7146c1a1d8dcce6111c3229a6e0d8916a163b3644d0496fd9d0057f.
+  Allocation report SHA256:
+  20739274c3b18408231b93d89c3ca9f7133ec945176dc9a0898e4bdfdd5dae50.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -65,12 +76,13 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
    candidate and mechanism evidence, but only the separate `query_rewrite`
    performance workstream owns its frozen denominator, final quality gate,
    serving delivery contract, and performance acceptance decision.
-5. **Qwen3.8 DRRQR:** keep algorithm selection primary. The aligned
-   Dk48/Dk64/Dk80 six-layer real-teacher curve passed. The next bounded
-   decision is an all-48-layer capture plus equal-or-lower-cost layerwise
-   allocation. Do not implement mixed-Dk cache/runtime support until that
-   allocation passes; do not run final accuracy before a candidate survives
-   numerical and fixed-1024-token endpoint screening.
+5. **Qwen3.8 DRRQR:** keep algorithm selection primary. The complete
+   all-48-layer equal-cost energy-selector width allocation was rejected, so
+   do not implement mixed-Dk cache/runtime support for it. The next bounded
+   decision must test one named selector or recurrence-compensation change
+   against the preserved teacher evidence. Only after numerical admission
+   should a concrete DRRQR candidate enter model integration, fixed-1024-token
+   endpoint screening, and targeted profiling. Final accuracy remains last.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -114,13 +126,12 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. For Qwen3.8 DRRQR, execute
-   drrqr-full-layer-sensitivity-budget-v1: capture and audit all 48
-   linear-attention layers, replay aligned Dk48/Dk64/Dk80, and solve a
-   layerwise plan whose sum(Dk) is no greater than uniform Dk64. Require at
-   least 10 percent aggregate local-fidelity improvement and no local window
-   regression above 5 percent. This stage still does not admit endpoint or
-   accuracy claims.
+2. For Qwen3.8 DRRQR, treat
+   drrqr-full-layer-sensitivity-budget-v1 as complete and rejected. Use its
+   preserved teacher evidence to predeclare one bounded selector or
+   recurrence-compensation experiment. Do not implement the rejected mixed-Dk
+   cache plan, broaden profiling, or run final accuracy before a replacement
+   candidate passes its numerical gate and a fixed-1024-token endpoint screen.
 3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
 4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
