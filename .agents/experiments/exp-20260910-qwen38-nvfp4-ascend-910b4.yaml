@@ -1,7 +1,7 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260910-qwen38-nvfp4-ascend-910b4
-status: official_checkpoint_contract_verified
-decision: continue_group16_ascendc_feasibility
+status: blocked_by_npu0_3_container_declarations
+decision: do_not_start_or_modify_containers
 objective: >-
   Reproduce nvidia/Qwen3.8-27B-NVFP4 on Ascend 910B4 and compare it with
   Qwen3.8-27B BF16 for serving performance and MMLU, GSM8K and HumanEval quality.
@@ -28,7 +28,8 @@ quality:
   humaneval: 164
   requirement: same harness and zero unreviewed protocol differences
 resource_policy:
-  candidate_devices: physical NPU0-7 only under one exclusive live lease
+  candidate_devices: physical NPU0-3 only under one exclusive live lease
+  protected_devices: physical NPU4-7; never mount or modify
   external_workload_policy: never preempt, stop, or alter an external workload
   min_mem_available_gib: 48
 device_free_evidence:
@@ -71,7 +72,42 @@ live_state_20260910:
   npu4_7: no NPU process, but external DRRQR container declaration remains
   mem_available_kb: 64298912
   decision: do not start a device workload
+live_state_20260910_170935z:
+  topology_path: chicaihong01/ma
+  route: peer_direct
+  resource_probe_operations:
+    npu: exec-0000000000000024
+    containers: exec-0000000000000027
+    memory: exec-0000000000000026
+    ports: exec-0000000000000025
+    competing_worktrees: exec-000000000000002a
+  npu0_3: no running processes; 2653 MiB idle HBM footprint per device
+  npu4_7: no running processes; protected and not mounted
+  running_containers: 0
+  port_10110: free
+  mem_available_kb: 81485876
+  lease: current workstream may use physical NPU0-3 for its exact disposable container lifetime
+  decision: start fresh BF16 TP4 control only; re-prove state immediately before launch
+live_state_20260910_171837z:
+  topology_path: chicaihong01/ma
+  route: peer_direct
+  resource_probe_operations:
+    npu: exec-000000000000003a
+    running_containers: exec-0000000000000036
+    all_containers: exec-0000000000000039
+    declarations: exec-0000000000000040
+    declaration_count: exec-0000000000000042
+    memory: exec-0000000000000037
+    ports: exec-0000000000000038
+  npu0_3: no running processes; 2653 MiB idle HBM footprint per device
+  npu4_7: no running processes; protected and not mounted
+  running_containers: 0
+  npu0_3_device_declarations: 81 total; 79 exited and 2 created containers
+  port_10110: free
+  mem_available_kb: 85348120
+  lease: not obtainable under the explicit no-container-declaration gate
+  decision: do not start, stop, remove, or modify any container
 next_gate: >-
-  Validate official checkpoint tensors, then require an exact group-16
-  stream-dequant plus BF16 Cube operator to pass correctness and repeated M=1
-  Qwen-shape latency before framework integration.
+  Wait until the NPU0-3 container declarations are cleared by their owners or
+  the operator explicitly narrows the gate to live containers. Then re-prove
+  all resource gates before starting the immutable-image BF16 TP4 control.

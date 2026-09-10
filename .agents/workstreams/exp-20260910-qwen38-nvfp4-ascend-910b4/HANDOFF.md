@@ -3,6 +3,17 @@
 ## Status
 
 - Dedicated worktree: `/opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4`.
+- At 2026-09-10T17:09:35Z the live gates changed to available: NPU0-7 had no
+  processes, Docker had no running containers, port 10110 was free, and
+  MemAvailable was 81,485,876 kB. The current workstream may use physical
+  NPU0-3 for its exact disposable-container lifetime; NPU4-7 remain protected.
+  Re-prove all of these immediately before launch.
+- The mandatory pre-launch recheck at 2026-09-10T17:18:37Z found 81 retained
+  Docker containers declaring one or more of physical NPU0-3: 79 are exited
+  and 2 are created. Although no container is running and NPU0-7 have no
+  process, the user's explicit gate rejects any external container device
+  declaration. No service was started and no container was stopped, removed,
+  or modified.
 - The fixed image's vLLM core can parse this official checkpoint through
   `modelopt_mixed` and already handles its Qwen3.5 prefix aliases. Do not
   translate it into the separate ModelSlim `quant_model_description.json`
@@ -92,11 +103,11 @@
 
 ## Current blockers
 
-1. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
-   NPU4-7 had no processes but remain in an external DRRQR container declaration
-   and are protected. The current test requires one exclusive lease for physical
-   NPU0-3 only; re-audit before any device action and never stop or alter either
-   external workload.
+1. The earlier NPU0-3 process occupancy has cleared, but 81 retained containers
+   still declare NPU0-3 (79 exited, 2 created). Under the explicit gate, the
+   NPU0-3 lease is not obtainable. Do not start, stop, remove, or modify any
+   container. Wait for owner cleanup or an explicit operator decision that
+   narrows the declaration gate, then re-audit. NPU4-7 remain protected.
 2. The fixed image now has a device-free validated external, fail-closed
    ModelOpt BF16 reference adapter, but it has not passed a four-rank model
    startup. Native or faithfully emulated activation quantization is still
@@ -195,6 +206,18 @@
   `exec-000000000000000c`, 3/6 pass and pass@1 0.5; result artifact SHA256
   `9e47a72acc1ffe3440a15f000f54a7b56233d34c8347a8085c728a52e2673db3`.
   HumanEval preparation/scorer unit tests: `exec-0000000000000017`, 4/4 pass.
+- Available-resource snapshot: `exec-0000000000000024` through
+  `exec-0000000000000027`; competing worktree/resource-claim audit:
+  `exec-000000000000002a`. No running containers or NPU processes, port 10110
+  free, MemAvailable 81,485,876 kB. The Qwen3.5 workstream's claim is
+  conditional on its own live lease and has no live process/container; this
+  workstream now owns the next exact NPU0-3 disposable-container lifetime.
+- Mandatory declaration recheck: NPU state `exec-000000000000003a`, running
+  containers `exec-0000000000000036`, all retained containers
+  `exec-0000000000000039`, exact NPU0-3 declaration list
+  `exec-0000000000000040`, and count `exec-0000000000000042`. The result
+  supersedes the earlier lease interpretation: 81 retained declarations block
+  startup under the user's stated gate.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.
