@@ -162,6 +162,19 @@
   instantaneous tail dot and toward historical reads from discarded state
   columns; any next candidate must represent that term under a bounded aligned
   state/projection budget.
+- The drrqr-historical-tail-sketch-foldability-v1 source/configuration audit is
+  complete and rejected before implementation. A dense 64-to-16 transform over
+  discarded post-convolution coordinates cannot be exactly folded through the
+  channel-specific causal-convolution kernels and enabled SiLU activation.
+  Computing it after convolution would retain the discarded source channels and
+  invalidate the claimed five-eighths projection/conv cost. No CPU replay, NPU
+  run, endpoint benchmark or task accuracy followed. Resume with the exact
+  aligned uniform energy-Dk80 plan (SHA256
+  934ef84ddea2ab0544ac0146d1ab4c3a8fd47d53e97cde6222a3ac2b2ca648ae)
+  for an integrated fixed-1024-token endpoint screen. Dk80 is a concrete
+  historical-state-retention DRRQR candidate, not the rejected equal-cost
+  mixed-layer plan. Only a promising endpoint result admits candidate-specific
+  Ascend fusion or data-movement work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

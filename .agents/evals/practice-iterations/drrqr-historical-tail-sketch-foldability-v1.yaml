@@ -1,0 +1,69 @@
+schema: mst-practice-iteration/v1
+id: drrqr-historical-tail-sketch-foldability-v1
+repository: model-tuning-lab
+status: rejected
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Decide whether a fixed 64-to-16 historical tail-state sketch can retain discarded recurrence history within a credible five-eighths-dense Ascend projection and state budget.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 provides 4.752041 percent endpoint gain but has unresolved accuracy loss, while TDRC showed that correcting only the instantaneous discarded-coordinate dot product worsens output fidelity and points to missing historical state reads.
+  medium_term_milestone: A numerically defensible aligned DRRQR candidate that preserves enough historical recurrence information and retains an implementable Ascend speed path.
+  short_term_decision: Audit whether a dense 64-to-16 tail transform can be folded through the real Qwen3.8 projection, causal-convolution and activation path before spending a CPU replay or NPU run on it.
+  deciding_evidence: The transform must reduce Q/K projection, causal-convolution and recurrent-state widths to 80 total channels without retaining the discarded 48 tail channels or changing the mathematical candidate.
+  budget_or_stop_rule: One source/configuration audit only; no implementation, CPU replay, NPU use, endpoint benchmark, profiling or task accuracy.
+  on_pass: Implement one frozen historical tail-state recurrence and compare it with energy-Dk64 and equal-cost energy-Dk80 on development captures.
+  on_failure: Reject the dense tail sketch before implementation and use the already NPU-qualified uniform energy-Dk80 candidate for the next endpoint screen and candidate-specific Ascend optimization decision.
+  on_inconclusive: Inspect only the unresolved projection-to-convolution seam; do not infer foldability from a local tensor replay.
+
+candidate_contract:
+  name: Historical Tail-State Subspace
+  proposed_geometry: Energy-selected 64 coordinates plus a fixed 16-dimensional orthogonal projection of all 64 discarded coordinates.
+  proposed_persistent_state_ratio_vs_dense: 0.625
+  proposed_qk_width_ratio_vs_dense: 0.625
+  required_foldability: The 64-to-16 transform must commute with or be exactly absorbable into every operation before recurrent Q/K normalization.
+  portability_boundary: A numerical CPU implementation that computes all dense post-convolution tail channels is not a performance candidate.
+
+evidence:
+  ascend_gdn_source: /cache/austinov/src/vllm-ascend/vllm_ascend/ops/gdn.py
+  ascend_gdn_source_sha256: d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816
+  source_flow:
+    - in_proj_qkv produces packed Q/K/V channels
+    - npu_causal_conv1d_custom applies per-channel convolution with activation_mode enabled when self.activation is set
+    - rearrange_mixed_qkv splits Q/K/V only after the convolution
+    - Q/K normalization and recurrent attention follow
+  checkpoint_config: /cache/austinov/Qwen3.8-27B/config.json
+  checkpoint_text_hidden_act: silu
+  frozen_energy80_plan: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/aligned-width-plans-v1/dk80-energy-kernel.json
+  frozen_energy80_plan_sha256: 934ef84ddea2ab0544ac0146d1ab4c3a8fd47d53e97cde6222a3ac2b2ca648ae
+
+result:
+  outcome: rejected_at_static_foldability_gate
+  evidence_level: source-and-model-configuration audit
+  claim_ceiling: Rejects this dense post-convolution tail-sketch implementation as a credible five-eighths-cost candidate; it does not reject all historical-state compensation, uniform Dk80, DRRQR, endpoint performance, task accuracy or portability.
+  reason: A transform that mixes discarded coordinates does not commute with channel-specific causal-convolution kernels followed by SiLU. Applying it after convolution requires computing the discarded source channels, while applying it before convolution changes the model because the distinct channel kernels and nonlinear activation cannot be folded exactly.
+  npu_used: false
+  endpoint_benchmark_run: false
+  task_accuracy_run: false
+  next_decision: Reuse the exact aligned uniform energy-Dk80 plan, whose full-layer native-NPU replay already passed, for an integrated fixed-1024-token endpoint screen; only a promising result admits candidate-specific packed QKV, normalization, gating, recurrent or data-movement optimization.
+
+changes:
+  - type: validation
+    description: Record the fail-closed static foldability audit and redirect the next candidate decision without implementing an invalid cost model.
+    files:
+      - .agents/evals/practice-iterations/drrqr-historical-tail-sketch-foldability-v1.yaml
+      - .agents/HANDOFF.md
+
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: A post-convolution coordinate-mixing sketch is not statically foldable through distinct depthwise causal-convolution kernels and SiLU merely because its linear transform can be folded into an input projection.
+    destination: projects/drror_vllm_ascend/AGENTS.md
+    severity: high
+  - lesson: Reject a candidate at the static cost/foldability gate when its claimed reduced width still requires computing discarded upstream channels.
+    destination: .agents/skills/ascend-inference-tuning-loop/SKILL.md
+    severity: high
