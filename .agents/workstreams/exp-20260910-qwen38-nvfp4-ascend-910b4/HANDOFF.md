@@ -52,7 +52,8 @@
 
 1. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
-   Re-audit before any device action and never stop those workloads.
+   The current test requires all physical NPU0-7 in one exclusive lease; re-audit
+   before any device action and never stop or alter either external workload.
 2. The fixed image needs an external, fail-closed ModelOpt method adapter plus
    dense NVFP4 group-16 and calibrated FP8 Ascend execution methods. The exact
    AscendC adapter/kernel is not implemented yet. The FP8 path must also be

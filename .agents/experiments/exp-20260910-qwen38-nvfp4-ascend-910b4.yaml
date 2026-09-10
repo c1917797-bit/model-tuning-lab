@@ -19,7 +19,7 @@ format_contract:
   global_scale_type: FP32
   ascend_gap: available A16F4 per-group interface starts at group size 32
 workload:
-  performance_concurrency: [1, 16]
+  performance_concurrency: [1, 5, 8, 16]
   performance_repetitions: 3
   decode: deterministic and identical for BF16 and NVFP4
 quality:
@@ -28,8 +28,8 @@ quality:
   humaneval: 164
   requirement: same harness and zero unreviewed protocol differences
 resource_policy:
-  candidate_devices: physical NPU0-3 under an exclusive live lease
-  protected_devices: physical NPU4-7
+  candidate_devices: physical NPU0-7 only under one exclusive live lease
+  external_workload_policy: never preempt, stop, or alter an external workload
   min_mem_available_gib: 48
 device_free_evidence:
   reference_codec: qwen38-nvfp4-ascend/nvfp4_codec.py

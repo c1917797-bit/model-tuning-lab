@@ -16,7 +16,7 @@
   "claims": [
     {"kind": "file", "mode": "exclusive", "value": "qwen38-nvfp4-ascend"},
     {"kind": "knowledge", "mode": "exclusive", "value": ".agents/workstreams/exp-20260910-qwen38-nvfp4-ascend-910b4"},
-    {"kind": "resource", "mode": "exclusive", "value": "chicaihong01 physical NPU0-3 only after an exclusive live lease is proven; NPU4-7 protected"}
+    {"kind": "resource", "mode": "exclusive", "value": "chicaihong01 physical NPU0-7 only after one exclusive live lease is proven; never preempt an external workload"}
   ],
   "validationCommands": [
     "python3 qwen38-nvfp4-ascend/test_nvfp4_codec.py",
