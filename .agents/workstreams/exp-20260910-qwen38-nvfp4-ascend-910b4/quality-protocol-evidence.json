@@ -42,6 +42,14 @@
     {
       "operation": "exec-0000000000000151",
       "result": "strict text scorer unit tests 2/2 pass in the fixed image, network disabled, no NPU devices"
+    },
+    {
+      "operation": "exec-0000000000000161",
+      "result": "tokenizer.json and chat_template.jinja are byte-identical between checkpoints; tokenizer_config defaults differ, so both launchers pin the BF16 tokenizer"
+    },
+    {
+      "operation": "exec-0000000000000163",
+      "result": "quality request runner unit tests 2/2 pass in the fixed image, network disabled, no NPU devices"
     }
   ],
   "limitations": [

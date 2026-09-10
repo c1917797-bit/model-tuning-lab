@@ -74,6 +74,14 @@
   and plugin mounts are read-only; candidate installation is confined to its
   disposable container layer. Shell syntax validation passes, but neither
   launcher has been executed while the lease is unavailable.
+- Tokenizer audit found byte-identical `tokenizer.json` and
+  `chat_template.jinja`, but different `tokenizer_config.json` defaults,
+  including the pad token. Both launchers therefore explicitly mount the BF16
+  tokenizer read-only at `/tokenizer` and pass `--tokenizer /tokenizer`.
+- A resumable OpenAI-compatible quality request runner now renders each chat
+  prompt locally with that tokenizer, records its SHA256, appends the full raw
+  response, and fails fast on request error. Its fixed-image unit tests pass;
+  it has not sent model requests while NPU0-3 are unavailable.
 
 ## Current blockers
 
@@ -168,6 +176,11 @@
   network-disabled, device-free tests: `exec-000000000000014f` and
   `exec-0000000000000151`. See `quality-protocol-evidence.json`.
 - Four-device TP4 launcher syntax validation: `exec-0000000000000159`, pass.
+- Paired tokenizer identity/default audit: `exec-0000000000000161` and
+  `exec-0000000000000162`.
+- Quality request runner fixed-image, device-free tests:
+  `exec-0000000000000163` (2/2 pass); updated launcher syntax validation:
+  `exec-0000000000000164`.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

@@ -5,6 +5,7 @@ set -euo pipefail
 
 image="${IMAGE:-quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a}"
 model_path="${MODEL_PATH:-/cache/cch/Qwen3.8-27B-NVFP4}"
+tokenizer_path="${TOKENIZER_PATH:-/cache/austinov/Qwen3.8-27B}"
 patch_path="${PATCH_PATH:-$(cd "$(dirname "$0")" && pwd)}"
 artifact_root="${ARTIFACT_ROOT:?set ARTIFACT_ROOT outside Git}"
 port="${PORT:-10110}"
@@ -12,6 +13,7 @@ name="${CONTAINER_NAME:-qwen38_nvfp4_reference_tp4_$(date -u +%Y%m%dT%H%M%SZ)}"
 
 case "${port}" in ''|*[!0-9]*) echo "PORT must be numeric" >&2; exit 64 ;; esac
 [[ -d "${model_path}" ]] || { echo "missing MODEL_PATH: ${model_path}" >&2; exit 66; }
+[[ -f "${tokenizer_path}/tokenizer.json" ]] || { echo "missing TOKENIZER_PATH: ${tokenizer_path}" >&2; exit 66; }
 [[ -f "${patch_path}/pyproject.toml" ]] || { echo "invalid PATCH_PATH: ${patch_path}" >&2; exit 66; }
 mkdir -p "${artifact_root}"
 
@@ -21,6 +23,7 @@ exec docker run --detach --rm \
   --device=/dev/davinci2 --device=/dev/davinci3 \
   --device=/dev/davinci_manager --device=/dev/devmm_svm --device=/dev/hisi_hdc \
   --mount "type=bind,src=${model_path},dst=/model,readonly" \
+  --mount "type=bind,src=${tokenizer_path},dst=/tokenizer,readonly" \
   --mount "type=bind,src=${patch_path},dst=/readonly/qwen38-nvfp4-ascend,readonly" \
   --mount "type=bind,src=${artifact_root},dst=/artifacts" \
   --mount type=bind,src=/usr/local/dcmi,dst=/usr/local/dcmi,readonly \

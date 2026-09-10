@@ -18,6 +18,12 @@ of those identities differs.
 stable JSONL request manifest.  Raw datasets and generated model responses stay
 under the ignored `artifacts/` directory.
 
+Both serving arms explicitly use the BF16 control's tokenizer directory. The
+two checkpoints have byte-identical `tokenizer.json` and `chat_template.jinja`,
+but their `tokenizer_config.json` defaults differ (including the pad token), so
+letting each arm select its own tokenizer configuration would invalidate the
+paired comparison.
+
 ## Prompt and decoding contract
 
 - MMLU: canonical subject-local 5-shot multiple-choice prompt.  The model must
@@ -49,6 +55,11 @@ code on the host or in an NPU-serving container.
 rendered-prompt identity checks and paired disagreement reporting. HumanEval is
 kept separate because its official functional-correctness evaluator executes
 untrusted generated code.
+
+`run_quality_requests.py` renders every chat prompt locally with the pinned
+tokenizer, records its SHA256, sends the corresponding chat or completion
+request, and appends the full raw response before advancing. It is resumable by
+request ID and fails fast on the first request error.
 
 The quality gate is fail closed:
 
