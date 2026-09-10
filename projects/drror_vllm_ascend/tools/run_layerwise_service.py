@@ -97,8 +97,10 @@ def verify_build(args):
     build = read_bound_json(args.build_manifest, args.build_manifest_sha256)
     if build.get("schema") != "drrqr-local-wheel-build/v1":
         raise ValueError("unexpected build manifest schema")
-    if Path(build["source_root"]).resolve() != ROOT.resolve():
-        raise ValueError("build source is not the plugin repository")
+    recorded_source_root = Path(build.get("source_root", ""))
+    if not recorded_source_root.is_absolute():
+        raise ValueError("build manifest source_root must be absolute provenance")
+    build_snapshot_root = args.build_manifest.parent / "source"
     wheel = Path(build["wheel"])
     if not wheel.is_absolute() or digest(wheel) != build["wheel_sha256"]:
         raise ValueError("wheel digest differs from the bound build")
@@ -111,7 +113,7 @@ def verify_build(args):
             raise ValueError("invalid relative source path/hash")
         if digest(ROOT / path) != checksum:
             raise ValueError("repository changed after build: " + name)
-        if digest(args.build_manifest.parent / "source" / path) != checksum:
+        if digest(build_snapshot_root / path) != checksum:
             raise ValueError("build snapshot differs: " + name)
     package = {name: checksum for name, checksum in expected.items()
                if name.startswith("drror_vllm_ascend/")}
@@ -150,10 +152,15 @@ def verify_build(args):
         metadata = [name for name in names if name.endswith(".dist-info/METADATA")]
         if len(metadata) != 1 or ("Version: " + args.plugin_version) not in archive.read(metadata[0]).decode().splitlines():
             raise ValueError("wheel version differs")
+    verified_source_root = ROOT.resolve()
     return {"installed_plugin": str(installed), "module_sha256": observed,
             "build_manifest_sha256": args.build_manifest_sha256,
             "build_source_sha256": expected, "wheel": str(wheel),
-            "wheel_sha256": build["wheel_sha256"], "plugin_version": args.plugin_version}
+            "wheel_sha256": build["wheel_sha256"], "plugin_version": args.plugin_version,
+            "build_recorded_source_root": str(recorded_source_root),
+            "build_snapshot_root": str(build_snapshot_root.resolve()),
+            "verified_source_root": str(verified_source_root),
+            "source_relocated": recorded_source_root.resolve() != verified_source_root}
 
 
 def verify_runtime(reference_sha256):

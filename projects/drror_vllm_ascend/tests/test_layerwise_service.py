@@ -132,7 +132,8 @@ class LayerwiseServiceTests(unittest.TestCase):
                 archive.writestr("fixture.dist-info/METADATA", "Name: fixture\nVersion: 0.1.12\n")
             manifest = build_dir / "build-manifest.json"
             manifest.write_text(json.dumps({"schema": "drrqr-local-wheel-build/v1",
-                "source_root": str(root), "source_sha256": expected,
+                "source_root": str(Path(tmp) / "original-build-source"),
+                "source_sha256": expected,
                 "wheel": str(wheel), "wheel_sha256": MODULE.digest(wheel)}))
             config = args(build_manifest=manifest,
                           build_manifest_sha256=MODULE.digest(manifest),
@@ -141,8 +142,15 @@ class LayerwiseServiceTests(unittest.TestCase):
                  patch.object(MODULE.importlib.util, "find_spec",
                               return_value=SimpleNamespace(origin=str(installed / "__init__.py"))), \
                  patch.object(MODULE.importlib.metadata, "version", return_value="0.1.12"):
-                self.assertEqual(MODULE.verify_build(config)["module_sha256"], {
+                verified = MODULE.verify_build(config)
+                self.assertEqual(verified["module_sha256"], {
                     "drror_vllm_ascend/__init__.py": sha(content)})
+                self.assertTrue(verified["source_relocated"])
+                self.assertEqual(verified["build_recorded_source_root"],
+                                 str(Path(tmp) / "original-build-source"))
+                self.assertEqual(verified["verified_source_root"], str(root.resolve()))
+                self.assertEqual(verified["build_snapshot_root"],
+                                 str((build_dir / "source").resolve()))
                 for target in (installed / "__init__.py",
                                build_dir / "source/drror_vllm_ascend/__init__.py",
                                root / "drror_vllm_ascend/__init__.py"):

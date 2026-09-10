@@ -9,14 +9,26 @@ stage_goal: Produce a bounded, hash-bound dense GDN state and post-RMS calibrati
 
 goal_chain:
   long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
-  current_gap: Energy-Dk64 reaches only 4.752041 percent endpoint gain and remains below historical dense quality, while paper StrongRRQR, diagonal causal energy, and two bounded Q/K-only exchange objectives all failed frozen gates; the latest safe exchange improved held-out QK proxy only 2.268935 percent.
+  current_gap: Energy-Dk64 reaches only 4.752041 percent endpoint gain. Its 39.37007874015748 percent LongBench-v2 preflight used max_tokens 1024 and is lower than the 45.406824147 percent historical dense mean, but that is not a current same-stack max_tokens 2048 paired comparison; final quality remains unproven. Paper StrongRRQR, diagonal causal energy, and two bounded Q/K-only exchange objectives failed their frozen numerical gates; the latest safe exchange improved held-out QK proxy only 2.268935 percent.
   medium_term_milestone: A defensible recurrence-aware DRRQR candidate that passes untouched held-out numerical admission and can proceed to fixed-1024-token endpoint screening toward the joint acceptance target.
-  short_term_decision: Generalize the pass-through dense GDN observer to capture 16 existing non-evaluation calibration sequences as exact 128-token raw-ID prompts with one prefill and eight decode steps on six representative layers, preserving indices 0-11 for later selector fitting and 12-15 for later admission only.
+  short_term_decision: Decide whether one bounded dense capture can provide complete and trustworthy recurrence/state evidence for fitting a named recurrence-aware DRRQR selector on indices 0-11 and independently admitting or rejecting it on untouched indices 12-15; if the capture cannot establish that evidence, stop this capture branch rather than extending the diagnostic chain.
   deciding_evidence: All four ranks must produce exactly 16 sequences times 9 steps times 6 layers, or 3456 hash-bound tensor archives, with exact request-token binding, zero prefill state, byte-identical state continuity and cache propagation, operator-to-norm binding, finite tensors, dense source/library identity and postflight cleanup; any missing or mismatched item rejects the capture.
   budget_or_stop_rule: Implement only the manifest/collector, worker adapter and minimally parameterized audited launcher with focused and full software tests. After a fresh live orientation, allow one dense eager TP4 service on physical NPU4-7 for at most 1800 seconds and one sequential collector with no request retry. No DRRQR candidate, profiling, endpoint benchmark or task accuracy runs in this iteration.
   on_pass: Freeze the capture hashes and create a separate CPU selector-analysis iteration that fits only indices 0-11 and makes its decision only on indices 12-15.
   on_failure: Preserve partial evidence, classify launcher, runtime, identity, storage or numerical failure precisely, clean only the owned process group and repair only the demonstrated defect before any rerun.
   on_inconclusive: Preserve partial evidence and do not infer algorithm quality; re-prove the live handle/process state before deciding whether any retry is authorized.
+
+runtime_attempts:
+  - id: prelaunch-provenance-gate-20260910
+    operation_id: exec-0000000000001233
+    result: failed_before_output_creation_or_model_load
+    evidence: The launcher rejected the old build manifest with ValueError build source is not the plugin repository because its source_root names the original immutable build snapshot rather than the relocated runtime source root. No capture output directory, model service, or NPU process was created.
+    decision: Preserve the original build manifest and its SHA256. Before a new launch, use the relocation-aware verifier to retain the original manifest identity, independently verify the original snapshot, relocated runtime root, wheel and installed package bytes, and record the original and verified paths separately.
+  - id: relocation-aware-provenance-gate-20260910
+    operation_id: exec-0000000000001263
+    result: passed_without_model_load_or_npu_use
+    evidence: The unchanged original build manifest and SHA256 validated the original build snapshot, relocated runtime package, wheel and installed 0.1.11 package byte-for-byte. The result records source_relocated true plus distinct build_recorded_source_root, build_snapshot_root and verified_source_root fields.
+    decision: The pre-launch provenance defect is repaired without rewriting the original build manifest. Re-run live resource orientation before the one authorized capture.
 
 changes:
   - type: algorithm_evidence
@@ -25,7 +37,9 @@ changes:
       - projects/drror_vllm_ascend/tools/collect_gdn_sensitivity_calibration.py
       - projects/drror_vllm_ascend/tools/gdn_sensitivity_capture_worker.py
       - projects/drror_vllm_ascend/tools/run_gdn_teacher_capture.py
+      - projects/drror_vllm_ascend/tools/run_layerwise_service.py
       - projects/drror_vllm_ascend/tests/test_gdn_sensitivity_capture.py
+      - projects/drror_vllm_ascend/tests/test_layerwise_service.py
 
 validation_commands:
   - python3 -m pytest projects/drror_vllm_ascend/tests/test_gdn_sensitivity_capture.py

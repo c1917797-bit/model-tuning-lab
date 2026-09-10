@@ -77,7 +77,17 @@
   12-15 for later admission, one prefill plus eight decode steps, six layers
   and all ranks. It must pass software gates and a fresh physical-NPU4-7
   ownership preflight before one bounded dense capture; it is not a candidate,
-  performance run or accuracy test.
+  performance run or accuracy test. One launch attempt
+  (exec-0000000000001233) stopped at the pre-launch provenance gate with
+  ValueError: build source is not the plugin repository: the old build
+  manifest names its original immutable source path, while the new observer
+  tools run from a relocated source root. The failure occurred before output
+  directory creation, model loading or NPU use. Preserve the original manifest
+  and SHA. The shared build verifier now accepts relocation only after proving
+  the original build snapshot, relocated runtime package, wheel and installed
+  package byte-for-byte; it records the original and verified paths separately.
+  The real 0.1.11 artifacts passed that gate in operation
+  exec-0000000000001263 without model loading or NPU use.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -164,9 +174,12 @@ For a new maintainer, start by treating this repository as ready for handoff but
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
 2. For Qwen3.8 DRRQR, finish the bounded
-   drrqr-rich-state-calibration-capture-v1 software gates, then re-prove live
-   physical-NPU4-7 ownership before its single dense capture. If the capture
-   passes, fit only on calibration indices 0-11 and make the next
+   drrqr-rich-state-calibration-capture-v1 relocation-aware provenance audit,
+   then
+   re-prove live physical-NPU4-7 ownership before its single dense capture.
+   Preserve the original build manifest and its immutable identity, and retain
+   the separately recorded relocated runtime path. If the capture passes, fit only on
+   calibration indices 0-11 and make the next
    recurrence-aware selector decision only on untouched indices 12-15. Do not
    implement the rejected mixed-Dk cache plan, broaden profiling, or run final
    accuracy before a replacement candidate passes its numerical gate and a
