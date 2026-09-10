@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260910-qwen38-nvfp4-ascend-910b4
-status: partial_real_tensor_contract_verified
+status: official_checkpoint_contract_verified
 decision: continue_group16_ascendc_feasibility
 objective: >-
   Reproduce nvidia/Qwen3.8-27B-NVFP4 on Ascend 910B4 and compare it with
@@ -58,7 +58,9 @@ checkpoint_acquisition:
   xet_disabled: true
   operation: exec-00000000000013ad
   local_dir: /cache/cch/Qwen3.8-27B-NVFP4
-  state: downloading_resumable
+  state: complete_and_verified
+  inspector_operation: exec-00000000000013df
+  evidence: .agents/workstreams/exp-20260910-qwen38-nvfp4-ascend-910b4/checkpoint-evidence.json
 live_state_20260910:
   chip_probe_operation: exec-0000000000001385
   detected_chip: Ascend910B4

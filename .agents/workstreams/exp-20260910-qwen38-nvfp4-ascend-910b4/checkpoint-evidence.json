@@ -1,0 +1,63 @@
+{
+  "schema": "qwen38-nvfp4-checkpoint-evidence/v1",
+  "source": "nvidia/Qwen3.8-27B-NVFP4",
+  "local_dir": "/cache/cch/Qwen3.8-27B-NVFP4",
+  "runtime_image": {
+    "tag": "quay.io/ascend/vllm-ascend:v0.23.0",
+    "id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "digest": "sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
+  },
+  "checkpoint_contract": {
+    "operation": "exec-00000000000013df",
+    "complete": true,
+    "tensor_count": 2194,
+    "quantized_layer_count": 401,
+    "nvfp4_layer_count": 193,
+    "fp8_layer_count": 208,
+    "validated_nvfp4_layers": 193,
+    "nvfp4_group_size": 16,
+    "contract_errors": []
+  },
+  "sha256_operation": "exec-00000000000013e6",
+  "files": {
+    "config.json": "71fa01bb64de20971045cd82a82c0ebb25a54e1b0a3f09ef23cf5479e9c54df8",
+    "hf_quant_config.json": "5f4aaa9e462ddb26a9790ab459eee69d100b9ade7541f0c86038e925c013f80b",
+    "model.safetensors.index.json": "7aa103a2582b7d26631988de33dea19e8a308ee9c239e8e14feb374af30905e2",
+    "model-00001-of-00003.safetensors": "7d0fd155118901373eb0fd13ed3aae68f95be747bc205be72ebc41739c25ee80",
+    "model-00002-of-00003.safetensors": "98a7e9486baa860c792c9463a770cb9d017696bdd17606300a5b9334149f4c27",
+    "model-00003-of-00003.safetensors": "0506ad35dc21469708e7813bd76c592cef08bd0317b4a1fe899745ebe2435271"
+  },
+  "modelopt_reference_commit": "079078de9d3cd26fa5baafdb754bba29dde24f7d",
+  "representative_rows": [
+    {
+      "operation": "exec-00000000000013e3",
+      "shard": "model-00001-of-00003.safetensors",
+      "tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+      "row": 0,
+      "decoded_values": 5120,
+      "packed_row_sha256": "b5aad2cfd3cd4365432905e593d44756ea84806a4c969d215de38794c8f99826",
+      "max_abs_error": 0.0,
+      "exact_match": true
+    },
+    {
+      "operation": "exec-00000000000013e4",
+      "shard": "model-00002-of-00003.safetensors",
+      "tensor": "model.language_model.layers.24.mlp.up_proj.weight",
+      "row": 1,
+      "decoded_values": 5120,
+      "packed_row_sha256": "953eb1dd8559cc6e250ebd6e93c58b21ea478abd027bc351be2a76c2af442267",
+      "max_abs_error": 0.0,
+      "exact_match": true
+    },
+    {
+      "operation": "exec-00000000000013e5",
+      "shard": "model-00003-of-00003.safetensors",
+      "tensor": "model.language_model.layers.62.mlp.gate_proj.weight",
+      "row": 2,
+      "decoded_values": 5120,
+      "packed_row_sha256": "a6df0cf2606954c00ce459313abd1f7220b87cf5b9898544a378d590e593f891",
+      "max_abs_error": 0.0,
+      "exact_match": true
+    }
+  ]
+}

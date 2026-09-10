@@ -12,9 +12,9 @@
 - The fixed image itself contains CANN 9.1.0, Bisheng, ATC, OPP, msprof and
   cannsim. A read-only CANNBot environment check passed inside a disposable
   container, so it can also be used as the isolated build environment.
-- The exact official snapshot download is active as
-  `exec-00000000000013ad`, using `hf-mirror` with Xet disabled and a
-  resumable local directory at `/cache/cch/Qwen3.8-27B-NVFP4`.
+- The exact official snapshot is complete at
+  `/cache/cch/Qwen3.8-27B-NVFP4`. All three shards have recorded SHA256
+  identities in `checkpoint-evidence.json`.
 - A fail-closed checkpoint inspector passes host and fixed-image tests.
 - One real row from the already complete third shard was independently decoded
   against NVIDIA ModelOpt commit
@@ -26,23 +26,18 @@
 
 ## Current blockers
 
-1. The official NVFP4 checkpoint download is still incomplete. Partial shards
-   may be inspected read-only, but do not declare checkpoint completeness or
-   start serving until the operation completes and the full shard index passes
-   the checkpoint inspector.
-2. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
+1. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
    Re-audit before any device action and never stop those workloads.
+2. Stock vLLM-Ascend 0.23.0 does not load ModelOpt NVFP4 and the exact group-16
+   AscendC adapter/kernel is not implemented yet.
 
 ## Next actions
 
-1. Poll `exec-00000000000013ad`; after completion, run
-   `inspect_checkpoint.py`, record identities and extend the independent
-   ModelOpt comparison to representative tensors from every completed shard.
-2. Implement the group-16 stream-dequant + BF16 Cube direct AscendC operator,
+1. Implement the group-16 stream-dequant + BF16 Cube direct AscendC operator,
    building inside the fixed image with source/output bind mounts.
-3. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
-4. Only after promotion, integrate through a read-only mounted plugin in a
+2. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
+3. Only after promotion, integrate through a read-only mounted plugin in a
    fresh disposable container and run BF16/NVFP4 paired performance and quality.
 
 ## Verified operations
@@ -53,6 +48,14 @@
 - Fixed-image CANNBot environment: CANN 9.1.0, pass with one non-blocking
   runtime-library-path warning.
 - Checkpoint inspector host and fixed-image tests: pass.
+- Complete official checkpoint contract: `exec-00000000000013df`; 3/3 shards,
+  2,194 tensors, all 193 NVFP4 layers validated with zero ABI errors.
+- Representative real rows from all three shards:
+  `exec-00000000000013e3`, `exec-00000000000013e4`, and
+  `exec-00000000000013e5`; 15,360 decoded values total, exact matches,
+  maximum absolute error `0.0`.
+- Checkpoint SHA256 manifest: `exec-00000000000013e6`; recorded in
+  `checkpoint-evidence.json`.
 - Real `lm_head.weight` row-0 ModelOpt cross-check:
   `exec-00000000000013cd`, exact match, maximum absolute error `0.0`,
   packed-row SHA256
