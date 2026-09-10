@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-uniform-dk80-endpoint-screen-v1
 repository: model-tuning-lab
-status: in_progress
+status: rejected
 date: 2026-09-10
-validated_commit: pending
+validated_commit: 635e55992cf6c14fccfb0ba6b58f3998e60678fe
 
 stage_goal: Admit or reject uniform energy-Dk80 as the next DRRQR performance-and-fidelity candidate using the exact frozen plan, candidate-only plugin geometry support, native Ascend correctness and one fixed-1024-token endpoint screen.
 
@@ -81,3 +81,41 @@ lessons_ingested:
   - lesson: A wider uniform aligned coordinate plan can be reconsidered after compensation failures when it directly retains missing historical state, but it needs its own endpoint evidence and must not be confused with a rejected equal-cost heterogeneous allocation.
     destination: projects/drror_vllm_ascend/AGENTS.md
     severity: high
+  - lesson: Short synthetic prefill parity and decode NPUGraph parity do not admit a new aligned Dk at production context length; the actual prefill chunk path needs a finite-output gate at the target workload before performance.
+    destination: projects/drror_vllm_ascend/AGENTS.md
+    severity: critical
+
+outcome:
+  decision: reject_dk80_endpoint_promotion_and_isolate_prefill_kernel
+  build_manifest_sha256: 5ffb6a08e69616e3d598591861be70c3f546500d65d9de404b1a4f561db82f0e
+  wheel_sha256: f9037b19e5a3c82eae60c115b6a555017f8e914609117ba81a700d2aa0bf38fe
+  installed_module_count: 21
+  service_status: healthy_before_probe
+  service_manifest_sha256: 3399dabe13808d89986fff1569226faae50de60c718beaa23b35532712c6d927
+  service_evidence:
+    worker_dispatch_verified: 12
+    model_configured: 4
+    weight_load_complete: 4
+    conv_weight_layout_prepared: 4
+    prefill_mc2_prepared: 4
+    prefill_mc2_mixed_called: 512
+  sequence_protocol:
+    requests: 16
+    concurrency: 16
+    input_tokens: 32768
+    output_tokens: 16
+    temperature: 0
+    seed: 0
+    ignore_eos: true
+    logprobs: 5
+  sequence_status: failed_nonfinite
+  successful_http_responses_including_warmup: 4
+  failed_http_responses: 13
+  nan_serialization_errors: 13
+  sequence_receipt_sha256: 7130f9dbdf73caaa0cb98c50c14cd5ed3b85a8cb07a3360c29b7ca03732ccc86
+  evidence_sha256: ea8581b26aff9a36612d4e32e64dc225a427e48594b55a11eb0cfa35e9b4fcd7
+  service_log_sha256: fad76aa8d0204df373468f25d588dbb4d321253100f366b7229320537ae4afe3
+  service_exit_sha256: 1cab704ab7a88a8442beccb6fa1a334832cde0f8884a2faa6866ed569a7e9f9b
+  runtime_path_observation: Prefill used vllm_ascend.ops.triton.fla.chunk.chunk_gated_delta_rule, whose h and output stages dispatch to Ascend custom chunk_gated_delta_rule_fwd_h and chunk_fwd_o; decode used the separately validated recurrent operator.
+  claim_boundary: The endpoint candidate failed its mandatory finite-output gate. This rejects performance promotion and forbids accuracy testing, but does not yet distinguish an energy-Dk80 algorithm instability from a Dk80 production-length prefill operator defect.
+  next_iteration: drrqr-dk80-prefill-kernel-isolation-v1

@@ -175,6 +175,24 @@
   historical-state-retention DRRQR candidate, not the rejected equal-cost
   mixed-layer plan. Only a promising endpoint result admits candidate-specific
   Ascend fusion or data-movement work.
+- The drrqr-uniform-dk80-endpoint-screen-v1 iteration is complete and rejected
+  before performance. The exact Dk80 plan passed short prefill, recurrent decode
+  eager/state and recurrent NPUGraph gates; the corrected four-worker service
+  also reached HTTP health with exact plan, wheel and worker identities. Its
+  mandatory 16-request, 32768-input/16-output mixed sequence gate then produced
+  13 HTTP 400 responses caused by NaN serialization; only three measured
+  requests plus the warmup returned 200. All 512 expected mixed-prefill calls
+  were observed across four workers. Receipt SHA256:
+  7130f9dbdf73caaa0cb98c50c14cd5ed3b85a8cb07a3360c29b7ca03732ccc86.
+  No endpoint performance, profiling or accuracy run followed. This rejects
+  Dk80 endpoint promotion but does not yet distinguish algorithm instability
+  from the production-length chunk-prefill path, which dispatches through
+  chunk_gated_delta_rule_fwd_h and chunk_fwd_o rather than the separately
+  validated recurrent decode operator. Resume with the single-request,
+  seam-bound drrqr-dk80-prefill-kernel-isolation-v1 iteration. Build a
+  plugin-owned Dk80 prefill adapter only if finite inputs first become
+  non-finite inside that chunk boundary; otherwise return to a mathematically
+  different exactly foldable DRRQR algorithm/state design.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

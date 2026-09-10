@@ -1,0 +1,69 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk80-prefill-kernel-isolation-v1
+repository: model-tuning-lab
+status: planned
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Determine whether the rejected Dk80 endpoint run becomes non-finite inside the production-length Ascend prefill chunk path or before/after it, so operator adaptation is attempted only for a proven DRRQR blocker.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 is finite and gains 4.752041 percent but lacks fidelity; energy-Dk80 improves captured-teacher post-RMS error and passes short prefill plus decode native gates, yet 13 of 16 production-length integrated requests failed with NaN before any performance screen.
+  medium_term_milestone: A numerically valid DRRQR candidate whose remaining endpoint gap can be addressed by a candidate-specific Ascend implementation.
+  short_term_decision: Locate the first non-finite Dk80 tensor at the real GDN prefill seam and decide whether a plugin-owned Dk80 chunk adapter is warranted.
+  deciding_evidence: On one fixed 32768-token request, record finite counts and compact norms immediately before and after Q/K normalization, the chunk recurrence output/final-state boundary, and the GDN output. All four workers must have exact source/plan identity. No full tensors, prompts or credentials enter Git.
+  budget_or_stop_rule: One instrumentation implementation/build, one four-worker service launch and one fixed request on physical NPU4-7. No width/seed sweep, profiler, endpoint throughput, task accuracy or automatic retry.
+  on_pass: If finite inputs first become non-finite in chunk_gated_delta_rule or its final state, capture one minimal reproducer and design an independently named, explicitly opted-in plugin-owned Dk80 prefill adapter with a portable reference/fallback and NPU parity gate.
+  on_failure: If inputs are already non-finite, or the chunk boundary is finite and NaN begins elsewhere, reject prefill-kernel adaptation and return to a mathematically different exactly foldable DRRQR algorithm/state design.
+  on_inconclusive: Instrument at most one adjacent downstream seam once; if the first non-finite tensor remains unbound, stop and preserve the result.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k DRRQR selector at uniform logical Dk80.
+  paper_exact_selection: false
+  plan_sha256: 934ef84ddea2ab0544ac0146d1ab4c3a8fd47d53e97cde6222a3ac2b2ca648ae
+  suspected_runtime_seam: vllm_ascend.ops.triton.fla.chunk.chunk_gated_delta_rule
+  actual_prefill_native_stages:
+    - torch.ops._C_ascend.chunk_gated_delta_rule_fwd_h
+    - torch.ops._C_ascend.chunk_fwd_o
+  already_proven:
+    - Dk80 short prefill parity at lengths 63,64,65
+    - Dk80 recurrent decode eager/state parity
+    - Dk80 recurrent decode NPUGraph parity
+  not_proven:
+    - Dk80 production-length chunk-prefill finite behavior
+    - algorithm-versus-operator root cause
+    - endpoint performance
+    - task accuracy
+    - cross-environment speedup
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+  output_policy: Fresh paths only; preserve the first failed result and never relax finite-output checks.
+
+changes:
+  - type: workspace
+    description: Add opt-in finite-stat instrumentation at the existing GDN prefill boundaries without changing arithmetic, scheduling or dense behavior.
+    files:
+      - projects/drror_vllm_ascend/drror_vllm_ascend/patches/gdn.py
+      - projects/drror_vllm_ascend/tests/test_contracts.py
+
+validation_commands:
+  - focused observer tests proving arithmetic pass-through and bounded evidence
+  - full project software test suite
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - one exact-plan four-worker service activation gate
+  - one 32768-input fixed diagnostic request with no retry
+
+portability_contract:
+  algorithm_semantics: Logical Dk80 selection remains independent of backend tile width and padding.
+  backend_dispatch: Any new operator must be independently named, explicitly opted in, capability checked, and fall back to a mathematically matching reference or reject unsupported execution.
+  evidence_limit: A fix on 910B4 and v0.23 proves only this environment until another environment has its own NPU parity and paired endpoint measurement.
+
+lessons_ingested:
+  - lesson: Admit nonstandard aligned Dk values with a production-context prefill finite gate in addition to short prefill parity and recurrent decode graph parity.
+    destination: projects/drror_vllm_ascend/AGENTS.md
+    severity: critical

@@ -17,7 +17,10 @@ DRIVER_SHA = "cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822"
 ROOTS = (
     Path("/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1"),
     Path("/drrqr-results/prefill-mc2-mixed-v1"),
+    Path("/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk80-endpoint-screen-v1"),
+    Path("/drrqr-results/dk80-endpoint-screen-v1"),
 )
+VARIANTS = ("dk32", "dk64", "dk80", "baseline")
 REQUESTS = 16
 INPUT_TOKENS = 32768
 OUTPUT_TOKENS = 16
@@ -25,6 +28,10 @@ OUTPUT_TOKENS = 16
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def service_directory_allowed(directory):
+    return any(root in directory.parents for root in ROOTS)
 
 
 def load_driver(path):
@@ -107,11 +114,11 @@ def main():
     parser.add_argument("--service-dir", required=True, type=Path)
     parser.add_argument("--benchmark-driver", required=True, type=Path)
     parser.add_argument("--base-url", default="http://127.0.0.1:6666")
-    parser.add_argument("--variant", choices=("dk32", "dk64", "baseline"), default="dk64")
+    parser.add_argument("--variant", choices=VARIANTS, default="dk64")
     args = parser.parse_args()
     directory = args.service_dir.resolve()
     output = directory / "mixed-sequence.json"
-    if not any(root in directory.parents for root in ROOTS) or output.exists():
+    if not service_directory_allowed(directory) or output.exists():
         parser.error("fresh receipt below the mixed experiment required")
     manifest_path = directory / "service-manifest.json"
     deadline = time.monotonic() + 900

@@ -149,3 +149,11 @@ promising candidates and final acceptance, not for every speculative change. Bit
 equality is appropriate for pure storage-layout transformations; arithmetic/fusion changes
 use justified predeclared error criteria and multi-step state checks. Never relax criteria
 after a numerical failure just to obtain a pass. Final accuracy requirements are unchanged.
+
+A new aligned logical Dk must pass the real prefill and decode implementations separately.
+Short synthetic chunk-prefill parity and recurrent decode graph parity do not establish
+production-context finiteness. If an integrated candidate becomes non-finite, reject its
+endpoint promotion first, then bind the first non-finite tensor at the actual model/operator
+seam before choosing between algorithm redesign and candidate-specific operator adaptation.
+Do not infer an algorithm failure from an unproven backend shape path, and do not build a
+replacement operator merely because the failure is plausibly kernel-related.
