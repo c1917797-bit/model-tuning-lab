@@ -27,6 +27,32 @@ WEIGHT_NAME = re.compile(
 )
 HASH = re.compile(r"^[0-9a-f]{64}$")
 ASCEND_DECODE_KEY_ALIGNMENT = 16
+SELECTION_PROVENANCE = {
+    "official-raw": (
+        "DRRQR (paper-faithful Strong RRQR selector)",
+        True,
+        "Strong RRQR on concatenated post-conv Q/K activations",
+        None,
+    ),
+    "cosine-kernel": (
+        "Experimental kernel-normalized Strong RRQR selector",
+        False,
+        "Strong RRQR on kernel-normalized post-conv Q/K activations",
+        1e-6,
+    ),
+    "energy-kernel": (
+        "Experimental joint normalized Q/K energy top-k selector",
+        False,
+        "Top shared coordinates by joint normalized Q/K energy",
+        1e-6,
+    ),
+    "causal-kernel-energy": (
+        "Experimental causal normalized Q/K interaction-energy selector",
+        False,
+        "Top shared coordinates by causal normalized Q/K interaction energy",
+        1e-6,
+    ),
+}
 
 
 def file_sha256(path: Path) -> str:
@@ -67,6 +93,45 @@ def validate_ascend_decode_alignment(target_head_k_dim: int) -> None:
             f"{ASCEND_DECODE_KEY_ALIGNMENT} while CopyOutState assumes compact "
             f"rows; use a multiple of {ASCEND_DECODE_KEY_ALIGNMENT}"
         )
+
+
+def validate_selection_provenance(data: dict[str, Any]) -> dict[str, Any]:
+    """Validate the exact selector identity recorded by the plan producer."""
+
+    provenance = data.get("provenance")
+    objective = data.get("selection_objective")
+    expected = SELECTION_PROVENANCE.get(objective)
+    if not isinstance(provenance, dict) or expected is None:
+        raise ValueError("DRRQR: missing pinned algorithm/calibration provenance")
+    method, paper_exact, selection_method, l2norm_eps = expected
+    selection = provenance.get("selection")
+    if (
+        provenance.get("method") != method
+        or provenance.get("paper_exact_selection") is not paper_exact
+        or provenance.get("official_commit") != OFFICIAL_COMMIT
+        or provenance.get("official_rrqr_sha256") != OFFICIAL_RRQR_SHA256
+        or not isinstance(provenance.get("calibration_sha256"), str)
+        or not HASH.fullmatch(provenance["calibration_sha256"])
+        or not isinstance(selection, dict)
+        or selection.get("schema") != "drrqr-selection/v1"
+        or selection.get("method") != selection_method
+        or selection.get("selection_objective") != objective
+        or selection.get("official_commit") != OFFICIAL_COMMIT
+        or selection.get("official_rrqr_sha256") != OFFICIAL_RRQR_SHA256
+        or selection.get("l2norm_eps") != l2norm_eps
+        or selection.get("f_param") != 1.5
+        or selection.get("max_swaps") != 20
+        or selection.get("subsample_threshold") != 5000
+        or selection.get("seed") != 42
+        or type(selection.get("capture_file_count")) is not int
+        or selection["capture_file_count"] <= 0
+        or not isinstance(selection.get("capture_manifest_sha256"), str)
+        or not HASH.fullmatch(selection["capture_manifest_sha256"])
+        or not isinstance(selection.get("layers"), dict)
+        or not selection["layers"]
+    ):
+        raise ValueError("DRRQR: missing pinned algorithm/calibration provenance")
+    return selection
 
 
 @dataclass(frozen=True)
@@ -111,16 +176,7 @@ class DrrqrPlan:
             data["source_config_sha256"],
             data["source_index_sha256"],
         )
-        provenance = data.get("provenance", {})
-        if (
-            not isinstance(provenance, dict)
-            or provenance.get("method") != "DRRQR"
-            or provenance.get("official_commit") != OFFICIAL_COMMIT
-            or provenance.get("official_rrqr_sha256") != OFFICIAL_RRQR_SHA256
-            or not isinstance(provenance.get("calibration_sha256"), str)
-            or not HASH.fullmatch(provenance["calibration_sha256"])
-        ):
-            raise ValueError("DRRQR: missing pinned algorithm/calibration provenance")
+        selection_provenance = validate_selection_provenance(data)
         names = (
             "old_head_k_dim",
             "target_head_k_dim",
@@ -149,6 +205,10 @@ class DrrqrPlan:
             for index, kind in enumerate(layer_types)
             if kind == "linear_attention"
         }
+        if set(selection_provenance["layers"]) != {
+            str(index) for index in layer_ids
+        }:
+            raise ValueError("DRRQR: selector provenance must cover all linear-attention layers")
         keeps = data.get("keep_indices")
         if not isinstance(keeps, dict) or set(keeps) != {
             str(index) for index in layer_ids
