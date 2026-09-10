@@ -1,0 +1,53 @@
+schema: ascend-inference-experiment/v1
+id: exp-20260910-qwen38-nvfp4-ascend-910b4
+status: device_free_reference_codec_verified
+decision: continue_group16_ascendc_feasibility
+objective: >-
+  Reproduce nvidia/Qwen3.8-27B-NVFP4 on Ascend 910B4 and compare it with
+  Qwen3.8-27B BF16 for serving performance and MMLU, GSM8K and HumanEval quality.
+environment:
+  host: chicaihong01
+  hardware: 8 x Ascend 910B4
+  runtime_image: quay.io/ascend/vllm-ascend:v0.23.0
+  runtime_image_policy: immutable; read-only plugin mount; disposable container
+format_contract:
+  quant_method: modelopt
+  algorithm: MIXED_PRECISION
+  nvfp4_value_type: E2M1 packed low nibble first
+  nvfp4_group_size: 16
+  local_scale_type: FP8 E4M3FN
+  global_scale_type: FP32
+  ascend_gap: available A16F4 per-group interface starts at group size 32
+workload:
+  performance_concurrency: [1, 16]
+  performance_repetitions: 3
+  decode: deterministic and identical for BF16 and NVFP4
+quality:
+  mmlu: full prepared split
+  gsm8k: 1319
+  humaneval: 164
+  requirement: same harness and zero unreviewed protocol differences
+resource_policy:
+  candidate_devices: physical NPU0-3 under an exclusive live lease
+  protected_devices: physical NPU4-7
+  min_mem_available_gib: 48
+device_free_evidence:
+  reference_codec: qwen38-nvfp4-ascend/nvfp4_codec.py
+  host_test_operation: exec-0000000000001386
+  fixed_image_test_operation: exec-000000000000138c
+  result: pass
+live_state_20260910:
+  chip_probe_operation: exec-0000000000001385
+  detected_chip: Ascend910B4
+  resource_probe_operations:
+    - exec-000000000000138a
+    - exec-000000000000138b
+  npu0_3: occupied by four external Qwen3.5 TP workers
+  npu4_7: no NPU process, but external DRRQR container declaration remains
+  mem_available_kb: 64298912
+  decision: do not start a device workload
+next_gate: >-
+  Validate official checkpoint tensors, then require an exact group-16
+  stream-dequant plus BF16 Cube operator to pass correctness and repeated M=1
+  Qwen-shape latency before framework integration.
+

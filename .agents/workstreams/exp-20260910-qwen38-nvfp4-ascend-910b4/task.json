@@ -1,0 +1,28 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260910-qwen38-nvfp4-ascend-910b4",
+  "objective": "Reproduce the official nvidia/Qwen3.8-27B-NVFP4 checkpoint on Ascend 910B4 and compare it with Qwen3.8-27B BF16 for serving performance and MMLU, GSM8K, and HumanEval quality without changing the fixed vLLM-Ascend 0.23.0 image.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen38-nvfp4-ascend-910b4-20260910",
+  "remote": "origin",
+  "originalBase": "31c43a4c249c9d4c597372f47d989a7c10b2c9c4",
+  "createdAt": "2026-09-10",
+  "owner": "codex",
+  "dependencies": [
+    "/cache/cch/cannbot-skills",
+    "/cache/cch/ops-transformer",
+    "/cache/cch/vllm-ascend"
+  ],
+  "claims": [
+    {"kind": "file", "mode": "exclusive", "value": "qwen38-nvfp4-ascend"},
+    {"kind": "knowledge", "mode": "exclusive", "value": ".agents/workstreams/exp-20260910-qwen38-nvfp4-ascend-910b4"},
+    {"kind": "resource", "mode": "exclusive", "value": "chicaihong01 physical NPU0-3 only after an exclusive live lease is proven; NPU4-7 protected"}
+  ],
+  "validationCommands": [
+    "python3 qwen38-nvfp4-ascend/test_nvfp4_codec.py",
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "device-free-reference-codec-verified-awaiting-checkpoint-and-npu-lease",
+  "integrationState": "branch-local-not-promoted"
+}
