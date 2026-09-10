@@ -207,6 +207,20 @@
   operator. Resume with drrqr-dk80-mixed-cache-state-isolation-v1, preserving
   the original 16-prompt cohort and binding per-request phase, state-cache
   slots/storage and the first non-finite GDN boundary before any operator work.
+- The follow-on drrqr-dk80-mixed-cache-state-isolation-v1 diagnostic
+  implementation is ready but its single NPU run has not started. Commit
+  53234ba and plugin 0.1.14 preserve all 16 prompt outcomes, arm only on an
+  exact 32768-token prefill, bound trace volume, and record phase, cache
+  indices/storage plus pre/post GDN state finite statistics without changing
+  arithmetic. Focused tests passed 43 cases and the full suite passed 519.
+  The immutable wheel SHA256 is
+  0d377dd11bb39868013d13eac39bb828ce20ec2a3f6b9558a3769ea463e5141f;
+  installation verified all 22 modules and unchanged upstream sources.
+  A fresh preflight then found the foreign
+  qwen38_tp8_full357_qwen38-tp8-full357-v2-20260910T212811Z container using
+  physical NPU0-7. Do not stop or overlap it. When physical NPU4-7 are free,
+  launch exactly one 0.1.14 Dk80 service and one frozen concurrency-16,
+  input32768/output16 cohort; do not retry or broaden the experiment.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

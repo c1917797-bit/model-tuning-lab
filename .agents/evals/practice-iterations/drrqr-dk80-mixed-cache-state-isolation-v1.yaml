@@ -2,8 +2,8 @@ schema: mst-practice-iteration/v1
 id: drrqr-dk80-mixed-cache-state-isolation-v1
 repository: model-tuning-lab
 status: in_progress
-date: 2026-09-10
-validated_commit: pending
+date: 2026-09-11
+validated_commit: 53234ba
 
 stage_goal: Bind the prior Dk80 concurrent endpoint NaN to either real cache-state ownership, mixed-prefill/decode GDN arithmetic, or a later output seam before changing the algorithm or Ascend operator.
 
@@ -30,6 +30,24 @@ resource_contract:
   container_npus: [0, 1, 2, 3]
   container: drrqr_qwen38_energy_preflight_20260908
   output_policy: Fresh paths only; preserve prior serial and concurrent evidence and never relax finite-output checks.
+
+implementation_checkpoint:
+  plugin_version: 0.1.14
+  commit: 53234ba
+  focused_tests: 43 passed with 16 warnings
+  full_tests: 519 passed with 14 warnings
+  wheel_sha256: 0d377dd11bb39868013d13eac39bb828ce20ec2a3f6b9558a3769ea463e5141f
+  build_manifest_sha256: 22a929a31d203bdda60e8febb4f0e858a1aa58e9dff14305fe5692802353f508
+  install_receipt: /drrqr-results/dk80-mixed-cache-state-isolation-v1/install-53234ba.json
+  install_status: installed_verified from 0.1.13 to 0.1.14; 22 source, wheel and installed modules matched and upstream reference sources were unchanged.
+  diagnostic_scope: Exact 32768-token arming, at most 16 long-prefill traces and 64 mixed/decode traces per layer, cache indices and storage identity, pre/post finite statistics, and first-nonfinite stopping without arithmetic changes.
+  collector_scope: Every frozen prompt returns an identity-bound success or failure receipt; one failed future no longer discards the other cohort outcomes.
+
+runtime_checkpoint:
+  state: waiting_for_resource_contract
+  observed_at: 2026-09-11
+  evidence: A fresh npu-smi and docker inspection found qwen38_tp8_full357_qwen38-tp8-full357-v2-20260910T212811Z using physical NPU0-7, with one VLLMWorker_TP process and about 25955 MiB on each card.
+  decision: Do not stop or overlap the foreign TP8 service. The one allowed four-worker Dk80 service and frozen cohort have not started.
 
 changes:
   - type: workspace
