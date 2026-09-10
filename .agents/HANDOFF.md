@@ -41,6 +41,13 @@
   de807118e7146c1a1d8dcce6111c3229a6e0d8916a163b3644d0496fd9d0057f.
   Allocation report SHA256:
   20739274c3b18408231b93d89c3ca9f7133ec945176dc9a0898e4bdfdd5dae50.
+- Active next iteration: drrqr-cosine-selector-screen-v1. It first compares
+  the supported kernel-normalized StrongRRQR Dk64 selector with energy-Dk64 on
+  the frozen normalized-QK proxy. Only a proxy improvement of at least ten
+  percent admits one full-layer native-NPU teacher replay; only an NPU
+  post-RMS improvement of at least ten percent with no local window worsening
+  above five percent admits a later aligned-Dk48 experiment. This is an
+  algorithm-selector branch, not endpoint, profiling, cache, or accuracy work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

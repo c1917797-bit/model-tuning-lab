@@ -1,0 +1,35 @@
+schema: mst-practice-iteration/v1
+id: drrqr-cosine-selector-screen-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Decide whether the supported kernel-normalized StrongRRQR selector improves real GDN trajectory fidelity enough to justify a lower-Dk performance candidate.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Common-optimized energy-Dk64 reaches only 4.752041 percent endpoint throughput gain and its available LongBench-v2 preflight is below historical dense quality, while the complete equal-cost Dk48/Dk64/Dk80 energy allocation has no feasible Dk48 layer under the frozen local-fidelity gate.
+  medium_term_milestone: A numerically defensible DRRQR selector at Dk64 whose improved recurrence fidelity can be carried to an aligned Dk48 candidate with plausible additional endpoint headroom.
+  short_term_decision: Compare the supported kernel-normalized StrongRRQR Dk64 selector with energy-Dk64 on the frozen normalized-QK proxy, then run at most one full-layer native-NPU captured-teacher shard only if the proxy improves.
+  deciding_evidence: The cosine selector must reduce aggregate normalized-QK score RMSE by at least 10 percent versus energy-Dk64 to consume NPU time; its NPU replay must then reduce aggregate post-RMS relative-L2 by at least 10 percent versus the complete energy64 shard with no layer-rank-sequence all, prefill-late, or decode-late window worsening by more than 5 percent.
+  budget_or_stop_rule: One deterministic CPU pre-screen over the frozen four capture indexes and, only on proxy pass, one 48-layer candidate replay on physical NPU4 bounded to 5400 seconds. Reuse hash-bound prior dense and energy64 evidence; do not run a model service, endpoint benchmark, profiling expansion, mixed-cache implementation, or task accuracy.
+  on_pass: Generate and replay an aligned Dk48 plan with the same selector in a new bounded iteration; only that lower-Dk result can be considered for model integration and endpoint performance.
+  on_failure: Reject kernel-normalized StrongRRQR as the next selector and design a recurrence-aware coordinate objective against the preserved teacher trajectories instead of returning to heterogeneous cache or generic operator work.
+  on_inconclusive: Preserve the evidence and repair only a demonstrated identity, orchestration, or replay defect without changing the frozen fidelity thresholds.
+
+changes:
+  - type: validation
+    description: Add a hash-bound selector comparison that reuses the complete energy64 token-fidelity evidence and the existing native replay path.
+    files:
+      - projects/drror_vllm_ascend/tools/replay_gdn_teacher_selector.py
+      - projects/drror_vllm_ascend/tests/test_replay_gdn_teacher_selector.py
+
+validation_commands:
+  - python3 -m pytest projects/drror_vllm_ascend/tests
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - deterministic normalized-QK proxy over capture indexes 0,4,8,12
+  - at most one candidate-only native-NPU replay on physical NPU4 after proxy admission
+
+lessons_ingested: []
