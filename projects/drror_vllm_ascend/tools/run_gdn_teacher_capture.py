@@ -51,6 +51,8 @@ def parse_args(argv=None):
     parser.add_argument("--build-manifest-sha256", required=True)
     parser.add_argument("--reference-manifest-sha256", required=True)
     parser.add_argument("--worker-sha256", required=True)
+    parser.add_argument("--worker-path", type=Path, default=WORKER)
+    parser.add_argument("--worker-class", default=WORKER_CLASS)
     parser.add_argument("--capture-manifest", type=Path, required=True)
     parser.add_argument("--capture-manifest-sha256", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -66,13 +68,16 @@ def parse_args(argv=None):
         parser.error("capture service budget must be between 1 and 1800 seconds")
     if not 1 <= args.term_grace_seconds <= 30:
         parser.error("TERM grace must be between 1 and 30 seconds")
-    for name in ("build_manifest", "capture_manifest", "output_dir"):
+    for name in ("build_manifest", "capture_manifest", "output_dir", "worker_path"):
         if not getattr(args, name).is_absolute():
             parser.error(name + " must be absolute")
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*",
+                        args.worker_class):
+        parser.error("worker_class must be one explicit module.Class name")
     return parser, args
 
 
-def service_command(executable=None):
+def service_command(executable=None, worker_class=WORKER_CLASS):
     return [
         executable or sys.executable, "-m", "vllm.entrypoints.openai.api_server",
         "--model", MODEL, "--host", "0.0.0.0", "--port", "6666",
@@ -81,7 +86,7 @@ def service_command(executable=None):
         "--max-model-len", "4096", "--max-num-batched-tokens", "4096",
         "--max-num-seqs", "1", "--gpu-memory-utilization", "0.9",
         "--no-enable-prefix-caching", "--enforce-eager",
-        "--worker-cls", WORKER_CLASS,
+        "--worker-cls", worker_class,
     ]
 
 
@@ -124,7 +129,10 @@ def service_environment(args, output, inherited=None):
     }
     env.update(disabled)
     env.update(observer)
-    env["PYTHONPATH"] = str(WORKER.parent) + (os.pathsep + os.pathsep.join(entries) if entries else "")
+    worker_path = getattr(args, "worker_path", WORKER)
+    env["PYTHONPATH"] = str(worker_path.resolve().parent) + (
+        os.pathsep + os.pathsep.join(entries) if entries else ""
+    )
     return env, disabled, observer, inherited_flags
 
 
@@ -135,9 +143,14 @@ def main(argv=None):
     output = args.output_dir.resolve()
     if RESULT_ROOT.resolve() not in output.parents or output.exists():
         parser.error("choose a fresh directory below /drrqr-results")
-    if WORKER.is_symlink() or WORKER.resolve() != ROOT / "tools/gdn_teacher_capture_worker.py":
-        raise ValueError("observer worker must be the explicit non-symlink repository tool")
-    if shared.digest(WORKER) != args.worker_sha256:
+    worker = args.worker_path.resolve()
+    if (
+        args.worker_path.is_symlink()
+        or not worker.is_file()
+        or worker.parent != ROOT / "tools"
+    ):
+        raise ValueError("observer worker must be an explicit non-symlink repository tool")
+    if shared.digest(worker) != args.worker_sha256:
         raise ValueError("observer worker identity differs")
     capture_manifest = shared.read_bound_json(args.capture_manifest, args.capture_manifest_sha256)
     env, disabled, observer, inherited = service_environment(args, output)
@@ -146,7 +159,7 @@ def main(argv=None):
     model_hashes = {name: shared.digest(Path(MODEL) / name) for name in MODEL_HASHES}
     if model_hashes != MODEL_HASHES:
         raise ValueError("original checkpoint metadata identity differs")
-    command = service_command()
+    command = service_command(worker_class=args.worker_class)
     # This is a collision check, never permission to replace an existing owner.
     with socket.socket() as probe:
         probe.bind(("0.0.0.0", 6666))
@@ -158,7 +171,7 @@ def main(argv=None):
         "shared_hf_head_k_dim": 128,
         "tensor_parallel_size": 4, "command": command,
         "calibration_only": True, "enforce_eager": True, "profiler_config": None,
-        "worker": str(WORKER), "worker_class": WORKER_CLASS,
+        "worker": str(worker), "worker_class": args.worker_class,
         "worker_sha256": args.worker_sha256,
         "capture_manifest": str(args.capture_manifest.resolve()),
         "capture_manifest_sha256": args.capture_manifest_sha256,
