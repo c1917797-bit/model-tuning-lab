@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-10",
+  "adapter": {
+    "package": "qwen38-nvfp4-ascend",
+    "version": "0.1.0",
+    "quantization_name": "modelopt_mixed_ascend_bf16_reference",
+    "activation_quantization_emulated": false,
+    "compute_dtype": "bfloat16",
+    "native_nvfp4_fp8_acceleration_claimed": false,
+    "explicit_opt_in": "QWEN38_ENABLE_BF16_REFERENCE=1"
+  },
+  "fixed_image": {
+    "name": "quay.io/ascend/vllm-ascend:v0.23.0",
+    "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "network": "none",
+    "npu_devices_mounted": false,
+    "patch_mount": "read-only"
+  },
+  "validation": {
+    "unit_tests": {
+      "count": 7,
+      "passed": 7,
+      "operation": "exec-000000000000013a"
+    },
+    "real_nvfp4_row": {
+      "tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+      "decoded_values": 5120,
+      "exact_match_to_independent_codec": true,
+      "decoded_sha256": "c7906ca0b5c1f11d2a78ca4522e2ab1d9aa6856201c73b7c66c00966958914d7"
+    },
+    "real_fp8_row": {
+      "tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+      "decoded_values": 6144,
+      "exact_match": true,
+      "decoded_sha256": "4734baae908332217144eb180ebee8893b7d7df467b2d8913fd11beff27afc90"
+    },
+    "real_tensor_operation": "exec-0000000000000136",
+    "plugin_install_and_discovery": {
+      "passed": true,
+      "operation": "exec-0000000000000134"
+    },
+    "official_layer_mapping": {
+      "NVFP4": 193,
+      "FP8": 208,
+      "total": 401,
+      "operation": "exec-000000000000013b"
+    }
+  },
+  "preserved_development_failures": [
+    {
+      "operation": "exec-000000000000012f",
+      "cause": "The first adapter import used a module path that does not exist in vLLM 0.23.0; UnquantizedLinearMethod is in vllm.model_executor.layers.linear."
+    },
+    {
+      "operation": "exec-0000000000000131",
+      "cause": "The initial synthetic expected values omitted local/global scale multiplication and reversed one nibble pair; the adapter matched the independent codec after correcting the test oracle."
+    },
+    {
+      "operation": "exec-0000000000000133",
+      "cause": "Setuptools cannot build directly in a read-only source mount because it creates a local build directory; copying source to the disposable container's /tmp before pip install passed."
+    },
+    {
+      "operation": "exec-0000000000000138",
+      "cause": "Calling upstream create_weights without a tensor-parallel process group is outside the device-free test contract; loading-after-process tests now construct serialized parameters directly."
+    },
+    {
+      "operation": "exec-0000000000000139",
+      "cause": "A synthetic packed-weight fixture defaulted to int64 and was correctly rejected; setting the fixture to the checkpoint's uint8 dtype passed."
+    }
+  ],
+  "scope_limit": "This proves package discovery, fail-closed registration, mixed-layer resolution, exact serialized weight reconstruction, and loading-after-process behavior. It does not prove full-model startup, activation-quantized semantics, NPU correctness, model accuracy, or performance."
+}

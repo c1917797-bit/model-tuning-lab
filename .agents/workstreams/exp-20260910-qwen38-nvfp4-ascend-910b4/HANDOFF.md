@@ -24,6 +24,12 @@
   are multiples of 32. This closes direct reuse for the checkpoint's group-16
   NVFP4 tensors; it is not an NPU execution or speed result.
 - A dependency-free exact-format reference codec and tests are now present.
+- A separately installable vLLM general plugin now registers
+  `modelopt_mixed_ascend_bf16_reference`. It preserves core ModelOpt layer
+  resolution, reconstructs NVFP4/FP8 weights with per-fused-shard scales, uses
+  BF16 linear compute, and refuses construction unless the explicit reference
+  opt-in is set. It does not emulate activation quantization and is therefore
+  an integration/quality upper-bound reference, not the final quantized path.
 - The reference test passed both on the host and in a network-disabled,
   device-free, disposable `quay.io/ascend/vllm-ascend:v0.23.0` container.
 - The fixed image itself contains CANN 9.1.0, Bisheng, ATC, OPP, msprof and
@@ -61,7 +67,10 @@
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
    The current test requires all physical NPU0-7 in one exclusive lease; re-audit
    before any device action and never stop or alter either external workload.
-2. The fixed image needs an external, fail-closed ModelOpt method adapter.
+2. The fixed image now has a device-free validated external, fail-closed
+   ModelOpt BF16 reference adapter, but it has not passed a four-rank model
+   startup. Native or faithfully emulated activation quantization is still
+   required before claiming the official NVFP4/FP8 runtime semantics.
    Native reuse of the ops-transformer FP4 path is closed for 910B4/group16.
    The next correctness-first implementation is exact ModelOpt NVFP4 and FP8
    decoding to BF16 weights at load time. That path can establish checkpoint
@@ -77,12 +86,12 @@
 1. Reuse and unit-test vLLM core's `ModelOptMixedPrecisionConfig` layer
    resolution, then implement a guarded external plugin which enables the
    method only for this contract and returns Ascend-specific per-layer methods.
-2. Implement the smallest exact load-time BF16 fallback for both the 193
-   group-16 NVFP4 layers and 208 calibrated FP8 layers. Keep core
-   `ModelOptMixedPrecisionConfig` parsing and layer resolution; fail closed
-   on any unmatched tensor, method, shape, dtype, or scale contract.
-3. Validate decoded tensors against the independent codec, then gate TP4 M=1
-   Qwen shapes for correctness. Record memory and load-time cost honestly.
+2. On the next valid device lease, start the BF16-compute reference plugin
+   through a read-only mount and disposable installation. Require four-rank
+   activation and record load-time plus per-rank memory before any request.
+3. Run deterministic smoke and a small paired quality canary. Label these
+   results as weight-fidelity BF16-compute reference results because activation
+   quantization is not yet emulated.
 4. Only after the reference adapter passes, evaluate a 910B4 group-16
    stream-dequant + BF16 Cube operator against it; do not port arch35 code.
 5. Integrate through a read-only mounted plugin in a
@@ -131,6 +140,13 @@
   `exec-000000000000011e`. Configuration and arch22 host compilation passed,
   298 kernel objects were generated, and no full-build or FP4 capability claim
   is made.
+- BF16 reference adapter tests: unit/load-after-process
+  `exec-000000000000013a` (7/7 pass); real checkpoint NVFP4 and FP8 rows
+  `exec-0000000000000136` (5120 and 6144 values, exact); standard package
+  install and vLLM entry-point discovery `exec-0000000000000134`; all 401
+  official layer mappings `exec-000000000000013b` (193 NVFP4, 208 FP8).
+  Detailed evidence and preserved development failures are in
+  `reference-adapter-evidence.json`.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.
