@@ -419,6 +419,37 @@ class V023PrefillTests(unittest.TestCase):
 
 
 class V023DecodeTests(unittest.TestCase):
+    def test_decode_observer_preserves_raw_identity_through_existing_wrapper(self):
+        calls = []
+
+        class Gdn:
+            prefix = "layer"
+
+            def _forward_core(self, mixed_qkv, b, a, core_attn_out):
+                calls.append("raw")
+                return core_attn_out
+
+            def rearrange_mixed_qkv(self, packed):
+                return None, None, None
+
+        raw_core = Gdn._forward_core
+
+        def existing_wrapper(self, mixed_qkv, b, a, core_attn_out):
+            calls.append("wrapper")
+            return raw_core(self, mixed_qkv, b, a, core_attn_out)
+
+        existing_wrapper._drror_core_original = raw_core
+        Gdn._forward_core = existing_wrapper
+        module = types.SimpleNamespace(
+            get_forward_context=lambda: types.SimpleNamespace(attn_metadata={})
+        )
+        gdn.install_decode_observer(Gdn, module, DrrqrConfig(enable=True))
+        installed = Gdn._forward_core
+        self.assertIs(installed._drror_core_original, raw_core)
+        output = object()
+        self.assertIs(Gdn()._forward_core(None, None, None, output), output)
+        self.assertEqual(calls, ["wrapper", "raw"])
+
     def test_decode_observer_preserves_core_and_records_actual_shapes(self):
         for dk in (32, 64, 96, 112):
             with self.subTest(dk=dk), tempfile.TemporaryDirectory(prefix="drror-decode-") as directory:

@@ -173,6 +173,10 @@ def install_decode_observer(gdn_cls, gdn_module, config: DrrqrConfig) -> None:
         return result
 
     core._drror_decode_config = identity
-    core._drror_core_original = original_core
+    # Keep calling the immediately wrapped implementation, but preserve the
+    # raw Ascend core as the provenance anchor when observers are layered.
+    core._drror_core_original = getattr(
+        original_core, "_drror_core_original", original_core
+    )
     gdn_cls._forward_core = core
     gdn_cls.rearrange_mixed_qkv = rearrange
