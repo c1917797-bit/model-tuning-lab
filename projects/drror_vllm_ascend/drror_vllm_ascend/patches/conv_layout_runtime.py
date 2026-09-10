@@ -24,7 +24,7 @@ def validate_config(vllm_config):
                 "hidden_size": 5120, "num_hidden_layers": 64}
     if any(getattr(text, key, None) != value for key, value in expected.items()):
         raise RuntimeError("conv layout: unsupported Qwen dimensions")
-    if text.linear_key_head_dim not in (32, 64, 96, 112, 128):
+    if text.linear_key_head_dim not in (32, 64, 80, 96, 112, 128):
         raise RuntimeError("conv layout: unsupported key dimension")
     expected_types = ["linear_attention" if i in LINEAR_LAYERS else "full_attention" for i in range(64)]
     if list(text.layer_types) != expected_types:
@@ -51,7 +51,7 @@ def prepare_model(model, gdn_cls, *, expected_dk, require_npu=True):
     if isinstance(expected_dk, dict):
         if set(expected_dk) != LINEAR_LAYERS:
             raise RuntimeError("conv layout: expected width map for all 48 layers")
-        if any(type(dk) is not int or dk not in (32, 64, 96, 112, 128)
+        if any(type(dk) is not int or dk not in (32, 64, 80, 96, 112, 128)
                for dk in expected_dk.values()):
             raise RuntimeError("conv layout: invalid per-layer width")
     targets = []

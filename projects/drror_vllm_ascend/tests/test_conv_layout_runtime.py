@@ -75,6 +75,15 @@ class ConvRuntimeTests(unittest.TestCase):
         self.assertTrue(all(torch.equal(module.conv1d.weight, original)
                             for (_, module), original in zip(model.targets, before)))
 
+    def test_dk80_all_targets_exact(self):
+        model = Model(dk=80)
+        before = [module.conv1d.weight.detach().clone() for _, module in model.targets]
+        rows = runtime.prepare_model(model, Gdn, expected_dk=80, require_npu=False)
+        self.assertEqual(len(rows), 48)
+        self.assertTrue(all(row["shape"] == [2176, 1, 4] for row in rows))
+        self.assertTrue(all(torch.equal(module.conv1d.weight, original)
+                            for (_, module), original in zip(model.targets, before)))
+
     def test_layerwise_widths_checked_before_repacking(self):
         dims = {i: (128 if i == 50 else 32 if i in (8, 22) else 64)
                 for i in runtime.LINEAR_LAYERS}
