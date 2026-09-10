@@ -82,6 +82,13 @@
   prompt locally with that tokenizer, records its SHA256, appends the full raw
   response, and fails fast on request error. Its fixed-image unit tests pass;
   it has not sent model requests while NPU0-3 are unavailable.
+- HumanEval is now executable only through a bounded CPU sandbox: no network,
+  read-only root, no capabilities, no privilege escalation, and explicit CPU,
+  memory, PID and per-test limits. The shared evaluator is mounted read-only;
+  its recognized execution guard is validated in a temporary copy. The
+  official example executed six completions and correctly separated three
+  passes from three failures/timeouts (pass@1 0.5). Full response preparation
+  and paired 164-task pass@1 comparison code has fixed-image unit coverage.
 
 ## Current blockers
 
@@ -181,6 +188,13 @@
 - Quality request runner fixed-image, device-free tests:
   `exec-0000000000000163` (2/2 pass); updated launcher syntax validation:
   `exec-0000000000000164`.
+- HumanEval sandbox development failures before execution or due input naming:
+  `exec-0000000000000002`, `exec-0000000000000003`, and
+  `exec-0000000000000008`; all are preserved in
+  `quality-protocol-evidence.json`. Successful functional smoke:
+  `exec-000000000000000c`, 3/6 pass and pass@1 0.5; result artifact SHA256
+  `9e47a72acc1ffe3440a15f000f54a7b56233d34c8347a8085c728a52e2673db3`.
+  HumanEval preparation/scorer unit tests: `exec-0000000000000017`, 4/4 pass.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

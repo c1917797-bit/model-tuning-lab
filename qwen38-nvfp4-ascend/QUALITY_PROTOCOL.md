@@ -51,6 +51,14 @@ HumanEval execution must occur after generation in a restricted, disposable,
 network-disabled CPU container with a per-test timeout.  Never execute generated
 code on the host or in an NPU-serving container.
 
+The cached upstream HumanEval checkout may keep its actual `exec` line either
+commented or explicitly enabled. `run_humaneval_sandbox.sh` mounts that checkout
+read-only, copies it into the disposable container's temporary filesystem,
+verifies exactly one recognized guard-line state, and enables it only in that
+temporary copy when required. Any other source state fails closed. The outer container has no network,
+a read-only root, no Linux capabilities, no privilege escalation, and explicit
+CPU, memory, PID and per-test time limits.
+
 `score_text_quality.py` performs strict MMLU/GSM8K parsing, population checks,
 rendered-prompt identity checks and paired disagreement reporting. HumanEval is
 kept separate because its official functional-correctness evaluator executes
@@ -60,6 +68,11 @@ untrusted generated code.
 tokenizer, records its SHA256, sends the corresponding chat or completion
 request, and appends the full raw response before advancing. It is resumable by
 request ID and fails fast on the first request error.
+
+`prepare_humaneval_samples.py` converts raw responses without rewriting model
+code, and `score_humaneval_quality.py` enforces the complete 164-task paired
+population, identical rendered prompts, pass@1 scoring and a per-task outcome
+disagreement report.
 
 The quality gate is fail closed:
 

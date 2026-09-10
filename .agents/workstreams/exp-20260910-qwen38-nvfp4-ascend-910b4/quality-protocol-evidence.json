@@ -27,7 +27,8 @@
     "humaneval": {
       "tasks": 164,
       "compressedSourceSha256": "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef",
-      "requestManifestSha256": "7b67cbb94935a0a7ac6e96aa208324097d67847001db2456ca6117a555362597"
+      "requestManifestSha256": "7b67cbb94935a0a7ac6e96aa208324097d67847001db2456ca6117a555362597",
+      "executionHarnessSha256": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c"
     }
   },
   "validation": [
@@ -50,11 +51,24 @@
     {
       "operation": "exec-0000000000000163",
       "result": "quality request runner unit tests 2/2 pass in the fixed image, network disabled, no NPU devices"
+    },
+    {
+      "operation": "exec-000000000000000c",
+      "result": "sandboxed upstream HumanEval example executed 6 completions: 3 pass, 3 fail/timeout, pass@1 0.5"
+    },
+    {
+      "operation": "exec-0000000000000017",
+      "result": "HumanEval preparation and paired scorer unit tests 4/4 pass in the fixed image, network disabled, no NPU devices"
     }
   ],
   "limitations": [
     "No model response, accuracy, or performance result is claimed.",
     "Rendered chat-template prompt hashes can only be compared after each serving arm is started.",
     "HumanEval generated code must be executed only in a restricted disposable CPU container."
+  ],
+  "preservedFailures": [
+    "exec-0000000000000002: sandbox requested 8 CPUs but the current execution node exposes at most 7; limit reduced to 4 before any code ran.",
+    "exec-0000000000000003: source guard expected a commented exec line but the live read-only checkout had an enabled line; runner now accepts exactly one known state and otherwise fails closed.",
+    "exec-0000000000000008: plain JSONL example was mounted with a gzip suffix; mount target now preserves compression state."
   ]
 }
