@@ -16,13 +16,20 @@
   `exec-00000000000013ad`, using `hf-mirror` with Xet disabled and a
   resumable local directory at `/cache/cch/Qwen3.8-27B-NVFP4`.
 - A fail-closed checkpoint inspector passes host and fixed-image tests.
+- One real row from the already complete third shard was independently decoded
+  against NVIDIA ModelOpt commit
+  `079078de9d3cd26fa5baafdb754bba29dde24f7d`: all 5,120 values matched
+  exactly (maximum absolute error `0.0`). This proves the packed-nibble,
+  FP8-local-scale and FP32-global-scale semantics for that sampled tensor; it
+  does not yet prove checkpoint completeness or end-to-end accuracy.
 - No NPU kernel, performance result, or accuracy result is claimed yet.
 
 ## Current blockers
 
-1. The official NVFP4 checkpoint download is still incomplete. Do not inspect
-   real tensors or start serving until the operation completes and the shard
-   index passes the checkpoint inspector.
+1. The official NVFP4 checkpoint download is still incomplete. Partial shards
+   may be inspected read-only, but do not declare checkpoint completeness or
+   start serving until the operation completes and the full shard index passes
+   the checkpoint inspector.
 2. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
    Re-audit before any device action and never stop those workloads.
@@ -30,8 +37,8 @@
 ## Next actions
 
 1. Poll `exec-00000000000013ad`; after completion, run
-   `inspect_checkpoint.py`, record identities and compare sampled decoded
-   tensors with an independent ModelOpt/vLLM reference.
+   `inspect_checkpoint.py`, record identities and extend the independent
+   ModelOpt comparison to representative tensors from every completed shard.
 2. Implement the group-16 stream-dequant + BF16 Cube direct AscendC operator,
    building inside the fixed image with source/output bind mounts.
 3. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
@@ -46,6 +53,10 @@
 - Fixed-image CANNBot environment: CANN 9.1.0, pass with one non-blocking
   runtime-library-path warning.
 - Checkpoint inspector host and fixed-image tests: pass.
+- Real `lm_head.weight` row-0 ModelOpt cross-check:
+  `exec-00000000000013cd`, exact match, maximum absolute error `0.0`,
+  packed-row SHA256
+  `31c1dd3c007d2daca930d927d6217ade2a96ba42826bfd3ae8073c22d7f0c4d7`.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

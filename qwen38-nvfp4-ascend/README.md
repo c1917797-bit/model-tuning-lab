@@ -53,3 +53,11 @@ completeness before any conversion or serving attempt:
 python3 qwen38-nvfp4-ascend/inspect_checkpoint.py \
   /cache/cch/Qwen3.8-27B-NVFP4
 ```
+
+Cross-check a real packed row against the independently pinned NVIDIA
+ModelOpt dequantization semantics:
+
+```bash
+python3 qwen38-nvfp4-ascend/validate_real_tensor.py \
+  /cache/cch/Qwen3.8-27B-NVFP4 --tensor lm_head.weight --row 0
+```

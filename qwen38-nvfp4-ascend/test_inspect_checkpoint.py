@@ -1,4 +1,5 @@
 import json
+import struct
 import tempfile
 from pathlib import Path
 
@@ -31,21 +32,52 @@ def _fixture(root: Path, group_size: int = 16) -> None:
             },
         },
     )
+    shard = "model-00001.safetensors"
     _write_json(
         root / "model.safetensors.index.json",
-        {"weight_map": {"model.layers.0.mlp.gate_proj.weight": "model-00001.safetensors"}},
+        {
+            "weight_map": {
+                "model.layers.0.mlp.gate_proj.weight": shard,
+                "model.layers.0.mlp.gate_proj.weight_scale": shard,
+                "model.layers.0.mlp.gate_proj.weight_scale_2": shard,
+            }
+        },
     )
+
+
+def _write_test_shard(path: Path) -> None:
+    header = {
+        "model.layers.0.mlp.gate_proj.weight": {
+            "dtype": "U8",
+            "shape": [32, 8],
+            "data_offsets": [0, 0],
+        },
+        "model.layers.0.mlp.gate_proj.weight_scale": {
+            "dtype": "F8_E4M3",
+            "shape": [32, 1],
+            "data_offsets": [0, 0],
+        },
+        "model.layers.0.mlp.gate_proj.weight_scale_2": {
+            "dtype": "F32",
+            "shape": [],
+            "data_offsets": [0, 0],
+        },
+    }
+    raw = json.dumps(header).encode("utf-8")
+    path.write_bytes(struct.pack("<Q", len(raw)) + raw)
 
 
 def test_complete_checkpoint() -> None:
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory)
         _fixture(root)
-        (root / "model-00001.safetensors").touch()
+        _write_test_shard(root / "model-00001.safetensors")
         result = inspect_checkpoint(root)
         assert result["complete"]
         assert result["algorithms"] == {"FP8": 1, "NVFP4": 1}
         assert result["nvfp4_group_sizes"] == [16]
+        assert result["validated_nvfp4_layers"] == 1
+        assert result["nvfp4_tensor_contract_errors"] == []
 
 
 def test_missing_shard_is_reported() -> None:
@@ -74,4 +106,3 @@ if __name__ == "__main__":
     test_missing_shard_is_reported()
     test_group32_substitution_is_rejected()
     print("PASS: checkpoint contract inspector")
-

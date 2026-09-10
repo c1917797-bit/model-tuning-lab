@@ -1,6 +1,6 @@
 schema: ascend-inference-experiment/v1
 id: exp-20260910-qwen38-nvfp4-ascend-910b4
-status: device_free_reference_codec_verified
+status: partial_real_tensor_contract_verified
 decision: continue_group16_ascendc_feasibility
 objective: >-
   Reproduce nvidia/Qwen3.8-27B-NVFP4 on Ascend 910B4 and compare it with
@@ -38,6 +38,15 @@ device_free_evidence:
   result: pass
   checkpoint_inspector: qwen38-nvfp4-ascend/inspect_checkpoint.py
   checkpoint_inspector_result: pass on host and fixed image
+  real_tensor_reference:
+    operation: exec-00000000000013cd
+    modelopt_commit: 079078de9d3cd26fa5baafdb754bba29dde24f7d
+    tensor: lm_head.weight
+    row: 0
+    decoded_values: 5120
+    exact_match: true
+    max_abs_error: 0.0
+    packed_row_sha256: 31c1dd3c007d2daca930d927d6217ade2a96ba42826bfd3ae8073c22d7f0c4d7
   build_environment:
     image: quay.io/ascend/vllm-ascend:v0.23.0
     cann: 9.1.0
