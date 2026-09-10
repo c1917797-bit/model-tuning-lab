@@ -25,23 +25,34 @@ def parse_args(argv=None):
     parser.add_argument("--plan-sha", default=PLAN_SHA)
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--plugin-version",
-                        choices=("0.1.7", "0.1.8", "0.1.9", "0.1.10", "0.1.11"),
+                        choices=("0.1.7", "0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12"),
                         default="0.1.7")
     parser.add_argument("--prefill-mc2", action="store_true")
     parser.add_argument("--prefill-mc2-mixed", action="store_true")
     parser.add_argument("--diagnostic-mc2-coverage", action="store_true")
     parser.add_argument("--diagnostic-determinism", action="store_true",
                         help="Preserve GDN operators; diagnose with deterministic torch/HCCL/LCCL settings")
+    parser.add_argument("--prefill-diagnostic", action="store_true")
+    parser.add_argument("--prefill-diagnostic-tokens", type=int, default=32768)
     args = parser.parse_args(argv)
-    if args.prefill_mc2 and args.plugin_version not in ("0.1.8", "0.1.9", "0.1.10", "0.1.11"):
+    if args.prefill_mc2 and args.plugin_version not in ("0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12"):
         parser.error("prefill MC2 requires an explicitly selected compatible local build")
     if args.prefill_mc2_mixed and (
-            not args.prefill_mc2 or args.plugin_version not in ("0.1.9", "0.1.10", "0.1.11")):
+            not args.prefill_mc2 or args.plugin_version not in ("0.1.9", "0.1.10", "0.1.11", "0.1.12")):
         parser.error("mixed-batch MC2 requires MC2 ON and an explicit compatible local build")
     if args.diagnostic_mc2_coverage and (not args.prefill_mc2 or args.profile or args.diagnostic_determinism):
         parser.error("MC2 coverage requires MC2 ON and excludes profiler/determinism diagnostics")
     if args.diagnostic_mc2_coverage and args.plugin_version != "0.1.8":
         parser.error("historical coverage worker is pinned to the0.1.8 adapter")
+    if args.prefill_diagnostic and (
+        args.variant == "baseline"
+        or args.plugin_version != "0.1.12"
+        or args.profile
+        or args.diagnostic_mc2_coverage
+        or args.diagnostic_determinism
+        or args.prefill_diagnostic_tokens <= 0
+    ):
+        parser.error("prefill diagnostic requires a reduced 0.1.12 treatment and excludes other diagnostics/profile")
     return parser, args
 
 
@@ -111,7 +122,7 @@ def main():
         "VLLM_ASCEND_ENABLE_FLASHCOMM1", "VLLM_BATCH_INVARIANT",
         "HCCL_OP_EXPANSION_MODE", "HCCL_DETERMINISTIC", "LCCL_DETERMINISTIC",
     )}
-    if args.plugin_version in ("0.1.8", "0.1.9", "0.1.10", "0.1.11"):
+    if args.plugin_version in ("0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12"):
         if runtime_env["VLLM_ASCEND_ENABLE_NZ"] not in (None, "1"):
             raise RuntimeError("MC2 experiment must retain original BF16 ND weight policy")
         for name in ("VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE", "VLLM_ASCEND_ENABLE_FLASHCOMM1", "VLLM_BATCH_INVARIANT"):
@@ -123,6 +134,8 @@ def main():
         "VLLM_ASCEND_DRRQR_CONV_LAYOUT": "1" if args.layout == "packed" else "0",
         "VLLM_ASCEND_DRRQR_PREFILL_MC2": "1" if args.prefill_mc2 else "0",
         "VLLM_ASCEND_DRRQR_PREFILL_MC2_MIXED": "1" if args.prefill_mc2_mixed else "0",
+        "VLLM_ASCEND_DRRQR_PREFILL_DIAGNOSTIC": "1" if args.prefill_diagnostic else "0",
+        "VLLM_ASCEND_DRRQR_PREFILL_DIAGNOSTIC_TOKENS": str(args.prefill_diagnostic_tokens),
         "VLLM_ASCEND_DRRQR_PLAN_PATH": str(plan),
         "VLLM_ASCEND_DRRQR_PLAN_SHA256": args.plan_sha,
         "VLLM_ASCEND_DRRQR_EVIDENCE_FILE": str(output / "evidence.jsonl"),
@@ -162,6 +175,8 @@ def main():
         "schema": "drrqr-conv-layout-service/v1", "variant": args.variant, "layout": args.layout,
         "plugin_version": args.plugin_version, "prefill_mc2": args.prefill_mc2,
         "prefill_mc2_mixed": args.prefill_mc2_mixed,
+        "prefill_diagnostic": args.prefill_diagnostic,
+        "prefill_diagnostic_tokens": args.prefill_diagnostic_tokens,
         "command": command, "profiler_config": profiler, "plugin_flags": flags,
         "installed_plugin": str(installed), "module_sha256": observed,
         "build_manifest_sha256": digest(args.build_manifest), "wheel_sha256": build["wheel_sha256"],
