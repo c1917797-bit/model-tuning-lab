@@ -125,6 +125,19 @@
   next DRRQR iteration must test a materially different structured
   recurrence-compensation/subspace design with an explicit foldability and
   Ascend cost model before any operator work.
+- The drrqr-pairwise-orthogonal-projection-v1 iteration is complete and
+  rejected. Its at-most-two-sparse orthonormal Dk64 transforms and static cost
+  gate were valid, but three-fold cross-validation over calibration indices
+  0-11 made post-RMS relative-L2 75.012854 percent worse than frozen
+  energy-Dk64. Only 9/96 heads were non-worse and the worst head ratio was
+  4.511841; state relative-L2 improved only 0.390987 percent. Previously viewed
+  indices 12-15 were not used. No fresh capture, NPU replay, integration,
+  endpoint benchmark or task accuracy followed. Report SHA256:
+  16cd56031ca22fee6a934f8a154731bd9cb6d9eb39fdb86f7d5dbe464c04cb75.
+  Stop nearby sparse-subspace variants. The next algorithmic test should keep
+  dense prefill and exact first-token state construction, then transition once
+  to aligned energy-Dk64 state for decode, with cache conversion and phase
+  identity designed explicitly before endpoint work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -212,12 +225,12 @@ For a new maintainer, start by treating this repository as ready for handoff but
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
 2. For Qwen3.8 DRRQR, treat the completed and independently audited
    drrqr-rich-state-calibration-capture-v1 corpus as frozen selector input and
-   the corrected recurrent-transition-selector-v2 result as a rejection of
-   bounded recurrence-weighted coordinate exchange. Do not tune another nearby
-   Q/K coordinate-score grid. Predeclare one materially different structured
-   recurrence-compensation/subspace design, including how it can be folded or
-   executed cheaply on Ascend, and use fit-only/cross-validation without
-   claiming the already-viewed indices 12-15 as fresh final admission evidence.
+   the corrected recurrent-transition-selector-v2 and porp-cv-v1 results as
+   rejections of bounded coordinate exchange and sparse subspace replacement.
+   Do not tune nearby Q/K score or pairwise-projection variants. Predeclare a
+   dense-prefill to aligned-Dk64-decode transition, including state/conv-cache
+   conversion, scheduler and graph identity, and a dual-path weight strategy
+   with a portable fallback.
    Do not implement the rejected mixed-Dk cache plan, broaden profiling, or run
    final accuracy before a replacement candidate passes its numerical gate and
    a fixed-1024-token endpoint screen.
@@ -304,6 +317,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-aligned-width-replay-v1.yaml
 .agents/evals/practice-iterations/drrqr-full-layer-sensitivity-budget-v1.yaml
 .agents/evals/practice-iterations/drrqr-recurrent-trajectory-selector-v1.yaml
+.agents/evals/practice-iterations/drrqr-pairwise-orthogonal-projection-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md

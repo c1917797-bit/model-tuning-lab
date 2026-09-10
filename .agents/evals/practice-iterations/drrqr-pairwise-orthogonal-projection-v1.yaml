@@ -1,0 +1,119 @@
+schema: mst-practice-iteration/v1
+id: drrqr-pairwise-orthogonal-projection-v1
+repository: model-tuning-lab
+status: complete_rejected
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Determine whether a two-sparse orthonormal Dk64 projection can preserve recurrent GDN trajectories materially better than frozen energy-Dk64 while retaining a credible low-overhead Ascend implementation.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen energy-Dk64 reaches only 4.752041 percent endpoint gain and lacks accepted same-stack max_tokens 2048 quality. Exact StrongRRQR, equal-budget mixed widths, Q/K-only selectors and bounded recurrence-weighted coordinate exchange did not pass their numerical gates.
+  medium_term_milestone: A Dk64 state-reduction transform with materially lower recurrent trajectory error than energy-Dk64 and an explicit implementation seam that can retain net decode savings on Ascend.
+  short_term_decision: Decide whether disjoint two-coordinate orthonormal projections improve out-of-fold post-RMS and state fidelity enough to justify collecting a fresh, untouched admission set.
+  deciding_evidence: Use only frozen calibration indices 0-11 in three predeclared cross-validation folds. Compare out-of-fold reconstruction with the exact frozen energy-Dk64 plan. Require at least 10 percent lower aggregate post-RMS relative-L2, non-worse aggregate selected-state relative-L2, all folds positive, at least 72 of 96 layer/rank/head groups non-worse, no group worse by more than 5 percent, exact rank 64, orthonormal columns, two nonzeros per column, finite outputs and a static operation-count showing projection overhead below 10 percent of the recurrent arithmetic removed by Dk128 to Dk64.
+  budget_or_stop_rule: One implementation of the fixed analytic Gram and deterministic matching rule below. No weight grid, angle grid, head-specific thresholds, NPU work, endpoint benchmark or task accuracy in this iteration.
+  on_pass: Freeze the transform and implementation contract, collect new non-evaluation calibration rows not used by any prior selector, and run a separate admission iteration before native-NPU eager/state/NPUGraph replay.
+  on_failure: Preserve and reject the two-sparse projection implementation. Diagnose whether the limitation is basis expressivity or recurrence approximation, then choose a different low-rank state representation rather than tuning pair weights or folds.
+  on_inconclusive: Fix only a demonstrated equation, identity, orthogonality, split-isolation or numerical-analysis defect, then rerun once without changing the algorithm or gates.
+
+algorithm_contract:
+  name: Pairwise Orthonormal Recurrent Projection
+  abbreviation: PORP
+  input_width: 128
+  target_width: 64
+  transform: U is 128 by 64. Every column is supported within one disjoint coordinate pair, every input coordinate belongs to exactly one pair, and U transpose U equals identity.
+  reduced_recurrence:
+    q_reduced: l2norm(raw_q times U)
+    k_reduced: l2norm(raw_k times U)
+    state_shape: value_width by 64
+    equation: S_t = exp(g_t) * S_(t-1) + beta_t * (v_t - exp(g_t) * S_(t-1) @ k_reduced_t) outer k_reduced_t
+    readout: o_t = S_t @ q_reduced_t / sqrt(64)
+  gram_construction:
+    components:
+      - dense-state readout coordinate influence
+      - key-feedback coordinate influence
+      - direct state-write coordinate influence
+    normalization: Normalize each component Gram by its trace, then sum the three normalized positive-semidefinite Grams with fixed equal weight.
+    fitting_scope: Per layer/rank/head using training folds only.
+  pairing:
+    anchors: The 64 coordinates selected by the frozen energy-Dk64 plan.
+    partners: The 64 coordinates discarded by the frozen energy-Dk64 plan.
+    pair_cost: For each anchor/partner 2 by 2 Gram block, use its smaller eigenvalue as retained rank-one residual; maximize improvement over dropping the partner.
+    assignment: Deterministic minimum-cost bipartite assignment with lexicographic tie-breaking.
+    direction: Unit leading eigenvector of the assigned 2 by 2 Gram block with deterministic sign.
+  baseline_identity: The energy comparator must have zero changed coordinates, no projection mixing and exact plan hash b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c.
+  portability: The transform depends only on model activations and GDN algebra. Device timing, kernel names, memory addresses, card model and CANN-version thresholds are prohibited from fitting.
+
+ascend_implementation_contract:
+  seam: Apply the two-sparse projection to causal-convolution raw Q/K, then perform reduced-width L2 normalization before recurrent state update.
+  foldability_limit: Do not claim exact folding through the preceding depthwise causal convolution because distinct per-channel convolution kernels do not generally commute with a mixed projection.
+  candidate_path: An explicitly named opt-in plugin operator may fuse two-sparse raw-Q/K projection, reduced-width L2 normalization and recurrent update/readout while storing only Dk64 state.
+  generic_fallback: A portable gather-FMA projection plus standard reduced-width L2 normalization and the aligned Dk64 recurrent operator must remain available for other supported Ascend environments.
+  forbidden_claims:
+    - CPU replay proves NPU speed
+    - arithmetic reduction proves endpoint throughput
+    - a 910B-specific kernel is portable without fallback
+
+cross_validation:
+  fit_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  folds:
+    - validation: [0, 3, 6, 9]
+      train: [1, 2, 4, 5, 7, 8, 10, 11]
+    - validation: [1, 4, 7, 10]
+      train: [0, 2, 3, 5, 6, 8, 9, 11]
+    - validation: [2, 5, 8, 11]
+      train: [0, 1, 3, 4, 6, 7, 9, 10]
+  prohibited_as_fresh_admission: [12, 13, 14, 15]
+  rationale: Indices 12-15 were already viewed by the rejected RTS iteration and cannot support a new untouched admission claim.
+
+inputs:
+  capture_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/rich-state-calibration-capture-v1
+  capture_audit_sha256: edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5
+  archive_set_sha256: d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20
+  baseline_plan_sha256: b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c
+
+changes:
+  - Implemented equal-trace read, key-feedback and state-write influence Grams from frozen dense GDN trajectories.
+  - Implemented deterministic energy-anchor to discarded-coordinate assignment and an at-most-two-sparse orthonormal Dk64 basis.
+  - Implemented raw-Q/K projection followed by reduced-width normalization, projected-state recurrence replay and a static Ascend arithmetic screen.
+  - Added focused tests for Gram validity, deterministic orthonormal pairing, exact one-hot energy semantics and operation-count claim boundaries.
+  - Completed the predeclared three-fold cross-validation over indices 0-11 without loading the previously viewed indices 12-15.
+validation_commands:
+  - focused tests for Gram PSD/symmetry, deterministic pairing, at-most-two-sparse orthonormality, exact energy baseline identity, generalized projected recurrence and fold isolation
+  - full project software test suite
+  - one CPU cross-validation run over indices 0-11
+  - independent report and transform audit
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+results:
+  operation_id: exec-000000000000131d
+  duration_ms: 558095
+  artifact_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/porp-cv-v1
+  started_sha256: 2d7d2398305988f2bdf6500a6f5848382cd47c55081c6b29de31ecb2d1bc9269
+  cv_transforms_sha256: a32f5ab303c2242800cc97141704150f5dc4bda5b41050535b89955768f1868e
+  report_sha256: 16cd56031ca22fee6a934f8a154731bd9cb6d9eb39fdb86f7d5dbe464c04cb75
+  script_sha256: b474ee7cc3dd623932084938d899dc561cf632a20f8523c8fcbe4e2f6d44e8e5
+  post_rms_improvement: -0.7501285363264663
+  state_improvement: 0.003909871661288089
+  nonworse_heads: 9
+  total_heads: 96
+  worst_head_ratio: 4.511841026765688
+  fold_post_rms_improvements:
+    - -0.749572302366676
+    - -0.7878680245540959
+    - -0.7183869636077913
+  all_transforms_valid: true
+  projection_over_removed_arithmetic_ratio: 0.001953125
+  disposition: rejected
+  scope: Reject PORP v1 and nearby pairwise sparse-subspace variants. Do not infer an NPU endpoint or task-accuracy result.
+
+lessons_ingested:
+  - Coordinate replacement around energy-Dk64 was too locally constrained and produced heterogeneous head regressions.
+  - A structured projection may retain information from all 128 coordinates while keeping a 64-wide recurrent state.
+  - Runtime viability must be designed before numerical promotion; depthwise convolution prevents casually claiming free weight folding.
+  - Previously viewed heldout data is not fresh evidence, even when the prior algorithm was invalid for a different reason.
+  - Valid orthonormality and low estimated projection overhead did not preserve recurrent output geometry: every fold regressed post-RMS by more than 71 percent.
+  - The next iteration should preserve dense prefill/initial-state construction and reduce only decode state, rather than replacing the feature basis throughout the sequence.
