@@ -16,7 +16,7 @@ from run_profile_service import PLAN_SHA, digest
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--variant", choices=("baseline", "dk64", "dk32"), required=True)
+    parser.add_argument("--variant", choices=("baseline", "dk80", "dk64", "dk32"), required=True)
     parser.add_argument("--layout", choices=("original", "packed"), required=True)
     parser.add_argument("--build-manifest", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)

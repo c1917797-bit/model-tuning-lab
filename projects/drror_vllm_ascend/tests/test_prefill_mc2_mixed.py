@@ -146,3 +146,6 @@ class MixedMC2Tests(unittest.TestCase):
         self.assertEqual(parsed.variant, "dk32")
         self.assertEqual(parsed.plan_path, Path("/drrqr-results/dk32.json"))
         self.assertEqual(parsed.plan_sha, "a" * 64)
+        dk80 = [*base]
+        dk80[1] = "dk80"
+        self.assertEqual(parse_args(dk80 + valid)[1].variant, "dk80")
