@@ -36,6 +36,20 @@ device_free_evidence:
   host_test_operation: exec-0000000000001386
   fixed_image_test_operation: exec-000000000000138c
   result: pass
+  checkpoint_inspector: qwen38-nvfp4-ascend/inspect_checkpoint.py
+  checkpoint_inspector_result: pass on host and fixed image
+  build_environment:
+    image: quay.io/ascend/vllm-ascend:v0.23.0
+    cann: 9.1.0
+    tools: [bisheng, atc, opp, msprof, cannsim]
+    cannbot_environment_check: pass
+checkpoint_acquisition:
+  source: nvidia/Qwen3.8-27B-NVFP4
+  endpoint: https://hf-mirror.com
+  xet_disabled: true
+  operation: exec-00000000000013ad
+  local_dir: /cache/cch/Qwen3.8-27B-NVFP4
+  state: downloading_resumable
 live_state_20260910:
   chip_probe_operation: exec-0000000000001385
   detected_chip: Ascend910B4
@@ -50,4 +64,3 @@ next_gate: >-
   Validate official checkpoint tensors, then require an exact group-16
   stream-dequant plus BF16 Cube operator to pass correctness and repeated M=1
   Qwen-shape latency before framework integration.
-

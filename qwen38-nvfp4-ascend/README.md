@@ -46,3 +46,10 @@ Run the device-free codec check with:
 python3 qwen38-nvfp4-ascend/test_nvfp4_codec.py
 ```
 
+After downloading the official snapshot, fail closed on format and shard
+completeness before any conversion or serving attempt:
+
+```bash
+python3 qwen38-nvfp4-ascend/inspect_checkpoint.py \
+  /cache/cch/Qwen3.8-27B-NVFP4
+```
