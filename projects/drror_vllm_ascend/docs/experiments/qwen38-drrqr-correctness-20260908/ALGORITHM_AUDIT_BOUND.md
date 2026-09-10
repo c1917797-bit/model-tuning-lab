@@ -95,6 +95,17 @@ insufficient training-token coverage, not a proven endpoint or state-fidelity
 gain. Report SHA256:
 32ce108ce430e81e221547b6b9244d47a9971ddab5d54cad4ae9bc500dd1b38a.
 
+The predeclared regularized check then increased training coverage from 16 to
+64 tokens per calibration capture and limited the search to one swap per head.
+It improved 82/96 held-out heads, had no head regression over 5%, and kept every
+Q/K energy ratio above 0.991. Nevertheless aggregate held-out RMSE improved
+only 2.268935% (0.027786426 to 0.027155970), still far below the 10% admission
+gate. This reduces the likelihood that the prior failure was merely too little
+training data or too many swaps. Further Q/K-only selector tuning is not the
+next branch; direct recurrent state/post-RMS sensitivity on non-evaluation
+calibration inputs is required. Report SHA256:
+c110a0dc37b7b0eed976dc81c5f0bfc2ab873f738f9fb4f3cac1f239b2fb6300.
+
 Changing the coordinate selector while keeping Dk64 leaves all runtime tensor
 shapes unchanged. Therefore it may recover accuracy but cannot close the
 measured performance gap from +4.752041% to the required >=10% throughput.

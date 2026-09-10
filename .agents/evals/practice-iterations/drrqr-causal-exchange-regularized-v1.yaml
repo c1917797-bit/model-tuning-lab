@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-causal-exchange-regularized-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-10
 validated_commit: pending
 
@@ -29,4 +29,26 @@ validation_commands:
   - git diff --check
   - one deterministic CPU prototype run with train-tokens=64, heldout-tokens=64 and max-swaps=1
 
-lessons_ingested: []
+result:
+  outcome: rejected_at_proxy
+  evidence_level: deterministic representative-layer held-out causal normalized-QK proxy
+  claim_ceiling: The broader-sample one-swap exchange is rejected because its 2.268935 percent aggregate held-out improvement is below the predeclared 10 percent gate. This does not reject DRRQR, direct dense-state or post-RMS sensitivity selection, endpoint performance, task accuracy, or portability.
+  report_sha256: c110a0dc37b7b0eed976dc81c5f0bfc2ab873f738f9fb4f3cac1f239b2fb6300
+  head_count: 96
+  accepted_swap_count: 96
+  baseline_heldout_rmse: 0.027786425668701074
+  candidate_heldout_rmse: 0.027155969782367523
+  candidate_over_baseline: 0.9773106518322829
+  heldout_relative_improvement: 0.02268934816771706
+  heads_improved: 82
+  heads_worse_over_5_percent: 0
+  mean_train_ratio: 0.9637701020890138
+  minimum_q_energy_ratio: 0.9913487896741602
+  minimum_k_energy_ratio: 0.9911713499505428
+  npu_replay_admitted: false
+  next_decision: Stop Q/K-only selector tuning and design one bounded rich calibration capture using non-evaluation inputs to measure direct dense state and post-RMS sensitivity without fitting to the two teacher prompts.
+
+lessons_ingested:
+  - lesson: With broader training coverage and only one exchange, causal-kernel changes generalize safely across most heads but provide only about 2.27 percent proxy gain; the remaining accuracy gap needs direct recurrent state/output evidence rather than further Q/K-only objective tuning.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/ALGORITHM_AUDIT_BOUND.md
+    severity: high

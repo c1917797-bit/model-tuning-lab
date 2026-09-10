@@ -64,11 +64,15 @@
   floors, but held-out aggregate RMSE improved only 2.163152 percent; three
   heads worsened by more than 5 percent. No NPU replay was admitted. Report
   SHA256: 32ce108ce430e81e221547b6b9244d47a9971ddab5d54cad4ae9bc500dd1b38a.
-  The active drrqr-causal-exchange-regularized-v1 decision reuses the same tool
-  once with 64 training tokens and at most one swap per head. If it misses the
-  unchanged 10 percent held-out gate or has a head regression over 5 percent,
-  stop tuning Q/K-only objectives and design a bounded rich calibration capture
-  for direct state/post-RMS sensitivity.
+  The drrqr-causal-exchange-regularized-v1 screen is complete and rejected. With
+  64 training tokens and one swap per head, 82/96 heads improved, no head
+  worsened over 5 percent, and Q/K energy ratios stayed above 0.991, but
+  aggregate held-out RMSE improved only 2.268935 percent, far below the 10
+  percent gate. No NPU replay was admitted. Report SHA256:
+  c110a0dc37b7b0eed976dc81c5f0bfc2ab873f738f9fb4f3cac1f239b2fb6300.
+  Stop Q/K-only selector tuning. The next bounded iteration must design a rich
+  non-evaluation calibration capture for direct dense state/post-RMS
+  sensitivity without fitting to the two preserved teacher prompts.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
