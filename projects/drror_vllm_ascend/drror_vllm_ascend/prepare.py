@@ -51,6 +51,8 @@ def selection_method(selection_objective: str) -> tuple[str, bool]:
         return "Experimental kernel-normalized Strong RRQR selector", False
     if selection_objective == "energy-kernel":
         return "Experimental joint normalized Q/K energy top-k selector", False
+    if selection_objective == "causal-kernel-energy":
+        return "Experimental causal normalized Q/K interaction-energy selector", False
     raise ValueError(f"DRRQR: unknown selection objective {selection_objective!r}")
 
 
@@ -363,7 +365,8 @@ def main() -> None:
         default="official-raw",
         help=(
             "Use paper-faithful raw activations or the experimental Qwen GDN "
-            "kernel-normalized geometry."
+            "kernel-normalized geometry, pointwise energy, or causal "
+            "interaction-energy objective."
         ),
     )
     args = parser.parse_args()

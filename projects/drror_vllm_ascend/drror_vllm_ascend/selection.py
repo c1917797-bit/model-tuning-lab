@@ -16,7 +16,15 @@ from .plan import OFFICIAL_INDEX_SHA256
 LAYER_RE = re.compile(r"(?:^|\.)layers\.(\d+)(?:\.|$)")
 OFFICIAL_COMMIT = "919d8667d951c385e08510bc1267c2e7049a4f56"
 OFFICIAL_RRQR_SHA256 = "fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62"
-SELECTION_OBJECTIVES = ("official-raw", "cosine-kernel", "energy-kernel")
+SELECTION_OBJECTIVES = (
+    "official-raw",
+    "cosine-kernel",
+    "energy-kernel",
+    "causal-kernel-energy",
+)
+CAUSAL_TRAIN_NUMERATOR = 3
+CAUSAL_TRAIN_DENOMINATOR = 4
+CAUSAL_MAX_TOKENS_PER_CAPTURE = 64
 
 
 def file_sha256(path: Path) -> str:
@@ -114,6 +122,101 @@ def strong_rrqr_indices(
     }
     selected = permutation[:n_keep]
     return (selected, evidence) if return_evidence else selected
+
+
+def causal_interaction_energy_indices(
+    q_sequences: list[torch.Tensor],
+    k_sequences: list[torch.Tensor],
+    n_keep: int,
+    *,
+    max_tokens_per_capture: int = CAUSAL_MAX_TOKENS_PER_CAPTURE,
+) -> tuple[np.ndarray, dict]:
+    """Rank coordinates by their causal normalized-Q/K interaction energy.
+
+    For each ordered pair s <= t, coordinate d contributes
+    q[t, d] * k[s, d] to the recurrent read kernel.  The diagonal surrogate
+    sums the squared contribution without materializing the quadratic pair
+    tensor:
+
+        sum_t q[t, d]^2 * cumulative_sum_{s <= t} k[s, d]^2.
+
+    Selection is backend independent.  The later proxy evaluates the actual
+    reduced-Dk re-normalization, which this cheap training objective does not
+    approximate away.
+    """
+
+    if (
+        not isinstance(q_sequences, list)
+        or not isinstance(k_sequences, list)
+        or not q_sequences
+        or len(q_sequences) != len(k_sequences)
+        or type(n_keep) is not int
+        or type(max_tokens_per_capture) is not int
+        or max_tokens_per_capture < 1
+    ):
+        raise ValueError("DRRQR: invalid causal interaction sequence contract")
+    width = q_sequences[0].shape[-1] if q_sequences[0].ndim == 2 else -1
+    if not 0 < n_keep < width:
+        raise ValueError("DRRQR: invalid causal interaction keep width")
+    score = torch.zeros(width, dtype=torch.float64)
+    sampled_tokens = []
+    causal_pair_count = 0
+    for q, k in zip(q_sequences, k_sequences, strict=True):
+        if (
+            not isinstance(q, torch.Tensor)
+            or not isinstance(k, torch.Tensor)
+            or q.ndim != 2
+            or q.shape != k.shape
+            or q.shape[0] < 1
+            or q.shape[1] != width
+            or not q.is_floating_point()
+            or not k.is_floating_point()
+            or not torch.isfinite(q).all()
+            or not torch.isfinite(k).all()
+        ):
+            raise ValueError("DRRQR: invalid causal Q/K sequence")
+        count = min(q.shape[0], max_tokens_per_capture)
+        rows = (
+            torch.arange(q.shape[0])
+            if count == q.shape[0]
+            else torch.linspace(0, q.shape[0] - 1, steps=count).round().long().unique()
+        )
+        q_norm = torch.nn.functional.normalize(
+            q.index_select(0, rows).float(), p=2.0, dim=-1, eps=1e-6
+        )
+        k_norm = torch.nn.functional.normalize(
+            k.index_select(0, rows).float(), p=2.0, dim=-1, eps=1e-6
+        )
+        pairs = q_norm.shape[0] * (q_norm.shape[0] + 1) // 2
+        contribution = (
+            q_norm.square() * k_norm.square().cumsum(dim=0)
+        ).sum(dim=0).double()
+        # Equal sequence weighting prevents a longer capture from silently
+        # dominating the selector if this routine is reused elsewhere.
+        score += contribution / pairs
+        sampled_tokens.append(int(q_norm.shape[0]))
+        causal_pair_count += pairs
+    score_np = score.numpy()
+    if not np.isfinite(score_np).all() or float(score_np.sum()) <= 0:
+        raise ValueError("DRRQR: singular causal interaction energy")
+    selected = np.lexsort(
+        (np.arange(width, dtype=np.int64), -score_np)
+    )[:n_keep]
+    evidence = {
+        "method": "causal_normalized_qk_diagonal_energy",
+        "sequence_count": len(q_sequences),
+        "sampled_tokens_per_sequence": sampled_tokens,
+        "max_tokens_per_capture": max_tokens_per_capture,
+        "causal_pair_count": causal_pair_count,
+        "causal_order": "key_position <= query_position within each capture",
+        "sequence_weighting": "equal after per-sequence causal-pair normalization",
+        "retained_interaction_energy_fraction": float(
+            score_np[selected].sum() / score_np.sum()
+        ),
+        "converged": True,
+        "termination": "closed_form_topk",
+    }
+    return selected, evidence
 
 
 def _layer_id(name: str) -> int:
@@ -217,15 +320,14 @@ def load_keep_maps(
     keep_maps: dict[int, torch.Tensor] = {}
     evidence = {
         "schema": "drrqr-selection/v1",
-        "method": (
-            "Strong RRQR on concatenated post-conv Q/K activations"
-            if selection_objective == "official-raw"
-            else (
-                "Strong RRQR on kernel-normalized post-conv Q/K activations"
-                if selection_objective == "cosine-kernel"
-                else "Top shared coordinates by joint normalized Q/K energy"
-            )
-        ),
+        "method": {
+            "official-raw": "Strong RRQR on concatenated post-conv Q/K activations",
+            "cosine-kernel": "Strong RRQR on kernel-normalized post-conv Q/K activations",
+            "energy-kernel": "Top shared coordinates by joint normalized Q/K energy",
+            "causal-kernel-energy": (
+                "Top shared coordinates by causal normalized Q/K interaction energy"
+            ),
+        }[selection_objective],
         "selection_objective": selection_objective,
         "l2norm_eps": 1e-6 if selection_objective != "official-raw" else None,
         "official_commit": OFFICIAL_COMMIT,
@@ -240,6 +342,18 @@ def load_keep_maps(
         ).hexdigest(),
         "layers": {},
     }
+    if selection_objective == "causal-kernel-energy":
+        training_count = max(
+            1,
+            captures_per_rank
+            * CAUSAL_TRAIN_NUMERATOR
+            // CAUSAL_TRAIN_DENOMINATOR,
+        )
+        evidence["selector_training_capture_indices"] = list(range(training_count))
+        evidence["selector_heldout_capture_indices"] = list(
+            range(training_count, captures_per_rank)
+        )
+        evidence["causal_max_tokens_per_capture"] = CAUSAL_MAX_TOKENS_PER_CAPTURE
     for layer in expected_layer_ids:
         global_keep: list[int] = []
         layer_record = {"ranks": {}}
@@ -312,6 +426,24 @@ def load_keep_maps(
                             energy_np[selected].sum() / energy_np.sum()
                         ),
                     }
+                elif selection_objective == "causal-kernel-energy":
+                    selected, rrqr = causal_interaction_energy_indices(
+                        [
+                            item["q"].view(-1, local_heads, old_dim)[
+                                :, local_head, :
+                            ]
+                            for item in payloads[:training_count]
+                        ],
+                        [
+                            item["k"].view(-1, local_heads, old_dim)[
+                                :, local_head, :
+                            ]
+                            for item in payloads[:training_count]
+                        ],
+                        new_dim,
+                    )
+                    rrqr["training_capture_indices"] = indexes[:training_count]
+                    rrqr["heldout_capture_indices"] = indexes[training_count:]
                 else:
                     selected, rrqr = strong_rrqr_indices(
                         head_activation,

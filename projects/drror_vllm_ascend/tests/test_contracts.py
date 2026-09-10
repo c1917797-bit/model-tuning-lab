@@ -574,6 +574,47 @@ class SelectionTests(unittest.TestCase):
                 "energy-kernel",
             )
             energy_rrqr.assert_not_called()
+            with mock.patch.object(selection, "strong_rrqr_indices") as causal_rrqr:
+                causal_keeps, causal_evidence = selection.load_keep_maps(
+                    root,
+                    selection_objective="causal-kernel-energy",
+                    **arguments,
+                )
+            expected_causal_keeps = []
+            for head in range(2):
+                q_head = torch.nn.functional.normalize(
+                    payload["q"].view(-1, 2, 4)[:, head, :].float(),
+                    p=2.0,
+                    dim=-1,
+                    eps=1e-6,
+                )
+                k_head = torch.nn.functional.normalize(
+                    payload["k"].view(-1, 2, 4)[:, head, :].float(),
+                    p=2.0,
+                    dim=-1,
+                    eps=1e-6,
+                )
+                score = (
+                    q_head.square() * k_head.square().cumsum(dim=0)
+                ).sum(dim=0).numpy()
+                selected = np.lexsort((np.arange(4), -score))[:2]
+                expected_causal_keeps.extend(
+                    (np.sort(selected) + head * 4).tolist()
+                )
+            self.assertEqual(causal_keeps[0].tolist(), expected_causal_keeps)
+            self.assertEqual(
+                causal_evidence["selection_objective"],
+                "causal-kernel-energy",
+            )
+            self.assertEqual(
+                causal_evidence["selector_training_capture_indices"],
+                [0],
+            )
+            self.assertEqual(
+                causal_evidence["selector_heldout_capture_indices"],
+                [],
+            )
+            causal_rrqr.assert_not_called()
             with mock.patch.object(
                 selection,
                 "strong_rrqr_indices",
