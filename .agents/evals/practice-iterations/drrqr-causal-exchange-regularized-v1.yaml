@@ -1,0 +1,32 @@
+schema: mst-practice-iteration/v1
+id: drrqr-causal-exchange-regularized-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Determine whether broader causal training coverage and one-swap capacity remove the representative exchange prototype's train-to-heldout gap.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 remains at 4.752041 percent endpoint gain and below historical dense quality; the four-swap causal exchange improved held-out proxy RMSE only 2.163152 percent after a much larger train improvement and had three local head regressions over 5 percent.
+  medium_term_milestone: A backend-independent Dk64 coordinate map with recurrence-facing fidelity strong enough for native teacher replay and later Dk48 testing.
+  short_term_decision: Re-run the same frozen representative-layer exchange objective with 64 deterministic training tokens per capture and at most one accepted swap per head, leaving all other data splits, candidate pools and energy floors fixed.
+  deciding_evidence: Held-out causal normalized-QK RMSE must improve by at least 10 percent versus energy-Dk64, no head may worsen by more than 5 percent, and every head must retain at least 98 percent of its baseline Q and K training energy.
+  budget_or_stop_rule: One deterministic CPU run on layers 0,12,25,38,50,62 using captures 0-11 for search and 12-15 for decision, 64 tokens in both splits, pool size 12, one swap and the existing tool without code changes. No NPU, model service, profiling, cache change or task accuracy.
+  on_pass: Promote the one-swap selector to an all-48-layer immutable plan and full held-out proxy in a new iteration.
+  on_failure: Stop tuning Q/K-only proxy objectives and design a bounded rich calibration capture for direct dense state/post-RMS coordinate sensitivity before any NPU candidate replay.
+  on_inconclusive: Preserve evidence and repair only a demonstrated execution, capture, identity or evaluation defect without changing thresholds.
+
+changes:
+  - type: validation
+    description: Reuse the committed exchange prototype with a predeclared broader-sample, lower-capacity configuration.
+    files:
+      - projects/drror_vllm_ascend/tools/prototype_causal_exchange_selector.py
+
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - one deterministic CPU prototype run with train-tokens=64, heldout-tokens=64 and max-swaps=1
+
+lessons_ingested: []

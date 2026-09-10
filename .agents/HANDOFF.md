@@ -64,9 +64,11 @@
   floors, but held-out aggregate RMSE improved only 2.163152 percent; three
   heads worsened by more than 5 percent. No NPU replay was admitted. Report
   SHA256: 32ce108ce430e81e221547b6b9244d47a9971ddab5d54cad4ae9bc500dd1b38a.
-  The next bounded decision should use broader train-token coverage with fewer
-  swaps to distinguish sample scarcity from objective mismatch before any
-  richer NPU calibration capture, mixed cache, or generic operator work.
+  The active drrqr-causal-exchange-regularized-v1 decision reuses the same tool
+  once with 64 training tokens and at most one swap per head. If it misses the
+  unchanged 10 percent held-out gate or has a head regression over 5 percent,
+  stop tuning Q/K-only objectives and design a bounded rich calibration capture
+  for direct state/post-RMS sensitivity.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
