@@ -15,8 +15,15 @@ BATCHES = (1, 2, 4, 8, 16, 24, 32)
 STEPS = 32
 
 
-def validate(records):
-    expected = {(dk, batch) for dk in DKS for batch in BATCHES}
+def csv_ints(value):
+    parsed = tuple(int(item.strip()) for item in value.split(",") if item.strip())
+    if not parsed or any(item <= 0 for item in parsed):
+        raise argparse.ArgumentTypeError("expected comma-separated positive integers")
+    return parsed
+
+
+def validate(records, dks=DKS):
+    expected = {(dk, batch) for dk in dks for batch in BATCHES}
     keys = [(r["dk"], r["batch"]) for r in records]
     if len(keys) != len(expected) or set(keys) != expected:
         raise ValueError("missing or duplicate graph cases")
@@ -89,6 +96,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--build-manifest", required=True, type=Path)
+    parser.add_argument("--dks", type=csv_ints, default=DKS)
+    parser.add_argument("--plugin-version", required=True)
     args = parser.parse_args()
     output = args.output_dir.resolve()
     if Path("/drrqr-results") not in output.parents or output.exists():
@@ -105,14 +114,14 @@ def main():
     if len(installed) != 1:
         raise RuntimeError("expected one installed plugin distribution")
     distribution = installed[0]
-    if distribution.version != "0.1.7":
+    if distribution.version != args.plugin_version:
         raise RuntimeError("wrong installed plugin")
     for name, expected in build["source_sha256"].items():
         if name.startswith("drror_vllm_ascend/"):
             if checksum(Path(build["source_root"]) / name) != expected or checksum(distribution.locate_file(name)) != expected:
                 raise RuntimeError("installed/source plugin mismatch: " + name)
     output.mkdir(parents=True)
-    protocol = {"dks": DKS, "batches": BATCHES, "steps": STEPS, "dtype": "bfloat16",
+    protocol = {"dks": args.dks, "batches": BATCHES, "steps": STEPS, "dtype": "bfloat16",
                 "bias": False, "changing_inputs_and_cache_indices": True,
                 "compare": "each graph and eager packed vs eager original; output and entire state",
                 "tolerance": "finite and bitwise equal", "graph": "torch.npu.NPUGraph",
@@ -131,7 +140,7 @@ def main():
     try:
         torch.npu.set_device(0)
         enable_custom_op()
-        for dk in DKS:
+        for dk in args.dks:
             for batch in BATCHES:
                 record = case(dk, batch)
                 report["cases"].append(record)
@@ -142,7 +151,7 @@ def main():
                     all(v is True for k, v in s.items() if k != "step") for s in record["steps"]
                 ):
                     raise RuntimeError("numerical difference; preserve first failure and stop")
-        report["status"] = validate(report["cases"])
+        report["status"] = validate(report["cases"], args.dks)
     except Exception as error:
         report["status"] = "failed"
         report["error"] = repr(error)

@@ -20,6 +20,12 @@ class GraphReportTests(unittest.TestCase):
     def test_complete_matrix(self):
         self.assertEqual(validate(records()), "graph_operator_parity_pass")
 
+    def test_custom_aligned_dimensions(self):
+        custom_dks = (80, 128)
+        value = [record for record in records() if record["dk"] == 128]
+        value.extend({**record, "dk": 80} for record in records() if record["dk"] == 64)
+        self.assertEqual(validate(value, custom_dks), "graph_operator_parity_pass")
+
     def test_missing_duplicate_cases(self):
         for invalid in ([], records()[:-1], records()[:-1] + [records()[0]]):
             with self.assertRaises(ValueError):
@@ -44,4 +50,3 @@ class GraphReportTests(unittest.TestCase):
             modified[0]["steps"][0][field] = False
             with self.assertRaises(ValueError):
                 validate(modified)
-
