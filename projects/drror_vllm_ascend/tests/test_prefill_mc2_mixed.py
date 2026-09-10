@@ -149,7 +149,7 @@ class MixedMC2Tests(unittest.TestCase):
         dk80 = [*base]
         dk80[1] = "dk80"
         self.assertEqual(parse_args(dk80 + valid)[1].variant, "dk80")
-        diagnostic = ["--plugin-version", "0.1.12", "--prefill-mc2", "--prefill-mc2-mixed",
+        diagnostic = ["--plugin-version", "0.1.13", "--prefill-mc2", "--prefill-mc2-mixed",
                       "--prefill-diagnostic", "--prefill-diagnostic-tokens", "32768"]
         parsed = parse_args(dk80 + diagnostic)[1]
         self.assertTrue(parsed.prefill_diagnostic)
