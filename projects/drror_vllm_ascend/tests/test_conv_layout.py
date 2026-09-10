@@ -5,11 +5,12 @@ from types import SimpleNamespace
 import torch
 
 from drror_vllm_ascend.patches.conv_layout import prepare_conv_weight_layout
+from drror_vllm_ascend.patches.gdn import SUPPORTED_REDUCED_KEY_DIMS
 
 
 class ConvLayoutTests(unittest.TestCase):
     def test_values_identity_metadata_reload_and_idempotence(self):
-        for channels in (1792, 2048, 2304, 2432, 2560):
+        for channels in (1792, 2048, 2176, 2304, 2432, 2560):
             with self.subTest(channels=channels):
                 original = torch.arange(channels * 4).reshape(channels, 1, 4).to(torch.bfloat16)
                 parameter = torch.nn.Parameter(original.clone(), requires_grad=False)
@@ -35,7 +36,7 @@ class ConvLayoutTests(unittest.TestCase):
         for tensor, training in (
             (torch.zeros(2048, 1, 4, dtype=torch.bfloat16), True),
             (torch.zeros(2048, 1, 3, dtype=torch.bfloat16), False),
-            (torch.zeros(2176, 1, 4, dtype=torch.bfloat16), False),
+            (torch.zeros(2112, 1, 4, dtype=torch.bfloat16), False),
             (torch.zeros(2048, 1, 4), False),
         ):
             with self.subTest(shape=tensor.shape, training=training, dtype=tensor.dtype):
@@ -44,6 +45,11 @@ class ConvLayoutTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     prepare_conv_weight_layout(module)
                 self.assertIs(module.weight, parameter)
+
+    def test_uniform_dk80_geometry_is_narrowly_admitted(self):
+        self.assertIn(80, SUPPORTED_REDUCED_KEY_DIMS)
+        self.assertNotIn(88, SUPPORTED_REDUCED_KEY_DIMS)
+        self.assertEqual(2 * 4 * 80 + 12 * 128, 2176)
 
 
 if __name__ == "__main__":

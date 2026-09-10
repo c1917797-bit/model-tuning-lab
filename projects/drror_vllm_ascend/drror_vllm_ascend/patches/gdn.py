@@ -9,7 +9,7 @@ import inspect
 from ..diagnostics import emit_evidence
 from ..envs import DrrqrConfig
 
-SUPPORTED_REDUCED_KEY_DIMS = (32, 64, 96, 112)
+SUPPORTED_REDUCED_KEY_DIMS = (32, 64, 80, 96, 112)
 
 
 def install_prefill_patch(gdn_module, config: DrrqrConfig) -> None:

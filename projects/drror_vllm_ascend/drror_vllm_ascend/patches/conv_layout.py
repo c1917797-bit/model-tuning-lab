@@ -23,7 +23,7 @@ def prepare_conv_weight_layout(conv_module):
         raise ValueError("layout preparation is inference-only")
     if weight.ndim != 3 or weight.shape[1:] != (1, 4):
         raise ValueError("expected Qwen GDN conv weight [channels, 1, 4]")
-    if weight.shape[0] not in (1792, 2048, 2304, 2432, 2560):
+    if weight.shape[0] not in (1792, 2048, 2176, 2304, 2432, 2560):
         raise ValueError("expected audited TP4-local aligned Qwen GDN channels")
     if weight.dtype != torch.bfloat16 or weight.device.type not in ("cpu", "npu"):
         raise ValueError("expected CPU/NPU bfloat16 weight")
