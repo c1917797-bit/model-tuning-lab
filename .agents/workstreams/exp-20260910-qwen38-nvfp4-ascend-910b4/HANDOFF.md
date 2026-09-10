@@ -16,6 +16,13 @@
 - ops-transformer contains useful E2M1/A16F4 source, but it is not proof of
   910B4 support: FP4-specific kernels are under `arch35`, and the per-group
   checker accepts only 32/64/128/256 while this checkpoint requires 16.
+- A device-free, network-disabled build probe in the fixed image selected the
+  real top-level `matmul_all_reduce` target for `ascend910b`. Configuration,
+  host/arch22 tiling compilation, and 298 kernel objects succeeded before the
+  deliberately bounded probe was stopped. The op contract explicitly says
+  FP8/FP4 support is new on Ascend 950 and requires antiquant group sizes that
+  are multiples of 32. This closes direct reuse for the checkpoint's group-16
+  NVFP4 tensors; it is not an NPU execution or speed result.
 - A dependency-free exact-format reference codec and tests are now present.
 - The reference test passed both on the host and in a network-disabled,
   device-free, disposable `quay.io/ascend/vllm-ascend:v0.23.0` container.
@@ -54,11 +61,13 @@
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
    The current test requires all physical NPU0-7 in one exclusive lease; re-audit
    before any device action and never stop or alter either external workload.
-2. The fixed image needs an external, fail-closed ModelOpt method adapter plus
-   dense NVFP4 group-16 and calibrated FP8 Ascend execution methods. The exact
-   AscendC adapter/kernel is not implemented yet. The FP8 path must also be
-   validated because this checkpoint
-   has 208 FP8 layers; it is not an all-FP4 model.
+2. The fixed image needs an external, fail-closed ModelOpt method adapter.
+   Native reuse of the ops-transformer FP4 path is closed for 910B4/group16.
+   The next correctness-first implementation is exact ModelOpt NVFP4 and FP8
+   decoding to BF16 weights at load time. That path can establish checkpoint
+   semantics and full-model quality but must be labelled a BF16-compute
+   fallback, not native quantized acceleration. A later 910B4 stream-dequant
+   kernel is eligible only after this reference path passes.
 3. Two pushes of the latest local commits failed with a transient GitHub TLS
    receive error. The commits and unpushed operator spec remain safe locally;
    retry without rewriting history.
@@ -68,12 +77,15 @@
 1. Reuse and unit-test vLLM core's `ModelOptMixedPrecisionConfig` layer
    resolution, then implement a guarded external plugin which enables the
    method only for this contract and returns Ascend-specific per-layer methods.
-2. Run a build-only 910B4 capability probe against the ops-transformer A16F4
-   source. If it cannot compile for 910B4, do not port its arch35 kernels
-   blindly; implement the smallest 910B4 group-16 stream-dequant + BF16 Cube
-   path. Build only inside the fixed image with source/output bind mounts.
-3. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
-4. Only after promotion, integrate through a read-only mounted plugin in a
+2. Implement the smallest exact load-time BF16 fallback for both the 193
+   group-16 NVFP4 layers and 208 calibrated FP8 layers. Keep core
+   `ModelOptMixedPrecisionConfig` parsing and layer resolution; fail closed
+   on any unmatched tensor, method, shape, dtype, or scale contract.
+3. Validate decoded tensors against the independent codec, then gate TP4 M=1
+   Qwen shapes for correctness. Record memory and load-time cost honestly.
+4. Only after the reference adapter passes, evaluate a 910B4 group-16
+   stream-dequant + BF16 Cube operator against it; do not port arch35 code.
+5. Integrate through a read-only mounted plugin in a
    fresh disposable container and run BF16/NVFP4 paired performance and quality.
 
 ## Verified operations
@@ -112,6 +124,13 @@
   `exec-0000000000000069`. A2 documentation does not establish FP8/FP4
   `npu_quant_matmul`; ops-transformer group-16/910B4 capability remains
   unproven and must be probed rather than assumed.
+- Offline ascend910b build probe: dependency discovery
+  `exec-00000000000000d6`; real top-level build
+  `exec-00000000000000f5`; bounded stop of the exact disposable container
+  `exec-000000000000011a`; source identities and post-build inspection
+  `exec-000000000000011e`. Configuration and arch22 host compilation passed,
+  298 kernel objects were generated, and no full-build or FP4 capability claim
+  is made.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

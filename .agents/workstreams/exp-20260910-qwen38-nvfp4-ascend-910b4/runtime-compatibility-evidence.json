@@ -72,6 +72,7 @@
     "device_support_inferred_from_symbol_presence": false
   },
   "ops_transformer_findings": {
+    "source_commit": "0684247214bae5abb5cb6dc7d90b34a6ad401cdd",
     "weight_quant_batch_matmul_v2_has_a16f4_source": true,
     "fp4_specific_kernel_tree": "arch35",
     "accepted_fp4_per_group_sizes": [
@@ -82,6 +83,26 @@
     ],
     "checkpoint_group_size_16_accepted": false,
     "ascend_910b4_execution_proven": false
+  },
+  "ascend910b_build_probe": {
+    "image": "quay.io/ascend/vllm-ascend:v0.23.0",
+    "network": "none",
+    "npu_devices_mounted": false,
+    "source_mount_policy": "worktree-local disposable copy; shared ops-transformer source was not modified",
+    "requested_soc": "ascend910b",
+    "requested_top_level_operator": "matmul_all_reduce",
+    "initial_standalone_target_result": "weight_quant_batch_matmul_v2 is an internal mc2/3rd implementation, not a valid standalone top-level --ops target",
+    "top_level_configuration_succeeded": true,
+    "host_arch22_tiling_sources_compiled": true,
+    "generated_kernel_objects_before_stop": 298,
+    "completed_full_kernel_matrix": false,
+    "termination": "The disposable build container was deliberately stopped after 1046 seconds because it was enumerating a broad MatmulAllReduce tiling matrix and could not overturn the source/API incompatibility decision.",
+    "capability_conclusion": "The probe proves the repository can enter ascend910b MatmulAllReduce compilation. It does not prove FP4 execution. The public op contract says FP8/FP4 are newly supported by Ascend 950, antiquant group size must be a multiple of 32, and the FP4-specific implementation is under arch35; the checkpoint requires group size 16.",
+    "source_file_sha256": {
+      "mc2/matmul_all_reduce/op_graph/matmul_all_reduce_proto.h": "9c46ecefcc17cf9261b1d2b10ce8acfe0fb4b8d8b1659a0d3dfc60a768f4e548",
+      "mc2/matmul_all_reduce/op_api/aclnn_weight_quant_matmul_all_reduce.cpp": "9a034370d0efa4b49729b147c038a7b85cc9e328110915050496fb55f9bc1884",
+      "mc2/3rd/weight_quant_batch_matmul_v2/op_kernel/arch35/weight_quant_batch_matmul_v2_reg_base.h": "9b3911148335777176b6e430e2f4220e37f99543d23a8d2a93843a4648d0f86e"
+    }
   },
   "compatibility_decision": {
     "loadable_without_plugin": false,
@@ -125,7 +146,12 @@
     "exec-0000000000000066",
     "exec-0000000000000067",
     "exec-0000000000000068",
-    "exec-0000000000000069"
+    "exec-0000000000000069",
+    "exec-00000000000000d6",
+    "exec-00000000000000f5",
+    "exec-0000000000000105",
+    "exec-000000000000011a",
+    "exec-000000000000011e"
   ],
   "scope_limit": "This is a device-free source/runtime compatibility audit. It is not an NPU correctness, accuracy, or performance result."
 }
