@@ -43,6 +43,18 @@ permitted.
   comparison, operator error envelope, and four-rank activation proof.
 - Evidence: raw outputs, protocol, image/model identities and SHA256 manifest.
 
+The exact quality population, prompts, decoding settings, scoring boundaries
+and fail-closed comparison rules are frozen in `QUALITY_PROTOCOL.md`. Generate
+the ignored request artifacts without using an NPU with:
+
+```bash
+python3 qwen38-nvfp4-ascend/freeze_eval_manifest.py \
+  --mmlu /cache/austinov/eval-data/general/prepared/mmlu \
+  --gsm8k /cache/austinov/eval-data/general/unpack/gsm8k/grade_school_math/data/test.jsonl \
+  --humaneval /cache/austinov/eval-data/general/unpack/humaneval/data/HumanEval.jsonl.gz \
+  --output artifacts/qwen38-quality-manifest
+```
+
 Run the device-free codec check with:
 
 ```bash

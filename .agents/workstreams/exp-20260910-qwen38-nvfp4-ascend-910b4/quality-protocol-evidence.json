@@ -1,0 +1,52 @@
+{
+  "schema": "mst-evidence/v1",
+  "claim": "The paired MMLU, GSM8K, and HumanEval quality populations and deterministic prompt/scoring boundaries are frozen without using an NPU.",
+  "modelInputs": {
+    "bf16": {
+      "path": "/cache/austinov/Qwen3.8-27B",
+      "shards": 18,
+      "safetensorBytes": 55563006776
+    },
+    "nvfp4": {
+      "path": "/cache/cch/Qwen3.8-27B-NVFP4",
+      "shards": 3
+    }
+  },
+  "datasets": {
+    "mmlu": {
+      "subjects": 57,
+      "devRows": 285,
+      "testRows": 14042,
+      "requestManifestSha256": "c17c0aeeeabdbfc3685e1ee65d97336590c9d71e501bd3b499f4eb972d74b87c"
+    },
+    "gsm8k": {
+      "testRows": 1319,
+      "sourceSha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+      "requestManifestSha256": "615caf60f7a1ba5f305109a30049128ba24ab3c70486382f1a3da2dfd72a52e4"
+    },
+    "humaneval": {
+      "tasks": 164,
+      "compressedSourceSha256": "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef",
+      "requestManifestSha256": "7b67cbb94935a0a7ac6e96aa208324097d67847001db2456ca6117a555362597"
+    }
+  },
+  "validation": [
+    {
+      "operation": "exec-000000000000014e",
+      "result": "full request populations generated with expected counts and stable hashes"
+    },
+    {
+      "operation": "exec-000000000000014f",
+      "result": "manifest unit tests 2/2 pass in the fixed image, network disabled, no NPU devices"
+    },
+    {
+      "operation": "exec-0000000000000151",
+      "result": "strict text scorer unit tests 2/2 pass in the fixed image, network disabled, no NPU devices"
+    }
+  ],
+  "limitations": [
+    "No model response, accuracy, or performance result is claimed.",
+    "Rendered chat-template prompt hashes can only be compared after each serving arm is started.",
+    "HumanEval generated code must be executed only in a restricted disposable CPU container."
+  ]
+}

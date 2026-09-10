@@ -38,6 +38,9 @@
 - The exact official snapshot is complete at
   `/cache/cch/Qwen3.8-27B-NVFP4`. All three shards have recorded SHA256
   identities in `checkpoint-evidence.json`.
+- The BF16 control is complete at `/cache/austinov/Qwen3.8-27B`: all 18
+  safetensor shards are present (55,563,006,776 bytes), its architecture is
+  `Qwen3_5ForConditionalGeneration`, and it has no quantization config.
 - A fail-closed checkpoint inspector passes host and fixed-image tests.
 - Representative rows from all three shards were independently decoded against
   NVIDIA ModelOpt commit
@@ -60,13 +63,19 @@
   bytes because Ascend 910B4 has no native FP8 dtype. It does not claim native
   FP8 hardware support.
 - No NPU kernel, performance result, or accuracy result is claimed yet.
+- The quality protocol is now frozen in `QUALITY_PROTOCOL.md`. Stable request
+  manifests were generated for 57-subject MMLU (14,042 tests), GSM8K (1,319),
+  and HumanEval (164), with source/output SHA256 identities recorded in
+  `quality-protocol-evidence.json`. Strict MMLU/GSM8K paired scoring code and
+  fixed-image unit tests pass. Generated artifacts remain ignored by Git.
 
 ## Current blockers
 
 1. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
-   NPU4-7 had no processes but remain in an external DRRQR container declaration.
-   The current test requires all physical NPU0-7 in one exclusive lease; re-audit
-   before any device action and never stop or alter either external workload.
+   NPU4-7 had no processes but remain in an external DRRQR container declaration
+   and are protected. The current test requires one exclusive lease for physical
+   NPU0-3 only; re-audit before any device action and never stop or alter either
+   external workload.
 2. The fixed image now has a device-free validated external, fail-closed
    ModelOpt BF16 reference adapter, but it has not passed a four-rank model
    startup. Native or faithfully emulated activation quantization is still
@@ -83,10 +92,9 @@
 
 ## Next actions
 
-1. Reuse and unit-test vLLM core's `ModelOptMixedPrecisionConfig` layer
-   resolution, then implement a guarded external plugin which enables the
-   method only for this contract and returns Ascend-specific per-layer methods.
-2. On the next valid device lease, start the BF16-compute reference plugin
+1. On the next valid NPU0-3 lease, start the BF16 control with TP4 in a fresh
+   disposable container and record four-rank activation, load time and memory.
+2. Then start the BF16-compute reference plugin
    through a read-only mount and disposable installation. Require four-rank
    activation and record load-time plus per-rank memory before any request.
 3. Run deterministic smoke and a small paired quality canary. Label these
@@ -147,6 +155,12 @@
   official layer mappings `exec-000000000000013b` (193 NVFP4, 208 FP8).
   Detailed evidence and preserved development failures are in
   `reference-adapter-evidence.json`.
+- BF16 control and local evaluation data discovery: `exec-0000000000000148`,
+  `exec-0000000000000147`, and dataset structure/count audit
+  `exec-0000000000000149` through `exec-000000000000014a`.
+- Frozen full quality manifests: `exec-000000000000014e`; fixed-image,
+  network-disabled, device-free tests: `exec-000000000000014f` and
+  `exec-0000000000000151`. See `quality-protocol-evidence.json`.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

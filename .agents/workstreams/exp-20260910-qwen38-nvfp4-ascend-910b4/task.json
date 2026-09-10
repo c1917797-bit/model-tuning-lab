@@ -16,13 +16,13 @@
   "claims": [
     {"kind": "file", "mode": "exclusive", "value": "qwen38-nvfp4-ascend"},
     {"kind": "knowledge", "mode": "exclusive", "value": ".agents/workstreams/exp-20260910-qwen38-nvfp4-ascend-910b4"},
-    {"kind": "resource", "mode": "exclusive", "value": "chicaihong01 physical NPU0-7 only after one exclusive live lease is proven; never preempt an external workload"}
+    {"kind": "resource", "mode": "exclusive", "value": "chicaihong01 physical NPU0-3 only after one exclusive live lease is proven; always protect NPU4-7 and never preempt an external workload"}
   ],
   "validationCommands": [
     "python3 qwen38-nvfp4-ascend/test_nvfp4_codec.py",
     "./scripts/validate-mst.sh",
     "git diff --check"
   ],
-  "executionState": "device-free-reference-codec-verified-awaiting-checkpoint-and-npu-lease",
+  "executionState": "device-free-reference-adapter-and-quality-protocol-verified-awaiting-npu0-3-lease",
   "integrationState": "branch-local-not-promoted"
 }
