@@ -12,6 +12,8 @@ from ..diagnostics import emit_evidence
 from ..envs import DrrqrConfig
 
 SCHEMA = "drrqr-prefill-finite-trace/v1"
+_PREFILL_TRACE_LIMIT = 16
+_MIXED_TRACE_LIMIT = 64
 _STAGE_ORDER = (
     "raw.q",
     "raw.k",
@@ -24,6 +26,16 @@ _STAGE_ORDER = (
     "chunk.output",
     "chunk.final_state",
     "gdn.output",
+)
+_MIXED_STAGE_ORDER = (
+    "core.mixed_qkv",
+    "core.b",
+    "core.a",
+    "state.conv.before",
+    "state.ssm.before",
+    "core.output",
+    "state.conv.after",
+    "state.ssm.after",
 )
 
 
@@ -59,11 +71,28 @@ def tensor_stats(tensor) -> dict:
 
 
 def _first_nonfinite(stats: dict[str, dict]) -> str | None:
-    for name in _STAGE_ORDER:
+    order = _MIXED_STAGE_ORDER if "core.output" in stats else _STAGE_ORDER
+    for name in order:
         item = stats.get(name)
         if item is not None and item["nonfinite_count"]:
             return name
     return None
+
+
+def _storage_identity(tensor) -> dict:
+    return {
+        "data_ptr": int(tensor.untyped_storage().data_ptr()),
+        "storage_offset": int(tensor.storage_offset()),
+        "shape": list(tensor.shape),
+        "stride": list(tensor.stride()),
+        "dtype": str(tensor.dtype),
+    }
+
+
+def _indices(value) -> list[int]:
+    if value is None:
+        return []
+    return [int(item) for item in value.detach().reshape(-1).cpu().tolist()]
 
 
 def install_prefill_diagnostic(gdn_cls, gdn_module, chunk_module, config: DrrqrConfig) -> None:
@@ -83,7 +112,9 @@ def install_prefill_diagnostic(gdn_cls, gdn_module, chunk_module, config: DrrqrC
     inner_signature = inspect.signature(original_inner)
     active = contextvars.ContextVar("drrqr_prefill_diagnostic", default=None)
     lock = threading.Lock()
-    completed_prefixes: set[str] = set()
+    prefill_counts: dict[str, int] = {}
+    mixed_counts: dict[str, int] = {}
+    mixed_armed = False
     stopped_after_nonfinite = False
 
     def record(observation: dict, prefix: str, tensor) -> None:
@@ -121,50 +152,178 @@ def install_prefill_diagnostic(gdn_cls, gdn_module, chunk_module, config: DrrqrC
 
     @functools.wraps(original_core)
     def core(self, mixed_qkv, b, a, core_attn_out):
-        nonlocal stopped_after_nonfinite
+        nonlocal mixed_armed, stopped_after_nonfinite
         metadata = getattr(gdn_module.get_forward_context(), "attn_metadata", None)
         candidate = metadata.get(self.prefix) if isinstance(metadata, dict) else metadata
         prefix = str(self.prefix)
-        eligible = (
-            not stopped_after_nonfinite
-            and prefix not in completed_prefixes
-            and candidate is not None
-            and getattr(candidate, "num_prefills", 0) > 0
-            and getattr(candidate, "num_decodes", 0) == 0
-            and getattr(candidate, "spec_sequence_masks", None) is None
-            and getattr(candidate, "num_actual_tokens", None) == config.prefill_diagnostic_tokens
+        num_prefills = int(getattr(candidate, "num_prefills", 0) or 0)
+        num_decodes = int(getattr(candidate, "num_decodes", 0) or 0)
+        num_decode_tokens = int(getattr(candidate, "num_decode_tokens", 0) or 0)
+        num_actual_tokens = int(getattr(candidate, "num_actual_tokens", 0) or 0)
+        prefill_tokens = max(0, num_actual_tokens - num_decode_tokens)
+        long_prefill = (
+            candidate is not None
+            and num_prefills > 0
+            and prefill_tokens == config.prefill_diagnostic_tokens
         )
-        if not eligible:
+        if long_prefill:
+            mixed_armed = True
+        prefill_call_index = prefill_counts.get(prefix, 0)
+        mixed_call_index = mixed_counts.get(prefix, 0)
+        prefill_eligible = (
+            not stopped_after_nonfinite
+            and long_prefill
+            and prefill_call_index < _PREFILL_TRACE_LIMIT
+            and getattr(candidate, "spec_sequence_masks", None) is None
+        )
+        mixed_eligible = (
+            not stopped_after_nonfinite
+            and mixed_armed
+            and candidate is not None
+            and (num_prefills > 0 or num_decodes > 0)
+            and mixed_call_index < _MIXED_TRACE_LIMIT
+            and getattr(candidate, "spec_sequence_masks", None) is None
+        )
+        if not prefill_eligible and not mixed_eligible:
             return original_core(self, mixed_qkv, b, a, core_attn_out)
-        observation = {"stats": {}}
-        token = active.set(observation)
+
+        prefill_observation = {"stats": {}}
+        token = active.set(prefill_observation) if prefill_eligible else None
+        prefill_indices = _indices(getattr(candidate, "prefill_state_indices", None))
+        non_spec_indices = _indices(
+            getattr(candidate, "non_spec_state_indices_tensor", None)
+        )
+        decode_indices = non_spec_indices[:num_decodes]
+        selected_indices = sorted(set(prefill_indices + decode_indices))
+        cache = getattr(self, "kv_cache", None)
+        conv_state = cache[0] if cache is not None and len(cache) > 0 else None
+        ssm_state = cache[1] if cache is not None and len(cache) > 1 else None
+        state_limit = int(ssm_state.shape[0]) if ssm_state is not None else 0
+        valid_indices = [
+            index for index in selected_indices if 0 <= index < state_limit
+        ]
+        invalid_indices = [
+            index for index in selected_indices if index not in valid_indices
+        ]
+        mixed_stats = {}
+        if mixed_eligible:
+            for name, tensor in (
+                ("core.mixed_qkv", mixed_qkv),
+                ("core.b", b),
+                ("core.a", a),
+            ):
+                if tensor is not None:
+                    mixed_stats[name] = tensor_stats(
+                        tensor[:num_actual_tokens]
+                    )
+            if valid_indices:
+                if conv_state is not None:
+                    mixed_stats["state.conv.before"] = tensor_stats(
+                        conv_state[valid_indices]
+                    )
+                if ssm_state is not None:
+                    mixed_stats["state.ssm.before"] = tensor_stats(
+                        ssm_state[valid_indices]
+                    )
         try:
             result = original_core(self, mixed_qkv, b, a, core_attn_out)
-            record(
-                observation,
-                "gdn.output",
-                core_attn_out[: config.prefill_diagnostic_tokens],
-            )
+            if prefill_eligible:
+                record(
+                    prefill_observation,
+                    "gdn.output",
+                    core_attn_out[:num_actual_tokens],
+                )
         finally:
-            active.reset(token)
-        first = _first_nonfinite(observation["stats"])
-        with lock:
-            completed_prefixes.add(prefix)
-            if first is not None:
-                stopped_after_nonfinite = True
-        emit_evidence(
-            config,
-            "prefill_finite_trace",
-            component="gdn-diagnostic",
-            diagnostic_schema=SCHEMA,
-            plan_sha256=config.plan_sha256,
-            prefix=prefix,
-            token_count=config.prefill_diagnostic_tokens,
-            first_nonfinite_stage=first,
-            all_observed_finite=first is None,
-            stats=observation["stats"],
-            arithmetic_changed=False,
+            if token is not None:
+                active.reset(token)
+        if mixed_eligible:
+            mixed_stats["core.output"] = tensor_stats(
+                core_attn_out[:num_actual_tokens]
+            )
+            if valid_indices:
+                if conv_state is not None:
+                    mixed_stats["state.conv.after"] = tensor_stats(
+                        conv_state[valid_indices]
+                    )
+                if ssm_state is not None:
+                    mixed_stats["state.ssm.after"] = tensor_stats(
+                        ssm_state[valid_indices]
+                    )
+        prefill_first = (
+            _first_nonfinite(prefill_observation["stats"])
+            if prefill_eligible
+            else None
         )
+        mixed_first = _first_nonfinite(mixed_stats) if mixed_eligible else None
+        with lock:
+            if prefill_eligible:
+                prefill_counts[prefix] = prefill_call_index + 1
+            if mixed_eligible:
+                mixed_counts[prefix] = mixed_call_index + 1
+            if prefill_first is not None or mixed_first is not None:
+                stopped_after_nonfinite = True
+        phase = (
+            "mixed"
+            if num_prefills > 0 and num_decodes > 0
+            else ("prefill" if num_prefills > 0 else "decode")
+        )
+        if prefill_eligible:
+            emit_evidence(
+                config,
+                "prefill_finite_trace",
+                component="gdn-diagnostic",
+                diagnostic_schema=SCHEMA,
+                plan_sha256=config.plan_sha256,
+                prefix=prefix,
+                phase=phase,
+                call_index=prefill_call_index,
+                token_count=prefill_tokens,
+                first_nonfinite_stage=prefill_first,
+                all_observed_finite=prefill_first is None,
+                stats=prefill_observation["stats"],
+                arithmetic_changed=False,
+            )
+        if mixed_eligible:
+            emit_evidence(
+                config,
+                "mixed_state_finite_trace",
+                component="gdn-diagnostic",
+                diagnostic_schema="drrqr-mixed-state-finite-trace/v1",
+                plan_sha256=config.plan_sha256,
+                prefix=prefix,
+                phase=phase,
+                call_index=mixed_call_index,
+                num_prefills=num_prefills,
+                num_decodes=num_decodes,
+                num_decode_tokens=num_decode_tokens,
+                num_actual_tokens=num_actual_tokens,
+                prefill_tokens=prefill_tokens,
+                prefill_state_indices=prefill_indices,
+                decode_state_indices=decode_indices,
+                selected_state_indices=selected_indices,
+                invalid_state_indices=invalid_indices,
+                selected_indices_unique=(
+                    len(prefill_indices + decode_indices)
+                    == len(set(prefill_indices + decode_indices))
+                ),
+                prefill_decode_index_overlap=sorted(
+                    set(prefill_indices).intersection(decode_indices)
+                ),
+                conv_storage=(
+                    _storage_identity(conv_state)
+                    if conv_state is not None
+                    else None
+                ),
+                ssm_storage=(
+                    _storage_identity(ssm_state)
+                    if ssm_state is not None
+                    else None
+                ),
+                first_nonfinite_stage=mixed_first,
+                all_observed_finite=mixed_first is None,
+                stats=mixed_stats,
+                arithmetic_changed=False,
+            )
         return result
 
     public._drror_prefill_diagnostic_config = identity

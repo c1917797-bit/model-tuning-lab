@@ -11,6 +11,7 @@ import sys
 import threading
 import time
 from types import SimpleNamespace
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 DRIVER_SHA = "cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822"
@@ -19,6 +20,8 @@ ROOTS = (
     Path("/drrqr-results/prefill-mc2-mixed-v1"),
     Path("/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk80-endpoint-screen-v1"),
     Path("/drrqr-results/dk80-endpoint-screen-v1"),
+    Path("/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk80-mixed-cache-state-isolation-v1"),
+    Path("/drrqr-results/dk80-mixed-cache-state-isolation-v1"),
 )
 VARIANTS = ("dk32", "dk64", "dk80", "baseline")
 REQUESTS = 16
@@ -45,40 +48,56 @@ def load_driver(path):
 
 
 def request(base_url, prompt, index, barrier, *, input_tokens, output_tokens):
+    prompt_sha256 = hashlib.sha256(json.dumps(prompt).encode()).hexdigest()
     payload = {"model": "qwen3.8", "prompt": prompt, "temperature": 0, "seed": 0,
                "max_tokens": output_tokens, "ignore_eos": True, "stream": False,
                "return_token_ids": True, "logprobs": 5,
                "vllm_xargs": {"hypic_segment_ends": f"{input_tokens // 2},{input_tokens}"}}
-    if barrier is not None:
-        barrier.wait(timeout=900)
     started = time.perf_counter()
-    req = Request(base_url + "/v1/completions", data=json.dumps(payload).encode(),
-                  headers={"Content-Type": "application/json"}, method="POST")
-    with urlopen(req, timeout=1800) as response:
-        data = json.load(response)
-    elapsed = time.perf_counter() - started
-    if data["usage"]["prompt_tokens"] != input_tokens or data["usage"]["completion_tokens"] != output_tokens:
-        raise RuntimeError("response token accounting differs")
-    if len(data.get("choices", [])) != 1:
-        raise RuntimeError("expected one completion")
-    choice = data["choices"][0]
-    ids = choice.get("token_ids")
-    logprobs = choice.get("logprobs") or {}
-    selected = logprobs.get("token_logprobs")
-    top = logprobs.get("top_logprobs")
-    if (choice.get("index") != 0 or choice.get("finish_reason") != "length"
-            or not isinstance(ids, list) or len(ids) != output_tokens
-            or not all(type(value) is int for value in ids)
-            or not isinstance(selected, list) or len(selected) != output_tokens
-            or not all(type(value) in (int, float) and math.isfinite(value) for value in selected)
-            or not isinstance(top, list) or len(top) != output_tokens
-            or not all(isinstance(value, dict) and value
-                       and all(type(score) in (int, float) and math.isfinite(score)
-                               for score in value.values()) for value in top)):
-        raise RuntimeError("completion token/logprob coverage differs")
-    return {"index": index, "prompt_sha256": hashlib.sha256(json.dumps(prompt).encode()).hexdigest(),
-            "token_ids": ids, "selected_logprobs": selected, "top_logprobs": top,
-            "duration_s_diagnostic": elapsed}
+    try:
+        if barrier is not None:
+            barrier.wait(timeout=900)
+        req = Request(base_url + "/v1/completions", data=json.dumps(payload).encode(),
+                      headers={"Content-Type": "application/json"}, method="POST")
+        with urlopen(req, timeout=1800) as response:
+            http_status = response.status
+            data = json.load(response)
+        elapsed = time.perf_counter() - started
+        if (data["usage"]["prompt_tokens"] != input_tokens
+                or data["usage"]["completion_tokens"] != output_tokens):
+            raise RuntimeError("response token accounting differs")
+        if len(data.get("choices", [])) != 1:
+            raise RuntimeError("expected one completion")
+        choice = data["choices"][0]
+        ids = choice.get("token_ids")
+        logprobs = choice.get("logprobs") or {}
+        selected = logprobs.get("token_logprobs")
+        top = logprobs.get("top_logprobs")
+        if (choice.get("index") != 0 or choice.get("finish_reason") != "length"
+                or not isinstance(ids, list) or len(ids) != output_tokens
+                or not all(type(value) is int for value in ids)
+                or not isinstance(selected, list) or len(selected) != output_tokens
+                or not all(type(value) in (int, float) and math.isfinite(value) for value in selected)
+                or not isinstance(top, list) or len(top) != output_tokens
+                or not all(isinstance(value, dict) and value
+                           and all(type(score) in (int, float) and math.isfinite(score)
+                                   for score in value.values()) for value in top)):
+            raise RuntimeError("completion token/logprob coverage differs")
+        return {"ok": True, "index": index, "prompt_sha256": prompt_sha256,
+                "http_status": http_status, "token_ids": ids,
+                "selected_logprobs": selected, "top_logprobs": top,
+                "duration_s_diagnostic": elapsed}
+    except HTTPError as error:
+        body = error.read(4096).decode("utf-8", errors="replace")
+        return {"ok": False, "index": index, "prompt_sha256": prompt_sha256,
+                "http_status": error.code, "error_type": type(error).__name__,
+                "error": str(error), "response_body": body,
+                "duration_s_diagnostic": time.perf_counter() - started}
+    except Exception as error:
+        return {"ok": False, "index": index, "prompt_sha256": prompt_sha256,
+                "http_status": None, "error_type": type(error).__name__,
+                "error": repr(error),
+                "duration_s_diagnostic": time.perf_counter() - started}
 
 
 def validate_activation(events, manifest):
@@ -135,7 +154,8 @@ def main():
         if time.monotonic() >= deadline:
             raise TimeoutError("service startup exceeded900s")
         time.sleep(5)
-    if (manifest.get("plugin_version") not in ("0.1.9", "0.1.10", "0.1.11")
+    if (manifest.get("plugin_version") not in (
+            "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14")
             or manifest.get("variant") != args.variant
             or manifest.get("layout") != "packed" or manifest.get("prefill_mc2") is not True
             or type(manifest.get("prefill_mc2_mixed")) is not bool
@@ -160,8 +180,12 @@ def main():
     try:
         warm_config = SimpleNamespace(**{**vars(config), "input_tokens": 2048,
                                          "prefix_tokens": 1024, "requests": 1})
-        request(args.base_url, driver._build_prompts(warm_config)[0], -1, None,
-                input_tokens=2048, output_tokens=1)
+        report["warmup"] = request(
+            args.base_url, driver._build_prompts(warm_config)[0], -1, None,
+            input_tokens=2048, output_tokens=1,
+        )
+        if not report["warmup"]["ok"]:
+            raise RuntimeError("warmup request failed")
         barrier = threading.Barrier(REQUESTS)
         with ThreadPoolExecutor(max_workers=REQUESTS) as pool:
             futures = {pool.submit(request, args.base_url, prompt, i, barrier,
@@ -173,6 +197,11 @@ def main():
         events = [json.loads(line) for line in (directory / "evidence.jsonl").read_text().splitlines()]
         report["activation"] = validate_activation(events, manifest)
         report["evidence_sha256"] = digest(directory / "evidence.jsonl")
+        failures = [result for result in report["results"] if not result["ok"]]
+        if failures:
+            raise RuntimeError(
+                f"{len(failures)} of {REQUESTS} frozen cohort requests failed"
+            )
         report["status"] = "sequence_probe_pass"
     except Exception as error:
         report.update(status="failed", error=repr(error))
