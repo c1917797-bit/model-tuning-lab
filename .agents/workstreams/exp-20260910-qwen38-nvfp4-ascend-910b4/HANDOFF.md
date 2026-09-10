@@ -16,12 +16,21 @@
   `/cache/cch/Qwen3.8-27B-NVFP4`. All three shards have recorded SHA256
   identities in `checkpoint-evidence.json`.
 - A fail-closed checkpoint inspector passes host and fixed-image tests.
-- One real row from the already complete third shard was independently decoded
-  against NVIDIA ModelOpt commit
-  `079078de9d3cd26fa5baafdb754bba29dde24f7d`: all 5,120 values matched
-  exactly (maximum absolute error `0.0`). This proves the packed-nibble,
-  FP8-local-scale and FP32-global-scale semantics for that sampled tensor; it
-  does not yet prove checkpoint completeness or end-to-end accuracy.
+- Representative rows from all three shards were independently decoded against
+  NVIDIA ModelOpt commit
+  `079078de9d3cd26fa5baafdb754bba29dde24f7d`: all 15,360 sampled values
+  matched exactly (maximum absolute error `0.0`). Together with the full
+  checkpoint inspector, this verifies the packed-nibble, finite-E4M3 local
+  scale, FP32 global scale, and group-16 storage contract. It does not yet
+  prove end-to-end model accuracy.
+- A proposed `nvfp4_group16_matmul` L0 operator contract now exists under
+  `qwen38-nvfp4-ascend/operator/`. CANNBot strict validation passes stages
+  1-7 with no warnings. Stages 8-11 are explicitly skipped because the current
+  formula harness cannot preserve relational `K:K/2:K/16` symbolic shapes;
+  executable tensor truth remains covered by `validate_real_tensor.py`.
+- The contract correctly exposes finite-E4M3 checkpoint data as raw `uint8`
+  bytes because Ascend 910B4 has no native FP8 dtype. It does not claim native
+  FP8 hardware support.
 - No NPU kernel, performance result, or accuracy result is claimed yet.
 
 ## Current blockers
@@ -31,11 +40,16 @@
    Re-audit before any device action and never stop those workloads.
 2. Stock vLLM-Ascend 0.23.0 does not load ModelOpt NVFP4 and the exact group-16
    AscendC adapter/kernel is not implemented yet.
+3. Two pushes of the latest local commits failed with a transient GitHub TLS
+   receive error. The commits and unpushed operator spec remain safe locally;
+   retry without rewriting history.
 
 ## Next actions
 
-1. Implement the group-16 stream-dequant + BF16 Cube direct AscendC operator,
-   building inside the fixed image with source/output bind mounts.
+1. Inspect the existing ops-transformer A16F4 implementation against the
+   validated group-16 contract, then implement the smallest viable group-16
+   stream-dequant + BF16 Cube path. Build only inside the fixed image with
+   source/output bind mounts.
 2. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
 3. Only after promotion, integrate through a read-only mounted plugin in a
    fresh disposable container and run BF16/NVFP4 paired performance and quality.
@@ -56,6 +70,9 @@
   maximum absolute error `0.0`.
 - Checkpoint SHA256 manifest: `exec-00000000000013e6`; recorded in
   `checkpoint-evidence.json`.
+- CANNBot strict L0 spec validation: `exec-000000000000001c`; stages 1-7
+  PASS, stages 8-11 explicit SKIP for the documented relational-shape harness
+  limitation, zero warnings and zero failures.
 - Real `lm_head.weight` row-0 ModelOpt cross-check:
   `exec-00000000000013cd`, exact match, maximum absolute error `0.0`,
   packed-row SHA256

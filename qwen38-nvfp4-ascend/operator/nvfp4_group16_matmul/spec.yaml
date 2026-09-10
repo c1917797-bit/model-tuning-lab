@@ -1,0 +1,269 @@
+# Copyright (c) 2026 Huawei Technologies Co., Ltd.
+# This program is free software, you can redistribute it and/or modify it under the terms and conditions of
+# CANN Open Software License Agreement Version 2.0 (the "License").
+# Please refer to the License for details. You may not use this file except in compliance with the License.
+# THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
+# See LICENSE in the root of the software repository for the full text of the License.
+
+# L0 contract for the NVIDIA ModelOpt NVFP4 weights shipped by
+# nvidia/Qwen3.8-27B-NVFP4. This is a proposed Ascend 910B4 operator contract,
+# not a claim that a performant kernel already exists.
+schema_version: 1
+
+op:
+  name: nvfp4_group16_matmul
+  version: "1.0"
+  description: "BF16 activation matmul with ModelOpt NVFP4 E2M1 packed weights, E4M3 group-16 scale bytes, and one FP32 tensor scale"
+  category: FusedComposite
+  paradigms: [Contraction, LayoutTransform, Quantization, FusedComposite]
+  paradigm_groups:
+    - kind: fusion
+      paradigms: [Contraction, LayoutTransform]
+  lifecycle: experimental
+  error_codes: [null_input, shape_mismatch]
+  platform_constraints:
+    supported_chips: [Ascend910B]
+    requires_hccl: false
+
+inputs:
+  - name: x
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [2, 2]
+    layout: ND
+    shape:
+      symbolic: ["M", "K"]
+  - name: packed_weight
+    role: tensor
+    dtype_set: [uint8]
+    rank_range: [2, 2]
+    layout: ND
+    shape:
+      symbolic: ["N", "K_PACKED"]
+  - name: scale
+    role: tensor
+    # Ascend 910B4 has no native FP8 dtype. Preserve the checkpoint's
+    # finite-E4M3 bytes as uint8 and decode them inside the operator.
+    dtype_set: [uint8]
+    rank_range: [2, 2]
+    layout: ND
+    shape:
+      symbolic: ["N", "K_GROUPS"]
+  - name: weight_scale_2
+    role: tensor
+    dtype_set: [float32]
+    rank_range: [2, 2]
+    layout: ND
+    shape:
+      symbolic: [1, 1]
+
+attributes: []
+
+outputs:
+  - name: y
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      y.shape = (x.shape[0], packed_weight.shape[0])
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      y.dtype = x.dtype
+    layout: ND
+    aliasing: none
+
+shape_constraints:
+  symbols:
+    M: {kind: dim, range: [1, 9223372036854775807]}
+    N: {kind: dim, range: [1, 9223372036854775807]}
+    K: {kind: dim, range: [16, 9223372036854775807]}
+    K_PACKED: {kind: dim, range: [8, 4611686018427387903]}
+    K_GROUPS: {kind: dim, range: [1, 576460752303423487]}
+  global_constraints:
+    - "rank(x) == 2"
+    - "rank(packed_weight) == 2"
+    - "rank(scale) == 2"
+    - "rank(weight_scale_2) == 2"
+  notes:
+    - "K must be divisible by 16"
+    - "K_PACKED must equal K / 2 because each uint8 stores low-nibble then high-nibble FP4 codes"
+    - "K_GROUPS must equal K / 16"
+    - "packed_weight.shape[0] and scale.shape[0] must both equal N"
+    - "scale stores finite-E4M3 bytes from the checkpoint; it is not an Ascend native FP8 tensor"
+    - "The checkpoint scalar weight_scale_2 is exposed to the kernel as a zero-copy [1,1] view"
+    - "Empty tensors are not supported"
+
+dtype_policy:
+  promotion: same_as_first_input
+  supported_combinations:
+    - {inputs: {x: bfloat16, packed_weight: uint8, scale: uint8, weight_scale_2: float32}, outputs: {y: bfloat16}}
+  accumulator_dtype: float32
+
+# Inputs have relational, not broadcast, shapes. The [1,1] scale view is
+# consumed as a scalar inside p1 without materializing an expanded tensor.
+broadcast:
+  kind: none
+
+math_semantics:
+  # CANNBot stage 8 independently materializes every symbolic dimension as 3,
+  # so it cannot preserve K:K/2:K/16. Marking this textual is deliberate; the
+  # executable oracle is qwen38-nvfp4-ascend/tools/validate_real_tensor.py.
+  formula_kind: textual_only
+  formula: |
+    codes[n, 2*j]   = packed_weight[n, j] & 0x0f
+    codes[n, 2*j+1] = packed_weight[n, j] >> 4
+    fp4_lut = [0, 0.5, 1, 1.5, 2, 3, 4, 6, -0, -0.5, -1, -1.5, -2, -3, -4, -6]
+    local_scale[n, g] = decode_finite_e4m3(scale[n, g])
+    w[n, k] = fp4_lut[codes[n, k]]
+              * float32(local_scale[n, floor(k / 16)])
+              * weight_scale_2[0, 0]
+    y = cast_bfloat16(matmul_fp32(float32(x), transpose(w)))
+
+  reference_oracle:
+    framework: torch
+    api: torch.matmul
+    kwargs: {}
+    available_for_dtype: [bfloat16]
+    absent: true
+
+  invariants:
+    - name: no_leak
+      kind: no_leak_intermediates
+      tolerance_inherit: false
+
+  composition:
+    primitives:
+      - id: p1
+        op: elementwise_unary
+        inputs: [packed_weight, scale, weight_scale_2]
+        outputs: [dequant_weight]
+      - id: p2
+        op: gemm
+        inputs: [x, dequant_weight]
+        outputs: [acc]
+      - id: p3
+        op: cast
+        inputs: [acc]
+        outputs: [y]
+    dataflow:
+      intermediates: [dequant_weight, acc]
+      no_leak: true
+      fusable_groups:
+        - [p1, p2, p3]
+
+numerical_stability:
+  required: true
+  techniques:
+    - name: fp32_scale_and_accumulation
+      applies_to: "Convert E4M3 scale bytes to FP32 and accumulate the matrix product in FP32 before BF16 output cast"
+      rationale: "Avoid scale underflow and BF16 accumulation drift while preserving the checkpoint's exact dequantization contract"
+      anti_pattern_id: AP-007
+  affects_invariants: false
+
+numerical_tolerance:
+  source: "ops-precision-standard/quant_compute_community.md"
+  per_dtype:
+    bfloat16: {rtol: 7.0e-2, atol: 7.0e-2, metric: max_relative}
+    uint8: {rtol: 0, atol: 0, metric: bitwise_equal}
+    float32: {rtol: 0, atol: 0, metric: bitwise_equal}
+
+boundary_conditions:
+  - case: "minimal valid group: M=1, N=1, K=16"
+    synthesize:
+      x.shape: "[1, 16]"
+      packed_weight.shape: "[1, 8]"
+      scale.shape: "[1, 1]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: matches_oracle}
+  - case: "decode-critical M=1 shape from Qwen3.8 hidden size"
+    synthesize:
+      x.shape: "[1, 5120]"
+      packed_weight.shape: "[17408, 2560]"
+      scale.shape: "[17408, 320]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: matches_oracle}
+  - case: "K not divisible by 16"
+    synthesize:
+      x.shape: "[1, 15]"
+      packed_weight.shape: "[1, 8]"
+      scale.shape: "[1, 1]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "packed K dimension is not K/2"
+    synthesize:
+      x.shape: "[1, 32]"
+      packed_weight.shape: "[1, 15]"
+      scale.shape: "[1, 2]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "local-scale K dimension is not K/16"
+    synthesize:
+      x.shape: "[1, 32]"
+      packed_weight.shape: "[1, 16]"
+      scale.shape: "[1, 1]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "N mismatch between packed weights and local scales"
+    synthesize:
+      x.shape: "[1, 16]"
+      packed_weight.shape: "[2, 8]"
+      scale.shape: "[1, 1]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "K=0 empty contraction is unsupported"
+    tags: [k_zero_empty_inner_product]
+    synthesize:
+      x.shape: "[1, 0]"
+      packed_weight.shape: "[1, 0]"
+      scale.shape: "[1, 0]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "K dimension mismatch between activation and packed weights"
+    tags: [k_mismatch_raises]
+    synthesize:
+      x.shape: "[1, 32]"
+      packed_weight.shape: "[1, 8]"
+      scale.shape: "[1, 2]"
+      weight_scale_2.shape: "[1, 1]"
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+
+extreme_inputs:
+  - case: "zero activation produces zero output"
+    tags: [zero_input]
+    synthesize:
+      shapes:
+        x: "[1, 16]"
+        packed_weight: "[1, 8]"
+        scale: "[1, 1]"
+        weight_scale_2: "[1, 1]"
+      patterns:
+        - {pattern: all_zero, target: x}
+    machine_check: {kind: equals, value: 0.0}
+  - case: "all positive maximum E2M1 code"
+    synthesize:
+      shapes:
+        x: "[1, 16]"
+        packed_weight: "[1, 8]"
+        scale: "[1, 1]"
+        weight_scale_2: "[1, 1]"
+      patterns:
+        - {pattern: "all_same(119)", target: packed_weight}
+        - {pattern: "all_same(56)", target: scale}
+        - {pattern: "all_same(1)", target: weight_scale_2}
+    machine_check: {kind: matches_oracle}
+  - case: "all negative maximum E2M1 code"
+    synthesize:
+      shapes:
+        x: "[1, 16]"
+        packed_weight: "[1, 8]"
+        scale: "[1, 1]"
+        weight_scale_2: "[1, 1]"
+      patterns:
+        - {pattern: "all_same(255)", target: packed_weight}
+        - {pattern: "all_same(56)", target: scale}
+        - {pattern: "all_same(1)", target: weight_scale_2}
+    machine_check: {kind: matches_oracle}
+
+determinism:
+  required: true
+  accumulation_order: tree
+  bitwise_reproducible: false
