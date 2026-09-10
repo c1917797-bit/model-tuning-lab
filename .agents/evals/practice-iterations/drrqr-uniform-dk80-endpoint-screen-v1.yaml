@@ -1,0 +1,83 @@
+schema: mst-practice-iteration/v1
+id: drrqr-uniform-dk80-endpoint-screen-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Admit or reject uniform energy-Dk80 as the next DRRQR performance-and-fidelity candidate using the exact frozen plan, candidate-only plugin geometry support, native Ascend correctness and one fixed-1024-token endpoint screen.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Uniform energy-Dk64 gains 4.752041 percent throughput but has unresolved task-quality loss. Full-layer native replay shows energy-Dk80 lowers aggregate post-RMS relative-L2 to 0.693278 of Dk64 while retaining a 37.5 percent state reduction, but Dk80 has no integrated endpoint result.
+  medium_term_milestone: A concrete aligned DRRQR candidate with materially better fidelity than Dk64 and enough measured endpoint headroom for one candidate-specific Ascend fusion attempt.
+  short_term_decision: Add only Dk80 and its TP4-local 2176 packed-convolution geometry to the plugin fail-closed allowlists, prove native and integrated execution, and measure one profiler-disabled endpoint screen.
+  deciding_evidence: Require exact plan/source identities, all software gates, Dk128/Dk80 native multi-step eager and NPUGraph correctness, four-worker integrated Dk80 activation and fixed 40-request by 1024-output performance evidence. Promote only if throughput is at least 140 output tokens per second with finite TTFT/TPOT and no protocol drift.
+  budget_or_stop_rule: One geometry-support implementation, one build/install, one native correctness matrix, one integrated service gate and one endpoint screen on physical NPU4-7. No parameter sweep, generic profiling, three-round performance, LongBench-v2 or GSM8K.
+  on_pass: Capture one bounded Dk80 profile using the existing 4-rank/30-decode-step protocol and implement only a Dk80-relevant packed QKV, normalization, gating, recurrent or data-movement fusion with sufficient measured critical-path headroom.
+  on_failure: Preserve and reject uniform Dk80 endpoint promotion; return to an exactly foldable coordinate/state algorithm rather than widening dimensions or running final accuracy.
+  on_inconclusive: Repair only a demonstrated plan identity, geometry allowlist, build, service, orchestration or evidence-binding defect and rerun the affected gate once with unchanged thresholds.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k DRRQR selector at uniform logical Dk80.
+  paper_exact_selection: false
+  old_head_k_dim: 128
+  target_head_k_dim: 80
+  persistent_state_ratio_vs_dense: 0.625
+  qk_projection_ratio_vs_dense: 0.625
+  physical_alignment: 16
+  tp_size: 4
+  tp_local_qkv_channels: 2176
+  plan_path_host: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/aligned-width-plans-v1/dk80-energy-kernel.json
+  plan_path_container: /drrqr-results/aligned-width-plans-v1/dk80-energy-kernel.json
+  plan_sha256: 934ef84ddea2ab0544ac0146d1ab4c3a8fd47d53e97cde6222a3ac2b2ca648ae
+  portability: Logical Dk80 is separated from physical alignment and packed-channel validation; unsupported backends fail closed or use the unchanged dense path, and only paired NPU measurements can establish speed on another environment.
+
+baseline_contract:
+  id: qwen38-dense-common-optimized-npu4-7-v1
+  output_tokens_per_second: 135.14246991715385
+  ttft_mean_ms: 34693.57763297157
+  tpot_mean_ms: 69.43622686534793
+  ten_percent_target_tokens_per_second: 148.65671690886924
+  reuse_condition: Prove the new Dk80 geometry additions are unreachable when DRRQR is disabled and all frozen model, image, runtime, common-optimization, topology and workload fields still match.
+
+numerical_prior:
+  evidence_level: all-48-layer captured-teacher native-NPU trajectory replay
+  candidate_trajectories: 384
+  candidate_steps: 3456
+  energy64_post_rms_relative_l2: 0.3439181998102832
+  energy80_post_rms_relative_l2: 0.23843076125384707
+  energy80_over_energy64: 0.6932775333942008
+  failed_energy80_group_windows: 0
+  merged_report_sha256: de807118e7146c1a1d8dcce6111c3229a6e0d8916a163b3644d0496fd9d0057f
+  claim_boundary: This admits Dk80 geometry support and a fresh integrated correctness gate only; it is not endpoint, task-accuracy or portability acceptance.
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+  container_image_id: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+  output_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk80-endpoint-screen-v1
+  output_policy: Fresh paths only; never overwrite or silently retry a failed result.
+
+changes:
+  - type: workspace
+    description: Add only aligned Dk80 recurrent-observer and TP4-local packed-convolution geometry support with focused regression coverage.
+    files:
+      - projects/drror_vllm_ascend/drror_vllm_ascend/patches/gdn.py
+      - projects/drror_vllm_ascend/drror_vllm_ascend/patches/conv_layout.py
+      - projects/drror_vllm_ascend/tests/test_conv_layout.py
+
+validation_commands:
+  - focused Dk80 geometry and dense-path inactivity tests
+  - full project software test suite
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - native Dk128/Dk80 eager, state and NPUGraph correctness matrix
+  - integrated four-worker Dk80 sequence and activation gate
+  - one profiler-disabled 40-request fixed-1024-output endpoint screen
+
+lessons_ingested:
+  - lesson: A wider uniform aligned coordinate plan can be reconsidered after compensation failures when it directly retains missing historical state, but it needs its own endpoint evidence and must not be confused with a rejected equal-cost heterogeneous allocation.
+    destination: projects/drror_vllm_ascend/AGENTS.md
+    severity: high
