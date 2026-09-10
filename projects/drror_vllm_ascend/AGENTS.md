@@ -157,3 +157,10 @@ endpoint promotion first, then bind the first non-finite tensor at the actual mo
 seam before choosing between algorithm redesign and candidate-specific operator adaptation.
 Do not infer an algorithm failure from an unproven backend shape path, and do not build a
 replacement operator merely because the failure is plausibly kernel-related.
+
+A finite serial long-prefill trace does not clear a failure observed only under concurrent
+mixed prefill/decode scheduling. Preserve the exact prompt cohort, concurrency, cache
+occupancy and decode phase when localizing that failure. Before adapting an operator, bind
+the first non-finite tensor to a concrete request phase and record the real state-cache slot,
+storage identity, shape, stride and non-overlap evidence. A safe prompt or low-occupancy run
+may narrow the failure scope, but cannot be substituted for the failed production regime.

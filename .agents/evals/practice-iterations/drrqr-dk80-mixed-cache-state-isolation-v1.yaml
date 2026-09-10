@@ -1,0 +1,59 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk80-mixed-cache-state-isolation-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Bind the prior Dk80 concurrent endpoint NaN to either real cache-state ownership, mixed-prefill/decode GDN arithmetic, or a later output seam before changing the algorithm or Ascend operator.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 gains only 4.752041 percent; Dk80 passes short native gates and one complete serial 32768-token prefill trace, but the protocol-faithful 16-concurrent endpoint gate previously produced 13 NaN serialization failures.
+  medium_term_milestone: A numerically valid Dk80 DRRQR candidate with a proven candidate-specific Ascend implementation seam, or a defensible rejection that redirects algorithm design.
+  short_term_decision: Determine whether the first non-finite value under the original mixed scheduler regime occurs in Dk80 state-cache ownership/lifecycle, within GDN prefill/decode arithmetic, or only after GDN.
+  deciding_evidence: Re-run the frozen 16-prompt, concurrency-16, input32768/output16 cohort once with lightweight request-preserving receipts and bounded GDN diagnostics that record phase, cache indices, state storage pointer/offset/shape/stride and finite counts until the first non-finite boundary on each worker.
+  budget_or_stop_rule: One diagnostic implementation/build, one four-worker service and one frozen 16-request cohort on physical NPU4-7. No retry, width or seed sweep, profiler, performance acceptance, or task accuracy.
+  on_pass: If non-finite state coincides with overlapping or incorrect cache ownership, implement a Dk80-specific cache-layout/indexing correction with bitwise storage and multi-step NPU gates; if finite inputs first become non-finite inside a named GDN operator, design an explicitly opted-in plugin-owned adapter with a portable mathematical fallback.
+  on_failure: If cache ownership and every GDN boundary remain finite while downstream output becomes non-finite, reject cache/prefill-operator adaptation and bind at most one model-output or logprob seam.
+  on_inconclusive: Preserve the run, reject further diagnostic expansion for Dk80, and return to a materially different exactly foldable DRRQR algorithm/state design.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk80.
+  paper_exact_selection: false
+  plan_sha256: 934ef84ddea2ab0544ac0146d1ab4c3a8fd47d53e97cde6222a3ac2b2ca648ae
+  prior_serial_evidence_sha256: ce0e5243594bad01540fbcf1e4ea849e6513a5172c79ff98ec5759e1c6299162
+  prior_concurrent_failure_receipt_sha256: 7130f9dbdf73caaa0cb98c50c14cd5ed3b85a8cb07a3360c29b7ca03732ccc86
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+  output_policy: Fresh paths only; preserve prior serial and concurrent evidence and never relax finite-output checks.
+
+changes:
+  - type: workspace
+    description: Extend the opt-in Dk80 diagnostic only at the proven mixed scheduler/cache-state seam and make the frozen cohort receipt retain every prompt outcome.
+    files:
+      - projects/drror_vllm_ascend/drror_vllm_ascend/patches/gdn.py
+      - projects/drror_vllm_ascend/drror_vllm_ascend/patches/prefill_diagnostic.py
+      - projects/drror_vllm_ascend/tools/collect_mc2_mixed_sequence.py
+      - projects/drror_vllm_ascend/tests/test_prefill_diagnostic.py
+
+validation_commands:
+  - focused tests for bounded repeated tracing, phase/state identity and all-future receipt retention
+  - full project software test suite
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - one exact-plan four-worker activation gate
+  - one frozen 16-request mixed cohort with no retry
+
+portability_contract:
+  algorithm_semantics: Logical Dk80 selection and recurrence remain separate from physical padding, cache block size and operator tiling.
+  backend_dispatch: A correction must capability-check the cache/operator ABI, be independently named and explicitly opted in, and preserve a mathematically matching fallback or fail closed.
+  evidence_limit: A result on 910B4 and v0.23 is environment-specific until another environment passes its own NPU numerical and paired endpoint gates.
+
+lessons_ingested:
+  - lesson: Protocol-faithful anomaly localization must retain the concurrency, scheduler phase, cache occupancy and prompt cohort of the failure being explained.
+    destination: projects/drror_vllm_ascend/AGENTS.md
+    severity: critical

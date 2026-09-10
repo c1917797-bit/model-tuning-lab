@@ -193,6 +193,20 @@
   plugin-owned Dk80 prefill adapter only if finite inputs first become
   non-finite inside that chunk boundary; otherwise return to a mathematically
   different exactly foldable DRRQR algorithm/state design.
+- The seam-bound drrqr-dk80-prefill-kernel-isolation-v1 iteration is complete
+  and inconclusive about the prior concurrent NaN. After correcting two
+  preserved launch defects, plugin 0.1.13 served one exact 32768-token prompt
+  on physical NPU4-7. All four workers recorded all 48 linear-attention layers
+  and all 11 declared raw/normalized/chunk/state/GDN stages: 192 complete
+  traces, no NaN or Inf, and no arithmetic change. The request returned HTTP
+  200 with one length-terminated token. Evidence SHA256:
+  ce0e5243594bad01540fbcf1e4ea849e6513a5172c79ff98ec5759e1c6299162.
+  This disproves only a deterministic failure for that serial pure-prefill
+  prompt; it does not clear the earlier 13/16 failures under the concurrent
+  mixed-prefill/decode regime and does not justify a replacement prefill
+  operator. Resume with drrqr-dk80-mixed-cache-state-isolation-v1, preserving
+  the original 16-prompt cohort and binding per-request phase, state-cache
+  slots/storage and the first non-finite GDN boundary before any operator work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

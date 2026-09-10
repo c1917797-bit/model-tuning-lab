@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-dk80-prefill-kernel-isolation-v1
 repository: model-tuning-lab
-status: planned
+status: done
 date: 2026-09-10
-validated_commit: pending
+validated_commit: bda1f9e
 
 stage_goal: Determine whether the rejected Dk80 endpoint run becomes non-finite inside the production-length Ascend prefill chunk path or before/after it, so operator adaptation is attempted only for a proven DRRQR blocker.
 
@@ -67,3 +67,30 @@ lessons_ingested:
   - lesson: Admit nonstandard aligned Dk values with a production-context prefill finite gate in addition to short prefill parity and recurrent decode graph parity.
     destination: projects/drror_vllm_ascend/AGENTS.md
     severity: critical
+  - lesson: A finite serial long-prefill trace cannot clear a failure observed only under a concurrent mixed-prefill/decode protocol; preserve the failed scope and bind the next diagnostic to that exact scheduler and cache-state regime.
+    destination: projects/drror_vllm_ascend/AGENTS.md
+    severity: critical
+
+outcome:
+  classification: inconclusive
+  claim_ceiling: The tested Dk80 prompt is finite through every observed production-length pure-prefill GDN seam on this exact 910B4/v0.23 stack; this neither clears the prior concurrent endpoint failure nor proves performance, task accuracy, or portability.
+  implementation_commits:
+    - e35640e5f9317938ec707432e72407920d93f43b
+    - 3c5aa63c8bdbe0729c5bcecc2b6ab92e1e6d56ce
+    - 2496d53
+    - bda1f9e
+  invalid_attempts:
+    - The first launch imported the immutable source snapshot from its working directory instead of the installed wheel and stopped before output creation or NPU use.
+    - The second launch exposed a layered-observer provenance defect and stopped after model load but before any request; preserving the raw Ascend core identity fixed it without weakening verification.
+  corrected_run:
+    service_operation: exec-0000000000000127
+    request_operation: exec-0000000000000132
+    plugin_version: 0.1.13
+    wheel_sha256: fba6f9655ac2df2e680f142dd34f123af5eea6e621dd524a713dfb578a907f73
+    build_manifest_sha256: 323d42bc3b9968cbd15bd253398f2bffc667a08b0f510b6bc218cf2a498c6354
+    service_manifest_sha256: 087db94f9fee6c0aaac6ba1474647aa316239b9ca4576a24366657dcc49fa3d6
+    evidence_sha256: ce0e5243594bad01540fbcf1e4ea849e6513a5172c79ff98ec5759e1c6299162
+    request_receipt_sha256: 43d024234ebb3d596b0f9a65aaa38757ec5a49426eee231ef0ac3308beeba4ee
+    coverage: Four workers, 48 linear-attention layers each, 192 complete traces, all 11 declared stages present, no NaN or Inf, arithmetic unchanged.
+    response: HTTP 200 with exactly 32768 prompt tokens and one length-terminated output token.
+  decision: Do not build a replacement Dk80 prefill operator from this evidence. The next bounded iteration must reproduce the original 16-concurrent mixed-prefill/decode regime and bind state/cache identity and finiteness there.
