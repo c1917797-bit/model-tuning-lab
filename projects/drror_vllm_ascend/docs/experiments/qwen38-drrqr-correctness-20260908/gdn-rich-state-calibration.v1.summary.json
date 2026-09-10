@@ -1,0 +1,71 @@
+{
+  "schema": "drrqr-gdn-rich-state-calibration-summary/v1",
+  "status": "capture_complete_and_independent_audit_passed",
+  "date": "2026-09-10",
+  "claim_boundary": "Trustworthy dense Ascend GDN selector input only; not a DRRQR candidate, performance, task-accuracy, or portability result.",
+  "artifact_root": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/rich-state-calibration-capture-v1",
+  "protocol": {
+    "physical_npus": [4, 5, 6, 7],
+    "tensor_parallel_size": 4,
+    "sequences": 16,
+    "input_tokens": 128,
+    "output_tokens": 9,
+    "decode_steps": 8,
+    "layers": [0, 12, 25, 38, 50, 62],
+    "ranks": [0, 1, 2, 3],
+    "thinking": false,
+    "raw_token_prompts": true,
+    "request_retries": 0,
+    "enforce_eager": true,
+    "profiler": false
+  },
+  "selector_split": {
+    "fit_indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    "untouched_admission_indices": [12, 13, 14, 15]
+  },
+  "operations": {
+    "service": "exec-0000000000001283",
+    "collector": "exec-000000000000128b",
+    "independent_audit": "exec-000000000000129b"
+  },
+  "evidence": {
+    "manifest_sha256": "6281f7613379daa65af4e70ead89e32fc33290a39124a4bcb7425bb7ff0e38c1",
+    "service_manifest_sha256": "ef009c215de4edc08c344bb86a084c4fd530ae6fa18daca80da5e427d9d27b17",
+    "collector_sha256": "2fcb0c9bc60a146dea4aca1398b0c59dc23a59f73e30e7ebe05557dad0ada350",
+    "service_exit_sha256": "706f02cf73e6014704c729276a93a6b642635397f995f1f08910bc4c49337cff",
+    "audit_sha256": "edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5",
+    "archive_set_sha256": "d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20",
+    "auditor_sha256": "652fd55f3d4706885ff6d9e9e3dc104a761a40ce1da3ff05931e893184a9147a"
+  },
+  "coverage": {
+    "archives": 3456,
+    "tensors": 59136,
+    "logical_tensor_bytes_checked": 7220984832,
+    "state_trajectories": 384,
+    "byte_exact_decode_state_transitions": 3072,
+    "stable_state_storage_groups": 24,
+    "worker_failures": 0,
+    "partial_files": 0
+  },
+  "checks": {
+    "archive_and_receipt_hashes": "passed",
+    "request_and_token_binding": "passed",
+    "finite_tensors": "passed",
+    "dense_state_geometry": "passed",
+    "stable_state_storage_metadata": "passed",
+    "prefill_zero_state": "passed",
+    "decode_state_continuity": "byte_exact_passed",
+    "operator_to_post_rms_handoff": "byte_exact_passed",
+    "ascend_source_identity": "passed",
+    "loaded_native_library_identity": "passed",
+    "clean_process_group_exit": "passed",
+    "postflight_npu_cleanup": "passed"
+  },
+  "software_validation": {
+    "focused": "3 passed, 14 warnings",
+    "full_project": "490 passed, 14 warnings",
+    "maintainer_skill_tree": "26 skills passed",
+    "git_diff_check": "passed"
+  },
+  "decision": "Admit the frozen corpus to a separate CPU selector-analysis iteration. Fit only indices 0-11 and keep 12-15 untouched until the final admission calculation."
+}

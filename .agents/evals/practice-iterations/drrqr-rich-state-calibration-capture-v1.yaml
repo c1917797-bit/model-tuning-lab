@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-rich-state-calibration-capture-v1
 repository: model-tuning-lab
-status: in_progress
+status: complete
 date: 2026-09-10
 validated_commit: pending
 
@@ -29,6 +29,29 @@ runtime_attempts:
     result: passed_without_model_load_or_npu_use
     evidence: The unchanged original build manifest and SHA256 validated the original build snapshot, relocated runtime package, wheel and installed 0.1.11 package byte-for-byte. The result records source_relocated true plus distinct build_recorded_source_root, build_snapshot_root and verified_source_root fields.
     decision: The pre-launch provenance defect is repaired without rewriting the original build manifest. Re-run live resource orientation before the one authorized capture.
+  - id: installed-wheel-shadowed-by-launch-cwd-20260910
+    operation_id: exec-000000000000127e
+    result: failed_before_output_creation_or_model_load
+    evidence: The relocation-aware verifier rejected the formal launch with ValueError expected installed wheel, not repository import. The launcher ran with the relocated runtime root as its working directory, so Python resolved drror_vllm_ascend from that current directory instead of the installed wheel. The output directory remained absent and no model or NPU process was created.
+    decision: Treat this as a demonstrated pre-launch environment defect, not an algorithm or NPU result. Preserve the exact runtime root and invoke its absolute launcher path with /tmp as the container working directory so the launcher can verify the relocated source while package discovery resolves the installed wheel. Re-prove resource ownership immediately before this single corrected gate retry.
+  - id: corrected-capture-and-independent-audit-20260910
+    service_operation_id: exec-0000000000001283
+    collector_operation_id: exec-000000000000128b
+    audit_operation_id: exec-000000000000129b
+    result: passed
+    evidence: The corrected launcher ran from /tmp, loaded one dense eager TP4 service on physical NPU4-7, and exited cleanly after the bound collector stop request. All 16 sequential requests completed without retry. The independent CPU auditor loaded all 3456 archives, checked 59136 tensors and 7220984832 logical tensor bytes, and passed 3072 byte-exact recurrent state transitions, finite-tensor checks, token/receipt hashes, stable state storage metadata, operator-to-post-RMS byte binding, source identity and loaded-library identity. Audit SHA256 edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5; archive-set SHA256 d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20.
+    decision: The capture is admitted as trustworthy selector input only. It is not a DRRQR candidate, endpoint performance, task accuracy or portability result. Freeze indices 0-11 for fitting and keep indices 12-15 untouched for admission in a separate recurrence-aware selector iteration.
+
+results:
+  artifact_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/rich-state-calibration-capture-v1
+  audit_report: audit.v1.json
+  audit_sha256: edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5
+  archive_count: 3456
+  archive_set_sha256: d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20
+  state_trajectory_count: 384
+  state_transition_count: 3072
+  software_tests: 490 passed, 14 warnings
+  postflight: service process group absent; container retains only its original bash; physical NPU4-7 healthy with no running process
 
 changes:
   - type: algorithm_evidence
@@ -49,4 +72,6 @@ validation_commands:
   - live host, container, port, memory and physical NPU4-7 ownership preflight
   - one bounded dense capture and independent archive audit
 
-lessons_ingested: []
+lessons_ingested:
+  - A relocation-aware source verifier is insufficient if the launch working directory can still shadow the installed package. Execute absolute audit/launcher paths from a neutral working directory and verify both source and installed identities.
+  - Capture-time assertions and collector receipts are necessary but not sufficient. A separate immutable auditor should reload every tensor archive and independently check state continuity, tensor finiteness, source/library identity and protocol hashes.

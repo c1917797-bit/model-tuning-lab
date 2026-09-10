@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-09.
+- Last updated: 2026-09-10.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
@@ -70,8 +70,8 @@
   aggregate held-out RMSE improved only 2.268935 percent, far below the 10
   percent gate. No NPU replay was admitted. Report SHA256:
   c110a0dc37b7b0eed976dc81c5f0bfc2ab873f738f9fb4f3cac1f239b2fb6300.
-  Stop Q/K-only selector tuning. The active
-  drrqr-rich-state-calibration-capture-v1 iteration will adapt the existing
+  Stop Q/K-only selector tuning. The
+  drrqr-rich-state-calibration-capture-v1 iteration adapted the existing
   pass-through observer to the 16 frozen non-evaluation calibration rows:
   exact 128-token raw-ID prompts, indices 0-11 reserved for later fitting and
   12-15 for later admission, one prefill plus eight decode steps, six layers
@@ -87,7 +87,28 @@
   the original build snapshot, relocated runtime package, wheel and installed
   package byte-for-byte; it records the original and verified paths separately.
   The real 0.1.11 artifacts passed that gate in operation
-  exec-0000000000001263 without model loading or NPU use.
+  exec-0000000000001263 without model loading or NPU use. A subsequent formal
+  launch (exec-000000000000127e) also stopped before output creation, model
+  loading or NPU use: using the relocated runtime root as the container working
+  directory caused Python package discovery to resolve that source tree instead
+  of the installed wheel. Preserve this failure as a pre-launch environment
+  defect. The bounded correction is to run the same absolute launcher from
+  /tmp, allowing the launcher to verify the relocated source root while the
+  installed-package identity check resolves site-packages; refresh NPU4-7
+  ownership immediately before that corrected gate retry. The corrected
+  service (exec-0000000000001283) and collector
+  (exec-000000000000128b) completed successfully and cleaned their process
+  group. The independent audit (exec-000000000000129b) loaded all 3456 tensor
+  archives: 59136 tensors / 7220984832 logical bytes, 384 state trajectories
+  and 3072 byte-exact decode state transitions. It also passed request/token
+  and receipt hashes, finite tensors, stable state-storage metadata,
+  operator-to-post-RMS byte binding, actual Ascend source identity and loaded
+  native-library identity. Audit SHA256:
+  edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5.
+  This admits the corpus as selector input only, not as a candidate, endpoint
+  performance, task accuracy or portability result. The next iteration must
+  fit a named recurrence-aware selector on indices 0-11 only and make its
+  admission decision only on untouched indices 12-15.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -173,14 +194,10 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. For Qwen3.8 DRRQR, finish the bounded
-   drrqr-rich-state-calibration-capture-v1 relocation-aware provenance audit,
-   then
-   re-prove live physical-NPU4-7 ownership before its single dense capture.
-   Preserve the original build manifest and its immutable identity, and retain
-   the separately recorded relocated runtime path. If the capture passes, fit only on
-   calibration indices 0-11 and make the next
-   recurrence-aware selector decision only on untouched indices 12-15. Do not
+2. For Qwen3.8 DRRQR, treat the completed and independently audited
+   drrqr-rich-state-calibration-capture-v1 corpus as frozen selector input.
+   Fit only on calibration indices 0-11 and make the next recurrence-aware
+   selector decision only on untouched indices 12-15. Do not
    implement the rejected mixed-Dk cache plan, broaden profiling, or run final
    accuracy before a replacement candidate passes its numerical gate and a
    fixed-1024-token endpoint screen.
