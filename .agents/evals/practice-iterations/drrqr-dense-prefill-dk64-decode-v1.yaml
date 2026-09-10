@@ -1,0 +1,92 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dense-prefill-dk64-decode-v1
+repository: model-tuning-lab
+status: rejected
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Determine whether exact dense prefill followed by one aligned energy-Dk64 state transition materially improves decode fidelity over all-phase energy-Dk64 while retaining a credible decode-speed path on Ascend.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 provides only 4.752041 percent endpoint gain and its 1024-token LongBench-v2 preflight is below historical dense accuracy. Changing coordinate scores or sparse subspaces did not provide enough recurrent fidelity.
+  medium_term_milestone: Preserve dense prompt processing and first-token behavior while reducing the recurrent state and decode path to aligned Dk64 for the long 1024-token output phase.
+  short_term_decision: On frozen dense trajectories, compare decode-only error after a dense-prefill state projection against the same energy-Dk64 selector run through both prefill and decode.
+  deciding_evidence: Use calibration indices 0-11 with no fitted parameters. Dense-prefill candidate must have exact zero prefill output/state error by construction, transition once by gathering the frozen energy-Dk64 state columns, and then run the same Dk64 recurrence for eight decode steps. Require at least 20 percent lower aggregate decode post-RMS relative-L2, non-worse aggregate decode state relative-L2, at least 72 of 96 layer/rank/head groups non-worse, no group worse by more than 5 percent, finite outputs and exact Dk64/alignment/baseline-plan identity.
+  budget_or_stop_rule: One CPU implementation and one frozen-trajectory run. No selector fitting, weight grid, NPU use, endpoint benchmark or task accuracy in this iteration.
+  on_pass: Freeze the phase-transition contract, collect a new non-evaluation calibration set for admission, then implement a plugin-only native-NPU eager/state/NPUGraph prototype before endpoint screening.
+  on_failure: Preserve and reject dense-prefill state transition as a fidelity recovery mechanism; do not weaken its gates. Reassess whether Dk64 needs an explicit low-cost tail-state correction.
+  on_inconclusive: Fix only a demonstrated recurrence, state-transition, metric-window or identity defect and rerun once without changing the gates.
+
+algorithm_contract:
+  name: Dense-Prefill DRRQR-Decode Transition
+  abbreviation: DPDT
+  baseline: Frozen energy-Dk64 coordinate plan applied from the start of prefill through decode.
+  prefill:
+    width: 128
+    outputs: Exact dense path.
+    recurrent_state: Dense value-width by 128 state.
+    causal_conv_cache: Dense 128-coordinate cache.
+  transition:
+    count_per_sequence: 1
+    trigger: First true decode step after all prompt chunks complete, never a chunked-prefill boundary.
+    recurrent_state: Gather the frozen energy-Dk64 columns from dense state.
+    causal_conv_cache: Gather the same frozen energy-Dk64 coordinates.
+    identity: Include plan hash, source width, target width and phase in cache and graph keys.
+  decode:
+    width: 64
+    recurrence: Existing aligned energy-Dk64 recurrence.
+    expansion: forbidden
+  portability: Phase detection, state gathering and fallback use framework-visible shapes and the frozen plan, not 910B-specific addresses, timing constants or private runtime replacement.
+
+ascend_implementation_contract:
+  portable_fallback: Keep dense prefill weights; on decode compute compatible Q/K/conv outputs and gather the frozen coordinates before reduced L2Norm and the standard Dk64 recurrent operator.
+  optimized_path: Store an explicitly named compact decode weight pack in the plugin and dispatch it only after the one-way phase transition.
+  operator_scope: Only add or adapt an operator after trajectory and fresh-admission gates pass. Candidate work may fuse decode gather/normalization/recurrent operations but must remain opt-in.
+  scheduler_scope: Chunked prefill, prefix-cache reuse, request migration and NPUGraph capture keys must distinguish dense-prefill and compressed-decode states.
+  comparison: Apply every generic serving optimization equally to dense and DPDT.
+  claims: Static or operator evidence cannot replace fixed-1024-token endpoint throughput, TTFT and TPOT.
+
+inputs:
+  capture_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/rich-state-calibration-capture-v1
+  capture_audit_sha256: edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5
+  archive_set_sha256: d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20
+  baseline_plan_sha256: b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c
+  development_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  prohibited_as_fresh_admission: [12, 13, 14, 15]
+
+changes:
+  - Added a fail-closed CPU replay that compares frozen all-phase energy-Dk64 against exact dense prefill followed by one energy-Dk64 state transition at the first true decode step.
+  - Added focused transition/metric/identity tests; the full project suite passed 501 tests.
+  - Preserved the rejected immutable result at /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dpdt-development-v1.
+
+result:
+  operation_id: exec-0000000000000219
+  report_sha256: 94389564a28c28e9eaa1f2baf91502ada40140661b4a12d4c5775325e44edc2e
+  started_sha256: 51111a0c06084712f92371d43b693de5aa2f99c1fb8cbbcf1eac0682d4777ede
+  status: rejected
+  decode_post_rms_improvement: -0.02183104479115716
+  decode_state_improvement: 0.5998592296381363
+  nonworse_heads: 85
+  total_heads: 96
+  worst_head_ratio: 1.3379020683282292
+  failed_gates:
+    - decode post-RMS improvement was -2.183104 percent instead of at least 20 percent
+    - worst head was 33.790207 percent worse instead of at most 5 percent
+  decision: Reject DPDT v1. Do not admit it to fresh capture, NPU replay, integration, endpoint benchmarking or task accuracy.
+validation_commands:
+  - focused tests for exact transition identity, decode metric windows, no expansion and fail-closed plan geometry
+  - full project software test suite
+  - one CPU replay over development indices 0-11
+  - independent report audit
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - Energy-Dk64 coordinate identity is more stable than recurrence-weighted coordinate exchanges and sparse orthogonal replacement.
+  - Accuracy risk may be dominated by applying compression while the prompt establishes recurrent state and hidden representations.
+  - Fixed 1024-token output makes a one-time dense-prefill to compressed-decode transition potentially worthwhile, but endpoint evidence remains mandatory.
+  - Chunked prefill boundaries are not decode transitions.
+  - Exact dense prefill and a better compressed initial state are insufficient by themselves: DPDT improved aggregate decode state relative-L2 by 59.985923 percent yet worsened aggregate decode post-RMS by 2.183104 percent.
+  - Optimize and gate the observable post-RMS decode output, not a state proxy alone.
+  - The next bounded direction is an explicit low-cost decode-tail/output correction with a static foldability and Ascend cost contract; do not retry nearby phase-transition or selector variants.

@@ -138,6 +138,17 @@
   dense prefill and exact first-token state construction, then transition once
   to aligned energy-Dk64 state for decode, with cache conversion and phase
   identity designed explicitly before endpoint work.
+- The drrqr-dense-prefill-dk64-decode-v1 iteration is complete and rejected.
+  Exact dense prefill followed by a single frozen energy-Dk64 transition
+  improved aggregate decode state relative-L2 by 59.985923 percent and made
+  85/96 heads non-worse, but aggregate decode post-RMS relative-L2 worsened by
+  2.183104 percent and the worst head regressed 33.790207 percent. The full
+  project suite passed 501 tests. No fresh capture, NPU replay, integration,
+  endpoint benchmark or task accuracy followed. Report SHA256:
+  94389564a28c28e9eaa1f2baf91502ada40140661b4a12d4c5775325e44edc2e.
+  Do not retry nearby dense-prefill transition variants or optimize a state
+  proxy alone. The next bounded algorithmic direction is an explicit low-cost
+  decode-tail/output correction with static foldability and Ascend cost gates.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
