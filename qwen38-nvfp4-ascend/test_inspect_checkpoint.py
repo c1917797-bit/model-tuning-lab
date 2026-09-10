@@ -40,6 +40,9 @@ def _fixture(root: Path, group_size: int = 16) -> None:
                 "model.layers.0.mlp.gate_proj.weight": shard,
                 "model.layers.0.mlp.gate_proj.weight_scale": shard,
                 "model.layers.0.mlp.gate_proj.weight_scale_2": shard,
+                "model.layers.0.self_attn.q_proj.weight": shard,
+                "model.layers.0.self_attn.q_proj.input_scale": shard,
+                "model.layers.0.self_attn.q_proj.weight_scale": shard,
             }
         },
     )
@@ -62,6 +65,21 @@ def _write_test_shard(path: Path) -> None:
             "shape": [],
             "data_offsets": [0, 0],
         },
+        "model.layers.0.self_attn.q_proj.weight": {
+            "dtype": "F8_E4M3",
+            "shape": [32, 16],
+            "data_offsets": [0, 0],
+        },
+        "model.layers.0.self_attn.q_proj.input_scale": {
+            "dtype": "F32",
+            "shape": [],
+            "data_offsets": [0, 0],
+        },
+        "model.layers.0.self_attn.q_proj.weight_scale": {
+            "dtype": "F32",
+            "shape": [],
+            "data_offsets": [0, 0],
+        },
     }
     raw = json.dumps(header).encode("utf-8")
     path.write_bytes(struct.pack("<Q", len(raw)) + raw)
@@ -78,6 +96,8 @@ def test_complete_checkpoint() -> None:
         assert result["nvfp4_group_sizes"] == [16]
         assert result["validated_nvfp4_layers"] == 1
         assert result["nvfp4_tensor_contract_errors"] == []
+        assert result["validated_fp8_layers"] == 1
+        assert result["fp8_tensor_contract_errors"] == []
 
 
 def test_missing_shard_is_reported() -> None:
@@ -101,8 +121,29 @@ def test_group32_substitution_is_rejected() -> None:
             raise AssertionError("group32 checkpoint must fail the NVFP4 contract")
 
 
+def test_non_scalar_fp8_scale_is_rejected() -> None:
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        _fixture(root)
+        _write_test_shard(root / "model-00001.safetensors")
+        shard = root / "model-00001.safetensors"
+        with shard.open("rb") as handle:
+            header_size = struct.unpack("<Q", handle.read(8))[0]
+            header = json.loads(handle.read(header_size))
+        header["model.layers.0.self_attn.q_proj.input_scale"]["shape"] = [1]
+        raw = json.dumps(header).encode("utf-8")
+        shard.write_bytes(struct.pack("<Q", len(raw)) + raw)
+        try:
+            inspect_checkpoint(root)
+        except CheckpointContractError as error:
+            assert "input_scale must be scalar F32" in str(error)
+        else:
+            raise AssertionError("non-scalar FP8 input scale must fail")
+
+
 if __name__ == "__main__":
     test_complete_checkpoint()
     test_missing_shard_is_reported()
     test_group32_substitution_is_rejected()
+    test_non_scalar_fp8_scale_is_rejected()
     print("PASS: checkpoint contract inspector")

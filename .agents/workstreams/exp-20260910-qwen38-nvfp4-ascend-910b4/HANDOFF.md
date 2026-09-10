@@ -3,7 +3,13 @@
 ## Status
 
 - Dedicated worktree: `/opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4`.
-- Stock vLLM-Ascend 0.23.0 has no ModelOpt NVFP4 loader.
+- Stock vLLM-Ascend 0.23.0 has a ModelSlim loader, but it cannot directly load
+  this official ModelOpt mixed checkpoint: it expects
+  `quant_model_description.json`, while the checkpoint supplies
+  `hf_quant_config.json`.
+- The checkpoint is mixed precision: 193 dense NVFP4 layers at group size 16
+  and 208 FP8 layers. The fixed image registers `W4A16_MXFP4` only for MoE and
+  defaults that path to group size 32; no dense group-16 registration exists.
 - ops-transformer proves E2M1/A16F4 capability, but its available per-group
   contract starts at 32 while the checkpoint requires 16.
 - A dependency-free exact-format reference codec and tests are now present.
@@ -23,6 +29,11 @@
   checkpoint inspector, this verifies the packed-nibble, finite-E4M3 local
   scale, FP32 global scale, and group-16 storage contract. It does not yet
   prove end-to-end model accuracy.
+- The checkpoint inspector now also validates every FP8 layer's rank-2
+  `F8_E4M3` weight plus scalar FP32 `input_scale` and `weight_scale`. All 208
+  FP8 layers pass, so all 401 mixed-precision layer declarations now have a
+  checked tensor-storage contract. This still does not validate an Ascend FP8
+  execution path.
 - A proposed `nvfp4_group16_matmul` L0 operator contract now exists under
   `qwen38-nvfp4-ascend/operator/`. CANNBot strict validation passes stages
   1-7 with no warnings. Stages 8-11 are explicitly skipped because the current
@@ -38,20 +49,26 @@
 1. The 2026-09-10 live audit found NPU0-3 occupied by four Qwen3.5 TP workers.
    NPU4-7 had no processes but remain in an external DRRQR container declaration.
    Re-audit before any device action and never stop those workloads.
-2. Stock vLLM-Ascend 0.23.0 does not load ModelOpt NVFP4 and the exact group-16
-   AscendC adapter/kernel is not implemented yet.
+2. The fixed image needs an external, fail-closed config adapter plus a dense
+   W4A16 group-16 scheme. The exact AscendC adapter/kernel is not implemented
+   yet. The existing FP8 mapping must also be validated because this checkpoint
+   has 208 FP8 layers; it is not an all-FP4 model.
 3. Two pushes of the latest local commits failed with a transient GitHub TLS
    receive error. The commits and unpushed operator spec remain safe locally;
    retry without rewriting history.
 
 ## Next actions
 
-1. Inspect the existing ops-transformer A16F4 implementation against the
+1. Implement and unit-test the fail-closed in-memory translation from the
+   checkpoint's `hf_quant_config.json`; do not create or edit files in the
+   checkpoint or image. Then register the dense group-16 scheme in an external
+   plugin.
+2. Inspect the existing ops-transformer A16F4 implementation against the
    validated group-16 contract, then implement the smallest viable group-16
    stream-dequant + BF16 Cube path. Build only inside the fixed image with
    source/output bind mounts.
-2. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
-3. Only after promotion, integrate through a read-only mounted plugin in a
+3. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
+4. Only after promotion, integrate through a read-only mounted plugin in a
    fresh disposable container and run BF16/NVFP4 paired performance and quality.
 
 ## Verified operations
@@ -77,6 +94,14 @@
   `exec-00000000000013cd`, exact match, maximum absolute error `0.0`,
   packed-row SHA256
   `31c1dd3c007d2daca930d927d6217ade2a96ba42826bfd3ae8073c22d7f0c4d7`.
+- Fixed-image ModelSlim/registry/API audit:
+  `exec-000000000000003a` through `exec-0000000000000045`; recorded in
+  `runtime-compatibility-evidence.json`. It proves that an external config
+  adapter and dense group-16 scheme are required. It is device-free evidence,
+  not an NPU support or speed claim.
+- Mixed NVFP4/FP8 checkpoint inspector: host `exec-000000000000004b` and
+  fixed-image read-only mount `exec-000000000000004d`; 193/193 NVFP4 and
+  208/208 FP8 layers passed with zero tensor-contract errors.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

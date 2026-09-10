@@ -145,6 +145,48 @@ def inspect_checkpoint(model_dir: str | Path) -> dict[str, Any]:
             "NVFP4 tensor contract failed: " + "; ".join(nvfp4_tensor_contract_errors[:8])
         )
 
+    fp8_tensor_contract_errors: list[str] = []
+    validated_fp8_layers = 0
+    for layer_name, spec in layers.items():
+        if not isinstance(spec, dict) or spec.get("quant_algo") != "FP8":
+            continue
+        names = {
+            "weight": f"{layer_name}.weight",
+            "input_scale": f"{layer_name}.input_scale",
+            "weight_scale": f"{layer_name}.weight_scale",
+        }
+        layer_shards = {weight_map.get(name) for name in names.values()}
+        if None in layer_shards or any(shard in missing_shards for shard in layer_shards):
+            continue
+        entries = {kind: tensor_headers.get(name) for kind, name in names.items()}
+        if any(entry is None for entry in entries.values()):
+            fp8_tensor_contract_errors.append(f"{layer_name}: tensor missing from shard header")
+            continue
+        weight = entries["weight"]
+        input_scale = entries["input_scale"]
+        weight_scale = entries["weight_scale"]
+        if weight.get("dtype") != "F8_E4M3" or len(weight.get("shape", [])) != 2:
+            fp8_tensor_contract_errors.append(
+                f"{layer_name}: weight must be rank-2 F8_E4M3"
+            )
+        for scale_name, scale in (
+            ("input_scale", input_scale),
+            ("weight_scale", weight_scale),
+        ):
+            if scale.get("dtype") != "F32" or scale.get("shape") != []:
+                fp8_tensor_contract_errors.append(
+                    f"{layer_name}: {scale_name} must be scalar F32"
+                )
+        validated_fp8_layers += 1
+    if not missing_shards and validated_fp8_layers != algorithms["FP8"]:
+        fp8_tensor_contract_errors.append(
+            f"validated {validated_fp8_layers} of {algorithms['FP8']} FP8 layers"
+        )
+    if not missing_shards and fp8_tensor_contract_errors:
+        raise CheckpointContractError(
+            "FP8 tensor contract failed: " + "; ".join(fp8_tensor_contract_errors[:8])
+        )
+
     return {
         "model_dir": str(root.resolve()),
         "quant_method": quant_method,
@@ -159,6 +201,8 @@ def inspect_checkpoint(model_dir: str | Path) -> dict[str, Any]:
         "missing_shards": missing_shards,
         "validated_nvfp4_layers": validated_nvfp4_layers,
         "nvfp4_tensor_contract_errors": nvfp4_tensor_contract_errors,
+        "validated_fp8_layers": validated_fp8_layers,
+        "fp8_tensor_contract_errors": fp8_tensor_contract_errors,
         "complete": not missing_shards,
     }
 
