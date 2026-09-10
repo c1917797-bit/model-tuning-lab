@@ -61,6 +61,7 @@
     },
     "w4a16_mxfp4_default_group_size": 32,
     "w4a16_mxfp4_dense_linear_registered": false,
+    "npu_quant_matmul_public_a2_fp8_fp4_support_documented": false,
     "torch_npu_api_symbols_present": [
       "float4_e2m1fn_x2",
       "npu_quant_matmul",
@@ -69,6 +70,18 @@
       "npu_format_cast"
     ],
     "device_support_inferred_from_symbol_presence": false
+  },
+  "ops_transformer_findings": {
+    "weight_quant_batch_matmul_v2_has_a16f4_source": true,
+    "fp4_specific_kernel_tree": "arch35",
+    "accepted_fp4_per_group_sizes": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "checkpoint_group_size_16_accepted": false,
+    "ascend_910b4_execution_proven": false
   },
   "compatibility_decision": {
     "loadable_without_plugin": false,
@@ -107,6 +120,12 @@
     "exec-0000000000000057",
     "exec-0000000000000058",
     "exec-0000000000000059"
+    ,
+    "exec-0000000000000064",
+    "exec-0000000000000066",
+    "exec-0000000000000067",
+    "exec-0000000000000068",
+    "exec-0000000000000069"
   ],
   "scope_limit": "This is a device-free source/runtime compatibility audit. It is not an NPU correctness, accuracy, or performance result."
 }

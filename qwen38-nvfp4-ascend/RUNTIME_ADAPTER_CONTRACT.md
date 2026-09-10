@@ -19,6 +19,12 @@ registers its Ascend `W4A16_MXFP4` method only for MoE layers, with group size
 32 as its default. Qwen3.8 needs dense linear, group-16 execution. Therefore,
 changing a serve flag cannot make the checkpoint run correctly.
 
+`ops-transformer` is prior art, not an already-compatible backend. Its
+`weight_quant_batch_matmul_v2` tree contains A16F4 checks, but the FP4-specific
+kernel sources are under `arch35`, and the per-group checker accepts only
+32/64/128/256. It rejects this checkpoint's group size 16. No 910B4 execution
+claim may be made from that source alone.
+
 ## Plugin boundary
 
 The deliverable must be an external, read-only mounted plugin. It may:
@@ -46,6 +52,8 @@ modify site-packages, overlay framework sources, or commit a container.
   performance comparison.
 - Operator correctness must pass against the checked-in reference decoder
   before a full-model run.
+- A 910B4 compile and minimal execution probe must precede any reuse of the
+  `ops-transformer` A16F4 implementation.
 
 ## Evidence boundary
 

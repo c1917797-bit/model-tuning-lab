@@ -13,8 +13,9 @@
 - The checkpoint is mixed precision: 193 dense NVFP4 layers at group size 16
   and 208 FP8 layers. The fixed image registers `W4A16_MXFP4` only for MoE and
   defaults that path to group size 32; no dense group-16 registration exists.
-- ops-transformer proves E2M1/A16F4 capability, but its available per-group
-  contract starts at 32 while the checkpoint requires 16.
+- ops-transformer contains useful E2M1/A16F4 source, but it is not proof of
+  910B4 support: FP4-specific kernels are under `arch35`, and the per-group
+  checker accepts only 32/64/128/256 while this checkpoint requires 16.
 - A dependency-free exact-format reference codec and tests are now present.
 - The reference test passed both on the host and in a network-disabled,
   device-free, disposable `quay.io/ascend/vllm-ascend:v0.23.0` container.
@@ -66,10 +67,10 @@
 1. Reuse and unit-test vLLM core's `ModelOptMixedPrecisionConfig` layer
    resolution, then implement a guarded external plugin which enables the
    method only for this contract and returns Ascend-specific per-layer methods.
-2. Inspect the existing ops-transformer A16F4 implementation against the
-   validated group-16 contract, then implement the smallest viable group-16
-   stream-dequant + BF16 Cube path. Build only inside the fixed image with
-   source/output bind mounts.
+2. Run a build-only 910B4 capability probe against the ops-transformer A16F4
+   source. If it cannot compile for 910B4, do not port its arch35 kernels
+   blindly; implement the smallest 910B4 group-16 stream-dequant + BF16 Cube
+   path. Build only inside the fixed image with source/output bind mounts.
 3. Gate TP4 M=1 Qwen shapes for correctness and repeated latency.
 4. Only after promotion, integrate through a read-only mounted plugin in a
    fresh disposable container and run BF16/NVFP4 paired performance and quality.
@@ -105,6 +106,11 @@
 - Mixed NVFP4/FP8 checkpoint inspector: host `exec-000000000000004b` and
   fixed-image read-only mount `exec-000000000000004d`; 193/193 NVFP4 and
   208/208 FP8 layers passed with zero tensor-contract errors.
+- Fixed-image `torch_npu` public API contract and ops-transformer source audit:
+  `exec-0000000000000064`, `exec-0000000000000066` through
+  `exec-0000000000000069`. A2 documentation does not establish FP8/FP4
+  `npu_quant_matmul`; ops-transformer group-16/910B4 capability remains
+  unproven and must be probed rather than assumed.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.
