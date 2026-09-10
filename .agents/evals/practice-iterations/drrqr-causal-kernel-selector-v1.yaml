@@ -1,0 +1,36 @@
+schema: mst-practice-iteration/v1
+id: drrqr-causal-kernel-selector-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Decide whether a causal Q/K interaction selector can improve held-out reduced-kernel fidelity enough to admit one native-NPU DRRQR trajectory replay.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Common-optimized energy-Dk64 reaches only 4.752041 percent endpoint throughput gain and remains below historical dense quality, while kernel-normalized StrongRRQR worsened the frozen QK proxy by 47.960894 percent and equal-cost energy-selector width allocation could not admit any Dk48 layer.
+  medium_term_milestone: A recurrence-aware, backend-independent Dk64 selector that materially improves held-out GDN kernel fidelity and can then be tested on preserved native teacher trajectories before attempting Dk48.
+  short_term_decision: Add one deterministic causal-interaction-energy selector trained only on calibration captures 0 through 11 and compare its Dk64 plan with the frozen energy-Dk64 plan on untouched captures 12 through 15.
+  deciding_evidence: The new selector must reduce held-out normalized-QK score RMSE by at least 10 percent versus energy-Dk64 without using teacher prompts; only then may one all-48-layer native-NPU teacher replay be planned, where aggregate post-RMS relative-L2 must improve by at least 10 percent with no local window worsening over 5 percent.
+  budget_or_stop_rule: One selector implementation, focused software tests, one deterministic Dk64 plan generation, and one CPU held-out proxy run. Do not use NPU, start a model service, profile operators, implement cache changes, or run task accuracy unless this gate passes and a new bounded NPU iteration is committed first.
+  on_pass: Commit the plan/proxy evidence and predeclare one candidate-only all-layer replay on physical NPU4 using the preserved teacher trajectories.
+  on_failure: Reject this diagonal causal-interaction surrogate and inspect a bounded covariance or state-sensitivity objective; do not return to generic operator or heterogeneous-cache work.
+  on_inconclusive: Preserve the evidence and repair only a demonstrated capture, identity, implementation, or evaluation defect without changing the frozen thresholds.
+
+changes:
+  - type: algorithm
+    description: Add a portable causal Q/K interaction-energy coordinate selector and honest non-paper-exact provenance.
+    files:
+      - projects/drror_vllm_ascend/drror_vllm_ascend/selection.py
+      - projects/drror_vllm_ascend/drror_vllm_ascend/prepare.py
+      - projects/drror_vllm_ascend/tests/test_contracts.py
+
+validation_commands:
+  - python3 -m pytest projects/drror_vllm_ascend/tests
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - generate one Dk64 causal-kernel-energy plan from frozen calibration captures 0 through 11
+  - compare causal and frozen energy Dk64 on held-out capture indices 12,13,14,15 with qk_kernel_fidelity.py
+
+lessons_ingested: []
