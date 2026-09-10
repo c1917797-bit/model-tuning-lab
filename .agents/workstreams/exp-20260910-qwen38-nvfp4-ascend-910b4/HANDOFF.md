@@ -68,6 +68,12 @@
   and HumanEval (164), with source/output SHA256 identities recorded in
   `quality-protocol-evidence.json`. Strict MMLU/GSM8K paired scoring code and
   fixed-image unit tests pass. Generated artifacts remain ignored by Git.
+- The old eight-device DP2 launcher has been removed. Matched launchers now
+  expose only physical NPU0-3 and use TP4: `start_bf16_tp4.sh` for the control
+  and `start_nvfp4_reference_tp4.sh` for the external reference plugin. Model
+  and plugin mounts are read-only; candidate installation is confined to its
+  disposable container layer. Shell syntax validation passes, but neither
+  launcher has been executed while the lease is unavailable.
 
 ## Current blockers
 
@@ -161,6 +167,7 @@
 - Frozen full quality manifests: `exec-000000000000014e`; fixed-image,
   network-disabled, device-free tests: `exec-000000000000014f` and
   `exec-0000000000000151`. See `quality-protocol-evidence.json`.
+- Four-device TP4 launcher syntax validation: `exec-0000000000000159`, pass.
 - Whitespace/error check: `exec-0000000000001387`, pass.
 - Live resource audit: `exec-000000000000138a` and
   `exec-000000000000138b`; NPU0-3 unavailable.

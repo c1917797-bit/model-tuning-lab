@@ -77,6 +77,12 @@ The explicit environment opt-in is mandatory. This mode reconstructs
 quantized weights and runs BF16 linear compute; it is suitable for integration
 and quality-upper-bound validation, not for claiming NVFP4/FP8 acceleration.
 
+After the maintainer has obtained an exclusive physical NPU0-3 lease and
+passed the port/memory/container gates, use the matched TP4 launchers
+`start_bf16_tp4.sh` and `start_nvfp4_reference_tp4.sh`. Neither launcher mounts
+NPU4-7. The patch source and both model directories are read-only; plugin
+installation occurs only in the candidate's disposable container layer.
+
 After downloading the official snapshot, fail closed on format and shard
 completeness before any conversion or serving attempt:
 
