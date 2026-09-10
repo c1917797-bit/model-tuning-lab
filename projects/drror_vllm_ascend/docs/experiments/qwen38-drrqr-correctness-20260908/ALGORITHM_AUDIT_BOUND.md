@@ -83,6 +83,18 @@ energy. It therefore failed before NPU replay. This rejects the diagonal causal
 surrogate, not covariance-aware or direct state-sensitivity selection. Report
 SHA256: 77e08035e819c6d680da929687cb8b65d5ce5a45df3784b4914c90c34df5bad9.
 
+A bounded follow-up started from the frozen energy-Dk64 map and optimized the
+exact causal normalized-QK score under per-head 98% Q/K marginal-energy floors.
+On six representative layers and all 96 local heads, four train-only exchanges
+per head improved mean train RMSE by about 11.7% and 67/96 heads improved on
+held-out captures. Aggregate held-out RMSE improved only 2.163152%
+(0.027786426 to 0.027185363), below the frozen 10% gate, and three heads
+worsened by more than 5%. It was therefore rejected before NPU replay. The gap
+between train and held-out evidence points to excessive search capacity or
+insufficient training-token coverage, not a proven endpoint or state-fidelity
+gain. Report SHA256:
+32ce108ce430e81e221547b6b9244d47a9971ddab5d54cad4ae9bc500dd1b38a.
+
 Changing the coordinate selector while keeping Dk64 leaves all runtime tensor
 shapes unchanged. Therefore it may recover accuracy but cannot close the
 measured performance gap from +4.752041% to the required >=10% throughput.

@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-causal-exchange-prototype-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-10
 validated_commit: pending
 
@@ -32,4 +32,26 @@ validation_commands:
   - git diff --check
   - one deterministic CPU prototype run against frozen captures and the energy-Dk64 plan
 
-lessons_ingested: []
+result:
+  outcome: rejected_at_proxy
+  evidence_level: deterministic representative-layer held-out causal normalized-QK proxy
+  claim_ceiling: The bounded 16-token, four-swap, marginal-preserving exchange prototype is rejected because its aggregate held-out improvement is below the predeclared 10 percent gate and three heads regress by more than 5 percent. This does not reject lower-capacity exchange, richer training coverage, direct state sensitivity, endpoint performance, task accuracy, or portability.
+  report_sha256: 32ce108ce430e81e221547b6b9244d47a9971ddab5d54cad4ae9bc500dd1b38a
+  head_count: 96
+  accepted_swap_count: 364
+  baseline_heldout_rmse: 0.027786425668701074
+  candidate_heldout_rmse: 0.027185363180885283
+  candidate_over_baseline: 0.9783684848500384
+  heldout_relative_improvement: 0.021631515149961644
+  heads_improved: 67
+  heads_worse_over_5_percent: 3
+  mean_train_ratio: 0.8831613452918159
+  minimum_q_energy_ratio: 0.9821017674571735
+  minimum_k_energy_ratio: 0.9825992426267894
+  npu_replay_admitted: false
+  next_decision: Test one lower-capacity exchange variant with broader train-token coverage and fewer swaps to distinguish sample scarcity from objective mismatch before requesting a richer NPU calibration capture.
+
+lessons_ingested:
+  - lesson: Direct causal-kernel optimization can improve a majority of heads while satisfying marginal-energy floors, but a large train-versus-heldout gap and local regressions show that small-token multi-swap search overfits and is not enough for NPU admission.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/ALGORITHM_AUDIT_BOUND.md
+    severity: high
