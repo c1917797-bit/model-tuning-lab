@@ -1,0 +1,101 @@
+schema: mst-practice-iteration/v1
+id: drrqr-recurrent-trajectory-selector-v1
+repository: model-tuning-lab
+status: complete_rejected
+date: 2026-09-10
+validated_commit: pending
+
+stage_goal: Fit and independently gate one named Dk64 Recurrent-Transition Saliency selector using the frozen, independently audited dense Ascend GDN trajectory corpus.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 reaches only 4.752041 percent endpoint gain and has no accepted same-stack max_tokens 2048 quality result. StrongRRQR and three Q/K-only objectives were rejected. The new dense corpus now provides exact recurrent state, normalized Q/K, value, decay, beta, operator output and post-RMS output for a frozen train/held-out split.
+  medium_term_milestone: A recurrence-aware Dk64 coordinate map that beats the frozen energy-Dk64 map on untouched trajectory evidence strongly enough to justify native-NPU multi-step replay.
+  short_term_decision: Decide whether Recurrent-Transition Saliency can convert real dense state read, key-feedback and state-write influence into a Dk64 map with at least 10 percent lower untouched post-RMS error than energy-Dk64 while preserving state-transition fidelity.
+  deciding_evidence: First independently reproduce the dense operator state/output equations from every frozen trajectory. Fit all score weights and coordinate choices on indices 0-11 only. Lock one global weight tuple and every per-head index set before loading indices 12-15. On untouched indices require at least 10 percent lower aggregate post-RMS relative-L2 than energy-Dk64, no worse aggregate selected-state relative-L2, at least 75 percent of 96 layer/rank/head groups non-worse, no group worse by more than 5 percent, exact Dk64/alignment/energy-floor contracts, and complete finite outputs.
+  budget_or_stop_rule: One CPU-only implementation and bounded predefined global weight grid. Reuse the frozen 3456 archives; do not collect more data, touch an NPU, profile, integrate a plan, benchmark endpoints or run task accuracy in this iteration.
+  on_pass: Freeze the selected plan and metrics, then create a separate native-NPU eager/state/NPUGraph replay iteration before any endpoint screen.
+  on_failure: Preserve the selector and report as a negative recurrence-aware result; diagnose which read, feedback or write term failed, then choose one materially different recurrence-compensation design rather than retuning the same grid.
+  on_inconclusive: Preserve partial evidence and fix only a demonstrated formula, identity or numerical-analysis defect before rerunning.
+
+algorithm_contract:
+  name: Recurrent-Transition Saliency
+  abbreviation: RTS
+  target_width: 64
+  portability: Uses only model tensors and algebraic GDN recurrence quantities; no device-specific timing, kernel name, memory address or 910B-specific threshold enters the selection score.
+  fit_terms:
+    - normalized joint Q/K energy
+    - dense state readout contribution
+    - key-feedback contribution to the delta residual
+    - direct state-write column contribution
+  recurrence_equation: S_t = exp(g_t) * S_(t-1) + beta_t * (v_t - exp(g_t) * S_(t-1) @ k_t) outer k_t
+  readout_equation: o_t = S_t @ q_t / sqrt(Dk)
+  baseline: frozen energy-kernel Dk64 coordinate plan
+  guardrails:
+    max_swaps_per_head: 8
+    q_energy_floor_relative_to_energy_baseline: 0.98
+    k_energy_floor_relative_to_energy_baseline: 0.98
+    one_global_weight_tuple: true
+    head_specific_hyperparameters: false
+
+inputs:
+  capture_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/rich-state-calibration-capture-v1
+  capture_audit_sha256: edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5
+  archive_set_sha256: d630cd31f77f6a1ef29b29daac4106aff3f8af493c001ff4d7678f1af2e3ab20
+  manifest_sha256: 6281f7613379daa65af4e70ead89e32fc33290a39124a4bcb7425bb7ff0e38c1
+  fit_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  untouched_admission_indices: [12, 13, 14, 15]
+
+changes:
+  - Added an exact CPU replay of the captured GDN recurrence and actual post-RMS gate for frozen dense trajectories.
+  - Added a bounded, predeclared global weight grid for read, key-feedback and state-write saliency with at most eight coordinate exchanges per head.
+  - Added fit-lock-before-heldout enforcement, exact frozen energy-plan identity, finite/width/alignment/energy-floor checks and per-head robustness gates.
+  - Added focused software tests and eliminated repeated archive I/O by reusing decoded layer/rank trajectories.
+  - Fixed three implementation defects before accepting evidence: removals originally targeted coordinate numbers instead of the lowest-scored selected coordinates; a no-candidate fit path could duplicate heldout evaluation; and the named energy baseline was incorrectly allowed to exchange coordinates.
+  - Preserved recurrent-transition-selector-v1 as invalid because its fit comparator was not the frozen energy plan, then performed exactly one contract-permitted rerun after only the demonstrated baseline-identity fix.
+validation_commands:
+  - focused software tests for recurrence reconstruction, saliency terms, split isolation, width/alignment and fail-closed output
+  - full project software test suite
+  - one CPU selector run over the frozen capture
+  - independent report/plan audit
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+results:
+  invalid_first_run:
+    artifact_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/recurrent-transition-selector-v1
+    report_sha256: 65db8b8a8053ec6c2ba6b4d721b7d52a7d1dcaa0a236ea0868ea4c5f302e9ccb
+    disposition: invalid
+    reason: The configuration named energy changed all 96 heads and made 761 exchanges, so fit selection was not compared with the frozen energy-Dk64 plan.
+  corrected_run:
+    operation_id: exec-00000000000012f3
+    duration_ms: 1382780
+    artifact_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/recurrent-transition-selector-v2
+    started_sha256: b809709f4bcb01b64273fdad849e120de54b183903eab043d60e7da05b0d566a
+    fit_lock_sha256: 7f9f405f445e193de188e0e1435fdd0e0ac617329379df6ccae9f6b29675bfe1
+    report_sha256: 0ee9838dfe41fecb4b89b01963764f51fcf02f4009c611b7eac5cc7ce99ddaa5
+    script_sha256: b38c455ec765ef4dea429e29b46f446813a59b39f036b01cf254ad276f0adaac
+    locked_configuration: read-feedback
+    frozen_energy_changed_heads: 0
+    frozen_energy_total_swaps: 0
+    frozen_energy_minimum_q_energy_ratio: 1.0
+    frozen_energy_minimum_k_energy_ratio: 1.0
+    heldout_loaded_only_after_fit_lock: true
+    heldout_post_rms_improvement: 0.03570485662204115
+    heldout_state_improvement: 0.011403188444331969
+    heldout_nonworse_heads: 53
+    heldout_total_heads: 96
+    heldout_worst_head_ratio: 1.1462181916511558
+    disposition: rejected
+    failed_gates:
+      - heldout post-RMS improvement was below 10 percent
+      - fewer than 72 of 96 heads were non-worse
+      - the worst head was more than 5 percent worse
+    scope: Reject this bounded RTS coordinate-exchange implementation only. It does not reject DRRQR, non-coordinate low-rank subspaces, native-operator adaptations for an admitted candidate, endpoint performance, task accuracy or portability.
+
+lessons_ingested:
+  - A named baseline is an executable identity contract, not a label. Assert zero changed heads, zero swaps and unit retained-energy ratios before using it for model selection.
+  - Aggregate recurrent-error improvement can hide unacceptable head-local regressions; retain per-head robustness gates before native-NPU admission.
+  - Bounded coordinate exchanges around energy-Dk64 improved aggregate heldout error only 3.57 percent and harmed 43 of 96 heads, so do not tune another nearby Q/K coordinate-score grid.
+  - The next DRRQR algorithm iteration must be materially different and preserve deployment relevance, for example a recurrence-aware structured subspace or compensation that has an explicit foldability and Ascend cost model before implementation.
+  - CPU replay over audited NPU captures is only an admission screen. A passing design still requires native eager/state/NPUGraph numerical validation before endpoint performance and final accuracy.

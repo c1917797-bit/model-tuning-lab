@@ -109,6 +109,22 @@
   performance, task accuracy or portability result. The next iteration must
   fit a named recurrence-aware selector on indices 0-11 only and make its
   admission decision only on untouched indices 12-15.
+- The drrqr-recurrent-trajectory-selector-v1 iteration is complete and
+  rejected. Its first run is preserved as invalid because the fit comparator
+  labelled energy still exchanged coordinates. After fixing only that proven
+  baseline-identity defect, the corrected run proved the frozen energy plan had
+  zero changed heads, zero swaps and unit Q/K retained-energy ratios, with
+  heldout loaded only after fit lock. The locked read-feedback selector improved
+  heldout post-RMS relative-L2 by only 3.570486 percent and selected-state
+  relative-L2 by 1.140319 percent; only 53/96 heads were non-worse and the
+  worst head regressed 14.621819 percent. It failed three predeclared gates and
+  was not admitted to NPU replay, endpoint performance or task accuracy.
+  Corrected report SHA256:
+  0ee9838dfe41fecb4b89b01963764f51fcf02f4009c611b7eac5cc7ce99ddaa5.
+  Stop tuning nearby recurrence-weighted coordinate-exchange objectives. The
+  next DRRQR iteration must test a materially different structured
+  recurrence-compensation/subspace design with an explicit foldability and
+  Ascend cost model before any operator work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
@@ -181,8 +197,8 @@ For a new maintainer, start by treating this repository as ready for handoff but
 1. Read `AGENTS.md`, this handoff, `docs/RUNBOOK.md`, and `docs/LESSONS_LEARNED.md`.
    For Qwen3.8 DRRQR also read the project AGENTS.md, frozen baseline contract,
    GDN_TEACHER_CAPTURE.md, the captured-reference v2 and aligned-width
-   summaries, and the active drrqr-rich-state-calibration-capture-v1 iteration
-   YAML.
+   summaries, and the completed drrqr-recurrent-trajectory-selector-v1
+   iteration YAML.
 2. If the next task touches `chicaihong01`, use `chicaihong01-host-maintenance` before any remote or NPU action.
 3. If the next task is another paper/practice result, start with `paper-to-ascend`; for historical reproduction or adoption claims, include `paper-to-ascend-reproduction` and its evidence contract.
 4. Before using any claimed NPU/port lane, read the relevant target-host branch-local handoff and prove current ownership in the same session.
@@ -195,12 +211,16 @@ For a new maintainer, start by treating this repository as ready for handoff but
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
 2. For Qwen3.8 DRRQR, treat the completed and independently audited
-   drrqr-rich-state-calibration-capture-v1 corpus as frozen selector input.
-   Fit only on calibration indices 0-11 and make the next recurrence-aware
-   selector decision only on untouched indices 12-15. Do not
-   implement the rejected mixed-Dk cache plan, broaden profiling, or run final
-   accuracy before a replacement candidate passes its numerical gate and a
-   fixed-1024-token endpoint screen.
+   drrqr-rich-state-calibration-capture-v1 corpus as frozen selector input and
+   the corrected recurrent-transition-selector-v2 result as a rejection of
+   bounded recurrence-weighted coordinate exchange. Do not tune another nearby
+   Q/K coordinate-score grid. Predeclare one materially different structured
+   recurrence-compensation/subspace design, including how it can be folded or
+   executed cheaply on Ascend, and use fit-only/cross-validation without
+   claiming the already-viewed indices 12-15 as fresh final admission evidence.
+   Do not implement the rejected mixed-Dk cache plan, broaden profiling, or run
+   final accuracy before a replacement candidate passes its numerical gate and
+   a fixed-1024-token endpoint screen.
 3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
 4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
@@ -283,6 +303,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-rich-state-calibration-capture-v1.yaml
 .agents/evals/practice-iterations/drrqr-aligned-width-replay-v1.yaml
 .agents/evals/practice-iterations/drrqr-full-layer-sensitivity-budget-v1.yaml
+.agents/evals/practice-iterations/drrqr-recurrent-trajectory-selector-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
