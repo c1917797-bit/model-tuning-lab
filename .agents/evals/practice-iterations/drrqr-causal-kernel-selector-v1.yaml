@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-causal-kernel-selector-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-10
 validated_commit: pending
 
@@ -33,4 +33,24 @@ validation_commands:
   - generate one Dk64 causal-kernel-energy plan from frozen calibration captures 0 through 11
   - compare causal and frozen energy Dk64 on held-out capture indices 12,13,14,15 with qk_kernel_fidelity.py
 
-lessons_ingested: []
+result:
+  outcome: rejected_at_proxy
+  evidence_level: deterministic held-out post-convolution Q/K geometry proxy
+  claim_ceiling: The diagonal causal-interaction-energy selector is rejected as the next native-NPU teacher-replay candidate because it substantially worsens held-out reduced-kernel fidelity. This does not reject DRRQR, a covariance-aware selector, a direct state-sensitivity objective, endpoint performance, task accuracy, or portability.
+  plan_sha256: 0e94bbe3eb99a7edfb90bf37c6c31444d4c03457b34d29c4866cbd0369f1aeca
+  report_sha256: 77e08035e819c6d680da929687cb8b65d5ce5a45df3784b4914c90c34df5bad9
+  selector_training_capture_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  heldout_capture_indices: [12, 13, 14, 15]
+  energy_dk64_qk_score_rmse: 0.02255897366039393
+  causal_dk64_qk_score_rmse: 0.07935217122680395
+  causal_relative_rmse_change: 2.5175435027046476
+  causal_mean_q_energy_fraction: 0.5352146769614023
+  causal_mean_k_energy_fraction: 0.7774424246454362
+  keep_overlap_fraction: 0.7787882486979166
+  npu_replay_admitted: false
+  next_decision: Design a bounded covariance-aware or direct state-sensitivity objective that preserves both Q and K marginal energy; do not consume NPU or start generic operator work for this rejected selector.
+
+lessons_ingested:
+  - lesson: Causal ordering alone does not make a diagonal coordinate score recurrence-faithful; without explicit Q and K marginal preservation it can select K-dominant coordinates and catastrophically degrade the reduced normalized kernel.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/ALGORITHM_AUDIT_BOUND.md
+    severity: high

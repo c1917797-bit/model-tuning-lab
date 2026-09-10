@@ -73,6 +73,16 @@ and no native teacher replay was run. This rejects that selector candidate,
 not DRRQR or a recurrence-aware coordinate objective. Report SHA256:
 71d2a657f6fd8c9fb5b1392f0ea13eef086aba1434b9f297011d4f23e4453305.
 
+A subsequent causal-interaction-energy selector used only calibration captures
+0-11 for coordinate selection and reserved captures 12-15 for its deciding
+proxy. It ranked each coordinate by the squared diagonal contribution from
+historical keys to later queries. On the held-out captures, Dk64 normalized-QK
+RMSE worsened from 0.022558974 for energy-Dk64 to 0.079352171, or 251.754350%.
+The causal selector retained only 0.535215 mean Q energy versus 0.777442 mean K
+energy. It therefore failed before NPU replay. This rejects the diagonal causal
+surrogate, not covariance-aware or direct state-sensitivity selection. Report
+SHA256: 77e08035e819c6d680da929687cb8b65d5ce5a45df3784b4914c90c34df5bad9.
+
 Changing the coordinate selector while keeping Dk64 leaves all runtime tensor
 shapes unchanged. Therefore it may recover accuracy but cannot close the
 measured performance gap from +4.752041% to the required >=10% throughput.

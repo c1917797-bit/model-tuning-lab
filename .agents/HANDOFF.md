@@ -51,6 +51,16 @@
   preserved teacher trajectories, not by retrying cosine StrongRRQR,
   implementing heterogeneous cache, or starting generic operator/profiling
   work.
+- The drrqr-causal-kernel-selector-v1 iteration is also complete and rejected
+  at its held-out CPU gate. The selector used calibration captures 0-11 only,
+  but on untouched captures 12-15 its Dk64 normalized-QK RMSE was 0.079352171
+  versus 0.022558974 for energy-Dk64, a 251.754350 percent worsening. It
+  retained only 0.535215 mean Q energy despite 0.777442 mean K energy. No NPU
+  replay was admitted or started. Report SHA256:
+  77e08035e819c6d680da929687cb8b65d5ce5a45df3784b4914c90c34df5bad9.
+  Resume with a bounded covariance-aware or direct state-sensitivity objective
+  that explicitly preserves both Q and K marginals; do not promote this
+  diagonal surrogate, mixed cache, or generic operator work.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
