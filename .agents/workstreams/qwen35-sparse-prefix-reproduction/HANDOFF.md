@@ -93,9 +93,28 @@ No model execution, accuracy result, or performance improvement is claimed.
    accelerate decode. Reproduction completion does not require hiding a null result.
 
 ## Next action
-Push this planning checkpoint, pin author source without redistribution,
-inspect the immutable image's actual runtime APIs and model path, and run the
-CPU reproduction tests. Acquire/recheck NPU4-7 only when ready for real smoke.
+2026-09-11 identity gate PASSED: all 11 local weight SHA256 values from completed
+exec-00000000000006e2 match official Qwen/Qwen3.5-27B blob/main file pages.
+Official source: https://huggingface.co/Qwen/Qwen3.5-27B/tree/main
+Each shard page exposes SHA256 under Xet Pointer Details; all 11 were read.
+Expected values are stored in qwen35-official-weights.sha256 beside this handoff.
+This supersedes the upstream-unproven note below; no weights were changed.
+Planning and CPU checkpoints fa36a34/c0cb9cb are pushed; do not repeat them.
+Use ONLY /cache/efim/Qwen3.5-27B, subject to weight verification. Eleven
+safetensors shards are present. Hashing operation: exec-00000000000006e2.
+Poll that handle rather than duplicating it. Official HF API retrieval from
+the host failed with curl exit 28; upstream weight equivalence remains unproven.
+IMPORTANT: the old launcher used /cache/austinov/Qwen3.8-27B while advertising
+Qwen3.5-27B. Do not reuse those results as Qwen3.5 evidence. User explicitly
+requires model identities and measurements to remain separate.
+Pinned image sources: /vllm-workspace/vllm/vllm and
+/vllm-workspace/vllm-ascend/vllm_ascend (editable installs).
+Image Qwen3.5 rejects mamba_cache_mode=all; native align is the starting point.
+GDN prefill accepts initial state and emits final state at chunk boundaries;
+arbitrary checkpoint retention is NOT implemented or verified yet.
+Latest snapshot: external VLLM workers occupy NPU0-3; NPU4-7 have no compute
+process; MemAvailable 64274020 kB. Snapshot is not a lease or future proof.
+ascend-canary-implementation has been fully read. Recheck resources before smoke.
 Read .agents/skills/paper-to-ascend-reproduction and its evidence contract.
 All long commands use one tracked operation handle; poll rather than duplicate.
 Git fetch timed out once, then succeeded on bounded retry. AWMCP was healthy.
