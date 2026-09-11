@@ -30,6 +30,7 @@ constexpr uint64_t BF16_NUM_PER_BLOCK = 16;
 constexpr uint64_t FP32_NUM_PER_BLOCK = 8;
 constexpr uint32_t REPEAT_LENTH = 64; // 256Byte for float
 constexpr uint32_t MAX_REPEAT_TIME = 255;
+constexpr uint32_t DRRQR_TARGET_K = 64;
 constexpr uint32_t ADD_FOLD_REDUCE_MIN_K = 128;
 
 #ifndef DRRQR_LAYOUT_V1_ENABLE_ADD_FOLD_REDUCE
@@ -292,6 +293,19 @@ private:
         ReduceSum<float, Pattern::Reduce::AR, true>(dstTensor, srcTensor, stateShape, true);
     }
 
+    __aicore__ inline bool CanUseDrrqrK64Reduce(uint32_t rows) const
+    {
+        return alignK_ == DRRQR_TARGET_K && rows > 0 && rows <= MAX_REPEAT_TIME;
+    }
+
+    __aicore__ inline void ReduceSumDrrqrK64(LocalTensor<float> &dstTensor,
+                                             const LocalTensor<float> &srcTensor,
+                                             uint32_t rows)
+    {
+        WholeReduceSum(dstTensor, srcTensor, DRRQR_TARGET_K, static_cast<uint8_t>(rows),
+                       1, 1, DRRQR_TARGET_K / FP32_NUM_PER_BLOCK);
+    }
+
     __aicore__ inline bool CanUseK128AddFoldFastPath(uint32_t rows) const
     {
         if (alignK_ != ADD_FOLD_REDUCE_MIN_K) {
@@ -351,6 +365,10 @@ private:
     __aicore__ inline void ReduceSumDispatch(LocalTensor<float> &dstTensor, LocalTensor<float> &srcTensor,
                                              uint32_t rows)
     {
+        if (CanUseDrrqrK64Reduce(rows)) {
+            ReduceSumDrrqrK64(dstTensor, srcTensor, rows);
+            return;
+        }
         if (useAddFoldReduce_ && alignK_ >= ADD_FOLD_REDUCE_MIN_K) {
             ReduceSumAddFold(dstTensor, srcTensor, rows);
             return;

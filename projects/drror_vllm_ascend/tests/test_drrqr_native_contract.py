@@ -46,6 +46,11 @@ def test_all_header_guards_are_isolated_from_upstream_name():
         path.read_text().count("DRRQR_LAYOUT_V1_ENABLE_ADD_FOLD_REDUCE") == 3
         for path in kernel_headers
     )
+    default_kernel = kernel_headers[0].read_text()
+    arch35_kernel = kernel_headers[1].read_text()
+    assert "CanUseDrrqrK64Reduce" in default_kernel
+    assert "WholeReduceSum(dstTensor, srcTensor, DRRQR_TARGET_K" in default_kernel
+    assert "ReduceSum64(dstAddr, srcAddr, rowNum)" in arch35_kernel
 
 
 def test_mutable_state_is_preserved_in_aclnn_and_torch_adapter():
