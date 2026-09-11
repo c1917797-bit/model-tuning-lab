@@ -1,6 +1,31 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+LATEST USER SCOPE: explicitly authorized Qwen3.8-27B for this paper piercing,
+and requested existing FOUR-card TP4 baseline, not TP8. Historical worktree
+name retained to avoid another tree; all new results MUST say Qwen3.8-27B.
+Qwen3.5 smoke b993f42d20e6 was stopped for scope change; its artifacts at
+/cache/austinov/sparse-prefix-smoke-dTOScp are not Qwen3.8 evidence.
+Baseline metadata in qwen35-performance-delivery/agentic/baseline/
+baseline_metadata.json is actually Qwen3.8 TP4 and may now be considered.
+It has only c1/c16 repeat1 plus cold tails; per-request unique cache_salt
+disables cross-request reuse. It is not a matched native-cache baseline.
+Reuse verified raw cells with these limitations; do not silently claim full
+matrix or sparse-cache incremental speedup. User asked not to rerun full baseline.
+RESOLVED DEVICE GATE: user explicitly authorized temporary stop of
+drrqr_qwen38_energy_preflight_20260908. Through live chicaihong01/mb,
+operation0095 stopped a41efa7fcf8b (not deleted; autoremove=false).
+After stop, -8020 disappeared. With physical device nodes4-7 preserved but
+ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 (container logical numbering), device-only
+operation009d passed exit0. Evidence /cache/austinov/sparse-prefix-smoke-jgLoZU.
+The external container remains stopped temporarily; do not delete it. Restore
+with docker start drrqr_qwen38_energy_preflight_20260908 after releasing this lane,
+coordinating any new external use first. No model inference has passed yet.
+ma was missing from topology; mb direct target and exact container ID verified.
+Device-rootfs control 0746 completed exit1: writable disposable rootfs still
+gave DCMI -8020 / DEVICE_COUNT0. Evidence /cache/austinov/sparse-prefix-smoke-eljuzX.
+Restored --read-only after this negative control; no host/image content changed.
+Rootfs write permission alone does not explain the remaining driver failure.
 Latest device-only evidence: 0733 (remap physical4-7 to0-3, visible0-3)
 and 073e (preserve physical4-7, visible4-7) both exited1 with DEVICE_COUNT0
 and DCMI -8020. Artifacts respectively sparse-prefix-smoke-0iNXFv and

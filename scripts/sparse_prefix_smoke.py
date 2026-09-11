@@ -1,11 +1,11 @@
-"""Official-image Qwen3.5 BF16 smoke; not a performance benchmark."""
+"""Official-image Qwen3.8 BF16 smoke; not a performance benchmark."""
 import hashlib
 import json
 import os
 from pathlib import Path
 import time
 
-MODEL = "/model/Qwen3.5-27B"
+MODEL = "/model/Qwen3.8-27B"
 
 def main():
     if os.environ.get("SPARSE_DEVICE_PREFLIGHT") == "1":
@@ -24,7 +24,7 @@ def main():
     import vllm
     import vllm_ascend
     config = Path(MODEL, "config.json").read_bytes()
-    expected = "f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c"
+    expected = "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab"
     if hashlib.sha256(config).hexdigest() != expected:
         raise RuntimeError("Unexpected model config; refuse model substitution")
     mode = os.environ.get("SPARSE_SMOKE_CACHE", "off")

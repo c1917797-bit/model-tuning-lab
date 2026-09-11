@@ -17,7 +17,7 @@ printf '%s\n' "$snapshot" >"$artifact/npu-before.txt"
 docker ps -a --no-trunc >"$artifact/containers-before.txt"
 docker image inspect sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1 >"$artifact/image.json"
 sha256sum scripts/sparse_prefix_smoke.py >"$artifact/script.sha256"
-name="qwen35_sparse_smoke_${artifact##*-}"
+name="qwen38_sparse_smoke_${artifact##*-}"
 printf '%s\n' "$name" >"$artifact/container-name.txt"
 docker run --rm --name "$name" --network host --read-only --shm-size 8g \
  --memory 48g --memory-swap 48g --cpus 6 \
@@ -31,14 +31,14 @@ docker run --rm --name "$name" --network host --read-only --shm-size 8g \
  -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro \
  -v /etc/ascend_install.info:/etc/ascend_install.info:ro \
  -v /etc/vnpu.cfg:/etc/vnpu.cfg:ro \
- -v /cache/efim/Qwen3.5-27B:/model/Qwen3.5-27B:ro \
+ -v /cache/austinov/Qwen3.8-27B:/model/Qwen3.8-27B:ro \
  -v "$PWD/scripts/sparse_prefix_smoke.py":/smoke.py:ro \
  -v "$artifact":/output \
  -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 \
  -e OMP_NUM_THREADS=4 -e HCCL_BUFFSIZE=512 \
  -e SPARSE_SMOKE_CACHE=off \
  -e SPARSE_DEVICE_PREFLIGHT="${SPARSE_DEVICE_PREFLIGHT:-0}" \
- -e ASCEND_RT_VISIBLE_DEVICES=4,5,6,7 \
+ -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 \
  --entrypoint python3 \
  sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1 \
  /smoke.py 2>&1 | tee "$artifact/run.log"
