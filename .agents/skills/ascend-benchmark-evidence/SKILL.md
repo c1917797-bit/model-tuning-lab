@@ -92,6 +92,12 @@ For long benchmark matrices, make progress and recovery auditable per unit:
 - service cleanup/resource release is recorded separately from experiment
   completion.
 
+When designing, auditing, or resuming a full-corpus multi-concurrency matrix,
+read [references/long-matrix-baseline-lessons.md](references/long-matrix-baseline-lessons.md).
+It captures the reusable success pattern and the promotion failures observed in
+the Qwen3.8 TP8 full357 baseline without turning that single run into a universal
+model rule.
+
 Do not run a second benchmark against the same service merely because a long
 matrix appears slow. Parallel clients change scheduling and batching and create
 a different experiment unless concurrent controllers are explicitly the
