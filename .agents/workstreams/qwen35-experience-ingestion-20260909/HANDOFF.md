@@ -50,6 +50,12 @@ than silent baseline mutation.
   this workstream. A read-only follow-up observed it fail during partial MMLU
   collection after 2589 well-formed rows; the lesson records this as an
   incomplete lifecycle/operational result, not a model-quality conclusion.
+- Preserved the completed Qwen3.8-27B BF16 TP8 full357 concurrency matrix as
+  `.agents/experiments/exp-20260910-qwen38-tp8-full357-baseline.yaml`.
+  All 12 performance cells completed with zero request errors. The record stays
+  `inconclusive` for clean-baseline promotion because c1-r2 has known
+  coincident audit/build load, full-window isolation was not proven, and the
+  semantic-quality follow-up did not complete.
 
 ## 4. Current Action
 

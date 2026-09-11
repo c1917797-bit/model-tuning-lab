@@ -1,0 +1,147 @@
+schema: model-tuning-experiment/v1
+id: exp-20260910-qwen38-tp8-full357-baseline
+status: measured
+decision: inconclusive
+hypothesis: >-
+  Establish a repeatable TP8 concurrency-scaling performance denominator for
+  Qwen3.8-27B on the frozen 357-row query-rewrite workload.
+objective: >-
+  Preserve the completed c1/c5/c8/c16 three-repeat performance matrix without
+  promoting it beyond the evidence supported by the interference and quality
+  audits.
+owner: c1917797-bit
+git:
+  branch: work/qwen35-experience-ingestion-20260909
+  base_commit: 31c43a4c249c9d4c597372f47d989a7c10b2c9c4
+  stage_commits: []
+environment:
+  source_commit: >-
+    not recorded as a repository commit; frozen benchmark script
+    sha256:430160a9a8d8c3b91be6bb96597f95ad625087960d9c2ce8fc58b5eddbc1d673
+  model_revision: >-
+    /cache/austinov/Qwen3.8-27B; actual loaded path was audited, while the
+    served-model alias remained the legacy Qwen3-5/Qwen3.5-27B name
+  tokenizer_revision: not recorded in the accepted performance summary
+  dtype_or_quantization: BF16; no quantization
+  framework_versions:
+    runtime_container_image: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+    exact_package_versions: not recorded in the accepted performance summary
+  cann_driver_firmware:
+    status: not recorded in the accepted performance summary
+  hardware_topology:
+    accelerator: Ascend 910B4
+    physical_npus: [0, 1, 2, 3, 4, 5, 6, 7]
+  runtime_topology:
+    tensor_parallel_size: 8
+    data_parallel_size: 1
+    container_name: qwen38_tp8_full357_qwen38-tp8-full357-v2-20260910T212811Z
+protocol:
+  primary_metric: per-concurrency TTFT P95 and TPOT P95
+  correctness_guardrails:
+    - each cell contains all 357 frozen request indexes
+    - every finalized request completed without a transport error
+    - cache salts are unique per concurrency and repetition
+    - quality claim is limited to transport success and natural stopping
+  acceptance_thresholds:
+    - none; this run establishes a denominator and does not accept a candidate
+  regression_thresholds:
+    - future candidates require separately declared thresholds
+  abort_conditions:
+    - request errors or an incomplete concurrency/repetition cell
+    - concurrent benchmark controllers against the same service
+  warmup: frozen by the external experiment manifest
+  repetitions: 3
+  workload:
+    dataset_path: /cache/cch/query_rewrite.jsonl
+    dataset_rows: 357
+    dataset_sha256: a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e
+    concurrency: [1, 5, 8, 16]
+    aggregation: median of three repetition-level summaries
+  command: >-
+    Reproduce only from the retained external experiment manifest and frozen
+    benchmark script; the full command is intentionally not reconstructed from
+    chat history.
+results:
+  baseline:
+    c1:
+      ttft_p95_ms: 1792.2078639989195
+      tpot_p95_ms: 70.39344599907054
+      ttft_p99_ms: 1954.3711495994648
+      tpot_p99_ms: 85.98998120127362
+      output_token_throughput_tps: 20.61313426940928
+      request_throughput_rps: 0.145674418682776
+    c5:
+      ttft_p95_ms: 3483.768675997271
+      tpot_p95_ms: 147.53250745099123
+      ttft_p99_ms: 4623.285795598058
+      tpot_p99_ms: 235.90559072659312
+      output_token_throughput_tps: 47.73274158658442
+      request_throughput_rps: 0.3335601766870366
+    c8:
+      ttft_p95_ms: 4422.741334003513
+      tpot_p95_ms: 262.95992031168265
+      ttft_p99_ms: 15095.661882399436
+      tpot_p99_ms: 1020.9263111950713
+      output_token_throughput_tps: 48.99498757868808
+      request_throughput_rps: 0.3409526240344563
+    c16:
+      ttft_p95_ms: 14219.072345997836
+      tpot_p95_ms: 562.571042783255
+      ttft_p99_ms: 15370.932568400458
+      tpot_p99_ms: 1173.0353483998624
+      output_token_throughput_tps: 56.65169035194119
+      request_throughput_rps: 0.3989240888327549
+  candidate: {}
+  cold:
+    status: out-of-scope
+  steady:
+    matrix_cells_completed: 12
+    matrix_cells_planned: 12
+    requests_per_cell: 357
+    request_errors: 0
+  boundary:
+    tested_concurrency: [1, 5, 8, 16]
+  lifecycle:
+    performance_controller_status: completed
+    performance_controller_exit_code: 0
+    baseline_container_stopped_after_collection: true
+    quality_followup_status: failed
+    quality_followup_detail: >-
+      Partial MMLU collection is retained externally, but the controller failed
+      operationally and produced no authorized full-suite quality result.
+  resources:
+    physical_npus: [0, 1, 2, 3, 4, 5, 6, 7]
+    isolation_status: not proven for every measured window
+limitations:
+  - >-
+    c1-r2 overlapped a 55,563,006,776-byte weight-identity read and an observed
+    CPU operator build; its effect was not quantified and the original artifact
+    remains preserved.
+  - Other cells passed structural checks but were not proven interference-free
+    for their complete measurement windows.
+  - The failed quality follow-up does not prove a model-quality regression; it
+    leaves semantic quality incomplete.
+  - Do not compare this TP8 full357 denominator with TP4, quick32, T15, or the
+    32K-input/1024-output long-context protocol.
+artifacts:
+  - kind: performance_summary
+    path: /cache/austinov/eval-runs/qwen38-tp8-full-baseline/qwen38-tp8-full357-v2-20260910T212811Z/summary.json
+    sha256: cf43e9e5f2b1eb3e2c8068fbbba5b984958f6e9eda5b40f385b4b576dafe3747
+    retention: external target-host artifact; not committed
+  - kind: stage_audit
+    path: /cache/austinov/eval-runs/qwen38-tp8-full-baseline/audits/qwen38-tp8-full357-v2-20260910T212811Z-review-20260911T015941Z/progress-audit.json
+    retention: external target-host artifact; stage snapshot completed 10 of 12
+  - kind: interference_audit
+    path: /cache/austinov/eval-runs/qwen38-tp8-full-baseline/audits/qwen38-tp8-full357-v2-20260910T212811Z-review-20260911T015941Z/interference-review.json
+    retention: external target-host artifact
+decision_reason: >-
+  The performance controller completed all twelve cells with zero request
+  errors, so the descriptive TP8 denominator is preserved. It is not promoted
+  to a clean fully qualified baseline because c1-r2 has known coincident load,
+  full-window isolation was not proven, and semantic quality did not complete.
+next_loop: >-
+  Run a separately identified clean c1 replacement under matched lifecycle and
+  cache state, then complete and score the predeclared full quality population.
+rollback:
+  command: not applicable; baseline-only record with no product-code change
+  verified: true
