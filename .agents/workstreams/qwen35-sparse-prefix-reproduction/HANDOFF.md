@@ -1,6 +1,12 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+LATEST DEVICE CHECK: operation07ae completed exit1, DEVICE_COUNT0 and DCMI
+-8020 (device is used). Raw evidence /cache/austinov/sparse-prefix-smoke-RLFnK6.
+No model inference was attempted. The external container restarted since the
+previous authorized stop and again maps physical4-7. Do not repeatedly launch
+full smoke or stop this new running instance without renewed coordination.
+Spawn fix b5ce821 is pushed but remains untested on a live four-rank model.
 2026-09-11 current diagnostic: dTOScp first fatal error is PyTorch
 ParallelOpenMP.cpp:64 Invalid thread pool following multithreaded fork.
 Pinned image envs.py lines 889-894 explicitly supports spawn. Launcher now
