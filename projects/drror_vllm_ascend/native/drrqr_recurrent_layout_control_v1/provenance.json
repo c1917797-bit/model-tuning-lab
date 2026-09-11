@@ -1,0 +1,29 @@
+{
+  "schema": "drrqr-native-source-provenance/v1",
+  "source_repository": "/cache/austinov/src/vllm-ascend",
+  "source_tag": "v0.23.0",
+  "source_commit": "5cb98caaadeff42b5b62b996e34bb2aaa29d20fd",
+  "source_subtree": "csrc/attention/recurrent_gated_delta_rule",
+  "derived_operator": "DrrqrRecurrentLayoutControlV1",
+  "derived_snake_name": "drrqr_recurrent_layout_control_v1",
+  "transformation": "mechanical identifier and filename isolation; arithmetic and state semantics unchanged",
+  "source_sha256": {
+    "CMakeLists.txt": "b402e8b709c2110e43ab4a82b1538469a011926501afcfd5e6be2d8772300b17",
+    "recurrent_gated_delta_rule_torch_adpt.h": "96cf511bedd953c0b332bf97d88f535663c759fc81235baeb3044e66605d6a0c",
+    "op_kernel/recurrent_gated_delta_rule_tiling_data.h": "578015f07642a2260f6689a83c4ec44cc4a289ab3c041e15a038a5654c2b49de",
+    "op_kernel/arch35/recurrent_gated_delta_rule.h": "e2b5eef9d7593170f3d2f0c939c71b48ea0c55dbd4a89bc3d99c56ea3182f913",
+    "op_kernel/recurrent_gated_delta_rule.cpp": "74af73bbe19fef7f8163c953e2de0ee70df49ed3b76e7d2db1c8aab32af17c03",
+    "op_kernel/recurrent_gated_delta_rule.h": "96e6d9667af1e3457316ffce92a8a983fcb90096df08e3efd13ec0b35b8b1c5b",
+    "op_host/recurrent_gated_delta_rule_infershape.cpp": "3a65a478ef660d9b2827a521279c7ecedfd3f32b92078fab7c8563eb8a22f497",
+    "op_host/math_util.h": "ac4403569115835651f24c5abdc93a097160debc69407e9169a9c25c53bffbab",
+    "op_host/CMakeLists.txt": "3c19962cf0b1dda116fda584349158e30091e2b56a29fe0d732305e435a07ec7",
+    "op_host/op_api/aclnn_recurrent_gated_delta_rule.h": "8aa56221552df8379bdf0f4f67a26406d9b4a8588d493533cb3c09b26f99b5bd",
+    "op_host/op_api/aclnn_recurrent_gated_delta_rule.cpp": "aa2d9cfaee40171c7f3b1e9eb244728f8097d48f87acf907b7fe39e6ba801ad7",
+    "op_host/op_api/recurrent_gated_delta_rule.cpp": "51e5bd68b8704d32ba777d4dc0b514a1bde493c356706183d777dd5c216a25d4",
+    "op_host/arch35/recurrent_gated_delta_rule_tiling_arch35.cpp": "4ba3a6c046ec383018a065835d11148dd4dff9678a1fceb8906a04cf564a3f1f",
+    "op_host/recurrent_gated_delta_rule_tiling.h": "a6266f7e2d5256f594b05a43a3ac3c21274c496e0c15285d7eef1d6f7b6cbd03",
+    "op_host/recurrent_gated_delta_rule_def.cpp": "c388285948566df9e106bca2dc895aa6dad57506c9da5216cde67b3cc16276d0",
+    "op_host/recurrent_gated_delta_rule.h": "4e2687d0c1d9db4a8693c53544f79a29953f36a8b5c3febb38ddefc65755534b",
+    "op_host/recurrent_gated_delta_rule_tiling.cpp": "72bc53c4f46ffe3ff4d262098796ac878ae01364ba9dbaa519e417c8c0ce204e"
+  }
+}
