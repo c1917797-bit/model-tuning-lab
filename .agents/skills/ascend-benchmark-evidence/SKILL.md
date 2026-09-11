@@ -22,6 +22,13 @@ real improvement.
    NPU execution.
 4. Measure baseline and candidate with the same commands and controlled order.
    Use explicit warmups, multiple measured repetitions, and report dispersion.
+   When an exact custom library can be bound only once per process, run each
+   implementation in a fresh process and balance process order (for example,
+   ABCCBA) instead of silently comparing differently warmed processes.
+   If the intended serving path uses graph replay, graph-replay timing is the
+   admission signal; eager timing may be reported diagnostically but must not
+   override a graph-path regression. Wrapper or bridge dispatch overhead must
+   be separated from captured-kernel timing when the two paths differ.
 5. Separate these evidence classes:
    - cold/startup: import, model load, compile, first token, first request;
    - steady: throughput, request latency, TTFT, TPOT, and token latency;

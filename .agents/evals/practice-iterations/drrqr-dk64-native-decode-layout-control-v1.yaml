@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-dk64-native-decode-layout-control-v1
 repository: model-tuning-lab
-status: in_progress
+status: complete
 date: 2026-09-11
-validated_commit: pending
+validated_commit: cc64c24
 
 stage_goal: Establish an independently named plugin-owned Ascend recurrent decode control for energy-Dk64 that preserves the frozen native arithmetic and state exactly while exposing the packed-layout seam required by later DRRQR-specific fusion.
 
@@ -12,7 +12,7 @@ goal_chain:
   current_gap: The frozen dense baseline is 135.142469917 output tok/s and the accepted-development target is 148.656716909; energy-Dk64 reaches 141.564496, so it still needs about 5.009887 percent additional throughput, while Dk80 is not admitted under the mixed-MC2 common path.
   medium_term_milestone: A numerically qualified Dk64-specific Ascend decode implementation that can remove Q/K normalization materialization and packed-QKV rearrangement in the next stage without changing DRRQR semantics.
   short_term_decision: Determine whether the frozen recurrent arithmetic can be reproduced under a unique plugin-owned ACLNN/torch namespace and consume an explicit packed-layout contract without hidden copies, symbol collision, state reallocation or graph-stale metadata.
-  deciding_evidence: Source/build provenance plus a physical-NPU4-7 matrix for TP4-local HQK4/HV12/Dv128/Dk64, batch1 and batch16, eight changing-input/state-index steps, eager and NPUGraph replay, comparing output and the entire FP32 mutable state bitwise with the frozen native recurrent operator and checking guards, untouched slots, pointers and loaded symbol identity.
+  deciding_evidence: Source/build provenance plus a physical-NPU4-7 matrix for TP4-local HQK4/HV12/Dv128/Dk64, batch1 and batch16, eight changing-input/state-index steps, eager and NPUGraph replay, comparing output and the entire BF16 mutable state bitwise with the frozen native recurrent operator and checking guards, untouched slots, pointers and loaded symbol identity.
   budget_or_stop_rule: One plugin-local operator import/rename and build adapter, one build attempt with at most one correction for a proven build defect, and one bounded NPU matrix with no numerical retry or tolerance relaxation. No model service, profiler, endpoint benchmark or task accuracy in this iteration.
   on_pass: Freeze the control artifact and begin the packed-QKV plus in-kernel L2 stage with a separately predeclared incremental numerical budget and static saved-versus-added cost model.
   on_failure: Preserve the failed build/runtime/numerical evidence, recover the active plugin path, and return to a materially different exactly foldable DRRQR algorithm design if the failure is architectural rather than a single proven integration defect.
@@ -22,7 +22,7 @@ candidate_contract:
   algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
   paper_exact_selection: false
   semantic_change_in_this_iteration: none
-  control_arithmetic: Frozen v0.23 Ascend RecurrentGatedDeltaRule BF16-input/FP32-state behavior.
+  control_arithmetic: Frozen v0.23 Ascend RecurrentGatedDeltaRule BF16-input/BF16-state behavior used by the current model runtime.
   implementation_name: DrrqrRecurrentLayoutControlV1
   dispatch: Unique vendor, ACLNN symbols and torch namespace; explicit opt-in; fail closed on unsupported dtype/layout/stride or unresolved provenance.
 
@@ -65,4 +65,21 @@ validation_commands:
   - git diff --check
   - one fresh physical-NPU4-7 eager and NPUGraph exact-state matrix
 
-lessons_ingested: []
+outcome:
+  class: accepted
+  evidence_level: target-runtime numerical correctness
+  claim_ceiling: The independently named control and the Dk64 K64-reduction variant preserve native eager output, full mutable state and NPUGraph replay bitwise for the tested shapes; no service, accuracy or portable speedup claim.
+  control_parity_report:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-native-layout-control-v1/native-control-parity-v1-bf16/report.json
+    sha256: 9b843c5cf86625ce265f4a5fc51a33447280d616bf5da507ef377285d48fe04c
+  k64_candidate_parity_report:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-native-layout-control-v1/native-k64-reduce-parity-v1-bf16/report.json
+    sha256: 86ae8e0c26e9c4510e49c92511b55e70950998eb746cef4525fff1effe9d2101
+  k64_performance_subdecision:
+    class: rejected
+    evidence_level: single-operator NPU screen
+    result: The candidate improved eager device time by 5.429347 percent at batch1 and 2.924780 percent at batch16 versus the exact plugin control, but regressed NPUGraph replay by 2.164909 percent and 8.116835 percent respectively.
+    decision: Do not integrate the K64 WholeReduceSum replacement into the service. This rejects only the tested reduction replacement, not DRRQR-specific decode fusion.
+
+lessons_ingested:
+  - Graph-served custom operators must be admitted on graph-replay evidence; eager wrapper timing cannot override a graph regression.

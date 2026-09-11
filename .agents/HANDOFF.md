@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-10.
+- Last updated: 2026-09-11.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
@@ -223,14 +223,22 @@
   clean afterward. Resume on the energy-Dk64 DRRQR mainline with the
   independently named plugin-owned native decode layout control described in
   NATIVE_DECODE_PROTOTYPE_SEAMS.md; do not resume mixed MC2 diagnosis.
-- Active next iteration:
-  drrqr-dk64-native-decode-layout-control-v1. It keeps the energy-Dk64
-  algorithm and frozen native arithmetic unchanged, uses only the ACLNN
-  registry route, and first proves unique plugin-owned build/symbol/state/graph
-  identity. Its one bounded NPU matrix is a prerequisite for later packed-QKV
-  and L2 fusion, not a performance or accuracy claim. Stop after one build
-  correction and one numerical matrix; do not start a model service in this
-  iteration.
+- The drrqr-dk64-native-decode-layout-control-v1 iteration is complete. The
+  independently named exact-path control passed BF16 native eager/state and
+  NPUGraph bitwise parity for batch1/16 across eight changing steps. A Dk64
+  WholeReduceSum variant passed the same numerical gate, but its ABCCBA
+  operator screen regressed NPUGraph replay by 2.164909 percent at batch1 and
+  8.116835 percent at batch16 versus the exact plugin control, despite
+  eager-only improvements. It is rejected and no endpoint or accuracy run
+  followed. Candidate parity report SHA256:
+  86ae8e0c26e9c4510e49c92511b55e70950998eb746cef4525fff1effe9d2101.
+- Active next iteration: drrqr-dk64-l2-recurrent-fusion-v1. Keep the
+  energy-Dk64 algorithm primary. First audit the exact loaded Ascend
+  l2norm_fwd epsilon, dtype, layout, rounding and graph semantics and write a
+  saved-versus-added cost model. Build one independently named fused prototype
+  only if those semantics and a portable native fallback are explicit. Require
+  target-NPU composition parity before any performance screen; do not start a
+  model service or accuracy run in the audit/numerical stage.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

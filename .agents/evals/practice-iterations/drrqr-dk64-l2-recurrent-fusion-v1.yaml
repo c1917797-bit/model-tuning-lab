@@ -1,0 +1,47 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-l2-recurrent-fusion-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-11
+validated_commit: pending
+
+stage_goal: Determine whether energy-Dk64 can remove separate decode Q/K normalization materialization and launch overhead by a plugin-owned Ascend fusion that preserves the real v0.23 GDN semantics.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: The frozen dense baseline is 135.142469917 output tok/s and the fixed target is 148.656716909; energy-Dk64 reaches 141.564496 and still needs about 5.009887 percent additional throughput. The isolated K64 reduction replacement was numerically correct but regressed the graph path.
+  medium_term_milestone: A Dk64-specific decode operator that reduces real graph-path launches and intermediate traffic across Q/K L2 normalization and recurrent state update without changing selector, state or output semantics.
+  short_term_decision: Audit the exact l2norm_fwd epsilon, dtype, layout, rounding and graph contract on the loaded Ascend path, quantify saved materialization and added work, then decide whether one independently named fused prototype is implementable with a portable native fallback.
+  deciding_evidence: Exact source and loaded-library identity, a static saved-versus-added cost model, then only if feasible one physical-NPU4 BF16 eager/state/NPUGraph numerical matrix against the unfused native composition before any performance screen.
+  budget_or_stop_rule: One source/semantic audit and cost model; if feasible, one plugin-local prototype build with at most one correction for a proven build defect and one no-relaxation NPU matrix. Stop before service work if semantics, foldability, portability dispatch or numerical parity cannot be proven.
+  on_pass: Run an order-balanced native-composition versus fused graph-path micro screen; admit endpoint integration only for a clear graph-path gain.
+  on_failure: Preserve the exact failed seam and return to a materially different DRRQR algorithm/state representation or another measured DRRQR-specific data-movement seam.
+  on_inconclusive: Run at most one bounded disambiguation that changes the implementation decision; otherwise stop the branch.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
+  paper_exact_selection: false
+  semantic_change: none in the fusion iteration
+  prohibited_substitutes: [MTP, speculative decoding, quantization, retraining]
+
+architecture_and_portability:
+  logical_physical_separation: Keep Dk64 selection and coordinate order as backend-independent plan metadata; dispatch fusion only for explicitly qualified SoC/runtime capabilities.
+  fallback: Preserve the existing separate l2norm_fwd plus native recurrent composition.
+  integration: Unique plugin-owned operator and explicit opt-in; do not replace the upstream operator globally or modify the original image/runtime.
+  claim_ceiling: Target-NPU composition correctness and single-operator graph screening only until a same-stack endpoint comparison passes.
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+  source_policy: New code only under projects/drror_vllm_ascend; vLLM-Ascend, ops-transformer, cannbot-skills, GitCode CANN references and the image remain read-only.
+
+validation_commands:
+  - exact loaded-source and library identity audit for l2norm_fwd and recurrent composition
+  - static saved-versus-added data-movement and launch cost model
+  - plugin software contract tests and source-manifest audit if a prototype is admitted
+  - one fresh physical-NPU4 eager/state/NPUGraph composition parity matrix if a prototype is admitted
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested: []
