@@ -40,7 +40,32 @@ separate from a derivative implementation.
 - A transformation case encodes the DRRQR failure pattern as a reusable
   regression check.
 
-## Resume
+## 2026-09-11 selection and baseline follow-up
+
+User requested ingestion of the subsequent paper-selection and TP4 reporting
+experience. The existing clean maintenance branch is reused; no new hardware
+experiment or worktree is required.
+
+- `paper-ingestion`: source/publication identity, redistribution permission,
+  GPU-to-Ascend contribution intent, and upstream implementation-state checks.
+- `ascend-source-map`: exact head grouping/state contract and separation of
+  runtime-library repairs from kernel-performance evidence.
+- `ascend-benchmark-evidence`: historical/fresh/development baselines,
+  new-shape versus warmed TTFT, screening versus complete matrices, and EOS
+  length/occupancy effects.
+- `paper-to-ascend`: removed stale MTP-first task advice in favor of the owning
+  task's current constraints.
+- Case evidence is linked from the skills in
+  `.agents/skills/paper-ingestion/references/selection-baseline-lessons.md`.
+  Kachua remains an unvalidated migration candidate; no Ascend success claimed.
+
+Follow-up validation: `git diff --check` passed; `bash scripts/validate-mst.sh`
+passed (26 skills). All four T16 raw-file SHA256 values were independently
+recomputed and matched the case record. No performance experiment was rerun;
+no NPU, container, model, host framework, or base image was modified. Existing
+validation below refers to the earlier parity checkpoint.
+
+## Integration handoff
 
 The implementation is complete. Review the exact branch diff and integrate it
 through the serialized maintainer path; do not merge branch-local DRRQR runtime

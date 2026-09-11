@@ -59,7 +59,37 @@ Do not compare results when material source, model, hardware, driver, firmware,
 CANN, framework, container, power mode, topology, workload, or cache state
 differs. Re-baseline instead.
 
-## Review Traps
+## Baseline identity in progress reports
+
+Read the owning workstream's latest decision and referenced raw summaries
+before answering what the current baseline or gain is. Name separately:
+the historical frozen denominator, the fresh control for this iteration, and
+any retained optimized component used as the next development reference.
+Newer files do not automatically supersede the contractual baseline.
+
+Report model/dtype, TP/DP and physical devices, MTP/speculation, workload slice,
+cache/compilation regime, date/run ID, units, samples, repetitions, and the
+aggregation actually used. Do not label a P50 summary as P95. For median of
+per-run P95, calculate per-run P95 first; do not pool requests or average P95
+values under a median label. Link the original paired artifacts and hashes.
+
+A compile-specialization treatment may improve first-unseen-shape TTFT without
+improving warmed arithmetic. Separate first-shape, warmed, startup/warmup and
+mixed-arrival evidence; establish compiler attribution from traces/cache-key
+evidence rather than latency gaps alone. Do not multiply its gain by historical
+fusion gains from another denominator.
+
+A 32-request single-repeat low/high-concurrency screen is screening evidence,
+not a completed repetition matrix. Natural EOS preserves stopping semantics but
+may change output lengths and batch occupancy; report those differences and
+avoid attributing the entire TPOT/throughput delta to kernel speed. An accepted
+quality canary is not the full-dataset quality gate. Recheck artifact hashes
+before calling a stored decision independently verified.
+
+See [case evidence](../paper-ingestion/references/selection-baseline-lessons.md)
+when separating historical and fresh Qwen performance claims.
+
+## Additional review traps
 
 - Throughput alone can hide latency or correctness regressions.
 - Averages can hide tails and instability.

@@ -122,20 +122,17 @@ make the experiment reproducible and evidence-bound.
 
 ## Current repository guidance
 
-The current installed target is dense. The active Paper-to-Ascend direction is
-exact speculative decoding using the checkpoint's built-in Qwen3.5 MTP head.
-Dynamic MoE is retained as a superseded audit exemplar, not an active
-optimization path for the dense target.
+Read `docs/ACTIVE_WORKSTREAMS.md` and the owning task's latest handoff for the
+current model and restrictions. Do not infer authorization for MTP, speculation,
+quantization, retraining, or a different workload from historical examples.
+The Qwen3.5 performance task currently forbids those algorithm changes; other
+tasks may explicitly allow them. Keep paper migration and cumulative serving
+acceptance decisions distinct.
 
-This is not a permanent architecture restriction. Dense is only the current
-verified target at this handoff. Future MoE, quantization, sparse, multimodal,
-or retraining-based work is allowed when the user selects that target and live
-environment orientation proves the matching checkpoint, runtime, and resources
-exist.
-
-For dense inference, prefer methods such as exact speculative/MTP,
-attention/KV/decode improvements, or other inference-time techniques that do
-not require retraining unless retraining is explicitly in scope.
+For a source-backed GPU-to-Ascend contribution, apply the selection guidance in
+`paper-ingestion` before proposing an already-supported Ascend implementation.
+Reuse existing task ownership instead of creating a permanent worktree for
+each paper considered.
 
 ## Lessons already learned
 

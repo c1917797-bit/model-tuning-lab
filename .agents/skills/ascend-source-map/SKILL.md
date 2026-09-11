@@ -34,6 +34,19 @@ seam.
 
 ## Output
 
+Before treating a CUDA/Triton kernel as model-compatible, compare its actual
+constants and indexing with the checkpoint and TP-local tensors: Q/K versus V
+head counts and grouping, head dimensions, state orientation/strides and dtype,
+normalization, scale, gates, variable-length inputs, and cache-slot ownership.
+Matching the model family or D128 alone is insufficient. Map GPU-specific warp,
+shuffle, register, and asynchronous-copy assumptions to a supported Ascend
+implementation; changing device names is not a port.
+
+If a numerical failure disappears after fixing runtime-library resolution,
+record it as a packaging/backend fix and rerun the same kernel's correctness
+and performance gates. Build-only libraries must not silently replace runtime
+providers. A corrected output does not imply a faster kernel.
+
 A source map note with:
 
 - target layer and rationale;
