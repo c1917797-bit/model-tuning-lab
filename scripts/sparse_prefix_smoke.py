@@ -8,6 +8,16 @@ import time
 MODEL = "/model/Qwen3.5-27B"
 
 def main():
+    if os.environ.get("SPARSE_DEVICE_PREFLIGHT") == "1":
+        import subprocess
+        import torch_npu
+        probe = subprocess.run(["npu-smi", "info"], capture_output=True, text=True)
+        count = torch_npu.npu.device_count()
+        print(probe.stdout, probe.stderr, flush=True)
+        print("DEVICE_COUNT", count, flush=True)
+        if count != 4:
+            raise RuntimeError("Expected exactly four visible NPUs")
+        return
     from vllm import LLM, SamplingParams
     from transformers import AutoTokenizer
     import importlib.metadata as metadata

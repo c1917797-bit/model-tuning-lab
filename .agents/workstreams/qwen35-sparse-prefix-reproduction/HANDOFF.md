@@ -1,6 +1,15 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+Latest device-only evidence: 0733 (remap physical4-7 to0-3, visible0-3)
+and 073e (preserve physical4-7, visible4-7) both exited1 with DEVICE_COUNT0
+and DCMI -8020. Artifacts respectively sparse-prefix-smoke-0iNXFv and
+sparse-prefix-smoke-7g09xQ under /cache/austinov. No model load occurred.
+Read-only host check 0739: no NPU processes on any card; fuser found no open
+4-7/manager handles; outside container a41efa7fcf8b contained only bash1991839.
+Thus neither actual external compute nor a device-renumbering-only cause is
+proven. Do not stop the outside container or claim it is the confirmed cause.
+Device-only mode SPARSE_DEVICE_PREFLIGHT=1 now permits bounded diagnostics.
 SUPERSEDING STATUS: 0715 completed exit1 before weights loaded. Triton could not
 map npu_utils.so from tmpfs; log SHA256
 04e9702d5aa1a8c259d31ead6a90e5433cd9614f1290480dcddbabc4ed7d9b51.
