@@ -106,3 +106,21 @@ Private recovery inventory:
 /cache/austinov/handoffs/qwen35-mtp-off-20260909T214308Z/preservation.json.
 The original performance worktree is intentionally still dirty. Do not apply
 the saved patch back onto it without an ownership and clean-recovery-tree check.
+
+## 2026-09-11 T20-T24 maintainer-skill extension
+
+- Added the Qwen3.5 v0.23 runtime decision record under
+  `.agents/skills/chicaihong01-host-maintenance/references/` and linked it
+  from the host-maintenance entrypoint.
+- Preserved the bounded-prefill TTFT win as a partial component, not a final
+  performance claim; TPOT remains below its required gate.
+- Recorded successful simplification by removing neutral retired-prefetch
+  hooks, plus the experimental FFN ABI failure, upstream-retirement signal,
+  zero-cost opportunity rejection, built-in BF16 FFN runtime rejection,
+  collective-boundary rule, and fail-closed accuracy contract.
+- No NPU, container, port, framework source, performance artifact, or dirty
+  performance-worktree file was mutated by this ingestion.
+- Exact branch validation passed: the 26-skill tree, JSON, handoff validator
+  with artifact hashes, 15 Qwen3.5 guards, 11 Qwen3.8 guards, and diff check.
+  Commit and push this coherent checkpoint; serialized `main` integration
+  remains separate.

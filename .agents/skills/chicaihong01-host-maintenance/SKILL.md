@@ -99,6 +99,13 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 For performance work, also use `ascend-npu-environment-orientation`,
 `ascend-inference-tuning-loop`, and `ascend-benchmark-evidence`.
 
+For Qwen3.x BF16 runtime work on the pinned vLLM-Ascend v0.23 family, read
+[references/qwen35-v023-runtime-lessons.md](references/qwen35-v023-runtime-lessons.md)
+before allocating NPUs. It records which upstream and built-in routes were
+measured, retired, rejected, or retained as partial components. Treat it as
+candidate-screening knowledge, not as proof of current host state or final
+performance attainment.
+
 ## Editing and checkpoints
 
 Route non-trivial work through one named remote `work/*` branch and independent
