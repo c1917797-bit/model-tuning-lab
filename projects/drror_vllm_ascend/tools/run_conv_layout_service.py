@@ -25,7 +25,7 @@ def parse_args(argv=None):
     parser.add_argument("--plan-sha", default=PLAN_SHA)
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--plugin-version",
-                        choices=("0.1.7", "0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14"),
+                        choices=("0.1.7", "0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14", "0.1.15", "0.1.16", "0.1.17"),
                         default="0.1.7")
     parser.add_argument("--prefill-mc2", action="store_true")
     parser.add_argument("--prefill-mc2-mixed", action="store_true")
@@ -35,10 +35,10 @@ def parse_args(argv=None):
     parser.add_argument("--prefill-diagnostic", action="store_true")
     parser.add_argument("--prefill-diagnostic-tokens", type=int, default=32768)
     args = parser.parse_args(argv)
-    if args.prefill_mc2 and args.plugin_version not in ("0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14"):
+    if args.prefill_mc2 and args.plugin_version not in ("0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14", "0.1.15", "0.1.16", "0.1.17"):
         parser.error("prefill MC2 requires an explicitly selected compatible local build")
     if args.prefill_mc2_mixed and (
-            not args.prefill_mc2 or args.plugin_version not in ("0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14")):
+            not args.prefill_mc2 or args.plugin_version not in ("0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14", "0.1.15", "0.1.16", "0.1.17")):
         parser.error("mixed-batch MC2 requires MC2 ON and an explicit compatible local build")
     if args.diagnostic_mc2_coverage and (not args.prefill_mc2 or args.profile or args.diagnostic_determinism):
         parser.error("MC2 coverage requires MC2 ON and excludes profiler/determinism diagnostics")
@@ -46,13 +46,13 @@ def parse_args(argv=None):
         parser.error("historical coverage worker is pinned to the0.1.8 adapter")
     if args.prefill_diagnostic and (
         args.variant == "baseline"
-        or args.plugin_version != "0.1.14"
+        or args.plugin_version not in ("0.1.14", "0.1.15", "0.1.16", "0.1.17")
         or args.profile
         or args.diagnostic_mc2_coverage
         or args.diagnostic_determinism
         or args.prefill_diagnostic_tokens <= 0
     ):
-        parser.error("prefill diagnostic requires a reduced 0.1.14 treatment and excludes other diagnostics/profile")
+        parser.error("prefill diagnostic requires a reduced 0.1.14+ treatment and excludes other diagnostics/profile")
     return parser, args
 
 
@@ -122,7 +122,7 @@ def main():
         "VLLM_ASCEND_ENABLE_FLASHCOMM1", "VLLM_BATCH_INVARIANT",
         "HCCL_OP_EXPANSION_MODE", "HCCL_DETERMINISTIC", "LCCL_DETERMINISTIC",
     )}
-    if args.plugin_version in ("0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14"):
+    if args.plugin_version in ("0.1.8", "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14", "0.1.15", "0.1.16", "0.1.17"):
         if runtime_env["VLLM_ASCEND_ENABLE_NZ"] not in (None, "1"):
             raise RuntimeError("MC2 experiment must retain original BF16 ND weight policy")
         for name in ("VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE", "VLLM_ASCEND_ENABLE_FLASHCOMM1", "VLLM_BATCH_INVARIANT"):

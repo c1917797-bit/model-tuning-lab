@@ -155,7 +155,7 @@ def main():
             raise TimeoutError("service startup exceeded900s")
         time.sleep(5)
     if (manifest.get("plugin_version") not in (
-            "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14")
+            "0.1.9", "0.1.10", "0.1.11", "0.1.12", "0.1.13", "0.1.14", "0.1.15", "0.1.16", "0.1.17")
             or manifest.get("variant") != args.variant
             or manifest.get("layout") != "packed" or manifest.get("prefill_mc2") is not True
             or type(manifest.get("prefill_mc2_mixed")) is not bool

@@ -15,6 +15,7 @@ from ..plan import file_sha256
 # Integer row count only; no tensors or global runtime state escape a forward call.
 _PREFILL_ROWS = contextvars.ContextVar("drrqr_prefill_mc2_rows", default=0)
 _PREFILL_PHASE = contextvars.ContextVar("drrqr_prefill_mc2_phase", default="none")
+_DECODE_ROWS = contextvars.ContextVar("drrqr_prefill_mc2_decode_rows", default=0)
 LINEAR_SOURCE_SHA256 = "3f14a92019a6612158ba41a26c358c8f164cbda66b743c518a5e4019694b5dc3"
 TARGET = re.compile(r"(?:^|\.)layers\.(\d+)\.(mlp\.down_proj|linear_attn\.out_proj|self_attn\.o_proj)$")
 
@@ -30,10 +31,15 @@ def prefill_rows(context, rows, *, allow_mixed=False):
     metadata = getattr(context, "attn_metadata", None)
     if not isinstance(metadata, dict) or not metadata:
         return 0
+    expected_counts = None
     for item in metadata.values():
         counts = [getattr(item, name, None) for name in
                   ("num_prefills", "num_decodes", "num_decode_tokens", "num_actual_tokens")]
         if not all(type(value) is int for value in counts):
+            return 0
+        if expected_counts is None:
+            expected_counts = counts
+        elif counts != expected_counts:
             return 0
         if not (counts[0] > 0 and counts[3] == rows):
             return 0
@@ -92,6 +98,9 @@ def install_dispatch(runner_cls, linear_cls, config, *, get_context, fused, make
             raise RuntimeError("prefill MC2: another configuration is installed")
         return original_forward._drrqr_prefill_mc2_bindings
     bindings = {}
+    mixed_diagnostic_stopped = False
+    mixed_diagnostic_calls = 0
+    mixed_diagnostic_last_finite = None
     original_model_forward = runner_cls._model_forward
     signature = inspect.signature(original_model_forward)
     if "num_tokens_padded" not in signature.parameters:
@@ -102,20 +111,28 @@ def install_dispatch(runner_cls, linear_cls, config, *, get_context, fused, make
         bound = signature.bind(self, *args, **kwargs)
         context = get_context()
         rows = prefill_rows(context, bound.arguments["num_tokens_padded"], allow_mixed=config.prefill_mc2_mixed)
-        mixed = bool(rows) and any(item.num_decode_tokens > 0 for item in context.attn_metadata.values())
+        decode_rows = next(iter(context.attn_metadata.values())).num_decode_tokens if rows else 0
+        mixed = bool(rows) and decode_rows > 0
         token = _PREFILL_ROWS.set(rows)
         phase_token = _PREFILL_PHASE.set("mixed_prefill" if mixed else ("pure_prefill" if rows else "none"))
+        decode_token = _DECODE_ROWS.set(decode_rows)
         try:
             return original_model_forward(self, *args, **kwargs)
         finally:
+            _DECODE_ROWS.reset(decode_token)
             _PREFILL_PHASE.reset(phase_token)
             _PREFILL_ROWS.reset(token)
 
     def dispatch(input_, weight, key: str):
+        nonlocal mixed_diagnostic_stopped, mixed_diagnostic_calls
+        nonlocal mixed_diagnostic_last_finite
         # This body is opaque to Dynamo; the phase must be read at execution,
         # not specialized from the profile/dummy batch used for compilation.
         self, binding = bindings[key]
-        if input_.shape[0] < binding["min_rows"] or _PREFILL_ROWS.get() != input_.shape[0]:
+        decode_rows = _DECODE_ROWS.get()
+        fused_rows = input_.shape[0] - decode_rows
+        if (fused_rows < binding["min_rows"] or _PREFILL_ROWS.get() != input_.shape[0]
+                or not 0 <= decode_rows < input_.shape[0]):
             output = original_forward(self, input_)
             return output[0] if self.return_bias else output
         if input_.ndim != 2 or input_.shape[1] != binding["k"] or input_.dtype != self.weight.dtype:
@@ -123,16 +140,85 @@ def install_dispatch(runner_cls, linear_cls, config, *, get_context, fused, make
         if input_.device != self.weight.device or not input_.is_contiguous():
             output = original_forward(self, input_)
             return output[0] if self.return_bias else output
-        output = fused(input_, weight.t(), binding["hcom"])
+        decode_output = None
+        prefill_output = None
+        if decode_rows:
+            decode_output = original_forward(self, input_[:decode_rows])
+            if self.return_bias:
+                decode_output = decode_output[0]
+            prefill_output = fused(input_[decode_rows:], weight.t(), binding["hcom"])
+            output = torch.cat((decode_output, prefill_output), dim=0)
+        else:
+            output = fused(input_, weight.t(), binding["hcom"])
+        if (config.prefill_diagnostic
+                and _PREFILL_PHASE.get() == "mixed_prefill"
+                and not mixed_diagnostic_stopped):
+            # Diagnostic-only synchronization.  Check every audited MC2 boundary
+            # in execution order, but emit and stop after the first bad boundary.
+            input_finite = bool(torch.isfinite(input_).all().item())
+            output_finite = bool(torch.isfinite(output).all().item())
+            mixed_diagnostic_calls += 1
+            if input_finite and output_finite:
+                mixed_diagnostic_last_finite = binding["name"]
+            else:
+                def finite_summary(tensor, finite=None):
+                    if finite is None:
+                        finite = bool(torch.isfinite(tensor).all().item())
+                    return {
+                        "shape": list(tensor.shape),
+                        "dtype": str(tensor.dtype),
+                        "finite": finite,
+                    }
+
+                # Never cast a production-sized projection to FP32 here: the
+                # temporary alone exceeds the remaining HBM at 40960 rows.
+                stats = {
+                    "input": finite_summary(input_, input_finite),
+                    "output": finite_summary(output, output_finite),
+                }
+                first_nonfinite_stage = "input" if not input_finite else "output"
+                if decode_output is not None:
+                    stats["decode_input"] = finite_summary(input_[:decode_rows])
+                    stats["prefill_input"] = finite_summary(input_[decode_rows:])
+                    stats["decode_output"] = finite_summary(decode_output)
+                    stats["prefill_output"] = finite_summary(prefill_output)
+                    if not stats["decode_input"]["finite"]:
+                        first_nonfinite_stage = "decode_input"
+                    elif not stats["prefill_input"]["finite"]:
+                        first_nonfinite_stage = "prefill_input"
+                    elif not stats["decode_output"]["finite"]:
+                        first_nonfinite_stage = "decode_output"
+                    elif not stats["prefill_output"]["finite"]:
+                        first_nonfinite_stage = "prefill_output"
+                emit_evidence(
+                    config,
+                    "prefill_mc2_output_nonfinite",
+                    component="correctness",
+                    name=binding["name"],
+                    diagnostic_call_index=mixed_diagnostic_calls,
+                    previous_finite_mc2_name=mixed_diagnostic_last_finite,
+                    rows=input_.shape[0],
+                    decode_rows=decode_rows,
+                    fused_rows=fused_rows,
+                    first_nonfinite_stage=first_nonfinite_stage,
+                    stats=stats,
+                    phase="mixed_prefill",
+                    source=__file__,
+                    source_sha256=binding["source_sha256"],
+                )
+                mixed_diagnostic_stopped = True
         if not binding["observed"]:
             emit_evidence(config, "prefill_mc2_called", component="performance",
                           name=binding["name"], rows=input_.shape[0], k=binding["k"],
+                          decode_rows=decode_rows, fused_rows=fused_rows,
                           weight_shape=list(self.weight.shape), phase=_PREFILL_PHASE.get(),
                           source=__file__, source_sha256=binding["source_sha256"])
             binding["observed"] = True
         if _PREFILL_PHASE.get() == "mixed_prefill" and not binding.get("observed_mixed", False):
             emit_evidence(config, "prefill_mc2_mixed_called", component="performance",
                           name=binding["name"], rows=input_.shape[0], k=binding["k"],
+                          decode_rows=decode_rows, fused_rows=fused_rows,
+                          strategy="original_decode_plus_fused_prefill",
                           phase="mixed_prefill", source=__file__, source_sha256=binding["source_sha256"])
             binding["observed_mixed"] = True
         return output

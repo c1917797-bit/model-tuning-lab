@@ -35,6 +35,9 @@ class MixedMC2Tests(unittest.TestCase):
             bad = context()
             setattr(bad.attn_metadata["full"], name, value)
             self.assertEqual(mc2.prefill_rows(bad, 8292, allow_mixed=True), 0)
+        inconsistent = context()
+        inconsistent.attn_metadata["full"].num_decode_tokens = 3
+        self.assertEqual(mc2.prefill_rows(inconsistent, 8292, allow_mixed=True), 0)
         for key in ("in_profile_run", "capturing"):
             bad = context()
             setattr(bad, key, True)
@@ -73,9 +76,9 @@ class MixedMC2Tests(unittest.TestCase):
         config = DrrqrConfig(prefill_mc2=True, prefill_mc2_mixed=True)
         bindings = mc2.install_dispatch(
             Runner, Linear, config, get_context=lambda: c,
-            fused=lambda x, w, h: calls.append(mc2._PREFILL_PHASE.get()) or (x @ w + 1),
+            fused=lambda x, w, h: calls.append((mc2._PREFILL_PHASE.get(), x.shape[0])) or (x @ w + 1),
             make_opaque=make_opaque)
-        binding = {"name": "mixed", "k": 4, "min_rows": 2048, "hcom": "cpu",
+        binding = {"name": "mixed", "k": 4, "min_rows": 2044, "hcom": "cpu",
                    "observed": False, "observed_mixed": False, "source_sha256": "unused"}
         layer._drrqr_prefill_mc2 = binding
         bindings["mixed"] = (layer, binding)
@@ -88,11 +91,13 @@ class MixedMC2Tests(unittest.TestCase):
         with patch.object(mc2, "emit_evidence") as evidence:
             self.assertTrue(torch.equal(runner._model_forward(2048), reference))
             c.in_profile_run = False
+            mixed_reference = torch.cat((reference[:4], reference[4:] + 1), dim=0)
             for _ in range(2):
-                self.assertTrue(torch.equal(runner._model_forward(2048), reference + 1))
+                self.assertTrue(torch.equal(runner._model_forward(2048), mixed_reference))
                 self.assertEqual(mc2._PREFILL_ROWS.get(), 0)
                 self.assertEqual(mc2._PREFILL_PHASE.get(), "none")
-            self.assertEqual(calls, ["mixed_prefill", "mixed_prefill"])
+                self.assertEqual(mc2._DECODE_ROWS.get(), 0)
+            self.assertEqual(calls, [("mixed_prefill", 2044), ("mixed_prefill", 2044)])
             self.assertEqual([e.args[1] for e in evidence.call_args_list],
                              ["prefill_mc2_called", "prefill_mc2_mixed_called"])
             # Pure decode is still original even with many rows.
@@ -100,6 +105,12 @@ class MixedMC2Tests(unittest.TestCase):
                 item.num_prefills = 0
                 item.num_decodes = item.num_decode_tokens = 2048
             self.assertTrue(torch.equal(runner._model_forward(2048), reference))
+            # Pure prefill keeps the one-call fused fast path.
+            for item in c.attn_metadata.values():
+                item.num_prefills = 2
+                item.num_decodes = item.num_decode_tokens = 0
+            self.assertTrue(torch.equal(runner._model_forward(2048), reference + 1))
+            self.assertEqual(calls[-1], ("pure_prefill", 2048))
             # Direct call has no runner marker.
             self.assertTrue(torch.equal(layer.forward(runner.x)[0], reference))
             c = context(2048, 4)
@@ -113,7 +124,7 @@ class MixedMC2Tests(unittest.TestCase):
                 runner._model_forward(2048)
             self.assertEqual(mc2._PREFILL_ROWS.get(), 0)
             self.assertEqual(mc2._PREFILL_PHASE.get(), "none")
-            self.assertEqual(len(calls), 2)
+            self.assertEqual(len(calls), 3)
         with self.assertRaisesRegex(RuntimeError, "another configuration"):
             mc2.install_dispatch(Runner, Linear, DrrqrConfig(), get_context=lambda: c, fused=None)
 
@@ -127,6 +138,62 @@ class MixedMC2Tests(unittest.TestCase):
                                      "VLLM_ASCEND_DRRQR_PREFILL_MC2_MIXED": "1",
                                      "VLLM_ASCEND_DRRQR_EVIDENCE_FILE": "/tmp/evidence"}, clear=True):
             self.assertTrue(get_config().prefill_mc2_mixed)
+
+    def test_diagnostic_stops_after_first_nonfinite_mc2_boundary(self):
+        class Linear:
+            def __init__(self):
+                self.weight = torch.randn((8, 4))
+                self.return_bias = True
+
+            def forward(self, x, **kwargs):
+                return torch.nn.functional.linear(x, self.weight), None
+
+        class Runner:
+            def _model_forward(self, num_tokens_padded):
+                return self.layer.forward(self.x)[0]
+
+        c = context(2048, 4)
+        layer = Linear()
+
+        def fused(x, weight, hcom):
+            result = x @ weight
+            result[0, 0] = float("nan")
+            return result
+
+        config = DrrqrConfig(
+            prefill_mc2=True,
+            prefill_mc2_mixed=True,
+            prefill_diagnostic=True,
+        )
+        bindings = mc2.install_dispatch(
+            Runner, Linear, config, get_context=lambda: c, fused=fused
+        )
+        binding = {
+            "name": "layers.3.self_attn.o_proj",
+            "k": 4,
+            "min_rows": 2044,
+            "hcom": "cpu",
+            "observed": False,
+            "observed_mixed": False,
+            "source_sha256": "unused",
+        }
+        layer._drrqr_prefill_mc2 = binding
+        bindings[binding["name"]] = (layer, binding)
+        runner = Runner()
+        runner.layer = layer
+        runner.x = torch.randn((2048, 4))
+        with patch.object(mc2, "emit_evidence") as evidence:
+            for _ in range(2):
+                self.assertTrue(torch.isnan(runner._model_forward(2048)[4:, 0]).any())
+        failures = [
+            call for call in evidence.call_args_list
+            if call.args[1] == "prefill_mc2_output_nonfinite"
+        ]
+        self.assertEqual(len(failures), 1)
+        self.assertEqual(failures[0].kwargs["first_nonfinite_stage"], "prefill_output")
+        self.assertEqual(failures[0].kwargs["diagnostic_call_index"], 1)
+        self.assertIsNone(failures[0].kwargs["previous_finite_mc2_name"])
+        self.assertFalse(failures[0].kwargs["stats"]["prefill_output"]["finite"])
 
     def test_launcher_version_and_diagnostic_boundaries(self):
         base = ["--variant", "dk64", "--layout", "packed", "--build-manifest", "/unused",
@@ -149,7 +216,7 @@ class MixedMC2Tests(unittest.TestCase):
         dk80 = [*base]
         dk80[1] = "dk80"
         self.assertEqual(parse_args(dk80 + valid)[1].variant, "dk80")
-        diagnostic = ["--plugin-version", "0.1.14", "--prefill-mc2", "--prefill-mc2-mixed",
+        diagnostic = ["--plugin-version", "0.1.17", "--prefill-mc2", "--prefill-mc2-mixed",
                       "--prefill-diagnostic", "--prefill-diagnostic-tokens", "32768"]
         parsed = parse_args(dk80 + diagnostic)[1]
         self.assertTrue(parsed.prefill_diagnostic)

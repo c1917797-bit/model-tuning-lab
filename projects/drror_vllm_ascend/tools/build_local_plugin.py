@@ -37,7 +37,9 @@ def main():
     wheels = list((output / "wheels").glob("*.whl"))
     if len(wheels) != 1:
         raise RuntimeError("expected one offline-built wheel")
-    result = {"schema": "drrqr-local-wheel-build/v1", "source_root": str(root),
+    # Consumers may run in another container that only shares /drrqr-results.
+    # Pin provenance to the immutable staged snapshot, not the builder mount.
+    result = {"schema": "drrqr-local-wheel-build/v1", "source_root": str(stage),
               "source_sha256": sources, "wheel": str(wheels[0]), "wheel_sha256": digest(wheels[0]),
               "builder_sha256": digest(Path(__file__))}
     (output / "build-manifest.json").write_text(json.dumps(result, indent=2) + "\n")
