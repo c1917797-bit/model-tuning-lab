@@ -223,6 +223,14 @@
   clean afterward. Resume on the energy-Dk64 DRRQR mainline with the
   independently named plugin-owned native decode layout control described in
   NATIVE_DECODE_PROTOTYPE_SEAMS.md; do not resume mixed MC2 diagnosis.
+- Active next iteration:
+  drrqr-dk64-native-decode-layout-control-v1. It keeps the energy-Dk64
+  algorithm and frozen native arithmetic unchanged, uses only the ACLNN
+  registry route, and first proves unique plugin-owned build/symbol/state/graph
+  identity. Its one bounded NPU matrix is a prerequisite for later packed-QKV
+  and L2 fusion, not a performance or accuracy claim. Stop after one build
+  correction and one numerical matrix; do not start a model service in this
+  iteration.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

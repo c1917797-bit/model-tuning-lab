@@ -1,0 +1,68 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-native-decode-layout-control-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-11
+validated_commit: pending
+
+stage_goal: Establish an independently named plugin-owned Ascend recurrent decode control for energy-Dk64 that preserves the frozen native arithmetic and state exactly while exposing the packed-layout seam required by later DRRQR-specific fusion.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: The frozen dense baseline is 135.142469917 output tok/s and the accepted-development target is 148.656716909; energy-Dk64 reaches 141.564496, so it still needs about 5.009887 percent additional throughput, while Dk80 is not admitted under the mixed-MC2 common path.
+  medium_term_milestone: A numerically qualified Dk64-specific Ascend decode implementation that can remove Q/K normalization materialization and packed-QKV rearrangement in the next stage without changing DRRQR semantics.
+  short_term_decision: Determine whether the frozen recurrent arithmetic can be reproduced under a unique plugin-owned ACLNN/torch namespace and consume an explicit packed-layout contract without hidden copies, symbol collision, state reallocation or graph-stale metadata.
+  deciding_evidence: Source/build provenance plus a physical-NPU4-7 matrix for TP4-local HQK4/HV12/Dv128/Dk64, batch1 and batch16, eight changing-input/state-index steps, eager and NPUGraph replay, comparing output and the entire FP32 mutable state bitwise with the frozen native recurrent operator and checking guards, untouched slots, pointers and loaded symbol identity.
+  budget_or_stop_rule: One plugin-local operator import/rename and build adapter, one build attempt with at most one correction for a proven build defect, and one bounded NPU matrix with no numerical retry or tolerance relaxation. No model service, profiler, endpoint benchmark or task accuracy in this iteration.
+  on_pass: Freeze the control artifact and begin the packed-QKV plus in-kernel L2 stage with a separately predeclared incremental numerical budget and static saved-versus-added cost model.
+  on_failure: Preserve the failed build/runtime/numerical evidence, recover the active plugin path, and return to a materially different exactly foldable DRRQR algorithm design if the failure is architectural rather than a single proven integration defect.
+  on_inconclusive: Stop native expansion, preserve the gap, and reassess whether the loaded binary/symbol or graph path can be proven within one smaller bounded check.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
+  paper_exact_selection: false
+  semantic_change_in_this_iteration: none
+  control_arithmetic: Frozen v0.23 Ascend RecurrentGatedDeltaRule BF16-input/FP32-state behavior.
+  implementation_name: DrrqrRecurrentLayoutControlV1
+  dispatch: Unique vendor, ACLNN symbols and torch namespace; explicit opt-in; fail closed on unsupported dtype/layout/stride or unresolved provenance.
+
+architecture_and_portability:
+  integration_route: ACLNN registry route because the source has OpDef, op_api and two-stage aclnn symbols; direct-invoke templates are excluded.
+  logical_physical_separation: Logical Dk64 and coordinate order remain algorithm metadata; physical alignment, strides, tiling and SoC dispatch remain backend capabilities.
+  supported_first_environment: Ascend 910B4, current v0.23 container, BF16 Q/K/V/beta, FP32 g/state, TP4-local HQK4/HV12/Dv128.
+  future_dispatch: Keep an unchanged mathematical/native fallback and separate SoC-specific kernel registration so another Ascend environment can qualify its own backend without changing the algorithm plan.
+  claim_ceiling: Build/ABI/storage and target-NPU numerical qualification only; no throughput, accuracy or cross-environment gain.
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+  source_policy: All new sources, build scripts and manifests live under projects/drror_vllm_ascend; vLLM-Ascend, ops-transformer, cannbot-skills and the image remain read-only references.
+  artifact_policy: Build and raw NPU artifacts stay under a fresh /drrqr-results path with hashes referenced from Git.
+
+expert_guidance:
+  cannbot_commit: d5e0d44b7a1d2e90c5f0b9fb62970fb3bac89ec3
+  ops_transformer_commit: 0684247214bae5abb5cb6dc7d90b34a6ad401cdd
+  route: torch-ascendc-op-extension ACLNN registry
+  guards:
+    - Keep the custom GE op type, ACLNN symbols and torch operator name uniquely prefixed.
+    - Do not mix direct-invoke stream handling with EXEC_NPU_CMD_V1 queue semantics.
+    - Register mutable state in the torch schema and prove Meta/graph behavior.
+    - Resolve the uniquely named ACLNN functions from an explicit artifact and record actual symbol provenance.
+
+changes:
+  - type: workspace
+    description: Add one independently named native operator control, its build/provenance adapter and its exact-state NPU probe.
+    files:
+      - projects/drror_vllm_ascend/native/drrqr_recurrent_layout_control_v1/**
+      - projects/drror_vllm_ascend/tools/build_drrqr_native.py
+      - projects/drror_vllm_ascend/tools/drrqr_recurrent_layout_control_probe.py
+      - projects/drror_vllm_ascend/tests/test_drrqr_native_contract.py
+
+validation_commands:
+  - plugin software contract tests and source-manifest audit
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - one fresh physical-NPU4-7 eager and NPUGraph exact-state matrix
+
+lessons_ingested: []
