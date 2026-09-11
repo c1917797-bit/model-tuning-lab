@@ -207,20 +207,22 @@
   operator. Resume with drrqr-dk80-mixed-cache-state-isolation-v1, preserving
   the original 16-prompt cohort and binding per-request phase, state-cache
   slots/storage and the first non-finite GDN boundary before any operator work.
-- The follow-on drrqr-dk80-mixed-cache-state-isolation-v1 diagnostic
-  implementation is ready but its single NPU run has not started. Commit
-  53234ba and plugin 0.1.14 preserve all 16 prompt outcomes, arm only on an
-  exact 32768-token prefill, bound trace volume, and record phase, cache
-  indices/storage plus pre/post GDN state finite statistics without changing
-  arithmetic. Focused tests passed 43 cases and the full suite passed 519.
-  The immutable wheel SHA256 is
-  0d377dd11bb39868013d13eac39bb828ce20ec2a3f6b9558a3769ea463e5141f;
-  installation verified all 22 modules and unchanged upstream sources.
-  A fresh preflight then found the foreign
-  qwen38_tp8_full357_qwen38-tp8-full357-v2-20260910T212811Z container using
-  physical NPU0-7. Do not stop or overlap it. When physical NPU4-7 are free,
-  launch exactly one 0.1.14 Dk80 service and one frozen concurrency-16,
-  input32768/output16 cohort; do not retry or broaden the experiment.
+- The drrqr-dk80-mixed-cache-state-isolation-v1 diagnostic is complete.
+  Plugin 0.1.17 reproduced the mixed cohort outcome: 10/16 HTTP 200 and six
+  NaN serialization failures. All four workers first bound non-finiteness at
+  call 7, `language_model.model.layers.3.self_attn.o_proj`: the one-row
+  decode input was non-finite while the 32768-row prefill input, both split
+  outputs and the prior layer-2 MLP MC2 boundary were finite. Evidence SHA256:
+  805cd19839d1d4c2aa3692df9d023d700287122397088869409c9611aaacce0e.
+  This rejects Dk80 cache/recurrent or fused-prefill adaptation for this
+  anomaly and stops the mixed-MC2 diagnostic chain. It does not reject Dk80
+  under another valid common path. An initial 0.1.16 diagnostic was invalid
+  because a whole production tensor was promoted to FP32 and exhausted HBM;
+  0.1.17 replaced it with bounded finite summaries. Commit 804d9b9 preserves
+  the implementation. The exact service was stopped and physical NPU4-7 were
+  clean afterward. Resume on the energy-Dk64 DRRQR mainline with the
+  independently named plugin-owned native decode layout control described in
+  NATIVE_DECODE_PROTOTYPE_SEAMS.md; do not resume mixed MC2 diagnosis.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

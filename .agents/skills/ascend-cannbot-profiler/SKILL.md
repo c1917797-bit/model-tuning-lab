@@ -93,6 +93,12 @@ Re-prove this in the actual container/session before a new claim.
 - Store raw profiler trees, trace databases, CANN dumps, and large logs outside
   Git, usually under persistent `/cache` storage. Commit only commands, hashes,
   compact summaries, artifact paths, and decisions.
+- Before adding tensor diagnostics to a production-scale model path, estimate
+  every temporary allocation, synchronization and retained reference. Avoid
+  whole-tensor dtype promotion or diagnostic copies when a device-side finite
+  reduction, metadata, or bounded slice answers the question. If instrumentation
+  itself exhausts HBM or changes scheduling, classify that run as invalid
+  diagnostic evidence; it is not evidence for or against the algorithm.
 - Do not mutate CANN, drivers, firmware, clocks, power settings, or shared
   system services without explicit authorization and rollback.
 

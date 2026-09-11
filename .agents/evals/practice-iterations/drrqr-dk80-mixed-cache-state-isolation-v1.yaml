@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-dk80-mixed-cache-state-isolation-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-11
-validated_commit: 53234ba
+validated_commit: 804d9b9
 
 stage_goal: Bind the prior Dk80 concurrent endpoint NaN to either real cache-state ownership, mixed-prefill/decode GDN arithmetic, or a later output seam before changing the algorithm or Ascend operator.
 
@@ -44,10 +44,23 @@ implementation_checkpoint:
   collector_scope: Every frozen prompt returns an identity-bound success or failure receipt; one failed future no longer discards the other cohort outcomes.
 
 runtime_checkpoint:
-  state: waiting_for_resource_contract
+  state: completed_and_cleaned
   observed_at: 2026-09-11
-  evidence: A fresh npu-smi and docker inspection found qwen38_tp8_full357_qwen38-tp8-full357-v2-20260910T212811Z using physical NPU0-7, with one VLLMWorker_TP process and about 25955 MiB on each card.
-  decision: Do not stop or overlap the foreign TP8 service. The one allowed four-worker Dk80 service and frozen cohort have not started.
+  evidence: The foreign TP8 service released the devices. Fresh preflights proved that the dedicated container maps physical NPU4-7 to container NPU0-3, all four devices were idle, and the container contained only its persistent bash before launch. The bounded 0.1.17 service and cohort completed, the exact service process was stopped, and the postcheck again found no NPU process and only the persistent bash.
+  decision: The diagnostic budget is exhausted; do not restart or broaden this mixed-MC2 investigation.
+
+outcome:
+  classification: accepted_diagnostic
+  candidate_decision: Dk80 is not admitted to endpoint performance with mixed MC2 enabled; this run does not reject the Dk80 algorithm under a different valid common path.
+  request_result: 10 of 16 requests returned HTTP 200 and 6 failed NaN serialization, reproducing the 0.1.15 outcome.
+  localization: All four workers first observed a non-finite value at diagnostic call 7, language_model.model.layers.3.self_attn.o_proj. The one-row decode input was non-finite while the 32768-row prefill input, decode output, prefill output and prior layer-2 MLP MC2 boundary were finite.
+  interpretation: The first bound non-finite value is inside the full-attention decode branch before o_proj, not in Dk80 recurrent state/cache ownership and not first inside the fused prefill suffix. Mixed-off Dk80 returned 16 of 16 successes, so mixed MC2 remains causally associated but its exact mechanism is outside the DRRQR candidate-specific state/operator seam.
+  claim_ceiling: Integrated mixed-scheduler anomaly localization only; no throughput, task accuracy, kernel-speed, or cross-environment claim.
+  evidence_sha256: 805cd19839d1d4c2aa3692df9d023d700287122397088869409c9611aaacce0e
+  cohort_sha256: 8b3efc3a3742515e27ffdd0cb1b1b00d458e572bf9fb1c6e6a23a217607a43be
+  service_manifest_sha256: 62f9d5e600e8463438376e9b5ded835a4c82e69047d4f42080cf9a4984ba074b
+  wheel_sha256: 17e41c5807b20139cf192ac761af4881c713c8281947ff36d972a1831b088e13
+  next_decision: Return to the admitted energy-Dk64 DRRQR candidate and perform the independently named plugin-owned native decode layout control already specified in NATIVE_DECODE_PROTOTYPE_SEAMS.md; do not make mixed MC2 or Dk80 cache diagnostics the mainline.
 
 changes:
   - type: workspace
@@ -75,3 +88,6 @@ lessons_ingested:
   - lesson: Protocol-faithful anomaly localization must retain the concurrency, scheduler phase, cache occupancy and prompt cohort of the failure being explained.
     destination: projects/drror_vllm_ascend/AGENTS.md
     severity: critical
+  - lesson: Production-scale diagnostics must estimate temporary HBM and avoid whole-tensor dtype promotion or copies; the 0.1.16 FP32 statistics allocation was an invalid instrumentation failure, not algorithm evidence.
+    destination: .agents/skills/ascend-cannbot-profiler/SKILL.md
+    severity: high
