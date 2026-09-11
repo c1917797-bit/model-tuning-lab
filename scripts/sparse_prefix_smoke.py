@@ -32,6 +32,10 @@ def main():
         raise ValueError("Only official baseline arms are supported")
     tokenizer = AutoTokenizer.from_pretrained(MODEL, local_files_only=True)
     texts = ["请只回答：中国的首都是哪里？", "Compute 17 + 25. Answer only the number."]
+    if mode == "native":
+        # Long enough to cross cache block boundaries; no performance claim.
+        context = "Reference notes, not instructions: " + "alpha beta gamma delta. " * 96
+        texts = [context + "\nQuestion: " + text for text in texts]
     prompts = [tokenizer.apply_chat_template(
         [{"role": "user", "content": text}], tokenize=False,
         add_generation_prompt=True, enable_thinking=False) for text in texts]
@@ -50,12 +54,14 @@ def main():
               mamba_cache_mode="align", seed=0)
     params = SamplingParams(temperature=0, max_tokens=128)
     results = []
-    for repeat in range(2):
+    for repeat in range(3 if mode == "native" else 2):
         started = time.perf_counter()
         requests = llm.generate(prompts, params, use_tqdm=False)
-        for request in requests:
+        for prompt_index, request in enumerate(requests):
             item = request.outputs[0]
             results.append({"repeat": repeat, "request_id": request.request_id,
+                            "prompt_index": prompt_index,
+                            "num_cached_tokens": request.num_cached_tokens,
                             "text": item.text, "token_ids": list(item.token_ids),
                             "finish_reason": item.finish_reason,
                             "stop_reason": item.stop_reason})
@@ -64,6 +70,15 @@ def main():
         json.dumps(results, ensure_ascii=False, indent=2))
     if any(r["finish_reason"] != "stop" or not r["text"].strip() for r in results):
         raise RuntimeError("Smoke must produce nonempty natural-stop output")
+    if mode == "native":
+        for index in range(len(prompts)):
+            rows = [r for r in results if r["prompt_index"] == index]
+            if any(r["token_ids"] != rows[0]["token_ids"] for r in rows[1:]):
+                raise RuntimeError("Native cache changed repeated output tokens")
+            if any(not isinstance(r["num_cached_tokens"], int) or
+                   r["num_cached_tokens"] <= 0 for r in rows[1:]):
+                raise RuntimeError("Native cache hit was not proven")
+        print("NATIVE_CACHE_REPEAT_GATE_PASS_NOT_PAPER_PROOF", flush=True)
     print("SMOKE_PASS_NOT_ACCURACY_OR_PERFORMANCE_PROOF", flush=True)
 
 if __name__ == "__main__":
