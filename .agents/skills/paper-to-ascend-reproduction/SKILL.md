@@ -30,7 +30,10 @@ or starting a long run.
 - Treat model/checkpoint, accelerator generation, card count, topology, cache
   denominator, image, capacity budget, dataset hashes, prompt/scorer, traffic
   shape, and repetitions as experiment identity.
-- A changed identity requires a fresh baseline and artifact root.
+- A changed identity requires a separate artifact root and a matching baseline.
+  Reuse verified historical evidence when the user requests it and identity
+  matches; missing or incompatible evidence is not permission to silently rerun
+  the full baseline or pool different models.
 - Never pool evidence across different scientific questions, rulers, cache
   denominators, topologies, or invalid attempts.
 - Do not accept a favorable metric without mechanism activation evidence.
@@ -165,6 +168,11 @@ Promote only repeated, decision-changing lessons into reusable skills. Keep
 machine-specific values and one-off incidents in the workstream retrospective.
 
 ## HYPIC lessons already learned
+
+For sparse-prefix reproduction and container-startup lessons, read
+`../chicaihong01-host-maintenance/references/reproduction-runtime-lessons.md`.
+In particular, planner-only success is not model reproduction, and unchanged
+environment polling must not replace feasible algorithm implementation work.
 
 HYPIC reproduced a prior practice direction on a changed environment by keeping
 a same-denominator A/B: native prefix cache off in both arms, with only

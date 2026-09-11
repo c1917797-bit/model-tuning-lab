@@ -120,6 +120,10 @@ the workstream upstream. Serialized integration alone updates `main`.
 
 ## Failure handling
 
+For device-count/DCMI failures, model identity drift, or repeated blocked
+reproduction attempts, read `references/reproduction-runtime-lessons.md`.
+Keep compute occupancy, container binding, and initialization success distinct.
+
 Preserve exact AWMCP errors. Refresh topology after routing drift and retry only
 when the response marks the failure retryable. A control-plane timeout is not
 proof of host, command, container, or NPU failure; do not mutate the machine to
