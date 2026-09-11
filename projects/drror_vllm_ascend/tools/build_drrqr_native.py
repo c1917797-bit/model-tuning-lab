@@ -46,6 +46,22 @@ def result_path(output: Path) -> PurePosixPath:
     return CONTAINER_RESULTS_ROOT.joinpath(*relative.parts)
 
 
+def copy_ignore(source_root: Path):
+    """Ignore generated roots without dropping legitimate nested directories."""
+    source_root = source_root.resolve()
+
+    def ignore(directory: str, names: list[str]) -> set[str]:
+        ignored = {
+            name for name in names
+            if name == "__pycache__" or name.endswith(".pyc")
+        }
+        if Path(directory).resolve() == source_root:
+            ignored.update({"build", "build_out", "output"} & set(names))
+        return ignored
+
+    return ignore
+
+
 def verify_source(reference: Path, plugin_op: Path) -> dict:
     provenance = json.loads((plugin_op / "provenance.json").read_text())
     if git(reference, "rev-parse", "HEAD") != REFERENCE_COMMIT:
@@ -137,10 +153,8 @@ def main() -> None:
     save(manifest, receipt)
 
     csrc = output / "csrc"
-    ignore = shutil.ignore_patterns(
-        "build", "build_out", "output", "__pycache__", "*.pyc"
-    )
-    shutil.copytree(args.reference_root.resolve() / "csrc", csrc, ignore=ignore)
+    source_csrc = args.reference_root.resolve() / "csrc"
+    shutil.copytree(source_csrc, csrc, ignore=copy_ignore(source_csrc))
     destination = csrc / "attention" / OP_SNAKE
     shutil.copytree(plugin_op, destination)
 

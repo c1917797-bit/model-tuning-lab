@@ -69,3 +69,16 @@ def test_results_path_translation_is_bounded():
         pass
     else:
         raise AssertionError("unmounted output path was accepted")
+
+
+def test_copy_filter_keeps_nested_output_source_directories(tmp_path):
+    tool = load_build_tool()
+    source = tmp_path / "csrc"
+    source.mkdir()
+    top_names = ["build", "build_out", "output", "__pycache__", "attention"]
+    nested = source / "third_party/json/include/nlohmann/detail"
+    nested.mkdir(parents=True)
+    assert tool.copy_ignore(source)(str(source), top_names) == {
+        "build", "build_out", "output", "__pycache__"
+    }
+    assert tool.copy_ignore(source)(str(nested), ["input", "output"]) == set()
