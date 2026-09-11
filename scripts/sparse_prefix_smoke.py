@@ -52,6 +52,19 @@ def main():
               max_num_batched_tokens=2048, gpu_memory_utilization=0.7,
               enforce_eager=True, enable_prefix_caching=(mode == "native"),
               mamba_cache_mode="align", seed=0)
+    runtime = llm.llm_engine.vllm_config
+    scheduler_type = runtime.scheduler_config.get_scheduler_cls()
+    identity["resolved_runtime"] = {
+        "block_size": runtime.cache_config.block_size,
+        "mamba_cache_mode": runtime.cache_config.mamba_cache_mode,
+        "enable_prefix_caching": runtime.cache_config.enable_prefix_caching,
+        "scheduler_class": scheduler_type.__module__ + "." + scheduler_type.__qualname__,
+        "scheduler_class_is_configuration_not_activation_proof": True,
+        "prompt_token_counts": [len(tokenizer.encode(p, add_special_tokens=False))
+                                for p in prompts],
+    }
+    output.joinpath("identity.json").write_text(json.dumps(identity, indent=2))
+    print("RESOLVED_CACHE_CONFIG", json.dumps(identity["resolved_runtime"]), flush=True)
     params = SamplingParams(temperature=0, max_tokens=128)
     results = []
     for repeat in range(3 if mode == "native" else 2):

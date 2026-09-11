@@ -1,6 +1,20 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+LATEST NATIVE GATE: YvM1go smoke.json contains all six natural-stop outputs,
+identical Beijing/42 tokens across three rounds, but num_cached_tokens=0 for
+every request. Gate correctly raised Native cache hit was not proven.
+Cache configuration was True/align in actual engine log. Do not call this
+restoration success. Inspect scheduler chunk alignment and checkpoint publication
+conditions before changing the stimulus; preserve this failed attempt.
+At last observation operation00e0 was tearing down, so poll for terminal state
+and verify resource release before another launch.
+CURRENT LIVE CHECK: native-cache repeat gate operation exec-00000000000000e0
+on ma is running, container0313c1764e96 / qwen38_sparse_smoke_YvM1go.
+Artifact /cache/austinov/sparse-prefix-smoke-YvM1go. Poll before starting another
+job. Uses physical0-3, official native cache, long prefix and three rounds;
+requires positive cached-token counts and identical repeat output tokens.
+This is not the paper algorithm nor a matched cache-off quality comparison.
 LATEST ACCEPTED GATE: operation00bc completed exit0. Qwen3.8 BF16 TP4 on
 physical0-3 with spawn passed two prompts twice: Beijing and 42, natural stop,
 identical token IDs across repeats. Artifact /cache/austinov/sparse-prefix-smoke-K3EF2a.
