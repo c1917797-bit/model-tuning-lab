@@ -2,10 +2,16 @@
 # Disposable official-image smoke. No patch or existing container is modified.
 set -euo pipefail
 cd /opt/host/vnf/austinov/worktrees/qwen35-sparse-prefix-reproduction
-exec 9>/cache/austinov/.locks/npu4-7.lock
-flock -n 9 || { echo "NPU4-7 lease unavailable"; exit 75; }
+lane="${SPARSE_NPU_LANE:-4-7}"
+case "$lane" in
+  0-3) cards=(0 1 2 3) ;;
+  4-7) cards=(4 5 6 7) ;;
+  *) echo "Unsupported four-card lane"; exit 64 ;;
+esac
+exec 9>"/cache/austinov/.locks/npu${lane}.lock"
+flock -n 9 || { echo "NPU lane lease unavailable"; exit 75; }
 snapshot=$(npu-smi info)
-for card in 4 5 6 7; do
+for card in "${cards[@]}"; do
   grep -q "No running processes found in NPU $card " <<<"$snapshot" ||
     { echo "NPU $card is occupied or status is unrecognized"; exit 75; }
 done
@@ -22,8 +28,8 @@ printf '%s\n' "$name" >"$artifact/container-name.txt"
 docker run --rm --name "$name" --network host --read-only --shm-size 8g \
  --memory 48g --memory-swap 48g --cpus 6 \
  --tmpfs /tmp:rw,exec,size=4g --tmpfs /root:rw,exec,size=1g \
- --device /dev/davinci4 --device /dev/davinci5 \
- --device /dev/davinci6 --device /dev/davinci7 \
+ --device "/dev/davinci${cards[0]}" --device "/dev/davinci${cards[1]}" \
+ --device "/dev/davinci${cards[2]}" --device "/dev/davinci${cards[3]}" \
  --device /dev/davinci_manager --device /dev/devmm_svm --device /dev/hisi_hdc \
  -v /usr/local/Ascend/driver:/usr/local/Ascend/driver:ro \
  -v /usr/local/Ascend/firmware:/usr/local/Ascend/firmware:ro \
