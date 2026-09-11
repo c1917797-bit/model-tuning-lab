@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-dk64-packed-qkv-l2-recurrent-v1
 repository: model-tuning-lab
-status: in_progress
+status: complete
 date: 2026-09-11
 validated_commit: pending
 
@@ -54,4 +54,17 @@ current_result:
   graph_batch1_change_pct: -34.79416916219489
   graph_batch16_change_pct: -39.62034912902641
   software_suite: 543 passed after copying the complete native test fixture
-  decision: admitted_to_opt_in_service_integration
+  service_activation: Four TP workers installed the patch and recorded the packed_qkv_l2+npu_recurrent_gated_delta_rule decode backend.
+  endpoint_protocol: 40 requests at concurrency 16, input 32768, shared prefix 16384, fixed output 1024, profiler disabled.
+  endpoint_output_throughput_tps: 140.58318839725982
+  endpoint_vs_frozen_dense_pct: 4.025913159232086
+  endpoint_vs_prior_energy_dk64_pct: -0.6931877569733902
+  endpoint_mean_ttft_ms: 34414.993482751015
+  endpoint_mean_tpot_ms: 66.53808178690124
+  endpoint_remaining_to_fixed_target_pct: 5.74288334448303
+  endpoint_report_sha256: 8b22c609f1470ef6e62d8c3397143740e8eea0be374a1bad994335d2dc51edb8
+  graph_cache_observation: The same Triton npugraph_ex cache warning exists in the prior energy-Dk64 control, so it is not candidate-specific causal evidence.
+  cleanup: The bounded service was terminated after measurement; docker top retained only the container shell and npu-smi reported no processes on NPU0-7.
+  decision: rejected_at_single_endpoint_screen
+  claim_ceiling: One valid same-protocol endpoint screen rejects this packed-QKV/L2 implementation for promotion; it does not reject DRRQR or a larger native fused recurrent path.
+  next_loop: Audit one materially larger DRRQR-specific native seam spanning packed QKV normalization, gating and recurrent state traffic; require a static endpoint-share case before implementation.

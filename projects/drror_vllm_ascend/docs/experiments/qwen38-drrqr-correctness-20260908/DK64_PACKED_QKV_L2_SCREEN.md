@@ -1,7 +1,8 @@
 # Dk64 packed-QKV plus L2 screen
 
 Date: 2026-09-11  
-Status: numerical and operator-composition gates passed; service integration not yet measured.
+Status: numerical and operator-composition gates passed; rejected at the
+single fixed-protocol service screen.
 
 ## Scope
 
@@ -70,10 +71,52 @@ Run report SHA256 values in order:
 These percentages apply only to the isolated rearrangement-plus-normalization
 composition. They must not be projected onto endpoint throughput.
 
+## Fixed-protocol endpoint screen
+
+The opt-in path was exercised by all four TP workers. Each worker recorded both
+patch installation and execution of the
+packed_qkv_l2+npu_recurrent_gated_delta_rule decode backend. The screen used
+40 requests, concurrency 16, input length 32768, shared prefix 16384, fixed
+output length 1024 and no profiler. All 40 requests completed with 40960 output
+tokens.
+
+| Metric | Frozen dense | Prior energy-Dk64 | Packed-QKV/L2 |
+|---|---:|---:|---:|
+| Output throughput (tok/s) | 135.142470 | 141.564496 | 140.583188 |
+| Mean TTFT (ms) | 34693.578 | 33468.964 | 34414.993 |
+| Mean TPOT (ms) | 69.436227 | 66.689384 | 66.538082 |
+
+The candidate is 4.025913 percent above the frozen dense baseline but 0.693188
+percent below the prior comparable energy-Dk64 screen. Its TPOT is 0.226875
+percent better than the prior Dk64 result, while TTFT is 2.826587 percent worse;
+the net endpoint result therefore does not promote. It remains 8.073529 tok/s,
+or 5.742883 percent relative, below the fixed 148.656717 tok/s acceptance
+target.
+
+Performance report:
+
+/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-qkv-l2-v1/service-candidate-v2/performance.run1.json
+
+Performance report SHA256:
+
+8b22c609f1470ef6e62d8c3397143740e8eea0be374a1bad994335d2dc51edb8
+
+The new and prior Dk64 service logs both contain the same message about
+skipping the persistent npugraph_ex cache for graphs containing Triton
+kernels. It is therefore not candidate-specific evidence and does not explain
+the regression. The supported interpretation is narrower: the isolated
+composition improved substantially, but its endpoint cost share was too small
+to overcome TTFT and whole-service costs.
+
+After measurement the exact service process group was terminated. The
+dedicated container retained only its idle shell, and npu-smi reported no
+running processes on NPU0-7.
+
 ## Decision
 
-The candidate passes the numerical and micro-performance gates and is admitted
-to an opt-in service integration screen. The next decision is one
-profiler-disabled, fixed-1024-token endpoint comparison against the existing
-energy-Dk64 path with the same common optimizations. Final accuracy remains
-deferred until a performance candidate is promoted.
+Reject this packed-QKV/L2 implementation at the single endpoint screen and do
+not spend repeats, profiling or accuracy budget on it. This rejects the tested
+implementation, not DRRQR. The next loop must target a materially larger native
+Ascend seam spanning packed QKV normalization, gating and recurrent state
+traffic, and must establish a static endpoint-share case before implementation.
+Final accuracy remains deferred until a performance candidate is promoted.

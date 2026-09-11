@@ -84,6 +84,13 @@ microbenchmark does not prove service throughput; one paired screen does not
 prove repeated acceptance; successful execution on one environment does not
 prove portable speedup.
 
+When a microbenchmark wins but the same-protocol endpoint screen does not,
+reject that implementation at the endpoint gate unless one bounded diagnostic
+can change the decision. Do not repeat the microbenchmark as progress. Compare
+candidate and control logs before assigning causality to compiler or graph
+warnings, and use the result to choose a larger measured cost seam rather than
+stacking more small launch-saving edits.
+
 Treat outcome classes differently:
 
 - accepted: promote only the claim covered by the predeclared gate.

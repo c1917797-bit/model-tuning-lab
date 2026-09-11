@@ -239,18 +239,25 @@
   6.05536/1350.83691 ms, about 0.448 percent of the diagnostic decode kernel
   envelope, so L2-only fusion cannot be the primary route to the remaining
   throughput gap.
-- Active iteration: drrqr-dk64-packed-qkv-l2-recurrent-v1. The corrected
+- The drrqr-dk64-packed-qkv-l2-recurrent-v1 iteration is complete and rejected
+  at its single fixed-1024-token endpoint screen. The corrected
   plugin-owned two-kernel packed QKV/L2 implementation passed batch1/16,
   eight-step bitwise eager and NPUGraph parity on physical NPU4. Its
   fresh-process ABBA screen reduced graph replay time by 34.794169 percent at
   batch1 and 39.620349 percent at batch16 for this isolated composition.
   Parity report SHA256:
   2fd4133dfa00edd9f639c1d6215707656d32b88ed03eb86c128cc3ee734feaac.
-  This admits an explicitly opt-in energy-Dk64 service integration screen; it
-  is not endpoint throughput, task accuracy or portability evidence. Keep
-  dense layers, prefill, mixed batches and speculative decode on the audited
-  fallback, and do not run final accuracy before the fixed-1024-token endpoint
-  decision.
+  All four TP workers proved the integrated packed backend executed, but it
+  reached only 140.583188 tok/s: +4.025913 percent versus frozen dense and
+  -0.693188 percent versus the prior energy-Dk64 screen. Mean TTFT was
+  34414.993 ms and mean TPOT 66.538082 ms. Performance report SHA256:
+  8b22c609f1470ef6e62d8c3397143740e8eea0be374a1bad994335d2dc51edb8.
+  The same Triton graph-cache warning exists in the prior control, so do not
+  assign it candidate-specific causality. Do not repeat, profile or accuracy
+  test this implementation. Resume with a source/cost audit of a materially
+  larger native DRRQR seam spanning packed QKV normalization, gating and
+  recurrent state traffic; require a credible endpoint-share case before
+  implementation.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
