@@ -1,6 +1,6 @@
 ---
 name: paper-to-ascend
-description: Use when selecting, adapting, or evaluating a research paper as an Ascend NPU inference optimization; gate paper fit before implementation and keep claims scoped to measured evidence.
+description: Use when selecting, adapting, porting, or evaluating a research paper as an Ascend NPU inference optimization; prove method-chain completeness and constraint feasibility before implementation, and keep claims scoped to measured evidence.
 ---
 
 # Paper-to-Ascend
@@ -23,15 +23,31 @@ Git, usually in the experiment record or branch-local handoff:
 2. **Inference-time fit:** can the method be tested without retraining under the
    user's current scope? If retraining is required, stop unless the user
    explicitly authorizes that expansion.
-3. **Bottleneck fit:** what measured Decode, Prefill, kernel, memory, cache,
+3. **Method-chain completeness:** enumerate every paper stage that causally
+   supports its performance or quality result. For each stage record its paper
+   role, reference source/commit, required data or training, and whether the
+   target implementation is `exact`, `adapted`, `substituted`, or
+   `omitted`. A port of the headline operation alone is not a port of the
+   paper result.
+4. **Constraint feasibility:** compare the complete method chain with the
+   user's restrictions. If a forbidden or unavailable stage was responsible
+   for quality recovery, stability, capacity, or performance in the paper,
+   name and gate a credible replacement before implementation. Otherwise
+   classify the requested combination as presently infeasible or a stronger
+   research objective; do not imply that the paper already demonstrates it.
+5. **Bottleneck fit:** what measured Decode, Prefill, kernel, memory, cache,
    communication, or scheduling bottleneck is the paper expected to improve?
-4. **Production path:** does the installed vLLM, vLLM-Ascend, CANN, or
+6. **Production path:** does the installed vLLM, vLLM-Ascend, CANN, or
    operator stack already expose a usable seam? Prefer built-in exact paths
    before authoring new kernels or replacing low-level code.
-5. **Decision scope:** predeclare whether the first result can support only an
+7. **Algorithm identity:** label the implementation as `paper-exact`,
+   `faithful-port`, or `derivative`. Different selectors, calibration
+   corpora, objectives, recovery methods, or runtime policies are separate
+   algorithm identities even when the tensor shapes and package name match.
+8. **Decision scope:** predeclare whether the first result can support only an
    operator/router, block, service, or full-model claim. Do not promote a narrow
    result into a broader conclusion.
-6. **Resource isolation:** reserve concrete NPU IDs, port, CPU/NUMA scope, and
+9. **Resource isolation:** reserve concrete NPU IDs, port, CPU/NUMA scope, and
    artifact locations, then prove the live ownership before baseline and
    candidate runs.
 
@@ -65,29 +81,43 @@ make the experiment reproducible and evidence-bound.
 
 1. Read `AGENTS.md`, `.agents/HANDOFF.md`, and any active branch-local
    workstream handoff before using host resources.
-2. Use `paper-ingestion` to extract the paper mechanism, prerequisites,
-   expected speed path, possible overhead, and first candidate hypothesis.
-3. Use `ascend-architecture-fit` to prove the selected model/checkpoint/runtime
+2. Use `paper-ingestion` to extract the complete causal method chain, not only
+   the headline operation: selection/calibration, model transformation,
+   training or recovery, runtime execution, and evaluation conditions.
+3. Create a method parity ledger before code:
+   `paper stage -> causal role -> reference identity -> target status ->
+   replacement/evidence`. Freeze the `paper-exact`, `faithful-port`, or
+   `derivative` label. Any later substitution changes that identity and must
+   be recorded rather than silently inheriting the paper claim.
+4. Use `ascend-architecture-fit` to prove the selected model/checkpoint/runtime
    actually supports the paper's required mechanism, or stop with a scoped
    `does-not-fit`, `requires-retraining`, or `inconclusive` decision.
-4. Use `ascend-source-map` to map the mechanism to the smallest real
+5. Run the constraint-feasibility check. When the user's target is stricter
+   than the paper contract, state the extra research gap and require an
+   evidence-backed substitute for every forbidden result-bearing stage.
+6. Use `ascend-source-map` to map the mechanism to the smallest real
    configuration or source seam before editing. Prefer existing exact paths.
-5. Prove the applicability gate with live or repository evidence. Record
+7. Prove the applicability gate with live or repository evidence. Record
    unknowns explicitly.
-6. Choose one primary variable for the first experiment. Keep unrelated paper
+8. Choose one primary variable for the first experiment. Keep unrelated paper
    ideas for later loops.
-7. Create or resume one `work/*` branch and one experiment record using
+9. Create or resume one `work/*` branch and one experiment record using
    `.agents/experiments/TEMPLATE.yaml`.
-8. Freeze baseline conditions before implementation: model/tokenizer identity,
+10. Freeze baseline conditions before implementation: model/tokenizer identity,
    dtype or quantization, workload, parallelism, container/runtime versions,
    CANN/driver/firmware, physical NPU IDs, port, and launch command.
-9. Measure baseline first. Only then use `ascend-canary-implementation` for the
+11. Measure baseline first. Only then use `ascend-canary-implementation` for the
    smallest one-variable candidate, followed by correctness and target-device
    checks before any full benchmark.
-10. Decide as `accepted`, `rejected`, `inconclusive`, or `failed`, and use
+12. At every gate, separate algorithm evidence from backend evidence. A layout,
+    alignment, scheduler, precision, or state-lifecycle failure invalidates
+    that executed path; it is not evidence that the mathematical method is
+    worse. Conversely, a kernel-local pass does not prove closed-loop model
+    quality.
+13. Decide as `accepted`, `rejected`, `inconclusive`, or `failed`, and use
     `paper-to-ascend-reporting` to record the exact scope, recovery state,
     evidence, and next loop.
-11. Preserve negative results as pushed history. Recover failed active code
+14. Preserve negative results as pushed history. Recover failed active code
     before integration, but do not erase the evidence.
 
 ## Current repository guidance
@@ -121,12 +151,31 @@ not require retraining unless retraining is explicitly in scope.
   treatment switch, activation proof, repeated performance and quality units,
   resumable per-sample artifacts, and an independent fail-closed audit before
   adoption.
+- HYPIC also showed that a successful port reproduces the whole result-bearing
+  runtime chain: matching/planning, state or cache materialization, framework
+  scheduling, worker hot path, capacity arithmetic, and fallback behavior.
+  Copying only the paper's visible primitive would not reproduce its gain.
+- DRRQR showed that reducing Q/K rank can reproduce a local compute-saving
+  mechanism without reproducing the paper result. The tested no-training
+  objective forbade the paper's training-based quality-recovery stage, and the
+  early energy selector and calibration corpus were derivative choices rather
+  than paper-exact StrongRRQR. Those differences must be visible before NPU
+  implementation, not discovered after endpoint testing.
+- DRRQR also showed that backend-invalid ranks must be excluded from algorithm
+  trends: non-16-aligned recurrent-state copy-out corruption was a runtime-path
+  failure, while the aligned Dk64 speed/quality trade-off was valid evidence for
+  only that derivative no-training configuration.
 
 ## Do not do
 
 - Do not select papers by novelty alone.
 - Do not apply architecture-specific methods to an incompatible installed
   checkpoint.
+- Do not call a partial or derivative implementation a paper migration without
+  a method parity ledger. Never hide omitted training, calibration, recovery,
+  routing, cache, or scheduling stages behind the paper or plugin name.
+- Do not spend accelerator time on a target whose joint performance and quality
+  contract has no credible path after user-forbidden stages are removed.
 - Do not claim an improvement without repeated baseline/candidate evidence under
   matching environment fingerprints.
 - Do not mutate vLLM, vLLM-Ascend, CANN, drivers, or system services before the

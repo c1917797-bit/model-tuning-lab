@@ -29,8 +29,28 @@ identify exact, adapted, omitted, and substituted stages, prove that the user's
 constraints leave a feasible success path, and keep paper-exact reproduction
 separate from a derivative implementation.
 
+## Implemented checkpoint
+
+- `paper-to-ascend` now requires a stage-by-stage method parity ledger.
+- Paper-exact, faithful-port, and derivative identities are distinct.
+- User restrictions are checked against every result-bearing paper stage before
+  accelerator implementation.
+- Backend-invalid execution paths are separated from mathematical algorithm
+  evidence.
+- A transformation case encodes the DRRQR failure pattern as a reusable
+  regression check.
+
 ## Resume
 
-Read `.agents/skills/paper-to-ascend/SKILL.md`, update its registry metadata,
-add a small transformation case, run the declared validation commands, commit,
-and push each coherent checkpoint.
+The implementation is complete. Review the exact branch diff and integrate it
+through the serialized maintainer path; do not merge branch-local DRRQR runtime
+changes with this shared-skill checkpoint.
+
+## Validation
+
+- `./scripts/validate-mst.sh`: PASS, 26 skills.
+- `git diff --check`: PASS.
+- Workstream task JSON parse: PASS.
+- Transformation-case YAML parse and four-lesson assertion: PASS.
+- Semantic presence checks for method-chain completeness, constraint
+  feasibility, and algorithm identity: PASS.
