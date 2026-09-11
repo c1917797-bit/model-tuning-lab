@@ -36,6 +36,7 @@ docker run --rm --name "$name" --network host --read-only --shm-size 8g \
  -v "$artifact":/output \
  -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 \
  -e OMP_NUM_THREADS=4 -e HCCL_BUFFSIZE=512 \
+ -e VLLM_WORKER_MULTIPROC_METHOD=spawn \
  -e SPARSE_SMOKE_CACHE=off \
  -e SPARSE_DEVICE_PREFLIGHT="${SPARSE_DEVICE_PREFLIGHT:-0}" \
  -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 \

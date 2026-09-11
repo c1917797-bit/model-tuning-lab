@@ -1,10 +1,21 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+2026-09-11 current diagnostic: dTOScp first fatal error is PyTorch
+ParallelOpenMP.cpp:64 Invalid thread pool following multithreaded fork.
+Pinned image envs.py lines 889-894 explicitly supports spawn. Launcher now
+sets VLLM_WORKER_MULTIPROC_METHOD=spawn; this fix is NOT yet model-tested.
+Live operation 07a7 found all NPUs without compute processes, but external
+a41efa7fcf8b is RUNNING AGAIN. Previous stopped-container status below is
+historical. Do not repeat its stop based on stale ownership/permission.
+Recheck device binding and current ownership before another model launch.
+Raw TP4 c1/c16 repeat1 baseline JSONs verified by operation079f; no full
+matrix or native-cache comparison has been established.
 LATEST USER SCOPE: explicitly authorized Qwen3.8-27B for this paper piercing,
 and requested existing FOUR-card TP4 baseline, not TP8. Historical worktree
 name retained to avoid another tree; all new results MUST say Qwen3.8-27B.
-Qwen3.5 smoke b993f42d20e6 was stopped for scope change; its artifacts at
+Qwen3.5 smoke b993f42d20e6 exited on engine initialization failure before the
+scope-change stop request (0793 returned No such container); its artifacts at
 /cache/austinov/sparse-prefix-smoke-dTOScp are not Qwen3.8 evidence.
 Baseline metadata in qwen35-performance-delivery/agentic/baseline/
 baseline_metadata.json is actually Qwen3.8 TP4 and may now be considered.
