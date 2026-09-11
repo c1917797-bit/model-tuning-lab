@@ -1,6 +1,23 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+LATEST ACCEPTED GATE: operation00bc completed exit0. Qwen3.8 BF16 TP4 on
+physical0-3 with spawn passed two prompts twice: Beijing and 42, natural stop,
+identical token IDs across repeats. Artifact /cache/austinov/sparse-prefix-smoke-K3EF2a.
+smoke.json SHA256 1b7f13f5cd592b70889528ae5628131896bf385a3f1290ec693f7b41f00aa611
+identity.json SHA256 2d415a08ab1135e753f48c3f951fe6e7f8bfa01c896ecd20ae74f08e880781a8
+run.log SHA256 890ce624615a0401b85e0f7e577f61e3697f537d64900c0ff6819dc515315d5f
+Container c5294dccc42a auto-removed; operation00d4 found no NPU processes.
+Shutdown logged worker SIGTERM/shared-memory cleanup warnings; do not hide them.
+This is official cache-off feasibility only, NOT paper activation, full quality,
+or performance evidence. Next implement/test cache restoration and paper mechanism.
+Lane selector checkpoint763f751 pushed. The historical running note below is terminal.
+CURRENT RESUME: physical0-3 became free. Device preflight operation00b5 exited0
+using SPARSE_NPU_LANE=0-3; evidence /cache/austinov/sparse-prefix-smoke-1Ng56O.
+Qwen3.8 TP4 spawn smoke submitted as exec-00000000000000bc on chicaihong01/ma.
+Poll that exact handle and inspect its container before any new launch.
+Launcher holds npu0-3.lock during execution. External4-7 container untouched.
+This supersedes waiting-for4-7 as the next action; model smoke is not yet proven.
 LATEST DEVICE CHECK: operation07ae completed exit1, DEVICE_COUNT0 and DCMI
 -8020 (device is used). Raw evidence /cache/austinov/sparse-prefix-smoke-RLFnK6.
 No model inference was attempted. The external container restarted since the
