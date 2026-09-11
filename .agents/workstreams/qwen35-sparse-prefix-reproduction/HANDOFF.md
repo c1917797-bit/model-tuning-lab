@@ -6,6 +6,26 @@ Reproduce Sparse Prefix Caching for Hybrid and Recurrent LLM Serving
 Qwen3.5-27B checkpoint on Ascend 910B4. Status: planned, not baselined.
 No model execution, accuracy result, or performance improvement is claimed.
 
+## Completed CPU reproduction checkpoint
+- Planning checkpoint fa36a34 pushed; local branch matched its own upstream.
+- Author source cloned separately at /cache/cch/paper-sources/sparse-prefix-caching-reproduction,
+  pinned d3050d44ed9d878c396cf3fcf632d63743ffed5b; checkout remains clean.
+- No license file was found in this checkout. Do not redistribute author code.
+- scripts/test_sparse_prefix_author_dp.py runs the unmodified author planner
+  against an independent exhaustive oracle: 868 cases, zero failures, plus
+  empty/zero histogram and zero budget checks. Legacy missing-type error reproduced.
+- Executed in the pinned official image, CPU only, no devices, no network,
+  read-only root/source, two CPUs, 2 GiB limit, and a writable artifact mount.
+- Raw per-case artifact: /cache/austinov/sparse-prefix-cpu-sRpewC/author-dp-oracle.json
+- Artifact SHA256: be5528e45ca6df64dfad944aada7d9c897ecf4786a8cc728f7ef9c1bda9d8ead
+- Test SHA256: f618af75bcb610c1684904a82cfe69c9c4364e1dec5302efbcdcef40655f4a78
+- Author strategies.py SHA256: 9d2d1ba380a5f74121dec11bb5ba7e34388844c02844458ebe4b7f89dd13360e
+- AWMCP operation exec-000000000000069f completed exit 0; disposable container
+  qwen35_sparse_prefix_cpu_oracle_20260911 no longer exists. No NPU used.
+- This does not validate streaming histogram behavior, checkpoint restoration,
+  real-model outputs or NPU latency. Next: inspect actual image model/cache APIs,
+  identify exact Qwen3.5-27B weights, then restore-state canary on NPU4-7.
+
 ## Scope and ownership
 - Parent business task: Qwen3.5 performance; this is a bounded paper reproduction,
   not another permanent business stream. Archive this worktree after integration.

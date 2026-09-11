@@ -1,7 +1,7 @@
 {
   "task_id": "qwen35-sparse-prefix-reproduction",
   "parent_task": "qwen35-performance-delivery",
-  "status": "planned",
+  "status": "cpu_planner_verified_model_pending",
   "objective": "Reproduce arXiv:2605.05219 and test Qwen3.5-27B performance and quality on Ascend 910B4",
   "branch": "work/qwen35-sparse-prefix-reproduction",
   "physical_devices_allowed": [4, 5, 6, 7],
@@ -9,6 +9,6 @@
   "resource_lease_held": false,
   "controller": null,
   "model_test_completed": false,
-  "next_action": "Pin sources, inspect exact official image runtime, reproduce CPU algorithm, then real-weight NPU smoke",
+  "next_action": "Inspect exact official image runtime and Qwen3.5-27B identity, then real-weight restore-state smoke on physical NPU4-7",
   "constraints": ["no external workload mutation", "no original framework/image mutation", "BF16", "no retraining", "no quantization", "no speculative decoding"]
 }
