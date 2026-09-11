@@ -65,7 +65,7 @@ public:
         hasAcceptedTokens_ = (tilingData->hasAcceptedTokens == 1);
         hasGama_ = (tilingData->hasGama == 1);
         hasGamaK_ = (tilingData->hasGamaK == 1);
-        useAddFoldReduce_ = (RGDR_ENABLE_ADD_FOLD_REDUCE != 0);
+        useAddFoldReduce_ = (DRRQR_LAYOUT_V1_ENABLE_ADD_FOLD_REDUCE != 0);
         vStep_ = tilingData->vStep;
         stateOutBufferNum_ = (tilingData->stateOutBufferNum == MAX_OUT_BUFFER_NUM) ? MAX_OUT_BUFFER_NUM : BUFFER_NUM;
         attnOutBufferNum_ = (tilingData->attnOutBufferNum == MAX_OUT_BUFFER_NUM) ? MAX_OUT_BUFFER_NUM : BUFFER_NUM;

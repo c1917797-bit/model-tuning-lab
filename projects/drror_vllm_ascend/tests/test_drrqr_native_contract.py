@@ -37,6 +37,15 @@ def test_all_header_guards_are_isolated_from_upstream_name():
     guards = "\n".join(path.read_text() for path in headers)
     assert "RECURRENT_GATED_DELTA_RULE" not in guards
     assert "RECURRENT_GETED_DELTA_RULE" not in guards
+    assert "RGDR_ENABLE_ADD_FOLD_REDUCE" not in guards
+    kernel_headers = [
+        OP_ROOT / "op_kernel/drrqr_recurrent_layout_control_v1.h",
+        OP_ROOT / "op_kernel/arch35/drrqr_recurrent_layout_control_v1.h",
+    ]
+    assert all(
+        path.read_text().count("DRRQR_LAYOUT_V1_ENABLE_ADD_FOLD_REDUCE") == 3
+        for path in kernel_headers
+    )
 
 
 def test_mutable_state_is_preserved_in_aclnn_and_torch_adapter():
