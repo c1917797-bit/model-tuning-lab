@@ -1,0 +1,48 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-packed-qkv-l2-recurrent-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-11
+validated_commit: pending
+
+stage_goal: Build and numerically qualify one plugin-owned energy-Dk64 decode operator that consumes causal-convolution packed QKV directly, performs exact Q/K normalization in-kernel, and reuses the validated recurrent state path.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 is 4.752041 percent faster than the frozen dense baseline but still needs about 5.009887 percent additional throughput. K64 reduction specialization regressed graph replay, and L2-only fusion has only about 0.448 percent of the diagnostic decode kernel envelope.
+  medium_term_milestone: Remove DRRQR decode-only packed-QKV rearrangement plus two L2 launches/materializations while preserving the accepted Dk64 selector and recurrent state semantics.
+  short_term_decision: Determine whether a uniquely named operator can address Q/K/V directly in packed causal-convolution output, reproduce FP32 square/sum/rsqrt with eps=1e-6 and the required BF16 rounding boundary, then match the unfused native composition on output and full mutable state.
+  deciding_evidence: Source/build provenance, explicit packed offset and stride contract, static saved-versus-added traffic/launch model, then one physical-NPU4 BF16 matrix for batch1/16 and eight changing steps comparing unfused l2norm_fwd plus native recurrent against packed plugin eager and NPUGraph.
+  budget_or_stop_rule: One plugin-local operator implementation and build, at most one correction for a proven build defect, and one no-relaxation NPU numerical matrix. Stop before performance if packed layout identity, BF16 rounding, state mutation, graph replay or provenance fails.
+  on_pass: Run an ABCCBA graph-path micro screen; start a model service only if the packed composition has a clear benefit large enough to contribute materially to the remaining endpoint gap.
+  on_failure: Preserve the failed evidence, recover the active plugin path, and move to a different measured DRRQR-specific seam or a materially different algorithm/state design.
+  on_inconclusive: Run at most one bounded disambiguation that changes the implementation decision; otherwise stop.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
+  paper_exact_selection: false
+  packed_input: Per-token Q then K then V layout emitted by the existing causal-convolution path.
+  normalization: FP32 square/sum/rsqrt with eps=1e-6, explicit BF16 rounding before recurrent scale/state arithmetic.
+  semantic_change: none
+  prohibited_substitutes: [MTP, speculative decoding, quantization, retraining]
+
+architecture_and_portability:
+  algorithm_metadata: Logical Dk64 and coordinate order remain independent of physical tiling.
+  backend_dispatch: New packed kernel is explicitly opt-in and qualified per SoC/runtime capability.
+  fallback: Existing rearrange_mixed_qkv plus two l2norm_fwd calls plus frozen native recurrent.
+  source_boundary: All implementation and build code lives in projects/drror_vllm_ascend; upstream sources and image remain unmodified.
+  claim_ceiling: Target-NPU packed-composition correctness, then single-operator graph screening; no endpoint, accuracy or cross-environment speedup claim.
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+
+validation_commands:
+  - plugin software contract tests and packed-offset source audit
+  - source/build/artifact and exact loaded-library hashes
+  - one fresh physical-NPU4 unfused-versus-packed eager/state/NPUGraph exact matrix
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested: []

@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-dk64-l2-recurrent-fusion-v1
 repository: model-tuning-lab
-status: in_progress
+status: complete
 date: 2026-09-11
-validated_commit: pending
+validated_commit: 2012e3c
 
 stage_goal: Determine whether energy-Dk64 can remove separate decode Q/K normalization materialization and launch overhead by a plugin-owned Ascend fusion that preserves the real v0.23 GDN semantics.
 
@@ -44,4 +44,16 @@ validation_commands:
   - ./scripts/validate-mst.sh
   - git diff --check
 
-lessons_ingested: []
+outcome:
+  class: rejected
+  evidence_level: source identity plus existing target-runtime diagnostic profile
+  claim_ceiling: Rejects only an L2-only recurrent fusion as the next primary implementation; it does not reject a packed-QKV plus L2 recurrent composition.
+  source_identity:
+    gdn_sha256: d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816
+    l2norm_sha256: 520f4513ef4fc97e6b88dc07877cca8e29da0d34e44673fe989e3af002d86381
+    qwen_gdn_sha256: 885c56f5e3584ab60bb4ce4b42cf8259e5e92c86ba13aa6128e6ed7a2a20d2b0
+  finding: The loaded path uses USE_DEFAULT_FLA_NORM=0, eps=1e-6, FP32 square/sum/rsqrt and a BF16 materialization before recurrent. Existing Dk64 decode profiling attributes 6.05536 ms of 1350.83691 ms rank-mean kernel envelope over 30 steps to l2norm_fwd_kernel2, about 0.448 percent.
+  decision: Do not spend the prototype budget on L2-only fusion. Expand the same exact seam to consume packed mixed QKV directly and normalize Q/K in the recurrent kernel, while preserving the separate native composition as fallback.
+
+lessons_ingested:
+  - Require a saved-versus-added cost ceiling before native fusion; numerical feasibility alone does not justify a low-ceiling operator build.

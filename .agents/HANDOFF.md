@@ -232,13 +232,20 @@
   eager-only improvements. It is rejected and no endpoint or accuracy run
   followed. Candidate parity report SHA256:
   86ae8e0c26e9c4510e49c92511b55e70950998eb746cef4525fff1effe9d2101.
-- Active next iteration: drrqr-dk64-l2-recurrent-fusion-v1. Keep the
-  energy-Dk64 algorithm primary. First audit the exact loaded Ascend
-  l2norm_fwd epsilon, dtype, layout, rounding and graph semantics and write a
-  saved-versus-added cost model. Build one independently named fused prototype
-  only if those semantics and a portable native fallback are explicit. Require
-  target-NPU composition parity before any performance screen; do not start a
-  model service or accuracy run in the audit/numerical stage.
+- The drrqr-dk64-l2-recurrent-fusion-v1 source/cost audit is complete and
+  rejected before implementation. The loaded path uses
+  l2norm_fwd_kernel2 with FP32 square/sum/rsqrt, eps=1e-6 and BF16
+  materialization before recurrent. Its existing Dk64 trace share is only
+  6.05536/1350.83691 ms, about 0.448 percent of the diagnostic decode kernel
+  envelope, so L2-only fusion cannot be the primary route to the remaining
+  throughput gap.
+- Active next iteration: drrqr-dk64-packed-qkv-l2-recurrent-v1. Keep the
+  energy-Dk64 algorithm fixed and consume causal-convolution packed QKV
+  directly, eliminating the packed rearrangement plus two L2 launches and
+  materializations. Preserve the exact eps=1e-6 FP32 normalization and BF16
+  rounding boundary, the full mutable-state behavior, exact artifact identity
+  and the unfused native fallback. One target-NPU numerical/state/graph matrix
+  gates timing; no model service or accuracy run is admitted before it passes.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production
