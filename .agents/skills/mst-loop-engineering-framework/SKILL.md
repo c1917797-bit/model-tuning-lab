@@ -203,6 +203,12 @@ A loop framework is not validated by a clever prompt. It is validated when:
 - registry and filesystem skills match;
 - handoff has the required sections;
 - current tasks have pass criteria;
+- relocated or staged validation snapshots contain every source-backed fixture
+  required by the selected tests; missing native fixtures are staging failures,
+  not product failures;
+- when a hash-pinned shared helper changes, every consumer binding is found,
+  re-reviewed and updated before the suite is allowed to pass; never weaken the
+  fail-closed identity check to accommodate a legitimate source change;
 - medium- or long-term tasks link fixed acceptance, current gap, medium-term
   hypothesis, short-term decision, and bounded stop rule;
 - each evidence record states its evidence level and claim ceiling;

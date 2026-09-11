@@ -14,7 +14,7 @@ goal_chain:
   short_term_decision: Determine whether a uniquely named operator can address Q/K/V directly in packed causal-convolution output, reproduce FP32 square/sum/rsqrt with eps=1e-6 and the required BF16 rounding boundary, then match the unfused native composition on output and full mutable state.
   deciding_evidence: Source/build provenance, explicit packed offset and stride contract, static saved-versus-added traffic/launch model, then one physical-NPU4 BF16 matrix for batch1/16 and eight changing steps comparing unfused l2norm_fwd plus native recurrent against packed plugin eager and NPUGraph.
   budget_or_stop_rule: One plugin-local operator implementation and build, at most one correction for a proven build defect, and one no-relaxation NPU numerical matrix. Stop before performance if packed layout identity, BF16 rounding, state mutation, graph replay or provenance fails.
-  on_pass: Run an ABCCBA graph-path micro screen; start a model service only if the packed composition has a clear benefit large enough to contribute materially to the remaining endpoint gap.
+  on_pass: Run an ABBA fresh-process graph-path micro screen; start a model service only if the packed composition has a clear benefit large enough to contribute materially to the remaining endpoint gap.
   on_failure: Preserve the failed evidence, recover the active plugin path, and move to a different measured DRRQR-specific seam or a materially different algorithm/state design.
   on_inconclusive: Run at most one bounded disambiguation that changes the implementation decision; otherwise stop.
 
@@ -46,3 +46,12 @@ validation_commands:
   - git diff --check
 
 lessons_ingested: []
+
+current_result:
+  numerical_gate: passed
+  parity_report_sha256: 2fd4133dfa00edd9f639c1d6215707656d32b88ed03eb86c128cc3ee734feaac
+  correction: The initial one-kernel branch failed Ascend Triton compilation because branch vectors had incompatible lengths; the single allowed correction split Q/K normalization and V copy without changing semantics.
+  graph_batch1_change_pct: -34.79416916219489
+  graph_batch16_change_pct: -39.62034912902641
+  software_suite: 543 passed after copying the complete native test fixture
+  decision: admitted_to_opt_in_service_integration

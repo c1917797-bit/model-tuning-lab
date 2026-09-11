@@ -36,6 +36,12 @@ Ascend path.
 5. Compare against a tiny baseline under the same environment fingerprint before
    any larger benchmark.
 6. If correctness fails, classify the stage as `failed` and recover active code.
+   Distinguish compilation or adapter-contract failure before arithmetic from
+   numerical failure after execution. A predeclared single correction may
+   repair a proven compiler/source defect only when the algorithm, formula,
+   dtype boundary, tolerance, workload and fallback remain unchanged. Preserve
+   the first failed output, use a fresh result directory, and bind the corrected
+   source hash. Do not reinterpret a numerical mismatch as a build defect.
 7. If correctness passes but performance is unclear, route to profiler or formal
    benchmark rather than expanding the change blindly.
 8. Record the canary result, limitations, artifact paths/hashes, and next step.
@@ -56,3 +62,6 @@ Only scale to repeated benchmark when:
 - Do not use canary success as a performance claim.
 - Do not leave failed active code in the final branch tree, even though the
   failed commit/evidence should remain reachable in history.
+- A local kernel or composition win admits integration testing only. It does
+  not justify an endpoint projection; the real service path must independently
+  prove activation, correctness and performance.

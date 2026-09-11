@@ -18,7 +18,7 @@ RESULT_ROOT = Path("/drrqr-results")
 MODEL = "/cache/austinov/Qwen3.8-27B"
 WORKER = ROOT / "tools/gdn_teacher_capture_worker.py"
 WORKER_CLASS = "gdn_teacher_capture_worker.GdnTeacherCaptureWorker"
-SHARED_SHA256 = "c7e92e139ffa1617fa657f82b630dba9c0680de9b15021e68e9ca081fe73a3f2"
+SHARED_SHA256 = "8a73fd9a74f2029d93742153470a6219fd062b69d0a12faf652d57ab9f8cb71d"
 HASH = re.compile(r"^[0-9a-f]{64}$")
 PLUGIN_VERSION = "0.1.11"
 # These native libraries do not share the plugin's "0"/"1" convention.

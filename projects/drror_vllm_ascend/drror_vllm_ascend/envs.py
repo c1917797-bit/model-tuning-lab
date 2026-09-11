@@ -57,6 +57,7 @@ class DrrqrConfig:
     prefill_mc2_mixed: bool = False
     prefill_diagnostic: bool = False
     prefill_diagnostic_tokens: int = 32768
+    packed_qkv_l2: bool = False
 
 
 def get_config() -> DrrqrConfig:
@@ -67,6 +68,7 @@ def get_config() -> DrrqrConfig:
         prefill_mc2=_bool_env("VLLM_ASCEND_DRRQR_PREFILL_MC2", False),
         prefill_mc2_mixed=_bool_env("VLLM_ASCEND_DRRQR_PREFILL_MC2_MIXED", False),
         prefill_diagnostic=_bool_env("VLLM_ASCEND_DRRQR_PREFILL_DIAGNOSTIC", False),
+        packed_qkv_l2=_bool_env("VLLM_ASCEND_DRRQR_PACKED_QKV_L2", False),
         prefill_diagnostic_tokens=_positive_int_env(
             "VLLM_ASCEND_DRRQR_PREFILL_DIAGNOSTIC_TOKENS", 32768
         ),
@@ -91,6 +93,10 @@ def get_config() -> DrrqrConfig:
         raise ValueError("prefill diagnostics require VLLM_ASCEND_DRRQR_ENABLE")
     if config.prefill_diagnostic and not config.evidence_file:
         raise ValueError("prefill diagnostics require VLLM_ASCEND_DRRQR_EVIDENCE_FILE")
+    if config.packed_qkv_l2 and not config.enable:
+        raise ValueError("packed QKV L2 requires VLLM_ASCEND_DRRQR_ENABLE")
+    if config.packed_qkv_l2 and not config.evidence_file:
+        raise ValueError("packed QKV L2 requires VLLM_ASCEND_DRRQR_EVIDENCE_FILE")
     if config.enable and config.capture_enable:
         raise ValueError("DRRQR treatment and capture modes are mutually exclusive")
     if config.conv_layout and config.capture_enable:

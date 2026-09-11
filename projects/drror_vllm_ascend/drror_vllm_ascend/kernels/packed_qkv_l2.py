@@ -1,4 +1,4 @@
-"""One-kernel packed QKV rearrangement with exact-boundary Q/K L2 norm."""
+"""Packed QKV rearrangement with exact-boundary Q/K L2 norm."""
 
 from __future__ import annotations
 
@@ -8,53 +8,56 @@ from vllm.triton_utils import tl, triton
 
 
 @triton.jit
-def _packed_qkv_l2_kernel(
+def _packed_qk_l2_kernel(
     mixed,
     output,
     tokens,
     eps,
     H_QK: tl.constexpr,
-    H_V: tl.constexpr,
     D_K: tl.constexpr,
-    D_V: tl.constexpr,
-    V_BLOCK: tl.constexpr,
+    PACKED_WIDTH: tl.constexpr,
 ):
     pid = tl.program_id(0)
     norm_rows_per_token: tl.constexpr = 2 * H_QK
-    v_blocks_per_token: tl.constexpr = tl.cdiv(H_V * D_V, V_BLOCK)
-    norm_programs = tokens * norm_rows_per_token
     q_width: tl.constexpr = H_QK * D_K
-    k_width: tl.constexpr = H_QK * D_K
-    v_width: tl.constexpr = H_V * D_V
-    packed_width: tl.constexpr = q_width + k_width + v_width
+    token = pid // norm_rows_per_token
+    row = pid % norm_rows_per_token
+    is_key = row >= H_QK
+    head = row - tl.where(is_key, H_QK, 0)
+    cols = tl.arange(0, D_K)
+    input_base = token * PACKED_WIDTH + head * D_K
+    input_base += tl.where(is_key, q_width, 0)
+    values = tl.load(mixed + input_base + cols).to(tl.float32)
+    inv_norm = tl.rsqrt(tl.sum(values * values, axis=0) + eps)
+    output_base = token * q_width + head * D_K
+    output_base += tl.where(is_key, tokens * q_width, 0)
+    tl.store(
+        output + output_base + cols,
+        (values * inv_norm).to(tl.bfloat16),
+    )
 
-    if pid < norm_programs:
-        token = pid // norm_rows_per_token
-        row = pid % norm_rows_per_token
-        is_key = row >= H_QK
-        head = row - tl.where(is_key, H_QK, 0)
-        cols = tl.arange(0, D_K)
-        input_base = token * packed_width + head * D_K
-        input_base += tl.where(is_key, q_width, 0)
-        values = tl.load(mixed + input_base + cols).to(tl.float32)
-        inv_norm = tl.rsqrt(tl.sum(values * values, axis=0) + eps)
-        output_base = token * q_width + head * D_K
-        output_base += tl.where(is_key, tokens * q_width, 0)
-        tl.store(
-            output + output_base + cols,
-            (values * inv_norm).to(tl.bfloat16),
-        )
-    else:
-        value_pid = pid - norm_programs
-        token = value_pid // v_blocks_per_token
-        block = value_pid % v_blocks_per_token
-        cols = tl.arange(0, V_BLOCK)
-        value_offset = block * V_BLOCK + cols
-        mask = value_offset < v_width
-        input_base = token * packed_width + q_width + k_width
-        output_base = tokens * (q_width + k_width) + token * v_width
-        values = tl.load(mixed + input_base + value_offset, mask=mask)
-        tl.store(output + output_base + value_offset, values, mask=mask)
+
+@triton.jit
+def _packed_v_copy_kernel(
+    mixed,
+    output,
+    tokens,
+    QK_WIDTH: tl.constexpr,
+    V_WIDTH: tl.constexpr,
+    PACKED_WIDTH: tl.constexpr,
+    V_BLOCK: tl.constexpr,
+):
+    pid = tl.program_id(0)
+    blocks_per_token: tl.constexpr = tl.cdiv(V_WIDTH, V_BLOCK)
+    token = pid // blocks_per_token
+    block = pid % blocks_per_token
+    cols = tl.arange(0, V_BLOCK)
+    value_offset = block * V_BLOCK + cols
+    mask = value_offset < V_WIDTH
+    input_base = token * PACKED_WIDTH + 2 * QK_WIDTH
+    output_base = tokens * (2 * QK_WIDTH) + token * V_WIDTH
+    values = tl.load(mixed + input_base + value_offset, mask=mask)
+    tl.store(output + output_base + value_offset, values, mask=mask)
 
 
 def packed_qkv_l2(
@@ -84,12 +87,16 @@ def packed_qkv_l2(
         device=mixed_qkv.device,
     )
     v_block = 256
-    programs = tokens * (
-        2 * h_qk + triton.cdiv(h_v * d_v, v_block)
-    )
-    _packed_qkv_l2_kernel[(programs,)](
+    _packed_qk_l2_kernel[(tokens * 2 * h_qk,)](
         mixed_qkv, output, tokens, eps,
-        H_QK=h_qk, H_V=h_v, D_K=d_k, D_V=d_v, V_BLOCK=v_block,
+        H_QK=h_qk, D_K=d_k, PACKED_WIDTH=packed_width,
+    )
+    qk_width = h_qk * d_k
+    v_width = h_v * d_v
+    _packed_v_copy_kernel[(tokens * triton.cdiv(v_width, v_block),)](
+        mixed_qkv, output, tokens,
+        QK_WIDTH=qk_width, V_WIDTH=v_width,
+        PACKED_WIDTH=packed_width, V_BLOCK=v_block,
     )
     q_size = tokens * h_qk * d_k
     k_size = q_size

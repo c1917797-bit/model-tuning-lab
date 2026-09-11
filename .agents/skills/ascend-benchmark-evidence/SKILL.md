@@ -23,8 +23,11 @@ real improvement.
 4. Measure baseline and candidate with the same commands and controlled order.
    Use explicit warmups, multiple measured repetitions, and report dispersion.
    When an exact custom library can be bound only once per process, run each
-   implementation in a fresh process and balance process order (for example,
-   ABCCBA) instead of silently comparing differently warmed processes.
+   implementation in a fresh process and balance process order instead of
+   silently comparing differently warmed processes. Match the sequence to the
+   number of distinct implementations: ABBA is balanced for two; ABCCBA is
+   appropriate for three distinct implementations A/B/C. Do not copy a
+   three-arm sequence into a two-arm experiment and thereby oversample one arm.
    If the intended serving path uses graph replay, graph-replay timing is the
    admission signal; eager timing may be reported diagnostically but must not
    override a graph-path regression. Wrapper or bridge dispatch overhead must

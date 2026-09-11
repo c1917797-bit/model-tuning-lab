@@ -12,6 +12,97 @@ from ..envs import DrrqrConfig
 SUPPORTED_REDUCED_KEY_DIMS = (32, 64, 80, 96, 112)
 
 
+def install_decode_packed_qkv_l2(
+    gdn_cls,
+    gdn_module,
+    config: DrrqrConfig,
+    *,
+    kernel=None,
+) -> None:
+    """Fuse Dk64 pure-decode QKV packing and Q/K normalization.
+
+    The audited fallback remains active for dense layers, prefill, mixed
+    prefill/decode, and speculative decode.  On the admitted pure Dk64 path,
+    the packed kernel is fail-closed and the two immediately following module
+    L2 calls become identities because the kernel already materialized the
+    exact BF16-normalized boundary.
+    """
+    original_rearrange = gdn_cls.rearrange_mixed_qkv
+    original_l2norm = gdn_module.l2norm_fwd
+    identity = (config.plan_path, config.plan_sha256, "packed-qkv-l2-v1")
+    installed = getattr(original_rearrange, "_drror_packed_qkv_l2_config", None)
+    if installed is not None:
+        if installed != identity:
+            raise RuntimeError("DRRQR: packed QKV L2 already bound to another plan")
+        return
+    if kernel is None:
+        from ..kernels.packed_qkv_l2 import packed_qkv_l2
+
+        kernel = packed_qkv_l2
+    normalized_outputs = contextvars.ContextVar(
+        "drrqr_packed_qkv_l2_outputs", default=()
+    )
+
+    def metadata_for(instance):
+        metadata = getattr(gdn_module.get_forward_context(), "attn_metadata", None)
+        return metadata.get(instance.prefix) if isinstance(metadata, dict) else metadata
+
+    def pure_decode(metadata, tokens):
+        return (
+            metadata is not None
+            and getattr(metadata, "spec_sequence_masks", None) is None
+            and getattr(metadata, "num_prefills", 0) == 0
+            and getattr(metadata, "num_decodes", 0) > 0
+            and int(getattr(metadata, "num_decode_tokens", -1)) == int(tokens)
+        )
+
+    @functools.wraps(original_rearrange)
+    def rearrange(instance, mixed_qkv):
+        normalized_outputs.set(())
+        if mixed_qkv is None:
+            return original_rearrange(instance, mixed_qkv)
+        metadata = metadata_for(instance)
+        if not pure_decode(metadata, mixed_qkv.shape[0]):
+            return original_rearrange(instance, mixed_qkv)
+        if instance.head_k_dim != 64:
+            return original_rearrange(instance, mixed_qkv)
+        h_qk = instance.key_dim // instance.tp_size // instance.head_k_dim
+        h_v = instance.value_dim // instance.tp_size // instance.head_v_dim
+        if (h_qk, h_v, instance.head_v_dim) != (4, 12, 128):
+            raise RuntimeError("DRRQR: packed QKV L2 runtime shape contract failed")
+        result = kernel(
+            mixed_qkv,
+            h_qk=h_qk,
+            h_v=h_v,
+            d_k=instance.head_k_dim,
+            d_v=instance.head_v_dim,
+        )
+        normalized_outputs.set(result[:2])
+        return result
+
+    @functools.wraps(original_l2norm)
+    def l2norm(value, *args, **kwargs):
+        pending = normalized_outputs.get()
+        if pending and value is pending[0]:
+            normalized_outputs.set(pending[1:])
+            return value
+        return original_l2norm(value, *args, **kwargs)
+
+    rearrange._drror_packed_qkv_l2_config = identity
+    l2norm._drror_packed_qkv_l2_config = identity
+    gdn_cls.rearrange_mixed_qkv = rearrange
+    gdn_module.l2norm_fwd = l2norm
+    emit_evidence(
+        config,
+        "packed_qkv_l2_patch_installed",
+        component="gdn",
+        plan_sha256=config.plan_sha256,
+        implementation="plugin-triton-two-kernel-v1",
+        admitted_path="pure-nonspec-decode-tp4-dk64",
+        fallback="audited-v0.23-rearrange-and-l2norm",
+    )
+
+
 def install_prefill_patch(gdn_module, config: DrrqrConfig) -> None:
     """Observe the actual v0.23 module-global prefill call without changing it.
 
@@ -151,7 +242,11 @@ def install_decode_observer(gdn_cls, gdn_module, config: DrrqrConfig) -> None:
             "reduced_gdn_decode_branch",
             component="gdn",
             plan_sha256=config.plan_sha256,
-            backend="npu_recurrent_gated_delta_rule",
+            backend=(
+                "packed_qkv_l2+npu_recurrent_gated_delta_rule"
+                if config.packed_qkv_l2 and qshape[-1] == 64
+                else "npu_recurrent_gated_delta_rule"
+            ),
             prefix=str(self.prefix),
             query_shape=observation["query_shape"],
             key_shape=observation["key_shape"],
@@ -162,7 +257,12 @@ def install_decode_observer(gdn_cls, gdn_module, config: DrrqrConfig) -> None:
             value_head_dim=int(state.shape[-2]),
             token_count=observation["decode_tokens"],
             completed_python_call=True,
-            observation="unchanged audited v0.23 core decode branch returned; torch.ops was not replaced",
+            observation=(
+                "audited v0.23 recurrent core returned; plugin packed QKV/L2 "
+                "adapter active before unchanged torch.ops"
+                if config.packed_qkv_l2
+                else "unchanged audited v0.23 core decode branch returned; torch.ops was not replaced"
+            ),
         )
         reported = True
         # Restore both exact v0.23 methods after the first successful decode

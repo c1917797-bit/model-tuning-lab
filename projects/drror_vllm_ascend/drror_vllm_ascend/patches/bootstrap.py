@@ -166,7 +166,11 @@ def apply_patches(config: DrrqrConfig) -> None:
         )
         return
 
-    from .gdn import install_decode_observer, install_prefill_patch
+    from .gdn import (
+        install_decode_observer,
+        install_decode_packed_qkv_l2,
+        install_prefill_patch,
+    )
     from .cache_alignment import install_hybrid_cache_alignment_patch
     from .model import install_model_patch
 
@@ -177,6 +181,12 @@ def apply_patches(config: DrrqrConfig) -> None:
         verify_worker()
         from .layerwise import install_layerwise_cache_guard
         install_layerwise_cache_guard(NPUModelRunner, config, plan)
+        if config.packed_qkv_l2:
+            install_decode_packed_qkv_l2(
+                QwenGatedDeltaNetAttention,
+                gdn,
+                config,
+            )
         if config.prefill_diagnostic:
             from .prefill_diagnostic import install_prefill_diagnostic
 

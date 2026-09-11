@@ -239,13 +239,18 @@
   6.05536/1350.83691 ms, about 0.448 percent of the diagnostic decode kernel
   envelope, so L2-only fusion cannot be the primary route to the remaining
   throughput gap.
-- Active next iteration: drrqr-dk64-packed-qkv-l2-recurrent-v1. Keep the
-  energy-Dk64 algorithm fixed and consume causal-convolution packed QKV
-  directly, eliminating the packed rearrangement plus two L2 launches and
-  materializations. Preserve the exact eps=1e-6 FP32 normalization and BF16
-  rounding boundary, the full mutable-state behavior, exact artifact identity
-  and the unfused native fallback. One target-NPU numerical/state/graph matrix
-  gates timing; no model service or accuracy run is admitted before it passes.
+- Active iteration: drrqr-dk64-packed-qkv-l2-recurrent-v1. The corrected
+  plugin-owned two-kernel packed QKV/L2 implementation passed batch1/16,
+  eight-step bitwise eager and NPUGraph parity on physical NPU4. Its
+  fresh-process ABBA screen reduced graph replay time by 34.794169 percent at
+  batch1 and 39.620349 percent at batch16 for this isolated composition.
+  Parity report SHA256:
+  2fd4133dfa00edd9f639c1d6215707656d32b88ed03eb86c128cc3ee734feaac.
+  This admits an explicitly opt-in energy-Dk64 service integration screen; it
+  is not endpoint throughput, task accuracy or portability evidence. Keep
+  dense layers, prefill, mixed batches and speculative decode on the audited
+  fallback, and do not run final accuracy before the fixed-1024-token endpoint
+  decision.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

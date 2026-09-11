@@ -70,11 +70,16 @@ class LayerwiseServiceTests(unittest.TestCase):
              "DRRQR_LAYERWISE_OLD": "stale"})
         self.assertEqual(flags["VLLM_ASCEND_DRRQR_CONV_LAYOUT"], "1")
         self.assertEqual(flags["VLLM_ASCEND_DRRQR_PREFILL_MC2_MIXED"], "1")
+        self.assertEqual(flags["VLLM_ASCEND_DRRQR_PACKED_QKV_L2"], "0")
         self.assertEqual(flags["VLLM_ASCEND_DRRQR_CAPTURE_ENABLE"], "0")
         self.assertNotIn("VLLM_ASCEND_DRRQR_CAPTURE_DIR", env)
         self.assertNotIn("DRRQR_LAYERWISE_OLD", env)
         self.assertEqual(worker_args, [])
         self.assertIsNone(diagnostic)
+        _, enabled, _, _, _ = MODULE.service_environment(
+            args(packed_qkv_l2=True), Path("/drrqr-results/new"),
+            {"ASCEND_RT_VISIBLE_DEVICES": "0,1,2,3"})
+        self.assertEqual(enabled["VLLM_ASCEND_DRRQR_PACKED_QKV_L2"], "1")
 
     def test_namespace_determinism_and_source_shadow_rejected(self):
         for key, value in (

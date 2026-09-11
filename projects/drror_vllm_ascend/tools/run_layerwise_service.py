@@ -76,6 +76,7 @@ def parse_args(argv=None):
     parser.add_argument("--diagnostic-worker", type=Path)
     parser.add_argument("--diagnostic-worker-sha256")
     parser.add_argument("--diagnostic-worker-class", default=WORKER_CLASS)
+    parser.add_argument("--packed-qkv-l2", action="store_true")
     args = parser.parse_args(argv)
     if not 1 <= args.max_service_seconds <= 7200:
         parser.error("service budget must be between 1 and 7200 seconds")
@@ -243,6 +244,7 @@ def service_command(shared_dk, executable=None):
 
 def service_environment(args, output, inherited=None):
     env = dict(os.environ if inherited is None else inherited)
+    packed_qkv_l2 = bool(getattr(args, "packed_qkv_l2", False))
     if env.get("ASCEND_RT_VISIBLE_DEVICES") != "0,1,2,3":
         raise ValueError("expected the audited four-device container namespace")
     for name, allowed in {
@@ -275,6 +277,7 @@ def service_environment(args, output, inherited=None):
         "VLLM_ASCEND_DRRQR_CONV_LAYOUT": "1",
         "VLLM_ASCEND_DRRQR_PREFILL_MC2": "1",
         "VLLM_ASCEND_DRRQR_PREFILL_MC2_MIXED": "1",
+        "VLLM_ASCEND_DRRQR_PACKED_QKV_L2": "1" if packed_qkv_l2 else "0",
         "VLLM_ASCEND_DRRQR_PLAN_PATH": str(args.plan_path),
         "VLLM_ASCEND_DRRQR_PLAN_SHA256": args.plan_sha256,
         "VLLM_ASCEND_DRRQR_EVIDENCE_FILE": str(output / "evidence.jsonl"),
@@ -453,7 +456,9 @@ def main(argv=None):
         "command": command, "plugin_flags": flags, "diagnostic_worker": diagnostic,
         "inherited_runtime_environment": inherited, "profiler_config": None,
         "common_optimizations": {"conv_layout": "packed", "prefill_mc2": True,
-                                 "prefill_mc2_mixed": True},
+                                 "prefill_mc2_mixed": True,
+                                 "packed_qkv_l2":
+                                     flags.get("VLLM_ASCEND_DRRQR_PACKED_QKV_L2", "0") == "1"},
         "wrapper_sha256": digest(Path(__file__)), "created_epoch_s": time.time(),
         "physical_npu_contract": [4, 5, 6, 7], "container_npu_namespace": [0, 1, 2, 3],
         "physical_mapping_verification": "external parent preflight required before launch",
