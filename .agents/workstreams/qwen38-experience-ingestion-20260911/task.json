@@ -9,17 +9,14 @@
   "createdAt": "2026-09-11",
   "owner": "codex",
   "dependencies": [],
-  "claims": [
-    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-npu-environment-orientation/SKILL.md"},
-    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-benchmark-evidence/SKILL.md"},
-    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-inference-tuning-loop/SKILL.md"},
-    {"kind":"file","mode":"exclusive","value":"docs/LESSONS_LEARNED.md"}
-  ],
+  "claims": [],
   "validationCommands": [
     "./scripts/validate-mst.sh",
     "python3 -m json.tool .agents/workstreams/qwen38-experience-ingestion-20260911/task.json",
     "git diff --check"
   ],
-  "executionState": "started",
-  "integrationState": "not-ready"
+  "executionState": "completed",
+  "integrationState": "superseded",
+  "supersededBy": "work/qwen35-experience-ingestion-20260909",
+  "supersessionReason": "Earlier exclusive knowledge claims already own the same maintainer skills; Qwen3.8 lessons are absorbed there to avoid competing knowledge branches."
 }

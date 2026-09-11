@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Execution: started; integration: not-ready.
+- Execution: completed; integration: superseded.
 - Branch: `work/qwen38-experience-ingestion-20260911`.
 - Base: `origin/main` at `31c43a4c249c9d4c597372f47d989a7c10b2c9c4`.
 - Live Qwen3.8 quality evaluation is out of scope and must not be stopped or modified.
@@ -22,14 +22,12 @@ Ingest model-identity proof, measurement-interference isolation, long-matrix evi
 
 ## 4. Current Action
 
-Audit the reusable lessons against existing skill text, apply minimal additions, add a regression/eval case, then validate.
+No implementation work remains on this branch. The earlier `work/qwen35-experience-ingestion-20260909` exclusive knowledge owner absorbs these lessons.
 
 ## 5. Next Actions
 
-1. Update only existing narrow skills unless a distinct new trigger is proven.
-2. Add concise repository-specific lessons and an executable validation case.
-3. Run MST, JSON, focused regression, and whitespace checks.
-4. Commit and push each coherent checkpoint.
+1. Continue experience ingestion only on `work/qwen35-experience-ingestion-20260909`.
+2. Do not add maintainer-skill edits to this superseded branch.
 
 ## 6. Validation Commands
 
