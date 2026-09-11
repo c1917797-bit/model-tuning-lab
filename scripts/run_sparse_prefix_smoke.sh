@@ -20,14 +20,15 @@ sha256sum scripts/sparse_prefix_smoke.py >"$artifact/script.sha256"
 name="qwen35_sparse_smoke_${artifact##*-}"
 printf '%s\n' "$name" >"$artifact/container-name.txt"
 docker run --rm --name "$name" --network host --read-only --shm-size 8g \
- --memory 48g --memory-swap 48g --cpus 16 \
- --tmpfs /tmp:rw,size=4g --tmpfs /root:rw,size=1g \
+ --memory 48g --memory-swap 48g --cpus 6 \
+ --tmpfs /tmp:rw,exec,size=4g --tmpfs /root:rw,exec,size=1g \
  --device /dev/davinci4:/dev/davinci0 --device /dev/davinci5:/dev/davinci1 \
  --device /dev/davinci6:/dev/davinci2 --device /dev/davinci7:/dev/davinci3 \
  --device /dev/davinci_manager --device /dev/devmm_svm --device /dev/hisi_hdc \
  -v /usr/local/Ascend/driver:/usr/local/Ascend/driver:ro \
  -v /usr/local/Ascend/firmware:/usr/local/Ascend/firmware:ro \
  -v /usr/local/dcmi:/usr/local/dcmi:ro \
+ -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro \
  -v /etc/ascend_install.info:/etc/ascend_install.info:ro \
  -v /etc/vnpu.cfg:/etc/vnpu.cfg:ro \
  -v /cache/efim/Qwen3.5-27B:/model/Qwen3.5-27B:ro \

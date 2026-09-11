@@ -1,6 +1,25 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+SUPERSEDING STATUS: 0715 completed exit1 before weights loaded. Triton could not
+map npu_utils.so from tmpfs; log SHA256
+04e9702d5aa1a8c259d31ead6a90e5433cd9614f1290480dcddbabc4ed7d9b51.
+Explicit tmpfs exec permissions fixed that error on retry 0721, but the new
+run /cache/austinov/sparse-prefix-smoke-7ubVgM failed with get_arch returning
+NULL and ascend_hal device count unavailable. Do not repeat full model launch
+unchanged; first isolate a device-count/driver preflight in the same container
+configuration. No successful model request or performance claim exists.
+Previous checkpoint (historical): baseline smoke operation exec-0000000000000715 was running
+at last poll. Container 8767e41c2bc9 / qwen35_sparse_smoke_qfye7H;
+artifacts /cache/austinov/sparse-prefix-smoke-qfye7H. Poll the operation and
+inspect run.log before any new launch. Launcher holds flock npu4-7.lock.
+Only physical 4-7 are mapped, to container 0-3. Official image/weights unchanged.
+Startup reached LLM config but warned it could not get ascend_hal device count;
+no successful request or actual NPU worker execution has been proven yet.
+First attempt exec-0000000000000711 failed exit125 before model startup because
+Docker permits at most 7 CPUs. Evidence /cache/austinov/sparse-prefix-smoke-7ZDcnC.
+CPU quota corrected from 16 to 6; original smoke scripts pushed at a3a24b4.
+This smoke is not paper implementation or benchmark completion.
 Reproduce Sparse Prefix Caching for Hybrid and Recurrent LLM Serving
 (arXiv:2605.05219), then measure performance and quality on the actual
 Qwen3.5-27B checkpoint on Ascend 910B4. Status: planned, not baselined.
