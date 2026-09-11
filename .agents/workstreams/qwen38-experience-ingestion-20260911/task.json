@@ -1,0 +1,25 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "qwen38-experience-ingestion-20260911",
+  "objective": "Distill verified Qwen3.8 TP8 baseline, model-identity, measurement-interference, lifecycle, and long-matrix lessons into reusable Maintainer Skill Tree guidance and executable verification without changing live NPU workloads.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen38-experience-ingestion-20260911",
+  "remote": "origin",
+  "originalBase": "31c43a4c249c9d4c597372f47d989a7c10b2c9c4",
+  "createdAt": "2026-09-11",
+  "owner": "codex",
+  "dependencies": [],
+  "claims": [
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-npu-environment-orientation/SKILL.md"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-benchmark-evidence/SKILL.md"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-inference-tuning-loop/SKILL.md"},
+    {"kind":"file","mode":"exclusive","value":"docs/LESSONS_LEARNED.md"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "python3 -m json.tool .agents/workstreams/qwen38-experience-ingestion-20260911/task.json",
+    "git diff --check"
+  ],
+  "executionState": "started",
+  "integrationState": "not-ready"
+}
