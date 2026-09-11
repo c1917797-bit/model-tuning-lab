@@ -1,0 +1,22 @@
+schema: mst-transformation-case/v1
+id: qwen38-runtime-evidence-integrity
+source: model-tuning-lab/qwen38-tp8-full-baseline
+scope: maintainer-knowledge-only
+performance_acceptance_claim: false
+lessons_ingested:
+  - model-identity-proof-ladder
+  - heavyweight-diagnostics-outside-measurement
+  - preserve-and-label-contaminated-cells
+  - resumable-hashed-long-matrix
+  - configuration-change-is-candidate-not-baseline-mutation
+  - partial-quality-population-is-not-final-quality
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - python3 tests/test_qwen38_experience_ingestion.py
+  - git diff --check
+expected:
+  no_npu_workload_changes: true
+  service_alias_not_model_identity: true
+  contaminated_results_preserved: true
+  long_matrix_recomputable: true
+  partial_quality_not_promoted: true

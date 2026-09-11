@@ -45,6 +45,30 @@
       "source": "Qwen3.5 optimization practice",
       "target": "docs/LESSONS_LEARNED.md",
       "summary": "Record runtime-path, profiler-overlap, collective-ownership, quality-oracle, and evidence-scope lessons without claiming the final target."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.8 TP8 checkpoint identity audit",
+      "target": ".agents/skills/ascend-npu-environment-orientation/SKILL.md",
+      "summary": "Distinguish artifact provenance, architecture metadata, live loaded bytes, and service aliases; keep heavyweight hashing outside measured latency windows."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.8 TP8 long baseline and interference audit",
+      "target": ".agents/skills/ascend-benchmark-evidence/SKILL.md",
+      "summary": "Preserve contaminated cells, serialize long matrices, hash every finalized unit, and recompute summaries from immutable cell evidence."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.8 TP8 configuration discussion",
+      "target": ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+      "summary": "Treat configuration changes as named candidates and topology/model/dtype changes as new deployment denominators unless explicitly declared otherwise."
+    },
+    {
+      "kind": "existing-skill-update",
+      "source": "Qwen3.8 interrupted absolute-quality collection",
+      "target": ".agents/skills/ascend-benchmark-evidence/SKILL.md",
+      "summary": "Preserve valid partial quality rows but require the declared population for final scoring, and separate model-quality, transport, lifecycle, scorer and cleanup failures."
     }
   ]
 }

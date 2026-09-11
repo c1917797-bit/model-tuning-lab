@@ -72,6 +72,28 @@ most 0.80 (speedup at least 1.25). Do not interpret a 1.20x speedup as a 20%
 latency reduction, round a near miss into a pass, or mix historical thresholds
 with the current contract.
 
+## Configuration changes and baseline promotion
+
+Configuration tuning is a valid optimization, but the configuration is part of
+the candidate identity. Changing scheduler limits, batching, graph/compile
+policy, cache policy or communication switches creates a named candidate and
+must be compared against the frozen configuration under matched conditions.
+Do not edit the baseline in place and then describe the new result as the same
+denominator.
+
+Changes to model weights, dtype/quantization, tensor/data/pipeline parallel
+degree, accelerator set, or other capacity-defining topology usually create a
+new deployment variant and denominator rather than a continuation of the old
+baseline unless the experiment contract explicitly defines them as the tested
+variable. Preserve the old baseline for continuity and re-baseline the new
+deployment before attributing later gains.
+
+A baseline is promotable only after its required repetitions are complete,
+their raw artifacts and aggregation are independently checkable, and known
+measurement interference is either absent or handled by a predeclared rule.
+An otherwise successful matrix with a known contaminated repetition remains a
+useful diagnostic dataset but is not automatically a clean production ruler.
+
 ## Stage Checkpoints
 
 Commit and immediately push each coherent stage:
@@ -133,6 +155,8 @@ when it changes a material mechanism or moves the observed failure boundary.
 - Every admitted candidate has a recorded E2E opportunity bound and real
   runtime-path proof.
 - All outcomes include a reason and next-loop recommendation.
+- Baseline and candidate configuration identities are explicit; configuration
+  changes never silently mutate the denominator.
 - Rejected and failed routes identify the exact bytes and evidence required for
   any materially different successor.
 - Failed active changes are recovered before integration.

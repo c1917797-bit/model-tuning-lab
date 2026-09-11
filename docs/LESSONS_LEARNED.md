@@ -464,3 +464,78 @@ prove that the target host was never reached.
 denominator IDs, scoped uncertainty and correction history. Recover dirty
 files privately; commit only the owning workstream's reviewed files. The
 takeover packet includes executable checks against these recurring mistakes.
+
+## 9. Qwen3.8 TP8 baseline and identity lessons
+
+### 9.1 Service names and architecture classes are not checkpoint identity
+
+A Qwen3.8-27B TP8 service intentionally exposed a legacy Qwen3.5 served-model
+alias, while the checkpoint config also reused the `Qwen3_5ForConditionalGeneration`
+architecture and `qwen3_5` model type. Reading only API labels or config class
+names therefore suggested the wrong model generation. The ambiguity was closed
+by checking the live serving command, the process view of the mounted model,
+the checkpoint README/provenance, the safetensors index and all weight-shard
+checksums.
+
+**Reusable rule:** model identity is a proof ladder: artifact provenance,
+architecture metadata, live loaded path/bytes, then presentation alias. A
+service alias is metadata, not a weight selector, and a reused implementation
+class does not downgrade a newer checkpoint into the older product name.
+
+### 9.2 Identity auditing can contaminate the benchmark it is meant to protect
+
+During one TP8 baseline repetition, a full weight identity audit read tens of
+gigabytes while the latency benchmark was still running; a CPU operator build
+also overlapped part of the same cell. The benchmark completed successfully,
+but success does not make the timing clean. The original result was retained
+and marked for separate comparable rerun rather than overwritten or cherry
+picked.
+
+**Reusable rule:** complete heavyweight provenance checks before latency
+measurement. Hashing, compiling, profiling and storage scans are workload. If
+they overlap a cell, preserve that cell as contaminated/inconclusive and rerun
+under a separately identified matched lifecycle.
+
+### 9.3 A long matrix needs a durable controller, not chat-based progress
+
+The TP8 baseline consisted of twelve serial concurrency/repetition cells and
+thousands of requests. The useful evidence was not merely the final summary:
+each cell had stable identity, unique cache isolation, request and finish
+counts, a completion marker and SHA256; the controller tracked the last
+completed cell and generated a checksummed summary from the raw cells. This
+made it possible to distinguish a stale status snapshot from actual completion
+and to audit every result after the serving container exited normally.
+
+**Reusable rule:** long experiments must be resumable and recomputable from
+immutable units. One controller owns the service workload; do not launch a
+second benchmark because the first looks slow. A final report is trustworthy
+only when it can be reconstructed from the per-unit evidence.
+
+### 9.4 Configuration tuning is an experiment, not a moving baseline
+
+TP degree, scheduler limits, batch-token capacity, graph capture, prefix cache,
+communication switches and compilation policy all materially define the
+serving system. Some are legitimate optimization knobs, but changing them and
+then calling the result the old baseline destroys attribution. A model/dtype/TP
+change is an even stronger deployment-identity change.
+
+**Reusable rule:** freeze the baseline configuration. Test one named
+configuration candidate at a time; if model, dtype, parallel topology or other
+capacity-defining identity changes, establish a new denominator instead of
+pooling the numbers with the old deployment.
+
+### 9.5 Partial quality collection is not a quality result
+
+A later Qwen3.8 BF16 TP8 quality run planned full MMLU, GSM8K and HumanEval
+populations. The MMLU request phase produced thousands of well-formed responses
+without explicit per-request errors, but stopped far before the declared MMLU
+population completed and the serving container exited with a lifecycle failure.
+No final MMLU score file was produced. Those completed rows are useful recovery
+evidence, but they are not an accuracy result and the lifecycle failure is not
+itself evidence of a model-quality regression.
+
+**Reusable rule:** quality evidence is population-bound. Preserve completed
+rows and hashes after interruption, but keep `quality`, `transport`, `service
+lifecycle`, `scorer`, and `cleanup/audit` decisions separate. Never score an
+unplanned prefix as the full suite or convert an operational failure into a
+model-quality conclusion.

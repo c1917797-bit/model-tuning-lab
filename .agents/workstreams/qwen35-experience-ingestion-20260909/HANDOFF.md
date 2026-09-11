@@ -2,8 +2,8 @@
 
 ## 0. Status
 
-- Execution: completed (knowledge and handoff preparation only).
-- Integration: needs-revalidation; no main merge and no performance promotion.
+- Execution: in-progress (Qwen3.8 experience extension); no NPU mutation.
+- Integration: not-ready; no main merge and no performance promotion.
 - Branch: work/qwen35-experience-ingestion-20260909.
 - Base: origin/main at 31c43a4c249c9d4c597372f47d989a7c10b2c9c4.
 - Resume checkpoint: 88dc4f3e8568892de2d80f7ec503b61a0b14620c;
@@ -19,16 +19,17 @@
 
 ## 1. North Star
 
-Turn verified Qwen3.5 Ascend optimization experience into reusable maintainer
+Turn verified Qwen3.x Ascend optimization experience into reusable maintainer
 rules without copying experiment-specific claims into generic skills.
 
 ## 2. Current Focus
 
-The takeover entry is docs/handovers/qwen35-mtp-off/README.md. Twelve structured
-lessons cover runtime activation, overlap-safe profiling, collective ownership,
-quality scope, independent warmup/generalization, denominator/percentile and
-dirty-source identity, negative-result retention, claim corrections, execution
-recovery and private worktree preservation. T15 remains incomplete.
+The existing Qwen3.5 takeover packet remains unchanged. The current extension
+adds cross-model Qwen3.8 lessons: model identity must distinguish checkpoint
+provenance, architecture metadata, live loaded bytes and service alias; heavy
+hashing/builds must not overlap latency measurement; long matrices require
+per-cell resumable hashes; configuration changes are named candidates rather
+than silent baseline mutation.
 
 ## 3. Recent Progress
 
@@ -43,22 +44,29 @@ recovery and private worktree preservation. T15 remains incomplete.
   six untracked files, without modifying or staging that worktree.
 - Confirmed direct absolute-shell execution and login-shell Git transport.
   Previous spawn/transport root causes remain unknown.
+- Verified the Qwen3.8 lesson set is absorbed into this earlier exclusive
+  knowledge owner; a duplicate later workstream was explicitly superseded.
+- The Qwen3.8 quality evaluation remained out of scope and was not mutated by
+  this workstream. A read-only follow-up observed it fail during partial MMLU
+  collection after 2589 well-formed rows; the lesson records this as an
+  incomplete lifecycle/operational result, not a model-quality conclusion.
 
 ## 4. Current Action
 
-Documentation and contract tests are complete; finalize the exact checkpoint
-receipt and leave serialized integration to the target owner. This does not
-complete the separate performance task. No NPU service was started or stopped.
+Apply and validate the Qwen3.8 model-identity, benchmark-interference,
+long-matrix and configuration-denominator additions. This is maintainer
+knowledge only; do not touch the live quality service.
 
 ## 5. Next Actions
 
-1. Read the takeover packet and verify the actual workstream HEAD/upstream.
-2. Before integration, fetch latest main, reconcile target-owned HANDOFF and
+1. Run the new Qwen3.8 experience regression plus all existing handoff gates.
+2. Commit and push the coherent experience extension.
+3. Before integration, fetch latest main, reconcile target-owned HANDOFF and
    knowledge proposals, and rerun gates on the exact final remote source.
-3. Do not overwrite the dirty performance worktree. Its older branch-local
+4. Do not overwrite the dirty performance worktree. Its older branch-local
    HANDOFF has stale resume instructions; use the packet's corrections and
    re-prove owner, code identity, containers, ports and NPU leases first.
-4. Resume T15 only as a registered independent-shape/JIT experiment, with
+5. Resume T15 only as a registered independent-shape/JIT experiment, with
    matched cache states and held-out tests. TPOT is a separate unresolved gate.
 
 ## 6. Validation Commands
@@ -68,6 +76,7 @@ complete the separate performance task. No NPU service was started or stopped.
 python3 scripts/validate_qwen35_handoff.py
 python3 tests/test_qwen35_handoff.py
 python3 scripts/validate_qwen35_handoff.py --verify-artifacts
+python3 tests/test_qwen38_experience_ingestion.py
 git diff --check
 ```
 

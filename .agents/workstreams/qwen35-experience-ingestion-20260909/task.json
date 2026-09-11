@@ -1,7 +1,7 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "qwen35-experience-ingestion-20260909",
-  "objective": "Distill verified Qwen3.5 Ascend optimization successes, failures, profiling lessons, runtime-patch activation rules, quality boundaries, and collective-safety gates into the Maintainer Skill Tree.",
+  "objective": "Distill verified Qwen3.x Ascend optimization successes, failures, profiling lessons, runtime/model-identity rules, benchmark-interference boundaries, quality scope, and collective-safety gates into the Maintainer Skill Tree.",
   "targetBranch": "main",
   "workBranch": "work/qwen35-experience-ingestion-20260909",
   "remote": "origin",
@@ -19,12 +19,15 @@
     {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-cannbot-profiler/SKILL.md"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-benchmark-evidence/SKILL.md"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-inference-tuning-loop/SKILL.md"},
+    {"kind":"knowledge","mode":"exclusive","value":".agents/skills/ascend-npu-environment-orientation/SKILL.md"},
     {"kind":"file","mode":"exclusive","value":"docs/LESSONS_LEARNED.md"},
     {"kind":"knowledge","mode":"shared","value":".agents/HANDOFF.md"},
     {"kind":"file","mode":"exclusive","value":"docs/handovers/qwen35-mtp-off/"},
     {"kind":"file","mode":"exclusive","value":".agents/evals/transformation-cases/qwen35-evidence-handoff.yaml"},
     {"kind":"file","mode":"exclusive","value":"scripts/validate_qwen35_handoff.py"},
     {"kind":"file","mode":"exclusive","value":"tests/test_qwen35_handoff.py"},
+    {"kind":"file","mode":"exclusive","value":".agents/evals/transformation-cases/qwen38-runtime-evidence-integrity.yaml"},
+    {"kind":"file","mode":"exclusive","value":"tests/test_qwen38_experience_ingestion.py"},
     {"kind":"knowledge","mode":"exclusive","value":".agents/skills.registry.yaml:ascend-benchmark-evidence,ascend-inference-tuning-loop"}
   ],
   "validationCommands": [
@@ -33,10 +36,11 @@
     "python3 scripts/validate_qwen35_handoff.py",
     "python3 tests/test_qwen35_handoff.py",
     "python3 scripts/validate_qwen35_handoff.py --verify-artifacts",
+    "python3 tests/test_qwen38_experience_ingestion.py",
     "git diff --check"
   ],
-  "executionState": "completed",
-  "integrationState": "needs-revalidation",
+  "executionState": "in-progress",
+  "integrationState": "not-ready",
   "resumeSource": "88dc4f3e8568892de2d80f7ec503b61a0b14620c",
   "dependencyScope": "The performance workstream is a read-only evidence dependency, not a prerequisite to claim performance completion. Its dirty runtime files are excluded from this documentation workstream.",
   "resourceLeases": [],

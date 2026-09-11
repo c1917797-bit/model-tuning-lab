@@ -39,6 +39,8 @@ skills:
       - evaluate startup warmup without held-out dataset leakage
       - separate cold steady unseen-shape and compile-cache evidence
       - audit denominator percentile and dirty-source provenance
+      - audit benchmark interference from hashing compilation profiling or competing work
+      - validate resumable long-running benchmark matrices and per-cell evidence
     scope:
       - configs/**
       - scripts/**
@@ -77,6 +79,8 @@ skills:
       - bound recoverable E2E opportunity before implementation
       - correct a historical claim whose evidence scope was overstated
       - distinguish speedup from percentage latency reduction
+      - evaluate a configuration change without mutating the frozen baseline
+      - decide whether a measured baseline is clean enough for promotion
     scope:
       - configs/**
       - scripts/**
@@ -91,6 +95,8 @@ skills:
       - establish or refresh a tuning baseline
       - move an experiment to another host or container
       - investigate environment or topology drift
+      - prove model version when service alias architecture class and weight path differ
+      - audit whether the live process loaded the intended checkpoint bytes
     scope:
       - configs/**
       - scripts/**
