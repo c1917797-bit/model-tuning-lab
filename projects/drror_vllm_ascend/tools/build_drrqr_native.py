@@ -160,6 +160,7 @@ def main() -> None:
 
     command = [
         "docker", "exec",
+        "-e", f"CMAKE_BUILD_PARALLEL_LEVEL={args.jobs}",
         "-w", str(container_output / "csrc"),
         args.container,
         "bash", "build.sh",
