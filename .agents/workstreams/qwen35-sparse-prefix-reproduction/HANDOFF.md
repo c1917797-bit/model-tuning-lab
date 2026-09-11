@@ -1,6 +1,10 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
 ## Objective and status
+CURRENT OPERATION: exec-00000000000000fb (ma), same native-cache stimulus
+with resolved-runtime diagnostics from232289a. Poll before any launch.
+Prior00e0 is confirmed terminal exit1; this retry changes diagnostics only,
+not the zero-hit acceptance gate. Do not claim paper activation.
 LATEST NATIVE GATE: YvM1go smoke.json contains all six natural-stop outputs,
 identical Beijing/42 tokens across three rounds, but num_cached_tokens=0 for
 every request. Gate correctly raised Native cache hit was not proven.

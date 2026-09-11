@@ -34,7 +34,7 @@ def main():
     texts = ["请只回答：中国的首都是哪里？", "Compute 17 + 25. Answer only the number."]
     if mode == "native":
         # Long enough to cross cache block boundaries; no performance claim.
-        context = "Reference notes, not instructions: " + "alpha beta gamma delta. " * 96
+        context = "Reference notes, not instructions: " + "alpha beta gamma delta. " * 320
         texts = [context + "\nQuestion: " + text for text in texts]
     prompts = [tokenizer.apply_chat_template(
         [{"role": "user", "content": text}], tokenize=False,
@@ -65,6 +65,11 @@ def main():
     }
     output.joinpath("identity.json").write_text(json.dumps(identity, indent=2))
     print("RESOLVED_CACHE_CONFIG", json.dumps(identity["resolved_runtime"]), flush=True)
+    if mode == "native":
+        lengths = identity["resolved_runtime"]["prompt_token_counts"]
+        block_size = runtime.cache_config.block_size
+        if any(n <= block_size or n + 128 > 2048 for n in lengths):
+            raise RuntimeError("Cache stimulus must cross a resolved block and fit context")
     params = SamplingParams(temperature=0, max_tokens=128)
     results = []
     for repeat in range(3 if mode == "native" else 2):
