@@ -2,8 +2,8 @@
 
 ## 0. Status
 
-- Execution: in-progress (Qwen3.8 experience extension); no NPU mutation.
-- Integration: not-ready; no main merge and no performance promotion.
+- Execution: completed for the Qwen3.x knowledge extension; no NPU mutation.
+- Integration: needs-revalidation; no main merge and no performance promotion.
 - Branch: work/qwen35-experience-ingestion-20260909.
 - Base: origin/main at 31c43a4c249c9d4c597372f47d989a7c10b2c9c4.
 - Resume checkpoint: 88dc4f3e8568892de2d80f7ec503b61a0b14620c;
@@ -53,20 +53,19 @@ than silent baseline mutation.
 
 ## 4. Current Action
 
-Apply and validate the Qwen3.8 model-identity, benchmark-interference,
-long-matrix and configuration-denominator additions. This is maintainer
-knowledge only; do not touch the live quality service.
+The Qwen3.8 model-identity, benchmark-interference, long-matrix,
+configuration-denominator, and partial-quality-population rules are implemented
+and validated at content checkpoint `701cd9da47b975254fbcba3aa24a3f48fe6ad2b0`.
+Leave serialized integration to the target owner after exact-source revalidation.
 
 ## 5. Next Actions
 
-1. Run the new Qwen3.8 experience regression plus all existing handoff gates.
-2. Commit and push the coherent experience extension.
-3. Before integration, fetch latest main, reconcile target-owned HANDOFF and
+1. Before integration, fetch latest main, reconcile target-owned HANDOFF and
    knowledge proposals, and rerun gates on the exact final remote source.
-4. Do not overwrite the dirty performance worktree. Its older branch-local
+2. Do not overwrite the dirty performance worktree. Its older branch-local
    HANDOFF has stale resume instructions; use the packet's corrections and
    re-prove owner, code identity, containers, ports and NPU leases first.
-5. Resume T15 only as a registered independent-shape/JIT experiment, with
+3. Resume T15 only as a registered independent-shape/JIT experiment, with
    matched cache states and held-out tests. TPOT is a separate unresolved gate.
 
 ## 6. Validation Commands
