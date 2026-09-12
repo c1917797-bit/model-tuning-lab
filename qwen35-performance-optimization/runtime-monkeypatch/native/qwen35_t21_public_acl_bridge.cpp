@@ -220,7 +220,8 @@ at::Tensor SwigluGatedMlpMeta(const at::Tensor& x,
                 "T21 bridge meta gate/up K mismatch");
     TORCH_CHECK(gate_up_weight.size(1) == 2 * down_weight.size(0),
                 "T21 bridge meta intermediate-width mismatch");
-    return at::empty({x.size(0), down_weight.size(1)}, x.options());
+    return x.new_empty_symint(
+        {x.sym_size(0), down_weight.sym_size(1)});
 }
 
 }  // namespace

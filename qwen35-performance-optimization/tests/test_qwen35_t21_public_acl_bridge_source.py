@@ -34,7 +34,16 @@ def test_is_exact_model_shape_gated_without_artificial_m_ceiling() -> None:
     assert "M in [1,16]" not in SOURCE
 
 
+def test_meta_kernel_preserves_symbolic_flattened_rows() -> None:
+    assert "x.new_empty_symint(" in SOURCE
+    assert "{x.sym_size(0), down_weight.sym_size(1)}" in SOURCE
+    meta = SOURCE[SOURCE.index("at::Tensor SwigluGatedMlpMeta"):]
+    meta = meta[:meta.index("}  // namespace")]
+    assert "at::empty({x.size(0)" not in meta
+
+
 if __name__ == "__main__":
     test_uses_only_public_tensor_and_stream_seams()
     test_is_exact_model_shape_gated_without_artificial_m_ceiling()
+    test_meta_kernel_preserves_symbolic_flattened_rows()
     print("PASS: T21 public ACL bridge source contract")
