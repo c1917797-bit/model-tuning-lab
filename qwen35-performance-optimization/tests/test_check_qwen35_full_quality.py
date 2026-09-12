@@ -138,13 +138,14 @@ def main() -> None:
         manual.write_text(
             json.dumps(
                 {
-                    "schema": "qwen35-quality-human-decision/v2",
+                    "schema": "qwen35-quality-human-decision/v3",
                     "candidate_id": "synthetic-t12",
                     "dataset_sha256": "dataset",
                     "samples": 357,
                     "exact_matches": 356,
                     "reviewed_differences": 1,
-                    "equivalent_samples": 357,
+                    "equivalent_differences": 1,
+                    "candidate_better_differences": 0,
                     "material_regressions": 0,
                     "decision": "pass",
                     "reviewer": "fixture-reviewer",
@@ -158,6 +159,17 @@ def main() -> None:
                     "comparison": {
                         "sha256": digest(root / "comparison.json")
                     },
+                    "reviews": [
+                        {
+                            "dataset_index": 0,
+                            "baseline_response_sha256": text_digest("response-0"),
+                            "candidate_response_sha256": text_digest(
+                                "equivalent-response-zero"
+                            ),
+                            "verdict": "equivalent",
+                            "rationale": "The synthetic fixture preserves meaning.",
+                        }
+                    ],
                 },
                 sort_keys=True,
             )
@@ -168,6 +180,19 @@ def main() -> None:
         assert status == 0
         assert report["passed"]
         assert report["manual_reviewer"] == "fixture-reviewer"
+
+        invalid_manual = json.loads(manual.read_text(encoding="utf-8"))
+        invalid_manual["reviews"] = []
+        manual.write_text(
+            json.dumps(invalid_manual, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        try:
+            run(module, root, manual)
+        except ValueError as exc:
+            assert "every differing pair" in str(exc)
+        else:
+            raise AssertionError("incomplete row review unexpectedly passed")
     print("PASS: all-357-row quality decision contract")
 
 

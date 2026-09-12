@@ -163,6 +163,19 @@ def test_ascend_forward_selection(patch):
     assert a.size(-1) == 16
 
 
+def test_bounded_mmar_disabled(patch):
+    class GraphFusionPassManager:
+        def configure(self, config):
+            self.config = config
+
+    os.environ["VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD"] = "0"
+    fake = SimpleNamespace(GraphFusionPassManager=GraphFusionPassManager)
+    patch._patch_graph_manager(fake)
+    assert not getattr(
+        GraphFusionPassManager, "_qwen35_mmar_pass_monkeypatched", False
+    )
+
+
 def test_linear_attention_gate_up_prefetch(patch):
     calls = []
 
@@ -344,6 +357,7 @@ def main():
     test_projection_construction(patch)
     test_weight_mapping(patch)
     test_ascend_forward_selection(patch)
+    test_bounded_mmar_disabled(patch)
     test_linear_attention_gate_up_prefetch(patch)
     test_gemma_rmsnorm_prefetch_postprocess(patch)
     test_scheduler_diagnostics_opt_in(patch)

@@ -85,8 +85,21 @@ def check(
     expected_ranks: int = 4,
     variant: str = "candidate",
 ) -> dict:
-    if variant not in {"candidate", "control"}:
-        raise ValueError("variant must be candidate or control")
+    variants = {
+        "candidate",
+        "candidate-prefill",
+        "candidate-prefill-no-prefetch",
+        "control",
+    }
+    if variant not in variants:
+        raise ValueError(f"variant must be one of {sorted(variants)}")
+    patch_enabled = variant != "control"
+    operator_enabled = variant == "candidate"
+    prefill_enabled = variant in {
+        "candidate-prefill",
+        "candidate-prefill-no-prefetch",
+    }
+    prefetch_patch_enabled = variant in {"candidate", "candidate-prefill"}
     log_text = log_path.read_text(encoding="utf-8", errors="replace")
     inspect = _load_inspect(inspect_path)
     npu_text = npu_path.read_text(encoding="utf-8", errors="replace")
@@ -96,22 +109,28 @@ def check(
     marker_counts = {
         name: log_text.count(marker) for name, marker in REQUIRED_MARKERS.items()
     }
-    if variant == "candidate":
-        marker_checks = {
-            name: count >= expected_ranks
-            for name, count in marker_counts.items()
-        }
-    else:
-        marker_checks = {
-            name: count == 0 for name, count in marker_counts.items()
-        }
+    marker_checks = {}
+    for name, count in marker_counts.items():
+        expected = patch_enabled
+        if name in {"gate_up_prefetch", "rmsnorm_postprocess"}:
+            expected = prefetch_patch_enabled
+        marker_checks[name] = count >= expected_ranks if expected else count == 0
 
     env = _environment(inspect)
     expected_env = {
         **EXPECTED_ENV,
-        "QWEN35_ASCEND_MONKEYPATCH": "1" if variant == "candidate" else "0",
+        "QWEN35_ASCEND_MONKEYPATCH": "1" if patch_enabled else "0",
+        "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH": (
+            "1" if prefetch_patch_enabled else "0"
+        ),
         "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS": (
-            "1" if variant == "candidate" else "0"
+            "1" if patch_enabled else "0"
+        ),
+        "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD": (
+            "512" if prefill_enabled else "0"
+        ),
+        "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS": (
+            "16384" if prefill_enabled else "0"
         ),
     }
     env_checks = {
@@ -121,7 +140,7 @@ def check(
     env_checks["patch_first_on_pythonpath"] = python_path.startswith(
         "/opt/qwen35-t12-monkeypatch:"
     )
-    if variant == "candidate":
+    if operator_enabled:
         env_checks.update(
             {
                 "operator_feature_enabled": (
@@ -199,7 +218,7 @@ def check(
         "operator_mount": (
             len(operator_mounts) == 1
             and not operator_mounts[0].get("RW", True)
-            if variant == "candidate"
+            if operator_enabled
             else not operator_mounts
         ),
     }
@@ -295,7 +314,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-ranks", type=int, default=4)
     parser.add_argument(
-        "--variant", choices=("candidate", "control"), default="candidate"
+        "--variant",
+        choices=(
+            "candidate",
+            "candidate-prefill",
+            "candidate-prefill-no-prefetch",
+            "control",
+        ),
+        default="candidate",
     )
     return parser.parse_args()
 

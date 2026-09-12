@@ -69,7 +69,7 @@ def write_matrix(root: Path, *, candidate: bool, fail_c16: bool = False) -> None
                 ttft = (55.0, 60.0, 65.0)[repetition - 1]
                 tpot = (75.0, 80.0, 85.0)[repetition - 1]
                 if fail_c16:
-                    tpot = (80.5, 81.0, 81.5)[repetition - 1]
+                    tpot = (90.5, 91.0, 91.5)[repetition - 1]
             else:
                 ttft = 100.0
                 tpot = 100.0
@@ -122,10 +122,10 @@ def main() -> None:
         assert report["decision"] == "performance-target-met-await-quality"
         assert report["thresholds"][
             "ttft_p95_candidate_over_baseline_max"
-        ] == 0.60
+        ] == 0.80
         assert report["thresholds"][
             "tpot_p95_candidate_over_baseline_max"
-        ] == 0.80
+        ] == 0.90
         for cell in report["cells"].values():
             assert cell["ttft_p95_ratio"] == 0.60
             assert cell["tpot_p95_ratio"] == 0.80
@@ -136,7 +136,7 @@ def main() -> None:
         assert status == 2
         assert not report["performance_target_met"]
         assert not report["cells"]["16"]["performance_target_met"]
-    print("PASS: current 40/20 P95 acceptance contract")
+    print("PASS: current 20/10 P95 acceptance contract")
 
 
 if __name__ == "__main__":

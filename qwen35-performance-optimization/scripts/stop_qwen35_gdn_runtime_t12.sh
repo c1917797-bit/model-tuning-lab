@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-variant="${VARIANT:?set VARIANT to candidate or control}"
+variant="${VARIANT:?set VARIANT to candidate, candidate-prefill, candidate-prefill-no-prefetch, or control}"
 output_root="${OUTPUT_ROOT:?set OUTPUT_ROOT to the exact service artifact directory}"
 case "$variant" in
-  candidate|control) ;;
-  *) echo "VARIANT must be candidate or control" >&2; exit 64 ;;
+  candidate|candidate-prefill|candidate-prefill-no-prefetch|control) ;;
+  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-no-prefetch, or control" >&2; exit 64 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 

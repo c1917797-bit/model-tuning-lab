@@ -1,0 +1,117 @@
+{
+  "schema": "qwen35-cannbot-baseline-metadata/v1",
+  "case": "qwen35-27b-tp4-910b4",
+  "status": "reproducible-fresh-control-checkpoint-partial",
+  "scenario": "optimization-analysis/qwen35-27b-tp4-910b4/scenario.md",
+  "repository": "/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery",
+  "model": {
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "checkpoint": "/cache/austinov/Qwen3.8-27B",
+    "served_name": "Qwen3-5/Qwen3.5-27B",
+    "config_sha256": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
+    "tokenizer_config_sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+    "weight_index_sha256": "77042094076611b69791a610065f28b7013b8c621795fa86ddccc8bac7d1b9df"
+  },
+  "runtime": {
+    "framework": "vLLM-Ascend",
+    "version": "0.23.0",
+    "image": "quay.io/ascend/vllm-ascend:v0.23.0",
+    "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "image_repo_digest": "sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a",
+    "dtype": "bfloat16",
+    "quantization": null,
+    "speculative_config": null,
+    "base_image_mutated": false
+  },
+  "hardware": {
+    "accelerator": "Ascend 910B4",
+    "tensor_parallel_size": 4,
+    "data_parallel_size": 1,
+    "physical_devices": [0, 1, 2, 3],
+    "protected_devices": [4, 5, 6, 7]
+  },
+  "dataset": {
+    "path": "/cache/cch/query_rewrite.jsonl",
+    "sha256": "a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e",
+    "bytes": 3305726,
+    "rows": 357,
+    "prompt_field": "question",
+    "answer_field": "answer",
+    "empty_answer_rows": 357,
+    "evidence_boundary": "The answer field provides no external-reference accuracy signal; quality claims are limited to same-runtime paired semantic no-regression on this frozen workload."
+  },
+  "protocol": {
+    "contract": ".agents/experiments/exp-20260904-qwen35-query-rewrite-3x-e2e.yaml",
+    "concurrency": [1, 5, 8, 16],
+    "repetitions": 3,
+    "requests_per_cell": 32,
+    "temperature": 0,
+    "seed": 1024,
+    "generation": "natural_eos",
+    "max_tokens": "per-request model-context remainder returned by /tokenize",
+    "cache_isolation": "run-unique cache_salt for every warmup and measured request",
+    "primary_metrics": ["ttft_p95_ms", "tpot_p95_ms"],
+    "decision_statistic": "median of three per-run P95 values per concurrency"
+  },
+  "acceptance": {
+    "ttft_candidate_control_ratio_max": 0.6,
+    "ttft_latency_reduction_min": 0.4,
+    "tpot_candidate_control_ratio_max": 0.8,
+    "tpot_latency_reduction_min": 0.2,
+    "request_errors": 0,
+    "natural_eos_required": true,
+    "material_quality_regressions": 0
+  },
+  "quality": {
+    "early_canary_rows": 32,
+    "promotion_rows": 357,
+    "automatic_pass": "all paired responses are byte-identical",
+    "manual_route": "review every differing pair for retained intent, facts, constraints, completeness, and readability",
+    "existing_canary_scope": "AICPU-first t12 candidate only; 24/32 byte-identical, eight reviewed differences, zero material regressions",
+    "full_357_gate_status": "pending-for-any-promotable-candidate"
+  },
+  "fresh_control": {
+    "artifact_root": "/cache/austinov/qwen35-t12-aicpu-first-control-r2-20260909-064538",
+    "activation_report": "activation-report.json",
+    "activation_passed": true,
+    "natural_eos_smoke": "control-natural-eos-smoke.json",
+    "requests_per_observed_cell": 32,
+    "errors": 0,
+    "natural_eos": true,
+    "observed_cells": {
+      "1": {
+        "repeat": 1,
+        "ttft_p95_ms": 6310.576018947177,
+        "tpot_p95_ms": 29.10703386078306,
+        "artifact": "failfast/c1-r1.json"
+      },
+      "16": {
+        "repeat": 1,
+        "ttft_p95_ms": 30092.57700643502,
+        "tpot_p95_ms": 210.99100931006572,
+        "artifact": "failfast/c16-r1.json"
+      }
+    },
+    "cold_tail_warning": "The observed TTFT P95 values contain pronounced cold or dynamic-compilation tails.",
+    "missing_for_final_baseline": [
+      "c5 measurements",
+      "c8 measurements",
+      "repetitions 2 and 3 at every concurrency",
+      "median-of-three P95 denominator",
+      "exact-control round0 profiling and perf-breakdown analysis"
+    ]
+  },
+  "reproduction": {
+    "service_launcher": "qwen35-performance-optimization/scripts/start_qwen35_gdn_runtime_t12_supervised.sh",
+    "service_variant": "control",
+    "benchmark_driver": "scripts/run_qwen35_benchmark_matrix.py",
+    "quality_capture": "scripts/capture_qwen35_quality_outputs.py",
+    "resource_gate": "NPU0-3 idle with no container declarations, NPU4-7 excluded, ports free, MemAvailable >= 48 GiB, and cooperative lease held for the full disposable-container lifetime"
+  },
+  "profiling": {
+    "round0_status": "pending",
+    "legacy_profile_reusable": "unproven until exact runtime and treatment fingerprints match",
+    "plan_dashboard_allowed": false
+  },
+  "claim_boundary": "This file records a reproducible, verified fresh-control checkpoint. It does not claim a complete final baseline, performance-target completion, or full-corpus lossless quality."
+}

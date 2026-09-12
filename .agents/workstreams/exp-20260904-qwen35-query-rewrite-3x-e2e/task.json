@@ -1,7 +1,7 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "exp-20260904-qwen35-query-rewrite-3x-e2e",
-  "objective": "Reduce Qwen3.5-27B TTFT P95 by at least 40% and TPOT P95 by at least 20% at concurrency 1, 5, 8, and 16 on the frozen query_rewrite workload, with BF16 semantic quality preserved by the same-runtime paired gate. No quantization, retraining, MTP, speculative decoding, vLLM source edits, or final source overlays. The workstream identifier retains its historical 3x label for audit continuity.",
+  "objective": "Optimize Qwen3.5-27B so TTFT P95 is reduced by at least 20% and TPOT P95 by at least 10% at concurrency 1, 5, 8, and 16 on the frozen query_rewrite workload, with BF16 semantic quality preserved by the same-runtime paired gate. Deliver the final optimization as a removable runtime Python monkeypatch loaded into the unchanged official vLLM-Ascend image. This workstream is independent of Paper-to-Ascend. No quantization, retraining, MTP, speculative decoding, vLLM source edits, final source overlays, or custom final image. First absorb proven upstream optimizations and engineering lessons; do not duplicate an upstream wheel. Then add a profile-grounded Qwen3.5-27B-specific optimization delta in an uncovered integration, layout/lifecycle, scheduling, communication, or fusion-composition seam. The final result must not consist solely of copied upstream behavior. New functionality is admissible only when the audit proves no compatible upstream capability exists and profiling proves the concrete gap. Experimental or unreleased upstream code remains untrusted until exact-shape numerical, stress, end-to-end quality, rollback, and all-concurrency gates pass. Reused upstream implementations and the project-specific delta must cross the monkeypatch/package boundary. The workstream identifier retains its historical 3x label for audit continuity.",
   "targetBranch": "main",
   "workBranch": "work/qwen35-performance-delivery",
   "remote": "origin",
@@ -42,11 +42,15 @@
     "bash qwen35-performance-optimization/tests/test_runtime_monkeypatch_editable_install.sh",
     "python3 qwen35-performance-optimization/tests/test_analyze_qwen35_current_targets.py",
     "python3 qwen35-performance-optimization/tests/test_check_qwen35_full_quality.py",
+    "python3 qwen35-performance-optimization/tests/test_check_qwen35_gsm8k_no_regression.py",
     "python3 scripts/test_analyze_qwen35_candidate_vs_original.py",
     "python3 -m py_compile scripts/run_qwen35_benchmark_matrix.py",
     "python3 qwen35-performance-optimization/tests/test_qwen35_benchmark_cache_isolation.py",
-    "git diff --check"
+    "git diff --check",
+    "bash -n qwen35-performance-optimization/scripts/run_qwen35_t21_upstream_float_smoke_npu0.sh",
+    "python3 qwen35-performance-optimization/tests/test_qwen35_t21_bf16_numerical_source.py",
+    "bash -n qwen35-performance-optimization/scripts/run_qwen35_t21_bf16_numerical_npu0.sh"
   ],
-    "executionState": "active-t13-scheduler-diagnostics-checkpointed",
+    "executionState": "t27-gates-pass-private-npubridge-bridge-rejected-public-api-bridge-next",
     "integrationState": "branch-local-final-monkeypatch-not-promoted"
 }

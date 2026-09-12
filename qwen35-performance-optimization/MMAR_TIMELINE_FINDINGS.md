@@ -46,5 +46,5 @@ matrix pass.
 2. Add a narrow diagnostic or patch around MMAR lifecycle timing rather than a
    broad operator replacement.
 3. Run fixed-input smoke and 32-sample canary before any c1/c16 fail-fast.
-4. Only if c1/c16 pass the TTFT >=40% and TPOT >=20% gates, expand to
+4. Only if c1/c16 pass the TTFT >=20% and TPOT >=10% gates, expand to
    c1/c5/c8/c16 x3 and the full 357-sample paired quality gate.

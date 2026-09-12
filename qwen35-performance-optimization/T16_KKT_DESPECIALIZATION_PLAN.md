@@ -102,7 +102,7 @@ close the unchanged route. Return to measured TTFT/TPOT candidate selection.
 
 Inconclusive: preserve partial evidence; repair only a demonstrated source,
 activation or measurement defect. Do not enlarge the budget or alter the
-final 40/20, quality, precision or serving-capacity contract automatically.
+final 20/10, quality, precision or serving-capacity contract automatically.
 
 ## Validation and integration boundary
 

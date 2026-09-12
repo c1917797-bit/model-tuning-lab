@@ -28,7 +28,10 @@ def main() -> None:
         env.extend(
             [
                 "QWEN35_ASCEND_MONKEYPATCH=1",
+                "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=1",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
+                "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0",
+                "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0",
                 f"{checker.EXPECTED_OPERATOR_FEATURE_ENV}=1",
                 f"ASCEND_CUSTOM_OPP_PATH={checker.EXPECTED_OPERATOR_VENDOR}",
                 (
@@ -104,7 +107,86 @@ def main() -> None:
 
         result = checker.check(log, inspect, npu, top, models)
         assert result["passed"], result
-        control = json.loads(inspect.read_text(encoding="utf-8"))
+        candidate = json.loads(inspect.read_text(encoding="utf-8"))
+        candidate_prefill = json.loads(json.dumps(candidate))
+        candidate_prefill_env = candidate_prefill[0]["Config"]["Env"]
+        candidate_prefill[0]["Config"]["Labels"][
+            "com.c1917797.qwen35-variant"
+        ] = "candidate-prefill"
+        candidate_prefill[0]["Config"]["Env"] = [
+            "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=512"
+            if value.startswith("VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=")
+            else "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=16384"
+            if value.startswith(
+                "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="
+            )
+            else value
+            for value in candidate_prefill_env
+            if not value.startswith(
+                (
+                    f"{checker.EXPECTED_OPERATOR_FEATURE_ENV}=",
+                    "ASCEND_CUSTOM_OPP_PATH=",
+                    "QWEN35_MMAR_OPERATOR_COMMIT=",
+                    "QWEN35_MMAR_PACKAGE_SHA256=",
+                )
+            )
+        ]
+        candidate_prefill[0]["Config"]["Env"] = [
+            value
+            for value in candidate_prefill[0]["Config"]["Env"]
+            if not (
+                value.startswith("LD_LIBRARY_PATH=")
+                and checker.EXPECTED_OPERATOR_ROOT in value
+            )
+        ]
+        candidate_prefill[0]["Mounts"] = [
+            mount
+            for mount in candidate_prefill[0]["Mounts"]
+            if mount["Destination"] != checker.EXPECTED_OPERATOR_ROOT
+        ]
+        inspect.write_text(json.dumps(candidate_prefill), encoding="utf-8")
+        result = checker.check(
+            log, inspect, npu, top, models, variant="candidate-prefill"
+        )
+        assert result["passed"], result
+
+        candidate_prefill_no_prefetch = json.loads(
+            json.dumps(candidate_prefill)
+        )
+        candidate_prefill_no_prefetch[0]["Config"]["Labels"][
+            "com.c1917797.qwen35-variant"
+        ] = "candidate-prefill-no-prefetch"
+        candidate_prefill_no_prefetch[0]["Config"]["Env"] = [
+            "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=0"
+            if value.startswith("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=")
+            else value
+            for value in candidate_prefill_no_prefetch[0]["Config"]["Env"]
+        ]
+        inspect.write_text(
+            json.dumps(candidate_prefill_no_prefetch), encoding="utf-8"
+        )
+        non_prefetch_markers = "\n".join(
+            marker
+            for name, marker in checker.REQUIRED_MARKERS.items()
+            if name not in {"gate_up_prefetch", "rmsnorm_postprocess"}
+        )
+        log.write_text(
+            "\n".join([non_prefetch_markers] * 4) + "\n",
+            encoding="utf-8",
+        )
+        result = checker.check(
+            log,
+            inspect,
+            npu,
+            top,
+            models,
+            variant="candidate-prefill-no-prefetch",
+        )
+        assert result["passed"], result
+        assert result["marker_counts"]["gate_up_prefetch"] == 0
+        assert result["marker_counts"]["rmsnorm_postprocess"] == 0
+
+        control = json.loads(json.dumps(candidate))
         control_env = control[0]["Config"]["Env"]
         control[0]["Config"]["Labels"][
             "com.c1917797.qwen35-variant"
@@ -112,6 +194,8 @@ def main() -> None:
         control[0]["Config"]["Env"] = [
             "QWEN35_ASCEND_MONKEYPATCH=0"
             if value.startswith("QWEN35_ASCEND_MONKEYPATCH=")
+            else "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=0"
+            if value.startswith("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=")
             else "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=0"
             if value.startswith("VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=")
             else value

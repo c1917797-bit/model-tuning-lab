@@ -78,16 +78,16 @@ def main() -> None:
         output = root / "decision.json"
 
         control.write_text(json.dumps(row(100.0, 100.0)) + "\n")
-        candidate.write_text(json.dumps(row(60.0, 80.0)) + "\n")
+        candidate.write_text(json.dumps(row(80.0, 90.0)) + "\n")
         status, report = run(module, control, candidate, output)
         assert status == 0
         assert report["performance_target_met"]
         assert report["decision"] == "advance-to-quality-canary"
-        assert report["metrics"]["ttft_ms"]["reduction_fraction"] == 0.4
-        assert report["metrics"]["tpot_ms"]["reduction_fraction"] == 0.2
+        assert report["metrics"]["ttft_ms"]["reduction_fraction"] == 0.2
+        assert report["metrics"]["tpot_ms"]["reduction_fraction"] == 0.1
         assert report["response_hash_all_equal"]
 
-        candidate.write_text(json.dumps(row(70.0, 90.0)) + "\n")
+        candidate.write_text(json.dumps(row(81.0, 91.0)) + "\n")
         status, report = run(module, control, candidate, output)
         assert status == 2
         assert not report["performance_target_met"]
@@ -107,4 +107,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

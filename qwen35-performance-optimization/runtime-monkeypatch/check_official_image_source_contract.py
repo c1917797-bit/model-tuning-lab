@@ -19,6 +19,13 @@ SOURCES = {
     "qwen_model": Path(
         "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py"
     ),
+    "ascend_config": Path(
+        "/vllm-workspace/vllm-ascend/vllm_ascend/ascend_config.py"
+    ),
+    "graph_manager": Path(
+        "/vllm-workspace/vllm-ascend/vllm_ascend/compilation/"
+        "graph_fusion_pass_manager.py"
+    ),
     "ascend_gdn": Path(
         "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py"
     ),
@@ -42,6 +49,10 @@ REQUIRED_METHODS = {
         "QwenGatedDeltaNetAttention": {"__init__": {"self", "prefix"}}
     },
     "qwen_model": {"Qwen3_5Model": {"load_weights": {"self"}}},
+    "ascend_config": {
+        "AscendConfig": {"update_compile_ranges_split_points": {"self"}}
+    },
+    "graph_manager": {"GraphFusionPassManager": {"configure": {"self", "config"}}},
     "ascend_gdn": {
         "AscendGatedDeltaNetAttention": {"forward": {"self", "hidden_states"}}
     },

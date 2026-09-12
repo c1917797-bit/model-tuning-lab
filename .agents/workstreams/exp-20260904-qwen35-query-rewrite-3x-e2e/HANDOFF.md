@@ -4680,3 +4680,318 @@ the live gates pass.
   script. Post-stop `npu-smi` showed no running process on NPU0-7. This is only
   a point-in-time snapshot; re-run the complete resource gate before starting
   the next experiment.
+
+## 2026-09-11 current takeover: small-M GEMV round closed
+
+This section supersedes the t13 execution pointer above, not its historical
+evidence. Detailed record:
+`qwen35-performance-optimization/T17_SMALLM_GEMV_FINDINGS.md`.
+
+- Current AIC GEMV is NOT eligible for service integration. Removing an
+  accidentally deployed build-only `libopapi_math.so` fixed all-zero output
+  without changing the GEMV kernel. Both A/B paths pass independent stages;
+  the original enabled GEMV now passes the full-chain sparse canary.
+- Dense correctness: each path and round passed 16 cases / 58,400 elements,
+  bit-identical to the BF16-rounded oracle. This does not replace model quality.
+- Two opposite-order cold-weight screens both materially regress gate-up
+  (23.3–24.7%) and qkvz (27.1–28.8%). N=3584 is mixed across rounds, so do not
+  claim all shapes consistently regress. The aggregate affected-projection
+  budget is negative in both orders, including any shape-local gains.
+- Decision: `reject-current-aic-gemv-before-service`; no TP4/full-matrix or
+  all-357 run for this unchanged implementation. The exact decision is
+  `/cache/austinov/qwen35-smallm-gemv-debug-r3-20260911/CONFIRMED_DECISION.json`,
+  SHA256 `221533fc6648db0ba206ca6d540d9c1d703c108038c5288ba4282a2a8c75241d`.
+- New `check_qwen35_opp_runtime_bundle.py` and device-free fixtures prevent
+  recurrence of runtime-library shadowing; this is not a complete package gate.
+- Source/binary mismatch is intentional A/B history: the experimental source
+  guard remains disabled, while the tested original GEMV binary is retained
+  in the fixed diagnostic bundle. Neither is a release artifact.
+- Preserve T16 TTFT evidence and the closed MMAR lifecycle-only hypothesis.
+  Next action is memory-path/layout opportunity admission against exact T16,
+  not another unchanged GEMV rerun or a sum of overlapping AICPU intervals.
+- This round used only physical NPU0 under the NPU0-3 cooperative lock. The
+  external NPU4-7 workstream was not stopped or modified. Each owned probe
+  container was identity-checked and removed. Re-prove live state on takeover.
+- User instruction remains validate-first: no commit/push for this round;
+  no final promotion or attainment of all end-to-end targets is claimed.
+
+## 2026-09-11 T18 next pointer: native NK vector reduction
+
+See `qwen35-performance-optimization/T18_NATIVE_NK_VECTOR_PLAN.md`. The closed
+T17 AIC GEMV result is unchanged. Actual T16 uses NK MatMulV2 weights; a new
+row-wise BF16/FP32 vector-reduction diagnostic and exact F.linear NK / KN
+controls are prepared under
+`/cache/austinov/qwen35-t18-nk-vector-20260911-01`.
+
+Seven no-device contract tests passed. The guarded NPU attempt was blocked
+BEFORE launch by another active physical NPU0-3 reservation. At 08:51:34 UTC
+the active reservation was `/vllm-ep-profile-tp4-910b`; inspect live state again
+rather than trusting this historical name. NPU4-7 remain excluded.
+
+No-device compiler execution failed before kernel lowering because backend
+cache-key traversal imports a module that initializes the NPU. Treat this as
+an environment boundary, not a numerical failure or a compiled kernel PASS.
+
+Next: after the external owner releases NPU0-3, run the external guarded
+command using a new output root, numerical gate first, then hot/cold gate-up
+screen. No unguarded retries, no external workload cleanup. STATUS.json SHA256
+`6b4b5fb840a1bdbcfe99dd9db5a32bed262427d05697eaf8bcc453a9765017c2` records the
+state and source hashes. No T18 E2E/quality result, no commit/push or promotion.
+
+## 2026-09-11 10:18 UTC takeover: T18 device screen completed
+
+This supersedes the resource-blocked execution pointer, not its evidence.
+See `qwen35-performance-optimization/T18_NATIVE_NK_VECTOR_FINDINGS.md`.
+
+- NPU0-3 became available. Four bounded owned device runs completed: first
+  compiler/numerical attempt, r2 performance screen, r2 diagnostic profile,
+  and profile-grounded r3 retile screen. Only physical NPU0 was exposed and
+  the NPU0-3 cooperative lock covered each complete container lifetime.
+- Full-K BN1 passed the first numerical case. Full-K BN4 failed UB planning
+  (224 KiB required, 192 KiB available); BN8 full-K was not reached. Preserve
+  that scope rather than reporting all variants as numerical failures.
+- Six distinct compiled configurations passed one frozen normal-input
+  8704-element oracle and graph-replay checks. This is NOT full model quality
+  or a general operator accuracy gate; expanded shapes/seeds were not run.
+- R2 stock NK cold median 149.760 us vs best candidate 161.320 us. R3 stock NK
+  cold median 138.470 us vs best candidate 146.790 us. Compare within each
+  round only. R3 has a near-equal last repeat, not every sample is slower;
+  neither new configuration passes its preregistered 10% operator progression
+  threshold. Do not run their TP4/E2E matrix unchanged.
+- R2/r3 retain 720/600 raw non-profiler NPU-event samples. R2 profiling is
+  diagnostic only and shows substantial vector/reduction overhead; overlapping
+  vector/MTE/scalar times must never be added into an E2E budget.
+- Decisions are at /cache/austinov/qwen35-t18-nk-vector-r2-20260911 and
+  /cache/austinov/qwen35-t18-nk-vector-r3-20260911, filename
+  VALIDATED_SCREEN_DECISION.json. The latter SHA256 is
+  91907db33c40ad82a9efd15be4e95974ebe929178395c3a6ece7c1f465289d5c.
+- Next admission should quantify a different memory-transfer/layout or
+  pipeline mechanism against exact T16. No further blind BN/BK scans. Merely
+  finding a class named GEMV or enabling an MMAD flag is not evidence that
+  the service executes native M=1 or that the ~6.1 ms gap can be closed.
+- T16 remains the retained TTFT component; T17 current AIC implementation is
+  still closed. No final service, full matrix, or all-357 quality PASS.
+- All four owned NPU containers were removed after identity checks. External
+  NPU4-7 workload untouched. Re-prove live state on the next takeover.
+- Validate-first remains in force: no commit/push, image or framework-source
+  mutation, network changes, or final candidate promotion this round.
+
+## 2026-09-11 10:58 UTC: T19 exact GDN-terminal budget closed
+
+This section supersedes the T18 next-admission pointer, not its negative
+evidence. Detailed record:
+`qwen35-performance-optimization/T19_GDN_TERMINAL_BUDGET_FINDINGS.md`.
+
+- A new standard-library analyzer paired the exact T16 four-rank msprof
+  timeline at the GDN terminal seam. Its synthetic test first exposed and
+  then prevented cross-layer norm mispairing with a 25-us same-stream gap
+  gate.
+- Every rank has 6,720 decode M=1 K1536 MMAR calls; 5,040 pair with a GDN
+  terminal norm and 1,680 belong to the non-GDN K1536 route. Rank medians
+  from norm start through the enclosing MMAR end are 62.5-63.5 us.
+- Even treating this whole interval as free yields only 3.048 ms/token over
+  48 GDN layers, 49.9798% of the required 6.0985 ms/token c1 saving.
+  Decision: reject GDN terminal fusion as a standalone T16 successor; retain
+  it only as a possible independently gated stack component.
+- Evidence root:
+  `/cache/austinov/qwen35-t19-gdn-terminal-admission-20260911`.
+  Report SHA256:
+  `1d75bce433e9ff5c4a6aff5e92a37117bfae006c9c1a79d7ed78adaa0f78c2cb`.
+- Next admission is the exact dense `gate_up -> SwiGLU -> K4352 MMAR`
+  critical-path union. Dense-only requires about 95.29 us/layer saving
+  (roughly 1.67x whole-chain speedup); a stack may use a smaller requirement
+  only after each contribution is independently measured. Never sum
+  overlapping AICPU/producer/AI-core time.
+- The external `/cache/efim/merge_pr` BuildKit/CANN compilation was still
+  live. It was not stopped or modified. Do not run latency gates until a
+  fresh interference-free resource check passes.
+
+## 2026-09-11 T20 bounded-prefill live decision
+
+This supersedes the T19 next-action pointer, not the T19 budget evidence.
+Detailed record:
+`qwen35-performance-optimization/T20_CANDIDATE_PREFILL_FINDINGS.md`.
+
+- The removable `candidate-prefill` monkeypatch activated in the unchanged
+  official vLLM-Ascend v0.23.0 image on physical NPU0-3, TP4 BF16. It used no
+  source overlay, custom image, or custom OPP and did not mount NPU4-7.
+- After a separate 32-request shape-stabilization run, the measured c1/32
+  completed 32/32 with zero errors and natural EOS. TTFT P95 was 808.224 ms
+  and TPOT P95 was 28.282 ms.
+- Against the identity-matched control at 6310.576/29.107 ms, TTFT improved
+  87.193% and TPOT improved 2.835%. Standard decision: `iterate`. Retain
+  bounded-prefill as a TTFT component; it is not a final candidate because
+  TPOT misses the >=20% gate.
+- The pair decision is
+  `/cache/austinov/qwen35-t20-candidate-prefill-20260911/failfast-candidate/c1-r1-decision.json`,
+  SHA256
+  `adcdf1b5aff9d490a333a1a393b909c3aab4df960dbd1089ed79975dc2fa5b2e`.
+- Upstream-first audit pins vLLM-Ascend
+  `1b1709b9227ad3e0db2d82b9231c4962919b86f5` and ops-transformer
+  `d967eeb08ceef7c394d0d5e27767e5b08b77aa58`.
+  ops-transformer's BF16 Atlas-A2 `SwigluGatedMlp` is the mandatory base for
+  the next dense decode candidate; do not rewrite it. It lacks AllReduce, so
+  measure composition with the existing TP collective and add only the
+  monkeypatch adapter.
+- The official image does not contain `aclnnSwigluGatedMlp`. Any live
+  evaluation must build a minimal read-only OPP from pinned upstream source.
+  Do not reuse the old diagnostic bundle with `libopapi_math.so`.
+- The owned candidate container was identity-checked and removed. The
+  post-stop snapshot showed no NPU0-7 processes. Re-prove resource state
+  before the next device run.
+
+## 2026-09-11 T24 built-in npu_ffn BF16 gate
+
+This supersedes the T23 next-admission pointer, not its budget evidence. See
+`qwen35-performance-optimization/T24_BUILTIN_NPU_FFN_BF16_GATE.md`.
+
+- The stable built-in `torch_npu.npu_ffn` was preferred over any new FFN
+  implementation, but the repository already had an exact real-weight TP4
+  result from the same official v0.23.0 image.
+- For M=1/5/8/16, all BF16 `swiglu` calls failed in `aclnnFFNV2`: the
+  installed no-expert-tokens path accepts FP16 only. The Python-facing API
+  schema/doc is broader than the executable kernel contract.
+- FP16 casting is forbidden by the quality contract. No new NPU run, source
+  overlay, custom image, or replacement implementation was used.
+- Exact T16 decode SwiGLU median is only about 4.39 us/layer across ranks, so
+  activation-only fusion is below the installed operator's own economic
+  guidance.
+- A future BF16-capable version must still beat the complete FFN plus TP
+  communication chain because `npu_ffn` does not retain MatmulAllReduce.
+- Decision: `reject-builtin-npu-ffn-for-current-bf16-runtime`. Continue the
+  upstream dense-tail audit; do not rerun this exact candidate or relax dtype.
+
+## 2026-09-11 T25 upstream dense-path audit
+
+This supersedes the T24 next-audit pointer, not any earlier performance or
+quality evidence. See
+`qwen35-performance-optimization/T25_UPSTREAM_DENSE_PATH_AUDIT.md`.
+
+- The apparent Qwen3.5 Dense ACLGraph fused-operator change `4b1d43a62` is
+  already in the pinned v0.23 ancestry and is entirely 310P-specific.
+  Related RGDR optimization and graph-accuracy fixes remain 310P-only; do not
+  transplant them to Ascend 910B4.
+- The later graph synchronization improvement `804317471` is MRV2-only and
+  has no compatible MRV1 target seam.
+- The later GDN device-metadata change `432743d83` requires custom-op ABI
+  changes; the pinned Python path already supplies device tensors. Its
+  published validation does not establish the required BF16 dense MTP-off
+  TPOT opportunity.
+- A fresh fetch of ops-transformer master shows that experimental
+  `SwigluGatedMlp` still depends on the unresolved private
+  `Ops::NN::ExecMmOp` symbol. There is no upstream fix or accepted
+  vLLM-Ascend adapter. Keep the T21 ABI rejection; do not patch around it.
+- No NPU, model service, custom image, source overlay, or precision relaxation
+  was used in this audit. T20 bounded-prefill remains the retained TTFT
+  component. The next admissible TPOT candidate must target supported A2 BF16
+  dense weight movement or the complete projection/collective chain and show
+  a conservative path toward about 6.10 ms/token saving before device use.
+
+## 2026-09-11 T26 upstream parallelism and MC2 audit
+
+This supersedes the T25 next-candidate pointer, not its evidence. See
+`qwen35-performance-optimization/T26_UPSTREAM_PARALLELISM_MC2_AUDIT.md`.
+
+- Dense FFN NZ was confirmed as an evidence-backed rollback: it won the
+  isolated layout microbenchmark but delivered 0.992x geometric-mean
+  incremental TPOT versus retained MMAR and regressed some E2E cells.
+- Fine-grained MLP TP cannot serve the fixed TP4/DP1 target. Pinned v0.23
+  rejects dense models; later upstream permits dense models but documents that
+  the DP-axis sharding is only effective with standard TP1.
+- A2 `AttentionToFFN` / `FFNToAttention` are not available: current
+  ops-transformer marks both A3-only, and their expert-routing/disaggregated
+  contracts do not match a dense TP4 graph.
+- A2 BF16 MMAR+Add+RMS variants remain rejected by the prior v13-v17 E2E
+  regression and their later upstream removal as deprecated/internal.
+  Existing MMAR tuning, decomposition, HCCL AIV, async-finalize, AICPU-first,
+  and IPC routes also retain their prior negative gates.
+- No NPU, model service, image/source mutation, or precision relaxation was
+  used. The next admissible design must start from supported A2 BF16 MMAR,
+  alter a profile-proven complete projection/collective critical path, and
+  show a conservative path toward the remaining about 6.10 ms/token c1 saving
+  before any device run.
+
+## 2026-09-11 T27 upstream SwiGLU ABI adapter
+
+This supersedes the T25 statement that the internal matmul ABI remained
+unresolvable, but not any accuracy or performance gate. See
+`qwen35-performance-optimization/T27_UPSTREAM_SWIGLU_ABI_ADAPTER_FINDINGS.md`.
+
+- The pinned upstream SwiGLU MLP was minimally adapted to the official CANN
+  9.1 six-argument `ExecMmOp` ABI. No matmul, activation, or collective was
+  reimplemented.
+- Final and installed library SHA-256:
+  `ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb`.
+  `ldd -r` and normal package installation pass in the unchanged image.
+- The guarded FLOAT runner is
+  `qwen35-performance-optimization/scripts/run_qwen35_t21_upstream_float_smoke_npu0.sh`.
+  Syntax, live NPU parsing, diff, no-network, read-only OPP, and NPU0-only
+  mapping checks pass.
+- Three attempts stopped before Docker launch because the NPU0-3 lease was
+  held; two waited 45 seconds. Concurrent `VLLMWorker_TP` processes were
+  observed and not interrupted.
+- Current state: ABI integration PASS; device smoke, BF16 numerical gate,
+  service integration, and final performance gates remain open.
+- An exact-shape BF16 C++ gate and 12-case guarded runner were added:
+  `qwen35-performance-optimization/tools/qwen35_t21_bf16_numerical_gate.cpp`
+  and
+  `qwen35-performance-optimization/scripts/run_qwen35_t21_bf16_numerical_npu0.sh`.
+  They compare the candidate with official
+  `aclnnMatmul -> aclnnSwiGlu -> aclnnMatmul` for M=1/5/8/16 and three
+  deterministic seeds. Warning-clean no-device compilation and complete
+  dynamic linkage pass.
+- The real model config declares Qwen3.5 BF16, hidden 5120, and global
+  intermediate 17408, proving TP4-local 4352 and gate/up 8704. The runner
+  validates and hashes that config before device admission.
+- The latest live preflight obtained the cooperative lock but rejected
+  `Maxon4ick_torch_910_dev` because it is privileged. It has no current NPU
+  process, but a privileged container can access all devices without explicit
+  mappings, so the guard must not be weakened. No owned device container was
+  launched.
+
+## 2026-09-12 T27 device gates and target correction
+
+This supersedes the old privileged-container admission rule and the old
+40%/20% target, not earlier evidence.
+
+- Testing is admitted whenever physical NPU0-3 have no actual processes and
+  the cooperative lease is held. Idle privileged or device-declaring
+  containers alone no longer block.
+- Upstream FLOAT passed on NPU0. Evidence:
+  /cache/austinov/qwen35-t21-upstream-float-smoke-20260912T163200Z.
+- Exact TP4 BF16 M=1/5/8/16 x seeds 1/2/3 passed 12/12 against official
+  Matmul/SwiGLU/Matmul, bit-exact with no non-finite values. Evidence:
+  /cache/austinov/qwen35-t21-bf16-numerical-20260912T163327Z.
+- Canonical target: Qwen3.5-27B TTFT P95 reduction >=20% and TPOT P95
+  reduction >=10% at c1/c5/c8/c16, three repetitions, delivered as a
+  removable runtime Python monkeypatch. The task is unrelated to
+  Paper-to-Ascend.
+- First absorb upstream work and never duplicate it; then add a
+  profile-grounded Qwen3.5-27B-specific delta. Pure upstream reuse is not the
+  final optimization. Quantify the upstream base and our added delta
+  separately by ablation.
+- Next: integrate the upstream operator through the monkeypatch/package
+  boundary with a model-specific delta, run stress and rollback, then perform
+  a fail-fast model A/B before full performance and quality matrices.
+
+## 2026-09-12 history checkpoint and bridge rejection
+
+- Durable success/failure lessons and target-dependent reevaluation are
+  summarized in
+  qwen35-performance-optimization/QWEN35_PERFORMANCE_LESSONS.md.
+- A first out-of-tree PyTorch bridge compiled but could not load because the
+  reused vLLM-Ascend adapter header depends on the private, non-exported
+  vllm_ascend::NPUBridge symbol. Explicit linkage to vllm_ascend_C did not
+  resolve it. No NPU run occurred.
+- The known-unloadable bridge implementation was removed before checkpoint;
+  only the failure reason is retained. Do not copy or reimplement NPUBridge.
+  The next bridge must use public ACL tensor APIs plus the current torch-npu
+  stream, or an upstream public registration seam.
+- T27 FLOAT and BF16 gates remain valid. The operator itself is admitted;
+  service integration, project-specific delta, stress, rollback, full
+  performance matrix, and quality remain open.
+- Pre-push validation passed after correcting the executable acceptance
+  defaults to TTFT 20% / TPOT 10%: all non-pytest Python contracts, all
+  qwen35-performance-optimization shell contracts, runtime projection tests,
+  py_compile, validate-mst, JSON parsing, and diff checks passed. The remaining
+  pytest-style feature-gate test passed 4/4 in the read-only official image.

@@ -82,6 +82,11 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
   action. HTTP health or container existence alone is insufficient.
 - Treat NPU0-3, NPU4-7, ports, and running services as leased resources, not
   permanent assignments.
+- Current operator-approved admission rule: a test may start when the intended
+  physical cards have no actual NPU processes and the cooperative lease is
+  held. An idle privileged or device-declaring container is inventory
+  evidence, not by itself an occupancy veto. Recheck real device processes
+  immediately after acquiring the lease and abort rather than compete.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.
@@ -92,6 +97,13 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 
 For performance work, also use `ascend-npu-environment-orientation`,
 `ascend-inference-tuning-loop`, and `ascend-benchmark-evidence`.
+
+For Qwen3.5-27B performance work, do not mix the objective with
+Paper-to-Ascend. The current target is TTFT P95 reduction at least 20% and
+TPOT P95 reduction at least 10%, delivered as a removable runtime Python
+monkeypatch. Absorb upstream optimizations first and do not duplicate them,
+but require a profile-grounded model-specific delta and an ablation that
+separates upstream-base benefit from the added project benefit.
 
 ## Editing and checkpoints
 

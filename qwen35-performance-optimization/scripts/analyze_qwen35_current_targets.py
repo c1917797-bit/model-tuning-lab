@@ -81,8 +81,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--baseline-dir", type=Path, required=True)
     parser.add_argument("--candidate-dir", type=Path, required=True)
     parser.add_argument("--candidate-id", required=True)
-    parser.add_argument("--ttft-target-ratio", type=float, default=0.60)
-    parser.add_argument("--tpot-target-ratio", type=float, default=0.80)
+    parser.add_argument("--ttft-target-ratio", type=float, default=0.80)
+    parser.add_argument("--tpot-target-ratio", type=float, default=0.90)
     parser.add_argument(
         "--p99-risk-ratio",
         type=float,

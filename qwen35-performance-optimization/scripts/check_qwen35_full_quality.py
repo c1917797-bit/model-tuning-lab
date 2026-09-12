@@ -77,16 +77,16 @@ def validate_manual_decision(
     dataset_sha256: str,
     exact_matches: int,
     artifacts: dict[str, str],
+    differences: dict[int, tuple[dict, dict]],
 ) -> dict:
     payload = load_json(path)
     expected = {
-        "schema": "qwen35-quality-human-decision/v2",
+        "schema": "qwen35-quality-human-decision/v3",
         "candidate_id": candidate_id,
         "dataset_sha256": dataset_sha256,
         "samples": EXPECTED_ROWS,
         "exact_matches": exact_matches,
         "reviewed_differences": EXPECTED_ROWS - exact_matches,
-        "equivalent_samples": EXPECTED_ROWS,
         "material_regressions": 0,
         "decision": "pass",
     }
@@ -97,6 +97,46 @@ def validate_manual_decision(
             )
     if not payload.get("reviewer") or not payload.get("reviewed_at_utc"):
         raise ValueError(f"{path}: reviewer and reviewed_at_utc are required")
+    reviews = payload.get("reviews")
+    if not isinstance(reviews, list) or len(reviews) != len(differences):
+        raise ValueError(
+            f"{path}: reviews must contain every differing pair exactly once"
+        )
+    reviewed = {}
+    verdict_counts = {"equivalent": 0, "candidate_better": 0}
+    for review in reviews:
+        if not isinstance(review, dict):
+            raise ValueError(f"{path}: every review must be an object")
+        index = review.get("dataset_index")
+        if index not in differences or index in reviewed:
+            raise ValueError(f"{path}: invalid or duplicate review index {index!r}")
+        baseline_row, candidate_row = differences[index]
+        expected_hashes = {
+            "baseline_response_sha256": baseline_row["response_sha256"],
+            "candidate_response_sha256": candidate_row["response_sha256"],
+        }
+        for key, value in expected_hashes.items():
+            if review.get(key) != value:
+                raise ValueError(f"{path}: {key} mismatch at row {index}")
+        verdict = review.get("verdict")
+        if verdict not in verdict_counts:
+            raise ValueError(
+                f"{path}: row {index} verdict must be equivalent or candidate_better"
+            )
+        rationale = review.get("rationale")
+        if not isinstance(rationale, str) or not rationale.strip():
+            raise ValueError(f"{path}: row {index} requires a rationale")
+        verdict_counts[verdict] += 1
+        reviewed[index] = review
+    if set(reviewed) != set(differences):
+        raise ValueError(f"{path}: one or more differing rows were not reviewed")
+    expected_counts = {
+        "equivalent_differences": verdict_counts["equivalent"],
+        "candidate_better_differences": verdict_counts["candidate_better"],
+    }
+    for key, value in expected_counts.items():
+        if payload.get(key) != value:
+            raise ValueError(f"{path}: {key} must be {value}")
     for name, digest in artifacts.items():
         record = payload.get(name)
         if not isinstance(record, dict) or record.get("sha256") != digest:
@@ -123,12 +163,16 @@ def main() -> int:
         if baseline["payload"].get(key) != candidate["payload"].get(key):
             raise ValueError(f"paired capture mismatch for {key}")
     exact_matches = 0
+    differences = {}
     for index in range(EXPECTED_ROWS):
         left = baseline["rows"][index]
         right = candidate["rows"][index]
         if left["question_sha256"] != right["question_sha256"]:
             raise ValueError(f"paired prompt mismatch at row {index}")
-        exact_matches += left["response_sha256"] == right["response_sha256"]
+        if left["response_sha256"] == right["response_sha256"]:
+            exact_matches += 1
+        else:
+            differences[index] = (left, right)
 
     comparison = load_json(args.comparison)
     expected_comparison = {
@@ -163,10 +207,11 @@ def main() -> int:
             dataset_sha256=baseline["payload"]["dataset_sha256"],
             exact_matches=exact_matches,
             artifacts=artifacts,
+            differences=differences,
         )
         artifacts["manual_decision"] = sha256_file(args.manual_decision)
         passed = True
-        method = "all-differences-reviewed-no-material-regression"
+        method = "all-differences-row-reviewed-no-material-regression"
 
     report = {
         "schema": "qwen35-full-quality-decision/v1",
