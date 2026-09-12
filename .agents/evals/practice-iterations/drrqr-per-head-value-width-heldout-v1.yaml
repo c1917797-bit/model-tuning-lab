@@ -1,0 +1,66 @@
+schema: mst-practice-iteration/v1
+id: drrqr-per-head-value-width-heldout-v1
+repository: model-tuning-lab
+status: active
+date: 2026-09-13
+validated_commit: pending
+
+stage_goal: Decide whether static per-value-head Dv coordinates rescue the structurally sufficient Dk64 plus value/state-width DRRQR route that failed with one layer-shared coordinate set.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen dense is 135.142469917 output tok/s, the fixed target is 148.656716909, and energy-Dk64 is 141.564496153 output tok/s. The prior Dv64 and Dv48 layer-shared plans had enough optimistic cost headroom but failed every held-out fidelity family.
+  medium_term_milestone: Admit or reject the last untested statically foldable value/state-width selector class without opening an unbounded selector search.
+  short_term_decision: Fit exactly one coordinate set per value head and one scalar per layer on captures 0-11, publish the lock, then evaluate Dv64 and Dv48 on untouched captures 12-15 using the predeclared gates from the layer-shared screen.
+  deciding_evidence: Frozen energy-Dk64 plan, independently audited 16-sequence rich-state corpus, exact checkpoint out-projection tensors, immutable fit lock and untouched held-out metrics.
+  budget_or_stop_rule: One CPU admission run only. No nearby selector variants, per-head gains, NPU work, service launch, endpoint benchmark or task accuracy unless a width passes every gate.
+  on_pass: Implement only the first passing width inside the plugin, preserve four-arm attribution, then require native NPU prefill/decode multi-step state and NPUGraph numerical gates before endpoint performance.
+  on_failure: Reject the per-head value/state-width branch and record it as bounded negative evidence; choose a materially different DRRQR recurrence/state design or conclude the present method cannot meet the fixed target under current constraints.
+  on_inconclusive: Repair only a concrete implementation or evidence-identity defect and repeat once with a new immutable output path.
+
+candidate_contract:
+  name: per-value-head two-sided energy-Dk64 value/state-width extension
+  paper_exact_strong_rrqr: false
+  fixed_rank_side: joint normalized Q/K energy top-k at logical Dk64
+  new_freedom: one static Dv coordinate set for each of 48 global value heads in each screened layer
+  forbidden_freedom: no per-head, per-token or hidden-dimension gains; retain exactly one bounded scalar per layer
+  foldability: Each head's retained V/Z projection rows, convolution channels, recurrent-state rows, RMS gamma entries and matching out-projection columns can be statically packed in plugin-owned weights and metadata.
+  runtime_rule: No dynamic gather is part of the proposed endpoint; the analysis scatter only maps reduced coordinates back to the exact dense out-projection basis for comparison.
+  attribution_requirement: Preserve Dk128/Dv128, Dk64/Dv128, Dk128/DvX and Dk64/DvX arms before any endpoint claim.
+
+predeclared_gates:
+  dense_post_rms_formula_relative_l2_at_most: 0.01
+  aggregate_output_projected_error_ratio_at_most: 1.10
+  worst_layer_output_projected_error_ratio_at_most: 1.20
+  aggregate_retained_post_rms_error_ratio_at_most: 1.10
+  head_layer_ratio_at_most_1_10_fraction_at_least: 0.75
+  worst_head_layer_retained_post_rms_error_ratio_at_most: 1.50
+  scalar_bounds: [0.5, 2.0]
+  coordinate_shape: exactly 48 unique in-range coordinate lists per layer, each of the candidate Dv width
+
+portability_contract:
+  logical_geometry: Coordinate plans are logical model metadata and independent of CANN tiling, physical card ids and TP rank placement.
+  static_packing: Selected rows and columns must be materialized before serving rather than gathered per token.
+  capability_dispatch: Any later operator adaptation must be explicit opt-in, retain Dk64/Dv128 and dense fallbacks, and record loaded source and binary identities.
+  source_boundary: All implementation remains in projects/drror_vllm_ascend; vLLM, vLLM-Ascend, ops-transformer, cann bot and images remain read-only.
+
+result:
+  outcome: pending
+  analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_per_head_value_width_heldout.py
+  output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-per-head-value-width-heldout-v1/report.json
+  claim_ceiling: CPU held-out admission only; no NPU correctness, endpoint performance, task accuracy, paper-exactness or portability result.
+
+validation_commands:
+  - parse analyzer with the Python AST without creating bytecode
+  - run analyzer in the existing pinned container into a fresh immutable output directory
+  - verify report and fit-lock hashes plus every predeclared gate
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: Per-head robustness metrics do not test per-head selection; distinguish evaluation granularity from selector granularity before declaring a class exhausted.
+    destination: this iteration
+    severity: high
+  - lesson: Add only the minimum new degree of freedom needed to test the hypothesis. Keeping one scalar per layer makes any change attributable to per-head coordinates.
+    destination: candidate contract
+    severity: high
