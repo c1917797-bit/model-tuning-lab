@@ -17,9 +17,9 @@ The bridge was built offline in the unchanged official vLLM-Ascend v0.23.0
 image with no network and no NPU mapping. Its undefined-symbol audit contains
 neither private bridge nor private storage symbols. The pinned build is:
 
-- artifact: `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4`;
+- artifact: `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v5`;
 - bridge SHA-256:
-  `7c0e01b2b6d4274ead9871c76df5a83cad3618cddec35128ca4e8d12a8c786e4`;
+  `3b1875d6e9a7957aa44810c99fca046f8a4123e997143e2e00300c5e1c1030f4`;
 - build runner: `scripts/build_qwen35_t21_public_acl_bridge.sh`.
 
 The official-image device-free registration test passes: importing the
@@ -69,7 +69,7 @@ The opt-in runtime hook is deliberately narrower than the upstream operator:
   `tensor_model_parallel_all_reduce`;
 - all ineligible shapes and modes use the unchanged official forward path;
 - missing bridge or ABI incompatibility fails startup when the feature is
-  enabled;
+enabled;
 - `QWEN35_ASCEND_T21_DENSE_MLP=0` is immediate rollback.
 
 This is the independently measurable project delta on top of upstream reuse:
@@ -94,6 +94,13 @@ upstream vLLM explicitly skips `size` calls with a positional or keyword
 `dim`. The runtime package backports that exact upstream guard only when
 T21 is enabled, using strict source-block matching so an incompatible image
 fails closed instead of being silently rewritten.
+
+Bridge v5 changes only the Meta allocation to PyTorch's SymInt-preserving
+API. Fresh evidence at
+`/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v11` passes
+M=1/16/128/512/1024/4096, keeps zero-copy and contiguous-weight results
+bit-exact, retains the `7.62939453125e-06` maximum reference error, and
+passes 100 repeated finite-output calls.
 
 ## Remaining gates
 

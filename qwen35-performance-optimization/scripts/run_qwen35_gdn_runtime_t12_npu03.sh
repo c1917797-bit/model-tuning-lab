@@ -175,14 +175,14 @@ if [[ "$operator_enabled" == 1 ]]; then
   operator_package_label="$operator_package_sha256"
 fi
 t21_opp_root="${T21_OPP_ROOT:-/cache/austinov/qwen35-t21-abi-adapter-opp-r2-20260911}"
-t21_bridge_root="${T21_BRIDGE_ROOT:-/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4}"
+t21_bridge_root="${T21_BRIDGE_ROOT:-/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v5}"
 t21_vendor=qwen35_t21_v910_transformer
 t21_container_opp_root=/opt/qwen35-t21-opp
 t21_container_vendor="$t21_container_opp_root/vendors/$t21_vendor"
 t21_container_bridge_root=/opt/qwen35-t21-bridge
 t21_operator_sha256=ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb
 t21_opp_tree_sha256=802bcf190aae4b4d7f688fec4beb23f42e58c0c39bf9d0b52a7ac3ce4d7b29ea
-t21_bridge_sha256=7c0e01b2b6d4274ead9871c76df5a83cad3618cddec35128ca4e8d12a8c786e4
+t21_bridge_sha256=3b1875d6e9a7957aa44810c99fca046f8a4123e997143e2e00300c5e1c1030f4
 t21_mount_args=()
 t21_env_args=(-e QWEN35_ASCEND_T21_DENSE_MLP=0)
 t21_python_path=""

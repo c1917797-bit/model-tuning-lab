@@ -28,12 +28,12 @@
     "rationale": "bounded prefill MMAR is the retained TTFT component; decode still requires a separately validated project-specific component to clear the current 10 percent TPOT gate"
   },
   "candidate_t21_dense_mlp": {
-    "status": "large_m_numerical_gate_passed_tp4_service_pending",
+    "status": "symbolic_meta_gate_passed_tp4_service_pending",
     "enabled_by": "QWEN35_ASCEND_T21_DENSE_MLP=1",
     "upstream_operator_sha256": "ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb",
-    "public_bridge_sha256": "7c0e01b2b6d4274ead9871c76df5a83cad3618cddec35128ca4e8d12a8c786e4",
+    "public_bridge_sha256": "3b1875d6e9a7957aa44810c99fca046f8a4123e997143e2e00300c5e1c1030f4",
     "shape_contract": "Qwen3.5-27B BF16 TP4, positive M, local 5120->8704->4352->5120",
-    "project_delta": "traceable torch op registration with static module admission only, C++ runtime tensor contract checks, zero-copy model-weight views, existing vLLM TP AllReduce composition",
+    "project_delta": "traceable torch op registration with symbolic-M Meta output and static module admission only, C++ runtime tensor contract checks, zero-copy model-weight views, existing vLLM TP AllReduce composition",
     "rollback": "set QWEN35_ASCEND_T21_DENSE_MLP=0 and restart"
   },
   "framework": "vLLM-Ascend 0.23.0",
@@ -87,7 +87,7 @@
       "natural_eos": true,
       "response_sha256_matched_control": true
     },
-    "t21_public_bridge_build": "/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4",
+    "t21_public_bridge_build": "/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v5",
     "t21_zero_copy_numerical": [
       "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v4",
       "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v5",

@@ -4,7 +4,7 @@ set -euo pipefail
 image="${IMAGE:-quay.io/ascend/vllm-ascend:v0.23.0}"
 repo_root="${REPO_ROOT:-/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery}"
 candidate_opp_root="${CANDIDATE_OPP_ROOT:-/cache/austinov/qwen35-t21-abi-adapter-opp-r2-20260911}"
-bridge_root="${BRIDGE_ROOT:-/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4}"
+bridge_root="${BRIDGE_ROOT:-/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v5}"
 model_config="${MODEL_CONFIG:-/cache/austinov/Qwen3.8-27B/config.json}"
 lease_file="${LEASE_FILE:-/cache/austinov/.locks/npu0-3.lock}"
 lease_wait_seconds="${LEASE_WAIT_SECONDS:-45}"
