@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-12.
+- Last updated: 2026-09-13.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
@@ -15,22 +15,21 @@
   performance baseline is 135.142469917 output tok/s and the fixed +10 percent
   target is 148.656716909 output tok/s. The best comparable energy-Dk64 screen
   is +4.752041 percent; it is not accepted.
-- The drrqr-two-sided-value-width-admission-v1 source/cost/corpus audit is
-  complete and admits only an offline held-out screen. Exact four-rank decode
-  CSV accounting corrected the TP-local Dv128-to-Dv64 QKVZ reduction from an
-  earlier 46.153846 percent estimate to 42.857143 percent. Under deliberately
-  optimistic proportional scaling, Dv96 and Dv80 cannot reach the fixed target;
-  Dv64 has a 149.751434 tok/s ceiling (+10.810046 percent) and Dv48 has a
-  151.948297 tok/s ceiling (+12.435637 percent). These are not predictions.
-  Dv64 is the primary held-out candidate, Dv48 is one headroom control and
-  Dv32 is bounded out. Report SHA256:
-  f9dba2a1735b6379116a798ae7523200bc8c5688f4d64cb374353e175a81e121.
-  No candidate weights, NPU run, endpoint benchmark or accuracy test followed.
-  Resume with drrqr-two-sided-value-width-heldout-v1: fit only captures 0-11,
-  freeze plans, then decide on untouched 12-15 using post-RMS plus
-  output-projected fidelity and per-head robustness. Preserve four attribution
-  arms before any endpoint claim; this is an experimental DRRQR extension, not
-  paper-exact StrongRRQR.
+- The drrqr-two-sided-value-width-heldout-v1 screen is complete and rejected.
+  Fit indices 0-11 were locked before untouched indices 12-15 were loaded.
+  Dv64/Dv48 projected-error ratios were 3.711740/4.072586 versus energy-Dk64,
+  retained-post-RMS ratios were 2.422295/2.602293, and both failed all fidelity
+  and robustness families. No NPU, endpoint or accuracy run followed. Report
+  SHA256: 44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528.
+  The nearby layer-shared value-coordinate/scalar family is closed.
+- The drrqr-dk64-fp32-inplace-state-cache-admission-v1 source/profile audit is
+  complete and rejected before implementation. The active schema already marks
+  recurrent state mutable and pure decode passes the cache tensor directly to
+  the native recurrent operator. Profiled Slice/ConcatD shapes are QKV layout,
+  not state traffic. Admissible new state-copy credit is zero; even wrongly
+  removing every Slice+ConcatD gives only 1.826091 ms/token versus the open
+  3.181665 ms/token gap. No code, build, NPU, service, endpoint or accuracy run
+  followed. Require a materially different named DRRQR mechanism to reopen.
 - The real captured-teacher fixed-beta screen is complete and rejected:
   144/144 dense128/energy64/beta64 trajectories passed numerical and graph
   gates, but beta64 failed 5/144 robustness windows despite a 0.888847 global
@@ -506,6 +505,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-pairwise-orthogonal-projection-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml
 .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
+.agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md

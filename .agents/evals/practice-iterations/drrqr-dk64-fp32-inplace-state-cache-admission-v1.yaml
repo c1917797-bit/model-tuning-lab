@@ -1,0 +1,89 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-fp32-inplace-state-cache-admission-v1
+repository: model-tuning-lab
+status: complete
+date: 2026-09-13
+validated_commit: 17454029d743ad3469ef1d088f382850789e29a7
+
+stage_goal: Decide whether a plugin-owned FP32 in-place recurrent-state cache/update adaptation is a new DRRQR-specific mechanism with enough measured headroom to reopen implementation.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen dense is 135.142469917 output tok/s, the fixed target is 148.656716909, and energy-Dk64 is 141.564496153 with TPOT 66.689383571 ms. Under reciprocal-throughput admission it still needs 3.181664712 ms/token of TPOT reduction.
+  medium_term_milestone: Admit only a materially different DRRQR mechanism whose source identity and deliberately optimistic endpoint ceiling can close a material part of the open gap.
+  short_term_decision: Bind the actual v0.23 Ascend pure-decode state mutation contract and the Slice/Concat profile shapes before writing code or using an NPU.
+  deciding_evidence: Frozen source/schema identity plus the existing validated four-rank, 30-step decode profile.
+  budget_or_stop_rule: One source/profile audit. Stop without code, build, NPU, service, endpoint, or accuracy work if recurrent state is already updated in place or if the claimed profile kernels are not state-cache transfers.
+  on_pass: Open one plugin-local exact-state implementation and target-NPU numerical gate.
+  on_failure: Preserve the duplicate-mechanism evidence and require another materially different named DRRQR algorithm/state mechanism before reopening.
+  on_inconclusive: Permit one caller-to-kernel trace disambiguation only if it can change the admission decision.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
+  paper_exact_selection: false
+  proposed_change: Preserve the real FP32 recurrent-state semantics while making state update/storage in place.
+  prohibited_substitutes: [MTP, speculative decoding, quantization, retraining]
+
+source_identity:
+  vllm_ascend_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  gdn_source:
+    path: /cache/austinov/src/vllm-ascend/vllm_ascend/ops/gdn.py
+    sha256: d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816
+  torch_schema:
+    path: /cache/austinov/src/vllm-ascend/csrc/torch_binding.cpp
+    sha256: a95ec8d3c28714b083620e2f501a5f9b5e44b4c55e8c766985cb1f922afb02b0
+  recurrent_adapter:
+    path: /cache/austinov/src/vllm-ascend/csrc/attention/recurrent_gated_delta_rule/recurrent_gated_delta_rule_torch_adpt.h
+    sha256: 96cf511bedd953c0b332bf97d88f535663c759fc81235baeb3044e66605d6a0c
+  profile_summary:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/dk64/profile-summary.v1.json
+    sha256: eafb57f6e6358afffa91560a259a659661c863002d5a3aefe8b03b0b0a44b22b
+
+findings:
+  active_state_path:
+    result: already_in_place
+    evidence:
+      - The torch schema declares recurrent state as Tensor(a!), a mutable alias.
+      - Pure decode passes the cache tensor directly as state=ssm_state to npu_recurrent_gated_delta_rule.
+      - The native adapter calls aclnnRecurrentGatedDeltaRule with that state; pure decode has no state gather, concatenate, returned-state allocation, or scatter-back boundary.
+      - Prefill indexing and last-state scatter are not part of the validated 30-step pure-decode profile and cannot be credited to decode TPOT.
+  slice_concat_binding:
+    result: qkv_layout_not_state_cache
+    evidence:
+      - One Slice per layer/step has input shape 16x3584 and is the QKVZ split.
+      - Three Slice calls per layer/step have input shape 16x2048 and are the Q/K/V split.
+      - One ConcatD per layer/step has flattened Q/K/V input shapes 4096, 4096, and 24576.
+      - None has the FP32 recurrent-state geometry with local shape slots x 12 x 128 x 64.
+  capacity_only_cache_route:
+    result: no_decode_compute_saving
+    evidence:
+      - Compact request-state allocation can change capacity and index ownership but not the native per-active-request recurrent state read/update/write.
+      - The already-tested concurrency-32 endpoint configuration did not improve throughput, so capacity alone is not a measured route to the fixed target.
+
+optimistic_ceiling:
+  required_tpot_reduction_ms: 3.181664712
+  admitted_state_copy_credit_ms: 0.0
+  reason: The proposed FP32 in-place state mutation is already active.
+  deliberately_overgenerous_all_slice_concat_credit_ms: 1.826090500
+  overgenerous_shortfall_ms: 1.355574212
+  warning: The overgenerous figure wrongly treats every profiled Slice and ConcatD kernel as removable, state-related, and fully critical-path. It is retained only as a stronger rejection bound; kernel sums are not an endpoint forecast.
+
+validation_commands:
+  - Read the exact v0.23 gdn.py pure-decode caller, torch mutation schema, and recurrent torch adapter.
+  - Bind validated four-rank decode Slice and ConcatD records by input shape and per-layer call count.
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+outcome:
+  class: rejected_before_implementation
+  evidence_level: source identity plus existing target-runtime diagnostic profile
+  decision: Do not implement, build, or run an FP32 in-place state-cache operator. It duplicates the active mutation contract, and the profile kernels initially considered as state movement are QKV layout operations already owned by the previously tested packed-QKV fusion family.
+  claim_ceiling: Rejects only the proposed FP32 in-place state-cache/update mechanism as a new performance candidate. It does not reject a materially different DRRQR algorithm/state formulation.
+  npu_used: false
+  endpoint_used: false
+  accuracy_used: false
+
+lessons_ingested:
+  - Prove mutation and aliasing from the active torch schema and caller before proposing an in-place cache operator.
+  - Bind profiler kernels to tensor shapes and call-site multiplicity; never relabel QKV Slice/Concat traffic as recurrent-state traffic.
+  - A compact allocator is a capacity mechanism until it proves a per-token compute or memory-traffic change on the fixed workload.

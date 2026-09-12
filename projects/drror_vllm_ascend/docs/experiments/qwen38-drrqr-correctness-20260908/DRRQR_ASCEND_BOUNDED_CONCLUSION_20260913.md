@@ -85,6 +85,28 @@ than a tunable margin. Opening another nearby selector, scalar, launch fusion,
 generic operator optimization, MTP, speculation, quantization or training
 branch would violate the declared DRRQR scope or repeat a stopped family.
 
+## Post-conclusion FP32 state-cache admission audit
+
+A subsequent source-only reopen check tested whether a plugin-owned FP32
+in-place recurrent-state cache/update was materially different. It was
+rejected before implementation:
+
+- the active torch schema already declares recurrent state as mutable
+  `Tensor(a!)`;
+- pure decode passes `ssm_state` directly to the native recurrent operator,
+  which updates it in place;
+- the profiled Slice/ConcatD shapes bind to QKVZ split, Q/K/V split and packed
+  QKV layout, not to the FP32 recurrent-state tensor;
+- compact request-state allocation changes capacity/index ownership but does
+  not remove the per-active-request recurrent state update.
+
+The admissible new state-copy saving is therefore zero. Even the deliberately
+incorrect perfect removal of every profiled Slice plus ConcatD kernel would
+credit only 1.826091 ms/token against the 3.181665 ms/token open TPOT gap, and
+kernel sums are not a critical-path forecast. No code, build, NPU, endpoint or
+accuracy run was started. See
+`.agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml`.
+
 ## Reopen condition
 
 Reopen only as a new bounded program around a materially different, named

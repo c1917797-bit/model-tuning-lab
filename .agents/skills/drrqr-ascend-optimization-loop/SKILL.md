@@ -114,6 +114,12 @@ reproduction.
   output and retained-post-RMS robustness on untouched data. If both the least
   aggressive target-crossing width and its control fail by a large margin,
   close the value-width branch instead of tuning nearby coordinates or gains.
+- Before proposing an in-place recurrent-state/cache operator, inspect the
+  active torch mutation schema and caller. A mutable `Tensor(a!)` passed
+  directly from the cache means state update is already in place. Bind profile
+  kernels to input shapes and per-layer call counts: QKV Slice/Concat traffic
+  must not be relabelled as state-cache traffic. Treat compact allocation as a
+  capacity mechanism until a fixed-workload per-token saving is identified.
 
 ## Iteration workflow
 
