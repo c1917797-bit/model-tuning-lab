@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Last updated: 2026-09-11.
+- Last updated: 2026-09-12.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
 - Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction and the expanded Paper-to-Ascend maintainer skill pipeline.
 - Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
@@ -258,6 +258,29 @@
   larger native DRRQR seam spanning packed QKV normalization, gating and
   recurrent state traffic; require a credible endpoint-share case before
   implementation.
+- The drrqr-dk64-native-packed-gating-recurrent-v1 source/cost audit now admits
+  a staged native candidate. The measured Dk64 packed front end is 61.383355 ms
+  rank-mean and recurrent is 55.046810 ms in the existing diagnostic trace;
+  these are not additive critical-path or endpoint forecasts. The plugin-owned
+  native control also passed a new FP32-state batch1/16, eight-step eager and
+  NPUGraph bitwise matrix. Report SHA256:
+  2a83504c777205525e33055e097b21152eac583a8aed23b489004d1fb9e6e303.
+  Stage 1 packed already-normalized Q/K/V addressing is now implemented and
+  passed the exact physical-NPU4 batch1/16, eight-step eager/full-FP32-state/
+  NPUGraph gate in one run. Report SHA256:
+  caf98324fd5ac5f5177abb2d291d0fbc60e289b715c80871f7f01f4a8c1f5174.
+  Its claim ceiling is packed addressing, shape derivation and unchanged
+  recurrent ABI correctness on the qualified 910B environment. Resume with
+  Stage 2 raw packed-Q/K normalization behind a predeclared numerical gate;
+  gating, endpoint performance and accuracy remain unrun.
+- Historical DRRQR success, rejection, invalid-run, and tooling experience is
+  now routed through `drrqr-ascend-optimization-loop`, with the evidence
+  summary in
+  `projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md`.
+  It makes the current direction explicit: continue the energy-Dk64
+  algorithm/operator co-design, stage native semantics one boundary at a time,
+  stop repeated Q/K-only selector and microbenchmark-only variants, and keep
+  endpoint performance plus final accuracy as the product gates.
 - Two Qwen3.5 branch-local tracks are deliberately separate and are not
   integrated product truth:
   - `work/exp-20260904-qwen35-query-rewrite-3x-e2e` owns the production

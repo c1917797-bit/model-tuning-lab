@@ -6,33 +6,25 @@ description: Use before maintaining code, inspecting runtime state, or running A
 # chicaihong01 Host Maintenance
 
 ## Purpose
-Make a fresh clone sufficient to enter the real machine-bound maintenance
-environment safely. The local clone carries governance and discovery knowledge;
-the canonical target-host checkout and live machine state produce authoritative
-code, runtime, and performance evidence.
+Make a fresh clone sufficient to enter the real machine-bound maintenance environment safely.
+The target-host checkout and live machine state produce authoritative code, runtime, and performance evidence.
 
 ## Canonical target
 - Preferred AWMCP topology path: `chicaihong01/ma`. Resolve it live every
   session; the label is not a durable peer ID.
-- Canonical target repository:
-  `/opt/host/vnf/austinov/model-tuning-lab`.
-- Compatibility path:
-  `/cache/austinov/model-tuning-lab`.
+- Canonical target repository: `/opt/host/vnf/austinov/model-tuning-lab`.
+- Compatibility path: `/cache/austinov/model-tuning-lab`.
 - Expected host baseline: EulerOS on aarch64, 8 Ascend 910B4 NPUs, about 2 TiB
   RAM, and a large 1 GiB HugeTLB pool.
 
-Topology peer IDs, processes, containers, ports, free memory, NPU ownership, and
-software versions are live facts. Resolve or measure them every session; never
-copy an old snapshot forward as proof.
+Topology, processes, containers, ports, memory, NPU ownership, and software versions are live facts; resolve them every session instead of copying an old snapshot.
 
 ## Verification credential boundary
-Obtain the AWMCP verification value from the operator or approved secret
-environment at session start and pass it only in the connector's `verify`
-field. Refer to it in instructions as `AWMCP_VERIFY`.
+Obtain the AWMCP verification value from the operator or approved secret environment
+at session start and pass it only in the connector's `verify` field.
 
-Never commit, print, log, echo, cache, or embed the literal verification value
-in this repository, scripts, shell history, handoffs, examples, or command
-arguments. A clone intentionally does not contain the credential.
+Never commit, print, log, echo, cache, or embed it in repository content,
+shell history, handoffs, examples, or command arguments.
 
 ## Fresh-clone connection workflow
 1. Read `AGENTS.md`, `.agents/HANDOFF.md`, this skill, and the narrow task
@@ -41,10 +33,9 @@ arguments. A clone intentionally does not contain the credential.
    the approved runtime channel.
 3. Call AWMCP topology `tree` and `get` for the live `chicaihong01`
    manager nodes. Prefer `chicaihong01/ma`.
-4. Resolve its current concrete peer ID. Never hardcode a peer ID from an older
-   session. If `ma` is missing or unresponsive, refresh topology before using
-   `mb` or `mc`; accept a sibling control plane only after direct-route
-   target proof and the same canonical repository/system identity are verified.
+4. Resolve its current concrete peer ID; never hardcode an older peer. If `ma`
+   is unavailable, refresh topology and accept `mb` or `mc` only after direct
+   target and canonical repository/system identity proof.
 5. Load the AWMCP `host-development` skill contract before its first action.
 6. Run `a_status` against the resolved peer.
 7. Accept the target only when the response identifies the intended peer and
@@ -103,6 +94,12 @@ target-host worktree. Create and push the remote start checkpoint before
 protected-path or product edits. Use AWMCP `a_apply_patch` for remote UTF-8
 text edits where available, validate each coherent stage, commit, and push to
 the workstream upstream. Serialized integration alone updates `main`.
+
+For commands that can exceed the connector's short wait, use the AWMCP
+asynchronous job lane with `sync=false`, an explicit command `timeout`, and
+`waitMs=0`; then poll the returned operation on the same peer. Do not invent
+unsupported duration fields, restart after a client timeout, or treat a
+30-second default termination as a compiler or algorithm result.
 
 ## Verification
 

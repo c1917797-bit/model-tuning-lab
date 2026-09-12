@@ -1,0 +1,85 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-native-packed-gating-recurrent-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-12
+validated_commit: pending
+
+stage_goal: Build and qualify a uniquely named native Ascend DRRQR operator that can consume packed decode QKV and remove the measured normalization, gating, and recurrent state-traffic boundary without changing energy-Dk64 semantics.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: The accepted energy-Dk64 screen is 141.564496 output tok/s, 4.752041 percent above frozen dense but about 5.009887 percent below the fixed 10 percent target. The smaller packed-QKV/L2 composition regressed versus energy-Dk64 and was rejected.
+  medium_term_milestone: Produce a numerically defensible native DRRQR decode candidate with a sufficiently large measured seam to justify one endpoint screen.
+  short_term_decision: First prove a packed normalized-QKV reader with unchanged recurrent arithmetic and FP32 state, then admit in-kernel normalization and gating only behind separate numerical gates.
+  deciding_evidence: Source and cost audit, exact build/load provenance, batch1/16 eight-step full-state eager and NPUGraph comparison on physical NPU4, then a bounded graph micro screen before any endpoint service.
+  budget_or_stop_rule: Stage each semantic boundary separately. Preserve every failure, permit at most one correction for a proven implementation defect per stage, and never relax a declared numerical gate after observing results.
+  on_pass: Advance from packed normalized-QKV to raw packed-QKV normalization, then gating, and run one fixed-protocol endpoint screen only if graph-path evidence is materially positive.
+  on_failure: Keep the exact failure and fall back to the previously validated native composition; change the DRRQR algorithm/state design or measured seam rather than repeating a rejected micro-optimization.
+  on_inconclusive: Run at most one bounded disambiguation that can change the implementation decision.
+
+measured_seam:
+  profile_protocol: Four ranks, 30 decode steps, concurrency 16, input 32768, shared prefix 16384.
+  packed_front_end_rank_mean_ms: 61.383355
+  recurrent_rank_mean_ms: 55.04681
+  combined_rank_mean_ms: 116.430165
+  warning: These are diagnostic kernel-time sums, not an additive critical path or an endpoint speedup forecast.
+
+correctness_control:
+  state_dtype: float32
+  batches: [1, 16]
+  changing_steps: 8
+  modes: [eager, NPUGraph]
+  requirements: Exact BF16 output and complete mutable FP32 state, intact guards and untouched slots, stable storage pointers, and exact loaded-library provenance.
+  result: passed
+  report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-native-layout-control-v1/native-control-parity-v1-fp32/report.json
+  report_sha256: 2a83504c777205525e33055e097b21152eac583a8aed23b489004d1fb9e6e303
+  claim_ceiling: Native separate-Q/K/V control ABI and storage correctness only; no packed-layout, performance, accuracy, or portability claim.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
+  paper_exact_selection: false
+  stage1_input: Packed already-normalized BF16 Q, K, and V; derive and validate key-head count from packed width plus state shape while keeping native recurrent arithmetic and FP32 state unchanged.
+  stage2_input: Raw causal-convolution packed BF16 Q, K, and V; FP32 square/sum/rsqrt normalization with eps 1e-6 and explicit BF16 rounding before recurrent arithmetic.
+  stage3_scope: Add gating only if stage2 passes numerical and graph gates; preserve softplus threshold and BF16 beta rounding plus FP32 g semantics.
+  prohibited_substitutes: [MTP, speculative decoding, quantization, retraining]
+
+architecture_and_portability:
+  algorithm_metadata: Logical Dk and coordinate order are independent of physical tiling, alignment, and padding.
+  shape_contract: Infer Dk, Dv, and value heads from state; derive key-head count from packed width and validate exact divisibility and grouping instead of hard-coding TP4 model dimensions.
+  backend_dispatch: Unique operator name, explicit opt-in, and qualification per SoC/runtime capability.
+  fallback: Existing rearrange_mixed_qkv, l2norm_fwd, fused_gdn_gating, and frozen native recurrent path.
+  source_boundary: All implementation and build code remains in projects/drror_vllm_ascend; reference frameworks, ops-transformer, cann bot, and the image remain read-only.
+  claim_ceiling: Current-environment staged correctness and screening only until paired endpoint and accuracy evidence exists.
+
+resource_contract:
+  physical_npus: [4, 5, 6, 7]
+  container_npus: [0, 1, 2, 3]
+  container: drrqr_qwen38_energy_preflight_20260908
+
+validation_commands:
+  - plugin source syntax plus JSON and YAML parse checks
+  - native build and torch bridge with exact source, artifact, and loaded-library receipts
+  - one physical-NPU4 native separate-Q/K/V versus packed eager/full-state/NPUGraph exact matrix
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - Promote packed addressing and recurrent ABI correctness only to their declared claim ceiling; they admit normalization work but do not prove endpoint speedup.
+  - Deriving head counts from packed width and state shape avoids a model-specific TP4 constant while retaining strict validation and backend qualification.
+  - Use the AWMCP asynchronous job lane with an explicit timeout for native builds; a client wait timeout is not build evidence and must not trigger an automatic retry.
+
+current_result:
+  source_cost_audit: passed_for_staged_implementation
+  stage1_implementation: passed_npu_exact_gate
+  stage1_build_manifest: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage1-build-v4/manifest.json
+  stage1_build_manifest_sha256: dd8516b2ed7d108125f47d21e82193853675f72e07ba7e5f788ac11790209d62
+  stage1_bridge_sha256: 8abdfc778c64466b766797d8915167520f411ee065fea3fa7bf2f73573e5ee41
+  stage1_loaded_opapi_sha256: a1f6478acdf47a3a65e263338c235e8042596754d7c96befcd96cec8119ad8b3
+  stage1_parity_report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage1-parity-v1/report.json
+  stage1_parity_report_sha256: caf98324fd5ac5f5177abb2d291d0fbc60e289b715c80871f7f01f4a8c1f5174
+  stage1_matrix: Physical NPU4, batch1/16, eight changing steps, exact BF16 output and full FP32 state, eager and NPUGraph, guards, untouched slots, pointers, metadata, and loaded-library identity all passed in one run.
+  stage1_claim_ceiling: Packed addressing, shape derivation, storage, and unchanged recurrent ABI correctness on the qualified 910B environment only; no normalization, gating, service, performance, accuracy, or portability claim.
+  stage2_raw_normalization: not_started
+  endpoint: not_run
+  accuracy: not_run

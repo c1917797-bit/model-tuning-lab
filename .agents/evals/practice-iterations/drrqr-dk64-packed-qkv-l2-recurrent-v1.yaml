@@ -3,7 +3,7 @@ id: drrqr-dk64-packed-qkv-l2-recurrent-v1
 repository: model-tuning-lab
 status: complete
 date: 2026-09-11
-validated_commit: pending
+validated_commit: 1c42fbc
 
 stage_goal: Build and numerically qualify one plugin-owned energy-Dk64 decode operator that consumes causal-convolution packed QKV directly, performs exact Q/K normalization in-kernel, and reuses the validated recurrent state path.
 
