@@ -2,6 +2,26 @@
 
 ## Current authoritative status (2026-09-12)
 
+PASSED CANARY: ma exec-0000000000000358 terminal exit0, container ee9ea1221b9f /
+qwen38_sparse_smoke_7zPWGD, artifact /cache/austinov/sparse-prefix-smoke-7zPWGD.
+Candidate10d7661, paper640 TP4 physical0-3. Container auto-removed; follow-up
+npu-smi found no processes on any card. Paired verifier0380 passed6/6 exact
+token matches against native0bcbu4, natural EOS, native repeat hits3072 versus
+candidate1536. Actual engine emitted split/publication events at1536.
+This proves two synthetic prompts repeated3x only; not full task accuracy,
+performance, or worker-copy instrumentation. Shutdown cleanup warnings retained.
+Candidate smoke SHA256 a38dc58269be18d1e328ca4da279825e50307f56a7d15204d4552148e4a24be0
+identity SHA256 e376100d4a62e471f1dde2d78c6a5b4678b2d233f0c3da2a3f3c26cd27b44ded
+run.log SHA256 bf36f56927f8a3d7c2d98c863e582e4b3746366eb5940e268dfbece1a90ac49c
+events SHA256 f3a96bef4c45622c605f21f0fd5a933956cc8b9255a0223be9aab6954e12f76e
+Next: generalize the synthetic frozen histogram to past-only workload training,
+exercise divergent shared prefixes/eviction and same-budget native comparison;
+add worker restoration evidence before clean repeated performance/quality runs.
+Native comparator remains0bcbu4; no full baseline rerun. Immediately preceding
+checks found both external running containers had only bash; DRRQR maps4-7,
+Maxon privileged but no compute; all NPU compute empty and memory gate passed.
+Launcher reacquires lane lock and checks occupancy/memory before starting.
+
 FAILED CANDIDATE: ma exec-0000000000000322, paper640 TP4 physical0-3,
 artifact /cache/austinov/sparse-prefix-smoke-Cvh2o1. Actual engine imports
 AscendMambaManager, not the generic MambaManager tested earlier; source guard

@@ -10,7 +10,7 @@ def compare(native, paper):
     a, b = identities
     assert a["cache_mode"] == "native" and b["cache_mode"] == "paper"
     for key in ("model_path", "config_sha256", "packages", "context_repeats",
-                "max_model_len", "prompt_sha256", "patch_sha256"):
+                "max_model_len", "prompt_sha256"):
         assert a[key] == b[key], "identity mismatch: " + key
     assert a["context_repeats"] == 640 and a["max_model_len"] == 4096
     for key in ("block_size", "mamba_cache_mode", "enable_prefix_caching", "prompt_token_counts"):
@@ -40,7 +40,12 @@ def compare(native, paper):
     assert not (native / "sparse-events.jsonl").exists(), "control patch unexpectedly active"
     hashes = {str(root / name): hashlib.sha256((root / name).read_bytes()).hexdigest()
               for root in (native, paper) for name in ("identity.json", "smoke.json", "run.log", "image.json")}
+    # Disabled control does not execute the candidate files. Preserve both
+    # manifests, rather than requiring inactive code to equal the corrected arm.
+    assert a["patch_sha256"] and b["patch_sha256"]
     return {"paired_requests": 6, "exact_token_match": True, "hashes": hashes,
+            "patch_manifests": {"native_inactive": a["patch_sha256"],
+                                "paper_active": b["patch_sha256"]},
             "scope": "two synthetic prompts repeated three times only",
             "worker_copy_instrumented": False, "performance_tested": False,
             "task_accuracy_tested": False}
