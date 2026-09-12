@@ -34,7 +34,17 @@ under the mistaken assumption that freeing destroys a checkpoint.
 Contract tests use fake objects and do NOT prove real scheduler or worker behavior.
 Next must test against pinned image classes, inject in engine before construction,
 prove actual selected state copy/restoration, and compare matched native caching.
-The adapter currently has no worker-copy instrumentation and no live validation.
+The adapter currently has no worker-copy instrumentation and no live model validation.
+Pinned-image native-class test completed: operation exec-00000000000002db exit0,
+2026-09-12, script scripts/test_sparse_runtime_image.py. It imported real
+AsyncScheduler, MambaManager, MambaSpec and BlockPool with source SHA guards.
+Verified split4608->1536, publication at1536/4608 but not3072, bounded cache hit,
+same-step readiness rejection, and hash retention/free count after request free.
+No NPU devices were mounted, no weights loaded or tensors restored. Device-count
+warnings were expected in this CPU-only metadata test. This is NOT performance
+or quality proof. Reproduce by mounting src read-only at /patch and that script
+at /test.py in the pinned official image, PYTHONPATH=/patch, driver read-only,
+temporary /tmp and /root, then python3 /test.py without device mounts.
 
 Next: implement the paper's budgeted checkpoint selection/retention mechanism
 against the resolved native cache manager; prove selection and actual restoration

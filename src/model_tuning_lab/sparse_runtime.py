@@ -23,7 +23,8 @@ def install(scheduler_class, mamba_class, positions, block_size, source_hashes, 
             any(type(p) is not int or p <= 0 or p % block_size for p in positions) or
             list(positions) != sorted(set(positions))):
         raise ValueError("plan must contain sorted unique positive block boundaries")
-    for cls in (scheduler_class, mamba_class):
+    for cls in (scheduler_class, mamba_class,
+                scheduler_class._mamba_block_aligned_split):
         path = inspect.getsourcefile(cls)
         if not path or path not in source_hashes:
             raise ValueError("missing imported source fingerprint")
