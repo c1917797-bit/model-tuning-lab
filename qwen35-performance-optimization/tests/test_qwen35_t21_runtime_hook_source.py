@@ -53,6 +53,20 @@ def test_t21_hook_composes_upstream_and_existing_collective() -> None:
     assert "return original(self, x)" in SOURCE
 
 
+def test_t21_hook_overrides_only_fake_shape_propagation_symbolically() -> None:
+    assert "def _register_t21_fake_kernel(torch_module)" in SOURCE
+    assert '"qwen35_t21::swiglu_gated_mlp", allow_override=True' in SOURCE
+    assert "return x.new_empty((x.shape[0], down_weight.shape[1]))" in SOURCE
+    assert "_register_t21_fake_kernel(module.torch)" in SOURCE
+    helper = SOURCE[
+        SOURCE.index("def _register_t21_fake_kernel"):
+        SOURCE.index("def _patch_qwen_gdn_linear_attn")
+    ]
+    assert "PrivateUse1" in helper
+    assert "torch_module.library.register_fake" in helper
+    assert "torch_module.library.Library" not in helper
+
+
 def test_t21_ineligible_path_has_state_free_failfast_diagnostics() -> None:
     assert "_diagnostics_enabled()" in SOURCE
     assert "T21_DIAG_FAIL=x_rows" not in SOURCE
@@ -93,6 +107,7 @@ def test_size_dim_backport_matches_official_vllm_source_once() -> None:
 if __name__ == "__main__":
     test_t21_hook_has_only_static_module_admission_before_torch_op()
     test_t21_hook_composes_upstream_and_existing_collective()
+    test_t21_hook_overrides_only_fake_shape_propagation_symbolically()
     test_t21_ineligible_path_has_state_free_failfast_diagnostics()
     test_t21_backports_upstream_size_dim_graph_split_guard()
     print("PASS: T21 runtime hook source contract")

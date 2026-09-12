@@ -95,6 +95,26 @@ def _replace_function_block(function, old: str, new: str, label: str):
     return patched
 
 
+def _register_t21_fake_kernel(torch_module) -> None:
+    """Keep the T21 output row count symbolic during Dynamo/FakeTensor tracing."""
+    operator = torch_module.ops.qwen35_t21.swiglu_gated_mlp
+    if getattr(operator, "_qwen35_symbolic_fake_registered", False):
+        return
+
+    @torch_module.library.register_fake(
+        "qwen35_t21::swiglu_gated_mlp", allow_override=True
+    )
+    def _t21_swiglu_gated_mlp_fake(x, gate_up_weight, down_weight):
+        # The C++ Meta registration in the upstream-derived bridge specializes
+        # backed SymInts in torch 2.10. Override only FakeTensor shape
+        # propagation; the PrivateUse1 implementation and its numerical path
+        # remain unchanged.
+        return x.new_empty((x.shape[0], down_weight.shape[1]))
+
+    operator._qwen35_symbolic_fake_registered = True
+    _notice("registered symbolic T21 FakeTensor kernel")
+
+
 def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
     if not _gdn_projection_fusion_enabled():
         return
@@ -194,6 +214,7 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
     # implementation and a Meta implementation. Fail closed during startup if
     # the validated bridge artifact is absent or has an incompatible ABI.
     import qwen35_t21_bridge  # noqa: F401
+    _register_t21_fake_kernel(module.torch)
     from vllm.distributed.communication_op import (
         tensor_model_parallel_all_reduce,
     )
