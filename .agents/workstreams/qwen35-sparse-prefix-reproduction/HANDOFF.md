@@ -2,6 +2,21 @@
 
 ## Current authoritative status (2026-09-12)
 
+REAL WORKLOAD OPPORTUNITY (CPU tokenizer only): operation039a exit0,
+/cache/austinov/sparse-opportunity-8t6gZ0/opportunity.json SHA256
+613e67c218a4a8cad68c3b61464982d561408af85081fdd0234c23b7fb1d855f.
+357 raw completion prompts,742948 tokens;356 have past-only overlap>=1536.
+Training first71 only produces position[1536] for budgets1/2/4; heldout286
+all potentially reuse1536 tokens (439296 total). Special-token on/off identical.
+This assumes shared cache salt, unlimited retention and no eviction: NOT latency.
+Crucial:337 prompt lengths already have native final boundary1536;20 have3072.
+Thus this workload likely overlaps native behavior heavily. Do NOT attribute
+generic caching versus unique-salt baseline gains to the paper. Next run matched
+native versus trained sparse plan and report incremental benefit or no benefit.
+First audit0394 failed before tokenization because the CPU container omitted the
+read-only driver libraries required by torch_npu autoload.039a added that mount;
+no NPU devices or model inference in either attempt.
+
 PASSED CANARY: ma exec-0000000000000358 terminal exit0, container ee9ea1221b9f /
 qwen38_sparse_smoke_7zPWGD, artifact /cache/austinov/sparse-prefix-smoke-7zPWGD.
 Candidate10d7661, paper640 TP4 physical0-3. Container auto-removed; follow-up
