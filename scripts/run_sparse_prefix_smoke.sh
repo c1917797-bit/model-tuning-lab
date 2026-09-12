@@ -39,8 +39,10 @@ docker run --rm --name "$name" --network host --read-only --shm-size 8g \
  -v /etc/vnpu.cfg:/etc/vnpu.cfg:ro \
  -v /cache/austinov/Qwen3.8-27B:/model/Qwen3.8-27B:ro \
  -v "$PWD/scripts/sparse_prefix_smoke.py":/smoke.py:ro \
+ -v "$PWD/src":/patch:ro \
  -v "$artifact":/output \
  -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 \
+ -e PYTHONPATH=/patch -e SPARSE_CONTEXT_REPEATS="${SPARSE_CONTEXT_REPEATS:-320}" \
  -e OMP_NUM_THREADS=4 -e HCCL_BUFFSIZE=512 \
  -e VLLM_WORKER_MULTIPROC_METHOD=spawn \
  -e SPARSE_SMOKE_CACHE="${SPARSE_SMOKE_CACHE:-off}" \

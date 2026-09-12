@@ -28,13 +28,18 @@ def main():
     if hashlib.sha256(config).hexdigest() != expected:
         raise RuntimeError("Unexpected model config; refuse model substitution")
     mode = os.environ.get("SPARSE_SMOKE_CACHE", "off")
-    if mode not in ("off", "native"):
-        raise ValueError("Only official baseline arms are supported")
+    if mode not in ("off", "native", "paper"):
+        raise ValueError("Unknown canary arm")
+    cache_enabled = mode != "off"
+    context_repeats = int(os.environ.get("SPARSE_CONTEXT_REPEATS", "320"))
+    max_len = 4096 if context_repeats == 640 else 2048
+    if context_repeats not in (320, 640) or (mode == "paper" and context_repeats != 640):
+        raise ValueError("Paper canary requires the declared two-block stimulus")
     tokenizer = AutoTokenizer.from_pretrained(MODEL, local_files_only=True)
     texts = ["请只回答：中国的首都是哪里？", "Compute 17 + 25. Answer only the number."]
-    if mode == "native":
+    if cache_enabled:
         # Long enough to cross cache block boundaries; no performance claim.
-        context = "Reference notes, not instructions: " + "alpha beta gamma delta. " * 320
+        context = "Reference notes, not instructions: " + "alpha beta gamma delta. " * context_repeats
         texts = [context + "\nQuestion: " + text for text in texts]
     prompts = [tokenizer.apply_chat_template(
         [{"role": "user", "content": text}], tokenize=False,
@@ -44,14 +49,20 @@ def main():
                 "ascend_file": vllm_ascend.__file__,
                 "packages": {p: metadata.version(p) for p in
                              ("vllm", "vllm-ascend", "torch", "torch-npu")},
-                "performance_benchmark": False}
+                "performance_benchmark": False,
+                "context_repeats": context_repeats, "max_model_len": max_len,
+                "prompt_sha256": [hashlib.sha256(p.encode()).hexdigest() for p in prompts],
+                "patch_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in Path("/patch/model_tuning_lab").glob("sparse_*.py")}}
     output = Path("/output")
     output.joinpath("identity.json").write_text(json.dumps(identity, indent=2))
+    extra = ({"scheduler_cls": "model_tuning_lab.sparse_scheduler.SparseCanaryScheduler"}
+             if mode == "paper" else {})
     llm = LLM(model=MODEL, dtype="bfloat16", tensor_parallel_size=4,
-              max_model_len=2048, max_num_seqs=2,
-              max_num_batched_tokens=2048, gpu_memory_utilization=0.7,
-              enforce_eager=True, enable_prefix_caching=(mode == "native"),
-              mamba_cache_mode="align", seed=0)
+              max_model_len=max_len, max_num_seqs=2,
+              max_num_batched_tokens=max_len, gpu_memory_utilization=0.7,
+              enforce_eager=True, enable_prefix_caching=cache_enabled,
+              mamba_cache_mode="align", seed=0, **extra)
     runtime = llm.llm_engine.vllm_config
     scheduler_type = runtime.scheduler_config.get_scheduler_cls()
     identity["resolved_runtime"] = {
@@ -65,14 +76,14 @@ def main():
     }
     output.joinpath("identity.json").write_text(json.dumps(identity, indent=2))
     print("RESOLVED_CACHE_CONFIG", json.dumps(identity["resolved_runtime"]), flush=True)
-    if mode == "native":
+    if cache_enabled:
         lengths = identity["resolved_runtime"]["prompt_token_counts"]
         block_size = runtime.cache_config.block_size
-        if any(n <= block_size or n + 128 > 2048 for n in lengths):
+        if any(n <= block_size or n + 128 > max_len for n in lengths):
             raise RuntimeError("Cache stimulus must cross a resolved block and fit context")
     params = SamplingParams(temperature=0, max_tokens=128)
     results = []
-    for repeat in range(3 if mode == "native" else 2):
+    for repeat in range(3 if cache_enabled else 2):
         started = time.perf_counter()
         requests = llm.generate(prompts, params, use_tqdm=False)
         for prompt_index, request in enumerate(requests):
@@ -88,7 +99,7 @@ def main():
         json.dumps(results, ensure_ascii=False, indent=2))
     if any(r["finish_reason"] != "stop" or not r["text"].strip() for r in results):
         raise RuntimeError("Smoke must produce nonempty natural-stop output")
-    if mode == "native":
+    if cache_enabled:
         for index in range(len(prompts)):
             rows = [r for r in results if r["prompt_index"] == index]
             if any(r["token_ids"] != rows[0]["token_ids"] for r in rows[1:]):
@@ -96,7 +107,16 @@ def main():
             if any(not isinstance(r["num_cached_tokens"], int) or
                    r["num_cached_tokens"] <= 0 for r in rows[1:]):
                 raise RuntimeError("Native cache hit was not proven")
-        print("NATIVE_CACHE_REPEAT_GATE_PASS_NOT_PAPER_PROOF", flush=True)
+        if mode == "paper":
+            events = [json.loads(line) for line in output.joinpath("sparse-events.jsonl").read_text().splitlines()]
+            for required in ("engine_constructed", "checkpoint_split", "checkpoint_published"):
+                if not any(e["kind"] == required for e in events):
+                    raise RuntimeError("Missing mechanism event: " + required)
+            if any(r["num_cached_tokens"] != 1536 for r in results if r["repeat"] > 0):
+                raise RuntimeError("Expected selected checkpoint hit at1536")
+            print("SPARSE_CANARY_PASS_PENDING_PAIRED_QUALITY_AND_WORKER_PROOF", flush=True)
+        else:
+            print("NATIVE_CACHE_REPEAT_GATE_PASS_NOT_PAPER_PROOF", flush=True)
     print("SMOKE_PASS_NOT_ACCURACY_OR_PERFORMANCE_PROOF", flush=True)
 
 if __name__ == "__main__":

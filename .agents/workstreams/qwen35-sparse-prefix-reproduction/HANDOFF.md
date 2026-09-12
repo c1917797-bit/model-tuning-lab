@@ -46,6 +46,18 @@ or quality proof. Reproduce by mounting src read-only at /patch and that script
 at /test.py in the pinned official image, PYTHONPATH=/patch, driver read-only,
 temporary /tmp and /root, then python3 /test.py without device mounts.
 
+Prepared live entry point (NOT yet run): SparseCanaryScheduler is selected only
+for SPARSE_SMOKE_CACHE=paper. Its constructor installs the adapter in the actual
+engine process; import alone changes nothing. Frozen synthetic training histogram
+selects one checkpoint at1536, explicitly a mechanism canary, not fitted workload
+performance. Both matched arms use SPARSE_CONTEXT_REPEATS=640, maxlen4096, TP4,
+same prompts and sampling. Native320 evidence is NOT its paired denominator.
+Run after live resource checks using SPARSE_NPU_LANE=<free four-card lane>
+SPARSE_CONTEXT_REPEATS=640 SPARSE_SMOKE_CACHE=native (then paper) with
+bash scripts/run_sparse_prefix_smoke.sh. Compare complete token IDs across arms,
+check split/publication engine events and candidate repeat hits exactly1536.
+Worker state-copy instrumentation remains missing. No speedup claim from this test.
+
 Next: implement the paper's budgeted checkpoint selection/retention mechanism
 against the resolved native cache manager; prove selection and actual restoration
 before matched performance/quality measurement. Preserve native caching as the
