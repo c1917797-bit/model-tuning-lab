@@ -2,6 +2,23 @@
 
 ## Current authoritative status (2026-09-12)
 
+CACHE-OFF DIAGNOSIS TERMINAL exit1: mb exec-0000000000000186, containerc9a30b133822 /
+qwen38_sparse_smoke_EsTcm5, artifact /cache/austinov/sparse-prefix-smoke-EsTcm5.
+Exact raw index72, same BF16 TP4 model/sampling, no prefix cache, no warmup.
+Exact output index72: token_ids[198,248046], text newline, finish stop,
+num_cached_tokens0. Matches prior native-cache-on empty output. Thus the observed
+empty answer is not introduced by prefix reuse; prompt/model compatibility remains
+unresolved. Container removed; npu-smi found no processes. No paper performance
+or task accuracy acceptance. Requests SHA256
+757f26f57a286b957a5e611ee95c5cb9feb490732d046ba792aed99e672288fa;
+run.log SHA256 d1011a6533658adfe5153aeaa59f929a775c72ee23a017878bf02b1b36df9e92.
+Do not silently normalize role delimiters or thinking mode and call it the old
+baseline. Any official-template comparison must be a separately named protocol.
+Inspected index72 instructions:
+strict JSON with 思考/意图 fields required, so whitespace is not an acceptable
+task response. Raw input is already role-delimited text; do not silently apply
+a second chat template or change thinking mode and reuse the old denominator.
+
 FAILED REAL QUALITY RETRY: mb exec-000000000000017a, container0af22f820b75 /
 qwen38_sparse_smoke_qvXe0h, artifact /cache/austinov/sparse-prefix-smoke-qvXe0h.
 Commit1cccfb1, native quality TP4 physical0-3. Two rows: index71 natural stop348
