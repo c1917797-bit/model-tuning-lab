@@ -31,7 +31,15 @@ def test_t21_hook_composes_upstream_and_existing_collective() -> None:
     assert "return original(self, x)" in SOURCE
 
 
+def test_t21_ineligible_path_has_bounded_opt_in_diagnostics() -> None:
+    assert "_diagnostics_enabled()" in SOURCE
+    assert "_qwen35_t21_ineligible_reported" in SOURCE
+    assert "T21 dense MLP fallback diagnostics" in SOURCE
+    assert "torch_npu.get_npu_format" in SOURCE
+
+
 if __name__ == "__main__":
     test_t21_hook_is_opt_in_and_exact_shape_gated()
     test_t21_hook_composes_upstream_and_existing_collective()
+    test_t21_ineligible_path_has_bounded_opt_in_diagnostics()
     print("PASS: T21 runtime hook source contract")

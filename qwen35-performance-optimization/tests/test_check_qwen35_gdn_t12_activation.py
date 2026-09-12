@@ -14,6 +14,28 @@ from qwen35_performance_optimization_import import load_checker
 
 def main() -> None:
     checker = load_checker()
+    original_argv = sys.argv
+    try:
+        sys.argv = [
+            "check_qwen35_gdn_t12_activation.py",
+            "--log",
+            "log",
+            "--inspect",
+            "inspect",
+            "--npu",
+            "npu",
+            "--top",
+            "top",
+            "--models",
+            "models",
+            "--output",
+            "output",
+            "--variant",
+            "candidate-prefill-t21",
+        ]
+        assert checker.parse_args().variant == "candidate-prefill-t21"
+    finally:
+        sys.argv = original_argv
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory)
         log = root / "service.log"

@@ -373,6 +373,7 @@ def parse_args() -> argparse.Namespace:
         choices=(
             "candidate",
             "candidate-prefill",
+            "candidate-prefill-t21",
             "candidate-prefill-no-prefetch",
             "control",
         ),

@@ -234,6 +234,46 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
             and down_proj.bias is None
         )
         if not eligible:
+            if (
+                _diagnostics_enabled()
+                and not getattr(cls, "_qwen35_t21_ineligible_reported", False)
+            ):
+                cls._qwen35_t21_ineligible_reported = True
+                try:
+                    import torch_npu
+
+                    gate_up_format = int(
+                        torch_npu.get_npu_format(gate_up_weight)
+                    )
+                    down_format = int(torch_npu.get_npu_format(down_weight))
+                except Exception:
+                    gate_up_format = -1
+                    down_format = -1
+                _notice(
+                    "T21 dense MLP fallback diagnostics "
+                    f"x_shape={tuple(x.shape)} x_stride={tuple(x.stride())} "
+                    f"x_dtype={x.dtype} x_contiguous={x.is_contiguous()} "
+                    f"x_offset={x.storage_offset()} "
+                    f"gate_shape={tuple(gate_up_weight.shape)} "
+                    f"gate_stride={tuple(gate_up_weight.stride())} "
+                    f"gate_dtype={gate_up_weight.dtype} "
+                    f"gate_contiguous={gate_up_weight.is_contiguous()} "
+                    f"gate_offset={gate_up_weight.storage_offset()} "
+                    f"gate_format={gate_up_format} "
+                    f"down_shape={tuple(down_weight.shape)} "
+                    f"down_stride={tuple(down_weight.stride())} "
+                    f"down_dtype={down_weight.dtype} "
+                    f"down_contiguous={down_weight.is_contiguous()} "
+                    f"down_offset={down_weight.storage_offset()} "
+                    f"down_format={down_format} "
+                    f"gate_tp={gate_up_proj.tp_size} "
+                    f"down_tp={down_proj.tp_size} "
+                    f"input_parallel={down_proj.input_is_parallel} "
+                    f"reduce_results={down_proj.reduce_results} "
+                    f"gate_quant={gate_up_proj.quant_method.__class__.__name__} "
+                    f"down_quant={down_proj.quant_method.__class__.__name__} "
+                    f"expert_gate_none={self.expert_gate is None}"
+                )
             return original(self, x)
 
         output_parallel = module.torch.ops.qwen35_t21.swiglu_gated_mlp(
