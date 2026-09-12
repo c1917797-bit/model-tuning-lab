@@ -45,7 +45,9 @@ reproduction.
    task accuracy.
 6. Stage native fusion one semantic boundary at a time. A packed-addressing
    stage may require bitwise parity; normalization and gating require
-   predeclared arithmetic criteria before execution.
+   predeclared arithmetic criteria before execution. Count work at the actual
+   head and sequence multiplicity: shared Q/K heads can make a naive
+   per-value-head fusion recompute normalization and lose despite fewer launches.
 
 ## Reusable failure and stop rules
 

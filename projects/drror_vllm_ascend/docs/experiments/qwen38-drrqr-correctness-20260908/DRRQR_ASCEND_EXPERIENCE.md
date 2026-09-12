@@ -16,7 +16,7 @@ promising development baseline, not an accepted result. Its selector is an
 experimental joint normalized Q/K energy top-k rule, not the paper-exact
 StrongRRQR implementation.
 
-## Seven durable conclusions
+## Eight durable conclusions
 
 1. The frozen dense contract is reusable until a material model, runtime,
    common-optimization, topology, device, or workload change occurs.
@@ -36,6 +36,23 @@ StrongRRQR implementation.
 7. Operator work is admitted only when it enables a concrete DRRQR candidate.
    Fusion is staged by semantic boundary and must pass NPU numerical/state
    gates before endpoint performance and final accuracy.
+8. Fusion cost must be counted at the actual native-loop multiplicity. In the
+   current TP worker, one Q/K head serves three value heads; moving Q/K
+   normalization into a per-value-head loop without reuse would compute it
+   three times and can lose even when it removes global launches.
+
+## Outcome classes and recovery rules
+
+- **Accepted foundation** admits only the next evidence layer. Numerical or ABI
+  success is not endpoint or accuracy success.
+- **Rejected** stops the tested configuration or nearby family named by its
+  evidence; it does not reject all DRRQR.
+- **Invalid** contributes no algorithm trend. Repair path identity,
+  comparability, alignment, or measurement before interpreting it.
+- **Failed tooling/environment** preserves the operation and exact error, then
+  permits a bounded retry only after the external defect is proven corrected.
+- **Inconclusive** permits one disambiguation only when its result can change a
+  candidate decision; otherwise return to the DRRQR mainline.
 
 ## Evidence ledger
 
@@ -52,17 +69,21 @@ StrongRRQR implementation.
 | rejected | A Dk64 reduction specialization passed parity but regressed NPUGraph replay. | Eager wins are insufficient for graph-served inference. | Tested kernel variant only. |
 | rejected | Packed QKV/L2 passed exact parity and improved isolated graph timing, then reached 140.583188 tok/s, below energy-Dk64. | Reject at the endpoint gate; move to a larger measured seam rather than stack small launches. | Tested two-kernel composition only. |
 | accepted foundation | Native packed normalized-QKV Stage 1 passed batch1/16, eight-step, eager/full-FP32-state/NPUGraph exact parity on physical NPU4. | Packed addressing and derived shape contracts are safe enough to admit raw normalization work. | ABI/storage correctness on the qualified 910B environment only. |
+| accepted source audit | The active decode path normalizes each Q/K head with FP32 square/sum/rsqrt, epsilon 1e-6 and a BF16 materialization boundary; the native recurrence maps three value heads to each Q/K head. | Preserve the exact arithmetic boundary and reuse each normalized shared Q/K head instead of blindly recomputing it per value head. | Source and cost-model guidance only; no new NPU or endpoint result. |
 | failed tooling | Two native builds were terminated by an unintended 30-second remote default; one later attempt found the dedicated container stopped. | Use an explicit asynchronous job timeout, poll the same operation, and inspect container/device state before any bounded retry. | Tool and environment handling only. |
 
 ## Current directional decision
 
 Continue the energy-Dk64 mainline with the uniquely named native operator
-stages. Stage 1 is complete at its strict claim ceiling. The next bounded step
-is raw packed Q/K normalization with FP32 square/sum/rsqrt, epsilon 1e-6, and
-the required BF16 materialization boundary. Gating is admitted only after that
-stage passes its predeclared numerical and NPUGraph gates. A fixed-output
-endpoint screen follows only if the graph path is materially promising; final
-LongBench-v2 and GSM8K remain last.
+stages. Stage 1 is complete at its strict claim ceiling. The Stage 2 source and
+multiplicity audit is complete, but implementation and NPU validation have not
+started. The next bounded step is raw packed Q/K normalization with FP32
+square/sum/rsqrt, epsilon 1e-6, the required BF16 materialization boundary, and
+reuse across value heads that share one Q/K head. Its numerical criterion must
+be declared before execution. Gating is admitted only after that stage passes
+its numerical and NPUGraph gates. A fixed-output endpoint screen follows only
+if the graph path is materially promising; final LongBench-v2 and GSM8K remain
+last.
 
 Do not resume MTP, speculative decoding, quantization, retraining, nearby
 Q/K-only selector search, simple heterogeneous widths, the K64 reduction

@@ -271,8 +271,13 @@
   caf98324fd5ac5f5177abb2d291d0fbc60e289b715c80871f7f01f4a8c1f5174.
   Its claim ceiling is packed addressing, shape derivation and unchanged
   recurrent ABI correctness on the qualified 910B environment. Resume with
-  Stage 2 raw packed-Q/K normalization behind a predeclared numerical gate;
-  gating, endpoint performance and accuracy remain unrun.
+  Stage 2 raw packed-Q/K normalization behind a predeclared numerical gate.
+  Its source/cost audit is complete: the active L2 path uses per-head FP32
+  square/sum/rsqrt with eps 1e-6 and a BF16 materialization boundary, while
+  the native loop maps three value heads to one Q/K head. A naive per-value-head
+  fusion would repeat normalization three times, so Stage 2 must reuse the
+  shared normalized Q/K or fail its cost gate. This is source evidence only;
+  gating, new NPU parity, endpoint performance and accuracy remain unrun.
 - Historical DRRQR success, rejection, invalid-run, and tooling experience is
   now routed through `drrqr-ascend-optimization-loop`, with the evidence
   summary in

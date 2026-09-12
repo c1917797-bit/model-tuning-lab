@@ -68,6 +68,7 @@ lessons_ingested:
   - Promote packed addressing and recurrent ABI correctness only to their declared claim ceiling; they admit normalization work but do not prove endpoint speedup.
   - Deriving head counts from packed width and state shape avoids a model-specific TP4 constant while retaining strict validation and backend qualification.
   - Use the AWMCP asynchronous job lane with an explicit timeout for native builds; a client wait timeout is not build evidence and must not trigger an automatic retry.
+  - Count fused work at the native loop's true head multiplicity. In this model one Q/K head is shared by three value heads, so a naive per-value-head implementation would compute the same normalization three times and could erase launch and materialization savings.
 
 current_result:
   source_cost_audit: passed_for_staged_implementation
@@ -80,6 +81,9 @@ current_result:
   stage1_parity_report_sha256: caf98324fd5ac5f5177abb2d291d0fbc60e289b715c80871f7f01f4a8c1f5174
   stage1_matrix: Physical NPU4, batch1/16, eight changing steps, exact BF16 output and full FP32 state, eager and NPUGraph, guards, untouched slots, pointers, metadata, and loaded-library identity all passed in one run.
   stage1_claim_ceiling: Packed addressing, shape derivation, storage, and unchanged recurrent ABI correctness on the qualified 910B environment only; no normalization, gating, service, performance, accuracy, or portability claim.
-  stage2_raw_normalization: not_started
+  stage2_raw_normalization: source_and_multiplicity_audit_complete_implementation_not_started
+  stage2_reference_semantics: The active vLLM FLA l2norm_fwd path performs per-head FP32 square, sum, rsqrt with eps 1e-6, materializes BF16 normalized Q/K, and only then enters the native recurrent operator.
+  stage2_cost_risk: The current native loop processes value heads while Nv/Nk is three; raw Q/K normalization must be reused within each shared-head group or explicitly account for threefold duplicate normalization before it can pass the graph cost screen.
+  stage2_claim_ceiling: Source-path and cost-model audit only; no new NPU numerical, performance, accuracy, or portability result.
   endpoint: not_run
   accuracy: not_run
