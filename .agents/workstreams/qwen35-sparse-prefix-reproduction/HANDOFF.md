@@ -2,6 +2,20 @@
 
 ## Current authoritative status (2026-09-12)
 
+FAILED CONTROL (terminal exit1): ma operation exec-00000000000002f3; exact container
+db88362e0e40 / qwen38_sparse_smoke_mDKrKl; artifact
+/cache/austinov/sparse-prefix-smoke-mDKrKl. Native cache, context640, maxlen4096,
+physical0-3 TP4; started from d343d9b. Container auto-removed.
+Cause: launcher replaced image PYTHONPATH with /patch, hiding CANN acl.so;
+workers failed importing acl before weight load. Original image PYTHONPATH
+resolves acl.so successfully in a device-free diagnostic. Launcher correction
+extends the image environment inside bash and gates acl import before model load.
+Failed run.log SHA256 b3155644add7be9a41d5aa135892f6f9fbe42cab8cd133ca034ddbaa86c42297.
+Do not rerun d343d9b launcher unchanged. Device preflight02eb/EXdD9x
+passed DEVICE_COUNT4. No external containers changed. Next after terminal success
+and resource release: paper arm with the identical640 stimulus, then token pairing.
+This is a correctness/mechanism control, not a rerun of the full user baseline.
+
 User-approved target is Qwen3.8-27B BF16 TP4. Historical Qwen3.5 directory
 names are not model identity. Either physical0-3 or physical4-7 may be used
 after live compute, lease, device initialization and memory checks.

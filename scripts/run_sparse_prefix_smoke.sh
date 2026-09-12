@@ -42,12 +42,12 @@ docker run --rm --name "$name" --network host --read-only --shm-size 8g \
  -v "$PWD/src":/patch:ro \
  -v "$artifact":/output \
  -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 \
- -e PYTHONPATH=/patch -e SPARSE_CONTEXT_REPEATS="${SPARSE_CONTEXT_REPEATS:-320}" \
+ -e SPARSE_CONTEXT_REPEATS="${SPARSE_CONTEXT_REPEATS:-320}" \
  -e OMP_NUM_THREADS=4 -e HCCL_BUFFSIZE=512 \
  -e VLLM_WORKER_MULTIPROC_METHOD=spawn \
  -e SPARSE_SMOKE_CACHE="${SPARSE_SMOKE_CACHE:-off}" \
  -e SPARSE_DEVICE_PREFLIGHT="${SPARSE_DEVICE_PREFLIGHT:-0}" \
  -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 \
- --entrypoint python3 \
+ --entrypoint /bin/bash \
  sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1 \
- /smoke.py 2>&1 | tee "$artifact/run.log"
+ -c 'export PYTHONPATH="/patch${PYTHONPATH:+:$PYTHONPATH}"; python3 -c "import acl; print(\"ACL_IMPORT_PASS\", acl.__file__, flush=True)" && exec python3 /smoke.py' 2>&1 | tee "$artifact/run.log"
