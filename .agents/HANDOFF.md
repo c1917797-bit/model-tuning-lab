@@ -258,8 +258,8 @@
   larger native DRRQR seam spanning packed QKV normalization, gating and
   recurrent state traffic; require a credible endpoint-share case before
   implementation.
-- The drrqr-dk64-native-packed-gating-recurrent-v1 source/cost audit now admits
-  a staged native candidate. The measured Dk64 packed front end is 61.383355 ms
+- The drrqr-dk64-native-packed-gating-recurrent-v1 iteration is now closed
+  after a failed Stage 2 numerical gate. The measured Dk64 packed front end is 61.383355 ms
   rank-mean and recurrent is 55.046810 ms in the existing diagnostic trace;
   these are not additive critical-path or endpoint forecasts. The plugin-owned
   native control also passed a new FP32-state batch1/16, eight-step eager and
@@ -270,14 +270,20 @@
   NPUGraph gate in one run. Report SHA256:
   caf98324fd5ac5f5177abb2d291d0fbc60e289b715c80871f7f01f4a8c1f5174.
   Its claim ceiling is packed addressing, shape derivation and unchanged
-  recurrent ABI correctness on the qualified 910B environment. Resume with
-  Stage 2 raw packed-Q/K normalization behind a predeclared numerical gate.
-  Its source/cost audit is complete: the active L2 path uses per-head FP32
-  square/sum/rsqrt with eps 1e-6 and a BF16 materialization boundary, while
-  the native loop maps three value heads to one Q/K head. A naive per-value-head
-  fusion would repeat normalization three times, so Stage 2 must reuse the
-  shared normalized Q/K or fail its cost gate. This is source evidence only;
-  gating, new NPU parity, endpoint performance and accuracy remain unrun.
+  recurrent ABI correctness on the qualified 910B environment. Stage 2 raw
+  packed-Q/K normalization then built after one concrete CANN event-API
+  correction. Two parity attempts were runtime-invalid because the complete
+  generated vendor bundle was not loaded. With matching op_api, opmaster and
+  opsproto loaded, the physical-NPU4 batch1 step1 result failed exact eager and
+  NPUGraph output plus full FP32-state comparison; guards, pointers, metadata,
+  dtype, finiteness and untouched slots remained valid. Report SHA256:
+  85fc61f57ff966a9502942e3354d1aec0122e5f8adb2be723d4e2d88f0b32808.
+  Failed code is preserved in commit 9dec2683c36bc6f44643d305e4ea2c75ff3eacee
+  and removed from the active safe tree by
+  c4348e006643eeec4803d3438ec329fbb736e92e. Do not run graph timing, endpoint, gating or accuracy for
+  this implementation. Resume with one source-only normalization exactness
+  audit; if no portable exact and material-cost route exists, leave this
+  fusion boundary and replan a larger DRRQR algorithm/state seam.
 - Historical DRRQR success, rejection, invalid-run, and tooling experience is
   now routed through `drrqr-ascend-optimization-loop`, with the evidence
   summary in
@@ -321,13 +327,14 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
    candidate and mechanism evidence, but only the separate `query_rewrite`
    performance workstream owns its frozen denominator, final quality gate,
    serving delivery contract, and performance acceptance decision.
-5. **Qwen3.8 DRRQR:** keep algorithm selection primary. The complete
-   all-48-layer equal-cost energy-selector width allocation was rejected, so
-   do not implement mixed-Dk cache/runtime support for it. The next bounded
-   decision must test one named selector or recurrence-compensation change
-   against the preserved teacher evidence. Only after numerical admission
-   should a concrete DRRQR candidate enter model integration, fixed-1024-token
-   endpoint screening, and targeted profiling. Final accuracy remains last.
+5. **Qwen3.8 DRRQR:** keep the joint algorithm/operator objective primary.
+   Energy-Dk64 remains the best development candidate, while the tested Stage
+   2 inline-normalization implementation is stopped at its numerical gate.
+   Run one source-only arithmetic exactness audit before deciding whether a
+   new exact primitive design is admissible; otherwise replan a materially
+   larger DRRQR algorithm/state seam. Only after numerical admission should a
+   concrete candidate enter graph screening, fixed-1024-token endpoint
+   testing, targeted profiling, and finally accuracy.
 
 Keep the distinction between three kinds of knowledge explicit:
 

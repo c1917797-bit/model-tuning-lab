@@ -71,6 +71,13 @@ reproduction.
   the dense control.
 - Do not retry a failed build or remote command merely because the client wait
   ended. Preserve the operation identity and prove terminal state first.
+- Treat generated CANN runtime identity as a vendor bundle, not one op_api
+  library. Load and hash the matching opmaster and opsproto from the same
+  packaged vendor root before interpreting an operator result.
+- If an arithmetic stage diverges at the first step while guards, pointers,
+  untouched slots and metadata remain valid, classify it as a numerical
+  failure. Stop performance and accuracy work; do not relabel the storage
+  checks as partial arithmetic acceptance or relax exactness after the fact.
 
 ## Iteration workflow
 
