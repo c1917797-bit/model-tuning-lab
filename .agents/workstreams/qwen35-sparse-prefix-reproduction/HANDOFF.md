@@ -1,6 +1,37 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
-## Objective and status
+## Current authoritative status (2026-09-12)
+
+User-approved target is Qwen3.8-27B BF16 TP4. Historical Qwen3.5 directory
+names are not model identity. Either physical0-3 or physical4-7 may be used
+after live compute, lease, device initialization and memory checks.
+
+Native cache repeat gate U9JADE passed: six natural-stop requests; identical
+tokens for each repeated question; all four repeat-round requests reused1536
+tokens. Raw smoke.json was inspected, not merely the PASS marker.
+This is native-cache feasibility, NOT paper activation or performance proof.
+The original operation0108 is no longer in the peer journal. Its run.log contains
+NATIVE_CACHE_REPEAT_GATE_PASS_NOT_PAPER_PROOF and shutdown records.
+Do not poll or restart this historical handle as a live experiment.
+
+Artifact root: /cache/austinov/sparse-prefix-smoke-U9JADE
+- smoke.json SHA256 a38dc58269be18d1e328ca4da279825e50307f56a7d15204d4552148e4a24be0
+- identity.json SHA256 a0653f32df768ed07b3a25edd3266c95ca91f724068cfba54fc2c1fce9ef9288
+- run.log SHA256 a661e0e2d325b6f18b67e8716bf7a126d7605ef9b788b23161f297a3f9dfce18
+
+Next: implement the paper's budgeted checkpoint selection/retention mechanism
+against the resolved native cache manager; prove selection and actual restoration
+before matched performance/quality measurement. Preserve native caching as the
+incremental-benefit comparator. The historical no-reuse TP4 baseline cannot
+attribute benefit specifically to the paper. No paper speedup is established.
+
+## Historical chronology (superseded status statements below)
+CURRENT: operation exec-0000000000000108 on ma submitted cross-block native
+cache gate. Poll exact handle before any new launch. Previous00fb exited1.
+ZGFLju resolved_runtime proves block_size1536 but prompts511/515 tokens:
+zero hits are explained by below-block stimulus, not demonstrated framework bug.
+New stimulus repeats context320 times and asserts block_size < prompt length
+and prompt length+128 <=2048 before requests. Output/hit gate unchanged.
 CURRENT OPERATION: exec-00000000000000fb (ma), same native-cache stimulus
 with resolved-runtime diagnostics from232289a. Poll before any launch.
 Prior00e0 is confirmed terminal exit1; this retry changes diagnostics only,

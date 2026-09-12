@@ -1,14 +1,15 @@
 {
   "task_id": "qwen35-sparse-prefix-reproduction",
   "parent_task": "qwen35-performance-delivery",
-  "status": "cpu_planner_verified_model_pending",
-  "objective": "Reproduce arXiv:2605.05219 and test Qwen3.5-27B performance and quality on Ascend 910B4",
+  "status": "native_cache_verified_paper_implementation_pending",
+  "objective": "Reproduce arXiv:2605.05219 and test user-approved Qwen3.8-27B BF16 TP4 performance and quality on Ascend 910B4",
   "branch": "work/qwen35-sparse-prefix-reproduction",
-  "physical_devices_allowed": [4, 5, 6, 7],
+  "physical_devices_allowed": [0, 1, 2, 3, 4, 5, 6, 7],
+  "allowed_four_card_lanes": [[0, 1, 2, 3], [4, 5, 6, 7]],
   "occupancy_rule": "Actual live compute processes; container device declarations alone do not block, per latest user authorization",
   "resource_lease_held": false,
   "controller": null,
   "model_test_completed": false,
-  "next_action": "Inspect exact official image runtime and Qwen3.5-27B identity, then real-weight restore-state smoke on physical NPU4-7",
+  "next_action": "Implement paper checkpoint selection and retention, then prove actual restoration and compare against native caching under a matched TP4 protocol",
   "constraints": ["no external workload mutation", "no original framework/image mutation", "BF16", "no retraining", "no quantization", "no speculative decoding"]
 }
