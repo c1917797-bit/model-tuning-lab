@@ -125,6 +125,12 @@ reproduction.
   work, surviving per-layer launches and an optimistic measured graph floor.
   If the corrected mechanism still cannot close the open endpoint gap before
   charging its added arithmetic, stop before code, build or NPU.
+- After closing the visible operator seams, express the open TPOT gap as a
+  fraction of the complete DRRQR-attributable sublayer budget. Partition
+  key/state, layout/fusion, value/output and whole-layer effects. Do not admit
+  another selector when perfect removal of its partition is insufficient; a
+  reopened program must name a mechanism whose affected fraction exceeds the
+  measured threshold with margin for launches and added work.
 
 ## Iteration workflow
 

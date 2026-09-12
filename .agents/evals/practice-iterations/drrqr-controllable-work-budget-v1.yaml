@@ -1,0 +1,87 @@
+schema: mst-practice-iteration/v1
+id: drrqr-controllable-work-budget-v1
+repository: model-tuning-lab
+status: complete
+date: 2026-09-13
+validated_commit: b32cf4fdcb68d688387b3de4bae6b919d9f60402
+
+stage_goal: Quantify the minimum full-path scale a materially different DRRQR mechanism must affect before any further algorithm, operator, NPU, or accuracy work is admitted.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen dense is 135.142469917 output tok/s, energy-Dk64 is 141.564496153, the fixed target is 148.656716909, and reciprocal-TPOT admission requires another 3.181664712 ms/token.
+  medium_term_milestone: Require a new DRRQR mechanism to affect enough source-bound GDN work to close the open gap after surviving launches and added work.
+  short_term_decision: Partition the validated Dk64 profile into key/state-only, packed-fusion, value/output, and complete-GDN budgets and state an explicit reopen threshold.
+  deciding_evidence: The frozen endpoint pair, exact four-rank 30-step Dk64 profile accounting, the measured fused-recurrent floor audit, and the held-out value-width rejection.
+  budget_or_stop_rule: One offline profile-derived budget map. Do not implement or run a candidate whose perfect source-bound ceiling is below the gap or whose required surviving floor is below observed target-runtime evidence.
+  on_pass: Admit only a named full-path DRRQR mechanism with an untouched downstream-fidelity gate and a portable operator plan.
+  on_failure: Keep the bounded negative conclusion and do not replace it with generic optimization, layer skipping, MTP, quantization, or training.
+  on_inconclusive: Bind at most one missing profile shape or call site if it can change the partition.
+
+evidence:
+  endpoint_pair:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/dk64-vs-dense-common-optimized.json
+    sha256: d222aa3a39fa0933c8f2c72d0fba405aae6aa32fcc95e5823d3911092ffdffbd
+  profile_pair:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/profile-comparison.v1.json
+    sha256: 9cca1cd11a9eecd12c6e45988505d767c92ac6aa41fe3a857445a50d5b64115b
+  component_accounting:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-two-sided-value-width-admission-v1/drrqr-two-sided-value-width-admission.v1.json
+    status: accepted_for_heldout_fidelity_screen
+  fused_floor_iteration: .agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml
+  value_width_iteration: .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
+
+profile_budget:
+  protocol: four ranks, 30 pure-decode steps, concurrency 16
+  drrqr_attributable_rank_mean_kernel_sum_ms:
+    qkvz_projection: 83.100735000
+    causal_conv: 27.899320000
+    qkvz_split: 4.197305000
+    qkv_slices: 11.808380000
+    packed_concat: 21.657215000
+    l2norm: 6.055360000
+    gating: 10.978735000
+    recurrent: 55.046810000
+    rms_norm: 7.918120000
+    output_projection: 39.859878750
+    total: 268.521858750
+  deliberately_optimistic_gdn_budget_per_step_ms: 8.950728625
+  warning: Kernel sums are not additive critical-path time. Treating every component as additive and perfectly removable favors candidate admission.
+
+scope_bounds:
+  required_tpot_reduction_ms: 3.181664712
+  required_fraction_of_optimistic_gdn_budget_percent: 35.546433
+  uniform_layer_equivalent_at_48_gdn_layers: 17.062288
+  key_state_only_perfect_credit_ms: 2.927359563
+  key_state_only_shortfall_ms: 0.254305148
+  key_state_definition: Perfect removal of the remaining Q/K share of QKVZ projection and convolution, two Q/K slice calls, all L2 normalization, and the entire recurrent kernel, without charging surviving work.
+  key_plus_full_packed_perfect_credit_ms: 3.780470952
+  key_plus_full_packed_note: This crosses only by treating all QKV slices and concat plus the full recurrent kernel as removable. The measured per-layer graph-floor iteration rejects that physical implementation family.
+  value_output_note: Dv reduction is the only tested structural route with enough broad component coverage, but locked Dv64 and Dv48 failed every held-out downstream fidelity and robustness family.
+
+reopen_contract:
+  required_mechanism_scale: Remove or structurally avoid more than 35.546433 percent of the optimistic GDN budget, or provide a stronger measured endpoint argument, while retaining enough margin for launches and added work.
+  required_algorithm_property: Remain recognizably DRRQR/state-rank work; generic model-layer skipping or an unrelated acceleration method does not satisfy the objective.
+  required_fidelity: A locked fit/untouched downstream-output gate must change the existing value-width and Q/K-only evidence before NPU implementation.
+  required_portability: Separate logical state representation from backend tiling and provide capability dispatch plus a correctness fallback; performance remains environment-qualified.
+
+validation_commands:
+  - Recompute all component sums from the frozen Dk64 profile and exact call-shape accounting.
+  - Compare key/state-only and packed-fusion bounds with the fixed reciprocal-TPOT gap.
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+outcome:
+  class: bounded_negative_budget_map
+  evidence_level: frozen endpoint plus target-runtime diagnostic profile and prior numerical/fidelity gates
+  decision: No existing Dk-only, cache-only, or per-layer packed-fusion candidate meets the reopen contract. Do not spend NPU time until a materially different DRRQR mechanism crosses this scale and untouched-fidelity threshold.
+  claim_ceiling: This is a target-stack admission bound, not a theorem about every future DRRQR formulation or another Ascend environment.
+  code_changed: false
+  npu_used: false
+  endpoint_used: false
+  accuracy_used: false
+
+lessons_ingested:
+  - Translate the remaining endpoint gap into a fraction of the entire algorithm-attributable sublayer budget, not just the next visible kernel.
+  - A new selector is irrelevant when perfect key/state removal itself cannot close the gap.
+  - Require a mechanism-scale threshold before reopening a closed research program.

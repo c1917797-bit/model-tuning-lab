@@ -130,6 +130,29 @@ and recurrence, so this bound already favors the candidate. No correction,
 build, NPU, endpoint or accuracy run was started. See
 `.agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml`.
 
+## Remaining mechanism-scale threshold
+
+The validated Dk64 profile was also partitioned into every source-bound GDN
+component: QKVZ/output projections, convolution, layout, L2, gating,
+recurrent, and post-recurrent RMS. Their deliberately additive total is
+8.950729 ms/token. Closing the 3.181665 ms/token gap therefore requires a new
+mechanism to remove at least 35.55 percent of the whole optimistic GDN budget,
+equivalent to about 17.1 of 48 uniformly costed GDN layers.
+
+Perfect removal of the remaining key/state partition alone is only
+2.927360 ms/token and still misses. Counting all packed layout work can make a
+paper ceiling cross, but its surviving measured per-layer graph floor is what
+the fused-recurrent audit already rejected. The broader value/output route had
+enough paper headroom but failed the locked held-out fidelity gates by large
+margins.
+
+Consequently another coordinate selector, cache allocator, or per-layer launch
+fusion cannot reopen the program. A future candidate must name a structurally
+different DRRQR state representation affecting more than 35.55 percent of GDN
+work, pass an untouched downstream-output gate, and retain physical margin for
+its launches and added arithmetic. See
+`.agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml`.
+
 ## Reopen condition
 
 Reopen only as a new bounded program around a materially different, named

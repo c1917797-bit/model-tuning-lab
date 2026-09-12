@@ -39,6 +39,14 @@
   remains 0.176751 ms/token short of the required 3.181665 ms/token before
   charging any fused arithmetic or the real FP32 state. No code, build, NPU,
   endpoint or accuracy run followed. Do not repair Stage2 for this target.
+- The drrqr-controllable-work-budget-v1 map is complete. All source-bound GDN
+  components sum to an intentionally additive 8.950729 ms/token; the open
+  3.181665 ms/token gap is 35.55 percent, or about 17.1/48 uniform GDN-layer
+  equivalents. Perfect removal of the remaining key/state partition is only
+  2.927360 ms/token. Packed fusion crosses only before the already-measured
+  per-layer graph floor, while value/output reduction failed locked held-out
+  fidelity. Require a structurally different DRRQR state representation
+  affecting more than 35.55 percent of GDN work before any new NPU run.
 - The real captured-teacher fixed-beta screen is complete and rejected:
   144/144 dense128/energy64/beta64 trajectories passed numerical and graph
   gates, but beta64 failed 5/144 robustness windows despite a 0.888847 global
@@ -516,6 +524,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml
+.agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
