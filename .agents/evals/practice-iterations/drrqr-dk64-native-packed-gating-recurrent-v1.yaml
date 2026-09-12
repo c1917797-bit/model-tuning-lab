@@ -3,7 +3,7 @@ id: drrqr-dk64-native-packed-gating-recurrent-v1
 repository: model-tuning-lab
 status: in_progress
 date: 2026-09-12
-validated_commit: pending
+validated_commit: 96bbc1feef45dea60803aebbf2aa6a7f9686ba27
 
 stage_goal: Build and qualify a uniquely named native Ascend DRRQR operator that can consume packed decode QKV and remove the measured normalization, gating, and recurrent state-traffic boundary without changing energy-Dk64 semantics.
 
