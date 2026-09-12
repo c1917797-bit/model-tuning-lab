@@ -81,11 +81,12 @@ skills:
   - id: drrqr-ascend-optimization-loop
     path: .agents/skills/drrqr-ascend-optimization-loop
     status: experimental
-    purpose: Preserve DRRQR-specific Ascend algorithm/operator decisions, evidence gates, portability obligations, and proven stop rules.
+    purpose: Preserve DRRQR-specific Ascend algorithm/operator decisions, source-duplication and endpoint-headroom admission gates, portability obligations, and proven stop rules.
     triggers:
       - start resume or review DRRQR optimization on Ascend
       - select a DRRQR algorithm or native operator iteration
       - ingest DRRQR success failure invalid or rejected experience
+      - reject duplicate or insufficient-headroom DRRQR implementation work before coding
     scope:
       - projects/drror_vllm_ascend/**
       - .agents/evals/practice-iterations/drrqr-*.yaml

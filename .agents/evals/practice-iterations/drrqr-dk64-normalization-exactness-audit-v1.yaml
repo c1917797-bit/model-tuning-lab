@@ -1,7 +1,7 @@
 schema: mst-practice-iteration/v1
 id: drrqr-dk64-normalization-exactness-audit-v1
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: 2026-09-12
 validated_commit: pending
 
@@ -15,7 +15,7 @@ goal_chain:
   deciding_evidence: A source-level operation-order and dtype-boundary comparison tied to exact commits and hashes, plus a head-multiplicity, UB, data-movement, and launch cost model against the existing separate l2norm path.
   budget_or_stop_rule: One source-and-cost audit only. Do not patch the operator, build, run NPU parity, profile, start a service, or run accuracy in this iteration.
   on_pass: Open a new implementation iteration with an independently named or versioned operator, a predeclared exact NPU gate, complete vendor-bundle identity, and an explicit portability dispatch contract.
-  on_failure: Stop normalization fusion and open a direct aligned-Dk64 projection-weight slicing plus state-layout integration iteration that removes Dk-dependent upstream work while preserving a dense-prefill fallback and graph/cache identity.
+  on_failure: Stop normalization fusion. Do not open projection-weight or convolution-row slicing because the active uniform Dk64 weight transformer already performs both before the original loader and TP sharding. Return to a source-only admission of a materially different DRRQR algorithm/state mechanism with a new fidelity and endpoint-headroom argument.
   on_inconclusive: Run at most one source-only disambiguation if it can decide exactness or the material cost case; otherwise take the failure branch.
 
 authoritative_evidence:
@@ -43,10 +43,33 @@ portability_contract:
   implementation: Derive shapes and head grouping from tensors, use supported backend primitives, version the opt-in operator, and retain the current separate l2norm plus recurrent fallback.
   evidence_boundary: Passing this audit is source and cost admission only; every implementation still requires per-environment NPU numerical, graph, endpoint, and final accuracy evidence.
 
+current_result:
+  outcome: rejected
+  decision: The active Triton L2 path and failed AscendC Stage 2 are algebraically similar, but the observed bitwise contract depends on the Triton reduction tree, compiler lowering, math.rsqrt, FP fusion settings, and BF16 truncation. No supported portable CANN primitive was found that guarantees the same compiled reduction and rounding contract.
+  active_ttir: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-normalization-exactness-audit-v1/l2norm_fwd_kernel2.ttir
+  active_ttir_sha256: 34d8e2bbbafcd197cf91fdf1e1cacd230e06be766833bbc98c66e3ec45b71d56
+  active_npubin_sha256: 5bf915acfcdb2a808435a08fe6602bceef1f6c0584ebe9ecb08c04b6b2b8c5d3
+  target: Ascend910B4
+  l2_ms_per_decode_step: 0.20184533333333335
+  packed_front_ms_per_decode_step: 2.0461118333333332
+  required_tpot_reduction_ms: 3.1816648009431248
+  perfect_l2_throughput_ceiling_percent: 0.3035837051289958
+  perfect_packed_front_throughput_ceiling_percent: 3.1652355531414544
+  additional_recurrent_fraction_after_perfect_front_removal_percent: 61.88658167166044
+  duplicate_work_audit: The active DrrqrPlan.transform_weights already index-selects retained Q/K projection rows and matching convolution rows before the original model loader and TP sharding; direct Dk64 slicing is not a new branch.
+  claim_ceiling: Source, compiled-artifact, and optimistic cost rejection only. No new NPU, graph timing, endpoint performance, or accuracy result was produced.
+  next_action: Admit a materially different DRRQR algorithm/state transformation only after proving it is not already implemented, improves held-out recurrent output rather than a state proxy alone, and has a credible Dk-specific path to at least the remaining approximately 3.182 ms per-token TPOT reduction.
+
 changes:
   - type: docs
-    description: Record the bounded post-failure decision loop and its explicit pivot to a larger DRRQR-specific projection/state seam.
-    files: [.agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml]
+    description: Close the bounded post-failure audit, preserve compiled-source and cost evidence, reject the insufficient normalization seam, and correct the duplicate projection-slicing next action.
+    files:
+      - .agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml
+      - .agents/skills/drrqr-ascend-optimization-loop/SKILL.md
+      - .agents/skills.registry.yaml
+      - projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DK64_NORMALIZATION_EXACTNESS_AUDIT.md
+      - projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md
+      - .agents/HANDOFF.md
 
 validation_commands:
   - parse this YAML with yaml.safe_load
@@ -59,4 +82,10 @@ lessons_ingested:
     severity: high
   - lesson: If exact normalization cannot be folded with material savings, move to a larger DRRQR-specific Dk-dependent projection and state seam instead of accumulating launch-only optimizations.
     destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md
+    severity: high
+  - lesson: Algebraic equivalence across Triton and AscendC is not a portable bitwise contract; compiler reduction and rounding behavior must be treated as part of the numerical boundary.
+    destination: .agents/skills/drrqr-ascend-optimization-loop/SKILL.md
+    severity: high
+  - lesson: Before starting a planned optimization, prove that the active plugin does not already implement it and that perfect removal of the measured seam can materially close the endpoint gap.
+    destination: .agents/skills/drrqr-ascend-optimization-loop/SKILL.md
     severity: high

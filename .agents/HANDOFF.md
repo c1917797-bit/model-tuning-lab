@@ -329,12 +329,15 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
    serving delivery contract, and performance acceptance decision.
 5. **Qwen3.8 DRRQR:** keep the joint algorithm/operator objective primary.
    Energy-Dk64 remains the best development candidate, while the tested Stage
-   2 inline-normalization implementation is stopped at its numerical gate.
-   Run one source-only arithmetic exactness audit before deciding whether a
-   new exact primitive design is admissible; otherwise replan a materially
-   larger DRRQR algorithm/state seam. Only after numerical admission should a
-   concrete candidate enter graph screening, fixed-1024-token endpoint
-   testing, targeted profiling, and finally accuracy.
+   2 inline-normalization implementation is stopped at its numerical gate and
+   its source/cost audit is now rejected. The separate L2 seam and even the
+   whole packed front end are too small to close the remaining gap, and direct
+   Dk64 projection/convolution slicing is already active. Resume with a
+   materially different DRRQR algorithm/state mechanism whose held-out
+   recurrent-output fidelity and endpoint headroom are established before
+   implementation. Only after numerical admission should a concrete candidate
+   enter graph screening, fixed-1024-token endpoint testing, targeted
+   profiling, and finally accuracy.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -357,6 +360,12 @@ Keep the distinction between three kinds of knowledge explicit:
   Paper-to-Ascend experiment. The MTP paper candidate is no longer an allowed
   implementation route for the performance objective and no longer claims
   NPU0-3.
+- Closed the Dk64 normalization exactness audit without another NPU run. The
+  compiled Triton artifact proves a compiler-specific reduction/rsqrt/BF16
+  boundary; perfect L2 removal is only about 0.304 percent and perfect packed
+  front removal about 3.165 percent versus the remaining 5.010 percent
+  throughput gap. Source audit also proved existing Dk64 weight and convolution
+  row slicing, preventing a duplicate next iteration.
 
 ## 4. Current Action
 
@@ -378,17 +387,17 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. For Qwen3.8 DRRQR, treat the completed and independently audited
-   drrqr-rich-state-calibration-capture-v1 corpus as frozen selector input and
-   the corrected recurrent-transition-selector-v2 and porp-cv-v1 results as
-   rejections of bounded coordinate exchange and sparse subspace replacement.
-   Do not tune nearby Q/K score or pairwise-projection variants. Predeclare a
-   dense-prefill to aligned-Dk64-decode transition, including state/conv-cache
-   conversion, scheduler and graph identity, and a dual-path weight strategy
-   with a portable fallback.
-   Do not implement the rejected mixed-Dk cache plan, broaden profiling, or run
-   final accuracy before a replacement candidate passes its numerical gate and
-   a fixed-1024-token endpoint screen.
+2. For Qwen3.8 DRRQR, read the completed
+   drrqr-dk64-normalization-exactness-audit-v1 record and
+   DK64_NORMALIZATION_EXACTNESS_AUDIT.md. Do not retry inline normalization,
+   weaken its exact gate, or reopen projection/convolution slicing already
+   performed by DrrqrPlan.transform_weights. Select a materially different
+   algorithm/state transformation only after a source-duplication audit, a
+   held-out recurrent-output fidelity criterion, and an optimistic
+   Dk-specific endpoint-headroom calculation show it can address a material
+   portion of the remaining approximately 3.182 ms per-token gap. Do not
+   broaden profiling or run final accuracy before that candidate passes its
+   numerical gate and a fixed-1024-token endpoint screen.
 3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
 4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
@@ -473,11 +482,13 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-full-layer-sensitivity-budget-v1.yaml
 .agents/evals/practice-iterations/drrqr-recurrent-trajectory-selector-v1.yaml
 .agents/evals/practice-iterations/drrqr-pairwise-orthogonal-projection-v1.yaml
+.agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-captured-reference.v2.summary.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-width-curve.v1.summary.json
+projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DK64_NORMALIZATION_EXACTNESS_AUDIT.md
 ```
 
 HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.

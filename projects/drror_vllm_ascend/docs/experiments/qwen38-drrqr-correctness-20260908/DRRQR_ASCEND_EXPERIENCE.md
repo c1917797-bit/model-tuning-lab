@@ -16,7 +16,7 @@ promising development baseline, not an accepted result. Its selector is an
 experimental joint normalized Q/K energy top-k rule, not the paper-exact
 StrongRRQR implementation.
 
-## Nine durable conclusions
+## Twelve durable conclusions
 
 1. The frozen dense contract is reusable until a material model, runtime,
    common-optimization, topology, device, or workload change occurs.
@@ -43,6 +43,17 @@ StrongRRQR implementation.
 9. A generated CANN operator is identified by its complete packaged vendor
    bundle. Loading op_api without the matching opmaster and opsproto can fail
    before execution and is runtime-invalid evidence, not an algorithm result.
+10. Algebraically identical normalization is not automatically bitwise
+    identical or portable across Triton and AscendC. Reduction topology,
+    compiler lowering, rsqrt behavior, fusion and BF16 truncation belong to the
+    observed numerical contract.
+11. A measured seam needs an endpoint-headroom gate before implementation.
+    Here, perfect removal of L2 normalization is only about 0.304 percent and
+    perfect removal of the entire packed front end only about 3.165 percent,
+    below the remaining 5.010 percent candidate throughput gap.
+12. A next-action note is a hypothesis, not proof that work is missing. The
+    active Dk64 transformer already slices retained Q/K projection and matching
+    convolution rows; source and trace audits prevented a duplicate branch.
 
 ## Outcome classes and recovery rules
 
@@ -74,22 +85,24 @@ StrongRRQR implementation.
 | accepted foundation | Native packed normalized-QKV Stage 1 passed batch1/16, eight-step, eager/full-FP32-state/NPUGraph exact parity on physical NPU4. | Packed addressing and derived shape contracts are safe enough to admit raw normalization work. | ABI/storage correctness on the qualified 910B environment only. |
 | accepted source audit | The active decode path normalizes each Q/K head with FP32 square/sum/rsqrt, epsilon 1e-6 and a BF16 materialization boundary; the native recurrence maps three value heads to each Q/K head. | Preserve the exact arithmetic boundary and reuse each normalized shared Q/K head instead of blindly recomputing it per value head. | Source and cost-model guidance only; no new NPU or endpoint result. |
 | failed implementation | Raw packed Q/K normalization built after one concrete CANN event-API correction. Two runs were runtime-invalid until the complete generated vendor bundle was loaded; the first valid physical-NPU4 execution then diverged in both output and full FP32 state at batch1 step1 in eager and NPUGraph while guards, pointers, metadata and untouched slots remained valid. | Storage safety does not admit arithmetic. Stop this implementation before graph timing, endpoint, gating, or accuracy; preserve the exact failure and recover the Stage 1 safe tree. | First-step numerical failure on the tested 910B environment only. |
+| rejected source/cost audit | The active Dk64 Triton artifact exposes a compiler-specific reduction/rsqrt/BF16 boundary, while the separate L2 seam is only 0.201845 ms per step and the full packed front end only 2.046112 ms versus a required 3.181665 ms optimistic TPOT reduction. | Do not assume cross-compiler bitwise equivalence or build a candidate whose perfect-removal ceiling cannot materially close the gap. | Source, compiled-artifact and optimistic cost rejection only; no new NPU or endpoint result. |
+| corrected next action | The active weight transformer already index-selects Q/K projection and convolution rows before loading and sharding. | Audit loaded behavior before opening a planned optimization; do not duplicate an existing saving. | Plugin source and existing trace-shape evidence only. |
 | failed tooling | Two native builds were terminated by an unintended 30-second remote default; one later attempt found the dedicated container stopped. | Use an explicit asynchronous job timeout, poll the same operation, and inspect container/device state before any bounded retry. | Tool and environment handling only. |
 
 ## Current directional decision
 
 Continue the energy-Dk64 DRRQR mainline, but stop the tested inline raw-Q/K
-normalization implementation. Stage 1 remains the accepted safe foundation;
-the failed Stage 2 code is preserved in Git history and reverted from the
-active tree. The next bounded iteration is a source-and-arithmetic exactness
-audit: identify the earliest semantic difference between the active
-l2norm_fwd path and the failed inline implementation, and decide whether a
-portable exact primitive can be folded without erasing the measured seam. It
-does not authorize another NPU retry. If the audit cannot support both exact
-semantics and a material cost case, abandon this fusion boundary and replan a
-DRRQR algorithm/state transformation against a larger measured bottleneck.
-A fixed-output endpoint screen still follows only after a new candidate passes
-its numerical and graph gates; final LongBench-v2 and GSM8K remain last.
+normalization implementation and close its exactness audit as rejected. Stage
+1 remains the accepted safe foundation; the failed Stage 2 code is preserved
+in Git history and reverted from the active tree. The audit found neither a
+portable same-lowering bitwise primitive nor enough endpoint headroom: perfect
+removal of the whole packed front end is still smaller than the open gap.
+Direct Dk64 projection/convolution slicing is not the next branch because it is
+already active. Re-enter algorithm/state design with a materially different
+DRRQR mechanism and predeclare held-out recurrent-output fidelity plus a
+Dk-specific endpoint-headroom case before implementation. A fixed-output
+endpoint screen still follows only after a new candidate passes its numerical
+and graph gates; final LongBench-v2 and GSM8K remain last.
 
 Do not resume MTP, speculative decoding, quantization, retraining, nearby
 Q/K-only selector search, simple heterogeneous widths, the K64 reduction

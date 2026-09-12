@@ -48,6 +48,11 @@ reproduction.
    predeclared arithmetic criteria before execution. Count work at the actual
    head and sequence multiplicity: shared Q/K heads can make a naive
    per-value-head fusion recompute normalization and lose despite fewer launches.
+7. Before opening an implementation iteration, run two source-only admission
+   checks. First prove the proposed saving is not already active in the plugin
+   or loaded model path. Then translate the measured seam into a deliberately
+   optimistic endpoint ceiling. If perfect removal cannot close a material
+   part of the current joint gap, stop before code, build, NPU, or service work.
 
 ## Reusable failure and stop rules
 
@@ -78,6 +83,19 @@ reproduction.
   untouched slots and metadata remain valid, classify it as a numerical
   failure. Stop performance and accuracy work; do not relabel the storage
   checks as partial arithmetic acceptance or relax exactness after the fact.
+- Do not infer portable bitwise equivalence from algebraically identical
+  reductions or reciprocal-square-root expressions across Triton and AscendC.
+  Reduction topology, compiler lowering, fusion and final BF16 truncation are
+  part of the observed numerical contract. A different implementation needs
+  its own predeclared numerical criterion.
+- Do not reopen projection or convolution slicing merely because it appears in
+  a next-step note. Audit the active weight transformer and trace shapes first;
+  the current uniform Dk64 path already selects Q/K projection and matching
+  convolution rows before the original loader and TP sharding.
+- Stop a launch/fusion branch when even its perfect endpoint ceiling is below
+  the open gap. In the frozen Dk64 profile, separate L2 normalization is only
+  about 0.202 ms per decode step and the full packed front end about 2.046 ms;
+  neither can alone supply the required approximately 3.182 ms TPOT reduction.
 
 ## Iteration workflow
 
@@ -85,18 +103,20 @@ reproduction.
    and the actual model/operator path.
 2. Restate the still-open joint gap and name one medium-term DRRQR capability
    that can materially close it.
-3. Admit one bounded short experiment with pass, rejected, failed, invalid and
+3. Prove the proposed work is not already active and calculate its optimistic
+   endpoint ceiling from the frozen profile before treating it as a candidate.
+4. Admit one bounded short experiment with pass, rejected, failed, invalid and
    inconclusive exits declared before implementation.
-4. Prefer the cheapest faithful gate: source/foldability, held-out trajectory,
+5. Prefer the cheapest faithful gate: source/foldability, held-out trajectory,
    target-NPU numerical/state, integrated activation, endpoint, then accuracy.
-5. Adapt an operator only when it removes a measured DRRQR-specific seam or is
+6. Adapt an operator only when it removes a measured DRRQR-specific seam or is
    required for a valid logical-rank/state design.
-6. Require exact source/build/load identities and preserve all negative
+7. Require exact source/build/load identities and preserve all negative
    artifacts outside Git with hashes in the iteration record.
-7. Promote one evidence level at a time. On failure, recover the active tree;
+8. Promote one evidence level at a time. On failure, recover the active tree;
    on rejection, stop the tested variant; on invalidity, repair comparability
    without assigning an algorithm trend.
-8. Recheck long-, medium-, and short-term alignment before choosing the next
+9. Recheck long-, medium-, and short-term alignment before choosing the next
    loop. Commit and push the coherent checkpoint.
 
 ## Portability review
