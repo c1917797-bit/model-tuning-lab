@@ -1,5 +1,14 @@
 # Maintainer Handoff
 
+## Repository integration update — 2026-09-12
+
+Integrated the validated DRRQR paper-parity and source-selection/baseline
+lessons. Exact source: `4617c5e4ccd8f4dc1c996bfc9b64f3f44bb30b72`;
+target parent: `80cf967c929dc40842f47a15f0601b0a9b7b686a`.
+See `docs/BRANCH_CONSOLIDATION_20260912.md` for retention and remaining work.
+The older runtime descriptions below are historical, not current occupancy.
+
+
 ## 0. Status
 
 - Last updated: 2026-09-09.

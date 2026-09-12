@@ -30,7 +30,37 @@ an Ascend implementation is worth attempting.
 7. Record uncertainty explicitly. Unknown architecture or runtime prerequisites
    route to `ascend-architecture-fit` or `ascend-source-map`, not implementation.
 
-## Output
+## Source-backed migration selection
+
+When the user wants a new GPU-to-Ascend contribution, distinguish that objective
+from reproducing or adopting an existing Ascend implementation. Rank candidates
+by a concrete missing target capability and measured opportunity, not by paper
+headline speedup or the mere existence of a repository.
+
+- Record the exact title/version and whether the source is a research paper,
+  competition technical report, or engineering repository. Do not silently
+  substitute one for a user-required publication type.
+- Verify the paper-to-code link, core implementation files, fixed commit,
+  reference tests, supported shapes/dtypes, and redistribution license. An
+  empty repository, framework dependency, or related implementation does not
+  satisfy a requirement for the paper's source. Public visibility alone does
+  not establish permission to redistribute it.
+- Check target implementations and relevant PRs. Keep proposed, implemented,
+  merged, released, installed, activated, and validated states separate. A
+  shared name such as GDN, solve_tri, or fused prefill does not establish that
+  two implementations use the same paper algorithm.
+- Record author baseline and workload before quoting gains. A competition
+  reference, eager framework, or cache-disabled denominator is not equivalent
+  to the installed optimized serving baseline. A failed search means source
+  availability is unconfirmed, not that no code exists.
+- Recommend a bounded candidate with explicit unknowns. Do not describe a
+  source-compatible method as high-probability or proven on the target model
+  before architecture, missing-implementation, and bottleneck checks pass.
+
+For the motivating cases and evidence boundaries, read
+[selection and baseline lessons](references/selection-baseline-lessons.md).
+
+## Ingestion note
 
 Produce a concise paper ingestion note suitable for an experiment record or
 workstream handoff:

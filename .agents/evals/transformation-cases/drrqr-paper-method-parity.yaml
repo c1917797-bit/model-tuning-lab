@@ -1,0 +1,31 @@
+schema: mst-transformation-case/v1
+id: drrqr-paper-method-parity
+source: DRRQR no-training Ascend migration retrospective
+scenario:
+  paper_result_requires:
+    - StrongRRQR coordinate selection
+    - paper calibration protocol
+    - rank reduction
+    - training-based quality recovery
+  requested_target:
+    - no retraining
+    - no accuracy decline
+    - at least 10 percent end-to-end throughput gain
+  proposed_port:
+    - substitute energy selector
+    - use a different calibration corpus
+    - omit training-based recovery
+expected_behavior:
+  - create a stage-by-stage method parity ledger before implementation
+  - label the proposed port derivative rather than paper-exact
+  - identify no-retraining quality recovery as an unproven stronger research gap
+  - prevent backend-invalid ranks from becoming algorithm evidence
+  - require a credible replacement gate before spending NPU time on final acceptance
+lessons_ingested:
+  - headline-operation parity is not method-result parity
+  - user constraints must be checked against every result-bearing paper stage
+  - selector corpus recovery and runtime-path changes define algorithm identity
+  - backend invalidity and mathematical rejection require separate decisions
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check
