@@ -3,7 +3,7 @@ id: drrqr-two-sided-value-width-admission-v1
 repository: model-tuning-lab
 status: done
 date: 2026-09-12
-validated_commit: pending
+validated_commit: 1b295bff26fa5fdc6ff065d84b4216d942dd7277
 
 stage_goal: Decide whether an experimental Dk64 plus aligned value/state-width reduction has a structurally foldable path, a trustworthy held-out corpus, and enough corrected Ascend endpoint headroom to justify one offline fidelity screen.
 
@@ -96,4 +96,3 @@ lessons_ingested:
   - lesson: Preserve DRRQR attribution with four structural arms so value-width pruning cannot silently replace the named Dk64 method.
     destination: candidate contract
     severity: high
-
