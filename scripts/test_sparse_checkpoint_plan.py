@@ -4,7 +4,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from model_tuning_lab.sparse_checkpoint_plan import plan_checkpoints, restorable_position
+from model_tuning_lab.sparse_checkpoint_plan import (
+    plan_checkpoints, restorable_position, split_at_checkpoint, publication_mask)
 
 
 def cost(histogram, positions):
@@ -39,4 +40,11 @@ for bad in ([float("nan")], [-1], [float("inf")]):
         pass
     else:
         raise AssertionError("invalid histogram accepted")
-print(f"PASS {cases} exhaustive aligned plans; NOT runtime/model/performance proof")
+assert split_at_checkpoint([1536, 3072], 0, 4608, 5000) == 1536
+assert split_at_checkpoint([1536, 3072], 1536, 3072, 5000) == 1536
+assert split_at_checkpoint([1536], 0, 0, 5000) == 0
+assert split_at_checkpoint([1536], 5000, 1, 5000) == 1
+assert split_at_checkpoint([1536], 0, 512, 5000) == 512
+assert publication_mask([1536, 4608], 0, 4, 1536) == [True, False, True, False]
+assert publication_mask([1536, 4608], 1, 3, 1536) == [False, True]
+print(f"PASS {cases} exhaustive aligned plans and scheduler/publication boundaries; NOT runtime/model/performance proof")

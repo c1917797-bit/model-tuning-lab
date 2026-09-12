@@ -25,6 +25,17 @@ restore-position selector. It is NOT wired into vLLM; it does not retain or
 restore tensors. scripts/test_sparse_checkpoint_plan.py compares plans to an
 exhaustive oracle at block sizes1/2/3/1536. Never claim this as model activation.
 
+Runtime adapter draft: src/model_tuning_lab/sparse_runtime.py is opt-in only,
+not connected to the launcher. It fingerprints imported scheduler/Mamba source,
+splits native-approved prefill at selected boundaries and masks state publication.
+It preserves native refcounts/eviction and same-step readiness bookkeeping.
+Native free_blocks retains hashes until eviction; do not add permanent references
+under the mistaken assumption that freeing destroys a checkpoint.
+Contract tests use fake objects and do NOT prove real scheduler or worker behavior.
+Next must test against pinned image classes, inject in engine before construction,
+prove actual selected state copy/restoration, and compare matched native caching.
+The adapter currently has no worker-copy instrumentation and no live validation.
+
 Next: implement the paper's budgeted checkpoint selection/retention mechanism
 against the resolved native cache manager; prove selection and actual restoration
 before matched performance/quality measurement. Preserve native caching as the

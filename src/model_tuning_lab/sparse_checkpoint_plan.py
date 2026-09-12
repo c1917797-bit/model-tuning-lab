@@ -61,3 +61,31 @@ def restorable_position(positions, overlap_tokens, kv_coverage_tokens):
     """Never restore a recurrent state beyond either matching or retained KV."""
     limit = min(overlap_tokens, kv_coverage_tokens)
     return max((p for p in positions if 0 < p <= limit), default=0)
+
+
+def split_at_checkpoint(positions, computed_tokens, native_new_tokens, prompt_tokens):
+    """Shorten an already native-approved prefill step at the next checkpoint.
+
+    Never extend a scheduler allocation, force progress when native returns zero,
+    or split decode. The runtime still owns alignment and admission checks.
+    """
+    if native_new_tokens < 0 or computed_tokens < 0:
+        raise ValueError("negative scheduler token count")
+    if computed_tokens >= prompt_tokens or not native_new_tokens:
+        return native_new_tokens
+    end = computed_tokens + native_new_tokens
+    boundary = min((p for p in positions if computed_tokens < p < end
+                    and p <= prompt_tokens), default=end)
+    return boundary - computed_tokens
+
+
+def publication_mask(positions, start_block, end_block, block_size):
+    """Publish selected complete state blocks only, never null or partial state.
+
+    Native cache_full_blocks additionally filters null blocks. Unselected state
+    blocks remain valid running state but are not advertised as reusable cache.
+    """
+    if block_size <= 0 or start_block < 0 or end_block < start_block:
+        raise ValueError("invalid block interval")
+    chosen = frozenset(positions)
+    return [(i + 1) * block_size in chosen for i in range(start_block, end_block)]
