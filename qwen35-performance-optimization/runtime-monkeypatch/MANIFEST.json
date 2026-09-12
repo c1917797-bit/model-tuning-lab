@@ -27,6 +27,15 @@
     "decode_range_modified": false,
     "rationale": "bounded prefill MMAR is the retained TTFT component; decode still requires a separately validated project-specific component to clear the current 10 percent TPOT gate"
   },
+  "candidate_t21_dense_mlp": {
+    "status": "public_bridge_and_zero_copy_layout_passed_tp4_service_pending",
+    "enabled_by": "QWEN35_ASCEND_T21_DENSE_MLP=1",
+    "upstream_operator_sha256": "ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb",
+    "public_bridge_sha256": "878091b05f3556f62ac94089faedfff211b859d205463c93d7cd45f5d57e46bf",
+    "shape_contract": "Qwen3.5-27B BF16 TP4, M=1..16, local 5120->8704->4352->5120",
+    "project_delta": "traceable torch op registration, exact-shape admission, zero-copy model-weight views, existing vLLM TP AllReduce composition",
+    "rollback": "set QWEN35_ASCEND_T21_DENSE_MLP=0 and restart"
+  },
   "framework": "vLLM-Ascend 0.23.0",
   "hardware": "Ascend 910B4",
   "historical_implementation_provenance": {
@@ -77,7 +86,10 @@
       "errors": 0,
       "natural_eos": true,
       "response_sha256_matched_control": true
-    }
+    },
+    "t21_public_bridge_build": "/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v2",
+    "t21_zero_copy_numerical": "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912T173348Z",
+    "t21_zero_copy_matrix": "12/12 passed plus 100-call stress; TP4 service pending"
   },
   "model": "Qwen3.5-27B",
   "mtp": false,
@@ -104,10 +116,10 @@
   ],
   "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
   "schema": "qwen35-runtime-monkeypatch/v2",
-  "sitecustomize_sha256": "4eac1a4eaacdaa9acbdf47365288b0aa247eb4c2ea5dedc88f009d1fb12ab5b3",
+  "sitecustomize_sha256": "78651527489c1e431859e9b16543ac01896594b2a5f347b0c55594dabd4b5511",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "live_activation_passed_performance_gate_failed",
+  "status": "t21_bridge_gates_passed_tp4_service_and_acceptance_pending",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
@@ -116,6 +128,7 @@
     "linear-attention gate/up weight prefetch",
     "Gemma RMSNorm prefetch postprocess",
     "opt-in bounded prefill-only MMAR decomposition for candidate-prefill",
-    "opt-in vLLM Scheduler and DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1"
+    "opt-in vLLM Scheduler and DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1",
+    "opt-in upstream T21 dense local MLP through a public ACL torch operator, zero-copy model-weight views, and existing vLLM TP AllReduce"
   ]
 }

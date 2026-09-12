@@ -22,13 +22,18 @@ def main() -> None:
         top = root / "top.txt"
         models = root / "models.json"
 
-        rank_markers = "\n".join(checker.REQUIRED_MARKERS.values())
+        rank_markers = "\n".join(
+            marker
+            for name, marker in checker.REQUIRED_MARKERS.items()
+            if name != "t21_dense_mlp"
+        )
         log.write_text("\n".join([rank_markers] * 4) + "\n", encoding="utf-8")
         env = [f"{key}={value}" for key, value in checker.EXPECTED_ENV.items()]
         env.extend(
             [
                 "QWEN35_ASCEND_MONKEYPATCH=1",
                 "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=1",
+                "QWEN35_ASCEND_T21_DENSE_MLP=0",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0",
@@ -150,6 +155,59 @@ def main() -> None:
         )
         assert result["passed"], result
 
+        candidate_prefill_t21 = json.loads(json.dumps(candidate_prefill))
+        candidate_prefill_t21[0]["Config"]["Labels"][
+            "com.c1917797.qwen35-variant"
+        ] = "candidate-prefill-t21"
+        candidate_prefill_t21[0]["Config"]["Env"] = [
+            "QWEN35_ASCEND_T21_DENSE_MLP=1"
+            if value.startswith("QWEN35_ASCEND_T21_DENSE_MLP=")
+            else (
+                "PYTHONPATH=/opt/qwen35-t12-monkeypatch:"
+                f"{checker.EXPECTED_T21_BRIDGE_ROOT}:/image/python:"
+            )
+            if value.startswith("PYTHONPATH=")
+            else value
+            for value in candidate_prefill_t21[0]["Config"]["Env"]
+        ]
+        candidate_prefill_t21[0]["Config"]["Env"].extend(
+            [
+                f"ASCEND_CUSTOM_OPP_PATH={checker.EXPECTED_T21_VENDOR}",
+                (
+                    "QWEN35_T21_OPAPI_LIBRARY="
+                    f"{checker.EXPECTED_T21_VENDOR}/op_api/lib/libcust_opapi.so"
+                ),
+                (
+                    "LD_LIBRARY_PATH="
+                    f"{checker.EXPECTED_T21_VENDOR}/op_api/lib:/image/lib"
+                ),
+            ]
+        )
+        candidate_prefill_t21[0]["Mounts"].extend(
+            [
+                {
+                    "Source": "/host/t21-opp",
+                    "Destination": checker.EXPECTED_T21_OPP_ROOT,
+                    "RW": False,
+                },
+                {
+                    "Source": "/host/t21-bridge",
+                    "Destination": checker.EXPECTED_T21_BRIDGE_ROOT,
+                    "RW": False,
+                },
+            ]
+        )
+        inspect.write_text(json.dumps(candidate_prefill_t21), encoding="utf-8")
+        t21_markers = rank_markers + "\n" + checker.REQUIRED_MARKERS[
+            "t21_dense_mlp"
+        ]
+        log.write_text("\n".join([t21_markers] * 4) + "\n", encoding="utf-8")
+        result = checker.check(
+            log, inspect, npu, top, models, variant="candidate-prefill-t21"
+        )
+        assert result["passed"], result
+        assert result["marker_counts"]["t21_dense_mlp"] == 4
+
         candidate_prefill_no_prefetch = json.loads(
             json.dumps(candidate_prefill)
         )
@@ -168,7 +226,11 @@ def main() -> None:
         non_prefetch_markers = "\n".join(
             marker
             for name, marker in checker.REQUIRED_MARKERS.items()
-            if name not in {"gate_up_prefetch", "rmsnorm_postprocess"}
+            if name not in {
+                "gate_up_prefetch",
+                "rmsnorm_postprocess",
+                "t21_dense_mlp",
+            }
         )
         log.write_text(
             "\n".join([non_prefetch_markers] * 4) + "\n",

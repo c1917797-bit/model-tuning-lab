@@ -7,8 +7,8 @@ previously measured GDN projection-fusion stack without vLLM or vLLM-Ascend
 source overlays. It is not yet a final deliverable. The current acceptance
 target is:
 
-- TTFT P95 candidate/control ratio at most 0.60 at c1/c5/c8/c16;
-- TPOT P95 candidate/control ratio at most 0.80 at c1/c5/c8/c16;
+- TTFT P95 candidate/control ratio at most 0.80 at c1/c5/c8/c16;
+- TPOT P95 candidate/control ratio at most 0.90 at c1/c5/c8/c16;
 - zero request errors and natural EOS for every measured request;
 - semantic quality preserved on all 357 frozen dataset rows;
 - no quantization, retraining, MTP, speculative decoding, or base-image

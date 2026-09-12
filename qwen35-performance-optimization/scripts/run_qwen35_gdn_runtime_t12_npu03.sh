@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=4eac1a4eaacdaa9acbdf47365288b0aa247eb4c2ea5dedc88f009d1fb12ab5b3
+patch_sha256=78651527489c1e431859e9b16543ac01896594b2a5f347b0c55594dabd4b5511
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -28,6 +28,7 @@ case "$variant" in
     operator_enabled=1
     mmar_prefill_threshold=0
     mmar_prefill_max_tokens=0
+    t21_enabled=0
     ;;
   candidate-prefill)
     patch_enabled=1
@@ -36,6 +37,16 @@ case "$variant" in
     operator_enabled=0
     mmar_prefill_threshold=512
     mmar_prefill_max_tokens=16384
+    t21_enabled=0
+    ;;
+  candidate-prefill-t21)
+    patch_enabled=1
+    prefetch_patch_enabled=1
+    weight_prefetch_enabled=true
+    operator_enabled=0
+    mmar_prefill_threshold=512
+    mmar_prefill_max_tokens=16384
+    t21_enabled=1
     ;;
   candidate-prefill-no-prefetch)
     patch_enabled=1
@@ -44,6 +55,7 @@ case "$variant" in
     operator_enabled=0
     mmar_prefill_threshold=512
     mmar_prefill_max_tokens=16384
+    t21_enabled=0
     ;;
   control)
     patch_enabled=0
@@ -52,8 +64,9 @@ case "$variant" in
     operator_enabled=0
     mmar_prefill_threshold=0
     mmar_prefill_max_tokens=0
+    t21_enabled=0
     ;;
-  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-no-prefetch, or control" >&2; exit 64 ;;
+  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, or control" >&2; exit 64 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 port="${PORT:-10010}"
@@ -161,6 +174,60 @@ if [[ "$operator_enabled" == 1 ]]; then
   operator_commit_label="$operator_commit"
   operator_package_label="$operator_package_sha256"
 fi
+t21_opp_root="${T21_OPP_ROOT:-/cache/austinov/qwen35-t21-abi-adapter-opp-r2-20260911}"
+t21_bridge_root="${T21_BRIDGE_ROOT:-/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v2}"
+t21_vendor=qwen35_t21_v910_transformer
+t21_container_opp_root=/opt/qwen35-t21-opp
+t21_container_vendor="$t21_container_opp_root/vendors/$t21_vendor"
+t21_container_bridge_root=/opt/qwen35-t21-bridge
+t21_operator_sha256=ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb
+t21_opp_tree_sha256=802bcf190aae4b4d7f688fec4beb23f42e58c0c39bf9d0b52a7ac3ce4d7b29ea
+t21_bridge_sha256=878091b05f3556f62ac94089faedfff211b859d205463c93d7cd45f5d57e46bf
+t21_mount_args=()
+t21_env_args=(-e QWEN35_ASCEND_T21_DENSE_MLP=0)
+t21_python_path=""
+if [[ "$t21_enabled" == 1 ]]; then
+  t21_operator="$t21_opp_root/vendors/$t21_vendor/op_api/lib/libcust_opapi.so"
+  t21_bridge="$t21_bridge_root/qwen35_t21_bridge.so"
+  [[ -f "$t21_operator" && -f "$t21_bridge" ]] || {
+    echo "T21 OPP or public bridge artifact is incomplete" >&2
+    exit 66
+  }
+  [[ "$(sha256sum "$t21_operator" | awk '{print $1}')" == "$t21_operator_sha256" ]] || {
+    echo "T21 operator SHA256 mismatch" >&2
+    exit 47
+  }
+  [[ "$(sha256sum "$t21_bridge" | awk '{print $1}')" == "$t21_bridge_sha256" ]] || {
+    echo "T21 bridge SHA256 mismatch" >&2
+    exit 47
+  }
+  actual_t21_tree_sha256="$(
+    find "$t21_opp_root" -type f -print0 |
+      sort -z |
+      xargs -0 sha256sum |
+      sha256sum |
+      awk '{print $1}'
+  )"
+  [[ "$actual_t21_tree_sha256" == "$t21_opp_tree_sha256" ]] || {
+    echo "T21 OPP tree SHA256 mismatch" >&2
+    exit 47
+  }
+  image_ld_library_path="$(
+    docker image inspect "$image_ref" --format '{{range .Config.Env}}{{println .}}{{end}}' |
+      sed -n 's/^LD_LIBRARY_PATH=//p'
+  )"
+  t21_mount_args=(
+    -v "$t21_opp_root:$t21_container_opp_root:ro"
+    -v "$t21_bridge_root:$t21_container_bridge_root:ro"
+  )
+  t21_env_args=(
+    -e QWEN35_ASCEND_T21_DENSE_MLP=1
+    -e "ASCEND_CUSTOM_OPP_PATH=$t21_container_vendor"
+    -e "QWEN35_T21_OPAPI_LIBRARY=$t21_container_vendor/op_api/lib/libcust_opapi.so"
+    -e "LD_LIBRARY_PATH=$t21_container_vendor/op_api/lib:${image_ld_library_path}"
+  )
+  t21_python_path="$t21_container_bridge_root:"
+fi
 [[ -f /cache/austinov/Qwen3.8-27B/config.json ]] || {
   echo "missing frozen Qwen3.5-27B model" >&2
   exit 66
@@ -234,6 +301,13 @@ git -C "$repo_root" rev-parse HEAD >"$OUTPUT_ROOT/repository-commit.txt"
   echo "expected_tree_sha256=$operator_tree_sha256"
   echo "loading=relocated read-only OPP; packaged set_env.bash is not sourced"
 } >"$OUTPUT_ROOT/operator-opp.txt"
+{
+  echo "enabled=$t21_enabled"
+  echo "operator_sha256=$t21_operator_sha256"
+  echo "opp_tree_sha256=$t21_opp_tree_sha256"
+  echo "bridge_sha256=$t21_bridge_sha256"
+  echo "composition=upstream local fused MLP + zero-copy model-weight views + existing vLLM TP AllReduce"
+} >"$OUTPUT_ROOT/t21-runtime.txt"
 docker ps --no-trunc >"$OUTPUT_ROOT/docker-ps.before.txt"
 printf '%s\n' "$npu_snapshot" >"$OUTPUT_ROOT/npu-smi.before.txt"
 ss -lntp >"$OUTPUT_ROOT/ports.before.txt"
@@ -241,7 +315,7 @@ grep -E '^(MemTotal|MemAvailable|HugePages_|Hugepagesize|Hugetlb):' /proc/meminf
 
 compilation_config='{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
 additional_config="{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":true,\"enable_flashcomm1\":false,\"weight_nz_mode\":1,\"weight_prefetch_config\":{\"enabled\":$weight_prefetch_enabled,\"prefetch_ratio\":{\"attn\":{\"qkv\":0.0,\"o\":0.0},\"moe\":{\"gate_up\":0.0},\"mlp\":{\"gate_up\":0.1,\"down\":0.0}}}}"
-python_path='/opt/qwen35-t12-monkeypatch:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:'
+python_path="/opt/qwen35-t12-monkeypatch:${t21_python_path}/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:"
 
 docker_args=(
   run -d --rm
@@ -272,6 +346,7 @@ docker_args=(
   -v "$repo_root":/experiment:ro
   -v "$patch_root":/opt/qwen35-t12-monkeypatch:ro
   "${operator_mount_args[@]}"
+  "${t21_mount_args[@]}"
   "${profile_mount_args[@]}"
   -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3
   -e HCCL_BUFFSIZE=512
@@ -297,6 +372,7 @@ docker_args=(
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$mmar_prefill_max_tokens"
   -e PYTHONPATH="$python_path"
   "${operator_env_args[@]}"
+  "${t21_env_args[@]}"
   "${profile_env_args[@]}"
 )
 serve_args=(

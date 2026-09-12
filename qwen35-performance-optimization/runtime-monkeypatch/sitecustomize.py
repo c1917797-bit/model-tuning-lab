@@ -27,6 +27,7 @@ _RUNTIME_TARGETS = {
     "vllm.v1.core.sched.scheduler",
     "vllm_ascend.core.dyntra_lb_scheduler",
     "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn",
+    "vllm.model_executor.models.qwen2_moe",
     "vllm.model_executor.models.qwen3_5",
     "vllm_ascend.ops.gdn",
 }
@@ -63,6 +64,10 @@ def _weight_prefetch_patch_enabled() -> bool:
 
 def _diagnostics_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_DIAGNOSTICS", "0") == "1"
+
+
+def _t21_dense_mlp_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_T21_DENSE_MLP", "0") == "1"
 
 
 def _diagnostics_interval() -> int:
@@ -174,6 +179,79 @@ def _patch_qwen35_model(module: ModuleType) -> None:
     )
     cls._qwen35_projection_weight_loader_monkeypatched = True
     _notice("patched Qwen3.5 six-way fused projection weight mapping")
+
+
+def _patch_qwen2_moe(module: ModuleType) -> None:
+    """Compose the upstream local MLP op with vLLM's existing TP reduction."""
+    if not _t21_dense_mlp_enabled():
+        return
+    cls = module.Qwen2MoeMLP
+    if getattr(cls, "_qwen35_t21_dense_mlp_monkeypatched", False):
+        return
+
+    # Importing the extension registers a traceable torch.ops node with an NPU
+    # implementation and a Meta implementation. Fail closed during startup if
+    # the validated bridge artifact is absent or has an incompatible ABI.
+    import qwen35_t21_bridge  # noqa: F401
+    from vllm.distributed.communication_op import (
+        tensor_model_parallel_all_reduce,
+    )
+
+    original = cls.forward
+
+    @functools.wraps(original)
+    def forward(self, x):
+        gate_up_proj = self.gate_up_proj
+        down_proj = self.down_proj
+        gate_up_weight = gate_up_proj.weight
+        down_weight = down_proj.weight
+        eligible = (
+            self.expert_gate is None
+            and x.dim() == 2
+            and 1 <= x.size(0) <= 16
+            and x.size(1) == 5120
+            and x.dtype == module.torch.bfloat16
+            and x.is_contiguous()
+            and gate_up_weight.dtype == module.torch.bfloat16
+            and down_weight.dtype == module.torch.bfloat16
+            and gate_up_weight.device == x.device
+            and down_weight.device == x.device
+            and tuple(gate_up_weight.shape) == (8704, 5120)
+            and tuple(down_weight.shape) == (5120, 4352)
+            and gate_up_weight.is_contiguous()
+            and down_weight.is_contiguous()
+            and gate_up_weight.storage_offset() == 0
+            and down_weight.storage_offset() == 0
+            and gate_up_proj.tp_size == 4
+            and down_proj.tp_size == 4
+            and down_proj.input_is_parallel
+            and down_proj.reduce_results
+            and gate_up_proj.quant_method.__class__.__name__
+            == "UnquantizedLinearMethod"
+            and down_proj.quant_method.__class__.__name__
+            == "UnquantizedLinearMethod"
+            and gate_up_proj.bias is None
+            and down_proj.bias is None
+        )
+        if not eligible:
+            return original(self, x)
+
+        output_parallel = module.torch.ops.qwen35_t21.swiglu_gated_mlp(
+            x, gate_up_weight.t(), down_weight.t()
+        )
+        output = tensor_model_parallel_all_reduce(output_parallel)
+        calls = int(getattr(self, "_qwen35_t21_calls", 0)) + 1
+        self._qwen35_t21_calls = calls
+        if calls == 1:
+            _notice(
+                "activated T21 upstream dense MLP with Qwen3.5 TP4 "
+                "zero-copy weight views and existing vLLM AllReduce"
+            )
+        return output
+
+    cls.forward = forward
+    cls._qwen35_t21_dense_mlp_monkeypatched = True
+    _notice("patched Qwen2MoeMLP with opt-in T21 dense path")
 
 
 def _patch_ascend_gdn(module: ModuleType) -> None:
@@ -491,6 +569,7 @@ _PATCHERS = {
     "vllm.model_executor.models.registry": _patch_model_registry,
     "vllm.v1.core.sched.scheduler": _patch_vllm_scheduler,
     "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn": _patch_qwen_gdn_linear_attn,
+    "vllm.model_executor.models.qwen2_moe": _patch_qwen2_moe,
     "vllm.model_executor.models.qwen3_5": _patch_qwen35_model,
     "vllm_ascend.ascend_config": _patch_ascend_config,
     "vllm_ascend.compilation.graph_fusion_pass_manager": _patch_graph_manager,

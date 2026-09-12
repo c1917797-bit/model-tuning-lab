@@ -24,6 +24,9 @@ EXPECTED_OPERATOR_VENDOR = (
     f"{EXPECTED_OPERATOR_ROOT}/vendors/"
     "qwen35_mmar_aicpu_first_transformer_transformer"
 )
+EXPECTED_T21_OPP_ROOT = "/opt/qwen35-t21-opp"
+EXPECTED_T21_VENDOR = f"{EXPECTED_T21_OPP_ROOT}/vendors/qwen35_t21_v910_transformer"
+EXPECTED_T21_BRIDGE_ROOT = "/opt/qwen35-t21-bridge"
 EXPECTED_ENV = {
     "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
     "VLLM_ASCEND_ENABLE_FLASHCOMM1": "0",
@@ -36,6 +39,7 @@ REQUIRED_MARKERS = {
     "ascend_forward": "patched Ascend GDN fused projection forward path",
     "gate_up_prefetch": "patched linear-attention gate/up prefetch",
     "rmsnorm_postprocess": "patched Gemma RMSNorm prefetch postprocess",
+    "t21_dense_mlp": "patched Qwen2MoeMLP with opt-in T21 dense path",
 }
 NPU_PROCESS_RE = re.compile(
     r"^\|\s*([0-7])\s+\d+\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|",
@@ -88,6 +92,7 @@ def check(
     variants = {
         "candidate",
         "candidate-prefill",
+        "candidate-prefill-t21",
         "candidate-prefill-no-prefetch",
         "control",
     }
@@ -95,11 +100,17 @@ def check(
         raise ValueError(f"variant must be one of {sorted(variants)}")
     patch_enabled = variant != "control"
     operator_enabled = variant == "candidate"
+    t21_enabled = variant == "candidate-prefill-t21"
     prefill_enabled = variant in {
         "candidate-prefill",
+        "candidate-prefill-t21",
         "candidate-prefill-no-prefetch",
     }
-    prefetch_patch_enabled = variant in {"candidate", "candidate-prefill"}
+    prefetch_patch_enabled = variant in {
+        "candidate",
+        "candidate-prefill",
+        "candidate-prefill-t21",
+    }
     log_text = log_path.read_text(encoding="utf-8", errors="replace")
     inspect = _load_inspect(inspect_path)
     npu_text = npu_path.read_text(encoding="utf-8", errors="replace")
@@ -114,6 +125,8 @@ def check(
         expected = patch_enabled
         if name in {"gate_up_prefetch", "rmsnorm_postprocess"}:
             expected = prefetch_patch_enabled
+        if name == "t21_dense_mlp":
+            expected = t21_enabled
         marker_checks[name] = count >= expected_ranks if expected else count == 0
 
     env = _environment(inspect)
@@ -123,6 +136,7 @@ def check(
         "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH": (
             "1" if prefetch_patch_enabled else "0"
         ),
+        "QWEN35_ASCEND_T21_DENSE_MLP": "1" if t21_enabled else "0",
         "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS": (
             "1" if patch_enabled else "0"
         ),
@@ -175,6 +189,28 @@ def check(
                 ),
             }
         )
+    if t21_enabled:
+        env_checks.update(
+            {
+                "t21_opp_path": (
+                    env.get("ASCEND_CUSTOM_OPP_PATH") == EXPECTED_T21_VENDOR
+                ),
+                "t21_operator_library": (
+                    env.get("QWEN35_T21_OPAPI_LIBRARY")
+                    == f"{EXPECTED_T21_VENDOR}/op_api/lib/libcust_opapi.so"
+                ),
+                "t21_library_first": env.get("LD_LIBRARY_PATH", "").startswith(
+                    f"{EXPECTED_T21_VENDOR}/op_api/lib:"
+                ),
+                "t21_bridge_on_pythonpath": (
+                    EXPECTED_T21_BRIDGE_ROOT in python_path.split(":")
+                ),
+            }
+        )
+    else:
+        env_checks["t21_operator_library_absent"] = (
+            "QWEN35_T21_OPAPI_LIBRARY" not in env
+        )
 
     host_devices = {
         item.get("PathOnHost")
@@ -203,6 +239,14 @@ def check(
         for item in mounts
         if item.get("Destination") == EXPECTED_OPERATOR_ROOT
     ]
+    t21_opp_mounts = [
+        item for item in mounts
+        if item.get("Destination") == EXPECTED_T21_OPP_ROOT
+    ]
+    t21_bridge_mounts = [
+        item for item in mounts
+        if item.get("Destination") == EXPECTED_T21_BRIDGE_ROOT
+    ]
     forbidden_mounts = [
         item
         for item in mounts
@@ -220,6 +264,15 @@ def check(
             and not operator_mounts[0].get("RW", True)
             if operator_enabled
             else not operator_mounts
+        ),
+        "t21_opp_mount": (
+            len(t21_opp_mounts) == 1 and not t21_opp_mounts[0].get("RW", True)
+            if t21_enabled else not t21_opp_mounts
+        ),
+        "t21_bridge_mount": (
+            len(t21_bridge_mounts) == 1
+            and not t21_bridge_mounts[0].get("RW", True)
+            if t21_enabled else not t21_bridge_mounts
         ),
     }
 
@@ -289,6 +342,8 @@ def check(
             "host_devices": sorted(value for value in host_devices if value),
             "patch_mounts": patch_mounts,
             "operator_mounts": operator_mounts,
+            "t21_opp_mounts": t21_opp_mounts,
+            "t21_bridge_mounts": t21_bridge_mounts,
             "forbidden_mounts": forbidden_mounts,
             "npu_processes": npu_processes,
             "container_pids": sorted(top_pids),

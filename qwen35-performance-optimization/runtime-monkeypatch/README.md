@@ -85,7 +85,7 @@ MMAR path. This variant does not mount the rejected AICPU-first custom OPP and
 is disabled unless the launcher explicitly selects it. The expected
 sitecustomize.py SHA256 is:
 
-    4eac1a4eaacdaa9acbdf47365288b0aa247eb4c2ea5dedc88f009d1fb12ab5b3
+    78651527489c1e431859e9b16543ac01896594b2a5f347b0c55594dabd4b5511
 
 The `candidate-prefill-no-prefetch` ablation keeps the same bounded-prefill
 rewrite and GDN projection patch while disabling both the official weight
@@ -148,6 +148,15 @@ Still pending for a final money patch:
 - c1/c5/c8/c16, three repeats, TTFT P95 reduction at least 20%;
 - c1/c5/c8/c16, three repeats, TPOT P95 reduction at least 10%;
 - paired quality validation over all 357 frozen rows.
+
+An additional opt-in T21 path is now available behind
+`QWEN35_ASCEND_T21_DENSE_MLP=1`. It registers the pinned upstream fused local
+MLP as a traceable torch operator through public ACL/torch-npu interfaces,
+admits only exact Qwen3.5-27B BF16 TP4 shapes with M<=16, passes zero-copy
+transposed model-weight views, and composes the result with vLLM's existing TP
+AllReduce. It is disabled by default and is not promoted until TP4 service,
+ablation, complete matrix, and quality gates pass. See
+`../T28_PUBLIC_ACL_TORCH_BRIDGE_FINDINGS.md`.
 
 Historical t11 reached a 47.7% c1 TTFT P95 reduction and 17.3% TPOT P95
 reduction, which clears the corrected c1 thresholds. Those measurements remain

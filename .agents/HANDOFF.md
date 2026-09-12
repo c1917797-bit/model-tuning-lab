@@ -1,5 +1,51 @@
 # Maintainer Handoff
 
+## 2026-09-12 active Qwen3.5 performance workstream (supersedes older focus below)
+
+- Canonical branch/worktree:
+  `work/qwen35-performance-delivery` at
+  `/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery`.
+- Objective: Qwen3.5-27B BF16 TP4 on physical NPU0-3, MTP/speculation off,
+  TTFT P95 reduction at least 20% and TPOT P95 reduction at least 10% for
+  c1/c5/c8/c16, three repetitions, zero errors, natural EOS, and no accuracy
+  regression. Final delivery is a removable runtime monkeypatch in the
+  unchanged official vLLM-Ascend v0.23.0 image. This workstream is not
+  Paper-to-Ascend and is not the older dense-MTP experiment.
+- Retained TTFT component: T20 bounded-prefill, c1/32 TTFT
+  6310.576 -> 808.224 ms (-87.193%); TPOT -2.835%. Treat it as the upstream
+  base, not a final passing stack.
+- Retained upstream dense candidate: T27 `aclnnSwigluGatedMlp` with the
+  minimal CANN 9.1 six-argument ABI adapter. Exact BF16 TP4 matrix passed
+  12/12 against official Matmul -> SwiGLU -> Matmul.
+- T28 replaced the failed private-symbol PyTorch bridge with public ACL
+  tensor descriptors, the public torch-npu current stream, and a traceable
+  `torch.ops.qwen35_t21.swiglu_gated_mlp` node with Meta registration.
+  Device-free build/import and private-symbol audit pass. Pinned bridge:
+  `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v2`, SHA-256
+  `878091b05f3556f62ac94089faedfff211b859d205463c93d7cd45f5d57e46bf`.
+- The zero-copy `.t()` model-weight layout passed 12/12 M=1/5/8/16 x
+  seeds=1/2/3 and matched contiguous candidate weights bit-for-bit; 100-call
+  stress passed. Evidence:
+  `/cache/austinov/qwen35-t21-public-bridge-numerical-20260912T173348Z`.
+- Qwen-specific delta: exact BF16 TP4/small-M admission, zero-copy model
+  weight views, traceable registration, and composition with vLLM's existing
+  TP AllReduce. It is opt-in as `candidate-prefill-t21` and rolls back with
+  `QWEN35_ASCEND_T21_DENSE_MLP=0` plus restart.
+- The first repeat of the v2 torch-operator device gate correctly stopped at
+  the cooperative lock because another Qwen3.8 job acquired NPU0-3. Do not
+  interrupt it. Re-run after both the lease and real NPU processes are clear.
+- Next sequence: v2 torch-operator numerical/stress rerun -> TP4
+  `candidate-prefill-t21` activation/natural-EOS smoke -> official control vs
+  bounded-prefill base vs base+T21 fail-fast ablation -> complete performance
+  matrix -> paired 357-row and frozen GSM8K quality gates.
+- Current offline regression is green: all directly executable Python and
+  shell contracts pass, the official-image source contract passes, and
+  official-image `pytest` reports 7 passed. The two pytest warnings are only
+  the expected inability to create `.pytest_cache` on a read-only mount.
+
+The older 2026-09-04 Paper-to-Ascend/MTP and NPU4-7 descriptions below are
+historical context only. They must not override this active branch-local goal.
+
 ## 0. Status
 
 - Last updated: 2026-09-04.
