@@ -20,6 +20,7 @@ _ENABLED = (
     and "-m" not in getattr(sys, "orig_argv", ())
 )
 _RUNTIME_TARGETS = {
+    "vllm.compilation.backends",
     "vllm_ascend.ascend_config",
     "vllm_ascend.compilation.graph_fusion_pass_manager",
     "vllm_ascend.ops.layernorm",
@@ -257,6 +258,32 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
     cls.forward = forward
     cls._qwen35_t21_dense_mlp_monkeypatched = True
     _notice("patched Qwen2MoeMLP with opt-in T21 dense path")
+
+
+def _patch_vllm_backends(module: ModuleType) -> None:
+    """Backport upstream's x.size(dim) guard for v0.23.0 graph splitting."""
+    if not _t21_dense_mlp_enabled():
+        return
+    if getattr(module, "_qwen35_size_dim_guard_monkeypatched", False):
+        return
+    old = """    for node in size_nodes:
+        tensor_node = node.args[0]
+"""
+    new = """    for node in size_nodes:
+        # Upstream fix: only x.size() returns the torch.Size tuple that this
+        # pass must decompose. x.size(dim) already returns a scalar SymInt.
+        if len(node.args) > 1 or "dim" in node.kwargs:
+            continue
+        tensor_node = node.args[0]
+"""
+    module._decompose_size_nodes = _replace_function_block(
+        module._decompose_size_nodes,
+        old,
+        new,
+        "vllm.compilation.backends._decompose_size_nodes",
+    )
+    module._qwen35_size_dim_guard_monkeypatched = True
+    _notice("backported upstream x.size(dim) graph-split guard")
 
 
 def _patch_ascend_gdn(module: ModuleType) -> None:
@@ -571,6 +598,7 @@ def _patch_dyntra_scheduler(module: ModuleType) -> None:
 
 
 _PATCHERS = {
+    "vllm.compilation.backends": _patch_vllm_backends,
     "vllm.model_executor.models.registry": _patch_model_registry,
     "vllm.v1.core.sched.scheduler": _patch_vllm_scheduler,
     "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn": _patch_qwen_gdn_linear_attn,

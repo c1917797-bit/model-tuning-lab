@@ -85,7 +85,7 @@ MMAR path. This variant does not mount the rejected AICPU-first custom OPP and
 is disabled unless the launcher explicitly selects it. The expected
 sitecustomize.py SHA256 is:
 
-    a54d791196070b6033be3df73e8e604fa692f32908e42e160ab67833c8218268
+    cc9ed4125822dd06a9899da42619685d2814ac62259d3ad7ef57bd3ec566d5f1
 
 The `candidate-prefill-no-prefetch` ablation keeps the same bounded-prefill
 rewrite and GDN projection patch while disabling both the official weight
@@ -160,7 +160,10 @@ permanently select the fallback path. The branch is removed, and numerical
 gates now cover M through 4096. Python performs only static module admission;
 the C++ bridge validates tensor dtype, device, exact shape, and layout at
 runtime so non-Tensor metadata calls cannot break fullgraph capture. It is
-disabled by default and is not promoted until TP4 service,
+disabled by default. For the pinned v0.23.0 image it also backports current
+upstream vLLM's graph-split guard that leaves scalar `x.size(dim)` calls
+untouched; this is required only after the traceable T21 node enters the AOT
+graph and is applied with an exact source anchor. T21 is not promoted until TP4 service,
 ablation, complete matrix, and quality gates pass. See
 `../T28_PUBLIC_ACL_TORCH_BRIDGE_FINDINGS.md`.
 

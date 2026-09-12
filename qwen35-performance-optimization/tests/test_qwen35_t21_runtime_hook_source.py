@@ -23,7 +23,10 @@ def test_t21_hook_has_only_static_module_admission_before_torch_op() -> None:
     ):
         assert marker in SOURCE
     assert '== "UnquantizedLinearMethod"' not in SOURCE
-    hook = SOURCE[SOURCE.index("def _patch_qwen2_moe"):SOURCE.index("def _patch_ascend_gdn")]
+    hook = SOURCE[
+        SOURCE.index("def _patch_qwen2_moe"):
+        SOURCE.index("def _patch_vllm_backends")
+    ]
     for forbidden in (
         "x.dim()",
         "x.size(",
@@ -57,8 +60,39 @@ def test_t21_ineligible_path_has_state_free_failfast_diagnostics() -> None:
     assert "_qwen35_t21_calls" not in SOURCE
 
 
+def test_t21_backports_upstream_size_dim_graph_split_guard() -> None:
+    assert '"vllm.compilation.backends"' in SOURCE
+    assert "def _patch_vllm_backends(module: ModuleType)" in SOURCE
+    assert 'if len(node.args) > 1 or "dim" in node.kwargs:' in SOURCE
+    assert '"vllm.compilation.backends._decompose_size_nodes"' in SOURCE
+    assert "if not _t21_dense_mlp_enabled():" in SOURCE
+
+
+def test_size_dim_backport_matches_official_vllm_source_once() -> None:
+    official_path = Path("/vllm-workspace/vllm/vllm/compilation/backends.py")
+    if not official_path.exists():
+        return
+    official_source = official_path.read_text(encoding="utf-8")
+    old = """    for node in size_nodes:
+        tensor_node = node.args[0]
+"""
+    assert official_source.count(old) == 1
+    patched_source = official_source.replace(
+        old,
+        """    for node in size_nodes:
+        if len(node.args) > 1 or "dim" in node.kwargs:
+            continue
+        tensor_node = node.args[0]
+""",
+    )
+    assert patched_source.count(
+        'if len(node.args) > 1 or "dim" in node.kwargs:'
+    ) == 1
+
+
 if __name__ == "__main__":
     test_t21_hook_has_only_static_module_admission_before_torch_op()
     test_t21_hook_composes_upstream_and_existing_collective()
     test_t21_ineligible_path_has_state_free_failfast_diagnostics()
+    test_t21_backports_upstream_size_dim_graph_split_guard()
     print("PASS: T21 runtime hook source contract")

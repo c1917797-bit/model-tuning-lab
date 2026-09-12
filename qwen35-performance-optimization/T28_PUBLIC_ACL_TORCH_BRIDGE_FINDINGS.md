@@ -86,6 +86,15 @@ Fresh gates passed M=1/16/128/512 and M=1024/4096, with zero-copy and
 contiguous-weight candidate outputs bit-exact and maximum reference error
 `7.62939453125e-06`.
 
+The next TP4 service admitted the official Ascend BF16 subclass correctly,
+then exposed a pinned-v0.23.0 graph-split bug: its
+`_decompose_size_nodes` treated scalar `x.size(dim)` as a full
+`torch.Size` tuple and attempted to erase a still-used FX node. Current
+upstream vLLM explicitly skips `size` calls with a positional or keyword
+`dim`. The runtime package backports that exact upstream guard only when
+T21 is enabled, using strict source-block matching so an incompatible image
+fails closed instead of being silently rewritten.
+
 ## Remaining gates
 
 Before promotion, start the TP4 `candidate-prefill-t21` service, prove
