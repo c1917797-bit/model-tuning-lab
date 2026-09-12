@@ -2,6 +2,22 @@
 
 ## Current authoritative status (2026-09-12)
 
+READ-ONLY PROMPT AUDIT completed: mb exec-0000000000000195 exit0.
+Artifact /cache/austinov/sparse-prompt-audit-aJ2ugv/audit.json SHA256
+f96f9e9701052ac70b6004d2da8f7b82120929c85fd9bb6a43134e477af87ad9.
+Pinned original dataset unchanged. All357 prompts have role/header newline
+differences from mounted official chat_template.jinja; all2482 closed messages
+lack the role newline, and all357 generation stubs end at bare assistant.
+252 prompts contain530 empty historical assistant messages. No orphan end or
+unclosed message (excluding valid generation stub) found by this bounded parser.
+These are format observations, NOT proof of the empty-output cause. Empty
+historical messages may be intentional; do not remove them to improve results.
+scripts/audit_sparse_prompt_format.py records per-index hashes/counts without
+publishing prompt text; CPU tests, spawn import guard and MST validation pass.
+No model launched or resources claimed. A separately named official-template
+diagnostic was proposed to user; awaiting confirmation before changing prompt
+serialization. Keep old TP4 baseline immutable and never pool new-protocol metrics.
+
 CACHE-OFF DIAGNOSIS TERMINAL exit1: mb exec-0000000000000186, containerc9a30b133822 /
 qwen38_sparse_smoke_EsTcm5, artifact /cache/austinov/sparse-prefix-smoke-EsTcm5.
 Exact raw index72, same BF16 TP4 model/sampling, no prefix cache, no warmup.
