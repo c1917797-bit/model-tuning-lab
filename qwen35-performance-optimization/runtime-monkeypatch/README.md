@@ -85,7 +85,7 @@ MMAR path. This variant does not mount the rejected AICPU-first custom OPP and
 is disabled unless the launcher explicitly selects it. The expected
 sitecustomize.py SHA256 is:
 
-    f4c4b30c8e5fb1f27fbfbb8b6ac290b58fb95c7484f5de0e7ee27c545972a6be
+    65ff17245bf8f649152b753f19fb4aa502f6b5c6eff079c5f719b160caefc2e2
 
 The `candidate-prefill-no-prefetch` ablation keeps the same bounded-prefill
 rewrite and GDN projection patch while disabling both the official weight
@@ -157,7 +157,10 @@ transposed model-weight views, and composes the result with vLLM's existing TP
 AllReduce. The upstream operator accepts every positive flattened M; keeping
 the former Python M<=16 branch caused AOT fullgraph capture at large M to
 permanently select the fallback path. The branch is removed, and numerical
-gates now cover M through 4096. It is disabled by default and is not promoted until TP4 service,
+gates now cover M through 4096. Python performs only static module admission;
+the C++ bridge validates tensor dtype, device, exact shape, and layout at
+runtime so non-Tensor metadata calls cannot break fullgraph capture. It is
+disabled by default and is not promoted until TP4 service,
 ablation, complete matrix, and quality gates pass. See
 `../T28_PUBLIC_ACL_TORCH_BRIDGE_FINDINGS.md`.
 

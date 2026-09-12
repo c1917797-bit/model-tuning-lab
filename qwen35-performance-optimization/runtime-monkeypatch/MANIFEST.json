@@ -33,7 +33,7 @@
     "upstream_operator_sha256": "ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb",
     "public_bridge_sha256": "7c0e01b2b6d4274ead9871c76df5a83cad3618cddec35128ca4e8d12a8c786e4",
     "shape_contract": "Qwen3.5-27B BF16 TP4, positive M, local 5120->8704->4352->5120",
-    "project_delta": "traceable torch op registration without a Python dynamic-M branch, exact model-shape admission, zero-copy model-weight views, existing vLLM TP AllReduce composition",
+    "project_delta": "traceable torch op registration with static module admission only, C++ runtime tensor contract checks, zero-copy model-weight views, existing vLLM TP AllReduce composition",
     "rollback": "set QWEN35_ASCEND_T21_DENSE_MLP=0 and restart"
   },
   "framework": "vLLM-Ascend 0.23.0",
@@ -122,7 +122,7 @@
   ],
   "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
   "schema": "qwen35-runtime-monkeypatch/v2",
-  "sitecustomize_sha256": "f4c4b30c8e5fb1f27fbfbb8b6ac290b58fb95c7484f5de0e7ee27c545972a6be",
+  "sitecustomize_sha256": "65ff17245bf8f649152b753f19fb4aa502f6b5c6eff079c5f719b160caefc2e2",
   "source_overlays": 0,
   "speculative_decoding": false,
   "status": "t21_bridge_gates_passed_tp4_service_and_acceptance_pending",

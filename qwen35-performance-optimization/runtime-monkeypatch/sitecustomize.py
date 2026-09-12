@@ -207,20 +207,6 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
         down_weight = down_proj.weight
         eligible = (
             self.expert_gate is None
-            and x.dim() == 2
-            and x.size(1) == 5120
-            and x.dtype == module.torch.bfloat16
-            and x.is_contiguous()
-            and gate_up_weight.dtype == module.torch.bfloat16
-            and down_weight.dtype == module.torch.bfloat16
-            and gate_up_weight.device == x.device
-            and down_weight.device == x.device
-            and tuple(gate_up_weight.shape) == (8704, 5120)
-            and tuple(down_weight.shape) == (5120, 4352)
-            and gate_up_weight.is_contiguous()
-            and down_weight.is_contiguous()
-            and gate_up_weight.storage_offset() == 0
-            and down_weight.storage_offset() == 0
             and gate_up_proj.tp_size == 4
             and down_proj.tp_size == 4
             and down_proj.input_is_parallel
@@ -236,34 +222,6 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
             if _diagnostics_enabled():
                 if self.expert_gate is not None:
                     raise RuntimeError("T21_DIAG_FAIL=expert_gate")
-                if x.dim() != 2:
-                    raise RuntimeError("T21_DIAG_FAIL=x_dim")
-                if x.size(1) != 5120:
-                    raise RuntimeError("T21_DIAG_FAIL=x_hidden")
-                if x.dtype != module.torch.bfloat16:
-                    raise RuntimeError("T21_DIAG_FAIL=x_dtype")
-                if not x.is_contiguous():
-                    raise RuntimeError("T21_DIAG_FAIL=x_contiguous")
-                if gate_up_weight.dtype != module.torch.bfloat16:
-                    raise RuntimeError("T21_DIAG_FAIL=gate_dtype")
-                if down_weight.dtype != module.torch.bfloat16:
-                    raise RuntimeError("T21_DIAG_FAIL=down_dtype")
-                if gate_up_weight.device != x.device:
-                    raise RuntimeError("T21_DIAG_FAIL=gate_device")
-                if down_weight.device != x.device:
-                    raise RuntimeError("T21_DIAG_FAIL=down_device")
-                if tuple(gate_up_weight.shape) != (8704, 5120):
-                    raise RuntimeError("T21_DIAG_FAIL=gate_shape")
-                if tuple(down_weight.shape) != (5120, 4352):
-                    raise RuntimeError("T21_DIAG_FAIL=down_shape")
-                if not gate_up_weight.is_contiguous():
-                    raise RuntimeError("T21_DIAG_FAIL=gate_contiguous")
-                if not down_weight.is_contiguous():
-                    raise RuntimeError("T21_DIAG_FAIL=down_contiguous")
-                if gate_up_weight.storage_offset() != 0:
-                    raise RuntimeError("T21_DIAG_FAIL=gate_offset")
-                if down_weight.storage_offset() != 0:
-                    raise RuntimeError("T21_DIAG_FAIL=down_offset")
                 if gate_up_proj.tp_size != 4:
                     raise RuntimeError("T21_DIAG_FAIL=gate_tp")
                 if down_proj.tp_size != 4:
@@ -289,6 +247,9 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
                 raise RuntimeError("T21_DIAG_FAIL=aggregate_only")
             return original(self, x)
 
+        # Tensor dtype/device/shape/layout checks intentionally live in the
+        # C++ operator. Querying Parameter metadata here introduces non-Tensor
+        # values into Dynamo fullgraph capture and prevents a traceable node.
         output_parallel = module.torch.ops.qwen35_t21.swiglu_gated_mlp(
             x, gate_up_weight.t(), down_weight.t()
         )

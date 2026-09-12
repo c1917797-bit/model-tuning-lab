@@ -62,6 +62,8 @@ The opt-in runtime hook is deliberately narrower than the upstream operator:
 - unquantized weights only;
 - every positive flattened M supported by the upstream operator; no Python
   dynamic-M branch is allowed before AOT fullgraph capture;
+- Python performs static module admission only; tensor dtype, device, exact
+  shape, and storage layout are checked fail-closed inside the C++ bridge;
 - zero-offset contiguous model weights converted to zero-copy views;
 - upstream local fused MLP result composed with vLLM's existing
   `tensor_model_parallel_all_reduce`;

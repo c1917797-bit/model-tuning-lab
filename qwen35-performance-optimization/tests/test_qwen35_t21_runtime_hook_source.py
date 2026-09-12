@@ -11,17 +11,32 @@ SOURCE = (
 ).read_text(encoding="utf-8")
 
 
-def test_t21_hook_is_opt_in_and_exact_model_gated_without_dynamic_m_branch() -> None:
+def test_t21_hook_has_only_static_module_admission_before_torch_op() -> None:
     assert 'QWEN35_ASCEND_T21_DENSE_MLP", "0"' in SOURCE
     for marker in (
-        "tuple(gate_up_weight.shape) == (8704, 5120)",
-        "tuple(down_weight.shape) == (5120, 4352)",
         '== "UnquantizedLinearMethod"',
         "gate_up_proj.tp_size == 4",
         "down_proj.tp_size == 4",
     ):
         assert marker in SOURCE
-    assert "1 <= x.size(0) <= 16" not in SOURCE
+    hook = SOURCE[SOURCE.index("def _patch_qwen2_moe"):SOURCE.index("def _patch_ascend_gdn")]
+    for forbidden in (
+        "x.dim()",
+        "x.size(",
+        "x.dtype",
+        "x.is_contiguous()",
+        "gate_up_weight.dtype",
+        "gate_up_weight.device",
+        "gate_up_weight.shape",
+        "gate_up_weight.is_contiguous()",
+        "gate_up_weight.storage_offset()",
+        "down_weight.dtype",
+        "down_weight.device",
+        "down_weight.shape",
+        "down_weight.is_contiguous()",
+        "down_weight.storage_offset()",
+    ):
+        assert forbidden not in hook
 
 
 def test_t21_hook_composes_upstream_and_existing_collective() -> None:
@@ -34,12 +49,12 @@ def test_t21_hook_composes_upstream_and_existing_collective() -> None:
 def test_t21_ineligible_path_has_state_free_failfast_diagnostics() -> None:
     assert "_diagnostics_enabled()" in SOURCE
     assert "T21_DIAG_FAIL=x_rows" not in SOURCE
-    assert "T21_DIAG_FAIL=gate_shape" in SOURCE
+    assert "T21_DIAG_FAIL=gate_tp" in SOURCE
     assert "_qwen35_t21_calls" not in SOURCE
 
 
 if __name__ == "__main__":
-    test_t21_hook_is_opt_in_and_exact_model_gated_without_dynamic_m_branch()
+    test_t21_hook_has_only_static_module_admission_before_torch_op()
     test_t21_hook_composes_upstream_and_existing_collective()
     test_t21_ineligible_path_has_state_free_failfast_diagnostics()
     print("PASS: T21 runtime hook source contract")
