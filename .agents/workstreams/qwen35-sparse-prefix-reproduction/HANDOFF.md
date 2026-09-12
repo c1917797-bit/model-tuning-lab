@@ -2,6 +2,19 @@
 
 ## Current authoritative status (2026-09-12)
 
+FAILED REAL QUALITY CONTROL: exec-0000000000000172 terminal exit1 on chicaihong01/mb
+(NOT ma). Direct mb route verified after intermittent ma timeout. Commit56daa10
+push confirmed by mb0170. SPARSE_REAL_PHASE=quality, native, physical0-3 TP4.
+Artifact /cache/austinov/sparse-prefix-smoke-IdTJbb. Script lacked __main__ guard;
+spawn child imported it and recursively attempted engine creation. No valid
+quality requests. Corrected all executable logic into main(), added permanent
+scripts/test_sparse_real_import.py. Import-as-__mp_main__ passes without importing
+vllm or reading data/model files. Container auto-removed. Failed run.log SHA256
+d83df6531b11052bd60ff5e08d7979b79fcd6c32eee930f23519e4feafa551bc.
+Live preflight found external
+containers only bash, DRRQR maps4-7, no NPU compute, ~79GiB MemAvailable;
+launcher acquires npu0-3.lock. This is first16 heldout real requests, not full357.
+
 PREPARED REAL SCREEN (not run): SPARSE_REAL_PHASE=quality or performance selects
 scripts/sparse_real_workload.py in the existing safe launcher. Native/paper only;
 paper requires SPARSE_TRAINING_REPORT=/training/opportunity.json. Scheduler reads
