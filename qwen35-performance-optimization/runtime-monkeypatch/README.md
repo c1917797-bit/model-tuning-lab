@@ -85,7 +85,7 @@ MMAR path. This variant does not mount the rejected AICPU-first custom OPP and
 is disabled unless the launcher explicitly selects it. The expected
 sitecustomize.py SHA256 is:
 
-    65ff17245bf8f649152b753f19fb4aa502f6b5c6eff079c5f719b160caefc2e2
+    a54d791196070b6033be3df73e8e604fa692f32908e42e160ab67833c8218268
 
 The `candidate-prefill-no-prefetch` ablation keeps the same bounded-prefill
 rewrite and GDN projection patch while disabling both the official weight

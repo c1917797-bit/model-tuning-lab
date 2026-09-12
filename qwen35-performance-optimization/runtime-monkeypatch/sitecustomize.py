@@ -196,6 +196,7 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
     from vllm.distributed.communication_op import (
         tensor_model_parallel_all_reduce,
     )
+    from vllm.model_executor.layers.linear import UnquantizedLinearMethod
 
     original = cls.forward
 
@@ -211,10 +212,10 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
             and down_proj.tp_size == 4
             and down_proj.input_is_parallel
             and down_proj.reduce_results
-            and gate_up_proj.quant_method.__class__.__name__
-            == "UnquantizedLinearMethod"
-            and down_proj.quant_method.__class__.__name__
-            == "UnquantizedLinearMethod"
+            and isinstance(
+                gate_up_proj.quant_method, UnquantizedLinearMethod
+            )
+            and isinstance(down_proj.quant_method, UnquantizedLinearMethod)
             and gate_up_proj.bias is None
             and down_proj.bias is None
         )
@@ -230,14 +231,12 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
                     raise RuntimeError("T21_DIAG_FAIL=input_parallel")
                 if not down_proj.reduce_results:
                     raise RuntimeError("T21_DIAG_FAIL=reduce_results")
-                if (
-                    gate_up_proj.quant_method.__class__.__name__
-                    != "UnquantizedLinearMethod"
+                if not isinstance(
+                    gate_up_proj.quant_method, UnquantizedLinearMethod
                 ):
                     raise RuntimeError("T21_DIAG_FAIL=gate_quant")
-                if (
-                    down_proj.quant_method.__class__.__name__
-                    != "UnquantizedLinearMethod"
+                if not isinstance(
+                    down_proj.quant_method, UnquantizedLinearMethod
                 ):
                     raise RuntimeError("T21_DIAG_FAIL=down_quant")
                 if gate_up_proj.bias is not None:

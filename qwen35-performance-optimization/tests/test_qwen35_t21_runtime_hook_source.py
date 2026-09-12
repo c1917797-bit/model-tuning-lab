@@ -14,11 +14,15 @@ SOURCE = (
 def test_t21_hook_has_only_static_module_admission_before_torch_op() -> None:
     assert 'QWEN35_ASCEND_T21_DENSE_MLP", "0"' in SOURCE
     for marker in (
-        '== "UnquantizedLinearMethod"',
+        "from vllm.model_executor.layers.linear import UnquantizedLinearMethod",
+        "isinstance(",
+        "gate_up_proj.quant_method, UnquantizedLinearMethod",
+        "down_proj.quant_method, UnquantizedLinearMethod",
         "gate_up_proj.tp_size == 4",
         "down_proj.tp_size == 4",
     ):
         assert marker in SOURCE
+    assert '== "UnquantizedLinearMethod"' not in SOURCE
     hook = SOURCE[SOURCE.index("def _patch_qwen2_moe"):SOURCE.index("def _patch_ascend_gdn")]
     for forbidden in (
         "x.dim()",
