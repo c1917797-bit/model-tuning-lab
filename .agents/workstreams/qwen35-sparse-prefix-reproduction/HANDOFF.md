@@ -19,6 +19,12 @@ Artifact root: /cache/austinov/sparse-prefix-smoke-U9JADE
 - identity.json SHA256 a0653f32df768ed07b3a25edd3266c95ca91f724068cfba54fc2c1fce9ef9288
 - run.log SHA256 a661e0e2d325b6f18b67e8716bf7a126d7605ef9b788b23161f297a3f9dfce18
 
+Implementation started: src/model_tuning_lab/sparse_checkpoint_plan.py contains
+an independent budgeted block-aligned placement DP and a KV-coverage-bounded
+restore-position selector. It is NOT wired into vLLM; it does not retain or
+restore tensors. scripts/test_sparse_checkpoint_plan.py compares plans to an
+exhaustive oracle at block sizes1/2/3/1536. Never claim this as model activation.
+
 Next: implement the paper's budgeted checkpoint selection/retention mechanism
 against the resolved native cache manager; prove selection and actual restoration
 before matched performance/quality measurement. Preserve native caching as the
