@@ -1,0 +1,80 @@
+schema: mst-practice-iteration/v1
+id: drrqr-two-sided-value-width-heldout-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-13
+validated_commit: pending
+
+stage_goal: Decide from a locked fit/held-out output-fidelity screen whether the two-sided energy-Dk64 plus aligned value/state-width candidate is worth one Ascend implementation gate.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen dense is 135.142469917 output tok/s, the fixed target is 148.656716909, and the best comparable energy-Dk64 result is 141.564496153 output tok/s. Dv64 has only a deliberately optimistic 149.751434 tok/s ceiling and no fidelity, NPU, endpoint, or quality evidence.
+  medium_term_milestone: Produce one DRRQR-rooted structural candidate with enough measured output fidelity and model-level headroom to justify a minimal plugin implementation and target-NPU numerical gate.
+  short_term_decision: Fit layer-shared Dv64 and Dv48 coordinate plans on captures 0-11, lock them before opening captures 12-15, and admit a width only if its untouched post-RMS and exact checkpoint-output-projected error remains robust relative to energy-Dk64/Dv128.
+  deciding_evidence: The independently audited 16-sequence teacher corpus, frozen energy-Dk64 plan, exact checkpoint out-projection weights, a predeclared layer-shared selector, a fit-locked per-layer scalar fold, and untouched captures 12-15.
+  budget_or_stop_rule: One CPU-only analysis in the existing audited container, no NPU, no service, no checkpoint rewrite, no endpoint benchmark, and no task accuracy. Overall DRRQR work has a hard wall-clock deadline of 2026-09-14T21:30:45Z; do not open an unbounded replacement selector loop.
+  on_pass: Select the least aggressive passing width, implement only its complete plugin-owned V/Z/conv/norm/out-projection/state path, and require real prefill/decode multi-step state plus NPUGraph numerical gates before one endpoint screen.
+  on_failure: Reject the entire value/state-width branch and use the remaining hard-deadline budget to render the overall DRRQR stop conclusion from accumulated evidence rather than opening another nearby selector or generic-operator branch.
+  on_inconclusive: Resolve only a specific capture, checkpoint-weight, arithmetic, or evidence-identity defect; do not weaken thresholds or consume NPU.
+
+candidate_contract:
+  name: two-sided energy-Dk64 value/state-width extension
+  paper_exact_strong_rrqr: false
+  fixed_rank_side: frozen joint normalized Q/K energy top-k at logical Dk64
+  widths: [64, 48]
+  selector: For each captured layer, rank value coordinates by the sum over fit-only tokens and all 48 value heads of squared energy-Dk64 post-RMS activation times the exact matching checkpoint out-projection column squared norm; keep one coordinate set shared by all heads in that layer.
+  scalar_fold: Fit one bounded least-squares scalar per layer from the fit-only projected output and fold it into selected out-projection columns; do not fit per-head, per-token, or hidden-dimension gains.
+  reference: Dense captured post-RMS output projected through the exact checkpoint out-projection weight.
+  comparator: Frozen energy-Dk64 with the original Dv128 path projected through the same exact checkpoint weight.
+  attribution_requirement: Preserve Dk128/Dv128, Dk64/Dv128, Dk128/DvX and Dk64/DvX arms before any endpoint claim.
+
+predeclared_gates:
+  source_and_split:
+    capture_audit_sha256: edfc6780adde0dff36f1fd3872452f0d2ad77541e06ac500de3eb3ec72e5b2a5
+    energy_dk64_plan_sha256: b1fcb727d3e58be66cc24148e30a5a1722d3bdc0914784f01cad02f11f741b8c
+    fit_indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    heldout_indices: [12, 13, 14, 15]
+    heldout_must_not_load_before_fit_lock: true
+  formula_and_geometry:
+    dense_post_rms_relative_l2_max: 0.01
+    exact_layer_shared_coordinate_count: true
+    fit_scalar_min: 0.5
+    fit_scalar_max: 2.0
+  heldout_relative_to_dk64_dv128:
+    aggregate_output_projected_error_ratio_max: 1.10
+    worst_layer_output_projected_error_ratio_max: 1.20
+    aggregate_retained_post_rms_error_ratio_max: 1.10
+    head_layer_units_with_retained_post_rms_ratio_at_most_1_10_min_fraction: 0.75
+    worst_head_layer_retained_post_rms_error_ratio_max: 1.50
+  admission: At least one of Dv64 or Dv48 must pass every gate; prefer Dv64 when both pass because it is the least aggressive width whose optimistic ceiling crosses the fixed target.
+
+portability_contract:
+  semantics: Coordinate order and scalar folds are model artifacts independent of physical padding, tiling, TP rank, and chip generation.
+  grouping: One coordinate set per layer avoids a per-head RMS gamma-fold assumption and remains valid across tensor-parallel partitions.
+  physical_contract: Logical Dv is a multiple of 16, but later backends must capability-dispatch their own alignment, cache, graph, dtype, and prefill/decode support.
+  saved_work: V/Z projection rows, matching causal-convolution rows, recurrent-state rows, normalization coordinates, out-projection columns, cache bytes, and value-side recurrent compute.
+  added_work: No runtime gather or dense reconstruction is permitted; selected weights and one scalar per layer must be folded offline.
+  disappearance_conditions: Benefit may disappear when value-side kernels are launch-bound, hidden dense reconstruction survives, graph specialization regresses, or the target stack already fuses equivalent work.
+  source_boundary: Implementation stays in projects/drror_vllm_ascend; the model, vLLM, vLLM-Ascend, ops-transformer, cann bot, container image, and captured evidence remain read-only.
+
+claim_ceiling: Passing this iteration admits one plugin implementation and target-NPU numerical gate only. It is not NPU correctness, endpoint speedup, task accuracy, paper-exact reproduction, or cross-environment performance evidence.
+
+changes:
+  - type: validation
+    description: Add the predeclared fit-lock and untouched output-fidelity decision contract.
+    files:
+      - .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
+
+validation_commands:
+  - parse the iteration YAML and assert its fixed split, thresholds, and hard deadline
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: A marginal optimistic endpoint ceiling must be followed by an exact output-projected held-out gate before structural implementation.
+    destination: this iteration
+    severity: high
+  - lesson: A hard research deadline needs outcome routing at each gate so failure ends the branch instead of spawning nearby variants.
+    destination: this iteration and .agents/HANDOFF.md after the result
+    severity: high
