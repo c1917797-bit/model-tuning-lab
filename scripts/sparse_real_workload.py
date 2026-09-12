@@ -18,12 +18,18 @@ def main():
     assert arm in ("native", "paper")
     phase = os.environ["SPARSE_REAL_PHASE"]
     assert phase in ("performance", "quality")
+    diagnostic = os.environ.get("SPARSE_REAL_DIAGNOSTIC", "")
+    assert diagnostic in ("", "cacheoff-index72")
+    if diagnostic and (arm != "native" or phase != "quality"):
+        raise ValueError("Cache-off diagnostic must remain a separate native quality question")
+    indices = [72] if diagnostic else list(range(71,87))
     if arm == "paper" and not os.environ.get("SPARSE_TRAINING_REPORT"):
         raise RuntimeError("Real workload requires frozen past-only training report")
     output = Path("/output")
     identity = dict(model="Qwen3.8-27B", arm=arm, phase=phase, tp=4,
-                    scope="offline c1 first16 heldout requests; not production HTTP benchmark",
-                    train_indices=[0,71], test_indices=[71,87], max_model_len=6144,
+                    scope="cache-off index72 diagnosis" if diagnostic else "offline c1 first16 heldout requests; not production HTTP benchmark",
+                    diagnostic=diagnostic, indices=indices,
+                    train_indices=[0,71], test_indices=[72,73] if diagnostic else [71,87], max_model_len=6144,
                     dataset_sha256=hashlib.sha256(dataset.read_bytes()).hexdigest(),
                     script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     patch_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -32,15 +38,16 @@ def main():
     extra = {"scheduler_cls":"model_tuning_lab.sparse_scheduler.SparseCanaryScheduler"} if arm == "paper" else {}
     llm = LLM(model="/model/Qwen3.8-27B", dtype="bfloat16", tensor_parallel_size=4,
               max_model_len=6144, max_num_seqs=1, max_num_batched_tokens=4096,
-              gpu_memory_utilization=0.7, enforce_eager=True, enable_prefix_caching=True,
+              gpu_memory_utilization=0.7, enforce_eager=True, enable_prefix_caching=not bool(diagnostic),
               mamba_cache_mode="align", disable_log_stats=False, seed=0, **extra)
     params = SamplingParams(temperature=0, seed=0, max_tokens=64 if phase=="performance" else 512,
                             ignore_eos=phase=="performance")
     # Use training requests only for warmup; no heldout outputs influence the plan.
-    llm.generate(questions[:1], params, use_tqdm=False)
+    if not diagnostic:
+        llm.generate(questions[:1], params, use_tqdm=False)
     with output.joinpath("requests.jsonl").open("w") as stream:
         for repeat in range(3 if phase=="performance" else 1):
-            for index in range(71,87):
+            for index in indices:
                 request = llm.generate([questions[index]], params, use_tqdm=False)[0]
                 result = request.outputs[0]
                 stats = request.metrics

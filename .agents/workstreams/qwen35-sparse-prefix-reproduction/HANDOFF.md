@@ -2,6 +2,19 @@
 
 ## Current authoritative status (2026-09-12)
 
+FAILED REAL QUALITY RETRY: mb exec-000000000000017a, container0af22f820b75 /
+qwen38_sparse_smoke_qvXe0h, artifact /cache/austinov/sparse-prefix-smoke-qvXe0h.
+Commit1cccfb1, native quality TP4 physical0-3. Two rows: index71 natural stop348
+tokens; index72 natural stop2 tokens but text only newline. Failed nonempty gate.
+This is native baseline, NOT paper regression. Do not weaken the gate or silently
+alter raw prompt formatting. Next separate diagnostic: exact index72, prefix cache
+off, same model/sampling; distinguish intrinsic response from cache restoration.
+requests.jsonl SHA256 bddae22feea9214e3ab2e8b342628d6a440da3621e3bcfe72c1f79fd9abcf861
+run.log SHA256 4f6cfd043760c754eb3a3a228e0c876e1921b50362b834e3f1f68458eea2db30.
+External CPU-only build container
+qwen35_t21_public_acl_bridge_build_v2 was active at launch (no device mappings),
+so this run is quality only and its latencies are not clean performance evidence.
+
 FAILED REAL QUALITY CONTROL: exec-0000000000000172 terminal exit1 on chicaihong01/mb
 (NOT ma). Direct mb route verified after intermittent ma timeout. Commit56daa10
 push confirmed by mb0170. SPARSE_REAL_PHASE=quality, native, physical0-3 TP4.
