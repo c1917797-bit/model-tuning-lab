@@ -1,5 +1,6 @@
 """Explicit scheduler entry point for a bounded mechanism canary, not release."""
 import json
+import hashlib
 import os
 from pathlib import Path
 from vllm.v1.core.sched.async_scheduler import AsyncScheduler
@@ -12,8 +13,19 @@ class SparseCanaryScheduler(AsyncScheduler):
     def __init__(self, *args, **kwargs):
         # Synthetic predeclared training histogram, not measured future traffic.
         # One checkpoint at1536 deliberately differs from native final boundary.
-        histogram = [0] * 3073
-        histogram[1536] = 1
+        training_path = os.environ.get("SPARSE_TRAINING_REPORT")
+        if training_path:
+            raw = Path(training_path).read_bytes()
+            if hashlib.sha256(raw).hexdigest() != "613e67c218a4a8cad68c3b61464982d561408af85081fdd0234c23b7fb1d855f":
+                raise RuntimeError("unrecognized frozen training report")
+            report = json.loads(raw)["reports"][0]
+            observations = report["past_only_overlaps"][:71]
+            histogram = [0] * (max(observations) + 1)
+            for overlap in observations:
+                histogram[overlap] += 1
+        else:
+            histogram = [0] * 3073
+            histogram[1536] = 1
         positions = plan_checkpoints(histogram, 1536, 1)
         if positions != [1536]:
             raise RuntimeError("unexpected canary plan")
@@ -26,6 +38,8 @@ class SparseCanaryScheduler(AsyncScheduler):
         }
 
         def emit(kind, **data):
+            if os.environ.get("SPARSE_REAL_PHASE") == "performance":
+                return  # Keep diagnostic file I/O out of clean timing runs.
             event = dict(kind=kind, pid=os.getpid(), **data)
             with Path("/output/sparse-events.jsonl").open("a") as stream:
                 stream.write(json.dumps(event, sort_keys=True) + "\n")
@@ -36,4 +50,5 @@ class SparseCanaryScheduler(AsyncScheduler):
         if self.cache_config.block_size != 1536 or self.use_eagle:
             raise RuntimeError("unsupported canary runtime")
         emit("engine_constructed", positions=positions, budget=1,
+             training="first71_query_rewrite" if training_path else "synthetic_canary",
              scheduler=type(self).__module__ + "." + type(self).__qualname__)

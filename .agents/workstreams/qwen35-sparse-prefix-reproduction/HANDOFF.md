@@ -2,6 +2,19 @@
 
 ## Current authoritative status (2026-09-12)
 
+PREPARED REAL SCREEN (not run): SPARSE_REAL_PHASE=quality or performance selects
+scripts/sparse_real_workload.py in the existing safe launcher. Native/paper only;
+paper requires SPARSE_TRAINING_REPORT=/training/opportunity.json. Scheduler reads
+only the first71 overlap observations from SHA-pinned report; heldout indices71:87.
+TP4, raw prompts, c1, maxlen6144, maxbatch4096, eager BF16. Quality:512 max,
+natural EOS required, one paired repetition. Performance:64 fixed output tokens,
+3 repetitions, framework first_token_latency and monotonic first/last token TPOT.
+No subtraction of wall arrival time from monotonic engine timestamps. Diagnostic
+event file I/O disabled in performance mode. This is a bounded offline screen,
+NOT the old HTTP benchmark, full357 accuracy or full concurrency matrix.
+Run quality arms first; require paired outputs before performance. Preserve per-row
+artifacts and verify metrics are actually populated; no static readiness claim.
+
 REAL WORKLOAD OPPORTUNITY (CPU tokenizer only): operation039a exit0,
 /cache/austinov/sparse-opportunity-8t6gZ0/opportunity.json SHA256
 613e67c218a4a8cad68c3b61464982d561408af85081fdd0234c23b7fb1d855f.
