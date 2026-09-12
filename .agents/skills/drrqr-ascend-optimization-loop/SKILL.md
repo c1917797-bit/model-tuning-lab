@@ -107,6 +107,13 @@ reproduction.
   arithmetic stage fails. Recover the active tree to that safe stage, retain
   the failed implementation and evidence in Git history, and never promote the
   earlier ABI or storage pass into acceptance of the failed arithmetic.
+- Do not admit two-sided value/state reduction from an optimistic compute
+  ceiling alone. Reducing Dv changes the RMS denominator and removes matching
+  output-projection columns. First lock layer-shared coordinates and any
+  foldable scalar on fit-only data, then require exact-checkpoint projected
+  output and retained-post-RMS robustness on untouched data. If both the least
+  aggressive target-crossing width and its control fail by a large margin,
+  close the value-width branch instead of tuning nearby coordinates or gains.
 
 ## Iteration workflow
 

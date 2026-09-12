@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-two-sided-value-width-heldout-v1
 repository: model-tuning-lab
-status: in_progress
+status: complete_rejected
 date: 2026-09-13
-validated_commit: pending
+validated_commit: 9ac811be8a41ea1379c5a98a8fceecd10b772bca
 
 stage_goal: Decide from a locked fit/held-out output-fidelity screen whether the two-sided energy-Dk64 plus aligned value/state-width candidate is worth one Ascend implementation gate.
 
@@ -65,11 +65,58 @@ changes:
     description: Add the predeclared fit-lock and untouched output-fidelity decision contract.
     files:
       - .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
+  - type: algorithm_evidence
+    description: Add the exact-checkpoint output-projected Dv64/Dv48 fit/held-out gate and fail-closed evidence publication.
+    files:
+      - projects/drror_vllm_ascend/tools/analyze_drrqr_value_width_heldout.py
 
 validation_commands:
   - parse the iteration YAML and assert its fixed split, thresholds, and hard deadline
+  - compile the analysis tool in the audited container
+  - run one layer-0 sequence smoke covering TP4 replay, RMS, coordinate selection, and the exact checkpoint out projection
+  - run one formal CPU-only fit/held-out screen over all 16 sequences and six representative layers
+  - independently reload the report and fit lock, verify their hashes, split, geometry, status, and every gate
   - ./scripts/validate-mst.sh
   - git diff --check
+
+results:
+  operation_id: exec-00000000000006b1
+  duration_ms: 272666
+  artifact_root: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-two-sided-value-width-heldout-v1
+  started_sha256: ac14d2af87aef66acc07f1ec3734d63fb766bd69ac01822898bd6e8a8ccfdb7c
+  fit_lock_sha256: ac7f65e52e3805d0f6debfa17721223b2ffe1703f0648d4bbef85f5dc26477a8
+  report_sha256: 44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528
+  script_sha256: 8d56fbe4fa992acd2384cd736045c1c28d2914e8d23f8e720e6f5c71833725c8
+  heldout_loaded_only_after_fit_lock: true
+  fit_dense_post_rms_formula_relative_l2: 0.0016597308251866155
+  heldout_dense_post_rms_formula_relative_l2: 0.0016828277208102314
+  dv64:
+    aggregate_output_projected_error_ratio: 3.711739907286725
+    worst_layer_output_projected_error_ratio: 84.74012591389263
+    aggregate_retained_post_rms_error_ratio: 2.4222951349045734
+    head_layer_ratio_at_most_1_10_fraction: 0.5277777777777778
+    worst_head_layer_retained_post_rms_error_ratio: 1137.3125514629664
+    disposition: rejected
+  dv48:
+    aggregate_output_projected_error_ratio: 4.072585902514082
+    worst_layer_output_projected_error_ratio: 75.82253651749849
+    aggregate_retained_post_rms_error_ratio: 2.6022932445085014
+    head_layer_ratio_at_most_1_10_fraction: 0.4340277777777778
+    worst_head_layer_retained_post_rms_error_ratio: 1152.8321738465545
+    disposition: rejected
+  common_passes:
+    - exact fit-lock-before-heldout split
+    - exact layer-shared Dv64 and Dv48 coordinate counts
+    - all per-layer scalar folds stayed within the predeclared range
+    - dense post-RMS formula calibration
+  common_failures:
+    - aggregate exact-checkpoint output-projected fidelity
+    - worst-layer exact-checkpoint output-projected fidelity
+    - aggregate retained post-RMS fidelity
+    - head-layer robustness fraction
+    - worst head-layer retained post-RMS robustness
+  disposition: Reject the complete layer-shared value/state-width branch. Do not implement it, spend NPU time, run an endpoint benchmark, run task accuracy, weaken the gates, or open a nearby coordinate/scalar variant.
+  scope: This rejects the tested two-sided energy-Dk64 plus layer-shared Dv64/Dv48 coordinate-and-scalar family. It establishes neither a general impossibility theorem for DRRQR nor any new NPU performance or task-accuracy result.
 
 lessons_ingested:
   - lesson: A marginal optimistic endpoint ceiling must be followed by an exact output-projected held-out gate before structural implementation.
@@ -77,4 +124,7 @@ lessons_ingested:
     severity: high
   - lesson: A hard research deadline needs outcome routing at each gate so failure ends the branch instead of spawning nearby variants.
     destination: this iteration and .agents/HANDOFF.md after the result
+    severity: high
+  - lesson: A value-side compute ceiling is not an algorithm admission result. Reducing Dv changes the RMS denominator and removes out-projection support; require fit-locked exact-checkpoint projected-output and retained-post-RMS held-out gates before operator work.
+    destination: .agents/skills/drrqr-ascend-optimization-loop/SKILL.md and DRRQR_ASCEND_EXPERIENCE.md
     severity: high

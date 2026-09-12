@@ -347,17 +347,15 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
    candidate and mechanism evidence, but only the separate `query_rewrite`
    performance workstream owns its frozen denominator, final quality gate,
    serving delivery contract, and performance acceptance decision.
-5. **Qwen3.8 DRRQR:** keep the joint algorithm/operator objective primary.
-   Energy-Dk64 remains the best development candidate, while the tested Stage
-   2 inline-normalization implementation is stopped at its numerical gate and
-   its source/cost audit is now rejected. The separate L2 seam and even the
-   whole packed front end are too small to close the remaining gap, and direct
-   Dk64 projection/convolution slicing is already active. Resume with a
-   materially different DRRQR algorithm/state mechanism whose held-out
-   recurrent-output fidelity and endpoint headroom are established before
-   implementation. Only after numerical admission should a concrete candidate
-   enter graph screening, fixed-1024-token endpoint testing, targeted
-   profiling, and finally accuracy.
+5. **Qwen3.8 DRRQR:** the bounded program is now joint-target-not-met.
+   Energy-Dk64 remains the best comparable development screen at +4.752041
+   percent versus the frozen dense baseline, below the required +10 percent.
+   The final two-sided Dv64/Dv48 route failed its fit-locked untouched
+   exact-checkpoint projected-output and retained-post-RMS gates by large
+   margins. Do not implement it, spend NPU time on it, run final accuracy, or
+   open a nearby selector/scalar/operator variant. Reopening requires a
+   materially different named DRRQR mechanism with new output-fidelity and
+   endpoint-headroom evidence.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -386,6 +384,14 @@ Keep the distinction between three kinds of knowledge explicit:
   front removal about 3.165 percent versus the remaining 5.010 percent
   throughput gap. Source audit also proved existing Dk64 weight and convolution
   row slicing, preventing a duplicate next iteration.
+- Closed the two-sided value/state-width branch without consuming an NPU.
+  Dv64 and Dv48 were fit-locked on indices 0-11 before indices 12-15 were
+  loaded. Their held-out exact-checkpoint projected-error ratios were 3.712
+  and 4.073, and retained-post-RMS ratios were 2.422 and 2.602, versus
+  energy-Dk64/Dv128. Both widths failed every fidelity/robustness family gate.
+  The evidence is immutable under drrqr-two-sided-value-width-heldout-v1,
+  report SHA256
+  44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528.
 
 ## 4. Current Action
 
@@ -407,17 +413,13 @@ For a new maintainer, start by treating this repository as ready for handoff but
 ## 5. Next Actions
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
-2. For Qwen3.8 DRRQR, read the completed
-   drrqr-dk64-normalization-exactness-audit-v1 record and
-   DK64_NORMALIZATION_EXACTNESS_AUDIT.md. Do not retry inline normalization,
-   weaken its exact gate, or reopen projection/convolution slicing already
-   performed by DrrqrPlan.transform_weights. Select a materially different
-   algorithm/state transformation only after a source-duplication audit, a
-   held-out recurrent-output fidelity criterion, and an optimistic
-   Dk-specific endpoint-headroom calculation show it can address a material
-   portion of the remaining approximately 3.182 ms per-token gap. Do not
-   broaden profiling or run final accuracy before that candidate passes its
-   numerical gate and a fixed-1024-token endpoint screen.
+2. For Qwen3.8 DRRQR, treat the bounded conclusion as final for this program.
+   Do not retry inline normalization, Dv64/Dv48 value-width reduction, nearby
+   Q/K or value coordinate selectors, scalar retuning, or already-active
+   projection/convolution slicing. Do not run final accuracy because no
+   candidate reached the endpoint admission threshold. A future reopen must
+   start as a new, materially different DRRQR mechanism and must predeclare
+   both untouched output-fidelity and optimistic endpoint-headroom gates.
 3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
 4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
@@ -503,12 +505,14 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-recurrent-trajectory-selector-v1.yaml
 .agents/evals/practice-iterations/drrqr-pairwise-orthogonal-projection-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml
+.agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-captured-reference.v2.summary.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/gdn-teacher-width-curve.v1.summary.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DK64_NORMALIZATION_EXACTNESS_AUDIT.md
+projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_BOUNDED_CONCLUSION_20260913.md
 ```
 
 HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.

@@ -1,6 +1,6 @@
 # DRRQR on Ascend: durable success and failure experience
 
-Date: 2026-09-12
+Date: 2026-09-13
 
 ## Purpose and claim boundary
 
@@ -16,7 +16,7 @@ promising development baseline, not an accepted result. Its selector is an
 experimental joint normalized Q/K energy top-k rule, not the paper-exact
 StrongRRQR implementation.
 
-## Fourteen durable conclusions
+## Fifteen durable conclusions
 
 1. The frozen dense contract is reusable until a material model, runtime,
    common-optimization, topology, device, or workload change occurs.
@@ -64,6 +64,12 @@ StrongRRQR implementation.
     channels. Future rank or channel changes must map checkpoint slicing,
     nonlinearities, state/cache layout, normalization/gating, output projection
     and graph identity before claiming compute or traffic savings.
+15. A value-side compute ceiling is not an algorithm admission result. The
+    layer-shared Dv64 and Dv48 extensions changed the RMS denominator and
+    removed output-projection support; on untouched captures their exact
+    checkpoint-projected error was respectively 3.712 and 4.073 times the
+    energy-Dk64/Dv128 comparator. Stop this coordinate-and-scalar family before
+    NPU implementation rather than tuning around a large fidelity failure.
 
 ## Outcome classes and recovery rules
 
@@ -97,22 +103,23 @@ StrongRRQR implementation.
 | failed implementation | Raw packed Q/K normalization built after one concrete CANN event-API correction. Two runs were runtime-invalid until the complete generated vendor bundle was loaded; the first valid physical-NPU4 execution then diverged in both output and full FP32 state at batch1 step1 in eager and NPUGraph while guards, pointers, metadata and untouched slots remained valid. | Storage safety does not admit arithmetic. Stop this implementation before graph timing, endpoint, gating, or accuracy; preserve the exact failure and recover the Stage 1 safe tree. | First-step numerical failure on the tested 910B environment only. |
 | rejected source/cost audit | The active Dk64 Triton artifact exposes a compiler-specific reduction/rsqrt/BF16 boundary, while the separate L2 seam is only 0.201845 ms per step and the full packed front end only 2.046112 ms versus a required 3.181665 ms optimistic TPOT reduction. | Do not assume cross-compiler bitwise equivalence or build a candidate whose perfect-removal ceiling cannot materially close the gap. | Source, compiled-artifact and optimistic cost rejection only; no new NPU or endpoint result. |
 | corrected next action | The active weight transformer already index-selects Q/K projection and convolution rows before loading and sharding. | Audit loaded behavior before opening a planned optimization; do not duplicate an existing saving. | Plugin source and existing trace-shape evidence only. |
+| rejected | Fit-locked layer-shared Dv64 and Dv48 value/state reduction produced held-out exact-checkpoint projected-error ratios of 3.712 and 4.073 and retained-post-RMS ratios of 2.422 and 2.602 versus energy-Dk64/Dv128. | Value reduction changes RMS and output-projection semantics; require untouched output-projected fidelity before implementation and close nearby coordinate/scalar variants after a large miss. | CPU replay over audited NPU captures only; no NPU correctness, endpoint, accuracy, or general DRRQR impossibility claim. |
 | failed tooling | Two native builds were terminated by an unintended 30-second remote default; one later attempt found the dedicated container stopped. | Use an explicit asynchronous job timeout, poll the same operation, and inspect container/device state before any bounded retry. | Tool and environment handling only. |
 
 ## Current directional decision
 
-Continue the energy-Dk64 DRRQR mainline, but stop the tested inline raw-Q/K
-normalization implementation and close its exactness audit as rejected. Stage
-1 remains the accepted safe foundation; the failed Stage 2 code is preserved
-in Git history and reverted from the active tree. The audit found neither a
-portable same-lowering bitwise primitive nor enough endpoint headroom: perfect
-removal of the whole packed front end is still smaller than the open gap.
-Direct Dk64 projection/convolution slicing is not the next branch because it is
-already active. Re-enter algorithm/state design with a materially different
-DRRQR mechanism and predeclare held-out recurrent-output fidelity plus a
-Dk-specific endpoint-headroom case before implementation. A fixed-output
-endpoint screen still follows only after a new candidate passes its numerical
-and graph gates; final LongBench-v2 and GSM8K remain last.
+Stop the bounded Qwen3.8-27B DRRQR program as joint-target-not-met. Energy-Dk64
+remains the best comparable screen at +4.752041 percent, below the required
++10 percent, and no later algorithm/operator route passed the evidence needed
+for another endpoint run. The final same-stack max_tokens 2048 LongBench-v2
+and GSM8K pair was therefore not run: accuracy remains unaccepted rather than
+failed under that final protocol.
+
+This is a program decision, not a theorem that all future DRRQR designs are
+impossible. Reopening requires a materially different, named DRRQR mechanism
+with new evidence that changes both the output-fidelity and endpoint-headroom
+case; another nearby coordinate selector, scalar fold, launch fusion, or
+generic operator optimization is insufficient.
 
 Do not resume MTP, speculative decoding, quantization, retraining, nearby
 Q/K-only selector search, simple heterogeneous widths, the K64 reduction

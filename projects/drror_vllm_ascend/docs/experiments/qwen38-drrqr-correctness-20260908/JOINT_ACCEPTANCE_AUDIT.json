@@ -1,7 +1,7 @@
 {
   "schema": "drrqr-joint-acceptance-audit/v1",
-  "date": "2026-09-09",
-  "decision": "extended_runtime_research_authorized_acceptance_not_met",
+  "date": "2026-09-13",
+  "decision": "bounded_program_stopped_joint_target_not_met",
   "locked_acceptance": {
     "performance": "At least 10% end-to-end output-token throughput improvement over a contemporaneous common-optimized dense control, confirmed by at least three matched rounds.",
     "accuracy": "No LongBench-v2 or GSM8K decline with thinking disabled, max_tokens=2048 and normal EOS.",
@@ -85,7 +85,7 @@
     }
   },
   "blocking_condition": null,
-  "claim": "The project demonstrates a real single-screen Ascend gain, but does not demonstrate the locked performance-times-accuracy joint success.",
+  "claim": "The project demonstrates a real single-screen Ascend gain, but did not meet the locked performance-times-accuracy joint target. The extended bounded program is stopped; final same-stack accuracy was not run because no candidate reached performance admission.",
   "historical_decision": "blocked_requires_scope_change",
   "historical_falsified_short_phase_routes": [
     "non-16-aligned Dk104/Dk88 data as an algorithm trend",
@@ -99,5 +99,20 @@
   ],
   "historical_blocking_condition": "The best credible no-training candidate is below the locked throughput gate, its available task-accuracy preflight is below baseline, and all bounded candidate-specific short-phase routes have failed their admission evidence. Further work requires authorization for training-based recovery, a new multi-day custom-runtime research phase, or a changed acceptance target.",
   "correction": "Generic vLLM Triton source was not the active Ascend path; fusion feasibility rejection is withdrawn. Kernel sums and retained-energy proxies do not establish impossibility. Historical route list is not a valid universal falsification list.",
-  "current_research_plan": "EXTENDED_RUNTIME_RESEARCH.md"
+  "current_research_plan": null,
+  "current_conclusion": "DRRQR_ASCEND_BOUNDED_CONCLUSION_20260913.md",
+  "final_bounded_route": {
+    "name": "energy-Dk64 plus layer-shared Dv64/Dv48 value-state reduction",
+    "status": "rejected_before_npu_implementation",
+    "heldout_output_projected_error_ratio": {
+      "dv64": 3.711739907286725,
+      "dv48": 4.072585902514082
+    },
+    "heldout_retained_post_rms_error_ratio": {
+      "dv64": 2.4222951349045734,
+      "dv48": 2.6022932445085014
+    },
+    "report_sha256": "44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528",
+    "claim_boundary": "CPU replay over audited NPU captures with exact checkpoint out-projection weights; no new NPU performance or task-accuracy result."
+  }
 }

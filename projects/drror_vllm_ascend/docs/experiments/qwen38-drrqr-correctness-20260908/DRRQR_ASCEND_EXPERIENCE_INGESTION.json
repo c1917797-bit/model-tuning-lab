@@ -3,8 +3,8 @@
   "source": {
     "project": "projects/drror_vllm_ascend",
     "program": "Qwen3.8-27B DRRQR on Ascend",
-    "checkpoint": "2026-09-12",
-    "base_commit": "ba6c4698393b15dd18565d66d6ac0a6d2c8ce2ce",
+    "checkpoint": "2026-09-13",
+    "base_commit": "9ac811be8a41ea1379c5a98a8fceecd10b772bca",
     "authoritative_records": [
       ".agents/evals/practice-iterations/drrqr-*.yaml",
       ".agents/HANDOFF.md",
@@ -18,7 +18,8 @@
     "The locked teacher corpus supports fit and held-out admission screens but does not prove NPU endpoint speed, task accuracy, or portability.",
     "Nearby Q/K-only selector, sparse projection, phase-transition, tail-sketch, simple heterogeneous-width, reduction-specialization, and small-fusion variants were rejected only within their tested scopes.",
     "Packed-addressing Stage 1 passed exact NPU eager, full-state, NPUGraph, guard, and pointer gates, while raw-normalization Stage 2 failed at the first valid arithmetic comparison and was reverted from the active tree.",
-    "Perfect removal of the measured separate L2 seam or complete packed front end cannot by itself close the remaining optimistic TPOT gap."
+    "Perfect removal of the measured separate L2 seam or complete packed front end cannot by itself close the remaining optimistic TPOT gap.",
+    "Fit-locked layer-shared Dv64 and Dv48 value/state reduction failed untouched exact-checkpoint output-projected and retained-post-RMS fidelity by large margins, so the nearby value-width coordinate-and-scalar family is closed before NPU implementation."
   ],
   "lessons": [
     {
@@ -148,6 +149,21 @@
         ".agents/skills/chicaihong01-host-maintenance/SKILL.md"
       ],
       "verification": "A retry cites the prior operation identity, terminal state, and corrected cause instead of launching duplicate work."
+    },
+    {
+      "title": "Gate value-side reduction on untouched projected output",
+      "outcome_class": "rejected",
+      "trigger": "A two-sided DRRQR proposal claims endpoint headroom by reducing value channels, recurrent-state rows, normalization coordinates, and output-projection columns.",
+      "future_action": "Lock layer-shared coordinates and any foldable scalar on fit-only data, then compare exact-checkpoint projected output and retained-post-RMS behavior with the Dk-only comparator on untouched data before operator or NPU work.",
+      "tested_scope": "Energy-Dk64 plus layer-shared Dv64 and Dv48 coordinate selection with one bounded scalar per representative layer.",
+      "evidence_level": "CPU fit/held-out replay over independently audited NPU captures with exact checkpoint out-projection weights",
+      "claim_ceiling": "Rejects this value-width coordinate-and-scalar family only; it is not NPU performance, task accuracy, or a general DRRQR impossibility result.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        ".agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml",
+        "projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md"
+      ],
+      "verification": "The artifact publishes fit-lock.json before heldout load and reports aggregate, worst-layer, aggregate retained, head-layer fraction, and worst-head-layer gates for both widths."
     }
   ],
   "do_not_ingest_as_durable_truth": [
@@ -165,7 +181,7 @@
   },
   "commit_push": {
     "requested": true,
-    "content_commit": "2971c7f8aff02b44d19d963ca068d231469401f4",
+    "content_commit": "9ac811be8a41ea1379c5a98a8fceecd10b772bca",
     "target_branch": "work/drror-objective-loop-skill-20260909",
     "status_source": "Use Git remote branch ancestry as the authoritative push state."
   }

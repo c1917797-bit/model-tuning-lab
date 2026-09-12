@@ -5,6 +5,11 @@
 > The packed-Triton hot-path inference and broad fusion/layerwise impossibility
 > conclusions below are withdrawn; retained here as historical audit evidence.
 > Measurements are unchanged. Current status is research authorized, not success.
+>
+> Superseded again on 2026-09-13: the authorized bounded research program is
+> complete and stopped as joint-target-not-met. See
+> [DRRQR_ASCEND_BOUNDED_CONCLUSION_20260913.md](DRRQR_ASCEND_BOUNDED_CONCLUSION_20260913.md).
+> The body below remains the 2026-09-09 historical audit.
 
 Date: 2026-09-09
 
