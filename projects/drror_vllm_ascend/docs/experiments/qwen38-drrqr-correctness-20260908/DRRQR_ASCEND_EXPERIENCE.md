@@ -16,7 +16,7 @@ promising development baseline, not an accepted result. Its selector is an
 experimental joint normalized Q/K energy top-k rule, not the paper-exact
 StrongRRQR implementation.
 
-## Twelve durable conclusions
+## Fourteen durable conclusions
 
 1. The frozen dense contract is reusable until a material model, runtime,
    common-optimization, topology, device, or workload change occurs.
@@ -54,6 +54,16 @@ StrongRRQR implementation.
 12. A next-action note is a hypothesis, not proof that work is missing. The
     active Dk64 transformer already slices retained Q/K projection and matching
     convolution rows; source and trace audits prevented a duplicate branch.
+13. Semantic staging makes partial success reusable without overstating it.
+    Stage 1 proved packed addressing, shape derivation and the unchanged
+    recurrent ABI; Stage 2 arithmetic failed, so the active tree recovered to
+    Stage 1 while the failed implementation remained in Git history.
+14. A structural reduction is useful only if it stays reduced through the
+    complete serving path. The historical tail-sketch proposal failed because
+    post-convolution mixing could not be folded without retaining discarded
+    channels. Future rank or channel changes must map checkpoint slicing,
+    nonlinearities, state/cache layout, normalization/gating, output projection
+    and graph identity before claiming compute or traffic savings.
 
 ## Outcome classes and recovery rules
 
@@ -115,3 +125,8 @@ The authoritative decision records are
 `.agents/evals/practice-iterations/drrqr-*.yaml`; the live resume state is
 `.agents/HANDOFF.md`. Large reports remain outside Git and are bound by the
 paths and SHA256 values in those records.
+
+The machine-readable experience-ingestion ledger is
+`DRRQR_ASCEND_EXPERIENCE_INGESTION.json`. It records the trigger, future
+action, tested scope, evidence level, claim ceiling, destination and
+verification method for the reusable lessons without duplicating raw reports.

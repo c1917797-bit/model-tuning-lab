@@ -288,6 +288,10 @@
   now routed through `drrqr-ascend-optimization-loop`, with the evidence
   summary in
   `projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md`.
+  Its structured ingestion ledger is
+  `projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE_INGESTION.json`;
+  it separates reusable rules from run-specific evidence and records trigger,
+  tested scope, evidence level, claim ceiling, destination, and verification.
   It makes the current direction explicit: continue the energy-Dk64
   algorithm/operator co-design, stage native semantics one boundary at a time,
   stop repeated Q/K-only selector and microbenchmark-only variants, and keep

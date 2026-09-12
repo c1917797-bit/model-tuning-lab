@@ -53,6 +53,13 @@ reproduction.
    or loaded model path. Then translate the measured seam into a deliberately
    optimistic endpoint ceiling. If perfect removal cannot close a material
    part of the current joint gap, stop before code, build, NPU, or service work.
+8. For a structural rank or channel change, build a full-path foldability map
+   before implementation: checkpoint rows and columns, post-convolution
+   nonlinearities, recurrent state, normalization and gating, output
+   projection, cache allocation, scheduler identity, and graph keys. The
+   reduced dimension must remain reduced through the hot path. Charge any
+   dense reconstruction, gather, conversion, or hidden expansion against the
+   endpoint-headroom case.
 
 ## Reusable failure and stop rules
 
@@ -96,6 +103,10 @@ reproduction.
   the open gap. In the frozen Dk64 profile, separate L2 normalization is only
   about 0.202 ms per decode step and the full packed front end about 2.046 ms;
   neither can alone supply the required approximately 3.182 ms TPOT reduction.
+- Preserve a lower semantic stage that passed its declared gates when a later
+  arithmetic stage fails. Recover the active tree to that safe stage, retain
+  the failed implementation and evidence in Git history, and never promote the
+  earlier ABI or storage pass into acceptance of the failed arithmetic.
 
 ## Iteration workflow
 

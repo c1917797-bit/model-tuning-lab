@@ -1,0 +1,171 @@
+{
+  "schema": "maintainer-experience-ingestion/v1",
+  "source": {
+    "project": "projects/drror_vllm_ascend",
+    "program": "Qwen3.8-27B DRRQR on Ascend",
+    "checkpoint": "2026-09-12",
+    "base_commit": "ba6c4698393b15dd18565d66d6ac0a6d2c8ce2ce",
+    "authoritative_records": [
+      ".agents/evals/practice-iterations/drrqr-*.yaml",
+      ".agents/HANDOFF.md",
+      "projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md"
+    ]
+  },
+  "facts": [
+    "The frozen dense development baseline is 135.142469917 output tokens/s and the fixed ten-percent target is 148.656716909 output tokens/s.",
+    "The best comparable energy-Dk64 endpoint screen is 141.564496 output tokens/s, or 4.752041 percent above dense, and is not accepted.",
+    "Dk104 and Dk88 results on the frozen native decode path are runtime-invalid because padded state rows were copied out incorrectly; Dk128 and Dk64 passed the tested native decode golden gates.",
+    "The locked teacher corpus supports fit and held-out admission screens but does not prove NPU endpoint speed, task accuracy, or portability.",
+    "Nearby Q/K-only selector, sparse projection, phase-transition, tail-sketch, simple heterogeneous-width, reduction-specialization, and small-fusion variants were rejected only within their tested scopes.",
+    "Packed-addressing Stage 1 passed exact NPU eager, full-state, NPUGraph, guard, and pointer gates, while raw-normalization Stage 2 failed at the first valid arithmetic comparison and was reverted from the active tree.",
+    "Perfect removal of the measured separate L2 seam or complete packed front end cannot by itself close the remaining optimistic TPOT gap."
+  ],
+  "lessons": [
+    {
+      "title": "Reuse a frozen denominator until a material invariant changes",
+      "outcome_class": "accepted foundation",
+      "trigger": "A DRRQR candidate is compared with the established dense control.",
+      "future_action": "Reuse the frozen baseline unless model, runtime, common optimization, topology, device, or workload contract changes; if one changes, declare it and rebaseline both arms.",
+      "tested_scope": "Qwen3.8-27B TP4 fixed-output development protocol on the qualified Ascend environment.",
+      "evidence_level": "paired endpoint development evidence",
+      "claim_ceiling": "Comparable development screening, not final three-run acceptance.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        "projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json"
+      ],
+      "verification": "A future iteration names either the frozen baseline identity or the exact material change that forces a new one."
+    },
+    {
+      "title": "Prove the loaded execution path before optimizing it",
+      "outcome_class": "audit correction",
+      "trigger": "A source file or kernel is used to explain current Ascend service behavior.",
+      "future_action": "Bind worker dispatch, loaded source and dynamic-library identities before drawing a fusion or bottleneck conclusion; mark disproved conclusions superseded rather than silently retaining them.",
+      "tested_scope": "The current Ascend GDN gating, L2-normalization, and native recurrent path.",
+      "evidence_level": "worker-dispatch, source-hash, trace, and loaded-library evidence",
+      "claim_ceiling": "Execution-path identity for the captured environment.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        "projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md"
+      ],
+      "verification": "Every operator iteration records the actual dispatch path and loaded binary identity."
+    },
+    {
+      "title": "Treat complete recurrent state as part of correctness",
+      "outcome_class": "accepted foundation",
+      "trigger": "A DRRQR change mutates recurrent state or cache storage.",
+      "future_action": "Compare output and complete mutable state over changing multi-step inputs, untouched slots, guards, storage identity, eager, and NPUGraph before any performance test.",
+      "tested_scope": "Native recurrent Dk128/Dk64 controls and plugin-owned packed Stage 1 on physical NPU4.",
+      "evidence_level": "target-NPU numerical and graph correctness",
+      "claim_ceiling": "Correctness for the declared shapes, steps, dtype, and environment only.",
+      "destination": ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+      "verification": "The numerical gate fails closed on any output, full-state, guard, pointer, untouched-slot, or graph mismatch."
+    },
+    {
+      "title": "Do not infer an algorithm trend from invalid aligned storage",
+      "outcome_class": "invalid",
+      "trigger": "A logical rank crosses a native padding or alignment boundary.",
+      "future_action": "Keep the alignment guard, repair CopyOut or storage semantics first, and rerun correctness before comparing pruning rates.",
+      "tested_scope": "Frozen native decode state rows for Dk104 and Dk88 versus Dk128 and Dk64.",
+      "evidence_level": "golden native operator comparison",
+      "claim_ceiling": "Runtime validity of the tested widths, not DRRQR accuracy or speed trend.",
+      "destination": ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+      "verification": "Non-aligned candidates cannot enter endpoint or accuracy gates without a passing full-state test."
+    },
+    {
+      "title": "Optimize downstream recurrent output rather than a proxy",
+      "outcome_class": "rejected",
+      "trigger": "A new selector or transition improves retained energy, normalized-QK error, or state relative error.",
+      "future_action": "Use a locked fit and held-out split and require post-recurrence or post-RMS output fidelity; stop nearby variants when proxy improvements do not transfer.",
+      "tested_scope": "The frozen teacher corpus and the named Q/K-only, transition, sparse-subspace, and tail-compensation families.",
+      "evidence_level": "offline held-out trajectory screening",
+      "claim_ceiling": "Rejects only the tested configurations and nearby variants named in their iteration records.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        ".agents/evals/practice-iterations/drrqr-*.yaml"
+      ],
+      "verification": "Held-out data is opened only after the candidate is locked and reports both aggregate and worst-head output behavior."
+    },
+    {
+      "title": "Require full-path foldability for structural reduction",
+      "outcome_class": "rejected source audit",
+      "trigger": "A rank, channel, subspace, sketch, or heterogeneous-state proposal claims compute or memory savings.",
+      "future_action": "Map checkpoint rows and columns, convolution and nonlinearities, state/cache allocation, normalization/gating, output projection, scheduler identity, and graph keys; charge every reconstruction, gather, conversion, or dense expansion to the cost model.",
+      "tested_scope": "The rejected historical-tail sketch and the verified existing Dk64 Q/K projection plus convolution slicing path.",
+      "evidence_level": "source, checkpoint-transform, and trace-shape audit",
+      "claim_ceiling": "Implementation admission or rejection before code; no endpoint or quality claim.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        ".agents/skills.registry.yaml"
+      ],
+      "verification": "The candidate's reduced dimension remains reduced through every claimed hot-path saving, or the added work appears in its optimistic endpoint ceiling."
+    },
+    {
+      "title": "Use endpoint headroom to stop insufficient seams before implementation",
+      "outcome_class": "rejected source and cost audit",
+      "trigger": "A proposed operator change targets a measured DRRQR seam.",
+      "future_action": "First prove the saving is not already active, then compare deliberately optimistic perfect-removal savings with the open endpoint gap; stop if it cannot close a material part.",
+      "tested_scope": "Dk64 separate L2 normalization and the packed front end in the frozen diagnostic profile.",
+      "evidence_level": "compiled-artifact, source, and optimistic cost model",
+      "claim_ceiling": "Rejects the measured seam as the primary route; it is not an end-to-end benchmark.",
+      "destination": ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+      "verification": "Every implementation iteration states the open TPOT/throughput gap and a quantified optimistic saving before code or NPU work."
+    },
+    {
+      "title": "Stage semantics and recover to the last safe boundary",
+      "outcome_class": "failed implementation with accepted lower stage",
+      "trigger": "A multi-stage native operator prototype passes layout or ABI checks and later fails arithmetic.",
+      "future_action": "Keep the passed lower stage as the active recovery base, preserve the failed code and artifacts in history, and stop graph timing, endpoint, and accuracy for the failed stage.",
+      "tested_scope": "Packed-addressing Stage 1 and raw-normalization Stage 2.",
+      "evidence_level": "target-NPU eager, full-state, graph, and first-step arithmetic comparison",
+      "claim_ceiling": "Stage 1 ABI/storage admission only; Stage 2 is numerically failed.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        "projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md"
+      ],
+      "verification": "The active tree contains only the last safe stage and Git history retains both the failed implementation and its explicit revert."
+    },
+    {
+      "title": "Identify generated CANN operators by the complete vendor bundle",
+      "outcome_class": "invalid",
+      "trigger": "A generated custom operator is loaded for numerical or performance evidence.",
+      "future_action": "Load and hash matching op_api, opmaster, and opsproto artifacts from one packaged vendor root before interpreting a result.",
+      "tested_scope": "The raw-normalization Stage 2 generated operator bundle.",
+      "evidence_level": "runtime load and operator execution identity",
+      "claim_ceiling": "Runtime validity only; loading one library is not operator correctness.",
+      "destination": ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+      "verification": "Evidence records all bundle paths and hashes and rejects mixed or incomplete roots."
+    },
+    {
+      "title": "Preserve remote operation identity and retry only after terminal proof",
+      "outcome_class": "failed tooling and environment",
+      "trigger": "A remote build or command outlives the client wait, or its dedicated container is unavailable.",
+      "future_action": "Poll the same operation, prove terminal state, inspect container and device state, and retry once only after correcting the concrete defect.",
+      "tested_scope": "Remote native builds, container lifecycle, and Git push handling on chicaihong01.",
+      "evidence_level": "control-plane operation and process-state evidence",
+      "claim_ceiling": "Safe operational recovery, not algorithm evidence.",
+      "destination": [
+        ".agents/skills/drrqr-ascend-optimization-loop/SKILL.md",
+        ".agents/skills/chicaihong01-host-maintenance/SKILL.md"
+      ],
+      "verification": "A retry cites the prior operation identity, terminal state, and corrected cause instead of launching duplicate work."
+    }
+  ],
+  "do_not_ingest_as_durable_truth": [
+    "Unverified future algorithm ideas or operator speed estimates.",
+    "A single microbenchmark as evidence of endpoint improvement.",
+    "Historical errors that have been superseded by loaded-path evidence.",
+    "Raw report contents, credentials, model weights, profiler payloads, or machine-live state."
+  ],
+  "validation": {
+    "json_parse_required": true,
+    "skill_tree_validation_required": true,
+    "diff_check_required": true,
+    "npu_workload_started": false,
+    "new_performance_or_accuracy_result": false
+  },
+  "commit_push": {
+    "requested": true,
+    "content_commit": null,
+    "pushed_branch": null
+  }
+}
