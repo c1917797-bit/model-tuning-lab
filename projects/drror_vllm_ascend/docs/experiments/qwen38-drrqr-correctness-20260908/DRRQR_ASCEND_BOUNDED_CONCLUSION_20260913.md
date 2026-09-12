@@ -107,6 +107,29 @@ kernel sums are not a critical-path forecast. No code, build, NPU, endpoint or
 accuracy run was started. See
 `.agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml`.
 
+## Post-conclusion fused-recurrent floor audit
+
+The failed raw-packed-QKV Stage2 was re-read without modifying it. Its
+first-step numerical failure has a concrete implementation cause: the
+normalization routine squares Q/K in place, destroys the original signed
+values, and then normalizes the squared values. A correct implementation would
+square into separate scratch and multiply the preserved inputs.
+
+That bug is not being fixed because an independent target-runtime floor rejects
+the mechanism first. Under a deliberately favorable bound:
+
+- QKV split/concat, L2 and gating are all treated as perfectly removable;
+- even the preceding QKVZ split is optionally credited;
+- the recurrent part is reduced to 48 times the fastest single BF16 graph
+  sample ever observed in the existing order-balanced micro-screen.
+
+The resulting maximum credit is 3.004914 ms/token, still 0.176751 ms/token
+short of the required 3.181665 ms/token. The real service uses FP32 recurrent
+state, and a corrected fused kernel must still perform normalization, gating
+and recurrence, so this bound already favors the candidate. No correction,
+build, NPU, endpoint or accuracy run was started. See
+`.agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml`.
+
 ## Reopen condition
 
 Reopen only as a new bounded program around a materially different, named

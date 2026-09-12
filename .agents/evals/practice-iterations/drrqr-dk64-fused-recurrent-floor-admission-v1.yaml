@@ -1,0 +1,93 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-fused-recurrent-floor-admission-v1
+repository: model-tuning-lab
+status: complete
+date: 2026-09-13
+validated_commit: 42ac9d95b4b156f37cd42e8b1326072afa03d9d3
+
+stage_goal: Decide whether correcting and extending the failed raw-packed-QKV Stage2 into a Dk64-specific QKV/L2/gating/recurrent operator can credibly close the frozen performance gap.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 still needs 3.181664712 ms/token of reciprocal-TPOT reduction to reach 148.656716909 output tok/s from 141.564496153.
+  medium_term_milestone: Admit only a Dk64-specific operator whose surviving work and launch floor still leave enough optimistic endpoint headroom.
+  short_term_decision: Identify the preserved Stage2 arithmetic defect, bind only source-removable profile kernels, and include a measured per-layer graph floor before spending another build or NPU run.
+  deciding_evidence: Failed Stage2 source at commit 9dec2683c36bc6f44643d305e4ea2c75ff3eacee, the validated four-rank 30-step profile, and the existing order-balanced native/control/K64 micro-screen.
+  budget_or_stop_rule: One source and measured-floor audit. Do not correct, build, or run the operator if even the deliberately optimistic known-removable plus recurrent-floor bound misses the fixed endpoint target.
+  on_pass: Implement one correction for the proven arithmetic defect, require exact output/full-state eager and NPUGraph parity, then run one graph micro screen before service integration.
+  on_failure: Preserve the identified bug but do not fix it for performance work; close this packed-fusion family and require a materially different DRRQR mechanism or explicit scope change.
+  on_inconclusive: Permit one trace-shape or micro-report identity check only if it can change the bound.
+
+candidate_contract:
+  algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
+  paper_exact_selection: false
+  proposed_change: Consume raw packed QKV, reproduce active Q/K L2 semantics, optionally absorb gating, and retain one recurrent launch per GDN layer.
+  prohibited_substitutes: [MTP, speculative decoding, quantization, retraining]
+
+numerical_failure_audit:
+  failed_commit: 9dec2683c36bc6f44643d305e4ea2c75ff3eacee
+  result: proven_implementation_defect
+  defect: NormalizeAndRoundQK calls Mul(input, input, input), destroying original signed Q/K values, then normalizes and BF16-round-trips the squared values instead of the original values.
+  correction_shape: Compute squares into independent FP32 scratch, reduce them for the inverse norm, multiply the preserved original FP32 Q/K, then reproduce the BF16 round trip before recurrent arithmetic.
+  claim_boundary: This explains the first-step output and full-state divergence. It does not prove that the corrected AscendC reduction will be bitwise equal or faster.
+
+profile_costs:
+  protocol: four ranks, 30 pure-decode steps, concurrency 16
+  source_report:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/profile-comparison.v1.json
+    sha256: 9cca1cd11a9eecd12c6e45988505d767c92ac6aa41fe3a857445a50d5b64115b
+  known_removable_per_step_ms:
+    qkv_slices: 0.393612667
+    qkv_concat: 0.721907167
+    l2norm: 0.201845333
+    gating: 0.365957833
+    subtotal: 1.683323000
+  optional_full_qkvz_input_credit_ms: 0.139910167
+  recurrent_current_per_step_ms: 1.834893667
+  warning: Every listed kernel sum is treated as fully critical and perfectly removable where source-bound. This is an optimistic admission bound, not an endpoint forecast.
+
+measured_floor:
+  source: Existing ABCCBA single-operator micro-screen, BF16 state, batches 1 and 16, eager and NPUGraph.
+  reports:
+    - {label: native_a1, sha256: dd4198c0ecd7ba18ef76d86d3f3cbfa7e2355ee74dd018b45842bb71152c3b1d}
+    - {label: control_b1, sha256: e67d4e38d680a934f103ecacfea0a165c6e3ebed0d8cfeb8bd12ce6493ecc64f}
+    - {label: candidate_c1, sha256: b874efc9d83ffd72a524680ea872d72771ffab743708db96c6b1c82c5807a2c8}
+    - {label: candidate_c2, sha256: 91f8c2783adc3180f4702b6e8fc0611b41843de2007e47a8966c1585b9f7e262}
+    - {label: control_b2, sha256: 6a09cf48d1e7b11cbd3a39f9f20b7a8e61919a842870fc0653d5a6980a9a4df4}
+    - {label: native_a2, sha256: 28b8401415ce5118e1973afc08253e73d7be26c4b7c81bfec4d631a2a6704e01}
+  fastest_observed_graph_sample_per_layer_ms: 0.013608600
+  layers_per_decode_step: 48
+  optimistic_surviving_recurrent_floor_ms: 0.653212795
+  portability_note: The micro floor used BF16 state while the actual service recurrent state is FP32, so it favors rather than penalizes the candidate. It is still target-environment evidence, not a cross-environment guarantee.
+
+optimistic_endpoint_bound:
+  required_tpot_reduction_ms: 3.181664712
+  known_external_credit_plus_recurrent_to_floor_ms: 2.865003871
+  shortfall_without_optional_qkvz_ms: 0.316660840
+  all_known_external_plus_optional_qkvz_plus_recurrent_to_floor_ms: 3.004914038
+  shortfall_even_with_optional_qkvz_ms: 0.176750674
+  required_residual_recurrent_per_layer_without_optional_qkvz_us: 7.011499
+  required_residual_recurrent_per_layer_with_optional_qkvz_us: 9.926294
+  comparison: Both required residuals are below the fastest observed 13.608600 us graph sample, before charging fused normalization, gating, FP32 state, or added raw-layout work.
+
+validation_commands:
+  - Inspect the failed Stage2 header at commit 9dec2683 and the frozen active L2 semantics.
+  - Recompute source-bound per-step costs from the validated profile.
+  - Inspect all six immutable ABCCBA micro reports and use the fastest individual graph sample as the optimistic per-layer floor.
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+outcome:
+  class: rejected_before_correction
+  evidence_level: source root cause plus target-runtime profile and measured graph floor
+  decision: Do not correct or extend Stage2 for endpoint work. The numerical defect is real and repairable in principle, but the surviving one-launch-per-layer recurrent floor makes the fixed 10 percent target unreachable even under an overgenerous removal bound.
+  claim_ceiling: Rejects this per-layer packed QKV/L2/gating/recurrent fusion family as the remaining route to the fixed target. It does not prove that every future cross-layer or algorithmically different DRRQR formulation is impossible.
+  code_changed: false
+  npu_used: false
+  endpoint_used: false
+  accuracy_used: false
+
+lessons_ingested:
+  - A proven numerical bug does not justify a correction run when an independent performance floor already rejects the mechanism.
+  - Perfect-removal bounds must retain irreducible per-layer launches and arithmetic rather than treating the entire recurrent kernel as removable.
+  - Use the fastest compatible observed sample and favorable dtype as an optimistic floor; failure under that bound is stronger than failure under an average estimate.

@@ -30,6 +30,15 @@
   removing every Slice+ConcatD gives only 1.826091 ms/token versus the open
   3.181665 ms/token gap. No code, build, NPU, service, endpoint or accuracy run
   followed. Require a materially different named DRRQR mechanism to reopen.
+- The drrqr-dk64-fused-recurrent-floor-admission-v1 audit is complete and
+  rejected before correction. It found a real bug in failed Stage2: Q/K were
+  squared in place and the squared values were normalized. Even so, a favorable
+  target-runtime bound that perfectly removes source-bound QKV split/concat,
+  L2, gating and optionally QKVZ split, then reduces recurrent work to 48 times
+  the fastest observed BF16 graph sample, saves at most 3.004914 ms/token. That
+  remains 0.176751 ms/token short of the required 3.181665 ms/token before
+  charging any fused arithmetic or the real FP32 state. No code, build, NPU,
+  endpoint or accuracy run followed. Do not repair Stage2 for this target.
 - The real captured-teacher fixed-beta screen is complete and rejected:
   144/144 dense128/energy64/beta64 trajectories passed numerical and graph
   gates, but beta64 failed 5/144 robustness windows despite a 0.888847 global
@@ -506,6 +515,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml
 .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml
+.agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md

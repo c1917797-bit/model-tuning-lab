@@ -120,6 +120,11 @@ reproduction.
   kernels to input shapes and per-layer call counts: QKV Slice/Concat traffic
   must not be relabelled as state-cache traffic. Treat compact allocation as a
   capacity mechanism until a fixed-workload per-token saving is identified.
+- Do not repair a numerically failed fusion merely because its bug is now
+  understood. Recompute the performance admission with all source-removable
+  work, surviving per-layer launches and an optimistic measured graph floor.
+  If the corrected mechanism still cannot close the open endpoint gap before
+  charging its added arithmetic, stop before code, build or NPU.
 
 ## Iteration workflow
 
