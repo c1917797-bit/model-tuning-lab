@@ -259,6 +259,9 @@ def main() -> None:
                 "gate_up_prefetch",
                 "rmsnorm_postprocess",
                 "t21_dense_mlp",
+                "mrv1_acl_graph",
+                "mrv1_npugraph_options",
+                "mrv1_optimized_graph",
             }
         )
         log.write_text(
