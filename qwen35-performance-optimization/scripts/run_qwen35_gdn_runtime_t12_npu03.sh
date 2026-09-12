@@ -20,6 +20,11 @@ operator_vendor=qwen35_mmar_aicpu_first_transformer_transformer
 operator_container_root=/opt/qwen35-mmar-aicpu-first-opp
 operator_container_vendor="$operator_container_root/vendors/$operator_vendor"
 variant="${VARIANT:-candidate}"
+torch_logs="${QWEN35_TORCH_LOGS:-}"
+torch_log_env_args=()
+if [[ -n "$torch_logs" ]]; then
+  torch_log_env_args=(-e "TORCH_LOGS=$torch_logs")
+fi
 case "$variant" in
   candidate)
     patch_enabled=1
@@ -371,6 +376,7 @@ docker_args=(
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD="$mmar_prefill_threshold"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$mmar_prefill_max_tokens"
   -e PYTHONPATH="$python_path"
+  "${torch_log_env_args[@]}"
   "${operator_env_args[@]}"
   "${t21_env_args[@]}"
   "${profile_env_args[@]}"

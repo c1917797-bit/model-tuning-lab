@@ -63,6 +63,8 @@ grep -Fq 'ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb' "$ru
 grep -Fq 'T21 bridge SHA256 mismatch' "$runner"
 grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS:-0' "$runner"
 grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS_INTERVAL:-32' "$runner"
+grep -Fq 'QWEN35_TORCH_LOGS:-' "$runner"
+grep -Fq 'TORCH_LOGS=$torch_logs' "$runner"
 grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS="$qwen35_diagnostics"' "$runner"
 grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS_INTERVAL="$qwen35_diagnostics_interval"' "$runner"
 grep -Fq 'qwen35_gdn_runtime_t12_${variant}_npu03' "$capture"
