@@ -131,6 +131,12 @@ reproduction.
   another selector when perfect removal of its partition is insufficient; a
   reopened program must name a mechanism whose affected fraction exceeds the
   measured threshold with margin for launches and added work.
+- Audit nominal rank zero by semantics, not by its label. If Dk0 makes the
+  complete algorithm-bearing residual branch zero, it is branch or layer
+  pruning rather than a reduced recurrent representation unless a new
+  derivation proves otherwise. Its relative-L2 against every nonzero local
+  teacher output is exactly one, so evaluate the integer layer-removal count
+  and frozen local windows before writing bypass code or launching NPU work.
 
 ## Iteration workflow
 

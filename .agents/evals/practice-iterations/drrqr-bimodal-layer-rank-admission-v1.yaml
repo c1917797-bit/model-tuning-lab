@@ -1,0 +1,125 @@
+schema: mst-practice-iteration/v1
+id: drrqr-bimodal-layer-rank-admission-v1
+repository: model-tuning-lab
+status: complete
+date: 2026-09-13
+validated_commit: 2a5e4fe07826b6bb0b0c7f40cd3ff2d9bc8d529a
+
+stage_goal: Decide whether a bimodal layerwise plan that keeps critical GDN layers at Dk128 and bypasses redundant GDN layers at Dk0 can cross the fixed performance target without abandoning the existing DRRQR fidelity contract.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen dense is 135.142469917 output tok/s, the fixed target is 148.656716909, and the best energy-Dk64 endpoint screen is 141.564496153 tok/s. The complete optimistic Dk64 GDN budget showed that a new mechanism must affect more than 35.546433 percent of GDN work.
+  medium_term_milestone: Admit only a full-path state-rank mechanism whose optimistic physical scale crosses the target and whose untouched local-output fidelity is no worse than the validated Dk64 reference.
+  short_term_decision: Reuse the frozen dense profile and all-48-layer captured-teacher width curve to accept or reject the Dk0/Dk128 bimodal plan before implementation or NPU execution.
+  deciding_evidence: The dense profile must show the integer number of fully bypassed GDN layers needed to cross the fixed target under a deliberately favorable additive model. A bypassed layer has zero GDN branch output, hence relative-L2 error exactly one against every nonzero dense teacher output; it must pass the frozen five-percent local-window regression gate versus energy-Dk64.
+  budget_or_stop_rule: One offline source/profile/fidelity admission. Stop without code, build, NPU, endpoint or accuracy if the target requires broad branch removal or any proposed Dk0 layer fails the existing local-window gate.
+  on_pass: Define a plugin-owned logical rank-zero representation, exact residual semantics, cache and graph identities, then run a target-NPU numerical/state gate before endpoint work.
+  on_failure: Reject the Dk0/Dk128 bypass family for this objective and do not relabel generic GDN-layer pruning as DRRQR state reduction.
+  on_inconclusive: Bind only a missing profile shape or teacher denominator if it can change the integer skip count or the exact zero-output error.
+
+candidate:
+  name: bimodal_layer_rank_0_128
+  definition: Execute retained linear-attention GDN layers at original Dk128 and replace selected layers' complete GDN branch output with zero, leaving the residual path as a bypass.
+  state_budget_equal_to_uniform_dk64:
+    retained_dk128_layers: 24
+    bypassed_dk0_layers: 24
+    sum_dk: 3072
+  scope_warning: Dk0 removes the complete GDN sublayer contribution rather than preserving a reduced recurrent state. Without a new rank-zero algorithmic derivation, this is generic branch or layer pruning, not paper-faithful DRRQR.
+
+evidence:
+  frozen_endpoint_pair:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/dk64-vs-dense-common-optimized.json
+    sha256: d222aa3a39fa0933c8f2c72d0fba405aae6aa32fcc95e5823d3911092ffdffbd
+  dense_profile_summary:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/baseline/profile-summary.v1.json
+    sha256: b3bddd3b1a8b96571f20c59d801aa21da3da673f875f86a3b04318afbdb480a8
+  full_layer_width_curve:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-full-layer-width-merge-v1/report.json
+    sha256: de807118e7146c1a1d8dcce6111c3229a6e0d8916a163b3644d0496fd9d0057f
+  full_layer_width_budget:
+    path: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-full-layer-width-budget-v1/report.json
+    sha256: 20739274c3b18408231b93d89c3ca9f7133ec945176dc9a0898e4bdfdd5dae50
+
+performance_bound:
+  protocol: four ranks, 30 pure-decode steps, concurrency 16
+  dense_gdn_rank_mean_kernel_sum_ms:
+    qkvz_projection: 91.647630000
+    causal_conv: 28.158165000
+    qkvz_split: 4.234915000
+    qkv_slices: 11.400465000
+    packed_concat: 22.041250000
+    l2norm: 6.666155000
+    gating: 10.766115000
+    recurrent: 63.584425000
+    rms_norm: 7.889010000
+    output_projection: 39.931503750
+    total: 286.319633750
+  deliberately_optimistic_dense_gdn_budget_per_step_ms: 9.543987792
+  frozen_dense_tpot_ms: 69.436226865
+  reciprocal_target_tpot_ms: 63.123842605
+  required_dense_tpot_reduction_ms: 6.312384260
+  required_fraction_of_optimistic_dense_gdn_budget_percent: 66.139903
+  required_uniform_layer_equivalents: 31.747153
+  minimum_integer_bypassed_layers: 32
+  equal_state_budget_24_layer_bound:
+    optimistic_tpot_ms: 64.664232969
+    optimistic_output_tps: 145.115510838
+    optimistic_gain_vs_dense_percent: 7.379650
+    crosses_target: false
+  31_layer_bound:
+    optimistic_output_tps: 148.307682184
+    optimistic_gain_vs_dense_percent: 9.741728
+    crosses_target: false
+  32_layer_bound:
+    optimistic_output_tps: 148.775207233
+    optimistic_gain_vs_dense_percent: 10.087678
+    crosses_target: true
+    retained_dk128_layers: 16
+    bypassed_fraction_percent: 66.666667
+  warning: Kernel sums are not an additive critical path. Linear per-layer removal, zero bypass overhead and exact inverse-TPOT throughput conversion all favor admission; the first crossing has only 0.087678 percentage-point paper margin.
+
+fidelity_bound:
+  reference: energy-Dk64 captured-dense local post-RMS trajectory error
+  groups: 1152
+  groups_per_layer: 24
+  layers: 48
+  denominator_floor: 0.000001
+  local_regression_ratio_limit: 1.05
+  dk64_global_mean_relative_l2: 0.3439181998102832
+  dk0_relative_l2_per_nonzero_teacher_window: 1.0
+  dk0_over_dk64_global_mean_ratio: 2.907668162
+  dk0_violating_windows: 1145
+  dk0_violating_windows_per_layer_range:
+    minimum: 22
+    maximum: 24
+  safe_dk0_layers: 0
+  best_layer_by_mean_ratio:
+    layer: 2
+    dk64_mean_relative_l2: 0.567746360
+    dk0_over_dk64_mean_ratio: 1.761349910
+    violating_windows: 22
+  comparison_context:
+    safe_dk48_layers_under_same_gate: 0
+    note: Even Dk48 already failed every layer's local regression gate; rank zero is much more destructive and fails the gate directly from the preserved teacher report.
+
+validation_commands:
+  - Rebind every dense GDN component by operator type, exact input shape and per-rank call count from the hash-bound baseline profile.
+  - Recompute the additive dense GDN budget and integer skip threshold from the frozen endpoint denominator.
+  - Evaluate the analytic Dk0 zero-output error against all 1152 energy-Dk64 teacher windows using the frozen denominator floor and 1.05 ratio limit.
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+outcome:
+  class: rejected_at_scope_and_fidelity_gate
+  decision: Do not implement or run the Dk0/Dk128 bimodal plan. Equal-state-budget 24-layer bypass cannot reach the fixed target even under the favorable cost model; reaching it requires bypassing at least 32 of 48 GDN branches, while zero of 48 layers pass the untouched local-fidelity gate.
+  claim_ceiling: This rejects complete GDN-branch bypass as a layerwise 0/128 plan for the current objective. It does not reject every future learned layer-pruning method or a genuinely derived rank-zero recurrent representation, but those would be new scoped algorithms and cannot inherit the DRRQR claim.
+  code_changed: false
+  npu_used: false
+  endpoint_used: false
+  accuracy_used: false
+
+lessons_ingested:
+  - A nominal Dk0 must be audited semantically; if it zeros the complete residual branch, it is layer pruning rather than a reduced recurrent representation.
+  - For zero-output bypass, local relative-L2 is analytically one. Reuse frozen teacher windows to reject unsafe layer maps before implementation or NPU work.
+  - Convert a whole-layer paper ceiling to an integer skip count. A candidate that must remove two thirds of algorithm-bearing layers and has no fidelity-safe layer is not an admissible performance route.

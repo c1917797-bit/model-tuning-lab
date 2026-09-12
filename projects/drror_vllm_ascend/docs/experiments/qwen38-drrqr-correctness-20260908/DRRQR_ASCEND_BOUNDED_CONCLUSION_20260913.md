@@ -153,6 +153,31 @@ work, pass an untouched downstream-output gate, and retain physical margin for
 its launches and added arithmetic. See
 `.agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml`.
 
+## Bimodal Dk0/Dk128 layer-rank audit
+
+A final whole-layer interpretation was checked without launching NPU work:
+retain critical GDN layers at the original Dk128 and assign other layers Dk0.
+Here Dk0 does not preserve a smaller recurrent state; it makes the complete
+GDN branch contribution zero and leaves only the residual bypass. It is
+therefore generic branch pruning unless a new rank-zero recurrence is derived.
+
+The exact dense Dk128 profile shapes bind a deliberately additive
+9.543988 ms/token GDN budget. Under linear per-layer removal, zero bypass
+overhead and inverse-TPOT conversion, an equal-state-budget plan with 24 Dk0
+and 24 Dk128 layers reaches only 145.115511 tok/s, or +7.379650 percent.
+Thirty-one bypasses remain below target. The first paper crossing requires
+bypassing 32 of 48 GDN layers and retaining only 16; even then the projected
+gain is only +10.087678 percent, with no physical-overhead margin.
+
+The preserved all-48-layer teacher report closes the fidelity side
+analytically. A zero branch has relative-L2 exactly one against each nonzero
+dense branch output, versus 0.343918 global mean for energy-Dk64. Dk0 is
+2.907668 times worse globally, violates 1145/1152 local windows under the
+frozen five-percent regression gate, and has zero safe layers; even the best
+layer violates 22/24 windows. The Dk0/Dk128 bypass family is therefore rejected
+before code, build, NPU, endpoint or accuracy work. See
+.agents/evals/practice-iterations/drrqr-bimodal-layer-rank-admission-v1.yaml.
+
 ## Reopen condition
 
 Reopen only as a new bounded program around a materially different, named

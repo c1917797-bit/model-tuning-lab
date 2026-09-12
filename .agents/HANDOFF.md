@@ -47,6 +47,15 @@
   per-layer graph floor, while value/output reduction failed locked held-out
   fidelity. Require a structurally different DRRQR state representation
   affecting more than 35.55 percent of GDN work before any new NPU run.
+- The drrqr-bimodal-layer-rank-admission-v1 audit is complete and rejected
+  before implementation. Treating selected Dk0 layers as complete GDN branch
+  bypasses, the dense profile's deliberately additive 9.543988 ms/token GDN
+  budget requires bypassing at least 32/48 layers to reach only a 10.087678
+  percent paper gain; the equal-state-budget 24/24 Dk0/Dk128 plan reaches only
+  7.379650 percent. A zero branch has relative-L2 exactly one against a
+  nonzero teacher output. It violates 1145/1152 frozen Dk64 local windows,
+  with zero fidelity-safe layers. This is generic branch pruning without a new
+  rank-zero derivation, so no code, NPU, endpoint or accuracy run followed.
 - The real captured-teacher fixed-beta screen is complete and rejected:
   144/144 dense128/energy64/beta64 trajectories passed numerical and graph
   gates, but beta64 failed 5/144 robustness windows despite a 0.888847 global
@@ -525,6 +534,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml
+.agents/evals/practice-iterations/drrqr-bimodal-layer-rank-admission-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
