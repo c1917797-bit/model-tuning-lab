@@ -19,6 +19,7 @@ class SparseCanaryScheduler(AsyncScheduler):
             raise RuntimeError("unexpected canary plan")
         root = "/vllm-workspace/vllm/vllm/v1/core/"
         hashes = {
+            "/vllm-workspace/vllm-ascend/vllm_ascend/patch/platform/patch_mamba_manager.py": "f39b28a75509ff5b8617104a00c73e6bd21b8b7acd43f81b50c57ea7c474815e",
             root + "sched/async_scheduler.py": "0022e12f356fd46406f6e6d3c82755daf7287ca2d86e2000c27b05bb8d9621cc",
             root + "sched/scheduler.py": "9ae1491f57a6294e32416b93ef2ea68107fa0d65c3a4d7f745f1261012f735e9",
             root + "single_type_kv_cache_manager.py": "dc425e1e87b6157f3e5c46be2bfee54076ccb020b86c5a8aaa3d9901c75e46ef",

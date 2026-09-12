@@ -23,11 +23,13 @@ def install(scheduler_class, mamba_class, positions, block_size, source_hashes, 
             any(type(p) is not int or p <= 0 or p % block_size for p in positions) or
             list(positions) != sorted(set(positions))):
         raise ValueError("plan must contain sorted unique positive block boundaries")
-    for cls in (scheduler_class, mamba_class,
+    cache_base = next(cls for cls in mamba_class.__mro__[1:]
+                      if "reachable_block_mask" in cls.__dict__ and "cache_blocks" in cls.__dict__)
+    for cls in (scheduler_class, mamba_class, cache_base,
                 scheduler_class._mamba_block_aligned_split):
         path = inspect.getsourcefile(cls)
         if not path or path not in source_hashes:
-            raise ValueError("missing imported source fingerprint")
+            raise ValueError("missing imported source fingerprint: " + str(path))
         if hashlib.sha256(Path(path).read_bytes()).hexdigest() != source_hashes[path]:
             raise ValueError("imported source fingerprint mismatch")
     if getattr(mamba_class, "_sparse_plan_installed", False):
@@ -36,7 +38,7 @@ def install(scheduler_class, mamba_class, positions, block_size, source_hashes, 
     owners = (scheduler_class, mamba_class, mamba_class)
     saved = [(cls, name, cls.__dict__.get(name)) for cls, name in zip(owners, names)]
     native_split = scheduler_class._mamba_block_aligned_split
-    base_cache = super(mamba_class, mamba_class).cache_blocks
+    base_cache = cache_base.cache_blocks
 
     def split(self, request, num_new_tokens, num_new_local_computed_tokens=0,
               num_external_computed_tokens=0):

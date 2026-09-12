@@ -2,6 +2,25 @@
 
 ## Current authoritative status (2026-09-12)
 
+FAILED CANDIDATE: ma exec-0000000000000322, paper640 TP4 physical0-3,
+artifact /cache/austinov/sparse-prefix-smoke-Cvh2o1. Actual engine imports
+AscendMambaManager, not the generic MambaManager tested earlier; source guard
+rejected it before requests. Exact owned container ce41a468ce89 stopped by0347
+after fatal initialization;0322 terminal137 is cleanup, not evidence of OOM.
+Raw run.log SHA2560615cc513ba0641d51f42f7245b65545ed058ebfb5bde1637e0d02dcf5dd1ec1.
+Correction pins AscendMambaManager source and resolves base publication through
+the MRO, preserving Ascend hit/admission overrides. Revised image metadata test
+0341 explicitly imports AscendMambaManager and passed exit0. Live retry pending.
+Native control030d completed exit0; all six rows inspected: Beijing/42, natural
+stop, identical repeated token IDs, repeat hits3072. Container auto-removed and
+npu-smi showed no processes before0322. Control artifact:
+/cache/austinov/sparse-prefix-smoke-0bcbu4
+smoke.json SHA256 de62dc68cad75dd9e5e305468028ab41eac7d45b8ff6db49daa57ed7d8915a25
+identity.json SHA256 ce6baff739c9d354c472333baebf0c102beaca0f35581c5c54194e2da55d4ace
+run.log SHA256 358c9edad0e40210acb1ae1b0521dccca12277b63d548b9a0470f7eba365bc79
+ACL_AND_PATCH_IMPORT_PASS was verified by device-free operation030c with the
+same read-only driver mount before this retry. No model result yet.
+
 FAILED CONTROL (terminal exit1): ma operation exec-00000000000002f3; exact container
 db88362e0e40 / qwen38_sparse_smoke_mDKrKl; artifact
 /cache/austinov/sparse-prefix-smoke-mDKrKl. Native cache, context640, maxlen4096,
