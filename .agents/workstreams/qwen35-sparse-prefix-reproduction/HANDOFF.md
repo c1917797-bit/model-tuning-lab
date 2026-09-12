@@ -2,6 +2,18 @@
 
 ## Current authoritative status (2026-09-12)
 
+LATEST DEVICE RETRY after user requested use of idle4-7: mb019a terminal exit1.
+Artifact /cache/austinov/sparse-prefix-smoke-FvmPE9; run.log SHA256
+702b92ba6b16c425fe0cfb680716093169e232c84e0799de6ffe07f664399b85.
+Actual attempt: SPARSE_NPU_LANE=4-7 SPARSE_DEVICE_PREFLIGHT=1 safe launcher.
+ACL import passed, DEVICE_COUNT0 / DCMI -8020 device-used; no model loaded.
+Preflight found no compute on4-7 and MemAvailable67912516kB; external0-3
+VLLM workers847343-847346 protected. Running drrqr_qwen38_energy_preflight_20260908
+still binds4-7; mb019b docker top found only bash3335959. Own --rm container
+no longer running. No external container changed. Need explicit permission
+to temporarily stop that binding container (with restoration responsibility),
+or wait for owner to release it. Do not retry unchanged initialization repeatedly.
+
 READ-ONLY PROMPT AUDIT completed: mb exec-0000000000000195 exit0.
 Artifact /cache/austinov/sparse-prompt-audit-aJ2ugv/audit.json SHA256
 f96f9e9701052ac70b6004d2da8f7b82120929c85fd9bb6a43134e477af87ad9.
