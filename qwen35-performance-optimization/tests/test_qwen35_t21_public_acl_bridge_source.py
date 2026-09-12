@@ -16,6 +16,8 @@ SOURCE = (
 def test_uses_only_public_tensor_and_stream_seams() -> None:
     assert "aclCreateTensor" in SOURCE
     assert "getCurrentNPUStream" in SOURCE
+    assert "OpCommand::RunOpApiV2" in SOURCE
+    assert "std::make_shared<PublicAclTensor>" in SOURCE
     assert "dlopen" in SOURCE and "dlsym" in SOURCE
     assert "aclnnSwigluGatedMlp" in SOURCE
     assert "TORCH_LIBRARY(qwen35_t21" in SOURCE

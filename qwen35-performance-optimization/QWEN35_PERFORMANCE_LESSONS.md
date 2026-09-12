@@ -22,8 +22,8 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | Historical T11 c1: TTFT reduction 47.7%, TPOT reduction 17.3% | Runtime monkeypatch manifest | It clears the corrected c1 thresholds, but lacks the current full matrix and quality proof. Reproduce before claiming. |
 | T27 upstream SwiGLU MLP FLOAT smoke passed on NPU0 | /cache/austinov/qwen35-t21-upstream-float-smoke-20260912T163200Z | The minimal official six-argument ExecMmOp ABI adapter is viable. |
 | T27 exact TP4 BF16 matrix passed 12/12 for M=1/5/8/16 x seeds 1/2/3 | /cache/austinov/qwen35-t21-bf16-numerical-20260912T163327Z | Every case was bit-exact against official Matmul -> SwiGLU -> Matmul; the operator may enter model integration but is not promoted. |
-| T28 public ACL bridge builds and imports without private vLLM-Ascend symbols | /cache/austinov/qwen35-t21-public-acl-bridge-20260912-v2 | Public ACL descriptors plus the public torch-npu stream avoid the failed private-symbol seam. |
-| T28 zero-copy model-layout gate passed 12/12 plus 100-call stress | /cache/austinov/qwen35-t21-public-bridge-numerical-20260912T173348Z | `.t()` views are bit-exact with contiguous candidate weights, so no persistent transposed copies are needed. |
+| T28 task-queue-safe public ACL bridge builds and imports without private vLLM-Ascend symbols | /cache/austinov/qwen35-t21-public-acl-bridge-20260912-v3 | Public ACL descriptors plus torch-npu `RunOpApiV2` preserve stream ordering and object lifetimes without the failed private-symbol seam. |
+| T28 zero-copy model-layout gate passed three fresh 20/20 matrices plus 500-call stress per run | /cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v4, -v5, -v7 | `.t()` views are bit-exact with contiguous candidate weights; the former intermittent NaN was eliminated by task-queue-aware scheduling and captured ownership. |
 | Reproducible benchmark, accuracy, resource-lock, rollback, official-image, and evidence tooling exists | This workstream and external artifact roots | Infrastructure is part of the result; reuse it rather than creating ad-hoc tests. |
 
 ## Failed or rejected routes

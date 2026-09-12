@@ -18,24 +18,24 @@
   minimal CANN 9.1 six-argument ABI adapter. Exact BF16 TP4 matrix passed
   12/12 against official Matmul -> SwiGLU -> Matmul.
 - T28 replaced the failed private-symbol PyTorch bridge with public ACL
-  tensor descriptors, the public torch-npu current stream, and a traceable
+  tensor descriptors, torch-npu's `RunOpApiV2` task-queue seam, and a traceable
   `torch.ops.qwen35_t21.swiglu_gated_mlp` node with Meta registration.
   Device-free build/import and private-symbol audit pass. Pinned bridge:
-  `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v2`, SHA-256
-  `878091b05f3556f62ac94089faedfff211b859d205463c93d7cd45f5d57e46bf`.
-- The zero-copy `.t()` model-weight layout passed 12/12 M=1/5/8/16 x
-  seeds=1/2/3 and matched contiguous candidate weights bit-for-bit; 100-call
-  stress passed. Evidence:
-  `/cache/austinov/qwen35-t21-public-bridge-numerical-20260912T173348Z`.
+  `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v3`, SHA-256
+  `36bf053fd6511ac8a050dd30e08ee99396a76738afcc74fe3788fdc1f001e58a`.
+- A direct ACL execute initially produced an intermittent NaN because it
+  bypassed torch-npu's enabled host task queue. Captured ownership plus
+  `RunOpApiV2` removed that race. Three fresh zero-copy `.t()` layout runs
+  passed 20/20 M=1/5/8/16 x seeds=1..5 and matched contiguous candidate
+  weights bit-for-bit; each completed run passed 500-call stress. Evidence:
+  `/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v4`,
+  `/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v5`, and
+  `/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v7`.
 - Qwen-specific delta: exact BF16 TP4/small-M admission, zero-copy model
   weight views, traceable registration, and composition with vLLM's existing
   TP AllReduce. It is opt-in as `candidate-prefill-t21` and rolls back with
   `QWEN35_ASCEND_T21_DENSE_MLP=0` plus restart.
-- The first repeat of the v2 torch-operator device gate correctly stopped at
-  the cooperative lock because another Qwen3.8 job acquired NPU0-3. Do not
-  interrupt it. Re-run after both the lease and real NPU processes are clear.
-- Next sequence: v2 torch-operator numerical/stress rerun -> TP4
-  `candidate-prefill-t21` activation/natural-EOS smoke -> official control vs
+- Next sequence: TP4 `candidate-prefill-t21` activation/natural-EOS smoke -> official control vs
   bounded-prefill base vs base+T21 fail-fast ablation -> complete performance
   matrix -> paired 357-row and frozen GSM8K quality gates.
 - Current offline regression is green: all directly executable Python and

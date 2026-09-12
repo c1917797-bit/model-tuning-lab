@@ -7,7 +7,8 @@
 The first bridge failed because it referenced a private, non-exported
 vLLM-Ascend `NPUBridge` symbol. T28 removes that dependency entirely. The new
 bridge builds tensor descriptors with public `aclCreateTensor`, submits the
-pinned upstream `aclnnSwigluGatedMlp` ABI on torch-npu's public current stream,
+pinned upstream `aclnnSwigluGatedMlp` ABI through torch-npu's `RunOpApiV2`
+task-queue seam on the public current stream,
 and registers both `PrivateUse1` and `Meta` kernels as a traceable
 `torch.ops.qwen35_t21.swiglu_gated_mlp` node. It contains no replacement
 matmul, SwiGLU, or collective implementation.
@@ -16,9 +17,9 @@ The bridge was built offline in the unchanged official vLLM-Ascend v0.23.0
 image with no network and no NPU mapping. Its undefined-symbol audit contains
 neither private bridge nor private storage symbols. The pinned build is:
 
-- artifact: `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v2`;
+- artifact: `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v3`;
 - bridge SHA-256:
-  `878091b05f3556f62ac94089faedfff211b859d205463c93d7cd45f5d57e46bf`;
+  `36bf053fd6511ac8a050dd30e08ee99396a76738afcc74fe3788fdc1f001e58a`;
 - build runner: `scripts/build_qwen35_t21_public_acl_bridge.sh`.
 
 The official-image device-free registration test passes: importing the
@@ -37,18 +38,21 @@ T28 passes zero-copy `.t()` views with strides `[1, 5120]` and `[1, 4352]`
 through public ACL descriptors; it does not allocate persistent transposed
 weight copies.
 
-On physical NPU0, M=1/5/8/16 across seeds 1/2/3 passed 12/12. The zero-copy
-view and contiguous-copy candidate outputs were bit-exact in every case. The
+The first torch-operator bridge exposed an intermittent NaN because a direct
+ACL execute bypassed torch-npu's enabled host task queue. The v3 bridge now
+uses `RunOpApiV2` and captures tensors, workspace, executor, and ACL
+descriptors until the queued call is consumed.
+
+On physical NPU0, three fresh runs of M=1/5/8/16 across seeds 1/2/3/4/5
+passed 20/20 each. The zero-copy view and contiguous-copy candidate outputs
+were bit-exact in every case. The
 largest difference from the official torch Matmul -> npu_swiglu -> Matmul
 reference was `7.62939453125e-06` maximum absolute error and approximately
-`4.68966e-04` relative L2. One hundred repeated M=1 calls produced a finite
-checksum. Evidence:
-`/cache/austinov/qwen35-t21-public-bridge-numerical-20260912T173348Z`.
-
-That result used the direct Python binding. The v2 artifact adds the traceable
-torch operator registration. Its repeat device gate was safely deferred when
-another task acquired the NPU0-3 lease and started four VLLM workers; no
-operator call occurred in that attempt.
+`4.68966e-04` relative L2. Each completed run also passed 500 repeated M=1
+calls with a finite checksum. Evidence:
+`/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v4`,
+`/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v5`, and
+`/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v7`.
 
 ## Qwen3.5-specific project delta
 
@@ -72,8 +76,8 @@ locally rewritten kernel.
 
 ## Remaining gates
 
-Before promotion, rerun the v2 torch-operator numerical/stress matrix, start
-the TP4 `candidate-prefill-t21` service, prove four-rank activation and natural
+Before promotion, start the TP4 `candidate-prefill-t21` service, prove
+four-rank activation and natural
 EOS, then run official control vs bounded-prefill base vs bounded-prefill+T21
 ablation. Only a passing fail-fast result may enter the c1/c5/c8/c16 x3 and
 full quality gates.

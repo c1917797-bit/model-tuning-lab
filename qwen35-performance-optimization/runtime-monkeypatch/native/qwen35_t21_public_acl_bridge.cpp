@@ -12,12 +12,14 @@
 #include <dlfcn.h>
 
 #include <cstdint>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <vector>
 
 #include "aclnn/acl_meta.h"
 #include "torch_npu/csrc/core/npu/NPUStream.h"
+#include "torch_npu/csrc/framework/OpCommand.h"
 
 namespace {
 
@@ -161,16 +163,17 @@ at::Tensor SwigluGatedMlp(const at::Tensor& x,
 {
     CheckInputs(x, gate_up_weight, down_weight);
     auto output = at::empty({x.size(0), down_weight.size(1)}, x.options());
-    PublicAclTensor acl_x(x);
-    PublicAclTensor acl_gate_up(gate_up_weight);
-    PublicAclTensor acl_down(down_weight);
-    PublicAclTensor acl_output(output);
+    auto acl_x = std::make_shared<PublicAclTensor>(x);
+    auto acl_gate_up = std::make_shared<PublicAclTensor>(gate_up_weight);
+    auto acl_down = std::make_shared<PublicAclTensor>(down_weight);
+    auto acl_output = std::make_shared<PublicAclTensor>(output);
 
     auto& api = GetOperatorApi();
     uint64_t workspace_size = 0;
     aclOpExecutor* executor = nullptr;
     const auto prepare_status = api.get_workspace(
-        acl_x.get(), acl_gate_up.get(), acl_down.get(), 1, acl_output.get(),
+        acl_x->get(), acl_gate_up->get(), acl_down->get(), 1,
+        acl_output->get(),
         &workspace_size, &executor);
     TORCH_CHECK(prepare_status == 0,
                 "aclnnSwigluGatedMlpGetWorkspaceSize failed: ",
@@ -184,11 +187,19 @@ at::Tensor SwigluGatedMlp(const at::Tensor& x,
             x.options().dtype(at::ScalarType::Byte));
         workspace_address = workspace.mutable_data_ptr();
     }
-    const auto stream = c10_npu::getCurrentNPUStream(x.get_device()).stream(false);
-    const auto execute_status =
-        api.execute(workspace_address, workspace_size, executor, stream);
-    TORCH_CHECK(execute_status == 0,
-                "aclnnSwigluGatedMlp failed: ", execute_status);
+    const auto stream =
+        c10_npu::getCurrentNPUStream(x.get_device()).stream(false);
+    auto execute = api.execute;
+    auto acl_call = [execute, workspace_address, workspace_size, executor,
+                     stream, workspace, x, gate_up_weight, down_weight, output,
+                     acl_x, acl_gate_up, acl_down, acl_output]() -> int {
+        return execute(workspace_address, workspace_size, executor, stream);
+    };
+    // Match torch-npu's official ACLNN scheduling seam so the custom call is
+    // ordered with the host task queue. Captures keep tensors, workspace, and
+    // public ACL descriptors alive until the queued callable is consumed.
+    at_npu::native::OpCommand::RunOpApiV2(
+        "aclnnSwigluGatedMlp", acl_call);
     return output;
 }
 
