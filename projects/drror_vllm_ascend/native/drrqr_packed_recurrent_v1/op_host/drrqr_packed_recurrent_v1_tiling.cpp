@@ -519,7 +519,7 @@ int64_t DrrqrPackedRecurrentV1Tiling::CalcFixedUbBytes(int64_t aNv, int64_t aDv,
 int64_t DrrqrPackedRecurrentV1Tiling::CalcWorkingUbBytes(int64_t aNv, int64_t aDv, int64_t aDk) const
 {
     int64_t usedUbBytes = CalcFixedUbBytes(aNv, aDv, aDk);
-    usedUbBytes += MAX_MTP * (8 * aDk + 4 * aDv + 4 * aNv + 4); // q/k/v/beta plus one FP32 norm scalar per row
+    usedUbBytes += MAX_MTP * (8 * aDk + 4 * aDv + 4 * aNv); // 8 for qk in ub, 4 for v in ub, 4 for beta in ub
     return usedUbBytes;
 }
 

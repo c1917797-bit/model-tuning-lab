@@ -36,13 +36,6 @@ correctness_control:
   report_sha256: 2a83504c777205525e33055e097b21152eac583a8aed23b489004d1fb9e6e303
   claim_ceiling: Native separate-Q/K/V control ABI and storage correctness only; no packed-layout, performance, accuracy, or portability claim.
 
-stage2_correctness_contract:
-  reference: Active vLLM FLA l2norm_fwd_kernel2 on raw BF16 Q/K followed by the frozen native recurrent operator.
-  candidate: Plugin raw packed BF16 Q/K/V with in-kernel FP32 square/sum/rsqrt, eps 1e-6, BF16 materialization, and within-block shared-Q/K reuse.
-  criterion: Exact finite BF16 output bytes and complete mutable FP32 state bytes for batch1/16 over eight changing steps in eager and NPUGraph, with intact guards, untouched slots, stable pointers, exact source/build/load identities, and no automatic retry.
-  on_failure: Preserve the first report and do not relax the exact gate. Permit only one bounded diagnostic or correction if it proves a concrete implementation, reduction-order, or source-identity defect without changing the declared reference semantics.
-  claim_ceiling: Arithmetic and state correctness for the tested physical-NPU4 matrix only; no service, endpoint, accuracy, or portability claim.
-
 candidate_contract:
   algorithm: Experimental joint normalized Q/K energy top-k selector at uniform logical Dk64.
   paper_exact_selection: false
@@ -76,9 +69,6 @@ lessons_ingested:
   - Deriving head counts from packed width and state shape avoids a model-specific TP4 constant while retaining strict validation and backend qualification.
   - Use the AWMCP asynchronous job lane with an explicit timeout for native builds; a client wait timeout is not build evidence and must not trigger an automatic retry.
   - Count fused work at the native loop's true head multiplicity. In this model one Q/K head is shared by three value heads, so a naive per-value-head implementation would compute the same normalization three times and could erase launch and materialization savings.
-  - CANN 9.1 on 910B does not provide the attempted SyncFunc V-to-S shorthand; use an allocated V_S event with SetFlag and WaitFlag before scalar GetValue, and preserve the first compiler failure as evidence.
-  - Loading a generated op_api library alone is insufficient. The packaged vendor root must be present in ASCEND_CUSTOM_OPP_PATH so the matching opmaster and opsproto companions are loaded and hashed.
-  - A kernel that preserves guards, pointers, metadata, and untouched slots can still be numerically wrong. First-step output plus complete-state divergence is a hard arithmetic failure, not a storage success that permits performance testing.
 
 current_result:
   source_cost_audit: passed_for_staged_implementation
@@ -91,32 +81,9 @@ current_result:
   stage1_parity_report_sha256: caf98324fd5ac5f5177abb2d291d0fbc60e289b715c80871f7f01f4a8c1f5174
   stage1_matrix: Physical NPU4, batch1/16, eight changing steps, exact BF16 output and full FP32 state, eager and NPUGraph, guards, untouched slots, pointers, metadata, and loaded-library identity all passed in one run.
   stage1_claim_ceiling: Packed addressing, shape derivation, storage, and unchanged recurrent ABI correctness on the qualified 910B environment only; no normalization, gating, service, performance, accuracy, or portability claim.
-  stage2_raw_normalization: failed_exact_numerical_gate
+  stage2_raw_normalization: source_and_multiplicity_audit_complete_implementation_not_started
   stage2_reference_semantics: The active vLLM FLA l2norm_fwd path performs per-head FP32 square, sum, rsqrt with eps 1e-6, materializes BF16 normalized Q/K, and only then enters the native recurrent operator.
   stage2_cost_risk: The current native loop processes value heads while Nv/Nk is three; raw Q/K normalization must be reused within each shared-head group or explicitly account for threefold duplicate normalization before it can pass the graph cost screen.
-  stage2_build_v1_manifest: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-build-v1/build-manifest.json
-  stage2_build_v1_manifest_sha256: eab47f41267deab60289a78f00a222a3302ac2f98b8eb674360bcc1645d0cdc1
-  stage2_build_v1_result: failed_compile because SyncFunc<HardEvent::V_S>() is unavailable in the qualified CANN 9.1 910B compiler.
-  stage2_build_v2_manifest: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-build-v2/build-manifest.json
-  stage2_build_v2_manifest_sha256: f664cf1db4e7cc9cc13c044f9dc954d623a12ddecb4b9032817c6a7ceef9bc3b
-  stage2_build_v2_result: passed after replacing the unsupported shorthand with the documented allocated V_S event sequence.
-  stage2_loaded_opapi_sha256: e232f73542f0cff25dba87affe2ff204a731e4306aeaa72d4bc62b233d46ecc4
-  stage2_loaded_opmaster_sha256: 136bb29727f37426a0a74c35c5a9c4bd0c7b1b175935ec0a20a38a224de63e32
-  stage2_loaded_opsproto_sha256: 168a93d71ce8ad8817a143990b241ab21e1996b31c8523b64f5b6f355ba06d80
-  stage2_bridge_manifest: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-bridge-v1/bridge-build-manifest.json
-  stage2_bridge_manifest_sha256: 5dd6c9ba0d642618315c807c78fa488051e400bfdd60d4ad41a9838600821383
-  stage2_bridge_sha256: 72ae6e5c35902760c893daec678b49a424a2b2fa12d859fc827984e994aacd95
-  stage2_parity_v1_report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-parity-v1/report.json
-  stage2_parity_v1_report_sha256: 1b8b479578de9bd8633b49d99185bc4645341400c7a8cc5f1e7a5f89d5f1e3cd
-  stage2_parity_v1_result: runtime_invalid because the unpackaged op_api path did not load matching infer-shape companions.
-  stage2_parity_v2_report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-parity-v2/report.json
-  stage2_parity_v2_report_sha256: a7d21ac9d5dd52a5ed132d82c6ff202c9dfdb81adbc491438acfd1bb2b032322
-  stage2_parity_v2_result: runtime_invalid because the packaged op_api was selected without placing its vendor root in ASCEND_CUSTOM_OPP_PATH.
-  stage2_parity_v3_report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-parity-v3/report.json
-  stage2_parity_v3_report_sha256: 85fc61f57ff966a9502942e3354d1aec0122e5f8adb2be723d4e2d88f0b32808
-  stage2_parity_runner_sha256: 4e3ee810798516a9b24b1754d05330589bc85d301a344f32146b6b1348709ffc
-  stage2_parity_v3_result: Physical NPU4 reached the intended generated operator and loaded its exact op_api, opmaster and opsproto, but batch1 step1 already failed eager and NPUGraph exact output plus complete FP32-state comparison. Guards, untouched slots, pointers, metadata, finiteness and BF16 output dtype remained valid.
-  stage2_decision: Failed and stopped. Do not run graph timing, endpoint performance, gating integration, or accuracy for this implementation, and do not relax exactness.
-  stage2_claim_ceiling: Build, load-identity, and first-step arithmetic-failure evidence on the tested 910B environment only; no performance, accuracy, or portability claim.
-  endpoint: not_run_due_to_stage2_numerical_gate
-  accuracy: not_run_due_to_stage2_numerical_gate
+  stage2_claim_ceiling: Source-path and cost-model audit only; no new NPU numerical, performance, accuracy, or portability result.
+  endpoint: not_run
+  accuracy: not_run

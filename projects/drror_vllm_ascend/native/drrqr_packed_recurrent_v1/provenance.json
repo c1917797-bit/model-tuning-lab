@@ -6,16 +6,7 @@
   "source_subtree": "csrc/attention/recurrent_gated_delta_rule",
   "derived_operator": "DrrqrPackedRecurrentV1",
   "derived_snake_name": "drrqr_packed_recurrent_v1",
-  "transformation": "isolated operator identifiers plus raw packed Q/K/V addressing, per-head FP32 L2 normalization with BF16 materialization, within-block shared-Q/K reuse, and validated shape derivation; recurrent arithmetic and state semantics unchanged",
-  "normalization_reference": {
-    "repository": "/cache/austinov/src/vllm",
-    "commit": "0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665",
-    "path": "vllm/model_executor/layers/fla/ops/l2norm.py",
-    "sha256": "520f4513ef4fc97e6b88dc07877cca8e29da0d34e44673fe989e3af002d86381",
-    "active_kernel": "l2norm_fwd_kernel2",
-    "epsilon": 0.000001,
-    "materialized_dtype": "bfloat16"
-  },
+  "transformation": "isolated operator identifiers plus packed normalized Q/K/V addressing and validated shape derivation; recurrent arithmetic and state semantics unchanged",
   "source_sha256": {
     "CMakeLists.txt": "b402e8b709c2110e43ab4a82b1538469a011926501afcfd5e6be2d8772300b17",
     "recurrent_gated_delta_rule_torch_adpt.h": "96cf511bedd953c0b332bf97d88f535663c759fc81235baeb3044e66605d6a0c",

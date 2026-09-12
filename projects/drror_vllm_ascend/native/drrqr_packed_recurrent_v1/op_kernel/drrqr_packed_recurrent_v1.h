@@ -31,7 +31,6 @@ constexpr uint64_t FP32_NUM_PER_BLOCK = 8;
 constexpr uint32_t REPEAT_LENTH = 64; // 256Byte for float
 constexpr uint32_t MAX_REPEAT_TIME = 255;
 constexpr uint32_t ADD_FOLD_REDUCE_MIN_K = 128;
-constexpr float QK_NORM_EPS = 1.0e-6f;
 
 #ifndef DRRQR_LAYOUT_V1_ENABLE_ADD_FOLD_REDUCE
 #define DRRQR_LAYOUT_V1_ENABLE_ADD_FOLD_REDUCE  1
@@ -107,8 +106,8 @@ public:
         uint32_t singleVSize = vStep_ * sizeof(float);
         uint32_t vSize = MAX_MTP * alignV_ * sizeof(float);
         uint32_t kSize = MAX_MTP * alignK_ * sizeof(float);
-        uint32_t betaUbElements = Ceil(MAX_MTP * NV_, BF16_NUM_PER_BLOCK) * BF16_NUM_PER_BLOCK;
-        uint32_t betaUbSize = betaUbElements * sizeof(float);
+        uint32_t betaUbSize =
+            Ceil(MAX_MTP * NV_, BF16_NUM_PER_BLOCK) * BF16_NUM_PER_BLOCK * sizeof(float); //  8: 8 * 4 = 32B;
         pipe_->InitBuffer(qInQueue_, BUFFER_NUM, MAX_MTP * alignK_ * sizeof(inType));
         pipe_->InitBuffer(kInQueue_, BUFFER_NUM, MAX_MTP * alignK_ * sizeof(inType));
         pipe_->InitBuffer(vInQueue_, BUFFER_NUM, MAX_MTP * alignV_ * sizeof(inType));
@@ -138,9 +137,7 @@ public:
         buffOffset += cubeSize;
         broadTmpInUb = tmpBuff.GetWithOffset<float>(static_cast<uint32_t>(alignK_ * vStep_), buffOffset);
         buffOffset += cubeSize;
-        betaInUb = tmpBuff.GetWithOffset<float>(betaUbElements, buffOffset);
-        buffOffset += betaUbSize;
-        normScaleInUb = tmpBuff.GetWithOffset<float>(static_cast<uint32_t>(MAX_MTP), buffOffset);
+        betaInUb = tmpBuff.GetWithOffset<float>(static_cast<uint32_t>(betaUbSize), buffOffset);
     }
 
     __aicore__ inline void ComputeAvgload()
@@ -171,8 +168,6 @@ public:
             seq1 += seqLen;
             uint32_t copyFlag = 0;
             uint64_t stateOffset;
-            bool hasCachedQk = false;
-            uint64_t cachedQkHead = 0;
             for (uint64_t head_i = 0; head_i < NV_; head_i++) {
                 if (!IsCurrentBlock(seq1 - seq0)) {
                     continue;
@@ -190,11 +185,7 @@ public:
                     stateOffset = ssmStateIndicesGm_.GetValue(stateTokenIdx);
                     CopyInGamaBeta(seq0, seq1);
                 }
-                const uint64_t qkHead = head_i / (NV_ / NK_);
-                const bool loadQk = !hasCachedQk || qkHead != cachedQkHead;
-                ProcessHead(seq0, seq1, head_i, stateOffset, loadQk);
-                hasCachedQk = true;
-                cachedQkHead = qkHead;
+                ProcessHead(seq0, seq1, head_i, stateOffset);
             }
             if (hasGama_ && copyFlag != 0) {
                 gamaInQueue_.FreeTensor(gamaInUb);
@@ -203,70 +194,21 @@ public:
     }
 
 private:
-    __aicore__ inline void NormalizeAndRoundQK(LocalTensor<float> &input,
-                                               LocalTensor<inType> &roundTrip,
-                                               int32_t seqLen)
-    {
-        const uint32_t elements = static_cast<uint32_t>(seqLen) * alignK_;
-        Mul(input, input, input, elements);
-        AscendC::PipeBarrier<PIPE_V>();
-        ReduceSumBaseline(normScaleInUb, input, static_cast<uint32_t>(seqLen));
-        AscendC::PipeBarrier<PIPE_V>();
-        Adds(normScaleInUb, normScaleInUb, QK_NORM_EPS, static_cast<uint32_t>(seqLen));
-        AscendC::PipeBarrier<PIPE_V>();
-        Rsqrt(normScaleInUb, normScaleInUb, static_cast<uint32_t>(seqLen));
-        AscendC::PipeBarrier<PIPE_V>();
-        Cast(input, roundTrip, AscendC::RoundMode::CAST_NONE, elements);
-        AscendC::PipeBarrier<PIPE_V>();
-        event_t eventVToS = static_cast<event_t>(GetTPipePtr()->FetchEventID(HardEvent::V_S));
-        SetFlag<HardEvent::V_S>(eventVToS);
-        WaitFlag<HardEvent::V_S>(eventVToS);
-        for (int32_t row = 0; row < seqLen; ++row) {
-            const float invNorm = normScaleInUb.GetValue(static_cast<uint32_t>(row));
-            Muls(input[static_cast<uint32_t>(row) * alignK_],
-                 input[static_cast<uint32_t>(row) * alignK_], invNorm, alignK_);
-        }
-        AscendC::PipeBarrier<PIPE_V>();
-        Cast(roundTrip, input, AscendC::RoundMode::CAST_RINT, elements);
-        AscendC::PipeBarrier<PIPE_V>();
-        Cast(input, roundTrip, AscendC::RoundMode::CAST_NONE, elements);
-        AscendC::PipeBarrier<PIPE_V>();
-    }
-
-    __aicore__ inline void CopyInQK(int32_t seq0, uint64_t qkHead, int32_t seqLen)
+    __aicore__ inline void CopyInQKV(int32_t seq0, uint64_t head_i, int32_t seqLen)
     {
         LocalTensor<inType> qLocal = qInQueue_.AllocTensor<inType>();
         LocalTensor<inType> kLocal = kInQueue_.AllocTensor<inType>();
-        const uint64_t packedWidth = 2 * NK_ * realK_ + NV_ * realV_;
-        const uint64_t qBase = seq0 * packedWidth + qkHead * realK_;
-        const uint64_t kBase = seq0 * packedWidth + NK_ * realK_ + qkHead * realK_;
-        DataCopyExtParams qkInParams{static_cast<uint16_t>(seqLen), static_cast<uint32_t>(realK_ * sizeof(inType)),
-                                     static_cast<uint32_t>((packedWidth - realK_) * sizeof(inType)), 0, 0};
-        DataCopyPadExtParams<inType> qkPadParams{true, 0, static_cast<uint8_t>(alignK_ - realK_), 0};
-        DataCopyPad(qLocal, packedQkvGm_[qBase], qkInParams, qkPadParams);
-        DataCopyPad(kLocal, packedQkvGm_[kBase], qkInParams, qkPadParams);
-        qInQueue_.EnQue<inType>(qLocal);
-        kInQueue_.EnQue<inType>(kLocal);
-        qLocal = qInQueue_.DeQue<inType>();
-        kLocal = kInQueue_.DeQue<inType>();
-        Cast(qInUb, qLocal, AscendC::RoundMode::CAST_NONE, alignK_ * seqLen);
-        Cast(kInUb, kLocal, AscendC::RoundMode::CAST_NONE, alignK_ * seqLen);
-        AscendC::PipeBarrier<PIPE_V>();
-        NormalizeAndRoundQK(qInUb, qLocal, seqLen);
-        NormalizeAndRoundQK(kInUb, kLocal, seqLen);
-        Muls(qInUb, qInUb, scale_, seqLen * alignK_);
-        AscendC::PipeBarrier<PIPE_V>();
-        qInQueue_.FreeTensor(qLocal);
-        kInQueue_.FreeTensor(kLocal);
-    }
-
-    __aicore__ inline void CopyInVAndGamaK(int32_t seq0, uint64_t head_i, int32_t seqLen)
-    {
         LocalTensor<inType> vLocal = vInQueue_.AllocTensor<inType>();
         const uint64_t packedWidth = 2 * NK_ * realK_ + NV_ * realV_;
+        const uint64_t qkHead = head_i / (NV_ / NK_);
+        const uint64_t qBase = seq0 * packedWidth + qkHead * realK_;
+        const uint64_t kBase = seq0 * packedWidth + NK_ * realK_ + qkHead * realK_;
         const uint64_t vBase = seq0 * packedWidth + 2 * NK_ * realK_ + head_i * realV_;
+        DataCopyExtParams qkInParams{static_cast<uint16_t>(seqLen), static_cast<uint32_t>(realK_ * sizeof(inType)),
+                                     static_cast<uint32_t>((packedWidth - realK_) * sizeof(inType)), 0, 0};
         DataCopyExtParams vInParams{static_cast<uint16_t>(seqLen), static_cast<uint32_t>(realV_ * sizeof(inType)),
                                     static_cast<uint32_t>((packedWidth - realV_) * sizeof(inType)), 0, 0};
+        DataCopyPadExtParams<inType> qkPadParams{true, 0, static_cast<uint8_t>(alignK_ - realK_), 0};
         DataCopyPadExtParams<inType> vPadParams{true, 0, static_cast<uint8_t>(alignV_ - realV_), 0};
         if (hasGamaK_) {
             uint32_t alignKGamma = Ceil(realK_, FP32_NUM_PER_BLOCK) * FP32_NUM_PER_BLOCK;
@@ -285,11 +227,22 @@ private:
             Exp(gamaKInUb, gamaKInUb, alignK_ * seqLen);
             AscendC::PipeBarrier<PIPE_V>();
         }
+        DataCopyPad(qLocal, packedQkvGm_[qBase], qkInParams, qkPadParams);
+        DataCopyPad(kLocal, packedQkvGm_[kBase], qkInParams, qkPadParams);
         DataCopyPad(vLocal, packedQkvGm_[vBase], vInParams, vPadParams);
+        qInQueue_.EnQue<inType>(qLocal);
+        kInQueue_.EnQue<inType>(kLocal);
         vInQueue_.EnQue<inType>(vLocal);
+        qLocal = qInQueue_.DeQue<inType>();
+        kLocal = kInQueue_.DeQue<inType>();
         vLocal = vInQueue_.DeQue<inType>();
+        Cast(qInUb, qLocal, AscendC::RoundMode::CAST_NONE, alignK_ * seqLen);
+        Cast(kInUb, kLocal, AscendC::RoundMode::CAST_NONE, alignK_ * seqLen);
         Cast(vInUb, vLocal, AscendC::RoundMode::CAST_NONE, alignV_ * seqLen);
         AscendC::PipeBarrier<PIPE_V>();
+        Muls(qInUb, qInUb, scale_, seqLen * alignK_);
+        qInQueue_.FreeTensor(qLocal);
+        kInQueue_.FreeTensor(kLocal);
         vInQueue_.FreeTensor(vLocal);
     }
 
@@ -487,14 +440,9 @@ private:
         }
     }
 
-    __aicore__ inline void ProcessHead(int32_t seq0, int32_t seq1, uint64_t head_i,
-                                      uint64_t stateOffset, bool loadQk)
+    __aicore__ inline void ProcessHead(int32_t seq0, int32_t seq1, uint64_t head_i, uint64_t stateOffset)
     {
-        const int32_t seqLen = seq1 - seq0;
-        if (loadQk) {
-            CopyInQK(seq0, head_i / (NV_ / NK_), seqLen);
-        }
-        CopyInVAndGamaK(seq0, head_i, seqLen);
+        CopyInQKV(seq0, head_i, seq1 - seq0);
         if (realV_ == 0) {
             if (hasGamaK_) {
                 gamaKInQueue_.FreeTensor(gamaKInUb);
@@ -602,7 +550,6 @@ private:
     LocalTensor<float> broadTmpInUb;
     LocalTensor<float> attnInUb;
     LocalTensor<float> stateInUb;
-    LocalTensor<float> normScaleInUb;
     uint32_t B_;
     uint32_t T_;
     uint32_t NK_;
