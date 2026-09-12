@@ -1,0 +1,99 @@
+schema: mst-practice-iteration/v1
+id: drrqr-two-sided-value-width-admission-v1
+repository: model-tuning-lab
+status: done
+date: 2026-09-12
+validated_commit: pending
+
+stage_goal: Decide whether an experimental Dk64 plus aligned value/state-width reduction has a structurally foldable path, a trustworthy held-out corpus, and enough corrected Ascend endpoint headroom to justify one offline fidelity screen.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Frozen dense is 135.142469917 output tok/s, the fixed target is 148.656716909, and energy-Dk64 is 141.564496153 output tok/s with TPOT 66.689383571 ms. Closing the target under reciprocal scaling requires an optimistic 3.181664712 ms/token further TPOT reduction.
+  medium_term_milestone: Produce a DRRQR-rooted structural candidate that reduces both rank-dependent and value/state-dependent work, preserves output fidelity on untouched teacher trajectories, and has sufficient model-level headroom for one NPU implementation gate.
+  short_term_decision: Audit Dv96, Dv80, Dv64, Dv48 and Dv32 from exact checkpoint geometry and four-rank decode CSVs; admit only the smallest bounded set that crosses the fixed target after correcting all TP-local width arithmetic.
+  deciding_evidence: Exact model/checkpoint cut points, active plugin and framework sources, native recurrent dynamic-Dv tiling, four rank-specific 30-step decode CSVs with exact counts, the frozen performance baseline, and the independently audited 16-sequence rich-state corpus.
+  budget_or_stop_rule: Source, checkpoint-header, profile and corpus audit only. Do not implement weights/cache/operators, run NPU, launch a service, benchmark an endpoint, or run task accuracy in this iteration.
+  on_pass: Fit Dv64 plus one Dv48 headroom control on captures 0-11 only, freeze the plans, and decide admission using untouched captures 12-15 with post-RMS and output-projected fidelity plus per-head robustness.
+  on_failure: Reject value-side structural reduction and return to a materially different exactly foldable DRRQR recurrence/state design; do not replace the goal with generic operator optimization.
+  on_inconclusive: Resolve only the specific source, shape or cost ambiguity that prevents the admission decision.
+
+candidate_contract:
+  name: two-sided energy-Dk64 value/state-width extension
+  paper_exact_strong_rrqr: false
+  fixed_rank_side: joint normalized Q/K energy top-k at logical Dk64
+  experimental_value_side: select aligned Dv coordinates consistently through V/Z projection, causal convolution, FP32 recurrent-state rows, reduced RMSNorm and output-projection columns
+  attribution_requirement: Preserve Dk128/Dv128, Dk64/Dv128, Dk128/DvX and Dk64/DvX arms before any endpoint claim.
+  claim_rule: This may be called a DRRQR extension only if the combined arm retains an identifiable Dk64 contribution; it must never be reported as the paper-exact selector.
+
+foldability:
+  result: structurally_foldable_candidate_with_changed_reduced_rms_semantics
+  reason: GDN recurrence is separable across value rows, so retained Dv rows use shared Q/K and their own V/state rows without reconstructing deleted rows.
+  approximation_boundary: RMSNorm couples retained coordinates through its denominator; reduced-Dv normalization changes semantics and must be screened on untouched output-projected data.
+  shared_norm_constraint: Start with one layer-shared coordinate set because norm.weight has shape 128 and is shared across value heads. Per-head sets require a separate gamma-to-out-projection fold proof.
+  existing_plugin_support: false
+  integration_scope_if_admitted: V and Z weight rows, matching convolution rows, norm representation, output-projection columns, state/cache geometry, graph identity and production prefill/decode dispatch.
+
+cost_model:
+  profile_protocol: Four ranks, 30 decode steps, concurrency 16, input 32768, shared prefix 16384.
+  diagnostic_warning: Kernel sums are not a critical path or a performance prediction. The ceiling assumes proportional width scaling and full conversion of saved kernel time into TPOT.
+  arithmetic_correction: TP-local Dk64 has Q+K width 512 and V+Z width 3072. Dv128 to Dv64 changes QKVZ 3584 to 2048, which is a 42.857142857 percent reduction, not 46.153846154 percent.
+  required_tpot_reduction_ms: 3.181664711871953
+  widths:
+    Dv96: {optimistic_tpot_credit_ms: 1.822960234126985, optimistic_output_tps_ceiling: 145.542924957, optimistic_gain_vs_dense_percent: 7.695919015, crosses_target: false}
+    Dv80: {optimistic_tpot_credit_ms: 2.7344403511904775, optimistic_output_tps_ceiling: 147.617189676, optimistic_gain_vs_dense_percent: 9.230791598, crosses_target: false}
+    Dv64: {optimistic_tpot_credit_ms: 3.64592046825397, optimistic_output_tps_ceiling: 149.751433683, optimistic_gain_vs_dense_percent: 10.810046446, crosses_target: true}
+    Dv48: {optimistic_tpot_credit_ms: 4.557400585317462, optimistic_output_tps_ceiling: 151.948296679, optimistic_gain_vs_dense_percent: 12.435636830, crosses_target: true}
+    Dv32: {optimistic_tpot_credit_ms: 5.468880702380955, optimistic_output_tps_ceiling: 154.210575569, optimistic_gain_vs_dense_percent: 14.109632348, crosses_target: true}
+
+portability_contract:
+  logical_geometry: Keep Dk/Dv coordinate order independent of physical tiling and TP size.
+  alignment: Screen multiples of 16; the native recurrent tiler derives Dv from input tensors and aligns Dv to 16 rather than requiring 128.
+  active_path_boundary: Dynamic source support is not production qualification. Prefill, cache, graph and any adapted operator require explicit capability dispatch plus their own NPU numerical and endpoint gates.
+  fallback: Preserve the existing Dk64/Dv128 plugin path and dense-disabled path.
+  source_boundary: All implementation remains in projects/drror_vllm_ascend; vLLM, vLLM-Ascend, ops-transformer, cann bot and the image remain read-only.
+
+result:
+  outcome: accepted_for_heldout_fidelity_screen
+  primary_width: 64
+  headroom_control_width: 48
+  cost_rejected_widths: [96, 80]
+  bounded_out_width: 32
+  report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-two-sided-value-width-admission-v1/drrqr-two-sided-value-width-admission.v1.json
+  report_sha256: f9dba2a1735b6379116a798ae7523200bc8c5688f4d64cb374353e175a81e121
+  analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_value_width_admission.py
+  analyzer_sha256: d212f0200e1fcf8b254c29c0fe727be8b770252736efd5bdf7e9de63f7a3d632
+  invalid_attempt: exec-0000000000000600 reached all evidence and cost assertions but failed before publication because Python booleans were accidentally written with JSON spelling. No output directory or result file was created.
+  corrected_run: exec-0000000000000605 completed and published the fresh report after changing only those four booleans.
+  claim_ceiling: Source, checkpoint geometry, existing-profile optimistic ceiling and corpus admission only; no candidate plan, NPU, endpoint, task-accuracy or portability result.
+  next_action: Open drrqr-two-sided-value-width-heldout-v1 with fit indices 0-11 and untouched decision indices 12-15. Reject the entire value-side branch unless Dv64 or Dv48 passes output-projected and per-head robustness gates declared before execution.
+
+changes:
+  - type: tool
+    description: Add a fail-closed stdlib analyzer that binds exact source/checkpoint/profile/corpus evidence and recomputes width ceilings from rank-specific CSV rows.
+    files:
+      - projects/drror_vllm_ascend/tools/analyze_drrqr_value_width_admission.py
+  - type: maintainer_state
+    description: Record the corrected decision and next bounded DRRQR gate.
+    files:
+      - .agents/evals/practice-iterations/drrqr-two-sided-value-width-admission-v1.yaml
+      - .agents/HANDOFF.md
+
+validation_commands:
+  - compile analyzer source without creating bytecode
+  - run analyzer on exact frozen artifacts into a fresh output path
+  - parse report JSON and verify all five width decisions
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: Derive TP-local packed widths symbolically from Q, K, V and Z components before turning profile shares into a ceiling; a small denominator mistake can reverse a marginal admission decision.
+    destination: this iteration and analyzer arithmetic assertions
+    severity: high
+  - lesson: A theoretical ceiling only admits the next cheap fidelity gate. Dv64 retains 0.810046 percentage points of optimistic margin and therefore does not justify implementation by itself.
+    destination: .agents/HANDOFF.md
+    severity: high
+  - lesson: Preserve DRRQR attribution with four structural arms so value-width pruning cannot silently replace the named Dk64 method.
+    destination: candidate contract
+    severity: high
+

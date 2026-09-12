@@ -15,6 +15,22 @@
   performance baseline is 135.142469917 output tok/s and the fixed +10 percent
   target is 148.656716909 output tok/s. The best comparable energy-Dk64 screen
   is +4.752041 percent; it is not accepted.
+- The drrqr-two-sided-value-width-admission-v1 source/cost/corpus audit is
+  complete and admits only an offline held-out screen. Exact four-rank decode
+  CSV accounting corrected the TP-local Dv128-to-Dv64 QKVZ reduction from an
+  earlier 46.153846 percent estimate to 42.857143 percent. Under deliberately
+  optimistic proportional scaling, Dv96 and Dv80 cannot reach the fixed target;
+  Dv64 has a 149.751434 tok/s ceiling (+10.810046 percent) and Dv48 has a
+  151.948297 tok/s ceiling (+12.435637 percent). These are not predictions.
+  Dv64 is the primary held-out candidate, Dv48 is one headroom control and
+  Dv32 is bounded out. Report SHA256:
+  f9dba2a1735b6379116a798ae7523200bc8c5688f4d64cb374353e175a81e121.
+  No candidate weights, NPU run, endpoint benchmark or accuracy test followed.
+  Resume with drrqr-two-sided-value-width-heldout-v1: fit only captures 0-11,
+  freeze plans, then decide on untouched 12-15 using post-RMS plus
+  output-projected fidelity and per-head robustness. Preserve four attribution
+  arms before any endpoint claim; this is an experimental DRRQR extension, not
+  paper-exact StrongRRQR.
 - The real captured-teacher fixed-beta screen is complete and rejected:
   144/144 dense128/energy64/beta64 trajectories passed numerical and graph
   gates, but beta64 failed 5/144 robustness windows despite a 0.888847 global
