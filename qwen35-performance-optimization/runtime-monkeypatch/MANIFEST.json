@@ -50,6 +50,53 @@
     "offline_activation_operation": "exec-0000000000000755",
     "rollback": "set QWEN35_ASCEND_SUPER_KERNEL=0, remove enable_static_kernel, and restart"
   },
+  "fresh_control_matrix": {
+    "status": "completed",
+    "artifact_root": "/cache/austinov/qwen35-control-matrix-20260913-v14",
+    "state_sha256": "3f841566bca9425b7d00a1df55230bd2f75d20e5b9639adf869dd2702447495b",
+    "cells_completed": 12,
+    "requests_completed": 384,
+    "errors": 0,
+    "natural_eos": true,
+    "aggregation": "median of three per-run P95 values",
+    "p95_median_ms": {
+      "c1": {
+        "ttft": 841.073,
+        "tpot": 28.909
+      },
+      "c5": {
+        "ttft": 12271.928,
+        "tpot": 65.701
+      },
+      "c8": {
+        "ttft": 13332.456,
+        "tpot": 115.31
+      },
+      "c16": {
+        "ttft": 15474.004,
+        "tpot": 139.105
+      }
+    },
+    "candidate_pass_threshold_ms": {
+      "c1": {
+        "ttft_max": 672.858,
+        "tpot_max": 26.018
+      },
+      "c5": {
+        "ttft_max": 9817.543,
+        "tpot_max": 59.131
+      },
+      "c8": {
+        "ttft_max": 10665.965,
+        "tpot_max": 103.779
+      },
+      "c16": {
+        "ttft_max": 12379.203,
+        "tpot_max": 125.195
+      }
+    },
+    "note": "c5 and c8 have high inter-run variance; candidate comparison must use the identical three-run protocol and paired temporal interpretation"
+  },
   "framework": "vLLM-Ascend 0.23.0",
   "hardware": "Ascend 910B4",
   "historical_implementation_provenance": {
@@ -140,7 +187,7 @@
   "sitecustomize_sha256": "ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "fresh_control_matrix_running_mrv1_live_npu_gate_pending",
+  "status": "fresh_control_matrix_completed_mrv1_live_npu_gate_pending",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
