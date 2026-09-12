@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=d3ce2884c0d983655520af7b66746a484920ce75bb28c7bd6a6a5620061c35dd
+patch_sha256=ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -28,50 +28,71 @@ fi
 case "$variant" in
   candidate)
     patch_enabled=1
+    gdn_fusion_enabled=1
     prefetch_patch_enabled=1
     weight_prefetch_enabled=true
     operator_enabled=1
     mmar_prefill_threshold=0
     mmar_prefill_max_tokens=0
     t21_enabled=0
+    super_kernel_enabled=0
     ;;
   candidate-prefill)
     patch_enabled=1
+    gdn_fusion_enabled=1
     prefetch_patch_enabled=1
     weight_prefetch_enabled=true
     operator_enabled=0
     mmar_prefill_threshold=512
     mmar_prefill_max_tokens=16384
     t21_enabled=0
+    super_kernel_enabled=0
     ;;
   candidate-prefill-t21)
     patch_enabled=1
+    gdn_fusion_enabled=1
     prefetch_patch_enabled=1
     weight_prefetch_enabled=true
     operator_enabled=0
     mmar_prefill_threshold=512
     mmar_prefill_max_tokens=16384
     t21_enabled=1
+    super_kernel_enabled=0
     ;;
   candidate-prefill-no-prefetch)
     patch_enabled=1
+    gdn_fusion_enabled=1
     prefetch_patch_enabled=0
     weight_prefetch_enabled=false
     operator_enabled=0
     mmar_prefill_threshold=512
     mmar_prefill_max_tokens=16384
     t21_enabled=0
+    super_kernel_enabled=0
     ;;
-  control)
-    patch_enabled=0
+  candidate-super-kernel)
+    patch_enabled=1
+    gdn_fusion_enabled=0
     prefetch_patch_enabled=0
     weight_prefetch_enabled=true
     operator_enabled=0
     mmar_prefill_threshold=0
     mmar_prefill_max_tokens=0
     t21_enabled=0
+    super_kernel_enabled=1
     ;;
-  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, or control" >&2; exit 64 ;;
+  control)
+    patch_enabled=0
+    gdn_fusion_enabled=0
+    prefetch_patch_enabled=0
+    weight_prefetch_enabled=true
+    operator_enabled=0
+    mmar_prefill_threshold=0
+    mmar_prefill_max_tokens=0
+    t21_enabled=0
+    super_kernel_enabled=0
+    ;;
+  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, or control" >&2; exit 64 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 port="${PORT:-10010}"
@@ -320,6 +341,9 @@ grep -E '^(MemTotal|MemAvailable|HugePages_|Hugepagesize|Hugetlb):' /proc/meminf
 
 compilation_config='{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,6,8,10,12,14,16,32,64,128,256,384,512,640,768,896,1024,1280,1536,1792,2048,2304,2560,2816,3072,3328,3456,3584]}'
 additional_config="{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":true,\"enable_flashcomm1\":false,\"weight_nz_mode\":1,\"weight_prefetch_config\":{\"enabled\":$weight_prefetch_enabled,\"prefetch_ratio\":{\"attn\":{\"qkv\":0.0,\"o\":0.0},\"moe\":{\"gate_up\":0.0},\"mlp\":{\"gate_up\":0.1,\"down\":0.0}}}}"
+if [[ "$super_kernel_enabled" == 1 ]]; then
+  additional_config="${additional_config%?},\"ascend_compilation_config\":{\"enable_npugraph_ex\":true,\"enable_static_kernel\":true}}"
+fi
 python_path="/opt/qwen35-t12-monkeypatch:${t21_python_path}/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:"
 
 docker_args=(
@@ -372,7 +396,8 @@ docker_args=(
   -e QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH="$prefetch_patch_enabled"
   -e QWEN35_ASCEND_DIAGNOSTICS="$qwen35_diagnostics"
   -e QWEN35_ASCEND_DIAGNOSTICS_INTERVAL="$qwen35_diagnostics_interval"
-  -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$patch_enabled"
+  -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$gdn_fusion_enabled"
+  -e QWEN35_ASCEND_SUPER_KERNEL="$super_kernel_enabled"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD="$mmar_prefill_threshold"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$mmar_prefill_max_tokens"
   -e PYTHONPATH="$python_path"

@@ -13,7 +13,7 @@
     "ttft_p95_reduction_fraction_min": 0.2
   },
   "base_image_mutation": false,
-  "candidate": "runtime-monkeypatch-gdn-projection-fusion-t12",
+  "candidate": "runtime-monkeypatch-upstream-mrv1-super-kernel-t29",
   "excluded_historical_paths": [
     "ad-hoc IPC fullmesh MMAR implementations",
     "AICPU-first M=1 operator bytes as a final candidate"
@@ -28,13 +28,27 @@
     "rationale": "bounded prefill MMAR is the retained TTFT component; decode still requires a separately validated project-specific component to clear the current 10 percent TPOT gate"
   },
   "candidate_t21_dense_mlp": {
-    "status": "symbolic_fake_export_passed_tp4_service_pending",
+    "status": "rejected_after_tp4_service_failfast",
     "enabled_by": "QWEN35_ASCEND_T21_DENSE_MLP=1",
     "upstream_operator_sha256": "ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb",
     "public_bridge_sha256": "3b1875d6e9a7957aa44810c99fca046f8a4123e997143e2e00300c5e1c1030f4",
     "shape_contract": "Qwen3.5-27B BF16 TP4, positive M, local 5120->8704->4352->5120",
     "project_delta": "traceable torch op registration with a Python FakeTensor override that preserves dynamic M on torch 2.10, static module admission only, C++ runtime tensor contract checks, zero-copy model-weight views, existing vLLM TP AllReduce composition",
-    "rollback": "set QWEN35_ASCEND_T21_DENSE_MLP=0 and restart"
+    "rollback": "set QWEN35_ASCEND_T21_DENSE_MLP=0 and restart",
+    "service_artifact_root": "/cache/austinov/qwen35-t21-service-20260912-v13",
+    "paired_control_artifact_root": "/cache/austinov/qwen35-control-service-20260913-v14",
+    "decision_artifact": "/cache/austinov/qwen35-t21-v13-vs-control-v14-20260913/decision.json",
+    "reason": "c1 TTFT improved only 7.51 percent while TPOT regressed 144.3 percent"
+  },
+  "candidate_mrv1_super_kernel": {
+    "status": "official_image_activation_passed_live_npu_gate_pending",
+    "enabled_by": "QWEN35_ASCEND_SUPER_KERNEL=1 plus enable_static_kernel=true",
+    "upstream_repository": "https://github.com/vllm-project/vllm-ascend",
+    "upstream_commit": "7ab47e73d005756963e3c6dd0e491296401b1f19",
+    "upstream_pr": 15059,
+    "project_delta": "runtime-only exact-anchor backport into the unchanged official v0.23.0 image with isolated feature gating and activation logging",
+    "offline_activation_operation": "exec-0000000000000755",
+    "rollback": "set QWEN35_ASCEND_SUPER_KERNEL=0, remove enable_static_kernel, and restart"
   },
   "framework": "vLLM-Ascend 0.23.0",
   "hardware": "Ascend 910B4",
@@ -95,7 +109,7 @@
       "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v8",
       "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v9"
     ],
-    "t21_zero_copy_matrix": "three fresh 20/20 small-M matrices plus 500-call stress passed; M=128/512/1024/4096 extension gates also passed; TP4 service pending"
+    "t21_zero_copy_matrix": "three fresh 20/20 small-M matrices plus 500-call stress passed; M=128/512/1024/4096 extension gates also passed; TP4 service later rejected for TPOT regression"
   },
   "model": "Qwen3.5-27B",
   "mtp": false,
@@ -106,6 +120,7 @@
     "official_image_install_operation": "exec-0000000000000789",
     "official_image_no_device_offline_install": "passed",
     "official_image_read_only_source_contract": "passed",
+    "official_image_mrv1_monkeypatch_activation": "passed",
     "static_contracts": "passed"
   },
   "physical_devices": [
@@ -122,10 +137,10 @@
   ],
   "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
   "schema": "qwen35-runtime-monkeypatch/v2",
-  "sitecustomize_sha256": "d3ce2884c0d983655520af7b66746a484920ce75bb28c7bd6a6a5620061c35dd",
+  "sitecustomize_sha256": "ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "t21_bridge_gates_passed_tp4_service_and_acceptance_pending",
+  "status": "fresh_control_matrix_running_mrv1_live_npu_gate_pending",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
@@ -135,6 +150,7 @@
     "Gemma RMSNorm prefetch postprocess",
     "opt-in bounded prefill-only MMAR decomposition for candidate-prefill",
     "opt-in vLLM Scheduler and DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1",
-    "opt-in upstream T21 dense local MLP through a public ACL torch operator, zero-copy model-weight views, and existing vLLM TP AllReduce"
+    "opt-in upstream T21 dense local MLP through a public ACL torch operator, zero-copy model-weight views, and existing vLLM TP AllReduce (rejected after live service test)",
+    "opt-in upstream MRV1 full-model ACL Graph super-kernel with static-kernel compilation"
   ]
 }

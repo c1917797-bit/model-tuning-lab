@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.abc
 import importlib.machinery
+import contextlib
 import functools
 import inspect
 import os
@@ -22,6 +23,8 @@ _ENABLED = (
 _RUNTIME_TARGETS = {
     "vllm.compilation.backends",
     "vllm_ascend.ascend_config",
+    "vllm_ascend.compilation.acl_graph",
+    "vllm_ascend.compilation.compiler_interface",
     "vllm_ascend.compilation.graph_fusion_pass_manager",
     "vllm_ascend.ops.layernorm",
     "vllm_ascend.ops.weight_prefetch",
@@ -71,6 +74,10 @@ def _t21_dense_mlp_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_T21_DENSE_MLP", "0") == "1"
 
 
+def _super_kernel_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_SUPER_KERNEL", "0") == "1"
+
+
 def _diagnostics_interval() -> int:
     try:
         return max(1, int(os.getenv("QWEN35_ASCEND_DIAGNOSTICS_INTERVAL", "32")))
@@ -89,6 +96,24 @@ def _replace_function_block(function, old: str, new: str, label: str):
         compile(source.replace(old, new), function.__code__.co_filename, "exec"),
         namespace,
     )
+    patched = namespace[function.__name__]
+    patched.__module__ = function.__module__
+    patched.__qualname__ = function.__qualname__
+    return patched
+
+
+def _replace_function_blocks(function, replacements, label: str):
+    """Apply multiple exact source anchors before compiling the function once."""
+    source = textwrap.dedent(inspect.getsource(function))
+    for suffix, old, new in replacements:
+        if source.count(old) != 1:
+            raise RuntimeError(
+                f"{label}.{suffix}: expected exactly one compatible v0.23.0 "
+                "source block"
+            )
+        source = source.replace(old, new)
+    namespace = dict(function.__globals__)
+    exec(compile(source, function.__code__.co_filename, "exec"), namespace)
     patched = namespace[function.__name__]
     patched.__module__ = function.__module__
     patched.__qualname__ = function.__qualname__
@@ -389,6 +414,93 @@ def _patch_ascend_config(module: ModuleType) -> None:
     _notice("patched AscendConfig compile ranges")
 
 
+def _patch_acl_graph(module: ModuleType) -> None:
+    """Backport upstream MRV1 super-kernel capture to the official v0.23 image."""
+    if not _super_kernel_enabled():
+        return
+    cls = module.ACLGraphWrapper
+    if getattr(cls, "_qwen35_super_kernel_monkeypatched", False):
+        return
+
+    for owner, name in (
+        (module.torch.npu, "super_kernel_scope_begin"),
+        (module.torch.npu, "super_kernel_scope_end"),
+        (module.torch.npu.NPUGraph, "super_kernel_optimize"),
+    ):
+        if not hasattr(owner, name):
+            raise RuntimeError(f"MRV1 super-kernel runtime API is missing: {name}")
+
+    @contextlib.contextmanager
+    def _qwen35_super_kernel_scope(scope: str):
+        module.torch.npu.super_kernel_scope_begin(scope)
+        try:
+            yield
+        finally:
+            module.torch.npu.super_kernel_scope_end(scope)
+
+    # _replace_function_block compiles against the target function's globals.
+    module._qwen35_super_kernel_scope = _qwen35_super_kernel_scope
+    original_init = cls.__init__
+
+    @functools.wraps(original_init)
+    def __init__(self, *args, **kwargs):
+        original_init(self, *args, **kwargs)
+        self.enable_super_kernel = True
+
+    old_capture = """                    output = self.runnable(*args, **kwargs)
+"""
+    new_capture = """                    with _qwen35_super_kernel_scope("full_model"):
+                        output = self.runnable(*args, **kwargs)
+"""
+    old_optimize = """        # here we always use weak ref for the workspaces
+"""
+    new_optimize = """        aclgraph.super_kernel_optimize(
+            optimize_options={"dcci_after_kernel_end": [".*"]},
+        )
+        logger.info(
+            "[qwen35-monkeypatch] MRV1 super-kernel optimized ACL graph: %s",
+            entry.batch_descriptor,
+        )
+
+        # here we always use weak ref for the workspaces
+"""
+    cls.__init__ = __init__
+    cls.__call__ = _replace_function_blocks(
+        cls.__call__,
+        (
+            ("capture", old_capture, new_capture),
+            ("optimize", old_optimize, new_optimize),
+        ),
+        "ACLGraphWrapper.__call__",
+    )
+    cls._qwen35_super_kernel_monkeypatched = True
+    _notice("backported upstream MRV1 ACL Graph super-kernel")
+
+
+def _patch_compiler_interface(module: ModuleType) -> None:
+    """Backport upstream MRV1 options into npugraph-ex static compilation."""
+    if not _super_kernel_enabled():
+        return
+    if getattr(module, "_qwen35_super_kernel_monkeypatched", False):
+        return
+    old = """            options["_vllm_aclnn_static_kernel_sym_range"] = _compute_decode_cudagraph_batch_sizes(vllm_config)
+"""
+    new = """            options["_vllm_aclnn_static_kernel_sym_range"] = _compute_decode_cudagraph_batch_sizes(vllm_config)
+            options["super_kernel_optimize"] = True
+            options["super_kernel_optimize_options"] = {
+                "dcci_after_kernel_end": [".*"],
+            }
+"""
+    module._configure_backend = _replace_function_block(
+        module._configure_backend,
+        old,
+        new,
+        "compiler_interface._configure_backend",
+    )
+    module._qwen35_super_kernel_monkeypatched = True
+    _notice("backported upstream MRV1 npugraph-ex options")
+
+
 def _make_mmar_pass():
     import torch
     from vllm.compilation.passes.vllm_inductor_pass import VllmInductorPass
@@ -626,6 +738,8 @@ _PATCHERS = {
     "vllm.model_executor.models.qwen2_moe": _patch_qwen2_moe,
     "vllm.model_executor.models.qwen3_5": _patch_qwen35_model,
     "vllm_ascend.ascend_config": _patch_ascend_config,
+    "vllm_ascend.compilation.acl_graph": _patch_acl_graph,
+    "vllm_ascend.compilation.compiler_interface": _patch_compiler_interface,
     "vllm_ascend.compilation.graph_fusion_pass_manager": _patch_graph_manager,
     "vllm_ascend.ops.gdn": _patch_ascend_gdn,
     "vllm_ascend.ops.layernorm": _patch_layernorm,

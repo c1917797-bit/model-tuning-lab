@@ -26,6 +26,13 @@ SOURCES = {
         "/vllm-workspace/vllm-ascend/vllm_ascend/compilation/"
         "graph_fusion_pass_manager.py"
     ),
+    "acl_graph": Path(
+        "/vllm-workspace/vllm-ascend/vllm_ascend/compilation/acl_graph.py"
+    ),
+    "compiler_interface": Path(
+        "/vllm-workspace/vllm-ascend/vllm_ascend/compilation/"
+        "compiler_interface.py"
+    ),
     "ascend_gdn": Path(
         "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py"
     ),
@@ -53,6 +60,12 @@ REQUIRED_METHODS = {
         "AscendConfig": {"update_compile_ranges_split_points": {"self"}}
     },
     "graph_manager": {"GraphFusionPassManager": {"configure": {"self", "config"}}},
+    "acl_graph": {
+        "ACLGraphWrapper": {
+            "__init__": {"self", "vllm_config", "runtime_mode"},
+            "__call__": {"self"},
+        }
+    },
     "ascend_gdn": {
         "AscendGatedDeltaNetAttention": {"forward": {"self", "hidden_states"}}
     },
@@ -85,6 +98,14 @@ REQUIRED_METHODS = {
 
 REQUIRED_FUNCTIONS = {
     "linear_op": {"_get_row_parallel_op": {"prefix", "layer"}},
+    "compiler_interface": {
+        "_configure_backend": {
+            "config",
+            "ascend_compilation_config",
+            "vllm_config",
+            "process_kwargs_options",
+        }
+    },
 }
 
 EXACT_METHOD_ANCHORS = {
@@ -104,12 +125,19 @@ EXACT_METHOD_ANCHORS = {
         "    if self.reduce_results and self.tp_size > 1:\n"
         "        output = torch_npu.npu_mm_all_reduce_base(\n"
     ),
+    ("acl_graph", "ACLGraphWrapper", "__call__"): (
+        "        # here we always use weak ref for the workspaces\n"
+    ),
 }
 
 EXACT_FUNCTION_ANCHORS = {
     ("linear_op", "_get_row_parallel_op"): (
         "    if matmul_allreduce_enable():\n"
         "        return MatmulAllreduceRowParallelOp(layer)\n"
+    ),
+    ("compiler_interface", "_configure_backend"): (
+        '            options["_vllm_aclnn_static_kernel_sym_range"] = '
+        "_compute_decode_cudagraph_batch_sizes(vllm_config)\n"
     ),
 }
 

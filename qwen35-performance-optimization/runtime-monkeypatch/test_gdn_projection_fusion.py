@@ -352,6 +352,17 @@ def test_scheduler_diagnostics_opt_in(patch):
             os.environ["QWEN35_ASCEND_DIAGNOSTICS"] = saved
 
 
+def test_super_kernel_disabled_by_default(patch):
+    os.environ.pop("QWEN35_ASCEND_SUPER_KERNEL", None)
+
+    class ACLGraphWrapper:
+        pass
+
+    fake = SimpleNamespace(ACLGraphWrapper=ACLGraphWrapper)
+    patch._patch_acl_graph(fake)
+    assert not getattr(ACLGraphWrapper, "_qwen35_super_kernel_monkeypatched", False)
+
+
 def main():
     patch = load_patch()
     test_projection_construction(patch)
@@ -361,6 +372,7 @@ def main():
     test_linear_attention_gate_up_prefetch(patch)
     test_gemma_rmsnorm_prefetch_postprocess(patch)
     test_scheduler_diagnostics_opt_in(patch)
+    test_super_kernel_disabled_by_default(patch)
     print("PASS: runtime-only GDN projection fusion contract")
 
 
