@@ -24,6 +24,7 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | T27 exact TP4 BF16 matrix passed 12/12 for M=1/5/8/16 x seeds 1/2/3 | /cache/austinov/qwen35-t21-bf16-numerical-20260912T163327Z | Every case was bit-exact against official Matmul -> SwiGLU -> Matmul; the operator may enter model integration but is not promoted. |
 | T28 task-queue-safe public ACL bridge builds and imports without private vLLM-Ascend symbols | /cache/austinov/qwen35-t21-public-acl-bridge-20260912-v3 | Public ACL descriptors plus torch-npu `RunOpApiV2` preserve stream ordering and object lifetimes without the failed private-symbol seam. |
 | T28 zero-copy model-layout gate passed three fresh 20/20 matrices plus 500-call stress per run | /cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v4, -v5, -v7 | `.t()` views are bit-exact with contiguous candidate weights; the former intermittent NaN was eliminated by task-queue-aware scheduling and captured ownership. |
+| T29 removed the artificial Python dynamic-M gate and rebuilt the public bridge | /cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4; numerical -v8 and -v9 | Upstream documents positive flattened rows without an M ceiling. M=128/512/1024/4096 passed; Python M branching before fullgraph capture had frozen the official fallback. |
 | Reproducible benchmark, accuracy, resource-lock, rollback, official-image, and evidence tooling exists | This workstream and external artifact roots | Infrastructure is part of the result; reuse it rather than creating ad-hoc tests. |
 
 ## Failed or rejected routes
@@ -88,9 +89,7 @@ Do not mechanically carry forward rejections that depended only on the old
 ## Immediate resume point
 
 1. Keep T20 bounded-prefill as the TTFT component.
-2. Rerun the v2 traceable `torch.ops` artifact's device numerical/stress gate
-   after the current NPU0-3 lease holder exits.
-3. Start the opt-in `candidate-prefill-t21` TP4 service and require four-rank
+2. Start the no-dynamic-M `candidate-prefill-t21` TP4 service and require four-rank
    activation, natural EOS, and clean rollback.
-4. Run fail-fast official/upstream-base/project-delta ablation. Only then run
+3. Run fail-fast official/upstream-base/project-delta ablation. Only then run
    c1/c5/c8/c16 x3 and full paired quality.

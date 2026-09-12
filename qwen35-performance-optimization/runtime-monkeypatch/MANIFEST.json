@@ -28,12 +28,12 @@
     "rationale": "bounded prefill MMAR is the retained TTFT component; decode still requires a separately validated project-specific component to clear the current 10 percent TPOT gate"
   },
   "candidate_t21_dense_mlp": {
-    "status": "task_queue_safe_public_bridge_and_repeated_zero_copy_layout_passed_tp4_service_pending",
+    "status": "large_m_numerical_gate_passed_tp4_service_pending",
     "enabled_by": "QWEN35_ASCEND_T21_DENSE_MLP=1",
     "upstream_operator_sha256": "ef99d0382ead18f4ef565fb62b40e679adaa9ee120af56089989430fa5a38afb",
-    "public_bridge_sha256": "36bf053fd6511ac8a050dd30e08ee99396a76738afcc74fe3788fdc1f001e58a",
-    "shape_contract": "Qwen3.5-27B BF16 TP4, M=1..16, local 5120->8704->4352->5120",
-    "project_delta": "traceable torch op registration, exact-shape admission, zero-copy model-weight views, existing vLLM TP AllReduce composition",
+    "public_bridge_sha256": "7c0e01b2b6d4274ead9871c76df5a83cad3618cddec35128ca4e8d12a8c786e4",
+    "shape_contract": "Qwen3.5-27B BF16 TP4, positive M, local 5120->8704->4352->5120",
+    "project_delta": "traceable torch op registration without a Python dynamic-M branch, exact model-shape admission, zero-copy model-weight views, existing vLLM TP AllReduce composition",
     "rollback": "set QWEN35_ASCEND_T21_DENSE_MLP=0 and restart"
   },
   "framework": "vLLM-Ascend 0.23.0",
@@ -87,13 +87,15 @@
       "natural_eos": true,
       "response_sha256_matched_control": true
     },
-    "t21_public_bridge_build": "/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v3",
+    "t21_public_bridge_build": "/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4",
     "t21_zero_copy_numerical": [
       "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v4",
       "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v5",
-      "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v7"
+      "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v7",
+      "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v8",
+      "/cache/austinov/qwen35-t21-public-bridge-numerical-20260912-v9"
     ],
-    "t21_zero_copy_matrix": "three fresh 20/20 matrices passed plus 500-call stress per completed run; TP4 service pending"
+    "t21_zero_copy_matrix": "three fresh 20/20 small-M matrices plus 500-call stress passed; M=128/512/1024/4096 extension gates also passed; TP4 service pending"
   },
   "model": "Qwen3.5-27B",
   "mtp": false,
@@ -120,7 +122,7 @@
   ],
   "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
   "schema": "qwen35-runtime-monkeypatch/v2",
-  "sitecustomize_sha256": "377e85ebf371cb6aef36cd52d08a5b42624f524689b4102b4fc92142fbd9becc",
+  "sitecustomize_sha256": "f4c4b30c8e5fb1f27fbfbb8b6ac290b58fb95c7484f5de0e7ee27c545972a6be",
   "source_overlays": 0,
   "speculative_decoding": false,
   "status": "t21_bridge_gates_passed_tp4_service_and_acceptance_pending",

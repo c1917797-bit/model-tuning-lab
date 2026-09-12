@@ -147,8 +147,8 @@ void CheckInputs(const at::Tensor& x,
                     gate_up_weight.scalar_type() == at::ScalarType::BFloat16 &&
                     down_weight.scalar_type() == at::ScalarType::BFloat16,
                 "T21 bridge requires BF16 tensors");
-    TORCH_CHECK(x.size(0) >= 1 && x.size(0) <= 16,
-                "T21 bridge is gated to decode/small-batch M in [1,16]");
+    TORCH_CHECK(x.size(0) >= 1,
+                "T21 bridge requires a positive flattened row count");
     TORCH_CHECK(x.size(1) == 5120 &&
                     gate_up_weight.sizes() == at::IntArrayRef({5120, 8704}) &&
                     down_weight.sizes() == at::IntArrayRef({4352, 5120}),

@@ -28,12 +28,13 @@ def test_uses_only_public_tensor_and_stream_seams() -> None:
     assert "op_api_common.h" not in SOURCE
 
 
-def test_is_exact_shape_and_small_m_gated() -> None:
-    for marker in ("5120", "8704", "4352", "M in [1,16]"):
+def test_is_exact_model_shape_gated_without_artificial_m_ceiling() -> None:
+    for marker in ("5120", "8704", "4352", "positive flattened row count"):
         assert marker in SOURCE
+    assert "M in [1,16]" not in SOURCE
 
 
 if __name__ == "__main__":
     test_uses_only_public_tensor_and_stream_seams()
-    test_is_exact_shape_and_small_m_gated()
+    test_is_exact_model_shape_gated_without_artificial_m_ceiling()
     print("PASS: T21 public ACL bridge source contract")

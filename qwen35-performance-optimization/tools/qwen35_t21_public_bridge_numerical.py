@@ -98,8 +98,8 @@ def main() -> None:
     rows_values = [int(item) for item in os.environ.get("M_VALUES", "1 5 8 16").split()]
     seeds = [int(item) for item in os.environ.get("SEEDS", "1 2 3").split()]
     stress_iterations = int(os.environ.get("STRESS_ITERATIONS", "100"))
-    if not rows_values or any(item not in {1, 5, 8, 16} for item in rows_values):
-        raise SystemExit("M_VALUES must contain only 1, 5, 8, 16")
+    if not rows_values or any(item <= 0 for item in rows_values):
+        raise SystemExit("M_VALUES must contain positive integers")
     if not seeds or any(item <= 0 for item in seeds):
         raise SystemExit("SEEDS must contain positive integers")
     if stress_iterations < 1:

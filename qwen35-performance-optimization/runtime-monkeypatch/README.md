@@ -85,7 +85,7 @@ MMAR path. This variant does not mount the rejected AICPU-first custom OPP and
 is disabled unless the launcher explicitly selects it. The expected
 sitecustomize.py SHA256 is:
 
-    377e85ebf371cb6aef36cd52d08a5b42624f524689b4102b4fc92142fbd9becc
+    f4c4b30c8e5fb1f27fbfbb8b6ac290b58fb95c7484f5de0e7ee27c545972a6be
 
 The `candidate-prefill-no-prefetch` ablation keeps the same bounded-prefill
 rewrite and GDN projection patch while disabling both the official weight
@@ -152,9 +152,12 @@ Still pending for a final money patch:
 An additional opt-in T21 path is now available behind
 `QWEN35_ASCEND_T21_DENSE_MLP=1`. It registers the pinned upstream fused local
 MLP as a traceable torch operator through public ACL/torch-npu interfaces,
-admits only exact Qwen3.5-27B BF16 TP4 shapes with M<=16, passes zero-copy
+admits only exact Qwen3.5-27B BF16 TP4 model shapes, passes zero-copy
 transposed model-weight views, and composes the result with vLLM's existing TP
-AllReduce. It is disabled by default and is not promoted until TP4 service,
+AllReduce. The upstream operator accepts every positive flattened M; keeping
+the former Python M<=16 branch caused AOT fullgraph capture at large M to
+permanently select the fallback path. The branch is removed, and numerical
+gates now cover M through 4096. It is disabled by default and is not promoted until TP4 service,
 ablation, complete matrix, and quality gates pass. See
 `../T28_PUBLIC_ACL_TORCH_BRIDGE_FINDINGS.md`.
 

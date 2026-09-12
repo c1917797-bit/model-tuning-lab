@@ -208,7 +208,6 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
         eligible = (
             self.expert_gate is None
             and x.dim() == 2
-            and 1 <= x.size(0) <= 16
             and x.size(1) == 5120
             and x.dtype == module.torch.bfloat16
             and x.is_contiguous()
@@ -234,60 +233,66 @@ def _patch_qwen2_moe(module: ModuleType) -> None:
             and down_proj.bias is None
         )
         if not eligible:
-            if (
-                _diagnostics_enabled()
-                and not getattr(cls, "_qwen35_t21_ineligible_reported", False)
-            ):
-                cls._qwen35_t21_ineligible_reported = True
-                try:
-                    import torch_npu
-
-                    gate_up_format = int(
-                        torch_npu.get_npu_format(gate_up_weight)
-                    )
-                    down_format = int(torch_npu.get_npu_format(down_weight))
-                except Exception:
-                    gate_up_format = -1
-                    down_format = -1
-                _notice(
-                    "T21 dense MLP fallback diagnostics "
-                    f"x_shape={tuple(x.shape)} x_stride={tuple(x.stride())} "
-                    f"x_dtype={x.dtype} x_contiguous={x.is_contiguous()} "
-                    f"x_offset={x.storage_offset()} "
-                    f"gate_shape={tuple(gate_up_weight.shape)} "
-                    f"gate_stride={tuple(gate_up_weight.stride())} "
-                    f"gate_dtype={gate_up_weight.dtype} "
-                    f"gate_contiguous={gate_up_weight.is_contiguous()} "
-                    f"gate_offset={gate_up_weight.storage_offset()} "
-                    f"gate_format={gate_up_format} "
-                    f"down_shape={tuple(down_weight.shape)} "
-                    f"down_stride={tuple(down_weight.stride())} "
-                    f"down_dtype={down_weight.dtype} "
-                    f"down_contiguous={down_weight.is_contiguous()} "
-                    f"down_offset={down_weight.storage_offset()} "
-                    f"down_format={down_format} "
-                    f"gate_tp={gate_up_proj.tp_size} "
-                    f"down_tp={down_proj.tp_size} "
-                    f"input_parallel={down_proj.input_is_parallel} "
-                    f"reduce_results={down_proj.reduce_results} "
-                    f"gate_quant={gate_up_proj.quant_method.__class__.__name__} "
-                    f"down_quant={down_proj.quant_method.__class__.__name__} "
-                    f"expert_gate_none={self.expert_gate is None}"
-                )
+            if _diagnostics_enabled():
+                if self.expert_gate is not None:
+                    raise RuntimeError("T21_DIAG_FAIL=expert_gate")
+                if x.dim() != 2:
+                    raise RuntimeError("T21_DIAG_FAIL=x_dim")
+                if x.size(1) != 5120:
+                    raise RuntimeError("T21_DIAG_FAIL=x_hidden")
+                if x.dtype != module.torch.bfloat16:
+                    raise RuntimeError("T21_DIAG_FAIL=x_dtype")
+                if not x.is_contiguous():
+                    raise RuntimeError("T21_DIAG_FAIL=x_contiguous")
+                if gate_up_weight.dtype != module.torch.bfloat16:
+                    raise RuntimeError("T21_DIAG_FAIL=gate_dtype")
+                if down_weight.dtype != module.torch.bfloat16:
+                    raise RuntimeError("T21_DIAG_FAIL=down_dtype")
+                if gate_up_weight.device != x.device:
+                    raise RuntimeError("T21_DIAG_FAIL=gate_device")
+                if down_weight.device != x.device:
+                    raise RuntimeError("T21_DIAG_FAIL=down_device")
+                if tuple(gate_up_weight.shape) != (8704, 5120):
+                    raise RuntimeError("T21_DIAG_FAIL=gate_shape")
+                if tuple(down_weight.shape) != (5120, 4352):
+                    raise RuntimeError("T21_DIAG_FAIL=down_shape")
+                if not gate_up_weight.is_contiguous():
+                    raise RuntimeError("T21_DIAG_FAIL=gate_contiguous")
+                if not down_weight.is_contiguous():
+                    raise RuntimeError("T21_DIAG_FAIL=down_contiguous")
+                if gate_up_weight.storage_offset() != 0:
+                    raise RuntimeError("T21_DIAG_FAIL=gate_offset")
+                if down_weight.storage_offset() != 0:
+                    raise RuntimeError("T21_DIAG_FAIL=down_offset")
+                if gate_up_proj.tp_size != 4:
+                    raise RuntimeError("T21_DIAG_FAIL=gate_tp")
+                if down_proj.tp_size != 4:
+                    raise RuntimeError("T21_DIAG_FAIL=down_tp")
+                if not down_proj.input_is_parallel:
+                    raise RuntimeError("T21_DIAG_FAIL=input_parallel")
+                if not down_proj.reduce_results:
+                    raise RuntimeError("T21_DIAG_FAIL=reduce_results")
+                if (
+                    gate_up_proj.quant_method.__class__.__name__
+                    != "UnquantizedLinearMethod"
+                ):
+                    raise RuntimeError("T21_DIAG_FAIL=gate_quant")
+                if (
+                    down_proj.quant_method.__class__.__name__
+                    != "UnquantizedLinearMethod"
+                ):
+                    raise RuntimeError("T21_DIAG_FAIL=down_quant")
+                if gate_up_proj.bias is not None:
+                    raise RuntimeError("T21_DIAG_FAIL=gate_bias")
+                if down_proj.bias is not None:
+                    raise RuntimeError("T21_DIAG_FAIL=down_bias")
+                raise RuntimeError("T21_DIAG_FAIL=aggregate_only")
             return original(self, x)
 
         output_parallel = module.torch.ops.qwen35_t21.swiglu_gated_mlp(
             x, gate_up_weight.t(), down_weight.t()
         )
-        output = tensor_model_parallel_all_reduce(output_parallel)
-        calls = int(getattr(self, "_qwen35_t21_calls", 0)) + 1
-        self._qwen35_t21_calls = calls
-        if calls == 1:
-            _notice(
-                "activated T21 upstream dense MLP with Qwen3.5 TP4 "
-                "zero-copy weight views and existing vLLM AllReduce"
-            )
-        return output
+        return tensor_model_parallel_all_reduce(output_parallel)
 
     cls.forward = forward
     cls._qwen35_t21_dense_mlp_monkeypatched = True

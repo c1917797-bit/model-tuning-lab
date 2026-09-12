@@ -17,9 +17,9 @@ The bridge was built offline in the unchanged official vLLM-Ascend v0.23.0
 image with no network and no NPU mapping. Its undefined-symbol audit contains
 neither private bridge nor private storage symbols. The pinned build is:
 
-- artifact: `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v3`;
+- artifact: `/cache/austinov/qwen35-t21-public-acl-bridge-20260912-v4`;
 - bridge SHA-256:
-  `36bf053fd6511ac8a050dd30e08ee99396a76738afcc74fe3788fdc1f001e58a`;
+  `7c0e01b2b6d4274ead9871c76df5a83cad3618cddec35128ca4e8d12a8c786e4`;
 - build runner: `scripts/build_qwen35_t21_public_acl_bridge.sh`.
 
 The official-image device-free registration test passes: importing the
@@ -60,7 +60,8 @@ The opt-in runtime hook is deliberately narrower than the upstream operator:
 
 - exact Qwen3.5-27B BF16 TP4 shapes only;
 - unquantized weights only;
-- M in `[1, 16]` only;
+- every positive flattened M supported by the upstream operator; no Python
+  dynamic-M branch is allowed before AOT fullgraph capture;
 - zero-offset contiguous model weights converted to zero-copy views;
 - upstream local fused MLP result composed with vLLM's existing
   `tensor_model_parallel_all_reduce`;
@@ -73,6 +74,15 @@ This is the independently measurable project delta on top of upstream reuse:
 model-specific admission, zero-copy layout/lifecycle integration, traceable
 registration, and correct existing-collective composition. It is not a
 locally rewritten kernel.
+
+The first TP4 service produced correct output but did not execute the T21 node.
+A bounded fail-fast diagnostic proved that profile/AOT capture first entered
+the hook with `x_rows > 16`; the Python small-M predicate therefore captured
+the official fallback for the reusable graph. Upstream documentation and
+tiling contain no such ceiling. Bridge v4 removes only that artificial limit.
+Fresh gates passed M=1/16/128/512 and M=1024/4096, with zero-copy and
+contiguous-weight candidate outputs bit-exact and maximum reference error
+`7.62939453125e-06`.
 
 ## Remaining gates
 
