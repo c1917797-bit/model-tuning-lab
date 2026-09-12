@@ -27,6 +27,8 @@ STEPS = 8
 ALIGNMENT_BYTES = 512
 SENTINEL = 123.0
 STATE_DTYPES = {"bfloat16": torch.bfloat16, "float32": torch.float32}
+EXPECTED_L2NORM_SHA256 = "520f4513ef4fc97e6b88dc07877cca8e29da0d34e44673fe989e3af002d86381"
+L2NORM_FWD = None
 
 
 def sha256(path):
@@ -93,8 +95,11 @@ def reset_graph(graph, record, original_error):
 
 
 def native_operation(inputs, state):
+    if L2NORM_FWD is None:
+        raise RuntimeError("active l2norm reference is not initialized")
     return torch.ops._C_ascend.npu_recurrent_gated_delta_rule(
-        query=inputs["q"], key=inputs["k"], value=inputs["v"],
+        query=L2NORM_FWD(inputs["q"]), key=L2NORM_FWD(inputs["k"]),
+        value=inputs["v"],
         g=inputs["g"], beta=inputs["beta"], state=state,
         scale=D_K ** -0.5, actual_seq_lengths=inputs["lengths"],
         ssm_state_indices=inputs["indices"],
@@ -188,9 +193,7 @@ def run_case(batch, state_dtype, record, save):
                 value = torch.randn(
                     (batch, H_QK, D_K), generator=generator
                 )
-                inputs[name].copy_(
-                    F.normalize(value, dim=-1).to(torch.bfloat16)
-                )
+                inputs[name].copy_(value.to(torch.bfloat16))
             inputs["v"].copy_((
                 torch.randn((batch, H_V, D_V), generator=generator) * 0.1
             ).to(torch.bfloat16))
@@ -295,6 +298,31 @@ def main():
     for path in (args.bridge, args.opapi):
         if not path.resolve().is_file():
             parser.error(f"missing runtime artifact: {path}")
+    opapi = args.opapi.resolve()
+    vendor_root = opapi.parents[2]
+    custom_opp_paths = [
+        Path(entry).resolve()
+        for entry in os.environ.get("ASCEND_CUSTOM_OPP_PATH", "").split(":")
+        if entry
+    ]
+    if vendor_root not in custom_opp_paths:
+        parser.error(
+            "ASCEND_CUSTOM_OPP_PATH must include the packaged candidate "
+            f"vendor root: {vendor_root}"
+        )
+    companion_paths = {
+        "opmaster": (
+            vendor_root / "op_impl/ai_core/tbe/op_tiling/lib/linux/aarch64/"
+            "libcust_opmaster_rt2.0.so"
+        ),
+        "opsproto": (
+            vendor_root / "op_proto/lib/linux/aarch64/"
+            "libcust_opsproto_rt2.0.so"
+        ),
+    }
+    for name, path in companion_paths.items():
+        if not path.is_file():
+            parser.error(f"missing packaged {name} library: {path}")
 
     output.mkdir(parents=True)
     report = {
@@ -307,8 +335,16 @@ def main():
             "sha256": sha256(args.bridge),
         },
         "opapi": {
-            "path": str(args.opapi.resolve()),
-            "sha256": sha256(args.opapi),
+            "path": str(opapi),
+            "sha256": sha256(opapi),
+        },
+        "runtime_vendor": {
+            "path": str(vendor_root),
+            "custom_opp_path_at_start": [str(path) for path in custom_opp_paths],
+            "companions": {
+                name: {"path": str(path), "sha256": sha256(path)}
+                for name, path in companion_paths.items()
+            },
         },
         "device": "logical npu:0; externally verified physical NPU4",
         "protocol": {
@@ -316,8 +352,9 @@ def main():
             "batches": [1, 16], "steps": STEPS,
             "state_dtype": args.state_dtype,
             "criterion": (
-                "finite logical bytes exactly equal for native separate Q/K/V "
-                "versus plugin packed Q/K/V output and full mutable state; "
+                "finite logical bytes exactly equal for active l2norm plus "
+                "native separate Q/K/V versus plugin raw packed Q/K/V output "
+                "and full mutable state; "
                 "guards, untouched slots and "
                 "tensor metadata invariant"
             ),
@@ -340,6 +377,7 @@ def main():
 
     save()
     try:
+        global L2NORM_FWD
         from vllm_ascend.ops.triton.triton_utils import (
             init_device_properties_triton,
         )
@@ -349,8 +387,28 @@ def main():
             raise RuntimeError("native custom operators unavailable")
         torch.npu.set_device(0)
         init_device_properties_triton()
+        from vllm.model_executor.layers.fla.ops import l2norm as l2norm_module
+        l2norm_path = Path(l2norm_module.__file__).resolve()
+        l2norm_sha256 = sha256(l2norm_path)
+        if l2norm_sha256 != EXPECTED_L2NORM_SHA256:
+            raise RuntimeError(
+                f"active l2norm source mismatch: {l2norm_sha256}"
+            )
+        if int(l2norm_module.USE_DEFAULT_FLA_NORM) != 0:
+            raise RuntimeError("active l2norm path is not l2norm_fwd_kernel2")
+        L2NORM_FWD = l2norm_module.l2norm_fwd
+        report["reference_l2norm"] = {
+            "path": str(l2norm_path),
+            "sha256": l2norm_sha256,
+            "expected_sha256": EXPECTED_L2NORM_SHA256,
+            "use_default_fla_norm": int(l2norm_module.USE_DEFAULT_FLA_NORM),
+            "semantics": (
+                "per-row FP32 square/sum/rsqrt, eps=1e-6, BF16 output"
+            ),
+        }
+        save()
         bridge = load_bridge(args.bridge.resolve())
-        bridge.configure_exact_opapi(str(args.opapi.resolve()))
+        bridge.configure_exact_opapi(str(opapi))
         report["configured_opapi_path"] = bridge.configured_opapi_path()
         report["schemas"] = {
             "native": str(
