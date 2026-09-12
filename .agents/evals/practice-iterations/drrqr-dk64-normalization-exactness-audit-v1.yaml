@@ -1,0 +1,62 @@
+schema: mst-practice-iteration/v1
+id: drrqr-dk64-normalization-exactness-audit-v1
+repository: model-tuning-lab
+status: in_progress
+date: 2026-09-12
+validated_commit: pending
+
+stage_goal: Decide from exact source and cost evidence whether a portable normalization primitive can replace the failed inline Stage 2 boundary without changing energy-Dk64 semantics or erasing its prospective gain.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 remains at 141.564496 output tok/s, 4.752041 percent above frozen dense and about 5.009887 percent below the fixed 10 percent target. The tested inline raw-Q/K normalization diverged at batch1 step1 and is stopped.
+  medium_term_milestone: Produce a numerically defensible DRRQR decode candidate with a sufficiently large Dk-dependent compute or state-traffic reduction to justify one endpoint screen.
+  short_term_decision: Determine whether the active l2norm arithmetic and BF16 materialization can be reproduced exactly with a portable CANN primitive inside the packed recurrent design at a credible cost; otherwise abandon this fusion boundary.
+  deciding_evidence: A source-level operation-order and dtype-boundary comparison tied to exact commits and hashes, plus a head-multiplicity, UB, data-movement, and launch cost model against the existing separate l2norm path.
+  budget_or_stop_rule: One source-and-cost audit only. Do not patch the operator, build, run NPU parity, profile, start a service, or run accuracy in this iteration.
+  on_pass: Open a new implementation iteration with an independently named or versioned operator, a predeclared exact NPU gate, complete vendor-bundle identity, and an explicit portability dispatch contract.
+  on_failure: Stop normalization fusion and open a direct aligned-Dk64 projection-weight slicing plus state-layout integration iteration that removes Dk-dependent upstream work while preserving a dense-prefill fallback and graph/cache identity.
+  on_inconclusive: Run at most one source-only disambiguation if it can decide exactness or the material cost case; otherwise take the failure branch.
+
+authoritative_evidence:
+  frozen_dense_output_tok_s: 135.142469917
+  target_output_tok_s: 148.656716909
+  energy_dk64_output_tok_s: 141.564496
+  failed_stage2_commit: 9dec2683c36bc6f44643d305e4ea2c75ff3eacee
+  safe_recovery_commit: c4348e006643eeec4803d3438ec329fbb736e92e
+  failed_report: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/dk64-packed-recurrent-stage2-parity-v3/report.json
+  failed_report_sha256: 85fc61f57ff966a9502942e3354d1aec0122e5f8adb2be723d4e2d88f0b32808
+  failure_observation: Exact eager and NPUGraph output plus complete FP32 state diverged at physical-NPU4 batch1 step1 while guards, untouched slots, pointers, metadata, finiteness and BF16 output dtype remained valid.
+  active_l2norm_source: /cache/austinov/src/vllm/vllm/model_executor/layers/fla/ops/l2norm.py
+  active_l2norm_commit: 0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665
+  active_l2norm_sha256: 520f4513ef4fc97e6b88dc07877cca8e29da0d34e44673fe989e3af002d86381
+
+audit_questions:
+  - What exact load dtype, multiplication order, reduction tree, epsilon placement, reciprocal-square-root operation, rounding mode, and BF16 store boundary does the active path execute?
+  - Which difference can explain first-step output and state divergence without a storage or metadata failure?
+  - Can a supported CANN primitive reproduce that boundary across qualified SoCs and runtimes without hard-coded TP4 dimensions?
+  - Does the proposed fold remove global materialization or launches after accounting for one Q/K head serving three value heads, or does it merely move the same work?
+  - If exactness requires preserving the same materialized tensor and reduction launch, is the remaining seam too small to close the approximately 5.01 percent candidate gap?
+
+portability_contract:
+  algorithm_semantics: Keep logical Dk, selected-coordinate order, and normalization semantics independent of physical tiling and SoC dispatch.
+  implementation: Derive shapes and head grouping from tensors, use supported backend primitives, version the opt-in operator, and retain the current separate l2norm plus recurrent fallback.
+  evidence_boundary: Passing this audit is source and cost admission only; every implementation still requires per-environment NPU numerical, graph, endpoint, and final accuracy evidence.
+
+changes:
+  - type: docs
+    description: Record the bounded post-failure decision loop and its explicit pivot to a larger DRRQR-specific projection/state seam.
+    files: [.agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml]
+
+validation_commands:
+  - parse this YAML with yaml.safe_load
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: A failed arithmetic gate changes the implementation decision immediately; the next iteration is a source/cost decision, not an automatic numerical retry.
+    destination: .agents/skills/drrqr-ascend-optimization-loop/SKILL.md
+    severity: high
+  - lesson: If exact normalization cannot be folded with material savings, move to a larger DRRQR-specific Dk-dependent projection and state seam instead of accumulating launch-only optimizations.
+    destination: projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/DRRQR_ASCEND_EXPERIENCE.md
+    severity: high
