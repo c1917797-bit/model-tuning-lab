@@ -31,9 +31,9 @@ def main() -> None:
             "--output",
             "output",
             "--variant",
-            "candidate-prefill-t21",
+            "candidate-super-kernel",
         ]
-        assert checker.parse_args().variant == "candidate-prefill-t21"
+        assert checker.parse_args().variant == "candidate-super-kernel"
     finally:
         sys.argv = original_argv
     with tempfile.TemporaryDirectory() as directory:
@@ -47,7 +47,13 @@ def main() -> None:
         rank_markers = "\n".join(
             marker
             for name, marker in checker.REQUIRED_MARKERS.items()
-            if name != "t21_dense_mlp"
+            if name
+            not in {
+                "t21_dense_mlp",
+                "mrv1_acl_graph",
+                "mrv1_npugraph_options",
+                "mrv1_optimized_graph",
+            }
         )
         log.write_text("\n".join([rank_markers] * 4) + "\n", encoding="utf-8")
         env = [f"{key}={value}" for key, value in checker.EXPECTED_ENV.items()]
@@ -56,6 +62,7 @@ def main() -> None:
                 "QWEN35_ASCEND_MONKEYPATCH=1",
                 "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=1",
                 "QWEN35_ASCEND_T21_DENSE_MLP=0",
+                "QWEN35_ASCEND_SUPER_KERNEL=0",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0",
@@ -269,6 +276,49 @@ def main() -> None:
         assert result["passed"], result
         assert result["marker_counts"]["gate_up_prefetch"] == 0
         assert result["marker_counts"]["rmsnorm_postprocess"] == 0
+
+        candidate_super_kernel = json.loads(json.dumps(candidate_prefill_no_prefetch))
+        candidate_super_kernel[0]["Config"]["Labels"][
+            "com.c1917797.qwen35-variant"
+        ] = "candidate-super-kernel"
+        candidate_super_kernel[0]["Config"]["Env"] = [
+            "QWEN35_ASCEND_SUPER_KERNEL=1"
+            if value.startswith("QWEN35_ASCEND_SUPER_KERNEL=")
+            else "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=0"
+            if value.startswith("VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=")
+            else "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0"
+            if value.startswith("VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=")
+            else "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0"
+            if value.startswith("VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=")
+            else value
+            for value in candidate_super_kernel[0]["Config"]["Env"]
+        ]
+        inspect.write_text(json.dumps(candidate_super_kernel), encoding="utf-8")
+        super_kernel_markers = "\n".join(
+            marker
+            for name, marker in checker.REQUIRED_MARKERS.items()
+            if name
+            in {
+                "multiprocessing_child",
+                "mrv1_acl_graph",
+                "mrv1_npugraph_options",
+                "mrv1_optimized_graph",
+            }
+        )
+        log.write_text(
+            "\n".join([super_kernel_markers] * 4) + "\n",
+            encoding="utf-8",
+        )
+        result = checker.check(
+            log,
+            inspect,
+            npu,
+            top,
+            models,
+            variant="candidate-super-kernel",
+        )
+        assert result["passed"], result
+        assert result["marker_counts"]["mrv1_optimized_graph"] == 4
 
         control = json.loads(json.dumps(candidate))
         control_env = control[0]["Config"]["Env"]

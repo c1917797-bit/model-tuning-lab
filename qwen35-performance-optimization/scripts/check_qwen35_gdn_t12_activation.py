@@ -40,6 +40,9 @@ REQUIRED_MARKERS = {
     "gate_up_prefetch": "patched linear-attention gate/up prefetch",
     "rmsnorm_postprocess": "patched Gemma RMSNorm prefetch postprocess",
     "t21_dense_mlp": "patched Qwen2MoeMLP with opt-in T21 dense path",
+    "mrv1_acl_graph": "backported upstream MRV1 ACL Graph super-kernel",
+    "mrv1_npugraph_options": "backported upstream MRV1 npugraph-ex options",
+    "mrv1_optimized_graph": "MRV1 super-kernel optimized ACL graph",
 }
 NPU_PROCESS_RE = re.compile(
     r"^\|\s*([0-7])\s+\d+\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|",
@@ -94,6 +97,7 @@ def check(
         "candidate-prefill",
         "candidate-prefill-t21",
         "candidate-prefill-no-prefetch",
+        "candidate-super-kernel",
         "control",
     }
     if variant not in variants:
@@ -101,6 +105,8 @@ def check(
     patch_enabled = variant != "control"
     operator_enabled = variant == "candidate"
     t21_enabled = variant == "candidate-prefill-t21"
+    super_kernel_enabled = variant == "candidate-super-kernel"
+    gdn_fusion_enabled = patch_enabled and not super_kernel_enabled
     prefill_enabled = variant in {
         "candidate-prefill",
         "candidate-prefill-t21",
@@ -123,10 +129,18 @@ def check(
     marker_checks = {}
     for name, count in marker_counts.items():
         expected = patch_enabled
+        if name in {"gdn_construction", "weight_mapping", "ascend_forward"}:
+            expected = gdn_fusion_enabled
         if name in {"gate_up_prefetch", "rmsnorm_postprocess"}:
             expected = prefetch_patch_enabled
         if name == "t21_dense_mlp":
             expected = t21_enabled
+        if name in {
+            "mrv1_acl_graph",
+            "mrv1_npugraph_options",
+            "mrv1_optimized_graph",
+        }:
+            expected = super_kernel_enabled
         marker_checks[name] = count >= expected_ranks if expected else count == 0
 
     env = _environment(inspect)
@@ -137,8 +151,9 @@ def check(
             "1" if prefetch_patch_enabled else "0"
         ),
         "QWEN35_ASCEND_T21_DENSE_MLP": "1" if t21_enabled else "0",
+        "QWEN35_ASCEND_SUPER_KERNEL": "1" if super_kernel_enabled else "0",
         "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS": (
-            "1" if patch_enabled else "0"
+            "1" if gdn_fusion_enabled else "0"
         ),
         "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD": (
             "512" if prefill_enabled else "0"
@@ -375,6 +390,7 @@ def parse_args() -> argparse.Namespace:
             "candidate-prefill",
             "candidate-prefill-t21",
             "candidate-prefill-no-prefetch",
+            "candidate-super-kernel",
             "control",
         ),
         default="candidate",
