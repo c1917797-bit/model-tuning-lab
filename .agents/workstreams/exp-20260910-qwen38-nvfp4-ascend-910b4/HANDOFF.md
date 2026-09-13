@@ -2,6 +2,28 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LATEST LIVE CHECKPOINT 20:09 UTC: first Qwen3.8 canary completed32/32, errors0,
+stop32, but9 empty outputs. Every empty response has usage completion_tokens=1;
+raw SSE contains only empty role/finish and usage events. Not a missed visible
+content field; EOS identity still needs nonstream/visible-special-token diagnosis.
+Artifact /cache/austinov/eval-runs/switch12h-qwen38-20260913-fRMUzD:
+canary.json SHA2569942a2f2513e47e620fe1ba2294f593a1e2b6be14bd3db3abf7708fba4939ecd;
+rows SHA256e7da12ab6aec052e3e4d7a875d7f563142b0e1c8680784b268bc477f81969a4e.
+This failed canary must not be treated as accepted full performance evidence.
+
+The initial Qwen3 controller exec-0000000000000beb was lost during observed
+gateway availability changes. Host verified no controller/container and log
+Terminated; /switch12h-qwen3-20260913-mGp54E/status.json is stale, not running.
+Restarted safely with nohup+setsid after resource checks; actual live controller
+PID2187839, PPID1, SID2187839, container715dd4c2360d, artifact
+/cache/austinov/eval-runs/switch12h-qwen3-resume-20260913-N4hS5H. Check exact
+process cmdline/container/status rather than relying on resettable gateway exec IDs.
+At20:09 it was loading17 model shards. Do not duplicate this run.
+Prepared queue_switch_probe.sh to follow that exact controller, then run a fresh
+Qwen3.8 diagnostic on3 observed empty examples and1 nonempty control, each with
+nonstream, visible-special-token and ignore_eos16 variants. Last variant is
+diagnostic ONLY, never quality/performance evidence. Inputs/outputs stay outside Git.
+
 LATEST RESOURCE AUTHORITY / DEADLINE: user explicitly authorized stopping
 qwen35_t37_pa_workspace_service_v1 and other containers proven to interfere with
 this test. This supersedes earlier never-stop-external-container wording only
