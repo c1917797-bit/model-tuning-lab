@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=0de5b4e008947e9fab83e098bc010b63e51332146ff1021611c2a425dc0c18f9
+patch_sha256=3a0e871250a07e5dcdde096f2df7bf5667b0883e1734d1675e05bf8ceb2cf38a
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a

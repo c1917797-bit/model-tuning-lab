@@ -345,19 +345,19 @@ def _patch_qwen35_model(module: ModuleType) -> None:
         ]
     loaded_params: set[str] = set()
 """
-    loaded_old = """            loaded_params.add(name)
-        return loaded_params
+    loaded_old = """        loaded_params.add(name)
+    return loaded_params
 """
-    loaded_new = """            loaded_params.add(name)
-        # This runtime-derived parameter is materialized by the wrapped
-        # conv1d checkpoint loader and therefore is initialized, even though
-        # it has no independent checkpoint tensor.
-        loaded_params.update(
-            name
-            for name in params_dict
-            if name.endswith("._qwen35_ascend_conv1d_weight")
-        )
-        return loaded_params
+    loaded_new = """        loaded_params.add(name)
+    # This runtime-derived parameter is materialized by the wrapped
+    # conv1d checkpoint loader and therefore is initialized, even though
+    # it has no independent checkpoint tensor.
+    loaded_params.update(
+        name
+        for name in params_dict
+        if name.endswith("._qwen35_ascend_conv1d_weight")
+    )
+    return loaded_params
 """
     cls.load_weights = _replace_function_blocks(
         cls.load_weights,
