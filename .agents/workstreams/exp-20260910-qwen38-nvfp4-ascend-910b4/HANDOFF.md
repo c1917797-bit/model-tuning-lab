@@ -2,6 +2,24 @@
 
 ## Current goal correction — user clarification 2026-09-13
 
+Identity audit: /cache/austinov/Qwen3.8-27B has a Qwen3.8 model card and
+config SHA256 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab.
+Its qwen3_5 architecture does NOT identify it as Qwen3.5 weights. Exclude those
+historical candidate results from the requested Qwen3.5 switch decision.
+The local Qwen3.5 candidate is /cache/efim/Qwen3.5-27B, with a matching model
+card, 11 visible safetensor shards, and config SHA256
+f8d190c5b89c1521220f935d2567a587d6e291ed69066a45a106560b05a2174c.
+Full shard/index and upstream provenance validation is still required.
+Qwen3-32B control at /cache/austinov/Qwen3-32B has config SHA256
+97e295b63283935788fac5e4f8860862a56d4089538cafc93f0431f2ebe483bb.
+
+Resource observation at 2026-09-13 18:42 UTC: NPU0-7 report no processes;
+fuser reports no holders of davinci0-7; port 10010 is free; MemAvailable is
+84210248 kB. The sole running Maxon4ick_torch_910_dev container is privileged
+and docker top shows only bash. This is a point-in-time observation, not an
+acquired lease. User requires eight-card exclusive operation: stop this task's
+launch/measurement if another owner uses any card, never stop their workload.
+
 The current business decision is whether to switch Qwen3-32B BF16 to
 Qwen3.5-27B BF16 under vLLM-Ascend. NVFP4 exploration is paused. The directory
 and branch names are historical and intentionally retained to avoid creating
