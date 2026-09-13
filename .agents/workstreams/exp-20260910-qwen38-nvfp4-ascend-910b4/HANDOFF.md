@@ -1,5 +1,26 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Live recovery observation 2026-09-13 22:58 UTC
+
+AWMCP transient transport outage recovered without restarting any workload.
+Controller3385497 is now absent; its termination cause is NOT established.
+Do NOT use the stale redirected quality-full.log as a liveness signal.
+Owned NPU service f1055dcda5e4572b2dbcd56b14c275c074ecd680c9b16c2730688b81b6d99f84
+is running, OOMKilled=false. CPU evaluator container
+1248efadb5f030ccabcbeea28501163a11804786b3d93438a5bbe20081665f6b
+and process3474870 remain live, CPU~100%; Docker logs show advancing MMLU
+tokenization ~45171/56168. Full scoring is not yet complete. Observe exact
+containers directly; do not relaunch or duplicate the evaluation. Original
+shell cleanup can no longer be assumed: at evaluator termination preserve
+Docker logs/inspect, verify full results/counts/hashes, and explicitly perform
+only owned service cleanup before advancing the next arm. Existing heartbeat
+must use these live handles, not missing controller or stale file timestamps.
+Actual small canary results confirm n-shot=5 for MMLU and GSM8K, each2/2;
+this establishes plumbing only, not full accuracy. MemAvailable49449148KiB
+is below the NEW-launch48GiB gate; do not launch another service now, and
+do not stop the healthy existing evaluation solely for that launch threshold.
+All original-image/framework restrictions remain unchanged.
+
 ## Current goal — latest user clarification 2026-09-13
 
 22:43 pre-scoring correction: historical2-item quality canary9ryELw explicitly
