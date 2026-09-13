@@ -18,11 +18,20 @@ esac
 code="$(cd "$(dirname "$0")" && pwd)"
 image=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
 container_id=''
+evaluator_id_file=''
 exec 9>/tmp/model-tuning-lab-switch-npu0-7.lock
 flock -n 9 || exit 75
 status() { printf '{"phase":"%s","state":"%s","updated":"%s"}\n' "$1" "$2" "$(date -u +%FT%TZ)" > "$out/status.json"; }
 cleanup() {
  rc=$?; trap - EXIT INT TERM
+ if [[ -n "$evaluator_id_file" && -f "$evaluator_id_file" ]]; then
+  evaluator_id="$(cat "$evaluator_id_file")"
+  if [[ "$evaluator_id" =~ ^[0-9a-f]{64}$ ]] && docker inspect "$evaluator_id" >/dev/null 2>&1; then
+   docker logs --timestamps "$evaluator_id" > "$out/evaluator.final.log" 2>&1 || true
+   docker inspect "$evaluator_id" > "$out/evaluator.final.inspect.json" || true
+   docker stop --time 30 "$evaluator_id" >> "$out/cleanup.log" 2>&1 || true
+  fi
+ fi
  if [[ -n "$container_id" ]] && docker inspect "$container_id" >/dev/null 2>&1; then
   docker logs --timestamps "$container_id" > "$out/service.final.log" 2>&1 || true
   docker inspect "$container_id" > "$out/service.final.inspect.json" || true
@@ -81,7 +90,8 @@ if [[ "$stage" == quality || "$stage" == quality-full ]]; then
  sha256sum "$code/run_standard_text_quality.py" "$code/no_thinking_api.py" "$code/offline_standard_data.py" > "$out/evaluator.sha256"
  run_text_eval() {
  local result_name="$1"; shift
- docker run --rm --network host --read-only --cap-drop ALL --security-opt no-new-privileges \
+ evaluator_id_file="$out/$result_name.container.id"
+ docker run --cidfile "$evaluator_id_file" --rm --network host --read-only --cap-drop ALL --security-opt no-new-privileges \
   --cpus 4 --memory 8g --tmpfs /tmp:rw,size=2g \
   -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 -e HF_DATASETS_OFFLINE=1 \
   -e TORCH_DEVICE_BACKEND_AUTOLOAD=0 \
