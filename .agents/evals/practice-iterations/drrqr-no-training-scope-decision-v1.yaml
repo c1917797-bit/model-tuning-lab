@@ -1,0 +1,46 @@
+schema: mst-practice-iteration/v1
+id: drrqr-no-training-scope-decision-v1
+repository: model-tuning-lab
+status: active
+date: 2026-09-13
+validated_commit: pending
+
+stage_goal: Decide whether the pinned paper implementation or accumulated Qwen3.8 evidence contains one remaining materially distinct no-training DRRQR mechanism that can still meet the frozen joint target.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: The best matched energy-Dk64 screen is 141.564496153 output tok/s or +4.752041 percent versus frozen dense 135.142469917, below target 148.656716909. Final same-stack 2048-token accuracy is intentionally absent because no candidate crossed performance and numerical admission.
+  medium_term_milestone: Name an untested DRRQR representation whose downstream fidelity and affected Ascend cost can both cross the joint gate, or close the current no-training program at its exact evidence boundary.
+  short_term_decision: Audit the pinned official StrongRRQR source and recovery workflow against the completed selector, state, value, cache and operator ledgers.
+  deciding_evidence: Pinned official repository identity and hashes, exact selector transformation, official post-pruning recovery commands, frozen endpoint ledger, mechanism-scale threshold, and completed downstream fidelity gates.
+  budget_or_stop_rule: One source-and-ledger audit only. No new selector, operator repair, build, NPU, endpoint or accuracy run is admitted by this iteration.
+  on_pass: Open exactly one new iteration only if the official or accumulated evidence names an untested no-training representation, proves a non-overlapping target-crossing cost ceiling, and supplies a credible untouched downstream-fidelity gate.
+  on_failure: Close the current no-training DRRQR program as joint-target-not-met. Request explicit scope change before LoRA, RFT, teacher distillation, changed acceptance thresholds or a different model architecture.
+  on_inconclusive: Preserve the exact missing source or paper evidence; do not substitute another nearby empirical variant.
+
+audit_questions:
+  - Does official StrongRRQR change runtime shape or work at fixed Dk, rather than only coordinate identity?
+  - Does the official workflow claim no-loss pruning without post-pruning recovery training?
+  - Is any untested no-training mechanism left that affects more than the measured 35.55 percent GDN threshold and has not failed an untouched downstream-output gate?
+  - Would any proposed operator be candidate-specific and sufficient after overlap, rather than a generic optimization or a previously bounded seam?
+
+claim_boundary:
+  - This audit may close the current Qwen3.8 same-stack no-training program.
+  - It must not claim that DRRQR is impossible for all models, training regimes, ranks, Ascend generations or software stacks.
+  - Official paper-exact StrongRRQR and the measured energy selector remain distinct.
+  - No final task-accuracy result is inferred from local fidelity screens.
+
+result:
+  outcome: pending
+
+lessons_ingested:
+  - lesson: A bounded program needs an explicit scope-decision iteration when all nearby mechanism families are closed; do not turn absence of a credible candidate into another empirical sweep.
+    destination: drrqr-ascend-optimization-loop
+    severity: high
+
+validation_commands:
+  - prove official repository commit 919d8667d951c385e08510bc1267c2e7049a4f56
+  - hash and inspect README.md, run_rrqr.sh, rrqr.py and LoRA/distillation launcher
+  - cross-check completed frozen performance, mechanism-scale and downstream-fidelity ledgers
+  - ./scripts/validate-mst.sh
+  - git diff --check
