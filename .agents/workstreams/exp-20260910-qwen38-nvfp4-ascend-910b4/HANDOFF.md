@@ -2,6 +2,20 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+20:47 quality API canary PASSED; PID2430859 terminal, owned container cleaned.
+Artifact /cache/austinov/eval-runs/switch12h-qwen38-quality-fixed-20260913-9ryELw:
+quality-canary/results.json SHA256f9b5c168f5de78f6394ea0201ae74b744e64005742fca7a02131e8fa8bfa5651.
+MMLU abstract_algebra1/2, GSM8K strict/flexible2/2. Scoring plumbing only, NOT
+overall accuracy. Return to performance blocker before full quality expansion.
+Push recovered; dd0f32a includes HumanEval prep and CPU evaluator backend fix.
+Next: run_switch_probe.sh qwen38 <fresh-out> sampling, all9 empty plus3 nonempty
+controls, two greedy repeats and official nonthinking recipe (temp0.7/top_p0.8/
+top_k20/presence1.5), cap256. Joint recipe diagnosis, not single-factor causality
+or a replacement baseline. Reference local model README lines252-253/502-503.
+Preserve truncation and empty outputs; any new deployment recipe requires its
+own matched control and validation. User asks fixing problems and continuing,
+not casually stopping the overall task. Keep original framework untouched.
+
 20:34 correction: quality controller2336761 is TERMINAL, failed20:31:59 before
 model requests. CPU-only evaluator AutoTokenizer import auto-loaded torch_npu
 and failed backend initialization. Owned server was cleaned up. See XJ5TBA

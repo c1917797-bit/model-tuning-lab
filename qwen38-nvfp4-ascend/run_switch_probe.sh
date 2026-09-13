@@ -75,5 +75,4 @@ status empty_output_probe running
 python3 "$code/probe_empty_outputs.py" --base-url http://127.0.0.1:10010 --model "$model" \
  --dataset /cache/cch/query_rewrite.jsonl \
  --source-rows /cache/austinov/eval-runs/switch12h-qwen38-20260913-fRMUzD/canary.rows.jsonl \
- --output "$out/probe" > "$out/probe.log" 2>&1
-
+ --profile "${3:-termination}" --output "$out/probe" > "$out/probe.log" 2>&1
