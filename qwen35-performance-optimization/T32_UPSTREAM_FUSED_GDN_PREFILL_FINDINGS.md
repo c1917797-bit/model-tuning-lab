@@ -52,8 +52,34 @@ is not admitted to performance testing until a real request produces the
 device-probe-passed marker on all four TP ranks, returns tokens, terminates by
 natural EOS, and leaves the service healthy.
 
+## v3 valid fail-fast result
+
+Artifact root: `/cache/austinov/qwen35-fused-prefill-service-20260913-v3`.
+The service passed activation, and all four TP ranks passed the actual-device
+probe with zero fallback markers. A separate 32-request warmup completed with
+zero errors and natural EOS. The formal c1/32 run also completed 32/32 with
+zero errors and natural EOS:
+
+| Metric | Fresh v14 control | v3 candidate | Reduction | Required |
+|---|---:|---:|---:|---:|
+| TTFT P95 | 841.073 ms | 617.432 ms | 26.590% | >=20% |
+| TPOT P95 | 28.909 ms | 28.276 ms | 2.189% | >=10% |
+
+The upstream fused GDN prefill is retained as a valid TTFT component, but it
+is not a final candidate because it misses the TPOT gate. Do not run the full
+concurrency matrix for this component alone.
+
+Evidence SHA256 values:
+
+- activation report: `cdb699da8807ba9899f7c15ba759529cb79ccd81a8c19419c152979f67479a55`
+- warmup result: `c9b679feeb2f766c9a88874dc3ee6029aec23aaf64bb7b0322a184a0e1c14ee5`
+- formal c1 result: `561acf2aa85d38a6b4e924fee445809dab892875df4ee19bcbe55019e04fe875`
+- final service log: `6f8257b01365e5d272575e6e59295216ea270134c46c26097a709e85a48617ca`
+
 ## Resume point
 
-Start a fresh v3 service from the corrected monkeypatch, recapture activation,
-then run a separate 32-request c1 warmup. Only a clean warmup may proceed to
-the formal c1 fail-fast gate against the fresh v14 control thresholds.
+Keep the v3 fused-prefill treatment as the TTFT base. Continue the upstream
+audit on the decode/collective path and add only a profile-grounded component
+that can close the remaining TPOT gap without sacrificing the TTFT win. Run a
+fresh c1 fail-fast on the combined stack before any full matrix or quality
+promotion.
