@@ -2,6 +2,18 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LIVE22:39 UTC Qwen3.8 full text-quality pipeline PID3385497 PPID1, container
+f1055dcda5e4572b2dbcd56b14c275c074ecd680c9b16c2730688b81b6d99f84,
+artifact /cache/austinov/eval-runs/switch12h-qwen38-text-full-20260913-oOH3fa.
+Started22:38:45 from pushedb46df46; command run_switch_canary.sh qwen38 <out>
+quality-full. Currently startup; after8rank/health gate, concurrency8 small
+MMLU/GSM8K check, then full15361 standard text items. HumanEval not included.
+Follow exact controller/container, quality-canary.log and quality-full.log;
+do not duplicate on observation timeout. Fresh resources:8empty,noholders,
+portfree,MemAvailable84238356kB,lease obtainable; unrelated bash container
+unchanged. No input-normalization approval has arrived and no formal query
+protocol was changed. Original candidate query failures remain part of report.
+
 22:35 Qwen3 original repetition1 COMPLETE, finished22:34:01. Controller3208813
 and owned containera19dae4cfa51 gone. All four357 cells passed: errors/empty/
 reasoning/prompt mismatches/undefinedTPOT all0; all357 stop. P95 TTFT/TPOT ms:
