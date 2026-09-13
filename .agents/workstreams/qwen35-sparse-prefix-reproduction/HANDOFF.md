@@ -1,6 +1,36 @@
 # Qwen3.5-27B Sparse Prefix Caching reproduction
 
-## Current authoritative status (2026-09-12)
+## Current authoritative status (2026-09-13)
+
+ACCEPTED prefix-dependent QA canary: native mb01bc and paper mb01bf both
+terminal exit0. Independent paired audit mb01c2/01c3 passed12/12 exact token
+pairs, exact lookup answers and natural EOS (four prompts, three repeats).
+Artifacts: /cache/austinov/sparse-prefix-smoke-ejaFfQ (native) and
+/cache/austinov/sparse-prefix-smoke-AxcJfe (paper), candidate commit d680fa2.
+Paired audit: /cache/austinov/sparse-prefix-smoke-AxcJfe/paired-audit.json
+SHA256 5ac0f09a8c7b32e93171dae43be1dd1298e0c04790e46834335f19ef59a376b8.
+Same image, model, prompts and physical4-7. New branch hits native0/paper1536;
+repeat hits native3072/paper1536. This is bounded synthetic correctness, NOT
+full task accuracy or measured performance. Worker-copy tracing remains absent.
+01c3 confirmed no own smoke container and no compute processes on4-7.
+Do not rerun these accepted canaries unchanged. Next: worker-path evidence and
+frozen mixed new/repeat traffic performance with equal cache resource budgets,
+three repetitions and diagnostic I/O disabled; report both wins and regressions.
+User removed fixed2K input requirement: freeze lengths before A/B, use native
+prefix caching as primary control, cacheoff auxiliary. No HYPIC gain extrapolation.
+The LIVE paragraphs below are historical and superseded by this terminal audit.
+
+PREFIX QA update: native01bc terminal exit0,350s, artifact
+/cache/austinov/sparse-prefix-smoke-ejaFfQ. Conditional exact12-row answer audit
+then matching paper arm dispatched as mb exec-00000000000001bf, timeout3600.
+Poll01bf before restart; physical4-7, prefix-lookup-v1, commit d680fa2.
+
+LIVE prefix-lookup-v1 native control: mb exec-00000000000001bc,
+commit d680fa2, physical4-7, timeout3600. SPARSE_PREFIX_QA=1, DIVERGENT=1,
+context640,native. Four distinct exact lookup answers stored before checkpoint;
+same twelve-request protocol. Poll handle before restart. Preflight01bb:
+4-7 no compute, MemAvailable63258012kB; external qwen35_candidate_prefill_v15
+and Maxon4ick protected. After native exact-answer pass run matching paper arm.
 
 ACCEPTED divergent mechanism canary (not performance/accuracy): native01b2
 QSoLhT and paper01b5 GFsaYa both exit0. Paired audit01b7/01b8 passed12/12 exact
