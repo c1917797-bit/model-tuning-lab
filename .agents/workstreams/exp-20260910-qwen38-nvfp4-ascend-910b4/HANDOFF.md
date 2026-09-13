@@ -2,6 +2,23 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+22:11 history diagnostic TERMINAL (finished22:10:38), PID3106750 and own
+container085fd3f032d3 gone. Original12:8empty,1length; drop-empty-assistant12:
+0empty,3length; HTTP errors0 both. Summary SHA256
+6b1792ca263ae85772c7fba264eaa0e6ab782cc8714d29f396e493008e1c10a7 at
+/cache/austinov/eval-runs/switch12h-qwen38-history-20260913-UvgopA/probe/summary.json.
+Important input-structure evidence, not full quality/correctness or a proven
+lossless fix. Cap64 truncations require natural-EOS validation. User was asked
+asynchronously whether formal results keep original plus normalized supplement,
+uniformly normalize both arms, or original only. No answer received yet; do not
+silently replace the original protocol/data. Preserve all original results.
+Meanwhile advance original Qwen3-32B control repetition1 using performance mode,
+fresh32 validity canary then full357 c1/c16/c5/c8. This model's prior32 canary
+passed; does not claim candidate acceptance or complete paired comparison. Run
+run_switch_canary.sh qwen3 <fresh-out> performance 1 after fresh resource gate.
+No new quality run before this performance stage. Final target remains full
+paired three-repeat matrix plus MMLU/GSM8K/HumanEval, not these diagnostics.
+
 LIVE22:01 UTC input-history diagnostic PID3106750 PPID1, container
 085fd3f032d3e5465f20434344cb7bd0842cd1fc42a3ce1de57c1703cefb6fa4,
 artifact /cache/austinov/eval-runs/switch12h-qwen38-history-20260913-UvgopA.
