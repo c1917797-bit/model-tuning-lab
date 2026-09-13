@@ -1,5 +1,24 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Standard text comparison preparation / live23:15 UTC
+
+Recovery unit3572690 remains active; 8worker gate passed, small canary actual
+MMLU2/2 and GSM8K2/2 with n-shot5 verified. Full phase began23:12:26;
+CPU evaluator ca02cc7a45fa6d15b88a1e1ebe18fef834b0eda74273957fc3eab01dec745e7e
+is preparing full requests. No full score yet. Do not repeat completed canary.
+Added compare_standard_text_quality.py for the CURRENT lm-eval likelihood
+MMLU protocol (old score_text_quality.py is generation-answer extraction and
+must NOT score these artifacts). New entry verifies full local documents,
+counts, five shots, pinned harness/protocol, raw response presence and recorded
+score consistency; pairs native-model runs by identical dataset documents,
+not identical tokenizer/prompt bytes. Reports MMLU micro/macro/subjects and
+GSM8K strict, discordant pairs and labeled normal-approximate paired95CI.
+This is not provenance certification or a lossless/migration acceptance gate.
+Dependency-free synthetic tests pass including invalid artifact rejection;
+actual full local population validated58tasks15361rows; MST/diff pass.
+Run once BOTH full results exist:
+python3 qwen38-nvfp4-ascend/compare_standard_text_quality.py --control <Q3-results.json> --candidate <Q38-results.json> --data-root /cache/austinov/eval-data/general --output <fresh-external-report.json>
+
 ## Current recovery 2026-09-13 23:03 UTC (supersedes earlier LIVE entries)
 
 User approved continuing current order: MMLU/GSM8K, HumanEval, remaining
