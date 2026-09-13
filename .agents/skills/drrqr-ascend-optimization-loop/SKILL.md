@@ -123,6 +123,15 @@ reproduction.
   close nearby coordinate and gain selectors before NPU work. More selector
   freedom is not evidence of fidelity when the score ignores cross-column
   cancellation in the downstream projection.
+- Preserving a retained value head's complete Dv width and RMS denominator
+  does not make whole-head deletion low loss. For Qwen3.8 Nv48/Nk16, keeping
+  one of each three independently parameterized value heads and folding all
+  three output blocks with bounded scalars had enough optimistic cost headroom
+  but failed all 18 cross-validated layer-fold projected-output comparisons;
+  aggregate projected and feature error ratios were 3.887735 and 3.451611.
+  Close nearby head choices and scalar ranges. Any reopened value-head route
+  must define a materially different recurrent state/dynamics representation,
+  not add freedom to the same select-one-and-fold mechanism.
 - Before proposing an in-place recurrent-state/cache operator, inspect the
   active torch mutation schema and caller. A mutable `Tensor(a!)` passed
   directly from the cache means state update is already in place. Bind profile

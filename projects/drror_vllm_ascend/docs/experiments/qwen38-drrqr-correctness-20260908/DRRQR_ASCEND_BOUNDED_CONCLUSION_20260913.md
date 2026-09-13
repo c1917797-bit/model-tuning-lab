@@ -98,6 +98,48 @@ This closes the nearby static value-coordinate family at both layer-shared and
 per-head granularities. It does not prove every possible learned or newly
 derived value-state representation impossible.
 
+## Complete value-head scalar-merge closure
+
+A later bounded reopen preserved a retained head's complete Dv128 coordinates
+and original RMS denominator, while reducing global Nv48 to Nv16 by keeping one
+of every three complete value heads. For each key-head group it selected the
+retained head and fit three bounded scalars on fit-only data, then folded the
+three original output-projection blocks into the retained block. The frozen
+source audit confirmed local Nv4/Nk4 satisfies the native recurrent
+divisibility contract and that the serving cut points can be static.
+
+The optimistic profile ledger put this Nv16 design at 152.694978 output tok/s,
+or +12.988151 percent versus frozen dense, so it had sufficient paper
+headroom. Fidelity did not survive three predeclared cross-validation folds
+over reused calibration indices 0-11:
+
+| Metric | Result | Gate |
+|---|---:|---:|
+| Aggregate projected-error ratio | 3.887735 | <=1.10 |
+| Aggregate feature-error ratio | 3.451611 | <=1.10 |
+| Worst fold projected-error ratio | 4.062477 | <=1.20 |
+| Layer-fold fraction <=1.10 | 0/18 | >=75% |
+| Worst layer-fold ratio | 10.294326 | <=1.50 |
+| Dense formula relative-L2 | 0.001660 | <=0.01 |
+
+All three fit locks were published before their validation indices were loaded
+and their hashes matched. The failure is consistent across every layer-fold,
+not a marginal split or formula defect. No fresh teacher capture, NPU,
+implementation, endpoint or accuracy run followed. Nearby head choices,
+scalar ranges and select-one-and-fold variants are closed; a future Nv
+reduction must change the recurrent state/dynamics representation.
+
+Artifact:
+
+/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-scalar-merge-cv-v1
+
+- started SHA256: fc844da3440267ee15a9ab906fa3b8c17f67e43e998fe8f363a4c8a8d2b2661c
+- fold-0 lock SHA256: c5938ffd3c32167515bce38460bbead616868e366f91d08faa8f195e78bf6f34
+- fold-1 lock SHA256: b721674d72b7ef9634148b08a2bfb97b2972a66d77ebd1ddfefc60ab28797d38
+- fold-2 lock SHA256: 12d86db57b11b3fc790fa5539c560dcfdac2f53d6909057daa09348629bcee65
+- report SHA256: d61cd9619f95a2e83fc5a51027974ae9720b81fe24ac9f7a3da6846456b49c10
+- tool SHA256: c7f3e44ca94dc9c794081f7626b89c61b6e06bf1886e0d911c9762402d0ecb16
+
 ## What was established
 
 - The real Ascend GDN execution path and loaded binaries were identified.
@@ -113,8 +155,8 @@ derived value-state representation impossible.
   custom-operator results from reaching performance tests.
 - Multiple Q/K-only, heterogeneous-width, subspace, phase-transition,
   compensation, packed-QKV, normalization-fusion, layer-shared value-width and
-  per-head value-width routes were rejected at the cheapest faithful evidence
-  layer.
+  per-head value-width and complete value-head scalar-merge routes were
+  rejected at the cheapest faithful evidence layer.
 
 ## Why the program stops
 

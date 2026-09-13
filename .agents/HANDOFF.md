@@ -33,6 +33,19 @@
   000c174f2b45f4e8cee1700d577201ae14199b87f29f8fede6dbfcbe17c9fcf4.
   The nearby static value-coordinate and gain family is now closed at both
   layer-shared and per-head selector granularities.
+- The drrqr-value-head-scalar-merge-cv-v1 screen is complete and rejected.
+  It preserved all Dv128 coordinates and the RMS denominator of each retained
+  head, but reduced Nv48 to Nv16 by keeping one of every three complete value
+  heads and folding the three original output blocks with fit-only bounded
+  scalars. Nv16 had an optimistic ceiling of 152.694978 output tok/s, but its
+  three cross-validation fold projected-error ratios were
+  4.062477/3.819736/3.766572. Aggregate projected and feature ratios were
+  3.887735/3.451611; zero of 18 layer-fold comparisons met 1.10 and the worst
+  was 10.294326. Formula calibration and all three pre-validation locks
+  passed. No fresh capture, NPU, endpoint or accuracy run followed. Report
+  SHA256: d61cd9619f95a2e83fc5a51027974ae9720b81fe24ac9f7a3da6846456b49c10.
+  Close nearby complete-head selection and scalar-fold variants; any reopen
+  must change the recurrent state/dynamics representation.
 - The drrqr-dk64-fp32-inplace-state-cache-admission-v1 source/profile audit is
   complete and rejected before implementation. The active schema already marks
   recurrent state mutable and pure decode passes the cache tensor directly to
@@ -554,6 +567,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml
 .agents/evals/practice-iterations/drrqr-bimodal-layer-rank-admission-v1.yaml
+.agents/evals/practice-iterations/drrqr-value-head-scalar-merge-cv-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md

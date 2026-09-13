@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-value-head-scalar-merge-cv-v1
 repository: model-tuning-lab
-status: active
+status: rejected
 date: 2026-09-13
-validated_commit: pending
+validated_commit: ab24c89
 
 stage_goal: Decide whether a complete-Dv128 value-head merge can preserve the energy-Dk64 downstream output while reducing enough value-side work to cross the fixed Ascend throughput target.
 
@@ -53,10 +53,28 @@ evidence_protocol:
   lock_rule: Publish each fold's six-layer fit lock before loading that fold's validation indices.
 
 result:
-  outcome: pending
+  outcome: rejected
   analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_value_head_scalar_merge_cv.py
   output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-scalar-merge-cv-v1/report.json
   claim_ceiling: CPU cross-validation and optimistic profile-cost admission only.
+  operation: exec-000000000000082c
+  duration_ms: 359786
+  started_sha256: fc844da3440267ee15a9ab906fa3b8c17f67e43e998fe8f363a4c8a8d2b2661c
+  report_sha256: d61cd9619f95a2e83fc5a51027974ae9720b81fe24ac9f7a3da6846456b49c10
+  analyzer_sha256: c7f3e44ca94dc9c794081f7626b89c61b6e06bf1886e0d911c9762402d0ecb16
+  fold_lock_sha256:
+    fold_0: c5938ffd3c32167515bce38460bbead616868e366f91d08faa8f195e78bf6f34
+    fold_1: b721674d72b7ef9634148b08a2bfb97b2972a66d77ebd1ddfefc60ab28797d38
+    fold_2: 12d86db57b11b3fc790fa5539c560dcfdac2f53d6909057daa09348629bcee65
+  optimistic_nv16_output_tps_ceiling: 152.69497833988802
+  optimistic_nv16_gain_vs_dense_percent: 12.988151269911196
+  aggregate_projected_error_ratio: 3.887734579805014
+  aggregate_feature_error_ratio: 3.4516107642037896
+  fold_projected_error_ratios: [4.0624769448687665, 3.8197363757629486, 3.766571503453567]
+  worst_layer_fold_projected_error_ratio: 10.294325572937908
+  layer_fold_ratio_at_most_1_10_fraction: 0.0
+  dense_formula_relative_l2: 0.0016597308251866155
+  decision: Reject complete-head scalar merge. Do not collect a fresh corpus, implement the Nv16 path, run NPU, benchmark an endpoint, run accuracy, or tune nearby head choices and scalar ranges.
 
 validation_commands:
   - parse analyzer with Python AST without bytecode
@@ -72,4 +90,7 @@ lessons_ingested:
     severity: high
   - lesson: Nv32 removes only one third of value-side work and cannot close the fixed gap under the existing optimistic ledger; screen only Nv16.
     destination: cost gate
+    severity: high
+  - lesson: Preserving the complete Dv128 coordinate width and RMS denominator is not sufficient when two of three independently parameterized value heads are deleted. Every one of 18 layer-fold comparisons failed the 1.10 projected-output gate, so head selection plus scalar output folding is closed rather than tuned.
+    destination: drrqr-ascend-optimization-loop failure rules
     severity: high
