@@ -27,6 +27,18 @@ exec-0000000000000bc2, 58 tasks, 15361 rows, known-right/wrong MMLU scored 1/0.
 HumanEval runtime scoring is separate and not proven by that test.
 Prior checkpoint 6b5e8b6 is now pushed.
 
+Latest offline scoring gates: HumanEval164 canonical solutions all passed;
+164 intentional RuntimeError completions all failed in the existing restricted
+CPU sandbox (exec-0000000000000bd4). evaluator-preflight-evidence.json contains
+input/output/evaluator hashes; this is not model accuracy. Added external
+NoThinkingCompletions evaluator subclass because upstream template rendering
+does not forward enable_thinking. Actual tokenizers for Qwen3 and Qwen3.8 passed
+no-thinking/continuation/tokenized payload checks (exec-0000000000000bdb).
+The first import probe failed due missing PYTHONPATH, fixed by mounting and
+selecting the pinned harness source; no package or framework installation.
+Next: live paired32 chat diagnostic and a small MMLU/GSM8K API scoring canary
+once the eight-card resource gate permits. No new model inference ran here.
+
 ### Superseded Qwen3.5 correction and preserved audit
 
 Latest checkpoint: see `qwen38-nvfp4-ascend/BASELINE_REUSE.md` for the audited

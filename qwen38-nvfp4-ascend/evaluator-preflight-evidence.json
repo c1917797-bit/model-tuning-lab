@@ -1,0 +1,42 @@
+{
+  "schema": "switch-evaluator-preflight/v1",
+  "scope": "Evaluator fixture verification only; not Qwen model accuracy",
+  "artifact_root": "/cache/austinov/eval-runs/humaneval-evaluator-preflight-8ejx795c",
+  "operation": "exec-0000000000000bd4",
+  "input_population": 164,
+  "outcomes": {
+    "canonical_solutions": {
+      "passed": 164,
+      "total": 164
+    },
+    "intentional_runtime_errors": {
+      "passed": 0,
+      "total": 164
+    }
+  },
+  "checksums": {
+    "problems_gzip": "b796127e635a67f93fb35c04f4cb03cf06f38c8072ee7cee8833d7bee06979ef",
+    "reference_fixture": "6b6fcbb2e036735aadbc6483fd18223b02d953e59a7b09a80da5284c7aec9243",
+    "negative_fixture": "8fe09dcd9cbf1015dea5a2a1cc9fc7e63f3d185a3255d4941b0bfc47cabc44a5",
+    "reference_results": "c93ee928446b70b4296382123b9680b02e1900496f82a1f4ba3e780e71cbc3e6",
+    "negative_results": "5352583a9c8b64667edabf4ccad1dde82575b945e6e7686ca03aa54c600a566b",
+    "verification_json": "8413877c4e534a2616da621b3425c7825a0b351200b8bc96832b73d7e576991c",
+    "sandbox_entrypoint": "95ce1ead979a450bc4e5f03cc43082b1a1ea385aa71791816323aca2ff582f68",
+    "sandbox_launcher": "34e7431f3b26f2fb11ec29b50b244e1e44b570a304c7df5b88dd5409b61d61fe",
+    "upstream_evaluation_py": "e926d5e9b8f1ec040096cd5952e8cf79f8dc0b7fb80ba6667ce604ffea0397bc",
+    "upstream_execution_py": "79901c6f5b59701c465b164aed290fa53abc35abc80a5378fc10f4dac1f9a84c"
+  },
+  "reproduction": "For each reference.jsonl and negative.jsonl under artifact_root, set SAMPLES to that path and run bash qwen38-nvfp4-ascend/run_humaneval_sandbox.sh. Source fixture completion is canonical_solution for reference and an intentional indented RuntimeError for negative. No generated model answers were used.",
+  "isolation": {
+    "network": "none",
+    "npu_devices": 0,
+    "root": "read-only",
+    "capabilities": "ALL dropped",
+    "no_new_privileges": true,
+    "cpus": 4,
+    "memory_gib": 8,
+    "pids": 128,
+    "per_test_seconds": 3
+  },
+  "image": "quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a"
+}

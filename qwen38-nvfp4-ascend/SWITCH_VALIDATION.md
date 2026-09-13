@@ -69,3 +69,25 @@ sentinel used Qwen3.8, but92 empty candidate outputs and v3 finish-event timing
 make it diagnostic/failure evidence, not a passed switch gate. Keep it unchanged.
 Offline dataset checks and58 executable text tasks passed; these are not model
 quality scores or v4 NPU performance results.
+
+## Verified scoring preparation
+
+HumanEval full fixture test passed: canonical solutions164/164, deliberately
+raising completions0/164. See evaluator-preflight-evidence.json for raw paths,
+SHA256 identities, sandbox settings and commands. These are NOT model scores.
+
+The pinned lm-eval LocalCompletionsAPI renders HF templates without forwarding
+enable_thinking. Server default chat settings do not control tokenized completions.
+Use external NoThinkingCompletions from no_thinking_api.py with local HF tokenizer,
+tokenized_requests=True and simple_evaluate(apply_chat_template=True) for text
+quality. It explicitly supplies enable_thinking=False and rejects uncontrolled
+template backends. No installed package was modified.
+
+Fixed-image test_no_thinking_api.py passed with both actual model tokenizers:
+exact native no-thinking rendering, distinct thinking-enabled rendering,
+continuation rendering and tokenized log-likelihood payload preservation.
+Test operation exec-0000000000000bdb. Supply
+PYTHONPATH=/cache/austinov/eval-tools/lm-evaluation-harness-v0.4.13 inside the
+device-free offline container. First attempt exec-0000000000000bd9 omitted that
+source path and failed import; it made no model requests. The venv alone does not
+install lm_eval. Live API canary and full model scores are still outstanding.
