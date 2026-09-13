@@ -2,6 +2,32 @@
 
 ## Current authoritative status (2026-09-12)
 
+ACCEPTED divergent mechanism canary (not performance/accuracy): native01b2
+QSoLhT and paper01b5 GFsaYa both exit0. Paired audit01b7/01b8 passed12/12 exact
+tokens and natural EOS; first new branches native cache0 versus paper1536;
+repeat branches native3072 versus paper1536. All answers42, so this stimulus
+does NOT establish dependence on the restored prefix or broad semantic quality.
+Audit /cache/austinov/sparse-prefix-smoke-GFsaYa/paired-audit.json SHA256
+021bac4f82bd452a76908612e979df5f9549a57172e2e57cca173e071a87f2d9.
+01b8 confirmed no own smoke container and no compute on4-7. All runs terminal.
+Next must cover prefix-dependent answers, then frozen new/repeat traffic mixes;
+never report only new-branch wins. Native retains deeper checkpoints on repeats.
+Worker restoration tracing and clean same-budget timing remain unproven.
+
+DIVERGENT UPDATE: native mb01b2 terminal exit0,333s, artifact
+/cache/austinov/sparse-prefix-smoke-QSoLhT. Matching paper arm dispatched as
+mb exec-00000000000001b5, timeout3600; poll before restart. Same commit bd633bb,
+physical4-7, SPARSE_DIVERGENT=1,context640. Full paired audit still pending.
+
+LIVE divergent-prefix-v1 native control: mb exec-00000000000001b2,
+commit bd633bb, physical4-7, SPARSE_DIVERGENT=1, context_repeats640,
+SPARSE_SMOKE_CACHE=native. Four sequential prompts x3 repetitions; same shared
+prefix followed by distinct private suffixes. Frozen before execution; tokenizer
+must prove overlap1536..3071 and total3073..3968. No performance claim.
+Poll01b2 before restarting. Preflight01b1 found no NPU compute, MemAvailable
+83739676kB and only Maxon4ick external container. Prior DRRQR remains stopped.
+After accepted native arm, run identical paper arm and strict12-row paired audit.
+
 2026-09-13 LATEST: paper640 on physical4-7 mb01a4 completed exit0 in347s.
 Artifact /cache/austinov/sparse-prefix-smoke-jb7DPC. Independent comparison
 mb01ae passed6/6 exact token pairs against historical native0bcbu4; scheduler
