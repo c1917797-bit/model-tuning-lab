@@ -21,8 +21,16 @@ def main():
     ap.add_argument('--output', required=True, type=Path)
     ap.add_argument('--tasks', nargs='+', required=True)
     ap.add_argument('--limit', type=int)
+    ap.add_argument('--concurrency', type=int, choices=(1, 5, 8, 16), default=1)
     ap.add_argument('--preflight-only', action='store_true')
     args = ap.parse_args()
+    if 'mmlu' in args.tasks:
+        subjects = sorted(p.stem for p in (args.harness/'lm_eval/tasks/mmlu/default').glob('mmlu_*.yaml'))
+        if len(subjects) != 57:
+            ap.error('Full MMLU requires exactly 57 pinned subject configurations')
+        args.tasks = [task for name in args.tasks for task in (subjects if name == 'mmlu' else [name])]
+    if len(set(args.tasks)) != len(args.tasks):
+        ap.error('Duplicate quality tasks are not allowed')
     if args.limit is not None and args.limit < 1:
         ap.error('limit must be a positive sample count')
     if args.output.exists():
@@ -63,13 +71,17 @@ def main():
         lm = SeededCompletions(model=args.model, tokenizer=args.tokenizer,
             tokenizer_backend='huggingface', tokenized_requests=True,
             base_url=args.base_url, max_length=40960, max_gen_toks=4096,
-            trust_remote_code=False, batch_size=1)
+            trust_remote_code=False, batch_size=1, num_concurrent=args.concurrency)
         doc = simple_evaluate(model=lm, tasks=tasks, limit=args.limit,
             log_samples=True, apply_chat_template=True,
             random_seed=1024, numpy_random_seed=1024, torch_random_seed=1024,
             fewshot_random_seed=1024, bootstrap_iters=1000)
         if doc is None:
             raise RuntimeError('Evaluator returned no result')
+    doc['switch_run_protocol'] = {'tasks':args.tasks, 'concurrency':args.concurrency,
+        'limit':args.limit, 'model':args.model, 'tokenizer':args.tokenizer,
+        'seed':1024, 'enable_thinking':False, 'max_length':40960,
+        'max_gen_toks':4096, 'batch_size':1}
     path = args.output/'results.json'
     path.write_text(json.dumps(doc, ensure_ascii=False, indent=2, default=str)+'\n')
     path.with_suffix('.sha256').write_text(hashlib.sha256(path.read_bytes()).hexdigest()+'  results.json\n')

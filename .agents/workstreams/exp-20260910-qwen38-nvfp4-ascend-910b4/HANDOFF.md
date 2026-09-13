@@ -2,6 +2,20 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+Quality-runner preparation: --tasks mmlu gsm8k expands exactly57 MMLU subjects
+plus GSM8K; duplicate tasks rejected. --concurrency1/5/8/16 explicitly forwards
+to pinned TemplateAPI.num_concurrent (api_models.py122/182); default remains1.
+Protocol metadata saved with results. Full task-construction preflight with8
+passed in fixed device-free/network-disabled CPU container:58tasks/15361rows,
+artifact /cache/austinov/eval-runs/switch-quality-preflight-nh6rJJ/full/results.json,
+SHA25691ca07313559a7e98ac569fd45a4aceea8ab0e942d7f12ff08987001e080c194.
+No quality model requests were issued. Concurrent model-scoring still requires
+small live validation before full scaling; do not label preflight as accuracy.
+At21:39 MMAR-off controller2841060 remains live with31/36 case artifacts.
+Official HF model metadata fetch timed out; local weight SHA identities are
+complete but independent upstream provenance remains unverified. No weights
+downloaded or changed. Local directory has no HF download metadata.
+
 Performance preparation while MMAR diagnostic is live: run_switch_canary.sh now
 accepts performance <repeat1|2|3>. It keeps the same owned service/lease, runs
 the existing32-row canary first, then run_switch_performance_repeat.py with
