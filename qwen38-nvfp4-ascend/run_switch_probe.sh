@@ -3,6 +3,8 @@
 set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
+profile="${3:-termination}"
+[[ "$profile" == termination || "$profile" == sampling || "$profile" == history ]] || exit 64
 execution="${4:-graph}"
 case "${6:-on}" in
  on) prefix_args=(--enable-prefix-caching); mamba_mode=align;;
@@ -88,6 +90,12 @@ npu-smi info > "$out/npu.ready.txt"
 [[ "$(grep -c VLLMWorker_TP "$out/npu.ready.txt")" == 8 ]] || exit 70
 curl -fsS http://127.0.0.1:10010/v1/models > "$out/models.json"
 status empty_output_probe running
+if [[ "$profile" == history ]]; then
+ python3 "$code/probe_empty_history.py" --base-url http://127.0.0.1:10010 \
+  --source-probe /cache/austinov/eval-runs/switch12h-qwen38-sampling-20260913-43OW1b/probe \
+  --output "$out/probe" > "$out/probe.log" 2>&1
+ exit 0
+fi
 python3 "$code/probe_empty_outputs.py" --base-url http://127.0.0.1:10010 --model "$model" \
  --dataset /cache/cch/query_rewrite.jsonl \
  --source-rows /cache/austinov/eval-runs/switch12h-qwen38-20260913-fRMUzD/canary.rows.jsonl \

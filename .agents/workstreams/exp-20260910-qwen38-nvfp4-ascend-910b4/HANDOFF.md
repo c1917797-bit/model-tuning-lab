@@ -2,6 +2,19 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+21:59 cache-off diagnostic TERMINAL, finished21:58:22. PID2997867 missing and
+exact owned containerbbf30a6eee39 gone.36/36 requests,errors0; greedyA9/12empty,
+0length; greedyB9/12empty,1length; official5/12empty,1length. Summary SHA256
+98e1f2c6fc89026aeeb45fbd195ea3a7bef9a8645331f24547f60e8ddfe42a67 at
+/cache/austinov/eval-runs/switch12h-qwen38-cacheoff-20260913-T4RYhJ/probe/summary.json.
+Disabling prefix/state cache alone did not fix empty outputs. Route closed.
+Next launcher profile history invokes prepared paired empty-history diagnostic
+on frozen12 cases (24 calls), original graph/MMAR-on/cache-on settings restored.
+Command run_switch_probe.sh qwen38 <fresh-out> history graph on on. Original
+messages versus remove-only-empty-assistant, seed1024, cap64. Do not represent
+this changed-input diagnostic as natural-EOS full baseline or business accuracy.
+Fresh resources/lease must pass before launch; no other services may be modified.
+
 New data-structure hypothesis21:53:252/357 source requests contain empty
 historical assistant messages;105 do not. Original32-row Qwen3.8 canary:
 with-empty-history20 =>9empty outputs/11nonempty; without-empty-history12 =>
