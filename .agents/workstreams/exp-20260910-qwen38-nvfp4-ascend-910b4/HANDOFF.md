@@ -15,6 +15,14 @@ it auto-removed by its original --rm policy. Logs/inspect/diff saved under
 /cache/austinov/eval-runs/switch-takeover-20260913-POeM1v. Eight NPUs and port10010
 were verified released afterward. Maxon4ick_torch_910_dev was not stopped.
 Use run_switch_canary.sh for fresh exact-ID-owned lifecycle and protected mounts.
+ACTIVE RUN: exec-0000000000000be5, artifact directory
+/cache/austinov/eval-runs/switch12h-qwen38-20260913-fRMUzD,
+container prefix568af23e3ca3, startup at2026-09-13T19:45:17Z. Poll this exact
+operation and status/service.live.log; do not start a duplicate on observation
+timeout. Script runs Qwen3.8 TP8/DP1 BF16 then32 request canary and cleans up only
+its exact container ID. This is not yet a completed canary or performance result.
+Heartbeat qwen3-8 now runs every15minutes with the latest conflict-stop authority
+and12-hour report deadline. Next arm is Qwen3-32B after this operation is terminal.
 
 User now explicitly requests trustworthy continued testing to decide whether to
 switch to Qwen3.8-27B. Current pair: Qwen3-32B BF16 vs Qwen3.8-27B BF16.
