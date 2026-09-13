@@ -32,6 +32,10 @@ def main():
         raise ValueError("Unknown canary arm")
     cache_enabled = mode != "off"
     divergent = os.environ.get("SPARSE_DIVERGENT", "0") == "1"
+    prefix_qa = os.environ.get("SPARSE_PREFIX_QA", "0") == "1"
+    if prefix_qa and not divergent:
+        raise ValueError("Prefix QA requires divergence protocol")
+    answers = ["ZEBRA-41729", "OTTER-68351", "RAVEN-92507", "KOALA-13684"]
     context_repeats = int(os.environ.get("SPARSE_CONTEXT_REPEATS", "320"))
     max_len = 4096 if context_repeats == 640 else 2048
     if context_repeats not in (320, 640) or (mode == "paper" and context_repeats != 640):
@@ -50,6 +54,14 @@ def main():
                  "\nQuestion: Compute 17 + 25. Answer only the number."
                  for word in ("red blue green white. ", "cat dog bird fish. ",
                               "sun moon star sky. ", "one two three four. ")]
+        if prefix_qa:
+            records = "Authoritative lookup table. Copy values exactly.\n" + "\n".join(
+                "Record " + str(i) + ": " + value for i, value in enumerate(answers)) + "\n"
+            texts = [records + text.replace(
+                "Compute 17 + 25. Answer only the number.",
+                "What is the value of Record " + str(i) +
+                " in the authoritative lookup table? Return only its exact value.")
+                for i, text in enumerate(texts)]
     prompts = [tokenizer.apply_chat_template(
         [{"role": "user", "content": text}], tokenize=False,
         add_generation_prompt=True, enable_thinking=False) for text in texts]
@@ -59,7 +71,8 @@ def main():
                 "packages": {p: metadata.version(p) for p in
                              ("vllm", "vllm-ascend", "torch", "torch-npu")},
                 "performance_benchmark": False,
-                "stimulus": "divergent-prefix-v1" if divergent else "repeat-v1",
+                "stimulus": "prefix-lookup-v1" if prefix_qa else ("divergent-prefix-v1" if divergent else "repeat-v1"),
+                "expected_answers": answers if prefix_qa else None,
                 "context_repeats": context_repeats, "max_model_len": max_len,
                 "prompt_sha256": [hashlib.sha256(p.encode()).hexdigest() for p in prompts],
                 "patch_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
@@ -123,6 +136,8 @@ def main():
         json.dumps(results, ensure_ascii=False, indent=2))
     if any(r["finish_reason"] != "stop" or not r["text"].strip() for r in results):
         raise RuntimeError("Smoke must produce nonempty natural-stop output")
+    if prefix_qa and any(r["text"].strip() != answers[r["prompt_index"]] for r in results):
+        raise RuntimeError("Prefix-dependent exact answer gate failed")
     if cache_enabled:
         for index in range(len(prompts)):
             rows = [r for r in results if r["prompt_index"] == index]

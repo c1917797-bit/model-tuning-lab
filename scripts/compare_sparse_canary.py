@@ -11,8 +11,8 @@ def compare(native, paper):
     assert a["cache_mode"] == "native" and b["cache_mode"] == "paper"
     stimulus = a.get("stimulus", "repeat-v1")
     assert stimulus == b.get("stimulus", "repeat-v1")
-    assert stimulus in ("repeat-v1", "divergent-prefix-v1")
-    count = 4 if stimulus == "divergent-prefix-v1" else 2
+    assert stimulus in ("repeat-v1", "divergent-prefix-v1", "prefix-lookup-v1")
+    count = 2 if stimulus == "repeat-v1" else 4
     if count == 4:
         assert a["seed_overlap_tokens"] == b["seed_overlap_tokens"]
         assert all(1536 <= n < 3072 for n in a["seed_overlap_tokens"])
@@ -34,6 +34,11 @@ def compare(native, paper):
         assert len(rows) == count * 3 and set(indexed) == expected
         assert all(row["finish_reason"] == "stop" and row["text"].strip()
                    and row["token_ids"] for row in rows)
+        if stimulus == "prefix-lookup-v1":
+            assert a["expected_answers"] == b["expected_answers"]
+            assert len(set(a["expected_answers"])) == 4
+            assert all(row["text"].strip() == a["expected_answers"][row["prompt_index"]]
+                       for row in rows)
         arms.append(indexed)
     for index in expected:
         assert arms[0][index]["token_ids"] == arms[1][index]["token_ids"], index
