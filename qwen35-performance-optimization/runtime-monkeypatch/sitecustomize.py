@@ -62,6 +62,14 @@ def _gdn_projection_fusion_enabled() -> bool:
     return os.getenv("VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS", "0") == "1"
 
 
+def _upstream_fused_prefill_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL", "0") == "1"
+
+
+def _fused_prefill_metadata_reuse_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE", "0") == "1"
+
+
 def _weight_prefetch_patch_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH", "1") == "1"
 
@@ -333,15 +341,19 @@ def _patch_vllm_backends(module: ModuleType) -> None:
 
 
 def _patch_ascend_gdn(module: ModuleType) -> None:
-    if not _gdn_projection_fusion_enabled():
+    projection_enabled = _gdn_projection_fusion_enabled()
+    fused_prefill_enabled = _upstream_fused_prefill_enabled()
+    if not projection_enabled and not fused_prefill_enabled:
         return
     cls = module.AscendGatedDeltaNetAttention
-    if getattr(cls, "_qwen35_projection_forward_monkeypatched", False):
-        return
-    old = """    num_tokens = hidden_states.size(0)
+    if (
+        projection_enabled
+        and not getattr(cls, "_qwen35_projection_forward_monkeypatched", False)
+    ):
+        old = """    num_tokens = hidden_states.size(0)
     if hasattr(self, "in_proj_qkv"):
 """
-    new = """    num_tokens = hidden_states.size(0)
+        new = """    num_tokens = hidden_states.size(0)
     if hasattr(self, "in_proj_qkvzba"):
         mixed_qkvz, ba = self.project_qkvz_ba(hidden_states)
         num_tokens = mixed_qkvz.size(0)
@@ -354,11 +366,182 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
         a = a.contiguous()
     elif hasattr(self, "in_proj_qkv"):
 """
-    cls.forward = _replace_function_block(
-        cls.forward, old, new, "AscendGatedDeltaNetAttention.forward"
-    )
-    cls._qwen35_projection_forward_monkeypatched = True
-    _notice("patched Ascend GDN fused projection forward path")
+        cls.forward = _replace_function_block(
+            cls.forward, old, new, "AscendGatedDeltaNetAttention.forward"
+        )
+        cls._qwen35_projection_forward_monkeypatched = True
+        _notice("patched Ascend GDN fused projection forward path")
+
+    if (
+        fused_prefill_enabled
+        and not getattr(cls, "_qwen35_upstream_fused_prefill_monkeypatched", False)
+    ):
+        import torch_npu
+
+        cls._qwen35_fused_chunk_available = None
+
+        @classmethod
+        def _qwen35_probe_fused_chunk(candidate_cls):
+            cached = candidate_cls._qwen35_fused_chunk_available
+            if cached is not None:
+                return cached
+            if not hasattr(torch_npu, "npu_chunk_gated_delta_rule"):
+                candidate_cls._qwen35_fused_chunk_available = False
+                _notice("fused GDN prefill unavailable: operator missing")
+                return False
+            try:
+                device = module.torch.npu.current_device()
+                width = 128
+                q = module.torch.zeros(
+                    (64, 1, width),
+                    dtype=module.torch.bfloat16,
+                    device=device,
+                )
+                k = module.torch.zeros_like(q)
+                v = module.torch.zeros_like(q)
+                beta = module.torch.full_like(q[:, :, 0], 0.5)
+                g = module.torch.full(
+                    (64, 1),
+                    -0.1,
+                    dtype=module.torch.float32,
+                    device=device,
+                )
+                state = module.torch.zeros(
+                    (1, 1, width, width),
+                    dtype=module.torch.bfloat16,
+                    device=device,
+                )
+                lengths = module.torch.tensor(
+                    [64], dtype=module.torch.int32, device=device
+                )
+                torch_npu.npu_chunk_gated_delta_rule(
+                    q,
+                    k,
+                    v,
+                    beta=beta,
+                    initial_state=state,
+                    actual_seq_lengths=lengths,
+                    scale=width**-0.5,
+                    g=g,
+                )
+                module.torch.npu.synchronize()
+                candidate_cls._qwen35_fused_chunk_available = True
+                _notice("fused GDN prefill device probe passed")
+            except Exception as exc:
+                candidate_cls._qwen35_fused_chunk_available = False
+                _notice(
+                    "fused GDN prefill device probe failed; using Triton "
+                    f"fallback ({type(exc).__name__})"
+                )
+            return candidate_cls._qwen35_fused_chunk_available
+
+        cls._qwen35_probe_fused_chunk = _qwen35_probe_fused_chunk
+
+        def _qwen35_fused_chunk_gated_delta_rule(
+            q,
+            k,
+            v,
+            g,
+            beta,
+            initial_state,
+            cu_seqlens,
+            scale,
+            attn_metadata,
+        ):
+            # Upstream vLLM-Ascend commit 77d13e2c0: replace the multi-kernel
+            # Triton prefill path with the public fused torch_npu operator.
+            q = module.l2norm_fwd(q).squeeze(0).contiguous()
+            k = module.l2norm_fwd(k).squeeze(0).contiguous()
+            v = v.squeeze(0).contiguous()
+            g = g.squeeze(0).to(module.torch.float32).contiguous()
+            beta = beta.squeeze(0).to(v.dtype).contiguous()
+            initial_state = initial_state.to(
+                module.torch.bfloat16
+            ).contiguous()
+
+            actual_seq_lengths = module.torch.diff(
+                cu_seqlens
+            ).to(module.torch.int32)
+
+            output, final_state = torch_npu.npu_chunk_gated_delta_rule(
+                q,
+                k,
+                v,
+                beta=beta,
+                initial_state=initial_state,
+                actual_seq_lengths=actual_seq_lengths,
+                scale=scale,
+                g=g,
+            )
+            return output.unsqueeze(0), final_state
+
+        cls._qwen35_fused_chunk_gated_delta_rule = staticmethod(
+            _qwen35_fused_chunk_gated_delta_rule
+        )
+        old = """        initial_state = ssm_state[prefill_state_indices].transpose(-1, -2).contiguous()
+        clear_ssm_states(initial_state, prefill_has_initial_state)
+        (core_attn_out_non_spec, last_recurrent_state) = chunk_gated_delta_rule(
+            q=query_non_spec,
+            k=key_non_spec,
+            v=value_non_spec,
+            g=g_non_spec,
+            beta=beta_non_spec,
+            initial_state=initial_state,
+            output_final_state=True,
+            cu_seqlens=prefill_query_start_loc,
+            prebuilt_meta=attn_metadata.non_spec_prefill_metadata.chunk,
+            head_first=False,
+            use_qk_l2norm_in_kernel=True,
+        )
+        ssm_state[prefill_state_indices] = last_recurrent_state.transpose(-1, -2).contiguous().to(ssm_state.dtype)
+"""
+        new = """        use_fused_chunk = (
+            self._qwen35_probe_fused_chunk()
+            and get_pcp_group().world_size == 1
+        )
+        if use_fused_chunk:
+            initial_state = ssm_state[prefill_state_indices]
+            clear_ssm_states(initial_state, prefill_has_initial_state)
+            (core_attn_out_non_spec, last_recurrent_state) = self._qwen35_fused_chunk_gated_delta_rule(
+                q=query_non_spec,
+                k=key_non_spec,
+                v=value_non_spec,
+                g=g_non_spec,
+                beta=beta_non_spec,
+                initial_state=initial_state,
+                cu_seqlens=prefill_query_start_loc,
+                scale=key_non_spec.shape[-1] ** -0.5,
+                attn_metadata=attn_metadata,
+            )
+            ssm_state[prefill_state_indices] = last_recurrent_state.to(ssm_state.dtype)
+        else:
+            initial_state = ssm_state[prefill_state_indices].transpose(-1, -2).contiguous()
+            clear_ssm_states(initial_state, prefill_has_initial_state)
+            (core_attn_out_non_spec, last_recurrent_state) = chunk_gated_delta_rule(
+                q=query_non_spec,
+                k=key_non_spec,
+                v=value_non_spec,
+                g=g_non_spec,
+                beta=beta_non_spec,
+                initial_state=initial_state,
+                output_final_state=True,
+                cu_seqlens=prefill_query_start_loc,
+                prebuilt_meta=attn_metadata.non_spec_prefill_metadata.chunk,
+                head_first=False,
+                use_qk_l2norm_in_kernel=True,
+            )
+            ssm_state[prefill_state_indices] = last_recurrent_state.transpose(-1, -2).contiguous().to(ssm_state.dtype)
+"""
+        cls._forward_core = _replace_function_block(
+            cls._forward_core,
+            old,
+            new,
+            "AscendGatedDeltaNetAttention._forward_core.upstream_fused_prefill",
+        )
+        cls._qwen35_upstream_fused_prefill_monkeypatched = True
+        _notice(
+            "backported upstream 77d13e2c0 fused GDN prefill"
+        )
 
 
 def _activate_runtime_patches() -> None:

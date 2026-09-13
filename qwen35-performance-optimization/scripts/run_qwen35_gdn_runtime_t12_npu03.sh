@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4
+patch_sha256=9a7c7ff402370c6590c15267f342c86d1bd10ca6ecf0da424758b4a5f59860be
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -36,6 +36,8 @@ case "$variant" in
     mmar_prefill_max_tokens=0
     t21_enabled=0
     super_kernel_enabled=0
+    upstream_fused_prefill_enabled=0
+    fused_prefill_metadata_reuse_enabled=0
     ;;
   candidate-prefill)
     patch_enabled=1
@@ -47,6 +49,8 @@ case "$variant" in
     mmar_prefill_max_tokens=16384
     t21_enabled=0
     super_kernel_enabled=0
+    upstream_fused_prefill_enabled=0
+    fused_prefill_metadata_reuse_enabled=0
     ;;
   candidate-prefill-t21)
     patch_enabled=1
@@ -58,6 +62,8 @@ case "$variant" in
     mmar_prefill_max_tokens=16384
     t21_enabled=1
     super_kernel_enabled=0
+    upstream_fused_prefill_enabled=0
+    fused_prefill_metadata_reuse_enabled=0
     ;;
   candidate-prefill-no-prefetch)
     patch_enabled=1
@@ -69,6 +75,8 @@ case "$variant" in
     mmar_prefill_max_tokens=16384
     t21_enabled=0
     super_kernel_enabled=0
+    upstream_fused_prefill_enabled=0
+    fused_prefill_metadata_reuse_enabled=0
     ;;
   candidate-super-kernel)
     patch_enabled=1
@@ -80,6 +88,21 @@ case "$variant" in
     mmar_prefill_max_tokens=0
     t21_enabled=0
     super_kernel_enabled=1
+    upstream_fused_prefill_enabled=0
+    fused_prefill_metadata_reuse_enabled=0
+    ;;
+  candidate-fused-prefill)
+    patch_enabled=1
+    gdn_fusion_enabled=1
+    prefetch_patch_enabled=1
+    weight_prefetch_enabled=true
+    operator_enabled=0
+    mmar_prefill_threshold=0
+    mmar_prefill_max_tokens=0
+    t21_enabled=0
+    super_kernel_enabled=0
+    upstream_fused_prefill_enabled=1
+    fused_prefill_metadata_reuse_enabled=0
     ;;
   control)
     patch_enabled=0
@@ -91,6 +114,8 @@ case "$variant" in
     mmar_prefill_max_tokens=0
     t21_enabled=0
     super_kernel_enabled=0
+    upstream_fused_prefill_enabled=0
+    fused_prefill_metadata_reuse_enabled=0
     ;;
   *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, or control" >&2; exit 64 ;;
 esac
@@ -398,6 +423,8 @@ docker_args=(
   -e QWEN35_ASCEND_DIAGNOSTICS_INTERVAL="$qwen35_diagnostics_interval"
   -e VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS="$gdn_fusion_enabled"
   -e QWEN35_ASCEND_SUPER_KERNEL="$super_kernel_enabled"
+  -e QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL="$upstream_fused_prefill_enabled"
+  -e QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE="$fused_prefill_metadata_reuse_enabled"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD="$mmar_prefill_threshold"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$mmar_prefill_max_tokens"
   -e PYTHONPATH="$python_path"

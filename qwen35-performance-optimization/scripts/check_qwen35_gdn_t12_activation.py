@@ -43,6 +43,7 @@ REQUIRED_MARKERS = {
     "mrv1_acl_graph": "backported upstream MRV1 ACL Graph super-kernel",
     "mrv1_npugraph_options": "backported upstream MRV1 npugraph-ex options",
     "mrv1_optimized_graph": "MRV1 super-kernel optimized ACL graph",
+    "upstream_fused_prefill": "backported upstream 77d13e2c0 fused GDN prefill",
 }
 NPU_PROCESS_RE = re.compile(
     r"^\|\s*([0-7])\s+\d+\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|",
@@ -98,6 +99,7 @@ def check(
         "candidate-prefill-t21",
         "candidate-prefill-no-prefetch",
         "candidate-super-kernel",
+        "candidate-fused-prefill",
         "control",
     }
     if variant not in variants:
@@ -106,6 +108,7 @@ def check(
     operator_enabled = variant == "candidate"
     t21_enabled = variant == "candidate-prefill-t21"
     super_kernel_enabled = variant == "candidate-super-kernel"
+    upstream_fused_prefill_enabled = variant == "candidate-fused-prefill"
     gdn_fusion_enabled = patch_enabled and not super_kernel_enabled
     prefill_enabled = variant in {
         "candidate-prefill",
@@ -116,6 +119,7 @@ def check(
         "candidate",
         "candidate-prefill",
         "candidate-prefill-t21",
+        "candidate-fused-prefill",
     }
     log_text = log_path.read_text(encoding="utf-8", errors="replace")
     inspect = _load_inspect(inspect_path)
@@ -141,6 +145,8 @@ def check(
             "mrv1_optimized_graph",
         }:
             expected = super_kernel_enabled
+        if name == "upstream_fused_prefill":
+            expected = upstream_fused_prefill_enabled
         marker_checks[name] = count >= expected_ranks if expected else count == 0
 
     env = _environment(inspect)
@@ -152,6 +158,12 @@ def check(
         ),
         "QWEN35_ASCEND_T21_DENSE_MLP": "1" if t21_enabled else "0",
         "QWEN35_ASCEND_SUPER_KERNEL": "1" if super_kernel_enabled else "0",
+        "QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL": (
+            "1" if upstream_fused_prefill_enabled else "0"
+        ),
+        "QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE": (
+            "0"
+        ),
         "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS": (
             "1" if gdn_fusion_enabled else "0"
         ),

@@ -53,6 +53,8 @@ def main() -> None:
                 "mrv1_acl_graph",
                 "mrv1_npugraph_options",
                 "mrv1_optimized_graph",
+                "upstream_fused_prefill",
+                "fused_prefill_metadata_reuse",
             }
         )
         log.write_text("\n".join([rank_markers] * 4) + "\n", encoding="utf-8")
@@ -63,6 +65,8 @@ def main() -> None:
                 "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=1",
                 "QWEN35_ASCEND_T21_DENSE_MLP=0",
                 "QWEN35_ASCEND_SUPER_KERNEL=0",
+                "QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL=0",
+                "QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE=0",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0",
@@ -184,6 +188,47 @@ def main() -> None:
         )
         assert result["passed"], result
 
+        candidate_fused_prefill = json.loads(json.dumps(candidate_prefill))
+        candidate_fused_prefill[0]["Config"]["Labels"][
+            "com.c1917797.qwen35-variant"
+        ] = "candidate-fused-prefill"
+        candidate_fused_prefill[0]["Config"]["Env"] = [
+            "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0"
+            if value.startswith("VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=")
+            else "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0"
+            if value.startswith(
+                "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="
+            )
+            else "QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL=1"
+            if value.startswith("QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL=")
+            else "QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE=0"
+            if value.startswith("QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE=")
+            else value
+            for value in candidate_fused_prefill[0]["Config"]["Env"]
+        ]
+        inspect.write_text(
+            json.dumps(candidate_fused_prefill), encoding="utf-8"
+        )
+        fused_markers = rank_markers + "\n" + "\n".join(
+            [
+                checker.REQUIRED_MARKERS["upstream_fused_prefill"],
+            ]
+        )
+        log.write_text(
+            "\n".join([fused_markers] * 4) + "\n",
+            encoding="utf-8",
+        )
+        result = checker.check(
+            log,
+            inspect,
+            npu,
+            top,
+            models,
+            variant="candidate-fused-prefill",
+        )
+        assert result["passed"], result
+        assert result["marker_counts"]["upstream_fused_prefill"] == 4
+
         candidate_prefill_t21 = json.loads(json.dumps(candidate_prefill))
         candidate_prefill_t21[0]["Config"]["Labels"][
             "com.c1917797.qwen35-variant"
@@ -262,6 +307,8 @@ def main() -> None:
                 "mrv1_acl_graph",
                 "mrv1_npugraph_options",
                 "mrv1_optimized_graph",
+                "upstream_fused_prefill",
+                "fused_prefill_metadata_reuse",
             }
         )
         log.write_text(
