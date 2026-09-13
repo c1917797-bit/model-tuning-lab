@@ -74,6 +74,10 @@ def _decode_qkv_view_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_DECODE_QKV_VIEW", "0") == "1"
 
 
+def _gdn_conv_prepack_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_GDN_CONV_PREPACK", "0") == "1"
+
+
 def _weight_prefetch_patch_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH", "1") == "1"
 
@@ -152,11 +156,38 @@ def _register_t21_fake_kernel(torch_module) -> None:
     _notice("registered symbolic T21 FakeTensor kernel")
 
 
+_PACKED_GDN_CONV_WEIGHT_NAME = "_qwen35_ascend_conv1d_weight"
+
+
+def _pack_qwen35_gdn_conv_weight(attention, replace_parameter) -> None:
+    """Materialize upstream KDA's activation-dtype [W, C] kernel layout."""
+    if attention.conv1d.weight.is_meta:
+        return
+    packed_param = attention.get_parameter(_PACKED_GDN_CONV_WEIGHT_NAME)
+    packed_weight = (
+        attention.conv1d.weight.view(
+            attention.conv1d.weight.size(0),
+            attention.conv1d.weight.size(2),
+        )
+        .transpose(0, 1)
+        .to(device=packed_param.device, dtype=packed_param.dtype)
+        .contiguous()
+    )
+    replace_parameter(
+        attention,
+        _PACKED_GDN_CONV_WEIGHT_NAME,
+        packed_weight,
+        prefer_copy=True,
+    )
+
+
 def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
-    if not _gdn_projection_fusion_enabled():
+    projection_enabled = _gdn_projection_fusion_enabled()
+    conv_prepack_enabled = _gdn_conv_prepack_enabled()
+    if not projection_enabled and not conv_prepack_enabled:
         return
     cls = module.QwenGatedDeltaNetAttention
-    if getattr(cls, "_qwen35_projection_fusion_monkeypatched", False):
+    if getattr(cls, "_qwen35_gdn_construction_monkeypatched", False):
         return
     original_init = cls.__init__
     original_rearrange_mixed_qkv = cls.rearrange_mixed_qkv
@@ -166,7 +197,47 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
         bound = inspect.signature(original_init).bind(self, *args, **kwargs)
         bound.apply_defaults()
         original_init(self, *args, **kwargs)
-        if self.gqa_interleaved_layout or self.quant_config is not None:
+        eligible = not self.gqa_interleaved_layout and self.quant_config is None
+        if conv_prepack_enabled and eligible:
+            model_dtype = bound.arguments["vllm_config"].model_config.dtype
+            self.register_parameter(
+                _PACKED_GDN_CONV_WEIGHT_NAME,
+                module.torch.nn.Parameter(
+                    module.torch.empty(
+                        self.conv1d.weight.size(2),
+                        self.conv1d.weight.size(0),
+                        dtype=model_dtype,
+                        device=self.conv1d.weight.device,
+                    ),
+                    requires_grad=False,
+                ),
+            )
+            original_process_weights = (
+                self.conv1d.quant_method.process_weights_after_loading
+            )
+
+            @functools.wraps(original_process_weights)
+            def process_weights_and_pack(*pack_args, **pack_kwargs):
+                from vllm.model_executor.utils import replace_parameter
+
+                result = original_process_weights(*pack_args, **pack_kwargs)
+                _pack_qwen35_gdn_conv_weight(self, replace_parameter)
+                if not getattr(
+                    module, "_qwen35_conv_prepack_notice_emitted", False
+                ):
+                    module._qwen35_conv_prepack_notice_emitted = True
+                    _notice(
+                        "materialized upstream-derived Qwen GDN conv weight "
+                        "prepack"
+                    )
+                return result
+
+            self.conv1d.quant_method.process_weights_after_loading = (
+                process_weights_and_pack
+            )
+        if not projection_enabled:
+            return
+        if not eligible:
             self.fuse_qwen35_gdn_projections = False
             return
         prefix = bound.arguments["prefix"]
@@ -204,8 +275,9 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
         return mixed_qkvz, ba
 
     cls.__init__ = __init__
-    cls.project_qkvz_ba = project_qkvz_ba
-    if _decode_qkv_view_enabled():
+    if projection_enabled:
+        cls.project_qkvz_ba = project_qkvz_ba
+    if projection_enabled and _decode_qkv_view_enabled():
         @functools.wraps(original_rearrange_mixed_qkv)
         def rearrange_mixed_qkv(self, mixed_qkv):
             # Extend upstream's QKV-rearrange reuse idea to the exact
@@ -240,8 +312,13 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
         _notice(
             "extended upstream QKV rearrange reuse to zero-copy M1 decode"
         )
-    cls._qwen35_projection_fusion_monkeypatched = True
-    _notice("patched Qwen3.5 GDN fused projection construction")
+    cls._qwen35_gdn_construction_monkeypatched = True
+    if projection_enabled:
+        cls._qwen35_projection_fusion_monkeypatched = True
+        _notice("patched Qwen3.5 GDN fused projection construction")
+    if conv_prepack_enabled:
+        cls._qwen35_conv_prepack_monkeypatched = True
+        _notice("installed upstream-derived Qwen GDN conv prepack hook")
 
 
 def _patch_qwen35_model(module: ModuleType) -> None:
@@ -383,7 +460,8 @@ def _patch_vllm_backends(module: ModuleType) -> None:
 def _patch_ascend_gdn(module: ModuleType) -> None:
     projection_enabled = _gdn_projection_fusion_enabled()
     fused_prefill_enabled = _upstream_fused_prefill_enabled()
-    if not projection_enabled and not fused_prefill_enabled:
+    conv_prepack_enabled = _gdn_conv_prepack_enabled()
+    if not projection_enabled and not fused_prefill_enabled and not conv_prepack_enabled:
         return
     cls = module.AscendGatedDeltaNetAttention
     if (
@@ -572,16 +650,51 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
             )
             ssm_state[prefill_state_indices] = last_recurrent_state.transpose(-1, -2).contiguous().to(ssm_state.dtype)
 """
-        cls._forward_core = _replace_function_block(
+        core_replacements = [("upstream_fused_prefill", old, new)]
+        if conv_prepack_enabled:
+            core_replacements.append(
+                (
+                    "conv_prepack",
+                    """    conv_weights = self.conv1d.weight.view(self.conv1d.weight.size(0), self.conv1d.weight.size(2))
+""",
+                    """    if hasattr(self, "_qwen35_ascend_conv1d_weight"):
+        conv_weights = self._qwen35_ascend_conv1d_weight.transpose(0, 1)
+    else:
+        conv_weights = self.conv1d.weight.view(self.conv1d.weight.size(0), self.conv1d.weight.size(2))
+""",
+                )
+            )
+        cls._forward_core = _replace_function_blocks(
             cls._forward_core,
-            old,
-            new,
-            "AscendGatedDeltaNetAttention._forward_core.upstream_fused_prefill",
+            core_replacements,
+            "AscendGatedDeltaNetAttention._forward_core",
         )
         cls._qwen35_upstream_fused_prefill_monkeypatched = True
         _notice(
             "backported upstream 77d13e2c0 fused GDN prefill"
         )
+        if conv_prepack_enabled:
+            cls._qwen35_conv_prepack_forward_monkeypatched = True
+            _notice("patched Ascend GDN to consume prepacked conv weight")
+    elif (
+        conv_prepack_enabled
+        and not getattr(cls, "_qwen35_conv_prepack_forward_monkeypatched", False)
+    ):
+        old = """    conv_weights = self.conv1d.weight.view(self.conv1d.weight.size(0), self.conv1d.weight.size(2))
+"""
+        new = """    if hasattr(self, "_qwen35_ascend_conv1d_weight"):
+        conv_weights = self._qwen35_ascend_conv1d_weight.transpose(0, 1)
+    else:
+        conv_weights = self.conv1d.weight.view(self.conv1d.weight.size(0), self.conv1d.weight.size(2))
+"""
+        cls._forward_core = _replace_function_block(
+            cls._forward_core,
+            old,
+            new,
+            "AscendGatedDeltaNetAttention._forward_core.conv_prepack",
+        )
+        cls._qwen35_conv_prepack_forward_monkeypatched = True
+        _notice("patched Ascend GDN to consume prepacked conv weight")
 
 
 def _activate_runtime_patches() -> None:

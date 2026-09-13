@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=2f9447e1d47b1f815b0fc2fb5863924ff28b7e1cf31bef73de00403eb7517ede
+patch_sha256=1c3629e31fe2beca36fb949d4f92b7e49ccd6de969c4b61ed7668fa3dea580ce
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -23,6 +23,7 @@ variant="${VARIANT:-candidate}"
 torch_logs="${QWEN35_TORCH_LOGS:-}"
 torch_log_env_args=()
 decode_qkv_view_enabled=0
+gdn_conv_prepack_enabled=0
 if [[ -n "$torch_logs" ]]; then
   torch_log_env_args=(-e "TORCH_LOGS=$torch_logs")
 fi
@@ -119,6 +120,20 @@ case "$variant" in
     fused_prefill_metadata_reuse_enabled=0
     decode_qkv_view_enabled=1
     ;;
+  candidate-fused-prefill-conv-prepack)
+    patch_enabled=1
+    gdn_fusion_enabled=1
+    prefetch_patch_enabled=1
+    weight_prefetch_enabled=true
+    operator_enabled=0
+    mmar_prefill_threshold=0
+    mmar_prefill_max_tokens=0
+    t21_enabled=0
+    super_kernel_enabled=0
+    upstream_fused_prefill_enabled=1
+    fused_prefill_metadata_reuse_enabled=0
+    gdn_conv_prepack_enabled=1
+    ;;
   control)
     patch_enabled=0
     gdn_fusion_enabled=0
@@ -132,7 +147,7 @@ case "$variant" in
     upstream_fused_prefill_enabled=0
     fused_prefill_metadata_reuse_enabled=0
     ;;
-  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, candidate-fused-prefill, candidate-fused-prefill-decode-view, or control" >&2; exit 64 ;;
+  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, candidate-fused-prefill, candidate-fused-prefill-decode-view, candidate-fused-prefill-conv-prepack, or control" >&2; exit 64 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 port="${PORT:-10010}"
@@ -441,6 +456,7 @@ docker_args=(
   -e QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL="$upstream_fused_prefill_enabled"
   -e QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE="$fused_prefill_metadata_reuse_enabled"
   -e QWEN35_ASCEND_DECODE_QKV_VIEW="$decode_qkv_view_enabled"
+  -e QWEN35_ASCEND_GDN_CONV_PREPACK="$gdn_conv_prepack_enabled"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD="$mmar_prefill_threshold"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$mmar_prefill_max_tokens"
   -e PYTHONPATH="$python_path"

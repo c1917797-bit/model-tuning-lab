@@ -4,7 +4,7 @@ set -euo pipefail
 variant="${VARIANT:?set VARIANT to candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, or control}"
 output_root="${OUTPUT_ROOT:?set OUTPUT_ROOT to the exact service artifact directory}"
 case "$variant" in
-  candidate|candidate-prefill|candidate-prefill-t21|candidate-prefill-no-prefetch|candidate-super-kernel|candidate-fused-prefill|candidate-fused-prefill-decode-view|control) ;;
+  candidate|candidate-prefill|candidate-prefill-t21|candidate-prefill-no-prefetch|candidate-super-kernel|candidate-fused-prefill|candidate-fused-prefill-decode-view|candidate-fused-prefill-conv-prepack|control) ;;
   *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, or control" >&2; exit 64 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
