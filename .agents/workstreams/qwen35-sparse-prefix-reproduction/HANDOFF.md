@@ -2,7 +2,23 @@
 
 ## Current authoritative status (2026-09-12)
 
-USER WORKLOAD CLARIFICATION: approximately2K input tokens. Formal benefit
+2026-09-13 LATEST: paper640 on physical4-7 mb01a4 completed exit0 in347s.
+Artifact /cache/austinov/sparse-prefix-smoke-jb7DPC. Independent comparison
+mb01ae passed6/6 exact token pairs against historical native0bcbu4; scheduler
+split/publication events present, paper repeated cache1536 versus native3072.
+This cross-lane historical comparison is correctness-only, NOT matched latency.
+smoke.json SHA256 a38dc58269be18d1e328ca4da279825e50307f56a7d15204d4552148e4a24be0;
+run.log SHA256 4b77fe956bf832113d8c71aad46ff24991235daaaee7355248e4e0f28d1ffd67.
+Own container no longer running; no performance or full task accuracy claim.
+User superseded mandatory2K input: follow prior controlled A/B validation method,
+freeze paper-relevant lengths/shared-prefix/workload before measurement, separate
+performance and EOS quality, three repetitions. Native prefix caching remains
+primary comparator; cache-off auxiliary only. Do not copy HYPIC gain thresholds.
+Next: frozen same-lane native/paper protocol with worker restoration evidence
+and representative prefix divergence/capacity coverage, then repeated performance
+and task quality. Do not repeat this already-passed canary unchanged.
+
+SUPERSEDED WORKLOAD CLARIFICATION: approximately2K input tokens. Formal benefit
 acceptance must use the actual approximately2K workload and matched native
 prefix-cache comparator, not long synthetic shared-prefix timing. Do not pad,
 truncate or change template silently to obtain an attractive number. Existing
