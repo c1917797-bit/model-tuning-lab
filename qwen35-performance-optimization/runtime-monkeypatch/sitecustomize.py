@@ -496,7 +496,7 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
         ssm_state[prefill_state_indices] = last_recurrent_state.transpose(-1, -2).contiguous().to(ssm_state.dtype)
 """
         new = """        use_fused_chunk = (
-            self._qwen35_probe_fused_chunk()
+            AscendGatedDeltaNetAttention._qwen35_probe_fused_chunk()
             and get_pcp_group().world_size == 1
         )
         if use_fused_chunk:

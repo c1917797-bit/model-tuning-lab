@@ -25,6 +25,7 @@ required_patch_fragments = [
     "initial_state = ssm_state[prefill_state_indices]",
     "last_recurrent_state.to(ssm_state.dtype)",
     "_qwen35_probe_fused_chunk",
+    "AscendGatedDeltaNetAttention._qwen35_probe_fused_chunk()",
     "device probe failed; using Triton",
     'f"fallback ({type(exc).__name__})"',
 ]
