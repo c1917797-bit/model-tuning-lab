@@ -1,0 +1,75 @@
+schema: mst-practice-iteration/v1
+id: drrqr-value-head-scalar-merge-cv-v1
+repository: model-tuning-lab
+status: active
+date: 2026-09-13
+validated_commit: pending
+
+stage_goal: Decide whether a complete-Dv128 value-head merge can preserve the energy-Dk64 downstream output while reducing enough value-side work to cross the fixed Ascend throughput target.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 remains at 141.564496153 output tok/s or +4.752041 percent against the frozen dense 135.142469917 tok/s baseline. Layer-shared and per-head Dv coordinate reduction had enough cost headroom but failed locked downstream fidelity by multiples.
+  medium_term_milestone: Find a DRRQR-rooted structural candidate that affects more than the required 35.55 percent of GDN work without changing each retained head's Dv128 RMS denominator.
+  short_term_decision: Keep one complete value head from each three-head key group, fold the three output blocks into the retained block with three bounded scalars, and cross-validate the frozen algorithm on indices 0-11.
+  deciding_evidence: Exact model and Ascend source seams, native Nv divisibility, frozen energy-Dk64 teacher replay, exact checkpoint out projection, three predeclared folds and the existing profile-derived cost ledger.
+  budget_or_stop_rule: One scalar-merge implementation and one three-fold CPU screen. No arbitrary matrices, coordinate gains, task labels, gradients, NPU, service, endpoint or accuracy work in this iteration.
+  on_pass: Collect a new untouched teacher corpus first. Only a fresh-data pass may admit plugin implementation and target-NPU eager/state/NPUGraph correctness.
+  on_failure: Reject complete-head scalar merge and do not tune nearby representatives, scalar ranges or head counts. Return only to a materially different DRRQR state representation.
+  on_inconclusive: Repair only a concrete equation, source identity or implementation defect and rerun once into a new immutable artifact.
+
+candidate_contract:
+  name: energy-Dk64 one-of-three value-head scalar merge
+  paper_exact_strong_rrqr: false
+  geometry: Global Nk16/Nv48/Dv128 becomes Nk16/Nv16/Dv128; under TP4 local Nk4/Nv12 becomes Nk4/Nv4.
+  selection: For each key-head group, choose one of its three complete value heads using fit-only output-column-norm-weighted reconstruction error.
+  fold: Approximate each of the three dense post-RMS head features by one bounded scalar times the retained energy-Dk64 feature and fold the three scaled original out-projection blocks into one block.
+  forbidden_freedom: No per-coordinate or hidden-dimension maps, no gradients, no task labels, no dynamic gather and no adjustment between folds.
+  attribution_requirement: Preserve Dk128/Nv48, Dk64/Nv48, Dk128/Nv16 and Dk64/Nv16 arms before any endpoint claim.
+
+predeclared_gates:
+  nv16_optimistic_cost_crosses_fixed_target: true
+  dense_formula_relative_l2_at_most: 0.01
+  aggregate_projected_error_ratio_at_most: 1.10
+  worst_fold_projected_error_ratio_at_most: 1.20
+  aggregate_feature_error_ratio_at_most: 1.10
+  layer_fold_ratio_at_most_1_10_fraction_at_least: 0.75
+  worst_layer_fold_projected_error_ratio_at_most: 1.50
+  scalar_bounds: [-2.0, 2.0]
+
+foldability_contract:
+  unchanged_semantics: Retained heads keep all 128 value coordinates, the original norm weight and the Dv128 RMS denominator.
+  independent_state: Value heads have independent V/Z, A/B, A_log, dt_bias, convolution channels and state rows; deleting other heads does not change the retained head recurrence.
+  native_shape: The recurrent operator requires Nv to be an integer multiple of Nk; local Nv4/Nk4 satisfies it.
+  static_cut_points: V/Z rows, A/B rows, A_log/dt_bias entries, value convolution rows, state/core value-head axes and folded out-projection blocks.
+  source_boundary: Any admitted implementation remains plugin-owned with the existing dense and Dk64/Nv48 fallbacks.
+
+evidence_protocol:
+  reused_corpus_claim: Cross-validation screen only; the corpus is not fresh admission evidence.
+  folds:
+    - {fit: [1, 2, 4, 5, 7, 8, 10, 11], validation: [0, 3, 6, 9]}
+    - {fit: [0, 2, 3, 5, 6, 8, 9, 11], validation: [1, 4, 7, 10]}
+    - {fit: [0, 1, 3, 4, 6, 7, 9, 10], validation: [2, 5, 8, 11]}
+  lock_rule: Publish each fold's six-layer fit lock before loading that fold's validation indices.
+
+result:
+  outcome: pending
+  analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_value_head_scalar_merge_cv.py
+  output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-scalar-merge-cv-v1/report.json
+  claim_ceiling: CPU cross-validation and optimistic profile-cost admission only.
+
+validation_commands:
+  - parse analyzer with Python AST without bytecode
+  - synthetic scalar-merge identity and lock-shape checks in the pinned container
+  - run the analyzer once into a fresh immutable output directory
+  - verify fold-lock and report hashes
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: Dv coordinate reduction changes the RMS denominator; complete-head reduction preserves it and is a materially different value/state compression mechanism.
+    destination: candidate contract
+    severity: high
+  - lesson: Nv32 removes only one third of value-side work and cannot close the fixed gap under the existing optimistic ledger; screen only Nv16.
+    destination: cost gate
+    severity: high
