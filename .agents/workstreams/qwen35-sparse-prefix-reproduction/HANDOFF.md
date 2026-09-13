@@ -2,6 +2,22 @@
 
 ## Current authoritative status (2026-09-12)
 
+USER WORKLOAD CLARIFICATION: approximately2K input tokens. Formal benefit
+acceptance must use the actual approximately2K workload and matched native
+prefix-cache comparator, not long synthetic shared-prefix timing. Do not pad,
+truncate or change template silently to obtain an attractive number. Existing
+paper640 mb01a4 remains a mechanism canary only (max_seq_len4096 is capacity,
+not proof of input length). Record tokenizer-measured lengths in formal results.
+
+2026-09-13 RESUMED: user explicitly authorized stopping
+drrqr_qwen38_energy_preflight_20260908; mb01a2 confirmed exited. No deletion.
+Device preflight mb01a3 exit0 on physical4-7, artifact
+/cache/austinov/sparse-prefix-smoke-RwMVJm. Previous -8020 cleared.
+LIVE paper640 canary launched as mb exec-00000000000001a4, timeout3600 seconds;
+poll that handle before any restart. Uses existing pinned official image,
+Qwen3.8-27B TP4, readonly patch and disposable container. Physical0-3 protected.
+This is current-lane activation/correctness, not performance or full task quality.
+
 LATEST DEVICE RETRY after user requested use of idle4-7: mb019a terminal exit1.
 Artifact /cache/austinov/sparse-prefix-smoke-FvmPE9; run.log SHA256
 702b92ba6b16c425fe0cfb680716093169e232c84e0799de6ffe07f664399b85.
