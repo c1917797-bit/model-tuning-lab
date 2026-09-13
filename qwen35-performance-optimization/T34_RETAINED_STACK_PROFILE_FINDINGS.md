@@ -34,6 +34,10 @@ Analysis digests:
   `9497bd941b3c5fef72178e4ea46d54950b2895126af1a853d7fbbd2a84138fa0`
 - `gdn-terminal-budget-current.json`:
   `6c88b483ec8eeffa070ab364789f060881f48dac219fdc5b5718eb5cf1486ae4`
+- `decode-op-groups.json`:
+  `52e55f4f2f82ad0e76213b0a318b2c80cf015bdcd95fa08db6ab79e834cb6520`
+- `gdn-decode-chain.json`:
+  `5c5d83ad33c6940037e3227fa644be2b58b5adf4130d26025670d2acee06bbd9`
 
 ## Hotspot boundary
 
@@ -98,6 +102,20 @@ semantic order and its prior full-service integrations regressed TPOT.
 Do not build a GDN terminal fusion blindly and do not rerun the old fused
 AddRMSNorm path unchanged.
 
+## GDN decode preprocessing chain
+
+The four-rank analysis paired all 5,040 GDN calls per rank: 105 decode steps
+times 48 GDN layers. On the slowest rank, the median per-layer weight
+transpose is 13.22 us, or only 0.63456 ms/token if made completely free. That
+is 28.099 percent of the 2.2583 ms/token gap, so one-time conv-weight
+prepacking is admissible only as a stack component.
+
+The complete transpose-to-recurrent envelope is 58.25 us/layer, or
+2.796 ms/token. This covers 123.81 percent of the measured gap in the
+zero-cost upper bound and is the first GDN decode boundary with enough budget
+to remain a serious successor. It still requires an upstream-derived
+implementation, BF16 equivalence, and end-to-end proof.
+
 ## Next admission gate
 
 Audit current upstream vLLM-Ascend, ops-transformer, and CANN-supported A2 BF16
@@ -109,4 +127,3 @@ the device only after all of the following are explicit:
 3. a conservative whole-token budget that can cover 2.2583 ms/token;
 4. exact BF16 numerical and collective-semantics gates;
 5. removable activation in the unchanged official image.
-
