@@ -2,6 +2,19 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+CURRENT LIVE RUN at20:56 UTC: sampling diagnostic PID2544764 (PPID1),
+container d0468a73dcdc79a8c8078b9f6cf7686b802f2a20ff7067d558c5a2dd3879f04e,
+artifact /cache/austinov/eval-runs/switch12h-qwen38-sampling-20260913-43OW1b.
+Started20:51:46, still compiling at20:55. Do not duplicate/restart on a wait
+warning. Follow probe/summary.json and actual process/container. Source dc5511a.
+Same-session config audit: installed editable finder maps vllm_ascend to
+/vllm-workspace/vllm-ascend/vllm_ascend, not the host checkout. Installed
+ascend_config.py lines354-365 prioritize additional_config. service.live.log
+at20:52:53 and20:54:03 explicitly records enable_matmul_allreduce=True and
+enable_flashcomm1=False. Core unknown-env warnings do NOT prove these settings
+are ignored. No framework edits were made; current measured configuration stays
+unchanged. Do not use host checkout's newer deprecation behavior as image truth.
+
 20:47 quality API canary PASSED; PID2430859 terminal, owned container cleaned.
 Artifact /cache/austinov/eval-runs/switch12h-qwen38-quality-fixed-20260913-9ryELw:
 quality-canary/results.json SHA256f9b5c168f5de78f6394ea0201ae74b744e64005742fca7a02131e8fa8bfa5651.
