@@ -2,6 +2,27 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+CURRENT RUN 20:26 UTC: standalone quality controller PID2336761, PPID1,
+container85e23ed6b56477d575bdbcc7e357f188250ab798e6f8cee5ed3580ea2829adb1,
+artifact /cache/austinov/eval-runs/switch12h-qwen38-quality-20260913-XJ5TBA.
+Command run_switch_canary.sh qwen38 <artifact> quality. Follow this exact job;
+do not launch another service. Source checkpoint e34c878 adds isolated CPU
+evaluator against owned TP8 server: MMLU abstract_algebra and GSM8K, limit2 each,
+then exact-container cleanup. This validates scoring plumbing, not full accuracy.
+Next must inspect quality-canary/results.json and logs, then scale to full tasks
+and pair Qwen3 control; HumanEval and performance matrix remain required.
+Prelaunch verified eight NPUs empty, no physical-device fuser holders, portfree,
+MemAvailable84224300kB. Remaining Maxon4ick container only bash, shared manager
+devices, no physical0-7 declarations. It was not changed.
+
+Empty-output diagnostic finished20:22:02 and its container is gone. All three
+empty cases1/2/5 reproduce first-token EOS248046 under nonstream/special-token
+visibility. Summary SHA25641c5fe42864145239819c212289319480cfbe43e7f41b56a729ffabe14a9f0f3
+under /cache/austinov/eval-runs/switch12h-qwen38-probe-20260913-Smh123/probe.
+Diagnostic state passed means the probe executed, NOT business validity passed.
+Nonempty control0 differs between variants (8vs12 tokens), so do not infer
+deterministic equivalence or a root cause from these diagnostics alone.
+
 20:22 diagnostic partial evidence: indices1/2 nonstream remain empty; visible
 token IDs are [248046]. Local tokenizer_config identifies248046 as<|im_end|>,
 and generation_config lists it as EOS. Thus these cases emit EOS as first token,
