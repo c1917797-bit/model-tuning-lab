@@ -114,6 +114,15 @@ reproduction.
   output and retained-post-RMS robustness on untouched data. If both the least
   aggressive target-crossing width and its control fail by a large margin,
   close the value-width branch instead of tuning nearby coordinates or gains.
+- Distinguish metric granularity from selector granularity. Reporting
+  per-head errors for one layer-shared coordinate set does not test static
+  per-head coordinate sets. If that distinction can change a material
+  decision, allow one predeclared fit-locked per-head screen while holding
+  gains and all other freedoms fixed. If both layer-shared and per-head plans
+  fail the same untouched projected-output and post-RMS gates by multiples,
+  close nearby coordinate and gain selectors before NPU work. More selector
+  freedom is not evidence of fidelity when the score ignores cross-column
+  cancellation in the downstream projection.
 - Before proposing an in-place recurrent-state/cache operator, inspect the
   active torch mutation schema and caller. A mutable `Tensor(a!)` passed
   directly from the cache means state update is already in place. Bind profile

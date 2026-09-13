@@ -22,6 +22,17 @@
   and robustness families. No NPU, endpoint or accuracy run followed. Report
   SHA256: 44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528.
   The nearby layer-shared value-coordinate/scalar family is closed.
+- The distinct drrqr-per-head-value-width-heldout-v1 screen is also complete
+  and rejected. It held the scalar at one per layer and changed only selector
+  granularity to one static coordinate set per each of 48 value heads. Dv64
+  held-out projected/retained-post-RMS ratios were 4.164589/3.098033 and Dv48
+  ratios were 4.177106/3.203223; both were worse than their layer-shared
+  controls and failed every fidelity/robustness family. Dense formula
+  calibration passed at 0.001683 relative-L2. No NPU, endpoint or accuracy run
+  followed. Report SHA256:
+  000c174f2b45f4e8cee1700d577201ae14199b87f29f8fede6dbfcbe17c9fcf4.
+  The nearby static value-coordinate and gain family is now closed at both
+  layer-shared and per-head selector granularities.
 - The drrqr-dk64-fp32-inplace-state-cache-admission-v1 source/profile audit is
   complete and rejected before implementation. The active schema already marks
   recurrent state mutable and pure decode passes the cache tensor directly to
@@ -375,12 +386,12 @@ The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
 5. **Qwen3.8 DRRQR:** the bounded program is now joint-target-not-met.
    Energy-Dk64 remains the best comparable development screen at +4.752041
    percent versus the frozen dense baseline, below the required +10 percent.
-   The final two-sided Dv64/Dv48 route failed its fit-locked untouched
-   exact-checkpoint projected-output and retained-post-RMS gates by large
-   margins. Do not implement it, spend NPU time on it, run final accuracy, or
-   open a nearby selector/scalar/operator variant. Reopening requires a
-   materially different named DRRQR mechanism with new output-fidelity and
-   endpoint-headroom evidence.
+   Both layer-shared and static per-head Dv64/Dv48 routes failed their
+   fit-locked untouched exact-checkpoint projected-output and retained-post-RMS
+   gates by large margins. Do not implement them, spend NPU time on them, run
+   final accuracy, or open a nearby selector/scalar/operator variant.
+   Reopening requires a materially different named DRRQR mechanism with new
+   output-fidelity and endpoint-headroom evidence.
 
 Keep the distinction between three kinds of knowledge explicit:
 
@@ -417,6 +428,12 @@ Keep the distinction between three kinds of knowledge explicit:
   The evidence is immutable under drrqr-two-sided-value-width-heldout-v1,
   report SHA256
   44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528.
+- Closed the remaining static per-head value-coordinate distinction with one
+  fit-locked run. Per-head Dv64/Dv48 held-out projected ratios were 4.165/4.177
+  and retained-post-RMS ratios were 3.098/3.203. Both worsened versus the
+  layer-shared controls and failed every fidelity/robustness family. Evidence
+  is immutable under drrqr-per-head-value-width-heldout-v1, report SHA256
+  000c174f2b45f4e8cee1700d577201ae14199b87f29f8fede6dbfcbe17c9fcf4.
 
 ## 4. Current Action
 
@@ -439,12 +456,13 @@ For a new maintainer, start by treating this repository as ready for handoff but
 
 1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
 2. For Qwen3.8 DRRQR, treat the bounded conclusion as final for this program.
-   Do not retry inline normalization, Dv64/Dv48 value-width reduction, nearby
-   Q/K or value coordinate selectors, scalar retuning, or already-active
-   projection/convolution slicing. Do not run final accuracy because no
-   candidate reached the endpoint admission threshold. A future reopen must
-   start as a new, materially different DRRQR mechanism and must predeclare
-   both untouched output-fidelity and optimistic endpoint-headroom gates.
+   Do not retry inline normalization, Dv64/Dv48 layer-shared or per-head
+   value-width reduction, nearby Q/K or value coordinate selectors, scalar
+   retuning, or already-active projection/convolution slicing. Do not run
+   final accuracy because no candidate reached the endpoint admission
+   threshold. A future reopen must start as a new, materially different DRRQR
+   mechanism and must predeclare both untouched output-fidelity and optimistic
+   endpoint-headroom gates.
 3. Inventory active `work/*` branches/worktrees on the target host. Read each `task.json` and `HANDOFF.md` before touching files, containers, ports, processes, or NPUs.
 4. For the Qwen3.5 performance loop, do not launch until NPU0-3 ownership is
    proven. Resume with the runtime-only bounded-MMAR/prefetch monkeypatch
@@ -531,6 +549,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-pairwise-orthogonal-projection-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-normalization-exactness-audit-v1.yaml
 .agents/evals/practice-iterations/drrqr-two-sided-value-width-heldout-v1.yaml
+.agents/evals/practice-iterations/drrqr-per-head-value-width-heldout-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-fp32-inplace-state-cache-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-dk64-fused-recurrent-floor-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml

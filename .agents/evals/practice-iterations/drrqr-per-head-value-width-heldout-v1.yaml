@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-per-head-value-width-heldout-v1
 repository: model-tuning-lab
-status: active
+status: done
 date: 2026-09-13
-validated_commit: pending
+validated_commit: ad1feedecefa3e468328c208a1e095d875e25b2d
 
 stage_goal: Decide whether static per-value-head Dv coordinates rescue the structurally sufficient Dk64 plus value/state-width DRRQR route that failed with one layer-shared coordinate set.
 
@@ -45,9 +45,30 @@ portability_contract:
   source_boundary: All implementation remains in projects/drror_vllm_ascend; vLLM, vLLM-Ascend, ops-transformer, cann bot and images remain read-only.
 
 result:
-  outcome: pending
+  outcome: rejected
   analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_per_head_value_width_heldout.py
+  analyzer_sha256: 007156a0ffd374cd7130c9ae4ed842b85ec2e3bc5f3cfe312e4af216c10184a0
   output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-per-head-value-width-heldout-v1/report.json
+  operation: exec-00000000000007e4
+  duration_seconds: 257.30118391
+  started_sha256: f0841fd65fa43350e67726255866910cdde34b6a8eb8683ded928af209eb9bc2
+  fit_lock_sha256: 50c50cd274c67d658ee1c0d14daf2f41679b4522ba26ad90a2e0463eeab4680e
+  report_sha256: 000c174f2b45f4e8cee1700d577201ae14199b87f29f8fede6dbfcbe17c9fcf4
+  dense_formula_heldout_relative_l2: 0.0016828277208102314
+  Dv64:
+    fit_projected_error_ratio: 4.256534214626931
+    heldout_projected_error_ratio: 4.164588758333743
+    heldout_retained_post_rms_error_ratio: 3.0980329418400596
+    heldout_head_layer_ratio_at_most_1_10_fraction: 0.5520833333333334
+    all_gates: false
+  Dv48:
+    fit_projected_error_ratio: 4.138283706552568
+    heldout_projected_error_ratio: 4.177106041706618
+    heldout_retained_post_rms_error_ratio: 3.2032232548137247
+    heldout_head_layer_ratio_at_most_1_10_fraction: 0.4965277777777778
+    all_gates: false
+  comparison_to_layer_shared: Per-head Dv64 worsened held-out projected ratio from 3.711740 to 4.164589 and retained ratio from 2.422295 to 3.098033. Per-head Dv48 worsened them from 4.072586 to 4.177106 and from 2.602293 to 3.203223.
+  decision: Reject the static per-head energy-coordinate value/state-width route. Do not implement it, run NPU, benchmark an endpoint, run task accuracy, or open a nearby coordinate/gain selector loop.
   claim_ceiling: CPU held-out admission only; no NPU correctness, endpoint performance, task accuracy, paper-exactness or portability result.
 
 validation_commands:
@@ -63,4 +84,10 @@ lessons_ingested:
     severity: high
   - lesson: Add only the minimum new degree of freedom needed to test the hypothesis. Keeping one scalar per layer makes any change attributable to per-head coordinates.
     destination: candidate contract
+    severity: high
+  - lesson: More selector granularity is not automatically more faithful. The per-head score optimized individual coordinate energy times output-column norm but ignored cross-column cancellation; both fit and held-out projected error stayed above four times the Dk64 baseline error.
+    destination: .agents/skills/drrqr-ascend-optimization-loop/SKILL.md
+    severity: high
+  - lesson: When layer-shared and per-head static coordinate plans both fail the same untouched downstream gates by multiples, close the nearby coordinate/gain family before NPU rather than continuing selector search.
+    destination: .agents/HANDOFF.md
     severity: high

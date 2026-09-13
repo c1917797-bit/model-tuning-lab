@@ -58,6 +58,46 @@ Artifact:
 - report SHA256: 44a7ca586e52a72ff42e4ed2f7d3b064158fa6c261875791b24fadd9b2ca6528
 - tool SHA256: 8d56fbe4fa992acd2384cd736045c1c28d2914e8d23f8e720e6f5c71833725c8
 
+## Per-head value-coordinate closure
+
+The layer-shared screen reported per-head robustness but did not itself test
+one coordinate set per head. That selector-granularity distinction received
+one final bounded screen. It changed only the coordinate scope to one static
+set for each of 48 global value heads and retained exactly one scalar per
+layer. The proposed serving implementation remained statically foldable:
+matching V/Z projection rows, convolution channels, state rows, RMS gamma
+entries and out-projection columns would be packed before serving, with no
+per-token gather.
+
+The same fit indices 0-11, untouched indices 12-15, checkpoint projections and
+predeclared gates were used. The fit lock was published before held-out load.
+Dense post-RMS formula calibration again passed at 0.001683 relative-L2.
+
+| Width | Fit projected ratio | Held-out projected ratio | Retained post-RMS ratio | Head-layer fraction <=1.10 | Result |
+|---|---:|---:|---:|---:|---|
+| Dv64 | 4.256534 | 4.164589 | 3.098033 | 55.21% | rejected |
+| Dv48 | 4.138284 | 4.177106 | 3.203223 | 49.65% | rejected |
+
+Both widths failed aggregate projected output, worst-layer projected output,
+aggregate retained post-RMS, head-layer robustness fraction and worst-head
+robustness. Dv64 also worsened from the layer-shared projected/retained ratios
+of 3.711740/2.422295; Dv48 worsened from 4.072586/2.602293. The failure is
+already large on fit and persists on held-out, so it is not a marginal split
+effect. No NPU, endpoint or task-accuracy run followed.
+
+Artifact:
+
+/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-per-head-value-width-heldout-v1
+
+- started SHA256: f0841fd65fa43350e67726255866910cdde34b6a8eb8683ded928af209eb9bc2
+- fit-lock SHA256: 50c50cd274c67d658ee1c0d14daf2f41679b4522ba26ad90a2e0463eeab4680e
+- report SHA256: 000c174f2b45f4e8cee1700d577201ae14199b87f29f8fede6dbfcbe17c9fcf4
+- tool SHA256: 007156a0ffd374cd7130c9ae4ed842b85ec2e3bc5f3cfe312e4af216c10184a0
+
+This closes the nearby static value-coordinate family at both layer-shared and
+per-head granularities. It does not prove every possible learned or newly
+derived value-state representation impossible.
+
 ## What was established
 
 - The real Ascend GDN execution path and loaded binaries were identified.
@@ -72,18 +112,20 @@ Artifact:
 - ABI/storage, eager/state/NPUGraph and arithmetic gates prevented invalid
   custom-operator results from reaching performance tests.
 - Multiple Q/K-only, heterogeneous-width, subspace, phase-transition,
-  compensation, packed-QKV, normalization-fusion and value-width routes were
-  rejected at the cheapest faithful evidence layer.
+  compensation, packed-QKV, normalization-fusion, layer-shared value-width and
+  per-head value-width routes were rejected at the cheapest faithful evidence
+  layer.
 
 ## Why the program stops
 
 The remaining throughput gap is larger than the optimistic perfect-removal
 headroom of the measured small operator seams. Direct Dk64 projection and
-convolution slicing are already active. The last structural route with a cost
+convolution slicing are already active. The last structural routes with a cost
 ceiling above the target failed exact downstream fidelity by multiples rather
-than a tunable margin. Opening another nearby selector, scalar, launch fusion,
-generic operator optimization, MTP, speculation, quantization or training
-branch would violate the declared DRRQR scope or repeat a stopped family.
+than a tunable margin at both layer-shared and per-head selector granularities.
+Opening another nearby selector, scalar, launch fusion, generic operator
+optimization, MTP, speculation, quantization or training branch would violate
+the declared DRRQR scope or repeat a stopped family.
 
 ## Post-conclusion FP32 state-cache admission audit
 
