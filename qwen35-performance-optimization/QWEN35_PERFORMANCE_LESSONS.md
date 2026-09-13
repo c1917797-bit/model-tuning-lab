@@ -44,6 +44,7 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | T31 bounded prefill MMAR rerun | After a separate 32-request warmup, c1 TTFT P95 was 850.068 ms and TPOT P95 was 31.342 ms versus fresh-control medians 841.073/28.909 ms; 32/32, zero errors, natural EOS | The historical 87% TTFT result was a cold-control artifact. Compare steady state on one live service and reject this component before the full matrix. |
 | T33 zero-copy M=1 QKV views | Warmed c1 TTFT passed at 609.652 ms, but TPOT regressed 2.147% to 29.530 ms/token | Sub-one-percent layout/copy work is not the retained stack's TPOT bottleneck. Do not compose or rerun unchanged. |
 | T35 upstream-derived GDN conv-weight prepack | Warmed c1 TTFT passed at 619.023 ms and TPOT improved 5.477% to 27.326 ms/token, but TPOT missed the 26.018 ms gate | The upstream KDA prepack idea is sound but too small alone. Do not rerun unchanged; target the complete profile-proven GDN preprocessing-to-recurrent chain. |
+| T36 pinned upstream FusedGdnDecode combined stack | Four-rank BF16-state graph capture, activation, smoke, and warm/formal c1 all passed functionally; formal TTFT was 615.101 ms but TPOT was 26.529 ms, an 8.233% reduction versus the fresh control | The upstream fused chain is real and contributes an incremental 2.916% over T35, but still misses the 10% TPOT gate by 0.511 ms/token. Retain as experimental evidence only; do not run c5/c8/c16 unchanged. |
 
 ## Decisions changed by the corrected target
 
@@ -101,10 +102,11 @@ Do not mechanically carry forward rejections that depended only on the old
    warmup. Do not rerun or compose this exact implementation unchanged.
 4. Keep T35 conv-weight prepack rejected as a standalone component. Its formal
    c1 retained the TTFT pass but reached only a 5.477% TPOT reduction.
-5. Continue the post-v0.23 upstream audit for a Qwen3.5/910B full GDN decode
-   chain or materially different collective boundary. T34 measures only
-   0.63456 ms/token in transpose but 2.796 ms/token in the complete
-   transpose-to-recurrent envelope. The next candidate must contain an
-   upstream-derived base plus a measurable project-specific whole-chain delta.
-   Only a passing c1 fail-fast result may enter c1/c5/c8/c16 x3 and the full
-   paired quality gate.
+5. Keep the exact T36 combined stack rejected before c5/c8/c16. Its upstream
+   FusedGdnDecode path passed BF16-state numerical and real-service gates and
+   improved TPOT to 26.529 ms, but the required maximum is 26.0181 ms.
+6. Continue the post-v0.23 upstream audit for a newer supported
+   FusedGdnDecode integration/tiling improvement or a non-overlapping
+   decode/collective boundary with a credible budget above the remaining
+   0.511 ms/token. Only a passing c1 fail-fast result may enter
+   c1/c5/c8/c16 x3 and the full paired quality gate.

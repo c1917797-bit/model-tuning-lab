@@ -27,6 +27,8 @@ EXPECTED_OPERATOR_VENDOR = (
 EXPECTED_T21_OPP_ROOT = "/opt/qwen35-t21-opp"
 EXPECTED_T21_VENDOR = f"{EXPECTED_T21_OPP_ROOT}/vendors/qwen35_t21_v910_transformer"
 EXPECTED_T21_BRIDGE_ROOT = "/opt/qwen35-t21-bridge"
+EXPECTED_T36_ROOT = "/opt/qwen35-t36"
+EXPECTED_T36_VENDOR = f"{EXPECTED_T36_ROOT}/qwen35_t36_transformer"
 EXPECTED_ENV = {
     "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE": "1",
     "VLLM_ASCEND_ENABLE_FLASHCOMM1": "0",
@@ -46,6 +48,7 @@ REQUIRED_MARKERS = {
     "upstream_fused_prefill": "backported upstream 77d13e2c0 fused GDN prefill",
     "decode_qkv_view": "extended upstream QKV rearrange reuse to zero-copy M1 decode",
     "gdn_conv_prepack": "materialized upstream-derived Qwen GDN conv weight prepack",
+    "fused_gdn_decode": "patched exact-shape Qwen3.5 pure decode with upstream FusedGdnDecode",
 }
 NPU_PROCESS_RE = re.compile(
     r"^\|\s*([0-7])\s+\d+\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|",
@@ -104,6 +107,7 @@ def check(
         "candidate-fused-prefill",
         "candidate-fused-prefill-decode-view",
         "candidate-fused-prefill-conv-prepack",
+        "candidate-fused-prefill-conv-prepack-fused-decode",
         "control",
     }
     if variant not in variants:
@@ -116,10 +120,17 @@ def check(
         "candidate-fused-prefill",
         "candidate-fused-prefill-decode-view",
         "candidate-fused-prefill-conv-prepack",
+        "candidate-fused-prefill-conv-prepack-fused-decode",
     }
     decode_qkv_view_enabled = variant == "candidate-fused-prefill-decode-view"
     gdn_conv_prepack_enabled = (
-        variant == "candidate-fused-prefill-conv-prepack"
+        variant in {
+            "candidate-fused-prefill-conv-prepack",
+            "candidate-fused-prefill-conv-prepack-fused-decode",
+        }
+    )
+    fused_gdn_decode_enabled = (
+        variant == "candidate-fused-prefill-conv-prepack-fused-decode"
     )
     gdn_fusion_enabled = patch_enabled and not super_kernel_enabled
     prefill_enabled = variant in {
@@ -133,6 +144,7 @@ def check(
         "candidate-prefill-t21",
         "candidate-fused-prefill",
         "candidate-fused-prefill-conv-prepack",
+        "candidate-fused-prefill-conv-prepack-fused-decode",
     }
     log_text = log_path.read_text(encoding="utf-8", errors="replace")
     inspect = _load_inspect(inspect_path)
@@ -164,6 +176,8 @@ def check(
             expected = decode_qkv_view_enabled
         if name == "gdn_conv_prepack":
             expected = gdn_conv_prepack_enabled
+        if name == "fused_gdn_decode":
+            expected = fused_gdn_decode_enabled
         marker_checks[name] = count >= expected_ranks if expected else count == 0
 
     env = _environment(inspect)
@@ -186,6 +200,9 @@ def check(
         ),
         "QWEN35_ASCEND_GDN_CONV_PREPACK": (
             "1" if gdn_conv_prepack_enabled else "0"
+        ),
+        "QWEN35_ASCEND_FUSED_GDN_DECODE": (
+            "1" if fused_gdn_decode_enabled else "0"
         ),
         "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS": (
             "1" if gdn_fusion_enabled else "0"
@@ -261,6 +278,18 @@ def check(
         env_checks["t21_operator_library_absent"] = (
             "QWEN35_T21_OPAPI_LIBRARY" not in env
         )
+    if fused_gdn_decode_enabled:
+        env_checks.update(
+            {
+                "t36_opp_path": env.get("ASCEND_CUSTOM_OPP_PATH") == EXPECTED_T36_VENDOR,
+                "t36_library_first": env.get("LD_LIBRARY_PATH", "").startswith(
+                    f"{EXPECTED_T36_VENDOR}/op_api/lib:"
+                ),
+                "t36_bridge_on_pythonpath": (
+                    f"{EXPECTED_T36_ROOT}/python" in python_path.split(":")
+                ),
+            }
+        )
 
     host_devices = {
         item.get("PathOnHost")
@@ -297,6 +326,10 @@ def check(
         item for item in mounts
         if item.get("Destination") == EXPECTED_T21_BRIDGE_ROOT
     ]
+    t36_mounts = [
+        item for item in mounts
+        if item.get("Destination") == EXPECTED_T36_ROOT
+    ]
     forbidden_mounts = [
         item
         for item in mounts
@@ -323,6 +356,10 @@ def check(
             len(t21_bridge_mounts) == 1
             and not t21_bridge_mounts[0].get("RW", True)
             if t21_enabled else not t21_bridge_mounts
+        ),
+        "t36_mount": (
+            len(t36_mounts) == 1 and not t36_mounts[0].get("RW", True)
+            if fused_gdn_decode_enabled else not t36_mounts
         ),
     }
 
@@ -429,6 +466,7 @@ def parse_args() -> argparse.Namespace:
             "candidate-fused-prefill",
             "candidate-fused-prefill-decode-view",
             "candidate-fused-prefill-conv-prepack",
+            "candidate-fused-prefill-conv-prepack-fused-decode",
             "control",
         ),
         default="candidate",

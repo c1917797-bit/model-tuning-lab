@@ -7,12 +7,12 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 launcher="$repo_root/qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh"
-: "${VARIANT:?set VARIANT to candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, candidate-fused-prefill, candidate-fused-prefill-decode-view, candidate-fused-prefill-conv-prepack, or control}"
+: "${VARIANT:?set VARIANT}"
 : "${OUTPUT_ROOT:?set OUTPUT_ROOT to a new directory under /cache/austinov}"
 
 case "$VARIANT" in
-  candidate|candidate-prefill|candidate-prefill-t21|candidate-prefill-no-prefetch|candidate-super-kernel|candidate-fused-prefill|candidate-fused-prefill-decode-view|candidate-fused-prefill-conv-prepack|control) ;;
-  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, candidate-fused-prefill, candidate-fused-prefill-decode-view, candidate-fused-prefill-conv-prepack, or control" >&2; exit 64 ;;
+  candidate|candidate-prefill|candidate-prefill-t21|candidate-prefill-no-prefetch|candidate-super-kernel|candidate-fused-prefill|candidate-fused-prefill-decode-view|candidate-fused-prefill-conv-prepack|candidate-fused-prefill-conv-prepack-fused-decode|control) ;;
+  *) echo "unsupported VARIANT: $VARIANT" >&2; exit 64 ;;
 esac
 case "$OUTPUT_ROOT" in
   /cache/austinov/*) ;;

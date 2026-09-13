@@ -78,6 +78,10 @@ def _gdn_conv_prepack_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_GDN_CONV_PREPACK", "0") == "1"
 
 
+def _fused_gdn_decode_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_FUSED_GDN_DECODE", "0") == "1"
+
+
 def _weight_prefetch_patch_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH", "1") == "1"
 
@@ -476,13 +480,149 @@ def _patch_vllm_backends(module: ModuleType) -> None:
     _notice("backported upstream x.size(dim) graph-split guard")
 
 
+def _qwen35_fused_decode_replacements():
+    """Exact anchors that bypass the decomposed pure-decode GDN chain."""
+    split_old = """    query_spec, key_spec, value_spec = self.rearrange_mixed_qkv(mixed_qkv_spec)
+    query_non_spec, key_non_spec, value_non_spec = self.rearrange_mixed_qkv(mixed_qkv_non_spec)
+"""
+    split_new = """    expected_qwen35_width = (
+        2 * (self.num_k_heads // self.tp_size) * self.head_k_dim
+        + (self.num_v_heads // self.tp_size) * self.head_v_dim
+    )
+    use_qwen35_fused_decode = (
+        spec_sequence_masks is None
+        and attn_metadata.num_prefills == 0
+        and attn_metadata.num_decodes > 0
+        and get_pcp_group().world_size == 1
+        and mixed_qkv_non_spec is not None
+        and mixed_qkv_non_spec.ndim == 2
+        and mixed_qkv_non_spec.size(0) == attn_metadata.num_decodes
+        and mixed_qkv_non_spec.size(1) == expected_qwen35_width
+        and self.num_k_heads // self.tp_size == 4
+        and self.num_v_heads // self.tp_size == 12
+        and self.head_k_dim == 128
+        and self.head_v_dim == 128
+        and a.ndim == 2
+        and b.ndim == 2
+        and a.shape == b.shape
+        and a.size(0) == mixed_qkv_non_spec.size(0)
+        and a.size(1) == self.num_v_heads // self.tp_size
+        and a.dtype == mixed_qkv_non_spec.dtype
+        and b.dtype == mixed_qkv_non_spec.dtype
+        and self.A_log.dtype == torch.float32
+        and self.dt_bias.dtype == mixed_qkv_non_spec.dtype
+        and ssm_state.dtype in (torch.float32, mixed_qkv_non_spec.dtype)
+        and ssm_state.is_contiguous()
+        and non_spec_state_indices_tensor is not None
+        and non_spec_state_indices_tensor.ndim == 1
+        and non_spec_state_indices_tensor.dtype == torch.int32
+        and non_spec_state_indices_tensor.numel() == mixed_qkv_non_spec.size(0)
+    )
+    if (
+        spec_sequence_masks is None
+        and attn_metadata.num_prefills == 0
+        and attn_metadata.num_decodes > 0
+        and not use_qwen35_fused_decode
+    ):
+        raise RuntimeError(
+            "QWEN35 fused decode was requested but the live pure-decode "
+            "metadata did not satisfy the exact Qwen3.5-27B TP4 contract"
+        )
+    query_spec, key_spec, value_spec = self.rearrange_mixed_qkv(mixed_qkv_spec)
+    if use_qwen35_fused_decode:
+        query_non_spec, key_non_spec, value_non_spec = None, None, None
+    else:
+        query_non_spec, key_non_spec, value_non_spec = self.rearrange_mixed_qkv(mixed_qkv_non_spec)
+"""
+    gating_old = """    g, beta = DeviceOperator.fused_gdn_gating(self.A_log, a, b, self.dt_bias)
+"""
+    gating_new = """    if use_qwen35_fused_decode:
+        g, beta = None, None
+    else:
+        g, beta = DeviceOperator.fused_gdn_gating(self.A_log, a, b, self.dt_bias)
+"""
+    recurrent_old = """    elif attn_metadata.num_decodes > 0:
+        actual_seq_lengths = attn_metadata.non_spec_decode_metadata.actual_seq_lengths
+        query_non_spec = l2norm_fwd(query_non_spec)
+        key_non_spec = l2norm_fwd(key_non_spec)
+        # Dispatches to the vllm-ascend AscendC custom operator
+        # (csrc/recurrent_gated_delta_rule), NOT the built-in CANN operator.
+        core_attn_out_non_spec = torch.ops._C_ascend.npu_recurrent_gated_delta_rule(
+            query=query_non_spec.squeeze(0),
+            key=key_non_spec.squeeze(0),
+            value=value_non_spec.squeeze(0),
+            g=g_non_spec.squeeze(0) if g_non_spec is not None else g_non_spec,
+            beta=beta_non_spec.squeeze(0) if beta_non_spec is not None else beta_non_spec,
+            state=ssm_state,
+            scale=key_non_spec.shape[-1] ** -0.5,
+            actual_seq_lengths=actual_seq_lengths,
+            ssm_state_indices=non_spec_state_indices_tensor,
+        ).unsqueeze(0)
+"""
+    recurrent_new = """    elif attn_metadata.num_decodes > 0:
+        if use_qwen35_fused_decode:
+            core_attn_out_non_spec = torch.ops.custom.npu_fused_gdn_decode(
+                mixed_qkv_non_spec,
+                a,
+                b,
+                self.A_log,
+                self.dt_bias,
+                ssm_state,
+                non_spec_state_indices_tensor,
+                self.head_k_dim ** -0.5,
+                softplus_threshold=20.0,
+            ).squeeze(1).unsqueeze(0)
+        else:
+            actual_seq_lengths = attn_metadata.non_spec_decode_metadata.actual_seq_lengths
+            query_non_spec = l2norm_fwd(query_non_spec)
+            key_non_spec = l2norm_fwd(key_non_spec)
+            # Dispatches to the vllm-ascend AscendC custom operator
+            # (csrc/recurrent_gated_delta_rule), NOT the built-in CANN operator.
+            core_attn_out_non_spec = torch.ops._C_ascend.npu_recurrent_gated_delta_rule(
+                query=query_non_spec.squeeze(0),
+                key=key_non_spec.squeeze(0),
+                value=value_non_spec.squeeze(0),
+                g=g_non_spec.squeeze(0) if g_non_spec is not None else g_non_spec,
+                beta=beta_non_spec.squeeze(0) if beta_non_spec is not None else beta_non_spec,
+                state=ssm_state,
+                scale=key_non_spec.shape[-1] ** -0.5,
+                actual_seq_lengths=actual_seq_lengths,
+                ssm_state_indices=non_spec_state_indices_tensor,
+            ).unsqueeze(0)
+"""
+    return [
+        ("fused_decode_split", split_old, split_new),
+        ("fused_decode_gating", gating_old, gating_new),
+        ("fused_decode_recurrent", recurrent_old, recurrent_new),
+    ]
+
+
 def _patch_ascend_gdn(module: ModuleType) -> None:
     projection_enabled = _gdn_projection_fusion_enabled()
     fused_prefill_enabled = _upstream_fused_prefill_enabled()
     conv_prepack_enabled = _gdn_conv_prepack_enabled()
-    if not projection_enabled and not fused_prefill_enabled and not conv_prepack_enabled:
+    fused_decode_enabled = _fused_gdn_decode_enabled()
+    if (
+        not projection_enabled
+        and not fused_prefill_enabled
+        and not conv_prepack_enabled
+        and not fused_decode_enabled
+    ):
         return
     cls = module.AscendGatedDeltaNetAttention
+    if fused_decode_enabled:
+        # This is the unmodified torch bridge shipped beside the pinned
+        # ops-transformer experimental FusedGdnDecode implementation.  Import
+        # failure is fatal when explicitly requested: silently benchmarking
+        # the fallback would produce false performance evidence.
+        import custom_ops  # noqa: F401
+
+        if not hasattr(module.torch.ops.custom, "npu_fused_gdn_decode"):
+            raise RuntimeError(
+                "QWEN35_ASCEND_FUSED_GDN_DECODE=1 but the upstream "
+                "torch operator is not registered"
+            )
+        _notice("loaded pinned upstream FusedGdnDecode torch bridge")
     if (
         projection_enabled
         and not getattr(cls, "_qwen35_projection_forward_monkeypatched", False)
@@ -683,6 +823,8 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
 """,
                 )
             )
+        if fused_decode_enabled:
+            core_replacements.extend(_qwen35_fused_decode_replacements())
         cls._forward_core = _replace_function_blocks(
             cls._forward_core,
             core_replacements,
@@ -695,6 +837,9 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
         if conv_prepack_enabled:
             cls._qwen35_conv_prepack_forward_monkeypatched = True
             _notice("patched Ascend GDN to consume prepacked conv weight")
+        if fused_decode_enabled:
+            cls._qwen35_fused_decode_monkeypatched = True
+            _notice("patched exact-shape Qwen3.5 pure decode with upstream FusedGdnDecode")
     elif (
         conv_prepack_enabled
         and not getattr(cls, "_qwen35_conv_prepack_forward_monkeypatched", False)
@@ -706,14 +851,30 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
     else:
         conv_weights = self.conv1d.weight.view(self.conv1d.weight.size(0), self.conv1d.weight.size(2))
 """
-        cls._forward_core = _replace_function_block(
+        replacements = [("conv_prepack", old, new)]
+        if fused_decode_enabled:
+            replacements.extend(_qwen35_fused_decode_replacements())
+        cls._forward_core = _replace_function_blocks(
             cls._forward_core,
-            old,
-            new,
-            "AscendGatedDeltaNetAttention._forward_core.conv_prepack",
+            replacements,
+            "AscendGatedDeltaNetAttention._forward_core",
         )
         cls._qwen35_conv_prepack_forward_monkeypatched = True
         _notice("patched Ascend GDN to consume prepacked conv weight")
+        if fused_decode_enabled:
+            cls._qwen35_fused_decode_monkeypatched = True
+            _notice("patched exact-shape Qwen3.5 pure decode with upstream FusedGdnDecode")
+    elif (
+        fused_decode_enabled
+        and not getattr(cls, "_qwen35_fused_decode_monkeypatched", False)
+    ):
+        cls._forward_core = _replace_function_blocks(
+            cls._forward_core,
+            _qwen35_fused_decode_replacements(),
+            "AscendGatedDeltaNetAttention._forward_core",
+        )
+        cls._qwen35_fused_decode_monkeypatched = True
+        _notice("patched exact-shape Qwen3.5 pure decode with upstream FusedGdnDecode")
 
 
 def _activate_runtime_patches() -> None:

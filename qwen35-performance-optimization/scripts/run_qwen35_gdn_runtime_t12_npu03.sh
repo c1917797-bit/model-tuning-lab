@@ -8,7 +8,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 patch_root="$repo_root/qwen35-performance-optimization/runtime-monkeypatch"
 patch_file="$patch_root/sitecustomize.py"
-patch_sha256=3a0e871250a07e5dcdde096f2df7bf5667b0883e1734d1675e05bf8ceb2cf38a
+patch_sha256=62e508565f5408a993ffad3f998022915d7d98b6486c80033f44265754f34ae9
 image_ref=quay.io/ascend/vllm-ascend:v0.23.0
 image_id=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 image_digest=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
@@ -24,6 +24,7 @@ torch_logs="${QWEN35_TORCH_LOGS:-}"
 torch_log_env_args=()
 decode_qkv_view_enabled=0
 gdn_conv_prepack_enabled=0
+fused_gdn_decode_enabled=0
 if [[ -n "$torch_logs" ]]; then
   torch_log_env_args=(-e "TORCH_LOGS=$torch_logs")
 fi
@@ -134,6 +135,21 @@ case "$variant" in
     fused_prefill_metadata_reuse_enabled=0
     gdn_conv_prepack_enabled=1
     ;;
+  candidate-fused-prefill-conv-prepack-fused-decode)
+    patch_enabled=1
+    gdn_fusion_enabled=1
+    prefetch_patch_enabled=1
+    weight_prefetch_enabled=true
+    operator_enabled=0
+    mmar_prefill_threshold=0
+    mmar_prefill_max_tokens=0
+    t21_enabled=0
+    super_kernel_enabled=0
+    upstream_fused_prefill_enabled=1
+    fused_prefill_metadata_reuse_enabled=0
+    gdn_conv_prepack_enabled=1
+    fused_gdn_decode_enabled=1
+    ;;
   control)
     patch_enabled=0
     gdn_fusion_enabled=0
@@ -147,7 +163,7 @@ case "$variant" in
     upstream_fused_prefill_enabled=0
     fused_prefill_metadata_reuse_enabled=0
     ;;
-  *) echo "VARIANT must be candidate, candidate-prefill, candidate-prefill-t21, candidate-prefill-no-prefetch, candidate-super-kernel, candidate-fused-prefill, candidate-fused-prefill-decode-view, candidate-fused-prefill-conv-prepack, or control" >&2; exit 64 ;;
+  *) echo "unsupported VARIANT: $variant" >&2; exit 64 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"
 port="${PORT:-10010}"
@@ -309,6 +325,49 @@ if [[ "$t21_enabled" == 1 ]]; then
   )
   t21_python_path="$t21_container_bridge_root:"
 fi
+t36_root="${T36_ROOT:-/cache/austinov/qwen35-t36-fused-gdn-decode-opp-v1}"
+t36_container_root=/opt/qwen35-t36
+t36_container_vendor="$t36_container_root/qwen35_t36_transformer"
+t36_opapi_sha256=1c5e65a7d7b91abb33bc00b368a12bf2e05331e933ec1ac041cf0fb0b07702e4
+t36_bridge_sha256=a5abcbcc49f8b192a5444c36252989b9004ba53a4c913a98c9630b886a2191d8
+t36_package_sha256=65b2bdd8c169ddd46e574c87097c23d6a1ab34b87958bcc55f2e4a83d471f0e1
+t36_wheel_sha256=14dd76c60125d8c52d9b782806b6fe97b9ddf9e18962c2297640b594c3472c69
+t36_validation_sha256=312225147b5cb6abf6010a48d89fc8f5b3d47ad6b4723aab0c61b3c2bef94076
+t36_bf16_validation_sha256=e6887cecbf1ec6afd4ab67e5edb543edc4e164c149f9e952ba29f9b85ff2d50c
+t36_validation_script_sha256=e93ecff1c3be12da624795e8e42ccaf8c081154166a171a3021bf4e18fae64c4
+t36_mount_args=()
+t36_env_args=()
+t36_python_path=""
+if [[ "$fused_gdn_decode_enabled" == 1 ]]; then
+  t36_opapi="$t36_root/qwen35_t36_transformer/op_api/lib/libcust_opapi.so"
+  t36_bridge="$t36_root/python/custom_ops/custom_ops_lib.cpython-312-aarch64-linux-gnu.so"
+  t36_package="$t36_root/cann-ops-transformer-qwen35_t36_linux-aarch64.run"
+  t36_wheel="$t36_root/custom_ops-1.0-cp312-cp312-linux_aarch64.whl"
+  t36_validation="$t36_root/validation-v1.json"
+  t36_bf16_validation="$t36_root/validation-bf16-state-v1.json"
+  t36_validation_script="$t36_root/validate_fused_gdn_decode.py"
+  [[ -f "$t36_opapi" && -f "$t36_bridge" && -f "$t36_package" && -f "$t36_wheel" && -f "$t36_validation" && -f "$t36_bf16_validation" && -f "$t36_validation_script" ]] || {
+    echo "T36 fused decode artifact is incomplete" >&2
+    exit 66
+  }
+  [[ "$(sha256sum "$t36_opapi" | awk '{print $1}')" == "$t36_opapi_sha256" ]] || { echo "T36 opapi SHA256 mismatch" >&2; exit 47; }
+  [[ "$(sha256sum "$t36_bridge" | awk '{print $1}')" == "$t36_bridge_sha256" ]] || { echo "T36 bridge SHA256 mismatch" >&2; exit 47; }
+  [[ "$(sha256sum "$t36_package" | awk '{print $1}')" == "$t36_package_sha256" ]] || { echo "T36 package SHA256 mismatch" >&2; exit 47; }
+  [[ "$(sha256sum "$t36_wheel" | awk '{print $1}')" == "$t36_wheel_sha256" ]] || { echo "T36 wheel SHA256 mismatch" >&2; exit 47; }
+  [[ "$(sha256sum "$t36_validation" | awk '{print $1}')" == "$t36_validation_sha256" ]] || { echo "T36 validation SHA256 mismatch" >&2; exit 47; }
+  [[ "$(sha256sum "$t36_bf16_validation" | awk '{print $1}')" == "$t36_bf16_validation_sha256" ]] || { echo "T36 BF16-state validation SHA256 mismatch" >&2; exit 47; }
+  [[ "$(sha256sum "$t36_validation_script" | awk '{print $1}')" == "$t36_validation_script_sha256" ]] || { echo "T36 validation script SHA256 mismatch" >&2; exit 47; }
+  image_ld_library_path="$(
+    docker image inspect "$image_ref" --format '{{range .Config.Env}}{{println .}}{{end}}' |
+      sed -n 's/^LD_LIBRARY_PATH=//p'
+  )"
+  t36_mount_args=(-v "$t36_root:$t36_container_root:ro")
+  t36_env_args=(
+    -e "ASCEND_CUSTOM_OPP_PATH=$t36_container_vendor"
+    -e "LD_LIBRARY_PATH=$t36_container_vendor/op_api/lib:${image_ld_library_path}"
+  )
+  t36_python_path="$t36_container_root/python:"
+fi
 [[ -f /cache/austinov/Qwen3.8-27B/config.json ]] || {
   echo "missing frozen Qwen3.5-27B model" >&2
   exit 66
@@ -389,6 +448,18 @@ git -C "$repo_root" rev-parse HEAD >"$OUTPUT_ROOT/repository-commit.txt"
   echo "bridge_sha256=$t21_bridge_sha256"
   echo "composition=upstream local fused MLP + zero-copy model-weight views + existing vLLM TP AllReduce"
 } >"$OUTPUT_ROOT/t21-runtime.txt"
+{
+  echo "enabled=$fused_gdn_decode_enabled"
+  echo "upstream_commit=d967eeb08ceef7c394d0d5e27767e5b08b77aa58"
+  echo "opapi_sha256=$t36_opapi_sha256"
+  echo "bridge_sha256=$t36_bridge_sha256"
+  echo "package_sha256=$t36_package_sha256"
+  echo "wheel_sha256=$t36_wheel_sha256"
+  echo "validation_sha256=$t36_validation_sha256"
+  echo "bf16_state_validation_sha256=$t36_bf16_validation_sha256"
+  echo "validation_script_sha256=$t36_validation_script_sha256"
+  echo "composition=pinned upstream FusedGdnDecode + exact Qwen3.5-27B TP4 fail-closed dispatch"
+} >"$OUTPUT_ROOT/t36-runtime.txt"
 docker ps --no-trunc >"$OUTPUT_ROOT/docker-ps.before.txt"
 printf '%s\n' "$npu_snapshot" >"$OUTPUT_ROOT/npu-smi.before.txt"
 ss -lntp >"$OUTPUT_ROOT/ports.before.txt"
@@ -399,7 +470,7 @@ additional_config="{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":true
 if [[ "$super_kernel_enabled" == 1 ]]; then
   additional_config="${additional_config%?},\"ascend_compilation_config\":{\"enable_npugraph_ex\":true,\"enable_static_kernel\":true}}"
 fi
-python_path="/opt/qwen35-t12-monkeypatch:${t21_python_path}/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:"
+python_path="/opt/qwen35-t12-monkeypatch:${t36_python_path}${t21_python_path}/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:"
 
 docker_args=(
   run -d --rm
@@ -431,6 +502,7 @@ docker_args=(
   -v "$patch_root":/opt/qwen35-t12-monkeypatch:ro
   "${operator_mount_args[@]}"
   "${t21_mount_args[@]}"
+  "${t36_mount_args[@]}"
   "${profile_mount_args[@]}"
   -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3
   -e HCCL_BUFFSIZE=512
@@ -457,12 +529,14 @@ docker_args=(
   -e QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE="$fused_prefill_metadata_reuse_enabled"
   -e QWEN35_ASCEND_DECODE_QKV_VIEW="$decode_qkv_view_enabled"
   -e QWEN35_ASCEND_GDN_CONV_PREPACK="$gdn_conv_prepack_enabled"
+  -e QWEN35_ASCEND_FUSED_GDN_DECODE="$fused_gdn_decode_enabled"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD="$mmar_prefill_threshold"
   -e VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS="$mmar_prefill_max_tokens"
   -e PYTHONPATH="$python_path"
   "${torch_log_env_args[@]}"
   "${operator_env_args[@]}"
   "${t21_env_args[@]}"
+  "${t36_env_args[@]}"
   "${profile_env_args[@]}"
 )
 serve_args=(
