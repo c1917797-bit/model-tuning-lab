@@ -79,6 +79,7 @@ if [[ "$stage" == quality ]]; then
  docker run --rm --network host --read-only --cap-drop ALL --security-opt no-new-privileges \
   --cpus 4 --memory 8g --tmpfs /tmp:rw,size=2g \
   -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 -e HF_DATASETS_OFFLINE=1 \
+  -e TORCH_DEVICE_BACKEND_AUTOLOAD=0 \
   -e HF_HOME=/tmp/hf -e PYTHONPATH=/cache/austinov/eval-tools/lm-evaluation-harness-v0.4.13 \
   -v /cache/austinov/eval-tools:/cache/austinov/eval-tools:ro \
   -v /cache/austinov/eval-data/general:/data:ro -v "$code:/code:ro" \

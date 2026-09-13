@@ -2,6 +2,18 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+20:34 correction: quality controller2336761 is TERMINAL, failed20:31:59 before
+model requests. CPU-only evaluator AutoTokenizer import auto-loaded torch_npu
+and failed backend initialization. Owned server was cleaned up. See XJ5TBA
+quality-canary.log; no quality scores exist from this attempt. Successor changes
+only CPU evaluator environment TORCH_DEVICE_BACKEND_AUTOLOAD=0. Actual
+NoThinkingCompletions/tokenizer/payload test passed in otherwise matching
+device-free network-disabled container (exec-0000000000000024). Do not apply
+this environment setting to the NPU server. A fresh live scoring retry is next.
+HumanEval prep commit1ed70b7 push encountered slow transfer then an HTTPS
+authentication failure; retain local checkpoint and retry without exposing
+credentials or disabling TLS. Earlier e34c878/01c28d3 are pushed.
+
 HumanEval generation preparation: run_switch_humaneval.py implements pinned
 v0.4.13 humaneval_instruct user prompt and assistant gen_prefix, native local
 no-thinking continuation, temperature0/seed1024/max1024, upstream stop strings
