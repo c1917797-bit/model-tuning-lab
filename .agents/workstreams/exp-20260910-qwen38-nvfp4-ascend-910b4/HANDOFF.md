@@ -2,6 +2,26 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+21:25 UTC eager diagnostic is TERMINAL (finished21:22:25); PID2665758 and
+owned container8ed2453c45d9 are gone. All36 requests executed, HTTP errors0.
+Greedy A9/12 empty,1 length; greedy B8/12 empty,0 length; official8/12 empty,
+0 length. Summary SHA2562bcddadee9fe8afd5e050b45a61dc21ac1fea7bafc6ec8dc538407c2a3a1de73
+under /cache/austinov/eval-runs/switch12h-qwen38-eager-20260913-wvQ790/probe.
+Eager did not fix business validity; diagnostic status passed is NOT acceptance.
+Read-only fixed-image source confirms non-spec decode calls the same Ascend
+custom recurrent op as spec decode; prefill uses chunk_gated_delta_rule and
+casts saved state to configured dtype. First-token EOS alone does not establish
+decode state precision as root cause. Do not blindly change state precision.
+Next bounded hypothesis: enabled MMAR path may affect outputs; compare the same
+sampling36 cases with graph mode and only MMAR disabled. Fifth argument of
+run_switch_probe.sh selects on(default)/off, setting both additional_config and
+environment consistently. Command: qwen38 <fresh-out> sampling graph off.
+Acceptance for further validation: no empty/error outputs and reproducible
+greedy repeats; truncations still require later natural-EOS canary. This is a
+diagnostic, not a new benchmark or proven fix. If empties remain, close this
+configuration-only hypothesis without full-matrix expansion. Preserve original
+image/weights; exact-owned-container cleanup only. Recheck resources before launch.
+
 LIVE at21:10 UTC: eager diagnostic PID2665758, PPID1; container
 8ed2453c45d9f9e4928bf0fe75163ad51bdd8030d2eb88364f6b8be65728b949;
 artifact /cache/austinov/eval-runs/switch12h-qwen38-eager-20260913-wvQ790.

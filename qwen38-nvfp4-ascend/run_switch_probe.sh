@@ -4,6 +4,11 @@ set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
 execution="${4:-graph}"
+case "${5:-on}" in
+ on) mmar=true; mmar_env=1;;
+ off) mmar=false; mmar_env=0;;
+ *) exit 64;;
+esac
 case "$execution" in
  graph) execution_args=(--compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,8,16,24,32]}');;
  eager) execution_args=(--enforce-eager);;
@@ -55,14 +60,14 @@ container_id="$(docker run -d --rm --network host --shm-size 16g --label model-t
  -v /etc/ascend_install.info:/etc/ascend_install.info:ro \
  -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 -e HCCL_BUFFSIZE=512 \
  -e OMP_NUM_THREADS=1 -e OMP_PROC_BIND=false -e TASK_QUEUE_ENABLE=1 \
- -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1 -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0 -e VLLM_LOGGING_LEVEL=INFO \
+ -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE="$mmar_env" -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0 -e VLLM_LOGGING_LEVEL=INFO \
  "$image" vllm serve /model --host 127.0.0.1 --port 10010 --served-model-name "$model" \
  --dtype bfloat16 --tensor-parallel-size 8 --data-parallel-size 1 --seed 1024 \
  --max-num-seqs 16 --max-model-len 40960 --max-num-batched-tokens 32768 \
  --trust-remote-code --gpu-memory-utilization 0.90 --enable-prefix-caching --enable-chunked-prefill \
  --disable-custom-all-reduce --async-scheduling "${extra[@]}" \
  "${execution_args[@]}" \
- --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}' \
+ --additional-config "{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":$mmar,\"enable_flashcomm1\":false}" \
  --default-chat-template-kwargs '{"enable_thinking":false}')"
 printf '%s\n' "$container_id" > "$out/container.id"
 docker logs --follow --timestamps "$container_id" > "$out/service.live.log" 2>&1 &
