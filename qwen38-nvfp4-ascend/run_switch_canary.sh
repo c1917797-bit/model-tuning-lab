@@ -15,6 +15,16 @@ case "$label" in
 esac
 [[ "$out" == /cache/austinov/eval-runs/switch12h-* ]] || exit 64
 [[ -d "$out" && ! -e "$out/status.json" ]] || exit 65
+gpu_memory_utilization=0.90
+max_batched_tokens=32768
+if [[ "$stage" == quality || "$stage" == quality-full ]]; then
+ # Prompt-logprob scoring materializes FP32 vocabulary probabilities. Reserve
+ # workspace and bound prefill chunks; use the SAME quality profile for both models.
+ gpu_memory_utilization=0.75
+ max_batched_tokens=2048
+fi
+printf '{"gpu_memory_utilization":%s,"max_num_batched_tokens":%s,"stage":"%s"}\n' \
+ "$gpu_memory_utilization" "$max_batched_tokens" "$stage" > "$out/server-profile.json"
 code="$(cd "$(dirname "$0")" && pwd)"
 image=quay.io/ascend/vllm-ascend@sha256:471744200c5d0c768c1f6c6a6816dcae0fd551de2487d4d129b6fb750024ce6a
 container_id=''
@@ -66,8 +76,8 @@ container_id="$(docker run -d --rm --network host --shm-size 16g --label model-t
  -e VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1 -e VLLM_ASCEND_ENABLE_FLASHCOMM1=0 -e VLLM_LOGGING_LEVEL=INFO \
  "$image" vllm serve /model --host 127.0.0.1 --port 10010 --served-model-name "$model" \
  --dtype bfloat16 --tensor-parallel-size 8 --data-parallel-size 1 --seed 1024 \
- --max-num-seqs 16 --max-model-len 40960 --max-num-batched-tokens 32768 \
- --trust-remote-code --gpu-memory-utilization 0.90 --enable-prefix-caching --enable-chunked-prefill \
+ --max-num-seqs 16 --max-model-len 40960 --max-num-batched-tokens "$max_batched_tokens" \
+ --trust-remote-code --gpu-memory-utilization "$gpu_memory_utilization" --enable-prefix-caching --enable-chunked-prefill \
  --disable-custom-all-reduce --async-scheduling "${extra[@]}" \
  --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,8,16,24,32]}' \
  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}' \
@@ -103,11 +113,20 @@ if [[ "$stage" == quality || "$stage" == quality-full ]]; then
   /code/run_standard_text_quality.py --harness /cache/austinov/eval-tools/lm-evaluation-harness-v0.4.13 \
   --data-root /data --tokenizer /tokenizer --model "$model" \
   --base-url http://127.0.0.1:10010/v1/completions --output "/output/$result_name" \
-  "$@" > "$out/$result_name.log" 2>&1
+  "$@" > "$out/$result_name.log" 2>&1 &
+ local evaluator_pid=$!
+ while kill -0 "$evaluator_pid" 2>/dev/null; do
+  if [[ "$(docker inspect -f '{{.State.Running}}' "$container_id" 2>/dev/null)" != true ]]; then
+   echo 'Owned model service terminated; aborting invalid scoring attempt' >> "$out/$result_name.log"
+   return 70
+  fi
+  sleep 5
+ done
+ wait "$evaluator_pid"
  }
  concurrency=1
  [[ "$stage" != quality-full ]] || concurrency=8
- run_text_eval quality-canary --tasks mmlu_abstract_algebra gsm8k --limit 2 --concurrency "$concurrency"
+ run_text_eval quality-canary --tasks mmlu_abstract_algebra mmlu_professional_law gsm8k --limit 2 --concurrency "$concurrency"
  if [[ "$stage" == quality-full ]]; then
   status quality_full running
   run_text_eval quality-full --tasks mmlu gsm8k --concurrency 8

@@ -1,5 +1,25 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## 23:24 UTC full MMLU failure — proven NPU prompt-logprob OOM
+
+Second attempt pJYHxH reached full56168 requests then NPU worker failed in
+sampler.compute_logprobs -> logits.log_softmax(dtype=float32): allocation2.84GiB,
+only2.40GiB free on NPU0 (similar NPU5); active25.79GiB. Scheduler dump has
+3220-token prompts and two3072-token prefill chunks. Docker process exit0 did
+NOT mean successful evaluation. Full service.live.log SHA256
+c1fe1d6f761ad37c95dc1d4fc4f65db9a5449099b33bc706bb13fd7b6625e655.
+Systemd controller survived, disproving controller-loss as sufficient cause
+of this second failure. First attempt cause cannot be proven retrospectively.
+Stopped exact failed unit r2 and CPUca02cc7a45fa after preserving inspect/logs;
+MainPID0/failed, only unrelated bash container remains. No full scores.
+Fix now prepared: QUALITY ONLY gpu_memory_utilization0.75 and maxbatched2048,
+same on both models, recorded server-profile.json. Performance retains0.90/
+32768; do not pool quality service timing with performance results. Dataset,
+BF16/five-shot/seed/length/scoring unchanged. Canary adds professional_law2
+alongside abstract_algebra2/GSM8K2 before full run. Server-death polling now
+aborts invalid scoring rather than allowing endless connection retries.
+Syntax, comparator regression, MST checks pass; NPU OOM fix not yet proven.
+
 ## Standard text comparison preparation / live23:15 UTC
 
 Recovery unit3572690 remains active; 8worker gate passed, small canary actual
