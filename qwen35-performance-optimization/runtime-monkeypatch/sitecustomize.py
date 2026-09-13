@@ -212,15 +212,13 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
                     requires_grad=False,
                 ),
             )
-            original_process_weights = (
-                self.conv1d.quant_method.process_weights_after_loading
-            )
+            original_weight_loader = self.conv1d.weight.weight_loader
 
-            @functools.wraps(original_process_weights)
-            def process_weights_and_pack(*pack_args, **pack_kwargs):
+            @functools.wraps(original_weight_loader)
+            def weight_loader_and_pack(*pack_args, **pack_kwargs):
                 from vllm.model_executor.utils import replace_parameter
 
-                result = original_process_weights(*pack_args, **pack_kwargs)
+                result = original_weight_loader(*pack_args, **pack_kwargs)
                 _pack_qwen35_gdn_conv_weight(self, replace_parameter)
                 if not getattr(
                     module, "_qwen35_conv_prepack_notice_emitted", False
@@ -232,9 +230,11 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
                     )
                 return result
 
-            self.conv1d.quant_method.process_weights_after_loading = (
-                process_weights_and_pack
-            )
+            # vLLM 0.23 performs strict checkpoint tracking before the newer
+            # upstream process_weights_after_loading lifecycle.  Qwen BF16 has
+            # no post-load quant transform, so materialize the exact upstream
+            # KDA layout immediately after its checkpoint weight loader.
+            self.conv1d.weight.weight_loader = weight_loader_and_pack
         if not projection_enabled:
             return
         if not eligible:
@@ -345,8 +345,27 @@ def _patch_qwen35_model(module: ModuleType) -> None:
         ]
     loaded_params: set[str] = set()
 """
-    cls.load_weights = _replace_function_block(
-        cls.load_weights, old, new, "Qwen3_5Model.load_weights"
+    loaded_old = """            loaded_params.add(name)
+        return loaded_params
+"""
+    loaded_new = """            loaded_params.add(name)
+        # This runtime-derived parameter is materialized by the wrapped
+        # conv1d checkpoint loader and therefore is initialized, even though
+        # it has no independent checkpoint tensor.
+        loaded_params.update(
+            name
+            for name in params_dict
+            if name.endswith("._qwen35_ascend_conv1d_weight")
+        )
+        return loaded_params
+"""
+    cls.load_weights = _replace_function_blocks(
+        cls.load_weights,
+        (
+            ("projection_mapping", old, new),
+            ("conv_prepack_tracking", loaded_old, loaded_new),
+        ),
+        "Qwen3_5Model.load_weights",
     )
     cls._qwen35_projection_weight_loader_monkeypatched = True
     _notice("patched Qwen3.5 six-way fused projection weight mapping")

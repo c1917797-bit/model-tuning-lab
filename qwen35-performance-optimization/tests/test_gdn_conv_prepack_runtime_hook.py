@@ -61,7 +61,8 @@ assert replace_calls == [
 
 source = path.read_text(encoding="utf-8")
 assert "QWEN35_ASCEND_GDN_CONV_PREPACK" in source
-assert "process_weights_after_loading" in source
+assert "weight_loader_and_pack" in source
+assert "strict checkpoint tracking" in source
 assert "self._qwen35_ascend_conv1d_weight.transpose(0, 1)" in source
 assert "from vllm.model_executor.utils import replace_parameter" in source
 assert "upstream-derived Qwen GDN conv" in source
