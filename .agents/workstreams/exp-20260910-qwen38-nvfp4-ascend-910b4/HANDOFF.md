@@ -2,6 +2,17 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LIVE21:49 UTC cache-off diagnostic: PID2997867 PPID1, container
+bbf30a6eee39d35c709ea63e5d474151c234ffc8f6244cf97d526b8e116ab812,
+artifact /cache/austinov/eval-runs/switch12h-qwen38-cacheoff-20260913-T4RYhJ.
+Started21:48:28 from pushed e6a13ba, command sampling graph on off. Currently
+startup, no diagnostic results yet. Follow exact process/container, do not
+duplicate. Fresh gate:8NPUs empty, no physical holders, portfree,
+MemAvailable84252136kB, cooperative lease obtainable, sole unrelated running
+Maxon4ick container bash/shared-manager only and untouched. Prompt audit JSON
+SHA2560deb89459860a2010d1ba42ba45ec8910016f9864cb9e13e0c565037093b5278.
+Transient Git push timeout recovered on retry; no TLS/security changes.
+
 Offline prompt identity audit PASSED108 cases from graph/recipe, eager and
 MMAR-off runs: native HF template input_ids == actual response.prompt_token_ids
 for every case, usage counts match, same messages never changed token sequences.
