@@ -1,5 +1,16 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## LIVE23:30 UTC — bounded logprob workspace attempt
+
+Unit mtl-q38-quality-20260913-r3.service active, MainPID3774324.
+Artifact /cache/austinov/eval-runs/switch12h-qwen38-quality-workspace-20260913-hlBZAo
+Container1adbdddbad6eeea8e3a01c0201ec0611a57e5ecb06c264890f98b818bc61cc4c.
+Startup23:30:20UTC from0cdb1fb; profile file confirms0.75/2048. Full quality
+pipeline, no performance claims from this service. Await6-item canary and
+actual full scoring before declaring the OOM mitigation verified. Freshgate:
+8empty/noholders, portfree, leaseobtained, MemAvailable84190480KiB, external
+manager-only bash container unchanged. Old r2 is terminal, do not resume it.
+
 ## 23:24 UTC full MMLU failure — proven NPU prompt-logprob OOM
 
 Second attempt pJYHxH reached full56168 requests then NPU worker failed in
