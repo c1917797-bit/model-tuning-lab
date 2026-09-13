@@ -43,6 +43,30 @@
     "decision": "reject before the full matrix: after an isolated 32-request warmup on the same live service, both c1 performance gates failed",
     "rationale": "the historical large TTFT result compared a cold control; current warm evidence shows bounded prefill MMAR does not provide the required steady-state improvement"
   },
+  "candidate_decode_qkv_view": {
+    "status": "rejected_after_warm_same_service_c1_failfast",
+    "enabled_by": "QWEN35_ASCEND_DECODE_QKV_VIEW=1",
+    "upstream_basis_commit": "2bb515688d1ff21def27c7246f3b433a9f1e42ff",
+    "project_delta": "extend upstream mixed-batch rearrange reuse to contiguous zero-copy packed M=1 decode QKV views with fail-closed non-M1 fallback",
+    "service_artifact_root": "/cache/austinov/qwen35-fused-prefill-decode-view-service-20260913-v1",
+    "activation_report_sha256": "d5a254803e4a3b53c0ce3a71079ae7ffe778d685fa7633474c4769761e44c1a7",
+    "smoke_artifact_sha256": "d96944a938782f60fc21627c779a12b1236a01b07ee486b339d386270353e569",
+    "warmup_artifact_sha256": "611aeeb2cb93d587a524bb3128098bc1ae86eb3ac7cb74aaab4217d30f093259",
+    "failfast_artifact_sha256": "97ce877b827296d5e63dba23eb75ecb9b55736f8baac827b19c553089de34aec",
+    "failfast_c1_32": {
+      "completed": 32,
+      "errors": 0,
+      "natural_eos": true,
+      "ttft_p95_ms": 609.652,
+      "tpot_p95_ms": 29.53,
+      "ttft_required_max_ms": 672.858,
+      "tpot_required_max_ms": 26.018,
+      "ttft_reduction_vs_fresh_control_fraction": 0.27515,
+      "tpot_reduction_vs_fresh_control_fraction": -0.02147
+    },
+    "decision": "reject before c5/c8/c16: TTFT passed but TPOT regressed and failed the current acceptance gate",
+    "rollback": "set QWEN35_ASCEND_DECODE_QKV_VIEW=0 and restart"
+  },
   "candidate_t21_dense_mlp": {
     "status": "rejected_after_tp4_service_failfast",
     "enabled_by": "QWEN35_ASCEND_T21_DENSE_MLP=1",
@@ -209,13 +233,13 @@
   "sitecustomize_sha256": "2f9447e1d47b1f815b0fc2fb5863924ff28b7e1cf31bef73de00403eb7517ede",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "fused_prefill_ttft_component_retained_decode_qkv_view_candidate_admitted_to_live_test",
+  "status": "fused_prefill_ttft_component_retained_decode_qkv_view_rejected_search_active",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
     "six-way fused checkpoint weight mapping",
     "Ascend GDN fused projection forward path",
-    "opt-in zero-copy M=1 decode QKV views extending upstream rearrange reuse",
+    "opt-in zero-copy M=1 decode QKV views extending upstream rearrange reuse (rejected after warm c1 TPOT fail-fast)",
     "linear-attention gate/up weight prefetch",
     "Gemma RMSNorm prefetch postprocess",
     "opt-in bounded prefill-only MMAR decomposition for candidate-prefill (rejected after warm c1 fail-fast)",

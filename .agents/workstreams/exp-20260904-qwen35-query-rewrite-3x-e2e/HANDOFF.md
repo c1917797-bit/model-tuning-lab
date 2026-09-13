@@ -4995,3 +4995,29 @@ This supersedes the old privileged-container admission rule and the old
   qwen35-performance-optimization shell contracts, runtime projection tests,
   py_compile, validate-mst, JSON parsing, and diff checks passed. The remaining
   pytest-style feature-gate test passed 4/4 in the read-only official image.
+
+## 2026-09-13 T33 zero-copy decode QKV live rejection
+
+- Implemented an opt-in pure M=1 zero-copy Q/K/V view path derived from
+  upstream vLLM-Ascend commit `2bb515688`; non-M1 shapes fall back to the
+  official implementation. Local implementation commit: `9e571e5`.
+- Static value/shape/contiguity/storage-alias and fallback tests passed in the
+  official image. Live activation passed on physical NPU0-3 with the unchanged
+  official v0.23.0 image, one read-only monkeypatch mount, no source overlay,
+  no custom OPP, no MTP/speculation, and four proven TP worker bindings.
+- Evidence root:
+  `/cache/austinov/qwen35-fused-prefill-decode-view-service-20260913-v1`.
+  Smoke, separate 32-request warmup, and formal c1/32 all completed with zero
+  request errors and natural EOS.
+- Formal c1 TTFT P95 was 609.652 ms versus fresh-control 841.073 ms, a 27.515%
+  reduction and a pass. TPOT P95 was 29.530 ms versus 28.909 ms, a 2.147%
+  regression and a fail against the required 26.018 ms maximum.
+- Decision: reject before c5/c8/c16. Do not rerun or compose this exact M=1
+  view path unchanged. Retain T32 fused prefill only as the TTFT component and
+  continue with a profile-grounded decode candidate that can close at least
+  the remaining 2.258 ms/token gap.
+- The activation wrapper initially rejected the new variant because its CLI
+  enum lagged the internal checker enum. The partial capture was preserved in
+  `activation-failed-cli-enum`, the enum was fixed, and a fresh capture passed.
+- The shutdown-only `EngineDeadError` follows explicit SIGTERM after the
+  completed formal run; it is teardown noise, not a request failure.

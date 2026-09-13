@@ -94,7 +94,10 @@ Do not mechanically carry forward rejections that depended only on the old
 1. Keep the fresh v14 control matrix as the only current acceptance reference.
 2. Keep bounded-prefill MMAR rejected: its warm c1 fail-fast missed both current
    gates. Do not rerun it unchanged or use its historical cold-control result.
-3. Continue the post-v0.23 upstream audit for a Qwen3.5/910B decode-path change.
+3. Keep the zero-copy M=1 QKV view candidate rejected: it retained a 27.515%
+   TTFT reduction but regressed TPOT by 2.147% after a separate same-service
+   warmup. Do not rerun or compose this exact implementation unchanged.
+4. Continue the post-v0.23 upstream audit for a Qwen3.5/910B decode-path change.
    The next candidate must contain an upstream-derived base plus a measurable
    project-specific delta. Only a passing c1 fail-fast result may enter
    c1/c5/c8/c16 x3 and the full paired quality gate.

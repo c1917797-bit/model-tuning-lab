@@ -415,6 +415,7 @@ def parse_args() -> argparse.Namespace:
             "candidate-prefill-no-prefetch",
             "candidate-super-kernel",
             "candidate-fused-prefill",
+            "candidate-fused-prefill-decode-view",
             "control",
         ),
         default="candidate",

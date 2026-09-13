@@ -5,6 +5,7 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 runner="$root/qwen35-performance-optimization/scripts/run_qwen35_gdn_runtime_t12_npu03.sh"
 starter="$root/qwen35-performance-optimization/scripts/start_qwen35_gdn_runtime_t12_supervised.sh"
 capture="$root/qwen35-performance-optimization/scripts/capture_qwen35_gdn_t12_activation.sh"
+checker="$root/qwen35-performance-optimization/scripts/check_qwen35_gdn_t12_activation.py"
 [[ -x "$runner" || -f "$runner" ]]
 [[ -x "$starter" || -f "$starter" ]]
 
@@ -79,6 +80,7 @@ grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS="$qwen35_diagnostics"' "$runner"
 grep -Fq 'QWEN35_ASCEND_DIAGNOSTICS_INTERVAL="$qwen35_diagnostics_interval"' "$runner"
 grep -Fq 'qwen35_gdn_runtime_t12_${variant}_npu03' "$capture"
 grep -Fq 'candidate-fused-prefill|candidate-fused-prefill-decode-view|control)' "$capture"
+python3 "$checker" --help | grep -Fq 'candidate-fused-prefill-decode-view'
 grep -Fq 'docker logs "$container_name"' "$capture"
 grep -Fq -- '--log "$OUTPUT_ROOT/container-logs.live.txt"' "$capture"
 grep -Fq 'nohup setsid "$launcher"' "$starter"

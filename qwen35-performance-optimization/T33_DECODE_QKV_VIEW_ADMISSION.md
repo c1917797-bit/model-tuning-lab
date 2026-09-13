@@ -49,3 +49,34 @@ uses the unchanged official vLLM-Ascend v0.23.0 image.
 
 Failure at any live gate retires this exact implementation; threshold rounding
 or an unchanged rerun is not allowed.
+
+## Live result
+
+Rejected after the warmed same-service c1/32 fail-fast on 2026-09-13.
+
+- Artifact root: `/cache/austinov/qwen35-fused-prefill-decode-view-service-20260913-v1`.
+- Activation passed on the unchanged official image with one read-only
+  monkeypatch mount, physical NPU0-3 only, no source overlay, no custom OPP,
+  and all four TP worker bindings proven.
+- One real smoke request completed with zero errors and natural EOS.
+- The separate warmup completed 32/32 with zero errors and natural EOS.
+- The formal cell completed 32/32 with zero errors and natural EOS.
+- Formal TTFT P95 was `609.652 ms`, a `27.515%` reduction from the fresh
+  control median `841.073 ms`; this passes the `672.858 ms` gate.
+- Formal TPOT P95 was `29.530 ms`, a `2.147%` regression from the fresh
+  control median `28.909 ms`; this fails the `26.018 ms` gate.
+
+The zero-copy M=1 view changed storage preparation but did not remove enough
+of the measured decode critical path. Do not rerun this exact implementation
+unchanged and do not compose it into the retained T32 prefill component.
+
+Evidence SHA256 values:
+
+- activation: `d5a254803e4a3b53c0ce3a71079ae7ffe778d685fa7633474c4769761e44c1a7`
+- smoke: `d96944a938782f60fc21627c779a12b1236a01b07ee486b339d386270353e569`
+- warmup: `611aeeb2cb93d587a524bb3128098bc1ae86eb3ac7cb74aaab4217d30f093259`
+- formal c1: `97ce877b827296d5e63dba23eb75ecb9b55736f8baac827b19c553089de34aec`
+
+The `EngineDeadError` at the end of `service.log` follows the explicit
+SIGTERM shutdown sequence after all formal requests completed; it is teardown
+noise, not a benchmark request failure.
