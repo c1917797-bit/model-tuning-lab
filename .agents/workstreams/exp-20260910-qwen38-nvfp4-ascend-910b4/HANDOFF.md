@@ -2,6 +2,16 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LIVE21:29 UTC: MMAR-off graph diagnostic started21:28:53, PID2841060 PPID1,
+container8d8155054e910c8c531fd60197b53e412b7cd479c52f471f49b5a8b4de15feac,
+artifact /cache/austinov/eval-runs/switch12h-qwen38-mmaroff-20260913-oMQll2.
+Code checkpoint942925f pushed. Exact command run_switch_probe.sh qwen38
+<artifact> sampling graph off. Startup logs confirm Ascend platform activated;
+health and MMAR-off config activation still need confirmation. Follow this job,
+do not duplicate. Fresh gate: eight NPUs empty, no physical-device holders,
+port10010 free, MemAvailable84251536kB, cooperative lease obtainable; sole
+external running container Maxon4ick only bash/shared manager devices, untouched.
+
 21:25 UTC eager diagnostic is TERMINAL (finished21:22:25); PID2665758 and
 owned container8ed2453c45d9 are gone. All36 requests executed, HTTP errors0.
 Greedy A9/12 empty,1 length; greedy B8/12 empty,0 length; official8/12 empty,
