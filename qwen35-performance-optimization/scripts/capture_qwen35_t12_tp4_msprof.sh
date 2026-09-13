@@ -19,8 +19,8 @@ flush_timeout="${PROFILE_FLUSH_TIMEOUT_SECONDS:-600}"
 expected_image_id="sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 
 case "$expected_variant" in
-  control|candidate) ;;
-  *) echo "EXPECTED_VARIANT must be control or candidate" >&2; exit 64 ;;
+  control|candidate|candidate-fused-prefill) ;;
+  *) echo "EXPECTED_VARIANT must be control, candidate, or candidate-fused-prefill" >&2; exit 64 ;;
 esac
 for path in "$expected_output_root" "$profile_dir" "$artifact_dir"; do
   case "$path" in
@@ -103,6 +103,20 @@ if expected_variant == "control":
     }
     if any(labels.get(key) != value for key, value in expected_operator_labels.items()):
         raise SystemExit("control unexpectedly mounts a custom operator")
+elif expected_variant == "candidate-fused-prefill":
+    required_env = {
+        "QWEN35_ASCEND_MONKEYPATCH=1",
+        "QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL=1",
+    }
+    if not required_env.issubset(env):
+        raise SystemExit("fused-prefill candidate activation mismatch")
+    expected_operator_labels = {
+        "com.c1917797.qwen35-operator-feature": "disabled",
+        "com.c1917797.qwen35-operator-commit": "official-stock",
+        "com.c1917797.qwen35-operator-package-sha256": "not-applicable",
+    }
+    if any(labels.get(key) != value for key, value in expected_operator_labels.items()):
+        raise SystemExit("fused-prefill candidate unexpectedly mounts a custom operator")
 PY
 
 curl --fail --silent --max-time 5 "$base_url/health" >/dev/null || {
