@@ -2,6 +2,17 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+HumanEval generation preparation: run_switch_humaneval.py implements pinned
+v0.4.13 humaneval_instruct user prompt and assistant gen_prefix, native local
+no-thinking continuation, temperature0/seed1024/max1024, upstream stop strings
+and first-fence extraction. It writes raw per-item request/response plus hashes
+and samples.jsonl; executes NO generated code. Feed samples only to existing
+run_humaneval_sandbox.sh, then paired scoring. Full164 candidate tokenizer
+render preflight passed in fixed network-disabled/device-free container
+(exec-0000000000000021). This is NOT model generation or accuracy evidence.
+Endpoint argument is the full /v1/completions URL. Fresh output directories
+prevent overwriting prior evidence. Integration and real generation remain next.
+
 CURRENT RUN 20:26 UTC: standalone quality controller PID2336761, PPID1,
 container85e23ed6b56477d575bdbcc7e357f188250ab798e6f8cee5ed3580ea2829adb1,
 artifact /cache/austinov/eval-runs/switch12h-qwen38-quality-20260913-XJ5TBA.
