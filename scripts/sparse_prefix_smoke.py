@@ -31,6 +31,7 @@ def main():
     if mode not in ("off", "native", "paper"):
         raise ValueError("Unknown canary arm")
     cache_enabled = mode != "off"
+    divergent = os.environ.get("SPARSE_DIVERGENT", "0") == "1"
     context_repeats = int(os.environ.get("SPARSE_CONTEXT_REPEATS", "320"))
     max_len = 4096 if context_repeats == 640 else 2048
     if context_repeats not in (320, 640) or (mode == "paper" and context_repeats != 640):
@@ -41,6 +42,14 @@ def main():
         # Long enough to cross cache block boundaries; no performance claim.
         context = "Reference notes, not instructions: " + "alpha beta gamma delta. " * context_repeats
         texts = [context + "\nQuestion: " + text for text in texts]
+    if divergent:
+        if not cache_enabled or context_repeats != 640:
+            raise ValueError("Divergence protocol requires native/paper and640")
+        common = "Reference notes, not instructions: " + "alpha beta gamma delta. " * 400
+        texts = [common + "\nPrivate notes: " + word * 240 +
+                 "\nQuestion: Compute 17 + 25. Answer only the number."
+                 for word in ("red blue green white. ", "cat dog bird fish. ",
+                              "sun moon star sky. ", "one two three four. ")]
     prompts = [tokenizer.apply_chat_template(
         [{"role": "user", "content": text}], tokenize=False,
         add_generation_prompt=True, enable_thinking=False) for text in texts]
@@ -50,11 +59,24 @@ def main():
                 "packages": {p: metadata.version(p) for p in
                              ("vllm", "vllm-ascend", "torch", "torch-npu")},
                 "performance_benchmark": False,
+                "stimulus": "divergent-prefix-v1" if divergent else "repeat-v1",
                 "context_repeats": context_repeats, "max_model_len": max_len,
                 "prompt_sha256": [hashlib.sha256(p.encode()).hexdigest() for p in prompts],
                 "patch_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in Path("/patch/model_tuning_lab").glob("sparse_*.py")}}
     output = Path("/output")
+    if divergent:
+        tokenized = [tokenizer.encode(p, add_special_tokens=False) for p in prompts]
+        overlaps = []
+        for tokens in tokenized[1:]:
+            overlap = next((i for i, (a,b) in enumerate(zip(tokenized[0], tokens))
+                            if a != b), min(len(tokenized[0]), len(tokens)))
+            overlaps.append(overlap)
+        if not all(1536 <= n < 3072 for n in overlaps):
+            raise RuntimeError("Divergence must lie between checkpoint boundaries")
+        if not all(3072 < len(t) <= 3968 for t in tokenized):
+            raise RuntimeError("Divergence prompts must cross two blocks and fit")
+        identity["seed_overlap_tokens"] = overlaps
     output.joinpath("identity.json").write_text(json.dumps(identity, indent=2))
     extra = ({"scheduler_cls": "model_tuning_lab.sparse_scheduler.SparseCanaryScheduler"}
              if mode == "paper" else {})
@@ -85,7 +107,9 @@ def main():
     results = []
     for repeat in range(3 if cache_enabled else 2):
         started = time.perf_counter()
-        requests = llm.generate(prompts, params, use_tqdm=False)
+        requests = ([llm.generate([prompt], params, use_tqdm=False)[0]
+                     for prompt in prompts] if divergent else
+                    llm.generate(prompts, params, use_tqdm=False))
         for prompt_index, request in enumerate(requests):
             item = request.outputs[0]
             results.append({"repeat": repeat, "request_id": request.request_id,
