@@ -1,0 +1,71 @@
+schema: mst-practice-iteration/v1
+id: drrqr-value-head-rank1-oracle-cv-v1
+repository: model-tuning-lab
+status: active
+date: 2026-09-13
+validated_commit: pending
+
+stage_goal: Decide whether one shared Dv128 latent state per key head has enough representation capacity to preserve energy-Dk64 downstream output before designing altered value-head dynamics.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 remains at 141.564496153 output tok/s or +4.752041 percent against frozen dense 135.142469917 tok/s. The Nv16 select-one scalar merge had a crossing cost ceiling but failed all 18 layer-fold fidelity comparisons.
+  medium_term_milestone: Find or reject a materially different Nv16 recurrent-state representation rather than adding freedom to head selection and output scalars.
+  short_term_decision: Fit one orthogonal rank-1 direction across each three-head energy-Dk64 operator-state group on each fold's fit rows, then evaluate the locked representation with original per-head gates, RMS and exact checkpoint output projection.
+  deciding_evidence: Three predeclared cross-validation folds on reused calibration indices 0-11, six representative layers, exact checkpoint output projection, and the frozen Nv16 cost ledger.
+  budget_or_stop_rule: One rank-1 oracle implementation and one three-fold CPU screen. No early-dynamics implementation, arbitrary coordinate map, gradient, task label, fresh capture, NPU, service, endpoint or accuracy work.
+  on_pass: Audit whether a pre-convolution/projection Nv16 dynamics fold can be defined without retaining dense value-source work. Do not run NPU.
+  on_failure: Reject the grouped rank-1 value-state representation and close nearby static rank-1 head-axis mixtures.
+  on_inconclusive: Repair only a concrete equation, identity or implementation defect and rerun once into a new immutable artifact.
+
+oracle_contract:
+  latent: One Dv128 vector from the top fit-only orthogonal direction across each group of three energy-Dk64 operator outputs.
+  generous_fidelity: Preserve all three original Z gates and RMS applications, expand the latent back to all three heads, and use the exact checkpoint output projection.
+  limitation: The oracle derives its latent from all three already-computed operator outputs and therefore is not an implementable or performance-bearing Nv16 recurrence.
+  interpretation: Failure rejects a necessary representation-capacity condition. Passing admits only an early-dynamics foldability audit.
+  paper_exact_strong_rrqr: false
+
+cost_contract:
+  full_nv16_optimistic_output_tps_ceiling: 152.69497833988802
+  open_tpot_gap_ms: 3.181664712
+  generous_post_value_source_credit_ms: 2.6459493333333335
+  post_value_source_route_crosses_gap: false
+  consequence: An eventual candidate must compress value projection, convolution or gate dynamics before their nonlinear boundary; a post-source state merge alone cannot meet the target.
+
+predeclared_gates:
+  dense_formula_relative_l2_at_most: 0.01
+  aggregate_projected_error_ratio_at_most: 1.10
+  worst_fold_projected_error_ratio_at_most: 1.20
+  aggregate_feature_error_ratio_at_most: 1.10
+  layer_fold_ratio_at_most_1_10_fraction_at_least: 0.75
+  worst_layer_fold_projected_error_ratio_at_most: 1.50
+
+evidence_protocol:
+  reused_corpus_claim: Representation-capacity screen only; passing does not admit NPU.
+  folds:
+    - {fit: [1, 2, 4, 5, 7, 8, 10, 11], validation: [0, 3, 6, 9]}
+    - {fit: [0, 2, 3, 5, 6, 8, 9, 11], validation: [1, 4, 7, 10]}
+    - {fit: [0, 1, 3, 4, 6, 7, 9, 10], validation: [2, 5, 8, 11]}
+  lock_rule: Publish each fold's six-layer unit directions before loading that fold's validation rows.
+
+result:
+  outcome: pending
+  analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_value_head_rank1_oracle_cv.py
+  output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-rank1-oracle-cv-v1/report.json
+  claim_ceiling: Reused-corpus CPU rank-1 representation oracle only.
+
+validation_commands:
+  - parse analyzer with Python AST without bytecode
+  - synthetic rank-1 identity, orthogonality and lock checks in the pinned container
+  - run the analyzer once into a fresh immutable output directory
+  - verify fold-lock and report hashes
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: A select-one scalar merge is not the same representation as the best static rank-1 mixture across the three recurrent outputs; test the stronger necessary condition once.
+    destination: oracle contract
+    severity: high
+  - lesson: Even an ideal post-value-source merge has only 2.645949 ms/token optimistic credit versus the 3.181665 ms/token gap, so passing cannot skip the early-dynamics foldability problem.
+    destination: cost contract
+    severity: high
