@@ -2,6 +2,17 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LIVE22:13 UTC Qwen3-32B original-data performance repetition1: PID3208813 PPID1,
+container a19dae4cfa516ecca08ef78ebd0de82ef9fb593bc7c81c5676ad6e984115b0cb,
+artifact /cache/austinov/eval-runs/switch12h-qwen3-performance-r1-20260913-iRDuy1.
+Started22:12:53 from pushed5c979c4; run_switch_canary.sh qwen3 <out> performance1.
+Currently startup, will run fresh32 canary then357 each at1/16/5/8. Follow exact
+job; do not launch any other NPU service. Resource gate immediately preceding:
+8empty,noholders,portfree,MemAvailable84213256kB,lease obtainable, unrelated
+Maxon4ick bash-only container untouched. Original-input model comparison and
+full quality still incomplete. Awaiting user's input-policy response; unchanged
+original control work can proceed without assuming normalization approval.
+
 22:11 history diagnostic TERMINAL (finished22:10:38), PID3106750 and own
 container085fd3f032d3 gone. Original12:8empty,1length; drop-empty-assistant12:
 0empty,3length; HTTP errors0 both. Summary SHA256
