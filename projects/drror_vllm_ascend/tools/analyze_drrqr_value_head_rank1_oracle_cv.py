@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Cross-validate a generous rank-1 value-state representation oracle.
+"""Cross-validate a generous rank-1 or rank-2 value-state oracle.
 
 For each global key head, the three energy-Dk64 value-head operator outputs are
-projected onto one fit-locked orthogonal head-axis direction.  Validation still
-uses the original three Z gates, RMS weight and output-projection blocks.  This
-is deliberately more expressive than an implementable Nv16 path: failure
-rejects the representation before dynamics/operator work, while success admits
-only an early-dynamics foldability audit.
+projected onto fit-locked orthogonal head-axis directions. Validation still
+uses the original three Z gates, RMS weight and output-projection blocks. This
+is deliberately more expressive than an implementable reduced-Nv path.
 """
 
 import argparse
@@ -23,7 +21,7 @@ from pathlib import Path
 import torch
 
 
-SCHEMA = "drrqr-value-head-rank1-oracle-cv/v1"
+SCHEMA_PREFIX = "drrqr-value-head-rank"
 BASE_SHA256 = "8d56fbe4fa992acd2384cd736045c1c28d2914e8d23f8e720e6f5c71833725c8"
 MERGE_REPORT_SHA256 = "d61cd9619f95a2e83fc5a51027974ae9720b81fe24ac9f7a3da6846456b49c10"
 OPEN_TPOT_GAP_MS = 3.181664712
@@ -109,7 +107,8 @@ def canonical_direction(vector):
     return vector
 
 
-def fit_layer(bundle):
+def fit_layer(bundle, latent_heads=1):
+    require(latent_heads in (1, 2), "rank-1 or rank-2 latent geometry")
     groups = []
     operator = bundle["baseline_operator"]
     require(
@@ -128,30 +127,51 @@ def fit_layer(bundle):
         )
         gram = torch.mm(samples.t(), samples)
         eigenvalues, eigenvectors = torch.linalg.eigh(gram)
-        direction = canonical_direction(eigenvectors[:, -1])
+        directions = [
+            canonical_direction(eigenvectors[:, index])
+            for index in range(
+                HEADS_PER_GROUP - 1,
+                HEADS_PER_GROUP - latent_heads - 1,
+                -1,
+            )
+        ]
+        basis = torch.stack(directions, dim=1)
         total = float(eigenvalues.clamp_min(0).sum())
-        retained = float(eigenvalues[-1].clamp_min(0))
+        retained = float(eigenvalues[-latent_heads:].clamp_min(0).sum())
         groups.append(
             {
                 "group": group,
-                "direction": [float(value) for value in direction],
+                "basis": [
+                    [float(value) for value in row]
+                    for row in basis
+                ],
                 "fit_operator_energy_fraction": retained / max(total, 1e-30),
             }
         )
     return groups
 
 
-def validate_lock(groups):
+def validate_lock(groups, latent_heads=1):
+    require(latent_heads in (1, 2), "rank-1 or rank-2 lock geometry")
     require(len(groups) == KEY_HEADS, "one direction per key-head group")
     for group, item in enumerate(groups):
         require(item["group"] == group, "ordered key-head groups")
-        direction = item["direction"]
-        require(len(direction) == HEADS_PER_GROUP, "rank-1 direction geometry")
-        norm = math.sqrt(sum(value * value for value in direction))
+        basis = item["basis"]
         require(
-            all(math.isfinite(value) for value in direction)
-            and abs(norm - 1.0) <= 1e-5,
-            "finite unit rank-1 direction",
+            len(basis) == HEADS_PER_GROUP
+            and all(len(row) == latent_heads for row in basis),
+            "head-axis basis geometry",
+        )
+        basis_tensor = torch.tensor(basis, dtype=torch.float64)
+        require(
+            torch.isfinite(basis_tensor).all()
+            and torch.allclose(
+                basis_tensor.t() @ basis_tensor,
+                torch.eye(latent_heads, dtype=torch.float64),
+                rtol=1e-5,
+                atol=1e-5,
+            ),
+            "finite orthonormal head-axis basis",
         )
         require(
             math.isfinite(item["fit_operator_energy_fraction"])
@@ -160,21 +180,19 @@ def validate_lock(groups):
         )
 
 
-def evaluate_layer(bundle, weight, groups, helper, base):
-    validate_lock(groups)
+def evaluate_layer(bundle, weight, groups, helper, base, latent_heads=1):
+    validate_lock(groups, latent_heads)
     baseline_operator = bundle["baseline_operator"]
     candidate_operator = torch.empty_like(baseline_operator)
     for item in groups:
         group = item["group"]
         start = group * HEADS_PER_GROUP
         stop = start + HEADS_PER_GROUP
-        direction = torch.tensor(
-            item["direction"], dtype=baseline_operator.dtype
-        )
+        basis = torch.tensor(item["basis"], dtype=baseline_operator.dtype)
         value = baseline_operator[:, start:stop]
-        latent = torch.einsum("thd,h->td", value, direction)
+        latent = torch.einsum("thd,hr->trd", value, basis)
         candidate_operator[:, start:stop] = torch.einsum(
-            "td,h->thd", latent, direction
+            "trd,hr->thd", latent, basis
         )
 
     candidate_post = helper.rms_gated(
@@ -289,6 +307,7 @@ def aggregate(folds):
 
 
 def run(args):
+    schema = f"{SCHEMA_PREFIX}{args.latent_heads}-oracle-cv/v1"
     base, base_path = load_base()
     require(
         VALUE_HEADS == base.VALUE_HEADS
@@ -310,7 +329,8 @@ def run(args):
         and merge_report.get("status") == "rejected",
         "scalar-merge decision identity",
     )
-    cost = merge_report["cost_model"]["16"]
+    target_value_heads = KEY_HEADS * args.latent_heads
+    cost = merge_report["cost_model"][str(target_value_heads)]
     components = cost["components"]
     generous_post_source_credit = sum(
         components[name]["optimistic_tpot_credit_ms"]
@@ -325,7 +345,7 @@ def run(args):
     )
     output_dir.mkdir(parents=True)
     started = {
-        "schema": SCHEMA,
+        "schema": schema,
         "started_unix_ns": time.time_ns(),
         "script_sha256": digest(__file__),
         "base_analyzer_sha256": digest(base_path),
@@ -336,6 +356,8 @@ def run(args):
             {"fit": list(fit), "validation": list(validation)}
             for fit, validation in FOLDS
         ],
+        "latent_heads_per_key_head": args.latent_heads,
+        "target_value_heads": target_value_heads,
     }
     publish(output_dir / "started.json", started)
 
@@ -350,9 +372,11 @@ def run(args):
             fit_bundle = load_split(
                 capture, fit_indices, layer, plan, helper, base
             )
-            layer_locks[str(layer)] = fit_layer(fit_bundle)
+            layer_locks[str(layer)] = fit_layer(
+                fit_bundle, args.latent_heads
+            )
         lock = {
-            "schema": SCHEMA + "/fit-lock",
+            "schema": schema + "/fit-lock",
             "fold": fold_index,
             "fit_indices": list(fit_indices),
             "validation_indices_not_loaded": list(validation_indices),
@@ -379,6 +403,7 @@ def run(args):
                 locked["layers"][str(layer)],
                 helper,
                 base,
+                args.latent_heads,
             )
             value["projected_error_ratio"] = math.sqrt(
                 value["candidate_projected_error2"]
@@ -419,15 +444,19 @@ def run(args):
     }
     gates["all"] = all(gates.values())
     report = {
-        "schema": SCHEMA,
+        "schema": schema,
         "status": (
-            "admitted_to_early_dynamics_foldability_audit"
+            (
+                "admitted_to_combined_fusion_overlap_audit"
+                if args.latent_heads == 2
+                else "admitted_to_early_dynamics_foldability_audit"
+            )
             if gates["all"] else "rejected"
         ),
         "completed_unix_ns": time.time_ns(),
         "candidate": (
-            "fit-locked rank-1 projection across each three-value-head "
-            "energy-Dk64 operator-state group"
+            f"fit-locked rank-{args.latent_heads} projection across each "
+            "three-value-head energy-Dk64 operator-state group"
         ),
         "claim": (
             "Reused-corpus CPU representation oracle only. It retains the "
@@ -446,9 +475,11 @@ def run(args):
         ],
         "cost_boundary": {
             "open_tpot_gap_ms": OPEN_TPOT_GAP_MS,
-            "nv16_full_path_optimistic_output_tps_ceiling":
+            "target_value_heads": target_value_heads,
+            "reduced_nv_full_path_optimistic_output_tps_ceiling":
                 cost["optimistic_output_tps_ceiling"],
-            "nv16_full_path_crosses_fixed_target": cost["crosses_fixed_target"],
+            "reduced_nv_full_path_crosses_fixed_target":
+                cost["crosses_fixed_target"],
             "generous_post_value_source_credit_ms": generous_post_source_credit,
             "generous_post_value_source_shortfall_ms":
                 OPEN_TPOT_GAP_MS - generous_post_source_credit,
@@ -466,10 +497,16 @@ def run(args):
         "gates": gates,
         "folds": folds,
         "decision": (
-            "Proceed only to an early-dynamics foldability audit; do not run NPU."
+            (
+                "Proceed only to an overlap-aware Nv32 plus corrected-fusion "
+                "cost audit; do not modify the kernel or run NPU."
+                if args.latent_heads == 2
+                else "Proceed only to an early-dynamics foldability audit; "
+                "do not run NPU."
+            )
             if gates["all"]
-            else "Reject the grouped rank-1 value-state representation before "
-            "early-dynamics design, NPU, endpoint or accuracy work."
+            else f"Reject the grouped rank-{args.latent_heads} value-state "
+            "representation before dynamics design, NPU, endpoint or accuracy work."
         ),
         "inputs": {
             "capture_root": str(Path(args.capture_root).resolve()),
@@ -495,6 +532,7 @@ def run(args):
             "platform": platform.platform(),
             "torch": torch.__version__,
             "threads": torch.get_num_threads(),
+            "latent_heads_per_key_head": args.latent_heads,
         },
     }
     publish(output_dir / "report.json", report)
@@ -511,6 +549,7 @@ def main(argv=None):
     parser.add_argument("--merge-report", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--threads", type=int, default=32)
+    parser.add_argument("--latent-heads", type=int, choices=(1, 2), default=1)
     args = parser.parse_args(argv)
     require(1 <= args.threads <= 64, "CPU thread bound")
     torch.set_num_threads(args.threads)

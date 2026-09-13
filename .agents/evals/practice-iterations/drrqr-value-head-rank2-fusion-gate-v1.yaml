@@ -1,0 +1,73 @@
+schema: mst-practice-iteration/v1
+id: drrqr-value-head-rank2-fusion-gate-v1
+repository: model-tuning-lab
+status: active
+date: 2026-09-13
+validated_commit: pending
+
+stage_goal: Decide whether an Nv32 rank-2 value-state representation preserves enough energy-Dk64 fidelity to justify reopening the corrected fused-recurrent route as one combined algorithm-operator candidate.
+
+goal_chain:
+  long_term_objective: Reproducible DRRQR deployment on Ascend with at least 10 percent end-to-end output-throughput gain, no LongBench-v2 or GSM8K accuracy decline, fixed TTFT/TPOT and resource contracts, and design-time portability.
+  current_gap: Energy-Dk64 is 141.564496153 output tok/s or +4.752041 percent. Nv32 structural savings alone have an optimistic ceiling of 146.919229779 tok/s or +8.714329 percent and remain about 0.751051 ms/token short of the fixed target.
+  medium_term_milestone: Combine a fidelity-preserving DRRQR value-state reduction with a candidate-specific Ascend fusion whose overlap-aware net saving crosses the remaining endpoint gap.
+  short_term_decision: Test the necessary representation capacity of two fit-locked orthogonal Dv128 latent states for every three-head key group, using the same deliberately favorable oracle boundary as the rejected rank-1 screen.
+  deciding_evidence: Three predeclared folds on reused calibration indices 0-11, six representative layers, exact checkpoint output projection, the Nv32 component ledger, and the preserved corrected-fusion floor audit.
+  budget_or_stop_rule: One rank-2 oracle run. No fusion arithmetic repair, build, NPU, service, endpoint or accuracy work unless the oracle passes and a later overlap-aware cost audit also crosses with margin.
+  on_pass: Compute a component-by-component overlap-aware Nv32 plus corrected-fusion endpoint ceiling. Only a crossing result may admit repairing the known Stage2 squared-Q/K defect.
+  on_failure: Reject Nv32 static rank-2 value-state compression and do not reopen fused recurrent for this combination.
+  on_inconclusive: Repair only a concrete equation, identity or implementation defect and rerun once into a new immutable artifact.
+
+candidate_contract:
+  algorithm: Energy-Dk64 plus two orthogonal head-axis latent states per key head, reducing global Nv48 to Nv32.
+  oracle_favors_candidate: Form the two states from all three real Dk64 operator outputs, retain all original Z gates and RMS applications, expand back to 48 heads, and use the exact output projection.
+  operator_complement: Corrected raw-packed QKV normalization, gating and recurrent fusion is only reconsidered after fidelity and overlap-aware cost gates.
+  fairness: Do not add the separate optimistic savings; remove every overlapping component once and retain measured floors and added arithmetic.
+  paper_exact_strong_rrqr: false
+
+predeclared_fidelity_gates:
+  dense_formula_relative_l2_at_most: 0.01
+  aggregate_projected_error_ratio_at_most: 1.10
+  worst_fold_projected_error_ratio_at_most: 1.20
+  aggregate_feature_error_ratio_at_most: 1.10
+  layer_fold_ratio_at_most_1_10_fraction_at_least: 0.75
+  worst_layer_fold_projected_error_ratio_at_most: 1.50
+
+performance_contract:
+  nv32_optimistic_output_tps_ceiling: 146.91922977852704
+  nv32_optimistic_gain_vs_dense_percent: 8.714329306392488
+  nv32_optimistic_tpot_ceiling_ms: 64.25876992560885
+  fixed_target_implied_tpot_ms: 63.507718859
+  residual_tpot_gap_after_nv32_ms: 0.75105106660885
+  next_gate_if_fidelity_passes: Recompute the corrected-fusion floor at Nv32 and subtract overlap with structural value-head savings before any implementation.
+
+evidence_protocol:
+  reused_corpus_claim: Necessary representation-capacity screen only; passing does not admit NPU.
+  folds:
+    - {fit: [1, 2, 4, 5, 7, 8, 10, 11], validation: [0, 3, 6, 9]}
+    - {fit: [0, 2, 3, 5, 6, 8, 9, 11], validation: [1, 4, 7, 10]}
+    - {fit: [0, 1, 3, 4, 6, 7, 9, 10], validation: [2, 5, 8, 11]}
+  lock_rule: Publish every fold's six-layer rank-2 bases before loading its validation rows.
+
+result:
+  outcome: pending
+  analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_value_head_rank1_oracle_cv.py --latent-heads 2
+  output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-rank2-oracle-cv-v1/report.json
+  claim_ceiling: Reused-corpus CPU rank-2 representation oracle only.
+
+validation_commands:
+  - parse analyzer with Python AST without bytecode
+  - synthetic rank-1 and rank-2 projection identity and orthogonality
+  - verify source and container-copy hashes
+  - run once into a fresh immutable output directory
+  - verify locks and report hashes
+  - ./scripts/validate-mst.sh
+  - git diff --check
+
+lessons_ingested:
+  - lesson: Nv32 cannot meet the fixed target as a structural reduction alone, but its residual 0.751051 ms/token is small enough to justify a combined fusion audit only after fidelity passes.
+    destination: performance contract
+    severity: high
+  - lesson: A prior fusion rejected as insufficient alone may be reconsidered only for a named combined algorithm-operator candidate with overlap removed, never by adding independent optimistic ceilings.
+    destination: drrqr-ascend-optimization-loop
+    severity: high
