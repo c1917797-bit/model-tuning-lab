@@ -2,6 +2,23 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LATEST LIVE CHECKPOINT 20:17 UTC (supersedes running states below): Qwen3-32B
+resumed control completed at20:12:57, passed request validity:32/32, errors0,
+empty0, stop32, reasoning0, prompt-token mismatches0. c1 TTFT P95=376.284524ms,
+TPOT P95=52.319630ms/token. This is a32-request canary, NOT full357 baseline
+or semantic quality acceptance. Artifact:
+/cache/austinov/eval-runs/switch12h-qwen3-resume-20260913-N4hS5H
+canary.json SHA256 f88409839aa141e1636e0607a97615827a529fcc9105077e6a2d1c85772d1e6f
+canary.rows.jsonl SHA256 c658180b8d1cfdf59aab0ee6c5cbc8efaa92bbe2309b7f28a883e5ebcf8663ba
+Its controller2187839 and container715dd4c2360d are finished, not live.
+Successor queue PID2224697 was verified live with PPID1; it started the existing
+diagnostic container5250eac96940 at20:13. Artifact:
+/cache/austinov/eval-runs/switch12h-qwen38-probe-20260913-Smh123
+At20:17 weights were loaded and graph compilation underway. Follow this exact
+queue/container and probe/summary.json; do not duplicate or restart on stale
+status alone. Full MMLU/GSM8K/HumanEval model scoring and the repeated357 matrix
+remain outstanding. Request validity success is not a semantic accuracy score.
+
 LATEST LIVE CHECKPOINT 20:09 UTC: first Qwen3.8 canary completed32/32, errors0,
 stop32, but9 empty outputs. Every empty response has usage completion_tokens=1;
 raw SSE contains only empty role/finish and usage events. Not a missed visible
