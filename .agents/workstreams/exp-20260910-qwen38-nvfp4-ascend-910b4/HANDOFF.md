@@ -2,6 +2,20 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LATEST RESOURCE AUTHORITY / DEADLINE: user explicitly authorized stopping
+qwen35_t37_pa_workspace_service_v1 and other containers proven to interfere with
+this test. This supersedes earlier never-stop-external-container wording only
+for conflicting containers, not unrelated services or arbitrary host processes.
+Preserve inspect/logs, stop exact IDs, do not delete model/source/bind-mounted data.
+Deadline for an evidence-backed result: 2026-09-14 07:40 UTC (12 hours from request).
+Report completed results and explicit missing gates by then; never call partial
+coverage complete. Continue full objective, not just the canary.
+Stopped exact container 58dfe81c55e6a66d1ec377422c04443c822698c0ef5146473de5d2de682fac2b;
+it auto-removed by its original --rm policy. Logs/inspect/diff saved under
+/cache/austinov/eval-runs/switch-takeover-20260913-POeM1v. Eight NPUs and port10010
+were verified released afterward. Maxon4ick_torch_910_dev was not stopped.
+Use run_switch_canary.sh for fresh exact-ID-owned lifecycle and protected mounts.
+
 User now explicitly requests trustworthy continued testing to decide whether to
 switch to Qwen3.8-27B. Current pair: Qwen3-32B BF16 vs Qwen3.8-27B BF16.
 This supersedes the earlier Qwen3.5 correction below. Use SWITCH_VALIDATION.md.
