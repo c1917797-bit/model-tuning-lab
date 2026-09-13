@@ -2,6 +2,17 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+Performance preparation while MMAR diagnostic is live: run_switch_canary.sh now
+accepts performance <repeat1|2|3>. It keeps the same owned service/lease, runs
+the existing32-row canary first, then run_switch_performance_repeat.py with
+full357 cells in boundary-first order1,16,5,8. Each cell has separate warmup,
+v4 metrics/raw rows/hashes; error/empty/truncation fails that lifecycle without
+discarding prior valid cells. Fresh output is mandatory. This implements ONE
+arm/repetition, not the full paired result. Schedule lifecycles Q3/Q38, Q38/Q3,
+Q3/Q38 for AB/BA/AB; do not launch while current probe owns cards or before
+candidate validity is fixed. Current production launcher still uses MMAR-on;
+do not silently adopt the diagnostic configuration. No full matrix ran yet.
+
 LIVE21:29 UTC: MMAR-off graph diagnostic started21:28:53, PID2841060 PPID1,
 container8d8155054e910c8c531fd60197b53e412b7cd479c52f471f49b5a8b4de15feac,
 artifact /cache/austinov/eval-runs/switch12h-qwen38-mmaroff-20260913-oMQll2.

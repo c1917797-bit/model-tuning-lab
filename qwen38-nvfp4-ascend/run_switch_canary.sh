@@ -4,7 +4,10 @@ set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
 stage="${3:-chat}"
-[[ "$stage" == chat || "$stage" == quality ]] || exit 64
+[[ "$stage" == chat || "$stage" == quality || "$stage" == performance ]] || exit 64
+if [[ "$stage" == performance ]]; then
+ [[ "${4:-}" =~ ^[123]$ ]] || exit 64
+fi
 case "$label" in
  qwen3) model_path=/cache/austinov/Qwen3-32B; model=Qwen/Qwen3-32B; extra=();;
  qwen38) model_path=/cache/austinov/Qwen3.8-27B; model=Qwen/Qwen3.8-27B; extra=(--mamba-cache-mode align --mamba-cache-dtype bfloat16 --mamba-ssm-cache-dtype bfloat16);;
@@ -96,3 +99,9 @@ python3 "$code/chat_benchmark.py" --base-url http://127.0.0.1:10010 --model "$mo
  --dataset /cache/cch/query_rewrite.jsonl --dataset-sha256 a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e \
  --concurrency 1 --repeat-index 1 --limit 32 --seed 1024 --max-output-tokens 4096 --timeout 300 \
  --cache-salt-prefix "$(basename "$out")" --output "$out/canary.json" > "$out/canary.log" 2>&1
+if [[ "$stage" == performance ]]; then
+ status performance_repeat running
+ python3 "$code/run_switch_performance_repeat.py" --base-url http://127.0.0.1:10010 \
+  --model "$model" --dataset /cache/cch/query_rewrite.jsonl --canary "$out/canary.json" \
+  --repeat "$4" --output "$out/performance" > "$out/performance.log" 2>&1
+fi
