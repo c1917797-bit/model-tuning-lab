@@ -2,6 +2,20 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+20:22 diagnostic partial evidence: indices1/2 nonstream remain empty; visible
+token IDs are [248046]. Local tokenizer_config identifies248046 as<|im_end|>,
+and generation_config lists it as EOS. Thus these cases emit EOS as first token,
+not a streaming-client omission. ignore_eos continues role-delimiter tokens;
+it is diagnostic only, not a fix or quality result. Probe still running, do not
+restart. Remaining case results and underlying model/template/runtime cause
+are not yet determined.
+Added run_standard_text_quality.py for exact upstream MMLU subjects/GSM8K,
+local custom datasets, native no-thinking templates and seed1024 payloads.
+Device-free fixed-image task-construction preflight passed for abstract_algebra
+and GSM8K (exec-0000000000000012). No live model scoring is claimed; next gate
+is a tiny API/scoring run after the current diagnostic finishes. HumanEval
+generation/execution remains separate. Never pool preflight with model accuracy.
+
 LATEST LIVE CHECKPOINT 20:17 UTC (supersedes running states below): Qwen3-32B
 resumed control completed at20:12:57, passed request validity:32/32, errors0,
 empty0, stop32, reasoning0, prompt-token mismatches0. c1 TTFT P95=376.284524ms,
