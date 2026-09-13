@@ -71,6 +71,17 @@
   fused-recurrent combination before overlap audit, Stage2 repair, build, NPU,
   endpoint or accuracy. Report SHA256:
   7a6a25e809bf4ba5f9b866137f2a3f4abea091d8f4fabc0344e0906d4e1f22b0.
+- The final drrqr-no-training-scope-decision-v1 source-and-ledger audit closes
+  the current Qwen3.8 same-stack no-training program as joint-target-not-met.
+  Pinned official StrongRRQR changes Q/K coordinate identity but not runtime
+  shapes or work at fixed Dk. The official README explicitly places LoRA after
+  pruning for recovery, while both recovery launchers enable teacher
+  distillation. No remaining untested no-training mechanism has both a
+  non-overlapping target-crossing cost case and a credible untouched
+  downstream-output fidelity case. Do not launch another selector, operator,
+  NPU endpoint or final accuracy run. Reopen only with explicit authorization
+  for training-based recovery or a genuinely new model/algorithm scope. This
+  is not a universal DRRQR impossibility claim.
 - The drrqr-dk64-fp32-inplace-state-cache-admission-v1 source/profile audit is
   complete and rejected before implementation. The active schema already marks
   recurrent state mutable and pure decode passes the cache tensor directly to
@@ -595,6 +606,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-value-head-scalar-merge-cv-v1.yaml
 .agents/evals/practice-iterations/drrqr-value-head-rank1-oracle-cv-v1.yaml
 .agents/evals/practice-iterations/drrqr-value-head-rank2-fusion-gate-v1.yaml
+.agents/evals/practice-iterations/drrqr-no-training-scope-decision-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md

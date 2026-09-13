@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-no-training-scope-decision-v1
 repository: model-tuning-lab
-status: active
+status: rejected
 date: 2026-09-13
-validated_commit: pending
+validated_commit: e5979898c36f12ada27c1edf62381f2eaa9ef32a
 
 stage_goal: Decide whether the pinned paper implementation or accumulated Qwen3.8 evidence contains one remaining materially distinct no-training DRRQR mechanism that can still meet the frozen joint target.
 
@@ -31,10 +31,29 @@ claim_boundary:
   - No final task-accuracy result is inferred from local fidelity screens.
 
 result:
-  outcome: pending
+  outcome: current_no_training_program_closed_joint_target_not_met
+  official_repository_commit: 919d8667d951c385e08510bc1267c2e7049a4f56
+  official_readme_sha256: 2cfbe84d3c6f7ab81455e6c10e15e27d7627165748ee5848ab354b16917a30ff
+  official_rrqr_launcher_sha256: b1ad2cf8e1ba48b9674e38f2866e75a59675b827e323f690c5c20e8b43b31db5
+  official_rrqr_source_sha256: fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62
+  official_lora_launcher_sha256: 8980e62bbf353e722b1917253201251b5365df7b50da2cc24b471fd95b31b36c
+  official_distillation_launcher_sha256: 364a657c9bd0595d342fc1e359f556a129f15ff28734a702343a4fd846d851c0
+  frozen_baseline_sha256: 234307c9669fb0558307851a14f647dbb4a58096ad14f3ca2192b1e0076ea37c
+  mechanism_budget_sha256: e9b4908a3625c02e1b55e9c775e4987d08075771bb318ec5c1f97dea36164eb6
+  fused_recurrent_floor_sha256: e0670ca0eb37cd896ae6a28e858e493958085d7f4c4b402c46d65452784206c2
+  rank2_fusion_gate_sha256: a9d9b2d57fa1f92e766c51edb243556279ea8a7e82fb7a8d85e9c3f3b8c702fc
+  bounded_conclusion_sha256_before_this_update: 9efdb2b0e4a309157db7b5d49d77bee973d621b40f2dd185fa4bd96f268cb748
+  official_selector_runtime_finding: At fixed Dk, official StrongRRQR selects Q and K projection and convolution rows and updates head_k_dim; it changes coordinate identity, not runtime tensor shape or work relative to another selector at the same Dk.
+  official_recovery_finding: The README places LoRA after pruning to recover performance. Both LoRA launchers enable LoRA and teacher-model distillation; this is outside the current no-training boundary.
+  remaining_mechanism_finding: No untested named no-training representation remains with both a non-overlapping target-crossing cost case and a credible untouched downstream-output fidelity case.
+  decision: Do not start another nearby selector, state/value compression, cache, fusion repair, operator build, NPU endpoint or final accuracy run. Reopening requires explicit authorization for training-based recovery or a genuinely new model/algorithm scope with fresh gates.
+  claim_ceiling: Current Qwen3.8 same-stack no-training program only; not a universal impossibility result for DRRQR, other models, training regimes, ranks, Ascend generations or software stacks.
 
 lessons_ingested:
   - lesson: A bounded program needs an explicit scope-decision iteration when all nearby mechanism families are closed; do not turn absence of a credible candidate into another empirical sweep.
+    destination: drrqr-ascend-optimization-loop
+    severity: high
+  - lesson: If the official paper workflow recovers a structurally pruned model with LoRA and teacher distillation, a no-training no-loss target is a stronger program. Coordinate-only StrongRRQR at fixed Dk cannot add runtime headroom; after all distinct untrained representations fail downstream gates, require a scope decision instead of more selector or operator variants.
     destination: drrqr-ascend-optimization-loop
     severity: high
 

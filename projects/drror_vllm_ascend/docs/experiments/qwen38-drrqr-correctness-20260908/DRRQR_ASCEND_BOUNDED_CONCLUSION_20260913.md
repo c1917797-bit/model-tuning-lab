@@ -349,10 +349,51 @@ layer violates 22/24 windows. The Dk0/Dk128 bypass family is therefore rejected
 before code, build, NPU, endpoint or accuracy work. See
 .agents/evals/practice-iterations/drrqr-bimodal-layer-rank-admission-v1.yaml.
 
+## Final official-workflow and no-training scope decision
+
+The pinned official repository at commit
+919d8667d951c385e08510bc1267c2e7049a4f56 was re-audited against every
+completed Qwen3.8 ledger. Its StrongRRQR implementation concatenates captured
+post-convolution Q/K activations, selects coordinates per head, slices the
+matching Q/K projection and convolution rows, and updates the key dimension.
+At a fixed Dk this changes coordinate identity, not runtime shapes or work, so
+paper-exact selection cannot add performance headroom beyond another selector
+at the same Dk.
+
+The official README explicitly places LoRA after pruning to recover model
+performance. Its two recovery launchers enable LoRA; the concrete training
+commands also load a teacher and use a nonzero distillation loss. The present
+requirement of no training and no task-accuracy decline is therefore stronger
+than the published recovery workflow.
+
+The source identities used for this decision are:
+
+- README SHA256: 2cfbe84d3c6f7ab81455e6c10e15e27d7627165748ee5848ab354b16917a30ff
+- RRQR launcher SHA256: b1ad2cf8e1ba48b9674e38f2866e75a59675b827e323f690c5c20e8b43b31db5
+- RRQR source SHA256: fa4bacf516011ba1c88f2e0e92957bbe4513cc1bb6634912fdb0d06ba7821a62
+- LoRA launcher SHA256: 8980e62bbf353e722b1917253201251b5365df7b50da2cc24b471fd95b31b36c
+- alternate LoRA/distillation launcher SHA256: 364a657c9bd0595d342fc1e359f556a129f15ff28734a702343a4fd846d851c0
+
+Across the accumulated evidence, no remaining untested no-training mechanism
+has both requirements needed to justify another run: a non-overlapping
+target-crossing Ascend cost case and a credible untouched downstream-output
+fidelity case. Q/K selection changes fidelity but not fixed-Dk performance;
+lower and heterogeneous key widths, state/dynamics transitions, tail
+compensation, value width/head/state compression, cache allocation, packed
+normalization and fused recurrent seams have each failed one of those two
+gates.
+
+The current Qwen3.8 same-stack no-training program is therefore closed as
+joint-target-not-met. This is not a claim that DRRQR is impossible for other
+models, ranks, training regimes, Ascend generations or software stacks. No new
+NPU endpoint or final accuracy run was appropriate because no candidate crossed
+the prior numerical and performance admission gates.
+
 ## Reopen condition
 
-Reopen only as a new bounded program around a materially different, named
-DRRQR mechanism that provides both:
+Reopen only with explicit scope authorization for training-based recovery, or
+as a new bounded program around a materially different, named DRRQR mechanism
+that provides both:
 
 1. a full-path foldability and optimistic endpoint case that can materially
    close the current gap without dense reconstruction; and

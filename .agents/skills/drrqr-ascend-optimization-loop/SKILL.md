@@ -152,6 +152,16 @@ reproduction.
   ms/token. Reject the named Nv32 plus corrected-fusion combination before
   arithmetic repair, build or NPU. A future reopen must change the
   representation and pass downstream fidelity first.
+- Distinguish paper selection from paper recovery. In the pinned official
+  workflow, StrongRRQR selects Q/K projection and convolution rows; at a fixed
+  Dk it changes coordinate identity but not runtime shapes or work. The
+  official README then places LoRA after pruning, and the launchers enable both
+  LoRA and teacher distillation. A no-training, no-loss requirement is
+  therefore stronger than that workflow. Once distinct selector, state,
+  value, cache and operator families have all failed either target-crossing
+  headroom or untouched downstream fidelity, write a bounded scope decision.
+  Do not manufacture another nearby experiment; require explicit authorization
+  before training recovery or a different model/algorithm scope.
 - Before proposing an in-place recurrent-state/cache operator, inspect the
   active torch mutation schema and caller. A mutable `Tensor(a!)` passed
   directly from the cache means state update is already in place. Bind profile
