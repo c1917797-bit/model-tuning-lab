@@ -2,6 +2,15 @@
 
 ## Current goal correction — user clarification 2026-09-13
 
+Latest checkpoint: see `qwen38-nvfp4-ascend/BASELINE_REUSE.md` for the audited
+Qwen3-32B c1/c5/c8 repeat-1 cells, hashes, truncation exceptions and conditional
+reuse rules. Do not discard valid cells because their parent controller failed.
+Offline standard-task data preflight now passes in the fixed device-free,
+network-disabled container: 59 configs / 15525 test rows. HumanEval function
+resolution is deliberately disabled for this inspection because upstream utils
+runs a code_eval sample at import time. Executable evaluator wiring and scoring
+remain incomplete; this is not a quality-score result. No NPU lease was taken.
+
 Identity audit: /cache/austinov/Qwen3.8-27B has a Qwen3.8 model card and
 config SHA256 191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab.
 Its qwen3_5 architecture does NOT identify it as Qwen3.5 weights. Exclude those
