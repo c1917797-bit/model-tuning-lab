@@ -502,7 +502,7 @@ def _patch_ascend_gdn(module: ModuleType) -> None:
         if use_fused_chunk:
             initial_state = ssm_state[prefill_state_indices]
             clear_ssm_states(initial_state, prefill_has_initial_state)
-            (core_attn_out_non_spec, last_recurrent_state) = self._qwen35_fused_chunk_gated_delta_rule(
+            (core_attn_out_non_spec, last_recurrent_state) = AscendGatedDeltaNetAttention._qwen35_fused_chunk_gated_delta_rule(
                 q=query_non_spec,
                 k=key_non_spec,
                 v=value_non_spec,
