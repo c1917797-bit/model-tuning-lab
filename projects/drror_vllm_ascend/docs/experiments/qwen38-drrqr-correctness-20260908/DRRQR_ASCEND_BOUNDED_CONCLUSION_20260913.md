@@ -140,6 +140,45 @@ Artifact:
 - report SHA256: d61cd9619f95a2e83fc5a51027974ae9720b81fe24ac9f7a3da6846456b49c10
 - tool SHA256: c7f3e44ca94dc9c794081f7626b89c61b6e06bf1886e0d911c9762402d0ecb16
 
+## Rank-1 shared value-state oracle closure
+
+The select-one result was followed by a stronger necessary-capacity oracle.
+For every key head and fold it fit the best orthogonal rank-1 direction across
+the three complete energy-Dk64 operator outputs. On validation it was allowed
+to form that latent from all three already-computed states, expand back to all
+three heads, retain the original three Z gates and RMS applications, and use
+the exact checkpoint output projection. A real Nv16 recurrence would have
+strictly less information and additional dynamics/folding error.
+
+| Metric | Result | Gate |
+|---|---:|---:|
+| Aggregate projected-error ratio | 5.410002 | <=1.10 |
+| Aggregate feature-error ratio | 5.012867 | <=1.10 |
+| Operator-state reconstruction relative-L2 | 0.553733 | diagnostic |
+| Worst fold projected-error ratio | 5.712986 | <=1.20 |
+| Layer-fold fraction <=1.10 | 0/18 | >=75% |
+| Worst layer-fold ratio | 80.730378 | <=1.50 |
+| Dense formula relative-L2 | 0.001660 | <=0.01 |
+
+The three fold ratios were 5.408264, 5.712986 and 5.156480, so the result is
+stable across splits. All fit locks were published before validation load and
+matched their hashes. Separately, retaining dense value-source projection and
+convolution while perfectly removing the proportional recurrent, RMS,
+output-projection and packed-concat work credits only 2.645949 ms/token,
+0.535715 ms/token short of the open gap. The Nv16 rank-1 family is therefore
+closed before early-dynamics design, NPU, endpoint or accuracy work.
+
+Artifact:
+
+/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-rank1-oracle-cv-v1
+
+- started SHA256: ffb94184d52bccf883917c64b850b37da3829daf82d014c29481b369895d8bb8
+- fold-0 lock SHA256: e51281827235ec6b1232464245ea06edacd5d87eb45c34ae88d7cd5e00e5f747
+- fold-1 lock SHA256: a5acdc81c4b0811bf1c9a74189a57c405aece42fac4620644b4e724b87b4411c
+- fold-2 lock SHA256: f873f9446ed253a2035ce8d5acd97dba1823ab2ca0660794eed1a9d8f1de7683
+- report SHA256: 32f9295d84d613a2f8c458071a8ee6957ccd70018e924772b8a3b9701da666a0
+- tool SHA256: fb57c1de16a7f3560b88e05cae1a900cb43a865ed2f044b39e942d6a2f172ff1
+
 ## What was established
 
 - The real Ascend GDN execution path and loaded binaries were identified.
@@ -155,8 +194,8 @@ Artifact:
   custom-operator results from reaching performance tests.
 - Multiple Q/K-only, heterogeneous-width, subspace, phase-transition,
   compensation, packed-QKV, normalization-fusion, layer-shared value-width and
-  per-head value-width and complete value-head scalar-merge routes were
-  rejected at the cheapest faithful evidence layer.
+  per-head value-width, complete value-head scalar-merge and rank-1 shared
+  value-state routes were rejected at the cheapest faithful evidence layer.
 
 ## Why the program stops
 

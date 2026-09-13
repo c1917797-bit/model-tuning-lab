@@ -132,6 +132,16 @@ reproduction.
   Close nearby head choices and scalar ranges. Any reopened value-head route
   must define a materially different recurrent state/dynamics representation,
   not add freedom to the same select-one-and-fold mechanism.
+- A best fit-locked rank-1 direction across each three-head group is a stronger
+  necessary-capacity test than selecting one head. If it fails while being
+  allowed to reconstruct from all three already-computed Dk64 operator outputs
+  and retain the original three gates, RMS applications and output blocks,
+  stop static one-direction value-state mixtures before dynamics or NPU work.
+  The Qwen3.8 oracle failed all 18 layer-fold gates with aggregate projected
+  ratio 5.410002 and operator-state reconstruction relative-L2 0.553733.
+  Also calculate the post-value-source ceiling separately: retaining dense
+  value projection/convolution while reducing only recurrent and downstream
+  work credited 2.645949 ms/token, below the 3.181665 ms/token open gap.
 - Before proposing an in-place recurrent-state/cache operator, inspect the
   active torch mutation schema and caller. A mutable `Tensor(a!)` passed
   directly from the cache means state update is already in place. Bind profile

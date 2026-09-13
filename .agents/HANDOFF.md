@@ -46,6 +46,18 @@
   SHA256: d61cd9619f95a2e83fc5a51027974ae9720b81fe24ac9f7a3da6846456b49c10.
   Close nearby complete-head selection and scalar-fold variants; any reopen
   must change the recurrent state/dynamics representation.
+- The stronger drrqr-value-head-rank1-oracle-cv-v1 screen is complete and
+  rejected. Per key head it fit the best orthogonal rank-1 direction across
+  all three real energy-Dk64 operator outputs, then generously retained the
+  original three Z gates, RMS applications and exact output blocks. Aggregate
+  projected/feature ratios were 5.410002/5.012867, state reconstruction
+  relative-L2 was 0.553733, fold ratios were
+  5.408264/5.712986/5.156480, and zero of 18 layer-folds met 1.10. Formula and
+  lock gates passed. A post-value-source-only merge also has at most 2.645949
+  ms/token optimistic credit, 0.535715 ms short of the gap. No early-dynamics
+  implementation, NPU, endpoint or accuracy run followed. Report SHA256:
+  32f9295d84d613a2f8c458071a8ee6957ccd70018e924772b8a3b9701da666a0.
+  Static Nv16/rank-1 value-state mixtures are closed.
 - The drrqr-dk64-fp32-inplace-state-cache-admission-v1 source/profile audit is
   complete and rejected before implementation. The active schema already marks
   recurrent state mutable and pure decode passes the cache tensor directly to
@@ -568,6 +580,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-controllable-work-budget-v1.yaml
 .agents/evals/practice-iterations/drrqr-bimodal-layer-rank-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-value-head-scalar-merge-cv-v1.yaml
+.agents/evals/practice-iterations/drrqr-value-head-rank1-oracle-cv-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
