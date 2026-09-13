@@ -2,6 +2,22 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LIVE at21:10 UTC: eager diagnostic PID2665758, PPID1; container
+8ed2453c45d9f9e4928bf0fe75163ad51bdd8030d2eb88364f6b8be65728b949;
+artifact /cache/austinov/eval-runs/switch12h-qwen38-eager-20260913-wvQ790.
+Started21:05:52 using94bae36. Logs prove enforce_eager=True and Cudagraph
+disabled at21:07:00. Still warming up at21:10, not terminal. Follow exact job;
+do not restart based only on shared-memory wait messages.
+Complete weight-byte SHA256 manifests now available in this artifact root:
+qwen38-weights.sha256 (18 shards), manifest SHA256
+a21eacf961df7d6b3009cc6fb43652ba80bfb978b5869fc8a98602ba588f9ff0;
+qwen3-weights.sha256 (17 shards), manifest SHA256
+845959b3f0be0a6111fc2a646c856fd3d1c728179f6c3946fa4057cde2d70fb5.
+Each manifest's complete unique file population matches its model index.
+Hasher PID2674267 finished; no errors in weight-hash.log. Low-priority hashing
+overlapped startup diagnostics only, not a reported performance run. These bind
+local weight bytes; not independent upstream provenance or accuracy proof.
+
 21:03 sampling diagnostic TERMINAL, completed36 requests; own service cleaned.
 Artifact /cache/austinov/eval-runs/switch12h-qwen38-sampling-20260913-43OW1b,
 probe/summary.json SHA256494c1100be85bd1913bb24617f0c48567d7970e2f9cb37e905371952ffac22ea.
