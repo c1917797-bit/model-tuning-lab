@@ -4,6 +4,11 @@ set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
 execution="${4:-graph}"
+case "${6:-on}" in
+ on) prefix_args=(--enable-prefix-caching); mamba_mode=align;;
+ off) prefix_args=(--no-enable-prefix-caching); mamba_mode=none;;
+ *) exit 64;;
+esac
 case "${5:-on}" in
  on) mmar=true; mmar_env=1;;
  off) mmar=false; mmar_env=0;;
@@ -16,7 +21,7 @@ case "$execution" in
 esac
 case "$label" in
  qwen3) model_path=/cache/austinov/Qwen3-32B; model=Qwen/Qwen3-32B; extra=();;
- qwen38) model_path=/cache/austinov/Qwen3.8-27B; model=Qwen/Qwen3.8-27B; extra=(--mamba-cache-mode align --mamba-cache-dtype bfloat16 --mamba-ssm-cache-dtype bfloat16);;
+ qwen38) model_path=/cache/austinov/Qwen3.8-27B; model=Qwen/Qwen3.8-27B; extra=(--mamba-cache-mode "$mamba_mode" --mamba-cache-dtype bfloat16 --mamba-ssm-cache-dtype bfloat16);;
  *) exit 64;;
 esac
 [[ "$out" == /cache/austinov/eval-runs/switch12h-* ]] || exit 64
@@ -64,7 +69,7 @@ container_id="$(docker run -d --rm --network host --shm-size 16g --label model-t
  "$image" vllm serve /model --host 127.0.0.1 --port 10010 --served-model-name "$model" \
  --dtype bfloat16 --tensor-parallel-size 8 --data-parallel-size 1 --seed 1024 \
  --max-num-seqs 16 --max-model-len 40960 --max-num-batched-tokens 32768 \
- --trust-remote-code --gpu-memory-utilization 0.90 --enable-prefix-caching --enable-chunked-prefill \
+ --trust-remote-code --gpu-memory-utilization 0.90 "${prefix_args[@]}" --enable-chunked-prefill \
  --disable-custom-all-reduce --async-scheduling "${extra[@]}" \
  "${execution_args[@]}" \
  --additional-config "{\"enable_cpu_binding\":true,\"enable_matmul_allreduce\":$mmar,\"enable_flashcomm1\":false}" \

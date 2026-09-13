@@ -2,6 +2,22 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+Offline prompt identity audit PASSED108 cases from graph/recipe, eager and
+MMAR-off runs: native HF template input_ids == actual response.prompt_token_ids
+for every case, usage counts match, same messages never changed token sequences.
+Artifact /cache/austinov/eval-runs/switch-prompt-audit-NDkmM3/audit.json.
+Uses fixed-image tokenizer, no model inference. Initial audit GqpCzf failed
+because Transformers returns BatchEncoding; corrected audit extracts input_ids.
+This rules out observed frontend token drift, NOT model arithmetic/weight issues.
+Next bounded diagnostic isolates prefix/state-cache lifecycle: graph, MMAR-on,
+same BF16 weights, same36 sampling requests, but --no-enable-prefix-caching and
+corresponding --mamba-cache-mode none. Sixth launcher arg off selects this policy;
+command run_switch_probe.sh qwen38 <fresh-out> sampling graph on off. No other
+framework edits. This is a cache-policy diagnostic, not an accepted deployment.
+If empties remain, close this cache-policy-only fix; do not repeat unchanged.
+Require fresh eight-card/port/memory/lease checks before starting. Full baseline
+and quality scope remains unchanged; no automatic promotion of diagnostic data.
+
 21:40 MMAR-off diagnostic TERMINAL (finished21:39:28). PID2841060 missing;
 exact owned container8d8155054e91 gone.36/36 responses,0HTTP errors. GreedyA:
 8/12empty,0length; greedyB:9/12empty,1length; official:8/12empty,0length.
