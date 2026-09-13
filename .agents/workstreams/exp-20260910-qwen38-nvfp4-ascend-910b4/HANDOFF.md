@@ -2,6 +2,16 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+LIVE22:01 UTC input-history diagnostic PID3106750 PPID1, container
+085fd3f032d3e5465f20434344cb7bd0842cd1fc42a3ce1de57c1703cefb6fa4,
+artifact /cache/austinov/eval-runs/switch12h-qwen38-history-20260913-UvgopA.
+Started22:01:02 from pushed fa4e082; command history graph on on. Startup
+currently running; follow exact PID/container and probe/summary.json, no duplicate.
+Fresh gate:8NPUs empty, no physical holders, port10010free, MemAvailable84227468kB,
+cooperative lease obtainable; unrelated Maxon4ick bash-only container untouched.
+This24-call original/drop-empty-history paired diagnostic does not change the
+dataset on disk and does not satisfy original-protocol performance acceptance.
+
 21:59 cache-off diagnostic TERMINAL, finished21:58:22. PID2997867 missing and
 exact owned containerbbf30a6eee39 gone.36/36 requests,errors0; greedyA9/12empty,
 0length; greedyB9/12empty,1length; official5/12empty,1length. Summary SHA256
