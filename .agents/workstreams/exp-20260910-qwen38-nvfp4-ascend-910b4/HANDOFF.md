@@ -2,6 +2,21 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+New data-structure hypothesis21:53:252/357 source requests contain empty
+historical assistant messages;105 do not. Original32-row Qwen3.8 canary:
+with-empty-history20 =>9empty outputs/11nonempty; without-empty-history12 =>
+0empty/12nonempty. Association only, NOT causality. Actual failed samples have
+nonempty final user messages; no user content is stored here.
+Prepared probe_empty_history.py: paired original vs remove-only-empty-assistant
+history for frozen12 diagnostic cases, cap64, original nonempty turns preserved,
+separate raw artifacts/hashes. Dependency-free transformation checks passed.
+This is NOT original-protocol baseline data and cannot silently replace business
+inputs. Needs explicit protocol agreement before any deployment/acceptance use.
+Do not launch while cache-off PID2997867/containerbbf30a6eee39 is live; at21:53
+it was still compiling. Logs confirm enable_prefix_caching=False. After its
+terminal result, if still empty, use baseline graph/MMAR-on/cache-on for a fresh
+input-structure diagnostic. Existing current controller must not be edited/restarted.
+
 LIVE21:49 UTC cache-off diagnostic: PID2997867 PPID1, container
 bbf30a6eee39d35c709ea63e5d474151c234ffc8f6244cf97d526b8e116ab812,
 artifact /cache/austinov/eval-runs/switch12h-qwen38-cacheoff-20260913-T4RYhJ.
