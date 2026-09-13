@@ -2,6 +2,22 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+22:43 pre-scoring correction: historical2-item quality canary9ryELw explicitly
+records n-shot mmlu_abstract_algebra=0, gsm8k=5. Its MMLU1/2 score was a0-shot
+plumbing check, NOT the promised5-shot protocol. Individual MMLU default YAML
+does not set num_fewshot; no group-inheritance claim is established. Fixed
+run_standard_text_quality.py to set num_fewshot=5 explicitly for both task types,
+assert constructed task configs and actual result n-shot values, and persist
+shot counts in protocol metadata. Source fix made BEFORE current CPU evaluator
+started; controller3385497 remained in NPU startup, no model/frame/image edits.
+The controller hashes evaluator files immediately before launching the client,
+so use evaluator.sha256 for exact scoring bytes rather than only startup commit.
+Full offline construction passed58tasks/15361rows/all58five-shot, artifact
+/cache/austinov/eval-runs/switch-five-shot-preflight-iRnuOM/full/results.json,
+SHA256eff979b0e9bfda2f197bcd1bd0766dd360d65e5a88e8c1a8c52b06f7285da219.
+Await actual concurrent5-shot canary before claiming full scoring began. Keep
+old0-shot records unchanged and excluded from5-shot accuracy comparisons.
+
 LIVE22:39 UTC Qwen3.8 full text-quality pipeline PID3385497 PPID1, container
 f1055dcda5e4572b2dbcd56b14c275c074ecd680c9b16c2730688b81b6d99f84,
 artifact /cache/austinov/eval-runs/switch12h-qwen38-text-full-20260913-oOH3fa.

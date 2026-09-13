@@ -55,11 +55,17 @@ def main():
             ap.error('Only exact MMLU subject names and gsm8k are supported')
         config = load_yaml(path, resolve_func=True)
         config['custom_dataset'] = provider
+        # Individual MMLU YAMLs do not set num_fewshot. Pin the promised
+        # protocol explicitly instead of relying on the task default (zero).
+        config['num_fewshot'] = 5
         tasks.append(ConfigurableTask(config=config))
+    if any(task.get_config('num_fewshot') != 5 for task in tasks):
+        raise RuntimeError('All standard text tasks must use exactly five shots')
     args.output.mkdir(parents=True)
     if args.preflight_only:
         doc = {'scope':'task construction only; no model requests',
-               'tasks':args.tasks, 'test_rows':[len(t.test_docs()) for t in tasks]}
+               'tasks':args.tasks, 'test_rows':[len(t.test_docs()) for t in tasks],
+               'fewshot_counts':[t.get_config('num_fewshot') for t in tasks]}
     else:
         from no_thinking_api import NoThinkingCompletions
         from lm_eval import simple_evaluate
@@ -79,9 +85,11 @@ def main():
             fewshot_random_seed=1024, bootstrap_iters=1000)
         if doc is None:
             raise RuntimeError('Evaluator returned no result')
+        if any(doc.get('n-shot', {}).get(name) != 5 for name in args.tasks):
+            raise RuntimeError('Actual evaluation shot counts violated the protocol')
     doc['switch_run_protocol'] = {'tasks':args.tasks, 'concurrency':args.concurrency,
         'limit':args.limit, 'model':args.model, 'tokenizer':args.tokenizer,
-        'seed':1024, 'enable_thinking':False, 'max_length':40960,
+        'seed':1024, 'num_fewshot':5, 'enable_thinking':False, 'max_length':40960,
         'max_gen_toks':4096, 'batch_size':1}
     path = args.output/'results.json'
     path.write_text(json.dumps(doc, ensure_ascii=False, indent=2, default=str)+'\n')
