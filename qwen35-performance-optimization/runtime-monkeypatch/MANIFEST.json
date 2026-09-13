@@ -19,13 +19,29 @@
     "AICPU-first M=1 operator bytes as a final candidate"
   ],
   "candidate_prefill_t14": {
-    "status": "offline_verified_live_pending",
+    "status": "rejected_after_warm_same_service_c1_failfast",
     "base": "current t12 runtime projection/prefetch stack",
     "custom_opp": false,
     "mmar_prefill_fallback_threshold": 512,
     "mmar_prefill_fallback_max_tokens": 16384,
     "decode_range_modified": false,
-    "rationale": "bounded prefill MMAR is the retained TTFT component; decode still requires a separately validated project-specific component to clear the current 10 percent TPOT gate"
+    "service_artifact_root": "/cache/austinov/qwen35-candidate-prefill-service-20260913-v15",
+    "activation_report_sha256": "6712cf7ce54fa7351e9b37a73a7c80db0f051d0d124f51ff35d2e2cff234f7ae",
+    "warmup_artifact_sha256": "034ceeade183d3fa02e12c04d20ec771db24667798a93d6d3262cf116bef5ee1",
+    "failfast_artifact_sha256": "1b9d6f77dd9b95af8166ac289daa803dd71f2136489c106b8464f1c3ee3ec289",
+    "failfast_c1_32": {
+      "completed": 32,
+      "errors": 0,
+      "natural_eos": true,
+      "ttft_p95_ms": 850.068,
+      "tpot_p95_ms": 31.342,
+      "ttft_required_max_ms": 672.858,
+      "tpot_required_max_ms": 26.018,
+      "ttft_reduction_vs_fresh_control_fraction": -0.0107,
+      "tpot_reduction_vs_fresh_control_fraction": -0.0841
+    },
+    "decision": "reject before the full matrix: after an isolated 32-request warmup on the same live service, both c1 performance gates failed",
+    "rationale": "the historical large TTFT result compared a cold control; current warm evidence shows bounded prefill MMAR does not provide the required steady-state improvement"
   },
   "candidate_t21_dense_mlp": {
     "status": "rejected_after_tp4_service_failfast",
@@ -192,7 +208,7 @@
   "sitecustomize_sha256": "ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "fresh_control_matrix_completed_mrv1_rejected_candidate_search_active",
+  "status": "fresh_control_matrix_completed_mrv1_and_candidate_prefill_rejected_candidate_search_active",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
@@ -200,7 +216,7 @@
     "Ascend GDN fused projection forward path",
     "linear-attention gate/up weight prefetch",
     "Gemma RMSNorm prefetch postprocess",
-    "opt-in bounded prefill-only MMAR decomposition for candidate-prefill",
+    "opt-in bounded prefill-only MMAR decomposition for candidate-prefill (rejected after warm c1 fail-fast)",
     "opt-in vLLM Scheduler and DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1",
     "opt-in upstream T21 dense local MLP through a public ACL torch operator, zero-copy model-weight views, and existing vLLM TP AllReduce (rejected after live service test)",
     "opt-in upstream MRV1 full-model ACL Graph super-kernel with static-kernel compilation (rejected on the target stack before service readiness)"

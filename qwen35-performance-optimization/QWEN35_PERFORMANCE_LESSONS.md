@@ -40,6 +40,7 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | First T21 PyTorch bridge | Compiled, but load failed on private, non-exported vllm_ascend::NPUBridge symbol even with explicit vllm_ascend_C linkage | Do not copy or reimplement NPUBridge. Build the next bridge only from public ACL tensor APIs and the current torch-npu stream, or use an upstream public registration seam. |
 | T21 public fused-MLP TP4 service | c1 TTFT improved only 7.51%, while TPOT regressed 144.3% against the paired fresh control | The operator's numerical gate is necessary but not sufficient; reject a correct local kernel when its complete projection/collective path regresses end to end. |
 | T30 upstream MRV1 Super Kernel | All four workers activated the exact upstream backport, but CANN AclskOptimize failed with ACL 500001 during graph capture | Never swallow an optimization failure. Upstream provenance plus unit tests is not target-stack validation, and a service that never becomes ready produces no admissible performance or quality claim. |
+| T31 bounded prefill MMAR rerun | After a separate 32-request warmup, c1 TTFT P95 was 850.068 ms and TPOT P95 was 31.342 ms versus fresh-control medians 841.073/28.909 ms; 32/32, zero errors, natural EOS | The historical 87% TTFT result was a cold-control artifact. Compare steady state on one live service and reject this component before the full matrix. |
 
 ## Decisions changed by the corrected target
 
@@ -91,9 +92,9 @@ Do not mechanically carry forward rejections that depended only on the old
 ## Immediate resume point
 
 1. Keep the fresh v14 control matrix as the only current acceptance reference.
-2. Re-run the nearest historical bounded-prefill candidate against that control
-   with a c1 fail-fast gate; the old T11/T20 controls are not substitutes for
-   current evidence.
-3. In parallel with candidate admission, continue the post-v0.23 upstream audit
-   for a Qwen3.5/910B decode-path change. Only a passing fail-fast result may
-   enter c1/c5/c8/c16 x3 and the full paired quality gate.
+2. Keep bounded-prefill MMAR rejected: its warm c1 fail-fast missed both current
+   gates. Do not rerun it unchanged or use its historical cold-control result.
+3. Continue the post-v0.23 upstream audit for a Qwen3.5/910B decode-path change.
+   The next candidate must contain an upstream-derived base plus a measurable
+   project-specific delta. Only a passing c1 fail-fast result may enter
+   c1/c5/c8/c16 x3 and the full paired quality gate.
