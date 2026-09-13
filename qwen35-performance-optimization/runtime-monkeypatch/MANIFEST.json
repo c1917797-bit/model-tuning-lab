@@ -67,6 +67,36 @@
     "decision": "reject before c5/c8/c16: TTFT passed but TPOT regressed and failed the current acceptance gate",
     "rollback": "set QWEN35_ASCEND_DECODE_QKV_VIEW=0 and restart"
   },
+  "retained_upstream_fused_prefill": {
+    "status": "retained_as_ttft_component_not_final",
+    "upstream_basis_commit": "77d13e2c0",
+    "service_artifact_root": "/cache/austinov/qwen35-fused-prefill-service-20260913-v3",
+    "c1_32": {
+      "completed": 32,
+      "errors": 0,
+      "natural_eos": true,
+      "ttft_p95_ms": 617.432,
+      "tpot_p95_ms": 28.276,
+      "ttft_reduction_vs_fresh_control_fraction": 0.2659,
+      "tpot_reduction_vs_fresh_control_fraction": 0.02189
+    },
+    "remaining_c1_tpot_gap_ms_per_token": 2.2583,
+    "decision": "retain as the TTFT base and continue decode/MMAR candidate search"
+  },
+  "retained_stack_profile_t34": {
+    "status": "completed_diagnostic_not_performance_evidence",
+    "service_artifact_root": "/cache/austinov/qwen35-t34-retained-profile-service-20260913-v1",
+    "raw_profile_root": "/cache/austinov/qwen35-t34-retained-profile-raw-20260913-v1",
+    "analysis_root": "/cache/austinov/qwen35-t34-retained-profile-analysis-20260913-v1",
+    "mmar_timeline_sha256": "7295a8da66a6eeaa6c44e04a365afbeb129d2910d8731f509f0982c3c2a903cf",
+    "dense_tail_budget_sha256": "9497bd941b3c5fef72178e4ea46d54950b2895126af1a853d7fbbd2a84138fa0",
+    "gdn_terminal_budget_sha256": "6c88b483ec8eeffa070ab364789f060881f48dac219fdc5b5718eb5cf1486ae4",
+    "decode_steps": 105,
+    "dense_k4352_mmar_us_per_step_max_rank": 5922.591,
+    "dense_chain_us_per_step_max_rank": 6205.585,
+    "gdn_terminal_zero_cost_upper_bound_ms_per_token": 3.108,
+    "decision": "reject copy-only and activation-only candidates; require a materially new upstream-derived MMAR/collective boundary"
+  },
   "candidate_t21_dense_mlp": {
     "status": "rejected_after_tp4_service_failfast",
     "enabled_by": "QWEN35_ASCEND_T21_DENSE_MLP=1",
@@ -233,7 +263,7 @@
   "sitecustomize_sha256": "2f9447e1d47b1f815b0fc2fb5863924ff28b7e1cf31bef73de00403eb7517ede",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "fused_prefill_ttft_component_retained_decode_qkv_view_rejected_search_active",
+  "status": "fused_prefill_ttft_component_retained_t34_profiled_mmar_collective_search_active",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",

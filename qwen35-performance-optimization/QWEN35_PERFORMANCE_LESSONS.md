@@ -19,6 +19,7 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | Result | Evidence | Durable lesson |
 |---|---|---|
 | T20 bounded-prefill c1/32: TTFT 6310.576 -> 808.224 ms, 87.193% reduction; TPOT 29.107 -> 28.282 ms, 2.835% reduction; 32/32, zero errors, natural EOS | /cache/austinov/qwen35-t20-candidate-prefill-20260911 | Retain as the TTFT component, not a final stack. |
+| T32 upstream fused-GDN prefill c1/32: TTFT 841.073 -> 617.432 ms, 26.590% reduction; TPOT 28.909 -> 28.276 ms, 2.189% reduction; 32/32, zero errors, natural EOS | /cache/austinov/qwen35-fused-prefill-service-20260913-v3 | This is the current TTFT base; compose only with a separately proven decode treatment. |
 | Historical T11 c1: TTFT reduction 47.7%, TPOT reduction 17.3% | Runtime monkeypatch manifest | It clears the corrected c1 thresholds, but lacks the current full matrix and quality proof. Reproduce before claiming. |
 | T27 upstream SwiGLU MLP FLOAT smoke passed on NPU0 | /cache/austinov/qwen35-t21-upstream-float-smoke-20260912T163200Z | The minimal official six-argument ExecMmOp ABI adapter is viable. |
 | T27 exact TP4 BF16 matrix passed 12/12 for M=1/5/8/16 x seeds 1/2/3 | /cache/austinov/qwen35-t21-bf16-numerical-20260912T163327Z | Every case was bit-exact against official Matmul -> SwiGLU -> Matmul; the operator may enter model integration but is not promoted. |
@@ -41,6 +42,7 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | T21 public fused-MLP TP4 service | c1 TTFT improved only 7.51%, while TPOT regressed 144.3% against the paired fresh control | The operator's numerical gate is necessary but not sufficient; reject a correct local kernel when its complete projection/collective path regresses end to end. |
 | T30 upstream MRV1 Super Kernel | All four workers activated the exact upstream backport, but CANN AclskOptimize failed with ACL 500001 during graph capture | Never swallow an optimization failure. Upstream provenance plus unit tests is not target-stack validation, and a service that never becomes ready produces no admissible performance or quality claim. |
 | T31 bounded prefill MMAR rerun | After a separate 32-request warmup, c1 TTFT P95 was 850.068 ms and TPOT P95 was 31.342 ms versus fresh-control medians 841.073/28.909 ms; 32/32, zero errors, natural EOS | The historical 87% TTFT result was a cold-control artifact. Compare steady state on one live service and reject this component before the full matrix. |
+| T33 zero-copy M=1 QKV views | Warmed c1 TTFT passed at 609.652 ms, but TPOT regressed 2.147% to 29.530 ms/token | Sub-one-percent layout/copy work is not the retained stack's TPOT bottleneck. Do not compose or rerun unchanged. |
 
 ## Decisions changed by the corrected target
 
@@ -49,12 +51,11 @@ Do not mechanically carry forward rejections that depended only on the old
 
 - T11 is now performance-admissible at c1, but still lacks current matrix and
   accuracy evidence.
-- T19 measured a theoretical maximum of about 3.048 ms/token for the GDN
-  terminal interval. That was insufficient for the old roughly 6.10 ms/token
-  gap. The corrected c1 TPOT target from the T20 control needs roughly
-  2.91 ms/token. Recalculate overlap and realizable savings before deciding
-  whether T19 can contribute to a stack; the theoretical interval is not an
-  achieved speedup.
+- T34 remeasured the T19 GDN terminal envelope on the retained stack at a
+  3.108 ms/token zero-cost upper bound. The current c1 gap is 2.2583 ms/token,
+  so this route would have to realize about 72.7 percent of the whole envelope.
+  The existing fused AddRMSNorm path already regressed end to end; only a
+  materially different, numerically gated boundary may reopen it.
 - Compatibility, accuracy, hardware, and measured-regression failures remain
   closed regardless of the lower target.
 
@@ -98,6 +99,9 @@ Do not mechanically carry forward rejections that depended only on the old
    TTFT reduction but regressed TPOT by 2.147% after a separate same-service
    warmup. Do not rerun or compose this exact implementation unchanged.
 4. Continue the post-v0.23 upstream audit for a Qwen3.5/910B decode-path change.
-   The next candidate must contain an upstream-derived base plus a measurable
-   project-specific delta. Only a passing c1 fail-fast result may enter
-   c1/c5/c8/c16 x3 and the full paired quality gate.
+   T34 shows collective/MMAR at 69.049 percent and matmul at 21.706 percent of
+   summed profiled duration, while copy/layout and individual elementwise
+   targets are near or below one percent. The next candidate must contain an
+   upstream-derived base plus a measurable project-specific MMAR/collective
+   delta with a conservative 2.2583 ms/token budget. Only a passing c1
+   fail-fast result may enter c1/c5/c8/c16 x3 and the full paired quality gate.

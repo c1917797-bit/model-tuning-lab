@@ -6,8 +6,8 @@ workstream on Ascend 910B4 and vLLM-Ascend 0.23.0.
 ## Current objective
 
 - preserve paired semantic quality on the frozen query_rewrite workload;
-- reduce TTFT P95 by at least 40% at c1/c5/c8/c16;
-- reduce TPOT P95 by at least 20% at c1/c5/c8/c16;
+- reduce TTFT P95 by at least 20% at c1/c5/c8/c16;
+- reduce TPOT P95 by at least 10% at c1/c5/c8/c16;
 - use BF16 TP4 on physical NPU0-3 only;
 - do not use quantization, retraining, MTP, speculative decoding, vLLM source
   edits, final source overlays, or base-image mutation.
@@ -17,27 +17,25 @@ workstream on Ascend 910B4 and vLLM-Ascend 0.23.0.
 
 ## Current candidate
 
-The active t12 candidate is a standalone Python runtime monkeypatch under
-runtime-monkeypatch/. It reconstructs the previously promising GDN qkvz/ba
-projection fusion and gate/up-prefetch stack without replacing files from
-vLLM or vLLM-Ascend.
+The retained base is T32: an upstream fused-GDN prefill backport composed with
+the Qwen3.5 projection monkeypatch. Its warmed c1/32 result reduced TTFT P95
+from 841.073 ms to 617.432 ms (26.590 percent) with zero errors and natural
+EOS. TPOT improved only 2.189 percent, from 28.909 to 28.276 ms/token, so this
+is a TTFT component rather than a final candidate.
 
-Its code and offline deployment contracts are validated, including an
-editable installation in the pinned official image with no network and no NPU
-devices. It has not yet run on NPU because physical NPU0-3 currently have an
-external owner. Consequently this directory makes no t12 performance or
-quality-pass claim yet.
-
-The earlier bounded-MMAR t11 result remains historical evidence:
-
-- c1 TTFT P95: 966.3259 ms to 505.1956 ms, 47.7% lower;
-- c1 TPOT P95: 39.0459 ms to 32.3098 ms, 17.3% lower.
-
-t11 is not final because it missed the current 20% TPOT target.
+T33 zero-copy M=1 QKV views was rejected after TPOT regressed 2.147 percent.
+T34 profiles the retained stack and proves that the remaining decode work is
+dominated by MMAR/collective boundaries. The active search is therefore for an
+upstream-derived, Qwen-specific MMAR/collective delta capable of closing the
+remaining 2.2583 ms/token c1 gap without accuracy loss.
 
 ## Review map
 
 - VALIDATION_PLAN.md: audited ordered plan and acceptance boundaries.
+- T32_UPSTREAM_FUSED_GDN_PREFILL_FINDINGS.md: retained TTFT component.
+- T33_DECODE_QKV_VIEW_ADMISSION.md: rejected zero-copy decode candidate.
+- T34_RETAINED_STACK_PROFILE_FINDINGS.md: current decode/MMAR budget and next
+  candidate admission boundary.
 - runtime-monkeypatch/: candidate code, offline installer, activation wrapper,
   digest manifest, and static fusion test.
 - scripts/run_qwen35_gdn_runtime_t12_npu03.sh: full-lifetime NPU0-3 lease,
