@@ -2,6 +2,20 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+21:40 MMAR-off diagnostic TERMINAL (finished21:39:28). PID2841060 missing;
+exact owned container8d8155054e91 gone.36/36 responses,0HTTP errors. GreedyA:
+8/12empty,0length; greedyB:9/12empty,1length; official:8/12empty,0length.
+Artifact /cache/austinov/eval-runs/switch12h-qwen38-mmaroff-20260913-oMQll2/probe/summary.json
+SHA2566af79439a577c25a3b54e34de033e5fc680687d93c1962d22a62ab6c3b0abcdf.
+Image logs explicitly confirmed enable_matmul_allreduce=False. Disabling MMAR
+alone is NOT a fix. Do not repeat unchanged MMAR-off/eager/recipe diagnostics.
+No active NPU run remains from this lifecycle; recheck physical resources before
+next launch. Main performance baseline and full quality remain incomplete.
+Next localization should target prompt-to-first-token/prefill behavior rather
+than asserting a decode-only root cause. Native rendered token identity versus
+chat frontend and prefix/state lifecycle remain unisolated. Use exact image
+source, not the newer host checkout, and predeclare one changed hypothesis.
+
 Quality-runner preparation: --tasks mmlu gsm8k expands exactly57 MMLU subjects
 plus GSM8K; duplicate tasks rejected. --concurrency1/5/8/16 explicitly forwards
 to pinned TemplateAPI.num_concurrent (api_models.py122/182); default remains1.
