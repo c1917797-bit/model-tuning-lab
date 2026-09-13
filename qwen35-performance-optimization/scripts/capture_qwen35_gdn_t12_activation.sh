@@ -11,7 +11,7 @@ port="${PORT:-10010}"
 [[ -f "$OUTPUT_ROOT/variant.txt" ]] || { echo "missing variant.txt" >&2; exit 66; }
 variant="$(cat "$OUTPUT_ROOT/variant.txt")"
 case "$variant" in
-  candidate|candidate-prefill|candidate-prefill-t21|candidate-prefill-no-prefetch|candidate-super-kernel|candidate-fused-prefill|control) ;;
+  candidate|candidate-prefill|candidate-prefill-t21|candidate-prefill-no-prefetch|candidate-super-kernel|candidate-fused-prefill|candidate-fused-prefill-decode-view|control) ;;
   *) echo "invalid recorded variant: $variant" >&2; exit 66 ;;
 esac
 container_name="${CONTAINER_NAME:-qwen35_gdn_runtime_t12_${variant}_npu03}"

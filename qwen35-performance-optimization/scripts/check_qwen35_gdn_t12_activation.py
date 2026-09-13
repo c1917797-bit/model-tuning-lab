@@ -44,6 +44,7 @@ REQUIRED_MARKERS = {
     "mrv1_npugraph_options": "backported upstream MRV1 npugraph-ex options",
     "mrv1_optimized_graph": "MRV1 super-kernel optimized ACL graph",
     "upstream_fused_prefill": "backported upstream 77d13e2c0 fused GDN prefill",
+    "decode_qkv_view": "extended upstream QKV rearrange reuse to zero-copy M1 decode",
 }
 NPU_PROCESS_RE = re.compile(
     r"^\|\s*([0-7])\s+\d+\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|",
@@ -100,6 +101,7 @@ def check(
         "candidate-prefill-no-prefetch",
         "candidate-super-kernel",
         "candidate-fused-prefill",
+        "candidate-fused-prefill-decode-view",
         "control",
     }
     if variant not in variants:
@@ -108,7 +110,11 @@ def check(
     operator_enabled = variant == "candidate"
     t21_enabled = variant == "candidate-prefill-t21"
     super_kernel_enabled = variant == "candidate-super-kernel"
-    upstream_fused_prefill_enabled = variant == "candidate-fused-prefill"
+    upstream_fused_prefill_enabled = variant in {
+        "candidate-fused-prefill",
+        "candidate-fused-prefill-decode-view",
+    }
+    decode_qkv_view_enabled = variant == "candidate-fused-prefill-decode-view"
     gdn_fusion_enabled = patch_enabled and not super_kernel_enabled
     prefill_enabled = variant in {
         "candidate-prefill",
@@ -147,6 +153,8 @@ def check(
             expected = super_kernel_enabled
         if name == "upstream_fused_prefill":
             expected = upstream_fused_prefill_enabled
+        if name == "decode_qkv_view":
+            expected = decode_qkv_view_enabled
         marker_checks[name] = count >= expected_ranks if expected else count == 0
 
     env = _environment(inspect)
@@ -163,6 +171,9 @@ def check(
         ),
         "QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE": (
             "0"
+        ),
+        "QWEN35_ASCEND_DECODE_QKV_VIEW": (
+            "1" if decode_qkv_view_enabled else "0"
         ),
         "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS": (
             "1" if gdn_fusion_enabled else "0"

@@ -123,6 +123,7 @@
   "historical_implementation_provenance": {
     "scope": "source and device-free behavioral equivalence; live t12 evidence recorded",
     "vllm_ascend_gdn_forward_commit": "d98e37ebb72acd71b5a35222fd7ab7f8049d41cb",
+    "vllm_ascend_mixed_qkv_reuse_commit": "2bb515688d1ff21def27c7246f3b433a9f1e42ff",
     "vllm_ascend_prefetch_lifecycle_commit": "82a2dce7",
     "vllm_gdn_projection_commit": "685fdf22098fb3a0aa8d582dda57063773606a02"
   },
@@ -205,15 +206,16 @@
   ],
   "runtime_scope": "new_disposable_container_with_read_only_patch_mount",
   "schema": "qwen35-runtime-monkeypatch/v2",
-  "sitecustomize_sha256": "ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4",
+  "sitecustomize_sha256": "2f9447e1d47b1f815b0fc2fb5863924ff28b7e1cf31bef73de00403eb7517ede",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "fresh_control_matrix_completed_mrv1_and_candidate_prefill_rejected_candidate_search_active",
+  "status": "fused_prefill_ttft_component_retained_decode_qkv_view_candidate_admitted_to_live_test",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
     "six-way fused checkpoint weight mapping",
     "Ascend GDN fused projection forward path",
+    "opt-in zero-copy M=1 decode QKV views extending upstream rearrange reuse",
     "linear-attention gate/up weight prefetch",
     "Gemma RMSNorm prefetch postprocess",
     "opt-in bounded prefill-only MMAR decomposition for candidate-prefill (rejected after warm c1 fail-fast)",

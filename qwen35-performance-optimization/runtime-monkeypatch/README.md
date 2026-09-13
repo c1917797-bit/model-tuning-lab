@@ -59,9 +59,10 @@ with no candidate repetition or median accuracy below its control. See
 
 This directory contains a source-overlay-free Python candidate for the
 unchanged vLLM-Ascend 0.23.0 image. It is not the final commercial performance
-deliverable: offline installation and contract tests pass, and live activation
-plus smoke passed on physical NPU0-3, but the c1/32 fail-fast performance gate
-missed the current TTFT >=20% and TPOT >=10% targets.
+deliverable: the upstream fused-prefill stack passed the c1 TTFT target on
+physical NPU0-3, but still missed the TPOT target. A new opt-in decode-layout
+candidate is admitted to live testing; it is not promoted until its service
+and quality gates pass.
 
 The candidate installs five coordinated runtime changes:
 
@@ -70,6 +71,13 @@ The candidate installs five coordinated runtime changes:
 - Ascend GDN forward consumption of the fused outputs;
 - linear-attention gate/up weight prefetch;
 - Gemma RMSNorm prefetch postprocessing.
+
+The `candidate-fused-prefill-decode-view` variant disables the retired
+prefetch hooks, retains upstream fused GDN prefill, and extends upstream commit
+`2bb515688`'s QKV-rearrange reuse principle to pure M=1 decode. For a packed
+single-row QKV tensor, the three column slices are already contiguous views,
+so the candidate bypasses the upstream cat/copy kernel without changing the
+recurrent operator ABI. All non-M1 shapes fall back to the official method.
 
 It also contains an opt-in t13 diagnostic hook for the DyntraLBScheduler. The
 diagnostic hook is disabled by default and is activated only with
@@ -85,7 +93,7 @@ MMAR path. This variant does not mount the rejected AICPU-first custom OPP and
 is disabled unless the launcher explicitly selects it. The expected
 sitecustomize.py SHA256 is:
 
-    d3ce2884c0d983655520af7b66746a484920ce75bb28c7bd6a6a5620061c35dd
+    2f9447e1d47b1f815b0fc2fb5863924ff28b7e1cf31bef73de00403eb7517ede
 
 The `candidate-prefill-no-prefetch` ablation keeps the same bounded-prefill
 rewrite and GDN projection patch while disabling both the official weight

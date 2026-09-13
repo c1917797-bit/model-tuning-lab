@@ -70,6 +70,10 @@ def _fused_prefill_metadata_reuse_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE", "0") == "1"
 
 
+def _decode_qkv_view_enabled() -> bool:
+    return os.getenv("QWEN35_ASCEND_DECODE_QKV_VIEW", "0") == "1"
+
+
 def _weight_prefetch_patch_enabled() -> bool:
     return os.getenv("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH", "1") == "1"
 
@@ -155,6 +159,7 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
     if getattr(cls, "_qwen35_projection_fusion_monkeypatched", False):
         return
     original_init = cls.__init__
+    original_rearrange_mixed_qkv = cls.rearrange_mixed_qkv
 
     @functools.wraps(original_init)
     def __init__(self, *args, **kwargs):
@@ -200,6 +205,41 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
 
     cls.__init__ = __init__
     cls.project_qkvz_ba = project_qkvz_ba
+    if _decode_qkv_view_enabled():
+        @functools.wraps(original_rearrange_mixed_qkv)
+        def rearrange_mixed_qkv(self, mixed_qkv):
+            # Extend upstream's QKV-rearrange reuse idea to the exact
+            # non-speculative M=1 decode shape.  A row slice of a packed
+            # [1, q+k+v] tensor is already contiguous because its only
+            # non-unit stride belongs to a size-one dimension.  Returning
+            # shaped views therefore removes the upstream cat/copy kernel
+            # without changing values, storage, or the recurrent-op ABI.
+            if (
+                mixed_qkv is not None
+                and mixed_qkv.ndim == 2
+                and mixed_qkv.size(0) == 1
+            ):
+                q_dim = self.key_dim // self.tp_size
+                k_dim = self.key_dim // self.tp_size
+                v_dim = self.value_dim // self.tp_size
+                query, key, value = module.torch.split(
+                    mixed_qkv, [q_dim, k_dim, v_dim], dim=-1
+                )
+                query = query.view(1, 1, -1, self.head_k_dim)
+                key = key.view(1, 1, -1, self.head_k_dim)
+                value = value.view(1, 1, -1, self.head_v_dim)
+                if (
+                    query.is_contiguous()
+                    and key.is_contiguous()
+                    and value.is_contiguous()
+                ):
+                    return query, key, value
+            return original_rearrange_mixed_qkv(self, mixed_qkv)
+
+        cls.rearrange_mixed_qkv = rearrange_mixed_qkv
+        _notice(
+            "extended upstream QKV rearrange reuse to zero-copy M1 decode"
+        )
     cls._qwen35_projection_fusion_monkeypatched = True
     _notice("patched Qwen3.5 GDN fused projection construction")
 

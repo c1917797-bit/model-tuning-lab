@@ -54,6 +54,7 @@ def main() -> None:
                 "mrv1_npugraph_options",
                 "mrv1_optimized_graph",
                 "upstream_fused_prefill",
+                "decode_qkv_view",
                 "fused_prefill_metadata_reuse",
             }
         )
@@ -67,6 +68,7 @@ def main() -> None:
                 "QWEN35_ASCEND_SUPER_KERNEL=0",
                 "QWEN35_ASCEND_UPSTREAM_FUSED_PREFILL=0",
                 "QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE=0",
+                "QWEN35_ASCEND_DECODE_QKV_VIEW=0",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0",
@@ -229,6 +231,51 @@ def main() -> None:
         assert result["passed"], result
         assert result["marker_counts"]["upstream_fused_prefill"] == 4
 
+        candidate_decode_view = json.loads(
+            json.dumps(candidate_fused_prefill)
+        )
+        candidate_decode_view[0]["Config"]["Labels"][
+            "com.c1917797.qwen35-variant"
+        ] = "candidate-fused-prefill-decode-view"
+        candidate_decode_view[0]["Config"]["Env"] = [
+            "QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=0"
+            if value.startswith("QWEN35_ASCEND_WEIGHT_PREFETCH_PATCH=")
+            else "QWEN35_ASCEND_DECODE_QKV_VIEW=1"
+            if value.startswith("QWEN35_ASCEND_DECODE_QKV_VIEW=")
+            else value
+            for value in candidate_decode_view[0]["Config"]["Env"]
+        ]
+        inspect.write_text(json.dumps(candidate_decode_view), encoding="utf-8")
+        decode_view_markers = "\n".join(
+            marker
+            for name, marker in checker.REQUIRED_MARKERS.items()
+            if name
+            not in {
+                "gate_up_prefetch",
+                "rmsnorm_postprocess",
+                "t21_dense_mlp",
+                "mrv1_acl_graph",
+                "mrv1_npugraph_options",
+                "mrv1_optimized_graph",
+                "fused_prefill_metadata_reuse",
+            }
+        )
+        log.write_text(
+            "\n".join([decode_view_markers] * 4) + "\n",
+            encoding="utf-8",
+        )
+        result = checker.check(
+            log,
+            inspect,
+            npu,
+            top,
+            models,
+            variant="candidate-fused-prefill-decode-view",
+        )
+        assert result["passed"], result
+        assert result["marker_counts"]["decode_qkv_view"] == 4
+        assert result["marker_counts"]["gate_up_prefetch"] == 0
+
         candidate_prefill_t21 = json.loads(json.dumps(candidate_prefill))
         candidate_prefill_t21[0]["Config"]["Labels"][
             "com.c1917797.qwen35-variant"
@@ -308,6 +355,7 @@ def main() -> None:
                 "mrv1_npugraph_options",
                 "mrv1_optimized_graph",
                 "upstream_fused_prefill",
+                "decode_qkv_view",
                 "fused_prefill_metadata_reuse",
             }
         )
