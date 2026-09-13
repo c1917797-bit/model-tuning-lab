@@ -13,7 +13,7 @@
     "ttft_p95_reduction_fraction_min": 0.2
   },
   "base_image_mutation": false,
-  "candidate": "runtime-monkeypatch-upstream-mrv1-super-kernel-t29",
+  "candidate": "runtime-monkeypatch-candidate-search-active",
   "excluded_historical_paths": [
     "ad-hoc IPC fullmesh MMAR implementations",
     "AICPU-first M=1 operator bytes as a final candidate"
@@ -41,13 +41,18 @@
     "reason": "c1 TTFT improved only 7.51 percent while TPOT regressed 144.3 percent"
   },
   "candidate_mrv1_super_kernel": {
-    "status": "official_image_activation_passed_live_npu_gate_pending",
+    "status": "rejected_after_live_graph_capture",
     "enabled_by": "QWEN35_ASCEND_SUPER_KERNEL=1 plus enable_static_kernel=true",
     "upstream_repository": "https://github.com/vllm-project/vllm-ascend",
     "upstream_commit": "7ab47e73d005756963e3c6dd0e491296401b1f19",
     "upstream_pr": 15059,
     "project_delta": "runtime-only exact-anchor backport into the unchanged official v0.23.0 image with isolated feature gating and activation logging",
     "offline_activation_operation": "exec-0000000000000755",
+    "live_service_artifact_root": "/cache/austinov/qwen35-mrv1-super-kernel-service-20260913-v1",
+    "service_log_sha256": "70ed038d322c40ac6000f4df0e2e67f41fa38c49571c59d614e68ce68ad3a750",
+    "live_activation": "all four TP workers logged both pinned upstream MRV1 backport markers before graph capture",
+    "failure": "torch_npu/CANN AclskOptimize failed with ACL error 500001 during super_kernel_optimize before service readiness",
+    "decision": "do not catch or ignore the optimizer failure; no benchmark or quality result is valid because the optimized service never became ready",
     "rollback": "set QWEN35_ASCEND_SUPER_KERNEL=0, remove enable_static_kernel, and restart"
   },
   "fresh_control_matrix": {
@@ -187,7 +192,7 @@
   "sitecustomize_sha256": "ed367f00057fe0766de47be5170bb2852e500a0e8fbc660dca52cbf53ecd9eb4",
   "source_overlays": 0,
   "speculative_decoding": false,
-  "status": "fresh_control_matrix_completed_mrv1_live_npu_gate_pending",
+  "status": "fresh_control_matrix_completed_mrv1_rejected_candidate_search_active",
   "tensor_parallel_size": 4,
   "treatments": [
     "Qwen3.5 GDN qkvz and ba projection fusion",
@@ -198,6 +203,6 @@
     "opt-in bounded prefill-only MMAR decomposition for candidate-prefill",
     "opt-in vLLM Scheduler and DyntraLBScheduler diagnostics when QWEN35_ASCEND_DIAGNOSTICS=1",
     "opt-in upstream T21 dense local MLP through a public ACL torch operator, zero-copy model-weight views, and existing vLLM TP AllReduce (rejected after live service test)",
-    "opt-in upstream MRV1 full-model ACL Graph super-kernel with static-kernel compilation"
+    "opt-in upstream MRV1 full-model ACL Graph super-kernel with static-kernel compilation (rejected on the target stack before service readiness)"
   ]
 }

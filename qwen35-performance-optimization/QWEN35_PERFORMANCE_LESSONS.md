@@ -38,6 +38,8 @@ profile-grounded Qwen3.5-specific delta. Pure copying is not completion.
 | A3-only AttentionToFFN/FFNToAttention and dense-incompatible fine-grained TP | Hardware/topology contract mismatch | Hard reject for A2 TP4. |
 | Old T12 GDN projection candidate | c1/32 improved TTFT only 12.38%, TPOT 0.36%, and only 16/32 response hashes matched | Loader/activation evidence only; not a quality-preserving performance result. |
 | First T21 PyTorch bridge | Compiled, but load failed on private, non-exported vllm_ascend::NPUBridge symbol even with explicit vllm_ascend_C linkage | Do not copy or reimplement NPUBridge. Build the next bridge only from public ACL tensor APIs and the current torch-npu stream, or use an upstream public registration seam. |
+| T21 public fused-MLP TP4 service | c1 TTFT improved only 7.51%, while TPOT regressed 144.3% against the paired fresh control | The operator's numerical gate is necessary but not sufficient; reject a correct local kernel when its complete projection/collective path regresses end to end. |
+| T30 upstream MRV1 Super Kernel | All four workers activated the exact upstream backport, but CANN AclskOptimize failed with ACL 500001 during graph capture | Never swallow an optimization failure. Upstream provenance plus unit tests is not target-stack validation, and a service that never becomes ready produces no admissible performance or quality claim. |
 
 ## Decisions changed by the corrected target
 
@@ -88,8 +90,10 @@ Do not mechanically carry forward rejections that depended only on the old
 
 ## Immediate resume point
 
-1. Keep T20 bounded-prefill as the TTFT component.
-2. Start the no-dynamic-M `candidate-prefill-t21` TP4 service and require four-rank
-   activation, natural EOS, and clean rollback.
-3. Run fail-fast official/upstream-base/project-delta ablation. Only then run
-   c1/c5/c8/c16 x3 and full paired quality.
+1. Keep the fresh v14 control matrix as the only current acceptance reference.
+2. Re-run the nearest historical bounded-prefill candidate against that control
+   with a c1 fail-fast gate; the old T11/T20 controls are not substitutes for
+   current evidence.
+3. In parallel with candidate admission, continue the post-v0.23 upstream audit
+   for a Qwen3.5/910B decode-path change. Only a passing fail-fast result may
+   enter c1/c5/c8/c16 x3 and the full paired quality gate.
