@@ -3,6 +3,8 @@
 set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
+stage="${3:-chat}"
+[[ "$stage" == chat || "$stage" == quality ]] || exit 64
 case "$label" in
  qwen3) model_path=/cache/austinov/Qwen3-32B; model=Qwen/Qwen3-32B; extra=();;
  qwen38) model_path=/cache/austinov/Qwen3.8-27B; model=Qwen/Qwen3.8-27B; extra=(--mamba-cache-mode align --mamba-cache-dtype bfloat16 --mamba-ssm-cache-dtype bfloat16);;
@@ -71,6 +73,23 @@ $ready || exit 70
 npu-smi info > "$out/npu.ready.txt"
 [[ "$(grep -c VLLMWorker_TP "$out/npu.ready.txt")" == 8 ]] || exit 70
 curl -fsS http://127.0.0.1:10010/v1/models > "$out/models.json"
+if [[ "$stage" == quality ]]; then
+ status quality_api_canary running
+ sha256sum "$code/run_standard_text_quality.py" "$code/no_thinking_api.py" "$code/offline_standard_data.py" > "$out/evaluator.sha256"
+ docker run --rm --network host --read-only --cap-drop ALL --security-opt no-new-privileges \
+  --cpus 4 --memory 8g --tmpfs /tmp:rw,size=2g \
+  -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 -e HF_DATASETS_OFFLINE=1 \
+  -e HF_HOME=/tmp/hf -e PYTHONPATH=/cache/austinov/eval-tools/lm-evaluation-harness-v0.4.13 \
+  -v /cache/austinov/eval-tools:/cache/austinov/eval-tools:ro \
+  -v /cache/austinov/eval-data/general:/data:ro -v "$code:/code:ro" \
+  -v "$model_path:/tokenizer:ro" -v "$out:/output" \
+  --entrypoint /cache/austinov/eval-tools/lm-eval-v0.4.13-venv/bin/python "$image" \
+  /code/run_standard_text_quality.py --harness /cache/austinov/eval-tools/lm-evaluation-harness-v0.4.13 \
+  --data-root /data --tokenizer /tokenizer --model "$model" \
+  --base-url http://127.0.0.1:10010/v1/completions --output /output/quality-canary \
+  --tasks mmlu_abstract_algebra gsm8k --limit 2 > "$out/quality-canary.log" 2>&1
+ exit 0
+fi
 status canary running
 python3 "$code/chat_benchmark.py" --base-url http://127.0.0.1:10010 --model "$model" \
  --dataset /cache/cch/query_rewrite.jsonl --dataset-sha256 a7a1c93be3a64843d2a4e316f39fbe1bd2c9d4bc7b8bb28776d121e0154b056e \
