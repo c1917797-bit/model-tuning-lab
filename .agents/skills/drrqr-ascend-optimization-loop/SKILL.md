@@ -142,6 +142,16 @@ reproduction.
   Also calculate the post-value-source ceiling separately: retaining dense
   value projection/convolution while reducing only recurrent and downstream
   work credited 2.645949 ms/token, below the 3.181665 ms/token open gap.
+- Do not use low raw recurrent-state reconstruction error as a proxy for
+  downstream fidelity or as permission to reopen an operator branch. A
+  fit-locked rank-2/Nv32 oracle retained most raw state energy at 0.061391
+  relative-L2, but after the exact original Z gates, RMS applications and
+  output projection its aggregate projected-error ratio was 3.272293; all 18
+  layer-fold comparisons failed the 1.10 gate. The Nv32 structural ceiling was
+  only +8.714329 percent and the post-value-source-only credit was 1.322975
+  ms/token. Reject the named Nv32 plus corrected-fusion combination before
+  arithmetic repair, build or NPU. A future reopen must change the
+  representation and pass downstream fidelity first.
 - Before proposing an in-place recurrent-state/cache operator, inspect the
   active torch mutation schema and caller. A mutable `Tensor(a!)` passed
   directly from the cache means state update is already in place. Bind profile

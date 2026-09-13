@@ -179,6 +179,53 @@ Artifact:
 - report SHA256: 32f9295d84d613a2f8c458071a8ee6957ccd70018e924772b8a3b9701da666a0
 - tool SHA256: fb57c1de16a7f3560b88e05cae1a900cb43a865ed2f044b39e942d6a2f172ff1
 
+## Rank-2 shared value-state oracle and fusion closure
+
+The final bounded representation check raised the favorable oracle from one to
+two orthogonal latent states for every three-head key group, reducing global
+Nv48 to Nv32. It still formed those states from all three real energy-Dk64
+operator outputs on validation and retained the exact original Z gates, RMS
+applications and checkpoint output projection. This is more informative than
+any implementable two-state recurrence because it pays no formation,
+foldability or dynamics penalty.
+
+| Metric | Result | Gate |
+|---|---:|---:|
+| Aggregate projected-error ratio | 3.272293 | <=1.10 |
+| Aggregate feature-error ratio | 3.210713 | <=1.10 |
+| Operator-state reconstruction relative-L2 | 0.061391 | diagnostic |
+| Worst fold projected-error ratio | 3.324044 | <=1.20 |
+| Layer-fold fraction <=1.10 | 0/18 | >=75% |
+| Worst layer-fold ratio | 3.868026 | <=1.50 |
+| Dense formula relative-L2 | 0.001660 | <=0.01 |
+
+The three fold ratios were 3.324044, 3.315541 and 3.185740, with all locks
+published before validation load. Although rank two reconstructs most raw
+operator-state energy, exact downstream gating, normalization and projection
+still amplify its error to more than three times the energy-Dk64 reference.
+This directly disproves raw-state reconstruction error as a sufficient
+admission metric.
+
+Nv32 structural reduction alone has an optimistic endpoint ceiling of
+146.919230 output tok/s, or +8.714329 percent, below the fixed target. Retaining
+dense value-source projection/convolution and reducing only proportional
+recurrent and downstream work credits just 1.322975 ms/token, still 1.858690
+ms/token short of the original gap. Because the fidelity gate failed, the
+specific Nv32 plus corrected fused-recurrent combination is closed without an
+overlap audit, Stage2 arithmetic repair, build, NPU, endpoint or accuracy run.
+
+Artifact:
+
+/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-rank2-oracle-cv-v1
+
+- operation: exec-0000000000000874, 357565 ms
+- started SHA256: d1bc1c7865a3f9f9fa8b5f0cdc0a4dc77b1c851d499e9a5323fec436ff281332
+- fold-0 lock SHA256: 3bbf9e670652ddbb19702dff81f5d09a9e5dfee72bec69c0ec905c319a0e238b
+- fold-1 lock SHA256: 3d4d85ff32f547a08435e62542a9821d7037654355af024121a8bcc554435808
+- fold-2 lock SHA256: 90b41c3fb52e4860b9cf008f8ae982c1c7c793186bc7ba70d84b6a0cc87cad2f
+- report SHA256: 7a6a25e809bf4ba5f9b866137f2a3f4abea091d8f4fabc0344e0906d4e1f22b0
+- tool SHA256: 062f64c1057f66f525bd0389bddaef5c5aa38ea0b5d50e08cf55b2f8adc60034
+
 ## What was established
 
 - The real Ascend GDN execution path and loaded binaries were identified.
@@ -194,8 +241,9 @@ Artifact:
   custom-operator results from reaching performance tests.
 - Multiple Q/K-only, heterogeneous-width, subspace, phase-transition,
   compensation, packed-QKV, normalization-fusion, layer-shared value-width and
-  per-head value-width, complete value-head scalar-merge and rank-1 shared
-  value-state routes were rejected at the cheapest faithful evidence layer.
+  per-head value-width, complete value-head scalar-merge, rank-1 and rank-2
+  shared value-state routes were rejected at the cheapest faithful evidence
+  layer.
 
 ## Why the program stops
 

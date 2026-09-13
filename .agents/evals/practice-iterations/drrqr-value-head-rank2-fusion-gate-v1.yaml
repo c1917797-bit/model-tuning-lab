@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: drrqr-value-head-rank2-fusion-gate-v1
 repository: model-tuning-lab
-status: active
+status: rejected
 date: 2026-09-13
-validated_commit: pending
+validated_commit: 673a6c0b04163c34126cf19ddfe0f69d028f4469
 
 stage_goal: Decide whether an Nv32 rank-2 value-state representation preserves enough energy-Dk64 fidelity to justify reopening the corrected fused-recurrent route as one combined algorithm-operator candidate.
 
@@ -50,10 +50,29 @@ evidence_protocol:
   lock_rule: Publish every fold's six-layer rank-2 bases before loading its validation rows.
 
 result:
-  outcome: pending
+  outcome: rejected
   analyzer: projects/drror_vllm_ascend/tools/analyze_drrqr_value_head_rank1_oracle_cv.py --latent-heads 2
   output: /cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/drrqr-value-head-rank2-oracle-cv-v1/report.json
   claim_ceiling: Reused-corpus CPU rank-2 representation oracle only.
+  operation_id: exec-0000000000000874
+  duration_ms: 357565
+  dense_formula_relative_l2: 0.0016597308
+  operator_state_reconstruction_relative_l2: 0.0613913693
+  aggregate_projected_error_ratio: 3.272292811
+  aggregate_feature_error_ratio: 3.210712795
+  fold_projected_error_ratios: [3.324043786, 3.315540781, 3.185739884]
+  layer_fold_ratio_at_most_1_10_count: 0
+  layer_fold_count: 18
+  worst_layer_fold_projected_error_ratio: 3.868026480
+  post_value_source_optimistic_credit_ms: 1.322974667
+  post_value_source_shortfall_ms: 1.858690045
+  started_sha256: d1bc1c7865a3f9f9fa8b5f0cdc0a4dc77b1c851d499e9a5323fec436ff281332
+  fold_0_lock_sha256: 3bbf9e670652ddbb19702dff81f5d09a9e5dfee72bec69c0ec905c319a0e238b
+  fold_1_lock_sha256: 3d4d85ff32f547a08435e62542a9821d7037654355af024121a8bcc554435808
+  fold_2_lock_sha256: 90b41c3fb52e4860b9cf008f8ae982c1c7c793186bc7ba70d84b6a0cc87cad2f
+  report_sha256: 7a6a25e809bf4ba5f9b866137f2a3f4abea091d8f4fabc0344e0906d4e1f22b0
+  analyzer_sha256: 062f64c1057f66f525bd0389bddaef5c5aa38ea0b5d50e08cf55b2f8adc60034
+  decision: Reject Nv32 static rank-2 value-state compression. Do not run the overlap-aware fusion audit, repair Stage2, build an operator, use NPU, start an endpoint benchmark, or run final accuracy for this combination.
 
 validation_commands:
   - parse analyzer with Python AST without bytecode
@@ -69,5 +88,8 @@ lessons_ingested:
     destination: performance contract
     severity: high
   - lesson: A prior fusion rejected as insufficient alone may be reconsidered only for a named combined algorithm-operator candidate with overlap removed, never by adding independent optimistic ceilings.
+    destination: drrqr-ascend-optimization-loop
+    severity: high
+  - lesson: Low raw operator-state reconstruction error is not a downstream fidelity result. Rank-2 retained most raw state energy at 0.061391 relative-L2, yet exact Z, RMS and output projection amplified the candidate to a 3.272293 projected-error ratio and all 18 layer-fold gates failed.
     destination: drrqr-ascend-optimization-loop
     severity: high

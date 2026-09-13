@@ -58,6 +58,19 @@
   implementation, NPU, endpoint or accuracy run followed. Report SHA256:
   32f9295d84d613a2f8c458071a8ee6957ccd70018e924772b8a3b9701da666a0.
   Static Nv16/rank-1 value-state mixtures are closed.
+- The drrqr-value-head-rank2-oracle-cv-v1 screen is complete and rejected.
+  The deliberately favorable Nv32 oracle fit two orthogonal states per
+  three-head key group from all three real energy-Dk64 operator outputs and
+  retained the original Z, RMS and output-projection paths. Raw operator-state
+  reconstruction relative-L2 improved to 0.061391, but aggregate
+  projected/feature error ratios remained 3.272293/3.210713. Fold ratios were
+  3.324044/3.315541/3.185740; zero of 18 layer-folds met 1.10 and the worst was
+  3.868026. Nv32 alone has only a +8.714329 percent optimistic endpoint
+  ceiling, and its post-value-source-only credit is 1.322975 ms/token versus
+  the 3.181665 ms/token open gap. This closes the named Nv32 plus corrected
+  fused-recurrent combination before overlap audit, Stage2 repair, build, NPU,
+  endpoint or accuracy. Report SHA256:
+  7a6a25e809bf4ba5f9b866137f2a3f4abea091d8f4fabc0344e0906d4e1f22b0.
 - The drrqr-dk64-fp32-inplace-state-cache-admission-v1 source/profile audit is
   complete and rejected before implementation. The active schema already marks
   recurrent state mutable and pure decode passes the cache tensor directly to
@@ -581,6 +594,7 @@ Qwen3.8 DRRQR-specific resume files:
 .agents/evals/practice-iterations/drrqr-bimodal-layer-rank-admission-v1.yaml
 .agents/evals/practice-iterations/drrqr-value-head-scalar-merge-cv-v1.yaml
 .agents/evals/practice-iterations/drrqr-value-head-rank1-oracle-cv-v1.yaml
+.agents/evals/practice-iterations/drrqr-value-head-rank2-fusion-gate-v1.yaml
 projects/drror_vllm_ascend/AGENTS.md
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/FROZEN_BASELINE_V1.json
 projects/drror_vllm_ascend/docs/experiments/qwen38-drrqr-correctness-20260908/GDN_TEACHER_CAPTURE.md
