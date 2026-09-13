@@ -1,5 +1,34 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Current goal correction — user clarification 2026-09-13
+
+The current business decision is whether to switch Qwen3-32B BF16 to
+Qwen3.5-27B BF16 under vLLM-Ascend. NVFP4 exploration is paused. The directory
+and branch names are historical and intentionally retained to avoid creating
+another worktree. Do not treat an automated old objective as a new model choice.
+
+Acceptance needs matched query_rewrite c1/c5/c8/c16 repeated performance,
+MMLU, GSM8K and HumanEval scores, plus output-length and business-quality
+context. Verify actual model/checkpoint identity; a Qwen3.8-labelled path and
+a Qwen3.5 served alias alone prove neither identity. Historical TP8/DP1 data
+must not be represented as TP4/DP2. Preserve the original official image.
+
+Existing artifact roots to audit before rerunning:
+- /cache/austinov/eval-runs/qwen3-32b-comparison
+- /cache/austinov/eval-runs/qwen-switch-chat-natural-eos-gate1b
+- /cache/austinov/eval-runs/qwen38-tp8-full-baseline
+
+The standard-quality controller failed loading cais/mmlu over an unavailable
+network. Local datasets exist. offline_standard_data.py now provides local
+lm-eval custom_dataset callables without changing prompts or scoring. Host
+data validation passed: MMLU 57 subjects/14042 test/285 dev, GSM8K 7473 train/
+1319 test, HumanEval 164 unique tasks; malformed subject paths are rejected.
+This is data-layer validation only: task wiring and datasets-library execution
+still need testing, then serving/quality gates. No model test was launched.
+
+All status, resource assignments and next actions below are historical unless
+revalidated against this corrected goal and live ownership.
+
 ## Status
 
 - Dedicated worktree: `/opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4`.

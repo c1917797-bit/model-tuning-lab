@@ -1,7 +1,8 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "exp-20260910-qwen38-nvfp4-ascend-910b4",
-  "objective": "Reproduce the official nvidia/Qwen3.8-27B-NVFP4 checkpoint on Ascend 910B4 and compare it with Qwen3.8-27B BF16 for serving performance and MMLU, GSM8K, and HumanEval quality without changing the fixed vLLM-Ascend 0.23.0 image.",
+  "objective": "Evaluate switching from Qwen3-32B BF16 to Qwen3.5-27B BF16 on vLLM-Ascend using matched query_rewrite c1/c5/c8/c16 performance and MMLU, GSM8K, HumanEval quality. Verify checkpoint identity independently of historical paths and aliases. NVFP4 work is paused per the user's clarified goal.",
+  "historicalObjective": "Qwen3.8-labelled BF16/NVFP4 exploration; retained as historical evidence, not the current acceptance contract.",
   "targetBranch": "main",
   "workBranch": "work/qwen38-nvfp4-ascend-910b4-20260910",
   "remote": "origin",
@@ -16,13 +17,13 @@
   "claims": [
     {"kind": "file", "mode": "exclusive", "value": "qwen38-nvfp4-ascend"},
     {"kind": "knowledge", "mode": "exclusive", "value": ".agents/workstreams/exp-20260910-qwen38-nvfp4-ascend-910b4"},
-    {"kind": "resource", "mode": "exclusive", "value": "chicaihong01 physical NPU0-3 only after one exclusive live lease is proven; always protect NPU4-7 and never preempt an external workload"}
+    {"kind": "resource", "mode": "read", "value": "No lease held by this record. Eight-card testing requires all physical NPU0-7 available and a fresh exclusive lease; never preempt other workloads."}
   ],
   "validationCommands": [
     "python3 qwen38-nvfp4-ascend/test_nvfp4_codec.py",
     "./scripts/validate-mst.sh",
     "git diff --check"
   ],
-  "executionState": "blocked-by-81-stopped-or-created-npu0-3-container-declarations",
+  "executionState": "in-progress-offline-data-and-model-identity-validation",
   "integrationState": "branch-local-not-promoted"
 }
