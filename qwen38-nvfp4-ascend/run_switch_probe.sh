@@ -3,6 +3,12 @@
 set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
+execution="${4:-graph}"
+case "$execution" in
+ graph) execution_args=(--compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,8,16,24,32]}');;
+ eager) execution_args=(--enforce-eager);;
+ *) exit 64;;
+esac
 case "$label" in
  qwen3) model_path=/cache/austinov/Qwen3-32B; model=Qwen/Qwen3-32B; extra=();;
  qwen38) model_path=/cache/austinov/Qwen3.8-27B; model=Qwen/Qwen3.8-27B; extra=(--mamba-cache-mode align --mamba-cache-dtype bfloat16 --mamba-ssm-cache-dtype bfloat16);;
@@ -55,7 +61,7 @@ container_id="$(docker run -d --rm --network host --shm-size 16g --label model-t
  --max-num-seqs 16 --max-model-len 40960 --max-num-batched-tokens 32768 \
  --trust-remote-code --gpu-memory-utilization 0.90 --enable-prefix-caching --enable-chunked-prefill \
  --disable-custom-all-reduce --async-scheduling "${extra[@]}" \
- --compilation-config '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,2,4,8,16,24,32]}' \
+ "${execution_args[@]}" \
  --additional-config '{"enable_cpu_binding":true,"enable_matmul_allreduce":true,"enable_flashcomm1":false}' \
  --default-chat-template-kwargs '{"enable_thinking":false}')"
 printf '%s\n' "$container_id" > "$out/container.id"

@@ -2,6 +2,19 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+21:03 sampling diagnostic TERMINAL, completed36 requests; own service cleaned.
+Artifact /cache/austinov/eval-runs/switch12h-qwen38-sampling-20260913-43OW1b,
+probe/summary.json SHA256494c1100be85bd1913bb24617f0c48567d7970e2f9cb37e905371952ffac22ea.
+Greedy A:8/12 empty,1 length; greedy B:7/12 empty,1 length; official recipe:
+7/12 empty,2 length. Recipe change did not fix business validity. Two greedy
+repeats differ on some examples despite same seed; root cause not established.
+Successor: same sampling-profile requests with only execution mode changed:
+run_switch_probe.sh qwen38 <fresh-out> sampling eager. This selects --enforce-eager
+instead of graph compilation settings; all model/data/cache/TP/recipe settings
+remain as before. Goal is isolate graph-path involvement, not accept a new
+performance baseline. Do not expand full quality before performance validity
+issue is resolved; retain every negative result. No external service edits.
+
 CURRENT LIVE RUN at20:56 UTC: sampling diagnostic PID2544764 (PPID1),
 container d0468a73dcdc79a8c8078b9f6cf7686b802f2a20ff7067d558c5a2dd3879f04e,
 artifact /cache/austinov/eval-runs/switch12h-qwen38-sampling-20260913-43OW1b.
