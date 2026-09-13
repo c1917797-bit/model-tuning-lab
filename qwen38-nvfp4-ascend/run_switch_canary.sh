@@ -4,7 +4,7 @@ set -Eeuo pipefail
 label="${1:?qwen3 or qwen38}"
 out="${2:?absolute fresh artifact directory}"
 stage="${3:-chat}"
-[[ "$stage" == chat || "$stage" == quality || "$stage" == performance ]] || exit 64
+[[ "$stage" == chat || "$stage" == quality || "$stage" == quality-full || "$stage" == performance ]] || exit 64
 if [[ "$stage" == performance ]]; then
  [[ "${4:-}" =~ ^[123]$ ]] || exit 64
 fi
@@ -76,9 +76,11 @@ $ready || exit 70
 npu-smi info > "$out/npu.ready.txt"
 [[ "$(grep -c VLLMWorker_TP "$out/npu.ready.txt")" == 8 ]] || exit 70
 curl -fsS http://127.0.0.1:10010/v1/models > "$out/models.json"
-if [[ "$stage" == quality ]]; then
+if [[ "$stage" == quality || "$stage" == quality-full ]]; then
  status quality_api_canary running
  sha256sum "$code/run_standard_text_quality.py" "$code/no_thinking_api.py" "$code/offline_standard_data.py" > "$out/evaluator.sha256"
+ run_text_eval() {
+ local result_name="$1"; shift
  docker run --rm --network host --read-only --cap-drop ALL --security-opt no-new-privileges \
   --cpus 4 --memory 8g --tmpfs /tmp:rw,size=2g \
   -e PYTHONDONTWRITEBYTECODE=1 -e HF_HUB_OFFLINE=1 -e HF_DATASETS_OFFLINE=1 \
@@ -90,8 +92,16 @@ if [[ "$stage" == quality ]]; then
   --entrypoint /cache/austinov/eval-tools/lm-eval-v0.4.13-venv/bin/python "$image" \
   /code/run_standard_text_quality.py --harness /cache/austinov/eval-tools/lm-evaluation-harness-v0.4.13 \
   --data-root /data --tokenizer /tokenizer --model "$model" \
-  --base-url http://127.0.0.1:10010/v1/completions --output /output/quality-canary \
-  --tasks mmlu_abstract_algebra gsm8k --limit 2 > "$out/quality-canary.log" 2>&1
+  --base-url http://127.0.0.1:10010/v1/completions --output "/output/$result_name" \
+  "$@" > "$out/$result_name.log" 2>&1
+ }
+ concurrency=1
+ [[ "$stage" != quality-full ]] || concurrency=8
+ run_text_eval quality-canary --tasks mmlu_abstract_algebra gsm8k --limit 2 --concurrency "$concurrency"
+ if [[ "$stage" == quality-full ]]; then
+  status quality_full running
+  run_text_eval quality-full --tasks mmlu gsm8k --concurrency 8
+ fi
  exit 0
 fi
 status canary running

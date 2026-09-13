@@ -73,6 +73,7 @@ def main():
             base_url=args.base_url, max_length=40960, max_gen_toks=4096,
             trust_remote_code=False, batch_size=1, num_concurrent=args.concurrency)
         doc = simple_evaluate(model=lm, tasks=tasks, limit=args.limit,
+            use_cache=str(args.output/'response_cache'),
             log_samples=True, apply_chat_template=True,
             random_seed=1024, numpy_random_seed=1024, torch_random_seed=1024,
             fewshot_random_seed=1024, bootstrap_iters=1000)

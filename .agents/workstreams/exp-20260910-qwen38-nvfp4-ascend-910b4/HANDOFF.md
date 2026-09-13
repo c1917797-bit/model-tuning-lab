@@ -2,6 +2,28 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+22:35 Qwen3 original repetition1 COMPLETE, finished22:34:01. Controller3208813
+and owned containera19dae4cfa51 gone. All four357 cells passed: errors/empty/
+reasoning/prompt mismatches/undefinedTPOT all0; all357 stop. P95 TTFT/TPOT ms:
+c1 364.009888/44.242973; c5 764.495800/108.435290;
+c8 965.979688/147.033256; c16 1375.014982/194.880301.
+Full evidence/hashes: qwen38-nvfp4-ascend/qwen3-original-performance-r1.md.
+Only one control repetition, NOT completed paired comparison; do not reuse old
+raw-completion or normalized-input metrics as its candidate denominator.
+
+Next advance independent standard quality while input-policy answer is pending:
+run_switch_canary.sh qwen38 <fresh-out> quality-full. Same original BF16 service
+configuration, no dataset normalization. Runs2-item MMLU/GSM8K live plumbing
+check at concurrency8, then full57subject MMLU14042 plus GSM8K1319 at8. Fresh
+per-run harness SQLite response cache preserves completed model calls for
+controlled recovery (evaluator.py63/277-283 confirms supported use_cache). Never
+reuse caches across model/config/protocol identities. Existing fresh-output
+guard remains; manual recovery must verify identity before opting into reuse.
+HumanEval remains separately required. Do not wait on query normalization to
+block these independent quality datasets, nor call Qwen3.8 query validity fixed.
+This advances requested scoring, not a performance acceptance or migration claim.
+Recheck eight-card resources and exact lease before launch; no external edits.
+
 22:19 Qwen3 original repetition1 advanced to FULL performance. Fresh32 canary
 passed32/32,errors0,empty0,reasoning0,stop32. Controller3208813 is live; c1
 benchmark child3255121 was verified with --limit0 and frozen dataset SHA, cap4096.
