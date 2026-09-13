@@ -1,5 +1,29 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Current recovery 2026-09-13 23:03 UTC (supersedes earlier LIVE entries)
+
+User approved continuing current order: MMLU/GSM8K, HumanEval, remaining
+performance comparison. At23:00:05 Docker recorded old NPU service f1055dc
+die(exitCode0) then destroy; evaluator began ConnectionRefused retries.
+Termination cause remains unproven (no observed OOM event). Preserved old
+evaluator inspect and quality-full.recovered.log in oOH3fa artifact before
+stopping ONLY exact owned CPU container1248efadb5f0. It is now absent.
+No full score from that interrupted attempt is valid or claimed.
+Launcher2289a3b now records exact evaluator cidfiles and cleans only these
+owned IDs if interrupted. Shell syntax/MST26skills/diff checks passed, pushed.
+Recovery uses transient systemd unit mtl-q38-quality-20260913-r2.service,
+MainPID3572690; independent of AWMCP exec ancestry. No claim that this proves
+the prior root cause. Active/running verified, startup23:03:13UTC.
+Artifact /cache/austinov/eval-runs/switch12h-qwen38-text-recovery-20260913-pJYHxH
+NPU container b49c1d4e438d03df23219b033c4f8e26d9f7df3df71b2681997fab73618d5032.
+Same fixed image, TP8 BF16/seed1024/thinkingfalse, original model and protocol.
+Fresh launch gate: all8NPUs empty/noholders, portfree, leaseobtainable,
+MemAvailable84215892KiB. Sole external running container321c36f70aac onlybash
+and manager devices; left untouched. Follow unit MainPID plus exact container
+and new artifact status/logs; never duplicate a live run on gateway timeout.
+Automatic small5-shot canary then full58tasks15361rows remains configured.
+HumanEval and full paired performance matrix are still outstanding.
+
 ## Live recovery observation 2026-09-13 22:58 UTC
 
 AWMCP transient transport outage recovered without restarting any workload.
