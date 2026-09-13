@@ -1,6 +1,11 @@
 # Baseline reuse audit — 2026-09-13
 
-Current business comparison: Qwen3-32B BF16 versus Qwen3.5-27B BF16.
+Historical audit scope at creation: Qwen3-32B BF16 versus Qwen3.5-27B BF16.
+The user subsequently selected Qwen3.8-27B explicitly; SWITCH_VALIDATION.md and
+the latest HANDOFF supersede this model-selection scope, not the raw cell facts.
+Actual PERF_RUNNER inspection confirms /v1/completions with a raw prompt.
+The service's no-thinking chat-template default does not transform that prompt.
+Keep those cells only as original-protocol evidence.
 Keep Qwen3.8 evidence separate; architecture/served aliases do not prove weight identity.
 Do not rerun valid cells merely because the containing controller failed.
 

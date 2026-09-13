@@ -1,7 +1,7 @@
 {
   "schema": "mst-workstream/v1",
   "taskId": "exp-20260910-qwen38-nvfp4-ascend-910b4",
-  "objective": "Evaluate switching from Qwen3-32B BF16 to Qwen3.5-27B BF16 on vLLM-Ascend using matched query_rewrite c1/c5/c8/c16 performance and MMLU, GSM8K, HumanEval quality. Verify checkpoint identity independently of historical paths and aliases. NVFP4 work is paused per the user's clarified goal.",
+  "objective": "Evaluate switching from Qwen3-32B BF16 to Qwen3.8-27B BF16 using trustworthy matched query_rewrite c1/c5/c8/c16 performance and MMLU, GSM8K, HumanEval quality. User explicitly selected Qwen3.8 again on 2026-09-13. Verify checkpoint identity independently of paths and aliases. NVFP4 remains paused.",
   "historicalObjective": "Qwen3.8-labelled BF16/NVFP4 exploration; retained as historical evidence, not the current acceptance contract.",
   "targetBranch": "main",
   "workBranch": "work/qwen38-nvfp4-ascend-910b4-20260910",

@@ -1,6 +1,33 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
-## Current goal correction — user clarification 2026-09-13
+## Current goal — latest user clarification 2026-09-13
+
+User now explicitly requests trustworthy continued testing to decide whether to
+switch to Qwen3.8-27B. Current pair: Qwen3-32B BF16 vs Qwen3.8-27B BF16.
+This supersedes the earlier Qwen3.5 correction below. Use SWITCH_VALIDATION.md.
+The original NVFP4 QUALITY_PROTOCOL.md is historical, not this switch contract.
+
+Resource gate now BLOCKS launch (exec-0000000000000bcf and subsequent inspect):
+qwen35_t37_pa_workspace_service_v1 owns devices0-3, with VLLMWorker_TP PIDs
+1735149/1735151/1735153/1735154. Port10010 is held by vllm PID1722640.
+MemAvailable64578876kB. No external workload was changed. No lease acquired.
+App heartbeat qwen3-8 is ACTIVE every30minutes for this task; unchanged blocked
+resource state stays quiet. It must follow existing live jobs, never double-launch.
+SSE timing/output guard dependency-free tests passed; MST26skills passed.
+
+Historical chat sentinel has 92/357 empty candidate outputs despite status=valid.
+That is not a business-valid run. v3 counts finish-only events as first token.
+New chat_benchmark.py v4 fixes that, keeps raw SSE and response text outside Git,
+marks one-token TPOT undefined, and rejects empty, whitespace-only, truncated or
+reasoning-bearing output. Do not pool v3/v4 timings. Next gate: paired 32-request
+diagnostic, not an unchanged full matrix.
+
+Executable lm-eval text-task construction passed in the offline CPU-only image:
+exec-0000000000000bc2, 58 tasks, 15361 rows, known-right/wrong MMLU scored 1/0.
+HumanEval runtime scoring is separate and not proven by that test.
+Prior checkpoint 6b5e8b6 is now pushed.
+
+### Superseded Qwen3.5 correction and preserved audit
 
 Latest checkpoint: see `qwen38-nvfp4-ascend/BASELINE_REUSE.md` for the audited
 Qwen3-32B c1/c5/c8 repeat-1 cells, hashes, truncation exceptions and conditional
