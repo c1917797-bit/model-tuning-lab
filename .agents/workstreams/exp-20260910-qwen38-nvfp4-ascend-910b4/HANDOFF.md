@@ -2,6 +2,14 @@
 
 ## Current goal — latest user clarification 2026-09-13
 
+22:19 Qwen3 original repetition1 advanced to FULL performance. Fresh32 canary
+passed32/32,errors0,empty0,reasoning0,stop32. Controller3208813 is live; c1
+benchmark child3255121 was verified with --limit0 and frozen dataset SHA, cap4096.
+Artifact /cache/austinov/eval-runs/switch12h-qwen3-performance-r1-20260913-iRDuy1;
+performance/manifest.json state running, cells initially empty. Follow c1.json
+then c16/c5/c8; do not restart or call incomplete cell a result. Container and
+lease remain owned by existing lifecycle. No normalization approval received.
+
 LIVE22:13 UTC Qwen3-32B original-data performance repetition1: PID3208813 PPID1,
 container a19dae4cfa516ecca08ef78ebd0de82ef9fb593bc7c81c5676ad6e984115b0cb,
 artifact /cache/austinov/eval-runs/switch12h-qwen3-performance-r1-20260913-iRDuy1.
