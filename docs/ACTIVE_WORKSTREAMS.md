@@ -30,6 +30,27 @@ This branch currently has an in-progress captured-teacher fidelity iteration
 and an exited container that declares the current worktree path. Do not rename,
 split, or move it while either condition remains.
 
+## Mounted supporting workstreams
+
+The following branches are separate validation, reproduction, or research
+workstreams. They do not increase the count of long-lived business tasks, but
+their worktrees remain active until their branch-local gates close:
+
+- `work/qwen35-experience-ingestion-20260909`: clean and synchronized, but
+  explicitly marked `needs-revalidation` before main integration.
+- `work/qwen35-sparse-prefix-reproduction`: dirty; preserve all 23 current
+  status entries and do not archive or clean it.
+- `work/qwen38-nvfp4-ascend-910b4-20260910`: dirty; preserve all 18 current
+  status entries. Its branch name is historical and its branch-local handoff
+  owns the current model-switch evaluation truth.
+- `work/sliminfer-qwen36-ascend-piercing-20260914`: clean and synchronized,
+  but active in `attempted-resource-wait`; no SlimInfer NPU result exists.
+
+After the temporary governance worktree is integrated and reclaimed, the
+expected registered inventory is seven worktrees: `main` plus the two business
+tasks and these four supporting workstreams. The configured budget is eight;
+one slot remains for a genuinely independent task.
+
 ## Archive policy
 
 Terminal hypotheses are retained by immutable annotated tags and removed from
@@ -42,7 +63,12 @@ Current archive tags include:
 - `archive/qwen35-query-rewrite-pre-canonical-20260909`
 - `archive/qwen35-shortgpt-semantic-reject-20260909`
 - `archive/qwen35-pr-pre-canonical-20260909`
+- `archive/consolidated-20260912/drrqr-paper-parity-lessons-20260911`
 
-The first two archived worktrees remain on disk only because stopped
-experiment containers retain mount declarations. Removing those container
-records is a separate environment cleanup decision, not a Git shortcut.
+On 2026-09-14, with explicit operator authorization, 116 stopped containers
+that referenced only the superseded query-rewrite and ShortGPT worktrees were
+removed. No running container, Docker volume, image, active experiment
+worktree, or external evidence root was removed. Those two clean worktrees and
+the already-integrated paper-parity worktree were then reclaimed only after
+their exact tips were proven reachable through immutable remote archive tags.
+The two local `archive-local/*` branches remain as additional recovery names.

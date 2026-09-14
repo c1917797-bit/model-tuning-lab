@@ -19,8 +19,11 @@ process, or running container.
 - With explicit user authorization, 116 exited containers referencing only
   those two superseded worktrees were removed. No Docker volume, image, running
   container, external evidence root, or active experiment worktree was removed.
-- After reclamation, six worktrees remained: main plus five unmerged task
-  worktrees.
+- Immediately after reclamation, six worktrees remained: main plus five
+  unmerged task worktrees.
+- Two later task worktrees are now present: SlimInfer Qwen3.6 piercing and this
+  temporary governance worktree. The Qwen3.8 evaluation worktree also became
+  dirty. The live pre-integration inventory is therefore eight worktrees.
 
 ## Boundaries
 
@@ -32,6 +35,7 @@ process, or running container.
 
 ## Next action
 
-Update target-owned workstream and consolidation documentation, run
-./scripts/validate-mst.sh and git diff --check, then push this workstream for
-serialized integration.
+The governance record is complete. Run `./scripts/validate-mst.sh` and
+`git diff --check` on the exact tree, integrate serially into `main`, push
+`main`, and reclaim only this clean temporary governance worktree. Preserve
+the six experiment/support task worktrees.

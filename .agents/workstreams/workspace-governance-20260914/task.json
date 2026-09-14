@@ -7,9 +7,9 @@
   "original_base": "64468d3c89ce4262f0cd85e2a636303712c2d884",
   "created_at": "2026-09-14",
   "owner": "c1917797-bit",
-  "execution_state": "started",
-  "integration_state": "not-ready",
-  "decision": "pending",
+  "execution_state": "completed",
+  "integration_state": "ready-for-serialized-main-integration",
+  "decision": "retain-six-active-task-worktrees-and-integrate-governance-only",
   "resource_claims": {
     "npu": "none",
     "containers": "read-only inventory; no running container mutation",
@@ -41,5 +41,5 @@
     "./scripts/validate-mst.sh",
     "git diff --check"
   ],
-  "next_action": "Persist the verified six-worktree inventory and cleanup provenance, validate, push, and integrate serially."
+  "next_action": "Validate this exact tree, integrate it serially into main, push main, then reclaim only this temporary clean governance worktree."
 }
