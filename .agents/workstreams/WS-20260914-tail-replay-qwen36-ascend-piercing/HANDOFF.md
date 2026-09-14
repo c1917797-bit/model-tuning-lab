@@ -26,9 +26,10 @@ Updated: 2026-09-14
   plugin. It clones the exact boundary hidden/residual pair, isolates both
   convolution and recurrent state, and records exact-full versus 5%/10%
   suffix replay metrics. It has not run on NPU yet.
-- The pinned-image offline suite now passes 38/38 tests, including 17 focused
+- The pinned-image offline suite now passes 40/40 tests, including 17 focused
   Tail-Replay tests, and early group-oracle plugin registration passes without
-  importing the device backend.
+  importing the device backend. A strict result summarizer has two additional
+  passing coverage/failure tests.
 - NPU4-7 were released after the successful run; this is not a future lease.
 
 ## Immediate recovery

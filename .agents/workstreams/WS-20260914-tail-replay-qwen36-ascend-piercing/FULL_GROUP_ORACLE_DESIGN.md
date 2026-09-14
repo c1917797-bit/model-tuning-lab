@@ -49,6 +49,9 @@ L2 0.01 for all outputs and states. A failure is a harness failure, not an
 algorithm result. Only after exact controls pass may the 5%/10% metrics be
 interpreted. The live convolution and recurrent cache entries are snapshotted
 before diagnostic replay and must remain bitwise unchanged afterwards.
+The strict group_summary module rejects missing or duplicate rank/group/ratio
+rows, failed exact controls, nonfinite metrics, missing source identities and
+any cache mutation before writing an admissible aggregate.
 
 ## Explicit limitation
 

@@ -69,8 +69,9 @@ abort:
   - exact full-group control fails
   - live request output is mutated
 offline_checkpoint:
-  pinned_image_tests: 38/38 passed
+  pinned_image_tests: 40/40 passed
   focused_tests: 17/17 passed
+  strict_summary_tests: 2/2 passed
   early_plugin_registration: passed
   npu_run: not_started
 next_gate: >-

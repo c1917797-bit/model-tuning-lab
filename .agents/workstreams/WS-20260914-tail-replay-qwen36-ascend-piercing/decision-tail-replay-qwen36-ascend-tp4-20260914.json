@@ -8,7 +8,7 @@
     "official paper method and tables",
     "pinned Qwen3.6 and vLLM-Ascend source identities",
     "four-rank SlimInfer metadata canary reused only as runtime topology evidence",
-    "38 passing pinned-image no-device tests, including a three-layer capture-lifecycle regression",
+    "40 passing pinned-image no-device tests, including capture lifecycle and strict evidence-summary regressions",
     "650-token TP4 recurrence run on physical NPU4-7",
     "384/384 exact-split-controlled layer/rank/ratio result rows",
     "pinned live GDN and chunk-operator source hashes"
