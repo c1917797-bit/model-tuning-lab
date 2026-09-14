@@ -1,8 +1,8 @@
 {
   "schema": "paper-to-ascend-evidence/v1",
   "experiment_id": "sliminfer-qwen36-ascend-tp4-20260914",
-  "status": "selection-shadow-npu-passed-semantic-pruning-pending",
-  "prior_checkpoint_commits": ["5dc0514", "3d401a9"],
+  "status": "semantic-prefill-qkv-reuse-npu-passed-formal-performance-pending",
+  "prior_checkpoint_commits": ["5dc0514", "3d401a9", "883b045", "c79429bb17564cf85fa10b11df1111878a87d8b3"],
   "paper_source": {
     "arxiv": "2508.06447v2",
     "official_repository": "https://github.com/Longxmas/SlimInfer",
@@ -82,6 +82,28 @@
     "audit_sha256": "bb39e62f09e8a3cbe7c8c297014d61dea71d469ff3a5afe140696b4f35ca9696",
     "output_parity_sha256": "60ccea32b088f58634834857a67cddd94b6bc6bb9b314ea8d95b8d15d6848b65"
   },
+  "semantic_prefill_npu": {
+    "scope": "real Ascend TP4 hidden-row compaction with live-forward QKV reuse; eager single-request diagnostic only",
+    "source_commit": "c79429bb17564cf85fa10b11df1111878a87d8b3",
+    "artifact_root": "/cache/cch/sliminfer-qwen36-ascend-tp4-20260915/semantic-prefill-qkv-reuse-v4",
+    "audit_status": "passed",
+    "request_tokens": 13000,
+    "completion_tokens": 1,
+    "ranks": [0, 1, 2, 3],
+    "semantic_rows": ["19:13000->12232", "39:12232->6088", "59:6088->4040"],
+    "qkv_projection_reused_from_live_forward": true,
+    "duplicate_qkv_projection_for_diagnostics": false,
+    "disabled_elapsed_seconds": 54.84065492998343,
+    "enabled_elapsed_seconds": 72.75203853001585,
+    "diagnostic_elapsed_change_percent": 32.66077624875263,
+    "regression_reduction_vs_v3_percentage_points": 11.154856270566938,
+    "request_sha256_equal": true,
+    "first_token_output_equal": true,
+    "audit_sha256": "f866031928315eef7b29fab332dd96206c607af50075b513df0a44234f723524",
+    "runtime_sha256": "18cd32ef24cf1826bd2e48a2d6a3823a895488c348cf498387d7637a6f2a8d54",
+    "output_comparison_sha256": "9e574475ad4348db3645a6781ffda7faf5fafd06e4ab11c37ab7ba9aa9029988",
+    "interpretation": "Mechanism and live-QKV reuse passed. Timing is a negative implementation signal, not an admissible formal throughput or paper-level result."
+  },
   "profile_reuse": {
     "source": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline",
     "source_manifest_sha256": "f1ec0d5d7a8257f8e7033e61233edc1975ac5a7d7cc47a0312f641232c79aa5b",
@@ -99,15 +121,15 @@
     "external_vllm_worker_pids_on_npu4_7": [],
     "npu_test_started": true,
     "npu_test_completed": true,
-    "post_run_state": "no running process on NPU4-7; unrelated workers remain on protected NPU0-3",
+    "post_run_state": "both v4 experiment containers exited successfully and no experiment service remains",
     "resource_action": "only owned containers were created and removed"
   },
   "performance": null,
   "quality": null,
-  "allowed_claim": "The SlimInfer selector mechanism executed deterministically on Ascend TP4 and preserved output in a non-mutating selection-shadow A/B; semantic pruning, performance and quality remain pending.",
+  "allowed_claim": "SlimInfer semantic prefill compaction and live-forward QKV reuse executed consistently on Ascend TP4. The v4 one-request diagnostic remained 32.66 percent slower than its paired control; formal fixed-output performance and quality remain pending.",
   "forbidden_claims": [
-    "SlimInfer semantic pruning has executed on Ascend.",
     "SlimInfer improves Qwen3.6 performance.",
-    "SlimInfer preserves Qwen3.6 accuracy."
+    "SlimInfer preserves Qwen3.6 accuracy.",
+    "The one-request eager diagnostic rejects the SlimInfer paper."
   ]
 }

@@ -2,8 +2,8 @@
   "schema": "paper-to-ascend-decision/v1",
   "decision_id": "sliminfer-qwen36-ascend-tp4-20260914",
   "status": "open",
-  "current_decision": "continue-to-semantic-pruning-canary",
-  "reason": "The selection-shadow A/B passed on real Ascend TP4 at frozen commit 96d5ae91e886a2fbcb758c2d8254d610a029b08c. All ranks agreed on canonical scores and selected blocks at layers 19, 39 and 59, and disabled/enabled outputs were identical. This clears the runtime mechanism gate but does not establish semantic pruning, performance or quality.",
+  "current_decision": "continue-to-request-persistent-hscache-and-multistep-decode-canary",
+  "reason": "Semantic-prefill v4 passed on real Ascend TP4 at frozen commit c79429bb17564cf85fa10b11df1111878a87d8b3. All four ranks agreed, hidden rows compacted at layers 19, 39 and 59, and selection reused the live QKV projection. The paired eager one-request timing remained 32.66 percent slower, so the current implementation is not a performance candidate. One bounded persistent-HsCache and multistep-decode implementation is required before a fixed-1024-output go/no-go screen.",
   "accepted_evidence": [
     "paper and public source method-chain review",
     "pinned Qwen3.6 checkpoint and model-loop architecture review",
@@ -11,14 +11,17 @@
     "17 passing no-NPU planner, runtime-canary and compact-stream tests",
     "successful no-device editable install and vLLM entry-point load",
     "partial Qwen3.6 TP4 profile hotspot analysis with parser limitations recorded"
-    ,"successful four-rank Ascend selection-shadow A/B with output parity"
+    ,"successful four-rank Ascend selection-shadow A/B with output parity",
+    "successful four-rank semantic-prefill compaction with live-forward QKV reuse"
   ],
   "rejected_or_unavailable_evidence": [
     "paper RTX4090 numbers as local Ascend evidence",
     "HYPIC performance numbers as SlimInfer evidence",
     "summed Qwen3.6 task or operator time as removable critical path",
-    "selection-shadow block-count reduction as semantic pruning or performance evidence"
+    "selection-shadow block-count reduction as semantic pruning or performance evidence",
+    "v4 one-request eager timing as a formal throughput result",
+    "v4 first-token equality as task-quality evidence"
   ],
-  "next_gate": "faithful layer-local active-token and HsCache restoration NPU correctness canary",
+  "next_gate": "request-persistent HsCache and multistep decode NPU correctness canary, followed by one fixed-1024-output paired screen",
   "final_adoption_decision": null
 }

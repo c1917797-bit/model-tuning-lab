@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
-stage: implementation
-status: semantic-prefill-npu-passed-decode-hscache-pending
+stage: measurement
+status: semantic-prefill-qkv-reuse-npu-passed-decode-hscache-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -9,7 +9,7 @@ hypothesis: >-
 primary_variable: MST_SLIMINFER_ENABLE
 algorithm_identity: faithful-port-feasibility
 source:
-  repository_commit: 28cc2cb
+  repository_commit: c79429bb17564cf85fa10b11df1111878a87d8b3
   branch: paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted
   vllm_ascend_reference: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
 environment:
@@ -20,8 +20,8 @@ environment:
   intended_host_devices: [4, 5, 6, 7]
   container_visible_devices: [0, 1, 2, 3]
   tensor_parallel: 4
-  ownership: released-after-metadata-prefill-decode-canary
-  drift_status: runtime-metadata-path-proven-semantic-pruning-not-active
+  ownership: released-after-semantic-prefill-qkv-reuse-canary
+  drift_status: semantic-prefill-pruning-proven-formal-performance-pending
 correctness_guardrails:
   - request-local token identity
   - identical selection digest on all TP ranks
@@ -185,6 +185,52 @@ offline_checkpoint:
       next_requirement: >-
         Implement the decode/HsCache contract and remove duplicate score-path
         work before a HYPIC-equivalent 1024-output performance screen.
+    v4:
+      source_commit: c79429bb17564cf85fa10b11df1111878a87d8b3
+      artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260915/semantic-prefill-qkv-reuse-v4
+      result: passed
+      scope: eager-single-request-semantic-prefill-diagnostic
+      physical_devices: [4, 5, 6, 7]
+      disabled_arm:
+        http_status: 200
+        prompt_tokens: 13000
+        completion_tokens: 1
+        elapsed_seconds: 54.84065492998343
+      enabled_arm:
+        http_status: 200
+        prompt_tokens: 13000
+        completion_tokens: 1
+        elapsed_seconds: 72.75203853001585
+      semantic_rows:
+        layer_19: [13000, 12232]
+        layer_39: [12232, 6088]
+        layer_59: [6088, 4040]
+      four_rank_selection_agreement: true
+      four_rank_semantic_completion: true
+      qkv_projection_reused_from_live_forward: true
+      duplicate_qkv_projection_for_diagnostics: false
+      request_sha256_equal: true
+      first_token_output_equal: true
+      audit_sha256: f866031928315eef7b29fab332dd96206c607af50075b513df0a44234f723524
+      output_comparison_sha256: 9e574475ad4348db3645a6781ffda7faf5fafd06e4ab11c37ab7ba9aa9029988
+      runtime_sha256: 18cd32ef24cf1826bd2e48a2d6a3823a895488c348cf498387d7637a6f2a8d54
+      diagnostic_elapsed_change_percent: 32.66077624875263
+      regression_reduction_vs_v3_percentage_points: 11.154856270566938
+      timing_interpretation: >-
+        Reusing the live QKV projection materially reduced the diagnostic
+        regression versus v3, but the semantic-prefill prototype remains
+        32.66 percent slower for this one-request eager canary. The remaining
+        cost includes Python selection, TP synchronization, gathers and
+        metadata rebuilding. This is a negative implementation signal, not a
+        formal 1024-output throughput result and not a paper-level rejection.
+      performance_or_quality_claim_allowed: false
+      cleanup:
+        containers_running: false
+        port_8238_listening: false
+      next_requirement: >-
+        Implement request-persistent HsCache and multistep decode semantics,
+        then run one bounded fixed-1024-output screen. Reject the current
+        implementation if that screen cannot outperform its paired control.
 selection_shadow_npu_result:
   source_commit: 2b73ea9
   artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1
@@ -434,7 +480,7 @@ current_resume:
     The earlier user-approved Tail-Replay pivot remains recorded as a historical
     direction decision and is not rewritten as a SlimInfer result.
   current_npu4_7_pids: []
-  action: implement-decode-hscache-and-integrated-score-path
+  action: implement-request-persistent-hscache-and-multistep-decode
 historical_resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched
@@ -505,4 +551,4 @@ current_direction_decision:
     Continue the bounded SlimInfer piercing under the HYPIC-equivalent ruler.
     Prove real semantic prefill mutation first, then implement decode/HsCache
     only if the NPU canary passes.
-next_gate: tp4-decode-hscache-multistep-numerical-canary
+next_gate: tp4-request-persistent-hscache-multistep-decode-numerical-canary
