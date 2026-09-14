@@ -163,6 +163,17 @@ def _tp_reduce_sum(value: Any) -> Any:
     return tensor_model_parallel_all_reduce(value)
 
 
+def _distributed_rank() -> int | None:
+    try:
+        import torch.distributed as dist
+
+        if dist.is_available() and dist.is_initialized():
+            return int(dist.get_rank())
+    except Exception:
+        return None
+    return None
+
+
 def _score_digest(block_scores: dict[int, float]) -> str:
     payload = [[int(block), float(score)] for block, score in sorted(block_scores.items())]
     encoded = json.dumps(payload, separators=(",", ":"), allow_nan=False).encode()
@@ -219,6 +230,7 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         "selection_shadow_layer",
                         component="attention",
                         mode=config.mode,
+                        distributed_rank=_distributed_rank(),
                         forward_serial=state["serial"],
                         request_index=request_index,
                         layer_index=layer_index,
@@ -252,6 +264,7 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
         original_forward_qualname=original_forward.__qualname__,
         source_path=source_path,
         source_sha256=source_digest,
+        distributed_rank=_distributed_rank(),
         boundaries=sorted(_BOUNDARY_KEEP_TOKENS),
     )
     return True

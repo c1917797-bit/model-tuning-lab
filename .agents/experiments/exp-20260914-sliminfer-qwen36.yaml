@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: implementation
-status: selection-shadow-hook-offline-passed-npu-pending
+status: selection-shadow-hook-and-audit-offline-passed-npu-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -39,7 +39,7 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_stream_and_shadow_tests: 35/35 passed
+  planner_runtime_stream_shadow_and_audit_tests: 38/38 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
@@ -95,6 +95,20 @@ selection_shadow_scorer:
   corrected_hook_test_attempt:
     result: 35-passed
     elapsed_seconds: 8.79
+  fail_closed_audit:
+    implementation: tools/summarize_sliminfer_shadow.py
+    complete_test_result: 38-passed
+    elapsed_seconds: 8.97
+    requires:
+      - patch activation on every expected TP rank
+      - layers 19, 39 and 59 for each qualifying request
+      - identical per-layer score and selection digests across ranks
+      - monotonically shrinking selected block sets
+      - at least one observed block-count reduction
+    rejects:
+      - missing rank
+      - rank selection disagreement
+      - activation without any block reduction
   mst_validation: 26-skills-passed
   diff_check: passed
   ruff_check: unavailable-in-pinned-image

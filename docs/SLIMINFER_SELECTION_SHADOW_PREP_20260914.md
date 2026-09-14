@@ -80,6 +80,15 @@ One intermediate run reported 34 passed and 1 failed because a digest fixture
 still contained the old forced-recent block. Only the stale expected set was
 updated.
 
+A fail-closed evidence auditor is now available at
+tools/summarize_sliminfer_shadow.py. It requires all expected TP ranks, all
+three boundary layers, identical score and selection digests across ranks,
+monotonically shrinking staged block sets, and at least one actual block-count
+reduction. Tests prove that rank disagreement, a missing rank, and activation
+without pruning are rejected. With this audit included, the complete suite is:
+
+    38 passed in 8.97s
+
 Remaining gates:
 
 1. Run the wrapper in the pinned image on physical NPU4-7 after proving the
