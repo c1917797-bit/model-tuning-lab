@@ -125,6 +125,49 @@ def test_group_wrapper_keeps_capture_across_three_layer_calls(monkeypatch):
     assert full_group_patch._ACTIVE_CAPTURE.get() is None
 
 
+def test_group_wrapper_records_entry_before_capture_filter(monkeypatch):
+    full_group_patch._SEEN_GROUPS.clear()
+    full_group_patch._ACTIVE_CAPTURE.set(None)
+    events = []
+    monkeypatch.setattr(
+        full_group_patch,
+        "emit_event",
+        lambda event, **fields: events.append((event, fields)),
+    )
+
+    class Attention:
+        prefix = "model.layers.fake.linear_attn"
+
+    class Layer:
+        layer_idx = 0
+        layer_type = "linear_attention"
+        linear_attn = Attention()
+
+    def original(_self, hidden_states, residual, *args, **kwargs):
+        return hidden_states, residual
+
+    wrapped = full_group_patch._make_decoder_wrapper(
+        original, _config()
+    )
+    hidden = torch.ones((4097, 1))
+    wrapped(Layer(), hidden, None)
+
+    assert events == [
+        (
+            "group_oracle_group_start_seen",
+            {
+                "distributed_rank": None,
+                "layer_idx": 0,
+                "layer_type": "linear_attention",
+                "token_count": 4097,
+                "capture_eligible": False,
+                "decoder_class_module": Layer.__module__,
+                "decoder_class_name": Layer.__qualname__,
+            },
+        )
+    ]
+
+
 @pytest.mark.parametrize(
     ("tokens", "ratio", "expected"),
     [(1, 0.05, 1), (20, 0.05, 1), (21, 0.05, 2), (196, 0.10, 20)],

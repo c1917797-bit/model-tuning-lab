@@ -1,6 +1,6 @@
 id: exp-20260914-tail-replay-full-group-oracle
-stage: prepared
-status: offline-gates-passed-npu-not-run
+stage: attempted
+status: tp2-staging-activation-gate-failed
 objective: >-
   Validate Tail-Replay at the real Qwen3.6 GDN-group boundary by replaying
   each three-layer GDN group from the exact cached boundary hidden/residual
@@ -70,11 +70,36 @@ abort:
   - live request output is mutated
 offline_checkpoint:
   pinned_image_tests: 40/40 passed
-  focused_tests: 17/17 passed
+  focused_tests: 20/20 passed
   strict_summary_tests: 2/2 passed
   early_plugin_registration: passed
-  npu_run: not_started
+  npu_run: >-
+    TP2 staging attempted on physical NPU6-7 only. v1 failed at startup because
+    model weights left negative KV-cache capacity. v2 increased the configured
+    memory fraction, became healthy, and completed the fixed 650-token request,
+    but emitted zero group-attempt/result events. The strict summary failed
+    closed with all 32 expected rank/group exact keys missing.
+  tp2_staging_artifacts:
+    root: /cache/cch/tail-replay-qwen36-ascend-tp2-staging-20260914/full-group-oracle/short-v2
+    request_sha256: 1236c33d92c4b659286f5229630cdfe4bf909c4628c43c9d321c253ac00beb4e
+    response_sha256: c32648edfaab89fc975ca3bd8807baa08c2e93b90f97a9ac9c5b8204020bd3f4
+    runtime_sha256: b58ef3833e5554dde67f2a1395946b8bdf11b2a47e5a615870c900e7c5b5f15a
+    summary_sha256: 490e3de07c23a11249bd0ea9803818144c68cbccf4930f1b92d18a0fd7a6dcee
+    request_completed: true
+    runtime_events: 15
+    group_attempts: 0
+    exact_results: 0
+    tail_results: 0
+    expected_rank_group_keys: 32
+    interpretation: hot-path activation failure, not a numerical result
+  entry_diagnostic:
+    event: group_oracle_group_start_seen
+    scope: emit before capture filtering at every four-layer group boundary
+    focused_pinned_image_tests: 20/20 passed
+  resource_release: physical NPU6-7 confirmed free after staging
 next_gate: >-
-  One 650-token TP4 NPU request. If all-rank exact controls pass, evaluate
-  5%/10% group state and boundary errors before implementing first-token
-  reconstructed-cache swapping.
+  First prove that the installed wrapper enters the actual worker hot path by
+  observing group_oracle_group_start_seen on every worker. If absent, move the
+  hook to the real model-loop/base-class invocation seam. Only after activation
+  and exact-control coverage pass should the TP4 full-group oracle run, followed
+  by the isolated first-token reconstructed-cache comparison.

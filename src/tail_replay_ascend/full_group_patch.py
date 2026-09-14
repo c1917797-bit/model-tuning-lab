@@ -527,6 +527,23 @@ def _make_decoder_wrapper(original: Callable, config: TailReplayConfig) -> Calla
         layer_idx = int(getattr(self, "layer_idx", -1))
         layer_type = str(getattr(self, "layer_type", ""))
         capture = _ACTIVE_CAPTURE.get()
+        if layer_idx >= 0 and layer_idx % 4 == 0:
+            token_count = int(hidden_states.shape[0])
+            emit_event(
+                "group_oracle_group_start_seen",
+                distributed_rank=_distributed_rank(),
+                layer_idx=layer_idx,
+                layer_type=layer_type,
+                token_count=token_count,
+                capture_eligible=bool(
+                    _is_group_start(layer_idx, layer_type)
+                    and config.min_prefill_tokens
+                    <= token_count
+                    <= config.max_prefill_tokens
+                ),
+                decoder_class_module=type(self).__module__,
+                decoder_class_name=type(self).__qualname__,
+            )
         if _is_group_start(layer_idx, layer_type):
             token_count = int(hidden_states.shape[0])
             key = (_distributed_rank(), layer_idx)

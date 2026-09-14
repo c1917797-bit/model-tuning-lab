@@ -2,8 +2,8 @@
   "schema": "paper-to-ascend-decision/v1",
   "decision_id": "tail-replay-qwen36-ascend-tp4-20260914",
   "status": "open",
-  "current_decision": "continue-to-full-gdn-group-state-boundary-canary-then-first-token",
-  "reason": "The all-layer all-rank Ascend recurrence oracle is valid because every exact-split control passed, but zero-state tail-only final recurrent state error is large at both paper ratios. A full group replay with convolution state and hidden propagation is now prepared and must pass on NPU before the separate reconstructed-cache first-token comparison.",
+  "current_decision": "prove-full-group-hot-path-activation-then-run-exact-controlled-oracle",
+  "reason": "The all-layer all-rank Ascend recurrence oracle remains valid. Two TP2 full-group staging attempts added no Tail-Replay numerical evidence: v1 failed at KV-cache capacity initialization, while v2 served the fixed request but emitted zero group attempts/results and was rejected by the strict coverage checker. The next gate is therefore the actual worker invocation seam, followed by full-group exact controls and only then the reconstructed-cache first-token comparison.",
   "accepted_evidence": [
     "official paper method and tables",
     "pinned Qwen3.6 and vLLM-Ascend source identities",
@@ -11,14 +11,18 @@
     "40 passing pinned-image no-device tests, including capture lifecycle and strict evidence-summary regressions",
     "650-token TP4 recurrence run on physical NPU4-7",
     "384/384 exact-split-controlled layer/rank/ratio result rows",
-    "pinned live GDN and chunk-operator source hashes"
+    "pinned live GDN and chunk-operator source hashes",
+    "TP2 v2 healthy request plus fail-closed activation summary with all 32 expected rank/group keys missing",
+    "20 passing focused pinned-image tests including the pre-filter group-entry diagnostic"
   ],
   "rejected_or_unavailable_evidence": [
     "paper H100 results as Ascend evidence",
     "recurrence-only error as first-token or task-quality evidence",
     "diagnostic request time as performance evidence",
-    "recurrence-only final-state error as terminal Tail-Replay quality evidence"
+    "recurrence-only final-state error as terminal Tail-Replay quality evidence",
+    "TP2 full-group staging as TP4 performance or quality evidence",
+    "a successful HTTP response as proof that the algorithm hook executed"
   ],
-  "next_gate": "full GDN-group 5%/10% state and boundary replay with causal-convolution state, hidden propagation and exact-replay control; then isolated first-token reconstructed-cache comparison",
+  "next_gate": "observe group_oracle_group_start_seen on every worker; if absent move the hook to the actual model-loop/base-class seam; then require complete all-rank exact-controlled GDN-group replay before isolated first-token reconstructed-cache comparison",
   "final_adoption_decision": null
 }

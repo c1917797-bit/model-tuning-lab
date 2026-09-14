@@ -1,20 +1,20 @@
 {
   "schema": "model-tuning-task/v1",
   "task_id": "WS-20260914-tail-replay-qwen36-ascend-piercing",
-  "status": "npu-recurrence-oracle-complete",
+  "status": "full-group-tp2-staging-activation-gate-failed",
   "objective": "Pierce Tail-Replay on Qwen3.6-27B Ascend TP4 and determine whether 5% or 10% suffix replay can reconstruct GDN state accurately enough to justify a cache-hit TTFT implementation.",
   "long_term_alignment": "Paper-to-Ascend inference optimization with real NPU correctness, performance, quality, portability, and retained success/failure evidence.",
   "scientific_scope": "Architecture-matched direction reproduction on Qwen3.6-27B; first prove the recurrence mechanism, then group replay, then prefix-cache integration.",
-  "current_stage": "measured-recurrence-only-canary",
-  "next_action": "Implement and validate a non-mutating full GDN-group replay canary, including causal-convolution state, inter-layer hidden propagation, exact-replay controls and first-token logits, before prefix-cache integration.",
+  "current_stage": "prove-full-group-wrapper-hot-path-entry",
+  "next_action": "Run the pre-filter group-entry diagnostic on a fresh staging request. If no worker emits group_oracle_group_start_seen, patch the actual model-loop or inherited base-class invocation seam. Only then run complete exact-controlled group replay, followed by the isolated first-token reconstructed-cache comparison.",
   "resource_state": {
     "intended_lane": "host NPU4-7, container-visible 0-3, TP4",
     "protected_lane": "host NPU0-3; do not use or alter",
-    "last_observed": "physical NPU4-7 released after the successful Tail-Replay recurrence run; physical NPU0-3 remained assigned to another task",
+    "last_observed": "TP2 staging used physical NPU6-7 only and both were confirmed released afterward; physical NPU4-5 were occupied by an unrelated task, and physical NPU0-3 were also in unrelated use",
     "rule": "recheck npu-smi, containers, mappings, processes, ports and output path immediately before launch"
   },
   "results": {
-    "offline_tests": "29 passed in the pinned image; eight Tail-Replay-specific tests",
+    "offline_tests": "40/40 full pinned-image suite at the prior checkpoint; 20/20 focused Tail-Replay suite after the group-entry diagnostic change",
     "npu_recurrence_oracle": {
       "status": "complete",
       "prompt_tokens": 650,
@@ -34,6 +34,14 @@
         "0.10": 0.8777303695678711
       },
       "evidence": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/summary.json"
+    },
+    "group_replay_activation": {
+      "status": "failed-closed",
+      "tp2_physical_npus": [6, 7],
+      "v1": "KV-cache capacity/startup failure; algorithm not executed",
+      "v2": "healthy 650-token request completed, but zero group attempts/results and all 32 expected rank/group keys missing",
+      "evidence": "/cache/cch/tail-replay-qwen36-ascend-tp2-staging-20260914/full-group-oracle/short-v2/summary.json",
+      "interpretation": "hot-path activation failure, not a numerical, performance, or quality result"
     },
     "group_replay_first_token": null,
     "performance": null,

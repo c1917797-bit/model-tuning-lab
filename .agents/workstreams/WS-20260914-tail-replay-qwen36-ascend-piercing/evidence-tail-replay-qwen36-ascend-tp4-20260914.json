@@ -60,12 +60,53 @@
       "response": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/response.json"
     }
   },
+  "group_replay_activation": {
+    "status": "tp2-staging-failed-closed",
+    "scope": "startup and mechanism-activation staging only; excluded from TP4 performance and quality evidence",
+    "physical_npus": [6, 7],
+    "tensor_parallel": 2,
+    "attempts": [
+      {
+        "id": "v1",
+        "result": "capacity-startup-failure",
+        "detail": "model weights loaded, but configured memory left negative KV-cache capacity; algorithm did not execute"
+      },
+      {
+        "id": "v2",
+        "result": "request-complete-activation-failed",
+        "prompt_tokens": 650,
+        "completion_tokens": 1,
+        "response_text": "Here",
+        "runtime_events": 15,
+        "group_attempts": 0,
+        "exact_results": 0,
+        "tail_results": 0,
+        "expected_rank_group_keys": 32,
+        "missing_rank_group_keys": 32,
+        "artifacts": {
+          "root": "/cache/cch/tail-replay-qwen36-ascend-tp2-staging-20260914/full-group-oracle/short-v2",
+          "request_sha256": "1236c33d92c4b659286f5229630cdfe4bf909c4628c43c9d321c253ac00beb4e",
+          "response_sha256": "c32648edfaab89fc975ca3bd8807baa08c2e93b90f97a9ac9c5b8204020bd3f4",
+          "runtime_sha256": "b58ef3833e5554dde67f2a1395946b8bdf11b2a47e5a615870c900e7c5b5f15a",
+          "summary_sha256": "490e3de07c23a11249bd0ea9803818144c68cbccf4930f1b92d18a0fd7a6dcee"
+        }
+      }
+    ],
+    "interpretation": "The HTTP request completed, but zero oracle events prove that the installed subclass wrapper was not on the effective hot path. No numerical Tail-Replay conclusion is allowed.",
+    "entry_diagnostic": {
+      "event": "group_oracle_group_start_seen",
+      "emission_point": "before capture filtering at each four-layer group boundary",
+      "focused_pinned_image_tests": "20/20 passed"
+    },
+    "resource_release": "physical NPU6-7 confirmed free after staging"
+  },
   "group_replay_first_token": null,
   "performance": null,
   "quality": null,
   "allowed_claim": "The opt-in recurrence-only oracle ran on Qwen3.6-27B Ascend TP4 with complete 48-layer/four-rank coverage. Exact-split controls passed, while zero-state 5% and 10% tail recurrence produced large final-state error.",
   "forbidden_claims": [
     "The full Tail-Replay algorithm has executed on Ascend.",
+    "The TP2 staging request produced a Tail-Replay numerical result.",
     "The recurrence-only result predicts final first-token or task quality.",
     "Tail-Replay improves Ascend TTFT.",
     "Tail-Replay preserves local task quality."
