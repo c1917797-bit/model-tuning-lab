@@ -1,5 +1,31 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## LIVE06:47UTC normalized PERFORMANCE r1; MMLU stopped for priority
+
+Unit `mtl-q38-normalized-performance-r1-20260914.service`, MainPID2558020,
+container `8e14c13543a8b020374741455a45a03e04cd8527f808be5fe09053ab829e4c4e`,
+artifact `/cache/austinov/eval-runs/switch12h-qwen38-normalized-r1-20260914-2p3S3E1t`.
+Started06:47:16 from pushed0c3ca84; startup/Ascend activation seen, no performance
+result yet. Follow exact unit/CID/status/canary/performance manifest; do not
+resume MMLU or launch competing service. After successful Q38r1, next is fresh
+Q3normalizedr1 under SAME supplement SHA and profile, then remaining BA/AB/BA.
+
+MMLU consistent checkpoint before intentional stop:
+`/cache/austinov/eval-runs/mmlu-performance-checkpoint-yzt8wewd`,26841 entries,
+cacheSHAead46f8f6a2d368eae751dad86469e4dc0fc626e77172f6e92d6317b958998f2,
+manifestSHAf73cceb144b476c2bcc3aff4dcb2475310791fa8ebb626ed022da1ef1c7edfa0.
+SQLite backup/integrity passed, five identity files and exact client/model
+inspect/log saved. Original livecache/root retained (may include later entries).
+Stopped exact owned r3unit; its client/model cleaned, no outside container stop.
+Unit failed state reflects intentional termination, NOT model numerical failure.
+Do not announce MMLU complete; full-resume integration still required later.
+
+Prelaunch fresh gate: all8NPUs no processes, port10010free, lease obtainable,
+MemAvailable84096976KiB. Sole remaining external Maxon4ick container only bash,
+shared manager devices and privilegedtrue, unchanged/no physical NPU process.
+New lifecycle only physical0..7, original immutable image and framework intact.
+
+
 ## PRIORITY OVERRIDE: authorized normalized performance supplement
 
 User explicitly approved removing only empty historical assistant turns from
