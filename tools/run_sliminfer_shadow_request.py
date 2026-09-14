@@ -46,8 +46,11 @@ def canonical_response(response: dict[str, Any]) -> dict[str, Any]:
     choice = choices[0]
     if not isinstance(choice, dict):
         raise ValueError("response choice must be an object")
+    logprobs = choice.get("logprobs")
+    tokens = logprobs.get("tokens") if isinstance(logprobs, dict) else None
     return {
         "text": choice.get("text"),
+        "tokens": tokens,
         "finish_reason": choice.get("finish_reason"),
         "stop_reason": choice.get("stop_reason"),
         "prompt_tokens": usage.get("prompt_tokens"),
@@ -103,6 +106,8 @@ def main() -> int:
             max_tokens=args.max_tokens,
         )
         result = send_request(args.endpoint, payload, args.timeout)
+        if result["canonical_response"]["prompt_tokens"] != args.prompt_tokens:
+            raise ValueError("service prompt-token count differs from the request")
     except Exception as exc:
         parser.exit(2, f"FAILED: {exc}\n")
 

@@ -135,14 +135,17 @@ selection_shadow_scorer:
     requested_prompt_tokens: 13000
     prompt_form: repeated-explicit-token-id
     sampling: temperature-0-seed-0-max-tokens-1
+    request_sha256_must_match: true
+    observed_prompt_tokens_must_equal_requested: true
     compared_fields:
       - text
+      - returned_token_strings
       - finish_reason
       - stop_reason
       - prompt_tokens
       - completion_tokens
     complete_test_result: 42-passed
-    elapsed_seconds: 8.44
+    elapsed_seconds: 8.51
   mst_validation: 26-skills-passed
   diff_check: passed
   ruff_check: unavailable-in-pinned-image

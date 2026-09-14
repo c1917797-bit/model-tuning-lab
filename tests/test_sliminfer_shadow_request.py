@@ -16,6 +16,7 @@ def _record(text=" answer", prompt_tokens=13000):
         "request_sha256": "same-request",
         "canonical_response": {
             "text": text,
+            "tokens": [" answer"],
             "finish_reason": "length",
             "stop_reason": None,
             "prompt_tokens": prompt_tokens,
@@ -41,6 +42,7 @@ def test_response_is_reduced_to_parity_fields():
             {
                 "index": 0,
                 "text": " answer",
+                "logprobs": {"tokens": [" answer"]},
                 "finish_reason": "length",
                 "stop_reason": None,
             }
@@ -61,3 +63,7 @@ def test_compare_rejects_request_or_output_drift():
         compare_records(_record(), _record(prompt_tokens=12999))
     with pytest.raises(ValueError, match="response fields"):
         compare_records(_record(), _record(text=" different"))
+    changed_hash = _record()
+    changed_hash["request_sha256"] = "different-request"
+    with pytest.raises(ValueError, match="hashes"):
+        compare_records(_record(), changed_hash)

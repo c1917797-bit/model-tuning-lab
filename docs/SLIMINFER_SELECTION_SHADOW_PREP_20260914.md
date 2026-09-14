@@ -103,11 +103,13 @@ order must be verified by the first TP4 worker canary.
 
 Two deterministic canary tools were also added. The request tool sends an exact
 13,000-token explicit token-ID prompt at temperature 0 and seed 0. The parity
-tool rejects request drift and compares generated text, finish and stop reasons,
-and prompt/completion token counts while ignoring response IDs and timestamps.
+tool rejects field or request-hash drift and compares generated text, returned
+token strings, finish and stop reasons, and prompt/completion token counts while
+ignoring response IDs and timestamps. The request tool also rejects a service
+response whose observed prompt-token count differs from the requested 13,000.
 With these tools included, the complete suite is:
 
-    42 passed in 8.44s
+    42 passed in 8.51s
 
 Remaining gates:
 

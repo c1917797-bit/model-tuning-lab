@@ -27,12 +27,15 @@ def compare_records(
     ]
     if mismatched_request:
         raise ValueError(f"request fields differ: {mismatched_request}")
+    if disabled.get("request_sha256") != enabled.get("request_sha256"):
+        raise ValueError("request hashes differ")
     disabled_response = disabled.get("canonical_response")
     enabled_response = enabled.get("canonical_response")
     if not isinstance(disabled_response, dict) or not isinstance(enabled_response, dict):
         raise ValueError("both records must contain canonical_response")
     response_fields = (
         "text",
+        "tokens",
         "finish_reason",
         "stop_reason",
         "prompt_tokens",
@@ -48,9 +51,7 @@ def compare_records(
     return {
         "schema": "sliminfer-shadow-output-parity/v1",
         "status": "passed",
-        "request_sha256_equal": (
-            disabled.get("request_sha256") == enabled.get("request_sha256")
-        ),
+        "request_sha256_equal": True,
         "compared_request_fields": list(request_fields),
         "compared_response_fields": list(response_fields),
         "canonical_response": disabled_response,
