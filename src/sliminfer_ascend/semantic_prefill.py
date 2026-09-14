@@ -17,6 +17,33 @@ from .diagnostics import emit_event
 from .stream_contract import RequestPruningState
 
 
+def position_token_axis(positions: Any) -> int:
+    """Return the token axis for supported text and multimodal RoPE layouts."""
+
+    ndim = int(getattr(positions, "ndim", -1))
+    if ndim == 1:
+        return 0
+    if ndim == 2:
+        return 1
+    raise RuntimeError(
+        "semantic-prefill requires positions shaped [tokens] or [channels, tokens]"
+    )
+
+
+def compact_positions(
+    positions: Any,
+    index: Any,
+    *,
+    expected_tokens: int,
+) -> Any:
+    """Gather token positions while preserving any leading RoPE channels."""
+
+    axis = position_token_axis(positions)
+    if int(positions.shape[axis]) != int(expected_tokens):
+        raise RuntimeError("position token count differs from hidden-state rows")
+    return positions.index_select(axis, index)
+
+
 def compact_gather_indices(
     current_active_blocks: Sequence[int],
     selected_active_blocks: Sequence[int],
@@ -262,11 +289,12 @@ def semantic_prefill_forward(
         raise ValueError("semantic-prefill accepts only one input representation")
     else:
         hidden_states = inputs_embeds
-    if hidden_states.ndim != 2 or positions.ndim != 1:
-        raise RuntimeError("semantic-prefill requires flattened 2D states and 1D positions")
+    if hidden_states.ndim != 2:
+        raise RuntimeError("semantic-prefill requires flattened 2D hidden states")
     prompt_tokens = int(hidden_states.shape[0])
-    if int(positions.shape[0]) != prompt_tokens:
-        raise RuntimeError("position rows differ from prompt hidden-state rows")
+    position_axis = position_token_axis(positions)
+    if int(positions.shape[position_axis]) != prompt_tokens:
+        raise RuntimeError("position token count differs from hidden-state rows")
 
     context = get_forward_context()
     mapping = context.attn_metadata
@@ -313,18 +341,21 @@ def semantic_prefill_forward(
                 index = torch.tensor(
                     gather, dtype=torch.long, device=hidden_states.device
                 )
+                input_rows = int(hidden_states.shape[0])
+                current_positions = compact_positions(
+                    current_positions,
+                    index,
+                    expected_tokens=input_rows,
+                )
                 hidden_states = torch.index_select(hidden_states, 0, index)
                 residual = torch.index_select(residual, 0, index)
-                current_positions = torch.index_select(current_positions, 0, index)
                 emit_event(
                     "semantic_prefill_compacted",
                     component="model",
                     mode="semantic-prefill",
                     layer_index=layer_index,
                     distributed_rank=_distributed_rank(),
-                    input_rows=sum(
-                        min(64, prompt_tokens - block * 64) for block in before
-                    ),
+                    input_rows=input_rows,
                     output_rows=int(hidden_states.shape[0]),
                     runtime_mutation=True,
                 )

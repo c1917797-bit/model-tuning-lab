@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: implementation
-status: semantic-prefill-offline-passed-npu-pending
+status: semantic-prefill-npu-runtime-integration-fix-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -39,7 +39,7 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_stream_shadow_audit_and_request_tests: 68/68 passed
+  planner_runtime_stream_shadow_audit_and_request_tests: 71/71 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
@@ -48,7 +48,7 @@ offline_checkpoint:
 semantic_prefill_canary:
   source_commit: 28cc2cb
   implementation: src/sliminfer_ascend/semantic_prefill.py
-  status: offline-verified-npu-pending
+  status: qwen-multichannel-position-fix-offline-verified-npu-pending
   intended_scope:
     - single-request
     - whole-prompt-prefill
@@ -77,8 +77,8 @@ semantic_prefill_canary:
     - sink-and-recent-retention
     - semantic-completion-on-all-ranks
   validation:
-    focused_tests: 23/23 passed
-    complete_tests: 68/68 passed
+    focused_tests: 26/26 passed
+    complete_tests: 71/71 passed
     maintainer_skill_tree: 26 skills passed
     git_diff_check: passed
   limitations:
@@ -116,6 +116,35 @@ semantic_prefill_canary:
         Permit only the attn-metadata-None startup dummy to pass through the
         attention hook without a selection scope, retain fail-closed behavior
         for real metadata, and add a focused regression test.
+    v2:
+      source_commit: cdde0de
+      artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260915/semantic-prefill-v2
+      result: failed
+      failure_class: runtime-integration
+      disabled_arm:
+        service_healthy: true
+        request_succeeded: true
+        prompt_tokens: 13000
+        completion_tokens: 1
+      enabled_arm:
+        service_healthy: true
+        real_request_started: true
+        failure_boundary: semantic-prefill-input-layout-validation
+        cause: >-
+          Qwen3.6 supplies multi-channel RoPE positions shaped [3, tokens].
+          The first canary accepted only a one-dimensional position tensor,
+          so all four TP workers rejected the real request before mutation.
+      interpretation: qwen36-model-adaptation-gap-not-algorithm-result
+      performance_or_quality_claim_allowed: false
+      runtime_sha256: 4c96d631b46bd794719da55ec2af93b33729236c6721413807bbff9863d19a95
+      service_failure_sha256: ec2ee8220b4fb068a4e73a8c81311c30ed56c01c2aff154a00b2ed1c5b42e370
+      disabled_request_sha256: 834d2a6336b432aab51ca63b075c7d03d2d69223cc6dca69ac7e119c0f1a4d63
+      cleanup:
+        containers_running: false
+      successor_requirement: >-
+        Preserve the Qwen3.6 RoPE channel axis and gather the token axis for
+        [3, tokens] positions, retain [tokens] support, reject unknown layouts,
+        and cover both accepted layouts plus mismatched counts in tests.
 selection_shadow_npu_result:
   source_commit: 2b73ea9
   artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1

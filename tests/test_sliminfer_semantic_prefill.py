@@ -8,6 +8,7 @@ import pytest
 torch = pytest.importorskip("torch")
 
 from sliminfer_ascend.semantic_prefill import (
+    compact_positions,
     compact_gdn_metadata,
     compact_full_attention_metadata,
     compact_gather_indices,
@@ -58,6 +59,25 @@ def test_compact_gather_indices_keep_noncontiguous_absolute_blocks():
     ) == tuple(range(64)) + tuple(range(128, 192))
     with pytest.raises(ValueError, match="subset"):
         compact_gather_indices((0, 2), (0, 3), prompt_tokens=4 * 64)
+
+
+def test_compact_positions_supports_text_and_qwen_multichannel_rope_layouts():
+    index = torch.tensor([0, 3, 5], dtype=torch.long)
+    text = torch.arange(6)
+    multichannel = torch.arange(18).reshape(3, 6)
+
+    assert compact_positions(text, index, expected_tokens=6).tolist() == [0, 3, 5]
+    assert compact_positions(
+        multichannel, index, expected_tokens=6
+    ).tolist() == multichannel[:, index].tolist()
+
+
+def test_compact_positions_rejects_unknown_layout_or_wrong_token_count():
+    index = torch.tensor([0], dtype=torch.long)
+    with pytest.raises(RuntimeError, match="positions shaped"):
+        compact_positions(torch.zeros(1, 2, 3), index, expected_tokens=3)
+    with pytest.raises(RuntimeError, match="position token count"):
+        compact_positions(torch.zeros(3, 5), index, expected_tokens=6)
 
 
 def test_full_metadata_clone_uses_compact_cache_slots_and_keeps_original_immutable():
