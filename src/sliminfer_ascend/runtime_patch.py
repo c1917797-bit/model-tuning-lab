@@ -332,7 +332,19 @@ def _patch_runner_class(cls: type, config: SlimInferConfig) -> bool:
             positions = args[2]
         if positions is None:
             raise RuntimeError("SlimInfer runner hook cannot resolve positions")
-        from .request_runtime import runner_forward_scope
+        from .request_runtime import runner_forward_scope, runner_request_count
+
+        request_count = runner_request_count(self)
+        if request_count == 0:
+            emit_event(
+                "runner_request_scope_bypassed",
+                component="runner",
+                mode=config.mode,
+                distributed_rank=_distributed_rank(),
+                reason="zero-request-dummy-or-profile-forward",
+                runtime_mutation=False,
+            )
+            return original_forward(self, *args, **kwargs)
 
         with runner_forward_scope(self, positions) as identity:
             request = identity.requests[0]

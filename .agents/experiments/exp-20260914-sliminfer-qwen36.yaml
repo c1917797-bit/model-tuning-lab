@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: measurement
-status: semantic-prefill-qkv-reuse-npu-passed-decode-hscache-pending
+status: semantic-stream-runner-dummy-bypass-fixed-npu-retest-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -9,7 +9,7 @@ hypothesis: >-
 primary_variable: MST_SLIMINFER_ENABLE
 algorithm_identity: faithful-port-feasibility
 source:
-  repository_commit: c79429bb17564cf85fa10b11df1111878a87d8b3
+  repository_commit: 6f8c24bb98284ebc5a4f72943b81c561f9b4821c
   branch: paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted
   vllm_ascend_reference: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
 environment:
@@ -231,6 +231,38 @@ offline_checkpoint:
         Implement request-persistent HsCache and multistep decode semantics,
         then run one bounded fixed-1024-output screen. Reject the current
         implementation if that screen cannot outperform its paired control.
+    v5:
+      source_commit: 6f8c24bb98284ebc5a4f72943b81c561f9b4821c
+      artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260915/semantic-stream-state-v5
+      result: failed
+      failure_class: runtime-integration
+      disabled_arm:
+        request_succeeded: true
+        prompt_tokens: 13000
+        completion_tokens: 1
+      enabled_arm:
+        service_healthy: false
+        real_request_started: false
+        four_rank_runner_patch_installed: true
+        failure_boundary: startup-memory-profile-dummy-forward
+        cause: >-
+          NPUModelRunner invokes a zero-request dummy forward while determining
+          available KV-cache memory. The first request-identity hook treated
+          that framework profile pass as a real single-request batch and
+          rejected it before service health.
+      interpretation: runner-lifecycle-adaptation-gap-not-algorithm-result
+      performance_or_quality_claim_allowed: false
+      runtime_sha256: 5365c203c4531cccd22eb0b79987e1ea3620fba2eb51a1c812d8628be570fc09
+      service_failure_sha256: 49363cf5c04248ec46216fe551075c706badaf3b4ed43df14f86df58fd8e6f29
+      disabled_request_sha256: 02eab8f2594698f204be2666d821c2d83c10bfeadf377b2bde0625cb1ba6026c
+      cleanup:
+        containers_running: false
+        physical_npu4_7_processes: []
+      correction: >-
+        Bypass and record only zero-request runner forwards. Continue to reject
+        any real batch with more than one request until per-request stream
+        state is implemented.
+      corrected_offline_validation: 77/77 passed
 selection_shadow_npu_result:
   source_commit: 2b73ea9
   artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1

@@ -127,6 +127,15 @@ def capture_runner_forward_identity(
     )
 
 
+def runner_request_count(runner: Any) -> int:
+    """Return the live request count without touching device tensors."""
+
+    input_batch = getattr(runner, "input_batch", None)
+    if input_batch is None:
+        raise RuntimeError("NPUModelRunner input batch is unavailable")
+    return len(tuple(getattr(input_batch, "req_ids", ())))
+
+
 @contextmanager
 def runner_forward_scope(
     runner: Any, positions: Any

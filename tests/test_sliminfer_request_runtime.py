@@ -12,6 +12,7 @@ from sliminfer_ascend.request_runtime import (
     current_runner_forward_identity,
     get_request_state,
     put_request_state,
+    runner_request_count,
     runner_forward_scope,
 )
 
@@ -70,6 +71,13 @@ def test_runner_scope_is_transactional_and_rejects_multi_request_batch():
     runner.input_batch.req_ids.append("request-b")
     with pytest.raises(RuntimeError, match="one request"):
         capture_runner_forward_identity(runner, SimpleNamespace(shape=(2,)))
+
+
+def test_runner_request_count_distinguishes_framework_dummy_forward():
+    runner = _runner()
+    assert runner_request_count(runner) == 1
+    runner.input_batch.req_ids.clear()
+    assert runner_request_count(runner) == 0
 
 
 def test_persistent_registry_uses_request_id_and_can_be_replaced():
