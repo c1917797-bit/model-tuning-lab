@@ -151,6 +151,25 @@ selection_shadow_scorer:
       - completion_tokens
     complete_test_result: 42-passed
     elapsed_seconds: 8.51
+  tp4_shadow_controller:
+    implementation: tools/run_sliminfer_shadow_tp4.sh
+    status: syntax-passed-runtime-not-started-npu4-7-occupied
+    physical_devices: [4, 5, 6, 7]
+    arms: [disabled, selection-shadow]
+    prompt_tokens: 13000
+    max_model_len: 16384
+    max_num_batched_tokens: 16384
+    preflight:
+      - clean-source-tree
+      - pinned-image-identity
+      - fresh-output-root-and-container-names
+      - free-port
+      - empty-physical-npu4-7-lane
+    postconditions:
+      - tp4-selection-audit-passed
+      - deterministic-output-parity-passed
+      - experiment-owned-containers-stopped
+      - physical-npu4-7-released
   mst_validation: 26-skills-passed
   diff_check: passed
   ruff_check: unavailable-in-pinned-image

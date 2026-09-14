@@ -116,6 +116,16 @@ With these tools included, the complete suite is:
 
     42 passed in 8.51s
 
+`tools/run_sliminfer_shadow_tp4.sh` now composes the first live TP4 gate. It
+fails before mutation unless physical NPU4-7 are all idle, the pinned image and
+model exist, the source tree is clean, the port is free, and a fresh output
+root and container names are available. It then runs disabled and enabled arms
+sequentially, verifies container ownership of all four devices, preserves
+container/log/device evidence, audits TP-rank selection agreement, compares
+the deterministic outputs, and stops only containers bearing its experiment
+label. This controller has passed Bash syntax and diff checks but has not been
+run because NPU4-7 are occupied.
+
 Remaining gates:
 
 1. Run the wrapper in the pinned image on physical NPU4-7 after proving the
