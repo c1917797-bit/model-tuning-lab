@@ -1,5 +1,14 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+00:17UTC non-interrupting SQLite backup saved to
+/cache/austinov/eval-runs/mmlu-cache-checkpoint-ic03wkan,708entries,
+integrity_check=ok, cacheSHAcce878d2050a01b01489d04fac29453b1c5aa9b80afc91adad84f91d6ee48162.
+Manifest binds copied input/evaluator/image/model/profile identity hashes.
+Source opened read-only and SQLite backup used (not unsafe live file copy).
+Full PID3862919 remains running/unpaused and continues beyond snapshot.
+This is a cache checkpoint, NOT a full result or tested resume implementation.
+User priority question still unanswered; no additional task stopped.
+
 ## 00:14 UTC — full client RESUMED; paired32 alternative NOT promoted
 
 Diagnostic L1i2ED completed32/32 with all4labels in top20, winners31/32 match.
