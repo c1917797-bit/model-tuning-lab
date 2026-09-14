@@ -1,5 +1,28 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## PRIORITY OVERRIDE: authorized normalized performance supplement
+
+User explicitly approved removing only empty historical assistant turns from
+BOTH models' supplement, retaining all original data/results. Dataset357 at
+`/cache/austinov/eval-runs/normalized-query-fGnFWXQa/data/query_rewrite.normalized.jsonl`,
+SHA256 ec22de93e406d6c0706a8bd38a1ace12a74d04f503daf3a7f3577daf9a62b2e2.
+252rows changed,530empty assistant turns removed. All other parsed message
+contents/order and other JSON fields preserved, ChatML roundtrip checked.
+Original357 dataset/SHA unchanged; do not pool old Q3 r1 with new supplement.
+
+Separate run_normalized_performance.sh and repetition driver retain original
+performance32768/.90 TP8DP1 BF16 image/settings/seed/no-thinking/v4 timing.
+Mandatory32-row natural-EOS validity gate, then full357 c1/c16/c5/c8 per arm.
+Predeclared new-supplement lifecycle order Q38/Q3, Q3/Q38, Q38/Q3 (BA/AB/BA),
+three repetitions each: candidate first to fail fast on known empty-output
+risk. This is not a retrospective change to original AB/BA/AB evidence.
+No MMLU/HumanEval new launch until performance stage is resolved. Save current
+MMLU consistent checkpoint, preserve exact service/client inspect/log, then
+stop only owned r3 service lifecycle to release eight cards. Quality remains
+incomplete/resumable preparation, not cancelled from full objective. Do not
+automatically restore MMLU while normalized performance has priority.
+
+
 ## CURRENT: Qwen3.8 GSM8K complete; MMLU resumed (03:32UTC check)
 
 Priority unit706850 is TERMINAL/success, completed2026-09-14T03:26:14Z;
