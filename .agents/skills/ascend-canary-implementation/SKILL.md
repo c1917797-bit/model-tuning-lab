@@ -21,6 +21,10 @@ Ascend path.
 3. From inside the pinned serving image, resolve and record the imported module,
    source file, class or function, package version, and source/patch hash used
    by the live service. Do not infer this path from a historical host checkout.
+   For hybrid or recurrent models, run an identity-preserving metadata canary
+   before semantic mutation: capture a representative prefill and decode,
+   group metadata by object identity, compare all TP ranks, and record tensor
+   shape/dtype/device without reading device tensor values.
 4. Change one primary variable only. Prefer config or existing runtime hooks
    before custom source changes.
 5. Run a small deterministic workload first. Prove load, request success,
@@ -51,6 +55,9 @@ Only scale to repeated benchmark when:
 ## Boundaries
 
 - Do not combine multiple paper ideas in one canary.
+- Do not infer state/cache ownership from layer count, field name, or source
+  type alone. Prove the live metadata object groups and prefill/decode
+  transitions before replay, compaction, or cache restoration.
 - Do not treat import success or a marker from only the launcher as proof that
   tensor-parallel workers or the engine core executed the change.
 - Do not use canary success as a performance claim.

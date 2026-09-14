@@ -436,3 +436,42 @@ so no token-ID equality claim was made.
 request success, algorithm activation, numerical correctness, performance, and
 task accuracy. Passing an identity canary authorizes the semantic canary; it
 does not establish SlimInfer speed or quality.
+
+### 9.5 Stateful metadata ownership must be observed, not inferred
+
+The Qwen3.6 TP4 metadata canary observed all 64 layer entries but only four
+distinct attention-metadata objects: one AscendMetadata shared by the 16
+full-attention layers and three GDNAttentionMetadata objects shared by the
+16 GDN layers at each relative position in the repeating architecture. The
+top-level ForwardContext slot mapping was empty, while the active full-
+attention slot mapping lived inside AscendMetadata.
+
+**Reusable rule:** for hybrid or recurrent models, group live metadata by
+object identity before mutation. Layer count does not imply metadata-object
+count, and a plausible top-level field may not own the active slots.
+
+### 9.6 Capture prefill and decode as separate state transitions
+
+The same deterministic request path exposed a five-token prefill followed by a
+one-token decode. Full attention moved from PrefillNoCache to DecodeOnly;
+all three GDN groups moved from one prefill/zero decodes to zero prefills/one
+decode. Shapes, dtypes, devices, ranks, and group ownership were recorded
+without reading NPU tensor values.
+
+**Reusable rule:** a stateful canary must observe at least one real prefill and
+one real decode before implementing replay, compaction, or cache restoration.
+Warmup-only evidence and value-reading diagnostics can both give misleading or
+intrusive results.
+
+### 9.7 Keep service packaging deterministic and offline
+
+The first metadata launch used editable-install build isolation and delayed on
+build-dependency acquisition. It was stopped before model workers or NPU
+allocation and preserved as a startup failure. The fresh successor used the
+pinned image's existing build backend with --no-build-isolation --no-deps
+and started normally.
+
+**Reusable rule:** after dependency compatibility is proven in the pinned
+image, keep experimental service startup network-independent. Preserve a
+failed launch separately and use a fresh output directory for the corrected
+attempt.

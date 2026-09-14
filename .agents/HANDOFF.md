@@ -11,14 +11,20 @@ The older runtime descriptions below are historical, not current occupancy.
 ## Branch-local SlimInfer update — 2026-09-14
 
 On branch `work/sliminfer-qwen36-ascend-piercing-20260914`, the Qwen3.6-27B
-TP4 identity canary passed on physical NPU4-7 and the lane was released. The
-enabled and disabled arms returned identical short deterministic output and
-metadata; all four enabled workers installed the runtime wrapper. This proves
-removable plugin integration only. Real SlimInfer pruning, performance, and
-accuracy are still unproven. Resume at
-`.agents/experiments/exp-20260914-sliminfer-qwen36.yaml` and
-`docs/SLIMINFER_IDENTITY_CANARY_20260914.md`; the next gate is a
-whole-prompt-only semantic pruning NPU numerical canary.
+TP4 identity and read-only runtime metadata canaries passed on physical
+NPU4-7, and the lane was released. The metadata run captured a real prefill
+and decode on all four ranks. All 16 full-attention layers shared one
+AscendMetadata; the 48 GDN layers shared three metadata objects by relative
+position in the repeating layer pattern. The top-level slot mapping was empty,
+while the live full-attention slot mapping was nested in AscendMetadata.
+
+This proves runtime structure only. Real SlimInfer pruning, Tail-Replay state
+reconstruction, performance, and accuracy are still unproven. The user
+approved preserving the SlimInfer result and prioritizing an independent
+Tail-Replay 5%/10% GDN-state and first-token numerical canary. Resume at
+`.agents/experiments/exp-20260914-sliminfer-qwen36.yaml`,
+`docs/SLIMINFER_IDENTITY_CANARY_20260914.md`, and
+`docs/SLIMINFER_RUNTIME_METADATA_CANARY_20260914.md`.
 
 
 ## 0. Status

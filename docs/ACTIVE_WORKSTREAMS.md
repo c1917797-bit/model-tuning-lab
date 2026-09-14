@@ -37,15 +37,23 @@ split, or move it while either condition remains.
   `/opt/host/vnf/austinov/worktrees/sliminfer-qwen36-ascend-piercing`
 - Goal: test a faithful, architecture-aware SlimInfer port on the same
   Qwen3.6-27B TP4 ruler used for the HYPIC-style report.
-- Current decision: the removable plugin and four-rank identity path are
-  verified on physical NPU4-7; algorithmic pruning, performance, and accuracy
-  remain unproven.
-- Next gate: a whole-prompt-only semantic pruning canary that preserves
-  absolute RoPE positions, uses compact KV positions for full attention, and
-  rejects resumed/chunked prompt state until its semantics are implemented.
+- Current decision: the removable plugin, four-rank identity path, and a
+  read-only prefill/decode metadata canary are verified on physical NPU4-7.
+  Real SlimInfer pruning, performance, and accuracy remain unproven.
+- The metadata canary showed one shared full-attention metadata object for all
+  16 full-attention layers and three GDN metadata objects, each shared by the
+  16 layers at one relative position in the three-GDN/one-FA pattern. The real
+  full-attention slot mapping is nested in AscendMetadata; the top-level
+  ForwardContext slot mapping was empty.
+- User-approved direction: preserve this result and pause broad SlimInfer
+  semantic-pruning work. Create an independent Tail-Replay workstream from
+  this checkpoint and first test 5%/10% replay state and first-token numerical
+  behavior on Qwen3.6-27B TP4.
 
 This is an independent Paper-to-Ascend workstream. HYPIC measurements are a
 reporting/protocol reference only and are not a SlimInfer baseline or result.
+The metadata canary is reusable input to Tail-Replay, but it is not evidence
+that either algorithm is correct or faster.
 
 ## Archive policy
 

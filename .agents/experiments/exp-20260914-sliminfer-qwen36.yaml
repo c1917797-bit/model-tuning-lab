@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: verified
-status: identity-canary-passed
+status: metadata-canary-passed-user-approved-tail-replay-pivot
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -9,7 +9,7 @@ hypothesis: >-
 primary_variable: MST_SLIMINFER_ENABLE
 algorithm_identity: faithful-port-feasibility
 source:
-  repository_commit: 9122ae1
+  repository_commit: 945cd6c
   branch: work/sliminfer-qwen36-ascend-piercing-20260914
   vllm_ascend_reference: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
 environment:
@@ -20,8 +20,8 @@ environment:
   intended_host_devices: [4, 5, 6, 7]
   container_visible_devices: [0, 1, 2, 3]
   tensor_parallel: 4
-  ownership: released-after-serial-enabled-disabled-canary
-  drift_status: identity-runtime-path-proven-semantic-pruning-not-yet-active
+  ownership: released-after-metadata-prefill-decode-canary
+  drift_status: runtime-metadata-path-proven-semantic-pruning-not-active
 correctness_guardrails:
   - request-local token identity
   - identical selection digest on all TP ranks
@@ -36,7 +36,7 @@ abort:
   - deterministic runtime failure on unchanged bytes
 artifacts:
   root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914
-  status: identity-canary-artifacts-present
+  status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
   planner_runtime_and_stream_contract_tests: 17/17 passed
@@ -68,4 +68,45 @@ identity_canary:
   enabled_runtime_sha256: 753d192e8347ac4096e237ad11f95bd955dcc8b96f7598e3d11bb3582800b4ab
   identity_parity_sha256: 32c73aaeaefa0f261219fcc183363e94e554b2913a298eb685aeab21f0f460d3
   resource_release_verified: true
-next_gate: whole-prompt-only-semantic-pruning-npu-numerical-canary
+metadata_canary:
+  source_commit: 945cd6c
+  physical_npus: [4, 5, 6, 7]
+  host_worker_pids: [1933866, 1933867, 1933868, 1933869]
+  npu0_3_used_by_this_experiment: false
+  four_rank_hook_evidence: true
+  requests:
+    - prompt_tokens: 196
+      completion_tokens: 1
+    - prompt_tokens: 5
+      completion_tokens: 2
+  observed_forward_calls:
+    - profile-warmup-4096
+    - prefill-196
+    - prefill-5
+    - decode-1
+  attention_metadata_layer_count: 64
+  attention_metadata_group_count: 4
+  full_attention_shared_group_layers: 16
+  gdn_shared_groups: 3
+  gdn_layers_per_shared_group: 16
+  prefill_attention_state: PrefillNoCache
+  decode_attention_state: DecodeOnly
+  top_level_slot_mapping_empty: true
+  full_attention_metadata_owns_slot_mapping: true
+  summary_sha256: afb98737d70c0bfb443ba14abf77b7d8c3f3da6b1f2b77f14ae6af67a560afee
+  runtime_sha256: c814d78354f41d1a29420067928afdb3a058c662973223f69be137bc9fb4fc92
+  algorithmic_pruning_active: false
+  performance_claim_allowed: false
+  accuracy_claim_allowed: false
+  resource_release_verified: true
+direction_decision:
+  user_approved: true
+  decision: >-
+    Preserve the SlimInfer metadata result, pause broad semantic-pruning work,
+    and prioritize a Tail-Replay 5%/10% numerical canary because the paper
+    directly evaluates Qwen3.6-27B and matches the hybrid GDN/full-attention
+    prefix-cache workload.
+  limitation: >-
+    Tail-Replay is cache-hit TTFT optimization, not a general no-prefix decode
+    throughput optimization; paper quality retention is not strict equality.
+next_gate: tail-replay-5pct-10pct-gdn-state-and-first-token-npu-numerical-canary
