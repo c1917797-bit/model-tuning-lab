@@ -1,5 +1,20 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Qwen3 control r1 raw-artifact audit (2026-09-14)
+
+Re-read all1428 request rows across c1/c5/c8/c16 from completed Qwen3 r1.
+Verified manifest/summary/row SHA256, dataset357 identities and input-message
+hashes, reconstructed response text from SSE events, output hashes, usage token
+counts, nonempty natural-stop/no-reasoning conditions, TPOT algebra and all
+P50/P95/P99 values using an independent interpolation implementation.
+Audit: `/cache/austinov/eval-runs/qwen3-r1-raw-audit-0r_80e2s/audit.json`,
+SHA256 eed532f4e0b81f7c683bfaf7b728c0c0f5f7c27686a7eff8d978476e98e741ad.
+All checks passed; original performance numbers unchanged. Reuse this valid
+r1 rather than rerunning without cause. This does NOT finish three-repeat
+paired comparison or certify candidate quality. Raw SSE events lack independent
+per-event receipt timestamps; capture timing relies on the pinned audited v4
+benchmark, while arithmetic and reported quantiles were independently checked.
+
 ## Cross-model HumanEval scoring preparation (2026-09-14)
 
 Actual CPU-only execution-manifest smoke completed using source a5e7eda:
