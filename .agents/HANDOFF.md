@@ -27,6 +27,13 @@ Tail-Replay 5%/10% GDN-state and first-token numerical canary. Resume at
 `docs/SLIMINFER_RUNTIME_METADATA_CANARY_20260914.md`.
 
 
+A later bounded resume added the paper-faithful, read-only semantic selection
+scorer and passed the full 29-test repository suite plus the 26-skill structure
+gate. It is still not connected to the live Ascend Q/K path and has not run on
+NPU. Continue at docs/SLIMINFER_SELECTION_SHADOW_PREP_20260914.md; the next
+gate is an identity-preserving TP4 selection-shadow canary, not a performance
+run.
+
 ## 0. Status
 
 - Last updated: 2026-09-09.

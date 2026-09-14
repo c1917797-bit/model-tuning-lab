@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
-stage: verified
-status: metadata-canary-passed-user-approved-tail-replay-pivot
+stage: implementation
+status: selection-shadow-scorer-offline-passed-npu-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -39,12 +39,53 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_and_stream_contract_tests: 17/17 passed
+  planner_runtime_stream_and_shadow_score_tests: 29/29 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
   token_linear_shape_ratio_pct: 49.609375
   first_semantic_canary_prefill: whole-prompt-only
+selection_shadow_scorer:
+  implementation: src/sliminfer_ascend/shadow_score.py
+  report: docs/SLIMINFER_SELECTION_SHADOW_PREP_20260914.md
+  paper_parameters:
+    block_size: 64
+    semantic_unit_size: 8
+    query_window: 4
+  distributed_invariant: >-
+    Sum-reduce every semantic-unit score across TP ranks before taking the
+    maximum semantic-unit score for each block.
+  gqa_mapping: repeat each local KV head over its corresponding local query heads
+  request_scope: explicit cumulative boundaries with no cross-request mixing
+  runtime_mutation: none
+  npu_executed: false
+  algorithmic_pruning_active: false
+  performance_claim_allowed: false
+  accuracy_claim_allowed: false
+  first_test_attempt:
+    result: 28-passed-1-failed
+    cause: >-
+      The collective shape-change fixture used the default 8-token unit size,
+      so two tokens produced one unit and slicing to one element did not change
+      the vector shape.
+    resolution: Set unit_size=1 in the fixture; production logic was unchanged.
+  corrected_test_attempt:
+    result: 29-passed
+    elapsed_seconds: 8.51
+  mst_validation: 26-skills-passed
+  diff_check: passed
+  ruff_check: unavailable-in-pinned-image
+  manual_line_length_check: passed
+  validation_devices_exposed: []
+current_resume:
+  basis: >-
+    Continue the active SlimInfer HYPIC-equivalent piercing objective with a
+    bounded selection-shadow implementation while the NPU lane is unavailable.
+  preserved_history: >-
+    The earlier user-approved Tail-Replay pivot remains recorded as a historical
+    direction decision and is not rewritten as a SlimInfer result.
+  current_npu4_7_pids: [2646154, 2646155, 3240854, 3240855]
+  action: external-workload-left-untouched
 historical_resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched
@@ -109,4 +150,4 @@ direction_decision:
   limitation: >-
     Tail-Replay is cache-hit TTFT optimization, not a general no-prefix decode
     throughput optimization; paper quality retention is not strict equality.
-next_gate: tail-replay-5pct-10pct-gdn-state-and-first-token-npu-numerical-canary
+next_gate: post-ascend-attention-qk-shadow-hook-and-tp4-selection-npu-canary

@@ -21,6 +21,7 @@ from .stream_contract import (
     full_attention_physical_slot,
     prefill_full_attention_slots,
 )
+from .shadow_score import SemanticRequestScores, semantic_block_scores
 
 __version__ = "0.1.0"
 
@@ -58,6 +59,7 @@ __all__ = [
     "CompactPrefillLayout",
     "RequestPruningState",
     "SlimInferConfig",
+    "SemanticRequestScores",
     "aggregate_rank_scores",
     "build_layer_plan",
     "build_whole_prompt_layout",
@@ -68,5 +70,6 @@ __all__ = [
     "prefill_full_attention_slots",
     "register",
     "selection_digest",
+    "semantic_block_scores",
     "select_active_blocks",
 ]
