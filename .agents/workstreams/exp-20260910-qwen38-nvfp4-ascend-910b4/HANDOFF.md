@@ -1,5 +1,25 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## 00:14 UTC — full client RESUMED; paired32 alternative NOT promoted
+
+Diagnostic L1i2ED completed32/32 with all4labels in top20, winners31/32 match.
+abstract_algebra doc2 differs: standard C=-1.5972367525,D=-1.5210561752
+choosesD; next-token C=D=-1.5680167675 ties and first-max choosesC. Max relative
+logprob difference0.3577424287791473. Do not claim numerical/full equivalence,
+accuracy regression direction, or established root cause. Alternative NOT
+accepted as replacement; no fabricated missing scores or silent tie handling.
+SummarySHA2534899d0729b7b9eb59c84c1829cacebbee92369f9277b0d1309c21c595f36f;
+referenceSHA6cc8ebdc387034d06eac3c276113c4329cae8a7678c4262adfcb05dc9e93e6ba.
+Exact full clientf1c3f7bf6dcb0263b760135c50a6f3898a140fa6d53631f6f0b73c4b5075f790
+unpaused manually; verified running/paused=false, safety timer stopped only
+AFTER successful unpause. R3 model/unit remain live. Full SQLite read-only
+count confirms583 completed cached requests (unnamed table), matching logs.
+Asked async user whether to checkpoint MMLU and prioritize performance/GSM8K/
+HumanEval within12h, then resume full MMLU, versus keep MMLU first accepting
+>12h. NO response received at this checkpoint: keep current full job running.
+Any future resume must validate same model/image/data/harness/protocol and
+copy a consistent cache snapshot into a fresh run; never overwrite originals.
+
 ## LIVE00:08 UTC — bounded paired32 diagnostic, full CLIENT temporarily paused
 
 Model1adbdddbad6e and unitr3 remain running. Full CPUclient
