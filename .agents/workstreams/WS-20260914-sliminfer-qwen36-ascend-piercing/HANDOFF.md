@@ -4,19 +4,27 @@ Updated: 2026-09-14
 
 ## Current state
 
+- Two TP4 selection-shadow attempts are preserved but inadmissible. The first
+  was intentionally aborted after source drift; the second completed the
+  disabled 13,000-token request but failed before the enabled arm because the
+  controller made a one-shot port-reuse check. This is an experiment-control
+  failure, not a SlimInfer result.
+- The port transition now uses a bounded reusable-bind wait and still fails
+  closed after 120 seconds. A fresh frozen-source A/B rerun is the next action.
+- Physical NPU4-7 are currently free; NPU0-3 remain owned by another task and
+  must not be touched.
 - Workstream branch:
-  `work/sliminfer-qwen36-ascend-piercing-20260914`.
-- No SlimInfer NPU run has started.
+  `paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted`.
+- No complete, admissible SlimInfer NPU A/B result exists yet.
 - No SlimInfer performance or accuracy result exists.
-- Intended HYPIC-equivalent NPU4-7 lane is not owned. The latest full
-  `npu-smi info` showed external `VLLMWorker_TP` PIDs 786664-786667 on NPU4-7,
-  each using 26,189 MiB. Do not stop or reuse them.
+- Intended HYPIC-equivalent NPU4-7 lane is currently free. NPU0-3 have external
+  VLLM workers and remain out of scope.
 - The paper, official source structure, Qwen3.6 checkpoint, HYPIC formal
   contract, and pinned vLLM/vLLM-Ascend model loops have been reviewed.
 - A deterministic request-local planner and Qwen3.6 12K/6K/4K layer plan are
   committed and pushed.
-- An opt-in, identity-preserving `vllm.general_plugins` canary and compact
-  stream contract now pass 17/17
+- An opt-in, identity-preserving `vllm.general_plugins` canary, selection
+  shadow and hidden-state restoration contract now pass 46/46
   tests in the pinned image without NPU devices. Editable installation and
   entry-point loading also passed, emitting only `plugin_build_active` and
   `model_patch_deferred`. This is a packaging/runtime-hook precondition, not an

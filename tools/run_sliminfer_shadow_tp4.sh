@@ -7,6 +7,7 @@ MODEL_PATH=/cache/efim/Qwen3.6-27B
 MODEL_NAME=qwen36-sliminfer-shadow
 IMAGE=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 PORT=${SLIMINFER_SHADOW_PORT:-8235}
+PORT_WAIT_SECONDS=${SLIMINFER_SHADOW_PORT_WAIT_SECONDS:-120}
 CPUSET=${SLIMINFER_SHADOW_CPUSET:-112-191}
 HOST_NPU_FIRST=4
 HOST_NPU_LAST=7
@@ -57,15 +58,32 @@ assert_lane_empty() {
   [[ -z "$pids" ]] || fail "NPU4-7 occupied by pid(s): ${pids//$'\n'/,}"
 }
 
-assert_port_free() {
+port_is_free() {
   python3 - "$PORT" <<'PY'
 import socket
 import sys
 
 port = int(sys.argv[1])
 with socket.socket() as sock:
-    sock.bind(("127.0.0.1", port))
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        sock.bind(("127.0.0.1", port))
+    except OSError:
+        raise SystemExit(1)
 PY
+}
+
+wait_for_port_free() {
+  local waited
+  for ((waited = 0; waited <= PORT_WAIT_SECONDS; waited++)); do
+    if port_is_free; then
+      return 0
+    fi
+    if (( waited < PORT_WAIT_SECONDS )); then
+      sleep 1
+    fi
+  done
+  fail "port $PORT did not become reusable within ${PORT_WAIT_SECONDS}s"
 }
 
 verify_static_inputs() {
@@ -80,7 +98,7 @@ verify_static_inputs() {
     fail "container already exists: $DISABLED_CONTAINER"
   [[ $(container_state "$ENABLED_CONTAINER") == absent ]] ||
     fail "container already exists: $ENABLED_CONTAINER"
-  assert_port_free
+  wait_for_port_free
   assert_lane_empty
 }
 
@@ -155,7 +173,7 @@ create_container() {
 wait_for_health() {
   local name=$1 attempt
   for attempt in $(seq 1 240); do
-    if curl -fsS "http://127.0.0.1:$PORT/health" >/dev/null; then
+    if curl -fsS "http://127.0.0.1:$PORT/health" >/dev/null 2>&1; then
       assert_container_owns_lane "$name"
       return 0
     fi
@@ -171,7 +189,7 @@ wait_for_health() {
 start_arm() {
   local arm=$1 name=$2 enabled=$3
   assert_lane_empty
-  assert_port_free
+  wait_for_port_free
   create_container "$arm" "$name" "$enabled"
   CURRENT_CONTAINER=$name
   CURRENT_ARM=$arm

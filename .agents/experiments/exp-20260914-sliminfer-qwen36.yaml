@@ -171,7 +171,7 @@ selection_shadow_scorer:
     elapsed_seconds: 8.51
   tp4_shadow_controller:
     implementation: tools/run_sliminfer_shadow_tp4.sh
-    status: first-runtime-aborted-before-result-source-bytes-changed
+    status: second-runtime-failed-after-disabled-control-port-transition-fixed
     corrected_preflight_bug: >-
       The first dry preflight treated Docker's empty stdout on an absent object
       as part of the fallback state string. Container state now branches on the
@@ -195,6 +195,28 @@ selection_shadow_scorer:
       enabled_arm_started: false
       performance_or_accuracy_claim_allowed: false
       preserved_artifact: selection-shadow-v1
+    second_runtime_attempt:
+      source_commit: f138ff4
+      preflight: passed
+      disabled_arm_started_on_physical_npu4-7: true
+      disabled_request:
+        prompt_tokens: 13000
+        completion_tokens: 1
+        finish_reason: length
+        result: passed
+      disabled_container_exit_code: 0
+      enabled_arm_started: false
+      result_admissible: false
+      terminal_cause: >-
+        The one-shot port probe reported address-in-use immediately after the
+        disabled service stopped, so the controller exited before creating the
+        enabled arm.
+      interpretation: controller-transition-failure-not-an-algorithm-result
+      performance_or_accuracy_claim_allowed: false
+      preserved_artifact: selection-shadow-v1-failed-port-transition
+      correction: >-
+        Probe with SO_REUSEADDR and wait up to a bounded 120 seconds for the
+        host port to become reusable; fail closed if it remains unavailable.
     physical_devices: [4, 5, 6, 7]
     arms: [disabled, selection-shadow]
     prompt_tokens: 13000
