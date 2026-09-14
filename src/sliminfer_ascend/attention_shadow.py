@@ -164,12 +164,23 @@ def _attention_metadata(layer_name: str) -> Any | None:
     return mapping[layer_name]
 
 
-def _compute_live_qk(self: Any, positions: Any, hidden_states: Any) -> tuple[Any, Any]:
-    """Duplicate the final Ascend projection/split only for a shadow canary."""
+def _projected_qkv(value: Any) -> Any:
+    """Extract the live fused projection tensor from the Ascend layer output."""
+
+    if isinstance(value, tuple):
+        if not value:
+            raise RuntimeError("QKV projection returned an empty tuple")
+        value = value[0]
+    if getattr(value, "shape", None) is None:
+        raise RuntimeError("QKV projection did not return a tensor-like value")
+    return value
+
+
+def _split_projected_qk(self: Any, positions: Any, qkv: Any) -> tuple[Any, Any]:
+    """Apply the real Ascend split/norm/RoPE op to an already projected QKV."""
 
     import torch
 
-    qkv, _ = self.qkv_proj(hidden_states)
     cos_sin = self.rotary_emb.cos_sin_cache[positions]
     if cos_sin.device != qkv.device:
         cos_sin = cos_sin.to(qkv.device)
@@ -234,6 +245,103 @@ def _request_token_counts(
     return original_tokens, current_active_tokens
 
 
+def _record_selection(
+    self: Any,
+    *,
+    positions: Any,
+    projected_qkv: Any,
+    start_locs: tuple[int, ...],
+    config: SlimInferConfig,
+    layer_index: int,
+    layer_name: str,
+) -> None:
+    q, k = _split_projected_qk(self, positions, projected_qkv)
+    results = semantic_block_scores(
+        q,
+        k,
+        start_locs,
+        block_size=_BLOCK_SIZE,
+        unit_size=_UNIT_SIZE,
+        query_window=_QUERY_WINDOW,
+        reduce_sum=_tp_reduce_sum,
+        global_query_heads=int(self.total_num_heads),
+    )
+    state = _selection_state()
+    for result in results:
+        request_index = result.request_index
+        if state["semantic_compact"] and request_index != 0:
+            raise RuntimeError("semantic-prefill currently supports one request")
+        if state["semantic_compact"]:
+            active = state["active"].get(request_index)
+            if active is None:
+                raise RuntimeError("semantic active block identity is missing")
+            block_scores = remap_compact_block_scores(
+                result.block_scores,
+                active,
+                prompt_tokens=int(state["prompt_tokens"]),
+                compact_tokens=result.token_end - result.token_start,
+                block_size=_BLOCK_SIZE,
+            )
+        else:
+            block_scores = result.block_scores
+        all_blocks = tuple(sorted(block_scores))
+        active = state["active"].get(request_index, all_blocks)
+        selected = select_active_blocks(
+            active,
+            block_scores,
+            keep_tokens=_BOUNDARY_KEEP_TOKENS[layer_index],
+            block_size=_BLOCK_SIZE,
+            keep_sink=True,
+            keep_recent=True,
+        )
+        state["active"][request_index] = selected
+        plan = state["plans"].setdefault(request_index, {})
+        state["selection_inputs"].setdefault(request_index, {})[layer_index] = active
+        plan[layer_index] = selected
+        digest = selection_digest(
+            f"forward-{state['serial']}-request-{request_index}", plan
+        )
+        request_tokens, active_tokens = _request_token_counts(
+            state, result.token_end - result.token_start
+        )
+        emit_event(
+            "selection_shadow_layer",
+            component="attention",
+            mode=config.mode,
+            distributed_rank=_distributed_rank(),
+            forward_serial=state["serial"],
+            request_index=request_index,
+            layer_index=layer_index,
+            layer_name=layer_name,
+            request_tokens=request_tokens,
+            active_tokens=active_tokens,
+            input_block_count=len(active),
+            selected_block_count=len(selected),
+            selected_blocks=list(selected),
+            score_sha256=_score_digest(block_scores),
+            selection_sha256=digest,
+            local_query_heads=int(self.num_heads),
+            local_kv_heads=int(self.num_kv_heads),
+            global_query_heads=int(self.total_num_heads),
+            block_size=_BLOCK_SIZE,
+            unit_size=_UNIT_SIZE,
+            query_window=_QUERY_WINDOW,
+            keep_sink_block=True,
+            keep_recent_block=True,
+            tp_score_canonicalization="sum-all-reduce-then-rank0-broadcast",
+            score_block_identity=(
+                "compact-remapped-to-absolute"
+                if state["semantic_compact"]
+                else "dense-original"
+            ),
+            compact_block_remap_applied=bool(state["semantic_compact"]),
+            staged_compact_semantics_proven=bool(state["semantic_compact"]),
+            duplicate_projection_for_diagnostics=False,
+            projection_reused_from_live_forward=True,
+            runtime_mutation=False,
+        )
+
+
 def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
     if cls.__dict__.get("_mst_sliminfer_selection_shadow_installed", False):
         return False
@@ -248,121 +356,56 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
         if not isinstance(layer_name, str):
             raise RuntimeError("SlimInfer requires the live attention layer_name")
         layer_index = _layer_index(layer_name)
-        if layer_index in _BOUNDARY_KEEP_TOKENS:
-            metadata = _attention_metadata(layer_name)
-            if metadata is None:
-                scope = getattr(_state, "value", None)
-                emit_event(
-                    "selection_shadow_metadata_unavailable",
-                    component="attention",
-                    mode=config.mode,
-                    distributed_rank=_distributed_rank(),
-                    forward_serial=(
-                        scope.get("serial") if isinstance(scope, dict) else None
-                    ),
-                    layer_index=layer_index,
-                    layer_name=layer_name,
-                    reason="forward-context-attn-metadata-is-none",
-                    runtime_mutation=False,
-                )
-            else:
-                start_locs = _whole_prompt_start_locs(
-                    metadata, int(hidden_states.shape[0])
-                )
-            if metadata is not None and start_locs is not None:
-                q, k = _compute_live_qk(self, positions, hidden_states)
-                results = semantic_block_scores(
-                    q,
-                    k,
-                    start_locs,
-                    block_size=_BLOCK_SIZE,
-                    unit_size=_UNIT_SIZE,
-                    query_window=_QUERY_WINDOW,
-                    reduce_sum=_tp_reduce_sum,
-                    global_query_heads=int(self.total_num_heads),
-                )
-                state = _selection_state()
-                for result in results:
-                    request_index = result.request_index
-                    if state["semantic_compact"] and request_index != 0:
-                        raise RuntimeError(
-                            "semantic-prefill currently supports one request"
-                        )
-                    if state["semantic_compact"]:
-                        active = state["active"].get(request_index)
-                        if active is None:
-                            raise RuntimeError("semantic active block identity is missing")
-                        block_scores = remap_compact_block_scores(
-                            result.block_scores,
-                            active,
-                            prompt_tokens=int(state["prompt_tokens"]),
-                            compact_tokens=result.token_end - result.token_start,
-                            block_size=_BLOCK_SIZE,
-                        )
-                    else:
-                        block_scores = result.block_scores
-                    all_blocks = tuple(sorted(block_scores))
-                    active = state["active"].get(request_index, all_blocks)
-                    selected = select_active_blocks(
-                        active,
-                        block_scores,
-                        keep_tokens=_BOUNDARY_KEEP_TOKENS[layer_index],
-                        block_size=_BLOCK_SIZE,
-                        keep_sink=True,
-                        keep_recent=True,
-                    )
-                    state["active"][request_index] = selected
-                    plan = state["plans"].setdefault(request_index, {})
-                    state["selection_inputs"].setdefault(request_index, {})[
-                        layer_index
-                    ] = active
-                    plan[layer_index] = selected
-                    digest = selection_digest(
-                        f"forward-{state['serial']}-request-{request_index}", plan
-                    )
-                    request_tokens, active_tokens = _request_token_counts(
-                        state, result.token_end - result.token_start
-                    )
-                    emit_event(
-                        "selection_shadow_layer",
-                        component="attention",
-                        mode=config.mode,
-                        distributed_rank=_distributed_rank(),
-                        forward_serial=state["serial"],
-                        request_index=request_index,
-                        layer_index=layer_index,
-                        layer_name=layer_name,
-                        request_tokens=request_tokens,
-                        active_tokens=active_tokens,
-                        input_block_count=len(active),
-                        selected_block_count=len(selected),
-                        selected_blocks=list(selected),
-                        score_sha256=_score_digest(block_scores),
-                        selection_sha256=digest,
-                        local_query_heads=int(self.num_heads),
-                        local_kv_heads=int(self.num_kv_heads),
-                        global_query_heads=int(self.total_num_heads),
-                        block_size=_BLOCK_SIZE,
-                        unit_size=_UNIT_SIZE,
-                        query_window=_QUERY_WINDOW,
-                        keep_sink_block=True,
-                        keep_recent_block=True,
-                        tp_score_canonicalization=(
-                            "sum-all-reduce-then-rank0-broadcast"
-                        ),
-                        score_block_identity=(
-                            "compact-remapped-to-absolute"
-                            if state["semantic_compact"]
-                            else "dense-original"
-                        ),
-                        compact_block_remap_applied=bool(state["semantic_compact"]),
-                        staged_compact_semantics_proven=bool(
-                            state["semantic_compact"]
-                        ),
-                        duplicate_projection_for_diagnostics=True,
-                        runtime_mutation=False,
-                    )
-        return original_forward(self, positions, output, hidden_states)
+        if layer_index not in _BOUNDARY_KEEP_TOKENS:
+            return original_forward(self, positions, output, hidden_states)
+
+        metadata = _attention_metadata(layer_name)
+        if metadata is None:
+            scope = getattr(_state, "value", None)
+            emit_event(
+                "selection_shadow_metadata_unavailable",
+                component="attention",
+                mode=config.mode,
+                distributed_rank=_distributed_rank(),
+                forward_serial=(
+                    scope.get("serial") if isinstance(scope, dict) else None
+                ),
+                layer_index=layer_index,
+                layer_name=layer_name,
+                reason="forward-context-attn-metadata-is-none",
+                runtime_mutation=False,
+            )
+            return original_forward(self, positions, output, hidden_states)
+
+        start_locs = _whole_prompt_start_locs(metadata, int(hidden_states.shape[0]))
+        if start_locs is None:
+            return original_forward(self, positions, output, hidden_states)
+
+        observed_projection_count = 0
+
+        def reuse_live_projection(_module: Any, _args: Any, value: Any) -> None:
+            nonlocal observed_projection_count
+            observed_projection_count += 1
+            if observed_projection_count != 1:
+                raise RuntimeError("attention forward executed QKV projection more than once")
+            _record_selection(
+                self,
+                positions=positions,
+                projected_qkv=_projected_qkv(value),
+                start_locs=start_locs,
+                config=config,
+                layer_index=layer_index,
+                layer_name=layer_name,
+            )
+
+        handle = self.qkv_proj.register_forward_hook(reuse_live_projection)
+        try:
+            result = original_forward(self, positions, output, hidden_states)
+        finally:
+            handle.remove()
+        if observed_projection_count != 1:
+            raise RuntimeError("attention forward did not execute the expected QKV projection")
+        return result
 
     cls.forward = forward_with_selection_shadow
     cls._mst_sliminfer_selection_shadow_installed = True

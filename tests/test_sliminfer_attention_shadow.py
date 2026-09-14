@@ -101,6 +101,7 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
 
     class Qwen3NextAttention:
         def forward(self, positions, output, hidden_states):
+            self.qkv_proj(hidden_states)
             output.copy_(hidden_states)
             return "original-result"
 
@@ -109,6 +110,13 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
     module.Qwen3NextAttention = Qwen3NextAttention
     _apply_attention_patch(module, _config(evidence))
 
+    class CountingProjection(torch.nn.Linear):
+        calls = 0
+
+        def forward(self, value):
+            self.calls += 1
+            return super().forward(value), None
+
     instance = Qwen3NextAttention()
     instance.attn = SimpleNamespace(
         layer_name="language_model.model.layers.19.self_attn.attn"
@@ -116,11 +124,14 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
     instance.num_heads = 1
     instance.num_kv_heads = 1
     instance.total_num_heads = 1
+    instance.qkv_proj = CountingProjection(1, 4, bias=False)
     hidden = torch.arange(4, dtype=torch.float32).reshape(4, 1)
     output = torch.empty_like(hidden)
     q = torch.ones((4, 1, 1), dtype=torch.float32)
     k = torch.arange(4, dtype=torch.float32).reshape(4, 1, 1)
-    monkeypatch.setattr(attention_shadow, "_compute_live_qk", lambda *args: (q, k))
+    monkeypatch.setattr(
+        attention_shadow, "_split_projected_qk", lambda *args: (q, k)
+    )
     monkeypatch.setattr(
         attention_shadow, "_attention_metadata", lambda name: _metadata((4,))
     )
@@ -130,6 +141,7 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
         result = instance.forward(torch.arange(4), output, hidden)
 
     assert result == "original-result"
+    assert instance.qkv_proj.calls == 1
     assert torch.equal(output, hidden)
     events = [json.loads(line) for line in evidence.read_text().splitlines()]
     assert [event["event"] for event in events] == [
@@ -145,7 +157,8 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
     assert selection["keep_sink_block"] is True
     assert selection["keep_recent_block"] is True
     assert selection["runtime_mutation"] is False
-    assert selection["duplicate_projection_for_diagnostics"] is True
+    assert selection["duplicate_projection_for_diagnostics"] is False
+    assert selection["projection_reused_from_live_forward"] is True
 
 
 def test_non_boundary_layer_calls_original_without_scoring(tmp_path, monkeypatch):
@@ -165,7 +178,7 @@ def test_non_boundary_layer_calls_original_without_scoring(tmp_path, monkeypatch
     )
     monkeypatch.setattr(
         attention_shadow,
-        "_compute_live_qk",
+        "_split_projected_qk",
         lambda *args: (_ for _ in ()).throw(AssertionError("must not score")),
     )
     assert instance.forward(None, None, None) == "untouched"
@@ -189,7 +202,7 @@ def test_boundary_layer_skips_dummy_forward_without_metadata(tmp_path, monkeypat
     monkeypatch.setattr(attention_shadow, "_attention_metadata", lambda name: None)
     monkeypatch.setattr(
         attention_shadow,
-        "_compute_live_qk",
+        "_split_projected_qk",
         lambda *args: (_ for _ in ()).throw(AssertionError("must not score")),
     )
 
@@ -226,7 +239,7 @@ def test_semantic_boundary_dummy_without_scope_is_identity_preserving(
     monkeypatch.setattr(attention_shadow, "_attention_metadata", lambda name: None)
     monkeypatch.setattr(
         attention_shadow,
-        "_compute_live_qk",
+        "_split_projected_qk",
         lambda *args: (_ for _ in ()).throw(AssertionError("must not score")),
     )
 
