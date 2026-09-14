@@ -242,6 +242,11 @@ def _patch_model_class(cls: type, config: SlimInferConfig) -> bool:
                         ),
                     )
                     emitted_calls += 1
+        if config.mode == "selection-shadow":
+            from .attention_shadow import selection_forward_scope
+
+            with selection_forward_scope():
+                return original_forward(self, *args, **kwargs)
         return original_forward(self, *args, **kwargs)
 
     cls.forward = forward_with_identity_canary

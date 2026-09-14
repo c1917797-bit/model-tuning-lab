@@ -28,11 +28,11 @@ Tail-Replay 5%/10% GDN-state and first-token numerical canary. Resume at
 
 
 A later bounded resume added the paper-faithful, read-only semantic selection
-scorer and passed the full 29-test repository suite plus the 26-skill structure
-gate. It is still not connected to the live Ascend Q/K path and has not run on
-NPU. Continue at docs/SLIMINFER_SELECTION_SHADOW_PREP_20260914.md; the next
-gate is an identity-preserving TP4 selection-shadow canary, not a performance
-run.
+scorer and final-Ascend-forward shadow hook, then passed the full 35-test
+repository suite. The hook remains unexecuted on NPU and does not mutate model
+outputs or cache state. Continue at
+docs/SLIMINFER_SELECTION_SHADOW_PREP_20260914.md; the next gate is an
+identity-preserving TP4 selection-shadow canary, not a performance run.
 
 ## 0. Status
 

@@ -46,6 +46,10 @@ def register() -> None:
         mode=config.mode,
     )
     install_model_patch(config)
+    if config.mode == "selection-shadow":
+        from .attention_shadow import install_attention_patch
+
+        install_attention_patch(config)
     logger.info(
         "SlimInfer Ascend plugin active: version=%s mode=%s module=%s",
         __version__,

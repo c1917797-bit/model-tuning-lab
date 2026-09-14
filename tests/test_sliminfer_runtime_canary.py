@@ -40,6 +40,11 @@ def test_config_accepts_metadata_canary(monkeypatch):
     assert get_config().mode == "metadata-canary"
 
 
+def test_config_accepts_selection_shadow(monkeypatch):
+    monkeypatch.setenv("MST_SLIMINFER_MODE", "selection-shadow")
+    assert get_config().mode == "selection-shadow"
+
+
 def test_identity_canary_preserves_forward_and_emits_once(tmp_path, monkeypatch):
     evidence = tmp_path / "runtime.jsonl"
     monkeypatch.setenv("MST_SLIMINFER_EVIDENCE_FILE", str(evidence))

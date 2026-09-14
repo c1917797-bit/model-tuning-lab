@@ -20,7 +20,7 @@ def test_prompt_block_ids_cover_partial_last_block():
     assert prompt_block_ids(65) == (0, 1)
 
 
-def test_fixed_12k_budget_on_32k_prompt_keeps_exact_block_count_and_edges():
+def test_fixed_12k_budget_keeps_exact_count_and_paper_sink_block():
     blocks = prompt_block_ids(32768)
     selected = select_active_blocks(
         blocks,
@@ -30,14 +30,14 @@ def test_fixed_12k_budget_on_32k_prompt_keeps_exact_block_count_and_edges():
     assert len(blocks) == 512
     assert len(selected) == 192
     assert selected[0] == 0
-    assert selected[-1] == 511
+    assert selected[-1] == 191
 
 
 def test_ties_are_deterministic_and_independent_of_mapping_order():
     blocks = (0, 1, 2, 3, 4, 5)
     forward = {block: 1.0 for block in blocks}
     reverse = dict(reversed(tuple(forward.items())))
-    expected = (0, 1, 2, 5)
+    expected = (0, 1, 2, 3)
     assert select_active_blocks(blocks, forward, keep_tokens=4, block_size=1) == expected
     assert select_active_blocks(blocks, reverse, keep_tokens=4, block_size=1) == expected
 
@@ -51,11 +51,9 @@ def test_tp_scores_are_mean_reduced_before_selection():
     ]
     reduced = aggregate_rank_scores(rank_scores)
     assert reduced == {0: 0.0, 1: 4.0, 2: 5.0, 3: 0.0}
-    assert select_active_blocks((0, 1, 2, 3), reduced, keep_tokens=3, block_size=1) == (
-        0,
-        2,
-        3,
-    )
+    assert select_active_blocks(
+        (0, 1, 2, 3), reduced, keep_tokens=3, block_size=1
+    ) == (0, 1, 2)
 
 
 def test_tp_score_identity_mismatch_fails_closed():

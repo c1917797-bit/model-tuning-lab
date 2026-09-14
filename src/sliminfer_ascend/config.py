@@ -8,7 +8,7 @@ import os
 
 _TRUE = {"1", "true", "yes", "on"}
 _FALSE = {"0", "false", "no", "off", ""}
-_SUPPORTED_MODES = {"identity-canary", "metadata-canary"}
+_SUPPORTED_MODES = {"identity-canary", "metadata-canary", "selection-shadow"}
 
 
 def _bool_env(name: str, default: bool = False) -> bool:

@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: implementation
-status: selection-shadow-scorer-offline-passed-npu-pending
+status: selection-shadow-hook-offline-passed-npu-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -39,7 +39,7 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_stream_and_shadow_score_tests: 29/29 passed
+  planner_runtime_stream_and_shadow_tests: 35/35 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
@@ -72,6 +72,29 @@ selection_shadow_scorer:
   corrected_test_attempt:
     result: 29-passed
     elapsed_seconds: 8.51
+  runtime_hook:
+    implementation: src/sliminfer_ascend/attention_shadow.py
+    patch_order: after-vllm-ascend-final-qwen3-5-forward
+    boundary_layers: [19, 39, 59]
+    request_boundaries: live-attention-metadata-query-start-loc
+    tp_collective: tensor-model-parallel-all-reduce-per-semantic-unit
+    duplicate_qkv_projection: diagnostics-only
+    output_or_cache_mutation: false
+    staged_active_set: request-local-model-forward-scope
+  paper_semantic_correction:
+    mandatory_prompt_blocks: first-sink-only
+    recent_prompt_block_forced: false
+    note: generated response tokens remain a separate later integration rule
+  hook_test_attempt:
+    result: 34-passed-1-failed
+    cause: >-
+      A canonical digest fixture still referenced the previously forced recent
+      prompt block after the selection rule was corrected to the paper's
+      sink-only mandatory block.
+    resolution: Updated only the stale expected set from [0, 1, 3] to [0, 1, 2].
+  corrected_hook_test_attempt:
+    result: 35-passed
+    elapsed_seconds: 8.79
   mst_validation: 26-skills-passed
   diff_check: passed
   ruff_check: unavailable-in-pinned-image

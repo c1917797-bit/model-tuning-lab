@@ -69,7 +69,8 @@ def select_active_blocks(
     *,
     keep_tokens: int,
     block_size: int = 64,
-    keep_sink_and_recent: bool = True,
+    keep_sink: bool = True,
+    keep_recent: bool = False,
 ) -> tuple[int, ...]:
     """Select a deterministic subset of the currently active prompt blocks."""
 
@@ -97,7 +98,11 @@ def select_active_blocks(
 
     # Score descending, absolute block ID ascending for deterministic ties.
     ranked = sorted(active, key=lambda block_id: (-float(block_scores[block_id]), block_id))
-    mandatory = {active[0], active[-1]} if keep_sink_and_recent else set()
+    mandatory: set[int] = set()
+    if keep_sink:
+        mandatory.add(active[0])
+    if keep_recent:
+        mandatory.add(active[-1])
     if len(mandatory) >= keep_count:
         return tuple(sorted(mandatory))
 

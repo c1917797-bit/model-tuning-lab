@@ -56,13 +56,38 @@ digest integration.
 
 ## Remaining gates
 
-1. Install a post-import wrapper after the final vLLM-Ascend Qwen3.5 patch.
-2. Capture the live normalized and position-encoded Q/K at layers 19, 39, and
-   59 without changing the original forward result.
-3. Use a real TP4 all-reduce over semantic-unit scores.
-4. Prove identical selection digests on all four ranks and exact output parity
-   against the disabled control.
-5. Only then implement actual row/cache pruning and run a paired performance
+The offline implementation now includes a post-import wrapper that is installed
+after the final vLLM-Ascend Qwen3.5 patch. At layers 19, 39, and 59 it
+duplicates the pinned Ascend QKV projection and fused split only to obtain the
+normalized, position-encoded Q/K; reads request boundaries from the live
+attention query_start_loc; performs a real tensor-model-parallel per-unit
+all-reduce; and emits staged request-local selection evidence. The original
+attention forward is still called exactly once and the wrapper does not mutate
+outputs or cache state.
+
+During this audit two semantics were corrected before NPU execution:
+
+- query_start_loc is used as the authoritative cumulative request boundary;
+  actual_seq_lengths_q is not assumed to be a vector of ordinary lengths;
+- only the first sink prompt block is mandatory, matching the paper. The
+  previous planner also forced the most recent prompt block.
+
+After these corrections the complete repository suite reported:
+
+    35 passed in 8.79s
+
+One intermediate run reported 34 passed and 1 failed because a digest fixture
+still contained the old forced-recent block. Only the stale expected set was
+updated.
+
+Remaining gates:
+
+1. Run the wrapper in the pinned image on physical NPU4-7 after proving the
+   lane is free.
+2. Prove all four ranks loaded the final Ascend source and produced identical
+   staged selection digests.
+3. Prove enabled and disabled outputs are exactly equal.
+4. Only then implement actual row/cache pruning and run a paired performance
    screen.
 
 At this checkpoint physical NPU4-7 were occupied by external VLLMWorker_TP
