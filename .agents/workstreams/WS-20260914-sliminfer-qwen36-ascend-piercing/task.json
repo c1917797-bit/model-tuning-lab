@@ -1,0 +1,22 @@
+{
+  "schema": "model-tuning-task/v1",
+  "task_id": "WS-20260914-sliminfer-qwen36-ascend-piercing",
+  "status": "planned-resource-wait",
+  "objective": "Quickly pierce SlimInfer on the same Qwen3.6-27B Ascend TP4 ruler used by the completed HYPIC reproduction and produce a HYPIC-shaped, fail-closed report.",
+  "long_term_alignment": "Paper-to-Ascend inference optimization with real NPU performance, quality evidence, portable design, and retained success/failure learning.",
+  "scientific_scope": "Direction reproduction on a changed hybrid model and Ascend serving stack; not absolute reproduction of the paper's single-GPU Llama/Qwen2 numbers.",
+  "current_stage": "planned",
+  "next_action": "Complete live source-map and opportunity bound while NPU4-7 remains occupied; claim and verify the lane only after the external workload releases it.",
+  "resource_state": {
+    "intended_lane": "host NPU4-7, container-visible 0-3, TP4",
+    "protected_lane": "host NPU0-3; do not inspect or alter",
+    "ownership": "not claimed",
+    "observation_2026_09_14": "NPU4-7 each reported 87% HBM use and an unrelated eight-worker vLLM process was live",
+    "action": "do not stop, restart, inspect internals of, or reuse the external workload"
+  },
+  "results": {
+    "sliminfer_performance": null,
+    "sliminfer_accuracy": null,
+    "statement": "No SlimInfer NPU run has started."
+  }
+}
