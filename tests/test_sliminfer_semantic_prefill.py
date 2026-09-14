@@ -8,6 +8,7 @@ import pytest
 torch = pytest.importorskip("torch")
 
 from sliminfer_ascend.semantic_prefill import (
+    _cache_pruned_fused_residual_blocks,
     compact_positions,
     compact_gdn_metadata,
     compact_full_attention_metadata,
@@ -16,6 +17,35 @@ from sliminfer_ascend.semantic_prefill import (
     swapped_layer_metadata,
     validate_model_contract,
 )
+
+
+def test_pruned_fused_residual_cache_preserves_complete_absolute_blocks():
+    hidden = torch.arange(384 * 3, dtype=torch.float32).reshape(384, 3)
+    residual = hidden + 100
+    cached = _cache_pruned_fused_residual_blocks(
+        hidden,
+        residual,
+        current_active_blocks=(0, 2, 5),
+        selected_active_blocks=(0, 5),
+        prompt_tokens=384,
+        layer_index=19,
+    )
+    assert tuple(cached) == ((19, 2),)
+    assert cached[(19, 2)].hidden_states.tolist() == hidden[64:128].tolist()
+    assert cached[(19, 2)].residual.tolist() == residual[64:128].tolist()
+    assert cached[(19, 2)].hidden_states.data_ptr() != hidden[64:128].data_ptr()
+
+
+def test_pruned_fused_residual_cache_requires_residual_tensor():
+    with pytest.raises(RuntimeError, match="fused residual"):
+        _cache_pruned_fused_residual_blocks(
+            torch.zeros(64, 2),
+            None,
+            current_active_blocks=(0,),
+            selected_active_blocks=(0,),
+            prompt_tokens=64,
+            layer_index=19,
+        )
 
 
 @dataclass

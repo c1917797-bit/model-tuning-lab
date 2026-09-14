@@ -266,7 +266,7 @@ python3 tools/run_sliminfer_shadow_request.py \
   --output "$OUTPUT_ROOT/enabled/request.json"
 stop_arm enabled "$ENABLED_CONTAINER"
 
-if [[ "$CANARY_MODE" == semantic-prefill ]]; then
+if [[ "$CANARY_MODE" == semantic-prefill || "$CANARY_MODE" == semantic-stream ]]; then
   python3 tools/summarize_sliminfer_shadow.py \
     "$OUTPUT_ROOT/enabled/runtime.jsonl" \
     --expected-ranks 0,1,2,3 \

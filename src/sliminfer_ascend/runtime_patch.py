@@ -18,6 +18,8 @@ from .import_hook import PostImportFinder
 
 _TARGET_MODULE = "vllm.model_executor.models.qwen3_5"
 _TARGET_CLASS = "Qwen3_5Model"
+_RUNNER_MODULE = "vllm_ascend.worker.model_runner_v1"
+_RUNNER_CLASS = "NPUModelRunner"
 _METADATA_CALL_LIMIT = 16
 _SEQUENCE_ITEM_LIMIT = 16
 _MAPPING_ITEM_LIMIT = 96
@@ -242,7 +244,7 @@ def _patch_model_class(cls: type, config: SlimInferConfig) -> bool:
                         ),
                     )
                     emitted_calls += 1
-        if config.mode == "semantic-prefill":
+        if config.mode in {"semantic-prefill", "semantic-stream"}:
             from .semantic_prefill import semantic_prefill_forward
 
             try:
@@ -314,4 +316,82 @@ def install_model_patch(config: SlimInferConfig) -> None:
         mode=config.mode,
         target_module=_TARGET_MODULE,
         target_class=_TARGET_CLASS,
+    )
+
+
+def _patch_runner_class(cls: type, config: SlimInferConfig) -> bool:
+    if cls.__dict__.get("_mst_sliminfer_runner_patch_installed", False):
+        return False
+    original_forward = cls._model_forward
+    source_path, source_digest = _source_identity(original_forward)
+
+    @wraps(original_forward)
+    def model_forward_with_request_identity(self, *args, **kwargs):
+        positions = kwargs.get("positions")
+        if positions is None and len(args) > 2:
+            positions = args[2]
+        if positions is None:
+            raise RuntimeError("SlimInfer runner hook cannot resolve positions")
+        from .request_runtime import runner_forward_scope
+
+        with runner_forward_scope(self, positions) as identity:
+            request = identity.requests[0]
+            emit_event(
+                "runner_request_scope_enter",
+                component="runner",
+                mode=config.mode,
+                distributed_rank=_distributed_rank(),
+                req_id_sha256=sha256(request.req_id.encode()).hexdigest(),
+                prompt_tokens=request.prompt_tokens,
+                num_computed_tokens=request.num_computed_tokens,
+                scheduled_tokens=request.scheduled_tokens,
+                kv_group_count=len(request.block_tables),
+                kv_block_sizes=list(request.kv_block_sizes),
+                runtime_mutation=False,
+            )
+            return original_forward(self, *args, **kwargs)
+
+    cls._model_forward = model_forward_with_request_identity
+    cls._mst_sliminfer_runner_patch_installed = True
+    emit_event(
+        "runner_patch_installed",
+        component="runner",
+        mode=config.mode,
+        target_module=cls.__module__,
+        target_class=cls.__name__,
+        source_path=source_path,
+        source_sha256=source_digest,
+    )
+    return True
+
+
+def _apply_runner_patch(module: ModuleType, config: SlimInferConfig) -> None:
+    cls = getattr(module, _RUNNER_CLASS, None)
+    if cls is None:
+        if config.require_runtime_hooks:
+            raise RuntimeError(
+                f"SlimInfer runner target {_RUNNER_MODULE}.{_RUNNER_CLASS} was not found"
+            )
+        return
+    _patch_runner_class(cls, config)
+
+
+def install_runner_patch(config: SlimInferConfig) -> None:
+    """Capture request/cache identity around the real Ascend model call."""
+
+    module = sys.modules.get(_RUNNER_MODULE)
+    if module is not None:
+        _apply_runner_patch(module, config)
+        return
+
+    def callback(imported_module: ModuleType) -> None:
+        _apply_runner_patch(imported_module, config)
+
+    PostImportFinder(_RUNNER_MODULE, callback).install()
+    emit_event(
+        "runner_patch_deferred",
+        component="runner",
+        mode=config.mode,
+        target_module=_RUNNER_MODULE,
+        target_class=_RUNNER_CLASS,
     )

@@ -13,6 +13,7 @@ _SUPPORTED_MODES = {
     "metadata-canary",
     "selection-shadow",
     "semantic-prefill",
+    "semantic-stream",
 }
 
 

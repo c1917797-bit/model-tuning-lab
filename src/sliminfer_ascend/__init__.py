@@ -52,7 +52,11 @@ def register() -> None:
         mode=config.mode,
     )
     install_model_patch(config)
-    if config.mode in {"selection-shadow", "semantic-prefill"}:
+    if config.mode == "semantic-stream":
+        from .runtime_patch import install_runner_patch
+
+        install_runner_patch(config)
+    if config.mode in {"selection-shadow", "semantic-prefill", "semantic-stream"}:
         from .attention_shadow import install_attention_patch
 
         install_attention_patch(config)

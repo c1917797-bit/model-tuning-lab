@@ -10,11 +10,53 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from dataclasses import fields, is_dataclass, replace
+import os
 from types import SimpleNamespace
 from typing import Any, Iterator, Mapping, Sequence
 
 from .diagnostics import emit_event
 from .stream_contract import RequestPruningState
+
+
+def _cache_pruned_fused_residual_blocks(
+    hidden_states: Any,
+    residual: Any,
+    *,
+    current_active_blocks: Sequence[int],
+    selected_active_blocks: Sequence[int],
+    prompt_tokens: int,
+    layer_index: int,
+) -> dict[tuple[int, int], Any]:
+    """Cache complete pruned blocks from the vLLM fused-residual stream."""
+
+    import torch
+
+    from .request_runtime import HiddenStateBlock
+
+    if residual is None:
+        raise RuntimeError("semantic-stream requires the fused residual tensor")
+    selected = set(int(block) for block in selected_active_blocks)
+    current_state = RequestPruningState(
+        prompt_tokens=prompt_tokens,
+        active_blocks=tuple(int(block) for block in current_active_blocks),
+    )
+    row_by_token = {
+        token_id: row
+        for row, token_id in enumerate(current_state.active_prompt_token_ids)
+    }
+    result: dict[tuple[int, int], HiddenStateBlock] = {}
+    for block in current_state.active_blocks:
+        if block in selected:
+            continue
+        start = block * current_state.pruning_block_size
+        stop = min(start + current_state.pruning_block_size, prompt_tokens)
+        rows = tuple(row_by_token[token_id] for token_id in range(start, stop))
+        index = torch.tensor(rows, dtype=torch.long, device=hidden_states.device)
+        result[(layer_index, block)] = HiddenStateBlock(
+            hidden_states=torch.index_select(hidden_states, 0, index).detach(),
+            residual=torch.index_select(residual, 0, index).detach(),
+        )
+    return result
 
 
 def position_token_axis(positions: Any) -> int:
@@ -311,6 +353,27 @@ def semantic_prefill_forward(
     original_rows = prompt_tokens
     residual = None
     current_positions = positions
+    persistent_state = None
+    if os.environ.get("MST_SLIMINFER_MODE") == "semantic-stream":
+        from .request_runtime import (
+            PersistentRequestState,
+            current_runner_forward_identity,
+        )
+
+        runner_identity = current_runner_forward_identity()
+        if len(runner_identity.requests) != 1:
+            raise RuntimeError("semantic-stream requires exactly one runner request")
+        request_identity = runner_identity.requests[0]
+        if request_identity.num_computed_tokens != 0:
+            raise RuntimeError("semantic-stream decode is not implemented yet")
+        if request_identity.prompt_tokens != prompt_tokens:
+            raise RuntimeError("runner and model prompt lengths differ")
+        persistent_state = PersistentRequestState(
+            req_id=request_identity.req_id,
+            prompt_tokens=prompt_tokens,
+            block_tables=request_identity.block_tables,
+            kv_block_sizes=request_identity.kv_block_sizes,
+        )
     with selection_forward_scope(
         prompt_tokens=prompt_tokens, semantic_compact=True
     ):
@@ -333,6 +396,18 @@ def semantic_prefill_forward(
                 )
             if layer_index in _BOUNDARY_KEEP_TOKENS:
                 before, selected = semantic_layer_transition(layer_index)
+                if persistent_state is not None:
+                    persistent_state.hidden_state_cache.update(
+                        _cache_pruned_fused_residual_blocks(
+                            hidden_states,
+                            residual,
+                            current_active_blocks=before,
+                            selected_active_blocks=selected,
+                            prompt_tokens=prompt_tokens,
+                            layer_index=layer_index,
+                        )
+                    )
+                    persistent_state.active_blocks_after_layer[layer_index] = selected
                 gather = compact_gather_indices(
                     before,
                     selected,
@@ -386,4 +461,19 @@ def semantic_prefill_forward(
             output_rows=int(restored.shape[0]),
             runtime_mutation=True,
         )
+        if persistent_state is not None:
+            from .request_runtime import put_request_state
+
+            put_request_state(persistent_state)
+            emit_event(
+                "semantic_stream_prefill_state_committed",
+                component="model",
+                mode="semantic-stream",
+                distributed_rank=_distributed_rank(),
+                prompt_tokens=prompt_tokens,
+                boundary_layers=sorted(persistent_state.active_blocks_after_layer),
+                hidden_state_block_count=len(persistent_state.hidden_state_cache),
+                kv_group_count=len(persistent_state.block_tables),
+                runtime_mutation=True,
+            )
         return restored
