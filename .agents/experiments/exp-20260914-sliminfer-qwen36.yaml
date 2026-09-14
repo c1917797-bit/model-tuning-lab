@@ -39,7 +39,7 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_stream_shadow_and_audit_tests: 38/38 passed
+  planner_runtime_stream_shadow_audit_and_request_tests: 42/42 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
@@ -120,6 +120,29 @@ selection_shadow_scorer:
     meaning: >-
       The opt-in plugin registers both deferred hooks without loading a model
       or touching an NPU. This is packaging evidence, not runtime activation.
+  real_ascend_module_import_without_device:
+    result: inconclusive-environment-precondition
+    npu_devices_exposed: []
+    failure_boundary: >-
+      Ascend Triton platform initialization could not obtain the SoC target
+      before vllm_ascend.patch.worker.patch_qwen3_5 imported.
+    interpretation: >-
+      This does not execute or evaluate the SlimInfer hook. Final patch-order
+      validation requires a real NPU worker and remains part of the TP4 canary.
+  deterministic_request_and_parity_tools:
+    request: tools/run_sliminfer_shadow_request.py
+    comparison: tools/compare_sliminfer_shadow_outputs.py
+    requested_prompt_tokens: 13000
+    prompt_form: repeated-explicit-token-id
+    sampling: temperature-0-seed-0-max-tokens-1
+    compared_fields:
+      - text
+      - finish_reason
+      - stop_reason
+      - prompt_tokens
+      - completion_tokens
+    complete_test_result: 42-passed
+    elapsed_seconds: 8.44
   mst_validation: 26-skills-passed
   diff_check: passed
   ruff_check: unavailable-in-pinned-image

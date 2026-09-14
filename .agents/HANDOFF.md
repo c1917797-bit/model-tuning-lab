@@ -29,7 +29,8 @@ Tail-Replay 5%/10% GDN-state and first-token numerical canary. Resume at
 
 A later bounded resume added the paper-faithful, read-only semantic selection
 scorer, final-Ascend-forward shadow hook, and a fail-closed four-rank evidence
-auditor, then passed the full 38-test repository suite. The hook remains
+auditor plus deterministic request/parity tools, then passed the full 42-test
+repository suite. The hook remains
 unexecuted on NPU and does not mutate model outputs or cache state. Continue at
 docs/SLIMINFER_SELECTION_SHADOW_PREP_20260914.md; the next gate is an
 identity-preserving TP4 selection-shadow canary, not a performance run.

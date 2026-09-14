@@ -95,6 +95,20 @@ selection_shadow_patch_deferred in that order. This proves the opt-in package
 registers both hooks; it does not prove that the live model imports or executes
 them.
 
+A stronger no-device import of the real vLLM-Ascend worker patch was attempted.
+It stopped before the Qwen patch module imported because Ascend Triton could not
+obtain a SoC target without an exposed NPU. The SlimInfer hook did not execute,
+so this is an environment-precondition result, not a failed hook result. Patch
+order must be verified by the first TP4 worker canary.
+
+Two deterministic canary tools were also added. The request tool sends an exact
+13,000-token explicit token-ID prompt at temperature 0 and seed 0. The parity
+tool rejects request drift and compares generated text, finish and stop reasons,
+and prompt/completion token counts while ignoring response IDs and timestamps.
+With these tools included, the complete suite is:
+
+    42 passed in 8.44s
+
 Remaining gates:
 
 1. Run the wrapper in the pinned image on physical NPU4-7 after proving the
