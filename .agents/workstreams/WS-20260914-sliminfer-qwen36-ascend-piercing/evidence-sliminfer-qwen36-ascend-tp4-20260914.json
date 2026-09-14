@@ -1,0 +1,57 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "sliminfer-qwen36-ascend-tp4-20260914",
+  "status": "pre-npu-feasibility",
+  "planned_commit": "5dc0514",
+  "paper_source": {
+    "arxiv": "2508.06447v2",
+    "official_repository": "https://github.com/Longxmas/SlimInfer",
+    "exact_commit": null,
+    "exact_commit_status": "unresolved; target-host outbound git lookup did not complete",
+    "license_status": "no root LICENSE visible; no official code copied or vendored"
+  },
+  "architecture": {
+    "checkpoint_config_read": true,
+    "layers": 64,
+    "linear_attention_layers": 48,
+    "full_attention_layers": 16,
+    "fit": "fits-with-implementation-high-risk"
+  },
+  "planner": {
+    "scope": "device-independent precondition only",
+    "test_environment": "pinned serving image with no NPU devices mounted",
+    "tests": 8,
+    "passed": 8,
+    "failed": 0,
+    "duration_s": 0.05,
+    "planner_sha256": "5bcc9698bad03871fbaba1b620f99e6f8151d5fa70f44adb253cbe58d1906862",
+    "tests_sha256": "f92f05578c4b9df6998617a271049171349606133f0e6af5ef03cf85e258de34",
+    "plan_sha256": "8f9bac80ac128c7cc604fa573a205f55d596056d28891fd2f4436c1a5f05e264",
+    "covered": [
+      "64-token block accounting",
+      "12K/6K/4K staged monotonic selection",
+      "sink and recent retention",
+      "deterministic tie breaking",
+      "TP score reduction contract",
+      "rank block-identity failure",
+      "request-local canonical digest",
+      "missing and non-finite score rejection"
+    ]
+  },
+  "resource_evidence": {
+    "intended_lane": "host NPU4-7",
+    "ownership": "not claimed",
+    "latest_hbm_usage_pct_each": 87,
+    "external_vllm_workers_observed": 8,
+    "npu_test_started": false,
+    "resource_action": "no external workload stopped, restarted or reused"
+  },
+  "performance": null,
+  "quality": null,
+  "allowed_claim": "The deterministic planner preconditions pass without NPU access.",
+  "forbidden_claims": [
+    "SlimInfer has executed on Ascend.",
+    "SlimInfer improves Qwen3.6 performance.",
+    "SlimInfer preserves Qwen3.6 accuracy."
+  ]
+}

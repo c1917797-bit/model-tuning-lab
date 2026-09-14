@@ -1,0 +1,35 @@
+{
+  "schema": "sliminfer-ascend-plan/v1",
+  "algorithm_identity": "faithful-port-feasibility",
+  "target_model": "Qwen3.6-27B",
+  "block_size": 64,
+  "semantic_unit_size": 8,
+  "recent_query_window": 4,
+  "swap_overlap_threshold": 0.9,
+  "keep_sink_and_recent_blocks": true,
+  "layer_indexing": "zero-based; prune after the named layer",
+  "mapping_rationale": "Map the official Qwen2.5 three-stage depth fractions to Qwen3.6 full-attention boundaries while preserving 12K/6K/4K budgets.",
+  "pruning_boundaries": [
+    {
+      "layer_index": 19,
+      "layer_type": "full_attention",
+      "keep_tokens": 12288
+    },
+    {
+      "layer_index": 39,
+      "layer_type": "full_attention",
+      "keep_tokens": 6144
+    },
+    {
+      "layer_index": 59,
+      "layer_type": "full_attention",
+      "keep_tokens": 4096
+    }
+  ],
+  "disabled_features_for_first_canary": [
+    "cpu_kv_offload",
+    "async_prefetch",
+    "continuous_batching",
+    "npu_graph"
+  ]
+}

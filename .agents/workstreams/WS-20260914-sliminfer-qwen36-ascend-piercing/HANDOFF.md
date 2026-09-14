@@ -13,6 +13,9 @@ Updated: 2026-09-14
   live. Do not stop or reuse it.
 - The paper, official source structure, Qwen3.6 checkpoint, HYPIC formal
   contract, and pinned vLLM/vLLM-Ascend model loops have been reviewed.
+- A deterministic request-local planner and Qwen3.6 12K/6K/4K layer plan now
+  pass 8/8 tests in the pinned image without mounting NPU devices. This is a
+  precondition only, not an Ascend result.
 
 ## Main finding so far
 

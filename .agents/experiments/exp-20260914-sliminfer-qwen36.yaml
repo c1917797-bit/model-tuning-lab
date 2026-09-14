@@ -1,5 +1,5 @@
 id: exp-20260914-sliminfer-qwen36
-stage: planned
+stage: attempted
 status: resource-wait
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
@@ -38,4 +38,4 @@ artifacts:
   root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914
   status: must-not-exist-before-run
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
-next_gate: opportunity-bound-and-pure-planner
+next_gate: live-source-map-and-npu-canary
