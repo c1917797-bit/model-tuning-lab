@@ -47,7 +47,8 @@ For every group and TP rank, the oracle records:
 The full-sequence exact replay must remain finite and stay within relative
 L2 0.01 for all outputs and states. A failure is a harness failure, not an
 algorithm result. Only after exact controls pass may the 5%/10% metrics be
-interpreted.
+interpreted. The live convolution and recurrent cache entries are snapshotted
+before diagnostic replay and must remain bitwise unchanged afterwards.
 
 ## Explicit limitation
 

@@ -381,6 +381,13 @@ def _run_group_oracle(
             list(layer.linear_attn.kv_cache[1].shape) for layer in layers
         ],
     )
+    metadata_by_layer = [
+        _prefill_metadata(layer.linear_attn) for layer in layers
+    ]
+    dense_state_snapshots = [
+        _dense_states(layer, metadata)
+        for layer, metadata in zip(layers, metadata_by_layer)
+    ]
     exact_hidden, exact_residual, exact_states = _run_replay(
         layers, input_hidden.clone(),
         None if input_residual is None else input_residual.clone()
@@ -391,9 +398,10 @@ def _run_group_oracle(
         reference_materialized, exact_materialized
     )
     exact_state_metrics = []
-    for layer, (conv_state, recurrent_state) in zip(layers, exact_states):
-        metadata = _prefill_metadata(layer.linear_attn)
-        dense_conv, dense_recurrent = _dense_states(layer, metadata)
+    for layer, (conv_state, recurrent_state), dense_states in zip(
+        layers, exact_states, dense_state_snapshots
+    ):
+        dense_conv, dense_recurrent = dense_states
         exact_state_metrics.append(
             {
                 "layer_idx": int(layer.layer_idx),
@@ -456,9 +464,10 @@ def _run_group_oracle(
             _materialize(replay_hidden, replay_residual),
         )
         state_metrics = []
-        for layer, (conv_state, recurrent_state) in zip(layers, replay_states):
-            metadata = _prefill_metadata(layer.linear_attn)
-            dense_conv, dense_recurrent = _dense_states(layer, metadata)
+        for layer, (conv_state, recurrent_state), dense_states in zip(
+            layers, replay_states, dense_state_snapshots
+        ):
+            dense_conv, dense_recurrent = dense_states
             state_metrics.append(
                 {
                     "layer_idx": int(layer.layer_idx),
@@ -479,6 +488,34 @@ def _run_group_oracle(
             tail_tokens=tail_tokens,
             output=output_metrics,
             states=state_metrics,
+        )
+    cache_preservation = []
+    cache_preserved = True
+    for layer, metadata, snapshot in zip(
+        layers, metadata_by_layer, dense_state_snapshots
+    ):
+        current_conv, current_recurrent = _dense_states(layer, metadata)
+        conv_equal = bool(torch.equal(current_conv, snapshot[0]))
+        recurrent_equal = bool(torch.equal(current_recurrent, snapshot[1]))
+        cache_preserved = cache_preserved and conv_equal and recurrent_equal
+        cache_preservation.append(
+            {
+                "layer_idx": int(layer.layer_idx),
+                "conv_bitwise_equal": conv_equal,
+                "recurrent_bitwise_equal": recurrent_equal,
+            }
+        )
+    emit_event(
+        "group_oracle_live_cache_preservation",
+        distributed_rank=_distributed_rank(),
+        start_layer=start_layer,
+        end_layer=start_layer + 2,
+        cache_preserved=cache_preserved,
+        layers=cache_preservation,
+    )
+    if not cache_preserved:
+        raise RuntimeError(
+            f"Tail-Replay group oracle mutated live cache at layer {start_layer}"
         )
     if input_hidden.device.type == "npu":
         torch.npu.synchronize()

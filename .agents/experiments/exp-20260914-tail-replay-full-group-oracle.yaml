@@ -50,6 +50,7 @@ correctness_guardrails:
   - normal serving output and live cache are never replaced
   - exact full-group replay relative L2 no greater than 0.01
   - all exact and candidate metrics finite
+  - live convolution and recurrent cache remain bitwise unchanged
   - source paths and hashes emitted at runtime
 scope:
   includes:
