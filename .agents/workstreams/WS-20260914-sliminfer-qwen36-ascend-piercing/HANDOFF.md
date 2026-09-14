@@ -4,13 +4,17 @@ Updated: 2026-09-14
 
 ## Current state
 
-- Two TP4 selection-shadow attempts are preserved but inadmissible. The first
+- Three TP4 selection-shadow attempts are preserved but inadmissible. The first
   was intentionally aborted after source drift; the second completed the
   disabled 13,000-token request but failed before the enabled arm because the
-  controller made a one-shot port-reuse check. This is an experiment-control
-  failure, not a SlimInfer result.
+  controller made a one-shot port-reuse check. The third proved that transition
+  fix and installed both hooks on all TP workers, then failed during the
+  startup dummy forward because that forward has no attention metadata. These
+  are integration/control failures, not SlimInfer performance results.
 - The port transition now uses a bounded reusable-bind wait and still fails
-  closed after 120 seconds. A fresh frozen-source A/B rerun is the next action.
+  closed after 120 seconds. The shadow hook now skips only the explicit
+  attn_metadata-is-None startup dummy case; a non-mapping, missing real layer,
+  or incomplete final audit still fails closed.
 - Physical NPU4-7 are currently free; NPU0-3 remain owned by another task and
   must not be touched.
 - Workstream branch:

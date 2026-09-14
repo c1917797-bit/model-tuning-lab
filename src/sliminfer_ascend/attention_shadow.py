@@ -117,11 +117,17 @@ def _whole_prompt_start_locs(metadata: Any, token_count: int) -> tuple[int, ...]
     return tuple(starts)
 
 
-def _attention_metadata(layer_name: str) -> Any:
+def _attention_metadata(layer_name: str) -> Any | None:
     from vllm.forward_context import get_forward_context
 
     mapping = get_forward_context().attn_metadata
-    if not isinstance(mapping, dict) or layer_name not in mapping:
+    if mapping is None:
+        return None
+    if not isinstance(mapping, dict):
+        raise RuntimeError(
+            "attention metadata must be a per-layer mapping when present"
+        )
+    if layer_name not in mapping:
         raise RuntimeError(f"missing attention metadata for {layer_name}")
     return mapping[layer_name]
 
@@ -196,8 +202,23 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
         layer_index = _layer_index(layer_name)
         if layer_index in _BOUNDARY_KEEP_TOKENS:
             metadata = _attention_metadata(layer_name)
-            start_locs = _whole_prompt_start_locs(metadata, int(hidden_states.shape[0]))
-            if start_locs is not None:
+            if metadata is None:
+                emit_event(
+                    "selection_shadow_metadata_unavailable",
+                    component="attention",
+                    mode=config.mode,
+                    distributed_rank=_distributed_rank(),
+                    forward_serial=_selection_state()["serial"],
+                    layer_index=layer_index,
+                    layer_name=layer_name,
+                    reason="forward-context-attn-metadata-is-none",
+                    runtime_mutation=False,
+                )
+            else:
+                start_locs = _whole_prompt_start_locs(
+                    metadata, int(hidden_states.shape[0])
+                )
+            if metadata is not None and start_locs is not None:
                 q, k = _compute_live_qk(self, positions, hidden_states)
                 results = semantic_block_scores(
                     q,

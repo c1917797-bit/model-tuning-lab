@@ -129,6 +129,41 @@ def test_non_boundary_layer_calls_original_without_scoring(tmp_path, monkeypatch
     assert instance.forward(None, None, None) == "untouched"
 
 
+def test_boundary_layer_skips_dummy_forward_without_metadata(tmp_path, monkeypatch):
+    evidence = tmp_path / "selection.jsonl"
+    monkeypatch.setenv("MST_SLIMINFER_EVIDENCE_FILE", str(evidence))
+
+    class Qwen3NextAttention:
+        def forward(self, positions, output, hidden_states):
+            return "dummy-forward"
+
+    module = ModuleType("vllm_ascend.patch.worker.patch_qwen3_5")
+    module.Qwen3NextAttention = Qwen3NextAttention
+    _apply_attention_patch(module, _config(evidence))
+    instance = Qwen3NextAttention()
+    instance.attn = SimpleNamespace(
+        layer_name="language_model.model.layers.19.self_attn.attn"
+    )
+    monkeypatch.setattr(attention_shadow, "_attention_metadata", lambda name: None)
+    monkeypatch.setattr(
+        attention_shadow,
+        "_compute_live_qk",
+        lambda *args: (_ for _ in ()).throw(AssertionError("must not score")),
+    )
+
+    with selection_forward_scope():
+        result = instance.forward(None, None, torch.ones((4, 1)))
+
+    assert result == "dummy-forward"
+    events = [json.loads(line) for line in evidence.read_text().splitlines()]
+    assert [event["event"] for event in events] == [
+        "selection_shadow_patch_installed",
+        "selection_shadow_metadata_unavailable",
+    ]
+    assert events[1]["reason"] == "forward-context-attn-metadata-is-none"
+    assert events[1]["runtime_mutation"] is False
+
+
 def test_missing_attention_target_fails_closed(tmp_path):
     with pytest.raises(RuntimeError, match="was not found"):
         _apply_attention_patch(ModuleType("empty"), _config(tmp_path / "events"))

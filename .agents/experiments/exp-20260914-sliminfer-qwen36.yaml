@@ -171,7 +171,7 @@ selection_shadow_scorer:
     elapsed_seconds: 8.51
   tp4_shadow_controller:
     implementation: tools/run_sliminfer_shadow_tp4.sh
-    status: second-runtime-failed-after-disabled-control-port-transition-fixed
+    status: third-runtime-exposed-dummy-forward-metadata-precondition
     corrected_preflight_bug: >-
       The first dry preflight treated Docker's empty stdout on an absent object
       as part of the fallback state string. Container state now branches on the
@@ -217,6 +217,35 @@ selection_shadow_scorer:
       correction: >-
         Probe with SO_REUSEADDR and wait up to a bounded 120 seconds for the
         host port to become reusable; fail closed if it remains unavailable.
+    third_runtime_attempt:
+      source_commit: 69df1b8
+      preflight: passed
+      port_transition_fix_verified: true
+      disabled_request:
+        prompt_tokens: 13000
+        completion_tokens: 1
+        finish_reason: length
+        result: passed
+      enabled_container_started_on_physical_npu4-7: true
+      enabled_runtime_hooks_installed_on_all_tp_workers: true
+      enabled_service_healthy: false
+      enabled_request_started: false
+      failure_boundary: startup-dummy-model-forward
+      terminal_cause: >-
+        The eager startup profile forward supplied no attention metadata.
+        The boundary attention hook treated this expected dummy-run state as a
+        missing real-request layer key and raised before the service became
+        healthy.
+      interpretation: runtime-integration-precondition-not-algorithm-result
+      result_admissible: false
+      performance_or_accuracy_claim_allowed: false
+      preserved_artifact: selection-shadow-v1-failed-metadata-key
+      resource_cleanup: physical-npu4-7-released
+      correction: >-
+        Skip and explicitly record only the attn_metadata-is-None dummy-forward
+        case. Continue to fail on a non-mapping or a missing layer key, and let
+        the final audit reject any real request without complete selection
+        events.
     physical_devices: [4, 5, 6, 7]
     arms: [disabled, selection-shadow]
     prompt_tokens: 13000
