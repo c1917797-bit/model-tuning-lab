@@ -24,3 +24,27 @@ path-consumer audit. No new worktree was created.
 Historical completed remote maintenance branches may be archived under
 archive/consolidated-20260912/<old-work-branch-suffix>. Their commits remain
 on main and in the remote archive tags. Active and unmerged branches remain.
+
+## 2026-09-14 verified reclamation
+
+The merged paper-parity worktree was reclaimed after its exact tip was retained
+by remote annotated tag
+`archive/consolidated-20260912/drrqr-paper-parity-lessons-20260911`.
+
+With explicit operator authorization, 116 stopped containers referencing only
+the superseded query-rewrite and ShortGPT worktrees were removed. They held
+about 14.55 GB of writable-layer data and no Docker volumes. No running
+container, image, active worktree, or external evidence root was removed.
+After a fresh path-consumer audit, the two clean archive worktrees were
+reclaimed. Exact tips remain retained by:
+
+- `archive/qwen35-query-rewrite-pre-canonical-20260909`
+- `archive/qwen35-shortgpt-semantic-reject-20260909`
+- local `archive-local/qwen35-query-rewrite-20260909`
+- local `archive-local/qwen35-shortgpt-20260909`
+
+Later on 2026-09-14, two valid new task worktrees appeared: the Qwen3.8
+model-switch evaluation became dirty and SlimInfer entered resource wait.
+Neither is terminal or reclaimable. After this temporary governance worktree
+is integrated and reclaimed, the expected inventory is `main` plus six active
+task worktrees.

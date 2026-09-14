@@ -203,3 +203,24 @@ branch-local handoff before acting:
 ```text
 /opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e/.agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/HANDOFF.md
 ```
+
+## 2026-09-14 workspace-governance checkpoint
+
+- The repository still has two canonical business tasks: Qwen3.5 performance
+  delivery and DRRQR/objective optimization.
+- Four additional mounted workstreams are retained because they are dirty,
+  awaiting exact-source revalidation, or waiting for an owned NPU lane:
+  Qwen3.5 experience ingestion, sparse-prefix reproduction, Qwen3.8
+  model-switch evaluation, and SlimInfer Qwen3.6 piercing.
+- The merged paper-parity worktree and two superseded archive worktrees were
+  safely reclaimed. The exact tips remain recoverable through the archive tags
+  recorded in `docs/BRANCH_CONSOLIDATION_20260912.md`.
+- Explicit authorization covered removal of 116 stopped containers referencing
+  only the two superseded archive paths. No running container, Docker volume,
+  image, active task worktree, or external evidence root was removed.
+- After the temporary governance worktree is integrated and reclaimed, expect
+  seven registered worktrees: `main` plus six task worktrees. Worktree budget
+  remains eight.
+- Do not infer active tasks from every unmerged local branch. Start from
+  `docs/ACTIVE_WORKSTREAMS.md`, registered worktrees, and each branch-local
+  task/handoff record.
