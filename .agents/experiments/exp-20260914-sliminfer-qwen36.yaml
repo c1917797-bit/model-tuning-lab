@@ -21,7 +21,7 @@ environment:
   container_visible_devices: [0, 1, 2, 3]
   tensor_parallel: 4
   ownership: not-claimed
-  drift_status: pending-live-canary
+  drift_status: identity-canary-ready-pending-live-rank-proof
 correctness_guardrails:
   - request-local token identity
   - identical selection digest on all TP ranks
@@ -38,4 +38,13 @@ artifacts:
   root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914
   status: must-not-exist-before-run
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
-next_gate: live-source-map-and-npu-canary
+offline_checkpoint:
+  planner_and_runtime_tests: 12/12 passed
+  packaging: editable-install-and-vllm-entry-point-load-passed
+  algorithmic_pruning_active: false
+  qwen36_profile_reuse: partial-parser-hotspot-evidence-only
+  token_linear_shape_ratio_pct: 49.609375
+resource_block:
+  observed_npu4_7_pids: [786664, 786665, 786666, 786667]
+  action: external-workload-left-untouched
+next_gate: four-rank-identity-only-eager-npu-canary

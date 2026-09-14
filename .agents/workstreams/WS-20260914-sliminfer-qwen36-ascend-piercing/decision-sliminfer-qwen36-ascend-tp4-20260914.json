@@ -2,20 +2,22 @@
   "schema": "paper-to-ascend-decision/v1",
   "decision_id": "sliminfer-qwen36-ascend-tp4-20260914",
   "status": "open",
-  "current_decision": "continue-bounded-pre-npu-feasibility",
-  "reason": "The official method is not directly compatible with the Qwen3.6 hybrid serving path, but the faithful cross-hybrid route still has a plausible broad prefill opportunity. Deterministic planner tests pass. The intended NPU lane is occupied, so there is no valid NPU, performance or quality decision yet.",
+  "current_decision": "continue-to-runtime-identity-canary",
+  "reason": "The exact source map shows that a faithful port needs layer-local token, cache and GDN-state semantics, but an opt-in outer-model hook is viable. The deterministic planner and identity-preserving plugin canary pass no-NPU tests and packaging checks. A reused Qwen3.6 profile supports broad opportunity admission but has parser limitations. The intended NPU lane is occupied, so there is no valid NPU, performance or quality decision yet.",
   "accepted_evidence": [
     "paper and public source method-chain review",
     "pinned Qwen3.6 checkpoint and model-loop architecture review",
     "HYPIC-equivalent frozen ruler",
-    "8 passing no-NPU planner tests"
+    "12 passing no-NPU planner and runtime-canary tests",
+    "successful no-device editable install and vLLM entry-point load",
+    "partial Qwen3.6 TP4 profile hotspot analysis with parser limitations recorded"
   ],
   "rejected_or_unavailable_evidence": [
     "paper RTX4090 numbers as local Ascend evidence",
     "HYPIC performance numbers as SlimInfer evidence",
-    "Qwen3.8 operator sums as an additive Qwen3.6 critical path",
+    "summed Qwen3.6 task or operator time as removable critical path",
     "NPU4-7 execution while the external service owns the lane"
   ],
-  "next_gate": "exact live request/cache/state source map, corrected opportunity bound, then eager TP4 NPU canary",
+  "next_gate": "four-rank identity-only eager TP4 NPU service canary, then faithful layer-local semantics canary",
   "final_adoption_decision": null
 }

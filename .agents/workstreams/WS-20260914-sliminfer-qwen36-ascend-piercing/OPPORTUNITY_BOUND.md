@@ -4,13 +4,30 @@
 
 The HYPIC-equivalent Qwen3.6 performance ruler has a completed dense historical
 control with mean TTFT 40.358 seconds, TPOT 74.507 ms/token and output
-throughput 123.765 token/s. It did not include a clean Qwen3.6 operator profile.
+throughput 123.765 token/s. These historical values define the comparison
+contract but are not a SlimInfer result.
 
-A separate Qwen3.8 DRRQR diagnostic used the same 32K input and TP4 shape. Its
-dense prefill trace reported a 4143.450 ms kernel envelope and 401.944 ms
-rank-mean `FusedInferAttentionScore` sum. The ratio is 9.70%. This is only
-hotspot-ranking context: operator sums may overlap and the model/candidate
-identity differs, so it is neither a Qwen3.6 baseline nor an end-to-end bound.
+A Qwen3.6 TP4 profile from the same model and pinned image was reused from
+`/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline`. Its workload
+was input 32,768, output 128, concurrency 4 and four requests, so it is
+contextual opportunity evidence rather than the formal c16/output1024 ruler.
+The raw evidence was copied to a new derived directory before analysis; the
+HYPIC evidence was not mutated.
+
+Offline CANN parsing produced an operator summary and SQLite database, but the
+log also contains step-trace database warnings and unknown-key errors. The
+usable subset shows large-row work in `MatMulV3`, `MatMulV2`,
+`FusedInferAttentionScore`, GDN chunk/recurrent kernels, normalization, slicing
+and `hcom_allReduce`. Summed task time exceeds the trace span because tasks
+overlap. These totals rank affected mechanisms only; they are not removable
+wall time and cannot be converted into a throughput claim.
+
+For the proposed 20/40/60 pruning boundaries, the token-linear row-work proxy is
+`(20 + 20*0.375 + 20*0.1875 + 4*0.125) / 64 = 49.609375%` of dense. This is an
+optimistic shape proxy for token-linear work after pruning, not a measured
+speedup. Full-attention quadratic work may increase the opportunity, while
+selection, gather/scatter, metadata, TP synchronization and hybrid GDN state
+handling reduce it.
 
 ## Admission decision
 
@@ -21,10 +38,10 @@ identity differs, so it is neither a Qwen3.6 baseline nor an end-to-end bound.
   gain from the existing trace. Perfect removal of the identified attention
   sum alone is below 10% of the diagnostic envelope, and gather/scatter plus
   selection adds cost.
-- Before a broad implementation, collect one bounded Qwen3.6 prefill profile
-  only if no comparable trace already exists. Attribute exclusive or
-  non-overlapped wall time; do not sum overlapping kernels into a throughput
-  forecast.
+- The available Qwen3.6 profile is sufficient to admit the identity and
+  semantics canaries. A new formal profile is justified only after a real
+  pruning path exists and must separate prefill/decode and preserve the raw
+  trace.
 
 ## Stop/redirect rule
 

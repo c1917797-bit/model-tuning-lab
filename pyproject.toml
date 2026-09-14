@@ -5,6 +5,9 @@ description = "Model tuning, inference optimization, and evaluation experiments"
 requires-python = ">=3.10"
 dependencies = []
 
+[project.entry-points."vllm.general_plugins"]
+sliminfer_ascend = "sliminfer_ascend:register"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

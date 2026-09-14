@@ -1,8 +1,8 @@
 {
   "schema": "paper-to-ascend-evidence/v1",
   "experiment_id": "sliminfer-qwen36-ascend-tp4-20260914",
-  "status": "pre-npu-feasibility",
-  "planned_commit": "5dc0514",
+  "status": "runtime-identity-canary-ready-resource-wait",
+  "prior_checkpoint_commits": ["5dc0514", "3d401a9"],
   "paper_source": {
     "arxiv": "2508.06447v2",
     "official_repository": "https://github.com/Longxmas/SlimInfer",
@@ -20,12 +20,13 @@
   "planner": {
     "scope": "device-independent precondition only",
     "test_environment": "pinned serving image with no NPU devices mounted",
-    "tests": 8,
-    "passed": 8,
+    "tests": 12,
+    "passed": 12,
     "failed": 0,
-    "duration_s": 0.05,
+    "duration_s": 8.70,
     "planner_sha256": "5bcc9698bad03871fbaba1b620f99e6f8151d5fa70f44adb253cbe58d1906862",
-    "tests_sha256": "f92f05578c4b9df6998617a271049171349606133f0e6af5ef03cf85e258de34",
+    "planner_tests_sha256": "f92f05578c4b9df6998617a271049171349606133f0e6af5ef03cf85e258de34",
+    "runtime_tests_sha256": "7db775ebb0c24de8f995b33e4424221c97dac5b49f5f50da03bfa2ed1b272593",
     "plan_sha256": "8f9bac80ac128c7cc604fa573a205f55d596056d28891fd2f4436c1a5f05e264",
     "covered": [
       "64-token block accounting",
@@ -35,20 +36,49 @@
       "TP score reduction contract",
       "rank block-identity failure",
       "request-local canonical digest",
-      "missing and non-finite score rejection"
+      "missing and non-finite score rejection",
+      "disabled-by-default runtime configuration",
+      "unknown mode failure",
+      "identity-preserving forward hook with one-shot evidence",
+      "missing runtime target failure"
     ]
+  },
+  "runtime_identity_canary": {
+    "scope": "no-device packaging and hook precondition only",
+    "vllm_entry_point": "sliminfer_ascend:register",
+    "supported_mode": "identity-canary",
+    "algorithmic_pruning_active": false,
+    "editable_install": "passed",
+    "vllm_plugin_load": "passed",
+    "observed_events": ["plugin_build_active", "model_patch_deferred"],
+    "runtime_patch_sha256": "c24a056eaef5de56189512a1e8071dc2153e30d3bf7267f2cc4b51b3fc1304cd",
+    "config_sha256": "4d6f44bcf91816c5efc61b3e0b17d8b07450b2d96b158b56df159968d417056b",
+    "diagnostics_sha256": "1e6ad9b61877fc26421e2f334f7317f171f88641b667a780cc0d5a1ba7b8bdd5",
+    "import_hook_sha256": "db29f1ce233bbeffd48df9aab59bc4094c010c31d85e13c971e6999cf8a7efa2"
+  },
+  "profile_reuse": {
+    "source": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline",
+    "source_manifest_sha256": "f1ec0d5d7a8257f8e7033e61233edc1975ac5a7d7cc47a0312f641232c79aa5b",
+    "derived_root": "/cache/cch/sliminfer-qwen36-source-analysis-20260914",
+    "workload": "input32768/output128/concurrency4/requests4/TP4",
+    "operator_summary_sha256": "50a94121059045e52cfd832e2ab211f59f847e622cca59c215852fae2a284588",
+    "sqlite_sha256": "94f55d79a727744b0d52e7bfe50815f44a0d27dfbc4711dd200ad3db4c302324",
+    "parser_status": "partial; step-trace DB warnings and unknown-key errors recorded",
+    "allowed_use": "hotspot and affected-mechanism ranking only",
+    "token_linear_shape_ratio_pct": 49.609375
   },
   "resource_evidence": {
     "intended_lane": "host NPU4-7",
     "ownership": "not claimed",
-    "latest_hbm_usage_pct_each": 87,
-    "external_vllm_workers_observed": 8,
+    "external_vllm_worker_pids_on_npu4_7": [786664, 786665, 786666, 786667],
+    "external_worker_memory_mib_each": 26189,
+    "all_eight_npus_occupied_by_external_vllm_workers": true,
     "npu_test_started": false,
     "resource_action": "no external workload stopped, restarted or reused"
   },
   "performance": null,
   "quality": null,
-  "allowed_claim": "The deterministic planner preconditions pass without NPU access.",
+  "allowed_claim": "The deterministic planner and identity-preserving plugin preconditions pass without NPU access; source mapping and a partial reused profile admit a bounded faithful-port canary.",
   "forbidden_claims": [
     "SlimInfer has executed on Ascend.",
     "SlimInfer improves Qwen3.6 performance.",
