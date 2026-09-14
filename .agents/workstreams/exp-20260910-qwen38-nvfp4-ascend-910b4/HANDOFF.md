@@ -1,5 +1,14 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+Latest non-interrupting MMLU cache snapshot:
+`/cache/austinov/eval-runs/mmlu-cache-checkpoint-0cirvcon`, 2360 completed option requests.
+Cache SHA256 f295cbc38dbe4c0699e0b796c9453807938b76d30bcf1d1bc9d1b874c8eba686;
+manifest SHA256 3b1931bc78df99f358a16ac9142c1026d7e05d81cd0c78a406e669217e3906cc.
+SQLite backup/integrity_check passed; five source identity files match the
+earlier708-entry snapshot exactly. Source opened read-only; active client and
+model remained running/unpaused. Old snapshot retained. This is a recovery
+checkpoint, not full MMLU accuracy or an already-tested resume implementation.
+
 ## Qwen3 control r1 raw-artifact audit (2026-09-14)
 
 Re-read all1428 request rows across c1/c5/c8/c16 from completed Qwen3 r1.
