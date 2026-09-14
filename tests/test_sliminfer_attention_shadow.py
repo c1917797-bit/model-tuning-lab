@@ -20,10 +20,10 @@ from sliminfer_ascend.attention_shadow import (
 from sliminfer_ascend.config import SlimInferConfig
 
 
-def _config(evidence):
+def _config(evidence, mode="selection-shadow"):
     return SlimInferConfig(
         enable=True,
-        mode="selection-shadow",
+        mode=mode,
         evidence_file=str(evidence),
         require_runtime_hooks=True,
     )
@@ -203,6 +203,42 @@ def test_boundary_layer_skips_dummy_forward_without_metadata(tmp_path, monkeypat
         "selection_shadow_metadata_unavailable",
     ]
     assert events[1]["reason"] == "forward-context-attn-metadata-is-none"
+    assert events[1]["runtime_mutation"] is False
+
+
+def test_semantic_boundary_dummy_without_scope_is_identity_preserving(
+    tmp_path, monkeypatch
+):
+    evidence = tmp_path / "selection.jsonl"
+    monkeypatch.setenv("MST_SLIMINFER_EVIDENCE_FILE", str(evidence))
+
+    class Qwen3NextAttention:
+        def forward(self, positions, output, hidden_states):
+            return "semantic-dummy-forward"
+
+    module = ModuleType("vllm_ascend.patch.worker.patch_qwen3_5")
+    module.Qwen3NextAttention = Qwen3NextAttention
+    _apply_attention_patch(module, _config(evidence, mode="semantic-prefill"))
+    instance = Qwen3NextAttention()
+    instance.attn = SimpleNamespace(
+        layer_name="language_model.model.layers.19.self_attn.attn"
+    )
+    monkeypatch.setattr(attention_shadow, "_attention_metadata", lambda name: None)
+    monkeypatch.setattr(
+        attention_shadow,
+        "_compute_live_qk",
+        lambda *args: (_ for _ in ()).throw(AssertionError("must not score")),
+    )
+
+    result = instance.forward(None, None, torch.ones((4, 1)))
+
+    assert result == "semantic-dummy-forward"
+    events = [json.loads(line) for line in evidence.read_text().splitlines()]
+    assert [event["event"] for event in events] == [
+        "selection_shadow_patch_installed",
+        "selection_shadow_metadata_unavailable",
+    ]
+    assert events[1]["forward_serial"] is None
     assert events[1]["runtime_mutation"] is False
 
 

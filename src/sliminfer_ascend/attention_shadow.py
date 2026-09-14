@@ -251,12 +251,15 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
         if layer_index in _BOUNDARY_KEEP_TOKENS:
             metadata = _attention_metadata(layer_name)
             if metadata is None:
+                scope = getattr(_state, "value", None)
                 emit_event(
                     "selection_shadow_metadata_unavailable",
                     component="attention",
                     mode=config.mode,
                     distributed_rank=_distributed_rank(),
-                    forward_serial=_selection_state()["serial"],
+                    forward_serial=(
+                        scope.get("serial") if isinstance(scope, dict) else None
+                    ),
                     layer_index=layer_index,
                     layer_name=layer_name,
                     reason="forward-context-attn-metadata-is-none",

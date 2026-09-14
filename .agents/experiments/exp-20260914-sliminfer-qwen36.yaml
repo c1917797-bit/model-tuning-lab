@@ -86,6 +86,36 @@ semantic_prefill_canary:
     - no-performance-result
     - no-quality-result
     - npu-semantic-path-not-yet-executed
+  attempts:
+    v1:
+      source_commit: 7ff096a
+      artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260915/semantic-prefill-v1
+      result: failed
+      failure_class: runtime-integration
+      disabled_arm:
+        request_succeeded: true
+        prompt_tokens: 13000
+        completion_tokens: 1
+      enabled_arm:
+        service_healthy: false
+        real_request_started: false
+        failure_boundary: startup-dummy-forward
+        cause: >-
+          The model hook correctly passed through a dummy forward whose
+          attention metadata was None, but the boundary attention hook still
+          attempted to read a selection scope that does not exist on that
+          pass-through path.
+      performance_or_quality_claim_allowed: false
+      runtime_sha256: f2f4e50bad7373fadea88a1d579863b4605e3b3ce23d86add92f8213c20895c2
+      service_failure_sha256: 3a8df9374e59154d3866d4c0cbd26bb1b042cf74bdcf610b32a625e9e7371635
+      disabled_request_sha256: 39a6205c61daa85ea43341defc351bd155dcae3b2f1bc09aa6aa04ed1d1da7de
+      cleanup:
+        containers_running: false
+        physical_npu4_7_processes: []
+      successor_requirement: >-
+        Permit only the attn-metadata-None startup dummy to pass through the
+        attention hook without a selection scope, retain fail-closed behavior
+        for real metadata, and add a focused regression test.
 selection_shadow_npu_result:
   source_commit: 2b73ea9
   artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1

@@ -182,6 +182,11 @@ wait_for_health() {
       docker logs "$name" >"$OUTPUT_ROOT/current-failed.log" 2>&1 || true
       fail "$name exited before becoming healthy"
     fi
+    if docker logs "$name" 2>&1 |
+      grep -Eq 'EngineCore failed to start|Engine core initialization failed|RuntimeError: SlimInfer'; then
+      docker logs "$name" >"$OUTPUT_ROOT/current-failed.log" 2>&1 || true
+      fail "$name reported a terminal engine startup error"
+    fi
     sleep 5
   done
   fail "$name did not become healthy within 20 minutes"
