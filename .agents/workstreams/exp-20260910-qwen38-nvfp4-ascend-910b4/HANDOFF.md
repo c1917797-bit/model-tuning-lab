@@ -1,5 +1,27 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Cross-model HumanEval scoring preparation (2026-09-14)
+
+Added `qwen38-nvfp4-ascend/compare_switch_humaneval.py` for the model-switch
+comparison; the older quantization-specific scorer remains unchanged. Native
+prompt hashes may differ across models, but full HumanEval/0..163 source
+documents, generation protocol, extracted samples, and executed completions
+must match their evidence. Each outcome must be a real boolean and consistent
+with its execution result. Reports include paired pass@1 differences and an
+explicitly approximate interval, not an automatic lossless/migration verdict.
+Generator now records source-document hash and frozen protocol. Disposable
+execution entrypoint emits a manifest binding sample/problem/result hashes,
+evaluator source hashes, 3-second timeout and 4 workers. Comparator checks this
+chain and cross-arm evaluator identity. Model/image identity and actual sandbox
+isolation still require the separate runtime artifact audit.
+Focused dependency-free tests cover native-template differences, missing and
+duplicate tasks, source/request drift, serving errors, extraction/execution
+mismatch, non-boolean outcomes, and disk checksum/protocol corruption.
+These are tooling fixtures, NOT new model quality results. No NPU service or
+active MMLU source was changed. HumanEval model generation remains pending.
+Usage after both full generation and sandbox runs:
+`python3 qwen38-nvfp4-ascend/compare_switch_humaneval.py --control-dir <Q3-generation> --candidate-dir <Q38-generation> --control-results <Q3-samples.jsonl_results.jsonl> --candidate-results <Q38-samples.jsonl_results.jsonl> --data-root /cache/austinov/eval-data/general --output <fresh-report.json>`.
+
 00:17UTC non-interrupting SQLite backup saved to
 /cache/austinov/eval-runs/mmlu-cache-checkpoint-ic03wkan,708entries,
 integrity_check=ok, cacheSHAcce878d2050a01b01489d04fac29453b1c5aa9b80afc91adad84f91d6ee48162.

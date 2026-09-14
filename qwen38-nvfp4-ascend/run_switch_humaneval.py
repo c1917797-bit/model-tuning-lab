@@ -10,6 +10,17 @@ from pathlib import Path
 import urllib.request
 from offline_standard_data import read_rows
 
+PROTOCOL = dict(schema='switch-humaneval-instruct/v1', seed=1024,
+    temperature=0, max_tokens=1024, enable_thinking=False,
+    stop=['\nclass', '\ndef', '\n#', '\nif', '\nprint'],
+    harness_prompt_version='lm-eval-v0.4.13-humaneval-instruct',
+    extraction='before-first-code-fence', samples_per_task=1)
+
+
+def document_hash(row):
+    return hashlib.sha256(json.dumps(row, sort_keys=True, ensure_ascii=False,
+        separators=(',', ':')).encode()).hexdigest()
+
 
 def messages(prompt):
     return [dict(role='user', content='Write a solution to the following problem and make sure that it passes the tests:\n```python\n'+prompt+'\n```\n'),
@@ -44,6 +55,7 @@ def main():
             temperature=0, seed=1024, max_tokens=1024,
             stop=['\nclass', '\ndef', '\n#', '\nif', '\nprint'])
         record = dict(task_id=row['task_id'], request=payload,
+            protocol=PROTOCOL, source_document_sha256=document_hash(row),
             rendered_prompt_sha256=hashlib.sha256(rendered.encode()).hexdigest())
         path = args.output/(row['task_id'].replace('/', '-')+'.json')
         try:

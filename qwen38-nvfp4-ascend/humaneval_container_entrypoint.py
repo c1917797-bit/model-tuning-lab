@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import shutil
 import sys
 import tempfile
@@ -52,6 +54,18 @@ def main() -> int:
     )
     result_path = Path(str(sample_copy) + "_results.jsonl")
     shutil.copy2(result_path, args.result)
+    # Bind the score rows to the exact samples, problem set and evaluator.
+    def digest(path):
+        return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    manifest = dict(schema='switch-humaneval-execution/v1', workers=args.workers,
+        timeout_seconds=args.timeout, samples_sha256=digest(args.samples),
+        problems_sha256=digest(args.problems), results_sha256=digest(args.result),
+        evaluator_sha256={name: digest(Path(args.source)/'human_eval'/name)
+                          for name in ('execution.py', 'evaluation.py', 'data.py')},
+        execution_guard='enabled-in-disposable-copy')
+    with Path(args.result + '.manifest.json').open('x') as stream:
+        json.dump(manifest, stream, sort_keys=True, indent=2)
+        stream.write('\n')
     print(result)
     return 0
 
