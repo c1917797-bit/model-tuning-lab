@@ -89,6 +89,12 @@ without pruning are rejected. With this audit included, the complete suite is:
 
     38 passed in 8.97s
 
+A no-device plugin startup smoke also passed in selection-shadow mode. It
+emitted plugin_build_active, model_patch_deferred, and
+selection_shadow_patch_deferred in that order. This proves the opt-in package
+registers both hooks; it does not prove that the live model imports or executes
+them.
+
 Remaining gates:
 
 1. Run the wrapper in the pinned image on physical NPU4-7 after proving the

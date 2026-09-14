@@ -109,6 +109,17 @@ selection_shadow_scorer:
       - missing rank
       - rank selection disagreement
       - activation without any block reduction
+  plugin_startup_smoke:
+    mode: selection-shadow
+    npu_devices_exposed: []
+    result: passed
+    observed_events:
+      - plugin_build_active
+      - model_patch_deferred
+      - selection_shadow_patch_deferred
+    meaning: >-
+      The opt-in plugin registers both deferred hooks without loading a model
+      or touching an NPU. This is packaging evidence, not runtime activation.
   mst_validation: 26-skills-passed
   diff_check: passed
   ruff_check: unavailable-in-pinned-image
