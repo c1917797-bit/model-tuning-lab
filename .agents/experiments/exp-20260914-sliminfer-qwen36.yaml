@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: implementation
-status: selection-shadow-hook-and-audit-offline-passed-npu-pending
+status: semantic-prefill-offline-passed-npu-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -9,8 +9,8 @@ hypothesis: >-
 primary_variable: MST_SLIMINFER_ENABLE
 algorithm_identity: faithful-port-feasibility
 source:
-  repository_commit: 945cd6c
-  branch: work/sliminfer-qwen36-ascend-piercing-20260914
+  repository_commit: 28cc2cb
+  branch: paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted
   vllm_ascend_reference: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
 environment:
   host: Euler
@@ -39,12 +39,70 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_stream_shadow_audit_and_request_tests: 46/46 passed
+  planner_runtime_stream_shadow_audit_and_request_tests: 68/68 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
   token_linear_shape_ratio_pct: 49.609375
   first_semantic_canary_prefill: whole-prompt-only
+semantic_prefill_canary:
+  source_commit: 28cc2cb
+  implementation: src/sliminfer_ascend/semantic_prefill.py
+  status: offline-verified-npu-pending
+  intended_scope:
+    - single-request
+    - whole-prompt-prefill
+    - eager-execution
+    - tensor-parallel-four
+    - one-generated-token
+  runtime_mutation:
+    - compact-hidden-states
+    - compact-residual
+    - preserve-absolute-positions
+    - rebuild-full-attention-and-gdn-metadata
+    - restore-original-flat-output-shape-for-logits-indexing
+  fail_closed_rejections:
+    - decode-or-mixed-batch
+    - chunked-or-cached-prefill
+    - pipeline-parallelism
+    - partial-decoder-layer-range
+    - auxiliary-hidden-state-consumers
+    - missing-layer-metadata
+    - invalid-compact-to-absolute-block-identity
+  evidence_audit:
+    - original-request-token-identity
+    - current-active-token-count
+    - four-rank-selection-agreement
+    - four-rank-row-reduction-at-layers-19-39-59
+    - sink-and-recent-retention
+    - semantic-completion-on-all-ranks
+  validation:
+    focused_tests: 23/23 passed
+    complete_tests: 68/68 passed
+    maintainer_skill_tree: 26 skills passed
+    git_diff_check: passed
+  limitations:
+    - no-decode-or-hs-cache-integration
+    - no-performance-result
+    - no-quality-result
+    - npu-semantic-path-not-yet-executed
+selection_shadow_npu_result:
+  source_commit: 2b73ea9
+  artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1
+  status: passed
+  physical_devices: [4, 5, 6, 7]
+  prompt_tokens: 13000
+  output_tokens: 1
+  selected_blocks:
+    layer_19: 192
+    layer_39: 96
+    layer_59: 64
+  four_rank_selection_agreement: true
+  disabled_enabled_output_equal: true
+  audit_sha256: bb39e62f09e8a3cbe7c8c297014d61dea71d469ff3a5afe140696b4f35ca9696
+  output_parity_sha256: 60ccea32b088f58634834857a67cddd94b6bc6bb9b314ea8d95b8d15d6848b65
+  algorithmic_runtime_mutation: false
+  performance_or_quality_claim_allowed: false
 selection_shadow_scorer:
   implementation: src/sliminfer_ascend/shadow_score.py
   report: docs/SLIMINFER_SELECTION_SHADOW_PREP_20260914.md
@@ -82,10 +140,12 @@ selection_shadow_scorer:
     output_or_cache_mutation: false
     staged_active_set: request-local-model-forward-scope
   paper_semantic_correction:
-    mandatory_prompt_blocks: first-sink-only
-    recent_prompt_block_forced: false
+    mandatory_prompt_blocks: first-sink-and-latest-active
+    recent_prompt_block_forced: true
     planner_and_stream_contract_aligned: true
-    note: generated response tokens remain a separate later integration rule
+    note: >-
+      Official SlimInfer source forces both sink and recent prompt blocks;
+      generated response tokens remain a separate later integration rule.
     stale_contract_found: >-
       The later compact-cache contract still required the most recent prompt
       block after the planner had been corrected. The requirement was removed;
@@ -171,7 +231,7 @@ selection_shadow_scorer:
     elapsed_seconds: 8.51
   tp4_shadow_controller:
     implementation: tools/run_sliminfer_shadow_tp4.sh
-    status: third-runtime-exposed-dummy-forward-metadata-precondition
+    status: selection-shadow-passed-semantic-prefill-pending
     corrected_preflight_bug: >-
       The first dry preflight treated Docker's empty stdout on an absent object
       as part of the fallback state string. Container state now branches on the
@@ -275,7 +335,7 @@ current_resume:
     The earlier user-approved Tail-Replay pivot remains recorded as a historical
     direction decision and is not rewritten as a SlimInfer result.
   current_npu4_7_pids: []
-  action: freeze-source-archive-aborted-v1-and-rerun-one-switch-canary
+  action: run-one-semantic-prefill-tp4-disabled-enabled-canary
 historical_resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched
@@ -330,7 +390,7 @@ metadata_canary:
   performance_claim_allowed: false
   accuracy_claim_allowed: false
   resource_release_verified: true
-direction_decision:
+historical_direction_decision:
   user_approved: true
   decision: >-
     Preserve the SlimInfer metadata result, pause broad semantic-pruning work,
@@ -340,4 +400,10 @@ direction_decision:
   limitation: >-
     Tail-Replay is cache-hit TTFT optimization, not a general no-prefix decode
     throughput optimization; paper quality retention is not strict equality.
-next_gate: post-ascend-attention-qk-shadow-hook-and-tp4-selection-npu-canary
+current_direction_decision:
+  user_approved: true
+  decision: >-
+    Continue the bounded SlimInfer piercing under the HYPIC-equivalent ruler.
+    Prove real semantic prefill mutation first, then implement decode/HsCache
+    only if the NPU canary passes.
+next_gate: tp4-semantic-prefill-disabled-enabled-npu-canary
