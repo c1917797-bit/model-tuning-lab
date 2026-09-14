@@ -70,7 +70,7 @@ def select_active_blocks(
     keep_tokens: int,
     block_size: int = 64,
     keep_sink: bool = True,
-    keep_recent: bool = False,
+    keep_recent: bool = True,
 ) -> tuple[int, ...]:
     """Select a deterministic subset of the currently active prompt blocks."""
 
@@ -103,7 +103,11 @@ def select_active_blocks(
         mandatory.add(active[0])
     if keep_recent:
         mandatory.add(active[-1])
-    if len(mandatory) >= keep_count:
+    if len(mandatory) > keep_count:
+        raise ValueError(
+            "keep_tokens cannot cover all mandatory sink/recent blocks"
+        )
+    if len(mandatory) == keep_count:
         return tuple(sorted(mandatory))
 
     selected = set(mandatory)

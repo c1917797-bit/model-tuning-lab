@@ -242,6 +242,8 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         result.block_scores,
                         keep_tokens=_BOUNDARY_KEEP_TOKENS[layer_index],
                         block_size=_BLOCK_SIZE,
+                        keep_sink=True,
+                        keep_recent=True,
                     )
                     state["active"][request_index] = selected
                     plan = state["plans"].setdefault(request_index, {})
@@ -270,6 +272,8 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         block_size=_BLOCK_SIZE,
                         unit_size=_UNIT_SIZE,
                         query_window=_QUERY_WINDOW,
+                        keep_sink_block=True,
+                        keep_recent_block=True,
                         tp_score_canonicalization=(
                             "sum-all-reduce-then-rank0-broadcast"
                         ),

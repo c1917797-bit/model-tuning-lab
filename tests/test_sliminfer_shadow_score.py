@@ -114,9 +114,9 @@ def test_scores_feed_deterministic_sink_and_topk_selection():
     selected = select_active_blocks(
         (0, 1, 2, 3), result.block_scores, keep_tokens=3, block_size=1
     )
-    assert selected == (0, 1, 2)
+    assert selected == (0, 1, 3)
     assert selection_digest("request-a", {19: selected}) == selection_digest(
-        "request-a", {19: (2, 1, 0)}
+        "request-a", {19: (3, 1, 0)}
     )
 
 

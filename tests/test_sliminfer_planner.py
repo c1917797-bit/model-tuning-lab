@@ -30,14 +30,14 @@ def test_fixed_12k_budget_keeps_exact_count_and_paper_sink_block():
     assert len(blocks) == 512
     assert len(selected) == 192
     assert selected[0] == 0
-    assert selected[-1] == 191
+    assert selected[-1] == 511
 
 
 def test_ties_are_deterministic_and_independent_of_mapping_order():
     blocks = (0, 1, 2, 3, 4, 5)
     forward = {block: 1.0 for block in blocks}
     reverse = dict(reversed(tuple(forward.items())))
-    expected = (0, 1, 2, 3)
+    expected = (0, 1, 2, 5)
     assert select_active_blocks(blocks, forward, keep_tokens=4, block_size=1) == expected
     assert select_active_blocks(blocks, reverse, keep_tokens=4, block_size=1) == expected
 
@@ -53,7 +53,7 @@ def test_tp_scores_are_mean_reduced_before_selection():
     assert reduced == {0: 0.0, 1: 4.0, 2: 5.0, 3: 0.0}
     assert select_active_blocks(
         (0, 1, 2, 3), reduced, keep_tokens=3, block_size=1
-    ) == (0, 1, 2)
+    ) == (0, 2, 3)
 
 
 def test_tp_score_identity_mismatch_fails_closed():
@@ -90,3 +90,12 @@ def test_missing_or_nonfinite_scores_fail_closed():
         select_active_blocks((0, 1), {0: 1.0}, keep_tokens=1, block_size=1)
     with pytest.raises(ValueError, match="non-finite"):
         select_active_blocks((0, 1), {0: 1.0, 1: float("nan")}, keep_tokens=1, block_size=1)
+
+
+def test_sink_and_recent_are_mandatory_and_budget_is_exact():
+    scores = {0: -100.0, 1: 10.0, 2: 9.0, 3: -200.0}
+    assert select_active_blocks(
+        scores, scores, keep_tokens=3, block_size=1
+    ) == (0, 1, 3)
+    with pytest.raises(ValueError, match="mandatory sink/recent"):
+        select_active_blocks(scores, scores, keep_tokens=1, block_size=1)

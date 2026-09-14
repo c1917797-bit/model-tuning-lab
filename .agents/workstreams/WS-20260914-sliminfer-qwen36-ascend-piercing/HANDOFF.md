@@ -39,6 +39,10 @@ Updated: 2026-09-14
   semantic path must remap compact ordinals to explicit absolute active block
   IDs and fail closed when the compact row count does not exactly cover those
   blocks.
+- The passed shadow also used sink-only mandatory retention. Official SlimInfer
+  retains both sink and recent blocks. The planner and future runtime path now
+  enforce both; therefore the old selection hashes remain activation/TP
+  determinism evidence, not faithful final selector evidence.
 - Intended HYPIC-equivalent NPU4-7 lane is currently free. NPU0-3 have external
   VLLM workers and remain out of scope.
 - The paper, official source structure, Qwen3.6 checkpoint, HYPIC formal

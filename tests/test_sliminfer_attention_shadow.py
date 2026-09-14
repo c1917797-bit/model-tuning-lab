@@ -132,6 +132,8 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
     assert selection["score_block_identity"] == "dense-original"
     assert selection["compact_block_remap_applied"] is False
     assert selection["staged_compact_semantics_proven"] is False
+    assert selection["keep_sink_block"] is True
+    assert selection["keep_recent_block"] is True
     assert selection["runtime_mutation"] is False
     assert selection["duplicate_projection_for_diagnostics"] is True
 
