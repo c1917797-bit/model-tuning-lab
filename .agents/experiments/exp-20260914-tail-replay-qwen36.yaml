@@ -1,0 +1,59 @@
+id: exp-20260914-tail-replay-qwen36
+stage: validated
+status: offline-recurrence-oracle-ready
+objective: >-
+  Determine whether Tail-Replay's 5% and 10% zero-state suffix recurrence is
+  numerically plausible on Qwen3.6-27B Ascend TP4 before cache integration.
+hypothesis: >-
+  GDN forgetting makes a recent projected-input suffix approximate the full
+  prefix state, while an exact head-tail split reproduces the full state.
+primary_variable: MST_TAIL_REPLAY_RATIOS
+algorithm_identity: tail-replay-projected-recurrence-oracle
+source:
+  branch: work/tail-replay-qwen36-ascend-piercing-20260914
+  base_commit: 822231451916206dcc60f12341871619f2a4472c
+  paper: arXiv:2608.30310v1
+  vllm_ascend_reference: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+environment:
+  host: chicaihong01
+  model: /cache/efim/Qwen3.6-27B
+  image: quay.io/ascend/vllm-ascend:v0.23.0
+  image_id: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+  intended_host_devices: [4, 5, 6, 7]
+  container_visible_devices: [0, 1, 2, 3]
+  tensor_parallel: 4
+  execution: eager
+  batch: 1
+correctness_guardrails:
+  - fresh zero-state prefill only
+  - exact source identity on every worker
+  - all 48 GDN layers on all four ranks
+  - exact split relative L2 no greater than 0.01
+  - all state metrics finite
+  - normal forward output unchanged
+replay_ratios: [0.05, 0.10]
+scope:
+  includes:
+    - post-convolution GDN recurrence state
+    - exact head-tail harness control
+    - zero-state tail approximation metrics
+  excludes:
+    - causal-convolution reconstruction
+    - group hidden propagation
+    - full-attention KV cache
+    - first-token quality
+    - performance claims
+abort:
+  - any NPU outside physical 4-7 is used by this experiment
+  - nonzero initial state
+  - missing rank or layer coverage
+  - exact split exceeds the frozen harness threshold
+  - nonfinite state
+artifacts:
+  root: /cache/cch/tail-replay-qwen36-ascend-tp4-20260914
+  status: must-not-exist-before-run
+rollback: Unset MST_TAIL_REPLAY_ENABLE and remove the plugin mount.
+offline_checkpoint:
+  tests: 29/29 passed
+  tail_replay_specific_tests: 8
+next_gate: projected-recurrence-oracle-npu4-7-tp4

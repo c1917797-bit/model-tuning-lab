@@ -1,0 +1,20 @@
+{
+  "schema": "paper-to-ascend-decision/v1",
+  "decision_id": "tail-replay-qwen36-ascend-tp4-20260914",
+  "status": "open",
+  "current_decision": "continue-to-projected-recurrence-npu-oracle",
+  "reason": "The paper directly evaluates Qwen3.6-27B and matches the hybrid shared-prefix workload. Exact live source mapping exposes a non-mutating GDN recurrence seam, and the fail-closed offline harness passes.",
+  "accepted_evidence": [
+    "official paper method and tables",
+    "pinned Qwen3.6 and vLLM-Ascend source identities",
+    "four-rank SlimInfer metadata canary reused only as runtime topology evidence",
+    "29 passing pinned-image no-device tests"
+  ],
+  "rejected_or_unavailable_evidence": [
+    "paper H100 results as Ascend evidence",
+    "recurrence-only error as first-token or task-quality evidence",
+    "diagnostic request time as performance evidence"
+  ],
+  "next_gate": "all-rank 5%/10% projected-recurrence oracle with exact-split control",
+  "final_adoption_decision": null
+}

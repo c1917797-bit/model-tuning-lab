@@ -55,6 +55,23 @@ reporting/protocol reference only and are not a SlimInfer baseline or result.
 The metadata canary is reusable input to Tail-Replay, but it is not evidence
 that either algorithm is correct or faster.
 
+## 4. Tail-Replay Qwen3.6 Paper-to-Ascend piercing
+
+- Branch: work/tail-replay-qwen36-ascend-piercing-20260914
+- Worktree:
+  /opt/host/vnf/austinov/worktrees/tail-replay-qwen36-ascend-piercing
+- Goal: determine whether 5%/10% tail replay can reconstruct Qwen3.6 GDN
+  state accurately enough to justify a cache-hit TTFT implementation.
+- Current decision: proceed to a read-only projected-recurrence NPU oracle.
+  The harness first proves an exact head-tail split, then measures zero-state
+  5%/10% tail error on every GDN layer and TP rank.
+- Current evidence: source mapping and 29 no-device tests only. No Tail-Replay
+  NPU correctness, performance or quality result exists yet.
+
+The first probe deliberately excludes full cache integration and cannot alter
+generated outputs. A positive recurrence result admits full GDN group replay;
+it is not an adoption or performance result.
+
 ## Archive policy
 
 Terminal hypotheses are retained by immutable annotated tags and removed from

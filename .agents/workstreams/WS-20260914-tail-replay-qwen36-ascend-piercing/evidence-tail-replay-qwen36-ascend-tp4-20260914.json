@@ -1,0 +1,44 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "tail-replay-qwen36-ascend-tp4-20260914",
+  "status": "offline-recurrence-oracle-ready",
+  "paper_source": {
+    "arxiv": "2608.30310v1",
+    "public_repository": null,
+    "public_repository_search_date": "2026-09-14"
+  },
+  "architecture": {
+    "checkpoint": "/cache/efim/Qwen3.6-27B",
+    "layers": 64,
+    "gdn_layers": 48,
+    "full_attention_layers": 16,
+    "fit": "fits-with-implementation"
+  },
+  "offline_canary": {
+    "scope": "projected-recurrence harness only",
+    "tests_total": 29,
+    "tail_replay_specific_tests": 8,
+    "passed": 29,
+    "failed": 0,
+    "normal_outputs_mutated": false,
+    "replay_ratios": [0.05, 0.1],
+    "exact_split_relative_l2_max": 0.01
+  },
+  "runtime_metadata_reused": {
+    "source_commit": "822231451916206dcc60f12341871619f2a4472c",
+    "attention_metadata_layer_count": 64,
+    "attention_metadata_object_count": 4,
+    "all_four_ranks_observed": true
+  },
+  "npu_recurrence_oracle": null,
+  "group_replay_first_token": null,
+  "performance": null,
+  "quality": null,
+  "allowed_claim": "An opt-in recurrence-oracle harness is ready and passes no-device contract tests in the pinned image.",
+  "forbidden_claims": [
+    "Tail-Replay has executed on Ascend.",
+    "Tail-Replay reconstructs Qwen3.6 state accurately on Ascend.",
+    "Tail-Replay improves Ascend TTFT.",
+    "Tail-Replay preserves local task quality."
+  ]
+}
