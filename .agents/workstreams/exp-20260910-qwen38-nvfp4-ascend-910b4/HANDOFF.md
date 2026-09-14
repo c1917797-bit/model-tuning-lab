@@ -1,5 +1,29 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## 2026-09-14 00:00 UTC throughput / next-token diagnostic
+
+Current r3 full evaluator PID3862919/container
+f1c3f7bf6dcb0263b760135c50a6f3898a140fa6d53631f6f0b73c4b5075f790
+passed6-item5shot canary6/6 and reached actual full requests23:51. First
+hundreds returned, no repeat OOM observed. Standard echo prompt-logprob
+method ~0.6requests/sec is too slow for remaining12h deadline; do not promise
+completion on that basis. R3 stays active, do not duplicate it.
+Bounded alternative diagnostic source9d3b332, artifact
+/cache/austinov/eval-runs/mmlu-next-token-probe-WAufEH/probe/summary.json.
+Four existing MMLU canary docs, exact harness _encode_pair then factor common
+continuation prefix; four residual tokens32/33/34/35. One completion returns
+raw next-token top20 probabilities using return_tokens_as_token_ids=true.
+All4labels present in all4cases; winners4/4 match standard method, BUT maximum
+relative logprob difference0.24182689174813277. NOT numerically identical,
+NOT a validated full replacement. Concurrency/prefill/cache execution differs;
+no attribution of numeric drift is established. Diagnostic timings under
+concurrent quality load are NOT performance evidence. Needs broader paired
+validation, especially small-margin questions, before changing formal method.
+Original image supports /generative_scoring with label_token_ids but response
+only exposes first label score; no need to modify framework to explore it.
+Do not infer all labels are always in top20; missing labels require explicit
+fallback, never fabricated scores. Old generation-answer MMLU remains excluded.
+
 ## LIVE23:30 UTC — bounded logprob workspace attempt
 
 Unit mtl-q38-quality-20260913-r3.service active, MainPID3774324.
