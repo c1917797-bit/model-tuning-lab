@@ -164,9 +164,11 @@ def _compute_live_qk(self: Any, positions: Any, hidden_states: Any) -> tuple[Any
 
 
 def _tp_reduce_sum(value: Any) -> Any:
-    from vllm.distributed.communication_op import tensor_model_parallel_all_reduce
+    from vllm.distributed.parallel_state import get_tp_group
 
-    return tensor_model_parallel_all_reduce(value)
+    group = get_tp_group()
+    reduced = group.all_reduce(value)
+    return group.broadcast(reduced, src=0)
 
 
 def _distributed_rank() -> int | None:
@@ -268,6 +270,9 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         block_size=_BLOCK_SIZE,
                         unit_size=_UNIT_SIZE,
                         query_window=_QUERY_WINDOW,
+                        tp_score_canonicalization=(
+                            "sum-all-reduce-then-rank0-broadcast"
+                        ),
                         duplicate_projection_for_diagnostics=True,
                         runtime_mutation=False,
                     )

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from types import ModuleType, SimpleNamespace
 
 import pytest
@@ -11,6 +12,7 @@ from sliminfer_ascend import attention_shadow
 from sliminfer_ascend.attention_shadow import (
     _apply_attention_patch,
     _layer_index,
+    _tp_reduce_sum,
     _whole_prompt_start_locs,
     selection_forward_scope,
 )
@@ -43,6 +45,31 @@ def test_layer_index_comes_from_live_attention_name():
     assert _layer_index("language_model.model.layers.19.self_attn.attn") == 19
     with pytest.raises(ValueError, match="cannot extract"):
         _layer_index("language_model.attention")
+
+
+def test_tp_score_sum_is_canonicalized_from_rank_zero(monkeypatch):
+    calls = []
+
+    class FakeGroup:
+        def all_reduce(self, value):
+            calls.append(("all_reduce", value))
+            return value + 1
+
+        def broadcast(self, value, src):
+            calls.append(("broadcast", value, src))
+            return value + 2
+
+    module = ModuleType("vllm.distributed.parallel_state")
+    module.get_tp_group = lambda: FakeGroup()
+    monkeypatch.setitem(sys.modules, module.__name__, module)
+    value = torch.tensor([3.0])
+
+    result = _tp_reduce_sum(value)
+
+    assert torch.equal(result, torch.tensor([6.0]))
+    assert calls[0][0] == "all_reduce"
+    assert calls[1][0] == "broadcast"
+    assert calls[1][2] == 0
 
 
 def test_whole_prompt_contract_skips_decode_and_rejects_partial_rows():
