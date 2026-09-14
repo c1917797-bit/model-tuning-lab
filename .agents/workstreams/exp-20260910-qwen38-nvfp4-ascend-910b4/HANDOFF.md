@@ -2,6 +2,20 @@
 
 ## Cross-model HumanEval scoring preparation (2026-09-14)
 
+Actual CPU-only execution-manifest smoke completed using source a5e7eda:
+`/cache/austinov/eval-runs/humaneval-manifest-full-1usep7e5` contains full164
+canonical fixtures (164 passed) and full164 raising fixtures (0 passed).
+Both sample/problem/result hashes were recomputed and match manifests.
+Canonical manifestSHA a2f2b651a98e83979e77333548e71d050fdd4265e4e58ba453bdb3ce95fd1ec3;
+negative manifestSHA f0998e0b561d71728bf044e23ce9632287e7d566bc0cc493d428add126587fa8.
+First two-item fixture attempt at `/cache/austinov/eval-runs/humaneval-manifest-smoke-frrhl2u1`
+was correctly rejected by official evaluator because full problem set requires
+all164 attempted. Preserved, not a model failure. Do not relax this check.
+These fixture results are NOT model accuracy. CPU containers used no NPU,
+network none, read-only root, bounded CPU/memory and disposable source copy;
+original image/host framework unchanged. Live MMLU unit remained active and
+advanced to1447/56168 requests during this check.
+
 Added `qwen38-nvfp4-ascend/compare_switch_humaneval.py` for the model-switch
 comparison; the older quantization-specific scorer remains unchanged. Native
 prompt hashes may differ across models, but full HumanEval/0..163 source
