@@ -12,7 +12,8 @@ def _events():
     events = [
         {
             "event": "selection_shadow_patch_installed",
-            "distributed_rank": rank,
+            "distributed_rank": None,
+            "pid": 100 + rank,
         }
         for rank in RANKS
     ]
@@ -86,3 +87,15 @@ def test_audit_rejects_missing_rank_and_non_pruning_activation():
             item["input_block_count"] = item["selected_block_count"]
     with pytest.raises(AuditError, match="no block reduction"):
         audit_events(non_pruning, expected_ranks=RANKS, min_request_tokens=8192)
+
+
+def test_audit_rejects_duplicate_patch_worker_process():
+    events = _events()
+    patch_events = [
+        item
+        for item in events
+        if item.get("event") == "selection_shadow_patch_installed"
+    ]
+    patch_events[-1]["pid"] = patch_events[0]["pid"]
+    with pytest.raises(AuditError, match="distinct worker process"):
+        audit_events(events, expected_ranks=RANKS, min_request_tokens=8192)

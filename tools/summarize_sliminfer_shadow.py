@@ -53,15 +53,20 @@ def audit_events(
         raise AuditError("min_request_tokens must be positive")
 
     materialized = list(events)
-    patch_ranks = {
-        _rank(item)
+    patch_events = [
+        item
         for item in materialized
         if item.get("event") == "selection_shadow_patch_installed"
-    }
-    if patch_ranks != expected_ranks:
+    ]
+    patch_pids = {item.get("pid") for item in patch_events}
+    if (
+        len(patch_events) != len(expected_ranks)
+        or len(patch_pids) != len(expected_ranks)
+        or not all(isinstance(pid, int) for pid in patch_pids)
+    ):
         raise AuditError(
-            f"patch ranks {sorted(patch_ranks)} differ from expected "
-            f"{sorted(expected_ranks)}"
+            "patch installation must cover one distinct worker process per "
+            f"expected rank; events={len(patch_events)}, pids={sorted(patch_pids, key=str)}"
         )
 
     grouped: dict[tuple[int, int, int], list[dict[str, Any]]] = defaultdict(list)
@@ -143,6 +148,7 @@ def audit_events(
         "schema": "sliminfer-selection-shadow-audit/v1",
         "status": "passed",
         "expected_ranks": sorted(expected_ranks),
+        "patch_worker_pids": sorted(patch_pids),
         "min_request_tokens": min_request_tokens,
         "request_count": len(request_summaries),
         "pruning_observed": True,
