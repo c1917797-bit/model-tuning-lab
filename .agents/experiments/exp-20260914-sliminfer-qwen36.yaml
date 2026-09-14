@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
 stage: implementation
-status: semantic-prefill-npu-runtime-integration-fix-pending
+status: semantic-prefill-npu-passed-decode-hscache-pending
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -45,7 +45,7 @@ offline_checkpoint:
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
   token_linear_shape_ratio_pct: 49.609375
   first_semantic_canary_prefill: whole-prompt-only
-semantic_prefill_canary:
+  semantic_prefill_canary:
   source_commit: 28cc2cb
   implementation: src/sliminfer_ascend/semantic_prefill.py
   status: qwen-multichannel-position-fix-offline-verified-npu-pending
@@ -145,6 +145,46 @@ semantic_prefill_canary:
         Preserve the Qwen3.6 RoPE channel axis and gather the token axis for
         [3, tokens] positions, retain [tokens] support, reject unknown layouts,
         and cover both accepted layouts plus mismatched counts in tests.
+    v3:
+      source_commit: 0b50d915730393d8557b1b898a3e12ab858dc6e8
+      artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260915/semantic-prefill-v3
+      result: passed
+      physical_devices: [4, 5, 6, 7]
+      disabled_arm:
+        http_status: 200
+        prompt_tokens: 13000
+        completion_tokens: 1
+        elapsed_seconds: 51.74322071002098
+      enabled_arm:
+        http_status: 200
+        prompt_tokens: 13000
+        completion_tokens: 1
+        elapsed_seconds: 74.41484014998423
+      semantic_rows:
+        layer_19: [13000, 12232]
+        layer_39: [12232, 6088]
+        layer_59: [6088, 4040]
+      four_rank_selection_agreement: true
+      four_rank_semantic_completion: true
+      request_sha256_equal: true
+      first_token_output_equal: true
+      audit_sha256: 54de19de9b03a289757ed3d2ac1351b7e45657b9691e4b5d2ecd594aecfea414
+      output_comparison_sha256: 9e574475ad4348db3645a6781ffda7faf5fafd06e4ab11c37ab7ba9aa9029988
+      runtime_sha256: ad427f7896899ec84c531523d7734d0b6885b7ee87fdafadf6c8952d0c149196
+      diagnostic_elapsed_change_percent: 43.81563251931957
+      timing_interpretation: >-
+        The eager one-request canary is materially slower with online scoring,
+        duplicate QKV projection, gathers and metadata rebuilding. This is a
+        negative implementation signal, not an admissible formal throughput
+        result and not a proof that an integrated SlimInfer path cannot win.
+      performance_or_quality_claim_allowed: false
+      cleanup:
+        containers_running: false
+        physical_npu4_7_processes: []
+        port_8237_listening: false
+      next_requirement: >-
+        Implement the decode/HsCache contract and remove duplicate score-path
+        work before a HYPIC-equivalent 1024-output performance screen.
 selection_shadow_npu_result:
   source_commit: 2b73ea9
   artifact_root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1
@@ -394,7 +434,7 @@ current_resume:
     The earlier user-approved Tail-Replay pivot remains recorded as a historical
     direction decision and is not rewritten as a SlimInfer result.
   current_npu4_7_pids: []
-  action: run-one-semantic-prefill-tp4-disabled-enabled-canary
+  action: implement-decode-hscache-and-integrated-score-path
 historical_resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched
@@ -465,4 +505,4 @@ current_direction_decision:
     Continue the bounded SlimInfer piercing under the HYPIC-equivalent ruler.
     Prove real semantic prefill mutation first, then implement decode/HsCache
     only if the NPU canary passes.
-next_gate: tp4-semantic-prefill-disabled-enabled-npu-canary
+next_gate: tp4-decode-hscache-multistep-numerical-canary
