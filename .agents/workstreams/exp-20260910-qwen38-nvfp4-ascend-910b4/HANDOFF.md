@@ -1,5 +1,34 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## CURRENT: GSM8K priority stage, MMLU client intentionally paused
+
+Started2026-09-14T02:12:52Z from pushed8b212ac on the SAME owned Qwen3.8
+quality service (no NPU service restart or framework edits).
+Unit `mtl-q38-gsm8k-priority-20260914.service`, MainPID706850.
+Artifact `/cache/austinov/eval-runs/gsm8k-priority-20260914-rTaQHTfH`.
+Full GSM8K1319, native5-shot, seed1024, thinkingfalse, clientconcurrency8,
+same quality2048/.75 profile. Follow evaluator.id, gsm8k.log and results;
+startup is NOT completion or accuracy. Original MMLU CPU container
+`f1c3f7bf6dcb0263b760135c50a6f3898a140fa6d53631f6f0b73c4b5075f790`
+is intentionally PAUSED, not failed; original mainunit3774324/model remain.
+Do not resume it while this priority evaluator is running. Controller traps
+stop only its new evaluator and unpause original client on exit; systemd
+ExecStopPost independently unpauses exact original CID, RuntimeMaxSec7200.
+This reversible scheduling step produces an earlier GSM8K result; not a
+completed MMLU-last/performance-first replan. Original full client still has
+GSM8K queued after MMLU; avoid counting its eventual repeated results as an
+independent protocol/accuracy population. Full resume integration remains open.
+
+Before launch verified all8physicalNPUworkers3787188..3787195 belong to same
+model, listener10010PID3774516, MemAvailable53738424KiB. Exact model/client
+identity, image, launch config, RO model mount, source evaluator/input hashes
+checked before pause; in-flight requests drained before priority evaluation.
+Previous mount-list byte comparison failed due solely to ordering; comparing
+mounts by destination proved identical. No physical resource reallocation,
+external task stop, or new NPU container occurred. Bash syntax, cache tests,
+MST26 and diffcheck passed. Initial push auth error recovered unchanged retry.
+
+
 ## Cache recovery preparation (2026-09-14)
 
 Official pinned CachingLM replayed28 real overlapping request keys from a
