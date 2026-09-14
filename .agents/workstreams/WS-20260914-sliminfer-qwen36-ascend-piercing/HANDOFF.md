@@ -4,7 +4,7 @@ Updated: 2026-09-14
 
 ## Current state
 
-- Three TP4 selection-shadow attempts are preserved but inadmissible. The first
+- Three early TP4 selection-shadow attempts are preserved but inadmissible. The first
   was intentionally aborted after source drift; the second completed the
   disabled 13,000-token request but failed before the enabled arm because the
   controller made a one-shot port-reuse check. The third proved that transition
@@ -15,11 +15,23 @@ Updated: 2026-09-14
   closed after 120 seconds. The shadow hook now skips only the explicit
   attn_metadata-is-None startup dummy case; a non-mapping, missing real layer,
   or incomplete final audit still fails closed.
+- A later audit initially failed because HCCL sum-reduction produced
+  rank-dependent last bits in score vectors even though every rank selected the
+  same blocks. The plugin now canonicalizes the reduced score by broadcasting
+  rank 0's vector. This is a correctness guard, not a speed optimization.
+- The fifth TP4 selection-shadow A/B completed successfully from frozen commit
+  `96d5ae91e886a2fbcb758c2d8254d610a029b08c`. Both 13,000-token arms returned
+  the same canonical response. All ranks agreed on score and selection hashes
+  at layers 19, 39 and 59, with block counts 204->192, 192->96 and 96->64.
+  Evidence is under
+  `/cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1`.
 - Physical NPU4-7 are currently free; NPU0-3 remain owned by another task and
   must not be touched.
 - Workstream branch:
   `paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted`.
-- No complete, admissible SlimInfer NPU A/B result exists yet.
+- A complete selection-shadow NPU A/B exists. It proves real Ascend TP4 hook
+  activation and deterministic selection only; it does not mutate the model,
+  cache or hidden states.
 - No SlimInfer performance or accuracy result exists.
 - Intended HYPIC-equivalent NPU4-7 lane is currently free. NPU0-3 have external
   VLLM workers and remain out of scope.
@@ -28,7 +40,7 @@ Updated: 2026-09-14
 - A deterministic request-local planner and Qwen3.6 12K/6K/4K layer plan are
   committed and pushed.
 - An opt-in, identity-preserving `vllm.general_plugins` canary, selection
-  shadow and hidden-state restoration contract now pass 46/46
+  shadow and hidden-state restoration contract now pass 49/49
   tests in the pinned image without NPU devices. Editable installation and
   entry-point loading also passed, emitting only `plugin_build_active` and
   `model_patch_deferred`. This is a packaging/runtime-hook precondition, not an
@@ -60,12 +72,13 @@ or decomposed from the algorithm effect.
 4. Re-check only NPU4-7 ownership, intended ports and CPU set.
 5. If the lane is still occupied, continue source mapping and planner tests;
    do not start a service.
-6. If free, run the identity-only eager TP4 service canary before activating
-   pruning or starting a benchmark.
+6. If free, implement and run the smallest semantic layer-local active-token
+   and HsCache restoration canary before starting a benchmark.
 
 ## Next scientific decision
 
-Prove the runtime hook on all four ranks, then implement the smallest faithful
-layer-local active-token/state contract. The shape proxy admits this work, but
+The runtime hook and selector are now proven on all four ranks. Implement the
+smallest faithful layer-local active-token/state contract. The shape proxy
+admits this work, but
 only a real NPU canary may establish correctness and only the frozen ruler may
 establish performance or quality.

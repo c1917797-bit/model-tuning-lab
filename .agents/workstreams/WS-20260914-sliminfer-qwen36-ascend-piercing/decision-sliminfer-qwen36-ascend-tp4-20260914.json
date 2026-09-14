@@ -2,8 +2,8 @@
   "schema": "paper-to-ascend-decision/v1",
   "decision_id": "sliminfer-qwen36-ascend-tp4-20260914",
   "status": "open",
-  "current_decision": "continue-to-runtime-identity-canary",
-  "reason": "The exact source map shows that a faithful port needs layer-local token, cache and GDN-state semantics, but an opt-in outer-model hook is viable. The deterministic planner and identity-preserving plugin canary pass no-NPU tests and packaging checks. A reused Qwen3.6 profile supports broad opportunity admission but has parser limitations. The intended NPU lane is occupied, so there is no valid NPU, performance or quality decision yet.",
+  "current_decision": "continue-to-semantic-pruning-canary",
+  "reason": "The selection-shadow A/B passed on real Ascend TP4 at frozen commit 96d5ae91e886a2fbcb758c2d8254d610a029b08c. All ranks agreed on canonical scores and selected blocks at layers 19, 39 and 59, and disabled/enabled outputs were identical. This clears the runtime mechanism gate but does not establish semantic pruning, performance or quality.",
   "accepted_evidence": [
     "paper and public source method-chain review",
     "pinned Qwen3.6 checkpoint and model-loop architecture review",
@@ -11,13 +11,14 @@
     "17 passing no-NPU planner, runtime-canary and compact-stream tests",
     "successful no-device editable install and vLLM entry-point load",
     "partial Qwen3.6 TP4 profile hotspot analysis with parser limitations recorded"
+    ,"successful four-rank Ascend selection-shadow A/B with output parity"
   ],
   "rejected_or_unavailable_evidence": [
     "paper RTX4090 numbers as local Ascend evidence",
     "HYPIC performance numbers as SlimInfer evidence",
     "summed Qwen3.6 task or operator time as removable critical path",
-    "NPU4-7 execution while the external service owns the lane"
+    "selection-shadow block-count reduction as semantic pruning or performance evidence"
   ],
-  "next_gate": "four-rank identity-only eager TP4 NPU service canary, then faithful layer-local semantics canary",
+  "next_gate": "faithful layer-local active-token and HsCache restoration NPU correctness canary",
   "final_adoption_decision": null
 }

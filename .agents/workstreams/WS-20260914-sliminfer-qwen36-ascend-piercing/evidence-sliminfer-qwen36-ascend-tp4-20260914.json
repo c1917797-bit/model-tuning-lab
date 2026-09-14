@@ -1,7 +1,7 @@
 {
   "schema": "paper-to-ascend-evidence/v1",
   "experiment_id": "sliminfer-qwen36-ascend-tp4-20260914",
-  "status": "runtime-identity-canary-ready-resource-wait",
+  "status": "selection-shadow-npu-passed-semantic-pruning-pending",
   "prior_checkpoint_commits": ["5dc0514", "3d401a9"],
   "paper_source": {
     "arxiv": "2508.06447v2",
@@ -69,6 +69,19 @@
     "chunked_prefill_status": "not supported by the first semantic canary",
     "fairness_rule": "whole-prompt scheduling must be common to both arms or reported separately"
   },
+  "selection_shadow_npu": {
+    "scope": "real Ascend TP4 selector activation and determinism; outputs and cache are not mutated",
+    "source_commit": "96d5ae91e886a2fbcb758c2d8254d610a029b08c",
+    "artifact_root": "/cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1",
+    "audit_status": "passed",
+    "output_parity_status": "passed",
+    "request_tokens": 13000,
+    "ranks": [0, 1, 2, 3],
+    "layer_block_counts": ["19:204->192", "39:192->96", "59:96->64"],
+    "score_canonicalization": "sum-all-reduce-then-rank0-broadcast",
+    "audit_sha256": "bb39e62f09e8a3cbe7c8c297014d61dea71d469ff3a5afe140696b4f35ca9696",
+    "output_parity_sha256": "60ccea32b088f58634834857a67cddd94b6bc6bb9b314ea8d95b8d15d6848b65"
+  },
   "profile_reuse": {
     "source": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline",
     "source_manifest_sha256": "f1ec0d5d7a8257f8e7033e61233edc1975ac5a7d7cc47a0312f641232c79aa5b",
@@ -82,18 +95,18 @@
   },
   "resource_evidence": {
     "intended_lane": "host NPU4-7",
-    "ownership": "not claimed",
-    "external_vllm_worker_pids_on_npu4_7": [786664, 786665, 786666, 786667],
-    "external_worker_memory_mib_each": 26189,
-    "all_eight_npus_occupied_by_external_vllm_workers": true,
-    "npu_test_started": false,
-    "resource_action": "no external workload stopped, restarted or reused"
+    "ownership": "claimed only for the bounded canary and then released",
+    "external_vllm_worker_pids_on_npu4_7": [],
+    "npu_test_started": true,
+    "npu_test_completed": true,
+    "post_run_state": "no running process on NPU4-7; unrelated workers remain on protected NPU0-3",
+    "resource_action": "only owned containers were created and removed"
   },
   "performance": null,
   "quality": null,
-  "allowed_claim": "The deterministic planner and identity-preserving plugin preconditions pass without NPU access; source mapping and a partial reused profile admit a bounded faithful-port canary.",
+  "allowed_claim": "The SlimInfer selector mechanism executed deterministically on Ascend TP4 and preserved output in a non-mutating selection-shadow A/B; semantic pruning, performance and quality remain pending.",
   "forbidden_claims": [
-    "SlimInfer has executed on Ascend.",
+    "SlimInfer semantic pruning has executed on Ascend.",
     "SlimInfer improves Qwen3.6 performance.",
     "SlimInfer preserves Qwen3.6 accuracy."
   ]
