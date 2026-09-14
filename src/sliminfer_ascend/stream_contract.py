@@ -40,8 +40,6 @@ class RequestPruningState:
         max_block = math.ceil(self.prompt_tokens / self.pruning_block_size) - 1
         if blocks[0] != 0:
             raise ValueError("the sink block must remain active")
-        if blocks[-1] != max_block:
-            raise ValueError("the most recent prompt block must remain active")
         if any(block < 0 or block > max_block for block in blocks):
             raise ValueError("active_blocks contain an out-of-range block")
 

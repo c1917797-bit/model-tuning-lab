@@ -72,6 +72,11 @@ During this audit two semantics were corrected before NPU execution:
 - only the first sink prompt block is mandatory, matching the paper. The
   previous planner also forced the most recent prompt block.
 
+A later integration audit found the same obsolete forced-recent rule still in
+the compact-cache stream contract. It was removed there as well. Generated
+response tokens remain a separate always-retained decode stream; they are not a
+reason to force the newest prompt block.
+
 After these corrections the complete repository suite reported:
 
     35 passed in 8.79s

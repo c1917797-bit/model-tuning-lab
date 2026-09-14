@@ -52,8 +52,9 @@ decomposed; it cannot be hidden inside the treatment claim.
 ## Evidence currently available
 
 stream_contract.py is a device-independent executable specification. It checks
-sink/recent retention, request-local row gathering, absolute position identity,
-compact cache positions, physical block-table mapping, decode continuation and
-fail-closed whole-prompt admission. Passing these tests is only a precondition
-for building live Ascend metadata; it is not NPU, performance or quality
-evidence.
+paper-faithful first-sink retention, request-local row gathering, absolute
+position identity, compact cache positions, physical block-table mapping,
+decode continuation and fail-closed whole-prompt admission. Generated response
+tokens are retained separately from prompt-block selection. Passing these tests
+is only a precondition for building live Ascend metadata; it is not NPU,
+performance or quality evidence.

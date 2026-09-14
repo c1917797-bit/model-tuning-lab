@@ -70,8 +70,12 @@ def test_full_attention_slots_use_compact_order_not_absolute_positions():
 def test_contract_rejects_invalid_active_sets_and_cache_capacity():
     with pytest.raises(ValueError, match="sink"):
         RequestPruningState(prompt_tokens=130, active_blocks=(1, 2))
-    with pytest.raises(ValueError, match="most recent"):
-        RequestPruningState(prompt_tokens=130, active_blocks=(0, 1))
+    # SlimInfer forces only the first sink block. Generated response tokens are
+    # retained separately and must not be confused with the latest prompt block.
+    without_recent_prompt = RequestPruningState(
+        prompt_tokens=130, active_blocks=(0, 1)
+    )
+    assert without_recent_prompt.active_prompt_tokens == 128
     with pytest.raises(ValueError, match="sorted and unique"):
         RequestPruningState(prompt_tokens=130, active_blocks=(2, 0))
     with pytest.raises(ValueError, match="too short"):

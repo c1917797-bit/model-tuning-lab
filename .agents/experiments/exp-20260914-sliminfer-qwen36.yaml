@@ -84,7 +84,12 @@ selection_shadow_scorer:
   paper_semantic_correction:
     mandatory_prompt_blocks: first-sink-only
     recent_prompt_block_forced: false
+    planner_and_stream_contract_aligned: true
     note: generated response tokens remain a separate later integration rule
+    stale_contract_found: >-
+      The later compact-cache contract still required the most recent prompt
+      block after the planner had been corrected. The requirement was removed;
+      generated response tokens remain independently retained during decode.
   hook_test_attempt:
     result: 34-passed-1-failed
     cause: >-
