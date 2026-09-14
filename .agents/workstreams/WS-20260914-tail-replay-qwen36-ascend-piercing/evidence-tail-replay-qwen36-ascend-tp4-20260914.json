@@ -1,7 +1,7 @@
 {
   "schema": "paper-to-ascend-evidence/v1",
   "experiment_id": "tail-replay-qwen36-ascend-tp4-20260914",
-  "status": "offline-recurrence-oracle-ready",
+  "status": "npu-recurrence-oracle-complete",
   "paper_source": {
     "arxiv": "2608.30310v1",
     "public_repository": null,
@@ -30,14 +30,43 @@
     "attention_metadata_object_count": 4,
     "all_four_ranks_observed": true
   },
-  "npu_recurrence_oracle": null,
+  "npu_recurrence_oracle": {
+    "status": "complete",
+    "container": "tail_replay_qwen36_recurrence_npu4_7_20260914_v4",
+    "prompt_tokens": 650,
+    "physical_npus": [4, 5, 6, 7],
+    "container_logical_npus": [0, 1, 2, 3],
+    "gdn_layers": 48,
+    "tp_ranks": 4,
+    "ratios": [0.05, 0.10],
+    "result_rows": 384,
+    "all_harness_passed": true,
+    "exact_split_relative_l2_max": {
+      "0.05": 0.0030248563271015882,
+      "0.10": 0.0034913457930088043
+    },
+    "zero_tail_relative_l2_mean": {
+      "0.05": 0.5188882413397854,
+      "0.10": 0.4943235622971163
+    },
+    "zero_tail_relative_l2_max": {
+      "0.05": 0.8868423104286194,
+      "0.10": 0.8777303695678711
+    },
+    "artifacts": {
+      "summary": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/summary.json",
+      "runtime": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/runtime.jsonl",
+      "request": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/request.json",
+      "response": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/response.json"
+    }
+  },
   "group_replay_first_token": null,
   "performance": null,
   "quality": null,
-  "allowed_claim": "An opt-in recurrence-oracle harness is ready and passes no-device contract tests in the pinned image.",
+  "allowed_claim": "The opt-in recurrence-only oracle ran on Qwen3.6-27B Ascend TP4 with complete 48-layer/four-rank coverage. Exact-split controls passed, while zero-state 5% and 10% tail recurrence produced large final-state error.",
   "forbidden_claims": [
-    "Tail-Replay has executed on Ascend.",
-    "Tail-Replay reconstructs Qwen3.6 state accurately on Ascend.",
+    "The full Tail-Replay algorithm has executed on Ascend.",
+    "The recurrence-only result predicts final first-token or task quality.",
     "Tail-Replay improves Ascend TTFT.",
     "Tail-Replay preserves local task quality."
   ]

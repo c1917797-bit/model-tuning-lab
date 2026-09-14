@@ -1,21 +1,40 @@
 {
   "schema": "model-tuning-task/v1",
   "task_id": "WS-20260914-tail-replay-qwen36-ascend-piercing",
-  "status": "offline-recurrence-oracle-ready",
+  "status": "npu-recurrence-oracle-complete",
   "objective": "Pierce Tail-Replay on Qwen3.6-27B Ascend TP4 and determine whether 5% or 10% suffix replay can reconstruct GDN state accurately enough to justify a cache-hit TTFT implementation.",
   "long_term_alignment": "Paper-to-Ascend inference optimization with real NPU correctness, performance, quality, portability, and retained success/failure evidence.",
   "scientific_scope": "Architecture-matched direction reproduction on Qwen3.6-27B; first prove the recurrence mechanism, then group replay, then prefix-cache integration.",
-  "current_stage": "validated-offline-canary",
-  "next_action": "Recheck physical NPU4-7 and run one fresh TP4 recurrence-oracle request at 5% and 10% without mutating serving outputs.",
+  "current_stage": "measured-recurrence-only-canary",
+  "next_action": "Implement and validate a non-mutating full GDN-group replay canary, including causal-convolution state, inter-layer hidden propagation, exact-replay controls and first-token logits, before prefix-cache integration.",
   "resource_state": {
     "intended_lane": "host NPU4-7, container-visible 0-3, TP4",
     "protected_lane": "host NPU0-3; do not use or alter",
-    "last_observed": "released after the SlimInfer metadata canary",
+    "last_observed": "physical NPU4-7 released after the successful Tail-Replay recurrence run; physical NPU0-3 remained assigned to another task",
     "rule": "recheck npu-smi, containers, mappings, processes, ports and output path immediately before launch"
   },
   "results": {
     "offline_tests": "29 passed in the pinned image; eight Tail-Replay-specific tests",
-    "npu_recurrence_oracle": null,
+    "npu_recurrence_oracle": {
+      "status": "complete",
+      "prompt_tokens": 650,
+      "result_rows": 384,
+      "coverage": "48 GDN layers x 4 TP ranks x 2 replay ratios",
+      "all_exact_split_harness_passed": true,
+      "exact_split_relative_l2_max": {
+        "0.05": 0.0030248563271015882,
+        "0.10": 0.0034913457930088043
+      },
+      "zero_tail_relative_l2_mean": {
+        "0.05": 0.5188882413397854,
+        "0.10": 0.4943235622971163
+      },
+      "zero_tail_relative_l2_max": {
+        "0.05": 0.8868423104286194,
+        "0.10": 0.8777303695678711
+      },
+      "evidence": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260914/recurrence-oracle/short-v4/summary.json"
+    },
     "group_replay_first_token": null,
     "performance": null,
     "quality": null

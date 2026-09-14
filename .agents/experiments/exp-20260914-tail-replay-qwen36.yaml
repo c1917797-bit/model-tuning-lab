@@ -1,6 +1,6 @@
 id: exp-20260914-tail-replay-qwen36
-stage: validated
-status: offline-recurrence-oracle-ready
+stage: measured
+status: npu-recurrence-oracle-complete
 objective: >-
   Determine whether Tail-Replay's 5% and 10% zero-state suffix recurrence is
   numerically plausible on Qwen3.6-27B Ascend TP4 before cache integration.
@@ -51,9 +51,26 @@ abort:
   - nonfinite state
 artifacts:
   root: /cache/cch/tail-replay-qwen36-ascend-tp4-20260914
-  status: must-not-exist-before-run
+  recurrence_summary: recurrence-oracle/short-v4/summary.json
+  recurrence_runtime: recurrence-oracle/short-v4/runtime.jsonl
+  recurrence_request: recurrence-oracle/short-v4/request.json
+  recurrence_response: recurrence-oracle/short-v4/response.json
 rollback: Unset MST_TAIL_REPLAY_ENABLE and remove the plugin mount.
 offline_checkpoint:
   tests: 29/29 passed
   tail_replay_specific_tests: 8
-next_gate: projected-recurrence-oracle-npu4-7-tp4
+npu_result:
+  prompt_tokens: 650
+  result_rows: 384
+  coverage: 48 GDN layers x 4 TP ranks x 2 ratios
+  all_exact_split_harness_passed: true
+  exact_split_relative_l2_max:
+    0.05: 0.0030248563271015882
+    0.10: 0.0034913457930088043
+  zero_tail_relative_l2_mean:
+    0.05: 0.5188882413397854
+    0.10: 0.4943235622971163
+  zero_tail_relative_l2_max:
+    0.05: 0.8868423104286194
+    0.10: 0.8777303695678711
+next_gate: full-gdn-group-replay-first-token-npu4-7-tp4

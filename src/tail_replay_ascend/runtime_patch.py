@@ -12,8 +12,6 @@ import threading
 from types import ModuleType
 from typing import Any, Callable
 
-import torch
-
 from .config import TailReplayConfig
 from .diagnostics import emit_event
 from .import_hook import PostImportFinder
@@ -54,7 +52,7 @@ def _distributed_rank() -> int | None:
 
 def _source_identity(callable_obj: Callable) -> tuple[str | None, str | None]:
     try:
-        path = Path(inspect.getsourcefile(callable_obj) or "").resolve()
+        path = Path(inspect.getsourcefile(inspect.unwrap(callable_obj)) or "").resolve()
         return str(path), hashlib.sha256(path.read_bytes()).hexdigest()
     except (OSError, TypeError, ValueError):
         return None, None
@@ -72,6 +70,8 @@ def _tail_tokens(total_tokens: int, ratio: float) -> int:
 
 
 def _state_metrics(reference: torch.Tensor, candidate: torch.Tensor) -> dict[str, Any]:
+    import torch
+
     reference_fp32 = reference.float()
     candidate_fp32 = candidate.float()
     difference = candidate_fp32 - reference_fp32
@@ -117,6 +117,69 @@ def _state_metrics(reference: torch.Tensor, candidate: torch.Tensor) -> dict[str
     }
 
 
+def _build_chunk_metadata(values: dict[str, Any], token_count: int):
+    import torch
+    from vllm_ascend.ops.gdn_attn_builder import GDNChunkedPrefillMetadata
+    from vllm_ascend.ops.triton.fla.utils import (
+        prepare_chunk_indices,
+        prepare_chunk_offsets,
+        prepare_final_chunk_indices,
+        prepare_update_chunk_offsets,
+    )
+
+    chunk_size = 64
+    solve_tril_large_block_size = 608 * 2
+    cumsum_working_set = 2**18
+    value_heads = int(values["v"].shape[2])
+    cumsum_chunks = max(1, cumsum_working_set // (value_heads * chunk_size))
+    cumsum_chunk_size = (
+        1 if cumsum_chunks <= 1 else 1 << (cumsum_chunks - 1).bit_length()
+    )
+    cu_seqlens_cpu = torch.tensor([0, token_count], dtype=torch.int32)
+    chunk_indices = prepare_chunk_indices(cu_seqlens_cpu, chunk_size)
+    chunk_offsets = prepare_chunk_offsets(cu_seqlens_cpu, chunk_size)
+    update_chunk_offsets = prepare_update_chunk_offsets(
+        cu_seqlens_cpu, chunk_size
+    )
+    final_chunk_indices = prepare_final_chunk_indices(
+        cu_seqlens_cpu, chunk_size
+    )
+    large_block_indices = prepare_chunk_indices(
+        cu_seqlens_cpu, solve_tril_large_block_size
+    )
+    cumsum_block_indices = prepare_chunk_indices(
+        cu_seqlens_cpu, cumsum_chunk_size
+    )
+    device = values["q"].device
+    return GDNChunkedPrefillMetadata(
+        cu_seqlens_host=(0, token_count),
+        chunk_indices_chunk64_host=tuple(
+            chunk_indices.to(torch.int64).reshape(-1).tolist()
+        ),
+        chunk_indices_chunk64=chunk_indices.to(
+            device=device, non_blocking=True
+        ),
+        chunk_offsets_chunk64=chunk_offsets.to(
+            device=device, non_blocking=True
+        ),
+        update_chunk_offsets_chunk64=update_chunk_offsets.to(
+            device=device, non_blocking=True
+        ),
+        final_chunk_indices_chunk64=final_chunk_indices.to(
+            device=device, non_blocking=True
+        ),
+        chunk_indices_large_block=large_block_indices.to(
+            device=device, non_blocking=True
+        ),
+        block_indices_cumsum=cumsum_block_indices.to(
+            device=device, non_blocking=True
+        ),
+        num_decodes=int(token_count == 1),
+        cu_seqlens_kern=None,
+        keep_meta=None,
+    )
+
+
 def _invoke_chunk(
     original: Callable,
     values: dict[str, Any],
@@ -124,9 +187,32 @@ def _invoke_chunk(
     start: int,
     end: int,
     initial_state: torch.Tensor,
+    layer_prefix: str,
+    replay_ratio: float,
+    phase: str,
 ):
-    cu_seqlens = values["cu_seqlens"].new_tensor([0, end - start])
-    return original(
+    import torch
+
+    token_count = end - start
+    cu_seqlens = values["cu_seqlens"].new_tensor([0, token_count])
+    prebuilt_meta = _build_chunk_metadata(values, token_count)
+    emit_event(
+        "recurrence_oracle_attempt",
+        layer_prefix=layer_prefix,
+        distributed_rank=_distributed_rank(),
+        replay_ratio=replay_ratio,
+        phase=phase,
+        token_start=start,
+        token_end=end,
+        token_count=token_count,
+        q_shape=list(values["q"][:, start:end].shape),
+        initial_state_shape=list(initial_state.shape),
+        initial_state_dtype=str(initial_state.dtype),
+        initial_state_device=str(initial_state.device),
+        original_prebuilt_metadata_type=type(values["prebuilt_meta"]).__name__,
+        replay_prebuilt_metadata_type=type(prebuilt_meta).__name__,
+    )
+    replay_result = original(
         q=values["q"][:, start:end],
         k=values["k"][:, start:end],
         v=values["v"][:, start:end],
@@ -136,15 +222,20 @@ def _invoke_chunk(
         initial_state=initial_state,
         output_final_state=True,
         cu_seqlens=cu_seqlens,
-        prebuilt_meta=None,
+        prebuilt_meta=prebuilt_meta,
         head_first=False,
         use_qk_l2norm_in_kernel=values["use_qk_l2norm_in_kernel"],
     )
+    if values["q"].device.type == "npu":
+        torch.npu.synchronize()
+    return replay_result
 
 
 def _make_chunk_wrapper(original: Callable, config: TailReplayConfig) -> Callable:
     @wraps(original)
     def chunk_with_recurrence_oracle(*args, **kwargs):
+        import torch
+
         result = original(*args, **kwargs)
         layer_prefix = _CURRENT_LAYER_PREFIX.get()
         if layer_prefix is None:
@@ -202,6 +293,9 @@ def _make_chunk_wrapper(original: Callable, config: TailReplayConfig) -> Callabl
                 start=head_tokens,
                 end=total_tokens,
                 initial_state=zero_state.clone(),
+                layer_prefix=layer_prefix,
+                replay_ratio=ratio,
+                phase="zero_tail",
             )
             if head_tokens:
                 _, head_state = _invoke_chunk(
@@ -210,6 +304,9 @@ def _make_chunk_wrapper(original: Callable, config: TailReplayConfig) -> Callabl
                     start=0,
                     end=head_tokens,
                     initial_state=zero_state.clone(),
+                    layer_prefix=layer_prefix,
+                    replay_ratio=ratio,
+                    phase="exact_head",
                 )
                 _, exact_split_state = _invoke_chunk(
                     original,
@@ -217,6 +314,9 @@ def _make_chunk_wrapper(original: Callable, config: TailReplayConfig) -> Callabl
                     start=head_tokens,
                     end=total_tokens,
                     initial_state=head_state,
+                    layer_prefix=layer_prefix,
+                    replay_ratio=ratio,
+                    phase="exact_tail",
                 )
             else:
                 exact_split_state = zero_tail_state

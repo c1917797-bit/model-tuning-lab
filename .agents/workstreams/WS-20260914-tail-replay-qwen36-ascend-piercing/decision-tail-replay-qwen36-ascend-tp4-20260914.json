@@ -2,19 +2,23 @@
   "schema": "paper-to-ascend-decision/v1",
   "decision_id": "tail-replay-qwen36-ascend-tp4-20260914",
   "status": "open",
-  "current_decision": "continue-to-projected-recurrence-npu-oracle",
-  "reason": "The paper directly evaluates Qwen3.6-27B and matches the hybrid shared-prefix workload. Exact live source mapping exposes a non-mutating GDN recurrence seam, and the fail-closed offline harness passes.",
+  "current_decision": "continue-to-full-gdn-group-replay-first-token-canary",
+  "reason": "The all-layer all-rank Ascend recurrence oracle is valid because every exact-split control passed, but zero-state tail-only final recurrent state error is large at both paper ratios. A full group replay with convolution state and hidden propagation is required before either rejection or cache-hit TTFT integration.",
   "accepted_evidence": [
     "official paper method and tables",
     "pinned Qwen3.6 and vLLM-Ascend source identities",
     "four-rank SlimInfer metadata canary reused only as runtime topology evidence",
-    "29 passing pinned-image no-device tests"
+    "29 passing pinned-image no-device tests",
+    "650-token TP4 recurrence run on physical NPU4-7",
+    "384/384 exact-split-controlled layer/rank/ratio result rows",
+    "pinned live GDN and chunk-operator source hashes"
   ],
   "rejected_or_unavailable_evidence": [
     "paper H100 results as Ascend evidence",
     "recurrence-only error as first-token or task-quality evidence",
-    "diagnostic request time as performance evidence"
+    "diagnostic request time as performance evidence",
+    "recurrence-only final-state error as terminal Tail-Replay quality evidence"
   ],
-  "next_gate": "all-rank 5%/10% projected-recurrence oracle with exact-split control",
+  "next_gate": "full GDN-group 5%/10% replay with causal-convolution state, hidden propagation, exact-replay control and first-token comparison",
   "final_adoption_decision": null
 }
