@@ -124,7 +124,9 @@ sequentially, verifies container ownership of all four devices, preserves
 container/log/device evidence, audits TP-rank selection agreement, compares
 the deterministic outputs, and stops only containers bearing its experiment
 label. This controller has passed Bash syntax and diff checks but has not been
-run because NPU4-7 are occupied.
+run because NPU4-7 are occupied. Its corrected dry preflight returned exit 1
+with the four observed foreign worker PIDs, while the fresh output root and
+experiment-labeled container set both remained absent.
 
 Remaining gates:
 

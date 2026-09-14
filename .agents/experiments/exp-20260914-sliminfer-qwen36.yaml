@@ -159,6 +159,12 @@ selection_shadow_scorer:
       as part of the fallback state string. Container state now branches on the
       inspect exit code and emits exactly one normalized state. No container or
       output directory was created by the failed attempt.
+    corrected_preflight_result:
+      exit_code: 1
+      reason: physical-npu4-7-occupied-by-four-foreign-worker-pids
+      output_root_created: false
+      experiment_labeled_container_created: false
+      interpretation: resource-gate-passed-by-failing-before-mutation
     physical_devices: [4, 5, 6, 7]
     arms: [disabled, selection-shadow]
     prompt_tokens: 13000
