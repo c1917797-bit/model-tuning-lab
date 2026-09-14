@@ -8,8 +8,8 @@
   "created_at": "2026-09-14",
   "owner": "c1917797-bit",
   "execution_state": "completed",
-  "integration_state": "ready-for-serialized-main-integration",
-  "decision": "retain-six-active-task-worktrees-and-integrate-governance-only",
+  "integration_state": "integrated-into-main",
+  "decision": "retained-six-active-task-worktrees-and-integrated-governance-only",
   "resource_claims": {
     "npu": "none",
     "containers": "read-only inventory; no running container mutation",
@@ -41,5 +41,5 @@
     "./scripts/validate-mst.sh",
     "git diff --check"
   ],
-  "next_action": "Validate this exact tree, integrate it serially into main, push main, then reclaim only this temporary clean governance worktree."
+  "next_action": "Push the validated main integration and reclaim only the clean temporary governance worktree; retain the six active experiment/support worktrees."
 }

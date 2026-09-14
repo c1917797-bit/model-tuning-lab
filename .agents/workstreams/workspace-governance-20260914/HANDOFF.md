@@ -39,3 +39,12 @@ The governance record is complete. Run `./scripts/validate-mst.sh` and
 `git diff --check` on the exact tree, integrate serially into `main`, push
 `main`, and reclaim only this clean temporary governance worktree. Preserve
 the six experiment/support task worktrees.
+
+## Integration receipt
+
+- Integrated into local `main` by merge commit
+  `a8a45199720930aee89e5eb83bd2c250c005bee6`.
+- The final receipt update is intentionally a follow-up main commit so the
+  task record does not falsely claim integration while still on its workstream.
+- After final validation and remote push, reclaim only
+  `/opt/host/vnf/austinov/worktrees/workspace-governance-20260914`.
