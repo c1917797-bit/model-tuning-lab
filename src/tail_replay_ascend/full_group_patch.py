@@ -527,7 +527,6 @@ def _make_decoder_wrapper(original: Callable, config: TailReplayConfig) -> Calla
         layer_idx = int(getattr(self, "layer_idx", -1))
         layer_type = str(getattr(self, "layer_type", ""))
         capture = _ACTIVE_CAPTURE.get()
-        capture_token = None
         if _is_group_start(layer_idx, layer_type):
             token_count = int(hidden_states.shape[0])
             key = (_distributed_rank(), layer_idx)
@@ -549,7 +548,7 @@ def _make_decoder_wrapper(original: Callable, config: TailReplayConfig) -> Calla
                         None if residual is None else residual.clone()
                     ),
                 }
-                capture_token = _ACTIVE_CAPTURE.set(capture)
+                _ACTIVE_CAPTURE.set(capture)
 
         if capture is not None:
             expected_idx = int(capture["start_layer"]) + len(capture["layers"])
@@ -572,8 +571,6 @@ def _make_decoder_wrapper(original: Callable, config: TailReplayConfig) -> Calla
                 config=config,
             )
             _ACTIVE_CAPTURE.set(None)
-        if capture_token is not None:
-            _ACTIVE_CAPTURE.reset(capture_token)
         return result
 
     decoder_with_group_oracle._mst_tail_replay_group_wrapper = True

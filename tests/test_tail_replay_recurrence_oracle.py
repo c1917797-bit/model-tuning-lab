@@ -5,6 +5,7 @@ import json
 import pytest
 import torch
 
+import tail_replay_ascend.full_group_patch as full_group_patch
 from tail_replay_ascend.config import TailReplayConfig, get_config
 from tail_replay_ascend.runtime_patch import (
     _CURRENT_LAYER_PREFIX,
@@ -80,6 +81,48 @@ def test_group_tensor_metrics_and_materialized_state():
     assert metrics["all_finite"] is True
     assert metrics["relative_l2"] == 0.0
     assert metrics["cosine"] == pytest.approx(1.0)
+
+
+def test_group_wrapper_keeps_capture_across_three_layer_calls(monkeypatch):
+    full_group_patch._SEEN_GROUPS.clear()
+    full_group_patch._ACTIVE_CAPTURE.set(None)
+    observed = []
+    monkeypatch.setattr(
+        full_group_patch, "_prefill_metadata", lambda _attention: object()
+    )
+    monkeypatch.setattr(
+        full_group_patch,
+        "_run_group_oracle",
+        lambda **kwargs: observed.append(kwargs),
+    )
+
+    class Attention:
+        prefix = "model.layers.fake.linear_attn"
+
+    class Layer:
+        def __init__(self, layer_idx):
+            self.layer_idx = layer_idx
+            self.layer_type = "linear_attention"
+            self.linear_attn = Attention()
+
+    def original(_self, hidden_states, residual, *args, **kwargs):
+        return hidden_states + 1, residual
+
+    wrapped = full_group_patch._make_decoder_wrapper(
+        original, _config()
+    )
+    hidden = torch.ones((8, 4))
+    residual = None
+    for layer_idx in range(3):
+        hidden, residual = wrapped(Layer(layer_idx), hidden, residual)
+
+    assert torch.equal(hidden, torch.full((8, 4), 4.0))
+    assert residual is None
+    assert len(observed) == 1
+    assert observed[0]["start_layer"] == 0
+    assert [layer.layer_idx for layer in observed[0]["layers"]] == [0, 1, 2]
+    assert torch.equal(observed[0]["input_hidden"], torch.ones((8, 4)))
+    assert full_group_patch._ACTIVE_CAPTURE.get() is None
 
 
 @pytest.mark.parametrize(
