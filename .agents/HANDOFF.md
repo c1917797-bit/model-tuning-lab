@@ -224,3 +224,14 @@ branch-local handoff before acting:
 - Do not infer active tasks from every unmerged local branch. Start from
   `docs/ACTIVE_WORKSTREAMS.md`, registered worktrees, and each branch-local
   task/handoff record.
+
+## 2026-09-14 branch-governance checkpoint
+
+- Branch namespaces were reduced from 16 local / 12 origin to a steady-state
+  target of 7 local / 7 origin: `main` and the six registered task branches.
+- Nine local and five origin historical branch names were removed only after
+  exact immutable annotated tags were verified or pushed.
+- The locally-ahead Qwen3.8 prefix-cache history and its former remote tip have
+  separate recovery tags; no unique commit was discarded.
+- Use `docs/BRANCH_GOVERNANCE_20260914.md` for exact restoration mappings.
+  Restoring a tag does not reactivate the old task or its resource claims.

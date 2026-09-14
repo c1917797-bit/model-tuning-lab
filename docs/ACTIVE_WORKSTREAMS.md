@@ -51,6 +51,12 @@ expected registered inventory is seven worktrees: `main` plus the two business
 tasks and these four supporting workstreams. The configured budget is eight;
 one slot remains for a genuinely independent task.
 
+The branch namespace was reconciled on 2026-09-14. In steady state there are
+seven local branches and seven origin branches, exactly matching these seven
+registered worktrees. Historical branch names were replaced only after their
+tips were retained by pushed annotated tags. See
+`docs/BRANCH_GOVERNANCE_20260914.md`.
+
 ## Archive policy
 
 Terminal hypotheses are retained by immutable annotated tags and removed from
