@@ -1,0 +1,29 @@
+{
+  "task_id": "branch-governance-20260914",
+  "objective": "Converge local and origin branch namespaces to the seven live worktree branches while retaining every retired tip through immutable annotated archive tags.",
+  "target_branch": "main",
+  "workstream_branch": "work/branch-governance-20260914",
+  "remote": "origin",
+  "original_base": "4ae1f7965de1bb5902c093ab8e03d070977cf636",
+  "created_at": "2026-09-14",
+  "owner": "c1917797-bit",
+  "execution_state": "completed",
+  "integration_state": "ready-for-serialized-main-integration",
+  "decision": "retain-seven-live-branches-and-replace-retired-branch-names-with-annotated-tags",
+  "resource_claims": {
+    "npu": "none",
+    "containers": "none",
+    "ports": "none"
+  },
+  "boundaries": [
+    "Do not delete a branch attached to a registered worktree.",
+    "Do not delete any branch until its exact tip, or both divergent local and remote tips, has a pushed immutable annotated tag.",
+    "Do not modify active experiment worktrees or reinterpret archived evidence as accepted performance."
+  ],
+  "validation_commands": [
+    "./scripts/validate-mst.sh",
+    "python3 -m json.tool .agents/workstreams/branch-governance-20260914/task.json",
+    "git diff --check"
+  ],
+  "next_action": "Validate, integrate to main, push main, archive this temporary governance tip, and reclaim only its worktree and branch."
+}
