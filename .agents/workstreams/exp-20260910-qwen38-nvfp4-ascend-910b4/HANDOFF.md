@@ -1,5 +1,38 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## CURRENT: Qwen3.8 GSM8K complete; MMLU resumed (03:32UTC check)
+
+Priority unit706850 is TERMINAL/success, completed2026-09-14T03:26:14Z;
+its --rm evaluator4401b4961d96... is gone normally. Original MMLU client
+f1c3f7bf6dcb... is running/unpaused and progressed to7498/56168 at03:32.
+Do not interpret older paused/LIVE priority text below as current state.
+
+Full GSM8K1319 result:
+`/cache/austinov/eval-runs/gsm8k-priority-20260914-rTaQHTfH/gsm8k/results.json`
+SHA25608d69af6e25ab86e5e3bb412286fcac6137097fd64a90376db0ddf1fdf41da3e.
+Strict1282/1319=97.1948445792%; flexible1283/1319=97.2706595906%.
+Pinned lm-eval0.4.13, taskv3.0, full native5-shot, seed1024, BF16TP8DP1,
+thinkingfalse, clientconcurrency8, maxgen4096, quality2048/.75 profile.
+All1319 unique documents match frozen local test data;2638 logged rows are
+two filters over SAME1319 raw answers, NOT2638 independent examples. No empty
+raw answers. Result SHA sidecar verified. Existing comparator validated full
+GSM-only population/protocol/metric aggregation; independent strict regex
+extraction and normalization recomputed every score,1282 correct. First audit
+assertion treated filtered_resps as scalar instead of a one-element list;
+corrected according to actual schema, then all1319 passed. No result edits.
+Log's 'not a git repository' is harness metadata lookup in CPU cwd; explicit
+harness version and separately pinned source provenance retained. Not a model
+failure and not a claim of new upstream provenance verification.
+
+This is a full single-arm GSM8K result, NOT paired model-switch completion,
+MMLU accuracy, HumanEval pass@1, or performance evidence. Qwen3 control GSM8K
+still required under same protocol. Do not count the original full client's
+eventual queued GSM8K rerun as another independent population. HumanEval real
+generation remains pending. query_rewrite original-input empty-output gate
+and full paired3repeat matrix still unresolved. Deadline07:40UTC unchanged;
+deliver verified partial results with missing items then, even if MMLU live.
+
+
 ## CURRENT: GSM8K priority stage, MMLU client intentionally paused
 
 Started2026-09-14T02:12:52Z from pushed8b212ac on the SAME owned Qwen3.8
