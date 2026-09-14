@@ -35,7 +35,12 @@ fail() {
 }
 
 container_state() {
-  docker inspect -f '{{.State.Status}}' "$1" 2>/dev/null || printf 'absent\n'
+  local state
+  if state=$(docker inspect -f '{{.State.Status}}' "$1" 2>/dev/null); then
+    printf '%s\n' "$state"
+  else
+    printf 'absent\n'
+  fi
 }
 
 lane_pids() {

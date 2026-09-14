@@ -154,6 +154,11 @@ selection_shadow_scorer:
   tp4_shadow_controller:
     implementation: tools/run_sliminfer_shadow_tp4.sh
     status: syntax-passed-runtime-not-started-npu4-7-occupied
+    corrected_preflight_bug: >-
+      The first dry preflight treated Docker's empty stdout on an absent object
+      as part of the fallback state string. Container state now branches on the
+      inspect exit code and emits exactly one normalized state. No container or
+      output directory was created by the failed attempt.
     physical_devices: [4, 5, 6, 7]
     arms: [disabled, selection-shadow]
     prompt_tokens: 13000
