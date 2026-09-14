@@ -194,7 +194,7 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
     if getattr(cls, "_qwen35_gdn_construction_monkeypatched", False):
         return
     original_init = cls.__init__
-    original_rearrange_mixed_qkv = cls.rearrange_mixed_qkv
+    original_rearrange_mixed_qkv = getattr(cls, "rearrange_mixed_qkv", None)
 
     @functools.wraps(original_init)
     def __init__(self, *args, **kwargs):
@@ -282,6 +282,12 @@ def _patch_qwen_gdn_linear_attn(module: ModuleType) -> None:
     if projection_enabled:
         cls.project_qkvz_ba = project_qkvz_ba
     if projection_enabled and _decode_qkv_view_enabled():
+        if original_rearrange_mixed_qkv is None:
+            raise RuntimeError(
+                "QwenGatedDeltaNetAttention.rearrange_mixed_qkv is required "
+                "for the opt-in decode-view patch"
+            )
+
         @functools.wraps(original_rearrange_mixed_qkv)
         def rearrange_mixed_qkv(self, mixed_qkv):
             # Extend upstream's QKV-rearrange reuse idea to the exact
@@ -363,12 +369,14 @@ def _patch_qwen35_model(module: ModuleType) -> None:
     )
     return loaded_params
 """
+    replacements = [("projection_mapping", old, new)]
+    if _gdn_conv_prepack_enabled():
+        replacements.append(
+            ("conv_prepack_tracking", loaded_old, loaded_new)
+        )
     cls.load_weights = _replace_function_blocks(
         cls.load_weights,
-        (
-            ("projection_mapping", old, new),
-            ("conv_prepack_tracking", loaded_old, loaded_new),
-        ),
+        replacements,
         "Qwen3_5Model.load_weights",
     )
     cls._qwen35_projection_weight_loader_monkeypatched = True

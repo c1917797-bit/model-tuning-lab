@@ -57,6 +57,7 @@ def main() -> None:
                 "decode_qkv_view",
                 "gdn_conv_prepack",
                 "fused_prefill_metadata_reuse",
+                "fused_gdn_decode",
             }
         )
         log.write_text("\n".join([rank_markers] * 4) + "\n", encoding="utf-8")
@@ -71,6 +72,7 @@ def main() -> None:
                 "QWEN35_ASCEND_FUSED_PREFILL_METADATA_REUSE=0",
                 "QWEN35_ASCEND_DECODE_QKV_VIEW=0",
                 "QWEN35_ASCEND_GDN_CONV_PREPACK=0",
+                "QWEN35_ASCEND_FUSED_GDN_DECODE=0",
                 "VLLM_ASCEND_FUSE_QWEN35_GDN_PROJECTIONS=1",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_THRESHOLD=0",
                 "VLLM_ASCEND_MMAR_PREFILL_FALLBACK_MAX_TOKENS=0",
@@ -294,6 +296,7 @@ def main() -> None:
                 "mrv1_optimized_graph",
                 "fused_prefill_metadata_reuse",
                 "gdn_conv_prepack",
+                "fused_gdn_decode",
             }
         )
         log.write_text(
@@ -394,6 +397,7 @@ def main() -> None:
                 "decode_qkv_view",
                 "gdn_conv_prepack",
                 "fused_prefill_metadata_reuse",
+                "fused_gdn_decode",
             }
         )
         log.write_text(
