@@ -1,5 +1,23 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## LIVE00:08 UTC — bounded paired32 diagnostic, full CLIENT temporarily paused
+
+Model1adbdddbad6e and unitr3 remain running. Full CPUclient
+f1c3f7bf6dcb0263b760135c50a6f3898a140fa6d53631f6f0b73c4b5075f790
+is intentionally docker-paused (not stopped; caches/progress preserved) to
+avoid ~25min diagnostic queueing behind its8requests. Safety resume timer
+mtl-mmlu-resume-20260914.timer active, scheduled10min after pause (~00:17UTC).
+Unpause this exact client EARLIER when diagnostic ends; never leave paused
+or duplicate full run. Model/NPU lease remains owned by r3 throughout.
+Diagnostic container7483cb8b39b7a36722a42d3abdfbe5dd80ff36954c1cfb072e1c45641bcdaacb
+artifact /cache/austinov/eval-runs/mmlu-next-token-paired32-L1i2ED.
+Eight MMLU subjects first4each: abstract_algebra, professional_law, anatomy,
+high_school_mathematics, high_school_physics, high_school_us_history,
+logical_fallacies, clinical_knowledge. Standard5shot reference128 optioncalls
+at clientc1, then probe_mmlu_next_token.py automatically compares32questions.
+Reference27/128 completed at00:07:55. Diagnostic only, not full quality or
+performance. Use actual result/token coverage/margins before any promotion.
+
 ## 2026-09-14 00:00 UTC throughput / next-token diagnostic
 
 Current r3 full evaluator PID3862919/container
