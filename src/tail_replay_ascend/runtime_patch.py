@@ -410,6 +410,12 @@ def _apply_gdn_patch(module: ModuleType, config: TailReplayConfig) -> None:
 
 
 def install_runtime_patch(config: TailReplayConfig) -> None:
+    if config.mode == "group-oracle":
+        from .full_group_patch import install_full_group_patch
+
+        install_full_group_patch(config)
+        return
+
     module = sys.modules.get(_TARGET_MODULE)
     if module is not None:
         _apply_gdn_patch(module, config)

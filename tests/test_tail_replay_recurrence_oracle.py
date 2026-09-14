@@ -13,6 +13,12 @@ from tail_replay_ascend.runtime_patch import (
     _state_metrics,
     _tail_tokens,
 )
+from tail_replay_ascend.full_group_patch import (
+    _is_group_end,
+    _is_group_start,
+    _materialize,
+    _tensor_metrics,
+)
 
 
 def _config(evidence_file: str | None = None) -> TailReplayConfig:
@@ -46,6 +52,34 @@ def test_config_rejects_invalid_ratio(monkeypatch):
     monkeypatch.setenv("MST_TAIL_REPLAY_RATIOS", "0,1.1")
     with pytest.raises(ValueError, match="RATIOS"):
         get_config()
+
+
+def test_config_accepts_group_oracle_mode(monkeypatch):
+    monkeypatch.setenv("MST_TAIL_REPLAY_MODE", "group-oracle")
+    assert get_config().mode == "group-oracle"
+
+
+@pytest.mark.parametrize(
+    ("layer_idx", "start", "end"),
+    [(0, True, False), (1, False, False), (2, False, True), (3, False, False),
+     (4, True, False), (62, False, True)],
+)
+def test_gdn_group_boundaries(layer_idx, start, end):
+    assert _is_group_start(layer_idx, "linear_attention") is start
+    assert _is_group_end(layer_idx, "linear_attention") is end
+    assert _is_group_start(layer_idx, "full_attention") is False
+    assert _is_group_end(layer_idx, "full_attention") is False
+
+
+def test_group_tensor_metrics_and_materialized_state():
+    hidden = torch.arange(6, dtype=torch.float32).reshape(2, 3)
+    residual = torch.ones_like(hidden)
+    materialized = _materialize(hidden, residual)
+    assert torch.equal(materialized, hidden + residual)
+    metrics = _tensor_metrics(materialized, materialized.clone())
+    assert metrics["all_finite"] is True
+    assert metrics["relative_l2"] == 0.0
+    assert metrics["cosine"] == pytest.approx(1.0)
 
 
 @pytest.mark.parametrize(
