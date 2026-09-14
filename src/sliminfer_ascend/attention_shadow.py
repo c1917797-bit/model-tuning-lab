@@ -273,6 +273,9 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         tp_score_canonicalization=(
                             "sum-all-reduce-then-rank0-broadcast"
                         ),
+                        score_block_identity="dense-original",
+                        compact_block_remap_applied=False,
+                        staged_compact_semantics_proven=False,
                         duplicate_projection_for_diagnostics=True,
                         runtime_mutation=False,
                     )

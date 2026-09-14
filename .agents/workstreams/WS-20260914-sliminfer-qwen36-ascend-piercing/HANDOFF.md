@@ -33,6 +33,12 @@ Updated: 2026-09-14
   activation and deterministic selection only; it does not mutate the model,
   cache or hidden states.
 - No SlimInfer performance or accuracy result exists.
+- The passed shadow keeps all hidden-state rows dense. Its score ordinals are
+  therefore original prompt block IDs, but later scores still observe the
+  unpruned prompt. It does not prove staged compact scoring semantics. The
+  semantic path must remap compact ordinals to explicit absolute active block
+  IDs and fail closed when the compact row count does not exactly cover those
+  blocks.
 - Intended HYPIC-equivalent NPU4-7 lane is currently free. NPU0-3 have external
   VLLM workers and remain out of scope.
 - The paper, official source structure, Qwen3.6 checkpoint, HYPIC formal

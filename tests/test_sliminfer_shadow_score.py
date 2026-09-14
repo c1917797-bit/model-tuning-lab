@@ -5,7 +5,10 @@ import pytest
 torch = pytest.importorskip("torch")
 
 from sliminfer_ascend.planner import selection_digest, select_active_blocks
-from sliminfer_ascend.shadow_score import semantic_block_scores
+from sliminfer_ascend.shadow_score import (
+    remap_compact_block_scores,
+    semantic_block_scores,
+)
 
 
 def _tensor(values):
@@ -115,3 +118,47 @@ def test_scores_feed_deterministic_sink_and_topk_selection():
     assert selection_digest("request-a", {19: selected}) == selection_digest(
         "request-a", {19: (2, 1, 0)}
     )
+
+
+def test_compact_scores_remap_to_noncontiguous_absolute_blocks():
+    remapped = remap_compact_block_scores(
+        {0: 9.0, 1: 7.0, 2: 8.0},
+        (0, 2, 5),
+        prompt_tokens=6 * 64,
+        compact_tokens=3 * 64,
+    )
+    assert remapped == {0: 9.0, 2: 7.0, 5: 8.0}
+    selected = select_active_blocks(
+        (0, 2, 5), remapped, keep_tokens=2, block_size=1
+    )
+    assert selected == (0, 5)
+
+
+def test_compact_score_remap_accounts_for_partial_original_final_block():
+    assert remap_compact_block_scores(
+        {0: 1.0, 1: 2.0},
+        (0, 5),
+        prompt_tokens=321,
+        compact_tokens=65,
+    ) == {0: 1.0, 5: 2.0}
+
+
+@pytest.mark.parametrize(
+    ("scores", "blocks", "prompt_tokens", "compact_tokens", "message"),
+    [
+        ({0: 1.0, 2: 2.0}, (0, 2), 192, 128, "contiguous ordinals"),
+        ({0: 1.0, 1: 2.0}, (0, 0), 192, 128, "strictly increasing"),
+        ({0: 1.0}, (3,), 192, 64, "outside the prompt"),
+        ({0: 1.0, 1: 2.0}, (0, 2), 129, 128, "exactly cover"),
+    ],
+)
+def test_compact_score_remap_fails_closed_on_identity_mismatch(
+    scores, blocks, prompt_tokens, compact_tokens, message
+):
+    with pytest.raises(ValueError, match=message):
+        remap_compact_block_scores(
+            scores,
+            blocks,
+            prompt_tokens=prompt_tokens,
+            compact_tokens=compact_tokens,
+        )

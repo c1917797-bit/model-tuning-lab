@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
-from typing import Any, Callable, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
 
 ReduceSum = Callable[[Any], Any | None]
@@ -30,6 +30,71 @@ class SemanticRequestScores:
     token_end: int
     unit_scores: tuple[float, ...]
     block_scores: dict[int, float]
+
+
+def remap_compact_block_scores(
+    compact_block_scores: Mapping[int, float],
+    active_absolute_blocks: Sequence[int],
+    *,
+    prompt_tokens: int,
+    compact_tokens: int,
+    block_size: int = 64,
+) -> dict[int, float]:
+    """Map compact score ordinals back to stable prompt block identities.
+
+    A semantic pruning stage concatenates complete active prompt blocks.  The
+    scorer necessarily labels those rows with compact ordinals 0..N-1, while
+    the planner must continue using the original prompt's absolute block IDs.
+    Validate both identities and the exact compact row count before remapping.
+    """
+
+    if prompt_tokens <= 0:
+        raise ValueError("prompt_tokens must be positive")
+    if compact_tokens <= 0:
+        raise ValueError("compact_tokens must be positive")
+    if block_size <= 0:
+        raise ValueError("block_size must be positive")
+
+    absolute = tuple(int(block) for block in active_absolute_blocks)
+    if not absolute:
+        raise ValueError("active_absolute_blocks must not be empty")
+    if absolute != tuple(sorted(set(absolute))):
+        raise ValueError(
+            "active_absolute_blocks must be strictly increasing and unique"
+        )
+
+    total_blocks = math.ceil(prompt_tokens / block_size)
+    invalid = [block for block in absolute if block < 0 or block >= total_blocks]
+    if invalid:
+        raise ValueError(f"absolute block IDs are outside the prompt: {invalid[:8]}")
+
+    expected_compact_tokens = sum(
+        min(block_size, prompt_tokens - block * block_size) for block in absolute
+    )
+    if compact_tokens != expected_compact_tokens:
+        raise ValueError(
+            "compact token rows do not exactly cover the declared active blocks: "
+            f"expected {expected_compact_tokens}, got {compact_tokens}"
+        )
+
+    compact_ids = set(int(block) for block in compact_block_scores)
+    expected_ids = set(range(len(absolute)))
+    if compact_ids != expected_ids:
+        raise ValueError(
+            "compact score block IDs must be contiguous ordinals 0..N-1"
+        )
+    non_finite = [
+        block
+        for block, score in compact_block_scores.items()
+        if not math.isfinite(float(score))
+    ]
+    if non_finite:
+        raise ValueError(f"compact block scores must be finite: {non_finite[:8]}")
+
+    return {
+        absolute[compact_id]: float(compact_block_scores[compact_id])
+        for compact_id in range(len(absolute))
+    }
 
 
 def _validate_start_locs(start_locs: Sequence[int], token_count: int) -> tuple[int, ...]:

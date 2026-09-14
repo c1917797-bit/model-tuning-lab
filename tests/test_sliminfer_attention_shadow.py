@@ -129,6 +129,9 @@ def test_attention_shadow_preserves_original_forward_and_emits_selection(
     selection = events[1]
     assert selection["layer_index"] == 19
     assert selection["selected_blocks"] == [0]
+    assert selection["score_block_identity"] == "dense-original"
+    assert selection["compact_block_remap_applied"] is False
+    assert selection["staged_compact_semantics_proven"] is False
     assert selection["runtime_mutation"] is False
     assert selection["duplicate_projection_for_diagnostics"] is True
 
