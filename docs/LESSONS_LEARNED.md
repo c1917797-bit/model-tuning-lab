@@ -386,3 +386,53 @@ compliant production result.
 **Reusable rule:** retain successful ingredients and failed treatments, but
 never widen a microbenchmark, sampled-quality, source-overlay, or paper-level
 result into a final serving claim.
+
+## 9. Paper-to-Ascend lessons from the SlimInfer identity gate
+
+### 9.1 vLLM plugin filtering must retain the platform plugin
+
+The first SlimInfer service attempt set `VLLM_PLUGINS=sliminfer_ascend`.
+That variable is a filter, so it excluded the required `ascend` platform
+plugin and vLLM failed before model load with an unknown device type. The
+corrected list was `ascend,sliminfer_ascend`.
+
+**Reusable rule:** when adding a general vLLM plugin, inspect plugin discovery
+semantics and retain every required platform plugin. A plugin import success is
+not a serving-path success.
+
+### 9.2 Container-visible NPU IDs are not host NPU IDs
+
+The verified mapping was host physical NPU4-7 to container logical NPU0-3.
+`ASCEND_RT_VISIBLE_DEVICES=0,1,2,3` was therefore correct inside the
+non-privileged container. A same-path single-card proof showed that using host
+ID 4 after remapping host4 to container0 produced zero visible devices, while
+logical ID 0 allocated successfully on physical NPU4.
+
+**Reusable rule:** prove one-card and full-TP host-to-container mapping before
+model launch. Record host IDs and container-visible IDs as separate fields.
+
+### 9.3 Process ownership beats snapshot inference
+
+An early launch was stopped when NPU0-3 processes appeared concurrently. Later
+single-card and four-card allocation probes proved the mapping, and a subsequent
+external process on NPU0 demonstrated that raw `npu-smi` presence alone cannot
+attribute ownership. The accepted gate intersected Docker worker PIDs with host
+`npu-smi` PIDs: all four SlimInfer workers were on physical NPU4-7 only.
+
+**Reusable rule:** fail closed on uncertainty, then resolve attribution with
+PID ownership. Do not restart a suspect container merely because a later
+explanation seems plausible; create a fresh verified run.
+
+### 9.4 Identity parity is necessary but not algorithm evidence
+
+With SlimInfer enabled in identity mode, all four TP workers installed the
+wrapper around `Qwen3_5Model.forward` and identified the inherited
+`Qwen3NextModel.forward` source by SHA256. A deterministic 5-token prompt
+produced the same 4-token text, token counts, finish reason, and system
+fingerprint as the serial disabled control. The API did not return token IDs,
+so no token-ID equality claim was made.
+
+**Reusable rule:** distinguish packaging, patch installation, warmup entry,
+request success, algorithm activation, numerical correctness, performance, and
+task accuracy. Passing an identity canary authorizes the semantic canary; it
+does not establish SlimInfer speed or quality.

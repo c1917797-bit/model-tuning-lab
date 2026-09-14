@@ -1,6 +1,6 @@
 id: exp-20260914-sliminfer-qwen36
-stage: attempted
-status: resource-wait
+stage: verified
+status: identity-canary-passed
 objective: >-
   Test SlimInfer direction on the HYPIC-equivalent Qwen3.6-27B TP4 ruler.
 hypothesis: >-
@@ -9,7 +9,7 @@ hypothesis: >-
 primary_variable: MST_SLIMINFER_ENABLE
 algorithm_identity: faithful-port-feasibility
 source:
-  repository_commit: 64468d3c89ce4262f0cd85e2a636303712c2d884
+  repository_commit: 9122ae1
   branch: work/sliminfer-qwen36-ascend-piercing-20260914
   vllm_ascend_reference: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
 environment:
@@ -20,8 +20,8 @@ environment:
   intended_host_devices: [4, 5, 6, 7]
   container_visible_devices: [0, 1, 2, 3]
   tensor_parallel: 4
-  ownership: not-claimed
-  drift_status: identity-canary-ready-pending-live-rank-proof
+  ownership: released-after-serial-enabled-disabled-canary
+  drift_status: identity-runtime-path-proven-semantic-pruning-not-yet-active
 correctness_guardrails:
   - request-local token identity
   - identical selection digest on all TP ranks
@@ -36,7 +36,7 @@ abort:
   - deterministic runtime failure on unchanged bytes
 artifacts:
   root: /cache/cch/sliminfer-qwen36-ascend-tp4-20260914
-  status: must-not-exist-before-run
+  status: identity-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
   planner_runtime_and_stream_contract_tests: 17/17 passed
@@ -45,7 +45,27 @@ offline_checkpoint:
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
   token_linear_shape_ratio_pct: 49.609375
   first_semantic_canary_prefill: whole-prompt-only
-resource_block:
+historical_resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched
-next_gate: four-rank-identity-only-eager-npu-canary
+identity_canary:
+  host_worker_pids_enabled: [1504637, 1504638, 1504639, 1504640]
+  host_worker_pids_disabled: [1599229, 1599230, 1599231, 1599232]
+  physical_npus: [4, 5, 6, 7]
+  npu0_3_used_by_this_experiment: false
+  enabled_output: " Paris.\\n\\n<think>"
+  disabled_output: " Paris.\\n\\n<think>"
+  output_text_equal: true
+  prompt_tokens_each: 5
+  completion_tokens_each: 4
+  token_ids_available_from_api: false
+  four_rank_hook_evidence: true
+  hook_event_boundary: first-forward events were emitted during engine warmup
+  algorithmic_pruning_active: false
+  performance_claim_allowed: false
+  accuracy_claim_allowed: false
+  device_mapping_proof_sha256: d0b4d0994244769821bb4e5d500ab0a990c1de7b570e0fe425722594ff880e90
+  enabled_runtime_sha256: 753d192e8347ac4096e237ad11f95bd955dcc8b96f7598e3d11bb3582800b4ab
+  identity_parity_sha256: 32c73aaeaefa0f261219fcc183363e94e554b2913a298eb685aeab21f0f460d3
+  resource_release_verified: true
+next_gate: whole-prompt-only-semantic-pruning-npu-numerical-canary

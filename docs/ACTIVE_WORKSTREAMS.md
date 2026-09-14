@@ -1,6 +1,6 @@
 # Active Workstreams
 
-This repository is the single Git control plane for two business tasks.
+This repository is the single Git control plane for multiple business tasks.
 Reusable maintainer skills, safety policy, experiment schemas, and integrated
 handoff truth live on `main`. Implementation and live evidence remain on the
 owning task branch until their gates pass.
@@ -29,6 +29,23 @@ hypothesis.
 This branch currently has an in-progress captured-teacher fidelity iteration
 and an exited container that declares the current worktree path. Do not rename,
 split, or move it while either condition remains.
+
+## 3. SlimInfer Qwen3.6 Paper-to-Ascend piercing
+
+- Branch: `work/sliminfer-qwen36-ascend-piercing-20260914`
+- Worktree:
+  `/opt/host/vnf/austinov/worktrees/sliminfer-qwen36-ascend-piercing`
+- Goal: test a faithful, architecture-aware SlimInfer port on the same
+  Qwen3.6-27B TP4 ruler used for the HYPIC-style report.
+- Current decision: the removable plugin and four-rank identity path are
+  verified on physical NPU4-7; algorithmic pruning, performance, and accuracy
+  remain unproven.
+- Next gate: a whole-prompt-only semantic pruning canary that preserves
+  absolute RoPE positions, uses compact KV positions for full attention, and
+  rejects resumed/chunked prompt state until its semantics are implemented.
+
+This is an independent Paper-to-Ascend workstream. HYPIC measurements are a
+reporting/protocol reference only and are not a SlimInfer baseline or result.
 
 ## Archive policy
 

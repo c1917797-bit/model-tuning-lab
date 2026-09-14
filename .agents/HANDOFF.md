@@ -8,6 +8,18 @@ target parent: `80cf967c929dc40842f47a15f0601b0a9b7b686a`.
 See `docs/BRANCH_CONSOLIDATION_20260912.md` for retention and remaining work.
 The older runtime descriptions below are historical, not current occupancy.
 
+## Branch-local SlimInfer update — 2026-09-14
+
+On branch `work/sliminfer-qwen36-ascend-piercing-20260914`, the Qwen3.6-27B
+TP4 identity canary passed on physical NPU4-7 and the lane was released. The
+enabled and disabled arms returned identical short deterministic output and
+metadata; all four enabled workers installed the runtime wrapper. This proves
+removable plugin integration only. Real SlimInfer pruning, performance, and
+accuracy are still unproven. Resume at
+`.agents/experiments/exp-20260914-sliminfer-qwen36.yaml` and
+`docs/SLIMINFER_IDENTITY_CANARY_20260914.md`; the next gate is a
+whole-prompt-only semantic pruning NPU numerical canary.
+
 
 ## 0. Status
 
