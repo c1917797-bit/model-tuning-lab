@@ -85,6 +85,125 @@ class CompactPrefillLayout:
     compact_cache_positions: tuple[int, ...]
 
 
+@dataclass(frozen=True)
+class HiddenStateRestorationPlan:
+    """Per-request query rows assembled from live and cached hidden states.
+
+    Official SlimInfer may append whole prompt blocks cached at the previous
+    layer to the rows that survived that layer.  Absolute token identity is
+    therefore authoritative; row position is only a transient tensor index.
+    """
+
+    query_absolute_ids: tuple[int, ...]
+    live_gather_indices: tuple[int, ...]
+    restored_absolute_ids: tuple[int, ...]
+    cache_block_ids: tuple[int, ...]
+    final_input_relative_index: int | None
+
+
+def build_hidden_state_restoration_plan(
+    live_absolute_ids: Sequence[int],
+    required_prompt_blocks: Sequence[int],
+    available_cached_prompt_blocks: Sequence[int],
+    *,
+    prompt_tokens: int,
+    pruning_block_size: int = 64,
+    generated_absolute_ids: Sequence[int] = (),
+    final_input_absolute_id: int | None = None,
+) -> HiddenStateRestorationPlan:
+    """Plan one request's next-layer rows, failing closed on identity drift.
+
+    Prompt rows absent from the live tensor may only be restored as complete
+    blocks from the previous layer's hidden-state cache. Generated response
+    rows are never restored from that prompt cache and must remain live.
+    """
+
+    if prompt_tokens <= 0:
+        raise ValueError("prompt_tokens must be positive")
+    if pruning_block_size <= 0:
+        raise ValueError("pruning_block_size must be positive")
+
+    live_ids = tuple(int(value) for value in live_absolute_ids)
+    if len(set(live_ids)) != len(live_ids):
+        raise ValueError("live_absolute_ids must be unique")
+    generated_ids = tuple(int(value) for value in generated_absolute_ids)
+    if tuple(sorted(set(generated_ids))) != generated_ids:
+        raise ValueError("generated_absolute_ids must be sorted and unique")
+    if any(value < prompt_tokens for value in generated_ids):
+        raise ValueError("generated token IDs must follow the prompt")
+    allowed_ids = set(range(prompt_tokens))
+    allowed_ids.update(generated_ids)
+    if any(value not in allowed_ids for value in live_ids):
+        raise ValueError("live rows contain an unknown absolute token ID")
+    if not set(generated_ids).issubset(live_ids):
+        raise RuntimeError("generated response tokens must remain live")
+
+    required_blocks = tuple(int(value) for value in required_prompt_blocks)
+    if tuple(sorted(set(required_blocks))) != required_blocks:
+        raise ValueError("required_prompt_blocks must be sorted and unique")
+    if not required_blocks or required_blocks[0] != 0:
+        raise ValueError("the sink block must remain active")
+    max_block = math.ceil(prompt_tokens / pruning_block_size) - 1
+    if any(block < 0 or block > max_block for block in required_blocks):
+        raise ValueError("required_prompt_blocks contain an out-of-range block")
+
+    cached_blocks = tuple(int(value) for value in available_cached_prompt_blocks)
+    if len(set(cached_blocks)) != len(cached_blocks):
+        raise ValueError("available cached prompt blocks must be unique")
+    if any(block < 0 or block > max_block for block in cached_blocks):
+        raise ValueError("cached prompt blocks contain an out-of-range block")
+    cached_block_set = set(cached_blocks)
+    live_set = set(live_ids)
+
+    restored_ids: list[int] = []
+    restored_blocks: list[int] = []
+    for block in required_blocks:
+        start = block * pruning_block_size
+        stop = min(start + pruning_block_size, prompt_tokens)
+        block_ids = tuple(range(start, stop))
+        present = sum(token_id in live_set for token_id in block_ids)
+        if present == len(block_ids):
+            continue
+        if present:
+            raise RuntimeError("prompt blocks must be live or restored atomically")
+        if block not in cached_block_set:
+            raise RuntimeError("required prompt block is missing from live rows and cache")
+        restored_blocks.append(block)
+        restored_ids.extend(block_ids)
+
+    query_ids = live_ids + tuple(restored_ids)
+    if len(set(query_ids)) != len(query_ids):
+        raise RuntimeError("restoration produced duplicate absolute token IDs")
+    required_prompt_ids = {
+        token_id
+        for block in required_blocks
+        for token_id in range(
+            block * pruning_block_size,
+            min((block + 1) * pruning_block_size, prompt_tokens),
+        )
+    }
+    if not required_prompt_ids.issubset(query_ids):
+        raise RuntimeError("restoration did not materialize every required prompt row")
+
+    final_relative_index = None
+    if final_input_absolute_id is not None:
+        final_id = int(final_input_absolute_id)
+        try:
+            final_relative_index = query_ids.index(final_id)
+        except ValueError as exc:
+            raise RuntimeError(
+                "final input token is unavailable for model output logits"
+            ) from exc
+
+    return HiddenStateRestorationPlan(
+        query_absolute_ids=query_ids,
+        live_gather_indices=tuple(range(len(live_ids))),
+        restored_absolute_ids=tuple(restored_ids),
+        cache_block_ids=tuple(restored_blocks),
+        final_input_relative_index=final_relative_index,
+    )
+
+
 def build_whole_prompt_layout(
     states: Sequence[RequestPruningState],
     dense_query_start_loc: Sequence[int],

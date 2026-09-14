@@ -15,7 +15,9 @@ from .planner import (
 )
 from .stream_contract import (
     CompactPrefillLayout,
+    HiddenStateRestorationPlan,
     RequestPruningState,
+    build_hidden_state_restoration_plan,
     build_whole_prompt_layout,
     decode_full_attention_slots,
     full_attention_physical_slot,
@@ -61,11 +63,13 @@ def register() -> None:
 __all__ = [
     "LayerPruningSpec",
     "CompactPrefillLayout",
+    "HiddenStateRestorationPlan",
     "RequestPruningState",
     "SlimInferConfig",
     "SemanticRequestScores",
     "aggregate_rank_scores",
     "build_layer_plan",
+    "build_hidden_state_restoration_plan",
     "build_whole_prompt_layout",
     "decode_full_attention_slots",
     "full_attention_physical_slot",

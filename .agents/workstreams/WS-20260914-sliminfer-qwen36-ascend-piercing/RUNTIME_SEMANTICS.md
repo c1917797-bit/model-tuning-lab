@@ -33,6 +33,22 @@ full-attention slots are derived from the layer's existing block table and the
 compact logical KV position; raw GDN block tables must continue through the
 existing mamba_get_block_table_tensor path.
 
+## Hidden-state restoration is part of the algorithm
+
+The official implementation does not treat the compact stream as a permanently
+shrinking tensor. After a layer prunes prompt blocks, it stores those blocks'
+MLP outputs in an HsCache keyed by layer and absolute block identity. A later
+layer may append a complete block from the preceding layer's HsCache when that
+block is required but absent from the live rows. Position embeddings and
+attention masks are then rebuilt for the restored absolute positions.
+
+Consequently, a faithful Ascend port must keep separate identities for live
+rows, cached prompt blocks, generated response rows and per-layer KV blocks.
+Generated response rows must remain live. The final original input token must
+also be locatable in the final layer output before logits are computed. A plain
+monotonic gather without HsCache restoration is not an admissible SlimInfer
+implementation.
+
 ## Whole-prompt gate
 
 The first semantic canary deliberately rejects partial or resumed prompt
@@ -54,7 +70,8 @@ decomposed; it cannot be hidden inside the treatment claim.
 stream_contract.py is a device-independent executable specification. It checks
 paper-faithful first-sink retention, request-local row gathering, absolute
 position identity, compact cache positions, physical block-table mapping,
-decode continuation and fail-closed whole-prompt admission. Generated response
-tokens are retained separately from prompt-block selection. Passing these tests
-is only a precondition for building live Ascend metadata; it is not NPU,
-performance or quality evidence.
+decode continuation, whole-block hidden-state restoration, final-logit token
+availability and fail-closed whole-prompt admission. Generated response tokens
+are retained separately from prompt-block selection and may not be restored
+from the prompt HsCache. Passing these tests is only a precondition for building
+live Ascend metadata; it is not NPU, performance or quality evidence.

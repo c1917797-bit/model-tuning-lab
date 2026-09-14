@@ -4,6 +4,7 @@ import pytest
 
 from sliminfer_ascend.stream_contract import (
     RequestPruningState,
+    build_hidden_state_restoration_plan,
     build_whole_prompt_layout,
     decode_full_attention_slots,
     full_attention_physical_slot,
@@ -81,4 +82,61 @@ def test_contract_rejects_invalid_active_sets_and_cache_capacity():
     with pytest.raises(ValueError, match="too short"):
         full_attention_physical_slot(
             (10,), kv_block_size=64, compact_cache_position=64
+        )
+
+
+def test_hidden_state_plan_restores_a_previously_pruned_prompt_block():
+    live_ids = tuple(range(64)) + tuple(range(128, 130)) + (130, 131)
+    plan = build_hidden_state_restoration_plan(
+        live_ids,
+        required_prompt_blocks=(0, 1, 2),
+        available_cached_prompt_blocks=(1,),
+        prompt_tokens=130,
+        generated_absolute_ids=(130, 131),
+        final_input_absolute_id=131,
+    )
+
+    assert plan.cache_block_ids == (1,)
+    assert plan.restored_absolute_ids == tuple(range(64, 128))
+    assert plan.query_absolute_ids[:66] == live_ids[:66]
+    assert plan.query_absolute_ids[-64:] == tuple(range(64, 128))
+    assert plan.final_input_relative_index == 67
+
+
+def test_hidden_state_plan_requires_generated_rows_to_stay_live():
+    with pytest.raises(RuntimeError, match="generated response tokens"):
+        build_hidden_state_restoration_plan(
+            tuple(range(64)),
+            required_prompt_blocks=(0,),
+            available_cached_prompt_blocks=(),
+            prompt_tokens=130,
+            generated_absolute_ids=(130,),
+        )
+
+
+def test_hidden_state_plan_fails_on_partial_or_missing_block_restore():
+    with pytest.raises(RuntimeError, match="atomically"):
+        build_hidden_state_restoration_plan(
+            tuple(range(64)) + (64,),
+            required_prompt_blocks=(0, 1),
+            available_cached_prompt_blocks=(1,),
+            prompt_tokens=130,
+        )
+    with pytest.raises(RuntimeError, match="missing from live rows and cache"):
+        build_hidden_state_restoration_plan(
+            tuple(range(64)),
+            required_prompt_blocks=(0, 1),
+            available_cached_prompt_blocks=(),
+            prompt_tokens=130,
+        )
+
+
+def test_hidden_state_plan_fails_if_final_logits_token_was_pruned():
+    with pytest.raises(RuntimeError, match="model output logits"):
+        build_hidden_state_restoration_plan(
+            tuple(range(64)),
+            required_prompt_blocks=(0,),
+            available_cached_prompt_blocks=(1,),
+            prompt_tokens=130,
+            final_input_absolute_id=129,
         )

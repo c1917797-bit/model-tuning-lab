@@ -39,7 +39,7 @@ artifacts:
   status: identity-and-runtime-metadata-canary-artifacts-present
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_runtime_stream_shadow_audit_and_request_tests: 42/42 passed
+  planner_runtime_stream_shadow_audit_and_request_tests: 46/46 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
@@ -90,6 +90,24 @@ selection_shadow_scorer:
       The later compact-cache contract still required the most recent prompt
       block after the planner had been corrected. The requirement was removed;
       generated response tokens remain independently retained during decode.
+    official_hs_cache_followup:
+      status: device-independent-contract-implemented-and-tested
+      verified_behavior: >-
+        Official SlimInfer stores pruned per-layer hidden-state blocks and may
+        restore a complete block by absolute identity as a later layer input.
+      required_invariants:
+        - live-and-cached-row-identities-remain-distinct
+        - generated-response-rows-remain-live
+        - prompt-block-restoration-is-atomic
+        - final-input-token-is-locatable-for-logits
+      rejected_shortcut: monotonic-gather-without-hidden-state-restoration
+      complete_test_result: 46-passed
+      elapsed_seconds: 3.16
+      first_environment_attempt:
+        result: collection-failed-before-tests
+        cause: torch-device-backend-autoload-required-unmapped-ascend-host-library
+        correction: TORCH_DEVICE_BACKEND_AUTOLOAD=0
+        production_logic_changed: false
   hook_test_attempt:
     result: 34-passed-1-failed
     cause: >-
@@ -153,7 +171,7 @@ selection_shadow_scorer:
     elapsed_seconds: 8.51
   tp4_shadow_controller:
     implementation: tools/run_sliminfer_shadow_tp4.sh
-    status: syntax-passed-runtime-not-started-npu4-7-occupied
+    status: first-runtime-aborted-before-result-source-bytes-changed
     corrected_preflight_bug: >-
       The first dry preflight treated Docker's empty stdout on an absent object
       as part of the fallback state string. Container state now branches on the
@@ -165,6 +183,18 @@ selection_shadow_scorer:
       output_root_created: false
       experiment_labeled_container_created: false
       interpretation: resource-gate-passed-by-failing-before-mutation
+    first_runtime_attempt:
+      preflight: passed
+      disabled_arm_started_on_physical_npu4-7: true
+      result_admissible: false
+      abort_reason: >-
+        The worktree-mounted device-independent stream contract and durable
+        records were edited after the disabled arm started. The contract is not
+        used by the selection shadow, but exact one-switch source identity was
+        no longer provable, so the experiment-owned container was stopped.
+      enabled_arm_started: false
+      performance_or_accuracy_claim_allowed: false
+      preserved_artifact: selection-shadow-v1
     physical_devices: [4, 5, 6, 7]
     arms: [disabled, selection-shadow]
     prompt_tokens: 13000
@@ -193,8 +223,8 @@ current_resume:
   preserved_history: >-
     The earlier user-approved Tail-Replay pivot remains recorded as a historical
     direction decision and is not rewritten as a SlimInfer result.
-  current_npu4_7_pids: [2646154, 2646155, 3240854, 3240855]
-  action: external-workload-left-untouched
+  current_npu4_7_pids: []
+  action: freeze-source-archive-aborted-v1-and-rerun-one-switch-canary
 historical_resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched
