@@ -39,11 +39,12 @@ artifacts:
   status: must-not-exist-before-run
 rollback: Unset MST_SLIMINFER_ENABLE and remove the plugin mount.
 offline_checkpoint:
-  planner_and_runtime_tests: 12/12 passed
+  planner_runtime_and_stream_contract_tests: 17/17 passed
   packaging: editable-install-and-vllm-entry-point-load-passed
   algorithmic_pruning_active: false
   qwen36_profile_reuse: partial-parser-hotspot-evidence-only
   token_linear_shape_ratio_pct: 49.609375
+  first_semantic_canary_prefill: whole-prompt-only
 resource_block:
   observed_npu4_7_pids: [786664, 786665, 786666, 786667]
   action: external-workload-left-untouched

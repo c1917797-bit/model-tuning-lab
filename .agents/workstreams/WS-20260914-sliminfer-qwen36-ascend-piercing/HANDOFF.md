@@ -15,7 +15,8 @@ Updated: 2026-09-14
   contract, and pinned vLLM/vLLM-Ascend model loops have been reviewed.
 - A deterministic request-local planner and Qwen3.6 12K/6K/4K layer plan are
   committed and pushed.
-- An opt-in, identity-preserving `vllm.general_plugins` canary now passes 12/12
+- An opt-in, identity-preserving `vllm.general_plugins` canary and compact
+  stream contract now pass 17/17
   tests in the pinned image without NPU devices. Editable installation and
   entry-point loading also passed, emitting only `plugin_build_active` and
   `model_patch_deferred`. This is a packaging/runtime-hook precondition, not an
@@ -33,6 +34,11 @@ A faithful port requires layer-specific token/state/cache accounting across GDN,
 full attention, TP4 and continuous batching. The live source map confirms that
 one request-global metadata object is insufficient. A shortcut must be labeled
 as a separate derivative.
+
+The first semantic canary also requires an entire prompt in one model forward.
+Partial/chunked prefill cannot retroactively save deep-layer work for an earlier
+chunk. Whole-prompt scheduler admission, if used, must be measured in both arms
+or decomposed from the algorithm effect.
 
 ## Recovery
 

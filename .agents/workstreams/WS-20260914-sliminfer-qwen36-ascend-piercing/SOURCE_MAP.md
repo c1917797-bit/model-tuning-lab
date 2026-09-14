@@ -43,6 +43,11 @@ metadata cannot simply be reused with a smaller row tensor. A shortcut that
 only masks full-attention KV is a derivative and must use a different result
 label.
 
+The first semantic implementation must reject partial/resumed prefill. Under
+the 40,960-token batch budget a 32K request can fit whole, but a second request
+may be admitted only partially. A scheduler gate is therefore part of the
+candidate design, not an incidental benchmark setting.
+
 ## Smallest first change
 
 Do not edit the original vLLM or vLLM-Ascend repositories. Add an explicit,

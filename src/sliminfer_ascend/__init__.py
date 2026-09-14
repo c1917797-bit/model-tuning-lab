@@ -13,6 +13,14 @@ from .planner import (
     selection_digest,
     select_active_blocks,
 )
+from .stream_contract import (
+    CompactPrefillLayout,
+    RequestPruningState,
+    build_whole_prompt_layout,
+    decode_full_attention_slots,
+    full_attention_physical_slot,
+    prefill_full_attention_slots,
+)
 
 __version__ = "0.1.0"
 
@@ -47,11 +55,17 @@ def register() -> None:
 
 __all__ = [
     "LayerPruningSpec",
+    "CompactPrefillLayout",
+    "RequestPruningState",
     "SlimInferConfig",
     "aggregate_rank_scores",
     "build_layer_plan",
+    "build_whole_prompt_layout",
+    "decode_full_attention_slots",
+    "full_attention_physical_slot",
     "get_config",
     "prompt_block_ids",
+    "prefill_full_attention_slots",
     "register",
     "selection_digest",
     "select_active_blocks",

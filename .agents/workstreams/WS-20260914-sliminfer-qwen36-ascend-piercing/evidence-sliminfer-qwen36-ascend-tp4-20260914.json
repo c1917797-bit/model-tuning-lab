@@ -20,13 +20,15 @@
   "planner": {
     "scope": "device-independent precondition only",
     "test_environment": "pinned serving image with no NPU devices mounted",
-    "tests": 12,
-    "passed": 12,
+    "tests": 17,
+    "passed": 17,
     "failed": 0,
-    "duration_s": 8.70,
+    "duration_s": 2.30,
     "planner_sha256": "5bcc9698bad03871fbaba1b620f99e6f8151d5fa70f44adb253cbe58d1906862",
     "planner_tests_sha256": "f92f05578c4b9df6998617a271049171349606133f0e6af5ef03cf85e258de34",
     "runtime_tests_sha256": "7db775ebb0c24de8f995b33e4424221c97dac5b49f5f50da03bfa2ed1b272593",
+    "stream_contract_sha256": "c3be04f61ca9abd4c77d12229df313d524b98d3e6b97cd0e2ce016938d6e46ed",
+    "stream_contract_tests_sha256": "795929186d53c6823a37076d95b1d0d2b0bc5ae419ad4267667a052c5011a3ea",
     "plan_sha256": "8f9bac80ac128c7cc604fa573a205f55d596056d28891fd2f4436c1a5f05e264",
     "covered": [
       "64-token block accounting",
@@ -40,7 +42,12 @@
       "disabled-by-default runtime configuration",
       "unknown mode failure",
       "identity-preserving forward hook with one-shot evidence",
-      "missing runtime target failure"
+      "missing runtime target failure",
+      "request-local compact prefill row layout",
+      "absolute RoPE position versus compact KV position separation",
+      "physical KV slot mapping through existing block tables",
+      "decode cache continuation",
+      "partial and resumed prefill rejection"
     ]
   },
   "runtime_identity_canary": {
@@ -55,6 +62,12 @@
     "config_sha256": "4d6f44bcf91816c5efc61b3e0b17d8b07450b2d96b158b56df159968d417056b",
     "diagnostics_sha256": "1e6ad9b61877fc26421e2f334f7317f171f88641b667a780cc0d5a1ba7b8bdd5",
     "import_hook_sha256": "db29f1ce233bbeffd48df9aab59bc4094c010c31d85e13c971e6999cf8a7efa2"
+  },
+  "runtime_semantics": {
+    "document_sha256": "40156d06d471dc5fa6b729c0a476453211ca83e776b380710d04be2ba1d3eda3",
+    "first_canary_prefill_gate": "whole prompt only",
+    "chunked_prefill_status": "not supported by the first semantic canary",
+    "fairness_rule": "whole-prompt scheduling must be common to both arms or reported separately"
   },
   "profile_reuse": {
     "source": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline",
