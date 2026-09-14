@@ -1,5 +1,33 @@
 # Qwen3.8 NVFP4 on Ascend 910B4 Handoff
 
+## Cache recovery preparation (2026-09-14)
+
+Official pinned CachingLM replayed28 real overlapping request keys from a
+consistent copy of the active cache, exactly matching stored scores; fallback
+model calls were disabled and none occurred. Active cache had6147 entries.
+First probe could not see another artifact directory inside the evaluator
+container; corrected by streaming only the reference JSON over stdin, without
+changing mounts or model requests. This is cache-level proof, not full resume.
+
+Added restore_quality_cache.py: explicit manifest SHA, complete five-file
+identity matching, cache SHA/count/integrity and raw key/value equality; source
+read-only, destination exclusive-create, failed outputs retained. Tests reject
+overwrite and manifest/model/profile/count/cache corruption. MST26 passed.
+Real2360-entry snapshot restored to
+`/cache/austinov/eval-runs/mmlu-restore-check-qH8pHD0g/response_cache_rank0.db`,
+SHA256 f295cbc38dbe4c0699e0b796c9453807938b76d30bcf1d1bc9d1b874c8eba686,
+identical to source. Main evaluator/model were not stopped or modified.
+
+Remaining: bind a resumed service's actual model/image/data/harness/protocol to
+the checkpoint, and integrate fresh-output cache import with the unchanged
+runner. A copied identity directory is not proof of current runtime identity.
+The legacy five files do not alone bind every dataset/weight byte; preserve
+separate frozen weight/dataset/harness evidence. Do not yet claim an end-to-end
+resume or stop MMLU merely because this import test passed. User wants MMLU
+last; complete safe checkpoint/resume integration before reordering. Existing
+query_rewrite candidate empty-output validity issue still needs resolution.
+
+
 Latest non-interrupting MMLU cache snapshot:
 `/cache/austinov/eval-runs/mmlu-cache-checkpoint-0cirvcon`, 2360 completed option requests.
 Cache SHA256 f295cbc38dbe4c0699e0b796c9453807938b76d30bcf1d1bc9d1b874c8eba686;
