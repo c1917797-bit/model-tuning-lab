@@ -23,7 +23,11 @@ from .stream_contract import (
     full_attention_physical_slot,
     prefill_full_attention_slots,
 )
-from .shadow_score import SemanticRequestScores, semantic_block_scores
+from .shadow_score import (
+    SemanticRequestScores,
+    remap_compact_block_scores,
+    semantic_block_scores,
+)
 
 __version__ = "0.1.0"
 
@@ -48,7 +52,7 @@ def register() -> None:
         mode=config.mode,
     )
     install_model_patch(config)
-    if config.mode == "selection-shadow":
+    if config.mode in {"selection-shadow", "semantic-prefill"}:
         from .attention_shadow import install_attention_patch
 
         install_attention_patch(config)
@@ -77,6 +81,7 @@ __all__ = [
     "prompt_block_ids",
     "prefill_full_attention_slots",
     "register",
+    "remap_compact_block_scores",
     "selection_digest",
     "semantic_block_scores",
     "select_active_blocks",

@@ -18,7 +18,7 @@ from .config import SlimInferConfig
 from .diagnostics import emit_event
 from .import_hook import PostImportFinder
 from .planner import selection_digest, select_active_blocks
-from .shadow_score import semantic_block_scores
+from .shadow_score import remap_compact_block_scores, semantic_block_scores
 
 
 _TARGET_MODULE = "vllm_ascend.patch.worker.patch_qwen3_5"
@@ -45,7 +45,9 @@ def _source_identity(obj: Any) -> tuple[str | None, str | None]:
 
 
 @contextmanager
-def selection_forward_scope() -> Iterator[int]:
+def selection_forward_scope(
+    *, prompt_tokens: int | None = None, semantic_compact: bool = False
+) -> Iterator[int]:
     """Create request-local staged-selection state around one model forward."""
 
     global _next_serial
@@ -54,7 +56,19 @@ def selection_forward_scope() -> Iterator[int]:
     with _serial_lock:
         serial = _next_serial
         _next_serial += 1
-    _state.value = {"serial": serial, "active": {}, "plans": {}}
+    if semantic_compact and prompt_tokens is None:
+        raise ValueError("semantic compact scope requires prompt_tokens")
+    active = {}
+    if prompt_tokens is not None:
+        active[0] = tuple(range((prompt_tokens + _BLOCK_SIZE - 1) // _BLOCK_SIZE))
+    _state.value = {
+        "serial": serial,
+        "active": active,
+        "plans": {},
+        "selection_inputs": {},
+        "prompt_tokens": prompt_tokens,
+        "semantic_compact": semantic_compact,
+    }
     try:
         yield serial
     finally:
@@ -66,6 +80,24 @@ def _selection_state() -> dict[str, Any]:
     if value is None:
         raise RuntimeError("SlimInfer attention hook ran outside the model forward scope")
     return value
+
+
+def semantic_layer_transition(
+    layer_index: int | None,
+) -> tuple[tuple[int, ...], tuple[int, ...]]:
+    state = _selection_state()
+    if not state["semantic_compact"]:
+        raise RuntimeError("semantic layer transition requires compact mode")
+    if layer_index is None:
+        active = state["active"].get(0)
+        if active is None:
+            raise RuntimeError("semantic active set is unavailable")
+        return active, active
+    before = state["selection_inputs"].get(0, {}).get(layer_index)
+    selected = state["plans"].get(0, {}).get(layer_index)
+    if before is None or selected is None:
+        raise RuntimeError(f"semantic selection missing after layer {layer_index}")
+    return before, selected
 
 
 def _layer_index(layer_name: str) -> int:
@@ -188,6 +220,20 @@ def _score_digest(block_scores: dict[int, float]) -> str:
     return sha256(encoded).hexdigest()
 
 
+def _request_token_counts(
+    state: dict[str, Any], current_active_tokens: int
+) -> tuple[int, int]:
+    if current_active_tokens <= 0:
+        raise ValueError("current active token count must be positive")
+    if state["semantic_compact"]:
+        original_tokens = state.get("prompt_tokens")
+        if not isinstance(original_tokens, int) or original_tokens <= 0:
+            raise RuntimeError("semantic prompt token identity is unavailable")
+    else:
+        original_tokens = current_active_tokens
+    return original_tokens, current_active_tokens
+
+
 def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
     if cls.__dict__.get("_mst_sliminfer_selection_shadow_installed", False):
         return False
@@ -235,11 +281,28 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                 state = _selection_state()
                 for result in results:
                     request_index = result.request_index
-                    all_blocks = tuple(sorted(result.block_scores))
+                    if state["semantic_compact"] and request_index != 0:
+                        raise RuntimeError(
+                            "semantic-prefill currently supports one request"
+                        )
+                    if state["semantic_compact"]:
+                        active = state["active"].get(request_index)
+                        if active is None:
+                            raise RuntimeError("semantic active block identity is missing")
+                        block_scores = remap_compact_block_scores(
+                            result.block_scores,
+                            active,
+                            prompt_tokens=int(state["prompt_tokens"]),
+                            compact_tokens=result.token_end - result.token_start,
+                            block_size=_BLOCK_SIZE,
+                        )
+                    else:
+                        block_scores = result.block_scores
+                    all_blocks = tuple(sorted(block_scores))
                     active = state["active"].get(request_index, all_blocks)
                     selected = select_active_blocks(
                         active,
-                        result.block_scores,
+                        block_scores,
                         keep_tokens=_BOUNDARY_KEEP_TOKENS[layer_index],
                         block_size=_BLOCK_SIZE,
                         keep_sink=True,
@@ -247,9 +310,15 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                     )
                     state["active"][request_index] = selected
                     plan = state["plans"].setdefault(request_index, {})
+                    state["selection_inputs"].setdefault(request_index, {})[
+                        layer_index
+                    ] = active
                     plan[layer_index] = selected
                     digest = selection_digest(
                         f"forward-{state['serial']}-request-{request_index}", plan
+                    )
+                    request_tokens, active_tokens = _request_token_counts(
+                        state, result.token_end - result.token_start
                     )
                     emit_event(
                         "selection_shadow_layer",
@@ -260,11 +329,12 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         request_index=request_index,
                         layer_index=layer_index,
                         layer_name=layer_name,
-                        request_tokens=result.token_end - result.token_start,
+                        request_tokens=request_tokens,
+                        active_tokens=active_tokens,
                         input_block_count=len(active),
                         selected_block_count=len(selected),
                         selected_blocks=list(selected),
-                        score_sha256=_score_digest(result.block_scores),
+                        score_sha256=_score_digest(block_scores),
                         selection_sha256=digest,
                         local_query_heads=int(self.num_heads),
                         local_kv_heads=int(self.num_kv_heads),
@@ -277,9 +347,15 @@ def _patch_attention_class(cls: type, config: SlimInferConfig) -> bool:
                         tp_score_canonicalization=(
                             "sum-all-reduce-then-rank0-broadcast"
                         ),
-                        score_block_identity="dense-original",
-                        compact_block_remap_applied=False,
-                        staged_compact_semantics_proven=False,
+                        score_block_identity=(
+                            "compact-remapped-to-absolute"
+                            if state["semantic_compact"]
+                            else "dense-original"
+                        ),
+                        compact_block_remap_applied=bool(state["semantic_compact"]),
+                        staged_compact_semantics_proven=bool(
+                            state["semantic_compact"]
+                        ),
                         duplicate_projection_for_diagnostics=True,
                         runtime_mutation=False,
                     )

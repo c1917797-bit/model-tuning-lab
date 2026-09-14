@@ -12,6 +12,7 @@ from sliminfer_ascend import attention_shadow
 from sliminfer_ascend.attention_shadow import (
     _apply_attention_patch,
     _layer_index,
+    _request_token_counts,
     _tp_reduce_sum,
     _whole_prompt_start_locs,
     selection_forward_scope,
@@ -45,6 +46,15 @@ def test_layer_index_comes_from_live_attention_name():
     assert _layer_index("language_model.model.layers.19.self_attn.attn") == 19
     with pytest.raises(ValueError, match="cannot extract"):
         _layer_index("language_model.attention")
+
+
+def test_semantic_evidence_keeps_original_and_active_token_counts_distinct():
+    assert _request_token_counts(
+        {"semantic_compact": True, "prompt_tokens": 13000}, 12288
+    ) == (13000, 12288)
+    assert _request_token_counts(
+        {"semantic_compact": False, "prompt_tokens": None}, 13000
+    ) == (13000, 13000)
 
 
 def test_tp_score_sum_is_canonicalized_from_rank_zero(monkeypatch):

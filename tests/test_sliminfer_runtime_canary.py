@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from types import ModuleType
 
 import pytest
@@ -43,6 +44,11 @@ def test_config_accepts_metadata_canary(monkeypatch):
 def test_config_accepts_selection_shadow(monkeypatch):
     monkeypatch.setenv("MST_SLIMINFER_MODE", "selection-shadow")
     assert get_config().mode == "selection-shadow"
+
+
+def test_config_accepts_semantic_prefill(monkeypatch):
+    monkeypatch.setenv("MST_SLIMINFER_MODE", "semantic-prefill")
+    assert get_config().mode == "semantic-prefill"
 
 
 def test_identity_canary_preserves_forward_and_emits_once(tmp_path, monkeypatch):
@@ -174,3 +180,49 @@ def test_missing_target_fails_closed():
     )
     with pytest.raises(RuntimeError, match="was not found"):
         _apply_model_patch(module, config)
+
+
+def test_semantic_prefill_allows_only_startup_without_attention_metadata(
+    tmp_path, monkeypatch
+):
+    evidence = tmp_path / "runtime.jsonl"
+    monkeypatch.setenv("MST_SLIMINFER_EVIDENCE_FILE", str(evidence))
+    config = SlimInferConfig(
+        enable=True,
+        mode="semantic-prefill",
+        evidence_file=str(evidence),
+        require_runtime_hooks=True,
+    )
+
+    class ForwardContext:
+        attn_metadata = None
+
+    forward_context_module = ModuleType("vllm.forward_context")
+    forward_context_module.get_forward_context = lambda: ForwardContext()
+    monkeypatch.setitem(sys.modules, "vllm.forward_context", forward_context_module)
+
+    class Qwen3_5Model:
+        def forward(self, input_ids=None, positions=None, **kwargs):
+            return input_ids, positions, kwargs
+
+    module = ModuleType("vllm.model_executor.models.qwen3_5")
+    Qwen3_5Model.__module__ = module.__name__
+    module.Qwen3_5Model = Qwen3_5Model
+
+    _apply_model_patch(module, config)
+    model = Qwen3_5Model()
+    assert model.forward(input_ids="dummy", positions="dummy-pos") == (
+        "dummy",
+        "dummy-pos",
+        {},
+    )
+
+    events = [json.loads(line) for line in evidence.read_text().splitlines()]
+    unavailable = [
+        item
+        for item in events
+        if item["event"] == "semantic_prefill_metadata_unavailable"
+    ]
+    assert len(unavailable) == 1
+    assert unavailable[0]["runtime_mutation"] is False
+    assert unavailable[0]["reason"] == "forward-context-attn-metadata-is-none"

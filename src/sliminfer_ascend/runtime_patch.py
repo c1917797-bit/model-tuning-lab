@@ -242,6 +242,26 @@ def _patch_model_class(cls: type, config: SlimInferConfig) -> bool:
                         ),
                     )
                     emitted_calls += 1
+        if config.mode == "semantic-prefill":
+            from .semantic_prefill import semantic_prefill_forward
+
+            try:
+                from vllm.forward_context import get_forward_context
+
+                semantic_metadata = get_forward_context().attn_metadata
+            except Exception:
+                semantic_metadata = None
+            if semantic_metadata is None:
+                emit_event(
+                    "semantic_prefill_metadata_unavailable",
+                    component="model",
+                    mode=config.mode,
+                    distributed_rank=_distributed_rank(),
+                    reason="forward-context-attn-metadata-is-none",
+                    runtime_mutation=False,
+                )
+                return original_forward(self, *args, **kwargs)
+            return semantic_prefill_forward(self, *args, **kwargs)
         if config.mode == "selection-shadow":
             from .attention_shadow import selection_forward_scope
 

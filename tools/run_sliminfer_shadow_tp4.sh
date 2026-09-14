@@ -2,9 +2,10 @@
 set -euo pipefail
 
 WORKTREE=/opt/host/vnf/austinov/worktrees/sliminfer-qwen36-ascend-piercing
+CANARY_MODE=${SLIMINFER_CANARY_MODE:-selection-shadow}
 OUTPUT_ROOT=${SLIMINFER_SHADOW_OUTPUT_ROOT:-/cache/cch/sliminfer-qwen36-ascend-tp4-20260914/selection-shadow-v1}
 MODEL_PATH=/cache/efim/Qwen3.6-27B
-MODEL_NAME=qwen36-sliminfer-shadow
+MODEL_NAME=${SLIMINFER_MODEL_NAME:-qwen36-sliminfer-shadow}
 IMAGE=sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
 PORT=${SLIMINFER_SHADOW_PORT:-8235}
 PORT_WAIT_SECONDS=${SLIMINFER_SHADOW_PORT_WAIT_SECONDS:-120}
@@ -16,9 +17,9 @@ TP_SIZE=4
 MAX_MODEL_LEN=16384
 MAX_BATCHED_TOKENS=16384
 PROMPT_TOKENS=13000
-EXPERIMENT_ID=sliminfer-shadow-qwen36-tp4-20260914-v1
-DISABLED_CONTAINER=sliminfer_qwen36_shadow_disabled_npu4_7_v1
-ENABLED_CONTAINER=sliminfer_qwen36_shadow_enabled_npu4_7_v1
+EXPERIMENT_ID=${SLIMINFER_EXPERIMENT_ID:-sliminfer-shadow-qwen36-tp4-20260914-v1}
+DISABLED_CONTAINER=${SLIMINFER_DISABLED_CONTAINER:-sliminfer_qwen36_shadow_disabled_npu4_7_v1}
+ENABLED_CONTAINER=${SLIMINFER_ENABLED_CONTAINER:-sliminfer_qwen36_shadow_enabled_npu4_7_v1}
 CURRENT_CONTAINER=
 CURRENT_ARM=
 MODE=${1:-run}
@@ -157,7 +158,7 @@ create_container() {
     -e ASCEND_RT_VISIBLE_DEVICES="$VISIBLE_DEVICES" \
     -e VLLM_PLUGINS=ascend,sliminfer_ascend \
     -e MST_SLIMINFER_ENABLE="$enabled" \
-    -e MST_SLIMINFER_MODE=selection-shadow \
+    -e MST_SLIMINFER_MODE="$CANARY_MODE" \
     -e MST_SLIMINFER_REQUIRE_RUNTIME_HOOKS=1 \
     -e MST_SLIMINFER_EVIDENCE_FILE="/results/$arm/runtime.jsonl" \
     -e PYTHONDONTWRITEBYTECODE=1 \
@@ -260,16 +261,29 @@ python3 tools/run_sliminfer_shadow_request.py \
   --output "$OUTPUT_ROOT/enabled/request.json"
 stop_arm enabled "$ENABLED_CONTAINER"
 
-python3 tools/summarize_sliminfer_shadow.py \
-  "$OUTPUT_ROOT/enabled/runtime.jsonl" \
-  --expected-ranks 0,1,2,3 \
-  --min-request-tokens "$PROMPT_TOKENS" \
-  --output "$OUTPUT_ROOT/enabled/audit.json"
-python3 tools/compare_sliminfer_shadow_outputs.py \
-  "$OUTPUT_ROOT/disabled/request.json" \
-  "$OUTPUT_ROOT/enabled/request.json" \
-  --output "$OUTPUT_ROOT/output-parity.json"
+if [[ "$CANARY_MODE" == semantic-prefill ]]; then
+  python3 tools/summarize_sliminfer_shadow.py \
+    "$OUTPUT_ROOT/enabled/runtime.jsonl" \
+    --expected-ranks 0,1,2,3 \
+    --min-request-tokens "$PROMPT_TOKENS" \
+    --require-semantic \
+    --output "$OUTPUT_ROOT/enabled/audit.json"
+  python3 tools/compare_sliminfer_semantic_outputs.py \
+    "$OUTPUT_ROOT/disabled/request.json" \
+    "$OUTPUT_ROOT/enabled/request.json" \
+    --output "$OUTPUT_ROOT/output-comparison.json"
+else
+  python3 tools/summarize_sliminfer_shadow.py \
+    "$OUTPUT_ROOT/enabled/runtime.jsonl" \
+    --expected-ranks 0,1,2,3 \
+    --min-request-tokens "$PROMPT_TOKENS" \
+    --output "$OUTPUT_ROOT/enabled/audit.json"
+  python3 tools/compare_sliminfer_shadow_outputs.py \
+    "$OUTPUT_ROOT/disabled/request.json" \
+    "$OUTPUT_ROOT/enabled/request.json" \
+    --output "$OUTPUT_ROOT/output-parity.json"
+fi
 npu-smi info >"$OUTPUT_ROOT/npu.after.txt"
 find "$OUTPUT_ROOT" -type f ! -name SHA256SUMS -print0 |
   sort -z | xargs -0 sha256sum >"$OUTPUT_ROOT/SHA256SUMS"
-printf 'SlimInfer TP4 selection-shadow canary passed: %s\n' "$OUTPUT_ROOT"
+printf 'SlimInfer TP4 %s canary passed: %s\n' "$CANARY_MODE" "$OUTPUT_ROOT"

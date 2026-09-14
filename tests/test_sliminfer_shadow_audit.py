@@ -32,7 +32,8 @@ def _events():
                     "distributed_rank": rank,
                     "forward_serial": 3,
                     "request_index": 0,
-                    "request_tokens": 16384,
+                "request_tokens": 16384,
+                "active_tokens": input_by_layer[layer] * 64,
                     "layer_index": layer,
                     "input_block_count": input_by_layer[layer],
                     "selected_block_count": len(selected),
@@ -41,6 +42,60 @@ def _events():
                     "score_sha256": f"score-{layer}",
                 }
             )
+    return events
+
+
+def _semantic_events():
+    events = _events()
+    selected_by_layer = {
+        19: list(range(191)) + [1023],
+        39: list(range(95)) + [1023],
+        59: list(range(63)) + [1023],
+    }
+    for item in events:
+        if item.get("event") != "selection_shadow_layer":
+            continue
+        layer = item["layer_index"]
+        selected = selected_by_layer[layer]
+        item.update(
+            {
+                "mode": "semantic-prefill",
+                "block_size": 16,
+                "selected_blocks": selected,
+                "selected_block_count": len(selected),
+                "selection_sha256": f"semantic-selection-{layer}",
+                "score_block_identity": "compact-remapped-to-absolute",
+                "compact_block_remap_applied": True,
+                "staged_compact_semantics_proven": True,
+                "keep_sink_block": True,
+                "keep_recent_block": True,
+                "runtime_mutation": False,
+            }
+        )
+    row_pairs = {
+        19: (16384, 3072),
+        39: (3072, 1536),
+        59: (1536, 1024),
+    }
+    for rank in RANKS:
+        for layer, (input_rows, output_rows) in row_pairs.items():
+            events.append(
+                {
+                    "event": "semantic_prefill_compacted",
+                    "distributed_rank": rank,
+                    "layer_index": layer,
+                    "input_rows": input_rows,
+                    "output_rows": output_rows,
+                    "runtime_mutation": True,
+                }
+            )
+        events.append(
+            {
+                "event": "semantic_prefill_complete",
+                "distributed_rank": rank,
+                "runtime_mutation": True,
+            }
+        )
     return events
 
 
@@ -99,3 +154,38 @@ def test_audit_rejects_duplicate_patch_worker_process():
     patch_events[-1]["pid"] = patch_events[0]["pid"]
     with pytest.raises(AuditError, match="distinct worker process"):
         audit_events(events, expected_ranks=RANKS, min_request_tokens=8192)
+
+
+def test_audit_accepts_complete_tp4_semantic_compaction():
+    summary = audit_events(
+        _semantic_events(),
+        expected_ranks=RANKS,
+        min_request_tokens=8192,
+        require_semantic=True,
+    )
+    assert summary["status"] == "passed"
+    assert summary["semantic_required"] is True
+    assert summary["semantic_compactions"] == [
+        {"layer_index": 19, "input_rows": 16384, "output_rows": 3072},
+        {"layer_index": 39, "input_rows": 3072, "output_rows": 1536},
+        {"layer_index": 59, "input_rows": 1536, "output_rows": 1024},
+    ]
+
+
+def test_audit_rejects_missing_semantic_rank_evidence():
+    events = [
+        item
+        for item in _semantic_events()
+        if not (
+            item.get("event") == "semantic_prefill_compacted"
+            and item.get("distributed_rank") == 2
+            and item.get("layer_index") == 39
+        )
+    ]
+    with pytest.raises(AuditError, match="semantic compaction layer 39 has ranks"):
+        audit_events(
+            events,
+            expected_ranks=RANKS,
+            min_request_tokens=8192,
+            require_semantic=True,
+        )
