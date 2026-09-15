@@ -42,6 +42,10 @@ def inspect_value(arm):
             "Devices": [
                 {"PathOnHost": f"/dev/davinci{x}", "PathInContainer": f"/dev/davinci{x - 4}"}
                 for x in range(4, 8)
+            ] + [
+                {"PathOnHost": "/dev/davinci_manager", "PathInContainer": "/dev/davinci_manager"},
+                {"PathOnHost": "/dev/devmm_svm", "PathInContainer": "/dev/devmm_svm"},
+                {"PathOnHost": "/dev/hisi_hdc", "PathInContainer": "/dev/hisi_hdc"},
             ],
         },
         "Mounts": [

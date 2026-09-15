@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import re
 
 
 MODEL_CONTAINER = "/models/Qwen3.6-27B"
@@ -45,7 +46,7 @@ def extract(
     devices = {
         (x.get("PathOnHost"), x.get("PathInContainer"))
         for x in host.get("Devices", [])
-        if str(x.get("PathOnHost", "")).startswith("/dev/davinci")
+        if re.fullmatch(r"/dev/davinci\d+", str(x.get("PathOnHost", "")))
     }
     expected_name = f"/dasc_qwen36_formal_v13_{arm}_20260916"
     candidate = arm == "candidate"
