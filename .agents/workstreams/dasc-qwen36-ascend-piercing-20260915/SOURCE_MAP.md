@@ -37,12 +37,21 @@ This preserves native Ascend recurrent kernels and changes only the recurrent-st
 
 ## Still Unknown
 
-- Whether current vLLM-Ascend persists recurrent state checkpoints across prefix-cache entries, or only maintains active request state rows.
+- Whether current vLLM-Ascend persists recurrent state checkpoints across prefix-cache entries, or only maintains active request state rows. Initial vLLM core inspection shows prefix-cache hits are represented as computed KV blocks and `num_computed_tokens`; no recurrent-state checkpoint identity was found in the generic `KVCacheManager` interface.
 - Where prefix-cache hit length and cached state checkpoint identity are exposed to model-layer code.
 - Whether conv state must be stored dense for every checkpoint or can be compressed/omitted in local experiments.
 - Whether graph capture requires DASC-NR to be part of graph-key/config identity.
 
+## vLLM Prefix-Cache Boundary
+
+File: `/cache/austinov/src/vllm/vllm/v1/core/kv_cache_manager.py`
+
+- `get_computed_blocks()` finds the longest prefix-cache hit and returns `num_new_computed_tokens`.
+- `allocate_slots()` appends newly computed blocks and updates request `num_computed_tokens` accounting.
+- The generic prefix-cache path is block/KV-oriented. It does not by itself carry DASC's recurrent checkpoint payload, retained-head mask, or compressed state layout.
+
+Therefore the first DASC canary needs an explicit plugin-owned mapping from cached prefix boundary to compressed GDN state checkpoint. Treating normal vLLM prefix-cache blocks as if they already contain DASC recurrent checkpoints would be an unsupported assumption.
+
 ## Current Fit Classification
 
 `fits-with-implementation`: the GDN state layout and weight-derived selector fit the target, but DASC's serving benefit needs a plugin-owned state checkpoint store/load path if vLLM-Ascend lacks one.
-
