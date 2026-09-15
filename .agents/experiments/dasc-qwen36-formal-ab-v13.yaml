@@ -92,6 +92,7 @@ protocol:
     - "both arms use max_model_len=44032 so all audited LongBench-v2 prompts plus 1024 output tokens fit without truncation"
     - "both arms use exactly 9663676416 cache bytes per rank, block size 128, max_num_seqs=32, and the same cache dtype"
     - "the static resource audit must pass, and live startup evidence must reproduce the actual block counts and page sizes rather than trusting the estimate"
+    - "the normalized raw evidence must pass verify_formal_decision.py; a hand-written aggregate is not an acceptance decision"
   acceptance_thresholds:
     - "three unique repetitions per arm"
     - "candidate cache-hit TTFT and derived input-token throughput improve in the same direction in every repetition"
@@ -125,6 +126,11 @@ results:
     spare_dense_blocks_after_longest_sequence: 101
     candidate_dense_workspace_upper_bound_bytes_per_rank: 603979776
     live_reconciliation: pending_v12_and_v13_startup_evidence
+  decision_verifier:
+    tool: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/verify_formal_decision.py
+    input_schema: dasc-formal-v13-normalized/v1
+    output_schema: dasc-formal-v13-decision/v1
+    status: ready_for_controller_integration_after_v12_gate
 artifacts:
   - /cache/cch/dasc-qwen36-ascend-20260915/formal-ab-v13
 decision_reason: ""

@@ -110,3 +110,11 @@ positive only if all three repetitions improve cache-hit TTFT and derived input
 throughput in the same direction. It can be accepted only if each dataset's
 median quality loss is no worse than the larger of one percentage point and
 the measured dense baseline run-to-run range.
+
+The controller must normalize the complete per-request performance rows,
+quality-detail rows, metric snapshots, and arm identities into
+`dasc-formal-v13-normalized/v1`. Run `verify_formal_decision.py` over that
+self-contained evidence. It recomputes completeness, cache-hit deltas,
+accuracies, paired per-run direction, the Dense run-to-run tolerance, and the
+one-switch identity. Its exit code is authoritative for the formal decision;
+a hand-written summary cannot override a rejection.
