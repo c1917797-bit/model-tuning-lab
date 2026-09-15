@@ -4,7 +4,7 @@ set -euo pipefail
 REPO=/opt/host/vnf/austinov/model-tuning-lab
 WS=.agents/workstreams/dasc-qwen36-ascend-piercing-20260915
 BASE=/cache/cch/dasc-qwen36-ascend-20260915
-V12=$BASE/physical-cache-order-fix-v12
+V12=${DASC_V12_ROOT:-$BASE/physical-cache-order-fix-v12}
 ROOT=$BASE/formal-ab-v13
 IMAGE=quay.io/ascend/vllm-ascend:v0.23.0
 MODEL_HOST=/cache/efim/Qwen3.6-27B

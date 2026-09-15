@@ -17,6 +17,12 @@ exist. Experiment v12 must first prove that the order-fixed physical cache:
 Any v12 failure is preserved under its immutable artifact root and classified
 before a superseding experiment is created.
 
+The first order-fixed v12 attempt exposed a PID/HBM teardown race: the external
+TP8 service temporarily removed its reported PIDs while 94% HBM remained, and
+the owned service then failed with only 1.91 GiB free per rank. Superseding
+controllers therefore require both an empty process table and HBM usage no
+greater than 5% on all physical NPU4-7 before and after lock acquisition.
+
 After the controller is terminal, run verify_physical_v12.py against the
 immutable root. It must independently recompute the raw activation cohort,
 exact responses, cache-hit delta, source commit, and every nested SHA256

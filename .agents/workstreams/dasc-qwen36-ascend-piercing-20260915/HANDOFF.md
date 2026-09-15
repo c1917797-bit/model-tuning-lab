@@ -135,6 +135,19 @@ At the last check, an unrelated TP4 service still owned NPU4-7, using about
 28,068 MiB per card, so the owned v12 container and immutable result root did
 not yet exist.
 
+That historical statement is now superseded. The external TP8 service briefly
+removed its device PIDs at 22:48 UTC while retaining about 94% HBM, so v12
+passed the PID-only idle check and then failed before service readiness with
+only 1.91/29.49 GiB free per rank. The immutable v12 root is retained and the
+independent verifier correctly rejects it because SUCCESS, evidence.jsonl, and
+physical-canary.json are absent. This is a resource handoff race, not DASC
+mechanism evidence.
+
+The successor controller must use a new immutable v12r1 root and container. It
+inherits the same mechanism code but now requires both no device PID and at
+most 5% reported HBM use on every physical NPU4-7 before and after taking the
+lock. Never reuse or overwrite the failed v12 root.
+
 When the operation becomes terminal, inspect its result and the immutable root
 `/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12`, then run
 `verify_physical_v12.py --root ...`. Only a zero controller exit, complete

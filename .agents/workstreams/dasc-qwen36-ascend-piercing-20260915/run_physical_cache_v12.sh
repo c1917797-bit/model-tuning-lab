@@ -3,14 +3,14 @@ set -euo pipefail
 
 REPO=/opt/host/vnf/austinov/model-tuning-lab
 WORKSTREAM=.agents/workstreams/dasc-qwen36-ascend-piercing-20260915
-EXPERIMENT=dasc-qwen36-physical-cache-v12
+EXPERIMENT=${DASC_EXPERIMENT:-dasc-qwen36-physical-cache-v12}
 ARTIFACT_BASE=/cache/cch/dasc-qwen36-ascend-20260915
-RESULT_ROOT=$ARTIFACT_BASE/physical-cache-order-fix-v12
+RESULT_ROOT=${DASC_RESULT_ROOT:-$ARTIFACT_BASE/physical-cache-order-fix-v12}
 CONTROLLER_ROOT=$ARTIFACT_BASE/controllers
 CONTROLLER_LOG=$CONTROLLER_ROOT/$EXPERIMENT.log
 LOCK_DIR=/cache/cch/.locks
 LOCK_FILE=$LOCK_DIR/npu4-7.lock
-CONTAINER=dasc_qwen36_physical_order_fix_v12_20260915
+CONTAINER=${DASC_CONTAINER:-dasc_qwen36_physical_order_fix_v12_20260915}
 IMAGE=quay.io/ascend/vllm-ascend:v0.23.0
 MODEL_HOST=/cache/efim/Qwen3.6-27B
 MODEL_CONTAINER=/models/Qwen3.6-27B
@@ -18,6 +18,7 @@ PLUGIN_HOST=$RESULT_ROOT/plugin-snapshot
 PORT=8030
 POLL_SECONDS=${DASC_POLL_SECONDS:-60}
 READY_POLLS=${DASC_READY_POLLS:-360}
+MAX_HBM_USAGE_PERCENT=${DASC_MAX_HBM_USAGE_PERCENT:-5}
 
 mkdir -p "$CONTROLLER_ROOT" "$LOCK_DIR"
 exec > >(tee -a "$CONTROLLER_LOG") 2>&1
@@ -43,12 +44,16 @@ card_info_snapshot() {
 }
 
 cards_are_idle() {
-    local device output
+    local device output usage hbm_usage
     for device in 4 5 6 7; do
         output=$(npu-smi info -t proc-mem -i "$device" -c 0 2>&1) || return 1
         if grep -q 'Process id:' <<<"$output"; then
             return 1
         fi
+        usage=$(npu-smi info -t usages -i "$device" -c 0 2>&1) || return 1
+        hbm_usage=$(awk -F: '/HBM Usage Rate\(%\)/ {gsub(/[^0-9]/, "", $2); print $2; exit}' <<<"$usage")
+        [[ $hbm_usage =~ ^[0-9]+$ ]] || return 1
+        (( hbm_usage <= MAX_HBM_USAGE_PERCENT )) || return 1
     done
     return 0
 }
@@ -100,7 +105,7 @@ if docker container inspect "$CONTAINER" >/dev/null 2>&1; then
     exit 2
 fi
 
-echo "$(timestamp) waiting for physical NPU4-7; NPU0-3 are outside scope"
+echo "$(timestamp) waiting for physical NPU4-7 process-idle and HBM<=${MAX_HBM_USAGE_PERCENT}%; NPU0-3 are outside scope"
 while true; do
     if cards_are_idle; then
         exec 9>"$LOCK_FILE"
