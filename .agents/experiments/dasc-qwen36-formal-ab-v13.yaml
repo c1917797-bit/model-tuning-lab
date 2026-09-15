@@ -127,6 +127,7 @@ results:
     candidate_dense_workspace_upper_bound_bytes_per_rank: 603979776
     live_reconciliation: pending_v12_and_v13_startup_evidence
   decision_verifier:
+    identity_extractor: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/extract_formal_identity.py
     metric_capture: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/capture_prometheus_metrics.py
     normalizer: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/build_formal_evidence.py
     tool: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/verify_formal_decision.py
