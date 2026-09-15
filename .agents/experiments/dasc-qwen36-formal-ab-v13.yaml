@@ -49,6 +49,10 @@ protocol:
     warmup_requests: 2
     ignore_eos: true
   quality:
+    adapter: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/dasc_quality_eval.py
+    base_evaluator: .agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py
+    base_evaluator_sha256: 9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0
+    shared_prefix_lines: 96
     datasets:
       longbenchv2:
         path: /cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json
@@ -58,7 +62,7 @@ protocol:
         path: /cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl
         sha256: 3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14
         requests: 1319
-    cache_hit_requirement: "Both arms use the same hashed neutral shared prefix; score only runs with positive prefix-cache hit deltas."
+    cache_hit_requirement: "Both arms use the same generated and hash-bound neutral shared prefix; invoke the adapter with --require-cache-hit and accept only positive prefix-cache hit deltas."
     concurrency: 32
     max_output_tokens: 1024
     temperature: 0

@@ -62,8 +62,12 @@ one JSONL row per sample, unique complete indexes, response hashes, dataset and
 prompt hashes, scorer identity, and summary-to-detail hashes. Recompute every
 summary independently.
 
-The shared-prefix quality adapter is not yet implemented. Do not run the
-existing no-hit HYPIC evaluator unchanged and call that DASC quality evidence.
+The thin shared-prefix adapter is implemented in dasc_quality_eval.py. It
+verifies the validated HYPIC evaluator SHA before importing its unchanged
+dataset loaders, prompts, and scorers; prepends a deterministic neutral prefix;
+captures cache metrics; and augments the summary with all relevant hashes. It
+must be invoked with --require-cache-hit. Its offline self-test is necessary but
+not sufficient: only a live positive hit delta makes a quality run admissible.
 
 ## Decision
 
