@@ -18,6 +18,7 @@ from .import_hook import PostImportFinder
 
 
 _TARGET_MODULE = "vllm.model_executor.models.qwen3_5"
+_ASCEND_PATCH_MODULE = "vllm_ascend.patch.worker.patch_qwen3_5"
 _ACTIVE_CAPTURE: ContextVar[dict[str, Any] | None] = ContextVar(
     "mst_tail_replay_group_capture", default=None
 )
@@ -614,17 +615,42 @@ def _apply_full_group_patch(module: ModuleType, config: TailReplayConfig) -> Non
         decoder_source_path=path,
         decoder_source_sha256=source_hash,
         replay_ratios=list(config.replay_ratios),
+        applied_after_ascend_patch=True,
+    )
+
+
+def _apply_after_ascend_patch(
+    ascend_patch_module: ModuleType, config: TailReplayConfig
+) -> None:
+    target_module = sys.modules.get(_TARGET_MODULE)
+    if target_module is None:
+        if config.require_runtime_hooks:
+            raise RuntimeError(
+                "Tail-Replay group oracle saw the Ascend Qwen3.5 patch "
+                "without the target model module"
+            )
+        return
+    _apply_full_group_patch(target_module, config)
+    emit_event(
+        "group_oracle_ascend_patch_order_verified",
+        distributed_rank=_distributed_rank(),
+        ascend_patch_module=ascend_patch_module.__name__,
+        target_module=_TARGET_MODULE,
     )
 
 
 def install_full_group_patch(config: TailReplayConfig) -> None:
-    module = sys.modules.get(_TARGET_MODULE)
-    if module is not None:
-        _apply_full_group_patch(module, config)
+    ascend_patch_module = sys.modules.get(_ASCEND_PATCH_MODULE)
+    if ascend_patch_module is not None:
+        _apply_after_ascend_patch(ascend_patch_module, config)
         return
 
     def callback(imported_module: ModuleType) -> None:
-        _apply_full_group_patch(imported_module, config)
+        _apply_after_ascend_patch(imported_module, config)
 
-    PostImportFinder(_TARGET_MODULE, callback).install()
-    emit_event("group_oracle_patch_deferred", target_module=_TARGET_MODULE)
+    PostImportFinder(_ASCEND_PATCH_MODULE, callback).install()
+    emit_event(
+        "group_oracle_patch_deferred",
+        target_module=_TARGET_MODULE,
+        wait_for_module=_ASCEND_PATCH_MODULE,
+    )

@@ -1,6 +1,6 @@
 id: exp-20260914-tail-replay-full-group-oracle
-stage: attempted
-status: tp2-staging-activation-gate-failed
+stage: canary-ready
+status: tp4-entry-diagnostic-ready-after-final-ascend-forward-hook
 objective: >-
   Validate Tail-Replay at the real Qwen3.6 GDN-group boundary by replaying
   each three-layer GDN group from the exact cached boundary hidden/residual
@@ -69,8 +69,8 @@ abort:
   - exact full-group control fails
   - live request output is mutated
 offline_checkpoint:
-  pinned_image_tests: 40/40 passed
-  focused_tests: 20/20 passed
+  pinned_image_tests: 42/42 passed
+  focused_tests: 21/21 passed
   strict_summary_tests: 2/2 passed
   early_plugin_registration: passed
   npu_run: >-
@@ -95,11 +95,23 @@ offline_checkpoint:
   entry_diagnostic:
     event: group_oracle_group_start_seen
     scope: emit before capture filtering at every four-layer group boundary
-    focused_pinned_image_tests: 20/20 passed
+    focused_pinned_image_tests: 21/21 passed
+    diagnosed_root_cause: >-
+      The plugin wrapped Qwen3_5DecoderLayer.forward when the base model module
+      loaded, but vllm_ascend.patch.worker.patch_qwen3_5 subsequently replaced
+      that method with AscendQwen3_5DecoderLayer.forward. The installed wrapper
+      was therefore absent from the effective worker hot path.
+    correction: >-
+      Defer installation until the Ascend Qwen3.5 patch module finishes, then
+      wrap the final assigned forward and emit an explicit patch-order event.
+    source_audit: >-
+      The final Ascend forward assignment occurs in the pinned image after the
+      Qwen3.5 class definition. A focused unit test proves the wrapper retains
+      the final Ascend function as __wrapped__.
   resource_release: physical NPU6-7 confirmed free after staging
 next_gate: >-
-  First prove that the installed wrapper enters the actual worker hot path by
-  observing group_oracle_group_start_seen on every worker. If absent, move the
-  hook to the real model-loop/base-class invocation seam. Only after activation
-  and exact-control coverage pass should the TP4 full-group oracle run, followed
-  by the isolated first-token reconstructed-cache comparison.
+  Run one 650-token TP4 entry-only diagnostic with capture disabled by a
+  threshold above the request length. Require patch-order verification and
+  group_oracle_group_start_seen on all four ranks. Only then run complete TP4
+  exact-controlled group replay, followed by the isolated first-token
+  reconstructed-cache comparison.

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import sys
+from types import ModuleType
 
 import pytest
 import torch
@@ -166,6 +168,46 @@ def test_group_wrapper_records_entry_before_capture_filter(monkeypatch):
             },
         )
     ]
+
+
+def test_group_patch_wraps_final_ascend_forward_after_patch_module(monkeypatch):
+    events = []
+    target_module = ModuleType(full_group_patch._TARGET_MODULE)
+    ascend_patch_module = ModuleType(full_group_patch._ASCEND_PATCH_MODULE)
+
+    class Decoder:
+        pass
+
+    def final_ascend_forward(
+        self, hidden_states, residual, *args, **kwargs
+    ):
+        return hidden_states, residual
+
+    Decoder.forward = final_ascend_forward
+    target_module.Qwen3_5DecoderLayer = Decoder
+    monkeypatch.setitem(sys.modules, full_group_patch._TARGET_MODULE, target_module)
+    monkeypatch.setitem(
+        sys.modules, full_group_patch._ASCEND_PATCH_MODULE, ascend_patch_module
+    )
+    monkeypatch.setattr(
+        full_group_patch,
+        "emit_event",
+        lambda event, **fields: events.append((event, fields)),
+    )
+
+    full_group_patch.install_full_group_patch(_config())
+
+    assert Decoder.forward._mst_tail_replay_group_wrapper is True
+    assert Decoder.forward.__wrapped__ is final_ascend_forward
+    assert [event for event, _ in events] == [
+        "group_oracle_patch_installed",
+        "group_oracle_ascend_patch_order_verified",
+    ]
+    assert events[0][1]["applied_after_ascend_patch"] is True
+    assert (
+        events[1][1]["ascend_patch_module"]
+        == full_group_patch._ASCEND_PATCH_MODULE
+    )
 
 
 @pytest.mark.parametrize(

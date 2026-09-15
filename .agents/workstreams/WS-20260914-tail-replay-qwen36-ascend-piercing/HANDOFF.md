@@ -1,6 +1,6 @@
 # Tail-Replay Qwen3.6 Ascend piercing handoff
 
-Updated: 2026-09-14
+Updated: 2026-09-15
 
 ## Current state
 
@@ -32,9 +32,15 @@ Updated: 2026-09-14
   results. The strict summary rejected it with all 32 expected rank/group keys
   missing. This is a hot-path activation failure, not a Tail-Replay numerical,
   performance, quality, or rejection result.
-- The pinned-image offline suite passes 40/40 tests. The focused suite now
-  passes 20/20 after adding a pre-filter group-entry diagnostic event. Early
-  plugin registration and the two strict-summary coverage/failure tests pass.
+- Before the patch-order correction, the pinned-image suite passed 40/40 and
+  the focused suite passed 20/20 after adding the pre-filter group-entry event.
+- The v2 activation failure has now been source-attributed: the plugin wrapped
+  `Qwen3_5DecoderLayer.forward` before
+  `vllm_ascend.patch.worker.patch_qwen3_5` replaced it with the final Ascend
+  forward. The corrected plugin waits for that Ascend patch module, then wraps
+  the final function and emits `group_oracle_ascend_patch_order_verified`.
+  The pinned-image suite passes 42/42 and the focused Tail-Replay suite passes
+  21/21 after this correction. The corrected bytes have not yet run on NPU.
 - TP2 staging artifacts are under
   /cache/cch/tail-replay-qwen36-ascend-tp2-staging-20260914/full-group-oracle/short-v2.
   request/response/runtime/summary SHA256 values are respectively
@@ -55,10 +61,9 @@ Updated: 2026-09-14
 4. Recheck all NPU status but claim only physical NPU4-7.
 5. Read FULL_GROUP_ORACLE_DESIGN.md, the TP2 short-v2 strict summary, and the
    latest full-group implementation.
-6. Run a fresh entry-diagnostic staging request only after rechecking the
-   selected physical devices. Require group_oracle_group_start_seen from every
-   worker. If it is absent, patch the actual model loop or inherited base-class
-   invocation seam instead of interpreting algorithm accuracy.
+6. Run a fresh 650-token TP4 entry-only diagnostic after rechecking physical
+   NPU4-7. Set the minimum capture threshold above 650 so only patch-order and
+   `group_oracle_group_start_seen` evidence is emitted. Require all four ranks.
 7. Run one 650-token TP4 group-oracle request only when all physical NPU4-7
    are free and the entry diagnostic has proved activation. Preserve exact
    controls and do not retry an NPU fault blindly.

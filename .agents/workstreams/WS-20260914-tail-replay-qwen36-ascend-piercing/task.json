@@ -1,12 +1,12 @@
 {
   "schema": "model-tuning-task/v1",
   "task_id": "WS-20260914-tail-replay-qwen36-ascend-piercing",
-  "status": "full-group-tp2-staging-activation-gate-failed",
+  "status": "full-group-tp4-entry-diagnostic-ready",
   "objective": "Pierce Tail-Replay on Qwen3.6-27B Ascend TP4 and determine whether 5% or 10% suffix replay can reconstruct GDN state accurately enough to justify a cache-hit TTFT implementation.",
   "long_term_alignment": "Paper-to-Ascend inference optimization with real NPU correctness, performance, quality, portability, and retained success/failure evidence.",
   "scientific_scope": "Architecture-matched direction reproduction on Qwen3.6-27B; first prove the recurrence mechanism, then group replay, then prefix-cache integration.",
-  "current_stage": "prove-full-group-wrapper-hot-path-entry",
-  "next_action": "Run the pre-filter group-entry diagnostic on a fresh staging request. If no worker emits group_oracle_group_start_seen, patch the actual model-loop or inherited base-class invocation seam. Only then run complete exact-controlled group replay, followed by the isolated first-token reconstructed-cache comparison.",
+  "current_stage": "verify-final-ascend-forward-hook-on-tp4",
+  "next_action": "Run one 650-token TP4 entry-only diagnostic with the capture threshold deliberately set above 650. Require group_oracle_group_start_seen from every rank after the final vLLM-Ascend Qwen3.5 patch. If it passes, run the complete exact-controlled TP4 group replay, followed by the isolated first-token reconstructed-cache comparison.",
   "resource_state": {
     "intended_lane": "host NPU4-7, container-visible 0-3, TP4",
     "protected_lane": "host NPU0-3; do not use or alter",
@@ -14,7 +14,7 @@
     "rule": "recheck npu-smi, containers, mappings, processes, ports and output path immediately before launch"
   },
   "results": {
-    "offline_tests": "40/40 full pinned-image suite at the prior checkpoint; 20/20 focused Tail-Replay suite after the group-entry diagnostic change",
+    "offline_tests": "42/42 full pinned-image suite and 21/21 focused Tail-Replay suite after fixing final Ascend forward patch order",
     "npu_recurrence_oracle": {
       "status": "complete",
       "prompt_tokens": 650,
@@ -41,7 +41,7 @@
       "v1": "KV-cache capacity/startup failure; algorithm not executed",
       "v2": "healthy 650-token request completed, but zero group attempts/results and all 32 expected rank/group keys missing",
       "evidence": "/cache/cch/tail-replay-qwen36-ascend-tp2-staging-20260914/full-group-oracle/short-v2/summary.json",
-      "interpretation": "hot-path activation failure, not a numerical, performance, or quality result"
+      "interpretation": "hot-path activation failure, not a numerical, performance, or quality result; source audit proved the plugin wrapper was overwritten later by vllm_ascend.patch.worker.patch_qwen3_5"
     },
     "group_replay_first_token": null,
     "performance": null,
