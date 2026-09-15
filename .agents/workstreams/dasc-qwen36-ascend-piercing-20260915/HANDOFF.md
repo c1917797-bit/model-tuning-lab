@@ -119,3 +119,55 @@ first prove service readiness, physical bytes, real prefix reuse, and retained
 state correctness. At the latest orientation, NPU4-7 were occupied by the
 separate `vllm_23_au` DeltaLog/fused-GDN piercing process, so v3 was not
 started and that workload was not interrupted.
+
+## 2026-09-16 authoritative continuation
+
+The earlier v3 wording above is historical. Attempts through v11 narrowed the
+remaining integration issue to cache-group ordering. Commit `48594bf` fixed
+that ordering and the current immutable mechanism attempt is v12.
+
+The only v12 controller is remote exec operation
+`exec-0000000000001235`. It is live and waits only on physical NPU4-7. Do not
+restart it after a poll timeout and do not inspect, stop, or schedule on
+NPU0-3. Its log is
+`/cache/cch/dasc-qwen36-ascend-20260915/controllers/dasc-qwen36-physical-cache-v12.log`.
+At the last check, an unrelated TP4 service still owned NPU4-7, using about
+28,068 MiB per card, so the owned v12 container and immutable result root did
+not yet exist.
+
+When the operation becomes terminal, inspect its result and the immutable root
+`/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12`, then run
+`verify_physical_v12.py --root ...`. Only a zero controller exit, complete
+artifact manifests, exact service responses, positive cache-hit delta, compact
+bytes, and one aligned four-worker cohort pass the mechanism gate.
+
+The successor formal experiment is specified in
+`.agents/experiments/dasc-qwen36-formal-ab-v13.yaml`. Its resumable controller
+is `run_formal_ab_v13.sh`; `--self-test` passed without starting an NPU
+workload. It refuses to run before v12 verification succeeds and uses the same
+NPU4-7 lock. Dense and candidate arms are TP4/HCCL and differ only by the DASC
+plugin treatment. Each arm runs three fixed shared-prefix performance rounds
+and three LongBench-v2 plus GSM8K quality rounds.
+
+Formal evidence is deliberately not accepted from a hand-written summary:
+
+- `extract_formal_identity.py` derives arm identity from Docker inspect and
+  rejects protected-device mappings or treatment drift.
+- `capture_prometheus_metrics.py` captures the exact prefix-cache counters.
+- `build_formal_evidence.py` reads a fixed raw-artifact layout.
+- `verify_formal_decision.py` recomputes completeness, cache-hit deltas,
+  paired performance direction, quality tolerance, and the four-worker
+  candidate activation gate.
+
+Two preparation failures are retained as lessons. The first CPU-only full
+test omitted the read-only model-config mount and produced two
+`FileNotFoundError` failures; adding the mount yielded a clean run. The first
+activation-gate patch displaced `verify_identity()`'s return block; tests
+caught the `None` result before runtime and commit `5fc08a5` corrected it. A
+later review also found that prefix matching would misclassify
+`/dev/davinci_manager` as a compute card; commit `a7c2173` changed this to an
+exact numeric-device match and added realistic auxiliary devices to the test.
+
+The last full CPU-only workstream run passed 30 tests with 14 upstream Torch
+deprecation warnings. The current branch is intentionally unpushed; pushing
+requires explicit user authorization for the exact branch and payload.
