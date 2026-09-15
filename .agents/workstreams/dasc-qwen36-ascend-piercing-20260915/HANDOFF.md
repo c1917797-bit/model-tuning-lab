@@ -3,8 +3,14 @@
 ## Current Status
 
 Workstream opened on 2026-09-15 for arXiv:2608.30386 DASC. No NPU experiment
-has been launched for this paper yet. Paper ingestion, architecture fit, and the
-first state-lifecycle source map are complete.
+has been launched for this paper yet. Paper ingestion, architecture fit, the
+state-lifecycle source map, and a first plugin-owned DASC-NR numerical canary
+implementation are complete.
+
+The canary lives under `projects/dasc_vllm_ascend`. It is disabled by default,
+version/source guarded, and only changes temporal-state copying on a genuine
+new/resumed prefix restore. It keeps dense allocation and therefore is not yet
+a cache-capacity or performance implementation.
 
 ## Mainline Goal
 
@@ -22,11 +28,12 @@ The final runnable implementation must be a plugin-owned monkeypatch that runs o
 4. Source-map vLLM-Ascend prefix-cache/state-checkpoint store/load behavior.
    This is complete: `MambaManager` and `preprocess_mamba` preserve and copy
    aligned convolution and temporal checkpoints by block ID.
-5. Prove a plugin-visible seam for compact temporal-cache storage plus dense
-   active-state workspace. Do not mistake zero-filled dense storage for a
-   capacity optimization.
-6. Implement a DASC-NR numerical canary, then a physical-capacity canary, before
-   any service benchmark.
+5. Review, package, and run the implemented DASC-NR numerical canary with a
+   disabled control on physical NPU4-7.
+6. After all-rank activation and correctness pass, implement compact temporal
+   pages plus dense active-state workspace. Do not mistake the current
+   zero-filled dense storage for a capacity optimization.
+7. Prove real cache-block admission growth before any service performance claim.
 
 ## HYPIC Lessons Applied
 
