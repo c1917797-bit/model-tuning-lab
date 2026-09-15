@@ -93,6 +93,10 @@ def request_record(base_url: str, model: str, prompt: str, max_tokens: int = 16)
     }
 
 
+def exact_stopped(record: dict, expected: str) -> bool:
+    return record.get("content") == expected and record.get("finish_reason") == "stop"
+
+
 def load_activation(path: Path) -> tuple[list[dict], list[str]]:
     rows: list[dict] = []
     errors: list[str] = []
@@ -132,13 +136,22 @@ def activation_summary(rows: list[dict], parse_errors: list[str]) -> dict:
         isinstance(row.get("num_blocks"), int) and row["num_blocks"] > 0
         for row in physical
     )
+    physical_pids = pids("physical_cache_bound")
+    geometry_pids = pids("tp_geometry_aligned")
+    dispatch_pids = pids("worker_dispatch_verified")
+    worker_cohort_aligned = (
+        len(physical_pids) == 4
+        and physical_pids == geometry_pids
+        and physical_pids == dispatch_pids
+    )
     summary = {
         "row_count": len(rows),
         "parse_errors": parse_errors,
         "event_counts": dict(sorted(counts.items(), key=lambda pair: str(pair[0]))),
-        "physical_cache_pids": pids("physical_cache_bound"),
-        "tp_geometry_pids": pids("tp_geometry_aligned"),
-        "worker_dispatch_pids": pids("worker_dispatch_verified"),
+        "physical_cache_pids": physical_pids,
+        "tp_geometry_pids": geometry_pids,
+        "worker_dispatch_pids": dispatch_pids,
+        "worker_cohort_aligned": worker_cohort_aligned,
         "compact_lt_dense": compact_lt_dense,
         "positive_blocks": positive_blocks,
         "aggregate_compact_page_bytes": sum(
@@ -150,9 +163,7 @@ def activation_summary(rows: list[dict], parse_errors: list[str]) -> dict:
     }
     summary["ok"] = (
         not parse_errors
-        and len(summary["physical_cache_pids"]) >= 4
-        and len(summary["tp_geometry_pids"]) >= 4
-        and len(summary["worker_dispatch_pids"]) >= 4
+        and worker_cohort_aligned
         and counts["heterogeneous_cache_grouped"] >= 1
         and compact_lt_dense
         and positive_blocks
@@ -209,16 +220,12 @@ def main() -> int:
             result["metrics_after"], "prefix_cache_hits_total"
         ) - metric_sum(result["metrics_before"], "prefix_cache_hits_total")
         result["gates"] = {
-            "short_exact_ok": result["short"]["content"].strip() == "OK",
+            "short_exact_ok": exact_stopped(result["short"], "OK"),
             "identical_replays": len(set(contents)) == 1,
             "replay_exact_verified": all(
-                isinstance(content, str) and content.strip() == "VERIFIED"
-                for content in contents
+                exact_stopped(run, "VERIFIED") for run in result["runs"]
             ),
-            "variant_exact_ascend": (
-                isinstance(result["variant"]["content"], str)
-                and result["variant"]["content"].strip() == "ASCEND"
-            ),
+            "variant_exact_ascend": exact_stopped(result["variant"], "ASCEND"),
             "reasoning_disabled": no_reasoning,
             "prefix_cache_hit_delta": hit_delta,
             "prefix_cache_hit_observed": hit_delta > 0,

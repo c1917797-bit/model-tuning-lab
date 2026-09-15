@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: dasc-qwen36-physical-cache-v12
-status: planned
+status: running
 decision: pending
 hypothesis: "Preserving original hybrid cache-group order lets the plugin-owned heterogeneous DASC cache complete service startup and prefix-cache reuse on Ascend."
 objective: "Validate physical compact cache reachability and semantic safety before any formal performance claim."
@@ -33,12 +33,12 @@ protocol:
   correctness_guardrails:
     - "all four TP workers emit physical-cache activation evidence"
     - "every bound compact page is smaller than its dense page and has positive admitted blocks"
-    - "one exact short response succeeds"
+    - "one byte-exact short response succeeds with finish_reason=stop"
     - "three deterministic shared-prefix replays produce identical output with reasoning disabled"
     - "prefix-cache hit counters increase"
   acceptance_thresholds:
-    - "short response is exactly OK"
-    - "physical_cache_bound, tp_geometry_aligned, and worker_dispatch_verified each cover at least four worker pids"
+    - "short response content is byte-exactly OK with finish_reason=stop"
+    - "physical_cache_bound, tp_geometry_aligned, and worker_dispatch_verified cover the same exact set of four worker pids"
     - "heterogeneous_cache_grouped is present"
   regression_thresholds:
     - "any semantic mismatch or missing hot-path evidence rejects v12"

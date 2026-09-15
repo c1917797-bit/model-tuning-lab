@@ -6,11 +6,11 @@ Do not start the formal A/B merely because unit tests pass or compact tensors
 exist. Experiment v12 must first prove that the order-fixed physical cache:
 
 1. starts on physical NPU4-7 as TP4;
-2. emits geometry, worker-dispatch, and compact-page evidence from all four
-   workers;
+2. emits geometry, worker-dispatch, and compact-page evidence from the same
+   exact set of four workers;
 3. binds pages smaller than the dense representation with positive admitted
    blocks;
-4. completes an exact short response;
+4. completes a byte-exact short response with a normal stop finish reason;
 5. completes three deterministic shared-prefix reuses with a positive cache-hit
    counter delta.
 
