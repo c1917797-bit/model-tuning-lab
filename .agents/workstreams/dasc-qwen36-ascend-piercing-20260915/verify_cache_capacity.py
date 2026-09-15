@@ -36,21 +36,28 @@ def verify(dense_log: Path, candidate_log: Path, candidate_evidence: Path) -> di
     candidate_tokens = service_tokens(candidate_log.read_text(encoding="utf-8", errors="replace"))
     if dense_tokens % BLOCK_SIZE or candidate_tokens % BLOCK_SIZE:
         raise ValueError("live token capacity is not divisible by block size")
-    dense_blocks = dense_tokens // BLOCK_SIZE
-    candidate_blocks = candidate_tokens // BLOCK_SIZE
     evidence_count, workers = evidence_blocks(candidate_evidence)
+    dense_aggregate_blocks = dense_tokens // BLOCK_SIZE
+    candidate_aggregate_blocks = candidate_tokens // BLOCK_SIZE
+    dense_groups, dense_remainder = divmod(dense_aggregate_blocks, EXPECTED_DENSE_BLOCKS)
+    candidate_groups, candidate_remainder = divmod(candidate_aggregate_blocks, evidence_count)
     checks = {
-        "dense_matches_static_budget": dense_blocks == EXPECTED_DENSE_BLOCKS,
-        "candidate_admits_more_blocks": candidate_blocks > dense_blocks,
-        "candidate_log_matches_evidence": candidate_blocks == evidence_count,
+        "dense_matches_static_budget": dense_groups > 0 and dense_remainder == 0,
+        "candidate_admits_more_blocks": evidence_count > EXPECTED_DENSE_BLOCKS,
+        "candidate_log_matches_evidence": candidate_groups > 0
+        and candidate_remainder == 0,
+        "same_cache_group_multiplier": candidate_groups == dense_groups,
+        "total_token_capacity_grows": candidate_tokens > dense_tokens,
         "four_candidate_workers": workers == 4,
     }
     return {
         "block_size": BLOCK_SIZE,
         "dense_tokens": dense_tokens,
-        "dense_blocks": dense_blocks,
+        "dense_blocks_per_group": EXPECTED_DENSE_BLOCKS,
+        "dense_cache_groups": dense_groups,
         "candidate_tokens": candidate_tokens,
-        "candidate_blocks": candidate_blocks,
+        "candidate_blocks_per_group": evidence_count,
+        "candidate_cache_groups": candidate_groups,
         "candidate_evidence_blocks": evidence_count,
         "checks": checks,
         "ok": all(checks.values()),

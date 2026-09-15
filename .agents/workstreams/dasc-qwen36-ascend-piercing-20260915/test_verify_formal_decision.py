@@ -129,6 +129,8 @@ def payload(candidate_quality_drop=0):
                 "dense_matches_static_budget": True,
                 "candidate_admits_more_blocks": True,
                 "candidate_log_matches_evidence": True,
+                "same_cache_group_multiplier": True,
+                "total_token_capacity_grows": True,
                 "four_candidate_workers": True,
             },
         },
