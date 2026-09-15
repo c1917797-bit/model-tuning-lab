@@ -72,7 +72,11 @@ def main() -> int:
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     result = verify(args.dense_log, args.candidate_log, args.candidate_evidence)
-    args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    temporary = args.output.with_suffix(args.output.suffix + ".tmp")
+    temporary.write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    temporary.replace(args.output)
     return 0 if result["ok"] else 3
 
 

@@ -17,6 +17,7 @@ IDENTITY=$REPO/$WS/extract_formal_identity.py
 NORMALIZER=$REPO/$WS/build_formal_evidence.py
 DECIDER=$REPO/$WS/verify_formal_decision.py
 CAPACITY=$REPO/$WS/verify_cache_capacity.py
+PERF_RESUME=$REPO/$WS/verify_performance_triplet.py
 VERIFY_V12=$REPO/$WS/verify_physical_v12.py
 PORT=8031
 LOCK=/cache/cch/.locks/npu4-7.lock
@@ -39,7 +40,7 @@ static_checks() {
   command -v docker >/dev/null; command -v npu-smi >/dev/null; command -v flock >/dev/null
   test -r "$MODEL_HOST/config.json"; test -r "$REPO/projects/dasc_vllm_ascend/pyproject.toml"
   test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"
-  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$VERIFY_V12"
+  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$PERF_RESUME"; test -r "$VERIFY_V12"
   printf '%s  %s\n' cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822 "$BENCH" | sha256sum -c -
   docker image inspect "$IMAGE" >/dev/null
   local i; for i in 4 5 6 7; do test -c "/dev/davinci$i"; done
@@ -121,7 +122,7 @@ run_performance() {
   local arm=$1 run out before after
   for run in run1 run2 run3; do
     out=$ROOT/$arm/performance.$run.json; before=$ROOT/$arm/performance.$run.metrics.before.json; after=$ROOT/$arm/performance.$run.metrics.after.json
-    if [[ -s "$out" && -s "$before" && -s "$after" ]]; then continue; fi
+    if python3 "$PERF_RESUME" --report "$out" --metrics-before "$before" --metrics-after "$after" >/dev/null 2>&1; then continue; fi
     archive "$out" "$before" "$after"; capture "$before"
     python3 "$BENCH" --base-url "http://127.0.0.1:$PORT" --model qwen36-dasc-formal-v13 --input-tokens 32768 --prefix-tokens 16384 --output-tokens 1024 \
       --requests 40 --concurrency 16 --warmup-requests 2 --timeout 2400 --json-output "$out" 2>&1 | tee "$ROOT/$arm/performance.$run.log"
