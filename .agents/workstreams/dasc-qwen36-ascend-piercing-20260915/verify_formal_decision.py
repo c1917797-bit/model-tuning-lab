@@ -52,6 +52,19 @@ def verify_identity(payload: dict) -> dict:
     candidate_fixed = {
         key: value for key, value in candidate.items() if key not in ignored
     }
+    return {
+        "fixed_fields_equal": dense_fixed == candidate_fixed,
+        "required_runtime_identity": all(
+            dense.get(key) == value and candidate.get(key) == value
+            for key, value in FIXED_IDENTITY.items()
+        ),
+        "dense_treatment": dense.get("dasc_plugin") is False
+        and dense.get("mode") is None
+        and dense.get("w_max") is None,
+        "candidate_treatment": candidate.get("dasc_plugin") is True
+        and candidate.get("mode") == "physical-cache-eager"
+        and candidate.get("w_max") == 64,
+    }
 
 
 def verify_candidate_activation(payload: dict) -> dict:
@@ -68,21 +81,6 @@ def verify_candidate_activation(payload: dict) -> dict:
         "heterogeneous_cache_grouped": activation.get("heterogeneous_cache_grouped")
         is True,
     }
-    return {
-        "fixed_fields_equal": dense_fixed == candidate_fixed,
-        "required_runtime_identity": all(
-            dense.get(key) == value and candidate.get(key) == value
-            for key, value in FIXED_IDENTITY.items()
-        ),
-        "dense_treatment": dense.get("dasc_plugin") is False
-        and dense.get("mode") is None
-        and dense.get("w_max") is None,
-        "candidate_treatment": candidate.get("dasc_plugin") is True
-        and candidate.get("mode") == "physical-cache-eager"
-        and candidate.get("w_max") == 64,
-    }
-
-
 def verify_performance_run(run: dict) -> dict:
     report = run["report"]
     config = report["config"]
