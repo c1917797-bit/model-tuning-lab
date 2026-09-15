@@ -48,3 +48,21 @@ copy and invalidation, and expands active blocks into fixed dense workspaces
 around the native Ascend core. This mode is eager-only until graph capture has
 its own pointer and replay gate. It has not yet passed NPU or end-to-end
 validation and must not be used for a performance claim.
+
+## Physical-cache integration status (2026-09-15)
+
+A same-configuration, plugin-disabled dense control completed all five
+`FULL_DECODE_ONLY` graph captures and returned the exact short response
+`OK`. Earlier physical-cache runs instead reached an Ascend FIAS no-RoPE TND
+path with unsupported head dimension 256. The difference was localized to the
+plugin's synthetic hybrid group reordering all attention layers ahead of
+Mamba layers. Ascend dispatches group-wide slot-mapping behavior from the first
+inner spec, so the aggregate must preserve model order. Commit `48594bf`
+restores that invariant and the full 42-test suite passes.
+
+The first NPU rerun of those exact bytes is inconclusive: an unrelated
+container claimed physical NPU4-6 during worker initialization, leaving
+21.43/29.49 GiB free and tripping vLLM's startup memory gate. This is not
+evidence for or against DASC correctness. A clean NPU4-7 rerun, short-request
+gate, multi-step state validation, and performance/accuracy measurements remain
+required.
