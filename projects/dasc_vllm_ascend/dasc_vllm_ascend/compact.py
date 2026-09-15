@@ -220,6 +220,109 @@ class CompactCheckpointArena:
         ids = block_ids.to(device=self.storage.device, dtype=torch.long)
         self._valid.index_fill_(0, ids, False)
 
+    def copy_many(self, source_block_ids: Any, destination_block_ids: Any) -> None:
+        """Copy compact checkpoints between scheduler blocks.
+
+        This is the physical-cache equivalent of vLLM's prefix-state block
+        copy.  Source validity is propagated rather than assumed.
+        """
+        if source_block_ids.ndim != 1 or destination_block_ids.ndim != 1:
+            raise ValueError("source and destination block ids must be vectors")
+        if source_block_ids.numel() != destination_block_ids.numel():
+            raise ValueError("source and destination block counts must match")
+        if source_block_ids.numel() == 0:
+            return
+        source = source_block_ids.to(device=self.storage.device, dtype=torch.long)
+        destination = destination_block_ids.to(
+            device=self.storage.device, dtype=torch.long
+        )
+        if (
+            int(source.min().item()) < 0
+            or int(source.max().item()) >= self.num_blocks
+            or int(destination.min().item()) < 0
+            or int(destination.max().item()) >= self.num_blocks
+        ):
+            raise IndexError("block ids outside compact arena")
+        if destination.unique().numel() != destination.numel():
+            raise ValueError("destination block ids must be unique")
+        payload = self.storage.index_select(0, source)
+        validity = self._valid.index_select(0, source)
+        self.storage.index_copy_(0, destination, payload)
+        self._valid.index_copy_(0, destination, validity)
+
+
+class FullCheckpointArena:
+    """Fixed-address persistent storage for non-pruned companion state."""
+
+    def __init__(
+        self,
+        *,
+        num_blocks: int,
+        state_shape: tuple[int, ...],
+        dtype: Any,
+        device: Any,
+    ) -> None:
+        if num_blocks <= 0 or not state_shape or any(size <= 0 for size in state_shape):
+            raise ValueError("num_blocks and state_shape must be positive")
+        self.num_blocks = num_blocks
+        self.state_shape = state_shape
+        self.storage = torch.empty(
+            (num_blocks, *state_shape), dtype=dtype, device=device
+        )
+        self._valid = torch.zeros(num_blocks, dtype=torch.bool, device=device)
+        self._storage_ptr = self.storage.data_ptr()
+
+    @property
+    def physical_bytes(self) -> int:
+        return self.storage.numel() * self.storage.element_size()
+
+    def _ids(self, block_ids: Any) -> Any:
+        if block_ids.ndim != 1:
+            raise ValueError("block_ids must be one-dimensional")
+        ids = block_ids.to(device=self.storage.device, dtype=torch.long)
+        if ids.numel() and (
+            int(ids.min().item()) < 0 or int(ids.max().item()) >= self.num_blocks
+        ):
+            raise IndexError("block_ids outside full arena")
+        if self.storage.data_ptr() != self._storage_ptr:
+            raise RuntimeError("full checkpoint storage pointer changed")
+        return ids
+
+    def checkpoint_many(self, block_ids: Any, states: Any) -> None:
+        ids = self._ids(block_ids)
+        if tuple(states.shape) != (ids.numel(), *self.state_shape):
+            raise ValueError("states shape does not match full arena")
+        if ids.unique().numel() != ids.numel():
+            raise ValueError("block_ids must be unique for checkpoint_many")
+        self.storage.index_copy_(0, ids, states)
+        self._valid.index_fill_(0, ids, True)
+
+    def restore_many(self, block_ids: Any, workspaces: Any) -> Any:
+        ids = self._ids(block_ids)
+        if tuple(workspaces.shape) != (ids.numel(), *self.state_shape):
+            raise ValueError("workspaces shape does not match full arena")
+        if ids.numel() == 0:
+            return workspaces
+        payload = self.storage.index_select(0, ids)
+        valid = self._valid.index_select(0, ids)
+        broadcast = valid.view(valid.shape[0], *([1] * len(self.state_shape)))
+        workspaces.copy_(torch.where(broadcast, payload, torch.zeros_like(payload)))
+        return workspaces
+
+    def copy_many(self, source_block_ids: Any, destination_block_ids: Any) -> None:
+        source = self._ids(source_block_ids)
+        destination = self._ids(destination_block_ids)
+        if source.numel() != destination.numel():
+            raise ValueError("source and destination block counts must match")
+        if destination.unique().numel() != destination.numel():
+            raise ValueError("destination block ids must be unique")
+        self.storage.index_copy_(0, destination, self.storage.index_select(0, source))
+        self._valid.index_copy_(0, destination, self._valid.index_select(0, source))
+
+    def invalidate_many(self, block_ids: Any) -> None:
+        ids = self._ids(block_ids)
+        self._valid.index_fill_(0, ids, False)
+
 
 @dataclass(frozen=True)
 class ActiveSlotPlan:

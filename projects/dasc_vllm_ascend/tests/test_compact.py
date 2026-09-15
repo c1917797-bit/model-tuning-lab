@@ -4,6 +4,7 @@ import torch
 from dasc_vllm_ascend.compact import (
     CompactCheckpointLayout,
     CompactCheckpointArena,
+    FullCheckpointArena,
     build_active_slot_plan,
     pack_retained_heads,
     unpack_retained_heads,
@@ -82,6 +83,37 @@ def test_checkpoint_arena_vectorized_lifecycle():
         torch.tensor([2, 6], dtype=torch.int32), torch.full((2, 4, 2), 9.0)
     )
     assert torch.count_nonzero(invalid).item() == 0
+
+
+def test_compact_arena_prefix_copy_propagates_payload_and_validity():
+    retained = torch.tensor([1, 3], dtype=torch.long)
+    arena = CompactCheckpointArena(
+        num_blocks=6, dense_shape=(4, 2), head_axis=0,
+        retained_indices=retained, dtype=torch.float32, device="cpu",
+    )
+    dense = torch.arange(8, dtype=torch.float32).view(1, 4, 2)
+    arena.checkpoint_many(torch.tensor([1]), dense)
+    arena.copy_many(torch.tensor([1, 4]), torch.tensor([3, 5]))
+    restored = arena.restore_many(
+        torch.tensor([3, 5]), torch.full((2, 4, 2), -1.0)
+    )
+    assert torch.equal(restored[0].index_select(0, retained), dense[0].index_select(0, retained))
+    assert torch.count_nonzero(restored[1]).item() == 0
+
+
+def test_full_checkpoint_arena_lifecycle_and_copy():
+    arena = FullCheckpointArena(
+        num_blocks=5, state_shape=(2, 3), dtype=torch.float32, device="cpu"
+    )
+    payload = torch.arange(6, dtype=torch.float32).view(1, 2, 3)
+    arena.checkpoint_many(torch.tensor([1]), payload)
+    arena.copy_many(torch.tensor([1]), torch.tensor([4]))
+    restored = arena.restore_many(torch.tensor([4]), torch.empty_like(payload))
+    assert torch.equal(restored, payload)
+    arena.invalidate_many(torch.tensor([4]))
+    assert torch.count_nonzero(
+        arena.restore_many(torch.tensor([4]), torch.full_like(payload, 9))
+    ).item() == 0
 
 
 def test_active_slot_plan_is_contiguous_and_preserves_padding():
