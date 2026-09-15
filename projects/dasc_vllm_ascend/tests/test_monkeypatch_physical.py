@@ -254,3 +254,97 @@ def test_heterogeneous_cascade_guard_disables_only_uniform_group(tmp_path):
     assert runner._compute_cascade_attn_prefix_lens(None, None, None) == [
         ["original"]
     ]
+
+
+def test_heterogeneous_mamba_lifecycle_filters_attention_layers(tmp_path):
+    from vllm.v1.kv_cache_interface import (
+        FullAttentionSpec,
+        KVCacheGroupSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    attention = FullAttentionSpec(
+        block_size=1536,
+        num_kv_heads=1,
+        head_size=128,
+        dtype=torch.bfloat16,
+    )
+    mamba6 = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (6, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    mamba12 = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (12, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    aggregate = UniformTypeKVCacheSpecs(
+        block_size=1536,
+        kv_cache_specs={
+            "attn": attention,
+            "mamba6": mamba6,
+            "mamba12": mamba12,
+        },
+    )
+    cache_config = SimpleNamespace(
+        kv_cache_groups=[
+            KVCacheGroupSpec(["attn", "mamba6", "mamba12"], aggregate)
+        ]
+    )
+    observed = {}
+
+    class FakeBuffers:
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
+
+        @classmethod
+        def create(cls, *_args, **_kwargs):
+            raise AssertionError("aggregate must use DASC creation")
+
+    def original_collect(_bufs, proxied, *_args):
+        observed["layer_names"] = proxied.kv_cache_groups[0].layer_names
+
+    namespace = SimpleNamespace(
+        get_mamba_groups=lambda *_: (_ for _ in ()).throw(
+            AssertionError("aggregate must use DASC group discovery")
+        ),
+        MambaCopyBuffers=FakeBuffers,
+        collect_mamba_copy_meta=original_collect,
+    )
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_heterogeneous_mamba_lifecycle_patch(config, namespace)
+
+    allocations = []
+
+    def make_buffer(count, dtype):
+        allocations.append((count, dtype))
+        return SimpleNamespace(count=count, dtype=dtype)
+
+    buffers = FakeBuffers.create(3, cache_config, (object(), object()), make_buffer)
+    assert buffers.mamba_group_ids == [0]
+    assert buffers.mamba_spec is mamba6
+    assert allocations == [
+        (12, torch.int64),
+        (12, torch.int64),
+        (12, torch.int32),
+    ]
+
+    namespace.collect_mamba_copy_meta(
+        buffers,
+        cache_config,
+        (object(), object()),
+        [0],
+        0,
+        1,
+        0,
+        SimpleNamespace(),
+        {},
+    )
+    assert observed["layer_names"] == ["mamba6", "mamba12"]

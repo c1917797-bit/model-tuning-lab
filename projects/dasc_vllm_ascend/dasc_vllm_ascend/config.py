@@ -11,6 +11,7 @@ from pathlib import Path
 DEFAULT_GDN_SHA256 = "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
 DEFAULT_MAMBA_PATCH_SHA256 = "a8862c3509f698c05cdeba5aa408a28e506349eff97801b28161569b8e3c9778"
 DEFAULT_MODEL_RUNNER_SHA256 = "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+DEFAULT_VLLM_MAMBA_UTILS_SHA256 = "1d854c36fe1b32cfacd071393c05fc155f37190fe19afc5e6c02d5d0a2d561f3"
 
 
 class DascConfigurationError(ValueError):
@@ -35,6 +36,7 @@ class DascConfig:
     expected_gdn_sha256: str
     expected_mamba_patch_sha256: str
     expected_model_runner_sha256: str
+    expected_vllm_mamba_utils_sha256: str
 
     @classmethod
     def from_env(cls) -> "DascConfig":
@@ -72,6 +74,10 @@ class DascConfig:
             "model_runner": os.getenv(
                 "MST_DASC_EXPECTED_MODEL_RUNNER_SHA256", DEFAULT_MODEL_RUNNER_SHA256
             ),
+            "vllm_mamba_utils": os.getenv(
+                "MST_DASC_EXPECTED_VLLM_MAMBA_UTILS_SHA256",
+                DEFAULT_VLLM_MAMBA_UTILS_SHA256,
+            ),
         }
         expected_hashes = {name: value.lower() for name, value in expected_hashes.items()}
         for name, value in expected_hashes.items():
@@ -89,4 +95,5 @@ class DascConfig:
             expected_gdn_sha256=expected_hashes["gdn"],
             expected_mamba_patch_sha256=expected_hashes["mamba_patch"],
             expected_model_runner_sha256=expected_hashes["model_runner"],
+            expected_vllm_mamba_utils_sha256=expected_hashes["vllm_mamba_utils"],
         )

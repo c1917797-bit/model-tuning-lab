@@ -13,6 +13,7 @@ import importlib.metadata
 import inspect
 import itertools
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 from .config import DascConfig
@@ -182,6 +183,153 @@ def _install_heterogeneous_cascade_guard(
         compute_without_heterogeneous_cascade
     )
     model_runner_class._mst_dasc_cascade_guard_installed = True
+
+
+def _install_heterogeneous_mamba_lifecycle_patch(
+    config: DascConfig, mamba_utils: Any
+) -> None:
+    """Teach vLLM's Mamba copy lifecycle about the aggregate hybrid group.
+
+    The aggregate cache group intentionally contains attention and heterogeneous
+    Mamba layer specs so every layer shares one token-block lifecycle.  vLLM
+    0.23's helper recognizes only groups whose outer spec is a MambaSpec and
+    later iterates every layer name in such a group.  Preserve the aggregate
+    scheduler group while exposing only its inner Mamba layers to the Mamba
+    state-copy path.
+    """
+    if getattr(mamba_utils, "_mst_dasc_heterogeneous_lifecycle_installed", False):
+        return
+
+    import torch
+    from vllm.v1.kv_cache_interface import MambaSpec, UniformTypeKVCacheSpecs
+
+    original_get_groups = mamba_utils.get_mamba_groups
+    original_create = mamba_utils.MambaCopyBuffers.create
+    original_collect = mamba_utils.collect_mamba_copy_meta
+
+    def aggregate_mamba_names(group):
+        spec = group.kv_cache_spec
+        if not isinstance(spec, UniformTypeKVCacheSpecs):
+            return ()
+        return tuple(
+            name
+            for name, inner_spec in spec.kv_cache_specs.items()
+            if isinstance(inner_spec, MambaSpec)
+        )
+
+    def aggregate_groups(kv_cache_config):
+        groups = []
+        specs = []
+        names_by_group = {}
+        for group_id, group in enumerate(kv_cache_config.kv_cache_groups):
+            names = aggregate_mamba_names(group)
+            if not names:
+                continue
+            names_by_group[group_id] = names
+            groups.append(group_id)
+            specs.extend(group.kv_cache_spec.kv_cache_specs[name] for name in names)
+        return groups, specs, names_by_group
+
+    def get_dasc_mamba_groups(kv_cache_config):
+        group_ids, specs, _ = aggregate_groups(kv_cache_config)
+        if not group_ids:
+            return original_get_groups(kv_cache_config)
+        lifecycle = {
+            (spec.block_size, spec.num_speculative_blocks, spec.mamba_cache_mode)
+            for spec in specs
+        }
+        if len(lifecycle) != 1:
+            raise DascRuntimeUnsupported(
+                f"DASC aggregate Mamba lifecycle fields differ: {lifecycle}"
+            )
+        representative = specs[0]
+        if representative.mamba_cache_mode != "align":
+            raise DascRuntimeUnsupported("DASC aggregate requires Mamba align mode")
+        if representative.num_speculative_blocks:
+            raise DascRuntimeUnsupported(
+                "DASC heterogeneous physical cache does not yet support speculative decoding"
+            )
+        return group_ids, representative
+
+    @classmethod
+    def create_dasc_copy_buffers(
+        cls, max_num_reqs, kv_cache_config, copy_funcs, make_buffer
+    ):
+        group_ids, _, names_by_group = aggregate_groups(kv_cache_config)
+        if not group_ids:
+            return original_create(
+                max_num_reqs, kv_cache_config, copy_funcs, make_buffer
+            )
+        mamba_group_ids, mamba_spec = get_dasc_mamba_groups(kv_cache_config)
+        entries_per_req = (
+            sum(len(names_by_group[group_id]) for group_id in mamba_group_ids)
+            * len(copy_funcs)
+        )
+        count = max_num_reqs * entries_per_req
+        return cls(
+            src_ptrs=make_buffer(count, dtype=torch.int64),
+            dst_ptrs=make_buffer(count, dtype=torch.int64),
+            sizes=make_buffer(count, dtype=torch.int32),
+            mamba_group_ids=mamba_group_ids,
+            mamba_spec=mamba_spec,
+        )
+
+    @functools.wraps(original_collect)
+    def collect_dasc_mamba_meta(
+        copy_bufs,
+        kv_cache_config,
+        copy_funcs,
+        group_ids,
+        src_block_idx,
+        dest_block_idx,
+        accept_token_bias,
+        req_state,
+        forward_context,
+    ):
+        _, _, names_by_group = aggregate_groups(kv_cache_config)
+        if not any(group_id in names_by_group for group_id in group_ids):
+            return original_collect(
+                copy_bufs,
+                kv_cache_config,
+                copy_funcs,
+                group_ids,
+                src_block_idx,
+                dest_block_idx,
+                accept_token_bias,
+                req_state,
+                forward_context,
+            )
+        proxy_groups = list(kv_cache_config.kv_cache_groups)
+        for group_id in group_ids:
+            names = names_by_group.get(group_id)
+            if names is not None:
+                group = proxy_groups[group_id]
+                proxy_groups[group_id] = SimpleNamespace(
+                    layer_names=list(names),
+                    kv_cache_spec=group.kv_cache_spec,
+                )
+        proxy_config = SimpleNamespace(kv_cache_groups=proxy_groups)
+        return original_collect(
+            copy_bufs,
+            proxy_config,
+            copy_funcs,
+            group_ids,
+            src_block_idx,
+            dest_block_idx,
+            accept_token_bias,
+            req_state,
+            forward_context,
+        )
+
+    mamba_utils.get_mamba_groups = get_dasc_mamba_groups
+    mamba_utils.MambaCopyBuffers.create = create_dasc_copy_buffers
+    mamba_utils.collect_mamba_copy_meta = collect_dasc_mamba_meta
+    mamba_utils._mst_dasc_heterogeneous_lifecycle_installed = True
+    emit(
+        config.evidence_path,
+        "heterogeneous_mamba_lifecycle_installed",
+        mode=config.mode,
+    )
 
 
 def _retained_mask(module: Any, state: Any, config: DascConfig):
@@ -498,6 +646,10 @@ def install(config: DascConfig) -> None:
         "gdn": (gdn, config.expected_gdn_sha256),
         "mamba_patch": (ascend_patch, config.expected_mamba_patch_sha256),
         "model_runner": (model_runner_v1, config.expected_model_runner_sha256),
+        "vllm_mamba_utils": (
+            mamba_utils,
+            config.expected_vllm_mamba_utils_sha256,
+        ),
     }
     source_evidence = {}
     for name, (module, expected_sha) in guarded_sources.items():
@@ -567,6 +719,7 @@ def install(config: DascConfig) -> None:
     if config.mode == "physical-cache-eager":
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
+        _install_heterogeneous_mamba_lifecycle_patch(config, mamba_utils)
     emit(
         config.evidence_path,
         "plugin_registered",
