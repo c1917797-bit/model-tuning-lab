@@ -146,3 +146,10 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   important local states; a global maximum across all layers destroys useful
   heterogeneity. Treat cross-worker cache-spec merge as a hard runtime gate and
   cover it before another service launch.
+- In hybrid attention/Mamba models, equal TP geometry is necessary but not
+  sufficient. Per-layer compact Mamba pages can still fail vLLM's global
+  page-divisibility gate. Do not pad every compact layer back to the dense
+  maximum and call that physical reduction. In Mamba align mode, represent
+  attention plus heterogeneous Mamba layers as one token-lifecycle group whose
+  aggregate page is the sum of exact inner pages, and fail closed for cache
+  families whose lifecycle equivalence has not been proved.

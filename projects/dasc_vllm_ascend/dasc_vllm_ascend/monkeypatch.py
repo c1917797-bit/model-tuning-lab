@@ -58,6 +58,90 @@ def _ensure_ascend_global_patch() -> None:
         ensure()
 
 
+def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: Any) -> None:
+    """Group aligned attention and heterogeneous Mamba pages in one pool.
+
+    vLLM 0.23 normally rejects the different per-layer Mamba page sizes before
+    allocation. In align mode both attention and Mamba layers consume the same
+    token-block lifecycle, so a UniformTypeKVCacheSpecs aggregate is the
+    truthful physical representation: its page is the sum of the exact inner
+    layer pages rather than a dense per-layer maximum.
+    """
+    if getattr(kv_cache_utils, "_mst_dasc_aligned_hybrid_installed", False):
+        return
+
+    from vllm.v1.kv_cache_interface import (
+        AttentionSpec,
+        HiddenStateCacheSpec,
+        KVCacheGroupSpec,
+        MambaSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    original = kv_cache_utils.get_kv_cache_groups
+
+    @functools.wraps(original)
+    def get_dasc_groups(vllm_config, kv_cache_spec):
+        hidden = {
+            name: spec
+            for name, spec in kv_cache_spec.items()
+            if isinstance(spec, HiddenStateCacheSpec)
+        }
+        filtered = {
+            name: spec
+            for name, spec in kv_cache_spec.items()
+            if not isinstance(spec, HiddenStateCacheSpec)
+        }
+        attention = {
+            name: spec
+            for name, spec in filtered.items()
+            if isinstance(spec, AttentionSpec)
+        }
+        mamba = {
+            name: spec
+            for name, spec in filtered.items()
+            if isinstance(spec, MambaSpec)
+        }
+        known = len(attention) + len(mamba) == len(filtered)
+        block_sizes = {spec.block_size for spec in filtered.values()}
+        aligned = mamba and all(
+            spec.mamba_cache_mode == "align" for spec in mamba.values()
+        )
+        heterogeneous = len({spec.page_size_bytes for spec in mamba.values()}) > 1
+
+        if not (known and attention and aligned and heterogeneous):
+            return original(vllm_config, kv_cache_spec)
+        if hidden:
+            raise DascRuntimeUnsupported(
+                "DASC heterogeneous grouping does not yet support hidden-state cache"
+            )
+        if len(block_sizes) != 1:
+            raise DascRuntimeUnsupported(
+                f"DASC align mode requires one token block size, got {block_sizes}"
+            )
+
+        ordered = {**attention, **mamba}
+        aggregate = UniformTypeKVCacheSpecs(
+            block_size=next(iter(block_sizes)),
+            kv_cache_specs=ordered,
+        )
+        emit(
+            config.evidence_path,
+            "heterogeneous_cache_grouped",
+            mode=config.mode,
+            attention_layers=len(attention),
+            mamba_layers=len(mamba),
+            mamba_page_sizes=sorted(
+                {spec.page_size_bytes for spec in mamba.values()}
+            ),
+            aggregate_page_bytes=aggregate.page_size_bytes,
+        )
+        return [KVCacheGroupSpec(list(ordered), aggregate)]
+
+    kv_cache_utils.get_kv_cache_groups = get_dasc_groups
+    kv_cache_utils._mst_dasc_aligned_hybrid_installed = True
+
+
 def _retained_mask(module: Any, state: Any, config: DascConfig):
     import torch
 
@@ -363,6 +447,7 @@ def install(config: DascConfig) -> None:
     from vllm.distributed.parallel_state import get_tp_group
     from vllm.forward_context import get_forward_context
     from vllm.v1.worker import mamba_utils
+    from vllm.v1.core import kv_cache_utils
     from vllm_ascend.ops import gdn
     from vllm_ascend.patch.worker import patch_mamba_utils as ascend_patch
     from vllm_ascend.worker import model_runner_v1
@@ -437,6 +522,8 @@ def install(config: DascConfig) -> None:
 
     load_then_install._mst_dasc_loader = True
     Qwen3_5ForConditionalGeneration.load_weights = load_then_install
+    if config.mode == "physical-cache-eager":
+        _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
     emit(
         config.evidence_path,
         "plugin_registered",

@@ -130,3 +130,85 @@ def test_physical_patch_aborts_and_restores_bindings_on_native_error(
     assert all(torch.equal(actual, expected) for actual, expected in zip(module.kv_cache, before))
     assert module._mst_dasc_bound_bridge._active_ids is None
     assert observed["metadata"] is not metadata
+
+
+def test_aligned_hybrid_grouping_preserves_exact_inner_page_sizes(tmp_path):
+    from vllm.v1.kv_cache_interface import FullAttentionSpec, UniformTypeKVCacheSpecs
+
+    attention = FullAttentionSpec(
+        block_size=1536,
+        num_kv_heads=1,
+        head_size=128,
+        dtype=torch.bfloat16,
+    )
+    mamba6 = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (6, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    mamba12 = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (12, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    namespace = SimpleNamespace(
+        get_kv_cache_groups=lambda *_: (_ for _ in ()).throw(
+            AssertionError("fallback must not run")
+        )
+    )
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_aligned_hybrid_grouping_patch(config, namespace)
+    groups = namespace.get_kv_cache_groups(
+        SimpleNamespace(),
+        {"attn": attention, "mamba6": mamba6, "mamba12": mamba12},
+    )
+    assert len(groups) == 1
+    assert isinstance(groups[0].kv_cache_spec, UniformTypeKVCacheSpecs)
+    inner = groups[0].kv_cache_spec.kv_cache_specs
+    assert inner["mamba6"].page_size_bytes < inner["mamba12"].page_size_bytes
+
+
+def test_aligned_hybrid_grouping_rejects_hidden_cache(tmp_path):
+    from vllm.v1.kv_cache_interface import FullAttentionSpec, HiddenStateCacheSpec
+
+    specs = {
+        "attn": FullAttentionSpec(
+            block_size=1536,
+            num_kv_heads=1,
+            head_size=128,
+            dtype=torch.bfloat16,
+        ),
+        "mamba1": MambaSpec(
+            block_size=1536,
+            shapes=((3, 16), (1, 128, 128)),
+            dtypes=(torch.bfloat16, torch.float32),
+            mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+            mamba_cache_mode="align",
+        ),
+        "mamba2": MambaSpec(
+            block_size=1536,
+            shapes=((3, 16), (2, 128, 128)),
+            dtypes=(torch.bfloat16, torch.float32),
+            mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+            mamba_cache_mode="align",
+        ),
+        "hidden": HiddenStateCacheSpec(
+            block_size=1536,
+            num_kv_heads=1,
+            head_size=128,
+            dtype=torch.bfloat16,
+        ),
+    }
+    namespace = SimpleNamespace(get_kv_cache_groups=lambda *_: [])
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_aligned_hybrid_grouping_patch(config, namespace)
+    with pytest.raises(physical_patch.DascRuntimeUnsupported, match="hidden-state"):
+        namespace.get_kv_cache_groups(SimpleNamespace(), specs)
