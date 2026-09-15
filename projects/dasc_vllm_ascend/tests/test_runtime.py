@@ -1,7 +1,7 @@
 import pytest
 import torch
 
-from dasc_vllm_ascend.runtime import ActiveStateBridge
+from dasc_vllm_ascend.runtime import ActiveStateBridge, BoundActiveStateBridge
 
 
 def make_bridge():
@@ -49,3 +49,49 @@ def test_bridge_is_transactional_and_fixed_capacity():
         bridge.restore_active(torch.tensor([0, 1, 2, 3]))
     assert bridge.conv_workspace.data_ptr() == conv_ptr
     assert bridge.temporal_workspace.data_ptr() == temporal_ptr
+
+
+def test_bound_bridge_round_trips_runner_owned_compact_cache():
+    conv_storage = torch.arange(8 * 2 * 3, dtype=torch.float32).view(8, 2, 3)
+    temporal_storage = torch.arange(
+        8 * 2 * 2, dtype=torch.float32
+    ).view(8, 2, 2)
+    retained = torch.tensor([0, 3], dtype=torch.long)
+    bridge = BoundActiveStateBridge(
+        conv_storage=conv_storage,
+        compact_temporal_storage=temporal_storage,
+        dense_temporal_shape=(4, 2),
+        temporal_head_axis=0,
+        retained_indices=retained,
+        max_active_blocks=3,
+    )
+    conv_ptr = conv_storage.data_ptr()
+    temporal_ptr = temporal_storage.data_ptr()
+    conv, temporal = bridge.restore_active(torch.tensor([6, 2]))
+    assert torch.equal(conv, conv_storage.index_select(0, torch.tensor([6, 2])))
+    assert torch.equal(
+        temporal.index_select(1, retained),
+        temporal_storage.index_select(0, torch.tensor([6, 2])),
+    )
+    assert torch.count_nonzero(temporal[:, [1, 2]]).item() == 0
+    conv.add_(11)
+    temporal[:, retained].add_(13)
+    bridge.checkpoint_active()
+    assert conv_storage.data_ptr() == conv_ptr
+    assert temporal_storage.data_ptr() == temporal_ptr
+    assert torch.equal(
+        temporal_storage.index_select(0, torch.tensor([6, 2])),
+        temporal.index_select(1, retained),
+    )
+
+
+def test_bound_bridge_rejects_dense_runner_temporal_cache():
+    with pytest.raises(ValueError, match="compact geometry"):
+        BoundActiveStateBridge(
+            conv_storage=torch.empty(4, 2, 3),
+            compact_temporal_storage=torch.empty(4, 4, 2),
+            dense_temporal_shape=(4, 2),
+            temporal_head_axis=0,
+            retained_indices=torch.tensor([0, 3], dtype=torch.long),
+            max_active_blocks=2,
+        )
