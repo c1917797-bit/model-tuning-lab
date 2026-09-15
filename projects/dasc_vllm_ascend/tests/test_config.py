@@ -28,8 +28,19 @@ class ConfigTest(unittest.TestCase):
         with patch.dict(
             os.environ, {"MST_DASC_MODE": "physical"}, clear=True
         ):
-            with self.assertRaisesRegex(DascConfigurationError, "not be implied"):
+            with self.assertRaisesRegex(DascConfigurationError, "must be"):
                 DascConfig.from_env()
+
+    def test_physical_cache_eager_mode_is_explicit(self):
+        env = {
+            "MST_DASC_ENABLE": "1",
+            "MST_DASC_MODE": "physical-cache-eager",
+            "MST_DASC_EVIDENCE_PATH": "/tmp/dasc-evidence.jsonl",
+        }
+        with patch.dict(os.environ, env, clear=True):
+            config = DascConfig.from_env()
+        self.assertTrue(config.enabled)
+        self.assertEqual(config.mode, "physical-cache-eager")
 
     def test_numeric_bounds(self):
         invalid = (

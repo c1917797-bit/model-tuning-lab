@@ -12,12 +12,15 @@ import hashlib
 import importlib.metadata
 import inspect
 import itertools
-import math
 from pathlib import Path
 from typing import Any
 
 from .config import DascConfig
 from .evidence import emit
+from .metadata import remap_ascend_gdn_metadata
+from .runtime import BoundActiveStateBridge
+from .selector import retained_head_indices, unique_head_axis
+from .spec import compact_mamba_spec
 
 
 class DascRuntimeUnsupported(RuntimeError):
@@ -53,32 +56,110 @@ def _ensure_ascend_global_patch() -> None:
 
 def _retained_mask(module: Any, state: Any, config: DascConfig):
     import torch
-    import torch.nn.functional as functional
 
     cached = getattr(module, "_mst_dasc_retained_mask", None)
     if cached is None:
-        a_log = module.A_log.detach().float().reshape(-1)
-        dt_bias = module.dt_bias.detach().float().reshape(-1)
-        if a_log.shape != dt_bias.shape:
-            raise DascRuntimeUnsupported(
-                f"DASC decay parameter mismatch: {a_log.shape} vs {dt_bias.shape}"
-            )
-        decay = -torch.exp(a_log) * functional.softplus(
-            dt_bias + config.representative_a
-        )
-        horizon = math.log(config.epsilon) / decay
-        cached = horizon > config.w_max
-        if not bool(cached.any()):
-            raise DascRuntimeUnsupported("DASC selector retained zero local heads")
+        indices = retained_head_indices(module, config)
+        cached = state.new_zeros(module.A_log.numel(), dtype=torch.bool)
+        cached[indices] = True
         module._mst_dasc_retained_mask = cached
 
-    axes = [axis for axis, size in enumerate(state.shape) if size == cached.numel()]
-    if len(axes) != 1:
-        raise DascRuntimeUnsupported(
-            "DASC cannot map local decay heads to temporal state: "
-            f"state={tuple(state.shape)} heads={cached.numel()} axes={axes}"
+    return cached, unique_head_axis(tuple(state.shape), cached.numel())
+
+
+def _install_physical_cache_patch(
+    config: DascConfig,
+    qwen_gdn_class: Any,
+    get_forward_context: Any,
+) -> None:
+    """Install compact spec accounting and dense-ABI execution bridge."""
+    if getattr(qwen_gdn_class, "_mst_dasc_physical_installed", False):
+        return
+    original_get_spec = qwen_gdn_class.get_kv_cache_spec
+    original_core = qwen_gdn_class._forward_core
+
+    @functools.wraps(original_get_spec)
+    def compact_get_spec(self, vllm_config):
+        dense_spec = original_get_spec(self, vllm_config)
+        if dense_spec is None or len(dense_spec.shapes) != 2:
+            raise DascRuntimeUnsupported(
+                "DASC physical mode requires conv and temporal Mamba states"
+            )
+        retained = retained_head_indices(self, config)
+        temporal_shape = tuple(dense_spec.shapes[1])
+        head_axis = unique_head_axis(temporal_shape, self.A_log.numel())
+        compact = compact_mamba_spec(
+            dense_spec,
+            state_index=1,
+            head_axis=head_axis,
+            retained_heads=retained.numel(),
         )
-    return cached, axes[0]
+        self._mst_dasc_dense_temporal_shape = temporal_shape
+        self._mst_dasc_temporal_head_axis = head_axis
+        self._mst_dasc_max_active_blocks = (
+            vllm_config.scheduler_config.max_num_seqs
+            * (1 + dense_spec.num_speculative_blocks)
+        )
+        self._mst_dasc_dense_page_bytes = dense_spec.page_size_bytes
+        self._mst_dasc_compact_page_bytes = compact.page_size_bytes
+        return compact
+
+    @functools.wraps(original_core)
+    def physical_core(self, mixed_qkv, b, a, core_attn_out):
+        forward_context = get_forward_context()
+        metadata_map = forward_context.attn_metadata
+        if metadata_map is None:
+            return original_core(self, mixed_qkv, b, a, core_attn_out)
+        if not isinstance(metadata_map, dict) or self.prefix not in metadata_map:
+            raise DascRuntimeUnsupported("DASC cannot resolve live GDN metadata")
+        original_metadata = metadata_map[self.prefix]
+        remapped_metadata, plan = remap_ascend_gdn_metadata(original_metadata)
+
+        bridge = getattr(self, "_mst_dasc_bound_bridge", None)
+        if bridge is None:
+            if len(self.kv_cache) != 2:
+                raise DascRuntimeUnsupported(
+                    "DASC physical mode requires two runner-owned cache tensors"
+                )
+            bridge = BoundActiveStateBridge(
+                conv_storage=self.kv_cache[0],
+                compact_temporal_storage=self.kv_cache[1],
+                dense_temporal_shape=self._mst_dasc_dense_temporal_shape,
+                temporal_head_axis=self._mst_dasc_temporal_head_axis,
+                retained_indices=retained_head_indices(self, config),
+                max_active_blocks=self._mst_dasc_max_active_blocks,
+            )
+            self._mst_dasc_bound_bridge = bridge
+            emit(
+                config.evidence_path,
+                "physical_cache_bound",
+                layer=self.prefix,
+                mode=config.mode,
+                dense_page_bytes=self._mst_dasc_dense_page_bytes,
+                compact_page_bytes=self._mst_dasc_compact_page_bytes,
+                persistent_bytes=bridge.persistent_bytes,
+                num_blocks=self.kv_cache[0].shape[0],
+            )
+
+        original_cache = self.kv_cache
+        conv_workspace, temporal_workspace = bridge.restore_active(plan.block_ids)
+        self.kv_cache = (conv_workspace, temporal_workspace)
+        metadata_map[self.prefix] = remapped_metadata
+        succeeded = False
+        try:
+            result = original_core(self, mixed_qkv, b, a, core_attn_out)
+            bridge.checkpoint_active()
+            succeeded = True
+            return result
+        finally:
+            if not succeeded:
+                bridge.abort_active()
+            metadata_map[self.prefix] = original_metadata
+            self.kv_cache = original_cache
+
+    qwen_gdn_class.get_kv_cache_spec = compact_get_spec
+    qwen_gdn_class._forward_core = physical_core
+    qwen_gdn_class._mst_dasc_physical_installed = True
 
 
 def _copy_temporal_nr(
@@ -275,6 +356,7 @@ def install(config: DascConfig) -> None:
         QwenGatedDeltaNetAttention,
     )
     from vllm.model_executor.models.qwen3_5 import Qwen3_5ForConditionalGeneration
+    from vllm.forward_context import get_forward_context
     from vllm.v1.worker import mamba_utils
     from vllm_ascend.ops import gdn
     from vllm_ascend.patch.worker import patch_mamba_utils as ascend_patch
@@ -312,7 +394,12 @@ def install(config: DascConfig) -> None:
             raise DascRuntimeUnsupported(
                 "Ascend Qwen GDN worker dispatch is not installed"
             )
-        _install_state_restore_patch(config, mamba_utils, ascend_patch)
+        if config.mode == "nr-numerical":
+            _install_state_restore_patch(config, mamba_utils, ascend_patch)
+        else:
+            _install_physical_cache_patch(
+                config, QwenGatedDeltaNetAttention, get_forward_context
+            )
         emit(
             config.evidence_path,
             "worker_dispatch_verified",

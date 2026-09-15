@@ -40,3 +40,11 @@ A/B measurements.
 
 Raw runtime evidence remains outside Git under
 `/cache/cch/dasc-qwen36-ascend-20260915/`.
+
+An experimental `MST_DASC_MODE=physical-cache-eager` path is implemented.
+It changes every loaded GDN layer's MambaSpec to its heterogeneous compact
+temporal shape, keeps runner-owned compact tensors authoritative for block
+copy and invalidation, and expands active blocks into fixed dense workspaces
+around the native Ascend core. This mode is eager-only until graph capture has
+its own pointer and replay gate. It has not yet passed NPU or end-to-end
+validation and must not be used for a performance claim.
