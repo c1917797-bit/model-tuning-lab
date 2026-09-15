@@ -166,11 +166,12 @@ def test_aligned_hybrid_grouping_preserves_exact_inner_page_sizes(tmp_path):
     physical_patch._install_aligned_hybrid_grouping_patch(config, namespace)
     groups = namespace.get_kv_cache_groups(
         SimpleNamespace(),
-        {"attn": attention, "mamba6": mamba6, "mamba12": mamba12},
+        {"mamba6": mamba6, "attn": attention, "mamba12": mamba12},
     )
     assert len(groups) == 1
     assert isinstance(groups[0].kv_cache_spec, UniformTypeKVCacheSpecs)
     inner = groups[0].kv_cache_spec.kv_cache_specs
+    assert list(inner) == ["mamba6", "attn", "mamba12"]
     assert inner["mamba6"].page_size_bytes < inner["mamba12"].page_size_bytes
 
 

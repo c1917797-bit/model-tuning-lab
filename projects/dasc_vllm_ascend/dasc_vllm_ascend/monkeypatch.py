@@ -121,7 +121,14 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
                 f"DASC align mode requires one token block size, got {block_sizes}"
             )
 
-        ordered = {**attention, **mamba}
+        # Preserve the model-provided layer order. Ascend's input-batch
+        # reinitialization dispatches a UniformTypeKVCacheSpecs group from its
+        # first inner spec. Reordering a Mamba-first hybrid model to put
+        # attention first incorrectly enables attention slot mapping for the
+        # whole group and can route graph capture through the no-RoPE TND FIAS
+        # path. The aggregate changes page accounting only; it must not change
+        # execution dispatch semantics.
+        ordered = dict(filtered)
         aggregate = UniformTypeKVCacheSpecs(
             block_size=next(iter(block_sizes)),
             kv_cache_specs=ordered,
