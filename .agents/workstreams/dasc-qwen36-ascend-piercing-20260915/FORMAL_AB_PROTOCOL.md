@@ -35,6 +35,12 @@ random seed.
 The DASC switch is the only treatment difference. A run with prefix caching
 disabled is not a DASC denominator.
 
+While an arm is live, poll only physical NPU4-7 and compare every device PID
+with the current Docker container's process set. Any foreign PID is an
+ownership change: preserve the violation evidence, stop that arm, and reject
+the run. The cooperative NPU4-7 flock remains necessary but is not sufficient
+because unrelated launchers may not honor it.
+
 Before either arm starts, create its deterministic runtime manifest. Hash the
 model config, safetensors weight index, tokenizer files, Docker image
 inspection, host driver/CANN metadata, pinned HYPIC benchmark, quality

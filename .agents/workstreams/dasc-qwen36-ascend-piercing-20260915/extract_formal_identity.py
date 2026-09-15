@@ -99,6 +99,7 @@ def extract(
         "max_num_seqs": 32,
         "block_size": 128,
         "kv_cache_memory_bytes_per_rank": 9663676416,
+        "cpuset_cpus": host.get("CpusetCpus", ""),
         "image_digest": value["Image"],
         "model_config_sha256": model_config_sha256,
         "plugin_manifest_sha256": plugin_manifest_sha256,

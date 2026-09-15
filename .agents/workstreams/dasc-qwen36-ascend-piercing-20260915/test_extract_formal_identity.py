@@ -39,6 +39,7 @@ def inspect_value(arm):
         },
         "HostConfig": {
             "NetworkMode": "host",
+            "CpusetCpus": "0-191",
             "Devices": [
                 {"PathOnHost": f"/dev/davinci{x}", "PathInContainer": f"/dev/davinci{x - 4}"}
                 for x in range(4, 8)
@@ -63,6 +64,7 @@ def test_extracts_exact_identity(arm):
     )
     assert result["dasc_plugin"] is (arm == "candidate")
     assert result["physical_npus"] == [4, 5, 6, 7]
+    assert result["cpuset_cpus"] == "0-191"
 
 
 def test_rejects_protected_device_mapping():

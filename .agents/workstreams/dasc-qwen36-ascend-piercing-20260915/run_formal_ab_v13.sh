@@ -21,9 +21,11 @@ CAPACITY=$REPO/$WS/verify_cache_capacity.py
 PERF_RESUME=$REPO/$WS/verify_performance_triplet.py
 QUALITY_RESUME=$REPO/$WS/verify_quality_pair.py
 VERIFY_V12=$REPO/$WS/verify_physical_v12.py
+DEVICE_OWNERSHIP=$REPO/$WS/verify_device_ownership.py
 PORT=8031
 LOCK=/cache/cch/.locks/npu4-7.lock
 CURRENT=
+GUARD_PID=
 
 container_name() { echo "dasc_qwen36_formal_v13_${1}_20260916"; }
 container_state() { docker inspect -f '{{.State.Status}}' "$1" 2>/dev/null || echo absent; }
@@ -42,7 +44,7 @@ static_checks() {
   command -v docker >/dev/null; command -v npu-smi >/dev/null; command -v flock >/dev/null
   test -r "$MODEL_HOST/config.json"; test -r "$REPO/projects/dasc_vllm_ascend/pyproject.toml"
   test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"; test -r "$RUNTIME_MANIFEST"
-  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$PERF_RESUME"; test -r "$QUALITY_RESUME"; test -r "$VERIFY_V12"
+  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$PERF_RESUME"; test -r "$QUALITY_RESUME"; test -r "$VERIFY_V12"; test -r "$DEVICE_OWNERSHIP"
   printf '%s  %s\n' cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822 "$BENCH" | sha256sum -c -
   docker image inspect "$IMAGE" >/dev/null
   local i; for i in 4 5 6 7; do test -c "/dev/davinci$i"; done
@@ -58,6 +60,7 @@ if [[ ${1:-} == --self-test ]]; then static_checks; echo 'v13 static self-test p
 cleanup() {
   local rc=$?
   set +e
+  [[ -z "$GUARD_PID" ]] || { kill "$GUARD_PID" 2>/dev/null; wait "$GUARD_PID" 2>/dev/null; }
   if [[ -n "$CURRENT" && $(container_state "$CURRENT") == running ]]; then docker stop --time 60 "$CURRENT" >/dev/null; fi
   [[ -d "$ROOT" ]] && echo "$rc" >"$ROOT/controller-last-exit-code.txt"
   exit "$rc"
@@ -123,9 +126,14 @@ start_arm() {
     [[ $(container_state "$name") == running ]] || { docker logs --tail 200 "$name"; return 1; }
     (( SECONDS < deadline )) || return 1; sleep 10
   done
+  guard_cards "$arm" "$name" &
+  GUARD_PID=$!
 }
 stop_arm() {
   local arm=$1 name; name=$(container_name "$arm")
+  kill "$GUARD_PID" 2>/dev/null || true
+  wait "$GUARD_PID" 2>/dev/null || true
+  GUARD_PID=
   docker logs "$name" >"$ROOT/$arm/service.log" 2>&1 || true
   [[ $(container_state "$name") == running ]] && docker stop --time 60 "$name" >/dev/null
   docker inspect "$name" >"$ROOT/$arm/container-final-inspect.json"; CURRENT=
@@ -133,6 +141,19 @@ stop_arm() {
 }
 archive() { local stamp; stamp=$(date -u +%Y%m%dT%H%M%SZ); for x in "$@"; do [[ ! -e "$x" ]] || mv "$x" "$x.invalid.$stamp"; done; }
 capture() { python3 "$METRICS" --url "http://127.0.0.1:$PORT/metrics" --output "$1"; }
+guard_cards() {
+  local arm=$1 name=$2 latest violation
+  latest=$ROOT/$arm/device-ownership.latest.json
+  violation=$ROOT/$arm/device-ownership.violation.json
+  while [[ $(container_state "$name") == running ]]; do
+    if ! python3 "$DEVICE_OWNERSHIP" --container "$name" --cards 4 5 6 7 --output "$latest"; then
+      cp "$latest" "$violation" 2>/dev/null || true
+      docker stop --time 10 "$name" >/dev/null 2>&1 || true
+      return 1
+    fi
+    sleep 5
+  done
+}
 
 run_performance() {
   local arm=$1 run out before after

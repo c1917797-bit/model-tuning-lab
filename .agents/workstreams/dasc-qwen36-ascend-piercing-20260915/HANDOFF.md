@@ -172,6 +172,9 @@ Formal evidence is deliberately not accepted from a hand-written summary:
   archived and regenerated.
 - `verify_quality_pair.py` applies the final row-count, index, rescoring, and
   cache-hit rules before a LongBench-v2 or GSM8K run is reused.
+- `verify_device_ownership.py` compares every process observed on physical
+  NPU4-7 with the active arm's Docker PID set. The controller polls it while
+  the arm is live and stops immediately on a foreign PID.
 - `build_formal_evidence.py` reads a fixed raw-artifact layout.
 - `verify_formal_decision.py` recomputes completeness, cache-hit deltas,
   paired performance direction, quality tolerance, and the four-worker
@@ -186,6 +189,6 @@ later review also found that prefix matching would misclassify
 `/dev/davinci_manager` as a compute card; commit `a7c2173` changed this to an
 exact numeric-device match and added realistic auxiliary devices to the test.
 
-The last full CPU-only workstream run passed 42 tests with 14 upstream Torch
+The last full CPU-only workstream run passed 45 tests with 14 upstream Torch
 deprecation warnings. The current branch is intentionally unpushed; pushing
 requires explicit user authorization for the exact branch and payload.
