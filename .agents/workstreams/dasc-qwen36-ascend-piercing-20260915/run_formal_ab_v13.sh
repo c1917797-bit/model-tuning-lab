@@ -19,6 +19,7 @@ NORMALIZER=$REPO/$WS/build_formal_evidence.py
 DECIDER=$REPO/$WS/verify_formal_decision.py
 CAPACITY=$REPO/$WS/verify_cache_capacity.py
 PERF_RESUME=$REPO/$WS/verify_performance_triplet.py
+QUALITY_RESUME=$REPO/$WS/verify_quality_pair.py
 VERIFY_V12=$REPO/$WS/verify_physical_v12.py
 PORT=8031
 LOCK=/cache/cch/.locks/npu4-7.lock
@@ -41,7 +42,7 @@ static_checks() {
   command -v docker >/dev/null; command -v npu-smi >/dev/null; command -v flock >/dev/null
   test -r "$MODEL_HOST/config.json"; test -r "$REPO/projects/dasc_vllm_ascend/pyproject.toml"
   test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"; test -r "$RUNTIME_MANIFEST"
-  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$PERF_RESUME"; test -r "$VERIFY_V12"
+  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$PERF_RESUME"; test -r "$QUALITY_RESUME"; test -r "$VERIFY_V12"
   printf '%s  %s\n' cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822 "$BENCH" | sha256sum -c -
   docker image inspect "$IMAGE" >/dev/null
   local i; for i in 4 5 6 7; do test -c "/dev/davinci$i"; done
@@ -145,13 +146,15 @@ run_performance() {
   done
 }
 run_quality() {
-  local arm=$1 dataset run data dir summary
+  local arm=$1 dataset run data dir summary details
   dir=$ROOT/quality/$arm
   for dataset in longbenchv2 gsm8k; do
     [[ "$dataset" == longbenchv2 ]] && data=/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json || data=/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl
     for run in run1 run2 run3; do
       summary=$dir/$dataset.$run.summary.json
-      [[ -s "$summary" && -s "$dir/$dataset.$run.jsonl" ]] && continue
+      details=$dir/$dataset.$run.jsonl
+      if python3 "$QUALITY_RESUME" --dataset "$dataset" --summary "$summary" --details "$details" >/dev/null 2>&1; then continue; fi
+      archive "$summary" "$details"
       python3 "$QUALITY" --repo "$REPO" --shared-prefix-lines 96 --require-cache-hit --dataset "$dataset" --data "$data" \
         --base-url "http://127.0.0.1:$PORT" --model qwen36-dasc-formal-v13 --output-dir "$dir" --run-id "$run" \
         --concurrency 32 --max-out-len 1024 --seed 0 --timeout 2400 --retries 2
