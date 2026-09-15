@@ -4,6 +4,7 @@ import torch
 from dasc_vllm_ascend.compact import (
     CompactCheckpointLayout,
     CompactCheckpointArena,
+    build_active_slot_plan,
     pack_retained_heads,
     unpack_retained_heads,
 )
@@ -56,6 +57,50 @@ def test_checkpoint_arena_rejects_duplicate_indices():
             num_blocks=2, dense_shape=(4, 3), head_axis=0,
             retained_indices=torch.tensor([1, 1], dtype=torch.long),
             dtype=torch.float32, device="cpu",
+        )
+
+
+def test_checkpoint_arena_vectorized_lifecycle():
+    retained = torch.tensor([0, 2], dtype=torch.long)
+    arena = CompactCheckpointArena(
+        num_blocks=8, dense_shape=(4, 2), head_axis=0,
+        retained_indices=retained, dtype=torch.float32, device="cpu",
+    )
+    blocks = torch.tensor([6, 2, 5], dtype=torch.int32)
+    dense = torch.arange(3 * 4 * 2, dtype=torch.float32).view(3, 4, 2)
+    arena.checkpoint_many(blocks, dense)
+    restored = arena.restore_many(blocks, torch.empty_like(dense))
+    assert torch.equal(restored.index_select(1, retained), dense.index_select(1, retained))
+    omitted = torch.tensor([1, 3], dtype=torch.long)
+    assert torch.count_nonzero(restored.index_select(1, omitted)).item() == 0
+
+    new_block = torch.tensor([7], dtype=torch.int32)
+    new_state = arena.restore_many(new_block, torch.full((1, 4, 2), 9.0))
+    assert torch.count_nonzero(new_state).item() == 0
+    arena.invalidate_many(torch.tensor([2, 6], dtype=torch.int32))
+    invalid = arena.restore_many(
+        torch.tensor([2, 6], dtype=torch.int32), torch.full((2, 4, 2), 9.0)
+    )
+    assert torch.count_nonzero(invalid).item() == 0
+
+
+def test_active_slot_plan_is_contiguous_and_preserves_padding():
+    decode = torch.tensor([[17], [4], [-1]], dtype=torch.int32)
+    prefill = torch.tensor([9, 17], dtype=torch.int32)
+    plan = build_active_slot_plan(decode, prefill, pad_slot_id=-1)
+    assert torch.equal(plan.block_ids, torch.tensor([4, 9, 17], dtype=torch.int32))
+    assert plan.num_slots == 3
+    assert torch.equal(
+        plan.remapped_indices[0], torch.tensor([[2], [0], [-1]], dtype=torch.int32)
+    )
+    assert torch.equal(plan.remapped_indices[1], torch.tensor([1, 2], dtype=torch.int32))
+
+
+def test_active_slot_plan_requires_consistent_tensor_types():
+    with pytest.raises(ValueError, match="share device and dtype"):
+        build_active_slot_plan(
+            torch.tensor([1], dtype=torch.int32),
+            torch.tensor([1], dtype=torch.int64),
         )
 
 
