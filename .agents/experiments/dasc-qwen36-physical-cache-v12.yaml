@@ -1,0 +1,67 @@
+schema: model-tuning-experiment/v1
+id: dasc-qwen36-physical-cache-v12
+status: planned
+decision: pending
+hypothesis: "Preserving original hybrid cache-group order lets the plugin-owned heterogeneous DASC cache complete service startup and prefix-cache reuse on Ascend."
+objective: "Validate physical compact cache reachability and semantic safety before any formal performance claim."
+owner: "c1917797-bit"
+git:
+  branch: work/dasc-qwen36-ascend-piercing-20260915
+  base_commit: "c5c6fadb1270bab419caa36a0918529251902df0"
+  stage_commits: []
+environment:
+  source_commit: "captured at launch; must descend from c5c6fadb1270bab419caa36a0918529251902df0"
+  model_revision: "/cache/efim/Qwen3.6-27B; config.json SHA256 captured at launch"
+  tokenizer_revision: "same immutable model mount as model_revision"
+  dtype_or_quantization: "model-native"
+  framework_versions:
+    image: quay.io/ascend/vllm-ascend:v0.23.0
+    vllm: 0.23.0
+    vllm_ascend: 0.23.0
+  cann_driver_firmware: "captured under the raw artifact root"
+  hardware_topology:
+    host: chicaihong01
+    physical_npus: [4, 5, 6, 7]
+    protected_npus: [0, 1, 2, 3]
+  runtime_topology:
+    tensor_parallel_size: 4
+    host_to_container_devices: ["4:0", "5:1", "6:2", "7:3"]
+    communication: HCCL
+    port: 8030
+protocol:
+  primary_metric: "mechanism and semantic canary only; no performance acceptance in v12"
+  correctness_guardrails:
+    - "all four TP workers emit physical-cache activation evidence"
+    - "every bound compact page is smaller than its dense page and has positive admitted blocks"
+    - "one exact short response succeeds"
+    - "three deterministic shared-prefix replays produce identical output with reasoning disabled"
+    - "prefix-cache hit counters increase"
+  acceptance_thresholds:
+    - "short response is exactly OK"
+    - "physical_cache_bound, tp_geometry_aligned, and worker_dispatch_verified each cover at least four worker pids"
+    - "heterogeneous_cache_grouped is present"
+  regression_thresholds:
+    - "any semantic mismatch or missing hot-path evidence rejects v12"
+  abort_conditions:
+    - "any physical NPU4-7 is occupied before lock or after lock recheck"
+    - "port 8030 is already listening"
+    - "the exact owned v12 container name or artifact directory already exists"
+    - "service exits or does not become ready within 3600 seconds"
+  warmup: "service graph capture; excluded from later formal performance work"
+  repetitions: 3
+  command: "bash .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_physical_cache_v12.sh"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - /cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12
+decision_reason: ""
+next_loop: "If v12 passes, freeze a new one-switch dense-control versus physical-cache performance experiment with three unique repetitions."
+rollback:
+  command: "Disable MST_DASC_ENABLE and omit dasc_vllm_ascend from VLLM_PLUGINS."
+  verified: true

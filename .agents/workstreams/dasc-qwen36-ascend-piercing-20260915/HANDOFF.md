@@ -1,5 +1,21 @@
 # DASC Qwen3.6 Ascend Piercing Handoff
 
+## NPU4-7 v12 resumable controller
+
+The next immutable attempt is dasc-qwen36-physical-cache-v12. It is pinned to
+physical NPU4-7 and port 8030; NPU0-3 are explicitly outside scope. Validate and
+start exactly once with run_physical_cache_v12.sh --self-test, followed by the
+same script without arguments.
+
+The controller waits while any physical NPU4-7 has a live device process, then
+takes /cache/cch/.locks/npu4-7.lock, repeats the occupancy check, checks port
+8030, snapshots the plugin bytes, and starts the exact owned v12 container. Do
+not start a second controller. Poll its authoritative remote exec handle and
+inspect the controller log at
+/cache/cch/dasc-qwen36-ascend-20260915/controllers/dasc-qwen36-physical-cache-v12.log.
+The immutable result directory is
+/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12.
+
 ## Current Status
 
 Workstream opened on 2026-09-15 for arXiv:2608.30386 DASC. Paper ingestion,
