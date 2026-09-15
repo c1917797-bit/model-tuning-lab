@@ -39,6 +39,14 @@ The selected design is therefore:
    runner allocation, views, metadata indices, invalidation, and save/restore
    paths all use the new representation.
 
+The v0.23 cache manager can represent heterogeneous per-layer sizes through
+UniformTypeKVCacheSpecs, whose page size is the sum of its child specs.
+Therefore DASC should return a compact MambaSpec for each GDN layer rather than
+padding all layers to one retained-head count. The compact spec must set
+page_size_padded=None; otherwise the global dense padding overrides the smaller
+shape and no physical allocation is saved. The runner-bound compact tensor
+must never be passed directly to the dense native GDN ABI.
+
 ## Rejected shortcuts
 
 - Zeroing omitted heads in the existing dense cache: numerically reachable but
