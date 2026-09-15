@@ -148,6 +148,15 @@ inherits the same mechanism code but now requires both no device PID and at
 most 5% reported HBM use on every physical NPU4-7 before and after taking the
 lock. Never reuse or overwrite the failed v12 root.
 
+The authoritative v12r1 controller is remote operation
+`exec-0000000000001326`; its immutable root is
+`/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12r1`
+and its owned container is
+`dasc_qwen36_physical_order_fix_v12r1_20260915`. The replacement v12r1-to-v13
+supervisor is `exec-0000000000001327`. Both were launched from clean commit
+`181fe72`. Poll these handles; the older v12 handle is terminal-failed and
+the older supervisor can never observe a v12 SUCCESS marker.
+
 When the operation becomes terminal, inspect its result and the immutable root
 `/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12`, then run
 `verify_physical_v12.py --root ...`. Only a zero controller exit, complete
