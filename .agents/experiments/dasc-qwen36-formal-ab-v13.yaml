@@ -107,7 +107,7 @@ protocol:
     - "profiler is enabled during benchmark timing"
   warmup: "two shared-prefix requests plus graph capture; excluded from aggregates"
   repetitions: 3
-  command: "to be added only after v12 acceptance; controller must be resumable and single-instance"
+  command: ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_formal_ab_v13.sh (only after v12 acceptance; resumable and single-instance)"
 results:
   baseline: {}
   candidate: {}
