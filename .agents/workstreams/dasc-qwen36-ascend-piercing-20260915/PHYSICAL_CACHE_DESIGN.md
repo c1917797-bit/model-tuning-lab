@@ -59,6 +59,17 @@ The selected design is therefore:
 - common-config dense control, warmup excluded, repeated steady-state A/B;
 - only then E2E GSM8K quality with no more than one percentage-point loss.
 
-The plugin now contains CompactCheckpointLayout, pack/unpack primitives, and a
-fixed-address CompactCheckpointArena. They are tested but are not yet connected
-to scheduler allocation or the live GDN lifecycle.
+The plugin now contains CompactCheckpointLayout, pack/unpack primitives,
+compact and full fixed-address arenas, and an atomic ActiveStateBridge. The
+bridge synchronizes temporal and convolution restore/checkpoint, prefix block
+copy, validity propagation, abort, and invalidation. The v0.23 container suite
+passes 21 tests. This is CPU tensor/lifecycle evidence; the bridge is not yet
+connected to scheduler allocation or live GDN execution.
+
+## NPU lifecycle attempt
+
+A bounded single-process validation mapped physical NPU4 to container device 0
+and attempted to allocate its first NPU tensor. It terminated before any DASC
+operation or assertion because `aclInit` returned `507899 Resource_Busy`
+(AWMCP operation `exec-0000000000000f5b`). It was not retried and no broader
+device claim was made. The NPU lifecycle gate therefore remains open.
