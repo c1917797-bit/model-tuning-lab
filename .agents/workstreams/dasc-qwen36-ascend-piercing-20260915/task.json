@@ -14,6 +14,7 @@
     "repository": "/opt/host/vnf/austinov/model-tuning-lab"
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
+  "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
   "status": "ingestion_started",
   "decision": "open",
   "next_actions": [

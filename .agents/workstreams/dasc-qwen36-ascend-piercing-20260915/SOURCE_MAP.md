@@ -35,6 +35,8 @@ The smallest candidate should hook the live GDN core before recurrent computatio
 
 This preserves native Ascend recurrent kernels and changes only the recurrent-state checkpoint representation/load policy.
 
+The hook must be delivered as a plugin-owned monkeypatch, installed after the Ascend model/runtime patches are active. The plugin may wrap live Python objects and call native Ascend kernels, but it must not patch upstream source trees or replace CANN/vLLM-Ascend binaries in place.
+
 ## Still Unknown
 
 - Whether current vLLM-Ascend persists recurrent state checkpoints across prefix-cache entries, or only maintains active request state rows. Initial vLLM core inspection shows prefix-cache hits are represented as computed KV blocks and `num_computed_tokens`; no recurrent-state checkpoint identity was found in the generic `KVCacheManager` interface.

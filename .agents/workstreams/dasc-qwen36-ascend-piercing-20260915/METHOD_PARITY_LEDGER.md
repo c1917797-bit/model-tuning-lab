@@ -16,3 +16,6 @@
 
 Until the full store/load and benchmark chain is reproduced, local work is `DASC-GDN Ascend derivative`. It may become `faithful-port` only if the same horizon formula, GDN head granularity, dense denominator, ragged checkpoint semantics, and cache-hit serving protocol are implemented and measured.
 
+## Delivery Boundary
+
+All implementation must live in the plugin/monkeypatch layer and run against the installed Ascend serving stack. Direct upstream edits to vLLM, vLLM-Ascend, CANN, model weights, or base images are out of scope for delivery and may only be used as read-only references.
