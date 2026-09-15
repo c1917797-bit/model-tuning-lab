@@ -112,7 +112,19 @@ def payload(candidate_quality_drop=0):
                 for dataset, correct in dense_quality.items()
             },
         }
-    return {"schema": "dasc-formal-v13-normalized/v1", "arms": arms}
+    return {
+        "schema": "dasc-formal-v13-normalized/v1",
+        "candidate_activation": {
+            "ok": True,
+            "physical_cache_pids": [101, 102, 103, 104],
+            "tp_geometry_pids": [101, 102, 103, 104],
+            "worker_dispatch_pids": [101, 102, 103, 104],
+            "compact_lt_dense": True,
+            "positive_blocks": True,
+            "heterogeneous_cache_grouped": True,
+        },
+        "arms": arms,
+    }
 
 
 def test_accepts_complete_paired_positive_evidence():
@@ -134,3 +146,13 @@ def test_rejects_zero_cache_hit_even_when_metrics_improve():
     result = evaluate(value)
     assert result["ok"] is False
     assert result["checks"]["all_raw_runs_valid"] is False
+
+
+def test_rejects_missing_four_worker_candidate_activation():
+    value = payload()
+    value["candidate_activation"]["physical_cache_pids"] = [101, 102, 103]
+    value["candidate_activation"]["tp_geometry_pids"] = [101, 102, 103]
+    value["candidate_activation"]["worker_dispatch_pids"] = [101, 102, 103]
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["checks"]["candidate_activation"] is False

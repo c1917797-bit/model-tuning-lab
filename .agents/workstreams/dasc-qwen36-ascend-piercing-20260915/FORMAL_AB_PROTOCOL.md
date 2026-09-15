@@ -117,5 +117,7 @@ quality-detail rows, metric snapshots, and arm identities with
 `verify_formal_decision.py` over that
 self-contained evidence. It recomputes completeness, cache-hit deltas,
 accuracies, paired per-run direction, the Dense run-to-run tolerance, and the
-one-switch identity. Its exit code is authoritative for the formal decision;
+one-switch identity. It also rejects candidate evidence unless the physical
+cache, TP geometry, and dispatch events cover the same four workers. Its exit
+code is authoritative for the formal decision;
 a hand-written summary cannot override a rejection.

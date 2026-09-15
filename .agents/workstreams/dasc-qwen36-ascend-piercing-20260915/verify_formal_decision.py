@@ -52,6 +52,22 @@ def verify_identity(payload: dict) -> dict:
     candidate_fixed = {
         key: value for key, value in candidate.items() if key not in ignored
     }
+
+
+def verify_candidate_activation(payload: dict) -> dict:
+    activation = payload.get("candidate_activation", {})
+    physical = activation.get("physical_cache_pids")
+    geometry = activation.get("tp_geometry_pids")
+    dispatch = activation.get("worker_dispatch_pids")
+    return {
+        "reported_ok": activation.get("ok") is True,
+        "four_workers": isinstance(physical, list) and len(physical) == 4,
+        "worker_cohort_aligned": physical == geometry == dispatch,
+        "compact_lt_dense": activation.get("compact_lt_dense") is True,
+        "positive_blocks": activation.get("positive_blocks") is True,
+        "heterogeneous_cache_grouped": activation.get("heterogeneous_cache_grouped")
+        is True,
+    }
     return {
         "fixed_fields_equal": dense_fixed == candidate_fixed,
         "required_runtime_identity": all(
@@ -128,6 +144,7 @@ def evaluate(payload: dict) -> dict:
     if payload.get("schema") != "dasc-formal-v13-normalized/v1":
         raise ValueError("unexpected normalized evidence schema")
     identities = verify_identity(payload)
+    activation = verify_candidate_activation(payload)
     performance_checks = {}
     performance_values = {}
     quality_checks = {}
@@ -193,6 +210,7 @@ def evaluate(payload: dict) -> dict:
     )
     checks = {
         "identity": all(identities.values()),
+        "candidate_activation": all(activation.values()),
         "all_raw_runs_valid": all_run_checks,
         "performance_runs_paired": paired_performance,
         "performance_direction_every_run": performance_direction,
@@ -201,6 +219,7 @@ def evaluate(payload: dict) -> dict:
     return {
         "schema": "dasc-formal-v13-decision/v1",
         "identity_checks": identities,
+        "candidate_activation_checks": activation,
         "performance_checks": performance_checks,
         "quality_checks": quality_checks,
         "quality_gates": quality_gates,

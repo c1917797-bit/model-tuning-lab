@@ -86,7 +86,7 @@ protocol:
   correctness_guardrails:
     - "v12 must first pass service, four-worker activation, compact-byte, short-response, and deterministic reuse gates"
     - "all measured performance requests succeed and produce exactly 1024 output tokens"
-    - "candidate activation evidence covers all four TP workers"
+    - "candidate activation evidence covers all four TP workers and is consumed by the independent decision verifier"
     - "quality rows are complete, uniquely indexed, hash-bound, and independently rescored"
     - "full-attention KV policy, model bytes, image, request tokens, concurrency, warmups, and HBM budget are identical"
     - "both arms use max_model_len=44032 so all audited LongBench-v2 prompts plus 1024 output tokens fit without truncation"

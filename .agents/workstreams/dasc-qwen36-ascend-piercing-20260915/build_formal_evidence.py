@@ -67,7 +67,11 @@ def build(root: Path) -> dict:
             "performance": performance,
             "quality": quality,
         }
-    return {"schema": "dasc-formal-v13-normalized/v1", "arms": arms}
+    return {
+        "schema": "dasc-formal-v13-normalized/v1",
+        "candidate_activation": read_json(root / "candidate" / "activation.json"),
+        "arms": arms,
+    }
 
 
 def main() -> int:
