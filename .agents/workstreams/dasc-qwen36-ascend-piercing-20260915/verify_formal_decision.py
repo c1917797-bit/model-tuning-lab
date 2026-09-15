@@ -45,8 +45,10 @@ def cache_hit_delta(record: dict) -> float:
 
 
 def verify_identity(payload: dict) -> dict:
-    dense = payload["arms"]["dense"]["identity"]
-    candidate = payload["arms"]["candidate"]["identity"]
+    dense_arm = payload["arms"]["dense"]
+    candidate_arm = payload["arms"]["candidate"]
+    dense = dense_arm["identity"]
+    candidate = candidate_arm["identity"]
     ignored = {"dasc_plugin", "mode", "w_max"}
     dense_fixed = {key: value for key, value in dense.items() if key not in ignored}
     candidate_fixed = {
@@ -64,6 +66,12 @@ def verify_identity(payload: dict) -> dict:
         "candidate_treatment": candidate.get("dasc_plugin") is True
         and candidate.get("mode") == "physical-cache-eager"
         and candidate.get("w_max") == 64,
+        "runtime_manifest_hash_bound": dense.get("runtime_manifest_sha256")
+        == dense_arm.get("runtime_manifest_sha256")
+        and candidate.get("runtime_manifest_sha256")
+        == candidate_arm.get("runtime_manifest_sha256"),
+        "runtime_manifests_equal": dense_arm.get("runtime_manifest")
+        == candidate_arm.get("runtime_manifest"),
     }
 
 

@@ -1,4 +1,5 @@
 import json
+import hashlib
 from pathlib import Path
 
 import pytest
@@ -16,6 +17,10 @@ def make_root(root: Path) -> None:
     write_json(root / "cache-capacity.json", {"ok": True})
     for arm in ARMS:
         write_json(root / arm / "identity.json", {"arm": arm})
+        write_json(
+            root / arm / "runtime-manifest.json",
+            {"schema": "dasc-formal-runtime-manifest/v1", "files": {}},
+        )
         for run_id in RUN_IDS:
             write_json(root / arm / f"performance.{run_id}.json", {"config": {}})
             write_json(
@@ -46,6 +51,10 @@ def test_build_uses_fixed_local_artifact_layout(tmp_path):
     assert set(result["arms"]) == set(ARMS)
     assert result["candidate_activation"] == {"ok": True}
     assert result["cache_capacity"] == {"ok": True}
+    runtime_path = tmp_path / "dense" / "runtime-manifest.json"
+    assert result["arms"]["dense"]["runtime_manifest_sha256"] == hashlib.sha256(
+        runtime_path.read_bytes()
+    ).hexdigest()
     assert [x["run_id"] for x in result["arms"]["dense"]["performance"]] == list(
         RUN_IDS
     )

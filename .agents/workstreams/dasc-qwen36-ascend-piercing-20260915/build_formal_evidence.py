@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -28,10 +29,15 @@ def read_jsonl(path: Path) -> list[dict]:
     return rows
 
 
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def build(root: Path) -> dict:
     arms = {}
     for arm in ARMS:
         arm_root = root / arm
+        runtime_manifest_path = arm_root / "runtime-manifest.json"
         performance = []
         for run_id in RUN_IDS:
             performance.append(
@@ -64,6 +70,8 @@ def build(root: Path) -> dict:
                 )
         arms[arm] = {
             "identity": read_json(arm_root / "identity.json"),
+            "runtime_manifest": read_json(runtime_manifest_path),
+            "runtime_manifest_sha256": sha256(runtime_manifest_path),
             "performance": performance,
             "quality": quality,
         }

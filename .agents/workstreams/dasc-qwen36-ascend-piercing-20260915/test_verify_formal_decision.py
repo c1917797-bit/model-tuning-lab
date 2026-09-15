@@ -77,6 +77,7 @@ def identity(candidate):
     return {
         **FIXED_IDENTITY,
         "model_config_sha256": "same",
+        "runtime_manifest_sha256": "manifest",
         "image_digest": "same",
         "source_commit": "same",
         "dasc_plugin": candidate,
@@ -92,6 +93,11 @@ def payload(candidate_quality_drop=0):
     for arm, candidate in (("dense", False), ("candidate", True)):
         arms[arm] = {
             "identity": identity(candidate),
+            "runtime_manifest": {
+                "schema": "dasc-formal-runtime-manifest/v1",
+                "files": {"model_index": {"sha256": "same"}},
+            },
+            "runtime_manifest_sha256": "manifest",
             "performance": [
                 performance(
                     run_id,
@@ -167,3 +173,21 @@ def test_rejects_missing_four_worker_candidate_activation():
     result = evaluate(value)
     assert result["ok"] is False
     assert result["checks"]["candidate_activation"] is False
+
+
+def test_rejects_runtime_manifest_drift():
+    value = payload()
+    value["arms"]["candidate"]["runtime_manifest"]["files"]["model_index"][
+        "sha256"
+    ] = "changed"
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["identity_checks"]["runtime_manifests_equal"] is False
+
+
+def test_rejects_unbound_runtime_manifest_hash():
+    value = payload()
+    value["arms"]["candidate"]["runtime_manifest_sha256"] = "different"
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["identity_checks"]["runtime_manifest_hash_bound"] is False

@@ -160,6 +160,10 @@ Formal evidence is deliberately not accepted from a hand-written summary:
 
 - `extract_formal_identity.py` derives arm identity from Docker inspect and
   rejects protected-device mappings or treatment drift.
+- `capture_runtime_manifest.py` hashes the model config and weight index,
+  tokenizer, image inspection, driver/CANN metadata, benchmark, evaluator, and
+  datasets separately for each arm. The normalized decision requires the raw
+  manifests and their hashes to match.
 - `capture_prometheus_metrics.py` captures the exact prefix-cache counters.
 - `verify_cache_capacity.py` reconciles live aggregate cache tokens with the
   per-group dense budget and four-worker candidate allocation evidence.
@@ -180,6 +184,6 @@ later review also found that prefix matching would misclassify
 `/dev/davinci_manager` as a compute card; commit `a7c2173` changed this to an
 exact numeric-device match and added realistic auxiliary devices to the test.
 
-The last full CPU-only workstream run passed 35 tests with 14 upstream Torch
+The last full CPU-only workstream run passed 40 tests with 14 upstream Torch
 deprecation warnings. The current branch is intentionally unpushed; pushing
 requires explicit user authorization for the exact branch and payload.

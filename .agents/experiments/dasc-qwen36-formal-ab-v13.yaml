@@ -89,6 +89,7 @@ protocol:
     - "candidate activation evidence covers all four TP workers and is consumed by the independent decision verifier"
     - "quality rows are complete, uniquely indexed, hash-bound, and independently rescored"
     - "full-attention KV policy, model bytes, image, request tokens, concurrency, warmups, and HBM budget are identical"
+    - "each arm independently hashes the model config, weight index, tokenizer files, image inspection, driver/CANN metadata, benchmark, evaluator, and datasets; the normalized decision requires byte-identical manifests"
     - "both arms use max_model_len=44032 so all audited LongBench-v2 prompts plus 1024 output tokens fit without truncation"
     - "both arms use exactly 9663676416 cache bytes per rank, block size 128, max_num_seqs=32, and the same cache dtype"
     - "the static resource audit must pass, and live startup evidence must reproduce the actual block counts and page sizes rather than trusting the estimate"
@@ -127,6 +128,7 @@ results:
     candidate_dense_workspace_upper_bound_bytes_per_rank: 603979776
     live_reconciliation: pending_v12_and_v13_startup_evidence
   decision_verifier:
+    runtime_manifest: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/capture_runtime_manifest.py
     live_capacity: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/verify_cache_capacity.py
     identity_extractor: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/extract_formal_identity.py
     metric_capture: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/capture_prometheus_metrics.py
@@ -134,7 +136,7 @@ results:
     tool: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/verify_formal_decision.py
     input_schema: dasc-formal-v13-normalized/v1
     output_schema: dasc-formal-v13-decision/v1
-    status: ready_for_controller_integration_after_v12_gate
+    status: integrated_and_waiting_for_v12_gate
 artifacts:
   - /cache/cch/dasc-qwen36-ascend-20260915/formal-ab-v13
 decision_reason: ""

@@ -58,7 +58,9 @@ def inspect_value(arm):
 
 @pytest.mark.parametrize("arm", ["dense", "candidate"])
 def test_extracts_exact_identity(arm):
-    result = extract(inspect_value(arm), arm, "c" * 40, "model", "plugin")
+    result = extract(
+        inspect_value(arm), arm, "c" * 40, "model", "plugin", "runtime"
+    )
     assert result["dasc_plugin"] is (arm == "candidate")
     assert result["physical_npus"] == [4, 5, 6, 7]
 
@@ -69,7 +71,7 @@ def test_rejects_protected_device_mapping():
         {"PathOnHost": "/dev/davinci0", "PathInContainer": "/dev/davinci4"}
     )
     with pytest.raises(ValueError, match="devices"):
-        extract(value, "dense", "c" * 40, "model", "plugin")
+        extract(value, "dense", "c" * 40, "model", "plugin", "runtime")
 
 
 def test_rejects_candidate_with_dense_plugin_switch():
@@ -78,4 +80,6 @@ def test_rejects_candidate_with_dense_plugin_switch():
         x.replace("ascend,dasc_vllm_ascend", "ascend") for x in value["Config"]["Env"]
     ]
     with pytest.raises(ValueError, match="plugins"):
-        extract(value, "candidate", "c" * 40, "model", "plugin")
+        extract(
+            value, "candidate", "c" * 40, "model", "plugin", "runtime"
+        )

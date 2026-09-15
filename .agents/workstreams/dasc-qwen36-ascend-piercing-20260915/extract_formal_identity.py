@@ -35,6 +35,7 @@ def extract(
     source_commit: str,
     model_config_sha256: str,
     plugin_manifest_sha256: str,
+    runtime_manifest_sha256: str,
 ) -> dict:
     if arm not in ("dense", "candidate"):
         raise ValueError(f"unknown arm: {arm}")
@@ -101,6 +102,7 @@ def extract(
         "image_digest": value["Image"],
         "model_config_sha256": model_config_sha256,
         "plugin_manifest_sha256": plugin_manifest_sha256,
+        "runtime_manifest_sha256": runtime_manifest_sha256,
         "source_commit": source_commit,
         "dasc_plugin": candidate,
         "mode": "physical-cache-eager" if candidate else None,
@@ -115,6 +117,7 @@ def main() -> int:
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--model-config-sha256", required=True)
     parser.add_argument("--plugin-manifest-sha256", required=True)
+    parser.add_argument("--runtime-manifest-sha256", required=True)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     values = json.loads(args.inspect.read_text(encoding="utf-8"))
@@ -126,6 +129,7 @@ def main() -> int:
         args.source_commit,
         args.model_config_sha256,
         args.plugin_manifest_sha256,
+        args.runtime_manifest_sha256,
     )
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
     temporary.write_text(json.dumps(identity, indent=2, sort_keys=True) + "\n")

@@ -14,6 +14,7 @@ BENCH=/cache/cch/hypic_vllm_ascend-v0.8.5/tools/benchmark_shared_prefix.py
 QUALITY=$REPO/$WS/dasc_quality_eval.py
 METRICS=$REPO/$WS/capture_prometheus_metrics.py
 IDENTITY=$REPO/$WS/extract_formal_identity.py
+RUNTIME_MANIFEST=$REPO/$WS/capture_runtime_manifest.py
 NORMALIZER=$REPO/$WS/build_formal_evidence.py
 DECIDER=$REPO/$WS/verify_formal_decision.py
 CAPACITY=$REPO/$WS/verify_cache_capacity.py
@@ -39,7 +40,7 @@ snapshot_cards() {
 static_checks() {
   command -v docker >/dev/null; command -v npu-smi >/dev/null; command -v flock >/dev/null
   test -r "$MODEL_HOST/config.json"; test -r "$REPO/projects/dasc_vllm_ascend/pyproject.toml"
-  test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"
+  test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"; test -r "$RUNTIME_MANIFEST"
   test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$PERF_RESUME"; test -r "$VERIFY_V12"
   printf '%s  %s\n' cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822 "$BENCH" | sha256sum -c -
   docker image inspect "$IMAGE" >/dev/null
@@ -78,7 +79,7 @@ docker image inspect "$IMAGE" >"$ROOT/image-inspect.json"
 snapshot_cards >"$ROOT/npu-before.txt"
 
 create_arm() {
-  local arm=$1 name candidate plugins enable
+  local arm=$1 name candidate plugins enable runtime_sha
   name=$(container_name "$arm")
   [[ "$arm" == candidate ]] && { candidate=1; plugins=ascend,dasc_vllm_ascend; enable=1; } || { candidate=0; plugins=ascend; enable=0; }
   if [[ $(container_state "$name") == absent ]]; then
@@ -95,7 +96,21 @@ create_arm() {
       --compilation-config '{"cudagraph_capture_sizes":[1,2,4,8,16,32],"cudagraph_mode":"FULL_DECODE_ONLY"}' --port "$PORT" >/dev/null
   fi
   docker inspect "$name" >"$ROOT/$arm/container-inspect.json"
-  python3 "$IDENTITY" --inspect "$ROOT/$arm/container-inspect.json" --arm "$arm" --source-commit "$HEAD" --model-config-sha256 "$MODEL_SHA" --plugin-manifest-sha256 "$PLUGIN_SHA" --output "$ROOT/$arm/identity.json"
+  python3 "$RUNTIME_MANIFEST" \
+    --file "model_config=$MODEL_HOST/config.json" \
+    --file "model_weight_index=$MODEL_HOST/model.safetensors.index.json" \
+    --file "tokenizer=$MODEL_HOST/tokenizer.json" \
+    --file "tokenizer_config=$MODEL_HOST/tokenizer_config.json" \
+    --file "driver_version=/usr/local/Ascend/driver/version.info" \
+    --file "ascend_install=/etc/ascend_install.info" \
+    --file "image_inspect=$ROOT/image-inspect.json" \
+    --file "benchmark=$BENCH" \
+    --file "quality_evaluator=$REPO/.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py" \
+    --file "longbenchv2=/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json" \
+    --file "gsm8k=/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl" \
+    --output "$ROOT/$arm/runtime-manifest.json"
+  runtime_sha=$(sha256sum "$ROOT/$arm/runtime-manifest.json" | awk '{print $1}')
+  python3 "$IDENTITY" --inspect "$ROOT/$arm/container-inspect.json" --arm "$arm" --source-commit "$HEAD" --model-config-sha256 "$MODEL_SHA" --plugin-manifest-sha256 "$PLUGIN_SHA" --runtime-manifest-sha256 "$runtime_sha" --output "$ROOT/$arm/identity.json"
 }
 
 start_arm() {

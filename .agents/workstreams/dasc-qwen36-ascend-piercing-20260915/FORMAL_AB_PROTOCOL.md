@@ -35,6 +35,13 @@ random seed.
 The DASC switch is the only treatment difference. A run with prefix caching
 disabled is not a DASC denominator.
 
+Before either arm starts, create its deterministic runtime manifest. Hash the
+model config, safetensors weight index, tokenizer files, Docker image
+inspection, host driver/CANN metadata, pinned HYPIC benchmark, quality
+evaluator, and both datasets. Include each raw manifest and its file SHA256 in
+the normalized evidence. The independent decision rejects either an unbound
+manifest hash or any cross-arm byte drift.
+
 ## Frozen resource budget
 
 Both arms use exactly 9,663,676,416 cache bytes per TP rank (9 GiB), a
