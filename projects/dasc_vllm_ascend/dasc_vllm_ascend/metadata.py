@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import fields, is_dataclass, replace
+import copy
+from dataclasses import fields, is_dataclass
 from typing import Any
 
 from .compact import ActiveSlotPlan, build_active_slot_plan
@@ -30,12 +31,15 @@ def _get_path(root: Any, path: tuple[str, ...]) -> Any | None:
 def _replace_path(root: Any, path: tuple[str, ...], value: Any) -> Any:
     if not is_dataclass(root):
         raise TypeError(f"metadata node for {'.'.join(path)} is not a dataclass")
+    cloned = copy.copy(root)
     if len(path) == 1:
-        return replace(root, **{path[0]: value})
+        object.__setattr__(cloned, path[0], value)
+        return cloned
     child = getattr(root, path[0])
     if child is None:
         raise ValueError(f"metadata path {'.'.join(path)} disappeared")
-    return replace(root, **{path[0]: _replace_path(child, path[1:], value)})
+    object.__setattr__(cloned, path[0], _replace_path(child, path[1:], value))
+    return cloned
 
 
 def _discover_index_paths(root: Any, prefix: tuple[str, ...] = ()) -> set[tuple[str, ...]]:

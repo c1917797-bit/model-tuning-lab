@@ -81,3 +81,28 @@ def test_rejects_metadata_without_state_indices():
     empty = Metadata(None, None, None, None, None, None)
     with pytest.raises(ValueError, match="contains no"):
         remap_ascend_gdn_metadata(empty)
+
+
+@dataclass
+class UpstreamMetadata:
+    non_spec_state_indices_tensor: torch.Tensor
+
+
+def test_preserves_ascend_runtime_attributes_while_replacing_dataclass_fields():
+    metadata = UpstreamMetadata(torch.tensor([7, 3], dtype=torch.int32))
+    metadata.non_spec_prefill_metadata = Prefill(
+        Conv(torch.tensor([7, 3], dtype=torch.int32))
+    )
+
+    remapped, plan = remap_ascend_gdn_metadata(metadata)
+
+    assert torch.equal(plan.block_ids, torch.tensor([3, 7], dtype=torch.int32))
+    assert torch.equal(
+        remapped.non_spec_state_indices_tensor,
+        torch.tensor([1, 0], dtype=torch.int32),
+    )
+    assert torch.equal(
+        remapped.non_spec_prefill_metadata.causal_conv1d.cache_indices,
+        torch.tensor([1, 0], dtype=torch.int32),
+    )
+    assert hasattr(metadata, "non_spec_prefill_metadata")
