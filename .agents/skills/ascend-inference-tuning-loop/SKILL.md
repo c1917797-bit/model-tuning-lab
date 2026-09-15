@@ -130,3 +130,12 @@ For algorithms that claim gains by reducing recurrent or prefix state:
 - A canary that is slower is still useful if it closes the execution-path
   uncertainty; record it as a negative performance result and move to the
   missing physical representation rather than tuning the canary.
+- Treat every state family sharing scheduler indices as one transaction. For
+  GDN this means temporal and convolution state must use the same active-slot
+  remap, prefix block copy, validity propagation, and invalidation boundary;
+  changing only the pruned tensor can silently combine states from different
+  requests.
+- Keep persistent checkpoint storage separate from fixed-address dense active
+  workspaces when the native operator ABI is dense. Prove restore, compute,
+  checkpoint, prefix-copy, abort, and invalidation lifecycles before changing
+  framework page accounting or claiming physical savings.
