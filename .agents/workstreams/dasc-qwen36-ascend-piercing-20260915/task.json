@@ -22,16 +22,25 @@
     "Poll authoritative controller exec-00000000000011b9; do not start a duplicate while it is live.",
     "When physical NPU4-7 become idle, let v12 run the order-fixed compact-cache service, exact short request, repeated shared-prefix reuse, activation, and physical-byte gates.",
     "Classify v12 independently: service or semantic failure rejects the attempt; external occupancy remains an environment wait.",
+    "Use commit 5f93b14 cache-hit quality adapter for formal quality runs; --require-cache-hit must fail closed on a zero hit delta.",
     "Only after physical capacity changes, run the one-switch cache-hit TTFT and input-throughput benchmark."
   ],
   "controller": {
     "operation_id": "exec-00000000000011b9",
     "idempotency_key": "dasc-qwen36-physical-cache-v12-npu4-7-controller",
     "state_last_verified": "running",
-    "verified_at": "2026-09-15T19:19:24Z",
+    "verified_at": "2026-09-15T19:37:08Z",
     "artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12",
     "container": "dasc_qwen36_physical_order_fix_v12_20260915",
     "port": 8030,
     "physical_npus": [4, 5, 6, 7]
+  },
+  "quality_gate": {
+    "commit": "5f93b14",
+    "adapter": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/dasc_quality_eval.py",
+    "base_evaluator_sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0",
+    "positive_hit_test": "passed",
+    "zero_hit_fail_closed_test": "passed",
+    "maintainer_tree_validation": "passed_26_skills"
   }
 }
