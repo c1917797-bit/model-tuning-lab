@@ -212,3 +212,45 @@ def test_aligned_hybrid_grouping_rejects_hidden_cache(tmp_path):
     physical_patch._install_aligned_hybrid_grouping_patch(config, namespace)
     with pytest.raises(physical_patch.DascRuntimeUnsupported, match="hidden-state"):
         namespace.get_kv_cache_groups(SimpleNamespace(), specs)
+
+
+def test_heterogeneous_cascade_guard_disables_only_uniform_group(tmp_path):
+    from vllm.v1.kv_cache_interface import (
+        FullAttentionSpec,
+        KVCacheGroupSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    attention = FullAttentionSpec(
+        block_size=1536,
+        num_kv_heads=1,
+        head_size=128,
+        dtype=torch.bfloat16,
+    )
+    aggregate = UniformTypeKVCacheSpecs(
+        block_size=1536,
+        kv_cache_specs={"attn": attention},
+    )
+
+    class FakeRunner:
+        def _compute_cascade_attn_prefix_lens(self, *args, **kwargs):
+            return [["original"]]
+
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_heterogeneous_cascade_guard(config, FakeRunner)
+
+    runner = FakeRunner()
+    runner.kv_cache_config = SimpleNamespace(
+        kv_cache_groups=[KVCacheGroupSpec(["attn"], aggregate)]
+    )
+    assert runner._compute_cascade_attn_prefix_lens(None, None, None) is None
+    assert runner._mst_dasc_cascade_guard_emitted
+
+    runner.kv_cache_config = SimpleNamespace(
+        kv_cache_groups=[KVCacheGroupSpec(["attn"], attention)]
+    )
+    assert runner._compute_cascade_attn_prefix_lens(None, None, None) == [
+        ["original"]
+    ]

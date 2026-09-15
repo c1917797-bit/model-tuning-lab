@@ -142,6 +142,48 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
     kv_cache_utils._mst_dasc_aligned_hybrid_installed = True
 
 
+def _install_heterogeneous_cascade_guard(
+    config: DascConfig, model_runner_class: Any
+) -> None:
+    """Disable cascade attention for the synthetic heterogeneous cache group.
+
+    vLLM 0.23 passes the aggregate UniformTypeKVCacheSpecs to its cascade
+    heuristic, which accepts only AttentionSpec. Cascade attention is an
+    optional execution optimization, so returning None retains the normal
+    attention path while preserving the shared attention/Mamba block lifecycle.
+    """
+    if getattr(model_runner_class, "_mst_dasc_cascade_guard_installed", False):
+        return
+
+    from vllm.v1.kv_cache_interface import UniformTypeKVCacheSpecs
+
+    original = model_runner_class._compute_cascade_attn_prefix_lens
+
+    @functools.wraps(original)
+    def compute_without_heterogeneous_cascade(self, *args, **kwargs):
+        cache_config = getattr(self, "kv_cache_config", None)
+        groups = getattr(cache_config, "kv_cache_groups", ())
+        if any(
+            isinstance(group.kv_cache_spec, UniformTypeKVCacheSpecs)
+            for group in groups
+        ):
+            if not getattr(self, "_mst_dasc_cascade_guard_emitted", False):
+                emit(
+                    config.evidence_path,
+                    "heterogeneous_cascade_disabled",
+                    mode=config.mode,
+                    cache_groups=len(groups),
+                )
+                self._mst_dasc_cascade_guard_emitted = True
+            return None
+        return original(self, *args, **kwargs)
+
+    model_runner_class._compute_cascade_attn_prefix_lens = (
+        compute_without_heterogeneous_cascade
+    )
+    model_runner_class._mst_dasc_cascade_guard_installed = True
+
+
 def _retained_mask(module: Any, state: Any, config: DascConfig):
     import torch
 
@@ -524,6 +566,7 @@ def install(config: DascConfig) -> None:
     Qwen3_5ForConditionalGeneration.load_weights = load_then_install
     if config.mode == "physical-cache-eager":
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
+        _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
     emit(
         config.evidence_path,
         "plugin_registered",
