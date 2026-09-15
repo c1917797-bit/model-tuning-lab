@@ -72,6 +72,9 @@ def build(root: Path) -> dict:
             "identity": read_json(arm_root / "identity.json"),
             "runtime_manifest": read_json(runtime_manifest_path),
             "runtime_manifest_sha256": sha256(runtime_manifest_path),
+            "device_ownership_history": read_jsonl(
+                arm_root / "device-ownership.jsonl"
+            ),
             "performance": performance,
             "quality": quality,
         }

@@ -1,4 +1,7 @@
+import json
+
 from verify_device_ownership import (
+    append_history,
     parse_container_pids,
     parse_device_pids,
     verify,
@@ -27,3 +30,13 @@ def test_rejects_foreign_device_process():
 def test_rejects_missing_container_process_set():
     result = verify(set(), set())
     assert result["ok"] is False
+
+
+def test_appends_durable_jsonl_history(tmp_path):
+    path = tmp_path / "ownership.jsonl"
+    append_history(path, {"ok": True, "owned_pids": [101]})
+    append_history(path, {"ok": True, "owned_pids": [102]})
+    assert [json.loads(line)["owned_pids"] for line in path.read_text().splitlines()] == [
+        [101],
+        [102],
+    ]

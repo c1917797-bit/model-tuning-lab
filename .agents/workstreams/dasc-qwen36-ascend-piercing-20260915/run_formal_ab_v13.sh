@@ -142,11 +142,12 @@ stop_arm() {
 archive() { local stamp; stamp=$(date -u +%Y%m%dT%H%M%SZ); for x in "$@"; do [[ ! -e "$x" ]] || mv "$x" "$x.invalid.$stamp"; done; }
 capture() { python3 "$METRICS" --url "http://127.0.0.1:$PORT/metrics" --output "$1"; }
 guard_cards() {
-  local arm=$1 name=$2 latest violation
+  local arm=$1 name=$2 latest history violation
   latest=$ROOT/$arm/device-ownership.latest.json
+  history=$ROOT/$arm/device-ownership.jsonl
   violation=$ROOT/$arm/device-ownership.violation.json
   while [[ $(container_state "$name") == running ]]; do
-    if ! python3 "$DEVICE_OWNERSHIP" --container "$name" --cards 4 5 6 7 --output "$latest"; then
+    if ! python3 "$DEVICE_OWNERSHIP" --container "$name" --cards 4 5 6 7 --output "$latest" --history "$history"; then
       cp "$latest" "$violation" 2>/dev/null || true
       docker stop --time 10 "$name" >/dev/null 2>&1 || true
       return 1

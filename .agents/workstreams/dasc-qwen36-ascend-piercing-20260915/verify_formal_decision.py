@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import json
 import statistics
 from pathlib import Path
@@ -31,6 +32,10 @@ FIXED_IDENTITY = {
     "max_num_seqs": 32,
     "block_size": 128,
     "kv_cache_memory_bytes_per_rank": 9663676416,
+}
+EXPECTED_CONTAINERS = {
+    "dense": "dasc_qwen36_formal_v13_dense_20260916",
+    "candidate": "dasc_qwen36_formal_v13_candidate_20260916",
 }
 
 
@@ -89,6 +94,64 @@ def verify_candidate_activation(payload: dict) -> dict:
         "heterogeneous_cache_grouped": activation.get("heterogeneous_cache_grouped")
         is True,
     }
+
+
+def verify_device_ownership_history(rows: object, arm: str) -> dict:
+    samples = rows if isinstance(rows, list) else []
+    def timestamp_valid(row: object) -> bool:
+        if not isinstance(row, dict):
+            return False
+        try:
+            parsed = datetime.fromisoformat(row["observed_at_utc"])
+        except (KeyError, TypeError, ValueError):
+            return False
+        return parsed.utcoffset() is not None
+
+    return {
+        "history_nonempty": bool(samples),
+        "all_samples_objects": all(isinstance(row, dict) for row in samples),
+        "timestamps_valid": bool(samples) and all(timestamp_valid(row) for row in samples),
+        "physical_npus_fixed": bool(samples)
+        and all(
+            isinstance(row, dict)
+            and row.get("physical_npus") == [4, 5, 6, 7]
+            for row in samples
+        ),
+        "container_fixed": bool(samples)
+        and all(
+            isinstance(row, dict)
+            and row.get("container") == EXPECTED_CONTAINERS[arm]
+            for row in samples
+        ),
+        "owned_process_set_nonempty": bool(samples)
+        and all(
+            isinstance(row, dict)
+            and isinstance(row.get("owned_pids"), list)
+            and bool(row["owned_pids"])
+            for row in samples
+        ),
+        "no_foreign_processes": bool(samples)
+        and all(
+            isinstance(row, dict)
+            and row.get("ok") is True
+            and row.get("foreign_pids") == []
+            for row in samples
+        ),
+        "observations_owned": bool(samples)
+        and all(
+            isinstance(row, dict)
+            and isinstance(row.get("observed_device_pids"), list)
+            and isinstance(row.get("owned_pids"), list)
+            and set(row["observed_device_pids"]) <= set(row["owned_pids"])
+            for row in samples
+        ),
+        "npu_workers_observed": any(
+            isinstance(row, dict) and bool(row.get("observed_device_pids"))
+            for row in samples
+        ),
+    }
+
+
 def verify_performance_run(run: dict) -> dict:
     report = run["report"]
     config = report["config"]
@@ -152,6 +215,12 @@ def evaluate(payload: dict) -> dict:
     identities = verify_identity(payload)
     activation = verify_candidate_activation(payload)
     capacity = payload.get("cache_capacity", {})
+    device_ownership_checks = {
+        arm: verify_device_ownership_history(
+            payload["arms"][arm].get("device_ownership_history"), arm
+        )
+        for arm in ("dense", "candidate")
+    }
     performance_checks = {}
     performance_values = {}
     quality_checks = {}
@@ -220,6 +289,9 @@ def evaluate(payload: dict) -> dict:
         "candidate_activation": all(activation.values()),
         "cache_capacity": capacity.get("ok") is True
         and all(capacity.get("checks", {}).values()),
+        "device_ownership": all(
+            all(values.values()) for values in device_ownership_checks.values()
+        ),
         "all_raw_runs_valid": all_run_checks,
         "performance_runs_paired": paired_performance,
         "performance_direction_every_run": performance_direction,
@@ -230,6 +302,7 @@ def evaluate(payload: dict) -> dict:
         "identity_checks": identities,
         "candidate_activation_checks": activation,
         "cache_capacity": capacity,
+        "device_ownership_checks": device_ownership_checks,
         "performance_checks": performance_checks,
         "quality_checks": quality_checks,
         "quality_gates": quality_gates,

@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -56,7 +58,28 @@ def run(container: str, cards: list[int]) -> dict:
             text=True,
         )
         snapshots[card] = result.stdout + result.stderr
-    return verify(parse_container_pids(top.stdout), parse_device_pids(snapshots))
+    result = verify(parse_container_pids(top.stdout), parse_device_pids(snapshots))
+    result.update(
+        {
+            "container": container,
+            "physical_npus": cards,
+            "observed_at_utc": datetime.now(timezone.utc).isoformat(),
+        }
+    )
+    return result
+
+
+def append_history(path: Path, result: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    line = (json.dumps(result, sort_keys=True) + "\n").encode("utf-8")
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+    try:
+        written = os.write(descriptor, line)
+        if written != len(line):
+            raise OSError(f"short ownership-history write: {written}/{len(line)}")
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
 
 
 def main() -> int:
@@ -64,6 +87,7 @@ def main() -> int:
     parser.add_argument("--container", required=True)
     parser.add_argument("--cards", nargs="+", type=int, required=True)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--history", type=Path)
     args = parser.parse_args()
     result = run(args.container, args.cards)
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
@@ -71,6 +95,8 @@ def main() -> int:
         json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     temporary.replace(args.output)
+    if args.history:
+        append_history(args.history, result)
     return 0 if result["ok"] else 3
 
 

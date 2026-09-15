@@ -86,6 +86,20 @@ def identity(candidate):
     }
 
 
+def ownership(arm):
+    return [
+        {
+            "container": f"dasc_qwen36_formal_v13_{arm}_20260916",
+            "physical_npus": [4, 5, 6, 7],
+            "observed_at_utc": "2026-09-16T12:00:00+00:00",
+            "owned_pids": [101, 102, 103, 104],
+            "observed_device_pids": [101, 102, 103, 104],
+            "foreign_pids": [],
+            "ok": True,
+        }
+    ]
+
+
 def payload(candidate_quality_drop=0):
     run_ids = ["r1", "r2", "r3"]
     dense_quality = {"longbenchv2": 90, "gsm8k": 1200}
@@ -98,6 +112,7 @@ def payload(candidate_quality_drop=0):
                 "files": {"model_index": {"sha256": "same"}},
             },
             "runtime_manifest_sha256": "manifest",
+            "device_ownership_history": ownership(arm),
             "performance": [
                 performance(
                     run_id,
@@ -191,3 +206,30 @@ def test_rejects_unbound_runtime_manifest_hash():
     result = evaluate(value)
     assert result["ok"] is False
     assert result["identity_checks"]["runtime_manifest_hash_bound"] is False
+
+
+def test_rejects_missing_device_ownership_history():
+    value = payload()
+    value["arms"]["candidate"]["device_ownership_history"] = []
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["checks"]["device_ownership"] is False
+
+
+def test_rejects_foreign_device_process_in_history():
+    value = payload()
+    sample = value["arms"]["dense"]["device_ownership_history"][0]
+    sample["observed_device_pids"].append(999)
+    sample["foreign_pids"] = [999]
+    sample["ok"] = False
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["checks"]["device_ownership"] is False
+
+
+def test_rejects_malformed_device_ownership_history_without_crashing():
+    value = payload()
+    value["arms"]["dense"]["device_ownership_history"] = ["not-an-object"]
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["checks"]["device_ownership"] is False

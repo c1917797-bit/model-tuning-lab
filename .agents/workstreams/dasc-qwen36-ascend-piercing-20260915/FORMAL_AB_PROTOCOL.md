@@ -41,6 +41,13 @@ ownership change: preserve the violation evidence, stop that arm, and reject
 the run. The cooperative NPU4-7 flock remains necessary but is not sufficient
 because unrelated launchers may not honor it.
 
+Append every five-second ownership observation to the arm's durable JSONL
+history, including UTC time, exact container name, physical card list, Docker
+PID set, observed NPU PID set, and foreign PID set. Normalize the full history,
+not only the latest snapshot. The final decision requires a non-empty,
+parseable history for both arms, no foreign PID in any sample, and at least one
+observed NPU worker sample per arm.
+
 Before either arm starts, create its deterministic runtime manifest. Hash the
 model config, safetensors weight index, tokenizer files, Docker image
 inspection, host driver/CANN metadata, pinned HYPIC benchmark, quality

@@ -17,6 +17,10 @@ def make_root(root: Path) -> None:
     write_json(root / "cache-capacity.json", {"ok": True})
     for arm in ARMS:
         write_json(root / arm / "identity.json", {"arm": arm})
+        (root / arm / "device-ownership.jsonl").write_text(
+            json.dumps({"ok": True, "physical_npus": [4, 5, 6, 7]}) + "\n",
+            encoding="utf-8",
+        )
         write_json(
             root / arm / "runtime-manifest.json",
             {"schema": "dasc-formal-runtime-manifest/v1", "files": {}},
@@ -60,6 +64,9 @@ def test_build_uses_fixed_local_artifact_layout(tmp_path):
     )
     assert result["arms"]["candidate"]["quality"]["gsm8k"][2]["details"] == [
         {"index": 0, "ok": True}
+    ]
+    assert result["arms"]["dense"]["device_ownership_history"] == [
+        {"ok": True, "physical_npus": [4, 5, 6, 7]}
     ]
 
 
