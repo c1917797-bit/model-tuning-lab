@@ -1,0 +1,25 @@
+{
+  "workstream": "dasc-qwen36-ascend-piercing-20260915",
+  "title": "DASC Qwen3.6 Ascend piercing",
+  "paper": {
+    "id": "arXiv:2608.30386v1",
+    "title": "DASC: Decay-Aware State Compression for Hybrid Linear-Attention Serving",
+    "url": "https://arxiv.org/abs/2608.30386",
+    "submitted": "2026-08-31"
+  },
+  "target": {
+    "host": "chicaihong01",
+    "model_path": "/cache/efim/Qwen3.6-27B",
+    "hardware_scope": "physical NPU4-7 only",
+    "repository": "/opt/host/vnf/austinov/model-tuning-lab"
+  },
+  "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
+  "status": "ingestion_started",
+  "decision": "open",
+  "next_actions": [
+    "Validate Qwen3.6 GDN decay parameters and state layout in the installed Ascend runtime.",
+    "Build an offline DASC-GDN head-retention plan from weights and record compression arithmetic.",
+    "Identify whether vLLM-Ascend exposes recurrent state checkpoint store/load paths compatible with compressed checkpoints.",
+    "Implement the smallest fail-closed canary only after architecture and cache-store seams are proven."
+  ]
+}

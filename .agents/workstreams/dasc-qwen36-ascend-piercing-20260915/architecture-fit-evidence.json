@@ -1,0 +1,992 @@
+{
+  "formula": {
+    "epsilon": 0.001,
+    "horizon": "ln(epsilon) / (-exp(A_log) * softplus(a + dt_bias))",
+    "representative_a": -0.3
+  },
+  "head_unit_count_per_gdn_layer": 48,
+  "layers": [
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 150497.91884182527,
+      "horizon_median": 4305.663226295389,
+      "horizon_min": 1.4039286280317094,
+      "layer": 0,
+      "retained_heads_gt_threshold": {
+        "1024": 30,
+        "128": 31,
+        "16": 34,
+        "512": 31,
+        "64": 32
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 245826.4043010907,
+      "horizon_median": 19.30406789123311,
+      "horizon_min": 2.965198343001833,
+      "layer": 1,
+      "retained_heads_gt_threshold": {
+        "1024": 14,
+        "128": 19,
+        "16": 26,
+        "512": 14,
+        "64": 19
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 7979.6259801907045,
+      "horizon_median": 34.65970834693891,
+      "horizon_min": 4.946072040585224,
+      "layer": 2,
+      "retained_heads_gt_threshold": {
+        "1024": 9,
+        "128": 17,
+        "16": 39,
+        "512": 12,
+        "64": 21
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 25332.44551759635,
+      "horizon_median": 47.46357600572711,
+      "horizon_min": 4.268879481345258,
+      "layer": 4,
+      "retained_heads_gt_threshold": {
+        "1024": 14,
+        "128": 18,
+        "16": 35,
+        "512": 16,
+        "64": 22
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 18968.725316908258,
+      "horizon_median": 76.51695590768146,
+      "horizon_min": 4.1154888490649695,
+      "layer": 5,
+      "retained_heads_gt_threshold": {
+        "1024": 15,
+        "128": 19,
+        "16": 36,
+        "512": 16,
+        "64": 24
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 40150.44742811771,
+      "horizon_median": 194.30653853680636,
+      "horizon_min": 2.73727303074808,
+      "layer": 6,
+      "retained_heads_gt_threshold": {
+        "1024": 14,
+        "128": 26,
+        "16": 46,
+        "512": 17,
+        "64": 36
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 19267.876091112204,
+      "horizon_median": 100.53998870125677,
+      "horizon_min": 1.2489578288448668,
+      "layer": 8,
+      "retained_heads_gt_threshold": {
+        "1024": 18,
+        "128": 23,
+        "16": 41,
+        "512": 18,
+        "64": 30
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 21074.768282880952,
+      "horizon_median": 424.66664158331366,
+      "horizon_min": 2.698975736818258,
+      "layer": 9,
+      "retained_heads_gt_threshold": {
+        "1024": 16,
+        "128": 36,
+        "16": 45,
+        "512": 20,
+        "64": 40
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 27054.49509285167,
+      "horizon_median": 396.0078035149424,
+      "horizon_min": 4.41695965089305,
+      "layer": 10,
+      "retained_heads_gt_threshold": {
+        "1024": 19,
+        "128": 31,
+        "16": 42,
+        "512": 22,
+        "64": 36
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 35983.532415159585,
+      "horizon_median": 1380.3366234778644,
+      "horizon_min": 1.4771105430202351,
+      "layer": 12,
+      "retained_heads_gt_threshold": {
+        "1024": 25,
+        "128": 32,
+        "16": 45,
+        "512": 26,
+        "64": 35
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 18820.695950468446,
+      "horizon_median": 204.6360698875073,
+      "horizon_min": 13.569322137483,
+      "layer": 13,
+      "retained_heads_gt_threshold": {
+        "1024": 13,
+        "128": 29,
+        "16": 47,
+        "512": 16,
+        "64": 37
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 60740.797978956965,
+      "horizon_median": 341.558463373569,
+      "horizon_min": 3.20768697920124,
+      "layer": 14,
+      "retained_heads_gt_threshold": {
+        "1024": 13,
+        "128": 35,
+        "16": 44,
+        "512": 20,
+        "64": 41
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 34073.545544315384,
+      "horizon_median": 1369.5813702134192,
+      "horizon_min": 11.851697027332284,
+      "layer": 16,
+      "retained_heads_gt_threshold": {
+        "1024": 27,
+        "128": 39,
+        "16": 47,
+        "512": 32,
+        "64": 42
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 75572.16189456626,
+      "horizon_median": 360.97986314845934,
+      "horizon_min": 7.151850423037867,
+      "layer": 17,
+      "retained_heads_gt_threshold": {
+        "1024": 17,
+        "128": 37,
+        "16": 46,
+        "512": 20,
+        "64": 43
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 24343.75835949182,
+      "horizon_median": 1049.5586947864795,
+      "horizon_min": 3.7474916155725135,
+      "layer": 18,
+      "retained_heads_gt_threshold": {
+        "1024": 24,
+        "128": 37,
+        "16": 46,
+        "512": 27,
+        "64": 44
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 39272.339059307815,
+      "horizon_median": 915.7351346269852,
+      "horizon_min": 4.902605174475812,
+      "layer": 20,
+      "retained_heads_gt_threshold": {
+        "1024": 22,
+        "128": 33,
+        "16": 45,
+        "512": 25,
+        "64": 40
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 15385.224676337351,
+      "horizon_median": 711.0751512355647,
+      "horizon_min": 1.1548335850687392,
+      "layer": 21,
+      "retained_heads_gt_threshold": {
+        "1024": 22,
+        "128": 25,
+        "16": 39,
+        "512": 25,
+        "64": 28
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 6239.168387238475,
+      "horizon_median": 178.23096260683326,
+      "horizon_min": 4.164375939598018,
+      "layer": 22,
+      "retained_heads_gt_threshold": {
+        "1024": 14,
+        "128": 25,
+        "16": 43,
+        "512": 14,
+        "64": 36
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 25132.513347561187,
+      "horizon_median": 222.93438837491308,
+      "horizon_min": 0.8869980957328446,
+      "layer": 24,
+      "retained_heads_gt_threshold": {
+        "1024": 18,
+        "128": 27,
+        "16": 44,
+        "512": 18,
+        "64": 33
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 24235.94946243367,
+      "horizon_median": 671.2456263502539,
+      "horizon_min": 2.8331162160059353,
+      "layer": 25,
+      "retained_heads_gt_threshold": {
+        "1024": 20,
+        "128": 41,
+        "16": 46,
+        "512": 25,
+        "64": 43
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 27054.239231151118,
+      "horizon_median": 525.5624508553846,
+      "horizon_min": 9.79510393466968,
+      "layer": 26,
+      "retained_heads_gt_threshold": {
+        "1024": 21,
+        "128": 37,
+        "16": 46,
+        "512": 24,
+        "64": 39
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 27594.972056005863,
+      "horizon_median": 2905.3549213889783,
+      "horizon_min": 4.311067497997174,
+      "layer": 28,
+      "retained_heads_gt_threshold": {
+        "1024": 27,
+        "128": 34,
+        "16": 46,
+        "512": 29,
+        "64": 41
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 26961.887071028057,
+      "horizon_median": 335.30003253415026,
+      "horizon_min": 18.96492567507782,
+      "layer": 29,
+      "retained_heads_gt_threshold": {
+        "1024": 14,
+        "128": 32,
+        "16": 48,
+        "512": 19,
+        "64": 39
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 66719.73356925098,
+      "horizon_median": 450.0149289130257,
+      "horizon_min": 4.138783198629943,
+      "layer": 30,
+      "retained_heads_gt_threshold": {
+        "1024": 16,
+        "128": 39,
+        "16": 46,
+        "512": 22,
+        "64": 43
+      },
+      "source_files": [
+        "model-00008-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 32523.888834439058,
+      "horizon_median": 1432.665698150333,
+      "horizon_min": 18.86127751815092,
+      "layer": 32,
+      "retained_heads_gt_threshold": {
+        "1024": 26,
+        "128": 39,
+        "16": 48,
+        "512": 34,
+        "64": 43
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 132633.2746696161,
+      "horizon_median": 419.09231454089615,
+      "horizon_min": 4.819333108236429,
+      "layer": 33,
+      "retained_heads_gt_threshold": {
+        "1024": 18,
+        "128": 36,
+        "16": 47,
+        "512": 21,
+        "64": 43
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 31750.446475377426,
+      "horizon_median": 1317.7860692932063,
+      "horizon_min": 3.861881756771781,
+      "layer": 34,
+      "retained_heads_gt_threshold": {
+        "1024": 25,
+        "128": 40,
+        "16": 47,
+        "512": 28,
+        "64": 45
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 32530.52752702242,
+      "horizon_median": 826.0231848368707,
+      "horizon_min": 14.174903778147748,
+      "layer": 36,
+      "retained_heads_gt_threshold": {
+        "1024": 23,
+        "128": 32,
+        "16": 47,
+        "512": 25,
+        "64": 40
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 16365.889426679505,
+      "horizon_median": 1041.8012485177524,
+      "horizon_min": 1.67910430788131,
+      "layer": 37,
+      "retained_heads_gt_threshold": {
+        "1024": 24,
+        "128": 26,
+        "16": 41,
+        "512": 25,
+        "64": 28
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 5097.36429449918,
+      "horizon_median": 252.73988176131584,
+      "horizon_min": 3.300660917291636,
+      "layer": 38,
+      "retained_heads_gt_threshold": {
+        "1024": 11,
+        "128": 29,
+        "16": 44,
+        "512": 16,
+        "64": 36
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 34621.499446720816,
+      "horizon_median": 186.76809719751336,
+      "horizon_min": 1.0930698336605003,
+      "layer": 40,
+      "retained_heads_gt_threshold": {
+        "1024": 18,
+        "128": 26,
+        "16": 43,
+        "512": 18,
+        "64": 33
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 24563.612578357526,
+      "horizon_median": 558.5309033470163,
+      "horizon_min": 4.572741190603479,
+      "layer": 41,
+      "retained_heads_gt_threshold": {
+        "1024": 18,
+        "128": 41,
+        "16": 46,
+        "512": 24,
+        "64": 44
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 20343.019788462418,
+      "horizon_median": 334.12228105492136,
+      "horizon_min": 6.516230729946381,
+      "layer": 42,
+      "retained_heads_gt_threshold": {
+        "1024": 18,
+        "128": 35,
+        "16": 45,
+        "512": 22,
+        "64": 40
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 34070.15374633981,
+      "horizon_median": 2079.7507738836857,
+      "horizon_min": 4.378297591172921,
+      "layer": 44,
+      "retained_heads_gt_threshold": {
+        "1024": 26,
+        "128": 35,
+        "16": 46,
+        "512": 28,
+        "64": 37
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 32523.05345637441,
+      "horizon_median": 238.6841021021239,
+      "horizon_min": 17.071064147892923,
+      "layer": 45,
+      "retained_heads_gt_threshold": {
+        "1024": 14,
+        "128": 32,
+        "16": 48,
+        "512": 17,
+        "64": 41
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 48054.64231965859,
+      "horizon_median": 352.41131556227504,
+      "horizon_min": 2.549877205461095,
+      "layer": 46,
+      "retained_heads_gt_threshold": {
+        "1024": 13,
+        "128": 38,
+        "16": 45,
+        "512": 21,
+        "64": 41
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 41751.35751225575,
+      "horizon_median": 1150.2666513869951,
+      "horizon_min": 21.294168195182564,
+      "layer": 48,
+      "retained_heads_gt_threshold": {
+        "1024": 27,
+        "128": 39,
+        "16": 48,
+        "512": 31,
+        "64": 43
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 69893.71900907587,
+      "horizon_median": 303.90085094166636,
+      "horizon_min": 6.019090349197133,
+      "layer": 49,
+      "retained_heads_gt_threshold": {
+        "1024": 16,
+        "128": 36,
+        "16": 47,
+        "512": 20,
+        "64": 41
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 44079.355694587786,
+      "horizon_median": 966.9415749347731,
+      "horizon_min": 7.739250235782379,
+      "layer": 50,
+      "retained_heads_gt_threshold": {
+        "1024": 23,
+        "128": 36,
+        "16": 46,
+        "512": 29,
+        "64": 44
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 33070.6251393379,
+      "horizon_median": 949.437272337948,
+      "horizon_min": 10.711384277291051,
+      "layer": 52,
+      "retained_heads_gt_threshold": {
+        "1024": 23,
+        "128": 34,
+        "16": 47,
+        "512": 26,
+        "64": 39
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 19443.572266450275,
+      "horizon_median": 433.3386045104234,
+      "horizon_min": 1.3193573020918818,
+      "layer": 53,
+      "retained_heads_gt_threshold": {
+        "1024": 23,
+        "128": 26,
+        "16": 39,
+        "512": 23,
+        "64": 30
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 9207.485835876205,
+      "horizon_median": 203.91128740012974,
+      "horizon_min": 6.083683089941866,
+      "layer": 54,
+      "retained_heads_gt_threshold": {
+        "1024": 15,
+        "128": 30,
+        "16": 45,
+        "512": 16,
+        "64": 35
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 41768.6894113353,
+      "horizon_median": 1263.5253442655348,
+      "horizon_min": 5.343350463345169,
+      "layer": 56,
+      "retained_heads_gt_threshold": {
+        "1024": 25,
+        "128": 28,
+        "16": 39,
+        "512": 27,
+        "64": 34
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 7665.61240636636,
+      "horizon_median": 266.17795536879464,
+      "horizon_min": 3.088089309335086,
+      "layer": 57,
+      "retained_heads_gt_threshold": {
+        "1024": 13,
+        "128": 27,
+        "16": 47,
+        "512": 19,
+        "64": 32
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 5603.515391094318,
+      "horizon_median": 74.07872573108565,
+      "horizon_min": 2.109315926616176,
+      "layer": 58,
+      "retained_heads_gt_threshold": {
+        "1024": 10,
+        "128": 20,
+        "16": 42,
+        "512": 12,
+        "64": 25
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 5342.573947885779,
+      "horizon_median": 122.87501600444965,
+      "horizon_min": 2.3410671553709475,
+      "layer": 60,
+      "retained_heads_gt_threshold": {
+        "1024": 5,
+        "128": 22,
+        "16": 41,
+        "512": 11,
+        "64": 28
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 12365.125821576397,
+      "horizon_median": 186.74740752134784,
+      "horizon_min": 8.44998664171593,
+      "layer": 61,
+      "retained_heads_gt_threshold": {
+        "1024": 10,
+        "128": 27,
+        "16": 44,
+        "512": 13,
+        "64": 27
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    },
+    {
+      "a_log_dtype": "BF16",
+      "dt_bias_dtype": "BF16",
+      "heads": 48,
+      "horizon_max": 42067.23518467094,
+      "horizon_median": 373.2784767254243,
+      "horizon_min": 2.154370568624214,
+      "layer": 62,
+      "retained_heads_gt_threshold": {
+        "1024": 17,
+        "128": 31,
+        "16": 39,
+        "512": 21,
+        "64": 35
+      },
+      "source_files": [
+        "model-00015-of-00015.safetensors"
+      ]
+    }
+  ],
+  "linear_attention_layers": 48,
+  "linear_layers": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    24,
+    25,
+    26,
+    28,
+    29,
+    30,
+    32,
+    33,
+    34,
+    36,
+    37,
+    38,
+    40,
+    41,
+    42,
+    44,
+    45,
+    46,
+    48,
+    49,
+    50,
+    52,
+    53,
+    54,
+    56,
+    57,
+    58,
+    60,
+    61,
+    62
+  ],
+  "model_path": "/cache/efim/Qwen3.6-27B",
+  "model_type": "qwen3_5_text",
+  "num_layers": 64,
+  "paper": "arXiv:2608.30386v1 DASC",
+  "temporal_head_compression_if_store_only_retained": {
+    "1024": 2.609286523216308,
+    "128": 1.5494283792871553,
+    "16": 1.1008122312470139,
+    "512": 2.226086956521739,
+    "64": 1.3333333333333333
+  },
+  "total_heads": 2304,
+  "total_retained_heads_gt_threshold": {
+    "1024": 883,
+    "128": 1487,
+    "16": 2093,
+    "512": 1035,
+    "64": 1728
+  }
+}
