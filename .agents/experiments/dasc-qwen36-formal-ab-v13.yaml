@@ -1,0 +1,101 @@
+schema: model-tuning-experiment/v1
+id: dasc-qwen36-formal-ab-v13
+status: blocked_by_v12_gate
+decision: pending
+hypothesis: "Under one fixed recurrent-checkpoint HBM budget, DASC-NR compact checkpoints admit more reusable prefixes and reduce cache-hit TTFT/input-replay work without a material end-task quality loss."
+objective: "Produce three-run one-switch performance and cache-hit quality evidence after the v12 mechanism gate passes."
+owner: "c1917797-bit"
+git:
+  branch: work/dasc-qwen36-ascend-piercing-20260915
+  base_commit: "set to the accepted v12 implementation commit before launch"
+  stage_commits: []
+environment:
+  source_commit: "pending accepted v12"
+  model_revision: "/cache/efim/Qwen3.6-27B; config and weight-index hashes frozen at launch"
+  tokenizer_revision: "same immutable model mount in both arms"
+  dtype_or_quantization: "model-native and identical in both arms"
+  framework_versions:
+    image_digest: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+    vllm: 0.23.0
+    vllm_ascend: 0.23.0
+  cann_driver_firmware: "captured once per arm and compared"
+  hardware_topology:
+    host: chicaihong01
+    physical_npus: [4, 5, 6, 7]
+    protected_npus: [0, 1, 2, 3]
+  runtime_topology:
+    tensor_parallel_size: 4
+    communication: HCCL
+    host_to_container_devices: ["4:0", "5:1", "6:2", "7:3"]
+protocol:
+  primary_metric: "cache-hit TTFT mean and fixed-input-token throughput"
+  arms:
+    dense:
+      prefix_caching: true
+      dasc_plugin: false
+    dasc_nr_w64:
+      prefix_caching: true
+      dasc_plugin: true
+      mode: physical-cache-eager
+      w_max: 64
+  shared_prefix_performance:
+    tool: /cache/cch/hypic_vllm_ascend-v0.8.5/tools/benchmark_shared_prefix.py
+    tool_sha256: cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822
+    input_tokens: 32768
+    prefix_tokens: 16384
+    output_tokens: 1024
+    requests: 40
+    concurrency: 16
+    warmup_requests: 2
+    ignore_eos: true
+  quality:
+    datasets:
+      longbenchv2:
+        path: /cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json
+        sha256: cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a
+        requests: 127
+      gsm8k:
+        path: /cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl
+        sha256: 3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14
+        requests: 1319
+    cache_hit_requirement: "Both arms use the same hashed neutral shared prefix; score only runs with positive prefix-cache hit deltas."
+    concurrency: 32
+    max_output_tokens: 1024
+    temperature: 0
+    seed: 0
+  correctness_guardrails:
+    - "v12 must first pass service, four-worker activation, compact-byte, short-response, and deterministic reuse gates"
+    - "all measured performance requests succeed and produce exactly 1024 output tokens"
+    - "candidate activation evidence covers all four TP workers"
+    - "quality rows are complete, uniquely indexed, hash-bound, and independently rescored"
+    - "full-attention KV policy, model bytes, image, request tokens, concurrency, warmups, and HBM budget are identical"
+  acceptance_thresholds:
+    - "three unique repetitions per arm"
+    - "candidate cache-hit TTFT and derived input-token throughput improve in the same direction in every repetition"
+    - "median quality loss per dataset is no worse than max(1 percentage point, measured dense baseline run-to-run range)"
+  regression_thresholds:
+    - "any semantic mismatch, missing activation, incomplete request, or non-positive cache-hit delta rejects the affected unit"
+    - "a performance gain cannot override a failed quality gate"
+  abort_conditions:
+    - "physical NPU4-7 occupancy or ownership changes"
+    - "v12 is rejected"
+    - "arm identity differs by more than the DASC plugin switch"
+    - "profiler is enabled during benchmark timing"
+  warmup: "two shared-prefix requests plus graph capture; excluded from aggregates"
+  repetitions: 3
+  command: "to be added only after v12 acceptance; controller must be resumable and single-instance"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - /cache/cch/dasc-qwen36-ascend-20260915/formal-ab-v13
+decision_reason: ""
+next_loop: "If v13 fails performance or quality, retain evidence and evaluate a separately frozen W_max or DASC-WR experiment; never overwrite v13."
+rollback:
+  command: "Disable MST_DASC_ENABLE and remove dasc_vllm_ascend from VLLM_PLUGINS."
+  verified: true
