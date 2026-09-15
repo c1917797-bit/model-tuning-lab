@@ -57,15 +57,15 @@ def build(root: Path) -> dict:
             quality[dataset] = []
             for run_id in RUN_IDS:
                 quality_root = root / "quality" / arm
+                details_path = quality_root / f"{dataset}.{run_id}.jsonl"
                 quality[dataset].append(
                     {
                         "run_id": run_id,
                         "summary": read_json(
                             quality_root / f"{dataset}.{run_id}.summary.json"
                         ),
-                        "details": read_jsonl(
-                            quality_root / f"{dataset}.{run_id}.jsonl"
-                        ),
+                        "details": read_jsonl(details_path),
+                        "details_sha256": sha256(details_path),
                     }
                 )
         arms[arm] = {

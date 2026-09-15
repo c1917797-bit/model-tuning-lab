@@ -51,7 +51,8 @@ observed NPU worker sample per arm.
 Before either arm starts, create its deterministic runtime manifest. Hash the
 model config, safetensors weight index, tokenizer files, Docker image
 inspection, host driver/CANN metadata, pinned HYPIC benchmark, quality
-evaluator, and both datasets. Include each raw manifest and its file SHA256 in
+adapter, underlying quality evaluator, and both datasets. Include each raw
+manifest and its file SHA256 in
 the normalized evidence. The independent decision rejects either an unbound
 manifest hash or any cross-arm byte drift.
 
@@ -111,6 +112,12 @@ temperature 0, seed 0, thinking disabled, and the same output budget. Preserve
 one JSONL row per sample, unique complete indexes, response hashes, dataset and
 prompt hashes, scorer identity, and summary-to-detail hashes. Recompute every
 summary independently.
+
+The normalized evidence binds every raw details JSONL SHA256. The final
+decision recomputes each response-text SHA256, stored score relation, correct
+count, accuracy, response uniqueness, effective prompt-contract hash, and
+cache-hit delta. It also binds the dataset, adapter, and underlying evaluator
+hashes in every run summary to that arm's runtime manifest.
 
 The thin shared-prefix adapter is implemented in dasc_quality_eval.py. It
 verifies the validated HYPIC evaluator SHA before importing its unchanged

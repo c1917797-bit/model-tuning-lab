@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime
+import hashlib
 import json
+import re
 import statistics
 from pathlib import Path
 
@@ -23,6 +25,7 @@ PERF_CONFIG = {
     "segment_ends": [16384, 32768],
 }
 QUALITY_REQUESTS = {"longbenchv2": 127, "gsm8k": 1319}
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 FIXED_IDENTITY = {
     "physical_npus": [4, 5, 6, 7],
     "host_to_container_devices": ["4:0", "5:1", "6:2", "7:3"],
@@ -185,16 +188,53 @@ def verify_performance_run(run: dict) -> dict:
     }
 
 
-def verify_quality_run(run: dict, dataset: str) -> dict:
+def runtime_hash(manifest: dict | None, label: str) -> str | None:
+    if manifest is None:
+        return None
+    return manifest.get("files", {}).get(label, {}).get("sha256")
+
+
+def row_score_consistent(row: dict, dataset: str) -> bool:
+    prediction = row.get("prediction")
+    reference = row.get("reference")
+    if not isinstance(prediction, str) or not isinstance(reference, str):
+        return False
+    if dataset == "longbenchv2":
+        expected = prediction == reference
+    else:
+        try:
+            expected = prediction == reference or abs(
+                float(prediction) - int(reference)
+            ) < 1e-6
+        except (TypeError, ValueError):
+            expected = False
+    return row.get("correct") is expected
+
+
+def verify_quality_run(
+    run: dict, dataset: str, runtime_manifest: dict | None = None
+) -> dict:
     summary = run["summary"]
     rows = run["details"]
     expected = QUALITY_REQUESTS[dataset]
     indices = sorted(row.get("index") for row in rows)
     correct = sum(row.get("correct") is True for row in rows)
     accuracy = 100.0 * correct / expected
-    return {
+    shared_prefix_sha = summary.get("shared_prefix_sha256")
+    prompt_sha = summary.get("prompt_template_sha256")
+    effective_sha = summary.get("effective_prompt_contract_sha256")
+    expected_effective = None
+    if isinstance(shared_prefix_sha, str) and isinstance(prompt_sha, str):
+        try:
+            expected_effective = hashlib.sha256(
+                f"{prompt_sha}:{shared_prefix_sha}".encode("ascii")
+            ).hexdigest()
+        except UnicodeEncodeError:
+            pass
+    checks = {
         "schema": summary.get("schema") == "mst.dasc.cache-hit-quality/v1",
         "dataset": summary.get("dataset") == dataset,
+        "run_id": summary.get("run_id") == run.get("run_id"),
         "row_count": len(rows) == expected,
         "unique_complete_indices": indices == list(range(expected)),
         "all_rows_ok": all(row.get("ok") is True for row in rows),
@@ -202,11 +242,58 @@ def verify_quality_run(run: dict, dataset: str) -> dict:
         and summary.get("successful") == expected
         and summary.get("failed") == 0,
         "accuracy_recomputed": abs(float(summary["accuracy_pct"]) - accuracy) < 1e-12,
+        "correct_recomputed": summary.get("correct") == correct,
+        "request_contract": summary.get("concurrency") == 32
+        and summary.get("max_out_len") == 1024
+        and summary.get("temperature") == 0
+        and summary.get("seed") == 0
+        and summary.get("ignore_eos") is False
+        and summary.get("enable_thinking") is False,
+        "hashes_well_formed": all(
+            isinstance(value, str) and SHA256_RE.fullmatch(value)
+            for value in (
+                summary.get("data_sha256"),
+                prompt_sha,
+                shared_prefix_sha,
+                effective_sha,
+                summary.get("base_evaluator_sha256"),
+                summary.get("evaluator_script_sha256"),
+                summary.get("adapter_sha256"),
+                summary.get("details_sha256"),
+                run.get("details_sha256"),
+            )
+        ),
+        "details_hash_bound": summary.get("details_sha256")
+        == run.get("details_sha256"),
+        "evaluator_hash_self_consistent": summary.get("base_evaluator_sha256")
+        == summary.get("evaluator_script_sha256"),
+        "effective_prompt_hash_recomputed": effective_sha == expected_effective,
+        "shared_prefix_contract": summary.get("shared_prefix_lines") == 96
+        and isinstance(summary.get("shared_prefix_bytes"), int)
+        and summary.get("shared_prefix_bytes") > 0,
+        "response_hashes_recomputed": all(
+            isinstance(row.get("response_text"), str)
+            and row.get("response_sha256")
+            == hashlib.sha256(row["response_text"].encode("utf-8")).hexdigest()
+            for row in rows
+        ),
+        "scores_recomputed": all(row_score_consistent(row, dataset) for row in rows),
+        "unique_responses_recomputed": summary.get("unique_response_sha256")
+        == len({row.get("response_sha256") for row in rows}),
         "cache_hit_recomputed": cache_hit_delta(summary) > 0
         and float(summary.get("prefix_cache_hit_delta", 0)) == cache_hit_delta(summary),
         "cache_hit_required": summary.get("adapter_require_cache_hit") is True
         and summary.get("cache_hit_verified") is True,
     }
+    if runtime_manifest is not None:
+        checks["runtime_hash_binding"] = (
+            summary.get("data_sha256") == runtime_hash(runtime_manifest, dataset)
+            and summary.get("adapter_sha256")
+            == runtime_hash(runtime_manifest, "quality_adapter")
+            and summary.get("base_evaluator_sha256")
+            == runtime_hash(runtime_manifest, "quality_evaluator")
+        )
+    return checks
 
 
 def evaluate(payload: dict) -> dict:
@@ -247,7 +334,10 @@ def evaluate(payload: dict) -> dict:
             if len(runs) != 3 or len({run["run_id"] for run in runs}) != 3:
                 raise ValueError(f"{arm}/{dataset} must contain three unique quality runs")
             quality_checks[arm][dataset] = [
-                verify_quality_run(run, dataset) for run in runs
+                verify_quality_run(
+                    run, dataset, payload["arms"][arm]["runtime_manifest"]
+                )
+                for run in runs
             ]
             quality_values[arm][dataset] = {
                 run["run_id"]: float(run["summary"]["accuracy_pct"]) for run in runs

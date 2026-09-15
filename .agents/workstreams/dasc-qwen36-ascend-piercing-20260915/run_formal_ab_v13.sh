@@ -109,6 +109,7 @@ create_arm() {
     --file "ascend_install=/etc/ascend_install.info" \
     --file "image_inspect=$ROOT/image-inspect.json" \
     --file "benchmark=$BENCH" \
+    --file "quality_adapter=$QUALITY" \
     --file "quality_evaluator=$REPO/.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py" \
     --file "longbenchv2=/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json" \
     --file "gsm8k=/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl" \

@@ -65,6 +65,10 @@ def test_build_uses_fixed_local_artifact_layout(tmp_path):
     assert result["arms"]["candidate"]["quality"]["gsm8k"][2]["details"] == [
         {"index": 0, "ok": True}
     ]
+    details_path = tmp_path / "quality" / "candidate" / "gsm8k.run3.jsonl"
+    assert result["arms"]["candidate"]["quality"]["gsm8k"][2][
+        "details_sha256"
+    ] == hashlib.sha256(details_path.read_bytes()).hexdigest()
     assert result["arms"]["dense"]["device_ownership_history"] == [
         {"ok": True, "physical_npus": [4, 5, 6, 7]}
     ]

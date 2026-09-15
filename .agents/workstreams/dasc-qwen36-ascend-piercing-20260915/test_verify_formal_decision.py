@@ -1,3 +1,5 @@
+import hashlib
+
 from verify_formal_decision import FIXED_IDENTITY, evaluate
 
 
@@ -49,20 +51,57 @@ def performance(run_id, ttft, duration):
 
 def quality(dataset, run_id, correct):
     count = 127 if dataset == "longbenchv2" else 1319
-    rows = [
-        {"index": index, "ok": True, "correct": index < correct}
-        for index in range(count)
-    ]
+    rows = []
+    for index in range(count):
+        is_correct = index < correct
+        response = f"{dataset}-response-{index}"
+        rows.append(
+            {
+                "index": index,
+                "ok": True,
+                "correct": is_correct,
+                "prediction": "A" if is_correct else "B",
+                "reference": "A",
+                "response_text": response,
+                "response_sha256": hashlib.sha256(response.encode()).hexdigest(),
+            }
+        )
     accuracy = 100.0 * correct / count
+    prompt_sha = "1" * 64
+    prefix_sha = "2" * 64
+    effective_sha = hashlib.sha256(
+        f"{prompt_sha}:{prefix_sha}".encode("ascii")
+    ).hexdigest()
+    details_sha = "3" * 64
     return {
         "run_id": run_id,
+        "details_sha256": details_sha,
         "summary": {
             "schema": "mst.dasc.cache-hit-quality/v1",
             "dataset": dataset,
             "requests": count,
             "successful": count,
             "failed": 0,
+            "run_id": run_id,
+            "correct": correct,
             "accuracy_pct": accuracy,
+            "concurrency": 32,
+            "max_out_len": 1024,
+            "temperature": 0,
+            "seed": 0,
+            "ignore_eos": False,
+            "enable_thinking": False,
+            "data_sha256": "4" * 64 if dataset == "longbenchv2" else "5" * 64,
+            "prompt_template_sha256": prompt_sha,
+            "shared_prefix_sha256": prefix_sha,
+            "effective_prompt_contract_sha256": effective_sha,
+            "shared_prefix_lines": 96,
+            "shared_prefix_bytes": 1024,
+            "base_evaluator_sha256": "6" * 64,
+            "evaluator_script_sha256": "6" * 64,
+            "adapter_sha256": "7" * 64,
+            "details_sha256": details_sha,
+            "unique_response_sha256": count,
             "metrics_before": metrics(3),
             "metrics_after": metrics(5),
             "prefix_cache_hit_delta": 2,
@@ -109,7 +148,13 @@ def payload(candidate_quality_drop=0):
             "identity": identity(candidate),
             "runtime_manifest": {
                 "schema": "dasc-formal-runtime-manifest/v1",
-                "files": {"model_index": {"sha256": "same"}},
+                "files": {
+                    "model_index": {"sha256": "same"},
+                    "longbenchv2": {"sha256": "4" * 64},
+                    "gsm8k": {"sha256": "5" * 64},
+                    "quality_evaluator": {"sha256": "6" * 64},
+                    "quality_adapter": {"sha256": "7" * 64},
+                },
             },
             "runtime_manifest_sha256": "manifest",
             "device_ownership_history": ownership(arm),
@@ -206,6 +251,26 @@ def test_rejects_unbound_runtime_manifest_hash():
     result = evaluate(value)
     assert result["ok"] is False
     assert result["identity_checks"]["runtime_manifest_hash_bound"] is False
+
+
+def test_rejects_quality_response_hash_mismatch():
+    value = payload()
+    value["arms"]["candidate"]["quality"]["gsm8k"][0]["details"][0][
+        "response_sha256"
+    ] = "0" * 64
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["checks"]["all_raw_runs_valid"] is False
+
+
+def test_rejects_quality_dataset_hash_drift():
+    value = payload()
+    value["arms"]["dense"]["quality"]["longbenchv2"][0]["summary"][
+        "data_sha256"
+    ] = "8" * 64
+    result = evaluate(value)
+    assert result["ok"] is False
+    assert result["checks"]["all_raw_runs_valid"] is False
 
 
 def test_rejects_missing_device_ownership_history():

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -33,7 +34,12 @@ def read_rows(path: Path) -> list[dict]:
 
 def verify(dataset: str, summary: Path, details: Path) -> dict:
     checks = verify_quality_run(
-        {"summary": read_object(summary), "details": read_rows(details)},
+        {
+            "run_id": read_object(summary).get("run_id"),
+            "summary": read_object(summary),
+            "details": read_rows(details),
+            "details_sha256": hashlib.sha256(details.read_bytes()).hexdigest(),
+        },
         dataset,
     )
     return {"ok": all(checks.values()), "checks": checks}
