@@ -41,3 +41,11 @@ This is not a normal decode-throughput hypothesis. It is a cache-capacity and ca
 
 DASC has higher local relevance than Tail-Replay as a cache-system paper because it directly targets recurrent state checkpoint storage. The main risk is that current vLLM-Ascend may not expose the same state-checkpoint store/load abstraction as SGLang; if absent, the first work becomes runtime integration rather than a simple selector port.
 
+## Implementation Availability Audit
+
+Rechecked on 2026-09-15 against the official arXiv v1 page and targeted GitHub
+searches for the exact title and arXiv identifier. The arXiv page exposes PDF,
+HTML, and TeX source but no author-linked code repository, and no maintained
+official implementation was found. Therefore the local plugin must continue to
+be labeled a paper-derived Ascend implementation; it must not be described as
+vendored official DASC code. Re-run this audit before claiming upstream parity.

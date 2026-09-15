@@ -15,13 +15,23 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "numerical_canary_verified_performance_rejected",
+  "status": "physical_cache_v12_waiting_for_npu4_7",
   "decision": "open",
   "next_actions": [
     "Keep the verified dense-storage numerical canary as a closed reachability result; do not tune or benchmark it as a performance candidate.",
-    "Implement compact retained-head checkpoint storage plus dense active-state workspace in the plugin.",
-    "Prove checkpoint bytes and admitted cache-block capacity change after framework alignment.",
-    "Run multi-step NPU restore correctness before service timing.",
+    "Poll authoritative controller exec-00000000000011b9; do not start a duplicate while it is live.",
+    "When physical NPU4-7 become idle, let v12 run the order-fixed compact-cache service, exact short request, repeated shared-prefix reuse, activation, and physical-byte gates.",
+    "Classify v12 independently: service or semantic failure rejects the attempt; external occupancy remains an environment wait.",
     "Only after physical capacity changes, run the one-switch cache-hit TTFT and input-throughput benchmark."
-  ]
+  ],
+  "controller": {
+    "operation_id": "exec-00000000000011b9",
+    "idempotency_key": "dasc-qwen36-physical-cache-v12-npu4-7-controller",
+    "state_last_verified": "running",
+    "verified_at": "2026-09-15T19:19:24Z",
+    "artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12",
+    "container": "dasc_qwen36_physical_order_fix_v12_20260915",
+    "port": 8030,
+    "physical_npus": [4, 5, 6, 7]
+  }
 }
