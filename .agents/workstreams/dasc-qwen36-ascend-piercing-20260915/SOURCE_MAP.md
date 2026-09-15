@@ -1,59 +1,123 @@
 # DASC Source Map
 
-## Validated Runtime Facts
+## Source Identity
 
-Reference source inspected from `/cache/austinov/src/vllm-ascend`.
+- vLLM: `/cache/austinov/src/vllm`,
+  `0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665`.
+- vLLM-Ascend: `/cache/austinov/src/vllm-ascend`,
+  `5cb98caaadeff42b5b62b996e34bb2aaa29d20fd`.
+
+These are reference checkouts. The final implementation must remain a
+plugin-owned monkeypatch and must prove its live imported paths in the serving
+container before an NPU claim.
+
+## Validated GDN Runtime Facts
 
 ### GDN metadata
 
-File: `/cache/austinov/src/vllm-ascend/vllm_ascend/ops/gdn_attn_builder.py`
+File: `vllm_ascend/ops/gdn_attn_builder.py`
 
-- `block_table_tensor[:, 0]` is used as the non-spec GDN state/cache index for common non-spec paths.
-- Prefill metadata records `prefill_state_indices`, `prefill_has_initial_state`, and conv1d `cache_indices`.
-- `prefill_has_initial_state` is derived from `context_lens_tensor > 0`, which is the key signal for a reused or continued state.
-- Decode metadata records `non_spec_state_indices_tensor` and conv1d cache indices.
+- `block_table_tensor[:, 0]` is the common non-spec GDN state/cache index.
+- Prefill metadata records `prefill_state_indices`,
+  `prefill_has_initial_state`, and conv1d cache indices.
+- `prefill_has_initial_state` is derived from `context_lens_tensor > 0`.
+- Decode metadata records `non_spec_state_indices_tensor` and conv1d cache
+  indices.
 
 ### GDN state update
 
-File: `/cache/austinov/src/vllm-ascend/vllm_ascend/ops/gdn.py`
+File: `vllm_ascend/ops/gdn.py`
 
 - `self.kv_cache[0]` is the convolution state cache.
 - `self.kv_cache[1]` is the recurrent/temporal GDN state cache.
-- Prefill path reads `initial_state = ssm_state[prefill_state_indices].transpose(-1, -2).contiguous()`.
-- `clear_ssm_states(initial_state, prefill_has_initial_state)` zeroes entries without prior state.
-- Prefill writes back `ssm_state[prefill_state_indices] = last_recurrent_state.transpose(-1, -2).contiguous().to(ssm_state.dtype)`.
-- Decode path updates `ssm_state` in-place through `torch.ops._C_ascend.npu_recurrent_gated_delta_rule(..., state=ssm_state, ssm_state_indices=...)`.
+- Prefill reads the selected temporal row, transposes it to compute layout,
+  clears rows without prior state, and writes the final recurrent state back.
+- Decode passes the full state tensor plus block-derived row indices to
+  `torch.ops._C_ascend.npu_recurrent_gated_delta_rule`, which updates the
+  selected rows in place.
 
-## DASC-NR Candidate Injection Point
+## Validated Mamba/GDN Prefix-State Lifecycle
 
-The smallest candidate should hook the live GDN core before recurrent computation and only when a row has prior state. For a cache-hit row, reconstruct the compute-layout recurrent state as:
+The earlier generic-`KVCacheManager` inspection was incomplete. The current
+stack already has a dedicated Mamba/GDN checkpoint lifecycle:
 
-1. Start from zero for all heads.
-2. Copy retained heads from a DASC compressed checkpoint into the matching head positions.
-3. Leave omitted heads zero for DASC-NR.
-4. Write the reconstructed row into `ssm_state[state_index]` before the native recurrent op consumes it.
+- `MambaManager.find_longest_cache_hit()` searches cached Mamba blocks and
+  returns an aligned state block at the prefix-hit boundary.
+- In align mode, `MambaManager.allocate_new_blocks()` records that cached
+  state block for a new prefix-hit request and allocates a running-state block.
+- `vllm_ascend.patch.worker.patch_mamba_utils.preprocess_mamba()` derives the
+  previous state block from `req_state.num_computed_tokens`, request block
+  IDs, and `mamba_state_idx`.
+- `collect_mamba_copy_meta()` visits every GDN layer and both cache tensors,
+  copying convolution and temporal state from the cached prefix block to the
+  current running-state block.
+- `model_runner_v1.execute_model()` executes the state copy immediately before
+  model forward, after connector loading. GDN metadata then uses the current
+  block ID as the native operator's state index.
 
-This preserves native Ascend recurrent kernels and changes only the recurrent-state checkpoint representation/load policy.
+Therefore a separate request-ID transport into every GDN layer is not required
+for the first DASC port. The existing block lifecycle is the correct seam.
 
-The hook must be delivered as a plugin-owned monkeypatch, installed after the Ascend model/runtime patches are active. The plugin may wrap live Python objects and call native Ascend kernels, but it must not patch upstream source trees or replace CANN/vLLM-Ascend binaries in place.
+## Revised DASC-NR Implementation Gap
+
+The missing capability is physical compression, not prefix-state identity.
+Zeroing omitted heads inside the existing dense temporal-state tensor can test
+DASC-NR numerics, but it saves no cache memory and cannot support the paper's
+capacity or cache-hit TTFT claim.
+
+The performance-bearing plugin path must virtualize the representation:
+
+1. keep a compact retained-head temporal checkpoint in block-backed cache;
+2. materialize a dense per-active-request temporal workspace before the native
+   recurrent operator;
+3. preserve or separately account for the convolution checkpoint;
+4. run the unchanged native Ascend GDN operator on the dense workspace;
+5. compress the resulting temporal state back into retained-head storage at an
+   aligned checkpoint boundary.
+
+The first physical-capacity canary must prove that page-size accounting and
+admitted cache capacity really change. A dense cache plus a sidecar compressed
+copy is only a numerical canary.
+
+## Candidate Injection Points
+
+- Scheduler/cache lifecycle:
+  `vllm.v1.core.single_type_kv_cache_manager.MambaManager`.
+- Worker state movement:
+  `vllm_ascend.patch.worker.patch_mamba_utils.preprocess_mamba`,
+  `collect_mamba_copy_meta`, and the pre-forward copy call in
+  `vllm_ascend.worker.model_runner_v1`.
+- State allocation contract:
+  `MambaBase.get_kv_cache_spec()` and `MambaSpec.shapes/page_size_bytes`.
+- Native compute boundary:
+  the GDN core immediately before recurrent prefill/decode execution.
+
+The plugin must install after Ascend runtime patches, use explicit opt-in,
+validate source identities, emit activation evidence from every TP worker, and
+fail closed on an unsupported layout or version.
 
 ## Still Unknown
 
-- Whether current vLLM-Ascend persists recurrent state checkpoints across prefix-cache entries, or only maintains active request state rows. Initial vLLM core inspection shows prefix-cache hits are represented as computed KV blocks and `num_computed_tokens`; no recurrent-state checkpoint identity was found in the generic `KVCacheManager` interface.
-- Where prefix-cache hit length and cached state checkpoint identity are exposed to model-layer code.
-- Whether conv state must be stored dense for every checkpoint or can be compressed/omitted in local experiments.
-- Whether graph capture requires DASC-NR to be part of graph-key/config identity.
+- Which live binding hook can substitute compact block storage plus dense active
+  workspace without upstream edits.
+- Whether the convolution checkpoint must remain dense for every retained
+  checkpoint in the first faithful port.
+- Whether DASC mode, retained-mask identity, and workspace shape must enter the
+  graph key, or whether the first canary must force eager execution.
+- Whether compact page sizes alter hybrid-group balancing or alignment
+  constraints elsewhere in `kv_cache_utils`.
 
-## vLLM Prefix-Cache Boundary
+## Canary and Benchmark Boundary
 
-File: `/cache/austinov/src/vllm/vllm/v1/core/kv_cache_manager.py`
-
-- `get_computed_blocks()` finds the longest prefix-cache hit and returns `num_new_computed_tokens`.
-- `allocate_slots()` appends newly computed blocks and updates request `num_computed_tokens` accounting.
-- The generic prefix-cache path is block/KV-oriented. It does not by itself carry DASC's recurrent checkpoint payload, retained-head mask, or compressed state layout.
-
-Therefore the first DASC canary needs an explicit plugin-owned mapping from cached prefix boundary to compressed GDN state checkpoint. Treating normal vLLM prefix-cache blocks as if they already contain DASC recurrent checkpoints would be an unsupported assumption.
+The first numerical canary may use dense storage to validate DASC-NR
+reconstruction against a dense control on real Ascend. It cannot claim capacity
+or performance. The next canary must prove compact allocation, prefix hit,
+state reconstruction, native GDN consumption, cache admission increase, and
+rollback. Only then may a one-switch cache-fill/replay TTFT A/B run.
 
 ## Current Fit Classification
 
-`fits-with-implementation`: the GDN state layout and weight-derived selector fit the target, but DASC's serving benefit needs a plugin-owned state checkpoint store/load path if vLLM-Ascend lacks one.
+`fits-with-implementation`: GDN architecture, weight-derived selection, and
+the prefix-state lifecycle fit. The remaining feasibility gate is a
+plugin-owned compact-cache/dense-workspace virtualization path whose capacity
+arithmetic is real rather than simulated.

@@ -2,7 +2,9 @@
 
 ## Current Status
 
-Workstream opened on 2026-09-15 for arXiv:2608.30386 DASC. No NPU experiment has been launched for this paper yet. Current state is paper ingestion and applicability gating.
+Workstream opened on 2026-09-15 for arXiv:2608.30386 DASC. No NPU experiment
+has been launched for this paper yet. Paper ingestion, architecture fit, and the
+first state-lifecycle source map are complete.
 
 ## Mainline Goal
 
@@ -18,7 +20,13 @@ The final runnable implementation must be a plugin-owned monkeypatch that runs o
 2. Generate a DASC-GDN head-retention plan for `W_max` values such as 16, 64, 128, and 512.
 3. Compute dense vs compressed checkpoint bytes including recurrent temporal state and convolution state.
 4. Source-map vLLM-Ascend prefix-cache/state-checkpoint store/load behavior.
-5. If the cache path exists, implement DASC-NR canary first; if it does not, implement the smallest plugin-owned state checkpoint path or stop with an integration-gap decision.
+   This is complete: `MambaManager` and `preprocess_mamba` preserve and copy
+   aligned convolution and temporal checkpoints by block ID.
+5. Prove a plugin-visible seam for compact temporal-cache storage plus dense
+   active-state workspace. Do not mistake zero-filled dense storage for a
+   capacity optimization.
+6. Implement a DASC-NR numerical canary, then a physical-capacity canary, before
+   any service benchmark.
 
 ## HYPIC Lessons Applied
 
@@ -30,4 +38,8 @@ The final runnable implementation must be a plugin-owned monkeypatch that runs o
 
 ## Current Decision
 
-Open. The paper has credible relevance to Qwen-GDN, but local feasibility depends on state checkpoint store/load support in vLLM-Ascend.
+Open, with a narrower integration risk. The paper has credible relevance to
+Qwen-GDN and the current stack already supports aligned recurrent-state prefix
+checkpoints. Local feasibility now depends on whether a plugin monkeypatch can
+replace dense block storage with compact retained-head storage plus a dense
+active-request workspace while keeping native Ascend GDN kernels unchanged.
