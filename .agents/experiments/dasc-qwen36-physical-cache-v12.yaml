@@ -39,6 +39,7 @@ protocol:
     - "one byte-exact short response succeeds with finish_reason=stop"
     - "three deterministic shared-prefix replays produce identical output with reasoning disabled"
     - "prefix-cache hit counters increase"
+    - "the independent raw-artifact verifier exits zero after controller completion"
   acceptance_thresholds:
     - "short response content is byte-exactly OK with finish_reason=stop"
     - "physical_cache_bound, tp_geometry_aligned, and worker_dispatch_verified cover the same exact set of four worker pids"
@@ -53,6 +54,7 @@ protocol:
   warmup: "service graph capture; excluded from later formal performance work"
   repetitions: 3
   command: "bash .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_physical_cache_v12.sh"
+  verification_command: "python3 .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/verify_physical_v12.py --root /cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12"
 results:
   baseline: {}
   candidate: {}

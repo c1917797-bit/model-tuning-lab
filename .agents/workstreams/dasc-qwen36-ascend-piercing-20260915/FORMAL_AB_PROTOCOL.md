@@ -17,6 +17,11 @@ exist. Experiment v12 must first prove that the order-fixed physical cache:
 Any v12 failure is preserved under its immutable artifact root and classified
 before a superseding experiment is created.
 
+After the controller is terminal, run verify_physical_v12.py against the
+immutable root. It must independently recompute the raw activation cohort,
+exact responses, cache-hit delta, source commit, and every nested SHA256
+manifest. A controller-authored ok field is not acceptance evidence by itself.
+
 ## One-switch arms
 
 Both arms use the same Qwen3.6-27B bytes, image digest, CANN/driver stack,
