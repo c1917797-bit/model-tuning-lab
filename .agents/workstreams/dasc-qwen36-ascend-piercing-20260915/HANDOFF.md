@@ -149,11 +149,23 @@ NPU4-7 lock. Dense and candidate arms are TP4/HCCL and differ only by the DASC
 plugin treatment. Each arm runs three fixed shared-prefix performance rounds
 and three LongBench-v2 plus GSM8K quality rounds.
 
+The single automatic v12-to-v13 handoff supervisor is remote exec operation
+`exec-00000000000012c5`, launched from `run_v13_after_v12.sh`. It waits for
+the v12 `SUCCESS` marker, independently reruns `verify_physical_v12.py`, and
+then invokes the formal controller. Exit 75 means the NPU4-7 lock or devices
+are not yet ready and is retried after 60 seconds; any other nonzero result is
+fail-closed and must be inspected rather than restarted blindly.
+
 Formal evidence is deliberately not accepted from a hand-written summary:
 
 - `extract_formal_identity.py` derives arm identity from Docker inspect and
   rejects protected-device mappings or treatment drift.
 - `capture_prometheus_metrics.py` captures the exact prefix-cache counters.
+- `verify_cache_capacity.py` reconciles live aggregate cache tokens with the
+  per-group dense budget and four-worker candidate allocation evidence.
+- `verify_performance_triplet.py` applies the final performance-run rules
+  before an interrupted run is reused; malformed or incomplete artifacts are
+  archived and regenerated.
 - `build_formal_evidence.py` reads a fixed raw-artifact layout.
 - `verify_formal_decision.py` recomputes completeness, cache-hit deltas,
   paired performance direction, quality tolerance, and the four-worker
@@ -168,6 +180,6 @@ later review also found that prefix matching would misclassify
 `/dev/davinci_manager` as a compute card; commit `a7c2173` changed this to an
 exact numeric-device match and added realistic auxiliary devices to the test.
 
-The last full CPU-only workstream run passed 30 tests with 14 upstream Torch
+The last full CPU-only workstream run passed 35 tests with 14 upstream Torch
 deprecation warnings. The current branch is intentionally unpushed; pushing
 requires explicit user authorization for the exact branch and payload.
