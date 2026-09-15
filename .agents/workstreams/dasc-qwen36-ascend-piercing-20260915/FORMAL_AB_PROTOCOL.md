@@ -35,6 +35,25 @@ random seed.
 The DASC switch is the only treatment difference. A run with prefix caching
 disabled is not a DASC denominator.
 
+## Frozen resource budget
+
+Both arms use exactly 9,663,676,416 cache bytes per TP rank (9 GiB), a
+128-token block, `max_model_len=44032`, `max_num_seqs=32`, and the same
+model-native bfloat16 cache dtype. The static audit derives the Dense TP4 page
+from the immutable Qwen3.6 config: 16 full-attention layers contribute
+2,097,152 bytes and 48 GDN layers contribute 19,611,648 bytes, for a
+21,708,800-byte aggregate page. The fixed budget therefore admits 445 blocks
+or 56,960 tokens. The longest audited request consumes 344 blocks, leaving 101
+blocks, so the Dense arm can serve it without truncation.
+
+Run `audit_formal_resource_budget.py` before launch and preserve its JSON and
+SHA256. This is a preflight estimate, not runtime proof: each arm must emit and
+independently reconcile its actual page sizes, allocated block count, cache
+dtype, and cache bytes. A mismatch rejects the arm. The benchmark may queue
+requests when all concurrency cannot be resident; such scheduling pressure is
+part of the fixed-budget capacity comparison and must not be hidden by giving
+the arms different cache budgets.
+
 ## Performance ruler
 
 Reuse the HYPIC-proven dependency-free shared-prefix benchmark at the pinned
