@@ -18,6 +18,12 @@ orient -> hypothesize -> baseline -> change -> verify -> measure -> decide
 Success, regression, failure, and inconclusive evidence are all useful when
 their conditions and decisions are reproducible.
 
+For paper-algorithm piercing, read
+[`references/paper-algorithm-piercing-lessons.md`](references/paper-algorithm-piercing-lessons.md)
+before selecting or extending an implementation route. It captures the
+decision-changing HYPIC, DRRQR, and DASC lessons without turning their local
+parameters into universal rules.
+
 ## Experiment Contract
 
 Use one ID such as `exp-YYYYMMDD-short-name`, one `work/*` branch, and one
@@ -89,6 +95,23 @@ bounded test that targets the recorded failure phase. Fixing a visible defect
 does not establish root cause until the failure phase or measured outcome
 changes. Keep the old route closed when a fix leaves the original stall,
 timeout, correctness failure, or performance result unchanged.
+
+## Goal-alignment checkpoint
+
+At the end of every short loop, compare the evidence and proposed successor
+with both the workstream's medium-term milestone and its long-term adoption
+goal. Record:
+
+- which causal link advanced: method parity, runtime activation, numerical
+  correctness, physical capacity, service performance, quality, or portability;
+- whether the next loop attacks the earliest still-unproven link;
+- whether the optimistic E2E bound can still reach the declared target;
+- the stop, pivot, or escalation condition if it cannot.
+
+Do not keep polishing a primitive after its route is closed, substitute an
+unrequested optimization such as speculative decoding, or let report writing,
+profiling, microbenchmarks, and Git activity masquerade as progress toward the
+adoption goal.
 
 ## Git and Artifact Rules
 
