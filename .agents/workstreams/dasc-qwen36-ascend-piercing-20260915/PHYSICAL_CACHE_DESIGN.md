@@ -81,3 +81,28 @@ and attempted to allocate its first NPU tensor. It terminated before any DASC
 operation or assertion because `aclInit` returned `507899 Resource_Busy`
 (AWMCP operation `exec-0000000000000f5b`). It was not retried and no broader
 device claim was made. The NPU lifecycle gate therefore remains open.
+
+## Live cache-manager findings
+
+The first physical service attempt exposed a TP invariant absent from the
+standalone bridge: layer geometry derived from sharded weights must be equal
+across workers. The implementation now synchronizes a 48-element retained
+count vector with HCCL MAX after weights load, while selecting/padding indices
+locally. This preserves layerwise heterogeneity and avoids a global 12-head
+fallback. Physical NPU evidence from v2 confirms all ranks received the same
+count vector.
+
+The second attempt exposed a distinct hybrid-cache invariant. vLLM's general
+fallback tries to make every layer page divide the maximum page. A compact GDN
+page contains a fixed convolution-state term plus a head-proportional temporal
+term, so ordinary retained counts do not satisfy that arithmetic. Padding each
+layer to the dense maximum would make the implementation cosmetic.
+
+In Mamba align mode, attention and recurrent layers share the same 1,536-token
+block lifecycle. The next implementation therefore packages their exact child
+specs in one `UniformTypeKVCacheSpecs` aggregate. Allocation accounts for the
+sum of real child pages, while the runner can still construct each child view
+from its own shape. This adaptation is narrowly enabled only for heterogeneous
+aligned Mamba plus attention, with one common block size and no hidden-state
+cache. Unsupported cache families fail closed rather than silently changing
+lifecycle semantics.

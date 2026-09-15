@@ -71,3 +71,35 @@ The next admissible successor must change the physical representation:
 compact retained-head checkpoint storage, dense workspace expansion on restore,
 and measured post-alignment cache capacity. Repeating or tuning the existing
 dense masking route is closed.
+
+## Physical-cache integration attempts
+
+Two bounded service launches advanced the integration boundary without
+producing performance or quality results:
+
+- `physical-cache-eager-v1` reached cache-spec collection on all four TP ranks
+  and failed because independently selected local head counts produced
+  different shapes for the same layer across workers. Logs and activation
+  evidence are retained under the runtime artifact root; their SHA256 values
+  are `24732fd...e83854` and `f51df7d...40fcf`.
+- Commit `fc1fb2b` added a per-layer HCCL MAX of retained counts. Each rank
+  keeps its own weight-derived indices and pads only with its longest-horizon
+  omitted heads. The complete v0.23 suite passed 37 tests.
+- `physical-cache-eager-v2` proved that collective on physical NPU4-7. All
+  four workers emitted identical 48-layer common-count vectors, and the run
+  passed the former cross-worker merge assertion. It then failed at the next
+  framework gate because heterogeneous Mamba pages were sent through vLLM's
+  global page-divisibility path. Logs/evidence SHA256 are
+  `831fcf5...09644` and `2237ca8...8e18`.
+- Commit `e4587c3` represents aligned attention plus heterogeneous Mamba specs
+  as one `UniformTypeKVCacheSpecs` aggregate, retaining the exact inner page
+  sizes instead of padding every layer to the dense maximum. It fails closed
+  if hidden-state cache or unequal token block sizes appear. The v0.23 suite
+  passes 39 tests and the commit is pushed.
+
+No TTFT, TPOT, throughput, or E2E accuracy conclusion follows from v1/v2.
+The next run must use a new `physical-cache-eager-v3` artifact directory and
+first prove service readiness, physical bytes, real prefix reuse, and retained
+state correctness. At the latest orientation, NPU4-7 were occupied by the
+separate `vllm_23_au` DeltaLog/fused-GDN piercing process, so v3 was not
+started and that workload was not interrupted.
