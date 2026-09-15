@@ -69,6 +69,20 @@ self_test() {
     echo "self-test: ok"
 }
 
+validate_source_state() {
+    local current_head
+    current_head=$(git rev-parse HEAD)
+    if ! git merge-base --is-ancestor c5c6fadb1270bab419caa36a0918529251902df0 "$current_head"; then
+        echo "refusing: HEAD $current_head does not descend from the v12 frozen base"
+        return 2
+    fi
+    if [[ -n $(git status --porcelain) ]]; then
+        echo "refusing: repository is dirty"
+        git status --short
+        return 2
+    fi
+}
+
 if [[ ${1:-} == "--self-test" ]]; then
     self_test
     exit 0
@@ -76,16 +90,7 @@ fi
 
 self_test
 cd "$REPO"
-CURRENT_HEAD=$(git rev-parse HEAD)
-if ! git merge-base --is-ancestor c5c6fadb1270bab419caa36a0918529251902df0 "$CURRENT_HEAD"; then
-    echo "refusing: HEAD $CURRENT_HEAD does not descend from the v12 frozen base"
-    exit 2
-fi
-if [[ -n $(git status --porcelain) ]]; then
-    echo "refusing: repository is dirty"
-    git status --short
-    exit 2
-fi
+validate_source_state
 if [[ -e "$RESULT_ROOT" ]]; then
     echo "refusing: immutable result directory already exists: $RESULT_ROOT"
     exit 2
@@ -117,6 +122,7 @@ if ss -ltn | awk '{print $4}' | grep -Eq "(^|:)$PORT$"; then
     echo "refusing: port $PORT is already listening"
     exit 2
 fi
+validate_source_state
 
 mkdir "$RESULT_ROOT"
 card_snapshot >"$RESULT_ROOT/npu-before.txt"
@@ -132,6 +138,7 @@ sha256sum "$RESULT_ROOT/run_physical_canary.py" >"$RESULT_ROOT/canary.sha256"
 
 cleanup() {
     local status=$?
+    local manifest_tmp
     set +e
     if docker container inspect "$CONTAINER" >/dev/null 2>&1; then
         docker logs "$CONTAINER" >"$RESULT_ROOT/service.log" 2>&1
@@ -143,10 +150,11 @@ cleanup() {
     fi
     card_snapshot >"$RESULT_ROOT/npu-after.txt"
     echo "$status" >"$RESULT_ROOT/controller-exit-code.txt"
+    manifest_tmp=$(mktemp "$CONTROLLER_ROOT/$EXPERIMENT-artifacts.XXXXXX")
     find "$RESULT_ROOT" -maxdepth 1 -type f ! -name artifacts.sha256 -print0 |
         sort -z |
-        xargs -0 sha256sum >"$RESULT_ROOT/artifacts.sha256.tmp"
-    mv "$RESULT_ROOT/artifacts.sha256.tmp" "$RESULT_ROOT/artifacts.sha256"
+        xargs -0 sha256sum >"$manifest_tmp"
+    mv "$manifest_tmp" "$RESULT_ROOT/artifacts.sha256"
     echo "$(timestamp) controller exit=$status"
 }
 trap cleanup EXIT
