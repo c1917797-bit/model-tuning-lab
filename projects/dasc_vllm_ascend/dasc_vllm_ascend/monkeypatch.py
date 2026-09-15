@@ -19,7 +19,11 @@ from .config import DascConfig
 from .evidence import emit
 from .metadata import remap_ascend_gdn_metadata
 from .runtime import BoundActiveStateBridge
-from .selector import retained_head_indices, unique_head_axis
+from .selector import (
+    align_retained_heads_tp,
+    retained_head_indices,
+    unique_head_axis,
+)
 from .spec import compact_mamba_spec
 
 
@@ -356,6 +360,7 @@ def install(config: DascConfig) -> None:
         QwenGatedDeltaNetAttention,
     )
     from vllm.model_executor.models.qwen3_5 import Qwen3_5ForConditionalGeneration
+    from vllm.distributed.parallel_state import get_tp_group
     from vllm.forward_context import get_forward_context
     from vllm.v1.worker import mamba_utils
     from vllm_ascend.ops import gdn
@@ -397,6 +402,26 @@ def install(config: DascConfig) -> None:
         if config.mode == "nr-numerical":
             _install_state_restore_patch(config, mamba_utils, ascend_patch)
         else:
+            named_gdn_modules = sorted(
+                (
+                    (name, module)
+                    for name, module in self.named_modules()
+                    if isinstance(module, QwenGatedDeltaNetAttention)
+                ),
+                key=lambda item: item[0],
+            )
+            tp_group = get_tp_group()
+            alignment = align_retained_heads_tp(
+                named_gdn_modules, config, tp_group.device_group
+            )
+            emit(
+                config.evidence_path,
+                "tp_geometry_aligned",
+                mode=config.mode,
+                tp_rank=tp_group.rank_in_group,
+                tp_world_size=tp_group.world_size,
+                **alignment,
+            )
             _install_physical_cache_patch(
                 config, QwenGatedDeltaNetAttention, get_forward_context
             )

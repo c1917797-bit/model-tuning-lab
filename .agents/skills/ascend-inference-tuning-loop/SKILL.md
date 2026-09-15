@@ -139,3 +139,10 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   workspaces when the native operator ABI is dense. Prove restore, compute,
   checkpoint, prefix-copy, abort, and invalidation lifecycles before changing
   framework page accounting or claiming physical savings.
+- When state geometry is derived from TP-sharded weights, synchronize the
+  per-layer geometry before vLLM cache-spec collection. Rank-local indices may
+  differ, but every worker must advertise the same page shape for a layer.
+  Prefer a layerwise collective MAX count and pad each rank with its next most
+  important local states; a global maximum across all layers destroys useful
+  heterogeneity. Treat cross-worker cache-spec merge as a hard runtime gate and
+  cover it before another service launch.
