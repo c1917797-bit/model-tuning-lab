@@ -1,0 +1,49 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "tail-replay-qwen36-ascend-tp4-20260915",
+  "status": "first-decode-mechanism-gate-complete",
+  "model": "/cache/efim/Qwen3.6-27B",
+  "physical_npus": [4, 5, 6, 7],
+  "tensor_parallel_size": 4,
+  "prompt_tokens": 650,
+  "completion_tokens": 2,
+  "software_tests": "42/42 passed",
+  "first_decode": {
+    "exact_results": 64,
+    "exact_all_passed": true,
+    "exact_output_relative_l2_mean": 0.003814654453890398,
+    "exact_output_relative_l2_max": 0.006211802829056978,
+    "cache_preservation_results": 64,
+    "all_live_caches_bitwise_preserved": true,
+    "ratios": {
+      "0.05": {
+        "results": 64,
+        "all_finite": true,
+        "output_relative_l2_mean": 0.0535771616268903,
+        "output_relative_l2_min": 0.02378152497112751,
+        "output_relative_l2_max": 0.12771955132484436,
+        "recurrent_state_relative_l2_mean": 0.502003648551181,
+        "recurrent_state_relative_l2_max": 0.8718187212944031
+      },
+      "0.10": {
+        "results": 64,
+        "all_finite": true,
+        "output_relative_l2_mean": 0.05128683301154524,
+        "output_relative_l2_min": 0.022977719083428383,
+        "output_relative_l2_max": 0.12143142521381378,
+        "recurrent_state_relative_l2_mean": 0.47682125117474544,
+        "recurrent_state_relative_l2_max": 0.8654512166976929
+      }
+    }
+  },
+  "artifacts": {
+    "root": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260915/first-decode-oracle/v1",
+    "request_sha256": "f46d6a6881abecd33795be53404ed9d8b1b4a64d44b7d2b423b7c06c1b1e26a1",
+    "response_sha256": "43daed79794836a35eb832a2077419ab8ddc98afc64baa39304c4c3403a0dba6",
+    "runtime_sha256": "4ed3e0c392c93eb7ed4a250d4722433b533f7fc732e7841c463b586721a15c87",
+    "probe_source_sha256": "3a04a73497f3da47b74b7ead46a7024ed9565ef031e1fa5cdcbcd0c282739078"
+  },
+  "performance": null,
+  "quality": null,
+  "resource_release": "owned container stopped; physical NPU4-7 confirmed without running processes"
+}

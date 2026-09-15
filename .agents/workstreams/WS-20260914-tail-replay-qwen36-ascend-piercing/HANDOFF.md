@@ -2,6 +2,25 @@
 
 Updated: 2026-09-15
 
+## Final update
+
+- The TP4 entry diagnostic, full three-GDN-group oracle, and isolated first
+  real decode-token comparison have now completed on physical NPU4-7.
+- The final pinned-image suite passes 42/42.
+- First-decode exact controls passed 64/64 and live caches were bitwise
+  preserved 64/64.
+- The 5% and 10% candidates produced mean group-output relative L2 of
+  0.053577 and 0.051287, with mean recurrent-state relative L2 of 0.502004
+  and 0.476821 respectively. Every candidate group-output result exceeded
+  the 0.01 exact-control ceiling.
+- The tested candidates are closed as mechanism-rejected and were not admitted
+  to cache-hit TTFT, performance, or task-quality testing.
+- Final report: `TAIL_REPLAY_ASCEND_PIERCING_REPORT.md`.
+- Final evidence and decision records use the 20260915 filenames in this
+  directory. Older records remain as historical stage evidence.
+- The owned experiment container was stopped and physical NPU4-7 were
+  confirmed free after the run.
+
 ## Current state
 
 - Branch: work/tail-replay-qwen36-ascend-piercing-20260914.
