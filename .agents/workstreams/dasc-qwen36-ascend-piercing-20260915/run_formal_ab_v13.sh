@@ -36,13 +36,18 @@ snapshot_cards() {
 }
 static_checks() {
   command -v docker >/dev/null; command -v npu-smi >/dev/null; command -v flock >/dev/null
-  test -r "$MODEL_HOST/config.json"; test -r "$PLUGIN/pyproject.toml"
+  test -r "$MODEL_HOST/config.json"; test -r "$REPO/projects/dasc_vllm_ascend/pyproject.toml"
   test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"
   test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$VERIFY_V12"
   printf '%s  %s\n' cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822 "$BENCH" | sha256sum -c -
   docker image inspect "$IMAGE" >/dev/null
   local i; for i in 4 5 6 7; do test -c "/dev/davinci$i"; done
   test -z "$(git -C "$REPO" status --porcelain)"
+}
+gate_checks() {
+  test -f "$V12/SUCCESS"
+  test -r "$PLUGIN/pyproject.toml"
+  python3 "$VERIFY_V12" --root "$V12" --repo "$REPO" --output "$BASE/controllers/dasc-qwen36-v12-verification.json"
 }
 if [[ ${1:-} == --self-test ]]; then static_checks; echo 'v13 static self-test passed; no NPU workload started'; exit 0; fi
 
@@ -56,8 +61,7 @@ cleanup() {
 trap cleanup EXIT
 
 static_checks
-test -f "$V12/SUCCESS"
-python3 "$VERIFY_V12" --root "$V12" --repo "$REPO" --output "$BASE/controllers/dasc-qwen36-v12-verification.json"
+gate_checks
 mkdir -p "$ROOT"/{dense,candidate,quality/dense,quality/candidate}
 exec 8>"$ROOT/controller.lock"; flock -n 8 || { echo 'another v13 controller owns the lock'; exit 75; }
 exec 9>"$LOCK"; flock -n 9 || { echo 'NPU4-7 lock is held'; exit 75; }
