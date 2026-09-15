@@ -83,6 +83,77 @@ class PhysicalV12VerifierTest(unittest.TestCase):
             payload.write_text("tampered\n", encoding="utf-8")
             self.assertFalse(MODULE.verify_manifest(manifest, root)["ok"])
 
+    def test_container_identity_requires_exact_npu4_7_mapping(self) -> None:
+        image = {"Id": "sha256:image"}
+        devices = [
+            {
+                "PathOnHost": f"/dev/davinci{physical}",
+                "PathInContainer": f"/dev/davinci{logical}",
+            }
+            for logical, physical in enumerate(range(4, 8))
+        ]
+        devices.extend(
+            {"PathOnHost": value, "PathInContainer": value}
+            for value in (
+                "/dev/davinci_manager",
+                "/dev/devmm_svm",
+                "/dev/hisi_hdc",
+            )
+        )
+        container = {
+            "Name": MODULE.EXPECTED_CONTAINER,
+            "Image": "sha256:image",
+            "Config": {
+                "Image": MODULE.EXPECTED_IMAGE,
+                "Labels": {
+                    "mst.owner": "c1917797-bit",
+                    "mst.workstream": "dasc-qwen36-ascend-piercing-20260915",
+                    "mst.experiment": "dasc-qwen36-physical-cache-v12",
+                },
+                "Env": [
+                    "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3",
+                    "VLLM_PLUGINS=ascend,dasc_vllm_ascend",
+                    "MST_DASC_ENABLE=1",
+                    "MST_DASC_MODE=physical-cache-eager",
+                    "MST_DASC_W_MAX=64",
+                ],
+                "Cmd": [
+                    "vllm",
+                    "serve",
+                    "/models/Qwen3.6-27B",
+                    "--tensor-parallel-size",
+                    "4",
+                    "--mamba-cache-mode",
+                    "align",
+                    "--enable-prefix-caching",
+                    "--port",
+                    "8030",
+                ],
+            },
+            "HostConfig": {"NetworkMode": "host", "Devices": devices},
+            "Mounts": [
+                {
+                    "Source": "/cache/efim/Qwen3.6-27B",
+                    "Destination": "/models/Qwen3.6-27B",
+                    "RW": False,
+                },
+                {
+                    "Source": str(MODULE.EXPECTED_RESULT_ROOT / "plugin-snapshot"),
+                    "Destination": "/workspace/dasc",
+                    "RW": False,
+                },
+                {
+                    "Source": str(MODULE.EXPECTED_RESULT_ROOT),
+                    "Destination": "/dasc-results",
+                    "RW": True,
+                },
+            ],
+            "State": {"Running": False},
+        }
+        self.assertTrue(MODULE.container_identity_verdict(container, image)["ok"])
+        container["HostConfig"]["Devices"][0]["PathOnHost"] = "/dev/davinci0"
+        self.assertFalse(MODULE.container_identity_verdict(container, image)["ok"])
+
 
 if __name__ == "__main__":
     unittest.main()

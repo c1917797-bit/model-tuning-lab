@@ -14,6 +14,15 @@ import subprocess
 
 SHA_LINE = re.compile(r"^([0-9a-f]{64}) [ *](.+)$")
 EXPECTED_MODEL_CONFIG = Path("/cache/efim/Qwen3.6-27B/config.json")
+EXPECTED_IMAGE = "quay.io/ascend/vllm-ascend:v0.23.0"
+EXPECTED_CONTAINER = "/dasc_qwen36_physical_order_fix_v12_20260915"
+EXPECTED_RESULT_ROOT = Path(
+    "/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12"
+)
+CONTROLLER_RELATIVE = (
+    ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/"
+    "run_physical_cache_v12.sh"
+)
 
 
 def sha256_file(path: Path) -> str:
@@ -179,6 +188,110 @@ def verify_source_commit(repo: Path, value: str) -> bool:
     return completed.returncode == 0
 
 
+def option_value(command: list[str], name: str) -> str | None:
+    try:
+        return command[command.index(name) + 1]
+    except (ValueError, IndexError):
+        return None
+
+
+def container_identity_verdict(container: dict, image: dict) -> dict:
+    config = container.get("Config", {})
+    host_config = container.get("HostConfig", {})
+    env = {
+        item.split("=", 1)[0]: item.split("=", 1)[1]
+        for item in config.get("Env", [])
+        if "=" in item
+    }
+    devices = host_config.get("Devices", [])
+    davinci = {
+        (item.get("PathOnHost"), item.get("PathInContainer"))
+        for item in devices
+        if re.fullmatch(r"/dev/davinci\d+", str(item.get("PathOnHost")))
+    }
+    expected_davinci = {
+        ("/dev/davinci4", "/dev/davinci0"),
+        ("/dev/davinci5", "/dev/davinci1"),
+        ("/dev/davinci6", "/dev/davinci2"),
+        ("/dev/davinci7", "/dev/davinci3"),
+    }
+    auxiliary = {item.get("PathOnHost") for item in devices}
+    mounts = {item.get("Destination"): item for item in container.get("Mounts", [])}
+    command = config.get("Cmd", [])
+    checks = {
+        "container_name": container.get("Name") == EXPECTED_CONTAINER,
+        "image_tag": config.get("Image") == EXPECTED_IMAGE,
+        "image_id": bool(image.get("Id")) and container.get("Image") == image.get("Id"),
+        "owner_label": config.get("Labels", {}).get("mst.owner") == "c1917797-bit",
+        "workstream_label": config.get("Labels", {}).get("mst.workstream")
+        == "dasc-qwen36-ascend-piercing-20260915",
+        "experiment_label": config.get("Labels", {}).get("mst.experiment")
+        == "dasc-qwen36-physical-cache-v12",
+        "network_host": host_config.get("NetworkMode") == "host",
+        "physical_device_map": davinci == expected_davinci,
+        "auxiliary_devices": {
+            "/dev/davinci_manager",
+            "/dev/devmm_svm",
+            "/dev/hisi_hdc",
+        }.issubset(auxiliary),
+        "visible_devices": env.get("ASCEND_RT_VISIBLE_DEVICES") == "0,1,2,3",
+        "plugins": env.get("VLLM_PLUGINS") == "ascend,dasc_vllm_ascend",
+        "dasc_enabled": env.get("MST_DASC_ENABLE") == "1",
+        "dasc_mode": env.get("MST_DASC_MODE") == "physical-cache-eager",
+        "dasc_wmax": env.get("MST_DASC_W_MAX") == "64",
+        "serve_model": command[:3]
+        == ["vllm", "serve", "/models/Qwen3.6-27B"],
+        "tp4": option_value(command, "--tensor-parallel-size") == "4",
+        "prefix_caching": "--enable-prefix-caching" in command,
+        "mamba_align": option_value(command, "--mamba-cache-mode") == "align",
+        "port": option_value(command, "--port") == "8030",
+        "model_mount": mounts.get("/models/Qwen3.6-27B", {}).get("Source")
+        == "/cache/efim/Qwen3.6-27B"
+        and mounts.get("/models/Qwen3.6-27B", {}).get("RW") is False,
+        "plugin_mount_read_only": mounts.get("/workspace/dasc", {}).get("Source")
+        == str(EXPECTED_RESULT_ROOT / "plugin-snapshot")
+        and mounts.get("/workspace/dasc", {}).get("RW") is False,
+        "result_mount_writable": mounts.get("/dasc-results", {}).get("Source")
+        == str(EXPECTED_RESULT_ROOT)
+        and mounts.get("/dasc-results", {}).get("RW") is True,
+        "terminal": container.get("State", {}).get("Running") is False,
+    }
+    return {"checks": checks, "ok": all(checks.values())}
+
+
+def source_scope_verdict(repo: Path, commit: str) -> dict:
+    completed = subprocess.run(
+        ["git", "show", f"{commit}:{CONTROLLER_RELATIVE}"],
+        cwd=repo,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if completed.returncode != 0:
+        return {"loaded": False, "unscoped_npu_smi_lines": [], "ok": False}
+    npu_lines = [
+        line.strip()
+        for line in completed.stdout.splitlines()
+        if "npu-smi info" in line
+    ]
+    unscoped = [line for line in npu_lines if '-i "$device"' not in line]
+    expected_maps = [
+        f"--device /dev/davinci{physical}:/dev/davinci{logical}"
+        for logical, physical in enumerate(range(4, 8))
+    ]
+    result = {
+        "loaded": True,
+        "npu_smi_lines": npu_lines,
+        "unscoped_npu_smi_lines": unscoped,
+        "device_maps_present": all(
+            mapping in completed.stdout for mapping in expected_maps
+        ),
+    }
+    result["ok"] = not unscoped and result["device_maps_present"]
+    return result
+
+
 def verify(root: Path, repo: Path) -> dict:
     required = (
         "SUCCESS",
@@ -187,6 +300,11 @@ def verify(root: Path, repo: Path) -> dict:
         "source-status.txt",
         "model-config.sha256",
         "image-inspect.json",
+        "container-inspect.json",
+        "container-final-inspect.json",
+        "npu-before.txt",
+        "npu-smi-info.txt",
+        "npu-after.txt",
         "plugin-files.sha256",
         "canary.sha256",
         "evidence.jsonl",
@@ -219,12 +337,22 @@ def verify(root: Path, repo: Path) -> dict:
     source_lines = (root / "source-status.txt").read_text(encoding="utf-8").splitlines()
     result["source_commit"] = source_commit
     result["source_commit_exists"] = verify_source_commit(repo, source_commit)
+    result["source_scope"] = source_scope_verdict(repo, source_commit)
     result["source_status_clean"] = bool(source_lines) and not any(
         line and not line.startswith("## ") for line in source_lines
     )
     result["controller_exit_zero"] = (
         root.joinpath("controller-exit-code.txt").read_text(encoding="utf-8").strip()
         == "0"
+    )
+    image_values = json.loads(root.joinpath("image-inspect.json").read_text(encoding="utf-8"))
+    container_values = json.loads(
+        root.joinpath("container-final-inspect.json").read_text(encoding="utf-8")
+    )
+    result["container_identity"] = (
+        container_identity_verdict(container_values[0], image_values[0])
+        if len(container_values) == 1 and len(image_values) == 1
+        else {"checks": {}, "ok": False}
     )
     canary = json.loads(
         root.joinpath("physical-canary.json").read_text(encoding="utf-8")
@@ -237,8 +365,10 @@ def verify(root: Path, repo: Path) -> dict:
         and result["canary_manifest"]["ok"]
         and result["model_config_ok"]
         and result["source_commit_exists"]
+        and result["source_scope"]["ok"]
         and result["source_status_clean"]
         and result["controller_exit_zero"]
+        and result["container_identity"]["ok"]
         and result["canary"]["ok"]
     )
     return result
