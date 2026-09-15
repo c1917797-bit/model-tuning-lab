@@ -70,6 +70,7 @@ def build(root: Path) -> dict:
     return {
         "schema": "dasc-formal-v13-normalized/v1",
         "candidate_activation": read_json(root / "candidate" / "activation.json"),
+        "cache_capacity": read_json(root / "cache-capacity.json"),
         "arms": arms,
     }
 

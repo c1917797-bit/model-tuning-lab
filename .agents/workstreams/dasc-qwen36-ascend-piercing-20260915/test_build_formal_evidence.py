@@ -13,6 +13,7 @@ def write_json(path: Path, value: object) -> None:
 
 def make_root(root: Path) -> None:
     write_json(root / "candidate" / "activation.json", {"ok": True})
+    write_json(root / "cache-capacity.json", {"ok": True})
     for arm in ARMS:
         write_json(root / arm / "identity.json", {"arm": arm})
         for run_id in RUN_IDS:
@@ -44,6 +45,7 @@ def test_build_uses_fixed_local_artifact_layout(tmp_path):
     assert result["schema"] == "dasc-formal-v13-normalized/v1"
     assert set(result["arms"]) == set(ARMS)
     assert result["candidate_activation"] == {"ok": True}
+    assert result["cache_capacity"] == {"ok": True}
     assert [x["run_id"] for x in result["arms"]["dense"]["performance"]] == list(
         RUN_IDS
     )

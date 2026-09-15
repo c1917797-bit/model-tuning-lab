@@ -16,6 +16,7 @@ METRICS=$REPO/$WS/capture_prometheus_metrics.py
 IDENTITY=$REPO/$WS/extract_formal_identity.py
 NORMALIZER=$REPO/$WS/build_formal_evidence.py
 DECIDER=$REPO/$WS/verify_formal_decision.py
+CAPACITY=$REPO/$WS/verify_cache_capacity.py
 VERIFY_V12=$REPO/$WS/verify_physical_v12.py
 PORT=8031
 LOCK=/cache/cch/.locks/npu4-7.lock
@@ -38,7 +39,7 @@ static_checks() {
   command -v docker >/dev/null; command -v npu-smi >/dev/null; command -v flock >/dev/null
   test -r "$MODEL_HOST/config.json"; test -r "$REPO/projects/dasc_vllm_ascend/pyproject.toml"
   test -r "$BENCH"; test -r "$QUALITY"; test -r "$METRICS"; test -r "$IDENTITY"
-  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$VERIFY_V12"
+  test -r "$NORMALIZER"; test -r "$DECIDER"; test -r "$CAPACITY"; test -r "$VERIFY_V12"
   printf '%s  %s\n' cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822 "$BENCH" | sha256sum -c -
   docker image inspect "$IMAGE" >/dev/null
   local i; for i in 4 5 6 7; do test -c "/dev/davinci$i"; done
@@ -144,6 +145,7 @@ run_quality() {
 
 create_arm dense; create_arm candidate
 for arm in dense candidate; do start_arm "$arm"; run_performance "$arm"; run_quality "$arm"; stop_arm "$arm"; done
+python3 "$CAPACITY" --dense-log "$ROOT/dense/service.log" --candidate-log "$ROOT/candidate/service.log" --candidate-evidence "$ROOT/candidate/evidence.jsonl" --output "$ROOT/cache-capacity.json"
 python3 - "$ROOT/candidate/evidence.jsonl" "$ROOT/candidate/activation.json" "$REPO/$WS" <<'PY'
 import json, pathlib, sys
 sys.path.insert(0, sys.argv[3])

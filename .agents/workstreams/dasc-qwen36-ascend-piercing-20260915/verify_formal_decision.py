@@ -143,6 +143,7 @@ def evaluate(payload: dict) -> dict:
         raise ValueError("unexpected normalized evidence schema")
     identities = verify_identity(payload)
     activation = verify_candidate_activation(payload)
+    capacity = payload.get("cache_capacity", {})
     performance_checks = {}
     performance_values = {}
     quality_checks = {}
@@ -209,6 +210,8 @@ def evaluate(payload: dict) -> dict:
     checks = {
         "identity": all(identities.values()),
         "candidate_activation": all(activation.values()),
+        "cache_capacity": capacity.get("ok") is True
+        and all(capacity.get("checks", {}).values()),
         "all_raw_runs_valid": all_run_checks,
         "performance_runs_paired": paired_performance,
         "performance_direction_every_run": performance_direction,
@@ -218,6 +221,7 @@ def evaluate(payload: dict) -> dict:
         "schema": "dasc-formal-v13-decision/v1",
         "identity_checks": identities,
         "candidate_activation_checks": activation,
+        "cache_capacity": capacity,
         "performance_checks": performance_checks,
         "quality_checks": quality_checks,
         "quality_gates": quality_gates,

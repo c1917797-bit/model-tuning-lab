@@ -123,6 +123,15 @@ def payload(candidate_quality_drop=0):
             "positive_blocks": True,
             "heterogeneous_cache_grouped": True,
         },
+        "cache_capacity": {
+            "ok": True,
+            "checks": {
+                "dense_matches_static_budget": True,
+                "candidate_admits_more_blocks": True,
+                "candidate_log_matches_evidence": True,
+                "four_candidate_workers": True,
+            },
+        },
         "arms": arms,
     }
 
