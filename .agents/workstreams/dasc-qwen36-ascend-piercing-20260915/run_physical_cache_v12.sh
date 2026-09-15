@@ -34,6 +34,14 @@ card_snapshot() {
     done
 }
 
+card_info_snapshot() {
+    local device
+    for device in 4 5 6 7; do
+        echo "NPU${device}"
+        npu-smi info -i "$device" -c 0 2>&1 || true
+    done
+}
+
 cards_are_idle() {
     local device output
     for device in 4 5 6 7; do
@@ -116,7 +124,7 @@ git rev-parse HEAD >"$RESULT_ROOT/source-commit.txt"
 git status --short --branch >"$RESULT_ROOT/source-status.txt"
 sha256sum "$MODEL_HOST/config.json" >"$RESULT_ROOT/model-config.sha256"
 docker image inspect "$IMAGE" >"$RESULT_ROOT/image-inspect.json"
-npu-smi info >"$RESULT_ROOT/npu-smi-info.txt" 2>&1 || true
+card_info_snapshot >"$RESULT_ROOT/npu-smi-info.txt"
 cp -a "$REPO/projects/dasc_vllm_ascend" "$PLUGIN_HOST"
 cp "$REPO/$WORKSTREAM/run_physical_canary.py" "$RESULT_ROOT/run_physical_canary.py"
 find "$PLUGIN_HOST" -type f -print0 | sort -z | xargs -0 sha256sum >"$RESULT_ROOT/plugin-files.sha256"
