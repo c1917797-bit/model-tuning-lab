@@ -24,6 +24,7 @@
     "Classify v12 independently: service or semantic failure rejects the attempt; external occupancy remains an environment wait.",
     "After v12 becomes terminal, run verify_physical_v12.py against the immutable artifact root and accept only its recomputed zero exit.",
     "Use commit 5f93b14 cache-hit quality adapter for formal quality runs; --require-cache-hit must fail closed on a zero hit delta.",
+    "Use the hash-pinned tokenizer context audit and max_model_len=44032 for both formal arms; reject truncation and the preserved invalid two-token audit.",
     "Only after physical capacity changes, run the one-switch cache-hit TTFT and input-throughput benchmark."
   ],
   "controller": {

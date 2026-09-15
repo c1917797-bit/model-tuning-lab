@@ -27,6 +27,7 @@ environment:
     tensor_parallel_size: 4
     communication: HCCL
     host_to_container_devices: ["4:0", "5:1", "6:2", "7:3"]
+    max_model_len: 44032
 protocol:
   primary_metric: "cache-hit TTFT mean and fixed-input-token throughput"
   arms:
@@ -53,6 +54,17 @@ protocol:
     base_evaluator: .agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py
     base_evaluator_sha256: 9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0
     shared_prefix_lines: 96
+    shared_prefix_tokens: 2592
+    context_audit:
+      tool: .agents/workstreams/dasc-qwen36-ascend-piercing-20260915/audit_quality_context.py
+      artifact: /cache/cch/dasc-qwen36-ascend-20260915/preflight/quality-context-audit.json
+      artifact_sha256: d1417bf99940cc4f654c938309566538f5e30424dd73dbf4b8e6a2c393f35fb4
+      longbench_max_input_tokens: 42234
+      longbench_required_with_output: 43258
+      frozen_max_model_len: 44032
+      rejected_artifact: /cache/cch/dasc-qwen36-ascend-20260915/preflight/quality-context-audit.invalid-token-count-v1.json
+      rejected_artifact_sha256: dabc48810839867c088aa6dbcb4ccb39a8f816f1adb72104344f86461276fc05
+      rejected_reason: "Tokenizer returned a dict-like BatchEncoding and the first implementation measured its two fields instead of input_ids; preserved and excluded."
     datasets:
       longbenchv2:
         path: /cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json
@@ -73,6 +85,7 @@ protocol:
     - "candidate activation evidence covers all four TP workers"
     - "quality rows are complete, uniquely indexed, hash-bound, and independently rescored"
     - "full-attention KV policy, model bytes, image, request tokens, concurrency, warmups, and HBM budget are identical"
+    - "both arms use max_model_len=44032 so all audited LongBench-v2 prompts plus 1024 output tokens fit without truncation"
   acceptance_thresholds:
     - "three unique repetitions per arm"
     - "candidate cache-hit TTFT and derived input-token throughput improve in the same direction in every repetition"

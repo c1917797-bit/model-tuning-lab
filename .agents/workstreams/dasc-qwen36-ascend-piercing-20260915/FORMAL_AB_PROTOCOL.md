@@ -61,6 +61,12 @@ Both arms must prepend the same hash-bound, semantically neutral shared prefix.
 The evaluator must snapshot prefix-cache counters before and after each run and
 reject a run with no positive hit delta.
 
+The Qwen3.6 tokenizer audit at the hash pinned in the v13 experiment found that
+the 96-line neutral prefix adds exactly 2592 tokens. The largest LongBench-v2
+prompt becomes 42234 input tokens and needs 43258 tokens with the fixed 1024
+output budget. Both arms therefore use max_model_len=44032. A service configured
+below that bound is inadmissible; silent truncation is not allowed.
+
 Run all 127 LongBench-v2 and 1319 GSM8K samples three times per arm with
 temperature 0, seed 0, thinking disabled, and the same output budget. Preserve
 one JSONL row per sample, unique complete indexes, response hashes, dataset and
@@ -73,6 +79,9 @@ dataset loaders, prompts, and scorers; prepends a deterministic neutral prefix;
 captures cache metrics; and augments the summary with all relevant hashes. It
 must be invoked with --require-cache-hit. Its offline self-test is necessary but
 not sufficient: only a live positive hit delta makes a quality run admissible.
+The first context audit incorrectly measured the two fields of a dict-like
+tokenizer result as two tokens. That artifact is hash-preserved as rejected
+evidence and must never be used for sizing.
 
 ## Decision
 
