@@ -15,13 +15,13 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "numerical_canary_implemented_unverified",
+  "status": "numerical_canary_verified_performance_rejected",
   "decision": "open",
   "next_actions": [
-    "Review the numerical canary against the live vLLM-Ascend container source and build an installable wheel.",
-    "Re-prove physical NPU4-7 ownership, container mapping, ports, processes, and memory immediately before launch.",
-    "Run disabled and DASC-NR W=64 prefix-fill/reuse canaries with all-rank activation and output evidence.",
-    "If numerical correctness passes, implement compact physical cache pages plus dense active-state workspace.",
+    "Keep the verified dense-storage numerical canary as a closed reachability result; do not tune or benchmark it as a performance candidate.",
+    "Implement compact retained-head checkpoint storage plus dense active-state workspace in the plugin.",
+    "Prove checkpoint bytes and admitted cache-block capacity change after framework alignment.",
+    "Run multi-step NPU restore correctness before service timing.",
     "Only after physical capacity changes, run the one-switch cache-hit TTFT and input-throughput benchmark."
   ]
 }

@@ -2,10 +2,9 @@
 
 ## Current Status
 
-Workstream opened on 2026-09-15 for arXiv:2608.30386 DASC. No NPU experiment
-has been launched for this paper yet. Paper ingestion, architecture fit, the
-state-lifecycle source map, and a first plugin-owned DASC-NR numerical canary
-implementation are complete.
+Workstream opened on 2026-09-15 for arXiv:2608.30386 DASC. Paper ingestion,
+architecture fit, the state-lifecycle source map, and the first plugin-owned
+DASC-NR numerical canary are complete and verified on physical NPU4-7.
 
 The canary lives under `projects/dasc_vllm_ascend`. It is disabled by default,
 version/source guarded, and only changes temporal-state copying on a genuine
@@ -50,3 +49,25 @@ Qwen-GDN and the current stack already supports aligned recurrent-state prefix
 checkpoints. Local feasibility now depends on whether a plugin monkeypatch can
 replace dense block storage with compact retained-head storage plus a dense
 active-request workspace while keeping native Ascend GDN kernels unchanged.
+
+## Verified NPU canary and decision
+
+The W64 dense-storage canary ran on Qwen3.6-27B with TP4, vLLM/vLLM-Ascend
+v0.23.0, eager mode, Mamba align cache, and physical NPU4-7. Two 2,350-token
+prompts shared one 1,536-token cache page. All 48 GDN layers fired on all four
+TP workers, yielding exactly 192 temporal-restore events. Candidate and
+plugin-disabled control returned identical 16-token continuations.
+
+The steady cache-reuse request was 4.213 s for the canary and 4.008 s for the
+control, so the dense-storage canary regressed by 5.095%. It is rejected as a
+performance candidate but accepted as runtime-path and semantic evidence.
+First-request latency is excluded because both runs included cold operator
+initialization.
+
+Runtime artifacts:
+`/cache/cch/dasc-qwen36-ascend-20260915/`
+
+The next admissible successor must change the physical representation:
+compact retained-head checkpoint storage, dense workspace expansion on restore,
+and measured post-alignment cache capacity. Repeating or tuning the existing
+dense masking route is closed.

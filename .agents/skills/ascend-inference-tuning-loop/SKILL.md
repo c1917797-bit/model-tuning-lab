@@ -110,3 +110,23 @@ timeout, correctness failure, or performance result unchanged.
   any materially different successor.
 - Failed active changes are recovered before integration.
 - Local branch equals its upstream after every stage checkpoint.
+
+## State-cache algorithm piercing gate
+
+For algorithms that claim gains by reducing recurrent or prefix state:
+
+- First prove the plugin reaches the real checkpoint save/restore path on every
+  TP rank and expected layer; an API success or model-level hook is not enough.
+- Separate a numerical canary from a performance implementation. A canary that
+  masks a dense state proves semantics/reachability but cannot claim memory,
+  capacity, TTFT, or throughput gains.
+- Measure physical allocation and page geometry. Framework page balancing or
+  alignment can erase theoretical state savings.
+- Run an explicit plugin-disabled control with identical model, devices,
+  cache mode, eager/graph mode, prompt tokens, cache-hit tokens, and decoding
+  settings.
+- Treat first-request latency as warm-up evidence only. Use repeated
+  steady-state cache reuse for performance decisions.
+- A canary that is slower is still useful if it closes the execution-path
+  uncertainty; record it as a negative performance result and move to the
+  missing physical representation rather than tuning the canary.
