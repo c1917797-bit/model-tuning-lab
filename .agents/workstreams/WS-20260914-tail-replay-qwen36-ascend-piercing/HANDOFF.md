@@ -13,8 +13,11 @@ Updated: 2026-09-15
   0.053577 and 0.051287, with mean recurrent-state relative L2 of 0.502004
   and 0.476821 respectively. Every candidate group-output result exceeded
   the 0.01 exact-control ceiling.
-- The tested candidates are closed as mechanism-rejected and were not admitted
-  to cache-hit TTFT, performance, or task-quality testing.
+- The earlier mechanism-rejected decision is withdrawn. The 0.01
+  intermediate relative-L2 limit is only an exact-harness control; the user's
+  1% limit applies to end-to-end GSM8K accuracy loss.
+- The workstream is reopened for real cache-hit integration, paired TTFT, and
+  end-to-end GSM8K validation.
 - Final report: `TAIL_REPLAY_ASCEND_PIERCING_REPORT.md`.
 - Final evidence and decision records use the 20260915 filenames in this
   directory. Older records remain as historical stage evidence.

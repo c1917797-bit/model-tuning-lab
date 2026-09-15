@@ -1,7 +1,7 @@
 {
   "schema": "paper-to-ascend-evidence/v1",
   "experiment_id": "tail-replay-qwen36-ascend-tp4-20260915",
-  "status": "first-decode-mechanism-gate-complete",
+  "status": "first-decode-diagnostic-complete-e2e-pending",
   "model": "/cache/efim/Qwen3.6-27B",
   "physical_npus": [4, 5, 6, 7],
   "tensor_parallel_size": 4,
@@ -43,7 +43,12 @@
     "runtime_sha256": "4ed3e0c392c93eb7ed4a250d4722433b533f7fc732e7841c463b586721a15c87",
     "probe_source_sha256": "3a04a73497f3da47b74b7ead46a7024ed9565ef031e1fa5cdcbcd0c282739078"
   },
-  "performance": null,
-  "quality": null,
+  "performance": {
+    "status": "not-run-yet"
+  },
+  "quality": {
+    "status": "not-run-yet",
+    "acceptance_scope": "end-to-end GSM8K accuracy loss at most 1%; intermediate relative-L2 is diagnostic only"
+  },
   "resource_release": "owned container stopped; physical NPU4-7 confirmed without running processes"
 }

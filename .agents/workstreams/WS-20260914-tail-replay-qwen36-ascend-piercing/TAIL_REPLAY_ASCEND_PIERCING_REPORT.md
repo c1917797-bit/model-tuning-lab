@@ -4,18 +4,21 @@ Date: 2026-09-15
 
 ## Executive decision
 
-The tested Tail-Replay mechanism is **not admitted** to cache-hit TTFT,
-performance, or task-quality evaluation on this Ascend environment.
+The tested Tail-Replay mechanism remains **open for end-to-end validation**.
+The earlier use of a 0.01 intermediate relative-L2 threshold as a candidate
+acceptance gate was incorrect and is withdrawn.
 
 The architecture match is strong: Qwen3.6-27B has 48 GDN layers arranged as
 16 three-GDN groups, matching the paper's target family. The native Ascend
 execution path was reached on every TP rank and every GDN group. However,
-zero-initial-state replay of the final 5% or 10% of a 650-token prompt did not
-reconstruct state closely enough to pass the numerical mechanism gate.
+zero-initial-state replay of the final 5% or 10% of a 650-token prompt produced
+measurable intermediate-state and first-decode group-output deviations. These
+are diagnostic signals, not an end-to-end accuracy decision.
 
-This is a rejection of the tested 5%/10% zero-state suffix-replay candidates,
-not a claim that the paper is false on its reported hardware or that every
-possible Tail-Replay adaptation is impossible.
+The 0.01 threshold applies only to the exact dense functional control used to
+prove that the probe follows the real Ascend operator path. The user's 1%
+acceptance limit applies to end-to-end GSM8K accuracy loss, not to an
+intermediate tensor.
 
 ## Frozen question
 
@@ -29,7 +32,9 @@ The evidence ladder was frozen as:
 2. prove recurrence-only arithmetic with an exact-split control;
 3. prove a complete three-GDN group with an exact functional control;
 4. compare the first real decode token using reconstructed versus dense state;
-5. only then admit a candidate to paired cache-hit TTFT and quality testing.
+5. integrate the approximate candidates into the real cache-hit path;
+6. decide them using paired cache-hit TTFT and end-to-end GSM8K, with at most
+   1% GSM8K accuracy loss.
 
 ## Environment
 
@@ -97,7 +102,8 @@ decode path was first checked using the real dense pre-decode state.
 - candidate results: 64 per ratio, 128 total;
 - cache preservation: 64/64 bitwise preserved;
 - all candidate tensors were finite;
-- every candidate group-output relative-L2 value exceeded 0.01.
+- every candidate group-output relative-L2 value exceeded 0.01, but 0.01 is
+  not a valid acceptance threshold for an approximate Tail-Replay candidate.
 
 | Replay ratio | Output relative L2 mean / min / max | Output cosine mean / min | Recurrent-state relative L2 mean / max |
 |---|---:|---:|---:|
@@ -105,8 +111,9 @@ decode path was first checked using the real dense pre-decode state.
 | 10% | 0.051287 / 0.022978 / 0.121431 | 0.998450 / 0.992601 | 0.476821 / 0.865451 |
 
 The exact functional-decode output error was only 0.003815 on average and
-0.006212 at worst, below the frozen 0.01 ceiling. The candidate gap therefore
-cannot be attributed to the functional harness alone.
+0.006212 at worst, below the frozen 0.01 harness ceiling. The candidate gap
+therefore appears to be a real property of suffix replay rather than a probe
+artifact, but its effect on logits and GSM8K remains unmeasured.
 
 ## HYPIC-style gate result
 
@@ -117,10 +124,10 @@ cannot be attributed to the functional harness alone.
 | Exact recurrence control | Pass | Continue |
 | Exact full-group control | Pass | Continue |
 | Exact first-decode control | Pass | Candidate comparison is admissible |
-| 5% suffix replay numerical signal | Fail | Do not benchmark |
-| 10% suffix replay numerical signal | Fail | Do not benchmark |
-| Paired cache-hit TTFT | Not run | Candidate was not admitted |
-| Task quality | Not run | Candidate was not admitted |
+| 5% suffix replay numerical signal | Diagnostic only | Continue to E2E |
+| 10% suffix replay numerical signal | Diagnostic only | Continue to E2E |
+| Paired cache-hit TTFT | Not run yet | Required |
+| End-to-end GSM8K | Not run yet | Required; loss must be at most 1% |
 
 Request latency from this diagnostic is not a performance result: the oracle
 deliberately executes dense and multiple candidate paths and synchronizes for
@@ -128,15 +135,14 @@ evidence.
 
 ## Decision and next use of effort
 
-Stop the current Tail-Replay 5%/10% zero-state suffix-replay implementation.
-Do not spend NPU time on paired TTFT or downstream accuracy for these
-candidates.
+Continue the current 5%/10% candidates into a real, opt-in cache-hit
+integration. First verify candidate activation and output/logit plumbing, then
+run paired cache-hit TTFT and end-to-end GSM8K. The final quality gate is the
+user-defined GSM8K accuracy loss of at most 1%; the report should show both
+absolute percentage-point and relative-percent deltas to avoid ambiguity.
 
-A future Tail-Replay research branch would need a materially different
-reconstruction method, such as a non-zero boundary-state estimator, a learned
-correction, or a substantially longer/adaptive replay window. Those are new
-algorithmic variants and must restart at the same exact-controlled NPU gates;
-they should not be presented as reproduction of the tested paper setting.
+The intermediate error suggests that 10% is the more promising of the two
+tested ratios, but it does not authorize selecting a winner before E2E results.
 
 ## Evidence locations and identities
 
@@ -153,15 +159,15 @@ have no running processes.
 
 ## Allowed and forbidden claims
 
-Allowed: the tested 5%/10% zero-state Tail-Replay mechanism executed through
+Allowed: the tested 5%/10% zero-state Tail-Replay diagnostic executed through
 the native Ascend Qwen3.6 TP4 path with complete rank/group coverage and valid
-exact controls, but produced material reconstructed-state and first-decode
-group-output deviations and was not admitted to performance or quality tests.
+exact controls, and produced measurable reconstructed-state and first-decode
+group-output deviations whose E2E impact remains unknown.
 
 Forbidden:
 
-- Tail-Replay improves or regresses Ascend TTFT; no admissible TTFT test ran.
-- Tail-Replay preserves or degrades task accuracy; no admissible task test ran.
+- Tail-Replay improves or regresses Ascend TTFT; no paired TTFT test has run.
+- Tail-Replay passes or fails the 1% GSM8K gate; no E2E GSM8K test has run.
 - The diagnostic request time is an end-to-end performance measurement.
 - These results disprove every Tail-Replay variant or the paper's reported
   results on other hardware and software stacks.

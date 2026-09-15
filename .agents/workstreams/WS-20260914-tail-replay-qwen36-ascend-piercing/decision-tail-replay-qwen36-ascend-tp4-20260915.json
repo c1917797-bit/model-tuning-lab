@@ -1,9 +1,9 @@
 {
   "schema": "paper-to-ascend-decision/v1",
   "decision_id": "tail-replay-qwen36-ascend-tp4-20260915",
-  "status": "closed",
-  "current_decision": "reject-tested-5-and-10-percent-zero-state-suffix-replay",
-  "reason": "Complete TP4 exact controls passed, but both replay ratios produced material error on every first-decode GDN group and approximately 48-50% mean recurrent-state relative L2 error.",
+  "status": "open",
+  "current_decision": "proceed-to-end-to-end-cache-hit-and-gsm8k-validation",
+  "reason": "The 0.01 intermediate relative-L2 threshold validates only the exact functional harness. It is not the Tail-Replay acceptance gate. The user-defined 1% limit applies to end-to-end GSM8K accuracy loss.",
   "accepted_evidence": [
     "Qwen3.6-27B architecture fit",
     "native Ascend final-forward activation on all four ranks and 16 groups per rank",
@@ -13,13 +13,14 @@
     "64 passing first-decode exact controls, 128 finite candidate results, and 64 bitwise cache-preservation results"
   ],
   "performance": {
-    "status": "not-run",
-    "reason": "Numerical mechanism gate failed"
+    "status": "not-run-yet",
+    "required_metric": "paired cache-hit TTFT"
   },
   "quality": {
-    "status": "not-run",
-    "reason": "Numerical mechanism gate failed"
+    "status": "not-run-yet",
+    "required_metric": "end-to-end GSM8K",
+    "maximum_allowed_accuracy_loss_percent": 1
   },
-  "final_adoption_decision": "do-not-adopt-tested-candidates",
+  "final_adoption_decision": null,
   "report": "TAIL_REPLAY_ASCEND_PIERCING_REPORT.md"
 }

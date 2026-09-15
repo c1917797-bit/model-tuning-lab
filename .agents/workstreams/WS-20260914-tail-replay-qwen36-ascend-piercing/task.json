@@ -1,12 +1,12 @@
 {
   "schema": "model-tuning-task/v1",
   "task_id": "WS-20260914-tail-replay-qwen36-ascend-piercing",
-  "status": "closed-tested-mechanism-rejected",
+  "status": "open-end-to-end-validation-required",
   "objective": "Pierce Tail-Replay on Qwen3.6-27B Ascend TP4 and determine whether 5% or 10% suffix replay can reconstruct GDN state accurately enough to justify a cache-hit TTFT implementation.",
   "long_term_alignment": "Paper-to-Ascend inference optimization with real NPU correctness, performance, quality, portability, and retained success/failure evidence.",
   "scientific_scope": "Architecture-matched direction reproduction on Qwen3.6-27B; first prove the recurrence mechanism, then group replay, then prefix-cache integration.",
-  "current_stage": "complete",
-  "next_action": "Do not benchmark the tested 5% or 10% zero-state suffix-replay candidates. Any materially different reconstruction method must open a new workstream and restart at exact-controlled NPU gates.",
+  "current_stage": "implement-real-cache-hit-tail-replay-path",
+  "next_action": "Integrate the 5% and 10% candidates into an opt-in real cache-hit path, verify activation and logits, then run paired cache-hit TTFT and end-to-end GSM8K. The 1% limit applies to GSM8K accuracy loss, not intermediate relative-L2.",
   "resource_state": {
     "intended_lane": "host NPU4-7, container-visible 0-3, TP4",
     "protected_lane": "host NPU0-3; do not use or alter",
@@ -44,7 +44,7 @@
       "interpretation": "hot-path activation failure, not a numerical, performance, or quality result; source audit proved the plugin wrapper was overwritten later by vllm_ascend.patch.worker.patch_qwen3_5"
     },
     "group_replay_first_token": {
-      "status": "complete-mechanism-rejected",
+      "status": "diagnostic-complete-e2e-pending",
       "coverage": "4 TP ranks x 16 GDN groups; 64 exact controls and 64 candidate results per ratio",
       "exact_all_passed": true,
       "all_live_caches_bitwise_preserved": true,
@@ -59,12 +59,13 @@
       "evidence": "/cache/cch/tail-replay-qwen36-ascend-tp4-20260915/first-decode-oracle/v1/summary.json"
     },
     "performance": {
-      "status": "not-run",
-      "reason": "numerical mechanism gate failed"
+      "status": "not-run-yet",
+      "required_metric": "paired cache-hit TTFT"
     },
     "quality": {
-      "status": "not-run",
-      "reason": "numerical mechanism gate failed"
+      "status": "not-run-yet",
+      "required_metric": "end-to-end GSM8K",
+      "maximum_allowed_accuracy_loss_percent": 1
     }
   }
 }
