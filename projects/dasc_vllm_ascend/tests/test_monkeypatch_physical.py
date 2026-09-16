@@ -564,6 +564,43 @@ def test_scheduler_reduction_preserves_mamba_lifecycle_flags(tmp_path):
     assert preserved["needs_kv_cache_zeroing"] is True
 
 
+def test_scheduler_awareness_rejects_detached_engine_alias(tmp_path):
+    class FakeKVCacheConfig:
+        @property
+        def has_mamba_layers(self):
+            return False
+
+        @property
+        def needs_kv_cache_zeroing(self):
+            return self.has_mamba_layers
+
+    def module_generator(configs):
+        return configs[0]
+
+    def detached_engine_generator(configs):
+        return configs[0]
+
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    kv_cache_utils = SimpleNamespace(
+        generate_scheduler_kv_cache_config=module_generator
+    )
+    engine_core = SimpleNamespace(
+        generate_scheduler_kv_cache_config=detached_engine_generator
+    )
+    with pytest.raises(
+        physical_patch.DascRuntimeUnsupported,
+        match="scheduler cache-config alias differs",
+    ):
+        physical_patch._install_heterogeneous_cache_config_awareness_patch(
+            config,
+            FakeKVCacheConfig,
+            kv_cache_utils,
+            engine_core,
+        )
+
+
 def test_heterogeneous_cascade_guard_disables_only_uniform_group(tmp_path):
     from vllm.v1.kv_cache_interface import (
         FullAttentionSpec,

@@ -39,6 +39,26 @@ The audit used the official vLLM `v0.23.0` tag at commit
 This explains why both the bridge and bridge-bypassed all-head controls could
 start successfully yet diverge only after prefix-cache hits.
 
+## Consumer coverage
+
+A complete `vllm/v1` search at the pinned tag found no other consumers of
+`has_mamba_layers` or `needs_kv_cache_zeroing`:
+
+- the worker reads `needs_kv_cache_zeroing` after physical cache allocation to
+  initialize block-zero metadata;
+- the scheduler snapshots both properties during construction;
+- `need_mamba_block_aligned_split` gates the waiting-request and
+  running-request prefill scheduling paths;
+- `needs_kv_cache_zeroing` gates collection of newly allocated block IDs for
+  zeroing in each scheduler output.
+
+Cache-manager selection is independently driven by the reduced outer spec.
+Keeping attention first therefore remains necessary to retain
+`FullAttentionManager`; changing the first spec to Mamba would select
+`MambaManager` and lose full-attention allocation semantics. The corrected
+patch changes only lifecycle flags and deliberately leaves manager selection
+unchanged.
+
 ## Corrected seam
 
 The plugin patch now covers both representations:
