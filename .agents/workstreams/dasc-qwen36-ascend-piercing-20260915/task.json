@@ -57,7 +57,10 @@
     "maintainer_tree_validation": "passed_26_skills",
     "planned_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-graph-stable-v12r6",
     "planned_container": "dasc_qwen36_physical_graph_stable_v12r6_20260916",
-    "launch_state": "not_started_due_to_active_all_npu_container_claim",
+    "controller_commit": "1d9a4b7",
+    "controller_path": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r6_once.py",
+    "preflight_state": "physical NPU4-7 have no NPU processes and are at the idle HBM floor; the vllm-ascend container still declares devices 4-7",
+    "launch_state": "not_started_due_to_vllm_ascend_device_claim",
     "performance_result": null,
     "quality_result": null
   },
