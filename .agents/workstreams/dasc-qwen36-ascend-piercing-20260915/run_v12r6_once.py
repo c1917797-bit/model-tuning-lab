@@ -39,6 +39,7 @@ IMAGE_ID = (
 NPUS = (4, 5, 6, 7)
 IDLE_HBM_LIMIT_MIB = 3932
 PORT = 8030
+BLOCK_ON_IDLE_CONTAINER_CLAIMS = True
 SUPERSEDED_REASON = (
     "v12r6 is superseded: its per-forward compact restore would erase "
     "omitted-head updates after the first DASC-NR cache-load boundary"
@@ -158,12 +159,12 @@ def port_available() -> bool:
         probe.close()
 
 
-def preflight() -> tuple[dict, list[str]]:
-    raw, hbm, processes = npu_snapshot()
-    claims = docker_claims()
+def runtime_resource_blockers(
+    hbm: dict[int, int],
+    processes: set[int],
+    claims: dict[str, list[int]],
+) -> list[str]:
     blockers: list[str] = []
-    if SUPERSEDED_REASON is not None:
-        blockers.append(SUPERSEDED_REASON)
     if set(hbm) != set(range(8)):
         blockers.append(f"could not parse all NPU HBM rows: {sorted(hbm)}")
     for device in NPUS:
@@ -174,8 +175,33 @@ def preflight() -> tuple[dict, list[str]]:
                 f"physical NPU{device} HBM {hbm.get(device)} MiB exceeds "
                 f"{IDLE_HBM_LIMIT_MIB} MiB"
             )
-    if claims:
+    if claims and BLOCK_ON_IDLE_CONTAINER_CLAIMS:
         blockers.append(f"running container device claims: {claims}")
+    if not port_available():
+        blockers.append(f"port {PORT} is unavailable")
+    return blockers
+
+
+def live_resource_state() -> tuple[dict, list[str]]:
+    raw, hbm, processes = npu_snapshot()
+    claims = docker_claims()
+    state = {
+        "hbm_mib": hbm,
+        "npu_process_devices": sorted(processes),
+        "container_claims": claims,
+        "idle_container_claim_policy": (
+            "block" if BLOCK_ON_IDLE_CONTAINER_CLAIMS else "record_only"
+        ),
+        "port": PORT,
+        "npu_smi": raw,
+    }
+    return state, runtime_resource_blockers(hbm, processes, claims)
+
+
+def preflight() -> tuple[dict, list[str]]:
+    state, blockers = live_resource_state()
+    if SUPERSEDED_REASON is not None:
+        blockers.append(SUPERSEDED_REASON)
     if RESULT.exists():
         blockers.append(f"immutable result root already exists: {RESULT}")
     known = run(
@@ -183,8 +209,6 @@ def preflight() -> tuple[dict, list[str]]:
     ).strip()
     if known:
         blockers.append(f"owned container name already exists: {CONTAINER}")
-    if not port_available():
-        blockers.append(f"port {PORT} is unavailable")
     if not PROJECT.is_dir():
         blockers.append(f"plugin project is missing: {PROJECT}")
     if not PREVIOUS_CANARY.is_file():
@@ -199,18 +223,14 @@ def preflight() -> tuple[dict, list[str]]:
     ).strip()
     if image_id != IMAGE_ID:
         blockers.append(f"image identity mismatch: {image_id}")
-    return {
-        "hbm_mib": hbm,
-        "npu_process_devices": sorted(processes),
-        "container_claims": claims,
+    state.update({
         "git_head": run(
             ["/usr/bin/git", "rev-parse", "HEAD"], timeout=30
         ).strip(),
         "image": IMAGE,
         "image_id": image_id,
-        "port": PORT,
-        "npu_smi": raw,
-    }, blockers
+    })
+    return state, blockers
 
 
 def sha256(path: Path) -> str:
@@ -469,6 +489,13 @@ def main() -> int:
         atomic_json(RESULT / "preflight.json", state)
         try:
             snapshot_plugin()
+            prelaunch_state, prelaunch_blockers = live_resource_state()
+            atomic_json(RESULT / "prelaunch-resource-check.json", prelaunch_state)
+            if prelaunch_blockers:
+                raise RuntimeError(
+                    "prelaunch resource gate failed: "
+                    + "; ".join(prelaunch_blockers)
+                )
             container_id = launch()
             (RESULT / "container-id.txt").write_text(container_id + "\n")
             wait_ready()

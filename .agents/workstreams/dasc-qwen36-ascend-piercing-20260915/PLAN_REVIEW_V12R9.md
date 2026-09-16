@@ -110,3 +110,17 @@ failed closed (operation exec-0000000000001640). This is a safety correction,
 not NPU algorithm, performance, or quality evidence. The full 54-test plugin
 suite also passed in the pinned image without devices after the correction
 (operation exec-0000000000001649).
+
+The operator subsequently authorized this DASC attempt to use physical NPU4-7
+while foreign containers merely declare those devices but have no device-side
+process and HBM remains at the idle threshold. This is a workstream-local
+override, not a global ownership-policy change. v12r9 records the declarations
+but does not block on them alone; active NPU4-7 processes, HBM above 3932 MiB,
+port 8030, immutable-result, source, and image gates remain fail closed. The
+controller repeats the live process/HBM/port check after plugin preparation and
+immediately before launch. It never stops or modifies the foreign containers.
+Fifteen focused policy/parser/layer-cohort tests passed in the pinned image
+(operation exec-0000000000001651), the full 54-test plugin suite passed
+(operation exec-0000000000001653), and a live dirty-tree preflight proved the
+claims were recorded while the independent source-integrity gate still blocked
+(operation exec-0000000000001652).

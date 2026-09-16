@@ -16,6 +16,7 @@ spec.loader.exec_module(controller)
 controller.RESULT = Path("/cache/cch/dasc-qwen36-ascend-20260915/request-owned-dummy-scope-v12r9")
 controller.CONTAINER = "dasc_qwen36_dummy_scope_v12r9_20260916"
 controller.SUPERSEDED_REASON = None
+controller.BLOCK_ON_IDLE_CONTAINER_CLAIMS = False
 original_validate = controller.validate_allocation_evidence
 
 

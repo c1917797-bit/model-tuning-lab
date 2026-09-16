@@ -206,3 +206,8 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   authority even when devices are renumbered inside; for privileged containers,
   conservatively union explicit mappings with valid visible-device claims.
   Cover both forms and their mixed case with parser regression tests.
+- If the operator explicitly authorizes a narrow experiment to coexist with
+  idle foreign declarations, record that exception in the owning workstream
+  rather than weakening the repository default. Keep device-side processes,
+  HBM, port, and immutable-output checks as hard blockers, and repeat the live
+  resource check immediately before container launch after preparation work.
