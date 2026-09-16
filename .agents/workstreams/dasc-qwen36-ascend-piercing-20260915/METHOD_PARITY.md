@@ -22,7 +22,7 @@ then replace inference-based entries with file/function/output comparisons.
 | GDN static decay | `g=-exp(A_log)*softplus(a+dt_bias)`, `a=-0.3` | Same formula in `selector.head_horizons` | Independent scalar/tensor reference tests required | Implemented, reference gate incomplete |
 | Retention horizon | `H_s=ln(epsilon)/g`, `epsilon=1e-3` | Same formula and default constants | Boundary and dtype tests required | Implemented, reference gate incomplete |
 | GDN selection | Retain full head state when `H_s>W_max` | `retained_head_indices` | Existing selector tests plus model count manifest | Implemented |
-| DASC-NR load | Restore retained units; omitted units remain zero | Dense active workspace is zero-filled, retained heads restored | Multi-step prefix-hit NPU equality/finite-state gate | Implemented, final NPU gate incomplete |
+| DASC-NR load | Restore retained units; omitted units start at zero only on cache-hit Load, then accumulate normally while the request remains active | v12r6 restored compact state before every model forward, which would erase post-load omitted-unit updates; a request-owned dense-slot bridge now has a passing lifecycle regression test but is not yet wired into vLLM | Multi-step same-request block-transition and release/reactivate gates, then NPU equality/finite-state gate | v12r6 superseded; corrected core in progress |
 | Physical checkpoint | Ragged flat-pack with per-layer offsets | Heterogeneous per-layer Mamba specs aggregated into one vLLM physical group | Physical bytes and cache-capacity verifier | Different representation; graph capture failing |
 | TP compute placement | Model-load permutation of coupled tensors | No weight/head permutation | Exact permutation and output-equivalence test | Missing |
 | TP storage balance | Shared TP pool with variable-split all-to-all on Store and inverse on Load | Per-layer MAX retained count; each rank pads with its next-longest heads | Rank payload and communication trace | Not equivalent |
@@ -51,7 +51,10 @@ then replace inference-based entries with file/function/output comparisons.
    label the variant.
 3. Prove full-attention KV metadata is unchanged despite the mixed physical
    group before another service launch.
-4. Pass Ascend graph capture, strict prefix-hit canary, multi-step recurrent
-   state checks, and physical-byte verification.
+4. Integrate request-owned dense active slots so DASC-NR zero-fill occurs only
+   at a true prefix-checkpoint Load. Prove omitted-unit continuity across
+   decode steps and scheduler block transitions, then pass Ascend graph
+   capture, strict prefix-hit canary, multi-step recurrent-state checks, and
+   physical-byte verification.
 5. Only then run matched dense/candidate performance and final E2E quality
    evaluation.

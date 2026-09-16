@@ -128,6 +128,10 @@ def preflight() -> tuple[dict, list[str]]:
     raw, hbm, processes = npu_snapshot()
     claims = docker_claims()
     blockers: list[str] = []
+    blockers.append(
+        "v12r6 is superseded: its per-forward compact restore would erase "
+        "omitted-head updates after the first DASC-NR cache-load boundary"
+    )
     if set(hbm) != set(range(8)):
         blockers.append(f"could not parse all NPU HBM rows: {sorted(hbm)}")
     for device in NPUS:

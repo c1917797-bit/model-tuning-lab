@@ -1,7 +1,11 @@
 import pytest
 import torch
 
-from dasc_vllm_ascend.runtime import ActiveStateBridge, BoundActiveStateBridge
+from dasc_vllm_ascend.runtime import (
+    ActiveStateBridge,
+    BoundActiveStateBridge,
+    RequestActiveStateBridge,
+)
 
 
 def make_bridge():
@@ -102,3 +106,57 @@ def test_bound_bridge_rejects_dense_runner_temporal_cache():
             retained_indices=torch.tensor([0, 3], dtype=torch.long),
             max_active_blocks=2,
         )
+
+
+def test_request_bridge_zero_fills_only_on_prefix_load():
+    conv_storage = torch.zeros(8, 2, 3)
+    temporal_storage = torch.zeros(8, 2, 2)
+    temporal_storage[3].copy_(
+        torch.tensor([[1.0, 2.0], [7.0, 8.0]])
+    )
+    retained = torch.tensor([0, 3], dtype=torch.long)
+    bridge = RequestActiveStateBridge(
+        conv_storage=conv_storage,
+        compact_temporal_storage=temporal_storage,
+        dense_temporal_shape=(4, 2),
+        temporal_head_axis=0,
+        retained_indices=retained,
+        max_active_requests=2,
+    )
+
+    slots = bridge.activate(
+        ("req-a",),
+        torch.tensor([3]),
+        torch.tensor([True]),
+    )
+    assert slots.tolist() == [0]
+    active = bridge.temporal_workspace[0]
+    assert torch.equal(active[retained], temporal_storage[3])
+    assert torch.count_nonzero(active[[1, 2]]).item() == 0
+
+    # A normal recurrent step updates every head, including omitted heads.
+    active.add_(10)
+    omitted_after_step = active[[1, 2]].clone()
+    bridge.checkpoint(("req-a",), torch.tensor([5]))
+
+    # A scheduler block transition for the same live request must not perform
+    # a second DASC-NR load or erase the newly accumulated omitted-head state.
+    slots_again = bridge.activate(
+        ("req-a",),
+        torch.tensor([5]),
+        torch.tensor([True]),
+    )
+    assert slots_again.tolist() == [0]
+    assert torch.equal(bridge.temporal_workspace[0, [1, 2]], omitted_after_step)
+
+    # Releasing and later reactivating is a real checkpoint load boundary:
+    # retained heads restore from compact storage and omitted heads start zero.
+    retained_checkpoint = temporal_storage[5].clone()
+    bridge.release(("req-a",))
+    bridge.activate(("req-a",), torch.tensor([5]), torch.tensor([True]))
+    assert torch.equal(
+        bridge.temporal_workspace[0, retained], retained_checkpoint
+    )
+    assert torch.count_nonzero(
+        bridge.temporal_workspace[0, [1, 2]]
+    ).item() == 0
