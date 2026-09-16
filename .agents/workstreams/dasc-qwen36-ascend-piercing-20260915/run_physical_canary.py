@@ -113,7 +113,9 @@ def load_activation(path: Path) -> tuple[list[dict], list[str]]:
     return rows, errors
 
 
-def activation_summary(rows: list[dict], parse_errors: list[str]) -> dict:
+def activation_summary(
+    rows: list[dict], parse_errors: list[str], *, allow_dense_pages: bool = False
+) -> dict:
     counts = Counter(row.get("event") for row in rows)
     physical = [row for row in rows if row.get("event") == "physical_cache_bound"]
 
@@ -126,10 +128,14 @@ def activation_summary(rows: list[dict], parse_errors: list[str]) -> dict:
             }
         )
 
-    compact_lt_dense = bool(physical) and all(
+    page_relation_ok = bool(physical) and all(
         isinstance(row.get("compact_page_bytes"), int)
         and isinstance(row.get("dense_page_bytes"), int)
-        and row["compact_page_bytes"] < row["dense_page_bytes"]
+        and (
+            row["compact_page_bytes"] <= row["dense_page_bytes"]
+            if allow_dense_pages
+            else row["compact_page_bytes"] < row["dense_page_bytes"]
+        )
         for row in physical
     )
     positive_blocks = bool(physical) and all(
@@ -152,7 +158,9 @@ def activation_summary(rows: list[dict], parse_errors: list[str]) -> dict:
         "tp_geometry_pids": geometry_pids,
         "worker_dispatch_pids": dispatch_pids,
         "worker_cohort_aligned": worker_cohort_aligned,
-        "compact_lt_dense": compact_lt_dense,
+        "compact_lt_dense": page_relation_ok and not allow_dense_pages,
+        "page_relation_ok": page_relation_ok,
+        "allow_dense_pages": allow_dense_pages,
         "positive_blocks": positive_blocks,
         "aggregate_compact_page_bytes": sum(
             row.get("compact_page_bytes", 0) for row in physical
@@ -164,8 +172,12 @@ def activation_summary(rows: list[dict], parse_errors: list[str]) -> dict:
     summary["ok"] = (
         not parse_errors
         and worker_cohort_aligned
-        and counts["heterogeneous_cache_grouped"] >= 1
-        and compact_lt_dense
+        and (
+            counts["aligned_hybrid_cache_grouped"] >= 1
+            if allow_dense_pages
+            else counts["heterogeneous_cache_grouped"] >= 1
+        )
+        and page_relation_ok
         and positive_blocks
     )
     return summary
@@ -177,6 +189,7 @@ def main() -> int:
     parser.add_argument("--model", default="/models/Qwen3.6-27B")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--activation", type=Path, required=True)
+    parser.add_argument("--allow-dense-pages", action="store_true")
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -211,7 +224,9 @@ def main() -> int:
         )
         result["metrics_after"] = metrics(args.base_url)
         rows, parse_errors = load_activation(args.activation)
-        result["activation"] = activation_summary(rows, parse_errors)
+        result["activation"] = activation_summary(
+            rows, parse_errors, allow_dense_pages=args.allow_dense_pages
+        )
         contents = [run["content"] for run in result["runs"]]
         no_reasoning = all(not run["reasoning_content"] for run in result["runs"])
         no_reasoning = no_reasoning and not result["short"]["reasoning_content"]

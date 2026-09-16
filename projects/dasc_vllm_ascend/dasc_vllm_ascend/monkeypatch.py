@@ -190,7 +190,7 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
         )
         heterogeneous = len({spec.page_size_bytes for spec in mamba.values()}) > 1
 
-        if not (known and attention and aligned and heterogeneous):
+        if not (known and attention and aligned):
             return original(vllm_config, kv_cache_spec)
         if hidden:
             raise DascRuntimeUnsupported(
@@ -211,8 +211,9 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
         )
         emit(
             config.evidence_path,
-            "heterogeneous_cache_grouped",
+            "aligned_hybrid_cache_grouped",
             mode=config.mode,
+            heterogeneous_mamba_pages=heterogeneous,
             attention_layers=len(attention),
             mamba_layers=len(mamba),
             mamba_page_sizes=sorted(
@@ -220,6 +221,15 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
             ),
             aggregate_page_bytes=aggregate.page_size_bytes,
         )
+        if heterogeneous:
+            emit(
+                config.evidence_path,
+                "heterogeneous_cache_grouped",
+                mode=config.mode,
+                attention_layers=len(attention),
+                mamba_layers=len(mamba),
+                aggregate_page_bytes=aggregate.page_size_bytes,
+            )
         return [KVCacheGroupSpec(list(ordered), aggregate)]
 
     kv_cache_utils.get_kv_cache_groups = get_dasc_groups

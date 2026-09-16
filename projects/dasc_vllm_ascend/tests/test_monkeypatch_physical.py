@@ -312,6 +312,40 @@ def test_aligned_hybrid_grouping_preserves_exact_inner_page_sizes(tmp_path):
     assert inner["mamba6"].page_size_bytes < inner["mamba12"].page_size_bytes
 
 
+def test_aligned_hybrid_grouping_also_handles_equal_mamba_pages(tmp_path):
+    from vllm.v1.kv_cache_interface import FullAttentionSpec, UniformTypeKVCacheSpecs
+
+    attention = FullAttentionSpec(
+        block_size=1536,
+        num_kv_heads=1,
+        head_size=256,
+        dtype=torch.bfloat16,
+    )
+    mamba = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (12, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    namespace = SimpleNamespace(
+        get_kv_cache_groups=lambda *_: (_ for _ in ()).throw(
+            AssertionError("fallback must not run for aligned hybrid cache")
+        )
+    )
+    evidence = tmp_path / "events.jsonl"
+    config = SimpleNamespace(mode="physical-cache-eager", evidence_path=evidence)
+    physical_patch._install_aligned_hybrid_grouping_patch(config, namespace)
+    groups = namespace.get_kv_cache_groups(
+        SimpleNamespace(), {"attn": attention, "mamba0": mamba, "mamba1": mamba}
+    )
+    assert len(groups) == 1
+    assert isinstance(groups[0].kv_cache_spec, UniformTypeKVCacheSpecs)
+    events = [json.loads(line) for line in evidence.read_text().splitlines()]
+    assert sum(row["event"] == "aligned_hybrid_cache_grouped" for row in events) == 1
+    assert not any(row["event"] == "heterogeneous_cache_grouped" for row in events)
+
+
 def test_aligned_hybrid_grouping_rejects_hidden_cache(tmp_path):
     from vllm.v1.kv_cache_interface import FullAttentionSpec, HiddenStateCacheSpec
 

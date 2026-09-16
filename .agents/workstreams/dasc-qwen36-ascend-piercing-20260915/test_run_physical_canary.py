@@ -62,6 +62,18 @@ class PhysicalCanaryGateTest(unittest.TestCase):
         self.assertFalse(summary["ok"])
         self.assertFalse(summary["worker_cohort_aligned"])
 
+    def test_all_heads_control_accepts_equal_pages_only_with_explicit_flag(self) -> None:
+        rows = activation_rows(range(1, 5), range(1, 5), range(1, 5))
+        rows[0] = {"event": "aligned_hybrid_cache_grouped", "pid": 99}
+        for row in rows:
+            if row.get("event") == "physical_cache_bound":
+                row["compact_page_bytes"] = row["dense_page_bytes"]
+        self.assertFalse(MODULE.activation_summary(rows, [])["ok"])
+        summary = MODULE.activation_summary(rows, [], allow_dense_pages=True)
+        self.assertTrue(summary["ok"])
+        self.assertTrue(summary["page_relation_ok"])
+        self.assertTrue(summary["allow_dense_pages"])
+
     def test_exact_output_rejects_whitespace_or_length_finish(self) -> None:
         self.assertTrue(
             MODULE.exact_stopped({"content": "OK", "finish_reason": "stop"}, "OK")

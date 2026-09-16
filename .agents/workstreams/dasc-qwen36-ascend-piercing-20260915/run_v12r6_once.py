@@ -43,6 +43,7 @@ BLOCK_ON_IDLE_CONTAINER_CLAIMS = True
 ADDITIONAL_CONFIG: str | None = None
 PLUGIN_MODE = "physical-cache-eager"
 W_MAX = "64"
+CANARY_EXTRA_ARGS: tuple[str, ...] = ()
 SUPERSEDED_REASON = (
     "v12r6 is superseded: its per-forward compact restore would erase "
     "omitted-head updates after the first DASC-NR cache-load boundary"
@@ -520,7 +521,7 @@ def main() -> int:
                     str(RESULT),
                     "--activation",
                     str(RESULT / "evidence.jsonl"),
-                ],
+                ] + list(CANARY_EXTRA_ARGS),
                 timeout=1800,
             )
             validate_allocation_evidence()
