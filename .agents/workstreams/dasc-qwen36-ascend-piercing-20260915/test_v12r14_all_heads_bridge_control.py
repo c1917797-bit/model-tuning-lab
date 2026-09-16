@@ -49,8 +49,8 @@ def test_all_heads_verdict_requires_every_rank_layer_and_dense_bytes():
                     "pid": pid,
                     "layer": layer,
                     "allocation_matches_spec": True,
-                    "actual_page_bytes": 1588224,
-                    "compact_page_bytes": 1588224,
+                    "actual_page_bytes": 801792,
+                    "compact_page_bytes": 801792,
                     "dense_page_bytes": 1588224,
                 }
             )

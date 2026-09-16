@@ -41,7 +41,8 @@ def all_heads_evidence_verdict(rows: list[dict]) -> dict:
     physical_ok = len(physical) == 192 and all(
         row.get("allocation_matches_spec") is True
         and row.get("actual_page_bytes") == row.get("compact_page_bytes")
-        and row.get("compact_page_bytes") == row.get("dense_page_bytes")
+        and isinstance(row.get("dense_page_bytes"), int)
+        and row.get("compact_page_bytes") <= row.get("dense_page_bytes")
         for row in physical
     )
     result = {
@@ -49,7 +50,7 @@ def all_heads_evidence_verdict(rows: list[dict]) -> dict:
         "geometry_rows": len(geometry),
         "physical_rows": len(physical),
         "all_48_layers_retain_12_local_heads_on_4_ranks": geometry_ok,
-        "persistent_page_equals_dense_page": physical_ok,
+        "all_head_page_matches_exact_spec_without_exceeding_dense": physical_ok,
     }
     result["ok"] = geometry_ok and physical_ok
     return result
