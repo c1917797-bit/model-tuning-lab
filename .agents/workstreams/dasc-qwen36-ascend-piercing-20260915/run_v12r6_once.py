@@ -40,6 +40,7 @@ NPUS = (4, 5, 6, 7)
 IDLE_HBM_LIMIT_MIB = 3932
 PORT = 8030
 BLOCK_ON_IDLE_CONTAINER_CLAIMS = True
+ADDITIONAL_CONFIG: str | None = None
 SUPERSEDED_REASON = (
     "v12r6 is superseded: its per-forward compact restore would erase "
     "omitted-head updates after the first DASC-NR cache-load boundary"
@@ -323,8 +324,7 @@ def launch() -> str:
         "MST_DASC_W_MAX": "64",
     }.items():
         args.extend(["-e", f"{key}={value}"])
-    args.extend(
-        [
+    serve_args = [
             IMAGE,
             "vllm",
             "serve",
@@ -342,10 +342,11 @@ def launch() -> str:
             "9663676416",
             "--compilation-config",
             '{"cudagraph_capture_sizes":[1,2,4,8,16],"cudagraph_mode":"FULL_DECODE_ONLY"}',
-            "--port",
-            str(PORT),
-        ]
-    )
+    ]
+    if ADDITIONAL_CONFIG is not None:
+        serve_args.extend(["--additional-config", ADDITIONAL_CONFIG])
+    serve_args.extend(["--port", str(PORT)])
+    args.extend(serve_args)
     return run(args, timeout=60).strip()
 
 
@@ -370,6 +371,16 @@ def wait_ready() -> None:
                     return
         except Exception:
             pass
+        recent_logs = run(
+            ["/usr/bin/docker", "logs", "--tail", "200", CONTAINER],
+            check=False,
+            timeout=30,
+        )
+        if (
+            "EngineCore failed" in recent_logs
+            or "NPUModelRunner init failed" in recent_logs
+        ):
+            raise RuntimeError("service reported a fatal initialization failure")
         if attempt % 6 == 0:
             print(f"waiting for readiness attempt={attempt}/360", flush=True)
         time.sleep(10)

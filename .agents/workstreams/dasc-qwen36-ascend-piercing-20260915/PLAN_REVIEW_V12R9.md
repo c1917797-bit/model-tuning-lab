@@ -124,3 +124,30 @@ Fifteen focused policy/parser/layer-cohort tests passed in the pinned image
 (operation exec-0000000000001653), and a live dirty-tree preflight proved the
 claims were recorded while the independent source-integrity gate still blocked
 (operation exec-0000000000001652).
+
+## v12r9 NPU result and bounded successor
+
+The authorized v12r9 attempt ran once on physical NPU4-7 and terminated before
+readiness. It advanced beyond v12r8's first-layer-only allocation and recorded
+all 48 linear layers on all four ranks (192 exact physical-cache bindings), so
+the explicit dummy-scope correction removed the preceding 'active_slots'
+failure. Graph dummy execution then exposed the next deterministic boundary:
+'aclnnFusedInferAttentionScoreV3' error 561002 because the no-RoPE TND FIA path
+accepts head dimensions 64/128/192 but Qwen3.6 uses 256. No real request,
+numerical canary, performance run, or quality run occurred. The immutable root
+is /cache/cch/dasc-qwen36-ascend-20260915/request-owned-dummy-scope-v12r9;
+service.log SHA256 is
+4439e34bc0d344d2fe0d41a325d7de0b538651da02d72c20066f6394114e7a06.
+The owned container was stopped and physical NPU4-7 returned to idle HBM with
+no device-side process.
+
+The materially different v12r10 hypothesis uses vLLM-Ascend's documented
+'pa_shape_list' switch for the five graph capture sizes 1/2/4/8/16, routing
+decode attention through Paged Attention instead of unsupported FIA. This is a
+common framework compatibility setting, not DASC benefit; any later matched
+dense control must use the same setting. The controller also fails early when
+service logs contain a fatal EngineCore/NPUModelRunner initialization error,
+while preserving the immutable artifacts.
+The launch-contract and inherited policy/lifecycle suite passed 16 tests in the
+pinned image (operation exec-000000000000166d), and the full plugin suite
+remained at 54 passed (operation exec-000000000000166e).
