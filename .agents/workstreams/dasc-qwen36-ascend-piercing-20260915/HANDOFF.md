@@ -247,3 +247,19 @@ immutable root and container. Its controller continuously records NPU4-7
 ownership from service launch through the canary. The updated complete
 CPU-only workstream suite passes 52 tests, and a live host smoke check of the
 corrected Docker top path succeeds.
+
+The subsequent v12r3 service reached readiness and completed all five strict
+HTTP requests with exact outputs. It also observed 4,608 prefix-cache hit
+tokens, with the first long request taking about 19.99 seconds and the two
+replays about 0.52 and 0.50 seconds. The mechanism gate still rejected the run:
+no `evidence.jsonl` was created. Inspection proved that adding the project
+source to `PYTHONPATH` did not make it discoverable by vLLM's
+`vllm.general_plugins` entry-point loader. Therefore the 4,608-token hit is
+ordinary vLLM prefix-cache evidence, not DASC activation evidence.
+
+The successor controller builds the immutable plugin snapshot into a
+`plugin-snapshot/site` target with the same pinned image, records the
+discovered entry points, and refuses to launch the NPU service unless the exact
+`dasc_vllm_ascend:register` entry is visible. A no-device smoke build with the
+pinned image produced that entry successfully. The next NPU attempt must use a
+new v12r4 root and container; never reuse v12r3.

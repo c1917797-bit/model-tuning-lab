@@ -175,6 +175,26 @@ def canary_verdict(canary: dict, evidence: list[dict]) -> dict:
     }
 
 
+def plugin_entry_point_verdict(entries: object) -> dict:
+    expected = {
+        "name": "dasc_vllm_ascend",
+        "value": "dasc_vllm_ascend:register",
+    }
+    well_formed = isinstance(entries, list) and all(
+        isinstance(item, dict)
+        and isinstance(item.get("name"), str)
+        and isinstance(item.get("value"), str)
+        for item in entries
+    )
+    present = well_formed and expected in entries
+    return {
+        "well_formed": well_formed,
+        "expected": expected,
+        "present": present,
+        "ok": well_formed and present,
+    }
+
+
 def verify_source_commit(repo: Path, value: str) -> bool:
     if re.fullmatch(r"[0-9a-f]{40}", value) is None:
         return False
@@ -256,7 +276,7 @@ def container_identity_verdict(
         == "/cache/efim/Qwen3.6-27B"
         and mounts.get("/models/Qwen3.6-27B", {}).get("RW") is False,
         "plugin_mount_read_only": mounts.get("/workspace/dasc", {}).get("Source")
-        == str(expected_result_root / "plugin-snapshot")
+        == str(expected_result_root / "plugin-snapshot" / "site")
         and mounts.get("/workspace/dasc", {}).get("RW") is False,
         "result_mount_writable": mounts.get("/dasc-results", {}).get("Source")
         == str(expected_result_root)
@@ -319,6 +339,7 @@ def verify(
         "npu-smi-info.txt",
         "npu-after.txt",
         "plugin-files.sha256",
+        "plugin-entry-points.json",
         "canary.sha256",
         "evidence.jsonl",
         "physical-canary.json",
@@ -334,6 +355,9 @@ def verify(
     result["artifacts_manifest"] = verify_manifest(root / "artifacts.sha256", root)
     result["plugin_manifest"] = verify_manifest(root / "plugin-files.sha256", root)
     result["canary_manifest"] = verify_manifest(root / "canary.sha256", root)
+    result["plugin_entry_point"] = plugin_entry_point_verdict(
+        json.loads(root.joinpath("plugin-entry-points.json").read_text(encoding="utf-8"))
+    )
 
     model_records = parse_manifest(root / "model-config.sha256")
     model_ok = len(model_records) == 1
@@ -382,6 +406,7 @@ def verify(
         and result["artifacts_manifest"]["ok"]
         and result["plugin_manifest"]["ok"]
         and result["canary_manifest"]["ok"]
+        and result["plugin_entry_point"]["ok"]
         and result["model_config_ok"]
         and result["source_commit_exists"]
         and result["source_scope"]["ok"]

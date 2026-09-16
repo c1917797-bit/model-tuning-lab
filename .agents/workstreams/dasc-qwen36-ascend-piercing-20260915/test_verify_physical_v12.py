@@ -71,6 +71,17 @@ class PhysicalV12VerifierTest(unittest.TestCase):
         value["short"]["content"] = "OK\n"
         self.assertFalse(MODULE.canary_verdict(value, evidence())["ok"])
 
+    def test_requires_exact_general_plugin_entry_point(self) -> None:
+        entries = [
+            {
+                "name": "dasc_vllm_ascend",
+                "value": "dasc_vllm_ascend:register",
+            }
+        ]
+        self.assertTrue(MODULE.plugin_entry_point_verdict(entries)["ok"])
+        entries[0]["value"] = "dasc_vllm_ascend:wrong"
+        self.assertFalse(MODULE.plugin_entry_point_verdict(entries)["ok"])
+
     def test_manifest_detects_tamper(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -138,7 +149,9 @@ class PhysicalV12VerifierTest(unittest.TestCase):
                     "RW": False,
                 },
                 {
-                    "Source": str(MODULE.EXPECTED_RESULT_ROOT / "plugin-snapshot"),
+                    "Source": str(
+                        MODULE.EXPECTED_RESULT_ROOT / "plugin-snapshot" / "site"
+                    ),
                     "Destination": "/workspace/dasc",
                     "RW": False,
                 },
@@ -210,7 +223,7 @@ class PhysicalV12VerifierTest(unittest.TestCase):
                     "RW": False,
                 },
                 {
-                    "Source": str(root / "plugin-snapshot"),
+                    "Source": str(root / "plugin-snapshot" / "site"),
                     "Destination": "/workspace/dasc",
                     "RW": False,
                 },

@@ -15,6 +15,8 @@ IMAGE=quay.io/ascend/vllm-ascend:v0.23.0
 MODEL_HOST=/cache/efim/Qwen3.6-27B
 MODEL_CONTAINER=/models/Qwen3.6-27B
 PLUGIN_HOST=$RESULT_ROOT/plugin-snapshot
+PLUGIN_SOURCE=$PLUGIN_HOST/src
+PLUGIN_SITE=$PLUGIN_HOST/site
 PORT=8030
 POLL_SECONDS=${DASC_POLL_SECONDS:-60}
 READY_POLLS=${DASC_READY_POLLS:-360}
@@ -138,13 +140,30 @@ fi
 validate_source_state
 
 mkdir "$RESULT_ROOT"
+mkdir "$PLUGIN_HOST"
 card_snapshot >"$RESULT_ROOT/npu-before.txt"
 git rev-parse HEAD >"$RESULT_ROOT/source-commit.txt"
 git status --short --branch >"$RESULT_ROOT/source-status.txt"
 sha256sum "$MODEL_HOST/config.json" >"$RESULT_ROOT/model-config.sha256"
 docker image inspect "$IMAGE" >"$RESULT_ROOT/image-inspect.json"
 card_info_snapshot >"$RESULT_ROOT/npu-smi-info.txt"
-cp -a "$REPO/projects/dasc_vllm_ascend" "$PLUGIN_HOST"
+cp -a "$REPO/projects/dasc_vllm_ascend" "$PLUGIN_SOURCE"
+mkdir "$PLUGIN_SITE"
+docker run --rm --network none \
+    -v "$PLUGIN_HOST:/build:rw" \
+    "$IMAGE" \
+    /usr/local/python3.12.13/bin/python3 -m pip install \
+    --no-deps \
+    --no-build-isolation \
+    --target /build/site \
+    /build/src
+docker run --rm --network none \
+    -v "$PLUGIN_SITE:/workspace/dasc:ro" \
+    -e PYTHONPATH=/workspace/dasc \
+    "$IMAGE" \
+    /usr/local/python3.12.13/bin/python3 -c \
+    'from importlib.metadata import entry_points; import json; entries=[{"name": item.name, "value": item.value} for item in entry_points(group="vllm.general_plugins")]; assert any(item["name"] == "dasc_vllm_ascend" and item["value"] == "dasc_vllm_ascend:register" for item in entries); print(json.dumps(entries, indent=2, sort_keys=True))' \
+    >"$RESULT_ROOT/plugin-entry-points.json"
 cp "$REPO/$WORKSTREAM/run_physical_canary.py" "$RESULT_ROOT/run_physical_canary.py"
 find "$PLUGIN_HOST" -type f -print0 | sort -z | xargs -0 sha256sum >"$RESULT_ROOT/plugin-files.sha256"
 sha256sum "$RESULT_ROOT/run_physical_canary.py" >"$RESULT_ROOT/canary.sha256"
@@ -195,7 +214,7 @@ docker run -d \
     -v /etc/ascend_install.info:/etc/ascend_install.info:ro \
     -v /usr/local/dcmi:/usr/local/dcmi:ro \
     -v "$MODEL_HOST:$MODEL_CONTAINER:ro" \
-    -v "$PLUGIN_HOST:/workspace/dasc:ro" \
+    -v "$PLUGIN_SITE:/workspace/dasc:ro" \
     -v "$RESULT_ROOT:/dasc-results:rw" \
     -e ASCEND_RT_VISIBLE_DEVICES=0,1,2,3 \
     -e VLLM_PLUGINS=ascend,dasc_vllm_ascend \
