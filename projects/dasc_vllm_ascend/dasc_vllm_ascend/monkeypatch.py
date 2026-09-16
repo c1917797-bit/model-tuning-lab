@@ -411,6 +411,10 @@ def _install_physical_cache_patch(
                 max_active_blocks=self._mst_dasc_max_active_blocks,
             )
             self._mst_dasc_bound_bridge = bridge
+            # Bind once. Scheduler lifecycle operations retain the original
+            # compact tensors through bridge and vLLM's cache registry, while
+            # native GDN always observes the same dense objects and addresses.
+            self.kv_cache = bridge.workspace_cache
             emit(
                 config.evidence_path,
                 "physical_cache_bound",
@@ -422,9 +426,7 @@ def _install_physical_cache_patch(
                 num_blocks=self.kv_cache[0].shape[0],
             )
 
-        original_cache = self.kv_cache
-        conv_workspace, temporal_workspace = bridge.restore_active(plan.block_ids)
-        self.kv_cache = (conv_workspace, temporal_workspace)
+        bridge.restore_active(plan.block_ids)
         metadata_map[self.prefix] = remapped_metadata
         succeeded = False
         try:
@@ -436,7 +438,6 @@ def _install_physical_cache_patch(
             if not succeeded:
                 bridge.abort_active()
             metadata_map[self.prefix] = original_metadata
-            self.kv_cache = original_cache
 
     qwen_gdn_class.get_kv_cache_spec = compact_get_spec
     qwen_gdn_class._forward_core = physical_core

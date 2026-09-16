@@ -169,6 +169,14 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   do not keep permuting dictionaries. Audit every remaining consumer of the
   synthetic outer spec because a same-type wrapper around mixed inner specs can
   violate assumptions beyond the initial dispatch branch.
+- Treat recurrent-state virtualization as a graph-boundary design problem, not
+  only a storage-layout problem. A plugin that allocates new index tensors or
+  swaps module cache/metadata objects inside every forward may pass eager
+  numerical tests yet be invalid for ACL graph replay. Keep scheduler-owned
+  compact storage authoritative, bind the native operator once to fixed-address
+  dense active workspaces, prepare global-to-local state indices before the
+  captured model call, and checkpoint after replay. Lock tensor pointers and
+  object identity with regression tests before spending another multi-NPU run.
 - When a historical control has an empty result directory, inspect any retained
   stopped container before rerunning expensive accelerator work. Recover and
   hash only evidence the container can actually prove: image, command, mounts,

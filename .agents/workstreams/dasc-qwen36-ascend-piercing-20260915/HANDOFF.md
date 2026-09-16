@@ -366,3 +366,26 @@ Recovered raw files and hashes:
 This closes the narrow question of whether the dense stack can capture the
 five graphs. It does not prove response-content equivalence, DASC correctness,
 performance, or quality.
+
+## 2026-09-16 graph-stable workspace refactor
+
+The v12r5 failure was narrowed beyond the rejected cache-group ordering theory.
+The physical bridge dynamically replaced `self.kv_cache`, cloned/replaced GDN
+metadata, and created remapped index tensors inside each model forward. Those
+object and address changes are unsafe assumptions for ACL graph capture/replay,
+even though eager transactional tests pass.
+
+The first successor step now permanently binds each GDN module to one full-size,
+fixed-address dense workspace tuple while the bridge and vLLM cache registry
+retain the scheduler-owned compact tensors. Restore populates only the active
+workspace prefix; checkpoint writes only that prefix back. The module no longer
+changes cache tuple or tensor addresses per forward, including after a native
+operator exception. The complete DASC plugin suite passes in the pinned v0.23.0
+image: 42 tests; `git diff --check` also passes.
+
+This is a code-level gate, not NPU graph, performance, or accuracy evidence.
+Metadata remapping and persistent block-id restore/checkpoint still happen in
+the model-forward path. The next implementation step is to move those lifecycle
+operations outside the captured model call while reusing fixed metadata/index
+buffers. Do not launch the next four-card attempt until that invariant has a
+bounded replay-style test.

@@ -182,6 +182,20 @@ class BoundActiveStateBridge:
             * self.temporal_storage.element_size()
         )
 
+    @property
+    def workspace_cache(self) -> tuple[Any, Any]:
+        """Return the one fixed-address dense cache tuple used by native GDN.
+
+        The tuple and both tensors are intentionally stable for the lifetime of
+        the bridge. Active rows occupy the prefix selected by _active_ids;
+        unused rows must never be referenced by remapped metadata.
+        """
+        cache = getattr(self, "_workspace_cache", None)
+        if cache is None:
+            cache = (self.conv_workspace, self.temporal_workspace)
+            self._workspace_cache = cache
+        return cache
+
     def _check_pointers(self) -> None:
         pointers = (
             self.conv_storage.data_ptr(),
@@ -224,7 +238,9 @@ class BoundActiveStateBridge:
             self.temporal_head_axis + 1,
         )
         self._active_ids = ids
-        return conv, temporal
+        # Native GDN is permanently bound to the full, fixed-address
+        # workspaces. Metadata restricts execution to the populated prefix.
+        return self.workspace_cache
 
     def checkpoint_active(self) -> None:
         if self._active_ids is None:

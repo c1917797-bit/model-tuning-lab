@@ -88,16 +88,17 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
 
     assert result == "native-result"
     assert context.attn_metadata[module.prefix] is metadata
-    assert module.kv_cache is persistent_cache
-    assert tuple(tensor.data_ptr() for tensor in module.kv_cache) == persistent_ptrs
+    bridge = module._mst_dasc_bound_bridge
+    assert module.kv_cache is bridge.workspace_cache
+    assert tuple(tensor.data_ptr() for tensor in persistent_cache) == persistent_ptrs
     assert observed["metadata"] is not metadata
     assert torch.equal(
         observed["metadata"].non_spec_state_indices_tensor,
         torch.tensor([1, 0], dtype=torch.int32),
     )
     dense_conv, dense_temporal = observed["cache"]
-    assert dense_conv.shape == (2, 2, 3)
-    assert dense_temporal.shape == (2, 4, 2)
+    assert dense_conv.shape == (3, 2, 3)
+    assert dense_temporal.shape == (3, 4, 2)
     assert torch.equal(
         persistent_cache[0].index_select(0, torch.tensor([6, 2])),
         before_conv.index_select(0, torch.tensor([6, 2])) + 11,
@@ -108,12 +109,12 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
     )
     assert torch.count_nonzero(observed["cache_before"][1][:, [1, 2]]).item() == 0
     assert torch.equal(
-        dense_temporal.index_select(1, retained),
+        dense_temporal[:2].index_select(1, retained),
         persistent_cache[1].index_select(0, torch.tensor([2, 6])),
     )
 
 
-def test_physical_patch_aborts_and_restores_bindings_on_native_error(
+def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error(
     monkeypatch, tmp_path
 ):
     module, metadata, context, observed, _, _ = _fixture(
@@ -126,8 +127,14 @@ def test_physical_patch_aborts_and_restores_bindings_on_native_error(
         module._forward_core(None, None, None, None)
 
     assert context.attn_metadata[module.prefix] is metadata
-    assert module.kv_cache is persistent_cache
-    assert all(torch.equal(actual, expected) for actual, expected in zip(module.kv_cache, before))
+    bridge = module._mst_dasc_bound_bridge
+    assert module.kv_cache is bridge.workspace_cache
+    assert all(
+        torch.equal(actual, expected)
+        for actual, expected in zip(
+            (bridge.conv_storage, bridge.temporal_storage), before
+        )
+    )
     assert module._mst_dasc_bound_bridge._active_ids is None
     assert observed["metadata"] is not metadata
 

@@ -67,21 +67,28 @@ def test_bound_bridge_round_trips_runner_owned_compact_cache():
     )
     conv_ptr = conv_storage.data_ptr()
     temporal_ptr = temporal_storage.data_ptr()
+    cache = bridge.workspace_cache
+    cache_ptrs = tuple(tensor.data_ptr() for tensor in cache)
     conv, temporal = bridge.restore_active(torch.tensor([6, 2]))
-    assert torch.equal(conv, conv_storage.index_select(0, torch.tensor([6, 2])))
+    assert (conv, temporal) == cache
+    assert conv.shape == (3, 2, 3)
+    assert temporal.shape == (3, 4, 2)
+    assert torch.equal(conv[:2], conv_storage.index_select(0, torch.tensor([6, 2])))
     assert torch.equal(
-        temporal.index_select(1, retained),
+        temporal[:2].index_select(1, retained),
         temporal_storage.index_select(0, torch.tensor([6, 2])),
     )
-    assert torch.count_nonzero(temporal[:, [1, 2]]).item() == 0
-    conv.add_(11)
-    temporal[:, retained].add_(13)
+    assert torch.count_nonzero(temporal[:2, [1, 2]]).item() == 0
+    conv[:2].add_(11)
+    temporal[:2, retained].add_(13)
     bridge.checkpoint_active()
+    assert bridge.workspace_cache is cache
+    assert tuple(tensor.data_ptr() for tensor in bridge.workspace_cache) == cache_ptrs
     assert conv_storage.data_ptr() == conv_ptr
     assert temporal_storage.data_ptr() == temporal_ptr
     assert torch.equal(
         temporal_storage.index_select(0, torch.tensor([6, 2])),
-        temporal.index_select(1, retained),
+        temporal[:2].index_select(1, retained),
     )
 
 
