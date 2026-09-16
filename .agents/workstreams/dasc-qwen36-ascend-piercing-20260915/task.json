@@ -64,6 +64,10 @@
     "launch_state": "not_started_and_now_fail_closed_due_to_dasc_nr_lifecycle_semantic_bug",
     "semantic_finding": "paper section 4.2 zero-fills omitted units on cache-hit Load only; v12r6 restored before every forward and would erase later omitted-head recurrent updates",
     "corrected_core_gate": "request-owned bridge, metadata remapping, scheduler-visible compact cache, failure cleanup, and cross-block omitted-state continuity pass the 48-test pinned-image suite; NPU integration remains incomplete",
+    "next_controller": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r7_once.py",
+    "next_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/request-owned-active-state-v12r7",
+    "next_container": "dasc_qwen36_request_owned_v12r7_20260916",
+    "required_core_commit": "e064564",
     "performance_result": null,
     "quality_result": null
   },

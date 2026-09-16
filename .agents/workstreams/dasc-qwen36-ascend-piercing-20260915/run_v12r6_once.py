@@ -39,6 +39,10 @@ IMAGE_ID = (
 NPUS = (4, 5, 6, 7)
 IDLE_HBM_LIMIT_MIB = 3932
 PORT = 8030
+SUPERSEDED_REASON = (
+    "v12r6 is superseded: its per-forward compact restore would erase "
+    "omitted-head updates after the first DASC-NR cache-load boundary"
+)
 
 
 def run(args: list[str], *, check: bool = True, timeout: int = 60) -> str:
@@ -128,10 +132,8 @@ def preflight() -> tuple[dict, list[str]]:
     raw, hbm, processes = npu_snapshot()
     claims = docker_claims()
     blockers: list[str] = []
-    blockers.append(
-        "v12r6 is superseded: its per-forward compact restore would erase "
-        "omitted-head updates after the first DASC-NR cache-load boundary"
-    )
+    if SUPERSEDED_REASON is not None:
+        blockers.append(SUPERSEDED_REASON)
     if set(hbm) != set(range(8)):
         blockers.append(f"could not parse all NPU HBM rows: {sorted(hbm)}")
     for device in NPUS:
