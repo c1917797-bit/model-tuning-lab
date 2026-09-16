@@ -1,3 +1,4 @@
+import math
 from types import SimpleNamespace
 
 import pytest
@@ -10,6 +11,52 @@ from dasc_vllm_ascend.selector import (
     retained_head_indices,
     unique_head_axis,
 )
+
+
+@pytest.mark.parametrize("dtype", [torch.float32, torch.bfloat16])
+def test_horizon_formula_matches_independent_scalar_reference_at_threshold(dtype):
+    config = SimpleNamespace(
+        representative_a=-0.3,
+        epsilon=0.001,
+        w_max=64,
+    )
+    softplus = math.log1p(math.exp(config.representative_a))
+    target_horizons = (63.5, 64.5, 128.0)
+    a_log = [
+        math.log(-math.log(config.epsilon) / (horizon * softplus))
+        for horizon in target_horizons
+    ]
+    module = SimpleNamespace(
+        A_log=torch.tensor(a_log, dtype=dtype),
+        dt_bias=torch.zeros(3, dtype=dtype),
+    )
+
+    actual = head_horizons(module, config)
+    expected = torch.tensor(
+        [
+            math.log(config.epsilon)
+            / (
+                -math.exp(float(a_log_value))
+                * math.log1p(
+                    math.exp(
+                        float(dt_bias_value) + config.representative_a
+                    )
+                )
+            )
+            for a_log_value, dt_bias_value in zip(
+                module.A_log.float(), module.dt_bias.float()
+            )
+        ],
+        dtype=torch.float32,
+    )
+
+    assert torch.allclose(actual.cpu(), expected, rtol=2e-6, atol=2e-5)
+    expected_indices = (
+        (expected > config.w_max).nonzero(as_tuple=False).flatten()
+    )
+    assert torch.equal(
+        retained_head_indices(module, config).cpu(), expected_indices
+    )
 
 
 def test_loaded_weight_selector_is_cached_and_nonempty():
