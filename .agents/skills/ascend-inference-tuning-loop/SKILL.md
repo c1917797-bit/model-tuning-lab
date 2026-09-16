@@ -163,6 +163,12 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   Mamba members, and leave authoritative cache order unchanged. Lock all three
   invariants with regression tests and require target-device graph-capture
   evidence before treating the adapter as correct.
+- Instrument the actual first inner spec and the derived dispatch before
+  changing hybrid-group order. If the live group already selects attention and
+  the same graph/operator failure persists, close the first-spec hypothesis;
+  do not keep permuting dictionaries. Audit every remaining consumer of the
+  synthetic outer spec because a same-type wrapper around mixed inner specs can
+  violate assumptions beyond the initial dispatch branch.
 - Recheck accelerator ownership and free memory at worker initialization, not
   only immediately before launching a container. Another container can claim
   devices in the startup gap. Attribute every conflicting PID through its

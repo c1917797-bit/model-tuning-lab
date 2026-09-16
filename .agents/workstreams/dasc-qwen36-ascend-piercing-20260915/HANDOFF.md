@@ -300,3 +300,41 @@ with the exact `/cache/efim/Qwen3.6-27B/config.json` path passed. The maintainer
 skill tree validator passes all 26 skills, JSON parsing and `git diff --check`
 also pass. NPU4-7 were then process-free at the verified 8% idle HBM floor and
 port 8030 was free, so the next action is one immutable v12r5 run.
+
+## 2026-09-16 v12r5 first-spec hypothesis rejected
+
+v12r5 ran once from commit `373b448` on physical NPU4-7. The adapter emitted
+four `heterogeneous_input_batch_dispatch_adapted` events, proving activation
+on every TP worker. Crucially, every event recorded the same attention layer as
+both `storage_first` and `dispatch_first`
+(`language_model.model.layers.3.self_attn.attn`). The attempted reorder was
+therefore a runtime no-op.
+
+Graph capture failed at the identical
+`aclnnFusedInferAttentionScoreV3` 561002 no-RoPE TND headDim=256 gate. The
+controller exited 1, the independent verifier correctly rejected the root
+because `SUCCESS` and `physical-canary.json` are absent, and the exact owned
+container was stopped. NPU4-7 were subsequently process-free. Evidence SHA256
+is `d4927792b2fbd55a04ffd9a9c78fd152d06cfde7c52f6468bcae20dd8ee25e68`;
+service log SHA256 is
+`0c4c844f58c378325c82673b4c2192bf9f3336e9c046e1cc8af8f2543002218a`.
+
+Close the first-inner-spec ordering route. The next work is source-backed
+localization of every downstream consumer that assumes a
+`UniformTypeKVCacheSpecs` wrapper contains one type. Do not launch another NPU
+attempt until a materially different metadata or grouping invariant is proved
+and covered by a bounded test.
+
+The failed adapter was removed from the active plugin tree while its
+`373b448` commit remains in history. The recovered tree passes the complete
+pinned-image suite: 95 tests with 16 upstream Torch/read-only-cache warnings.
+
+## 2026-09-16 implementation provenance
+
+No first-party DASC repository is linked by arXiv or the paper, and exact
+title/algorithm GitHub searches found no author release as of this date. The
+plugin is an independent paper-derived DASC-NR/Ascend adaptation. It must not be
+described as the authors' official implementation or as method-chain equivalent
+while the paper's SGLang ragged flat-pack, model-load head permutation,
+variable-split all-to-all TP balancing, and DASC-WR suffix refresh are absent.
+The authoritative comparison is `METHOD_PARITY.md`.

@@ -67,6 +67,24 @@ attention-first nor Mamba-first ordering is a correct execution contract.
 The successor keeps the authoritative model/storage order and adapts only the
 runner's input-batch initialization view so attention slot mapping is derived
 from an `AttentionSpec`; Mamba copy/invalidation remains independently
-filtered to Mamba layers. The focused 8-test file and complete 97-test
-no-device suite pass in the pinned image. A fresh NPU4-7 graph-capture run is
-still required before any correctness or performance claim.
+filtered to Mamba layers. That successor passed 97 no-device tests, but v12r5
+proved it was a no-op at runtime: the aggregate already had an attention layer
+first on every rank, and the same FIAS failure remained. The adapter is retired
+from the active tree; commit `373b448` and the immutable v12r5 artifacts retain
+the negative result.
+
+## Provenance and paper parity
+
+No first-party implementation repository was linked from arXiv or the paper,
+and exact-title/algorithm GitHub searches found no author release as of
+2026-09-16. This plugin is therefore an independent, paper-derived
+DASC-NR/Ascend adaptation, not the authors' official code.
+
+The weight-only GDN horizon formula, constants, head-wise threshold selection,
+and zero-fill load policy follow the paper. The current implementation is not
+yet method-chain equivalent to the paper's SGLang prototype: it does not
+implement model-load head permutation, variable-split all-to-all TP storage
+balancing, the exact ragged flat-pack layout, or DASC-WR suffix refresh. See the
+workstream `METHOD_PARITY.md` for the executable parity contract. Until those
+gaps are closed or explicitly scoped out, results must be labeled as an
+Ascend adaptation rather than an exact paper reproduction.
