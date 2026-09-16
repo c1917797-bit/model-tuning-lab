@@ -263,3 +263,40 @@ discovered entry points, and refuses to launch the NPU service unless the exact
 `dasc_vllm_ascend:register` entry is visible. A no-device smoke build with the
 pinned image produced that entry successfully. The next NPU attempt must use a
 new v12r4 root and container; never reuse v12r3.
+
+## 2026-09-16 v12r4 graph-capture result
+
+v12r4 installed and discovered the plugin and reached the real physical-cache
+path on all four TP ranks. Evidence contains seven `plugin_registered`, seven
+`heterogeneous_mamba_lifecycle_installed`, four
+`tp_geometry_aligned`, four `worker_dispatch_verified`, one
+`heterogeneous_cache_grouped`, and twelve `physical_cache_bound` events.
+The aggregate page is 60,047,360 bytes for 16 attention plus 48 heterogeneous
+Mamba layers. This is direct activation and allocation evidence, not a service,
+performance, or accuracy pass.
+
+Graph capture then failed on every rank in
+`aclnnFusedInferAttentionScoreV3` with error 561002: the no-RoPE TND path
+received unsupported head dimension 256. The owned container was stopped and
+physical NPU4-7 were released. Keep the immutable v12r4 artifacts; do not retry
+the same bytes.
+
+The failure disproves the earlier statement that model-order/Mamba-first alone
+restores correct dispatch. The pinned vLLM-Ascend runner picks the first inner
+spec from a `UniformTypeKVCacheSpecs` group under a same-type assumption.
+DASC's aggregate is intentionally mixed, so ordering cannot represent both
+attention slot mapping and Mamba state lifecycle. The v12r5 hypothesis is to
+preserve authoritative storage and layer order, provide an attention-first
+proxy only to `may_reinitialize_input_batch`, and keep the existing
+Mamba-only copy/invalidation filter. This must first pass targeted and complete
+no-device tests, then one fresh NPU4-7 graph-capture attempt. Do not start v13
+unless the complete physical mechanism verifier passes.
+
+The successor adapter's focused file passes 8 tests and the complete pinned
+image workstream suite passes 97 tests (16 upstream Torch/read-only-cache
+warnings). The first complete-suite invocation mounted the model config at the
+wrong container path and produced two expected FileNotFoundErrors; rerunning
+with the exact `/cache/efim/Qwen3.6-27B/config.json` path passed. The maintainer
+skill tree validator passes all 26 skills, JSON parsing and `git diff --check`
+also pass. NPU4-7 were then process-free at the verified 8% idle HBM floor and
+port 8030 was free, so the next action is one immutable v12r5 run.

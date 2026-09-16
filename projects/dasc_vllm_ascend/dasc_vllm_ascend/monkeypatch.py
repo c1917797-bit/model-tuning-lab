@@ -7,6 +7,7 @@ virtualization is attempted.
 
 from __future__ import annotations
 
+from dataclasses import replace
 import functools
 import hashlib
 import importlib.metadata
@@ -121,13 +122,9 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
                 f"DASC align mode requires one token block size, got {block_sizes}"
             )
 
-        # Preserve the model-provided layer order. Ascend's input-batch
-        # reinitialization dispatches a UniformTypeKVCacheSpecs group from its
-        # first inner spec. Reordering a Mamba-first hybrid model to put
-        # attention first incorrectly enables attention slot mapping for the
-        # whole group and can route graph capture through the no-RoPE TND FIAS
-        # path. The aggregate changes page accounting only; it must not change
-        # execution dispatch semantics.
+        # The aggregate changes page accounting only. Preserve the model's
+        # storage/layer order here; the Ascend input-batch dispatch ambiguity is
+        # adapted separately without mutating this authoritative group.
         ordered = dict(filtered)
         aggregate = UniformTypeKVCacheSpecs(
             block_size=next(iter(block_sizes)),
@@ -148,6 +145,97 @@ def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: A
 
     kv_cache_utils.get_kv_cache_groups = get_dasc_groups
     kv_cache_utils._mst_dasc_aligned_hybrid_installed = True
+
+
+def _install_heterogeneous_input_batch_dispatch_patch(
+    config: DascConfig, model_runner_class: Any
+) -> None:
+    """Adapt Ascend input-batch dispatch without changing cache storage order.
+
+    vLLM-Ascend v0.23 assumes every inner spec of a
+    UniformTypeKVCacheSpecs group has one type and dispatches the whole group
+    from the first entry. DASC deliberately uses one aggregate containing both
+    attention and Mamba specs, so neither model-order/Mamba-first nor global
+    attention-first ordering is a correct representation. Keep the real group
+    untouched and present an attention-first proxy only while the runner
+    derives its attention slot-mapping metadata.
+    """
+    installed = "_mst_dasc_heterogeneous_input_batch_dispatch_installed"
+    if getattr(model_runner_class, installed, False):
+        return
+
+    from vllm.v1.kv_cache_interface import (
+        AttentionSpec,
+        MambaSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    original = model_runner_class.may_reinitialize_input_batch
+
+    @functools.wraps(original)
+    def reinitialize_with_explicit_attention_dispatch(self, kv_cache_config):
+        proxy_groups = list(kv_cache_config.kv_cache_groups)
+        adaptations = []
+        for group_id, group in enumerate(kv_cache_config.kv_cache_groups):
+            aggregate = group.kv_cache_spec
+            if not isinstance(aggregate, UniformTypeKVCacheSpecs):
+                continue
+            inner = aggregate.kv_cache_specs
+            attention = [
+                (name, spec)
+                for name, spec in inner.items()
+                if isinstance(spec, AttentionSpec)
+            ]
+            mamba = [
+                (name, spec)
+                for name, spec in inner.items()
+                if isinstance(spec, MambaSpec)
+            ]
+            if not (attention and mamba):
+                continue
+            unknown = [
+                name
+                for name, spec in inner.items()
+                if not isinstance(spec, (AttentionSpec, MambaSpec))
+            ]
+            if unknown:
+                raise DascRuntimeUnsupported(
+                    "DASC mixed cache dispatch found unsupported inner specs: "
+                    f"{unknown}"
+                )
+
+            dispatch_inner = dict((*attention, *mamba))
+            dispatch_spec = UniformTypeKVCacheSpecs(
+                block_size=aggregate.block_size,
+                kv_cache_specs=dispatch_inner,
+            )
+            proxy_groups[group_id] = replace(group, kv_cache_spec=dispatch_spec)
+            adaptations.append(
+                {
+                    "group_id": group_id,
+                    "storage_first": next(iter(inner)),
+                    "dispatch_first": next(iter(dispatch_inner)),
+                    "attention_layers": len(attention),
+                    "mamba_layers": len(mamba),
+                }
+            )
+
+        if not adaptations:
+            return original(self, kv_cache_config)
+
+        emit(
+            config.evidence_path,
+            "heterogeneous_input_batch_dispatch_adapted",
+            mode=config.mode,
+            groups=adaptations,
+        )
+        proxy_config = replace(kv_cache_config, kv_cache_groups=proxy_groups)
+        return original(self, proxy_config)
+
+    model_runner_class.may_reinitialize_input_batch = (
+        reinitialize_with_explicit_attention_dispatch
+    )
+    setattr(model_runner_class, installed, True)
 
 
 def _install_heterogeneous_cascade_guard(
@@ -725,6 +813,9 @@ def install(config: DascConfig) -> None:
     Qwen3_5ForConditionalGeneration.load_weights = load_then_install
     if config.mode == "physical-cache-eager":
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
+        _install_heterogeneous_input_batch_dispatch_patch(
+            config, model_runner_v1.NPUModelRunner
+        )
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
         _install_heterogeneous_mamba_lifecycle_patch(config, mamba_utils)
     emit(

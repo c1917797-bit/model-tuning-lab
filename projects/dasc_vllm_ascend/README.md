@@ -49,20 +49,24 @@ around the native Ascend core. This mode is eager-only until graph capture has
 its own pointer and replay gate. It has not yet passed NPU or end-to-end
 validation and must not be used for a performance claim.
 
-## Physical-cache integration status (2026-09-15)
+## Physical-cache integration status (2026-09-16)
 
 A same-configuration, plugin-disabled dense control completed all five
 `FULL_DECODE_ONLY` graph captures and returned the exact short response
-`OK`. Earlier physical-cache runs instead reached an Ascend FIAS no-RoPE TND
-path with unsupported head dimension 256. The difference was localized to the
-plugin's synthetic hybrid group reordering all attention layers ahead of
-Mamba layers. Ascend dispatches group-wide slot-mapping behavior from the first
-inner spec, so the aggregate must preserve model order. Commit `48594bf`
-restores that invariant and the full 42-test suite passes.
+`OK`. Physical attempt v12r4 also proved plugin discovery and real DASC
+activation on all four TP ranks: the heterogeneous group, TP-aligned geometry,
+worker dispatch, Mamba lifecycle, and twelve compact physical cache bindings
+were recorded. It then failed during graph capture in Ascend FIAS's no-RoPE
+TND path because head dimension 256 is unsupported.
 
-The first NPU rerun of those exact bytes is inconclusive: an unrelated
-container claimed physical NPU4-6 during worker initialization, leaving
-21.43/29.49 GiB free and tripping vLLM's startup memory gate. This is not
-evidence for or against DASC correctness. A clean NPU4-7 rerun, short-request
-gate, multi-step state validation, and performance/accuracy measurements remain
-required.
+This result disproves the earlier conclusion that merely preserving a
+Mamba-first model order fixes the dispatch. vLLM-Ascend v0.23 treats a
+`UniformTypeKVCacheSpecs` group as one type by inspecting its first inner
+spec. A DASC aggregate is intentionally mixed, so neither globally
+attention-first nor Mamba-first ordering is a correct execution contract.
+The successor keeps the authoritative model/storage order and adapts only the
+runner's input-batch initialization view so attention slot mapping is derived
+from an `AttentionSpec`; Mamba copy/invalidation remains independently
+filtered to Mamba layers. The focused 8-test file and complete 97-test
+no-device suite pass in the pinned image. A fresh NPU4-7 graph-capture run is
+still required before any correctness or performance claim.

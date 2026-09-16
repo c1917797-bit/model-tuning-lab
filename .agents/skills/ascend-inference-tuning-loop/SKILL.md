@@ -153,12 +153,16 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   attention plus heterogeneous Mamba layers as one token-lifecycle group whose
   aggregate page is the sum of exact inner pages, and fail closed for cache
   families whose lifecycle equivalence has not been proved.
-- Preserve the model-provided inner-layer order when synthesizing an aggregate
-  hybrid cache group. Some runners dispatch group-wide block-table and slot
-  mapping behavior from the first inner spec; sorting attention before Mamba
-  can silently change execution semantics even when page accounting remains
-  numerically correct. Lock order preservation with a regression test and a
-  same-config plugin-disabled service control.
+- Preserve the model-provided storage/layer order when synthesizing an
+  aggregate hybrid cache group, but never treat that order as a valid
+  group-wide execution-dispatch contract. Some runners infer block-table and
+  slot-mapping behavior from the first inner spec under a same-type assumption;
+  a mixed attention/Mamba aggregate violates that assumption whether attention
+  or Mamba comes first. Adapt runner dispatch explicitly: derive attention slot
+  mapping from an `AttentionSpec`, filter Mamba copy/invalidation to the
+  Mamba members, and leave authoritative cache order unchanged. Lock all three
+  invariants with regression tests and require target-device graph-capture
+  evidence before treating the adapter as correct.
 - Recheck accelerator ownership and free memory at worker initialization, not
   only immediately before launching a container. Another container can claim
   devices in the startup gap. Attribute every conflicting PID through its
