@@ -486,3 +486,59 @@ def test_heterogeneous_mamba_lifecycle_filters_attention_layers(tmp_path):
         {},
     )
     assert observed["layer_names"] == ["mamba6", "mamba12"]
+
+
+def test_head256_prefill_uses_existing_npu_fusion_attention_fallback(tmp_path):
+    calls = []
+
+    class FakeDeviceOperator:
+        @classmethod
+        def npu_fused_infer_attention_score(cls, **kwargs):
+            calls.append(("fia", kwargs))
+            return "fia"
+
+    class FakeDeviceUtils:
+        @staticmethod
+        def npu_large_head_prefill_attention(*args, **kwargs):
+            calls.append(("fusion", args, kwargs))
+            return "fusion"
+
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_head256_prefill_fallback_patch(
+        config, FakeDeviceOperator, FakeDeviceUtils
+    )
+    common = dict(
+        query="q",
+        key="k",
+        value="v",
+        attn_metadata="metadata",
+        key_cache="kc",
+        value_cache="vc",
+        current_key="current-k",
+        current_value="current-v",
+        num_heads=24,
+        num_key_value_heads=4,
+        scale=0.125,
+        is_prefill_no_cache=False,
+    )
+
+    assert (
+        FakeDeviceOperator.npu_fused_infer_attention_score(
+            **common, head_size=256
+        )
+        == "fusion"
+    )
+    assert calls[0][0] == "fusion"
+    assert calls[0][1] == ("q", "current-k", "current-v", "metadata")
+    assert calls[0][2]["head_size"] == 256
+
+    assert (
+        FakeDeviceOperator.npu_fused_infer_attention_score(
+            **common, head_size=128
+        )
+        == "fia"
+    )
+    assert calls[1][0] == "fia"
+    assert calls[1][1]["head_size"] == 128

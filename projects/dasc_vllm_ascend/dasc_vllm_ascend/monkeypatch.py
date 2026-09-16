@@ -32,6 +32,86 @@ class DascRuntimeUnsupported(RuntimeError):
     pass
 
 
+def _install_head256_prefill_fallback_patch(
+    config: DascConfig, device_operator: Any, device_utils: Any
+) -> None:
+    """Route unsupported Qwen3.5 256-wide prefill heads to fusion attention.
+
+    Ascend 910B's FIA TND path rejects a 256-wide no-RoPE head.  Upstream
+    vLLM-Ascend already provides a paged-KV-aware NPU fusion-attention fallback
+    for another unsupported large-head geometry (512).  Reuse that exact
+    adaptor for Qwen3.5's 256-wide full-attention layers; decode remains on the
+    existing paged-attention selection and supported FIA geometries are left
+    untouched.
+    """
+    if getattr(device_operator, "_mst_dasc_head256_prefill_installed", False):
+        return
+
+    original = device_operator.npu_fused_infer_attention_score
+
+    @classmethod
+    def attention_with_head256_prefill_fallback(
+        cls,
+        query,
+        key,
+        value,
+        attn_metadata,
+        *,
+        key_cache,
+        value_cache,
+        current_key,
+        current_value,
+        num_heads,
+        num_key_value_heads,
+        head_size,
+        scale,
+        is_prefill_no_cache,
+        **kwargs,
+    ):
+        if head_size == 256:
+            return device_utils.npu_large_head_prefill_attention(
+                query,
+                current_key,
+                current_value,
+                attn_metadata,
+                key_cache=key_cache,
+                value_cache=value_cache,
+                num_heads=num_heads,
+                num_kv_heads=num_key_value_heads,
+                head_size=head_size,
+                scale=scale,
+                is_prefill_no_cache=is_prefill_no_cache,
+            )
+        return original(
+            query=query,
+            key=key,
+            value=value,
+            attn_metadata=attn_metadata,
+            key_cache=key_cache,
+            value_cache=value_cache,
+            current_key=current_key,
+            current_value=current_value,
+            num_heads=num_heads,
+            num_key_value_heads=num_key_value_heads,
+            head_size=head_size,
+            scale=scale,
+            is_prefill_no_cache=is_prefill_no_cache,
+            **kwargs,
+        )
+
+    device_operator.npu_fused_infer_attention_score = (
+        attention_with_head256_prefill_fallback
+    )
+    device_operator._mst_dasc_head256_prefill_installed = True
+    emit(
+        config.evidence_path,
+        "head256_prefill_fallback_installed",
+        mode=config.mode,
+        head_size=256,
+        backend="npu_fusion_attention",
+    )
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
@@ -798,6 +878,7 @@ def install(config: DascConfig) -> None:
     from vllm.v1.worker import mamba_utils
     from vllm.v1.core import kv_cache_utils
     from vllm_ascend.ops import gdn
+    from vllm_ascend.device import device_op, utils as device_utils
     from vllm_ascend.patch.worker import patch_mamba_utils as ascend_patch
     from vllm_ascend.worker import model_runner_v1
 
@@ -879,6 +960,9 @@ def install(config: DascConfig) -> None:
     load_then_install._mst_dasc_loader = True
     Qwen3_5ForConditionalGeneration.load_weights = load_then_install
     if config.mode == "physical-cache-eager":
+        _install_head256_prefill_fallback_patch(
+            config, device_op.DeviceOperator, device_utils
+        )
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
         _install_heterogeneous_mamba_lifecycle_patch(config, mamba_utils)
