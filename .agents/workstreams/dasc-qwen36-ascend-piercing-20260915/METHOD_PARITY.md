@@ -51,6 +51,13 @@ An independent second run produced a byte-identical file and hash. Version 3
 supersedes version 2 by adding the Qwen GQA coupling constraint; it does not
 replace or erase the older immutable artifact.
 
+A separate standard-library verifier used unlabeled-bin dynamic programming,
+not the manifest generator's backtracking search, to recompute all 48 optima
+and validate every assignment and aggregate. Its immutable output is
+`/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v3.verify.json`
+with SHA256
+`15fdf0745e425b16b6311a794a66734d25a3a82e780bf14216201cc345fe3aa0`.
+
 At `W_max=64`, the paper threshold retains 1728 of 2304 global temporal
 heads (1.33x temporal-only compression). The current layerwise TP-MAX padding
 stores 2084 heads (about 1.11x), an overhead of 356 heads. It therefore

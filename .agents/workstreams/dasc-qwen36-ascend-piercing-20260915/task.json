@@ -96,6 +96,10 @@
       "gqa_group_balanced_removed_heads": 476,
       "determinism_repeat_path": "/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v3.repeat.json",
       "determinism_repeat_sha256": "c474ff65baef39c41944da0a6027eaf5ab69805a55d23db00e1dca3b2fff1f8d",
+      "independent_audit_path": "/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v3.verify.json",
+      "independent_audit_sha256": "15fdf0745e425b16b6311a794a66734d25a3a82e780bf14216201cc345fe3aa0",
+      "independent_audit_algorithm": "unlabeled-bin dynamic programming",
+      "independent_audit_ok": true,
       "claim_scope": "real-weight combinatorial storage bound; no NPU performance or output-equivalence claim"
     },
     "performance_result": null,
