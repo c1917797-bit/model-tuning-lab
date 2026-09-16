@@ -199,3 +199,10 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   overlapping mapping is a launch blocker even when no NPU PID is present; do
   not describe that idle mapping as active compute, and do not weaken the gate
   merely to consume apparently free memory.
+- Do not implement the container-claim gate from HostConfig.Devices alone.
+  Privileged Ascend containers can expose no explicit Docker device mappings
+  while selecting host-physical devices through ASCEND_RT_VISIBLE_DEVICES.
+  For non-privileged containers, explicit PathOnHost mappings are physical
+  authority even when devices are renumbered inside; for privileged containers,
+  conservatively union explicit mappings with valid visible-device claims.
+  Cover both forms and their mixed case with parser regression tests.

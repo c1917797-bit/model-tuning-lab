@@ -90,3 +90,23 @@ Use the pinned-image interpreter for these tests.
 `run_v12r9_once.py` uses a new immutable result directory and requires the
 explicit-dummy-scope fix commit 8899d8d. This strengthens evidence coverage but
 does not replace numerical lifecycle tests.
+
+## Preflight ownership correction
+
+A 2026-09-16 review found that the inherited controller parsed only explicit
+HostConfig.Devices mappings. Three running foreign Ascend containers were
+privileged, had no explicit device entries, and declared physical NPU4-7 only
+through ASCEND_RT_VISIBLE_DEVICES. The old parser could therefore have launched
+v12r9 into an overlapping reservation even though the external heartbeat gate
+correctly blocked it.
+
+The controller now treats explicit PathOnHost device mappings as physical
+authority for non-privileged containers and, for privileged containers,
+conservatively unions valid visible-device declarations with explicit mappings.
+Eleven focused parser and layer-cohort tests passed in the pinned v0.23.0 image
+without device mappings (operation exec-0000000000001641). A live
+`--preflight-only` run then identified all three foreign NPU4-7 claims and
+failed closed (operation exec-0000000000001640). This is a safety correction,
+not NPU algorithm, performance, or quality evidence. The full 54-test plugin
+suite also passed in the pinned image without devices after the correction
+(operation exec-0000000000001649).

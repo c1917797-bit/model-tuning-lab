@@ -91,6 +91,47 @@ def npu_snapshot() -> tuple[str, dict[int, int], set[int]]:
     return raw, hbm, processes
 
 
+def container_claims_from_inspect(item: dict) -> list[int]:
+    """Return physical target devices reserved by one running container.
+
+    Explicit Docker device mappings are authoritative because PathOnHost names
+    physical devices even when they are renumbered inside the container. Some
+    Ascend development containers instead run privileged with no explicit
+    device entries and select host devices only through
+    ASCEND_RT_VISIBLE_DEVICES. In that case the environment values are
+    host-physical reservation claims and must not be ignored.
+    """
+    host_config = item.get("HostConfig") or {}
+    mapped = {
+        int(match.group(1))
+        for device in host_config.get("Devices") or []
+        if (
+            match := re.fullmatch(
+                r"/dev/davinci([0-7])", device.get("PathOnHost", "")
+            )
+        )
+    }
+    if not host_config.get("Privileged"):
+        return sorted(mapped.intersection(NPUS))
+    visible_prefix = "ASCEND_RT_VISIBLE_DEVICES="
+    visible = next(
+        (
+            value[len(visible_prefix) :]
+            for value in (item.get("Config") or {}).get("Env") or []
+            if value.startswith(visible_prefix)
+        ),
+        None,
+    )
+    if visible is None:
+        return sorted(mapped.intersection(NPUS))
+    declared = {
+        int(value)
+        for value in visible.split(",")
+        if re.fullmatch(r"[0-7]", value.strip())
+    }
+    return sorted((mapped | declared).intersection(NPUS))
+
+
 def docker_claims() -> dict[str, list[int]]:
     ids = run(
         ["/usr/bin/docker", "ps", "-q"], timeout=30
@@ -100,18 +141,7 @@ def docker_claims() -> dict[str, list[int]]:
         item = json.loads(
             run(["/usr/bin/docker", "inspect", container_id], timeout=30)
         )[0]
-        claimed = sorted(
-            {
-                int(match.group(1))
-                for device in item["HostConfig"].get("Devices", [])
-                if (
-                    match := re.fullmatch(
-                        r"/dev/davinci([0-7])", device.get("PathOnHost", "")
-                    )
-                )
-                and int(match.group(1)) in NPUS
-            }
-        )
+        claimed = container_claims_from_inspect(item)
         if claimed:
             claims[item["Name"].lstrip("/")] = claimed
     return claims
