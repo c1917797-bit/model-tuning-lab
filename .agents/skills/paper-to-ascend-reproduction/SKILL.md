@@ -87,6 +87,23 @@ Verify health plus a real request, not startup text alone. Check capacity
 arithmetic, including private suffix, seam sink, block alignment, workspace, and
 reserved tokens.
 
+For stateful algorithms, add a lifecycle-equivalence gate before accelerator
+execution:
+
+1. enumerate the paper's semantic boundaries such as Store, Load, cache hit,
+   active continuation, replay, release, and resume;
+2. map every boundary to the exact framework hook and record how often that
+   hook executes;
+3. test state across at least two consecutive model steps and one scheduler
+   block transition, not only a single restore or operator call;
+4. fail closed when a per-request or per-cache-hit operation has been attached
+   to a more frequent boundary such as every model forward.
+
+Do not infer lifecycle parity from correct tensor shapes, stable pointers, a
+passing one-step numerical test, or successful graph capture. A transformation
+can satisfy all four while repeatedly destroying state that the algorithm says
+must remain live.
+
 Archive pre-measurement failures separately. If a frozen invariant changes,
 start a new experiment; do not repair the ruler in place and reuse its baseline.
 
@@ -183,6 +200,9 @@ Reusable lessons:
 - complete only after independent hash/count/index audit and resource release;
 - distinguish direction reproduction from absolute reproduction when model,
   accelerator generation, or TP degree changes.
+- prove semantic lifecycle parity before optimizing a stateful bridge: paper
+  Load/Store boundaries are not interchangeable with framework forward,
+  scheduler-step, or physical-block-copy boundaries.
 
 ## Completion gate
 

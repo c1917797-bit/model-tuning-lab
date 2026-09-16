@@ -60,7 +60,7 @@
     "planned_container": "dasc_qwen36_physical_graph_stable_v12r6_20260916",
     "controller_commit": "1d9a4b7",
     "controller_path": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r6_once.py",
-    "preflight_state": "physical NPU4-7 have no NPU processes and are at the idle HBM floor; the vllm-ascend container still declares devices 4-7",
+    "preflight_state": "2026-09-16 latest check: physical NPU4-7 each have an active VLLMWorker_TP process using about 27540 MiB and the vllm-ascend container declares devices 4-7",
     "launch_state": "not_started_and_now_fail_closed_due_to_dasc_nr_lifecycle_semantic_bug",
     "semantic_finding": "paper section 4.2 zero-fills omitted units on cache-hit Load only; v12r6 restored before every forward and would erase later omitted-head recurrent updates",
     "corrected_core_gate": "RequestActiveStateBridge regression test passed in pinned image; framework integration incomplete",
