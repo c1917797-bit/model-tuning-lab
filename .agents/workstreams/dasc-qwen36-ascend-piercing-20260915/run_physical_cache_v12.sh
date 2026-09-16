@@ -22,6 +22,8 @@ READY_POLLS=${DASC_READY_POLLS:-360}
 # Keep headroom for that floor while still rejecting the observed 94% teardown
 # residue. The empty process table remains an independent mandatory gate.
 MAX_HBM_USAGE_PERCENT=${DASC_MAX_HBM_USAGE_PERCENT:-12}
+OWNERSHIP_POLL_SECONDS=${DASC_OWNERSHIP_POLL_SECONDS:-2}
+OWNERSHIP_PID=
 
 mkdir -p "$CONTROLLER_ROOT" "$LOCK_DIR"
 exec > >(tee -a "$CONTROLLER_LOG") 2>&1
@@ -68,6 +70,7 @@ self_test() {
     done
     test -d "$REPO/.git"
     test -r "$REPO/$WORKSTREAM/run_physical_canary.py"
+    test -r "$REPO/$WORKSTREAM/verify_device_ownership.py"
     test -r "$MODEL_HOST/config.json"
     docker image inspect "$IMAGE" >/dev/null
     local device
@@ -150,6 +153,10 @@ cleanup() {
     local status=$?
     local manifest_tmp
     set +e
+    if [[ -n "${OWNERSHIP_PID:-}" ]]; then
+        kill "$OWNERSHIP_PID" 2>/dev/null || true
+        wait "$OWNERSHIP_PID" 2>/dev/null || true
+    fi
     if docker container inspect "$CONTAINER" >/dev/null 2>&1; then
         docker logs "$CONTAINER" >"$RESULT_ROOT/service.log" 2>&1
         docker inspect "$CONTAINER" >"$RESULT_ROOT/container-inspect.json"
@@ -208,6 +215,22 @@ docker run -d \
     --compilation-config '{"cudagraph_capture_sizes":[1,2,4,8,16],"cudagraph_mode":"FULL_DECODE_ONLY"}' \
     --port "$PORT" >"$RESULT_ROOT/container-id.txt"
 
+ownership_monitor() {
+    while [[ $(docker inspect -f '{{.State.Running}}' "$CONTAINER" 2>/dev/null) == true ]]; do
+        if ! python3 "$REPO/$WORKSTREAM/verify_device_ownership.py" \
+            --container "$CONTAINER" \
+            --cards 4 5 6 7 \
+            --output "$RESULT_ROOT/device-ownership-latest.json" \
+            --history "$RESULT_ROOT/device-ownership-history.jsonl"; then
+            touch "$RESULT_ROOT/device-ownership-failed"
+            return 1
+        fi
+        sleep "$OWNERSHIP_POLL_SECONDS"
+    done
+}
+ownership_monitor &
+OWNERSHIP_PID=$!
+
 ready=0
 for ((attempt = 1; attempt <= READY_POLLS; attempt++)); do
     if curl -fsS "http://127.0.0.1:$PORT/v1/models" >"$RESULT_ROOT/models.json.tmp" 2>/dev/null; then
@@ -217,6 +240,10 @@ for ((attempt = 1; attempt <= READY_POLLS; attempt++)); do
     fi
     if [[ $(docker inspect -f '{{.State.Running}}' "$CONTAINER" 2>/dev/null) != true ]]; then
         echo "service exited before readiness"
+        exit 1
+    fi
+    if [[ -e "$RESULT_ROOT/device-ownership-failed" ]]; then
+        echo "device ownership verifier failed before service readiness"
         exit 1
     fi
     if (( attempt % 6 == 0 )); then
@@ -235,5 +262,14 @@ python3 "$RESULT_ROOT/run_physical_canary.py" \
     --model "$MODEL_CONTAINER" \
     --output-dir "$RESULT_ROOT" \
     --activation "$RESULT_ROOT/evidence.jsonl"
+if [[ -e "$RESULT_ROOT/device-ownership-failed" ]]; then
+    echo "device ownership verifier failed during canary"
+    exit 1
+fi
+python3 "$REPO/$WORKSTREAM/verify_device_ownership.py" \
+    --container "$CONTAINER" \
+    --cards 4 5 6 7 \
+    --output "$RESULT_ROOT/device-ownership-latest.json" \
+    --history "$RESULT_ROOT/device-ownership-history.jsonl"
 touch "$RESULT_ROOT/SUCCESS"
 echo "$(timestamp) v12 passed"

@@ -195,7 +195,14 @@ def option_value(command: list[str], name: str) -> str | None:
         return None
 
 
-def container_identity_verdict(container: dict, image: dict) -> dict:
+def container_identity_verdict(
+    container: dict,
+    image: dict,
+    *,
+    expected_container: str = EXPECTED_CONTAINER,
+    expected_result_root: Path = EXPECTED_RESULT_ROOT,
+    expected_experiment: str = "dasc-qwen36-physical-cache-v12",
+) -> dict:
     config = container.get("Config", {})
     host_config = container.get("HostConfig", {})
     env = {
@@ -219,14 +226,14 @@ def container_identity_verdict(container: dict, image: dict) -> dict:
     mounts = {item.get("Destination"): item for item in container.get("Mounts", [])}
     command = config.get("Cmd", [])
     checks = {
-        "container_name": container.get("Name") == EXPECTED_CONTAINER,
+        "container_name": container.get("Name") == expected_container,
         "image_tag": config.get("Image") == EXPECTED_IMAGE,
         "image_id": bool(image.get("Id")) and container.get("Image") == image.get("Id"),
         "owner_label": config.get("Labels", {}).get("mst.owner") == "c1917797-bit",
         "workstream_label": config.get("Labels", {}).get("mst.workstream")
         == "dasc-qwen36-ascend-piercing-20260915",
         "experiment_label": config.get("Labels", {}).get("mst.experiment")
-        == "dasc-qwen36-physical-cache-v12",
+        == expected_experiment,
         "network_host": host_config.get("NetworkMode") == "host",
         "physical_device_map": davinci == expected_davinci,
         "auxiliary_devices": {
@@ -249,10 +256,10 @@ def container_identity_verdict(container: dict, image: dict) -> dict:
         == "/cache/efim/Qwen3.6-27B"
         and mounts.get("/models/Qwen3.6-27B", {}).get("RW") is False,
         "plugin_mount_read_only": mounts.get("/workspace/dasc", {}).get("Source")
-        == str(EXPECTED_RESULT_ROOT / "plugin-snapshot")
+        == str(expected_result_root / "plugin-snapshot")
         and mounts.get("/workspace/dasc", {}).get("RW") is False,
         "result_mount_writable": mounts.get("/dasc-results", {}).get("Source")
-        == str(EXPECTED_RESULT_ROOT)
+        == str(expected_result_root)
         and mounts.get("/dasc-results", {}).get("RW") is True,
         "terminal": container.get("State", {}).get("Running") is False,
     }
@@ -292,7 +299,13 @@ def source_scope_verdict(repo: Path, commit: str) -> dict:
     return result
 
 
-def verify(root: Path, repo: Path) -> dict:
+def verify(
+    root: Path,
+    repo: Path,
+    *,
+    expected_container: str = EXPECTED_CONTAINER,
+    expected_experiment: str = "dasc-qwen36-physical-cache-v12",
+) -> dict:
     required = (
         "SUCCESS",
         "controller-exit-code.txt",
@@ -350,7 +363,13 @@ def verify(root: Path, repo: Path) -> dict:
         root.joinpath("container-final-inspect.json").read_text(encoding="utf-8")
     )
     result["container_identity"] = (
-        container_identity_verdict(container_values[0], image_values[0])
+        container_identity_verdict(
+            container_values[0],
+            image_values[0],
+            expected_container=expected_container,
+            expected_result_root=root,
+            expected_experiment=expected_experiment,
+        )
         if len(container_values) == 1 and len(image_values) == 1
         else {"checks": {}, "ok": False}
     )
@@ -382,9 +401,18 @@ def main() -> int:
         type=Path,
         default=Path(__file__).resolve().parents[3],
     )
+    parser.add_argument("--expected-container", default=EXPECTED_CONTAINER)
+    parser.add_argument(
+        "--expected-experiment", default="dasc-qwen36-physical-cache-v12"
+    )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    result = verify(args.root.resolve(), args.repo.resolve())
+    result = verify(
+        args.root.resolve(),
+        args.repo.resolve(),
+        expected_container=args.expected_container,
+        expected_experiment=args.expected_experiment,
+    )
     encoded = json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True) + "\n"
     if args.output:
         args.output.write_text(encoded, encoding="utf-8")

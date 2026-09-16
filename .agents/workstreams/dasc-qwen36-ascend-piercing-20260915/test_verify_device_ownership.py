@@ -9,7 +9,7 @@ from verify_device_ownership import (
 
 
 def test_accepts_only_container_owned_device_processes():
-    owned = parse_container_pids(" 101\n102\n103\n")
+    owned = parse_container_pids("PID\n 101\n102\n103\n")
     observed = parse_device_pids(
         {
             4: "Process id:101 Process name:worker",

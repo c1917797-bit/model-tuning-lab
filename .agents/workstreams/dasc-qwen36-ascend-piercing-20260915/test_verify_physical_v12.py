@@ -154,6 +154,84 @@ class PhysicalV12VerifierTest(unittest.TestCase):
         container["HostConfig"]["Devices"][0]["PathOnHost"] = "/dev/davinci0"
         self.assertFalse(MODULE.container_identity_verdict(container, image)["ok"])
 
+    def test_container_identity_accepts_explicit_successor_identity(self) -> None:
+        image = {"Id": "sha256:image"}
+        root = Path("/cache/example/physical-cache-order-fix-v12r3")
+        devices = [
+            {
+                "PathOnHost": f"/dev/davinci{physical}",
+                "PathInContainer": f"/dev/davinci{logical}",
+            }
+            for logical, physical in enumerate(range(4, 8))
+        ]
+        devices.extend(
+            {"PathOnHost": value, "PathInContainer": value}
+            for value in (
+                "/dev/davinci_manager",
+                "/dev/devmm_svm",
+                "/dev/hisi_hdc",
+            )
+        )
+        container = {
+            "Name": "/dasc_qwen36_physical_order_fix_v12r3_20260916",
+            "Image": "sha256:image",
+            "Config": {
+                "Image": MODULE.EXPECTED_IMAGE,
+                "Labels": {
+                    "mst.owner": "c1917797-bit",
+                    "mst.workstream": "dasc-qwen36-ascend-piercing-20260915",
+                    "mst.experiment": "dasc-qwen36-physical-cache-v12r3",
+                },
+                "Env": [
+                    "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3",
+                    "VLLM_PLUGINS=ascend,dasc_vllm_ascend",
+                    "MST_DASC_ENABLE=1",
+                    "MST_DASC_MODE=physical-cache-eager",
+                    "MST_DASC_W_MAX=64",
+                ],
+                "Cmd": [
+                    "vllm",
+                    "serve",
+                    "/models/Qwen3.6-27B",
+                    "--tensor-parallel-size",
+                    "4",
+                    "--mamba-cache-mode",
+                    "align",
+                    "--enable-prefix-caching",
+                    "--port",
+                    "8030",
+                ],
+            },
+            "HostConfig": {"NetworkMode": "host", "Devices": devices},
+            "Mounts": [
+                {
+                    "Source": "/cache/efim/Qwen3.6-27B",
+                    "Destination": "/models/Qwen3.6-27B",
+                    "RW": False,
+                },
+                {
+                    "Source": str(root / "plugin-snapshot"),
+                    "Destination": "/workspace/dasc",
+                    "RW": False,
+                },
+                {
+                    "Source": str(root),
+                    "Destination": "/dasc-results",
+                    "RW": True,
+                },
+            ],
+            "State": {"Running": False},
+        }
+        self.assertTrue(
+            MODULE.container_identity_verdict(
+                container,
+                image,
+                expected_container="/dasc_qwen36_physical_order_fix_v12r3_20260916",
+                expected_result_root=root,
+                expected_experiment="dasc-qwen36-physical-cache-v12r3",
+            )["ok"]
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

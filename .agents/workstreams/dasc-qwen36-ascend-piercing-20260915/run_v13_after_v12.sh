@@ -5,6 +5,8 @@ REPO=/opt/host/vnf/austinov/model-tuning-lab
 WS=.agents/workstreams/dasc-qwen36-ascend-piercing-20260915
 BASE=/cache/cch/dasc-qwen36-ascend-20260915
 V12=${DASC_V12_ROOT:-$BASE/physical-cache-order-fix-v12}
+V12_CONTAINER=${DASC_V12_CONTAINER:-/dasc_qwen36_physical_order_fix_v12_20260915}
+V12_EXPERIMENT=${DASC_V12_EXPERIMENT:-dasc-qwen36-physical-cache-v12}
 VERIFY=$REPO/$WS/verify_physical_v12.py
 RUN_V13=$REPO/$WS/run_formal_ab_v13.sh
 SUPERVISOR_LOCK=${DASC_SUPERVISOR_LOCK:-$BASE/controllers/dasc-qwen36-v13-after-v12.lock}
@@ -19,7 +21,12 @@ while [[ ! -f "$V12/SUCCESS" ]]; do
   sleep 60
 done
 
-python3 "$VERIFY" --root "$V12" --repo "$REPO" --output "$VERDICT"
+python3 "$VERIFY" \
+  --root "$V12" \
+  --repo "$REPO" \
+  --expected-container "$V12_CONTAINER" \
+  --expected-experiment "$V12_EXPERIMENT" \
+  --output "$VERDICT"
 
 while true; do
   set +e

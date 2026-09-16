@@ -228,3 +228,22 @@ exact numeric-device match and added realistic auxiliary devices to the test.
 The last full CPU-only workstream run passed 51 tests with 14 upstream Torch
 deprecation warnings. The current branch is intentionally unpushed; pushing
 requires explicit user authorization for the exact branch and payload.
+
+## 2026-09-16 v12r2 recovery result
+
+The v12r2 service reached readiness on physical NPU4-7, but its original AWMCP
+controller handle had already timed out and exited before the canary. A bounded
+recovery controller acquired the same NPU4-7 lock and failed closed before any
+request because `verify_device_ownership.py` used `docker top -eo pid=`, which
+the host Docker/ps combination rejects. Cleanup stopped only the owned v12r2
+container and retained the immutable failed root. This is a control-plane
+compatibility failure, not DASC numerical or performance evidence.
+
+The verifier now uses the portable `docker top -eo pid` form and ignores the
+header during numeric PID parsing. The physical-v12 verifier and v13 handoff
+also accept an explicit successor container and experiment while still binding
+the result mount to the exact `--root`. The next attempt is v12r3, with a new
+immutable root and container. Its controller continuously records NPU4-7
+ownership from service launch through the canary. The updated complete
+CPU-only workstream suite passes 52 tests, and a live host smoke check of the
+corrected Docker top path succeeds.

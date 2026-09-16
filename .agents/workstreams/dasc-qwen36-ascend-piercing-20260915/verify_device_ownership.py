@@ -44,7 +44,11 @@ def verify(owned: set[int], observed: set[int]) -> dict:
 
 def run(container: str, cards: list[int]) -> dict:
     top = subprocess.run(
-        ["docker", "top", container, "-eo", "pid="],
+        # The Docker/ps combination on chicaihong01 rejects the GNU-style
+        # header suppression token "pid=".  "pid" is accepted by both the
+        # host daemon and newer daemons; parse_container_pids already ignores
+        # the non-numeric header.
+        ["docker", "top", container, "-eo", "pid"],
         check=True,
         capture_output=True,
         text=True,
