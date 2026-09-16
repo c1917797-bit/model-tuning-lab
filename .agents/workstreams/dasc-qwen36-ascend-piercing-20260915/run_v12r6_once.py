@@ -199,29 +199,36 @@ def snapshot_plugin() -> None:
         ignore=shutil.ignore_patterns("__pycache__", "*.pyc", ".pytest_cache"),
     )
     (snapshot / "site").mkdir()
-    run(
-        [
-            "/usr/bin/docker",
-            "run",
-            "--rm",
-            "-v",
-            f"{snapshot / 'src'}:/build/src:ro",
-            "-v",
-            f"{snapshot / 'site'}:/target",
-            "-w",
-            "/build/src",
-            IMAGE,
-            "/usr/local/python3.12.13/bin/python3",
-            "-m",
-            "pip",
-            "install",
-            "--no-deps",
-            "--target",
-            "/target",
-            ".",
-        ],
-        timeout=600,
-    )
+    try:
+        output = run(
+            [
+                "/usr/bin/docker",
+                "run",
+                "--rm",
+                "--network",
+                "none",
+                "-e",
+                "TORCH_DEVICE_BACKEND_AUTOLOAD=0",
+                "-v",
+                f"{snapshot / 'src'}:/build/src:ro",
+                "-v",
+                f"{snapshot / 'site'}:/target",
+                IMAGE,
+                "/bin/bash",
+                "-lc",
+                "cp -a /build/src /tmp/dasc-src && "
+                "cd /tmp/dasc-src && "
+                "/usr/local/python3.12.13/bin/python3 -m pip install "
+                "--no-deps --no-build-isolation --target /target .",
+            ],
+            timeout=600,
+        )
+    except subprocess.CalledProcessError as error:
+        (RESULT / "plugin-install.log").write_text(
+            error.stdout or "", encoding="utf-8"
+        )
+        raise
+    (RESULT / "plugin-install.log").write_text(output, encoding="utf-8")
     shutil.copy2(PREVIOUS_CANARY, RESULT / "run_physical_canary.py")
 
 
@@ -426,12 +433,12 @@ def main() -> int:
         if blockers:
             print(json.dumps({"ok": False, "state": state, "blockers": blockers}, indent=2))
             return 2
-        RESULT.mkdir(parents=False)
-        atomic_json(RESULT / "preflight.json", state)
-        snapshot_plugin()
         container_id = ""
         exit_code = 1
+        RESULT.mkdir(parents=False)
+        atomic_json(RESULT / "preflight.json", state)
         try:
+            snapshot_plugin()
             container_id = launch()
             (RESULT / "container-id.txt").write_text(container_id + "\n")
             wait_ready()
@@ -454,7 +461,8 @@ def main() -> int:
             )
             raise
         finally:
-            preserve()
+            if container_id:
+                preserve()
             if container_id:
                 run(
                     ["/usr/bin/docker", "stop", "--time", "30", CONTAINER],
