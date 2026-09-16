@@ -44,10 +44,12 @@ Raw runtime evidence remains outside Git under
 An experimental `MST_DASC_MODE=physical-cache-eager` path is implemented.
 It changes every loaded GDN layer's MambaSpec to its heterogeneous compact
 temporal shape, keeps runner-owned compact tensors authoritative for block
-copy and invalidation, and expands active blocks into fixed dense workspaces
-around the native Ascend core. This mode is eager-only until graph capture has
-its own pointer and replay gate. It has not yet passed NPU or end-to-end
-validation and must not be used for a performance claim.
+copy and invalidation, and assigns every live request a fixed dense workspace
+slot around the native Ascend core. Compact state is loaded only when the
+request first becomes active; later decode steps and physical block transitions
+reuse the same dense slot so omitted-head updates are preserved. This mode has
+not yet passed NPU or end-to-end validation and must not be used for a
+performance claim.
 
 ## Physical-cache integration status (2026-09-16)
 
@@ -76,6 +78,16 @@ proved it was a no-op at runtime: the aggregate already had an attention layer
 first on every rank, and the same FIAS failure remained. The adapter is retired
 from the active tree; commit `373b448` and the immutable v12r5 artifacts retain
 the negative result.
+
+The first graph-boundary successor (v12r6) is also retired before NPU launch.
+It restored compact state before every model forward, while the paper's
+DASC-NR zero-fill applies only at a cache-hit Load boundary. That mismatch
+would erase omitted-head updates accumulated during active continuation. The
+v12r6 controller now fails closed. The replacement uses request-owned dense
+slots, keeps compact tensors visible to scheduler copy outside model execution,
+preserves omitted-head state across a synthetic block transition, and releases
+the slot on request disappearance or native failure. Its pinned-image software
+suite currently passes 48 tests; NPU graph and multi-step gates remain open.
 
 ## Provenance and paper parity
 

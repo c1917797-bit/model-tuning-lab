@@ -59,6 +59,11 @@ def _fixture(monkeypatch, tmp_path, *, fail=False):
     class FakeRunner:
         def __init__(self):
             self.model = SimpleNamespace(modules=lambda: (module,))
+            self.input_batch = SimpleNamespace(req_ids=["req-a", "req-b"])
+            self.requests = {
+                "req-a": SimpleNamespace(num_computed_tokens=10),
+                "req-b": SimpleNamespace(num_computed_tokens=20),
+            }
 
         def _model_forward(self, *args, **kwargs):
             return module._forward_core(None, None, None, None)
@@ -99,12 +104,12 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
     assert result == "native-result"
     assert context.attn_metadata[module.prefix] is metadata
     bridge = module._mst_dasc_bound_bridge
-    assert module.kv_cache is bridge.workspace_cache
+    assert module.kv_cache is persistent_cache
     assert tuple(tensor.data_ptr() for tensor in persistent_cache) == persistent_ptrs
     assert observed["metadata"] is not metadata
     assert torch.equal(
         observed["metadata"].non_spec_state_indices_tensor,
-        torch.tensor([1, 0], dtype=torch.int32),
+        torch.tensor([0, 1], dtype=torch.int32),
     )
     dense_conv, dense_temporal = observed["cache"]
     assert dense_conv.shape == (3, 2, 3)
@@ -120,7 +125,7 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
     assert torch.count_nonzero(observed["cache_before"][1][:, [1, 2]]).item() == 0
     assert torch.equal(
         dense_temporal[:2].index_select(1, retained),
-        persistent_cache[1].index_select(0, torch.tensor([2, 6])),
+        persistent_cache[1].index_select(0, torch.tensor([6, 2])),
     )
     events = [
         json.loads(line)
@@ -148,14 +153,14 @@ def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error
 
     assert context.attn_metadata[module.prefix] is metadata
     bridge = module._mst_dasc_bound_bridge
-    assert module.kv_cache is bridge.workspace_cache
+    assert module.kv_cache is persistent_cache
     assert all(
         torch.equal(actual, expected)
         for actual, expected in zip(
             (bridge.conv_storage, bridge.temporal_storage), before
         )
     )
-    assert module._mst_dasc_bound_bridge._active_ids is None
+    assert bridge.active_owners == frozenset()
     assert observed["metadata"] is not metadata
 
 
@@ -169,6 +174,8 @@ def test_graph_boundary_reuses_buffers_with_changed_scheduler_blocks(
     workspace_cache = bridge.workspace_cache
     workspace_ptrs = tuple(tensor.data_ptr() for tensor in workspace_cache)
     metadata_ptrs = module._mst_dasc_metadata_remapper.pointers
+    active_conv_before = workspace_cache[0][:2].clone()
+    active_temporal_before = workspace_cache[1][:2].clone()
 
     metadata.non_spec_state_indices_tensor = torch.tensor(
         [4, 7], dtype=torch.int32
@@ -178,17 +185,23 @@ def test_graph_boundary_reuses_buffers_with_changed_scheduler_blocks(
     runner._model_forward()
 
     assert context.attn_metadata[module.prefix] is metadata
-    assert module.kv_cache is workspace_cache
-    assert tuple(tensor.data_ptr() for tensor in module.kv_cache) == workspace_ptrs
+    assert module.kv_cache is module._mst_dasc_persistent_cache
+    assert tuple(tensor.data_ptr() for tensor in workspace_cache) == workspace_ptrs
     assert module._mst_dasc_metadata_remapper.pointers == metadata_ptrs
     ids = torch.tensor([4, 7])
     assert torch.equal(
         bridge.conv_storage.index_select(0, ids),
-        before_conv.index_select(0, ids) + 11,
+        active_conv_before + 11,
     )
     assert torch.equal(
         bridge.temporal_storage.index_select(0, ids),
-        before_temporal.index_select(0, ids) + 13,
+        (active_temporal_before + 13).index_select(
+            1, torch.tensor([0, 3])
+        ),
+    )
+    assert torch.equal(
+        workspace_cache[1][:2, [1, 2]],
+        active_temporal_before[:, [1, 2]] + 13,
     )
 
 

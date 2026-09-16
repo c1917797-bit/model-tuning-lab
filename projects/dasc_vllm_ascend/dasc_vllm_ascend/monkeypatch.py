@@ -19,7 +19,7 @@ from typing import Any
 from .config import DascConfig
 from .evidence import emit
 from .metadata import StableAscendGDNMetadataRemapper, remap_ascend_gdn_metadata
-from .runtime import BoundActiveStateBridge
+from .runtime import RequestActiveStateBridge
 from .selector import (
     align_retained_heads_tp,
     retained_head_indices,
@@ -394,16 +394,16 @@ def _install_physical_cache_patch(
             raise DascRuntimeUnsupported(
                 "DASC physical mode requires two runner-owned cache tensors"
             )
-        bridge = BoundActiveStateBridge(
+        bridge = RequestActiveStateBridge(
             conv_storage=module.kv_cache[0],
             compact_temporal_storage=module.kv_cache[1],
             dense_temporal_shape=module._mst_dasc_dense_temporal_shape,
             temporal_head_axis=module._mst_dasc_temporal_head_axis,
             retained_indices=retained_head_indices(module, config),
-            max_active_blocks=module._mst_dasc_max_active_blocks,
+            max_active_requests=module._mst_dasc_max_active_blocks,
         )
         module._mst_dasc_bound_bridge = bridge
-        module.kv_cache = bridge.workspace_cache
+        module._mst_dasc_persistent_cache = module.kv_cache
         num_blocks = bridge.conv_storage.shape[0]
         expected_persistent_bytes = (
             module._mst_dasc_compact_page_bytes * num_blocks
@@ -448,6 +448,8 @@ def _install_physical_cache_patch(
         active = []
         succeeded = False
         try:
+            owner_ids = tuple(self.input_batch.req_ids)
+            restore_mask = None
             for module in modules:
                 if module.prefix not in metadata_map:
                     raise DascRuntimeUnsupported(
@@ -458,22 +460,64 @@ def _install_physical_cache_patch(
                 if remapper is None:
                     remapper = StableAscendGDNMetadataRemapper()
                     module._mst_dasc_metadata_remapper = remapper
-                remapped_metadata, plan = remapper.prepare(original_metadata)
                 bridge = bind_bridge(module)
-                bridge.restore_active(plan.block_ids)
+                state_indices = original_metadata.non_spec_state_indices_tensor
+                if state_indices is None:
+                    raise DascRuntimeUnsupported(
+                        "DASC request bridge requires non-spec state indices"
+                    )
+                if state_indices.ndim != 1 or state_indices.numel() < len(owner_ids):
+                    raise DascRuntimeUnsupported(
+                        "DASC request bridge cannot align requests to state indices"
+                    )
+                source_blocks = state_indices[:len(owner_ids)]
+                if restore_mask is None:
+                    restore_mask = source_blocks.new_tensor(
+                        [
+                            self.requests[owner].num_computed_tokens > 0
+                            for owner in owner_ids
+                        ],
+                        dtype=bool,
+                    )
+                bridge.release(
+                    tuple(bridge.active_owners.difference(owner_ids))
+                )
+                request_slots = bridge.activate(
+                    owner_ids, source_blocks, restore_mask
+                )
+                sorted_blocks, order = source_blocks.sort()
+                if sorted_blocks.unique().numel() != sorted_blocks.numel():
+                    raise DascRuntimeUnsupported(
+                        "DASC active requests share a physical state block"
+                    )
+                slots_by_sorted_block = request_slots.index_select(
+                    0, order
+                )
+                remapped_metadata, plan = remapper.prepare(
+                    original_metadata,
+                    active_slots=slots_by_sorted_block,
+                )
+                if not plan.block_ids.equal(sorted_blocks):
+                    raise DascRuntimeUnsupported(
+                        "DASC metadata contains state blocks outside active requests"
+                    )
+                module.kv_cache = bridge.workspace_cache
                 metadata_map[module.prefix] = remapped_metadata
-                active.append((module, bridge, original_metadata))
+                active.append(
+                    (module, bridge, original_metadata, owner_ids, source_blocks)
+                )
 
             result = original_model_forward(self, *args, **kwargs)
-            for _, bridge, _ in active:
-                bridge.checkpoint_active()
+            for _, bridge, _, owners, destination_blocks in active:
+                bridge.checkpoint(owners, destination_blocks)
             succeeded = True
             return result
         finally:
             if not succeeded:
-                for _, bridge, _ in active:
-                    bridge.abort_active()
-            for module, _, original_metadata in active:
+                for _, bridge, _, owners, _ in active:
+                    bridge.release(owners)
+            for module, _, original_metadata, _, _ in active:
+                module.kv_cache = module._mst_dasc_persistent_cache
                 metadata_map[module.prefix] = original_metadata
 
     qwen_gdn_class.get_kv_cache_spec = compact_get_spec

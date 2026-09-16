@@ -328,6 +328,10 @@ class RequestActiveStateBridge:
         return self._workspace_cache
 
     @property
+    def active_owners(self) -> frozenset[Any]:
+        return frozenset(self._owner_to_slot)
+
+    @property
     def persistent_bytes(self) -> int:
         return (
             self.conv_storage.numel() * self.conv_storage.element_size()

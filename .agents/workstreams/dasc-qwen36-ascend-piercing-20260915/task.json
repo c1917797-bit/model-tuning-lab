@@ -15,7 +15,7 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "v12r6_superseded_request_owned_active_state_integration",
+  "status": "request_owned_active_state_integrated_waiting_for_npu_gate",
   "decision": "open",
   "next_actions": [
     "Keep the verified dense-storage numerical canary as a closed reachability result; do not tune or benchmark it as a performance candidate.",
@@ -24,7 +24,7 @@
     "Keep the failed adapter out of the active plugin tree while preserving its Git history.",
     "Complete the paper-to-code parity matrix and label the current implementation paper-derived DASC-NR Ascend adaptation until an author repository is released or the missing SGLang mechanisms are independently reproduced.",
     "Treat v12r6 as superseded: restoring compact state before every model forward violates the paper's cache-load boundary by erasing omitted-head updates accumulated after the first token.",
-    "Integrate the request-owned dense active-state bridge: a request keeps one stable dense slot across decode steps and physical block transitions; compact restore occurs only on true new/resumed prefix Load, and compact Store occurs at checkpoint boundaries.",
+    "Keep the integrated request-owned dense active-state bridge: a request keeps one stable dense slot across decode steps and physical block transitions; compact restore occurs only on true new/resumed prefix Load.",
     "Keep the request-lifecycle regression gate: first Load zero-fills omitted heads, a normal step updates them, same-request block transition preserves them, and release/reactivate zero-fills them again while restoring retained heads.",
     "Wait for exclusive physical NPU4-7 availability. A running vllm-ascend container currently declares all eight NPUs and is starting a DP2 x TP4 service; do not stop it, share the cards, or launch the successor while that claim is active.",
     "Do not launch v12r6; its controller now fails closed on the semantic supersession. Prepare a newly named immutable attempt only after request identity, release/resume, metadata remapping, and graph-pointer gates pass.",
@@ -63,7 +63,7 @@
     "preflight_state": "2026-09-16 latest check: physical NPU4-7 each have an active VLLMWorker_TP process using about 27540 MiB and the vllm-ascend container declares devices 4-7",
     "launch_state": "not_started_and_now_fail_closed_due_to_dasc_nr_lifecycle_semantic_bug",
     "semantic_finding": "paper section 4.2 zero-fills omitted units on cache-hit Load only; v12r6 restored before every forward and would erase later omitted-head recurrent updates",
-    "corrected_core_gate": "RequestActiveStateBridge regression test passed in pinned image; framework integration incomplete",
+    "corrected_core_gate": "request-owned bridge, metadata remapping, scheduler-visible compact cache, failure cleanup, and cross-block omitted-state continuity pass the 48-test pinned-image suite; NPU integration remains incomplete",
     "performance_result": null,
     "quality_result": null
   },
