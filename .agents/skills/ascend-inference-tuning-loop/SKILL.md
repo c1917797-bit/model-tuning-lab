@@ -169,6 +169,12 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   do not keep permuting dictionaries. Audit every remaining consumer of the
   synthetic outer spec because a same-type wrapper around mixed inner specs can
   violate assumptions beyond the initial dispatch branch.
+- When a historical control has an empty result directory, inspect any retained
+  stopped container before rerunning expensive accelerator work. Recover and
+  hash only evidence the container can actually prove: image, command, mounts,
+  device mapping, graph-capture completion, readiness, replay, and HTTP status.
+  A server-side HTTP 200 log does not prove the client response body; withdraw
+  exact-output claims unless the response artifact itself is retained.
 - Recheck accelerator ownership and free memory at worker initialization, not
   only immediately before launching a container. Another container can claim
   devices in the startup gap. Attribute every conflicting PID through its

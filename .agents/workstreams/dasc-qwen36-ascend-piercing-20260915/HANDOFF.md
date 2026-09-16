@@ -338,3 +338,31 @@ described as the authors' official implementation or as method-chain equivalent
 while the paper's SGLang ragged flat-pack, model-load head permutation,
 variable-split all-to-all TP balancing, and DASC-WR suffix refresh are absent.
 The authoritative comparison is `METHOD_PARITY.md`.
+
+## 2026-09-16 dense-control evidence recovery
+
+The previously empty
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-align-prefix-control-v10`
+directory did not by itself support the README's dense-control claim. The
+stopped container
+`dasc_qwen36_dense_align_prefix_v10_20260915` still existed and was audited
+without restarting it. Container metadata proves image
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`,
+physical NPU4-7 mapped to logical 0-3, TP4, Mamba align mode, 9 GiB manual cache,
+and `FULL_DECODE_ONLY` capture sizes 1, 2, 4, 8, and 16. It exited 0 and had no
+DASC repository or plugin mount.
+
+The retained Docker log proves all five captures completed, the service became
+ready, ACL graph replay occurred, and one chat-completion request returned HTTP
+200. It does not contain the client response body. Therefore graph/service
+success is verified, while the historical exact-`OK` output claim is not.
+Recovered raw files and hashes:
+
+- `container-inspect.recovered.txt`:
+  `f7a23feab93e80d6586ff7aba19073031f92a9dcd7b746e80e4e41a5d8925162`
+- `service-log.tail250.recovered.txt`:
+  `c504ca2f489d2c819866af229b979bd3e72bb35dee1dc6e8ff4fb9087fbc97c1`
+
+This closes the narrow question of whether the dense stack can capture the
+five graphs. It does not prove response-content equivalence, DASC correctness,
+performance, or quality.

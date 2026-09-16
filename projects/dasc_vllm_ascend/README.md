@@ -51,9 +51,13 @@ validation and must not be used for a performance claim.
 
 ## Physical-cache integration status (2026-09-16)
 
-A same-configuration, plugin-disabled dense control completed all five
-`FULL_DECODE_ONLY` graph captures and returned the exact short response
-`OK`. Physical attempt v12r4 also proved plugin discovery and real DASC
+A stopped same-configuration dense-control container was recovered and audited.
+Its immutable metadata proves the pinned image, physical NPU4-7 mapping, exact
+serve arguments, and absence of a DASC source/plugin mount. Its retained Docker
+log proves completion of all five `FULL_DECODE_ONLY` graph captures, server
+readiness, ACL-graph replay, and one successful HTTP 200 completion request.
+The client response body was not retained, so the earlier exact-`OK` claim is
+withdrawn as unverified. Physical attempt v12r4 also proved plugin discovery and real DASC
 activation on all four TP ranks: the heterogeneous group, TP-aligned geometry,
 worker dispatch, Mamba lifecycle, and twelve compact physical cache bindings
 were recorded. It then failed during graph capture in Ascend FIAS's no-RoPE
