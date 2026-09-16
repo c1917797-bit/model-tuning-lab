@@ -15,7 +15,7 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "dense_control_graph_evidence_recovered_candidate_graph_failure_open",
+  "status": "graph_boundary_successor_ready_waiting_for_exclusive_npu4_7",
   "decision": "open",
   "next_actions": [
     "Keep the verified dense-storage numerical canary as a closed reachability result; do not tune or benchmark it as a performance candidate.",
@@ -23,7 +23,10 @@
     "Keep commit 373b448 and immutable v12r5 artifacts as the rejected first-spec dispatch attempt; the adapter fired on four ranks but storage_first and dispatch_first were already the same attention layer and graph capture failed identically.",
     "Keep the failed adapter out of the active plugin tree while preserving its Git history.",
     "Complete the paper-to-code parity matrix and label the current implementation paper-derived DASC-NR Ascend adaptation until an author repository is released or the missing SGLang mechanisms are independently reproduced.",
-    "Audit downstream consumers of the mixed UniformTypeKVCacheSpecs outer wrapper and localize the no-RoPE decision with source-backed metadata invariants before another NPU run.",
+    "Use the graph-boundary successor at commit ff350dc: scheduler-owned compact storage stays authoritative, fixed-address dense workspaces stay permanently bound, metadata remapping and restore/checkpoint occur outside the captured model call.",
+    "Keep the complete pinned-image software gate: 45 tests passed, including replay with changing block IDs, stable workspace/index pointers, shape variants, and exception cleanup.",
+    "Wait for exclusive physical NPU4-7 availability. A running vllm-ascend container currently declares all eight NPUs and is starting a DP2 x TP4 service; do not stop it, share the cards, or launch the successor while that claim is active.",
+    "Prepare a new immutable v12r6 result root and owned container from the preserved v12r5 launch identity; refuse overwrite, recheck ownership after lock acquisition, and run only once.",
     "Do not start formal performance or quality work unless a materially different successor passes service, strict canary, activation, ownership, and physical-byte verification.",
     "Use commit 5f93b14 cache-hit quality adapter for formal quality runs; --require-cache-hit must fail closed on a zero hit delta.",
     "Use the hash-pinned tokenizer context audit and max_model_len=44032 for both formal arms; reject truncation and the preserved invalid two-token audit.",
@@ -44,6 +47,17 @@
     "service_log_sha256": "0c4c844f58c378325c82673b4c2192bf9f3336e9c046e1cc8af8f2543002218a",
     "port": 8030,
     "physical_npus": [4, 5, 6, 7]
+  },
+  "successor": {
+    "commit": "ff350dc",
+    "design": "fixed-address graph-boundary recurrent-state virtualization",
+    "software_gate": "45 passed in quay.io/ascend/vllm-ascend:v0.23.0",
+    "maintainer_tree_validation": "passed_26_skills",
+    "planned_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-graph-stable-v12r6",
+    "planned_container": "dasc_qwen36_physical_graph_stable_v12r6_20260916",
+    "launch_state": "not_started_due_to_active_all_npu_container_claim",
+    "performance_result": null,
+    "quality_result": null
   },
   "dense_control": {
     "container": "dasc_qwen36_dense_align_prefix_v10_20260915",
