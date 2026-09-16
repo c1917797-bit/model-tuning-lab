@@ -193,3 +193,9 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   devices in the startup gap. Attribute every conflicting PID through its
   cgroup/container identity, never stop an unowned workload, and classify a
   resource-collision run as inconclusive rather than an algorithm failure.
+- Keep the ownership evidence layers separate: a live container device mapping
+  is a reservation/overlap signal, a device-side PID proves active execution,
+  and HBM measures allocation. Under an exclusive-use contract, any foreign
+  overlapping mapping is a launch blocker even when no NPU PID is present; do
+  not describe that idle mapping as active compute, and do not weaken the gate
+  merely to consume apparently free memory.
