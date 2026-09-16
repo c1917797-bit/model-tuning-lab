@@ -39,13 +39,17 @@ def main() -> int:
     parser.add_argument("--activation", type=Path, required=True)
     args = parser.parse_args()
     prefix = "\n".join(
-        f"Record {index:04d}: deterministic replay probe." for index in range(100)
+        f"Record {index:04d}: DASC recurrent-state reuse must preserve exact deterministic semantics."
+        for index in range(100)
     )
-    prompt = prefix + "\nQuestion: Return one short word."
+    prompt = prefix + "\nQuestion: Return exactly the word VERIFIED."
     payload = {
         "model": args.model,
         "messages": [
-            {"role": "system", "content": "Do not show hidden reasoning."},
+            {
+                "role": "system",
+                "content": "Follow the requested exact output. Do not show hidden reasoning.",
+            },
             {"role": "user", "content": prompt},
         ],
         "temperature": 0,
