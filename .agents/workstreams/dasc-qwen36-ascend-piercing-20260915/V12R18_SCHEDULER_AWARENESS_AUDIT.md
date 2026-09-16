@@ -68,6 +68,10 @@ The plugin patch now covers both representations:
 - scheduler config: wrap the actual alias imported by `vllm.v1.engine.core`,
   detect Mamba before upstream reduction, call the original reducer, keep the
   resulting attention spec, and attach an explicit Mamba-lifecycle marker;
+- import timing: patch the defining `kv_cache_utils` function first; if
+  EngineCore is already loaded, patch its existing alias after proving both
+  references are identical, otherwise let its later import pick up the
+  patched definition without forcing a circular import;
 - `KVCacheConfig.has_mamba_layers`: honor the explicit marker, native direct
   Mamba groups, or inner aggregate Mamba members;
 - fail closed if the EngineCore and `kv_cache_utils` function aliases differ,
@@ -78,7 +82,8 @@ The plugin patch now covers both representations:
 The regression test reproduces upstream's deep-copy/first-inner reduction. It
 requires the reduced spec to remain `FullAttentionSpec`, both lifecycle flags
 to be true for the mixed aggregate, and both flags to remain false for a pure
-attention config.
+attention config. Separate tests require a detached already-loaded EngineCore
+alias to fail closed and an unloaded EngineCore to use the deferred path.
 
 ## Required gates before NPU
 

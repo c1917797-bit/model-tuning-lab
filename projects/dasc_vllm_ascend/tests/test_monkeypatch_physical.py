@@ -601,6 +601,44 @@ def test_scheduler_awareness_rejects_detached_engine_alias(tmp_path):
         )
 
 
+def test_scheduler_awareness_defers_alias_when_engine_not_loaded(
+    monkeypatch, tmp_path
+):
+    import sys
+
+    class FakeKVCacheConfig:
+        @property
+        def has_mamba_layers(self):
+            return False
+
+        @property
+        def needs_kv_cache_zeroing(self):
+            return self.has_mamba_layers
+
+    def module_generator(configs):
+        return configs[0]
+
+    monkeypatch.delitem(sys.modules, "vllm.v1.engine.core", raising=False)
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    kv_cache_utils = SimpleNamespace(
+        generate_scheduler_kv_cache_config=module_generator
+    )
+    physical_patch._install_heterogeneous_cache_config_awareness_patch(
+        config,
+        FakeKVCacheConfig,
+        kv_cache_utils,
+    )
+    assert kv_cache_utils.generate_scheduler_kv_cache_config is not module_generator
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    assert events[-1]["scheduler_alias_patched"] is False
+    assert events[-1]["scheduler_alias_deferred"] is True
+
+
 def test_heterogeneous_cascade_guard_disables_only_uniform_group(tmp_path):
     from vllm.v1.kv_cache_interface import (
         FullAttentionSpec,

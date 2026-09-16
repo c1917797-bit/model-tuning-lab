@@ -12,6 +12,7 @@ import hashlib
 import importlib.metadata
 import inspect
 import itertools
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -240,7 +241,7 @@ def _install_heterogeneous_cache_config_awareness_patch(
     config: DascConfig,
     kv_cache_config_class: Any,
     kv_cache_utils: Any,
-    engine_core: Any,
+    engine_core: Any = None,
 ) -> None:
     """Preserve Mamba lifecycle flags across scheduler-config reduction.
 
@@ -266,8 +267,13 @@ def _install_heterogeneous_cache_config_awareness_patch(
     )
 
     original_has_mamba = kv_cache_config_class.has_mamba_layers
-    original_generate = engine_core.generate_scheduler_kv_cache_config
-    if kv_cache_utils.generate_scheduler_kv_cache_config is not original_generate:
+    original_generate = kv_cache_utils.generate_scheduler_kv_cache_config
+    if engine_core is None:
+        engine_core = sys.modules.get("vllm.v1.engine.core")
+    if (
+        engine_core is not None
+        and engine_core.generate_scheduler_kv_cache_config is not original_generate
+    ):
         raise DascRuntimeUnsupported(
             "EngineCore scheduler cache-config alias differs from kv_cache_utils"
         )
@@ -328,13 +334,17 @@ def _install_heterogeneous_cache_config_awareness_patch(
     kv_cache_utils.generate_scheduler_kv_cache_config = (
         generate_dasc_scheduler_config
     )
-    engine_core.generate_scheduler_kv_cache_config = generate_dasc_scheduler_config
+    if engine_core is not None:
+        engine_core.generate_scheduler_kv_cache_config = (
+            generate_dasc_scheduler_config
+        )
     kv_cache_config_class._mst_dasc_heterogeneous_awareness_installed = True
     emit(
         config.evidence_path,
         "heterogeneous_cache_config_awareness_installed",
         mode=config.mode,
-        scheduler_alias_patched=True,
+        scheduler_alias_patched=engine_core is not None,
+        scheduler_alias_deferred=engine_core is None,
         preserves_attention_manager=True,
         restores_mamba_block_aligned_split=True,
         restores_kv_cache_zeroing=True,
@@ -1039,7 +1049,6 @@ def install(config: DascConfig) -> None:
     from vllm.model_executor.models.qwen3_5 import Qwen3_5ForConditionalGeneration
     from vllm.distributed.parallel_state import get_tp_group
     from vllm.forward_context import get_forward_context
-    from vllm.v1.engine import core as engine_core
     from vllm.v1.kv_cache_interface import KVCacheConfig
     from vllm.v1.worker import mamba_utils
     from vllm.v1.core import kv_cache_utils
@@ -1150,7 +1159,6 @@ def install(config: DascConfig) -> None:
             config,
             KVCacheConfig,
             kv_cache_utils,
-            engine_core,
         )
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
