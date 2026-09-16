@@ -152,21 +152,15 @@ class StableAscendGDNMetadataRemapper:
                 active_slots = active_slots.to(device=plan.block_ids.device)
             if active_slots.unique().numel() != active_slots.numel():
                 raise ValueError("active request slots must be unique")
-            mapped_indices = tuple(
-                torch.where(
-                    indices != self.pad_slot_id,
-                    active_slots.index_select(
-                        0,
-                        torch.where(
-                            indices != self.pad_slot_id,
-                            indices,
-                            torch.zeros_like(indices),
-                        ).reshape(-1).to(dtype=torch.long),
-                    ).reshape(indices.shape).to(dtype=indices.dtype),
-                    torch.full_like(indices, self.pad_slot_id),
+            # torch.where evaluates both operands: index_select on an empty
+            # slot table is invalid even when every metadata entry is padding.
+            if active_slots.numel() == 0:
+                mapped_indices = tuple(
+                    torch.full_like(indices, self.pad_slot_id)
+                    for indices in plan.remapped_indices
                 )
-                for indices in plan.remapped_indices
-            )
+            else:
+                mapped_indices = self._map_active_slots(plan, active_slots)
         remapped = metadata
         for path, source, buffer in zip(paths, mapped_indices, buffers):
             buffer.copy_(source)
@@ -174,3 +168,20 @@ class StableAscendGDNMetadataRemapper:
         if tuple(buffer.data_ptr() for buffer in buffers) != pointers:
             raise RuntimeError("stable GDN metadata buffer pointer changed")
         return remapped, ActiveSlotPlan(plan.block_ids, buffers)
+
+    def _map_active_slots(self, plan, active_slots):
+        return tuple(
+            torch.where(
+                indices != self.pad_slot_id,
+                active_slots.index_select(
+                    0,
+                    torch.where(
+                        indices != self.pad_slot_id,
+                        indices,
+                        torch.zeros_like(indices),
+                    ).reshape(-1).to(dtype=torch.long),
+                ).reshape(indices.shape).to(dtype=indices.dtype),
+                torch.full_like(indices, self.pad_slot_id),
+            )
+            for indices in plan.remapped_indices
+        )

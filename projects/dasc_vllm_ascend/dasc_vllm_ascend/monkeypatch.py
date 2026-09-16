@@ -359,6 +359,19 @@ def _install_physical_cache_patch(
         return
     original_get_spec = qwen_gdn_class.get_kv_cache_spec
     original_model_forward = model_runner_class._model_forward
+    original_dummy_run = getattr(model_runner_class, "_dummy_run", None)
+
+    if original_dummy_run is not None:
+        @functools.wraps(original_dummy_run)
+        def dummy_run_with_explicit_scope(self, *args, **kwargs):
+            previous = getattr(self, "_mst_dasc_dummy_scope", False)
+            self._mst_dasc_dummy_scope = True
+            try:
+                return original_dummy_run(self, *args, **kwargs)
+            finally:
+                self._mst_dasc_dummy_scope = previous
+
+        model_runner_class._dummy_run = dummy_run_with_explicit_scope
 
     @functools.wraps(original_get_spec)
     def compact_get_spec(self, vllm_config):
@@ -447,6 +460,7 @@ def _install_physical_cache_patch(
 
         active = []
         succeeded = False
+        is_dummy = getattr(self, "_mst_dasc_dummy_scope", False)
         try:
             owner_ids = tuple(self.input_batch.req_ids)
             restore_mask = None
@@ -461,6 +475,24 @@ def _install_physical_cache_patch(
                     remapper = StableAscendGDNMetadataRemapper()
                     module._mst_dasc_metadata_remapper = remapper
                 bridge = bind_bridge(module)
+                if is_dummy:
+                    # Capture uses synthetic metadata, not scheduler requests.
+                    # Reuse the same buffers later used for real graph replay.
+                    if bridge.active_owners:
+                        raise DascRuntimeUnsupported(
+                            "DASC dummy execution cannot overwrite live request state"
+                        )
+                    remapped_metadata, plan = remapper.prepare(original_metadata)
+                    if plan.block_ids.numel() > bridge.workspace_cache[0].shape[0]:
+                        raise DascRuntimeUnsupported(
+                            "DASC dummy state count exceeds fixed workspace capacity"
+                        )
+                    for tensor in bridge.workspace_cache:
+                        tensor.zero_()
+                    module.kv_cache = bridge.workspace_cache
+                    metadata_map[module.prefix] = remapped_metadata
+                    active.append((module, bridge, original_metadata, (), plan.block_ids))
+                    continue
                 state_indices = original_metadata.non_spec_state_indices_tensor
                 if state_indices is None:
                     raise DascRuntimeUnsupported(
@@ -550,7 +582,8 @@ def _install_physical_cache_patch(
 
             result = original_model_forward(self, *args, **kwargs)
             for _, bridge, _, owners, destination_blocks in active:
-                bridge.checkpoint(owners, destination_blocks)
+                if not is_dummy:
+                    bridge.checkpoint(owners, destination_blocks)
             succeeded = True
             return result
         finally:

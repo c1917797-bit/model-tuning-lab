@@ -15,7 +15,16 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "request_owned_active_state_integrated_waiting_for_npu_gate",
+  "status": "v12r9_dummy_scope_software_passed_npu_gate_pending_resource_release",
+  "current_plan": "PLAN_REVIEW_V12R9.md",
+  "latest_attempt": {
+    "name": "v12r8",
+    "state": "failed_before_readiness",
+    "failure": "active_slots must match discovered block ids during Ascend dummy graph execution",
+    "artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/request-owned-active-state-v12r8",
+    "performance_result": null,
+    "quality_result": null
+  },
   "decision": "open",
   "next_actions": [
     "Keep the verified dense-storage numerical canary as a closed reachability result; do not tune or benchmark it as a performance candidate.",

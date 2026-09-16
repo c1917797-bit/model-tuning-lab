@@ -68,6 +68,9 @@ def _fixture(monkeypatch, tmp_path, *, fail=False):
         def _model_forward(self, *args, **kwargs):
             return module._forward_core(None, None, None, None)
 
+        def _dummy_run(self):
+            return self._model_forward()
+
     config = SimpleNamespace(
         representative_a=-0.3,
         epsilon=0.001,
@@ -87,6 +90,57 @@ def _fixture(monkeypatch, tmp_path, *, fail=False):
         SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
     )
     return module, runner, metadata, context, observed, compact, retained
+
+
+def test_dummy_scope_preserves_storage_and_reuses_real_request_buffers(monkeypatch, tmp_path):
+    module, runner, metadata, context, observed, _, _ = _fixture(monkeypatch, tmp_path)
+    runner.input_batch.req_ids = []
+    persistent = module.kv_cache
+    before = tuple(t.clone() for t in persistent)
+    assert runner._dummy_run() == "native-result"
+    bridge = module._mst_dasc_bound_bridge
+    pointers = module._mst_dasc_metadata_remapper.pointers
+    workspace_ptrs = tuple(t.data_ptr() for t in bridge.workspace_cache)
+    assert bridge.active_owners == frozenset()
+    assert not runner._mst_dasc_dummy_scope
+    assert module.kv_cache is persistent
+    assert context.attn_metadata[module.prefix] is metadata
+    assert all(torch.equal(a, b) for a, b in zip(before, persistent))
+    runner.input_batch.req_ids = ["req-a", "req-b"]
+    runner._model_forward()
+    assert module._mst_dasc_metadata_remapper.pointers == pointers
+    assert tuple(t.data_ptr() for t in bridge.workspace_cache) == workspace_ptrs
+    with pytest.raises(physical_patch.DascRuntimeUnsupported, match="live request state"):
+        runner._dummy_run()
+    assert not runner._mst_dasc_dummy_scope
+
+
+def test_all_padding_metadata_with_empty_request_slot_table():
+    remapper = physical_patch.StableAscendGDNMetadataRemapper()
+    metadata = Metadata(torch.tensor([-1, -1], dtype=torch.int32))
+    result, plan = remapper.prepare(metadata, active_slots=torch.empty(0, dtype=torch.long))
+    assert plan.block_ids.numel() == 0
+    assert torch.equal(result.non_spec_state_indices_tensor, metadata.non_spec_state_indices_tensor)
+
+
+def test_empty_real_request_list_is_not_implicitly_dummy(monkeypatch, tmp_path):
+    module, runner, _, _, _, _, _ = _fixture(monkeypatch, tmp_path)
+    runner.input_batch.req_ids = []
+    with pytest.raises(ValueError, match="match discovered block ids"):
+        runner._model_forward()
+
+
+def test_dummy_failure_restores_scope_cache_and_metadata(monkeypatch, tmp_path):
+    module, runner, metadata, context, _, _, _ = _fixture(monkeypatch, tmp_path, fail=True)
+    runner.input_batch.req_ids = []
+    persistent = module.kv_cache
+    before = tuple(t.clone() for t in persistent)
+    with pytest.raises(RuntimeError, match="native failure"):
+        runner._dummy_run()
+    assert not runner._mst_dasc_dummy_scope
+    assert module.kv_cache is persistent
+    assert context.attn_metadata[module.prefix] is metadata
+    assert all(torch.equal(a, b) for a, b in zip(before, persistent))
 
 
 def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_path):
