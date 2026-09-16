@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import json
 from types import SimpleNamespace
 
 import pytest
@@ -120,6 +121,16 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
     assert torch.equal(
         dense_temporal[:2].index_select(1, retained),
         persistent_cache[1].index_select(0, torch.tensor([2, 6])),
+    )
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    bound = next(row for row in events if row["event"] == "physical_cache_bound")
+    assert bound["allocation_matches_spec"] is True
+    assert bound["actual_page_bytes"] == compact.page_size_bytes
+    assert bound["persistent_bytes"] == (
+        bound["num_blocks"] * compact.page_size_bytes
     )
 
 

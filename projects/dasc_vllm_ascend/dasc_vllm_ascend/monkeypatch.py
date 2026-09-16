@@ -404,6 +404,16 @@ def _install_physical_cache_patch(
         )
         module._mst_dasc_bound_bridge = bridge
         module.kv_cache = bridge.workspace_cache
+        num_blocks = bridge.conv_storage.shape[0]
+        expected_persistent_bytes = (
+            module._mst_dasc_compact_page_bytes * num_blocks
+        )
+        if bridge.persistent_bytes != expected_persistent_bytes:
+            raise DascRuntimeUnsupported(
+                "DASC runner allocation does not match compact cache spec: "
+                f"actual={bridge.persistent_bytes} "
+                f"expected={expected_persistent_bytes}"
+            )
         emit(
             config.evidence_path,
             "physical_cache_bound",
@@ -412,7 +422,9 @@ def _install_physical_cache_patch(
             dense_page_bytes=module._mst_dasc_dense_page_bytes,
             compact_page_bytes=module._mst_dasc_compact_page_bytes,
             persistent_bytes=bridge.persistent_bytes,
-            num_blocks=bridge.conv_storage.shape[0],
+            actual_page_bytes=bridge.persistent_bytes // num_blocks,
+            allocation_matches_spec=True,
+            num_blocks=num_blocks,
         )
         return bridge
 
