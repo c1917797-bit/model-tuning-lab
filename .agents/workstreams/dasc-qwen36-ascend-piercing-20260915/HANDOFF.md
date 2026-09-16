@@ -399,3 +399,56 @@ upstream Torch/read-only-cache warnings, and `git diff --check` passes. This is
 still not target-device evidence. Before an NPU launch, commit this stage and
 recheck live NPU4-7 ownership, container declarations, port 8030, immutable
 result-root absence, and the controller/plugin snapshot provenance.
+
+## 2026-09-16 v12r11-v12r16 numerical localization
+
+The head-dimension blocker was bypassed with a plugin-owned head-256 prefill
+fallback. v12r11 then reached service readiness with the W64 DASC selector and
+passed activation/allocation checks, but three identical long-prefix requests
+produced different nonsensical continuations. That result is not performance
+or quality evidence.
+
+An exact plugin-disabled dense control, v12r13, used the same 1,938-token
+prompt, system message, seed, temperature, output length, and prefix-cache
+sequence. It produced `VERIFIED` three times, had
+`identical_replays=true`, and observed 3,072 prefix-hit tokens. Its artifact
+SHA256 is
+`715aba4ddf6b9f35259034c96ea17051d66d350f20c71be83c54df48d20ce2d8`.
+This excludes the base head-256 fallback and ordinary prefix cache as the
+source of nondeterminism.
+
+v12r14 and v12r15 were control-plane failures, not numerical experiments.
+v12r14 exposed that the mixed attention/Mamba grouping path incorrectly
+admitted only heterogeneous Mamba pages. v12r15 fixed that admission and
+proved all 192 GDN cache bindings, but copied an obsolete canary script that
+did not recognize the all-head diagnostic flag. Both immutable roots are
+retained and must not be rerun.
+
+v12r16 used the commit-current canary and retained all 12 local GDN heads in
+all 48 layers on every TP rank. All 192 physical bindings had exact actual
+bytes equal to the compact spec. The service initialized and the short request
+returned exact `OK`. The three identical 1,938-token long-prefix requests
+still diverged:
+
+- `VERDICT: VERDICT: The user wants a summary of a response`
+- `- 0 ... The "onnxr" field is not a`
+- `[alright, there's no other way, this is a must]`
+
+Prefix-cache hits increased by 4,608 tokens, so this is specifically a
+cache-hit lifecycle failure. The all-head geometry removes DASC selection and
+zero-filled omitted heads from the causal path. The current defect is in the
+request-owned recurrent-state restore/continue bridge or its block/slot
+mapping. Physical-canary SHA256 is
+`9159d380fbaaf0778d7a7e82b8c6e92345f5345de9a25d842d5f537a8827fcfa`;
+evidence SHA256 is
+`a8e69ee0618268a9cca37a481a4fafe0cb65a9fd1495481b3c68292e74daa184`;
+service-log SHA256 is
+`e6e4e22c0661497fda2c5f2484c764168498149b6f0226fbd96fe58854b16ed3`.
+The owned container stopped and NPU4-7 returned to the 2,868 MiB idle floor.
+
+Do not benchmark or run E2E quality next. Instrument the first cache-hit token
+boundary and compare plugin-disabled dense lifecycle with all-head bridge:
+request identity, global/local block mapping, compact source row, active dense
+slot, and state checksums before restore, before native recurrent execution,
+and after checkpoint. Require exact first-token/logit equivalence and stable
+multi-step state evolution before reintroducing pruning.
