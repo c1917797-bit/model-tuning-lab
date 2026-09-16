@@ -29,9 +29,14 @@ Weight-derived DASC head-retention counts using `epsilon=1e-3` and representativ
 
 Full checkpoint compression will be lower than these temporal-only ratios because convolution state remains part of the checkpoint accounting.
 
+The first TP4 implementation does not realize the raw 1.33x temporal ratio at
+`W_max=64`: layerwise MAX padding raises stored heads from 1728 to 2084,
+leaving only about 1.11x temporal compression. This is an implementation
+adaptation cost. The exact paper path avoids it through balanced placement and
+variable-split communication.
+
 ## Implication
 
 The first practical canary should start with DASC-NR at `W_max=64` or `W_max=128`, not with `W_max=512/1024`. The latter are useful stress points but are more likely to trade quality for capacity.
 
 The next blocker is not the selector; it is the service integration path: finding or adding a plugin-owned recurrent state checkpoint store/load path that can be activated only on prefix-cache hits.
-

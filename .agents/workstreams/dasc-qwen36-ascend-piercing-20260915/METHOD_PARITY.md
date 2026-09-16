@@ -21,11 +21,11 @@ then replace inference-based entries with file/function/output comparisons.
 | --- | --- | --- | --- | --- |
 | GDN static decay | `g=-exp(A_log)*softplus(a+dt_bias)`, `a=-0.3` | Same formula in `selector.head_horizons` | Independent Python-scalar reference agrees for FP32 and BF16 source parameters | Synthetic reference gate passed |
 | Retention horizon | `H_s=ln(epsilon)/g`, `epsilon=1e-3` | Same formula and default constants | Near-threshold selection is checked against the independent scalar result | Synthetic boundary/dtype gate passed |
-| GDN selection | Retain full head state when `H_s>W_max` | `retained_head_indices` | Existing selector tests plus model count manifest | Implemented |
+| GDN selection | Retain full head state when `H_s>W_max` | `retained_head_indices` | All 48 raw checkpoint layers match the independent scalar indices and the architecture manifest at `W_max=64` | Real-weight gate passed |
 | DASC-NR load | Restore retained units; omitted units start at zero only on cache-hit Load, then accumulate normally while the request remains active | v12r6 is superseded; the plugin now assigns stable request-owned dense slots, exposes compact tensors to scheduler copy outside the native call, and preserves omitted units across synthetic decode/block transitions | Pinned-image lifecycle tests pass; multi-step NPU equality/finite-state gate remains | Framework integration implemented; NPU gate incomplete |
 | Physical checkpoint | Ragged flat-pack with per-layer offsets | Heterogeneous per-layer Mamba specs aggregated into one vLLM physical group | Physical bytes and cache-capacity verifier | Different representation; v12r7 NPU gate pending |
 | TP compute placement | Model-load permutation of coupled tensors | No weight/head permutation | Exact permutation and output-equivalence test | Missing |
-| TP storage balance | Shared TP pool with variable-split all-to-all on Store and inverse on Load | Per-layer MAX retained count; each rank pads with its next-longest heads | Rank payload and communication trace | Not equivalent |
+| TP storage balance | Shared TP pool with variable-split all-to-all on Store and inverse on Load | Per-layer MAX retained count; each rank pads with its next-longest heads | Raw TP4 audit: 1728 threshold-retained heads become 2084 physically stored heads, adding 356 | Not equivalent; measured capacity loss |
 | Full-attention KV | Unchanged | Intended unchanged; synthetic mixed group currently affects runner metadata | Dense/candidate metadata and graph-capture comparison | Not yet proved |
 | Convolution state | Stored uncompressed in BF16 | Kept dense with native lifecycle | Prefix copy/invalidation and byte accounting | Implemented |
 | Temporal state | Stored in FP32 | Compact persistent FP32, dense active FP32 workspace | ABI, restore/checkpoint, and byte gates | Implemented, graph gate incomplete |
@@ -41,11 +41,25 @@ then replace inference-based entries with file/function/output comparisons.
   paper-equivalent TP balancing; paper performance reproduction; end-to-end
   accuracy equivalence.
 
+## TP4 capacity audit
+
+The immutable raw-weight audit at
+`/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v1.json`
+passed all 48 GDN layers. Its SHA256 is
+`ebfa8d00becbefe3bde4c40bc9a72843352abfdc56adf1b0bf4aaee6fd80f6b7`.
+
+At `W_max=64`, the paper threshold retains 1728 of 2304 global temporal
+heads (1.33x temporal-only compression). The current layerwise TP-MAX padding
+stores 2084 heads (about 1.11x), an overhead of 356 heads. It therefore
+realizes only 220 of the 576 possible head removals. This is a measured
+adaptation tax, not a paper limitation, and makes rank-balanced placement or
+paper-equivalent variable-split storage a priority if v12r7 proves runtime
+correct but shows weak capacity/performance benefit.
+
 ## Required closure gates
 
-1. Keep the independent equations 2-3 FP32/BF16 synthetic reference gate;
-   additionally compare plugin-selected indices against the raw-safetensor
-   architecture manifest layer-by-layer when the TP-sharded workers next load.
+1. Keep the completed independent equations 2-3 gates: FP32/BF16 synthetic
+   threshold tests and the 48-layer raw-safetensor TP4 manifest audit.
 2. Decide explicitly whether exact paper TP balancing is required. If adapted,
    quantify its capacity loss relative to ragged shared-pool placement and
    label the variant.

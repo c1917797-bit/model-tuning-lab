@@ -26,6 +26,7 @@
     "Treat v12r6 as superseded: restoring compact state before every model forward violates the paper's cache-load boundary by erasing omitted-head updates accumulated after the first token.",
     "Keep the integrated request-owned dense active-state bridge: a request keeps one stable dense slot across decode steps and physical block transitions; compact restore occurs only on true new/resumed prefix Load.",
     "Keep the request-lifecycle regression gate: first Load zero-fills omitted heads, a normal step updates them, same-request block transition preserves them, and release/reactivate zero-fills them again while restoring retained heads.",
+    "Treat the TP4 MAX-padding tax as measured, not hypothetical: W_max=64 retains 1728 raw heads but stores 2084 after layerwise rank equalization. If v12r7 is correct but weak, prioritize rank-balanced weight placement or paper-equivalent variable-split Store/Load rather than tuning around the 1.11x temporal ceiling.",
     "Wait for exclusive physical NPU4-7 availability. Physical NPU4-7 currently have no processes, but a running vllm-ascend container still declares all eight NPUs; do not stop it, share the cards, or launch the successor while that claim is active.",
     "Do not launch v12r6; its controller now fails closed on the semantic supersession. Prepare a newly named immutable attempt only after request identity, release/resume, metadata remapping, and graph-pointer gates pass.",
     "Do not start formal performance or quality work unless a materially different successor passes service, strict canary, activation, ownership, and physical-byte verification.",
@@ -72,6 +73,17 @@
     "tested_head": "68a9ed4549698bb67d9ebb83d67f454b7ad22f9e",
     "lifecycle_evidence_gate_commit": "40139e7",
     "selector_reference_gate_commit": "68a9ed4",
+    "selector_manifest": {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v1.json",
+      "sha256": "ebfa8d00becbefe3bde4c40bc9a72843352abfdc56adf1b0bf4aaee6fd80f6b7",
+      "ok": true,
+      "layer_count": 48,
+      "w_max": 64,
+      "tp_size": 4,
+      "threshold_retained_heads": 1728,
+      "tp_padded_heads": 2084,
+      "tp_padding_overhead_heads": 356
+    },
     "performance_result": null,
     "quality_result": null
   },
