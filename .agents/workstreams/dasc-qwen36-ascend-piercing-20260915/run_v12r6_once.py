@@ -42,6 +42,7 @@ PORT = 8030
 BLOCK_ON_IDLE_CONTAINER_CLAIMS = True
 ADDITIONAL_CONFIG: str | None = None
 PLUGIN_MODE = "physical-cache-eager"
+W_MAX = "64"
 SUPERSEDED_REASON = (
     "v12r6 is superseded: its per-forward compact restore would erase "
     "omitted-head updates after the first DASC-NR cache-load boundary"
@@ -322,7 +323,7 @@ def launch() -> str:
         "VLLM_PLUGINS": "ascend,dasc_vllm_ascend",
         "MST_DASC_ENABLE": "1",
         "MST_DASC_MODE": PLUGIN_MODE,
-        "MST_DASC_W_MAX": "64",
+        "MST_DASC_W_MAX": W_MAX,
     }.items():
         args.extend(["-e", f"{key}={value}"])
     serve_args = [
