@@ -479,12 +479,53 @@ def _install_physical_cache_patch(
                         ],
                         dtype=bool,
                     )
+                prior_owners = bridge.active_owners
                 bridge.release(
-                    tuple(bridge.active_owners.difference(owner_ids))
+                    tuple(prior_owners.difference(owner_ids))
+                )
+                continuing = tuple(
+                    owner for owner in owner_ids if owner in prior_owners
+                )
+                new_owners = tuple(
+                    owner for owner in owner_ids if owner not in prior_owners
                 )
                 request_slots = bridge.activate(
                     owner_ids, source_blocks, restore_mask
                 )
+                if (
+                    new_owners
+                    and not getattr(
+                        module, "_mst_dasc_request_init_emitted", False
+                    )
+                ):
+                    restored_count = sum(
+                        self.requests[owner].num_computed_tokens > 0
+                        for owner in new_owners
+                    )
+                    emit(
+                        config.evidence_path,
+                        "request_active_state_initialized",
+                        layer=module.prefix,
+                        mode=config.mode,
+                        new_request_count=len(new_owners),
+                        restored_prefix_count=restored_count,
+                        zero_initialized_count=len(new_owners) - restored_count,
+                    )
+                    module._mst_dasc_request_init_emitted = True
+                if (
+                    continuing
+                    and not getattr(
+                        module, "_mst_dasc_request_continuity_emitted", False
+                    )
+                ):
+                    emit(
+                        config.evidence_path,
+                        "request_active_state_continued",
+                        layer=module.prefix,
+                        mode=config.mode,
+                        continued_request_count=len(continuing),
+                    )
+                    module._mst_dasc_request_continuity_emitted = True
                 sorted_blocks, order = source_blocks.sort()
                 if sorted_blocks.unique().numel() != sorted_blocks.numel():
                     raise DascRuntimeUnsupported(

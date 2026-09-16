@@ -203,6 +203,16 @@ def test_graph_boundary_reuses_buffers_with_changed_scheduler_blocks(
         workspace_cache[1][:2, [1, 2]],
         active_temporal_before[:, [1, 2]] + 13,
     )
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    assert sum(
+        row["event"] == "request_active_state_initialized" for row in events
+    ) == 1
+    assert sum(
+        row["event"] == "request_active_state_continued" for row in events
+    ) == 1
 
 
 def test_aligned_hybrid_grouping_preserves_exact_inner_page_sizes(tmp_path):

@@ -345,6 +345,17 @@ def validate_allocation_evidence() -> None:
         for line in (RESULT / "evidence.jsonl").read_text(encoding="utf-8").splitlines()
     ]
     physical = [row for row in rows if row.get("event") == "physical_cache_bound"]
+    initialized = {
+        row.get("pid")
+        for row in rows
+        if row.get("event") == "request_active_state_initialized"
+    }
+    continued = {
+        row.get("pid")
+        for row in rows
+        if row.get("event") == "request_active_state_continued"
+    }
+    physical_pids = {row.get("pid") for row in physical}
     checks = []
     for row in physical:
         actual_page = row.get("actual_page_bytes")
@@ -371,7 +382,21 @@ def validate_allocation_evidence() -> None:
         "schema": "mst.dasc.physical-allocation/v1",
         "binding_count": len(physical),
         "checks": checks,
-        "ok": bool(checks) and all(check["ok"] for check in checks),
+        "request_state_initialized_pids": sorted(initialized),
+        "request_state_continued_pids": sorted(continued),
+        "physical_cache_pids": sorted(physical_pids),
+        "lifecycle_cohort_aligned": (
+            len(physical_pids) == 4
+            and initialized == physical_pids
+            and continued == physical_pids
+        ),
+        "ok": (
+            bool(checks)
+            and all(check["ok"] for check in checks)
+            and len(physical_pids) == 4
+            and initialized == physical_pids
+            and continued == physical_pids
+        ),
     }
     atomic_json(RESULT / "physical-allocation.json", result)
     if not result["ok"]:
