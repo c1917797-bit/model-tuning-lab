@@ -139,6 +139,54 @@ def _ensure_ascend_global_patch() -> None:
         ensure()
 
 
+def _install_heterogeneous_cache_config_awareness_patch(
+    config: DascConfig, kv_cache_config_class: Any
+) -> None:
+    """Expose inner Mamba specs to scheduler-wide lifecycle guards.
+
+    The scheduler copy of a ``UniformTypeKVCacheSpecs`` group is reduced to a
+    representative inner spec.  Our mixed attention/Mamba aggregate keeps an
+    attention spec first so the shared physical block table still computes
+    attention slot mappings.  Without this adapter, ``KVCacheConfig`` therefore
+    reports no Mamba layers: block-aligned prefill splitting and cache zeroing
+    are both disabled even though the worker owns recurrent state tensors.
+    """
+    if getattr(
+        kv_cache_config_class,
+        "_mst_dasc_heterogeneous_awareness_installed",
+        False,
+    ):
+        return
+
+    from vllm.v1.kv_cache_interface import MambaSpec, UniformTypeKVCacheSpecs
+
+    original_has_mamba = kv_cache_config_class.has_mamba_layers.fget
+    if original_has_mamba is None:
+        raise DascRuntimeUnsupported("KVCacheConfig.has_mamba_layers is not readable")
+
+    def has_mamba_layers(self):
+        if original_has_mamba(self):
+            return True
+        return any(
+            isinstance(group.kv_cache_spec, UniformTypeKVCacheSpecs)
+            and any(
+                isinstance(inner_spec, MambaSpec)
+                for inner_spec in group.kv_cache_spec.kv_cache_specs.values()
+            )
+            for group in self.kv_cache_groups
+        )
+
+    kv_cache_config_class.has_mamba_layers = property(has_mamba_layers)
+    kv_cache_config_class._mst_dasc_heterogeneous_awareness_installed = True
+    emit(
+        config.evidence_path,
+        "heterogeneous_cache_config_awareness_installed",
+        mode=config.mode,
+        enables_block_aligned_split=True,
+        enables_cache_zeroing=True,
+    )
+
+
 def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: Any) -> None:
     """Group aligned attention and heterogeneous Mamba pages in one pool.
 
@@ -936,6 +984,7 @@ def install(config: DascConfig) -> None:
     from vllm.forward_context import get_forward_context
     from vllm.v1.worker import mamba_utils
     from vllm.v1.core import kv_cache_utils
+    from vllm.v1.kv_cache_interface import KVCacheConfig
     from vllm_ascend.ops import gdn
     from vllm_ascend.device import device_op, utils as device_utils
     from vllm_ascend.patch.worker import patch_mamba_utils as ascend_patch
@@ -1039,6 +1088,7 @@ def install(config: DascConfig) -> None:
         _install_head256_prefill_fallback_patch(
             config, device_op.DeviceOperator, device_utils
         )
+        _install_heterogeneous_cache_config_awareness_patch(config, KVCacheConfig)
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
         _install_heterogeneous_mamba_lifecycle_patch(config, mamba_utils)

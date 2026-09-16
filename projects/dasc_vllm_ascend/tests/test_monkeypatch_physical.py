@@ -591,6 +591,57 @@ def test_heterogeneous_mamba_lifecycle_filters_attention_layers(tmp_path):
     assert observed["layer_names"] == ["mamba6", "mamba12"]
 
 
+def test_heterogeneous_cache_config_exposes_inner_mamba_lifecycle(tmp_path):
+    from vllm.v1.kv_cache_interface import (
+        FullAttentionSpec,
+        KVCacheConfig,
+        KVCacheGroupSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    attention = FullAttentionSpec(
+        block_size=1536,
+        num_kv_heads=1,
+        head_size=128,
+        dtype=torch.bfloat16,
+    )
+    mamba = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (12, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    aggregate = UniformTypeKVCacheSpecs(
+        block_size=1536,
+        kv_cache_specs={"attn": attention, "mamba": mamba},
+    )
+    mixed = KVCacheConfig(
+        num_blocks=4,
+        kv_cache_tensors=[],
+        kv_cache_groups=[KVCacheGroupSpec(["attn", "mamba"], aggregate)],
+    )
+    attention_only = KVCacheConfig(
+        num_blocks=4,
+        kv_cache_tensors=[],
+        kv_cache_groups=[KVCacheGroupSpec(["attn"], attention)],
+    )
+    assert not mixed.has_mamba_layers
+    assert not mixed.needs_kv_cache_zeroing
+
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_heterogeneous_cache_config_awareness_patch(
+        config, KVCacheConfig
+    )
+
+    assert mixed.has_mamba_layers
+    assert mixed.needs_kv_cache_zeroing
+    assert not attention_only.has_mamba_layers
+    assert not attention_only.needs_kv_cache_zeroing
+
+
 def test_head256_prefill_uses_existing_npu_fusion_attention_fallback(tmp_path):
     calls = []
 

@@ -426,8 +426,9 @@ retained and must not be rerun.
 
 v12r16 used the commit-current canary and retained all 12 local GDN heads in
 all 48 layers on every TP rank. All 192 physical bindings had exact actual
-bytes equal to the compact spec. The service initialized and the short request
-returned exact `OK`. The three identical 1,938-token long-prefix requests
+bytes equal to the compact spec. The service initialized and the short response
+body was `OK\n\n`, but the strict short gate was false; do not describe it as
+exact. The three identical 1,938-token long-prefix requests
 still diverged:
 
 - `VERDICT: VERDICT: The user wants a summary of a response`
@@ -452,3 +453,36 @@ request identity, global/local block mapping, compact source row, active dense
 slot, and state checksums before restore, before native recurrent execution,
 and after checkpoint. Require exact first-token/logit equivalence and stable
 multi-step state evolution before reintroducing pruning.
+
+## 2026-09-16 v12r17 bridge bypass and v12r18 lifecycle correction
+
+v12r17 kept the all-head physical layout but bypassed the request-owned bridge,
+metadata remapping, and active-state workspace completely. All 192 native cache
+bindings and TP geometry checks passed and no `request_active_state` event was
+emitted. Nevertheless, the three identical prefix-hit replays still diverged.
+Physical-canary SHA256 is
+`19f8197ea40c247cc0931d3a2d3eb9b48520a6de28826dacd508cc2377df7262`;
+evidence SHA256 is
+`68996138c90ec276601d2b840b05fddbef632517e6bcf1ee837ec6913006a4ce`;
+service-log SHA256 is
+`16ab48cc1051d0c5821f0eb2dea0e2c7978e9f8b270a67d35aae49bad05f3b7f`.
+This disproves the bridge as the sole cause.
+
+The next source audit found a lower, cache-hit-specific lifecycle defect. The
+worker aggregate is a mixed `UniformTypeKVCacheSpecs`, but vLLM 0.23's
+`KVCacheConfig.has_mamba_layers` inspects only the outer group spec. It therefore
+returned false, disabling both scheduler `_mamba_block_aligned_split` and
+`needs_kv_cache_zeroing`. At the same time, scheduler config reduces the
+aggregate to its first inner attention spec and accepts a full 1,536-token
+prefix block. A 1,938-token unsplit prefill need not leave a valid recurrent
+state at that boundary, explaining why both bridge and native controls resume
+from invalid state.
+
+The v12r18 plugin patch makes `KVCacheConfig` detect inner Mamba specs only
+while DASC physical mode is enabled. It restores the native block-aligned split
+and zeroing without changing upstream sources, selector geometry, or the
+attention-first physical dispatch. Focused tests pass 15/15 and the plugin plus
+controller suite passes 90/90 in the pinned v0.23.0 image. This is source-backed
+software evidence only. Commit/push it, then run the immutable v12r18 native
+all-head control once on physical NPU4-7. Do not benchmark performance or run
+E2E quality until the strict replay canary passes.
