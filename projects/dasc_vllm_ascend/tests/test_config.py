@@ -42,6 +42,17 @@ class ConfigTest(unittest.TestCase):
         self.assertTrue(config.enabled)
         self.assertEqual(config.mode, "physical-cache-eager")
 
+    def test_native_all_heads_control_mode_is_explicit(self):
+        env = {
+            "MST_DASC_ENABLE": "1",
+            "MST_DASC_MODE": "physical-cache-native-all-heads",
+            "MST_DASC_EVIDENCE_PATH": "/tmp/dasc-evidence.jsonl",
+        }
+        with patch.dict(os.environ, env, clear=True):
+            config = DascConfig.from_env()
+        self.assertTrue(config.enabled)
+        self.assertEqual(config.mode, "physical-cache-native-all-heads")
+
     def test_numeric_bounds(self):
         invalid = (
             ("MST_DASC_W_MAX", "0"),

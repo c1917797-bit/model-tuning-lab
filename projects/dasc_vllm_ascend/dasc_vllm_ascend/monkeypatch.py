@@ -531,6 +531,51 @@ def _install_physical_cache_patch(
         )
         return bridge
 
+    def verify_native_all_heads(module):
+        if getattr(module, "_mst_dasc_native_all_heads_verified", False):
+            return
+        retained = retained_head_indices(module, config)
+        if retained.numel() != module.A_log.numel():
+            raise DascRuntimeUnsupported(
+                "native all-heads control requires every local GDN head"
+            )
+        if len(module.kv_cache) != 2:
+            raise DascRuntimeUnsupported(
+                "native all-heads control requires two runner-owned cache tensors"
+            )
+        conv_storage, temporal_storage = module.kv_cache
+        if tuple(temporal_storage.shape[1:]) != tuple(
+            module._mst_dasc_dense_temporal_shape
+        ):
+            raise DascRuntimeUnsupported(
+                "native all-heads temporal cache does not match the dense ABI"
+            )
+        num_blocks = conv_storage.shape[0]
+        persistent_bytes = (
+            conv_storage.numel() * conv_storage.element_size()
+            + temporal_storage.numel() * temporal_storage.element_size()
+        )
+        expected_bytes = module._mst_dasc_compact_page_bytes * num_blocks
+        if persistent_bytes != expected_bytes:
+            raise DascRuntimeUnsupported(
+                "native all-heads allocation does not match cache spec: "
+                f"actual={persistent_bytes} expected={expected_bytes}"
+            )
+        emit(
+            config.evidence_path,
+            "physical_cache_bound",
+            layer=module.prefix,
+            mode=config.mode,
+            dense_page_bytes=module._mst_dasc_dense_page_bytes,
+            compact_page_bytes=module._mst_dasc_compact_page_bytes,
+            persistent_bytes=persistent_bytes,
+            actual_page_bytes=persistent_bytes // num_blocks,
+            allocation_matches_spec=True,
+            native_all_heads=True,
+            num_blocks=num_blocks,
+        )
+        module._mst_dasc_native_all_heads_verified = True
+
     @functools.wraps(original_model_forward)
     def model_forward_with_physical_bridge(self, *args, **kwargs):
         forward_context = get_forward_context()
@@ -547,6 +592,10 @@ def _install_physical_cache_patch(
                 if isinstance(module, qwen_gdn_class)
             )
             self._mst_dasc_gdn_modules = modules
+        if config.mode == "physical-cache-native-all-heads":
+            for module in modules:
+                verify_native_all_heads(module)
+            return original_model_forward(self, *args, **kwargs)
 
         active = []
         succeeded = False
@@ -983,7 +1032,10 @@ def install(config: DascConfig) -> None:
 
     load_then_install._mst_dasc_loader = True
     Qwen3_5ForConditionalGeneration.load_weights = load_then_install
-    if config.mode == "physical-cache-eager":
+    if config.mode in {
+        "physical-cache-eager",
+        "physical-cache-native-all-heads",
+    }:
         _install_head256_prefill_fallback_patch(
             config, device_op.DeviceOperator, device_utils
         )

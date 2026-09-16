@@ -193,6 +193,75 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
     )
 
 
+def test_native_all_heads_control_keeps_runner_cache_and_metadata(monkeypatch, tmp_path):
+    metadata = Metadata(torch.tensor([6], dtype=torch.int32))
+    context = SimpleNamespace(attn_metadata={"layers.0": metadata})
+    observed = {}
+
+    class FakeGdn:
+        def __init__(self):
+            self.prefix = "layers.0"
+            self.A_log = torch.zeros(4)
+            self.dt_bias = torch.zeros(4)
+            self.kv_cache = (
+                torch.zeros(8, 2, 3),
+                torch.zeros(8, 4, 2),
+            )
+
+        def get_kv_cache_spec(self, vllm_config):
+            return _dense_spec()
+
+        def _forward_core(self, *args):
+            observed["cache"] = self.kv_cache
+            observed["metadata"] = context.attn_metadata[self.prefix]
+            self.kv_cache[1][6].add_(1)
+            return "native-all-heads"
+
+    module = FakeGdn()
+
+    class FakeRunner:
+        def __init__(self):
+            self.model = SimpleNamespace(modules=lambda: (module,))
+            self.input_batch = SimpleNamespace(req_ids=["req-a"])
+            self.requests = {"req-a": SimpleNamespace(num_computed_tokens=10)}
+
+        def _model_forward(self, *args, **kwargs):
+            return module._forward_core()
+
+    config = SimpleNamespace(
+        representative_a=-0.3,
+        epsilon=0.001,
+        w_max=1e-9,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads",
+    )
+    retained = torch.arange(4, dtype=torch.long)
+    monkeypatch.setattr(
+        physical_patch, "retained_head_indices", lambda module, cfg: retained
+    )
+    physical_patch._install_physical_cache_patch(
+        config, FakeGdn, FakeRunner, lambda: context
+    )
+    compact = module.get_kv_cache_spec(
+        SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
+    )
+    persistent = module.kv_cache
+    result = FakeRunner()._model_forward()
+
+    assert result == "native-all-heads"
+    assert observed["cache"] is persistent
+    assert observed["metadata"] is metadata
+    assert not hasattr(module, "_mst_dasc_bound_bridge")
+    assert compact.shapes == _dense_spec().shapes
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    bound = next(row for row in events if row["event"] == "physical_cache_bound")
+    assert bound["native_all_heads"] is True
+    assert bound["allocation_matches_spec"] is True
+
+
 def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error(
     monkeypatch, tmp_path
 ):
