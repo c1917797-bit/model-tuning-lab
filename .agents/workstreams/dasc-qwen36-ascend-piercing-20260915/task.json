@@ -49,9 +49,11 @@
     "physical_npus": [4, 5, 6, 7]
   },
   "successor": {
-    "commit": "ff350dc",
+    "commit": "74dcdf9",
+    "graph_boundary_commit": "ff350dc",
     "design": "fixed-address graph-boundary recurrent-state virtualization",
     "software_gate": "45 passed in quay.io/ascend/vllm-ascend:v0.23.0",
+    "allocation_gate": "fail closed unless actual persistent tensor bytes equal compact spec page bytes times allocated blocks",
     "maintainer_tree_validation": "passed_26_skills",
     "planned_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-graph-stable-v12r6",
     "planned_container": "dasc_qwen36_physical_graph_stable_v12r6_20260916",
