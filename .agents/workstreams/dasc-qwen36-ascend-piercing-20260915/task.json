@@ -74,15 +74,19 @@
     "lifecycle_evidence_gate_commit": "40139e7",
     "selector_reference_gate_commit": "68a9ed4",
     "selector_manifest": {
-      "path": "/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v1.json",
-      "sha256": "ebfa8d00becbefe3bde4c40bc9a72843352abfdc56adf1b0bf4aaee6fd80f6b7",
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v2.json",
+      "sha256": "5703e1aff66593ef4eee1b3497737cc8daf4e45acc676bf9c595a6ad204712f0",
       "ok": true,
       "layer_count": 48,
       "w_max": 64,
       "tp_size": 4,
       "threshold_retained_heads": 1728,
       "tp_padded_heads": 2084,
-      "tp_padding_overhead_heads": 356
+      "tp_padding_overhead_heads": 356,
+      "ideal_balanced_padded_heads": 1788,
+      "ideal_balanced_padding_overhead_heads": 60,
+      "current_removed_heads": 220,
+      "ideal_balanced_removed_heads": 516
     },
     "performance_result": null,
     "quality_result": null

@@ -44,9 +44,9 @@ then replace inference-based entries with file/function/output comparisons.
 ## TP4 capacity audit
 
 The immutable raw-weight audit at
-`/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v1.json`
+`/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v2.json`
 passed all 48 GDN layers. Its SHA256 is
-`ebfa8d00becbefe3bde4c40bc9a72843352abfdc56adf1b0bf4aaee6fd80f6b7`.
+`5703e1aff66593ef4eee1b3497737cc8daf4e45acc676bf9c595a6ad204712f0`.
 
 At `W_max=64`, the paper threshold retains 1728 of 2304 global temporal
 heads (1.33x temporal-only compression). The current layerwise TP-MAX padding
@@ -55,6 +55,11 @@ realizes only 220 of the 576 possible head removals. This is a measured
 adaptation tax, not a paper limitation, and makes rank-balanced placement or
 paper-equivalent variable-split storage a priority if v12r7 proves runtime
 correct but shows weak capacity/performance benefit.
+
+An ideal per-layer TP4 balance would store 1788 heads, only 60 above the raw
+threshold and would remove 516 heads. Thus balancing can recover 296 of the
+356 heads currently lost to padding, raising temporal-only compression from
+about 1.11x to about 1.29x without changing the DASC threshold.
 
 ## Required closure gates
 

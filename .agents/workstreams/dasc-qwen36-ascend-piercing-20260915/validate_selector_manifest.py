@@ -196,8 +196,14 @@ def main() -> None:
             }
         )
 
+    threshold_retained = sum(row["plugin_retained"] for row in rows)
+    tp_padded = sum(row["tp_padded_heads"] for row in rows)
+    balanced_padded = sum(
+        math.ceil(row["plugin_retained"] / args.tp_size) * args.tp_size
+        for row in rows
+    )
     result = {
-        "schema": "mst.dasc.selector-manifest/v1",
+        "schema": "mst.dasc.selector-manifest/v2",
         "ok": all_ok,
         "model_dir": str(args.model_dir),
         "index_sha256": sha256(index_path),
@@ -208,10 +214,18 @@ def main() -> None:
         "w_max": args.w_max,
         "tp_size": args.tp_size,
         "layer_count": len(rows),
-        "retained_heads": sum(row["plugin_retained"] for row in rows),
-        "tp_padded_heads": sum(row["tp_padded_heads"] for row in rows),
-        "tp_padding_overhead_heads": sum(
-            row["tp_padding_overhead_heads"] for row in rows
+        "retained_heads": threshold_retained,
+        "tp_padded_heads": tp_padded,
+        "tp_padding_overhead_heads": tp_padded - threshold_retained,
+        "ideal_balanced_padded_heads": balanced_padded,
+        "ideal_balanced_padding_overhead_heads": (
+            balanced_padded - threshold_retained
+        ),
+        "current_removed_heads": (
+            len(rows) * rows[0]["heads"] - tp_padded
+        ),
+        "ideal_balanced_removed_heads": (
+            len(rows) * rows[0]["heads"] - balanced_padded
         ),
         "layers": rows,
     }
