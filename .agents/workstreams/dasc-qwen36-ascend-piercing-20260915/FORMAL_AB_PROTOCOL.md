@@ -20,8 +20,12 @@ before a superseding experiment is created.
 The first order-fixed v12 attempt exposed a PID/HBM teardown race: the external
 TP8 service temporarily removed its reported PIDs while 94% HBM remained, and
 the owned service then failed with only 1.91 GiB free per rank. Superseding
-controllers therefore require both an empty process table and HBM usage no
-greater than 5% on all physical NPU4-7 before and after lock acquisition.
+controllers therefore require both an empty process table and a bounded HBM
+floor on all physical NPU4-7 before and after lock acquisition. A later live
+idle observation established that this 910B4 host retains 8% HBM with no
+device process, so the host-local controller uses a conservative 12% ceiling.
+This remains far below the rejected 94% teardown residue and is not portable
+to a different host without a fresh idle-floor observation.
 
 After the controller is terminal, run verify_physical_v12.py against the
 immutable root. It must independently recompute the raw activation cohort,

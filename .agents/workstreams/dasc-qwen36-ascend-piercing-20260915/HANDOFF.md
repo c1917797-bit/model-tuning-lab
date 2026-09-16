@@ -143,10 +143,13 @@ independent verifier correctly rejects it because SUCCESS, evidence.jsonl, and
 physical-canary.json are absent. This is a resource handoff race, not DASC
 mechanism evidence.
 
-The successor controller must use a new immutable v12r1 root and container. It
-inherits the same mechanism code but now requires both no device PID and at
-most 5% reported HBM use on every physical NPU4-7 before and after taking the
-lock. Never reuse or overwrite the failed v12 root.
+The successor controller must use a new immutable root and container. It
+inherits the same mechanism code but requires both no device PID and a bounded
+idle HBM floor on every physical NPU4-7 before and after taking the lock.
+The initial 5% ceiling was itself invalid on this host: a fresh process-free
+observation showed a stable 8% driver/runtime floor. The corrected host-local
+ceiling is 12%, still fail-closing on the observed 94% teardown residue. Never
+reuse or overwrite the failed v12 root or any superseded successor root.
 
 The authoritative v12r1 controller is remote operation
 `exec-0000000000001326`; its immutable root is
@@ -156,6 +159,12 @@ and its owned container is
 supervisor is `exec-0000000000001327`. Both were launched from clean commit
 `181fe72`. Poll these handles; the older v12 handle is terminal-failed and
 the older supervisor can never observe a v12 SUCCESS marker.
+
+That v12r1 pair is now a closed waiting route because its 5% ceiling cannot
+admit the verified 8% idle floor. Cancel only those two owned operations before
+launching a v12r2 pair from the threshold-fix commit. v12r2 must use a new
+immutable root and container and must retain the no-PID check, NPU4-7 lock,
+post-lock recheck, and all existing mechanism gates.
 
 When the operation becomes terminal, inspect its result and the immutable root
 `/cache/cch/dasc-qwen36-ascend-20260915/physical-cache-order-fix-v12`, then run

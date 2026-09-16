@@ -18,7 +18,10 @@ PLUGIN_HOST=$RESULT_ROOT/plugin-snapshot
 PORT=8030
 POLL_SECONDS=${DASC_POLL_SECONDS:-60}
 READY_POLLS=${DASC_READY_POLLS:-360}
-MAX_HBM_USAGE_PERCENT=${DASC_MAX_HBM_USAGE_PERCENT:-5}
+# An otherwise idle 910B4 on this host reports an 8% driver/runtime HBM floor.
+# Keep headroom for that floor while still rejecting the observed 94% teardown
+# residue. The empty process table remains an independent mandatory gate.
+MAX_HBM_USAGE_PERCENT=${DASC_MAX_HBM_USAGE_PERCENT:-12}
 
 mkdir -p "$CONTROLLER_ROOT" "$LOCK_DIR"
 exec > >(tee -a "$CONTROLLER_LOG") 2>&1
@@ -71,6 +74,8 @@ self_test() {
     for device in 4 5 6 7; do
         test -c "/dev/davinci${device}"
     done
+    [[ $MAX_HBM_USAGE_PERCENT =~ ^[0-9]+$ ]]
+    (( MAX_HBM_USAGE_PERCENT >= 8 && MAX_HBM_USAGE_PERCENT <= 20 ))
     echo "self-test: ok"
 }
 
