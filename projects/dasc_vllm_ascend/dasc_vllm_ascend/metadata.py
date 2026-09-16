@@ -6,6 +6,8 @@ import copy
 from dataclasses import fields, is_dataclass
 from typing import Any
 
+import torch
+
 from .compact import ActiveSlotPlan, build_active_slot_plan
 
 
@@ -107,7 +109,9 @@ class StableAscendGDNMetadataRemapper:
             raise RuntimeError("metadata remapper has not been prepared")
         return self._variants[self._active_signature][1]
 
-    def prepare(self, metadata: Any) -> tuple[Any, ActiveSlotPlan]:
+    def prepare(
+        self, metadata: Any, *, active_slots: Any | None = None
+    ) -> tuple[Any, ActiveSlotPlan]:
         discovered = _discover_index_paths(metadata)
         allowed = set(ASCEND_GDN_STATE_INDEX_PATHS)
         unknown = discovered - allowed
@@ -138,8 +142,33 @@ class StableAscendGDNMetadataRemapper:
         self._active_signature = signature
 
         plan = build_active_slot_plan(*tensors, pad_slot_id=self.pad_slot_id)
+        mapped_indices = plan.remapped_indices
+        if active_slots is not None:
+            if active_slots.ndim != 1:
+                raise ValueError("active_slots must be one-dimensional")
+            if active_slots.numel() != plan.block_ids.numel():
+                raise ValueError("active_slots must match discovered block ids")
+            if active_slots.device != plan.block_ids.device:
+                active_slots = active_slots.to(device=plan.block_ids.device)
+            if active_slots.unique().numel() != active_slots.numel():
+                raise ValueError("active request slots must be unique")
+            mapped_indices = tuple(
+                torch.where(
+                    indices != self.pad_slot_id,
+                    active_slots.index_select(
+                        0,
+                        torch.where(
+                            indices != self.pad_slot_id,
+                            indices,
+                            torch.zeros_like(indices),
+                        ).reshape(-1).to(dtype=torch.long),
+                    ).reshape(indices.shape).to(dtype=indices.dtype),
+                    torch.full_like(indices, self.pad_slot_id),
+                )
+                for indices in plan.remapped_indices
+            )
         remapped = metadata
-        for path, source, buffer in zip(paths, plan.remapped_indices, buffers):
+        for path, source, buffer in zip(paths, mapped_indices, buffers):
             buffer.copy_(source)
             remapped = _replace_path(remapped, path, buffer)
         if tuple(buffer.data_ptr() for buffer in buffers) != pointers:

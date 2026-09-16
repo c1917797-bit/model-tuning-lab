@@ -147,3 +147,39 @@ def test_stable_remapper_keeps_separate_shape_variants():
     assert mapped_small1.non_spec_state_indices_tensor.data_ptr() == small_pointer
     assert mapped_large.non_spec_state_indices_tensor.data_ptr() == large_pointer
     assert mapped_small2.non_spec_state_indices_tensor.data_ptr() == small_pointer
+
+
+def test_stable_remapper_targets_request_owned_slots():
+    metadata = Metadata(
+        torch.tensor([7, 3, -1], dtype=torch.int32),
+        None,
+        torch.tensor([3], dtype=torch.int32),
+        None,
+        None,
+        None,
+    )
+    remapper = StableAscendGDNMetadataRemapper()
+
+    # build_active_slot_plan sorts physical blocks as [3, 7].  Request-owned
+    # rows need not be contiguous or follow that physical ordering.
+    mapped, plan = remapper.prepare(
+        metadata, active_slots=torch.tensor([5, 1], dtype=torch.int64)
+    )
+
+    assert torch.equal(plan.block_ids, torch.tensor([3, 7], dtype=torch.int32))
+    assert torch.equal(
+        mapped.non_spec_state_indices_tensor,
+        torch.tensor([1, 5, -1], dtype=torch.int32),
+    )
+    assert torch.equal(
+        mapped.prefill_state_indices, torch.tensor([5], dtype=torch.int32)
+    )
+
+
+def test_stable_remapper_rejects_invalid_request_slot_map():
+    metadata = Metadata(torch.tensor([7, 3]), None, None, None, None, None)
+    remapper = StableAscendGDNMetadataRemapper()
+    with pytest.raises(ValueError, match="match discovered"):
+        remapper.prepare(metadata, active_slots=torch.tensor([1]))
+    with pytest.raises(ValueError, match="unique"):
+        remapper.prepare(metadata, active_slots=torch.tensor([1, 1]))
