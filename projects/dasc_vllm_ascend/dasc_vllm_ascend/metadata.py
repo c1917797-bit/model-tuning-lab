@@ -91,3 +91,57 @@ def remap_ascend_gdn_metadata(
     for path, tensor in zip(present_paths, plan.remapped_indices):
         remapped = _replace_path(remapped, path, tensor)
     return remapped, plan
+
+
+class StableAscendGDNMetadataRemapper:
+    """Reuse state-index tensor addresses across model graph invocations."""
+
+    def __init__(self, *, pad_slot_id: int = -1) -> None:
+        self.pad_slot_id = pad_slot_id
+        self._variants: dict[Any, tuple[tuple[Any, ...], tuple[int, ...]]] = {}
+        self._active_signature: Any | None = None
+
+    @property
+    def pointers(self) -> tuple[int, ...]:
+        if self._active_signature is None:
+            raise RuntimeError("metadata remapper has not been prepared")
+        return self._variants[self._active_signature][1]
+
+    def prepare(self, metadata: Any) -> tuple[Any, ActiveSlotPlan]:
+        discovered = _discover_index_paths(metadata)
+        allowed = set(ASCEND_GDN_STATE_INDEX_PATHS)
+        unknown = discovered - allowed
+        if unknown:
+            names = ", ".join(".".join(path) for path in sorted(unknown))
+            raise ValueError(f"unhandled Ascend GDN state-index metadata: {names}")
+
+        paths = tuple(
+            path
+            for path in ASCEND_GDN_STATE_INDEX_PATHS
+            if _get_path(metadata, path) is not None
+        )
+        if not paths:
+            raise ValueError("Ascend GDN metadata contains no state-index tensors")
+        tensors = tuple(_get_path(metadata, path) for path in paths)
+
+        signature = tuple(
+            (path, tuple(tensor.shape), tensor.dtype, tensor.device)
+            for path, tensor in zip(paths, tensors)
+        )
+        variant = self._variants.get(signature)
+        if variant is None:
+            buffers = tuple(tensor.new_empty(tensor.shape) for tensor in tensors)
+            pointers = tuple(buffer.data_ptr() for buffer in buffers)
+            self._variants[signature] = (buffers, pointers)
+        else:
+            buffers, pointers = variant
+        self._active_signature = signature
+
+        plan = build_active_slot_plan(*tensors, pad_slot_id=self.pad_slot_id)
+        remapped = metadata
+        for path, source, buffer in zip(paths, plan.remapped_indices, buffers):
+            buffer.copy_(source)
+            remapped = _replace_path(remapped, path, buffer)
+        if tuple(buffer.data_ptr() for buffer in buffers) != pointers:
+            raise RuntimeError("stable GDN metadata buffer pointer changed")
+        return remapped, ActiveSlotPlan(plan.block_ids, buffers)

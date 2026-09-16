@@ -3,7 +3,10 @@ from dataclasses import dataclass
 import pytest
 import torch
 
-from dasc_vllm_ascend.metadata import remap_ascend_gdn_metadata
+from dasc_vllm_ascend.metadata import (
+    StableAscendGDNMetadataRemapper,
+    remap_ascend_gdn_metadata,
+)
 
 
 @dataclass
@@ -106,3 +109,41 @@ def test_preserves_ascend_runtime_attributes_while_replacing_dataclass_fields():
         torch.tensor([1, 0], dtype=torch.int32),
     )
     assert hasattr(metadata, "non_spec_prefill_metadata")
+
+
+def test_stable_remapper_reuses_index_buffer_addresses():
+    first = Metadata(
+        torch.tensor([6, 2]), None, None, None, None, None
+    )
+    second = Metadata(
+        torch.tensor([4, 7]), None, None, None, None, None
+    )
+    remapper = StableAscendGDNMetadataRemapper()
+
+    mapped1, plan1 = remapper.prepare(first)
+    pointers = remapper.pointers
+    mapped2, plan2 = remapper.prepare(second)
+
+    assert remapper.pointers == pointers
+    assert mapped1.non_spec_state_indices_tensor.data_ptr() == pointers[0]
+    assert mapped2.non_spec_state_indices_tensor.data_ptr() == pointers[0]
+    assert torch.equal(plan1.block_ids, torch.tensor([2, 6]))
+    assert torch.equal(plan2.block_ids, torch.tensor([4, 7]))
+    assert torch.equal(mapped2.non_spec_state_indices_tensor, torch.tensor([0, 1]))
+
+
+def test_stable_remapper_keeps_separate_shape_variants():
+    remapper = StableAscendGDNMetadataRemapper()
+    small = Metadata(torch.tensor([6, 2]), None, None, None, None, None)
+    large = Metadata(torch.tensor([6, 2, 4]), None, None, None, None, None)
+
+    mapped_small1, _ = remapper.prepare(small)
+    small_pointer = remapper.pointers[0]
+    mapped_large, _ = remapper.prepare(large)
+    large_pointer = remapper.pointers[0]
+    mapped_small2, _ = remapper.prepare(small)
+
+    assert small_pointer != large_pointer
+    assert mapped_small1.non_spec_state_indices_tensor.data_ptr() == small_pointer
+    assert mapped_large.non_spec_state_indices_tensor.data_ptr() == large_pointer
+    assert mapped_small2.non_spec_state_indices_tensor.data_ptr() == small_pointer

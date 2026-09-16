@@ -384,8 +384,18 @@ operator exception. The complete DASC plugin suite passes in the pinned v0.23.0
 image: 42 tests; `git diff --check` also passes.
 
 This is a code-level gate, not NPU graph, performance, or accuracy evidence.
-Metadata remapping and persistent block-id restore/checkpoint still happen in
-the model-forward path. The next implementation step is to move those lifecycle
-operations outside the captured model call while reusing fixed metadata/index
-buffers. Do not launch the next four-card attempt until that invariant has a
-bounded replay-style test.
+The successor now wraps `NPUModelRunner._model_forward`, which is outside the
+wrapped model's ACL graph. It prepares global-to-local state mappings, restores
+compact persistent rows into fixed dense workspaces, calls the captured or
+replayed model, then checkpoints the updated retained heads. GDN native forward
+no longer owns this lifecycle. State-index tensors use fixed buffers keyed by
+path/shape/dtype/device, so prefill, decode, and different graph sizes retain
+separate stable addresses. A replay-style test changes scheduler block ids
+between two calls and verifies unchanged workspace/index pointers plus correct
+updates to the newly selected persistent rows.
+
+The complete pinned-image suite now passes 45 tests with only the 16 known
+upstream Torch/read-only-cache warnings, and `git diff --check` passes. This is
+still not target-device evidence. Before an NPU launch, commit this stage and
+recheck live NPU4-7 ownership, container declarations, port 8030, immutable
+result-root absence, and the controller/plugin snapshot provenance.

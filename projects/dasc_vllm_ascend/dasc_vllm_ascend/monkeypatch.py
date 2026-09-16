@@ -18,7 +18,7 @@ from typing import Any
 
 from .config import DascConfig
 from .evidence import emit
-from .metadata import remap_ascend_gdn_metadata
+from .metadata import StableAscendGDNMetadataRemapper, remap_ascend_gdn_metadata
 from .runtime import BoundActiveStateBridge
 from .selector import (
     align_retained_heads_tp,
@@ -351,13 +351,14 @@ def _retained_mask(module: Any, state: Any, config: DascConfig):
 def _install_physical_cache_patch(
     config: DascConfig,
     qwen_gdn_class: Any,
+    model_runner_class: Any,
     get_forward_context: Any,
 ) -> None:
-    """Install compact spec accounting and dense-ABI execution bridge."""
+    """Install compact accounting and a graph-boundary dense ABI bridge."""
     if getattr(qwen_gdn_class, "_mst_dasc_physical_installed", False):
         return
     original_get_spec = qwen_gdn_class.get_kv_cache_spec
-    original_core = qwen_gdn_class._forward_core
+    original_model_forward = model_runner_class._model_forward
 
     @functools.wraps(original_get_spec)
     def compact_get_spec(self, vllm_config):
@@ -385,62 +386,86 @@ def _install_physical_cache_patch(
         self._mst_dasc_compact_page_bytes = compact.page_size_bytes
         return compact
 
-    @functools.wraps(original_core)
-    def physical_core(self, mixed_qkv, b, a, core_attn_out):
+    def bind_bridge(module):
+        bridge = getattr(module, "_mst_dasc_bound_bridge", None)
+        if bridge is not None:
+            return bridge
+        if len(module.kv_cache) != 2:
+            raise DascRuntimeUnsupported(
+                "DASC physical mode requires two runner-owned cache tensors"
+            )
+        bridge = BoundActiveStateBridge(
+            conv_storage=module.kv_cache[0],
+            compact_temporal_storage=module.kv_cache[1],
+            dense_temporal_shape=module._mst_dasc_dense_temporal_shape,
+            temporal_head_axis=module._mst_dasc_temporal_head_axis,
+            retained_indices=retained_head_indices(module, config),
+            max_active_blocks=module._mst_dasc_max_active_blocks,
+        )
+        module._mst_dasc_bound_bridge = bridge
+        module.kv_cache = bridge.workspace_cache
+        emit(
+            config.evidence_path,
+            "physical_cache_bound",
+            layer=module.prefix,
+            mode=config.mode,
+            dense_page_bytes=module._mst_dasc_dense_page_bytes,
+            compact_page_bytes=module._mst_dasc_compact_page_bytes,
+            persistent_bytes=bridge.persistent_bytes,
+            num_blocks=bridge.conv_storage.shape[0],
+        )
+        return bridge
+
+    @functools.wraps(original_model_forward)
+    def model_forward_with_physical_bridge(self, *args, **kwargs):
         forward_context = get_forward_context()
         metadata_map = forward_context.attn_metadata
         if metadata_map is None:
-            return original_core(self, mixed_qkv, b, a, core_attn_out)
-        if not isinstance(metadata_map, dict) or self.prefix not in metadata_map:
+            return original_model_forward(self, *args, **kwargs)
+        if not isinstance(metadata_map, dict):
             raise DascRuntimeUnsupported("DASC cannot resolve live GDN metadata")
-        original_metadata = metadata_map[self.prefix]
-        remapped_metadata, plan = remap_ascend_gdn_metadata(original_metadata)
-
-        bridge = getattr(self, "_mst_dasc_bound_bridge", None)
-        if bridge is None:
-            if len(self.kv_cache) != 2:
-                raise DascRuntimeUnsupported(
-                    "DASC physical mode requires two runner-owned cache tensors"
-                )
-            bridge = BoundActiveStateBridge(
-                conv_storage=self.kv_cache[0],
-                compact_temporal_storage=self.kv_cache[1],
-                dense_temporal_shape=self._mst_dasc_dense_temporal_shape,
-                temporal_head_axis=self._mst_dasc_temporal_head_axis,
-                retained_indices=retained_head_indices(self, config),
-                max_active_blocks=self._mst_dasc_max_active_blocks,
+        modules = getattr(self, "_mst_dasc_gdn_modules", None)
+        if modules is None:
+            modules = tuple(
+                module
+                for module in self.model.modules()
+                if isinstance(module, qwen_gdn_class)
             )
-            self._mst_dasc_bound_bridge = bridge
-            # Bind once. Scheduler lifecycle operations retain the original
-            # compact tensors through bridge and vLLM's cache registry, while
-            # native GDN always observes the same dense objects and addresses.
-            self.kv_cache = bridge.workspace_cache
-            emit(
-                config.evidence_path,
-                "physical_cache_bound",
-                layer=self.prefix,
-                mode=config.mode,
-                dense_page_bytes=self._mst_dasc_dense_page_bytes,
-                compact_page_bytes=self._mst_dasc_compact_page_bytes,
-                persistent_bytes=bridge.persistent_bytes,
-                num_blocks=self.kv_cache[0].shape[0],
-            )
+            self._mst_dasc_gdn_modules = modules
 
-        bridge.restore_active(plan.block_ids)
-        metadata_map[self.prefix] = remapped_metadata
+        active = []
         succeeded = False
         try:
-            result = original_core(self, mixed_qkv, b, a, core_attn_out)
-            bridge.checkpoint_active()
+            for module in modules:
+                if module.prefix not in metadata_map:
+                    raise DascRuntimeUnsupported(
+                        f"DASC metadata missing GDN layer {module.prefix}"
+                    )
+                original_metadata = metadata_map[module.prefix]
+                remapper = getattr(module, "_mst_dasc_metadata_remapper", None)
+                if remapper is None:
+                    remapper = StableAscendGDNMetadataRemapper()
+                    module._mst_dasc_metadata_remapper = remapper
+                remapped_metadata, plan = remapper.prepare(original_metadata)
+                bridge = bind_bridge(module)
+                bridge.restore_active(plan.block_ids)
+                metadata_map[module.prefix] = remapped_metadata
+                active.append((module, bridge, original_metadata))
+
+            result = original_model_forward(self, *args, **kwargs)
+            for _, bridge, _ in active:
+                bridge.checkpoint_active()
             succeeded = True
             return result
         finally:
             if not succeeded:
-                bridge.abort_active()
-            metadata_map[self.prefix] = original_metadata
+                for _, bridge, _ in active:
+                    bridge.abort_active()
+            for module, _, original_metadata in active:
+                metadata_map[module.prefix] = original_metadata
 
     qwen_gdn_class.get_kv_cache_spec = compact_get_spec
-    qwen_gdn_class._forward_core = physical_core
+    model_runner_class._model_forward = model_forward_with_physical_bridge
     qwen_gdn_class._mst_dasc_physical_installed = True
 
 
@@ -706,7 +731,10 @@ def install(config: DascConfig) -> None:
                 **alignment,
             )
             _install_physical_cache_patch(
-                config, QwenGatedDeltaNetAttention, get_forward_context
+                config,
+                QwenGatedDeltaNetAttention,
+                model_runner_v1.NPUModelRunner,
+                get_forward_context,
             )
         emit(
             config.evidence_path,

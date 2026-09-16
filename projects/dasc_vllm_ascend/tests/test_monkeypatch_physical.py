@@ -53,6 +53,15 @@ def _fixture(monkeypatch, tmp_path, *, fail=False):
             self.kv_cache[1].add_(13)
             return "native-result"
 
+    module = FakeGdn()
+
+    class FakeRunner:
+        def __init__(self):
+            self.model = SimpleNamespace(modules=lambda: (module,))
+
+        def _model_forward(self, *args, **kwargs):
+            return module._forward_core(None, None, None, None)
+
     config = SimpleNamespace(
         representative_a=-0.3,
         epsilon=0.001,
@@ -65,17 +74,17 @@ def _fixture(monkeypatch, tmp_path, *, fail=False):
         physical_patch, "retained_head_indices", lambda module, cfg: retained
     )
     physical_patch._install_physical_cache_patch(
-        config, FakeGdn, lambda: context
+        config, FakeGdn, FakeRunner, lambda: context
     )
-    module = FakeGdn()
+    runner = FakeRunner()
     compact = module.get_kv_cache_spec(
         SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
     )
-    return module, metadata, context, observed, compact, retained
+    return module, runner, metadata, context, observed, compact, retained
 
 
 def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_path):
-    module, metadata, context, observed, compact, retained = _fixture(
+    module, runner, metadata, context, observed, compact, retained = _fixture(
         monkeypatch, tmp_path
     )
     persistent_cache = module.kv_cache
@@ -84,7 +93,7 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
     before_temporal = persistent_cache[1].clone()
 
     assert compact.shapes == ((2, 3), (2, 2))
-    result = module._forward_core(None, None, None, None)
+    result = runner._model_forward()
 
     assert result == "native-result"
     assert context.attn_metadata[module.prefix] is metadata
@@ -117,14 +126,14 @@ def test_physical_patch_runs_dense_abi_and_commits_atomically(monkeypatch, tmp_p
 def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error(
     monkeypatch, tmp_path
 ):
-    module, metadata, context, observed, _, _ = _fixture(
+    module, runner, metadata, context, observed, _, _ = _fixture(
         monkeypatch, tmp_path, fail=True
     )
     persistent_cache = module.kv_cache
     before = tuple(tensor.clone() for tensor in persistent_cache)
 
     with pytest.raises(RuntimeError, match="native failure"):
-        module._forward_core(None, None, None, None)
+        runner._model_forward()
 
     assert context.attn_metadata[module.prefix] is metadata
     bridge = module._mst_dasc_bound_bridge
@@ -137,6 +146,39 @@ def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error
     )
     assert module._mst_dasc_bound_bridge._active_ids is None
     assert observed["metadata"] is not metadata
+
+
+def test_graph_boundary_reuses_buffers_with_changed_scheduler_blocks(
+    monkeypatch, tmp_path
+):
+    module, runner, metadata, context, _, _, _ = _fixture(monkeypatch, tmp_path)
+
+    runner._model_forward()
+    bridge = module._mst_dasc_bound_bridge
+    workspace_cache = bridge.workspace_cache
+    workspace_ptrs = tuple(tensor.data_ptr() for tensor in workspace_cache)
+    metadata_ptrs = module._mst_dasc_metadata_remapper.pointers
+
+    metadata.non_spec_state_indices_tensor = torch.tensor(
+        [4, 7], dtype=torch.int32
+    )
+    before_conv = bridge.conv_storage.clone()
+    before_temporal = bridge.temporal_storage.clone()
+    runner._model_forward()
+
+    assert context.attn_metadata[module.prefix] is metadata
+    assert module.kv_cache is workspace_cache
+    assert tuple(tensor.data_ptr() for tensor in module.kv_cache) == workspace_ptrs
+    assert module._mst_dasc_metadata_remapper.pointers == metadata_ptrs
+    ids = torch.tensor([4, 7])
+    assert torch.equal(
+        bridge.conv_storage.index_select(0, ids),
+        before_conv.index_select(0, ids) + 11,
+    )
+    assert torch.equal(
+        bridge.temporal_storage.index_select(0, ids),
+        before_temporal.index_select(0, ids) + 13,
+    )
 
 
 def test_aligned_hybrid_grouping_preserves_exact_inner_page_sizes(tmp_path):
