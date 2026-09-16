@@ -139,6 +139,11 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   workspaces when the native operator ABI is dense. Prove restore, compute,
   checkpoint, prefix-copy, abort, and invalidation lifecycles before changing
   framework page accounting or claiming physical savings.
+- Do not accept a compact cache-spec or reported page size as proof of physical
+  allocation savings. After the framework allocator binds the real tensors,
+  fail closed unless their exact storage bytes equal compact page bytes times
+  the allocated block count; record both actual and expected values before any
+  performance claim.
 - When state geometry is derived from TP-sharded weights, synchronize the
   per-layer geometry before vLLM cache-spec collection. Rank-local indices may
   differ, but every worker must advertise the same page shape for a layer.
