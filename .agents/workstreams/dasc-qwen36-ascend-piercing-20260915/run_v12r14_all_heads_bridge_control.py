@@ -5,6 +5,7 @@ from __future__ import annotations
 import importlib.util
 import json
 from pathlib import Path
+import sys
 
 
 HERE = Path(__file__).resolve().parent
@@ -67,7 +68,7 @@ def validate_all_heads_evidence() -> None:
 
 def main() -> int:
     exit_code = trial.main()
-    if exit_code != 0:
+    if exit_code != 0 or "--preflight-only" in sys.argv:
         return exit_code
     validate_all_heads_evidence()
     return 0

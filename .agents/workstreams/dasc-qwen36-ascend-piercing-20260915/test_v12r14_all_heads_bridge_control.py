@@ -67,3 +67,12 @@ def test_main_validates_only_after_inner_success(monkeypatch):
     monkeypatch.setattr(trial.trial, "main", lambda: 7)
     assert trial.main() == 7
     assert calls == []
+
+
+def test_preflight_does_not_require_runtime_evidence(monkeypatch):
+    calls = []
+    monkeypatch.setattr(trial.trial, "main", lambda: 0)
+    monkeypatch.setattr(trial, "validate_all_heads_evidence", lambda: calls.append(True))
+    monkeypatch.setattr("sys.argv", ["run_v12r14_all_heads_bridge_control.py", "--preflight-only"])
+    assert trial.main() == 0
+    assert calls == []
