@@ -102,3 +102,17 @@ A pass permits reintroducing the all-head bridge and then W64 pruning. A fail
 closes this scheduler-awareness implementation and moves localization to the
 actual checkpoint materialization boundary; it does not justify changing the
 selector or starting performance/quality experiments.
+
+## Portable pre-NPU validation
+
+A Linux/WSL Python 3.12 stub executed the committed plugin function and passed
+both supported import timings: an already-loaded EngineCore alias and a
+deferred EngineCore import. The loaded case also reproduced first-inner
+reduction, retained `FullAttentionSpec`, restored both Mamba lifecycle flags,
+and emitted the scheduler-preservation event. Python compilation, `git diff
+--check`, and the 26-skill maintainer-tree validator also passed.
+
+This is only configuration-chain evidence. The stub replaces torch and vLLM
+types and therefore does not satisfy the pinned-image suite, live-source hash,
+Ascend graph, recurrent-state numerical, service, performance, or quality
+gates listed above.
