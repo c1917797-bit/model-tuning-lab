@@ -904,6 +904,20 @@ def install(config: DascConfig) -> None:
         source_evidence[f"{name}_source"] = source
         source_evidence[f"{name}_sha256"] = source_sha
 
+    if config.mode == "compat-head256":
+        _install_head256_prefill_fallback_patch(
+            config, device_op.DeviceOperator, device_utils
+        )
+        emit(
+            config.evidence_path,
+            "compatibility_only_registered",
+            mode=config.mode,
+            **source_evidence,
+            vllm_version=versions["vllm"],
+            vllm_ascend_version=versions["vllm-ascend"],
+        )
+        return
+
     original_load = Qwen3_5ForConditionalGeneration.load_weights
     if getattr(original_load, "_mst_dasc_loader", False):
         return

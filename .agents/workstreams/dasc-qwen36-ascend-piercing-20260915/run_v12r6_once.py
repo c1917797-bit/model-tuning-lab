@@ -41,6 +41,7 @@ IDLE_HBM_LIMIT_MIB = 3932
 PORT = 8030
 BLOCK_ON_IDLE_CONTAINER_CLAIMS = True
 ADDITIONAL_CONFIG: str | None = None
+PLUGIN_MODE = "physical-cache-eager"
 SUPERSEDED_REASON = (
     "v12r6 is superseded: its per-forward compact restore would erase "
     "omitted-head updates after the first DASC-NR cache-load boundary"
@@ -320,7 +321,7 @@ def launch() -> str:
         "ASCEND_RT_VISIBLE_DEVICES": "0,1,2,3",
         "VLLM_PLUGINS": "ascend,dasc_vllm_ascend",
         "MST_DASC_ENABLE": "1",
-        "MST_DASC_MODE": "physical-cache-eager",
+        "MST_DASC_MODE": PLUGIN_MODE,
         "MST_DASC_W_MAX": "64",
     }.items():
         args.extend(["-e", f"{key}={value}"])

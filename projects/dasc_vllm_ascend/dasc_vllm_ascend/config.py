@@ -42,9 +42,14 @@ class DascConfig:
     def from_env(cls) -> "DascConfig":
         enabled = _enabled("MST_DASC_ENABLE")
         mode = os.getenv("MST_DASC_MODE", "nr-numerical")
-        if mode not in {"nr-numerical", "physical-cache-eager"}:
+        if mode not in {
+            "nr-numerical",
+            "physical-cache-eager",
+            "compat-head256",
+        }:
             raise DascConfigurationError(
-                "MST_DASC_MODE must be nr-numerical or physical-cache-eager"
+                "MST_DASC_MODE must be nr-numerical, physical-cache-eager, "
+                "or compat-head256"
             )
         try:
             w_max = float(os.getenv("MST_DASC_W_MAX", "64"))
