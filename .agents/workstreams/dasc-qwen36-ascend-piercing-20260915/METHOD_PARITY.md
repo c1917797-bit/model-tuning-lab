@@ -25,7 +25,7 @@ then replace inference-based entries with file/function/output comparisons.
 | DASC-NR load | Restore retained units; omitted units start at zero only on cache-hit Load, then accumulate normally while the request remains active | v12r6 is superseded; the plugin now assigns stable request-owned dense slots, exposes compact tensors to scheduler copy outside the native call, and preserves omitted units across synthetic decode/block transitions | Pinned-image lifecycle tests pass; multi-step NPU equality/finite-state gate remains | Framework integration implemented; NPU gate incomplete |
 | Physical checkpoint | Ragged flat-pack with per-layer offsets | Heterogeneous per-layer Mamba specs aggregated into one vLLM physical group | Physical bytes and cache-capacity verifier | Different representation; v12r7 NPU gate pending |
 | TP compute placement | Model-load permutation of coupled tensors | No weight/head permutation | Exact permutation and output-equivalence test | Missing |
-| TP storage balance | Shared TP pool with variable-split all-to-all on Store and inverse on Load | Per-layer MAX retained count; each rank pads with its next-longest heads | Raw TP4 audit: 1728 threshold-retained heads become 2084 physically stored heads, adding 356 | Not equivalent; measured capacity loss |
+| TP storage balance | Shared TP pool with variable-split all-to-all on Store and inverse on Load | Per-layer MAX retained count; each rank pads with its next-longest heads | Raw TP4 audit: 1728 threshold-retained heads become 2084 physically stored heads; whole-GQA-group optimal placement would reduce that bound to 1828 | Not equivalent; measured capacity loss and quantified adaptation bound |
 | Full-attention KV | Unchanged | Intended unchanged; synthetic mixed group currently affects runner metadata | Dense/candidate metadata and graph-capture comparison | Not yet proved |
 | Convolution state | Stored uncompressed in BF16 | Kept dense with native lifecycle | Prefix copy/invalidation and byte accounting | Implemented |
 | Temporal state | Stored in FP32 | Compact persistent FP32, dense active FP32 workspace | ABI, restore/checkpoint, and byte gates | Implemented, graph gate incomplete |
@@ -44,9 +44,12 @@ then replace inference-based entries with file/function/output comparisons.
 ## TP4 capacity audit
 
 The immutable raw-weight audit at
-`/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v2.json`
+`/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v3.json`
 passed all 48 GDN layers. Its SHA256 is
-`5703e1aff66593ef4eee1b3497737cc8daf4e45acc676bf9c595a6ad204712f0`.
+`c474ff65baef39c41944da0a6027eaf5ab69805a55d23db00e1dca3b2fff1f8d`.
+An independent second run produced a byte-identical file and hash. Version 3
+supersedes version 2 by adding the Qwen GQA coupling constraint; it does not
+replace or erase the older immutable artifact.
 
 At `W_max=64`, the paper threshold retains 1728 of 2304 global temporal
 heads (1.33x temporal-only compression). The current layerwise TP-MAX padding
@@ -56,18 +59,32 @@ adaptation tax, not a paper limitation, and makes rank-balanced placement or
 paper-equivalent variable-split storage a priority if v12r7 proves runtime
 correct but shows weak capacity/performance benefit.
 
-An ideal per-layer TP4 balance would store 1788 heads, only 60 above the raw
-threshold and would remove 516 heads. Thus balancing can recover 296 of the
-356 heads currently lost to padding, raising temporal-only compression from
-about 1.11x to about 1.29x without changing the DASC threshold.
+There are three distinct storage bounds:
+
+- Paper variable-split Store/Load: 1728 heads, with no equal-rank-width
+  padding in this accounting.
+- Arbitrary per-head equal-rank placement: 1788 heads, a mathematical lower
+  bound that ignores Qwen's three-V-heads-per-Q/K-group coupling.
+- Whole-GQA-group TP4 placement: 1828 heads. The exact solver assigns all 16
+  groups, four groups per rank, and minimizes the maximum retained V-head load
+  independently in every layer.
+
+The group-constrained result removes 476 heads and recovers 256 of the current
+356 padded heads, for about 1.26x temporal-only compression. It is the relevant
+model-load permutation bound for a design that keeps each Q/K head colocated
+with its three V heads. It is not yet an implementation result: A_log,
+dt_bias, Q/K/V/Z and B/A projection slices, convolution channels, and output
+projection columns must be permuted consistently, then checked for dense-output
+equivalence and runtime overhead.
 
 ## Required closure gates
 
 1. Keep the completed independent equations 2-3 gates: FP32/BF16 synthetic
    threshold tests and the 48-layer raw-safetensor TP4 manifest audit.
-2. Decide explicitly whether exact paper TP balancing is required. If adapted,
-   quantify its capacity loss relative to ragged shared-pool placement and
-   label the variant.
+2. After v12r7 passes, choose between the quantified whole-GQA-group
+   permutation bound (1828 heads) and exact paper variable-split storage
+   (1728 heads). Keep the per-head 1788 result labeled as an unattained lower
+   bound, not an implementation target.
 3. Prove full-attention KV metadata is unchanged despite the mixed physical
    group before another service launch.
 4. Request-owned dense active slots and synthetic omitted-unit continuity are

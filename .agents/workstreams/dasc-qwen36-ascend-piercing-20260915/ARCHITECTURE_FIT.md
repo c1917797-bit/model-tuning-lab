@@ -33,8 +33,14 @@ The first TP4 implementation does not realize the raw 1.33x temporal ratio at
 `W_max=64`: layerwise MAX padding raises stored heads from 1728 to 2084,
 leaving only about 1.11x temporal compression. This is an implementation
 adaptation cost. The exact paper path avoids it through balanced placement and
-variable-split communication. Ideal per-layer TP4 balancing would store 1788
-heads (about 1.29x), recovering 296 heads of the current padding loss.
+variable-split communication. Arbitrary per-head TP4 balancing would store 1788
+heads (about 1.29x), but that is only a lower bound because Qwen couples three
+V heads to each Q/K head. The exact whole-group solver stores 1828 heads
+(about 1.26x), removes 476 heads, and recovers 256 heads of the current padding
+loss while assigning exactly four Q/K groups per rank. This is a model-load
+permutation bound, not implemented performance evidence; every coupled
+projection, convolution channel, decay parameter, and output column still
+requires a consistent permutation and output-equivalence gate.
 
 ## Implication
 
