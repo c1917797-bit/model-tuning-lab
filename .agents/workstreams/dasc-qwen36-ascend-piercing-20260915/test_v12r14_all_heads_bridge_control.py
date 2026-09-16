@@ -13,6 +13,9 @@ def test_v12r14_has_distinct_all_heads_identity():
     assert trial.controller.RESULT.name == "request-owned-all-heads-control-v12r14"
     assert trial.controller.CONTAINER == "dasc_qwen36_all_heads_bridge_v12r14_20260916"
     assert trial.controller.W_MAX == "1e-9"
+    assert trial.controller.PREVIOUS_CANARY == MODULE_PATH.with_name(
+        "run_physical_canary.py"
+    )
 
 
 def test_all_heads_threshold_is_forwarded_to_container(monkeypatch):

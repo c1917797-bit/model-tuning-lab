@@ -25,6 +25,7 @@ controller.RESULT = Path(
 controller.CONTAINER = "dasc_qwen36_all_heads_bridge_v12r14_20260916"
 controller.W_MAX = "1e-9"
 controller.CANARY_EXTRA_ARGS = ("--allow-dense-pages",)
+controller.PREVIOUS_CANARY = HERE / "run_physical_canary.py"
 
 
 def all_heads_evidence_verdict(rows: list[dict]) -> dict:
