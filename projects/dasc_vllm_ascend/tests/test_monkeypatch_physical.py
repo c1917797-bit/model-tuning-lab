@@ -455,6 +455,115 @@ def test_aligned_hybrid_grouping_rejects_hidden_cache(tmp_path):
         namespace.get_kv_cache_groups(SimpleNamespace(), specs)
 
 
+def test_scheduler_reduction_preserves_mamba_lifecycle_flags(tmp_path):
+    import copy
+
+    from vllm.v1.kv_cache_interface import (
+        FullAttentionSpec,
+        KVCacheGroupSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    attention = FullAttentionSpec(
+        block_size=1536,
+        num_kv_heads=1,
+        head_size=128,
+        dtype=torch.bfloat16,
+    )
+    mamba = MambaSpec(
+        block_size=1536,
+        shapes=((3, 16), (12, 128, 128)),
+        dtypes=(torch.bfloat16, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    aggregate = UniformTypeKVCacheSpecs(
+        block_size=1536,
+        kv_cache_specs={"attn": attention, "mamba": mamba},
+    )
+
+    class FakeKVCacheConfig:
+        def __init__(self, groups):
+            self.kv_cache_groups = groups
+
+        @property
+        def has_mamba_layers(self):
+            return any(
+                isinstance(group.kv_cache_spec, MambaSpec)
+                for group in self.kv_cache_groups
+            )
+
+        @property
+        def needs_kv_cache_zeroing(self):
+            return self.has_mamba_layers
+
+    def reduce_to_first_inner(configs):
+        reduced = copy.deepcopy(configs[0])
+        for group in reduced.kv_cache_groups:
+            if isinstance(group.kv_cache_spec, UniformTypeKVCacheSpecs):
+                group.kv_cache_spec = next(
+                    iter(group.kv_cache_spec.kv_cache_specs.values())
+                )
+        return reduced
+
+    kv_cache_utils = SimpleNamespace(
+        generate_scheduler_kv_cache_config=reduce_to_first_inner
+    )
+    engine_core = SimpleNamespace(
+        generate_scheduler_kv_cache_config=reduce_to_first_inner
+    )
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    physical_patch._install_heterogeneous_cache_config_awareness_patch(
+        config,
+        FakeKVCacheConfig,
+        kv_cache_utils,
+        engine_core,
+    )
+
+    worker_config = FakeKVCacheConfig(
+        [KVCacheGroupSpec(["attn", "mamba"], aggregate)]
+    )
+    assert worker_config.has_mamba_layers
+    assert worker_config.needs_kv_cache_zeroing
+
+    scheduler_config = engine_core.generate_scheduler_kv_cache_config(
+        [worker_config]
+    )
+    assert isinstance(
+        scheduler_config.kv_cache_groups[0].kv_cache_spec,
+        FullAttentionSpec,
+    )
+    assert scheduler_config.has_mamba_layers
+    assert scheduler_config.needs_kv_cache_zeroing
+    assert (
+        kv_cache_utils.generate_scheduler_kv_cache_config
+        is engine_core.generate_scheduler_kv_cache_config
+    )
+
+    attention_only = FakeKVCacheConfig(
+        [KVCacheGroupSpec(["attn"], attention)]
+    )
+    attention_scheduler = engine_core.generate_scheduler_kv_cache_config(
+        [attention_only]
+    )
+    assert not attention_scheduler.has_mamba_layers
+    assert not attention_scheduler.needs_kv_cache_zeroing
+
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    by_name = {event["event"]: event for event in events}
+    installed = by_name["heterogeneous_cache_config_awareness_installed"]
+    assert installed["scheduler_alias_patched"] is True
+    preserved = by_name["heterogeneous_scheduler_mamba_awareness_preserved"]
+    assert preserved["scheduler_group_specs"] == ["FullAttentionSpec"]
+    assert preserved["has_mamba_layers"] is True
+    assert preserved["needs_kv_cache_zeroing"] is True
+
+
 def test_heterogeneous_cascade_guard_disables_only_uniform_group(tmp_path):
     from vllm.v1.kv_cache_interface import (
         FullAttentionSpec,
