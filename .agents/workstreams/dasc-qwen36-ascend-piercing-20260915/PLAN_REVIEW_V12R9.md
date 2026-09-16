@@ -79,3 +79,14 @@ repository, offline, 2 CPU / 4 GiB limit: 24 focused tests passed in 7.40 s
 (exec-000000000000161d). Maintainer tree validation passed (26 skills), and
 `git diff --check` passed. This does not establish NPU numerical or graph
 correctness. The successor remains opt-in and unpromoted.
+
+The v12r9 controller now requires all 48 linear layers on each of four ranks
+for allocation, request initialization and continuity, rejecting duplicates or
+mismatched layer identities. Its six positive/negative validator tests passed
+in the pinned image without device mappings (exec-0000000000001624).
+The host Python test attempt failed before collection because that interpreter
+lacks `unittest` (exec-0000000000001623); do not change the host installation.
+Use the pinned-image interpreter for these tests.
+`run_v12r9_once.py` uses a new immutable result directory and requires the
+explicit-dummy-scope fix commit 8899d8d. This strengthens evidence coverage but
+does not replace numerical lifecycle tests.
