@@ -23,5 +23,9 @@ controller.RESULT = Path(
 controller.CONTAINER = "dasc_qwen36_head256_prefill_v12r11_20260916"
 
 
+def main() -> int:
+    return trial.trial.main()
+
+
 if __name__ == "__main__":
-    raise SystemExit(trial.main())
+    raise SystemExit(main())
