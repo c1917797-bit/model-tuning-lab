@@ -829,3 +829,37 @@ Ascend-capable container with unprovable device scope as a wildcard contender,
 and monitor ownership continuously from final admission through readiness.
 At the terminal audit, NPU0-3 and NPU4-7 both had foreign TP workers; do not
 stop or share them.
+
+## 2026-09-17 v12r21 startup guard prepared
+
+The next controller is
+`run_v12r21_startup_guard_control.py`. It preserves v12r20's all-head,
+dense-geometry, state-index-only treatment and changes no DASC algorithm
+variable. Its immutable root is
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-startup-guard-v12r21`;
+its container name is
+`dasc_qwen36_state_index_v12r21_20260917`.
+
+The controller now blocks a running privileged container when neither explicit
+Docker device mappings nor a valid `ASCEND_RT_VISIBLE_DEVICES` declaration can
+prove its physical scope. Such a container is recorded as
+`unknown_device_scope/wildcard_npu_contender`. After the owned container is
+created, every readiness iteration also compares NPU4-7 PIDs with the owned
+container process tree. A foreign activation writes
+`startup-resource-race.json` and terminates only the owned launch as
+`not_run/resource_race`.
+
+The v12r21 and v12r20 controller suites passed 13/13 in the pinned
+vLLM-Ascend v0.23.0 image; Python compilation and `git diff --check` passed.
+A live `--preflight-only` proof exited 2 as designed: NPU4-7 had active TP
+workers near 31 GiB HBM, and `Maxon4ick_torch_910_dev` plus
+`alltoall-dedup-ep4_nk` were running privileged with unknown physical-device
+scope. The repository was also intentionally dirty with the uncommitted
+controller at that moment. No result root was created and no NPU experiment
+started.
+
+Do not run v12r21 until a committed clean-tree preflight returns `ok: true`.
+Do not weaken the wildcard gate or use a different HCCL port to share cards;
+exclusive NPU ownership through readiness is part of the numerical ruler.
+Once admitted, v12r21 remains a single NPU numerical attempt. Performance and
+E2E quality stay prohibited until the row gate and exact replay canary pass.

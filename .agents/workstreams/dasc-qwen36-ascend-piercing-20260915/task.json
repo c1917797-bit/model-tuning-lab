@@ -15,7 +15,7 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "v12r20_not_run_resource_race_state_index_hypothesis_untested",
+  "status": "v12r20_not_run_resource_race_v12r21_startup_guard_prepared",
   "current_plan": "PLAN_REVIEW_V12R9.md",
   "latest_attempt": {
     "name": "v12r20",
@@ -45,7 +45,8 @@
   },
   "decision": "open",
   "next_actions": [
-    "Do not reuse the terminal v12r20 root or idempotency key. A later v12r21-style attempt may reuse the same one-variable state-index code only in a new immutable root after the selected four-card lane is exclusive through readiness and every running privileged Ascend-capable container has a proven device scope.",
+    "Do not reuse the terminal v12r20 root or idempotency key. The prepared v12r21 controller keeps the same one-variable state-index code in a new immutable root and adds fail-closed unknown-device-scope plus startup-window ownership guards.",
+    "Run v12r21 only after a fresh preflight returns ok. At the latest proof it correctly rejected the launch because NPU4-7 had live TP workers and two running privileged containers, Maxon4ick_torch_910_dev and alltoall-dedup-ep4_nk, had unknown physical-device scope. Do not stop, share, or silently allowlist them.",
     "Treat v12r20 as not_run/resource_race_before_readiness: it emitted no state-row or numerical evidence, so the copied-row versus GDN metadata hypothesis remains untested and must not be accepted or rejected from this run.",
     "Require v12r20 physical_state_copy_materialized, gdn_running_state_indices_remapped, and paired first_resumed_token_state_boundary events on all four TP workers. The old source row must remain unchanged, the destination row must update, and the strict short/replay numerical canary must pass before pruning is restored.",
     "Treat v12r19 as completed failed numerical evidence: all lifecycle branches were materially proven, so do not rerun v12r19, reuse its immutable root, or continue changing scheduler lifecycle selectors.",
@@ -146,9 +147,10 @@
     },
     "v12r19_readiness_gate": "Superseded by the completed v12r19 NPU result: branch coverage passed, strict numerical replay failed, and no performance or E2E quality work was admitted.",
     "v12r20_readiness_gate": "Terminal not_run/resource_race_before_readiness. Software preparation remained valid, but foreign unknown-scope container alltoall-dedup-ep4_nk activated on NPU4-7 during startup and caused an HCCL 16666 bind collision. No lifecycle, state-row, numerical, performance, or quality evidence was produced; the state-index hypothesis remains untested.",
-    "next_controller": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r20_state_index_control.py",
-    "next_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/state-index-all-heads-v12r20",
-    "next_container": "dasc_qwen36_state_index_v12r20_20260917",
+    "v12r21_startup_guard": "Prepared without changing the DASC algorithm variable. It treats a running privileged container with neither explicit Docker device mapping nor a valid ASCEND_RT_VISIBLE_DEVICES declaration as unknown_device_scope and a wildcard NPU contender. From owned-container creation through readiness it repeatedly compares target NPU PIDs with the owned container process tree and preserves startup-resource-race.json on any foreign activation. The v12r21 plus v12r20 controller tests passed 13/13 in the pinned v0.23.0 image; Python compilation and git diff --check passed. A live preflight exited 2 as designed on active NPU4-7 workers and the two unknown-scope privileged containers. No NPU experiment, numerical, performance, or quality result exists for v12r21.",
+    "next_controller": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r21_startup_guard_control.py",
+    "next_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/state-index-startup-guard-v12r21",
+    "next_container": "dasc_qwen36_state_index_v12r21_20260917",
     "performance_result": null,
     "quality_result": null
   },
