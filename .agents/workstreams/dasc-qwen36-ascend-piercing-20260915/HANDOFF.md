@@ -920,3 +920,23 @@ hash, count, length, and ordered layer IDs, and records both source hashes in
 the state-row verdict. A mismatched or stale selector fails before accelerator
 mutation. Unit tests cover both a matching inventory and a manifest from the
 wrong checkpoint.
+
+## 2026-09-17 v12r21 committed preflight result
+
+Read-only preflight operation `exec-00000000000019e9` ran from clean pushed
+commit `b66c8a4`. It first derived and printed the exact 48 GDN layer IDs from
+the 64-layer checkpoint and verified both the model-config and selector
+manifest hashes. Resource admission then exited 2 as designed. Physical
+NPU4-7 had no device process and were at the 2868-2869 MiB idle floor, port
+8030 was free, and the immutable v12r21 root was absent, but two running
+privileged containers had unknown physical-device scope:
+`Maxon4ick_torch_910_dev` and the restarted historical competitor
+`alltoall-dedup-ep4_nk`.
+
+The latter currently contains only `sleep infinity`, but v12r20 already
+proved that the same container can receive a later worker launch without a new
+Docker mapping and race HCCL startup. The former still contains an active
+opencode session. Do not stop, share, or silently allowlist either container.
+The preflight created no DASC container and no result directory; therefore it
+is readiness evidence only, not numerical, performance, quality, or algorithm
+evidence.
