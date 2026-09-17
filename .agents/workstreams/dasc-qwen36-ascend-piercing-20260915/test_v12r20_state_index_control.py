@@ -26,54 +26,71 @@ def complete_rows():
     for pid in (21, 22, 23, 24):
         rows.append(
             {
-                "event": "physical_state_copy_materialized",
-                "pid": pid,
-                "layer": "layers.0",
-                "state_index": 1,
-                "source_block_id": 7,
-                "destination_block_id": 9,
-                "source_pointer_block_id": 7,
-                "copy_bytes": 128,
-                "source_after_copy": {"full_sha256": "same"},
-                "destination_after_copy": {"full_sha256": "same"},
-            }
-        )
-        rows.append(
-            {
                 "event": "gdn_running_state_indices_remapped",
                 "pid": pid,
+                "layer_count": 48,
                 "representative_layers": [
                     {
                         "source_state_indices": [7],
                         "destination_state_indices": [9],
-                    }
+                    },
+                    {
+                        "source_state_indices": [7],
+                        "destination_state_indices": [9],
+                    },
                 ],
             }
         )
-        rows.append(
-            {
-                "event": "first_resumed_token_state_boundary_before",
-                "pid": pid,
-                "layer": "layers.0",
-                "state_index": 1,
-                "source_block_id": 7,
-                "destination_block_id": 9,
-                "source_before_native": {"full_sha256": "old"},
-                "destination_before_native": {"full_sha256": "copied"},
-            }
-        )
-        rows.append(
-            {
-                "event": "first_resumed_token_state_boundary_after",
-                "pid": pid,
-                "layer": "layers.0",
-                "state_index": 1,
-                "source_block_id": 7,
-                "destination_block_id": 9,
-                "source_after_native": {"full_sha256": "old"},
-                "destination_after_native": {"full_sha256": "updated"},
-            }
-        )
+        for layer in ("layers.0", "layers.47"):
+            for state_index in (0, 1):
+                rows.append(
+                    {
+                        "event": "physical_state_copy_materialized",
+                        "pid": pid,
+                        "layer": layer,
+                        "state_index": state_index,
+                        "source_block_id": 7,
+                        "destination_block_id": 9,
+                        "source_pointer_block_id": 7,
+                        "copy_bytes": 128,
+                        "source_after_copy": {"full_sha256": "same"},
+                        "destination_after_copy": {
+                            "full_sha256": "same"
+                        },
+                    }
+                )
+                rows.append(
+                    {
+                        "event": (
+                            "first_resumed_token_state_boundary_before"
+                        ),
+                        "pid": pid,
+                        "layer": layer,
+                        "state_index": state_index,
+                        "source_block_id": 7,
+                        "destination_block_id": 9,
+                        "source_before_native": {"full_sha256": "old"},
+                        "destination_before_native": {
+                            "full_sha256": "copied"
+                        },
+                    }
+                )
+                rows.append(
+                    {
+                        "event": (
+                            "first_resumed_token_state_boundary_after"
+                        ),
+                        "pid": pid,
+                        "layer": layer,
+                        "state_index": state_index,
+                        "source_block_id": 7,
+                        "destination_block_id": 9,
+                        "source_after_native": {"full_sha256": "old"},
+                        "destination_after_native": {
+                            "full_sha256": "updated"
+                        },
+                    }
+                )
     return rows
 
 
@@ -100,6 +117,42 @@ def test_state_index_verdict_rejects_old_source_mutation():
     result = trial.state_index_verdict(rows, {"ok": True})
     assert result["row_gate_ok"] is False
     assert result["decision"] == "native_execution_still_mutated_old_source_row"
+
+
+def test_state_index_verdict_rejects_partial_state_or_layer_coverage():
+    rows = complete_rows()
+    rows = [
+        row
+        for row in rows
+        if not (
+            row.get("pid") == 21
+            and row.get("layer") == "layers.47"
+            and row.get("state_index") == 0
+        )
+    ]
+    result = trial.state_index_verdict(rows, {"ok": True})
+    assert result["row_gate_ok"] is False
+    assert result["decision"] == "physical_copy_coverage_incomplete"
+
+
+def test_state_index_verdict_rejects_unpaired_exact_copy():
+    rows = complete_rows()
+    removed = False
+    filtered = []
+    for row in rows:
+        if (
+            not removed
+            and row.get("event")
+            == "first_resumed_token_state_boundary_after"
+        ):
+            removed = True
+            continue
+        filtered.append(row)
+    result = trial.state_index_verdict(filtered, {"ok": True})
+    assert result["row_gate_ok"] is False
+    assert result["decision"] == (
+        "native_boundary_does_not_match_every_exact_copy"
+    )
 
 
 def test_numerical_failure_still_writes_state_index_verdict(

@@ -863,3 +863,33 @@ Do not weaken the wildcard gate or use a different HCCL port to share cards;
 exclusive NPU ownership through readiness is part of the numerical ruler.
 Once admitted, v12r21 remains a single NPU numerical attempt. Performance and
 E2E quality stay prohibited until the row gate and exact replay canary pass.
+
+## 2026-09-17 v12r21 decisive row-gate hardening
+
+A source audit against the pinned v0.23.0 Ascend GDN metadata builder found
+that the original v12r20 verdict was weaker than the instrumentation. It could
+accept one exact copy and one before/after boundary per TP worker even if the
+other state family or one representative layer was absent. That would make a
+partial trace look like a complete state-row proof.
+
+The verdict now requires, on every one of four TP workers, both state indices
+0 and 1 across the first and last representative GDN layers. The set of exact
+copy keys must equal the sets of before-native and after-native boundary keys,
+without duplicate-key collapse. Every worker's mapping event must cover all 48
+GDN layers and contain two complete representative mappings. The existing
+source-row-unchanged, destination-row-updated, and strict numerical canary
+requirements remain unchanged.
+
+The pinned v0.23.0 image, with no device mapping and no network, passed 81
+plugin/controller tests. A focused metadata and controller run passed 24
+tests, including graph-padded remapping of every reviewed Ascend temporal and
+causal-convolution index path while preserving buffer addresses.
+
+The current live NPU4-7 snapshot is device-process-free at about 2868-2869 MiB
+HBM per card, but v12r21 is still not admitted. Running privileged container
+`Maxon4ick_torch_910_dev` has no provable physical-device scope and is being
+used interactively by a bash plus opencode process. The clean committed
+preflight rejected it as a wildcard contender. Do not stop, share, or
+allowlist it; rerun preflight only after its live claim disappears or its owner
+provides an authoritative narrower device scope. No NPU numerical,
+performance, or quality result was produced in this preparation turn.

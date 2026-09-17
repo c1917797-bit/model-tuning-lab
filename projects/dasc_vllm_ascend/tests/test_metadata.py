@@ -176,6 +176,65 @@ def test_stable_remapper_targets_request_owned_slots():
     )
 
 
+def test_stable_remapper_targets_all_ascend_state_paths_with_padding():
+    metadata = Metadata(
+        non_spec_state_indices_tensor=torch.tensor(
+            [7, 3, -1], dtype=torch.int32
+        ),
+        spec_state_indices_tensor=torch.tensor(
+            [[3, 7], [-1, -1]], dtype=torch.int32
+        ),
+        prefill_state_indices=torch.tensor([3], dtype=torch.int32),
+        non_spec_prefill_metadata=Prefill(
+            Conv(torch.tensor([7, 3, -1], dtype=torch.int32))
+        ),
+        non_spec_decode_metadata=Decode(
+            Conv(torch.tensor([7, 3, -1], dtype=torch.int32))
+        ),
+        spec_decode_metadata=SpecDecode(
+            SpecConv(
+                torch.tensor([[3, 7], [-1, -1]], dtype=torch.int32)
+            )
+        ),
+    )
+    remapper = StableAscendGDNMetadataRemapper()
+
+    mapped, plan = remapper.prepare(
+        metadata, active_slots=torch.tensor([5, 1], dtype=torch.int32)
+    )
+    first_pointers = remapper.pointers
+
+    assert torch.equal(plan.block_ids, torch.tensor([3, 7], dtype=torch.int32))
+    assert torch.equal(
+        mapped.non_spec_state_indices_tensor,
+        torch.tensor([1, 5, -1], dtype=torch.int32),
+    )
+    assert torch.equal(
+        mapped.spec_state_indices_tensor,
+        torch.tensor([[5, 1], [-1, -1]], dtype=torch.int32),
+    )
+    assert torch.equal(
+        mapped.prefill_state_indices, torch.tensor([5], dtype=torch.int32)
+    )
+    assert torch.equal(
+        mapped.non_spec_prefill_metadata.causal_conv1d.cache_indices,
+        torch.tensor([1, 5, -1], dtype=torch.int32),
+    )
+    assert torch.equal(
+        mapped.non_spec_decode_metadata.causal_conv1d.cache_indices,
+        torch.tensor([1, 5, -1], dtype=torch.int32),
+    )
+    assert torch.equal(
+        mapped.spec_decode_metadata.spec_causal_conv1d.cache_indices,
+        torch.tensor([[5, 1], [-1, -1]], dtype=torch.int32),
+    )
+
+    remapper.prepare(
+        metadata, active_slots=torch.tensor([6, 2], dtype=torch.int32)
+    )
+    assert remapper.pointers == first_pointers
+
+
 def test_stable_remapper_rejects_invalid_request_slot_map():
     metadata = Metadata(torch.tensor([7, 3]), None, None, None, None, None)
     remapper = StableAscendGDNMetadataRemapper()

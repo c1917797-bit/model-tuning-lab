@@ -25,6 +25,11 @@ controller.RESULT = Path(
 controller.CONTAINER = "dasc_qwen36_state_index_v12r20_20260917"
 controller.PLUGIN_MODE = "physical-cache-native-all-heads-state-index"
 
+EXPECTED_TP_WORKERS = 4
+EXPECTED_GDN_LAYERS = 48
+EXPECTED_STATE_INDICES = {0, 1}
+EXPECTED_REPRESENTATIVE_LAYERS = 2
+
 
 def _event_key(row: dict) -> tuple:
     return (
@@ -47,15 +52,23 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
         for row in rows
         if row.get("event") == "gdn_running_state_indices_remapped"
     ]
-    before = {
-        _event_key(row): row
+    before_rows = [
+        row
         for row in rows
         if row.get("event") == "first_resumed_token_state_boundary_before"
+    ]
+    after_rows = [
+        row
+        for row in rows
+        if row.get("event") == "first_resumed_token_state_boundary_after"
+    ]
+    before = {
+        _event_key(row): row
+        for row in before_rows
     }
     after = {
         _event_key(row): row
-        for row in rows
-        if row.get("event") == "first_resumed_token_state_boundary_after"
+        for row in after_rows
     }
 
     copy_exact = [
@@ -66,16 +79,32 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
         == row.get("destination_after_copy", {}).get("full_sha256")
         and row.get("copy_bytes", 0) > 0
     ]
-    changed_mappings = []
+    valid_mappings = []
     for row in mappings:
         representative = row.get("representative_layers") or []
-        if any(
-            layer.get("source_state_indices")
-            != layer.get("destination_state_indices")
-            for layer in representative
+        representative_complete = (
+            len(representative) == EXPECTED_REPRESENTATIVE_LAYERS
+            and all(
+                bool(layer.get("source_state_indices"))
+                and len(layer.get("source_state_indices"))
+                == len(layer.get("destination_state_indices") or [])
+                for layer in representative
+            )
+        )
+        if (
+            row.get("layer_count") == EXPECTED_GDN_LAYERS
+            and representative_complete
+            and any(
+                layer.get("source_state_indices")
+                != layer.get("destination_state_indices")
+                for layer in representative
+            )
         ):
-            changed_mappings.append(row)
+            valid_mappings.append(row)
 
+    copy_exact_keys = {_event_key(row) for row in copy_exact}
+    before_keys = set(before)
+    after_keys = set(after)
     matched_keys = sorted(set(before).intersection(after))
     source_unchanged = []
     destination_changed = []
@@ -98,30 +127,92 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
             destination_changed.append(key)
 
     copy_pids = sorted({row.get("pid") for row in copy_exact})
-    mapping_pids = sorted({row.get("pid") for row in changed_mappings})
+    mapping_pids = sorted({row.get("pid") for row in valid_mappings})
     boundary_pids = sorted({key[0] for key in matched_keys})
     destination_change_pids = sorted({key[0] for key in destination_changed})
+    copy_states_by_pid = {
+        pid: {
+            key[2]
+            for key in copy_exact_keys
+            if key[0] == pid
+        }
+        for pid in copy_pids
+    }
+    copy_layers_by_pid = {
+        pid: {
+            key[1]
+            for key in copy_exact_keys
+            if key[0] == pid
+        }
+        for pid in copy_pids
+    }
+    copy_layer_state_pairs_by_pid = {
+        pid: {
+            (key[1], key[2])
+            for key in copy_exact_keys
+            if key[0] == pid
+        }
+        for pid in copy_pids
+    }
+    copy_coverage_complete = (
+        len(copy_pids) == EXPECTED_TP_WORKERS
+        and all(
+            copy_states_by_pid[pid] == EXPECTED_STATE_INDICES
+            and len(copy_layers_by_pid[pid])
+            == EXPECTED_REPRESENTATIVE_LAYERS
+            and len(copy_layer_state_pairs_by_pid[pid])
+            == (
+                len(EXPECTED_STATE_INDICES)
+                * EXPECTED_REPRESENTATIVE_LAYERS
+            )
+            for pid in copy_pids
+        )
+    )
+    boundary_matches_copy = (
+        bool(copy_exact_keys)
+        and copy_exact_keys == before_keys == after_keys
+        and len(before_rows) == len(before)
+        and len(after_rows) == len(after)
+    )
     checks = {
-        "copy_materialized_exactly_on_all_four_tp_workers": len(copy_pids) == 4,
-        "state_index_changed_on_all_four_tp_workers": len(mapping_pids) == 4,
-        "before_after_boundary_pairs_on_all_four_tp_workers": (
-            len(boundary_pids) == 4 and bool(matched_keys)
+        "copy_materialized_exactly_on_all_four_tp_workers": (
+            len(copy_pids) == EXPECTED_TP_WORKERS
         ),
+        "copy_covers_both_states_and_representative_layers": (
+            copy_coverage_complete
+        ),
+        "state_index_changed_on_all_four_tp_workers": (
+            len(mapping_pids) == EXPECTED_TP_WORKERS
+        ),
+        "state_index_mapping_covers_all_gdn_layers": (
+            len(valid_mappings) == EXPECTED_TP_WORKERS
+        ),
+        "before_after_boundary_pairs_on_all_four_tp_workers": (
+            len(boundary_pids) == EXPECTED_TP_WORKERS
+            and bool(matched_keys)
+        ),
+        "every_exact_copy_has_one_native_boundary_pair": boundary_matches_copy,
         "old_source_rows_unchanged": (
             bool(matched_keys) and len(source_unchanged) == len(matched_keys)
         ),
         "destination_rows_updated_on_all_four_tp_workers": (
-            len(destination_change_pids) == 4
+            len(destination_change_pids) == EXPECTED_TP_WORKERS
         ),
     }
     row_gate_ok = all(checks.values())
     numerical_ok = None if numerical is None else numerical.get("ok") is True
     if not checks["copy_materialized_exactly_on_all_four_tp_workers"]:
         decision = "physical_copy_missing_or_not_exact"
+    elif not checks["copy_covers_both_states_and_representative_layers"]:
+        decision = "physical_copy_coverage_incomplete"
     elif not checks["state_index_changed_on_all_four_tp_workers"]:
         decision = "running_state_index_not_changed_on_all_workers"
+    elif not checks["state_index_mapping_covers_all_gdn_layers"]:
+        decision = "running_state_index_mapping_coverage_incomplete"
     elif not checks["before_after_boundary_pairs_on_all_four_tp_workers"]:
         decision = "first_resumed_token_boundary_missing"
+    elif not checks["every_exact_copy_has_one_native_boundary_pair"]:
+        decision = "native_boundary_does_not_match_every_exact_copy"
     elif not checks["old_source_rows_unchanged"]:
         decision = "native_execution_still_mutated_old_source_row"
     elif not checks["destination_rows_updated_on_all_four_tp_workers"]:
@@ -138,8 +229,16 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
         "event_counts": {
             "physical_state_copy_materialized": len(copies),
             "gdn_running_state_indices_remapped": len(mappings),
-            "first_resumed_token_state_boundary_before": len(before),
-            "first_resumed_token_state_boundary_after": len(after),
+            "first_resumed_token_state_boundary_before": len(before_rows),
+            "first_resumed_token_state_boundary_after": len(after_rows),
+        },
+        "expected": {
+            "tp_workers": EXPECTED_TP_WORKERS,
+            "gdn_layers": EXPECTED_GDN_LAYERS,
+            "state_indices": sorted(EXPECTED_STATE_INDICES),
+            "representative_layers_per_worker": (
+                EXPECTED_REPRESENTATIVE_LAYERS
+            ),
         },
         "checks": checks,
         "copy_worker_pids": copy_pids,
@@ -147,6 +246,7 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
         "boundary_worker_pids": boundary_pids,
         "destination_change_worker_pids": destination_change_pids,
         "matched_boundary_count": len(matched_keys),
+        "exact_copy_key_count": len(copy_exact_keys),
         "row_gate_ok": row_gate_ok,
         "numerical_canary_available": numerical is not None,
         "numerical_canary_ok": numerical_ok,
