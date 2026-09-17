@@ -254,6 +254,102 @@ def _install_heterogeneous_cache_config_awareness_patch(
     )
 
 
+def _install_scheduler_branch_evidence_patch(
+    config: DascConfig, scheduler_class: Any
+) -> None:
+    """Prove lifecycle flags reach the scheduler branches that consume them.
+
+    A true config property is only precondition evidence.  This wrapper emits
+    bounded, branch-local events without changing scheduling decisions.
+    """
+    if getattr(scheduler_class, "_mst_dasc_branch_evidence_installed", False):
+        return
+
+    original_init = scheduler_class.__init__
+    original_split = scheduler_class._mamba_block_aligned_split
+    original_schedule = scheduler_class.schedule
+
+    @functools.wraps(original_init)
+    def init_with_branch_evidence(self, *args, **kwargs):
+        original_init(self, *args, **kwargs)
+        emit(
+            config.evidence_path,
+            "scheduler_mamba_lifecycle_initialized",
+            mode=config.mode,
+            has_mamba_layers=bool(self.has_mamba_layers),
+            need_mamba_block_aligned_split=bool(
+                self.need_mamba_block_aligned_split
+            ),
+            needs_kv_cache_zeroing=bool(self.needs_kv_cache_zeroing),
+            block_size=int(self.block_size),
+        )
+
+    @functools.wraps(original_split)
+    def split_with_branch_evidence(self, request, num_new_tokens, *args, **kwargs):
+        result = original_split(self, request, num_new_tokens, *args, **kwargs)
+        if not getattr(self, "_mst_dasc_split_branch_emitted", False):
+            emit(
+                config.evidence_path,
+                "scheduler_mamba_aligned_split_executed",
+                mode=config.mode,
+                request_id=getattr(request, "request_id", None),
+                num_computed_tokens=int(request.num_computed_tokens),
+                num_prompt_tokens=int(request.num_prompt_tokens),
+                requested_tokens=int(num_new_tokens),
+                scheduled_tokens=int(result),
+                changed=int(result) != int(num_new_tokens),
+            )
+            self._mst_dasc_split_branch_emitted = True
+        return result
+
+    def count_block_ids(value):
+        if value is None:
+            return 0
+        if isinstance(value, dict):
+            return sum(count_block_ids(item) for item in value.values())
+        if isinstance(value, (list, tuple, set)):
+            return sum(
+                count_block_ids(item)
+                if isinstance(item, (dict, list, tuple, set))
+                else 1
+                for item in value
+            )
+        return 1
+
+    @functools.wraps(original_schedule)
+    def schedule_with_branch_evidence(self, *args, **kwargs):
+        output = original_schedule(self, *args, **kwargs)
+        block_count = count_block_ids(
+            getattr(output, "new_block_ids_to_zero", None)
+        )
+        first_call = not getattr(self, "_mst_dasc_zero_branch_emitted", False)
+        first_nonempty = block_count > 0 and not getattr(
+            self, "_mst_dasc_nonempty_zero_branch_emitted", False
+        )
+        if first_call or first_nonempty:
+            emit(
+                config.evidence_path,
+                "scheduler_kv_zeroing_branch_executed",
+                mode=config.mode,
+                new_block_count=block_count,
+                nonempty=block_count > 0,
+            )
+            self._mst_dasc_zero_branch_emitted = True
+            if block_count > 0:
+                self._mst_dasc_nonempty_zero_branch_emitted = True
+        return output
+
+    scheduler_class.__init__ = init_with_branch_evidence
+    scheduler_class._mamba_block_aligned_split = split_with_branch_evidence
+    scheduler_class.schedule = schedule_with_branch_evidence
+    scheduler_class._mst_dasc_branch_evidence_installed = True
+    emit(
+        config.evidence_path,
+        "scheduler_branch_evidence_installed",
+        mode=config.mode,
+    )
+
+
 def _install_aligned_hybrid_grouping_patch(config: DascConfig, kv_cache_utils: Any) -> None:
     """Group aligned attention and heterogeneous Mamba pages in one pool.
 
@@ -508,16 +604,19 @@ def _install_heterogeneous_mamba_lifecycle_patch(
                 forward_context,
             )
         proxy_groups = list(kv_cache_config.kv_cache_groups)
+        aggregate_layer_count = 0
         for group_id in group_ids:
             names = names_by_group.get(group_id)
             if names is not None:
+                aggregate_layer_count += len(names)
                 group = proxy_groups[group_id]
                 proxy_groups[group_id] = SimpleNamespace(
                     layer_names=list(names),
                     kv_cache_spec=group.kv_cache_spec,
                 )
         proxy_config = SimpleNamespace(kv_cache_groups=proxy_groups)
-        return original_collect(
+        offset_before = int(getattr(copy_bufs, "offset", 0))
+        result = original_collect(
             copy_bufs,
             proxy_config,
             copy_funcs,
@@ -528,6 +627,21 @@ def _install_heterogeneous_mamba_lifecycle_patch(
             req_state,
             forward_context,
         )
+        offset_after = int(getattr(copy_bufs, "offset", offset_before))
+        if not getattr(mamba_utils, "_mst_dasc_copy_branch_emitted", False):
+            emit(
+                config.evidence_path,
+                "heterogeneous_mamba_copy_branch_executed",
+                mode=config.mode,
+                group_ids=[int(group_id) for group_id in group_ids],
+                source_block_index=int(src_block_idx),
+                destination_block_index=int(dest_block_idx),
+                accept_token_bias=int(accept_token_bias),
+                mamba_layer_count=aggregate_layer_count,
+                copy_entries_added=offset_after - offset_before,
+            )
+            mamba_utils._mst_dasc_copy_branch_emitted = True
+        return result
 
     mamba_utils.get_mamba_groups = get_dasc_mamba_groups
     mamba_utils.MambaCopyBuffers.create = create_dasc_copy_buffers
@@ -1051,6 +1165,7 @@ def install(config: DascConfig) -> None:
     from vllm.forward_context import get_forward_context
     from vllm.v1.worker import mamba_utils
     from vllm.v1.core import kv_cache_utils
+    from vllm.v1.core.sched.scheduler import Scheduler
     from vllm.v1.kv_cache_interface import KVCacheConfig
     from vllm_ascend.ops import gdn
     from vllm_ascend.device import device_op, utils as device_utils
@@ -1160,6 +1275,7 @@ def install(config: DascConfig) -> None:
             KVCacheConfig,
             kv_cache_utils,
         )
+        _install_scheduler_branch_evidence_patch(config, Scheduler)
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
         _install_heterogeneous_mamba_lifecycle_patch(config, mamba_utils)

@@ -28,6 +28,10 @@ Ascend path.
 6. Emit bounded activation evidence from every relevant worker, rank, or engine
    process. Run the same canary with the mechanism disabled and prove the marker
    disappears while the request still succeeds.
+   A restored configuration property is precondition evidence only: when the
+   hypothesis depends on a scheduler split, cache zeroing, state copy, or
+   restore branch, emit bounded evidence from that branch and validate its
+   material inputs/outputs. Do not infer branch execution from a true flag.
 7. Compare against a tiny baseline under the same environment fingerprint before
    any larger benchmark.
 8. If correctness fails, classify the stage as `failed` and recover active code.
@@ -53,6 +57,8 @@ Only scale to repeated benchmark when:
 - Do not combine multiple paper ideas in one canary.
 - Do not treat import success or a marker from only the launcher as proof that
   tensor-parallel workers or the engine core executed the change.
+- Do not treat a lifecycle/configuration flag as proof that its consuming
+  branch executed; require branch-local evidence plus output correctness.
 - Do not use canary success as a performance claim.
 - Do not leave failed active code in the final branch tree, even though the
   failed commit/evidence should remain reachable in history.

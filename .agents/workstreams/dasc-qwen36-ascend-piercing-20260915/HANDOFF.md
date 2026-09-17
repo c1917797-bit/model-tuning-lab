@@ -577,3 +577,55 @@ run_v12r18_mixed_lifecycle_fix_control.py attempt after a fresh live-process,
 HBM, container-tree, port, lock, image, repository, and immutable-root
 preflight. No new DASC NPU numerical, performance, or quality result was
 created by this recheck.
+
+## 2026-09-17 v12r18 result and v12r19 readiness
+
+The single authorized v12r18 attempt ran on physical NPU4-7. Model load,
+TP4 worker ownership, graph compilation/capture, API readiness, all 192 native
+all-head cache bindings, and cleanup passed. The scheduler reducer emitted
+`has_mamba_layers=true` and `needs_kv_cache_zeroing=true`, and the repeated
+long prompt accumulated 4,608 prefix-cache-hit tokens. This proves the
+configuration path and physical allocation were active.
+
+The numerical gate still failed. The short output was
+`OK, I will \"wo\" to`, and the three identical long-prefix requests produced
+different nonsensical continuations. Therefore `identical_replays=false`,
+`replay_exact_verified=false`, and `short_exact_ok=false`. The current
+scheduler-awareness treatment is rejected. Do not benchmark it, do not run
+E2E quality, and do not rerun the same bytes or immutable root.
+
+Authoritative artifacts are under
+`/cache/cch/dasc-qwen36-ascend-20260915/mixed-lifecycle-fix-all-heads-v12r18`:
+
+- `physical-canary.json`: `e3b4825e1ae8991ae894569c7488ab92eba2612ffa9e2184e40aed87b2f230bd`;
+- `evidence.jsonl`: `957ee11b0ce14214ab5c83ed37184a00a3198dbaa4b197934d62b450c1ac8b2f`;
+- `service.log`: `16580897d3e3f6c7ca45e11459ee36c4eac944c40a02c9f54bc0f9e75a1f3c97`;
+- `container-inspect.json`: `1947d3115455b30dcd41c0c3dc133c367d016df32c77f2798395e50c8bb93284`.
+
+The owned container exited and physical NPU4-7 returned to the driver-only
+2,867-2,871 MiB floor with no device processes. No performance or E2E quality
+result was created.
+
+The decisive observability gap is now explicit: a true lifecycle property is
+only precondition evidence. v12r18 did not record whether the scheduler's
+aligned-split branch, its new-block zeroing branch, or the Mamba state-copy
+branch actually executed with the expected material inputs. v12r19 is prepared
+as an observability-only all-head control. It adds bounded branch-local events,
+does not alter scheduling or copy decisions, and uses the new immutable root
+`branch-evidence-all-heads-v12r19`. Its focused pinned-image test gate passes
+20/20; the full plugin plus v12r19 controller gate passes 64/64. Run it once
+only after commit/push and a fresh resource/root preflight.
+
+Interpret the v12r19 evidence before changing code again:
+
+- missing scheduler initialization or split events means the live scheduler
+  class/alias was not patched as assumed;
+- a split event whose scheduled count is not changed to the required boundary
+  means the restored flag is insufficient for the actual request shape;
+- no nonempty zeroing event means the block pool did not materialize blocks for
+  the worker zeroing path, even if the property was true;
+- no heterogeneous Mamba copy event means the aggregate group still bypassed
+  the state-copy lifecycle;
+- if all three branches execute with expected values and outputs still diverge,
+  move below configuration/lifecycle selection to physical row materialization,
+  per-layer byte offsets, and the exact first resumed-token state boundary.

@@ -589,6 +589,71 @@ def test_heterogeneous_mamba_lifecycle_filters_attention_layers(tmp_path):
         {},
     )
     assert observed["layer_names"] == ["mamba6", "mamba12"]
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    copied = next(
+        event
+        for event in events
+        if event["event"] == "heterogeneous_mamba_copy_branch_executed"
+    )
+    assert copied["group_ids"] == [0]
+    assert copied["mamba_layer_count"] == 2
+    assert copied["source_block_index"] == 0
+    assert copied["destination_block_index"] == 1
+
+
+def test_scheduler_branch_evidence_observes_execution_without_changing_results(
+    tmp_path,
+):
+    class FakeScheduler:
+        def __init__(self):
+            self.has_mamba_layers = True
+            self.need_mamba_block_aligned_split = True
+            self.needs_kv_cache_zeroing = True
+            self.block_size = 16
+            self.outputs = [
+                SimpleNamespace(new_block_ids_to_zero=None),
+                SimpleNamespace(new_block_ids_to_zero=[[3, 4], [8]]),
+            ]
+
+        def _mamba_block_aligned_split(self, _request, num_new_tokens):
+            return num_new_tokens - 3
+
+        def schedule(self):
+            return self.outputs.pop(0)
+
+    config = SimpleNamespace(
+        mode="physical-cache-native-all-heads",
+        evidence_path=tmp_path / "events.jsonl",
+    )
+    physical_patch._install_scheduler_branch_evidence_patch(config, FakeScheduler)
+    scheduler = FakeScheduler()
+    request = SimpleNamespace(
+        request_id="req-1",
+        num_computed_tokens=0,
+        num_prompt_tokens=1938,
+    )
+    assert scheduler._mamba_block_aligned_split(request, 1938) == 1935
+    assert scheduler.schedule().new_block_ids_to_zero is None
+    assert scheduler.schedule().new_block_ids_to_zero == [[3, 4], [8]]
+
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    by_name = {}
+    for event in events:
+        by_name.setdefault(event["event"], []).append(event)
+    initialized = by_name["scheduler_mamba_lifecycle_initialized"][0]
+    assert initialized["need_mamba_block_aligned_split"] is True
+    split = by_name["scheduler_mamba_aligned_split_executed"][0]
+    assert split["requested_tokens"] == 1938
+    assert split["scheduled_tokens"] == 1935
+    assert split["changed"] is True
+    zero_events = by_name["scheduler_kv_zeroing_branch_executed"]
+    assert [event["new_block_count"] for event in zero_events] == [0, 3]
 
 
 def test_scheduler_reduction_preserves_mamba_lifecycle_flags(tmp_path):
