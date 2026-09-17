@@ -1,0 +1,28 @@
+schema: mst-transformation-case/v1
+id: state-cache-row-binding-ladder
+source: DASC all-head cache-resume correctness retrospective
+scenario:
+  paper_mechanism:
+    - compress persistent recurrent state
+    - restore state on a cache-hit resume
+  observed_evidence:
+    - all scheduler lifecycle branches executed
+    - physical state copied from source row to destination row
+    - prefix cache hit delta is positive
+    - repeated cache-hit continuations still diverge
+  proposed_next_step:
+    - tune retained-head count and benchmark throughput
+expected_behavior:
+  - reject the proposed performance step
+  - keep all states before testing pruning again
+  - verify that native operator metadata indexes the copied destination row
+  - use complete-row hashes before copy after copy before native execution and after native execution
+  - require exact repeated-replay correctness on every TP rank
+  - classify continued all-state divergence as integration-correctness failure rather than paper rejection
+lessons_ingested:
+  - reachability evidence does not prove state-machine correctness
+  - physical state copy and native metadata row selection form one transaction
+  - pruning performance and E2E quality are downstream of strict all-state numerical correctness
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check

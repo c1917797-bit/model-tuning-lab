@@ -105,6 +105,19 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
   treat the admission failure as numerical, performance, or quality evidence.
   A later attempt requires a fresh live audit and a new control-plane
   idempotency key; never reuse the completed key from the rejected admission.
+- A running privileged Ascend-capable container with neither explicit Docker
+  device mappings nor a valid visible-device declaration has
+  `unknown_device_scope`; it is not claim-free. Under an exclusive-use
+  contract, conservatively treat it as a wildcard NPU contender until its owner
+  proves a narrower live scope or stops it. Absence of a device PID at one
+  instant is not enough because the container can start workers later.
+- Keep ownership monitoring active from the final prelaunch check through
+  service readiness when any tolerated foreign container can activate without
+  a new Docker mapping. If a foreign PID appears, stop only the owned launch,
+  preserve both identities, and classify the attempt as
+  `not_run/resource_race`. An HCCL bind collision during worker startup is
+  resource-race evidence when the conflicting socket belongs to that foreign
+  workload; it is not an algorithm or numerical result.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.
@@ -132,6 +145,9 @@ the workstream upstream. Serialized integration alone updates `main`.
 - Live Git, container, port, memory, and NPU state are captured before mutation.
 - The launch record distinguishes admission failure from an experiment that
   crossed its owned start boundary.
+- Privileged containers without a provable device scope are recorded as
+  wildcard contenders, and startup-window monitoring detects late activation
+  before any experiment result is accepted.
 - Container occupancy reports include state and identify whether the default
   active-claim rule or an explicitly stricter declaration rule was applied.
 - No verification value or other credential appears in tracked files or diffs.

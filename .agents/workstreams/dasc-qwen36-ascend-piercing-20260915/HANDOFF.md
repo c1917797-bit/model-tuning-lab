@@ -787,3 +787,45 @@ after a fresh audit proves a complete four-card lane idle, the immutable root
 absent, port 8030 free, and post-readiness ownership exclusive to the DASC
 container. Performance and E2E quality remain prohibited until the strict
 all-head numerical canary passes.
+
+## 2026-09-17 v12r20 terminal resource-race result
+
+v12r20 launched once from committed head
+`6fbb2f19474bb4a961f4f5a4ca498f4208cf0722` after both preflight and the
+immediate prelaunch audit showed physical NPU4-7 process-free at idle HBM.
+The owned service never reached readiness. During the plugin's TP alignment
+collective, all workers failed HCCL initialization because NPU network socket
+port 16666 was already bound.
+
+The conflicting NPU4-7 worker PIDs were attributed through cgroups to foreign
+container `alltoall-dedup-ep4_nk`
+(`fd2be986b54d2ac96d30b5c3fbc5785ba7c1f9703d812275d0fa0d48204622b5`).
+That container was already running with `privileged=true`, no explicit Docker
+device mapping, and no visible-device declaration, so the old claim parser
+could not assign it a lane. It activated TP workers during the DASC startup and
+later held about 28.2 GiB on each of physical NPU4-7.
+
+Classify v12r20 as `not_run/resource_race_before_readiness`. It emitted no
+state-copy, metadata-remap, lifecycle, or numerical-canary events. Therefore
+the state-index hypothesis remains untested; this is not a DASC algorithm,
+numerical, performance, or quality result. The owned container exited and was
+not restarted.
+
+Immutable artifact root:
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-all-heads-v12r20`.
+Key SHA256 values: service log
+`da466cdf0b05c9d842cf7fb69fafcf49efd644526a9cdea64b1f469845763ae8`,
+evidence
+`a6c4ccf8e7ea6e367703bc11db058b8772fe24d3e268b60b69dd63b0215f7b13`,
+state-index verdict
+`c4629b3dd0ad3506298f89debb39254c734a73e36641daf62be310b3470ffaef`,
+and prelaunch audit
+`e5aeb8603bfc2749cfcc89db4f73cba990104479b21f3af59cf69e1f2782206e`.
+
+Do not reuse the v12r20 root or idempotency key. A later v12r21-style attempt
+may reuse the same one-variable code only in a new immutable root after the
+entire lane is exclusive through readiness. Treat any running privileged
+Ascend-capable container with unprovable device scope as a wildcard contender,
+and monitor ownership continuously from final admission through readiness.
+At the terminal audit, NPU0-3 and NPU4-7 both had foreign TP workers; do not
+stop or share them.

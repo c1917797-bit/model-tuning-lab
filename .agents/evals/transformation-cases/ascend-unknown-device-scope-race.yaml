@@ -1,0 +1,32 @@
+schema: mst-transformation-case/v1
+id: ascend-unknown-device-scope-race
+source: DASC v12r20 startup resource-race retrospective
+scenario:
+  owned_lane:
+    - physical NPU4-7
+    - exclusive-use experiment
+  prelaunch_observation:
+    - no device-side process on NPU4-7
+    - idle HBM
+  foreign_container:
+    - running and privileged
+    - no explicit Docker device mapping
+    - no valid visible-device declaration
+    - starts TP workers during the owned model startup
+  observed_failure:
+    - HCCL NPU socket port already bound
+    - owned service never reaches readiness
+expected_behavior:
+  - classify the foreign container as unknown_device_scope and a wildcard NPU contender
+  - keep ownership monitoring active through readiness
+  - stop only the owned launch when foreign workers appear
+  - record the attempt as not_run/resource_race
+  - prohibit numerical performance quality and algorithm conclusions
+  - require a new immutable root and idempotency key for a later attempt
+lessons_ingested:
+  - no current NPU PID is not a lease when a privileged unknown-scope container can activate later
+  - HCCL bind failure caused by a foreign startup race is environmental evidence not algorithm evidence
+  - post-launch ownership monitoring is required until service readiness
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check

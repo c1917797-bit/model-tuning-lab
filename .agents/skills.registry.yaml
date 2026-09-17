@@ -21,6 +21,7 @@ skills:
       - verify the canonical remote repository and Ascend machine state
       - distinguish active and historical container device claims
       - attribute changing NPU process ids to their live container workload
+      - classify unknown-scope privileged containers and startup resource races
     scope:
       - AGENTS.md
       - .agents/**
@@ -74,6 +75,7 @@ skills:
       - close a tuning experiment
       - bound recoverable E2E opportunity before implementation
       - audit hybrid cache worker and scheduler lifecycle configuration
+      - localize physical state-row and operator metadata binding failures
     scope:
       - configs/**
       - scripts/**

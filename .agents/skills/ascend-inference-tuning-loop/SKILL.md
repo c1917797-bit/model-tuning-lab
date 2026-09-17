@@ -115,6 +115,27 @@ timeout, correctness failure, or performance result unchanged.
 
 For algorithms that claim gains by reducing recurrent or prefix state:
 
+- Use a one-variable correctness ladder before restoring compression:
+  plugin-disabled dense control, all-state native control, all-state bridge
+  control, lifecycle-branch coverage, physical-row/metadata binding, and only
+  then the pruned candidate. Give every rung a new immutable artifact root and
+  close it with an explicit decision; do not change pruning and lifecycle
+  mechanics in the same diagnostic.
+- Treat scheduler flags, branch counters, cache-hit deltas, state-copy events,
+  and HTTP success as reachability evidence only. They do not override a failed
+  exact repeated-replay canary. Performance and E2E quality remain prohibited
+  until the all-state path meets the declared token- or logit-equality contract
+  across repeated cache-hit resumes.
+- When state moves from one physical row to another, prove the native operator
+  consumes and updates the destination row: hash the complete representative
+  rows before copy, after copy, immediately before native execution, and after
+  execution; require the source row to remain unchanged and the destination row
+  to change on every TP rank. Sampled elements, pointer stability, or a copy
+  count alone cannot prove row identity.
+- Keep graph-captured metadata buffers at stable addresses while changing their
+  values outside replay. If an all-state control still diverges, classify it as
+  an integration-correctness failure and localize the next operator boundary;
+  do not tune retention, benchmark the candidate, or reject the paper.
 - First prove the plugin reaches the real checkpoint save/restore path on every
   TP rank and expected layer; an API success or model-level hook is not enough.
 - Separate a numerical canary from a performance implementation. A canary that
