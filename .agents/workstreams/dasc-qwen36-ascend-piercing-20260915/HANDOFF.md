@@ -545,3 +545,35 @@ A pass permits restoring the all-head bridge and then W64 pruning. A failure
 closes this scheduler-awareness treatment and moves localization to the actual
 checkpoint materialization boundary. It does not permit performance or quality
 testing.
+
+## 2026-09-17 publication and live-resource recheck
+
+GitHub connectivity recovered. The workstream branch was pushed and remotely
+verified at f5ada8a6d3d499a7fc433482602ee5acb07b9828. The annotated recovery tag
+checkpoint/dasc-qwen36-property-only-v12r18-20260917 was also pushed and
+verified at tag object 27b07e5bdeea73f77bbe58f506c4e1678bbdefcd, dereferencing to
+the intentionally non-runnable property-only commit
+a36a432933c8ee7c8f6f5354880cc7c0ff35423f.
+
+Do not infer NPU availability from one process-free npu-smi sample or from
+static Docker device declarations alone. The corrected PID-to-cgroup audit
+mapped the live TP4 workers to container vllm_26_au on physical NPU0-3, where
+each card held about 29.9-30.7 GiB HBM. Its Qwen3.8-27B service used port 8261.
+Physical NPU4-7 had no device process and remained at the 2868-2869 MiB idle
+floor. The earlier Qwen3.5 workers in container vllm-ascend had exited; its
+current process tree contained only bash/vim. This matters because privileged
+containers may expose mappings or visible-device values that do not establish
+which cards their live workers actually own.
+
+The operator additionally authorized physical NPU0-3 when they are genuinely
+idle, but they were not idle at this audit. The current v12r18 controller stays
+pinned to physical NPU4-7. Port 8030 was free and the actual immutable result
+root
+/cache/cch/dasc-qwen36-ascend-20260915/mixed-lifecycle-fix-all-heads-v12r18
+was absent.
+
+The next action remains exactly one
+run_v12r18_mixed_lifecycle_fix_control.py attempt after a fresh live-process,
+HBM, container-tree, port, lock, image, repository, and immutable-root
+preflight. No new DASC NPU numerical, performance, or quality result was
+created by this recheck.
