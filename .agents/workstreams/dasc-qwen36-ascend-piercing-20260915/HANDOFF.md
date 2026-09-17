@@ -893,3 +893,22 @@ preflight rejected it as a wildcard contender. Do not stop, share, or
 allowlist it; rerun preflight only after its live claim disappears or its owner
 provides an authoritative narrower device scope. No NPU numerical,
 performance, or quality result was produced in this preparation turn.
+
+## 2026-09-17 checkpoint inventory and reusable gate audit
+
+The target model inventory was re-derived instead of copied from the paper.
+`/cache/efim/Qwen3.6-27B/config.json` declares 64 hidden layers with the
+repeating `linear_attention, linear_attention, linear_attention,
+full_attention` pattern, which yields 48 linear-attention/GDN layers. The
+pinned selector manifest independently reports `layer_count: 48`. Therefore
+the controller's expected count of 48 is correct for this checkpoint even
+though the paper discusses a different Qwen-GDN inventory. Future controllers
+must derive this value from the exact checkpoint and cross-check the selector
+manifest and live activation rather than copying a paper-level count.
+
+The row verdict review also exposed a general false-positive pattern: checking
+the sets of observed ranks, state indices, and layers independently does not
+prove that every required combination exists. The hardened verdict now treats
+rank, state index, and representative layer as one composite key and requires
+the exact copy/before/after key sets without duplicate collapse. This rule is
+now part of the maintainer tuning skill and its transformation eval.

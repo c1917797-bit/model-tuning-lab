@@ -9,6 +9,7 @@ scenario:
     - all scheduler lifecycle branches executed
     - physical state copied from source row to destination row
     - prefix cache hit delta is positive
+    - every rank state family and representative layer appears somewhere in the trace
     - repeated cache-hit continuations still diverge
   proposed_next_step:
     - tune retained-head count and benchmark throughput
@@ -17,11 +18,15 @@ expected_behavior:
   - keep all states before testing pruning again
   - verify that native operator metadata indexes the copied destination row
   - use complete-row hashes before copy after copy before native execution and after native execution
+  - derive the expected layer inventory from the pinned checkpoint and cross-check the selector manifest and live activation
+  - require the complete rank by state family by representative layer Cartesian product with identical uniquely keyed event sets
   - require exact repeated-replay correctness on every TP rank
   - classify continued all-state divergence as integration-correctness failure rather than paper rejection
 lessons_ingested:
   - reachability evidence does not prove state-machine correctness
   - physical state copy and native metadata row selection form one transaction
+  - independent set coverage can falsely accept a trace that omits required rank state layer combinations
+  - paper architecture counts do not replace the exact target checkpoint inventory
   - pruning performance and E2E quality are downstream of strict all-state numerical correctness
 validation_commands:
   - ./scripts/validate-mst.sh

@@ -76,6 +76,7 @@ skills:
       - bound recoverable E2E opportunity before implementation
       - audit hybrid cache worker and scheduler lifecycle configuration
       - localize physical state-row and operator metadata binding failures
+      - verify checkpoint-derived state inventories and Cartesian trace coverage
     scope:
       - configs/**
       - scripts/**

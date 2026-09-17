@@ -121,6 +121,18 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   then the pruned candidate. Give every rung a new immutable artifact root and
   close it with an explicit decision; do not change pruning and lifecycle
   mechanics in the same diagnostic.
+- Derive the expected layer and state-family inventory from the exact pinned
+  checkpoint configuration, then cross-check it against the generated
+  selector/plan manifest and live worker activation. Treat architecture counts
+  quoted by a paper or a related checkpoint as context only. Fail before an
+  accelerator launch when these inventories disagree, and retain the
+  checkpoint and manifest hashes with the decision.
+- Make trace coverage a Cartesian-product gate, not a collection of independent
+  membership checks. For every required TP rank, state family/index, and
+  representative layer, require one uniquely keyed copy, before-native, and
+  after-native event; compare those key sets exactly and reject duplicate-key
+  collapse. Seeing every rank, state, and layer somewhere can still omit a
+  required combination.
 - Treat scheduler flags, branch counters, cache-hit deltas, state-copy events,
   and HTTP success as reachability evidence only. They do not override a failed
   exact repeated-replay canary. Performance and E2E quality remain prohibited
