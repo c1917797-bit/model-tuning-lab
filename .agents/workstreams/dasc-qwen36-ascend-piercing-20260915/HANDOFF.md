@@ -522,6 +522,11 @@ worktree is clean and two commits ahead of the public branch. Retry the same
 non-force push only after network reachability returns; do not amend, squash,
 or recreate either commit.
 
+While GitHub is unreachable, the offline recovery bundle is kept at
+`/cache/cch/dasc-qwen36-ascend-20260915/recovery/dasc-qwen36-handoff.bundle`.
+Run `git bundle verify` before using it and compare its advertised branch tip
+with this handoff; regenerate it after any later local-only checkpoint.
+
 Resume in this order:
 
 1. verify branch `HEAD` is the reconciled commit and inspect
