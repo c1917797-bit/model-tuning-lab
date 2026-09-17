@@ -629,3 +629,13 @@ Interpret the v12r19 evidence before changing code again:
 - if all three branches execute with expected values and outputs still diverge,
   move below configuration/lifecycle selection to physical row materialization,
   per-layer byte offsets, and the exact first resumed-token state boundary.
+
+The post-commit preflight found a new resource state: physical NPU4-7 were
+occupied by live TP workers at about 30.7 GiB HBM per card, while physical
+NPU0-3 had no device process and were at the 2.869-2.872 GiB driver floor.
+Because the operator explicitly authorized NPU0-3 when a live audit proves
+them idle, an alternate controller entry point is prepared at
+`run_v12r19_npu0_3_branch_evidence_control.py`. It changes only the physical
+device tuple and immutable root/container identity; candidate bytes and canary
+remain identical. Re-run its own preflight immediately before launch because
+the idle observation is not a reservation.
