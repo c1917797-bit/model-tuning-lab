@@ -262,6 +262,218 @@ def test_native_all_heads_control_keeps_runner_cache_and_metadata(monkeypatch, t
     assert bound["allocation_matches_spec"] is True
 
 
+def test_native_all_heads_state_index_tracks_copied_running_row(
+    monkeypatch, tmp_path
+):
+    metadata = Metadata(torch.tensor([2], dtype=torch.int32))
+    context = SimpleNamespace(attn_metadata={"layers.0": metadata})
+    observed_indices = []
+    observed_pointers = []
+
+    class FakeGdn:
+        def __init__(self):
+            self.prefix = "layers.0"
+            self.A_log = torch.zeros(4)
+            self.dt_bias = torch.zeros(4)
+            self.kv_cache = (
+                torch.zeros(8, 2, 3),
+                torch.zeros(8, 4, 2),
+            )
+
+        def get_kv_cache_spec(self, vllm_config):
+            return _dense_spec()
+
+        def _forward_core(self, *args):
+            active_metadata = context.attn_metadata[self.prefix]
+            state_index = int(
+                active_metadata.non_spec_state_indices_tensor[0].item()
+            )
+            observed_indices.append(state_index)
+            observed_pointers.append(
+                active_metadata.non_spec_state_indices_tensor.data_ptr()
+            )
+            self.kv_cache[1][state_index].add_(1)
+            return "state-index-result"
+
+    module = FakeGdn()
+
+    class FakeRunner:
+        def __init__(self):
+            self.model = SimpleNamespace(modules=lambda: (module,))
+            self.input_batch = SimpleNamespace(req_ids=["req-a"])
+            self.requests = {
+                "req-a": SimpleNamespace(
+                    num_computed_tokens=1536,
+                    _mst_dasc_running_state_block_id=6,
+                )
+            }
+
+        def _model_forward(self, *args, **kwargs):
+            return module._forward_core()
+
+        def _dummy_run(self):
+            return self._model_forward()
+
+    config = SimpleNamespace(
+        representative_a=-0.3,
+        epsilon=0.001,
+        w_max=1e-9,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads-state-index",
+    )
+    monkeypatch.setattr(
+        physical_patch,
+        "retained_head_indices",
+        lambda module, cfg: torch.arange(4, dtype=torch.long),
+    )
+    physical_patch._install_physical_cache_patch(
+        config, FakeGdn, FakeRunner, lambda: context
+    )
+    module.get_kv_cache_spec(
+        SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
+    )
+    runner = FakeRunner()
+
+    assert runner._dummy_run() == "state-index-result"
+    assert runner._model_forward() == "state-index-result"
+
+    assert observed_indices == [2, 6]
+    assert observed_pointers[0] == observed_pointers[1]
+    assert module.kv_cache[1][2].eq(1).all()
+    assert module.kv_cache[1][6].eq(1).all()
+    assert context.attn_metadata[module.prefix] is metadata
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    mapped = next(
+        row
+        for row in events
+        if row["event"] == "gdn_running_state_indices_remapped"
+    )
+    representative = mapped["representative_layers"][0]
+    assert representative["source_state_indices"] == [2]
+    assert representative["destination_state_indices"] == [6]
+
+
+def test_state_index_lifecycle_records_physical_copy_rows(tmp_path):
+    from vllm.v1.kv_cache_interface import (
+        KVCacheGroupSpec,
+        UniformTypeKVCacheSpecs,
+    )
+
+    mamba = MambaSpec(
+        block_size=1536,
+        shapes=((2,), (2,)),
+        dtypes=(torch.float32, torch.float32),
+        mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
+        mamba_cache_mode="align",
+    )
+    aggregate = UniformTypeKVCacheSpecs(
+        block_size=1536,
+        kv_cache_specs={"mamba0": mamba, "mamba1": mamba},
+    )
+    cache_config = SimpleNamespace(
+        kv_cache_groups=[
+            KVCacheGroupSpec(["mamba0", "mamba1"], aggregate)
+        ]
+    )
+    modules = {
+        name: SimpleNamespace(
+            kv_cache=(
+                torch.arange(8, dtype=torch.float32).view(4, 2).clone(),
+                torch.arange(8, dtype=torch.float32).view(4, 2).clone(),
+            )
+        )
+        for name in ("mamba0", "mamba1")
+    }
+
+    class FakeBuffers:
+        def __init__(self, **kwargs):
+            self.__dict__.update(kwargs)
+            self.offset = 0
+
+        @classmethod
+        def create(cls, *_args, **_kwargs):
+            raise AssertionError("aggregate must use DASC creation")
+
+    def original_collect(bufs, proxied, copy_funcs, *_args):
+        bufs.offset += len(proxied.kv_cache_groups[0].layer_names) * len(
+            copy_funcs
+        )
+
+    def original_copy(_bufs):
+        for module in modules.values():
+            for state in module.kv_cache:
+                state[3].copy_(state[1])
+
+    namespace = SimpleNamespace(
+        get_mamba_groups=lambda *_: (_ for _ in ()).throw(
+            AssertionError("aggregate must use DASC group discovery")
+        ),
+        MambaCopyBuffers=FakeBuffers,
+        collect_mamba_copy_meta=original_collect,
+        do_mamba_copy_block=original_copy,
+    )
+    config = SimpleNamespace(
+        mode="physical-cache-native-all-heads-state-index",
+        evidence_path=tmp_path / "events.jsonl",
+    )
+    physical_patch._install_heterogeneous_mamba_lifecycle_patch(
+        config, namespace
+    )
+
+    def make_buffer(count, dtype):
+        return SimpleNamespace(count=count, dtype=dtype)
+
+    def copy_func(state, block_ids, source_index, _token_count):
+        source_block_id = int(block_ids[source_index])
+        return SimpleNamespace(
+            start_addr=state[source_block_id].data_ptr(),
+            num_elements=state[source_block_id].numel(),
+        )
+
+    buffers = FakeBuffers.create(
+        1, cache_config, (copy_func, copy_func), make_buffer
+    )
+    request = SimpleNamespace(block_ids=[[1, 3]])
+    namespace.collect_mamba_copy_meta(
+        buffers,
+        cache_config,
+        (copy_func, copy_func),
+        [0],
+        0,
+        1,
+        0,
+        request,
+        modules,
+    )
+    assert request._mst_dasc_running_state_block_id == 3
+    namespace.do_mamba_copy_block(buffers)
+
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    rows = [
+        row
+        for row in events
+        if row["event"] == "physical_state_copy_materialized"
+    ]
+    assert len(rows) == 4
+    assert {row["source_block_id"] for row in rows} == {1}
+    assert {row["destination_block_id"] for row in rows} == {3}
+    assert all(
+        row["source_after_copy"]["full_sha256"]
+        == row["destination_after_copy"]["full_sha256"]
+        for row in rows
+    )
+    assert all(
+        len(module._mst_dasc_state_row_diagnostics_ready) == 2
+        for module in modules.values()
+    )
+
+
 def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error(
     monkeypatch, tmp_path
 ):

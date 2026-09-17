@@ -128,6 +128,58 @@ def _version(distribution: str) -> str:
         return "unknown"
 
 
+def _tensor_sample_fingerprint(tensor: Any, *, max_samples: int = 64) -> dict[str, Any]:
+    """Return an exact row digest plus bounded values for diagnosis.
+
+    This helper is used only for two representative layers at the first
+    cache-hit transition. Copying those rows to the host is intentional: the
+    numerical canary requires an exact byte digest and is never a performance
+    measurement.
+    """
+    import torch
+
+    flat = tensor.detach().reshape(-1)
+    count = flat.numel()
+    full = flat.to(device="cpu").contiguous()
+    full_raw = full.view(torch.uint8).numpy().tobytes()
+    if count == 0:
+        indices: list[int] = []
+        raw = b""
+        finite = True
+        sample_sum = 0.0
+        sample_abs_max = 0.0
+    else:
+        sample_count = min(max_samples, count)
+        if sample_count == 1:
+            indices = [0]
+        else:
+            indices = [
+                index * (count - 1) // (sample_count - 1)
+                for index in range(sample_count)
+            ]
+        index_tensor = torch.tensor(indices, dtype=torch.long)
+        sample = full.index_select(0, index_tensor).contiguous()
+        raw = sample.view(torch.uint8).numpy().tobytes()
+        sample_float = sample.float()
+        finite = bool(torch.isfinite(sample_float).all().item())
+        sample_sum = float(sample_float.sum().item())
+        sample_abs_max = float(sample_float.abs().max().item())
+    return {
+        "shape": [int(value) for value in tensor.shape],
+        "stride": [int(value) for value in tensor.stride()],
+        "dtype": str(tensor.dtype),
+        "device": str(tensor.device),
+        "numel": int(count),
+        "data_ptr": int(tensor.data_ptr()),
+        "full_sha256": hashlib.sha256(full_raw).hexdigest(),
+        "sample_indices": indices,
+        "sample_sha256": hashlib.sha256(raw).hexdigest(),
+        "sample_finite": finite,
+        "sample_sum": sample_sum,
+        "sample_abs_max": sample_abs_max,
+    }
+
+
 def _ensure_ascend_global_patch() -> None:
     try:
         import vllm_ascend
@@ -519,6 +571,14 @@ def _install_heterogeneous_mamba_lifecycle_patch(
     original_get_groups = mamba_utils.get_mamba_groups
     original_create = mamba_utils.MambaCopyBuffers.create
     original_collect = mamba_utils.collect_mamba_copy_meta
+    original_copy = getattr(mamba_utils, "do_mamba_copy_block", None)
+    if (
+        config.mode == "physical-cache-native-all-heads-state-index"
+        and original_copy is None
+    ):
+        raise DascRuntimeUnsupported(
+            "DASC state-index mode requires the Mamba copy executor"
+        )
 
     def aggregate_mamba_names(group):
         spec = group.kv_cache_spec
@@ -614,6 +674,7 @@ def _install_heterogeneous_mamba_lifecycle_patch(
             )
         proxy_groups = list(kv_cache_config.kv_cache_groups)
         aggregate_layer_count = 0
+        diagnostic_rows = []
         for group_id in group_ids:
             names = names_by_group.get(group_id)
             if names is not None:
@@ -623,6 +684,129 @@ def _install_heterogeneous_mamba_lifecycle_patch(
                     layer_names=list(names),
                     kv_cache_spec=group.kv_cache_spec,
                 )
+                if config.mode == "physical-cache-native-all-heads-state-index":
+                    block_ids = req_state.block_ids[group_id]
+                    source_block_id = int(block_ids[src_block_idx])
+                    destination_block_id = int(block_ids[dest_block_idx])
+                    previous_destination = getattr(
+                        req_state, "_mst_dasc_running_state_block_id", None
+                    )
+                    if (
+                        previous_destination is not None
+                        and previous_destination != destination_block_id
+                    ):
+                        raise DascRuntimeUnsupported(
+                            "DASC aggregate groups disagree on the running state row"
+                        )
+                    req_state._mst_dasc_running_state_block_id = destination_block_id
+                    if not getattr(
+                        mamba_utils,
+                        "_mst_dasc_physical_row_diagnostic_emitted",
+                        False,
+                    ):
+                        selected_names = {names[0], names[-1]}
+                        for layer_name in names:
+                            if layer_name not in selected_names:
+                                continue
+                            module = forward_context[layer_name]
+                            for state_index, (state, state_copy_func) in enumerate(
+                                zip(module.kv_cache, copy_funcs)
+                            ):
+                                copy_spec = state_copy_func(
+                                    state,
+                                    block_ids,
+                                    src_block_idx,
+                                    accept_token_bias + 1,
+                                )
+                                element_size = state.element_size()
+                                byte_offset = copy_spec.start_addr - state.data_ptr()
+                                if byte_offset < 0 or byte_offset % element_size:
+                                    raise DascRuntimeUnsupported(
+                                        "DASC state-copy pointer is outside tensor alignment"
+                                    )
+                                element_offset = byte_offset // element_size
+                                flat = state.view(-1)
+                                if (
+                                    element_offset + copy_spec.num_elements
+                                    > flat.numel()
+                                ):
+                                    raise DascRuntimeUnsupported(
+                                        "DASC state-copy source range exceeds storage"
+                                    )
+                                source_view = flat.narrow(
+                                    0, element_offset, copy_spec.num_elements
+                                )
+                                destination_row = state[destination_block_id].view(-1)
+                                if copy_spec.num_elements > destination_row.numel():
+                                    raise DascRuntimeUnsupported(
+                                        "DASC state-copy destination range exceeds row"
+                                    )
+                                destination_view = destination_row.narrow(
+                                    0, 0, copy_spec.num_elements
+                                )
+                                row_stride_elements = int(state.stride(0))
+                                diagnostic_rows.append(
+                                    {
+                                        "module": module,
+                                        "state": state,
+                                        "source_view": source_view,
+                                        "destination_view": destination_view,
+                                        "payload": {
+                                            "layer": layer_name,
+                                            "state_index": state_index,
+                                            "source_block_index": int(src_block_idx),
+                                            "destination_block_index": int(
+                                                dest_block_idx
+                                            ),
+                                            "source_block_id": source_block_id,
+                                            "destination_block_id": (
+                                                destination_block_id
+                                            ),
+                                            "accept_token_bias": int(
+                                                accept_token_bias
+                                            ),
+                                            "copy_elements": int(
+                                                copy_spec.num_elements
+                                            ),
+                                            "copy_bytes": int(
+                                                copy_spec.num_elements
+                                                * element_size
+                                            ),
+                                            "state_base_ptr": int(
+                                                state.data_ptr()
+                                            ),
+                                            "copy_source_ptr": int(
+                                                copy_spec.start_addr
+                                            ),
+                                            "destination_row_ptr": int(
+                                                state[
+                                                    destination_block_id
+                                                ].data_ptr()
+                                            ),
+                                            "row_stride_elements": (
+                                                row_stride_elements
+                                            ),
+                                            "source_pointer_block_id": int(
+                                                element_offset
+                                                // row_stride_elements
+                                            ),
+                                            "source_within_row_elements": int(
+                                                element_offset
+                                                % row_stride_elements
+                                            ),
+                                            "source_before_copy": (
+                                                _tensor_sample_fingerprint(
+                                                    source_view
+                                                )
+                                            ),
+                                            "destination_before_copy": (
+                                                _tensor_sample_fingerprint(
+                                                    destination_view
+                                                )
+                                            ),
+                                        },
+                                    }
+                                )
         proxy_config = SimpleNamespace(kv_cache_groups=proxy_groups)
         offset_before = int(getattr(copy_bufs, "offset", 0))
         result = original_collect(
@@ -637,6 +821,8 @@ def _install_heterogeneous_mamba_lifecycle_patch(
             forward_context,
         )
         offset_after = int(getattr(copy_bufs, "offset", offset_before))
+        if diagnostic_rows:
+            copy_bufs._mst_dasc_physical_row_diagnostics = diagnostic_rows
         if not getattr(mamba_utils, "_mst_dasc_copy_branch_emitted", False):
             emit(
                 config.evidence_path,
@@ -652,9 +838,50 @@ def _install_heterogeneous_mamba_lifecycle_patch(
             mamba_utils._mst_dasc_copy_branch_emitted = True
         return result
 
+    def copy_dasc_mamba_blocks(copy_bufs):
+        assert original_copy is not None
+        result = original_copy(copy_bufs)
+        diagnostic_rows = getattr(
+            copy_bufs, "_mst_dasc_physical_row_diagnostics", ()
+        )
+        if diagnostic_rows:
+            for row in diagnostic_rows:
+                payload = dict(row["payload"])
+                payload["source_after_copy"] = _tensor_sample_fingerprint(
+                    row["source_view"]
+                )
+                payload["destination_after_copy"] = _tensor_sample_fingerprint(
+                    row["destination_view"]
+                )
+                emit(
+                    config.evidence_path,
+                    "physical_state_copy_materialized",
+                    mode=config.mode,
+                    **payload,
+                )
+                module = row["module"]
+                ready = list(
+                    getattr(module, "_mst_dasc_state_row_diagnostics_ready", ())
+                )
+                ready.append(
+                    {
+                        "state_index": payload["state_index"],
+                        "source_block_id": payload["source_block_id"],
+                        "destination_block_id": payload[
+                            "destination_block_id"
+                        ],
+                    }
+                )
+                module._mst_dasc_state_row_diagnostics_ready = tuple(ready)
+            copy_bufs._mst_dasc_physical_row_diagnostics = []
+            mamba_utils._mst_dasc_physical_row_diagnostic_emitted = True
+        return result
+
     mamba_utils.get_mamba_groups = get_dasc_mamba_groups
     mamba_utils.MambaCopyBuffers.create = create_dasc_copy_buffers
     mamba_utils.collect_mamba_copy_meta = collect_dasc_mamba_meta
+    if config.mode == "physical-cache-native-all-heads-state-index":
+        mamba_utils.do_mamba_copy_block = copy_dasc_mamba_blocks
     mamba_utils._mst_dasc_heterogeneous_lifecycle_installed = True
     emit(
         config.evidence_path,
@@ -830,10 +1057,205 @@ def _install_physical_cache_patch(
                 if isinstance(module, qwen_gdn_class)
             )
             self._mst_dasc_gdn_modules = modules
-        if config.mode == "physical-cache-native-all-heads":
+        if config.mode in {
+            "physical-cache-native-all-heads",
+            "physical-cache-native-all-heads-state-index",
+        }:
             for module in modules:
                 verify_native_all_heads(module)
-            return original_model_forward(self, *args, **kwargs)
+            if config.mode == "physical-cache-native-all-heads":
+                return original_model_forward(self, *args, **kwargs)
+
+            owner_ids = tuple(self.input_batch.req_ids)
+            is_dummy = getattr(self, "_mst_dasc_dummy_scope", False)
+            originals = []
+            boundary_rows = []
+            mapping_evidence = []
+            try:
+                for module in modules:
+                    if module.prefix not in metadata_map:
+                        raise DascRuntimeUnsupported(
+                            f"DASC metadata missing GDN layer {module.prefix}"
+                        )
+                    original_metadata = metadata_map[module.prefix]
+                    remapper = getattr(
+                        module, "_mst_dasc_state_index_remapper", None
+                    )
+                    if remapper is None:
+                        remapper = StableAscendGDNMetadataRemapper()
+                        module._mst_dasc_state_index_remapper = remapper
+                    _, identity_plan = remap_ascend_gdn_metadata(
+                        original_metadata
+                    )
+                    active_slots = identity_plan.block_ids.clone()
+                    source_values = []
+                    destination_values = []
+                    if not is_dummy and owner_ids:
+                        source_indices = (
+                            original_metadata.non_spec_state_indices_tensor
+                        )
+                        if (
+                            source_indices is None
+                            or source_indices.ndim != 1
+                            or source_indices.numel() < len(owner_ids)
+                        ):
+                            raise DascRuntimeUnsupported(
+                                "DASC cannot align owners to native state indices"
+                            )
+                        source_values = [
+                            int(value)
+                            for value in source_indices[: len(owner_ids)]
+                            .detach()
+                            .to(device="cpu")
+                            .tolist()
+                        ]
+                        destination_values = []
+                        for owner, source_value in zip(
+                            owner_ids, source_values
+                        ):
+                            request = self.requests[owner]
+                            destination_values.append(
+                                int(
+                                    getattr(
+                                        request,
+                                        "_mst_dasc_running_state_block_id",
+                                        source_value,
+                                    )
+                                )
+                            )
+                        mapping = {}
+                        for source_value, destination_value in zip(
+                            source_values, destination_values
+                        ):
+                            previous = mapping.get(source_value)
+                            if (
+                                previous is not None
+                                and previous != destination_value
+                            ):
+                                raise DascRuntimeUnsupported(
+                                    "DASC owners disagree on state-index remap"
+                                )
+                            mapping[source_value] = destination_value
+                        plan_values = {
+                            int(value)
+                            for value in identity_plan.block_ids.detach()
+                            .to(device="cpu")
+                            .tolist()
+                        }
+                        if not set(mapping).issubset(plan_values):
+                            raise DascRuntimeUnsupported(
+                                "DASC owner state rows are absent from metadata plan"
+                            )
+                        for source_value, destination_value in mapping.items():
+                            active_slots[
+                                identity_plan.block_ids == source_value
+                            ] = destination_value
+                    remapped_metadata, _ = remapper.prepare(
+                        original_metadata,
+                        active_slots=active_slots,
+                    )
+                    metadata_map[module.prefix] = remapped_metadata
+                    originals.append((module, original_metadata))
+                    if source_values:
+                        mapping_evidence.append(
+                            {
+                                "layer": module.prefix,
+                                "source_state_indices": source_values,
+                                "destination_state_indices": (
+                                    destination_values
+                                ),
+                                "metadata_pointer": int(
+                                    remapped_metadata.non_spec_state_indices_tensor.data_ptr()
+                                ),
+                            }
+                        )
+                    diagnostics = getattr(
+                        module, "_mst_dasc_state_row_diagnostics_ready", ()
+                    )
+                    for diagnostic in diagnostics:
+                        state = module.kv_cache[diagnostic["state_index"]]
+                        source_block_id = diagnostic["source_block_id"]
+                        destination_block_id = diagnostic[
+                            "destination_block_id"
+                        ]
+                        boundary_rows.append(
+                            {
+                                "module": module,
+                                "state": state,
+                                "payload": {
+                                    "layer": module.prefix,
+                                    "state_index": diagnostic["state_index"],
+                                    "source_block_id": source_block_id,
+                                    "destination_block_id": (
+                                        destination_block_id
+                                    ),
+                                    "owner_ids": [str(owner) for owner in owner_ids],
+                                    "source_state_indices": source_values,
+                                    "destination_state_indices": (
+                                        destination_values
+                                    ),
+                                    "source_before_native": (
+                                        _tensor_sample_fingerprint(
+                                            state[source_block_id]
+                                        )
+                                    ),
+                                    "destination_before_native": (
+                                        _tensor_sample_fingerprint(
+                                            state[destination_block_id]
+                                        )
+                                    ),
+                                },
+                            }
+                        )
+                if (
+                    mapping_evidence
+                    and not getattr(
+                        self, "_mst_dasc_state_index_mapping_emitted", False
+                    )
+                ):
+                    emit(
+                        config.evidence_path,
+                        "gdn_running_state_indices_remapped",
+                        mode=config.mode,
+                        layer_count=len(mapping_evidence),
+                        representative_layers=[
+                            mapping_evidence[0], mapping_evidence[-1]
+                        ],
+                    )
+                    self._mst_dasc_state_index_mapping_emitted = True
+                for row in boundary_rows:
+                    emit(
+                        config.evidence_path,
+                        "first_resumed_token_state_boundary_before",
+                        mode=config.mode,
+                        **row["payload"],
+                    )
+                result = original_model_forward(self, *args, **kwargs)
+                for row in boundary_rows:
+                    payload = row["payload"]
+                    state = row["state"]
+                    emit(
+                        config.evidence_path,
+                        "first_resumed_token_state_boundary_after",
+                        mode=config.mode,
+                        layer=payload["layer"],
+                        state_index=payload["state_index"],
+                        source_block_id=payload["source_block_id"],
+                        destination_block_id=payload[
+                            "destination_block_id"
+                        ],
+                        source_after_native=_tensor_sample_fingerprint(
+                            state[payload["source_block_id"]]
+                        ),
+                        destination_after_native=_tensor_sample_fingerprint(
+                            state[payload["destination_block_id"]]
+                        ),
+                    )
+                    row["module"]._mst_dasc_state_row_diagnostics_ready = ()
+                return result
+            finally:
+                for module, original_metadata in originals:
+                    metadata_map[module.prefix] = original_metadata
 
         active = []
         succeeded = False
@@ -1275,6 +1697,7 @@ def install(config: DascConfig) -> None:
     if config.mode in {
         "physical-cache-eager",
         "physical-cache-native-all-heads",
+        "physical-cache-native-all-heads-state-index",
     }:
         _install_head256_prefill_fallback_patch(
             config, device_op.DeviceOperator, device_utils

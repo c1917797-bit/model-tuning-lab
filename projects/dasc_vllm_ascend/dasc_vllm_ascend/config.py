@@ -46,11 +46,13 @@ class DascConfig:
             "nr-numerical",
             "physical-cache-eager",
             "physical-cache-native-all-heads",
+            "physical-cache-native-all-heads-state-index",
             "compat-head256",
         }:
             raise DascConfigurationError(
                 "MST_DASC_MODE must be nr-numerical, physical-cache-eager, "
-                "physical-cache-native-all-heads, or compat-head256"
+                "physical-cache-native-all-heads, "
+                "physical-cache-native-all-heads-state-index, or compat-head256"
             )
         try:
             w_max = float(os.getenv("MST_DASC_W_MAX", "64"))

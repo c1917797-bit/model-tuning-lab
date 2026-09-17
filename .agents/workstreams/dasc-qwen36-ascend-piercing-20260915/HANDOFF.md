@@ -748,3 +748,42 @@ Do not rerun v12r19 or reuse its immutable root. Build the next one-variable
 diagnostic around the first cache-hit resume token and retain the all-head
 control until exact multi-replay equivalence passes. Only then reintroduce head
 pruning and later enter matched performance and E2E quality gates.
+
+## 2026-09-17 v12r20 state-index control prepared
+
+Source mapping below the proven lifecycle branches found one bounded, testable
+hypothesis. In v12r19 the real Mamba copy moved every layer's state from logical
+block index 0 to logical block index 1, while the native GDN metadata for an
+aggregate attention/Mamba group is constructed from block-table column 0. The
+aggregate attention table can therefore retain the old source row even after
+the Mamba lifecycle has materialized the new running-state row.
+
+The plugin now has an explicit
+`physical-cache-native-all-heads-state-index` mode. It keeps all heads, dense
+state geometry, the v12r19 scheduler decisions, and the existing Mamba copy
+unchanged. Its sole behavioral change is to route every known Ascend GDN state
+index path from the old physical row to the copied destination row using stable
+metadata buffers captured during dummy/graph execution. It emits bounded
+source/destination fingerprints before copy, after copy, immediately before
+the native model forward, and immediately after it. The old source row must not
+change; the destination row must change on every TP worker.
+
+The immutable controller is
+`run_v12r20_state_index_control.py`, with result root
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-all-heads-v12r20` and
+container `dasc_qwen36_state_index_v12r20_20260917`. The focused plugin tests
+passed 27/27, the complete plugin suite passed 65/65, and the controller tests
+passed 5/5 in the pinned v0.23.0 image. The safe no-model workstream run passed
+101/103; the only two unavailable cases required the local model config, and
+both pure resource-budget assertions passed when executed directly on the host
+without exposing that config to a container. These are software gates only;
+v12r20 has not run on NPU and has no performance or quality result.
+
+At the preparation audit all eight physical NPUs were active. NPU0-3 held
+VLLMWorker_TP PIDs 267654-267657 at about 28.67 GiB each. NPU4-7 held PIDs
+351355-351358 at about 27.07 GiB each, attributed to foreign container
+`dreamy_meitner`. Do not stop or share either workload. Run v12r20 once only
+after a fresh audit proves a complete four-card lane idle, the immutable root
+absent, port 8030 free, and post-readiness ownership exclusive to the DASC
+container. Performance and E2E quality remain prohibited until the strict
+all-head numerical canary passes.
