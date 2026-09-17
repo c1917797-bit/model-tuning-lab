@@ -287,7 +287,14 @@ def _install_scheduler_branch_evidence_patch(
     @functools.wraps(original_split)
     def split_with_branch_evidence(self, request, num_new_tokens, *args, **kwargs):
         result = original_split(self, request, num_new_tokens, *args, **kwargs)
-        if not getattr(self, "_mst_dasc_split_branch_emitted", False):
+        changed = int(result) != int(num_new_tokens)
+        first_call = not getattr(
+            self, "_mst_dasc_split_branch_emitted", False
+        )
+        first_changed = changed and not getattr(
+            self, "_mst_dasc_changed_split_branch_emitted", False
+        )
+        if first_call or first_changed:
             emit(
                 config.evidence_path,
                 "scheduler_mamba_aligned_split_executed",
@@ -297,9 +304,11 @@ def _install_scheduler_branch_evidence_patch(
                 num_prompt_tokens=int(request.num_prompt_tokens),
                 requested_tokens=int(num_new_tokens),
                 scheduled_tokens=int(result),
-                changed=int(result) != int(num_new_tokens),
+                changed=changed,
             )
             self._mst_dasc_split_branch_emitted = True
+            if changed:
+                self._mst_dasc_changed_split_branch_emitted = True
         return result
 
     def count_block_ids(value):

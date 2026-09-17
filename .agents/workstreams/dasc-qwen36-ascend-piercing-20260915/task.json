@@ -15,7 +15,7 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "v12r18_failed_numerical_v12r19_branch_evidence_ready",
+  "status": "v12r18_failed_numerical_v12r19_one_shot_gate_hardened",
   "current_plan": "PLAN_REVIEW_V12R9.md",
   "latest_attempt": {
     "name": "v12r18",
@@ -38,6 +38,7 @@
   },
   "decision": "open",
   "next_actions": [
+    "Treat v12r19 as a one-shot diagnostic run: it now records the first split call and the first materially changed split, writes branch-evidence-verdict.json even when the strict numerical canary fails, refreshes the artifact hash manifest, and verifies after readiness that every physical NPU4-7 process belongs to the owned container.",
     "Treat v12r18 as a completed failed numerical experiment: lifecycle configuration flags were restored, but exact output and deterministic prefix replay still failed. Do not rerun the same bytes/root and do not benchmark or run E2E quality.",
     "Use v12r19 only as a branch-evidence control. It must prove the scheduler aligned-split branch, the scheduler zeroing branch, and the heterogeneous Mamba copy branch with bounded runtime events while retaining the all-head geometry and unchanged outputs.",
     "Before v12r19, commit/push the prepared observability-only plugin, verify the immutable root branch-evidence-all-heads-v12r19 is absent, and repeat the live PID/HBM/container/port/image/lock audit. One NPU run only; never reuse the v12r18 root.",
@@ -139,6 +140,7 @@
       "independent_audit_ok": true,
       "claim_scope": "real-weight combinatorial storage bound; no NPU performance or output-equivalence claim"
     },
+    "v12r19_readiness_gate": "Pinned-image full DASC plugin/workstream suite passed 160 tests on 2026-09-17 with the model config mounted read-only. Maintainer tree validation, Python AST parsing, and git diff --check passed. This is software/control evidence only; v12r19 has not run on NPU.",
     "performance_result": null,
     "quality_result": null
   },

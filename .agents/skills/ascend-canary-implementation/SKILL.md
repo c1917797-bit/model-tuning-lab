@@ -32,12 +32,20 @@ Ascend path.
    hypothesis depends on a scheduler split, cache zeroing, state copy, or
    restore branch, emit bounded evidence from that branch and validate its
    material inputs/outputs. Do not infer branch execution from a true flag.
+   If an early warmup or short request may reach the branch without exercising
+   the material condition, record both the first invocation and the first
+   materially changed/nonempty invocation. A first-call-only marker can hide
+   the later request that the canary is meant to prove.
 7. Compare against a tiny baseline under the same environment fingerprint before
    any larger benchmark.
 8. If correctness fails, classify the stage as `failed` and recover active code.
 9. If correctness passes but performance is unclear, route to profiler or formal
    benchmark rather than expanding the change blindly.
 10. Record the canary result, limitations, artifact paths/hashes, and next step.
+    Generate the diagnostic verdict even when the primary numerical guard
+    fails, without masking that original failure. If verdict or cleanup files
+    are written after the base controller creates its artifact manifest,
+    regenerate the manifest while excluding the manifest itself.
 
 ## Acceptance to scale
 
@@ -49,6 +57,8 @@ Only scale to repeated benchmark when:
   does not;
 - correctness guardrails pass;
 - target NPU execution is proven in the same session;
+- after service readiness, every target-device PID is re-attributed to the
+  owned container before the numerical request is sent;
 - rollback is known;
 - the next benchmark protocol is frozen.
 
@@ -59,6 +69,9 @@ Only scale to repeated benchmark when:
   tensor-parallel workers or the engine core executed the change.
 - Do not treat a lifecycle/configuration flag as proof that its consuming
   branch executed; require branch-local evidence plus output correctness.
+- Do not assume a clean prelaunch sample reserves the devices. Recheck ownership
+  after the service has created its workers and fail closed on a missing target
+  worker or any foreign target-device PID.
 - Do not use canary success as a performance claim.
 - Do not leave failed active code in the final branch tree, even though the
   failed commit/evidence should remain reachable in history.

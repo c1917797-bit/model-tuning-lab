@@ -619,7 +619,7 @@ def test_scheduler_branch_evidence_observes_execution_without_changing_results(
             ]
 
         def _mamba_block_aligned_split(self, _request, num_new_tokens):
-            return num_new_tokens - 3
+            return num_new_tokens if num_new_tokens < 64 else num_new_tokens - 18
 
         def schedule(self):
             return self.outputs.pop(0)
@@ -635,7 +635,13 @@ def test_scheduler_branch_evidence_observes_execution_without_changing_results(
         num_computed_tokens=0,
         num_prompt_tokens=1938,
     )
-    assert scheduler._mamba_block_aligned_split(request, 1938) == 1935
+    short_request = SimpleNamespace(
+        request_id="req-short",
+        num_computed_tokens=0,
+        num_prompt_tokens=40,
+    )
+    assert scheduler._mamba_block_aligned_split(short_request, 40) == 40
+    assert scheduler._mamba_block_aligned_split(request, 1938) == 1920
     assert scheduler.schedule().new_block_ids_to_zero is None
     assert scheduler.schedule().new_block_ids_to_zero == [[3, 4], [8]]
 
@@ -648,10 +654,12 @@ def test_scheduler_branch_evidence_observes_execution_without_changing_results(
         by_name.setdefault(event["event"], []).append(event)
     initialized = by_name["scheduler_mamba_lifecycle_initialized"][0]
     assert initialized["need_mamba_block_aligned_split"] is True
-    split = by_name["scheduler_mamba_aligned_split_executed"][0]
-    assert split["requested_tokens"] == 1938
-    assert split["scheduled_tokens"] == 1935
-    assert split["changed"] is True
+    split_events = by_name["scheduler_mamba_aligned_split_executed"]
+    assert [event["requested_tokens"] for event in split_events] == [40, 1938]
+    assert split_events[0]["scheduled_tokens"] == 40
+    assert split_events[0]["changed"] is False
+    assert split_events[1]["scheduled_tokens"] == 1920
+    assert split_events[1]["changed"] is True
     zero_events = by_name["scheduler_kv_zeroing_branch_executed"]
     assert [event["new_block_count"] for event in zero_events] == [0, 3]
 

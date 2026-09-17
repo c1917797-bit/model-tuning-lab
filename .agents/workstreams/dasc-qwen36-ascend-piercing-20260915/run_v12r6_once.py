@@ -96,6 +96,61 @@ def npu_snapshot() -> tuple[str, dict[int, int], set[int]]:
     return raw, hbm, processes
 
 
+def npu_process_rows(raw: str) -> dict[int, set[int]]:
+    rows: dict[int, set[int]] = {}
+    in_processes = False
+    for line in raw.splitlines():
+        if "Process id" in line:
+            in_processes = True
+            continue
+        if not in_processes:
+            continue
+        match = re.match(r"\|\s*([0-7])\s+\d+\s+\|\s*(\d+)", line)
+        if match:
+            rows.setdefault(int(match.group(1)), set()).add(int(match.group(2)))
+    return rows
+
+
+def container_host_pids() -> set[int]:
+    output = run(
+        ["/usr/bin/docker", "top", CONTAINER, "-eo", "pid"],
+        timeout=30,
+    )
+    return {
+        int(line.strip())
+        for line in output.splitlines()[1:]
+        if re.fullmatch(r"\s*\d+\s*", line)
+    }
+
+
+def validate_post_readiness_ownership() -> None:
+    raw = run(["/usr/local/bin/npu-smi", "info"], timeout=30)
+    rows = npu_process_rows(raw)
+    owned = container_host_pids()
+    missing = [device for device in NPUS if not rows.get(device)]
+    target_pids = {
+        pid for device in NPUS for pid in rows.get(device, set())
+    }
+    foreign = sorted(target_pids.difference(owned))
+    result = {
+        "schema": "mst.dasc.post-readiness-ownership/v1",
+        "physical_npus": list(NPUS),
+        "npu_process_pids": {
+            str(device): sorted(rows.get(device, set())) for device in NPUS
+        },
+        "container_host_pids": sorted(owned),
+        "missing_process_devices": missing,
+        "foreign_process_pids": foreign,
+        "ok": not missing and not foreign,
+    }
+    atomic_json(RESULT / "post-readiness-ownership.json", result)
+    if not result["ok"]:
+        raise RuntimeError(
+            "post-readiness NPU ownership failed: "
+            f"missing_devices={missing} foreign_pids={foreign}"
+        )
+
+
 def container_claims_from_inspect(item: dict) -> list[int]:
     """Return physical target devices reserved by one running container.
 
@@ -513,6 +568,7 @@ def main() -> int:
             container_id = launch()
             (RESULT / "container-id.txt").write_text(container_id + "\n")
             wait_ready()
+            validate_post_readiness_ownership()
             run(
                 [
                     "/usr/bin/python3",

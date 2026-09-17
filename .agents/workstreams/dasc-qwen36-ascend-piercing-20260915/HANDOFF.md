@@ -639,3 +639,39 @@ them idle, an alternate controller entry point is prepared at
 device tuple and immutable root/container identity; candidate bytes and canary
 remain identical. Re-run its own preflight immediately before launch because
 the idle observation is not a reservation.
+
+## 2026-09-17 v12r19 one-shot readiness hardening
+
+A final pre-NPU audit found four execution-readiness gaps and repaired them
+without running the candidate:
+
+- the earlier wrapper did not create a structured branch verdict when the
+  strict numerical canary exited nonzero;
+- verdict files written after base-controller cleanup were not covered by the
+  final artifact hash manifest;
+- a first-call-only split marker could be consumed by the 40-token short
+  request and hide the later material split of the 1,938-token prefix;
+- the controller checked resources before launch but did not re-attribute
+  target-device PIDs to the owned container after service readiness.
+
+The v12r19 controller now writes `branch-evidence-verdict.json` on both the
+pass and numerical-failure paths, preserves the original failure, refreshes
+`artifacts.sha256.json` without self-hashing, records the first split invocation
+plus the first changed split, and writes
+`post-readiness-ownership.json`. The ownership gate requires live processes on
+all four selected physical devices and rejects any target-device PID outside
+the owned container before the numerical request.
+
+Validation in the pinned `quay.io/ascend/vllm-ascend:v0.23.0` image with the
+model configuration mounted read-only passed all 160 DASC plugin and workstream
+tests. The 26-skill maintainer-tree validator, Python AST parsing, and
+`git diff --check` also passed. This is software and controller evidence only;
+no v12r19 NPU, performance, or quality result exists yet.
+
+The one-shot interpretation is now encoded rather than left to manual log
+reading. Missing/invalid scheduler initialization, a non-material aligned
+split, empty zeroing, or fewer than four worker copy PIDs each produce a
+distinct decision. If all lifecycle branches pass but the numerical canary
+fails, the recorded next boundary is physical row materialization, per-layer
+offsets, and the exact first resumed token. Performance and E2E quality remain
+forbidden until this strict all-head control passes.
