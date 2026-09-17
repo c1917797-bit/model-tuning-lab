@@ -591,10 +591,11 @@ def test_heterogeneous_mamba_lifecycle_filters_attention_layers(tmp_path):
     assert observed["layer_names"] == ["mamba6", "mamba12"]
 
 
-def test_heterogeneous_cache_config_exposes_inner_mamba_lifecycle(tmp_path):
+def test_scheduler_reduction_preserves_mamba_lifecycle_flags(tmp_path):
+    import copy
+
     from vllm.v1.kv_cache_interface import (
         FullAttentionSpec,
-        KVCacheConfig,
         KVCacheGroupSpec,
         UniformTypeKVCacheSpecs,
     )
@@ -616,30 +617,162 @@ def test_heterogeneous_cache_config_exposes_inner_mamba_lifecycle(tmp_path):
         block_size=1536,
         kv_cache_specs={"attn": attention, "mamba": mamba},
     )
-    mixed = KVCacheConfig(
-        num_blocks=4,
-        kv_cache_tensors=[],
-        kv_cache_groups=[KVCacheGroupSpec(["attn", "mamba"], aggregate)],
+    class FakeKVCacheConfig:
+        def __init__(self, groups):
+            self.kv_cache_groups = groups
+
+        @property
+        def has_mamba_layers(self):
+            return any(
+                isinstance(group.kv_cache_spec, MambaSpec)
+                for group in self.kv_cache_groups
+            )
+
+        @property
+        def needs_kv_cache_zeroing(self):
+            return self.has_mamba_layers
+
+    def reduce_to_first_inner(configs):
+        reduced = copy.deepcopy(configs[0])
+        for group in reduced.kv_cache_groups:
+            if isinstance(group.kv_cache_spec, UniformTypeKVCacheSpecs):
+                group.kv_cache_spec = next(
+                    iter(group.kv_cache_spec.kv_cache_specs.values())
+                )
+        return reduced
+
+    kv_cache_utils = SimpleNamespace(
+        generate_scheduler_kv_cache_config=reduce_to_first_inner
     )
-    attention_only = KVCacheConfig(
-        num_blocks=4,
-        kv_cache_tensors=[],
-        kv_cache_groups=[KVCacheGroupSpec(["attn"], attention)],
+    engine_core = SimpleNamespace(
+        generate_scheduler_kv_cache_config=reduce_to_first_inner
     )
-    assert not mixed.has_mamba_layers
-    assert not mixed.needs_kv_cache_zeroing
 
     config = SimpleNamespace(
         mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
     )
     physical_patch._install_heterogeneous_cache_config_awareness_patch(
-        config, KVCacheConfig
+        config,
+        FakeKVCacheConfig,
+        kv_cache_utils,
+        engine_core,
     )
 
-    assert mixed.has_mamba_layers
-    assert mixed.needs_kv_cache_zeroing
-    assert not attention_only.has_mamba_layers
-    assert not attention_only.needs_kv_cache_zeroing
+    worker_config = FakeKVCacheConfig(
+        [KVCacheGroupSpec(["attn", "mamba"], aggregate)]
+    )
+    assert worker_config.has_mamba_layers
+    assert worker_config.needs_kv_cache_zeroing
+
+    scheduler_config = engine_core.generate_scheduler_kv_cache_config(
+        [worker_config]
+    )
+    assert isinstance(
+        scheduler_config.kv_cache_groups[0].kv_cache_spec,
+        FullAttentionSpec,
+    )
+    assert scheduler_config.has_mamba_layers
+    assert scheduler_config.needs_kv_cache_zeroing
+    assert (
+        kv_cache_utils.generate_scheduler_kv_cache_config
+        is engine_core.generate_scheduler_kv_cache_config
+    )
+
+    attention_only = FakeKVCacheConfig(
+        [KVCacheGroupSpec(["attn"], attention)]
+    )
+    attention_scheduler = engine_core.generate_scheduler_kv_cache_config(
+        [attention_only]
+    )
+    assert not attention_scheduler.has_mamba_layers
+    assert not attention_scheduler.needs_kv_cache_zeroing
+
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    by_name = {event["event"]: event for event in events}
+    installed = by_name["heterogeneous_cache_config_awareness_installed"]
+    assert installed["scheduler_alias_patched"] is True
+    preserved = by_name["heterogeneous_scheduler_mamba_awareness_preserved"]
+    assert preserved["scheduler_group_specs"] == ["FullAttentionSpec"]
+    assert preserved["has_mamba_layers"] is True
+    assert preserved["needs_kv_cache_zeroing"] is True
+
+
+def test_scheduler_awareness_rejects_detached_engine_alias(tmp_path):
+    class FakeKVCacheConfig:
+        @property
+        def has_mamba_layers(self):
+            return False
+
+        @property
+        def needs_kv_cache_zeroing(self):
+            return self.has_mamba_layers
+
+    def module_generator(configs):
+        return configs[0]
+
+    def detached_engine_generator(configs):
+        return configs[0]
+
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    kv_cache_utils = SimpleNamespace(
+        generate_scheduler_kv_cache_config=module_generator
+    )
+    engine_core = SimpleNamespace(
+        generate_scheduler_kv_cache_config=detached_engine_generator
+    )
+    with pytest.raises(
+        physical_patch.DascRuntimeUnsupported,
+        match="scheduler cache-config alias differs",
+    ):
+        physical_patch._install_heterogeneous_cache_config_awareness_patch(
+            config,
+            FakeKVCacheConfig,
+            kv_cache_utils,
+            engine_core,
+        )
+
+
+def test_scheduler_awareness_defers_alias_when_engine_not_loaded(
+    monkeypatch, tmp_path
+):
+    import sys
+
+    class FakeKVCacheConfig:
+        @property
+        def has_mamba_layers(self):
+            return False
+
+        @property
+        def needs_kv_cache_zeroing(self):
+            return self.has_mamba_layers
+
+    def module_generator(configs):
+        return configs[0]
+
+    monkeypatch.delitem(sys.modules, "vllm.v1.engine.core", raising=False)
+    config = SimpleNamespace(
+        mode="physical-cache-eager", evidence_path=tmp_path / "events.jsonl"
+    )
+    kv_cache_utils = SimpleNamespace(
+        generate_scheduler_kv_cache_config=module_generator
+    )
+    physical_patch._install_heterogeneous_cache_config_awareness_patch(
+        config,
+        FakeKVCacheConfig,
+        kv_cache_utils,
+    )
+    assert kv_cache_utils.generate_scheduler_kv_cache_config is not module_generator
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "events.jsonl").read_text().splitlines()
+    ]
+    assert events[-1]["scheduler_alias_patched"] is False
+    assert events[-1]["scheduler_alias_deferred"] is True
 
 
 def test_head256_prefill_uses_existing_npu_fusion_attention_fallback(tmp_path):

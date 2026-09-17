@@ -12,6 +12,7 @@ import hashlib
 import importlib.metadata
 import inspect
 import itertools
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -140,16 +141,20 @@ def _ensure_ascend_global_patch() -> None:
 
 
 def _install_heterogeneous_cache_config_awareness_patch(
-    config: DascConfig, kv_cache_config_class: Any
+    config: DascConfig,
+    kv_cache_config_class: Any,
+    kv_cache_utils: Any,
+    engine_core: Any = None,
 ) -> None:
-    """Expose inner Mamba specs to scheduler-wide lifecycle guards.
+    """Preserve Mamba lifecycle flags across scheduler-config reduction.
 
-    The scheduler copy of a ``UniformTypeKVCacheSpecs`` group is reduced to a
-    representative inner spec.  Our mixed attention/Mamba aggregate keeps an
-    attention spec first so the shared physical block table still computes
-    attention slot mappings.  Without this adapter, ``KVCacheConfig`` therefore
-    reports no Mamba layers: block-aligned prefill splitting and cache zeroing
-    are both disabled even though the worker owns recurrent state tensors.
+    vLLM 0.23 reduces a ``UniformTypeKVCacheSpecs`` group to its first inner
+    spec before constructing the scheduler. DASC deliberately puts attention
+    first so the scheduler keeps the full-attention block manager, but that
+    reduction otherwise erases the aggregate's inner Mamba layers. Mark the
+    reduced scheduler config explicitly while teaching worker configs to
+    inspect aggregate members. This restores block-aligned prefill splitting
+    and cache zeroing without changing the scheduler's manager type.
     """
     if getattr(
         kv_cache_config_class,
@@ -158,32 +163,94 @@ def _install_heterogeneous_cache_config_awareness_patch(
     ):
         return
 
-    from vllm.v1.kv_cache_interface import MambaSpec, UniformTypeKVCacheSpecs
+    from vllm.v1.kv_cache_interface import (
+        AttentionSpec,
+        MambaSpec,
+        UniformTypeKVCacheSpecs,
+    )
 
-    original_has_mamba = kv_cache_config_class.has_mamba_layers.fget
-    if original_has_mamba is None:
-        raise DascRuntimeUnsupported("KVCacheConfig.has_mamba_layers is not readable")
-
-    def has_mamba_layers(self):
-        if original_has_mamba(self):
-            return True
-        return any(
-            isinstance(group.kv_cache_spec, UniformTypeKVCacheSpecs)
-            and any(
-                isinstance(inner_spec, MambaSpec)
-                for inner_spec in group.kv_cache_spec.kv_cache_specs.values()
-            )
-            for group in self.kv_cache_groups
+    original_has_mamba = kv_cache_config_class.has_mamba_layers
+    original_generate = kv_cache_utils.generate_scheduler_kv_cache_config
+    if engine_core is None:
+        engine_core = sys.modules.get("vllm.v1.engine.core")
+    if (
+        engine_core is not None
+        and engine_core.generate_scheduler_kv_cache_config is not original_generate
+    ):
+        raise DascRuntimeUnsupported(
+            "EngineCore scheduler cache-config alias differs from kv_cache_utils"
         )
 
-    kv_cache_config_class.has_mamba_layers = property(has_mamba_layers)
+    def aggregate_has_mamba(cache_config: Any) -> bool:
+        for group in cache_config.kv_cache_groups:
+            spec = group.kv_cache_spec
+            if not isinstance(spec, UniformTypeKVCacheSpecs):
+                continue
+            if any(
+                isinstance(inner_spec, MambaSpec)
+                for inner_spec in spec.kv_cache_specs.values()
+            ):
+                return True
+        return False
+
+    @property
+    def has_mamba_layers(cache_config: Any) -> bool:
+        original_getter = getattr(original_has_mamba, "fget", None)
+        if original_getter is None:
+            raise DascRuntimeUnsupported(
+                "KVCacheConfig.has_mamba_layers is no longer a property"
+            )
+        return bool(
+            getattr(cache_config, "_mst_dasc_has_mamba_layers", False)
+            or original_getter(cache_config)
+            or aggregate_has_mamba(cache_config)
+        )
+
+    @functools.wraps(original_generate)
+    def generate_dasc_scheduler_config(kv_cache_configs):
+        preserve_mamba = any(aggregate_has_mamba(cfg) for cfg in kv_cache_configs)
+        scheduler_config = original_generate(kv_cache_configs)
+        if preserve_mamba:
+            groups = scheduler_config.kv_cache_groups
+            if not groups or not all(
+                isinstance(group.kv_cache_spec, AttentionSpec) for group in groups
+            ):
+                raise DascRuntimeUnsupported(
+                    "DASC scheduler reduction no longer preserves attention managers"
+                )
+            scheduler_config._mst_dasc_has_mamba_layers = True
+            emit(
+                config.evidence_path,
+                "heterogeneous_scheduler_mamba_awareness_preserved",
+                mode=config.mode,
+                scheduler_group_specs=[
+                    type(group.kv_cache_spec).__name__ for group in groups
+                ],
+                has_mamba_layers=scheduler_config.has_mamba_layers,
+                needs_kv_cache_zeroing=(
+                    scheduler_config.needs_kv_cache_zeroing
+                ),
+            )
+        return scheduler_config
+
+    kv_cache_config_class.has_mamba_layers = has_mamba_layers
+    kv_cache_utils.generate_scheduler_kv_cache_config = (
+        generate_dasc_scheduler_config
+    )
+    if engine_core is not None:
+        engine_core.generate_scheduler_kv_cache_config = (
+            generate_dasc_scheduler_config
+        )
     kv_cache_config_class._mst_dasc_heterogeneous_awareness_installed = True
     emit(
         config.evidence_path,
         "heterogeneous_cache_config_awareness_installed",
         mode=config.mode,
-        enables_block_aligned_split=True,
-        enables_cache_zeroing=True,
+        scheduler_alias_patched=engine_core is not None,
+        scheduler_alias_deferred=engine_core is None,
+        preserves_attention_manager=True,
+        restores_mamba_block_aligned_split=True,
+        restores_kv_cache_zeroing=True,
     )
 
 
@@ -1088,7 +1155,11 @@ def install(config: DascConfig) -> None:
         _install_head256_prefill_fallback_patch(
             config, device_op.DeviceOperator, device_utils
         )
-        _install_heterogeneous_cache_config_awareness_patch(config, KVCacheConfig)
+        _install_heterogeneous_cache_config_awareness_patch(
+            config,
+            KVCacheConfig,
+            kv_cache_utils,
+        )
         _install_aligned_hybrid_grouping_patch(config, kv_cache_utils)
         _install_heterogeneous_cascade_guard(config, model_runner_v1.NPUModelRunner)
         _install_heterogeneous_mamba_lifecycle_patch(config, mamba_utils)
