@@ -44,6 +44,14 @@ Ascend path.
 7. Compare against a tiny baseline under the same environment fingerprint before
    any larger benchmark.
 8. If correctness fails, classify the stage as `failed` and recover active code.
+   Preserve successful sub-gates separately from the numerical verdict. When
+   scheduler initialization, aligned splitting, block zeroing, and state copy
+   are all proven with material branch-local evidence but replay still fails,
+   stop changing those lifecycle selectors. Localize the next canary below
+   lifecycle selection: physical state-row materialization, per-layer byte
+   offsets, request/block/slot identity, and the exact first resumed-token
+   boundary. Compare checksums before restore, immediately before the native
+   recurrent operator, and after checkpoint.
 9. If correctness passes but performance is unclear, route to profiler or formal
    benchmark rather than expanding the change blindly.
 10. Record the canary result, limitations, artifact paths/hashes, and next step.
@@ -77,6 +85,10 @@ Only scale to repeated benchmark when:
   tensor-parallel workers or the engine core executed the change.
 - Do not treat a lifecycle/configuration flag as proof that its consuming
   branch executed; require branch-local evidence plus output correctness.
+- Do not treat complete branch coverage, correct ownership, service readiness,
+  or a zero container exit code as numerical success. These can all pass while
+  identical cache-hit replays diverge. Keep the strict numerical verdict as the
+  gate for performance and E2E quality.
 - Do not assume a clean prelaunch sample reserves the devices. Recheck ownership
   after the service has created its workers and fail closed on a missing target
   worker or any foreign target-device PID.

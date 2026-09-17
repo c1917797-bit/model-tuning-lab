@@ -703,3 +703,48 @@ admission-failure result. The immutable v12r19 experiment identity and result
 root may remain unchanged only after confirming that root is still absent.
 Then let the launch controller perform its own final occupancy check; do not
 insert performance or E2E quality work ahead of the strict numerical canary.
+
+## 2026-09-17 v12r19 branch evidence result
+
+The fresh v12r19 admission succeeded on physical NPU4-7 using commit
+`ced591b55a7ff1ab91892d91a59a452db8670286`. Post-readiness ownership
+attributed one TP worker to each selected physical device and found no foreign
+target-device PID. The service completed the canary, the owned container exited,
+the controller stopped, and NPU4-7 returned to the 2,868-2,869 MiB driver-only
+floor with no device processes. NPU0-3 were not touched.
+
+The observability treatment succeeded:
+
+- scheduler lifecycle initialization recorded all required flags;
+- the aligned split materially changed the request to the 1,536-token block
+  boundary;
+- zeroing produced a nonempty block set;
+- the Mamba copy branch executed in all four TP workers;
+- all 192 native all-head cache bindings and the positive 4,608-token
+  prefix-cache-hit delta were retained.
+
+The strict numerical canary still failed. The short exact gate was false, the
+three identical long-prefix replays diverged, and
+`replay_exact_verified=false`. Therefore the candidate is not eligible for
+performance or E2E quality testing. This result rejects the remaining
+configuration/lifecycle-selection hypothesis; it does not reject DASC itself.
+The next localization boundary is below lifecycle selection: physical state-row
+materialization, request/global/local block and slot mapping, per-layer byte
+offsets, and exact state evolution around the first resumed token.
+
+Authoritative immutable artifacts are under
+`/cache/cch/dasc-qwen36-ascend-20260915/branch-evidence-all-heads-v12r19`:
+
+- `branch-evidence-verdict.json`:
+  `5c890e85cdfa09dd8ca1fff184d6fb1e37bbb35b93a33484a1b14813cb131786`;
+- `physical-canary.json`:
+  `3d76f7e011f3888d85469ba2661e82767a51a16cfe3a2de8026349c4ebe0f786`;
+- `post-readiness-ownership.json`:
+  `c865a218bbf117ef00d3b3aee2fed66d955e91123c734460d2fceb9e1b2326e6`;
+- `evidence.jsonl`:
+  `b719eeb982ea72cc5a0c0e38993b2553b6fd010127e13525206a6a186b4afaa1`.
+
+Do not rerun v12r19 or reuse its immutable root. Build the next one-variable
+diagnostic around the first cache-hit resume token and retain the all-head
+control until exact multi-replay equivalence passes. Only then reintroduce head
+pruning and later enter matched performance and E2E quality gates.
