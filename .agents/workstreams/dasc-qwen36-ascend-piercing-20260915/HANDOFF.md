@@ -675,3 +675,31 @@ distinct decision. If all lifecycle branches pass but the numerical canary
 fails, the recorded next boundary is physical row materialization, per-layer
 offsets, and the exact first resumed token. Performance and E2E quality remain
 forbidden until this strict all-head control passes.
+
+## 2026-09-17 v12r19 admission race
+
+The remote workstream and public branch were verified at
+`fc02263efc9015b7aa7175f26172f04f29a3b4d5`. A fresh standalone v12r19
+preflight then found physical NPU4-7 process-free at the 2,869-2,870 MiB driver
+floor and passed every repository, image, port, and immutable-root gate.
+
+Before the launch controller could admit the DASC run, an unrelated workload
+started TP4 workers on the same four cards. The controller's own fail-closed
+preflight rejected the launch with PIDs 31337-31340. Their parent PID 28520
+mapped through `/proc/28520/cgroup` to container
+`fd2be986b54d2ac96d30b5c3fbc5785ba7c1f9703d812275d0fa0d48204622b5`
+(`alltoall-dedup-ep4_nk`). No DASC container or result root was created and no
+foreign process was stopped.
+
+This is `not_run/resource_race`, not a v12r19 numerical failure and not DASC
+algorithm evidence. The successful part is the two-stage admission gate: it
+prevented a collision despite a stale-in-seconds idle observation. The failed
+assumption is that a standalone process-free sample or repository lock reserves
+shared hardware; unrelated workloads need not honor that lock.
+
+Resume only after a fresh live audit proves NPU4-7 idle. Use a new AWMCP
+control-plane idempotency key because the previous launch key has a completed
+admission-failure result. The immutable v12r19 experiment identity and result
+root may remain unchanged only after confirming that root is still absent.
+Then let the launch controller perform its own final occupancy check; do not
+insert performance or E2E quality work ahead of the strict numerical canary.

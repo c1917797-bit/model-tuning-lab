@@ -80,6 +80,11 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 
 - Re-prove physical NPU/process/container ownership in the same session as each
   action. HTTP health or container existence alone is insufficient.
+- A process-free sample is not a lease. Shared-device occupancy can change
+  between a standalone preflight and launch, including within seconds. Keep
+  the authoritative final occupancy check in the launch controller after any
+  cooperative lock and immediately before container creation or service
+  mutation. The lock protects only cooperating repository workflows.
 - When device-side PIDs change during inspection, resolve each live PID through
   `/proc/<pid>/cgroup` to its container and inspect the container's live
   process tree. A long-lived shell container may launch or restart a short-lived
@@ -94,6 +99,12 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
   apply that stricter gate without reinterpretation.
 - Treat NPU0-3, NPU4-7, ports, and running services as leased resources, not
   permanent assignments.
+- When a foreign process wins the preflight-to-launch race, fail closed and
+  record the event as `not_run/resource_race`. Attribute each new PID through
+  cgroups, confirm that no owned container/result root was created, and do not
+  treat the admission failure as numerical, performance, or quality evidence.
+  A later attempt requires a fresh live audit and a new control-plane
+  idempotency key; never reuse the completed key from the rejected admission.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.
@@ -119,6 +130,8 @@ the workstream upstream. Serialized integration alone updates `main`.
 - AWMCP response proves the intended direct target.
 - Commands run from the canonical target repository.
 - Live Git, container, port, memory, and NPU state are captured before mutation.
+- The launch record distinguishes admission failure from an experiment that
+  crossed its owned start boundary.
 - Container occupancy reports include state and identify whether the default
   active-claim rule or an explicitly stricter declaration rule was applied.
 - No verification value or other credential appears in tracked files or diffs.

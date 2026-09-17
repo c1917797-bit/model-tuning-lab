@@ -25,6 +25,11 @@ Ascend path.
    before custom source changes.
 5. Run a small deterministic workload first. Prove load, request success,
    output validity, and the intended physical NPU/process execution.
+   Treat an idle-device sample as observation, not reservation. Put the final
+   occupancy check inside the same controller that performs the launch, after
+   any cooperative resource lock and immediately before the first mutation.
+   A repository lock coordinates only workflows that honor it; it cannot
+   exclude an unrelated container or operator.
 6. Emit bounded activation evidence from every relevant worker, rank, or engine
    process. Run the same canary with the mechanism disabled and prove the marker
    disappears while the request still succeeds.
@@ -57,6 +62,9 @@ Only scale to repeated benchmark when:
   does not;
 - correctness guardrails pass;
 - target NPU execution is proven in the same session;
+- the launch controller rechecks live target-device occupancy immediately
+  before mutation and records whether the experiment actually crossed its
+  start boundary;
 - after service readiness, every target-device PID is re-attributed to the
   owned container before the numerical request is sent;
 - rollback is known;
@@ -72,6 +80,13 @@ Only scale to repeated benchmark when:
 - Do not assume a clean prelaunch sample reserves the devices. Recheck ownership
   after the service has created its workers and fail closed on a missing target
   worker or any foreign target-device PID.
+- If a foreign workload appears after an idle preflight but before the owned
+  experiment crosses its recorded start boundary, classify the outcome as
+  `not_run/resource_race`, not as a candidate or algorithm failure. Preserve
+  the exact competing PIDs and container attribution, require the immutable
+  result root to remain absent, and allow a later fresh admission attempt only
+  with a new control-plane idempotency key. Do not reuse a completed key whose
+  cached result is the admission failure.
 - Do not use canary success as a performance claim.
 - Do not leave failed active code in the final branch tree, even though the
   failed commit/evidence should remain reachable in history.
