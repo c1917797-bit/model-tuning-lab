@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -26,9 +27,64 @@ controller.CONTAINER = "dasc_qwen36_state_index_v12r20_20260917"
 controller.PLUGIN_MODE = "physical-cache-native-all-heads-state-index"
 
 EXPECTED_TP_WORKERS = 4
-EXPECTED_GDN_LAYERS = 48
 EXPECTED_STATE_INDICES = {0, 1}
 EXPECTED_REPRESENTATIVE_LAYERS = 2
+MODEL_CONFIG = Path("/cache/efim/Qwen3.6-27B/config.json")
+SELECTOR_MANIFEST = Path(
+    "/cache/cch/dasc-qwen36-ascend-20260915/selector-manifest-v3.json"
+)
+
+
+def load_expected_gdn_inventory(
+    model_config_path: Path = MODEL_CONFIG,
+    selector_manifest_path: Path = SELECTOR_MANIFEST,
+) -> dict:
+    config_bytes = model_config_path.read_bytes()
+    manifest_bytes = selector_manifest_path.read_bytes()
+    config = json.loads(config_bytes)
+    manifest = json.loads(manifest_bytes)
+
+    text_config = config.get("text_config")
+    if not isinstance(text_config, dict):
+        raise RuntimeError("target checkpoint has no text_config object")
+    layer_types = text_config.get("layer_types")
+    hidden_layers = text_config.get("num_hidden_layers")
+    if not isinstance(layer_types, list) or len(layer_types) != hidden_layers:
+        raise RuntimeError(
+            "target checkpoint layer_types do not match num_hidden_layers"
+        )
+    checkpoint_layer_ids = [
+        index
+        for index, layer_type in enumerate(layer_types)
+        if layer_type == "linear_attention"
+    ]
+
+    manifest_layers = manifest.get("layers")
+    if not isinstance(manifest_layers, list):
+        raise RuntimeError("selector manifest has no layer list")
+    manifest_layer_ids = [row.get("layer") for row in manifest_layers]
+    manifest_layer_count = manifest.get("layer_count")
+    config_sha256 = hashlib.sha256(config_bytes).hexdigest()
+    if manifest.get("model_config_sha256") != config_sha256:
+        raise RuntimeError("selector manifest model-config hash mismatch")
+    if (
+        manifest_layer_count != len(checkpoint_layer_ids)
+        or len(manifest_layers) != manifest_layer_count
+        or manifest_layer_ids != checkpoint_layer_ids
+    ):
+        raise RuntimeError(
+            "selector manifest layer inventory does not match target checkpoint"
+        )
+
+    return {
+        "model_config_path": str(model_config_path),
+        "model_config_sha256": config_sha256,
+        "selector_manifest_path": str(selector_manifest_path),
+        "selector_manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+        "hidden_layer_count": hidden_layers,
+        "gdn_layer_count": len(checkpoint_layer_ids),
+        "gdn_layer_ids": checkpoint_layer_ids,
+    }
 
 
 def _event_key(row: dict) -> tuple:
@@ -41,7 +97,13 @@ def _event_key(row: dict) -> tuple:
     )
 
 
-def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
+def state_index_verdict(
+    rows: list[dict],
+    numerical: dict | None,
+    *,
+    expected_inventory: dict,
+) -> dict:
+    expected_gdn_layers = expected_inventory["gdn_layer_count"]
     copies = [
         row
         for row in rows
@@ -92,7 +154,7 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
             )
         )
         if (
-            row.get("layer_count") == EXPECTED_GDN_LAYERS
+            row.get("layer_count") == expected_gdn_layers
             and representative_complete
             and any(
                 layer.get("source_state_indices")
@@ -234,7 +296,8 @@ def state_index_verdict(rows: list[dict], numerical: dict | None) -> dict:
         },
         "expected": {
             "tp_workers": EXPECTED_TP_WORKERS,
-            "gdn_layers": EXPECTED_GDN_LAYERS,
+            "gdn_layers": expected_gdn_layers,
+            "checkpoint_inventory": expected_inventory,
             "state_indices": sorted(EXPECTED_STATE_INDICES),
             "representative_layers_per_worker": (
                 EXPECTED_REPRESENTATIVE_LAYERS
@@ -277,7 +340,11 @@ def validate_state_index_evidence() -> dict:
         if numerical_path.is_file()
         else None
     )
-    result = state_index_verdict(rows, numerical)
+    result = state_index_verdict(
+        rows,
+        numerical,
+        expected_inventory=load_expected_gdn_inventory(),
+    )
     controller.atomic_json(controller.RESULT / "state-index-verdict.json", result)
     refresh_artifact_manifest()
     if not result["row_gate_ok"]:
@@ -298,6 +365,14 @@ def preserve_state_index_verdict_after_failure() -> None:
 
 
 def main() -> int:
+    expected_inventory = load_expected_gdn_inventory()
+    print(
+        json.dumps(
+            {"checkpoint_gdn_inventory": expected_inventory},
+            sort_keys=True,
+        ),
+        flush=True,
+    )
     try:
         exit_code = trial.main()
     except BaseException:

@@ -912,3 +912,11 @@ prove that every required combination exists. The hardened verdict now treats
 rank, state index, and representative layer as one composite key and requires
 the exact copy/before/after key sets without duplicate collapse. This rule is
 now part of the maintainer tuning skill and its transformation eval.
+
+The controller no longer trusts a hard-coded count even though 48 was correct.
+Before preflight or launch it now derives the linear-attention layer IDs from
+the exact checkpoint configuration, verifies the selector manifest's config
+hash, count, length, and ordered layer IDs, and records both source hashes in
+the state-row verdict. A mismatched or stale selector fails before accelerator
+mutation. Unit tests cover both a matching inventory and a manifest from the
+wrong checkpoint.

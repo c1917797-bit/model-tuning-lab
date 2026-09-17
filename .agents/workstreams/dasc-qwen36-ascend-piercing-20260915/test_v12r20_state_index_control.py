@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 
@@ -10,6 +11,26 @@ SPEC = importlib.util.spec_from_file_location("run_v12r20_under_test", MODULE_PA
 assert SPEC is not None and SPEC.loader is not None
 trial = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(trial)
+
+EXPECTED_INVENTORY = {
+    "model_config_path": "/test/config.json",
+    "model_config_sha256": "config-sha",
+    "selector_manifest_path": "/test/selector.json",
+    "selector_manifest_sha256": "manifest-sha",
+    "hidden_layer_count": 64,
+    "gdn_layer_count": 48,
+    "gdn_layer_ids": [
+        index for index in range(64) if (index + 1) % 4 != 0
+    ],
+}
+
+
+def verdict(rows, numerical):
+    return trial.state_index_verdict(
+        rows,
+        numerical,
+        expected_inventory=EXPECTED_INVENTORY,
+    )
 
 
 def test_v12r20_has_distinct_immutable_identity():
@@ -95,7 +116,7 @@ def complete_rows():
 
 
 def test_state_index_verdict_accepts_exact_row_transition():
-    result = trial.state_index_verdict(complete_rows(), {"ok": True})
+    result = verdict(complete_rows(), {"ok": True})
     assert result["row_gate_ok"] is True
     assert result["numerical_canary_ok"] is True
     assert result["overall_ok"] is True
@@ -103,7 +124,7 @@ def test_state_index_verdict_accepts_exact_row_transition():
 
 
 def test_state_index_verdict_separates_row_success_from_numerical_failure():
-    result = trial.state_index_verdict(complete_rows(), {"ok": False})
+    result = verdict(complete_rows(), {"ok": False})
     assert result["row_gate_ok"] is True
     assert result["overall_ok"] is False
     assert result["decision"] == (
@@ -114,7 +135,7 @@ def test_state_index_verdict_separates_row_success_from_numerical_failure():
 def test_state_index_verdict_rejects_old_source_mutation():
     rows = complete_rows()
     rows[-1]["source_after_native"]["full_sha256"] = "changed"
-    result = trial.state_index_verdict(rows, {"ok": True})
+    result = verdict(rows, {"ok": True})
     assert result["row_gate_ok"] is False
     assert result["decision"] == "native_execution_still_mutated_old_source_row"
 
@@ -130,7 +151,7 @@ def test_state_index_verdict_rejects_partial_state_or_layer_coverage():
             and row.get("state_index") == 0
         )
     ]
-    result = trial.state_index_verdict(rows, {"ok": True})
+    result = verdict(rows, {"ok": True})
     assert result["row_gate_ok"] is False
     assert result["decision"] == "physical_copy_coverage_incomplete"
 
@@ -148,7 +169,7 @@ def test_state_index_verdict_rejects_unpaired_exact_copy():
             removed = True
             continue
         filtered.append(row)
-    result = trial.state_index_verdict(filtered, {"ok": True})
+    result = verdict(filtered, {"ok": True})
     assert result["row_gate_ok"] is False
     assert result["decision"] == (
         "native_boundary_does_not_match_every_exact_copy"
@@ -171,6 +192,11 @@ def test_numerical_failure_still_writes_state_index_verdict(
         raise RuntimeError("strict numerical gate failed")
 
     monkeypatch.setattr(trial.trial, "main", fail)
+    monkeypatch.setattr(
+        trial,
+        "load_expected_gdn_inventory",
+        lambda: EXPECTED_INVENTORY,
+    )
     with pytest.raises(RuntimeError, match="strict numerical gate failed"):
         trial.main()
 
@@ -184,3 +210,84 @@ def test_numerical_failure_still_writes_state_index_verdict(
     )
     assert "state-index-verdict.json" in manifest
     assert "artifacts.sha256.json" not in manifest
+
+
+def test_expected_inventory_is_derived_from_checkpoint_and_manifest(tmp_path):
+    layer_types = [
+        "full_attention" if (index + 1) % 4 == 0 else "linear_attention"
+        for index in range(8)
+    ]
+    config_path = tmp_path / "config.json"
+    config_path.write_text(
+        json.dumps(
+            {
+                "text_config": {
+                    "num_hidden_layers": 8,
+                    "layer_types": layer_types,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    config_sha256 = hashlib.sha256(config_path.read_bytes()).hexdigest()
+    manifest_path = tmp_path / "selector.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "model_config_sha256": config_sha256,
+                "layer_count": 6,
+                "layers": [
+                    {"layer": index}
+                    for index, layer_type in enumerate(layer_types)
+                    if layer_type == "linear_attention"
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = trial.load_expected_gdn_inventory(config_path, manifest_path)
+
+    assert result["hidden_layer_count"] == 8
+    assert result["gdn_layer_count"] == 6
+    assert result["gdn_layer_ids"] == [0, 1, 2, 4, 5, 6]
+
+
+def test_expected_inventory_rejects_manifest_from_different_checkpoint(
+    tmp_path,
+):
+    config_path = tmp_path / "config.json"
+    config_path.write_text(
+        json.dumps(
+            {
+                "text_config": {
+                    "num_hidden_layers": 4,
+                    "layer_types": [
+                        "linear_attention",
+                        "linear_attention",
+                        "linear_attention",
+                        "full_attention",
+                    ],
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    manifest_path = tmp_path / "selector.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "model_config_sha256": "wrong-checkpoint",
+                "layer_count": 3,
+                "layers": [
+                    {"layer": 0},
+                    {"layer": 1},
+                    {"layer": 2},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(RuntimeError, match="model-config hash mismatch"):
+        trial.load_expected_gdn_inventory(config_path, manifest_path)
