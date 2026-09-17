@@ -15,7 +15,7 @@
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "v12r17_bridge_bypass_failed_v12r18_mixed_lifecycle_fix_ready",
+  "status": "v12r18_scheduler_chain_fix_pinned_tests_passed_waiting_npu4_7_and_push",
   "current_plan": "PLAN_REVIEW_V12R9.md",
   "latest_attempt": {
     "name": "v12r17",
@@ -38,7 +38,7 @@
   },
   "decision": "open",
   "next_actions": [
-    "Run v12r18 exactly once only after commit/push and fresh NPU4-7 preflight. It keeps the native all-head control and changes only mixed-group Mamba awareness so scheduler block-aligned prefill and cache zeroing are restored.",
+    "Do not run the property-only a36a432 bytes. Use the reconciled successor at 7aa733eddbcc9e7365fe2ea861d5372ba933833c only after its branch push succeeds and a fresh NPU4-7 preflight proves no device PID, idle HBM, free port 8030, and an absent immutable result root.",
     "Do not tune DASC retention, benchmark performance, or run E2E quality while the all-head control is nondeterministic.",
     "Instrument the first cache-hit token boundary: capture request identity, local block mapping, compact source row, dense active-slot row, and state checksums before restore, before native recurrent execution, and after checkpoint.",
     "Add a plugin-disabled dense lifecycle control and an all-head bridge control under the same long-prefix request sequence; require exact first-token logits or token IDs and stable state evolution before restoring pruning.",
@@ -78,6 +78,10 @@
     "physical_npus": [4, 5, 6, 7]
   },
   "successor": {
+    "validated_scheduler_chain_commit": "7aa733eddbcc9e7365fe2ea861d5372ba933833c",
+    "property_only_recovery_tag": "checkpoint/dasc-qwen36-property-only-v12r18-20260917 (created on chicaihong01; push pending after GitHub timeout)",
+    "scheduler_chain_gate": "17 focused plugin tests, 61 complete plugin tests, 2 v12r18 controller tests, Python compilation, git diff --check, and 26-skill validation passed on 2026-09-17; no NPU claim",
+    "latest_resource_blocker": "On 2026-09-17 physical NPU4-7 had live VLLMWorker_TP processes in container vllm_main_au, launched by /cache/austinov/deltalog/scripts/run_config.sh pkg_on for /cache/austinov/Qwen3.8-27B TP4 on port 8251, with about 29461 MiB HBM per card. Do not stop or share it.",
     "commit": "74dcdf9",
     "graph_boundary_commit": "ff350dc",
     "design": "superseded fixed-address per-forward virtualization; replacing with request-owned dense active slots plus compact checkpoint storage",

@@ -80,6 +80,12 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 
 - Re-prove physical NPU/process/container ownership in the same session as each
   action. HTTP health or container existence alone is insufficient.
+- When device-side PIDs change during inspection, resolve each live PID through
+  `/proc/<pid>/cgroup` to its container and inspect the container's live
+  process tree. A long-lived shell container may launch or restart a short-lived
+  model service after the original parent disappears. Record the actual
+  container, script, model/service command, and device memory; do not infer a
+  human owner from a path or container name when no owner metadata exists.
 - Report container device declarations together with container state. By
   default, running containers and live processes are active occupancy claims;
   exited containers are historical provenance that still requires owner and

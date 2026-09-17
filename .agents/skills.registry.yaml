@@ -20,6 +20,7 @@ skills:
       - connect a fresh clone to the target host
       - verify the canonical remote repository and Ascend machine state
       - distinguish active and historical container device claims
+      - attribute changing NPU process ids to their live container workload
     scope:
       - AGENTS.md
       - .agents/**
@@ -72,6 +73,7 @@ skills:
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
       - bound recoverable E2E opportunity before implementation
+      - audit hybrid cache worker and scheduler lifecycle configuration
     scope:
       - configs/**
       - scripts/**

@@ -158,6 +158,15 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   attention plus heterogeneous Mamba layers as one token-lifecycle group whose
   aggregate page is the sum of exact inner pages, and fail closed for cache
   families whose lifecycle equivalence has not been proved.
+- Audit worker cache configuration and the scheduler's derived cache
+  configuration as separate runtime objects. A scheduler reducer may replace a
+  heterogeneous aggregate with one representative inner spec: manager
+  selection can remain correct while recurrent-state split/zeroing flags are
+  silently lost. Preserve manager type and lifecycle flags as independent
+  invariants. When a consumer imports the reducer by value, patch the defining
+  module first; patch an already-loaded alias only after proving object
+  identity, defer when the consumer is not loaded, and fail closed on a
+  detached alias.
 - Preserve the model-provided storage/layer order when synthesizing an
   aggregate hybrid cache group, but never treat that order as a valid
   group-wide execution-dispatch contract. Some runners infer block-table and
@@ -199,6 +208,11 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   overlapping mapping is a launch blocker even when no NPU PID is present; do
   not describe that idle mapping as active compute, and do not weaken the gate
   merely to consume apparently free memory.
+- Hardware-free validation may continue while an accelerator lane is occupied
+  only when the validation container is non-privileged, maps no accelerator
+  devices, uses read-only source/input mounts, and does not contend for the
+  owned service port. Record it as pinned-software evidence only; it cannot
+  satisfy target-device activation, numerical, performance, or quality gates.
 - Do not implement the container-claim gate from HostConfig.Devices alone.
   Privileged Ascend containers can expose no explicit Docker device mappings
   while selecting host-physical devices through ASCEND_RT_VISIBLE_DEVICES.

@@ -486,3 +486,57 @@ controller suite passes 90/90 in the pinned v0.23.0 image. This is source-backed
 software evidence only. Commit/push it, then run the immutable v12r18 native
 all-head control once on physical NPU4-7. Do not benchmark performance or run
 E2E quality until the strict replay canary passes.
+
+## 2026-09-17 takeover-ready scheduler-chain checkpoint
+
+The earlier property-only implementation at `a36a432` was incomplete: it
+fixed worker configs but not the scheduler config after upstream first-inner
+reduction. Preserve it through
+`checkpoint/dasc-qwen36-property-only-v12r18-20260917`; do not execute those
+bytes. The reconciled successor is
+`7aa733eddbcc9e7365fe2ea861d5372ba933833c`. It keeps the a36 controller and
+v12r17 evidence while adding the scheduler reducer wrapper, explicit lifecycle
+marker, import-order-safe alias handling, and detached-alias failure gate.
+
+Validation from the pinned `quay.io/ascend/vllm-ascend:v0.23.0` image:
+
+- focused physical monkeypatch file: 17 passed;
+- complete DASC plugin suite: 61 passed;
+- v12r18 controller tests: 2 passed;
+- Python compilation, `git diff --check`, and all 26 maintainer skills passed.
+
+These are pinned-software results only. No new NPU numerical, performance, or
+quality result exists. The previous 15/15 and 90/90 wording above describes the
+property-only checkpoint and is superseded for execution by this checkpoint.
+
+Physical NPU4-7 were actively occupied during the latest orientation. Live
+device PIDs mapped through cgroups to container `vllm_main_au`. Its process
+tree ran `/cache/austinov/deltalog/scripts/run_config.sh pkg_on`, serving
+`/cache/austinov/Qwen3.8-27B` with TP4 on port 8251. Each card reported about
+29,461 MiB HBM. The container has no owner label, so do not infer a person and
+do not stop, restart, or share the workload.
+
+The first push of the reconciled branch and recovery tag failed because the
+target host could not connect to GitHub port 443 for about 130 seconds. The
+worktree is clean and two commits ahead of the public branch. Retry the same
+non-force push only after network reachability returns; do not amend, squash,
+or recreate either commit.
+
+Resume in this order:
+
+1. verify branch `HEAD` is the reconciled commit and inspect
+   `git status --short --branch`;
+2. push the workstream branch plus the property-only recovery tag, then verify
+   the remote refs;
+3. re-orient NPU4-7, container mappings, device PIDs, HBM, port 8030, and the
+   immutable v12r18 result-root absence;
+4. only when the lane is genuinely free, run
+   `run_v12r18_mixed_lifecycle_fix_control.py` once;
+5. require the scheduler-preservation event, exact first resumed token,
+   identical repeated continuations, positive prefix-hit delta, owned cleanup,
+   and released resources.
+
+A pass permits restoring the all-head bridge and then W64 pruning. A failure
+closes this scheduler-awareness treatment and moves localization to the actual
+checkpoint materialization boundary. It does not permit performance or quality
+testing.
