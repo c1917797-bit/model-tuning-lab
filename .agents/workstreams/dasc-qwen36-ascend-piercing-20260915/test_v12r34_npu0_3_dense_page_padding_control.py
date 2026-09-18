@@ -137,7 +137,7 @@ def test_monitor_fails_closed_when_observation_raises(monkeypatch, tmp_path):
         ]
     ]
     stored = json.loads(
-        (tmp_path / "npu0-3-resource-race.json").read_text(
+        (tmp_path / "target-lane-resource-race.json").read_text(
             encoding="utf-8"
         )
     )

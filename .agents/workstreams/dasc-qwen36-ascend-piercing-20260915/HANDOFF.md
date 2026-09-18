@@ -1439,3 +1439,26 @@ preflight, and the one-shot NPU run remain pending. The planned immutable root i
 `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu0-3-coexist-v12r34`.
 This is still a correctness diagnostic. It cannot produce a performance or
 GSM8K claim unless the strict repeated-replay gate passes first.
+
+## 2026-09-18 v12r35 live-lane switch
+
+After v12r34 was committed and pushed, the live resource assignment reversed:
+the unchanged `dias-cont-1` task moved its four vLLM workers to physical
+NPU0-3, at about 28.2 GiB process memory and 30.98 GiB HBM per card. Physical
+NPU4-7 returned to the 2.869 GiB idle floor with no device-side process.
+Therefore v12r34 must not launch on its now-occupied NPU0-3 lane.
+
+v12r35 reuses the same tested target-lane coexistence controller and changes
+only `NPUS`, the cooperative lock, immutable result root, and owned container
+identity back to physical NPU4-7. Resource-race artifact schemas and messages
+now derive their target from the recorded `physical_npus` field instead of
+hard-coding NPU0-3. The exact DASC dense-padding treatment, eager mode,
+full-layer state diagnostics, Maxon pause guard, DIAS stable-identity guard,
+continuous target-process ownership check, and HBM-growth guard are unchanged.
+
+The focused v12r30-v12r35 suite passed 30/30. The complete read-only pinned
+v0.23.0 image suite passed 238/238 with 14 upstream torch.jit deprecation
+warnings; no NPU was mapped and historical artifacts remained read-only.
+Commit/push, exact live preflight, and the one-shot NPU run remain pending.
+Planned immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu4-7-coexist-v12r35`.

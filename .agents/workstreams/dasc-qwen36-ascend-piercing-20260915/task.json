@@ -10,12 +10,12 @@
   "target": {
     "host": "chicaihong01",
     "model_path": "/cache/efim/Qwen3.6-27B",
-    "hardware_scope": "current v12r34 controller targets physical NPU0-3 under the operator-authorized idle-lane exception; physical NPU4-7 remain occupied by the stable dias-cont-1 workload and are not touched",
+    "hardware_scope": "current v12r35 controller targets physical NPU4-7 under the operator-authorized idle-lane exception; the stable dias-cont-1 workload moved to physical NPU0-3 and is not touched",
     "repository": "/opt/host/vnf/austinov/model-tuning-lab"
   },
   "objective": "Pierce DASC using the HYPIC-style evidence loop: method-chain parity, architecture fit, one-switch cache-hit A/B, Ascend correctness, matched performance, and E2E quality evidence.",
   "delivery_constraint": "Final runnable implementation must execute on Ascend through a plugin-owned monkeypatch path. Do not modify upstream vLLM, vLLM-Ascend, CANN, model weights, or original images; CPU/offline probes are only gates, not delivery.",
-  "status": "v12r34_npu0_3_guard_software_validated_ready_to_checkpoint",
+  "status": "v12r35_npu4_7_guard_software_validated_ready_to_checkpoint",
   "current_plan": "PLAN_REVIEW_V12R9.md",
   "latest_attempt": {
     "name": "v12r32",
@@ -37,6 +37,8 @@
   },
   "decision": "open",
   "next_actions": [
+    "The live lane changed after v12r34 was checkpointed: dias-cont-1 now owns physical NPU0-3 and NPU4-7 are idle. Do not launch v12r34 into occupied NPU0-3.",
+    "Validate and checkpoint v12r35. It reuses the v12r34 target-lane guard with dynamic physical_npus evidence, sets only NPUS/lock/result/container to NPU4-7, and keeps every DASC treatment byte unchanged.",
     "Validate and checkpoint v12r34 before launch. It keeps the exact v12r31-v12r33 dense-padding treatment and moves only the physical lane to NPU0-3 with a distinct lock, result root, and container identity.",
     "For v12r34, temporarily pause only the exact Maxon4ick_torch_910_dev container, allow only the stable dias-cont-1 task to continue on non-target NPU4-7, and fail closed if its identity changes or any DIAS/foreign PID appears on NPU0-3. Require continuous target PID ownership and bounded post-readiness HBM growth through the physical canary, then unpause Maxon in finally.",
     "The v12r33 preparation contained a pre-NPU defect: its post-readiness wrapper treated the base validator's None return as a dictionary. The corrected wrapper reloads the base evidence artifact and has a regression test; do not launch older uncorrected bytes.",
@@ -165,10 +167,12 @@
     "v12r31_result": "Terminal not_run/resource_race_before_readiness. Ascend device initialization returned Resource_Busy and no plugin activation or numerical request occurred. A concurrently activated DIAS Qwen3.5 service was proven on physical NPU4-7; after stopping that exact task, the same four-card allocation probe passed.",
     "v12r33_software_correction": "The paused-container post-readiness wrapper now accepts the base validator's documented file-only result by reloading post-readiness-ownership.json before adding paused-container evidence. Focused v12r30-v12r34 tests passed 27/27 on the host.",
     "v12r34_software_gate": "The complete read-only pinned v0.23.0 image suite passed 235/235 with 14 upstream torch.jit deprecation warnings. Source and historical artifacts were read-only; a tmpfs result tree contained only the read-only selector manifest and exact model config input. Maintainer Skill Tree validation passed all 26 skills, task.json parsed, and git diff --check passed.",
-    "v12r34_readiness_gate": "Physical NPU0-3 only; distinct cooperative lock; exact v12r33 dense-padding treatment; exact Maxon container must remain paused; only dias-cont-1 may coexist on NPU4-7 with stable task identity; no DIAS or other foreign PID may appear on NPU0-3; target ownership and HBM are continuously checked through the canary.",
-    "next_controller": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r34_npu0_3_dense_page_padding_control.py",
-    "next_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu0-3-coexist-v12r34",
-    "next_container": "dasc_qwen36_dense_page_padding_npu0_3_v12r34_20260918",
+    "v12r34_readiness_gate": "Physical NPU0-3 only; distinct cooperative lock; exact v12r33 dense-padding treatment; exact Maxon container must remain paused; only dias-cont-1 may coexist on NPU4-7 with stable task identity; no DIAS or other foreign PID may appear on NPU0-3; target ownership and HBM are continuously checked through the canary. This lane is currently occupied and v12r34 must not launch.",
+    "v12r35_readiness_gate": "Physical NPU4-7 only; dynamic target-lane evidence; exact v12r34 resource semantics and exact dense-padding treatment; dias-cont-1 may remain stable only on non-target NPU0-3; no foreign PID may appear on NPU4-7; exact Maxon container must remain paused through canary and be unpaused in finally.",
+    "v12r35_software_gate": "Focused v12r30-v12r35 tests passed 30/30. The complete read-only pinned v0.23.0 image suite passed 238/238 with 14 upstream torch.jit deprecation warnings; no NPU was mapped and historical artifacts remained read-only.",
+    "next_controller": ".agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r35_npu4_7_dense_page_padding_control.py",
+    "next_artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu4-7-coexist-v12r35",
+    "next_container": "dasc_qwen36_dense_page_padding_npu4_7_v12r35_20260918",
     "performance_result": null,
     "quality_result": null
   },

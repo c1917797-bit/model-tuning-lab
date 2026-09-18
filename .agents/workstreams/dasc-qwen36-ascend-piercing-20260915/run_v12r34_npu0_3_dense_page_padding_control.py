@@ -191,9 +191,9 @@ controller.live_resource_state = live_resource_state_with_npu0_3_coexistence
 def record_resource_race(phase: str, payload: dict) -> None:
     if controller.RESULT.is_dir():
         controller.atomic_json(
-            controller.RESULT / "npu0-3-resource-race.json",
+            controller.RESULT / "target-lane-resource-race.json",
             {
-                "schema": "mst.dasc.npu0-3-resource-race/v1",
+                "schema": "mst.dasc.target-lane-resource-race/v1",
                 "phase": phase,
                 **payload,
             },
@@ -260,7 +260,7 @@ def target_runtime_verdict(
         "runtime_hbm_growth_bounded": not excessive_growth,
     }
     return {
-        "schema": "mst.dasc.npu0-3-runtime-ownership/v1",
+        "schema": "mst.dasc.target-lane-runtime-ownership/v1",
         "physical_npus": list(controller.NPUS),
         "npu_process_pids": {
             str(device): sorted(rows.get(device, set()))
@@ -313,7 +313,7 @@ def validate_post_readiness_with_npu0_3_guard() -> dict:
             "post_readiness", {"target_runtime": runtime}
         )
         raise RuntimeError(
-            "not_run/resource_race: NPU0-3 ownership changed "
+            "not_run/resource_race: target NPU ownership changed "
             "at post-readiness"
         )
     _post_readiness_hbm = {
@@ -385,7 +385,7 @@ def run_with_npu0_3_guard(
             {"target_runtime": initial_runtime},
         )
         raise RuntimeError(
-            "not_run/resource_race: NPU0-3 ownership invalid "
+            "not_run/resource_race: target NPU ownership invalid "
             "before physical canary"
         )
     stop = threading.Event()
@@ -393,7 +393,7 @@ def run_with_npu0_3_guard(
     monitor = threading.Thread(
         target=monitor_npu0_3,
         args=(stop, violation),
-        name="dasc-v12r34-npu0-3-monitor",
+        name="dasc-target-lane-monitor",
         daemon=True,
     )
     monitor.start()
@@ -420,7 +420,7 @@ def run_with_npu0_3_guard(
         }
         record_resource_race("after_physical_canary", payload)
         raise RuntimeError(
-            "not_run/resource_race: NPU0-3 ownership changed "
+            "not_run/resource_race: target NPU ownership changed "
             "during physical canary"
         ) from error
     if error is not None:
