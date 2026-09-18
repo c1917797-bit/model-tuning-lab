@@ -1,0 +1,70 @@
+# MXR Qwen3.6 Ascend Piercing
+
+## Current state
+
+The workstream is in pre-NPU preparation. No MXR NPU correctness, performance,
+or quality result exists yet. Physical NPU4-7 were last observed running an
+external `vllm-ascend` TP4 service and must not be disturbed.
+
+The target checkpoint is `/cache/efim/Qwen3.6-27B`. Its global GDN geometry is
+16 key heads, 48 value heads, and 128 dimensions for both key and value. Under
+TP4 the local target shape is therefore `Hg=4, H=12, Dk=Dv=128`, matching the
+official PTO kernel's supported dimension and GQA ratio.
+
+Exact official source archives are retained outside Git under
+`/cache/cch/paper-sources/mxr-tri-inverse-20260918/`. The MegaGDN archive is
+pinned to `d357fd38608f99ddf9b9fb2d217b2e731ecd3a72`; the PTO kernels archive is
+pinned to `282ed20bbe9777f47370e7e4e2c2bd9df7f7ad37`. Do not silently update them.
+
+## Important audit findings
+
+- vLLM-Ascend v0.23.0 imports the chunk GDN function into
+  `vllm_ascend.ops.gdn` and uses it for prefill. Its exact audited `gdn.py` hash
+  is `d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816`.
+- A later upstream main snapshot already probes and uses
+  `torch_npu.npu_chunk_gated_delta_rule`; its audited `gdn.py` hash is
+  `d26e15be45ec8a8bb84dab546d8a54963f75f90d0ae1b9fa0ce4167e73b01895`.
+- Therefore v0.23 needs an opt-in replacement, while the v0.27 adapter must
+  delegate to the native fused path by default and only override it for an
+  explicit, evidence-backed comparison.
+- The official `install_hook.py` edits the installed vLLM-Ascend package. That
+  violates this repository's delivery boundary and must not be used in final
+  integration.
+- The official full wrapper falls back when a non-zero initial state is
+  present. It is primarily a fresh-prefill path, not a decode optimization.
+- The official aggregate accuracy helper contains a weak elementwise test
+  (`all()` instead of `any()`) and scales `rtol` up to 0.5. It is not accepted
+  as our correctness gate. We require finite output/state, explicit max/mean
+  and Frobenius errors, quantiles, and repeated multi-step state evolution.
+- The MegaGDN repository root has no license file, but its triangular inversion
+  sources explicitly refer to the Clear BSD license in `huawei-csl/pto-kernels`.
+  Do not vendor the rest of MegaGDN until every copied file's license provenance
+  is resolved.
+
+## Version-independent delivery boundary
+
+`projects/mxr_vllm_ascend` owns configuration, source identity checks, adapter
+selection, evidence, and eventually the custom kernel. Core code must not
+import version-specific vLLM internals. `v023` and `v027` adapters are thin
+routing layers only. Activation is disabled by default and fails closed on an
+unknown version, unknown `gdn.py` identity, missing backend, or v0.27 native
+fused-path override without explicit authorization.
+
+## Admission order
+
+1. Source/license/build audit with exact hashes.
+2. One NPU compile and target-shape output/final-state correctness matrix.
+3. Target-shape timing for baseline, MXR-only, staged PTO, and full megakernel.
+4. v0.23 plugin service canary and matched dense A/B.
+5. Three-run formal performance only for a promising candidate.
+6. LongBench-v2 and GSM8K with thinking disabled, `max_tokens=2048`, normal EOS.
+
+Kernel timing is diagnostic evidence, not an end-to-end claim. Full-megakernel
+gain must not be attributed solely to MXR triangular inversion.
+
+## Stop rule
+
+Stop this workstream and move to KVBuffer if target-shape NPU timing shows no
+clear advantage, or if an evidence-based end-to-end bound remains below about
+5%. Do not spend another open-ended cycle on wrapper integration without a
+kernel-level reason.

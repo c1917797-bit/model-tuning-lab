@@ -1,0 +1,61 @@
+schema: model-tuning-experiment/v1
+id: exp-20260918-mxr-qwen36-npu-gate
+status: planned
+decision: pending
+hypothesis: "The official MXR/PTO triangular inversion is numerically stable on CANN 9.1 and reduces target-shape GDN prefill time enough to justify vLLM integration."
+objective: "Gate MXR on real Ascend before service integration."
+owner: "mxr-qwen36-ascend-piercing-20260918"
+git:
+  branch: work/mxr-qwen36-ascend-piercing-20260918
+  base_commit: c5b900f272f028a14fd37e16abc82c4b539e092b
+  stage_commits: []
+environment:
+  source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  model_revision: "config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  tokenizer_revision: "same local checkpoint"
+  dtype_or_quantization: "Qwen bf16; official PTO compute fp16/fp32 as implemented"
+  framework_versions:
+    vllm_ascend: v0.23.0
+    cann: "9.1"
+  cann_driver_firmware: "capture at run time"
+  hardware_topology:
+    allowed_physical_npus: [4, 5, 6, 7]
+  runtime_topology:
+    operator_probe: "one idle target NPU first"
+    service_ab: "TP4 on physical NPU4-7 only after operator gates pass"
+protocol:
+  primary_metric: "target-shape prefill kernel latency and matched E2E output throughput"
+  correctness_guardrails:
+    - "finite output and full final state"
+    - "double-reference and baseline comparison with predeclared statistics"
+    - "multi-step state evolution"
+    - "no tolerance relaxation after observing a failure"
+  acceptance_thresholds:
+    - "target-shape kernel advantage is clear and repeatable"
+    - "attributable E2E gain remains plausibly at least 5 percent"
+    - "final quality has no accepted regression"
+  regression_thresholds:
+    - "any non-finite value or state-layout mismatch is an immediate failure"
+    - "formal performance uses the same common optimizations for dense and candidate"
+  abort_conditions:
+    - "any foreign PID appears on physical NPU4-7"
+    - "source, image, model, or adapter identity differs from the frozen manifest"
+    - "numerical gate fails"
+    - "target-shape kernel result cannot support about 5 percent E2E gain"
+  warmup: "predeclared per stage; compile excluded from timing"
+  repetitions: 0
+  command: "pending one-shot controller"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts: []
+decision_reason: ""
+next_loop: "complete one-shot controller and NPU gate"
+rollback:
+  command: "unset MST_MXR_ENABLE and omit mxr_vllm_ascend from VLLM_PLUGINS"
+  verified: false
