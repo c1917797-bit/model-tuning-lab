@@ -940,3 +940,14 @@ opencode session. Do not stop, share, or silently allowlist either container.
 The preflight created no DASC container and no result directory; therefore it
 is readiness evidence only, not numerical, performance, quality, or algorithm
 evidence.
+
+## 2026-09-18 operator-authorized idle coexistence
+
+The operator subsequently and explicitly instructed this workstream to use
+physical NPU4-7 while the cards are process-free and at their idle HBM floor.
+The repository default remains fail-closed. v12r21 accepts only an exact-name,
+per-launch `MST_DASC_ALLOW_IDLE_UNKNOWN_SCOPE` list for
+`alltoall-dedup-ep4_nk` and `Maxon4ick_torch_910_dev`. The exception neither
+stops nor reconfigures those containers. Their identities remain in every
+preflight and startup verdict, and any NPU4-7 PID outside the owned DASC
+container terminates only the owned launch as `not_run/resource_race`.

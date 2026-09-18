@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 from pathlib import Path
 import re
 import sys
@@ -28,6 +29,26 @@ controller.RESULT = Path(
 controller.CONTAINER = "dasc_qwen36_state_index_v12r21_20260917"
 
 _original_live_resource_state = controller.live_resource_state
+
+
+def authorized_idle_unknown_scope_names() -> set[str]:
+    raw = os.environ.get("MST_DASC_ALLOW_IDLE_UNKNOWN_SCOPE", "")
+    names = {
+        value.strip().lstrip("/")
+        for value in raw.split(",")
+        if value.strip()
+    }
+    invalid = sorted(
+        name
+        for name in names
+        if re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", name) is None
+    )
+    if invalid:
+        raise ValueError(
+            "invalid idle unknown-scope container names: "
+            + ", ".join(invalid)
+        )
+    return names
 
 
 def unknown_device_scope_containers(
@@ -97,12 +118,25 @@ def running_container_inspects() -> list[dict]:
 def guarded_live_resource_state() -> tuple[dict, list[str]]:
     state, blockers = _original_live_resource_state()
     unknown = unknown_device_scope_containers(running_container_inspects())
+    authorized_names = authorized_idle_unknown_scope_names()
+    authorized = [
+        row for row in unknown if row["name"] in authorized_names
+    ]
+    unexpected = [
+        row for row in unknown if row["name"] not in authorized_names
+    ]
     state["unknown_device_scope_containers"] = unknown
-    state["unknown_device_scope_policy"] = "block_as_wildcard_npu_contender"
-    if unknown:
+    state["authorized_idle_unknown_scope_containers"] = authorized
+    state["unexpected_unknown_device_scope_containers"] = unexpected
+    state["unknown_device_scope_policy"] = (
+        "exact_name_idle_coexistence_with_pid_guard"
+        if authorized
+        else "block_as_wildcard_npu_contender"
+    )
+    if unexpected:
         blockers.append(
             "running privileged containers with unknown device scope: "
-            + ", ".join(row["name"] for row in unknown)
+            + ", ".join(row["name"] for row in unexpected)
         )
     return state, blockers
 
@@ -111,11 +145,23 @@ def startup_ownership_verdict(
     rows: dict[int, set[int]],
     owned_pids: set[int],
     unknown_scope: list[dict],
+    authorized_unknown_names: set[str] | None = None,
 ) -> dict:
+    authorized_unknown_names = authorized_unknown_names or set()
     target_pids = {
         pid for device in controller.NPUS for pid in rows.get(device, set())
     }
     foreign = sorted(target_pids.difference(owned_pids))
+    authorized_unknown = [
+        row
+        for row in unknown_scope
+        if row["name"] in authorized_unknown_names
+    ]
+    unexpected_unknown = [
+        row
+        for row in unknown_scope
+        if row["name"] not in authorized_unknown_names
+    ]
     return {
         "schema": "mst.dasc.startup-ownership/v1",
         "physical_npus": list(controller.NPUS),
@@ -126,7 +172,9 @@ def startup_ownership_verdict(
         "owned_container_host_pids": sorted(owned_pids),
         "foreign_process_pids": foreign,
         "unknown_device_scope_containers": unknown_scope,
-        "ok": not foreign and not unknown_scope,
+        "authorized_idle_unknown_scope_containers": authorized_unknown,
+        "unexpected_unknown_device_scope_containers": unexpected_unknown,
+        "ok": not foreign and not unexpected_unknown,
     }
 
 
@@ -138,7 +186,12 @@ def validate_startup_ownership() -> dict:
         running_container_inspects(),
         excluded_names={controller.CONTAINER},
     )
-    result = startup_ownership_verdict(rows, owned, unknown)
+    result = startup_ownership_verdict(
+        rows,
+        owned,
+        unknown,
+        authorized_idle_unknown_scope_names(),
+    )
     controller.atomic_json(
         controller.RESULT / "startup-ownership-last.json", result
     )
@@ -146,7 +199,12 @@ def validate_startup_ownership() -> dict:
         controller.atomic_json(
             controller.RESULT / "startup-resource-race.json", result
         )
-        names = [row["name"] for row in unknown]
+        names = [
+            row["name"]
+            for row in result[
+                "unexpected_unknown_device_scope_containers"
+            ]
+        ]
         raise RuntimeError(
             "not_run/resource_race during startup: "
             f"foreign_pids={result['foreign_process_pids']} "
