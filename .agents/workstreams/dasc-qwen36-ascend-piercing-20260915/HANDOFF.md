@@ -1022,3 +1022,25 @@ Next immutable run:
 result root
 `/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-v12r22`.
 Do not run performance or quality until this strict numerical canary passes.
+
+## 2026-09-18 v12r22 startup race
+
+Commit `239c4c5` passed 189 software tests, `git diff --check`, and the
+26-skill maintainer-tree validation. A fresh preflight showed physical NPU4-7
+process-free at the idle HBM floor, while NPU0-3 remained occupied by an
+unrelated service. v12r22 was launched with only physical NPU4-7 mapped.
+
+The startup guard stopped the owned container before readiness when NPU4-7
+reported PIDs `3194485, 3194486, 3194487, 3194495`, while Docker top reported
+the owned set as `3177121, 3190947, 3190948, 3198791-3198794`. The four NPU
+PIDs disappeared after the owned container stopped, so the evidence does not
+yet distinguish a real concurrent claimant from a PID-attribution gap during
+vLLM multiprocessing startup. The authoritative status is
+`not_run/resource_race`: no numerical request, performance test, or quality
+test ran. Evidence root:
+`/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-v12r22`.
+
+v12r23 preserves the same algorithm and fail-closed ownership rule but records
+`/proc/<pid>/status`, command line, cgroup, and executable for any unowned
+target-card PID before aborting. Its immutable result root is
+`/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-race-guard-v12r23`.

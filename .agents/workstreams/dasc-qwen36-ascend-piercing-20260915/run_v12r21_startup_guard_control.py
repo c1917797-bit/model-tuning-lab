@@ -178,6 +178,37 @@ def startup_ownership_verdict(
     }
 
 
+def process_identity(pid: int) -> dict:
+    root = Path("/proc") / str(pid)
+    result = {"pid": pid}
+    try:
+        status = {}
+        for line in (root / "status").read_text(
+            encoding="utf-8", errors="replace"
+        ).splitlines():
+            if ":" in line:
+                key, value = line.split(":", 1)
+                if key in {"Name", "Pid", "PPid", "NSpid", "Uid"}:
+                    status[key.lower()] = value.strip()
+        result["status"] = status
+        result["cmdline"] = (
+            (root / "cmdline")
+            .read_bytes()
+            .replace(b"\0", b" ")
+            .decode("utf-8", errors="replace")
+            .strip()
+        )
+        result["cgroup"] = (root / "cgroup").read_text(
+            encoding="utf-8", errors="replace"
+        ).splitlines()
+        result["exe"] = str((root / "exe").resolve())
+    except (FileNotFoundError, ProcessLookupError):
+        result["vanished_before_identity_capture"] = True
+    except PermissionError as error:
+        result["identity_error"] = repr(error)
+    return result
+
+
 def validate_startup_ownership() -> dict:
     raw = controller.run(["/usr/local/bin/npu-smi", "info"], timeout=30)
     rows = controller.npu_process_rows(raw)
@@ -192,6 +223,10 @@ def validate_startup_ownership() -> dict:
         unknown,
         authorized_idle_unknown_scope_names(),
     )
+    result["foreign_process_details"] = [
+        process_identity(pid)
+        for pid in result["foreign_process_pids"]
+    ]
     controller.atomic_json(
         controller.RESULT / "startup-ownership-last.json", result
     )
