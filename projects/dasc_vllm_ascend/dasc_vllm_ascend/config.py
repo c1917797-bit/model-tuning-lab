@@ -37,6 +37,7 @@ class DascConfig:
     expected_mamba_patch_sha256: str
     expected_model_runner_sha256: str
     expected_vllm_mamba_utils_sha256: str
+    full_state_row_diagnostics: bool
 
     @classmethod
     def from_env(cls) -> "DascConfig":
@@ -93,6 +94,9 @@ class DascConfig:
                 raise DascConfigurationError(
                     f"MST_DASC expected {name} hash must be a lowercase SHA256"
                 )
+        full_state_row_diagnostics = _enabled(
+            "MST_DASC_FULL_STATE_ROW_DIAGNOSTICS"
+        )
         return cls(
             enabled=enabled,
             mode=mode,
@@ -104,4 +108,5 @@ class DascConfig:
             expected_mamba_patch_sha256=expected_hashes["mamba_patch"],
             expected_model_runner_sha256=expected_hashes["model_runner"],
             expected_vllm_mamba_utils_sha256=expected_hashes["vllm_mamba_utils"],
+            full_state_row_diagnostics=full_state_row_diagnostics,
         )

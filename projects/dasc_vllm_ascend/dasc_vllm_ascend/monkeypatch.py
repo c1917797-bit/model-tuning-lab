@@ -195,8 +195,9 @@ def _version(distribution: str) -> str:
 def _tensor_sample_fingerprint(tensor: Any, *, max_samples: int = 64) -> dict[str, Any]:
     """Return an exact row digest plus bounded values for diagnosis.
 
-    This helper is used only for two representative layers at the first
-    cache-hit transition. Copying those rows to the host is intentional: the
+    This helper is used at the first cache-hit transition. The normal scope is
+    two representative layers; an explicit diagnostic-only switch expands it
+    to all GDN layers. Copying those rows to the host is intentional: the
     numerical canary requires an exact byte digest and is never a performance
     measurement.
     """
@@ -242,6 +243,17 @@ def _tensor_sample_fingerprint(tensor: Any, *, max_samples: int = 64) -> dict[st
         "sample_sum": sample_sum,
         "sample_abs_max": sample_abs_max,
     }
+
+
+def _state_row_diagnostic_layer_names(
+    names: list[str], *, full_scope: bool
+) -> tuple[str, ...]:
+    """Select a deterministic diagnostic scope without changing execution."""
+    if not names:
+        return ()
+    if full_scope:
+        return tuple(names)
+    return tuple(dict.fromkeys((names[0], names[-1])))
 
 
 def _ensure_ascend_global_patch() -> None:
@@ -768,7 +780,15 @@ def _install_heterogeneous_mamba_lifecycle_patch(
                         "_mst_dasc_physical_row_diagnostic_emitted",
                         False,
                     ):
-                        selected_names = {names[0], names[-1]}
+                        full_diagnostics = bool(
+                            getattr(config, "full_state_row_diagnostics", False)
+                        )
+                        selected_names = set(
+                            _state_row_diagnostic_layer_names(
+                                names,
+                                full_scope=full_diagnostics,
+                            )
+                        )
                         for layer_name in names:
                             if layer_name not in selected_names:
                                 continue
@@ -828,6 +848,11 @@ def _install_heterogeneous_mamba_lifecycle_patch(
                                             ),
                                             "accept_token_bias": int(
                                                 accept_token_bias
+                                            ),
+                                            "diagnostic_scope": (
+                                                "all_gdn_layers"
+                                                if full_diagnostics
+                                                else "first_last"
                                             ),
                                             "copy_elements": int(
                                                 copy_spec.num_elements
@@ -1341,9 +1366,15 @@ def _install_physical_cache_patch(
                             kernel_blocks_per_manager_block
                         ),
                         block_scale_sources=list(block_scale_sources),
-                        representative_layers=[
-                            mapping_evidence[0], mapping_evidence[-1]
-                        ],
+                        representative_layers=(
+                            mapping_evidence
+                            if getattr(
+                                config,
+                                "full_state_row_diagnostics",
+                                False,
+                            )
+                            else [mapping_evidence[0], mapping_evidence[-1]]
+                        ),
                     )
                     if initial_mapping_pending:
                         self._mst_dasc_state_index_mapping_emitted = True

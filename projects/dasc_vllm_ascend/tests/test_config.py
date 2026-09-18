@@ -14,6 +14,18 @@ class ConfigTest(unittest.TestCase):
         self.assertFalse(config.enabled)
         self.assertEqual(config.mode, "nr-numerical")
         self.assertEqual(config.w_max, 64)
+        self.assertFalse(config.full_state_row_diagnostics)
+
+    def test_full_state_row_diagnostics_is_explicit_and_fail_closed(self):
+        env = {"MST_DASC_FULL_STATE_ROW_DIAGNOSTICS": "1"}
+        with patch.dict(os.environ, env, clear=True):
+            config = DascConfig.from_env()
+        self.assertTrue(config.full_state_row_diagnostics)
+
+        env["MST_DASC_FULL_STATE_ROW_DIAGNOSTICS"] = "all"
+        with patch.dict(os.environ, env, clear=True):
+            with self.assertRaisesRegex(DascConfigurationError, "must be 0 or 1"):
+                DascConfig.from_env()
 
     def test_enabled_requires_absolute_evidence(self):
         env = {

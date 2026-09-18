@@ -1242,3 +1242,41 @@ execution unchanged. The expected Cartesian gate is 4 ranks x 48 layers x 2
 state families = 384 exact copy keys, each with exactly one before/after native
 boundary pair. This is a one-off correctness diagnostic only; its host-transfer
 overhead must not be reported as serving performance.
+
+## 2026-09-18 v12r30 full-layer diagnostic preparation
+
+v12r30 is prepared as a diagnostic-only extension of v12r28. The plugin now
+accepts the fail-closed boolean environment switch
+`MST_DASC_FULL_STATE_ROW_DIAGNOSTICS=1`. Without that switch, the established
+first/last-layer evidence scope is unchanged. With the switch, the first
+cache-hit transition records exact full-row digests for every checkpoint-
+derived GDN layer and includes every layer in the state-index mapping event.
+No pruning threshold, head selection, state mapping, request sequence, cache
+capacity, or eager execution setting changes.
+
+The v12r30 verifier derives the canonical 48-layer inventory from the pinned
+checkpoint and selector manifest. It requires exactly 384 unique physical-copy
+keys and exactly 384 matching before and after native-boundary events across
+four ranks, 48 layers, and two state families. It additionally requires exact
+source-to-destination copy digests, normalized metadata rows matching the copy
+rows, every old source row remaining unchanged, and every destination row
+changing after native execution. Numerical replay remains a separate gate.
+
+Software evidence in the pinned v0.23.0 image:
+
+- focused configuration, physical patch, v12r28, and v12r30 tests: 41 passed;
+- complete DASC plugin/workstream suite: 212 passed;
+- `git diff --check`: passed.
+
+The first complete-suite invocation exposed a harness-only failure because
+historical result roots were deliberately mounted read-only and an older test
+writes a verdict beside fixture evidence. The authoritative rerun used a
+container-local tmpfs results tree plus a read-only bind of only the selector
+manifest; all 212 tests passed and no historical result was modified. Preserve
+this pattern for future full-suite validation.
+
+Next immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-eager-all-layers-v12r30`.
+Run it only after the standard fresh physical NPU4-7, port, Docker identity,
+checkpoint, selector, and root-absence preflight passes. This diagnostic is not
+performance evidence; performance and GSM8K remain prohibited.

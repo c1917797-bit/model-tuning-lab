@@ -44,6 +44,7 @@ ADDITIONAL_CONFIG: str | None = None
 ENFORCE_EAGER = False
 PLUGIN_MODE = "physical-cache-eager"
 W_MAX = "64"
+PLUGIN_EXTRA_ENV: dict[str, str] = {}
 CANARY_EXTRA_ARGS: tuple[str, ...] = ()
 SUPERSEDED_REASON = (
     "v12r6 is superseded: its per-forward compact restore would erase "
@@ -373,7 +374,7 @@ def launch() -> str:
         ("/etc/ascend_install.info", "/etc/ascend_install.info", "ro"),
     ):
         args.extend(["-v", f"{source}:{destination}:{mode}"])
-    for key, value in {
+    environment = {
         "MST_DASC_EVIDENCE_PATH": "/dasc-results/evidence.jsonl",
         "PYTHONPATH": "/workspace/dasc",
         "ASCEND_RT_VISIBLE_DEVICES": "0,1,2,3",
@@ -381,7 +382,15 @@ def launch() -> str:
         "MST_DASC_ENABLE": "1",
         "MST_DASC_MODE": PLUGIN_MODE,
         "MST_DASC_W_MAX": W_MAX,
-    }.items():
+    }
+    overlap = set(environment).intersection(PLUGIN_EXTRA_ENV)
+    if overlap:
+        raise RuntimeError(
+            "PLUGIN_EXTRA_ENV cannot override reserved keys: "
+            + ", ".join(sorted(overlap))
+        )
+    environment.update(PLUGIN_EXTRA_ENV)
+    for key, value in environment.items():
         args.extend(["-e", f"{key}={value}"])
     serve_args = [
             IMAGE,

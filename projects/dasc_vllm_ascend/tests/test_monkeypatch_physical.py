@@ -680,6 +680,16 @@ def test_state_index_lifecycle_records_physical_copy_rows(tmp_path):
     )
 
 
+def test_state_row_diagnostic_layer_scope_is_explicit():
+    names = ["mamba0", "mamba1", "mamba2"]
+    assert physical_patch._state_row_diagnostic_layer_names(
+        names, full_scope=False
+    ) == ("mamba0", "mamba2")
+    assert physical_patch._state_row_diagnostic_layer_names(
+        names, full_scope=True
+    ) == tuple(names)
+
+
 def test_physical_patch_aborts_but_keeps_fixed_workspace_binding_on_native_error(
     monkeypatch, tmp_path
 ):
