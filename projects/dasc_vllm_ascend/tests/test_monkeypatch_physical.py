@@ -222,7 +222,12 @@ def test_native_all_heads_control_keeps_runner_cache_and_metadata(monkeypatch, t
     class FakeRunner:
         def __init__(self):
             self.model = SimpleNamespace(modules=lambda: (module,))
-            self.input_batch = SimpleNamespace(req_ids=["req-a"])
+            self.input_batch = SimpleNamespace(
+                req_ids=["req-a"],
+                block_table=[
+                    SimpleNamespace(blocks_per_kv_block=1)
+                ],
+            )
             self.requests = {"req-a": SimpleNamespace(num_computed_tokens=10)}
 
         def _model_forward(self, *args, **kwargs):
@@ -300,7 +305,12 @@ def test_native_all_heads_state_index_tracks_copied_running_row(
     class FakeRunner:
         def __init__(self):
             self.model = SimpleNamespace(modules=lambda: (module,))
-            self.input_batch = SimpleNamespace(req_ids=["req-a"])
+            self.input_batch = SimpleNamespace(
+                req_ids=["req-a"],
+                block_table=[
+                    SimpleNamespace(blocks_per_kv_block=1)
+                ],
+            )
             self.requests = {
                 "req-a": SimpleNamespace(
                     num_computed_tokens=1536,
@@ -353,7 +363,165 @@ def test_native_all_heads_state_index_tracks_copied_running_row(
     )
     representative = mapped["representative_layers"][0]
     assert representative["source_state_indices"] == [2]
+    assert representative["normalized_source_state_indices"] == [2]
     assert representative["destination_state_indices"] == [6]
+
+
+def test_state_index_normalizes_virtual_attention_blocks_before_copy_remap(
+    monkeypatch, tmp_path
+):
+    metadata = Metadata(torch.tensor([25], dtype=torch.int32))
+    context = SimpleNamespace(attn_metadata={"layers.0": metadata})
+    observed_indices = []
+
+    class FakeGdn:
+        def __init__(self):
+            self.prefix = "layers.0"
+            self.A_log = torch.zeros(4)
+            self.dt_bias = torch.zeros(4)
+            self.kv_cache = (
+                torch.zeros(8, 2, 3),
+                torch.zeros(8, 4, 2),
+            )
+
+        def get_kv_cache_spec(self, vllm_config):
+            return _dense_spec()
+
+        def _forward_core(self):
+            observed_indices.append(
+                int(
+                    context.attn_metadata[
+                        self.prefix
+                    ].non_spec_state_indices_tensor[0].item()
+                )
+            )
+            return "normalized"
+
+    module = FakeGdn()
+
+    class FakeRunner:
+        def __init__(self):
+            self.model = SimpleNamespace(modules=lambda: (module,))
+            self.input_batch = SimpleNamespace(
+                req_ids=["req-a"],
+                block_table=[
+                    SimpleNamespace(blocks_per_kv_block=12)
+                ],
+            )
+            self.requests = {
+                "req-a": SimpleNamespace(
+                    _mst_dasc_running_state_block_id=3
+                )
+            }
+
+        def _model_forward(self):
+            return module._forward_core()
+
+    config = SimpleNamespace(
+        representative_a=-0.3,
+        epsilon=0.001,
+        w_max=1e-9,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads-state-index",
+    )
+    monkeypatch.setattr(
+        physical_patch,
+        "retained_head_indices",
+        lambda module, cfg: torch.arange(4, dtype=torch.long),
+    )
+    physical_patch._install_physical_cache_patch(
+        config, FakeGdn, FakeRunner, lambda: context
+    )
+    module.get_kv_cache_spec(
+        SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
+    )
+
+    assert FakeRunner()._model_forward() == "normalized"
+    assert observed_indices == [3]
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    mapped = next(
+        row
+        for row in events
+        if row["event"] == "gdn_running_state_indices_remapped"
+    )
+    representative = mapped["representative_layers"][0]
+    assert mapped["copy_remap_active"] is True
+    assert mapped["kernel_blocks_per_manager_block"] == 12
+    assert representative["source_state_indices"] == [25]
+    assert representative["normalized_source_state_indices"] == [2]
+    assert representative["destination_state_indices"] == [3]
+
+
+def test_state_index_normalizes_virtual_attention_blocks_without_copy(
+    monkeypatch, tmp_path
+):
+    metadata = Metadata(torch.tensor([25], dtype=torch.int32))
+    context = SimpleNamespace(attn_metadata={"layers.0": metadata})
+    observed_indices = []
+
+    class FakeGdn:
+        def __init__(self):
+            self.prefix = "layers.0"
+            self.A_log = torch.zeros(4)
+            self.dt_bias = torch.zeros(4)
+            self.kv_cache = (
+                torch.zeros(8, 2, 3),
+                torch.zeros(8, 4, 2),
+            )
+
+        def get_kv_cache_spec(self, vllm_config):
+            return _dense_spec()
+
+        def _forward_core(self):
+            observed_indices.append(
+                int(
+                    context.attn_metadata[
+                        self.prefix
+                    ].non_spec_state_indices_tensor[0].item()
+                )
+            )
+            return "normalized"
+
+    module = FakeGdn()
+
+    class FakeRunner:
+        def __init__(self):
+            self.model = SimpleNamespace(modules=lambda: (module,))
+            self.input_batch = SimpleNamespace(
+                req_ids=["req-a"],
+                block_table=[
+                    SimpleNamespace(blocks_per_kv_block=12)
+                ],
+            )
+            self.requests = {"req-a": SimpleNamespace()}
+
+        def _model_forward(self):
+            return module._forward_core()
+
+    config = SimpleNamespace(
+        representative_a=-0.3,
+        epsilon=0.001,
+        w_max=1e-9,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads-state-index",
+    )
+    monkeypatch.setattr(
+        physical_patch,
+        "retained_head_indices",
+        lambda module, cfg: torch.arange(4, dtype=torch.long),
+    )
+    physical_patch._install_physical_cache_patch(
+        config, FakeGdn, FakeRunner, lambda: context
+    )
+    module.get_kv_cache_spec(
+        SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
+    )
+
+    assert FakeRunner()._model_forward() == "normalized"
+    assert observed_indices == [2]
 
 
 def test_state_index_lifecycle_records_physical_copy_rows(tmp_path):

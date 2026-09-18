@@ -50,13 +50,16 @@ def complete_rows():
                 "event": "gdn_running_state_indices_remapped",
                 "pid": pid,
                 "layer_count": 48,
+                "copy_remap_active": True,
                 "representative_layers": [
                     {
                         "source_state_indices": [7],
+                        "normalized_source_state_indices": [7],
                         "destination_state_indices": [9],
                     },
                     {
                         "source_state_indices": [7],
+                        "normalized_source_state_indices": [7],
                         "destination_state_indices": [9],
                     },
                 ],
@@ -90,6 +93,9 @@ def complete_rows():
                         "state_index": state_index,
                         "source_block_id": 7,
                         "destination_block_id": 9,
+                        "source_state_indices": [85],
+                        "normalized_source_state_indices": [7],
+                        "destination_state_indices": [9],
                         "source_before_native": {"full_sha256": "old"},
                         "destination_before_native": {
                             "full_sha256": "copied"
@@ -154,6 +160,49 @@ def test_state_index_verdict_rejects_partial_state_or_layer_coverage():
     result = verdict(rows, {"ok": True})
     assert result["row_gate_ok"] is False
     assert result["decision"] == "physical_copy_coverage_incomplete"
+
+
+def test_state_index_verdict_rejects_kernel_block_source_as_copy_row():
+    rows = complete_rows()
+    boundary = next(
+        row
+        for row in rows
+        if row.get("event")
+        == "first_resumed_token_state_boundary_before"
+    )
+    boundary["normalized_source_state_indices"] = [85]
+    result = verdict(rows, {"ok": True})
+    assert result["row_gate_ok"] is False
+    assert result["decision"] == (
+        "copy_rows_do_not_match_normalized_gdn_metadata"
+    )
+
+
+def test_state_index_verdict_ignores_pre_copy_identity_mapping():
+    rows = complete_rows()
+    rows.insert(
+        0,
+        {
+            "event": "gdn_running_state_indices_remapped",
+            "pid": 21,
+            "layer_count": 48,
+            "copy_remap_active": False,
+            "representative_layers": [
+                {
+                    "source_state_indices": [12],
+                    "normalized_source_state_indices": [1],
+                    "destination_state_indices": [1],
+                },
+                {
+                    "source_state_indices": [12],
+                    "normalized_source_state_indices": [1],
+                    "destination_state_indices": [1],
+                },
+            ],
+        },
+    )
+    result = verdict(rows, {"ok": True})
+    assert result["row_gate_ok"] is True
 
 
 def test_state_index_verdict_rejects_unpaired_exact_copy():

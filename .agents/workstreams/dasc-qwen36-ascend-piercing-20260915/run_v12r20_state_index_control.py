@@ -154,15 +154,33 @@ def state_index_verdict(
             )
         )
         if (
+            row.get("copy_remap_active") is True
+            and
             row.get("layer_count") == expected_gdn_layers
             and representative_complete
             and any(
-                layer.get("source_state_indices")
+                layer.get("normalized_source_state_indices")
                 != layer.get("destination_state_indices")
                 for layer in representative
             )
         ):
             valid_mappings.append(row)
+
+    exact_boundary_remaps = [
+        row
+        for row in before_rows
+        if row.get("normalized_source_state_indices")
+        and row.get("destination_state_indices")
+        and all(
+            value == row.get("source_block_id")
+            for value in row["normalized_source_state_indices"]
+        )
+        and all(
+            value == row.get("destination_block_id")
+            for value in row["destination_state_indices"]
+        )
+        and row.get("source_block_id") != row.get("destination_block_id")
+    ]
 
     copy_exact_keys = {_event_key(row) for row in copy_exact}
     before_keys = set(before)
@@ -190,6 +208,9 @@ def state_index_verdict(
 
     copy_pids = sorted({row.get("pid") for row in copy_exact})
     mapping_pids = sorted({row.get("pid") for row in valid_mappings})
+    exact_boundary_remap_pids = sorted(
+        {row.get("pid") for row in exact_boundary_remaps}
+    )
     boundary_pids = sorted({key[0] for key in matched_keys})
     destination_change_pids = sorted({key[0] for key in destination_changed})
     copy_states_by_pid = {
@@ -244,7 +265,7 @@ def state_index_verdict(
             copy_coverage_complete
         ),
         "state_index_changed_on_all_four_tp_workers": (
-            len(mapping_pids) == EXPECTED_TP_WORKERS
+            len(exact_boundary_remap_pids) == EXPECTED_TP_WORKERS
         ),
         "state_index_mapping_covers_all_gdn_layers": (
             len(valid_mappings) == EXPECTED_TP_WORKERS
@@ -252,6 +273,10 @@ def state_index_verdict(
         "before_after_boundary_pairs_on_all_four_tp_workers": (
             len(boundary_pids) == EXPECTED_TP_WORKERS
             and bool(matched_keys)
+        ),
+        "copy_rows_match_normalized_metadata_on_all_four_tp_workers": (
+            len(exact_boundary_remap_pids) == EXPECTED_TP_WORKERS
+            and len(exact_boundary_remaps) == len(before_rows)
         ),
         "every_exact_copy_has_one_native_boundary_pair": boundary_matches_copy,
         "old_source_rows_unchanged": (
@@ -273,6 +298,10 @@ def state_index_verdict(
         decision = "running_state_index_mapping_coverage_incomplete"
     elif not checks["before_after_boundary_pairs_on_all_four_tp_workers"]:
         decision = "first_resumed_token_boundary_missing"
+    elif not checks[
+        "copy_rows_match_normalized_metadata_on_all_four_tp_workers"
+    ]:
+        decision = "copy_rows_do_not_match_normalized_gdn_metadata"
     elif not checks["every_exact_copy_has_one_native_boundary_pair"]:
         decision = "native_boundary_does_not_match_every_exact_copy"
     elif not checks["old_source_rows_unchanged"]:
@@ -306,6 +335,7 @@ def state_index_verdict(
         "checks": checks,
         "copy_worker_pids": copy_pids,
         "mapping_worker_pids": mapping_pids,
+        "exact_boundary_remap_worker_pids": exact_boundary_remap_pids,
         "boundary_worker_pids": boundary_pids,
         "destination_change_worker_pids": destination_change_pids,
         "matched_boundary_count": len(matched_keys),

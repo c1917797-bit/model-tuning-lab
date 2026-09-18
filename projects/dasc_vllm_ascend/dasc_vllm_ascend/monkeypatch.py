@@ -1068,9 +1068,23 @@ def _install_physical_cache_patch(
 
             owner_ids = tuple(self.input_batch.req_ids)
             is_dummy = getattr(self, "_mst_dasc_dummy_scope", False)
+            try:
+                manager_block_table = self.input_batch.block_table[0]
+                kernel_blocks_per_manager_block = int(
+                    manager_block_table.blocks_per_kv_block
+                )
+            except (AttributeError, IndexError, TypeError) as error:
+                raise DascRuntimeUnsupported(
+                    "DASC cannot resolve the aggregate cache block-id scale"
+                ) from error
+            if kernel_blocks_per_manager_block < 1:
+                raise DascRuntimeUnsupported(
+                    "DASC aggregate cache block-id scale must be positive"
+                )
             originals = []
             boundary_rows = []
             mapping_evidence = []
+            copy_remap_active = False
             try:
                 for module in modules:
                     if module.prefix not in metadata_map:
@@ -1087,8 +1101,17 @@ def _install_physical_cache_patch(
                     _, identity_plan = remap_ascend_gdn_metadata(
                         original_metadata
                     )
-                    active_slots = identity_plan.block_ids.clone()
+                    # Attention layers can virtually split one 1536-token
+                    # scheduler block into smaller kernel blocks. GDN state
+                    # storage remains indexed by the unsplit scheduler block,
+                    # so normalize the live metadata ids before applying a
+                    # copied running-state destination.
+                    active_slots = (
+                        identity_plan.block_ids
+                        // kernel_blocks_per_manager_block
+                    )
                     source_values = []
+                    normalized_source_values = []
                     destination_values = []
                     if not is_dummy and owner_ids:
                         source_indices = (
@@ -1109,9 +1132,13 @@ def _install_physical_cache_patch(
                             .to(device="cpu")
                             .tolist()
                         ]
+                        normalized_source_values = [
+                            value // kernel_blocks_per_manager_block
+                            for value in source_values
+                        ]
                         destination_values = []
                         for owner, source_value in zip(
-                            owner_ids, source_values
+                            owner_ids, normalized_source_values
                         ):
                             request = self.requests[owner]
                             destination_values.append(
@@ -1123,6 +1150,13 @@ def _install_physical_cache_patch(
                                     )
                                 )
                             )
+                        copy_remap_active = copy_remap_active or any(
+                            source_value != destination_value
+                            for source_value, destination_value in zip(
+                                normalized_source_values,
+                                destination_values,
+                            )
+                        )
                         mapping = {}
                         for source_value, destination_value in zip(
                             source_values, destination_values
@@ -1161,8 +1195,14 @@ def _install_physical_cache_patch(
                             {
                                 "layer": module.prefix,
                                 "source_state_indices": source_values,
+                                "normalized_source_state_indices": (
+                                    normalized_source_values
+                                ),
                                 "destination_state_indices": (
                                     destination_values
+                                ),
+                                "kernel_blocks_per_manager_block": (
+                                    kernel_blocks_per_manager_block
                                 ),
                                 "metadata_pointer": int(
                                     remapped_metadata.non_spec_state_indices_tensor.data_ptr()
@@ -1191,8 +1231,14 @@ def _install_physical_cache_patch(
                                     ),
                                     "owner_ids": [str(owner) for owner in owner_ids],
                                     "source_state_indices": source_values,
+                                    "normalized_source_state_indices": (
+                                        normalized_source_values
+                                    ),
                                     "destination_state_indices": (
                                         destination_values
+                                    ),
+                                    "kernel_blocks_per_manager_block": (
+                                        kernel_blocks_per_manager_block
                                     ),
                                     "source_before_native": (
                                         _tensor_sample_fingerprint(
@@ -1207,22 +1253,37 @@ def _install_physical_cache_patch(
                                 },
                             }
                         )
-                if (
-                    mapping_evidence
+                initial_mapping_pending = not getattr(
+                    self, "_mst_dasc_state_index_mapping_emitted", False
+                )
+                copy_mapping_pending = (
+                    copy_remap_active
                     and not getattr(
-                        self, "_mst_dasc_state_index_mapping_emitted", False
+                        self,
+                        "_mst_dasc_copy_state_index_mapping_emitted",
+                        False,
                     )
+                )
+                if mapping_evidence and (
+                    initial_mapping_pending or copy_mapping_pending
                 ):
                     emit(
                         config.evidence_path,
                         "gdn_running_state_indices_remapped",
                         mode=config.mode,
                         layer_count=len(mapping_evidence),
+                        copy_remap_active=copy_remap_active,
+                        kernel_blocks_per_manager_block=(
+                            kernel_blocks_per_manager_block
+                        ),
                         representative_layers=[
                             mapping_evidence[0], mapping_evidence[-1]
                         ],
                     )
-                    self._mst_dasc_state_index_mapping_emitted = True
+                    if initial_mapping_pending:
+                        self._mst_dasc_state_index_mapping_emitted = True
+                    if copy_remap_active:
+                        self._mst_dasc_copy_state_index_mapping_emitted = True
                 for row in boundary_rows:
                     emit(
                         config.evidence_path,

@@ -986,3 +986,39 @@ later read through `model_runner.requests[owner]`, or carry the destination
 row through an explicit runner-owned mapping. Add a fail-closed assertion that
 source and destination state indices differ before launching the next NPU
 run.
+
+## 2026-09-18 v12r21 evidence correction and v12r22 preparation
+
+The previous paragraph's `12 -> 12` diagnosis inspected the first mapping
+event, which was emitted before the prefix-hit copy. The before-native
+boundary events are later and authoritative for the resumed token: all four
+workers recorded raw GDN metadata source `25`, remapped destination `3`,
+while the exact physical copy used source manager block `2` and destination
+manager block `3`. The request-state object did carry the destination
+correctly.
+
+The pinned v0.23.0 input-batch implementation explains the mismatch. The
+synthetic aggregate is attention-first, so a 1536-token scheduler block is
+virtually split into twelve 128-token attention-kernel blocks. The shared GDN
+builder consumes that expanded block table, while recurrent state tensors and
+the Mamba copy lifecycle remain indexed by unsplit manager blocks. Thus raw
+metadata `25` corresponds to manager block `2`, and the earlier ordinary
+metadata value `12` corresponds to manager block `1`. The plugin had been
+writing GDN state to raw kernel-block rows and later copying a different,
+still-zero manager row.
+
+v12r22 normalizes every live GDN metadata id by the runner-owned
+`blocks_per_kv_block` before native execution, then applies a copy
+destination when present. It fails closed if the scale cannot be resolved or
+is non-positive. Evidence now records raw source, normalized source,
+destination, scale, and whether a copy remap is active. The verdict ignores
+the earlier pre-copy identity event and requires each exact copy boundary to
+match its normalized metadata source and destination. Tests cover both
+ordinary `25 -> 2` normalization and resumed-copy `25 -> 2 -> 3`
+normalization/remapping. The focused plugin/controller gate passed 34 tests.
+
+Next immutable run:
+`.agents/workstreams/dasc-qwen36-ascend-piercing-20260915/run_v12r22_kernel_block_normalization_control.py`;
+result root
+`/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-v12r22`.
+Do not run performance or quality until this strict numerical canary passes.
