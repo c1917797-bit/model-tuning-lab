@@ -35,6 +35,15 @@ proof that the intended NPU path executed.
    an exclusive-use experiment contract.
 7. Run a minimal inference canary and capture a controlled-side event proving
    the intended NPU device executed the workload.
+   Before creating an immutable experiment result root, run a cheaper container
+   canary with the exact planned runtime, device mapping, namespaces, driver
+   mounts, and visibility variables. It must complete `torch.npu.set_device`,
+   one tensor operation, and synchronization. `npu-smi` showing no process and
+   idle HBM is necessary but does not prove that a new container can initialize
+   ACL. If the canary reports `aclInit 507899`, `Resource_Busy`, or an invalid
+   driver device ID, classify it as a pre-algorithm environment failure. Record
+   running privileged/all-device containers and their visibility variables,
+   preserve the exact failed configuration, and do not retry it unchanged.
 8. Compare with the previous baseline. If any material field drifted, declare
    the old and new measurements non-comparable until re-baselined.
 9. Commit and push the orientation or re-baseline stage.
@@ -50,6 +59,11 @@ proof that the intended NPU path executed.
 - Never stop, pause, or share an overlapping foreign container merely because
   its mapped devices are currently idle. Preserve the distinction in the
   experiment record and wait for release or obtain explicit owner authorization.
+- Do not start a privileged diagnostic container without explicit authorization.
+  If ordinary device-scoped containers cannot initialize while a foreign
+  privileged container exposes all devices, treat causality as unproven until a
+  controlled canary succeeds after release or an explicitly approved diagnostic
+  isolates the condition.
 
 ## Output
 
@@ -62,6 +76,8 @@ commit that established the baseline.
 - Every identity field is present or explicitly marked unavailable.
 - Source and image identities are immutable hashes, not mutable labels alone.
 - The canary identifies the expected physical NPU and execution process.
+- The exact planned container configuration has passed ACL initialization and a
+  real tensor operation before the formal result directory is created.
 - Device mapping, device-side processes, and HBM are recorded separately, and
   the declared exclusivity policy is evaluated against all three.
 - No secret or large binary artifact is staged.

@@ -2,11 +2,35 @@
 
 ## Current state
 
-The workstream has completed pre-NPU preparation. No MXR NPU correctness,
-performance, or quality result exists yet. A fresh read-only preflight at
-2026-09-18T15:21:44Z found physical NPU4-7 process-free and all frozen source,
-submodule, and image identities correct. Resource state is still dynamic and
-must be checked again by the controller immediately before launch.
+The workstream has completed pre-NPU preparation, but the first NPU gate did
+not reach MXR code. No MXR NPU correctness, performance, or quality result
+exists yet. A fresh preflight at 2026-09-18T15:21:44Z found physical NPU4-7
+process-free and all frozen source, submodule, and image identities correct.
+The immutable first-attempt root is
+`/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v1`.
+
+The first gate and four narrower follow-up canaries all failed during
+`torch_npu` lazy initialization with `aclInit` error `507899`,
+`Resource_Busy`, and `drv devId=0 invalid`, before any official or candidate
+MXR code executed. Physical NPU4-7 remained healthy, had no device-side
+process, and stayed at their idle-HBM baseline. This is an environment gate
+failure, not an MXR numerical or performance result.
+
+The failed matrix covered: physical NPU4 mapped alone to logical 0; physical
+NPU4-7 mapped to logical 0-3; host network plus host cgroup namespace; preserved
+physical `/dev/davinci4-7` names; corrected logical index 0 after
+`ASCEND_RT_VISIBLE_DEVICES=4`; and the documented pair
+`ASCEND_RT_VISIBLE_DEVICES=4` plus `ASCEND_DEVICE_ID=0`. Do not rerun these
+unchanged combinations.
+
+At the same time, `combine-only-ep4_nk` is a foreign privileged container with
+all host devices visible and active workers on physical NPU0-3. Another
+privileged development container also has all devices visible. `npu-smi` does
+not show either using NPU4-7, so their causal role remains unproven. Starting a
+new temporary privileged diagnostic was rejected by the safety boundary and
+requires explicit user approval. The other safe branch is to wait until the
+all-device privileged workload exits, then run only the minimal container
+canary. A successful canary must precede a new immutable `npu-gate-v2` root.
 
 The target checkpoint is `/cache/efim/Qwen3.6-27B`. Its global GDN geometry is
 16 key heads, 48 value heads, and 128 dimensions for both key and value. Under
@@ -21,13 +45,15 @@ The exact MegaGDN submodule pointer was recovered from the Git tree and checked
 out from `https://gitcode.com/cann/pto-isa.git` at
 `01666f3b386f296c95e6e05825fe63b8e6bb4ef4`.
 
-`run_npu_gate_v1.py` is the prepared one-shot controller. Its self-test and 19
+`run_npu_gate_v1.py` is the frozen first-attempt controller. Its self-test and 19
 focused CPU/control-plane tests pass. It checks both official archive hashes,
 the exact PTO-ISA commit, the pinned v0.23 image ID, an unused container name,
 and process-free physical NPU4-7 twice before creating the immutable result
 root. It maps only physical NPU4 to logical device 0, monitors NPU4 ownership
-and requires NPU5-7 to remain process-free. It never retries. Use
-`--preflight-only` for a read-only resource check.
+and requires NPU5-7 to remain process-free. It never retries. It has already
+been executed once and must not be reused or overwrite its result root. Use
+`--preflight-only` only as a read-only resource check; create a v2 controller
+only after the exact planned container canary initializes and computes once.
 
 The NPU probe runs three chained segments at the TP4-local Qwen shape and
 compares output plus the complete final state against the official double

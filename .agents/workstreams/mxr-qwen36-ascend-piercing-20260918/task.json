@@ -15,12 +15,12 @@
     "future_runtime": "vLLM-Ascend v0.27 thin adapter"
   },
   "objective": "Reproduce the official MXR/PTO mechanism faithfully on Ascend, prove multi-step numerical correctness and target-shape advantage, then obtain attributable matched end-to-end performance without quality regression through a plugin-owned monkeypatch.",
-  "status": "npu_gate_prepared_waiting_for_clean_target_lane",
+  "status": "npu_gate_environment_blocked_acl_init",
   "decision": "pending",
   "goal_alignment": {
     "long_term": "Deliver reproducible and portable Ascend performance benefit through a plugin-owned implementation without modifying upstream frameworks or images.",
     "medium_term": "Build a complete evidence chain: official-method parity, CANN 9.1 compatibility, NPU numerical correctness, target-shape kernel timing, matched dense end-to-end A/B, and final quality.",
-    "short_term": "Execute the prepared one-shot NPU4 numerical and target-shape timing gate while continuously guarding physical NPU4-7."
+    "short_term": "Resolve the pre-algorithm ACL initialization gate without touching physical NPU0-3, then execute the prepared one-shot NPU4 numerical and target-shape timing gate."
   },
   "fixed_gates": {
     "correctness_before_performance": true,
@@ -47,8 +47,25 @@
     "pto_isa_commit": "01666f3b386f296c95e6e05825fe63b8e6bb4ef4",
     "pto_isa_remote": "https://gitcode.com/cann/pto-isa.git"
   },
+  "environment_blocker": {
+    "first_gate_result_root": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v1",
+    "classification": "pre_algorithm_container_acl_initialization_failure",
+    "error": "aclInit 507899 Resource_Busy; torch_npu reports drv devId 0 invalid before any MXR code executes",
+    "target_card_observation": "Physical NPU4-7 were healthy, at idle-HBM baseline, and had no device-side process during each probe.",
+    "excluded_causes": [
+      "single-device versus four-device Docker mapping",
+      "missing host network or host cgroup namespace",
+      "renamed versus preserved /dev/davinci device-node paths",
+      "logical index misuse after ASCEND_RT_VISIBLE_DEVICES remapping",
+      "missing ASCEND_DEVICE_ID index when ASCEND_RT_VISIBLE_DEVICES is set"
+    ],
+    "concurrent_state": "A foreign privileged container with all host devices visible is actively serving on physical NPU0-3; no process is shown on NPU4-7. Causality is not yet proven.",
+    "next_safe_branch": "Either obtain explicit approval for one temporary privileged diagnostic constrained by ASCEND_RT_VISIBLE_DEVICES=4, or wait for the all-device privileged container to exit and rerun only the minimal canary before starting the immutable v2 gate."
+  },
   "next_actions": [
-    "Run the prepared one-shot compile plus numerical gate; timing is admitted only if correctness passes.",
+    "Do not rerun npu-gate-v1 or any already-failed Docker mapping combination.",
+    "Resolve the ACL initialization gate with one evidence-backed canary; do not classify this environment failure as an MXR result.",
+    "After a canary succeeds, create a new immutable npu-gate-v2 root and run the prepared compile plus numerical gate; timing is admitted only if correctness passes.",
     "If the gate passes, compare official staged, official megakernel, and the v0.23 baseline on the same target shape; preserve attribution between triangular inversion and full fusion.",
     "Only integrate the winning path into vLLM after the target-shape gate passes."
   ]
