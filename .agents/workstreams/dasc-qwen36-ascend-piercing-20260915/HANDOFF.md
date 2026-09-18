@@ -1509,3 +1509,22 @@ pause the exact container again, and run one physical canary. Do not run
 performance or GSM8K unless strict repeated replay passes. Planned immutable
 root:
 `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu4-7-active-nontarget-v12r36`.
+
+## 2026-09-18 v12r36 race and v12r37 lane reversal
+
+The live foreign workload changed lanes again before v12r36 could launch. Its
+previous NPU0-3 workers disappeared and new `combine-only-ep4_nk` TP4 workers
+appeared on physical NPU4-7 at about 30.98 GiB HBM per card. The v12r36
+preflight correctly rejected both occupied target cards and the exact
+container's wrong-side PID/device identity. Maxon was restored in `finally`,
+the v12r36 result root is absent, and no DASC container or request ran. This is
+`not_run/resource_race_before_launch`, not DASC evidence.
+
+v12r37 makes the v12r36 expected non-target device set derive from the active
+`controller.NPUS` value, then changes only the owned lane identity to physical
+NPU0-3. The exact foreign container must now remain frozen on all and only
+NPU4-7 throughout preflight, startup, post-readiness, and the physical canary.
+The DASC treatment remains unchanged. Focused v12r33-v12r37 tests passed 23/23;
+the canonical no-device pinned-image suite passed 246/246 with source
+read-only and the result tree on tmpfs. Planned immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu0-3-active-nontarget-v12r37`.

@@ -37,7 +37,6 @@ ACTIVE_NONTARGET_ID = (
     "15e12705d163911aedb992bb1edf17bd7044870459eeca0cb0bb1e0ad6d09e30"
 )
 ACTIVE_NONTARGET_IMAGE_ID = controller.IMAGE_ID
-EXPECTED_NONTARGET_DEVICES = frozenset(set(range(8)) - set(controller.NPUS))
 
 v12r34 = trial.trial
 v12r33 = v12r34.trial
@@ -107,6 +106,9 @@ def active_nontarget_verdict(
     expected_identity: tuple[tuple[int, int], ...] | None,
     expected_started_at: str | None,
 ) -> dict:
+    expected_nontarget_devices = frozenset(
+        set(range(8)) - set(controller.NPUS)
+    )
     identity = tuple(tuple(row) for row in snapshot.get("npu_identity") or [])
     devices = {device for device, _pid in identity}
     target_rows = [list(row) for row in identity if row[0] in controller.NPUS]
@@ -123,7 +125,7 @@ def active_nontarget_verdict(
             and snapshot.get("paused") is False
             and snapshot.get("privileged") is True
         ),
-        "all_nontarget_devices_owned": devices == EXPECTED_NONTARGET_DEVICES,
+        "all_nontarget_devices_owned": devices == expected_nontarget_devices,
         "no_target_npu_process": not target_rows,
         "npu_process_identity_stable": (
             expected_identity is None or identity == expected_identity
@@ -137,7 +139,7 @@ def active_nontarget_verdict(
         "schema": "mst.dasc.active-nontarget-container/v1",
         **snapshot,
         "physical_target_npus": list(controller.NPUS),
-        "expected_nontarget_devices": sorted(EXPECTED_NONTARGET_DEVICES),
+        "expected_nontarget_devices": sorted(expected_nontarget_devices),
         "expected_npu_identity": (
             None
             if expected_identity is None
