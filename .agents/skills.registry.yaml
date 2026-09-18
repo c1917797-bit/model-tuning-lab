@@ -46,6 +46,24 @@ skills:
       - src/**
       - tests/**
       - .agents/experiments/**
+  - id: ascend-model-quality-evaluation
+    path: .agents/skills/ascend-model-quality-evaluation
+    status: experimental
+    purpose: Produce reproducible paired Ascend model-quality evidence with a 2048-token quality cap and measured baseline variability.
+    triggers:
+      - test Ascend model accuracy or quality
+      - compare baseline and candidate quality
+      - validate quantization or optimization quality regression
+      - Paper-to-Ascend quality gate
+      - 精度测试
+      - 质量回归测试
+    scope:
+      - AGENTS.md
+      - configs/**
+      - scripts/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: ascend-cannbot-profiler
     path: .agents/skills/ascend-cannbot-profiler
     status: experimental

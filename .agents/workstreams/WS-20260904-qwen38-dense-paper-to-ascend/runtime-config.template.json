@@ -18,6 +18,7 @@
     "ignore_eos": true
   },
   "quality_generation": {
+    "max_output_tokens": 2048,
     "seed": 0,
     "temperature": 0,
     "ignore_eos": false,
