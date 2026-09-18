@@ -1148,3 +1148,23 @@ defect to graph-captured metadata/state binding. Eager failure would close that
 route and keep localization in physical state semantics or cache lifecycle.
 Neither outcome is performance or GSM8K evidence. Do not alter pruning,
 retained-head selection, cache capacity, or serving workload in this control.
+
+## 2026-09-18 v12r27 startup race and v12r28 retry
+
+v12r27 passed preflight from clean pushed commit `774fe05` with physical
+NPU4-7 process-free at the approximately 2.87 GiB idle floor. The four owned
+TP workers loaded the model and reached the final API warmup. During startup,
+a new privileged wildcard container named `combine-code-read-tmp_nk`
+appeared. The ownership guard stopped only the owned DASC container before
+any numerical request and classified the attempt as
+`not_run/resource_race`. Inspection showed that the contender contained
+only `sleep infinity`; it was removed by its creator before an explicit stop
+could be applied. No performance or quality test ran. The immutable v12r27
+root remains evidence of the aborted attempt.
+
+v12r28 is a resource retry only. It imports the exact v12r27 eager control and
+changes only the immutable result root and owned container name. Its root is
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-eager-boundary-v12r28`.
+It must still pass the same preflight and continuous ownership checks; do not
+allowlist transient `combine-*` containers. Interpret its numerical result
+with the same eager-vs-graph discriminator as v12r27.
