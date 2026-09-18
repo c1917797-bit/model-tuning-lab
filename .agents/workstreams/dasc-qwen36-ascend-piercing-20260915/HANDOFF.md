@@ -1374,3 +1374,34 @@ only the immutable Qwen3.6 model config mounted from the model tree. Maintainer
 Skill Tree validation passed for all 26 skills, `task.json` parsed successfully,
 and `git diff --check` passed. This remains software evidence only; it does not
 claim an NPU numerical, performance, or quality result.
+
+## 2026-09-18 v12r32 external restart and v12r33 paused guard
+
+v12r32 passed preflight with NPU4-7 at the 2868 MiB idle floor, no target-card
+PIDs, no running DIAS task, no wildcard container, and port 8030 free. During
+the readiness window an external actor explicitly restarted
+`Maxon4ick_torch_910_dev`. Its Docker `RestartPolicy` was `no` and
+`RestartCount` was zero, so this was not daemon auto-restart. The startup
+ownership guard observed the exact container id and stopped only the owned DASC
+service. No readiness, plugin activation, state-row event, numerical request,
+performance run, or quality run was reached. Keep v12r32 classified as
+`not_run/resource_race_during_startup`.
+
+Authoritative v12r32 evidence:
+
+- root: `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-identity-retry-v12r32`
+- operation: `exec-0000000000001d02`
+- `startup-resource-race.json`: `e64c3b9eced7a175c0c5b000396de9412c39f6d70c4616551307bc440cf9be37`
+- `controller-error.txt`: `482525b73d8cd6ac063820f7475da5a544c9b2456ba7c80012af0577bd3b9ca1`
+- `artifacts.sha256.json`: `d7679604a540214aa7c2b81b5d8b953c34477f9fd87089037d3c59a6304545d9`
+
+v12r33 keeps the exact v12r31/v12r32 dense-padding treatment. Its only new
+variable is stronger environmental isolation: the exact foreign container id
+must remain running but paused at preflight, every readiness poll,
+post-readiness, and continuously during the physical canary. Any identity or
+pause-state transition stops the owned service and remains resource-race
+evidence. The controller restores the foreign container with `docker unpause`
+in `finally`; it neither deletes nor reconfigures it. Its immutable root is
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-paused-guard-v12r33`.
+Focused v12r31-v12r33 tests passed 14/14, and the complete pinned-image suite
+passed 228/228.

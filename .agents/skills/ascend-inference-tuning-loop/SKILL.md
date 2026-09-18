@@ -287,3 +287,10 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   after the final prelaunch snapshot. Attribute workers by `/proc` cgroup and
   parent chain, and classify a device-initialization `Resource_Busy` attempt as
   `not_run/resource_race` when no treatment worker or request was reached.
+- A successful `docker stop` is not proof of exclusivity: an external client
+  can explicitly restart a container even when `RestartPolicy=no`. When the
+  operator authorizes temporary isolation, bind the exception to the exact
+  container id, keep it paused rather than racing repeated stops, verify its
+  paused state before launch, throughout readiness, after readiness, and during
+  the numerical canary, then unpause it in `finally`. Any identity or pause
+  transition is resource-race evidence and must stop only the owned workload.
