@@ -51,7 +51,7 @@
   ],
   "phase_protocol": {
     "performance": "Fixed-length load may use ignore_eos=true; run three measured repetitions only after health 200 and warmup.",
-    "quality": "Use seed=0, temperature=0, enable_thinking=false, ignore_eos=false, trust_remote_code=false and extract_non_reasoning_content; run three repetitions.",
+    "quality": "Use max_output_tokens=2048, seed=0, temperature=0, enable_thinking=false, ignore_eos=false, trust_remote_code=false and extract_non_reasoning_content; run three repetitions.",
     "isolation": "For each G1-G4 group, complete performance, stop the service, restart the exact same frozen group configuration, wait for health 200, then run quality. Never reuse profiler/capture state for quality.",
     "provenance": "Adapted from the supplied successful batch_size=32 HYPIC piercing record; host/device IDs and absolute paths are deliberately not copied."
   },
