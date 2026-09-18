@@ -105,6 +105,13 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
   treat the admission failure as numerical, performance, or quality evidence.
   A later attempt requires a fresh live audit and a new control-plane
   idempotency key; never reuse the completed key from the rejected admission.
+- Give expensive launch controllers a preflight-only path whose rejection is
+  observational and machine-readable. It may validate pinned files, hashes,
+  ordered inventories, and live resource state, but it must not create the
+  owned container or immutable result root, bind the service port, or start an
+  accelerator process. Record exact blocker identities and verify the absence
+  of those side effects before classifying the attempt as
+  `not_run/preflight_blocked`.
 - A running privileged Ascend-capable container with neither explicit Docker
   device mappings nor a valid visible-device declaration has
   `unknown_device_scope`; it is not claim-free. Under an exclusive-use
@@ -145,6 +152,9 @@ the workstream upstream. Serialized integration alone updates `main`.
 - Live Git, container, port, memory, and NPU state are captured before mutation.
 - The launch record distinguishes admission failure from an experiment that
   crossed its owned start boundary.
+- A rejected preflight records exact blockers and proves zero owned launch side
+  effects: no result root, container, service-port listener, or accelerator
+  process.
 - Privileged containers without a provable device scope are recorded as
   wildcard contenders, and startup-window monitoring detects late activation
   before any experiment result is accepted.

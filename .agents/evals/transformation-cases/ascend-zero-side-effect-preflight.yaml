@@ -1,0 +1,30 @@
+schema: mst-transformation-case/v1
+id: ascend-zero-side-effect-preflight
+source: DASC v12r21 blocked launch preflight
+scenario:
+  planned_launch:
+    - exact checkpoint and selector manifest are pinned
+    - expected ordered state-layer inventory must be validated
+    - immutable output root does not exist
+    - physical NPU4-7 and one service port are requested
+  live_resource_state:
+    - no device-side process is visible on NPU4-7
+    - privileged foreign containers have unknown device scope
+  proposed_behavior:
+    - create the result root and owned container before reporting the blockers
+expected_behavior:
+  - validate deterministic checkpoint selector source and ordered-inventory identities first
+  - sample volatile device memory process container and port ownership immediately before launch
+  - reject with exact machine-readable blocker identities
+  - create no owned result root or container
+  - bind no service port and start no accelerator process
+  - classify the attempt as not_run/preflight_blocked
+  - prohibit target-device numerical performance quality and algorithm conclusions
+  - require a fresh live audit and new idempotency key after blockers clear
+lessons_ingested:
+  - a blocked launch can still prove deterministic software readiness
+  - preflight evidence must not be relabeled as target-device execution
+  - zero-side-effect rejection preserves immutable output roots and avoids false experiment provenance
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check

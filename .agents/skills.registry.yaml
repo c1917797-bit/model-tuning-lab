@@ -22,6 +22,7 @@ skills:
       - distinguish active and historical container device claims
       - attribute changing NPU process ids to their live container workload
       - classify unknown-scope privileged containers and startup resource races
+      - verify a rejected accelerator preflight left zero owned launch side effects
     scope:
       - AGENTS.md
       - .agents/**
@@ -77,6 +78,7 @@ skills:
       - audit hybrid cache worker and scheduler lifecycle configuration
       - localize physical state-row and operator metadata binding failures
       - verify checkpoint-derived state inventories and Cartesian trace coverage
+      - separate deterministic software readiness from volatile launch admission
     scope:
       - configs/**
       - scripts/**

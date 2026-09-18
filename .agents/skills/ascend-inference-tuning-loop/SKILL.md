@@ -127,6 +127,13 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   quoted by a paper or a related checkpoint as context only. Fail before an
   accelerator launch when these inventories disagree, and retain the
   checkpoint and manifest hashes with the decision.
+- Split launch admission into deterministic and volatile phases. Validate the
+  pinned checkpoint, selector/plan, source identities, ordered inventories, and
+  output-root policy first without touching the accelerator. Then re-sample
+  device ownership, memory, ports, and foreign containers immediately before
+  launch. A volatile resource rejection may prove software readiness only; it
+  is not target-device activation, numerical, performance, or quality
+  evidence.
 - Make trace coverage a Cartesian-product gate, not a collection of independent
   membership checks. For every required TP rank, state family/index, and
   representative layer, require one uniquely keyed copy, before-native, and
