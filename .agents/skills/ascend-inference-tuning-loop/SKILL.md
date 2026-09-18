@@ -275,6 +275,18 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   blaming state values, run an explicit dense-padding identity control and
   record payload bytes separately from reserved page bytes. Never use that
   diagnostic control as evidence of compression or performance gain.
+- In Ascend split K/V attention allocations, dense or Mamba page padding may be
+  global trailing slack in each split buffer rather than logical payload.
+  Preserving only the padded page size can make a stock reshape consume slack
+  as data. A plugin compatibility adapter may expose only a verified logical
+  prefix while retaining the original allocation pointer and byte budget, but
+  only for known unquantized contiguous layouts and only after exact
+  per-worker/per-layer split-byte evidence; unknown layouts must fail closed.
+- Passing reshape, page geometry, complete recurrent-state transport, native
+  destination updates, lifecycle reachability, HTTP success, and prefix-cache
+  hits does not override failed deterministic replay. Treat that combination
+  as integration-correctness failure and prohibit performance and E2E quality
+  runs until exact replay passes.
 - Mount historical result trees read-only during software regression. If a
   test writes verdicts beside fixture evidence, provide a container-local tmpfs
   result tree and bind only immutable manifests/configuration inputs into it.

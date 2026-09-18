@@ -23,6 +23,7 @@ skills:
       - attribute changing NPU process ids to their live container workload
       - classify unknown-scope privileged containers and startup resource races
       - verify a rejected accelerator preflight left zero owned launch side effects
+      - guard coherent idle-to-full transitions on a physically disjoint non-target lane
     scope:
       - AGENTS.md
       - .agents/**
@@ -79,6 +80,8 @@ skills:
       - localize physical state-row and operator metadata binding failures
       - verify checkpoint-derived state inventories and Cartesian trace coverage
       - separate deterministic software readiness from volatile launch admission
+      - adapt split K/V buffers with padded attention pages
+      - stop performance after deterministic replay failure despite complete state transport
     scope:
       - configs/**
       - scripts/**

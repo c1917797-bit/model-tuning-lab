@@ -125,6 +125,14 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
   `not_run/resource_race`. An HCCL bind collision during worker startup is
   resource-race evidence when the conflicting socket belongs to that foreign
   workload; it is not an algorithm or numerical result.
+- When the operator explicitly authorizes coexistence with one exact,
+  physically disjoint foreign container, freezing its PID list may create false
+  aborts during a coherent idle-to-full-TP transition. Keep the repository
+  default strict; in the owning workstream only, pin container/image/start-time
+  identity, require every snapshot to be either idle or the complete expected
+  non-target TP set, reject partial TP states and every target-lane foreign PID,
+  and continuously verify owned target-lane processes. Never generalize this
+  exception to unknown containers or overlapping device scopes.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.

@@ -1585,3 +1585,61 @@ immediately to matched performance and required GSM8K evidence. If it fails,
 allow at most two evidence-driven corrective NPU iterations, then close the
 paper piercing with an explicit success, partial-mechanism, or failure verdict;
 do not continue open-ended exploration.
+
+## 2026-09-18 v12r38-v12r40 terminal numerical result
+
+v12r38 proved the plugin-owned split K/V padding adapter on real Ascend:
+exactly 64 prepared and 64 adapted events covered four TP workers times sixteen
+attention layers with exact payload, slack, and pointer checks. It did not run
+a numerical request because the fixed-PID non-target guard rejected a coherent
+foreign workload transition. v12r39 reproduced that transition and established
+that the exact foreign container could move from idle to a full TP4 service on
+non-target NPU0-3 without touching target NPU4-7. Both attempts are mechanism
+or resource-policy evidence, not numerical or performance results.
+
+v12r40 retained exact container/image/start-time identity, allowed only coherent
+idle or full-TP4 states on the non-target lane, rejected partial TP states and
+every foreign target PID, and continuously enforced owned target-lane
+processes. The owned physical NPU4-7 service passed preflight, model load, HCCL,
+readiness, post-readiness ownership, worker dispatch, and real request
+execution. The following physical mechanism gates all passed:
+
+- 64 prepared and 64 adapted split-attention reshape events;
+- 192 exact dense-page physical-cache bindings;
+- 384 canonical state copy/before-native/after-native keys across all four TP
+  workers, 48 GDN layers, and both recurrent-state families;
+- source-row preservation and native destination-row updates;
+- required lifecycle branch reachability;
+- a measured prefix-cache-hit delta of 4608.
+
+The unchanged strict numerical gate failed. The short response was `"OK\n\n"`
+instead of exact `"OK"`, and three temperature-zero, seed-zero,
+thinking-disabled identical-prefix requests produced three different
+continuations. Therefore performance and GSM8K were not admitted. This is a
+terminal integration-correctness failure for the current plugin-owned
+paper-derived DASC-NR Ascend implementation. It does not disprove the DASC
+paper mechanism on other implementations or runtimes.
+
+Authoritative v12r40 evidence:
+
+- root: `/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40`
+- operation: `exec-0000000000001e49`
+- `physical-canary.json`: `56f41fbfa41a823e8d05f7f8942e33be3f57a18fcdb643df840ebd343f371433`
+- `state-index-verdict.json`: `fa2c003e3280caef08b7ffe597dbfdbd6351fa9409d8f94f3cc1a6c862589377`
+- `full-layer-state-verdict.json`: `5e8aa50a90fd087033ecf95eb2537d30f97e678241dfdbdcd9a963f77dc128e6`
+- `dense-page-padding-verdict.json`: `3472758fa56442875847a9afe9d8f3cf78a21c5d7baecfc23598c0783e8bb1f7`
+- `padded-attention-reshape-verdict.json`: `d5acfdcd09762b3b8c2aeef9414c53e1126eacbbe575eb54e11b2c1a0f977047`
+- `evidence.jsonl`: `8b17d01977b2f7e5dadde3d5e4a59ea88c8667c1468d889e9110c6e1aa0a0922`
+- `service.log`: `e32ddff30e79d75e05b91a1f085b82236f5a0e7c05eec50ddb9b621baa41a48c`
+- `artifacts.sha256.json`: `dae4f89f64aae9724f2a45b0b16cbeb7b1bfb21a1bc62d9f2ae21ee995b9dcb5`
+
+The two corrective NPU iterations allowed by the 24-hour timebox have been
+consumed. Do not rerun unchanged bytes or add more state-row tracing. Revisit
+only with a materially new producer, attention-KV, or aggregate-lifecycle
+hypothesis and a stronger token/logit boundary oracle. Otherwise move to the
+next paper/algorithm. The owned v12r40 container exited and was subsequently
+removed, and the temporarily paused Maxon container was restored by the
+controller's `finally` path. A later read-only snapshot found NPU0-3
+process-free and a new `dias-cont-1` TP4 service on NPU4-7 (PIDs
+1898694-1898697); those workers are not part of this DASC attempt and were not
+modified.
