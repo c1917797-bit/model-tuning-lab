@@ -44,6 +44,11 @@ proof that the intended NPU path executed.
    driver device ID, classify it as a pre-algorithm environment failure. Record
    running privileged/all-device containers and their visibility variables,
    preserve the exact failed configuration, and do not retry it unchanged.
+   Inspect host kernel logs for Ascend UDA messages. In particular,
+   `uda_occupy_dev_by_ns: Conflict open udevid` proves a device-namespace
+   reservation even when `npu-smi` reports no process, HBM is idle, and `lsof`
+   reports no ordinary device-file handle. Do not misclassify that state as an
+   idle, usable card or as an algorithm failure.
 8. Compare with the previous baseline. If any material field drifted, declare
    the old and new measurements non-comparable until re-baselined.
 9. Commit and push the orientation or re-baseline stage.
@@ -64,6 +69,10 @@ proof that the intended NPU path executed.
   privileged container exposes all devices, treat causality as unproven until a
   controlled canary succeeds after release or an explicitly approved diagnostic
   isolates the condition.
+- Stopping an idle-looking privileged container can still interrupt interactive
+  work. Require explicit approval even when UDA evidence makes that container a
+  likely namespace owner. Never reset an NPU or restart driver services as an
+  implicit follow-up.
 
 ## Output
 

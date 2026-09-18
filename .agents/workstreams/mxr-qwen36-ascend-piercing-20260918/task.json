@@ -52,6 +52,7 @@
     "classification": "pre_algorithm_container_acl_initialization_failure",
     "error": "aclInit 507899 Resource_Busy; torch_npu reports drv devId 0 invalid before any MXR code executes",
     "target_card_observation": "Physical NPU4-7 were healthy, at idle-HBM baseline, and had no device-side process during each probe.",
+    "kernel_evidence": "The 2026-09-18T21:08:37Z post-release canary produced repeated Ascend UDA kernel errors: uda_occupy_dev_by_ns: Conflict open udevid (udevid=4; ns_id=0). npu-smi showed no process on any NPU and lsof showed no open target device file.",
     "excluded_causes": [
       "single-device versus four-device Docker mapping",
       "missing host network or host cgroup namespace",
@@ -59,8 +60,8 @@
       "logical index misuse after ASCEND_RT_VISIBLE_DEVICES remapping",
       "missing ASCEND_DEVICE_ID index when ASCEND_RT_VISIBLE_DEVICES is set"
     ],
-    "concurrent_state": "A foreign privileged container with all host devices visible is actively serving on physical NPU0-3; no process is shown on NPU4-7. Causality is not yet proven.",
-    "next_safe_branch": "Either obtain explicit approval for one temporary privileged diagnostic constrained by ASCEND_RT_VISIBLE_DEVICES=4, or wait for the all-device privileged container to exit and rerun only the minimal canary before starting the immutable v2 gate."
+    "concurrent_state": "The NPU0-3 serving container exited and all eight NPUs became process-free, but the same canary still failed. The only remaining running container is Maxon4ick_torch_910_dev: privileged, all host devices visible, no current NPU process, and an active interactive opencode process. It or stale driver namespace state may own the UDA reservation; causality is not yet proven.",
+    "next_safe_branch": "Obtain explicit approval to stop but not delete Maxon4ick_torch_910_dev, run exactly one non-privileged canary, and restart no foreign state automatically. If the conflict remains after the container is stopped, request an operator-approved driver namespace recovery; do not reset devices or restart driver services autonomously."
   },
   "next_actions": [
     "Do not rerun npu-gate-v1 or any already-failed Docker mapping combination.",

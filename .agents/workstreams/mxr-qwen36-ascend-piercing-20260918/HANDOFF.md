@@ -32,6 +32,24 @@ requires explicit user approval. The other safe branch is to wait until the
 all-device privileged workload exits, then run only the minimal container
 canary. A successful canary must precede a new immutable `npu-gate-v2` root.
 
+On 2026-09-19 the `combine-only-ep4_nk` service had exited and all eight NPUs
+were process-free at idle HBM. Re-running one evidence-backed non-privileged
+canary still failed. The host kernel log supplied the missing root-cause class:
+it repeatedly reported
+`uda_occupy_dev_by_ns: Conflict open udevid (udevid=4; ns_id=0)` for the canary
+process. `lsof` showed no process holding the target device files. This proves
+that the blocker is an Ascend UDA device-namespace reservation, not visible
+compute/HBM occupancy and not MXR code.
+
+The only remaining running container is `Maxon4ick_torch_910_dev`. It is
+privileged, can see every host device, has no current NPU process, and still
+contains an interactive `opencode` process. It may own the UDA namespace, or
+the driver may retain stale namespace state; that distinction is not yet
+proved. Do not stop it without explicit user approval. The next discriminating
+test is: stop but do not delete that container, run one non-privileged canary,
+and do not automatically restart or alter any driver service. If the conflict
+survives, driver namespace recovery requires separate operator authorization.
+
 The target checkpoint is `/cache/efim/Qwen3.6-27B`. Its global GDN geometry is
 16 key heads, 48 value heads, and 128 dimensions for both key and value. Under
 TP4 the local target shape is therefore `Hg=4, H=12, Dk=Dv=128`, matching the
