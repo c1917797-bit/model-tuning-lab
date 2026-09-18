@@ -15,12 +15,12 @@
     "future_runtime": "vLLM-Ascend v0.27 thin adapter"
   },
   "objective": "Reproduce the official MXR/PTO mechanism faithfully on Ascend, prove multi-step numerical correctness and target-shape advantage, then obtain attributable matched end-to-end performance without quality regression through a plugin-owned monkeypatch.",
-  "status": "pre_npu_preparation",
+  "status": "npu_gate_prepared_waiting_for_clean_target_lane",
   "decision": "pending",
   "goal_alignment": {
     "long_term": "Deliver reproducible and portable Ascend performance benefit through a plugin-owned implementation without modifying upstream frameworks or images.",
     "medium_term": "Build a complete evidence chain: official-method parity, CANN 9.1 compatibility, NPU numerical correctness, target-shape kernel timing, matched dense end-to-end A/B, and final quality.",
-    "short_term": "Finish source/license/runtime audit and one-shot NPU gate preparation while NPU4-7 are occupied by an external service."
+    "short_term": "Execute the prepared one-shot NPU4 numerical and target-shape timing gate while continuously guarding physical NPU4-7."
   },
   "fixed_gates": {
     "correctness_before_performance": true,
@@ -43,12 +43,12 @@
     "megagdn_pto_commit": "d357fd38608f99ddf9b9fb2d217b2e731ecd3a72",
     "megagdn_pto_archive_sha256": "4131a3b24e5b7d9a137574867b708c4ff03c547a956861637d508da958dad06d",
     "pto_kernels_commit": "282ed20bbe9777f47370e7e4e2c2bd9df7f7ad37",
-    "pto_kernels_archive_sha256": "8f57db5eb3f3c87608f54a957c7e6c8aa2374d92221efc61dd5a92648681b856"
+    "pto_kernels_archive_sha256": "8f57db5eb3f3c87608f54a957c7e6c8aa2374d92221efc61dd5a92648681b856",
+    "pto_isa_commit": "01666f3b386f296c95e6e05825fe63b8e6bb4ef4",
+    "pto_isa_remote": "https://gitcode.com/cann/pto-isa.git"
   },
   "next_actions": [
-    "Freeze an executable target-shape numerical and timing contract for H=12, Hg=4, D=128, chunk=128.",
-    "Prepare a fail-closed NPU4-7 controller with immutable artifact root and no automatic retries.",
-    "When a target card is truly idle, run one compile plus numerical gate before any timing.",
+    "Run the prepared one-shot compile plus numerical gate; timing is admitted only if correctness passes.",
     "If the gate passes, compare official staged, official megakernel, and the v0.23 baseline on the same target shape; preserve attribution between triangular inversion and full fusion.",
     "Only integrate the winning path into vLLM after the target-shape gate passes."
   ]

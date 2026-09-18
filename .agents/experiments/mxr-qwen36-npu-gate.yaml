@@ -44,7 +44,7 @@ protocol:
     - "target-shape kernel result cannot support about 5 percent E2E gain"
   warmup: "predeclared per stage; compile excluded from timing"
   repetitions: 0
-  command: "pending one-shot controller"
+  command: "python3 .agents/workstreams/mxr-qwen36-ascend-piercing-20260918/run_npu_gate_v1.py"
 results:
   baseline: {}
   candidate: {}
@@ -55,7 +55,7 @@ results:
   resources: {}
 artifacts: []
 decision_reason: ""
-next_loop: "complete one-shot controller and NPU gate"
+next_loop: "run the prepared one-shot NPU gate when fresh preflight proves physical NPU4-7 process-free"
 rollback:
   command: "unset MST_MXR_ENABLE and omit mxr_vllm_ascend from VLLM_PLUGINS"
   verified: false

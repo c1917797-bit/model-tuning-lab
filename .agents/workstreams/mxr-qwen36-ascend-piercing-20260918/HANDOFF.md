@@ -2,9 +2,11 @@
 
 ## Current state
 
-The workstream is in pre-NPU preparation. No MXR NPU correctness, performance,
-or quality result exists yet. Physical NPU4-7 were last observed running an
-external `vllm-ascend` TP4 service and must not be disturbed.
+The workstream has completed pre-NPU preparation. No MXR NPU correctness,
+performance, or quality result exists yet. A fresh read-only preflight at
+2026-09-18T15:21:44Z found physical NPU4-7 process-free and all frozen source,
+submodule, and image identities correct. Resource state is still dynamic and
+must be checked again by the controller immediately before launch.
 
 The target checkpoint is `/cache/efim/Qwen3.6-27B`. Its global GDN geometry is
 16 key heads, 48 value heads, and 128 dimensions for both key and value. Under
@@ -15,6 +17,25 @@ Exact official source archives are retained outside Git under
 `/cache/cch/paper-sources/mxr-tri-inverse-20260918/`. The MegaGDN archive is
 pinned to `d357fd38608f99ddf9b9fb2d217b2e731ecd3a72`; the PTO kernels archive is
 pinned to `282ed20bbe9777f47370e7e4e2c2bd9df7f7ad37`. Do not silently update them.
+The exact MegaGDN submodule pointer was recovered from the Git tree and checked
+out from `https://gitcode.com/cann/pto-isa.git` at
+`01666f3b386f296c95e6e05825fe63b8e6bb4ef4`.
+
+`run_npu_gate_v1.py` is the prepared one-shot controller. Its self-test and 19
+focused CPU/control-plane tests pass. It checks both official archive hashes,
+the exact PTO-ISA commit, the pinned v0.23 image ID, an unused container name,
+and process-free physical NPU4-7 twice before creating the immutable result
+root. It maps only physical NPU4 to logical device 0, monitors NPU4 ownership
+and requires NPU5-7 to remain process-free. It never retries. Use
+`--preflight-only` for a read-only resource check.
+
+The NPU probe runs three chained segments at the TP4-local Qwen shape and
+compares output plus the complete final state against the official double
+reference. It also requires bitwise same-input replay. Timing is admitted only
+after correctness and separately reports v0.23 versus MXR triangular solve,
+staged six-kernel PTO, and fused MegaGDN. A 1.10x median speedup at both 4K and
+16K local-token shapes is the predeclared clear-advantage threshold; this is an
+operator gate, not an end-to-end acceptance claim.
 
 ## Important audit findings
 
