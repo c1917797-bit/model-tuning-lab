@@ -280,3 +280,10 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   result tree and bind only immutable manifests/configuration inputs into it.
   A harness write failure is not an algorithm failure, but the corrected rerun
   must be recorded before the software gate is accepted.
+- Do not assume `docker ps` is the host's complete container inventory. Before
+  claiming exclusive accelerator ownership, enumerate relevant containerd
+  namespaces and task states as well as Docker containers. Repeat that check
+  during readiness, because a pre-existing shell task can start NPU workers
+  after the final prelaunch snapshot. Attribute workers by `/proc` cgroup and
+  parent chain, and classify a device-initialization `Resource_Busy` attempt as
+  `not_run/resource_race` when no treatment worker or request was reached.

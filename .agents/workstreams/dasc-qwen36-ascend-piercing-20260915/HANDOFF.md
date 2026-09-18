@@ -1340,3 +1340,37 @@ If its strict numerical canary passes, compact page geometry or aggregate
 offsets are implicated. If it fails, close page padding and test attention-KV
 or aggregate-lifecycle semantics as the next single variable. Neither branch
 admits performance or GSM8K until exact repeated replay passes.
+
+## 2026-09-18 v12r31 environment-race result and v12r32 retry
+
+v12r31 did not reach readiness, worker initialization, plugin activation, or a
+numerical request. The service process failed during Ascend
+`rtGetSocVersion`/`aclInit` with `Resource_Busy`. The immutable root is
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-identity-v12r31`;
+its container exited 1 without OOM. This is `not_run/resource_race`, not DASC
+numerical evidence, so dense page padding remains untested.
+
+The first live audit found a privileged Docker container with unknown device
+scope actively building a CANN operator and briefly calling `torch_npu`; it
+was stopped without deletion after it ceased to satisfy the operator-authorized
+idle-coexistence exception. Device access still failed because a separate
+containerd namespace was invisible to `docker ps`: `dias/dias-cont-1` launched
+a Qwen3.5-27B vLLM service whose four workers were proven by cgroup and parent
+chain on physical NPU4-7. Its environment declared all eight devices. SIGTERM
+to the task and all child processes was ignored; the operator-authorized
+SIGKILL stopped the task while preserving the container definition. NPU4-7
+then returned to the idle floor, and the pinned v0.23.0 image successfully
+allocated and read tensors on all four mapped devices.
+
+v12r32 is an immutable retry of the exact v12r31 treatment. It adds no algorithm
+or cache-layout change. Its controller additionally enumerates the `dias`
+containerd namespace before launch and during every readiness poll, failing
+closed if any DIAS task is RUNNING. Docker inventory alone is not sufficient
+on this host. The new root is
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-identity-retry-v12r32`.
+The v12r32 retry preparation passed the complete read-only pinned-image software
+suite: 223 tests passed with the plugin source provided through `PYTHONPATH` and
+only the immutable Qwen3.6 model config mounted from the model tree. Maintainer
+Skill Tree validation passed for all 26 skills, `task.json` parsed successfully,
+and `git diff --check` passed. This remains software evidence only; it does not
+claim an NPU numerical, performance, or quality result.
