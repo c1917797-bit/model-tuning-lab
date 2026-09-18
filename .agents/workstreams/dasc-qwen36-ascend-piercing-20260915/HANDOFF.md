@@ -1280,3 +1280,63 @@ Next immutable root:
 Run it only after the standard fresh physical NPU4-7, port, Docker identity,
 checkpoint, selector, and root-absence preflight passes. This diagnostic is not
 performance evidence; performance and GSM8K remain prohibited.
+
+## 2026-09-18 v12r30 full-layer diagnostic result
+
+v12r30 completed on physical NPU4-7. Its complete state-row gate passed:
+four TP workers x 48 checkpoint-derived GDN layers x two state families yielded
+exactly 384 unique copy keys, 384 before-native rows, and 384 after-native rows.
+Every full-row copy digest matched, every old source row remained unchanged,
+and native execution updated every copied destination row. Exact ownership also
+passed and the owned container exited normally; NPU4-7 returned to the idle
+floor.
+
+The strict numerical gate nevertheless failed. The short result was not exact,
+the third long-prefix replay diverged from the first two, and none of the long
+responses returned the requested exact stopped token. Prefix reuse was real
+(`prefix_cache_hit_delta=4608`), so this is a cache-hit semantic failure rather
+than a missed test path. Performance and GSM8K were not run.
+
+Authoritative root and hashes:
+
+- root: `/cache/cch/dasc-qwen36-ascend-20260915/state-index-eager-all-layers-v12r30`
+- `full-layer-state-verdict.json`: `aa6592f164d8e584bf034e66291dc4400bea933c2181ea547f6d811a4af3aec7`
+- `state-index-verdict.json`: `ce2ef4c572e885972a24b6bb976190105bb8f606893e6d56d29c47f72ef41206`
+- `physical-canary.json`: `f0ae4a4e3a1931b2678c682a1224da28d2e16f6502393044b05dc2927368554a`
+- `evidence.jsonl`: `312856a8597f481cd70bf612a64e2bd9c892cbb325e05b24992db1920edbed43`
+- `post-readiness-ownership.json`: `a314e4e9ebca4743b46ed4670bb47d6c3ff448d86be9dbc40f6f80077e8878e0`
+
+This closes missing middle-layer copy coverage and copied-row/native-consumer
+identity as explanations. Do not expand the same trace again. The remaining
+fault domain is above or beside those rows: state production, aggregate cache
+lifecycle, attention KV, or physical page geometry.
+
+## 2026-09-18 v12r31 dense-page-padding identity preparation
+
+A source audit found that v12r30 retained every local GDN head but still cleared
+the original `page_size_padded`. Its all-head payload was 801792 bytes per GDN
+page while the dense reservation was 1588224 bytes. Thus v12r30 was a state-
+content identity control, not a physical-page identity control.
+
+v12r31 adds the fail-closed diagnostic switch
+`MST_DASC_PRESERVE_DENSE_PAGE_PADDING=1`. It is legal only with enabled
+`physical-cache-native-all-heads-state-index` mode and all local heads retained.
+The same eager execution, cache-hit workload, state-index normalization, and
+384-key full-layer diagnostics remain active; only the dense page reservation
+is restored. The verifier requires 192 unique TP-worker/layer cache-binding
+rows, exact dense reservation fields, and a positive padding gap on every row.
+
+Software evidence in the pinned v0.23.0 image:
+
+- focused configuration, physical patch, v12r30, and v12r31 tests: 46 passed;
+- complete DASC plugin/workstream suite: 219 passed;
+- source was mounted read-only and historical result roots were replaced by a
+  tmpfs with only immutable model-config and selector inputs bound read-only;
+- `git diff --check`: passed.
+
+Next immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-identity-v12r31`.
+If its strict numerical canary passes, compact page geometry or aggregate
+offsets are implicated. If it fails, close page padding and test attention-KV
+or aggregate-lifecycle semantics as the next single variable. Neither branch
+admits performance or GSM8K until exact repeated replay passes.

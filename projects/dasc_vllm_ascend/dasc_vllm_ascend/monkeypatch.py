@@ -1027,12 +1027,27 @@ def _install_physical_cache_patch(
         retained = retained_head_indices(self, config)
         temporal_shape = tuple(dense_spec.shapes[1])
         head_axis = unique_head_axis(temporal_shape, self.A_log.numel())
-        compact = compact_mamba_spec(
-            dense_spec,
-            state_index=1,
-            head_axis=head_axis,
-            retained_heads=retained.numel(),
+        preserve_dense_padding = getattr(
+            config, "preserve_dense_page_padding", False
         )
+        if preserve_dense_padding:
+            if (
+                config.mode
+                != "physical-cache-native-all-heads-state-index"
+                or retained.numel() != self.A_log.numel()
+            ):
+                raise DascRuntimeUnsupported(
+                    "dense page-padding control requires native all-heads "
+                    "state-index mode"
+                )
+            compact = dense_spec
+        else:
+            compact = compact_mamba_spec(
+                dense_spec,
+                state_index=1,
+                head_axis=head_axis,
+                retained_heads=retained.numel(),
+            )
         self._mst_dasc_dense_temporal_shape = temporal_shape
         self._mst_dasc_temporal_head_axis = head_axis
         self._mst_dasc_max_active_blocks = (
@@ -1041,6 +1056,7 @@ def _install_physical_cache_patch(
         )
         self._mst_dasc_dense_page_bytes = dense_spec.page_size_bytes
         self._mst_dasc_compact_page_bytes = compact.page_size_bytes
+        self._mst_dasc_page_padding_preserved = preserve_dense_padding
         return compact
 
     def bind_bridge(module):
@@ -1109,11 +1125,31 @@ def _install_physical_cache_patch(
             conv_storage.numel() * conv_storage.element_size()
             + temporal_storage.numel() * temporal_storage.element_size()
         )
-        expected_bytes = module._mst_dasc_compact_page_bytes * num_blocks
-        if persistent_bytes != expected_bytes:
+        if num_blocks <= 0 or persistent_bytes % num_blocks:
+            raise DascRuntimeUnsupported(
+                "native all-heads cache has invalid block geometry"
+            )
+        payload_page_bytes = persistent_bytes // num_blocks
+        reserved_page_bytes = module._mst_dasc_compact_page_bytes
+        reserved_bytes = reserved_page_bytes * num_blocks
+        padding_bytes_per_page = reserved_page_bytes - payload_page_bytes
+        padding_preserved = getattr(
+            module, "_mst_dasc_page_padding_preserved", False
+        )
+        if padding_preserved:
+            if (
+                reserved_page_bytes != module._mst_dasc_dense_page_bytes
+                or persistent_bytes >= reserved_bytes
+                or padding_bytes_per_page <= 0
+            ):
+                raise DascRuntimeUnsupported(
+                    "dense page-padding control did not preserve a larger "
+                    "dense reservation"
+                )
+        elif persistent_bytes != reserved_bytes:
             raise DascRuntimeUnsupported(
                 "native all-heads allocation does not match cache spec: "
-                f"actual={persistent_bytes} expected={expected_bytes}"
+                f"actual={persistent_bytes} expected={reserved_bytes}"
             )
         emit(
             config.evidence_path,
@@ -1123,8 +1159,15 @@ def _install_physical_cache_patch(
             dense_page_bytes=module._mst_dasc_dense_page_bytes,
             compact_page_bytes=module._mst_dasc_compact_page_bytes,
             persistent_bytes=persistent_bytes,
-            actual_page_bytes=persistent_bytes // num_blocks,
-            allocation_matches_spec=True,
+            actual_page_bytes=payload_page_bytes,
+            allocation_matches_spec=persistent_bytes == reserved_bytes,
+            page_padding_preserved=padding_preserved,
+            payload_bytes=persistent_bytes,
+            payload_page_bytes=payload_page_bytes,
+            reserved_bytes=reserved_bytes,
+            reserved_page_bytes=reserved_page_bytes,
+            padding_bytes_per_page=padding_bytes_per_page,
+            payload_fits_reserved_page=persistent_bytes <= reserved_bytes,
             native_all_heads=True,
             num_blocks=num_blocks,
         )

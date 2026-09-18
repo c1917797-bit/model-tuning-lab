@@ -15,6 +15,7 @@ class ConfigTest(unittest.TestCase):
         self.assertEqual(config.mode, "nr-numerical")
         self.assertEqual(config.w_max, 64)
         self.assertFalse(config.full_state_row_diagnostics)
+        self.assertFalse(config.preserve_dense_page_padding)
 
     def test_full_state_row_diagnostics_is_explicit_and_fail_closed(self):
         env = {"MST_DASC_FULL_STATE_ROW_DIAGNOSTICS": "1"}
@@ -35,6 +36,31 @@ class ConfigTest(unittest.TestCase):
         with patch.dict(os.environ, env, clear=True):
             with self.assertRaisesRegex(DascConfigurationError, "absolute"):
                 DascConfig.from_env()
+
+    def test_dense_page_padding_control_is_fail_closed(self):
+        valid = {
+            "MST_DASC_ENABLE": "1",
+            "MST_DASC_MODE": "physical-cache-native-all-heads-state-index",
+            "MST_DASC_EVIDENCE_PATH": "/tmp/dasc-evidence.jsonl",
+            "MST_DASC_PRESERVE_DENSE_PAGE_PADDING": "1",
+        }
+        with patch.dict(os.environ, valid, clear=True):
+            config = DascConfig.from_env()
+        self.assertTrue(config.preserve_dense_page_padding)
+
+        for invalid in (
+            {"MST_DASC_PRESERVE_DENSE_PAGE_PADDING": "1"},
+            {
+                **valid,
+                "MST_DASC_MODE": "physical-cache-native-all-heads",
+            },
+        ):
+            with self.subTest(invalid=invalid):
+                with patch.dict(os.environ, invalid, clear=True):
+                    with self.assertRaisesRegex(
+                        DascConfigurationError, "requires enabled"
+                    ):
+                        DascConfig.from_env()
 
     def test_unimplemented_mode_fails_closed(self):
         with patch.dict(

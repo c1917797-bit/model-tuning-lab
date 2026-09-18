@@ -265,3 +265,18 @@ For algorithms that claim gains by reducing recurrent or prefix state:
   rather than weakening the repository default. Keep device-side processes,
   HBM, port, and immutable-output checks as hard blockers, and repeat the live
   resource check immediately before container launch after preparation work.
+- Treat a complete Cartesian state-row proof as transport/consumer evidence,
+  not producer or whole-cache correctness. If every source-to-destination copy
+  and native destination update passes but numerical replay fails, stop adding
+  more copies of the same trace. Move one variable at a time to state
+  production, attention KV, aggregate lifecycle, or page geometry.
+- "All heads retained" is not a physical identity control when cache grouping,
+  page padding, allocation size, or offsets still differ from dense. Before
+  blaming state values, run an explicit dense-padding identity control and
+  record payload bytes separately from reserved page bytes. Never use that
+  diagnostic control as evidence of compression or performance gain.
+- Mount historical result trees read-only during software regression. If a
+  test writes verdicts beside fixture evidence, provide a container-local tmpfs
+  result tree and bind only immutable manifests/configuration inputs into it.
+  A harness write failure is not an algorithm failure, but the corrected rerun
+  must be recorded before the software gate is accepted.

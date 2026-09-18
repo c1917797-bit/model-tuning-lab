@@ -15,12 +15,12 @@ class Metadata:
     non_spec_state_indices_tensor: torch.Tensor
 
 
-def _dense_spec():
+def _dense_spec(page_size_padded=None):
     return MambaSpec(
         block_size=1536,
         shapes=((2, 3), (4, 2)),
         dtypes=(torch.float32, torch.float32),
-        page_size_padded=None,
+        page_size_padded=page_size_padded,
         mamba_type=MambaAttentionBackendEnum.GDN_ATTN,
         mamba_cache_mode="align",
     )
@@ -265,6 +265,80 @@ def test_native_all_heads_control_keeps_runner_cache_and_metadata(monkeypatch, t
     bound = next(row for row in events if row["event"] == "physical_cache_bound")
     assert bound["native_all_heads"] is True
     assert bound["allocation_matches_spec"] is True
+
+
+def test_dense_page_padding_identity_control_preserves_reserved_geometry(
+    monkeypatch, tmp_path
+):
+    metadata = Metadata(torch.tensor([2], dtype=torch.int32))
+    context = SimpleNamespace(attn_metadata={"layers.0": metadata})
+
+    class FakeGdn:
+        def __init__(self):
+            self.prefix = "layers.0"
+            self.A_log = torch.zeros(4)
+            self.dt_bias = torch.zeros(4)
+            self.kv_cache = (
+                torch.zeros(8, 2, 3),
+                torch.zeros(8, 4, 2),
+            )
+
+        def get_kv_cache_spec(self, vllm_config):
+            return _dense_spec(page_size_padded=96)
+
+        def _forward_core(self, *args):
+            self.kv_cache[1][2].add_(1)
+            return "dense-padding"
+
+    module = FakeGdn()
+
+    class FakeRunner:
+        def __init__(self):
+            self.model = SimpleNamespace(modules=lambda: (module,))
+            self.input_batch = SimpleNamespace(
+                req_ids=["req-a"],
+                block_table=[SimpleNamespace(blocks_per_kv_block=1)],
+            )
+            self.requests = {"req-a": SimpleNamespace(num_computed_tokens=10)}
+
+        def _model_forward(self, *args, **kwargs):
+            return module._forward_core()
+
+    config = SimpleNamespace(
+        representative_a=-0.3,
+        epsilon=0.001,
+        w_max=1e-9,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads-state-index",
+        preserve_dense_page_padding=True,
+    )
+    monkeypatch.setattr(
+        physical_patch,
+        "retained_head_indices",
+        lambda module, cfg: torch.arange(4, dtype=torch.long),
+    )
+    physical_patch._install_physical_cache_patch(
+        config, FakeGdn, FakeRunner, lambda: context
+    )
+    reserved = module.get_kv_cache_spec(
+        SimpleNamespace(scheduler_config=SimpleNamespace(max_num_seqs=3))
+    )
+    assert reserved.shapes == _dense_spec().shapes
+    assert reserved.page_size_padded == 96
+    assert FakeRunner()._model_forward() == "dense-padding"
+
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    bound = next(row for row in events if row["event"] == "physical_cache_bound")
+    assert bound["native_all_heads"] is True
+    assert bound["page_padding_preserved"] is True
+    assert bound["payload_page_bytes"] == 56
+    assert bound["reserved_page_bytes"] == 96
+    assert bound["padding_bytes_per_page"] == 40
+    assert bound["payload_fits_reserved_page"] is True
+    assert bound["allocation_matches_spec"] is False
 
 
 def test_native_all_heads_state_index_tracks_copied_running_row(

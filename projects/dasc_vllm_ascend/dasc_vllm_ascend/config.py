@@ -38,6 +38,7 @@ class DascConfig:
     expected_model_runner_sha256: str
     expected_vllm_mamba_utils_sha256: str
     full_state_row_diagnostics: bool
+    preserve_dense_page_padding: bool
 
     @classmethod
     def from_env(cls) -> "DascConfig":
@@ -97,6 +98,17 @@ class DascConfig:
         full_state_row_diagnostics = _enabled(
             "MST_DASC_FULL_STATE_ROW_DIAGNOSTICS"
         )
+        preserve_dense_page_padding = _enabled(
+            "MST_DASC_PRESERVE_DENSE_PAGE_PADDING"
+        )
+        if preserve_dense_page_padding and (
+            not enabled
+            or mode != "physical-cache-native-all-heads-state-index"
+        ):
+            raise DascConfigurationError(
+                "MST_DASC_PRESERVE_DENSE_PAGE_PADDING requires enabled "
+                "physical-cache-native-all-heads-state-index mode"
+            )
         return cls(
             enabled=enabled,
             mode=mode,
@@ -109,4 +121,5 @@ class DascConfig:
             expected_model_runner_sha256=expected_hashes["model_runner"],
             expected_vllm_mamba_utils_sha256=expected_hashes["vllm_mamba_utils"],
             full_state_row_diagnostics=full_state_row_diagnostics,
+            preserve_dense_page_padding=preserve_dense_page_padding,
         )
