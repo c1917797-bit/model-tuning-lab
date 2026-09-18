@@ -951,3 +951,38 @@ per-launch `MST_DASC_ALLOW_IDLE_UNKNOWN_SCOPE` list for
 stops nor reconfigures those containers. Their identities remain in every
 preflight and startup verdict, and any NPU4-7 PID outside the owned DASC
 container terminates only the owned launch as `not_run/resource_race`.
+
+## 2026-09-18 v12r21 physical NPU4-7 result
+
+The operator-authorized single run used commit
+`680f5cb2500978662ca8212469a340b2ded86c7d` and the pinned v0.23.0 image on
+physical NPU4-7. Preflight passed with no target-card processes, HBM at the
+approximately 2.87 GiB idle floor, port 8030 free, and no result-root
+collision. Post-readiness ownership was exact: one owned TP worker on each of
+physical NPU4-7, no foreign PIDs, and no startup-resource-race artifact.
+
+The run is a strict numerical failure, not a resource failure. Lifecycle
+branch evidence passed on all four TP workers. Sixteen physical state-copy
+events and sixteen before/after native-boundary pairs covered both recurrent
+states and the two representative layers on all four workers; the old source
+rows remained unchanged and destination rows were updated. However, all four
+`gdn_running_state_indices_remapped` events recorded source and destination
+indices as `[12]` for both representative layers. The attempted remap was
+therefore a no-op (`12 -> 12`) even though the physical copy used source block
+2 and destination block 3.
+
+The strict replay gate failed: the three 16-token replays were non-identical,
+the short exact gate failed, and the variant response was not exact. Prefix
+cache hits were positive (delta 4608), activation evidence was present, and
+the service returned successful HTTP responses, so none of those facts may be
+reported as numerical correctness. The authoritative decision is
+`running_state_index_not_changed_on_all_workers`; performance and quality
+remain not run. Evidence root:
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-startup-guard-v12r21`.
+
+Do not repeat v12r21 unchanged. The next implementation slice must prove the
+request-state object used by `collect_mamba_copy_meta` is the same live object
+later read through `model_runner.requests[owner]`, or carry the destination
+row through an explicit runner-owned mapping. Add a fail-closed assertion that
+source and destination state indices differ before launching the next NPU
+run.
