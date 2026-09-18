@@ -41,6 +41,7 @@ IDLE_HBM_LIMIT_MIB = 3932
 PORT = 8030
 BLOCK_ON_IDLE_CONTAINER_CLAIMS = True
 ADDITIONAL_CONFIG: str | None = None
+ENFORCE_EAGER = False
 PLUGIN_MODE = "physical-cache-eager"
 W_MAX = "64"
 CANARY_EXTRA_ARGS: tuple[str, ...] = ()
@@ -398,9 +399,16 @@ def launch() -> str:
             "16",
             "--kv-cache-memory",
             "9663676416",
-            "--compilation-config",
-            '{"cudagraph_capture_sizes":[1,2,4,8,16],"cudagraph_mode":"FULL_DECODE_ONLY"}',
     ]
+    if ENFORCE_EAGER:
+        serve_args.append("--enforce-eager")
+    else:
+        serve_args.extend(
+            [
+                "--compilation-config",
+                '{"cudagraph_capture_sizes":[1,2,4,8,16],"cudagraph_mode":"FULL_DECODE_ONLY"}',
+            ]
+        )
     if ADDITIONAL_CONFIG is not None:
         serve_args.extend(["--additional-config", ADDITIONAL_CONFIG])
     serve_args.extend(["--port", str(PORT)])

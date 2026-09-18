@@ -1112,3 +1112,39 @@ conflicting source still fails closed. Evidence records the exact resolution
 sources. This is a cross-version compatibility fix in the plugin, not an
 upstream framework modification. Next immutable result root:
 /cache/cch/dasc-qwen36-ascend-20260915/ascend-block-scale-v12r25.
+
+## 2026-09-18 v12r25-v12r26 result and v12r27 graph-boundary control
+
+Commit `420c385` passed 196 software tests and fixed the native Ascend block
+scale lookup. v12r25 did not cross the experiment start boundary: the
+auto-restarted privileged `Maxon4ick_torch_910_dev` container triggered the
+strict unknown-scope admission guard. It is `not_run/resource_race`, not DASC
+numerical evidence.
+
+Commit `0cb6f84` added only an exact-name idle-container coexistence wrapper;
+live NPU4-7 PID ownership remained fail-closed. v12r26 reached readiness on
+physical NPU4-7 with one owned TP worker per card and no foreign device PID.
+The physical row gate passed: all four ranks, both state families, and both
+representative GDN layers had exact source-to-destination copies; source rows
+remained unchanged and destination rows changed after native execution. The
+strict numerical gate nevertheless failed. The short output was `OK,`, and
+the three deterministic long-prefix continuations were not identical. This is
+an all-state integration-correctness failure. Performance and E2E quality were
+not run. Immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/ascend-block-scale-idle-scope-v12r26`.
+
+A pinned-source audit rejects splitting causal-convolution and recurrent
+metadata into different row mappings. Ascend `gdn_attn_builder.py` derives both
+from the same gathered Mamba block table in align mode, while `gdn.py` consumes
+both against state tensors whose leading dimension is the allocated physical
+cache row. The next one-variable diagnostic therefore keeps the v12r26 plugin
+and physical-row mapping unchanged and changes only graph execution mode.
+`run_v12r27_eager_boundary_control.py` launches with `--enforce-eager`, omits
+the decode graph compilation contract, and writes a new immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/state-index-eager-boundary-v12r27`.
+
+Interpret v12r27 narrowly. Exact eager replay would localize the remaining
+defect to graph-captured metadata/state binding. Eager failure would close that
+route and keep localization in physical state semantics or cache lifecycle.
+Neither outcome is performance or GSM8K evidence. Do not alter pruning,
+retained-head selection, cache capacity, or serving workload in this control.
