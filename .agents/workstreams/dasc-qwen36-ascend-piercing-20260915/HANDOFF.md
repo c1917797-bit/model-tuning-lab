@@ -1462,3 +1462,50 @@ warnings; no NPU was mapped and historical artifacts remained read-only.
 Commit/push, exact live preflight, and the one-shot NPU run remain pending.
 Planned immutable root:
 `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu4-7-coexist-v12r35`.
+
+## 2026-09-18 v12r35 preflight and v12r36 active non-target guard
+
+The apparent NPU4-7 owner inside `combine-only-ep4_nk` was a separate TP4
+process group with `ASCEND_RT_VISIBLE_DEVICES=4,5,6,7`. Its original session
+leader was gone, both EngineCore groups had been reparented to the container's
+`sleep infinity`, Docker reported no live exec session, and the NPU4-7 group
+had no TCP connection. Under the operator's explicit authorization to clear
+NPU4-7, only process group `1198912` received TERM. The independent NPU0-3
+group was untouched. `npu-smi` then proved no process on NPU4-7 and an idle HBM
+floor of 2868-2869 MiB per card. The remaining zombies consume no NPU memory
+and stay confined to the foreign container init.
+
+The v12r35 preflight was then run with the exact Maxon container paused. It
+correctly failed closed before launch because the still-running
+`combine-only-ep4_nk` container is privileged, has no explicit Docker device
+mapping, and was not covered by the generic unknown-scope allowlist. The Maxon
+container was automatically unpaused in `finally`. The v12r35 result root is
+absent; no owned DASC container, plugin activation, numerical request,
+performance run, or quality run occurred. Keep this attempt classified as
+`not_run/resource_guard_before_launch`, not as algorithm evidence.
+
+v12r36 preserves the exact v12r35 DASC treatment and adds a narrow active
+non-target-container guard instead of stopping the live NPU0-3 service. At
+preflight it freezes all of the following for the exact
+`combine-only-ep4_nk` container: container id, pinned image id, start time,
+and the NPU-visible `(physical_device, host_pid)` identity. The container must
+own all and only NPU0-3 and no process on NPU4-7. Startup, post-readiness, and a
+0.5-second canary monitor repeat the check; any observation error, restart,
+PID drift, or device drift stops only the owned DASC container and records a
+resource-race artifact. The generic wildcard name exception is therefore not
+sufficient by itself.
+
+Focused v12r33-v12r36 tests passed 20/20. The complete no-device pinned
+v0.23.0 image suite passed 243/243 with source mounted read-only and the DASC
+result tree on tmpfs; only the selector manifest and exact model config were
+provided as inputs, so historical evidence remained untouched. A prior
+242-pass/1-fail invocation mounted historical results read-only; its only
+failure was an older test attempting to refresh a derived verdict and is not a
+product regression. The canonical tmpfs rerun is authoritative.
+
+After committing this preparation, run the v12r36 preflight with the exact
+Maxon container paused. If it passes, allow the controller to unpause Maxon,
+pause the exact container again, and run one physical canary. Do not run
+performance or GSM8K unless strict repeated replay passes. Planned immutable
+root:
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu4-7-active-nontarget-v12r36`.
