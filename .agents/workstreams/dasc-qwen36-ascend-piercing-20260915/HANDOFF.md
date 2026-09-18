@@ -1080,3 +1080,14 @@ and an exact sole `sleep infinity` process tree. The service is launched
 with per-exec `ASCEND_RT_VISIBLE_DEVICES=4,5,6,7`; every startup NPU PID must
 still belong to that container, and cleanup stops it. This is an experiment
 harness workaround only and is not part of the DASC deployable plugin.
+
+The existing-container workaround above was prepared and software-tested but
+was not used for an NPU experiment. A competing control run and then a
+treatment run repeatedly entered `alltoall-dedup-ep4_nk` and occupied all of
+physical NPU4-7. The operator had explicitly authorized terminating such
+occupants; their exact workload was terminated, and the container was
+subsequently stopped without deletion. Stopping it released enough dockerd
+mount budget for a fresh no-device v0.23 container to start successfully.
+Therefore v12r24 reverted to the safer dedicated-container design with exact
+physical 4-7 mappings. No shared-container mount injection, rename, or NPU
+service launch occurred.

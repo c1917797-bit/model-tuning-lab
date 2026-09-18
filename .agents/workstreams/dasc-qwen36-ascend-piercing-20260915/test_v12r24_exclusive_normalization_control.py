@@ -17,8 +17,9 @@ def test_v12r24_has_distinct_immutable_identity():
     assert trial.controller.RESULT.name == (
         "kernel-block-normalization-exclusive-v12r24"
     )
-    assert trial.controller.CONTAINER == "alltoall-dedup-ep4_nk"
-    assert trial.REUSED_CONTAINER_ID.startswith("fd2be986b54d")
+    assert trial.controller.CONTAINER == (
+        "dasc_qwen36_kernel_normalization_v12r24_20260918"
+    )
     assert (
         trial.controller.PLUGIN_MODE
         == "physical-cache-native-all-heads-state-index"
@@ -29,27 +30,3 @@ def test_v12r24_keeps_v12r23_identity_capture():
     result = trial.trial.trial.trial.process_identity(999999999)
     assert result["pid"] == 999999999
     assert result["vanished_before_identity_capture"] is True
-
-
-def test_reuse_identity_rejects_non_quiescent_process_tree(monkeypatch):
-    item = {
-        "Id": trial.REUSED_CONTAINER_ID,
-        "Image": trial.controller.IMAGE_ID,
-        "State": {"Running": True},
-        "HostConfig": {"Privileged": True, "Devices": []},
-        "Mounts": [
-            {
-                "Source": "/cache",
-                "Destination": "/cache",
-                "RW": True,
-            }
-        ],
-    }
-
-    def fake_run(args, **_kwargs):
-        assert args[1:3] == ["top", trial.controller.CONTAINER]
-        return "PID PPID CMD\n1 0 sleep infinity\n2 1 python foreign.py\n"
-
-    monkeypatch.setattr(trial.controller, "run", fake_run)
-    blockers = trial._reused_container_identity_blockers(item)
-    assert any("not quiescent" in blocker for blocker in blockers)
