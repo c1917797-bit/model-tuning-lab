@@ -1044,3 +1044,39 @@ v12r23 preserves the same algorithm and fail-closed ownership rule but records
 `/proc/<pid>/status`, command line, cgroup, and executable for any unowned
 target-card PID before aborting. Its immutable result root is
 `/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-race-guard-v12r23`.
+
+## 2026-09-18 v12r23 attributed startup race and v12r24 preparation
+
+v12r23 again terminated before readiness, but its enriched evidence closed the
+attribution gap. Foreign host PID 3277916 was
+`python3 /tmp/opencode/repro_foreach.py`, with cgroup
+`/docker/321c36f70aac...`, executable
+`/usr/local/python3.12.13/bin/python3.12`, and exact container identity
+`Maxon4ick_torch_910_dev`. It appeared on physical NPU4. Therefore the event
+was a real foreign claimant, not an owned vLLM multiprocessing PID omitted by
+`docker top`. The authoritative v12r23 status remains
+`not_run/resource_race`; no numerical request, performance test, or quality
+test ran.
+
+The operator explicitly authorized stopping containers that occupy physical
+NPU4-7. A fresh audit found NPU4-7 process-free and NPU0-3 still occupied by
+an unrelated service. The exact proven interfering container was stopped
+without deletion and verified as `exited false 0`; NPU0-3 and all other
+containers were left untouched. v12r24 keeps the v12r23 algorithm and strict
+fail-closed gates, changes only the immutable result root and container
+identity, and must be launched with only the still-running idle
+`alltoall-dedup-ep4_nk` allowlisted. Result root:
+`/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-exclusive-v12r24`.
+
+Before v12r24 launch, Docker container creation failed with ENOSPC despite
+about 912 GiB free and 3% inode use. Kernel evidence identified the real
+cause: dockerd's mount namespace had approximately 98,486 mounts against the
+vendor kernel `mount-max=100000`, while the v0.23 image required about 1,514
+additional mounts. Restarting Docker would risk the unrelated NPU0-3 service.
+v12r24 therefore uses a fail-closed existing-container path, not a relaxed
+resource gate. It accepts only exact container ID `fd2be986...`, exact pinned
+image ID, a writable `/cache` bind, privileged/no-explicit-device layout,
+and an exact sole `sleep infinity` process tree. The service is launched
+with per-exec `ASCEND_RT_VISIBLE_DEVICES=4,5,6,7`; every startup NPU PID must
+still belong to that container, and cleanup stops it. This is an experiment
+harness workaround only and is not part of the DASC deployable plugin.
