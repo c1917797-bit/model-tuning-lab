@@ -1208,3 +1208,37 @@ and the remaining defect stays inside DASC physical-state/cache-lifecycle
 semantics. If v12r29 fails, the eager branch is inconclusive and v12r26 remains
 the authoritative graph-mode DASC failure against the exact graph-mode v12r13
 dense control. Neither outcome is performance or GSM8K evidence.
+
+## 2026-09-18 v12r29 matched dense eager result
+
+v12r29 completed successfully on physical NPU4-7 from clean pushed commit
+`f2c4683`. Exact post-readiness ownership passed with one owned TP worker on
+each target card and no foreign target-card PID. All three long-prefix
+cache-hit replays returned exactly `VERIFIED`, used `finish_reason=stop`, had
+no reasoning output, and were byte-identical. The prefix-cache-hit counter
+increased by 3072 tokens. The first request took 76652.44754 ms while the two
+replays took 1153.42293 ms and 1155.0572 ms; these are diagnostic latencies,
+not a formal performance comparison.
+
+This closes the eager discriminator: eager execution itself is numerically
+sound under the matched dense control. Because v12r28 used the same eager
+execution mode and workload but failed only with DASC all-state integration,
+the remaining fault domain is DASC physical-state or cache-lifecycle semantics,
+not graph capture and not eager mode. Performance and GSM8K remain prohibited.
+
+Authoritative root and hashes:
+
+- root: `/cache/cch/dasc-qwen36-ascend-20260915/dense-eager-exact-prefix-control-v12r29`
+- `dense-eager-replay-control.json`: `e9d032771228a1fa9a178cfbe701ff7922757a0a6809f92a0ad4cf856bf1aafc`
+- `post-readiness-ownership.json`: `96a5d5a3dbbf4820d7ffdc9d4f969ce35448469d8e28e947bb5aea30e3a37d57`
+- `evidence.jsonl`: `95cc4f8d6e92eafc9ec07295727be7ba31860ce4d9a6df91c576f94f55dca667`
+- `artifacts.sha256.json`: `f19ca1244521302f769f7b1b16b6c527a1318b6cffe9dd98500ea992798c2050`
+
+The next bounded diagnostic is a v12r30 expansion of the exact first-resumed-
+token copy/native-boundary evidence from the current first/last representative
+layers to all 48 checkpoint-derived GDN layers, both state families, and all
+four TP ranks. It must keep the v12r28 algorithm, mapping, workload, and eager
+execution unchanged. The expected Cartesian gate is 4 ranks x 48 layers x 2
+state families = 384 exact copy keys, each with exactly one before/after native
+boundary pair. This is a one-off correctness diagnostic only; its host-transfer
+overhead must not be reported as serving performance.
