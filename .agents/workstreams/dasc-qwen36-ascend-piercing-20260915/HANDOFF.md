@@ -1168,3 +1168,43 @@ changes only the immutable result root and owned container name. Its root is
 It must still pass the same preflight and continuous ownership checks; do not
 allowlist transient `combine-*` containers. Interpret its numerical result
 with the same eager-vs-graph discriminator as v12r27.
+
+## 2026-09-18 v12r28 eager result and v12r29 dense-eager control
+
+v12r28 reached readiness on physical NPU4-7 with exact post-readiness
+ownership: one owned TP worker per card and no foreign device PID. The complete
+physical row gate passed on all four ranks, both state families, and both
+representative GDN layers. Sixteen exact copies matched sixteen before/after
+native-boundary pairs, source rows remained unchanged, destination rows
+changed, and the mapping covered all 48 checkpoint-derived GDN layers.
+
+The strict eager numerical gate failed. The short output was
+`OK,\n\n!$MOKET`; the three long-prefix continuations were not identical and
+were not exactly `VERIFIED`. Prefix-cache hits increased by 4608 tokens.
+Therefore graph capture is not sufficient to explain the treatment failure,
+but the discriminator is not yet closed because the prior exact dense control
+v12r13 used graph mode rather than eager mode. Performance and E2E quality
+remain prohibited. Authoritative hashes:
+
+- `physical-canary.json`: `a4201d9b8faa1d0956e1cf545ac77943bba1b4183378867311f783bca32fa17c`
+- `state-index-verdict.json`: `8e727298182db6f4185f944ab162cc67512e6bd5220153f4ff2d269154ddc8f2`
+- `branch-evidence-verdict.json`: `4fc87df30e0c9f9ce33ad788d9e0aa703146e70385e26bad5b987866a9927eb6`
+- `post-readiness-ownership.json`: `69a2bd13a7a9548d3a8f5e02861d614b9f3ac5c98735972d2b30c4610a06db80`
+- `evidence.jsonl`: `922a4c3721c2ae92cdb423e264368a66e77918f5740f317874e9e526dd7ac62a`
+
+v12r29 is the required matched dense eager control. It reuses the latest
+resource/ownership controller, changes the plugin mode to the same
+`compat-head256` dense treatment used by v12r13, keeps `--enforce-eager`, and
+requires three exact stopped `VERIFIED` responses plus a positive prefix-hit
+delta. DASC treatment-only allocation/row/branch verdicts are disabled while
+the latest resource guards remain active. Immutable root:
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-eager-exact-prefix-control-v12r29`.
+The pinned v0.23.0 image passed the complete 204-test DASC workstream/plugin
+suite with 14 upstream deprecation warnings; JSON parsing, `git diff --check`,
+and the 26-skill Maintainer Skill Tree validation also passed.
+
+Interpretation is fail-closed: if v12r29 passes, eager mode itself is cleared
+and the remaining defect stays inside DASC physical-state/cache-lifecycle
+semantics. If v12r29 fails, the eager branch is inconclusive and v12r26 remains
+the authoritative graph-mode DASC failure against the exact graph-mode v12r13
+dense control. Neither outcome is performance or GSM8K evidence.
