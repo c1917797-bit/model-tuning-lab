@@ -405,7 +405,11 @@ def test_state_index_normalizes_virtual_attention_blocks_before_copy_remap(
             self.input_batch = SimpleNamespace(
                 req_ids=["req-a"],
                 block_table=[
-                    SimpleNamespace(blocks_per_kv_block=12)
+                    SimpleNamespace(
+                        blocks_per_phys_block=12,
+                        physical_block_size=1536,
+                        logical_block_size=128,
+                    )
                 ],
             )
             self.requests = {
@@ -450,6 +454,10 @@ def test_state_index_normalizes_virtual_attention_blocks_before_copy_remap(
     representative = mapped["representative_layers"][0]
     assert mapped["copy_remap_active"] is True
     assert mapped["kernel_blocks_per_manager_block"] == 12
+    assert mapped["block_scale_sources"] == [
+        "blocks_per_phys_block",
+        "physical_block_size/logical_block_size",
+    ]
     assert representative["source_state_indices"] == [25]
     assert representative["normalized_source_state_indices"] == [2]
     assert representative["destination_state_indices"] == [3]
@@ -493,7 +501,11 @@ def test_state_index_normalizes_virtual_attention_blocks_without_copy(
             self.input_batch = SimpleNamespace(
                 req_ids=["req-a"],
                 block_table=[
-                    SimpleNamespace(blocks_per_kv_block=12)
+                    SimpleNamespace(
+                        blocks_per_phys_block=12,
+                        physical_block_size=1536,
+                        logical_block_size=128,
+                    )
                 ],
             )
             self.requests = {"req-a": SimpleNamespace()}
@@ -522,6 +534,32 @@ def test_state_index_normalizes_virtual_attention_blocks_without_copy(
 
     assert FakeRunner()._model_forward() == "normalized"
     assert observed_indices == [2]
+
+
+def test_block_scale_resolver_supports_upstream_name_and_geometry():
+    assert physical_patch._resolve_kernel_blocks_per_manager_block(
+        SimpleNamespace(blocks_per_kv_block=12)
+    ) == (12, ("blocks_per_kv_block",))
+    assert physical_patch._resolve_kernel_blocks_per_manager_block(
+        SimpleNamespace(
+            physical_block_size=1536,
+            logical_block_size=128,
+        )
+    ) == (12, ("physical_block_size/logical_block_size",))
+
+
+def test_block_scale_resolver_rejects_conflicting_sources():
+    with pytest.raises(
+        physical_patch.DascRuntimeUnsupported,
+        match="scale sources disagree",
+    ):
+        physical_patch._resolve_kernel_blocks_per_manager_block(
+            SimpleNamespace(
+                blocks_per_phys_block=12,
+                physical_block_size=1536,
+                logical_block_size=256,
+            )
+        )
 
 
 def test_state_index_lifecycle_records_physical_copy_rows(tmp_path):

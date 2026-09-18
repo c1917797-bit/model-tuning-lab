@@ -1091,3 +1091,24 @@ mount budget for a fresh no-device v0.23 container to start successfully.
 Therefore v12r24 reverted to the safer dedicated-container design with exact
 physical 4-7 mappings. No shared-container mount injection, rename, or NPU
 service launch occurred.
+
+## 2026-09-18 v12r24 native field mismatch and v12r25 plan
+
+The dedicated v12r24 launch passed physical NPU4-7 ownership and reached all
+four TP workers. It then failed closed during graph capture before readiness:
+the plugin requested upstream BlockTable.blocks_per_kv_block, while the pinned
+Ascend v0.23 vllm_ascend.worker.block_table.BlockTable exposes
+blocks_per_phys_block. The native implementation defines it as
+physical_block_size divided by logical_block_size; for the aggregate 1536/128
+layout this is exactly 12, matching the earlier raw-row 25 to manager-row 2
+analysis. No strict numerical request, performance test, or quality test ran.
+Evidence root:
+/cache/cch/dasc-qwen36-ascend-20260915/kernel-block-normalization-exclusive-v12r24.
+
+v12r25 resolves the ratio from both recognized field names and independently
+from physical/logical block geometry when available. Every available source
+must be positive and agree exactly; a missing, malformed, non-divisible, or
+conflicting source still fails closed. Evidence records the exact resolution
+sources. This is a cross-version compatibility fix in the plugin, not an
+upstream framework modification. Next immutable result root:
+/cache/cch/dasc-qwen36-ascend-20260915/ascend-block-scale-v12r25.

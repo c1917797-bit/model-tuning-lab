@@ -33,6 +33,70 @@ class DascRuntimeUnsupported(RuntimeError):
     pass
 
 
+def _resolve_kernel_blocks_per_manager_block(
+    manager_block_table: Any,
+) -> tuple[int, tuple[str, ...]]:
+    """Resolve the physical-manager to logical-kernel block ratio.
+
+    vLLM-Ascend v0.23 names this ratio 'blocks_per_phys_block' while
+    upstream vLLM block tables use 'blocks_per_kv_block'. Geometry is an
+    independent cross-version check when both physical and logical block
+    sizes are exposed. Conflicting sources fail closed.
+    """
+    candidates: dict[str, int] = {}
+    for attribute in (
+        "blocks_per_phys_block",
+        "blocks_per_kv_block",
+    ):
+        value = getattr(manager_block_table, attribute, None)
+        if value is None:
+            continue
+        try:
+            candidates[attribute] = int(value)
+        except (TypeError, ValueError) as error:
+            raise DascRuntimeUnsupported(
+                f"DASC aggregate cache block-id scale {attribute} is invalid"
+            ) from error
+
+    physical = getattr(manager_block_table, "physical_block_size", None)
+    logical = getattr(manager_block_table, "logical_block_size", None)
+    if physical is not None and logical is not None:
+        try:
+            physical_value = int(physical)
+            logical_value = int(logical)
+        except (TypeError, ValueError) as error:
+            raise DascRuntimeUnsupported(
+                "DASC aggregate cache block geometry is invalid"
+            ) from error
+        if (
+            physical_value < 1
+            or logical_value < 1
+            or physical_value % logical_value != 0
+        ):
+            raise DascRuntimeUnsupported(
+                "DASC aggregate cache block geometry is not exactly divisible"
+            )
+        candidates["physical_block_size/logical_block_size"] = (
+            physical_value // logical_value
+        )
+
+    if not candidates:
+        raise DascRuntimeUnsupported(
+            "DASC cannot resolve the aggregate cache block-id scale"
+        )
+    if any(value < 1 for value in candidates.values()):
+        raise DascRuntimeUnsupported(
+            "DASC aggregate cache block-id scale must be positive"
+        )
+    scales = set(candidates.values())
+    if len(scales) != 1:
+        raise DascRuntimeUnsupported(
+            "DASC aggregate cache block-id scale sources disagree: "
+            + repr(candidates)
+        )
+    return scales.pop(), tuple(sorted(candidates))
+
+
 def _install_head256_prefill_fallback_patch(
     config: DascConfig, device_operator: Any, device_utils: Any
 ) -> None:
@@ -1070,17 +1134,14 @@ def _install_physical_cache_patch(
             is_dummy = getattr(self, "_mst_dasc_dummy_scope", False)
             try:
                 manager_block_table = self.input_batch.block_table[0]
-                kernel_blocks_per_manager_block = int(
-                    manager_block_table.blocks_per_kv_block
-                )
             except (AttributeError, IndexError, TypeError) as error:
                 raise DascRuntimeUnsupported(
                     "DASC cannot resolve the aggregate cache block-id scale"
                 ) from error
-            if kernel_blocks_per_manager_block < 1:
-                raise DascRuntimeUnsupported(
-                    "DASC aggregate cache block-id scale must be positive"
-                )
+            (
+                kernel_blocks_per_manager_block,
+                block_scale_sources,
+            ) = _resolve_kernel_blocks_per_manager_block(manager_block_table)
             originals = []
             boundary_rows = []
             mapping_evidence = []
@@ -1204,6 +1265,9 @@ def _install_physical_cache_patch(
                                 "kernel_blocks_per_manager_block": (
                                     kernel_blocks_per_manager_block
                                 ),
+                                "block_scale_sources": list(
+                                    block_scale_sources
+                                ),
                                 "metadata_pointer": int(
                                     remapped_metadata.non_spec_state_indices_tensor.data_ptr()
                                 ),
@@ -1276,6 +1340,7 @@ def _install_physical_cache_patch(
                         kernel_blocks_per_manager_block=(
                             kernel_blocks_per_manager_block
                         ),
+                        block_scale_sources=list(block_scale_sources),
                         representative_layers=[
                             mapping_evidence[0], mapping_evidence[-1]
                         ],
