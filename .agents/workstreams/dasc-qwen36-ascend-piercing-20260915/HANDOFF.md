@@ -1528,3 +1528,60 @@ The DASC treatment remains unchanged. Focused v12r33-v12r37 tests passed 23/23;
 the canonical no-device pinned-image suite passed 246/246 with source
 read-only and the result tree on tmpfs. Planned immutable root:
 `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu0-3-active-nontarget-v12r37`.
+
+## 2026-09-18 v12r37 physical result and v12r38 reshape control
+
+v12r37 passed its live preflight and launched the owned TP4 service on physical
+NPU0-3 while the frozen foreign TP4 service remained on all and only NPU4-7.
+Model loading, HCCL initialization, worker dispatch, and DASC activation all
+completed. Service readiness then failed before any request at the stock
+Ascend KV-cache reshape:
+
+`shape '[95, 1536, 1, 256]' is invalid for input of size 37720320`.
+
+The failure is deterministic on all four workers. The attention payload is
+1572864 bytes per page, while the dense Mamba-aligned reservation is 1588224
+bytes per page. The 15360-byte difference is exactly the logged 0.97% hybrid
+page padding. DASC's aggregate `UniformTypeKVCacheSpecs` representation causes
+Ascend v0.23 to allocate ordinary attention as separate K and V int8 buffers;
+each half therefore contains its logical payload plus 7680 bytes of reserved
+slack per block. The stock ordinary-attention path views the complete split as
+payload and fails. Dense upstream grouping instead reaches its dedicated
+attention-Mamba split path. Thus v12r37 rejects the naive dense-reservation
+control implementation, not DASC numerical semantics and not the resource
+isolation strategy. No numerical request, performance run, or GSM8K run
+occurred.
+
+Authoritative v12r37 evidence:
+
+- root: `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu0-3-active-nontarget-v12r37`
+- operation: `exec-0000000000001da5`
+- `service.log`: `84f1aee5042e11a447f40e97d26d47ebfacc70f6c9162f6bfcdf982ea2815829`
+- `controller-error.txt`: `029c849a1c0851b7a7320075c25ddd1a54fb9d436a1437c4cc31f152578bdcd2`
+- `evidence.jsonl`: `e116616d0d72fa4eb41037997be162853b082c0f009f3bb033a4098c175bd5d9`
+- `artifacts.sha256.json`: `9c11941f01becf8a732a47d98c6ddad0664ec782be50f0de75e6ef739ffe6dfe`
+
+v12r38 adds a plugin-owned compatibility layer only for the explicit
+`MST_DASC_PRESERVE_DENSE_PAGE_PADDING=1` diagnostic control. It accepts only
+equal-width, unquantized, contiguous one-dimensional int8 split K/V storage;
+unknown layouts fail closed. It retains the padded allocation and budget,
+exposes only each split's logical prefix to the stock reshape, temporarily
+restores the real attention page for the stock block-count calculation, then
+restores the authoritative padded spec. Storage pointers, byte geometry, and
+the resulting payload sizes are verified. The controller requires exactly
+four TP workers times sixteen attention layers for both prepared and adapted
+events before accepting the compatibility path.
+
+The focused v12r38/plugin suite passed 31/31. The complete fixed-image suite
+passed 251/251 with the repository and Qwen3.6 model mounted read-only, no NPU
+mapped, and pytest temporary state on tmpfs. Python compilation and
+`git diff --check` passed. Ruff is not installed in the pinned image, so no
+Ruff result is claimed. The next immutable root is
+`/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-npu0-3-v12r38`.
+
+The operator imposed a 24-hour piercing deadline on 2026-09-18. Run v12r38
+once after a fresh clean-pushed preflight. If it passes strict replay, proceed
+immediately to matched performance and required GSM8K evidence. If it fails,
+allow at most two evidence-driven corrective NPU iterations, then close the
+paper piercing with an explicit success, partial-mechanism, or failure verdict;
+do not continue open-ended exploration.

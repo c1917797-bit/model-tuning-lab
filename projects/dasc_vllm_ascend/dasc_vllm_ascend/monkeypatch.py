@@ -1598,6 +1598,234 @@ def _install_physical_cache_patch(
     qwen_gdn_class._mst_dasc_physical_installed = True
 
 
+def _install_split_padded_attention_reshape_patch(
+    config: DascConfig, model_runner_class: Any
+) -> None:
+    """Adapt Ascend's split K/V allocation when an attention page is padded.
+
+    The v0.23 Ascend runner splits an ordinary attention allocation into two
+    equal, contiguous int8 buffers before reshaping them as K and V.  When the
+    attention spec has ``page_size_padded``, each split contains its logical
+    payload plus half of the aggregate trailing slack.  The stock reshape path
+    views the complete split and therefore fails before service readiness.
+
+    This compatibility patch is deliberately limited to the dense-page-padding
+    diagnostic control.  It exposes only the logical prefix of each split to
+    the stock reshape path, temporarily restores the spec's real page size for
+    its block-count calculation, and then restores the authoritative padded
+    spec.  Unknown layouts fail closed.
+    """
+    if not getattr(config, "preserve_dense_page_padding", False):
+        return
+    if getattr(
+        model_runner_class,
+        "_mst_dasc_split_padded_attention_reshape_installed",
+        False,
+    ):
+        return
+
+    original = getattr(model_runner_class, "_reshape_kv_cache_tensors", None)
+    if original is None:
+        raise DascRuntimeUnsupported(
+            "DASC dense page-padding control requires Ascend KV-cache reshape"
+        )
+
+    @functools.wraps(original)
+    def reshape_split_padded_attention(
+        self, kv_cache_config, kv_cache_raw_tensors
+    ):
+        import torch
+        from vllm.v1.kv_cache_interface import AttentionSpec
+
+        layer_specs = self._get_layer_kv_cache_specs(kv_cache_config)
+        adjusted_raw_tensors = dict(kv_cache_raw_tensors)
+        plans = []
+        specs_to_restore = {}
+
+        for layer_name, layer_spec in layer_specs.items():
+            if not isinstance(layer_spec, AttentionSpec):
+                continue
+            padded_page_bytes = getattr(
+                layer_spec, "page_size_padded", None
+            )
+            if padded_page_bytes is None:
+                continue
+
+            raw_pair = kv_cache_raw_tensors.get(layer_name)
+            if not isinstance(raw_pair, tuple) or len(raw_pair) != 2:
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape requires split K/V buffers: "
+                    f"layer={layer_name} raw_type={type(raw_pair).__name__}"
+                )
+            raw_k, raw_v = raw_pair
+            if raw_k is None or raw_v is None:
+                raise DascRuntimeUnsupported(
+                    f"DASC padded attention reshape found a missing K/V buffer: {layer_name}"
+                )
+            if (
+                raw_k.dtype is not torch.int8
+                or raw_v.dtype is not torch.int8
+                or raw_k.ndim != 1
+                or raw_v.ndim != 1
+                or not raw_k.is_contiguous()
+                or not raw_v.is_contiguous()
+            ):
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape supports only contiguous "
+                    f"one-dimensional int8 K/V storage: layer={layer_name}"
+                )
+
+            head_size_v = getattr(
+                layer_spec, "head_size_v", layer_spec.head_size
+            )
+            dtype_size = torch.empty((), dtype=layer_spec.dtype).element_size()
+            expected_real_page_bytes = (
+                layer_spec.block_size
+                * layer_spec.num_kv_heads
+                * (layer_spec.head_size + head_size_v)
+                * dtype_size
+            )
+            real_page_bytes = layer_spec.real_page_size_bytes
+            if (
+                head_size_v != layer_spec.head_size
+                or real_page_bytes != expected_real_page_bytes
+            ):
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape does not support asymmetric "
+                    f"or quantized K/V pages: layer={layer_name} "
+                    f"real={real_page_bytes} expected={expected_real_page_bytes}"
+                )
+            if (
+                padded_page_bytes <= real_page_bytes
+                or padded_page_bytes % 2
+                or real_page_bytes % 2
+            ):
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape found invalid page geometry: "
+                    f"layer={layer_name} padded={padded_page_bytes} "
+                    f"real={real_page_bytes}"
+                )
+
+            allocated_bytes = raw_k.numel() + raw_v.numel()
+            if (
+                raw_k.numel() != raw_v.numel()
+                or allocated_bytes % padded_page_bytes
+            ):
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape found incompatible split "
+                    f"allocation: layer={layer_name} k={raw_k.numel()} "
+                    f"v={raw_v.numel()} padded_page={padded_page_bytes}"
+                )
+            num_blocks = allocated_bytes // padded_page_bytes
+            if num_blocks < kv_cache_config.num_blocks:
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape allocation has fewer blocks "
+                    f"than the manager: layer={layer_name} actual={num_blocks} "
+                    f"manager={kv_cache_config.num_blocks}"
+                )
+
+            logical_split_bytes = num_blocks * (real_page_bytes // 2)
+            if (
+                logical_split_bytes <= 0
+                or logical_split_bytes >= raw_k.numel()
+                or logical_split_bytes % dtype_size
+            ):
+                raise DascRuntimeUnsupported(
+                    "DASC padded attention reshape cannot isolate its logical "
+                    f"payload: layer={layer_name} logical={logical_split_bytes} "
+                    f"allocated={raw_k.numel()} dtype_size={dtype_size}"
+                )
+
+            trimmed_k = raw_k.narrow(0, 0, logical_split_bytes)
+            trimmed_v = raw_v.narrow(0, 0, logical_split_bytes)
+            if (
+                trimmed_k.data_ptr() != raw_k.data_ptr()
+                or trimmed_v.data_ptr() != raw_v.data_ptr()
+                or trimmed_k.storage_offset() != raw_k.storage_offset()
+                or trimmed_v.storage_offset() != raw_v.storage_offset()
+            ):
+                raise DascRuntimeUnsupported(
+                    f"DASC padded attention reshape unexpectedly copied storage: {layer_name}"
+                )
+            adjusted_raw_tensors[layer_name] = (trimmed_k, trimmed_v)
+            specs_to_restore[id(layer_spec)] = (
+                layer_spec,
+                padded_page_bytes,
+            )
+            plan = {
+                "layer": layer_name,
+                "num_blocks": num_blocks,
+                "manager_num_blocks": int(kv_cache_config.num_blocks),
+                "padded_page_bytes": padded_page_bytes,
+                "real_page_bytes": real_page_bytes,
+                "allocated_split_bytes": raw_k.numel(),
+                "logical_split_bytes": logical_split_bytes,
+                "trailing_slack_bytes_per_split": (
+                    raw_k.numel() - logical_split_bytes
+                ),
+                "storage_pointer_preserved": True,
+            }
+            plans.append(plan)
+            emit(
+                config.evidence_path,
+                "ascend_split_padded_attention_reshape_prepared",
+                mode=config.mode,
+                **plan,
+            )
+
+        for layer_spec, _ in specs_to_restore.values():
+            object.__setattr__(layer_spec, "page_size_padded", None)
+        try:
+            result = original(
+                self, kv_cache_config, adjusted_raw_tensors
+            )
+            for plan in plans:
+                reshaped = result.get(plan["layer"])
+                if not isinstance(reshaped, tuple) or len(reshaped) != 2:
+                    raise DascRuntimeUnsupported(
+                        "DASC padded attention reshape did not produce split "
+                        f"K/V views: layer={plan['layer']}"
+                    )
+                k_cache, v_cache = reshaped
+                expected_payload_bytes = plan["logical_split_bytes"]
+                if (
+                    k_cache.numel() * k_cache.element_size()
+                    != expected_payload_bytes
+                    or v_cache.numel() * v_cache.element_size()
+                    != expected_payload_bytes
+                ):
+                    raise DascRuntimeUnsupported(
+                        "DASC padded attention reshape produced an unexpected "
+                        f"payload size: layer={plan['layer']}"
+                    )
+        finally:
+            for layer_spec, padded_page_bytes in specs_to_restore.values():
+                object.__setattr__(
+                    layer_spec, "page_size_padded", padded_page_bytes
+                )
+
+        for plan in plans:
+            emit(
+                config.evidence_path,
+                "ascend_split_padded_attention_reshape_adapted",
+                mode=config.mode,
+                **plan,
+            )
+        return result
+
+    model_runner_class._reshape_kv_cache_tensors = (
+        reshape_split_padded_attention
+    )
+    model_runner_class._mst_dasc_split_padded_attention_reshape_installed = (
+        True
+    )
+    emit(
+        config.evidence_path,
+        "ascend_split_padded_attention_reshape_installed",
+        mode=config.mode,
+    )
+
+
 def _copy_temporal_nr(
     module: Any,
     state: Any,
@@ -1899,6 +2127,9 @@ def install(config: DascConfig) -> None:
         "physical-cache-native-all-heads",
         "physical-cache-native-all-heads-state-index",
     }:
+        _install_split_padded_attention_reshape_patch(
+            config, model_runner_v1.NPUModelRunner
+        )
         _install_head256_prefill_fallback_patch(
             config, device_op.DeviceOperator, device_utils
         )

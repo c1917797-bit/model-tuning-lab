@@ -7,7 +7,7 @@ import torch
 
 import dasc_vllm_ascend.monkeypatch as physical_patch
 from vllm.v1.attention.backends.registry import MambaAttentionBackendEnum
-from vllm.v1.kv_cache_interface import MambaSpec
+from vllm.v1.kv_cache_interface import FullAttentionSpec, MambaSpec
 
 
 @dataclass
@@ -339,6 +339,121 @@ def test_dense_page_padding_identity_control_preserves_reserved_geometry(
     assert bound["padding_bytes_per_page"] == 40
     assert bound["payload_fits_reserved_page"] is True
     assert bound["allocation_matches_spec"] is False
+
+
+def test_split_padded_attention_reshape_trims_global_slack_and_restores_spec(
+    tmp_path,
+):
+    spec = FullAttentionSpec(
+        block_size=2,
+        num_kv_heads=1,
+        head_size=2,
+        dtype=torch.float32,
+        page_size_padded=40,
+    )
+    raw_k = torch.arange(60, dtype=torch.int8)
+    raw_v = torch.arange(60, dtype=torch.int8)
+    observed = {}
+
+    class FakeRunner:
+        def _get_layer_kv_cache_specs(self, kv_cache_config):
+            return {"layers.0.self_attn": spec}
+
+        def _reshape_kv_cache_tensors(
+            self, kv_cache_config, kv_cache_raw_tensors
+        ):
+            active_k, active_v = kv_cache_raw_tensors["layers.0.self_attn"]
+            observed["page_size_padded"] = spec.page_size_padded
+            observed["k_numel"] = active_k.numel()
+            observed["v_numel"] = active_v.numel()
+            observed["k_ptr"] = active_k.data_ptr()
+            observed["v_ptr"] = active_v.data_ptr()
+            return {
+                "layers.0.self_attn": (
+                    active_k.view(torch.float32).view(3, 2, 1, 2),
+                    active_v.view(torch.float32).view(3, 2, 1, 2),
+                )
+            }
+
+    config = SimpleNamespace(
+        preserve_dense_page_padding=True,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads-state-index",
+    )
+    physical_patch._install_split_padded_attention_reshape_patch(
+        config, FakeRunner
+    )
+    result = FakeRunner()._reshape_kv_cache_tensors(
+        SimpleNamespace(num_blocks=3),
+        {"layers.0.self_attn": (raw_k, raw_v)},
+    )
+
+    assert observed == {
+        "page_size_padded": None,
+        "k_numel": 48,
+        "v_numel": 48,
+        "k_ptr": raw_k.data_ptr(),
+        "v_ptr": raw_v.data_ptr(),
+    }
+    assert spec.page_size_padded == 40
+    assert result["layers.0.self_attn"][0].shape == (3, 2, 1, 2)
+    events = [
+        json.loads(line)
+        for line in (tmp_path / "evidence.jsonl").read_text().splitlines()
+    ]
+    prepared = next(
+        row
+        for row in events
+        if row["event"]
+        == "ascend_split_padded_attention_reshape_prepared"
+    )
+    adapted = next(
+        row
+        for row in events
+        if row["event"]
+        == "ascend_split_padded_attention_reshape_adapted"
+    )
+    assert prepared["padded_page_bytes"] == 40
+    assert prepared["real_page_bytes"] == 32
+    assert prepared["trailing_slack_bytes_per_split"] == 12
+    assert adapted["logical_split_bytes"] == 48
+
+
+def test_split_padded_attention_reshape_rejects_unknown_raw_layout(tmp_path):
+    spec = FullAttentionSpec(
+        block_size=2,
+        num_kv_heads=1,
+        head_size=2,
+        dtype=torch.float32,
+        page_size_padded=40,
+    )
+
+    class FakeRunner:
+        def _get_layer_kv_cache_specs(self, kv_cache_config):
+            return {"layers.0.self_attn": spec}
+
+        def _reshape_kv_cache_tensors(
+            self, kv_cache_config, kv_cache_raw_tensors
+        ):
+            raise AssertionError("stock reshape must not see an unknown layout")
+
+    config = SimpleNamespace(
+        preserve_dense_page_padding=True,
+        evidence_path=tmp_path / "evidence.jsonl",
+        mode="physical-cache-native-all-heads-state-index",
+    )
+    physical_patch._install_split_padded_attention_reshape_patch(
+        config, FakeRunner
+    )
+    with pytest.raises(
+        physical_patch.DascRuntimeUnsupported,
+        match="requires split K/V buffers",
+    ):
+        FakeRunner()._reshape_kv_cache_tensors(
+            SimpleNamespace(num_blocks=3),
+            {"layers.0.self_attn": torch.zeros(120, dtype=torch.int8)},
+        )
+    assert spec.page_size_padded == 40
 
 
 def test_native_all_heads_state_index_tracks_copied_running_row(
