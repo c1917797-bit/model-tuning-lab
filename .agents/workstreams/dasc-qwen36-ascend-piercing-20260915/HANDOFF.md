@@ -1405,3 +1405,37 @@ in `finally`; it neither deletes nor reconfigures it. Its immutable root is
 `/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-paused-guard-v12r33`.
 Focused v12r31-v12r33 tests passed 14/14, and the complete pinned-image suite
 passed 228/228.
+
+## 2026-09-18 v12r34 NPU0-3 guarded-lane preparation
+
+The v12r33 controller had one pre-NPU defect that its earlier mock coverage did
+not expose: the base post-readiness ownership validator writes its verdict but
+returns `None`, while the v12r33 wrapper attempted to mutate that return value
+as a dictionary. The wrapper now reloads the written verdict when the base
+validator returns `None`, rejects any other non-mapping return, and has a
+regression test. Do not launch the older uncorrected v12r33 bytes.
+
+Physical NPU4-7 are currently occupied by the live `dias-cont-1` Qwen3.5
+service. Physical NPU0-3 have no device-side processes and remain at the idle
+HBM floor. v12r34 therefore preserves the exact v12r31-v12r33 dense-padding
+treatment and changes only the execution lane and resource-isolation policy:
+
+- physical NPU0-3 with a distinct cooperative lock;
+- a new immutable result root and owned container identity;
+- the exact Maxon container must remain paused and is unpaused in `finally`;
+- only the already-running `dias-cont-1` task may coexist on non-target NPU4-7;
+- its namespace/task/root-PID/status identity must remain stable;
+- any DIAS or other foreign PID on NPU0-3 fails closed;
+- after readiness, every NPU0-3 process must belong to the owned container and
+  per-card HBM growth is monitored continuously through the physical canary.
+
+The focused v12r30-v12r34 suite passed 27/27. The complete read-only pinned
+v0.23.0 image suite passed 235/235 with 14 upstream torch.jit deprecation
+warnings. Source and historical artifacts remained read-only; the result tree
+was a container tmpfs with only the immutable selector manifest and exact model
+config mounted as inputs. Maintainer Skill Tree validation passed all 26
+skills, task.json parsed, and `git diff --check` passed. Commit/push,
+preflight, and the one-shot NPU run remain pending. The planned immutable root is
+`/cache/cch/dasc-qwen36-ascend-20260915/dense-page-padding-npu0-3-coexist-v12r34`.
+This is still a correctness diagnostic. It cannot produce a performance or
+GSM8K claim unless the strict repeated-replay gate passes first.

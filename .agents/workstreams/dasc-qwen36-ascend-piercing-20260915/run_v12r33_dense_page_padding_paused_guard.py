@@ -148,6 +148,19 @@ _original_post_readiness = controller.validate_post_readiness_ownership
 def validate_post_readiness_with_paused_guard() -> dict:
     paused = require_paused_container("post_readiness")
     result = _original_post_readiness()
+    if result is None:
+        evidence_path = controller.RESULT / "post-readiness-ownership.json"
+        if not evidence_path.is_file():
+            raise RuntimeError(
+                "post-readiness ownership validator returned no result "
+                "and wrote no evidence"
+            )
+        result = json.loads(evidence_path.read_text(encoding="utf-8"))
+    if not isinstance(result, dict):
+        raise TypeError(
+            "post-readiness ownership validator must return a mapping "
+            "or write post-readiness-ownership.json"
+        )
     result["paused_unknown_scope_container"] = paused
     controller.atomic_json(
         controller.RESULT / "post-readiness-ownership.json", result
@@ -261,4 +274,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

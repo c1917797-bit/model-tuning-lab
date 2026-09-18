@@ -130,3 +130,32 @@ def test_restore_unpauses_only_exact_paused_container(monkeypatch, tmp_path):
     ]
     assert (tmp_path / "paused-container-restoration.json").is_file()
 
+
+def test_post_readiness_recovers_evidence_from_void_base_validator(
+    monkeypatch, tmp_path
+):
+    trial.controller.RESULT = tmp_path
+    (tmp_path / "post-readiness-ownership.json").write_text(
+        json.dumps({"ok": True, "physical_npus": [4, 5, 6, 7]}),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(trial, "_original_post_readiness", lambda: None)
+    monkeypatch.setattr(
+        trial,
+        "require_paused_container",
+        lambda phase: {"ok": True, "phase": phase},
+    )
+
+    result = trial.validate_post_readiness_with_paused_guard()
+
+    assert result["ok"] is True
+    assert result["paused_unknown_scope_container"] == {
+        "ok": True,
+        "phase": "post_readiness",
+    }
+    stored = json.loads(
+        (tmp_path / "post-readiness-ownership.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert stored == result
