@@ -19,12 +19,17 @@ trial = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(trial)
 
 controller = trial.controller
+controller.NPUS = (4, 5, 6, 7)
+controller.LOCK = Path(
+    "/cache/cch/dasc-qwen36-ascend-20260915/controllers/"
+    "dasc-qwen36-npu4-7.lock"
+)
 controller.RESULT = Path(
     "/cache/cch/dasc-qwen36-ascend-20260915/"
-    "padded-attention-reshape-npu0-3-v12r38"
+    "padded-attention-reshape-npu4-7-v12r38"
 )
 controller.CONTAINER = (
-    "dasc_qwen36_padded_attention_reshape_npu0_3_v12r38_20260918"
+    "dasc_qwen36_padded_attention_reshape_npu4_7_v12r38_20260918"
 )
 
 EXPECTED_TP_WORKERS = 4

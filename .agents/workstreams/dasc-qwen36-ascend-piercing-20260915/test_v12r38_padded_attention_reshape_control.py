@@ -48,12 +48,12 @@ def _valid_rows() -> list[dict]:
 
 
 def test_v12r38_targets_idle_npu_lane_with_immutable_result_identity():
-    assert trial.controller.NPUS == (0, 1, 2, 3)
+    assert trial.controller.NPUS == (4, 5, 6, 7)
     assert trial.controller.RESULT.name == (
-        "padded-attention-reshape-npu0-3-v12r38"
+        "padded-attention-reshape-npu4-7-v12r38"
     )
     assert trial.controller.CONTAINER == (
-        "dasc_qwen36_padded_attention_reshape_npu0_3_v12r38_20260918"
+        "dasc_qwen36_padded_attention_reshape_npu4_7_v12r38_20260918"
     )
 
 
