@@ -57,6 +57,12 @@ Reverse-plan every 24-hour slot from its terminal deadline:
 The current latest-finish schedule starts at 2026-09-19T19:52:15Z. An earlier
 terminal decision pulls every later slot forward; it never creates idle time.
 
+Activation override recorded on 2026-09-19: after the MXR no-go, the user
+explicitly selected KVBuffer as the second paper from the original operator
+list. It activated at `2026-09-19T21:58:01Z` and closed no-go at
+`2026-09-19T22:06:59Z` after the real-trace opportunity bound failed.
+DeltaLog is now the frontier.
+
 | Slot | Paper | Latest window (UTC) |
 | ---: | --- | --- |
 | 1 | Fast and Stable Triangular Inversion | 2026-09-19T19:52:15Z to 2026-09-20T19:52:15Z |
@@ -88,7 +94,7 @@ terminal decision pulls every later slot forward; it never creates idle time.
 | 1 | [Fast and Stable Triangular Inversion for Delta-Rule Linear Transformers](https://arxiv.org/abs/2605.21325) | 95 | **95** | Best immediate fit: Qwen3.5/3.6, Huawei NPU evidence, complete official sources, and reported inversion-kernel gain up to 4.3x. |
 | 2 | [DeltaLog: Deferred Materialization of Recurrent States](https://arxiv.org/abs/2608.15533) | 91 | **87** | Strongest decode route; aims to preserve model semantics and reports 1.08-1.20x TPOT on Qwen/GDN, directly relevant to fixed 1024-token output. |
 | 3 | [When Good Enough Is Optimal](https://arxiv.org/abs/2606.06034) | 84 | **79** | Candidate B for the same inversion campaign: truncated Neumann plus residual correction, reported up to 5x kernel gain and 20% lower decode-layer overhead; Snapdragon NPU evidence and approximation add transfer and quality risk. |
-| 4 | [KVBuffer: IO-aware Serving for Linear Attention](https://arxiv.org/abs/2605.19049) | 89 | **76** | High decode potential and reported linear-attention latency reduction up to 45.17%, but requires state-lifecycle, scheduler, and graph-capture changes; reference stack is SGLang/Qwen3-Next. |
+| 4 | [KVBuffer: IO-aware Serving for Linear Attention](https://arxiv.org/abs/2605.19049) | 89 | **terminal no-go** | For the current non-speculative objective, recurrent GDN is only 4.52%-4.84% of decode NPU time. Perfect removal cannot reach 1.10x; speculative/MTP gains remain out of scope. |
 | 5 | [HYPIC: Accelerating Hybrid-Attention LLM Serving with Position-Independent Caching](https://arxiv.org/abs/2607.01299) | 92 | **72** | Mature mechanism and prior positive Ascend evidence, but benefit depends on segmented reuse/RAG workload and is limited as a generic dense/PDC increment. |
 | 6 | [Sparse Prefix Caching for Hybrid and Recurrent LLM Serving](https://arxiv.org/abs/2605.05219) | 82 | **68** | Exact recovery and low quality risk without recurrent-kernel changes, but benefit depends on real shared-prefix distribution rather than generic decode. |
 | 7 | [Scaling State-Space Models on Multiple GPUs with Tensor Parallelism](https://arxiv.org/abs/2602.21144) | 77 | **55** | Strong multi-GPU idea, but NVIDIA Mamba/Falcon-Mamba/Zamba evidence; Qwen3.6 TP4 already has related sharding, so incremental value must be re-proven. |
@@ -100,7 +106,7 @@ terminal decision pulls every later slot forward; it never creates idle time.
 
 Only the frontier campaign may consume implementation/NPU budget.
 
-1. **Fast and Stable Triangular Inversion (current frontier).**
+1. **Fast and Stable Triangular Inversion (terminal no-go).**
    Use the official Ascend sources first. Candidate A is the stable MXR path.
    Treat 2606.06034 as candidate B inside the same bounded operator campaign,
    without inheriting candidate A's identity or evidence. Before substantial
@@ -108,13 +114,12 @@ Only the frontier campaign may consume implementation/NPU budget.
    triangular-inversion share of about 12% or more. If that bound fails, a
    reported 4.3x local speedup cannot plausibly deliver 10% end to end; stop
    polishing the isolated solve.
-2. **DeltaLog (next independent frontier).**
-   Activate when the inversion campaign reaches a no-go or terminal result.
-   Gate batch/concurrency transfer explicitly because the paper's favorable
-   region is reported mainly at batch 64-256.
-3. **KVBuffer.**
-   Enter only if the first two routes cannot reach the contract and a source
-   map proves a plugin-safe state-lifecycle/scheduler/graph seam.
+2. **KVBuffer (terminal no-go for the current objective).**
+   The faithful path's perfect-removal bound is only about 1.05x. Reopen only
+   if speculative decoding is authorized or the runtime bottleneck changes.
+3. **DeltaLog (current frontier).**
+   Gate batch/concurrency transfer because its favorable region is mainly
+   batch 64-256.
 4. **Conditional cache/system routes.**
    HYPIC requires a segmented-reuse/RAG workload. Sparse Prefix Caching requires
    a measured shared-prefix distribution. They are not generic decode claims.

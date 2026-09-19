@@ -205,6 +205,19 @@ each paper considered.
   trends: non-16-aligned recurrent-state copy-out corruption was a runtime-path
   failure, while the aligned Dk64 speed/quality trade-off was valid evidence for
   only that derivative no-training configuration.
+- KVBuffer showed that an IO-amortization paper must be split by serving mode.
+  A speculative-verification capacity gain does not transfer to a
+  non-speculative objective. First measure the exact state-update share in a
+  real trace, apply the paper's local reduction, and calculate perfect deletion.
+  If perfect deletion cannot reach acceptance, stop before implementation.
+- For a self-evolved derivative, deliberately over-attribute all plausibly
+  removable preparation work and calculate the reduction required to hit the
+  target. Needing above about 90% removal when mandatory gating or
+  normalization is included is a strong no-go; a microbenchmark cannot repair
+  that service opportunity.
+- When a paper describes custom code but exposes no paper-linked source, label
+  an equation-derived migration `faithful-port`, not `paper-exact`, and record
+  the source-search date.
 
 ## Do not do
 

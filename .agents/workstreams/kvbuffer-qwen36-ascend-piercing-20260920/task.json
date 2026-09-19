@@ -1,0 +1,75 @@
+{
+  "task_id": "kvbuffer-qwen36-ascend-piercing-20260920",
+  "title": "KVBuffer Qwen3.6-27B Ascend piercing",
+  "branch": "work/kvbuffer-qwen36-ascend-piercing-20260920",
+  "status": "terminal_no_go_opportunity_bound_below_target",
+  "decision": "no-go",
+  "activated_at_utc": "2026-09-19T21:58:01Z",
+  "deadline_utc": "2026-09-20T21:58:01Z",
+  "paper": {
+    "title": "KVBuffer: IO-aware Serving for Linear Attention",
+    "arxiv": "2605.19049v1",
+    "source": "https://arxiv.org/abs/2605.19049",
+    "reference_stack": "SGLang v0.5.10, Qwen3-Next-80B-A3B-Instruct, four NVIDIA L40S GPUs",
+    "official_code_status": "No paper-linked public implementation or repository was found at activation time; do not call a target implementation paper-exact."
+  },
+  "target": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "runtime": "vLLM-Ascend v0.23.0",
+    "runtime_commit": "5cb98caaadeff42b5b62b996e34bb2aaa29d20fd",
+    "hardware": "Ascend 910B4",
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "tensor_parallel_size": 4,
+    "delivery": "disabled-by-default plugin monkeypatch with version-independent core and thin adapters"
+  },
+  "acceptance": {
+    "performance": "at least 10 percent end-to-end output-throughput gain versus matched control",
+    "output_tokens": 1024,
+    "quality": "no final LongBench-v2 or GSM8K regression; thinking disabled, max_tokens 2048, normal EOS",
+    "report": [
+      "throughput",
+      "TTFT",
+      "TPOT"
+    ]
+  },
+  "scope": {
+    "primary": "non-speculative chunkwise decode buffering for Gated DeltaNet",
+    "excluded": [
+      "MTP",
+      "speculative decoding",
+      "retraining",
+      "quantization"
+    ],
+    "algorithm_identity": "faithful-port only if paper equations and state lifecycle are preserved; any wider Ascend fusion is a derivative"
+  },
+  "current_evidence": {
+    "profile": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/baseline/profile-summary.v1.json",
+    "profile_sha256": "b3bddd3b1a8b96571f20c59d801aa21da3da673f875f86a3b04318afbdb480a8",
+    "direct_recurrent_decode_share_percent_range": [
+      4.520070493286582,
+      4.840458923491208
+    ],
+    "note": "Diagnostic real-NPU share, not end-to-end performance."
+  },
+  "terminal_result": {
+    "decided_at_utc": "2026-09-19T22:06:59Z",
+    "classification": "paper_mechanism_fits_but_non_speculative_service_opportunity_is_below_acceptance",
+    "artifact": "/cache/cch/kvbuffer-qwen36-ascend-20260920/opportunity-gate-v1/opportunity-audit.json",
+    "artifact_sha256": "87222d251b9c625114d27ef5882d38c32e9cbdc5d4fd431bba1e023843835ee4",
+    "paper_reduction_speedup_bound_range": [1.020842707274462, 1.0223530887801882],
+    "perfect_faithful_speedup_bound_range": [1.0473405302731058, 1.0508667745633562],
+    "aggressive_derivative_fraction_percent_range": [9.939216426330361, 10.062901427008539],
+    "derivative_reduction_required_percent_range": [90.34083417044467, 91.46504815838415],
+    "reason": "The faithful non-speculative path cannot reach 1.10x even if its recurrent operator is removed entirely. An intentionally over-attributed derivative would need to eliminate more than 90 percent of a scope containing mandatory work."
+  },
+  "next_actions": [
+    "Do not implement or rerun KVBuffer unchanged for the current non-speculative 1024-token objective.",
+    "Activate DeltaLog as the next paper and gate its batch/concurrency transfer against the same real decode profile.",
+    "Reopen KVBuffer only if speculative decoding is explicitly authorized or the runtime profile materially changes."
+  ]
+}
