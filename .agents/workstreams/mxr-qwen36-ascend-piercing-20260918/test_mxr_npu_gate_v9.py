@@ -23,6 +23,7 @@ def test_v9_command_is_correctness_only_and_npu4_only():
 
 
 def test_v9_configuration_and_identity():
+    SPEC.loader.exec_module(GATE)
     GATE.configure_gate()
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v9")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v9_20260919"

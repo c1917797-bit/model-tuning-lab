@@ -31,7 +31,7 @@ def adapter_for_version(version: str) -> str:
     minor = int(match.group(1))
     if minor == 23:
         return "v023"
-    if minor >= 27:
+    if minor == 27:
         return "v027"
     raise RuntimeError(f"unsupported vLLM-Ascend version: {version!r}")
 

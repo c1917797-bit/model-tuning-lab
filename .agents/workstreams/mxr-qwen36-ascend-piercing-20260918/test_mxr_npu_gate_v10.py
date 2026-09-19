@@ -23,6 +23,7 @@ def test_v10_command_is_all_phase_and_npu4_only():
 
 
 def test_v10_configuration_and_identity():
+    SPEC.loader.exec_module(GATE)
     GATE.configure_gate()
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v10")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v10_20260919"

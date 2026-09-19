@@ -22,5 +22,6 @@ def test_v7_command_uses_platform_order_probe():
 
 
 def test_v7_immutable_identity():
+    SPEC.loader.exec_module(GATE)
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v7")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v7_20260919"

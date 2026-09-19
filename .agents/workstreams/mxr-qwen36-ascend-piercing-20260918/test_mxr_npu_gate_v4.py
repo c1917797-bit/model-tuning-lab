@@ -24,5 +24,8 @@ def test_v4_command_keeps_canary_and_probe_in_one_device_scoped_container():
 
 
 def test_v4_uses_new_immutable_identity():
+    # Later gate modules mutate the shared v1 controller during collection.
+    # Re-execute this wrapper so a combined pytest run observes v4 identity.
+    SPEC.loader.exec_module(GATE)
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v4")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v4_20260919"

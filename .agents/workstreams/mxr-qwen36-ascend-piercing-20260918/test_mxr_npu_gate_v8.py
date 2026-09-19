@@ -24,6 +24,7 @@ def test_v8_command_is_candidate_only_correctness_gate():
 
 
 def test_v8_immutable_identity():
+    SPEC.loader.exec_module(GATE)
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v8")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v8_20260919"
 

@@ -22,5 +22,6 @@ def test_v5_command_uses_initialized_single_container_probe():
 
 
 def test_v5_immutable_identity():
+    SPEC.loader.exec_module(GATE)
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v5")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v5_20260919"

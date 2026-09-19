@@ -22,5 +22,6 @@ def test_v6_command_uses_complete_worker_bootstrap_probe():
 
 
 def test_v6_immutable_identity():
+    SPEC.loader.exec_module(GATE)
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v6")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v6_20260919"

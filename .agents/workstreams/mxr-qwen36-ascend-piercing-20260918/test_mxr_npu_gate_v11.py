@@ -24,6 +24,7 @@ def test_v11_command_uses_only_physical_npu4():
 
 
 def test_v11_identity_and_dependency_are_immutable():
+    SPEC.loader.exec_module(GATE)
     GATE.configure_gate()
     assert str(GATE.gate.RESULT).endswith("/npu-gate-v11")
     assert GATE.gate.CONTAINER == "mxr_qwen36_npu_gate_v11_20260920"
