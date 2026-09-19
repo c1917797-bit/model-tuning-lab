@@ -167,6 +167,20 @@ reusable paper-to-Ascend lessons (method parity, runtime seam, operator/CANN
 adaptation, numerical gates, attribution, failures, and portability boundary)
 into the maintainer skill as well as this workstream evidence.
 
+A read-only audit at `2026-09-19T20:07:43Z` found a non-Docker containerd
+task that earlier Docker-only checks did not cover. Namespace `dias` contains
+`dias-cont-1`, created at `2026-09-18T13:20:32Z` and still running
+`sleep infinity`. Its OCI specification exposes `/dev/davinci0-7`, manager,
+SVM, and HDC devices and sets both visible-device variables to `0,1,2,3,4,5,6,7`;
+it also sets `ASCEND_RUNTIME_OPTIONS=NODRV`. It predates the first MXR
+failure and is therefore a plausible UDA namespace owner, but device
+declaration is not proof of causality. At the same observation, an external
+TP4 workload was active on physical NPU0-3 while NPU4-7 were process-free and
+at idle HBM. Do not mutate `dias-cont-1` without explicit user approval. The
+next discriminating action, if approved, is stop-but-do-not-delete followed by
+exactly one unchanged non-privileged canary; a surviving conflict rules it out
+as a sufficient cause.
+
 ## Stop rule
 
 Stop this workstream and advance to the next portfolio item, DeltaLog, if
