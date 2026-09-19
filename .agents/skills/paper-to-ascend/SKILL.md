@@ -82,6 +82,35 @@ use `ascend-cannbot-profiler` before changing low-level code.
 This skill chooses whether the paper deserves an experiment; the Ascend skills
 make the experiment reproducible and evidence-bound.
 
+## Portfolio piercing mode
+
+When the user supplies several papers for one fixed deployment objective, treat
+the list as a sequential evidence portfolio rather than ten simultaneous
+implementations:
+
+1. Freeze one weighted scoring rubric and one end-to-end acceptance contract.
+2. Store the dated scores, evidence boundaries, current order, and turn rules in
+   a reference linked from this skill. Scores are priors for allocating
+   experiment time, not measured performance claims.
+3. Pierce only the current frontier paper. Its workstream must reach a scoped
+   terminal decision or an explicit environment block before the next paper
+   becomes active.
+4. Apply cheap gates in order: architecture and method-chain fit, official-source
+   identity, real runtime seam, measured bottleneck share or upper bound,
+   target-NPU numerical correctness, target-shape timing, matched service A/B,
+   then final quality. A failed early gate prevents expensive later work.
+5. Re-score after each terminal result or material upstream/runtime change.
+   Preserve the old score and reason for movement; never silently reorder the
+   portfolio.
+6. A related paper may be evaluated as an alternate candidate inside the same
+   bounded campaign, but it does not inherit the first candidate's correctness,
+   performance, or paper-identity evidence.
+
+For the current Qwen3.6-27B Ascend portfolio and its ten-paper queue, read
+[references/qwen36-ascend-paper-portfolio.md](references/qwen36-ascend-paper-portfolio.md).
+Use it only for that declared objective; do not make its scores a universal
+paper-quality ranking.
+
 ## Workflow
 
 1. Read `AGENTS.md`, `.agents/HANDOFF.md`, and any active branch-local

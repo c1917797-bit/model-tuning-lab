@@ -1,0 +1,39 @@
+schema: mst-practice-iteration/v1
+id: qwen36-paper-portfolio-20260919
+repository: model-tuning-lab
+status: done
+date: 2026-09-19
+validated_commit: 5c507d7afd3d706794343eec2a539a87c658afd8
+
+stage_goal: Preserve the ten-paper Qwen3.6 Ascend piercing portfolio and the latest UDA canary lesson as reusable maintainer guidance.
+
+changes:
+  - type: skill-tree
+    description: Add a sequential, evidence-gated portfolio mode and its dated ten-paper scoring reference.
+    files:
+      - .agents/skills/paper-to-ascend/SKILL.md
+      - .agents/skills/paper-to-ascend/references/qwen36-ascend-paper-portfolio.md
+  - type: skill-tree
+    description: Record the single-canary stopping rule after an approved suspected-container stop.
+    files:
+      - .agents/skills/ascend-npu-environment-orientation/SKILL.md
+  - type: docs
+    description: Preserve the Maxon stop and surviving UDA conflict in the active MXR handoff.
+    files:
+      - .agents/workstreams/mxr-qwen36-ascend-piercing-20260918/HANDOFF.md
+
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check
+  - python -c 'import pathlib, yaml; yaml.safe_load(pathlib.Path(".agents/evals/practice-iterations/qwen36-paper-portfolio-20260919.yaml").read_text())'
+
+lessons_ingested:
+  - lesson: A paper portfolio needs one fixed weighted rubric, sequential frontier ownership, early upper-bound gates, and explicit re-scoring rather than parallel open-ended implementations.
+    destination: paper-to-ascend
+    severity: high
+  - lesson: If one approved canary still reports the same UDA conflict after a suspected privileged container is stopped, stop retrying and require separately authorized driver-namespace recovery.
+    destination: ascend-npu-environment-orientation
+    severity: high
+  - lesson: The planning skill's example schema can drift from the repository validator; the validator is authoritative and the skill example needs a separate corrective checkpoint.
+    destination: mst-practice-iteration-planning
+    severity: medium

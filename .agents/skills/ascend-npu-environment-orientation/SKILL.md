@@ -49,6 +49,16 @@ proof that the intended NPU path executed.
    reservation even when `npu-smi` reports no process, HBM is idle, and `lsof`
    reports no ordinary device-file handle. Do not misclassify that state as an
    idle, usable card or as an algorithm failure.
+   If the operator explicitly approves stopping a suspected privileged
+   all-device container, stop but do not delete or automatically restart it,
+   verify its terminal state, and run exactly one unchanged non-privileged
+   canary. If the same UDA conflict survives, the live-container hypothesis is
+   not sufficient: preserve the stopped container and failed canary, do not
+   repeat the matrix, and require separate explicit authorization plus a
+   rollback plan before any driver namespace recovery, NPU reset, or service
+   restart. The suspected container may still have contributed stale state, so
+   record the conclusion as discriminating evidence rather than proof of the
+   original namespace owner.
 8. Compare with the previous baseline. If any material field drifted, declare
    the old and new measurements non-comparable until re-baselined.
 9. Commit and push the orientation or re-baseline stage.

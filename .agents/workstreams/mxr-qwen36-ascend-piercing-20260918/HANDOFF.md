@@ -41,14 +41,24 @@ process. `lsof` showed no process holding the target device files. This proves
 that the blocker is an Ascend UDA device-namespace reservation, not visible
 compute/HBM occupancy and not MXR code.
 
-The only remaining running container is `Maxon4ick_torch_910_dev`. It is
-privileged, can see every host device, has no current NPU process, and still
-contains an interactive `opencode` process. It may own the UDA namespace, or
-the driver may retain stale namespace state; that distinction is not yet
-proved. Do not stop it without explicit user approval. The next discriminating
-test is: stop but do not delete that container, run one non-privileged canary,
-and do not automatically restart or alter any driver service. If the conflict
-survives, driver namespace recovery requires separate operator authorization.
+The user explicitly authorized the discriminating Maxon test on 2026-09-19.
+`docker stop --time 30 Maxon4ick_torch_910_dev` completed successfully; the
+container was not deleted and remained `Exited (137)`. A fresh precheck showed
+physical NPU4-7 process-free, AICore idle, and at the 2868-2869 MiB HBM
+baseline. The single authorized non-privileged canary then failed before its
+first tensor operation with the same `aclInit 507899`, `Resource_Busy`, and
+`drv devId=0 invalid` error. Kernel records for 19:34:36-19:34:45 UTC tied the
+canary PID to repeated
+`uda_occupy_dev_by_ns: Conflict open udevid (udevid=4; ns_id=0)`.
+
+This falsifies the hypothesis that the still-running Maxon process was a
+sufficient cause of the current conflict. It does not identify the original
+namespace owner or exclude stale state left by an earlier container. Do not
+restart or delete Maxon, do not rerun the same canary, and do not create
+`npu-gate-v2`. The next executable action is an operator-approved,
+rollback-defined driver/UDA namespace recovery; an NPU reset or driver/service
+restart is outside current authorization. No MXR code ran, so there is still no
+MXR numerical, performance, or quality result.
 
 The target checkpoint is `/cache/efim/Qwen3.6-27B`. Its global GDN geometry is
 16 key heads, 48 value heads, and 128 dimensions for both key and value. Under
