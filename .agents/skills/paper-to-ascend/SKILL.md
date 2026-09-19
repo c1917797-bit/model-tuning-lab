@@ -105,6 +105,15 @@ implementations:
 6. A related paper may be evaluated as an alternate candidate inside the same
    bounded campaign, but it does not inherit the first candidate's correctness,
    performance, or paper-identity evidence.
+7. Freeze the physical device set for the portfolio. If the user assigns
+   physical NPU4-7, every build canary, numerical gate, profile, service A/B,
+   and quality run uses only NPU4-7. Never borrow NPU0-3 as a shortcut when the
+   assigned set is blocked.
+8. Every terminal paper checkpoint must extract reusable paper-to-Ascend
+   lessons into the maintainer skills: applicability checks, source/runtime
+   seams, CANN/operator adaptations, numerical gates, performance attribution,
+   failed approaches, portability boundaries, and the next cheaper decision
+   rule. A report without this skill update is not a complete portfolio close.
 
 For the current Qwen3.6-27B Ascend portfolio and its ten-paper queue, read
 [references/qwen36-ascend-paper-portfolio.md](references/qwen36-ascend-paper-portfolio.md).

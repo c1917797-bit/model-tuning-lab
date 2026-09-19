@@ -137,9 +137,40 @@ fused-path override without explicit authorization.
 Kernel timing is diagnostic evidence, not an end-to-end claim. Full-megakernel
 gain must not be attributed solely to MXR triangular inversion.
 
+## 24-hour terminal deadline
+
+The user imposed a hard one-day wall-clock limit per paper at
+`2026-09-19T19:52:15Z`. This MXR slot therefore ends no later than
+`2026-09-20T19:52:15Z`. Queueing, waiting for devices, environment recovery,
+build time, debugging, experiments, and reporting all consume the same window;
+the clock is never paused or reset.
+
+At the deadline this workstream must close as exactly one of `go`, `no-go`,
+or `environment-inconclusive`, preserve a recoverable handoff, and activate
+the next portfolio item. An environment-inconclusive result is not an
+algorithm failure, but it still closes this slot; reopening requires an
+explicit reprioritization and a new slot.
+
+At activation time, an external Qwen3.5 TP4 workload was using physical
+NPU0-3. Physical NPU4-7 remained process-free, but the proven UDA namespace
+conflict still prevented initialization. Host-wide driver/module recovery is
+therefore prohibited because it could disrupt NPU0-3. Do not rerun the
+deterministically failing canary. Continue read-only blast-radius and
+device-scoped recovery analysis; if a safe, separately authorized recovery
+makes the exact canary pass, immediately create and run `npu-gate-v2`.
+Otherwise close MXR as environment-inconclusive at the deadline and move to
+DeltaLog.
+
+Physical NPU4-7 are the invariant device set for the entire paper portfolio.
+NPU0-3 are not a fallback even when idle. Before closing this slot, extract the
+reusable paper-to-Ascend lessons (method parity, runtime seam, operator/CANN
+adaptation, numerical gates, attribution, failures, and portability boundary)
+into the maintainer skill as well as this workstream evidence.
+
 ## Stop rule
 
-Stop this workstream and move to KVBuffer if target-shape NPU timing shows no
-clear advantage, or if an evidence-based end-to-end bound remains below about
-5%. Do not spend another open-ended cycle on wrapper integration without a
+Stop this workstream and advance to the next portfolio item, DeltaLog, if
+target-shape NPU timing shows no clear advantage, if an evidence-based
+end-to-end bound remains below about 5%, or if the hard deadline is reached.
+Do not spend another open-ended cycle on wrapper integration without a
 kernel-level reason.

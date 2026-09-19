@@ -17,10 +17,22 @@
   "objective": "Reproduce the official MXR/PTO mechanism faithfully on Ascend, prove multi-step numerical correctness and target-shape advantage, then obtain attributable matched end-to-end performance without quality regression through a plugin-owned monkeypatch.",
   "status": "npu_gate_environment_blocked_acl_init",
   "decision": "pending",
+  "timebox": {
+    "policy": "one continuous wall-clock window; no pause or reset",
+    "activated_at_utc": "2026-09-19T19:52:15Z",
+    "terminal_deadline_utc": "2026-09-20T19:52:15Z",
+    "maximum_hours": 24,
+    "terminal_outcomes": [
+      "go",
+      "no-go",
+      "environment-inconclusive"
+    ],
+    "deadline_rule": "Push a scoped terminal checkpoint by the deadline. Environment failure does not become an MXR failure and does not extend the slot."
+  },
   "goal_alignment": {
     "long_term": "Deliver reproducible and portable Ascend performance benefit through a plugin-owned implementation without modifying upstream frameworks or images.",
     "medium_term": "Build a complete evidence chain: official-method parity, CANN 9.1 compatibility, NPU numerical correctness, target-shape kernel timing, matched dense end-to-end A/B, and final quality.",
-    "short_term": "Resolve the pre-algorithm ACL initialization gate without touching physical NPU0-3, then execute the prepared one-shot NPU4 numerical and target-shape timing gate."
+    "short_term": "By 2026-09-20T19:52:15Z, either pass the shared NPU canary and execute the prepared one-shot NPU4 numerical and target-shape timing gate, or push an environment-inconclusive terminal checkpoint without touching physical NPU0-3."
   },
   "fixed_gates": {
     "correctness_before_performance": true,
@@ -37,7 +49,7 @@
       "max_tokens": 2048,
       "normal_eos": true
     },
-    "stop_rule": "Stop heavy integration and move to KVBuffer if the candidate has no clear target-shape kernel advantage or the attributable end-to-end gain is expected to remain below about 5 percent."
+    "stop_rule": "Stop heavy integration and advance to the next portfolio item, DeltaLog, if the candidate has no clear target-shape kernel advantage, the attributable end-to-end gain is expected to remain below about 5 percent, or the hard deadline is reached."
   },
   "official_sources": {
     "megagdn_pto_commit": "d357fd38608f99ddf9b9fb2d217b2e731ecd3a72",
@@ -60,14 +72,16 @@
       "logical index misuse after ASCEND_RT_VISIBLE_DEVICES remapping",
       "missing ASCEND_DEVICE_ID index when ASCEND_RT_VISIBLE_DEVICES is set"
     ],
-    "concurrent_state": "The NPU0-3 serving container exited and all eight NPUs became process-free, but the same canary still failed. The only remaining running container is Maxon4ick_torch_910_dev: privileged, all host devices visible, no current NPU process, and an active interactive opencode process. It or stale driver namespace state may own the UDA reservation; causality is not yet proven.",
-    "next_safe_branch": "Obtain explicit approval to stop but not delete Maxon4ick_torch_910_dev, run exactly one non-privileged canary, and restart no foreign state automatically. If the conflict remains after the container is stopped, request an operator-approved driver namespace recovery; do not reset devices or restart driver services autonomously."
+    "concurrent_state": "The user-authorized stop-but-do-not-delete test completed: Maxon4ick_torch_910_dev remains Exited (137), yet the one non-privileged canary still failed and the kernel again reported udevid=4 ns_id=0 conflict. At 2026-09-19T19:52Z a separate Qwen3.5 TP4 workload was active on physical NPU0-3 with about 25.6 GiB per card. It is external to this workstream and forbids host-wide driver recovery while active.",
+    "next_safe_branch": "Do not repeat the canary or restart/delete Maxon. A device-scoped recovery is admissible only after its blast radius is proven not to affect NPU0-3 and the user explicitly authorizes it. Host-wide module, driver, or service recovery must wait for the external NPU0-3 workload to release and separate approval."
   },
   "next_actions": [
     "Do not rerun npu-gate-v1 or any already-failed Docker mapping combination.",
-    "Resolve the ACL initialization gate with one evidence-backed canary; do not classify this environment failure as an MXR result.",
+    "Do not run another canary until new evidence proves the UDA namespace state changed.",
+    "Use only physical NPU4-7 for this and every later portfolio experiment. NPU0-3 are never a fallback; while they have an external workload, do not unload modules, restart services, reset cards, or stop that workload.",
     "After a canary succeeds, create a new immutable npu-gate-v2 root and run the prepared compile plus numerical gate; timing is admitted only if correctness passes.",
     "If the gate passes, compare official staged, official megakernel, and the v0.23 baseline on the same target shape; preserve attribution between triangular inversion and full fusion.",
-    "Only integrate the winning path into vLLM after the target-shape gate passes."
+    "Only integrate the winning path into vLLM after the target-shape gate passes.",
+    "By 2026-09-20T19:52:15Z update the reusable paper-to-Ascend maintainer experience, push go, no-go, or environment-inconclusive, and activate the next portfolio slot; never extend this MXR slot."
   ]
 }

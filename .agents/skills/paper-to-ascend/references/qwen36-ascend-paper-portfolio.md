@@ -6,6 +6,8 @@ This is the dated 2026-09-19 piercing prior for one objective:
 
 - model: Qwen3.6-27B;
 - target: Ascend through vLLM-Ascend;
+- device invariant: all piercing experiments use physical NPU4-7 only;
+  physical NPU0-3 are never a fallback;
 - delivery: independent, opt-in plugin/monkeypatch with thin version adapters;
 - performance acceptance: at least 10% end-to-end output-throughput improvement
   versus a matched dense control, with TTFT and TPOT reported separately;
@@ -15,6 +17,58 @@ This is the dated 2026-09-19 piercing prior for one objective:
 The scores allocate research time. They are not paper-quality rankings, NPU
 measurements, or acceptance results. Re-verify each paper, official repository,
 upstream support status, runtime seam, and claimed numbers at activation time.
+
+## Hard 24-hour piercing rule
+
+Each paper has one continuous wall-clock window of at most 24 hours from its
+recorded activation time to a pushed terminal checkpoint. Queueing, compilation,
+resource waiting, debugging, and reporting all count. The clock is not paused or
+reset. The terminal classification must be one of:
+
+- go: all gates reached so far support continued integration;
+- no-go: paper, mechanism, implementation, bottleneck, correctness, or
+  performance evidence rejects the route at the declared scope;
+- environment-inconclusive: a shared external/runtime failure prevented the
+  algorithm gate before the deadline.
+
+Environment-inconclusive is not an algorithm failure. It still closes the paper's
+slot and advances the queue. Reopening that paper requires an explicit
+reprioritization and a new dated slot; it never silently extends the old one.
+
+Each terminal checkpoint also updates the reusable maintainer knowledge, not
+only the paper report. At minimum preserve the paper-to-Ascend method mapping,
+real runtime seam, CANN/operator adaptation, numerical and determinism gates,
+performance-attribution method, failed paths, version/shape/device portability
+boundary, and the cheaper decision rule for later papers. These lessons must be
+generic where evidence permits and must label environment- or model-specific
+limits honestly.
+
+Reverse-plan every 24-hour slot from its terminal deadline:
+
+| Latest time | Required state |
+| --- | --- |
+| T-24h | Activate; freeze source, identity, scope, one variable, and deadline. |
+| T-20h | Complete method parity, runtime seam, bottleneck share, and theoretical end-to-end upper bound. Stop early if the target cannot reach the acceptance threshold. |
+| T-16h | Complete build/container canary and real Ascend numerical/state/determinism gate. A shared environment failure is recorded once, not rediscovered per candidate. |
+| T-10h | Complete target-shape timing and one-switch service screen for a correct candidate. |
+| T-4h | Admit only a promising candidate to repeats and the minimum decisive quality screen. |
+| T | Push the scoped go, no-go, or environment-inconclusive decision, recover the safe tree, update reusable maintainer experience, and activate the next paper. |
+
+The current latest-finish schedule starts at 2026-09-19T19:52:15Z. An earlier
+terminal decision pulls every later slot forward; it never creates idle time.
+
+| Slot | Paper | Latest window (UTC) |
+| ---: | --- | --- |
+| 1 | Fast and Stable Triangular Inversion | 2026-09-19T19:52:15Z to 2026-09-20T19:52:15Z |
+| 2 | DeltaLog | 2026-09-20T19:52:15Z to 2026-09-21T19:52:15Z |
+| 3 | When Good Enough Is Optimal | 2026-09-21T19:52:15Z to 2026-09-22T19:52:15Z |
+| 4 | KVBuffer | 2026-09-22T19:52:15Z to 2026-09-23T19:52:15Z |
+| 5 | HYPIC | 2026-09-23T19:52:15Z to 2026-09-24T19:52:15Z |
+| 6 | Sparse Prefix Caching | 2026-09-24T19:52:15Z to 2026-09-25T19:52:15Z |
+| 7 | Scaling State-Space Models with Tensor Parallelism | 2026-09-25T19:52:15Z to 2026-09-26T19:52:15Z |
+| 8 | EPD-Serve | 2026-09-26T19:52:15Z to 2026-09-27T19:52:15Z |
+| 9 | DASC | 2026-09-27T19:52:15Z to 2026-09-28T19:52:15Z |
+| 10 | DUET | 2026-09-28T19:52:15Z to 2026-09-29T19:52:15Z |
 
 ## Weighted rubric
 
@@ -88,7 +142,9 @@ For every paper:
 8. expand to three-run performance only when the screen is promising;
 9. run final quality with thinking disabled, max_tokens=2048, and normal EOS;
 10. accept only at least 10% end-to-end throughput gain with no final quality
-    regression; otherwise record a scoped no-go and advance the queue.
+    regression; otherwise record a scoped no-go and advance the queue;
+11. extract reusable paper-to-Ascend success/failure lessons into the
+    maintainer skill before the terminal checkpoint is considered complete.
 
 General optimizations must be applied equally to the dense control. Kernel
 timing, FLOP savings, CPU simulation, energy proxies, or theoretical bounds are
