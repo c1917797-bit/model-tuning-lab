@@ -63,7 +63,10 @@ list. It activated at `2026-09-19T21:58:01Z` and closed no-go at
 `2026-09-19T22:06:59Z` after the real-trace opportunity bound failed.
 DeltaLog activated at `2026-09-19T22:11:56Z` and closed no-go at
 `2026-09-19T22:17:43Z` after its concurrency-transfer opportunity bound failed.
-When Good Enough Is Optimal is now the frontier.
+When Good Enough Is Optimal activated at `2026-09-19T22:20:31Z` and closed
+no-go at `2026-09-19T22:23:26Z` after reusing the exact same target-NPU
+inversion seam evidence from MXR. HYPIC is now the frontier; audit its existing
+formal Ascend evidence before scheduling a new run.
 
 | Slot | Paper | Latest window (UTC) |
 | ---: | --- | --- |
@@ -95,7 +98,7 @@ When Good Enough Is Optimal is now the frontier.
 | ---: | --- | ---: | ---: | --- |
 | 1 | [Fast and Stable Triangular Inversion for Delta-Rule Linear Transformers](https://arxiv.org/abs/2605.21325) | 95 | **95** | Best immediate fit: Qwen3.5/3.6, Huawei NPU evidence, complete official sources, and reported inversion-kernel gain up to 4.3x. |
 | 2 | [DeltaLog: Deferred Materialization of Recurrent States](https://arxiv.org/abs/2608.15533) | 91 | **terminal no-go** | At formal concurrency 16, the recurrent operator is only 4.52%-4.84% of NPU interval. The paper's best 1.86x local speedup projects to about 1.021x-1.023x, and perfect operator deletion remains below 1.10x. |
-| 3 | [When Good Enough Is Optimal](https://arxiv.org/abs/2606.06034) | 84 | **79** | Candidate B for the same inversion campaign: truncated Neumann plus residual correction, reported up to 5x kernel gain and 20% lower decode-layer overhead; Snapdragon NPU evidence and approximation add transfer and quality risk. |
+| 3 | [When Good Enough Is Optimal](https://arxiv.org/abs/2606.06034) | 84 | **terminal no-go** | The target inversion seam is only 2.93%-2.96% of prefill NPU interval and absent from decode. The paper's best 5.2x local speedup projects to about 1.024x, and perfect deletion remains about 1.030x. |
 | 4 | [KVBuffer: IO-aware Serving for Linear Attention](https://arxiv.org/abs/2605.19049) | 89 | **terminal no-go** | For the current non-speculative objective, recurrent GDN is only 4.52%-4.84% of decode NPU time. Perfect removal cannot reach 1.10x; speculative/MTP gains remain out of scope. |
 | 5 | [HYPIC: Accelerating Hybrid-Attention LLM Serving with Position-Independent Caching](https://arxiv.org/abs/2607.01299) | 92 | **72** | Mature mechanism and prior positive Ascend evidence, but benefit depends on segmented reuse/RAG workload and is limited as a generic dense/PDC increment. |
 | 6 | [Sparse Prefix Caching for Hybrid and Recurrent LLM Serving](https://arxiv.org/abs/2605.05219) | 82 | **68** | Exact recovery and low quality risk without recurrent-kernel changes, but benefit depends on real shared-prefix distribution rather than generic decode. |
@@ -122,15 +125,18 @@ Only the frontier campaign may consume implementation/NPU budget.
 3. **DeltaLog (terminal no-go for the frozen concurrency-16 objective).**
    The paper's high-batch state-materialization shares do not transfer to the
    measured target. Reopen only for a separately frozen high-batch deployment.
-4. **When Good Enough Is Optimal (current frontier).**
+4. **When Good Enough Is Optimal (terminal no-go).**
    Treat the truncated-Neumann plus residual-correction path as an approximate
-   algorithm with an independent numerical and final-quality identity. Reuse
-   the MXR real-path share evidence before deciding whether any broader fused
-   derivative has enough end-to-end opportunity.
-5. **Conditional cache/system routes.**
+   algorithm with an independent numerical and final-quality identity. The MXR
+   real-path share proves that perfect inversion deletion cannot reach 1.10x.
+5. **HYPIC (current frontier).**
+   Audit the existing formal Ascend evidence and denominator first. Do not
+   rerun unless a missing acceptance field cannot be recovered from immutable
+   artifacts. Its claim remains conditional on segmented reuse/RAG workload.
+6. **Conditional cache/system routes.**
    HYPIC requires a segmented-reuse/RAG workload. Sparse Prefix Caching requires
    a measured shared-prefix distribution. They are not generic decode claims.
-6. **Paused/deferred routes.**
+7. **Paused/deferred routes.**
    DASC must first pass deterministic replay. EPD-Serve and DUET require a
    separately authorized system/deployment scope. Scaling SSM TP requires a
    measured gap beyond the existing TP4 implementation.

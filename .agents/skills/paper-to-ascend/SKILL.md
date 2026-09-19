@@ -233,6 +233,13 @@ each paper considered.
   deletion. When perfect deletion of the complete affected operator remains
   below acceptance, close before operator work; reopen only for a separately
   frozen high-batch deployment with its own target trace.
+- A second paper targeting the same runtime seam should inherit immutable
+  target-NPU path-share evidence when model geometry, runtime, workload and
+  operator boundary are unchanged. Re-running a faster isolated kernel is not
+  new service evidence. For an approximate replacement, apply its best claimed
+  local speedup and perfect deletion to the already measured seam first. If
+  perfect deletion is below acceptance, stop before numerical tuning and task
+  quality; the approximation risk only worsens the decision.
 
 ## Do not do
 

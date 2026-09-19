@@ -1,0 +1,63 @@
+{
+  "task_id": "good-enough-inversion-qwen36-ascend-piercing-20260920",
+  "title": "When Good Enough Is Optimal Qwen3.6-27B Ascend piercing",
+  "branch": "work/good-enough-inversion-qwen36-ascend-piercing-20260920",
+  "status": "terminal_no_go_opportunity_bound_below_target",
+  "decision": "no-go",
+  "activated_at_utc": "2026-09-19T22:20:31Z",
+  "deadline_utc": "2026-09-20T22:20:31Z",
+  "paper": {
+    "title": "When Good Enough Is Optimal: Multiplication-Only Matrix Inversion Approximation for Quantized Gated DeltaNet",
+    "arxiv": "2606.06034v1",
+    "source": "https://arxiv.org/abs/2606.06034",
+    "reference_hardware": "Snapdragon 8 Elite Gen 5 NPU",
+    "default_method": "chunk 64, Neumann order 3, residual span 8, structured diagonal mask",
+    "official_code_status": "No paper-linked public implementation was identified at activation; any equation-derived target implementation is faithful-port, not paper-exact."
+  },
+  "target": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "runtime": "vLLM-Ascend v0.23.0 / CANN 9.1",
+    "hardware": "Ascend 910B4",
+    "physical_npus": [4, 5, 6, 7],
+    "tensor_parallel_size": 4,
+    "performance_contract": "32768 input / 16384 shared / 1024 fixed output / 40 requests / concurrency 16",
+    "delivery": "disabled-by-default plugin monkeypatch with version-independent core and thin adapters"
+  },
+  "acceptance": {
+    "performance": "at least 10 percent end-to-end output-throughput gain versus matched control",
+    "quality": "no final LongBench-v2 or GSM8K regression; thinking disabled, max_tokens 2048, normal EOS",
+    "report": ["throughput", "TTFT", "TPOT"]
+  },
+  "scope": {
+    "primary": "approximate chunkwise triangular inversion via masked low-order Neumann expansion and residual correction",
+    "algorithm_identity": "faithful-port if all paper stages and schedules are preserved; otherwise derivative",
+    "excluded": ["INT quantization", "MTP", "speculative decoding", "retraining"]
+  },
+  "reused_target_npu_evidence": {
+    "mxr_workstream": ".agents/workstreams/mxr-qwen36-ascend-piercing-20260918/task.json",
+    "triangular_timing": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v10/triangular-target-shape-timing.json",
+    "triangular_timing_sha256": "5d32bf31804152fa283dca5e449332908029f913b5cedd47f104378fb3d14d98",
+    "service_profile": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/baseline/profile-summary.v1.json",
+    "service_profile_sha256": "b3bddd3b1a8b96571f20c59d801aa21da3da673f875f86a3b04318afbdb480a8",
+    "target_prefill_inversion_share_percent_range": [2.9266965280114343, 2.956809639030148],
+    "decode_coverage_percent": 0.0,
+    "note": "Same model geometry, Ascend path and chunkwise inversion seam; reuse is stronger than a new synthetic microbenchmark."
+  },
+  "terminal_result": {
+    "decided_at_utc": "2026-09-19T22:23:26Z",
+    "classification": "paper_mechanism_matches_but_target_inversion_opportunity_is_below_acceptance",
+    "artifact": "/cache/cch/good-enough-inversion-qwen36-ascend-20260920/opportunity-gate-v1/opportunity-audit.json",
+    "artifact_sha256": "ab3f8ca82219b4262d3680bd0b3a33c58335b3adf0db412601e4a050555f0ef0",
+    "paper_5_2x_prefill_npu_bound_range": [1.024211019826627, 1.0244662245223455],
+    "perfect_inversion_deletion_prefill_npu_bound_range": [1.030149345116868, 1.0304690069239455],
+    "affected_fraction_required_for_target_percent": 11.255411255411259,
+    "observed_fraction_percent_range": [2.9266965280114343, 2.956809639030148],
+    "decode_coverage_percent": 0.0,
+    "reason": "The same target inversion seam is only about one quarter of the share required for the paper's best local speedup to yield 1.10x. Even perfect deletion remains below target, while the approximate algorithm would add numerical and quality risk."
+  },
+  "next_actions": [
+    "Do not implement or rerun the approximation unchanged for the frozen service objective.",
+    "Advance to HYPIC and audit the existing Ascend formal evidence before scheduling any new run.",
+    "Reopen only if the real target trace changes enough that chunkwise inversion exceeds the required affected share."
+  ]
+}
