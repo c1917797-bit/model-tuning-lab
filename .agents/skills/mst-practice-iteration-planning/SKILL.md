@@ -33,11 +33,12 @@ Turn a stage goal into a concrete, verifiable iteration plan with machine-checka
 Each iteration is recorded in `.agents/evals/practice-iterations/<id>.yaml`:
 
 ```yaml
-schema: practice-iteration/v1
+schema: mst-practice-iteration/v1
 id: <descriptive-slug>
 repository: <target-repo-name>
 status: done | in_progress | blocked
 date: YYYY-MM-DD
+validated_commit: <full commit hash of the state that was evaluated>
 
 stage_goal: <one sentence>
 
@@ -72,6 +73,8 @@ If an iteration requires more than 5 file changes or 2 structural changes, split
 - Every iteration has at least one `validation_commands` entry.
 - Every `lessons_ingested` entry has a `destination` and `severity`.
 - The `stage_goal` is a single sentence.
+- The schema and `validated_commit` match `scripts/validate-mst.sh`; the
+  repository validator is authoritative if an example ever drifts.
 - The iteration YAML parses without errors.
 
 ## Anti-patterns
