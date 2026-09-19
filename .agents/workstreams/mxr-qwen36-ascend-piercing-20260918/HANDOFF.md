@@ -172,14 +172,25 @@ task that earlier Docker-only checks did not cover. Namespace `dias` contains
 `dias-cont-1`, created at `2026-09-18T13:20:32Z` and still running
 `sleep infinity`. Its OCI specification exposes `/dev/davinci0-7`, manager,
 SVM, and HDC devices and sets both visible-device variables to `0,1,2,3,4,5,6,7`;
-it also sets `ASCEND_RUNTIME_OPTIONS=NODRV`. It predates the first MXR
-failure and is therefore a plausible UDA namespace owner, but device
-declaration is not proof of causality. At the same observation, an external
-TP4 workload was active on physical NPU0-3 while NPU4-7 were process-free and
+it also sets `ASCEND_RUNTIME_OPTIONS=NODRV`.
+
+The ownership is now proven rather than inferred. `/proc/uda/udevice` reports
+udevid 0-7 as used by container namespace ID 0.
+`/proc/uda/namespace_node` maps namespace ID 0 to
+`root_tgid 1619069` and lists udevid 0-7; PID 1619069 is exactly the
+`dias-cont-1` root `sleep` task in cgroup `/dias/dias-cont-1`. The installed
+driver source in `uda_access.c` shows that root-process exit schedules
+namespace destruction, which calls `uda_uninit_ns_node_dev`,
+`UDA_UNOCCUPY`, and `uda_unoccupy_dev_by_ns`. This makes stopping only that
+task the narrowest evidence-backed recovery, without a driver reset.
+
+At the same observation, an external TP4 workload was active in a different
+Docker mount namespace on physical NPU0-3 while NPU4-7 were process-free and
 at idle HBM. Do not mutate `dias-cont-1` without explicit user approval. The
 next discriminating action, if approved, is stop-but-do-not-delete followed by
-exactly one unchanged non-privileged canary; a surviving conflict rules it out
-as a sufficient cause.
+verification that namespace ID 0 disappears and exactly one unchanged
+non-privileged canary. Preserve all evidence and do not touch the NPU0-3
+workload.
 
 ## Stop rule
 

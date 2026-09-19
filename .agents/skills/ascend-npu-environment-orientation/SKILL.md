@@ -49,6 +49,20 @@ proof that the intended NPU path executed.
    reservation even when `npu-smi` reports no process, HBM is idle, and `lsof`
    reports no ordinary device-file handle. Do not misclassify that state as an
    idle, usable card or as an algorithm failure.
+   On drivers that expose UDA procfs, read both `/proc/uda/udevice` and
+   `/proc/uda/namespace_node` before considering a reset. The former reports
+   the owning namespace ID per physical `udevid`; the latter reports that
+   namespace's `root_tgid` and complete logical-to-physical device list. Map
+   `root_tgid` through `ps`, cgroups, Docker, and every containerd namespace
+   (`ctr namespaces list` / `ctr -n <namespace> tasks list`). Docker-only
+   inventory can miss the actual owner.
+   When procfs maps the conflicting namespace directly to a live container root
+   process, classify the owner as proven rather than merely suspected. Review
+   the installed driver's UDA cleanup path when source is available. If root
+   process exit schedules namespace destruction and calls `UDA_UNOCCUPY`, a
+   stop-but-do-not-delete test is the minimal recovery candidate; a host-wide
+   driver restart is not the first action. Stopping an externally owned task
+   still requires explicit approval and a preserved identity/rollback record.
    If the operator explicitly approves stopping a suspected privileged
    all-device container, stop but do not delete or automatically restart it,
    verify its terminal state, and run exactly one unchanged non-privileged
@@ -83,6 +97,9 @@ proof that the intended NPU path executed.
   work. Require explicit approval even when UDA evidence makes that container a
   likely namespace owner. Never reset an NPU or restart driver services as an
   implicit follow-up.
+- `ASCEND_RUNTIME_OPTIONS=NODRV`, an idle `sleep` command, and no
+  `npu-smi` process do not disprove UDA ownership. The driver's procfs
+  ownership table is authoritative for the namespace reservation.
 
 ## Output
 
