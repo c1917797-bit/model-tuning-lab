@@ -51,6 +51,13 @@ Git, usually in the experiment record or branch-local handoff:
    artifact locations, then prove the live ownership before baseline and
    candidate runs.
 
+When the user explicitly reserves a physical NPU set and authorizes preemption,
+re-check actual NPU processes, HBM, container device mappings, and ownership
+before each run. Stop only the exact new external workload that really overlaps
+the reserved cards. A namespace or container declaration without a live NPU
+process and non-idle HBM is not an overlap. Never broaden the stop to protected
+cards or unrelated workloads.
+
 If any gate is unproven, the next action is orientation, profiling, source
 inspection, or a smaller canary, not implementation.
 
@@ -218,6 +225,14 @@ each paper considered.
 - When a paper describes custom code but exposes no paper-linked source, label
   an equation-derived migration `faithful-port`, not `paper-exact`, and record
   the source-search date.
+- DeltaLog showed that batch-dependent state-write optimizations need a target
+  concurrency transfer gate. Do not import a paper's batch-64/256
+  materialization share into a concurrency-16 acceptance point. Apply the
+  paper's best local speedup to the hash-locked target trace, calculate the
+  affected share required by the E2E target, and also calculate perfect
+  deletion. When perfect deletion of the complete affected operator remains
+  below acceptance, close before operator work; reopen only for a separately
+  frozen high-batch deployment with its own target trace.
 
 ## Do not do
 

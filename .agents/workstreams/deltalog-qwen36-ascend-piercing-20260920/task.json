@@ -1,0 +1,62 @@
+{
+  "task_id": "deltalog-qwen36-ascend-piercing-20260920",
+  "title": "DeltaLog Qwen3.6-27B Ascend piercing",
+  "branch": "work/deltalog-qwen36-ascend-piercing-20260920",
+  "status": "terminal_no_go_opportunity_bound_below_target",
+  "decision": "no-go",
+  "activated_at_utc": "2026-09-19T22:11:56Z",
+  "deadline_utc": "2026-09-20T22:11:56Z",
+  "paper": {
+    "title": "DeltaLog: Deferred Materialization of Recurrent States for Linear Attention Decoding",
+    "arxiv": "2608.15533v1",
+    "source": "https://arxiv.org/abs/2608.15533",
+    "official_code_status": "No paper-linked public implementation was identified in the activation search; preserve equations and label any target implementation faithful-port, not paper-exact."
+  },
+  "target": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "runtime": "vLLM-Ascend v0.23.0",
+    "runtime_commit": "5cb98caaadeff42b5b62b996e34bb2aaa29d20fd",
+    "hardware": "Ascend 910B4",
+    "physical_npus": [4, 5, 6, 7],
+    "tensor_parallel_size": 4,
+    "performance_contract": "32768 input / 16384 shared / 1024 fixed output / 40 requests / concurrency 16",
+    "delivery": "disabled-by-default plugin monkeypatch with version-independent core and thin adapters"
+  },
+  "acceptance": {
+    "performance": "at least 10 percent end-to-end output-throughput gain versus matched control",
+    "quality": "no final LongBench-v2 or GSM8K regression; thinking disabled, max_tokens 2048, normal EOS",
+    "report": ["throughput", "TTFT", "TPOT"]
+  },
+  "scope": {
+    "primary": "exact deferred recurrent-state materialization for non-speculative decode",
+    "excluded": ["MTP", "speculative decoding", "retraining", "quantization"],
+    "algorithm_identity": "exact arithmetic semantics are required; approximations are separate derivatives"
+  },
+  "current_evidence": {
+    "profile": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/baseline/profile-summary.v1.json",
+    "profile_sha256": "b3bddd3b1a8b96571f20c59d801aa21da3da673f875f86a3b04318afbdb480a8",
+    "profile_concurrency": 16,
+    "direct_recurrent_decode_share_percent_range": [4.520070493286582, 4.840458923491208],
+    "paper_reported_local_kernel_speedup_max": 1.86,
+    "paper_reported_e2e_speedup_range": [1.08, 1.20],
+    "paper_reported_state_materialization_share_percent": {"batch_64": 25.2, "batch_256": 44.6},
+    "note": "Paper high-batch results are not transferable to the frozen concurrency-16 contract without target evidence."
+  },
+  "terminal_result": {
+    "decided_at_utc": "2026-09-19T22:17:43Z",
+    "classification": "exact_method_fits_but_current_concurrency_service_opportunity_is_below_acceptance",
+    "artifact": "/cache/cch/deltalog-qwen36-ascend-20260920/opportunity-gate-v1/opportunity-audit.json",
+    "artifact_sha256": "ef297a2b19b21705be48f2771e64708174884c97d361b8d2b8e874f259bbfefc",
+    "paper_local_speedup_bound_range": [1.021345352541238, 1.0228929754323046],
+    "optimistic_half_reduction_bound_range": [1.0231229390387688, 1.0248025738162276],
+    "perfect_recurrent_deletion_bound_range": [1.0473405302731058, 1.0508667745633562],
+    "recurrent_fraction_required_for_target_percent": 19.661733615221994,
+    "observed_recurrent_fraction_percent_range": [4.520070493286582, 4.840458923491209],
+    "reason": "At the frozen concurrency-16 point, the complete recurrent operator is less than one quarter of the share required for the paper's best local speedup to yield 1.10x. Perfect deletion of the operator also remains below target."
+  },
+  "next_actions": [
+    "Do not implement or rerun DeltaLog unchanged for the frozen concurrency-16 objective.",
+    "Activate When Good Enough Is Optimal as the next paper.",
+    "Reopen DeltaLog only for a separately frozen high-batch deployment whose target trace proves a materially larger state-materialization share."
+  ]
+}

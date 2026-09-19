@@ -61,7 +61,9 @@ Activation override recorded on 2026-09-19: after the MXR no-go, the user
 explicitly selected KVBuffer as the second paper from the original operator
 list. It activated at `2026-09-19T21:58:01Z` and closed no-go at
 `2026-09-19T22:06:59Z` after the real-trace opportunity bound failed.
-DeltaLog is now the frontier.
+DeltaLog activated at `2026-09-19T22:11:56Z` and closed no-go at
+`2026-09-19T22:17:43Z` after its concurrency-transfer opportunity bound failed.
+When Good Enough Is Optimal is now the frontier.
 
 | Slot | Paper | Latest window (UTC) |
 | ---: | --- | --- |
@@ -92,7 +94,7 @@ DeltaLog is now the frontier.
 | Rank | Paper | Mechanism value | Piercing priority | Current decision basis |
 | ---: | --- | ---: | ---: | --- |
 | 1 | [Fast and Stable Triangular Inversion for Delta-Rule Linear Transformers](https://arxiv.org/abs/2605.21325) | 95 | **95** | Best immediate fit: Qwen3.5/3.6, Huawei NPU evidence, complete official sources, and reported inversion-kernel gain up to 4.3x. |
-| 2 | [DeltaLog: Deferred Materialization of Recurrent States](https://arxiv.org/abs/2608.15533) | 91 | **87** | Strongest decode route; aims to preserve model semantics and reports 1.08-1.20x TPOT on Qwen/GDN, directly relevant to fixed 1024-token output. |
+| 2 | [DeltaLog: Deferred Materialization of Recurrent States](https://arxiv.org/abs/2608.15533) | 91 | **terminal no-go** | At formal concurrency 16, the recurrent operator is only 4.52%-4.84% of NPU interval. The paper's best 1.86x local speedup projects to about 1.021x-1.023x, and perfect operator deletion remains below 1.10x. |
 | 3 | [When Good Enough Is Optimal](https://arxiv.org/abs/2606.06034) | 84 | **79** | Candidate B for the same inversion campaign: truncated Neumann plus residual correction, reported up to 5x kernel gain and 20% lower decode-layer overhead; Snapdragon NPU evidence and approximation add transfer and quality risk. |
 | 4 | [KVBuffer: IO-aware Serving for Linear Attention](https://arxiv.org/abs/2605.19049) | 89 | **terminal no-go** | For the current non-speculative objective, recurrent GDN is only 4.52%-4.84% of decode NPU time. Perfect removal cannot reach 1.10x; speculative/MTP gains remain out of scope. |
 | 5 | [HYPIC: Accelerating Hybrid-Attention LLM Serving with Position-Independent Caching](https://arxiv.org/abs/2607.01299) | 92 | **72** | Mature mechanism and prior positive Ascend evidence, but benefit depends on segmented reuse/RAG workload and is limited as a generic dense/PDC increment. |
@@ -117,13 +119,18 @@ Only the frontier campaign may consume implementation/NPU budget.
 2. **KVBuffer (terminal no-go for the current objective).**
    The faithful path's perfect-removal bound is only about 1.05x. Reopen only
    if speculative decoding is authorized or the runtime bottleneck changes.
-3. **DeltaLog (current frontier).**
-   Gate batch/concurrency transfer because its favorable region is mainly
-   batch 64-256.
-4. **Conditional cache/system routes.**
+3. **DeltaLog (terminal no-go for the frozen concurrency-16 objective).**
+   The paper's high-batch state-materialization shares do not transfer to the
+   measured target. Reopen only for a separately frozen high-batch deployment.
+4. **When Good Enough Is Optimal (current frontier).**
+   Treat the truncated-Neumann plus residual-correction path as an approximate
+   algorithm with an independent numerical and final-quality identity. Reuse
+   the MXR real-path share evidence before deciding whether any broader fused
+   derivative has enough end-to-end opportunity.
+5. **Conditional cache/system routes.**
    HYPIC requires a segmented-reuse/RAG workload. Sparse Prefix Caching requires
    a measured shared-prefix distribution. They are not generic decode claims.
-5. **Paused/deferred routes.**
+6. **Paused/deferred routes.**
    DASC must first pass deterministic replay. EPD-Serve and DUET require a
    separately authorized system/deployment scope. Scaling SSM TP requires a
    measured gap beyond the existing TP4 implementation.
