@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Immutable v9 all-method correctness gate with v0.23 ABI adaptation."""
+from pathlib import Path
+
+import run_npu_gate_v7 as previous
+
+
+gate = previous.gate
+BASE_DOCKER_COMMAND = previous.docker_command
+
+gate.RESULT = Path("/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v9")
+gate.CONTAINER = "mxr_qwen36_npu_gate_v9_20260919"
+
+
+def docker_command() -> list[str]:
+    command = BASE_DOCKER_COMMAND()
+    old_probe = (
+        "/workspace/model-tuning-lab/.agents/workstreams/"
+        "mxr-qwen36-ascend-piercing-20260918/mxr_npu_probe_v7.py"
+    )
+    new_probe = (
+        "/workspace/model-tuning-lab/.agents/workstreams/"
+        "mxr-qwen36-ascend-piercing-20260918/mxr_npu_probe_v9.py"
+    )
+    command[command.index(old_probe)] = new_probe
+    command[command.index("--phase") + 1] = "correctness"
+    return command
+
+
+def configure_gate() -> None:
+    gate.preflight = previous.previous.preflight
+    gate.docker_command = docker_command
+    gate.monitor = previous.previous.monitor
+
+
+if __name__ == "__main__":
+    configure_gate()
+    raise SystemExit(gate.main())

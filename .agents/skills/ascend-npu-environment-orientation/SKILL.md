@@ -63,6 +63,17 @@ proof that the intended NPU path executed.
    stop-but-do-not-delete test is the minimal recovery candidate; a host-wide
    driver restart is not the first action. Stopping an externally owned task
    still requires explicit approval and a preserved identity/rollback record.
+   Treat a successful canary as point-in-time evidence, not a reservation. An
+   external resource controller can create a new all-device container after the
+   canary exits and before the formal gate starts, reclaiming UDA devices while
+   `npu-smi` remains process-free. Re-read both UDA procfs tables immediately
+   before container creation and fail closed on any target-device owner.
+   Because that check still has a time-of-check/time-of-use race, prefer one
+   long-lived device-scoped container namespace that performs the minimal real
+   tensor canary and, only after it passes, continues directly into the
+   numerical gate. Do not release the namespace between those phases. If an
+   external scheduler must coordinate allocation, obtain a real reservation
+   rather than relying on repeated polling.
    If the operator explicitly approves stopping a suspected privileged
    all-device container, stop but do not delete or automatically restart it,
    verify its terminal state, and run exactly one unchanged non-privileged
@@ -100,6 +111,9 @@ proof that the intended NPU path executed.
 - `ASCEND_RUNTIME_OPTIONS=NODRV`, an idle `sleep` command, and no
   `npu-smi` process do not disprove UDA ownership. The driver's procfs
   ownership table is authoritative for the namespace reservation.
+- A canary that exits before the formal workload proves only that the device
+  was usable at that instant. It does not make a later container launch safe
+  against an external allocator.
 
 ## Output
 

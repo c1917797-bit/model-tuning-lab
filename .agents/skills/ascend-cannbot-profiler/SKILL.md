@@ -140,3 +140,17 @@ the root cause unless the failure phase or outcome changes.
   actually runs.
 - Some filesystems can break CANN offline parsing. Treat parser failure as an
   artifact-location hypothesis before rewriting runtime code.
+- When an official paper package bundles the named mechanism with a broader
+  fused pipeline, measure and attribute both scopes separately. First map the
+  named kernels and the complete fused stages to a validated real-service
+  trace on every rank. Then time the exact target-shape candidate and calculate
+  the optimistic E2E bound. A large isolated-kernel speedup can remain a
+  service no-go when its phase share is small, while a wider fusion must not be
+  reported as the named algorithm's gain.
+- A synthetic incumbent harness can fail at an operator ABI boundary even when
+  the same incumbent runs in the real service. Preserve that failure, use the
+  validated service trace only as a conservative opportunity/translation
+  bound, and do not call candidate-only timing an apples-to-apples E2E result.
+  Require a working matched service A/B before acceptance; close the route when
+  both the named mechanism and broader official candidate remain below the
+  predeclared admission threshold.

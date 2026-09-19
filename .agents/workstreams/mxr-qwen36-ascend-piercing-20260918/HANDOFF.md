@@ -1,5 +1,52 @@
 # MXR Qwen3.6 Ascend Piercing
 
+## Terminal decision — no-go on the current service objective
+
+This workstream closed at `2026-09-19T21:44:00Z`, inside its fixed 24-hour
+window, as `no-go` for the pinned Qwen3.6-27B / Ascend 910B4 /
+vLLM-Ascend v0.23.0 path. The algorithm is not rejected as numerically invalid:
+the official staged PTO and MegaGDN candidates passed real-NPU chained
+output/final-state comparisons and bitwise replay at the exact TP4-local
+geometry `H=12, Hg=4, D=128`.
+
+The terminal reason is service opportunity, not correctness. Direct MXR
+triangular inversion is about `3.158x` faster at length 4096 and `3.140x`
+faster at length 16384, but the incumbent triangular-inversion kernels occupy
+only `2.93%-2.96%` of the measured prefill NPU interval and do not execute in
+decode. The optimistic prefill-NPU reduction is therefore about `2.0%`, below
+the predeclared roughly-5% integration gate and irrelevant to the long 1024
+token decode target.
+
+The wider official six-stage MegaGDN route was also screened so that a narrow
+MXR attribution would not hide a larger fusion opportunity. Those six service
+kernels occupy `10.84%-10.87%` of the measured prefill NPU interval. At the
+same 32768-token shape their rank-mean incumbent cost is about
+`9.335 ms/layer`; official `pto_mega` measured `8.589 ms/layer` (`1.087x`),
+while staged PTO measured `10.127 ms/layer`. The implied prefill-NPU saving is
+about `0.87%`, before any BF16/FP16 adapter cost. It also misses the
+predeclared `1.10x` target-shape threshold.
+
+Primary immutable evidence:
+
+- candidate numerical gate:
+  `/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v8/numerical-gate.json`,
+  SHA256 `ab112ae3ee4e2cf91af2399ccf18f65caf159831998f99b976dad7eff3dafa2c`;
+- direct triangular timing:
+  `/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v10/triangular-target-shape-timing.json`,
+  SHA256 `5d32bf31804152fa283dca5e449332908029f913b5cedd47f104378fb3d14d98`;
+- full staged/megakernel timing:
+  `/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v11/full-gdn-candidate-timing.json`,
+  SHA256 `d73b662c9d0fcc96029e665e0fd4d3c3a10b329c28050e6794640a1debbf9bb7`;
+- real-service profile summary:
+  `/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/baseline/profile-summary.v1.json`,
+  SHA256 `b3bddd3b1a8b96571f20c59d801aa21da3da673f875f86a3b04318afbdb480a8`.
+
+No service monkeypatch, matched E2E A/B, LongBench-v2, or GSM8K result was
+produced for MXR, because the candidate failed the admission bound before
+those expensive stages. Do not state that task accuracy regressed or passed.
+Do not rerun v1-v11 unchanged. The next portfolio item is KVBuffer, using
+physical NPU4-7 and beginning with a measured decode-IO opportunity bound.
+
 ## Current state
 
 The workstream has completed pre-NPU preparation, but the first NPU gate did
@@ -22,6 +69,31 @@ physical `/dev/davinci4-7` names; corrected logical index 0 after
 `ASCEND_RT_VISIBLE_DEVICES=4`; and the documented pair
 `ASCEND_RT_VISIBLE_DEVICES=4` plus `ASCEND_DEVICE_ID=0`. Do not rerun these
 unchanged combinations.
+
+On 2026-09-19 the user-authorized `dias-cont-1` recovery completed. SIGTERM
+did not terminate its PID-1 `sleep infinity`, so the authorized stop required
+SIGKILL. The task disappeared, its container metadata was preserved, namespace
+ID 0 and the all-device UDA claims disappeared, and physical NPU4-7 remained
+process-free. Exactly one unchanged non-privileged canary then mapped only
+physical NPU4 to logical device 0 and completed a real synchronized tensor
+operation on `Ascend910B4` with value `1256.0`. This proves that releasing
+the UDA owner repaired ACL initialization without a driver reset.
+
+The subsequent immutable `npu-gate-v2` attempt nevertheless failed before
+MXR code at `torch.npu.set_device(0)`. A new external containerd task,
+`dias/agentgpu-910b4-qwen35-4b-v0`, had been created at
+2026-09-19T20:40:31Z between the successful canary and the gate. Its root PID
+3523970 runs `sleep infinity`, its OCI spec exposes `/dev/davinci0-7`, and
+`/proc/uda/namespace_node` maps its namespace ID 0 to all eight devices.
+Kernel records for the failed gate report `Conflict open udevid
+(udevid=4; ns_id=0)`. `npu-smi` still reports no compute processes.
+
+The immutable second-attempt root is
+`/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v2`; do not overwrite or
+rerun it. The new external task is not covered by the authorization that named
+`dias-cont-1`; do not stop or delete it without new explicit approval. A
+future attempt must fail closed on current UDA ownership and keep the real
+canary plus MXR probe in one long-lived device-scoped container namespace.
 
 At the same time, `combine-only-ep4_nk` is a foreign privileged container with
 all host devices visible and active workers on physical NPU0-3. Another

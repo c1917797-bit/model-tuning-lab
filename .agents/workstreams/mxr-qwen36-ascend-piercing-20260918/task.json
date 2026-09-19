@@ -15,8 +15,8 @@
     "future_runtime": "vLLM-Ascend v0.27 thin adapter"
   },
   "objective": "Reproduce the official MXR/PTO mechanism faithfully on Ascend, prove multi-step numerical correctness and target-shape advantage, then obtain attributable matched end-to-end performance without quality regression through a plugin-owned monkeypatch.",
-  "status": "npu_gate_environment_blocked_acl_init",
-  "decision": "pending",
+  "status": "terminal_no_go_opportunity_bound_below_gate",
+  "decision": "no-go",
   "timebox": {
     "policy": "one continuous wall-clock window; no pause or reset",
     "activated_at_utc": "2026-09-19T19:52:15Z",
@@ -51,6 +51,38 @@
     },
     "stop_rule": "Stop heavy integration and advance to the next portfolio item, DeltaLog, if the candidate has no clear target-shape kernel advantage, the attributable end-to-end gain is expected to remain below about 5 percent, or the hard deadline is reached."
   },
+  "terminal_result": {
+    "decided_at_utc": "2026-09-19T21:44:00Z",
+    "scope": "Qwen3.6-27B TP4 local geometry on Ascend 910B4 with the pinned vLLM-Ascend v0.23.0 and CANN 9.1 stack",
+    "classification": "method_correct_and_kernel_positive_but_service_opportunity_below_admission_gate",
+    "numerical": "Official staged PTO and MegaGDN candidates passed three chained output/final-state comparisons and bitwise replay at H=12, Hg=4, D=128. Direct MXR and v0.23 triangular solves also passed against the double reference and bitwise replay.",
+    "triangular_inverse": {
+      "speedup_4096": 3.1579721390828808,
+      "speedup_16384": 3.1402504012537897,
+      "service_prefill_fraction_percent_range": [2.9266965280114343, 2.956809639030148],
+      "optimistic_prefill_npu_gain_percent": 2.02,
+      "decode_coverage_percent": 0.0
+    },
+    "full_six_stage": {
+      "service_prefill_fraction_percent_range": [10.836399726913498, 10.873727096736685],
+      "baseline_32768_rank_mean_ms_per_layer": 9.335120416666666,
+      "pto_mega_32768_median_ms_per_layer": 8.589284960180521,
+      "speedup": 1.086833243693682,
+      "estimated_prefill_npu_gain_percent": 0.87,
+      "pto_staged_32768_median_ms_per_layer": 10.126854933332652
+    },
+    "decision_reason": "The paper mechanism does not cover decode and its attributable gain is below the predeclared about-5-percent integration gate. The larger official six-stage fusion is also below the 1.10x target-shape threshold at 32K and predicts less than one percent prefill NPU gain. Heavy service integration and final task-quality testing are therefore not justified for this candidate.",
+    "artifacts": {
+      "candidate_correctness": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v8/numerical-gate.json",
+      "candidate_correctness_sha256": "ab112ae3ee4e2cf91af2399ccf18f65caf159831998f99b976dad7eff3dafa2c",
+      "triangular_timing": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v10/triangular-target-shape-timing.json",
+      "triangular_timing_sha256": "5d32bf31804152fa283dca5e449332908029f913b5cedd47f104378fb3d14d98",
+      "full_candidate_timing": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v11/full-gdn-candidate-timing.json",
+      "full_candidate_timing_sha256": "d73b662c9d0fcc96029e665e0fd4d3c3a10b329c28050e6794640a1debbf9bb7",
+      "service_profile": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/baseline/profile-summary.v1.json",
+      "service_profile_sha256": "b3bddd3b1a8b96571f20c59d801aa21da3da673f875f86a3b04318afbdb480a8"
+    }
+  },
   "official_sources": {
     "megagdn_pto_commit": "d357fd38608f99ddf9b9fb2d217b2e731ecd3a72",
     "megagdn_pto_archive_sha256": "4131a3b24e5b7d9a137574867b708c4ff03c547a956861637d508da958dad06d",
@@ -72,18 +104,15 @@
       "logical index misuse after ASCEND_RT_VISIBLE_DEVICES remapping",
       "missing ASCEND_DEVICE_ID index when ASCEND_RT_VISIBLE_DEVICES is set"
     ],
-    "concurrent_state": "The user-authorized stop-but-do-not-delete test completed: Maxon4ick_torch_910_dev remains Exited (137), yet the one non-privileged canary still failed and the kernel again reported udevid=4 ns_id=0 conflict. At 2026-09-19T20:07Z an external TP4 workload was active on physical NPU0-3 while NPU4-7 were process-free at idle HBM. A separate non-Docker containerd task, dias/dias-cont-1, has run sleep infinity since 2026-09-18T13:20Z with all /dev/davinci0-7 devices exposed and ASCEND_RUNTIME_OPTIONS=NODRV.",
-    "uda_owner_evidence": "/proc/uda/udevice reports udevid 0-7 used by container ns_id 0. /proc/uda/namespace_node maps ns_id 0 to root_tgid 1619069 and udevid 0-7; PID 1619069 is exactly dias/dias-cont-1 in cgroup /dias/dias-cont-1. Ownership is proven.",
+    "concurrent_state": "The authorized dias-cont-1 stop completed without deletion. Its UDA claims disappeared and exactly one non-privileged physical-NPU4 canary completed a synchronized tensor operation on Ascend910B4. Before npu-gate-v2 started, the external controller created dias/agentgpu-910b4-qwen35-4b-v0, a sleep-infinity task exposing /dev/davinci0-7. It reclaimed every UDA device while npu-smi continued to show no compute process.",
+    "uda_owner_evidence": "After dias-cont-1 stopped, /proc/uda showed no ns_id 0 owner and the canary succeeded. At the npu-gate-v2 failure, /proc/uda/namespace_node mapped ns_id 0 to root_tgid 3523970 and udevid 0-7; PID 3523970 is exactly dias/agentgpu-910b4-qwen35-4b-v0 in cgroup /dias/agentgpu-910b4-qwen35-4b-v0. Kernel records tie the gate PID to Conflict open udevid 4, ns_id 0.",
     "recovery_semantics": "Installed driver source uda_access.c shows root-process exit schedules namespace destruction and calls uda_uninit_ns_node_dev, UDA_UNOCCUPY, and uda_unoccupy_dev_by_ns. Stopping only the owning task is the narrow recovery candidate; no driver reset is justified first.",
-    "next_safe_branch": "Do not repeat the canary or restart/delete Maxon. Do not mutate dias-cont-1 without explicit user approval. If stop-but-do-not-delete is approved, stop only that task, verify ns_id 0 no longer owns udevid 4-7, and run exactly one unchanged non-privileged canary. Preserve all evidence and do not touch the external NPU0-3 workload."
+    "next_safe_branch": "Preserve dias-cont-1 stopped and undeleted, and preserve immutable npu-gate-v2. Do not stop or delete the new external agentgpu task without explicit approval. A later attempt must fail closed on UDA procfs ownership and keep the real canary plus MXR probe in the same device-scoped container namespace."
   },
   "next_actions": [
-    "Do not rerun npu-gate-v1 or any already-failed Docker mapping combination.",
-    "Do not run another canary until new evidence proves the UDA namespace state changed.",
-    "Use only physical NPU4-7 for this and every later portfolio experiment. NPU0-3 are never a fallback; while they have an external workload, do not unload modules, restart services, reset cards, or stop that workload.",
-    "After a canary succeeds, create a new immutable npu-gate-v2 root and run the prepared compile plus numerical gate; timing is admitted only if correctness passes.",
-    "If the gate passes, compare official staged, official megakernel, and the v0.23 baseline on the same target shape; preserve attribution between triangular inversion and full fusion.",
-    "Only integrate the winning path into vLLM after the target-shape gate passes.",
-    "By 2026-09-20T19:52:15Z update the reusable paper-to-Ascend maintainer experience, push go, no-go, or environment-inconclusive, and activate the next portfolio slot; never extend this MXR slot."
+    "Do not integrate or benchmark MXR/MegaGDN service code unchanged; reopening requires a materially different mechanism that also covers decode or a changed workload whose measured prefill opportunity exceeds the admission gate.",
+    "Preserve npu-gate-v1 through v11 as immutable environment, correctness, failure-isolation, and timing evidence; never overwrite or rerun a deterministic failure unchanged.",
+    "Advance the one-day paper portfolio to KVBuffer on physical NPU4-7, starting with source parity, real v0.23 seam mapping, and a measured decode IO opportunity bound before implementation.",
+    "Keep the target-lane priority policy: identify and release only new external workloads that actually overlap physical NPU4-7, while leaving physical NPU0-3 and disjoint workloads untouched."
   ]
 }
