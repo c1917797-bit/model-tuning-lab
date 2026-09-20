@@ -1,0 +1,72 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-gdn-decode-megaop
+status: planned
+decision: pending
+hypothesis: "An exact-semantics fused GDN decode route can remove repeated packed-QKV layout traffic, static weight transpose, intermediate gating/norm launches, and recurrent handoff overhead; if the measured 14.15340% route reaches at least 2.79680x locally, a >=10% decode-phase gain is plausible."
+objective: "Deliver and validate an explicit opt-in vLLM-Ascend plugin operator for Qwen3.6-27B on Ascend, then establish whether it improves end-to-end throughput by >=10% without LongBench-v2 or GSM8K loss."
+owner: codex
+git:
+  branch: work/qwen36-gdn-decode-megaop-20260920
+  base_commit: a4a9deff7b9b8805f8b68c4dfd36d0c315c90dc3
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  tokenizer_revision: "same immutable checkpoint as model; exact identity to be refreshed before NPU run"
+  dtype_or_quantization: "BF16 weights/activations, FP32 recurrent state, no quantization"
+  framework_versions:
+    vllm_ascend: "v0.23.0 reference commit 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+    torch_npu: "refresh from owned validation container before run"
+  cann_driver_firmware:
+    status: "refresh before NPU run"
+  hardware_topology:
+    product: "4x Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+    npu_arch: "DAV_2201 / arch22; runtime detection required"
+  runtime_topology:
+    host: chicaihong01
+    container_devices: [0, 1, 2, 3]
+    tensor_parallel_size: 4
+    delivery: "independent explicit opt-in plugin/monkeypatch"
+protocol:
+  primary_metric: "profiler-off end-to-end output throughput for fixed 1024 output tokens"
+  correctness_guardrails:
+    - "actual loaded plugin and operator identity is captured from every rank"
+    - "real NPU multi-step eager output and full mutated state match the unmodified Ascend reference within predeclared per-dtype limits"
+    - "real NPU graph replay is deterministic and preserves state-index semantics"
+    - "no NaN or Inf in output or complete state"
+    - "final LongBench-v2 and GSM8K use thinking disabled, max_tokens=2048, normal EOS, and do not decrease"
+  acceptance_thresholds:
+    - "affected local decode route speedup >=2.79680x before service A/B"
+    - "end-to-end output throughput gain >=10% versus same-stack dense with identical generic optimizations"
+    - "TTFT and TPOT are reported separately"
+    - "LongBench-v2 accuracy delta >=0"
+    - "GSM8K accuracy delta >=0"
+  regression_thresholds:
+    - "any task accuracy decrease"
+    - "candidate throughput gain <10% at final paired acceptance"
+  abort_conditions:
+    - "ABI or state mutation cannot be represented safely through the plugin boundary"
+    - "real NPU numerical or graph-replay gate fails"
+    - "credible affected scope is smaller than the shape-filtered measured seam"
+    - "credible implementation cannot plausibly reach 2.79680x on the affected route"
+    - "result exists only in CPU, simulator, or isolated operator evidence"
+  warmup: "compile/graph warmup outside measured windows; exact count frozen before service A/B"
+  repetitions: 3
+  command: "first: bounded NPU numerical probe; then, only if it passes, paired profiler-off service A/B with fixed output 1024"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
+    sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
+decision_reason: ""
+next_loop: "Complete arch22 ABI audit and CannBot L0 operator specification before implementation."
+rollback:
+  command: "disable the plugin opt-in and stop/remove only the owned validation container; do not touch upstream sources or NPU0-3"
+  verified: false

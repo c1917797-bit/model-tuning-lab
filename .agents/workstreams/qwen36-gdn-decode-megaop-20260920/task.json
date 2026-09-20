@@ -1,0 +1,32 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "qwen36-gdn-decode-megaop-20260920",
+  "objective": "Use the measured Qwen3.6 decode hotspot to design, generate, implement, and validate an exact-semantics Ascend GDN decode mega-op as an explicit opt-in vLLM-Ascend plugin, then determine whether it can deliver at least 10% end-to-end throughput gain without quality loss.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen36-gdn-decode-megaop-20260920",
+  "remote": "origin",
+  "originalBase": "a4a9deff7b9b8805f8b68c4dfd36d0c315c90dc3",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "Qwen3.6-27B",
+    "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd",
+    "cannbot-skills operator specification and development workflow",
+    "ops-transformer arch22 references",
+    "physical NPU4-7"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 during owned validation and benchmark runs"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-gdn-decode-megaop.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/qwen36-gdn-decode-megaop-20260920/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/qwen36-gdn-decode-megaop/**"}
+  ],
+  "validationCommands": [
+    "python3 /cache/cch/cannbot-skills/ops/ops-spec-gen/scripts/validate_spec.py projects/qwen36-gdn-decode-megaop/operators/qwen36_gdn_decode_megaop/spec.yaml --strict",
+    "python3 -m pytest projects/qwen36-gdn-decode-megaop/tests",
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "planned",
+  "integrationState": "not-ready"
+}
