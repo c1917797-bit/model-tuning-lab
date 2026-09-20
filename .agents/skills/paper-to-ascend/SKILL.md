@@ -164,6 +164,17 @@ not require retraining unless retraining is explicitly in scope.
 - Continue only when a distinct software-only mechanism remains after removing
   custom-hardware contributions. Otherwise close a scoped plugin-delivery
   no-go before consuming NPU time.
+- For BF16 fused candidates, algebraic equivalence is not numerical
+  equivalence. Reproduce the first failing random input, isolate stages with
+  identity/zero-state constructions, and preserve a deployed native semantic
+  boundary when the custom path cannot reproduce it exactly; never relax the
+  gate to keep a wider fusion.
+- A queue-safe custom operator can pass output/state/graph checks exactly and
+  still lose end to end. Measure the smallest exact plugin boundary once under
+  the frozen service protocol; if throughput is negative and the removed
+  boundary has already consumed the credible Amdahl opportunity, record an
+  implementation-scoped no-go and move to the next paper instead of polishing
+  operator microbenchmarks.
 
 ## Do not do
 

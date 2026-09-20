@@ -1,0 +1,2 @@
+[vllm.general_plugins]
+qwen36_gdn_decode_core = qwen36_gdn_decode_core_plugin:register

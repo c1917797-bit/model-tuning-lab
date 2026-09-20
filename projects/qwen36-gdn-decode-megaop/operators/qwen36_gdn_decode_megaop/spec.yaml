@@ -3,7 +3,9 @@
 
 # Generated with CannBot ops-spec-gen, then specialized from the audited
 # Qwen3.6-27B TP4 vLLM-Ascend decode ABI. This is an L0 contract, not evidence
-# that the AscendC kernel has been implemented or validated.
+# that the full mega-op has been implemented or validated. The implemented
+# v13 candidate deliberately stops at native-normalized Q/K plus custom
+# gating/recurrent; see ABI_AUDIT.md for its exact ABI and rejected E2E result.
 schema_version: 1
 
 op:
@@ -175,7 +177,7 @@ dtype_policy:
         a_log: float32
         a: bfloat16
         b: bfloat16
-        dt_bias: float32
+        dt_bias: bfloat16
         recurrent_state: float32
         actual_seq_lengths: int32
         conv_cache_indices: int32

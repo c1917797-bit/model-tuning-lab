@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-gdn-decode-megaop
-status: baselined
-decision: pending
+status: completed
+decision: rejected
 hypothesis: "An exact-semantics fused GDN decode route can remove repeated packed-QKV layout traffic, static weight transpose, intermediate gating/norm launches, and recurrent handoff overhead; if the measured 14.15340% route reaches at least 2.79680x locally, a >=10% decode-phase gain is plausible."
 objective: "Deliver and validate an explicit opt-in vLLM-Ascend plugin operator for Qwen3.6-27B on Ascend, then establish whether it improves end-to-end throughput by >=10% without LongBench-v2 or GSM8K loss."
 owner: codex
@@ -66,7 +66,36 @@ results:
       max_output_abs_error_vs_independent_formula: 9.5367431640625e-07
       max_fp32_state_abs_error_vs_independent_formula: 1.2959353625774384e-05
       scope: "reference-chain numerical/state/graph oracle only; no candidate or performance claim"
-  candidate: {}
+  candidate:
+    v13_hybrid:
+      boundary: "native causal conv and native Q/K l2norm; custom async gating plus recurrent update"
+      operator_library_sha256: feaf6a4297dc2b688dc41cc5c49851188c7de8d156b2aa9583f4b4b38e38ed69
+      numerical_gate:
+        status: candidate_post_conv_gdn_core_gate_pass
+        physical_device: 4
+        queue_ordering_iterations: 32
+        batches: [1, 16]
+        stateful_steps_per_batch: 8
+        eager_graph_pass: true
+        max_abs_error: 0.0
+        max_relative_l2_error: 0.0
+      service_dispatch:
+        physical_devices: [4, 5, 6, 7]
+        dispatch_events_per_rank: 48
+      performance_screen:
+        requests: 40
+        concurrency: 16
+        input_tokens: 32768
+        prefix_tokens: 16384
+        output_tokens_per_request: 1024
+        output_tokens: 40960
+        failed_requests: 0
+        throughput_tokens_per_second: 118.45517928998409
+        mean_ttft_ms: 43965.65800450626
+        weighted_tpot_ms: 76.39990980571733
+        throughput_delta_vs_dense_percent: -5.85280988344421
+        ttft_delta_vs_dense_percent: 14.324528074179321
+        tpot_delta_vs_dense_percent: 3.763589709586057
   cold: {}
   steady: {}
   boundary: {}
@@ -78,8 +107,12 @@ artifacts:
   - path: /cache/cch/qwen36-gdn-decode-megaop-20260920/native-golden-v1/report.json
     sha256: 5df8a431b892cf82bc2be986cd4e6d7b62e06a69d558b86094e8c4822cddaf19
     producer_sha256: 3d26f64a5855d1ef4c420d2c01ea2ff1da0cc3de39e234fb86c82156f390d794
-decision_reason: ""
-next_loop: "Implement the independently named direct-invoke candidate for rearrange+gating+Q/K normalization+recurrent, then compare its full output and state against the frozen native golden gate before considering causal-conv fusion or performance."
+  - path: /cache/cch/qwen36-gdn-decode-megaop-20260920/candidate-core-gate-v13-hybrid-v1/report.json
+    sha256: e0477146e3e89ef888b8aaec12074b55b5cc88f60b6ea3d58437b7ba1c299a9f
+  - path: /cache/cch/qwen36-gdn-decode-megaop-20260920/service-candidate-v13-hybrid-v1/performance.screen.run1.json
+    sha256: 0ddd8ed4973ea5ead95d488944415eba51e4ec7797bcbd7ee4cc0cc584e95954
+decision_reason: "The exact v13 hybrid passed the complete real-NPU numerical/state/graph gate and dispatched on all TP4 workers, but the one-shot fixed-1024 E2E screen delivered 118.455179 tok/s versus the frozen same-stack dense 125.819134 tok/s (-5.852810%), with TTFT and TPOT both worse. The failed performance gate makes final accuracy spend unjustified."
+next_loop: "Switch to DeltaLog. First prove a distinct deferred recurrent-state materialization seam and an end-to-end Amdahl opportunity in the real v0.23 Qwen3.6 path; abort before implementation if the runtime already forces per-step materialization."
 rollback:
   command: "disable the plugin opt-in and stop/remove only the owned validation container; do not touch upstream sources or NPU0-3"
-  verified: false
+  verified: true

@@ -1,7 +1,8 @@
 # Qwen3.6 TP4 GDN decode mega-op: generation and ABI audit
 
 Date: 2026-09-20  
-Status: L0 contract and native NPU golden oracle verified; no candidate AscendC implementation or end-to-end performance result yet.
+Status: v13 exact hybrid candidate passed real-NPU numerical/state/graph gates
+but failed the first fixed-1024 end-to-end performance screen.
 
 ## Scope and fail-closed boundary
 
@@ -34,7 +35,7 @@ python3 ops/ops-spec-gen/scripts/generate_spec.py
   --paradigms LayoutTransform,Reduction,SlidingWindow,Recurrence,Stateful,NumericalStable,FusedComposite
   --paradigm-groups fusion
   --axis-source fixed
-  --inputs mixed_qkv:bfloat16;conv_weight:bfloat16;conv_bias:bfloat16;conv_state:bfloat16;a_log:float32;a:bfloat16;b:bfloat16;dt_bias:float32;recurrent_state:float32;actual_seq_lengths:int32;conv_cache_indices:int32;ssm_state_indices:int32
+  --inputs mixed_qkv:bfloat16;conv_weight:bfloat16;conv_bias:bfloat16;conv_state:bfloat16;a_log:float32;a:bfloat16;b:bfloat16;dt_bias:bfloat16;recurrent_state:float32;actual_seq_lengths:int32;conv_cache_indices:int32;ssm_state_indices:int32
   --outputs output,conv_state_out,recurrent_state_out
   --chips Ascend910B
   --output-dir /opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-gdn-decode-megaop/operators/qwen36_gdn_decode_megaop
@@ -139,6 +140,55 @@ External evidence:
 - vLLM-Ascend `gdn.py` SHA256:
   `d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816`
 
-This does not satisfy the candidate half of the gate. The future direct-invoke
-operator must pass the same output, complete-state, unselected-slot, pointer,
-eager, and graph checks before any timing result is admissible.
+This reference alone did not satisfy the candidate half of the gate.
+
+## Candidate evolution and exact boundary
+
+The initial custom boundary included Q/K normalization. Exact replay first
+failed only at queue iteration 3. A frozen-input algebraic diagnostic then
+isolated the mismatch:
+
+- Q isolation was exact for every token.
+- K isolation was exact for tokens 0-13 and failed at token 14 with maximum
+  state absolute error `0.00048828125`.
+- Replacing the row reduction implementation did not change the mismatch.
+
+The failure is therefore at the BF16 K-normalization boundary, not gating,
+queue ordering, recurrent state indexing, or the state ABI. Algebraic formula
+equivalence was not accepted as numerical equivalence.
+
+The v13 candidate preserves the deployed native `l2norm_fwd` for Q and K,
+then invokes an independently named, queue-safe AscendC operator for gating
+and recurrent update. Its real-NPU gate passed 32 queue-order iterations plus
+batch 1 and batch 16 over eight stateful steps in eager and NPUGraph modes.
+Every compared output and complete state was bitwise equal; maximum absolute
+and relative-L2 error were both `0.0`.
+
+## End-to-end screen
+
+The plugin was loaded on all four TP workers on physical NPU4-7 and a real
+request produced 48 candidate dispatches per rank. The profiler-off screen used
+40 requests at concurrency 16, input 32768, prefix 16384, and fixed output
+1024. All 40960 output tokens completed.
+
+- frozen dense: `125.819134 tok/s`, mean TTFT `38456.890 ms`, weighted
+  TPOT `73.628823 ms`;
+- v13 hybrid: `118.455179 tok/s`, mean TTFT `43965.658 ms`, weighted
+  TPOT `76.399910 ms`;
+- delta: throughput `-5.852810%`, TTFT `+14.324528%`, TPOT
+  `+3.763590%`.
+
+The v13 screen is a performance rejection of this implemented boundary.
+Accuracy evaluation is intentionally not run because the candidate already
+fails the performance gate.
+
+Evidence:
+
+- candidate gate:
+  `/cache/cch/qwen36-gdn-decode-megaop-20260920/candidate-core-gate-v13-hybrid-v1/report.json`,
+  SHA256 `e0477146e3e89ef888b8aaec12074b55b5cc88f60b6ea3d58437b7ba1c299a9f`;
+- performance:
+  `/cache/cch/qwen36-gdn-decode-megaop-20260920/service-candidate-v13-hybrid-v1/performance.screen.run1.json`,
+  SHA256 `0ddd8ed4973ea5ead95d488944415eba51e4ec7797bcbd7ee4cc0cc584e95954`;
+- candidate library:
+  SHA256 `feaf6a4297dc2b688dc41cc5c49851188c7de8d156b2aa9583f4b4b38e38ed69`.

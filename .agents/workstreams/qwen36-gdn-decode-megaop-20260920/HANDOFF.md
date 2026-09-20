@@ -2,7 +2,8 @@
 
 ## Status
 
-- Stage: native reference verified; candidate implementation not started.
+- Stage: v13 exact hybrid candidate rejected by one-shot end-to-end screen;
+  evidence checkpoint ready.
 - Branch: `work/qwen36-gdn-decode-megaop-20260920`.
 - Base: portfolio synthesis checkpoint `a4a9def`.
 - Hardware lane: physical NPU4-7 only.
@@ -17,10 +18,18 @@ covering 14.15340% of decode operator time. Under the diagnostic Amdahl model,
 the affected route needs at least 2.79680x local speedup before a 10% decode
 phase gain is plausible. This is an opportunity gate, not an end-to-end result.
 
-The target chain is:
+The original target chain was:
 
 `static conv-weight transpose -> causal conv/state update -> packed QKV
 rearrangement -> gating -> Q/K L2 normalization -> recurrent state update`.
+
+The implemented v13 boundary is deliberately smaller:
+
+`native causal conv -> native Q/K l2norm -> custom async gating+recurrent`.
+
+The boundary was reduced after exact failing-input diagnostics proved that the
+custom K-normalization path changed BF16 values. It is not valid to relax that
+error merely because the formulas are algebraically equivalent.
 
 ## CannBot provenance
 
@@ -101,10 +110,57 @@ or a performance gain.
   selection explicit and fail closed on unvalidated architectures.
 - Never infer support from an image tag or model name.
 
+## Candidate numerical result
+
+The queue-safe v13 operator is independently named, explicit opt-in, and
+delivered only through this plugin project. It preserves the deployed native
+`l2norm_fwd` boundary and fuses gating plus recurrent state update.
+
+- Operator library SHA256:
+  `feaf6a4297dc2b688dc41cc5c49851188c7de8d156b2aa9583f4b4b38e38ed69`.
+- Gate report:
+  `/cache/cch/qwen36-gdn-decode-megaop-20260920/candidate-core-gate-v13-hybrid-v1/report.json`.
+- Gate report SHA256:
+  `e0477146e3e89ef888b8aaec12074b55b5cc88f60b6ea3d58437b7ba1c299a9f`.
+- Physical NPU4: 32 queue-order iterations, batch 1 and batch 16 with eight
+  stateful steps each, eager and NPUGraph all passed.
+- Output, complete recurrent state, successor clones, indices, unselected
+  slots, storage pointers, and metadata were exact; maximum absolute and
+  relative-L2 error were both `0.0`.
+
+This proves the implemented operator boundary, not service performance.
+
+## End-to-end result and decision
+
+The TP4 service ran on physical NPU4-7. A real request recorded 48
+`candidate_dispatch` events on each of the four workers. The fixed screen used
+40 requests, concurrency 16, input 32768, shared prefix 16384, and exactly 1024
+output tokens per request with profiler disabled.
+
+| Metric | frozen dense | v8 sync candidate | v13 exact hybrid | v13 vs dense |
+| --- | ---: | ---: | ---: | ---: |
+| output throughput (tok/s) | 125.819134 | 115.069990 | 118.455179 | -5.852810% |
+| mean TTFT (ms) | 38,456.890 | 47,521.586 | 43,965.658 | +14.324528% |
+| weighted TPOT (ms) | 73.628823 | 77.060475 | 76.399910 | +3.763590% |
+
+All 40 requests completed 1024 tokens and all finish reasons were `length`.
+The v13 queue-safe route recovered 2.941853% throughput over v8, but remained
+slower than dense and far below the required 138.401047 tok/s (+10%) target.
+
+- Performance report:
+  `/cache/cch/qwen36-gdn-decode-megaop-20260920/service-candidate-v13-hybrid-v1/performance.screen.run1.json`.
+- Report SHA256:
+  `0ddd8ed4973ea5ead95d488944415eba51e4ec7797bcbd7ee4cc0cc584e95954`.
+
+Decision: reject this implemented fusion boundary for service acceptance. Do
+not spend LongBench-v2 or GSM8K time on a performance-negative candidate.
+This is not a blanket rejection of every paper mechanism; it is evidence that
+the exact boundary available after preserving native BF16 normalization does
+not provide a useful end-to-end gain in this stack.
+
 ## Immediate next action
 
-Create the independently named direct-invoke AscendC candidate scaffold in the
-plugin project. First fuse packed-QKV rearrangement, gating, Q/K normalization,
-and recurrent update while reusing the audited recurrent algorithm; then run
-the candidate against the frozen native golden probe. Only a passing candidate
-may absorb causal conv and proceed to the `2.79680x` affected-route gate.
+Checkpoint and push this negative result, release the owned service without
+deleting its evidence, then open the next bounded Paper-to-Ascend loop for
+DeltaLog. DeltaLog must first prove a distinct deferred-state materialization
+seam in the real v0.23 Qwen3.6 decode path before implementation.
