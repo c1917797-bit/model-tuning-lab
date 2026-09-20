@@ -171,6 +171,12 @@ unchanged.
 Checkpoint and push the scoped negative result, stop the owned DeltaLog service
 without deleting its evidence, and open the next ranked Paper-to-Ascend loop.
 
+The owned service container was subsequently stopped without deletion. Fresh
+device evidence showed no processes and baseline HBM on physical NPU4-7.
+Commit 5f6fda3 contains the implementation, result, and reusable skill lesson;
+its push remains pending because the remote-egress safety review requires
+explicit approval for this exact repository payload.
+
 ## AscendC implementation status
 
 Direct-invoke v1 compiled and reached physical NPU4. Its first append produced

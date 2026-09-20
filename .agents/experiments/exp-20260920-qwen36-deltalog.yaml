@@ -176,4 +176,5 @@ decision_reason: "The numerically valid v4c service delivered 112.424603 tok/s, 
 next_loop: "Preserve this implementation-scoped no-go and move to the next ranked paper. Reopen DeltaLog only with a distinct device-side mixed-batch materialization design and a concurrency/batch regime matching a declared production workload."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
-  verified: false
+  verified: true
+  evidence: "Stopped qwen36_deltalog_service_candidate_v4c without deleting it; npu-smi then showed no process and baseline HBM on physical NPU4-7."
