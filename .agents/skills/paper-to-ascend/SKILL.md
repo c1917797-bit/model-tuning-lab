@@ -164,6 +164,13 @@ not require retraining unless retraining is explicitly in scope.
 - Keep end-task tolerance separate from intermediate correctness. A permitted
   GSM8K score delta does not authorize nondeterministic recurrent-state replay,
   because such a candidate has no stable semantics to benchmark.
+- For task-quality comparisons, record per-run correct counts and paired
+  candidate-minus-baseline differences, not only the means. Audit baseline
+  variance before interpreting a small delta. A negative mean does not prove a
+  deterministic regression when paired uncertainty spans zero, but an interval
+  spanning zero also does not prove no regression. Predeclare either literal
+  no-loss, a non-inferiority margin, or an exact-output criterion; classify
+  underpowered evidence as inconclusive and not accepted.
 - Classify the paper's intervention layer before implementing anything. A
   custom-chiplet or package-level design whose benefit depends on different
   compute arrays, memory technologies, and physical interconnects cannot be
