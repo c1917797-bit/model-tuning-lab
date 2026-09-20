@@ -1,0 +1,26 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260920-qwen36-sparse-prefix-caching",
+  "objective": "Pierce arXiv:2605.05219 on Qwen3.6-27B and Ascend 910B4 as an opt-in vLLM-Ascend plugin, with exact state/KV restoration and same-budget end-to-end evidence.",
+  "targetBranch": "main",
+  "workBranch": "work/exp-20260920-qwen36-sparse-prefix-caching",
+  "remote": "origin",
+  "originalBase": "6854b7cca88c5b883f41290cd1f9c1b1b619ce6d",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "arabel1a/sparse-prefix-caching@d3050d44ed9d878c396cf3fcf632d63743ffed5b",
+    "vllm-ascend@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 while experiments run"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-sparse-prefix-caching.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/exp-20260920-qwen36-sparse-prefix-caching/**"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "planned",
+  "integrationState": "not-ready"
+}

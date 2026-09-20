@@ -1,0 +1,68 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-sparse-prefix-caching
+status: planned
+decision: pending
+hypothesis: "For partially shared long-prefix traffic, distribution-aware sparse exact GDN checkpoints reduce replay work at a fixed recurrent-state byte budget and improve Qwen3.6-27B TP4 end-to-end output throughput by at least 10% over the strongest fixed checkpoint policy."
+objective: "Faithfully migrate arXiv:2605.05219 to an opt-in vLLM-Ascend plugin and obtain correctness-first, same-budget NPU end-to-end evidence within 24 hours."
+owner: codex
+git:
+  branch: work/exp-20260920-qwen36-sparse-prefix-caching
+  base_commit: 6854b7cca88c5b883f41290cd1f9c1b1b619ce6d
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; official paper code@d3050d44ed9d878c396cf3fcf632d63743ffed5b"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  tokenizer_revision: "to be hashed during live orientation"
+  dtype_or_quantization: "BF16 weights; FP32 recurrent state; no quantization"
+  framework_versions:
+    vllm_ascend: "v0.23.0"
+    container_image: "must be freshly verified before launch"
+  cann_driver_firmware:
+    status: "must be freshly captured before launch"
+  hardware_topology:
+    product: "4x Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology:
+    host: chicaihong01
+    plugin_delivery: "independent opt-in monkeypatch; no upstream source edits"
+    port: 8226
+protocol:
+  primary_metric: "end-to-end output tokens per second versus strongest same-budget fixed checkpoint policy"
+  correctness_guardrails:
+    - "real NPU path and physical NPU4-7 proven"
+    - "finite outputs and cache tensors"
+    - "greedy emitted token IDs equal to no-restore reference"
+    - "recurrent, convolution and attention KV restore/replay semantics verified"
+    - "slot reuse and relevant eager/graph lifecycle cases pass"
+  acceptance_thresholds:
+    - "mean output throughput gain >= 10% over strongest same-budget control"
+    - "TTFT and TPOT reported separately"
+    - "three comparable repetitions per arm"
+    - "LongBench-v2 and GSM8K paired accuracy do not decrease at max_tokens=2048"
+  regression_thresholds:
+    - "any task accuracy decrease in final paired quality gate"
+    - "TPOT regression > 2% without compensating accepted end-to-end gain"
+  abort_conditions:
+    - "unsafe or absent production state extraction/restoration seam"
+    - "real-NPU correctness failure"
+    - "no meaningful partial-prefix overlap in the frozen workload"
+    - "24-hour paper budget exhausted"
+  warmup: "explicit service and workload warmups, recorded per arm"
+  repetitions: 3
+  command: "to be frozen after production-path audit; fixed 1024 output tokens, 40 requests, concurrency 16"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - "/cache/cch/sparse-prefix-caching-official-2605.05219 (external reference checkout)"
+decision_reason: ""
+next_loop: "Audit v0.23 hybrid cache/state lifecycle and implement the smallest NPU extraction/restore canary."
+rollback:
+  command: "disable the explicit plugin switch and remove only the experiment containers/processes on physical NPU4-7"
+  verified: false
