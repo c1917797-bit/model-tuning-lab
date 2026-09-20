@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "source_summary_path": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-summary.json",
+  "source_summary_sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e",
+  "method": {
+    "pairing": "run index",
+    "interval": "two-sided paired t interval",
+    "confidence": 0.95,
+    "degrees_of_freedom": 2,
+    "critical_t": 4.302652729911275,
+    "warning": "Only three pairs; interval is descriptive and does not prove equivalence."
+  },
+  "datasets": {
+    "longbench_v2": {
+      "requests_per_run": 127,
+      "baseline_correct": [56, 57, 63],
+      "candidate_correct": [60, 59, 56],
+      "paired_correct_count_differences": [4, 2, -7],
+      "paired_percentage_point_differences": [
+        3.1496062992125986,
+        1.5748031496062993,
+        -5.511811023622047
+      ],
+      "mean_delta_percentage_points": -0.26246719160104975,
+      "sample_standard_deviation_percentage_points": 4.613752186678989,
+      "paired_t_95_percent_interval_percentage_points": [
+        -11.723662991631905,
+        11.198728608429803
+      ]
+    },
+    "gsm8k": {
+      "requests_per_run": 1319,
+      "baseline_correct": [1268, 1266, 1271],
+      "candidate_correct": [1268, 1265, 1266],
+      "paired_correct_count_differences": [0, -1, -5],
+      "paired_percentage_point_differences": [
+        0.0,
+        -0.0758150113722517,
+        -0.37907505686125853
+      ],
+      "mean_delta_percentage_points": -0.1516300227445034,
+      "sample_standard_deviation_percentage_points": 0.2005876657365118,
+      "paired_t_95_percent_interval_percentage_points": [
+        -0.6499174077312814,
+        0.3466573622422745
+      ]
+    }
+  },
+  "decision": {
+    "confirmed_regression": false,
+    "no_regression_proven": false,
+    "strict_quality_gate_passed": false,
+    "classification": "inconclusive_not_accepted",
+    "reason": "Observed means are negative, but baseline/candidate run variance and three paired samples do not establish a deterministic regression or non-regression."
+  }
+}

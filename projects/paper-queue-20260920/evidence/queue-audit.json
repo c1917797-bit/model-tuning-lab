@@ -68,7 +68,7 @@
     {
       "rank": 5,
       "short_name": "hypic",
-      "result": "performance_reproduction_passed_strict_quality_gate_not_passed",
+      "result": "performance_reproduction_passed_quality_inconclusive_strict_gate_not_accepted",
       "metrics": {
         "output_throughput_gain_percent": 36.0663,
         "ttft_improvement_percent": 43.6345,
@@ -84,6 +84,10 @@
         {
           "path": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-summary.json",
           "sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e"
+        },
+        {
+          "path": "projects/paper-queue-20260920/evidence/hypic-quality-post-audit.json",
+          "sha256": "b5f48b0c83f5b573bdb4123402a6b1f07a5a53a0e2d4fbe4fb80ed3a1d40105e"
         }
       ]
     },
@@ -152,6 +156,7 @@
     "only_candidate_above_10pct_e2e": "hypic",
     "hypic_workload_scope": "shared-prefix",
     "hypic_strict_joint_acceptance": false,
+    "hypic_quality_classification": "inconclusive_not_accepted",
     "universal_10pct_claim_supported": false,
     "strongest_reusable_operator_artifact": "stable-triangular-inversion-mxr"
   }

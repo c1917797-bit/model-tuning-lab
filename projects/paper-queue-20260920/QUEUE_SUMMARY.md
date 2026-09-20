@@ -16,7 +16,7 @@ and paper-reported numbers are not substitutes for this contract.
 | 2 | DeltaLog | No-go at opportunity gate | Recurrent fraction was 4.52-4.84%; even perfect deletion bounded speedup to 1.047-1.051x, while the paper-local bound was about 1.021-1.023x. |
 | 3 | When Good Enough Is Optimal | No-go at opportunity gate | The reported 5.2x local inversion speedup bounded measured prefill improvement to about 1.024x; decode coverage was zero. |
 | 4 | KVBuffer | No-go at opportunity gate | Faithful scope covered only 4.52-4.84% of the measured path. Perfect deletion was still below 1.051x. An aggressive derivative would need to remove over 90% of a much broader, no-longer-faithful scope. |
-| 5 | HYPIC | Performance reproduction passed for the shared-prefix workload; strict joint acceptance not passed | Three-run means: throughput +36.07%, TTFT -43.63%, TPOT -18.99%. LongBench-v2 changed by -0.2625 percentage points and GSM8K by -0.1516 percentage points, so the literal no-regression gate remains unmet. User directed that HYPIC not be rerun. |
+| 5 | HYPIC | Performance reproduction passed for the shared-prefix workload; quality is inconclusive and strict joint acceptance is not passed | Three-run means: throughput +36.07%, TTFT -43.63%, TPOT -18.99%. LongBench-v2 changed by -0.2625 percentage points and GSM8K by -0.1516 percentage points. The paired runs are highly variable and their intervals include zero, so this is not evidence of a deterministic regression; nevertheless the literal no-regression gate is unproven. User directed that HYPIC not be rerun. |
 | 6 | Sparse Prefix Caching | No-go for a thin v0.23 adapter | The real scheduler hook was reached on NPU, but native prefix caching and the HYPIC/GDN state lifecycle conflict. A faithful implementation needs an atomic runtime seam rather than a thin monkeypatch. |
 | 7 | Scaling State-Space Models with Tensor Parallelism | No-go as incremental work | Current vLLM/vLLM-Ascend already shards the relevant projections and recurrent state. BF16-to-FP16 does not reduce bytes. Existing communication headroom was below the 10% target. |
 | 8 | EPD-Serve | No-go for the fixed text-only, four-card contract | The encoder path is bypassed by the accepted workload. Faithful PD disaggregation needs two TP4 model instances (eight cards), outside the authorized topology. |
@@ -30,8 +30,10 @@ still open:
 
 - HYPIC is the only candidate that crossed the 10% end-to-end performance line,
   and only for its intended shared-prefix workload.
-- HYPIC did not satisfy the literal zero-regression quality rule in the recorded
-  formal reproduction.
+- HYPIC did not prove the literal zero-regression quality rule in the recorded
+  formal reproduction. The observed mean deltas are negative, but a post-audit
+  shows that the three-run paired evidence is inconclusive rather than proof of
+  a deterministic quality loss.
 - None of the other nine papers yielded a valid general-purpose, end-to-end
   candidate under the current Qwen3.6-27B/v0.23/four-NPU contract.
 - MXR/stable triangular inversion is the strongest reusable operator artifact,
@@ -59,3 +61,19 @@ opportunity gate.
    scheduler identity, allocation, graph keys, rollback, and cache ownership.
 7. Preserve negative results with exact evidence so a later version change can
    trigger a targeted re-audit rather than a full rerun.
+
+## HYPIC quality post-audit
+
+The three paired LongBench-v2 correct-count differences were +4, +2, and -7
+out of 127. The mean was -0.2625 percentage points, with a two-sided 95% paired
+t interval of approximately [-11.724, 11.199] percentage points.
+
+The three paired GSM8K differences were 0, -1, and -5 out of 1319. The mean
+was -0.1516 percentage points, with a two-sided 95% paired t interval of
+approximately [-0.650, 0.347] percentage points.
+
+With only three pairs, these intervals are descriptive rather than a strong
+statistical guarantee. They show why neither no regression nor confirmed
+regression is justified. A valid strict closeout would require a deterministic
+paired protocol or a pre-declared non-inferiority margin, but no additional
+HYPIC run is authorized in this queue.
