@@ -82,10 +82,12 @@ make the experiment reproducible and evidence-bound.
 
 ## Current repository guidance
 
-The current installed target is dense. The active Paper-to-Ascend direction is
-exact speculative decoding using the checkpoint's built-in Qwen3.5 MTP head.
-Dynamic MoE is retained as a superseded audit exemplar, not an active
-optimization path for the dense target.
+The current target is Qwen3.6-27B hybrid attention/GDN inference on Ascend,
+delivered as an explicit opt-in vLLM-Ascend plugin or monkeypatch. Process the
+ranked paper queue one paper at a time, normally within one day per paper. HYPIC
+is already pierced and must not be rerun unless a new, explicit hypothesis
+requires it. Do not introduce MTP or speculative decoding as a substitute for a
+paper's own mechanism.
 
 This is not a permanent architecture restriction. Dense is only the current
 verified target at this handoff. Future MoE, quantization, sparse, multimodal,
@@ -124,6 +126,21 @@ not require retraining unless retraining is explicitly in scope.
 - Do not infer checkpoint count or mechanism activation from an ambiguously
   named counter such as placements. Trace the producer and record the semantic
   unit (requests, rows, blocks, or checkpoints).
+- Compare a paper's baseline with the target baseline before treating its
+  headline speedup as available headroom. Single-device-to-TP scaling is not an
+  incremental gain over an already-sharded TP service.
+- Audit whether the current stack already contains each proposed mechanism.
+  If state, packed projections, local operators, and output aggregation already
+  match the paper, record that as an applicability no-go instead of rebuilding
+  the same design under a new plugin name.
+- Communication quantization only saves bandwidth when the proposed transfer
+  dtype is narrower than the live payload. BF16-to-FP16 changes representation
+  but not bytes; more aggressive INT8 is a distinct algorithm and needs its own
+  correctness and accuracy contract.
+- Use non-overlapped critical-path communication for an end-to-end ceiling.
+  Summed HCCL kernel durations may overlap and must not be substituted for the
+  critical path. Stop early when even zero-cost communication cannot meet the
+  acceptance target.
 
 ## Do not do
 

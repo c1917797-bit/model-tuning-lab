@@ -1,0 +1,49 @@
+{
+  "schema": "paper-to-ascend-applicability/v1",
+  "paper": {
+    "arxiv": "2602.21144v1",
+    "title": "Scaling State-Space Models on Multiple GPUs with Tensor Parallelism",
+    "official_code_status": "not_released_authors_commit_to_release_on_acceptance"
+  },
+  "target": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "accelerator": "Ascend 910B4",
+    "physical_npus": [4, 5, 6, 7],
+    "tensor_parallel_size": 4,
+    "live_dtype": "torch.bfloat16",
+    "vllm_commit": "0fc695fc6d1d82e9a5ac6835ac8e4e1c83703665",
+    "vllm_ascend_commit": "5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  },
+  "source_evidence": {
+    "qwen_gdn_path": "/cache/austinov/src/vllm/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py",
+    "qwen_gdn_sha256": "885c56f5e3584ab60bb4ce4b42cf8259e5e92c86ba13aa6128e6ed7a2a20d2b0",
+    "ascend_gdn_path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/gdn.py",
+    "ascend_gdn_sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "already_present": [
+      "tp_sharded_state_cache",
+      "channel_local_qkvz_ba_projections",
+      "channel_local_convolution",
+      "channel_local_recurrent_update",
+      "row_parallel_output_boundary"
+    ]
+  },
+  "profile_evidence": {
+    "path": "/cache/cch/state-reduction-qwen38-drrqr-aligned-20260908/dk64-energy/preflight/prefill-mc2-mixed-v1/profile-current-v1/profile-comparison.v1.json",
+    "sha256": "9cca1cd11a9eecd12c6e45988505d767c92ac6aa41fe3a857445a50d5b64115b",
+    "phase": "decode",
+    "profile_steps": 30,
+    "decode_concurrency": 16,
+    "kernel_envelope_mean_ms": 1388.008835,
+    "communication_without_compute_mean_ms": 65.0222,
+    "summed_hcom_allreduce_rank_mean_ms": 122.24209000000042,
+    "ideal_critical_path_speedup_percent": 4.9148,
+    "summed_kernel_upper_bound_speedup_percent": 9.657
+  },
+  "decision": {
+    "status": "rejected",
+    "scope": "current_qwen36_tp4_v023_plugin_target",
+    "reason": "core_mechanisms_already_present_and_fp16_quantization_does_not_reduce_live_bf16_payload",
+    "end_to_end_performance_run": "not_launched_no_supported_candidate",
+    "accuracy_run": "not_launched_no_candidate"
+  }
+}
