@@ -80,6 +80,13 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 
 - Re-prove physical NPU/process/container ownership in the same session as each
   action. HTTP health or container existence alone is insufficient.
+- If `npu-smi` shows no process and baseline HBM but a non-privileged canary
+  fails with ACL `Resource_Busy`, inspect device-node holders, container
+  device mappings, and the kernel log for `uda_occupy_dev_by_ns`. On this
+  host, an all-device container running only `sleep infinity` held the UDA
+  namespace without a visible NPU process; stopping it without deleting it
+  released the device. Treat this as a diagnostic signature, not permission to
+  stop an unidentified workload: identify its owner and rollback first.
 - Treat NPU0-3, NPU4-7, ports, and running services as leased resources, not
   permanent assignments.
 - Do not stop, restart, or replace a workload until its owning workstream and

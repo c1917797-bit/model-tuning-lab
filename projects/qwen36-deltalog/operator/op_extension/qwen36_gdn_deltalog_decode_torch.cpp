@@ -122,12 +122,12 @@ at::Tensor qwen36_gdn_deltalog_decode_torch(
     TORCH_CHECK(kLog.sizes() == at::IntArrayRef({slots, kValueHeads, kCapacity, kHeadDim}),
                 "k_log must have shape [S,12,7,128]");
     TORCH_CHECK(uLog.sizes() == kLog.sizes(), "u_log must match k_log shape");
-    TORCH_CHECK(lambdaLog.sizes() == at::IntArrayRef({slots, kValueHeads, 8}),
-                "lambda_log must have padded shape [S,12,8]");
-    TORCH_CHECK(cumulativeDecay.sizes() == at::IntArrayRef({slots, kValueHeads, 8}),
-                "cumulative_decay must have padded shape [S,12,8]");
-    TORCH_CHECK(logLength.sizes() == at::IntArrayRef({slots, kValueHeads, 8}),
-                "log_length must have padded shape [S,12,8]");
+    TORCH_CHECK(lambdaLog.sizes() == at::IntArrayRef({slots, kValueHeads, 16}),
+                "lambda_log must have padded shape [S,12,16]");
+    TORCH_CHECK(cumulativeDecay.sizes() == at::IntArrayRef({slots, kValueHeads, 16}),
+                "cumulative_decay must have padded shape [S,12,16]");
+    TORCH_CHECK(logLength.sizes() == at::IntArrayRef({slots, kValueHeads, 16}),
+                "log_length must have padded shape [S,12,16]");
     TORCH_CHECK(actualSeqLengths.dim() == 1 &&
                     actualSeqLengths.numel() == tokens + 1,
                 "actual_seq_lengths must contain T+1 elements");

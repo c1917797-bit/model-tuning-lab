@@ -2,7 +2,8 @@
 
 ## Status
 
-- Stage: paper equations passed a 128-step real-NPU gate; AscendC candidate pending.
+- Stage: paper equations and v3 AscendC eager/NPUGraph numerical gates passed;
+  service integration is next.
 - Branch: `work/qwen36-deltalog-20260920`.
 - Parent checkpoint: GDN fusion no-go `69029e7`.
 - Hardware lane: physical NPU4-7 only.
@@ -113,11 +114,13 @@ paper's deferred-write performance behavior.
 
 ## Immediate next action
 
-After a non-privileged canary proves the shared driver/UDA path usable, run the
-already-built v2 direct-invoke AscendC operator once through the 128-step eager
-gate. Its append path must not write the dense base and its eighth step must
-materialize and reset on device. Only an eager pass permits the NPUGraph
-state/queue-ordering gate and service integration.
+Integrate v3 behind the explicit service opt-in. Allocate persistent
+per-layer/per-slot auxiliary buffers, reset the addressed slots on prefill and
+slot reuse, and fail closed to the native path for unsupported modes. Before
+performance measurement, prove the real candidate library and dispatch on all
+four TP ranks. Then run one profiler-off fixed-output-1024 screen against the
+frozen dense baseline; no accuracy run is justified until that screen is
+performance-positive.
 
 ## AscendC implementation status
 
@@ -131,12 +134,39 @@ payloads for all 12 heads were present. The preserved failure is
 Root cause is an Ascend storage-layout hazard, not a paper equation error:
 independent AIV cores wrote different 4-byte metadata values inside the same
 32-byte GM block, so scalar `SetValue` operations clobbered neighboring heads.
-Candidate v2 pads lambda/decay/length metadata to an eight-element, 32-byte
-stride per head and has compiled successfully. Its NPU gate has not run because
-fresh non-privileged canaries on physical NPU4 and NPU5 returned driver
-`Resource_Busy` even though `npu-smi` showed no processes. Do not report v2 as
-numerically validated until that gate actually runs.
+Candidate v2 padded lambda/decay/length metadata to an eight-element, 32-byte
+stride per head and compiled successfully. After stopping (not deleting) the
+all-device `agentgpu-910b4-qwen35-4b-v0` sleep-only container, UDA released and
+the physical-NPU4 canary passed. The one-shot v2 gate then failed at batch1
+step1: output error was exactly zero and all K/U payloads were present, but
+state relative-L2 was `0.5446365983176608`; exactly one length value survived
+in each adjacent pair of heads. This proves the deployed scalar GM write
+granule is at least 64 bytes. Candidate v3 therefore uses a 16-element/64-byte
+row per head. Do not rerun v2.
 
 Built v2 library:
 `/cache/cch/qwen36-deltalog-20260920/operator-build-v2/libqwen36_gdn_deltalog_decode_ops.so`,
 SHA256 `232901f7866c2a2262857d0a20616647a9e4bfe466454285bd4a1d0647a1105c`.
+
+## AscendC v3 numerical gate
+
+The v3 library is
+`/cache/cch/qwen36-deltalog-20260920/operator-build-v3/libqwen36_gdn_deltalog_decode_ops.so`,
+SHA256 `142ffd6833a34dc6ce975340250a9dcc397950a555e65202ed8de25e03ed75dc`.
+
+The one-shot eager gate on physical NPU4 passed batch 1 and 16 for 128/128
+stateful steps each. Maximum normalized output error was
+`0.0014792899408284023`; maximum state relative-L2 was
+`1.27864878159613e-7`. Report SHA256:
+`0500932ac8f9496a3884a538ce458beae4a4f52f6cb8557919fae3738f9b1124`.
+
+The independently captured NPUGraph replay gate also passed batch 1 and 16 for
+128/128 steps each, including 68 merge observations. Maximum normalized output
+error was `0.002857142857142857`; maximum state relative-L2 was
+`1.3068015839486349e-7`. All steps were finite, append left the dense base
+unchanged, head metadata agreed, and storage pointers remained stable. Report:
+`/cache/cch/qwen36-deltalog-20260920/candidate-npugraph-gate-v3/report.json`,
+SHA256 `9566a53eda33f60ce0163d3c6cfa4383ecb0f934332d08a631c075914169471d`.
+
+These are direct-operator numerical and graph-compatibility results, not
+service-dispatch, throughput, TTFT/TPOT, or task-accuracy evidence.

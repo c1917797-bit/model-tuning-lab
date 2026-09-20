@@ -61,9 +61,19 @@ bounds. This validates the equations only. The generic torch/NPU reference
 materializes temporary logical state and is explicitly excluded from any
 performance claim.
 
-The first direct AscendC append exposed a separate hardware ABI constraint:
-4-byte scalar metadata fields for adjacent heads cannot be independently
-updated from separate AIV cores when they share one 32-byte GM block. Payload
-logs were correct, but scalar stores clobbered neighbors. The portable layout
-therefore gives every head an eight-element/32-byte metadata stride. This is an
+The first direct AscendC append exposed a separate hardware ABI constraint.
+Four-byte scalar metadata fields for adjacent heads cannot be independently
+updated from separate AIV cores when they share an effective GM write block.
+Payload logs were correct, but scalar stores clobbered neighbors. A 32-byte
+per-head stride still lost exactly one value in every adjacent head pair, so
+the deployed stack requires at least 64-byte isolation. The portable v3 layout
+therefore gives every head a 16-element/64-byte metadata row. This is an
 Ascend storage adaptation; it does not change DeltaLog's logical recurrence.
+
+With that adaptation, the direct AscendC candidate passed both eager and
+NPUGraph replay on physical NPU4 for batch 1 and 16, 128 stateful steps each.
+The worst output normalized error was 0.002857142857142857 and the worst state
+relative-L2 was 1.3068015839486349e-7, within the frozen paper-derived limits.
+Append preserved the dense base, all head metadata agreed, and storage
+pointers stayed fixed. This proves the operator and graph boundary only;
+service dispatch and end-to-end benefit remain unproven.

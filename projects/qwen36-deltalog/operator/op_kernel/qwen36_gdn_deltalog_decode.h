@@ -12,7 +12,9 @@ constexpr uint32_t KEY_HEADS = 4;
 constexpr uint32_t VALUE_HEADS = 12;
 constexpr uint32_t HEAD_DIM = 128;
 constexpr uint32_t LOG_CAPACITY = 7;
-constexpr uint32_t META_STRIDE = 8;
+// v2 used 8 FP32 values (32 bytes) per head and still showed exact pairwise
+// metadata clobbering.  One 64-byte row per AIV writer is the v3 ABI.
+constexpr uint32_t META_STRIDE = 16;
 constexpr uint32_t V_STEP = 64;
 constexpr uint32_t BF16_PER_BLOCK = 16;
 constexpr uint32_t FP32_PER_BLOCK = 8;

@@ -175,12 +175,12 @@ not require retraining unless retraining is explicitly in scope.
   boundary has already consumed the credible Amdahl opportunity, record an
   implementation-scoped no-go and move to the next paper instead of polishing
   operator microbenchmarks.
-- When independent AIV cores update per-head scalar metadata, map each writer to
-  the device's effective GM write granule before the NPU gate. Distinct 4-byte
-  fields inside one 32-byte block can clobber one another even when tensor
-  payloads are correct. Give each core a 32-byte-aligned metadata row or use a
-  single owner; output agreement plus corrupted neighboring counters is the
-  diagnostic signature.
+- When independent AIV cores update per-head scalar metadata, determine the
+  effective GM write granule on the deployed stack instead of assuming scalar
+  isolation or that 32-byte alignment is sufficient. Give each core one whole
+  empirically safe row or use a single owner. Output agreement plus correct
+  payloads and pairwise-corrupted neighboring counters is the diagnostic
+  signature of an undersized metadata stride.
 
 ## Do not do
 

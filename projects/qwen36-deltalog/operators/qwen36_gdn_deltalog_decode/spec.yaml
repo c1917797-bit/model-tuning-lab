@@ -85,29 +85,29 @@ inputs:
     contiguous: required
     shape: {symbolic: ["S", 12, 7, 128]}
   - name: lambda_log
-    description: "Mutable FP32 cumulative-decay snapshot; physical stride 8 aligns each head to 32 bytes, entries 0..6 are live"
+    description: "Mutable FP32 cumulative-decay snapshot; physical stride 16 gives each AIV writer a 64-byte row, entries 0..6 are live"
     role: state
     dtype_set: [float32]
     rank_range: [3, 3]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S", 12, 8]}
+    shape: {symbolic: ["S", 12, 16]}
   - name: cumulative_decay
-    description: "Mutable FP32 log decay; lane 0 is live and stride 8 prevents cross-core scalar-store collisions"
+    description: "Mutable FP32 log decay; lane 0 is live and stride 16 isolates the empirically observed 64-byte cross-core write granule"
     role: state
     dtype_set: [float32]
     rank_range: [3, 3]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S", 12, 8]}
+    shape: {symbolic: ["S", 12, 16]}
   - name: log_length
-    description: "Mutable live-entry count; lane 0 is live and stride 8 prevents cross-core scalar-store collisions"
+    description: "Mutable live-entry count; lane 0 is live and stride 16 isolates the empirically observed 64-byte cross-core write granule"
     role: state
     dtype_set: [int32]
     rank_range: [3, 3]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S", 12, 8]}
+    shape: {symbolic: ["S", 12, 16]}
   - name: actual_seq_lengths
     description: "Native decode metadata; non-spec domain is [0,1,...,1] and length T+1"
     role: tensor
@@ -210,7 +210,7 @@ shape_constraints:
     - "M=8 and C=M-1=7 are fixed for the first faithful paper configuration."
     - "T_plus_1 == T + 1; actual_seq_lengths is [0,1,...,1] for non-spec decode."
     - "ssm_state_indices values are unique in one invocation and each is in [0,S)."
-    - "Lane 0 of each per-head log_length row is in [0,7]; 8-lane/32-byte metadata rows eliminate block-store collisions between AIV cores."
+    - "Lane 0 of each per-head log_length row is in [0,7]; v2 proved 8-lane/32-byte rows still collide pairwise, so v3 uses 16-lane/64-byte rows."
     - "The four normalized key heads are repeated three times to address twelve local value heads, matching native Qwen3.6 TP4 GDN semantics."
     - "Prefill initializes base_state from the native chunk kernel and zeroes all auxiliary buffers; slot reuse must do the same before decode."
     - "Prefill, speculative decoding, mixed prefill/decode, FP16, non-TP4 heads, duplicate slots, and unsupported shapes fail closed to the native path."

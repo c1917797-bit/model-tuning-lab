@@ -79,19 +79,35 @@ def candidate_step(state: dict[str, torch.Tensor], inputs: dict[str, torch.Tenso
         state["decay"], state["length"], seq, inputs["indices"])
 
 
-def run_case(batch: int, report: dict[str, Any], save: Any) -> None:
+def allocate_state(initial: torch.Tensor) -> dict[str, torch.Tensor]:
+    slots = initial.size(0)
+    return {
+        "base": initial.to("npu:0"),
+        "k_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.bfloat16, device="npu:0"),
+        "u_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.float32, device="npu:0"),
+        "lambda_log": torch.zeros((slots, H_V, 16), dtype=torch.float32, device="npu:0"),
+        "decay": torch.zeros((slots, H_V, 16), dtype=torch.float32, device="npu:0"),
+        "length": torch.zeros((slots, H_V, 16), dtype=torch.int32, device="npu:0"),
+    }
+
+
+def reset_state(state: dict[str, torch.Tensor], initial: torch.Tensor) -> None:
+    state["base"].copy_(initial)
+    for name in ("k_log", "u_log", "lambda_log", "decay", "length"):
+        state[name].zero_()
+
+
+def copy_inputs(source: dict[str, torch.Tensor], destination: dict[str, torch.Tensor]) -> None:
+    for name, tensor in source.items():
+        destination[name].copy_(tensor)
+
+
+def run_case(batch: int, mode: str, steps: int, report: dict[str, Any], save: Any) -> None:
     slots = batch + 3
     gen = torch.Generator().manual_seed(260815533 + batch)
     initial = (torch.randn((slots, H_V, D, D), generator=gen) * 0.005).float()
     native = initial.to("npu:0")
-    state = {
-        "base": initial.to("npu:0"),
-        "k_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.bfloat16, device="npu:0"),
-        "u_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.float32, device="npu:0"),
-        "lambda_log": torch.zeros((slots, H_V, 8), dtype=torch.float32, device="npu:0"),
-        "decay": torch.zeros((slots, H_V, 8), dtype=torch.float32, device="npu:0"),
-        "length": torch.zeros((slots, H_V, 8), dtype=torch.int32, device="npu:0"),
-    }
+    state = allocate_state(initial)
     pointers = {name: tensor.untyped_storage().data_ptr() for name, tensor in state.items()}
     seq = torch.cat((torch.zeros(1, dtype=torch.int32), torch.ones(batch, dtype=torch.int32))).to("npu:0")
     case: dict[str, Any] = {"batch": batch, "slots": slots, "status": "running", "steps": [],
@@ -100,13 +116,39 @@ def run_case(batch: int, report: dict[str, Any], save: Any) -> None:
     report["cases"].append(case)
     save()
     try:
-        for step in range(STEPS):
-            inputs = make_inputs(batch, slots, step, gen)
+        graph = None
+        graph_output = None
+        static_inputs = None
+        if mode == "npugraph":
+            warm_state = allocate_state(initial)
+            static_inputs = make_inputs(batch, slots, 0, gen)
+            for warmup in range(3):
+                copy_inputs(make_inputs(batch, slots, warmup, gen), static_inputs)
+                candidate_step(warm_state, static_inputs, seq)
+                torch.npu.synchronize()
+            reset_state(state, initial)
+            graph = torch.npu.NPUGraph()
+            with torch.npu.graph(graph):
+                graph_output = candidate_step(state, static_inputs, seq)
+            torch.npu.synchronize()
+            reset_state(state, initial)
+            torch.npu.synchronize()
+        for step in range(steps):
+            generated = make_inputs(batch, slots, step, gen)
+            if static_inputs is not None:
+                copy_inputs(generated, static_inputs)
+                inputs = static_inputs
+            else:
+                inputs = generated
             idx64 = inputs["indices"].long()
             length_before = state["length"].index_select(0, idx64)[:, :, 0].clone()
             base_before = state["base"].index_select(0, idx64).clone()
             expected = native_step(native, inputs, seq)
-            actual = candidate_step(state, inputs, seq)
+            if graph is None:
+                actual = candidate_step(state, inputs, seq)
+            else:
+                graph.replay()
+                actual = graph_output
             torch.npu.synchronize()
             merge = length_before == CAPACITY
             append = torch.logical_not(merge)
@@ -159,6 +201,8 @@ def main() -> None:
     parser.add_argument("--library", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--physical-device", required=True, type=int, choices=range(4, 8))
+    parser.add_argument("--mode", choices=("eager", "npugraph"), default="eager")
+    parser.add_argument("--steps", type=int, default=STEPS)
     args = parser.parse_args()
     library, output_dir = args.library.resolve(), args.output_dir.resolve()
     if Path("/deltalog-results") not in output_dir.parents or output_dir.exists():
@@ -167,13 +211,15 @@ def main() -> None:
         parser.error("requires container logical NPU0; the launcher must map the declared physical NPU")
     if not library.is_file():
         parser.error("candidate library is missing")
+    if args.steps < 8:
+        parser.error("at least eight stateful steps are required")
     output_dir.mkdir(parents=True)
     report: dict[str, Any] = {
-        "schema": "qwen36-deltalog-ascendc-eager-gate/v1", "status": "running",
+        "schema": "qwen36-deltalog-ascendc-gate/v2", "status": "running",
         "created_unix_ns": time.time_ns(), "script_sha256": sha256(Path(__file__)),
         "library": str(library), "library_sha256": sha256(library),
         "device_contract": f"container logical NPU0 mapped to physical NPU{args.physical_device}",
-        "protocol": {"batches": list(BATCHES), "steps": STEPS,
+        "protocol": {"mode": args.mode, "batches": list(BATCHES), "steps": args.steps,
                      "output_limit": OUTPUT_LIMIT, "state_relative_l2_limit": STATE_LIMIT,
                      "retry_budget": "one run; preserve first failure"}, "cases": []}
 
@@ -196,8 +242,8 @@ def main() -> None:
         report["candidate_schema"] = str(torch.ops.qwen36_deltalog.decode.default._schema)
         save()
         for batch in BATCHES:
-            run_case(batch, report, save)
-        report["status"] = "ascendc_eager_gate_pass"
+            run_case(batch, args.mode, args.steps, report, save)
+        report["status"] = f"ascendc_{args.mode}_gate_pass"
     except BaseException as error:
         report.update(status="failed", error=repr(error), error_type=type(error).__name__)
         raise

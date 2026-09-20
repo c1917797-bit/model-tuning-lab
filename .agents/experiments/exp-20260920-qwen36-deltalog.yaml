@@ -68,7 +68,26 @@ results:
     v2:
       adaptation: "pad lambda/decay/length metadata to 8 elements (32 bytes) per value head"
       build: pass
-      eager_gate: not_run_driver_resource_busy
+      eager_gate: fail
+      first_step_output_normalized_error: 0.0
+      first_step_state_relative_l2: 0.5446365983176608
+      failure_signature: "exactly one log length survived in every adjacent pair of heads; effective cross-core scalar GM write granule is at least 64 bytes"
+    v3:
+      adaptation: "pad lambda/decay/length metadata to 16 elements (64 bytes) per value head"
+      build: pass
+      library_sha256: 142ffd6833a34dc6ce975340250a9dcc397950a555e65202ed8de25e03ed75dc
+      eager_gate: pass
+      eager_batch1_steps: "128/128"
+      eager_batch16_steps: "128/128"
+      eager_max_output_normalized_error: 0.0014792899408284023
+      eager_max_state_relative_l2: 1.27864878159613e-7
+      npugraph_gate: pass
+      npugraph_batch1_steps: "128/128"
+      npugraph_batch16_steps: "128/128"
+      npugraph_max_output_normalized_error: 0.002857142857142857
+      npugraph_max_state_relative_l2: 1.3068015839486349e-7
+      merge_observations_per_mode: 68
+      invariants: "finite; append base unchanged; all head metadata equal; storage pointers stable"
   equation_gate:
     status: pass
     device: "physical NPU4 (container logical NPU0)"
@@ -87,8 +106,17 @@ artifacts:
   - path: /cache/cch/qwen36-deltalog-20260920/operator-build-v2/libqwen36_gdn_deltalog_decode_ops.so
     sha256: 232901f7866c2a2262857d0a20616647a9e4bfe466454285bd4a1d0647a1105c
     evidence_scope: "build artifact only; no v2 NPU numerical claim"
+  - path: /cache/cch/qwen36-deltalog-20260920/candidate-eager-gate-v2b/report.json
+    sha256: d53cf567b822616cc83c01adef296c518dae0a95790a7242f466ebe418674d73
+    evidence_scope: "preserved v2 one-shot numerical failure"
+  - path: /cache/cch/qwen36-deltalog-20260920/operator-build-v3/libqwen36_gdn_deltalog_decode_ops.so
+    sha256: 142ffd6833a34dc6ce975340250a9dcc397950a555e65202ed8de25e03ed75dc
+  - path: /cache/cch/qwen36-deltalog-20260920/candidate-eager-gate-v3/report.json
+    sha256: 0500932ac8f9496a3884a538ce458beae4a4f52f6cb8557919fae3738f9b1124
+  - path: /cache/cch/qwen36-deltalog-20260920/candidate-npugraph-gate-v3/report.json
+    sha256: 9566a53eda33f60ce0163d3c6cfa4383ecb0f934332d08a631c075914169471d
 decision_reason: ""
-next_loop: "When a physical NPU4-7 canary succeeds, run the already-built v2 128-step eager gate once. If it passes, add NPUGraph/queue-ordering; if it fails, preserve and diagnose the first new failure."
+next_loop: "Integrate v3 behind an explicit service opt-in with persistent per-layer/per-slot auxiliary buffers, reset on prefill and slot reuse, fail-closed fallback, and dispatch proof on all TP4 ranks before one profiler-off E2E screen."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
   verified: false
