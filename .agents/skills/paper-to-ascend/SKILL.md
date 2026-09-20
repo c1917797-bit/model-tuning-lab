@@ -164,6 +164,12 @@ not require retraining unless retraining is explicitly in scope.
 - Keep end-task tolerance separate from intermediate correctness. A permitted
   GSM8K score delta does not authorize nondeterministic recurrent-state replay,
   because such a candidate has no stable semantics to benchmark.
+- Classify the paper's intervention layer before implementing anything. A
+  custom-chiplet or package-level design whose benefit depends on different
+  compute arrays, memory technologies, and physical interconnects cannot be
+  reproduced by a runtime plugin on fixed accelerator silicon. Architecture
+  simulator ticks and estimated clocks are evidence about the proposed
+  hardware, not NPU kernel or service performance.
 
 ## Do not do
 

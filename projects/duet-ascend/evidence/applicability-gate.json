@@ -1,0 +1,43 @@
+{
+  "schema": "model-tuning-lab.duet-applicability-gate/v1",
+  "paper": {
+    "title": "DUET: Disaggregated Hybrid Mamba-Transformer LLMs with Prefill and Decode-Specific Packages",
+    "arxiv": "2603.15530",
+    "url": "https://arxiv.org/abs/2603.15530"
+  },
+  "official_source": {
+    "url": "https://github.com/AlishKanani/DUET",
+    "identity_match": true,
+    "repository_type": "architecture_level_cycle_simulator",
+    "reported_units": [
+      "architectural_tics",
+      "estimated_clocks",
+      "simulated_flops_per_second"
+    ],
+    "deployable_ascend_operator": false,
+    "vllm_integration": false
+  },
+  "paper_mechanism": {
+    "prefill": "custom_systolic_array_chiplets_with_off_package_gddr",
+    "decode": "custom_vector_unit_chiplets_with_in_package_hbm",
+    "transfer": "package_level_kv_and_ssm_state_interconnect",
+    "intervention_layer": "custom_silicon_package_and_microarchitecture"
+  },
+  "target": {
+    "model": "Qwen3.6-27B",
+    "accelerator": "Ascend 910B4",
+    "physical_devices": [4, 5, 6, 7],
+    "delivery": "vllm_ascend_plugin_monkeypatch"
+  },
+  "reachability": {
+    "paper_mechanism_activatable": false,
+    "plugin_can_change_compute_array": false,
+    "plugin_can_change_memory_package": false,
+    "plugin_can_change_physical_interconnect": false
+  },
+  "decision": "delivery_boundary_no_go",
+  "npu_experiment_launched": false,
+  "reason": "No faithful DUET candidate can exist on fixed Ascend silicon; running the existing service would not vary the paper mechanism.",
+  "performance_claim": null,
+  "quality_claim": null
+}
