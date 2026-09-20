@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "campaign": "qwen36-ascend-ten-paper-piercing-20260920",
+  "ordered_queue_complete": true,
+  "general_joint_acceptance_met": false,
+  "acceptance": {
+    "model": "Qwen3.6-27B",
+    "device_scope": "physical NPU4-7",
+    "delivery": "vLLM-Ascend plugin/monkeypatch",
+    "minimum_output_throughput_gain_percent": 10.0,
+    "report_ttft_tpot": true,
+    "longbench_v2_no_regression": true,
+    "gsm8k_no_regression": true
+  },
+  "papers": [
+    {
+      "rank": 1,
+      "short_name": "stable-triangular-inversion",
+      "result": "no_go_for_10pct_e2e_retain_operator_artifact",
+      "evidence": [
+        {
+          "path": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v10/triangular-numerical-gate.json",
+          "sha256": "0799d6bdc62c9c27264417630e165b0aafdcf90dd7b6db52372ad15409f0dad9"
+        },
+        {
+          "path": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v10/triangular-target-shape-timing.json",
+          "sha256": "5d32bf31804152fa283dca5e449332908029f913b5cedd47f104378fb3d14d98"
+        },
+        {
+          "path": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v11/full-gdn-candidate-timing.json",
+          "sha256": "d73b662c9d0fcc96029e665e0fd4d3c3a10b329c28050e6794640a1debbf9bb7"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "short_name": "deltalog",
+      "result": "no_go_opportunity_gate",
+      "evidence": [
+        {
+          "path": "/cache/cch/deltalog-qwen36-ascend-20260920/opportunity-gate-v1/opportunity-audit.json",
+          "sha256": "ef297a2b19b21705be48f2771e64708174884c97d361b8d2b8e874f259bbfefc"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "short_name": "when-good-enough-is-optimal",
+      "result": "no_go_opportunity_gate",
+      "evidence": [
+        {
+          "path": "/cache/cch/good-enough-inversion-qwen36-ascend-20260920/opportunity-gate-v1/opportunity-audit.json",
+          "sha256": "ab3f8ca82219b4262d3680bd0b3a33c58335b3adf0db412601e4a050555f0ef0"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "short_name": "kvbuffer",
+      "result": "no_go_opportunity_gate",
+      "evidence": [
+        {
+          "path": "/cache/cch/kvbuffer-qwen36-ascend-20260920/opportunity-gate-v1/opportunity-audit.json",
+          "sha256": "87222d251b9c625114d27ef5882d38c32e9cbdc5d4fd431bba1e023843835ee4"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "short_name": "hypic",
+      "result": "performance_reproduction_passed_strict_quality_gate_not_passed",
+      "metrics": {
+        "output_throughput_gain_percent": 36.0663,
+        "ttft_improvement_percent": 43.6345,
+        "tpot_improvement_percent": 18.9911,
+        "longbench_v2_delta_percentage_points": -0.2625,
+        "gsm8k_delta_percentage_points": -0.15163
+      },
+      "evidence": [
+        {
+          "path": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-evidence-audit.json",
+          "sha256": "839ffd91812a45fce7472c03ed9752edae41193f1056b1f4b31d715fd0b4e81a"
+        },
+        {
+          "path": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-summary.json",
+          "sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "short_name": "sparse-prefix-caching",
+      "result": "no_go_thin_v023_adapter",
+      "repository_commit": "1fec307",
+      "evidence": [
+        {
+          "path": "projects/sparse-prefix-ascend/PIERCING_REPORT.md",
+          "sha256": "dde6c5594f3883cd0ba38fe8992f9a504d03e82f3d84f5e96b25eb95e87c32ea"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "short_name": "ssm-tensor-parallelism",
+      "result": "no_go_incremental_headroom",
+      "repository_commit": "783cc1f",
+      "evidence": [
+        {
+          "path": "projects/ssm-tp-ascend/PIERCING_REPORT.md",
+          "sha256": "a0e9d3c354978f17b87b5d013f8073ab8f7a26bb6f234c82760850adfbc767d4"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "short_name": "epd-serve",
+      "result": "no_go_workload_and_resource_topology",
+      "repository_commit": "15c9df4",
+      "evidence": [
+        {
+          "path": "projects/epd-serve-ascend/PIERCING_REPORT.md",
+          "sha256": "29889935092cff94ad6a29698c14d949c24fbd9e3e761b2d1f7d94cf7c24ca18"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "short_name": "dasc",
+      "result": "no_go_deterministic_replay",
+      "repository_commit": "e9c1b59",
+      "evidence": [
+        {
+          "path": "projects/dasc-ascend/evidence/terminal-audit.json",
+          "sha256": "2a2c4ed7724dc60ea10d3ec75b91fcba3c8013d3629f64544bb0293f1a39f60f"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "short_name": "duet",
+      "result": "no_go_fixed_silicon_intervention_layer",
+      "repository_commit": "89f7d8a",
+      "evidence": [
+        {
+          "path": "projects/duet-ascend/evidence/applicability-gate.json",
+          "sha256": "37aba33b8b113de706426c1d858da3026e2c0bd8f389b551b014dc6e6e4d9180"
+        }
+      ]
+    }
+  ],
+  "portfolio_conclusion": {
+    "only_candidate_above_10pct_e2e": "hypic",
+    "hypic_workload_scope": "shared-prefix",
+    "hypic_strict_joint_acceptance": false,
+    "universal_10pct_claim_supported": false,
+    "strongest_reusable_operator_artifact": "stable-triangular-inversion-mxr"
+  }
+}
