@@ -2,7 +2,7 @@
 
 ## Status
 
-- Stage: planned.
+- Stage: attempted (plugin policy adapter implemented; NPU validation pending).
 - Start: 2026-09-20.
 - Hard timebox: 24 hours from this workstream start.
 - Queue position: 6, after completed MXR, DeltaLog, approximate inversion,
@@ -74,7 +74,25 @@
 
 ## Immediate next action
 
-Audit the v0.23 hybrid cache manager and GDN state lifecycle end to end, map the
-official checkpoint store to production cache groups, then write the smallest
-NPU extraction/restore canary. Do not run the official CPU/dry simulator as a
-substitute for this gate.
+Run a container import/bootstrap canary on NPU4-7 with HYPIC and this plugin,
+then run the smallest exact-prefix restore case using one fixed placement plan.
+Do not start a serving performance comparison until token/state correctness and
+plugin hot-path activation are both proven.
+
+## Attempted implementation
+
+- Added projects/sparse-prefix-ascend as a separate vLLM general plugin.
+- Reimplemented the paper's distribution-aware O(NM) placement recurrence and
+  a same-count balanced control.
+- The runtime adapter requires HYPIC explicitly and replaces only HYPIC's
+  aligned exact-prefix candidate positions; state/KV extraction, storage,
+  restore, replay, and kernels remain identical between arms.
+- The adapter validates schema, absolute plan path, checkpoint count, range,
+  uniqueness and runtime block-size identity, and fails closed on drift.
+- Five focused unit tests pass, including fail-closed plan validation and a
+  fake-HYPIC monkeypatch test. These are implementation checks, not NPU or
+  performance evidence.
+- Source audit found that native v0.23 align mode retains only the final
+  recurrent state for a request. It does not natively implement the paper's
+  multiple sparse checkpoints. HYPIC's validated material store is therefore
+  the selected production seam.
