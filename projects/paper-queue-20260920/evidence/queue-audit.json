@@ -2,6 +2,12 @@
   "schema_version": 1,
   "campaign": "qwen36-ascend-ten-paper-piercing-20260920",
   "ordered_queue_complete": true,
+  "campaign_accounting": {
+    "new_paper_piercings": 9,
+    "historical_reference_samples": 1,
+    "historical_reference": "hypic",
+    "hypic_re_pierced_in_current_campaign": false
+  },
   "general_joint_acceptance_met": false,
   "acceptance": {
     "model": "Qwen3.6-27B",
@@ -68,7 +74,9 @@
     {
       "rank": 5,
       "short_name": "hypic",
-      "result": "performance_reproduction_passed_quality_inconclusive_strict_gate_not_accepted",
+      "queue_role": "historical_success_reference_not_re_pierced",
+      "current_campaign_result": false,
+      "result": "historical_performance_success_reference_quality_post_audit_inconclusive",
       "metrics": {
         "output_throughput_gain_percent": 36.0663,
         "ttft_improvement_percent": 43.6345,
@@ -157,7 +165,8 @@
     }
   ],
   "portfolio_conclusion": {
-    "only_candidate_above_10pct_e2e": "hypic",
+    "current_campaign_candidate_above_10pct_e2e": null,
+    "historical_reference_above_10pct_e2e": "hypic",
     "hypic_workload_scope": "shared-prefix",
     "hypic_strict_joint_acceptance": false,
     "hypic_quality_classification": "inconclusive_not_accepted",

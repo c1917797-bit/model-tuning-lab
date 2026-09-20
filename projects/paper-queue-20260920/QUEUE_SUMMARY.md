@@ -1,5 +1,13 @@
 # Ten-paper Ascend piercing summary
 
+## Campaign accounting
+
+HYPIC is not a new piercing result from this campaign. It was successfully
+pierced earlier and is retained here as the historical reference sample and
+acceptance-method template. The current ordered campaign produced nine new
+paper decisions around that anchor. Historical HYPIC metrics must never be
+reported as current-campaign gains.
+
 ## Acceptance contract
 
 All papers were judged against the same project goal: Qwen3.6-27B on Ascend,
@@ -16,7 +24,7 @@ and paper-reported numbers are not substitutes for this contract.
 | 2 | DeltaLog | No-go at opportunity gate | Recurrent fraction was 4.52-4.84%; even perfect deletion bounded speedup to 1.047-1.051x, while the paper-local bound was about 1.021-1.023x. |
 | 3 | When Good Enough Is Optimal | No-go at opportunity gate | The reported 5.2x local inversion speedup bounded measured prefill improvement to about 1.024x; decode coverage was zero. |
 | 4 | KVBuffer | No-go at opportunity gate | Faithful scope covered only 4.52-4.84% of the measured path. Perfect deletion was still below 1.051x. An aggressive derivative would need to remove over 90% of a much broader, no-longer-faithful scope. |
-| 5 | HYPIC | Performance reproduction passed for the shared-prefix workload; quality is inconclusive and strict joint acceptance is not passed | Three-run means: throughput +36.07%, TTFT -43.63%, TPOT -18.99%. LongBench-v2 changed by -0.2625 percentage points and GSM8K by -0.1516 percentage points. The paired runs are highly variable and their intervals include zero, so this is not evidence of a deterministic regression; nevertheless the literal no-regression gate is unproven. User directed that HYPIC not be rerun. |
+| 5 | HYPIC | Historical successful piercing and reference sample; not re-pierced in this campaign | Earlier three-run means: throughput +36.07%, TTFT -43.63%, TPOT -18.99%. It defines the performance and evidence standard for later work. A post-audit found that the old quality protocol is inconclusive for literal no-regression, but this does not convert HYPIC into a new result or require repeating its paper piercing. |
 | 6 | Sparse Prefix Caching | No-go for a thin v0.23 adapter | The real scheduler hook was reached on NPU, but native prefix caching and the HYPIC/GDN state lifecycle conflict. A faithful implementation needs an atomic runtime seam rather than a thin monkeypatch. |
 | 7 | Scaling State-Space Models with Tensor Parallelism | No-go as incremental work | Current vLLM/vLLM-Ascend already shards the relevant projections and recurrent state. BF16-to-FP16 does not reduce bytes. Existing communication headroom was below the 10% target. |
 | 8 | EPD-Serve | No-go for the fixed text-only, four-card contract | The encoder path is bypassed by the accepted workload. Faithful PD disaggregation needs two TP4 model instances (eight cards), outside the authorized topology. |
@@ -25,16 +33,17 @@ and paper-reported numbers are not substitutes for this contract.
 
 ## Core conclusion
 
-The ordered piercing queue is complete, but the general project acceptance is
-still open:
+The ordered evaluation is complete (nine new piercings plus one historical
+reference), but the general project acceptance is still open:
 
-- HYPIC is the only candidate that crossed the 10% end-to-end performance line,
-  and only for its intended shared-prefix workload.
+- The earlier HYPIC piercing is the only reference in the list that crossed the
+  10% end-to-end performance line, and only for its intended shared-prefix
+  workload. This is historical evidence, not a current-campaign result.
 - HYPIC did not prove the literal zero-regression quality rule in the recorded
   formal reproduction. The observed mean deltas are negative, but a post-audit
   shows that the three-run paired evidence is inconclusive rather than proof of
   a deterministic quality loss.
-- None of the other nine papers yielded a valid general-purpose, end-to-end
+- None of the nine newly pierced papers yielded a valid general-purpose, end-to-end
   candidate under the current Qwen3.6-27B/v0.23/four-NPU contract.
 - MXR/stable triangular inversion is the strongest reusable operator artifact,
   but its local gain cannot be promoted to an end-to-end claim.
