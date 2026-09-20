@@ -5,12 +5,39 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 from pathlib import Path
 
 from .planner import PlacementPlan
 
 logger = logging.getLogger(__name__)
 _INSTALLED = False
+
+
+def _emit_evidence(event: str, **fields) -> None:
+    path = os.environ.get(
+        "VLLM_ASCEND_SPARSE_PREFIX_EVIDENCE_FILE",
+        os.environ.get("VLLM_ASCEND_HYPIC_EVIDENCE_FILE", ""),
+    )
+    if not path:
+        return
+    payload = {
+        "schema": 1,
+        "event": event,
+        "component": "sparse_prefix_ascend",
+        "pid": os.getpid(),
+        "ppid": os.getppid(),
+        "time_ns": time.time_ns(),
+        **fields,
+    }
+    encoded = (
+        json.dumps(payload, ensure_ascii=True, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    descriptor = os.open(path, os.O_APPEND | os.O_CREAT | os.O_WRONLY, 0o600)
+    try:
+        os.write(descriptor, encoded)
+    finally:
+        os.close(descriptor)
 
 
 def _enabled() -> bool:
@@ -45,6 +72,13 @@ def register() -> None:
             "VLLM_ASCEND_SPARSE_PREFIX_PLAN must be an absolute plan path"
         )
     plan = _load_plan(path)
+    _emit_evidence(
+        "sparse_prefix_plan_loaded",
+        positions=list(plan.positions),
+        checkpoint_budget=plan.checkpoint_budget,
+        block_size=plan.block_size,
+        max_length=plan.max_length,
+    )
 
     from hypic_vllm_ascend.patches import scheduler as hypic_scheduler
 
@@ -83,6 +117,16 @@ def register() -> None:
             position
             for position in reversed(plan.positions)
             if minimum <= position <= upper and position < len(token_ids)
+        )
+        _emit_evidence(
+            "sparse_prefix_candidates_selected",
+            request_id=getattr(request, "request_id", None),
+            prompt_tokens=len(token_ids),
+            runtime_block_size=block_size,
+            original_candidates=list(eligible),
+            original_upper=upper,
+            selected=list(selected),
+            minimum_rewrite_tokens=minimum,
         )
         return selected
 

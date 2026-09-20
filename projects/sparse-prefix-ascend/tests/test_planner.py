@@ -90,6 +90,7 @@ class PlannerTests(unittest.TestCase):
                 "VLLM_ASCEND_HYPIC_ENABLE",
                 "VLLM_ASCEND_SPARSE_PREFIX_ENABLE",
                 "VLLM_ASCEND_SPARSE_PREFIX_PLAN",
+                "VLLM_ASCEND_SPARSE_PREFIX_EVIDENCE_FILE",
             )
         }
         try:
@@ -102,6 +103,10 @@ class PlannerTests(unittest.TestCase):
                 os.environ["VLLM_ASCEND_HYPIC_ENABLE"] = "1"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_ENABLE"] = "1"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_PLAN"] = str(path)
+                evidence_path = Path(tmp) / "evidence.jsonl"
+                os.environ["VLLM_ASCEND_SPARSE_PREFIX_EVIDENCE_FILE"] = str(
+                    evidence_path
+                )
                 runtime._INSTALLED = False
                 runtime.register()
                 config = types.SimpleNamespace(min_rewrite_tokens=1)
@@ -112,6 +117,18 @@ class PlannerTests(unittest.TestCase):
                     block_size=128,
                 )
                 self.assertEqual(selected, (512, 128))
+                events = [
+                    json.loads(line)
+                    for line in evidence_path.read_text(encoding="utf-8").splitlines()
+                ]
+                self.assertEqual(
+                    [event["event"] for event in events],
+                    [
+                        "sparse_prefix_plan_loaded",
+                        "sparse_prefix_candidates_selected",
+                    ],
+                )
+                self.assertEqual(events[-1]["selected"], [512, 128])
                 with self.assertRaises(RuntimeError):
                     scheduler._candidate_prefix_ends_for_request(
                         object(),
