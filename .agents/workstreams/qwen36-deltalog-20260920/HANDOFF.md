@@ -2,8 +2,9 @@
 
 ## Status
 
-- Stage: paper equations and v3 AscendC eager/NPUGraph numerical gates passed;
-  service integration is next.
+- Stage: paper equations, v3 AscendC eager/NPUGraph numerical gates, TP4
+  service dispatch, and short multi-step inference passed; fixed-output-1024
+  performance screening is next.
 - Branch: `work/qwen36-deltalog-20260920`.
 - Parent checkpoint: GDN fusion no-go `69029e7`.
 - Hardware lane: physical NPU4-7 only.
@@ -114,13 +115,10 @@ paper's deferred-write performance behavior.
 
 ## Immediate next action
 
-Integrate v3 behind the explicit service opt-in. Allocate persistent
-per-layer/per-slot auxiliary buffers, reset the addressed slots on prefill and
-slot reuse, and fail closed to the native path for unsupported modes. Before
-performance measurement, prove the real candidate library and dispatch on all
-four TP ranks. Then run one profiler-off fixed-output-1024 screen against the
-frozen dense baseline; no accuracy run is justified until that screen is
-performance-positive.
+Run one profiler-off fixed-output-1024 screen against the frozen same-stack
+dense baseline. The candidate must use the exact service configuration already
+validated here. Report throughput, TTFT, and TPOT. No accuracy run is justified
+until that screen is performance-positive.
 
 ## AscendC implementation status
 
@@ -170,3 +168,32 @@ SHA256 `9566a53eda33f60ce0163d3c6cfa4383ecb0f934332d08a631c075914169471d`.
 
 These are direct-operator numerical and graph-compatibility results, not
 service-dispatch, throughput, TTFT/TPOT, or task-accuracy evidence.
+
+## TP4 service integration gate
+
+The explicit opt-in plugin was loaded by the API server, engine process, and
+all four TP workers on physical NPU4-7. It pinned the deployed GDN source and
+v3 candidate-library hashes, allocated persistent per-layer/per-slot auxiliary
+buffers, and dispatched the candidate on all 48 GDN layers in every worker
+(PIDs 124-127). Unsupported/profile paths used the native fallback and
+materialized live auxiliary state before fallback.
+
+A one-token request returned HTTP 200 in 0.638 seconds with output ` Paris`.
+A four-token request returned HTTP 200 in 0.560 seconds with four completion
+tokens, proving multi-step service state progression. An earlier 16-token
+client was terminated by the remote execution layer at its 30-second boundary;
+the service remained healthy and later requests passed, so that attempt is
+retained as a harness-timeout event, not a candidate failure or performance
+result.
+
+Artifacts:
+
+- `/cache/cch/qwen36-deltalog-20260920/service-candidate-v1/audit.jsonl`,
+  SHA256 `dbf792ec90bc153445577c93761a810787f5ed3f0752f7d8a0b63d727f4ee080`;
+- `first-token-response.json`, SHA256
+  `7dd75ef1d5b3bda452e9ae00a6ec2cafd1d5aab00ed7bf24a3020a9186cd3f54`;
+- `four-token-response.json`, SHA256
+  `b4b984f4f72ba23b151c7a2d946c57a313d5a60b437af02c21b6af57ee70795b`.
+
+This gate proves real service dispatch and short inference only. It is not a
+fixed-output performance result and makes no LongBench-v2/GSM8K claim.

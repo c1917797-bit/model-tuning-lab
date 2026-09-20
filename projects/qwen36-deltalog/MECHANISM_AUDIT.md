@@ -77,3 +77,18 @@ relative-L2 was 1.3068015839486349e-7, within the frozen paper-derived limits.
 Append preserved the dense base, all head metadata agreed, and storage
 pointers stayed fixed. This proves the operator and graph boundary only;
 service dispatch and end-to-end benefit remain unproven.
+
+## Service-boundary evidence
+
+The v3 operator is now integrated as an independent, explicit opt-in
+vLLM general plugin. The plugin patches only the Ascend GDN decode core,
+allocates persistent auxiliary state per layer and cache slot, resets addressed
+slots on prefill, and materializes live log state before any native fallback.
+It rejects unsupported TP, dtype, speculative, and mixed-token modes.
+
+On physical NPU4-7 with TP4, all four workers loaded the exact v3 library and
+dispatched it on all 48 GDN layers. One-token and four-token requests both
+returned HTTP 200; the one-token output was ` Paris`. This establishes the
+real service seam and multi-step recurrence. It does not establish throughput
+gain or task accuracy; those remain gated by the fixed-output-1024 screen and,
+only if positive, LongBench-v2/GSM8K.

@@ -88,6 +88,15 @@ results:
       npugraph_max_state_relative_l2: 1.3068015839486349e-7
       merge_observations_per_mode: 68
       invariants: "finite; append base unchanged; all head metadata equal; storage pointers stable"
+      service_gate: pass
+      service_devices: "physical NPU4-7, TP4"
+      candidate_layers_per_worker: 48
+      candidate_worker_pids: [124, 125, 126, 127]
+      first_token_request_seconds: 0.6384115219116211
+      first_token_output: " Paris"
+      four_token_request_seconds: 0.5599768161773682
+      four_token_completion_tokens: 4
+      harness_timeout_note: "A 16-token client was terminated by the remote execution layer at 30 seconds; service stayed healthy and subsequent one/four-token requests passed. This is not a performance result."
   equation_gate:
     status: pass
     device: "physical NPU4 (container logical NPU0)"
@@ -115,8 +124,15 @@ artifacts:
     sha256: 0500932ac8f9496a3884a538ce458beae4a4f52f6cb8557919fae3738f9b1124
   - path: /cache/cch/qwen36-deltalog-20260920/candidate-npugraph-gate-v3/report.json
     sha256: 9566a53eda33f60ce0163d3c6cfa4383ecb0f934332d08a631c075914169471d
+  - path: /cache/cch/qwen36-deltalog-20260920/service-candidate-v1/audit.jsonl
+    sha256: dbf792ec90bc153445577c93761a810787f5ed3f0752f7d8a0b63d727f4ee080
+    evidence_scope: "TP4 plugin load, persistent auxiliary allocation, candidate dispatch on all 48 GDN layers per worker, and fail-closed fallback"
+  - path: /cache/cch/qwen36-deltalog-20260920/service-candidate-v1/first-token-response.json
+    sha256: 7dd75ef1d5b3bda452e9ae00a6ec2cafd1d5aab00ed7bf24a3020a9186cd3f54
+  - path: /cache/cch/qwen36-deltalog-20260920/service-candidate-v1/four-token-response.json
+    sha256: b4b984f4f72ba23b151c7a2d946c57a313d5a60b437af02c21b6af57ee70795b
 decision_reason: ""
-next_loop: "Integrate v3 behind an explicit service opt-in with persistent per-layer/per-slot auxiliary buffers, reset on prefill and slot reuse, fail-closed fallback, and dispatch proof on all TP4 ranks before one profiler-off E2E screen."
+next_loop: "Run one profiler-off fixed-output-1024 candidate screen against the frozen same-stack dense baseline; report throughput, TTFT, and TPOT, and stop before accuracy unless performance is positive."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
   verified: false
