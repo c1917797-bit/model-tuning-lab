@@ -6,9 +6,8 @@
 - Target: Qwen3.6-27B, vLLM/vLLM-Ascend 0.23.0, CANN 9.1, TP4, physical NPU4-7.
 - Scope: plugin/monkeypatch integration without modifying upstream runtime.
 - Decision: **rejected for the v0.23 thin-adapter implementation path**.
-- Paper-level decision: **inconclusive**; the mechanism still merits a future
-  implementation when the runtime exposes separate attention-KV publication
-  and recurrent-state checkpoint commit.
+- Paper-level decision: **re-entered with a deeper plugin-owned atomic
+  coexistence adapter; NPU correctness remains pending**.
 - Performance and accuracy: not measured because the correctness/runtime gate
   failed before a complete generation.
 
@@ -94,3 +93,21 @@ Reopen only if a target runtime exposes or safely permits all of:
    operator implementation.
 
 After that, rerun NPU multi-step correctness before any throughput comparison.
+
+## Re-entry implementation
+
+The v0.2 plugin now supplies the missing bounded protocol without modifying
+upstream source:
+
+1. native vLLM remains the sole owner of full-attention KV;
+2. HYPIC remains the sole owner of transactional GDN/conv material;
+3. a waiting request is predicted as a hit only after HYPIC reports the
+   recurrent checkpoint ready;
+4. the plugin bounds the native block-hash lookup to that exact checkpoint;
+5. a native KV hit at any different depth fails closed;
+6. the existing HYPIC scheduler verifies the computed-token boundary and
+   attaches its normal recurrent restore plan.
+
+The adapter is pinned to the reviewed HYPIC v0.8.5 scheduler SHA256. Ten
+software tests pass. Real NPU correctness, performance and accuracy evidence
+have not yet been produced.

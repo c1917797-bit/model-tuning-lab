@@ -94,8 +94,12 @@ class PlannerTests(unittest.TestCase):
                 "VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT",
                 "VLLM_ASCEND_HYPIC_CACHE_ONLY_CUMULATIVE_PREFIX",
                 "VLLM_ASCEND_HYPIC_REQUIRE_POSITION_DEPENDENT_PREFIX_CACHE",
+                "VLLM_ASCEND_HYPIC_STRICT",
+                "VLLM_ASCEND_HYPIC_ENABLE_PREFIX_CACHE_COEXISTENCE",
+                "VLLM_ASCEND_HYPIC_ENABLE_FULL_ATTN_KV_REPAIR",
             )
         }
+        original_install = runtime.install_native_kv_coexistence
         try:
             sys.modules["hypic_vllm_ascend"] = package
             sys.modules["hypic_vllm_ascend.patches"] = patches
@@ -107,11 +111,17 @@ class PlannerTests(unittest.TestCase):
                 os.environ["VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT"] = "0"
                 os.environ["VLLM_ASCEND_HYPIC_CACHE_ONLY_CUMULATIVE_PREFIX"] = "1"
                 os.environ["VLLM_ASCEND_HYPIC_REQUIRE_POSITION_DEPENDENT_PREFIX_CACHE"] = "1"
+                os.environ["VLLM_ASCEND_HYPIC_STRICT"] = "0"
+                os.environ["VLLM_ASCEND_HYPIC_ENABLE_PREFIX_CACHE_COEXISTENCE"] = "1"
+                os.environ["VLLM_ASCEND_HYPIC_ENABLE_FULL_ATTN_KV_REPAIR"] = "0"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_ENABLE"] = "1"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_PLAN"] = str(path)
                 evidence_path = Path(tmp) / "evidence.jsonl"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_EVIDENCE_FILE"] = str(
                     evidence_path
+                )
+                runtime.install_native_kv_coexistence = (
+                    lambda _scheduler: ("fake.Scheduler",)
                 )
                 runtime._INSTALLED = False
                 runtime.register()
@@ -145,6 +155,7 @@ class PlannerTests(unittest.TestCase):
                     )
         finally:
             runtime._INSTALLED = False
+            runtime.install_native_kv_coexistence = original_install
             for name, module in saved_modules.items():
                 if module is None:
                     sys.modules.pop(name, None)

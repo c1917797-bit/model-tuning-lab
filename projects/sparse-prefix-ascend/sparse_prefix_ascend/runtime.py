@@ -8,6 +8,7 @@ import os
 import time
 from pathlib import Path
 
+from .coexistence import install_native_kv_coexistence
 from .planner import PlacementPlan
 
 logger = logging.getLogger(__name__)
@@ -74,6 +75,24 @@ def register() -> None:
     if os.environ.get("VLLM_ASCEND_HYPIC_CACHE_ONLY_CUMULATIVE_PREFIX", "0") != "1":
         raise RuntimeError(
             "Sparse Prefix Ascend requires cumulative-prefix-only HYPIC material"
+        )
+    if os.environ.get("VLLM_ASCEND_HYPIC_STRICT", "1") != "0":
+        raise RuntimeError(
+            "Sparse Prefix Ascend requires HYPIC strict mode disabled because "
+            "the paper delegates full-attention KV to the native cache"
+        )
+    if os.environ.get(
+        "VLLM_ASCEND_HYPIC_ENABLE_PREFIX_CACHE_COEXISTENCE", "0"
+    ) != "1":
+        raise RuntimeError(
+            "Sparse Prefix Ascend requires explicit native prefix-cache coexistence"
+        )
+    if os.environ.get(
+        "VLLM_ASCEND_HYPIC_ENABLE_FULL_ATTN_KV_REPAIR", "1"
+    ) != "0":
+        raise RuntimeError(
+            "Sparse Prefix Ascend requires HYPIC full-attention KV repair "
+            "disabled; native vLLM owns those KV pages"
         )
     if os.environ.get("VLLM_ASCEND_HYPIC_REQUIRE_POSITION_DEPENDENT_PREFIX_CACHE", "0") != "1":
         raise RuntimeError(
@@ -146,10 +165,13 @@ def register() -> None:
     candidate_prefix_ends._sparse_prefix_ascend_wrapped = True
     candidate_prefix_ends._sparse_prefix_original = original
     hypic_scheduler._candidate_prefix_ends_for_request = candidate_prefix_ends
+    patched_classes = install_native_kv_coexistence(hypic_scheduler)
     _emit_evidence(
         "sparse_prefix_patch_installed",
         target="hypic_vllm_ascend.patches.scheduler._candidate_prefix_ends_for_request",
         mode="cumulative_prefix_with_native_attention_kv",
+        native_kv_coexistence=True,
+        patched_scheduler_classes=list(patched_classes),
     )
     _INSTALLED = True
     logger.info(

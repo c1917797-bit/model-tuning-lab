@@ -1,12 +1,12 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-sparse-prefix-caching
-status: attempted
+status: active
 decision: pending
 hypothesis: "For partially shared long-prefix traffic, distribution-aware sparse exact GDN checkpoints reduce replay work at a fixed recurrent-state byte budget and improve Qwen3.6-27B TP4 end-to-end output throughput by at least 10% over the strongest fixed checkpoint policy."
 objective: "Faithfully migrate arXiv:2605.05219 to an opt-in vLLM-Ascend plugin and obtain correctness-first, same-budget NPU end-to-end evidence within 24 hours."
 owner: codex
 git:
-  branch: work/exp-20260920-qwen36-sparse-prefix-caching
+  branch: work/sparse-prefix-runtime-qwen36-ascend-20260920
   base_commit: 6854b7cca88c5b883f41290cd1f9c1b1b619ce6d
   stage_commits: []
 environment:
@@ -59,12 +59,14 @@ results:
   boundary: {}
   lifecycle:
     source_audit: "native v0.23 align mode keeps the request-final state; multiple sparse checkpoints require the HYPIC exact-prefix material store"
-    plugin_unit_tests: "5 passed with unittest; implementation-only evidence"
+    plugin_unit_tests: "10 passed with unittest; implementation-only evidence"
+    runtime_reentry: "plugin-owned atomic coexistence: native cache owns full-attention KV; HYPIC transaction owns GDN/conv checkpoint; lookup is hidden until both can expose the identical checkpoint boundary"
+    opportunity: "frozen 26-request histogram: distribution plan 3072/7680 replays 19,456 tokens versus 47,104 for same-budget balanced 3072/6144, a reduction of 27,648 tokens (58.7%)"
   resources: {}
 artifacts:
   - "/cache/cch/sparse-prefix-caching-official-2605.05219 (external reference checkout)"
 decision_reason: ""
-next_loop: "Run NPU4-7 plugin bootstrap and exact-prefix restore canary with a fixed aligned plan; require token/state correctness and activation evidence before performance."
+next_loop: "Run NPU4-7 bootstrap, then one cold-producer/hot-consumer exact-prefix canary; require identical native-KV and ready-GDN boundaries plus greedy token equality before performance."
 rollback:
   command: "disable the explicit plugin switch and remove only the experiment containers/processes on physical NPU4-7"
   verified: false

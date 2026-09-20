@@ -2,7 +2,8 @@
 
 ## Status
 
-- Stage: attempted (plugin policy adapter implemented; NPU validation pending).
+- Stage: re-entered (atomic native-KV/GDN plugin adapter implemented; NPU
+  validation pending).
 - Start: 2026-09-20.
 - Hard timebox: 24 hours from this workstream start.
 - Queue position: 6, after completed MXR, DeltaLog, approximate inversion,
@@ -75,9 +76,11 @@
 ## Immediate next action
 
 Run a container import/bootstrap canary on NPU4-7 with HYPIC and this plugin,
-then run the smallest exact-prefix restore case using one fixed placement plan.
-Do not start a serving performance comparison until token/state correctness and
-plugin hot-path activation are both proven.
+then run the smallest cold-producer / hot-consumer exact-prefix case. Require
+evidence that native full-attention KV and the ready HYPIC GDN checkpoint expose
+the same computed-token boundary. Do not start a serving performance comparison
+until greedy token equality, repeated replay, and plugin hot-path activation are
+all proven.
 
 ## Attempted implementation
 
@@ -96,3 +99,22 @@ plugin hot-path activation are both proven.
   recurrent state for a request. It does not natively implement the paper's
   multiple sparse checkpoints. HYPIC's validated material store is therefore
   the selected production seam.
+
+## Runtime re-entry
+
+- The earlier thin-adapter no-go remains valid: changing only checkpoint
+  candidates cannot cross HYPIC's native-cache guard.
+- New bounded hypothesis: keep full-attention KV under the native vLLM cache,
+  keep GDN/conv checkpoints under HYPIC's transactional material store, and
+  expose a hit only when both owners agree on the exact checkpoint boundary.
+- The plugin now predicts a ready recurrent hit without pre-advancing the
+  request, hides native KV for cold/uncommitted prefixes, bounds
+  Request.block_hashes to the ready checkpoint during the native lookup, and
+  lets the existing HYPIC wrapper validate and attach the worker restore plan.
+- The adapter is gated to the reviewed HYPIC v0.8.5 scheduler SHA256 and fails
+  startup on drift. No HYPIC, vLLM, vLLM-Ascend or CANN source is modified.
+- Ten focused software tests pass. They are not NPU correctness evidence.
+- For the frozen 26-request overlap histogram, distribution-aware checkpoints
+  3072/7680 reduce replay by 27,648 tokens versus the same-budget balanced
+  3072/6144 control (58.7% less replay work), so an end-to-end opportunity still
+  exists.
