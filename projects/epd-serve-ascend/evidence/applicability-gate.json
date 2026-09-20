@@ -1,0 +1,51 @@
+{
+  "schema": "paper-to-ascend-applicability/v1",
+  "paper": {
+    "arxiv": "2601.11590v1",
+    "title": "EPD-Serve: A Flexible Multimodal EPD Disaggregation Inference Serving System On Ascend",
+    "evaluated_models": ["openPangu-7B-VL", "Qwen3-VL-8B"],
+    "evaluated_output_tokens": 64,
+    "official_code_status": "no_paper_specific_repository_identified"
+  },
+  "target": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "acceptance_workload": "text_only_longbench_v2_gsm8k_and_fixed_1024_output_performance",
+    "physical_npus": [4, 5, 6, 7],
+    "tensor_parallel_size": 4,
+    "hbm_mb_per_card": 32768,
+    "vllm_ascend_commit": "5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  },
+  "reachability": {
+    "encode_stage_reached_by_acceptance_workload": false,
+    "ep_feature_prefetch_reached": false,
+    "multimodal_cache_reuse_reached": false,
+    "pd_grouped_transfer_requires_separate_instances": true
+  },
+  "resource_evidence": {
+    "observed_model_weight_gib_per_tp4_rank": 12.8735,
+    "observed_peak_activation_gib_per_rank": 1.2,
+    "observed_non_torch_gib_per_rank": 0.48,
+    "observed_usable_hbm_gib_per_card": 29.49,
+    "minimum_language_model_instances_for_pd": 2,
+    "faithful_pd_fits_four_card_envelope": false
+  },
+  "upstream_evidence": {
+    "deployment_guide": "/cache/austinov/src/vllm-ascend/examples/epd_disaggregated/epd_disaggregated_guide.md",
+    "deployment_guide_sha256": "baac30aed4e60c132d3f1110a875ee85919ea7d91aa95527e161f015f4e8a65d",
+    "feature_guide": "/cache/austinov/src/vllm-ascend/docs/source/user_guide/feature_guide/epd_disaggregation.md",
+    "feature_guide_sha256": "ce5b3babf8edecbcbcc8055505473a50ca3ddb39691187f56c8e66229e597933",
+    "related_existing_features": [
+      "ECExampleConnector",
+      "EPD_load_balancing_proxy_example",
+      "MooncakeLayerwiseConnector",
+      "1E1PD_and_1E1P1D_examples"
+    ]
+  },
+  "decision": {
+    "status": "rejected",
+    "scope": "fixed_text_only_acceptance_and_four_card_single_instance_boundary",
+    "reason": "paper_mechanism_not_reached_and_faithful_multi_instance_topology_does_not_fit",
+    "end_to_end_run": "not_launched_resource_and_workload_gate_failed",
+    "accuracy_run": "not_launched_no_candidate"
+  }
+}

@@ -141,6 +141,20 @@ not require retraining unless retraining is explicitly in scope.
   Summed HCCL kernel durations may overlap and must not be substituted for the
   critical path. Stop early when even zero-cost communication cannot meet the
   acceptance target.
+- Prove workload reachability before provisioning a system paper. If the fixed
+  benchmark bypasses the optimized stage (for example, text-only requests
+  bypass a multimodal encoder), headline gains from that stage are unavailable.
+- For disaggregated serving, calculate the number of complete model instances
+  and per-card weight, activation, cache, and runtime memory before starting
+  containers. An experiment that can only OOM under the authorized topology is
+  not a paper reproduction.
+- A repository with the same system name may implement an earlier paper. Match
+  arXiv ID, authors, and mechanism contract before treating it as official
+  source code.
+- When upstream already exposes connector/proxy seams for a system design, use
+  them in a future correctly resourced deployment. Do not duplicate a fleet
+  architecture inside a single-process plugin merely to satisfy the delivery
+  label.
 
 ## Do not do
 
