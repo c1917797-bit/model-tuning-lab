@@ -1,0 +1,72 @@
+{
+  "schema": "model-tuning-lab.dasc-terminal-audit/v1",
+  "paper": {
+    "title": "DASC: Decay-Aware State Compression for Hybrid Linear-Attention Serving",
+    "arxiv": "2608.30386"
+  },
+  "target": {
+    "model": "Qwen3.6-27B",
+    "accelerator": "Ascend 910B4",
+    "physical_devices": [4, 5, 6, 7],
+    "tensor_parallel_size": 4,
+    "delivery": "plugin_monkeypatch"
+  },
+  "decision": "implementation_no_go",
+  "performance_claim": null,
+  "quality_claim": null,
+  "candidate": {
+    "artifact_root": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40",
+    "cache_hit_observed": true,
+    "cache_hit_delta_tokens": 4608,
+    "identical_replays": false,
+    "top_level_ok": false,
+    "structural_gates": {
+      "four_tp_workers": true,
+      "gdn_layers": 48,
+      "state_indices": [0, 1],
+      "exact_physical_state_copies": 384,
+      "state_row_gate_ok": true,
+      "dense_page_padding_ok": true,
+      "padded_attention_reshape_ok": true,
+      "numerical_canary_ok": false
+    }
+  },
+  "dense_eager_control": {
+    "artifact": "/cache/cch/dasc-qwen36-ascend-20260915/dense-eager-exact-prefix-control-v12r29/dense-eager-replay-control.json",
+    "cache_hit_observed": true,
+    "cache_hit_delta_tokens": 3072,
+    "identical_replays": true,
+    "ok": true
+  },
+  "source_artifacts": [
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40/physical-canary.json",
+      "sha256": "56f41fbfa41a823e8d05f7f8942e33be3f57a18fcdb643df840ebd343f371433"
+    },
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40/state-index-verdict.json",
+      "sha256": "fa2c003e3280caef08b7ffe597dbfdbd6351fa9409d8f94f3cc1a6c862589377"
+    },
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40/branch-evidence-verdict.json",
+      "sha256": "4fc87df30e0c9f9ce33ad788d9e0aa703146e70385e26bad5b987866a9927eb6"
+    },
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40/full-layer-state-verdict.json",
+      "sha256": "5e8aa50a90fd087033ecf95eb2537d30f97e678241dfdbdcd9a963f77dc128e6"
+    },
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40/dense-page-padding-verdict.json",
+      "sha256": "3472758fa56442875847a9afe9d8f3cf78a21c5d7baecfc23598c0783e8bb1f7"
+    },
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/padded-attention-reshape-coherent-nontarget-npu4-7-v12r40/padded-attention-reshape-verdict.json",
+      "sha256": "d5acfdcd09762b3b8c2aeef9414c53e1126eacbbe575eb54e11b2c1a0f977047"
+    },
+    {
+      "path": "/cache/cch/dasc-qwen36-ascend-20260915/dense-eager-exact-prefix-control-v12r29/dense-eager-replay-control.json",
+      "sha256": "e9d032771228a1fa9a178cfbe701ff7922757a0a6809f92a0ad4cf856bf1aafc"
+    }
+  ],
+  "reentry_gate": "materially_new_state_reconstruction_invariant_and_deterministic_cache_hit_replay"
+}

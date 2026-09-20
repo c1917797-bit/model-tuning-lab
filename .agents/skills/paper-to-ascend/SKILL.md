@@ -155,6 +155,15 @@ not require retraining unless retraining is explicitly in scope.
   them in a future correctly resourced deployment. Do not duplicate a fleet
   architecture inside a single-process plugin merely to satisfy the delivery
   label.
+- For cache/state lifecycle changes, a branch-hit event and structurally correct
+  row copy are necessary but not sufficient. Require deterministic repeated
+  cache-hit output under fixed decoding settings and a dense control in the
+  same execution mode. If the dense control is stable while the candidate is
+  not, stop before performance or task-quality benchmarking; do not average the
+  corruption away as ordinary numerical noise.
+- Keep end-task tolerance separate from intermediate correctness. A permitted
+  GSM8K score delta does not authorize nondeterministic recurrent-state replay,
+  because such a candidate has no stable semantics to benchmark.
 
 ## Do not do
 
