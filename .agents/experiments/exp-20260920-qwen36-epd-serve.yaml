@@ -1,14 +1,15 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-epd-serve
-status: planned
-decision: pending
+status: completed
+decision: rejected
 hypothesis: "On the fixed four-card Qwen3.6 workload, an explicit opt-in EPD deployment can isolate encode/prefill/decode interference and improve end-to-end output throughput by at least 10% without changing model outputs."
 objective: "Pierce arXiv:2601.11590 on Qwen3.6-27B and Ascend within 24 hours, proving workload, resource and plugin-delivery fit before launching a multi-instance service."
 owner: codex
 git:
   branch: work/epd-serve-qwen36-ascend-20260920
   base_commit: 52b4ec1b84af224e4e5178d6e4512573423732f4
-  stage_commits: []
+  stage_commits:
+    - bb0827f
 environment:
   source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; paper arXiv:2601.11590v1"
   model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
@@ -47,10 +48,14 @@ results:
     paper_scope: "EPD-Serve targets multimodal high-concurrency serving by separating Encode, Prefill and Decode, with asynchronous feature prefetch, hierarchical KV transfer and multi-route scheduling."
     model_config: "The installed checkpoint is Qwen3_5ForConditionalGeneration with a vision_config and text_config; it is not a pure-text architecture."
     upstream_capability: "The pinned vLLM-Ascend source already contains EPD guides/examples, EC-transfer integration and Mooncake layerwise P/D transfer support."
+    frozen_workload: "The established performance protocol is raw text completion with input length 32768, shared prefix 16384, concurrency 16 and fixed 1024-token output. LongBench-v2 and GSM8K are also text-only. No request contains image, video or audio input, so Encode-stage work is zero."
+    mechanism_decision: "Without media input, EPD-specific encoder isolation, asynchronous E-to-P feature prefetch and modality-aware routing cannot activate. Any residual P/D split is ordinary disaggregated prefill already supported upstream and is not a distinct EPD-Serve candidate."
+    performance: "Not run: no paper-distinct mechanism can activate under the frozen acceptance workload."
+    accuracy: "Not run: no candidate was implemented or executed."
   resources: {}
 artifacts: []
-decision_reason: ""
-next_loop: "Prove whether the frozen acceptance workload activates Encode; then establish a same-four-card E/P/D memory layout before any service launch."
+decision_reason: "Rejected for the current acceptance protocol at the workload applicability gate. The checkpoint can encode vision, but every frozen performance and accuracy request is text-only, so the Encode stage has no work and EPD-specific isolation, feature prefetch and multimodal scheduling cannot produce a gain. The pinned runtime already supplies ordinary P/D and EC/KV-transfer machinery; benchmarking that path would test an existing system feature rather than this paper's distinct contribution. No NPU run was launched."
+next_loop: "Treat the previously completed DASC deterministic-replay no-go as queue position 9 evidence; advance to queue position 10, DUET, and apply the plugin-delivery and hardware-package applicability gate."
 rollback:
   command: "disable the opt-in orchestration plugin and stop only this workstream's services on physical NPU4-7"
-  verified: false
+  verified: true

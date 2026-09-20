@@ -146,6 +146,13 @@ not require retraining unless retraining is explicitly in scope.
 - When a predeclared applicability abort condition proves that no distinct
   candidate remains, stop before profiling or E2E A/B. Benchmarking identical
   paths under different labels creates noise, not evidence.
+- A checkpoint's multimodal configuration proves capability, not workload
+  activation. For Encode/Prefill/Decode papers, inspect the frozen requests and
+  require actual media payloads plus live Encode events before attributing any
+  benefit to encoder separation or feature prefetch.
+- When Encode is inactive, do not relabel ordinary P/D disaggregation as EPD.
+  Record the mechanism boundary and reject the paper-specific claim even if the
+  runtime already has generic P/D connectors and proxy examples.
 
 ## Do not do
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-- Stage: planned / applicability gate in progress.
+- Stage: completed / rejected at the workload applicability gate.
 - Start: 2026-09-20.
 - Hard timebox: 24 hours.
 - Queue position: 8. HYPIC remains the previously completed successful template.
@@ -36,8 +36,25 @@ upstream capabilities and cannot be counted as new candidate gains.
    tokens and three comparable repetitions per arm, followed by paired
    LongBench-v2 and GSM8K.
 
-## Immediate next action
+## Final evidence
 
-Locate the frozen performance request corpus/command and prove its modality.
-In parallel, inspect the v0.23 EPD example's model support and instance memory
-layout. Do not launch an NPU service until both gates pass.
+- The checkpoint is multimodal-capable, but capability alone is insufficient.
+- The frozen performance protocol is raw text completion: input length 32768,
+  shared prefix 16384, concurrency 16 and fixed 1024-token output.
+- LongBench-v2 and GSM8K are text-only.
+- Therefore no request activates visual/audio/video Encode work. Encoder
+  isolation, E-to-P feature prefetch and modality-aware routing cannot affect
+  the accepted workload.
+- vLLM-Ascend v0.23 already contains ordinary P/D transfer, EC-transfer hooks,
+  Mooncake layerwise transfer and EPD proxy examples. Re-running ordinary P/D
+  would test an existing upstream feature, not this paper's distinct mechanism.
+- No NPU service was launched and physical NPU4-7 were not consumed.
+
+## Decision
+
+Reject EPD-Serve for the current frozen Qwen3.6 performance and accuracy
+protocol. This is a workload-scoped no-go, not a claim that EPD-Serve lacks
+value for real high-concurrency multimodal traffic.
+
+Queue position 9, DASC, already has a preserved deterministic cache-hit replay
+failure and is not to be rerun unchanged. Advance to queue position 10, DUET.
