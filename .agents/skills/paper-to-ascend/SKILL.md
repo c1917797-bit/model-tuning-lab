@@ -107,6 +107,23 @@ not require retraining unless retraining is explicitly in scope.
   or resource ownership drifts; re-isolate and re-baseline.
 - Saved FLOPs, faster local GMM, or a single warm run is not enough. Accept only
   correctness-first, apples-to-apples repeated evidence.
+- Plugin discovery, plan loading, and patch installation are not mechanism
+  evidence. Require an event from the exact live hook carrying request identity,
+  runtime geometry, and the selected action.
+- Derive cache/page/block alignment from the live runtime after all hybrid-cache
+  rewrites. A plan aligned to a static config can be invalid after Mamba and
+  attention page sizes are reconciled.
+- Read the predicate behind a fail-closed runtime error before launching a
+  proposed variant. Error prose can be narrower than the actual condition; do
+  not rerun a deterministic failure just because the message names one mode.
+- Hybrid-cache papers may require separate lifecycles for attention KV and
+  recurrent state. Before reusing another plugin's material cache, prove whether
+  it stores both together. If the paper requires dense attention KV but sparse
+  recurrent checkpoints, require an atomic publish/commit seam or reject the
+  thin-adapter path.
+- Do not infer checkpoint count or mechanism activation from an ambiguously
+  named counter such as placements. Trace the producer and record the semantic
+  unit (requests, rows, blocks, or checkpoints).
 
 ## Do not do
 

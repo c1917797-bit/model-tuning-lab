@@ -91,6 +91,9 @@ class PlannerTests(unittest.TestCase):
                 "VLLM_ASCEND_SPARSE_PREFIX_ENABLE",
                 "VLLM_ASCEND_SPARSE_PREFIX_PLAN",
                 "VLLM_ASCEND_SPARSE_PREFIX_EVIDENCE_FILE",
+                "VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT",
+                "VLLM_ASCEND_HYPIC_CACHE_ONLY_CUMULATIVE_PREFIX",
+                "VLLM_ASCEND_HYPIC_REQUIRE_POSITION_DEPENDENT_PREFIX_CACHE",
             )
         }
         try:
@@ -101,6 +104,9 @@ class PlannerTests(unittest.TestCase):
                 path = Path(tmp) / "plan.json"
                 path.write_text(json.dumps(payload), encoding="utf-8")
                 os.environ["VLLM_ASCEND_HYPIC_ENABLE"] = "1"
+                os.environ["VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT"] = "0"
+                os.environ["VLLM_ASCEND_HYPIC_CACHE_ONLY_CUMULATIVE_PREFIX"] = "1"
+                os.environ["VLLM_ASCEND_HYPIC_REQUIRE_POSITION_DEPENDENT_PREFIX_CACHE"] = "1"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_ENABLE"] = "1"
                 os.environ["VLLM_ASCEND_SPARSE_PREFIX_PLAN"] = str(path)
                 evidence_path = Path(tmp) / "evidence.jsonl"
@@ -125,6 +131,7 @@ class PlannerTests(unittest.TestCase):
                     [event["event"] for event in events],
                     [
                         "sparse_prefix_plan_loaded",
+                        "sparse_prefix_patch_installed",
                         "sparse_prefix_candidates_selected",
                     ],
                 )
@@ -143,6 +150,40 @@ class PlannerTests(unittest.TestCase):
                     sys.modules.pop(name, None)
                 else:
                     sys.modules[name] = module
+            for key, value in old_env.items():
+                if value is None:
+                    os.environ.pop(key, None)
+                else:
+                    os.environ[key] = value
+
+    def test_runtime_rejects_position_independent_hypic(self):
+        payload = {
+            "schema": "sparse-prefix-placement/v1",
+            "positions": [128, 512],
+            "checkpoint_budget": 2,
+            "block_size": 128,
+            "max_length": 1024,
+        }
+        keys = (
+            "VLLM_ASCEND_HYPIC_ENABLE",
+            "VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT",
+            "VLLM_ASCEND_SPARSE_PREFIX_ENABLE",
+            "VLLM_ASCEND_SPARSE_PREFIX_PLAN",
+        )
+        old_env = {key: os.environ.get(key) for key in keys}
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / "plan.json"
+                path.write_text(json.dumps(payload), encoding="utf-8")
+                os.environ["VLLM_ASCEND_HYPIC_ENABLE"] = "1"
+                os.environ["VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT"] = "1"
+                os.environ["VLLM_ASCEND_SPARSE_PREFIX_ENABLE"] = "1"
+                os.environ["VLLM_ASCEND_SPARSE_PREFIX_PLAN"] = str(path)
+                runtime._INSTALLED = False
+                with self.assertRaisesRegex(RuntimeError, "bypasses that placement path"):
+                    runtime.register()
+        finally:
+            runtime._INSTALLED = False
             for key, value in old_env.items():
                 if value is None:
                     os.environ.pop(key, None)

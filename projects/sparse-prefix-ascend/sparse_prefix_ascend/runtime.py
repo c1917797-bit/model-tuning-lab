@@ -66,6 +66,19 @@ def register() -> None:
         raise RuntimeError(
             "Sparse Prefix Ascend requires the validated HYPIC state/KV runtime"
         )
+    if os.environ.get("VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT", "0") == "1":
+        raise RuntimeError(
+            "Sparse Prefix Ascend implements cumulative recurrent checkpoints; "
+            "HYPIC true position-independent mode bypasses that placement path"
+        )
+    if os.environ.get("VLLM_ASCEND_HYPIC_CACHE_ONLY_CUMULATIVE_PREFIX", "0") != "1":
+        raise RuntimeError(
+            "Sparse Prefix Ascend requires cumulative-prefix-only HYPIC material"
+        )
+    if os.environ.get("VLLM_ASCEND_HYPIC_REQUIRE_POSITION_DEPENDENT_PREFIX_CACHE", "0") != "1":
+        raise RuntimeError(
+            "Sparse Prefix Ascend requires native position-dependent prefix KV cache"
+        )
     path = os.environ.get("VLLM_ASCEND_SPARSE_PREFIX_PLAN")
     if not path or not Path(path).is_absolute():
         raise RuntimeError(
@@ -133,6 +146,11 @@ def register() -> None:
     candidate_prefix_ends._sparse_prefix_ascend_wrapped = True
     candidate_prefix_ends._sparse_prefix_original = original
     hypic_scheduler._candidate_prefix_ends_for_request = candidate_prefix_ends
+    _emit_evidence(
+        "sparse_prefix_patch_installed",
+        target="hypic_vllm_ascend.patches.scheduler._candidate_prefix_ends_for_request",
+        mode="cumulative_prefix_with_native_attention_kv",
+    )
     _INSTALLED = True
     logger.info(
         "Sparse Prefix Ascend placement active: positions=%s budget=%d block=%d",
