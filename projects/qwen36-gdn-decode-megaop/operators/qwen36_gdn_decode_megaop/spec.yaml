@@ -1,0 +1,339 @@
+# Copyright (c) 2026 Huawei Technologies Co., Ltd.
+# This program is free software; see the CANN Open Software License Agreement Version 2.0.
+
+# Generated with CannBot ops-spec-gen, then specialized from the audited
+# Qwen3.6-27B TP4 vLLM-Ascend decode ABI. This is an L0 contract, not evidence
+# that the AscendC kernel has been implemented or validated.
+schema_version: 1
+
+op:
+  name: qwen36_gdn_decode_megaop
+  version: "1.0"
+  lifecycle: experimental
+  description: "Exact-semantics Qwen3.6 TP4 non-spec decode GDN fusion: causal convolution/state update, packed QKV split, gating, Q/K L2 normalization, and recurrent gated-delta state update"
+  category: FusedComposite
+  paradigms: [LayoutTransform, Reduction, SlidingWindow, Recurrence, Stateful, NumericalStable, FusedComposite]
+  error_codes: [null_input, shape_mismatch, dtype_not_supported]
+  platform_constraints:
+    supported_chips: [Ascend910B]
+    requires_hccl: false
+  paradigm_groups:
+    - kind: fusion
+      paradigms: [LayoutTransform, Reduction, SlidingWindow, Recurrence, Stateful, NumericalStable, FusedComposite]
+
+inputs:
+  - name: mixed_qkv
+    description: "One decode token per active sequence, packed as local Q(4x128), K(4x128), V(12x128)"
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 2560]}
+  - name: conv_weight
+    description: "Original checkpoint layout [packed_width, kernel_width]; fusion removes the per-step external transpose"
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: [2560, 4]}
+  - name: conv_bias
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: [2560]}
+  - name: conv_state
+    description: "Mutable causal-convolution cache; no speculative slots in this v1 contract"
+    role: state
+    dtype_set: [bfloat16]
+    rank_range: [3, 3]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 3, 2560]}
+  - name: a_log
+    role: tensor
+    dtype_set: [float32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: [12]}
+  - name: a
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 12]}
+  - name: b
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 12]}
+  - name: dt_bias
+    role: tensor
+    dtype_set: [float32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: [12]}
+  - name: recurrent_state
+    description: "Mutable FP32 GDN state [slot, local_value_head, value_dim, key_dim]"
+    role: state
+    dtype_set: [float32]
+    rank_range: [4, 4]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 12, 128, 128]}
+  - name: actual_seq_lengths
+    description: "Decode metadata; valid non-spec domain is [0, 1, ..., 1] with length T+1"
+    role: tensor
+    dtype_set: [int32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T_plus_1"]}
+  - name: conv_cache_indices
+    description: "Nonnegative slot id per active sequence; values must be less than S and unique in one invocation"
+    role: tensor
+    dtype_set: [int32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T"]}
+  - name: ssm_state_indices
+    description: "Nonnegative recurrent-state slot id per active sequence; values must be less than S and unique in one invocation"
+    role: tensor
+    dtype_set: [int32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T"]}
+
+attributes: []
+
+outputs:
+  - name: output
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      output.shape = (mixed_qkv.shape[0], 12, 128)
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      output.dtype = mixed_qkv.dtype
+    layout: ND
+    aliasing: none
+  - name: conv_state_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      conv_state_out.shape = conv_state.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      conv_state_out.dtype = conv_state.dtype
+    layout: ND
+    aliasing: inplace_with(conv_state)
+  - name: recurrent_state_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      recurrent_state_out.shape = recurrent_state.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      recurrent_state_out.dtype = recurrent_state.dtype
+    layout: ND
+    aliasing: inplace_with(recurrent_state)
+
+reduction:
+  axis_source: fixed
+  fixed_value: -1
+
+shape_constraints:
+  symbols:
+    T: {kind: dim, range: [1, 256]}
+    S: {kind: dim, range: [1, 4096]}
+    T_plus_1: {kind: dim, range: [2, 257]}
+  global_constraints:
+    - "rank(mixed_qkv) == 2"
+    - "rank(conv_state) == 3"
+    - "rank(recurrent_state) == 4"
+  notes:
+    - "T_plus_1 == T + 1; actual_seq_lengths is [0, 1, ..., 1] for this non-spec decode contract."
+    - "conv_cache_indices and ssm_state_indices are valid, nonnegative, unique within one invocation, and index the same logical request slots."
+    - "Prefill, speculative decoding, mixed prefill/decode batches, FP16 activation, and non-TP4 head layouts must fail closed to the unfused vLLM-Ascend path."
+    - "TP4 constants: local key heads=4, local value heads=12, key/value head dim=128, packed width=2560, convolution width=4."
+
+dtype_policy:
+  promotion: upcast_for_accum
+  supported_combinations:
+    - inputs:
+        mixed_qkv: bfloat16
+        conv_weight: bfloat16
+        conv_bias: bfloat16
+        conv_state: bfloat16
+        a_log: float32
+        a: bfloat16
+        b: bfloat16
+        dt_bias: float32
+        recurrent_state: float32
+        actual_seq_lengths: int32
+        conv_cache_indices: int32
+        ssm_state_indices: int32
+      outputs:
+        output: bfloat16
+        conv_state_out: bfloat16
+        recurrent_state_out: float32
+  accumulator_dtype: float32
+
+# The top-level ABI does not apply one broadcast rule across heterogeneous
+# operands. Broadcasting inside gating/normalization/recurrence is explicit in
+# the formula and composition DAG.
+broadcast:
+  kind: none
+
+math_semantics:
+  formula_kind: numpy_expr
+  formula: |
+    conv_idx = np.mod(conv_cache_indices, conv_state.shape[0])
+    state_idx = np.mod(ssm_state_indices, recurrent_state.shape[0])
+    selected_conv_state = conv_state[conv_idx]
+    conv_window = np.concatenate((selected_conv_state, mixed_qkv[:, np.newaxis, :]), axis=1)
+    conv_linear = np.sum(conv_window.astype(np.float32) * conv_weight.T[np.newaxis, :, :].astype(np.float32), axis=1)
+    conv_linear = conv_linear + conv_bias.astype(np.float32)
+    conv_output = conv_linear / (1.0 + np.exp(-conv_linear))
+    conv_state_out = conv_state.copy()
+    conv_state_out[conv_idx] = np.concatenate((selected_conv_state[:, 1:, :], mixed_qkv[:, np.newaxis, :]), axis=1)
+    query = conv_output[:, :512].reshape((conv_output.shape[0], 4, 128))
+    key = conv_output[:, 512:1024].reshape((conv_output.shape[0], 4, 128))
+    value = conv_output[:, 1024:].reshape((conv_output.shape[0], 12, 128))
+    gate = -np.exp(a_log[np.newaxis, :]) * np.logaddexp(0.0, a.astype(np.float32) + dt_bias[np.newaxis, :])
+    beta = 1.0 / (1.0 + np.exp(-b.astype(np.float32)))
+    query_norm = query / np.sqrt(np.sum(query * query, axis=-1, keepdims=True) + 1.0e-6)
+    key_norm = key / np.sqrt(np.sum(key * key, axis=-1, keepdims=True) + 1.0e-6)
+    query_heads = np.repeat(query_norm, 3, axis=1).astype(np.float32) / np.sqrt(128.0)
+    key_heads = np.repeat(key_norm, 3, axis=1).astype(np.float32)
+    selected_state = recurrent_state[state_idx]
+    decayed_state = selected_state * np.exp(gate)[:, :, np.newaxis, np.newaxis]
+    prediction = np.einsum("thvk,thk->thv", decayed_state, key_heads)
+    delta = (value.astype(np.float32) - prediction) * beta[:, :, np.newaxis]
+    updated_state = decayed_state + delta[:, :, :, np.newaxis] * key_heads[:, :, np.newaxis, :]
+    seq_guard = np.ones_like(mixed_qkv[:, 0], dtype=np.float32)
+    output = (np.einsum("thvk,thk->thv", updated_state, query_heads) * seq_guard[:, np.newaxis, np.newaxis]).astype(np.float32)
+    recurrent_state_out = recurrent_state.copy()
+    recurrent_state_out[state_idx] = updated_state
+
+  reference_oracle:
+    framework: torch
+    api: torch.qwen36_gdn_decode_megaop
+    kwargs: {}
+    available_for_dtype: [bfloat16]
+    absent: true
+
+  invariants:
+    - name: output_shape_contract
+      kind: shape_equals_macro
+      macro: qwen36_tp4_decode_output
+      tolerance_inherit: false
+    - name: no_intermediate_leak
+      kind: no_leak_intermediates
+      tolerance_inherit: false
+
+  composition:
+    primitives:
+      - {id: p01_weight_permute, op: permute, inputs: [conv_weight], outputs: [conv_weight_t]}
+      - {id: p02_causal_conv, op: conv, inputs: [mixed_qkv, conv_weight_t, conv_bias, conv_state, conv_cache_indices], outputs: [conv_output, conv_state_out]}
+      - {id: p03_q_slice, op: slice, inputs: [conv_output], outputs: [query]}
+      - {id: p04_k_slice, op: slice, inputs: [conv_output], outputs: [key]}
+      - {id: p05_v_slice, op: slice, inputs: [conv_output], outputs: [value]}
+      - {id: p06_gate, op: elementwise_binary, inputs: [a, a_log, dt_bias], outputs: [gate]}
+      - {id: p07_beta, op: elementwise_unary, inputs: [b], outputs: [beta]}
+      - {id: p08_q_reduce, op: reduce, inputs: [query], outputs: [query_sumsq]}
+      - {id: p09_q_normalize, op: elementwise_binary, inputs: [query, query_sumsq], outputs: [query_norm]}
+      - {id: p10_k_reduce, op: reduce, inputs: [key], outputs: [key_sumsq]}
+      - {id: p11_k_normalize, op: elementwise_binary, inputs: [key, key_sumsq], outputs: [key_norm]}
+      - {id: p12_state_prediction, op: gemm, inputs: [recurrent_state, key_norm, ssm_state_indices, actual_seq_lengths], outputs: [prediction]}
+      - {id: p13_state_update, op: elementwise_binary, inputs: [recurrent_state, prediction, value, beta, gate, key_norm], outputs: [recurrent_state_out]}
+      - {id: p14_output_projection, op: gemm, inputs: [recurrent_state_out, query_norm], outputs: [output]}
+    dataflow:
+      intermediates: [conv_weight_t, conv_output, query, key, value, gate, beta, query_sumsq, query_norm, key_sumsq, key_norm, prediction]
+      no_leak: true
+      fusable_groups:
+        - [p01_weight_permute, p02_causal_conv, p03_q_slice, p04_k_slice, p05_v_slice, p06_gate, p07_beta, p08_q_reduce, p09_q_normalize, p10_k_reduce, p11_k_normalize, p12_state_prediction, p13_state_update, p14_output_projection]
+
+numerical_stability:
+  required: true
+  techniques:
+    - name: fp32_accumulation
+      applies_to: "convolution, L2 sum-of-squares, gating, recurrent prediction/update, and output projection"
+      rationale: "The deployed path keeps recurrent state FP32 and avoids BF16 accumulation drift over long decode sequences."
+      anti_pattern_id: AP-007
+    - name: positive_l2_epsilon
+      applies_to: "query/key L2 normalization"
+      rationale: "Adding 1e-6 before reciprocal square root prevents division by zero on an all-zero head."
+    - name: keep_intermediates_on_chip
+      applies_to: "the fused causal-conv through recurrent-update chain"
+      rationale: "Avoiding GM materialization of split Q/K/V, gates, norms, and prediction is the performance purpose of the mega-op."
+      anti_pattern_id: AP-006
+  affects_invariants: false
+
+numerical_tolerance:
+  source: "ops-precision-standard/float_compute_community.md; final NPU gate is multi-step comparison against the current vLLM-Ascend chain"
+  per_dtype:
+    bfloat16: {rtol: 4.0e-3, atol: 4.0e-3, metric: max_relative}
+    float32: {rtol: 1.0e-5, atol: 1.0e-6, metric: max_relative}
+
+boundary_conditions:
+  - case: "reduce axis size 1 is not representable because Q/K head_dim is fixed at 128; adapter raises"
+    tags: [reduce_axis_size_1]
+    synthesize: {mixed_qkv.shape: "[1, 2560]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "rank=0 scalar input is outside the fixed decode ABI"
+    tags: [rank_zero_scalar]
+    synthesize: {mixed_qkv.shape: "[]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "empty Tensor T=0 is rejected; scheduler must not invoke the mega-op for an empty batch"
+    tags: [empty_tensor]
+    synthesize: {mixed_qkv.shape: "[0, 2560]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "stride > kernel is unsupported: stride is fixed to 1 and kernel width to 4"
+    tags: [stride_gt_kernel]
+    synthesize: {mixed_qkv.shape: "[1, 2560]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "cross-call state persists through explicit in-place conv_state and recurrent_state outputs"
+    tags: [state_persists_across_calls]
+    synthesize: {mixed_qkv.shape: "[3, 2560]"}
+    machine_check: {kind: matches_invariant, name: no_intermediate_leak}
+  - case: "packed width mismatch fails closed"
+    synthesize: {mixed_qkv.shape: "[3, 2559]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "FP16 activation is rejected rather than silently selecting a numerically different path"
+    synthesize: {mixed_qkv.shape: "[3, 2560]", dtype: {mixed_qkv: float16}}
+    machine_check: {kind: raises_error, error_type: dtype_not_supported}
+
+extreme_inputs:
+  - case: "BF16 60000 stress covers the fp16 overflow boundary requirement; FP16 itself is unsupported"
+    tags: [fp16_overflow_boundary]
+    synthesize:
+      shapes: {mixed_qkv: "[3, 2560]"}
+      patterns:
+        - {pattern: "all_same(60000.0)", target: mixed_qkv}
+      dtype: {mixed_qkv: bfloat16}
+    machine_check: {kind: matches_invariant, name: output_shape_contract}
+  - case: "all-zero Q/K exercises the positive L2 epsilon"
+    synthesize:
+      shapes: {mixed_qkv: "[3, 2560]"}
+      patterns:
+        - {pattern: all_zero, target: mixed_qkv}
+    machine_check: {kind: matches_invariant, name: output_shape_contract}
+  - case: "NaN in packed activation propagates and must not corrupt state outside referenced slots"
+    synthesize:
+      shapes: {mixed_qkv: "[3, 2560]"}
+      patterns:
+        - {pattern: inject_nan_one_element, target: mixed_qkv}
+    machine_check: {kind: produces_nan, scope: "referenced output/state slot"}
+
+determinism:
+  required: true
+  accumulation_order: sequential
+  bitwise_reproducible: false
