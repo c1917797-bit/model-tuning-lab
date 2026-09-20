@@ -13,12 +13,12 @@ from typing import Any
 
 
 LOGGER = logging.getLogger(__name__)
-PATCH_VERSION = "0.1.0"
+PATCH_VERSION = "0.2.0"
 ENABLE_ENV = "QWEN36_DELTALOG_ENABLE"
 LIBRARY_ENV = "QWEN36_DELTALOG_LIBRARY"
 AUDIT_ENV = "QWEN36_DELTALOG_AUDIT"
 EXPECTED_GDN_SHA256 = "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
-EXPECTED_LIBRARY_SHA256 = "142ffd6833a34dc6ce975340250a9dcc397950a555e65202ed8de25e03ed75dc"
+EXPECTED_LIBRARY_SHA256 = "a3698261d9e6de185b49aba5dd5aee1dc676cbb457e3e172aec826475bb57513"
 EXPECTED_SCHEMA = (
     "qwen36_deltalog::decode(Tensor query, Tensor key, Tensor value, Tensor g, "
     "Tensor beta, Tensor(a!) base_state, Tensor(b!) k_log, Tensor(c!) u_log, "
@@ -108,7 +108,7 @@ def _ensure_aux(torch: Any, self: Any) -> dict[str, Any] | None:
     aux = {
         "base_ptr": base_ptr,
         "slots": slots,
-        "k_log": torch.zeros((slots, VALUE_HEADS, CAPACITY, HEAD_DIM),
+        "k_log": torch.zeros((slots, KEY_HEADS, CAPACITY, HEAD_DIM),
                              dtype=torch.bfloat16, **options),
         "u_log": torch.zeros((slots, VALUE_HEADS, CAPACITY, HEAD_DIM),
                              dtype=torch.float32, **options),
@@ -150,7 +150,12 @@ def _flush_all(torch: Any, self: Any, aux: dict[str, Any], reason: str) -> None:
     active = torch.nonzero(lengths[:, 0] != 0, as_tuple=False).flatten()
     base = self.kv_cache[1]
     selected_base = base.index_select(0, active)
-    k_log = aux["k_log"].index_select(0, active).float()
+    k_log = (
+        aux["k_log"]
+        .index_select(0, active)
+        .float()
+        .repeat_interleave(VALUE_HEADS // KEY_HEADS, dim=1)
+    )
     u_log = aux["u_log"].index_select(0, active)
     lambda_log = aux["lambda_log"].index_select(0, active)[:, :, :CAPACITY]
     decay = aux["decay"].index_select(0, active)[:, :, 0]

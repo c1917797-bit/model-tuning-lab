@@ -69,13 +69,13 @@ inputs:
     contiguous: required
     shape: {symbolic: ["S", 12, 128, 128]}
   - name: k_log
-    description: "Mutable BF16 key log; capacity C=M-1=7"
+    description: "Mutable BF16 key log stored once per local Q/K head; capacity C=M-1=7"
     role: state
     dtype_set: [bfloat16]
     rank_range: [4, 4]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S", 12, 7, 128]}
+    shape: {symbolic: ["S", 4, 7, 128]}
   - name: u_log
     description: "Mutable FP32 delta-update log; capacity C=M-1=7"
     role: state
@@ -211,7 +211,7 @@ shape_constraints:
     - "T_plus_1 == T + 1; actual_seq_lengths is [0,1,...,1] for non-spec decode."
     - "ssm_state_indices values are unique in one invocation and each is in [0,S)."
     - "Lane 0 of each per-head log_length row is in [0,7]; v2 proved 8-lane/32-byte rows still collide pairwise, so v3 uses 16-lane/64-byte rows."
-    - "The four normalized key heads are repeated three times to address twelve local value heads, matching native Qwen3.6 TP4 GDN semantics."
+    - "The key log is stored once for each of four normalized key heads and expanded by a fixed 3:1 value-to-key mapping only while reconstructing twelve value-head states."
     - "Prefill initializes base_state from the native chunk kernel and zeroes all auxiliary buffers; slot reuse must do the same before decode."
     - "Prefill, speculative decoding, mixed prefill/decode, FP16, non-TP4 heads, duplicate slots, and unsupported shapes fail closed to the native path."
 
@@ -256,6 +256,7 @@ math_semantics:
     k_heads = np.repeat(key.astype(np.float32), 3, axis=1)
     selected_base = base_state[state_idx]
     selected_k_log = k_log[state_idx].astype(np.float32)
+    selected_k_log_for_v = np.repeat(selected_k_log, 3, axis=1)
     selected_u_log = u_log[state_idx]
     selected_lambda_storage = lambda_log[state_idx]
     selected_lambda_log = selected_lambda_storage[:, :, :7]
@@ -266,7 +267,7 @@ math_semantics:
     live_mask = np.arange(7)[np.newaxis, np.newaxis, :] < selected_length[:, :, np.newaxis]
     log_scale = np.exp(selected_decay[:, :, np.newaxis] - selected_lambda_log) * live_mask
     logical_previous = np.exp(selected_decay)[:, :, np.newaxis, np.newaxis] * selected_base
-    logical_previous = logical_previous + np.einsum("thl,thlv,thlk->thvk", log_scale, selected_u_log, selected_k_log)
+    logical_previous = logical_previous + np.einsum("thl,thlv,thlk->thvk", log_scale, selected_u_log, selected_k_log_for_v)
     decayed_previous = np.exp(g)[:, :, np.newaxis, np.newaxis] * logical_previous
     prediction = np.einsum("thvk,thk->thv", decayed_previous, k_heads)
     update = beta.astype(np.float32)[:, :, np.newaxis] * (value.astype(np.float32) - prediction)
@@ -285,8 +286,10 @@ math_semantics:
     # Merge resets visibility through log_length.  Payload bytes may remain
     # stale; physically clearing them would add writes without changing state.
     next_k_log = selected_k_log.copy()
-    old_k_entry = next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position, :]
-    next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position, :] = np.where(append_mask[:, :, np.newaxis], k_heads, old_k_entry)
+    key_position = position[:, :1]
+    key_append_mask = append_mask[:, :1]
+    old_k_entry = next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(4)[np.newaxis, :], key_position, :]
+    next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(4)[np.newaxis, :], key_position, :] = np.where(key_append_mask[:, :, np.newaxis], key.astype(np.float32), old_k_entry)
     k_log_out[state_idx] = next_k_log
     u_log_out = u_log.copy()
     next_u_log = selected_u_log.copy()

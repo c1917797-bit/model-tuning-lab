@@ -82,7 +82,12 @@ def make_inputs(batch: int, slots: int, step: int, generator: torch.Generator) -
 
 def materialize_selected(state: dict[str, torch.Tensor], indices64: torch.Tensor) -> torch.Tensor:
     base = state["base"].index_select(0, indices64)
-    k_log = state["k_log"].index_select(0, indices64).float()
+    k_log = (
+        state["k_log"]
+        .index_select(0, indices64)
+        .float()
+        .repeat_interleave(H_V // H_QK, dim=1)
+    )
     u_log = state["u_log"].index_select(0, indices64)
     lambda_log = state["lambda_log"].index_select(0, indices64)
     decay = state["decay"].index_select(0, indices64)
@@ -127,7 +132,11 @@ def deltalog_step(
     )
     append4 = append.view(-1, 1, 1, 1)
     merge4 = merge.view(-1, 1, 1, 1)
-    next_k = torch.where(position4 & append4, k_heads.unsqueeze(2).to(torch.bfloat16), selected_k)
+    next_k = torch.where(
+        position4 & append4,
+        inputs["key"].unsqueeze(2),
+        selected_k,
+    )
     next_u = torch.where(position4 & append4, update.unsqueeze(2), selected_u)
     next_k = torch.where(merge4, torch.zeros_like(next_k), next_k)
     next_u = torch.where(merge4, torch.zeros_like(next_u), next_u)
@@ -178,7 +187,7 @@ def run_case(batch: int, report: dict[str, Any], save: Any) -> None:
     native_state = initial.to("npu:0")
     delta_state = {
         "base": initial.to("npu:0"),
-        "k_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.bfloat16, device="npu:0"),
+        "k_log": torch.zeros((slots, H_QK, CAPACITY, D), dtype=torch.bfloat16, device="npu:0"),
         "u_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.float32, device="npu:0"),
         "lambda_log": torch.zeros((slots, H_V, CAPACITY), dtype=torch.float32, device="npu:0"),
         "decay": torch.zeros((slots, H_V), dtype=torch.float32, device="npu:0"),

@@ -2,9 +2,9 @@
 
 ## Status
 
-- Stage: paper equations, v3 AscendC eager/NPUGraph numerical gates, TP4
-  service dispatch, and short multi-step inference passed; fixed-output-1024
-  performance screening is next.
+- Stage: v4c paper-equation implementation passed eager, synchronized NPUGraph,
+  TP4 dispatch, and fixed-output validity, but failed the end-to-end performance
+  gate; current implementation is rejected.
 - Branch: `work/qwen36-deltalog-20260920`.
 - Parent checkpoint: GDN fusion no-go `69029e7`.
 - Hardware lane: physical NPU4-7 only.
@@ -113,12 +113,63 @@ This is real-NPU algorithm evidence, not kernel, graph, service, or performance
 evidence. Its generic `index_copy` state updates deliberately do not claim the
 paper's deferred-write performance behavior.
 
+## v4c memory correction and final numerical gate
+
+The first full-size service attempt OOMed during native prefill because the
+auxiliary key log repeated each of four local key heads across all twelve value
+heads. v4c stores one BF16 key-log row per key head and expands the fixed 3:1
+mapping only for fallback materialization. Per-layer auxiliary storage fell
+from 30,401,280 to 23,878,400 bytes, saving 6,522,880 bytes per layer and
+about 298.6 MiB across 48 layers on each TP worker.
+
+The v4c library SHA256 is
+a3698261d9e6de185b49aba5dd5aee1dc676cbb457e3e172aec826475bb57513.
+Its eager 128-step batch-1/batch-16 gate passed. An initial NPUGraph run showed
+a late state mismatch while output remained in tolerance; audit proved the
+probe copied changing static inputs on the current stream and immediately
+replayed the captured graph without a visibility barrier. The unchanged binary
+passed after adding torch.npu.synchronize() before replay. The synchronized
+report SHA256 is
+ee4faf38fb600d2864288de95d5ce009ce50213774b1be5f5a298d28360008e7.
+This is a harness correction, not a relaxed numerical threshold.
+
+## End-to-end result and decision
+
+The profiler-off TP4 screen used physical NPU4-7, 40 requests, concurrency 16,
+32768 input tokens, 16384 shared-prefix tokens, and exactly 1024 output tokens
+per request. All 40 requests completed and all 40960 expected output tokens
+were produced.
+
+| Metric | frozen dense | DeltaLog v4c | v4c vs dense |
+| --- | ---: | ---: | ---: |
+| output throughput (tok/s) | 125.819134 | 112.424603 | -10.646% |
+| mean TTFT (ms) | 38,456.890 | 159,935.195 | +315.888% |
+| weighted TPOT (ms) | 73.628823 | 99.825471 | +35.581% |
+
+The service audit recorded 2130 per-layer/rank live-log materializations, all
+caused by not_pure_decode mixed prefill/decode batches. The fallback uses
+Python einsum plus index_copy_ over every active logical state before calling
+the native mixed path. This is a concrete integration overhead that can erase
+deferred-write savings; it is not evidence against the paper's reported
+batch-64-to-256 regime. Even the candidate's first 16 requests showed
+112.220 ms mean derived TPOT, so the negative result is not explained only by
+later queued requests.
+
+Performance report:
+/cache/cch/qwen36-deltalog-20260920/performance-screen-v1/performance.v4c.run1.json,
+SHA256
+1233643e7dc6695251a88ac48edd0d928f1ed17c648d108976cd8e2ba8ec3da7.
+
+Decision: reject this v0.23 TP4 M=8 implementation at concurrency 16. Do not
+run LongBench-v2 or GSM8K for a performance-negative candidate. Reopen only if
+a future workload justifies the paper's higher serving batches and a distinct
+device-side mixed-batch materialization path is designed. Do not rerun v4c
+unchanged.
+
 ## Immediate next action
 
-Run one profiler-off fixed-output-1024 screen against the frozen same-stack
-dense baseline. The candidate must use the exact service configuration already
-validated here. Report throughput, TTFT, and TPOT. No accuracy run is justified
-until that screen is performance-positive.
+Checkpoint and push the scoped negative result, stop the owned DeltaLog service
+without deleting its evidence, and open the next ranked Paper-to-Ascend loop.
 
 ## AscendC implementation status
 

@@ -217,10 +217,14 @@ private:
         uint32_t slot, uint32_t head, uint32_t entry, uint32_t vStart,
         uint32_t rows, float coefficient)
     {
+        const uint32_t qHead = head / (VALUE_HEADS / KEY_HEADS);
         const uint64_t kOffset =
-            ((static_cast<uint64_t>(slot) * VALUE_HEADS + head) * LOG_CAPACITY + entry) * HEAD_DIM;
+            ((static_cast<uint64_t>(slot) * KEY_HEADS + qHead) * LOG_CAPACITY + entry) * HEAD_DIM;
         LoadBf16Vector(kLogGm_, kOffset, kLogUb_, kInQueue_, HEAD_DIM);
-        const uint64_t uOffset = kOffset + vStart;
+        const uint64_t uOffset =
+            ((static_cast<uint64_t>(slot) * VALUE_HEADS + head) * LOG_CAPACITY + entry) *
+                HEAD_DIM +
+            vStart;
         LoadULog(uOffset, rows);
         PipeBarrier<PIPE_V>();
         Muls(deltaUb_, deltaUb_, coefficient, rows);
@@ -271,7 +275,7 @@ private:
         const uint64_t sourceOffset =
             (static_cast<uint64_t>(token) * KEY_HEADS + qHead) * HEAD_DIM;
         const uint64_t targetOffset =
-            ((static_cast<uint64_t>(slot) * VALUE_HEADS + head) * LOG_CAPACITY + entry) * HEAD_DIM;
+            ((static_cast<uint64_t>(slot) * KEY_HEADS + qHead) * LOG_CAPACITY + entry) * HEAD_DIM;
         LocalTensor<bfloat16_t> local = kInQueue_.AllocTensor<bfloat16_t>();
         DataCopyExtParams inParams{1, HEAD_DIM * sizeof(bfloat16_t), 0, 0, 0};
         DataCopyPadExtParams<bfloat16_t> pad{true, 0, 0, static_cast<bfloat16_t>(0)};
@@ -361,7 +365,11 @@ private:
             cumulativeDecayGm_.SetValue(metaOffset, 0.0f);
             logLengthGm_.SetValue(metaOffset, 0);
         } else {
-            StoreKLog(token, slot, head, length);
+            // Three value heads share one Q/K head.  Their log lengths advance
+            // in lock-step, so a single writer owns the shared key row.
+            if (head % (VALUE_HEADS / KEY_HEADS) == 0) {
+                StoreKLog(token, slot, head, length);
+            }
             lambdaLogGm_.SetValue(metaOffset + length, nextCumulative);
             cumulativeDecayGm_.SetValue(metaOffset, nextCumulative);
             logLengthGm_.SetValue(metaOffset, static_cast<int32_t>(length + 1));

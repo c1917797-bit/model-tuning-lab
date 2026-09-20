@@ -7,8 +7,9 @@ This directory is a self-contained Python entry-point distribution. Add it to
 - `QWEN36_DELTALOG_LIBRARY=/absolute/path/libqwen36_gdn_deltalog_decode_ops.so`
 - `QWEN36_DELTALOG_AUDIT=/writable/path/evidence.jsonl`
 
-The adapter is pinned to the audited vLLM-Ascend v0.23 GDN source and v3
-operator hashes. It allocates persistent per-layer auxiliary state, dispatches
+The adapter is pinned to the audited vLLM-Ascend v0.23 GDN source and v4
+operator hashes. It stores each deferred key once per Q/K head rather than
+triplicating it for each mapped value head, allocates persistent per-layer auxiliary state, dispatches
 only the exact Qwen3.6-27B TP4 non-speculative decode ABI, and uses the native
 path for unsupported calls. Before a native fallback it materializes any live
 DeltaLog entries so the dense state remains semantically current; prefill then

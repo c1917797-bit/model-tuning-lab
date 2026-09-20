@@ -181,6 +181,18 @@ not require retraining unless retraining is explicitly in scope.
   empirically safe row or use a single owner. Output agreement plus correct
   payloads and pairwise-corrupted neighboring counters is the diagnostic
   signature of an undersized metadata stride.
+- For deferred recurrent-state methods, count every forced materialization by
+  runtime reason, layer/rank, and active-slot count before interpreting the
+  end-to-end result. A pure-decode custom operator can be numerically valid
+  while mixed prefill/decode scheduling repeatedly falls back through a Python
+  full-state reconstruction; that integration path can erase the intended HBM
+  write savings. Require a device-side mixed-batch materialization seam or
+  declare the supported scheduling regime explicitly.
+- When changing static NPUGraph inputs immediately before replay, establish a
+  device-visible synchronization boundary before diagnosing a late state
+  mismatch as an operator failure. Preserve the original failure, rerun the
+  unchanged binary once with the corrected harness, and never relax the frozen
+  numerical tolerance to make replay pass.
 
 ## Do not do
 

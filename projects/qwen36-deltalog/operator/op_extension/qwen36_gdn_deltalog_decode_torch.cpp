@@ -119,9 +119,10 @@ at::Tensor qwen36_gdn_deltalog_decode_torch(
                     baseState.size(2) == kHeadDim && baseState.size(3) == kHeadDim,
                 "base_state must have shape [S,12,128,128]");
     const int64_t slots = baseState.size(0);
-    TORCH_CHECK(kLog.sizes() == at::IntArrayRef({slots, kValueHeads, kCapacity, kHeadDim}),
-                "k_log must have shape [S,12,7,128]");
-    TORCH_CHECK(uLog.sizes() == kLog.sizes(), "u_log must match k_log shape");
+    TORCH_CHECK(kLog.sizes() == at::IntArrayRef({slots, kKeyHeads, kCapacity, kHeadDim}),
+                "k_log must have shape [S,4,7,128]");
+    TORCH_CHECK(uLog.sizes() == at::IntArrayRef({slots, kValueHeads, kCapacity, kHeadDim}),
+                "u_log must have shape [S,12,7,128]");
     TORCH_CHECK(lambdaLog.sizes() == at::IntArrayRef({slots, kValueHeads, 16}),
                 "lambda_log must have padded shape [S,12,16]");
     TORCH_CHECK(cumulativeDecay.sizes() == at::IntArrayRef({slots, kValueHeads, 16}),

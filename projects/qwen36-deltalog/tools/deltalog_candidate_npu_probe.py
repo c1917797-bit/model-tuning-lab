@@ -54,7 +54,12 @@ def make_inputs(batch: int, slots: int, step: int, gen: torch.Generator) -> dict
 
 def materialize_selected(state: dict[str, torch.Tensor], indices64: torch.Tensor) -> torch.Tensor:
     base = state["base"].index_select(0, indices64)
-    k_log = state["k_log"].index_select(0, indices64).float()
+    k_log = (
+        state["k_log"]
+        .index_select(0, indices64)
+        .float()
+        .repeat_interleave(H_V // H_QK, dim=1)
+    )
     u_log = state["u_log"].index_select(0, indices64)
     lambda_log = state["lambda_log"].index_select(0, indices64)[:, :, :CAPACITY]
     decay = state["decay"].index_select(0, indices64)[:, :, 0]
@@ -83,7 +88,7 @@ def allocate_state(initial: torch.Tensor) -> dict[str, torch.Tensor]:
     slots = initial.size(0)
     return {
         "base": initial.to("npu:0"),
-        "k_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.bfloat16, device="npu:0"),
+        "k_log": torch.zeros((slots, H_QK, CAPACITY, D), dtype=torch.bfloat16, device="npu:0"),
         "u_log": torch.zeros((slots, H_V, CAPACITY, D), dtype=torch.float32, device="npu:0"),
         "lambda_log": torch.zeros((slots, H_V, 16), dtype=torch.float32, device="npu:0"),
         "decay": torch.zeros((slots, H_V, 16), dtype=torch.float32, device="npu:0"),
@@ -147,6 +152,11 @@ def run_case(batch: int, mode: str, steps: int, report: dict[str, Any], save: An
             if graph is None:
                 actual = candidate_step(state, inputs, seq)
             else:
+                # NPUGraph replays on its captured stream.  Make the current
+                # stream's static-input copies (and the native oracle read)
+                # visible before replay; otherwise the graph may consume a
+                # mixture of the previous and current step.
+                torch.npu.synchronize()
                 graph.replay()
                 actual = graph_output
             torch.npu.synchronize()
@@ -172,8 +182,25 @@ def run_case(batch: int, mode: str, steps: int, report: dict[str, Any], save: An
             diagnostics = None
             if not (finite and output_error <= OUTPUT_LIMIT and state_error <= STATE_LIMIT
                     and append_base_unchanged and length_heads_equal and pointers_stable):
+                state_delta = (logical.float() - expected_state.float()).square()
+                state_reference = expected_state.float().square()
+                per_head_state_relative_l2 = torch.sqrt(
+                    state_delta.sum(dim=(-2, -1))
+                    / state_reference.sum(dim=(-2, -1)).clamp_min(1.0e-30)
+                )
+                selected_base = state["base"].index_select(0, idx64)
+                base_delta = (selected_base.float() - expected_state.float()).square()
+                per_head_base_relative_l2 = torch.sqrt(
+                    base_delta.sum(dim=(-2, -1))
+                    / state_reference.sum(dim=(-2, -1)).clamp_min(1.0e-30)
+                )
                 diagnostics = {
+                    "state_indices": inputs["indices"].cpu().tolist(),
+                    "length_before": length_before.cpu().tolist(),
                     "length_after": length_after.cpu().tolist(),
+                    "merge_mask_before": merge.cpu().tolist(),
+                    "per_head_state_relative_l2": per_head_state_relative_l2.cpu().tolist(),
+                    "per_head_base_relative_l2": per_head_base_relative_l2.cpu().tolist(),
                     "decay_after": state["decay"].index_select(0, idx64)[:, :, 0].cpu().tolist(),
                     "lambda0_after": state["lambda_log"].index_select(0, idx64)[:, :, 0].cpu().tolist(),
                     "k_log_abs_sum_per_head": state["k_log"].index_select(0, idx64)[:, :, 0].float().abs().sum(-1).cpu().tolist(),
