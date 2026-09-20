@@ -153,6 +153,17 @@ not require retraining unless retraining is explicitly in scope.
 - When Encode is inactive, do not relabel ordinary P/D disaggregation as EPD.
   Record the mechanism boundary and reject the paper-specific claim even if the
   runtime already has generic P/D connectors and proxy examples.
+- For accelerator-architecture papers, map every claimed gain to a software
+  choice, operator choice, memory placement, or physical package property.
+  Custom compute arrays and on/off-package memory systems are not reproducible
+  through a CANN operator or vLLM monkeypatch on fixed silicon.
+- Architecture-simulator tics, estimated clocks and FLOP/s are design-study
+  evidence only. They never substitute for physical NPU execution, and a
+  PyTorch numerical comparator does not make the simulated accelerator a
+  deployable kernel.
+- Continue only when a distinct software-only mechanism remains after removing
+  custom-hardware contributions. Otherwise close a scoped plugin-delivery
+  no-go before consuming NPU time.
 
 ## Do not do
 

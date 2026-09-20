@@ -1,14 +1,15 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-duet
-status: planned
-decision: pending
+status: completed
+decision: rejected
 hypothesis: "A paper-faithful, plugin-deliverable mapping of DUET's prefill/decode-specific packages exists on fixed Ascend 910B hardware and can improve Qwen3.6-27B end-to-end output throughput by at least 10% without accuracy loss."
 objective: "Pierce arXiv:2603.15530 on Qwen3.6-27B and Ascend within 24 hours, rejecting architectural-simulator proxies unless a real fixed-hardware runtime mechanism can be isolated."
 owner: codex
 git:
   branch: work/duet-qwen36-ascend-20260920
   base_commit: b0826187a00ae2c2cbf3450479ad797427a47393
-  stage_commits: []
+  stage_commits:
+    - 6757d67
 environment:
   source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; paper arXiv:2603.15530; official repository AlishKanani/DUET"
   model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
@@ -44,10 +45,14 @@ results:
   lifecycle:
     official_code: "The official repository describes an architecture-level simulator with configurable systolic PE_ARRAY and vector VU_ARRAY components, PyTorch numerical comparison, and simulated tics/clock/FLOP metrics."
     model_fit: "Qwen3.6 is hybrid linear/full attention rather than the paper's evaluated Mamba-Transformer, so any port would be a mechanism adaptation."
+    mechanism_audit: "The paper's prefill package depends on systolic-array chiplets with off-package memory; its decode package depends on vector-unit arrays with high-bandwidth in-package memory. Those package and memory-system choices are the optimization, not a software schedule exposed by CANN."
+    delivery_audit: "The official source has no CANN operator, torch_npu kernel, vLLM runtime integration, device binary or deployable scheduler. Its timing path reports simulator tics, estimated clocks and FLOP/s."
+    performance: "Not run: no software-selectable production candidate exists on unchanged Ascend 910B hardware."
+    accuracy: "Not run: no candidate was implemented or executed."
   resources: {}
 artifacts: []
-decision_reason: ""
-next_loop: "Determine whether DUET leaves any software-only production mechanism after excluding its custom hardware packages and simulator metrics."
+decision_reason: "Rejected at the hardware-expression and plugin-delivery gate. DUET's gains come from separate custom prefill and decode accelerator packages with different compute arrays and memory placement. Fixed Ascend 910B hardware cannot acquire those package-level properties through a CANN operator or vLLM monkeypatch, and the official repository supplies only an architecture simulator with estimated timing. No independent software-only mechanism remained, so an NPU run would be unrelated to the paper."
+next_loop: "The fixed 10-paper queue is now exhausted. Build a cross-paper evidence matrix from the pushed workstreams and resume only the strongest still-actionable lossless Ascend candidate; keep HYPIC as the completed reference and do not rerun DASC or other deterministic no-go paths unchanged."
 rollback:
   command: "disable any explicit plugin switch and stop only this workstream's processes on physical NPU4-7"
-  verified: false
+  verified: true

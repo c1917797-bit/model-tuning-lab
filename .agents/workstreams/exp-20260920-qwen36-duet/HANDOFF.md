@@ -2,7 +2,7 @@
 
 ## Status
 
-- Stage: planned / hardware-expression applicability gate.
+- Stage: completed / rejected at hardware-expression and plugin-delivery gates.
 - Start: 2026-09-20.
 - Hard timebox: 24 hours.
 - Queue position: 10, after the previously completed DASC no-go at position 9.
@@ -33,7 +33,26 @@ configuration cannot establish an Ascend runtime candidate.
 6. Simulator clocks, tics, FLOP/s and CPU/PyTorch comparisons never count as
    NPU performance evidence.
 
-## Immediate next action
+## Final mechanism audit
 
-Audit the official source tree and paper mechanism table. Do not launch NPU
-work until a real software-selectable 910B path is named and bounded.
+- The paper's Prefill package uses systolic-array chiplets plus off-package
+  memory for matrix multiplication and long-sequence SSM work.
+- Its Decode package uses vector-unit arrays plus high-bandwidth in-package
+  memory for token SSM and vector-matrix work.
+- Those distinct compute arrays and memory systems are the optimization.
+- The official repository implements them as `PE_ARRAY` and `VU_ARRAY`
+  architecture simulators. Timing is reported as tics, estimated clocks and
+  FLOP/s, not device measurements.
+- No CANN operator, torch_npu kernel, vLLM integration, device binary or
+  software-only scheduler that reproduces the package properties is present.
+
+## Decision
+
+Reject DUET for plugin delivery on unchanged Ascend 910B. A CANN operator can
+choose tiling and fuse software work, but cannot turn fixed 910B silicon into
+the paper's separate systolic/off-package and vector/in-package accelerator
+packages. Running the simulator or a generic NPU kernel would not pierce the
+paper's claimed mechanism.
+
+No NPU service was launched. The 10-paper queue is complete; next work should
+aggregate all evidence and resume only a still-actionable lossless candidate.
