@@ -124,6 +124,13 @@ not require retraining unless retraining is explicitly in scope.
 - Do not infer checkpoint count or mechanism activation from an ambiguously
   named counter such as placements. Trace the producer and record the semantic
   unit (requests, rows, blocks, or checkpoints).
+- For stateful cache/replay methods, a three-run canary is only a smoke test.
+  Separate cold/materialization warmups from at least eight measured identical
+  replays before declaring deterministic correctness; one divergent token is a
+  failed numerical gate.
+- A transaction, cache-hit, or restore-plan event proves that control flow ran.
+  It does not prove restored tensors are correct. Require exact output/state
+  evidence before performance, and never relax that gate to preserve a paper.
 
 ## Do not do
 

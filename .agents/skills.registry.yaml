@@ -68,6 +68,7 @@ skills:
       - start or resume an inference optimization
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
+      - restart a reusable experiment container after mounted source changes
     scope:
       - configs/**
       - scripts/**
@@ -97,6 +98,7 @@ skills:
       - implement a paper on Ascend
       - 论文迁移到 Ascend
       - 把论文方法落到 Ascend
+      - validate stateful cache or replay correctness
     scope:
       - AGENTS.md
       - docs/**

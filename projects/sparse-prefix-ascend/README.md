@@ -36,9 +36,11 @@ is ready, and the native lookup is bounded to exactly that checkpoint. HYPIC
 full-attention repair must be disabled and the reviewed HYPIC scheduler source
 hash must match.
 
-This code has passed software tests but has not yet passed the real NPU
-cold-producer/hot-consumer correctness gate. No performance or accuracy result
-is claimed yet.
+This code passes 12 focused software tests but failed the real NPU replay gate.
+With a deterministic dense reference, only 7/8 measured hot replays matched;
+one request diverged from the first generated token despite a complete atomic
+transaction event. The current v0.23 integration is therefore a no-go. No
+performance or accuracy result is claimed.
 
 See [PIERCING_REPORT.md](PIERCING_REPORT.md). No end-to-end performance or
 accuracy result is claimed from this probe.

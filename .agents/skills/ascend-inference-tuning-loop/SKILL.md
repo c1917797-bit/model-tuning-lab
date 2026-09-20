@@ -75,3 +75,8 @@ next loop from evidence, not from an unrecorded intuition.
 - All outcomes include a reason and next-loop recommendation.
 - Failed active changes are recovered before integration.
 - Local branch equals its upstream after every stage checkpoint.
+- After changing code mounted into a reusable container, prove the imported
+  module realpath and source identity in every relevant process. Restarting a
+  container is insufficient when startup copies into a persistent directory:
+  use a fresh container or a non-nesting replacement such as `cp -aT`, then
+  re-record module paths and hashes before spending an NPU validation run.

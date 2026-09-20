@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-sparse-prefix-caching
-status: active
-decision: pending
+status: completed
+decision: failed
 hypothesis: "For partially shared long-prefix traffic, distribution-aware sparse exact GDN checkpoints reduce replay work at a fixed recurrent-state byte budget and improve Qwen3.6-27B TP4 end-to-end output throughput by at least 10% over the strongest fixed checkpoint policy."
 objective: "Faithfully migrate arXiv:2605.05219 to an opt-in vLLM-Ascend plugin and obtain correctness-first, same-budget NPU end-to-end evidence within 24 hours."
 owner: codex
@@ -16,7 +16,7 @@ environment:
   dtype_or_quantization: "BF16 weights; FP32 recurrent state; no quantization"
   framework_versions:
     vllm_ascend: "v0.23.0"
-    container_image: "must be freshly verified before launch"
+    container_image: "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
   cann_driver_firmware:
     status: "must be freshly captured before launch"
   hardware_topology:
@@ -26,7 +26,7 @@ environment:
   runtime_topology:
     host: chicaihong01
     plugin_delivery: "independent opt-in monkeypatch; no upstream source edits"
-    port: 8226
+    port: 8227
 protocol:
   primary_metric: "end-to-end output tokens per second versus strongest same-budget fixed checkpoint policy"
   correctness_guardrails:
@@ -59,14 +59,17 @@ results:
   boundary: {}
   lifecycle:
     source_audit: "native v0.23 align mode keeps the request-final state; multiple sparse checkpoints require the HYPIC exact-prefix material store"
-    plugin_unit_tests: "11 passed with unittest; implementation-only evidence"
+    plugin_unit_tests: "12 passed with unittest; implementation-only evidence"
     runtime_reentry: "plugin-owned atomic coexistence: native cache owns full-attention KV; HYPIC transaction owns GDN/conv checkpoint; lookup is hidden until both can expose the identical checkpoint boundary"
     opportunity: "frozen 26-request histogram: distribution plan 3072/7680 replays 19,456 tokens versus 47,104 for same-budget balanced 3072/6144, a reduction of 27,648 tokens (58.7%)"
+    npu_correctness: "failed: deterministic dense reference; candidate 7/8 measured token sequences matched and one diverged from token 1 despite eight atomic native-KV/GDN transaction events"
   resources: {}
 artifacts:
   - "/cache/cch/sparse-prefix-caching-official-2605.05219 (external reference checkout)"
-decision_reason: ""
-next_loop: "Run NPU4-7 bootstrap, then one cold-producer/hot-consumer exact-prefix canary; require identical native-KV and ready-GDN boundaries plus greedy token equality before performance."
+  - "/cache/cch/sparse-prefix-qwen36-npu4-7-20260920/atomic-v021/candidate-validator-v2-r8.json sha256 4f14985ed6fe8cc5eb8a72a972b217c90bf14b343fab81fad11bf3d951e675cf"
+  - "/cache/cch/sparse-prefix-qwen36-npu4-7-20260920/atomic-v021/evidence-validator-v2.jsonl sha256 dc067a40ef999e848ddc5dbdefd32cd96b960277c92ed40bf7065862514d5686"
+decision_reason: "Real NPU exact-prefix replay remained nondeterministic after the bounded atomic coexistence fix: 7/8 measured runs matched dense and one diverged from the first token. Correctness failed before performance and accuracy."
+next_loop: "Advance to queue position 7, Scaling State-Space Models on Multiple GPUs with Tensor Parallelism; do not rerun this configuration without a new state-lifecycle hypothesis."
 rollback:
   command: "disable the explicit plugin switch and remove only the experiment containers/processes on physical NPU4-7"
-  verified: false
+  verified: true

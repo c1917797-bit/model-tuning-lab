@@ -2,8 +2,8 @@
 
 ## Status
 
-- Stage: re-entered (atomic native-KV/GDN plugin adapter implemented; NPU
-  validation pending).
+- Stage: decided / failed correctness gate. The deeper atomic native-KV/GDN
+  adapter was exercised on physical NPU4-7 but remained nondeterministic.
 - Start: 2026-09-20.
 - Hard timebox: 24 hours from this workstream start.
 - Queue position: 6, after completed MXR, DeltaLog, approximate inversion,
@@ -75,12 +75,11 @@
 
 ## Immediate next action
 
-Run a container import/bootstrap canary on NPU4-7 with HYPIC and this plugin,
-then run the smallest cold-producer / hot-consumer exact-prefix case. Require
-evidence that native full-attention KV and the ready HYPIC GDN checkpoint expose
-the same computed-token boundary. Do not start a serving performance comparison
-until greedy token equality, repeated replay, and plugin hot-path activation are
-all proven.
+Do not rerun the same Sparse Prefix configuration. Preserve this failed
+correctness result, push the branch, and advance to queue position 7 (Scaling
+State-Space Models on Multiple GPUs with Tensor Parallelism). Reopen Sparse
+Prefix only with a new state-lifecycle hypothesis that explains and prevents
+the observed intermittent first-token divergence.
 
 ## Attempted implementation
 
@@ -118,3 +117,30 @@ all proven.
   3072/7680 reduce replay by 27,648 tokens versus the same-budget balanced
   3072/6144 control (58.7% less replay work), so an end-to-end opportunity still
   exists.
+
+## Final NPU correctness result
+
+- A fresh non-privileged container used image
+  `sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`
+  with physical NPU4-7 mapped to container devices 0-3. No process used
+  physical NPU0-3.
+- The plugin recorded `worker_validation_patched=true` in the API process,
+  EngineCore, and all four TP workers. Eight hot requests each emitted an
+  atomic native-KV/GDN transaction at checkpoint 7680.
+- The strict gate used one immutable 9216-token prompt, a 7680-token reusable
+  prefix, 16 generated tokens, temperature 0, seed 0, two warmups, and eight
+  measured replays against a deterministic dense reference.
+- Result: 7/8 measured outputs matched dense bit-for-bit; measured replay 3
+  diverged from the first token. Candidate determinism is therefore false and
+  the correctness gate failed.
+- Report:
+  `/cache/cch/sparse-prefix-qwen36-npu4-7-20260920/atomic-v021/candidate-validator-v2-r8.json`
+  SHA256 `4f14985ed6fe8cc5eb8a72a972b217c90bf14b343fab81fad11bf3d951e675cf`.
+- Evidence:
+  `/cache/cch/sparse-prefix-qwen36-npu4-7-20260920/atomic-v021/evidence-validator-v2.jsonl`
+  SHA256 `dc067a40ef999e848ddc5dbdefd32cd96b960277c92ed40bf7065862514d5686`.
+- Performance and task accuracy were intentionally not run because a cache
+  transaction event proves control-flow activation, not restored-state
+  numerical correctness.
+- Both experiment containers were stopped and retained. Physical NPU4-7
+  returned to the idle baseline.

@@ -28,6 +28,9 @@ logger = logging.getLogger(__name__)
 _HYPIC_SCHEDULER_SHA256 = (
     "c19155be244b0fdca6cb97bf1a3c475568bfb1635e36512568d59735c241c55f"
 )
+_HYPIC_RUNNER_SHA256 = (
+    "474d13eb7e6ba2842afaeb234ccd773ba59f37773e3d0d991442b6eabf48cb81"
+)
 
 
 class _CachingGuardBypass:
@@ -39,6 +42,56 @@ class _CachingGuardBypass:
     def __bool__(self) -> bool:
         self.reads += 1
         return self.reads > 1
+
+
+def install_native_kv_worker_validation(hypic_runner: object) -> bool:
+    """Make HYPIC validate the state that it owns in coexistence mode.
+
+    Native vLLM owns and validates the full-attention KV hit through
+    _NativePrefixGate. HYPIC still owns every recurrent GDN/conv checkpoint
+    and must keep its complete-layer restore validation. The upstream HYPIC
+    validator currently counts full-attention repairs even when
+    enable_full_attn_kv_repair is false, so adapt only that expected layer
+    inventory while preserving all recurrent and transition checks.
+    """
+
+    source = Path(hypic_runner.__file__).resolve()
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    if digest != _HYPIC_RUNNER_SHA256:
+        raise RuntimeError(
+            "Sparse Prefix refuses an unreviewed HYPIC runner build: "
+            f"path={source} sha256={digest}."
+        )
+    original = getattr(hypic_runner, "_validate_hot_path_report", None)
+    if not callable(original):
+        raise RuntimeError(
+            "Sparse Prefix requires HYPIC._validate_hot_path_report()."
+        )
+    if getattr(original, "_sparse_prefix_native_kv_validator", False):
+        return False
+
+    def validate_owned_hot_path(
+        report,
+        *,
+        verified_hot_requests,
+        expected_full_layers,
+        expected_gdn_layers,
+        require_rope_relocation=False,
+        expected_transition_composes=None,
+    ):
+        return original(
+            report,
+            verified_hot_requests=verified_hot_requests,
+            expected_full_layers=set(),
+            expected_gdn_layers=expected_gdn_layers,
+            require_rope_relocation=require_rope_relocation,
+            expected_transition_composes=expected_transition_composes,
+        )
+
+    validate_owned_hot_path._sparse_prefix_native_kv_validator = True
+    validate_owned_hot_path._sparse_prefix_original = original
+    hypic_runner._validate_hot_path_report = validate_owned_hot_path
+    return True
 
 
 class _NativePrefixGate:
@@ -216,17 +269,17 @@ def _predict_ready_waiting_prefixes(
             prefix_end,
         )
         predicted[req_id] = (previous, entry.seg_hash, prefix_end)
-        if not state.first_prune_logged:
-            hs.emit_evidence(
-                "sparse_prefix_native_kv_transaction",
-                component="sparse_prefix_ascend",
-                request_id=req_id,
-                checkpoint_tokens=prefix_end,
-                prefix_hash=entry.seg_hash.hex(),
-                native_kv_owner=True,
-                recurrent_owner="hypic_material_store",
-            )
-            state.first_prune_logged = True
+        hs.emit_evidence(
+            "sparse_prefix_native_kv_transaction",
+            component="sparse_prefix_ascend",
+            request_id=req_id,
+            checkpoint_tokens=prefix_end,
+            prefix_hash=entry.seg_hash.hex(),
+            native_kv_owner=True,
+            recurrent_owner="hypic_material_store",
+            first_transaction=not state.first_prune_logged,
+        )
+        state.first_prune_logged = True
     return predicted
 
 

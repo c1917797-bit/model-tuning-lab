@@ -8,7 +8,10 @@ import os
 import time
 from pathlib import Path
 
-from .coexistence import install_native_kv_coexistence
+from .coexistence import (
+    install_native_kv_coexistence,
+    install_native_kv_worker_validation,
+)
 from .planner import PlacementPlan
 
 logger = logging.getLogger(__name__)
@@ -113,6 +116,7 @@ def register() -> None:
     )
 
     from hypic_vllm_ascend.patches import scheduler as hypic_scheduler
+    from hypic_vllm_ascend.patches import runner as hypic_runner
 
     original = hypic_scheduler._candidate_prefix_ends_for_request
     if getattr(original, "_sparse_prefix_ascend_wrapped", False):
@@ -166,11 +170,13 @@ def register() -> None:
     candidate_prefix_ends._sparse_prefix_original = original
     hypic_scheduler._candidate_prefix_ends_for_request = candidate_prefix_ends
     patched_classes = install_native_kv_coexistence(hypic_scheduler)
+    worker_validation_patched = install_native_kv_worker_validation(hypic_runner)
     _emit_evidence(
         "sparse_prefix_patch_installed",
         target="hypic_vllm_ascend.patches.scheduler._candidate_prefix_ends_for_request",
         mode="cumulative_prefix_with_native_attention_kv",
         native_kv_coexistence=True,
+        worker_validation_patched=worker_validation_patched,
         patched_scheduler_classes=list(patched_classes),
     )
     _INSTALLED = True

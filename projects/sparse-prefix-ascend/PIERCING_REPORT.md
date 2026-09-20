@@ -5,9 +5,10 @@
 - Paper: arXiv:2605.05219, Sparse Prefix Caching for Hybrid and Recurrent LLM Serving.
 - Target: Qwen3.6-27B, vLLM/vLLM-Ascend 0.23.0, CANN 9.1, TP4, physical NPU4-7.
 - Scope: plugin/monkeypatch integration without modifying upstream runtime.
-- Decision: **rejected for the v0.23 thin-adapter implementation path**.
-- Paper-level decision: **re-entered with a deeper plugin-owned atomic
-  coexistence adapter; NPU correctness remains pending**.
+- Decision: **failed for both the v0.23 thin-adapter and the bounded deeper
+  plugin-owned atomic coexistence path**.
+- Paper-level decision: **no-go for the current v0.23 integration; advance to
+  the next paper unless a new state-lifecycle hypothesis is available**.
 - Performance and accuracy: not measured because the correctness/runtime gate
   failed before a complete generation.
 
@@ -108,6 +109,40 @@ upstream source:
 6. the existing HYPIC scheduler verifies the computed-token boundary and
    attaches its normal recurrent restore plan.
 
-The adapter is pinned to the reviewed HYPIC v0.8.5 scheduler SHA256. Eleven
-software tests pass. Real NPU correctness, performance and accuracy evidence
-have not yet been produced.
+The adapter is pinned to the reviewed HYPIC v0.8.5 scheduler and runner source
+hashes. Twelve focused software tests pass.
+
+## Final real-NPU gate
+
+A fresh non-privileged container loaded the updated plugin into the API
+process, EngineCore, and all four TP workers. Runtime evidence recorded
+`worker_validation_patched=true` in every process and eight
+`sparse_prefix_native_kv_transaction` events with:
+
+- checkpoint 7680;
+- the same immutable prefix hash;
+- native vLLM as full-attention KV owner;
+- HYPIC material storage as recurrent-state owner.
+
+The exact replay gate then submitted one immutable 9216-token prompt with a
+7680-token reusable prefix, 16 generated tokens, temperature 0, seed 0, two
+warmups, and eight measured runs. The dense reference was deterministic.
+Candidate runs 0, 1, 2, 4, 5, 6, and 7 matched the dense token sequence
+bit-for-bit. Run 3 diverged from the first generated token, so candidate
+determinism was false (7/8 matching).
+
+This is a correctness failure, not a performance regression. No throughput,
+TTFT, TPOT, LongBench-v2, or GSM8K claim is valid for this candidate.
+
+Artifacts:
+
+- `atomic-v021/candidate-validator-v2-r8.json`, SHA256
+  `4f14985ed6fe8cc5eb8a72a972b217c90bf14b343fab81fad11bf3d951e675cf`;
+- `atomic-v021/evidence-validator-v2.jsonl`, SHA256
+  `dc067a40ef999e848ddc5dbdefd32cd96b960277c92ed40bf7065862514d5686`.
+
+The earlier three-run pass was insufficient: an expanded eight-run gate exposed
+an intermittent state-lifecycle failure. The validator fix removed a false
+requirement for plugin-owned full-attention repair and made every hot
+transaction observable, but it did not make recurrent-state replay
+deterministic. Do not treat transaction events as tensor-correctness evidence.

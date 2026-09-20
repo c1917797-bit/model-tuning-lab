@@ -72,8 +72,10 @@ class PlannerTests(unittest.TestCase):
             return (1024,)
 
         scheduler._candidate_prefix_ends_for_request = original
+        runner = types.ModuleType("hypic_vllm_ascend.patches.runner")
         patches = types.ModuleType("hypic_vllm_ascend.patches")
         patches.scheduler = scheduler
+        patches.runner = runner
         package = types.ModuleType("hypic_vllm_ascend")
         package.patches = patches
         saved_modules = {
@@ -82,6 +84,7 @@ class PlannerTests(unittest.TestCase):
                 "hypic_vllm_ascend",
                 "hypic_vllm_ascend.patches",
                 "hypic_vllm_ascend.patches.scheduler",
+                "hypic_vllm_ascend.patches.runner",
             )
         }
         old_env = {
@@ -100,10 +103,12 @@ class PlannerTests(unittest.TestCase):
             )
         }
         original_install = runtime.install_native_kv_coexistence
+        original_worker_install = runtime.install_native_kv_worker_validation
         try:
             sys.modules["hypic_vllm_ascend"] = package
             sys.modules["hypic_vllm_ascend.patches"] = patches
             sys.modules["hypic_vllm_ascend.patches.scheduler"] = scheduler
+            sys.modules["hypic_vllm_ascend.patches.runner"] = runner
             with tempfile.TemporaryDirectory() as tmp:
                 path = Path(tmp) / "plan.json"
                 path.write_text(json.dumps(payload), encoding="utf-8")
@@ -122,6 +127,9 @@ class PlannerTests(unittest.TestCase):
                 )
                 runtime.install_native_kv_coexistence = (
                     lambda _scheduler: ("fake.Scheduler",)
+                )
+                runtime.install_native_kv_worker_validation = (
+                    lambda _runner: True
                 )
                 runtime._INSTALLED = False
                 runtime.register()
@@ -156,6 +164,7 @@ class PlannerTests(unittest.TestCase):
         finally:
             runtime._INSTALLED = False
             runtime.install_native_kv_coexistence = original_install
+            runtime.install_native_kv_worker_validation = original_worker_install
             for name, module in saved_modules.items():
                 if module is None:
                     sys.modules.pop(name, None)
