@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssm-tp-ascend-plugin"
+version = "0.1.0"
+description = "Fail-closed Qwen GDN tensor-parallel communication probe and adaptation seam for vLLM-Ascend."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[project.entry-points."vllm.general_plugins"]
+ssm_tp_ascend = "ssm_tp_ascend:register"
+
+[tool.setuptools.packages.find]
+include = ["ssm_tp_ascend*"]
