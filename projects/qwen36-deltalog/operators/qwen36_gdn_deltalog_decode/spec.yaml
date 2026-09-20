@@ -85,29 +85,29 @@ inputs:
     contiguous: required
     shape: {symbolic: ["S", 12, 7, 128]}
   - name: lambda_log
-    description: "Mutable FP32 cumulative-decay snapshot for every live log entry"
+    description: "Mutable FP32 cumulative-decay snapshot; physical stride 8 aligns each head to 32 bytes, entries 0..6 are live"
     role: state
     dtype_set: [float32]
     rank_range: [3, 3]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S", 12, 7]}
+    shape: {symbolic: ["S", 12, 8]}
   - name: cumulative_decay
-    description: "Mutable FP32 log decay accumulated since the last materialization"
+    description: "Mutable FP32 log decay; lane 0 is live and stride 8 prevents cross-core scalar-store collisions"
     role: state
     dtype_set: [float32]
-    rank_range: [2, 2]
+    rank_range: [3, 3]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S", 12]}
+    shape: {symbolic: ["S", 12, 8]}
   - name: log_length
-    description: "Mutable live-entry count per slot; valid range 0..7"
+    description: "Mutable live-entry count; lane 0 is live and stride 8 prevents cross-core scalar-store collisions"
     role: state
     dtype_set: [int32]
-    rank_range: [1, 1]
+    rank_range: [3, 3]
     layout: ND
     contiguous: required
-    shape: {symbolic: ["S"]}
+    shape: {symbolic: ["S", 12, 8]}
   - name: actual_seq_lengths
     description: "Native decode metadata; non-spec domain is [0,1,...,1] and length T+1"
     role: tensor
@@ -205,12 +205,12 @@ shape_constraints:
     - "rank(query) == 3"
     - "rank(base_state) == 4"
     - "rank(k_log) == 4"
-    - "rank(log_length) == 1"
+    - "rank(log_length) == 3"
   notes:
     - "M=8 and C=M-1=7 are fixed for the first faithful paper configuration."
     - "T_plus_1 == T + 1; actual_seq_lengths is [0,1,...,1] for non-spec decode."
     - "ssm_state_indices values are unique in one invocation and each is in [0,S)."
-    - "Each log_length value is in [0,7]; an invalid value is rejected rather than clamped."
+    - "Lane 0 of each per-head log_length row is in [0,7]; 8-lane/32-byte metadata rows eliminate block-store collisions between AIV cores."
     - "The four normalized key heads are repeated three times to address twelve local value heads, matching native Qwen3.6 TP4 GDN semantics."
     - "Prefill initializes base_state from the native chunk kernel and zeroes all auxiliary buffers; slot reuse must do the same before decode."
     - "Prefill, speculative decoding, mixed prefill/decode, FP16, non-TP4 heads, duplicate slots, and unsupported shapes fail closed to the native path."
@@ -257,10 +257,13 @@ math_semantics:
     selected_base = base_state[state_idx]
     selected_k_log = k_log[state_idx].astype(np.float32)
     selected_u_log = u_log[state_idx]
-    selected_lambda_log = lambda_log[state_idx]
-    selected_decay = cumulative_decay[state_idx]
-    selected_length = log_length[state_idx]
-    live_mask = np.arange(7)[np.newaxis, np.newaxis, :] < selected_length[:, np.newaxis, np.newaxis]
+    selected_lambda_storage = lambda_log[state_idx]
+    selected_lambda_log = selected_lambda_storage[:, :, :7]
+    selected_decay_storage = cumulative_decay[state_idx]
+    selected_decay = selected_decay_storage[:, :, 0]
+    selected_length_storage = log_length[state_idx]
+    selected_length = selected_length_storage[:, :, 0]
+    live_mask = np.arange(7)[np.newaxis, np.newaxis, :] < selected_length[:, :, np.newaxis]
     log_scale = np.exp(selected_decay[:, :, np.newaxis] - selected_lambda_log) * live_mask
     logical_previous = np.exp(selected_decay)[:, :, np.newaxis, np.newaxis] * selected_base
     logical_previous = logical_previous + np.einsum("thl,thlv,thlk->thvk", log_scale, selected_u_log, selected_k_log)
@@ -272,28 +275,39 @@ math_semantics:
     output = np.einsum("thvk,thk->thv", logical_next, q_heads)
     append_mask = selected_length < 7
     merge_mask = np.logical_not(append_mask)
-    position = np.minimum(selected_length, 6)
+    # Formula smoke tests may synthesize invalid metadata before the runtime
+    # contract rejects it.  Keep array indexing total here; the boundary gate
+    # still rejects every length outside [0, 7].
+    position = np.clip(selected_length, 0, 6)
     base_state_out = base_state.copy()
-    base_state_out[state_idx] = np.where(merge_mask[:, np.newaxis, np.newaxis, np.newaxis], logical_next, selected_base)
+    base_state_out[state_idx] = np.where(merge_mask[:, :, np.newaxis, np.newaxis], logical_next, selected_base)
     k_log_out = k_log.copy()
-    next_k_log = np.where(merge_mask[:, np.newaxis, np.newaxis, np.newaxis], 0.0, selected_k_log)
-    old_k_entry = next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :]
-    next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :] = np.where(append_mask[:, np.newaxis, np.newaxis], k_heads, old_k_entry)
+    # Merge resets visibility through log_length.  Payload bytes may remain
+    # stale; physically clearing them would add writes without changing state.
+    next_k_log = selected_k_log.copy()
+    old_k_entry = next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position, :]
+    next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position, :] = np.where(append_mask[:, :, np.newaxis], k_heads, old_k_entry)
     k_log_out[state_idx] = next_k_log
     u_log_out = u_log.copy()
-    next_u_log = np.where(merge_mask[:, np.newaxis, np.newaxis, np.newaxis], 0.0, selected_u_log)
-    old_u_entry = next_u_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :]
-    next_u_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :] = np.where(append_mask[:, np.newaxis, np.newaxis], update, old_u_entry)
+    next_u_log = selected_u_log.copy()
+    old_u_entry = next_u_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position, :]
+    next_u_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position, :] = np.where(append_mask[:, :, np.newaxis], update, old_u_entry)
     u_log_out[state_idx] = next_u_log
     lambda_log_out = lambda_log.copy()
-    next_lambda_log = np.where(merge_mask[:, np.newaxis, np.newaxis], 0.0, selected_lambda_log)
-    old_lambda_entry = next_lambda_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis]]
-    next_lambda_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis]] = np.where(append_mask[:, np.newaxis], next_decay, old_lambda_entry)
-    lambda_log_out[state_idx] = next_lambda_log
+    next_lambda_log = selected_lambda_log.copy()
+    old_lambda_entry = next_lambda_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position]
+    next_lambda_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position] = np.where(append_mask, next_decay, old_lambda_entry)
+    next_lambda_storage = selected_lambda_storage.copy()
+    next_lambda_storage[:, :, :7] = next_lambda_log
+    lambda_log_out[state_idx] = next_lambda_storage
     cumulative_decay_out = cumulative_decay.copy()
-    cumulative_decay_out[state_idx] = np.where(append_mask[:, np.newaxis], next_decay, 0.0)
+    next_decay_storage = selected_decay_storage.copy()
+    next_decay_storage[:, :, 0] = np.where(append_mask, next_decay, 0.0)
+    cumulative_decay_out[state_idx] = next_decay_storage
     log_length_out = log_length.copy()
-    log_length_out[state_idx] = np.where(append_mask, selected_length + 1, 0)
+    next_length_storage = selected_length_storage.copy()
+    next_length_storage[:, :, 0] = np.where(append_mask, selected_length + 1, 0)
+    log_length_out[state_idx] = next_length_storage
 
   reference_oracle:
     framework: torch
@@ -325,7 +339,7 @@ math_semantics:
       intermediates: [selected_state, q_heads, k_heads, decayed_base, log_contribution, prediction, update]
       no_leak: true
       fusable_groups:
-        - [p01_slot_gather, p02_expand_heads, p03_decay_base, p04_log_reconstruct, p05_prediction, p06_update, p07_output, p08_append_or_merge]
+        - [p01_slot_select, p02_expand_heads, p03_decay_base, p04_log_reconstruct, p05_prediction, p06_update, p07_output, p08_append_or_merge]
 
 numerical_stability:
   required: true
@@ -360,7 +374,7 @@ boundary_conditions:
     tags: [state_persists_across_calls]
     synthesize: {query.shape: "[1, 4, 128]", log_length.pattern: all_zero}
     machine_check: {kind: matches_invariant, name: output_shape_contract}
-  - case: "log_length=7 triggers materialization, zero live length, and zero cumulative decay"
+  - case: "log_length=7 triggers materialization, zero live length, and zero cumulative decay; stale payload bytes are logically invisible"
     tags: [state_persists_across_calls]
     synthesize: {query.shape: "[1, 4, 128]", log_length.pattern: "all_same(7)"}
     machine_check: {kind: matches_invariant, name: no_intermediate_leak}

@@ -57,7 +57,18 @@ results:
     paper_serving_batch_sizes: [64, 128, 256]
     current_acceptance_concurrency: 16
     official_source_repository: "not linked from arXiv and not found in the initial primary-source search"
-  candidate: {}
+  candidate:
+    v1:
+      build: pass
+      eager_gate: fail
+      first_step_output_normalized_error: 0.0
+      first_step_state_relative_l2: 0.8985422743862637
+      append_base_unchanged: true
+      root_cause: "per-head scalar metadata shared 32-byte GM blocks; concurrent AIV SetValue writes clobbered neighboring values"
+    v2:
+      adaptation: "pad lambda/decay/length metadata to 8 elements (32 bytes) per value head"
+      build: pass
+      eager_gate: not_run_driver_resource_busy
   equation_gate:
     status: pass
     device: "physical NPU4 (container logical NPU0)"
@@ -73,8 +84,11 @@ artifacts:
     sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
   - path: /cache/cch/qwen36-deltalog-20260920/equation-gate-v1/report.json
     sha256: ad17ac193a472028850c69cc4eddda15bf4acb924b8695261a8c626dd4a92608
+  - path: /cache/cch/qwen36-deltalog-20260920/operator-build-v2/libqwen36_gdn_deltalog_decode_ops.so
+    sha256: 232901f7866c2a2262857d0a20616647a9e4bfe466454285bd4a1d0647a1105c
+    evidence_scope: "build artifact only; no v2 NPU numerical claim"
 decision_reason: ""
-next_loop: "Implement the direct-invoke AscendC append/merge kernel with no dense-base write on append; then run the 128-step eager/NPUGraph/queue-ordering gate before any service benchmark."
+next_loop: "When a physical NPU4-7 canary succeeds, run the already-built v2 128-step eager gate once. If it passes, add NPUGraph/queue-ordering; if it fails, preserve and diagnose the first new failure."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
   verified: false

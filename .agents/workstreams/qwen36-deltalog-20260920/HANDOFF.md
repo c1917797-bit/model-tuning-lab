@@ -16,7 +16,8 @@ Attention Decoding*, arXiv:2608.15533v1.
 The paper keeps one dense FP32 base state plus a bounded log of compact updates.
 For GDN it uses merge interval M=8, BF16 key log, FP32 value-side update log,
 and FP32 decay metadata. Seven append steps leave the dense base unchanged;
-the eighth step merges the logical state into the base and clears the log.
+the eighth step merges the logical state into the base and resets the live log
+length. Payload bytes need not be physically zeroed once they are invisible.
 
 The arXiv record and paper do not link an official source repository. This
 workstream is therefore a clean reimplementation from the published equations,
@@ -112,7 +113,30 @@ paper's deferred-write performance behavior.
 
 ## Immediate next action
 
-Implement the independently named direct-invoke AscendC append/merge operator.
-Its append path must not write the dense base, its eighth step must materialize
-and reset on device, and it must next pass eager plus NPUGraph state/queue
-ordering before any service integration.
+After a non-privileged canary proves the shared driver/UDA path usable, run the
+already-built v2 direct-invoke AscendC operator once through the 128-step eager
+gate. Its append path must not write the dense base and its eighth step must
+materialize and reset on device. Only an eager pass permits the NPUGraph
+state/queue-ordering gate and service integration.
+
+## AscendC implementation status
+
+Direct-invoke v1 compiled and reached physical NPU4. Its first append produced
+an output bitwise equal to native and left the dense base unchanged, but the
+state gate failed: only some per-head scalar metadata writes survived. K/U log
+payloads for all 12 heads were present. The preserved failure is
+`candidate-eager-gate-v1/report.json`; the diagnostic is
+`candidate-eager-diag-v1/report.json`.
+
+Root cause is an Ascend storage-layout hazard, not a paper equation error:
+independent AIV cores wrote different 4-byte metadata values inside the same
+32-byte GM block, so scalar `SetValue` operations clobbered neighboring heads.
+Candidate v2 pads lambda/decay/length metadata to an eight-element, 32-byte
+stride per head and has compiled successfully. Its NPU gate has not run because
+fresh non-privileged canaries on physical NPU4 and NPU5 returned driver
+`Resource_Busy` even though `npu-smi` showed no processes. Do not report v2 as
+numerically validated until that gate actually runs.
+
+Built v2 library:
+`/cache/cch/qwen36-deltalog-20260920/operator-build-v2/libqwen36_gdn_deltalog_decode_ops.so`,
+SHA256 `232901f7866c2a2262857d0a20616647a9e4bfe466454285bd4a1d0647a1105c`.

@@ -60,3 +60,10 @@ relative-L2 was 1.2238606976906924e-7, both within the predeclared published
 bounds. This validates the equations only. The generic torch/NPU reference
 materializes temporary logical state and is explicitly excluded from any
 performance claim.
+
+The first direct AscendC append exposed a separate hardware ABI constraint:
+4-byte scalar metadata fields for adjacent heads cannot be independently
+updated from separate AIV cores when they share one 32-byte GM block. Payload
+logs were correct, but scalar stores clobbered neighbors. The portable layout
+therefore gives every head an eight-element/32-byte metadata stride. This is an
+Ascend storage adaptation; it does not change DeltaLog's logical recurrence.

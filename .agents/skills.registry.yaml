@@ -99,6 +99,7 @@ skills:
       - 论文迁移到 Ascend
       - 把论文方法落到 Ascend
       - validate stateful cache or replay correctness
+      - debug AscendC state metadata corruption
     scope:
       - AGENTS.md
       - docs/**
@@ -108,6 +109,7 @@ skills:
       - tests/**
       - .agents/experiments/**
       - .agents/workstreams/**
+      - projects/**
   - id: mst-agentsmd-authoring
     path: .agents/skills/mst-agentsmd-authoring
     status: stable
