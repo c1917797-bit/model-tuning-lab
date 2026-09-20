@@ -1,0 +1,56 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-epd-serve
+status: planned
+decision: pending
+hypothesis: "On the fixed four-card Qwen3.6 workload, an explicit opt-in EPD deployment can isolate encode/prefill/decode interference and improve end-to-end output throughput by at least 10% without changing model outputs."
+objective: "Pierce arXiv:2601.11590 on Qwen3.6-27B and Ascend within 24 hours, proving workload, resource and plugin-delivery fit before launching a multi-instance service."
+owner: codex
+git:
+  branch: work/epd-serve-qwen36-ascend-20260920
+  base_commit: 52b4ec1b84af224e4e5178d6e4512573423732f4
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; paper arXiv:2601.11590v1"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  dtype_or_quantization: "BF16 weights/activations; no quantization"
+  hardware_topology:
+    product: "4x Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+  runtime_topology:
+    host: chicaihong01
+    plugin_delivery: "independent explicit opt-in orchestration/proxy plugin; no upstream source edits"
+protocol:
+  primary_metric: "end-to-end output tokens per second versus the same-stack four-card monolithic control"
+  correctness_guardrails:
+    - "same checkpoint, tokenizer, generation settings and total physical NPU4-7 allocation"
+    - "prove whether the frozen performance workload contains media and activates Encode"
+    - "prove E, P and D instance ownership and transfer events rather than inferring activation from launch configuration"
+    - "exact greedy token identity before formal performance"
+  acceptance_thresholds:
+    - "mean output throughput gain >= 10% over same-stack four-card control"
+    - "TTFT and TPOT reported separately"
+    - "fixed 1024 output tokens, 40 requests, concurrency 16, three comparable repetitions per arm"
+    - "LongBench-v2 and GSM8K paired accuracy do not decrease at max_tokens=2048"
+  abort_conditions:
+    - "the frozen performance and accuracy workloads are text-only, so no Encode-stage work exists and the distinct EPD mechanism cannot activate"
+    - "the only remaining candidate is ordinary PD disaggregation already supported upstream rather than a paper-derived EPD contribution"
+    - "the required E/P/D deployment cannot fit within the same four physical cards without CPU offload, quantization or resource oversubscription"
+    - "the result would require modifying vLLM, vLLM-Ascend, CANN, the image or model rather than an opt-in plugin"
+    - "real-NPU numerical or deterministic correctness failure"
+    - "24-hour paper budget exhausted"
+  repetitions: 3
+  command: "first audit workload modality, v0.23 EPD seams, model-instance memory geometry and same-resource comparability; launch NPU services only if all gates pass"
+results:
+  baseline: {}
+  candidate: {}
+  lifecycle:
+    paper_scope: "EPD-Serve targets multimodal high-concurrency serving by separating Encode, Prefill and Decode, with asynchronous feature prefetch, hierarchical KV transfer and multi-route scheduling."
+    model_config: "The installed checkpoint is Qwen3_5ForConditionalGeneration with a vision_config and text_config; it is not a pure-text architecture."
+    upstream_capability: "The pinned vLLM-Ascend source already contains EPD guides/examples, EC-transfer integration and Mooncake layerwise P/D transfer support."
+  resources: {}
+artifacts: []
+decision_reason: ""
+next_loop: "Prove whether the frozen acceptance workload activates Encode; then establish a same-four-card E/P/D memory layout before any service launch."
+rollback:
+  command: "disable the opt-in orchestration plugin and stop only this workstream's services on physical NPU4-7"
+  verified: false

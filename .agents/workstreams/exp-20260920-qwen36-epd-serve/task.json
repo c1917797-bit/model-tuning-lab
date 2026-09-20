@@ -1,0 +1,27 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260920-qwen36-epd-serve",
+  "objective": "Pierce arXiv:2601.11590 on the frozen Qwen3.6-27B Ascend acceptance workload without confusing existing upstream EPD support with a new plugin gain.",
+  "targetBranch": "main",
+  "workBranch": "work/epd-serve-qwen36-ascend-20260920",
+  "remote": "origin",
+  "originalBase": "52b4ec1b84af224e4e5178d6e4512573423732f4",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "arXiv:2601.11590v1",
+    "vllm-ascend@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 while experiments run"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-epd-serve.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/exp-20260920-qwen36-epd-serve/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/epd-serve-ascend/**"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "planned",
+  "integrationState": "not-ready"
+}
