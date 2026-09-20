@@ -1,0 +1,28 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260920-qwen36-duet",
+  "objective": "Pierce arXiv:2603.15530 on fixed Ascend 910B hardware without promoting architecture-simulator output into NPU performance evidence.",
+  "targetBranch": "main",
+  "workBranch": "work/duet-qwen36-ascend-20260920",
+  "remote": "origin",
+  "originalBase": "b0826187a00ae2c2cbf3450479ad797427a47393",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "arXiv:2603.15530",
+    "https://github.com/AlishKanani/DUET",
+    "vllm-ascend@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 only if applicability passes"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-duet.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/exp-20260920-qwen36-duet/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/duet-ascend/**"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "planned",
+  "integrationState": "not-ready"
+}

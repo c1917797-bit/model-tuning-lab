@@ -1,0 +1,53 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-duet
+status: planned
+decision: pending
+hypothesis: "A paper-faithful, plugin-deliverable mapping of DUET's prefill/decode-specific packages exists on fixed Ascend 910B hardware and can improve Qwen3.6-27B end-to-end output throughput by at least 10% without accuracy loss."
+objective: "Pierce arXiv:2603.15530 on Qwen3.6-27B and Ascend within 24 hours, rejecting architectural-simulator proxies unless a real fixed-hardware runtime mechanism can be isolated."
+owner: codex
+git:
+  branch: work/duet-qwen36-ascend-20260920
+  base_commit: b0826187a00ae2c2cbf3450479ad797427a47393
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; paper arXiv:2603.15530; official repository AlishKanani/DUET"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  dtype_or_quantization: "BF16 weights/activations; no quantization"
+  hardware_topology:
+    product: "4x fixed Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+  runtime_topology:
+    host: chicaihong01
+    plugin_delivery: "independent explicit opt-in plugin/monkeypatch; no hardware, runtime or image replacement"
+protocol:
+  primary_metric: "end-to-end output tokens per second versus same-stack TP4 control"
+  correctness_guardrails:
+    - "candidate executes on physical NPU4-7; simulator tics, estimated clocks and FLOP/s are not acceptance evidence"
+    - "candidate changes only a software-selectable production path available on fixed 910B hardware"
+    - "exact greedy token identity before formal performance"
+  acceptance_thresholds:
+    - "mean output throughput gain >= 10% over same-stack control"
+    - "TTFT and TPOT reported separately"
+    - "fixed 1024 output tokens, 40 requests, concurrency 16, three comparable repetitions per arm"
+    - "LongBench-v2 and GSM8K paired accuracy do not decrease at max_tokens=2048"
+  abort_conditions:
+    - "the paper's gain requires custom prefill/decode hardware packages or configurable PE/VU arrays unavailable on fixed 910B"
+    - "official code exposes only architecture simulation and no deployable operator/runtime implementation"
+    - "no distinct software mechanism remains after removing hardware-specific contributions"
+    - "candidate cannot be delivered as an explicit opt-in plugin without upstream or image changes"
+    - "24-hour paper budget exhausted"
+  repetitions: 3
+  command: "audit the official repository and paper mechanism against fixed 910B execution seams before any NPU launch"
+results:
+  baseline: {}
+  candidate: {}
+  lifecycle:
+    official_code: "The official repository describes an architecture-level simulator with configurable systolic PE_ARRAY and vector VU_ARRAY components, PyTorch numerical comparison, and simulated tics/clock/FLOP metrics."
+    model_fit: "Qwen3.6 is hybrid linear/full attention rather than the paper's evaluated Mamba-Transformer, so any port would be a mechanism adaptation."
+  resources: {}
+artifacts: []
+decision_reason: ""
+next_loop: "Determine whether DUET leaves any software-only production mechanism after excluding its custom hardware packages and simulator metrics."
+rollback:
+  command: "disable any explicit plugin switch and stop only this workstream's processes on physical NPU4-7"
+  verified: false
