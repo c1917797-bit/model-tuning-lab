@@ -113,7 +113,7 @@ all proven.
   lets the existing HYPIC wrapper validate and attach the worker restore plan.
 - The adapter is gated to the reviewed HYPIC v0.8.5 scheduler SHA256 and fails
   startup on drift. No HYPIC, vLLM, vLLM-Ascend or CANN source is modified.
-- Ten focused software tests pass. They are not NPU correctness evidence.
+- Eleven focused software tests pass. They are not NPU correctness evidence.
 - For the frozen 26-request overlap histogram, distribution-aware checkpoints
   3072/7680 reduce replay by 27,648 tokens versus the same-budget balanced
   3072/6144 control (58.7% less replay work), so an end-to-end opportunity still

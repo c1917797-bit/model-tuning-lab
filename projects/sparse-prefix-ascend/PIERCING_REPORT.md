@@ -108,6 +108,6 @@ upstream source:
 6. the existing HYPIC scheduler verifies the computed-token boundary and
    attaches its normal recurrent restore plan.
 
-The adapter is pinned to the reviewed HYPIC v0.8.5 scheduler SHA256. Ten
+The adapter is pinned to the reviewed HYPIC v0.8.5 scheduler SHA256. Eleven
 software tests pass. Real NPU correctness, performance and accuracy evidence
 have not yet been produced.

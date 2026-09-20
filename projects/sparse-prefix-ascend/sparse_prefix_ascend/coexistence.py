@@ -355,15 +355,17 @@ def install_native_kv_coexistence(hypic_scheduler: object) -> tuple[str, ...]:
     for cls in _scheduler_classes():
         if patch_class(cls):
             patched.append(f"{cls.__module__}.{cls.__name__}")
-    if not patched and not any(
+    already_patched = any(
         getattr(cls.schedule, "_sparse_prefix_native_kv_wrapper", False)
         for cls in _scheduler_classes()
-    ):
-        raise RuntimeError(
-            "Sparse Prefix could not patch a reviewed HYPIC scheduler class."
-        )
+    )
+    # The API/CLI process can load general plugins before scheduler modules are
+    # importable.  The reviewed HYPIC base-init wrapper resolves the concrete
+    # class later and calls the hook installed above.  Treat that as a deferred
+    # patch, while the engine process still proves activation through HYPIC's
+    # require_runtime_hooks contract.
     logger.info(
-        "Sparse Prefix native-KV/GDN coexistence active: %s",
-        patched or "already patched",
+        "Sparse Prefix native-KV/GDN coexistence installed: %s",
+        patched or ("already patched" if already_patched else "deferred"),
     )
     return tuple(patched)

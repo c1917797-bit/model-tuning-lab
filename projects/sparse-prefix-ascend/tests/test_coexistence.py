@@ -96,6 +96,16 @@ class NativePrefixGateTests(unittest.TestCase):
         finally:
             gate.restore()
 
+    def test_gate_restores_preexisting_instance_override(self):
+        manager = _FakeManager()
+        previous = manager.get_computed_blocks
+        manager.get_computed_blocks = previous
+        state = SimpleNamespace(scheduler_advanced_prefixes={})
+        gate = _NativePrefixGate(manager, state, _FakeHypicScheduler)
+        gate.install()
+        gate.restore()
+        self.assertIs(manager.get_computed_blocks, previous)
+
 
 if __name__ == "__main__":
     unittest.main()
