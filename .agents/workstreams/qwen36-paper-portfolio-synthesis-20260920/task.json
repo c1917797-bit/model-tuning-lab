@@ -1,0 +1,29 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "qwen36-paper-portfolio-synthesis-20260920",
+  "objective": "Aggregate the completed 10-paper Qwen3.6 Ascend piercing evidence, reject invalid additive benefit claims, and collect a fresh dense TP4 profile that identifies the next plugin-safe self-evolution target.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen36-paper-portfolio-synthesis-20260920",
+  "remote": "origin",
+  "originalBase": "63a25ca16d610abd7fab868fdc856ca248e14c1f",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "the completed 10-paper queue",
+    "Qwen3.6-27B",
+    "vllm-ascend@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 during the bounded dense profiling capture"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-paper-portfolio-synthesis.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/qwen36-paper-portfolio-synthesis-20260920/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/qwen36-paper-portfolio/**"}
+  ],
+  "validationCommands": [
+    "python3 -m pytest projects/qwen36-paper-portfolio/tests",
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "evidence-complete",
+  "integrationState": "ready-after-validation"
+}

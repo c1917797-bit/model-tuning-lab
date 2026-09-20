@@ -108,3 +108,20 @@ Re-prove this in the actual container/session before a new claim.
   actually runs.
 - Some filesystems can break CANN offline parsing. Treat parser failure as an
   artifact-location hypothesis before rewriting runtime code.
+- Do not claim that cannbot generated an operator merely because a run uses an
+  AscendC custom operator. Record provenance separately for upstream runtime
+  operators, paper-author code, cannbot-generated scaffolding, and project
+  adaptations.
+- Before generating a fused operator, split same-named kernels by call count,
+  input shape, and source call chain. Aggregate `Slice` or `Transpose` totals
+  can include unrelated layers and can materially inflate an Amdahl bound.
+- A no-device container from the serving image can perform CANN offline trace
+  parsing. Bind all eight prefill/decode rank traces to manifest/client hashes,
+  preserve the raw trees, and record an export receipt before summarization.
+- Requested concurrency is not sufficient evidence of active decode coverage.
+  Trigger a bounded decode profile only after every request has produced a
+  non-empty stream chunk, then verify per-rank operator counts against the
+  intended worker-step limit.
+- Run cannbot only after the live source seam, shapes, ABI, affected scope, and
+  required local speedup have been measured. A generated kernel that cannot
+  plausibly cross the opportunity gate should be rejected before build work.

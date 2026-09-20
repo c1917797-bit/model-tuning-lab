@@ -1,0 +1,130 @@
+{
+  "schema": "qwen36-ascend-paper-portfolio/v1",
+  "target": {
+    "model": "Qwen3.6-27B",
+    "runtime": "vLLM-Ascend v0.23.0 / CANN 9.1",
+    "physical_devices": [4, 5, 6, 7],
+    "tensor_parallel": 4,
+    "delivery": "explicit opt-in plugin/monkeypatch",
+    "throughput_acceptance_gain_pct": 10.0
+  },
+  "papers": [
+    {
+      "queue": 1,
+      "id": "arXiv:2605.21325",
+      "short_name": "MXR triangular inversion",
+      "family": "inversion",
+      "decision": "no-go-current-objective",
+      "observed_share_range": [0.02927, 0.02957],
+      "best_reported_or_measured_local_speedup": 3.158,
+      "note": "Direct inversion passed the real-NPU numerical gate but is too small; the official six-stage MegaGDN candidate was only 1.087x locally on a 10.84-10.87% measured scope."
+    },
+    {
+      "queue": 2,
+      "id": "arXiv:2608.15533",
+      "short_name": "DeltaLog",
+      "family": "recurrent-state-decode",
+      "decision": "no-go-opportunity-gate",
+      "observed_share_range": [0.04520, 0.04840],
+      "best_reported_or_measured_local_speedup": 1.86,
+      "note": "Best paper-local speedup maps to about 2.1-2.3% under the measured current workload."
+    },
+    {
+      "queue": 3,
+      "id": "arXiv:2606.06034",
+      "short_name": "Good Enough inversion",
+      "family": "inversion",
+      "decision": "no-go-opportunity-gate",
+      "observed_share_range": [0.02927, 0.02957],
+      "best_reported_or_measured_local_speedup": 5.2,
+      "note": "Overlaps MXR's inversion scope and therefore cannot be added to it."
+    },
+    {
+      "queue": 4,
+      "id": "arXiv:2605.19049",
+      "short_name": "KVBuffer",
+      "family": "recurrent-state-decode",
+      "decision": "no-go-opportunity-gate",
+      "observed_share_range": [0.04520, 0.04840],
+      "best_reported_or_measured_local_speedup": 1.8235,
+      "note": "The 45.17% local latency reduction overlaps DeltaLog's recurrent-state scope."
+    },
+    {
+      "queue": 5,
+      "id": "arXiv:2607.01299",
+      "short_name": "HYPIC",
+      "family": "prefix-reuse",
+      "decision": "prior-success-reference",
+      "end_to_end": {
+        "throughput_gain_pct": 36.066291634029724,
+        "ttft_change_pct": -43.63447512683103,
+        "tpot_change_pct": -18.99108291418369,
+        "longbenchv2_delta_pp": -0.262467,
+        "gsm8k_delta_pp": -0.151630
+      },
+      "note": "Valid prior Ascend reference for a 32768-token segmented-reuse workload; not a new result and not a generic no-reuse dense gain."
+    },
+    {
+      "queue": 6,
+      "id": "arXiv:2605.05219",
+      "short_name": "Sparse Prefix Caching",
+      "family": "prefix-reuse",
+      "decision": "no-go-correctness",
+      "note": "Real NPU replay matched dense in 7/8 runs; intermittent first-token divergence blocks performance."
+    },
+    {
+      "queue": 7,
+      "id": "arXiv:2602.21144",
+      "short_name": "SSM tensor parallelism",
+      "family": "tensor-parallel-communication",
+      "decision": "no-go-no-distinct-candidate",
+      "note": "All 192 GDN projection selections already used MatmulAllreduceRowParallelOp and observed collective payloads were BF16."
+    },
+    {
+      "queue": 8,
+      "id": "arXiv:2601.11590",
+      "short_name": "EPD-Serve",
+      "family": "multimodal-disaggregation",
+      "decision": "no-go-workload-gate",
+      "note": "The frozen text-only workload has no Encode-stage work; ordinary PD is already upstream and is not EPD evidence."
+    },
+    {
+      "queue": 9,
+      "id": "arXiv:2608.30386",
+      "short_name": "DASC",
+      "family": "compressed-state-reuse",
+      "decision": "no-go-correctness",
+      "note": "Three identical temperature-0/seed-0 cache-hit requests produced different continuations."
+    },
+    {
+      "queue": 10,
+      "id": "arXiv:2603.15530",
+      "short_name": "DUET",
+      "family": "custom-hardware-disaggregation",
+      "decision": "no-go-hardware-expression",
+      "note": "The gain depends on separate custom compute and memory packages; the official code is an architecture simulator, not a CANN/vLLM implementation."
+    }
+  ],
+  "overlap_groups": {
+    "inversion": ["arXiv:2605.21325", "arXiv:2606.06034"],
+    "recurrent-state-decode": ["arXiv:2608.15533", "arXiv:2605.19049"],
+    "prefix-reuse": ["arXiv:2607.01299", "arXiv:2605.05219"]
+  },
+  "fresh_dense_profile": {
+    "artifact": "/cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json",
+    "sha256": "7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81",
+    "prefill_direct_inversion_ratio_pct": 3.61275,
+    "prefill_six_stage_ratio_pct": 13.25425,
+    "decode_recurrent_ratio_pct": 4.68675,
+    "decode_shape_filtered_gdn_fusion_ratio_pct": 14.15340,
+    "decode_attention_ratio_pct": 27.40025,
+    "decode_matmul_ratio_pct": 50.29700
+  },
+  "self_evolution_target": {
+    "name": "exact-semantics shape-filtered GDN decode mega-op",
+    "delivery": "explicit opt-in fail-closed plugin monkeypatch",
+    "local_speedup_gate": 2.79680,
+    "status": "feasibility-review-next",
+    "operator_generation": "not started; cannbot was not used in this synthesis stage"
+  }
+}

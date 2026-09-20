@@ -1,0 +1,66 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-paper-portfolio-synthesis
+status: completed
+decision: go-next-loop
+hypothesis: "The completed paper evidence plus a fresh Qwen3.6 dense TP4 profile can identify a non-overlapping plugin-safe hotspot with enough measured share to support a credible >=10% end-to-end candidate."
+objective: "Reject invalid cross-paper benefit addition and choose the next self-evolution target from current-stack Qwen3.6 NPU evidence."
+owner: codex
+git:
+  branch: work/qwen36-paper-portfolio-synthesis-20260920
+  base_commit: 63a25ca16d610abd7fab868fdc856ca248e14c1f
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  dtype_or_quantization: "BF16 weights/activations; no quantization"
+  hardware_topology:
+    product: "4x Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+  runtime_topology:
+    host: chicaihong01
+    container_devices: [0, 1, 2, 3]
+    plugin_delivery: "future candidate must be independent explicit opt-in plugin/monkeypatch"
+protocol:
+  primary_metric: "current dense prefill/decode NPU hotspot share and a conservative end-to-end opportunity gate"
+  correctness_guardrails:
+    - "profile the unchanged dense service only"
+    - "separate prefill and decode captures"
+    - "four ranks and exactly 30 profiled decode iterations"
+    - "kernel sums are diagnostic and never reported as throughput"
+  acceptance_thresholds:
+    - "next candidate has a measured affected scope large enough to support >=10% end-to-end gain"
+    - "candidate has a plugin-safe production seam"
+    - "candidate preserves exact model semantics or declares and passes a quality-risk gate"
+  abort_conditions:
+    - "candidate merely recombines overlapping paper mechanisms"
+    - "benefit exists only in CPU, simulation, or isolated microbenchmark evidence"
+    - "candidate cannot be expressed on fixed Ascend 910B through a plugin/operator seam"
+  repetitions: 1
+  command: "one diagnostic dense prefill/decode profile; no performance acceptance claim"
+results:
+  portfolio:
+    direct_inversion_plus_recurrent_best_case_gain_pct: 4.85059
+    perfect_elimination_of_both_direct_scopes_gain_pct: 8.45634
+  dense_profile:
+    prefill_direct_inversion_ratio_pct: 3.61275
+    prefill_six_stage_ratio_pct: 13.25425
+    prefill_six_stage_local_speedup_needed_for_10pct_phase_gain: 3.18372
+    decode_recurrent_ratio_pct: 4.68675
+    decode_shape_filtered_gdn_fusion_ratio_pct: 14.15340
+    decode_shape_filtered_local_speedup_needed_for_10pct_phase_gain: 2.79680
+    decode_attention_ratio_pct: 27.40025
+    decode_matmul_ratio_pct: 50.29700
+    rank_coverage: [0, 1, 2, 3]
+    decode_iterations: 30
+artifacts:
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/opportunity-audit-v2/opportunity-audit.json
+    sha256: dad807a57e656ba5bfd4fa6361c1dff57e59684b206e61915d3b4da2a0fcfa4e
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-export.json
+    sha256: 87f13d128d8479b765bf97967e714718597411f835174ee4a91bdbab67a47103
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
+    sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
+decision_reason: "Single inversion/recurrent mechanisms remain too small. The next credible paper-derived self-evolution target is one exact-semantics shape-filtered GDN decode mega-op; its 14.15340% diagnostic scope requires >=2.79680x local speedup before a 10% decode-phase result is even plausible."
+next_loop: "Review cannbot-skills and ops-transformer, then perform a fail-closed ABI/shape feasibility audit for the explicit opt-in GDN decode mega-op before generating code."
+rollback:
+  command: "stop only the owned profiling service/container on physical NPU4-7"
+  verified: true
