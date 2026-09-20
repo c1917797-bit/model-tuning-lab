@@ -77,3 +77,11 @@ statistical guarantee. They show why neither no regression nor confirmed
 regression is justified. A valid strict closeout would require a deterministic
 paired protocol or a pre-declared non-inferiority margin, but no additional
 HYPIC run is authorized in this queue.
+
+An output-level audit of the existing JSONL files confirms that the service was
+not deterministic in either arm. Across the three LongBench-v2 runs, only
+6/127 no-cache samples and 7/127 HYPIC samples had identical full-response
+hashes in all three runs. For GSM8K the counts were 685/1319 and 714/1319.
+Each paired run also contained both candidate gains and candidate losses. This
+rules out treating the small mean delta as a one-sided HYPIC failure, but does
+not satisfy an exact-output or literal no-loss acceptance rule.

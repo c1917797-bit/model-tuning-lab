@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "source_root": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/quality",
+  "source_aggregate_sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e",
+  "method": {
+    "paired_key": "index",
+    "full_output_identity": "response_sha256 equality",
+    "prediction_identity": "prediction field equality",
+    "correctness_identity": "correct field equality",
+    "within_arm_replay": "all three run values identical for the same index"
+  },
+  "datasets": {
+    "longbench_v2": {
+      "paired_by_run": {
+        "1": {
+          "total": 127,
+          "identical_response_sha256": 14,
+          "identical_prediction": 110,
+          "identical_correctness": 115,
+          "candidate_gains": 8,
+          "candidate_losses": 4
+        },
+        "2": {
+          "total": 127,
+          "identical_response_sha256": 15,
+          "identical_prediction": 116,
+          "identical_correctness": 117,
+          "candidate_gains": 6,
+          "candidate_losses": 4
+        },
+        "3": {
+          "total": 127,
+          "identical_response_sha256": 12,
+          "identical_prediction": 112,
+          "identical_correctness": 118,
+          "candidate_gains": 1,
+          "candidate_losses": 8
+        }
+      },
+      "within_arm_across_three_runs": {
+        "no_cache": {
+          "total": 127,
+          "all_three_response_sha256_identical": 6,
+          "all_three_predictions_identical": 111,
+          "all_three_correctness_identical": 116
+        },
+        "hypic_only": {
+          "total": 127,
+          "all_three_response_sha256_identical": 7,
+          "all_three_predictions_identical": 107,
+          "all_three_correctness_identical": 112
+        }
+      }
+    },
+    "gsm8k": {
+      "paired_by_run": {
+        "1": {
+          "total": 1319,
+          "identical_response_sha256": 844,
+          "identical_prediction": 1291,
+          "identical_correctness": 1305,
+          "candidate_gains": 7,
+          "candidate_losses": 7
+        },
+        "2": {
+          "total": 1319,
+          "identical_response_sha256": 830,
+          "identical_prediction": 1290,
+          "identical_correctness": 1306,
+          "candidate_gains": 6,
+          "candidate_losses": 7
+        },
+        "3": {
+          "total": 1319,
+          "identical_response_sha256": 847,
+          "identical_prediction": 1289,
+          "identical_correctness": 1302,
+          "candidate_gains": 6,
+          "candidate_losses": 11
+        }
+      },
+      "within_arm_across_three_runs": {
+        "no_cache": {
+          "total": 1319,
+          "all_three_response_sha256_identical": 685,
+          "all_three_predictions_identical": 1284,
+          "all_three_correctness_identical": 1296
+        },
+        "hypic_only": {
+          "total": 1319,
+          "all_three_response_sha256_identical": 714,
+          "all_three_predictions_identical": 1291,
+          "all_three_correctness_identical": 1308
+        }
+      }
+    }
+  },
+  "decision": {
+    "dense_arm_deterministic": false,
+    "candidate_arm_deterministic": false,
+    "candidate_only_instability_proven": false,
+    "exact_output_equivalence_proven": false,
+    "strict_quality_gate_passed": false,
+    "classification": "inconclusive_not_accepted",
+    "reason": "Both arms exhibit substantial within-arm response variation, and paired runs contain both gains and losses."
+  }
+}

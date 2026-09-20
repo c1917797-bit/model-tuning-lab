@@ -171,6 +171,11 @@ not require retraining unless retraining is explicitly in scope.
   spanning zero also does not prove no regression. Predeclare either literal
   no-loss, a non-inferiority margin, or an exact-output criterion; classify
   underpowered evidence as inconclusive and not accepted.
+- Before using exact-output equality as the quality gate, measure repeated
+  same-arm output identity for the dense control. If the control itself is not
+  deterministic, report full-response, parsed-prediction, and correctness
+  agreement separately; do not attribute ordinary service replay variance only
+  to the candidate.
 - Classify the paper's intervention layer before implementing anything. A
   custom-chiplet or package-level design whose benefit depends on different
   compute arrays, memory technologies, and physical interconnects cannot be
