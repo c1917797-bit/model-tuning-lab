@@ -1,0 +1,33 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "qwen36-deltalog-20260920",
+  "objective": "Faithfully reimplement DeltaLog GDN append/merge decoding as an explicit opt-in Ascend plugin for Qwen3.6-27B, prove real-NPU numerical/state/graph correctness, and determine whether it can deliver at least 10% end-to-end throughput gain without task-accuracy loss.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen36-deltalog-20260920",
+  "remote": "origin",
+  "originalBase": "69029e7cac5dec01c1548115527341eab3032783",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "arXiv:2608.15533v1 equations and operator configuration",
+    "Qwen3.6-27B",
+    "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd",
+    "cannbot-skills operator workflow",
+    "physical NPU4-7"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 during owned validation and benchmark runs"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-deltalog.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/qwen36-deltalog-20260920/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/qwen36-deltalog/**"}
+  ],
+  "validationCommands": [
+    "python3 /cache/cch/cannbot-skills/ops/ops-spec-gen/scripts/validate_spec.py projects/qwen36-deltalog/operators/qwen36_gdn_deltalog_decode/spec.yaml --strict --stage 1 --stage 2 --stage 3 --stage 4 --stage 6 --stage 7",
+    "run CannBot spec stages 8 and 11 inside the pinned v0.23 image with NumPy; stage 5 is waived only for its all-input broadcast false positive on heterogeneous FusedComposite ABI",
+    "run projects/qwen36-deltalog/tools/deltalog_algorithm_npu_probe.py once on container logical NPU0 mapped to physical NPU4",
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "real-npu-equation-gate-pass-ascendc-pending",
+  "integrationState": "not-ready"
+}

@@ -1,0 +1,80 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-deltalog
+status: in_progress
+decision: pending
+hypothesis: "Replacing eager full FP32 recurrent-state write-back with an M=8 base-plus-log append/merge cycle can reduce Ascend HBM traffic enough to improve fixed-1024 decode throughput; the benefit must be established at concurrency 16 rather than extrapolated from the paper's batch 64-256 GPU results."
+objective: "Deliver a faithful DeltaLog GDN plugin and establish real-NPU correctness, end-to-end performance, and final LongBench-v2/GSM8K accuracy."
+owner: codex
+git:
+  branch: work/qwen36-deltalog-20260920
+  base_commit: 69029e7cac5dec01c1548115527341eab3032783
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  dtype_or_quantization: "BF16 activations/key log; FP32 dense state/U log/decay metadata; no quantization"
+  hardware_topology:
+    product: "4x Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+    tensor_parallel_size: 4
+  runtime_topology:
+    host: chicaihong01
+    container_devices: [0, 1, 2, 3]
+    delivery: "independent explicit opt-in plugin/monkeypatch"
+protocol:
+  paper_configuration:
+    merge_interval: 8
+    live_log_capacity: 7
+    key_log_dtype: bfloat16
+    update_log_dtype: float32
+    dense_state_dtype: float32
+  numerical_gate:
+    stateful_steps: 128
+    batches: [1, 16]
+    output_relative_error_max: 0.00303
+    merge_state_relative_error_max: 7.92e-7
+    non_finite_allowed: false
+    eager_and_npugraph_required: true
+  performance:
+    requests: 40
+    concurrency: 16
+    input_tokens: 32768
+    prefix_tokens: 16384
+    output_tokens: 1024
+    baseline_throughput_tokens_per_second: 125.819134
+    acceptance_throughput_tokens_per_second: 138.4010474
+    profiler_enabled: false
+  final_accuracy:
+    thinking: false
+    max_tokens: 2048
+    normal_eos: true
+    tasks: [LongBench-v2, GSM8K]
+    allowed_accuracy_delta: 0.0
+results:
+  applicability:
+    current_native_full_state_write_each_decode_step: true
+    current_recurrent_kernel_aggregate_share_percent: 4.68675
+    paper_serving_batch_sizes: [64, 128, 256]
+    current_acceptance_concurrency: 16
+    official_source_repository: "not linked from arXiv and not found in the initial primary-source search"
+  candidate: {}
+  equation_gate:
+    status: pass
+    device: "physical NPU4 (container logical NPU0)"
+    steps_per_batch: 128
+    batches: [1, 16]
+    batch1_max_output_normalized_error: 0.002369668246445498
+    batch16_max_output_normalized_error: 0.002890173410404624
+    max_merge_state_relative_l2: 1.2238606976906924e-7
+    merge_observations: 68
+    limitation: "generic torch/NPU equation reference; not an IO-efficient kernel or performance result"
+artifacts:
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
+    sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
+  - path: /cache/cch/qwen36-deltalog-20260920/equation-gate-v1/report.json
+    sha256: ad17ac193a472028850c69cc4eddda15bf4acb924b8695261a8c626dd4a92608
+decision_reason: ""
+next_loop: "Implement the direct-invoke AscendC append/merge kernel with no dense-base write on append; then run the 128-step eager/NPUGraph/queue-ordering gate before any service benchmark."
+rollback:
+  command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
+  verified: false

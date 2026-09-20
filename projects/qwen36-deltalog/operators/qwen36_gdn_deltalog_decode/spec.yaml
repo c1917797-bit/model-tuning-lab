@@ -1,0 +1,425 @@
+# Copyright (c) 2026 Huawei Technologies Co., Ltd.
+# This program is free software; see the CANN Open Software License Agreement Version 2.0.
+
+# Generated with CannBot ops-spec-gen, then specialized from the audited
+# DeltaLog equations and the Qwen3.6-27B TP4 vLLM-Ascend v0.23 decode ABI.
+# This is an implementation contract, not evidence of NPU correctness or E2E gain.
+schema_version: 1
+
+op:
+  name: qwen36_gdn_deltalog_decode
+  version: "1.0"
+  lifecycle: experimental
+  description: "Paper-equation DeltaLog append/merge decode for Qwen3.6 TP4 GDN with M=8 deferred recurrent-state materialization"
+  category: FusedComposite
+  paradigms: [LayoutTransform, Contraction, Recurrence, Stateful, NumericalStable, FusedComposite]
+  error_codes: [null_input, shape_mismatch, dtype_not_supported, attribute_value_out_of_range]
+  platform_constraints:
+    supported_chips: [Ascend910B]
+    requires_hccl: false
+  paradigm_groups:
+    - kind: fusion
+      paradigms: [LayoutTransform, Contraction, Recurrence, Stateful, NumericalStable, FusedComposite]
+
+inputs:
+  - name: query
+    description: "Native-l2norm output; four local key heads"
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [3, 3]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 4, 128]}
+  - name: key
+    description: "Native-l2norm output; four local key heads"
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [3, 3]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 4, 128]}
+  - name: value
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [3, 3]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 12, 128]}
+  - name: g
+    description: "Native gating output: per-token/head log decay, normally non-positive"
+    role: tensor
+    dtype_set: [float32]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 12]}
+  - name: beta
+    role: tensor
+    dtype_set: [bfloat16]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T", 12]}
+  - name: base_state
+    description: "Mutable materialized FP32 state [slot, local value head, value dim, key dim]"
+    role: state
+    dtype_set: [float32]
+    rank_range: [4, 4]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 12, 128, 128]}
+  - name: k_log
+    description: "Mutable BF16 key log; capacity C=M-1=7"
+    role: state
+    dtype_set: [bfloat16]
+    rank_range: [4, 4]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 12, 7, 128]}
+  - name: u_log
+    description: "Mutable FP32 delta-update log; capacity C=M-1=7"
+    role: state
+    dtype_set: [float32]
+    rank_range: [4, 4]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 12, 7, 128]}
+  - name: lambda_log
+    description: "Mutable FP32 cumulative-decay snapshot for every live log entry"
+    role: state
+    dtype_set: [float32]
+    rank_range: [3, 3]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 12, 7]}
+  - name: cumulative_decay
+    description: "Mutable FP32 log decay accumulated since the last materialization"
+    role: state
+    dtype_set: [float32]
+    rank_range: [2, 2]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S", 12]}
+  - name: log_length
+    description: "Mutable live-entry count per slot; valid range 0..7"
+    role: state
+    dtype_set: [int32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["S"]}
+  - name: actual_seq_lengths
+    description: "Native decode metadata; non-spec domain is [0,1,...,1] and length T+1"
+    role: tensor
+    dtype_set: [int32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T_plus_1"]}
+  - name: ssm_state_indices
+    description: "Unique valid state slot per active sequence"
+    role: tensor
+    dtype_set: [int32]
+    rank_range: [1, 1]
+    layout: ND
+    contiguous: required
+    shape: {symbolic: ["T"]}
+
+attributes: []
+
+outputs:
+  - name: output
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      output.shape = (query.shape[0], 12, 128)
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      output.dtype = query.dtype
+    layout: ND
+    aliasing: none
+  - name: base_state_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      base_state_out.shape = base_state.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      base_state_out.dtype = base_state.dtype
+    layout: ND
+    aliasing: inplace_with(base_state)
+  - name: k_log_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      k_log_out.shape = k_log.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      k_log_out.dtype = k_log.dtype
+    layout: ND
+    aliasing: inplace_with(k_log)
+  - name: u_log_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      u_log_out.shape = u_log.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      u_log_out.dtype = u_log.dtype
+    layout: ND
+    aliasing: inplace_with(u_log)
+  - name: lambda_log_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      lambda_log_out.shape = lambda_log.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      lambda_log_out.dtype = lambda_log.dtype
+    layout: ND
+    aliasing: inplace_with(lambda_log)
+  - name: cumulative_decay_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      cumulative_decay_out.shape = cumulative_decay.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      cumulative_decay_out.dtype = cumulative_decay.dtype
+    layout: ND
+    aliasing: inplace_with(cumulative_decay)
+  - name: log_length_out
+    shape_rule_kind: numpy_expr
+    shape_rule: |
+      log_length_out.shape = log_length.shape
+    dtype_rule_kind: numpy_expr
+    dtype_rule: |
+      log_length_out.dtype = log_length.dtype
+    layout: ND
+    aliasing: inplace_with(log_length)
+
+reduction:
+  axis_source: fixed
+  fixed_value: -1
+
+shape_constraints:
+  symbols:
+    T: {kind: dim, range: [1, 16]}
+    S: {kind: dim, range: [1, 4096]}
+    T_plus_1: {kind: dim, range: [2, 17]}
+  global_constraints:
+    - "rank(query) == 3"
+    - "rank(base_state) == 4"
+    - "rank(k_log) == 4"
+    - "rank(log_length) == 1"
+  notes:
+    - "M=8 and C=M-1=7 are fixed for the first faithful paper configuration."
+    - "T_plus_1 == T + 1; actual_seq_lengths is [0,1,...,1] for non-spec decode."
+    - "ssm_state_indices values are unique in one invocation and each is in [0,S)."
+    - "Each log_length value is in [0,7]; an invalid value is rejected rather than clamped."
+    - "The four normalized key heads are repeated three times to address twelve local value heads, matching native Qwen3.6 TP4 GDN semantics."
+    - "Prefill initializes base_state from the native chunk kernel and zeroes all auxiliary buffers; slot reuse must do the same before decode."
+    - "Prefill, speculative decoding, mixed prefill/decode, FP16, non-TP4 heads, duplicate slots, and unsupported shapes fail closed to the native path."
+
+dtype_policy:
+  promotion: upcast_for_accum
+  supported_combinations:
+    - inputs:
+        query: bfloat16
+        key: bfloat16
+        value: bfloat16
+        g: float32
+        beta: bfloat16
+        base_state: float32
+        k_log: bfloat16
+        u_log: float32
+        lambda_log: float32
+        cumulative_decay: float32
+        log_length: int32
+        actual_seq_lengths: int32
+        ssm_state_indices: int32
+      outputs:
+        output: bfloat16
+        base_state_out: float32
+        k_log_out: bfloat16
+        u_log_out: float32
+        lambda_log_out: float32
+        cumulative_decay_out: float32
+        log_length_out: int32
+  accumulator_dtype: float32
+
+broadcast:
+  # The fused ABI has heterogeneous state/metadata tensors and therefore no
+  # single top-level broadcast relation. Internal head expansion and scalar
+  # decay broadcasting are explicit in formula/composition.
+  kind: none
+
+math_semantics:
+  formula_kind: numpy_expr
+  formula: |
+    state_idx = np.mod(ssm_state_indices, base_state.shape[0])
+    q_heads = np.repeat(query.astype(np.float32), 3, axis=1) / np.sqrt(128.0)
+    k_heads = np.repeat(key.astype(np.float32), 3, axis=1)
+    selected_base = base_state[state_idx]
+    selected_k_log = k_log[state_idx].astype(np.float32)
+    selected_u_log = u_log[state_idx]
+    selected_lambda_log = lambda_log[state_idx]
+    selected_decay = cumulative_decay[state_idx]
+    selected_length = log_length[state_idx]
+    live_mask = np.arange(7)[np.newaxis, np.newaxis, :] < selected_length[:, np.newaxis, np.newaxis]
+    log_scale = np.exp(selected_decay[:, :, np.newaxis] - selected_lambda_log) * live_mask
+    logical_previous = np.exp(selected_decay)[:, :, np.newaxis, np.newaxis] * selected_base
+    logical_previous = logical_previous + np.einsum("thl,thlv,thlk->thvk", log_scale, selected_u_log, selected_k_log)
+    decayed_previous = np.exp(g)[:, :, np.newaxis, np.newaxis] * logical_previous
+    prediction = np.einsum("thvk,thk->thv", decayed_previous, k_heads)
+    update = beta.astype(np.float32)[:, :, np.newaxis] * (value.astype(np.float32) - prediction)
+    next_decay = selected_decay + g
+    logical_next = decayed_previous + update[:, :, :, np.newaxis] * k_heads[:, :, np.newaxis, :]
+    output = np.einsum("thvk,thk->thv", logical_next, q_heads)
+    append_mask = selected_length < 7
+    merge_mask = np.logical_not(append_mask)
+    position = np.minimum(selected_length, 6)
+    base_state_out = base_state.copy()
+    base_state_out[state_idx] = np.where(merge_mask[:, np.newaxis, np.newaxis, np.newaxis], logical_next, selected_base)
+    k_log_out = k_log.copy()
+    next_k_log = np.where(merge_mask[:, np.newaxis, np.newaxis, np.newaxis], 0.0, selected_k_log)
+    old_k_entry = next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :]
+    next_k_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :] = np.where(append_mask[:, np.newaxis, np.newaxis], k_heads, old_k_entry)
+    k_log_out[state_idx] = next_k_log
+    u_log_out = u_log.copy()
+    next_u_log = np.where(merge_mask[:, np.newaxis, np.newaxis, np.newaxis], 0.0, selected_u_log)
+    old_u_entry = next_u_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :]
+    next_u_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis], :] = np.where(append_mask[:, np.newaxis, np.newaxis], update, old_u_entry)
+    u_log_out[state_idx] = next_u_log
+    lambda_log_out = lambda_log.copy()
+    next_lambda_log = np.where(merge_mask[:, np.newaxis, np.newaxis], 0.0, selected_lambda_log)
+    old_lambda_entry = next_lambda_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis]]
+    next_lambda_log[np.arange(query.shape[0])[:, np.newaxis], np.arange(12)[np.newaxis, :], position[:, np.newaxis]] = np.where(append_mask[:, np.newaxis], next_decay, old_lambda_entry)
+    lambda_log_out[state_idx] = next_lambda_log
+    cumulative_decay_out = cumulative_decay.copy()
+    cumulative_decay_out[state_idx] = np.where(append_mask[:, np.newaxis], next_decay, 0.0)
+    log_length_out = log_length.copy()
+    log_length_out[state_idx] = np.where(append_mask, selected_length + 1, 0)
+
+  reference_oracle:
+    framework: torch
+    api: torch.qwen36_gdn_deltalog_decode
+    kwargs: {merge_interval: 8}
+    available_for_dtype: [bfloat16]
+    absent: true
+
+  invariants:
+    - name: output_shape_contract
+      kind: shape_equals_macro
+      macro: qwen36_tp4_decode_output
+      tolerance_inherit: false
+    - name: no_intermediate_leak
+      kind: no_leak_intermediates
+      tolerance_inherit: false
+
+  composition:
+    primitives:
+      - {id: p01_slot_select, op: slice, inputs: [base_state, k_log, u_log, lambda_log, cumulative_decay, log_length, ssm_state_indices], outputs: [selected_state]}
+      - {id: p02_expand_heads, op: broadcast, inputs: [query, key], outputs: [q_heads, k_heads]}
+      - {id: p03_decay_base, op: elementwise_binary, inputs: [selected_state, cumulative_decay, g], outputs: [decayed_base]}
+      - {id: p04_log_reconstruct, op: gemm, inputs: [k_log, u_log, lambda_log, cumulative_decay, log_length], outputs: [log_contribution]}
+      - {id: p05_prediction, op: gemm, inputs: [decayed_base, log_contribution, k_heads], outputs: [prediction]}
+      - {id: p06_update, op: elementwise_binary, inputs: [value, prediction, beta], outputs: [update]}
+      - {id: p07_output, op: gemm, inputs: [decayed_base, log_contribution, update, k_heads, q_heads, g], outputs: [output]}
+      - {id: p08_append_or_merge, op: elementwise_binary, inputs: [base_state, k_log, u_log, lambda_log, cumulative_decay, log_length, update, k_heads, g, ssm_state_indices], outputs: [base_state_out, k_log_out, u_log_out, lambda_log_out, cumulative_decay_out, log_length_out]}
+    dataflow:
+      intermediates: [selected_state, q_heads, k_heads, decayed_base, log_contribution, prediction, update]
+      no_leak: true
+      fusable_groups:
+        - [p01_slot_gather, p02_expand_heads, p03_decay_base, p04_log_reconstruct, p05_prediction, p06_update, p07_output, p08_append_or_merge]
+
+numerical_stability:
+  required: true
+  techniques:
+    - name: fp32_accumulation
+      applies_to: "base state, value-side update log, decay metadata, reconstruction, prediction, update, and output projection"
+      rationale: "The paper's GDN configuration keeps the dense state and U/decay logs FP32; long decode accumulation must not be silently demoted."
+      anti_pattern_id: AP-007
+    - name: bounded_log
+      applies_to: "deferred update representation"
+      rationale: "M=8 bounds the log at seven entries and periodically materializes the exact represented state."
+    - name: log_space_decay
+      applies_to: "decay composition"
+      rationale: "Cumulative log decay avoids repeatedly multiplying small decay factors before reconstruction."
+    - name: keep_intermediates_on_chip
+      applies_to: "logical-state reconstruction, delta update, output, and append/merge"
+      rationale: "Avoiding a full dense-state GM write on seven of every eight steps is the performance purpose of DeltaLog."
+      anti_pattern_id: AP-006
+  affects_invariants: false
+
+numerical_tolerance:
+  source: "DeltaLog arXiv:2608.15533v1 published GDN 128-token bounds; frozen before implementation"
+  per_dtype:
+    bfloat16: {rtol: 3.03e-3, atol: 4.0e-3, metric: max_relative}
+    # The executable 128-step gate separately measures the paper's state
+    # relative-L2 bound (7.92e-7); this registry has no relative_l2 metric.
+    float32: {rtol: 7.92e-7, atol: 1.0e-6, metric: max_relative}
+    int32: {rtol: 0.0, atol: 0.0, metric: bitwise_equal}
+
+boundary_conditions:
+  - case: "T=1 append from an empty log leaves the dense base unchanged and creates one live entry"
+    tags: [state_persists_across_calls]
+    synthesize: {query.shape: "[1, 4, 128]", log_length.pattern: all_zero}
+    machine_check: {kind: matches_invariant, name: output_shape_contract}
+  - case: "log_length=7 triggers materialization, zero live length, and zero cumulative decay"
+    tags: [state_persists_across_calls]
+    synthesize: {query.shape: "[1, 4, 128]", log_length.pattern: "all_same(7)"}
+    machine_check: {kind: matches_invariant, name: no_intermediate_leak}
+  - case: "empty T=0 is rejected; scheduler must not invoke the operator"
+    tags: [empty_tensor]
+    synthesize: {query.shape: "[0, 4, 128]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "rank-zero input is outside the fixed decode ABI"
+    tags: [rank_zero_scalar]
+    synthesize: {query.shape: "[]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "K=0 empty contraction is outside the fixed 128-wide GDN ABI"
+    tags: [k_zero_empty_inner_product]
+    synthesize: {key.shape: "[1, 4, 0]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "K dimension mismatch between normalized key and FP32 base state is rejected"
+    tags: [k_mismatch_raises]
+    synthesize: {key.shape: "[1, 4, 127]"}
+    machine_check: {kind: raises_error, error_type: shape_mismatch}
+  - case: "log_length outside 0..7 is rejected rather than clamped"
+    synthesize: {query.shape: "[1, 4, 128]", log_length.pattern: "all_same(8)"}
+    machine_check: {kind: raises_error, error_type: attribute_value_out_of_range}
+  - case: "duplicate slot indices are rejected because sequential same-slot tokens are not this ABI"
+    synthesize: {query.shape: "[2, 4, 128]", ssm_state_indices.pattern: all_zero}
+    machine_check: {kind: raises_error, error_type: attribute_value_out_of_range}
+  - case: "FP16 activation is rejected rather than silently selecting a different numerical regime"
+    synthesize: {query.shape: "[1, 4, 128]", dtype: {query: float16}}
+    machine_check: {kind: raises_error, error_type: dtype_not_supported}
+
+extreme_inputs:
+  - case: "BF16 60000 stress covers the fp16 overflow boundary; FP16 itself is rejected"
+    tags: [fp16_overflow_boundary]
+    synthesize:
+      shapes: {value: "[2, 12, 128]"}
+      patterns:
+        - {pattern: "all_same(60000.0)", target: value}
+      dtype: {value: bfloat16}
+    machine_check: {kind: matches_invariant, name: output_shape_contract}
+  - case: "all-zero normalized Q/K remains finite"
+    synthesize:
+      shapes: {query: "[2, 4, 128]", key: "[2, 4, 128]"}
+      patterns:
+        - {pattern: all_zero, target: query}
+        - {pattern: all_zero, target: key}
+    machine_check: {kind: matches_invariant, name: output_shape_contract}
+  - case: "large negative log decay remains finite and may underflow old contributions to zero"
+    synthesize:
+      shapes: {g: "[2, 12]"}
+      patterns:
+        - {pattern: "all_same(-80.0)", target: g}
+    machine_check: {kind: matches_invariant, name: output_shape_contract}
+  - case: "NaN in one active token propagates only through that token and referenced slot"
+    synthesize:
+      shapes: {query: "[2, 4, 128]"}
+      patterns:
+        - {pattern: inject_nan_one_element, target: query}
+    machine_check: {kind: produces_nan, scope: "referenced output/state slot"}
+
+determinism:
+  required: true
+  accumulation_order: sequential
+  bitwise_reproducible: false
