@@ -1,7 +1,7 @@
 # Qwen3.6 TP4 GDN decode mega-op: generation and ABI audit
 
 Date: 2026-09-20  
-Status: L0 contract prepared; no AscendC implementation, NPU numerical result, or end-to-end performance result yet.
+Status: L0 contract and native NPU golden oracle verified; no candidate AscendC implementation or end-to-end performance result yet.
 
 ## Scope and fail-closed boundary
 
@@ -118,3 +118,27 @@ The implementation cannot enter end-to-end benchmarking until a real Ascend test
 
 Only after that gate may the monkeypatch be enabled for the fixed 1024-token performance protocol.
 
+## Native reference result
+
+The first half of the numerical gate is now complete: the unmodified v0.23
+operator chain has a reproducible golden oracle on physical NPU4. The probe ran
+batch 1 and batch 16 for eight changing-index decode steps in eager and
+NPUGraph modes. All steps passed, eager and graph tensors were bitwise equal,
+unselected slots and pointers were unchanged, and the independent formulation
+matched with maximum output absolute error `9.5367431640625e-07` and maximum
+FP32 recurrent-state absolute error `1.2959353625774384e-05`.
+
+External evidence:
+
+- report:
+  `/cache/cch/qwen36-gdn-decode-megaop-20260920/native-golden-v1/report.json`
+- report SHA256:
+  `5df8a431b892cf82bc2be986cd4e6d7b62e06a69d558b86094e8c4822cddaf19`
+- probe SHA256:
+  `3d26f64a5855d1ef4c420d2c01ea2ff1da0cc3de39e234fb86c82156f390d794`
+- vLLM-Ascend `gdn.py` SHA256:
+  `d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816`
+
+This does not satisfy the candidate half of the gate. The future direct-invoke
+operator must pass the same output, complete-state, unselected-slot, pointer,
+eager, and graph checks before any timing result is admissible.

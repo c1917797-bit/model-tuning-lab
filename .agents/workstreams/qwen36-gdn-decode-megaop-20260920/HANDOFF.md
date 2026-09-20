@@ -2,7 +2,7 @@
 
 ## Status
 
-- Stage: planned.
+- Stage: native reference verified; candidate implementation not started.
 - Branch: `work/qwen36-gdn-decode-megaop-20260920`.
 - Base: portfolio synthesis checkpoint `a4a9def`.
 - Hardware lane: physical NPU4-7 only.
@@ -40,6 +40,40 @@ The first implementation checkpoint is allowed only after:
 - all manually completed L0 fields pass the 11-stage strict validator;
 - the design does not invent an unsupported CANN API or primitive.
 
+The CannBot-generated-and-audited L0 specification now exists at
+`projects/qwen36-gdn-decode-megaop/operators/qwen36_gdn_decode_megaop/spec.yaml`.
+Strict validation passes stages 1-4, 6-8, and 11. Stage 5 remains an explicit
+CannBot v1 tooling limitation because it incorrectly places heterogeneous
+activation, weight, state, and metadata inputs in one broadcast group; stages
+9-10 are skipped because no upstream single-call mega-op oracle exists.
+
+## Native golden gate
+
+The project-local probe
+`projects/qwen36-gdn-decode-megaop/tools/gdn_decode_golden_probe.py` ran once
+in the immutable v0.23.0 image on container logical NPU0 mapped only to
+physical NPU4. It exercised the current native causal-conv, gating, Q/K
+normalization, and recurrent operators for batch 1 and batch 16 over eight
+stateful steps with changing slot indices.
+
+- Result: `native_gdn_decode_golden_gate_pass`.
+- All 16 case/step combinations passed.
+- Eager and NPUGraph outputs, convolution states, and recurrent states were
+  bitwise identical at every step.
+- Unselected slots and all tracked tensor metadata/storage pointers remained
+  unchanged.
+- Maximum output absolute error versus the independent formulation was
+  `9.5367431640625e-07`.
+- Maximum FP32 recurrent-state absolute error was
+  `1.2959353625774384e-05`.
+- External report:
+  `/cache/cch/qwen36-gdn-decode-megaop-20260920/native-golden-v1/report.json`.
+- Report SHA256:
+  `5df8a431b892cf82bc2be986cd4e6d7b62e06a69d558b86094e8c4822cddaf19`.
+
+This proves the reference chain and oracle protocol, not a candidate operator
+or a performance gain.
+
 ## Fail-closed gates
 
 1. Preserve FP32 recurrent state and the actual runtime state-index semantics.
@@ -69,7 +103,8 @@ The first implementation checkpoint is allowed only after:
 
 ## Immediate next action
 
-Complete the arch22 ABI/source audit for recurrent GDN and causal conv, then
-generate the CannBot `spec.yaml` skeleton into
-`projects/qwen36-gdn-decode-megaop/operators/qwen36_gdn_decode_megaop/`.
-Do not start an NPU benchmark until the L0 spec and numerical probe are ready.
+Create the independently named direct-invoke AscendC candidate scaffold in the
+plugin project. First fuse packed-QKV rearrangement, gating, Q/K normalization,
+and recurrent update while reusing the audited recurrent algorithm; then run
+the candidate against the frozen native golden probe. Only a passing candidate
+may absorb causal conv and proceed to the `2.79680x` affected-route gate.

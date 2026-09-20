@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-gdn-decode-megaop
-status: planned
+status: baselined
 decision: pending
 hypothesis: "An exact-semantics fused GDN decode route can remove repeated packed-QKV layout traffic, static weight transpose, intermediate gating/norm launches, and recurrent handoff overhead; if the measured 14.15340% route reaches at least 2.79680x locally, a >=10% decode-phase gain is plausible."
 objective: "Deliver and validate an explicit opt-in vLLM-Ascend plugin operator for Qwen3.6-27B on Ascend, then establish whether it improves end-to-end throughput by >=10% without LongBench-v2 or GSM8K loss."
@@ -55,7 +55,17 @@ protocol:
   repetitions: 3
   command: "first: bounded NPU numerical probe; then, only if it passes, paired profiler-off service A/B with fixed output 1024"
 results:
-  baseline: {}
+  baseline:
+    native_golden_gate:
+      status: native_gdn_decode_golden_gate_pass
+      physical_device: 4
+      container_logical_device: 0
+      batches: [1, 16]
+      stateful_steps_per_batch: 8
+      eager_graph_bitwise_equal: true
+      max_output_abs_error_vs_independent_formula: 9.5367431640625e-07
+      max_fp32_state_abs_error_vs_independent_formula: 1.2959353625774384e-05
+      scope: "reference-chain numerical/state/graph oracle only; no candidate or performance claim"
   candidate: {}
   cold: {}
   steady: {}
@@ -65,8 +75,11 @@ results:
 artifacts:
   - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
     sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
+  - path: /cache/cch/qwen36-gdn-decode-megaop-20260920/native-golden-v1/report.json
+    sha256: 5df8a431b892cf82bc2be986cd4e6d7b62e06a69d558b86094e8c4822cddaf19
+    producer_sha256: 3d26f64a5855d1ef4c420d2c01ea2ff1da0cc3de39e234fb86c82156f390d794
 decision_reason: ""
-next_loop: "Complete arch22 ABI audit and CannBot L0 operator specification before implementation."
+next_loop: "Implement the independently named direct-invoke candidate for rearrange+gating+Q/K normalization+recurrent, then compare its full output and state against the frozen native golden gate before considering causal-conv fusion or performance."
 rollback:
   command: "disable the plugin opt-in and stop/remove only the owned validation container; do not touch upstream sources or NPU0-3"
   verified: false
