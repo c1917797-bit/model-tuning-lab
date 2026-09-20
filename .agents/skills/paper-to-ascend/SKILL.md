@@ -131,6 +131,21 @@ not require retraining unless retraining is explicitly in scope.
 - A transaction, cache-hit, or restore-plan event proves that control flow ran.
   It does not prove restored tensors are correct. Require exact output/state
   evidence before performance, and never relax that gate to preserve a paper.
+- For distributed model papers, separate mechanisms already provided by the
+  runtime (parameter/state/cache sharding, packed loaders, collective fusion)
+  from the paper's genuinely incremental mechanism before writing code. Existing
+  upstream features are applicability evidence, not candidate gains.
+- Do not infer a collective implementation or payload dtype from source
+  capability, configuration names, or model dtype alone. Instrument every rank
+  and record the selected class plus actual input, weight and output
+  dtype/geometry on both prefill and decode.
+- Treat an FP32-to-FP16 communication proposal as inapplicable when the live
+  production collective already consumes and emits BF16. It is then a no-op;
+  lowering below BF16 is a new quantization method with a different accuracy
+  burden, not a faithful lossless port of the paper.
+- When a predeclared applicability abort condition proves that no distinct
+  candidate remains, stop before profiling or E2E A/B. Benchmarking identical
+  paths under different labels creates noise, not evidence.
 
 ## Do not do
 

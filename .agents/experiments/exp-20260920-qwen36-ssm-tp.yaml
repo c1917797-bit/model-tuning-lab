@@ -1,14 +1,16 @@
 schema: model-tuning-experiment/v1
 id: exp-20260920-qwen36-ssm-tp
-status: planned
-decision: pending
+status: completed
+decision: rejected
 hypothesis: "After accounting for Qwen3.6 TP sharding already present in vLLM-Ascend v0.23, a lossless plugin-selected communication optimization on the real GDN output-projection path can reduce TP4 decode critical-path communication enough to improve end-to-end output throughput by at least 10%."
 objective: "Pierce arXiv:2602.21144 on Qwen3.6-27B and Ascend 910B4 within 24 hours, separating already-upstream TP mechanisms from a genuinely novel, correctness-preserving plugin candidate."
 owner: codex
 git:
   branch: work/ssm-tp-qwen36-ascend-20260920
   base_commit: 63045b5af65590ebe71396b0b94de91c5a7e035f
-  stage_commits: []
+  stage_commits:
+    - 941d48a
+    - 23214d6
 environment:
   source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; paper arXiv:2602.21144v1; no official source release located as of 2026-09-20"
   model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
@@ -60,11 +62,19 @@ results:
   boundary: {}
   lifecycle:
     source_audit: "Qwen3.6 GDN already channel-shards q/k/v/z and recurrent/conv state by TP; packed parameter loading is TP-aware; output projection is row-parallel and vLLM-Ascend exposes both ordinary AllReduce and fused MM-AllReduce paths."
+    runtime_inventory: "A four-rank TP4 probe selected MatmulAllreduceRowParallelOp for every one of 48 GDN output projections on every rank: 192 selection events total. Forty-four sampled runtime calls covered warmup, request prefill and decode on all four workers. Every input, weight and output tensor was BF16; observed input shapes were (10240,1536), (30,1536) and (1,1536), with BF16 output shapes (10240,5120), (30,5120) and (1,5120)."
+    request_canary: "One 30-token prompt with 16 generated tokens completed on the instrumented TP4 service. This request was used only to exercise prefill/decode hooks and is not performance or accuracy evidence."
+    performance: "Not run: the applicability abort condition fired before a distinct candidate existed. Benchmarking the same fused BF16 path under two labels would not be a valid baseline/candidate comparison."
+    accuracy: "Not run: no candidate changed model execution or numerics."
   resources:
     live_orientation: "2026-09-20: NPU4-7 idle at approximately 2867-2869 MiB HBM with no NPU processes; unrelated Qwen3.5 container maps only physical NPU0-3."
-artifacts: []
-decision_reason: ""
-next_loop: "Capture the real Qwen3.6 TP4 collective implementation, dtype, count and critical-path share before implementing any paper-derived change."
+    execution: "Four vLLM worker host PIDs were proven on physical NPU4,5,6,7. Probe container qwen36_ssm_tp_inventory_mmar_v1_20260920 exited 0 and was preserved; NPU4-7 returned to idle baseline."
+artifacts:
+  - path: /cache/cch/ssm-tp-qwen36-npu4-7-20260920/inventory-mmar-v1/evidence.jsonl
+    sha256: 7e45b0f74b11bf7044e3d9bb2e381dc5a1eeeb07c917ec10e3e23e8ac2344f91
+    scope: "read-only runtime selection/dtype/shape evidence; not a benchmark"
+decision_reason: "Rejected at the predeclared applicability gate. Qwen3.6/vLLM-Ascend v0.23 already provides the paper's channel-wise model/state/cache sharding and TP-aware packed loading. The live production GDN boundary selected fused MatmulAllreduceRowParallelOp on all 192 layer/rank selections, and all sampled prefill/decode payloads were already BF16. The paper's optional FP32-to-FP16 communication conversion is therefore a no-op; lowering below BF16 would violate the lossless/no-accuracy-loss boundary. No distinct plugin candidate remained, so profiling, E2E performance and task accuracy were intentionally not run."
+next_loop: "Advance the fixed queue to EPD-Serve and apply the same architecture, deployment-boundary and distinct-candidate applicability gate before consuming NPU time."
 rollback:
   command: "disable the explicit plugin switch and stop only this workstream's container/processes on physical NPU4-7"
-  verified: false
+  verified: true
