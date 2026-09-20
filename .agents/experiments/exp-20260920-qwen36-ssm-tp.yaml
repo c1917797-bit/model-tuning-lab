@@ -1,0 +1,70 @@
+schema: model-tuning-experiment/v1
+id: exp-20260920-qwen36-ssm-tp
+status: planned
+decision: pending
+hypothesis: "After accounting for Qwen3.6 TP sharding already present in vLLM-Ascend v0.23, a lossless plugin-selected communication optimization on the real GDN output-projection path can reduce TP4 decode critical-path communication enough to improve end-to-end output throughput by at least 10%."
+objective: "Pierce arXiv:2602.21144 on Qwen3.6-27B and Ascend 910B4 within 24 hours, separating already-upstream TP mechanisms from a genuinely novel, correctness-preserving plugin candidate."
+owner: codex
+git:
+  branch: work/ssm-tp-qwen36-ascend-20260920
+  base_commit: 63045b5af65590ebe71396b0b94de91c5a7e035f
+  stage_commits: []
+environment:
+  source_commit: "vllm-ascend v0.23.0@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; paper arXiv:2602.21144v1; no official source release located as of 2026-09-20"
+  model_revision: "/cache/efim/Qwen3.6-27B; config sha256 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+  tokenizer_revision: "capture before service launch"
+  dtype_or_quantization: "BF16 weights/activations; FP32 recurrent state; no quantization"
+  framework_versions:
+    vllm_ascend: "v0.23.0"
+    container_image: "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+  cann_driver_firmware:
+    status: "capture during live orientation"
+  hardware_topology:
+    product: "4x Ascend 910B4"
+    physical_devices: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology:
+    host: chicaihong01
+    plugin_delivery: "independent explicit opt-in monkeypatch; no upstream source edits"
+    port: 8228
+protocol:
+  primary_metric: "end-to-end output tokens per second versus same-stack TP4 dense control"
+  correctness_guardrails:
+    - "physical NPU4-7 and all four TP workers proven from host-side process evidence"
+    - "actual GDN output-projection implementation, collective kind, payload dtype and tensor geometry recorded from every worker"
+    - "candidate preserves finite outputs and exact greedy token IDs on repeated identical prompts"
+    - "candidate does not reduce communication precision below the baseline dtype"
+  acceptance_thresholds:
+    - "mean output throughput gain >= 10% over same-stack dense control"
+    - "TTFT and TPOT reported separately"
+    - "fixed 1024 output tokens, 40 requests, concurrency 16, three comparable repetitions per arm"
+    - "LongBench-v2 and GSM8K paired accuracy do not decrease at max_tokens=2048"
+  regression_thresholds:
+    - "any final paired task-accuracy decrease"
+    - "TPOT regression > 2% without an accepted end-to-end gain"
+  abort_conditions:
+    - "paper mechanism is already fully present and no distinct plugin candidate remains"
+    - "actual collective payload is already BF16, making the paper's FP32-to-FP16 payload conversion a no-op or a precision regression"
+    - "communication critical-path fraction is below 9.09% even under impossible total elimination, or below 18.18% for a credible 2x communication speedup"
+    - "candidate cannot be delivered as an explicit opt-in plugin without upstream edits"
+    - "real-NPU numerical or deterministic correctness failure"
+    - "24-hour paper budget exhausted"
+  warmup: "explicit service and workload warmups; profiling disabled for formal performance runs"
+  repetitions: 3
+  command: "first run a TP4 source/runtime communication inventory and bounded 30-decode-step profile; freeze the final 40x1024 command only if the applicability gate passes"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle:
+    source_audit: "Qwen3.6 GDN already channel-shards q/k/v/z and recurrent/conv state by TP; packed parameter loading is TP-aware; output projection is row-parallel and vLLM-Ascend exposes both ordinary AllReduce and fused MM-AllReduce paths."
+  resources:
+    live_orientation: "2026-09-20: NPU4-7 idle at approximately 2867-2869 MiB HBM with no NPU processes; unrelated Qwen3.5 container maps only physical NPU0-3."
+artifacts: []
+decision_reason: ""
+next_loop: "Capture the real Qwen3.6 TP4 collective implementation, dtype, count and critical-path share before implementing any paper-derived change."
+rollback:
+  command: "disable the explicit plugin switch and stop only this workstream's container/processes on physical NPU4-7"
+  verified: false

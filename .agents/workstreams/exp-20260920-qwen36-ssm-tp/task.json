@@ -1,0 +1,28 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "exp-20260920-qwen36-ssm-tp",
+  "objective": "Pierce arXiv:2602.21144 on Qwen3.6-27B and Ascend 910B4, isolating already-upstream TP sharding from a genuinely new lossless communication optimization.",
+  "targetBranch": "main",
+  "workBranch": "work/ssm-tp-qwen36-ascend-20260920",
+  "remote": "origin",
+  "originalBase": "63045b5af65590ebe71396b0b94de91c5a7e035f",
+  "createdAt": "2026-09-20",
+  "owner": "codex",
+  "dependencies": [
+    "arXiv:2602.21144v1",
+    "vllm-ascend@5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+  ],
+  "claims": [
+    {"kind": "resource", "mode": "exclusive", "value": "physical NPU4-7 while experiments run"},
+    {"kind": "port", "mode": "exclusive", "value": "127.0.0.1:8228 while service runs"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/experiments/exp-20260920-qwen36-ssm-tp.yaml"},
+    {"kind": "file", "mode": "exclusive", "value": ".agents/workstreams/exp-20260920-qwen36-ssm-tp/**"},
+    {"kind": "file", "mode": "exclusive", "value": "projects/ssm-tp-ascend/**"}
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "executionState": "planned",
+  "integrationState": "not-ready"
+}
