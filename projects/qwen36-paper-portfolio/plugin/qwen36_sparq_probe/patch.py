@@ -33,6 +33,10 @@ def register() -> None:
         return
     import torch
     import torch_npu
+    # v0.23's device_op imports ops.triton while ops.__init__ imports
+    # fused_moe.experts_selector back through DeviceOperator. During early
+    # general-plugin discovery, initialize ops first to avoid that cycle.
+    import vllm_ascend.ops
     import vllm_ascend.attention.attention_v1 as attention
 
     path = Path(attention.__file__).resolve()
