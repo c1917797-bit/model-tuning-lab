@@ -15,7 +15,7 @@ import torch_npu  # noqa: F401 - registers the NPU backend
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "plugin"))
-from qwen36_deltalog_plugin.patch import _flush_slots  # noqa: E402
+from qwen36_deltalog_plugin.patch import CAPACITY, _flush_slots  # noqa: E402
 from deltalog_candidate_npu_probe import (  # noqa: E402
     allocate_state,
     candidate_step,
@@ -58,6 +58,19 @@ def _case(batch: int, graph_mode: bool) -> dict[str, object]:
     selected64 = selected.long()
     logical_before = materialize_selected(candidate, selected64).clone()
     native_before = native.index_select(0, selected64).clone()
+    # Poison only dead lambda entries. The logical state is unchanged, but an
+    # unmasked exp(0 - stale_lambda) would overflow and then yield 0 * Inf.
+    selected_lambda = candidate["lambda_log"].index_select(0, selected64)
+    selected_length = candidate["length"].index_select(0, selected64)[:, :, 0]
+    dead = (torch.arange(CAPACITY, device="npu:0").view(1, 1, CAPACITY)
+            >= selected_length.unsqueeze(-1))
+    selected_lambda[:, :, :CAPACITY] = torch.where(
+        dead, torch.full_like(selected_lambda[:, :, :CAPACITY], -1000.0),
+        selected_lambda[:, :, :CAPACITY])
+    candidate["lambda_log"].index_copy_(0, selected64, selected_lambda)
+    dead_lambda_poisoned = int(torch.count_nonzero(dead).item())
+    if dead_lambda_poisoned == 0:
+        raise RuntimeError("bridge probe did not cover dead lambda entries")
     original = _clone_state(candidate)
     pointers = {name: tensor.untyped_storage().data_ptr()
                 for name, tensor in candidate.items()}
@@ -111,7 +124,9 @@ def _case(batch: int, graph_mode: bool) -> dict[str, object]:
               and payload_untouched
               and pointer_stable and finite)
     return {"batch": batch, "mode": "npugraph" if graph_mode else "eager",
-            "selected_slots": int(selected.numel()), "base_relative_l2": base_error,
+            "selected_slots": int(selected.numel()),
+            "dead_lambda_poisoned": dead_lambda_poisoned,
+            "base_relative_l2": base_error,
             "native_state_relative_l2": native_error,
             "next_output_normalized_error": output_error,
             "untouched_slots_bitwise": untouched, "selected_metadata_zero": metadata_zero,

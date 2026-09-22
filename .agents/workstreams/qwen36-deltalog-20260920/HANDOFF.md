@@ -207,6 +207,9 @@ unchanged selected K/U/lambda payload,
 stable pointers, and the following native decode output. The script and
 plugin passed syntax and `git diff --check`; Maintainer Skill Tree validation
 passed (20 skills).
+The next probe revision also poisons dead lambda entries with `-1000` before
+the bridge, so the new pre-exponent mask must prevent `0 * Inf -> NaN` in
+eager and graph replay. This revision is not yet NPU-validated.
 
 The first isolated probe container
 `qwen36_deltalog_mixed_selected_gate_v1` did not reach a tensor operation:
@@ -216,8 +219,11 @@ showed no NPU4-7 process and baseline HBM. Two unrelated Qwen3.5-4B
 containers (`agentgpu-910b4-qwen35-4b-aiv-v1` and
 `agentgpu-910b4-qwen35-4b-v0`) each declare physical 0-7 while `docker top`
 shows only `sleep infinity`. Their declarations may be related to the UDA
-failure, but causality is not yet proven. Because stopping either could affect
-someone's 0-3 environment, seek an exact decision before stopping them.
+failure. The host kernel log confirms `uda_occupy_dev_by_ns` conflict on
+physical device 4 during the failed probe, but does not by itself identify
+which container owns the namespace. Host Python has no torch/torch_npu, so
+there is no same-stack host-side probe shortcut. Because stopping either could
+affect someone's 0-3 environment, seek an exact decision before stopping them.
 
 Do not rerun the same container unchanged. After a resource-state change,
 re-prove NPU4-7 ownership, device mapping, and a fresh non-overwriting output
