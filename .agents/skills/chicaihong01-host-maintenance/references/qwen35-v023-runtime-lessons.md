@@ -25,6 +25,11 @@ or a claim that the final Qwen3.5 performance objective has passed.
 - Existing immutable evidence from the same image, dtype, real weights, TP
   degree, and exact shapes can close a candidate without consuming another NPU
   lease. Revalidate all identity fields before reusing it.
+- A pinned-image, network-disabled source/ABI audit can close an impossible
+  lifecycle hypothesis without allocating NPUs. For the v0.23 image, the
+  public CANN 9.1 HCCL header was sufficient to prove the supported A2 flow is
+  init, prepare, commit/wait, and finalize; preserve the image digest and exact
+  header path with that conclusion.
 - The real-client harness became a reusable success: OpenAI-compatible streaming
   requests measure request-to-first-token TTFT and first-to-last-token TPOT,
   require unique cache salts, natural EOS, zero errors, and keep raw per-request
@@ -94,6 +99,29 @@ or a claim that the final Qwen3.5 performance objective has passed.
   startup/performance were unproven. A fast partial boundary is not a release
   candidate when the task requires the complete GDN preprocessing-to-recurrent
   or projection/collective critical path.
+- Persistent cross-layer Matmul-AllReduce lifecycle reuse is closed for the
+  pinned public interface. The CANN 9.1 A2 API exposes no public reuse, reset,
+  imported-handle, or cross-invocation resume primitive. `repeat` repeats one
+  collective over continuous memory inside one lifecycle; it cannot span
+  dependent model layers with different weights and buffers. A private ABI or
+  monolithic multi-layer kernel would no longer be the requested removable
+  monkeypatch.
+- Do not confuse a large diagnostic envelope with removable latency. The
+  measured MMAR outer-minus-core envelope was about 16.016 ms/token, while the
+  required conservative admission threshold was 4.626 ms/token, but no public
+  mechanism could remove that envelope across invocations. The previously
+  tested InitV2 substitution saved only about 0.009854 ms/token in the weighted
+  exact-shape result and is terminally rejected.
+- Full-path opportunity math also closed the remaining GDN routes: the complete
+  preprocessing-to-recurrent zero-cost upper bound was about 2.796 ms/token,
+  and the terminal norm-to-MMAR envelope was about 3.108 ms/token. Both are
+  below the 4.626 ms/token admission threshold and overlap already rejected
+  fusion classes; they do not justify another NPU run unchanged.
+- Later official vLLM-Ascend release notes removed the Matmul-AllReduce and
+  Matmul-AllReduce-RMSNorm fusions after they had already been marked ready for
+  deprecation. Treat that removal as corroborating maintenance evidence, not as
+  proof that newer source is active in the frozen v0.23 image and not as a
+  local contribution.
 - Large graph-node or microbenchmark reductions must be translated into a
   conservative, non-overlapping end-to-end critical-path budget before they
   earn device time. Record which enclosing path remains untouched; otherwise a
