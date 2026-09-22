@@ -62,7 +62,15 @@
         "longbenchv2_delta_pp": -0.262467,
         "gsm8k_delta_pp": -0.151630
       },
-      "note": "Valid prior Ascend reference for a 32768-token segmented-reuse workload; not a new result and not a generic no-reuse dense gain."
+      "quality_scope": {
+        "max_out_len": 1024,
+        "thinking": false,
+        "normal_eos": true,
+        "longbenchv2_relative_loss_pct": 0.568,
+        "gsm8k_relative_loss_pct": 0.158,
+        "final_2048_quality_gate": "not established by this historical reproduction"
+      },
+      "note": "Valid prior Ascend reference for a 32768-token segmented-reuse workload; both mean task-accuracy losses are under 1 percentage point and 1% relative at the tested 1024 output cap. This is not a new result, a generic no-reuse dense gain, or a 2048-output final accuracy pass."
     },
     {
       "queue": 6,
@@ -124,7 +132,16 @@
     "name": "exact-semantics shape-filtered GDN decode mega-op",
     "delivery": "explicit opt-in fail-closed plugin monkeypatch",
     "local_speedup_gate": 2.79680,
-    "status": "feasibility-review-next",
-    "operator_generation": "not started; cannbot was not used in this synthesis stage"
+    "status": "rejected-implemented-boundary-e2e",
+    "operator_generation": "CannBot specification and plugin AscendC operator completed in the later GDN workstream",
+    "dense_output_tok_s": 125.819134,
+    "candidate_output_tok_s": 118.455179,
+    "performance_report_sha256": "0ddd8ed4973ea5ead95d488944415eba51e4ec7797bcbd7ee4cc0cc584e95954"
+  },
+  "deltalog_follow_on": {
+    "status": "rejected-v022-e2e",
+    "dense_output_tok_s": 125.819134,
+    "candidate_output_tok_s": 113.649628,
+    "performance_report_sha256": "5cb782eed695e56b27acd961690f4e446866be992f621f23d3e2487a3236e0d5"
   }
 }

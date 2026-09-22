@@ -19,6 +19,15 @@ numerical/state/graph safety gates separate, and require the candidate to
 meet the independent +10% end-to-end throughput target before spending a
 final accuracy run.
 
+The prior HYPIC three-run segmented-prefix result averaged +36.0663% output
+throughput, with LongBench-v2 -0.2625 percentage points (-0.568% relative)
+and GSM8K -0.1516 percentage points (-0.158% relative). Thus its historical
+mean quality result is within either reading of the new 1% allowance. However,
+those quality evaluations used `max_out_len=1024`; the Qwen3.6 final gate in
+the GDN workstream specifies `max_tokens=2048`. This evidence cannot be
+promoted to a 2048-output final accuracy pass, and HYPIC remains a prior
+workload-conditional success rather than a new generic decode result.
+
 ## What cannot be added
 
 - MXR and Good Enough optimize the same triangular-inversion scope.
