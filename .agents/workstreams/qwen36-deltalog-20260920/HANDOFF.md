@@ -224,6 +224,12 @@ physical device 4 during the failed probe, but does not by itself identify
 which container owns the namespace. Host Python has no torch/torch_npu, so
 there is no same-stack host-side probe shortcut. Because stopping either could
 affect someone's 0-3 environment, seek an exact decision before stopping them.
+On 2026-09-22, an exact `docker stop --time 10` request for only
+`agentgpu-910b4-qwen35-4b-v0` was rejected by the safety reviewer due to its
+external ownership and declared 0-3 mapping. No container was stopped and no
+alternative command was used. Wait for explicit approval or external release;
+do not treat the user's statement that 4-7 are computationally idle as proof
+that stopping a shared 0-7 container is authorized.
 
 Do not rerun the same container unchanged. After a resource-state change,
 re-prove NPU4-7 ownership, device mapping, and a fresh non-overwriting output
