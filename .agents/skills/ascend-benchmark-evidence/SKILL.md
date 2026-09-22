@@ -41,6 +41,17 @@ Do not compare results when material source, model, hardware, driver, firmware,
 CANN, framework, container, power mode, topology, workload, or cache state
 differs. Re-baseline instead.
 
+For resumable task-accuracy evaluations, bind every persisted response row to
+the full protocol identity: model/tokenizer and runtime revision, dataset and
+prompt/scorer hashes, sampling and thinking settings, EOS/stop behavior,
+`max_tokens`, and candidate/baseline arm. On resume, reject rows whose identity
+differs; use a fresh non-overwriting output root when any field changes. A
+command-line change alone is insufficient if the evaluator silently skips
+previously completed request IDs. Before applying a user-allowed accuracy loss,
+state whether the limit means percentage points or relative percent, compute
+both per final task, and do not reuse that task-level limit as an intermediate
+NPU tensor/state numerical tolerance.
+
 ## Review Traps
 
 - Throughput alone can hide latency or correctness regressions.
@@ -54,6 +65,8 @@ differs. Re-baseline instead.
 - Baseline and candidate environment fingerprints match.
 - Correctness gates pass before a performance win is accepted.
 - Commands, thresholds, repetitions, and exclusions are recorded.
+- A resumed run proves that every reused row has the current protocol identity;
+  changed output caps cannot inherit older responses.
 - Cold, steady, boundary, lifecycle, and resources are reported separately or
   explicitly marked out of scope.
 - Raw artifact hashes resolve and no protected data is committed.
