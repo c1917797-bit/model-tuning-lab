@@ -193,6 +193,21 @@ not require retraining unless retraining is explicitly in scope.
   mismatch as an operator failure. Preserve the original failure, rerun the
   unchanged binary once with the corrected harness, and never relax the frozen
   numerical tolerance to make replay pass.
+- Before generating a paper-specific Ascend operator, inventory the deployed
+  `vllm-ascend` call path and the pinned `CANN/ops-transformer` implementation
+  for the same mechanism. Record exact source revisions, callable ABI, supported
+  shapes/dtypes, graph behavior, and what the existing code cannot express.
+  Reuse an existing native primitive when it covers the paper's semantics;
+  add an independently named, opt-in plugin operator only for a measured
+  algorithm-specific gap. A faster standalone kernel is not a paper gain.
+- A selected-slot recurrent-state bridge can pass native-state, next-output,
+  untouched-slot, and NPUGraph checks yet fail serving performance. After a
+  direct bridge pass, prove every TP worker uses the intended mixed-batch path,
+  count materializations in the exact benchmark window, then run the frozen
+  fixed-output service screen before any final accuracy spend. In the Qwen3.6
+  DeltaLog follow-on, the v0.2.2 bridge passed all four batch-1/16 NPU modes
+  but delivered 113.650 tok/s against 125.819 tok/s dense; the adapter was
+  rejected rather than treating direct numerical success as deployment success.
 
 ## Do not do
 

@@ -2,9 +2,10 @@
 
 ## Status
 
-- Stage: v4c paper-equation implementation passed eager, synchronized NPUGraph,
-  TP4 dispatch, and fixed-output validity, but failed the end-to-end performance
-  gate; current implementation is rejected.
+- Stage: v4c paper-equation implementation failed the end-to-end performance
+  gate. The targeted v0.2.2 selected-slot mixed-batch bridge has now passed its
+  direct NPU eager/NPUGraph numerical gate and TP4 dispatch, but failed the
+  fixed-output end-to-end performance screen; this implementation is rejected.
 - Branch: `work/qwen36-deltalog-20260920`.
 - Parent checkpoint: GDN fusion no-go `69029e7`.
 - Hardware lane: physical NPU4-7 only.
@@ -242,6 +243,78 @@ not prove which remaining namespace holder is responsible. The `aiv-v1`
 container remains running with only `sleep infinity`, but stopping it requires
 its own explicit authorization. Do not rerun the unchanged canary or treat
 this infrastructure failure as DeltaLog numerical evidence.
+
+## 2026-09-22 resource recovery and selected-slot bridge result
+
+The user separately authorized stopping `agentgpu-910b4-qwen35-4b-aiv-v1`.
+Fresh `docker top`, device mapping, and NPU process checks showed only its
+`sleep infinity` process and no physical NPU4-7 compute process. It was
+stopped, not deleted, and is recoverable with
+`docker start agentgpu-910b4-qwen35-4b-aiv-v1`; Docker reported exit 137 after
+the 10-second grace period. A new nonprivileged physical-NPU4-to-logical-0
+canary `qwen36_deltalog_npu4_uda_canary_v3` passed calculation and readback.
+This is consistent with removing a UDA conflict, not proof of its internals.
+
+The first bridge attempt after recovery failed before numerical execution
+because the probe omitted the deployed vLLM-Ascend `enable_custom_op()`
+bootstrap. The corrected probe pins the deployed `gdn.py` hash, initializes
+native custom ops, and records the native recurrent operator schema. It
+reuses the existing vLLM-Ascend operator as the oracle.
+
+`/cache/cch/qwen36-deltalog-20260920/mixed-selected-gate-v3/report.json`
+passed all four physical-NPU4 cases: batch 1/16, eager and synchronized
+NPUGraph. Maximum selected-state relative-L2 versus native was
+`8.375391225256047e-08`, below the frozen `7.92e-7` bound; next native output
+normalized error was zero. Materialized selected state matched its logical
+state bitwise. Unselected slots were bitwise unchanged, selected length/decay
+were zero, selected K/U/lambda payloads were unchanged, pointers stable,
+and states finite after dead lambda entries were poisoned with `-1000`.
+Report SHA256: `f43b4c186c22d3f12bdd9bc819db7f27d4083beba4411ec8591c4e4ce1be54e2`.
+Candidate library SHA256: `a3698261d9e6de185b49aba5dd5aee1dc676cbb457e3e172aec826475bb57513`.
+
+This proves the direct bridge/graph gate, not TP4 service dispatch,
+throughput, TTFT/TPOT, or LongBench-v2/GSM8K accuracy. Next prove v0.2.2
+mixed-batch dispatch on all four TP ranks, then run one profiler-off fixed-1024
+paired screen with the same dense stack. If not plausibly on track for +10%,
+preserve an implementation-scoped no-go and move to the next paper. Before
+any new operator work, audit reusable pinned `vllm-ascend` and
+`ops-transformer` implementations; write a plugin op only for a measured
+DeltaLog-specific missing mechanism.
+
+## 2026-09-22 v0.2.2 TP4 service and performance decision
+
+The plugin v0.2.2 loaded in the API, engine, and all four workers on physical
+NPU4-7. A four-token short request returned HTTP 200. The audit identified
+candidate dispatch on worker PIDs 128-131 and mixed-batch selected-slot
+materialization. This proves actual service routing, not benefit.
+
+The one profiler-off fixed-output screen completed 40/40 requests and exactly
+40960/40960 output tokens at concurrency 16, input 32768, shared prefix 16384,
+output 1024. The previously frozen same-stack dense baseline was 125.819134
+tok/s, mean TTFT 38456.890 ms, weighted TPOT 73.628823 ms. v0.2.2 measured
+113.649628 tok/s (-9.672% vs dense), mean TTFT 157804.648 ms (+310.342%),
+weighted TPOT 98.434393 ms (+33.690%). It improves throughput only 1.090%
+versus v4c (112.424603 tok/s) and remains far from the required 138.401047
+tok/s. This is a single screening run against the frozen baseline, not a
+three-run final acceptance. The service audit recorded 7084
+`not_pure_decode` materialization events across the short request, warmups,
+and benchmark; this aggregate should not be compared naively with the old
+2130-event benchmark audit without matching event windows.
+
+Performance report:
+`/cache/cch/qwen36-deltalog-20260920/performance-screen-v022/candidate.run1.json`,
+SHA256 `5cb782eed695e56b27acd961690f4e446866be992f621f23d3e2487a3236e0d5`.
+Service audit SHA256:
+`bbb46dc8adae2bef5238558ab8d58ce2c93a8cb3a518bb9cbbced3ee5df07e3d`.
+
+Decision: reject the v0.2.2 selected-slot materialization implementation for
+this fixed concurrency-16 acceptance workload. Do not run LongBench-v2/GSM8K
+on a performance-negative candidate. A future DeltaLog revisit needs a
+distinct, measured remedy for mixed-batch state materialization, preferably
+using an existing `vllm-ascend`/`ops-transformer` primitive; only build a new
+plugin operator if the mechanism is missing. The owned v0.2.2 service was
+stopped without deletion after evidence capture; NPU release should be
+verified before the next paper.
 
 Do not rerun the same container unchanged. After a resource-state change,
 re-prove NPU4-7 ownership, device mapping, and a fresh non-overwriting output

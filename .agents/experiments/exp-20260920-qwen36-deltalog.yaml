@@ -172,11 +172,17 @@ artifacts:
   - path: /cache/cch/qwen36-deltalog-20260920/performance-screen-v1/performance.v4c.run1.json
     sha256: 1233643e7dc6695251a88ac48edd0d928f1ed17c648d108976cd8e2ba8ec3da7
     evidence_scope: "Profiler-off 40-request fixed-output-1024 service result on physical NPU4-7; 40/40 requests and 40960/40960 output tokens completed."
+  - path: /cache/cch/qwen36-deltalog-20260920/mixed-selected-gate-v3/report.json
+    sha256: f43b4c186c22d3f12bdd9bc819db7f27d4083beba4411ec8591c4e4ce1be54e2
+    evidence_scope: "Physical-NPU4 direct selected-slot bridge gate; batch 1/16 eager and synchronized NPUGraph. Not service or E2E evidence."
+  - path: /cache/cch/qwen36-deltalog-20260920/performance-screen-v022/candidate.run1.json
+    sha256: 5cb782eed695e56b27acd961690f4e446866be992f621f23d3e2487a3236e0d5
+    evidence_scope: "Profiler-off physical-NPU4-7 TP4 screening; 40/40 requests and 40960/40960 output tokens; candidate 113.649628 tok/s versus frozen dense 125.819134 tok/s."
 decision_reason: "The numerically valid v4c service delivered 112.424603 tok/s, 10.646% below the frozen dense 125.819134 tok/s; weighted TPOT regressed 35.581%. Mixed prefill/decode batches also forced 2130 per-layer/rank Python full-state materializations. The performance gate failed, so accuracy spend is not justified."
 next_loop: "Preserve this implementation-scoped no-go and move to the next ranked paper. Reopen DeltaLog only with a distinct device-side mixed-batch materialization design and a concurrency/batch regime matching a declared production workload."
 follow_on_20260922:
   user_direction: "Preserve the paper mechanism but adapt the plugin/operator for Ascend, following the HYPIC migration pattern."
-  status: "attempted; NPU numerical gate not reached"
+  status: "direct NPU and TP4 dispatch passed; v0.2.2 E2E performance rejected"
   hypothesis: "Materializing only mixed-batch decode/prefill slots without per-layer NPU-to-host active-slot discovery may remove a concrete v4c integration cost."
   candidate: "plugin v0.2.2 selected-slot mixed fallback and metadata-only reset; unchanged v4c decode library"
   correctness_gate: "physical NPU4, batch 1/16, eager and synchronized NPUGraph, full selected state and following native decode against reference; no threshold relaxation"
@@ -185,7 +191,14 @@ follow_on_20260922:
   resource_observation: "After explicit user approval, only agentgpu-910b4-qwen35-4b-v0 was stopped without deletion. The nonprivileged physical-NPU4 canary still failed at aclInit 507899; kernel again logged uda_occupy_dev_by_ns conflict for udevid=4. The second all-device sleep-only container remained running. No DeltaLog tensor test started."
   safety_review: "Initial exact docker stop of v0 was rejected because it declared NPU0-3; after explicit user approval, stop succeeded. Do not infer permission to stop agentgpu-910b4-qwen35-4b-aiv-v1."
   canary_container: "qwen36_deltalog_npu4_uda_canary_v2, exited 1; preserved logs; no result directory"
-  next_action: "Await exact authorization or owner release for the remaining all-device container; then re-prove physical NPU4 and run one new non-overwriting bridge gate. Do not repeat the unchanged failed canary."
+  recovery_update: "The user separately authorized stopping only agentgpu-910b4-qwen35-4b-aiv-v1. It was stopped, not deleted, after fresh sleep-only and NPU-idle checks. New nonprivileged physical-NPU4 canary v3 passed torch tensor computation/readback."
+  bootstrap_failure: "mixed-selected-gate-v2 failed before numerical execution because its script omitted deployed vLLM-Ascend enable_custom_op; corrected probe reuses native _C_ascend recurrence as oracle."
+  bridge_gate: "mixed-selected-gate-v3 passed batch 1/16 eager/NPUGraph; native state relative-L2 max 8.375391225256047e-08, following output error 0, untouched slots and pointers stable, finite with dead lambda poisoned -1000."
+  service_gate: "Physical NPU4-7 TP4; plugin 0.2.2 candidate dispatch on worker PIDs 128-131 and selected-slot mixed-batch materialization confirmed; short request HTTP 200."
+  performance_screen: "40/40 requests and 40960/40960 output tokens; 113.649628 tok/s, mean TTFT 157804.648 ms, weighted TPOT 98.434393 ms; -9.672% throughput versus frozen same-stack dense and +1.090% versus v4c. Single screen, not three-run acceptance."
+  service_audit_sha256: bbb46dc8adae2bef5238558ab8d58ce2c93a8cb3a518bb9cbbced3ee5df07e3d
+  decision: "Reject v0.2.2 selected-slot materialization implementation at concurrency 16; do not spend final accuracy test. Future revisit only with a measured missing mechanism and prior audit of reusable vllm-ascend/ops-transformer code."
+  next_action: "Verify owned service released physical NPU4-7, preserve evidence and move to next ranked paper rather than rerunning unchanged DeltaLog."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
   verified: true

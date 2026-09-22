@@ -100,6 +100,7 @@ skills:
       - 把论文方法落到 Ascend
       - validate stateful cache or replay correctness
       - debug AscendC state metadata corruption
+      - reuse vllm-ascend or ops-transformer operators before custom Ascend kernels
     scope:
       - AGENTS.md
       - docs/**

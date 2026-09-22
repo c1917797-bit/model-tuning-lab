@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "plugin"))
 from qwen36_deltalog_plugin.patch import CAPACITY, _flush_slots  # noqa: E402
 from deltalog_candidate_npu_probe import (  # noqa: E402
+    ASCEND_GDN_SHA256,
     allocate_state,
     candidate_step,
     make_inputs,
@@ -143,12 +144,24 @@ def main() -> None:
     if args.output_dir.exists():
         raise FileExistsError(args.output_dir)
     library = args.library.resolve(strict=True)
+    source = Path("/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py")
+    if not source.is_file() or hashlib.sha256(source.read_bytes()).hexdigest() != ASCEND_GDN_SHA256:
+        raise RuntimeError("vLLM-Ascend source identity changed")
+    from vllm_ascend.ops.triton.triton_utils import init_device_properties_triton
+    from vllm_ascend.utils import enable_custom_op
+    torch_npu.npu.set_compile_mode(jit_compile=False)
+    if not enable_custom_op():
+        raise RuntimeError("native Ascend custom operators unavailable")
+    torch.npu.set_device(0)
+    init_device_properties_triton()
+    native_schema = str(torch.ops._C_ascend.npu_recurrent_gated_delta_rule.default._schema)
     torch.ops.load_library(str(library))
     cases = [_case(batch, graph_mode) for graph_mode in (False, True)
              for batch in (1, 16)]
     report = {"schema": "qwen36-deltalog-mixed-fallback-gate/v1",
               "library": str(library),
               "library_sha256": hashlib.sha256(library.read_bytes()).hexdigest(),
+              "native_schema": native_schema,
               "device": "container npu:0; physical mapping must be proven externally",
               "cases": cases, "passed": all(case["passed"] for case in cases)}
     args.output_dir.mkdir(parents=True, exist_ok=False)
