@@ -89,7 +89,10 @@ def _case(batch: int, graph_mode: bool) -> dict[str, object]:
     untouched = bool(all(torch.equal(candidate[name][~chosen], original[name][~chosen])
                          for name in candidate))
     metadata_zero = bool(all(torch.count_nonzero(candidate[name].index_select(0, selected64)) == 0
-                             for name in ("k_log", "u_log", "lambda_log", "decay", "length")))
+                             for name in ("decay", "length")))
+    payload_untouched = bool(all(torch.equal(candidate[name].index_select(0, selected64),
+                                            original[name].index_select(0, selected64))
+                                 for name in ("k_log", "u_log", "lambda_log")))
     pointer_stable = pointers == {name: tensor.untyped_storage().data_ptr()
                                   for name, tensor in candidate.items()}
     finite = bool(torch.isfinite(candidate["base"]).all())
@@ -105,12 +108,14 @@ def _case(batch: int, graph_mode: bool) -> dict[str, object]:
     output_error = normalized_max_error(actual, expected)
     passed = (base_error <= 1e-7 and native_error <= STATE_LIMIT
               and output_error <= OUTPUT_LIMIT and untouched and metadata_zero
+              and payload_untouched
               and pointer_stable and finite)
     return {"batch": batch, "mode": "npugraph" if graph_mode else "eager",
             "selected_slots": int(selected.numel()), "base_relative_l2": base_error,
             "native_state_relative_l2": native_error,
             "next_output_normalized_error": output_error,
-            "untouched_slots_bitwise": untouched, "selected_aux_zero": metadata_zero,
+            "untouched_slots_bitwise": untouched, "selected_metadata_zero": metadata_zero,
+            "selected_payload_unchanged": payload_untouched,
             "storage_pointers_stable": pointer_stable, "finite": finite,
             "passed": passed}
 

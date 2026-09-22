@@ -178,7 +178,7 @@ follow_on_20260922:
   user_direction: "Preserve the paper mechanism but adapt the plugin/operator for Ascend, following the HYPIC migration pattern."
   status: "attempted; NPU numerical gate not reached"
   hypothesis: "Materializing only mixed-batch decode/prefill slots without per-layer NPU-to-host active-slot discovery may remove a concrete v4c integration cost."
-  candidate: "plugin v0.2.1 selected-slot mixed fallback; unchanged v4c decode library"
+  candidate: "plugin v0.2.2 selected-slot mixed fallback and metadata-only reset; unchanged v4c decode library"
   correctness_gate: "physical NPU4, batch 1/16, eager and synchronized NPUGraph, full selected state and following native decode against reference; no threshold relaxation"
   performance_gate: "only after correctness, profile-disabled paired dense/candidate 32768-input/1024-output, 40 requests, concurrency 16, TTFT and TPOT"
   first_probe: "container qwen36_deltalog_mixed_selected_gate_v1 failed in aclInit with 507899 Resource_Busy; no numerical result or output report"

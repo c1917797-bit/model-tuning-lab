@@ -192,9 +192,18 @@ mixed path. The native mixed core remains unchanged, and pure decode retains
 the previously validated DeltaLog operator. This is an implementation
 hypothesis, not a correctness or speed result.
 
+The subsequent v0.2.2 preparatory change leaves K/U/λ payloads untouched
+after materialization and clears only length/decay metadata, because zero
+length makes the old payload invisible and the next append overwrites its
+entry before use. A dead-entry exponent is masked before `exp` so stale
+lambda values cannot create `0 * Inf -> NaN`. The bridge probe checks the
+metadata/payload invariant explicitly.
+Neither v0.2.1 nor v0.2.2 has a passing NPU bridge gate.
+
 The new `deltalog_mixed_fallback_npu_probe.py` checks the bridge on physical
 NPU4, batch 1/16, eager and synchronized NPUGraph, selected state against the
-logical/native reference, untouched slots, zeroed selected auxiliary state,
+logical/native reference, untouched slots, zeroed selected length/decay,
+unchanged selected K/U/lambda payload,
 stable pointers, and the following native decode output. The script and
 plugin passed syntax and `git diff --check`; Maintainer Skill Tree validation
 passed (20 skills).

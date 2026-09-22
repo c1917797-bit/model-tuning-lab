@@ -13,7 +13,7 @@ from typing import Any
 
 
 LOGGER = logging.getLogger(__name__)
-PATCH_VERSION = "0.2.1"
+PATCH_VERSION = "0.2.2"
 ENABLE_ENV = "QWEN36_DELTALOG_ENABLE"
 LIBRARY_ENV = "QWEN36_DELTALOG_LIBRARY"
 AUDIT_ENV = "QWEN36_DELTALOG_AUDIT"
@@ -169,14 +169,21 @@ def _flush_slots(
         .view(1, 1, CAPACITY)
         < length.unsqueeze(-1)
     )
-    coeff = torch.exp(decay.unsqueeze(-1) - lambda_log) * live.float()
+    # Dead entries retain stale payload after a selected-slot flush. Mask the
+    # exponent *before* exp: multiplying an overflowed exp by zero is NaN.
+    safe_lambda = torch.where(live, lambda_log, decay.unsqueeze(-1))
+    coeff = torch.exp(decay.unsqueeze(-1) - safe_lambda) * live.float()
     contribution = torch.einsum("shl,shlv,shlk->shvk", coeff, u_log, k_log)
     logical = (
         torch.exp(decay).unsqueeze(-1).unsqueeze(-1) * selected_base
         + contribution
     )
     base.index_copy_(0, selected, logical)
-    _reset_selected(aux, selected)
+    # A zero length makes K/U/lambda payloads invisible. Clearing those large
+    # tensors on every mixed batch would undo the deferred-write saving; the
+    # next append overwrites entry zero before it becomes live again.
+    aux["decay"].index_fill_(0, selected, 0)
+    aux["length"].index_fill_(0, selected, 0)
     _audit(
         "aux_materialized_for_fallback",
         prefix=getattr(self, "prefix", None),
