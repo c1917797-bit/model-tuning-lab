@@ -25,12 +25,14 @@ or a claim that the final Qwen3.5 performance objective has passed.
 - Existing immutable evidence from the same image, dtype, real weights, TP
   degree, and exact shapes can close a candidate without consuming another NPU
   lease. Revalidate all identity fields before reusing it.
-- Retained raw profiles can also close ambiguity in source-level shapes. In the
-  four-rank decode capture, every rank contained 5,040 exact
-  `1x5120 @ 4120x5120` GDN input-projection calls: 105 decode steps times 48
-  GDN layers. Treat 4,120 as the mathematical projection width. A locally
-  padded 4,128-wide buffer is an implementation detail and must not silently
-  replace the model shape in opportunity accounting or correctness oracles.
+- Retained raw profiles can close source-level shape ambiguity only after the
+  service identity is proven. The official Control four-rank capture has
+  5,040 exact `1x5120 @ 4096x5120` QKVZ calls and 5,040 separate
+  `1x5120 @ 24x5120` BA calls per rank. T34 instead has 5,040
+  `1x5120 @ 4120x5120` calls because its six-way GDN projection monkeypatch
+  was active in all TP workers. A padded 4,128-wide buffer is a third,
+  implementation-only shape. Do not transfer timing or correctness claims
+  between these three identities.
 - A pinned-image, network-disabled source/ABI audit can close an impossible
   lifecycle hypothesis without allocating NPUs. For the v0.23 image, the
   public CANN 9.1 HCCL header was sufficient to prove the supported A2 flow is
@@ -112,17 +114,20 @@ or a claim that the final Qwen3.5 performance objective has passed.
   dependent model layers with different weights and buffers. A private ABI or
   monolithic multi-layer kernel would no longer be the requested removable
   monkeypatch.
-- Do not confuse a large diagnostic envelope with removable latency. The
-  measured MMAR outer-minus-core envelope was about 16.016 ms/token, while the
+- Do not confuse a large diagnostic envelope with removable latency. The T34
+  rejected-treatment MMAR outer-minus-core envelope was about 16.016 ms/token, while the
   required conservative admission threshold was 4.626 ms/token, but no public
   mechanism could remove that envelope across invocations. The previously
   tested InitV2 substitution saved only about 0.009854 ms/token in the weighted
   exact-shape result and is terminally rejected.
-- Full-path opportunity math also closed the remaining GDN routes: the complete
-  preprocessing-to-recurrent zero-cost upper bound was about 2.796 ms/token,
-  and the terminal norm-to-MMAR envelope was about 3.108 ms/token. Both are
-  below the 4.626 ms/token admission threshold and overlap already rejected
-  fusion classes; they do not justify another NPU run unchanged.
+- Partial-path opportunity math closed the old GDN routes: the T34
+  preprocessing-to-recurrent zero-cost upper bound was about 2.796 ms/token
+  and its terminal norm-to-MMAR envelope was about 3.108 ms/token. Both are
+  below the 4.626 ms/token admission threshold. A separate official-Control
+  full block profile pairs QKVZ, BA, conv, gating, both L2 norms, recurrent,
+  output norm, and MMAR for all 5,040 calls per rank; its zero-cost ceiling is
+  9.804 ms/token. That only permits source-design investigation. It does not
+  revive the rejected six-way fusion or prove any implementable saving.
 - Later official vLLM-Ascend release notes removed the Matmul-AllReduce and
   Matmul-AllReduce-RMSNorm fusions after they had already been marked ready for
   deprecation. Treat that removal as corroborating maintenance evidence, not as
@@ -185,6 +190,13 @@ or a claim that the final Qwen3.5 performance objective has passed.
   collective in the same bounded stream interval, with every expected
   layer-step call accounted for. Missing stages or unmatched calls make the
   budget inconclusive, not admissible.
+- An analyzer must also bind the profile to the exact service treatment.
+  Check the variant manifest, patch hash, worker activation log, and
+  projection shapes before admitting a profile. T34 was labeled
+  `candidate-fused-prefill` but also activated six-way projection; treating
+  its 4,120-wide path as official Control would have produced a false
+  candidate admission. Require separate 4,096-wide QKVZ and 24-wide BA
+  calls for the pinned official Control profile.
 - Keep three quantities separate in every admission report: the observed
   end-to-end TPOT gap, the required conservative admission floor, and the
   removable implementation budget. A zero-cost whole-envelope ceiling may
