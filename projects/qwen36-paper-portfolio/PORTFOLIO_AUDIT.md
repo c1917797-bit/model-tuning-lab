@@ -28,6 +28,17 @@ the GDN workstream specifies `max_tokens=2048`. This evidence cannot be
 promoted to a 2048-output final accuracy pass, and HYPIC remains a prior
 workload-conditional success rather than a new generic decode result.
 
+The historical HYPIC controller
+`resume_hypic_historical_reproduction.sh` hard-codes `--max-out-len 1024`
+for quality evaluation. Its `hypic_quality_eval.py` resumes successful rows
+from an existing result path without checking that each row used the current
+`max_out_len` or prompt/runtime identity. A 2048-output final run therefore
+requires a new non-overwriting output root, an explicit 2048 protocol identity
+in its manifest, and a preflight that rejects any stale result rows. Reusing
+the historical directory or only changing the command-line cap could silently
+mix 1024- and 2048-token responses. This was a source-level preflight finding;
+no new NPU accuracy test was launched.
+
 ## HYPIC portability audit (source-level, not a new hardware result)
 
 The historical Qwen3.6 reproduction pins `hypic_vllm_ascend` commit
