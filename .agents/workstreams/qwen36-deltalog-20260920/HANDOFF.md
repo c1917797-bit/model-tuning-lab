@@ -231,6 +231,18 @@ alternative command was used. Wait for explicit approval or external release;
 do not treat the user's statement that 4-7 are computationally idle as proof
 that stopping a shared 0-7 container is authorized.
 
+The user subsequently gave exact approval for `v0`. Fresh checks showed only
+`sleep infinity`, and only that container was stopped without deletion. It
+exited 137 after Docker's 10-second stop grace. The new nonprivileged canary
+`qwen36_deltalog_npu4_uda_canary_v2` mapped only physical 4 to logical 0 and
+still failed at `aclInit` 507899 before any candidate tensor operation; the
+kernel again logged `uda_occupy_dev_by_ns` conflict for `udevid=4`. Preserve
+the exited canary and logs. This rules out `v0` as the sole blocker; it does
+not prove which remaining namespace holder is responsible. The `aiv-v1`
+container remains running with only `sleep infinity`, but stopping it requires
+its own explicit authorization. Do not rerun the unchanged canary or treat
+this infrastructure failure as DeltaLog numerical evidence.
+
 Do not rerun the same container unchanged. After a resource-state change,
 re-prove NPU4-7 ownership, device mapping, and a fresh non-overwriting output
 directory; then run one bridge gate. If eager/graph correctness passes, measure

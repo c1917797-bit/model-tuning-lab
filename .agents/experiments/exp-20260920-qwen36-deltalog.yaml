@@ -182,9 +182,10 @@ follow_on_20260922:
   correctness_gate: "physical NPU4, batch 1/16, eager and synchronized NPUGraph, full selected state and following native decode against reference; no threshold relaxation"
   performance_gate: "only after correctness, profile-disabled paired dense/candidate 32768-input/1024-output, 40 requests, concurrency 16, TTFT and TPOT"
   first_probe: "container qwen36_deltalog_mixed_selected_gate_v1 failed in aclInit with 507899 Resource_Busy; no numerical result or output report"
-  resource_observation: "physical NPU4-7 showed no NPU process and baseline HBM; kernel logged uda_occupy_dev_by_ns conflict on physical 4 during aclInit; two sleep-only external containers declare 0-7; neither has been stopped"
-  safety_review: "Exact docker stop of agentgpu-910b4-qwen35-4b-v0 was rejected because it belongs to an external environment and declares NPU0-3 as well; no workaround attempted. Await exact user approval."
-  next_action: "After exact approval or external release and fresh isolation checks, run one non-overwriting NPU bridge gate; do not rerun unchanged failure."
+  resource_observation: "After explicit user approval, only agentgpu-910b4-qwen35-4b-v0 was stopped without deletion. The nonprivileged physical-NPU4 canary still failed at aclInit 507899; kernel again logged uda_occupy_dev_by_ns conflict for udevid=4. The second all-device sleep-only container remained running. No DeltaLog tensor test started."
+  safety_review: "Initial exact docker stop of v0 was rejected because it declared NPU0-3; after explicit user approval, stop succeeded. Do not infer permission to stop agentgpu-910b4-qwen35-4b-aiv-v1."
+  canary_container: "qwen36_deltalog_npu4_uda_canary_v2, exited 1; preserved logs; no result directory"
+  next_action: "Await exact authorization or owner release for the remaining all-device container; then re-prove physical NPU4 and run one new non-overwriting bridge gate. Do not repeat the unchanged failed canary."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
   verified: true
