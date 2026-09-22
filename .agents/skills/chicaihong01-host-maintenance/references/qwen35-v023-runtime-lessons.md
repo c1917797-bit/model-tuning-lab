@@ -94,6 +94,11 @@ or a claim that the final Qwen3.5 performance objective has passed.
   startup/performance were unproven. A fast partial boundary is not a release
   candidate when the task requires the complete GDN preprocessing-to-recurrent
   or projection/collective critical path.
+- Large graph-node or microbenchmark reductions must be translated into a
+  conservative, non-overlapping end-to-end critical-path budget before they
+  earn device time. Record which enclosing path remains untouched; otherwise a
+  partial fusion can look larger than the maximum service-level gain it can
+  actually deliver.
 
 ## Trust and quality gates
 
@@ -137,6 +142,11 @@ or a claim that the final Qwen3.5 performance objective has passed.
   checkpoint. Keep upstream wins, packaging repairs, harness improvements, and
   local microbench wins in their correct evidence categories; none alone is a
   validated release candidate.
+- Candidate manifests and executable contract tests are one state machine.
+  When a candidate moves from `pending` to terminal `rejected`, update the
+  tests to require the rejection reason, missing gates, and concrete reopening
+  premise. Never leave a test that treats `pending` as the only legal state or
+  silently accepts both states without checking their different obligations.
 - Once a candidate passes the offline budget, use the fixed order: exact
   layer/state oracle, sensitive semantics, c1 fail-fast, complete repeated
   performance matrix, then three paired GSM8K rounds. Only the all-green result
