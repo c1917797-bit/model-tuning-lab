@@ -7,6 +7,18 @@ reference for segmented prefix reuse; it is not a new result from this
 workstream. Every other queue entry has a scoped evidence-backed no-go or
 inapplicability decision under the current Qwen3.6/v0.23/910B/plugin contract.
 
+## Final acceptance boundary
+
+The user now permits up to 1% end-to-end task-accuracy loss. Apply this to the
+final, matched LongBench-v2 and GSM8K evaluations, not to a single operator
+output, state element, or intermediate tensor. Report both percentage-point
+and relative-percent deltas against the same-stack dense control; the user's
+choice between these two interpretations of "1%" is pending. Until resolved,
+do not declare a candidate accepted on accuracy alone. Keep the NPU
+numerical/state/graph safety gates separate, and require the candidate to
+meet the independent +10% end-to-end throughput target before spending a
+final accuracy run.
+
 ## What cannot be added
 
 - MXR and Good Enough optimize the same triangular-inversion scope.
@@ -56,7 +68,24 @@ Evidence:
 - SHA256 `7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81`
 - export receipt SHA256 `87f13d128d8479b765bf97967e714718597411f835174ee4a91bdbab67a47103`
 
-## Next bounded self-evolution loop
+## Historical proposed self-evolution loop and closure
+
+The paragraph below is the historical proposal at portfolio close, not an
+unstarted action. The exact-semantics GDN decode mega-op was subsequently
+built, passed real-NPU state/graph checks, and failed its fixed-output E2E
+screen (118.455179 vs 125.819134 tok/s dense). DeltaLog v4c also passed
+NPU/service gates but measured 112.424603 tok/s. Its targeted v0.2.2
+selected-slot mixed-batch bridge then passed batch-1/16 eager/NPUGraph and
+TP4 dispatch, yet measured 113.649628 tok/s on the same fixed-output screen.
+The latter report is
+`/cache/cch/qwen36-deltalog-20260920/performance-screen-v022/candidate.run1.json`
+(SHA256 `5cb782eed695e56b27acd961690f4e446866be992f621f23d3e2487a3236e0d5`).
+Neither implementation approaches the +10% gate; final accuracy was correctly
+deferred. The fixed ten-paper queue is exhausted. HYPIC's prior +36.07%
+result applies to the declared segmented shared-prefix workload and must not
+be generalized to no-reuse traffic. Select any subsequent paper or cross-paper
+loop only after a new workload/mechanism fit and measured opportunity gate;
+first audit reusable deployed `vllm-ascend` and `ops-transformer` code.
 
 Prototype an exact-semantics, explicit opt-in GDN decode mega-op through a
 plugin monkeypatch. Before implementation, review the live `cannbot-skills`
