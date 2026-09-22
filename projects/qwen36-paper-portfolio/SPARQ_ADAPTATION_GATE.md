@@ -54,13 +54,26 @@ installed availability, paged-KV adaptation and graph compatibility remain
 unproven. Reuse an existing native primitive only after its exact ABI is
 verified.
 
+The model file is actually `/cache/efim/Qwen3.6-27B/config.json`
+(SHA256 `69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c`),
+not the originally guessed `/cache/austinov/Qwen3.6-27B` path. It declares
+`Qwen3_5ForConditionalGeneration` despite the serving directory's Qwen3.6
+name, 24 Q heads, 4 KV heads, D=256, and 16 full-attention layers among 64.
+The measured TP4 trace has six local Q heads, so this configuration has one
+local KV head per worker. This removes the per-head block-table-union issue
+for **this TP4 configuration only**; it does not establish portability to
+other TP degrees or model shapes. Verify the deployed module and exact model
+identity again before loading.
+
 The frozen v0.23 Hamming route is a separate possible integration seam:
 `get_kvcomp_decode_params` substitutes a request-level block table and
 effective sequence lengths before `FusedInferAttentionScore`. SparQ's GQA
 recipe instead sums query magnitudes and approximate scores within each KV
-head group before choosing per-KV-head support. A single request-level table
-would need a union of those supports and may erase the expected sparsity.
-Quantify this union and selector cost before building a service adapter.
+head group before choosing per-KV-head support. With one local KV head on the
+current TP4 workers, one request-level table can represent that support.
+For environments with more than one local KV head, a table union may erase
+sparsity; gate those environments separately. Quantify selector cost and
+page-level support quality before building a service adapter.
 
 ## First adaptation and falsification order
 

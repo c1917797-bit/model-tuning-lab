@@ -19,8 +19,10 @@ git:
   stage_commits: []
 environment:
   source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
-  model_revision: /cache/austinov/Qwen3.6-27B (verify immutable identity before load)
-  tokenizer_revision: verify before load
+  model_revision: /cache/efim/Qwen3.6-27B
+  model_config_sha256: 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c
+  tokenizer_revision: /cache/efim/Qwen3.6-27B/tokenizer_config.json
+  tokenizer_config_sha256: 5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b
   dtype_or_quantization: BF16 dense
   framework_versions:
     vllm_ascend: v0.23.0 (verify deployed module hash)
@@ -34,6 +36,7 @@ protocol:
   correctness_guardrails:
     - Match the author SparQ reference top-r/top-k selection on identical small tensors before adapting to page selection.
     - On physical NPU4, verify selected page indices and table invariants, eager and NPUGraph replay, batch 1 and 16, with changing slots and lengths.
+    - Assert one local KV head per TP4 worker; if a different TP/version has multiple local KV heads, use explicit capability fallback or a per-head sparse interface, not an unmeasured union assumption.
     - Reject non-finite outputs, invalid page indices, state corruption, or nondeterministic identical replays.
     - Compare sparse attention output with a reference over precisely the selected KV support; freeze numerical tolerance against the native BF16 reference before evaluating the candidate.
     - Prove all four TP workers dispatch the opt-in candidate before an end-to-end claim.
