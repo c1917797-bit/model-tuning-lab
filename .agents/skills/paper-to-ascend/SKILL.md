@@ -208,6 +208,14 @@ not require retraining unless retraining is explicitly in scope.
   DeltaLog follow-on, the v0.2.2 bridge passed all four batch-1/16 NPU modes
   but delivered 113.650 tok/s against 125.819 tok/s dense; the adapter was
   rejected rather than treating direct numerical success as deployment success.
+- For page-selective attention adaptations, separate the attention mask mode
+  from block-table selection. On the tested CANN 9.1 native FIA, a mask-free
+  single-token decode call with `sparseMode=3` fails tiling; use `sparseMode=0`
+  when the selected table already contains only past KV entries. Preserve the
+  failed call and test changed tables under eager and NPUGraph against exact
+  attention on the selected support. This proves only the storage/ABI seam;
+  paper selector fidelity, service dispatch and end-to-end benefit are separate
+  gates, and other CANN versions must revalidate the ABI.
 
 ## Do not do
 

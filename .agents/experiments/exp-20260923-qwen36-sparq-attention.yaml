@@ -59,7 +59,13 @@ results:
   candidate: {}
   cold: {}
   steady: {}
-  boundary: {}
+  boundary:
+    selected_page_native_abi:
+      result: pass
+      scope: physical NPU4 only; batch 1/16; two selected-page patterns; eager and NPUGraph replay
+      max_abs_vs_selected_support_reference: 0.001910031
+      bitwise_identical_repeat_replay: true
+      not_proven: SparQ selector fidelity, TP4 service dispatch, throughput, task accuracy
   lifecycle: {}
   resources: {}
 artifacts:
@@ -69,11 +75,15 @@ artifacts:
   - path: /cache/cch/sparq-page-abi-20260923-v1/result.json
     sha256: e4ab461749d581aae36cd80f8ad420938ad8a5f2930156b809d532e7ba76cb8e
     scope: failed native ABI probe; no mask with sparseMode 3 rejected by CANN 9.1
+  - path: /cache/cch/sparq-page-abi-20260923-v2/result.json
+    sha256: 12920016294cdecd888037c50921e5c10ebdf18f573f7dec0a8fa4f1fd6f0203
+    scope: selected-page native FIA eager/graph numerical ABI pass on physical NPU4
 decision_reason: ""
 next_loop: >-
-  Run exactly one new-directory v2 native selected-page ABI probe with
-  sparseMode 0 for mask-free single-token decode. Preserve the v1 failure.
-  Numerical and graph gates precede any service performance screen.
+  Implement paper-faithful GQA top-r/top-k selector and separately labelled
+  page-level support adaptation. Check selected support and output against
+  frozen reference on NPU, then graph/slot lifecycle and TP4 service dispatch.
+  Only then perform a profiler-off same-stack dense E2E screen.
 rollback:
   command: disable plugin opt-in and stop only the owned candidate service
   verified: false

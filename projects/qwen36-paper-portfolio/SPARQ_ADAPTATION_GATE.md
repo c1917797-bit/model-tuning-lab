@@ -101,6 +101,15 @@ SparQ numerical or performance result. The immutable result is
 `e4ab461749d581aae36cd80f8ad420938ad8a5f2930156b809d532e7ba76cb8e`).
 The next run changes only that parameter and writes a new v2 directory.
 
+The v2 probe passed on physical NPU4 with native FIA for batch 1 and 16,
+two changed page tables, eager and NPUGraph replay. The maximum absolute
+error against full-precision attention over exactly the selected support was
+0.001910031; repeated identical graph replay was bitwise stable. Result:
+`/cache/cch/sparq-page-abi-20260923-v2/result.json` (SHA256
+`12920016294cdecd888037c50921e5c10ebdf18f573f7dec0a8fa4f1fd6f0203`).
+This does **not** validate SparQ's top-r/top-k selector, task accuracy, TP4
+service dispatch, or throughput. Those remain the next gates.
+
 The next attention candidate is Self-Indexing Attention
 (https://arxiv.org/abs/2609.13205), which reports Qwen3.6 hybrid-model
 results and is training-free, but no author repository was located during
