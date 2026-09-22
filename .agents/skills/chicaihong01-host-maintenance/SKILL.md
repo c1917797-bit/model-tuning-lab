@@ -41,8 +41,12 @@ arguments. A clone intentionally does not contain the credential.
 3. Call AWMCP topology `tree` with merged scope and select the exact
    `chicaihong01/ma` node.
 4. Resolve its current concrete peer ID. Never hardcode a peer ID from an older
-   session.
-5. Load the AWMCP `host-development` skill contract before its first action.
+   session or infer the node role from a familiar peer prefix. A previously
+   valid peer can remain reachable after it has moved from `ma` to `mc`.
+5. Load the AWMCP `host-development` skill contract before its first action and
+   again before every remote mutation. After a timeout, routing error, or long
+   pause, refresh topology and re-prove that the peer still owns
+   `chicaihong01/ma` before continuing.
 6. Run `a_status` against the resolved peer.
 7. Accept the target only when the response identifies the intended peer and
    `routeDecision` is `peer_direct` or `upstream_local_peer`.
@@ -80,6 +84,11 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 
 - Re-prove physical NPU/process/container ownership in the same session as each
   action. HTTP health or container existence alone is insufficient.
+- Resolve physical devices from Docker `HostConfig.Devices.PathOnHost`, then
+  cross-check physical `npu-smi` process/memory state and the collaboration
+  lock. Container-local `ASCEND_RT_VISIBLE_DEVICES=0,1,2,3` and logical NPU
+  numbers do not prove that physical NPU0-3 are occupied; they can represent
+  physical NPU4-7 after remapping.
 - Report container device declarations together with container state. By
   default, running containers and live processes are active occupancy claims;
   exited containers are historical provenance that still requires owner and
@@ -129,5 +138,7 @@ the workstream upstream. Serialized integration alone updates `main`.
 
 Preserve exact AWMCP errors. Refresh topology after routing drift and retry only
 when the response marks the failure retryable. A control-plane timeout is not
-proof of host, command, container, or NPU failure; do not mutate the machine to
-compensate for an unproven diagnosis.
+proof of host, command, container, or NPU failure and can occur after a command
+has already produced partial side effects. Before retrying, inspect the exact
+branch, worktree, container, process, or file target idempotently. Do not mutate
+the machine to compensate for an unproven diagnosis.

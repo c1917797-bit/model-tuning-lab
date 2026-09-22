@@ -2,9 +2,9 @@
 
 Read this reference when maintaining Qwen3.x BF16 serving work that uses the
 official vLLM-Ascend v0.23 runtime family. The evidence was distilled from the
-`work/qwen35-performance-delivery` T20-T24 records on 2026-09-11. It is a
-closed-route and decision guide, not a live resource snapshot or a claim that
-the final Qwen3.5 performance objective has passed.
+`work/qwen35-performance-delivery` records through the 2026-09-22 delivery
+campaign. It is a closed-route and decision guide, not a live resource snapshot
+or a claim that the final Qwen3.5 performance objective has passed.
 
 ## What worked
 
@@ -25,6 +25,18 @@ the final Qwen3.5 performance objective has passed.
 - Existing immutable evidence from the same image, dtype, real weights, TP
   degree, and exact shapes can close a candidate without consuming another NPU
   lease. Revalidate all identity fields before reusing it.
+- The real-client harness became a reusable success: OpenAI-compatible streaming
+  requests measure request-to-first-token TTFT and first-to-last-token TPOT,
+  require unique cache salts, natural EOS, zero errors, and keep raw per-request
+  evidence. Operator timers and server logs are diagnostic evidence only.
+- A custom recurrent-GDN operator package exposed a same-name ACLNN ABI
+  collision. Giving custom entry points unique names and pinning SHA256 for the
+  extension, kernel, op-api library, and OPP tree fixed packaging ambiguity.
+  This is a delivery-correctness repair, not a performance contribution.
+- Four independent exact-shape oracles on physical NPU0-3 are useful before a
+  TP4 service run. Parallelize seeds, dtypes, and shapes only after physical
+  mapping and leases are proved; a four-way oracle pass does not replace the
+  single TP4/HCCL end-to-end gate.
 
 ## What failed and why
 
@@ -60,6 +72,28 @@ the final Qwen3.5 performance objective has passed.
 - The existing decode SwiGLU median was about 4.39 us per layer, below the
   installed guidance's roughly 30-us vector threshold. Do not optimize a small
   named operator merely because a replacement exists.
+- Six-way GDN projection fusion produced promising local latency but failed
+  semantic regression, including a 26-case concurrency set, and remained
+  unstable even when narrowed to single-row decode. It is closed unchanged;
+  performance never compensates for wrong model behavior.
+- Conv-weight prepacking reduced repeated layout work in theory, but did not
+  earn admission with complete accuracy and end-to-end evidence. Do not combine
+  it into a release candidate merely because the preprocessing idea is sound.
+- `fused prefill`, `FusedGdnDecode`, and `fused_gdn_prepare` are upstream
+  vLLM-Ascend/CANN capabilities or upstream-derived paths. They may be baseline
+  B or reused components, but must never be reported as local invention.
+  Known accuracy/support defects remain upstream risks until the exact pinned
+  version is repaired and independently gated.
+- Adaptive M<=8 projection, weight-prefetch variants, row padding, MMAR/LCCL/
+  AIV experiments, FlashComm1, NUMA cpuset, and PCI-local CPU-affinity did not
+  establish a repeatable full-matrix gain. Treat their recorded terminal
+  decisions as closed; do not create a new trial number or recombine them
+  without a concrete changed premise.
+- The r20 RGDR output-boundary fusion showed large exact-shape microbenchmark
+  reductions for M=1/4/8, but M=16 had a BF16 mismatch and service-level
+  startup/performance were unproven. A fast partial boundary is not a release
+  candidate when the task requires the complete GDN preprocessing-to-recurrent
+  or projection/collective critical path.
 
 ## Trust and quality gates
 
@@ -76,6 +110,37 @@ the final Qwen3.5 performance objective has passed.
 - Exact response hashes may drift even without a treatment. Do not confuse
   nondeterminism with either correctness or regression; use paired semantic
   evidence and reference-backed scoring.
+- For the frozen 2026-09-22 Qwen3.5-27B campaign, the performance contract is
+  official v0.23.0 BF16 TP4/HCCL on physical NPU0-3; c1/c5/c8/c16 each use 32
+  fixed streaming requests, unique cache salts, three rounds, and the median of
+  per-round P95. Every tier must reduce TTFT by at least 20% and TPOT by at
+  least 8%, with 32/32 success, zero errors, and natural EOS. Do not inherit
+  older 40%/20% or partial-tier gates from stale handoffs.
+- The quality contract is a sensitive semantic set followed by GSM8K 1319
+  questions, paired Control/Candidate for three rounds. Candidate accuracy must
+  be no lower in every paired round and in the median. GSM8K is a quality gate,
+  not a performance workload.
+
+## Attribution and release-candidate discipline
+
+- Use A/B/C attribution: A is the unchanged official image, B is the exact
+  upstream vLLM-Ascend/CANN capability baseline, and C is B plus the smallest
+  local original increment. Only C-minus-B is local contribution.
+- For this repository, "upstream" in contribution accounting means
+  vLLM-Ascend and CANN/ops-transformer. Other sources can inspire design, but
+  provenance and license still need recording.
+- Do not start another device piercing run because a named operator looks fast.
+  First use existing profiles and source to prove a non-overlapping complete
+  critical-path budget. The conservative budget must be at least twice the
+  remaining TPOT gap; otherwise reject it offline.
+- Accepted local performance modifications were still zero at the 2026-09-22
+  checkpoint. Keep upstream wins, packaging repairs, harness improvements, and
+  local microbench wins in their correct evidence categories; none alone is a
+  validated release candidate.
+- Once a candidate passes the offline budget, use the fixed order: exact
+  layer/state oracle, sensitive semantics, c1 fail-fast, complete repeated
+  performance matrix, then three paired GSM8K rounds. Only the all-green result
+  becomes the removable monkeypatch delivery and PR.
 
 ## Reusable admission sequence
 
@@ -95,6 +160,8 @@ the final Qwen3.5 performance objective has passed.
 7. Record `accepted`, `partial-component`, `rejected`, `failed`, or
    `inconclusive`, with the premise that would permit reopening. Remove
    rejected hooks from the safe runtime while preserving their evidence.
+8. Stop multiplying trial labels. Continue the owning hypothesis ledger and
+   convert each terminal result into a reusable admission or rejection rule.
 
 Do not rerun a closed candidate unchanged. A retry needs a concrete changed
 premise such as a new supported kernel release, repaired ABI, different
