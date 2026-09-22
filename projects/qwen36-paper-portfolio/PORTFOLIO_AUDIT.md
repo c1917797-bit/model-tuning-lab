@@ -28,6 +28,33 @@ the GDN workstream specifies `max_tokens=2048`. This evidence cannot be
 promoted to a 2048-output final accuracy pass, and HYPIC remains a prior
 workload-conditional success rather than a new generic decode result.
 
+## HYPIC portability audit (source-level, not a new hardware result)
+
+The historical Qwen3.6 reproduction pins `hypic_vllm_ascend` commit
+`3ad0967589304cd8fc4e7cff02f48ecc6125c89f`; the local source checkout
+still resolves to that commit. It has unrelated dirty benchmark/test files,
+which were not changed by this audit. A future thin version adapter must
+re-prove these concrete seams before any new NPU claim:
+
+- scheduler: vLLM `Scheduler`/`AsyncScheduler` and Ascend scheduler variants,
+  patched at `add_request`, `schedule`, and `update_from_output`;
+- worker: `vllm_ascend.worker.model_runner_v1.NPUModelRunner`, patched at
+  initialization and `execute_model`, with import deferred until the Ascend
+  custom-op bootstrap completes;
+- full attention: `vllm_ascend.attention.attention_v1` implementation `forward`
+  and Qwen attention geometry registration in `patch_qwen3_5`;
+- linear attention: `vllm_ascend.ops.gdn.AscendGatedDeltaNetAttention._forward_core`
+  plus its Qwen patch target, including state ownership and graph semantics.
+
+These are version-sensitive private hooks, not proof that a newer runtime is
+compatible. The official [v0.27.1rc1 feedback scope](https://github.com/vllm-project/vllm-ascend/issues/16014)
+describes a model-restricted candidate centered on Kimi-K3/MiniMax-M3 and does
+not declare Qwen3.6-27B on 910B4 validated. Do not spend a cross-version
+performance run until that runtime first passes model startup, exact hook
+dispatch, numerical replay, and matched dense control. Keep paper C3
+distributed scatter/transfer distinct from the demonstrated single-instance
+C1/C2 segmented hot reuse; the latter does not prove paper-complete C3.
+
 ## What cannot be added
 
 - MXR and Good Enough optimize the same triangular-inversion scope.
