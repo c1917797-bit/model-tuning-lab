@@ -1,0 +1,72 @@
+schema: model-tuning-experiment/v1
+id: exp-20260923-qwen36-sparq-attention
+status: planned
+decision: pending
+hypothesis: >-
+  SparQ query-dependent KV selection can reduce the measured Qwen3.6 GQA
+  decode attention work enough to improve profiler-off TP4 output throughput.
+  The first Ascend adaptation may select cache pages rather than individual
+  tokens; that variant must be labelled separately from the paper algorithm.
+objective: >-
+  Find a HYPIC-independent, opt-in vLLM-Ascend plugin gain on Qwen3.6-27B.
+  Require at least 10% reproducible end-to-end output-throughput improvement
+  against the same-stack dense control, with TTFT/TPOT reported and final
+  LongBench-v2/GSM8K task loss within the user-allowed 1% bound.
+owner: paper-to-ascend
+git:
+  branch: work/qwen36-sparq-attention-20260923
+  base_commit: 3d858b8489a4f621deff560dbfdb1455da399a57
+  stage_commits: []
+environment:
+  source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  model_revision: /cache/austinov/Qwen3.6-27B (verify immutable identity before load)
+  tokenizer_revision: verify before load
+  dtype_or_quantization: BF16 dense
+  framework_versions:
+    vllm_ascend: v0.23.0 (verify deployed module hash)
+  cann_driver_firmware: verify before load
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology: verify process/container/device mapping before load
+protocol:
+  primary_metric: profiler-off end-to-end output tokens per second
+  correctness_guardrails:
+    - Match the author SparQ reference top-r/top-k selection on identical small tensors before adapting to page selection.
+    - On physical NPU4, verify selected page indices and table invariants, eager and NPUGraph replay, batch 1 and 16, with changing slots and lengths.
+    - Reject non-finite outputs, invalid page indices, state corruption, or nondeterministic identical replays.
+    - Compare sparse attention output with a reference over precisely the selected KV support; freeze numerical tolerance against the native BF16 reference before evaluating the candidate.
+    - Prove all four TP workers dispatch the opt-in candidate before an end-to-end claim.
+  acceptance_thresholds:
+    - Three comparable profiler-off runs each arm, fixed 1024 output tokens, mean candidate throughput at least 1.10x same-stack dense.
+    - Report TTFT and TPOT independently.
+    - Final LongBench-v2 and GSM8K each meet the user-allowed E2E 1% loss rule; report percentage-point and relative-percent loss separately.
+  regression_thresholds:
+    - A single correctness-passing E2E screen below dense throughput is implementation-scoped no-go unless trace identifies a distinct removable overhead.
+  abort_conditions:
+    - No proven Qwen GQA-compatible paged-KV selection and graph-safe integration seam.
+    - Selector cost plus sparse attention cannot plausibly beat the 10% E2E threshold.
+    - NPU numerical, state, replay, or TP4 dispatch failure.
+    - Stop this paper after 24 hours from formal start; preserve evidence and move to the next paper.
+  warmup: freeze with the existing 32768-input/16384-prefix/1024-output service protocol
+  repetitions: 3
+  command: record exact dense and candidate launch/client commands before benchmark
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
+    sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
+    scope: diagnostic single-arm profile only
+decision_reason: ""
+next_loop: >-
+  Verify author reference and deployed GQA cache ABI, then implement one opt-in
+  selected-page probe; numerical gate precedes any service performance screen.
+rollback:
+  command: disable plugin opt-in and stop only the owned candidate service
+  verified: false
