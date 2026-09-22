@@ -40,9 +40,22 @@ algorithm evidence: Hamming selection and SparQ top-r/top-K are different.
 The pinned `npu_sparse_flash_attention` path is MLA-specific; the inspected
 CANN operator documentation requires one KV head and D=512/Dr=64. It cannot
 be assumed compatible with this GQA D=256 path. `BlitzSparseAttention` is a
-separate experimental operator with block-sparse metadata; its installed
-availability, paged-KV semantics and graph compatibility remain unproven.
-Reuse an existing native primitive only after its exact ABI is verified.
+separate experimental operator with per-head `sabi` block indices and BF16
+GQA support, but its documented interface accepts dense K/V tensors, not a
+paged-KV block table. A read-only search of the CANN 9.1 operator tree in the
+existing v0.23 container found no installed BlitzSparseAttention artifact.
+The source implementation may be reusable after plugin-owned packaging;
+installed availability, paged-KV adaptation and graph compatibility remain
+unproven. Reuse an existing native primitive only after its exact ABI is
+verified.
+
+The frozen v0.23 Hamming route is a separate possible integration seam:
+`get_kvcomp_decode_params` substitutes a request-level block table and
+effective sequence lengths before `FusedInferAttentionScore`. SparQ's GQA
+recipe instead sums query magnitudes and approximate scores within each KV
+head group before choosing per-KV-head support. A single request-level table
+would need a union of those supports and may erase the expected sparsity.
+Quantify this union and selector cost before building a service adapter.
 
 ## First adaptation and falsification order
 
