@@ -15,6 +15,7 @@ ENABLE_ENV = "QWEN36_SPARQ_PROBE_ENABLE"
 AUDIT_ENV = "QWEN36_SPARQ_PROBE_AUDIT"
 _LOCK = threading.Lock()
 _DONE = False
+_SEEN_CALLS: set[tuple[int, str]] = set()
 
 
 def _event(name: str, **fields: object) -> None:
@@ -53,13 +54,28 @@ def register() -> None:
     def observed(self, query, key, value, attn_metadata, output, kv_cache=None):
         global _DONE
         result = original(self, query, key, value, attn_metadata, output, kv_cache)
+        state_name = getattr(attn_metadata.attn_state, "name", str(attn_metadata.attn_state))
+        identity = (self.layerIndex, state_name)
+        if self.layerIndex in (0, 3, 4) and identity not in _SEEN_CALLS:
+            _SEEN_CALLS.add(identity)
+            _event(
+                "attention_call_shape",
+                layer=self.layerIndex,
+                state=state_name,
+                query_shape=list(query.shape),
+                num_actual_tokens=int(attn_metadata.actual_seq_lengths_q[-1]),
+                seq_lens=[int(length) for length in attn_metadata.seq_lens_list],
+                local_kv_heads=int(self.num_kv_heads),
+                block_size=None if self.key_cache is None else int(self.key_cache.shape[1]),
+            )
+        actual_tokens = attn_metadata.actual_seq_lengths_q[-1]
         if (
             os.environ.get("RANK", "0") != "0"
             or self.layerIndex != 3
             or attn_metadata.attn_state != attention.AscendAttentionState.DecodeOnly
             or attention._EXTRA_CTX.capturing
             or query.ndim != 3
-            or query.shape[0] != 1
+            or actual_tokens != 1
             or query.shape[1:] != (6, 256)
             or self.num_kv_heads != 1
             or self.key_cache is None
