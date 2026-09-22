@@ -78,12 +78,15 @@ artifacts:
   - path: /cache/cch/sparq-page-abi-20260923-v2/result.json
     sha256: 12920016294cdecd888037c50921e5c10ebdf18f573f7dec0a8fa4f1fd6f0203
     scope: selected-page native FIA eager/graph numerical ABI pass on physical NPU4
+  - path: /cache/cch/sparq-selector-npu-20260923-v1/result.json
+    sha256: 629b8b3166f8cb4ece4ecd4bd8a48fa1063f06e16b19b60394da968fe49431de
+    scope: failed selector graph capture due synchronous host-to-device constant creation
 decision_reason: ""
 next_loop: >-
-  Implement paper-faithful GQA top-r/top-k selector and separately labelled
-  page-level support adaptation. Check selected support and output against
-  frozen reference on NPU, then graph/slot lifecycle and TP4 service dispatch.
-  Only then perform a profiler-off same-stack dense E2E screen.
+  Run one new-directory v2 selector probe after replacing graph-illegal
+  host-to-device constant creation with device-derived latest-page indexing.
+  Check selected support and output on NPU, then graph/slot lifecycle and TP4
+  service dispatch. Only then perform a profiler-off same-stack dense E2E screen.
 rollback:
   command: disable plugin opt-in and stop only the owned candidate service
   verified: false

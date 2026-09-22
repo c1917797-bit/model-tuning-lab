@@ -77,13 +77,16 @@ def select_sparq_pages(
         scores, (0, num_pages * block_size - seq_len)
     )
     page_mass = padded_scores.reshape(num_pages, block_size).sum(dim=-1)
+    # Derive the mandatory latest-page index entirely on device. Constructing
+    # torch.tensor([...], device='npu') here performs a host copy that CANN 9.1
+    # forbids inside NPUGraph capture.
+    latest = page_mass[-1:].to(torch.long) * 0 + (num_pages - 1)
     if page_budget == 1:
-        chosen = torch.tensor([num_pages - 1], dtype=torch.long, device=scores.device)
+        chosen = latest
     else:
         other = torch.topk(
             page_mass[:-1], page_budget - 1, sorted=False
         ).indices
-        latest = torch.tensor([num_pages - 1], dtype=torch.long, device=scores.device)
         chosen = torch.cat((other, latest)).sort().values
 
     physical_pages = block_table.index_select(0, chosen)
