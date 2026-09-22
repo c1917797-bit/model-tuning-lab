@@ -15,6 +15,11 @@ This is a planned experiment, not an NPU result.
   lifecycle bug into vLLM continuous batching.
 - It requires no model retraining. Its GQA reduction recipe is author-described,
   but Qwen3.6-27B and Ascend are not paper-evaluated models/platforms.
+- The public `sparq.py` uses `repeat_interleave` to expand grouped K/V heads
+  before its generic top-r/top-k routine. The paper's dedicated GQA recipe
+  instead aggregates query magnitudes and approximate scores within each KV
+  group; use the paper recipe as the GQA oracle and the code as the generic
+  selection oracle. Do not repeat the full KV cache in the Ascend adapter.
 
 ## Measured target, not a promised speedup
 
