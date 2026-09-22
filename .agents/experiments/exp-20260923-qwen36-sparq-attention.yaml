@@ -66,10 +66,14 @@ artifacts:
   - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
     sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
     scope: diagnostic single-arm profile only
+  - path: /cache/cch/sparq-page-abi-20260923-v1/result.json
+    sha256: e4ab461749d581aae36cd80f8ad420938ad8a5f2930156b809d532e7ba76cb8e
+    scope: failed native ABI probe; no mask with sparseMode 3 rejected by CANN 9.1
 decision_reason: ""
 next_loop: >-
-  Verify author reference and deployed GQA cache ABI, then implement one opt-in
-  selected-page probe; numerical gate precedes any service performance screen.
+  Run exactly one new-directory v2 native selected-page ABI probe with
+  sparseMode 0 for mask-free single-token decode. Preserve the v1 failure.
+  Numerical and graph gates precede any service performance screen.
 rollback:
   command: disable plugin opt-in and stop only the owned candidate service
   verified: false

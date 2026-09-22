@@ -92,6 +92,15 @@ page-level support quality before building a service adapter.
    plausibly on track for +10%; otherwise record implementation no-go and
    immediately advance to the next paper.
 
+First native ABI probe (v1) reached physical NPU4 through a non-privileged
+container mapping, but CANN 9.1 rejected the call before calculation:
+`attnMask` was absent while `sparseMode=3`. The exact error requires
+`sparseMode=0` when no mask is provided. This is a probe-call failure, not a
+SparQ numerical or performance result. The immutable result is
+`/cache/cch/sparq-page-abi-20260923-v1/result.json` (SHA256
+`e4ab461749d581aae36cd80f8ad420938ad8a5f2930156b809d532e7ba76cb8e`).
+The next run changes only that parameter and writes a new v2 directory.
+
 The next attention candidate is Self-Indexing Attention
 (https://arxiv.org/abs/2609.13205), which reports Qwen3.6 hybrid-model
 results and is training-free, but no author repository was located during

@@ -53,7 +53,9 @@ def native_attention(torch_npu, query, key_cache, value_cache, block_table, leng
         num_key_value_heads=1,
         num_heads=QUERY_HEADS,
         scale=1.0 / math.sqrt(HEAD_DIM),
-        sparse_mode=3,
+        # Single-token decode sees only past KV entries in the selected table.
+        # CANN 9.1 requires sparse_mode=0 when no attention mask is supplied.
+        sparse_mode=0,
     )[0]
 
 
