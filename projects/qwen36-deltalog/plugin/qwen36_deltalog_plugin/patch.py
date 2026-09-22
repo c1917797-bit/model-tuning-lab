@@ -13,7 +13,7 @@ from typing import Any
 
 
 LOGGER = logging.getLogger(__name__)
-PATCH_VERSION = "0.2.0"
+PATCH_VERSION = "0.2.1"
 ENABLE_ENV = "QWEN36_DELTALOG_ENABLE"
 LIBRARY_ENV = "QWEN36_DELTALOG_LIBRARY"
 AUDIT_ENV = "QWEN36_DELTALOG_AUDIT"
@@ -143,23 +143,27 @@ def _reset_selected(aux: dict[str, Any], indices: Any) -> None:
         aux[name].index_fill_(0, selected, 0)
 
 
-def _flush_all(torch: Any, self: Any, aux: dict[str, Any], reason: str) -> None:
-    lengths = aux["length"][:, :, 0]
-    if not bool(torch.any(lengths != 0).item()):
+def _flush_slots(
+    torch: Any, self: Any, aux: dict[str, Any], indices: Any, reason: str,
+    selection: str = "batch",
+) -> None:
+    if indices.numel() == 0:
         return
-    active = torch.nonzero(lengths[:, 0] != 0, as_tuple=False).flatten()
     base = self.kv_cache[1]
-    selected_base = base.index_select(0, active)
+    if indices.device != base.device or indices.dtype not in (torch.int32, torch.int64):
+        raise RuntimeError("DeltaLog fallback slot indices must be NPU int32/int64")
+    selected = indices.reshape(-1).long()
+    selected_base = base.index_select(0, selected)
     k_log = (
         aux["k_log"]
-        .index_select(0, active)
+        .index_select(0, selected)
         .float()
         .repeat_interleave(VALUE_HEADS // KEY_HEADS, dim=1)
     )
-    u_log = aux["u_log"].index_select(0, active)
-    lambda_log = aux["lambda_log"].index_select(0, active)[:, :, :CAPACITY]
-    decay = aux["decay"].index_select(0, active)[:, :, 0]
-    length = aux["length"].index_select(0, active)[:, :, 0]
+    u_log = aux["u_log"].index_select(0, selected)
+    lambda_log = aux["lambda_log"].index_select(0, selected)[:, :, :CAPACITY]
+    decay = aux["decay"].index_select(0, selected)[:, :, 0]
+    length = aux["length"].index_select(0, selected)[:, :, 0]
     live = (
         torch.arange(CAPACITY, dtype=torch.int32, device=base.device)
         .view(1, 1, CAPACITY)
@@ -171,14 +175,23 @@ def _flush_all(torch: Any, self: Any, aux: dict[str, Any], reason: str) -> None:
         torch.exp(decay).unsqueeze(-1).unsqueeze(-1) * selected_base
         + contribution
     )
-    base.index_copy_(0, active, logical)
-    _reset_selected(aux, active)
+    base.index_copy_(0, selected, logical)
+    _reset_selected(aux, selected)
     _audit(
         "aux_materialized_for_fallback",
         prefix=getattr(self, "prefix", None),
         reason=reason,
-        active_slots=int(active.numel()),
+        selection=selection,
+        selected_slots=int(selected.numel()),
     )
+
+
+def _flush_all(torch: Any, self: Any, aux: dict[str, Any], reason: str) -> None:
+    lengths = aux["length"][:, :, 0]
+    if not bool(torch.any(lengths != 0).item()):
+        return
+    active = torch.nonzero(lengths[:, 0] != 0, as_tuple=False).flatten()
+    _flush_slots(torch, self, aux, active, reason, selection="all_live")
 
 
 def _reset_prefill(aux: dict[str, Any], metadata: Any) -> None:
@@ -200,7 +213,30 @@ def _fallback(
     core_attn_out: Any,
 ) -> Any:
     if aux is not None:
-        _flush_all(torch, self, aux, reason)
+        if (
+            reason == "not_pure_decode"
+            and metadata is not None
+            and metadata.num_decodes > 0
+            and metadata.num_prefills > 0
+            and isinstance(metadata.non_spec_state_indices_tensor, torch.Tensor)
+            and isinstance(metadata.prefill_state_indices, torch.Tensor)
+            and metadata.non_spec_state_indices_tensor.device == aux["length"].device
+            and metadata.prefill_state_indices.device == aux["length"].device
+            and metadata.non_spec_state_indices_tensor.dtype in (torch.int32, torch.int64)
+            and metadata.prefill_state_indices.dtype in (torch.int32, torch.int64)
+        ):
+            # The native mixed path reads decode slots, then initializes the
+            # prefill slots. Materialize only those slots without a host-side
+            # nonzero/item synchronization on every GDN layer and TP rank.
+            selected = torch.cat(
+                (
+                    metadata.non_spec_state_indices_tensor[: metadata.num_decodes],
+                    metadata.prefill_state_indices,
+                )
+            )
+            _flush_slots(torch, self, aux, selected, reason)
+        else:
+            _flush_all(torch, self, aux, reason)
     result = original(self, mixed_qkv, b, a, core_attn_out)
     if aux is not None and metadata is not None:
         _reset_prefill(aux, metadata)

@@ -174,6 +174,16 @@ artifacts:
     evidence_scope: "Profiler-off 40-request fixed-output-1024 service result on physical NPU4-7; 40/40 requests and 40960/40960 output tokens completed."
 decision_reason: "The numerically valid v4c service delivered 112.424603 tok/s, 10.646% below the frozen dense 125.819134 tok/s; weighted TPOT regressed 35.581%. Mixed prefill/decode batches also forced 2130 per-layer/rank Python full-state materializations. The performance gate failed, so accuracy spend is not justified."
 next_loop: "Preserve this implementation-scoped no-go and move to the next ranked paper. Reopen DeltaLog only with a distinct device-side mixed-batch materialization design and a concurrency/batch regime matching a declared production workload."
+follow_on_20260922:
+  user_direction: "Preserve the paper mechanism but adapt the plugin/operator for Ascend, following the HYPIC migration pattern."
+  status: "attempted; NPU numerical gate not reached"
+  hypothesis: "Materializing only mixed-batch decode/prefill slots without per-layer NPU-to-host active-slot discovery may remove a concrete v4c integration cost."
+  candidate: "plugin v0.2.1 selected-slot mixed fallback; unchanged v4c decode library"
+  correctness_gate: "physical NPU4, batch 1/16, eager and synchronized NPUGraph, full selected state and following native decode against reference; no threshold relaxation"
+  performance_gate: "only after correctness, profile-disabled paired dense/candidate 32768-input/1024-output, 40 requests, concurrency 16, TTFT and TPOT"
+  first_probe: "container qwen36_deltalog_mixed_selected_gate_v1 failed in aclInit with 507899 Resource_Busy; no numerical result or output report"
+  resource_observation: "physical NPU4-7 showed no NPU process; two sleep-only Qwen3.5-4B containers declared 0-7; no container was stopped"
+  next_action: "After resource change and fresh isolation checks, run one non-overwriting NPU bridge gate; do not rerun unchanged failure."
 rollback:
   command: "disable the DeltaLog plugin and stop/remove only its owned containers; do not modify upstream sources or NPU0-3"
   verified: true

@@ -177,6 +177,48 @@ Commit 5f6fda3 contains the implementation, result, and reusable skill lesson;
 its push remains pending because the remote-egress safety review requires
 explicit approval for this exact repository payload.
 
+## 2026-09-22 targeted Ascend adaptation follow-on (unverified)
+
+The user explicitly requested HYPIC-style, mechanism-preserving Ascend
+adaptation rather than treating a direct port's failure as a paper-level
+failure. The v4c service audit gives a concrete removable bottleneck: 2130
+mixed-batch fallbacks invoked host-synchronized all-slot materialization.
+
+Plugin v0.2.1 now has a narrower first attempt: when the native v0.23 path
+receives a non-spec mixed prefill/decode batch, it materializes only that
+batch's decode and prefill state slots. It removes the per-layer
+`torch.any(...).item()` and `torch.nonzero()` host synchronization from this
+mixed path. The native mixed core remains unchanged, and pure decode retains
+the previously validated DeltaLog operator. This is an implementation
+hypothesis, not a correctness or speed result.
+
+The new `deltalog_mixed_fallback_npu_probe.py` checks the bridge on physical
+NPU4, batch 1/16, eager and synchronized NPUGraph, selected state against the
+logical/native reference, untouched slots, zeroed selected auxiliary state,
+stable pointers, and the following native decode output. The script and
+plugin passed syntax and `git diff --check`; Maintainer Skill Tree validation
+passed (20 skills).
+
+The first isolated probe container
+`qwen36_deltalog_mixed_selected_gate_v1` did not reach a tensor operation:
+`aclInit` returned 507899 / `Resource_Busy`. Preserve this exited container
+and its logs; the output directory was not created. Fresh host `npu-smi`
+showed no NPU4-7 process and baseline HBM. Two unrelated Qwen3.5-4B
+containers (`agentgpu-910b4-qwen35-4b-aiv-v1` and
+`agentgpu-910b4-qwen35-4b-v0`) each declare physical 0-7 while `docker top`
+shows only `sleep infinity`. Their declarations may be related to the UDA
+failure, but causality is not yet proven. Because stopping either could affect
+someone's 0-3 environment, seek an exact decision before stopping them.
+
+Do not rerun the same container unchanged. After a resource-state change,
+re-prove NPU4-7 ownership, device mapping, and a fresh non-overwriting output
+directory; then run one bridge gate. If eager/graph correctness passes, measure
+mixed-batch fallback count and run a paired profiler-off 1024-output E2E
+screen before any LongBench-v2/GSM8K spend. If selected-slot materialization
+remains expensive, consider an independently named device-side materialize
+operator using the reviewed CannBot spec/direct-invoke process; do not claim
+it already exists.
+
 ## AscendC implementation status
 
 Direct-invoke v1 compiled and reached physical NPU4. Its first append produced
