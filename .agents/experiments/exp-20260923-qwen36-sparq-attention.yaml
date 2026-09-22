@@ -66,6 +66,12 @@ results:
       max_abs_vs_selected_support_reference: 0.001910031
       bitwise_identical_repeat_replay: true
       not_proven: SparQ selector fidelity, TP4 service dispatch, throughput, task accuracy
+    gqa_selector_page_adapter:
+      result: pass_on_synthetic_shapes_only
+      scope: physical NPU4; batch 1/16; changing query; eager and NPUGraph replay
+      max_abs_vs_selected_support_reference: 0.001363218
+      paper_topk_page_recall_mean_batch16: [0.533203125, 0.53271484375]
+      caveat: random synthetic QKV; no real-model quality or throughput inference
   lifecycle: {}
   resources: {}
 artifacts:
@@ -81,12 +87,15 @@ artifacts:
   - path: /cache/cch/sparq-selector-npu-20260923-v1/result.json
     sha256: 629b8b3166f8cb4ece4ecd4bd8a48fa1063f06e16b19b60394da968fe49431de
     scope: failed selector graph capture due synchronous host-to-device constant creation
+  - path: /cache/cch/sparq-selector-npu-20260923-v2/result.json
+    sha256: b1dd5fac5331591d03d0be07dd4bc51956a9b12ffad086ac5a82389b28581e62
+    scope: synthetic GQA top-r and page adapter eager/graph numerical pass on physical NPU4
 decision_reason: ""
 next_loop: >-
-  Run one new-directory v2 selector probe after replacing graph-illegal
-  host-to-device constant creation with device-derived latest-page indexing.
-  Check selected support and output on NPU, then graph/slot lifecycle and TP4
-  service dispatch. Only then perform a profiler-off same-stack dense E2E screen.
+  Audit and implement an opt-in Qwen3.6 v0.23 serving hook for selected-page
+  support, with real model Q/K, cache slot lifecycle, capture/update semantics
+  and TP4 worker dispatch verified. Quantify selector launches and page-recall
+  on real workload; then do a profiler-off same-stack dense E2E screen.
 rollback:
   command: disable plugin opt-in and stop only the owned candidate service
   verified: false

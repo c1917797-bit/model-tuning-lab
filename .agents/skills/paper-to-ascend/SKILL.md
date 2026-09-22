@@ -216,6 +216,12 @@ not require retraining unless retraining is explicitly in scope.
   attention on the selected support. This proves only the storage/ABI seam;
   paper selector fidelity, service dispatch and end-to-end benefit are separate
   gates, and other CANN versions must revalidate the ABI.
+- During NPUGraph capture, constructing a device tensor from a Python constant
+  can issue a synchronous host-to-device copy and fail even after eager NPU
+  numerical checks pass. Derive replay-varying indices from pre-existing
+  device tensors or graph-safe device operations, then rerun in a fresh result
+  directory without erasing the original failure. A synthetic selector/ABI
+  pass remains narrower than a real-model serving or quality result.
 
 ## Do not do
 

@@ -110,6 +110,19 @@ error against full-precision attention over exactly the selected support was
 This does **not** validate SparQ's top-r/top-k selector, task accuracy, TP4
 service dispatch, or throughput. Those remain the next gates.
 
+The separate synthetic GQA selector probe initially failed NPUGraph capture:
+constructing a fresh NPU tensor from a host constant caused a synchronous
+host-to-device copy in GLOBAL capture mode. A device-derived latest-page index
+fixed that failure without changing the selection rule. The v2 probe passed
+batch 1/16 with changed Q, eager and replay, max absolute error 0.001363218
+against exact attention on the chosen support. Its batch-16 page adapter
+covered only about 53.3% of the paper top-128 tokens with three of five pages
+on **random synthetic** Q/K; this is an accuracy-risk signal, not a real-model
+quality estimate. The result is
+`/cache/cch/sparq-selector-npu-20260923-v2/result.json` (SHA256
+`b1dd5fac5331591d03d0be07dd4bc51956a9b12ffad086ac5a82389b28581e62`).
+No service patch, TP4 dispatch, E2E throughput or task accuracy claim follows.
+
 The next attention candidate is Self-Indexing Attention
 (https://arxiv.org/abs/2609.13205), which reports Qwen3.6 hybrid-model
 results and is training-free, but no author repository was located during
