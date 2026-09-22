@@ -25,6 +25,12 @@ or a claim that the final Qwen3.5 performance objective has passed.
 - Existing immutable evidence from the same image, dtype, real weights, TP
   degree, and exact shapes can close a candidate without consuming another NPU
   lease. Revalidate all identity fields before reusing it.
+- Retained raw profiles can also close ambiguity in source-level shapes. In the
+  four-rank decode capture, every rank contained 5,040 exact
+  `1x5120 @ 4120x5120` GDN input-projection calls: 105 decode steps times 48
+  GDN layers. Treat 4,120 as the mathematical projection width. A locally
+  padded 4,128-wide buffer is an implementation detail and must not silently
+  replace the model shape in opportunity accounting or correctness oracles.
 - A pinned-image, network-disabled source/ABI audit can close an impossible
   lifecycle hypothesis without allocating NPUs. For the v0.23 image, the
   public CANN 9.1 HCCL header was sufficient to prove the supported A2 flow is
@@ -122,6 +128,12 @@ or a claim that the final Qwen3.5 performance objective has passed.
   deprecation. Treat that removal as corroborating maintenance evidence, not as
   proof that newer source is active in the frozen v0.23 image and not as a
   local contribution.
+- A same-family patch release is not automatically a performance candidate.
+  The inspected `v0.23.0.post1` release carried KV-cache/MTP correctness,
+  dependency, CI, and documentation changes but no relevant A2 BF16 TP4
+  Qwen3.5 critical-path optimization. Record the audit result and keep the
+  frozen official baseline unchanged instead of upgrading by version number
+  alone.
 - Large graph-node or microbenchmark reductions must be translated into a
   conservative, non-overlapping end-to-end critical-path budget before they
   earn device time. Record which enclosing path remains untouched; otherwise a
@@ -166,6 +178,19 @@ or a claim that the final Qwen3.5 performance objective has passed.
   First use existing profiles and source to prove a non-overlapping complete
   critical-path budget. The conservative budget must be at least twice the
   remaining TPOT gap; otherwise reject it offline.
+- A full-block profile analyzer must prove the ordered causal path, not merely
+  pair a projection with a later recurrent or MMAR anchor. For GDN this means
+  checking projection, causal convolution, gating, both L2-normalizations,
+  recurrent state update, output normalization, and terminal projection/
+  collective in the same bounded stream interval, with every expected
+  layer-step call accounted for. Missing stages or unmatched calls make the
+  budget inconclusive, not admissible.
+- Keep three quantities separate in every admission report: the observed
+  end-to-end TPOT gap, the required conservative admission floor, and the
+  removable implementation budget. A zero-cost whole-envelope ceiling may
+  eliminate an impossible route, but it cannot establish that a monkeypatch
+  can realize the ceiling. Device time is earned only after a concrete public
+  mechanism has a conservative removable budget above the floor.
 - Accepted local performance modifications were still zero at the 2026-09-22
   checkpoint. Keep upstream wins, packaging repairs, harness improvements, and
   local microbench wins in their correct evidence categories; none alone is a
