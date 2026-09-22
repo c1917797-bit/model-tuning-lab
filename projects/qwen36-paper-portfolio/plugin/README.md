@@ -5,8 +5,11 @@ acceleration. Add both `/workspace/plugin` and `/workspace/tools` to
 `PYTHONPATH`, set `QWEN36_SPARQ_PROBE_ENABLE=1`, and provide a writable
 `QWEN36_SPARQ_PROBE_AUDIT` path outside Git. Use `--enforce-eager` for this
 diagnostic only. The plugin verifies the pinned vLLM-Ascend attention source,
-lets dense decode finish, then samples one rank-0, layer-3, batch-1 decode at
-sequence length at least 2048. It compares 25% and 50% selected-page native
+lets dense decode finish, then samples the first qualifying batch-1 decode
+per TP worker at sequence length at least 2048, recording the actual model
+layer name. The upstream `layerIndex` field is Hamming-specific and remains
+zero for ordinary attention; it must not be used as a model-layer identifier.
+The probe compares 25% and 50% selected-page native
 attention with the unchanged dense layer output and records paper top-k page
 coverage. It never substitutes the candidate output into the model.
 

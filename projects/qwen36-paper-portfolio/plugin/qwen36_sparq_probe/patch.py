@@ -48,6 +48,7 @@ def register() -> None:
     if hasattr(cls, "_sparq_probe_original"):
         raise RuntimeError("SparQ probe is already installed")
     original = cls.forward_fused_infer_attention
+    original_forward = cls.forward
     _event("probe_installed", source=str(path), source_sha256=digest,
            torch=torch.__version__, torch_npu=torch_npu.__version__)
 
@@ -60,7 +61,8 @@ def register() -> None:
             _SEEN_CALLS.add(identity)
             _event(
                 "attention_call_shape",
-                layer=self.layerIndex,
+                runtime_layer_index_field=self.layerIndex,
+                model_layer_name=getattr(self, "_sparq_probe_layer_name", None),
                 state=state_name,
                 query_shape=list(query.shape),
                 num_actual_tokens=int(attn_metadata.actual_seq_lengths_q[-1]),
@@ -70,9 +72,7 @@ def register() -> None:
             )
         actual_tokens = attn_metadata.actual_seq_lengths_q[-1]
         if (
-            os.environ.get("RANK", "0") != "0"
-            or self.layerIndex != 3
-            or attn_metadata.attn_state != attention.AscendAttentionState.DecodeOnly
+            attn_metadata.attn_state != attention.AscendAttentionState.DecodeOnly
             or attention._EXTRA_CTX.capturing
             or query.ndim != 3
             or actual_tokens != 1
@@ -141,12 +141,23 @@ def register() -> None:
                         approximation.flatten(), dense.flatten(), dim=0
                     ).item(),
                 })
-            _event("real_decode_sample", layer=self.layerIndex, seq_len=length,
+            _event("real_decode_sample",
+                   model_layer_name=getattr(self, "_sparq_probe_layer_name", None),
+                   tp_rank=torch.distributed.get_rank()
+                   if torch.distributed.is_initialized() else None,
+                   seq_len=length,
                    block_size=block_size, num_pages=num_pages, cases=cases)
         except BaseException as exc:
             _event("real_decode_sample_failed", error=f"{type(exc).__name__}: {exc}")
             raise
         return result
 
+    def observed_forward(self, *args, **kwargs):
+        layer = args[0] if args else kwargs.get("layer")
+        self._sparq_probe_layer_name = getattr(layer, "layer_name", None)
+        return original_forward(self, *args, **kwargs)
+
     cls._sparq_probe_original = original
+    cls._sparq_probe_original_forward = original_forward
+    cls.forward = observed_forward
     cls.forward_fused_infer_attention = observed
