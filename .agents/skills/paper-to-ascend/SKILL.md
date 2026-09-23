@@ -115,6 +115,18 @@ not require retraining unless retraining is explicitly in scope.
   not reject the paper, while a per-head selector can still lose too much
   mass at useful budgets. A few layers or one prompt are investment gates,
   never final task-accuracy evidence.
+- For a new token-sparse attention paper without verified author code, label
+  the implementation equation-derived rather than an official port. On the
+  same live Q/K, compare the proposed GQA-pooled selector, a per-head
+  diagnostic, and exact-logit Top-K at equal budgets with the same forced
+  windows. The exact Top-K bounds the attainable attention mass at that
+  budget and separates selector failure from intrinsic budget pressure.
+  Validate the transform's dot-product identity and a full-support math
+  oracle against native attention before interpreting sparse errors. This is
+  only a kernel-investment gate, not end-to-end throughput or task accuracy.
+  On Qwen3.6-27B TP4 at one 20K repetitive prompt, the Self-Indexing 5%
+  pooled selector retained 55.1% mean mass while exact Top-K retained 73.0%;
+  no custom token-sparse operator was commissioned for that scoped route.
 - Plugin discovery, plan loading, and patch installation are not mechanism
   evidence. Require an event from the exact live hook carrying request identity,
   runtime geometry, and the selected action.

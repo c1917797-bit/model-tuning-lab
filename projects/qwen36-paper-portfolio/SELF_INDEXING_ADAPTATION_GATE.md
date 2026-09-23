@@ -103,3 +103,51 @@ mass at the same 5%/10%/25% budgets. If even the exact-logit oracle is poor,
 the budget is the limiting factor; if it is strong and the sign variant is
 weak, the index/score is the limiting factor. A new immutable v2 root and
 one new run are required; never overwrite v1.
+
+## Same-budget selector decomposition (v2) and decision
+
+The v2 follow-up changed only the diagnostic selectors. One request with the
+same 20,718 prompt token IDs produced 12 samples again: four TP ranks ×
+layers 3, 31 and 63. The full-support oracle and Hadamard identity still
+passed (`0.06293` and `9.16e-5` max-absolute respectively); no probe failure
+event occurred. At each selected-token budget it compared the paper-equation
+GQA-pooled sign score, independent per-Q-head sign score, and an exact-logit
+Top-K upper bound on the *same live Q/K* with the same forced prefix/recent
+tokens. The exact oracle was at least as good as per-head sign for every
+sample, as expected.
+
+| Budget | Pooled sign min/mean mass | Per-head sign min/mean | Exact-logit Top-K min/mean |
+| --- | ---: | ---: | ---: |
+| 5%, 1036 tokens | 14.480% / 55.056% | 18.874% / 57.646% | 32.076% / 73.033% |
+| 10%, 2072 tokens | 19.518% / 70.429% | 28.093% / 72.803% | 45.316% / 84.842% |
+| 25%, 5180 tokens | 36.183% / 85.039% | 40.831% / 87.304% | 68.395% / 94.386% |
+
+Thus removing GQA pooling helps modestly, while the 5% budget itself leaves
+substantial attention mass out even under an exact-logit oracle on this
+repetitive prompt. The sign ranking adds another gap. This does **not**
+establish LongBench-v2/GSM8K loss, because exact selected output and task
+answers were not evaluated; it does not prove all workloads or the paper's
+Qwen3.6-35B-A3B setting behave this way. It does answer the predeclared
+investment question: do not spend this 24-hour slot building a new token-
+sparse CANN operator for this particular equation-derived 5%-budget target.
+The paper's authored bit-packed kernel remains unavailable for a faithful
+source port, and current v0.23 FIA's paged-table ABI still cannot express
+arbitrary selected tokens. No Self-Indexing candidate E2E performance,
+TTFT/TPOT or final task-accuracy result exists.
+
+The second owned container was stopped with exit 0 and retained for logs;
+physical NPU4-7 returned to process-free ~2.87 GiB HBM. NPU0-3 were never
+mapped. Immutable v2 artifacts:
+
+- `/cache/cch/self-indexing-qwen36-v2/audit.jsonl`: SHA256
+  `748b8b86729a3685a869917865764095fdd135a13c662f44a42bbd5662f12230`.
+- `/cache/cch/self-indexing-qwen36-v2/request-summary.json`: SHA256
+  `bdf74e5833ab3032e52c6b57a11e1c8f4ea18973d184f72efac976f0e0845b3a`.
+- `/cache/cch/self-indexing-qwen36-v2/admission.json`: SHA256
+  `77cb405a7237cb9725d95d51d1a894742ff52f1d48ad6fe4cde4fa3c7bbf6ab3`.
+
+**Scoped decision:** `no_go_current_selector_operator_investment`.
+Move to a distinct paper-backed attention or MatMul mechanism with a credible
+path to the fixed Qwen3.6 TP4 workload. Reopen Self-Indexing only with a new
+mechanism or workload evidence, not by replaying this same prompt/budget or
+calling an intermediate mass threshold a task-accuracy threshold.

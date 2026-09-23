@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-self-indexing-feasibility
-status: attempted
-decision: pending
+status: decided
+decision: no_go_current_selector_operator_investment
 hypothesis: >-
   The paper's GQA-pooled sign-magnitude token selector may retain useful
   attention on the actual Qwen3.6-27B TP4 Ascend decode path at a 5% token
@@ -76,9 +76,31 @@ results:
       pooled_sign_mass_25pct_min: 0.3667330741882324
       pooled_sign_mass_25pct_mean: 0.8516553176773919
       next_question: compare per-head sign and exact-logit Top-K on same live Q/K
+    second_diagnostic:
+      claim_scope: one additional non-mutating real-model decode selector decomposition, not E2E
+      four_rank_samples: 12
+      layers: [3, 31, 63]
+      dot_product_max_abs: 0.000091552734375
+      full_math_vs_dense_max_abs: 0.06292343139648438
+      pooled_sign_mass_5pct_min: 0.144802525639534
+      pooled_sign_mass_5pct_mean: 0.5505628020813068
+      per_head_sign_mass_5pct_min: 0.18873946368694305
+      per_head_sign_mass_5pct_mean: 0.5764638870540593
+      exact_logit_topk_mass_5pct_min: 0.3207649886608124
+      exact_logit_topk_mass_5pct_mean: 0.7303282862736119
+      pooled_sign_mass_10pct_min: 0.19518452882766724
+      per_head_sign_mass_10pct_min: 0.2809300422668457
+      exact_logit_topk_mass_10pct_min: 0.453163206577301
+      pooled_sign_mass_25pct_min: 0.3618318736553192
+      per_head_sign_mass_25pct_min: 0.4083138108253479
+      exact_logit_topk_mass_25pct_min: 0.6839520931243896
+      exact_oracle_order_valid: true
   cold: {}
   steady: {}
-  resources: {}
+  resources:
+    owned_v1_container_stopped_retained: d717949903dc7c96dbe4f41ea0d88b1a6c302641c68fee8269e664c82bcba53d
+    owned_v2_container_stopped_retained: 8af7c790f3855a3f38b7a6b997c3e40c9958259d42dd66f0f2e743a6314529b8
+    post_v2_physical4_7_process_free: true
 artifacts:
   - path: /cache/cch/self-indexing-qwen36-v1/audit.jsonl
     sha256: 031b9e24364a8ceb377590963fab6dc2a0f92e1a7fecbe3e55ca5ddaa9536fee
@@ -86,11 +108,27 @@ artifacts:
     sha256: 6ad9498e761d69b0b9036edad9812d61bcb9fcfd4851c0ea52731e820b230396
   - path: /cache/cch/self-indexing-qwen36-v1/admission.json
     sha256: 5a4d1c99d8026d394916c5a3b97f34045dd239b13abfcb65e14a1aa442891471
+  - path: /cache/cch/self-indexing-qwen36-v2/audit.jsonl
+    sha256: 748b8b86729a3685a869917865764095fdd135a13c662f44a42bbd5662f12230
+  - path: /cache/cch/self-indexing-qwen36-v2/request-summary.json
+    sha256: bdf74e5833ab3032e52c6b57a11e1c8f4ea18973d184f72efac976f0e0845b3a
+  - path: /cache/cch/self-indexing-qwen36-v2/admission.json
+    sha256: 77cb405a7237cb9725d95d51d1a894742ff52f1d48ad6fe4cde4fa3c7bbf6ab3
+decision_reason: >-
+  The deployed Qwen3.6-27B TP4 real-model 20K decode probe passed the
+  rotation and full-support mathematical checks, but 5%-token GQA-pooled
+  sign selection retained only 55.1% mean and 14.5% minimum exact
+  attention mass across tested heads. Per-head sign selection improved
+  little; even exact-logit Top-K retained 73.0% mean and 32.1% minimum.
+  This rejects custom token-sparse operator investment for the tested
+  selector/budget/prompt, not the paper or final task quality. No E2E
+  candidate was run.
 rollback:
   command: disable QWEN36_SIA_PROBE_ENABLE and stop only the newly owned container
-  verified: false
+  verified: true
 next_loop: >-
-  Only if live selector quality is plausible, map paged-KV token gather and
-  sparse-attention ABI, reuse existing CANN operators where semantically
-  compatible, then implement an opt-in plugin path and run the NPU numerical
-  gate before any matched E2E performance screen.
+  Advance within the one-day paper budget to a distinct paper-backed
+  attention or MatMul hotspot with a credible v0.23/CANN 9.1 expression
+  path. Do not repeat this selector on the same prompt/budget. New candidate
+  implementations still require native NPU numerical and graph gates before
+  matched fixed-1024 E2E throughput and final tasks.
