@@ -1,0 +1,76 @@
+schema: model-tuning-experiment/v1
+id: exp-20260923-qwen36-self-indexing-feasibility
+status: planned
+decision: pending
+hypothesis: >-
+  The paper's GQA-pooled sign-magnitude token selector may retain useful
+  attention on the actual Qwen3.6-27B TP4 Ascend decode path at a 5% token
+  budget, unlike the tested Quest selected-page route.
+objective: >-
+  Establish a paper-equation-derived real-NPU investment gate for a future
+  plugin-owned selected-token attention path. This is not an official-code
+  port, deployed candidate, E2E benchmark, or task-accuracy result.
+owner: paper-to-ascend
+paper:
+  url: https://arxiv.org/html/2609.13205v1
+  version: arXiv:2609.13205v1
+  official_repository: not_verified
+  implementation_label: equation-derived diagnostic, not author implementation
+git:
+  branch: work/qwen36-self-indexing-attention-20260923
+  base_commit: 612208539f2c3ddde1a9800a92cf3018f1765740
+  stage_commits: []
+timebox:
+  start_utc: 2026-09-23T15:30:00Z
+  deadline_utc: 2026-09-24T15:30:00Z
+environment:
+  source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  model_revision: /cache/efim/Qwen3.6-27B
+  tokenizer_revision: /cache/efim/Qwen3.6-27B/tokenizer_config.json
+  dtype_or_quantization: BF16 dense
+  framework_versions:
+    vllm_ascend: v0.23.0
+    CANN: 9.1.0
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology: physical4-7 map to container0-3; reverify before load
+protocol:
+  primary_metric: per-head exact attention mass retained by paper-equation token selector
+  correctness_guardrails:
+    - Keep native dense output unchanged in a non-mutating plugin probe.
+    - Observe all four TP ranks and full-attention layers 3, 31 and 63.
+    - Validate randomized Hadamard transform dot-product identity on the live Q/K before interpreting selection.
+    - Validate full-support FP32 mathematical attention against native BF16 FIA before interpreting sparse output errors.
+    - Pool the six local query heads by coordinate-wise absmax sign for their one local KV head.
+    - Score each token as max(sign_agreement - 128, 0) times rotated key L2 norm.
+    - Include prefix64 and recent64 within max(ceil(0.05 times length),768) budget; additionally inspect 10% and 25% without claiming paper defaults.
+    - Record selector phases separately from any native attention call; no timing is an E2E result.
+  acceptance_thresholds:
+    - A numerical investment gate only; custom token attention needs a separate ABI, graph, lifecycle and TP4 service validation.
+    - Final objective remains at least 10% matched profiler-off fixed-1024 E2E output throughput gain.
+    - Final LongBench-v2 and GSM8K loss must be at most 1 percentage point each under the latest user allowance, with both point and relative changes reported.
+  abort_conditions:
+    - Physical NPU4-7 overlap with an external real process or busy HBM/AICore at launch.
+    - Rotated QK dot products materially disagree with unrotated on live tensors.
+    - Full-support mathematical output materially disagrees with native dense.
+    - Useful token budgets retain too little exact attention mass to justify a custom token-selective kernel.
+    - Timebox deadline is reached.
+  warmup: one 20718-token diagnostic prompt then four decode tokens
+  repetitions: 1
+  command: run one fail-closed controller into a new immutable result root
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  resources: {}
+artifacts: []
+rollback:
+  command: disable QWEN36_SIA_PROBE_ENABLE and stop only the newly owned container
+  verified: false
+next_loop: >-
+  Only if live selector quality is plausible, map paged-KV token gather and
+  sparse-attention ABI, reuse existing CANN operators where semantically
+  compatible, then implement an opt-in plugin path and run the NPU numerical
+  gate before any matched E2E performance screen.
