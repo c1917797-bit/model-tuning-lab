@@ -98,6 +98,8 @@ def register() -> None:
             if bool((pages < 0).any().item()):
                 raise RuntimeError("invalid live page table")
             keys = self.key_cache.index_select(0, pages).reshape(-1, 256)[:length]
+            values = self.value_cache.index_select(0, pages).reshape(-1, 256)[:length]
+            mean_value = values.float().mean(dim=0)
             cache_key = self.key_cache.view(self.key_cache.shape[0], block_size, -1)
             cache_value = self.value_cache.view(self.value_cache.shape[0], block_size, -1)
             dense = result[0].float().reshape(6, 256)
@@ -126,6 +128,27 @@ def register() -> None:
                 sparse_ms = (time.perf_counter_ns() - start) / 1e6
                 approximation = sparse[0].float().reshape(6, 256)
                 difference = approximation - dense
+                # Paper Eq. 10 reallocates the omitted approximate probability
+                # mass to a running mean V. This one-shot diagnostic computes
+                # the exact historical mean from the live cache; it is not a
+                # serving implementation of the running-mean lifecycle.
+                q_full = query[0].float()
+                dimensions = selected["top_r_dimensions"]
+                q_short = q_full.index_select(-1, dimensions)
+                k_short = keys.index_select(-1, dimensions).float()
+                coverage = q_short.abs().sum(-1) / q_full.abs().sum(-1).clamp_min(1e-12)
+                temperature = torch.sqrt(256 * coverage.clamp_min(1e-12))
+                approximate = torch.softmax(
+                    (q_short @ k_short.T) / temperature[:, None], dim=-1
+                )
+                logical_positions = torch.arange(length, device=query.device)
+                selected_mask = (
+                    logical_positions[:, None] // block_size
+                    == selected["selected_logical_pages"][None, :]
+                ).any(dim=-1)
+                alpha = approximate[:, selected_mask].sum(dim=-1)
+                corrected = alpha[:, None] * approximation + (1 - alpha[:, None]) * mean_value
+                corrected_difference = corrected - dense
                 cases.append({
                     "fraction": fraction,
                     "page_budget": page_budget,
@@ -139,6 +162,12 @@ def register() -> None:
                     "output_rms": difference.square().mean().sqrt().item(),
                     "output_cosine": torch.nn.functional.cosine_similarity(
                         approximation.flatten(), dense.flatten(), dim=0
+                    ).item(),
+                    "mean_reallocation_alpha_range": [alpha.min().item(), alpha.max().item()],
+                    "mean_reallocated_max_abs": corrected_difference.abs().max().item(),
+                    "mean_reallocated_rms": corrected_difference.square().mean().sqrt().item(),
+                    "mean_reallocated_cosine": torch.nn.functional.cosine_similarity(
+                        corrected.flatten(), dense.flatten(), dim=0
                     ).item(),
                 })
             _event("real_decode_sample",
