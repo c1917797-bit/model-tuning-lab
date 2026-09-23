@@ -76,23 +76,47 @@ results:
         The native-output oracle failed at rank1 layer59; its layer63 reuse
         lacked an anchor and failed. The owned container was stopped after
         preserving logs and partial samples. No candidate output was served.
+    second_diagnostic:
+      claim_scope: all adjacent full-attention transitions on one dense 20K NPU request, not E2E candidate
+      prompt_ids_sha256: 1f58d8666640baff0f6ba570f2ffd2eed486ba3e0c95bbd5a62b3044b0f489c1
+      http_status: 200
+      prompt_tokens: 20718
+      completion_tokens: 4
+      valid_samples: 63
+      full_support_gate_failures: 1
+      gate_failed_layer_rank: [59, 1]
+      gate_failed_max_abs: 0.11269760131835938
+      predeclared_gate_unchanged: 0.1
+      20pct_mass_min_mean_3_to_7: [0.2020014375448227, 0.734275263423721]
+      20pct_mass_min_mean_31_to_35: [0.744865894317627, 0.9436419655879339]
+      20pct_mass_min_mean_47_to_51: [0.5793710350990295, 0.7769381627440453]
+      20pct_largest_selected_output_max_abs_39_to_43: 3.1670711040496826
+      conclusion: adjacent reuse alone is heterogeneous; dynamic anchor upper bound is next
   cold: {}
   steady: {}
   resources:
     owned_v1_container_stopped_retained: 6e3fd7dcb87fcf59f6306c6c61cabf131e2d59e4dfab3f14f410f91ae77da50b
     post_v1_physical4_7_process_free: true
+    owned_v2_container_stopped_retained: 566256317ba4d03cb89b2e56c7fa212c300058c1636af3ffaa7d00021f4b3112
 artifacts:
   - path: /cache/cch/kascade-qwen36-crosslayer-v1/audit.jsonl
     sha256: 85935543b8004fce5f426ece1f414cbff1eb62f9618766abc623f493494ec811
   - path: /cache/cch/kascade-qwen36-crosslayer-v1/admission.json
     sha256: b61631654d9f1542513f4cc71ea047ac95dee3cfa464ccb378568f9f115d6c2d
+  - path: /cache/cch/kascade-qwen36-crosslayer-v2/audit.jsonl
+    sha256: 35c2b8825a4d50c2cdce0e85cd384a7774b208c42f3f4adcfc10f87d417f01fb
+  - path: /cache/cch/kascade-qwen36-crosslayer-v2/admission.json
+    sha256: 307b2b3818598a7dfaf4ffab5f7171ef370cebd90fe831f78ad919324354e97e
+  - path: /cache/cch/kascade-qwen36-crosslayer-v2/request-summary.json
+    sha256: 7753ad81d7cdb9e8b0f39ae953c6fe7022c4619ade5cee47ee1aa61a35430cfd
 decision_reason: ""
 next_loop: >-
-  The early pair is poor but the mid pair at 20% is promising. Map all
-  adjacent full-attention layer transitions on a new immutable NPU run,
-  preserving the rank1 layer59 numerical failure as an excluded pair rather
-  than relaxing the predeclared full-support oracle gate. Decide whether
-  an adaptive anchor/reuse plan covers enough real layers for E2E benefit.
+  V2 mapped every adjacent full-attention transition and found variable
+  cross-layer fidelity. V3 will compare each target with all earlier local
+  anchor layers at equal budgets, choosing the best on this one token as an
+  optimistic upper bound, not a deployable mapping or task-accuracy result.
+  Preserve the unchanged full-support numerical gate; stop operator work if
+  even that upper bound cannot cover enough layers credibly.
 rollback:
   command: disable QWEN36_KASCADE_PROBE_ENABLE and stop only its owned container
   verified: true

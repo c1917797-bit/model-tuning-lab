@@ -18,11 +18,11 @@ import time
 
 ROOT = Path("/opt/host/vnf/austinov/model-tuning-lab")
 WORKSPACE = ROOT / "projects/qwen36-paper-portfolio"
-RESULTS = Path("/cache/cch/kascade-qwen36-crosslayer-v1")
-LOCK = Path("/cache/cch/kascade-qwen36-crosslayer-v1.admission.lock")
+RESULTS = Path("/cache/cch/kascade-qwen36-crosslayer-v2")
+LOCK = Path("/cache/cch/kascade-qwen36-crosslayer-v2.admission.lock")
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
-NAME = "qwen36_kascade_crosslayer_v1_20260923"
-PORT = 8236
+NAME = "qwen36_kascade_crosslayer_v2_20260923"
+PORT = 8237
 
 
 def capture(args: list[str], timeout: int = 30) -> str:
@@ -77,7 +77,7 @@ def main() -> int:
             raise FileExistsError(f"result root raced into existence: {RESULTS}")
         RESULTS.mkdir(parents=False, exist_ok=False)
         admission = {
-            "schema": "kascade-crosslayer-admission/v1", "time_ns": time.time_ns(),
+            "schema": "kascade-crosslayer-admission/v2", "time_ns": time.time_ns(),
             "physical_npus": [4, 5, 6, 7], "container_logical_npus": [0, 1, 2, 3],
             "npu_smi_prelaunch": snapshot,
             "other_running_containers": running.splitlines(),
@@ -118,7 +118,7 @@ def main() -> int:
             "--entrypoint", "/usr/local/python3.12.13/bin/python3", IMAGE,
             "-m", "vllm.entrypoints.openai.api_server",
             "--model", "/models/Qwen3.6-27B",
-            "--served-model-name", "qwen36-kascade-crosslayer-v1",
+            "--served-model-name", "qwen36-kascade-crosslayer-v2",
             "--host", "127.0.0.1", "--port", str(PORT),
             "--data-parallel-size", "1", "--tensor-parallel-size", "4",
             "--max-model-len", "40960", "--max-num-batched-tokens", "40960",

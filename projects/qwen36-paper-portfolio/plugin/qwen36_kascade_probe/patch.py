@@ -20,9 +20,7 @@ ENABLE_ENV = "QWEN36_KASCADE_PROBE_ENABLE"
 AUDIT_ENV = "QWEN36_KASCADE_PROBE_AUDIT"
 _LOCK = threading.Lock()
 _DONE_LAYERS: set[str] = set()
-_PAIRS = {3: 7, 31: 35, 59: 63}
-_REVERSE = {target: anchor for anchor, target in _PAIRS.items()}
-_TARGET_LAYERS = set(_PAIRS) | set(_REVERSE)
+_TARGET_LAYERS = set(range(3, 64, 4))
 _ANCHORS: dict[int, dict] = {}
 
 
@@ -118,13 +116,21 @@ def register() -> None:
             full_prob = torch.softmax((q @ k.T) * self.scale, dim=-1)
             full_math = full_prob @ v
             full_error = (full_math - dense).abs().max().item()
-            if full_error > 0.1:
-                raise RuntimeError(f"full-support math/native mismatch: {full_error}")
             rank = torch.distributed.get_rank() if torch.distributed.is_initialized() else 0
-            anchor_index = layer_index if layer_index in _PAIRS else _REVERSE[layer_index]
-            anchor = _ANCHORS.get(anchor_index)
-            if layer_index in _REVERSE and (anchor is None or anchor["length"] != length):
-                raise RuntimeError("matching earlier anchor sample is absent")
+            if full_error > 0.1:
+                _event("full_support_gate_failed", layer_name=layer_name,
+                       tp_rank=rank, layer_index=layer_index, seq_len=length,
+                       full_math_vs_dense_max_abs=full_error,
+                       predeclared_max_abs_gate=0.1)
+                return result
+            previous_layer = layer_index - 4 if layer_index > 3 else None
+            anchor = _ANCHORS.get(previous_layer)
+            if anchor is not None and anchor["length"] != length:
+                _event("cross_layer_skipped_length_mismatch", layer_name=layer_name,
+                       tp_rank=rank, layer_index=layer_index,
+                       previous_layer=previous_layer, seq_len=length,
+                       previous_seq_len=anchor["length"])
+                anchor = None
             pooled = full_prob.sum(dim=0)
             cases = []
             selected_by_percent = {}
@@ -148,14 +154,14 @@ def register() -> None:
                     case["cross_layer_overlap_fraction"] = torch.isin(
                         previous, same_layer).float().mean().item()
                 cases.append(case)
-            if layer_index in _PAIRS:
-                _ANCHORS[layer_index] = {
-                    "length": length,
-                    "indices": selected_by_percent,
-                }
+            _ANCHORS[layer_index] = {
+                "length": length,
+                "indices": selected_by_percent,
+            }
             _event("real_decode_sample", layer_name=layer_name,
-                   tp_rank=rank, layer_index=layer_index, anchor_layer=anchor_index,
-                   role="anchor" if layer_index in _PAIRS else "reuse",
+                   tp_rank=rank, layer_index=layer_index,
+                   previous_layer=previous_layer,
+                   previous_anchor_available=anchor is not None,
                    seq_len=length, block_size=block_size, num_pages=num_pages,
                    local_q_heads=6, local_kv_heads=1,
                    full_math_vs_dense_max_abs=full_error, cases=cases)

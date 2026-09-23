@@ -77,3 +77,36 @@ map with a new immutable root. It will skip only a transition whose
 full-support oracle fails and record the skip explicitly; it will not weaken
 the 0.1 gate. The aim is to determine whether an adaptive anchor/reuse plan
 can touch enough actual layers to justify a targeted Ascend operator.
+
+## Second live NPU diagnostic: adjacent-layer map
+
+The v2 probe used the same 20,718 prompt-token IDs and successfully returned
+four native dense output tokens (HTTP 200). It recorded 63 valid samples
+over 16 full-attention layers × four TP ranks. Rank1 layer59 again missed
+the unchanged 0.1 full-support math/native gate (max-abs 0.112698); the
+probe explicitly excluded that layer and its missing 59->63 transfer while
+the service stayed healthy. All other valid samples had full-support
+max-abs ≤0.06246.
+
+The adjacent transfer map is heterogeneous. At 20% selected tokens,
+3->7 retained min/mean exact mass 20.20%/73.43%, 31->35 retained
+74.49%/94.36%, and 47->51 retained 57.94%/77.69%. The largest selected
+output max-abs discrepancy at 39->43 was 3.17, far above ordinary native
+vs full-math differences. These are intermediate diagnostics, not the user's
+final task-accuracy percentage-point loss. Even a favorable middle pair
+does not by itself cover enough layers to establish ≥10% E2E benefit.
+
+The owned v2 container was stopped and retained after the request. Evidence:
+
+- `/cache/cch/kascade-qwen36-crosslayer-v2/audit.jsonl` SHA256
+  `35c2b8825a4d50c2cdce0e85cd384a7774b208c42f3f4adcfc10f87d417f01fb`.
+- `/cache/cch/kascade-qwen36-crosslayer-v2/admission.json` SHA256
+  `307b2b3818598a7dfaf4ffab5f7171ef370cebd90fe831f78ad919324354e97e`.
+- `/cache/cch/kascade-qwen36-crosslayer-v2/request-summary.json` SHA256
+  `7753ad81d7cdb9e8b0f39ae953c6fe7022c4619ade5cee47ee1aa61a35430cfd`.
+
+The next distinct check will use all earlier local KV-head anchor selections
+for each target layer and choose the best on this same token. This is an
+optimistic *oracle* for the paper's dev-set anchor planning, not an online
+free selection mechanism. If even it cannot support enough layers at useful
+budgets, a new Ascend token-sparse kernel would be a poor investment.

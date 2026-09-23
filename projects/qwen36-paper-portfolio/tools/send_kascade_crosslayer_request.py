@@ -12,9 +12,9 @@ from transformers import AutoTokenizer
 
 
 MODEL_PATH = "/models/Qwen3.6-27B"
-MODEL_NAME = "qwen36-kascade-crosslayer-v1"
+MODEL_NAME = "qwen36-kascade-crosslayer-v2"
 RESULT = Path("/results/request-summary.json")
-BASE_URL = "http://127.0.0.1:8236"
+BASE_URL = "http://127.0.0.1:8237"
 
 
 def main() -> None:
@@ -40,7 +40,7 @@ def main() -> None:
         status = response.status
     result = json.loads(raw)
     summary = {
-        "schema": "kascade-crosslayer-request/v1", "http_status": status,
+        "schema": "kascade-crosslayer-request/v2", "http_status": status,
         "model": result.get("model"), "prompt_tokens_requested": len(prompt_ids),
         "usage": result.get("usage", {}),
         "elapsed_seconds": time.perf_counter() - start,
