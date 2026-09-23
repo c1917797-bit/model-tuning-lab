@@ -8,6 +8,7 @@ import pytest
 import torch
 
 import tail_replay_ascend.full_group_patch as full_group_patch
+import tail_replay_ascend.runtime_patch as runtime_patch
 from tail_replay_ascend.config import TailReplayConfig, get_config
 from tail_replay_ascend.runtime_patch import (
     _CURRENT_LAYER_PREFIX,
@@ -232,6 +233,11 @@ def test_recurrence_oracle_preserves_result_and_validates_exact_split(
 ):
     evidence = tmp_path / "oracle.jsonl"
     monkeypatch.setenv("MST_TAIL_REPLAY_EVIDENCE_FILE", str(evidence))
+    monkeypatch.setattr(
+        runtime_patch,
+        "_build_chunk_metadata",
+        lambda _values, _token_count: object(),
+    )
     _SEEN_LAYER_PREFIXES.clear()
 
     def additive_chunk(
