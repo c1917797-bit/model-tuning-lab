@@ -86,6 +86,9 @@ make the experiment reproducible and evidence-bound.
 
 1. Read `AGENTS.md`, `.agents/HANDOFF.md`, and any active branch-local
    workstream handoff before using host resources.
+   For Qwen3.6 linear/hybrid-attention work, also read
+   [references/qwen36-linear-hybrid-lessons.md](references/qwen36-linear-hybrid-lessons.md)
+   before choosing or resuming a paper.
 2. Use `paper-ingestion` to extract the complete causal method chain, not only
    the headline operation: selection/calibration, model transformation,
    training or recovery, runtime execution, and evaluation conditions.
