@@ -1,0 +1,77 @@
+schema: model-tuning-experiment/v1
+id: exp-20260923-qwen36-quest-attention
+status: planned
+decision: pending
+hypothesis: >-
+  Quest page-min/max summaries can select Qwen3.6 GQA decode KV pages with
+  lower online selector cost than the failed full-K SparQ page adapter,
+  allowing native Ascend FIA to reduce end-to-end output-token latency.
+objective: >-
+  Find a HYPIC-independent opt-in vLLM-Ascend plugin with reproducible >=10%
+  fixed-1024 output throughput gain against same-stack dense, TTFT/TPOT
+  reported, and final LongBench-v2/GSM8K loss within the user-allowed 1%.
+owner: paper-to-ascend
+git:
+  branch: work/qwen36-quest-attention-20260923
+  base_commit: 106527f
+  stage_commits: []
+environment:
+  source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  model_revision: /cache/efim/Qwen3.6-27B
+  model_config_sha256: 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c
+  tokenizer_revision: /cache/efim/Qwen3.6-27B/tokenizer_config.json
+  dtype_or_quantization: BF16 dense
+  framework_versions:
+    vllm_ascend: v0.23.0
+  cann_driver_firmware: verify before each load
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology: physical4-7 map to container0-3; verify freshly
+protocol:
+  primary_metric: profiler-off end-to-end output tokens per second
+  correctness_guardrails:
+    - Prove six local Q heads and one local KV head on all TP4 ranks.
+    - Compare Quest page scores to the paper min/max formula and released author source.
+    - Separate one-time page-summary build from online selection latency.
+    - Validate selected-page native attention against selected-support reference, then compare with dense output.
+    - Check all live page indices, current partial page, finite outputs and unchanged dense behavior in diagnostic mode.
+    - Require batch1/16 eager and NPUGraph state/lifecycle correctness before candidate service timing.
+  acceptance_thresholds:
+    - Three paired profiler-off runs each arm, fixed 1024 output tokens, mean candidate throughput >=1.10x dense.
+    - Report TTFT and TPOT independently.
+    - Final LongBench-v2 and GSM8K each within the user-allowed 1% E2E loss; report percentage-point and relative loss.
+  regression_thresholds:
+    - A numerically passing first service screen below dense is implementation-scoped no-go unless trace identifies a distinct removable overhead.
+  abort_conditions:
+    - GQA shared-page proposal destroys critical per-head support at useful budgets.
+    - Page-summary maintenance cannot follow vLLM slot/page/prefix lifecycle or graph replay safely.
+    - Online selector plus sparse FIA cannot plausibly support >=10% E2E gain.
+    - NPU numerical, state, graph, or TP4 dispatch failure.
+    - Stop within 24 hours from formal start; preserve evidence and advance.
+  warmup: freeze same-stack dense/candidate under existing 32768-input/16384-prefix/1024-output protocol
+  repetitions: 3
+  command: record exact launch and client commands before candidate timing
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - path: /cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json
+    sha256: 7d7554583eb202c26d51e946e8e3fd741e1a8578b1bba882f1af02104da06d81
+    scope: diagnostic dense profile, not an E2E candidate result
+  - path: /cache/cch/sparq-page-abi-20260923-v2/result.json
+    sha256: 12920016294cdecd888037c50921e5c10ebdf18f573f7dec0a8fa4f1fd6f0203
+    scope: native selected-page FIA ABI, not Quest mechanism quality
+decision_reason: ""
+next_loop: >-
+  Implement a one-shot non-mutating real-Qwen Quest page-score diagnostic,
+  then decide whether incremental page summaries and a plugin service path
+  are justified by support quality and selector cost.
+rollback:
+  command: disable Quest plugin opt-in and stop only owned candidate service
+  verified: false
