@@ -1,0 +1,56 @@
+schema: model-tuning-experiment/v1
+id: exp-20260923-qwen36-kvarn-ascend
+status: planned
+decision: pending
+hypothesis: "Paper-faithful KVarN KV compression can reduce full-attention KV read cost in Qwen3.6 decode without exceeding the task accuracy budget."
+objective: "Opt-in Ascend plugin with at least 10% matched dense fixed-1024 output throughput gain, TTFT/TPOT reported, and at most 1 percentage point LongBench-v2/GSM8K loss."
+owner: codex
+git:
+  branch: work/qwen36-kvarn-ascend-20260923
+  base_commit: d96974c252590bb7758e6da54470d96860dff6bb
+  stage_commits:
+    - ce2bcc5
+environment:
+  source_commit: "vLLM-Ascend 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; KVarN reference 7586257f1c632e63187bfacbbe21ccb51540f7b3"
+  model_revision: "Qwen3.6-27B BF16; pin full checkpoint hash before NPU service run"
+  tokenizer_revision: "pin before service run"
+  dtype_or_quantization: "dense BF16 vs opt-in KVarN K4/V2; any INT8 derivative must be separately labeled"
+  framework_versions:
+    vllm_ascend: v0.23.0
+  cann_driver_firmware: "pin live versions before NPU service run"
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology: "fresh device/container/process/port check required before each new load"
+protocol:
+  primary_metric: "end-to-end output tokens/s, fixed output 1024"
+  correctness_guardrails:
+    - "Author-equation tile reference vs Ascend implementation for D=256, group=128, K4/V2"
+    - "Finite and bounded multi-step output/state; preserve first failure"
+    - "Mixed prefill/decode, tail/sink and NPUGraph replay checks"
+  acceptance_thresholds:
+    - "At least 10% throughput gain vs same-stack dense under identical general optimizations"
+    - "LongBench-v2 and GSM8K each lose at most 1 percentage point in matched final evaluation"
+  regression_thresholds: []
+  abort_conditions:
+    - "No numerically valid Ascend candidate at the one-day deadline"
+    - "No actual paper-specific path beyond existing C8 quantization"
+  warmup: "Compile/JIT and graph warmup outside measured window"
+  repetitions: 3
+  command: "TBD after plugin numerical gate and fresh NPU4-7 ownership check"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - "projects/qwen36-paper-portfolio/KVARN_ASCEND_GATE.md"
+  - "/cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json"
+decision_reason: "Pending NPU numerical and matched service evidence; source/profile fit only."
+next_loop: "NPU tile oracle and native ABI audit, then plugin-owned store/decode if needed."
+rollback:
+  command: "Disable explicit plugin opt-in; do not modify upstream runtime or image."
+  verified: false

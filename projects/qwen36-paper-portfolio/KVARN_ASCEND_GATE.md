@@ -29,6 +29,13 @@ a packed tile record and a fused low-bit decode path. The target's native
 attention block size 128 and head dim 256 match supported author geometry,
 but this is only a shape match.
 
+The author keeps the first 128 sink tokens and an in-progress tile in an
+unquantized tail pool. A port must preserve that lifecycle, not simply
+quantize each incoming KV token. The official configuration uses eight
+variance-balancing iterations by default and aligns the packed D=256 tile
+record for the vLLM cache allocator. These are part of the numerical and
+memory-accounting contract to test on Ascend.
+
 ## Reuse and incompatibility
 
 The deployed vLLM-Ascend source has an opt-in C8 KV path using INT8 cache,
