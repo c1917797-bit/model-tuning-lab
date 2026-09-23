@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-sparq-attention
-status: planned
+status: running
 decision: pending
 hypothesis: >-
   SparQ query-dependent KV selection can reduce the measured Qwen3.6 GQA
@@ -72,6 +72,21 @@ results:
       max_abs_vs_selected_support_reference: 0.001363218
       paper_topk_page_recall_mean_batch16: [0.533203125, 0.53271484375]
       caveat: random synthetic QKV; no real-model quality or throughput inference
+    real_qwen36_tp4_diagnostic:
+      result: observed_non_mutating_dense_service
+      scope: one 9002-token decode position; first full-attention layer; all four TP workers; forced ignore_eos solely to reach decode
+      native_page_size: 128
+      num_pages: 71
+      page_budget_25_percent:
+        paper_topk_page_recall_range: [0.9453125, 1.0]
+        layer_output_max_abs_range: [0.1015625, 0.96875]
+        selection_wall_ms_cold_range: [68.32782, 82.31603]
+      page_budget_50_percent:
+        paper_topk_page_recall_range: [1.0, 1.0]
+        layer_output_max_abs_range: [0.0546875, 0.4140625]
+        selection_wall_ms_warm_range: [1.79231, 2.19252]
+        sparse_fia_wall_ms_range: [0.48196, 0.60897]
+      not_proven: candidate service dispatch, E2E throughput, task accuracy, paper-level no-go
   lifecycle: {}
   resources: {}
 artifacts:
@@ -90,12 +105,15 @@ artifacts:
   - path: /cache/cch/sparq-selector-npu-20260923-v2/result.json
     sha256: b1dd5fac5331591d03d0be07dd4bc51956a9b12ffad086ac5a82389b28581e62
     scope: synthetic GQA top-r and page adapter eager/graph numerical pass on physical NPU4
+  - path: /cache/cch/sparq-real-qwen36-v5/audit.jsonl
+    sha256: e66a1f3a90b976ac40c3cf759d9e6b551658b28377968b2d1bf20d1a7d950b05
+    scope: one real-model first-attention-layer decode diagnostic on all TP4 workers; non-mutating, no E2E claim
 decision_reason: ""
 next_loop: >-
-  Audit and implement an opt-in Qwen3.6 v0.23 serving hook for selected-page
-  support, with real model Q/K, cache slot lifecycle, capture/update semantics
-  and TP4 worker dispatch verified. Quantify selector launches and page-recall
-  on real workload; then do a profiler-off same-stack dense E2E screen.
+  Resolve the algorithm-specific full-K selector overhead and omitted-value
+  mass, or close this page-adapter variant as implementation-scoped no-go.
+  Advance to the next attention paper before the 24-hour deadline if no
+  correctness-first candidate has a credible +10% E2E route.
 rollback:
   command: disable plugin opt-in and stop only the owned candidate service
   verified: false

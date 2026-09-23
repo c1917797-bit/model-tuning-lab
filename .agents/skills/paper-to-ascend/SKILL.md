@@ -222,6 +222,23 @@ not require retraining unless retraining is explicitly in scope.
   device tensors or graph-safe device operations, then rerun in a fresh result
   directory without erasing the original failure. A synthetic selector/ABI
   pass remains narrower than a real-model serving or quality result.
+- In v0.23 general-plugin discovery, a direct early attention import can hit a
+  `device_op`/`fused_moe` cycle; initialize the required Ascend ops package
+  before importing the attention implementation. Append plugin paths to the
+  image's original CANN `PYTHONPATH`, never replace it or hide `acl`. Validate
+  both changes with a no-device same-image import before a model launch.
+- A runtime field named `layerIndex` may be populated only by an optional
+  feature, not the normal attention path. Identify the live model layer from
+  the layer object and record its name in a one-shot worker event. Distinguish
+  hybrid scheduler block-size logs from the actual native cache tensor page
+  dimension before constructing a selected page table.
+- A page adapter can retain all token-level top-K selections and still diverge
+  from dense attention because unselected softmax mass contributes. Record
+  selected-support recall, output error, selector cost and native sparse-call
+  cost separately on real Q/K/V. Do not convert an intermediate tensor error
+  into the user's end-to-end task-accuracy bound, or promote a non-mutating
+  diagnostic into a throughput/accuracy result. The SparQ v5 evidence and
+  exact scope are in `projects/qwen36-paper-portfolio/SPARQ_ADAPTATION_GATE.md`.
 
 ## Do not do
 

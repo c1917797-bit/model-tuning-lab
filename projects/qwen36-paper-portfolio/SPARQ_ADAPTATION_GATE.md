@@ -1,7 +1,8 @@
 # SparQ Attention: Ascend applicability gate
 
 Start: 2026-09-22 22:22 UTC. Deadline for this paper: 2026-09-23 22:22 UTC.
-This is a planned experiment, not an NPU result.
+This workstream has native ABI and one real-model diagnostic result, but no
+end-to-end throughput or task-accuracy result. It is not accepted.
 
 ## Why this paper
 
@@ -127,3 +128,43 @@ The next attention candidate is Self-Indexing Attention
 (https://arxiv.org/abs/2609.13205), which reports Qwen3.6 hybrid-model
 results and is training-free, but no author repository was located during
 this initial audit. It must not be called an official-code port without one.
+
+## Real-model diagnostic, 2026-09-23
+
+An explicit opt-in, non-mutating plugin observed the real Qwen3.6 TP4 decode
+path on physical NPU4–7. Its source is in
+`projects/qwen36-paper-portfolio/plugin/qwen36_sparq_probe/`. The successful
+v5 audit is `/cache/cch/sparq-real-qwen36-v5/audit.jsonl` (SHA256
+`e66a1f3a90b976ac40c3cf759d9e6b551658b28377968b2d1bf20d1a7d950b05`).
+Each worker reached `language_model.model.layers.3.self_attn.attn` at one
+9002-token decode position; the live native page size was 128, with 71 pages.
+The request used `ignore_eos` only to force this diagnostic decode. The plugin
+returned the original dense output and did not run an accuracy or performance
+candidate. Services v1–v5 were stopped, not deleted; v5 was stopped cleanly.
+
+At 25% page budget, the four TP ranks retained 94.53–100% of the paper's
+top-128 token positions, but sparse-vs-dense layer-output maximum absolute
+error was 0.10156–0.96875. At 50%, top-128 page recall was 100% on all ranks,
+yet maximum absolute error remained 0.05469–0.41406. These are diagnostic
+intermediate errors, **not** the user's 1% end-to-end task-accuracy threshold.
+The second, warm selector path took 1.79–2.19 ms per rank, whereas its native
+sparse FIA call took 0.48–0.61 ms. The cold first selector took 68–82 ms.
+Selector timing includes full-K cache gathering, PyTorch operations and host
+synchronization; it is not a production timing estimate. Top-K recall alone
+does not preserve the dense output because omitted attention mass still
+contributes. A direct Python page selector is not a credible +10% end-to-end
+candidate without an algorithm-specific selector and omitted-value correction.
+
+The startup failures were preserved: v1 hit a v0.23 general-plugin import
+cycle and v2 replaced the image's CANN `PYTHONPATH`, hiding `acl`; v3 had no
+decode in the first EOS-terminated request; v4 exposed that `layerIndex` is
+only populated for the optional Hamming path and is zero here. The fixed
+probe captures `layer.layer_name`. An API startup log's 1536 attention block
+size is hybrid-cache planning, not this native FIA cache tensor's 128-page
+layout. None of these failures is a paper numerical result.
+
+The inspected `CANN/ops-transformer` BlitzSparseAttention documentation
+accepts dense K/V plus block-index metadata, not vLLM's live paged-KV table;
+it is therefore not a drop-in replacement. Source reuse may still be possible
+if an adapter avoids full-KV repacking. This source audit does not establish
+that an operator has been generated or deployed.
