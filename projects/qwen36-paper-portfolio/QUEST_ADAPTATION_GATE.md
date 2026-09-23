@@ -96,3 +96,53 @@ per-head native kernels, or other workloads fail. Reopen only with a new
 mechanism that solves the GQA page-set conflict *and* a credible low-overhead
 selector; do not simply increase the page budget without an E2E opportunity
 argument. Move to a distinct measured hotspot.
+
+## Per-head feasibility follow-up (2026-09-23)
+
+The preceding decision did not test the paper's per-query-head page sets. A
+new, non-mutating opt-in diagnostic compared **paper per-head Top-K** against
+the rejected shared-max approximation on the same real Q/K/V. The original
+dense output remained the service response. One 20,718-input/4-output
+request yielded 12 samples: all four TP ranks at full-attention layers 3, 31
+and 63, each at 20,719 live tokens and 162 pages. Its separate controller
+verified physical NPU4-7 were idle immediately before launch, mapped only
+those cards to container0-3, checked the four worker PIDs after readiness,
+and stopped only the owned container afterwards. NPU4-7 returned to their
+~2.87 GiB process-free HBM baseline. No NPU0-3 device was mapped.
+
+Across all 72 local Q-head samples per budget, per-head Quest retained:
+
+| Page budget | Min/mean exact probability mass | Shared-max min/mean | Largest per-head mathematical output error vs native dense |
+| --- | ---: | ---: | ---: |
+| 25% | 7.086% / 46.195% | 4.434% / 42.478% | 4.320 max-absolute; 0.298 RMS |
+| 50% | 24.453% / 67.516% | 12.837% / 61.730% | 1.687 max-absolute; 0.178 RMS |
+
+The full-support FP32 mathematical oracle itself differed from native BF16
+FIA by at most 0.0633 max-absolute across these samples. Thus a large
+selected-output difference cannot be attributed solely to oracle/numeric
+conversion. Layer 31 is a particularly hard case: its worst head retained
+only 7.086% at 25% budget and 24.453% at 50%. This is one repetitive
+long-context prompt, three layers, and one decode step—not a LongBench-v2 or
+GSM8K result. Intermediate mass and output error must not be called the
+user's final 1-percentage-point task-accuracy loss.
+
+The follow-up changes the scope of the decision: even repairing the GQA
+head-sharing compromise does **not** make 25% or 50% Quest pages an attractive
+custom-operator investment on this measured prompt. The paper method and
+different prompt distributions remain unproven, but the current Qwen3.6
+fixed-workload Quest path is a scoped no-go before a costly per-head kernel.
+Higher budgets need an independent E2E opportunity bound; 75% KV traffic
+alone cannot be assumed to reach the ~1.50x attention-local acceleration
+suggested by the existing 27.4%-share diagnostic. No Quest candidate E2E
+throughput, TTFT/TPOT, or final task-quality result exists.
+
+Artifacts outside Git:
+
+- Audit /cache/cch/quest-per-head-qwen36-v3/audit.jsonl, SHA256
+  d8c9ed8b846a2c9ed3dfdd232a5706f36a276bf62a1d12d3faf996e8b8504329.
+- Request /cache/cch/quest-per-head-qwen36-v3/request-summary.json,
+  SHA256 e5c80f7692827f757178b7b56f090e62f55abbdf9629e127684cf3e97e50ca6f.
+- Admission /cache/cch/quest-per-head-qwen36-v3/admission.json,
+  SHA256 a431f1f5bc1fc0d3ddcf41da9d99dc0070d440aaec55739c996b2c40ddd9b019.
+- Exact owned container 2485972c949ab408b522eb6a6f17450738afe0b1cceb57c0f82cb4da5cfe3e92,
+  stopped with exit code 0 and retained for logs.

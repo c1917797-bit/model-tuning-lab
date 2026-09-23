@@ -1,0 +1,104 @@
+schema: model-tuning-experiment/v1
+id: exp-20260923-qwen36-quest-per-head-feasibility
+status: decided
+decision: no_go_for_current_25_50pct_per_head_operator_path
+hypothesis: >-
+  Paper-faithful per-Q-head Quest page selection may retain materially more
+  useful attention than the rejected six-head shared-max Ascend FIA derivative.
+  A real-model mathematical oracle can decide whether a dedicated per-head
+  Ascend sparse-attention operator is worth implementing.
+objective: >-
+  Bound the remaining Quest migration gap, without claiming E2E performance
+  or task accuracy from intermediate attention tensors.
+owner: paper-to-ascend
+git:
+  branch: work/qwen36-quest-attention-20260923
+  base_commit: fbaa519
+  stage_commits: []
+environment:
+  source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  model_revision: /cache/efim/Qwen3.6-27B
+  tokenizer_revision: /cache/efim/Qwen3.6-27B/tokenizer_config.json
+  dtype_or_quantization: BF16 dense
+  framework_versions:
+    vllm_ascend: v0.23.0
+  cann_driver_firmware: verify before launch
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology: physical4-7 map to container0-3; verify before launch
+protocol:
+  primary_metric: exact per-head selected attention mass and output error versus dense
+  correctness_guardrails:
+    - All four TP ranks emit one sample for attention layers 3, 31 and 63.
+    - Verify the full-support mathematical oracle against native dense FIA before interpreting the sparse oracle.
+    - Compare paper per-head Top-K with the already-rejected shared-max Top-K using the same Q/K/V and 25%/50% page budgets.
+    - Preserve the native dense output; this diagnostic is non-mutating.
+    - Report one-time summary build, first-call score, selection and FIA timings separately; do not infer steady-state or E2E gain.
+  acceptance_thresholds:
+    - If the per-head selector appears numerically useful, require a distinct plugin-owned per-head operator path and NPU correctness before any throughput claim.
+    - Final acceptance remains >=10% matched profiler-off fixed-1024 E2E throughput and at most 1 percentage-point loss on each final task.
+  regression_thresholds: []
+  abort_conditions:
+    - Physical NPU4-7 foreign-process overlap at launch.
+    - Full-support math oracle materially disagrees with dense native FIA.
+    - Per-head selected support is still too inaccurate to warrant custom kernel development at useful budgets.
+    - Original Quest slot deadline 2026-09-24T00:20:00Z is reached.
+  warmup: one 20718-token prompt then four decode tokens, same as the prior real-model probe
+  repetitions: 1
+  command: record exact one-shot controller and immutable result root
+results:
+  baseline: {}
+  candidate:
+    claim_scope: one non-mutating real-model decode diagnostic, not E2E
+    request_prompt_tokens: 20718
+    request_output_tokens: 4
+    four_rank_samples: 12
+    layers: [3, 31, 63]
+    native_page_size: 128
+    native_pages: 162
+    full_support_math_vs_dense_max_abs: 0.06329154968261719
+    per_head_quest:
+      mass_25pct_min: 0.0708644762635231
+      mass_25pct_mean: 0.4619491042362319
+      math_output_25pct_max_abs: 4.3204474449157715
+      math_output_25pct_max_rms: 0.298379510641098
+      mass_50pct_min: 0.24453477561473846
+      mass_50pct_mean: 0.6751624927338626
+      math_output_50pct_max_abs: 1.6874293088912964
+      math_output_50pct_max_rms: 0.17750513553619385
+    shared_max_derivative:
+      mass_25pct_min: 0.04434463754296303
+      mass_25pct_mean: 0.4247766558805274
+      mass_50pct_min: 0.12836694717407227
+      mass_50pct_mean: 0.6173010863777664
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources:
+    physical_npus: [4, 5, 6, 7]
+    post_stop_process_free: true
+    owned_container_stopped_retained: 2485972c949ab408b522eb6a6f17450738afe0b1cceb57c0f82cb4da5cfe3e92
+artifacts:
+  - path: /cache/cch/quest-per-head-qwen36-v3/audit.jsonl
+    sha256: d8c9ed8b846a2c9ed3dfdd232a5706f36a276bf62a1d12d3faf996e8b8504329
+    scope: 12 real decode attention samples, diagnostic only
+  - path: /cache/cch/quest-per-head-qwen36-v3/request-summary.json
+    sha256: e5c80f7692827f757178b7b56f090e62f55abbdf9629e127684cf3e97e50ca6f
+  - path: /cache/cch/quest-per-head-qwen36-v3/admission.json
+    sha256: a431f1f5bc1fc0d3ddcf41da9d99dc0070d440aaec55739c996b2c40ddd9b019
+decision_reason: >-
+  On one repetitive 20K-token prompt at three attention layers, faithfully
+  selecting pages per local Q head improves retained mass over shared-max
+  selection but still loses substantial exact attention mass at the only
+  25%/50% budgets with plausible traffic reduction. This is a scoped
+  implementation-investment no-go, not a paper-wide or final-task-quality
+  verdict. No service candidate or E2E benchmark was run.
+next_loop: >-
+  Advance to a distinct paper-backed measured hotspot. A Quest reopening
+  requires a new selector/support mechanism and an E2E opportunity argument,
+  not a repeat of these budgets or this prompt.
+rollback:
+  command: disable QWEN36_QUEST_PROBE_ENABLE and stop only the newly owned service
+  verified: true

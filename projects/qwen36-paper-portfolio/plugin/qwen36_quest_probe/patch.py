@@ -20,7 +20,12 @@ EXPECTED_SOURCE_SHA256 = "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d
 ENABLE_ENV = "QWEN36_QUEST_PROBE_ENABLE"
 AUDIT_ENV = "QWEN36_QUEST_PROBE_AUDIT"
 _LOCK = threading.Lock()
-_DONE = False
+_DONE_LAYERS: set[str] = set()
+_TARGET_LAYERS = {
+    "language_model.model.layers.3.self_attn.attn",
+    "language_model.model.layers.31.self_attn.attn",
+    "language_model.model.layers.63.self_attn.attn",
+}
 
 
 def _event(name: str, **fields: object) -> None:
@@ -65,7 +70,6 @@ def register() -> None:
            torch=torch.__version__, torch_npu=torch_npu.__version__)
 
     def observed(self, query, key, value, attn_metadata, output, kv_cache=None):
-        global _DONE
         result = original(self, query, key, value, attn_metadata, output, kv_cache)
         actual_tokens = attn_metadata.actual_seq_lengths_q[-1]
         if (
@@ -77,16 +81,17 @@ def register() -> None:
             or self.num_kv_heads != 1
             or self.key_cache is None
             or getattr(self, "_quest_probe_layer_name", None)
-            != "language_model.model.layers.3.self_attn.attn"
+            not in _TARGET_LAYERS
         ):
             return result
         lengths = attn_metadata.seq_lens_list
         if len(lengths) != 1 or int(lengths[0]) < 2048:
             return result
         with _LOCK:
-            if _DONE:
+            layer_name = self._quest_probe_layer_name
+            if layer_name in _DONE_LAYERS:
                 return result
-            _DONE = True
+            _DONE_LAYERS.add(layer_name)
         try:
             length = int(lengths[0])
             block_size = int(self.key_cache.shape[1])
@@ -116,6 +121,9 @@ def register() -> None:
             dense = result[0].float().reshape(6, 256)
             cache_key = self.key_cache.view(self.key_cache.shape[0], block_size, -1)
             cache_value = self.value_cache.view(self.value_cache.shape[0], block_size, -1)
+            full_values = self.value_cache.index_select(0, pages).float().reshape(
+                -1, 256
+            )[:length]
             cases = []
             for fraction in (0.25, 0.5):
                 budget = max(2, math.ceil(num_pages * fraction))
@@ -163,6 +171,26 @@ def register() -> None:
                     == chosen[None, :]
                 ).any(dim=-1)
                 selected_mass = full_probs[:, selected_mask].sum(dim=-1)
+                # Distinguish the faithful per-Q-head Quest selector from the
+                # shared-max GQA/FIA derivative that failed the first gate.
+                own_pages = torch.cat(
+                    (
+                        each_other,
+                        torch.full(
+                            (q.shape[0], 1), num_pages - 1,
+                            device=q.device, dtype=each_other.dtype,
+                        ),
+                    ), dim=-1,
+                )
+                own_mask = (
+                    logical_positions[None, :, None] // block_size
+                    == own_pages[:, None, :]
+                ).any(dim=-1)
+                own_mass = (full_probs * own_mask).sum(dim=-1)
+                own_probs = full_probs * own_mask
+                own_probs = own_probs / own_probs.sum(dim=-1, keepdim=True)
+                own_output = own_probs @ full_values
+                own_difference = own_output - dense
                 cases.append({
                     "fraction": fraction, "page_budget": budget,
                     "selected_tokens": selected_length,
@@ -170,17 +198,23 @@ def register() -> None:
                     "sparse_fia_wall_ms": sparse_ms,
                     "per_head_quest_page_recall": page_recall.tolist(),
                     "per_head_exact_attention_mass": selected_mass.tolist(),
+                    "per_head_exact_mass_native_quest": own_mass.tolist(),
+                    "native_quest_math_output_max_abs": own_difference.abs().max().item(),
+                    "native_quest_math_output_rms": own_difference.square().mean().sqrt().item(),
                     "output_max_abs": difference.abs().max().item(),
                     "output_rms": difference.square().mean().sqrt().item(),
                     "output_cosine": torch.nn.functional.cosine_similarity(
                         approximation.flatten(), dense.flatten(), dim=0
                     ).item(),
                 })
-            _event("real_decode_sample", tp_rank=torch.distributed.get_rank()
+            _event("real_decode_sample", layer_name=layer_name,
+                   tp_rank=torch.distributed.get_rank()
                    if torch.distributed.is_initialized() else None,
                    seq_len=length, block_size=block_size,
                    num_pages=num_pages, summary_build_ms=summary_build_ms,
-                   score_wall_ms=score_ms, cases=cases)
+                   score_wall_ms=score_ms,
+                   dense_math_output_max_abs=((full_probs @ full_values) - dense).abs().max().item(),
+                   cases=cases)
         except BaseException as exc:
             _event("real_decode_sample_failed", error=f"{type(exc).__name__}: {exc}")
             raise

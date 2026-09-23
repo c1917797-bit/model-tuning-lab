@@ -107,6 +107,14 @@ not require retraining unless retraining is explicitly in scope.
   or resource ownership drifts; re-isolate and re-baseline.
 - Saved FLOPs, faster local GMM, or a single warm run is not enough. Accept only
   correctness-first, apples-to-apples repeated evidence.
+- For page-sparse attention, distinguish the paper's per-query-head support
+  from a backend-driven per-request shared block table. Before commissioning
+  a custom per-head kernel, compare both selectors on the same live Q/K/V:
+  exact attention mass, selected-output error, and a full-support mathematical
+  oracle checked against native attention. A shared-page failure alone does
+  not reject the paper, while a per-head selector can still lose too much
+  mass at useful budgets. A few layers or one prompt are investment gates,
+  never final task-accuracy evidence.
 - Plugin discovery, plan loading, and patch installation are not mechanism
   evidence. Require an event from the exact live hook carrying request identity,
   runtime geometry, and the selected action.
