@@ -248,6 +248,14 @@ not require retraining unless retraining is explicitly in scope.
   Python page variant was rejected, while paper-level token sparsity remains
   unjudged. Prefer a page-native paper with low-cost page summaries over
   relabeling a costly full-K scan as an optimized selector.
+- For GQA page-selection papers, do not assume a high per-head page score can
+  be collapsed to one native block table without loss. Measure per-head exact
+  attention mass and output error on the actual shared page set before building
+  incremental metadata. In Qwen3.6 TP4 (six local Q heads to one KV head), a
+  Quest max-across-heads shared table kept only 62.52% mass for the worst head
+  even at a 50% page budget. Separate first-call Python dispatch/compilation
+  timing from steady-state selector cost. This rejects that adapter, not the
+  paper or the user's final 1% E2E accuracy threshold.
 
 ## Do not do
 

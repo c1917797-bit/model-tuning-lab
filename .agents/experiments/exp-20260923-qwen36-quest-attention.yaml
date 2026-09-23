@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-quest-attention
-status: planned
-decision: pending
+status: decided
+decision: rejected_for_current_shared_page_adapter
 hypothesis: >-
   Quest page-min/max summaries can select Qwen3.6 GQA decode KV pages with
   lower online selector cost than the failed full-K SparQ page adapter,
@@ -14,7 +14,7 @@ owner: paper-to-ascend
 git:
   branch: work/qwen36-quest-attention-20260923
   base_commit: 106527f
-  stage_commits: []
+  stage_commits: [b774c44, fbaa519]
 environment:
   source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
   model_revision: /cache/efim/Qwen3.6-27B
@@ -54,7 +54,17 @@ protocol:
   command: record exact launch and client commands before candidate timing
 results:
   baseline: {}
-  candidate: {}
+  candidate:
+    scope: one real-model decode diagnostic; dense output returned unchanged
+    tp_samples: 4
+    kv_tokens: 20719
+    native_pages: 162
+    selected_mass_min_25pct: 0.428763210773468
+    selected_mass_min_50pct: 0.6251965165138245
+    max_abs_range_25pct: [0.10162353515625, 0.36328125]
+    max_abs_range_50pct: [0.0498046875, 0.1939697265625]
+    online_score_first_call_ms_range: [31.77872, 34.45285]
+    note: first-call diagnostic timings are not steady-state or E2E performance
   cold: {}
   steady: {}
   boundary: {}
@@ -67,11 +77,18 @@ artifacts:
   - path: /cache/cch/sparq-page-abi-20260923-v2/result.json
     sha256: 12920016294cdecd888037c50921e5c10ebdf18f573f7dec0a8fa4f1fd6f0203
     scope: native selected-page FIA ABI, not Quest mechanism quality
-decision_reason: ""
+  - path: /cache/cch/quest-real-qwen36-v2/audit.jsonl
+    sha256: 94f458927736b562a751d77b3346b7542b02a3a43025b6c50e38c9a3564fbaa6
+    scope: one-shot real TP4 non-mutating Quest diagnostic; not E2E
+decision_reason: >-
+  The pre-registered useful-budget support gate failed: the six-head shared
+  page set retained only 42.876% and 62.520% exact mass on its worst local
+  head at 25% and 50% page budgets. First-call Python scoring overhead also
+  needs a distinct low-cost solution. No Quest E2E or task-quality claim.
 next_loop: >-
-  Implement a one-shot non-mutating real-Qwen Quest page-score diagnostic,
-  then decide whether incremental page summaries and a plugin service path
-  are justified by support quality and selector cost.
+  Select a distinct measured attention/matmul mechanism with author code and
+  a credible path through the existing Ascend kernel ABI; do not repeat this
+  Quest shared-max variant without a new GQA-selection hypothesis.
 rollback:
   command: disable Quest plugin opt-in and stop only owned candidate service
-  verified: false
+  verified: true

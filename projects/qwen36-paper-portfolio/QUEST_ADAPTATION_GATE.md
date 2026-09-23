@@ -65,3 +65,34 @@ loss; do not declare accepted if the interpretation remains ambiguous.
 The official repository was inspected through GitHub primary-source pages;
 the host's direct `git ls-remote` timed out. Do not claim it was cloned or
 that its CUDA kernels were run on Ascend.
+
+## Real TP4 diagnostic and scoped decision (2026-09-23)
+
+The first service was stopped before any request after a cache-shape review:
+native paged Key is `[pages, 128, 1, 256]`, so the one-shot diagnostic must
+flatten the singleton KV-head dimension before page min/max. The corrected
+same-image shape test passed, and a fresh v2 service ran on physical NPU4–7.
+The corrected opt-in probe returned the original dense output unchanged.
+One 20,718-input/4-output request produced one `real_decode_sample` on each
+TP rank, at layer 3, 20,719 live KV tokens and 162 native 128-token pages.
+The service was stopped and all four cards returned to the idle HBM baseline.
+
+Evidence: `/cache/cch/quest-real-qwen36-v2/audit.jsonl`, SHA256
+`94f458927736b562a751d77b3346b7542b02a3a43025b6c50e38c9a3564fbaa6`.
+The 25% shared-page proposal retained as little as 42.876% exact attention
+probability mass on a local Q head; at 50%, the minimum was 62.520%.
+Across ranks, maximum absolute attention-output difference from dense was
+0.102–0.363 at 25% and 0.050–0.194 at 50%. The first-call page score took
+31.8–34.5 ms per rank versus 0.46–0.71 ms for a selected-page native FIA;
+that score timing includes initial operator/dispatch overhead and is **not**
+a steady-state or E2E estimate. The one-time full-cache summary build took
+42.3–44.7 ms and must not be charged to every decode in a real integration.
+
+Decision: reject this direct six-Q-head shared-max Quest page adapter for the
+current fixed workload. Its pre-registered useful-budget support gate fails,
+so do not invest in summary-lifecycle integration or claim a Quest throughput
+or task-accuracy result. This is not a proof that all Quest implementations,
+per-head native kernels, or other workloads fail. Reopen only with a new
+mechanism that solves the GQA page-set conflict *and* a credible low-overhead
+selector; do not simply increase the page budget without an E2E opportunity
+argument. Move to a distinct measured hotspot.
