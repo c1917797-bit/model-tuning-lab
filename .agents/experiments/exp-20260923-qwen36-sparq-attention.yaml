@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-sparq-attention
-status: running
-decision: pending
+status: decided
+decision: rejected
 hypothesis: >-
   SparQ query-dependent KV selection can reduce the measured Qwen3.6 GQA
   decode attention work enough to improve profiler-off TP4 output throughput.
@@ -87,6 +87,22 @@ results:
         selection_wall_ms_warm_range: [1.79231, 2.19252]
         sparse_fia_wall_ms_range: [0.48196, 0.60897]
       not_proven: candidate service dispatch, E2E throughput, task accuracy, paper-level no-go
+    paper_mean_reallocation_diagnostic:
+      result: executed_non_mutating_real_qwen36
+      scope: one 20719-token decode position; first full-attention layer; all four TP workers; eager only
+      native_page_size: 128
+      num_pages: 162
+      page_budget_25_percent:
+        page_count: 41
+        uncorrected_layer_max_abs_range: [0.1068025529, 0.3128662109]
+        corrected_layer_max_abs_range: [0.1068025529, 0.2350417674]
+      page_budget_50_percent:
+        page_count: 81
+        uncorrected_layer_max_abs_range: [0.05126953125, 0.15173339844]
+        corrected_layer_max_abs_range: [0.05120547116, 0.13018706441]
+        selection_wall_ms_warm_range: [1.87031, 2.39501]
+        sparse_fia_wall_ms_range: [0.48015, 0.63785]
+      caveat: correction modest and not uniformly better on each rank; exact historical V mean was computed diagnostically from full cache, not maintained by serving; intermediate errors are not E2E accuracy loss
   lifecycle: {}
   resources: {}
 artifacts:
@@ -108,12 +124,24 @@ artifacts:
   - path: /cache/cch/sparq-real-qwen36-v5/audit.jsonl
     sha256: e66a1f3a90b976ac40c3cf759d9e6b551658b28377968b2d1bf20d1a7d950b05
     scope: one real-model first-attention-layer decode diagnostic on all TP4 workers; non-mutating, no E2E claim
-decision_reason: ""
+  - path: /cache/cch/sparq-real-qwen36-v6/audit.jsonl
+    sha256: 5e9e4841d62ec45e1b45c5f46a9e9cc25585303dc176466ab68b06388ec1b863
+    scope: real-model paper mean-V reallocation diagnostic; one position, all TP4 workers; non-mutating
+decision_reason: >-
+  Reject this direct Python selected-page adapter, not the SparQ token-level
+  paper algorithm. Its full-K selector has 1.87–2.40 ms warm diagnostic wall
+  cost per layer/rank versus 0.48–0.64 ms selected-page FIA, and paper mean-V
+  reallocation only modestly improves real-model layer output. No supported
+  fused token-level sparse paged-KV operator or incremental mean-V lifecycle
+  exists in the inspected v0.23 seam. The preset selector-cost/quality abort
+  condition is met before a service throughput candidate. No E2E throughput
+  or LongBench-v2/GSM8K accuracy was measured for SparQ.
 next_loop: >-
-  Resolve the algorithm-specific full-K selector overhead and omitted-value
-  mass, or close this page-adapter variant as implementation-scoped no-go.
-  Advance to the next attention paper before the 24-hour deadline if no
-  correctness-first candidate has a credible +10% E2E route.
+  Start Quest page-min/max selection as the next attention mechanism, because
+  its paper algorithm targets native pages and can reuse the verified FIA
+  block-table seam. Audit the official GQA limitation and page-summary
+  lifecycle before NPU implementation. Self-Indexing Attention remains queued
+  but needs token-level sparse attention and a 1-bit selector operator.
 rollback:
   command: disable plugin opt-in and stop only the owned candidate service
-  verified: false
+  verified: true

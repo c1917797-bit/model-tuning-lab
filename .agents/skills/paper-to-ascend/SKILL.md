@@ -239,6 +239,15 @@ not require retraining unless retraining is explicitly in scope.
   into the user's end-to-end task-accuracy bound, or promote a non-mutating
   diagnostic into a throughput/accuracy result. The SparQ v5 evidence and
   exact scope are in `projects/qwen36-paper-portfolio/SPARQ_ADAPTATION_GATE.md`.
+- If the paper includes omitted-probability-mass correction, test it against
+  the *same* real-model Q/K/V and selected support before concluding that
+  page selection itself is the sole quality problem. An exact historical mean
+  computed from the full cache is valid for a one-shot diagnosis, but is not
+  a deployable running-mean lifecycle or a performance result. SparQ's v6
+  correction was modest and sometimes slightly worse by TP rank; its direct
+  Python page variant was rejected, while paper-level token sparsity remains
+  unjudged. Prefer a page-native paper with low-cost page summaries over
+  relabeling a costly full-K scan as an optimized selector.
 
 ## Do not do
 

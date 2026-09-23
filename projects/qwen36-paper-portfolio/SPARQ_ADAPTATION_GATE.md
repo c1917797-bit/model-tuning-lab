@@ -168,3 +168,27 @@ accepts dense K/V plus block-index metadata, not vLLM's live paged-KV table;
 it is therefore not a drop-in replacement. Source reuse may still be possible
 if an adapter avoids full-KV repacking. This source audit does not establish
 that an operator has been generated or deployed.
+
+The v6 follow-up tested the paper's omitted-mass correction on a *different*
+20719-token real-model prompt, with 162 native pages. The one-shot probe read
+the entire historical V to construct an exact mean for diagnosis; it did not
+implement a production running mean. At 25% page budget, uncorrected max
+absolute error across TP ranks ranged 0.107–0.313 and corrected error
+0.107–0.235. At 50%, the ranges were 0.051–0.152 and 0.051–0.130. Some
+individual ranks worsened slightly. Warm selector wall time was 1.87–2.40 ms,
+native sparse FIA 0.48–0.64 ms. The output is
+`/cache/cch/sparq-real-qwen36-v6/audit.jsonl` (SHA256
+`5e9e4841d62ec45e1b45c5f46a9e9cc25585303dc176466ab68b06388ec1b863`).
+The v6 service was stopped cleanly and NPU4–7 returned to their idle HBM
+baseline with no running processes.
+
+**Scoped decision:** reject the direct Python selected-page adapter under the
+pre-registered selector-cost/quality gate. Do not label the original
+token-level SparQ paper ineffective, and do not label these one-layer tensor
+errors as a LongBench-v2/GSM8K failure. A credible revival would need a
+fused selector over the paged key cache, selected-token (not merely selected-
+page) sparse attention, and a request/layer-safe running-V mean. None has
+passed current NPU or service gates. No SparQ E2E performance or final task
+accuracy result exists. The next paper-level loop will prioritize Quest,
+whose algorithm is page-native and has official code, ahead of Self-Indexing
+Attention's token-level 1-bit pipeline.
