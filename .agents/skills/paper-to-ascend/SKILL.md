@@ -290,6 +290,16 @@ not require retraining unless retraining is explicitly in scope.
   intermediate output error, so its *local operator investment* was declined;
   neither paper-wide performance nor task accuracy was measured. See
   `projects/qwen36-paper-portfolio/KASCADE_ADAPTATION_GATE.md`.
+- For a matmul paper, do not infer applicability from the aggregate MatMul
+  percentage. Parse the real prefill/decode kernel rows by M, K, N, dtype,
+  format, count, and rank; match the paper's required shape and concurrency
+  before authoring an operator. On Qwen3.6 TP4's 16-way decode trace, all
+  observed MatMuls had M=16, so a single-token `min(M,N)=1` vectorization
+  result does not transfer. Check the pinned vLLM-Ascend quantization methods
+  and CANN/ops-transformer Split-K sources before generating a W4A16 kernel;
+  source presence is not proof that the deployed binary selects that path.
+  Keep a paper's local kernel speedup separate from the matched E2E target.
+  See `projects/qwen36-paper-portfolio/MATMUL_PAPER_SHAPE_GATE.md`.
 
 ## Do not do
 
