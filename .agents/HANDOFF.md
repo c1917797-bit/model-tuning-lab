@@ -1,5 +1,21 @@
 # Maintainer Handoff
 
+## Host-side Python bootstrap update — 2026-09-23
+
+The reusable host-test setup is now defined by `pyproject.toml`,
+`scripts/bootstrap-host-test-env.sh`, and
+`chicaihong01-host-maintenance`. It uses uv-managed Python 3.11 and a shared
+CPU-only environment/cache under `/cache/cch`; each checkout supplies its own
+`src` through `PYTHONPATH`.
+
+This was selectively distilled from Tail-Replay branch commit `43bd4a8`.
+The Tail-Replay-only monkeypatch remains branch-local. The first unconstrained
+Torch install attempt resolved a newer Torch plus CUDA 13/NVIDIA dependencies
+and was stopped before completion; its wrong cache was removed. The validated
+path pins `torch==2.4.1`, keeps a separate `cache-cpu`, and passed 42 full
+and 21 focused Tail-Replay host tests. This proves only host-side unit-test
+readiness; Ascend execution still requires the pinned device container.
+
 ## Repository integration update — 2026-09-12
 
 Integrated the validated DRRQR paper-parity and source-selection/baseline
