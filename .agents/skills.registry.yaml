@@ -195,12 +195,17 @@ skills:
   - id: paper-to-ascend-reporting
     path: .agents/skills/paper-to-ascend-reporting
     status: experimental
-    purpose: Produce handoff-ready Paper-to-Ascend evidence reports with scoped decisions and next loops.
+    purpose: Render measured Paper-to-Ascend experiments as colleague-style, evidence-bound, reproducible reports without inventing data.
     triggers:
       - Paper-to-Ascend report
       - summarize paper implementation result
       - paper experiment handoff
       - 论文落地报告
+      - write a Paper-to-Ascend report
+      - summarize an algorithm-piercing experiment
+      - produce a paper reproduction report
+      - 输出论文穿刺报告
+      - 按同事实践格式汇报实测结果
     scope:
       - docs/**
       - .agents/HANDOFF.md
