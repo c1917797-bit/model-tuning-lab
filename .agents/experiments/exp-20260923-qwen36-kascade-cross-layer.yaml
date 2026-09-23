@@ -1,0 +1,98 @@
+schema: model-tuning-experiment/v1
+id: exp-20260923-qwen36-kascade-cross-layer
+status: attempted
+decision: pending
+hypothesis: >-
+  Kascade's anchor-layer post-softmax pooled Top-K positions retain useful
+  exact attention mass when reused at the next Qwen3.6 full-attention layer,
+  despite intervening GDN layers and TP4's one KV head per worker.
+objective: >-
+  Test the official mechanism on live BF16 Ascend Qwen3.6-27B without changing
+  serving output. This is an investment gate, not performance or task accuracy.
+owner: paper-to-ascend
+paper:
+  url: https://arxiv.org/html/2512.16391v2
+  official_repository: https://github.com/microsoft/kascade
+  official_vllm_branch_commit: de249edf9f2b10f436e2bf6d9e70e29247a671c9
+  license: MIT
+git:
+  branch: work/qwen36-kascade-attention-20260923
+  base_commit: 5459a2af6ad7c11671fac8240a7120df50024571
+  stage_commits: []
+timebox:
+  start_utc: 2026-09-23T16:15:00Z
+  deadline_utc: 2026-09-24T16:15:00Z
+environment:
+  source_commit: 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd
+  model_revision: /cache/efim/Qwen3.6-27B
+  tokenizer_revision: /cache/efim/Qwen3.6-27B/tokenizer_config.json
+  dtype_or_quantization: BF16 dense
+  framework_versions:
+    vllm_ascend: v0.23.0
+    CANN: 9.1.0
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+  runtime_topology: physical4-7 map to container0-3; reverify before load
+protocol:
+  primary_metric: exact attention mass retained by cross-layer KV-head Top-K reuse
+  correctness_guardrails:
+    - Native dense output is returned unchanged by the opt-in probe.
+    - Sample all four TP ranks and full-attention pairs 3-to-7, 31-to-35, 59-to-63.
+    - Verify full-support FP32 attention against native BF16 output before interpreting sparsity.
+    - Anchor scores are summed post-softmax probabilities over the six local Q heads.
+    - Compare 10%, 20%, 30% anchor-reuse with target-layer same-head and per-query-head exact Top-K oracles.
+    - Preserve request and sequence identity across anchor and reuse observations.
+    - Do not call attention-mass loss the final one-percentage-point task accuracy loss.
+  acceptance_thresholds:
+    - If cross-layer reuse is numerically promising, prove selected-token ABI and NPUGraph before service performance.
+    - Final objective remains >=10% matched profiler-off fixed-1024 E2E throughput gain.
+    - Final LongBench-v2 and GSM8K accuracy loss <=1 percentage point each under latest user allowance.
+  abort_conditions:
+    - Physical NPU4-7 overlap with a real external process or busy HBM/AICore.
+    - Full-support mathematical oracle disagrees materially with native FIA.
+    - Cross-layer selected support has insufficient mass or large selected-output error at useful budgets.
+    - One-day deadline reached.
+  warmup: one bounded 20718-token prompt and four dense decode tokens
+  repetitions: 1
+  command: one fail-closed non-mutating plugin diagnostic into a new immutable root
+results:
+  baseline: {}
+  candidate:
+    first_diagnostic:
+      claim_scope: one non-mutating 20K real-model decode request, partial due numerical gate
+      successful_samples: 22
+      failed_samples: 2
+      complete_pairs: [3-to-7, 31-to-35]
+      10pct_cross_layer_mass_min_mean_3_to_7: [0.05019658803939819, 0.6010817190011343]
+      20pct_cross_layer_mass_min_mean_3_to_7: [0.20735332369804382, 0.735766044507424]
+      20pct_same_layer_pooled_mass_min_mean_7: [0.6244905591011047, 0.9234173198541006]
+      20pct_cross_layer_mass_min_mean_31_to_35: [0.750780463218689, 0.9460456470648447]
+      20pct_same_layer_pooled_mass_min_mean_35: [0.8335995078086853, 0.9691580807169279]
+      layer59_rank1_full_math_vs_native_max_abs: 0.12085342407226562
+      predeclared_full_math_gate: 0.1
+      request_completed: false
+      reason: >-
+        The native-output oracle failed at rank1 layer59; its layer63 reuse
+        lacked an anchor and failed. The owned container was stopped after
+        preserving logs and partial samples. No candidate output was served.
+  cold: {}
+  steady: {}
+  resources:
+    owned_v1_container_stopped_retained: 6e3fd7dcb87fcf59f6306c6c61cabf131e2d59e4dfab3f14f410f91ae77da50b
+    post_v1_physical4_7_process_free: true
+artifacts:
+  - path: /cache/cch/kascade-qwen36-crosslayer-v1/audit.jsonl
+    sha256: 85935543b8004fce5f426ece1f414cbff1eb62f9618766abc623f493494ec811
+  - path: /cache/cch/kascade-qwen36-crosslayer-v1/admission.json
+    sha256: b61631654d9f1542513f4cc71ea047ac95dee3cfa464ccb378568f9f115d6c2d
+decision_reason: ""
+next_loop: >-
+  The early pair is poor but the mid pair at 20% is promising. Map all
+  adjacent full-attention layer transitions on a new immutable NPU run,
+  preserving the rank1 layer59 numerical failure as an excluded pair rather
+  than relaxing the predeclared full-support oracle gate. Decide whether
+  an adaptive anchor/reuse plan covers enough real layers for E2E benefit.
+rollback:
+  command: disable QWEN36_KASCADE_PROBE_ENABLE and stop only its owned container
+  verified: true
