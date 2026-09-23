@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-self-indexing-feasibility
-status: planned
+status: attempted
 decision: pending
 hypothesis: >-
   The paper's GQA-pooled sign-magnitude token selector may retain useful
@@ -61,11 +61,31 @@ protocol:
   command: run one fail-closed controller into a new immutable result root
 results:
   baseline: {}
-  candidate: {}
+  candidate:
+    first_diagnostic:
+      claim_scope: one non-mutating real-model decode diagnostic, not E2E
+      four_rank_samples: 12
+      layers: [3, 31, 63]
+      live_tokens: 20719
+      dot_product_max_abs: 0.000091552734375
+      full_math_vs_dense_max_abs: 0.06484222412109375
+      pooled_sign_mass_5pct_min: 0.13954320549964905
+      pooled_sign_mass_5pct_mean: 0.553388505967127
+      pooled_sign_mass_10pct_min: 0.1893046498298645
+      pooled_sign_mass_10pct_mean: 0.707094680931833
+      pooled_sign_mass_25pct_min: 0.3667330741882324
+      pooled_sign_mass_25pct_mean: 0.8516553176773919
+      next_question: compare per-head sign and exact-logit Top-K on same live Q/K
   cold: {}
   steady: {}
   resources: {}
-artifacts: []
+artifacts:
+  - path: /cache/cch/self-indexing-qwen36-v1/audit.jsonl
+    sha256: 031b9e24364a8ceb377590963fab6dc2a0f92e1a7fecbe3e55ca5ddaa9536fee
+  - path: /cache/cch/self-indexing-qwen36-v1/request-summary.json
+    sha256: 6ad9498e761d69b0b9036edad9812d61bcb9fcfd4851c0ea52731e820b230396
+  - path: /cache/cch/self-indexing-qwen36-v1/admission.json
+    sha256: 5a4d1c99d8026d394916c5a3b97f34045dd239b13abfcb65e14a1aa442891471
 rollback:
   command: disable QWEN36_SIA_PROBE_ENABLE and stop only the newly owned container
   verified: false

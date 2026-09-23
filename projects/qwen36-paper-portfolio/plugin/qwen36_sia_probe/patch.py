@@ -157,6 +157,17 @@ def register() -> None:
             key_sign = k_rot >= 0
             matches = (key_sign == query_sign[None, :]).sum(dim=-1).float()
             scores = (matches - 128).clamp_min(0) * k_rot.norm(dim=-1)
+            # The paper pools Q heads within a KV group. These two additional
+            # selectors are diagnostic bounds, not paper-serving variants:
+            # per-head sign scoring removes GQA pooling, while full-probability
+            # Top-K bounds what any selector can retain at the same budget.
+            per_head_matches = (
+                key_sign[None, :, :] == (q_rot >= 0)[:, None, :]
+            ).sum(dim=-1).float()
+            per_head_scores = (per_head_matches - 128).clamp_min(0) * k_rot.norm(dim=-1)[None, :]
+            positions = torch.arange(length, device=q.device)
+            forced = (positions < 64) | (positions >= length - 64)
+            forced_mass = full_probs[:, forced].sum(dim=-1)
             torch.npu.synchronize()
             score_wall_ms = (time.perf_counter_ns() - start) / 1e6
             cases = []
@@ -172,10 +183,26 @@ def register() -> None:
                 sparse_probs = torch.softmax((q @ selected_k.T) * self.scale, dim=-1)
                 sparse_math = sparse_probs @ selected_v
                 difference = sparse_math - dense
+                per_head_selected = torch.topk(
+                    per_head_scores.masked_fill(forced[None, :], float("-inf")),
+                    budget - 128, dim=-1, sorted=False,
+                ).indices
+                per_head_mass = forced_mass + full_probs.gather(
+                    1, per_head_selected
+                ).sum(dim=-1)
+                exact_selected = torch.topk(
+                    full_probs.masked_fill(forced[None, :], float("-inf")),
+                    budget - 128, dim=-1, sorted=False,
+                ).indices
+                exact_mass = forced_mass + full_probs.gather(
+                    1, exact_selected
+                ).sum(dim=-1)
                 cases.append({
                     "fraction": fraction, "budget": budget,
                     "selected_mass_per_head": mass.tolist(),
                     "mass_min": mass.min().item(), "mass_mean": mass.mean().item(),
+                    "per_head_sign_mass": per_head_mass.tolist(),
+                    "exact_logit_topk_mass": exact_mass.tolist(),
                     "math_output_max_abs": difference.abs().max().item(),
                     "math_output_rms": difference.square().mean().sqrt().item(),
                     "selection_wall_ms": selection_wall_ms,
@@ -184,6 +211,8 @@ def register() -> None:
                    tp_rank=rank, seq_len=length, block_size=block_size,
                    num_pages=num_pages, global_kv_head=rank,
                    rotation_seed_base=42,
+                   pooled_positive_score_fraction=(scores > 0).float().mean().item(),
+                   per_head_positive_score_fraction=(per_head_scores > 0).float().mean().item(),
                    dot_product_max_abs=dot_error,
                    full_math_vs_dense_max_abs=full_math_error,
                    rotation_wall_ms=rotation_wall_ms,

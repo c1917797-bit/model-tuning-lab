@@ -64,3 +64,42 @@ Run only with fresh fail-closed physical NPU4-7 ownership and immutable
 artifacts. Do not touch NPU0-3 or unrelated containers. A negative result
 must identify whether it rejects this equation-derived selector, the tested
 budget/prompt, or the broader paper, and advance without exceeding 24 hours.
+
+## First real-model NPU diagnostic (v1)
+
+One 20,718-token request generated 12 samples: every TP rank at layers 3,
+31 and 63, each with 20,719 live tokens. No probe failure event occurred.
+The randomized Hadamard QK dot-product identity had maximum absolute error
+`9.16e-5`. Full-support FP32 mathematical attention differed from native
+BF16 dense FIA by at most `0.06485` maximum absolute. Thus the sparse
+selector gap cannot be attributed solely to the transform implementation
+or the full-support mathematical oracle.
+
+| Selected tokens | Min/mean exact mass, across 72 local Q heads | Largest selected mathematical output max-abs vs native dense |
+| --- | ---: | ---: |
+| 5%, 1036 | 13.954% / 55.339% | 6.157 |
+| 10%, 2072 | 18.930% / 70.709% | 3.818 |
+| 25%, 5180 | 36.673% / 85.166% | 1.538 |
+
+The first-call transform, score and selection wall times ranged up to 82.65,
+64.87 and 48.90 ms respectively; warm samples were far smaller, but none
+is a deployable bit-packed selector benchmark. The serving response stayed
+dense and HTTP succeeded. The owned container was stopped with exit 0;
+physical NPU4-7 returned to process-free ~2.87 GiB HBM, and NPU0-3 were
+untouched. Immutable artifacts outside Git:
+
+- `/cache/cch/self-indexing-qwen36-v1/audit.jsonl`: SHA256
+  `031b9e24364a8ceb377590963fab6dc2a0f92e1a7fecbe3e55ca5ddaa9536fee`.
+- `/cache/cch/self-indexing-qwen36-v1/request-summary.json`: SHA256
+  `6ad9498e761d69b0b9036edad9812d61bcb9fcfd4851c0ea52731e820b230396`.
+- `/cache/cch/self-indexing-qwen36-v1/admission.json`: SHA256
+  `5a4d1c99d8026d394916c5a3b97f34045dd239b13abfcb65e14a1aa442891471`.
+
+This result rejects immediate operator investment for the tested pooled
+sign-selector/budget/prompt combination, **not** the paper or the user's
+task-accuracy target. The next, distinct falsification asks whether
+per-Q-head sign scores or exact-logit Top-K on the same live Q/K can recover
+mass at the same 5%/10%/25% budgets. If even the exact-logit oracle is poor,
+the budget is the limiting factor; if it is strong and the sign variant is
+weak, the index/score is the limiting factor. A new immutable v2 root and
+one new run are required; never overwrite v1.
