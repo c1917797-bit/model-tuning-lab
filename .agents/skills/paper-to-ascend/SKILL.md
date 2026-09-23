@@ -82,10 +82,11 @@ make the experiment reproducible and evidence-bound.
 
 ## Current repository guidance
 
-The current installed target is dense. The active Paper-to-Ascend direction is
-exact speculative decoding using the checkpoint's built-in Qwen3.5 MTP head.
-Dynamic MoE is retained as a superseded audit exemplar, not an active
-optimization path for the dense target.
+The current installed target is dense. Do not treat the old Qwen3.5 MTP
+direction as active: use the latest user objective, branch-local experiment
+record and live runtime evidence to select the paper-specific next loop.
+Dynamic MoE and MTP are retained as historical audit exemplars, not current
+optimization directives.
 
 This is not a permanent architecture restriction. Dense is only the current
 verified target at this handoff. Future MoE, quantization, sparse, multimodal,
@@ -276,6 +277,19 @@ not require retraining unless retraining is explicitly in scope.
   even at a 50% page budget. Separate first-call Python dispatch/compilation
   timing from steady-state selector cost. This rejects that adapter, not the
   paper or the user's final 1% E2E accuracy threshold.
+- For cross-layer sparse-attention papers, preserve the distinction between
+  an anchor's post-softmax pooled Top-K indices, the target layer's actual
+  per-query-head attention mass, and final task accuracy. Before writing an
+  Ascend selected-token kernel, measure both adjacent-layer transfer and an
+  optimistic best-earlier-anchor upper bound on live Q/K/V at useful budgets.
+  In TP-sharded GQA, prove whether a paper's KV-head remap is local or needs
+  cross-rank communication; a same-rank probe cannot reject the global
+  mechanism. Gate every sparse interpretation on full-support math/native
+  agreement without relaxing a failed sample. Qwen3.6 Kascade's one-prompt
+  same-rank 20% hindsight bound still had a 20.93% worst-head mass and large
+  intermediate output error, so its *local operator investment* was declined;
+  neither paper-wide performance nor task accuracy was measured. See
+  `projects/qwen36-paper-portfolio/KASCADE_ADAPTATION_GATE.md`.
 
 ## Do not do
 

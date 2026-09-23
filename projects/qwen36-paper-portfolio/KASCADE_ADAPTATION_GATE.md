@@ -110,3 +110,42 @@ for each target layer and choose the best on this same token. This is an
 optimistic *oracle* for the paper's dev-set anchor planning, not an online
 free selection mechanism. If even it cannot support enough layers at useful
 budgets, a new Ascend token-sparse kernel would be a poor investment.
+
+## Third live NPU diagnostic: optimistic local-anchor bound and scoped decision
+
+V3 completed a native dense request (HTTP 200, 20,718 prompt tokens and four
+output tokens) on physical NPU4–7 with the same token IDs as v2. It tested
+every earlier same-rank full-attention layer as an anchor for each target and
+chose the best *after seeing this token*. This is more optimistic than a
+deployable dev-set-fixed anchor plan, but it does not test the official
+cross-rank KV-head remap. There were 63 valid layer/rank samples covering
+354 local Q-head cases. Rank1 layer59 again failed the unchanged full-support
+math/native gate: max-abs 0.124748 > 0.1. That sample was excluded, not
+reclassified as a sparse-method failure.
+
+At 10% selected tokens, the best-previous-anchor mass was min/mean
+4.99%/72.30%; at 20%, 20.93%/86.30%; at 30%, 39.69%/91.73%.
+The largest selected-output max-abs discrepancies from native dense were
+4.31, 3.51 and 2.52, respectively. These are intermediate numerical
+diagnostics, **not** LongBench-v2 or GSM8K accuracy loss. The probe returned
+native dense output unchanged; there is no candidate throughput, TTFT, TPOT
+or task-accuracy measurement.
+
+Decision: **no-go for commissioning a new CANN token-sparse operator for this
+Qwen3.6 BF16 TP4 same-rank local-anchor path at the tested budgets and
+20K repetitive prompt**. Even the hindsight anchor upper bound leaves
+low-mass query heads and large selected-output errors. This does not reject
+Kascade as a whole, other workloads/budgets, cross-rank remapping, or future
+Ascend implementations. It means the current algorithm-specific operator
+investment lacks a credible numerical basis; profiling alone would not
+rescue it. The owned v3 container was stopped and retained, and NPU4–7
+returned to process-free idle baseline.
+
+Immutable evidence outside Git:
+
+- `/cache/cch/kascade-qwen36-crosslayer-v3/audit.jsonl` SHA256
+  `d71e06e2b91a5bb60bac6a3f7d9c68aa9154cc06d81e33d81cb3e1074e9d63b0`.
+- `/cache/cch/kascade-qwen36-crosslayer-v3/admission.json` SHA256
+  `e644f6d99c2478aeda531992af1b953ce6f3f81ac3f01ee87ea5cf7617e078df`.
+- `/cache/cch/kascade-qwen36-crosslayer-v3/request-summary.json` SHA256
+  `a72280cc4b9ff0731291fcb69c20c4bc262b6f117fe02071f052bca5807df93a`.

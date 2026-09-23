@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-kascade-cross-layer
-status: attempted
-decision: pending
+status: decided
+decision: rejected
 hypothesis: >-
   Kascade's anchor-layer post-softmax pooled Top-K positions retain useful
   exact attention mass when reused at the next Qwen3.6 full-attention layer,
@@ -18,7 +18,7 @@ paper:
 git:
   branch: work/qwen36-kascade-attention-20260923
   base_commit: 5459a2af6ad7c11671fac8240a7120df50024571
-  stage_commits: []
+  stage_commits: [72ba386, 9559e23]
 timebox:
   start_utc: 2026-09-23T16:15:00Z
   deadline_utc: 2026-09-24T16:15:00Z
@@ -92,12 +92,36 @@ results:
       20pct_mass_min_mean_47_to_51: [0.5793710350990295, 0.7769381627440453]
       20pct_largest_selected_output_max_abs_39_to_43: 3.1670711040496826
       conclusion: adjacent reuse alone is heterogeneous; dynamic anchor upper bound is next
+    third_diagnostic:
+      claim_scope: optimistic per-token all-earlier local-anchor upper bound on one native dense NPU request
+      prompt_ids_sha256: 1f58d8666640baff0f6ba570f2ffd2eed486ba3e0c95bbd5a62b3044b0f489c1
+      http_status: 200
+      prompt_tokens: 20718
+      completion_tokens: 4
+      valid_samples: 63
+      evaluated_local_query_head_cases: 354
+      full_support_gate_failures: 1
+      gate_failed_layer_rank: [59, 1]
+      gate_failed_max_abs: 0.12474822998046875
+      predeclared_gate_unchanged: 0.1
+      best_previous_anchor_by_worst_head_mass_10pct_min_mean: [0.04988429695367813, 0.7229949582978493]
+      best_previous_anchor_by_worst_head_mass_20pct_min_mean: [0.20928789675235748, 0.863037841426114]
+      best_previous_anchor_by_worst_head_mass_30pct_min_mean: [0.3968769907951355, 0.9173370958384821]
+      largest_selected_output_max_abs_vs_native_10pct: 4.310894966125488
+      largest_selected_output_max_abs_vs_native_20pct: 3.5140938758850098
+      largest_selected_output_max_abs_vs_native_30pct: 2.5224695205688477
+      conclusion: >-
+        Even a hindsight per-token local-anchor oracle leaves low-mass heads
+        and large selected-output errors at useful budgets on this prompt.
+        This is not a deployable mapping, E2E result, or task-accuracy result.
   cold: {}
   steady: {}
   resources:
     owned_v1_container_stopped_retained: 6e3fd7dcb87fcf59f6306c6c61cabf131e2d59e4dfab3f14f410f91ae77da50b
     post_v1_physical4_7_process_free: true
     owned_v2_container_stopped_retained: 566256317ba4d03cb89b2e56c7fa212c300058c1636af3ffaa7d00021f4b3112
+    owned_v3_container_stopped_retained: bc27d84b8a1c3c61d55936524ac729fee21a95e8a42306647033c6955cdfe8f6
+    post_v3_physical4_7_process_free: true
 artifacts:
   - path: /cache/cch/kascade-qwen36-crosslayer-v1/audit.jsonl
     sha256: 85935543b8004fce5f426ece1f414cbff1eb62f9618766abc623f493494ec811
@@ -109,14 +133,25 @@ artifacts:
     sha256: 307b2b3818598a7dfaf4ffab5f7171ef370cebd90fe831f78ad919324354e97e
   - path: /cache/cch/kascade-qwen36-crosslayer-v2/request-summary.json
     sha256: 7753ad81d7cdb9e8b0f39ae953c6fe7022c4619ade5cee47ee1aa61a35430cfd
-decision_reason: ""
+  - path: /cache/cch/kascade-qwen36-crosslayer-v3/audit.jsonl
+    sha256: d71e06e2b91a5bb60bac6a3f7d9c68aa9154cc06d81e33d81cb3e1074e9d63b0
+  - path: /cache/cch/kascade-qwen36-crosslayer-v3/admission.json
+    sha256: e644f6d99c2478aeda531992af1b953ce6f3f81ac3f01ee87ea5cf7617e078df
+  - path: /cache/cch/kascade-qwen36-crosslayer-v3/request-summary.json
+    sha256: a72280cc4b9ff0731291fcb69c20c4bc262b6f117fe02071f052bca5807df93a
+decision_reason: >-
+  On the tested Qwen3.6-27B BF16 TP4, one 20718-token repetitive prompt and
+  10/20/30% budgets, even hindsight selection among all earlier same-rank
+  anchor layers retained insufficient mass for some query heads and produced
+  large intermediate output errors. Do not invest in an algorithm-specific
+  token-sparse Ascend operator for this scoped local-anchor route now. This
+  does not reject the whole paper, cross-rank head remapping, other prompts,
+  or other budgets; no candidate E2E performance or task accuracy was measured.
 next_loop: >-
-  V2 mapped every adjacent full-attention transition and found variable
-  cross-layer fidelity. V3 will compare each target with all earlier local
-  anchor layers at equal budgets, choosing the best on this one token as an
-  optimistic upper bound, not a deployable mapping or task-accuracy result.
-  Preserve the unchanged full-support numerical gate; stop operator work if
-  even that upper bound cannot cover enough layers credibly.
+  Close this Kascade investment gate and pivot to the next distinct paper
+  aligned with the measured Ascend attention/matmul hotspots. Before any new
+  operator, audit reusable vLLM-Ascend and ops-transformer primitives, then
+  prove live numerical semantics and matched dense E2E benefit.
 rollback:
   command: disable QWEN36_KASCADE_PROBE_ENABLE and stop only its owned container
   verified: true

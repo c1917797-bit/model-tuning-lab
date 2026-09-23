@@ -124,13 +124,8 @@ def register() -> None:
                        predeclared_max_abs_gate=0.1)
                 return result
             previous_layer = layer_index - 4 if layer_index > 3 else None
-            anchor = _ANCHORS.get(previous_layer)
-            if anchor is not None and anchor["length"] != length:
-                _event("cross_layer_skipped_length_mismatch", layer_name=layer_name,
-                       tp_rank=rank, layer_index=layer_index,
-                       previous_layer=previous_layer, seq_len=length,
-                       previous_seq_len=anchor["length"])
-                anchor = None
+            anchors = {index: item for index, item in _ANCHORS.items()
+                       if index < layer_index and item["length"] == length}
             pooled = full_prob.sum(dim=0)
             cases = []
             selected_by_percent = {}
@@ -147,12 +142,29 @@ def register() -> None:
                     "same_layer_per_q_head_exact_mass_min": per_head_mass.min().item(),
                     "same_layer_per_q_head_exact_mass_mean": per_head_mass.mean().item(),
                 }
-                if anchor is not None:
-                    previous = anchor["indices"][percent]
-                    case["cross_layer_same_kv_head"] = _summary(
-                        full_prob, previous, q, k, v, dense, self.scale)
-                    case["cross_layer_overlap_fraction"] = torch.isin(
-                        previous, same_layer).float().mean().item()
+                if anchors:
+                    candidates = []
+                    for index, item in sorted(anchors.items()):
+                        selected = item["indices"][percent]
+                        masses = full_prob.index_select(1, selected).sum(dim=-1)
+                        candidates.append((index, masses.min().item(),
+                                           masses.mean().item()))
+                    best_min = max(candidates, key=lambda x: (x[1], -x[0]))
+                    best_mean = max(candidates, key=lambda x: (x[2], -x[0]))
+                    case["best_earlier_anchor_by_min"] = {
+                        "layer": best_min[0],
+                        **_summary(full_prob, anchors[best_min[0]]["indices"][percent],
+                                   q, k, v, dense, self.scale),
+                    }
+                    case["best_earlier_anchor_by_mean"] = {
+                        "layer": best_mean[0],
+                        **_summary(full_prob, anchors[best_mean[0]]["indices"][percent],
+                                   q, k, v, dense, self.scale),
+                    }
+                    case["earlier_anchor_candidates"] = [
+                        {"layer": index, "mass_min": minimum, "mass_mean": mean}
+                        for index, minimum, mean in candidates
+                    ]
                 cases.append(case)
             _ANCHORS[layer_index] = {
                 "length": length,
@@ -161,7 +173,7 @@ def register() -> None:
             _event("real_decode_sample", layer_name=layer_name,
                    tp_rank=rank, layer_index=layer_index,
                    previous_layer=previous_layer,
-                   previous_anchor_available=anchor is not None,
+                   eligible_earlier_anchor_layers=sorted(anchors),
                    seq_len=length, block_size=block_size, num_pages=num_pages,
                    local_q_heads=6, local_kv_heads=1,
                    full_math_vs_dense_max_abs=full_error, cases=cases)
