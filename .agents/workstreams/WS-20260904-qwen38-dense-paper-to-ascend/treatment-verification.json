@@ -1,0 +1,53 @@
+{
+  "schema": "paper-to-ascend-treatment-verification/v1",
+  "valid": true,
+  "matrix_sha256": "40468a3f0d3f106f6ce01fdfaa03aee8d2c55c234ec334e1af972e69c21c42e6",
+  "models": [
+    {
+      "id": "qwen38-27b",
+      "path": "/cache/austinov/Qwen3.8-27B",
+      "config_sha256": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
+      "index_sha256": "77042094076611b69791a610065f28b7013b8c621795fa86ddccc8bac7d1b9df",
+      "shard_count": 18,
+      "text_architecture": "qwen3_5_text",
+      "hidden_size": 5120,
+      "layers": 64,
+      "linear_value_heads": 48,
+      "linear_attention_layers": 48,
+      "full_attention_layers": 16
+    },
+    {
+      "id": "qwen35-4b",
+      "path": "/cache/Qwen3.5-4B",
+      "config_sha256": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+      "index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+      "shard_count": 2,
+      "text_architecture": "qwen3_5_text",
+      "hidden_size": 2560,
+      "layers": 32,
+      "linear_value_heads": 32,
+      "linear_attention_layers": 24,
+      "full_attention_layers": 8
+    }
+  ],
+  "native_patch_sha256": "d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e",
+  "groups": {
+    "G1": [
+      false,
+      false
+    ],
+    "G2": [
+      true,
+      false
+    ],
+    "G3": [
+      false,
+      true
+    ],
+    "G4": [
+      true,
+      true
+    ]
+  },
+  "errors": []
+}

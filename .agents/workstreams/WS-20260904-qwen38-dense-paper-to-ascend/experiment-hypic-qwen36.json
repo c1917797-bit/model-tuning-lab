@@ -1,0 +1,506 @@
+{
+  "schema": "paper-to-ascend-experiment/v1",
+  "experiment_id": "hypic-qwen36-pdc-coexistence-20260904",
+  "status": "completed-reject-adoption",
+  "target": {
+    "model": "Qwen3.6-27B",
+    "checkpoint": "/cache/efim/Qwen3.6-27B",
+    "accelerator": "Ascend 910B4",
+    "tensor_parallel": 4,
+    "host_devices": [0, 1, 2, 3],
+    "cpu_set": "112-191",
+    "served_model_name": "qwen36-hypic-piercing",
+    "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "hypic_source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "hypic_package_version": "0.8.5"
+  },
+  "isolation": {
+    "allowed": "host NPU0-3 only",
+    "forbidden": "host NPU4-7 and every workload mapped to them",
+    "baseline_container": "qwen36_hypic_pdc_baseline_npu0_3",
+    "treatment_container": "qwen36_hypic_pdc_treatment_npu0_3",
+    "profile_containers": [
+      "qwen36_hypic_pdc_baseline_profile_npu0_3",
+      "qwen36_hypic_pdc_treatment_profile_npu0_3"
+    ],
+    "simultaneous_baseline_treatment": false,
+    "git_identity_may_be_fabricated": false,
+    "push_allowed": false
+  },
+  "performance_contract": {
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "baseline": "native position-dependent prefix cache; Hypic disabled",
+    "treatment": "same PDC configuration plus strict Hypic transition_rope_recompute",
+    "result_scope": "single-instance C1/C2 hot reuse; no paper C3 distributed scatter/transfer"
+  },
+  "performance_results": {
+    "baseline": {
+      "artifact": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-baseline/native_prefix_baseline.run2.json",
+      "sha256": "98ad182273fb0affe2ae88fcbbfc4e0ac4659af6e8f0a626922ae335cb756adc",
+      "duration_seconds": 1371.8532803799026,
+      "throughput_tokens_per_second": 29.857420312948545,
+      "ttft_mean_ms": 50346.65534826345,
+      "request_mean_ms": 461330.56866275147,
+      "tpot_weighted_ms": 401.74380578151323,
+      "successful_requests": 40
+    },
+    "treatment": {
+      "artifact": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-hypic/pdc_hypic_treatment.run1.json",
+      "sha256": "aa2420bed5712813ddfff6744fb5c870deaf56f135a2ffd6b3bd35886ebe9b61",
+      "duration_seconds": 1357.6341019598767,
+      "throughput_tokens_per_second": 30.170131952983695,
+      "ttft_mean_ms": 41843.48050374538,
+      "request_mean_ms": 452520.9039257664,
+      "tpot_weighted_ms": 401.4442066686423,
+      "successful_requests": 40
+    },
+    "relative_change": {
+      "duration_improvement_percent": 1.036494107889452,
+      "throughput_improvement_percent": 1.0473498271367196,
+      "ttft_improvement_percent": 16.889254679777576,
+      "tpot_improvement_percent": 0.07457466887089821
+    }
+  },
+  "runtime_evidence": {
+    "hot_path_verified": true,
+    "materialization_ready_count": 1,
+    "materialization_failure_count": 0,
+    "prefix_cache_hypic_combined_hit_count": 25,
+    "position_dependent_prefix_cache_hit_count": 27,
+    "complete_hybrid_repair_count": 23,
+    "mixed_decode_hypic_admitted_count": 18,
+    "worker_hot_path_count": 4,
+    "coexistence_verified": false,
+    "missing_required_signals": [
+      "mixed_decode_latency_protection",
+      "mixed_decode_grouped_reclaim"
+    ],
+    "paper_complete": false
+  },
+  "semantic_canary": {
+    "pdc_baseline": {
+      "status": "passed",
+      "artifact": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-baseline/active_semantic_canary_reproducible.json",
+      "sha256": "9193e45cf414bcb380676bdc872b0e59063166e90e6fcff52a73d478c59e3cbc",
+      "answer_contains_key": true,
+      "answer_key": "ZEBRA-41729",
+      "input_tokens": 32768,
+      "prompt_token_sha256": "2f755435529f63b255cdfe3248b625c0aacf76986919debe43715138ea1dc844",
+      "public_segment_token_sha256": "91c13332ac4a7f80ea082d8a84aeb4222a11a7407883fbee67931659b71c39e4",
+      "segment_ends": [9216, 25600, 32768],
+      "response_text_sha256": "0fa5e875f58b181ddb6ac6890d15b5e4b6c1b29c58f6d8034e981b988f8d0498"
+    },
+    "pdc_hypic": {
+      "status": "passed-identical-ruler",
+      "artifact": "/cache/cch/hypic-qwen36-piercing-20260904/pdc-hypic/active_semantic_canary_reproducible.json",
+      "sha256": "d3e7128978a887a75cd376e087fbbd8fbcb94cfb8813f736fd8f6513e3e50b66",
+      "answer_contains_key": true,
+      "answer_key": "ZEBRA-41729",
+      "input_tokens": 32768,
+      "prompt_token_sha256": "2f755435529f63b255cdfe3248b625c0aacf76986919debe43715138ea1dc844",
+      "public_segment_token_sha256": "91c13332ac4a7f80ea082d8a84aeb4222a11a7407883fbee67931659b71c39e4",
+      "segment_ends": [9216, 25600, 32768],
+      "response_text_sha256": "0fa5e875f58b181ddb6ac6890d15b5e4b6c1b29c58f6d8034e981b988f8d0498",
+      "identical_to_baseline": true
+    }
+  },
+  "quality_contract": {
+    "datasets": ["LongBench-v2", "GSM8K", "NIAH+"],
+    "excluded_by_operator": ["CEval"],
+    "repetitions_per_group": 3,
+    "longbench_samples": 127,
+    "gsm8k_samples": 1319,
+    "generation": {
+      "temperature": 0,
+      "seed": 0,
+      "enable_thinking": false,
+      "ignore_eos": false,
+      "max_output_tokens": 1024,
+      "concurrency": 32
+    },
+    "provenance": {
+      "evaluator_path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py",
+      "evaluator_sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0",
+      "longbench_v2": {
+        "data_path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json",
+        "data_sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+        "prompt_template_sha256": "f83e3a6a0b6dadd20aa0b1098ae6b2e17a97ad85332c11f93f0b9baa9da97be1",
+        "scorer": "supplied_ais_bench_first_option_postprocess"
+      },
+      "gsm8k": {
+        "data_path": "/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl",
+        "data_sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+        "prompt_template_sha256": "da11364642ac6e0ad4223d97d7003cb8671aa2752b54a625052723fcd1f3fc75",
+        "scorer": "supplied_ais_bench_gsm8k_numeric_postprocess"
+      }
+    },
+    "niah_status": "blocked-authoritative-dataset-files-missing",
+    "current_progress": "PDC baseline and PDC+Hypic LongBench-v2 and GSM8K runs 1-3 are complete with zero request failures; both native profiles and the final strict evidence audit are complete"
+  },
+  "quality_results": {
+    "pdc_baseline": {
+      "longbench_v2": {
+        "runs": [
+          {
+            "run_id": "run1",
+            "successful": 127,
+            "failed": 0,
+            "correct": 56,
+            "accuracy_pct": 44.09448818897638,
+            "details_sha256": "3e6957c2d54fc29d98e57da5f84647ebc22b6f372b02cccc4a554572040f8f30",
+            "summary_sha256": "c0fc5a14bfdbeca9273e19ce304821664d94d2cfc763fa35a607f1f48094d02a"
+          },
+          {
+            "run_id": "run2",
+            "successful": 127,
+            "failed": 0,
+            "correct": 57,
+            "accuracy_pct": 44.881889763779526,
+            "details_sha256": "c169dffaf3f4ea54506018db00568b7425370f68ff3938f2bdd9b60e6f702a69",
+            "summary_sha256": "74dfdd04787aa4eddb439550ad83c3f27c9ec8f98d3e7d96ef1e2136116bc9d9"
+          },
+          {
+            "run_id": "run3",
+            "successful": 127,
+            "failed": 0,
+            "correct": 59,
+            "accuracy_pct": 46.45669291338583,
+            "details_sha256": "175af6ed8a9620f5319373cb7cfb583c1b32cff4a86611c7b9e2932b673f1e72",
+            "summary_sha256": "92a597c6d71a9fb3ea8e36594b198c4c31865a78d47ce48f4b0a175b527fb193"
+          }
+        ],
+        "mean_accuracy_pct": 45.14435695538058,
+        "population_stddev_pct_points": 0.982062306239881,
+        "run_range_pct_points": 2.3622047244094517,
+        "interpretation": "Baseline-only repeated-run noise evidence; no treatment comparison is valid until matching treatment runs finish."
+      },
+      "gsm8k": {
+        "runs": [
+          {
+            "run_id": "run1",
+            "successful": 1319,
+            "failed": 0,
+            "correct": 1269,
+            "accuracy_pct": 96.20924943138742,
+            "completion_tokens": 477400,
+            "finish_reasons": {
+              "length": 24,
+              "stop": 1295
+            },
+            "unique_response_sha256": 1319,
+            "details_sha256": "40254422ed6e221a6bde0349bbf610cb83ae86c8a26cf4380cad072c5b6d9e91",
+            "summary_sha256": "a260a095b52457fa9cb2039f0161c294c97ab9f7838d00cb87fa7d19892dab02"
+          },
+          {
+            "run_id": "run2",
+            "successful": 1319,
+            "failed": 0,
+            "correct": 1267,
+            "accuracy_pct": 96.0576194086429,
+            "completion_tokens": 476799,
+            "finish_reasons": {
+              "length": 25,
+              "stop": 1294
+            },
+            "unique_response_sha256": 1319,
+            "details_sha256": "4439d1536722b7413db397428c0a1a5b587d2193490ab53238ddda1f2b1b237a",
+            "summary_sha256": "fc00cdf0386e74521e71bdce7ef7e531045ad2bfb7d28825ed45bb712d7fd982"
+          },
+          {
+            "run_id": "run3",
+            "successful": 1319,
+            "failed": 0,
+            "correct": 1273,
+            "accuracy_pct": 96.51250947687642,
+            "completion_tokens": 476501,
+            "finish_reasons": {
+              "length": 23,
+              "stop": 1296
+            },
+            "unique_response_sha256": 1319,
+            "details_sha256": "b72e8e579e985cb40bac940032a0504e3f152e40805a73ff5142d39b663513b4",
+            "summary_sha256": "00528e2a5b9a99c822d8c2234150109b39a9bce4caa9a85f66f0bbd0165ab733"
+          }
+        ],
+        "mean_accuracy_pct": 96.25979277230225,
+        "population_stddev_pct_points": 0.18911586488622312,
+        "run_range_pct_points": 0.4548900682335102,
+        "interpretation": "Baseline repeated-run noise evidence; matching treatment repetitions remain required before regression comparison."
+      }
+    },
+    "pdc_hypic": {
+      "longbench_v2": {
+        "runs": [
+          {
+            "run_id": "run1",
+            "successful": 127,
+            "failed": 0,
+            "correct": 61,
+            "accuracy_pct": 48.031496062992126,
+            "completion_tokens": 101254,
+            "finish_reasons": {
+              "length": 51,
+              "stop": 76
+            },
+            "unique_response_sha256": 126,
+            "details_sha256": "4fa3bd52a3767a713688c12c1205a34972f2d4b33444cbc941e0ba36ab4cb454",
+            "summary_sha256": "f6b05215981c3bfd1a5f6f61cbc00d09d66a1e6ce32cef102256874b9e5e9cfc"
+          },
+          {
+            "run_id": "run2",
+            "successful": 127,
+            "failed": 0,
+            "correct": 56,
+            "accuracy_pct": 44.09448818897638,
+            "completion_tokens": 102393,
+            "finish_reasons": {
+              "length": 51,
+              "stop": 76
+            },
+            "unique_response_sha256": 126,
+            "details_sha256": "dca7acb5b93d772a5bd9a3cf8e85ecd487a8a5ce4087df59bd0a166cbafb1971",
+            "summary_sha256": "c611b31a890119f2089a0104e6fbfe8d275272d84c5875e1662e9cbe1d9b6b7c"
+          },
+          {
+            "run_id": "run3",
+            "successful": 127,
+            "failed": 0,
+            "correct": 57,
+            "accuracy_pct": 44.881889763779526,
+            "completion_tokens": 101908,
+            "finish_reasons": {
+              "length": 52,
+              "stop": 75
+            },
+            "unique_response_sha256": 127,
+            "details_sha256": "08cae3155c1bf19dcbadf69e9396e8ab9c4d9058bff54e02474e27cbf255a841",
+            "summary_sha256": "c5c8391d0da62ed32a10da494f14e0e27cf93e8154da0d59eae219873dbb011d"
+          }
+        ],
+        "mean_accuracy_pct": 45.669291338582674,
+        "population_stddev_pct_points": 1.700981810605738,
+        "run_range_pct_points": 3.937007874015748,
+        "delta_vs_baseline_mean_pct_points": 0.5249343832020941,
+        "delta_as_fraction_of_baseline_run_range": 0.22222222222221955,
+        "interpretation": "Three zero-failure treatment repetitions completed. The +0.524934pp mean delta is only 22.2% of the baseline three-run range (2.362205pp); matching-run deltas were +3.937008pp, -0.787402pp and -1.574803pp, so no stable LongBench-v2 quality improvement is demonstrated."
+      },
+      "gsm8k": {
+        "runs": [
+          {
+            "run_id": "run1",
+            "successful": 1319,
+            "failed": 0,
+            "correct": 1271,
+            "accuracy_pct": 96.36087945413192,
+            "completion_tokens": 475640,
+            "finish_reasons": {
+              "length": 24,
+              "stop": 1295
+            },
+            "unique_response_sha256": 1319,
+            "details_sha256": "8beba588a38cb9c3d721015c28ba4b1a19978479721ee4404406acea9dee2223",
+            "summary_sha256": "19458d4064d49a113c13932397c60248c55017061cc207ebe8a63be3b6412494"
+          },
+          {
+            "run_id": "run2",
+            "successful": 1319,
+            "failed": 0,
+            "correct": 1267,
+            "accuracy_pct": 96.0576194086429,
+            "completion_tokens": 477109,
+            "finish_reasons": {
+              "length": 24,
+              "stop": 1295
+            },
+            "unique_response_sha256": 1319,
+            "details_sha256": "588af4ca94f2798525abe594c5d2417158e0133574245ac4f7fa8cf6c833011d",
+            "summary_sha256": "6c956557c5e67fd9086aecf8fca6340529f1b3a76f4d1ba9e6c534abdeceba07"
+          },
+          {
+            "run_id": "run3",
+            "successful": 1319,
+            "failed": 0,
+            "correct": 1264,
+            "accuracy_pct": 95.83017437452615,
+            "completion_tokens": 478790,
+            "finish_reasons": {
+              "length": 29,
+              "stop": 1290
+            },
+            "unique_response_sha256": 1319,
+            "details_sha256": "86c05189a09e5d121f1a4d76a967247a6e4b1511e2aa88c6a33d6158b9203c7f",
+            "summary_sha256": "920634e74427174a552fd8cbf89ebb31328539b4fda2062bc6919af0062554cc"
+          }
+        ],
+        "mean_accuracy_pct": 96.08289107910032,
+        "population_stddev_pct_points": 0.217395129316217,
+        "run_range_pct_points": 0.5307050796057666,
+        "delta_vs_baseline_mean_pct_points": -0.17690169320192695,
+        "delta_as_fraction_of_baseline_run_range": -0.3888888888889028,
+        "matching_run_deltas_pct_points": [0.15163002274449866, 0.0, -0.6823351023502653],
+        "current_progress": "runs 1-3 complete",
+        "interpretation": "Three 1319/1319 zero-failure treatment repetitions completed. Mean accuracy is 96.082891%, 0.176902pp below the baseline mean and within the baseline 0.454890pp run range. Matching-run deltas were +0.151630pp, 0.000000pp and -0.682335pp; treatment range 0.530705pp exceeds baseline range 0.454890pp, so the aggregate is noise-compatible but does not authorize an accuracy-lossless claim."
+      }
+    }
+  },
+  "profiling": {
+    "status": "complete",
+    "runner": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_native_profile.py",
+    "rule": "Never overlap native profiling with quality evaluation; use a profile-only clone differing only by PROFILING_MODE=dynamic and attach interactive msprof to rank0 only.",
+    "recovery_evidence": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/profile-failure-20260905.json",
+    "profile_clone_helper": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_profile_clone.py",
+    "pdc_baseline": {
+      "status": "passed",
+      "manifest": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline/profile-manifest.json",
+      "manifest_sha256": "f1ec0d5d7a8257f8e7033e61233edc1975ac5a7d7cc47a0312f641232c79aa5b",
+      "workload": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-baseline/profile-workload.json",
+      "workload_sha256": "85dc8b447f8e46e4ac84d00bac64610c1b5269e9d21c5428f4f400b174b5a211",
+      "profile_elapsed_s": 97.51572756003588,
+      "profiler_exit_code": 0,
+      "workload_exit_code": 0,
+      "profile_files": 228,
+      "profile_bytes": 175150491,
+      "container": "qwen36_hypic_pdc_baseline_profile_npu0_3",
+      "container_id": "89123778a9f61faaf41523344646544756eede5f3df140240847c8732f17e58e"
+    },
+    "pdc_hypic": {
+      "status": "capture-passed-algorithm-gate-failed",
+      "manifest": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic/profile-manifest.json",
+      "manifest_sha256": "3adbf72f2da13a25d37796b30e873abb46e5d79503dac89624bb62a0142623f6",
+      "workload": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic/profile-workload.json",
+      "workload_sha256": "81b4beb0d3bc4cd220c9a118627c8183dcac5067286a2a979d7bef2a55a90fd3",
+      "profile_elapsed_s": 105.59777031000704,
+      "profiler_exit_code": 0,
+      "raw_benchmark_exit_code": 1,
+      "capture_stimulus_verified": true,
+      "workload_requests": 4,
+      "workload_successful": 4,
+      "workload_failed": 0,
+      "fixed_output_verified": true,
+      "profile_files": 234,
+      "profile_bytes": 184536157,
+      "container": "qwen36_hypic_pdc_treatment_profile_npu0_3",
+      "container_id": "b76d49c54993ebc75bb15540efb7bbd4e37dfcedf3beee0fd39fff02b2df97f4",
+      "coexistence_verified": false,
+      "coexistence_missing": [
+        "position_independent_hot_path",
+        "mixed_batch_native_decode_isolation",
+        "mixed_decode_latency_protection",
+        "mixed_decode_grouped_reclaim"
+      ],
+      "interpretation": "The native capture passed. The raw benchmark and missing signals remain negative algorithm evidence and are not normalized to success."
+    },
+    "preflight": {
+      "checked_at": "2026-09-05T00:03:46Z",
+      "baseline_container_id": "8371abb7731a6c4ba0d01a566c4c10ab27552ca9a26f476ec22229fe226c0d1e",
+      "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "host_devices": ["/dev/davinci0", "/dev/davinci1", "/dev/davinci2", "/dev/davinci3"],
+      "cpu_set": "112-191",
+      "results_mount": "/cache/cch/hypic-qwen36-piercing-20260904 -> /results (rw)",
+      "rank0_container_pid": 237,
+      "msprof_path": "/usr/local/Ascend/ascend-toolkit/latest/bin/msprof",
+      "benchmark_sha256": "87ad09f11984c9fc195f64b96458cff70343b594d2eeeef453c929a8f7435f0b"
+    }
+  },
+  "evidence_audit": {
+    "status": "final-strict-audit-passed",
+    "verifier": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/verify_hypic_evidence.py",
+    "verifier_sha256": "b0953f455877e91f0a4117eb3ce30dbf32faa4e91fcef1a6fb0dd8c6be3d813d",
+    "live_result": {
+      "checked_inventory_files": 34,
+      "baseline_profile_payload_files": 228,
+      "baseline_profile_payload_bytes": 175150491,
+      "errors": 0,
+      "allowed_volatile_evidence": [
+        "hypic-runtime-events"
+      ]
+    },
+    "final_result": {
+      "artifact": "/cache/cch/hypic-qwen36-piercing-20260904/final-evidence-audit.json",
+      "sha256": "078d0626afe615debb5eae829b754c4c30844740dad667155f5a81bfce20bf1c",
+      "evidence_inventory_sha256": "c2251a26d13b83a02e07c0c41933660503089e6f6d551a3a956ade087a08559d",
+      "checked_inventory_files": 37,
+      "baseline_profile_payload_files": 228,
+      "baseline_profile_payload_bytes": 175150491,
+      "treatment_profile_payload_files": 234,
+      "treatment_profile_payload_bytes": 184536157,
+      "errors": 0,
+      "allowed_volatile_evidence": []
+    },
+    "rule": "Final closure requires every producer stopped, the runtime-event hash frozen in the inventory, and a verifier run without --allow-volatile; all three conditions passed."
+  },
+  "orchestration": {
+    "status": "completed-exit-0",
+    "script": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/resume_hypic_piercing.sh",
+    "script_sha256": "568395006663e448b63d0851e05abb35778aa575c89b0a21cb6cec700bec4939",
+    "operation_id": "exec-00000000000004c6",
+    "wait_pid": null,
+    "log": "/cache/cch/hypic-qwen36-piercing-20260904/resume-hypic-piercing.log",
+    "lock": "/cache/cch/hypic-qwen36-piercing-20260904/resume-hypic-piercing.lock",
+    "completed_at": "2026-09-05T12:57:03Z",
+    "controller_exit_code": 0,
+    "final_owned_container_state": "all four exact Hypic containers exited",
+    "residual_owned_processes": 0,
+    "self_test": {
+      "status": "passed",
+      "checked_at": "2026-09-05T13:01:43Z",
+      "workload_or_container_state_changed": false,
+      "checks": [
+        "helper script hashes",
+        "exact baseline/treatment state, image, NPU0-3 mapping, CPU112-191 and Hypic switch",
+        "actual NPU0-3 process ownership is empty in the recovery state",
+        "baseline active semantic canary hash"
+      ]
+    },
+    "idempotent_resume_proof": {
+      "operation_id": "exec-00000000000004ec",
+      "completed_at": "2026-09-05T13:05:27Z",
+      "exit_code": 0,
+      "result": "verified every existing quality/canary/profile artifact, left all exact containers stopped, changed no workload state, and retained recoverable archiving for any future invalid profile directory"
+    },
+    "superseded_attempts": [
+      {
+        "operation_id": "exec-00000000000002b7",
+        "status": "stopped-before-workload",
+        "reason": "A read-only log audit found syntactically valid stray plus arguments introduced when line-continuation backslashes were serialized through the patch transport.",
+        "impact": "The controller was still waiting for baseline PID 1621106; no evaluator, profiler, container or NPU state was changed.",
+        "recovery": "Stop the exact controller PID, preserve the baseline evaluator, remove line continuations, add and pass --self-test, then launch the v2 operation."
+      },
+      {
+        "operation_id": "exec-00000000000002bf",
+        "status": "failed-closed-before-container-switch",
+        "reason": "The original service lacked PROFILING_MODE=dynamic, so no attach socket existed and msprof rejected the selected PID.",
+        "impact": "Baseline quality completed; baseline remained running and treatment remained exited.",
+        "recovery": "Introduce exact profile-only clones with a single environment delta."
+      },
+      {
+        "operation_id": "exec-000000000000036f",
+        "status": "failed-closed-after-baseline-stop",
+        "reason": "A missing-container probe returned a blank line plus absent and failed strict state comparison.",
+        "impact": "Baseline and treatment were stopped and NPU0-3 were empty.",
+        "recovery": "Normalize absent docker state output before comparison."
+      },
+      {
+        "operation_id": "exec-0000000000000372",
+        "status": "failed-closed-during-profile",
+        "reason": "docker exec omitted -i, so interactive msprof commands were not forwarded.",
+        "impact": "No valid profile artifact was accepted; the profile clone was stopped and NPU0-3 were proved empty.",
+        "recovery": "Use docker exec -i and a clone-local msprof cleanup guard."
+      },
+      {
+        "operation_id": "exec-000000000000038c",
+        "status": "failed-closed-after-valid-capture",
+        "reason": "The profiler and 4/4 measured requests succeeded, but the benchmark process returned 1 because algorithm coexistence acceptance was false.",
+        "impact": "The raw attempt is preserved outside accepted evidence; the exact profile clone was stopped and no algorithm gate was rewritten as passing.",
+        "recovery": "Keep the raw benchmark exit and missing signals while independently verifying the bounded profiling traffic stimulus."
+      }
+    ],
+    "fail_closed_sequence": "verify baseline quality; stop baseline; prove NPU0-3 empty; baseline profile-only clone; stop clone; start treatment; treatment semantic canary; treatment quality; stop treatment; treatment profile-only clone; stop clone; prove NPU0-3 empty"
+  },
+  "external_reference": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic-previous-practice-reference.json",
+  "comparison_report": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic-current-vs-previous-comparison.json",
+  "comparison_boundary": "Previous real measurements used Qwen3.5-27B, TP2, Hypic-only versus prefix-cache-disabled baseline. Current measurements use Qwen3.6-27B, TP4, PDC+Hypic versus PDC-only and a fixed image digest. Compare relative deltas as context only; absolute numbers are not interchangeable."
+}

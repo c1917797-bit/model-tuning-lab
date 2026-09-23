@@ -19,6 +19,7 @@ skills:
       - maintain code or run experiments on chicaihong01
       - connect a fresh clone to the target host
       - verify the canonical remote repository and Ascend machine state
+      - distinguish active and historical container device claims
     scope:
       - AGENTS.md
       - .agents/**
@@ -29,21 +30,40 @@ skills:
   - id: ascend-benchmark-evidence
     path: .agents/skills/ascend-benchmark-evidence
     status: experimental
-    purpose: Produce comparable correctness and performance evidence on Ascend NPUs.
+    purpose: Produce comparable Ascend evidence with correctness, E2E translation, and fail-fast progression gates.
     triggers:
       - benchmark an inference change
       - compare an optimization with its baseline
       - accept or reject a performance claim
+      - translate an operator microbenchmark to service impact
     scope:
       - configs/**
       - scripts/**
       - src/**
       - tests/**
       - .agents/experiments/**
+  - id: ascend-model-quality-evaluation
+    path: .agents/skills/ascend-model-quality-evaluation
+    status: experimental
+    purpose: Produce reproducible paired Ascend model-quality evidence with a 2048-token quality cap and measured baseline variability.
+    triggers:
+      - test Ascend model accuracy or quality
+      - compare baseline and candidate quality
+      - validate quantization or optimization quality regression
+      - Paper-to-Ascend quality gate
+      - 精度测试
+      - 质量回归测试
+    scope:
+      - AGENTS.md
+      - configs/**
+      - scripts/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: ascend-cannbot-profiler
     path: .agents/skills/ascend-cannbot-profiler
     status: experimental
-    purpose: Use cannbot/CANN profiler and operator evidence to explain Ascend inference bottlenecks before low-level changes.
+    purpose: Use cannbot/CANN critical-path and collective-lifecycle evidence before low-level Ascend changes.
     triggers:
       - cannbot-skills
       - CANN profiler
@@ -51,6 +71,7 @@ skills:
       - msprof or asys analysis
       - kernel bottleneck on Ascend
       - HCCL communication analysis
+      - custom multi-rank collective lifecycle
     scope:
       - AGENTS.md
       - docs/**
@@ -63,11 +84,12 @@ skills:
   - id: ascend-inference-tuning-loop
     path: .agents/skills/ascend-inference-tuning-loop
     status: experimental
-    purpose: Run the Git-recorded hypothesis-to-decision tuning flywheel.
+    purpose: Run the Git-recorded tuning flywheel with opportunity admission and closed-route learning.
     triggers:
       - start or resume an inference optimization
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
+      - bound recoverable E2E opportunity before implementation
     scope:
       - configs/**
       - scripts/**
@@ -86,17 +108,81 @@ skills:
       - configs/**
       - scripts/**
       - .agents/experiments/**
-  - id: paper-to-ascend
-    path: .agents/skills/paper-to-ascend
+  - id: paper-ingestion
+    path: .agents/skills/paper-ingestion
     status: experimental
-    purpose: Gate and translate a research paper into a bounded Ascend NPU inference optimization workstream.
+    purpose: Extract a paper into implementable inference hypotheses and prerequisites before Ascend work begins.
     triggers:
-      - Paper-to-Ascend
-      - papertoAscend
-      - adapt a paper to Ascend inference
-      - implement a paper on Ascend
-      - 论文迁移到 Ascend
-      - 把论文方法落到 Ascend
+      - ingest a paper for Ascend
+      - paper mechanism extraction
+      - read paper for implementation
+      - 论文机制拆解
+    scope:
+      - docs/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: ascend-architecture-fit
+    path: .agents/skills/ascend-architecture-fit
+    status: experimental
+    purpose: Verify whether a paper method fits the selected Ascend checkpoint, runtime, and serving stack.
+    triggers:
+      - architecture fit
+      - checkpoint fit for paper
+      - model mechanism verification
+      - 架构适配
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: ascend-source-map
+    path: .agents/skills/ascend-source-map
+    status: experimental
+    purpose: Map paper mechanisms to concrete vLLM, vLLM-Ascend, CANN, operator, launch, or system seams before editing.
+    triggers:
+      - map paper to source
+      - find Ascend implementation seam
+      - vLLM-Ascend source mapping
+      - 论文到源码映射
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: ascend-canary-implementation
+    path: .agents/skills/ascend-canary-implementation
+    status: experimental
+    purpose: Implement a minimal Ascend canary with exact runtime-path and per-process activation proof.
+    triggers:
+      - Ascend canary implementation
+      - minimal paper implementation
+      - one-variable inference canary
+      - runtime monkeypatch activation proof
+      - 最小可验证实现
+    scope:
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: paper-to-ascend-reproduction
+    path: .agents/skills/paper-to-ascend-reproduction
+    status: experimental
+    purpose: Reproduce prior paper/practice results on Ascend with frozen one-switch A/B evidence and fail-closed audit.
+    triggers:
+      - paper reproduction on Ascend
+      - historical benchmark reproduction
+      - reproduce prior paper result
+      - HYPIC reproduction
+      - paper-to-ascend reproduction
+      - 论文复现实验
     scope:
       - AGENTS.md
       - docs/**
@@ -111,6 +197,10 @@ skills:
     status: experimental
     purpose: Render measured Paper-to-Ascend experiments as colleague-style, evidence-bound, reproducible reports without inventing data.
     triggers:
+      - Paper-to-Ascend report
+      - summarize paper implementation result
+      - paper experiment handoff
+      - 论文落地报告
       - write a Paper-to-Ascend report
       - summarize an algorithm-piercing experiment
       - produce a paper reproduction report
@@ -118,6 +208,30 @@ skills:
       - 按同事实践格式汇报实测结果
     scope:
       - docs/**
+      - .agents/HANDOFF.md
+      - .agents/experiments/**
+      - .agents/workstreams/**
+  - id: paper-to-ascend
+    path: .agents/skills/paper-to-ascend
+    status: experimental
+    purpose: Gate and translate a complete, identity-labelled research method into a constraint-feasible Ascend NPU inference optimization workstream.
+    triggers:
+      - Paper-to-Ascend
+      - papertoAscend
+      - adapt a paper to Ascend inference
+      - implement a paper on Ascend
+      - 论文迁移到 Ascend
+      - 把论文方法落到 Ascend
+      - audit paper implementation completeness
+      - distinguish paper-exact and derivative implementations
+      - 论文方法链完整性核验
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
       - .agents/experiments/**
       - .agents/workstreams/**
   - id: mst-agentsmd-authoring

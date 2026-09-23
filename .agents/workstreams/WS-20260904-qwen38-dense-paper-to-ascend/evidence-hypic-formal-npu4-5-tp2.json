@@ -1,0 +1,62 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "hypic-qwen36-formal-npu4-5-tp2-20260906",
+  "status": "waiting-for-external-npu-release",
+  "controller_operation_id": "exec-0000000000000718",
+  "last_verified_wait": {
+    "verified_at": "2026-09-06T07:09:58+00:00",
+    "operation": "running",
+    "external_container": "p0_mp",
+    "external_workers": {
+      "NPU4": 907851,
+      "NPU5": 907852,
+      "NPU6": 907853,
+      "NPU7": 907854
+    },
+    "hypic_baseline_container": "exited",
+    "hypic_treatment_container": "created",
+    "benchmark_artifacts": "none"
+  },
+  "controller_attempts": [
+    {
+      "operation_id": "exec-0000000000000707",
+      "result": "control-plane timeout after 30 seconds",
+      "interpretation": "not an algorithm or feasibility result; EXIT cleanup stopped only the exact baseline container and emitted no benchmark artifact"
+    },
+    {
+      "operation_id": "exec-0000000000000718",
+      "result": "running with seven-day timeout; waiting for NPU4-5",
+      "external_occupant": "container p0_mp, TP4 workers on host NPU4-7",
+      "safety": "no external container or process is stopped or modified"
+    }
+  ],
+  "preflight": {
+    "verified_at": "2026-09-06T06:54:34+00:00",
+    "host_npu_4": "health OK; 2867/32768 MiB HBM; no process",
+    "host_npu_5": "health OK; 2867/32768 MiB HBM; no process",
+    "host_npu_6_7": "no process; not claimed",
+    "host_npu_0_3": "active external Qwen workload; not modified",
+    "port_8224": "no listener",
+    "cpu_set_46_95": "does not overlap the observed NPU0-3 VLLM worker affinities 2-45, 98-141 and 146-189",
+    "host_memory": "63354084 kB MemAvailable, no swap, 2009071616 kB Hugetlb reserved",
+    "memory_safety": "new containers are cgroup-limited to 48g; a container-local OOM is treated as a feasibility failure and must not trigger changes to the external workload",
+    "controller_self_test": "passed for NPU4-5 TP2 without changing workload state",
+    "json_records": "31 existing JSON files parsed successfully before this record was added"
+  },
+  "baseline": {
+    "performance": "not started",
+    "longbenchv2": "not started",
+    "gsm8k": "not started"
+  },
+  "treatment": {
+    "performance": "not started",
+    "longbenchv2": "not started",
+    "gsm8k": "not started",
+    "hot_path_evidence": "not started"
+  },
+  "profiling": {
+    "status": "not started",
+    "reason": "conditional on completed performance and quality gates"
+  },
+  "prohibited_inference": "No Hypic benefit or loss may be claimed until both fresh TP2 arms complete and their artifacts are hash-bound."
+}

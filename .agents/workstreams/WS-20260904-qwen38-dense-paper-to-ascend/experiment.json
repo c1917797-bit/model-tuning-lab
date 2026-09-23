@@ -1,0 +1,63 @@
+{
+  "experiment_id": "EXP-20260904-qwen36-gdn-dk64",
+  "paper": {
+    "title": "The Key to State Reduction in Linear Attention: A Rank-based Perspective",
+    "arxiv": "2602.04852"
+  },
+  "hypothesis": "Dk 128->64 reduces GDN projection/state cost on 910B4; DRRQR may preserve acceptable quality without retraining.",
+  "platform": {
+    "host": "chicaihong01",
+    "accelerator": "Ascend 910B4",
+    "software": "vLLM-Ascend 0.23.0",
+    "repo_base": "222677fc719c7014879b161ed1dd3ed3276d7a5d",
+    "tensor_parallel": 4
+  },
+  "resource_contract": {
+    "allowed": [
+      "host NPU0-3 after fresh check",
+      "CPU96-191"
+    ],
+    "forbidden": [
+      "host NPU4-7",
+      "CPU0-95",
+      "qwen38_gdn_fused_candidate"
+    ]
+  },
+  "baseline": {
+    "checkpoint": "/cache/efim/Qwen3.6-27B",
+    "head_k_dim": 128,
+    "steady_361in_32out_tpot_ms": 369.1616329034009
+  },
+  "treatments": [
+    {
+      "name": "fixed-first-channel speed oracle",
+      "checkpoint": "/cache/efim/Qwen3.6-27B-gdn-dk64-speed-oracle",
+      "head_k_dim": 64,
+      "quality_evidence": false,
+      "steady_361in_32out_tpot_ms": 369.163163224115,
+      "performance_gate": "failed"
+    },
+    {
+      "name": "data-free L1",
+      "checkpoint": "/cache/austinov/Qwen3.8-27B-gdn-dk64-l1",
+      "head_k_dim": 64,
+      "paper_aligned_drrqr": false
+    },
+    {
+      "name": "DRRQR",
+      "status": "not constructed",
+      "head_k_dim": 64
+    }
+  ],
+  "metrics": [
+    "TTFT",
+    "E2E",
+    "TPOT",
+    "throughput",
+    "deterministic tokens",
+    "quality",
+    "NPU operator/kernel time",
+    "memory"
+  ],
+  "status": "reject"
+}

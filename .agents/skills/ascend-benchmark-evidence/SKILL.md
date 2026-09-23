@@ -35,25 +35,81 @@ real improvement.
 8. Classify the result using `ascend-inference-tuning-loop` and commit/push the
    measurement stage even when it fails or shows no benefit.
 
+## Translation and progression gates
+
+Operator or microbenchmark speedup is mechanism evidence, not a service result.
+Before predicting E2E impact, record the real service shapes, affected calls,
+covered fraction, baseline and candidate per-call delta, overlap or critical
+path, and an optimistic maximum service-level benefit. Then measure the same
+candidate bytes in the service.
+
+Separate diagnostic instrumentation from the candidate treatment. Profiled or
+instrumented timing may select a hypothesis, but must not be reported as the
+candidate's performance result unless the instrumentation overhead is isolated.
+
+Use a predeclared fail-fast progression: first run correctness and representative
+low/high boundary concurrency. Expand to the full repetition matrix only when
+every primary metric passes its progression threshold and no safety, quality,
+or tail-risk gate fails. Preserve the stopped result; do not consume a full
+matrix to reconfirm a clearly missed gate.
+
 ## Comparability Gate
 
 Do not compare results when material source, model, hardware, driver, firmware,
 CANN, framework, container, power mode, topology, workload, or cache state
 differs. Re-baseline instead.
 
-## Review Traps
+## Baseline identity in progress reports
+
+Read the owning workstream's latest decision and referenced raw summaries
+before answering what the current baseline or gain is. Name separately:
+the historical frozen denominator, the fresh control for this iteration, and
+any retained optimized component used as the next development reference.
+Newer files do not automatically supersede the contractual baseline.
+
+Report model/dtype, TP/DP and physical devices, MTP/speculation, workload slice,
+cache/compilation regime, date/run ID, units, samples, repetitions, and the
+aggregation actually used. Do not label a P50 summary as P95. For median of
+per-run P95, calculate per-run P95 first; do not pool requests or average P95
+values under a median label. Link the original paired artifacts and hashes.
+
+A compile-specialization treatment may improve first-unseen-shape TTFT without
+improving warmed arithmetic. Separate first-shape, warmed, startup/warmup and
+mixed-arrival evidence; establish compiler attribution from traces/cache-key
+evidence rather than latency gaps alone. Do not multiply its gain by historical
+fusion gains from another denominator.
+
+A 32-request single-repeat low/high-concurrency screen is screening evidence,
+not a completed repetition matrix. Natural EOS preserves stopping semantics but
+may change output lengths and batch occupancy; report those differences and
+avoid attributing the entire TPOT/throughput delta to kernel speed. An accepted
+quality canary is not the full-dataset quality gate. Recheck artifact hashes
+before calling a stored decision independently verified.
+
+See [case evidence](../paper-ingestion/references/selection-baseline-lessons.md)
+when separating historical and fresh Qwen performance claims.
+
+## Additional review traps
 
 - Throughput alone can hide latency or correctness regressions.
 - Averages can hide tails and instability.
 - A single warm run cannot establish steady-state performance.
 - Host telemetry cannot prove physical NPU execution.
 - A faster compile cache hit is not a cold-start improvement.
+- Matching response bytes are strong deterministic evidence, but they are not
+  automatically full semantic accuracy when generation is stochastic, natural
+  stopping differs, or the reference dataset lacks ground-truth answers. State
+  the exact quality claim the oracle supports.
 
 ## Verification
 
 - Baseline and candidate environment fingerprints match.
 - Correctness gates pass before a performance win is accepted.
 - Commands, thresholds, repetitions, and exclusions are recorded.
+- Candidate bytes, activation evidence, and diagnostic overhead treatment are
+  recorded.
+- Microbenchmark claims include an E2E translation bound and are not relabeled
+  as service wins.
 - Cold, steady, boundary, lifecycle, and resources are reported separately or
   explicitly marked out of scope.
 - Raw artifact hashes resolve and no protected data is committed.

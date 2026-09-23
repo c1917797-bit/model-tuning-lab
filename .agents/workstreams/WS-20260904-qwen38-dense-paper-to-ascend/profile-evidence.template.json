@@ -1,0 +1,24 @@
+{
+  "schema": "paper-to-ascend-profile-evidence/v1",
+  "fixture_only": false,
+  "candidate_group": "REQUIRED_G2_G3_OR_G4",
+  "profile_workload_sha256": "REQUIRED",
+  "global_bindings": {
+    "frozen_inputs_sha256": "REQUIRED",
+    "invariant_config_sha256": "REQUIRED",
+    "treatment_matrix_sha256": "REQUIRED"
+  },
+  "cells": [
+    {
+      "model": "REQUIRED_MODEL",
+      "group": "G1_OR_CANDIDATE",
+      "profile_artifact": "REQUIRED_REGULAR_FILE",
+      "profile_artifact_sha256": "REQUIRED",
+      "capture_environment_disabled": true,
+      "profiler_enabled": true,
+      "target_region_operator_time_ms": "REQUIRED_POSITIVE",
+      "total_operator_time_ms": "REQUIRED_POSITIVE",
+      "target_region_invocations": "REQUIRED_POSITIVE_INTEGER"
+    }
+  ]
+}

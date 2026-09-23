@@ -255,3 +255,134 @@ contains the required mechanism and that the method targets an observed
 bottleneck. For dense inference, prefer methods such as exact speculative/MTP,
 attention/KV/decode improvements, or other inference-time techniques that do
 not require retraining unless retraining is explicitly in scope.
+
+## 7. Paper-to-Ascend lessons from HYPIC
+
+### 7.1 Reproduction success requires a named denominator
+
+HYPIC succeeded as a historical/practice-result reproduction because the
+scientific question was narrowed to a same-denominator A/B: native prefix cache
+was disabled in both arms and the only treatment switch was
+`VLLM_ASCEND_HYPIC_ENABLE`.
+
+The reference practice remained contextual rather than pooled evidence because
+model version, accelerator generation, and tensor parallel degree changed.
+The local result could reproduce direction and approximate magnitude, not
+absolute latency equality.
+
+**Reusable rule:** name the denominator before comparing gains. HYPIC-only vs
+no-cache, PDC-only vs PDC+HYPIC, and native prefix-cache experiments answer
+different questions and need separate ledgers.
+
+### 7.2 Activation evidence is part of performance evidence
+
+The HYPIC run did not accept favorable TTFT/TPOT/throughput numbers by
+correlation alone. The treatment also required strict runtime evidence that the
+HYPIC mechanism entered the intended hot path, with no missing required events.
+
+**Reusable rule:** configuration flags and import logs are not enough. A
+paper-derived mechanism needs planner/scheduler and worker/device hot-path
+activation proof before a performance delta can support adoption.
+
+### 7.3 Capacity arithmetic can invalidate an otherwise plausible ruler
+
+An earlier HYPIC configuration with a 16384-token budget could not admit a
+16384 private suffix plus an 8-token seam sink. That case was rejected and was
+not pooled with the corrected 40960-budget experiment.
+
+**Reusable rule:** admission budget must cover the full physical requirement,
+including private suffix, seam/sink, block alignment, workspace, and reserved
+tokens. Changing this identity requires a new baseline and artifact root.
+
+### 7.4 Host/container device mapping is experiment identity
+
+A preflight attempt reused host NPU IDs inside a remapped container. Measurement
+never began and the failure was archived. The corrected run recorded host NPU
+IDs separately from container-visible IDs.
+
+**Reusable rule:** prove host-to-container mapping and TP degree before
+measurement. Do not infer owned devices from container-local numbering.
+
+### 7.5 Performance and quality are separate execution contracts
+
+The HYPIC workflow separated fixed-output performance sampling from deterministic
+EOS-respecting quality sampling. It also restarted the identical arm between
+performance and quality phases so profiler, compilation, cache, and capture
+state could not leak across contracts.
+
+**Reusable rule:** `ignore_eos`, thinking mode, capture/profiler state, cache
+state, and scorer semantics must be phase-specific. A single global sampling
+block can silently invalidate either performance or quality evidence.
+
+### 7.6 Long runs must resume by verified unit, not by hope
+
+When service loss or long-tail behavior interrupted quality work, accepted rows
+were preserved with stable indexes and response hashes; only missing or invalid
+indexes were retried. Completed units were hash-validated and skipped on resume.
+
+**Reusable rule:** write per-request/per-sample JSONL with stable identity,
+`ok` state, and response/content hash. Never restart a live authoritative
+controller, and never average partial rows as if they were complete.
+
+### 7.7 Completion is an independent audit boundary
+
+HYPIC completion required an independent fail-closed audit over raw artifacts:
+planned performance and quality units, request counts, unique indexes, zero
+failures, response hashes, dataset/evaluator identity, mechanism activation,
+summary-to-details consistency, and resource release.
+
+**Reusable rule:** rendered reports and file presence are not enough. Adoption
+requires an independent raw-artifact audit plus explicit allowed and forbidden
+claims.
+
+### 7.8 Operational failures are not algorithm failures
+
+HYPIC preserved several failure classes without relabeling them as algorithmic
+regressions: wrong container device IDs, invalid capacity budget, evaluator or
+renderer defects, service lifecycle exits, and first-pass auditor bugs. Each was
+classified, repaired or superseded, and revalidated.
+
+**Reusable rule:** keep separate decisions for feasibility, mechanism
+activation, performance, quality, profiling, adoption, and generalization. A
+valid operational failure should stop or repair the run, not become a fake paper
+conclusion.
+
+## 8. Qwen3.5 parallel-task boundary
+
+### 8.1 Paper migration and production performance are different decisions
+
+Two Qwen3.5 tasks shared the model family, Ascend 910B4 host, vLLM-Ascend
+runtime, and initially the same NPU lane. That similarity caused the historical
+dense-MTP Paper-to-Ascend experiment to be described as if it were the active
+production optimization loop. The tasks actually use different workloads,
+metrics, acceptance gates, implementation policies, and evidence scopes.
+
+The performance workstream owns the frozen real `query_rewrite.jsonl`
+denominator, c1/c5/c8/c16 repeated P95/P99 evidence, semantic-quality gate,
+and final serving-stack decision. Paper-to-Ascend owns paper selection,
+architecture/source fit, bounded Ascend implementation, and paper-level
+mechanism evidence. A paper result can enter the performance loop only as a
+new candidate; it cannot inherit or replace the production baseline.
+
+The old MTP paper candidate is now policy-rejected because the active user
+constraint forbids MTP/speculative decoding. Its invalid contested baseline,
+failed startup, and selection rationale remain useful history, but it owns no
+current hardware lease.
+
+**Reusable rule:** every parallel task needs a unique task ID, branch, workload,
+metric gate, evidence root, implementation boundary, and resource lease.
+Shared model and hardware do not make two experiments comparable.
+
+### 8.2 Near-target and negative evidence must keep their scope
+
+The historical Qwen3.5 GDN projection-fusion plus gate/up-prefetch stack
+reached median-of-three P95 speedups of
+2.206x/1.938x/1.930x/1.910x for TTFT and
+1.381x/1.651x/1.753x/1.980x for TPOT at c1/c5/c8/c16. This passes seven of
+the eight current 1.5x latency cells, but c1 TPOT misses and the implementation
+used source overlays. It therefore selects the next hypothesis but is not a
+compliant production result.
+
+**Reusable rule:** retain successful ingredients and failed treatments, but
+never widen a microbenchmark, sampled-quality, source-overlay, or paper-level
+result into a final serving claim.

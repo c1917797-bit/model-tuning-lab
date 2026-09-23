@@ -1,21 +1,44 @@
 # Maintainer Handoff
 
+## Repository integration update — 2026-09-12
+
+Integrated the validated DRRQR paper-parity and source-selection/baseline
+lessons. Exact source: `4617c5e4ccd8f4dc1c996bfc9b64f3f44bb30b72`;
+target parent: `80cf967c929dc40842f47a15f0601b0a9b7b686a`.
+See `docs/BRANCH_CONSOLIDATION_20260912.md` for retention and remaining work.
+The older runtime descriptions below are historical, not current occupancy.
+
+
 ## 0. Status
 
-- Last updated: 2026-09-04.
+- Last updated: 2026-09-09.
 - Repository: Model Tuning Lab, a Git-native Ascend NPU model-inference optimization workspace.
-- Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide` with pushed evidence and recovery checkpoints.
-- Fresh clones route machine-bound work through
-  `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP,
-  prove the direct target, then enter the canonical target-host repository.
-- The repository-specific active worktree budget is eight.
-- Active branch-local tuning workstreams (not integrated truth):
-  - `work/exp-20260904-qwen35-dense-mtp-paper-to-ascend@07d723a`: dense-model Paper-to-Ascend, `planned / not-ready`, claims physical NPU0-3 and loopback port 8220.
-  - `work/exp-20260904-qwen38-prefix-cache-general-eval-final@5d28f45`: fixed 2k40 Prefix Cache A/B, `started / not-ready`, claims physical NPU4-7 and loopback port 8210; Prefix Cache OFF baseline is complete and candidate is next.
-- Superseded audit work: Dynamic MoE direct lowering is retained remotely at `work/exp-20260904-dynamic-moe-paper-to-ascend@55cc0a2`; its local worktree was reclaimed after the NPU lease was released. Do not merge that implementation into `main`.
-- Runtime/process/device facts can change independently of Git; re-check all NPU, container, port, memory, and competing-process state before acting.
-- Durable takeover guidance: `docs/LESSONS_LEARNED.md` and `docs/RUNBOOK.md`.
-- Handoff/docs integration validation: Maintainer Skill Tree PASS (17 skills), full merge diff check PASS, workstream JSON parse checks PASS. `python -m pytest` was attempted but could not run because the host Python environment does not have the `pytest` module installed; no test PASS is claimed.
+- Current `main` integrates the HYPIC Paper-to-Ascend historical reproduction,
+  the expanded Paper-to-Ascend pipeline, and tightened Ascend opportunity,
+  runtime-path, evidence, collective-lifecycle, and container-state gates.
+- Latest integrated handoff/skill checkpoint: `3286008 docs: align paper-to-ascend with hypic reproduction flow`.
+- Integrated maintainer model: `orient -> hypothesize -> baseline -> change -> verify -> measure -> decide`, with pushed evidence, negative-result retention, and explicit recovery checkpoints.
+- Fresh clones route machine-bound work through `chicaihong01-host-maintenance`: resolve `chicaihong01/ma` through AWMCP, pass the operator-provided value only in the connector `verify` field, prove the direct target, then enter `/opt/host/vnf/austinov/model-tuning-lab`.
+- The repository has two long-lived business workstreams. A hypothesis does not
+  receive a permanent worktree; it stays inside its owning task and is archived
+  immediately after a terminal decision.
+- Active branch-local work is not integrated product truth:
+  - `work/qwen35-performance-delivery` owns the Qwen3.5 production
+    performance loop. Its current user gate is at least 40% lower TTFT P95 and
+    at least 20% lower TPOT P95 at c1/c5/c8/c16 versus the frozen TP4 MTP-off
+    `query_rewrite` baseline, with zero material quality regressions.
+    BF16, no quantization/retraining/MTP/speculation, and runtime-monkeypatch
+    delivery are mandatory. It is blocked on a valid NPU0-3 lease.
+  - `work/drror-objective-loop-skill-20260909` owns the DRRQR/Objective
+    optimization task. Its current captured-teacher fidelity iteration is
+    in progress and must remain isolated from Qwen3.5 delivery.
+  - The old dense-MTP, prefix-cache, ShortGPT, and duplicate query-rewrite
+    candidates are superseded. Immutable remote tags retain their evidence;
+    rejected code is not merged into `main`.
+  - `work/drror-objective-loop-skill-20260909` retains imported DRRQR/objective
+    history for adaptation; it is not integration-ready and remains branch-local.
+- Local Git state alone does not prove current target-host runtime state. Re-check NPU, container, port, memory, process, controller, and worktree ownership before touching hardware.
+- Validation in this maintenance turn: Git status/log checks passed; `git diff --check` on the documentation update passed; a CRLF-tolerant Maintainer Skill Tree structure check passed with 26 skills. `./scripts/validate-mst.sh` was attempted on Windows and failed on CRLF shell-script parsing before repository checks; `python -m pytest` was attempted with the local Python 3.9 and failed because `pytest` is not installed. Run full validation on the Linux target before claiming execution readiness.
 
 ## 1. North Star
 
@@ -29,74 +52,129 @@ orient -> hypothesize -> baseline -> change -> verify -> measure -> decide
 
 ## 2. Current Focus
 
-Maintain two isolated tracks without cross-contamination:
+The integrated `main` focus is now a reusable Paper-to-Ascend operating system:
 
-1. **Dense Paper-to-Ascend:** evaluate exact speculative decoding using the installed dense checkpoint's built-in Qwen3.5 MTP head. The primary variable is speculation OFF -> `qwen3_5_mtp` with three speculative tokens; baseline/candidate must run on physical NPU0-3 / port 8220 with exact-match correctness and repeated throughput/TPOT evidence.
-2. **Prefix Cache A/B:** complete the frozen 2048-input/40-output protocol on physical NPU4-7 / port 8210. Prefix Cache OFF baseline is already recorded; next run is Prefix Cache ON followed by natural-prompt correctness and decision.
+1. **Paper-to-Ascend pipeline:** `paper-to-ascend` now routes through paper ingestion, architecture fit, source mapping, canary implementation, benchmark evidence, CANN/profiler attribution when needed, reproduction mode, and reporting.
+2. **HYPIC reproduction pattern:** historical/practice-result reproduction uses `paper-to-ascend-reproduction` with a frozen one-switch A/B denominator, mechanism activation evidence, resumable artifacts, and independent fail-closed audit.
+3. **Target-host safety:** `chicaihong01-host-maintenance` remains the gate for any live device work. Runtime state is not inherited from this local clone.
+4. **Qwen3.5 two-track boundary:** Paper-to-Ascend may produce a bounded
+   candidate and mechanism evidence, but only the separate `query_rewrite`
+   performance workstream owns its frozen denominator, final quality gate,
+   serving delivery contract, and performance acceptance decision.
 
 Keep the distinction between three kinds of knowledge explicit:
 
-1. integrated repository truth;
-2. branch-local active experiment state;
+1. integrated repository truth on `main`;
+2. branch-local or artifact-root experiment state;
 3. live host state that must be re-proven each session.
 
 ## 3. Recent Progress
 
+- Normalized the Qwen3.5 task onto
+  `work/qwen35-performance-delivery` at
+  `/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery`. The
+  scheduler-diagnostic checkpoint is pushed, while unvalidated prefetch and
+  terminal ShortGPT material are preserved under archive tags.
+- Two archived local worktrees are temporarily retained only because exited
+  experiment containers still declare their old paths as mounts. Do not remove
+  those worktrees or containers until exact ownership and restart requirements
+  are reviewed.
+- Consolidated target-host worktrees from eight to five: every committed
+  checkpoint was pushed, two superseded experiment worktrees were safely
+  reclaimed, and the transient consolidation worktree was removed after
+  integration. Dirty or not-ready worktrees were preserved.
+- Isolated and integrated only the three validated maintainer-skill commits
+  from a history-coupled branch. DRRQR/project imports remain branch-local.
+
 - Integrated the Ascend maintainer skills, experiment schema, workstream policy, and commit-implies-push tuning flywheel.
-- Diagnosed the host's low ordinary memory as a ~1.9 TiB 1 GiB HugeTLB reservation rather than ordinary process consumption; no risky hugepage release was performed.
-- Migrated the personal repository to `/opt/host/vnf/austinov/model-tuning-lab` with integrity checks and rollback backup; the old `/cache/austinov/model-tuning-lab` path remains a compatibility symlink.
+- Diagnosed low ordinary memory as a roughly 1.9 TiB 1 GiB HugeTLB reservation rather than ordinary process consumption; no risky hugepage release was performed.
+- Migrated the canonical target-host repository to `/opt/host/vnf/austinov/model-tuning-lab`, retaining `/cache/austinov/model-tuning-lab` as a compatibility symlink.
 - Repaired Git HTTPS runtime/CA handling without disabling TLS verification.
 - Prepared source workspaces for `vllm-ascend`, CANN `ops-transformer`, `cannbot-skills`, and `cann-recipes-infer` under `/home/mtuser/cch`.
-- Verified the vLLM-Ascend container provides `torch_npu.profiler`, `msprof`, and `asys`, and that the vLLM-Ascend profiler source uses Level1 + PipeUtilization.
-- In the active prefix-cache workstream, added the general-eval harness, froze model/eval-data identity, established an isolated 8200/NPU4-7 baseline, and proved the target worker processes on those physical devices.
-- Added durable success/failure history and maintainer takeover procedures in `docs/LESSONS_LEARNED.md` and `docs/RUNBOOK.md`.
-- Built a Paper-to-Ascend exemplar around Dynamic MoE and obtained a real negative result: the dynamic policy reduced token/expert pairs and accelerated expert GMM, but direct sort+cumsum+boolean compaction made whole-block latency much worse. The implementation was rejected, the paper/full-model conclusion remained inconclusive, and the workstream was superseded when the active installed target was confirmed to be dense.
-- Selected a dense-compatible next paper direction: exact speculative decoding backed by the checkpoint's built-in MTP head, with immutable model/runtime identities and acceptance/abort thresholds recorded before baseline.
+- Verified the vLLM-Ascend container had `torch_npu.profiler`, `msprof`, and `asys`; profiler guidance now lives in `ascend-cannbot-profiler`.
+- Built a Dynamic MoE Paper-to-Ascend exemplar and preserved a useful negative result: local expert GMM improved, but routing/packing overhead dominated whole-block latency. The implementation was rejected while the paper/full-model claim remained inconclusive.
+- Integrated HYPIC reproduction lessons: a changed environment can reproduce direction and approximate magnitude only with a fresh same-denominator A/B, mechanism activation proof, repeated performance/quality units, resumable raw artifacts, and independent audit.
+- Expanded the Paper-to-Ascend skill system with `paper-ingestion`, `ascend-architecture-fit`, `ascend-source-map`, `ascend-canary-implementation`, `paper-to-ascend-reporting`, `ascend-cannbot-profiler`, and `paper-to-ascend-reproduction`.
+- Separated the active Qwen3.5 performance loop from the historical dense-MTP
+  Paper-to-Ascend experiment. The MTP paper candidate is no longer an allowed
+  implementation route for the performance objective and no longer claims
+  NPU0-3.
+- Completed the runtime-only bounded-MMAR activation gate on physical NPU0-3.
+  All four TP workers activated the monkeypatch and the c1 three-repeat screen
+  achieved `1.9128x` TTFT P95 but only `1.2085x` TPOT P95 versus the frozen
+  MTP-off baseline. The candidate was rejected before full-matrix expansion;
+  NPU0-3 were released and the unrelated NPU4-7 workload was untouched.
 
 ## 4. Current Action
 
-Read both active branch-local handoffs before touching hardware. NPU0-3/8220 belongs to the Dense MTP experiment; NPU4-7/8210 belongs to the Prefix Cache experiment. Re-prove both leases and current processes before starting/stopping anything.
+For a new maintainer, start by treating this repository as ready for handoff but not as proof of live host state.
 
-For the user's latest Paper-to-Ascend direction, continue the Dense MTP workstream from its `planned` checkpoint: live orientation, fresh baseline on NPU0-3, exact-match correctness gate, then candidate A/B. Do not mutate vLLM/vLLM-Ascend source unless profiling shows the built-in path is insufficient.
+1. Read `AGENTS.md`, this handoff, `docs/RUNBOOK.md`, and `docs/LESSONS_LEARNED.md`.
+2. If the next task touches `chicaihong01`, use `chicaihong01-host-maintenance` before any remote or NPU action.
+3. If the next task is another paper/practice result, start with `paper-to-ascend`; for historical reproduction or adoption claims, include `paper-to-ascend-reproduction` and its evidence contract.
+4. Before using any claimed NPU/port lane, read the relevant target-host branch-local handoff and prove current ownership in the same session.
+5. For Qwen3.5 work, identify the task ID before acting: paper selection and
+   mechanism migration go to the Paper-to-Ascend workstream; cumulative
+   `query_rewrite` serving optimization and final acceptance go to the
+   performance workstream.
 
 ## 5. Next Actions
 
-1. Dense MTP: read `.agents/workstreams/exp-20260904-qwen35-dense-mtp-paper-to-ascend/HANDOFF.md` and its experiment YAML, then re-prove NPU0-3/8220 isolation and run the declared fresh baseline before enabling speculation.
-2. Dense MTP: compare speculation OFF vs `qwen3_5_mtp` with the exact frozen request protocol, three repetitions, greedy exact-match correctness, acceptance rate, throughput, TTFT/TPOT, and HBM evidence; checkpoint every stage.
-3. Prefix Cache: read `.agents/workstreams/exp-20260904-qwen38-prefix-cache-general-eval-final/HANDOFF.md`; re-prove NPU4-7/8210 isolation, then run the three Prefix Cache ON repetitions against the already-recorded OFF baseline and perform natural-prompt correctness verification.
-4. Keep the two tracks resource-isolated and never compare measurements across materially different model/runtime identities.
-5. If either bounded method fails, preserve the negative result and profile the measured hot path before selecting another paper or changing low-level code.
-6. Treat Qwen3-32B and HugeTLB release as separate future work: pass the Hugepage safety gate before any memory-pool change.
-7. Reconcile global handoff/lessons only during serialized integration; branch-local progress remains branch-local truth until merged.
+1. Re-enter the target host through AWMCP and refresh the canonical target repository state: `git fetch`, `git status --short --branch`, `git log -8 --decorate --oneline`, and `git worktree list --porcelain`.
+2. Start from `docs/ACTIVE_WORKSTREAMS.md`. Resume only one of the two
+   canonical task branches; archived experiment worktrees are not active work.
+3. For the Qwen3.5 performance loop, read branch commit
+   `c71de549b3ee32030799d66198786d8619aba3c1`. Do not retry the rejected
+   bounded-MMAR stack unchanged. Prove NPU0-3 ownership, then gate a materially
+   new ASCEND910B decode MMAR/HCCL lifecycle implementation on exact BF16 M=1
+   shapes before another E2E launch.
+4. Do not recreate or resume the old MTP or prefix-cache worktrees. Their remote
+   branches are evidence archives. Any new paper candidate requires a new
+   workstream and must be non-speculative, no-retraining, and no-quantization.
+5. For future Paper-to-Ascend work, choose the narrow route:
+   - new paper idea: `paper-ingestion` -> `ascend-architecture-fit` -> `ascend-source-map` -> canary;
+   - prior success or historical ruler: `paper-to-ascend-reproduction`;
+   - low-level kernel/operator/profiler question: `ascend-cannbot-profiler`;
+   - final result: `paper-to-ascend-reporting`.
+6. Do not reuse HYPIC absolute numbers across model, accelerator generation, TP degree, cache denominator, or capacity-budget changes. Create a fresh experiment, baseline, and artifact root.
+7. Re-run full validation on the Linux target before claiming the handoff is execution-ready.
 
 ## 6. Validation Commands
 
 ```text
+git status --short --branch
+git log -8 --decorate --oneline
+git worktree list --porcelain
 ./scripts/validate-mst.sh
 python -m pytest
 git diff --check
 ```
 
-For tuning evidence, also run the exact benchmark/profiling commands declared in the experiment record and verify the intended NPU processes.
+For tuning evidence, also run the exact benchmark/profiling/audit commands declared in the experiment record and prove intended NPU processes in the same session.
 
 ## 7. Do Not Do
 
 ```text
 - Do not use chat history as the only handoff state.
-- Do not overwrite global HANDOFF just to announce unmerged branch progress.
-- Do not ignore workstream claims or resource leases; NPU4-7 currently belongs to the active prefix-cache experiment until live state proves otherwise.
-- Do not claim an improvement without an apples-to-apples repeated protocol and correctness evidence.
-- Do not choose a paper by novelty alone. First prove that its required model mechanism exists in the installed checkpoint/runtime and that it addresses a measured bottleneck.
-- Do not apply MoE-only optimizations to the current dense model just because the algorithm showed theoretical compute savings.
-- Do not convert a rejected implementation into a rejected-paper claim; keep implementation, block-level, and full-model decision scopes explicit.
-- Do not discard rejected, inconclusive, or failed experiments; recover active code in later checkpoints while preserving evidence.
+- Do not assume this local clone proves current chicaihong01 runtime state.
+- Do not commit or print the AWMCP verification value; obtain it through the approved runtime channel and pass it only in the connector verify field.
+- Do not ignore workstream claims, resource leases, controllers, or neighboring protected NPU lanes.
+- Do not claim an improvement without one-switch or otherwise predeclared comparable baseline/candidate evidence and correctness gates.
+- Do not choose a paper by novelty alone. First prove mechanism fit, bottleneck fit, source seam, and resource isolation.
+- Do not apply architecture-specific methods to an incompatible checkpoint.
+- Do not convert a rejected implementation into a rejected-paper claim; keep implementation, operator/block, service, full-model, and adoption scopes separate.
+- Do not pool HYPIC, Dynamic MoE, prefix-cache, PDC coexistence, or other experiments across different denominators or scientific questions.
+- Do not pool the Qwen3.5 Paper-to-Ascend c8 synthetic protocol with the
+  frozen `query_rewrite` c1/c5/c8/c16 performance denominator.
+- Do not treat a paper-level mechanism success as a production serving win;
+  the performance workstream must independently prove activation, quality,
+  P95/P99, throughput, and resource safety.
+- Do not discard rejected, inconclusive, or failed experiments; recover active code while preserving evidence.
 - Do not merge failed active code into main.
 - Do not release the 1 GiB HugeTLB pool merely because many pages look free; identify OVS/DPDK/VNF consumers and define rollback first.
-- Do not assume a container is ready because it exists; prove listener and NPU workers in the same session.
+- Do not assume a container is ready because it exists; prove listener, health, real request, and NPU workers in the same session.
 - Do not disable TLS verification to repair Git.
-- Do not commit credentials, SSH material, shell history, private certificates, datasets, model weights, checkpoints, or large generated profiler outputs.
-- Do not commit or print the AWMCP verification value; obtain it through the
-  approved runtime channel and pass it only in the connector `verify` field.
+- Do not commit credentials, SSH material, shell history, private certificates, datasets, model weights, checkpoints, raw profiler traces, or large generated outputs.
 ```
 
 ## 8. Recovery / Resume Commands
@@ -105,21 +183,55 @@ For tuning evidence, also run the exact benchmark/profiling commands declared in
 git status --short --branch
 git log -8 --decorate --oneline
 git worktree list --porcelain
-sed -n '1,260p' .agents/HANDOFF.md
-sed -n '1,280p' docs/RUNBOOK.md
-sed -n '1,320p' docs/LESSONS_LEARNED.md
+sed -n '1,260p' AGENTS.md
+sed -n '1,320p' .agents/HANDOFF.md
+sed -n '1,340p' docs/RUNBOOK.md
+sed -n '1,420p' docs/LESSONS_LEARNED.md
+find .agents/skills -mindepth 2 -maxdepth 2 -name SKILL.md -type f | sort
 ./scripts/validate-mst.sh
 python -m pytest
 git diff --check
 ```
 
-If a `work/*` branch is active, read its `.agents/workstreams/<task-id>/task.json` and branch-local `HANDOFF.md` before touching files or hardware resources.
+If a `work/*` branch is active, read its `.agents/workstreams/<task-id>/task.json`, branch-local `HANDOFF.md`, experiment/evidence/decision ledgers, and exact audit/resume commands before acting.
 
-Active worktrees at this handoff:
+HYPIC-specific takeover reminder: use the integrated `paper-to-ascend-reproduction` skill and its `references/evidence-contract.md`; keep machine-specific artifact roots and resource lanes in the workstream handoff, not in reusable skills.
+
+Qwen3.5-specific takeover reminder: on chicaihong01 read the active target-host
+branch-local handoff before acting:
 
 ```text
-/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-dense-mtp-paper-to-ascend
-/opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-prefix-cache-general-eval-final
+/opt/host/vnf/austinov/worktrees/exp-20260904-qwen35-query-rewrite-3x-e2e/.agents/workstreams/exp-20260904-qwen35-query-rewrite-3x-e2e/HANDOFF.md
 ```
 
-Dynamic MoE is audit-only on its retained remote branch; recreate a worktree from that remote branch only if a future MoE target justifies reopening it.
+## 2026-09-14 workspace-governance checkpoint
+
+- The repository still has two canonical business tasks: Qwen3.5 performance
+  delivery and DRRQR/objective optimization.
+- Four additional mounted workstreams are retained because they are dirty,
+  awaiting exact-source revalidation, or waiting for an owned NPU lane:
+  Qwen3.5 experience ingestion, sparse-prefix reproduction, Qwen3.8
+  model-switch evaluation, and SlimInfer Qwen3.6 piercing.
+- The merged paper-parity worktree and two superseded archive worktrees were
+  safely reclaimed. The exact tips remain recoverable through the archive tags
+  recorded in `docs/BRANCH_CONSOLIDATION_20260912.md`.
+- Explicit authorization covered removal of 116 stopped containers referencing
+  only the two superseded archive paths. No running container, Docker volume,
+  image, active task worktree, or external evidence root was removed.
+- After the temporary governance worktree is integrated and reclaimed, expect
+  seven registered worktrees: `main` plus six task worktrees. Worktree budget
+  remains eight.
+- Do not infer active tasks from every unmerged local branch. Start from
+  `docs/ACTIVE_WORKSTREAMS.md`, registered worktrees, and each branch-local
+  task/handoff record.
+
+## 2026-09-14 branch-governance checkpoint
+
+- Branch namespaces were reduced from 16 local / 12 origin to a steady-state
+  target of 7 local / 7 origin: `main` and the six registered task branches.
+- Nine local and five origin historical branch names were removed only after
+  exact immutable annotated tags were verified or pushed.
+- The locally-ahead Qwen3.8 prefix-cache history and its former remote tip have
+  separate recovery tags; no unique commit was discarded.
+- Use `docs/BRANCH_GOVERNANCE_20260914.md` for exact restoration mappings.
+  Restoring a tag does not reactivate the old task or its resource claims.

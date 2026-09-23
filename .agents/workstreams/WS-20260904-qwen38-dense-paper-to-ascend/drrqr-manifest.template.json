@@ -1,0 +1,18 @@
+{
+  "schema": "paper-to-ascend-drrqr-checkpoint/v1",
+  "method": "DRRQR",
+  "model_id": "REQUIRED",
+  "source_model_path": "REQUIRED",
+  "source_config_sha256": "REQUIRED",
+  "selection_evidence_path": "REQUIRED",
+  "selection_evidence_sha256": "REQUIRED",
+  "calibration_dataset_path": "REQUIRED",
+  "calibration_dataset_sha256": "REQUIRED",
+  "checkpoint_config_sha256": "REQUIRED",
+  "checkpoint_index_sha256": "REQUIRED",
+  "changed_layers": "REQUIRED",
+  "changed_tensor_count": "REQUIRED",
+  "target_head_k_dim": 64,
+  "converter_version": "REQUIRED",
+  "created_at_utc": "REQUIRED"
+}

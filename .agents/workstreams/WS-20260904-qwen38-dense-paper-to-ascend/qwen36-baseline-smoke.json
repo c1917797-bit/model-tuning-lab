@@ -1,0 +1,56 @@
+{
+  "endpoint": "http://127.0.0.1:8211/v1/chat/completions",
+  "payload": {
+    "model": "qwen36-27b-hypic-baseline",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Compute 17*23. Reply with only the integer."
+      }
+    ],
+    "temperature": 0,
+    "seed": 1234,
+    "max_tokens": 128
+  },
+  "rows": [
+    {
+      "run": 1,
+      "elapsed_s": 98.12299536005594,
+      "text": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Task: Compute 17 * 23\n   - Constraint: Reply with only the integer.\n\n2.  **Perform Calculation:**\n   - 17 * 23\n   - Break it down: 17 * 20 = 340\n   - 17 * 3 = 51\n   - Add them: 340 + 51 = 391\n   - Alternatively: (20 - 3) * 23 = 4",
+      "sha256": "5dec717d64c3406ce77dc2095cf5a2d81e53697e6b889b99561c84b890a50ef8",
+      "usage": {
+        "prompt_tokens": 24,
+        "total_tokens": 152,
+        "completion_tokens": 128,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    },
+    {
+      "run": 2,
+      "elapsed_s": 49.427374379942194,
+      "text": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Task: Compute 17 * 23\n   - Constraint: Reply with only the integer.\n\n2.  **Perform Calculation:**\n   - 17 * 23\n   - Break it down: 17 * 20 = 340\n   - 17 * 3 = 51\n   - Add them: 340 + 51 = 391\n   - Alternatively: (20 - 3) * 23 = 4",
+      "sha256": "5dec717d64c3406ce77dc2095cf5a2d81e53697e6b889b99561c84b890a50ef8",
+      "usage": {
+        "prompt_tokens": 24,
+        "total_tokens": 152,
+        "completion_tokens": 128,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    },
+    {
+      "run": 3,
+      "elapsed_s": 49.50776656996459,
+      "text": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Task: Compute 17 * 23\n   - Constraint: Reply with only the integer.\n\n2.  **Perform Calculation:**\n   - 17 * 23\n   - Break it down: 17 * 20 = 340\n   - 17 * 3 = 51\n   - Add them: 340 + 51 = 391\n   - Alternatively: (20 - 3) * 23 = 4",
+      "sha256": "5dec717d64c3406ce77dc2095cf5a2d81e53697e6b889b99561c84b890a50ef8",
+      "usage": {
+        "prompt_tokens": 24,
+        "total_tokens": 152,
+        "completion_tokens": 128,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": null
+      }
+    }
+  ]
+}

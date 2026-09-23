@@ -1,0 +1,160 @@
+{
+  "schema": "paper-to-ascend-test-contract/v1",
+  "status": "draft-blocked-on-dataset-materialization",
+  "principle": "The test set is the fixed ruler; only the algorithm/treatment changes.",
+  "freeze_before_treatment": true,
+  "datasets": [
+    {
+      "name": "NIAH+",
+      "dimension": "RAG/needle long context",
+      "status": "missing locally",
+      "required": true
+    },
+    {
+      "name": "LongBench v2",
+      "dimension": "long context and multi-turn",
+      "status": "harness candidate found but exact frozen data absent",
+      "harness_candidate": "/cache/cch/hhs-aisbench/ais_bench/benchmark/configs/datasets/longbenchv2/longbenchv2_gen.py",
+      "required": true
+    },
+    {
+      "name": "GSM8K",
+      "dimension": "reasoning",
+      "status": "available",
+      "path": "/cache/austinov/eval-data/general/prepared/gsm8k_test.jsonl",
+      "required": true
+    },
+    {
+      "name": "CEval",
+      "dimension": "Chinese knowledge/reasoning",
+      "status": "EvalScope adapter installed; dataset files absent",
+      "harness_path": "/cache/austinov/p0/eval_env/lib/python3.9/site-packages/evalscope/benchmarks/ceval",
+      "declared_dataset_id": "modelscope/ceval-exam",
+      "declared_archive": "https://modelscope.oss-cn-beijing.aliyuncs.com/open_data/c-eval/ceval-exam.zip",
+      "required": true
+    }
+  ],
+  "immutable_fields": [
+    "dataset files and hashes",
+    "sample ids/order",
+    "prompt/chat template",
+    "input/output token limits",
+    "concurrency",
+    "request rate",
+    "warmup policy",
+    "three measured repetitions",
+    "container image digest",
+    "docker args except treatment selector",
+    "host NPU lane and CPU set",
+    "seed/sampling/generation config",
+    "metric parser version"
+  ],
+  "phase_protocol": {
+    "performance": "Fixed-length load may use ignore_eos=true; run three measured repetitions only after health 200 and warmup.",
+    "quality": "Use max_output_tokens=2048, seed=0, temperature=0, enable_thinking=false, ignore_eos=false, trust_remote_code=false and extract_non_reasoning_content; run three repetitions.",
+    "isolation": "For each G1-G4 group, complete performance, stop the service, restart the exact same frozen group configuration, wait for health 200, then run quality. Never reuse profiler/capture state for quality.",
+    "provenance": "Adapted from the supplied successful batch_size=32 HYPIC piercing record; host/device IDs and absolute paths are deliberately not copied."
+  },
+  "metrics": {
+    "performance": [
+      "TTFT",
+      "TPOT",
+      "OTT/E2E",
+      "output throughput",
+      "request throughput",
+      "batch delay",
+      "HBM",
+      "operator/kernel time"
+    ],
+    "quality": [
+      "dataset score per repetition",
+      "per-sample pass/fail",
+      "exact token/text equality for deterministic canary",
+      "per-task/category deltas"
+    ],
+    "statistics": {
+      "repetitions": 3,
+      "report": [
+        "each run",
+        "mean",
+        "standard deviation",
+        "relative delta to group 1"
+      ],
+      "cold_samples": "record separately; exclude from steady state"
+    }
+  },
+  "ablation_groups": [
+    {
+      "id": "G1",
+      "name": "unoptimized baseline",
+      "drrqr": false,
+      "native_optimization": false
+    },
+    {
+      "id": "G2",
+      "name": "native optimization only",
+      "drrqr": false,
+      "native_optimization": true,
+      "status": "candidate defined; runtime activation proof still required",
+      "native_treatment": {
+        "name": "fused CANN chunk gated delta rule prefill",
+        "upstream_commit": "77d13e2c0bfa9862b711b68811889e36b9d56aca",
+        "patch_sha256": "d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e",
+        "activation": "apply restart-safely, then prove torch_npu.npu_chunk_gated_delta_rule executed; source presence alone is insufficient"
+      }
+    },
+    {
+      "id": "G3",
+      "name": "DRRQR only",
+      "drrqr": true,
+      "native_optimization": false
+    },
+    {
+      "id": "G4",
+      "name": "DRRQR plus native optimization",
+      "drrqr": true,
+      "native_optimization": true
+    }
+  ],
+  "one_variable_rule": "Within each paired comparison exactly one declared switch may change; all immutable fields and artifact hashes must match.",
+  "generalization": {
+    "minimum_models": 2,
+    "status": "candidate selected; treatment conversion and load validation pending",
+    "current_model": "Qwen3.8-27B",
+    "second_model": {
+      "path": "/cache/Qwen3.5-4B",
+      "architecture": "Qwen3_5ForConditionalGeneration / qwen3_5_text",
+      "size_class": "4B",
+      "layout": "32 layers: 24 linear_attention plus 8 full_attention; hidden_size 2560; 32 linear value heads",
+      "weight_inventory": "2 safetensors shards, about 8.8 GiB",
+      "status": "available locally; must receive its own true DRRQR conversion and load/correctness validation"
+    }
+  },
+  "quality_gate": {
+    "condition_A": "Shared discrete accuracy values across groups are supporting evidence, not sufficient proof.",
+    "condition_B": "Aggregate mean difference may be called noise-level only after baseline NPU nondeterminism is measured on the same frozen suite; 1-2 percentage points is a prior, not a universal threshold.",
+    "condition_C": "For deterministic short-output canaries (<=512 output tokens), require zero within-group variance and exact baseline/treatment token equality where deterministic execution is expected.",
+    "additional_structural_pruning_gates": [
+      "No material per-dataset regression hidden by aggregate mean.",
+      "No critical-category or long-context cliff.",
+      "Report confidence/variance from three runs.",
+      "DRRQR must be evaluated separately from fixed-channel and L1 heuristics."
+    ],
+    "lossless_wording": "Use 'accuracy lossless within measured NPU noise on this frozen suite' only if all applicable gates pass; never claim mathematical equivalence from aggregate score alone."
+  },
+  "promotion_gate": [
+    "all required datasets materialized and hashed",
+    "G1-G4 contract frozen",
+    "three complete repetitions per group",
+    "second compatible model validated",
+    "quality gate passed",
+    "clean performance gain and profiler mechanism agree"
+  ],
+  "current_evidence_mapping": {
+    "G1": "baseline exists but not yet on full frozen suite",
+    "G2": "native fused-GDN patch identified and hashed; not yet run on the frozen suite and runtime activation evidence is required",
+    "G3": "DRRQR not constructed; speed-oracle and L1 are non-promotable probes",
+    "G4": "not run"
+  },
+  "resource_guard": "No test action may affect host NPU4-7 or CPU0-95. Fresh ownership check required for NPU0-3."
+}

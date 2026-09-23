@@ -1,0 +1,142 @@
+{
+  "schema": "maintainer-experience-ingestion/v1",
+  "source": {
+    "workstream": "WS-20260904-qwen38-dense-paper-to-ascend",
+    "checkpoint": "2026-09-06",
+    "inputs": [
+      "operator-supplied Hypic v0.8.5 successful practice",
+      "Qwen3.6 Dk64 experiment records",
+      "Qwen3.6 PDC coexistence Hypic records",
+      "Qwen3.6 historical-ruler controller attempts and partial evidence"
+    ]
+  },
+  "facts": [
+    "The Dk64 speed-oracle performance gate failed on Qwen3.6-27B.",
+    "The PDC coexistence Hypic experiment completed and rejected adoption.",
+    "The no-cache versus Hypic-only historical reproduction is paused after baseline performance x3 and baseline LongBench-v2 run1.",
+    "Host NPU0-3 and CPU112-191 are the only authorized lane; NPU4-7 is forbidden.",
+    "The employee success was Qwen3.5-27B TP2 on two 910C cards, while the current paused case is Qwen3.6-27B TP4 on four 910B4 cards; topology is part of the experimental identity.",
+    "CEval is excluded and authoritative NIAH+ is absent.",
+    "No commit or push is authorized."
+  ],
+  "lessons": [
+    {
+      "title": "Name the exact denominator",
+      "trigger": "A result is compared with prior work or an employee benchmark.",
+      "future_action": "Encode model, TP degree, cache policy and the single changed switch in the experiment id and contract before launch.",
+      "destination": "knowledge-proposals.json and experiment contract",
+      "verification": "A reviewer can identify both arms and prove a one-switch difference without reading service logs.",
+      "evidence": [
+        "hypic-previous-practice-reference.json",
+        "hypic-historical-reproduction-contract.json",
+        "hypic-current-vs-previous-comparison.json"
+      ]
+    },
+    {
+      "title": "Make pause a durable execution state",
+      "trigger": "The operator pauses a long accelerator run.",
+      "future_action": "Persist paused status, exact terminal operation, last complete unit, owned resource state and resume commands; never leave task or contract marked running.",
+      "destination": "task.json, HANDOFF.md and decision record",
+      "verification": "Static inspection identifies the next incomplete unit and cannot imply an active workload.",
+      "evidence": [
+        "task.json",
+        "evidence-hypic-historical-ruler.json"
+      ]
+    },
+    {
+      "title": "Validate serialized argv, not only shell syntax",
+      "trigger": "A controller or command is generated through patches, templates or transport layers.",
+      "future_action": "Run bash syntax, stray-argument scans and a no-side-effect self-test that renders the actual evaluator argv before workload mutation.",
+      "destination": "controller self-test and troubleshooting knowledge",
+      "verification": "The self-test rejects literal plus arguments and prints the expected option/value pairs.",
+      "evidence": [
+        "resume_hypic_historical_reproduction.sh",
+        "MAINTAINER_RETROSPECTIVE.md"
+      ]
+    },
+    {
+      "title": "Bind the verifier to the producer schema",
+      "trigger": "A controller validates a JSON summary emitted by another tool.",
+      "future_action": "Version the summary schema and run the verifier against a real fixture containing the producer's field names before launch.",
+      "destination": "controller verifier and future eval",
+      "verification": "A valid summary using requests is accepted and a missing or renamed required field fails before NPU execution.",
+      "evidence": [
+        "quality/no-cache/longbenchv2.run1.summary.json",
+        "resume_hypic_historical_reproduction.sh"
+      ]
+    },
+    {
+      "title": "Persist model outputs before aggregate validation",
+      "trigger": "A long concurrent evaluator may outlive its wrapper or verifier.",
+      "future_action": "Write atomic per-sample JSONL checkpoints, hash the final details, and allow a corrected scorer or verifier to resume without regeneration.",
+      "destination": "evaluation harness and evidence policy",
+      "verification": "A controller failure after completion preserves unique complete rows and resume skips the validated artifact.",
+      "evidence": [
+        "/cache/cch/hypic-qwen36-historical-reproduction-20260905/quality/no-cache/longbenchv2.run1.jsonl"
+      ]
+    },
+    {
+      "title": "Keep profile capture and acceptance independent",
+      "trigger": "The workload produces a usable native capture but an algorithm gate fails.",
+      "future_action": "Record profiler exit, stimulus validity and algorithm acceptance separately; never reinterpret capture success as adoption.",
+      "destination": "profile evidence and decision policy",
+      "verification": "The decision remains rejected when semantic signals are missing even if profile payloads are valid.",
+      "evidence": [
+        "profile-failure-20260905.json",
+        "decision-hypic-qwen36.json"
+      ]
+    },
+    {
+      "title": "Treat shared-host isolation as an executable contract",
+      "trigger": "Multiple workloads share an eight-card host.",
+      "future_action": "Pin exact host device nodes, CPU set, containers and port; inspect and clean only the owned lane.",
+      "destination": "resource contract and controller self-test",
+      "verification": "Every owned container maps only host NPU0-3/CPU112-191 and cleanup names one exact owned container.",
+      "evidence": [
+        "hypic-historical-reproduction-contract.json",
+        "HANDOFF.md"
+      ]
+    },
+    {
+      "title": "Freeze card count and tensor parallelism",
+      "trigger": "A prior successful practice used a different card count, accelerator generation or tensor-parallel degree.",
+      "future_action": "Keep topology in the experiment identity and refuse to resume preserved evidence under a different TP degree; create a new feasibility case and baseline instead.",
+      "destination": "task, experiment, decision, HANDOFF and knowledge proposal",
+      "verification": "The current resume commands are explicitly TP4/NPU0-3, while any TP2 attempt is labeled a separate experiment and cannot reuse TP4 measurements.",
+      "evidence": [
+        "hypic-previous-practice-reference.json",
+        "experiment-hypic-historical-ruler.json",
+        "HANDOFF.md"
+      ]
+    }
+  ],
+  "files_changed": [
+    "HANDOFF.md",
+    "HANDOFF_HISTORY_PRE_MAINTAINER_20260905.md",
+    "MAINTAINER_RETROSPECTIVE.md",
+    "PAPER_TO_LAB_DESIGN_REVIEW.md",
+    "COMPLETION_AUDIT.md",
+    "task.json",
+    "hypic-historical-reproduction-contract.json",
+    "experiment-hypic-historical-ruler.json",
+    "evidence-hypic-historical-ruler.json",
+    "decision-hypic-historical-ruler.json",
+    "knowledge-proposals.json",
+    "integration-evidence.json"
+    ,"hypic-previous-practice-reference.json"
+    ,"hypic-current-vs-previous-comparison.json"
+  ],
+  "validation": {
+    "static_only": true,
+    "npu_workload_started": false,
+    "json_parse_required": true,
+    "controller_syntax_required": true,
+    "controller_self_test_run_in_this_checkpoint": false,
+    "resume_requires_explicit_operator": true
+  },
+  "commit_push": {
+    "commit": false,
+    "push": false,
+    "reason": "Operator forbids fabricated Git identity and push; preserve the dirty branch for review."
+  }
+}

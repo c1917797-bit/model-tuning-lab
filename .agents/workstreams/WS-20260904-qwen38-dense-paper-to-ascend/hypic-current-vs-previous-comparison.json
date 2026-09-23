@@ -1,0 +1,106 @@
+{
+  "schema": "hypic-cross-environment-comparison/v1",
+  "record_scope": "The current_experiment object below is the completed PDC-coexistence track, not the active paused historical-ruler track.",
+  "current_experiment": {
+    "model": "Qwen3.6-27B",
+    "tensor_parallel": 4,
+    "comparison": "PDC+Hypic versus PDC-only",
+    "performance_shape": {
+      "input_tokens": 32768,
+      "output_tokens": 1024,
+      "requests": 40,
+      "concurrency": 16
+    },
+    "performance": {
+      "ttft_ms": {
+        "baseline": 50346.65534826345,
+        "treatment": 41843.48050374538,
+        "improvement_pct": 16.889254679777576
+      },
+      "tpot_ms": {
+        "baseline": 401.74380578151323,
+        "treatment": 401.4442066686423,
+        "improvement_pct": 0.07457466887089821
+      },
+      "output_tokens_per_second": {
+        "baseline": 29.857420312948545,
+        "treatment": 30.170131952983695,
+        "improvement_pct": 1.0473498271367196
+      },
+      "batch_duration_s": {
+        "baseline": 1371.8532803799026,
+        "treatment": 1357.6341019598767,
+        "improvement_pct": 1.036494107889452
+      }
+    },
+    "quality": {
+      "longbench_v2": {
+        "baseline_mean_accuracy_pct": 45.14435695538058,
+        "treatment_mean_accuracy_pct": 45.669291338582674,
+        "change_pp": 0.5249343832020941,
+        "baseline_run_range_pp": 2.3622047244094517,
+        "interpretation": "noise-compatible; not a demonstrated improvement"
+      },
+      "gsm8k": {
+        "baseline_mean_accuracy_pct": 96.25979277230225,
+        "treatment_mean_accuracy_pct": 96.08289107910032,
+        "change_pp": -0.17690169320192695,
+        "baseline_run_range_pp": 0.4548900682335102,
+        "treatment_run3_paired_change_pp": -0.6823351023502653,
+        "interpretation": "aggregate is within baseline run variation, but lossless is not established"
+      },
+      "niah_plus": {
+        "status": "blocked-authoritative-files-absent"
+      },
+      "ceval": {
+        "status": "excluded-by-operator"
+      }
+    }
+  },
+  "active_historical_reproduction": {
+    "status": "paused-before-treatment",
+    "model": "Qwen3.6-27B",
+    "accelerator": "four Ascend 910B4 cards on host NPU0-3",
+    "tensor_parallel": 4,
+    "comparison": "Hypic-only versus prefix-cache-disabled baseline",
+    "same_scientific_question_as_previous": true,
+    "treatment_measured": false,
+    "allowed_interpretation": "The denominator now matches the employee question, but no current Hypic gain can be reported until treatment performance and quality are complete.",
+    "two_card_boundary": "A Qwen3.6 TP2 probe would be a new experiment and cannot reuse the current TP4 baseline."
+  },
+  "previous_report": {
+    "model": "Qwen3.5-27B",
+    "tensor_parallel": 2,
+    "comparison": "Hypic-only versus prefix-cache-disabled baseline",
+    "source_record": "hypic-previous-practice-reference.json",
+    "reported_improvement_pct": {
+      "ttft": 46.6,
+      "tpot": 18.4,
+      "output_tokens_per_second": 38.5,
+      "batch_duration": 27.8
+    },
+    "reported_quality_change_pp": {
+      "niah_plus": 0.0,
+      "longbench_v2": 1.05,
+      "gsm8k": -0.17,
+      "ceval": 0.12
+    }
+  },
+  "relative_delta_context": {
+    "ttft_improvement_gap_pp": -29.710745320222422,
+    "tpot_improvement_gap_pp": -18.325425331129102,
+    "throughput_improvement_gap_pp": -37.45265017286328,
+    "duration_improvement_gap_pp": -26.76350589211055,
+    "current_gain_as_fraction_of_previous": {
+      "ttft": 0.3624303579351411,
+      "tpot": 0.004052970047331424,
+      "throughput": 0.02720389161394077,
+      "duration": 0.03728432042767813
+    }
+  },
+  "comparison_boundary": {
+    "apples_to_apples": false,
+    "reason": "For the completed PDC track, model version, tensor parallel degree and cache baseline differ. The active historical track aligns the cache question but still differs in model, accelerator generation, card count and TP degree. Absolute latency, throughput and quality scores must not be pooled.",
+    "current_result": "The current PDC-coexistence configuration reproduces a meaningful TTFT benefit but not the prior end-to-end, throughput or TPOT magnitude."
+  }
+}

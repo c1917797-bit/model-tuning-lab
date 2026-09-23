@@ -1,0 +1,25 @@
+{
+  "task_id": "drrqr-paper-parity-lessons-20260911",
+  "objective": "Ingest the DRRQR migration failures into the shared Paper-to-Ascend maintainer workflow as reusable method-completeness, provenance, constraint-feasibility, and backend-path gates.",
+  "target_branch": "main",
+  "workstream_branch": "work/drrqr-paper-parity-lessons-20260911",
+  "original_base": "31c43a4c249c9d4c597372f47d989a7c10b2c9c4",
+  "execution_state": "complete",
+  "integration_state": "merged",
+  "decision": "accepted",
+  "resource_claims": {
+    "npu": "none",
+    "containers": "none",
+    "ports": "none"
+  },
+  "boundaries": [
+    "Update shared maintainer knowledge only; do not modify DRRQR runtime code or experiment artifacts.",
+    "Preserve the branch-local DRRQR evidence and its bounded conclusions.",
+    "Do not claim that DRRQR as a paper is disproved by the tested no-training adaptation."
+  ],
+  "validation_commands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "next_action": "Retain evidence on main; reclaim the worktree only after checking all path consumers."
+}

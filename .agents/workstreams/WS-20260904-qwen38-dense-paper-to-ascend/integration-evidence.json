@@ -1,0 +1,65 @@
+{
+  "schema": "integration-evidence/v1",
+  "integration_state": "not-ready",
+  "base_commit": "222677fc719c7014879b161ed1dd3ed3276d7a5d",
+  "documentation_checkpoint": {
+    "date": "2026-09-06",
+    "active_track": "hypic-qwen36-historical-ruler-20260905",
+    "execution_state": "paused-by-operator",
+    "decision_state": "pending",
+    "next_incomplete_unit": "baseline LongBench-v2 run2",
+    "records": [
+      "HANDOFF.md",
+      "MAINTAINER_RETROSPECTIVE.md",
+      "PAPER_TO_LAB_DESIGN_REVIEW.md",
+      "experiment-hypic-historical-ruler.json",
+      "evidence-hypic-historical-ruler.json",
+      "decision-hypic-historical-ruler.json",
+      "experience-ingestion-20260905.json",
+      "hypic-previous-practice-reference.json",
+      "hypic-current-vs-previous-comparison.json"
+    ]
+  },
+  "scope_note": "The older four-dataset and DRRQR missing gates below belong to the original paper-derived Dk64/DRRQR track. The active historical Hypic track follows the successful-practice subset LongBench-v2 plus GSM8K; CEVal is excluded and authoritative NIAH+ is unavailable.",
+  "validated": [
+    "fixed-ruler freeze guard rejects missing required datasets",
+    "G1-G4 three-run offline summarizer fixture passes",
+    "freeze rejects unresolved runtime placeholders",
+    "summarizer rejects missing group cells and single-model final evidence",
+    "quality A/B/C gate passes and fails on controlled fixtures",
+    "two-model decision renderer adopts only a unique all-metric quality-passing winner",
+    "one-shot pipeline persists adopt on passing fixtures and iterate on quality failure",
+    "read-only piercing preflight fails closed on occupied NPU0-3 and incomplete frozen treatment inputs",
+    "same-architecture 4B second-model candidate and hashed fused-GDN native treatment identified",
+    "treatment matrix verifier confirms model configs, all indexed shards, native patch hash, and exact G1-G4 orthogonality",
+    "preflight binds each DRRQR checkpoint to its source config and re-hashes the exact frozen four-dataset ruler",
+    "preflight verifies DRRQR calibration/selection artifacts, checkpoint index and every indexed output shard",
+    "converter scripts exist",
+    "manifests exist",
+    "Dk64 loaded with real weights",
+    "baseline and Dk64 profiles exist",
+    "historical-ruler no-cache baseline performance has three hash-preserved 40-of-40 fixed-output runs",
+    "historical-ruler baseline LongBench-v2 run1 has 127-of-127 successful requests and a verified details hash",
+    "paused controller state and exact recovery commands are documented without starting a workload"
+    ,"historical TP2/two-card and current TP4/four-card identities are separated; changing topology requires a new case"
+    ,"handoff validation commands no longer contain literal plus arguments"
+  ],
+  "missing": [
+    "frozen four-dataset contract and hashes",
+    "three-run G1-G4 ablation matrix",
+    "second-model DRRQR conversion, load validation, and full generalization run",
+    "DRRQR",
+    "quality-qualified correctness",
+    "clean DRRQR A/B",
+    "DRRQR profile",
+    "capture cleanup",
+    "authorized Git identity",
+    "historical-ruler baseline quality runs after LongBench-v2 run1",
+    "historical-ruler Hypic-only performance and quality",
+    "historical-ruler final comparison and decision"
+  ],
+  "publish": {
+    "pushed": false,
+    "reason": "Operator forbids fabricated Git identity and push; no commit or push was performed."
+  }
+}

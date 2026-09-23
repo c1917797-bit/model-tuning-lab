@@ -1,0 +1,79 @@
+{
+  "schema": "paper-to-ascend-profile-recovery/v1",
+  "experiment_id": "hypic-qwen36-pdc-coexistence-20260904",
+  "status": "recovered-with-strict-capture-semantics",
+  "attempts": [
+    {
+      "operation_id": "exec-00000000000002bf",
+      "failure": "msprof rejected container PID 237 because the service had not been started with PROFILING_MODE=dynamic and no dynamic_profiling_socket existed.",
+      "impact": "Baseline quality was already complete; baseline remained running and treatment remained exited.",
+      "recovery": "Use a profile-only clone with identical image, argv, mounts, NPU0-3 mapping, CPU set and algorithm switch, adding only PROFILING_MODE=dynamic."
+    },
+    {
+      "operation_id": "exec-000000000000036f",
+      "failure": "The absent-container probe emitted an empty line before the fallback word, so a strict state comparison rejected the profile clone before creation.",
+      "impact": "Baseline was safely stopped and NPU0-3 were empty; no profile clone or treatment service was started.",
+      "recovery": "Capture docker inspect output and normalize a missing or empty result to exactly absent."
+    },
+    {
+      "operation_id": "exec-0000000000000372",
+      "failure": "docker exec omitted -i, so start/stop/quit were not forwarded to msprof stdin; msprof emitted repeated prompts until the 600-second fail-closed timeout.",
+      "impact": "The workload JSON was generated without valid profile files and is not accepted as profile evidence. The exact profile clone was stopped and NPU0-3 were proved empty.",
+      "recovery": "Use docker exec -i and terminate only the profile clone's msprof process on timeout."
+    },
+    {
+      "operation_id": "exec-000000000000038c",
+      "failure": "The native profiler and all 4 measured requests succeeded, but benchmark_prefix_coexistence.py returned 1 because its process exit combines traffic failure with algorithm coexistence acceptance; missing gates were native_decode_scheduler_passthrough, mixed_decode_latency_protection and mixed_decode_grouped_reclaim.",
+      "impact": "The controller exited 2 before cleanup. The exact NPU0-3/CPU112-191 profile clone was subsequently stopped, and the generated attempt was excluded from accepted profile evidence.",
+      "evidence": {
+        "archive": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic-failed-20260905T123020Z",
+        "manifest_sha256": "14c096638405d0aabb7ff62167ff2020476dc8af1e9337bb6a808c6adff8758b",
+        "workload_sha256": "2bd030979482934a283369f7611da55a2f3d89df84fbdb941e80a3d3dadb6007",
+        "profiler_exit_code": 0,
+        "benchmark_exit_code": 1,
+        "measured_requests_successful": 4,
+        "measured_requests_failed": 0,
+        "fixed_output_verified": true,
+        "profile_payload_files": 240,
+        "profile_payload_bytes": 186929539,
+        "profile_elapsed_s": 185.91175516997464
+      },
+      "recovery": "Keep the raw benchmark exit and missing algorithm gates, but verify profiler stimulus independently from the workload JSON. A capture is valid only for pdc-hypic exit 1 with exactly 4/4 successful measured requests, zero failures, fixed output and four individually successful results; this never changes algorithm acceptance to pass."
+    }
+  ],
+  "accepted_treatment_profile": {
+    "controller_operation_id": "exec-00000000000004c6",
+    "controller_exit_code": 0,
+    "manifest": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic/profile-manifest.json",
+    "manifest_sha256": "3adbf72f2da13a25d37796b30e873abb46e5d79503dac89624bb62a0142623f6",
+    "workload": "/cache/cch/hypic-qwen36-piercing-20260904/profiles/pdc-hypic/profile-workload.json",
+    "workload_sha256": "81b4beb0d3bc4cd220c9a118627c8183dcac5067286a2a979d7bef2a55a90fd3",
+    "profiler_exit_code": 0,
+    "raw_benchmark_exit_code": 1,
+    "capture_stimulus_verified": true,
+    "profile_payload_files": 234,
+    "profile_payload_bytes": 184536157,
+    "profile_elapsed_s": 105.59777031000704,
+    "algorithm_acceptance": false,
+    "interpretation": "The native capture is valid, while the raw benchmark exit and missing coexistence signals remain negative algorithm evidence."
+  },
+  "profile_clone_contract": {
+    "baseline_profile_container": "qwen36_hypic_pdc_baseline_profile_npu0_3",
+    "treatment_profile_container": "qwen36_hypic_pdc_treatment_profile_npu0_3",
+    "allowed_environment_delta": {
+      "PROFILING_MODE": "dynamic"
+    },
+    "host_devices": [
+      "/dev/davinci0",
+      "/dev/davinci1",
+      "/dev/davinci2",
+      "/dev/davinci3"
+    ],
+    "cpu_set": "112-191",
+    "simultaneous_quality_and_profile_services": false
+  },
+  "official_references": [
+    "https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/900beta2/devaids/Profiling/atlasprofiling_16_0016.html",
+    "https://www.hiascend.com/document/detail/zh/mindstudio/2610/msTT_msIT/msProf/docs/zh/profiling/msprof_cmd/dynamically.md"
+  ]
+}

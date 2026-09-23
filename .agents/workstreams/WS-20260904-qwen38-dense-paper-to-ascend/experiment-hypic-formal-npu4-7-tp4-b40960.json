@@ -1,0 +1,151 @@
+{
+  "schema": "paper-to-ascend-experiment/v1",
+  "experiment_id": "hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906",
+  "status": "complete",
+  "objective": "Reproduce the employee HYPIC v0.8.5 direction on Qwen3.6-27B TP4 with a physical scheduling budget that can admit the frozen 16384-token suffix plus seam sink.",
+  "historical_reference": {"model": "Qwen3.5-27B", "accelerator": "2x Ascend 910C", "tensor_parallel": 2, "hypic_version": "0.8.5"},
+  "current_target": {"model": "Qwen3.6-27B", "checkpoint": "/cache/efim/Qwen3.6-27B", "accelerator": "4x Ascend 910B4", "host_devices": [4, 5, 6, 7], "tensor_parallel": 4, "cpu_set": "0-95", "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1", "hypic_version": "0.8.5", "hypic_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f", "max_model_len": 40960, "max_num_batched_tokens": 40960},
+  "arms": {"baseline": "native prefix cache disabled; HYPIC disabled", "treatment": "native prefix cache disabled; HYPIC enabled", "only_algorithm_switch": "VLLM_ASCEND_HYPIC_ENABLE", "shared_runtime_invariants": ["max_num_batched_tokens=40960", "max_model_len=40960", "max_num_seqs=16", "TP4", "same image and checkpoint"]},
+  "performance_ruler": {"input_tokens": 32768, "shared_prefix_tokens": 16384, "output_tokens": 1024, "requests": 40, "concurrency": 16, "warmup_requests": 2, "ignore_eos": true, "repetitions_per_arm": 3, "seam_sink_tokens": 8, "minimum_physical_replay_tokens": 16392},
+  "quality_ruler": {"datasets": ["LongBench-v2", "GSM8K"], "temperature": 0, "seed": 0, "thinking": false, "max_output_tokens": 1024, "concurrency": 32, "repetitions_per_arm_and_dataset": 3, "ceval": "excluded by operator", "niah_plus": "authoritative files absent; no substitute"},
+  "isolation": {"owned_lane": "host NPU4-7 only", "protected_lane": "host NPU0-3 external workload; do not inspect or alter", "baseline_container": "qwen36_hypic_nocache_baseline_npu4_7_tp4_b40960", "treatment_container": "qwen36_hypic_only_npu4_7_tp4_b40960", "port": 8224, "hccl_port_range": "26000-26100", "simultaneous_arms": false, "artifact_root": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906"},
+  "startup_preflight_failures": [{"attempt": 1, "operation_id": "exec-000000000000089d", "failure": "ASCEND_RT_VISIBLE_DEVICES incorrectly used host IDs 4,5,6,7 after those nodes were remapped to container IDs 0,1,2,3", "measurement_started": false, "evidence_archive": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/preflight-failures/attempt1-invalid-visible-devices"}],
+  "controller": {"path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/resume_hypic_historical_reproduction.sh", "operation_id": "exec-00000000000009ab", "pid": 1124101, "exit_code": 0, "completed_at": "2026-09-06T17:31:34Z", "previous_operation_id": "exec-000000000000096e", "first_operation_id": "exec-00000000000008a5", "resumed_after_self_test": true, "completed_arm_skip_validation": true},
+  "progress": {
+    "accepted_units": 18,
+    "expected_units": 18,
+    "active_unit": null,
+    "last_verified_at": "2026-09-06T17:36:53Z",
+    "treatment_gsm8k_run1": {"requests": 1319, "successful": 1319, "failed": 0, "correct": 1268, "accuracy_pct": 96.13343442001516, "unique_response_sha256": 1319, "details_sha256": "f1cf288f5a7e99fb7ad268caebef4ce97df050213ad1016db566afe2de9568af", "summary_sha256": "a16e161293d7449a723c9778a211524463d183511d5108d51fc3af8e8004fa4b", "summary_details_hash_match": true},
+    "treatment_gsm8k_run2": {"requests": 1319, "successful": 1319, "failed": 0, "correct": 1265, "accuracy_pct": 95.90598938589841, "unique_response_sha256": 1319, "details_sha256": "ea72a82fb5c07536bab7b2acff3a7d8283f63958f3e4e6855822242ac19663e5", "summary_sha256": "88995a1547e8ba0ec109900ab8b5d6e65d9c3baeeb545e3b176d793cca6d3437", "summary_details_hash_match": true},
+    "treatment_gsm8k_run3": {"requests": 1319, "successful": 1319, "failed": 0, "correct": 1266, "accuracy_pct": 95.98180439727066, "unique_response_sha256": 1319, "details_sha256": "8ccd7ec29147a7cc8327faf75d1e61650c967170c5932af9c4736b6e972d18ed", "summary_sha256": "ac2babdfc2133044dc60210888e65b86649602f607ce1f55fa3a2ad8312ce2af", "summary_details_hash_match": true},
+    "treatment_gsm8k_aggregate": {"mean_accuracy_pct": 96.00707606772808, "delta_vs_baseline_pp": -0.15163002274451287, "baseline_range_pp": 0.37907505686125376, "within_baseline_range": true},
+    "interruptions": [
+      {
+        "unit": "baseline GSM8K run2",
+        "successful": 923,
+        "failed": 396,
+        "correct_among_successful": 889,
+        "partial_details_sha256": "4a12042f39119ef7c19b052fe29def87b248e391d7466d394498d5522f6ae960",
+        "accepted": false,
+        "service_failure_shape": "all requests after the 923rd successful response failed because port 8224 stopped responding",
+        "docker_oom_killed": false,
+        "recovery_semantics": "preserve ok rows and retry only indexes without ok=true"
+      }
+    ],
+    "baseline_longbenchv2_run1": {
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 56,
+      "accuracy_pct": 44.09448818897638,
+      "details_sha256": "807f06f603475aac6a161c70319d6b2a6055dbb4192e483f710a8b386157656a",
+      "summary_sha256": "3ba38ad6f2169b7bf1439662693c5e08fb64be74b7123408fe3607fdacc18c04"
+    },
+    "baseline_longbenchv2_run2": {
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 57,
+      "accuracy_pct": 44.881889763779526,
+      "details_sha256": "0c236d9b0d98d5789fff056b210aaf92dc9f0923545423b35e06760058053173",
+      "summary_sha256": "1d44c28e493bb642e9f00ca8bae5b7633860b86df772194eb0125262df11d473"
+    },
+    "baseline_longbenchv2_run3": {
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 63,
+      "accuracy_pct": 49.60629921259842,
+      "details_sha256": "1c5d00cb730f3cce6a49f30414696a098d26cffeb38aae6f96e05d61fa4a6356",
+      "summary_sha256": "4d18a7f1f802850a9b95b68ae72e3834df2b7dce920d8d454b5a6309737b6a67"
+    },
+    "baseline_gsm8k_run1": {
+      "requests": 1319,
+      "successful": 1319,
+      "failed": 0,
+      "correct": 1268,
+      "accuracy_pct": 96.13343442001516,
+      "details_sha256": "0227f668edbc04dc407345fc05b8a61d50fc128291ffe977a8f6b160f131a0bb",
+      "summary_sha256": "eafc16d3f246f798446791714536ca6a6bf2e4ba52bb1c86a85e8bb0bfe98a0c"
+    },
+    "baseline_gsm8k_run2": {
+      "requests": 1319,
+      "successful": 1319,
+      "failed": 0,
+      "correct": 1266,
+      "accuracy_pct": 95.98180439727066,
+      "details_sha256": "e6d79a9bbca6cde9ba230ea867047d4267414776b5a3748151203882da6465ec",
+      "summary_sha256": "6e42e5dba7268cd624055ced411484293afbd24ead8e12f0ba9c5930681408f7"
+    },
+    "baseline_gsm8k_run3": {
+      "requests": 1319,
+      "successful": 1319,
+      "failed": 0,
+      "correct": 1271,
+      "accuracy_pct": 96.36087945413192,
+      "details_sha256": "4df28c2cdd1230622399af2c3bac5204e55900382d7dc70dbf94b90cc7ec347d",
+      "summary_sha256": "11cb6c7e60032e630255f55dff770215969c97c043e486405471002405b6bab9"
+    },
+    "treatment_performance": {
+      "runs": [
+        {"run": 1, "successful": 40, "failed": 0, "duration_s": 245.28860574006103, "ttft_mean_ms": 24373.70598000125, "tpot_weighted_ms": 60.20963141594068, "output_tokens_per_second": 166.98696572724793, "fixed_output_verified": true, "hot_path_verified": true, "sha256": "b83c29312959485c355c6dee1f1a2db02476bbadf19aabc7ce6f78502701e065"},
+        {"run": 2, "successful": 40, "failed": 0, "duration_s": 244.77769861998968, "ttft_mean_ms": 21956.457585742464, "tpot_weighted_ms": 60.44371371579771, "output_tokens_per_second": 167.33550577084728, "fixed_output_verified": true, "sha256": "724e1c62ee84ff4e99766561225978bda4ef8b6c885d6a95b88d2f2016b81dda"},
+        {"run": 3, "successful": 40, "failed": 0, "duration_s": 239.6915595200844, "ttft_mean_ms": 21913.14031149377, "tpot_weighted_ms": 60.419721064023044, "output_tokens_per_second": 170.88628436483535, "fixed_output_verified": true, "sha256": "577cacbb6ced29dfa2841f0c10f851f45a7e98b0c3df646f47d9d54b3a9e3458"}
+      ],
+      "mean": {"duration_s": 243.25262129337838, "ttft_mean_ms": 22747.767959079163, "tpot_weighted_ms": 60.35768873192048, "output_tokens_per_second": 168.40291862097686},
+      "delta_pct": {"duration": -26.602831422417992, "ttft": -43.63447512683103, "tpot": -18.99108291418369, "output_throughput": 36.066291634029724}
+    },
+    "treatment_longbenchv2_run1": {
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 60,
+      "accuracy_pct": 47.24409448818898,
+      "details_sha256": "0005bb9f963d5c9f5cfcedb993630db52f5e3d797521913b9445827a84218fdf",
+      "summary_sha256": "01a6d0056e872b9dd380a9c3e81fd73d016b9abf84ec2f85abf7a09b84f5bd8b"
+    },
+    "treatment_longbenchv2_run2": {
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 59,
+      "accuracy_pct": 46.45669291338583,
+      "details_sha256": "c5b78d99c57672ad7071667634743ef77e484c68eb8f9ffb93055078aa8f369c",
+      "summary_sha256": "3cbc25ede28732b9a9235b374d0114789ee8baa16a4d5a1b4f58829aef0577c2"
+    },
+    "treatment_longbenchv2_run3": {
+      "requests": 127,
+      "successful": 127,
+      "failed": 0,
+      "correct": 56,
+      "accuracy_pct": 44.09448818897638,
+      "details_sha256": "d5c4918ebd231853001993fb82c2cb2e8b61f1c6d8fd1c45c47c5ce2d5263330",
+      "summary_sha256": "270e5b1e47f39dc58982290763a8eb0181e45fc7bd1ae487fa9500ac6f55d7b9"
+    },
+    "treatment_longbenchv2_aggregate": {
+      "mean_accuracy_pct": 45.931758530183726,
+      "delta_vs_baseline_pp": -0.26246719160104703,
+      "interpretation": "within baseline three-run range of 5.511811023622038 percentage points"
+    },
+    "renderer_recovery": {
+      "failed_operation_id": "exec-000000000000096e",
+      "failure": "allow-incomplete Markdown rendering indexed missing treatment GSM8K aggregate",
+      "algorithm_or_quality_failure": false,
+      "fix": "render only datasets present in quality_delta",
+      "validation": "py_compile, diff-check, allow-incomplete render and exact self-test passed",
+      "resume_operation_id": "exec-00000000000009ab"
+    },
+    "finalization": {
+      "summary": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-summary.json",
+      "summary_sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e",
+      "report": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/HISTORICAL_REPRODUCTION_REPORT.md",
+      "report_sha256": "f30ac5decb07145f78ee41a038874aaf3c059423f16ed73df0ea617fcd5fcb79",
+      "audit": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-evidence-audit.json",
+      "audit_ok": true,
+      "audit_errors": [],
+      "containers_exited": true,
+      "port_8224_released": true
+    }
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "schema": "paper-to-ascend-evidence/v1",
+  "experiment_id": "hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906",
+  "status": "complete",
+  "last_verified_at": "2026-09-06T17:36:53Z",
+  "resource_evidence": {"owned_lane": "NPU4-7", "container_visible_devices": [0, 1, 2, 3], "tensor_parallel": 4, "cpu_set": "0-95", "port": 8224, "protected_lane": "NPU0-3 not inspected or altered", "controller_operation_id": "exec-00000000000009ab", "controller_pid": 1124101, "controller_exit_code": 0, "route_decision": "peer_direct", "baseline_container_final_state": "exited; running=false; oom=false", "treatment_container_final_state": "exited; running=false; oom=false", "port_released": true},
+  "configuration_evidence": {"max_num_batched_tokens": 40960, "minimum_physical_replay_tokens": 16392, "budget_gate_passed": true, "controller_self_test": "passed", "same_budget_both_arms": true, "old_16384_baseline_not_pooled": true},
+  "preflight_failures": [{"attempt": 1, "measurement_started": false, "container_exit_code": 1, "oom_killed": false, "cause": "container-visible device IDs used host numbering", "archived_and_hashed": true, "archive": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/preflight-failures/attempt1-invalid-visible-devices"}],
+  "baseline": {
+    "status": "complete",
+    "accepted_units": 9,
+    "interruption_evidence": {
+      "controller_operation_id": "exec-00000000000008a5",
+      "controller_exit_code": 1,
+      "unit": "gsm8k-run2",
+      "requests": 1319,
+      "successful": 923,
+      "failed": 396,
+      "correct_among_successful": 889,
+      "partial_details_sha256": "4a12042f39119ef7c19b052fe29def87b248e391d7466d394498d5522f6ae960",
+      "accepted": false,
+      "oom_killed": false,
+      "cleanup_container_exit_code": 0,
+      "interpretation": "operational interruption only; no baseline or HYPIC conclusion",
+      "resume_contract": "the evaluator retains ok rows and retries only incomplete indexes"
+    },
+    "resume_evidence": {
+      "operation_id": "exec-000000000000092b",
+      "route": "peer_direct",
+      "static_validation": "passed",
+      "controller_self_test": "passed on empty NPU4-7 lane",
+      "checkpoint_successful_rows": 923,
+      "pending_indexes": 396
+    },
+    "service_health": "passed",
+    "owned_lane_verification": "passed",
+    "performance": {
+      "runs": [
+        {"run": 1, "requests": 40, "successful": 40, "failed": 0, "fixed_output_requests": 40, "fixed_output_tokens": 1024, "duration_s": 349.3089611798059, "ttft_mean_ms": 44857.20854199608, "tpot_weighted_ms": 76.70258613806746, "output_tokens_per_second": 117.26008935372242, "sha256": "f9c9f0288dce13b2fc4df72cf64fab60972be4847d138fc59599e12dfade1650"},
+        {"run": 2, "requests": 40, "successful": 40, "failed": 0, "fixed_output_requests": 40, "fixed_output_tokens": 1024, "duration_s": 323.01907927985303, "ttft_mean_ms": 38102.81385225244, "tpot_weighted_ms": 74.09921262634828, "output_tokens_per_second": 126.80365534852389, "sha256": "dc0e5f48d99f0488f99de2950e42d55e781690c9322621b34cc281ef85c7ceb2"},
+        {"run": 3, "requests": 40, "successful": 40, "failed": 0, "fixed_output_requests": 40, "fixed_output_tokens": 1024, "duration_s": 321.9308363099117, "ttft_mean_ms": 38112.750423524994, "tpot_weighted_ms": 72.72058952271912, "output_tokens_per_second": 127.23229768697654, "sha256": "e60492eba0848095b37cd90ec76e1b29253a4fca4ee627daaf8ee09732b4a35e"}
+      ],
+      "mean": {"duration_s": 331.4196255898569, "ttft_mean_ms": 40357.59093925784, "tpot_weighted_ms": 74.50746276237828, "output_tokens_per_second": 123.76534746307429}
+    },
+    "quality": {
+      "longbenchv2": {
+        "run1": {
+          "requests": 127,
+          "successful": 127,
+          "failed": 0,
+          "correct": 56,
+          "accuracy_pct": 44.09448818897638,
+          "finish_reasons": {"length": 56, "stop": 71},
+          "unique_indexes": 127,
+          "unique_response_sha256": 127,
+          "details_sha256": "807f06f603475aac6a161c70319d6b2a6055dbb4192e483f710a8b386157656a",
+          "summary_sha256": "3ba38ad6f2169b7bf1439662693c5e08fb64be74b7123408fe3607fdacc18c04",
+          "summary_details_hash_match": true
+        },
+        "run2": {
+          "requests": 127,
+          "successful": 127,
+          "failed": 0,
+          "correct": 57,
+          "accuracy_pct": 44.881889763779526,
+          "finish_reasons": {"length": 56, "stop": 71},
+          "unique_indexes": 127,
+          "unique_response_sha256": 127,
+          "details_sha256": "0c236d9b0d98d5789fff056b210aaf92dc9f0923545423b35e06760058053173",
+          "summary_sha256": "1d44c28e493bb642e9f00ca8bae5b7633860b86df772194eb0125262df11d473",
+          "summary_details_hash_match": true
+        },
+        "run3": {
+          "requests": 127,
+          "successful": 127,
+          "failed": 0,
+          "correct": 63,
+          "accuracy_pct": 49.60629921259842,
+          "finish_reasons": {"length": 50, "stop": 77},
+          "unique_indexes": 127,
+          "unique_response_sha256": 127,
+          "details_sha256": "1c5d00cb730f3cce6a49f30414696a098d26cffeb38aae6f96e05d61fa4a6356",
+          "summary_sha256": "4d18a7f1f802850a9b95b68ae72e3834df2b7dce920d8d454b5a6309737b6a67",
+          "summary_details_hash_match": true
+        }
+      },
+      "gsm8k": {
+        "run1": {
+          "requests": 1319,
+          "successful": 1319,
+          "failed": 0,
+          "correct": 1268,
+          "accuracy_pct": 96.13343442001516,
+          "finish_reasons": {"length": 31, "stop": 1288},
+          "unique_indexes": 1319,
+          "unique_response_sha256": 1319,
+          "details_sha256": "0227f668edbc04dc407345fc05b8a61d50fc128291ffe977a8f6b160f131a0bb",
+          "summary_sha256": "eafc16d3f246f798446791714536ca6a6bf2e4ba52bb1c86a85e8bb0bfe98a0c",
+          "summary_details_hash_match": true
+        },
+        "run2": {
+          "requests": 1319,
+          "successful": 1319,
+          "failed": 0,
+          "correct": 1266,
+          "accuracy_pct": 95.98180439727066,
+          "finish_reasons": {"length": 29, "stop": 1290},
+          "unique_indexes": 1319,
+          "unique_response_sha256": 1319,
+          "details_sha256": "e6d79a9bbca6cde9ba230ea867047d4267414776b5a3748151203882da6465ec",
+          "summary_sha256": "6e42e5dba7268cd624055ced411484293afbd24ead8e12f0ba9c5930681408f7",
+          "summary_details_hash_match": true
+        },
+        "run3": {
+          "requests": 1319,
+          "successful": 1319,
+          "failed": 0,
+          "correct": 1271,
+          "accuracy_pct": 96.36087945413192,
+          "finish_reasons": {"length": 19, "stop": 1300},
+          "unique_indexes": 1319,
+          "unique_response_sha256": 1319,
+          "details_sha256": "4df28c2cdd1230622399af2c3bac5204e55900382d7dc70dbf94b90cc7ec347d",
+          "summary_sha256": "11cb6c7e60032e630255f55dff770215969c97c043e486405471002405b6bab9",
+          "summary_details_hash_match": true
+        }
+      }
+    }
+  },
+  "treatment": {
+    "status": "complete",
+    "accepted_units": 9,
+    "required_hot_path_gate": true,
+    "performance": {
+      "runs": [
+        {"run": 1, "requests": 40, "successful": 40, "failed": 0, "fixed_output_verified": true, "hot_path_verified": true, "duration_s": 245.28860574006103, "ttft_mean_ms": 24373.70598000125, "tpot_weighted_ms": 60.20963141594068, "output_tokens_per_second": 166.98696572724793, "sha256": "b83c29312959485c355c6dee1f1a2db02476bbadf19aabc7ce6f78502701e065"},
+        {"run": 2, "requests": 40, "successful": 40, "failed": 0, "fixed_output_verified": true, "duration_s": 244.77769861998968, "ttft_mean_ms": 21956.457585742464, "tpot_weighted_ms": 60.44371371579771, "output_tokens_per_second": 167.33550577084728, "sha256": "724e1c62ee84ff4e99766561225978bda4ef8b6c885d6a95b88d2f2016b81dda"},
+        {"run": 3, "requests": 40, "successful": 40, "failed": 0, "fixed_output_verified": true, "duration_s": 239.6915595200844, "ttft_mean_ms": 21913.14031149377, "tpot_weighted_ms": 60.419721064023044, "output_tokens_per_second": 170.88628436483535, "sha256": "577cacbb6ced29dfa2841f0c10f851f45a7e98b0c3df646f47d9d54b3a9e3458"}
+      ],
+      "mean": {"duration_s": 243.25262129337838, "ttft_mean_ms": 22747.767959079163, "tpot_weighted_ms": 60.35768873192048, "output_tokens_per_second": 168.40291862097686},
+      "delta_pct": {"duration": -26.602831422417992, "ttft": -43.63447512683103, "tpot": -18.99108291418369, "output_throughput": 36.066291634029724}
+    },
+    "quality": {
+      "longbenchv2": {
+        "run1": {"requests": 127, "successful": 127, "failed": 0, "correct": 60, "accuracy_pct": 47.24409448818898, "finish_reasons": {"length": 55, "stop": 72}, "unique_indexes": 127, "unique_response_sha256": 127, "details_sha256": "0005bb9f963d5c9f5cfcedb993630db52f5e3d797521913b9445827a84218fdf", "summary_sha256": "01a6d0056e872b9dd380a9c3e81fd73d016b9abf84ec2f85abf7a09b84f5bd8b", "summary_details_hash_match": true},
+        "run2": {"requests": 127, "successful": 127, "failed": 0, "correct": 59, "accuracy_pct": 46.45669291338583, "finish_reasons": {"length": 52, "stop": 75}, "unique_indexes": 127, "unique_response_sha256": 127, "details_sha256": "c5b78d99c57672ad7071667634743ef77e484c68eb8f9ffb93055078aa8f369c", "summary_sha256": "3cbc25ede28732b9a9235b374d0114789ee8baa16a4d5a1b4f58829aef0577c2", "summary_details_hash_match": true},
+        "run3": {"requests": 127, "successful": 127, "failed": 0, "correct": 56, "accuracy_pct": 44.09448818897638, "finish_reasons": {"length": 58, "stop": 69}, "unique_indexes": 127, "unique_response_sha256": 127, "details_sha256": "d5c4918ebd231853001993fb82c2cb2e8b61f1c6d8fd1c45c47c5ce2d5263330", "summary_sha256": "270e5b1e47f39dc58982290763a8eb0181e45fc7bd1ae487fa9500ac6f55d7b9", "summary_details_hash_match": true},
+        "aggregate": {"mean_accuracy_pct": 45.931758530183726, "delta_vs_baseline_pp": -0.26246719160104703, "baseline_range_pp": 5.511811023622045, "within_baseline_range": true}
+      },
+      "gsm8k": {
+        "run1": {"requests": 1319, "successful": 1319, "failed": 0, "correct": 1268, "accuracy_pct": 96.13343442001516, "finish_reasons": {"length": 26, "stop": 1293}, "unique_indexes": 1319, "unique_response_sha256": 1319, "details_sha256": "f1cf288f5a7e99fb7ad268caebef4ce97df050213ad1016db566afe2de9568af", "summary_sha256": "a16e161293d7449a723c9778a211524463d183511d5108d51fc3af8e8004fa4b", "summary_details_hash_match": true},
+        "run2": {"requests": 1319, "successful": 1319, "failed": 0, "correct": 1265, "accuracy_pct": 95.90598938589841, "finish_reasons": {"length": 29, "stop": 1290}, "unique_indexes": 1319, "unique_response_sha256": 1319, "details_sha256": "ea72a82fb5c07536bab7b2acff3a7d8283f63958f3e4e6855822242ac19663e5", "summary_sha256": "88995a1547e8ba0ec109900ab8b5d6e65d9c3baeeb545e3b176d793cca6d3437", "summary_details_hash_match": true},
+        "run3": {"requests": 1319, "successful": 1319, "failed": 0, "correct": 1266, "accuracy_pct": 95.98180439727066, "finish_reasons": {"length": 31, "stop": 1288}, "unique_indexes": 1319, "unique_response_sha256": 1319, "details_sha256": "8ccd7ec29147a7cc8327faf75d1e61650c967170c5932af9c4736b6e972d18ed", "summary_sha256": "ac2babdfc2133044dc60210888e65b86649602f607ce1f55fa3a2ad8312ce2af", "summary_details_hash_match": true},
+        "aggregate": {"mean_accuracy_pct": 96.00707606772808, "delta_vs_baseline_pp": -0.15163002274451287, "baseline_range_pp": 0.37907505686125376, "within_baseline_range": true}
+      }
+    },
+    "renderer_recovery": {"failed_operation_id": "exec-000000000000096e", "controller_exit_code": 1, "cause": "allow-incomplete renderer accessed absent GSM8K aggregate", "algorithm_failure": false, "quality_unit_failure": false, "fix_validated": true, "self_test_passed": true, "resume_operation_id": "exec-00000000000009ab"},
+    "service_lifecycle_recovery": {"phase": "pre-quality startup", "first_resumed_instance": "exited cleanly without OOM before measurement", "recovery": "controller restarted the same exact treatment container and preserved all accepted units", "algorithm_or_quality_failure": false}
+  },
+  "profiling": {"status": "not-repeated-for-this-denominator", "reason": "The employee success ruler is a serving benchmark plus accuracy comparison. Strict per-run HYPIC event evidence proves treatment hot-path activation. Existing native msprof captures belong to the separate PDC-coexistence experiment and are preserved but not pooled into this decision.", "activation_evidence": "hypic-only/performance.run1.json summary.hot_path_verified=true with no missing events or evidence failures"},
+  "final_audit": {
+    "path": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/historical-reproduction-evidence-audit.json",
+    "schema": "hypic-historical-reproduction-audit/v1",
+    "ok": true,
+    "accepted_units": 18,
+    "expected_units": 18,
+    "errors": [],
+    "aggregate_sha256": "741a5ad225682452062143f776af81949961d11ecf946b4da64ade3a118f935e",
+    "report_sha256": "f30ac5decb07145f78ee41a038874aaf3c059423f16ed73df0ea617fcd5fcb79"
+  },
+  "authorized_inference": "The employee performance direction and approximate magnitude reproduced on the current Qwen3.6-27B TP4 topology. The observed LongBench-v2 and GSM8K mean deltas are within their measured baseline repeat ranges. This does not establish universal losslessness or absolute-value identity across models and hardware."
+}

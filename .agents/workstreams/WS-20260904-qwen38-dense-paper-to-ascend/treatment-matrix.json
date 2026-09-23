@@ -1,0 +1,45 @@
+{
+  "schema": "paper-to-ascend-treatment-matrix/v1",
+  "models": [
+    {
+      "id": "qwen38-27b",
+      "path": "/cache/austinov/Qwen3.8-27B",
+      "text_architecture": "qwen3_5_text",
+      "hidden_size": 5120,
+      "layers": 64,
+      "linear_attention_layers": 48,
+      "full_attention_layers": 16,
+      "linear_value_heads": 48
+    },
+    {
+      "id": "qwen35-4b",
+      "path": "/cache/Qwen3.5-4B",
+      "text_architecture": "qwen3_5_text",
+      "hidden_size": 2560,
+      "layers": 32,
+      "linear_attention_layers": 24,
+      "full_attention_layers": 8,
+      "linear_value_heads": 32
+    }
+  ],
+  "native_treatment": {
+    "id": "fused-gdn-prefill",
+    "upstream_commit": "77d13e2c0bfa9862b711b68811889e36b9d56aca",
+    "source_patch": "/opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-gdn-native-state-layout/patches/qwen38-gdn-state-layout/77d13e2c0-fused-gdn-prefill.patch",
+    "sha256": "d16712f909810c1dd1a7704d0a7d53434032f800cb2af1f9562d11475489a76e",
+    "operator": "torch_npu.npu_chunk_gated_delta_rule",
+    "runtime_proof_required": true,
+    "note": "The source patch probes capability and may fall back, so source presence is not activation evidence."
+  },
+  "groups": [
+    {"id": "G1", "native_treatment": false, "drrqr": false},
+    {"id": "G2", "native_treatment": true, "drrqr": false},
+    {"id": "G3", "native_treatment": false, "drrqr": true},
+    {"id": "G4", "native_treatment": true, "drrqr": true}
+  ],
+  "unresolved": [
+    "true DRRQR checkpoints for both model sizes",
+    "runtime activation evidence method for the fused operator",
+    "full frozen four-dataset inputs"
+  ]
+}

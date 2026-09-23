@@ -76,8 +76,8 @@ Re-prove this in the actual container/session before a new claim.
    changing model code.
 8. Analyze in this order: timeline gaps and serialization; per-step latency;
    top operators; top kernels with call count and shapes; AIC/MTE/AIV pipeline
-   ratios; HCCL communication and overlap; CPU/NUMA/scheduler correlation;
-   source-path mapping.
+   ratios; HCCL communication and overlap; cross-rank start/end spread;
+   CPU/NUMA/scheduler correlation; source-path mapping.
 9. Map the hot path to the smallest plausible layer: configuration, vLLM,
    vLLM-Ascend, CANN operator, `ops-transformer`, communication/topology, or
    system setting.
@@ -87,6 +87,12 @@ Re-prove this in the actual container/session before a new claim.
 ## Evidence rules
 
 - Separate observed local evidence from `cannbot-skills` guidance.
+- Treat summed operator or kernel durations across overlapping streams as
+  hotspot-ranking evidence, not removable wall time. Use timeline union,
+  serialization gaps, or critical-path evidence for an opportunity bound.
+- An AICPU or communication duration can include waiting. Correlate its start,
+  end, dependent kernels, and cross-rank spread before labeling it compute or
+  launch overhead.
 - Do not claim a kernel/operator root cause from host telemetry alone.
 - Do not compare profiler captures across drifted model, workload, container,
   CANN, driver, firmware, power mode, or device topology.
@@ -95,6 +101,32 @@ Re-prove this in the actual container/session before a new claim.
   compact summaries, artifact paths, and decisions.
 - Do not mutate CANN, drivers, firmware, clocks, power settings, or shared
   system services without explicit authorization and rollback.
+
+## Operator and collective admission
+
+- Capture the exact real-service phase, shapes, dtype, layout, ranks, and call
+  frequency before generating or tuning an operator.
+- Benchmark the official fused implementation and the simplest supported
+  decomposition first. Reject a custom route that cannot beat the correct
+  incumbent at the real shapes.
+- Use `cannbot-skills` as an expert workflow and source of checks, not as
+  black-box proof that a generated operator is correct or fast.
+- Prove the proposed chip/runtime route on the actual target. A mechanism
+  documented for another Ascend generation, compiler target, transport, or
+  communication architecture is not transferable evidence.
+
+Before service E2E, a custom multi-rank collective must pass a bounded
+fresh-process canary that records per-rank phase markers and proves:
+
+1. communicator initialization and finalization are balanced;
+2. all ranks make progress or produce one globally visible error;
+3. every wait has a timeout and a diagnosable failure phase;
+4. fresh logical epochs prevent stale-state, restart, and ABA reuse;
+5. repeated start/stop and crash-recovery trials do not inherit prior state.
+
+If the canary stalls, record exact candidate bytes and the last completed phase,
+clean up only owned resources, and close unchanged retries. A source fix is not
+the root cause unless the failure phase or outcome changes.
 
 ## Lessons already learned
 
