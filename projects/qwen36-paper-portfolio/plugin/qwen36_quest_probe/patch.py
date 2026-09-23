@@ -95,7 +95,9 @@ def register() -> None:
             if bool((pages < 0).any().item()):
                 raise RuntimeError("invalid live page table")
             start = time.perf_counter_ns()
-            key_pages = self.key_cache.index_select(0, pages).float()
+            key_pages = self.key_cache.index_select(0, pages).float().reshape(
+                num_pages, block_size, 256
+            )
             page_min = key_pages.amin(dim=1)
             page_max = key_pages.amax(dim=1)
             last_length = length - (num_pages - 1) * block_size
