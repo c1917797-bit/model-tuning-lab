@@ -178,3 +178,31 @@ No test reached NPU dequant output, so numerical correctness remains
 attention mechanism. Next investigate a split-tensor metadata layout (packed
 K/V bytes plus typed FP16 scale arrays) within the same plugin; only if that
 passes can it be fused with decode and evaluated as a service candidate.
+
+## 2026-09-24 split-metadata Ascend operator checkpoint
+
+The plugin's `tile_dequant_split.py` separates packed K4/V2 payload bytes
+from typed FP16 row/column scale and zero-point tensors while retaining the
+pinned author's dequant equations. The first physical-NPU4 run failed before
+output: BiShengHIR reported unsupported `uint32_t_to_float_rintmode` for a
+Triton cast. Its report is `triton-split-npu-v1/report.json` (SHA256
+`e3b3a1fa8d09ffe86098d9489565b9fd7a129219d2b791eea90375c32fc08f48`).
+Since packed values are only 0–15 (K) or 0–3 (V), converting the byte to
+signed int32 before floating conversion preserves their values exactly.
+
+The corrected one-shot run `qwen36_kvarn_triton_split_npu4_v2_20260924`
+compiled and passed on physical NPU4 / container NPU0. Both batch/tile
+counts 1 and 16 gave finite **bitwise exact** K and V dequantized tiles versus
+the pinned author's Python reference: zero mismatches and maximum absolute
+error 0. Its immutable report is `triton-split-npu-v2/report.json` (SHA256
+`ade9b3316e1fc845d6d170d20fa92d324f5e817724edb72b6baf2248dfa8ad14`);
+operator SHA256 is
+`75436f425b7c8c0d1e5ff26a8d62a309f0f3fff4fa75774d043060f105b992ca`.
+
+This is a successful **operator numerical prerequisite**, not a KVarN service
+candidate. It does not include fused attention, the sink/tail lifecycle,
+cache manager, NPUGraph, end-to-end throughput, or model-task accuracy. The
+split layout also changes the original packed-record cache ABI and must be
+costed against the matched dense service; it cannot be assumed faster merely
+because tile math is correct. Next gate is service-path feasibility, then
+graph/state correctness, then a paired fixed-1024 E2E screen if time permits.
