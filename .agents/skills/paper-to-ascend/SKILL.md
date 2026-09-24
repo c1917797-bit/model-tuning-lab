@@ -300,6 +300,18 @@ not require retraining unless retraining is explicitly in scope.
   source presence is not proof that the deployed binary selects that path.
   Keep a paper's local kernel speedup separate from the matched E2E target.
   See `projects/qwen36-paper-portfolio/MATMUL_PAPER_SHAPE_GATE.md`.
+- For low-bit attention papers on Ascend, distinguish paper tile equations,
+  packed-cache ABI, fused decode, and serving cache lifecycle as four separate
+  gates. On CANN 9.1/Triton 3.2, a mixed uint8 payload/FP16 metadata record
+  can fail pointer casts or compiler lowering before numerical execution;
+  separating typed scale arrays from packed bytes is a valid paper-specific
+  storage adaptation only after NPU parity proves its equations. A one-tile
+  fused K4/V2 attention pass does not establish sink/tail paging or service
+  benefit. If dynamic source branches inside a multi-block fused kernel hit
+  BiShengHIR cbuf-copy/alignment failures, preserve each failure and test
+  separate compressed/pool block partials with log-sum-exp combination instead
+  of repeatedly relaxing numerical gates or claiming the paper is invalid.
+  See `projects/qwen36-paper-portfolio/KVARN_ASCEND_GATE.md`.
 
 ## Do not do
 

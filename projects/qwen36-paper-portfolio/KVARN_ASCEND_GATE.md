@@ -206,3 +206,45 @@ split layout also changes the original packed-record cache ABI and must be
 costed against the matched dense service; it cannot be assumed faster merely
 because tile math is correct. Next gate is service-path feasibility, then
 graph/state correctness, then a paired fixed-1024 E2E screen if time permits.
+
+## 2026-09-24 fused attention and mixed-cache compiler checkpoint
+
+`tile_attention_split.py` performs K4/V2 dequant inside the attention kernel,
+without a full FP16 KV materialization to HBM. Its physical-NPU4 one-tile
+test passed for 1 and 16 independent requests, with six local Q heads per KV
+head. Against a full-precision-softmax reference over the author's restored
+tile, the maximum absolute output error was `6.103515625e-5`, all outputs
+finite. Report: `one-tile-attention-npu-v1/report.json`, SHA256
+`1a06775dce9ec978eda7bc4edc63a5d4dd678b08b421bd34dc4a9ceb277d1522`;
+operator SHA256
+`a142845465e82ce17388b065c0a6e5d8bd775a2c2a486e4828347c75316791e5`.
+This proves a narrow fused-compute compiler and numerical seam, **not** a
+service or performance gain.
+
+The first 3-block mixed-cache operator `decode_split.py` uses a block table
+for an FP16 sink, compressed middle block, and partial FP16 tail. Four
+non-overwriting NPU attempts were retained:
+
+- `mixed-decode-npu-v1/report.json` (SHA256
+  `c7f5027ab923237487227f7eb66240f17a721f4bbf77c188f517ae38096e3a63`):
+  Triton variable-scope error before code generation.
+- `mixed-decode-npu-v2/report.json` (SHA256
+  `0f305c4e27620ad41c4f3ce0d1a899e2eeb85e77f2e02bc32b51ae559aeab674`):
+  BiShengHIR rejects cbuf-to-cbuf copy with a dynamic sink/compressed branch.
+- `mixed-decode-npu-v3/report.json` (SHA256
+  `2d6e84cdc923f4330970049477e5e733c1c9740e48fadfe5c7182f9331e40566`):
+  branchless source selection still hits the same cbuf-copy lowering failure
+  because the dynamic nested loops remain.
+- `mixed-decode-npu-v4/report.json` (SHA256
+  `feb3519d814a7af80578e00105ce0f8fd142c184c404cb51d4f9926b4d3014ef`):
+  removing those runtime branches moved compilation to memory planning, which
+  rejects a 32×64×4 FP16 intermediate alignment.
+
+All four fail **before** mixed attention executes. The validated one-tile
+fused result must not be promoted to mixed-cache correctness. The next
+algorithm-specific Ascend adaptation is to split compressed and FP16-pool
+blocks into separate per-block partial attention kernels, then combine their
+softmax-normalized outputs with log-sum-exp. This follows the author's
+split-K reduction principle while avoiding the compiler's mixed-control-flow
+path. It still needs NPU numerical/graph checks, real cache lifecycle and a
+matched dense service screen before any E2E or quality claim.
