@@ -132,3 +132,19 @@ It is not the author's CUDA/Triton backend, vLLM cache integration, NPUGraph
 validation, or an end-to-end throughput result. The next gate must establish
 author-reference parity and a plugin-owned store/decode lifecycle before any
 service performance claim.
+
+## 2026-09-24 pinned author-reference parity checkpoint
+
+`tools/run_kvarn_author_parity_probe.py` loaded the author's unmodified
+PyTorch `sinkhorn.py`, `kvarn_store.py`, and `kvarn_decode.py` from Git commit
+`7586257f1c632e63187bfacbbe21ccb51540f7b3` in a read-only mount. On
+physical NPU4 (container NPU0), both batch 1 and 16 produced **bitwise exact**
+K/V balanced tiles, scales, packed bytes, and dequantized tiles against our
+equation probe. The one-shot container exited 0. The report is
+`/cache/cch/qwen36-kvarn-ascend-20260923/author-parity-npu-v1/report.json`,
+SHA256 `82eb48e487dee907cdf98bcb536b94c04c11a90008cde46b8e56fa32040dcce1`.
+
+This proves the tested tile equations and byte layout match the pinned author
+reference on this NPU. It does **not** prove the author's fused kernel, sink
+and tail management, cache allocator integration, graph replay, end-to-end
+speed, or LongBench-v2/GSM8K accuracy. Those remain mandatory gates.

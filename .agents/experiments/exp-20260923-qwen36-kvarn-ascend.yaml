@@ -12,6 +12,7 @@ git:
     - ce2bcc5
     - 8559109
     - 3b64713
+    - d6bb2f8
 environment:
   source_commit: "vLLM-Ascend 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; KVarN reference 7586257f1c632e63187bfacbbe21ccb51540f7b3"
   model_revision: "Qwen3.6-27B BF16; pin full checkpoint hash before NPU service run"
@@ -44,6 +45,7 @@ results:
   baseline: {}
   candidate:
     tile_npu_v3: "Physical NPU4 equation-derived smoke: batch 1/16 backend shared-state parity passed (max abs <= 1.05e-7); K/V pack roundtrips exact. Independent CPU/NPU packed values differed at 3/1 and 12/5 positions; synthetic K4/V2-vs-dense output cosine 0.898/0.875. Neither author-backend parity, model accuracy, nor service performance is established."
+    author_parity_npu_v1: "Physical NPU4, batch 1/16: pinned author PyTorch Sinkhorn, K4/V2 store fields, and decode matched plugin equation probe exactly on NPU (all recorded max_abs=0). This is tile-format parity only, not cache lifecycle, NPUGraph, model accuracy, or E2E performance."
   cold: {}
   steady: {}
   boundary: {}
@@ -55,8 +57,10 @@ artifacts:
   - "projects/qwen36-paper-portfolio/tools/run_kvarn_tile_npu_probe.py"
   - "/cache/cch/qwen36-kvarn-ascend-20260923/tile-npu-v2/report.json"
   - "/cache/cch/qwen36-kvarn-ascend-20260923/tile-npu-v3/report.json sha256:e5cd4605c6558bb3f590eb36f7c77b94f74e27bcf88b47127637236c1c454f9d"
-decision_reason: "Device visibility restored and synthetic NPU tile arithmetic passed its backend-parity gate; author implementation parity, cache lifecycle/NPUGraph, E2E throughput, and final accuracy remain unverified."
-next_loop: "Compare against the pinned author PyTorch reference and audit paper-specific store/decode ABI; only a numerically valid plugin path can proceed to matched service performance."
+  - "projects/qwen36-paper-portfolio/tools/run_kvarn_author_parity_probe.py"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/author-parity-npu-v1/report.json sha256:82eb48e487dee907cdf98bcb536b94c04c11a90008cde46b8e56fa32040dcce1"
+decision_reason: "UDA release enabled genuine NPU tile and pinned author-reference parity, both passed at batch 1/16. Full cache lifecycle/NPUGraph, E2E throughput, and final accuracy remain unverified."
+next_loop: "Audit and implement an opt-in paper-specific Ascend cache store/decode path; require tail/sink/graph/mixed-phase numerical checks before matched service performance. Apply the one-day deadline without mislabeling tile parity as a service win."
 rollback:
   command: "Disable explicit plugin opt-in; do not modify upstream runtime or image."
   verified: false
