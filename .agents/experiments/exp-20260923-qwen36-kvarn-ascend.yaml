@@ -15,6 +15,7 @@ git:
     - d6bb2f8
     - 1e20ee1
     - f10d7dc
+    - 1fc175d
 environment:
   source_commit: "vLLM-Ascend 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; KVarN reference 7586257f1c632e63187bfacbbe21ccb51540f7b3"
   model_revision: "Qwen3.6-27B BF16; pin full checkpoint hash before NPU service run"
@@ -52,6 +53,7 @@ results:
     triton_dequant_split: "Physical NPU4 split typed-metadata K4/V2 dequant passed batch 1/16 bitwise exact vs author-matched restored tiles. First version's uint32-to-float lowering failed; signed-int32 byte conversion fixed it without changing 0..15/0..3 values. Operator-only result."
     fused_one_tile_attention: "Physical NPU4 K4/V2 dequant inside attention passed batch 1/16, six local Q heads, max abs 6.103515625e-5 vs full-precision-softmax reference. No sink/tail, paging, service, or performance claim."
     mixed_three_block_decode: "Four physical NPU4 versions failed before execution: Triton variable scope, two dynamic-branch cbuf-copy failures, and branchless BiShengHIR alignment planning. Scope is this monolithic compiler path, not KVarN mechanism."
+    partitioned_mixed_decode: "Physical NPU4, batch 1/16, synthetic 128-token FP16 sink + 128-token K4/V2 middle + 1-42-token FP16 tail: max abs 3.0517578125e-5 vs full-support reference. Same captured NPUGraph replays were bitwise stable while query, compressed block ID and sink/tail pool slots changed. This is a mixed-read numerical/graph seam only; live cache allocation/writes, service, throughput and task accuracy are absent."
   cold: {}
   steady: {}
   boundary: {}
@@ -73,8 +75,11 @@ artifacts:
   - "/cache/cch/qwen36-kvarn-ascend-20260923/triton-split-npu-v2/report.json sha256:ade9b3316e1fc845d6d170d20fa92d324f5e817724edb72b6baf2248dfa8ad14"
   - "/cache/cch/qwen36-kvarn-ascend-20260923/one-tile-attention-npu-v1/report.json sha256:1a06775dce9ec978eda7bc4edc63a5d4dd678b08b421bd34dc4a9ceb277d1522"
   - "/cache/cch/qwen36-kvarn-ascend-20260923/mixed-decode-npu-v1..v4/report.json; exact hashes in KVARN_ASCEND_GATE.md"
-decision_reason: "Author-reference tile parity, split dequant, and one-tile fused attention have passed on physical NPU4. Monolithic mixed-cache kernel remains compiler-incompatible in four preserved attempts. Full lifecycle/NPUGraph, E2E throughput, and final accuracy remain unverified."
-next_loop: "Test distinct compressed/pool per-block partial-attention kernels and log-sum-exp combination to avoid the confirmed mixed-control-flow BiShengHIR path. Then graph/state gates, opt-in service integration and matched dense E2E only if numerical correctness holds. Apply the one-day deadline without claiming paper-wide failure from compiler limitations."
+  - "projects/qwen36-paper-portfolio/plugin/qwen36_kvarn_ascend/partial_decode_split.py"
+  - "projects/qwen36-paper-portfolio/tools/run_kvarn_partitioned_decode_probe.py"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-decode-npu-v3/report.json sha256:3aa70725363df36fe62bb5b2e9b4eb0a344f95014440a5893a85b4e9058a8cef"
+decision_reason: "Author-reference tile parity, split dequant, one-tile fused attention, and synthetic partitioned mixed-cache numerical/graph replay have passed on physical NPU4. Monolithic mixed-cache kernel remains compiler-incompatible in four preserved attempts. Live cache allocation/writes, service E2E throughput, and final task accuracy remain unverified."
+next_loop: "Audit pinned author backend and Ascend v0.23 cache lifecycle, then attempt the narrowest opt-in service path that actually replaces BF16 KV allocation/write and passes mixed scheduling/graph correctness. Run paired fixed-1024 E2E only if that gate passes; respect the one-day deadline and do not reject the paper globally from implementation limits."
 rollback:
   command: "Disable explicit plugin opt-in; do not modify upstream runtime or image."
   verified: false

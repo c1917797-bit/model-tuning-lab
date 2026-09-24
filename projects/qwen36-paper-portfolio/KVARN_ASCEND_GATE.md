@@ -248,3 +248,39 @@ softmax-normalized outputs with log-sum-exp. This follows the author's
 split-K reduction principle while avoiding the compiler's mixed-control-flow
 path. It still needs NPU numerical/graph checks, real cache lifecycle and a
 matched dense service screen before any E2E or quality claim.
+
+## 2026-09-24 partitioned mixed-cache numerical and graph checkpoint
+
+The plugin prototype `partial_decode_split.py` now computes separate
+compressed K4/V2 and FP16 sink/tail block partials, returning each block's
+normalized output and log-sum-exp. `combine_partials` performs the exact
+log-sum-exp weighting across blocks. This is an Ascend-specific adaptation
+of the author's split-K reduction, not a complete port of the author's
+cache backend.
+
+One-shot physical-NPU4 tests with the pinned author-matched K4/V2 tile format
+passed for 1 and 16 synthetic requests, each with a 128-token sink, one
+compressed 128-token block, and a 1–42-token FP16 tail. The strongest v3
+test changed the query, compressed block ID, and sink/tail pool slots between
+replays of the **same** captured NPUGraph. Each replay was bitwise stable,
+all outputs and LSE values were finite, and attention output had maximum
+absolute error `3.0517578125e-5` against its matching full-support
+reference. Report:
+`/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-decode-npu-v3/report.json`
+(SHA256 `3aa70725363df36fe62bb5b2e9b4eb0a344f95014440a5893a85b4e9058a8cef`).
+Operator SHA256
+`cddea5610de140271874e4dd3bd1347ff300199b7ff57fc3a6756b7d0c326162`;
+probe SHA256
+`c2709fd879b0a3d188dc7ae84c92e24f8fcfc6b4141dc19839b35106bc6b98e4`.
+
+This proves only the tested synthetic mixed-read numerical and graph seam.
+The probe prepopulates compressed and pool storage and builds task metadata
+outside the graph. It does **not** implement the author's sink/tail
+allocation, tile sealing and eviction, prefix-sharing identity, live
+prefill writes, or vLLM cache manager integration. It also uses separate
+kernel launches and PyTorch reduction, so no speed claim follows. A service
+candidate must actually replace the dense attention KV write/allocation
+path; a sidecar that retains the full BF16 cache cannot claim the paper's
+memory benefit. Next audit the author and v0.23 cache lifecycles, then
+implement the narrowest opt-in service path that passes mixed scheduling
+and graph correctness before any paired fixed-1024 benchmark.
