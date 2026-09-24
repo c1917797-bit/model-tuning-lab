@@ -106,3 +106,29 @@ outside the protected 4–7 scope. No container was stopped or deleted, and no
 indirect namespace workaround was used. This is an environment blocker, not
 a paper no-go. Continue paper-specific store/decode preparation while the
 device boundary is resolved; do not launch a service or claim throughput.
+
+## 2026-09-24 UDA release and tile numerical checkpoint
+
+After a fresh owner/process check, the operator-authorized stop of
+`agentgpu-910b4-qwen35-4b-aiv-v1` released its UDA namespace without deleting
+the container. A new, non-overwriting run in
+`qwen36_kvarn_tile_npu4_v3_20260924` exposed **only physical NPU4** as
+container NPU0 (image digest
+`sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1`).
+The report is
+`/cache/cch/qwen36-kvarn-ascend-20260923/tile-npu-v3/report.json`, SHA256
+`e5cd4605c6558bb3f590eb36f7c77b94f74e27bcf88b47127637236c1c454f9d`;
+the probe script is SHA256
+`1095f7e90ab7475b08a7a79a5d3cdb84412d84c459dbed9037a96eb03d5970a3`.
+
+The equation-derived NPU smoke completed at batch 1 and 16: K and V pack
+roundtrips were exact, all tested tensors finite, and the shared-packed-state
+NPU-vs-CPU attention maximum absolute difference was at most `1.05e-7`.
+Independently quantizing on CPU and NPU yielded a few different packed values
+(K/V: 3/1 at batch 1, 12/5 at batch 16). The synthetic quantized-vs-dense
+attention cosine was only 0.898/0.875, so **the report's `passed` status is a
+backend shared-state execution/parity gate only**, not proof of model accuracy.
+It is not the author's CUDA/Triton backend, vLLM cache integration, NPUGraph
+validation, or an end-to-end throughput result. The next gate must establish
+author-reference parity and a plugin-owned store/decode lifecycle before any
+service performance claim.
