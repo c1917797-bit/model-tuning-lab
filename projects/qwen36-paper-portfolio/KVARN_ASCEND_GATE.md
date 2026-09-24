@@ -79,3 +79,30 @@ paper-wide no-go, and do not promote capacity or a kernel microbenchmark to
 the required end-to-end throughput gain. If no NPU-valid service candidate
 exists by the deadline, preserve evidence and move to the next measured
 attention/IO paper rather than continuing this loop indefinitely.
+
+## 2026-09-24 environment gate checkpoint
+
+The equation-derived diagnostic is
+`tools/run_kvarn_tile_npu_probe.py`; it is not the author's CUDA/Triton
+implementation and does not establish paper fidelity, cache integration,
+performance, or accuracy. Static AST inspection passed and a wrong key
+transpose was corrected before launch. The physical NPU4 -> container NPU0
+attempt failed before numerical operations: `torch.npu.get_device_name(0)`
+reported invalid device id. The first failure is retained in stopped Docker
+container `qwen36_kvarn_tile_npu4_v1_20260924`. A second attempt with the
+driver mounted wrote
+`/cache/cch/qwen36-kvarn-ascend-20260923/tile-npu-v2/report.json`, status
+`failed`, zero completed cases. Default-network, preserved-physical-ID, and
+four-card 4–7 visibility canaries also reported HAL device count zero; no
+KVarN numerical result was produced.
+
+The host still reported healthy/idle NPU4–7, but kernel logs showed UDA
+`Conflict open udevid=4; ns_id=0`. `/proc/uda/namespace_node` mapped device
+4 and the other devices to `root_tgid=2178262`; its cgroup identified running
+container `agentgpu-910b4-qwen35-4b-aiv-v1`. `docker top` showed only
+`sleep infinity`, yet its UDA namespace held device 4. A requested stop was
+rejected by safety review because that container maps physical NPU0–7,
+outside the protected 4–7 scope. No container was stopped or deleted, and no
+indirect namespace workaround was used. This is an environment blocker, not
+a paper no-go. Continue paper-specific store/decode preparation while the
+device boundary is resolved; do not launch a service or claim throughput.

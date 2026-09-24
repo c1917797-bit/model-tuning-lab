@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-kvarn-ascend
-status: planned
+status: in_progress
 decision: pending
 hypothesis: "Paper-faithful KVarN KV compression can reduce full-attention KV read cost in Qwen3.6 decode without exceeding the task accuracy budget."
 objective: "Opt-in Ascend plugin with at least 10% matched dense fixed-1024 output throughput gain, TTFT/TPOT reported, and at most 1 percentage point LongBench-v2/GSM8K loss."
@@ -10,6 +10,7 @@ git:
   base_commit: d96974c252590bb7758e6da54470d96860dff6bb
   stage_commits:
     - ce2bcc5
+    - 8559109
 environment:
   source_commit: "vLLM-Ascend 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; KVarN reference 7586257f1c632e63187bfacbbe21ccb51540f7b3"
   model_revision: "Qwen3.6-27B BF16; pin full checkpoint hash before NPU service run"
@@ -21,7 +22,7 @@ environment:
   hardware_topology:
     physical_npus: [4, 5, 6, 7]
     tensor_parallel: 4
-  runtime_topology: "fresh device/container/process/port check required before each new load"
+  runtime_topology: "2026-09-24 NPU4-7 host idle but UDA ns_id=0 device claim mapped to external container agentgpu-910b4-qwen35-4b-aiv-v1; no new NPU load until safe release and fresh checks"
 protocol:
   primary_metric: "end-to-end output tokens/s, fixed output 1024"
   correctness_guardrails:
@@ -49,8 +50,10 @@ results:
 artifacts:
   - "projects/qwen36-paper-portfolio/KVARN_ASCEND_GATE.md"
   - "/cache/cch/qwen36-paper-portfolio-synthesis-20260920/dense-profile-v1/profile-summary-v2.json"
-decision_reason: "Pending NPU numerical and matched service evidence; source/profile fit only."
-next_loop: "NPU tile oracle and native ABI audit, then plugin-owned store/decode if needed."
+  - "projects/qwen36-paper-portfolio/tools/run_kvarn_tile_npu_probe.py"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/tile-npu-v2/report.json"
+decision_reason: "Pending NPU numerical and matched service evidence; 2026-09-24 attempts stopped at HAL device visibility due UDA namespace conflict, not KVarN arithmetic."
+next_loop: "Continue paper-specific store/decode ABI preparation without NPU; run one numerical gate only after independently verified 4-7 visibility and authorized UDA resolution."
 rollback:
   command: "Disable explicit plugin opt-in; do not modify upstream runtime or image."
   verified: false
