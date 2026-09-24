@@ -32,6 +32,8 @@ def run_case(count: int, probe) -> dict:
     v = random(count, probe.G, probe.D)
     q = random(count, 6, probe.D)
     h = probe.hadamard().half().to("npu:0")
+    h32 = h.float()
+    q_rot = q @ h
     kr, _ = probe.store_k(k.matmul(h).transpose(-1, -2).contiguous())
     vr, _ = probe.store_v(v.matmul(h))
     alt_k = random(count, probe.G, probe.D)
@@ -60,8 +62,8 @@ def run_case(count: int, probe) -> dict:
     seq_lens = torch.tensor(lengths, dtype=torch.int32, device="npu:0")
     compressed_ids = block_table[:, 1].contiguous()
     alternate_ids = block_table[:, 2].contiguous()
-    c_out, c_lse = compressed_partial(q, compressed_ids, tuple(cache_fields))
-    pool_q = q.repeat_interleave(2, 0).contiguous()
+    c_out, c_lse = compressed_partial(q_rot, compressed_ids, tuple(cache_fields))
+    pool_q = q_rot.repeat_interleave(2, 0).contiguous()
     pool_slots = torch.arange(count * 2, dtype=torch.int32, device="npu:0")
     swapped_pool_slots = pool_slots.reshape(count, 2).flip(1).reshape(-1).contiguous()
     pool_valid = torch.tensor([n for length in lengths for n in (128, length - 256)],
@@ -71,7 +73,7 @@ def run_case(count: int, probe) -> dict:
     p_lse = p_lse.reshape(count, 2, 6)
     parts = torch.stack((p_out[:, 0], c_out, p_out[:, 1]), 1)
     lses = torch.stack((p_lse[:, 0], c_lse, p_lse[:, 1]), 1)
-    got = combine_partials(parts, lses)
+    got = (combine_partials(parts, lses).float() @ h32).half()
 
     decoded_k = probe.restore_k(kr).transpose(-1, -2).half()
     decoded_v = probe.restore_v(vr).half()
@@ -85,8 +87,10 @@ def run_case(count: int, probe) -> dict:
             tail_slot = 2 * i if use_alt else 2 * i + 1
             middle_k = alt_decoded_k[i] if use_alt else decoded_k[i]
             middle_v = alt_decoded_v[i] if use_alt else decoded_v[i]
-            keys = torch.cat((pool_k[sink_slot], middle_k, pool_k[tail_slot, :tail]), 0)
-            values = torch.cat((pool_v[sink_slot], middle_v, pool_v[tail_slot, :tail]), 0)
+            keys_rot = torch.cat((pool_k[sink_slot], middle_k, pool_k[tail_slot, :tail]), 0)
+            values_rot = torch.cat((pool_v[sink_slot], middle_v, pool_v[tail_slot, :tail]), 0)
+            keys = keys_rot.float() @ h32
+            values = values_rot.float() @ h32
             weights = torch.softmax(query[i].float() @ keys.float().T / math.sqrt(probe.D), -1)
             expected.append((weights @ values.float()).half())
         return torch.stack(expected)
@@ -94,7 +98,7 @@ def run_case(count: int, probe) -> dict:
     reference = reference_for(q)
     torch.npu.synchronize()
     result = compare(got, reference)
-    static_q = q.clone()
+    static_q = q_rot.clone()
     static_pool_q = pool_q.clone()
     compressed_partial(static_q, compressed_ids, tuple(cache_fields))
     pool_partial(static_pool_q, pool_slots, pool_valid, pool_k, pool_v)
@@ -107,12 +111,13 @@ def run_case(count: int, probe) -> dict:
         gp_lse = gp_lse.reshape(count, 2, 6)
         g_parts = torch.stack((gp_out[:, 0], gc_out, gp_out[:, 1]), 1)
         g_lses = torch.stack((gp_lse[:, 0], gc_lse, gp_lse[:, 1]), 1)
-        graph_output = combine_partials(g_parts, g_lses)
+        graph_output = (combine_partials(g_parts, g_lses).float() @ h32).half()
     replay_cases = []
     for offset, use_alt in ((0.0, False), (0.125, True)):
         variant_q = (q.float() + offset).half()
-        static_q.copy_(variant_q)
-        static_pool_q.copy_(variant_q.repeat_interleave(2, 0))
+        variant_q_rot = variant_q @ h
+        static_q.copy_(variant_q_rot)
+        static_pool_q.copy_(variant_q_rot.repeat_interleave(2, 0))
         compressed_ids.copy_(alternate_ids if use_alt else block_table[:, 1].contiguous())
         pool_slots.copy_(swapped_pool_slots if use_alt else torch.arange(
             count * 2, dtype=torch.int32, device="npu:0"))

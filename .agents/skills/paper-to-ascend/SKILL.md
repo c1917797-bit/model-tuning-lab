@@ -312,6 +312,25 @@ not require retraining unless retraining is explicitly in scope.
   separate compressed/pool block partials with log-sum-exp combination instead
   of repeatedly relaxing numerical gates or claiming the paper is invalid.
   See `projects/qwen36-paper-portfolio/KVARN_ASCEND_GATE.md`.
+- For KVarN-style rotated KV caches, an attention kernel compared only in the
+  rotated frame is an intermediate check. Rotate Q with the same matrix used
+  on K/V writes, combine compressed and FP16 pool contributions by
+  log-sum-exp, and inverse-rotate the output before comparing with the
+  unrotated full-support reference. Separately verify
+  `slot_mapping -> physical block -> pool slot` writes, including a real
+  two-block boundary and changed block lookup under the same captured graph.
+  Passing either seam does not prove tile sealing, prefix identity, cache
+  allocation, service speed or task accuracy; do not preserve a full dense
+  cache in a sidecar and call it a compressed-cache memory win.
+- A numerically correct compiler workaround may be far too expensive to
+  justify service integration. After the real-NPU mixed-cache numerical and
+  graph gate, measure the *entire* candidate decode path at representative
+  batch and context lengths as an investment diagnostic, including rotation,
+  sink/tail, block partials and reduction. A failing diagnostic can reject
+  that implementation architecture without becoming a matched dense E2E
+  result or paper-wide no-go. KVarN's per-block split path reached 204.207 ms
+  at batch 16 and ~16.5K tokens on one 910B4; do not polish or integrate that
+  path without a distinct fused/native kernel mechanism.
 
 ## Do not do
 

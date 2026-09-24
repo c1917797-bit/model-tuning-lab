@@ -284,3 +284,71 @@ path; a sidecar that retains the full BF16 cache cannot claim the paper's
 memory benefit. Next audit the author and v0.23 cache lifecycles, then
 implement the narrowest opt-in service path that passes mixed scheduling
 and graph correctness before any paired fixed-1024 benchmark.
+
+## 2026-09-24 rotated-domain and staging-store checkpoint
+
+The author decode driver rotates Q with the same Hadamard matrix used for
+K/V store, computes attention in that frame, then rotates the output back.
+The earlier v3 mixed-read probe compared in the rotated frame only. The
+amended v4 probe exercised both boundary transforms against a complete
+unrotated-frame softmax reference. Physical NPU4 batch 1/16, changed query,
+compressed block ID and FP16 pool slots under NPUGraph all passed with
+maximum absolute error `3.0517578125e-5`. Report:
+`/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-decode-npu-v4/report.json`
+(SHA256 `a82ea2ea06bb38070cdabac766e78f3b78b03bd58af014d7bb2d7475501ecca6`).
+This remains a synthetic full-support test, not model-task accuracy.
+
+The new plugin `pool_store_split.py` implements the author's
+`slot_mapping -> physical block -> pool slot` FP16 rotated-K/V staging
+write in an Ascend-compatible masked Triton kernel. The stronger v2 test
+included actual writes across two physical blocks with 129 input tokens,
+plus batch 1/16 and a changed block lookup/value under a captured graph.
+Every tested pool element matched the independent scatter reference exactly
+and replay was stable. Report:
+`/cache/cch/qwen36-kvarn-ascend-20260923/pool-store-npu-v2/report.json`
+(SHA256 `fbdd7ee49c2bd9ac0f53fc8857e2448c6758432c3fbe51bc32338a87528224b9`);
+operator SHA256
+`fe6a9a64eb0863c55ebdbce7bf16225649392f4419a4fe571e8e0a2a9312c1ee`.
+An initial v1 passed but did not genuinely cross physical blocks; it is
+retained and superseded by v2 for that claim.
+
+These results validate only a staging write and mixed-read operator seam.
+Tile sealing, prefix sharing, physical block recycling, compressed-cache
+allocation, real-model dispatch and matched end-to-end throughput still
+need evidence. The remaining one-day loop should first diagnose whether
+the partitioned multi-block path has plausible latency at representative
+context/batch, then attempt service integration only if justified.
+
+## 2026-09-24 partitioned implementation stop decision
+
+The one-shot physical-NPU4 launch-cost diagnostic exercised the entire
+current split path: Q rotation, 16-way batched compressed partials, FP16
+sink/tail partials, log-sum-exp combination, and output inverse rotation.
+It used synthetic packed/scaled fields, no model service, no profiler, and
+20 synchronized steady repetitions after five warmups. Median wall times
+were 2.613 ms at one compressed block (about 288 tokens), 26.382 ms at
+16 blocks (about 2.2K tokens), 103.343 ms at 64 blocks (about 8.4K
+tokens), and 204.207 ms at 128 blocks (about 16.5K tokens), batch 16.
+All outputs were finite. Report:
+`/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-latency-npu-v1/report.json`
+(SHA256 `5b6aa51fe8506f20a54fd01658c8e975fbb96cd864c692bf9b08849ef5d3ec36`).
+
+This is **not** a matched dense/FIA or end-to-end performance result, and
+cannot be used to calculate a paper speedup. It does show that the
+compiler-compatible per-block split implementation has a rapidly growing,
+implausibly large standalone attention cost at the target's long-context
+geometry. Coupled with the four preserved monolithic compiler failures,
+there is no NPU-valid, latency-plausible *service* candidate for this
+one-day loop. Stop integrating this specific partitioned path into vLLM;
+doing so would preserve a full BF16 cache or add a large decode penalty.
+
+Decision scope: **partitioned Ascend implementation rejected for service
+investment; KVarN paper inconclusive on this stack**, not paper-wide
+invalidity. Author tile math, one-tile fused compute, rotated mixed reads,
+and slot-mapped staging writes passed their narrow NPU gates. No paired
+fixed-1024 E2E throughput, TTFT/TPOT, LongBench-v2 or GSM8K results exist.
+A future KVarN revisit requires a distinct fused/native CANN implementation
+that eliminates the measured per-block cost *and* an allocator/metadata
+path replacing, not duplicating, the BF16 cache. Until then, move the
+portfolio to another measured attention/matmul mechanism rather than
+repeating this deterministic architecture.

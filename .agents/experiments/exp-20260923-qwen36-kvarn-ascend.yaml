@@ -1,7 +1,7 @@
 schema: model-tuning-experiment/v1
 id: exp-20260923-qwen36-kvarn-ascend
-status: in_progress
-decision: pending
+status: completed
+decision: inconclusive
 hypothesis: "Paper-faithful KVarN KV compression can reduce full-attention KV read cost in Qwen3.6 decode without exceeding the task accuracy budget."
 objective: "Opt-in Ascend plugin with at least 10% matched dense fixed-1024 output throughput gain, TTFT/TPOT reported, and at most 1 percentage point LongBench-v2/GSM8K loss."
 owner: codex
@@ -54,6 +54,9 @@ results:
     fused_one_tile_attention: "Physical NPU4 K4/V2 dequant inside attention passed batch 1/16, six local Q heads, max abs 6.103515625e-5 vs full-precision-softmax reference. No sink/tail, paging, service, or performance claim."
     mixed_three_block_decode: "Four physical NPU4 versions failed before execution: Triton variable scope, two dynamic-branch cbuf-copy failures, and branchless BiShengHIR alignment planning. Scope is this monolithic compiler path, not KVarN mechanism."
     partitioned_mixed_decode: "Physical NPU4, batch 1/16, synthetic 128-token FP16 sink + 128-token K4/V2 middle + 1-42-token FP16 tail: max abs 3.0517578125e-5 vs full-support reference. Same captured NPUGraph replays were bitwise stable while query, compressed block ID and sink/tail pool slots changed. This is a mixed-read numerical/graph seam only; live cache allocation/writes, service, throughput and task accuracy are absent."
+    partitioned_mixed_decode_full_frame: "Physical NPU4 v4 adds Q rotation and output inverse rotation; batch 1/16 graph results matched unrotated-frame full-support reference within max abs 3.0517578125e-5. This is still synthetic, not task accuracy."
+    staging_pool_store: "Physical NPU4 v2 masked scatter matched independent pool reference bitwise for 1/16/129 tokens; 129 case actually crossed two physical blocks. Changed block lookup and K/V under captured graph remained exact and stable. No tile sealing, allocation manager or service evidence."
+    partitioned_latency_diagnostic: "Standalone NPU4 diagnostic only, batch16: median 2.613/26.382/103.343/204.207 ms at 1/16/64/128 compressed blocks per request. Not same-protocol FIA or E2E. The split-per-block implementation is rejected for service investment because cost grows far beyond a plausible attention-layer budget."
   cold: {}
   steady: {}
   boundary: {}
@@ -78,8 +81,14 @@ artifacts:
   - "projects/qwen36-paper-portfolio/plugin/qwen36_kvarn_ascend/partial_decode_split.py"
   - "projects/qwen36-paper-portfolio/tools/run_kvarn_partitioned_decode_probe.py"
   - "/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-decode-npu-v3/report.json sha256:3aa70725363df36fe62bb5b2e9b4eb0a344f95014440a5893a85b4e9058a8cef"
-decision_reason: "Author-reference tile parity, split dequant, one-tile fused attention, and synthetic partitioned mixed-cache numerical/graph replay have passed on physical NPU4. Monolithic mixed-cache kernel remains compiler-incompatible in four preserved attempts. Live cache allocation/writes, service E2E throughput, and final task accuracy remain unverified."
-next_loop: "Audit pinned author backend and Ascend v0.23 cache lifecycle, then attempt the narrowest opt-in service path that actually replaces BF16 KV allocation/write and passes mixed scheduling/graph correctness. Run paired fixed-1024 E2E only if that gate passes; respect the one-day deadline and do not reject the paper globally from implementation limits."
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-decode-npu-v4/report.json sha256:a82ea2ea06bb38070cdabac766e78f3b78b03bd58af014d7bb2d7475501ecca6"
+  - "projects/qwen36-paper-portfolio/plugin/qwen36_kvarn_ascend/pool_store_split.py"
+  - "projects/qwen36-paper-portfolio/tools/run_kvarn_pool_store_probe.py"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/pool-store-npu-v2/report.json sha256:fbdd7ee49c2bd9ac0f53fc8857e2448c6758432c3fbe51bc32338a87528224b9"
+  - "projects/qwen36-paper-portfolio/tools/run_kvarn_partitioned_latency_diagnostic.py"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/partitioned-latency-npu-v1/report.json sha256:5b6aa51fe8506f20a54fd01658c8e975fbb96cd864c692bf9b08849ef5d3ec36"
+decision_reason: "Author-reference tile parity, one-tile fused compute, rotated mixed-read graph replay, and slot-mapped staging writes passed narrow physical-NPU4 numerical gates. The compiler-compatible partitioned multi-block path had 204.207 ms median standalone latency at batch16/~16.5K tokens, while four monolithic variants failed before execution. No latency-plausible service candidate exists in this bounded loop. Reject this implementation, leave the paper inconclusive; no matched E2E throughput, TTFT/TPOT or final quality result was produced."
+next_loop: "Move to another measured attention/matmul paper mechanism. Revisit KVarN only with a distinct fused/native operator and a true compressed-cache allocator/metadata path, then re-run numerical, service and matched dense gates. Do not infer a paper-wide no-go from this implementation failure."
 rollback:
   command: "Disable explicit plugin opt-in; do not modify upstream runtime or image."
   verified: false
