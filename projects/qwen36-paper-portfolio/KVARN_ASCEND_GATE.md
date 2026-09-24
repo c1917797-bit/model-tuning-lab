@@ -148,3 +148,33 @@ This proves the tested tile equations and byte layout match the pinned author
 reference on this NPU. It does **not** prove the author's fused kernel, sink
 and tail management, cache allocator integration, graph replay, end-to-end
 speed, or LongBench-v2/GSM8K accuracy. Those remain mandatory gates.
+
+## 2026-09-24 Triton Ascend mixed-record failure checkpoint
+
+The v0.23 serving image contains Triton 3.2.0 with an Ascend backend, but not
+TileLang. A plugin-owned, opt-in K4/V2 dequant primitive was attempted at
+`plugin/qwen36_kvarn_ascend/tile_dequant.py`, tested by
+`tools/run_kvarn_triton_dequant_probe.py` on physical NPU4 only. This is a
+paper-specific operator prerequisite, **not** an attention or service result.
+
+- `triton-dequant-npu-v1/report.json` (SHA256
+  `88c3e0a77219780e5593214221ecc18cbbce6356cf5082c44bbe4b9dc7c4ceb3`):
+  Triton rejected module-level byte-offset globals before compiling. The
+  offsets were changed to explicit `tl.constexpr` parameters.
+- `triton-dequant-npu-v2/report.json` (SHA256
+  `901278b6142081eb2ff471d9985659f5f35a00069ee56726b4cd12cbef8b2f1e`):
+  Ascend codegen rejected the source `uint8*` to `uint16*` cast used to load
+  FP16 metadata. The next implementation used author-style two-byte loads.
+- `qwen36_kvarn_triton_dequant_npu4_v3_20260924` exited 133 during compiler
+  lowering with `InterleaveOptimization.cpp:136` asserting that a
+  reinterpret-cast offset addend must equal one. No v3 JSON report was
+  written; its preserved Docker log is the failure artifact. The operator
+  SHA256 for this attempt is
+  `ffc10883dfd5dec55c638f3fc55a60a57d7df68739999019fa42443d7e29d170`.
+
+No test reached NPU dequant output, so numerical correctness remains
+**unproven**. This is an implementation/compiler limitation for the mixed
+`uint8`+FP16 record access, not evidence against KVarN's quantization or
+attention mechanism. Next investigate a split-tensor metadata layout (packed
+K/V bytes plus typed FP16 scale arrays) within the same plugin; only if that
+passes can it be fused with decode and evaluated as a service candidate.

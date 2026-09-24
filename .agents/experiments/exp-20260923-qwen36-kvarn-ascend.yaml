@@ -46,6 +46,7 @@ results:
   candidate:
     tile_npu_v3: "Physical NPU4 equation-derived smoke: batch 1/16 backend shared-state parity passed (max abs <= 1.05e-7); K/V pack roundtrips exact. Independent CPU/NPU packed values differed at 3/1 and 12/5 positions; synthetic K4/V2-vs-dense output cosine 0.898/0.875. Neither author-backend parity, model accuracy, nor service performance is established."
     author_parity_npu_v1: "Physical NPU4, batch 1/16: pinned author PyTorch Sinkhorn, K4/V2 store fields, and decode matched plugin equation probe exactly on NPU (all recorded max_abs=0). This is tile-format parity only, not cache lifecycle, NPUGraph, model accuracy, or E2E performance."
+    triton_dequant_mixed_record: "Three physical-NPU4 attempts failed before output: unmarked globals, unsupported uint8* to uint16* pointer cast, then Ascend compiler InterleaveOptimization.cpp:136 assertion on two-byte FP16 loads. No numerical, graph, service, or performance result. Split typed metadata is the next bounded adaptation."
   cold: {}
   steady: {}
   boundary: {}
@@ -59,8 +60,13 @@ artifacts:
   - "/cache/cch/qwen36-kvarn-ascend-20260923/tile-npu-v3/report.json sha256:e5cd4605c6558bb3f590eb36f7c77b94f74e27bcf88b47127637236c1c454f9d"
   - "projects/qwen36-paper-portfolio/tools/run_kvarn_author_parity_probe.py"
   - "/cache/cch/qwen36-kvarn-ascend-20260923/author-parity-npu-v1/report.json sha256:82eb48e487dee907cdf98bcb536b94c04c11a90008cde46b8e56fa32040dcce1"
+  - "projects/qwen36-paper-portfolio/plugin/qwen36_kvarn_ascend/tile_dequant.py"
+  - "projects/qwen36-paper-portfolio/tools/run_kvarn_triton_dequant_probe.py"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/triton-dequant-npu-v1/report.json sha256:88c3e0a77219780e5593214221ecc18cbbce6356cf5082c44bbe4b9dc7c4ceb3"
+  - "/cache/cch/qwen36-kvarn-ascend-20260923/triton-dequant-npu-v2/report.json sha256:901278b6142081eb2ff471d9985659f5f35a00069ee56726b4cd12cbef8b2f1e"
+  - "Docker log: qwen36_kvarn_triton_dequant_npu4_v3_20260924 exited 133; no JSON due compiler assertion"
 decision_reason: "UDA release enabled genuine NPU tile and pinned author-reference parity, both passed at batch 1/16. Full cache lifecycle/NPUGraph, E2E throughput, and final accuracy remain unverified."
-next_loop: "Audit and implement an opt-in paper-specific Ascend cache store/decode path; require tail/sink/graph/mixed-phase numerical checks before matched service performance. Apply the one-day deadline without mislabeling tile parity as a service win."
+next_loop: "Try plugin-owned split-tensor K4/V2 metadata to avoid the mixed-pointer Ascend compiler failure; if numerical output passes, pursue fused decode, tail/sink/graph/mixed-phase gates, then matched service performance. Apply the one-day deadline without mislabeling tile parity or dequant as a service win."
 rollback:
   command: "Disable explicit plugin opt-in; do not modify upstream runtime or image."
   verified: false
