@@ -349,6 +349,15 @@ not require retraining unless retraining is explicitly in scope.
   cache budgets look close. Check the selected-support math against native
   attention and the full-support math against native dense separately; a
   single-layer error is not the final task-accuracy allowance.
+- When an adaptive-cache hook replaces only the native attention read, verify
+  whether the framework wrote dense K/V earlier in the same forward call.
+  A genuine compact read/write seam must intercept both sides and prove
+  selected-support NPU numerics over multiple decode steps. Even then, an
+  allocated-but-unwritten dense cache buffer is **not** a physical memory
+  saving: request identity, slot recycling, allocation, mixed batch and graph
+  replay remain distinct service gates. Ada-KV's first one-layer/one-request
+  eager seam and exact scope are in
+  `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
 
 ## Do not do
 

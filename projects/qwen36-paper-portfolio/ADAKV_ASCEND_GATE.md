@@ -203,3 +203,46 @@ batch. Do not time the existing read-only hook as an Ada-KV service candidate.
 
 Historical HYPIC remains only the prior segmented-prefix exemplar; it does
 not count as this loop's new qualifying technique.
+
+## Single-request compact read/write seam, 2026-09-25
+
+An independent, explicitly opt-in candidate hook now intercepts the target
+layer's `reshape_and_cache` **before** the ordinary dense write, constructs a
+fixed-capacity compact K/V arena from the author-order cross-rank budget at
+prefill, and runs native FIA over that arena for subsequent decode tokens.
+The hook is fail-closed outside one request, eager mode, `PrefillNoCache` and
+`DecodeOnly`; it is not enabled by merely importing the package. It changes
+the model output on this single layer, unlike the read-only v1-v3 probe.
+
+The first same-image import attempt lacked the read-only host driver bind and
+failed before registration with `libascend_hal.so` unavailable. Repeating
+with the driver bind passed registration without NPU devices. The first HTTP
+client attempt had the same missing-bind import error and sent no request;
+the corrected client was run once. These are launcher/environment failures,
+not numerical results.
+
+The service ran only on physical NPU4-7 and returned HTTP 200 for one
+4096-token prefill plus four generated tokens. On **each of four TP ranks**,
+the target full-attention layer recorded one skipped dense cache write at
+prefill, three skipped decode writes, one compact prefill arena and three
+native FIA compact decode outputs. Global safeguarded old-token budgets were
+[2182, 2068, 2428, 1514], with the recent 32 tokens retained on every rank.
+Across 12 rank/step comparisons, selected-support native FIA versus the
+independent math oracle had worst RMS `0.000950319`, under the predeclared
+`0.001` local gate. The request summary is
+`/cache/cch/qwen36-adakv-ascend-20260925/candidate-single-v1/request-summary.json`
+(SHA256 `dad2329ddc71e94c016af08713f27bfdde18b8e63a0ece74069c2fbd69db99b4`);
+rank-zero audit SHA256 is
+`c626b29651b1b57e49637f16619b7887ce08743e12fe65b9ed637c798dae772e`.
+The owned service was stopped without deletion; post-stop NPU4-7 had no
+compute processes.
+
+**Scope:** this passes only a real-model, one-layer, one-request eager
+read/write and selected-support numerical seam. The vLLM scheduler still
+allocates its normal dense cache buffer; only this layer's writes are skipped.
+No physical pool reduction, mixed-batch request isolation, prefix-cache
+identity, NPUGraph replay, matched dense E2E speed, or task accuracy has been
+shown. The next implementation gate is request-indexed compact arenas with
+slot reuse and an allocator/spec change that actually removes unused dense
+storage; do not benchmark the current single-request hook as a finished
+Ada-KV candidate.
