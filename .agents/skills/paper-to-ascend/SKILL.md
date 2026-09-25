@@ -376,6 +376,21 @@ not require retraining unless retraining is explicitly in scope.
   selected-support seam pass (worst 0.002572) without rewriting past failed
   attempts. This is a valid *local numerical* stage, not a pass for request
   isolation, physical cache reduction, E2E throughput, or task accuracy.
+- For a compact-cache serving port, concurrent HTTP requests can become a
+  *mixed* Ascend attention turn even if sent together: an existing decode may
+  overlap a newly admitted full prefill, yielding `ChunkedPrefill` metadata.
+  Do not infer support from two independent batch-1 passes. Carry the
+  runner's ordered request IDs into the attention hook, key arenas by identity,
+  verify cumulative query boundaries and sequence lengths, and fail before
+  skipping dense writes on unsupported continuation prefill, dummy padding
+  or graph states. Validate the actually observed mixed turn on all TP ranks.
+  For a split native prefill call, crosscheck its whole output against the
+  deployed full-batch native prefill on the same Q/K/V before claiming the
+  operator seam. Ada-KV's two-request eager check passed this crosscheck
+  bitwise on 16 layers/four ranks, but still did not reduce vLLM's dense
+  allocation or establish 1024-output throughput/task accuracy. Preserve
+  launch errors and mixed-state fail-closed runs separately; see
+  `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
 
 ## Do not do
 

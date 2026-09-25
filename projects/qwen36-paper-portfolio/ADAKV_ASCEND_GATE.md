@@ -372,3 +372,85 @@ paired throughput, and LongBench-v2/GSM8K task quality. The selected output
 is intentionally different from dense, so this local operator gate cannot
 stand in for task accuracy. The next implementation step is a request-indexed
 compact-cache lifecycle, not a claim of final Ada-KV deployment.
+
+### Request-indexed mixed-batch seam, 2026-09-25
+
+The next opt-in plugin mode wraps the deployed v0.23 `NPUModelRunner._model_forward`
+and carries `input_batch.req_ids` into full-attention execution. Each request
+owns a separate compact arena keyed by that identity; completed identities
+are dropped. The runner source SHA256 is
+`94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968`.
+This is still an eager prototype; vLLM retains its ordinary dense KV
+allocation, and chunked *continuation* prefill, graph replay and prefix
+cache are unsupported.
+
+The first two-request launch (`candidate-two-requests-v1`) failed before
+model initialization because the image's default shell entrypoint was not
+overridden by the explicit Python interpreter. The exited container was
+retained. It is a launch error, not NPU algorithm evidence.
+
+The next run (`candidate-two-requests-v2`) reached real NPU execution and
+failed closed before a targeted dense cache write at
+`AscendAttentionState.ChunkedPrefill`. The scheduler had one previously
+prefilled request decoding while a new 4096-token request entered prefill;
+homogeneous-only support was therefore insufficient. The HTTP requests
+returned 500; these are **not** numerical or performance results.
+
+After implementing mixed *new-request full prefill + existing-request
+one-token decode* with the native Ascend FIA and request-keyed arenas,
+`candidate-two-requests-v3` returned HTTP 200 for two concurrent asymmetric
+requests: 4096 and 3584 prompt tokens, each with four output tokens. Each
+of four TP ranks recorded 32 compact prefill events (16 layers per request),
+96 compact decode events (two requests × 16 layers × three steps),
+80 skipped dense-write events, and zero numeric failures. The 3584-token
+prefill occurred in `ChunkedPrefill` state and the 4096-token prefill in
+`PrefillNoCache`; this verifies actual mixed-state dispatch, not just a
+synthetic batch. Across all selected-support native-versus-BF16-rounded
+math comparisons, the worst relative RMS was `0.002815`, below the frozen
+`0.003` ceiling. The candidate still lacks task-quality and matched dense
+E2E evidence. The service was stopped, not deleted, after the canary.
+
+Immutable request summary SHA256:
+`9d92ebd139a0e42ebacbef10c9fae52e0c839f682cde070009974e5d4d07cf94`.
+Rank-0/1/2/3 audit SHA256:
+`d2b3cb5b64b5b25eea104ce5f21fea2f5d5b2c26fa75f17fa65b79b1d046ba48`,
+`24df72687a157b54d1ef28658780075f8310949e8c0577b64db3b8fe229b0cf1`,
+`6ed094d05a3d3bfa35d7291e7129e899a72f9a9e1fc343d60d5832555e128e94`,
+`f28791f631f684a69d089aa791a211ec3f02030e35130193256c1bd9b571ba42`.
+The prefill output itself was produced by an uncompressed native FIA on
+the corresponding per-request Q/K/V. The next gate explicitly crosschecks
+this split prefill call against the deployed full-batch native prefill on
+the same Q/K/V; do not conflate selected-support decode checks with
+prefill or task accuracy.
+
+The opt-in `candidate-two-requests-v4-crosscheck` then performed that
+native prefill crosscheck. Both asymmetric requests again returned HTTP 200
+and four output tokens each. On every TP rank, all 16 full-attention layers
+recorded one whole-output split-versus-original native prefill comparison,
+with **zero** relative RMS in all 64 checks. The other request entered
+as a new full prefill within a mixed `ChunkedPrefill` turn and used the
+same split native call. Each rank again recorded 32 compact prefill and
+96 compact decode events; no numeric failure event occurred. Worst
+selected-support native-versus-BF16-rounded-math relative RMS was
+`0.002448`, below the already frozen `0.003` gate. This establishes
+the split native operator path only for these real lengths, current
+eager TP4 stack and scheduling states; it does not establish a general
+chunked-continuation or graph implementation. The four-output request
+times are **not** fixed-1024 end-to-end performance data.
+
+Immutable request summary SHA256:
+`53e2ff137aa12f72d54d32357437509f1d7bc9ac8e58c139443583e814c30830`.
+Rank-0/1/2/3 audit SHA256:
+`871bebdb5d1ba2e8a64c24bcd4c75fc25689a29b795ed1dd86a4068798701b08`,
+`c1ff3d858438f06aaac4e32ec7a0494c9f085aa6a613ffbf49f16dca438b6ede`,
+`f6c8b96c40be98e2a3103069709dd098b26ad3282d95a6c8f4557f58317296c9`,
+`2f05e7634af70323157bbdfb475e83645c332d8f9bc83c667e8f76fc08294c47`.
+The service and failed diagnostic containers were stopped or exited but
+retained, not removed.
+
+Next: test sequential request retirement/reuse and longer decode state,
+then decide whether a plugin-owned cache manager/graph adaptation can
+eliminate the ordinary dense allocation without exceeding the paper's
+24-hour gate. Only numerically valid service code may enter a same-stack
+dense/candidate fixed-1024 throughput screen. Final task accuracy remains
+last, per user direction.

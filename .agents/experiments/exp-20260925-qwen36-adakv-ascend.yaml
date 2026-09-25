@@ -8,7 +8,7 @@ owner: codex
 git:
   branch: work/qwen36-adakv-ascend-20260925
   base_commit: 3790d65444341e47b3a100579aad8f289ebfde7c
-  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612, 66d177d, c9e4db9, a5fd5ef, 845ab77]
+  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612, 66d177d, c9e4db9, a5fd5ef, 845ab77, 7df23cb]
 environment:
   source_commit: "vLLM-Ascend v0.23.0 reference 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; AdaKV official HEAD 04497abac4c1a58426f3daf1014578990e225cc5 (pin checkout before numerical test)"
   model_revision: "Qwen3.6-27B BF16 /cache/efim/Qwen3.6-27B; checkpoint hash to pin before service run"
@@ -66,8 +66,12 @@ artifacts:
   - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-scaled-v1/: predeclared 0.001 * max(1, oracle RMS) gate also failed on several later layers; no HTTP response; four rank audits retained"
   - "/cache/cch/qwen36-adakv-ascend-20260925/dense-native-oracle-v1/: read-only 192-point all-full-layer dense numerical baseline HTTP 200; contiguous FIA vs BF16-rounded math relative RMS max 0.002819; request SHA256 aabbd92e77d793f205c5122171a36778f0130140f23594d0c9d476b1f74aae22"
   - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-native-envelope-v1/: one 4096-input/four-output HTTP 200; each TP rank has 16 compact prefill + 48 compact decode events, zero local failures; worst selected-support relative RMS 0.0025721 under the frozen native-calibrated 0.003 ceiling; request SHA256 40cdf30282a4580e59ed2ab34648bdc52427b3e386a8cec6b5627d908666323a; not a multi-request, performance or task-quality result"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v1/: launcher failed before model init due missing explicit Python entrypoint; exited container retained; no NPU algorithm result"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v2/: two requests exposed actual DecodeOnly/ChunkedPrefill coexistence; homogeneous-only hook failed closed before skipping dense writes; HTTP 500, not a paper no-go"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v3/: two asymmetric concurrent requests HTTP 200; 16 full layers and four ranks each completed two compact prefill and six compact decode events per layer; zero local failures; worst selected-support relative RMS 0.002815; request SHA256 9d92ebd139a0e42ebacbef10c9fae52e0c839f682cde070009974e5d4d07cf94"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v4-crosscheck/: two asymmetric requests HTTP 200; four ranks each passed 16 split-native-vs-full-native prefill comparisons at zero relative RMS and 96 compact decode checks; worst selected-support relative RMS 0.002448; request SHA256 53e2ff137aa12f72d54d32357437509f1d7bc9ac8e58c139443583e814c30830"
 decision_reason: ""
-next_loop: "With the scoped all-full-layer one-request NPU gate passed, implement a request-indexed compact-cache lifecycle and prove two concurrent requests plus request/slot recycling without cross-talk, then mixed/chunked prefill and graph correctness. Quantify actual dense-pool allocation and native FIA traffic; only then run same-stack dense/candidate fixed-1024 end-to-end screen. The one-day paper gate remains 2026-09-26 07:05 UTC; if no viable service path emerges, close only this implementation scope and advance the queue."
+next_loop: "Two concurrent requests and mixed new-prefill/decode now pass scoped eager NPU checks. Next prove sequential retirement/reuse and longer decode, then distinguish plugin-owned compact arena traffic from unchanged vLLM dense-pool allocation and handle graph/continuation prefill or fail closed. If a numerically valid service path survives, run a same-stack dense/candidate fixed-1024 E2E screen, then final task accuracy. The one-day paper gate remains 2026-09-26 07:05 UTC; if no viable service path emerges, close only this implementation scope and advance the queue."
 rollback:
   command: "Disable explicit Ada-KV plugin opt-in; retain unmodified vLLM-Ascend image and source."
   verified: false

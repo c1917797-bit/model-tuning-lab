@@ -15,7 +15,10 @@ def register() -> None:
     if os.environ.get("QWEN36_ADAKV_CANDIDATE_ENABLE") == "1":
         if os.environ.get("QWEN36_ADAKV_PROBE_ENABLE") == "1":
             raise RuntimeError("Ada-KV candidate and read-only probe are mutually exclusive")
-        from .single_request_candidate import register as register_candidate
+        if os.environ.get("QWEN36_ADAKV_MULTI_REQUEST_ENABLE") == "1":
+            from .multi_request_candidate import register as register_candidate
+        else:
+            from .single_request_candidate import register as register_candidate
 
         register_candidate()
     else:
