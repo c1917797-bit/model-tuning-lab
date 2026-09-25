@@ -32,6 +32,12 @@ def register() -> None:
         raise RuntimeError(f"attention source mismatch: {digest}")
     capacity = int(os.environ.get("QWEN36_ADAKV_BASE_CAPACITY", "2048"))
     max_decode = int(os.environ.get("QWEN36_ADAKV_MAX_DECODE", "8"))
+    all_full = os.environ.get("QWEN36_ADAKV_ALL_FULL_LAYERS") == "1"
+    target_layers = (
+        frozenset(f"language_model.model.layers.{i}.self_attn.attn"
+                  for i in range(3, 64, 4))
+        if all_full else frozenset((TARGET_LAYER,))
+    )
     if capacity <= 0 or max_decode <= 0:
         raise RuntimeError("capacity and max_decode must be positive")
 
@@ -49,7 +55,8 @@ def register() -> None:
         return original_forward(self, *args, **kwargs)
 
     def reshape_and_cache(self, query, key, value, kv_cache, attn_metadata, output):
-        if getattr(self, "_adakv_candidate_layer_name", None) != TARGET_LAYER:
+        layer_name = getattr(self, "_adakv_candidate_layer_name", None)
+        if layer_name not in target_layers:
             return original_reshape(self, query, key, value, kv_cache, attn_metadata, output)
         state = attn_metadata.attn_state
         if attention._EXTRA_CTX.capturing:
@@ -61,12 +68,12 @@ def register() -> None:
             raise RuntimeError("Ada-KV single-request candidate requires batch 1")
         # The normal native dense write is deliberately skipped. Any later
         # unsupported path must fail, because that cache is now uninitialized.
-        _event("candidate_dense_write_skipped", layer_name=TARGET_LAYER,
+        _event("candidate_dense_write_skipped", layer_name=layer_name,
                state=str(state), tokens=int(attn_metadata.num_actual_tokens))
         return query, key, value, output
 
     def forward_impl(self, query, key, value, kv_cache, attn_metadata, output):
-        if getattr(self, "_adakv_candidate_layer_name", None) != TARGET_LAYER:
+        if getattr(self, "_adakv_candidate_layer_name", None) not in target_layers:
             return original_forward_impl(self, query, key, value, kv_cache, attn_metadata, output)
         # Bypass the ordinary paged-attention dispatch as well as its dense
         # cache read. The candidate FIA consumes only the compact arena.
@@ -74,7 +81,8 @@ def register() -> None:
             query, key, value, attn_metadata, output, kv_cache)
 
     def fia(self, query, key, value, attn_metadata, output, kv_cache=None):
-        if getattr(self, "_adakv_candidate_layer_name", None) != TARGET_LAYER:
+        layer_name = getattr(self, "_adakv_candidate_layer_name", None)
+        if layer_name not in target_layers:
             return original_fia(self, query, key, value, attn_metadata, output, kv_cache)
         state = attn_metadata.attn_state
         if attention._EXTRA_CTX.capturing:
@@ -111,7 +119,7 @@ def register() -> None:
             self._adakv_candidate_cache = (compact_k, compact_v)
             self._adakv_candidate_length = selected_tokens
             self._adakv_candidate_decode_count = 0
-            _event("candidate_prefill_compact", layer_name=TARGET_LAYER,
+            _event("candidate_prefill_compact", layer_name=layer_name,
                    full_length=length, selected_tokens=selected_tokens,
                    arena_tokens=arena_tokens,
                    raw_counts=None if counts is None else counts[0].cpu().tolist(),
@@ -139,15 +147,40 @@ def register() -> None:
             actual_seq_lengths_kv=[n], num_key_value_heads=1,
             num_heads=6, scale=self.scale, sparse_mode=0)
         expected = _math_attention(query, compact_k[:n], compact_v[:n], self.scale)
-        error = _error(selected[0], expected)
-        if error["rms"] > 0.001 or not bool(torch.isfinite(selected).all().item()):
+        expected_rounded = expected.to(selected.dtype)
+        raw_error = _error(selected[0], expected)
+        error = _error(selected[0], expected_rounded)
+        rounding_error = _error(expected_rounded, expected)
+        expected_rms = float(expected.float().square().mean().sqrt().item())
+        # Same-stack, uncompressed native-oracle baseline (192 TP rank/layer/
+        # step points) reached 0.002819 relative RMS versus this rounded math
+        # oracle. Freeze a 0.003 ceiling before the candidate full-layer run.
+        allowed_rms = 0.003 * expected_rms
+        # Native FIA emits BF16. Compare with the independently computed
+        # oracle at the same output dtype; retain the FP32 comparison and the
+        # oracle's own BF16 rounding loss as separate diagnostics. This gate
+        # tests the native selected-support calculation only, not task quality.
+        if (expected_rms <= 0 or error["rms"] > allowed_rms
+                or not bool(torch.isfinite(selected).all().item())
+                or not bool(torch.isfinite(expected).all().item())):
+            _event("candidate_numeric_gate_failed", layer_name=layer_name,
+                   decode_step=self._adakv_candidate_decode_count + 1,
+                   selected_tokens=n, native_math_error=raw_error,
+                   rounded_reference_error=error,
+                   oracle_rounding_error=rounding_error,
+                   allowed_rms=allowed_rms,
+                   selected_rms=float(selected.float().square().mean().sqrt().item()),
+                   expected_rms=expected_rms)
             raise RuntimeError(f"Ada-KV native selected-support numerical gate failed: {error}")
         output[:1] = selected[:1].view(1, 6, 256)
         self._adakv_candidate_length = n
         self._adakv_candidate_decode_count += 1
-        _event("candidate_decode_compact", layer_name=TARGET_LAYER,
+        _event("candidate_decode_compact", layer_name=layer_name,
                decode_step=self._adakv_candidate_decode_count,
-               selected_tokens=n, native_math_error=error,
+               selected_tokens=n, native_math_error=raw_error,
+               rounded_reference_error=error,
+               oracle_rounding_error=rounding_error,
+               allowed_rms=allowed_rms, expected_rms=expected_rms,
                dense_write_skipped=True, output_replaced=True)
         return output
 
@@ -159,6 +192,6 @@ def register() -> None:
     cls.reshape_and_cache = reshape_and_cache
     cls.forward_impl = forward_impl
     cls.forward_fused_infer_attention = fia
-    _event("candidate_installed", layer_name=TARGET_LAYER,
+    _event("candidate_installed", target_layers=sorted(target_layers),
            source=str(source), source_sha256=digest, capacity=capacity,
            max_decode=max_decode, torch_npu=torch_npu.__version__)

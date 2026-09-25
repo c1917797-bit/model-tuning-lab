@@ -358,6 +358,24 @@ not require retraining unless retraining is explicitly in scope.
   replay remain distinct service gates. Ada-KV's first one-layer/one-request
   eager seam and exact scope are in
   `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
+- Before setting a cross-layer numerical tolerance for a BF16 native
+  attention candidate, measure the unmodified native path on the same real
+  Q/K/V: paged FIA versus contiguous full-support FIA, and both versus an
+  independent math oracle at FP32 and native output dtype. Oracle rounding
+  error can exceed a fixed absolute RMS bound as layer output scale changes.
+  Preserve every failed candidate run, but do not repeatedly tune absolute
+  or relative thresholds until it passes; establish the native backend's
+  error envelope first, then attribute only incremental candidate error.
+  A local selected-support check is separate from selected-versus-dense model
+  accuracy and matched service throughput. See
+  `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
+  On the pinned Qwen3.6/CANN 9.1 stack, 192 uncompressed native comparisons
+  showed up to 0.002819 relative RMS between contiguous BF16 FIA and a
+  BF16-rounded independent oracle. A 0.003 envelope frozen from that dense
+  baseline let the all-16-layer, four-rank, three-decode-step Ada-KV
+  selected-support seam pass (worst 0.002572) without rewriting past failed
+  attempts. This is a valid *local numerical* stage, not a pass for request
+  isolation, physical cache reduction, E2E throughput, or task accuracy.
 
 ## Do not do
 

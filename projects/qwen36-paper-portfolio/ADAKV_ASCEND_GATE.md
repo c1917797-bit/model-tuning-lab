@@ -246,3 +246,129 @@ shown. The next implementation gate is request-indexed compact arenas with
 slot reuse and an allocator/spec change that actually removes unused dense
 storage; do not benchmark the current single-request hook as a finished
 Ada-KV candidate.
+
+## All-full-layer numerical gate and oracle correction, 2026-09-25
+
+An explicit `QWEN36_ADAKV_ALL_FULL_LAYERS=1` variant targets the 16 Qwen3.6
+full-attention layers (3, 7, ..., 63); the default remains the single-layer
+diagnostic. In `candidate-all-v1`, all 16 layers completed a compact prefill
+on all four TP ranks for the same 4096-token prompt. The first decode failed
+the predeclared native-vs-FP32-math RMS gate of `0.001` at TP rank 3, layer
+19 (`0.0010745003`). No HTTP response or model-level pass exists. Rank-3
+audit SHA256: `65d2e04a527be3f2a4930c5d66ff5fbf4b4175665a9099e294514a410543c0b1`.
+
+The new failure-only diagnostic, in a separate immutable directory
+`/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-numeric-diagnostic-v1/`,
+kept that gate unchanged and recorded output scale and BF16 quantization.
+It failed on rank 1/layer 7 (raw RMS `0.00104436`) and rank 3/layer 19
+(`0.00122594`). The FP32 oracle's *own* BF16 rounding RMS was `0.00103023`
+and `0.00121511`, respectively, while native FIA versus the independently
+computed **BF16-rounded** oracle was `0.00069298` and `0.00067082`.
+Rank-1/3 audit SHA256: `1b7a6e9d172047d5540aef27e8ea0368fba76a961513c107c01a8e068de17d85`,
+`d47d0789bb1846a0f240768728e882a23ad3b6d734b2dd763e84797fa80806fd`.
+The first failed run remains preserved; these figures explain a mixed-dtype
+oracle gate, **not** final model correctness or task quality.
+
+Before another full-layer run, the independent math oracle is now rounded to
+the native FIA output dtype **for the local native-on-selected-support gate**.
+The absolute RMS threshold remains `0.001`, with the original FP32 error and
+rounding floor logged separately. This is a reference-dtype correction, not a
+relaxation of the numeric threshold or a claim that selected KV matches dense.
+At that checkpoint the corrected gate had not yet run. A pass would still
+require whole-model task-quality screening and a real request-indexed compact
+cache allocator; vLLM still preallocates its ordinary dense KV pool today.
+
+The `candidate-all-rounded-v1` run then showed that BF16 rounding alone is
+not the whole issue with a fixed absolute tolerance: all 16 layers again
+completed compact prefill on all four ranks, but later full-attention layers
+with larger outputs exceeded RMS `0.001` against the BF16-rounded oracle.
+For example, rank 1/layer 63 had output RMS `6.1634`, native-vs-rounded
+RMS `0.004308`, and independent oracle-rounding RMS `0.010092`; the
+native-vs-rounded **relative** RMS was `0.000699`. Rank 0/layer 59 was
+`0.001478/1.5826 = 0.000934`. This run also has no HTTP response or
+model-level pass. Rank-0/1/2/3 audit SHA256 respectively:
+`7ee0b491c1a5912a2fb63a00533a34efd7f7419ff3b30d6f6a5520bcff067f15`,
+`e01df0143d774e20347d68eae963105d9aa3be8eddaab811a17a7c9463529824`,
+`2d01f29eff3a86e686c29db342e54ac17568807078d67922322c49f388d2406e`,
+`b8cc9aa4a72e9f3241ae83df82d080cbc3f1958133abb6d57e27e2ff90b2b35e`.
+
+The next one-shot gate is therefore predeclared as independent BF16-rounded
+oracle RMS `<= 0.001 * max(1, oracle_RMS)`, requiring finite native output.
+This **changes** the tolerance from an absolute to an absolute/relative one;
+it does not retroactively pass either failed run. It tests local native FIA
+on the selected support, not selected-versus-dense equivalence, whole-model
+accuracy, or serving performance. The scale-aware gate had not yet run at
+that checkpoint.
+
+The `candidate-all-scaled-v1` run then failed this frozen envelope at several
+late layers, including rank 2/layer 47: native-vs-rounded RMS `0.0018845`
+against allowance `0.001`, with oracle output RMS `0.8733`. Rank 0/layer 59
+was `0.0024392` versus allowance `0.0016704`. All 16 layers completed compact
+prefill, but no complete decode or HTTP response was obtained. This run is
+preserved separately, not relabeled as passed.
+
+**Stop criterion:** do not keep tuning tolerance to the candidate. The next
+NPU experiment is a read-only, all-full-layer *uncompressed dense* numerical
+baseline: compare deployed paged FIA, native contiguous full-support FIA, and
+independent FP32/BF16-rounded math on the same real Q/K/V over three decode
+steps. Its purpose is to establish the native backend's own error envelope
+before attributing any extra discrepancy to Ada-KV. This baseline changes
+neither model output nor serving cache, and is not performance evidence.
+
+The read-only dense baseline `dense-native-oracle-v1` returned HTTP 200 for
+4096 input and four output tokens. All four TP ranks recorded 16 full layers
+times three decode calls, 192 complete comparisons. Relative RMS (divided
+by the independent math output RMS) for native paged versus native contiguous
+full-support FIA was median `0.000587`, P95 `0.001011`, max `0.001536`.
+Native contiguous FIA versus **BF16-rounded** independent math was median
+`0.000911`, P95 `0.001521`, max `0.002819`; versus FP32 math it was median
+`0.001678`, P95 `0.001848`, max `0.002141`. The candidate's available
+`candidate-all-scaled-v1` selected-support comparisons (84 points before
+fail-closed abort) had BF16-rounded-math relative RMS median `0.000904`,
+P95 `0.001525`, max `0.002359`. Their distributions are comparable on this
+one prompt, but this does not prove unobserved candidate layers or task
+accuracy. Request summary SHA256:
+`aabbd92e77d793f205c5122171a36778f0130140f23594d0c9d476b1f74aae22`.
+Rank-0/1/2/3 audit SHA256:
+`0dba876b80336c63f954944c32e7c091b7390953622e6a82fdd675ec070c870b`,
+`64aff5417471131ff20e8ec1a6a6b670b0014ebc729c457ddfec99391193718e`,
+`552d1032439ec57eade559e811160b348929d080755b9934f4221a0edc491e88`,
+`94dcdeb4500bbe4a4ef0e869f347060b550630e9159d1bd1d284f43847ca5fa8`.
+The service was stopped without deletion after this request.
+
+**Predeclared next gate:** one new full-layer candidate run will require finite
+native and math outputs and relative RMS `<= 0.003` versus the independent
+BF16-rounded math reference on **every** selected-support decode event. The
+`0.003` ceiling is rounded upward from the observed uncompressed-native max
+`0.002819`, not from a candidate pass. The earlier failed criteria and outputs
+remain failed. If this new gate fails, stop threshold tuning; investigate the
+specific operator/input discrepancy or close this implementation scope.
+Even a pass only validates the native computation on the selected KV; it
+cannot replace full-model output/task quality or E2E evidence.
+
+The single-run `candidate-all-native-envelope-v1` passed this scoped gate.
+The fixed request returned HTTP 200 with 4096 prompt and four completion
+tokens. All four TP ranks recorded 16 compact prefill layers, then three
+compact decode calls on each layer (48 per rank), with **zero** numerical
+failure events. Worst selected-support native-versus-rounded-math relative
+RMS was `0.0025721` at rank 3/layer 55/decode step 2, below the frozen
+`0.003` ceiling. Its absolute RMS was `0.0035346` on output RMS `1.37423`.
+Request summary SHA256:
+`40cdf30282a4580e59ed2ab34648bdc52427b3e386a8cec6b5627d908666323a`.
+Rank-0/1/2/3 audit SHA256:
+`cc6b14138e1d35f0a692b2452f685c9fce99dac8bd2274cca01a3c0c291ef776`,
+`57b6b302dc552812d3ab9ec93dd004ab3a09881a4f60bb1e89e41b6056e9`,
+`01f836b167a90932a28307275ccad5df68c7c739f3c46cdbde5bd6c1a07571fc`,
+`143f1f6750983c51d2ef656d7e92ae2426f00498101007ee0e0d26a9e23bb4d0`.
+The service was stopped but retained; physical NPU4-7 returned to their idle
+HBM baseline with no running compute process.
+
+**Decision scope:** real-model, all-full-layer, one-request eager selected KV
+read/write through native Ascend FIA passed a baseline-calibrated local
+numerical gate. This is stronger than the prior one-layer seam but still
+excludes multi-request identity, request/slot recycling, prefix cache,
+chunked prefill, NPUGraph, true dense-pool allocation reduction, 1024-output
+paired throughput, and LongBench-v2/GSM8K task quality. The selected output
+is intentionally different from dense, so this local operator gate cannot
+stand in for task accuracy. The next implementation step is a request-indexed
+compact-cache lifecycle, not a claim of final Ada-KV deployment.

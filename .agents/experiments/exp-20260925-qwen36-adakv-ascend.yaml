@@ -8,7 +8,7 @@ owner: codex
 git:
   branch: work/qwen36-adakv-ascend-20260925
   base_commit: 3790d65444341e47b3a100579aad8f289ebfde7c
-  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612, 66d177d, c9e4db9, a5fd5ef]
+  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612, 66d177d, c9e4db9, a5fd5ef, 845ab77]
 environment:
   source_commit: "vLLM-Ascend v0.23.0 reference 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; AdaKV official HEAD 04497abac4c1a58426f3daf1014578990e225cc5 (pin checkout before numerical test)"
   model_revision: "Qwen3.6-27B BF16 /cache/efim/Qwen3.6-27B; checkpoint hash to pin before service run"
@@ -60,8 +60,14 @@ artifacts:
   - "/cache/cch/qwen36-adakv-ascend-20260925/live-prefill-v2/: FP32 probability-score derivative; native selected-support oracle passed, selected-vs-dense error not a faithful-author conclusion"
   - "/cache/cch/qwen36-adakv-ascend-20260925/live-prefill-v3/: author-order BF16 scoring on one real 4096-token prompt, four ranks and three decode steps; rank0 SHA256 d0ae5f5f6f572de5738945683f15833e3e783cae44916f714ef376f74a6d88c7"
   - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-single-v1/: one-layer, single-request eager compact read/write candidate; HTTP 200, four TP ranks, three compact decode steps each, worst selected-support native/math RMS 0.000950319; request SHA256 dad2329ddc71e94c016af08713f27bfdde18b8e63a0ece74069c2fbd69db99b4; dense buffer still allocated"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-v1/: all 16 full layers passed compact prefill on TP4; first decode failed native-vs-FP32 math RMS gate (rank3 layer19 0.0010745003); no HTTP or E2E result; rank3 audit SHA256 65d2e04a527be3f2a4930c5d66ff5fbf4b4175665a9099e294514a410543c0b1"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-numeric-diagnostic-v1/: failure-only instrumentation showed FP32 oracle BF16 rounding RMS exceeded 0.001, while native-vs-BF16-rounded oracle was below 0.001 at the failing layers; rank1/3 audit SHA256 1b7a6e9d172047d5540aef27e8ea0368fba76a961513c107c01a8e068de17d85/d47d0789bb1846a0f240768728e882a23ad3b6d734b2dd763e84797fa80806fd"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-rounded-v1/: all-full-layer candidate still failed fixed 0.001 RMS gate against BF16-rounded math in higher-amplitude layers; four rank audits SHA256 in ADAKV_ASCEND_GATE.md; no HTTP response"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-scaled-v1/: predeclared 0.001 * max(1, oracle RMS) gate also failed on several later layers; no HTTP response; four rank audits retained"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/dense-native-oracle-v1/: read-only 192-point all-full-layer dense numerical baseline HTTP 200; contiguous FIA vs BF16-rounded math relative RMS max 0.002819; request SHA256 aabbd92e77d793f205c5122171a36778f0130140f23594d0c9d476b1f74aae22"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-all-native-envelope-v1/: one 4096-input/four-output HTTP 200; each TP rank has 16 compact prefill + 48 compact decode events, zero local failures; worst selected-support relative RMS 0.0025721 under the frozen native-calibrated 0.003 ceiling; request SHA256 40cdf30282a4580e59ed2ab34648bdc52427b3e386a8cec6b5627d908666323a; not a multi-request, performance or task-quality result"
 decision_reason: ""
-next_loop: "Expand the validated one-request eager read/write seam into request-indexed compact arenas and actual scheduler/cache allocation savings. Prove mixed batch, slot recycling and graph numerical correctness before matched dense E2E. If no viable candidate within the 24-hour loop, close only this implementation scope and advance the paper queue."
+next_loop: "With the scoped all-full-layer one-request NPU gate passed, implement a request-indexed compact-cache lifecycle and prove two concurrent requests plus request/slot recycling without cross-talk, then mixed/chunked prefill and graph correctness. Quantify actual dense-pool allocation and native FIA traffic; only then run same-stack dense/candidate fixed-1024 end-to-end screen. The one-day paper gate remains 2026-09-26 07:05 UTC; if no viable service path emerges, close only this implementation scope and advance the queue."
 rollback:
   command: "Disable explicit Ada-KV plugin opt-in; retain unmodified vLLM-Ascend image and source."
   verified: false
