@@ -191,5 +191,15 @@ next prototype must prove attention-owned compact storage or an explicit
 cache-manager/scheduler seam with physical allocation accounting. A selected
 block table over an otherwise dense cache is only a functional diagnostic.
 
+The deployed Ascend attention `forward` calls `reshape_and_cache` **before**
+`forward_impl`. `reshape_and_cache` writes the incoming K/V through the
+native cache operator and marks the write complete; the normal decode FIA
+then reads `self.key_cache`/`self.value_cache` with scheduler-provided block
+tables and sequence lengths. A replacement only inside
+`forward_fused_infer_attention` therefore cannot avoid dense writes. A real
+candidate must intercept at or above `forward`, own selected-token update
+and read consistently, and establish request/slot recycling before mixed
+batch. Do not time the existing read-only hook as an Ada-KV service candidate.
+
 Historical HYPIC remains only the prior segmented-prefix exemplar; it does
 not count as this loop's new qualifying technique.
