@@ -341,6 +341,14 @@ not require retraining unless retraining is explicitly in scope.
   independent per-head rounding can make the allocated total differ from the
   raw global Top-K target by a few tokens. See
   `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
+- For official observation-window selectors, preserve operation order and
+  intermediate dtype, not just the algebraic formula. Ada-KV's pinned GQA
+  path computes BF16 QK, FP32 softmax, casts probabilities back to BF16,
+  then averages over observation positions and grouped query heads before
+  pooling. A FP32-only score diagnostic is a derivative, even if its resulting
+  cache budgets look close. Check the selected-support math against native
+  attention and the full-support math against native dense separately; a
+  single-layer error is not the final task-accuracy allowance.
 
 ## Do not do
 

@@ -129,5 +129,67 @@ documented policy. This **only passes the synthetic distributed ABI gate**:
 it does not demonstrate real-model Q/K parity, KV eviction, graph safety,
 service throughput, or task quality.
 
+## Live Q/K/V diagnostic: v1/v2 and source-fidelity correction
+
+The opt-in read-only plugin captured one real 4096-token prefill at Qwen3.6
+full-attention layer 3. Four TP workers each saw Q `[4096,6,256]` and K/V
+`[4096,1,256]` in BF16, and agreed on a non-uniform global allocation.
+The v1 request returned HTTP 200 with four completion tokens. No model
+output or serving cache was mutated. Artifacts are under
+`/cache/cch/qwen36-adakv-ascend-20260925/live-prefill-v1/`.
+
+The v2 diagnostic retained selected historical K/V plus the last 32 prompt
+tokens, appended each decode token, and compared native contiguous FIA with
+the unchanged dense output over three decode calls. A full-support math
+oracle agreed with dense (worst max abs 0.006873), and selected-support math
+agreed with native FIA (worst RMS below 0.001). Across all four ranks and
+three steps, worst selected-vs-dense RMS was 0.1333/0.1073/0.07125/0.03741
+at old-token base capacities 256/512/1024/2048 respectively. This is one
+repetitive prompt and one layer; it is *not* a task-accuracy loss or
+performance result. Artifacts are under
+`/cache/cch/qwen36-adakv-ascend-20260925/live-prefill-v2/`.
+
+Source re-audit at official commit `04497ab` found a fidelity difference:
+`calcul_attn_sore` computes BF16 QK logits, FP32 softmax, casts probabilities
+back to BF16, **then** averages over the observation window and GQA group
+before max pooling. v2 kept those probabilities in FP32. Its large errors
+therefore characterize a FP32-score derivative, not the exact author score.
+The plugin was corrected and v3 run in a new output directory before any
+algorithm-level conclusion. The v2 container and logs were preserved stopped.
+
+The source-corrected v3 completed the same 4096-token request (HTTP 200,
+four generated tokens) with four TP workers and three observed decode steps
+per worker. The BF16 score path also passed a separate NPU4 operator canary.
+Across all twelve rank/step comparisons, worst selected-vs-dense RMS at
+old-token base capacities 256/512/1024/2048 was respectively
+0.13277/0.10691/0.07158/0.03728; worst selected-support math-vs-native FIA
+RMS remained below 0.001. The full-support math-vs-dense maximum absolute
+difference was 0.00743. The corrected allocation changed some head budgets
+but did not materially remove the selected-support error on this one prompt.
+The service was stopped without deletion after the request. Immutable v3
+artifacts are in
+`/cache/cch/qwen36-adakv-ascend-20260925/live-prefill-v3/`;
+rank-zero audit SHA256 is
+`d0ae5f5f6f572de5738945683f15833e3e783cae44916f714ef376f74a6d88c7`.
+
+This is a **single-layer, single-prompt investment diagnostic**. It does not
+show final LongBench-v2/GSM8K loss, any actual cache release, mixed-batch
+lifecycle, graph compatibility, or matched service performance. Before
+building a new kernel, audit whether native v0.23 cache allocation and FIA
+can express per-KV-head variable token lengths at the live hybrid page size
+(1536), or whether an opt-in attention-owned compact cache is required.
+Do not report the diagnostic's full dense sidecar as memory reduction.
+
+Source-level cache audit: vLLM v0.23's ordinary decoder path requests a
+`FullAttentionSpec`, whose capacity is derived from `max_model_len`; the
+existing `SlidingWindowSpec` admission calculation uses the configured
+sliding window **plus** `max_num_batched_tokens`. At a large prefill limit,
+substituting a sliding-window spec alone does not establish lower startup
+allocation, and it cannot express Ada-KV's unequal per-KV-head token counts.
+Native FIA accepts a block table and effective sequence lengths, so the
+next prototype must prove attention-owned compact storage or an explicit
+cache-manager/scheduler seam with physical allocation accounting. A selected
+block table over an otherwise dense cache is only a functional diagnostic.
+
 Historical HYPIC remains only the prior segmented-prefix exemplar; it does
 not count as this loop's new qualifying technique.
