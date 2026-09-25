@@ -44,7 +44,16 @@ def allocate_global_head_budget(
     gathered = torch.empty((world * batch, tokens), dtype=local_scores.dtype, device=local_scores.device)
     dist.all_gather_into_tensor(gathered, local_scores.contiguous(), group=group)
     by_request = gathered.view(world, batch, tokens).permute(1, 0, 2).contiguous()
-    selected = torch.topk(by_request.reshape(batch, world * tokens), k=world * base_capacity, dim=-1).indices
+    # The author sorts within heads, then applies global top-k. With equal
+    # scores these operations leave tie order unspecified; max pooling creates
+    # many such ties. Stable global sorting is an explicit deterministic
+    # tie-policy adaptation, not a claim of bitwise author parity for ties.
+    selected = torch.argsort(
+        by_request.reshape(batch, world * tokens),
+        dim=-1,
+        descending=True,
+        stable=True,
+    )[:, : world * base_capacity]
     selected_head = torch.div(selected, tokens, rounding_mode="floor")
     counts = torch.zeros((batch, world), dtype=torch.int64, device=local_scores.device)
     counts.scatter_add_(1, selected_head, torch.ones_like(selected_head, dtype=torch.int64))

@@ -44,6 +44,16 @@ non-FlashAttention backends as unsupported. It is not a drop-in Ascend
 implementation. Reuse its lifecycle ideas only where the v0.23 Ascend
 worker/cache-manager contracts can be proved compatible.
 
+The official score path uses an observation-window softmax, GQA reduction,
+and max pooling; max pooling often creates exact score ties. Its per-head
+`sort` followed by global `topk` leaves tie order unspecified. The plugin's
+budget probe now applies a stable global ordering (rank/head then token
+index) so repeated TP4 allocations have a defined tie policy. This is a
+documented determinism adaptation; a tie-free score case should match the
+author's allocation exactly, while tied-boundary cases require separate
+numerical and task-quality checks. Verify that Ascend supports stable sort
+before interpreting the NPU probe.
+
 ## Environment evidence, 2026-09-25
 
 The one-shot non-privileged NPU4 canary
