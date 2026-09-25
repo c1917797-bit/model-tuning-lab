@@ -37,6 +37,29 @@ native selected-table seam, but **does not** implement Ada-KV's score,
 cross-rank allocation or physical eviction. A sidecar retaining full BF16 KV
 cannot claim cache-memory reduction or a faithful Ada-KV port.
 
+The author's separate [vLLM compression fork](https://github.com/FFY0/adakvcompress)
+is useful for studying physical eviction and scheduler ownership, but its
+README explicitly lists tensor parallelism, prefix caching, CUDA graphs and
+non-FlashAttention backends as unsupported. It is not a drop-in Ascend
+implementation. Reuse its lifecycle ideas only where the v0.23 Ascend
+worker/cache-manager contracts can be proved compatible.
+
+## Environment evidence, 2026-09-25
+
+The one-shot non-privileged NPU4 canary
+`qwen36_adakv_npu4_canary_20260925` exited 1: `torch_npu` reported
+`Can't get ascend_hal device count`, then `Invalid device id`. Its Docker
+device mapping and read-only driver bind match a previous successful NPU4
+container. This reproduces the older pre-release canary symptom but does
+**not** by itself identify the cause. Host `npu-smi info` shows no compute
+process on physical 4-7 and idle-baseline HBM. The live
+`agentgpu-910b4-qwen35-4b-aiv-v1` container has only a `sleep infinity`
+process, yet its UDA namespace owns physical 0-7. Because it also maps
+protected 0-3, do not stop it without explicit authorization for that exact
+container and a fresh owner/process check. Preserve the exited canary logs;
+do not rerun an identical failing launch or count this as an Ada-KV NPU
+algorithm result.
+
 ## First bounded decisions
 
 1. Audit the official score/Top-K/safeguard code at the pinned commit and

@@ -1,6 +1,6 @@
 schema: model-tuning-experiment/v1
 id: exp-20260925-qwen36-adakv-ascend
-status: planned
+status: in_progress
 decision: pending
 hypothesis: "Cross-rank Ada-KV budget allocation plus real KV eviction can lower Qwen3.6 full-attention KV traffic without exceeding the final task-quality allowance."
 objective: "Opt-in vLLM-Ascend plugin on Qwen3.6-27B TP4: at least 10% matched dense end-to-end output throughput gain; report TTFT/TPOT; LongBench-v2 and GSM8K each lose no more than the user-allowed 1% (report both percentage-point and relative-percent deltas)."
@@ -8,7 +8,7 @@ owner: codex
 git:
   branch: work/qwen36-adakv-ascend-20260925
   base_commit: 3790d65444341e47b3a100579aad8f289ebfde7c
-  stage_commits: []
+  stage_commits: [85cf703, 561959f]
 environment:
   source_commit: "vLLM-Ascend v0.23.0 reference 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; AdaKV official HEAD 04497abac4c1a58426f3daf1014578990e225cc5 (pin checkout before numerical test)"
   model_revision: "Qwen3.6-27B BF16 /cache/efim/Qwen3.6-27B; checkpoint hash to pin before service run"
@@ -52,6 +52,7 @@ results:
   resources: {}
 artifacts:
   - projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md
+  - "Docker canary qwen36_adakv_npu4_canary_20260925: exited 1, torch_npu device count unavailable; environment diagnostic only"
 decision_reason: ""
 next_loop: "Prove cross-rank global budget and real v0.23 cache/attention seam; if the bounded implementation cannot reach service, scope the outcome and move to another measured attention or matmul paper."
 rollback:
