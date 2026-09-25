@@ -1,0 +1,59 @@
+schema: model-tuning-experiment/v1
+id: exp-20260925-qwen36-adakv-ascend
+status: planned
+decision: pending
+hypothesis: "Cross-rank Ada-KV budget allocation plus real KV eviction can lower Qwen3.6 full-attention KV traffic without exceeding the final task-quality allowance."
+objective: "Opt-in vLLM-Ascend plugin on Qwen3.6-27B TP4: at least 10% matched dense end-to-end output throughput gain; report TTFT/TPOT; LongBench-v2 and GSM8K each lose no more than the user-allowed 1% (report both percentage-point and relative-percent deltas)."
+owner: codex
+git:
+  branch: work/qwen36-adakv-ascend-20260925
+  base_commit: 3790d65444341e47b3a100579aad8f289ebfde7c
+  stage_commits: []
+environment:
+  source_commit: "vLLM-Ascend v0.23.0 reference 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; AdaKV official HEAD 04497abac4c1a58426f3daf1014578990e225cc5 (pin checkout before numerical test)"
+  model_revision: "Qwen3.6-27B BF16 /cache/efim/Qwen3.6-27B; checkpoint hash to pin before service run"
+  tokenizer_revision: "pin before service run"
+  dtype_or_quantization: "BF16 dense vs BF16 selected KV"
+  framework_versions:
+    vllm_ascend: v0.23.0
+  cann_driver_firmware: "pin live versions before NPU load"
+  hardware_topology:
+    physical_npus: [4, 5, 6, 7]
+    tensor_parallel: 4
+    full_attention_kv_heads_global: 4
+    full_attention_kv_heads_per_rank: 1
+    query_heads_per_kv_head: 6
+  runtime_topology: "fresh process, UDA namespace, container device, port and graph checks required before load"
+protocol:
+  primary_metric: "profiler-disabled matched end-to-end output tokens/s, fixed 1024 output tokens"
+  correctness_guardrails:
+    - "Pin author source; global four-head budget must be computed across all TP ranks, not independently per one-head rank."
+    - "GQA score is mean over six query heads per KV head, with the author observation-window/pooling/safeguard semantics or an explicitly labeled derivative."
+    - "Show NPU numerical parity against a full-support oracle, then multi-request cache lifecycle and NPUGraph replay before performance."
+    - "Candidate must actually reduce KV storage and FIA-read support; a dense sidecar or equal-size cache is diagnostic only."
+  acceptance_thresholds:
+    - "At least 10% throughput gain versus same-stack dense with identical common optimizations across three matched rounds."
+    - "LongBench-v2 and GSM8K each meet the final user quality allowance under matched no-thinking, normal-EOS, max_tokens=2048 evaluation."
+  regression_thresholds: []
+  abort_conditions:
+    - "No cross-rank adaptive effect: per-rank one-head selection collapses to uniform budgeting."
+    - "No true compressed-cache lifecycle or no numerically valid TP4 mixed-batch/graph path by the 24-hour gate."
+    - "No plausible native page/attention path capable of a matched E2E gain; do not substitute CPU or operator timings."
+  warmup: "compile/graph/service warmup outside measured window"
+  repetitions: 3
+  command: "TBD only after source/ABI and NPU numerical gates; target fixed-1024, 40 requests, concurrency 16, 32K input / 16K shared prefix"
+results:
+  baseline: {}
+  candidate: {}
+  cold: {}
+  steady: {}
+  boundary: {}
+  lifecycle: {}
+  resources: {}
+artifacts:
+  - projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md
+decision_reason: ""
+next_loop: "Prove cross-rank global budget and real v0.23 cache/attention seam; if the bounded implementation cannot reach service, scope the outcome and move to another measured attention or matmul paper."
+rollback:
+  command: "Disable explicit Ada-KV plugin opt-in; retain unmodified vLLM-Ascend image and source."
+  verified: false

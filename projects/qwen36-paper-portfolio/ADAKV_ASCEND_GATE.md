@@ -1,0 +1,67 @@
+# Ada-KV to Ascend: cross-rank and storage gate
+
+First-loop start: 2026-09-25 07:05 UTC. Stop or decide this paper's first
+formal loop by 2026-09-26 07:05 UTC. This document is a source/ABI gate, **not**
+an implemented candidate, NPU result, or performance claim.
+
+## Pinned mechanism and target
+
+The [paper](https://arxiv.org/html/2407.11550) allocates one layer's total
+Top-K eviction budget across KV heads by global selection of attention
+weights. Its official code is
+[`FFY0/AdaKV`](https://github.com/FFY0/AdaKV), observed HEAD
+`04497abac4c1a58426f3daf1014578990e225cc5`; pin a local read-only
+checkout before any parity result. The author implementation computes
+observation-window scores, pools them, means the six query-head scores inside
+each GQA group, applies a safeguard allocation, retains selected old tokens
+plus the recent window, and uses variable-length flattened storage. The
+inspected `AdaptiveSnapKVCluster.update_kv_gqa` asserts batch size one; the
+repository README targets Llama/Mistral with FlashAttention/CUDA, not Qwen3.6
+continuous batching on Ascend. These are adaptation requirements, not a
+paper-wide negative conclusion.
+
+The installed Qwen3.6-27B config has 24 query heads, four KV heads and a
+full-attention interval of four. TP4 places one KV head and six query heads
+per rank. Therefore rank-local Ada-KV **cannot** adapt among heads: a global
+four-head allocation must exchange scores or equivalent budget statistics
+across ranks. A per-rank Top-K that always gives each single local KV head its
+fixed budget is uniform eviction, not the paper mechanism.
+
+The measured dense decode profile attributes 27.40025% of summed operator
+time to attention; this is an investment signal, not a critical-path share or
+a 10% E2E proof. The deployed v0.23 cache shape is
+`[2, num_blocks, block_size, num_kv_heads, head_size]`, and the native FIA
+decode call accepts a block table and effective sequence length. Its existing
+`kvcomp_attn` route selects pages using Hamming hashes; that demonstrates a
+native selected-table seam, but **does not** implement Ada-KV's score,
+cross-rank allocation or physical eviction. A sidecar retaining full BF16 KV
+cannot claim cache-memory reduction or a faithful Ada-KV port.
+
+## First bounded decisions
+
+1. Audit the official score/Top-K/safeguard code at the pinned commit and
+   the actual v0.23 worker/cache-manager allocation, graph key, prefix-cache
+   identity and FIA update path. Reuse native CANN/FIA and existing source
+   where semantics match; generate no new operator without a measured gap.
+2. On physical NPU4–7, compare a four-rank global budget calculation against
+   the author's single-process four-head reference with GQA mean. Require
+   non-uniform head allocations on representative live Q/K, correct global
+   budget accounting, finite scores, and stable repeated output. Synthetic
+   scores alone are an ABI smoke, not the investment gate.
+3. Prove an opt-in compressed-cache lifecycle replacing dense attention KV,
+   including mixed batch, prefill/decode, slot recycling, prefix identity and
+   NPUGraph replay. A page-aligned approximation must be labeled
+   Ada-KV-derived, not the author's token-exact implementation, and validated
+   separately.
+4. After NPU correctness, run one profiler-off matched service screen against
+   the same-stack dense path with 1024 output tokens, 40 requests and
+   concurrency 16. Only a promising result advances to three rounds and
+   matched LongBench-v2/GSM8K max_tokens=2048 final quality.
+5. At the 24-hour gate, preserve precise accepted/rejected/inconclusive/failed
+   scope. If the one-day path lacks a real allocator and plausible E2E
+   candidate, stop this implementation and select a different measured
+   mechanism. Do not call the paper impossible because the author CUDA code
+   or current native cache ABI differs.
+
+Historical HYPIC remains only the prior segmented-prefix exemplar; it does
+not count as this loop's new qualifying technique.
