@@ -8,7 +8,7 @@ owner: codex
 git:
   branch: work/qwen36-adakv-ascend-20260925
   base_commit: 3790d65444341e47b3a100579aad8f289ebfde7c
-  stage_commits: [85cf703, 561959f]
+  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612]
 environment:
   source_commit: "vLLM-Ascend v0.23.0 reference 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; AdaKV official HEAD 04497abac4c1a58426f3daf1014578990e225cc5 (pin checkout before numerical test)"
   model_revision: "Qwen3.6-27B BF16 /cache/efim/Qwen3.6-27B; checkpoint hash to pin before service run"
@@ -53,6 +53,9 @@ results:
 artifacts:
   - projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md
   - "Docker canary qwen36_adakv_npu4_canary_20260925: exited 1, torch_npu device count unavailable; environment diagnostic only"
+  - "Docker canary qwen36_adakv_npu4_canary_postuda_v1_20260925: exit 0 after authorized stop of the exact all-device sleeper container"
+  - "Docker probe qwen36_adakv_tp_budget_abi_v1_20260925: launcher hostname resolution failure; stopped and retained"
+  - "/cache/cch/qwen36-adakv-ascend-20260925/tp-budget-abi-v2/report.json SHA256 fb8494f3fa916308c1acc6f1c3b18ab5a821ac54efed13a1ab0bddfe423bc595: synthetic TP4 allocation ABI passed batch 1 and 16; not service evidence"
 decision_reason: ""
 next_loop: "Prove cross-rank global budget and real v0.23 cache/attention seam; if the bounded implementation cannot reach service, scope the outcome and move to another measured attention or matmul paper."
 rollback:

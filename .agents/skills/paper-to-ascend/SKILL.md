@@ -331,6 +331,16 @@ not require retraining unless retraining is explicitly in scope.
   result or paper-wide no-go. KVarN's per-block split path reached 204.207 ms
   at batch 16 and ~16.5K tokens on one 910B4; do not polish or integrate that
   path without a distinct fused/native kernel mechanism.
+- For adaptive KV budgets under TP-sharded GQA, inspect the *local* KV-head
+  count before porting the author's per-head Top-K. If TP leaves one KV head
+  per worker, rank-local allocation is necessarily uniform; scores or
+  sufficient statistics must cross ranks at the allocation boundary. A
+  four-rank synthetic all-gather/Top-K pass proves only distributed ABI, not
+  live-model score fidelity, physical eviction, graph safety or end-to-end
+  benefit. Explicitly audit tied-score ordering and safeguard rounding:
+  independent per-head rounding can make the allocated total differ from the
+  raw global Top-K target by a few tokens. See
+  `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
 
 ## Do not do
 

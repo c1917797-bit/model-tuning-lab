@@ -96,5 +96,38 @@ algorithm result.
    mechanism. Do not call the paper impossible because the author CUDA code
    or current native cache ABI differs.
 
+## NPU resource and synthetic TP4 ABI result, 2026-09-25
+
+Kernel `uda_occupy_dev_by_ns` identified physical NPU4 conflict with
+`agentgpu-910b4-qwen35-4b-aiv-v1`, which mapped 0–7 despite running only
+`sleep`. After the user authorized stopping that exact container, it was
+stopped but **not deleted**; inspect showed `exited`, PID 0. A newly named,
+non-privileged single-device NPU4 canary then returned device count 1 and
+`Ascend910B4`. This resolves the earlier environment failure, not the
+algorithm gate. A separate CANNBench child was terminated only while it
+actually occupied NPU5; its broader parent/container and NPU0–3 work were
+preserved. A later attempt to stop the parent after NPU5 had cleared was
+rejected by safety review and was not retried.
+
+The first TP4 container, `qwen36_adakv_tp_budget_abi_v1_20260925`, did not
+enter the probe because `torchrun --standalone` could not resolve its
+hostname under `--network none`. It was stopped without deletion; this is a
+launcher failure, not an Ada-KV numerical failure. The corrected, uniquely
+named `qwen36_adakv_tp_budget_abi_v2_20260925` used an explicit loopback
+rendezvous and completed with exit 0. Its device map is host 4–7 to container
+0–3; no device 0–3 was mapped. The rank-zero report is
+`/cache/cch/qwen36-adakv-ascend-20260925/tp-budget-abi-v2/report.json`
+(SHA256 `fb8494f3fa916308c1acc6f1c3b18ab5a821ac54efed13a1ab0bddfe423bc595`).
+Synthetic author-style observation scores, TP4 all-gather, stable global
+selection and safeguarded per-head budgets matched an independent CPU
+reference for batch 1 and 16. All 17 requests had non-uniform raw and
+safeguarded head allocations. The unsafeguarded selected count is exactly
+1024 per request; safeguarded budgets sometimes total 1023 or 1025 due to
+the author's per-head rounding rule. Thus stable sort is supported on this
+NPU software stack, but exact physical storage accounting still needs a
+documented policy. This **only passes the synthetic distributed ABI gate**:
+it does not demonstrate real-model Q/K parity, KV eviction, graph safety,
+service throughput, or task quality.
+
 Historical HYPIC remains only the prior segmented-prefix exemplar; it does
 not count as this loop's new qualifying technique.
