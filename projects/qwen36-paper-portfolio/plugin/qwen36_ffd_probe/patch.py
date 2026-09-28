@@ -132,7 +132,9 @@ def _sample(self, query, result, attn_metadata) -> None:
         6, full_count, block_size
     ).amax(dim=-1)
     cases = []
-    for delta in (5.0, 7.0):
+    # Delta 3/4 are bounded algorithm adaptations to test the union-I/O
+    # versus retained-mass Pareto curve; 5/7 remain source/paper controls.
+    for delta in (3.0, 4.0, 5.0, 7.0):
         for units in ("author_log2", "paper_natural"):
             effective_delta = delta * math.log(2.0) if units == "author_log2" else delta
             threshold = pseudo_nat[:, None] - effective_delta
