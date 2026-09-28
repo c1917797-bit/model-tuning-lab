@@ -146,3 +146,24 @@ Artifacts outside Git:
   SHA256 a431f1f5bc1fc0d3ddcf41da9d99dc0070d440aaec55739c996b2c40ddd9b019.
 - Exact owned container 2485972c949ab408b522eb6a6f17450738afe0b1cceb57c0f82cb4da5cfe3e92,
   stopped with exit code 0 and retained for logs.
+
+## Existing Ascend selector reuse audit (2026-09-28)
+
+The pinned `CANN/ops-transformer` checkout at
+`0684247214bae5abb5cb6dc7d90b34a6ad401cdd` contains
+`experimental/select_attention_operators` with Quest metadata and paged
+block-selection kernels. Its README documents `quest_block_select_paged_in_out_w`
+as producing indices shaped `[B, N, k]` **per KV head**, with an Ascend 910B
+kernel constraint `D=128`, block size 128, and `k % 8 == 0`. The current
+Qwen3.6 TP4 full-attention geometry is `D=256`, six local query heads and one
+local KV head. The documented kernel is therefore neither shape-compatible
+nor a per-query-head selection repair for the rejected shared-page adapter.
+It was tested by its maintainers on CANN 8.x, not proven on this deployed
+CANN 9.1 stack. No build or NPU run was attempted in this audit.
+
+This source finding reinforces the existing scoped investment decision: do
+not commission a D=256 port solely because an Ascend Quest selector exists.
+A future Quest attempt first needs new real-model evidence that a useful page
+budget retains enough attention mass, plus a per-query-head attention backend
+or a mathematically justified GQA sharing rule. The existing one-prompt
+25%/50% per-head feasibility failure is not repaired by a faster selector.
