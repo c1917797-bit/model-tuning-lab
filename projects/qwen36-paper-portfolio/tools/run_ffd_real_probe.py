@@ -18,11 +18,11 @@ import time
 
 ROOT = Path("/opt/host/vnf/austinov/model-tuning-lab")
 WORKSPACE = ROOT / "projects/qwen36-paper-portfolio"
-RESULTS = Path("/cache/cch/ffd-qwen36-realprobe-v2-20260928")
-LOCK = Path("/cache/cch/ffd-qwen36-realprobe-v2-20260928.admission.lock")
+RESULTS = Path("/cache/cch/ffd-qwen36-realprobe-v3-20260928")
+LOCK = Path("/cache/cch/ffd-qwen36-realprobe-v3-20260928.admission.lock")
 MODEL = Path("/cache/efim/Qwen3.6-27B")
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
-NAME = "qwen36_ffd_realprobe_v2_20260928"
+NAME = "qwen36_ffd_realprobe_v3_20260928"
 PORT = 8235
 OFFICIAL_COMMIT = "ca09458ab1536328e5f46502b27891412733cd6d"
 
@@ -140,7 +140,7 @@ def main() -> int:
             IMAGE,
             "-m", "vllm.entrypoints.openai.api_server",
             "--model", "/models/Qwen3.6-27B",
-            "--served-model-name", "qwen36-ffd-realprobe-v2",
+            "--served-model-name", "qwen36-ffd-realprobe-v3",
             "--host", "127.0.0.1", "--port", str(PORT),
             "--data-parallel-size", "1", "--tensor-parallel-size", "4",
             "--max-model-len", "40960",
