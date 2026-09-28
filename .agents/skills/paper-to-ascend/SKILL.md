@@ -421,6 +421,18 @@ not require retraining unless retraining is explicitly in scope.
   common stack improvement, give it to the dense control too; attribute only
   the paper-specific increment. See
   `projects/qwen36-paper-portfolio/KV_QUANT_REUSE_GATE.md`.
+- For a GQA fused-selector paper, trace the decision through its kernel
+  branch, data loads, output update, public wrapper, and default arguments.
+  A per-head score threshold does not imply a per-head sparse output when
+  the actual branch is an OR across all query heads sharing one KV head.
+  Likewise an inner subblock loop does not prove a smaller active granularity
+  when the wrapper defaults its subblock size to the full block. Freeze tensor
+  axes and group-mask expansion with a small test before paying for model load.
+  On live Q/K/V, report private-head and source-faithful group-union masks
+  separately, with exact probability mass and selected-output error; keep
+  their one-prompt results below the E2E/task-accuracy claim boundary.
+  The FFD v2/v3 correction and scope are in
+  `projects/qwen36-paper-portfolio/FFD_APPLICABILITY_GATE.md`.
 
 ## Do not do
 

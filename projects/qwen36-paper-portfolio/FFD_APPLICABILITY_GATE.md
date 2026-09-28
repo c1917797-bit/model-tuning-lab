@@ -187,4 +187,58 @@ TP0/1/2/3 audit SHA256:
 `c9863f1d7e96590bdaaa241ceb7cb1a394b76e6ac77da0d19156d081b6cff4d9`,
 `fd9c4c9b55e406060b95ed3e6a631226c670142084864a711eae87f7350aedae`.
 
-Paired throughput and task accuracy remain unmeasured.
+## Third real-model request: official KV-group union scope
+
+The distinct v3 probe kept the same 20,718 input token IDs, native dense
+return path, model/image/TP4/NPU4-7 mapping and three sampled layers. Its
+unit test freezes the difference between a private query-head mask and the
+author's KV-group OR mask. All four worker hooks installed, the single request
+returned HTTP 200 with four output tokens, and 12 real decode samples were
+recorded. Full-support BF16-rounded math/native relative RMS was at most
+0.000888, again below the frozen 0.005 *oracle* ceiling. The v3 mask model
+still uses exact K/V for retained blocks, so it is an optimistic selector
+diagnostic, not Q2+FP8-kernel numerical parity.
+
+Across the 12 samples (means unless noted):
+
+| Threshold | Union blocks kept | Exact dense mass kept across heads | Union output/native relative RMS |
+| --- | ---: | ---: | ---: |
+| author log2, delta=5 | 0.940994 | 0.987379 (min 0.924660) | 0.002081 (max 0.007216) |
+| author log2, delta=7 | 0.997930 | 0.999748 (min 0.996220) | 0.000530 (max 0.000975) |
+| paper natural, delta=5 | 0.998447 | 0.999846 (min 0.997851) | 0.000522 (max 0.000888) |
+| paper natural, delta=7 | 1.000000 | 1.000000 | 0.000503 (max 0.000888) |
+
+These intermediate output differences are **not** LongBench-v2/GSM8K accuracy
+deltas or a candidate correctness pass. The source-default delta=5 leaves
+only about 5.9% of full blocks without residual-K/V access in this prompt.
+Under an intentionally optimistic byte-only model (native BF16 K+V:
+1024 bytes/token; FFD Q2 K: 64 bytes/token always; FP8 residual K plus BF16
+V: 768 bytes/token on kept blocks), the observed 0.940994 union fraction
+implies a 0.7682 traffic ratio and at most 1.30x attention-local speed from
+those bytes alone. The diagnostic 27.40025% attention operator-time share
+would require about 1.50x local speed for +10% E2E under an equally
+optimistic serial Amdahl model, or an ideal union keep fraction <=0.8076
+with zero new overhead. Neither model is a measured critical path or a proof
+that a fused Ascend kernel cannot improve other costs.
+
+This evidence motivates one bounded delta=3/4 sweep on the *same* real-model
+geometry to determine whether a more aggressive threshold offers a useful
+union-I/O versus exact-mass/output Pareto point. It does not authorize
+claiming a gain, relaxing a numerical gate, or calling the paper invalid
+based on one repetitive prompt. If no plausible point remains, close this
+implementation/workload route within the 24-hour deadline and move on.
+
+The v3 service was stopped without deletion; NPU4-7 returned to idle HBM
+with no process. Immutable artifacts:
+`/cache/cch/ffd-qwen36-realprobe-v3-20260928/`.
+Admission SHA256
+`698d5b03d2030cbb5266537a3b3220b17b00a5e87eb5084e4e58a579a11c1c5b`;
+request SHA256
+`f579c512bf0abe7a64d48340436cfb9ee7bd76fe29200bec989c037bc25bda97`.
+TP0/1/2/3 audit SHA256:
+`610854f49df91c03a28e463b25f71770cc1ee5393bf5dc67b1798ce5753bd233`,
+`1e73f02f14d05e867852db13a0224e7d5f94ca6e75e56ce8e495c56728b55121`,
+`d8b6ddba39bf1fe92210df0ed22fe31c8c51237157d7acb5b86b2e3600832e34`,
+`e9685c6f3f2e3764da6d08d200255b9f38e9c7ebb6de06f587f8f9365dde0f19`.
+
+Paired throughput, TTFT/TPOT, and task accuracy remain unmeasured.
