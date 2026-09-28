@@ -64,3 +64,33 @@ the dense control; do not credit generic quantization to the new paper. Pin
 the historical artifact owner and service manifests before using these
 reports as evidence. Only then pre-register one paper-specific correctness
 and profiler-off E2E test. No new NPU load was launched in this audit.
+
+## KIVI-4 versus native FIA V5 applicability (2026-09-28)
+
+This is a paper/API contract check, not a KIVI NPU result. The official KIVI
+implementation supports 2- and 4-bit K/V; both variants keep a full-precision
+recent window and quantize Key per channel *within each group of tokens* while
+quantizing Value per token. The paper's default group size is 32 tokens and
+residual length is 128. Sources:
+https://github.com/jy-yuan/KIVI and https://arxiv.org/html/2402.02750 .
+
+CANN 9.1 documents INT4 Key/Value with `keyAntiquantMode=0` and
+`valueAntiquantMode=1` in `aclnnFusedInferAttentionScoreV5`. However its
+per-channel Key scale is shaped for a single channel-scale set, not a distinct
+scale for each 32-token Key group, and this call does not represent KIVI's
+separate full-precision residual window. A direct V5 call using one global Key
+scale would be a derivative quantizer, not a faithful KIVI-4 port. The existing
+v0.23 C8 backend is more distant still: static INT8 per-channel K **and V**.
+API contract:
+https://www.hiascend.com/document/detail/en/CANNCommunityEdition/910/API/aolapi/context/ops-transformer/aclnnFusedInferAttentionScoreV5.md .
+
+Decision: no-go for a *direct native V5/C8 relabeling*; do not launch a model
+service or count generic cache compression as a KIVI result. Paper-level
+performance remains untested. Re-enter only with a fused plugin-owned operator
+or demonstrated native ABI that handles per-group Key scales, per-token Value
+scales, the residual window and paged decode together, plus a shape-matched
+cost gate against BF16 at the observed batch-16/long-context geometry. The
+prior KVarN per-block split implementation was locally far too slow; repeating
+that architecture under a new label is not a credible route. A local operator
+pass would still need real-model NPU state/output/graph checks and matched
+profiler-off end-to-end performance before final task accuracy.
