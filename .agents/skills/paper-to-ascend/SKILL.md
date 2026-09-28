@@ -448,6 +448,13 @@ not require retraining unless retraining is explicitly in scope.
   quantized block. This rejects commissioning that current selector route,
   not all workloads or the paper. See the FFD v4/v5 results in
   `projects/qwen36-paper-portfolio/FFD_APPLICABILITY_GATE.md`.
+- For lossless weight-compression papers, distinguish checkpoint/startup I/O,
+  CPU-offloaded weights copied on each token, and already-resident on-device
+  GEMM. A paper's large TTFT/TPOT gain against a single-device CPU-offload
+  baseline does not transfer to a TP-sharded model that fits in HBM. Prove a
+  live offload/transfer seam before porting its decompressor; never create an
+  artificially weaker control to make a paper fit. See
+  `projects/qwen36-paper-portfolio/ENEC_APPLICABILITY_GATE.md`.
 
 ## Do not do
 
