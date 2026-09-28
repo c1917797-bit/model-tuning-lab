@@ -5,6 +5,7 @@ from __future__ import annotations
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
+import os
 from pathlib import Path
 from threading import Barrier
 import time
@@ -15,9 +16,13 @@ from transformers import AutoTokenizer
 
 
 MODEL_PATH = "/models/Qwen3.6-27B"
-RESULT = Path("/results/two-request-summary.json")
+RESULT_BASENAME = os.environ.get("QWEN36_ADAKV_CANARY_RESULT_BASENAME", "two-request-summary.json")
+if Path(RESULT_BASENAME).name != RESULT_BASENAME or not RESULT_BASENAME.endswith(".json"):
+    raise ValueError("result basename must be a plain .json filename")
+RESULT = Path("/results") / RESULT_BASENAME
 BASE_URL = "http://127.0.0.1:8235"
 LENGTHS = (4096, 3584)
+MAX_TOKENS = int(os.environ.get("QWEN36_ADAKV_CANARY_MAX_TOKENS", "4"))
 
 
 def main() -> None:
@@ -36,7 +41,7 @@ def main() -> None:
 
     def request(index: int) -> dict:
         body = {"model": "qwen36-adakv-live-v1", "prompt": prompts[index],
-                "max_tokens": 4, "temperature": 0, "seed": 0, "ignore_eos": True}
+                "max_tokens": MAX_TOKENS, "temperature": 0, "seed": 0, "ignore_eos": True}
         wire = json.dumps(body, separators=(",", ":")).encode("utf-8")
         barrier.wait(timeout=30)
         start = time.perf_counter()
@@ -44,7 +49,7 @@ def main() -> None:
                               headers={"Content-Type": "application/json"},
                               method="POST")
         try:
-            with urlopen(request_obj, timeout=600) as response:
+            with urlopen(request_obj, timeout=2400) as response:
                 raw = response.read()
                 status = response.status
         except HTTPError as error:
@@ -62,6 +67,7 @@ def main() -> None:
         futures = [pool.submit(request, index) for index in range(2)]
         responses = [future.result() for future in futures]
     summary = {"schema": "adakv-two-request-canary/v1", "requested_lengths": LENGTHS,
+               "max_tokens": MAX_TOKENS,
                "responses": sorted(responses, key=lambda item: item["index"])}
     RESULT.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, sort_keys=True))

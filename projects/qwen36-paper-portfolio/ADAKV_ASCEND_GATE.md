@@ -454,3 +454,151 @@ eliminate the ordinary dense allocation without exceeding the paper's
 24-hour gate. Only numerically valid service code may enter a same-stack
 dense/candidate fixed-1024 throughput screen. Final task accuracy remains
 last, per user direction.
+
+The first 1024-output attempt (`candidate-two-requests-v5-long`) **did not
+pass**: at the first decode step for the 3584-token request, rank 2/layer 47
+reported selected-support native-versus-BF16-rounded-math RMS
+`0.003201728` on reference RMS `0.846319258`, relative RMS about
+`0.003783` against the previously frozen `0.003` ceiling. The client
+did not receive completed 1024-token outputs. No throughput or task-quality
+result exists for this run. The service was stopped and its per-rank audits
+retained; rank-0/1/2/3 SHA256:
+`a09115c2e4e96fa600ba58882424e8cce7f3662d543871bcf727d8f23fa2544c`,
+`be73cd4579f3d3187dc3ecc0430a1843d657391acd1b37c9a01d4b31d3dd8351`,
+`72a52da5ed637a16c16940e33c1b3827f6074d42012e65bf121f76497d3904cd`,
+`5c5bee9c532da4ba6d75245854c88a80cbe73d7a16e3327866b9e66b2181a21a`.
+The earlier dense-native envelope came from a different prompt and
+activation distribution, so this cannot yet be classified as either a
+native backend artifact or an Ada-KV integration bug. Do not relax the
+threshold to rescue this run. A read-only uncompressed dense native oracle
+on the same 3584-token prompt is the next diagnostic; only new evidence
+may define a revised long-output gate. The user's 1% allowance applies to
+eventual E2E task accuracy, not this intermediate RMS metric.
+
+Follow-up `dense-native-red-oracle-v1` replayed the exact 3584-token red
+prompt (prompt-ID SHA256
+`e26502a82de7c787dfeec4504c1a44fe577a57e835c1fdffa392e7f73643699d`)
+and returned HTTP 200 with four output tokens. Its read-only dense native
+oracle recorded 48 layer/step checks per rank. Maximum contiguous-native
+versus BF16-rounded FP32 math relative RMS across ranks was `0.002642`;
+rank 2/layer 47/step 1 was `0.000763`. This is **not** identical activation
+input to the pruned candidate at later layers. Dense summary SHA256:
+`402088599a5f3a64c75eae9c1eadb5d640972738694a9abf95e576138eb1a4d2`.
+Rank audit SHA256: `60da2deedf65d02d3eebe496e4d7efe94bfa5f32542972adcffe875b67fa572d`,
+`4a847e92f4b969b16fc36c0e66602e763d658b085d2f9350e00dc3f97d05bbcd`,
+`5706991d257d7c58c6813dd6f83a5e8374a8d93a4fab45576470b7174a011020`,
+`5fa1229aa811b0d87d8ef3d90eafc290c068e1f86d2dcc4e9f6f514d6b4733e2`.
+
+The separate `candidate-two-requests-v6-diagnostic32` retained every old
+`0.003` breach as an audit event but, for diagnosis only, continued unless
+the values became non-finite. Both 4096/3584-token requests completed 32
+outputs (HTTP 200). Four ranks × 16 layers × two requests × 31 decode steps
+gave 3,968 comparisons: nine breached `0.003`, worst relative RMS
+`0.003757` at rank 2/layer 47/step 9; no monotonic growth or non-finite
+values. This diagnostic is **not** a numerical pass and its latency includes
+heavy per-layer mathematical audits, so it is not a performance result.
+Summary SHA256: `7352d9ad6a5fa35b9104d7e27ea705a3bb13fe8a18a48e254ba0f1dd81372d44`.
+Rank audit SHA256: `9f634ebf0f5e9482c5a46fa5f71b2b486fd1da56d0af2f6a5114a85f432a8028`,
+`caa539f82cd870eaa4f1c38b00e896f586b6747e44082628bd4598fa46410b7d`,
+`75a91ddfa65ce37fbe41187964d030ce779fa3c1989cd2d8235966307f1894bc`,
+`7f3fb9b699d154fecee632c998b4cab6ea563443b209d2fdf5c2269ce7dabbe5`.
+
+Before the next long-output run, the selected-support native-versus-math
+screen is predeclared at relative RMS ≤`0.005`, cosine ≥`0.99998`, and
+finite complete outputs. The 0.005 boundary is a 33% margin over the
+observed selected-support pilot maximum, while the independent dense
+native envelope was lower. It is a screening tolerance for BF16/native
+rounding, not a claim that Ada-KV preserves dense-model task accuracy.
+Any later breach remains a failed hard gate. The 1024-token run will sample
+steps 1, 2, 8, 32, 128, 512, and 1023 on every target layer and rank;
+the full 32-token pilot covers the early dense step range. No formal E2E
+performance or task-accuracy result exists yet.
+
+`candidate-two-requests-v7-hardgate1024` used that frozen gate with
+diagnostic-only mode **off**. Both concurrent requests (4096 and 3584
+input tokens) returned HTTP 200 and exactly 1024 output tokens. Each
+rank logged 224 checks (16 layers × two requests × seven sampled decode
+steps); all four ranks had zero hard failures. Worst relative RMS was
+`0.002046` and minimum cosine was `0.99999797`. This is sampled
+selected-support numerical correctness and long request lifecycle on the
+current eager TP4 path, not full-step parity or model task accuracy.
+Summary SHA256: `6aff3de7da8754333ef7aee9923b131d67211d160dff2e1a92c7df5235358685`.
+Rank audit SHA256: `c42a32910c366feba84585d28f6d7d8a8b9376f3dd2febdaef8485360d9f54e4`,
+`e69b0f6d7a627e7989cb2cc6d618845424bad0136fa0c61f18fc82c4e27b87bd`,
+`3fcfe0b67daad76b11f795b2f27e199c776ccf97296a7be2c6be3420e50cafd9`,
+`ae8eabdc04cae01e89dd49a3ba542b04e1f94d2324395c9155d98c235e0dbdf5`.
+The timed request included the sampled math checks and must not be used as
+the candidate performance measurement. Next is a matched, audit-disabled
+dense/candidate 1024-token serving screen with explicit TTFT and TPOT.
+
+That profiler-off, eager TP4, concurrency-two single paired screen is now
+complete. Both arms used the same pinned image, model, no prefix caching,
+two asymmetric token-ID prompts, four-token warmup, streaming client,
+`ignore_eos=True`, and exactly 1024 output tokens per request. The candidate
+had `QWEN36_ADAKV_NUMERIC_CHECK_STEPS=none` and audit decode disabled after
+the separate 1024-token numerical gate. Candidate: 8.054679 output tok/s,
+mean TTFT 0.891986 s, mean TPOT 0.247559 s. Dense: 8.233244 output tok/s,
+mean TTFT 0.831510 s, mean TPOT 0.242217 s. Candidate/dense throughput
+change is **-2.168832%**, TTFT +7.273002%, TPOT +2.205706% (higher latency
+is worse). This is two requests and one paired screen, **not** the planned
+40-request/concurrency-16 or three-round acceptance. The result rejects
+the current per-request eager implementation as a performance winner,
+not the paper mechanism on all possible Ascend implementations. The current
+dense allocation remains in place, so no cache-HBM saving is claimed.
+Candidate JSON SHA256: `19d246b3e93635a3cc8b39e0f522df1a37a1951afe93612b71efe4a167273ecf`.
+Dense JSON SHA256: `67b05a12b0d9dcb8bb85f229633e879fda9f86a80559921026fb28bb3f3daced`.
+Client script SHA256: `4d9f114f81aad4d277afbe6ad764fec5d39db30e4cdf7c0f386a36d4765cb35c`.
+An initial client `BrokenBarrierError` occurred before HTTP submission
+because futures were submitted lazily. That failed container was retained;
+the client was fixed to submit all futures before waiting and the result
+file did not exist before the successful uniquely named retry.
+
+The next bounded adaptation targets **Ada-KV's variable selected-support
+batch**, not an unrelated operator: concatenate the request-specific compact
+KV and invoke the existing CANN/torch_npu TND FIA once per full-attention
+layer for a pure decode batch. `grouped-fia-abi-v1` on physical NPU4 tested
+KV lengths (2200,1888), (2049,3073), and (64,96). In all three cases,
+grouped native output was bitwise identical to two separate native calls,
+finite, and bitwise repeatable. This is storage/operator ABI evidence only,
+not service correctness or speed. The grouped path is opt-in and mixed
+prefill/decode still uses the prior per-request path. Gate sequence:
+real TP4 grouped-versus-solo native crosscheck and selected-support math,
+then 1024-token lifecycle, then another matched profiler-off screen.
+
+## First-loop time-box decision and grouped long-output result
+
+The first formal loop's deadline was 2026-09-26 07:05 UTC. The retained
+`grouped-two-requests-v3-hardgate1024` run completed two concurrent HTTP 200
+requests with 4096/3584 input tokens and exactly 1024 output tokens each.
+On every physical NPU4-7 TP rank, the audit contains 32,704 grouped-decode
+events, 32 per-request decode events, 32 compact-prefill events, and 16
+split-native-prefill crosschecks. No failure event was recorded. Across all
+four rank audits, the largest sampled selected-support native-versus-rounded
+oracle relative RMS was 0.002435 (frozen limit 0.005); the minimum cosine
+was 0.99999726 (frozen floor 0.99998). These checks support a scoped eager,
+two-request, long-output NPU numerical/lifecycle pass, not full-step dense
+parity or final task accuracy.
+
+The summary at
+`/cache/cch/qwen36-adakv-ascend-20260925/grouped-two-requests-v3-hardgate1024/two-request-summary.json`
+has SHA256 `3cc5a349d6b5ef9f3a0628ca6cccf2d45c49eed8465a04d754505419b8fbbbf7`.
+Rank 0/1/2/3 audit SHA256 values are respectively
+`3963331a2fe97c664c870d12cc72d391cb316702435053bf9e8c64c0864d569c`,
+`dec48ebb9b13092c450f53573ba15820ca037dc9fcb92c91dc6ec48e76503662`,
+`8fb084e3e5928e659c4e61e9113e9653d3f6aacb3311b98a6b2d5deff59ca9b8`,
+and `0d328161fb7ee1590703cea066bf3269bf7dd8e6620c9bfcbbb20af803d1c458`.
+The owned container was stopped without deletion on 2026-09-28 after the
+result was preserved; `npu-smi info` then showed no compute processes on
+physical NPU4-7 and idle-baseline HBM near 2.87 GiB per card.
+
+**Decision at the one-day gate:** no-go for promoting the current Ada-KV
+plugin implementation. Its only profiler-off matched E2E screen is the
+ungrouped concurrency-two result above (-2.168832% throughput), not the
+required +10%; the grouped variant has no matched E2E result. The vLLM
+dense cache allocation remains, and mixed continuation prefill, NPUGraph,
+final LongBench-v2/GSM8K accuracy, and three-round 40-request/concurrency-16
+performance are unproven. This is an implementation/time-box decision, **not**
+a claim that the Ada-KV paper cannot benefit another Ascend cache manager.
+The plugin remains explicit opt-in and disabled by default. Reopen only with
+a distinct allocator/graph mechanism and a new bounded, predeclared loop;
+do not spend further NPU time on the same unmeasured grouped path in this loop.

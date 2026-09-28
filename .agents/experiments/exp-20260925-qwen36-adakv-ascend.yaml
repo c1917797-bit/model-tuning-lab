@@ -1,14 +1,14 @@
 schema: model-tuning-experiment/v1
 id: exp-20260925-qwen36-adakv-ascend
-status: in_progress
-decision: pending
+status: decided
+decision: inconclusive
 hypothesis: "Cross-rank Ada-KV budget allocation plus real KV eviction can lower Qwen3.6 full-attention KV traffic without exceeding the final task-quality allowance."
 objective: "Opt-in vLLM-Ascend plugin on Qwen3.6-27B TP4: at least 10% matched dense end-to-end output throughput gain; report TTFT/TPOT; LongBench-v2 and GSM8K each lose no more than the user-allowed 1% (report both percentage-point and relative-percent deltas)."
 owner: codex
 git:
   branch: work/qwen36-adakv-ascend-20260925
   base_commit: 3790d65444341e47b3a100579aad8f289ebfde7c
-  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612, 66d177d, c9e4db9, a5fd5ef, 845ab77, 7df23cb]
+  stage_commits: [85cf703, 561959f, 76d588d, 2ba2612, 66d177d, c9e4db9, a5fd5ef, 845ab77, 7df23cb, e54971a]
 environment:
   source_commit: "vLLM-Ascend v0.23.0 reference 5cb98caaadeff42b5b62b996e34bb2aaa29d20fd; AdaKV official HEAD 04497abac4c1a58426f3daf1014578990e225cc5 (pin checkout before numerical test)"
   model_revision: "Qwen3.6-27B BF16 /cache/efim/Qwen3.6-27B; checkpoint hash to pin before service run"
@@ -70,8 +70,10 @@ artifacts:
   - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v2/: two requests exposed actual DecodeOnly/ChunkedPrefill coexistence; homogeneous-only hook failed closed before skipping dense writes; HTTP 500, not a paper no-go"
   - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v3/: two asymmetric concurrent requests HTTP 200; 16 full layers and four ranks each completed two compact prefill and six compact decode events per layer; zero local failures; worst selected-support relative RMS 0.002815; request SHA256 9d92ebd139a0e42ebacbef10c9fae52e0c839f682cde070009974e5d4d07cf94"
   - "/cache/cch/qwen36-adakv-ascend-20260925/candidate-two-requests-v4-crosscheck/: two asymmetric requests HTTP 200; four ranks each passed 16 split-native-vs-full-native prefill comparisons at zero relative RMS and 96 compact decode checks; worst selected-support relative RMS 0.002448; request SHA256 53e2ff137aa12f72d54d32357437509f1d7bc9ac8e58c139443583e814c30830"
-decision_reason: ""
-next_loop: "Two concurrent requests and mixed new-prefill/decode now pass scoped eager NPU checks. Next prove sequential retirement/reuse and longer decode, then distinguish plugin-owned compact arena traffic from unchanged vLLM dense-pool allocation and handle graph/continuation prefill or fail closed. If a numerically valid service path survives, run a same-stack dense/candidate fixed-1024 E2E screen, then final task accuracy. The one-day paper gate remains 2026-09-26 07:05 UTC; if no viable service path emerges, close only this implementation scope and advance the queue."
+  - "/cache/cch/qwen36-adakv-ascend-20260925/grouped-two-requests-v3-hardgate1024/: two HTTP 200 requests x 1024 output; four-rank sampled numerical checks had worst relative RMS 0.002435 and minimum cosine 0.99999726; summary SHA256 3cc5a349d6b5ef9f3a0628ca6cccf2d45c49eed8465a04d754505419b8fbbbf7; rank audit hashes in ADAKV_ASCEND_GATE.md"
+  - "One profiler-off matched concurrency-two screen of the ungrouped candidate: 8.054679 output tok/s vs dense 8.233244, -2.168832%; candidate/dense report SHA256 19d246b3e93635a3cc8b39e0f522df1a37a1951afe93612b71efe4a167273ecf/67b05a12b0d9dcb8bb85f229633e879fda9f86a80559921026fb28bb3f3daced; not the final protocol"
+decision_reason: "The 24-hour loop expired without a physical dense-pool reduction, graph/continuation-prefill support, a matched grouped E2E screen, or final task accuracy. The only matched ungrouped E2E screen regressed 2.168832%. Current implementation is no-go; paper-wide benefit remains inconclusive."
+next_loop: "Move to a different paper mechanism with a predeclared one-day gate and measured attention-path opportunity. Reopen Ada-KV only if a distinct allocator/graph design can physically reduce cache storage and plausibly meet +10% E2E; do not repeat this grouped path without new evidence."
 rollback:
   command: "Disable explicit Ada-KV plugin opt-in; retain unmodified vLLM-Ascend image and source."
-  verified: false
+  verified: true

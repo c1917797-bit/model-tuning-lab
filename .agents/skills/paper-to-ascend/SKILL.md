@@ -391,6 +391,15 @@ not require retraining unless retraining is explicitly in scope.
   allocation or establish 1024-output throughput/task accuracy. Preserve
   launch errors and mixed-state fail-closed runs separately; see
   `projects/qwen36-paper-portfolio/ADAKV_ASCEND_GATE.md`.
+- A grouped native FIA path can pass two concurrent 1024-token requests and
+  sampled selected-support numerics on all TP ranks while its serving value
+  remains unknown. Count real per-rank grouped decode events and preserve
+  audit hashes, but do not infer a throughput gain from batching the operator:
+  host-side concatenation and an unchanged dense cache allocation can erase
+  the intended saving. At the predeclared one-day gate, close the current
+  implementation as no-go/inconclusive if matched E2E, allocator, graph, and
+  final quality evidence are missing; distinguish this from rejecting the
+  paper. Stop and retain completed NPU services instead of leaving HBM leased.
 
 ## Do not do
 

@@ -1,7 +1,7 @@
 """Read-only native FIA vs math oracle baseline on all full-attention layers.
 
 This diagnostic leaves the serving output and dense cache unchanged. It
-captures Q/K/V for one 4096-token request to measure the deployed backend's
+captures Q/K/V for one fixed-length request to measure the deployed backend's
 own numerical envelope; it is not an Ada-KV performance implementation.
 """
 
@@ -26,6 +26,9 @@ def register() -> None:
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     if digest != EXPECTED_SOURCE_SHA256:
         raise RuntimeError(f"attention source mismatch: {digest}")
+    prefill_length = int(os.environ.get("QWEN36_ADAKV_NATIVE_ORACLE_PREFILL_LENGTH", "4096"))
+    if prefill_length <= 0:
+        raise RuntimeError("native oracle prefill length must be positive")
     cls = attention.AscendAttentionBackendImpl
     if hasattr(cls, "_adakv_native_oracle_original_fia"):
         raise RuntimeError("Ada-KV native oracle already installed")
@@ -49,7 +52,7 @@ def register() -> None:
                 and query.ndim == 3 and query.shape[1:] == (6, 256)
                 and key.shape == (query.shape[0], 1, 256)
                 and value.shape == key.shape
-                and query.shape[0] == 4096
+                and query.shape[0] == prefill_length
                 and len(attn_metadata.actual_seq_lengths_q) == 1):
             self._adakv_native_oracle_key = key.clone()
             self._adakv_native_oracle_value = value.clone()
@@ -93,4 +96,5 @@ def register() -> None:
     cls.forward = forward
     cls.forward_fused_infer_attention = fia
     _event("native_oracle_installed", source=str(source), source_sha256=digest,
-           target_layers=sorted(target_layers), torch_npu=torch_npu.__version__)
+           target_layers=sorted(target_layers), prefill_length=prefill_length,
+           torch_npu=torch_npu.__version__)
