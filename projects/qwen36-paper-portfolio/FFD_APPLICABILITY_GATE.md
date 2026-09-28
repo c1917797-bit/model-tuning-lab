@@ -322,3 +322,70 @@ numerical tolerances. Do not commission a custom compressed-cache operator
 unless a source-faithful point simultaneously offers a credible union-I/O
 path toward +10% E2E and acceptable numerical headroom; even then, run the
 actual NPU numerical and paired-service gates before any gain claim.
+
+## Fifth real-model request: author-supported subblock granularity
+
+The unique v5 service ran on physical NPU4-7 only and was stopped without
+deletion afterward. Four worker hooks bound to the pinned Ascend attention
+source; one request with the same 20,718 input token IDs returned HTTP 200
+and four output tokens. All four TP ranks sampled layers 3, 31, and 63 once:
+12 real decode samples, no probe failure. Full-support BF16-rounded
+math/native relative RMS was at most 0.001059, below the frozen 0.005 oracle
+ceiling. This remains an output-preserving selector diagnostic with exact
+retained K/V, not Q2+FP8 fused arithmetic parity, a new cache lifecycle,
+or candidate serving.
+
+The source-faithful KV-group OR results are within the same v5 request.
+The read fraction includes the unsealed full-precision tail. Mass is the
+mean over 72 query heads with minimum in parentheses. RMS max is the
+largest intermediate attention output/native relative RMS, not task accuracy.
+
+| SBS | Author-log2 delta | KV residual/V token fraction | Exact dense mass (minimum) | RMS max |
+| ---: | ---: | ---: | ---: | ---: |
+| 16 | 3 | 0.579903 | 0.807036 (0.207108) | 0.245440 |
+| 16 | 4 | 0.690397 | 0.887216 (0.386142) | 0.094382 |
+| 16 | 5 | 0.804753 | 0.949768 (0.669805) | 0.030066 |
+| 32 | 3 | 0.636662 | 0.840258 (0.236397) | 0.201884 |
+| 32 | 4 | 0.740657 | 0.909977 (0.455389) | 0.070068 |
+| 32 | 5 | 0.854562 | 0.965150 (0.755785) | 0.019781 |
+| 64 | 3 | 0.694966 | 0.869162 (0.290198) | 0.153700 |
+| 64 | 4 | 0.799733 | 0.932794 (0.565268) | 0.046321 |
+| 64 | 5 | 0.909648 | 0.981345 (0.870513) | 0.009897 |
+| 128 (wrapper default) | 3 | 0.754428 | 0.894176 (0.350732) | 0.116494 |
+| 128 (wrapper default) | 4 | 0.862027 | 0.955292 (0.706989) | 0.027084 |
+| 128 (wrapper default) | 5 | 0.951606 | 0.991214 (0.947643) | 0.004384 |
+
+SBS=16/delta=5 is the only relatively conservative setting close to the
+previous optimistic whole-path requirement of residual/V fraction <=0.8076.
+Its byte-only attention traffic estimate is (64 + 768 * 0.804753) / 1024
+= 0.6661, or at most about 1.50x local speed if all time were those bytes.
+This excludes Q2 scans, eight subblock iterations per quantized block,
+residual dequantization, branches, cache writes, and runtime costs. There is
+effectively no headroom above the diagnostic ~1.50x local speed needed for
++10% E2E under an optimistic serial-share model, while retained mass and
+intermediate drift are concerning. More aggressive settings save bytes but
+lose more mass. These are not measured critical-path results or a formal
+impossibility proof.
+
+Decision for the tested 128-token Q2 block / source-threshold / TP4 GQA /
+20K repetitive request route: **no-go for commissioning an Ascend
+compressed-cache kernel from this selector evidence alone**. The FFD paper
+across all prompts, models, and adaptive selectors is **inconclusive**, not
+rejected. No FFD matched throughput, TTFT/TPOT, LongBench-v2, or GSM8K
+candidate result exists; the user's 1% E2E task-loss allowance was not
+tested. Close this scoped 24-hour gate rather than building an operator
+without a credible joint benefit. Resume FFD only if a distinct selector
+or workload supplies new source-faithful evidence; do not rerun v5 unchanged.
+
+The v5 owned container stopped successfully; NPU4-7 showed no processes,
+0% AICore, and 2868-2871 MB idle-baseline HBM afterward. Immutable evidence
+root: /cache/cch/ffd-qwen36-realprobe-v5-20260928/.
+Admission SHA256:
+65ad096df018d8aee63c370157bb5c5edb37d449aa4f9f11bb366273934660f6.
+Request SHA256:
+4f799a1c8f4fc4d1a8cece9af3485637c8f1997bcfb67f24e315ff26b1e0add6.
+TP0/1/2/3 audit SHA256:
+3ca090e4f9ac11a445d7de8490c7b9cb5ab3a5cc16d6fc16fc30051dfdeafb9e,
+d428002ed417d063db8cd09fc79ae35c1b9b44b42412a06ea9c2995b6eb8a4bf,
+2ec2b0c63de5717e64105f31f35e9f54c77930843c020a7a7271c28819511540,
+f1308b312884dcd32f5ede17aec25651f0e99567eefc2fe9a9227ae48e98323b.

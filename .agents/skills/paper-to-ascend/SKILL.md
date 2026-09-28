@@ -442,7 +442,11 @@ not require retraining unless retraining is explicitly in scope.
   the user's permitted 1% E2E GSM8K loss. Before rejecting the paper itself,
   inspect author-supported granularity knobs such as subblock size and bound
   their added loop/launch cost. Retain unique NPU artifacts and stop the owned
-  service after each one-shot diagnostic. See the FFD v4 result in
+  service after each one-shot diagnostic. In FFD v5, SBS=16/delta=5 reached
+  the optimistic byte-only union-read bound but retained only 66.98% mass
+  in the worst observed head and added eight subblock iterations per
+  quantized block. This rejects commissioning that current selector route,
+  not all workloads or the paper. See the FFD v4/v5 results in
   `projects/qwen36-paper-portfolio/FFD_APPLICABILITY_GATE.md`.
 
 ## Do not do
