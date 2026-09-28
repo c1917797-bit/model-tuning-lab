@@ -433,6 +433,17 @@ not require retraining unless retraining is explicitly in scope.
   their one-prompt results below the E2E/task-accuracy claim boundary.
   The FFD v2/v3 correction and scope are in
   `projects/qwen36-paper-portfolio/FFD_APPLICABILITY_GATE.md`.
+- For a selector/compression threshold sweep, plot the *source-faithful*
+  group-union memory fraction against exact dense probability mass and
+  intermediate output drift on the same live Q/K/V. An aggressive setting
+  that clears an optimistic byte-only traffic requirement but drops large
+  attention mass is not a numerical pass; a safer setting that misses that
+  bound does not justify a new kernel on one prompt. Neither observation is
+  the user's permitted 1% E2E GSM8K loss. Before rejecting the paper itself,
+  inspect author-supported granularity knobs such as subblock size and bound
+  their added loop/launch cost. Retain unique NPU artifacts and stop the owned
+  service after each one-shot diagnostic. See the FFD v4 result in
+  `projects/qwen36-paper-portfolio/FFD_APPLICABILITY_GATE.md`.
 
 ## Do not do
 

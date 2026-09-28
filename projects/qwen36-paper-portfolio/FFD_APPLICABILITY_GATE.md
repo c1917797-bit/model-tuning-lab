@@ -242,3 +242,61 @@ TP0/1/2/3 audit SHA256:
 `e9685c6f3f2e3764da6d08d200255b9f38e9c7ebb6de06f587f8f9365dde0f19`.
 
 Paired throughput, TTFT/TPOT, and task accuracy remain unmeasured.
+
+## Fourth real-model request: threshold Pareto check
+
+The unique v4 service mapped only physical NPU4-7 to logical 0-3 and reached
+HTTP /health 200. Four live worker hooks reported the same pinned Ascend
+attention-source SHA256 as v3. A single request with the same 20,718 input
+token IDs returned HTTP 200 and four output tokens. Twelve real decode
+Q/K/V samples covered layers 3, 31, and 63 on all four TP ranks; there were
+no sample failures. The full-support BF16-rounded math/native relative RMS
+was at most 0.000969, below the frozen 0.005 oracle ceiling.
+
+The table reports 12-sample means, with 72 query-head probability-mass
+observations. `RMS max` is the largest *intermediate attention output*
+relative RMS versus the native path, **not** an E2E task-accuracy loss.
+
+| Threshold | KV-group union blocks kept | Exact dense mass kept (minimum) | Output/native RMS max |
+| --- | ---: | ---: | ---: |
+| author log2, delta=3 | 0.746377 | 0.886294 (0.329833) | 0.126387 |
+| author log2, delta=4 | 0.842133 | 0.943805 (0.673891) | 0.032415 |
+| author log2, delta=5 | 0.930124 | 0.984780 (0.884318) | 0.010309 |
+| author log2, delta=7 | 0.996377 | 0.999556 (0.994475) | 0.001231 |
+| paper natural, delta=3 | 0.877329 | 0.961120 (0.782073) | 0.021170 |
+| paper natural, delta=4 | 0.966356 | 0.994272 (0.937190) | 0.005850 |
+| paper natural, delta=5 | 0.997930 | 0.999749 (0.996498) | 0.001217 |
+| paper natural, delta=7 | 1.000000 | 1.000000 (1.000000) | 0.000969 |
+
+The aggressive author-log2 delta=3 reaches the **optimistic** whole-block
+traffic-only requirement of union fraction <=0.8076, but loses substantial
+dense probability mass and has large intermediate output drift. Delta=4
+has less drift but misses that optimistic traffic bound even before new
+kernel overhead. No tested 128-token selection point on this one prompt
+justifies building the compressed Ascend kernel or claiming a +10% E2E gain.
+This does not reject the paper as a whole: the released kernel exposes an
+`SBS` subblock parameter, whereas its public wrapper defaults `SBS=BS=128`.
+The next bounded, algorithm-specific check is source-audited 16/32/64-token
+subblock selection at safer thresholds on live Q/K/V, including the extra
+subblock-loop cost in any later performance hypothesis. If no plausible
+quality/traffic point survives, close this implementation/workload route
+within the pre-registered 24-hour FFD gate (2026-09-29 10:07 UTC). Do not
+mistake the user's permitted 1% *E2E GSM8K* loss for an intermediate RMS
+threshold; only final paired task tests can determine that loss.
+
+The v4 container was stopped, not deleted. Host NPU4-7 returned to
+2868-2872 MB idle-baseline HBM with no running process; NPU0-3 were not
+used. Immutable evidence root:
+`/cache/cch/ffd-qwen36-realprobe-v4-20260928/`.
+Admission SHA256
+`1d65be4b918f6dcb5f2046b5eb77266a370fe97c8187021588fb196e08d4fca5`;
+request SHA256
+`acd89137abb21bbf067242876840d8f41773183cc31c4da19a8e384277c6e8c3`.
+TP0/1/2/3 audit SHA256:
+`1c67095f287de0932e3f6d5e6a7ee2a69f1e8054784f30ee2a3859363bb4b0f0`,
+`86774e1caa635b833aa9cb0cfefc1772d69d610ee331d6271fd308291f048ee5`,
+`c6cebbd399b852357966ad25e24581c9876a857bae721b49213e5c8d10729534`,
+`134aebe01a607c9c3b3c05f604d81916e14b004855d5df26b0629c4bea52ddb6`.
+
+Paired throughput, TTFT/TPOT, and LongBench-v2/GSM8K accuracy remain
+unmeasured for FFD. This v4 experiment did not enable a candidate kernel.
