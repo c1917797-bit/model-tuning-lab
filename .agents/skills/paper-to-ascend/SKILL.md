@@ -421,6 +421,16 @@ not require retraining unless retraining is explicitly in scope.
   common stack improvement, give it to the dense control too; attribute only
   the paper-specific increment. See
   `projects/qwen36-paper-portfolio/KV_QUANT_REUSE_GATE.md`.
+- For a low-bit native matmul graph mismatch, first measure identical-input
+  eager repeats, graph repeats, and graph-versus-eager against an unmodified
+  dense control at the same shape. A failed bitwise graph/eager assertion alone
+  does not identify a graph bug when the quantized native eager call itself is
+  non-bitwise-repeatable. Preserve the original failure and report differing
+  element counts, maximum absolute and relative RMS errors without retroactively
+  relaxing its threshold. A small two-run native envelope is diagnostic, not a
+  model accuracy or service acceptance gate. QQQ's physical-NPU4 M16 native
+  observation and separate v1/v2 artifacts are in
+  `projects/qwen36-paper-portfolio/QQQ_APPLICABILITY_GATE.md`.
 - For a GQA fused-selector paper, trace the decision through its kernel
   branch, data loads, output update, public wrapper, and default arguments.
   A per-head score threshold does not imply a per-head sparse output when

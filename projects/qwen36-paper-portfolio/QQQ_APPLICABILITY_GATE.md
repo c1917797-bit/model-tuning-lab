@@ -50,14 +50,39 @@ contains only incomplete shards and must not be treated as a loadable model.
 The previous W8A8/SmoothQuant client-only throughput JSONs in
 `KV_QUANT_REUSE_GATE.md` are screening clues, not matched acceptance results.
 
+## Physical-NPU4 native W4A8 repeatability gate (2026-09-28)
+
+The owned one-card container mapped physical `/dev/davinci4` to container
+`/dev/davinci0`; `npu-smi` showed NPU4 idle before the one-shot run. The
+immutable v1 result is
+`/cache/cch/qwen36-qqq-native-substrate-20260928-v1/native-substrate.json`.
+Its SHA256 is `b1de6164d2789551fb6de6db4e7235ced8cbadf4cf9278671d8c11c32605d69d`.
+At M16/K5120/N8704/group128 the native packed-INT4 call returned finite
+values and 0.001342889 relative RMS versus a BF16 dequantized matmul, but
+failed a predeclared bitwise graph/eager assertion. No timing was produced.
+
+The separate non-overwriting diagnostic
+`/cache/cch/qwen36-qqq-native-substrate-20260928-v1/replay-envelope-v2.json`
+has SHA256 `23010fc2bfd3faecf0aae522873692ac559553527261edbd5eca0a1806e9f913` and
+isolated the source of that difference. Native W4A8 eager repeat differed in
+5/139264 elements (relative RMS 4.742e-6); graph repeat differed in 3
+elements (1.897e-5); graph versus eager for fixed input differed in 4
+elements (1.897e-5). Maximum absolute difference across these comparisons
+was 0.0078125. The BF16 dense control was bitwise identical in all four
+repeat/graph comparisons. Thus v1 did **not** establish a graph-specific
+fault: this native quantized operator itself varied between identical eager
+calls. The observed two-run envelope is a diagnostic, not a universal
+tolerance, QQQ model result, E2E gain, or task-accuracy result. Preserve the
+v1 failure; do not relabel it passed or silently relax its frozen assertion.
+The owned container was stopped after v2 and remains available for audit.
+
 ## Next bounded decision
 
-1. First check the native substrate on the actual physical 4-7 lane: exact
-   container/device mapping, operator identity and loaded weight layout,
-   BF16-vs-quantized reference correctness under eager and NPUGraph, and the
-   dominant M=16 shapes. Reuse the complete non-QQQ AWQ checkpoint only as a
-   **substrate** control, never as a QQQ result. A local operator timing is
-   merely an investment gate, not end-to-end speedup.
+1. Continue the native substrate gate after the M=16 synthetic numerical
+   diagnostic: identify the deployed operator/tiling and loaded weight layout,
+   bound native repeatability across representative inputs, and compare the
+   complete non-QQQ AWQ checkpoint only as a **substrate** control. A local
+   operator timing is merely an investment gate, not end-to-end speedup.
 2. If the substrate leaves a credible >=10% service opportunity, implement
    independently named, opt-in QQQ-specific calibration for Qwen3.6 linears
    (paper-faithful selective smoothing plus Hessian compensation, symmetric
