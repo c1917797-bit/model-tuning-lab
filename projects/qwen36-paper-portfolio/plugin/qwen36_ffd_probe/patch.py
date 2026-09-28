@@ -37,6 +37,17 @@ def _event(name: str, **fields: object) -> None:
         output.write(json.dumps(payload, sort_keys=True, allow_nan=False) + "\n")
 
 
+def _scan_scores(q, approx_k, scale):
+    """Return [query_head, block, token] scores, never token/block transposed."""
+    import torch
+
+    scores = torch.einsum("hd,btd->hbt", q, approx_k) * scale
+    expected = (q.shape[0], approx_k.shape[0], approx_k.shape[1])
+    if tuple(scores.shape) != expected:
+        raise RuntimeError(f"FFD scan shape {tuple(scores.shape)} != {expected}")
+    return scores
+
+
 def _sample(self, query, result, attn_metadata) -> None:
     import torch
 
@@ -63,7 +74,7 @@ def _sample(self, query, result, attn_metadata) -> None:
     codes = (k_full / scale[:, None, :] + 1.5).round().clamp(0, 3)
     approx_k = (codes.float() - 1.5) * scale.float()[:, None, :]
     q = query[0].float()
-    approx = torch.einsum("hd,bsd->hsb", q, approx_k) * self.scale
+    approx = _scan_scores(q, approx_k, self.scale)
     exact_k = key_pages.float().reshape(-1, 256)[:length]
     exact_v = value_pages.float().reshape(-1, 256)[:length]
     exact_logits = (q @ exact_k.T) * self.scale

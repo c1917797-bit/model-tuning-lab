@@ -1,9 +1,9 @@
 # Faster Flash Decoding: Qwen3.6/Ascend applicability gate
 
-Status: source-level investment gate only. No official-code checkout, Ascend
-operator, NPU numerical run, paired throughput, or task-accuracy result exists.
-Do not count this as a completed paper piercing. If formally started, the
-paper-specific loop must be decided within 24 hours.
+Status: official-source and output-preserving real-Q/K/V NPU investment gate.
+No Ascend FFD operator, selected-output serving run, paired throughput, or
+task-accuracy result exists. Do not count this as a completed paper piercing.
+The formally started paper-specific loop must be decided within 24 hours.
 
 ## Mechanism and provenance
 
@@ -21,7 +21,10 @@ paper-specific loop must be decided within 24 hours.
 - The paper's distinctive decode mechanism is a 2-bit mid-rise K thumbnail,
   8-bit residual K, sink/local pseudo-max, and top-delta block threshold.
   The selected block uses quantized-scan scores plus residual refinement;
-  V is fetched only when a block is retained. This is not Quest page min/max,
+  V is fetched only when a block is retained by any query head in its KV group.
+  The released paged wrapper defaults `SBS=BS=128` unless explicitly
+  overridden; the inner subblock loop is not evidence of 16-token selection.
+  This is not Quest page min/max,
   SparQ query-coordinate Top-K, or v0.23 C8 static-per-channel INT8 K/V.
 - Author `fast_decode_kernel.py` groups query heads sharing a KV head and
   loads V when **any** head in the group keeps the block. Its cache code
@@ -134,5 +137,54 @@ TP0/1/2/3 audit SHA256:
 `d64055fafd0a92cb71fdc4fda069b56fec78bb7001b6c10be2c1e5c8c9723cff`,
 `5de7b30089d96c75e9e700adc864445d4f8d50fbe9e849d95c61eeffcfc85d1d`.
 
-The first real-model selection gate, paired throughput, and task accuracy
-remain unmeasured.
+## Second real-model request and selector-semantics correction
+
+The shape-fixed v2 probe added a unit test for `[head, block, token]` scan
+layout. The owned `qwen36_ffd_realprobe_v2_20260928` service again mapped only
+physical NPU4-7 to logical 0-3. Its four worker audits bound the live v0.23
+attention source to SHA256
+`80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390`.
+One immutable, deliberately repetitive 20,718-input/4-output request returned
+HTTP 200. All four ranks sampled layers 3, 31, and 63 once: 12 real decode
+Q/K/V samples, each with 161 full 128-token blocks and a 111-token tail.
+The full-support BF16-rounded math/native relative RMS was 0.000188-0.000873,
+below the predeclared 0.005 diagnostic ceiling.
+
+Across these 12 samples the six-head *union* full-block keep fractions were:
+
+| Threshold interpretation | delta=5 | delta=7 |
+| --- | ---: | ---: |
+| Released author log2 units | 0.919255 | 0.995342 |
+| Paper natural-log units | 0.996894 | 1.000000 |
+
+These are one-prompt traffic-investment proxies, not measured NPU bandwidth,
+critical-path latency, task accuracy, or speedup. The v2 audit also computed
+selected-output error using each query head's private keep mask. Source review
+after the run showed that the released paged kernel's `need_keep` is the OR
+over the KV group's heads, followed by residual/V loads and online-softmax
+updates for **all** heads. Thus v2's `selected_math_vs_native_*` fields are
+only a hypothetical per-head-implementation diagnostic; they do **not**
+measure the released kernel's group-union output error. Do not use those fields
+as a correctness no-go. The kernel supports a subblock loop, but its released
+wrapper defaults `SBS=BS`; no 16-token claim is justified by that loop.
+
+The next unique v3 probe must calculate the union token mask, exact dense mass
+retained under that mask, and BF16-rounded union-support output versus native
+on the same live Q/K/V. Keep the per-head diagnostic separately labeled. It
+still must not replace the dense output or become a throughput claim. Only
+after that correction can the one-prompt operator-investment gate be decided.
+
+The v2 service was stopped without deletion and NPU4-7 returned to idle HBM
+with no process. External immutable artifacts:
+`/cache/cch/ffd-qwen36-realprobe-v2-20260928/`.
+Admission SHA256:
+`7cf2e2412e21fec02da74d33c9fe92217f5dc2247e392d73065630c9130747f4`.
+Request SHA256:
+`030f639d22331d240d20b747f9832b854c1a80cc6f2cc20904a20b49f5130395`.
+TP0/1/2/3 audit SHA256:
+`5e24e202fb5bd1bf3fd83ad46ee04b7af4966e873137f4d141a641d94d652ab2`,
+`87d0f82c16f7e0591ecd53cc45ffeb98c3ab0eff4ad10a71a0a9147f9457b91d`,
+`c9863f1d7e96590bdaaa241ceb7cb1a394b76e6ac77da0d19156d081b6cff4d9`,
+`fd9c4c9b55e406060b95ed3e6a631226c670142084864a711eae87f7350aedae`.
+
+Paired throughput and task accuracy remain unmeasured.
