@@ -144,3 +144,32 @@ profiler-disabled dense/candidate end-to-end comparison.
 
 No new operator was generated in this synthesis stage, and cannbot was not
 invoked to create one.
+
+## FlashInfer decode source-overlap audit (2026-09-28)
+
+This is a follow-on applicability audit, **not** an eleventh completed NPU
+paper piercing, deployed-binary proof, benchmark, or quality result. The
+[FlashInfer paper](https://arxiv.org/html/2501.01005) proposes, among other
+mechanisms, GQA head-group reuse and dynamic split-KV scheduling for decode.
+On the pinned vLLM-Ascend v0.23 source commit
+`5cb98caaadeff42b5b62b996e34bb2aaa29d20fd`,
+`vllm_ascend/attention/attention_v1.py` calls native FIA with local Q and KV
+head counts. `device/device_op.py` forwards the ordinary path to
+`torch_npu.npu_fused_infer_attention_score`.
+
+The inspected CANN/ops-transformer source commit
+`0684247214bae5abb5cb6dc7d90b34a6ad401cdd` has BF16 GQA tiling cases
+in `attention/fused_infer_attention_score/op_host/arch22/`, group-size-aware
+head tiles and KV-length-weighted core assignment in
+`op_host/flash_attention_infer_tiling.h`, and split-KV partial-output handling
+in `op_kernel/flash_attention_regular.h`. The real Qwen3.6 dense profile had
+27.40025% *diagnostic decode operator time* attributed to attention, but this
+is not a critical-path or end-to-end share.
+
+Decision: do not commission a direct GQA/split-KV kernel clone solely from
+FlashInfer's paper speedups. If revisited, first identify the deployed CANN
+binary and actual tiling/kernel selected for TP4, BF16, batch 16 and the
+frozen long-context shape; then isolate a specific scheduling deficiency and
+pre-register a numerically exact, matched E2E candidate. Source presence does
+not prove the installed binary takes that path. No new NPU load, throughput,
+TTFT, TPOT, or accuracy result was produced by this audit.

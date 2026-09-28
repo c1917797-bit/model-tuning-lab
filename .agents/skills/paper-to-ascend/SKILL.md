@@ -400,6 +400,17 @@ not require retraining unless retraining is explicitly in scope.
   implementation as no-go/inconclusive if matched E2E, allocator, graph, and
   final quality evidence are missing; distinguish this from rejecting the
   paper. Stop and retain completed NPU services instead of leaving HBM leased.
+- Before porting a CUDA attention engine's GQA or split-KV decode kernel to
+  Ascend, inspect the pinned native FIA tiling and kernel source for the same
+  mechanisms. The Qwen3.6 v0.23 call path passes local Q/KV head counts into
+  native FIA; the inspected ops-transformer source already has BF16 GQA,
+  group-size-aware head tiling, KV-length-weighted core assignment, and
+  split-KV partial-output handling. This is a source-level overlap gate, not
+  proof that the deployed CANN binary selected those paths or that its
+  scheduling is optimal. Require the actual kernel/tiling identity and a
+  shape-matched, profiler-off E2E opportunity before commissioning a custom
+  FlashInfer-style operator. Do not call a direct port a new paper gain merely
+  because a CUDA implementation is faster on different hardware.
 
 ## Do not do
 
