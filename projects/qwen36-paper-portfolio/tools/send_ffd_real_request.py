@@ -12,9 +12,9 @@ from transformers import AutoTokenizer
 
 
 MODEL_PATH = "/models/Qwen3.6-27B"
-MODEL_NAME = "qwen36-ffd-realprobe-v4"
+MODEL_NAME = "qwen36-ffd-realprobe-v5"
 RESULT = Path("/results/request-summary.json")
-BASE_URL = "http://127.0.0.1:8235"
+BASE_URL = "http://127.0.0.1:8236"
 
 
 def main() -> None:

@@ -48,17 +48,17 @@ def _scan_scores(q, approx_k, scale):
     return scores
 
 
-def _selection_masks(keep, block_size: int, tail_len: int):
-    """Expand per-head decisions and the author's KV-group OR to token masks."""
+def _selection_masks(keep, selection_size: int, tail_len: int):
+    """Expand subblock decisions and the author's KV-group OR to token masks."""
     import torch
 
     if keep.ndim != 2 or keep.dtype != torch.bool:
-        raise RuntimeError("FFD keep decisions must be a [head, block] bool tensor")
-    if block_size <= 0 or tail_len < 0 or tail_len >= block_size:
-        raise RuntimeError("invalid FFD block/tail geometry")
+        raise RuntimeError("FFD keep decisions must be a [head, subblock] bool tensor")
+    if selection_size <= 0 or tail_len < 0:
+        raise RuntimeError("invalid FFD selection/tail geometry")
     union = keep.any(dim=0)
-    per_head_tokens = keep.repeat_interleave(block_size, dim=-1)
-    union_tokens = union.repeat_interleave(block_size)
+    per_head_tokens = keep.repeat_interleave(selection_size, dim=-1)
+    union_tokens = union.repeat_interleave(selection_size)
     if tail_len:
         per_head_tokens = torch.cat(
             (per_head_tokens, torch.ones((keep.shape[0], tail_len),
@@ -128,27 +128,33 @@ def _sample(self, query, result, attn_metadata) -> None:
         approx[:, 0, :].amax(dim=-1), approx[:, -1, :].amax(dim=-1)
     )
     exact_max = exact_logits.amax(dim=-1)
-    exact_blocks = exact_logits[:, : full_count * block_size].reshape(
-        6, full_count, block_size
-    ).amax(dim=-1)
     cases = []
-    # Delta 3/4 are bounded algorithm adaptations to test the union-I/O
-    # versus retained-mass Pareto curve; 5/7 remain source/paper controls.
-    for delta in (3.0, 4.0, 5.0, 7.0):
-        for units in ("author_log2", "paper_natural"):
-            effective_delta = delta * math.log(2.0) if units == "author_log2" else delta
+    # The released author wrapper defaults SBS=BS=128, but the kernel admits
+    # finer subblocks. Keep Q2 quantization at the original 128-token block.
+    # This is an author-supported algorithm-parameter sweep, not FP16 kernel
+    # arithmetic parity or an enabled attention replacement.
+    for selection_size in (16, 32, 64, 128):
+        if block_size % selection_size:
+            raise RuntimeError("FFD subblock must divide the quantized block")
+        subblock_count = full_count * (block_size // selection_size)
+        subblock_scores = approx.reshape(6, subblock_count, selection_size)
+        exact_subblocks = exact_logits[:, : full_count * block_size].reshape(
+            6, subblock_count, selection_size
+        ).amax(dim=-1)
+        for delta in (3.0, 4.0, 5.0):
+            effective_delta = delta * math.log(2.0)
             threshold = pseudo_nat[:, None] - effective_delta
-            keep = approx.amax(dim=-1) >= threshold
+            keep = subblock_scores.amax(dim=-1) >= threshold
             keep_tokens, union, union_token_mask = _selection_masks(
-                keep, block_size, tail_len
+                keep, selection_size, tail_len
             )
             if keep_tokens.shape != (6, length) or union_token_mask.shape != (length,):
                 raise RuntimeError("FFD selection token-mask shape mismatch")
-            ideal_keep = exact_blocks >= (exact_max[:, None] - effective_delta)
+            ideal_keep = exact_subblocks >= (exact_max[:, None] - effective_delta)
             missed = (ideal_keep & ~keep).sum(dim=-1)
             mass = (exact_probs * keep_tokens).sum(dim=-1)
             union_mass = (exact_probs * union_token_mask[None, :]).sum(dim=-1)
-            ideal_mask = ideal_keep.repeat_interleave(block_size, dim=-1)
+            ideal_mask = ideal_keep.repeat_interleave(selection_size, dim=-1)
             if tail_len:
                 ideal_mask = torch.cat(
                     (ideal_mask, torch.ones((6, tail_len), dtype=torch.bool, device=q.device)),
@@ -173,16 +179,17 @@ def _sample(self, query, result, attn_metadata) -> None:
             union_difference = union_selected.to(native_output_dtype).float() - native
             cases.append({
                 "delta": delta,
-                "units": units,
+                "units": "author_log2",
+                "source_subblock_size": selection_size,
                 "effective_natural_delta": effective_delta,
-                "per_head_full_block_keep_fraction": keep.float().mean(dim=-1).tolist(),
-                "union_full_block_keep_fraction": union.float().mean().item(),
+                "per_head_subblock_keep_fraction": keep.float().mean(dim=-1).tolist(),
+                "union_subblock_keep_fraction": union.float().mean().item(),
                 "union_k_residual_v_token_fraction": union_token_mask.float().mean().item(),
                 "per_head_exact_dense_probability_mass": mass.tolist(),
                 "union_exact_dense_probability_mass": union_mass.tolist(),
                 "per_head_exact_logit_ideal_mass": ideal_mass.tolist(),
-                "ideal_exact_logit_union_full_block_keep_fraction": ideal_union.float().mean().item(),
-                "per_head_false_negative_blocks_against_exact_global_delta": missed.tolist(),
+                "ideal_exact_logit_union_subblock_keep_fraction": ideal_union.float().mean().item(),
+                "per_head_false_negative_subblocks_against_exact_global_delta": missed.tolist(),
                 "per_head_selected_math_vs_native_rms": per_head_difference.square().mean().sqrt().item(),
                 "union_selected_math_vs_native_max_abs": union_difference.abs().max().item(),
                 "union_selected_math_vs_native_rms": union_difference.square().mean().sqrt().item(),
@@ -207,7 +214,7 @@ def _sample(self, query, result, attn_metadata) -> None:
         cache_dtype=str(self.key_cache.dtype),
         source_mode="author_paged_threshold_unpacked_equation_diagnostic_not_fp16_kernel_parity",
         source_keep_scope="kv_group_any_query_head",
-        source_subblock_size=block_size,
+        source_subblock_sizes_tested=[16, 32, 64, 128],
         pseudo_max_below_exact_max=(exact_max - pseudo_nat).tolist(),
         q2_scan_vs_exact_max_abs=(
             approx.reshape(6, -1) - exact_logits[:, : full_count * block_size]

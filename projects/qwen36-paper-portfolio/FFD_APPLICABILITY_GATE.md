@@ -300,3 +300,25 @@ TP0/1/2/3 audit SHA256:
 
 Paired throughput, TTFT/TPOT, and LongBench-v2/GSM8K accuracy remain
 unmeasured for FFD. This v4 experiment did not enable a candidate kernel.
+
+## Pre-registered v5 subblock diagnostic
+
+The v5 one-shot request holds fixed the v4 model, image, TP4 mapping,
+20,718 input token IDs, native-output return path, three observed layers,
+128-token Q2 quantization block, and source-faithful KV-group OR rule.
+Only the author-supported selection subblock size changes:
+`SBS=16/32/64/128`, crossed with author-log2 delta 3/4/5. The 128-token
+setting is the released wrapper default and a within-request control.
+The unsealed tail remains full precision; it is never called a skipped
+quantized subblock.
+
+For each point record union residual-K/V token fraction, exact dense
+probability mass per head, union-support output/native relative RMS, and the
+full-support math/native oracle. This is an optimistic selector diagnostic
+using exact retained K/V, not Q2+FP8 fused-kernel parity. No model output is
+replaced. Run once in a unique non-overwriting result directory on verified
+physical NPU4-7. A failed sample is retained, not retried with looser
+numerical tolerances. Do not commission a custom compressed-cache operator
+unless a source-faithful point simultaneously offers a credible union-I/O
+path toward +10% E2E and acceptable numerical headroom; even then, run the
+actual NPU numerical and paired-service gates before any gain claim.
