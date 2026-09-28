@@ -411,6 +411,16 @@ not require retraining unless retraining is explicitly in scope.
   shape-matched, profiler-off E2E opportunity before commissioning a custom
   FlashInfer-style operator. Do not call a direct port a new paper gain merely
   because a CUDA implementation is faster on different hardware.
+- For a low-bit KV or linear paper, inventory the exact native quantization
+  methods and previous host artifacts before generating a kernel or converting
+  a checkpoint. v0.23 C8 uses checkpoint-provided static per-channel INT8 K/V;
+  it is not KIVI's asymmetric 2-bit K/V rule or SKVQ's clipped dynamic groups
+  and full-precision recent window. Likewise, saved client throughput JSON
+  without a bound service/model/image fingerprint and correctness evidence is
+  only a screening clue, not a transferable baseline. When quantization is a
+  common stack improvement, give it to the dense control too; attribute only
+  the paper-specific increment. See
+  `projects/qwen36-paper-portfolio/KV_QUANT_REUSE_GATE.md`.
 
 ## Do not do
 
