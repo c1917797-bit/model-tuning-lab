@@ -431,6 +431,21 @@ not require retraining unless retraining is explicitly in scope.
   model accuracy or service acceptance gate. QQQ's physical-NPU4 M16 native
   observation and separate v1/v2 artifacts are in
   `projects/qwen36-paper-portfolio/QQQ_APPLICABILITY_GATE.md`.
+- Do not identify quantization arithmetic by scheme name. On pinned v0.23,
+  `W4A8_DYNAMIC` passes an unquantized BF16 activation to weight-only
+  `npu_weight_quant_batchmatmul`; it is not QQQ's A8W4 GEMM. The deployed
+  CANN 9.1 `aclnnQuantMatmulV5` can take INT8 activation and packed INT4
+  weight, but its live call mutated nearly every element of the activation
+  input on physical NPU4. Preserve the failing repeat, compare *all* inputs
+  before/after, and test a disposable activation copy or fresh quantized
+  output under eager and NPUGraph before integrating it into a model. A
+  passing synthetic copy guard is only an operator ABI/numerical gate. Include
+  dynamic activation quantization and any protective copy in the local
+  investment timing; compare the same graph/eager regime and exact shape to
+  BF16. In QQQ's M16 and M256 graph screens, the complete native A8W4 sequence
+  was slower than BF16, so that implementation was declined before costly
+  checkpoint conversion. This is not a paper-wide no-go or final accuracy
+  result; see `projects/qwen36-paper-portfolio/QQQ_APPLICABILITY_GATE.md`.
 - For a GQA fused-selector paper, trace the decision through its kernel
   branch, data loads, output update, public wrapper, and default arguments.
   A per-head score threshold does not imply a per-head sparse output when
