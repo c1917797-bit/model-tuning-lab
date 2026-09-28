@@ -131,6 +131,16 @@ Candidate runs 0, 1, 2, 4, 5, 6, and 7 matched the dense token sequence
 bit-for-bit. Run 3 diverged from the first generated token, so candidate
 determinism was false (7/8 matching).
 
+The raw validator also shows that warmup run 1 diverged, while warmup run 0
+matched. Thus 8/10 total submitted requests matched, with two divergent
+requests; the formal 7/8 figure excludes warmups. The eight transaction
+events and the repeated `gdn_restores=48` reports prove dispatch/counts, not
+that native KV bytes and every restored recurrent tensor matched the dense
+state at the first-token boundary. The current event stream does not isolate
+the source of either divergence. Do not rerun the same replay gate without a
+new state- or cache-value hypothesis and an instrumented observation that can
+distinguish it.
+
 This is a correctness failure, not a performance regression. No throughput,
 TTFT, TPOT, LongBench-v2, or GSM8K claim is valid for this candidate.
 

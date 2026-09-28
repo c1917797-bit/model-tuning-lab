@@ -148,7 +148,9 @@ not require retraining unless retraining is explicitly in scope.
 - For stateful cache/replay methods, a three-run canary is only a smoke test.
   Separate cold/materialization warmups from at least eight measured identical
   replays before declaring deterministic correctness; one divergent token is a
-  failed numerical gate.
+  failed numerical gate. Report warmup divergences separately as well: excluding
+  warmups from the predeclared measured pass fraction must not hide an observed
+  initialization or state-lifecycle failure.
 - A transaction, cache-hit, or restore-plan event proves that control flow ran.
   It does not prove restored tensors are correct. Require exact output/state
   evidence before performance, and never relax that gate to preserve a paper.
