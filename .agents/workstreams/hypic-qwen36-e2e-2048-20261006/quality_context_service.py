@@ -188,7 +188,8 @@ def stop(arm: str) -> None:
     else:
         raise RuntimeError("NPU0-3 or port 8223 not released")
     current = inspect(name)
-    if current is None or current["Id"] != item["Id"] or current["State"]["Status"] != "exited":
+    if (current is None or current["Id"] != item["Id"]
+            or current["State"]["Status"] not in ("exited", "created")):
         raise RuntimeError("quality container identity changed before removal")
     run("docker", "rm", name)
     receipt(arm, "service-stop.json", {
