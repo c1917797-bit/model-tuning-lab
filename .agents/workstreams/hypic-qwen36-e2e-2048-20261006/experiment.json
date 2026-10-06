@@ -1,7 +1,9 @@
 {
   "schema": "paper-to-ascend-experiment/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
-  "status": "planned",
+  "status": "running",
+  "stage": "baselining",
+  "as_of_utc": "2026-10-06T13:26:00Z",
   "historical_reference": {
     "tag": "paper-result/hypic-qwen36-tp4-adopted",
     "commit": "fcaed3caf4a61a79bc191d7d074bb031b5206e9a",
@@ -41,7 +43,12 @@
     "thinking": false,
     "concurrency": 32,
     "repetitions_per_arm_and_dataset": 3,
-    "baseline_policy": "reuse a completed baseline only when baseline-contract.json fingerprint and every run validator match; otherwise measure once on NPU0-3"
+    "baseline_policy": "reuse a completed baseline only when baseline-contract.json fingerprint, every raw run validator, and baseline-registry.json artifact hashes match; otherwise measure once on NPU0-3"
+  },
+  "baseline_registry": {
+    "path": "/cache/cch/hypic-qwen36-e2e-2048-20261006/baseline-registry.json",
+    "performance": "pending third accepted repetition",
+    "quality": "pending 2048-token baseline repetitions"
   },
   "artifact_root": "/cache/cch/hypic-qwen36-e2e-2048-20261006",
   "terminal_states": ["accepted", "rejected", "inconclusive", "failed"]

@@ -2,7 +2,7 @@
   "schema": "paper-to-ascend-skill-validation/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
   "status": "running",
-  "as_of_utc": "2026-10-06T12:37:00Z",
+  "as_of_utc": "2026-10-06T13:26:00Z",
   "checks": [
     {
       "skill": "chicaihong01-host-maintenance",
@@ -28,8 +28,8 @@
     {
       "skill": "ascend-benchmark-evidence",
       "state": "running",
-      "evidence": ["baseline-contract.json"],
-      "remaining": ["six complete 40-request performance runs", "performance-gate.json"]
+      "evidence": ["baseline-contract.json", "no-cache/performance.run1.json", "no-cache/performance.run2.json"],
+      "remaining": ["baseline performance run3", "three treatment performance runs", "performance-gate.json", "frozen baseline-registry.json"]
     },
     {
       "skill": "paper-to-ascend-reproduction",
