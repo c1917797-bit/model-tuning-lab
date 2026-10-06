@@ -41,7 +41,7 @@
     "thinking": false,
     "concurrency": 32,
     "repetitions_per_arm_and_dataset": 3,
-    "fresh_baseline_required": true
+    "baseline_policy": "reuse a completed baseline only when baseline-contract.json fingerprint and every run validator match; otherwise measure once on NPU0-3"
   },
   "artifact_root": "/cache/cch/hypic-qwen36-e2e-2048-20261006",
   "terminal_states": ["accepted", "rejected", "inconclusive", "failed"]

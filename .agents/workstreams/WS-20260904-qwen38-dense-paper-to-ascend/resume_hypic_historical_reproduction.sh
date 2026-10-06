@@ -27,6 +27,9 @@ OWNED_LANE=NPU${HOST_NPU_FIRST}-${HOST_NPU_LAST}
 BENCHMARK=$SOURCE_HYPIC/tools/benchmark_shared_prefix.py
 QUALITY=$RECORDS/hypic_quality_eval.py
 ANALYZER=$RECORDS/summarize_hypic_historical_reproduction.py
+CANARY=$RECORDS/hypic_semantic_canary.py
+E2E_RECORDS=$WORKTREE/.agents/workstreams/hypic-qwen36-e2e-2048-20261006
+E2E_GATES=\${HYPIC_E2E_GATES:-0}
 REFERENCE=$RECORDS/hypic-previous-practice-reference.json
 STATUS_FILE=$OUTPUT_ROOT/controller-status.json
 CURRENT_CONTAINER=
@@ -52,6 +55,11 @@ verify_static_inputs() {
   (( MAX_NUM_BATCHED_TOKENS >= 16392 )) || { echo "max-num-batched-tokens must be >= 16392 for 16384-token suffix plus seam-sink=8" >&2; return 1; }
   docker image inspect "$IMAGE" >/dev/null
   python3 -m py_compile "$ANALYZER" "$QUALITY" "$BENCHMARK"
+  if [[ "$E2E_GATES" == 1 ]]; then
+    python3 -m py_compile "$CANARY" \
+      "$E2E_RECORDS/baseline_contract.py" \
+      "$E2E_RECORDS/assess_hypic_e2e_gates.py"
+  fi
 }
 
 owned_npu_pids() {
@@ -563,6 +571,46 @@ run_quality() {
   done
 }
 
+verify_canary_run() {
+  local path=$1 arm=$2
+  python3 - "$path" "$arm" <<'PY'
+import json
+import sys
+path, arm = sys.argv[1:]
+data = json.load(open(path))
+if not (
+    data.get("schema") == "hypic-active-semantic-canary/v1"
+    and data.get("phase") == arm
+    and data.get("answer_contains_key") is True
+    and data.get("input_tokens") == 32768
+    and data.get("request") == {
+        "max_tokens": 32, "temperature": 0,
+        "seed": 0, "ignore_eos": False,
+    }
+):
+    raise SystemExit(f"{path}: incomplete semantic canary")
+PY
+}
+
+run_canary() {
+  local arm=$1
+  local output="$OUTPUT_ROOT/$arm/semantic-canary.json"
+  if verify_canary_run "$output" "$arm" 2>/dev/null; then
+    printf '%s verified existing %s\n' "$(date -Is)" "$output"
+    return
+  fi
+  archive_invalid "$output"
+  write_status "$arm-real-weight-canary" "$output"
+  python3 "$CANARY" \
+    --base-url "http://127.0.0.1:$PORT" \
+    --model "$MODEL_NAME" \
+    --phase "$arm" \
+    --output "$output" \
+    --timeout 2400 \
+    2>&1 | tee "$OUTPUT_ROOT/$arm/semantic-canary.log"
+  verify_canary_run "$output" "$arm"
+}
+
 cleanup() {
   local rc=$?
   trap - EXIT
@@ -571,6 +619,41 @@ cleanup() {
     CURRENT_CONTAINER=
   fi
   if [[ -d "$OUTPUT_ROOT" ]]; then
+    if [[ "$E2E_GATES" == 1 ]]; then
+      python3 - "$OUTPUT_ROOT" "$rc" <<'PY' || true
+import json
+import pathlib
+import sys
+from datetime import datetime, timezone
+
+root, rc = pathlib.Path(sys.argv[1]), int(sys.argv[2])
+failed_gate = None
+for name in ("canary-gate.json", "performance-gate.json"):
+    path = root / name
+    if path.exists():
+        record = json.loads(path.read_text())
+        if record.get("passed") is False:
+            failed_gate = name
+            break
+if rc == 0:
+    status = "pending-independent-audit"
+elif failed_gate:
+    status = "rejected"
+elif rc in (124, 137, 143):
+    status = "inconclusive"
+else:
+    status = "failed"
+result = {
+    "schema": "hypic-e2e-terminal-decision/v1",
+    "status": status,
+    "controller_exit_code": rc,
+    "failed_gate": failed_gate,
+    "updated_at": datetime.now(timezone.utc).isoformat(),
+    "scope": "controller; independent audit may still be pending",
+}
+(root / "terminal-decision.json").write_text(json.dumps(result, indent=2) + "\n")
+PY
+    fi
     write_status "controller-exit" "exit_code=$rc" || true
   fi
   exit "$rc"
@@ -604,6 +687,7 @@ if ! flock -n 9; then
 fi
 exec > >(tee -a "$OUTPUT_ROOT/controller.log") 2>&1
 trap cleanup EXIT
+trap 'exit 124' TERM INT
 
 write_status preflight "creating or validating exact experiment containers"
 if [[ $(container_state "$BASELINE_CONTAINER") == running && $(container_state "$TREATMENT_CONTAINER") == running ]]; then
@@ -622,31 +706,86 @@ create_container hypic-only "$TREATMENT_CONTAINER" 1
   npu-smi info
 } > "$OUTPUT_ROOT/environment-and-container-snapshot.txt"
 
-if performance_complete no-cache; then
-  write_status no-cache-performance-complete "all three accepted runs reused"
+if [[ "$E2E_GATES" == 1 ]]; then
+  python3 "$E2E_RECORDS/baseline_contract.py" \
+    --root "$OUTPUT_ROOT" \
+    --source "$SOURCE_HYPIC" \
+    --image "$IMAGE" \
+    --container "$BASELINE_CONTAINER" \
+    --benchmark "$BENCHMARK" \
+    --quality "$QUALITY" \
+    --quality-max-out-len "$QUALITY_MAX_OUT_LEN"
+
+  if ! verify_canary_run "$OUTPUT_ROOT/no-cache/semantic-canary.json" no-cache 2>/dev/null; then
+    start_arm no-cache "$BASELINE_CONTAINER" 0
+    run_canary no-cache
+    stop_arm no-cache "$BASELINE_CONTAINER" canary 0
+  else
+    write_status no-cache-canary-reused "validated existing real-weight baseline canary"
+  fi
+  if ! verify_canary_run "$OUTPUT_ROOT/hypic-only/semantic-canary.json" hypic-only 2>/dev/null; then
+    start_arm hypic-only "$TREATMENT_CONTAINER" 1
+    run_canary hypic-only
+    stop_arm hypic-only "$TREATMENT_CONTAINER" canary 1
+  fi
+  python3 "$E2E_RECORDS/assess_hypic_e2e_gates.py" canary --root "$OUTPUT_ROOT"
+
+  if performance_complete no-cache; then
+    write_status no-cache-performance-reused "all three accepted baseline runs reused"
+  else
+    start_arm no-cache "$BASELINE_CONTAINER" 0
+    run_performance no-cache
+    stop_arm no-cache "$BASELINE_CONTAINER" performance 0
+  fi
+  if performance_complete hypic-only; then
+    write_status hypic-only-performance-reused "all three accepted treatment runs reused"
+  else
+    start_arm hypic-only "$TREATMENT_CONTAINER" 1
+    run_performance hypic-only
+    cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/performance.hypic-evidence.jsonl"
+    stop_arm hypic-only "$TREATMENT_CONTAINER" performance 1
+  fi
+  python3 "$E2E_RECORDS/assess_hypic_e2e_gates.py" performance --root "$OUTPUT_ROOT"
+
+  if quality_complete no-cache; then
+    write_status no-cache-quality-reused "all six accepted 2048-token baseline runs reused"
+  else
+    start_arm no-cache "$BASELINE_CONTAINER" 0
+    run_quality no-cache
+    stop_arm no-cache "$BASELINE_CONTAINER" quality 0
+  fi
+  if quality_complete hypic-only; then
+    write_status hypic-only-quality-reused "all six accepted treatment runs reused"
+  else
+    start_arm hypic-only "$TREATMENT_CONTAINER" 1
+    run_quality hypic-only
+    cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/quality.hypic-evidence.jsonl"
+    stop_arm hypic-only "$TREATMENT_CONTAINER" quality 1
+  fi
 else
-  start_arm no-cache "$BASELINE_CONTAINER" 0
-  run_performance no-cache
-  stop_arm no-cache "$BASELINE_CONTAINER" performance 0
+  if performance_complete no-cache; then
+    write_status no-cache-performance-complete "all three accepted runs reused"
+  else
+    start_arm no-cache "$BASELINE_CONTAINER" 0
+    run_performance no-cache
+    stop_arm no-cache "$BASELINE_CONTAINER" performance 0
+  fi
+  if quality_complete no-cache; then
+    write_status no-cache-quality-complete "all six accepted runs reused"
+  else
+    start_arm no-cache "$BASELINE_CONTAINER" 0
+    run_quality no-cache
+    stop_arm no-cache "$BASELINE_CONTAINER" quality 0
+  fi
+  start_arm hypic-only "$TREATMENT_CONTAINER" 1
+  run_performance hypic-only
+  cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/performance.hypic-evidence.jsonl"
+  stop_arm hypic-only "$TREATMENT_CONTAINER" performance 1
+  start_arm hypic-only "$TREATMENT_CONTAINER" 1
+  run_quality hypic-only
+  cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/quality.hypic-evidence.jsonl"
+  stop_arm hypic-only "$TREATMENT_CONTAINER" quality 1
 fi
-
-if quality_complete no-cache; then
-  write_status no-cache-quality-complete "all six accepted runs reused"
-else
-  start_arm no-cache "$BASELINE_CONTAINER" 0
-  run_quality no-cache
-  stop_arm no-cache "$BASELINE_CONTAINER" quality 0
-fi
-
-start_arm hypic-only "$TREATMENT_CONTAINER" 1
-run_performance hypic-only
-cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/performance.hypic-evidence.jsonl"
-stop_arm hypic-only "$TREATMENT_CONTAINER" performance 1
-
-start_arm hypic-only "$TREATMENT_CONTAINER" 1
-run_quality hypic-only
-cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/quality.hypic-evidence.jsonl"
-stop_arm hypic-only "$TREATMENT_CONTAINER" quality 1
 
 python3 "$ANALYZER" \
   --root "$OUTPUT_ROOT" \
