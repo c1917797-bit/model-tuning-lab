@@ -42,8 +42,12 @@ The formal paper-only performance gate remains **failed**, not pending. Its
 three-per-arm raw runs and original gate must not be overwritten. The 2048-token
 paired quality baseline is still unrun: historical LongBench-v2 sample 48 needs
 at least 41,690 context tokens for a 2,048-token cap, above the frozen 40,960
-service configuration. A changed context limit requires a new paired baseline
-and user choice; do not silently truncate, skip, or lower the cap.
+service configuration. A changed context limit requires a new paired baseline;
+do not silently truncate, skip, or lower the cap. Earlier user-choice requests
+were unanswered. The explicit 2048-token objective is now interpreted as
+authorizing a separately identified, paired quality-only environment on the
+already authorized NPU0-3 lane; it does not alter the original performance
+denominator or paper-only gate.
 
 Target-device profiling has now been captured separately for baseline and
 HYPIC. Both arms have four-rank raw Prefill and Decode data. Prefill export is
@@ -84,9 +88,37 @@ check whether automatic cleanup passed. If cleanup fails, run
 `matmul_allreduce_service.py stop` after confirming identity. Do not touch
 NPU4-7.
 
-Profiler, candidate, and handoff code was committed locally as `f4c4173`.
-The branch is eleven commits ahead of origin. Host HTTPS Git credentials remain unavailable;
+Profiler, candidate, and handoff code was committed locally as `f4c4173`
+and `27d265c`. The branch was twelve commits ahead of origin at this
+checkpoint. Host HTTPS Git credentials remain unavailable;
 do not expose or embed a token. Goal deadline is 2026-10-07 11:39:37 UTC.
+
+The paired 2048-token quality continuation is prepared under
+`quality-context-41984/`, with contract SHA256
+`fa7915cdab4c836869f867184de563dd407c237979a48b691098518aacc9373d`.
+Historical complete LongBench-v2 baseline rows (127/127) show maximum prompt
+39,642 tokens, so prompt plus the requested cap is 41,690. The quality
+service changes both arms equally to `--max-model-len 41984` and
+`--max-num-batched-tokens 41984`; this is a **new quality identity**, not
+the 40,960-context performance denominator. The frozen parent source,
+model index/shard metadata, two dataset hashes, and evaluator hash are
+revalidated by `quality_context_controller.py`. It runs serially on
+NPU0-3, freezes all six validated baseline raw run hashes before treatment,
+then runs six matched treatment runs and a paired raw audit. The script
+refuses duplicate controller instances and stops the exact owned service
+after each arm, including failure paths, with a 15-minute deadline margin.
+
+Do not start this controller until `exec-0000000000000590` is terminal and
+its candidate container has been removed with NPU0-3 and port 8223 free.
+Then run exactly once from this worktree:
+`python3 .agents/workstreams/hypic-qwen36-e2e-2048-20261006/quality_context_controller.py run`
+through AWMCP direct target `chicaihong01/ma`, with a long asynchronous
+operation timeout, and poll that one returned handle. Read
+`quality-context-41984/controller-status.json` and each in-progress
+`quality/<arm>/<dataset>.runN.log`/JSONL. Incomplete JSONL is a resume
+boundary; do not delete it. If the controller exits unexpectedly, inspect
+exact named quality container identity and the target NPU lane before any
+resume. `audit-only` rechecks all completed raw files without NPU traffic.
 
 ## Prior state — 2026-10-06 14:59 UTC
 

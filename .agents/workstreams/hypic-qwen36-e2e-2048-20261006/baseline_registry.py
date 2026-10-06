@@ -45,7 +45,9 @@ def performance_entries(root: Path) -> list[dict]:
     return result
 
 
-def quality_entries(root: Path, contract: dict) -> list[dict]:
+def quality_entries(root: Path, contract: dict, arm: str = "no-cache") -> list[dict]:
+    if arm not in ("no-cache", "hypic-only"):
+        raise ValueError(f"unsupported quality arm: {arm}")
     expected_data = {
         "longbenchv2": (127, contract["fingerprint"]["longbench_sha256"],
                         "supplied_ais_bench_first_option_postprocess"),
@@ -57,7 +59,7 @@ def quality_entries(root: Path, contract: dict) -> list[dict]:
     for dataset, (expected, dataset_hash, scorer) in expected_data.items():
         for index in (1, 2, 3):
             stem = f"{dataset}.run{index}"
-            directory = root / "quality" / "no-cache"
+            directory = root / "quality" / arm
             summary_path = directory / f"{stem}.summary.json"
             details_path = directory / f"{stem}.jsonl"
             summary = read(summary_path)
