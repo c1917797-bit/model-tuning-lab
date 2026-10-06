@@ -275,6 +275,12 @@ def main() -> int:
             and quality_context.get("quality_evidence_complete") is True
             and quality_context.get("performance_gate_overridden") is False,
         )
+        check(
+            "quality_context_classification_pass",
+            quality_context.get("quality_classification") == "pass"
+            and quality_context.get("negative_or_uncertain_signals") == [],
+            str(quality_context.get("quality_classification")),
+        )
 
     iteration = read("optimization_iteration_present", "optimization-iteration.json")
     if iteration is not None:
