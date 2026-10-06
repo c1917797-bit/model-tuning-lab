@@ -1,5 +1,35 @@
 # Continuous preparation and NPU execution queue
 
+## Current active dispatch — 2026-10-06
+
+MAIN MA070d independently closed the actual fresh-Git-export no-device packet:
+34 software checks/four exact audit CLI groups and actual candidate Meta32
+positive/46 negative. Parent MA070b remains exit1 (strict JSON parser rejected
+known trailing driver log), while its TARGET_META component really exited0;
+raw evidence was reused, not rerun or relabelled. Readback SHA19a938bb...8992e.
+Source8583c243/packet61cec464 was normally pushed and exact remote verified
+MA070c after the earlier push timeout; numerical main AST stayed unchanged.
+
+MA070e is now the ONLY live numerical dispatcher, run selected_row_bal_v1.
+Actual MAIN MA070f observes all four RUNNING reports with npu_executed=true,
+48 bitwise reference pairs each (192 total), zero failed recorded checks,
+and actual Python PIDs1542060/1542117/1542185/1542244 on physical4/5/6/7.
+Their container IDs are63f9a6ce...,4a66d94b...,53f9efa3...,a5bc4719....
+Each maps its one physical card to logical0, same image660,1CPU/8GiB.
+Protected0–3 workers174886/174890/174892/174896 are unchanged.
+Fresh admission ordinaryRAM64,135,659,520B (>40GiB component floor, <72GiB
+model floor), joint6CPU and disk685,760,663,552B. This does not admit C1.
+
+Poll ONLY exec-000000000000070e; do not duplicate/restart/edit its frozen
+52-entry source closure. Reference pairs do not pass candidate fullmatrix:
+24 native anchors,64×160 graph/state cases and lossless final aggregate/source
+checks remain in progress. Kernel/E2E/task results remain absent. Preserve
+the bounded3600s phase/180s cleanup and original DAMP cutoff08:48:03Z tomorrow.
+After terminal verify exact-owned stopped/retained4–7 release and actual
+protected0–3 fingerprint before admitting the next source-reviewed packet.
+Prepare the KVBuffer successor in distinct NEW scopes during this run; do not
+overlap a future TP4 model/calibration/performance phase with these jobs.
+
 ## Latest authoritative readiness — 2026-10-06 20:15Z
 
 MA06a0 is completed exit1: single3600s phase timeout, not cancelled/tool-timeout

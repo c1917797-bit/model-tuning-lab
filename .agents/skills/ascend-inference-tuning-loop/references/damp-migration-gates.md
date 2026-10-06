@@ -4,6 +4,37 @@ Evidence date: 2026-10-06. Workstream:
 `.agents/workstreams/qwen36-damp-ascend-20261006/`.
 These are engineering lessons, not evidence of DAMP throughput or quality gain.
 
+## Ready-before-card closure: actual Meta path and stdout ABI
+
+- Scope no-device checks to the dependencies they really exercise. MA06ff's
+  NEW Meta entry added native/vLLM loading absent from the prior successful
+  candidate-only command and aborted134. The corrected candidate-only entry
+  preserves actual candidate SO/schema/Meta, versions, module realpaths and
+  source-after; real numerical execution retains native bootstrap/schema/maps/
+  SoC checks. Internal C++ abort location remains unknown. Read actual image
+  sources: this build's device-type constant is not a runtime SoC observation,
+  and disabling Torch autoload does not suppress explicit torch_npu init.
+- Match the outer parser to actual process output before acquiring devices.
+  MA070b's candidate Meta exited0 and passed32 positive/46 negative calls,
+  followed by a driver console-log line; the parent exited1 parsing all stdout
+  as JSON. MAIN readback MA070d bound the original raw receipt, exact sole JSON
+  record/known trailing line, frozen sources/export and stopped no-device
+  container. It reused valid evidence without another run and did not rewrite
+  the parent failure. Use explicit framing for future producers; unknown output,
+  missing/duplicate records or nonzero component exits remain failures.
+- Balance oracle/transfer/CPU cost as well as case counts. A NEW selected-row
+  reference first passed192 actual full-S/local-S1 bitwise pairs on4–7 in
+  MA070e before being used by the unchanged full matrix. This proves that
+  restricted reference seam only, not general-SR, model lifecycle, throughput
+  or quality. Keep full coverage and the fixed cutoff; partial zero failures
+  cannot become aggregate PASS. Readiness includes actual original receipt ABI
+  and fresh-clone closure, not only synthetic helper tests.
+
+Evidence: workstream PRE_DEVICE_CLOSURE_AND_ACTIVE_GATE.md and external
+selected-row-no-device-preflight-v3/MAIN_READBACK_V1.json SHA19a938bb...8992e.
+At this checkpoint MA070e is active; complete64-case/NPU aggregate and model
+acceptance remain pending.
+
 ## Complete entrypoint preflight, not helper-only readiness — 2026-10-06 18:38Z
 
 Derive the NO-device source preflight from the intended immutable-image launch
