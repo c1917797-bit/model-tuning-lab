@@ -104,6 +104,12 @@ load. This rule does not guarantee the first real-device attempt will pass.
   terminal times, real per-card compute ownership, ready-queue gaps and the next
   bottleneck toward E2E acceptance. Update short goals against medium/long goals
   and the fixed per-paper/portfolio deadline after every stage.
+- Balance correctness shards by estimated oracle/native-call, transfer and CPU
+  costs, not just equal case counts. Pre-register complete coverage and each
+  source-bound group before launch. A frozen live grouping is not silently
+  reordered or restarted to hide tail waiting; use its measured progress to
+  design the next packet. Separate lightweight no-device preflight budgets from
+  model budgets, while preserving the full model's admission and reserve gates.
 
 ## Git and Artifact Rules
 
