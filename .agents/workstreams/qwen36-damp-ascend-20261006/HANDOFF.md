@@ -1,5 +1,23 @@
 # DAMP Ascend — current workstream
 
+## Verified device-independent preparation — 2026-10-06 20:57Z
+
+Checkpoint291dbeb is normally pushed/exact-remote-verified. Read the newest
+section of KVBUFFER_IMAGE_AND_SERVICE_PREPARATION_20261006.md:
+MA075b actual fresh-export image consumer11/NEW5 hashes/all49/realCLI/source
+freeze/four trueT2–15 audit commands passed; old69/API help reused by raw SHA.
+MA0762 actual library/schema14 positive Meta+nonalias/source-after passed.
+Exact own no-device containers5e3a.../403baa... stopped and retained, noOOM.
+This is device-independent preparation only, not numeric/graph/model/E2E PASS.
+Actual middle-T MAIN identity/launch/cleanup/raw report packet remains pending.
+
+Only live NPU handle is MA070e. OriginalMA0766 at20:55:48Z observes29/64 completed
+cases/4640 feedback steps and zero failed recorded checks; actual physical4–7
+Python owners and protected0–3 unchanged. Full aggregate/source-after/release
+pending. OrdinaryMemAvailable56926868KiB below unchanged72GiB model floor.
+Do not duplicate the live operation, refit/retest valid old work or change52
+frozen live sources. Cutoffs/queue/final performance+task gates remain unchanged.
+
 ## Preparation and live progress — 2026-10-06 20:50Z
 
 MA070e remains the only live numerical handle. OriginalMA0749 at20:46:19Z

@@ -1,5 +1,60 @@
 # KVBuffer: actual image preparation and NEW service handoff
 
+## Actual NEW-image closure — 2026-10-06T20:57Z
+
+MAIN checkpoint291dbeb0dd5f63e62f11ac3cba1e19071a62de4b was normally pushed
+and exactly remote-verified by MA075a. Original terminal outsideGit
+/cache/cch/qwen36-damp-20261006/kvbuffer-preparation-MA075a-checkpoint-original.json
+SHA256 a36a46f9f15ad44347d936625ac98baa81dadcae50875594480cf27eae12e2d2.
+
+MA075b fresh-Git-export actual-image no-device preflight exited0. It checked
+all NEW5 byte identities, original49 source/native-image closure, actual NEW11
+tests, three actual help/default-OFF entrypoints, consumer freeze and four exact
+middle-T source-audit commands covering all14 trueT groups. Original69/software
+and API-help results were SHA-rechecked/reused, not repeated.
+Actual /cache/cch/qwen36-kvbuffer-parallel-20261006/preflight-new-consumer-middle-v1/results/SUMMARY.json
+SHA256343809a2b829cebadca6d3b55369abae1e0824f6d2d9657de9c05d3229fb6d07.
+Original /cache/cch/qwen36-damp-20261006/kvbuffer-preflight-MA075b-new-source-image-original.json
+SHA256369e3cdc8a89aa05fa700aed8a99136a99f0fdae60cf8ba2218defb2935e5bbe.
+The actual source manifest is its results/new-consumer-source-freeze.stdout,
+SHA256022734f3fd7b470df5cee7b42186e28f39b272399de72d4d55f0c3527dae88a4.
+The report's /preflight-results prefix is its inspected RW mount alias, not a
+host Ref; use the exact host results path above for subsequent RO mounts.
+MAIN MA0761 independently checked container5e3a460f0d6afbe3738ec40ee80d930a7c38bdd95a3eccad563faa7c1a43b035:
+stopped/retained/PID0/exit0/noOOM/nonprivileged/no NPU devices,1CPU2GiB.
+
+MA0762 then reused the actual old Meta program from the original inspected
+container Cmd, changed only trueT loop2..15 and added no-alias/source/map checks;
+old69/API help were not repeated. Real torch+torch_npu dynamic load and all14
+positive Meta calls passed with BF16[T,12,128] output/non-alias and before/after49
+source identity. Actual loaded candidate SO hash matches0e7c64b5...3477b.
+No native NPU operation was executed; Meta does not prove physical ND, graph,
+numerical state, layout-negative validation or model performance. The unchanged
+Meta kernel has no negative-layout validation; that remains explicitly stated.
+Actual report.json uses schema for the kernel's real mutable13-input schema,
+not a fabricated wrapper-schema tag.
+Actual /cache/cch/qwen36-kvbuffer-parallel-20261006/preflight-middle-meta14-v1/results/report.json
+SHA2561c417ac0cae44e11842bd2a9434acd1cf537568f2bf19878ebb19dca64c65e75.
+Original /cache/cch/qwen36-damp-20261006/kvbuffer-preflight-MA0762-middle-meta14-original.json
+SHA256b741f6cdaf1935de3f6d2b9b8e6bca5005634929c65fa90cc90e59ea466758a3.
+MA0765 independently proved exact403baa334634d94c62c9913baea8463aceb14454d5cb2fdb9f9d551e0da0940b
+stopped/retained/PID0/noOOM/exit0/nonprivileged/no devices.
+Both real preflight jobs were freshly admitted against existing4x8GiB jobs+
+2GiB no-device job+8GiB reserve, actual Docker7CPU; no model admission was implied.
+
+Next remaining preparation is the thin MAIN middle-T identity/canary/child
+launcher plus exact joint timeout/resource/cleanup and raw-report consumption.
+Old B1/B16 actual split jobs remain unrun; NEW model lifecycle/E2E/task gates
+remain pending. Kernel correctness is not authorized by Meta alone.
+
+MA0766 at20:55:48Z still observes MA070e RUNNING:29 completed cases/4640 feedback
+steps, zero failed recorded checks,24 anchors, actual four authorized Python
+owners and unchanged protected0–3 workers. Its exact raw original is
+/cache/cch/qwen36-damp-20261006/damp-selected-row-MA0766-live-original.json.
+Full64/source-after/stop/release remain pending. OrdinaryMemAvailable56926868KiB
+is below model72GiB; do not lower that gate. No final non-HYPIC acceptance,
+new E2E performance or task accuracy has been established.
+
 Preparation checkpoint2026-10-06T20:50Z; not NPU/E2E acceptance.
 Canonical repository /opt/host/vnf/austinov/model-tuning-lab; branch work/qwen36-damp-ascend-20261006.
 Predecessor source7fd59c11121772afd7f691f4b64e22d567c89e09 was pushed normally
