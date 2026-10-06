@@ -63,6 +63,14 @@ root as no-cache/canary.hypic-evidence.jsonl and
 hypic-only/canary.hypic-evidence.jsonl. The current phase is authoritative
 only when read from controller-status.json.
 
+At 2026-10-06 12:51 UTC, baseline performance run1 completed with 40/40
+successful 1024-token fixed-output requests and no failures. Its JSON SHA256
+is 0a3c1740902d769de0240b909423c3b4655b8e334499bfd08d70b49c8c5d5bac.
+Run1 TTFT P95 was 92,633.55 ms; TPOT P95 457.29 ms; output throughput
+28.94 token/s; benchmark duration 1,415.47 s. This is one measured
+repetition, not the three-run baseline denominator. Controller moved to
+baseline performance run2 immediately afterward.
+
 An initial controller operation, exec-0000000000000263, was stopped before
 service readiness after an escaped E2E_GATES variable entered the historical
 sequence. It produced no performance or quality result. Its exit code was
