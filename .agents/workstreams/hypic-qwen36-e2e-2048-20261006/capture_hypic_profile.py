@@ -120,10 +120,12 @@ def verify_stimulus(path: Path, requests: int, tokens: int) -> dict:
 
 def summarize_rank(path: Path) -> dict:
     files = [item for item in path.rglob("*") if item.is_file()]
-    kernels = sorted(path.rglob("kernel_details.csv"))
-    traces = sorted(path.rglob("trace_view.json"))
-    ops = sorted(path.rglob("op_statistic.csv"))
-    apis = sorted(path.rglob("api_statistic.csv"))
+    # Dynamic msprof names differ from torch_npu.profiler's ASCEND_PROFILER_OUTPUT.
+    kernels = sorted(path.rglob("op_summary_*.csv"))
+    traces = sorted(path.rglob("msprof_*.json"))
+    ops = sorted(path.rglob("op_statistic_*.csv"))
+    apis = sorted(path.rglob("api_statistic_*.csv"))
+    steps = sorted(path.rglob("task_time_*.csv"))
     kernel_columns = []
     for item in kernels:
         with item.open(encoding="utf-8", newline="") as stream:
@@ -137,13 +139,14 @@ def summarize_rank(path: Path) -> dict:
             pass
     return {
         "file_count": len(files),
-        "kernel_details_count": len(kernels),
-        "kernel_detail_column_counts": kernel_columns,
+        "op_summary_count": len(kernels),
+        "op_summary_column_counts": kernel_columns,
         "op_statistic_count": len(ops),
         "api_statistic_count": len(apis),
-        "trace_count": len(traces),
-        "valid_trace_count": valid_traces,
-        "complete": bool(kernels and ops and apis and traces)
+        "task_time_count": len(steps),
+        "msprof_trace_count": len(traces),
+        "valid_msprof_trace_count": valid_traces,
+        "complete": bool(kernels and ops and apis and steps and traces)
         and all(columns >= 40 for columns in kernel_columns)
         and valid_traces == len(traces),
         "file_manifest": [
@@ -151,6 +154,63 @@ def summarize_rank(path: Path) -> dict:
             for item in sorted(files)
         ],
     }
+
+
+def offline_export(name: str, arm: str, phase: str, rank: int) -> dict:
+    root = ROOT / "profiles" / arm / phase / f"rank{rank}" / "msprof"
+    captures = sorted(item for item in root.glob("PROF_*") if item.is_dir())
+    if len(captures) != 1:
+        raise RuntimeError(f"rank {rank}: expected one raw PROF directory, found {len(captures)}")
+    container_capture = f"/results/profiles/{arm}/{phase}/rank{rank}/msprof/{captures[0].name}"
+    commands = (
+        ["docker", "exec", name, "msprof", "--parse=on", f"--output={container_capture}"],
+        ["docker", "exec", name, "msprof", "--export=on", f"--output={container_capture}"],
+    )
+    results = []
+    for command in commands:
+        result = run(*command, check=False, timeout=600)
+        results.append({"command": command, "exit_code": result.returncode, "stdout_tail": result.stdout[-3000:], "stderr_tail": result.stderr[-3000:]})
+        if result.returncode:
+            break
+    return {"capture": str(captures[0].relative_to(ROOT)), "steps": results, "passed": len(results) == 2 and all(item["exit_code"] == 0 for item in results)}
+
+
+def finalize_existing(arm: str, phase: str) -> int:
+    phase_root = ROOT / "profiles" / arm / phase
+    original = phase_root / "profile-manifest.json"
+    if not original.is_file():
+        raise RuntimeError(f"{original}: initial capture manifest missing")
+    target = phase_root / "profile-finalized.json"
+    if target.exists():
+        raise RuntimeError(f"{target}: finalized capture already exists")
+    initial = json.loads(original.read_text(encoding="utf-8"))
+    item, _ = inspect_container(arm)
+    if item["Id"] != initial.get("container_id"):
+        raise RuntimeError("profile container changed since raw capture")
+    exports = {}
+    for rank in range(4):
+        exports[str(rank)] = offline_export(NAMES[arm], arm, phase, rank)
+    ranks = {str(rank): summarize_rank(phase_root / f"rank{rank}" / "msprof") for rank in range(4)}
+    passed = (
+        initial.get("stimulus", {}).get("passed") is True
+        and all(row.get("exit_code") == 0 for row in initial.get("profiler_results", {}).values())
+        and all(row["passed"] for row in exports.values())
+        and all(row["complete"] for row in ranks.values())
+    )
+    result = {
+        "schema": "hypic-native-profile-finalized/v1",
+        "initial_manifest_sha256": sha256(original),
+        "arm": arm,
+        "phase": phase,
+        "container_id": item["Id"],
+        "offline_exports": exports,
+        "ranks": ranks,
+        "passed": passed,
+        "note": "recovered raw dynamic msprof data by explicit per-PROF parse and export; no NPU requests repeated",
+    }
+    target.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps({"arm": arm, "phase": phase, "passed": passed, "finalized": str(target)}, sort_keys=True))
+    return 0 if passed else 2
 
 
 def stop_profiler(process: subprocess.Popen[str]) -> tuple[int | None, str, str]:
@@ -171,8 +231,21 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=tuple(NAMES), required=True)
     parser.add_argument("--phase", choices=("prefill", "decode"), required=True)
+    parser.add_argument("--finalize-existing", action="store_true")
+    parser.add_argument(
+        "--offline-ranks", default="0,1,2,3",
+        help="TP ranks to parse/export; all four ranks are always dynamically captured",
+    )
     args = parser.parse_args()
     arm, phase = args.arm, args.phase
+    if args.finalize_existing:
+        return finalize_existing(arm, phase)
+    try:
+        offline_ranks = tuple(int(value) for value in args.offline_ranks.split(","))
+    except ValueError as exc:
+        raise RuntimeError("--offline-ranks must be comma-separated integers") from exc
+    if not offline_ranks or len(offline_ranks) != len(set(offline_ranks)) or any(rank not in range(4) for rank in offline_ranks):
+        raise RuntimeError("--offline-ranks must be a nonempty unique subset of 0,1,2,3")
     phase_root = ROOT / "profiles" / arm / phase
     if phase_root.exists():
         raise RuntimeError(f"{phase_root}: existing capture; refuse overwrite")
@@ -228,11 +301,19 @@ def main() -> int:
             profiler_results[rank] = {"exit_code": code, "stdout_tail": stdout, "stderr_tail": stderr}
 
     stimulus = verify_stimulus(workload_path, 4, output_tokens) if workload_path.is_file() else {"passed": False}
+    exports = {}
+    for rank in offline_ranks:
+        try:
+            exports[str(rank)] = offline_export(name, arm, phase, rank)
+        except Exception as exc:
+            exports[str(rank)] = {"passed": False, "error": str(exc)}
     ranks = {str(rank): summarize_rank(phase_root / f"rank{rank}" / "msprof") for rank in range(4)}
     profile_complete = all(result["complete"] for result in ranks.values())
+    selected_profile_complete = all(ranks[str(rank)]["complete"] for rank in offline_ranks)
     passed = (
         error is None and workload is not None and workload.returncode == 0
-        and stimulus["passed"] and profile_complete
+        and stimulus["passed"] and selected_profile_complete
+        and all(result["passed"] for result in exports.values())
         and all(result["exit_code"] == 0 for result in profiler_results.values())
     )
     manifest = {
@@ -255,8 +336,12 @@ def main() -> int:
         "workload_exit_code": None if workload is None else workload.returncode,
         "stimulus": stimulus,
         "profiler_results": profiler_results,
+        "offline_ranks": offline_ranks,
+        "offline_export_omitted_ranks": [rank for rank in range(4) if rank not in offline_ranks],
+        "offline_exports": exports,
         "ranks": ranks,
         "profile_complete": profile_complete,
+        "selected_profile_complete": selected_profile_complete,
         "passed": passed,
         "error": error,
     }

@@ -36,7 +36,56 @@ baseline is reusable only when baseline-contract.json matches and every run
 passes its raw-artifact check. Do not delete or overwrite partial JSONL files;
 incomplete indexes are the resume boundary.
 
-## Current state — 2026-10-06 14:59 UTC
+## Live checkpoint — 2026-10-06 16:44 UTC
+
+The formal paper-only performance gate remains **failed**, not pending. Its
+three-per-arm raw runs and original gate must not be overwritten. The 2048-token
+paired quality baseline is still unrun: historical LongBench-v2 sample 48 needs
+at least 41,690 context tokens for a 2,048-token cap, above the frozen 40,960
+service configuration. A changed context limit requires a new paired baseline
+and user choice; do not silently truncate, skip, or lower the cap.
+
+Target-device profiling has now been captured separately for baseline and
+HYPIC. Both arms have four-rank raw Prefill and Decode data. Prefill export is
+complete for all ranks; Decode offline export is complete for matched ranks
+0, 1, and 3, while rank 2 raw remains preserved and unexported/incomplete.
+The diagnostic at
+`/cache/cch/hypic-qwen36-e2e-2048-20261006/profiles/profile-diagnostic.json`
+(SHA256 `36d0b1be7ba4124ccfcc1a274e0b4cb369ddd1413d686b3e233144a553408501`)
+verifies the matched protocol and over 60 inferred steady Decode steps per
+selected rank. Prefill AllReduce count halves (774 to 387 on each matched
+rank), but each arm adds exactly 16,383 AllReduces per matched rank over the Decode capture
+and the median incremental cumulative communication time is 44.34s versus
+44.81s. Thus reduced Prefill work is observed, but no Decode collective
+reduction is established. This is one diagnostic profile per arm, not the
+formal three-run performance gate. Diagnostic services were serially stopped
+and removed; NPU0-3 and port 8223 were free before the next candidate.
+
+The source-grounded successor is **HYPIC plus**
+`VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1`, a separate, one-switch optimization
+candidate on the same official image and frozen HYPIC package. It is not a
+retroactive HYPIC paper-only result. Exact Docker image, CPU, NPU mapping,
+mounts, command, and environment identity were checked before start. The
+candidate container is
+`qwen36_hypic2048_matmulallreduce_npu0_3_v1` (ID prefix `c1b3a19f0d6e`).
+Its startup/health operation `exec-0000000000000575` completed with exit 0
+and health passed. The only active candidate run operation is
+`exec-0000000000000590`; **poll this exact handle and
+`candidate-matmul-allreduce/iteration-status.json`; do not start a second
+controller or service**. It began at 16:46 UTC and first checks the same
+real-weight canary,
+validates three fixed-output performance repetitions against both original
+arms, writes separate candidate artifacts, and stops only this exact
+container in a finally block. If the run fails, preserve logs/artifacts and
+check whether automatic cleanup passed. If cleanup fails, run
+`matmul_allreduce_service.py stop` after confirming identity. Do not touch
+NPU4-7.
+
+Local branch is ten commits ahead of origin and now has uncommitted profiler
+scripts and candidate scripts. Host HTTPS Git credentials remain unavailable;
+do not expose or embed a token. Goal deadline is 2026-10-07 11:39:37 UTC.
+
+## Prior state — 2026-10-06 14:59 UTC
 
 The first valid controller operation `exec-0000000000000277` is terminal with
 exit code 2 (controller-status.json at 14:49:57 UTC). The strict performance

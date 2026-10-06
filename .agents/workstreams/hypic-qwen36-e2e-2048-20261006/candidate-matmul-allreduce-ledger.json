@@ -1,0 +1,42 @@
+{
+  "schema": "ascend-performance-candidate/v1",
+  "candidate_id": "hypic-v085-plus-matmul-allreduce-qwen36-tp4-npu03",
+  "candidate_class": "separate post-HYPIC optimization iteration; not HYPIC paper-only",
+  "experiment": "hypic-qwen36-e2e-2048-20261006",
+  "measured_symptom": "The HYPIC-only median-of-three gate improved TTFT P95 39.40% but missed TPOT P95, output throughput and duration minima; matched NPU profiles show unchanged incremental Decode AllReduce count on ranks 0, 1 and 3.",
+  "diagnostic_evidence": {
+    "artifact": "/cache/cch/hypic-qwen36-e2e-2048-20261006/profiles/profile-diagnostic.json",
+    "sha256": "36d0b1be7ba4124ccfcc1a274e0b4cb369ddd1413d686b3e233144a553408501",
+    "prefill_allreduce_per_analyzed_rank": {
+      "no-cache": 774,
+      "hypic-only": 387
+    },
+    "decode_incremental_allreduce_per_analyzed_rank": {
+      "no-cache": 16383,
+      "hypic-only": 16383
+    },
+    "limitations": "One profile per arm, rank 2 raw preserved but offline Decode export incomplete; CANN communication times can include waits and multi-stream durations overlap."
+  },
+  "hypothesis": "The pinned vLLM-Ascend row-parallel linear implementation can combine MatMul with AllReduce when VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1, potentially reducing separate Decode communication overhead without changing the HYPIC package.",
+  "single_behavior_change": "VLLM_ASCEND_ENABLE_MATMUL_ALLREDUCE=1 on the frozen HYPIC treatment service",
+  "source_basis": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear_op.py inside the pinned official service image",
+  "scope": {
+    "physical_npus": [0, 1, 2, 3],
+    "model": "Qwen3.6-27B",
+    "tensor_parallel_size": 4,
+    "max_model_len": 40960,
+    "service_port": 8223,
+    "protected_npus": [4, 5, 6, 7]
+  },
+  "falsification": [
+    "service fails startup or health with the switch",
+    "real-weight 32768-token semantic canary differs from both original arms",
+    "forty fixed-output requests do not complete in any repetition",
+    "three-run candidate median fails to improve TPOT, throughput or duration against the frozen baseline",
+    "resource cleanup fails"
+  ],
+  "validation_protocol": "real-weight semantic canary, then 3 x 40 requests at input32768/prefix16384/output1024/concurrency16; preserve original HYPIC-only gate unchanged",
+  "canary_state_at_creation": "passed; exact normalized response and response SHA256 match both original arms",
+  "performance_state_at_creation": "running; no pass/fail claim yet",
+  "rollback": "remove only the exact candidate container after successful NPU0-3 and port 8223 release; original pinned image and package remain untouched"
+}
