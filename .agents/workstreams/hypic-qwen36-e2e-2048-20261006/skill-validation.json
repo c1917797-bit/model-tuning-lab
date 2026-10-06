@@ -1,8 +1,8 @@
 {
   "schema": "paper-to-ascend-skill-validation/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
-  "status": "paper-only-performance-rejected; one-switch-iteration-running; paired-2048-quality-prepared",
-  "as_of_utc": "2026-10-06T17:18:00Z",
+  "status": "paper-only-performance-rejected; one-switch-iteration-rejected; paired-2048-quality-running",
+  "as_of_utc": "2026-10-06T17:57:00Z",
   "checks": [
     {
       "skill": "chicaihong01-host-maintenance",
@@ -35,14 +35,14 @@
       "skill": "paper-to-ascend-reproduction",
       "state": "partial-component",
       "evidence": ["canary-gate.json", "performance-gate.json"],
-      "remaining": ["2048-token quality was not run under fail-fast", "independent 18-unit audit cannot pass without quality", "C3 paper-complete stages remain absent"]
+      "remaining": ["separate 41984-context paired 2048-token quality is running; no quality conclusion yet", "independent 18-unit audit awaits all quality runs", "C3 paper-complete stages remain absent"]
     },
     {
       "skill": "ascend-performance-optimization",
-      "state": "one-switch-measurement-in-progress",
-      "evidence": ["profiles/profile-diagnostic.json", "candidate-matmul-allreduce/canary-gate.json", "candidate-matmul-allreduce/performance.run1.json", "candidate-matmul-allreduce-ledger.json"],
-      "result": "matched profile supports unchanged Decode AllReduce count in the original HYPIC-only arm; HYPIC plus MatMulAllReduce canary passed and run1 completed 40/40",
-      "remaining": ["candidate performance runs 2 and 3", "three-run threshold decision", "optimization-iteration.json and exact resource release"]
+      "state": "completed-negative",
+      "evidence": ["profiles/profile-diagnostic.json", "candidate-matmul-allreduce/canary-gate.json", "candidate-matmul-allreduce/performance.run1.json", "candidate-matmul-allreduce/performance.run2.json", "candidate-matmul-allreduce/performance.run3.json", "candidate-matmul-allreduce/performance-comparison.json", "candidate-matmul-allreduce/service-stop.json", "optimization-iteration.json"],
+      "result": "matched profile supports unchanged Decode AllReduce count in original HYPIC-only arm; the separate HYPIC plus MatMulAllReduce candidate passed its canary and all three 40/40 measurements but missed the predeclared performance gates; exact container, NPU0-3 and port release verified",
+      "remaining": ["do not relabel the rejected fusion iteration as paper-only HYPIC gain"]
     },
     {
       "skill": "ascend-cannbot-profiler",
@@ -53,10 +53,10 @@
     },
     {
       "skill": "ascend-model-quality-evaluation",
-      "state": "separate-context-paired-ruler-prepared-not-run",
+      "state": "separate-context-paired-ruler-running-baseline-startup",
       "evidence": ["quality-context-41984/quality-context-contract.json", "quality_context_service.py", "quality_context_controller.py"],
-      "result": "historical complete LongBench maximum prompt 39642 plus 2048 cap requires 41690; independent 41984-context quality identity and paired six-run-per-arm controller are prepared without changing the original 40960-context performance denominator",
-      "remaining": ["wait for candidate resource release", "run and freeze six baseline and six treatment quality suites", "independent raw audit"]
+      "result": "historical complete LongBench maximum prompt 39642 plus 2048 cap requires 41690; independent 41984-context quality identity started at 17:56 UTC only after candidate release, without changing the original 40960-context performance denominator; physical worker PID-to-container proof is required at health",
+      "remaining": ["complete and freeze six baseline and six treatment quality suites", "classify accuracy, categories and length-limit rate", "independent raw audit and resource release"]
     },
     {
       "skill": "paper-to-ascend-reporting",

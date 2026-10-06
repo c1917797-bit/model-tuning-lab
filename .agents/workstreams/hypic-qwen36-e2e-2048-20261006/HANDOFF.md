@@ -1,5 +1,32 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Live checkpoint — 2026-10-06 17:57 UTC
+
+The candidate controller `exec-0000000000000590` ended with exit 0 and
+`released` at 17:53:54 UTC. Its three fixed-output 40/40 runs are hashed in
+`candidate-matmul-allreduce/performance-comparison.json`. The separate HYPIC
+plus MatMulAllReduce iteration is frozen as **rejected** in
+`optimization-iteration.json` (SHA256
+`d46eb3081612a89271aa4b9cf031179c4abd38147145ea627db9771035d5880a`):
+versus no-cache, median TTFT P95 improves 43.05%, but TPOT P95 6.42%,
+throughput 6.78%, and duration 6.35% miss their frozen gates. Versus original
+HYPIC-only, throughput improves only 0.53%. The original paper-only gate is
+unchanged and failed. The exact candidate container was absent, physical
+NPU0-3 had no processes, and port 8223 had no listener before quality launch;
+NPU4-7 were not touched.
+
+The **only active quality controller** is AWMCP operation
+`exec-000000000000064a`, started 17:56 UTC on the direct `chicaihong01/ma`
+peer. It entered `quality-arm-starting` for `no-cache`; poll this exact handle
+and `quality-context-41984/controller-status.json`. Do not start a duplicate.
+The baseline and treatment are serial on NPU0-3. Each start must capture
+`npu-smi` and `docker top` snapshots proving all four physical worker PIDs
+belong to its exact container; the controller and independent auditor both
+check the hashes and mapping. The helper was read-only smoke-tested against
+the live candidate workers before launch (commit `3c08fac`). The LongBench
+category auditor now recomputes difficulty and length accuracy from raw rows
+(commit `f6493ed`). The 2048 quality verdict is still **pending**, not passed.
+
 ## Live checkpoint — 2026-10-06 17:40 UTC
 
 The only candidate controller remains AWMCP operation
