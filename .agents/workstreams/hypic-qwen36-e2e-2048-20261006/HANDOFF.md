@@ -48,9 +48,20 @@ EXIT trap stops its owned container.
 
 The baseline contract was frozen at
 219e766d817442471b160598167bcca71191a62399706cf96558921beb147621
-for physical NPU0-3 and the 2048-token quality ruler. As of 2026-10-06
-12:11 UTC the baseline real-weight Canary was running. The current phase is
-authoritative only when read from controller-status.json.
+for physical NPU0-3 and the 2048-token quality ruler. At 2026-10-06
+12:21 UTC both real-weight Canaries passed. They used identical 32,768-token
+prompt hashes and returned the same full response with answer ZEBRA-41729.
+The canary-gate.json SHA256 is
+e539f53b309fd3ec691877d85c5ca13472d140e1579cbe142670c167721850f3.
+The disabled-control event file is empty (SHA256
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855);
+the enabled event file SHA256 is
+2c350a2c58e5f5d6fc87250fcd7e2d81e90f5e100eca4b85da3fbe75569a2bca.
+The enabled Canary emitted plugin activation in seven service processes and
+an independent segment reuse event. Raw event files are under the artifact
+root as no-cache/canary.hypic-evidence.jsonl and
+hypic-only/canary.hypic-evidence.jsonl. The current phase is authoritative
+only when read from controller-status.json.
 
 An initial controller operation, exec-0000000000000263, was stopped before
 service readiness after an escaped E2E_GATES variable entered the historical
