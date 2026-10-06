@@ -29,7 +29,10 @@ QUALITY=$RECORDS/hypic_quality_eval.py
 ANALYZER=$RECORDS/summarize_hypic_historical_reproduction.py
 CANARY=$RECORDS/hypic_semantic_canary.py
 E2E_RECORDS=$WORKTREE/.agents/workstreams/hypic-qwen36-e2e-2048-20261006
-E2E_GATES=\${HYPIC_E2E_GATES:-0}
+E2E_GATES=0
+if [[ -v HYPIC_E2E_GATES ]]; then
+  E2E_GATES=$HYPIC_E2E_GATES
+fi
 REFERENCE=$RECORDS/hypic-previous-practice-reference.json
 STATUS_FILE=$OUTPUT_ROOT/controller-status.json
 CURRENT_CONTAINER=
