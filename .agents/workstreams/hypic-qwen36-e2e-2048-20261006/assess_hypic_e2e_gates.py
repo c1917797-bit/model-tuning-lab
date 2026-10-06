@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import statistics
 from pathlib import Path
 
@@ -16,6 +17,91 @@ def read(path: Path) -> dict:
 
 def write(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+
+
+def validate_performance_record(record: dict, arm: str, index: int) -> dict:
+    """Reject an incomplete or protocol-drifted raw run before reusing it."""
+    config = record.get("config", {})
+    expected_config = {
+        "base_url": "http://127.0.0.1:8223",
+        "model": "qwen36-hypic-e2e-2048",
+        "input_tokens": 32768,
+        "prefix_tokens": 16384,
+        "output_tokens": 1024,
+        "requests": 40,
+        "concurrency": 16,
+        "warmup_requests": 2,
+        "ignore_eos": True,
+        "segment_boundary_transport": "vllm_xargs.hypic_segment_ends",
+        "segment_ends": [16384, 32768],
+    }
+    for key, expected in expected_config.items():
+        if config.get(key) != expected:
+            raise ValueError(f"{arm} run{index}: protocol mismatch: {key}")
+
+    rows = record.get("results")
+    warmups = record.get("warmup_results")
+    if not isinstance(rows, list) or len(rows) != 40:
+        raise ValueError(f"{arm} run{index}: expected 40 raw request rows")
+    if not isinstance(warmups, list) or len(warmups) != 2:
+        raise ValueError(f"{arm} run{index}: expected two raw warmup rows")
+    if sorted(row.get("index") for row in rows) != list(range(40)):
+        raise ValueError(f"{arm} run{index}: request indexes are incomplete")
+    if sorted(row.get("index") for row in warmups) != [-2, -1]:
+        raise ValueError(f"{arm} run{index}: warmup indexes are incomplete")
+    for row, expected_tokens in [
+        *((row, 1024) for row in rows),
+        *((row, 1) for row in warmups),
+    ]:
+        digest = row.get("output_sha256")
+        if not (
+            row.get("ok") is True
+            and row.get("error") is None
+            and row.get("finish_reason") == "length"
+            and row.get("requested_output_tokens") == expected_tokens
+            and row.get("output_tokens") == expected_tokens
+            and isinstance(digest, str)
+            and len(digest) == 64
+            and all(char in "0123456789abcdef" for char in digest)
+            and isinstance(row.get("ttft_ms"), (int, float))
+            and math.isfinite(row["ttft_ms"])
+            and row["ttft_ms"] > 0
+            and isinstance(row.get("duration_s"), (int, float))
+            and math.isfinite(row["duration_s"])
+            and row["duration_s"] > 0
+        ):
+            raise ValueError(f"{arm} run{index}: invalid raw request or warmup")
+
+    summary = record.get("summary", {})
+    expected_summary = {
+        "requests": 40,
+        "successful": 40,
+        "failed": 0,
+        "expected_output_tokens": 40960,
+        "output_tokens": 40960,
+        "fixed_output_requests": 40,
+        "fixed_output_verified": True,
+        "finish_reasons": {"length": 40},
+        "measured_concurrency": 16,
+        "measured_waves": 3,
+        "output_token_completion_ratio": 1.0,
+    }
+    for key, expected in expected_summary.items():
+        if summary.get(key) != expected:
+            raise ValueError(f"{arm} run{index}: summary mismatch: {key}")
+    for key in (
+        "ttft_p95_ms", "tpot_p95_ms", "output_tokens_per_second",
+        "benchmark_duration_s",
+    ):
+        value = summary.get(key)
+        if not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+            raise ValueError(f"{arm} run{index}: invalid metric: {key}")
+    throughput = 40960 / summary["benchmark_duration_s"]
+    if not math.isclose(summary["output_tokens_per_second"], throughput, rel_tol=1e-6):
+        raise ValueError(f"{arm} run{index}: throughput does not match duration")
+    if arm == "hypic-only" and index == 1 and summary.get("hot_path_verified") is not True:
+        raise ValueError("HYPIC treatment run1: hot path not verified")
+    return summary
 
 
 def assess_canary(root: Path) -> bool:
@@ -77,13 +163,7 @@ def assess_performance(root: Path) -> bool:
         for index in (1, 2, 3):
             path = root / arm / f"performance.run{index}.json"
             record = read(path)
-            summary = record["summary"]
-            if not (
-                summary.get("successful") == 40
-                and summary.get("failed") == 0
-                and summary.get("fixed_output_verified") is True
-            ):
-                raise ValueError(f"incomplete performance run: {path}")
+            summary = validate_performance_record(record, arm, index)
             summaries[arm].append(summary)
             hashes[arm].append(hashlib.sha256(path.read_bytes()).hexdigest())
     evaluated = {}
@@ -123,9 +203,20 @@ def assess_performance(root: Path) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("gate", choices=("canary", "performance"))
-    parser.add_argument("--root", type=Path, required=True)
+    parser.add_argument("gate", choices=("canary", "performance", "validate-performance"))
+    parser.add_argument("--root", type=Path)
+    parser.add_argument("--path", type=Path)
+    parser.add_argument("--arm", choices=("no-cache", "hypic-only"))
+    parser.add_argument("--run-index", type=int)
     args = parser.parse_args()
+    if args.gate == "validate-performance":
+        if args.path is None or args.arm is None or args.run_index not in (1, 2, 3):
+            parser.error("validate-performance requires --path, --arm, and --run-index 1-3")
+        validate_performance_record(read(args.path), args.arm, args.run_index)
+        print(f"verified {args.arm} run{args.run_index}: {args.path}")
+        return 0
+    if args.root is None:
+        parser.error(f"{args.gate} requires --root")
     if args.gate == "canary":
         passed = assess_canary(args.root)
     else:

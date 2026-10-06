@@ -396,6 +396,11 @@ stop_arm() {
 
 verify_performance_run() {
   local path=$1 arm=$2 run_index=$3
+  if [[ "$E2E_GATES" == 1 ]]; then
+    python3 "$E2E_RECORDS/assess_hypic_e2e_gates.py" validate-performance \
+      --path "$path" --arm "$arm" --run-index "$run_index"
+    return
+  fi
   python3 - "$path" "$arm" "$run_index" <<'PY'
 import json
 import sys
