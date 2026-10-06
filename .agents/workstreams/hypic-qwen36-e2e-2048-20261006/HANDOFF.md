@@ -137,6 +137,26 @@ evidence (`audit-regression-formal-1024.json` in this experiment's artifact
 root); the incomplete 2026-09-05 corpus correctly failed. These regression
 runs do not replace this experiment's pending 2048-token audit.
 
+2048-token quality preflight found a context-capacity blocker before starting
+quality traffic. The completed historical formal suite used the same dataset
+SHA256 `cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a`
+and evaluator SHA256 `9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0`.
+Its LongBench-v2 sample index 48 (`6719b96abb02136c067d4358`) used 39,642
+prompt tokens. Requested 2,048 output tokens would total 41,690, exceeding
+this experiment's `--max-model-len 40960` by 730. The pinned vLLM source
+`vllm/renderers/params.py` validates `max_input_tokens=max_total_tokens-
+max_output_tokens` and rejects overlength prompts before the later
+`get_max_tokens()` clamp in the chat serving path. This is a source-backed
+preflight warning based on historical tokenization, not yet a current-run
+HTTP observation. Do not truncate/skip the sample or silently lower its output
+cap while claiming the full 2048-token ruler. If the three-run performance
+gate passes, the next quality service must provide at least 41,690 context
+tokens and use a newly frozen, paired baseline/treatment environment identity;
+the existing 40,960 performance baseline cannot be represented as matching
+that changed service configuration. If the performance gate fails, preserve
+its terminal evidence before selecting a new measured candidate and quality
+environment. Keep the active controller untouched while performance runs.
+
 Git checkpoint `949fa6a` is local only: one attempted HTTPS push failed with
 `could not read Username for 'https://github.com'`. The branch was one commit
 ahead of origin and no credential helper or SSH agent was available. Do not
