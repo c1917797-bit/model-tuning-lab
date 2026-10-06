@@ -63,6 +63,7 @@ For performance work, also use:
 
 - `ascend-npu-environment-orientation`
 - `ascend-inference-tuning-loop`
+- `ascend-performance-optimization`
 - `ascend-benchmark-evidence`
 
 For accuracy, semantic-quality, deterministic-canary, or lossless claims, also
@@ -114,9 +115,10 @@ make the experiment reproducible and evidence-bound.
 10. Freeze baseline conditions before implementation: model/tokenizer identity,
    dtype or quantization, workload, parallelism, container/runtime versions,
    CANN/driver/firmware, physical NPU IDs, port, and launch command.
-11. Measure baseline first. Only then use `ascend-canary-implementation` for the
-   smallest one-variable candidate, followed by correctness and target-device
-   checks before any full benchmark.
+11. Measure baseline first. Use `ascend-performance-optimization` to convert
+    the evidenced bottleneck into one bounded treatment. Only then use
+    `ascend-canary-implementation` for the smallest one-variable candidate,
+    followed by correctness and target-device checks before any full benchmark.
 12. At every gate, separate algorithm evidence from backend evidence. A layout,
     alignment, scheduler, precision, or state-lifecycle failure invalidates
     that executed path; it is not evidence that the mathematical method is

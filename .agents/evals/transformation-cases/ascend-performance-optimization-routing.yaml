@@ -1,0 +1,27 @@
+schema: mst-transformation-case/v1
+id: ascend-performance-optimization-routing
+source: maintainer skill-gap review after runtime monkeypatch delivery integration
+scenario:
+  measured_evidence:
+    - decode shows a bounded communication and launch gap
+    - the active workload may use Dense, MoE, or MTP paths
+    - benchmark and profiler skills can measure and attribute but do not own treatment selection
+  requested_target:
+    - choose and implement one credible optimization
+    - preserve correctness quality and rollback
+    - avoid assuming Dense or MTP-off
+expected_behavior:
+  - prove the live model path and permitted feature set
+  - classify the bottleneck before choosing a treatment
+  - reject candidates whose optimistic opportunity bound cannot reach the milestone
+  - prefer official configuration then removable monkeypatch before broader source or native changes
+  - route the smallest treatment through canary performance and quality gates
+  - keep component evidence separate from service acceptance
+lessons_ingested:
+  - profiling measurement and tuning-loop governance do not replace optimization strategy
+  - Dense MoE MTP and speculative paths require separate source maps and baselines
+  - candidate selection needs an explicit causal chain opportunity bound and disproof signal
+  - accepted implementation requires performance quality lifecycle and rollback evidence
+validation_commands:
+  - ./scripts/validate-mst.sh
+  - git diff --check
