@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import statistics
 import subprocess
 import sys
@@ -84,6 +85,28 @@ def inspect_quality_decision(quality_root: Path, errors: list[str]) -> str | Non
             }
             for arm in ARMS
         }
+        for arm in ARMS:
+            for index in (1, 2, 3):
+                path = quality_root / "quality" / arm / f"longbenchv2.run{index}.jsonl"
+                raw = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
+                       if line]
+                if len(raw) != 127:
+                    errors.append(f"{arm}/LongBench/run{index}: category source row count mismatch")
+                summary = summaries[arm]["longbenchv2"][index - 1]
+                for field in ("difficulty", "length"):
+                    groups: dict[str, list[dict]] = {}
+                    for row in raw:
+                        groups.setdefault(str(row.get(field)), []).append(row)
+                    recomputed = {
+                        category: 100 * sum(row.get("correct") is True for row in members) / len(members)
+                        for category, members in groups.items()
+                    }
+                    observed = summary["category_accuracy_pct"][field]
+                    if (set(observed) != set(recomputed)
+                            or any(not math.isclose(observed[category], score,
+                                                    rel_tol=1e-9, abs_tol=1e-9)
+                                   for category, score in recomputed.items())):
+                        errors.append(f"{arm}/LongBench/run{index}: {field} category accuracy differs from raw rows")
         signals: list[tuple[str, str]] = []
 
         def classify(scope: str, baseline: list[float], treatment: list[float],
@@ -263,6 +286,8 @@ def main() -> int:
                         baseline.get("index") != treatment.get("index")
                         or baseline.get("sample_id") != treatment.get("sample_id")
                         or baseline.get("reference") != treatment.get("reference")
+                        or baseline.get("difficulty") != treatment.get("difficulty")
+                        or baseline.get("length") != treatment.get("length")
                         or (baseline.get("usage") or {}).get("prompt_tokens")
                         != (treatment.get("usage") or {}).get("prompt_tokens")
                     ):
