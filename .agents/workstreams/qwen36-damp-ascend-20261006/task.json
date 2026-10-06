@@ -1,0 +1,46 @@
+{
+  "schema": "mst-workstream/v1",
+  "taskId": "qwen36-damp-ascend-20261006",
+  "objective": "Equation-derived, training-free DAMP packed recurrent-state migration to Qwen3.6-27B Ascend; correctness-first plugin delivery and matched fixed-1024 E2E gate.",
+  "targetBranch": "main",
+  "workBranch": "work/qwen36-damp-ascend-20261006",
+  "remote": "origin",
+  "originalBase": "e63df715e045eb04eb73ba8bb391fabaff90fd48",
+  "createdAt": "2026-10-06T08:48:03Z",
+  "deadline": "2026-10-07T08:48:03Z",
+  "owner": "codex",
+  "dependencies": [
+    "arxiv:2608.27513v2",
+    "Qwen3.6-27B",
+    "vllm-ascend v0.23.0/CANN 9.1"
+  ],
+  "claims": [
+    {
+      "kind": "resource",
+      "mode": "exclusive",
+      "value": "physical NPU4-7 during owned DAMP runs only; NPU0-3 protected"
+    },
+    {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": "projects/damp-ascend/**"
+    },
+    {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": ".agents/workstreams/qwen36-damp-ascend-20261006/**"
+    },
+    {
+      "kind": "file",
+      "mode": "exclusive",
+      "value": ".agents/experiments/exp-20261006-qwen36-damp.yaml"
+    }
+  ],
+  "validationCommands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check",
+    "same-image focused tests and declared real-NPU gates"
+  ],
+  "executionState": "planned",
+  "integrationState": "not-ready"
+}
