@@ -76,13 +76,16 @@ controller or service**. It began at 16:46 UTC and first checks the same
 real-weight canary,
 validates three fixed-output performance repetitions against both original
 arms, writes separate candidate artifacts, and stops only this exact
-container in a finally block. If the run fails, preserve logs/artifacts and
+container in a finally block. At 16:47:31 UTC its canary passed: the response
+SHA256 `0fa5e875f58b181ddb6ac6890d15b5e4b6c1b29c58f6d8034e981b988f8d0498`
+matches both original arms, and performance run 1 is active. If the run fails,
+preserve logs/artifacts and
 check whether automatic cleanup passed. If cleanup fails, run
 `matmul_allreduce_service.py stop` after confirming identity. Do not touch
 NPU4-7.
 
-Local branch is ten commits ahead of origin and now has uncommitted profiler
-scripts and candidate scripts. Host HTTPS Git credentials remain unavailable;
+Profiler, candidate, and handoff code was committed locally as `f4c4173`.
+The branch is eleven commits ahead of origin. Host HTTPS Git credentials remain unavailable;
 do not expose or embed a token. Goal deadline is 2026-10-07 11:39:37 UTC.
 
 ## Prior state — 2026-10-06 14:59 UTC
