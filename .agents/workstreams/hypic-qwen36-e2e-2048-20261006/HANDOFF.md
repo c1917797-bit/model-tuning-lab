@@ -107,6 +107,16 @@ container on the same physical NPU0-3 lane. At 13:40 UTC Docker reported the
 expected image, CPU set 112-191, and `/dev/davinci0`–`3` mappings; NPU workers
 had not yet appeared, so service readiness remained unproven at that instant.
 
+At 2026-10-06 14:06 UTC, HYPIC treatment performance run1 completed and the
+request-level validator accepted all 40 measured 1024-token outputs, both
+warmups, exact protocol, and worker hot-path evidence. The raw JSON SHA256 is
+`942dc0acf3c83787bc70394c98cd607deb0213412083c798e7bd2f1aafdbb678`.
+Run1 TTFT P95 was 51,456.74 ms; TPOT P95 420.43 ms; output throughput
+31.42 token/s; duration 1,303.60 s. This is only one treatment repetition;
+the pre-registered performance gate uses medians of all three treatment and
+baseline runs, so no pass/fail conclusion is yet valid. The same controller
+continued into treatment run2 without restarting the service.
+
 Git checkpoint `949fa6a` is local only: one attempted HTTPS push failed with
 `could not read Username for 'https://github.com'`. The branch was one commit
 ahead of origin and no credential helper or SSH agent was available. Do not
