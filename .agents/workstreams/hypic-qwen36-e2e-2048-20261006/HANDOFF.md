@@ -1,5 +1,22 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Live checkpoint — 2026-10-06 18:45 UTC
+
+AWMCP operation `exec-000000000000064a` is still running on the direct
+`chicaihong01/ma` peer. The controller remains on the `no-cache` LongBench-v2
+run 1; do not duplicate or restart it. Its current durable checkpoint is
+60/127 successful responses, not a final accuracy result. A direct raw JSONL
+check found 60 unique sample indexes, no failed rows, valid response SHA256
+values, and every completion at or below 2,048 tokens with total prompt plus
+completion at or below 41,984. The historically longest prompt, sample index
+48, completed successfully with 39,642 prompt tokens and 944 completion
+tokens, `finish_reason=stop`, and a valid response hash. This verifies that
+the new paired quality context can serve that long input without truncation.
+The exact baseline container remained running and actively generated tokens;
+the quality verdict, all remaining repeats, treatment, and final independent
+audit are still pending. The controller has a 2026-10-07 11:24:37 UTC safety
+deadline ahead of the goal deadline; preserve partial JSONL on any failure.
+
 ## Live checkpoint — 2026-10-06 17:57 UTC
 
 The candidate controller `exec-0000000000000590` ended with exit 0 and
