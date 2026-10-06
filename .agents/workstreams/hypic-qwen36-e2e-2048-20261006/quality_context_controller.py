@@ -30,6 +30,12 @@ MODEL_DIR = Path("/cache/efim/Qwen3.6-27B")
 MODEL_NAME = "qwen36-hypic-e2e-2048"
 BASE_URL = "http://127.0.0.1:8223"
 DEADLINE = datetime.fromisoformat("2026-10-07T11:24:37+00:00")
+QUALITY_DECISION_RULE = (
+    "Pass only with nonnegative three-run mean accuracy deltas for both datasets, "
+    "nonnegative LongBench difficulty/length category deltas, and no increase "
+    "in length-limit finish rate. A negative signal beyond the matching baseline "
+    "three-run range is regression; one within that range is inconclusive."
+)
 
 
 def read(path: Path) -> dict:
@@ -251,6 +257,7 @@ def audit(parent: dict, quality_contract: dict) -> dict:
         rows[arm] = {}
         for dataset in DATASETS:
             rows[arm][dataset] = [validate_one(arm, dataset, index, parent) for index in (1, 2, 3)]
+    paired_counts = {dataset: {"wins": 0, "losses": 0, "unchanged": 0} for dataset in DATASETS}
     for dataset in DATASETS:
         for index in (1, 2, 3):
             paths = [QROOT / "quality" / arm / f"{dataset}.run{index}.jsonl"
@@ -264,11 +271,18 @@ def audit(parent: dict, quality_contract: dict) -> dict:
                         or (baseline.get("usage") or {}).get("prompt_tokens")
                         != (treatment.get("usage") or {}).get("prompt_tokens")):
                     raise ValueError(f"{dataset}/run{index}: cross-arm sample/protocol drift")
+                outcome = ("wins" if treatment["correct"] and not baseline["correct"]
+                           else "losses" if baseline["correct"] and not treatment["correct"]
+                           else "unchanged")
+                paired_counts[dataset][outcome] += 1
     accuracy = {
         arm: {
             dataset: {
                 "run_accuracy_pct": [row["accuracy_pct"] for row in rows[arm][dataset]],
                 "mean_accuracy_pct": statistics.mean(row["accuracy_pct"] for row in rows[arm][dataset]),
+                "run_range_pct": (max(row["accuracy_pct"] for row in rows[arm][dataset])
+                                  - min(row["accuracy_pct"] for row in rows[arm][dataset])),
+                "run_stdev_pct": statistics.stdev(row["accuracy_pct"] for row in rows[arm][dataset]),
             }
             for dataset in DATASETS
         }
@@ -279,6 +293,49 @@ def audit(parent: dict, quality_contract: dict) -> dict:
         - accuracy["no-cache"][dataset]["mean_accuracy_pct"]
         for dataset in DATASETS
     }
+    signals = []
+
+    def check_signal(scope: str, baseline_values: list[float], candidate_values: list[float],
+                     lower_is_worse: bool = True) -> None:
+        baseline_mean = statistics.mean(baseline_values)
+        candidate_mean = statistics.mean(candidate_values)
+        directional_delta = ((candidate_mean - baseline_mean) if lower_is_worse
+                             else (baseline_mean - candidate_mean))
+        baseline_range = max(baseline_values) - min(baseline_values)
+        if directional_delta < 0:
+            signals.append({
+                "scope": scope,
+                "directional_delta_pct": directional_delta,
+                "baseline_run_range_pct": baseline_range,
+                "classification": ("regression" if -directional_delta > baseline_range
+                                   else "inconclusive"),
+            })
+
+    for dataset in DATASETS:
+        baseline = rows["no-cache"][dataset]
+        candidate = rows["hypic-only"][dataset]
+        check_signal(f"{dataset}:accuracy", [row["accuracy_pct"] for row in baseline],
+                     [row["accuracy_pct"] for row in candidate])
+        expected = DATASETS[dataset][1]
+        check_signal(f"{dataset}:length-limit-rate",
+                     [100 * row["finish_reasons"].get("length", 0) / expected for row in baseline],
+                     [100 * row["finish_reasons"].get("length", 0) / expected for row in candidate],
+                     lower_is_worse=False)
+    for field in ("difficulty", "length"):
+        baseline_keys = set(rows["no-cache"]["longbenchv2"][0]["category_accuracy_pct"][field])
+        for arm in ("no-cache", "hypic-only"):
+            for row in rows[arm]["longbenchv2"]:
+                if set(row["category_accuracy_pct"][field]) != baseline_keys:
+                    raise ValueError(f"LongBench {field} category keys drift")
+        for value in sorted(baseline_keys):
+            check_signal(f"longbenchv2:{field}:{value}",
+                         [row["category_accuracy_pct"][field][value]
+                          for row in rows["no-cache"]["longbenchv2"]],
+                         [row["category_accuracy_pct"][field][value]
+                          for row in rows["hypic-only"]["longbenchv2"]])
+    quality_classification = ("regression" if any(signal["classification"] == "regression"
+                                              for signal in signals)
+                              else "inconclusive" if signals else "pass")
     report = {
         "schema": "hypic-paired-2048-quality-context-audit/v1",
         "quality_evidence_complete": True,
@@ -287,6 +344,10 @@ def audit(parent: dict, quality_contract: dict) -> dict:
         "accuracy": accuracy,
         "delta_percentage_points": delta,
         "no_negative_accuracy_delta_observed": all(value >= 0 for value in delta.values()),
+        "quality_decision_rule": QUALITY_DECISION_RULE,
+        "quality_classification": quality_classification,
+        "negative_or_uncertain_signals": signals,
+        "paired_sample_counts": paired_counts,
         "baseline_registry_sha256": sha256(QROOT / "no-cache-quality-registry.json"),
         "treatment_registry_sha256": sha256(QROOT / "hypic-only-quality-registry.json"),
     }

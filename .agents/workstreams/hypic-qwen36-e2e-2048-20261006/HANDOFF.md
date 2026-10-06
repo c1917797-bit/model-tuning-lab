@@ -115,6 +115,16 @@ after each arm, including failure paths, with a 15-minute deadline margin.
 Quality preparation was committed locally as `5baaae8` and the exact
 unstarted-container cleanup repair as `a597f7c`.
 
+Before any 41984-context quality traffic, `quality_context_controller.py`
+predeclares a strict quality decision: the three-run mean accuracy must not
+decrease on either dataset or any LongBench difficulty/length category, and
+the length-limit finish rate must not increase. Every negative signal is
+reported with the matching baseline three-run range. A signal larger than
+that range is a regression; a smaller signal is inconclusive, not a pass.
+Paired wins/losses and run-to-run standard deviations are reported as well.
+This quality classification is independent of the already-failed paper-only
+performance gate and must not be used to override it.
+
 Do not start this controller until `exec-0000000000000590` is terminal and
 its candidate container has been removed with NPU0-3 and port 8223 free.
 Then run exactly once from this worktree:
