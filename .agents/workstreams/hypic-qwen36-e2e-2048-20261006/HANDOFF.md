@@ -124,6 +124,8 @@ that range is a regression; a smaller signal is inconclusive, not a pass.
 Paired wins/losses and run-to-run standard deviations are reported as well.
 This quality classification is independent of the already-failed paper-only
 performance gate and must not be used to override it.
+The quality-service preflight also repaired a missing Docker image/command
+suffix in the unrun `docker create` path; syntax, CLI, and diff checks passed.
 
 Do not start this controller until `exec-0000000000000590` is terminal and
 its candidate container has been removed with NPU0-3 and port 8223 free.

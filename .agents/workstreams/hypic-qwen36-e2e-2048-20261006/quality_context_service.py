@@ -138,6 +138,7 @@ def start(arm: str) -> None:
             args += ["-v", bind]
         for key, value in sorted(env.items()):
             args += ["-e", f"{key}={value}"]
+        args += [IMAGE, *command]
         run(*args)
     item = inspect(name)
     if item is None:
