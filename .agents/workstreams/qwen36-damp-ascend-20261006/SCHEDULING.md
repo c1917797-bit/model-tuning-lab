@@ -8,6 +8,45 @@ claim of uninterrupted 24/7 hardware occupation.
 
 - Main agent owns the NPU4-7 execution pool, output paths, shared Git edits and
   checkpoint publication. TP4 paired performance runs never overlap other loads.
+- Correctness scheduling is not a blanket four-card lock: MAIN may run ready,
+  independent single-card numerical packets concurrently on disjoint physical
+  cards4-7, with separate nonprivileged containers, source-bound outputs and
+  aggregate ordinary-RAM/CPU/I/O admission. No preparer starts a device job.
+  TP4 model correctness/calibration and ALL measured E2E/profiling jobs retain
+  exclusive4-7 ownership. Overlapped numerical runs cannot supply performance
+  numbers, including kernel timing or latency.
+- Use no-device containers for compile/Meta/source preflight. Maintain ready
+  successor packets while a gate runs; after terminal exit inspect/retain/release
+  its exact container and dispatch the next admitted packet without waiting for
+  a report-writing checkpoint. Idle cards are reported with a concrete missing
+  packet/resource gate, not described as fully utilized. Never add dummy loads.
+- At the user's2026-10-06 utilization correction, the completed DAMP restricted
+  graph job had exited and a fresh snapshot found no compute PIDs on4-7. MAIN
+  prioritized arena-wrapper-v2 no-device build plus split KVBuffer P1 B1/B16
+  correctness preparation on physical5/6; DAMP shared-arena validation uses4
+  when its new wrapper and gate are actually ready. These are assigned targets,
+  NOT launch or device-pass receipts. Card7 remains unassigned until a useful
+  source-reviewed packet is ready. Preserve the full-model64GiB host admission;
+  an idle NPU is not permission to reclaim external RAM or HugeTLB.
+- Fresh MA0447 subsequently observed ordinary available RAM86736711680B and
+  no4-7 compute. MAIN dispatched the prepared ON-only full-TRAIN recovery,
+  MA0455, on all4-7 at14:59Z; source/import admission precedes model compute.
+  This newly unblocked critical-path collection takes precedence over small
+  single-card gates. Existing OFF36 is reused, not recaptured. Queued split
+  correctness targets remain KVBuffer B1/B16 on5/6 and DAMP shared arena B1/B16
+  on4/7, but none may overlap live TP4. The all-T1..16 wrapper and corresponding
+  numerical matrix are prepared independently to remove the proven T2-15 ABI
+  gap before C16 serving; source/geometry tests do not admit an untested kernel.
+- Ready-before-resource actual checks at15:18Z: arena-v2 and all-batch-v3
+  compiled/loaded/Meta without devices; shared/allT software and actual receipt
+  admission passed. MAIN full allT runner Meta MA04a0 passed32 positive and46
+  negative checks without devices, report13182482...ccd0, before
+  scarce-card launch. Ready-for-source/Meta is not ready-for-device: exact
+  native bindings, parent commands, new roots and fresh physical/aggregate RAM
+  checks are still required. Active TP4 has real four-worker trajectory capture,
+  not100% AICore utilization. After release use either disjoint shared4/7+KVB5/6
+  gates OR allT4-7 shards, never both on the same cards. Prefer the smallest
+  useful gate that unlocks calibrated DAMP service, not redundant occupancy.
 - Parallel preparation lane A: current DAMP equations/packing and GQA mapping.
 - Parallel preparation lane B: DAMP calibration train data/provenance and bounded
   live capture, no benchmark evaluation leakage.

@@ -59,6 +59,44 @@ active in the final tree merged to `main`.
 Never relabel an inconclusive run as a regression or improvement. Select the
 next loop from evidence, not from an unrecorded intuition.
 
+## Ready-before-resource execution rule
+
+Maintainer instruction2026-10-06: prepare the next algorithm migration while
+resources are unavailable or the current experiment runs; dispatch a complete
+source-reviewed validation matrix promptly after admission, not a placeholder
+load. This rule does not guarantee the first real-device attempt will pass.
+
+- Keep a ranked ready queue. Each packet names the algorithm-specific seam,
+  immutable dependencies, independent oracle, full numerical/slot/graph matrix,
+  matched E2E and task gates, exact commands, new output roots and failure policy.
+- Complete all safe device-independent checks first: syntax/import, software
+  contracts, no-device compile, defined export/dlopen/schema/Meta, actual receipt
+  format compatibility, CLI argument paths and source pins. Do not discover a
+  known missing schema field, smoke-only plan admission or batch restriction
+  for the first time after reserving scarce cards. Unrun prerequisites remain
+  explicitly pending, never fabricated to mark a packet ready.
+- MAIN alone admits and launches device jobs. Prove fresh physical mapping,
+  actual process/HBM usage, aggregate host-RAM/disk/cgroup limits and source
+  identities. Device declarations do not prove occupation; idle accelerators
+  do not authorize lowering resource gates or reclaiming protected workloads.
+- Independent correctness-only jobs may use disjoint authorized cards in
+  parallel when project safety contracts allow; all TP4 model/calibration and
+  formal performance/profiling measurements remain exclusive. Never publish
+  timing collected with overlapping experiments as a comparable speedup.
+- Parallel agents prepare the next gates/adapters during a running job, with
+  frozen live sources and distinct edit scopes. Observe terminal exit, retain
+  evidence/release only owned resources, then dispatch the admitted successor
+  without waiting for report prose. Preserve proven OFF/calibration artifacts
+  when only a missing arm is needed; never repeat expensive valid work blindly.
+- A real-device failure retains the first raw-before/exception/nullable-after
+  and has a scoped implementation diagnosis. No unchanged deterministic retry,
+  relaxed threshold, fake padded batch, dummy utilization or paper-wide no-go
+  from source/CPU-only evidence. Report idle time with its concrete blocker.
+- Review throughput of evidence, not card occupancy alone: track admission and
+  terminal times, real per-card compute ownership, ready-queue gaps and the next
+  bottleneck toward E2E acceptance. Update short goals against medium/long goals
+  and the fixed per-paper/portfolio deadline after every stage.
+
 ## Git and Artifact Rules
 
 - Commit small configuration, code, summaries, commands, and checksums.

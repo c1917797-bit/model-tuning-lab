@@ -3,6 +3,106 @@
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
+## Latest actual execution / preparation — 2026-10-06 15:18Z
+
+MA0455 is the NEW source-bound ON-only full-TRAIN recovery, freshly RUNNING:
+poll exec-0000000000000455 on chicaihong01/ma, never restart/duplicate it.
+Container qwen36_damp_full_reference_resume_20261006_v1, ID
+b6e2a1510fb809d0913ee214d28cf0df238930eadd1e39189eba54b0d2f9e1f1.
+Actual inspection proves nonprivileged physical4/5/6/7 -> logical0/1/2/3 only,
+immutable original image, repo/model/driver read-only. Actual model load and
+capture have started, superseding the older import-only snapshot. Fresh MA049f
+maps only owned workers2796882/2796883/2796884/2796885 to physical4/5/6/7;
+HBM26423-26428MiB and instantaneous AICore5-6%, not100% utilization. Each rank
+has1152 anchors,1152 fit-RMS snapshots and960 future events, with2876-2889
+completed turns. First4 TRAIN requests are live; completed client rows remain0.
+This is actual native calibration collection, NOT candidate service/timing/quality.
+
+Audit root: /cache/cch/qwen36-damp-20261006/full-reference-resume-v1-launch.
+ON output: /cache/cch/qwen36-damp-20261006/full-reference-resume-v1-on.
+Original complete OFF36 x4096 is reused byte/source-locked; original failed
+launcher/container stay unchanged. Fresh admission MA0447 had86,736,711,680B
+ordinary available RAM, above unchanged64GiB. Subsequent MA049f has53,762,668KiB
+available: external HYPIC restarted on protected0-3 by itself. MAIN never stopped
+it;0-3 remain out of scope. Retain8GiB runtime reserve, source28 freeze, original
+24h deadline and bounded capture timeout. No HugeTLB reclaim, automatic retry,
+premature source lock or competing NPU job during live TP4.
+
+NO-device prerequisites now completed (none proves numerical/serving success):
+- Arena wrapper-v2 build MA0439 and actual load/schema/Meta MA0470 terminal0.
+  SO1c5d433c0a4a13aa5cb4ebacb247c4b7799258e7b5a0f2eea721a3da34083632;
+  original receiptc1713f3edec99510b0007a79b770d90f26ad2acff204ce7dc1222edf9f073165;
+  Meta reportaaf8fcf9dc7e76c77732cd612e438fe9e0f60d33709866821923320dc25eda2b.
+  The original receipt lacked nested CANN identity. MA0470 observed real OPP
+  version bytes, command logs and export audit, then generated a separate,
+  provenance-bound compatibility projection, leaving original bytes unchanged.
+  Use /cache/cch/qwen36-damp-20261006/arena-wrapper-v2-meta-v1/compatibility-receipt-projection.json,
+  SHA2663d929fe1e50123454fdb9fc4edcfc193af882dd38c3f0fcee502c756f7cf2.
+  MAIN actual shared-gate admission MA047b passed9 compiled/18 runtime bindings
+  and8 stdlib tests, with no Torch import/NPU.
+- All-batch wrapper-v3 build MA0475 and actual load/schema/Meta MA0489 terminal0.
+  SOa802d2584f6342acd198406a94c4a4cb3dd0e9cd6cc360569e58f3f117ac0ade;
+  actual receipt a9c8a6824f3f0948d4395eabcc731a0b4e0da6a7f94d6053d3159cf008e23d36;
+  Meta report83faf6d19bbadf93217a8559ab85452107a0d0216dfb5ec22bdd3dfc8007502e,
+  32 positive/6 negative calls. This is real-T1..16 ABI admission, not a T2-15
+  numerical pass. Original fixed-B kernel/numerical helpers remain unchanged.
+- MAIN fully reviewed NEW all_batch_gate_v1 seven files. MA049f passed11 stdlib
+  tests and actual build/source receipt admission9 compiled/20 runtime sources.
+  Four disjoint physical shards cover actualT1-4/5-8/9-12/13-16,64 restricted
+  SR/layout cases; no fake token padding. Runtime manifestSHA
+  1755f39069b18b10aaabfb7ff341e6879ba741af3cbb72703b64ffe1070f38d5.
+  These source-only checks are NOT NPU, general-SR, final192 plans or service.
+  NEW no-device full runner Meta preflight MA04a0 is terminal0/retained:
+  actual32 positive/46 negative checks passed, reportSHA
+  131824824ae447f6c26bb53abf49c01a418f08bd30738c2d24f7c55a5cd0ccd0,
+  at /cache/cch/qwen36-damp-20261006/all-batch-gate-v1-preflight-v1/report.json.
+  This tests the exact runner admission before scarce-device launch; no NPU.
+- NEW KVBuffer split5/6 and DAMP shared arena4/7 packets are prepared/queued,
+  not launched; all-T correctness is an alternative exclusive queue, not an
+  additional simultaneous all-card load. MAIN must still finish actual parent
+  launch commands, native binding and fresh physical/aggregate resource proof.
+- Parallel agents prepare calibrated192-plan admission/final-plan numerical
+  runner and the real all-T service receiver/allocator seams. Do not relabel
+  integration-smoke plans as calibrated serving plans. Source drafts and
+  no-device passes cannot make the service ready.
+
+The human's ready-before-resource rule is now in the maintained
+ascend-inference-tuning-loop/SKILL.md; MA047b validates20 skills and the focused
+three-file whitespace check. Recheck goals/deadlines at every terminal stage.
+The ready queue requires actual schema/receipt/CLI/import admission before cards;
+observe terminal exit and retain/release only owned resources before successor
+dispatch. Independent numerical shards may overlap on disjoint cards; TP4
+model/calibration and every formal timing/profiling run remain exclusive.
+No new E2E throughput/TTFT/TPOT or LongBench-v2/GSM8K result exists.
+The separate NEW service_all_batch_v2 draft was applied, not reviewed/admitted:
+mixed/continuation rejects and CPU prefill importer make it diagnostic-only,
+NOT ready for the formal C16 workload. Explicit real192/allT gates are pending.
+Local HEAD580b6e0 was one commit ahead at MA049f; earlier normal push failed
+GnuTLS-110/strict-TLS timeout. No successful new push is claimed. Unreviewed
+service/calibration draft directories remain excluded from checkpoint scope.
+
+Latest utilization correction supersedes the older graph-running status below:
+MA040d ended terminal0 at2026-10-06T14:43:22Z, restricted_graph_metadata_pass.
+Four B1/B16 x SR1/power2 cases each completed160 changing steps and8 reset/
+identical replays;40 invalid metadata cases also passed. Recorded state/output
+metrics0 and no failed guards; reportSHA
+58479dfa97ee667b96f428e764f9ace8f63ea8a6c169e37e1fcdbdc0efcfb00e.
+This is restricted independent-storage graph evidence, NOT shared-arena/cache/
+service/performance/task acceptance. Exact owned container is exited0/retained.
+Fresh MAIN snapshot then found4-7 no compute PIDs/AICore0, HBM2859-2864MiB;
+protected0-3 still host external HYPIC and must never be touched. Ordinary
+MemAvailable65012690944bytes is below the unchanged full-model64GiB admission.
+
+The human identified under-utilization. Read updated SCHEDULING.md: independent
+source-reviewed per-card numerical packets may overlap, but TP4 model runs and
+every formal timing/profiling run remain exclusive. MAIN owns all launches;
+preparers now ready split KVBuffer P1 B1/B16 physical5/6 and the new DAMP shared
+arena gate. MAIN reviews/builds arena-wrapper-v2 without devices. None of those
+new packets has launched/passed yet. Do not equate assigned cards with utilization.
+Local checkpoint580b6e0 exists; normal push failed GnuTLS-110 and a subsequent
+strict-TLS connectivity probe timed out before another push. One commit ahead,
+not pushed; do not disable TLS/force-push or repeat unchanged network failures.
+
 Latest14:28Z stage overrides older live-status paragraphs below:
 native full capture MA0161 is terminal FAILED/stopped/retained. Its off36/36
 x4096 outputs completed; ordinary-RAM64GiB admission blocked on before start.
