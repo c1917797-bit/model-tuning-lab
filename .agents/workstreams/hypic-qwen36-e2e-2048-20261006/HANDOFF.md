@@ -128,6 +128,15 @@ after all three treatment runs; profile the decode/service critical path
 before selecting the required measured optimization iteration. Do not change
 the registered A/B gate or claim impossibility from this one-run estimate.
 
+The final independent 18-unit auditor now recomputes both arms' raw response
+SHA256 values, validates per-sample completion-token limits and finish reasons,
+reconciles accuracy/token/reason totals, and rejects cross-arm quality protocol
+drift. Syntax and the 29-skill maintainer validation passed. It also passed a
+regression audit against the separate completed 2026-09-06 1024-token formal
+evidence (`audit-regression-formal-1024.json` in this experiment's artifact
+root); the incomplete 2026-09-05 corpus correctly failed. These regression
+runs do not replace this experiment's pending 2048-token audit.
+
 Git checkpoint `949fa6a` is local only: one attempted HTTPS push failed with
 `could not read Username for 'https://github.com'`. The branch was one commit
 ahead of origin and no credential helper or SSH agent was available. Do not

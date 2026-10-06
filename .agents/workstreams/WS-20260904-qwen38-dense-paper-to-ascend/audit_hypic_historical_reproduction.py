@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import tempfile
 from datetime import datetime, timezone
@@ -135,6 +136,12 @@ def audit_quality(
     checked: list[dict[str, Any]] = []
     data_hashes: set[str] = set()
     evaluator_hashes: set[str] = set()
+    baseline_protocols: dict[str, dict[str, Any]] = {}
+    protocol_fields = (
+        "model", "base_url", "concurrency", "temperature", "seed",
+        "ignore_eos", "enable_thinking", "prompt_template_sha256",
+        "scorer", "data_sha256", "evaluator_script_sha256",
+    )
     expected_summary_hashes = {
         item["path"]: item["sha256"]
         for arm in ARMS
@@ -150,6 +157,9 @@ def audit_quality(
                 try:
                     summary = load_object(summary_path)
                     required = {
+                        "schema": "hypic-quality-eval/v1",
+                        "dataset": dataset,
+                        "run_id": f"run{run}",
                         "requests": expected_count,
                         "successful": expected_count,
                         "failed": 0,
@@ -162,6 +172,15 @@ def audit_quality(
                             errors.append(
                                 f"{summary_path}: {key} != {expected!r}"
                             )
+                    if Path(summary.get("details_path", "")).resolve() != details_path:
+                        errors.append(f"{summary_path}: details path mismatch")
+                    if summary.get("concurrency") != 32 or summary.get("temperature") != 0 or summary.get("seed") != 0 or summary.get("enable_thinking") is not False:
+                        errors.append(f"{summary_path}: quality request protocol mismatch")
+                    protocol = {field: summary.get(field) for field in protocol_fields}
+                    if arm == "no-cache" and run == 1:
+                        baseline_protocols[dataset] = protocol
+                    elif dataset in baseline_protocols and protocol != baseline_protocols[dataset]:
+                        errors.append(f"{summary_path}: baseline/treatment protocol drift")
                     rows: list[dict[str, Any]] = []
                     with details_path.open("r", encoding="utf-8") as stream:
                         for line_number, line in enumerate(stream, 1):
@@ -189,11 +208,42 @@ def audit_quality(
                         for value in response_hashes
                     ):
                         errors.append(f"{details_path}: invalid response SHA256")
+                    invalid_raw = []
+                    for row in rows:
+                        response = row.get("response_text")
+                        usage = row.get("usage")
+                        tokens = usage.get("completion_tokens") if isinstance(usage, dict) else None
+                        if not (
+                            isinstance(response, str)
+                            and row.get("response_sha256")
+                            == hashlib.sha256(response.encode("utf-8")).hexdigest()
+                            and isinstance(tokens, int)
+                            and 0 <= tokens <= quality_max_out_len
+                            and isinstance(row.get("correct"), bool)
+                            and row.get("finish_reason") in ("stop", "length")
+                        ):
+                            invalid_raw.append(row.get("index"))
+                    if invalid_raw:
+                        errors.append(f"{details_path}: invalid raw response/usage at {invalid_raw[:5]}")
                     if len(set(response_hashes)) != expected_count:
                         errors.append(f"{details_path}: response SHA256 values not unique")
                     correct = sum(row.get("correct") is True for row in rows)
                     if summary.get("correct") != correct:
                         errors.append(f"{details_path}: correct count disagrees with summary")
+                    if all(isinstance(row.get("usage"), dict) and isinstance(row["usage"].get("completion_tokens"), int) for row in rows):
+                        completion_tokens = sum(row["usage"]["completion_tokens"] for row in rows)
+                        if summary.get("completion_tokens") != completion_tokens:
+                            errors.append(f"{summary_path}: completion token total disagrees with raw rows")
+                    accuracy = 100 * correct / expected_count
+                    reported_accuracy = summary.get("accuracy_pct")
+                    if not isinstance(reported_accuracy, (int, float)) or not math.isclose(reported_accuracy, accuracy, rel_tol=1e-9, abs_tol=1e-9):
+                        errors.append(f"{summary_path}: accuracy disagrees with raw rows")
+                    finish_reasons = {
+                        reason: sum(row.get("finish_reason") == reason for row in rows)
+                        for reason in sorted({str(row.get("finish_reason")) for row in rows})
+                    }
+                    if summary.get("finish_reasons") != finish_reasons:
+                        errors.append(f"{summary_path}: finish reasons disagree with raw rows")
                     details_hash = sha256(details_path)
                     if summary.get("details_sha256") != details_hash:
                         errors.append(f"{details_path}: details hash mismatch")
