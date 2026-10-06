@@ -1,0 +1,22 @@
+{
+  "schema": "damp_integer_certificate_runtime_sources_v1",
+  "base_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/quantizer/fast_integer_certificate/probe",
+  "sources": {
+    "CMakeLists.txt": "58c383ce1a8230b269f46225c5279535d9f9ebae253dad9500389035386fbb2d",
+    "op_kernel/probe_plan.h": "63f36e289fbe863d8f5c25352a86f78c9e3981b4ce4063818dedac34803cd542",
+    "op_kernel/certificate_probe.h": "c3f9bfa94c9b2e3391486eb70c5cb5a978446c05537caa7d33ec3a50b57a85e1",
+    "op_kernel/certificate_probe_kernel.asc": "642afb4291ca889bc4c340afbc77c2a79d224635da00e2425f7593b62ddf68b1",
+    "op_extension/ops.h": "b9707ffe882314ba2e947f1f1b7926e4e9dedb3bd84bdf5b2deb4871055fb3ae",
+    "op_extension/certificate_torch.cpp": "7f5ba4ceba9d02203abe37f129fbff37d96244d60028a1b4c215144064a36766",
+    "op_extension/register.cpp": "776ca8b7195f0d7202d8c402d91afaed205ddc03b634c79e6d167c3c41b25013",
+    "cases.py": "c2787a9ed02add1726c4157418c4b362799755542bca6eea0d91248f29595d9e",
+    "test_software_contract.py": "af8e6b7a5b39c4f4f31d15d2d5d3a9566e747f570dd4e30e07404ee02c74a5e5",
+    "run_certificate_gate.py": "7cbefd4b10b75c671b8b581e7bf4478c355a63ef7cfd44f5ea8f1759c8c052be",
+    "../integer_certificate_ascendc.h": "e96cbd0565cdb879016e1970753342151936e3d45bafd375530d1d27cfd7b9cb",
+    "../integer_certificate.py": "93a5b4f79285dd18db179b0ae83ca144ce0227332d6d2ce221613f453220f3d1",
+    "../test_integer_certificate.py": "4c4521a1e023795717f852c874666dcef0370842da12e1081dd03998ff34f8f9",
+    "../../exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169",
+    "../../test_exact_quantizer.py": "b1c9d10bf9e24e095fe048235693e426f5437be27a9e21b39503bd7825a50c3d",
+    "../../probe_fixtures.py": "a4ce599438c7d0e325e78f7d22f51fa1c4f1133d9904dfcd12b3a48696763bf0"
+  }
+}

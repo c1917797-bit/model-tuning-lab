@@ -1,0 +1,24 @@
+{
+  "schema": "damp_integer_certificate_software_execution_v1",
+  "source_manifest": "audit/runtime-source-manifest-v3.json",
+  "source_manifest_sha256": "8498f834d9b1713446f1bd1c723bb24892063e511ed974fe952d1971fa2487a3",
+  "record": {
+    "args": [
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/quantizer/fast_integer_certificate/probe/run_certificate_gate.py",
+      "--software-only"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "durationMs": 72831,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-0000000000000306",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"accepted_certificates\": 28244, \"asc_compiled\": false, \"cxx_compiled\": false, \"endpoint_lower_outside_domain\": 8190, \"endpoint_rows\": 387096, \"failure_save_simulations\": 3, \"fixture_rows\": 40316, \"gather_mask_compaction_implemented\": false, \"graph_supported\": false, \"host_boundary_source_contract\": true, \"lut_hashes\": [\"7c6e8dbfe3ea2a3dcaf62ab2ef14936d2d9252a36738eb6b78ba4b1d37c7c708\", \"2df58f09be50ce6051418c229acf641a37c9596f1826884ee02d7a02b1581a83\", \"c58fdd435e302b9209203dcbdd38b7e456bed8f0d425d9f7339ca5b46e3582c8\"], \"npu_executed\": false, \"production_enabled\": false, \"proposal_rows\": 221676, \"receipt_admission_negatives\": 13, \"status\": \"software_contract_pass\", \"unsafe_acceptances\": 0}\n",
+    "timedOut": false
+  }
+}

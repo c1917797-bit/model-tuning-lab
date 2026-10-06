@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: Apache-2.0
+#include "kernel_operator.h"
+#include "probe_plan.h"
+// Host pass sees only the launcher declaration and shared plain-C++ plan.
+// Same CANN9.1 public interface pattern: include device impl only when
+// __NPU_ARCH__ is defined. The frozen impl still rejects every non2201 arch.
+// v1 actual host-pass failure is preserved in integer-certificate-build-v1.
+extern "C" __global__ __vector__ void qwen36_damp_integer_certify_bits_kernel(
+    GM_ADDR x, GM_ADDR scale, GM_ADDR proposal, GM_ADDR c, GM_ADDR f,
+    GM_ADDR accepted, GM_ADDR lower, GM_ADDR upper, GM_ADDR lowerDomain,
+    GM_ADDR upperDomain, GM_ADDR code, GM_ADDR valid, GM_ADDR tilingGm);
+#if defined(__NPU_ARCH__)
+#include "certificate_probe.h"
+extern "C" __global__ __vector__ void qwen36_damp_integer_certify_bits_kernel(
+    GM_ADDR x, GM_ADDR scale, GM_ADDR proposal, GM_ADDR c, GM_ADDR f,
+    GM_ADDR accepted, GM_ADDR lower, GM_ADDR upper, GM_ADDR lowerDomain,
+    GM_ADDR upperDomain, GM_ADDR code, GM_ADDR valid, GM_ADDR tilingGm)
+{
+    KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_AIV_ONLY);
+    AscendC::TPipe pipe;
+    DampIntegerProbe::Kernel op;
+    op.Init(x,scale,proposal,c,f,accepted,lower,upper,lowerDomain,upperDomain,code,valid,
+        reinterpret_cast<const __gm__ DampIntegerProbe::Tiling*>(tilingGm),&pipe);
+    op.Process();
+}
+#endif

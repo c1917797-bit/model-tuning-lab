@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: Apache-2.0
+#include "certificate_probe.h"
+extern "C" __global__ __vector__ void qwen36_damp_integer_certify_bits_kernel(
+    GM_ADDR x, GM_ADDR scale, GM_ADDR proposal, GM_ADDR c, GM_ADDR f,
+    GM_ADDR accepted, GM_ADDR lower, GM_ADDR upper, GM_ADDR lowerDomain,
+    GM_ADDR upperDomain, GM_ADDR code, GM_ADDR valid, GM_ADDR tilingGm)
+{
+    KERNEL_TASK_TYPE_DEFAULT(KERNEL_TYPE_AIV_ONLY);
+    AscendC::TPipe pipe;
+    DampIntegerProbe::Kernel op;
+    op.Init(x,scale,proposal,c,f,accepted,lower,upper,lowerDomain,upperDomain,code,valid,
+        reinterpret_cast<const __gm__ DampIntegerProbe::Tiling*>(tilingGm),&pipe);
+    op.Process();
+}
+

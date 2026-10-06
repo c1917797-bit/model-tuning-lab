@@ -275,3 +275,40 @@ reviewed21-file KVBuffer preparation and production seam review plus these
 maintainer lessons; the evolving certificate/compaction drafts remain outside
 this specific commit. No raw tensors/datasets/binaries enter Git. It is not
 an accepted performance/quality milestone.
+
+## 13:09Z certificate actual load result and frozen source checkpoint
+
+Normal branch checkpoint 0c9db4557af2345c2c587a7b86c0aef771c7c8d4 was pushed
+and its exact remote ref verified MA0324. It contains the reviewed KVBuffer
+parallel preparation and scoped maintainer/production-review lessons, not an
+accepted serving result. No main/force push or reference runtime edits occurred.
+
+The previously running certificate no-device Meta MA031e now ended terminal0.
+Actual report status=pass, SHA
+d89c57e3430874707b8a8524ad951e327dfc3088fb0f3a92aff8223054b1eb05,
+at /cache/cch/qwen36-damp-20261006/integer-certificate-meta-v2/gate/report.json.
+It actually loaded build-v3 SO f21105e61577f938fb8e039d1481e912c22760061bcd38a11348af5ec4472619
+and observed both operator schemas, two positive Meta geometries and the
+source-bound runner's negative admissions. It explicitly has npu_executed=false,
+graph_supported=false and production_integrated=false. Compiled9/runtime16
+were unchanged before/after. Do not call this device correctness or performance.
+
+MAIN readback MA0330 verified all30 certificate source/document/audit files,
+parsed current Python sources, and observed native-off24/36 rows; native-on
+has not started. MA0161 still runs. Only this reviewed certificate subtree
+plus this handoff update is checkpointed now. Compaction's separate12-file
+draft is excluded pending MAIN review/build; its49 software cases and static
+scan are not NPU evidence. No collector/production/frozen helper bytes change.
+Keep v1/v2 failures, source archives and their unchanged hashes in the record.
+
+Next physical-device action is still serial after the TP4 collector releases:
+isolated quantizer/certificate/compaction and independent native anchors before
+any new packed production SO, then step45 and multi-step/general-SR/graph/cache
+gates before serving. Individual/portfolio deadlines do not reset. No new
+non-HYPIC final throughput/LongBench-v2/GSM8K acceptance exists.
+
+MA0333 checked the actual compiled9/runtime16/source30/SO bindings and current
+Python AST/JSON files, and validate-mst.sh passed20 skills. The full staged
+whitespace check exited2 solely for13 extra-EOF blank-line notices in frozen
+source/helper/template/archive files. Preserve bytes bound to prior runs;
+this is a recorded negative style check, not a whitespace PASS or device gate.
