@@ -1,0 +1,41 @@
+{
+  "schema": "damp-prefill-fixed-buffers-runtime/v1",
+  "namespace": "qwen36_damp_prefill_float_probe",
+  "default_execute": false,
+  "npu_executed": false,
+  "graph_supported": false,
+  "packing_supported": false,
+  "serving_ready": false,
+  "performance_supported": false,
+  "counts": [
+    64,
+    896
+  ],
+  "turns": 20,
+  "identical_repeats": 8,
+  "prepare_per_case": 1,
+  "frozen_dependencies": {
+    "projects/damp-ascend/operator/prefill_pack_v1/exact_float_div_bits.h": "bca2ab982ac57ebed71efa4145281b5ee37faa5ec46cc0beccddf9d83eb2ae04",
+    "projects/damp-ascend/operator/prefill_pack_v1/independent_float_div.py": "5d0e489be5936adf2adac537c8a204d02851116f7d2d34a31b06a56b8cc88df4",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/CMakeLists.txt": "9f8ca19fbac4f959a910aafc89001a161ad1858a1a8607d1fec74dda53a76c86",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/README.md": "ed3b9ce83b066df402e232ab48eb6d6cb6c291486166bd88d5d77f643474ef54",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/cases.py": "b87aceacdef1ed99674fdef16dd83f45d164181f20a0c08b8163ace53a626c9b",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_extension/float_div_torch.cpp": "b3445859b0f6bb4ce122d345e8dad9287588f547897d1b1a0103e3eb8159fffc",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_extension/ops.h": "73d79931312ad87b7f8128f544a5a8dc67f539457133fde639d471d23740643a",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_extension/register.cpp": "3c88b9ce99649b1fae7a96b5e979118ede8e5ef0846aba53f50916a9d9591c8a",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_kernel/float_div_probe.h": "771286de9da81c4bae193b43d6add505d2008f2ee6d7c30bacd83bfa09d06e03",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_kernel/float_div_probe_kernel.asc": "7e8c7c49f4752b0f67f2d9c0a52c1f0ba20f0bd7dc25feac29dffc2cadbbc22e",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_kernel/probe_plan.h": "2e73d7499a13325baa64b9161a8e60df5321fa8843908c95bfe69ed134b2bd0c",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/run_float_gate.py": "41d2fe741e27718f40207e560d3d1d1415cef3f5db49fc19fe2e0fb09338c702",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/test_software_contract.py": "311cc2215858d2b693913bb96c0441b7d7a790300fc0953ec09c2e5a7e5b0ff9",
+    "projects/damp-ascend/operator/quantizer/exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169",
+    "projects/damp-ascend/tests/all_batch_gate_v1/contract.py": "f42a42ce36dc18cb65381f00ac3a4737cb8b50dbf50b22bf90a719dd800d87fd",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/source_manifest.json": "e8e1bd5f29b219b68351834da02c5385925ce51d86edfd27be304c1ef140817c",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/runtime_manifest.json": "bfc7d359ad444ad22dc99915f9372b543beef8d3ac568c2e96bb48c22554f1f1"
+  },
+  "sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/fixed_buffers_v1/run_fixed_buffers.py": "2b65b99cfef90f86f35c4009b0be3c5239af792e1b3d7e20239964e3472a10d4",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/fixed_buffers_v1/test_fixed_buffers.py": "ddac1553f1cc6b2a8237cf84180d914ff373eea9d6ec027c085c8273eeb6ecb8",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/fixed_buffers_v1/READY.md": "e79417fe39732578eca555dbab5bfd7527e58c810f170b340e7d8afce581c59e"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "damp-continuous-native-core-source/v1",
+  "namespace": "damp_continuous_core",
+  "default_enabled": false,
+  "serving_ready": false,
+  "npu_executed": false,
+  "performance_measurement_admitted": false,
+  "sources": {
+    "README.md": "7ef4365ecc9fc1762a40a806531981da5d784961cdf9dce8bd695be2b25ba178",
+    "SOURCE_MAP.md": "42285ad766b9810b440d06458f80d284cceb2b9f82556becd6add650a706c66a",
+    "damp_continuous_core/__init__.py": "82ab073d071de34835039d631dc34567f40f10df6afe64a1607744c734135eaf",
+    "damp_continuous_core/binding.py": "281c7813d3db72868612fef744cebc9835e5aee16fabce324d03c4744c615695",
+    "damp_continuous_core/checked_sink.py": "d420a3d0eb7b0d4c74a553e2be3c35e88416d3cfd16f529d8fc0a3843168ef80",
+    "damp_continuous_core/core.py": "0c769147728dec70e1f950b1077e772e2bc9c0de30302cb7fa649521e762be53",
+    "damp_continuous_core/torch_backend.py": "4314170ce61c6957825c35287d3e3c84648b5fb660e7f88b93b3bb85056874b2",
+    "tests/test_continuous_core.py": "ae818f7857bf639ee11c3f259b45c0ef159f068fc2d82abd3b82cddd1a07587e"
+  },
+  "dependencies": {
+    "projects/damp-ascend/integration/continuous_metadata_v1/contract.py": "113f37c597e8b062b217217a48e7f087d885c3456b5efe53305264d9c7b64a1b",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/source_manifest.json": "a115f00eb371476ad96c440fca53db2c383e2f5f11c9b62e80214543754c1958",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/source_manifest.json": "5670a88c77fde9fd81abadcb7c88d2b3f6bb684928e24f445a3a1d3a67f0a8bf"
+  },
+  "actual_image_sources": {
+    "/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py": "21fc9a2064f9b490ffcf3d61bacc8ddb67806a4c7490895a33128e65438838d3",
+    "/vllm-workspace/vllm/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py": "885c56f5e3584ab60bb4ce4b42cf8259e5e92c86ba13aa6128e6ed7a2a20d2b0",
+    "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666",
+    "/vllm-workspace/vllm/vllm/v1/worker/gpu_input_batch.py": "caeeb20f5010d74663c45f9419237191e3c0a149f4c7aa25bc1b73b1112d67ae",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/npu_input_batch.py": "a4dc08a9918f07797622f8d0915785e8c7b6899e0d10d92603e1dddec218acc3",
+    "/vllm-workspace/vllm/vllm/v1/attention/backends/utils.py": "f4f2f106ad84aa77cdf0b09d6948878f4e74c56568309312ec47bd190cc710cd",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/block_table.py": "8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn_attn_builder.py": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16",
+    "/vllm-workspace/vllm/vllm/model_executor/layers/mamba/abstract.py": "d7cba061c9d8c55b00e18bc7af515cfd28d875eee76c04fea7f6861f2d1c4e08",
+    "/vllm-workspace/vllm/vllm/model_executor/layers/mamba/mamba_utils.py": "aa9b7dc46725a012fc61b83a7181baaddad7ab4b0eb8e4144350799697ad6a42",
+    "/vllm-workspace/vllm/vllm/model_executor/layers/mamba/gdn/base.py": "7fec748fc74131f5a45bcaf2644b3fa3a0598fd437d7347f8207ea3644a951c5",
+    "/vllm-workspace/vllm/vllm/v1/kv_cache_interface.py": "8d6be98bbf75b3d55007b64ccf5afef047ca01790a432522f70a196412c103d9",
+    "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc"
+  }
+}

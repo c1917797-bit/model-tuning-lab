@@ -1,0 +1,40 @@
+{
+  "schema": "damp-continuous-native-core-software/v1",
+  "status": "software_contract_only_pass",
+  "tests": 16,
+  "ast_files": 6,
+  "host_exec_id": "exec-000000000000052b",
+  "command": "/usr/bin/python3 -B -m unittest discover -s projects/damp-ascend/integration/service_continuous_core_v1/tests -v",
+  "exit_code": 0,
+  "source_hash_exec_id": "exec-0000000000000531",
+  "sources": {
+    "README.md": "7ef4365ecc9fc1762a40a806531981da5d784961cdf9dce8bd695be2b25ba178",
+    "SOURCE_MAP.md": "42285ad766b9810b440d06458f80d284cceb2b9f82556becd6add650a706c66a",
+    "damp_continuous_core/__init__.py": "82ab073d071de34835039d631dc34567f40f10df6afe64a1607744c734135eaf",
+    "damp_continuous_core/binding.py": "281c7813d3db72868612fef744cebc9835e5aee16fabce324d03c4744c615695",
+    "damp_continuous_core/checked_sink.py": "d420a3d0eb7b0d4c74a553e2be3c35e88416d3cfd16f529d8fc0a3843168ef80",
+    "damp_continuous_core/core.py": "0c769147728dec70e1f950b1077e772e2bc9c0de30302cb7fa649521e762be53",
+    "damp_continuous_core/torch_backend.py": "4314170ce61c6957825c35287d3e3c84648b5fb660e7f88b93b3bb85056874b2",
+    "tests/test_continuous_core.py": "ae818f7857bf639ee11c3f259b45c0ef159f068fc2d82abd3b82cddd1a07587e"
+  },
+  "dependencies": {
+    "projects/damp-ascend/integration/continuous_metadata_v1/contract.py": "113f37c597e8b062b217217a48e7f087d885c3456b5efe53305264d9c7b64a1b",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/source_manifest.json": "a115f00eb371476ad96c440fca53db2c383e2f5f11c9b62e80214543754c1958",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/source_manifest.json": "5670a88c77fde9fd81abadcb7c88d2b3f6bb684928e24f445a3a1d3a67f0a8bf"
+  },
+  "npu_executed": false,
+  "torch_imported": false,
+  "docker_started": false,
+  "library_loaded": false,
+  "serving_ready": false,
+  "performance_measurement_admitted": false,
+  "missing_gates": [
+    "selected_float_div_NPU",
+    "selected_prefill_pack_NPU",
+    "selected_continuation_unpack_NPU",
+    "native_prefill_pack_160decode",
+    "final192plans",
+    "actual48x4_shared_FA_GDN_early_zero_lifecycle",
+    "async_status_and_formal_perf"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "damp-selected-prefill-pack-source/v1",
+  "status": "source_preparation_only",
+  "namespace": "qwen36_damp_selected_prefill_v1",
+  "target_library": "libqwen36_damp_selected_prefill_v1_ops.so",
+  "target_kernel": "qwen36_damp_selected_prefill_pack_kernel",
+  "default_enabled": false,
+  "build_executed": false,
+  "npu_executed": false,
+  "graph_supported": false,
+  "packing_numerically_accepted": false,
+  "serving_ready": false,
+  "compiled_sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/exact_float_div_bits.h": "bca2ab982ac57ebed71efa4145281b5ee37faa5ec46cc0beccddf9d83eb2ae04",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/CMakeLists.txt": "269966c5f70b5b1d57ff8c0f7e53b9c98bef6b96765829f9cb5d30617ac877ac",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/ops.h": "8554be1ec4c86b81f472787ae98c6e2a51ec4fad2e422bcdadef3af9dbdf481d",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/register.cpp": "bd94f4c761769bb40636f3b12ed5c6cabc2aae1316d344143bab19fb8c3c5571",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/selected_prefill_torch.cpp": "dd03d2c2b56397566507952fc962b3336ac054ebd85b803eb6cd892c0b0e2236",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_kernel/prefill_plan.h": "449c36746067c784f0f7612e526ea836556247aa0b660a68d2c0b04b75a11aa1",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_kernel/selected_prefill.h": "e2355651657152c8b3bc530f4cab805d4bae6cbcfec329f11e018150196e5c30",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_kernel/selected_prefill_kernel.asc": "87a67006ad535a9101304f329ad496a1dcc291f259e1b87bab4191f3ca5f01d4",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h": "ac40d62d8a37f8825ffb085beeb133a8b04f359e0e3a34bf4bca6ebf854224cc",
+    "projects/damp-ascend/operator/quantizer/exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169",
+    "projects/damp-ascend/operator/quantizer/fast_integer_certificate/integer_certificate_ascendc.h": "e96cbd0565cdb879016e1970753342151936e3d45bafd375530d1d27cfd7b9cb"
+  },
+  "review_sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/exact_float_div_bits.h": "bca2ab982ac57ebed71efa4145281b5ee37faa5ec46cc0beccddf9d83eb2ae04",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/CMakeLists.txt": "269966c5f70b5b1d57ff8c0f7e53b9c98bef6b96765829f9cb5d30617ac877ac",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/README.md": "88d5776aacc7e85c5d0b3efece6dad4e0a76cb508f4df74a0d18a40c82e7f0e0",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/ops.h": "8554be1ec4c86b81f472787ae98c6e2a51ec4fad2e422bcdadef3af9dbdf481d",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/register.cpp": "bd94f4c761769bb40636f3b12ed5c6cabc2aae1316d344143bab19fb8c3c5571",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/selected_prefill_torch.cpp": "dd03d2c2b56397566507952fc962b3336ac054ebd85b803eb6cd892c0b0e2236",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_kernel/prefill_plan.h": "449c36746067c784f0f7612e526ea836556247aa0b660a68d2c0b04b75a11aa1",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_kernel/selected_prefill.h": "e2355651657152c8b3bc530f4cab805d4bae6cbcfec329f11e018150196e5c30",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_kernel/selected_prefill_kernel.asc": "87a67006ad535a9101304f329ad496a1dcc291f259e1b87bab4191f3ca5f01d4",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/tests/test_selected_contract.py": "8b446c149a574c6d08c3af436f6020d11977f71753e1bec26e0fd898b5e1f04d",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h": "15142a8360043e30cafbaebd19e2f528573819dcfdb519580867732e69340ff1",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h": "ac40d62d8a37f8825ffb085beeb133a8b04f359e0e3a34bf4bca6ebf854224cc",
+    "projects/damp-ascend/operator/quantizer/exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169",
+    "projects/damp-ascend/operator/quantizer/fast_integer_certificate/integer_certificate_ascendc.h": "e96cbd0565cdb879016e1970753342151936e3d45bafd375530d1d27cfd7b9cb"
+  },
+  "copied_methods": [
+    "PackStore",
+    "QuantizeChunk",
+    "VectorToScalar",
+    "LoadQuantizerTables"
+  ],
+  "original_packing_source": {
+    "path": "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h",
+    "sha256": "15142a8360043e30cafbaebd19e2f528573819dcfdb519580867732e69340ff1"
+  },
+  "explicit_ub_bytes": 115392,
+  "scope": "selected native final-prefill P1..16 pack only; mixed/continuation, actual FA/GDN lifecycle, generalSR NPU gate and performance pending"
+}

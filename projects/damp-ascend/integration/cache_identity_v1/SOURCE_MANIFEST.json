@@ -1,0 +1,62 @@
+{
+  "schema": "damp-cache-identity-preparation/v1",
+  "status": "default-off-cpu-observation-only",
+  "ready": false,
+  "npu_executed": false,
+  "performance_measurement_admitted": false,
+  "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "source_files": {
+    "READY.md": {
+      "bytes": 5912,
+      "sha256": "5e9acb75dd075ee26f86fe32ad4dc1fdae4abaaa487850b12aa62a7c40aac3dd"
+    },
+    "adapter.py": {
+      "bytes": 33504,
+      "sha256": "246648f4ffb59155aa94fc64a6b98128191245d358210af7f64c0cdef31a5cad"
+    },
+    "contract.py": {
+      "bytes": 5670,
+      "sha256": "8808ca268b73a2b8b07dab8fc8a9b575610db865ee47e44e803e471b902b048c"
+    },
+    "test_contract.py": {
+      "bytes": 11324,
+      "sha256": "9b12d5c77ba43402fc1499cf5bde8fd13a3b71d82a0bb652a6bcc7287ac129b0"
+    }
+  },
+  "evidence_sources": [
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-zeroer-snapshot-v1/MANIFEST.json",
+      "sha256": "ed4b62694b8c99b456bc5008fd01a33cfa9be88f739b93952e91ceb36f7cfdd7",
+      "scope": "MAIN actual stopped-image source-only snapshot"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-source-snapshot-v1/receipt.json",
+      "sha256": "4a4e548e300339a0d28fbd71068ca803ad026325a5cf1c0fce1b8d7ee7261177",
+      "scope": "MAIN actual immutable source-only snapshot"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-continuous-snapshot-v1/MANIFEST.json",
+      "sha256": "2a37b75ec59f185943fb214e7efe6c8d08f8efa95a554de50c64558c62f19130",
+      "scope": "MAIN actual stopped-image source-only snapshot"
+    }
+  ],
+  "frozen_dependency": {
+    "path": "projects/damp-ascend/integration/continuous_metadata_v1/contract.py",
+    "sha256": "113f37c597e8b062b217217a48e7f087d885c3456b5efe53305264d9c7b64a1b"
+  },
+  "exact_native_seams": {
+    "pre_zero": "NPUModelRunner._update_states(self,scheduler_output) -> GPUModelRunner._update_states early zero at1151–1154",
+    "cold_views": "core-owned NPUModelRunner._reshape_kv_cache_tensors return -> Owner.observe_cold",
+    "zero_init": "AscendKVBlockZeroer.init_meta original iterable/scalars/tensors and native result retained",
+    "gdn_cpu_producer": "AscendGDNAttentionMetadataBuilder.build",
+    "fa_cpu_producer": "NPUModelRunner._build_attention_metadata"
+  },
+  "limitations": [
+    "No actual live CPU producer observer implemented here",
+    "No shared-FA/GDN NPU lifecycle/protected-state claim",
+    "No graph/preemption/async/transfer/speculative support",
+    "Conservative retained FA allocation superset may reject otherwise safe native layouts",
+    "No formal E2E/accuracy/memory saving claimed"
+  ],
+  "source_bound_ready_semantics": "AdmittedTurn is CPU-only complete pre-core-writer checks; ready remains false. Native FA zero has a separate earlier byte guard. Actual producer/device contents/NPU lifecycle require MAIN evidence."
+}

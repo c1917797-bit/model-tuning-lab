@@ -3,6 +3,27 @@
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
+## Prefill/compiler readiness checkpoint — 2026-10-06 16:29Z
+
+Read PREFILL_READINESS_CHECKPOINT_20261006.md and
+PREFILL_READY_SOURCE_SCOPE.json for the new56-file source boundary (51new,
+5already tracked), actual no-device builds and pending device admission.
+Float probe MA0526 and selected prefill MA053d actually compiled/exported/
+loaded/schema/Meta passed with no NPU; selected Meta32+/44- is not numerical
+acceptance. Continuous-core/cache MAIN51 contracts passed MA054e.
+Fixed-address supplement is NEW and source-reviewed; MAIN focused96 stdlib
+tests all passed MA056a. Its outer CLI verifier made a schema assumption and
+failed afterward; the unchanged actual CLI contract passed separately MA0574.
+Keep both receipts. No final service/E2E/task claim.
+
+MA0455 still runs exclusive TP4 native ON calibration, and MA0556 at16:29:22Z
+observes16/36 completed4096-token TRAIN clients (superseding earlier8/36).
+No full SOURCE_LOCK/RESULT or192 plans yet. Keep OFF36, exact parent ID and
+all original failures unchanged. Physical0–3 remain protected; cutoffs unchanged.
+After success, persist actual terminal receipt, fresh canary and joint40GiB/
+quota4 (or44GiB/quota6 with optional fit) checks before disjoint all-T shards.
+New observer/selected device-gate/final-admission drafts remain unstaged.
+
 ## Latest readiness checkpoint — 2026-10-06
 
 Read READINESS_CHECKPOINT_20261006.md and READY_SOURCE_SCOPE.json for exact

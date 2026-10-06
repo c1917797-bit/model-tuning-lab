@@ -310,3 +310,43 @@ can coexist with this real integration blocker. Target an independently
 named wrapper byte-interval adaptation, with ND/contiguous/alignment/bounds,
 shared-arena sentinels and lifecycle gates; do not bypass the actual allocator
 with hidden state copies or mutate frozen binaries/receipts.
+
+## 16:29Z prefill preparation: real compiler proof and remaining device gates
+
+- Freeze a complete next-stage packet before devices become available: exact
+  source/compiler/runtime identities, real build/load/schema, command bindings,
+  output non-overwrite checks, independent golden, changed-buffer protocol,
+  resource admission, deadlines and failure attribution. This means executable
+  preparation, not a promise that a new algorithm will pass first time.
+- Freshly allocating each changing fixture does not test cached pointer reuse.
+  The supplementary float probe keeps three guarded input roots/views fixed,
+  prepares once, and changes each input column20 times with8 repeated reads
+  per turn. Initial prepare must use different contents from turn0; otherwise
+  a supposed20-change test covers only19. Check CPU fixtures before H2D.
+  Eager changing buffers still do not prove graph capture/replay correctness.
+- Test compiled and runtime contracts against the actual receipt schema. The
+  float probe compiled9 and selected pack compiled11 actually built/exported/
+  loaded in isolated no-device containers. Selected Meta32 positive/44 negative
+  calls passed. These facts do not prove ND allocation, numerical packing,
+  native-prefill parity, shared-cache lifecycle or E2E/quality acceptance.
+- Cold plan contents need explicit immutable authority. Inference tensors can
+  lack a version counter; accepting version=-1 is not mutation detection.
+  Pointer stability alone cannot prove Pk/Pv/SR contents stayed unchanged.
+  Keep source/plan hashes, retained ownership and an immutable installation
+  contract; require device status and lifecycle gates before serving.
+- Selected pack numeric failures may leave prior groups/heads already written.
+  Wait for all status words/guards and retire the complete selected-slot owner
+  after any failure. Do not feed partial state to decode or fall back/retry on
+  it as though the write were transactional. Preserve raw states before asserts.
+- Inspect the actual CANN tooling CLI instead of assuming flags from a skill.
+  The flow analyzer rejected --frontend auto; its original failed receipt stays.
+  A separately recorded corrected invocation ran without that flag. Retain all
+  seven raw synchronization candidates from the companion scan. Helper V_S
+  Set/Wait pairs and returns before either side can explain scanner candidates,
+  but zero flow findings/manual source rationale do not prove device ordering.
+  UB-copy lowering at metadata/scalar seams still needs actual API/device proof.
+- A surrounding verifier can fail after its component tests pass. Record both
+  scopes and the actual exit code: MAIN96 software tests passed, then a harness
+  invented a common launchable field for a dry-plan CLI and exited1. Correct
+  the verifier against that CLI's frozen actual schema in a separate check;
+  do not rewrite the first receipt as success or rerun unchanged numerical work.

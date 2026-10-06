@@ -1,0 +1,19 @@
+{
+  "schema": "damp-prefill-float-compiled-source/v1",
+  "namespace": "qwen36_damp_prefill_float_probe",
+  "target_kernel": "qwen36_damp_prefill_float_div_bits_kernel",
+  "target_library": "libqwen36_damp_prefill_float_probe_ops.so",
+  "default_enabled": false,
+  "npu_executed": false,
+  "compiled_sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/exact_float_div_bits.h": "bca2ab982ac57ebed71efa4145281b5ee37faa5ec46cc0beccddf9d83eb2ae04",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/CMakeLists.txt": "9f8ca19fbac4f959a910aafc89001a161ad1858a1a8607d1fec74dda53a76c86",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_extension/float_div_torch.cpp": "b3445859b0f6bb4ce122d345e8dad9287588f547897d1b1a0103e3eb8159fffc",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_extension/ops.h": "73d79931312ad87b7f8128f544a5a8dc67f539457133fde639d471d23740643a",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_extension/register.cpp": "3c88b9ce99649b1fae7a96b5e979118ede8e5ef0846aba53f50916a9d9591c8a",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_kernel/float_div_probe.h": "771286de9da81c4bae193b43d6add505d2008f2ee6d7c30bacd83bfa09d06e03",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_kernel/float_div_probe_kernel.asc": "7e8c7c49f4752b0f67f2d9c0a52c1f0ba20f0bd7dc25feac29dffc2cadbbc22e",
+    "projects/damp-ascend/operator/prefill_pack_v1/probe/op_kernel/probe_plan.h": "2e73d7499a13325baa64b9161a8e60df5321fa8843908c95bfe69ed134b2bd0c",
+    "projects/damp-ascend/operator/quantizer/exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169"
+  }
+}
