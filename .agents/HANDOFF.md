@@ -1,5 +1,16 @@
 # Maintainer Handoff
 
+## Ascend performance optimization skill update — 2026-10-06
+
+The maintainer tree now includes `ascend-performance-optimization`, which owns
+the missing step between bottleneck attribution and canary implementation. It
+classifies compute, memory/cache, scheduler, communication, compile, and
+lifecycle bottlenecks; proves the active Dense/MoE/MTP/speculative path; and
+requires one bounded candidate with an opportunity estimate, disproof signal,
+quality guardrail, and rollback. Profiling still owns attribution, benchmark
+evidence still owns measurement, and the tuning loop still owns terminal
+decisions. The integrated skill count is 29 after this change.
+
 ## Host-side Python bootstrap update — 2026-09-23
 
 The reusable host-test setup is now defined by `pyproject.toml`,

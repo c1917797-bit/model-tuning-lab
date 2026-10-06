@@ -81,8 +81,9 @@ Re-prove this in the actual container/session before a new claim.
 9. Map the hot path to the smallest plausible layer: configuration, vLLM,
    vLLM-Ascend, CANN operator, `ops-transformer`, communication/topology, or
    system setting.
-10. Feed the conclusion back into `ascend-inference-tuning-loop` as the next
-    bounded hypothesis, rejection reason, or inconclusive gap.
+10. Feed an evidenced, opportunity-bounded treatment into
+    `ascend-performance-optimization`. Feed a rejection or inconclusive gap
+    directly back into `ascend-inference-tuning-loop`.
 
 ## Evidence rules
 

@@ -21,7 +21,8 @@ Before changing code:
 4. Select the smallest relevant maintainer skills.
 5. Follow the selected skills.
 6. For tuning work, use `ascend-npu-environment-orientation`,
-   `ascend-inference-tuning-loop`, and `ascend-benchmark-evidence`.
+   `ascend-inference-tuning-loop`, `ascend-performance-optimization`, and
+   `ascend-benchmark-evidence`.
    When accepting or rejecting an accuracy or model-quality claim, also use
    `ascend-model-quality-evaluation`.
    Deliver new local inference-runtime techniques first as a removable,

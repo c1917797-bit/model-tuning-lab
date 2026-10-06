@@ -172,6 +172,27 @@ skills:
       - tests/**
       - .agents/experiments/**
       - .agents/workstreams/**
+  - id: ascend-performance-optimization
+    path: .agents/skills/ascend-performance-optimization
+    status: experimental
+    purpose: Convert measured Ascend inference bottlenecks into bounded one-variable optimization candidates across compute, memory, scheduling, communication, compilation, and lifecycle paths.
+    triggers:
+      - optimize Ascend inference performance
+      - turn profiler evidence into an optimization
+      - choose or implement a performance treatment
+      - Dense MoE or MTP performance optimization
+      - Ascend 性能优化
+      - 根据瓶颈实施优化
+    scope:
+      - AGENTS.md
+      - docs/**
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - projects/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: runtime-monkeypatch-delivery
     path: .agents/skills/runtime-monkeypatch-delivery
     status: experimental
