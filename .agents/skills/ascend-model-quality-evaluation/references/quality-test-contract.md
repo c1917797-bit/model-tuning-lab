@@ -17,6 +17,8 @@ Use this reference when creating or reviewing a concrete quality experiment.
 - prompt and chat template, few-shot policy, preprocessing, answer extraction,
   postprocessor, scorer name/version, and evaluator source commit;
 - retry, timeout, failed-sample, duplicate-sample, and resume semantics.
+- maximum tokenized prompt plus the output cap versus `max_model_len`; a
+  larger-context service needs its own matched baseline identity.
 
 ## Frozen generation profile
 
@@ -34,6 +36,13 @@ Use this reference when creating or reviewing a concrete quality experiment.
 
 Record any additional sampling and stopping parameters. A changed field creates
 a new ruler and requires a fresh baseline.
+
+Before committing to the full suite, record the authorized per-run and total
+time limits, a target-NPU throughput or sample-rate estimate, the projected
+time for every dataset/repetition/arm, and a margin for service transitions,
+audit, and resource release. If the projection is infeasible, stop or request
+a newly authorized plan; do not silently shorten the dataset, cap, or number
+of repetitions and call it the frozen ruler.
 
 If the ruler and the complete environment fingerprint are unchanged, reuse the
 previously completed baseline rather than rerunning it for every candidate.
@@ -85,6 +94,11 @@ Performance and quality use separate service lifecycles:
    treatment activation, and run three repetitions;
 5. stop the candidate and prove owned resources were released.
 
+If an upstream gate or time limit terminates the suite before all required
+samples and matched arms complete, preserve raw partial rows and their hashes,
+record the exact stopping cause, and verify live release. Do not freeze the
+incomplete arm as a reusable baseline or calculate a paired quality verdict.
+
 Do not reuse profiler, compilation-capture, RRQR-capture, or diagnostic state
 as ordinary quality evidence unless the contract explicitly includes and
 matches that state in both arms.
@@ -95,8 +109,11 @@ matches that state in both arms.
 - `regression`: a predeclared quality or critical-category gate fails.
 - `inconclusive`: evidence is complete enough to inspect but cannot support a
   decision because uncertainty or variability is too large.
-- `invalid`: contract drift, missing samples, identity mismatch, artifact
-  disagreement, or execution-proof failure invalidates the comparison.
+- `invalid`: contract drift, unexplained missing samples, identity mismatch,
+  artifact disagreement, or execution-proof failure invalidates the comparison.
+- `incomplete-fail-fast`: an upstream rejection or authorized time/resource
+  stop ended an otherwise traceable suite before the required samples and
+  matched arms completed; this is a coverage state, not a quality score.
 
 Preserve the exact scope, exclusions, recovery state, allowed claims, forbidden
 claims, raw artifact hashes, and next gate.

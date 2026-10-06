@@ -1,5 +1,31 @@
 # Maintainer Handoff
 
+## Fresh HYPIC 2048-token fail-fast result — 2026-10-06
+
+The branch-local `hypic-qwen36-e2e-2048-20261006` workstream on
+`work/hypic-qwen36-e2e-2048-20261006` reached a **rejected** terminal
+classification on physical chicaihong01 NPU0-3. Its fresh one-switch
+Qwen3.6-27B TP4 performance gate passed only TTFT P95; TPOT, throughput,
+and duration gates failed. One source-grounded HYPIC+MatMulAllReduce iteration
+was measured and rejected. Real-weight Canary and disabled-control rollback
+passed. A separate 41984-context, 2048-token quality ruler produced three
+complete no-cache LongBench-v2 baseline runs and 80/1319 partial GSM8K rows;
+there is **no frozen full quality baseline or paired quality verdict**.
+The fail-fast independent audit found zero evidence-integrity errors while
+preserving that non-acceptance boundary. The exact quality container was
+removed and NPU0-3/port 8223 were free at 22:00 UTC; live ownership must
+still be rechecked before any later device use.
+
+Read the branch-local
+`.agents/workstreams/hypic-qwen36-e2e-2048-20261006/REPORT.md` and
+`HANDOFF.md` with the raw artifact root
+`/cache/cch/hypic-qwen36-e2e-2048-20261006` before reusing any claim.
+`ascend-model-quality-evaluation` now documents longest-prompt context
+capacity, end-to-end time feasibility, and `incomplete-fail-fast` handling.
+This is branch-local learning, **not** integrated `main` truth. The target
+host lacks working HTTPS Git authentication for these latest local commits;
+do not claim they were pushed or expose a token to force a push.
+
 ## Ascend performance optimization skill update — 2026-10-06
 
 The maintainer tree now includes `ascend-performance-optimization`, which owns

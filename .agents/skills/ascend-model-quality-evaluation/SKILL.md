@@ -35,6 +35,20 @@ The completed historical HYPIC evidence used a 1024-token cap. Preserve it as
 historical evidence. Never rewrite or relabel those measurements as 2048-token
 results.
 
+Before a long suite, tokenize the longest required prompt with the frozen
+template and confirm prompt tokens plus the output cap fit the service's
+`max_model_len`. A larger context is a new service identity: compare it only
+against a matching baseline. Estimate the full baseline-and-candidate wall
+time from a representative run on the target NPU (or verified matching runs),
+including all repetitions, long outputs, service transitions, audit, and
+cleanup. Compare that estimate with per-run and overall time limits before
+claiming the suite is feasible. If an upstream fail-fast gate or the time
+budget stops the suite, preserve and hash partial rows, release only owned
+resources, and label the quality outcome `incomplete-fail-fast`. Partial rows
+are not a frozen reusable baseline or evidence of quality pass/regression;
+changing the ruler to fit the budget requires a new matched baseline, and
+extra time or devices require their own authorization.
+
 ## Protocol
 
 1. Establish an environment fingerprint with
@@ -61,7 +75,8 @@ results.
    standard deviation or confidence interval when supported, absolute
    percentage-point delta, baseline repeat range, and per-category regressions.
 8. Classify the quality result as `pass`, `regression`, `inconclusive`,
-   or `invalid`. Preserve negative and incomplete results.
+   `invalid`, or `incomplete-fail-fast`. Preserve negative and incomplete
+   results without treating partial-sample accuracy as a verdict.
 
 ## Decision gates
 
@@ -77,9 +92,11 @@ A quality pass requires all applicable conditions:
 - deterministic canaries satisfy their exact-match requirement;
 - treatment activation and physical Ascend execution are proven.
 
-If a required dataset is missing, the service changes identity during the run,
-the 2048-token cap is not actually applied, or artifacts disagree, fail closed
-as `invalid` or `inconclusive`; do not substitute another dataset silently.
+If a required dataset is unexpectedly missing, the service changes identity
+during the run, the 2048-token cap is not actually applied, or artifacts
+disagree, fail closed as `invalid` or `inconclusive`; do not substitute another
+dataset silently. A documented upstream/time-budget stop is
+`incomplete-fail-fast`, not a quality comparison.
 
 ## Evidence and claims
 
