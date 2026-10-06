@@ -1,0 +1,33 @@
+{
+  "schema": "damp-post-reference-source-preparation/v1",
+  "status": "prepared-not-executed",
+  "source_pins": {
+    "projects/damp-ascend/calibration/damp_calibrate/__init__.py": "80b39b73c5d07f972c967fd052e5a7f23d7ca75f36ea48ec8f7312fce03a15ca",
+    "projects/damp-ascend/calibration/damp_calibrate/evidence.py": "3141314904cd5d3abbbedc15aed7c0f97a2370b9a435824cd7505073df16f5fa",
+    "projects/damp-ascend/calibration/damp_calibrate/numerics.py": "b6a238b17ccebb45b15ef3c8e29a99e035fb3294d44fdbd613ba8c6a2c89c3a4",
+    "projects/damp-ascend/calibration/damp_calibrate/pipeline.py": "641052ababa29c46440ab86fdc20fd6894737c8bf9afa9b240f4b687d1e35a55",
+    "projects/damp-ascend/calibration/damp_calibrate/rules.py": "98285137bfdf6c327a8695488e960678063d7dca907100ce03c60f42e9eca85b",
+    "projects/damp-ascend/collector/damp_capture/bindings.py": "137c71b0a3f2b4dac5d82be53a25d01de39b78a77b14db4d8b9e470181003525",
+    "projects/damp-ascend/collector/damp_capture/contract.py": "e56b6b47e66b3bec946eda96a51205a779c506edcb8b713730d42c03237e2a57",
+    "projects/damp-ascend/collector/damp_capture/identity.py": "8873f833c6dab835af5079ec269e82efa100b1695bef707a78f1cb82210a37db",
+    "projects/damp-ascend/collector/damp_capture/text_positions.py": "333aa0c09130b9f6c27459b04a4ae36a7743b9b77275beddc02655252d244354",
+    "projects/damp-ascend/collector/damp_capture/validate.py": "2daf0cefe7311431baf9bb0a2aa1dbebe62543598ddcec0bada55796d4be4b8c",
+    "projects/damp-ascend/integration/damp_integration/contract.py": "06b91ab27f03ea5cfc231443fbd3790a7e331e1662ef6f837fef8e9151b02dc6",
+    "projects/damp-ascend/integration/damp_integration/plan.py": "ccc4f8690caed74ebb7511b75ef2a744ae923d949e3fbb17d4ddbcf56e0d47d9",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/candidate_adapter.py": "43d4639d1ac0d737392fab8526aba14af0b1e50161a1940855b71822b18e6a7c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/protocols.py": "7a0747c8c1a1f246f32ec3ad32ab53cd7a5027339a5c8584d5552ae1508f7340",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_npu_gate.py": "9d2ff5e8eed33c5ec3719dcee2748908924c8ce7151a2e3d2b4d582d285c1c1c",
+    "projects/damp-ascend/tools/resume_reference_v1/controller.py": "d20889ce69e1eb1d2d49fff5e2d65803b9f63bff444115587dc21b562641454e",
+    "projects/damp-ascend/tools/run_full_capture.py": "9ad5e359766578a24f06e127a990ab93d1e86555baa15d1abb7bb2b3ffc51122"
+  },
+  "manifest_file_sha256": "f348e0b0404e2f3a619b986f5c1152427c52f1a3550386ee1f894eafa6986b33",
+  "manifest_semantic_sha256": "6791283f69290789555d4391312e8d8511fee7787d2ea4257599302486f34bb7",
+  "source_lock_issued_by_adapter": false,
+  "not_proven": [
+    "final plans NPU",
+    "graph",
+    "cache lifecycle",
+    "matched service performance",
+    "task accuracy"
+  ]
+}

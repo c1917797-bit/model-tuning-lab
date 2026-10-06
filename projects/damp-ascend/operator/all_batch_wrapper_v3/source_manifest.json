@@ -1,0 +1,46 @@
+{
+  "schema": "damp_all_batch_wrapper_sources_v3",
+  "status": "source_preparation_only",
+  "namespace": "qwen36_damp_all_batch_v3",
+  "target_library": "libqwen36_gdn_damp_all_batch_v3_decode_ops.so",
+  "target_kernel": "qwen36_gdn_damp_all_batch_v3_decode_kernel",
+  "build_opt_in": "DAMP_BUILD_ALL_BATCH_WRAPPER_V3",
+  "default_on": false,
+  "build_executed": false,
+  "load_executed": false,
+  "npu_executed": false,
+  "compiled_sources": {
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/CMakeLists.txt": "febb3e7e7dd955c98c8ca1e054afedeb77cdd6512040cf4d3551a950deb24561",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/ops.h": "8f103382816ac8e4206ebd24f996f41186f5d92f6ace9918362936191c7e8b84",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/qwen36_gdn_damp_all_batch_v3_decode_torch.cpp": "b8c0304b9efb13c03537894549c9e3028bd7a4e866305b2b86122875f5b45812",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/register.cpp": "cdfac8e115b450262d372aa76b464fb1c4948d88b8f906cef4e9c7fe2950ac08",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/op_kernel/qwen36_gdn_damp_all_batch_v3_decode.h": "16505660b4c4714bfb3c7ab5cbc3b5330eec88337f693ecdd4c48a79ab2db60e",
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/op_kernel/qwen36_gdn_damp_all_batch_v3_decode_kernel.asc": "5bfc1847a8a117b9ca0b8fcdf947a41a876009bf593174dcebdfc91f77e1b66b",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h": "ac40d62d8a37f8825ffb085beeb133a8b04f359e0e3a34bf4bca6ebf854224cc",
+    "projects/damp-ascend/operator/quantizer/exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169",
+    "projects/damp-ascend/operator/quantizer/fast_integer_certificate/integer_certificate_ascendc.h": "e96cbd0565cdb879016e1970753342151936e3d45bafd375530d1d27cfd7b9cb"
+  },
+  "software_contracts": {
+    "projects/damp-ascend/operator/all_batch_wrapper_v3/tests/test_all_batch_contract.py": "746eceb6bc59f80fa57f3013ea2ddb2acefb6b3a1aee9ef9d5afbbe3ae667ca4"
+  },
+  "original_math_header": {
+    "path": "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h",
+    "sha256": "15142a8360043e30cafbaebd19e2f528573819dcfdb519580867732e69340ff1",
+    "kernel_admission_line": 162
+  },
+  "arena_wrapper_reference": {
+    "path": "projects/damp-ascend/operator/arena_wrapper_v2/op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp",
+    "sha256": "11f95e0caf5e68ca4cf7cbc2e2a03bb62828e8ea3af815f698c194ac31b615bf"
+  },
+  "validation_scope": {
+    "candidate_token_range": [
+      1,
+      16
+    ],
+    "runtime_required_soc": "Ascend910B4",
+    "compile_npu_arch": "dav-2201",
+    "real_all_batch_numerical_acceptance": false,
+    "real_all_batch_graph_acceptance": false,
+    "service_c16_ready": false
+  }
+}

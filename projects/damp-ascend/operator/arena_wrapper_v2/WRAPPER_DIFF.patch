@@ -1,0 +1,347 @@
+--- projects/damp-ascend/operator/production_integer_compaction_v1/CMakeLists.txt
++++ projects/damp-ascend/operator/arena_wrapper_v2/CMakeLists.txt
+@@ -24,15 +24,15 @@
+ # ============================================================================
+ 
+ cmake_minimum_required(VERSION 3.16)
+-option(DAMP_BUILD_INTEGER_COMPACTION_V1 "Explicitly build unvalidated DAMP quantizer candidate" OFF)
+-if(NOT DAMP_BUILD_INTEGER_COMPACTION_V1)
+-    message(FATAL_ERROR "Default-OFF experimental candidate: pass -DDAMP_BUILD_INTEGER_COMPACTION_V1=ON explicitly")
++option(DAMP_BUILD_ARENA_WRAPPER_V2 "Explicitly build unvalidated DAMP shared-arena ABI wrapper" OFF)
++if(NOT DAMP_BUILD_ARENA_WRAPPER_V2)
++    message(FATAL_ERROR "Default-OFF experimental candidate: pass -DDAMP_BUILD_ARENA_WRAPPER_V2=ON explicitly")
+ endif()
+ 
+ find_package(ASC REQUIRED)
+ 
+ # [MODIFY] 工程名
+-project(qwen36_gdn_damp_integer_compaction_v1_decode LANGUAGES ASC CXX)
++project(qwen36_gdn_damp_arena_v2_decode LANGUAGES ASC CXX)
+ 
+ set(CMAKE_CXX_STANDARD 17)
+ 
+@@ -105,8 +105,8 @@
+ set(TORCH_NPU_LIBRARIES ${TORCH_NPU_PATH}/lib)
+ 
+ # [MODIFY] 所有 add_custom → <your_op>（保持 _ops 后缀）
+-add_library(qwen36_gdn_damp_integer_compaction_v1_decode_ops SHARED
+-    op_extension/qwen36_gdn_damp_integer_compaction_v1_decode_torch.cpp
++add_library(qwen36_gdn_damp_arena_v2_decode_ops SHARED
++    op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp
+     op_extension/register.cpp
+ )
+ 
+@@ -114,11 +114,11 @@
+ # launches it with triple-chevron syntax.  Keeping both in one compilation unit
+ # is what permits RunOpApi to enqueue the launch without stream(true) flushing.
+ set_source_files_properties(
+-    op_extension/qwen36_gdn_damp_integer_compaction_v1_decode_torch.cpp
++    op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp
+     PROPERTIES LANGUAGE ASC
+ )
+ 
+-target_include_directories(qwen36_gdn_damp_integer_compaction_v1_decode_ops PRIVATE
++target_include_directories(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
+     ${CMAKE_CURRENT_SOURCE_DIR}/op_kernel
+     ${CMAKE_CURRENT_SOURCE_DIR}/op_extension
+     ${TORCH_INCLUDE_DIRS}
+@@ -127,7 +127,7 @@
+     ${ACL_INCLUDE_DIR}
+ )
+ 
+-target_link_libraries(qwen36_gdn_damp_integer_compaction_v1_decode_ops PRIVATE
++target_link_libraries(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
+     torch_npu
+     tiling_api
+     register
+@@ -140,16 +140,15 @@
+     ascendc_runtime
+ )
+ 
+-target_link_directories(qwen36_gdn_damp_integer_compaction_v1_decode_ops PRIVATE
++target_link_directories(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
+     ${ACL_LIB_DIR}
+     "$ENV{ASCEND_HOME_PATH}/aarch64-linux/lib64"
+     ${TORCH_NPU_LIBRARIES}
+ )
+ 
+-target_compile_options(qwen36_gdn_damp_integer_compaction_v1_decode_ops PRIVATE
++target_compile_options(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
+     ${TORCH_CXX_FLAGS}
+     $<$<COMPILE_LANGUAGE:ASC>:--npu-arch=dav-2201>
+ )
+ 
+-message(STATUS "TORCH_LIBRARY module 'libqwen36_gdn_damp_integer_compaction_v1_decode_ops.so' will be built")
+-
++message(STATUS "TORCH_LIBRARY module 'libqwen36_gdn_damp_arena_v2_decode_ops.so' will be built")
+--- projects/damp-ascend/operator/production_integer_compaction_v1/op_extension/ops.h
++++ projects/damp-ascend/operator/arena_wrapper_v2/op_extension/ops.h
+@@ -1,14 +1,14 @@
+-#ifndef QWEN36_GDN_DAMP_INTEGER_COMPACTION_V1_OPS_H
+-#define QWEN36_GDN_DAMP_INTEGER_COMPACTION_V1_OPS_H
++#ifndef QWEN36_GDN_DAMP_ARENA_V2_OPS_H
++#define QWEN36_GDN_DAMP_ARENA_V2_OPS_H
+ #include <torch/extension.h>
+ 
+ namespace ascend_kernel {
+-void qwen36_gdn_damp_integer_compaction_v1_prepare_torch(
++void qwen36_gdn_damp_arena_v2_prepare_torch(
+     const at::Tensor& query, const at::Tensor& highState,
+     const at::Tensor& pk, const at::Tensor& pv,
+     const at::Tensor& invPv, const at::Tensor& sr);
+ 
+-at::Tensor qwen36_gdn_damp_integer_compaction_v1_decode_torch(
++at::Tensor qwen36_gdn_damp_arena_v2_decode_torch(
+     const at::Tensor& query, const at::Tensor& key, const at::Tensor& value,
+     const at::Tensor& g, const at::Tensor& beta,
+     const at::Tensor& highState, const at::Tensor& lowState,
+@@ -17,4 +17,3 @@
+     const at::Tensor& actualSeqLengths, const at::Tensor& stateIndices);
+ } // namespace ascend_kernel
+ #endif
+-
+--- projects/damp-ascend/operator/production_integer_compaction_v1/op_extension/register.cpp
++++ projects/damp-ascend/operator/arena_wrapper_v2/op_extension/register.cpp
+@@ -3,7 +3,7 @@
+ #include "ops.h"
+ 
+ namespace {
+-TORCH_LIBRARY_FRAGMENT(qwen36_damp_integer_compaction_v1, m)
++TORCH_LIBRARY_FRAGMENT(qwen36_damp_arena_v2, m)
+ {
+     m.def("prepare(Tensor query, Tensor high_state, Tensor pk, Tensor pv, "
+           "Tensor inv_pv, Tensor sr) -> ()");
+@@ -13,10 +13,10 @@
+         "Tensor pk, Tensor pv, Tensor inv_pv, Tensor sr, "
+         "Tensor actual_seq_lengths, Tensor state_indices) -> Tensor");
+ }
+-TORCH_LIBRARY_IMPL(qwen36_damp_integer_compaction_v1, PrivateUse1, m)
++TORCH_LIBRARY_IMPL(qwen36_damp_arena_v2, PrivateUse1, m)
+ {
+-    m.impl("prepare", TORCH_FN(ascend_kernel::qwen36_gdn_damp_integer_compaction_v1_prepare_torch));
+-    m.impl("decode", TORCH_FN(ascend_kernel::qwen36_gdn_damp_integer_compaction_v1_decode_torch));
++    m.impl("prepare", TORCH_FN(ascend_kernel::qwen36_gdn_damp_arena_v2_prepare_torch));
++    m.impl("decode", TORCH_FN(ascend_kernel::qwen36_gdn_damp_arena_v2_decode_torch));
+ }
+ void check_meta_plan(const at::Tensor& tensor, at::ScalarType dtype, const char* name)
+ {
+@@ -70,10 +70,9 @@
+                 "one-token metadata Meta shape/dtype mismatch");
+     return at::empty({tokens, 12, 128}, query.options());
+ }
+-TORCH_LIBRARY_IMPL(qwen36_damp_integer_compaction_v1, Meta, m)
++TORCH_LIBRARY_IMPL(qwen36_damp_arena_v2, Meta, m)
+ {
+     m.impl("prepare", &prepare_meta);
+     m.impl("decode", &decode_meta);
+ }
+ } // namespace
+-
+--- projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_kernel.asc
++++ projects/damp-ascend/operator/arena_wrapper_v2/op_kernel/qwen36_gdn_damp_arena_v2_decode_kernel.asc
+@@ -1,13 +1,13 @@
+ #include "kernel_operator.h"
+-#include "qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h"
++#include "../../production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h"
+ #if defined(__NPU_ARCH__)
+-#include "qwen36_gdn_damp_integer_compaction_v1_decode.h"
++#include "../../production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h"
+ #endif
+ 
+ using namespace AscendC;
+ using namespace Qwen36DampIntegerCompactionV1;
+ 
+-extern "C" __global__ __vector__ void qwen36_gdn_damp_integer_compaction_v1_decode_kernel(
++extern "C" __global__ __vector__ void qwen36_gdn_damp_arena_v2_decode_kernel(
+     GM_ADDR query, GM_ADDR key, GM_ADDR value, GM_ADDR g, GM_ADDR beta,
+     GM_ADDR highState, GM_ADDR lowState, GM_ADDR lowScale,
+     GM_ADDR pk, GM_ADDR pv, GM_ADDR invPv, GM_ADDR sr,
+@@ -27,4 +27,3 @@
+     op.Process();
+ #endif
+ }
+-
+--- projects/damp-ascend/operator/production_integer_compaction_v1/op_extension/qwen36_gdn_damp_integer_compaction_v1_decode_torch.cpp
++++ projects/damp-ascend/operator/arena_wrapper_v2/op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp
+@@ -12,7 +12,7 @@
+ #include "torch_npu/csrc/core/npu/NPUStream.h"
+ #include "torch_npu/csrc/framework/OpCommand.h"
+ #include "torch_npu/csrc/aten/CustomFunctions.h"
+-#include "../op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_kernel.asc"
++#include "../op_kernel/qwen36_gdn_damp_arena_v2_decode_kernel.asc"
+ #include "ops.h"
+ 
+ namespace ascend_kernel {
+@@ -43,6 +43,54 @@
+     const auto& counter = tensor.unsafeGetTensorImpl()->version_counter();
+     // Inference tensors have no version counter; their plan is immutable by ABI.
+     return counter.enabled() ? static_cast<int64_t>(counter.current_version()) : -1;
++}
++std::pair<uintptr_t, uintptr_t> tensor_span(const at::Tensor& tensor)
++{
++    // Only contiguous physical ND tensors reach dispatch. Never infer disjoint
++    // addresses from Tensor/Storage object identity: Mamba SoA shares storage.
++    // Every view must be wholly contained in its actual backing byte interval.
++    const int64_t elements = tensor.numel();
++    const size_t itemBytes = tensor.element_size();
++    const uintptr_t maximum = std::numeric_limits<uintptr_t>::max();
++    TORCH_CHECK(elements > 0 && itemBytes > 0,
++                "arena ABI requires nonempty positive-width tensors");
++    TORCH_CHECK(static_cast<uint64_t>(elements) <=
++                    maximum / static_cast<uint64_t>(itemBytes),
++                "tensor byte-count multiplication overflow");
++    const uintptr_t bytes = static_cast<uintptr_t>(elements) *
++                            static_cast<uintptr_t>(itemBytes);
++    const auto storage = tensor.storage();
++    const uintptr_t base = reinterpret_cast<uintptr_t>(storage.data_ptr().get());
++    const uint64_t backingBytes = static_cast<uint64_t>(storage.nbytes());
++    TORCH_CHECK(base != 0 && backingBytes > 0 && backingBytes <= maximum - base,
++                "backing storage byte range is empty/overflows");
++    const uintptr_t storageEnd = base + static_cast<uintptr_t>(backingBytes);
++    // storage_offset is in THIS view's elements, including dtype-reinterpreted
++    // raw-cache views. Check its byte conversion, not the allocator's indices.
++    const int64_t elementOffset = tensor.storage_offset();
++    TORCH_CHECK(elementOffset >= 0 &&
++                    static_cast<uint64_t>(elementOffset) <=
++                        maximum / static_cast<uint64_t>(itemBytes),
++                "tensor storage offset is negative/overflows byte conversion");
++    const uintptr_t offsetBytes = static_cast<uintptr_t>(elementOffset) *
++                                  static_cast<uintptr_t>(itemBytes);
++    TORCH_CHECK(offsetBytes < backingBytes && offsetBytes <= maximum - base,
++                "tensor storage offset lies outside its backing storage");
++    const uintptr_t begin = reinterpret_cast<uintptr_t>(tensor.data_ptr());
++    TORCH_CHECK(begin == base + offsetBytes,
++                "tensor data pointer disagrees with storage offset/element width");
++    TORCH_CHECK(begin >= base && begin < storageEnd && bytes <= storageEnd - begin,
++                "tensor data interval lies outside its backing storage");
++    return {begin, begin + bytes};
++}
++void check_writer_dma_span(const at::Tensor& tensor, const char* name)
++{
++    const auto span = tensor_span(tensor);
++    TORCH_CHECK((span.second - span.first) % 32 == 0,
++                name, " writer byte length must be 32B aligned");
++    // Do not impose this length rule on readonly short metadata. Their existing
++    // DataCopyPad path legitimately reads B1 indices=4B and lengths=8B.
++
+ }
+ void check_tensor(const at::Tensor& tensor, const at::Tensor& query,
+                   at::ScalarType dtype, const char* name)
+@@ -58,6 +106,7 @@
+     TORCH_CHECK(tensor.scalar_type() == dtype, name, " has unsupported dtype");
+     TORCH_CHECK(reinterpret_cast<uintptr_t>(tensor.data_ptr()) % 32 == 0,
+                 name, " requires a 32B-aligned physical pointer");
++    (void)tensor_span(tensor); // Bounds for EVERY readonly/mutable tensor, before writer dispatch.
+ }
+ int64_t check_query_state(const at::Tensor& query, const at::Tensor& highState)
+ {
+@@ -65,7 +114,7 @@
+     TORCH_CHECK(query.dim() == 3 && query.size(1) == 4 && query.size(2) == 128,
+                 "query must have shape [T,4,128]");
+     const int64_t tokens = query.size(0);
+-    TORCH_CHECK(tokens == 1 || tokens == 16, "DAMP v1 accepts exactly B1 or B16");
++    TORCH_CHECK(tokens == 1 || tokens == 16, "DAMP arena v2 accepts exactly B1 or B16");
+     check_tensor(highState, query, at::kHalf, "high_state");
+     TORCH_CHECK(highState.dim() == 4 && highState.size(0) > 0 &&
+                     highState.size(0) <= UINT32_MAX && highState.size(1) == 12 &&
+@@ -130,7 +179,7 @@
+ {
+     const char* soc = aclrtGetSocName();
+     TORCH_CHECK(soc != nullptr && std::string(soc) == "Ascend910B4",
+-                "unvalidated integer-compaction v1 is restricted to Ascend910B4");
++                "unvalidated arena-wrapper v2 is restricted to Ascend910B4");
+     TORCH_CHECK(aclrtGetDevice(&deviceId) == ACL_SUCCESS,
+                 "failed to get current NPU");
+     TORCH_CHECK(aclrtGetDeviceInfo(deviceId, ACL_DEV_ATTR_VECTOR_CORE_NUM, &coreNum) ==
+@@ -144,20 +193,11 @@
+         reinterpret_cast<uintptr_t>(sr.data_ptr()),
+         plan_version(pk), plan_version(pv), plan_version(invPv), plan_version(sr)};
+ }
+-std::pair<uintptr_t, uintptr_t> storage_span(const at::Tensor& tensor)
+-{
+-    const auto storage = tensor.storage();
+-    const uintptr_t begin = reinterpret_cast<uintptr_t>(storage.data_ptr().get());
+-    const uintptr_t bytes = static_cast<uintptr_t>(storage.nbytes());
+-    TORCH_CHECK(bytes <= std::numeric_limits<uintptr_t>::max() - begin,
+-                "backing storage byte range overflow");
+-    return {begin, begin + bytes};
+-}
+ void check_disjoint(const at::Tensor& a, const at::Tensor& b)
+ {
+-    const auto sa = storage_span(a), sb = storage_span(b);
++    const auto sa = tensor_span(a), sb = tensor_span(b);
+     TORCH_CHECK(sa.second <= sb.first || sb.second <= sa.first,
+-                "experimental typed buffers require disjoint complete backing storage");
++                "typed tensor DATA byte intervals overlap; shared backing storage alone is allowed");
+ }
+ uint32_t bit_length(uint32_t value)
+ {
+@@ -180,7 +220,7 @@
+ }
+ } // namespace
+ 
+-void qwen36_gdn_damp_integer_compaction_v1_prepare_torch(
++void qwen36_gdn_damp_arena_v2_prepare_torch(
+     const at::Tensor& query, const at::Tensor& highState,
+     const at::Tensor& pk, const at::Tensor& pv,
+     const at::Tensor& invPv, const at::Tensor& sr)
+@@ -218,7 +258,7 @@
+     tiling_cache().emplace(cacheKey, PreparedEntry{tensor, pk, pv, invPv, sr});
+ }
+ 
+-at::Tensor qwen36_gdn_damp_integer_compaction_v1_decode_torch(
++at::Tensor qwen36_gdn_damp_arena_v2_decode_torch(
+     const at::Tensor& query, const at::Tensor& key, const at::Tensor& value,
+     const at::Tensor& g, const at::Tensor& beta,
+     const at::Tensor& highState, const at::Tensor& lowState,
+@@ -229,6 +269,7 @@
+     const c10::OptionalDeviceGuard guard(query.device());
+     const int64_t tokens = check_query_state(query, highState);
+     const int64_t slots = highState.size(0);
++    check_writer_dma_span(highState, "high_state");
+     check_plans(query, pk, pv, invPv, sr);
+     check_tensor(key, query, at::kBFloat16, "key");
+     check_tensor(value, query, at::kBFloat16, "value");
+@@ -236,6 +277,8 @@
+     check_tensor(beta, query, at::kBFloat16, "beta");
+     check_tensor(lowState, query, at::kChar, "low_state");
+     check_tensor(lowScale, query, at::kFloat, "low_scale");
++    check_writer_dma_span(lowState, "low_state");
++    check_writer_dma_span(lowScale, "low_scale");
+     check_tensor(actualSeqLengths, query, at::kInt, "actual_seq_lengths");
+     check_tensor(stateIndices, query, at::kInt, "state_indices");
+     TORCH_CHECK(key.sizes() == query.sizes(), "key must match query [T,4,128]");
+@@ -275,10 +318,15 @@
+                     "device/T/S/immutable-plan identity first");
+         tilingTensor = found->second.tiling;
+     }
++    check_tensor(tilingTensor, query, at::kByte, "tiling");
++    check_disjoint(highState, tilingTensor);
++    check_disjoint(lowState, tilingTensor);
++    check_disjoint(lowScale, tilingTensor);
+     at::Tensor out = at_npu::native::custom_ops::npu_format_cast(
+         at::empty({tokens, 12, 128}, query.options()), ACL_FORMAT_ND,
+         std::nullopt, std::nullopt);
+     check_tensor(out, query, at::kBFloat16, "out");
++    check_writer_dma_span(out, "out");
+     const at::Tensor* outputInputs[] = {&query, &key, &value, &g, &beta, &highState,
+                                       &lowState, &lowScale, &pk, &pv, &invPv, &sr,
+                                       &actualSeqLengths, &stateIndices, &tilingTensor};
+@@ -291,7 +339,7 @@
+     // Do not replace with an unqueued C++ direct launch or stream(true) per layer.
+     auto stream = c10_npu::getCurrentNPUStream().stream(false);
+     auto aclCall = [=]() -> int {
+-        qwen36_gdn_damp_integer_compaction_v1_decode_kernel<<<blockNum, nullptr, stream>>>(
++        qwen36_gdn_damp_arena_v2_decode_kernel<<<blockNum, nullptr, stream>>>(
+             (GM_ADDR)query.mutable_data_ptr(), (GM_ADDR)key.mutable_data_ptr(),
+             (GM_ADDR)value.mutable_data_ptr(), (GM_ADDR)g.mutable_data_ptr(),
+             (GM_ADDR)beta.mutable_data_ptr(), (GM_ADDR)highState.mutable_data_ptr(),
+@@ -303,7 +351,7 @@
+             (GM_ADDR)tilingTensor.mutable_data_ptr());
+         return 0;
+     };
+-    at_npu::native::OpCommand::RunOpApi("Qwen36GdnDampIntegerCompactionV1Decode", aclCall);
++    at_npu::native::OpCommand::RunOpApi("Qwen36GdnDampArenaV2Decode", aclCall);
+     return out;
+ }
+ } // namespace ascend_kernel

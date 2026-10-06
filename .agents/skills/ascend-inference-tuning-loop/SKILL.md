@@ -75,6 +75,14 @@ load. This rule does not guarantee the first real-device attempt will pass.
   known missing schema field, smoke-only plan admission or batch restriction
   for the first time after reserving scarce cards. Unrun prerequisites remain
   explicitly pending, never fabricated to mark a packet ready.
+- Test real CLI/aggregate entry points and the fresh-clone transitive source
+  closure, not only helper mocks. Old failed/software snapshots are historical
+  evidence, not current source manifests; retain them without rewriting pins.
+- Check actual engine/cgroup CPU capacity before create; threads are not CPU
+  quota. Admit concurrent jobs against ONE summed RAM/CPU/workspace budget plus
+  the unchanged reserve. Separate per-job checks cannot admit their combination.
+  Prove no-device CPU fitting avoids device-backend autoload using the supported
+  pinned-stack mechanism; an import canary is not actual fitting or NPU evidence.
 - MAIN alone admits and launches device jobs. Prove fresh physical mapping,
   actual process/HBM usage, aggregate host-RAM/disk/cgroup limits and source
   identities. Device declarations do not prove occupation; idle accelerators

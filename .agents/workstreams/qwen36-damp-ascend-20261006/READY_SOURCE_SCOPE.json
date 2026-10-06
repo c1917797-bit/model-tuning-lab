@@ -1,0 +1,358 @@
+{
+  "schema": "damp-reviewed-readiness-publication-scope/v1",
+  "status": "source-preparation-not-serving",
+  "default_on": false,
+  "npu_executed_by_this_checkpoint": false,
+  "entries": [
+    {
+      "path": "projects/damp-ascend/integration/continuous_metadata_v1/READY.md",
+      "bytes": 7352,
+      "sha256": "d33a090c87b2768f64fc329598988692a0f8db128c93aa9e83a740f3ac28cbf5"
+    },
+    {
+      "path": "projects/damp-ascend/integration/continuous_metadata_v1/SOURCE_MANIFEST.json",
+      "bytes": 2689,
+      "sha256": "64285866c436c0f904af0a3f4faba8b45663ef155aeaa3b711b904311a77e9f1"
+    },
+    {
+      "path": "projects/damp-ascend/integration/continuous_metadata_v1/contract.py",
+      "bytes": 10541,
+      "sha256": "113f37c597e8b062b217217a48e7f087d885c3456b5efe53305264d9c7b64a1b"
+    },
+    {
+      "path": "projects/damp-ascend/integration/continuous_metadata_v1/test_contract.py",
+      "bytes": 5862,
+      "sha256": "d92659d2e87ab31581271bccdd7feaf7a15c221f3bd0c1b69b65cf875814adf8"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/ALL_BATCH_DIFF.patch",
+      "bytes": 11835,
+      "sha256": "1861c852c629e917e8d6144a2363fd72bc7390782b2d41e5af224a46e0d8b9c5"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/CMakeLists.txt",
+      "bytes": 6587,
+      "sha256": "febb3e7e7dd955c98c8ca1e054afedeb77cdd6512040cf4d3551a950deb24561"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/NPU_MATRIX.md",
+      "bytes": 2978,
+      "sha256": "ea2568bc1401b37b7320ed2967f441e25f6fa55a3fc4912f937424a5088edd52"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/PREPARATION_AUDIT.md",
+      "bytes": 1641,
+      "sha256": "5ccc4499a39725e5731ecac16618daefef71f189a228b699080358e9e3401fc6"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/README.md",
+      "bytes": 5468,
+      "sha256": "0a3f84ab1ed31aac3136b314067f0f0ed73d1bdb3870a74a1f91e10ca81c84df"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/SOURCE_PROOF.md",
+      "bytes": 2976,
+      "sha256": "0e5b61c8bdcbc589e6606fe1b9dd6d8d4914fe5b0ebb213aa1f1679f11ea8428"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/audit/software-v1.json",
+      "bytes": 1955,
+      "sha256": "54fbbc49e9eb4a39ad6b2be404e0be4c61f6088d2701f0a036d2fa7ac0806ce6"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/ops.h",
+      "bytes": 827,
+      "sha256": "8f103382816ac8e4206ebd24f996f41186f5d92f6ace9918362936191c7e8b84"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/qwen36_gdn_damp_all_batch_v3_decode_torch.cpp",
+      "bytes": 18085,
+      "sha256": "b8c0304b9efb13c03537894549c9e3028bd7a4e866305b2b86122875f5b45812"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/register.cpp",
+      "bytes": 3932,
+      "sha256": "cdfac8e115b450262d372aa76b464fb1c4948d88b8f906cef4e9c7fe2950ac08"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/op_kernel/qwen36_gdn_damp_all_batch_v3_decode.h",
+      "bytes": 28326,
+      "sha256": "16505660b4c4714bfb3c7ab5cbc3b5330eec88337f693ecdd4c48a79ab2db60e"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/op_kernel/qwen36_gdn_damp_all_batch_v3_decode_kernel.asc",
+      "bytes": 1099,
+      "sha256": "5bfc1847a8a117b9ca0b8fcdf947a41a876009bf593174dcebdfc91f77e1b66b"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/source_manifest.json",
+      "bytes": 2937,
+      "sha256": "a115f00eb371476ad96c440fca53db2c383e2f5f11c9b62e80214543754c1958"
+    },
+    {
+      "path": "projects/damp-ascend/operator/all_batch_wrapper_v3/tests/test_all_batch_contract.py",
+      "bytes": 8881,
+      "sha256": "746eceb6bc59f80fa57f3013ea2ddb2acefb6b3a1aee9ef9d5afbbe3ae667ca4"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/CMakeLists.txt",
+      "bytes": 6533,
+      "sha256": "27cc5f7fb39616b4f253dd7bcccd60fe6e49b3cf10a1fee0ebe2ad6e8ec328e1"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/NPU_GATE_PLAN.md",
+      "bytes": 5499,
+      "sha256": "1b61cef30a845d920a60947bdac2dfad21ffc6dcc71444f8cf8cf7d6299236d4"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/PREPARATION_AUDIT.md",
+      "bytes": 1979,
+      "sha256": "1429d1fb41a53d3fd03c2e2b76ab0da5be20ac7a9fc04039fafa5e4c2b26db9a"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/README.md",
+      "bytes": 6614,
+      "sha256": "c4bac79cba622add0d4fe584ab0fc3a023d86cb4693116f1532b85c5035edd4a"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/WRAPPER_DIFF.patch",
+      "bytes": 16931,
+      "sha256": "c8a14410e19292eccfe4713a29633dbc222c4ebfa546f882a696851b62311e50"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/audit/software-v1.json",
+      "bytes": 3805,
+      "sha256": "7be72830e1974be540387ddda263f03b011233d7de3b5a5380b33b808da79dd0"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/audit/software-v2.json",
+      "bytes": 2291,
+      "sha256": "7a9b46529ccd6a1fb29fcd91bf5ea7e1c2c0c45f95c953085ff52e25a7001202"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/op_extension/ops.h",
+      "bytes": 811,
+      "sha256": "278b3d6e9a41ee7cf3a9e2dffd71ebc209a56c820137ed71690db51859de22e8"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp",
+      "bytes": 18064,
+      "sha256": "11f95e0caf5e68ca4cf7cbc2e2a03bb62828e8ea3af815f698c194ac31b615bf"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/op_extension/register.cpp",
+      "bytes": 3912,
+      "sha256": "ed5fdf49791c00d0b7b2f18b78e662f8443859fba51fcf64e1d34de247a5f0fd"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/op_kernel/qwen36_gdn_damp_arena_v2_decode_kernel.asc",
+      "bytes": 1153,
+      "sha256": "82b1dbc3a2be66a6e47745b5997f11c8d8426e462746b4a64b5636f4de9cab0c"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/source_manifest.json",
+      "bytes": 2985,
+      "sha256": "c05354c54175bcaa15c1637ff335febcc2500b0c0489e37db5354d65d4a5001f"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/tests/interval_contract.py",
+      "bytes": 2254,
+      "sha256": "f392a6839bc2ba9eae8626de09bcc1df0f2dd672939972d9fa31b223cc268ec8"
+    },
+    {
+      "path": "projects/damp-ascend/operator/arena_wrapper_v2/tests/test_software_contract.py",
+      "bytes": 8736,
+      "sha256": "740b011861897345f0b11c9a0fa258a32bf595a957e4da3d3b40de52405bca52"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/PREPARATION_AUDIT.md",
+      "bytes": 3717,
+      "sha256": "fcff48963aa6e10d1455e137982a68316c8c7706c58ff5e8df090dcf321355db"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/README.md",
+      "bytes": 8951,
+      "sha256": "f5d92755238128cdbe48b43dd890c49ba43e355292764f7cc808ec6264e8bf97"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/audit/software-v1.json",
+      "bytes": 7304,
+      "sha256": "3a0b983b3e5dcc4c4cc44ae2c89af427271fd45353e9392fbe7a0c28deaf5c98"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/audit/software-v2.json",
+      "bytes": 7231,
+      "sha256": "f5ff5e7ec8a0d5234e094c734e715970093766e27c1a04864161cdaac87e3078"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/audit/source-admission-v1.json",
+      "bytes": 4897,
+      "sha256": "b2d913b02ec737b816f627adb9c023c672c004d5d2283e57d62e07bf5b9a33bc"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/graph_contract.py",
+      "bytes": 6660,
+      "sha256": "b31984a9c0a074812bd859b75316188475c445848832478974c543aa733727f6"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/graph_protocol.py",
+      "bytes": 16231,
+      "sha256": "35df04f1f8453a9c68f728cce65d4d4821906204fd74502a0cf900bab4e8b4ca"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/run_graph_gate.py",
+      "bytes": 7382,
+      "sha256": "5eaab32be3cfb06e43aa5615f6e7a8e8e608b894022cfa54cb6998c4b814f6ba"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/runtime_manifest.json",
+      "bytes": 1032,
+      "sha256": "305f8d04bca8fd9ed012324d2cdd22385eae577ef0fef9ea59c3536dc53a2bfc"
+    },
+    {
+      "path": "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/test_software_contract.py",
+      "bytes": 6175,
+      "sha256": "a555c79cbb88e5187d7d8263551b90024f7f6f6b85b3badd441e159286d053cc"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/README.md",
+      "bytes": 7142,
+      "sha256": "1637e687a31462ff2f1ecf09b0d9201f67e22be9f740dff2edc100f22d0385df"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/arena_adapter.py",
+      "bytes": 17048,
+      "sha256": "4da0c821392541cd881b8fa6614f126d063a882add5bd280993cced65a9ea7b5"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/contract.py",
+      "bytes": 14299,
+      "sha256": "f42a42ce36dc18cb65381f00ac3a4737cb8b50dbf50b22bf90a719dd800d87fd"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/metadata_contract.py",
+      "bytes": 2135,
+      "sha256": "2803105bad54bbcd0cc67e2035ea31cfd5fb8116adad278a94e62ae72271bee4"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/run_all_batch_gate.py",
+      "bytes": 10662,
+      "sha256": "fb0fde9ec2b257692cb6e8d9e473cbbaa42e5a2804416944edcc065d2a0a3b12"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/runtime_manifest.json",
+      "bytes": 3047,
+      "sha256": "1755f39069b18b10aaabfb7ff341e6879ba741af3cbb72703b64ffe1070f38d5"
+    },
+    {
+      "path": "projects/damp-ascend/tests/all_batch_gate_v1/test_software_contract.py",
+      "bytes": 11031,
+      "sha256": "9399cd82d0b7010e72522692a3cb3969dcc07b80ab4a33cb763ffff3142096e2"
+    },
+    {
+      "path": "projects/damp-ascend/tests/shared_arena_gate_v1/README.md",
+      "bytes": 6643,
+      "sha256": "f32ce15f510e4672e54e94ad8a9d96b7fdd8ed7dff74cb50a4dd4a943b62970e"
+    },
+    {
+      "path": "projects/damp-ascend/tests/shared_arena_gate_v1/arena_adapter.py",
+      "bytes": 13165,
+      "sha256": "bef38eaa944a2c62bc765f56df6529e9a13fbbec5b4bf803916c624baa736dd7"
+    },
+    {
+      "path": "projects/damp-ascend/tests/shared_arena_gate_v1/contract.py",
+      "bytes": 10476,
+      "sha256": "e010c108b6dbcb14a982b0d4246acc2f18efb70aacfdf7c24a92f09da1406bc3"
+    },
+    {
+      "path": "projects/damp-ascend/tests/shared_arena_gate_v1/run_shared_arena_gate.py",
+      "bytes": 9453,
+      "sha256": "c9b2e1221acdd69f6b4065e14df55591ff9c0bdf8546cd442adfe613420ddf6d"
+    },
+    {
+      "path": "projects/damp-ascend/tests/shared_arena_gate_v1/runtime_manifest.json",
+      "bytes": 2733,
+      "sha256": "c8c8003051ff54db7e43ac6e4337b53328cca3d1291e9148c1b3241e01c3756e"
+    },
+    {
+      "path": "projects/damp-ascend/tests/shared_arena_gate_v1/test_software_contract.py",
+      "bytes": 4381,
+      "sha256": "8729335013552f02866aa089a636e9126e2efe225af8a64aabf680b6de50b4c9"
+    },
+    {
+      "path": "projects/damp-ascend/tools/allT_dispatch_plan_v1/READY.md",
+      "bytes": 6989,
+      "sha256": "33de6895aca9c6c7cb429ff211d49a17ee7af1efd3a83ce5707e90a97d621403"
+    },
+    {
+      "path": "projects/damp-ascend/tools/allT_dispatch_plan_v1/plan.py",
+      "bytes": 19520,
+      "sha256": "b2facaebbdef3fcc8636af4fc0b2b8a230947e9d31e734f4769f3b75b7410179"
+    },
+    {
+      "path": "projects/damp-ascend/tools/allT_dispatch_plan_v1/test_plan_contract.py",
+      "bytes": 12477,
+      "sha256": "92489e9331cc5d69a34344caccece1633f21c17893a0c516d1e9eb8bef651983"
+    },
+    {
+      "path": "projects/damp-ascend/tools/cpu_selector_dispatch_v1/READY.md",
+      "bytes": 4022,
+      "sha256": "b238a7ed996d3f86986b52d7e652a3754a088605a89fa8a00b4b46f48c21814e"
+    },
+    {
+      "path": "projects/damp-ascend/tools/cpu_selector_dispatch_v1/plan.py",
+      "bytes": 7432,
+      "sha256": "c4c01c2f4fa795b37dca71fdc6d649f7a291b31ccdcab16db0d6d120e194e695"
+    },
+    {
+      "path": "projects/damp-ascend/tools/cpu_selector_dispatch_v1/test_plan.py",
+      "bytes": 5024,
+      "sha256": "85981e2a29c1f8a222d3a3cf498feff1fde027bddd2e9d586f8abfc4d1f1f5d8"
+    },
+    {
+      "path": "projects/damp-ascend/tools/post_reference_plan_v1/MANIFEST.json",
+      "bytes": 2834,
+      "sha256": "c57a9cde12eb00c4895894958ae004e3dedc2644f323f2682706da12b26e5423"
+    },
+    {
+      "path": "projects/damp-ascend/tools/post_reference_plan_v1/READY.md",
+      "bytes": 3650,
+      "sha256": "5e33131b6e6fe6510be8197a70c4f00fda0326081e8305957bb6a0046ce32cda"
+    },
+    {
+      "path": "projects/damp-ascend/tools/post_reference_plan_v1/post_reference_contract.py",
+      "bytes": 7656,
+      "sha256": "643f0ce23c7e6a45471f2e8d37439634ab74e27a92c90ed47ea9767312ce4e78"
+    },
+    {
+      "path": "projects/damp-ascend/tools/post_reference_plan_v1/run.py",
+      "bytes": 3031,
+      "sha256": "a5196a4283a5d88e5d2418dcc7e64bc652131507d574484b2781a595739c6771"
+    },
+    {
+      "path": "projects/damp-ascend/tools/post_reference_plan_v1/test_contract.py",
+      "bytes": 2200,
+      "sha256": "9a57157039d77041f4e2a08b803644ca304ccbfde901deb1160bcf9d4d49bb9f"
+    },
+    {
+      "path": "projects/damp-ascend/tools/resume_reference_v1/MEMORY_BUDGET.md",
+      "bytes": 3534,
+      "sha256": "8681dbd1a19ae42e0686ca8c958e60d11fdd995b357a3e6fac86f7dc1850a721"
+    },
+    {
+      "path": "projects/damp-ascend/tools/resume_reference_v1/README.md",
+      "bytes": 5040,
+      "sha256": "6cc5d3ad0415fa31470356581f16668d4b1eea68a2d60939984acf2d83450c0b"
+    },
+    {
+      "path": "projects/damp-ascend/tools/resume_reference_v1/controller.py",
+      "bytes": 28412,
+      "sha256": "d20889ce69e1eb1d2d49fff5e2d65803b9f63bff444115587dc21b562641454e"
+    },
+    {
+      "path": "projects/damp-ascend/tools/resume_reference_v1/test_controller.py",
+      "bytes": 5615,
+      "sha256": "efa76cdfd4a51d7486710a7f1da466de4a847073fe421e8d15fa5df399ddb363"
+    }
+  ]
+}

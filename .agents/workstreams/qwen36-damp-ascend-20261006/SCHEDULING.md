@@ -67,6 +67,28 @@ claim of uninterrupted 24/7 hardware occupation.
   An unavailable ma observation is not a hardware blocker and not permission to
   relaunch a possibly running job.
 
+## Actual next dispatch readiness — 2026-10-06
+
+- MA04fd MAIN software97 and real CLI source checks passed; MA04ed no-device
+  CPU import/CLI canary passed. These are preparation, not fitted/device/service
+  acceptance. MA04e8 quota8 failure preceded creation, retained with new v2 only
+  after actual capacity evidence. Use fresh engine limits, never hardcode7.
+- All-T4shards: quota1CPU/8GiB each, ordinary RAM40GiB plus disk/source/mapping
+  gates. CPU fitting: quota2CPU/4GiB. Combined admission needs44GiB and6CPU,
+  accounting for external work; CPU threads8 stay frozen. Formal performance
+  remains exclusive, with no fitting/build/numerical load overlap.
+- MA04fe at15:55:46Z: live ON8/36 complete,12bound/rank; ordinary RAM below40GiB.
+  Complete source-bound launch controller now, but wait for actual MA0455
+  terminal/success/release and fresh resources. The planner is not a launch.
+- Continuous helper is reviewed metadata/lifecycle preparation only; actual
+  pre-model cache-zero/shared FA writers, mixed/continuation pack/unpack and
+  final192-plan NPU gates are still prerequisites to C16 E2E. Ready queue is
+  neither a toy sample nor an unconditional promise of first-attempt success.
+- Reviewed readiness source checkpoint excludes evolving service/prefill/
+  controller drafts and final11 files with unpublished legacy test dependency.
+  Keep useful successor work ready; don't fill cards with dummy loads or skip
+  algorithm-specific correctness to raise utilization.
+
 ## Human-imposed portfolio cutoff (2026-10-06)
 
 All existing papers, including added still-unresolved candidates, enter the

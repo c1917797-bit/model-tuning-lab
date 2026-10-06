@@ -1,0 +1,44 @@
+{
+  "schema": "damp-continuous-metadata-preparation/v1",
+  "default_enabled": false,
+  "serve_ready": false,
+  "npu_executed": false,
+  "performance_measurement_admitted": false,
+  "head_at_preparation": "4e8dd78c8586dd866a07dd187b4192ceaea188d9",
+  "runtime_sources": {
+    "projects/damp-ascend/integration/continuous_metadata_v1/contract.py": "113f37c597e8b062b217217a48e7f087d885c3456b5efe53305264d9c7b64a1b",
+    "projects/damp-ascend/integration/continuous_metadata_v1/test_contract.py": "d92659d2e87ab31581271bccdd7feaf7a15c221f3bd0c1b69b65cf875814adf8",
+    "projects/damp-ascend/integration/continuous_metadata_v1/READY.md": "d33a090c87b2768f64fc329598988692a0f8db128c93aa9e83a740f3ac28cbf5"
+  },
+  "actual_snapshot_receipts": [
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-source-snapshot-v1/receipt.json",
+      "sha256": "4a4e548e300339a0d28fbd71068ca803ad026325a5cf1c0fce1b8d7ee7261177"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-continuous-snapshot-v1/MANIFEST.json",
+      "sha256": "2a37b75ec59f185943fb214e7efe6c8d08f8efa95a554de50c64558c62f19130"
+    }
+  ],
+  "native_sources": {
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn_attn_builder.py": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/npu_input_batch.py": "a4dc08a9918f07797622f8d0915785e8c7b6899e0d10d92603e1dddec218acc3",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/block_table.py": "8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a",
+    "/vllm-workspace/vllm/vllm/v1/worker/gpu_input_batch.py": "caeeb20f5010d74663c45f9419237191e3c0a149f4c7aa25bc1b73b1112d67ae",
+    "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666",
+    "/vllm-workspace/vllm/vllm/v1/attention/backends/gdn_attn.py": "27f5561c4b191f2be5a4a91820a6c64a38b755477b3f037178fb02bbc3bc1caf",
+    "/vllm-workspace/vllm/vllm/v1/attention/backends/utils.py": "f4f2f106ad84aa77cdf0b09d6948878f4e74c56568309312ec47bd190cc710cd",
+    "/vllm-workspace/vllm/vllm/v1/kv_cache_interface.py": "8d6be98bbf75b3d55007b64ccf5afef047ca01790a432522f70a196412c103d9"
+  },
+  "not_implemented": [
+    "runtime_patch",
+    "fast_selected_unpack",
+    "NPU_mixed_lifecycle",
+    "shared_FA_GDN_live_model_pages",
+    "NPUGraph_continuous",
+    "formal_E2E",
+    "task_accuracy"
+  ]
+}

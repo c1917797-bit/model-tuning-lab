@@ -3,6 +3,37 @@
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
+## Latest readiness checkpoint — 2026-10-06
+
+Read READINESS_CHECKPOINT_20261006.md and READY_SOURCE_SCOPE.json for exact
+source/publication boundary, actual no-device evidence and successor commands.
+MA0455 remains the only live TP4 NPU job; MA04fe at15:55:46Z observes8/36 ON
+completed4096-token TRAIN clients, no capture_failed, with source28 unchanged.
+No SOURCE_LOCK, fitted192 plans, candidate service, performance or task result
+exists yet. Protected0-3 remain untouched and per-paper/portfolio cutoffs do not reset.
+
+MAIN independently passed97 current software contracts and actual default CLIs
+MA04fd. Real CPU import/CLI canary MA04ed passed with NO devices,4GiB/quota2;
+MA04e8 quota8 create failure is retained, no container was created in that arm.
+Actual Docker capacity7 was observed then, not assumed forever. New all-T
+shards use quota1 each; joint optional fitting requires6 CPU quota and44GiB
+ordinary RAM, not separate40/12GiB checks. Current ordinary available RAM is
+below40GiB, so future cards being idle would not itself admit four shards.
+
+Prior4e8dd78c WAS normally pushed and exact remote branch verified MA04a9;
+the older15:18Z push-failed paragraph is superseded history.
+This checkpoint publishes only reviewed70-file source closure plus governance.
+Final/calibrated11 software-pass files remain excluded pending the older
+untracked smoke-loader test dependency's coherent publication; never claim
+fresh-clone/full numerical/service readiness. Evolving prefill/service/controller
+drafts are retained and not silently staged. Current defaults remain OFF.
+
+MA0503 validates20 maintainer skills and bundled skill-creator validation; exact
+70 source hashes/staged75-file scope and new-governance whitespace pass.
+Full whitespace exits2 only for retained .patch blank context and frozen
+MEMORY_BUDGET extra EOF, preserved without changing hashes. No blanket style PASS.
+
+
 ## Latest actual execution / preparation — 2026-10-06 15:18Z
 
 MA0455 is the NEW source-bound ON-only full-TRAIN recovery, freshly RUNNING:

@@ -1,0 +1,35 @@
+{
+  "schema": "damp_arena_wrapper_software_contract_v1",
+  "scope": "stdlib_source_and_interval_model_only",
+  "torch_imported": false,
+  "build_executed": false,
+  "npu_executed": false,
+  "load_executed": false,
+  "routeDecision": "peer_direct",
+  "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "record": {
+    "args": [
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "projects/damp-ascend/operator/arena_wrapper_v2/tests",
+      "-p",
+      "test_software_contract.py",
+      "-v"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "durationMs": 101,
+    "error": "exit code",
+    "exitCode": 1,
+    "id": "exec-000000000000042d",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "test_exact_backing_end (test_software_contract.IntervalContract) ... ok\ntest_guarded_arena_regions (test_software_contract.IntervalContract) ... ok\ntest_negative_empty_bounds (test_software_contract.IntervalContract) ... ok\ntest_overflow (test_software_contract.IntervalContract) ... ok\ntest_overlap_and_touch (test_software_contract.IntervalContract) ... ok\ntest_physical_layout_device_alignment (test_software_contract.IntervalContract) ... ok\ntest_pointer_offset_width (test_software_contract.IntervalContract) ... ok\ntest_readonly_overlap_allowed (test_software_contract.IntervalContract) ... ok\ntest_shared_arena_regions (test_software_contract.IntervalContract) ... ok\ntest_short_readonly_metadata (test_software_contract.IntervalContract) ... ok\ntest_writer_vs_tiling_every_input (test_software_contract.IntervalContract) ... ok\ntest_default_off_distinct_namespace_schema (test_software_contract.SourceContract) ... FAIL\ntest_delegated_sources_exact (test_software_contract.SourceContract) ... ok\ntest_every_mutable_vs_tiling (test_software_contract.SourceContract) ... ok\ntest_no_new_numerical_header (test_software_contract.SourceContract) ... FAIL\ntest_offset_bound_and_dma_scope (test_software_contract.SourceContract) ... ok\ntest_stream_kernel_gates_unchanged (test_software_contract.SourceContract) ... ok\n\n======================================================================\nFAIL: test_default_off_distinct_namespace_schema (test_software_contract.SourceContract)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/arena_wrapper_v2/tests/test_software_contract.py\", line 142, in test_default_off_distinct_namespace_schema\n    self.assertEqual(normalized, old)\nAssertionError: '#inc[3991 chars]);\\n    m.impl(\"decode\", &decode_meta);\\n}\\n} // namespace\\n' != '#inc[3991 chars]);\\n    m.impl(\"decode\", &decode_meta);\\n}\\n} // namespace\\n\\n'\nDiff is 4137 characters long. Set self.maxDiff to None to see it.\n\n======================================================================\nFAIL: test_no_new_numerical_header (test_software_contract.SourceContract)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/arena_wrapper_v2/tests/test_software_contract.py\", line 129, in test_no_new_numerical_header\n    self.assertEqual(normalized, old)\nAssertionError: '#inc[1033 chars]n    op.Init(params, &pipe);\\n    op.Process();\\n#endif\\n}\\n' != '#inc[1033 chars]n    op.Init(params, &pipe);\\n    op.Process();\\n#endif\\n}\\n\\n'\nDiff is 1130 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 17 tests in 0.006s\n\nFAILED (failures=2)\n",
+    "stdout": "",
+    "timedOut": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "damp_all_batch_software_contract_v1",
+  "scope": "source_and_geometry_model_only",
+  "build_executed": false,
+  "load_executed": false,
+  "npu_executed": false,
+  "torch_imported": false,
+  "routeDecision": "peer_direct",
+  "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "record": {
+    "args": [
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "projects/damp-ascend/operator/all_batch_wrapper_v3/tests",
+      "-p",
+      "test_all_batch_contract.py",
+      "-v"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "durationMs": 92,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-0000000000000445",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "test_active_reads_never_depend_on_padding (test_all_batch_contract.GeometryContract) ... ok\ntest_invalid_tokens_and_padding (test_all_batch_contract.GeometryContract) ... ok\ntest_metadata_capacity_all_sixteen (test_all_batch_contract.GeometryContract) ... ok\ntest_negative_duplicate_out_of_range_indices (test_all_batch_contract.GeometryContract) ... ok\ntest_per_token_dma_source_bounds (test_all_batch_contract.GeometryContract) ... ok\ntest_task_coverage_and_whole_head_ownership (test_all_batch_contract.GeometryContract) ... ok\ntest_default_off_host_visible_same_launcher_body (test_all_batch_contract.SourceContract) ... ok\ntest_exactly_one_device_admission_change (test_all_batch_contract.SourceContract) ... ok\ntest_frozen_sources_unchanged (test_all_batch_contract.SourceContract) ... ok\ntest_meta_only_named_batch_admission_differences (test_all_batch_contract.SourceContract) ... ok\ntest_wrapper_only_named_batch_admission_differences (test_all_batch_contract.SourceContract) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.008s\n\nOK\n",
+    "stdout": "",
+    "timedOut": false
+  }
+}

@@ -1,0 +1,250 @@
+--- projects/damp-ascend/operator/arena_wrapper_v2/CMakeLists.txt
++++ projects/damp-ascend/operator/all_batch_wrapper_v3/CMakeLists.txt
+@@ -24,15 +24,15 @@
+ # ============================================================================
+ 
+ cmake_minimum_required(VERSION 3.16)
+-option(DAMP_BUILD_ARENA_WRAPPER_V2 "Explicitly build unvalidated DAMP shared-arena ABI wrapper" OFF)
+-if(NOT DAMP_BUILD_ARENA_WRAPPER_V2)
+-    message(FATAL_ERROR "Default-OFF experimental candidate: pass -DDAMP_BUILD_ARENA_WRAPPER_V2=ON explicitly")
++option(DAMP_BUILD_ALL_BATCH_WRAPPER_V3 "Explicitly build unvalidated DAMP all-batch shared-arena wrapper" OFF)
++if(NOT DAMP_BUILD_ALL_BATCH_WRAPPER_V3)
++    message(FATAL_ERROR "Default-OFF experimental candidate: pass -DDAMP_BUILD_ALL_BATCH_WRAPPER_V3=ON explicitly")
+ endif()
+ 
+ find_package(ASC REQUIRED)
+ 
+ # [MODIFY] 工程名
+-project(qwen36_gdn_damp_arena_v2_decode LANGUAGES ASC CXX)
++project(qwen36_gdn_damp_all_batch_v3_decode LANGUAGES ASC CXX)
+ 
+ set(CMAKE_CXX_STANDARD 17)
+ 
+@@ -105,8 +105,8 @@
+ set(TORCH_NPU_LIBRARIES ${TORCH_NPU_PATH}/lib)
+ 
+ # [MODIFY] 所有 add_custom → <your_op>（保持 _ops 后缀）
+-add_library(qwen36_gdn_damp_arena_v2_decode_ops SHARED
+-    op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp
++add_library(qwen36_gdn_damp_all_batch_v3_decode_ops SHARED
++    op_extension/qwen36_gdn_damp_all_batch_v3_decode_torch.cpp
+     op_extension/register.cpp
+ )
+ 
+@@ -114,11 +114,11 @@
+ # launches it with triple-chevron syntax.  Keeping both in one compilation unit
+ # is what permits RunOpApi to enqueue the launch without stream(true) flushing.
+ set_source_files_properties(
+-    op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp
++    op_extension/qwen36_gdn_damp_all_batch_v3_decode_torch.cpp
+     PROPERTIES LANGUAGE ASC
+ )
+ 
+-target_include_directories(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
++target_include_directories(qwen36_gdn_damp_all_batch_v3_decode_ops PRIVATE
+     ${CMAKE_CURRENT_SOURCE_DIR}/op_kernel
+     ${CMAKE_CURRENT_SOURCE_DIR}/op_extension
+     ${TORCH_INCLUDE_DIRS}
+@@ -127,7 +127,7 @@
+     ${ACL_INCLUDE_DIR}
+ )
+ 
+-target_link_libraries(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
++target_link_libraries(qwen36_gdn_damp_all_batch_v3_decode_ops PRIVATE
+     torch_npu
+     tiling_api
+     register
+@@ -140,15 +140,15 @@
+     ascendc_runtime
+ )
+ 
+-target_link_directories(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
++target_link_directories(qwen36_gdn_damp_all_batch_v3_decode_ops PRIVATE
+     ${ACL_LIB_DIR}
+     "$ENV{ASCEND_HOME_PATH}/aarch64-linux/lib64"
+     ${TORCH_NPU_LIBRARIES}
+ )
+ 
+-target_compile_options(qwen36_gdn_damp_arena_v2_decode_ops PRIVATE
++target_compile_options(qwen36_gdn_damp_all_batch_v3_decode_ops PRIVATE
+     ${TORCH_CXX_FLAGS}
+     $<$<COMPILE_LANGUAGE:ASC>:--npu-arch=dav-2201>
+ )
+ 
+-message(STATUS "TORCH_LIBRARY module 'libqwen36_gdn_damp_arena_v2_decode_ops.so' will be built")
++message(STATUS "TORCH_LIBRARY module 'libqwen36_gdn_damp_all_batch_v3_decode_ops.so' will be built")
+--- projects/damp-ascend/operator/arena_wrapper_v2/op_extension/ops.h
++++ projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/ops.h
+@@ -1,14 +1,14 @@
+-#ifndef QWEN36_GDN_DAMP_ARENA_V2_OPS_H
+-#define QWEN36_GDN_DAMP_ARENA_V2_OPS_H
++#ifndef QWEN36_GDN_DAMP_ALL_BATCH_V3_OPS_H
++#define QWEN36_GDN_DAMP_ALL_BATCH_V3_OPS_H
+ #include <torch/extension.h>
+ 
+ namespace ascend_kernel {
+-void qwen36_gdn_damp_arena_v2_prepare_torch(
++void qwen36_gdn_damp_all_batch_v3_prepare_torch(
+     const at::Tensor& query, const at::Tensor& highState,
+     const at::Tensor& pk, const at::Tensor& pv,
+     const at::Tensor& invPv, const at::Tensor& sr);
+ 
+-at::Tensor qwen36_gdn_damp_arena_v2_decode_torch(
++at::Tensor qwen36_gdn_damp_all_batch_v3_decode_torch(
+     const at::Tensor& query, const at::Tensor& key, const at::Tensor& value,
+     const at::Tensor& g, const at::Tensor& beta,
+     const at::Tensor& highState, const at::Tensor& lowState,
+--- projects/damp-ascend/operator/arena_wrapper_v2/op_extension/register.cpp
++++ projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/register.cpp
+@@ -3,7 +3,7 @@
+ #include "ops.h"
+ 
+ namespace {
+-TORCH_LIBRARY_FRAGMENT(qwen36_damp_arena_v2, m)
++TORCH_LIBRARY_FRAGMENT(qwen36_damp_all_batch_v3, m)
+ {
+     m.def("prepare(Tensor query, Tensor high_state, Tensor pk, Tensor pv, "
+           "Tensor inv_pv, Tensor sr) -> ()");
+@@ -13,10 +13,10 @@
+         "Tensor pk, Tensor pv, Tensor inv_pv, Tensor sr, "
+         "Tensor actual_seq_lengths, Tensor state_indices) -> Tensor");
+ }
+-TORCH_LIBRARY_IMPL(qwen36_damp_arena_v2, PrivateUse1, m)
++TORCH_LIBRARY_IMPL(qwen36_damp_all_batch_v3, PrivateUse1, m)
+ {
+-    m.impl("prepare", TORCH_FN(ascend_kernel::qwen36_gdn_damp_arena_v2_prepare_torch));
+-    m.impl("decode", TORCH_FN(ascend_kernel::qwen36_gdn_damp_arena_v2_decode_torch));
++    m.impl("prepare", TORCH_FN(ascend_kernel::qwen36_gdn_damp_all_batch_v3_prepare_torch));
++    m.impl("decode", TORCH_FN(ascend_kernel::qwen36_gdn_damp_all_batch_v3_decode_torch));
+ }
+ void check_meta_plan(const at::Tensor& tensor, at::ScalarType dtype, const char* name)
+ {
+@@ -30,8 +30,8 @@
+ {
+     TORCH_CHECK(query.scalar_type() == at::kBFloat16 && query.is_contiguous() &&
+                     query.dim() == 3 && query.size(1) == 4 && query.size(2) == 128 &&
+-                    (query.size(0) == 1 || query.size(0) == 16),
+-                "query must be BF16 B1/B16 [T,4,128]");
++                    (query.size(0) >= 1 && query.size(0) <= 16),
++                "query must be BF16 T1..16 [T,4,128]");
+     TORCH_CHECK(hi.scalar_type() == at::kHalf && hi.is_contiguous() &&
+                     hi.dim() == 4 && hi.size(0) > 0 && hi.size(1) == 12 &&
+                     hi.size(2) == 128 && hi.size(3) == 16,
+@@ -70,7 +70,7 @@
+                 "one-token metadata Meta shape/dtype mismatch");
+     return at::empty({tokens, 12, 128}, query.options());
+ }
+-TORCH_LIBRARY_IMPL(qwen36_damp_arena_v2, Meta, m)
++TORCH_LIBRARY_IMPL(qwen36_damp_all_batch_v3, Meta, m)
+ {
+     m.impl("prepare", &prepare_meta);
+     m.impl("decode", &decode_meta);
+--- projects/damp-ascend/operator/arena_wrapper_v2/op_kernel/qwen36_gdn_damp_arena_v2_decode_kernel.asc
++++ projects/damp-ascend/operator/all_batch_wrapper_v3/op_kernel/qwen36_gdn_damp_all_batch_v3_decode_kernel.asc
+@@ -1,13 +1,13 @@
+ #include "kernel_operator.h"
+ #include "../../production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h"
+ #if defined(__NPU_ARCH__)
+-#include "../../production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h"
++#include "qwen36_gdn_damp_all_batch_v3_decode.h"
+ #endif
+ 
+ using namespace AscendC;
+ using namespace Qwen36DampIntegerCompactionV1;
+ 
+-extern "C" __global__ __vector__ void qwen36_gdn_damp_arena_v2_decode_kernel(
++extern "C" __global__ __vector__ void qwen36_gdn_damp_all_batch_v3_decode_kernel(
+     GM_ADDR query, GM_ADDR key, GM_ADDR value, GM_ADDR g, GM_ADDR beta,
+     GM_ADDR highState, GM_ADDR lowState, GM_ADDR lowScale,
+     GM_ADDR pk, GM_ADDR pv, GM_ADDR invPv, GM_ADDR sr,
+--- projects/damp-ascend/operator/arena_wrapper_v2/op_extension/qwen36_gdn_damp_arena_v2_decode_torch.cpp
++++ projects/damp-ascend/operator/all_batch_wrapper_v3/op_extension/qwen36_gdn_damp_all_batch_v3_decode_torch.cpp
+@@ -12,7 +12,7 @@
+ #include "torch_npu/csrc/core/npu/NPUStream.h"
+ #include "torch_npu/csrc/framework/OpCommand.h"
+ #include "torch_npu/csrc/aten/CustomFunctions.h"
+-#include "../op_kernel/qwen36_gdn_damp_arena_v2_decode_kernel.asc"
++#include "../op_kernel/qwen36_gdn_damp_all_batch_v3_decode_kernel.asc"
+ #include "ops.h"
+ 
+ namespace ascend_kernel {
+@@ -114,7 +114,7 @@
+     TORCH_CHECK(query.dim() == 3 && query.size(1) == 4 && query.size(2) == 128,
+                 "query must have shape [T,4,128]");
+     const int64_t tokens = query.size(0);
+-    TORCH_CHECK(tokens == 1 || tokens == 16, "DAMP arena v2 accepts exactly B1 or B16");
++    TORCH_CHECK(tokens >= 1 && tokens <= 16, "DAMP all-batch v3 accepts T1..16 only");
+     check_tensor(highState, query, at::kHalf, "high_state");
+     TORCH_CHECK(highState.dim() == 4 && highState.size(0) > 0 &&
+                     highState.size(0) <= UINT32_MAX && highState.size(1) == 12 &&
+@@ -179,7 +179,7 @@
+ {
+     const char* soc = aclrtGetSocName();
+     TORCH_CHECK(soc != nullptr && std::string(soc) == "Ascend910B4",
+-                "unvalidated arena-wrapper v2 is restricted to Ascend910B4");
++                "unvalidated all-batch-wrapper v3 is restricted to Ascend910B4");
+     TORCH_CHECK(aclrtGetDevice(&deviceId) == ACL_SUCCESS,
+                 "failed to get current NPU");
+     TORCH_CHECK(aclrtGetDeviceInfo(deviceId, ACL_DEV_ATTR_VECTOR_CORE_NUM, &coreNum) ==
+@@ -220,7 +220,7 @@
+ }
+ } // namespace
+ 
+-void qwen36_gdn_damp_arena_v2_prepare_torch(
++void qwen36_gdn_damp_all_batch_v3_prepare_torch(
+     const at::Tensor& query, const at::Tensor& highState,
+     const at::Tensor& pk, const at::Tensor& pv,
+     const at::Tensor& invPv, const at::Tensor& sr)
+@@ -258,7 +258,7 @@
+     tiling_cache().emplace(cacheKey, PreparedEntry{tensor, pk, pv, invPv, sr});
+ }
+ 
+-at::Tensor qwen36_gdn_damp_arena_v2_decode_torch(
++at::Tensor qwen36_gdn_damp_all_batch_v3_decode_torch(
+     const at::Tensor& query, const at::Tensor& key, const at::Tensor& value,
+     const at::Tensor& g, const at::Tensor& beta,
+     const at::Tensor& highState, const at::Tensor& lowState,
+@@ -339,7 +339,7 @@
+     // Do not replace with an unqueued C++ direct launch or stream(true) per layer.
+     auto stream = c10_npu::getCurrentNPUStream().stream(false);
+     auto aclCall = [=]() -> int {
+-        qwen36_gdn_damp_arena_v2_decode_kernel<<<blockNum, nullptr, stream>>>(
++        qwen36_gdn_damp_all_batch_v3_decode_kernel<<<blockNum, nullptr, stream>>>(
+             (GM_ADDR)query.mutable_data_ptr(), (GM_ADDR)key.mutable_data_ptr(),
+             (GM_ADDR)value.mutable_data_ptr(), (GM_ADDR)g.mutable_data_ptr(),
+             (GM_ADDR)beta.mutable_data_ptr(), (GM_ADDR)highState.mutable_data_ptr(),
+@@ -351,7 +351,7 @@
+             (GM_ADDR)tilingTensor.mutable_data_ptr());
+         return 0;
+     };
+-    at_npu::native::OpCommand::RunOpApi("Qwen36GdnDampArenaV2Decode", aclCall);
++    at_npu::native::OpCommand::RunOpApi("Qwen36GdnDampAllBatchV3Decode", aclCall);
+     return out;
+ }
+ } // namespace ascend_kernel
+--- projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h
++++ projects/damp-ascend/operator/all_batch_wrapper_v3/op_kernel/qwen36_gdn_damp_all_batch_v3_decode.h
+@@ -3,11 +3,11 @@
+ // Modified 2026-10-06: DAMP mixed-state load/update/readout/requantization,
+ // full-head DMA ownership, static permutation/SR and fail-closed metadata.
+ // Native recurrent arithmetic attribution: see README.md and LICENSE-APACHE.
+-#ifndef QWEN36_GDN_DAMP_INTEGER_COMPACTION_V1_DECODE_KERNEL_H
+-#define QWEN36_GDN_DAMP_INTEGER_COMPACTION_V1_DECODE_KERNEL_H
++#ifndef QWEN36_GDN_DAMP_ALL_BATCH_V3_DECODE_KERNEL_H
++#define QWEN36_GDN_DAMP_ALL_BATCH_V3_DECODE_KERNEL_H
+ 
+ #include "kernel_operator.h"
+-#include "qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h"
++#include "../../production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h"
+ #include "../../quantizer/fast_integer_certificate/integer_certificate_ascendc.h"
+ #define DAMP_QUANTIZER_ASCENDC
+ #include "../../quantizer/exact_quantizer_bits.h"
+@@ -159,7 +159,7 @@
+         DataCopy(meta_, local, 40);
+         metaIn_.FreeTensor(local);
+         VectorToScalar();
+-        if (abiVersion_ != ABI_VERSION || (tokens_ != 1 && tokens_ != 16) ||
++        if (abiVersion_ != ABI_VERSION || (tokens_ < 1 || tokens_ > MAX_TOKENS) ||
+             meta_.GetValue(16) != 0) {
+             return false;
+         }
