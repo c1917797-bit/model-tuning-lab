@@ -49,9 +49,11 @@ results.
 4. Run a deterministic short canary before the full suite. For outputs of at
    most 512 tokens where deterministic execution is expected, require zero
    within-arm variance and exact baseline/candidate token equality.
-5. Measure the baseline three times to establish its own NPU variability.
-   Record per-sample results, aggregate score, run-to-run range, failures,
-   timeouts, retries, finish reasons, and length-limit rate.
+5. Measure the baseline three times once, or reuse three completed runs whose
+   environment, generation, dataset, evaluator, and service fingerprints match
+   exactly and whose raw/detail hashes still verify. Record the original run
+   IDs and dates, per-sample results, aggregate score, run-to-run range,
+   failures, timeouts, retries, finish reasons, and length-limit rate.
 6. Stop the service used for performance or baseline work. Start the exact
    frozen candidate configuration, prove the intended treatment is active, and
    run the same quality suite three times.

@@ -35,6 +35,13 @@ Use this reference when creating or reviewing a concrete quality experiment.
 Record any additional sampling and stopping parameters. A changed field creates
 a new ruler and requires a fresh baseline.
 
+If the ruler and the complete environment fingerprint are unchanged, reuse the
+previously completed baseline rather than rerunning it for every candidate.
+Verify all three runs per dataset, raw/detail hashes, expected sample counts,
+model weights, tokenizer, image/source, physical NPU topology, serving flags,
+evaluator, dataset bytes, and generation profile. Cite the original run IDs
+and dates. Any mismatch or material runtime drift requires a new baseline.
+
 ## Per-run evidence
 
 For every arm, dataset, and repetition record:
@@ -70,8 +77,9 @@ variability, paired samples, dataset size, and critical-category gates.
 Performance and quality use separate service lifecycles:
 
 1. finish performance and stop that service;
-2. start the frozen quality baseline, wait for health, record identity, warm up
-   if the contract requires it, and run three quality repetitions;
+2. reuse a verified matching frozen quality baseline, or start the baseline,
+   wait for health, record identity, warm up if the contract requires it, and
+   run three quality repetitions once;
 3. stop the baseline;
 4. start the one-switch candidate, verify the matching invariant hash and
    treatment activation, and run three repetitions;

@@ -20,8 +20,10 @@ real improvement.
 3. Run correctness gates first: load success, output validity, numerical or
    task-quality tolerance, deterministic checks where applicable, and expected
    NPU execution.
-4. Measure baseline and candidate with the same commands and controlled order.
-   Use explicit warmups, multiple measured repetitions, and report dispersion.
+4. Measure or reuse a verified baseline, then measure the candidate with the
+   same commands and controlled order. Use explicit warmups, multiple measured
+   repetitions, and report dispersion. Reuse the same baseline across candidate
+   iterations while its environment and protocol fingerprint still matches.
 5. Separate these evidence classes:
    - cold/startup: import, model load, compile, first token, first request;
    - steady: throughput, request latency, TTFT, TPOT, and token latency;
@@ -58,6 +60,17 @@ matrix to reconfirm a clearly missed gate.
 Do not compare results when material source, model, hardware, driver, firmware,
 CANN, framework, container, power mode, topology, workload, or cache state
 differs. Re-baseline instead.
+
+Before repeating a baseline, search the owning experiment's frozen baseline
+registry. Reuse a completed baseline only when the model/weight identity,
+image and live source, physical NPU IDs and topology, serving flags, benchmark
+script and workload bytes, warmup/cache regime, metric definitions, and
+repetition contract match exactly; revalidate every raw artifact hash and
+successful-run gate. Record the original run ID and date as the denominator.
+Do not rerun the same baseline for every candidate merely because the
+candidate changed. Re-baseline if any identity changes or current health,
+contention, thermal/power state, or observed drift makes the old denominator
+noncomparable. Never relabel an old baseline as a new measurement.
 
 ## Baseline identity in progress reports
 
