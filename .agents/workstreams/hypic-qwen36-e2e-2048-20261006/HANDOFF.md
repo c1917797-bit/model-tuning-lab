@@ -117,6 +117,17 @@ the pre-registered performance gate uses medians of all three treatment and
 baseline runs, so no pass/fail conclusion is yet valid. The same controller
 continued into treatment run2 without restarting the service.
 
+Run1 diagnostic opportunity bound (not a gate decision): subtracting each
+request's TTFT from its duration and summing the longest remaining duration
+in each of the three measured waves yields 1,270.59 s for treatment run1.
+If decode-wave work were unchanged, even zero additional TTFT would not reach
+the frozen baseline median's +20% throughput target (1,147.62 s) or -15%
+duration target (1,170.57 s). Thus a proposed replay/prefill-only retune has
+no plausible E2E opportunity bound under this conditional model. Recompute
+after all three treatment runs; profile the decode/service critical path
+before selecting the required measured optimization iteration. Do not change
+the registered A/B gate or claim impossibility from this one-run estimate.
+
 Git checkpoint `949fa6a` is local only: one attempted HTTPS push failed with
 `could not read Username for 'https://github.com'`. The branch was one commit
 ahead of origin and no credential helper or SSH agent was available. Do not
