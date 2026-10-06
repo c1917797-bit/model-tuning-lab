@@ -80,6 +80,20 @@ baseline. Git is local-only ahead of origin because secure HTTPS credentials
 are unavailable on this host; keep all commits and raw evidence, and push only
 after authentication is restored without exposing tokens.
 
+Profiling preparation: `profile_service.py` reconstructs each diagnostic-only
+service from the frozen two-container snapshot, adding only
+`PROFILING_MODE=dynamic` and isolated `/results/profiles/<arm>` evidence paths.
+`capture_hypic_profile.py` prewarms outside the capture, then records all four
+TP ranks with `msprof` PipeUtilization for separate prefill-dominant 1-token
+and Decode-rich 128-token stimuli. The latter includes prefill onset, so
+analysis must select at least 10 steady Decode intervals. Profiling traffic
+is never part of the formal performance gate. Baseline profile-service start
+is currently AWMCP operation `exec-000000000000048a`; poll that exact handle.
+Do not start a second profile service while its container is running. When
+each arm is finished, use `profile_service.py stop --arm <arm>` to remove its
+exact container and verify NPU0-3/port release. A failed capture does not
+authorize unscoped process kills or changes to NPU4-7.
+
 ## Execution log (historical; superseded by current state above)
 
 Running on chicaihong01 through AWMCP direct peer

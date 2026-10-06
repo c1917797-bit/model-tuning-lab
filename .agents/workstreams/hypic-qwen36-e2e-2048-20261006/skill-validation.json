@@ -44,8 +44,9 @@
     },
     {
       "skill": "ascend-cannbot-profiler",
-      "state": "required-pending",
-      "remaining": ["bounded prefill/decode profiling to attribute failed TPOT and service metrics before low-level changes"]
+      "state": "in-progress",
+      "evidence": ["decode-opportunity-diagnostic.json", "profile_service.py", "capture_hypic_profile.py"],
+      "remaining": ["complete and validate matched all-rank Prefill and Decode captures", "attribute failed TPOT and service metrics before low-level changes"]
     },
     {
       "skill": "ascend-model-quality-evaluation",
