@@ -61,6 +61,7 @@ verify_static_inputs() {
   if [[ "$E2E_GATES" == 1 ]]; then
     python3 -m py_compile "$CANARY" \
       "$E2E_RECORDS/baseline_contract.py" \
+      "$E2E_RECORDS/baseline_registry.py" \
       "$E2E_RECORDS/assess_hypic_e2e_gates.py"
   fi
 }
@@ -767,6 +768,7 @@ if [[ "$E2E_GATES" == 1 ]]; then
     run_performance no-cache
     stop_arm no-cache "$BASELINE_CONTAINER" performance 0
   fi
+  python3 "$E2E_RECORDS/baseline_registry.py" performance --root "$OUTPUT_ROOT"
   if performance_complete hypic-only; then
     write_status hypic-only-performance-reused "all three accepted treatment runs reused"
   else
@@ -784,6 +786,7 @@ if [[ "$E2E_GATES" == 1 ]]; then
     run_quality no-cache
     stop_arm no-cache "$BASELINE_CONTAINER" quality 0
   fi
+  python3 "$E2E_RECORDS/baseline_registry.py" quality --root "$OUTPUT_ROOT"
   if quality_complete hypic-only; then
     write_status hypic-only-quality-reused "all six accepted treatment runs reused"
   else

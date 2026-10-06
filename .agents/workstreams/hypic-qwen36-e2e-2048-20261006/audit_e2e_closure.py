@@ -89,6 +89,51 @@ def main() -> int:
         else:
             check("baseline_fingerprint_integrity", False, "missing fingerprint")
 
+    registry = read("baseline_registry_present", "baseline-registry.json")
+    if registry is not None:
+        check(
+            "baseline_registry_identity",
+            registry.get("schema") == "hypic-baseline-registry/v1"
+            and registry.get("fingerprint_sha256") == baseline_hash,
+        )
+        expected_performance = {
+            f"no-cache/performance.run{index}.json" for index in (1, 2, 3)
+        }
+        expected_quality = {
+            f"quality/no-cache/{dataset}.run{index}.{suffix}"
+            for dataset in ("longbenchv2", "gsm8k")
+            for index in (1, 2, 3)
+            for suffix in ("summary.json", "jsonl")
+        }
+        for phase, expected in (
+            ("performance", expected_performance),
+            ("quality", expected_quality),
+        ):
+            entries = registry.get(phase)
+            if not isinstance(entries, list):
+                check(f"baseline_registry_{phase}", False, "missing phase")
+                continue
+            paths = [row.get("path") for row in entries if isinstance(row, dict)]
+            check(
+                f"baseline_registry_{phase}_members",
+                len(entries) == len(expected)
+                and len(paths) == len(expected)
+                and all(isinstance(rel, str) for rel in paths)
+                and set(paths) == expected,
+            )
+            for row in entries:
+                if not isinstance(row, dict):
+                    continue
+                rel = row.get("path")
+                if not isinstance(rel, str) or rel not in expected:
+                    continue
+                path = (root / rel).resolve()
+                check(
+                    f"baseline_registry_hash:{rel}",
+                    path.is_relative_to(root) and path.is_file()
+                    and row.get("sha256") == sha256(path),
+                )
+
     canary = read("canary_gate_present", "canary-gate.json")
     canary_runs = {
         arm: read(f"{arm}_canary_present", f"{arm}/semantic-canary.json")

@@ -91,6 +91,16 @@ Run2 TTFT P95 was 81,137.27 ms; TPOT P95 447.08 ms; output throughput
 repetitions, not the formal three-run denominator. The controller advanced to
 baseline performance run3 without restarting the service.
 
+Baseline artifact registry was added while this controller was already live.
+Its running shell will not execute the newly inserted registry commands. After
+baseline performance run3 completes, run
+`python3 .agents/workstreams/hypic-qwen36-e2e-2048-20261006/baseline_registry.py performance --root /cache/cch/hypic-qwen36-e2e-2048-20261006`
+to freeze all three validated raw performance hashes. Once all six baseline
+quality summaries and JSONL files complete, run the same command with `quality`
+instead of `performance`. Both commands fail closed on missing, invalid, or
+changed raw evidence. Future controller starts perform these steps automatically,
+and the independent closure audit requires both registry sections.
+
 An initial controller operation, exec-0000000000000263, was stopped before
 service readiness after an escaped E2E_GATES variable entered the historical
 sequence. It produced no performance or quality result. Its exit code was
