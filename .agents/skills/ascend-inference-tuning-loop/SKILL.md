@@ -78,6 +78,13 @@ load. This rule does not guarantee the first real-device attempt will pass.
 - Test real CLI/aggregate entry points and the fresh-clone transitive source
   closure, not only helper mocks. Old failed/software snapshots are historical
   evidence, not current source manifests; retain them without rewriting pins.
+- Before scarce-card reservation, check the actual cross-stage handoffs:
+  numerical producer -> model launcher -> paired comparator. A new report
+  schema or host absolute Ref needs an explicit consumer and inspected mounts,
+  not fabricated legacy PASS. Bind and interpret actual Python/NPU ownership
+  separately from a prelaunch waiting PID or tiny canary. Helper-test PASS may
+  coexist with a proven model-entrypoint gap; retain that gap as preparation
+  pending rather than an algorithm failure or end-to-end readiness.
 - Check actual engine/cgroup CPU capacity before create; threads are not CPU
   quota. Admit concurrent jobs against ONE summed RAM/CPU/workspace budget plus
   the unchanged reserve. Separate per-job checks cannot admit their combination.

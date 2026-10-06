@@ -1,0 +1,107 @@
+{
+  "schema": "kvbp.split-runner-packet/v1",
+  "executed_by_preparer": false,
+  "npu_verified": false,
+  "main_owned_execution": true,
+  "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "library_sha256": "0e7c64b53314f1e822a27b5f373376d82d3f73c01264a384cf58ee4bc6e3477b",
+  "existing_artifacts_must_not_be_rerun": [
+    "build-p1-v1",
+    "meta-p1-v1"
+  ],
+  "parallel_scope": "independent single-card kernel correctness only; formal TP4 performance exclusive",
+  "jobs": [
+    {
+      "batch": 1,
+      "physical_device": 5,
+      "container": "qwen36_kvbp_p1_b1_npu5_20261006_v1",
+      "tag": "split-p1-b1-phys5-v1",
+      "command": [
+        "/usr/local/python3.12.13/bin/python3",
+        "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/split_gate_v1/run.py",
+        "--batch",
+        "1",
+        "--physical-device",
+        "5",
+        "--identity",
+        "/kvbuffer-results/split-p1-b1-phys5-v1.identity.json",
+        "--output-dir",
+        "/kvbuffer-results/split-p1-b1-phys5-v1"
+      ],
+      "env": {
+        "ASCEND_RT_VISIBLE_DEVICES": "0",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "container_constraints": {
+        "physical_devices": [
+          5
+        ],
+        "logical_to_physical": {
+          "0": 5
+        },
+        "privileged": false,
+        "memory_bytes": 8589934592,
+        "memory_swap_bytes": 8589934592,
+        "repo_readonly": true,
+        "build_readonly": true,
+        "meta_readonly": true,
+        "preserve_image_cann_environment": true
+      },
+      "protocol": {
+        "eager_trials": 1,
+        "graph_trials": 3,
+        "steps_per_case": 160,
+        "slots": 4,
+        "output_limit": 0.00303,
+        "complete_and_per_head_l2_limit": 0.000002,
+        "retry": "none"
+      }
+    },
+    {
+      "batch": 16,
+      "physical_device": 6,
+      "container": "qwen36_kvbp_p1_b16_npu6_20261006_v1",
+      "tag": "split-p1-b16-phys6-v1",
+      "command": [
+        "/usr/local/python3.12.13/bin/python3",
+        "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/split_gate_v1/run.py",
+        "--batch",
+        "16",
+        "--physical-device",
+        "6",
+        "--identity",
+        "/kvbuffer-results/split-p1-b16-phys6-v1.identity.json",
+        "--output-dir",
+        "/kvbuffer-results/split-p1-b16-phys6-v1"
+      ],
+      "env": {
+        "ASCEND_RT_VISIBLE_DEVICES": "0",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "container_constraints": {
+        "physical_devices": [
+          6
+        ],
+        "logical_to_physical": {
+          "0": 6
+        },
+        "privileged": false,
+        "memory_bytes": 8589934592,
+        "memory_swap_bytes": 8589934592,
+        "repo_readonly": true,
+        "build_readonly": true,
+        "meta_readonly": true,
+        "preserve_image_cann_environment": true
+      },
+      "protocol": {
+        "eager_trials": 1,
+        "graph_trials": 3,
+        "steps_per_case": 160,
+        "slots": 19,
+        "output_limit": 0.00303,
+        "complete_and_per_head_l2_limit": 0.000002,
+        "retry": "none"
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+[vllm.general_plugins]
+kvbuffer_service = kvbuffer_service:register
+

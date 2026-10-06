@@ -1,5 +1,26 @@
 # Continuous preparation and NPU execution queue
 
+## Actual current state — 2026-10-06 20:30Z
+
+MA070e selected_row_bal_v1 is the ONLY live numerical operation; poll that
+handle, never duplicate it. MA0712 at20:24:42Z observes24 native anchors,
+11 completed cases/1760 feedback steps, zero failed recorded checks and actual
+Python PIDs1542060/1542117/1542185/1542244 on physical4–7. Full64×160 aggregate,
+source-after and exact-owned stop/retain/release are still pending.
+Protected0–3 workers174886/174890/174892/174896 remain unchanged.
+Fresh ordinaryRAM is not a proven full-model admission; raw
+MemAvailable57690864KiB from MA0712, below unchanged72GiB model floor.
+
+MAIN MA0713 actually passed69 KVBuffer stdlib preparation checks and all49
+source pins. Read KVBUFFER_READY_BEFORE_RESOURCE_20261006.md: old service
+rejects the NEW split prerequisite schema, extra actual Python/runtime budget
+evidence is not consumed by the old bridge, and original host absolute Refs
+need explicit image RO mounts. A NEW thin consumer/launcher is preparation,
+not current PASS; actual split jobs and model/E2E/task results remain absent.
+This coherent checkpoint publishes reviewed service11/split5/bridge4/dispatch5;
+unrelated drafts remain excluded. Preserve frozen liveDAMP52 sources.
+Individual and portfolio deadlines unchanged; no newly usable non-HYPIC result.
+
 ## Current active dispatch — 2026-10-06
 
 MAIN MA070d independently closed the actual fresh-Git-export no-device packet:
