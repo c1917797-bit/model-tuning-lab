@@ -117,6 +117,15 @@ the pre-registered performance gate uses medians of all three treatment and
 baseline runs, so no pass/fail conclusion is yet valid. The same controller
 continued into treatment run2 without restarting the service.
 
+At 2026-10-06 14:28 UTC, treatment performance run2 completed and the same
+request-level validator accepted 40/40 fixed-output requests and both
+warmups. Raw JSON SHA256:
+`f2c9df36f23708984645187ea3d354fe2f8c15075dec2ac0d0a43d567e1d8c6e`.
+Run2 TTFT P95 was 49,153.90 ms; TPOT P95 420.70 ms; throughput 31.59
+token/s; duration 1,296.49 s. These are two of three treatment repetitions,
+not a performance-gate verdict. Controller moved into run3 without restarting
+the service.
+
 Run1 diagnostic opportunity bound (not a gate decision): subtracting each
 request's TTFT from its duration and summing the longest remaining duration
 in each of the three measured waves yields 1,270.59 s for treatment run1.
