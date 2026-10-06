@@ -82,7 +82,12 @@ validates three fixed-output performance repetitions against both original
 arms, writes separate candidate artifacts, and stops only this exact
 container in a finally block. At 16:47:31 UTC its canary passed: the response
 SHA256 `0fa5e875f58b181ddb6ac6890d15b5e4b6c1b29c58f6d8034e981b988f8d0498`
-matches both original arms, and performance run 1 is active. If the run fails,
+matches both original arms. At 17:10 UTC performance run 1 completed with
+40/40 fixed 1024-token requests and hot-path proof; raw SHA256 is
+`eba04875d407e258a33cddc30c2e2204781609f9b116c9ab3db6fa689ec31968`.
+Its TTFT P95 is 48,079.78 ms, TPOT P95 418.39 ms, output throughput
+31.63 tokens/s, duration 1295.05s. These are one-run diagnostics, not
+the median gate. Performance run 2 is now active. If the run fails,
 preserve logs/artifacts and
 check whether automatic cleanup passed. If cleanup fails, run
 `matmul_allreduce_service.py stop` after confirming identity. Do not touch
@@ -107,6 +112,8 @@ NPU0-3, freezes all six validated baseline raw run hashes before treatment,
 then runs six matched treatment runs and a paired raw audit. The script
 refuses duplicate controller instances and stops the exact owned service
 after each arm, including failure paths, with a 15-minute deadline margin.
+Quality preparation was committed locally as `5baaae8` and the exact
+unstarted-container cleanup repair as `a597f7c`.
 
 Do not start this controller until `exec-0000000000000590` is terminal and
 its candidate container has been removed with NPU0-3 and port 8223 free.
