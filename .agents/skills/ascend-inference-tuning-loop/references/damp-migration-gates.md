@@ -203,3 +203,34 @@ passing this chain. Preserve the current paper's 24-hour decision deadline.
   Four-argument Broadcast on this dav-c220 path pops a shared LCM stack buffer;
   a sum of authored UB allocations alone is not a complete kernel UB proof.
   Audit that hidden path and actual producer/consumer barriers before deployment.
+
+## Actual no-device failures and interface evidence, 12:53Z
+
+- An ASC device-only header may reject the host compilation pass. Preserve
+  that failure and the source bytes; keep device-specific includes behind the
+  verified SDK boundary without removing the actual target-architecture guard.
+  However, guarding the entire annotated kernel definition and leaving only
+  a host prototype is not sufficient: integer-certificate v2 compiled/linked,
+  but actual dlopen failed on its kernel symbol. Actual nm/readelf found that
+  symbol undefined in both the ASC object and shared library. A shared link
+  can permit unresolved symbols. The next narrowly changed launcher must
+  retain its host-visible definition, prove the actual exported symbol, and
+  pass real load/schema/Meta before any NPU attempt. Do not mark that proposed
+  repair passed before compilation and load.
+- Bind actual compiled dependencies separately from runtime tests/oracles.
+  This probe has nine compiler dependencies and sixteen runtime dependencies;
+  their intersection must match, with missing/extra/drift identities rejected.
+  Do not demand that a genuine compiler receipt use an invented runtime schema.
+- Check deployed component version files rather than guessing SDK filenames.
+  The two version.cfg guesses were absent; actual OPP version.info proves
+  OPP9.1.0 bytes only. Build target dav-2201 is not a runtime SoC observation.
+- Device dispatch failure and a later poisoned-context D2H failure are distinct.
+  Save CPU input-before/golden, original dispatch error and independent copy
+  errors before assertions; nullable unavailable returns are not a pass.
+  Failure-save simulations validate this harness behavior, not NPU execution.
+- KVBuffer parallel-fold actually compiled and passed no-device load/schema/
+  positive Meta plus software checks. Its explicit Broadcast scratch avoids
+  relying on the hidden LCM path, but neither this change nor Meta proves
+  real UB safety, numerical recurrence, graph replay or serving benefit.
+  Candidate auxiliary storage must reduce its KV budget rather than receive
+  extra memory unavailable to the same dense control.

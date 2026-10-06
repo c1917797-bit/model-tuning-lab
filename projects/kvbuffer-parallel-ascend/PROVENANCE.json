@@ -1,0 +1,566 @@
+{
+  "schema": "kvbp.source-provenance/v1",
+  "status": "built-load-meta-npu-unverified",
+  "paper": {
+    "id": "2605.19049v1",
+    "url": "https://arxiv.org/abs/2605.19049v1",
+    "mechanism": "KVBuffer GDN rank-one K/U buffering with log-decay and parallel log-dimension contractions/fold",
+    "implementation_claim": "project equation-derived targeted Ascend adaptation; NOT verified author code port",
+    "precision": "FP32 base and U; BF16 Q/K/V/beta/K-log; cap16"
+  },
+  "baseline_revision": "d5c59876eaee1dc6a0cf425a7668830380d6371d",
+  "workspace_base": "7d60821a530d68541c1cf691e9141ed2cb93d869",
+  "source_files": {
+    "projects/kvbuffer-ascend/operator/CMakeLists.txt": "10548f50f0337dfa0679c30398d85de82c82d9d4e15469113ffaa711d31b8b1f",
+    "projects/kvbuffer-ascend/operator/op_extension/ops.h": "d32961a39ce6913a4a1e4f66b8fb77a2fbd8d78303b502663bac92239c5c9197",
+    "projects/kvbuffer-ascend/operator/op_extension/register.cpp": "cb22c9cfe3c68e3aa4dc8620c1ef2c5efe09f72d7fd271633adeba9f1ab98d58",
+    "projects/kvbuffer-ascend/operator/op_extension/qwen36_gdn_kvbuffer_decode_torch.cpp": "016ad06ebf66db373c54ad5c56de7201af26c5cb12299876bcec5b48f770a51a",
+    "projects/kvbuffer-ascend/operator/op_kernel/qwen36_gdn_kvbuffer_decode.h": "af8695e5dcfaae9d8955561039f78287f723e3202a73d6497542f5dbb118c7fd",
+    "projects/kvbuffer-ascend/operator/op_kernel/qwen36_gdn_kvbuffer_decode_kernel.asc": "cd702cea54e1c5e1e9bae0996099caac436dc3ab607fcdc603d17af79a810e60",
+    "projects/kvbuffer-ascend/operator/op_kernel/qwen36_gdn_kvbuffer_decode_tiling.h": "1b32550513cb4d1880369cbeaefedf0a7060f7845f242a82b7726e185b5bcfb9",
+    "projects/kvbuffer-ascend/plugin/qwen36_kvbuffer_plugin/patch.py": "557b057388df78f86f57aa9e4e70a734cf76c0f16bc91313686aa80a0ef02cb3",
+    "projects/kvbuffer-ascend/tools/kvbuffer_candidate_npu_probe.py": "0574a353a8d006d57f61acdd33e2a82fee5c46e2a014890e4452f66b742690ee"
+  },
+  "reuse": {
+    "operator": "exclusive VECOUT IO queues, ABI shapes, BF16/FP32 stores, AscendC direct launch pattern",
+    "plugin": "native conv/gating/L2norm reuse, selected-slot FP32 native mixed fallback, explicit opt-in/hash/schema checks",
+    "probe": "native oracle and original frozen numerical gate values; new implementation includes complete log/guard/reset/dummy/per-head checks"
+  },
+  "native_kernel": {
+    "path": "/vllm-workspace/vllm-ascend/csrc/attention/recurrent_gated_delta_rule/op_kernel/recurrent_gated_delta_rule.h",
+    "sha256": "96e6d9667af1e3457316ffce92a8a983fcb90096df08e3efd13ec0b35b8b1c5b",
+    "reuse": "128-wide row reduction layout; no vendor source edits"
+  },
+  "licenses": {
+    "CMake": "Original CANN Open Software License Version2 notices retained; full LICENSE.cann copied verbatim from /cache/cch/ops-transformer/LICENSE",
+    "project_sources": "Existing user-authorized project code, preserved full source hashes; original old tree has no root LICENSE (read-only git show returned path absent). No invented Apache/MIT claim."
+  },
+  "excluded_reuse": {
+    "FwdH": "FP32 state allowed but U casts BF16; cannot silently replace FP32 U-log contractions",
+    "ops_transformer_ChunkGatedDeltaRule": "BF16 state interface, separate approximation not P1"
+  },
+  "boundaries": [
+    "P1 service eager only",
+    "model graph not claimed",
+    "P2 native mixed fallback retained",
+    "prefix/migration/spec/multimodal rejected",
+    "No build/NPU/performance/accuracy done by preparer"
+  ],
+  "prelaunch_fix_revision": {
+    "revision": "P1-prelaunch-v2-source-audited-unbuilt",
+    "prepared_at_workspace_head": "28a96944307dc36117a355cb7efa206fa7af1901",
+    "status": "CPU-contract-only; compilation/NPU/native-model-ABI/E2E/accuracy unverified",
+    "prior_frozen_files": {
+      "projects/kvbuffer-parallel-ascend/LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "projects/kvbuffer-parallel-ascend/P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "projects/kvbuffer-parallel-ascend/PROVENANCE.json": "f73d65bf93c50ba3c225b55d2fa99504c0af41a622a96aa986be937f457fe2a1",
+      "projects/kvbuffer-parallel-ascend/README.md": "ce95149ab996ce7d60f99fa8f0f6d7282607f3bda8255eeecb52e0f94e695712",
+      "projects/kvbuffer-parallel-ascend/operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "projects/kvbuffer-parallel-ascend/operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "projects/kvbuffer-parallel-ascend/operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "projects/kvbuffer-parallel-ascend/operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "projects/kvbuffer-parallel-ascend/operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "dd42f03db715294a382b4cf532cb0ef1da285e6aff48e792383e99a4e980acc4",
+      "projects/kvbuffer-parallel-ascend/operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "projects/kvbuffer-parallel-ascend/operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/contract.py": "357a2f6ef201e092792d179cd63d8784a05ab278385fd57c9e47ac9fdfa459f5",
+      "projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/patch.py": "dff68d2593551ad8734d131ddb1e9e1859f303627ee63f851c3f067fefa5c455",
+      "projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "projects/kvbuffer-parallel-ascend/tests/test_contract.py": "e4d00507433a37d3333f9762b77c43bfd2849ee86d867cde83383791d9859e82",
+      "projects/kvbuffer-parallel-ascend/tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "projects/kvbuffer-parallel-ascend/tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "projects/kvbuffer-parallel-ascend/tools/native_oracle_probe.py": "60db97445e2a7adb03681497d442e692468e7dcdb85e87711ea8829793acf757"
+    },
+    "updated_files": {
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "6d25b3d6414890f2292e7c300c01b56ce1195903b11d78fb4a22a80fe5286886",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "tests/test_contract.py": "578cc9f839cbb0bf4b48ba52af57ffaaa37851eeb4798bb664800e81ccbf9d47",
+      "README.md": "3d05ba4caa121863d32560d7455c8462e0342c22a7c7d09415db65e50200a2c5"
+    },
+    "changes": [
+      "Three PIPE_V barriers: q dot-buffer reduction WAR, flush UB-copy RAW, dummy Duplicate-to-Cast RAW; preserve existing barriers.",
+      "4096B explicit disjoint uint8 Broadcast scratch within unused tail of existing128KiB reservation; all4 public five-argument calls, no implicit LCM stack.",
+      "CachedRequestState prompt_is_token_ids None admits pure text; supplied list requires full prompt length and strict all-True bools; multimodal/embeddings remain rejected."
+    ],
+    "cann91_sources": {
+      "/usr/local/Ascend/cann-9.1.0/asc/impl/basic_api/dav_c220/kernel_operator_data_copy_impl.h": "9cee16df54270872b114e512660ee8b3effb5c7ee617e5130450facecbc454a3",
+      "/usr/local/Ascend/cann-9.1.0/asc/include/adv_api/broadcast/broadcast.h": "ac4b048ba75b1c31e965db2a169ec6b75c1586310abde929ae6da758a12d24fd",
+      "/usr/local/Ascend/cann-9.1.0/asc/impl/adv_api/detail/pad/broadcast/broadcast_common_impl.h": "9647011f4ed228acc22b07dde321247271a24e3f88688e965c0ba4aee603acb8",
+      "/usr/local/Ascend/cann-9.1.0/asc/impl/adv_api/detail/pad/broadcast/broadcast_v220_impl.h": "37b17be5a6023ad3e5bccf11c5b6b30159bc3d9472ec41e8763c94c0fa977cc8",
+      "/usr/local/Ascend/cann-9.1.0/asc/impl/basic_api/dav_c220/kernel_operator_vec_reduce_impl.h": "804ac27889146c36d6bd3f7dafe3d09dca10a1d578dd787cc679dec8fcda08ed"
+    },
+    "cann_source_findings": [
+      "dav_c220 DataCopyUB2UBIntf:1003-1011 is pragma begin_pipe(V), not MTE2/MTE3.",
+      "BroadCastCommon:437-440 four-argument form PopStackBuffer LCM; public five-argument form accepts LocalTensor<uint8_t>&.",
+      "LastDim aligned FP32:170-194 plus BrcbToOneBlock:36-61 needs at most128*8*4=4096B for current shapes; min256B uses chunked broadcast.",
+      "WholeReduceSumImpl:261-282 calls vcadd with repeatTimes,dstRepStride,srcBlkStride,srcRepStride; pinned native128 row layout retained."
+    ],
+    "deployed_runtime_read_only_sources": {
+      "/vllm-workspace/vllm/vllm/config/cache.py": "a4fe18a134f7e487d5670f613e60e36bcccbda219b9d299aafee616ef2fe2e2e",
+      "/vllm-workspace/vllm/vllm/v1/worker/gpu_input_batch.py": "caeeb20f5010d74663c45f9419237191e3c0a149f4c7aa25bc1b73b1112d67ae",
+      "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666"
+    },
+    "runtime_findings": [
+      "MambaCacheMode is Literal['all','align','none']; current value is a string, not Enum.",
+      "GPUModelRunner:426-435 initializes vllm_config/model_config/cache_config/speculative_config; Ascend constructor calls super:287-288.",
+      "CachedRequestState:55-57 is list[bool]|None; add_request:360-367 fills native is_token_ids=True when mask None and prompt_token_ids present.",
+      "Ascend runner gdn_query_start_loc is a CpuGpuBuffer; CPU np starts copied from cumsum:1074-1078; same CPU/GPU slices passed to GDN metadata:3288-3293."
+    ],
+    "audit_peer": {
+      "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "route": {
+        "mode": "force_direct",
+        "logicalGatewayId": "tpc"
+      },
+      "routeDecision": "peer_direct",
+      "stopped_source_container": "qwen36_damp_cache_source_20261006",
+      "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+    },
+    "cpu_receipt": {
+      "operationId": "exec-000000000000025a",
+      "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "terminal": "completed",
+      "exit_code": 0,
+      "AST": "PASS",
+      "tests": 21,
+      "duration_ms": 325,
+      "not_NPU": true
+    },
+    "retained_apply_errors": [
+      {
+        "traceId": "6fec2b48-38b5-4486-9724-5bd868e93bbd",
+        "error": "GIT_CONFLICT baseRef changed; all21 frozen hashes rechecked before applying current HEAD"
+      },
+      {
+        "traceId": "f731ceeb-2f86-4634-833c-16005fae0d48",
+        "error": "trailing-slash allowedPaths prefix rejected; changed request to exact5 paths"
+      }
+    ],
+    "missing_gates": [
+      "Compiler/public5-argument Broadcast overload and UB ledger in exact image; no build performed.",
+      "Actual NPU numerical, multistep, dummy/reset/untouched/log/graph matrix; no candidate NPU run.",
+      "First real TP4 runner metadata ABI, full48 donor/receiver bindings and native-output parity.",
+      "Matched E2E profiler-off total-budget pairs and final task accuracy; no success claim."
+    ],
+    "history_scope": "Historical first prelaunch freeze; current source hashes are in prelaunch_sync_followup.current_frozen_files."
+  },
+  "prelaunch_sync_followup": {
+    "revision": "P1-prelaunch-v3-source-audited-unbuilt",
+    "status": "CPU-contract-only; not build/NPU/E2E/accuracy evidence",
+    "workspace_head": "28a96944307dc36117a355cb7efa206fa7af1901",
+    "prior_frozen_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "PROVENANCE.json": "f73d65bf93c50ba3c225b55d2fa99504c0af41a622a96aa986be937f457fe2a1",
+      "README.md": "3d05ba4caa121863d32560d7455c8462e0342c22a7c7d09415db65e50200a2c5",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "6d25b3d6414890f2292e7c300c01b56ce1195903b11d78fb4a22a80fe5286886",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "tests/test_contract.py": "578cc9f839cbb0bf4b48ba52af57ffaaa37851eeb4798bb664800e81ccbf9d47",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "tools/native_oracle_probe.py": "60db97445e2a7adb03681497d442e692468e7dcdb85e87711ea8829793acf757"
+    },
+    "intermediate_two_barrier_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "PROVENANCE.json": "da8c0ae89dc2de51d15dae654beedc6958e5e155cc31fedff6809481133af3ce",
+      "README.md": "ce71dba5288ad401c01dc01499b06f05f8f3c14828c4e0b9ec69cacee3885865",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "4ddbd0bc869c01cfa18c51f541f3f1a97a13e50fc496015db554a674ef45881a",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "tests/test_contract.py": "528057135e1dcb0869b675717abfea4f6f600830c3cff2ae4997022226488f8e",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "tools/native_oracle_probe.py": "60db97445e2a7adb03681497d442e692468e7dcdb85e87711ea8829793acf757"
+    },
+    "current_frozen_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "README.md": "7b5f0fc2077111e839e561883a440ef726e8876f83656376763e34c94f00c752",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "8fde339a17c32d853de9d05bdfb69dd2e6ab4e023f1de8c3dc7abc9c7e153674",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "tests/test_contract.py": "3d1151b6f69cc0217b85886e27d8b843a4b59b8430745a880f40ebef16b3540e",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "tools/native_oracle_probe.py": "60db97445e2a7adb03681497d442e692468e7dcdb85e87711ea8829793acf757"
+    },
+    "provenance_self_hash": "Excluded from self-contained hash mapping; final full21 receipt recorded by parent.",
+    "additional_sync_only_changes": [
+      "ExpScalar Duplicate(scalarUb_) to Exp(scalarUb_) RAW: explicit PIPE_V.",
+      "ProcessTile ReduceRows(deltaUb_,broadUb_) to MatVecMul overwrite broadUb_ WAR: explicit PIPE_V.",
+      "Merge ReduceRows(attnUb_,broadUb_) to StoreOutput Cast(attnUb_) RAW: explicit PIPE_V; StoreBase only accesses independent state and is not a substitute.",
+      "StoreKLog LoadBf16Vector's first Cast writes kLogUb_; output Cast reads it: explicit PIPE_V."
+    ],
+    "invariants": [
+      "No arithmetic, recurrence, thresholds, precision, capacity, slot contract or existing barrier changed.",
+      "TreeFold independent source/scratch ping-pong; each of4 Add levels completes via existing PIPE_V; result in original source.",
+      "LoggedMatVec ends with Add and PIPE_V; subsequent weighted/broad scratch reuse is fenced.",
+      "Flush local-copy V barrier plus preexisting Broadcast/Mul/tree/Add barriers protect tile reuse; DataCopy destination ranges within separate tile are disjoint.",
+      "Existing TQue MTE2->V and V->MTE3 event edges retained; vector-to-vector RAW/WAR above explicitly fenced."
+    ],
+    "real_metadata_sources": {
+      "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn_attn_builder.py": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16",
+      "/vllm-workspace/vllm/vllm/v1/attention/backends/gdn_attn.py": "27f5561c4b191f2be5a4a91820a6c64a38b755477b3f037178fb02bbc3bc1caf"
+    },
+    "metadata_findings": [
+      "Builder:129-143 actual_seq_lengths stores initial offset then per-sequence differences, not cumulative offsets.",
+      "Builder:591-605 non-spec state indices cover all decode/prefill requests; threshold1, decodes first.",
+      "Builder:733-735 mixed prefill starts subtract num_decode_tokens and prefill slots take tail after num_decodes.",
+      "Builder:467-483 eager decode actual_seq_lengths has num_decodes+1 entries; conv metadata retains all non-spec rows.",
+      "Runner:3265-3269 same attention metadata object is assigned to every layer in a cache group; read-only pointer dedup has actual source basis.",
+      "Runner:420-428 pcp_size/dcp_size are integer world sizes, fallback1; original caller args and positions stay unchanged.",
+      "Native recurrent header SHA96e6d9667af1e3457316ffce92a8a983fcb90096df08e3efd13ec0b35b8b1c5b:308-316 uses identical K128 Add-fold + WholeReduceSum(mask64,repeatRows,dst1,srcBlock1,srcRepeat16)."
+    ],
+    "preserved_read_errors": [
+      {
+        "operationId": "exec-0000000000000256",
+        "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+        "error": "Read-only guessed attention/gdn_attn.py absent; terminal exit1 and max-output truncation retained. Actual gdn.py imports routed subsequent independent reads to ops/gdn_attn_builder.py and vLLM backends/gdn_attn.py."
+      }
+    ],
+    "cpu_receipt": {
+      "operationId": "exec-0000000000000262",
+      "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "route": {
+        "mode": "force_direct",
+        "logicalGatewayId": "tpc"
+      },
+      "routeDecision": "peer_direct",
+      "terminal": "completed",
+      "exit_code": 0,
+      "AST": "PASS",
+      "tests": 21,
+      "duration_ms": 336,
+      "stdout_sha256": "14f37381c02eda0e0ae554d5e9cd5db2525b3bafbe7e3e9c6191392d254a5e38",
+      "stderr_sha256": "7b74868b0c079c482908ce519004571d4c2b0bea45dfa851c2df4bf1702ea505",
+      "scope": "stdlib contracts/math/AST only; no native import, no compilation, no NPU"
+    },
+    "history_scope": "Historical seven-barrier operator freeze; final project source hashes are in probe_diagnostic_revision.current_frozen_files. Operator files remain identical."
+  },
+  "probe_diagnostic_revision": {
+    "revision": "P1-probe-raw-first-CPU-metrics-v4",
+    "status": "CPU-contract-only; preparer has not compiled or launched NPU",
+    "workspace_head": "28a96944307dc36117a355cb7efa206fa7af1901",
+    "prior_frozen_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "PROVENANCE.json": "8ea0bc8ae73e777cd3204896861c10bc32d4b51db4fe414ffc3b9c36cde95da6",
+      "README.md": "7b5f0fc2077111e839e561883a440ef726e8876f83656376763e34c94f00c752",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "8fde339a17c32d853de9d05bdfb69dd2e6ab4e023f1de8c3dc7abc9c7e153674",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "tests/test_contract.py": "3d1151b6f69cc0217b85886e27d8b843a4b59b8430745a880f40ebef16b3540e",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "tools/native_oracle_probe.py": "60db97445e2a7adb03681497d442e692468e7dcdb85e87711ea8829793acf757"
+    },
+    "current_frozen_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "README.md": "edac8198ab451d2b8fadf7fd1c380e236edeb4f87aa39ee7a46637bc6f29154e",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "8fde339a17c32d853de9d05bdfb69dd2e6ab4e023f1de8c3dc7abc9c7e153674",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "tests/test_contract.py": "c1f22875ab1b64d8728340fe2b47972fddb365b0c45f2a535e0d9e6072a84f33",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "tools/native_oracle_probe.py": "caa65dd94506edbd68a5600e9f813d93711ba162a8a2fc0565e7e00ede4414dd"
+    },
+    "provenance_self_hash": "Excluded from self-contained mapping; final full21 receipt independently read after this edit.",
+    "changes": [
+      "rel and output_error detach then CPU copy before double/float diagnostics; no assumed NPU FP64.",
+      "Synchronize then persist independent complete raw-step CPU tensor before logical reconstruction, log/finiteness/metric checks and numerical assertions.",
+      "Raw contains candidate before/after, native before/after, inputs/input-before, actual/expected, complete guard arenas before/after and all original pointers.",
+      "Failures retain raw forever; only exact current-run passed step's unchanged hash-checked temporary raw may be individually removed. No recursive/glob/old-result cleanup.",
+      "Nonfinite metrics serialize null with finite=false and metric_finite=false; nonfinite max becomes null; original nonfinite tensors remain unchanged in raw .pt."
+    ],
+    "invariants": [
+      "All7 operator file hashes remain identical to prelaunch seven-barrier freeze.",
+      "No arithmetic, precision, numerical limits, capacity or recurrence modified.",
+      "AST/source-order and stdlib tests are software regression only, not CANN synchronization or NPU correctness proof."
+    ],
+    "cpu_receipt": {
+      "operationId": "exec-000000000000027e",
+      "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "route": {
+        "mode": "force_direct",
+        "logicalGatewayId": "tpc"
+      },
+      "routeDecision": "peer_direct",
+      "terminal": "completed",
+      "exit_code": 0,
+      "duration_ms": 424,
+      "AST": "PASS",
+      "tests": 25,
+      "captured_unittest_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "captured_unittest_stderr_sha256": "7dfb4a295e0a1ca55d35825408851b43fb0f07b64ae47d022a7f602e05db2d00",
+      "scope": "Host stdlib contracts/math/AST; no torch/native import, no build, no Docker/NPU execution."
+    },
+    "missing_gates": [
+      "Exact-image compiler/5-argument Broadcast ABI/resource report remains Main-owned pending.",
+      "Raw-save/CPU-transfer operation with actual torch_npu, numerical eager/graph/native parity still not run by preparer.",
+      "Full48×4 real model/cache lifecycle, matched E2E, final task accuracy pending."
+    ],
+    "history_scope": "Historical raw-first probe freeze. Operator7 files and probe remain unchanged; final docs/test hashes are in main_no_device_evidence.current_frozen_files."
+  },
+  "main_no_device_evidence": {
+    "status": "BUILT + LOAD/META / NPU-UNVERIFIED",
+    "attribution": "Actual NO-device build/load/Meta actions executed by MAIN, not preparer. Preparer only read receipts and updated own docs/assertion; historical no-build action declarations remain accurate.",
+    "build": {
+      "path": "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-p1-v1/build-receipt.json",
+      "sha256": "25db2cee4f6e6020e476b2c92e15fa8321655bd22e371e35c4d27b0db16dd0d4",
+      "reported_main_operation": "MA exec-00000000000002b0 terminal exit0",
+      "receipt": {
+        "commands": [
+          {
+            "command": [
+              "cmake",
+              "-S",
+              "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/operator",
+              "-B",
+              "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-p1-v1",
+              "-DCMAKE_BUILD_TYPE=Release",
+              "-DPython3_EXECUTABLE=/usr/local/python3.12.13/bin/python3"
+            ],
+            "exit_code": 0,
+            "log_sha256": "fa5c78b836267f7df84fd003c7bfee49622c4f186ae4a081ce9bba528b86cd2d"
+          },
+          {
+            "command": [
+              "cmake",
+              "--build",
+              "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-p1-v1",
+              "-j2"
+            ],
+            "exit_code": 0,
+            "log_sha256": "5e9bfa3710a982470cfefe5287e338860de0b42355a487e5fb086cf30c64ae19"
+          }
+        ],
+        "completed_utc": "2026-10-06T12:28:28.134270+00:00",
+        "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+        "library_sha256": "0e7c64b53314f1e822a27b5f373376d82d3f73c01264a384cf58ee4bc6e3477b",
+        "npu_arch": "dav-2201",
+        "npu_executed": false,
+        "physical_soc_runtime_observed": false,
+        "schema": "kvbp_parallel_build_v1",
+        "sources": {
+          "CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+          "op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+          "op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+          "op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+          "op_kernel/qwen36_gdn_kvbuffer_parallel.h": "8fde339a17c32d853de9d05bdfb69dd2e6ab4e023f1de8c3dc7abc9c7e153674",
+          "op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+          "op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd"
+        },
+        "started_utc": "2026-10-06T12:25:16.359582+00:00",
+        "status": "compiled_no_device"
+      }
+    },
+    "load_meta": {
+      "path": "/cache/cch/qwen36-kvbuffer-parallel-20261006/meta-p1-v1/report.json",
+      "sha256": "2765f4bbcbf1d935e260b4d6cfa3b5401257aaf125fca0ae4c149193566dc727",
+      "reported_main_operation": "MA exec-00000000000002d4 terminal exit0",
+      "receipt": {
+        "scope": "no-device load, schema, positive Meta and stdlib only",
+        "npu_executed": false,
+        "physical_nd_proven": false,
+        "graph_proven": false,
+        "library_sha256": "0e7c64b53314f1e822a27b5f373376d82d3f73c01264a384cf58ee4bc6e3477b",
+        "build_receipt_sha256": "25db2cee4f6e6020e476b2c92e15fa8321655bd22e371e35c4d27b0db16dd0d4",
+        "software_exit": 0,
+        "started_utc": "2026-10-06T12:36:06.181016+00:00",
+        "meta_negative_validation": "not implemented by this Meta kernel",
+        "schema": "qwen36_kvbuffer_parallel_fp32::decode(Tensor query, Tensor key, Tensor value, Tensor g, Tensor beta, Tensor(a!) base_state, Tensor(b!) k_log, Tensor(c!) u_log, Tensor(d!) lambda_log, Tensor(e!) cumulative_decay, Tensor(f!) log_length, Tensor actual_seq_lengths, Tensor state_indices) -> Tensor",
+        "prepare_schema": "qwen36_kvbuffer_parallel_fp32::prepare(Tensor query, Tensor base_state) -> ()",
+        "torch": "2.10.0+cpu",
+        "torch_npu": "2.10.0.post4",
+        "status": "pass",
+        "meta": [
+          {
+            "T": 1,
+            "slots": 4,
+            "shape": [
+              1,
+              12,
+              128
+            ],
+            "dtype": "torch.bfloat16"
+          },
+          {
+            "T": 16,
+            "slots": 19,
+            "shape": [
+              16,
+              12,
+              128
+            ],
+            "dtype": "torch.bfloat16"
+          }
+        ],
+        "completed_utc": "2026-10-06T12:36:36.165043+00:00"
+      }
+    },
+    "main_operation_handle_boundary": "MA operation handles are context only; never poll them using preparer's LGW peer. Receipts were independently read as files on the same canonical host.",
+    "independently_read": {
+      "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "route": {
+        "mode": "force_direct",
+        "logicalGatewayId": "tpc"
+      },
+      "routeDecision": "peer_direct",
+      "receipt_operationId": "exec-0000000000000286",
+      "library_and_paths_operationId": "exec-0000000000000289"
+    },
+    "verified_without_devices": {
+      "operator_source_binding": "7/7 build receipt hashes match frozen source",
+      "library_sha256": "0e7c64b53314f1e822a27b5f373376d82d3f73c01264a384cf58ee4bc6e3477b",
+      "exact_candidate_schema": "matches EXPECTED_SCHEMA",
+      "positive_Meta": "B1 slots4 and B16 slots19 => BF16 output [B,12,128]",
+      "software": "MAIN same-image suite reported25 PASS; preparer host suite25 PASS",
+      "fresh_identity_and_output_absent_snapshot": true
+    },
+    "unsupported_claims": {
+      "meta_negative_validation": "not implemented by this Meta kernel",
+      "npu_executed": false,
+      "physical_soc_runtime_observed": false,
+      "physical_nd_proven": false,
+      "graph_proven": false,
+      "numerical_correctness": false,
+      "model_lifecycle": false,
+      "matched_E2E": false,
+      "task_accuracy": false
+    },
+    "prior_frozen_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "PROVENANCE.json": "b128f47ef54a076bbaf79da22f9fbfbcd2f98e7a71bad5b2090440e74bd4c7fa",
+      "README.md": "edac8198ab451d2b8fadf7fd1c380e236edeb4f87aa39ee7a46637bc6f29154e",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "8fde339a17c32d853de9d05bdfb69dd2e6ab4e023f1de8c3dc7abc9c7e153674",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "tests/test_contract.py": "c1f22875ab1b64d8728340fe2b47972fddb365b0c45f2a535e0d9e6072a84f33",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "8c57092820d58b55db0f9d91891fbd6bb9d153d59280c7ee3cccb6df0f00cf56",
+      "tools/native_oracle_probe.py": "caa65dd94506edbd68a5600e9f813d93711ba162a8a2fc0565e7e00ede4414dd"
+    },
+    "current_frozen_files": {
+      "LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+      "P2_MIXED_PLAN.md": "8134e3c44cf87f457576b8369c27fc45c74eae2b677e8b9e4db3da886de32e87",
+      "README.md": "051912685bb39698375437e264616d17fecc949a44835e56e8786d27573b5e97",
+      "operator/CMakeLists.txt": "a46e98794744a2fe76c62d77d0cbf7936f8f87a0f7ff01db5c03e7337def064c",
+      "operator/op_extension/ops.h": "d5e0e1ccb511e107a9d1421eed1430af8735b95ed67809f41d84eafd8522930f",
+      "operator/op_extension/qwen36_gdn_kvbuffer_parallel_torch.cpp": "13aba192a2fb7d869c2b4f065a31b26e584e123a110001476c326699b837553e",
+      "operator/op_extension/register.cpp": "78cf3f62b312ca230d2a0cee199dce845bf5879608a5bb6d7ea0d66d48275481",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel.h": "8fde339a17c32d853de9d05bdfb69dd2e6ab4e023f1de8c3dc7abc9c7e153674",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_kernel.asc": "b18b4ba12de7334f80616353511983963f30438ecf4d190c3e89e0eaee13f610",
+      "operator/op_kernel/qwen36_gdn_kvbuffer_parallel_tiling.h": "db531136e309b4d886e7a728f0cb177ffd505a8a71b724be8fc87fc1e83337fd",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/METADATA": "90756999e69a0ce10b98036e983ab27a30cf5091b8f6735b67ef1710336f3a72",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/entry_points.txt": "15e27e27afd75f2ecb9aa09f9799cede9b0c676f013bf2a3bf8d4075f78eae59",
+      "plugin/kvbuffer_parallel-0.1.0.dist-info/top_level.txt": "2d51ed752dc68c432d8285c6eb94b090ce51fc225705afbc9de5ce3d157d8b3c",
+      "plugin/kvbuffer_parallel/__init__.py": "81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721",
+      "plugin/kvbuffer_parallel/contract.py": "db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38",
+      "plugin/kvbuffer_parallel/patch.py": "71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d",
+      "tests/test_contract.py": "a8c5ffa83c088421c6ba9a3dc449331d4592af209c73f936869e9a1091399693",
+      "tests/test_equation.py": "2e5b7aef6c6dee4081503625f7547f8d08bbcff6333104e1564d9e408268a2ec",
+      "tools/READY_COMMANDS.md": "7e77edebabc4bcd1ea48ada7f34a071249ad788006e0d8c7596eedbb193123f3",
+      "tools/native_oracle_probe.py": "caa65dd94506edbd68a5600e9f813d93711ba162a8a2fc0565e7e00ede4414dd"
+    },
+    "provenance_self_hash": "Excluded from self-contained mapping; final21 read receipt issued after this edit.",
+    "preparer_software_receipt": {
+      "operationId": "exec-000000000000028b",
+      "peerId": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "route": {
+        "mode": "force_direct",
+        "logicalGatewayId": "tpc"
+      },
+      "routeDecision": "peer_direct",
+      "terminal": "completed",
+      "exit_code": 0,
+      "AST": "PASS",
+      "tests": 25,
+      "unittest_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "unittest_stderr_sha256": "3ba9f98680fe23dfe05f1def7ca4b0d941dadff75bac570b26a30fea98deda6b",
+      "scope": "stdlib docs/source contracts only; no torch/native import, no build, no Docker/NPU execution"
+    },
+    "next_one_shot_review": {
+      "command": "ASCEND_RT_VISIBLE_DEVICES=0 PYTHONDONTWRITEBYTECODE=1 /usr/local/python3.12.13/bin/python3 /opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/native_oracle_probe.py --library /kvbuffer-results/build-p1-v1/libqwen36_gdn_kvbuffer_parallel_ops.so --identity /kvbuffer-results/p1-launch-v1.json --output-dir /kvbuffer-results/p1-native-matrix-v1",
+      "source_binding": "Existing artifact/source/EXPECTED_SCHEMA are compatible in this static review; current image native source/library loading is still Main-owned fresh preflight, not proved by Meta.",
+      "identity": "Main creates NEW kvbp.launch-identity/v1 only after inspected physical4->logical0, exact image/source/library/mounts, idle/RAM/disk and nonprivileged checks.",
+      "no_overwrite": "Host identity and native-matrix paths absent at LGW exec0289/028b snapshot; Main must recheck immediately before launch and stop if either now exists.",
+      "execution_boundary": "No second NPU workload while current DAMP TP4 capture is live; Main serializes all Docker/NPU/Git.",
+      "still_missing": [
+        "Actual SoC/native schema/device load/canary/physical ND",
+        "Native-oracle eager B1/B16 multistep, changed-input independent graph trials, guards/log/slot/reset/pointers",
+        "All48×4 live receiver/turn and native output lifecycle parity",
+        "Profiler-off matched E2E and final task accuracy"
+      ],
+      "no_retry_or_gate_relaxation": true
+    },
+    "preserved_read_discovery": "LGW exec0286 checked obsolete skills/ascend-inference-tuning-loop path and found absent; canonical .agents/ registry resolved the actual skill before edits. No missing-content substitution."
+  }
+}

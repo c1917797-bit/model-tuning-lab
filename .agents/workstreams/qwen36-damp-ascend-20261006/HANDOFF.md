@@ -204,3 +204,74 @@ titles were verified; OpenReview title remains unresolved. Applicability/source
 screens are not eight completed migrations or eight negative service results.
 No new non-HYPIC final performance/task acceptance exists. Portfolio cutoff
 2026-10-09T11:17:31Z and DAMP cutoff2026-10-07T08:48:03Z remain fixed.
+
+## 12:53Z actual build/load checkpoint and production seam review
+
+MA02eb at12:43:43Z observed native off20/36 TRAIN client rows complete,
+4096 outputs each; capture-on had not started. MA0161 is still RUNNING.
+Only owned TP4 workers744181/744186/744190/744192 used physical4-7.
+Protected0-3 now have an external HYPIC service; do not interfere. No competing
+NPU probe is authorized while full capture lives. No full source validator,
+source-lock/fitted192 plans, new formal throughput or task quality result exists.
+
+KVBuffer parallel-fold P1 source was fully reviewed. MAIN MA02b0 actually
+compiled its seven bound source files; library SHA
+0e7c64b53314f1e822a27b5f373376d82d3f73c01264a384cf58ee4bc6e3477b.
+MA02d4 actually loaded it, checked mutable schema/prepare registration, B1/B16
+positive Meta and25 stdlib tests. All no-device, not NPU correctness.
+Results: /cache/cch/qwen36-kvbuffer-parallel-20261006/build-p1-v1/ and
+meta-p1-v1/. This is an equation-derived FP32 deferred parallel fold, not an
+author-code claim or the already-negative serial implementation. P1 model
+integration is eager-only; operator graph proof and full lifecycle/state160step
+matrix remain unrun. Candidate119296 auxiliary bytes/layer/slot must fit the
+common total memory budget; no persistent candidate-only FP32 shadow state.
+
+DAMP integer-certificate probe v1 MA02be failed when its frozen device header
+reached the host pass. V2 MA02dc compiled/linked successfully, actual SO SHA
+4fd87e85a0ecf97b4613477f9d52517e80e90c3bb9931f378d5d37238ce21b53,
+but MA02f1 no-device load FAILED: undefined
+qwen36_damp_integer_certify_bits_kernel. Actual MA02f6/02f7 nm/readelf confirmed
+U/UND in both the ASC object and SO. Keep build-v1/build-v2/meta-v1 and exact
+source archives unchanged. Their source/compiler success is NOT registration
+or NPU acceptance. V3 must keep the annotated kernel definition visible to
+host while guarding only device includes/body; no parent2201 gate deletion.
+Only MAIN runs the new nonoverwriting build, exported-symbol and load checks.
+
+Read PRODUCTION_QUANTIZER_INTEGRATION_REVIEW.md (MAIN fully reviewed):
+preserve raw low FP32 state, unchanged group32 scale/readout/DMA, vector
+integer certificate and sparse exact fallback. Accepted lanes must not incur
+the diagnostic probe's all-lane scalar scan. A separate packed-mask/GatherMask
+count/order/guard/scatter seam is being prepared, not yet compiled/NPU proven.
+N448 UB sums are a cautious design, not a measured allocator or speed pass.
+Original v4 state gate remains FAILED, threshold1e-5 unchanged. Latest1% user
+allowance is task accuracy, not tensor correctness. After actual seam proof,
+use a fresh production SO and step45 -> B1/B16x160 -> source-bound generalSR/
+all final plans -> graph/typed-cache -> same-dense E2E/task-quality chain.
+
+Current short target directly repairs this proven DAMP quantizer blocker;
+parallel KB preparation remains next-paper readiness. Do not replace these
+with unrelated fusion, MTP, another paper survey or report-only work.
+Individual and portfolio deadlines above remain unchanged.
+
+At12:57:33Z MA0312 observed native-off24/36, capture-on0, all completed rows
+have4096 outputs, and only the four owned workers use physical4-7. Native
+collector/source/helper/launcher28 file hashes were verified unchanged MA0303.
+The actual run/validator bind source bytes, not a changing documentation Git
+HEAD; no capture module or protocol is edited by this preparation checkpoint.
+
+V3 kernel642afb... now actually built MA0309, completed12:58:52Z, both compiler
+commands0; actual exported launcher is T rather than U. SO SHA
+f21105e61577f938fb8e039d1481e912c22760061bcd38a11348af5ec4472619.
+New no-device Meta MA031e is running; do not claim its result until terminal.
+No real NPU certificate, production repair or compaction pass exists yet.
+V1/v2 failed load/compile histories remain unchanged.
+
+Reviewed KVBuffer/operator/source bound checks and scripts/validate-mst.sh
+passed MA0303. Staged full whitespace check MA031a exited2 only for three
+copied LICENSE.cann trailing-whitespace lines2/16/23; retain exact upstream
+license bytes and this negative, not a blanket whitespace PASS. The separate
+authored-code/document whitespace check passed. This checkpoint includes the
+reviewed21-file KVBuffer preparation and production seam review plus these
+maintainer lessons; the evolving certificate/compaction drafts remain outside
+this specific commit. No raw tensors/datasets/binaries enter Git. It is not
+an accepted performance/quality milestone.
