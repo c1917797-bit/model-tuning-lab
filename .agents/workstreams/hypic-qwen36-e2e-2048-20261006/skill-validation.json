@@ -1,8 +1,8 @@
 {
   "schema": "paper-to-ascend-skill-validation/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
-  "status": "running",
-  "as_of_utc": "2026-10-06T13:40:00Z",
+  "status": "initial-candidate-rejected; optimization-iteration-in-progress",
+  "as_of_utc": "2026-10-06T14:59:17Z",
   "checks": [
     {
       "skill": "chicaihong01-host-maintenance",
@@ -21,35 +21,36 @@
     },
     {
       "skill": "runtime-monkeypatch-delivery",
-      "state": "partial",
-      "evidence": ["DELIVERY.md", "environment-and-container-snapshot.txt"],
-      "remaining": ["post-treatment disabled control", "uninstall", "resource-release receipt"]
+      "state": "passed-for-rejected-candidate",
+      "evidence": ["DELIVERY.md", "environment-and-container-snapshot.txt", "rollback-evidence.json", "rollback/disabled-canary.json", "rollback/disabled-evidence.jsonl"],
+      "result": "disabled control request passed, treatment marker absent, two exact owned containers removed, NPU0-3 and port 8223 released"
     },
     {
       "skill": "ascend-benchmark-evidence",
-      "state": "running",
-      "evidence": ["baseline-contract.json", "no-cache/performance.run1.json", "no-cache/performance.run2.json", "no-cache/performance.run3.json", "baseline-registry.json"],
-      "remaining": ["three treatment performance runs", "performance-gate.json"]
+      "state": "completed-negative",
+      "evidence": ["baseline-contract.json", "no-cache/performance.run1.json", "no-cache/performance.run2.json", "no-cache/performance.run3.json", "hypic-only/performance.run1.json", "hypic-only/performance.run2.json", "hypic-only/performance.run3.json", "baseline-registry.json", "performance-gate.json"],
+      "result": "three matched repetitions per arm; TTFT +39.40% passed, TPOT +5.90%, throughput +6.22%, duration +5.86% failed preregistered gates"
     },
     {
       "skill": "paper-to-ascend-reproduction",
-      "state": "running",
-      "remaining": ["paper capability scope", "performance and 2048-token quality", "18-unit independent audit"]
+      "state": "partial-component",
+      "evidence": ["canary-gate.json", "performance-gate.json"],
+      "remaining": ["2048-token quality was not run under fail-fast", "independent 18-unit audit cannot pass without quality", "C3 paper-complete stages remain absent"]
     },
     {
       "skill": "ascend-performance-optimization",
-      "state": "pending",
-      "remaining": ["evidence-driven candidate change", "measured iteration"]
+      "state": "in-progress",
+      "remaining": ["decode/service critical-path attribution", "one bounded successor candidate", "measured iteration"]
     },
     {
       "skill": "ascend-cannbot-profiler",
-      "state": "pending",
-      "remaining": ["profile only if first comparison identifies a bottleneck requiring profiler attribution"]
+      "state": "required-pending",
+      "remaining": ["bounded prefill/decode profiling to attribute failed TPOT and service metrics before low-level changes"]
     },
     {
       "skill": "ascend-model-quality-evaluation",
-      "state": "pending",
-      "remaining": ["paired LongBench-v2 and GSM8K with 2048 cap, three repetitions each"]
+      "state": "not-run-fail-fast",
+      "remaining": ["paired LongBench-v2 and GSM8K with 2048 cap, three repetitions each", "context capacity at least 41690 and fresh matching baseline if user approves"]
     },
     {
       "skill": "paper-to-ascend-reporting",

@@ -1,9 +1,9 @@
 {
   "schema": "paper-to-ascend-experiment/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
-  "status": "running",
-  "stage": "baselining",
-  "as_of_utc": "2026-10-06T13:40:00Z",
+  "status": "optimization-iteration-in-progress",
+  "stage": "initial-hypic-performance-gate-rejected",
+  "as_of_utc": "2026-10-06T14:59:17Z",
   "historical_reference": {
     "tag": "paper-result/hypic-qwen36-tp4-adopted",
     "commit": "fcaed3caf4a61a79bc191d7d074bb031b5206e9a",
@@ -48,7 +48,16 @@
   "baseline_registry": {
     "path": "/cache/cch/hypic-qwen36-e2e-2048-20261006/baseline-registry.json",
     "performance": "frozen and revalidated: three accepted repetitions",
-    "quality": "pending 2048-token baseline repetitions"
+    "quality": "not measured: performance fail-fast; 39642-token LongBench prompt plus 2048 output exceeds current 40960 context"
+  },
+  "initial_performance_gate": {
+    "path": "/cache/cch/hypic-qwen36-e2e-2048-20261006/performance-gate.json",
+    "passed": false,
+    "ttft_p95_improvement_percent": 39.39961146961218,
+    "tpot_p95_improvement_percent": 5.900460689535548,
+    "output_throughput_improvement_percent": 6.221083748699568,
+    "duration_improvement_percent": 5.856731572629741,
+    "decision": "rejected as a full-service candidate; bounded C1/C2 mechanism and TTFT direction reproduced"
   },
   "artifact_root": "/cache/cch/hypic-qwen36-e2e-2048-20261006",
   "terminal_states": ["accepted", "rejected", "inconclusive", "failed"]

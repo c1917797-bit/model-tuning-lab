@@ -36,7 +36,51 @@ baseline is reusable only when baseline-contract.json matches and every run
 passes its raw-artifact check. Do not delete or overwrite partial JSONL files;
 incomplete indexes are the resume boundary.
 
-## Current state
+## Current state — 2026-10-06 14:59 UTC
+
+The first valid controller operation `exec-0000000000000277` is terminal with
+exit code 2 (controller-status.json at 14:49:57 UTC). The strict performance
+gate rejected the initial HYPIC v0.8.5 candidate after three validated
+repetitions per arm, each with 40/40 successful fixed 1024-token requests.
+Median TTFT P95 improved 39.40% against a 30% minimum; TPOT P95 improved only
+5.90% against 10%, throughput 6.22% against 20%, and total duration 5.86%
+against 15%. The raw six run hashes and precise values are in
+`/cache/cch/hypic-qwen36-e2e-2048-20261006/performance-gate.json`.
+The canary and worker evidence support bounded C1/C2 hot reuse and a TTFT
+directional win, **not** whole-service acceptance or paper-complete HYPIC.
+The fail-fast controller correctly skipped 2048-token quality; no fresh
+quality claim is available. The quality context-capacity preflight below is
+also unresolved. No unchanged controller retry is permitted.
+
+The owning controller stopped its treatment service on exit. At 14:59 UTC,
+both exact named experiment containers were exited, NPU0-3 had no processes,
+and port 8223 was free. The exact-identity disabled-control rollback completed
+at 15:04:02 UTC under AWMCP operation `exec-0000000000000452` (exit 0). The
+real 32,768-token disabled request passed, its treatment event file stayed
+empty, NPU0-3 and port 8223 were released, and the script removed only the
+two verified exited experiment containers. The receipt is
+`/cache/cch/hypic-qwen36-e2e-2048-20261006/rollback-evidence.json`;
+raw canary, event, NPU and port files remain under `rollback/`. The image,
+source, benchmark rows, and artifacts remain; only those two container
+instances were deleted and can be rebuilt from the pinned command.
+
+Next, preserve the rejected candidate as a partial component and profile the
+Decode/service critical path before choosing one new bounded variable. The
+three-run conditional Decode-wave proxy is 1270.59, 1269.73, 1269.79 s;
+its median 1269.79 s exceeds both the 1147.62 s throughput-equivalent and
+1170.57 s duration targets. The reproducible diagnostic is
+`decode-opportunity-diagnostic.json` under the artifact root (SHA256
+`8d9d6640181cdbce59bbf4ff1f50b21a540119db5482285854794f4553e51680`).
+This is a launch-order, unchanged-Decode screening assumption, not a measured
+critical path or proof of a kernel cause; verify with target-device profiling.
+A changed service max-model-len
+for 2048-token quality requires a new matching baseline and explicit user
+choice; do not reuse the 40960-context performance denominator as its quality
+baseline. Git is local-only ahead of origin because secure HTTPS credentials
+are unavailable on this host; keep all commits and raw evidence, and push only
+after authentication is restored without exposing tokens.
+
+## Execution log (historical; superseded by current state above)
 
 Running on chicaihong01 through AWMCP direct peer
 lgw_a6109c51076a4a2c9d2674ca5a8704a0. Active exec operation:

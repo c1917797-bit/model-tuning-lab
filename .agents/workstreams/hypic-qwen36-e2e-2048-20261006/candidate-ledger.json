@@ -7,7 +7,7 @@
   "paper_method_scope": {
     "source_audit": "hypic_vllm_ascend v0.8.5 docs/HYPIC_CORE_CAPABILITY_AUDIT.md at 3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
     "implemented_scope": "single-instance C0/C1/C2 position-independent hot-segment reuse, materialization, repair, scheduler admission and worker dispatch",
-    "current_npu_validation": "real-weight canary passed; three-run performance and 2048-token paired quality pending",
+    "current_npu_validation": "real-weight canary and three-run performance completed; TTFT passed, TPOT/throughput/duration failed; 2048-token paired quality skipped by fail-fast",
     "omitted_paper_stages": [
       "C3.1 global directory/router",
       "C3.2 cross-replica cold-segment scatter",
@@ -29,7 +29,13 @@
     "historical_current-topology_ttft_reduction_pct": 43.6345,
     "historical_current-topology_tpot_reduction_pct": 18.9911,
     "historical_evidence_only": true,
-    "fresh_baseline_required": true
+    "fresh_baseline_required": true,
+    "current_decode_screening": {
+      "artifact": "/cache/cch/hypic-qwen36-e2e-2048-20261006/decode-opportunity-diagnostic.json",
+      "sha256": "8d9d6640181cdbce59bbf4ff1f50b21a540119db5482285854794f4553e51680",
+      "treatment_median_proxy_s": 1269.7911319600244,
+      "interpretation": "conditional launch-order estimate only; profile the true Decode/service critical path before selecting a successor"
+    }
   },
   "disproof_signals": [
     "required HYPIC hot-path event missing",
@@ -39,5 +45,5 @@
     "rollback does not release NPU0-3 or port 8223"
   ],
   "delivery": "removable source overlay against an unchanged official image, hash-bound and disabled by default",
-  "decision": "pending"
+  "decision": "rejected-full-service; retain C1/C2 hot-reuse and TTFT as partial-component evidence, profile decode before a materially new iteration"
 }
