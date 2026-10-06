@@ -24,6 +24,10 @@ Before changing code:
    `ascend-inference-tuning-loop`, and `ascend-benchmark-evidence`.
    When accepting or rejecting an accuracy or model-quality claim, also use
    `ascend-model-quality-evaluation`.
+   Deliver new local inference-runtime techniques first as a removable,
+   disabled-by-default plugin or monkeypatch against the unchanged official
+   image; use `runtime-monkeypatch-delivery` for packaging, activation proof,
+   rollback, and promotion gates.
 7. Keep credentials, datasets, model weights, checkpoints, and generated
    experiment outputs out of Git.
 8. Record the model, framework, hardware, dataset, and measurement protocol
