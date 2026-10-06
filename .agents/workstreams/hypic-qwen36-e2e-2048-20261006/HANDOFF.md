@@ -126,6 +126,15 @@ operation timeout, and poll that one returned handle. Read
 boundary; do not delete it. If the controller exits unexpectedly, inspect
 exact named quality container identity and the target NPU lane before any
 resume. `audit-only` rechecks all completed raw files without NPU traffic.
+After both quality services have stopped and the paired audit passes, run
+`audit_split_context_e2e.py` to independently revalidate six original
+performance units plus twelve new-context quality units and live release. It
+writes `hypic-e2e-2048-evidence-audit.json` at the experiment root. Evidence
+integrity may pass even while the unchanged paper-only performance gate fails.
+Then record the measured fusion iteration in `optimization-iteration.json`
+with raw hashes and terminal classification, and run `audit_e2e_closure.py`.
+The acceptance closure is expected to remain false if the paper-only
+performance gate remains false; do not relabel that failure as success.
 
 ## Prior state — 2026-10-06 14:59 UTC
 

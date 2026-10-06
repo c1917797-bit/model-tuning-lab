@@ -111,7 +111,48 @@ def main() -> int:
         ):
             entries = registry.get(phase)
             if not isinstance(entries, list):
-                check(f"baseline_registry_{phase}", False, "missing phase")
+                if phase != "quality":
+                    check(f"baseline_registry_{phase}", False, "missing phase")
+                    continue
+                # The full 2048-token quality ruler needs a 41984-context
+                # service, so its paired baseline has a separate identity.
+                quality_root = root / "quality-context-41984"
+                try:
+                    quality_contract = obj(quality_root / "quality-context-contract.json")
+                    quality_registry = obj(quality_root / "no-cache-quality-registry.json")
+                    quality_fp = quality_contract["fingerprint"]
+                    quality_hash = hashlib.sha256(
+                        json.dumps(quality_fp, sort_keys=True, separators=(",", ":")).encode()
+                    ).hexdigest()
+                    alternate = quality_registry["raw_artifacts"]
+                    expected_alternate = {
+                        f"quality/no-cache/{dataset}.run{index}.{suffix}"
+                        for dataset in ("longbenchv2", "gsm8k")
+                        for index in (1, 2, 3)
+                        for suffix in ("summary.json", "jsonl")
+                    }
+                    members = {item["path"] for item in alternate}
+                    check(
+                        "baseline_registry_quality",
+                        quality_contract.get("fingerprint_sha256") == quality_hash
+                        and quality_fp.get("parent_baseline_fingerprint_sha256") == baseline_hash
+                        and quality_fp.get("max_model_len") == 41984
+                        and quality_fp.get("quality_max_output_tokens") == 2048
+                        and quality_registry.get("contract_sha256") == quality_hash
+                        and len(alternate) == len(expected_alternate)
+                        and members == expected_alternate,
+                        "separate 41984-context paired quality baseline",
+                    )
+                    for item in alternate:
+                        rel = item["path"]
+                        path = (quality_root / rel).resolve()
+                        check(
+                            f"baseline_registry_quality_hash:{rel}",
+                            rel in expected_alternate and path.is_relative_to(quality_root)
+                            and path.is_file() and item.get("sha256") == sha256(path),
+                        )
+                except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
+                    check("baseline_registry_quality", False, str(exc))
                 continue
             paths = [row.get("path") for row in entries if isinstance(row, dict)]
             check(
@@ -213,6 +254,26 @@ def main() -> int:
             and independent.get("accepted_units") == 18
             and independent.get("quality_max_output_tokens") == 2048
             and independent.get("errors") == [],
+        )
+        if independent.get("schema") == "hypic-split-context-independent-evidence-audit/v1":
+            check(
+                "independent_split_context_boundary",
+                independent.get("performance_context") == 40960
+                and independent.get("quality_context") == 41984
+                and independent.get("paper_only_performance_accepted") is False
+                and independent.get("evidence_integrity_not_algorithm_acceptance") is True,
+            )
+
+    quality_context = read(
+        "quality_context_audit_present",
+        "quality-context-41984/quality-context-audit.json",
+    )
+    if quality_context is not None:
+        check(
+            "quality_context_paired_evidence_complete",
+            quality_context.get("schema") == "hypic-paired-2048-quality-context-audit/v1"
+            and quality_context.get("quality_evidence_complete") is True
+            and quality_context.get("performance_gate_overridden") is False,
         )
 
     iteration = read("optimization_iteration_present", "optimization-iteration.json")
