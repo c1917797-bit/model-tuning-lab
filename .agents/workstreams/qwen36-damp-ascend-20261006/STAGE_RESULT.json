@@ -1,0 +1,43 @@
+{
+  "schema": "damp-equation-packing-stage/v1",
+  "decision": "partial_npu_gate_pass_not_e2e_ready",
+  "physical_npu": 4,
+  "container": "qwen36_damp_equation_npu4_20261006",
+  "container_state": "stopped_retained",
+  "first_failure": "/cache/cch/qwen36-damp-20261006/equation-packing-npu-v1/report.json",
+  "diagnostic": "/cache/cch/qwen36-damp-20261006/scale-lowering-diagnostic-v1/report.json",
+  "passed_report": "/cache/cch/qwen36-damp-20261006/equation-packing-npu-v2/report.json",
+  "passed_report_sha256": "54747116b388417275c9c3f0f115e0399be8dd448176bab556cb9104203ae508",
+  "script_sha256": "c4434b5aa00488963bb7cedebfe69871d09c7cc8f3f207158a88bbc2e88585d0",
+  "reference_sha256": "e1e082934afa03126047a0b6ff1d597303ba8b090faff7afbf7b5596e8dd939d",
+  "cases": [
+    {
+      "batch": 1,
+      "steps": 160,
+      "status": "passed",
+      "max_full_state_relative_l2": 1.4426040955796307e-7,
+      "max_output_relative_l2": 0.0003258761761719836
+    },
+    {
+      "batch": 16,
+      "steps": 160,
+      "status": "passed",
+      "max_full_state_relative_l2": 1.4280183602722226e-7,
+      "max_output_relative_l2": 0.0000982050029233976
+    }
+  ],
+  "scope": "native Ascend oracle versus UNCOMPRESSED coordinate-transformed NPU reference; packing parity on seeded shapes; no compressed recurrence, graph, service, speed or task-quality result",
+  "next": [
+    "full quantizer boundary/independent unpack oracle",
+    "nonfinite-safe failure logging and selected-slot per-head diagnostics",
+    "real worker collector smoke and frozen full training-only calibration",
+    "DAMP-specific packed recurrence and graph/lifecycle gate",
+    "matched dense E2E and final quality"
+  ],
+  "known_limits": [
+    "Int64 ArgSort falls back to AiCPU in the math reference; performance kernel must precompute inverse permutations and avoid per-token sorting",
+    "actual recurrent binary dispatch still needs exact provenance beyond gdn.py/schema/library inventory",
+    "groupedQK per-Hv key permutation must happen inside fused kernel; SR after SiLU, inverse before output norm/gating",
+    "one AIV owner per head or safe whole-head output gather avoids arbitrary permutation DMA ownership collision"
+  ]
+}
