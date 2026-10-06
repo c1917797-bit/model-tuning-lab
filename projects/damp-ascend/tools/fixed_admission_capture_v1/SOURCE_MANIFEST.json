@@ -1,0 +1,202 @@
+{
+  "schema": "damp-fixed-admission-sources/v1",
+  "status": "prepared_not_npu_validated",
+  "default_enabled": false,
+  "files": {
+    "README.md": "78adf0a2064a367936b6dd889d24907973967e761448b043ea4923398ed09326",
+    "READY.md": "7b00c8bbce37ec01a5493a04d874dc7da0d81ee2d4dc91a8963a4e8f964c217d",
+    "aggregate.py": "a57c6e1920d0a3e5c76336ef60545887cb6118c2205c12441ffc1e155e2eea9a",
+    "damp_admission_diagnostic/__init__.py": "c42f75c98aa18fd9c66922d19d511d9c031a1bd82de2c2ae59c8f8efcdeec297",
+    "damp_admission_diagnostic/arm.py": "565e0f403d85fb261b22def5a6b0218a3da36e4352c9596412ff1294abdfbc5f",
+    "damp_admission_diagnostic/observer.py": "1e325b09615a96d874529a155be601bb2ca4e280c44edbef23ad2a2f1ee6b7ce",
+    "diag_contract.py": "b1d6096bb5852a8de3c500e0519c1f95e78e6ea078e279c3f1c5a49929860c11",
+    "install.py": "7a262a6e153ade2c2a3043077f75bca39737e97a10df5660b8d63e918ab7f4d9",
+    "preflight.py": "919569fdb20e5e48e0486ffcaa3b9ab23bf1ce229d722aeb9fe1e53f25b3c57d",
+    "prepare.py": "367b1523d4a78c4fc138da4089dc5ab0d6a4ba98974cd1198e131ef8748c084d",
+    "profile_logic.py": "71f9acec99fee68aedfe24800f68621eb0b55805ae7f0a97b766a20474ed64af",
+    "run.py": "2c84e03dd9a8c3fc6876a1d2ac362413fef3ba21a368749ad5b4b0e6d3aa0107",
+    "tests/test_contract.py": "5c855b6faaa5dac8cbaad7709668cf31b24d4895d598ea4fb72b56b0757d837c"
+  },
+  "external_repo_files": {
+    "projects/damp-ascend/collector/README.md": "f07496ac5605b84ce5964897777c71c377b3fec2a746e2cc1b0e2aa994b357b8",
+    "projects/damp-ascend/collector/calibration-dependency.lock.json": "dd0b04a89b2e45d0239bd1418d26e282d4b657429e29eead37ca8e07cdd0fcac",
+    "projects/damp-ascend/collector/damp_capture-0.1.0.dist-info/METADATA": "a2ecafb32898d9cd1210bed6ff0f6c55b288790afec18b55aa67b13c4855db3b",
+    "projects/damp-ascend/collector/damp_capture-0.1.0.dist-info/entry_points.txt": "b5b7aaa97c3a767c04ee0f9eaaf95294f526551461bea99ace8767e6abacc013",
+    "projects/damp-ascend/collector/damp_capture/__init__.py": "5a05fdf5f33745bbdbf1eedea5ebd7275df61bf5c05d0dfcd466f79a718bd238",
+    "projects/damp-ascend/collector/damp_capture/bindings.py": "137c71b0a3f2b4dac5d82be53a25d01de39b78a77b14db4d8b9e470181003525",
+    "projects/damp-ascend/collector/damp_capture/build_full.py": "0cf3cfe4fd34428309c1efc3000b390d5e03e0030e3db8fdc26eb9472bc1e9cb",
+    "projects/damp-ascend/collector/damp_capture/contract.py": "e56b6b47e66b3bec946eda96a51205a779c506edcb8b713730d42c03237e2a57",
+    "projects/damp-ascend/collector/damp_capture/identity.py": "8873f833c6dab835af5079ec269e82efa100b1695bef707a78f1cb82210a37db",
+    "projects/damp-ascend/collector/damp_capture/patch.py": "3b1791ec12d072ce03c07a952984308b34adf1c3a64020d69cf2384c93e4ea78",
+    "projects/damp-ascend/collector/damp_capture/platform_gate.py": "5feed4703be32d96c685832b01b16da8d541800f9f63a2582d7f67cc9baf359f",
+    "projects/damp-ascend/collector/damp_capture/prepare.py": "dc8622f1a0f2a45582cc8727ed5cb45bb80319ee1e20e455337d874a55b40ec7",
+    "projects/damp-ascend/collector/damp_capture/run.py": "aaaad91454cf45ebfab27223e823d2d12b9dc5dd8197a3f060982e1be1c916f5",
+    "projects/damp-ascend/collector/damp_capture/session.py": "38275fe7d529bdee4498182f88a374a2b5639889609d09bc3b6cca32bc257b4c",
+    "projects/damp-ascend/collector/damp_capture/text_positions.py": "333aa0c09130b9f6c27459b04a4ae36a7743b9b77275beddc02655252d244354",
+    "projects/damp-ascend/collector/damp_capture/timeline.py": "1217d2edf4ea5f6b192ae689d7687d7f8c80e9f5646e82252d27e38e1bb7cb1c",
+    "projects/damp-ascend/collector/damp_capture/tokenizer_gate.py": "cd6ba384b709f891bb611280f037b0251691cf0f1cadd48267224e418e1ec18e",
+    "projects/damp-ascend/collector/damp_capture/training_sources.py": "b16109145cd1d9f14b8ecae0bc0749a754f8bad9a6f90e0abaff96e4ff7d7dc7",
+    "projects/damp-ascend/collector/damp_capture/validate.py": "2daf0cefe7311431baf9bb0a2aa1dbebe62543598ddcec0bada55796d4be4b8c",
+    "projects/damp-ascend/collector/damp_capture/writer.py": "a0016c6b3e0c5e84ccd74a109d482c10b2acb4fb2442a90c510081f3dff5b9e8",
+    "projects/damp-ascend/collector/tests/test_bindings.py": "55c83c00f4ad61ac3f3a127035d41d82350b1889397aa9396162c4d83ea3917c",
+    "projects/damp-ascend/collector/tests/test_collector.py": "369c8ec619c1dab0a7d971ad7c78f1167892ee29890df1942cabcf2bbcc0551a",
+    "projects/damp-ascend/collector/tests/test_identity.py": "db1d40785de8c0219267c7c405f698c6ab88caf2fa76eb93197f21f9e16cfb7e",
+    "projects/damp-ascend/collector/tests/test_text_positions.py": "5de6a680f5f5e90ef2c3703e1d2a804aca1ed2c6038a13e03412cec39457491f",
+    "projects/damp-ascend/collector/tests/test_tokenizer_gate.py": "136a367074d7c2e5a54c10adcbe4f829c39503995af330dcbf34231d3e43dee2",
+    "projects/damp-ascend/collector/tests/test_training_sources.py": "07a0a14200885c47027c03bb70136702ef1c0bc3c04c9d24a1988fb1a183a149",
+    "projects/damp-ascend/tools/run_collector_smoke.py": "da541917ebd8764a81624a215a157b6d4e18fbaaa53d9310be54a104d2fbbf92",
+    "projects/damp-ascend/tools/prefill_float_dispatch_v1/dispatch.py": "094defb90bfc6d748d13069a48bd24297d01caaab1720ef5b8a3bc32ecf87c9e"
+  },
+  "runtime_sources": {
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_qwen3_5.py": "21fc9a2064f9b490ffcf3d61bacc8ddb67806a4c7490895a33128e65438838d3",
+    "/vllm-workspace/vllm/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py": "885c56f5e3584ab60bb4ce4b42cf8259e5e92c86ba13aa6128e6ed7a2a20d2b0",
+    "/vllm-workspace/vllm/vllm/forward_context.py": "1c6fa51e9a02a120fed5e7357afb1190516cbdfefd1c644dfcd860603f1527c5"
+  },
+  "source_audit": {
+    "md": {
+      "path": ".agents/workstreams/qwen36-damp-ascend-20261006/CAPTURE_PARITY_SOURCE_AUDIT_20261006.md",
+      "sha256": "71fe6dab007588b10f91a9339b449629405933f332081d961de84fcf604864e4"
+    },
+    "json": {
+      "path": ".agents/workstreams/qwen36-damp-ascend-20261006/CAPTURE_PARITY_SOURCE_AUDIT_20261006.json",
+      "sha256": "5f46aa6bbfdeadb687cbf9107a45e1f1148b87bf557324d140a517df58038540"
+    }
+  },
+  "npu_executed": false,
+  "full_calibration_admitted": false,
+  "source_lock_issued": false,
+  "changes_original_collector": false,
+  "software_history": {
+    "original": {
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "operation_id": "exec-00000000000003e7",
+      "exit_code": 1,
+      "tests": 21,
+      "passed": 13,
+      "errors": 8,
+      "reason": "host CPython lacks public threading.getprofile",
+      "original_result_retained": true
+    },
+    "target_public_api_verification": "pending MAIN actual no-device/image execution",
+    "host_compatibility_scope": "stdlib fixtures only; target register requires3.12 public API",
+    "host_revision2": {
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "operation_id": "exec-00000000000003ed",
+      "exit_code": 0,
+      "tests": 23,
+      "passed": 23,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f583a2357095d9d93e2fffb711e5c5be7a6dfe4e8cb342dd8b46f105c5c28ce6",
+      "scope": "host stdlib only, not actual target CPython3.12 nor native frames"
+    },
+    "host_revision3": {
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "operation_id": "exec-00000000000003fe",
+      "exit_code": 0,
+      "tests": 40,
+      "passed": 40,
+      "source_manifest_sha256": "f396b6a3d9c5106fb135cb6609309dea16ac6351b6e9f87756f82b900fff165e",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "092f5bf83a325993e954adee2840a8512eb4598f9a6473e769edf104cc14916d",
+      "scope": "host stdlib only; not target/numeric success"
+    },
+    "host_revision4": {
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "operation_id": "exec-0000000000000408",
+      "exit_code": 0,
+      "tests": 42,
+      "passed": 42,
+      "source_manifest_sha256": "7dd56fc76f1e50f138bd11a5ef3398163921226ddd58e17704880fa163711f9c",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "2304425990255b83ad1705977ab87fe226c4044bf2429ab7d0774842725b9745",
+      "scope": "host stdlib only; not target/no-device/native-frame/NPU success"
+    }
+  },
+  "source_audit_history": {
+    "original_author_sha256": {
+      "md": {
+        "path": ".agents/workstreams/qwen36-damp-ascend-20261006/CAPTURE_PARITY_SOURCE_AUDIT_20261006.md",
+        "sha256": "490889e0985b22270268bb310d12e0ea1bf161c08cff2878904348017b18b735"
+      },
+      "json": {
+        "path": ".agents/workstreams/qwen36-damp-ascend-20261006/CAPTURE_PARITY_SOURCE_AUDIT_20261006.json",
+        "sha256": "9603b8ef7f1b9a37328eb7d7beb748467415a1017016fa3ef6894a75fdb6a73d"
+      }
+    },
+    "reason": "MAIN removed authored audit md/json trailing blank lines after cached-whitespace failure MA0698, then checkpoint MA069f/3d072488; underlying original experiments/10sources/7evidence bytes unchanged",
+    "canonical_hash_observation": {
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "operation_id": "exec-00000000000003eb"
+    }
+  },
+  "resource_revision": {
+    "previous_manifest_sha256": "b10a7a19c2ca273088512a5b7de4f5258fbe6c88a637166476eb7f6948ada9ee",
+    "previous_own_hashes": {
+      "README.md": "1febbc917b14f6aa74a12c36c6235cc439949bde5e9da4bb91c377807a41912c",
+      "READY.md": "d3b149378da8b57329ed6977fd7c7dbb45f619927923dce39520f82198b471ef",
+      "aggregate.py": "a57c6e1920d0a3e5c76336ef60545887cb6118c2205c12441ffc1e155e2eea9a",
+      "damp_admission_diagnostic/__init__.py": "c42f75c98aa18fd9c66922d19d511d9c031a1bd82de2c2ae59c8f8efcdeec297",
+      "damp_admission_diagnostic/arm.py": "1154a4f5ddefe01f213d0e75bfe29218ab3f195014b6235c5f5ff480edc03243",
+      "damp_admission_diagnostic/observer.py": "1e325b09615a96d874529a155be601bb2ca4e280c44edbef23ad2a2f1ee6b7ce",
+      "diag_contract.py": "2202cf6a124460b09b9950728c5089cc3311e02971dfb0e497e9e2405ad40847",
+      "install.py": "7a262a6e153ade2c2a3043077f75bca39737e97a10df5660b8d63e918ab7f4d9",
+      "preflight.py": "8b50de852a9306e106e5af1052c3750e00413bbe2119d8f6b220f9e25c96f095",
+      "prepare.py": "367b1523d4a78c4fc138da4089dc5ab0d6a4ba98974cd1198e131ef8748c084d",
+      "profile_logic.py": "71f9acec99fee68aedfe24800f68621eb0b55805ae7f0a97b766a20474ed64af",
+      "run.py": "880414e2709db2f6ef2243068d6bbeb3db3052969b168c10d21ced372bc8a498",
+      "tests/test_contract.py": "e8c4cb897230a46ec335a245869d2e0ecedc720c97829128f84d4e455c6142b4"
+    },
+    "reason": "MAIN actual engine NCPU7 requires6CPU formal;1CPU/2GiB no-device preflight may coexist with4CPU/32GiB known allT plus1CPU/8GiB reserve; no external declaration-cap sum",
+    "bootstrap_scope": "AST-read only exact reviewed literal, never old execute/parent guard",
+    "real_image_preflight_status": "pending MAIN execution",
+    "prior_original_device_proofs": {
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "operation_id": "exec-00000000000003f9",
+      "scope": "read-only actual first proof ABI, full immutable4 pins supplied by MAIN MA06b7; not release"
+    },
+    "allT_terminal_status": "pending actual MAIN exec06a0 terminal; no future receipt created"
+  },
+  "resource_scope_revision": {
+    "previous_manifest_sha256": "f396b6a3d9c5106fb135cb6609309dea16ac6351b6e9f87756f82b900fff165e",
+    "previous_run_sha256": "bffb7dedba04f260a4085ca627bf86e5efb1e9602e4cc054bddaba93603e8be5",
+    "previous_tests_sha256": "40afa5d86fa98787273cd8c676821ae64ec06d4232f7c602139d3013cea71c62",
+    "reason": "known allT caps only four actual PRIOR_IDS with exactname/image/owner; historical same-label sleep is externally observed, not numeric caps",
+    "actual_image_preflight": "pending MAIN; no Docker/NPU executed by preparing agent"
+  },
+  "protected_workload_revision": {
+    "previous_manifest_sha256": "7dd56fc76f1e50f138bd11a5ef3398163921226ddd58e17704880fa163711f9c",
+    "previous_own_hashes": {
+      "README.md": "e4c8adad7bc44e47af41f3ae90adf7a41b36dc3ad3fef747902a46bb91f1c435",
+      "READY.md": "4f94f6fbd9229af59e500a0a6cee6fc211f2be7566a91341aa56a4b2bde11a5a",
+      "diag_contract.py": "a166a89fa6ffcb8dc227d0eb039a102965c17841d984b86589193a0467212551",
+      "run.py": "284598a3f18ae0c8d36d14a500516063049270e7e8927b21552a6f8ad3636bd4",
+      "tests/test_contract.py": "96f1e5b73793632be24798103aa6eb4c6bf6340741fb3b116a85e4ff5deffe00"
+    },
+    "reason": "MAIN actual read-only MA06c6 retained the former production policy ValueError rejecting the known protected NPU0-3 baseline at26.76GiB/7.20%; its resident RAM is already deducted from MemAvailable",
+    "source_observation": {
+      "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "operation_id": "exec-00000000000006c6",
+      "route": "peer_direct",
+      "scope": "MAIN original read-only tool output, not an authored future terminal-file authority",
+      "original_value_error_retained": true,
+      "container_id": "eeb65fd29e054783ce8ba6f9165ea54d38a2575f170225ddf11b3e7584b9f12a",
+      "resident_display": "26.76GiB",
+      "cpu_display": "7.20%"
+    },
+    "policy": "Only exact immutable container id/name/image/nonprivileged physical0..3+common map and actual vllm/python3/VLLM::EngineCor/VLLM::Worker_TP PID-name set: record initial resident baseline; require CPU<=50%, no PID/name/map/identity drift, resident growth<=4GiB. UNKNOWN keeps2GiB/50%; no external hard cap guarantee; stop only own diagnostic.",
+    "unchanged": {
+      "preflight_mem_available_floor_gib": 42,
+      "formal_mem_available_floor_gib": 72,
+      "ordinary_ram_reserve_gib": 8,
+      "formal_cpus": 6,
+      "preflight_cpus": 1,
+      "npu_guard": true,
+      "collector_observer_algorithm": true,
+      "default_off": true
+    },
+    "real_image_preflight_status": "pending MAIN execution",
+    "preparing_agent_docker_npu_git_actions": false
+  }
+}
