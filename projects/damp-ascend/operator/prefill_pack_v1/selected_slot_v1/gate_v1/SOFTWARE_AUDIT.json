@@ -1,0 +1,133 @@
+{
+  "schema": "damp-selected-prefill-gate-software-audit/v1",
+  "scope": "Stdlib/AST/source identity only; no Torch import, library load, device execution, Docker/build/Git performed by subagent.",
+  "npu_executed": false,
+  "serving_ready": false,
+  "default_enabled": false,
+  "source_preparation_only": true,
+  "head_observed": "25e280d56d0bed5f2612352ebef773ef0be35bc4",
+  "sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/selected_contract.py": "c77651b97b1aa4e32351afab54e7688bd8fded1df3a989baf3d7a2a281aedcda",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/fraction_locator.py": "0d5618d64167b1caf23990427797ce192437d21ac79735d9fa86b049f498bbce",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/evidence.py": "766f38b65f75079f9a5c026bbb1959fb5c96da7f2ea622eacdd9796d0e726ceb",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/packing_oracle.py": "b3b67347dde36cb84e18c0852342e556283d3a9b513608ed6522ce79ce18d4b9",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/arena.py": "69d4cd26a95e24cf2f945638b91377a221acffaa25aeb6f44b7927c7b34d7035",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/run.py": "6ef05abac2be2448183398cf430a8395814fa773d080ce3ce159f66d5af33a72",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/native_feedback.py": "1206efb9523480866540adef4dd00288e2b9c7e0b3a218a336ae745087d7a656",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/tests/test_contract.py": "99636229a4de5fec495d790ef4fe37a6c60e24bf7d4b8fd7a0b58467bfad3e4e",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/README.md": "38744dfb4720a570aeab954572e5fa7781c85cc93e44afbdc022abd39c04b115"
+  },
+  "checks": [
+    {
+      "action": "unittest discover",
+      "exec_id": "exec-0000000000000587",
+      "exit_code": 0,
+      "tests": 18,
+      "stderr": "test_actual_allbatch_build_contract (test_contract.Contract) ... ok\ntest_actual_selected_build_contract (test_contract.Contract) ... ok\ntest_arena_shared_exact_geometry (test_contract.Contract) ... ok\ntest_ast_all_sources (test_contract.Contract) ... ok\ntest_default_off_before_torch (test_contract.Contract) ... ok\ntest_device_proof (test_contract.Contract) ... ok\ntest_evidence_poisoned_copy_preserved (test_contract.Contract) ... ok\ntest_exact_locator_all_boundaries (test_contract.Contract) ... ok\ntest_exact_locator_random (test_contract.Contract) ... ok\ntest_invalid_float_inputs (test_contract.Contract) ... ok\ntest_metadata_zero_writer (test_contract.Contract) ... ok\ntest_native_apis_not_fake_globals (test_contract.Contract) ... ok\ntest_numeric_partial_retirement (test_contract.Contract) ... ok\ntest_real_repo_and_integration_paths (test_contract.Contract) ... ok\ntest_real_unique_selected_slots (test_contract.Contract) ... ok\ntest_status_all_heads_and_complete_guards (test_contract.Contract) ... ok\ntest_copy_errors_cannot_hide_original_dispatch (test_contract.PoisonedEvidence) ... ok\ntest_safe_json_nonfinite_kept (test_contract.PoisonedEvidence) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 1.402s\n\nOK\n"
+    },
+    {
+      "action": "default disabled CLI",
+      "exec_id": "exec-0000000000000588",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"disabled\", \"npu_executed\": false, \"serving_ready\": false}\n"
+    },
+    {
+      "action": "source closure/AST",
+      "exec_id": "exec-0000000000000589",
+      "exit_code": 0,
+      "declared_sources": 9,
+      "repo_dependency_sources": 50,
+      "ast_pass": true
+    }
+  ],
+  "unexecuted": [
+    "Torch/load/schema in this new harness",
+    "physical shared-arena status/numerical negatives",
+    "actual generalSR Float RN32/FP16/group32 packing",
+    "native chunk public config/context/Gloo init runtime seam",
+    "original native chunk with transient continuation/unpack",
+    "native-final packed B1/B16 160 own-feedback decode",
+    "all 192 calibrated plans and actual native prebuilt/mixed builder",
+    "real model cache lifecycle/FA pages/early zero",
+    "graph/services/E2E paired performance/GSM8K/LongBench"
+  ],
+  "initial_reviewed_sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/selected_contract.py": "c77651b97b1aa4e32351afab54e7688bd8fded1df3a989baf3d7a2a281aedcda",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/fraction_locator.py": "0d5618d64167b1caf23990427797ce192437d21ac79735d9fa86b049f498bbce",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/evidence.py": "a4148799b7dffc5c6e8385e8148bf79ce0f2ec32d20abfb9bea627e0b093e5b4",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/packing_oracle.py": "b3b67347dde36cb84e18c0852342e556283d3a9b513608ed6522ce79ce18d4b9",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/arena.py": "69d4cd26a95e24cf2f945638b91377a221acffaa25aeb6f44b7927c7b34d7035",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/run.py": "6ef05abac2be2448183398cf430a8395814fa773d080ce3ce159f66d5af33a72",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/native_feedback.py": "8fc0d2a2e88b802d8245c4f12a53007aede5f1d2f1d0a0bd0392235537838e7e",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/tests/test_contract.py": "3a33d22ed60cf25555b423d38674251e1143088a699bddac80254a10e700d045",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/README.md": "6eea18a6e7483cf2c0429f36786deabb4101925f346f4fd89590f92ea6c6335a"
+  },
+  "checks_scope": "Original pre-repair v1 source tests (18). Exact prior identities are preserved in review_repair.previous_file_hashes; these tests did not catch the two newly found leave-evidence bugs.",
+  "review_repair": {
+    "status": "software_only_repaired",
+    "previous_file_hashes": {
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/README.md": "6eea18a6e7483cf2c0429f36786deabb4101925f346f4fd89590f92ea6c6335a",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/RUNTIME_MANIFEST.json": "75a734f7418ad21c1c1920a8b849eb7e34f4b84a78378534af64fb72b65df5c6",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/SOFTWARE_AUDIT.json": "b9c027ed9a0d6b4a756225320eab22ad62f84bef0751af712a8a4bbea32321ba",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/arena.py": "69d4cd26a95e24cf2f945638b91377a221acffaa25aeb6f44b7927c7b34d7035",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/evidence.py": "a4148799b7dffc5c6e8385e8148bf79ce0f2ec32d20abfb9bea627e0b093e5b4",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/fraction_locator.py": "0d5618d64167b1caf23990427797ce192437d21ac79735d9fa86b049f498bbce",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/native_feedback.py": "8fc0d2a2e88b802d8245c4f12a53007aede5f1d2f1d0a0bd0392235537838e7e",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/packing_oracle.py": "b3b67347dde36cb84e18c0852342e556283d3a9b513608ed6522ce79ce18d4b9",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/run.py": "6ef05abac2be2448183398cf430a8395814fa773d080ce3ce159f66d5af33a72",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/selected_contract.py": "c77651b97b1aa4e32351afab54e7688bd8fded1df3a989baf3d7a2a281aedcda",
+      "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/tests/test_contract.py": "3a33d22ed60cf25555b423d38674251e1143088a699bddac80254a10e700d045"
+    },
+    "findings": [
+      {
+        "source": "native_feedback.py",
+        "original_sha256": "8fc0d2a2e88b802d8245c4f12a53007aede5f1d2f1d0a0bd0392235537838e7e",
+        "finding": "golden_before clone existed, but gate.fixture referred to mutable golden planes subsequently modified in place.",
+        "repair": "Capture planes from golden_before authority, then selected_update can mutate golden without changing fixture."
+      },
+      {
+        "source": "evidence.py",
+        "original_sha256": "a4148799b7dffc5c6e8385e8148bf79ce0f2ec32d20abfb9bea627e0b093e5b4",
+        "finding": "pointers_after could throw before original dispatch_error record was published to fixture/last.",
+        "repair": "Publish original record first; nullable pointer query errors captured separately, and healthy rejects any pointer query error."
+      }
+    ],
+    "durability": "CPU memory before snapshots only; not saved to disk before every dispatch. Failure/negative retain() saves CPU fixture later. Process termination before save is outside current durability guarantees.",
+    "current_validation": [
+      {
+        "action": "stdlib unittest discover",
+        "exec_id": "exec-000000000000059d",
+        "exit_code": 0,
+        "tests": 20,
+        "stderr": "test_actual_allbatch_build_contract (test_contract.Contract) ... ok\ntest_actual_selected_build_contract (test_contract.Contract) ... ok\ntest_arena_shared_exact_geometry (test_contract.Contract) ... ok\ntest_ast_all_sources (test_contract.Contract) ... ok\ntest_default_off_before_torch (test_contract.Contract) ... ok\ntest_device_proof (test_contract.Contract) ... ok\ntest_evidence_poisoned_copy_preserved (test_contract.Contract) ... ok\ntest_exact_locator_all_boundaries (test_contract.Contract) ... ok\ntest_exact_locator_random (test_contract.Contract) ... ok\ntest_feedback_fixture_before_clone_survives_inplace_update (test_contract.Contract) ... ok\ntest_invalid_float_inputs (test_contract.Contract) ... ok\ntest_metadata_zero_writer (test_contract.Contract) ... ok\ntest_native_apis_not_fake_globals (test_contract.Contract) ... ok\ntest_numeric_partial_retirement (test_contract.Contract) ... ok\ntest_real_repo_and_integration_paths (test_contract.Contract) ... ok\ntest_real_unique_selected_slots (test_contract.Contract) ... ok\ntest_status_all_heads_and_complete_guards (test_contract.Contract) ... ok\ntest_copy_errors_cannot_hide_original_dispatch (test_contract.PoisonedEvidence) ... ok\ntest_pointer_after_error_preserves_original_dispatch_and_record (test_contract.PoisonedEvidence) ... ok\ntest_safe_json_nonfinite_kept (test_contract.PoisonedEvidence) ... ok\n\n----------------------------------------------------------------------\nRan 20 tests in 1.422s\n\nOK\n"
+      },
+      {
+        "action": "default CLI disabled",
+        "exec_id": "exec-000000000000059e",
+        "exit_code": 0,
+        "stdout": "{\"status\": \"disabled\", \"npu_executed\": false, \"serving_ready\": false}\n"
+      },
+      {
+        "action": "new source AST/hash",
+        "exec_id": "exec-00000000000005a0",
+        "exit_code": 0,
+        "sources": {
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/selected_contract.py": "c77651b97b1aa4e32351afab54e7688bd8fded1df3a989baf3d7a2a281aedcda",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/fraction_locator.py": "0d5618d64167b1caf23990427797ce192437d21ac79735d9fa86b049f498bbce",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/evidence.py": "766f38b65f75079f9a5c026bbb1959fb5c96da7f2ea622eacdd9796d0e726ceb",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/packing_oracle.py": "b3b67347dde36cb84e18c0852342e556283d3a9b513608ed6522ce79ce18d4b9",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/arena.py": "69d4cd26a95e24cf2f945638b91377a221acffaa25aeb6f44b7927c7b34d7035",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/run.py": "6ef05abac2be2448183398cf430a8395814fa773d080ce3ce159f66d5af33a72",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/native_feedback.py": "1206efb9523480866540adef4dd00288e2b9c7e0b3a218a336ae745087d7a656",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/tests/test_contract.py": "99636229a4de5fec495d790ef4fe37a6c60e24bf7d4b8fd7a0b58467bfad3e4e",
+          "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/README.md": "38744dfb4720a570aeab954572e5fa7781c85cc93e44afbdc022abd39c04b115"
+        },
+        "scope": "AST/stdlib only"
+      }
+    ],
+    "npu_executed": false,
+    "torch_imported": false,
+    "compiled_sources_changed": false,
+    "numerical_limits_changed": false
+  }
+}

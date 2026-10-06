@@ -350,3 +350,27 @@ with hidden state copies or mutate frozen binaries/receipts.
   invented a common launchable field for a dry-plan CLI and exited1. Correct
   the verifier against that CLI's frozen actual schema in a separate check;
   do not rewrite the first receipt as success or rerun unchanged numerical work.
+
+## Pre-device evidence and native type seams, 16:56Z
+
+- A saved before-trajectory must be an independent clone, not a reference to
+  the buffer that selected-update later mutates. Here the clone existed but
+  fixture construction used the mutable original. Execute the actual fixture
+  assignment in a behavior regression; helper mocks/source-token checks alone
+  had missed it. This was repaired before NPU, not a numerical failure.
+- Publish the original dispatch exception into the CPU evidence record before
+  any after-copy or pointer query. Pointer/stride queries may fail separately:
+  record them as nullable independent errors, refuse healthy status, and retain
+  the original cause. Software poisoned-context regressions do not prove NPU.
+  CPU before snapshots are not a durable pre-dispatch disk journal; state the
+  crash-loss boundary rather than promise evidence survives a process kill.
+- Identical Python source hashes do not imply identical class objects when
+  importlib loads the contract under different aliases. A receiver enforcing
+  isinstance must share canonical Turn/Leases authority with its producer.
+  Verify actual constructor/copier/allocator order and test the real module
+  interoperation. The current new assembly repair is pending, not accepted.
+- Distinguish CPU-derived scheduler metadata from actual device metadata.
+  A diagnostic compare may admit checked correctness only; it is not a formal
+  no-hot-D2H policy or throughput result. A B1/B16 native-prefill packet cannot
+  authorize intermediate P2–15, mixed48-layer service, graph or final192 plans.
+  Keep those obligations explicit instead of upgrading status-only reports.

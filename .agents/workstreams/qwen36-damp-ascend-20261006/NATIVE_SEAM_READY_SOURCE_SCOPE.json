@@ -1,0 +1,109 @@
+{
+  "schema": "damp-native-seam-ready-source-scope/v1",
+  "base_head": "25e280d56d0bed5f2612352ebef773ef0be35bc4",
+  "source_files": [
+    {
+      "path": "projects/damp-ascend/integration/cache_identity_v1/observer_v1/observer.py",
+      "sha256": "88e62cda93e1654a733d18739d244fb05b71d6acdc3848e6deb6edd73659bb96"
+    },
+    {
+      "path": "projects/damp-ascend/integration/cache_identity_v1/observer_v1/READY.md",
+      "sha256": "ce56eea1f91ca8d16b514392124069c9a6440869cbc2fae43c293c69e3c7f070"
+    },
+    {
+      "path": "projects/damp-ascend/integration/cache_identity_v1/observer_v1/SOURCE_MANIFEST.json",
+      "sha256": "8661a6bc2dda84627c1be529f69ea5af4286e6572063f5d15529dbb815a60fc0"
+    },
+    {
+      "path": "projects/damp-ascend/integration/cache_identity_v1/observer_v1/test_observer.py",
+      "sha256": "c9f70abf5672cef37080d498dd31c6e553d89d6f22098af827dff5295031ae1c"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/arena.py",
+      "sha256": "69d4cd26a95e24cf2f945638b91377a221acffaa25aeb6f44b7927c7b34d7035"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/evidence.py",
+      "sha256": "766f38b65f75079f9a5c026bbb1959fb5c96da7f2ea622eacdd9796d0e726ceb"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/fraction_locator.py",
+      "sha256": "0d5618d64167b1caf23990427797ce192437d21ac79735d9fa86b049f498bbce"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/native_feedback.py",
+      "sha256": "1206efb9523480866540adef4dd00288e2b9c7e0b3a218a336ae745087d7a656"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/packing_oracle.py",
+      "sha256": "b3b67347dde36cb84e18c0852342e556283d3a9b513608ed6522ce79ce18d4b9"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/README.md",
+      "sha256": "38744dfb4720a570aeab954572e5fa7781c85cc93e44afbdc022abd39c04b115"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/run.py",
+      "sha256": "6ef05abac2be2448183398cf430a8395814fa773d080ce3ce159f66d5af33a72"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/RUNTIME_MANIFEST.json",
+      "sha256": "7ea60a45ea46f28811c16455885eab46dbd78bce5586a8914f06a701dbcd4ed1"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/selected_contract.py",
+      "sha256": "c77651b97b1aa4e32351afab54e7688bd8fded1df3a989baf3d7a2a281aedcda"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/SOFTWARE_AUDIT.json",
+      "sha256": "5c92eab5347a54c23ad1a404aa6ec63d7e73df65036441ce38d29a9f24408729"
+    },
+    {
+      "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/tests/test_contract.py",
+      "sha256": "99636229a4de5fec495d790ef4fe37a6c60e24bf7d4b8fd7a0b58467bfad3e4e"
+    }
+  ],
+  "selected_gate_runtime_manifest_sha256": "7ea60a45ea46f28811c16455885eab46dbd78bce5586a8914f06a701dbcd4ed1",
+  "selected_published_dependency_count": 50,
+  "defaults_off": true,
+  "npu_executed": false,
+  "serving_ready": false,
+  "performance_claim": false,
+  "unchanged_compiled_sources": true,
+  "unchanged_numerical_limits": {
+    "state": 0.00001,
+    "output": 0.00303
+  },
+  "main_checks": [
+    {
+      "operation_id": "exec-00000000000005b0",
+      "exit_code": 0,
+      "tests": 20,
+      "result_path": "/cache/cch/qwen36-damp-20261006/selected-prefill-gate-main-software-v1/RESULT.json",
+      "result_sha256": "ce10ed83a9790641b139b0a21b46103721a5c81e23f36dfe46542418c59c5ff2"
+    },
+    {
+      "operation_id": "exec-0000000000000583",
+      "exit_code": 0,
+      "tests": 31,
+      "scope": "observer source/snapshot binding and stdlib only"
+    }
+  ],
+  "source_copies": [
+    {
+      "operation_id": "exec-00000000000005ac",
+      "exit_code": 0,
+      "manifest_path": "/cache/cch/qwen36-damp-20261006/runtime-serving-initializer-snapshot-v1/MANIFEST.json",
+      "manifest_sha256": "c1a766ac34025c62e6ac99f0449c87ec2cf5cb5d4818c5bcb326f21eb79c4ffd",
+      "stopped_image_no_devices": true
+    }
+  ],
+  "excluded_drafts": [
+    "service_assembly_v1",
+    "prefill_float_dispatch_v1",
+    "selected gate admission_v1",
+    "old unreviewed integer integration and service_all_batch_v2",
+    "calibrated_plan_admission_v2 and final_plan_gate_v1"
+  ],
+  "deadline_unchanged": "2026-10-07T08:48:03Z"
+}

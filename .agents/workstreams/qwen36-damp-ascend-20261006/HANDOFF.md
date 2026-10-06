@@ -3,6 +3,22 @@
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
+## Native-seam preparation checkpoint — 2026-10-06 16:56Z
+
+Read NATIVE_SEAM_READINESS_CHECKPOINT_20261006.md and
+NATIVE_SEAM_READY_SOURCE_SCOPE.json for the reviewed15-file publication.
+Selected gate MA05b0 independent20 stdlib/default-OFF/actual receipt+SO/source
+checks pass; observer MA0583 independent31 software checks pass. Neither ran
+NPU or establishes serving/performance. Two leave-evidence bugs were narrowly
+corrected; original hashes/history, thresholds and frozen binaries stay intact.
+New runtime7ea60a45…; MAIN software RESULTce10ed83… . Actual initializer snapshot
+MA05ac manifestc1a766ac… closes requested source order only, not execution.
+MA0455 still owns exclusive TP4; MA059c16:51Z observes20/36 x4096 completed,
+all rank events advancing. Full source-lock/fitting/final gates still pending.
+Original cutoffs unchanged;0–3 remain protected. NEW service/dispatcher/
+admission and older final-plan drafts are not silently part of this checkpoint.
+
+
 ## Prefill/compiler readiness checkpoint — 2026-10-06 16:29Z
 
 Read PREFILL_READINESS_CHECKPOINT_20261006.md and
