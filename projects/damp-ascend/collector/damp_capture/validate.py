@@ -3,14 +3,17 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from .contract import LAYERS, STATE_BYTES, digest, file_digest, load_manifest, require
+from .contract import LAYERS, STATE_BYTES, digest, file_digest, load_manifest, require,token_digest
+from .text_positions import TEXT_METADATA_SOURCES
+from .bindings import BINDING_SOURCES
+from .identity import live_identity,legacy_identity
 
 
 def records(path):
     return [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
 
 
-def validate(root, manifest, dense_root):
+def validate(root, manifest, dense_root, *, legacy_source_path=None):
     root, dense_root = Path(root), Path(dense_root)
     mhash = digest(manifest)
     run = json.loads((root / "RUN.json").read_text())
@@ -35,7 +38,17 @@ def validate(root, manifest, dense_root):
         require(live["prompt_token_sha256"] == oracle["prompt_token_sha256"] == row["input_ids_sha256"],
                 "prompt identity differs")
         require(live["output_token_ids"] == oracle["output_token_ids"], "capture changed output token IDs")
-        require(live["output_tokens"] == manifest["generation"]["max_tokens"], "wrong output length")
+        for output in (live,oracle):
+            require(output["output_tokens"] == len(output["output_token_ids"]) ==
+                manifest["generation"]["max_tokens"] and
+                output["output_token_sha256"] == token_digest(output["output_token_ids"]),
+                "wrong output length/hash")
+    if legacy_source_path is None:
+        identity = dict(mode="observed-native-add_request",
+            capture=live_identity(root,manifest,clients),oracle=live_identity(dense_root,manifest,oracles))
+        recovered = None
+    else:
+        recovered,identity = legacy_identity(root,dense_root,manifest,clients,oracles,legacy_source_path)
     expected = {(rid, layer, step) for rid in ids for layer in LAYERS for step in manifest["anchors"]}
     for rank in range(4):
         directory = root / f"rank-{rank}"
@@ -50,12 +63,30 @@ def validate(root, manifest, dense_root):
                 source["gdn_sha256"] == manifest["runtime_hashes"]["gdn"] and
                 source["runner_sha256"] == manifest["runtime_hashes"]["runner"] and
                 source["recurrent_schema_sha256"] == digest(source["recurrent_schema"]), "runtime identity mismatch")
+        require(source.get("text_metadata_sources") == TEXT_METADATA_SOURCES,
+                "text/sequence metadata source identity mismatch")
+        require(source.get("binding_sources") == BINDING_SOURCES, "actual receiver source identity mismatch")
+        dispatch = [e for e in events if e["event"] == "worker_dispatch_verified"]
+        require(len(dispatch) == 1 and len(dispatch[0]["layers"]) == len(LAYERS) and
+                {r["layer"] for r in dispatch[0]["layers"]} == set(LAYERS),
+                "actual receiver instance proof incomplete")
+        for binding in dispatch[0]["layers"]:
+            require(binding["instance_class"] ==
+                    "vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn.QwenGatedDeltaNetAttention" and
+                    binding["class_path"] ==
+                    "/vllm-workspace/vllm/vllm/model_executor/layers/mamba/gdn/qwen_gdn_linear_attn.py" and
+                    binding["class_sha256"] == BINDING_SOURCES[binding["class_path"]] and
+                    binding["core_owner"]["sha256"] == source["collector_sha256"] and
+                    binding["original_core_owner"]["sha256"] == source["gdn_sha256"] and
+                    binding["outer_forward_owner"]["sha256"] == source["gdn_sha256"],
+                    "actual receiver/wrapper/native owning function mismatch")
         bindings = [e for e in events if e["event"] == "request_bound"]
         require(len(bindings) == len(ids) and {e["logical_id"] for e in bindings} == ids,
                 "worker request identity incomplete")
         for event in bindings:
             client = clients[event["logical_id"]]
-            require(event["runtime_id"] == client["runtime_id"] and
+            runtime_id = client["runtime_id"] if recovered is None else recovered[event["logical_id"]]["runtime_id"]
+            require(event["runtime_id"] == runtime_id and
                     event["prompt_token_sha256"] == client["prompt_token_sha256"], "worker/client identity mismatch")
         for kind, size in (("anchor", STATE_BYTES), ("future", manifest["horizon"] * 12 * 4)):
             selected = [e for e in events if e["event"] == kind]
@@ -73,10 +104,16 @@ def validate(root, manifest, dense_root):
                 {(rid, layer) for rid in ids for layer in LAYERS}, "incomplete layer timelines")
         turns = [e for e in events if e["event"] == "turn_complete"]
         require(turns and all(e["layers"] == list(LAYERS) for e in turns), "GDN coverage incomplete")
+        position_events = [e for e in events if e["event"] == "text_positions_verified"]
+        require(len(position_events) == len(turns) and
+                all(p["runtime_ids"] == t["runtime_ids"] and p["native_arguments_unmodified"] is True and
+                    p["mode"] in ("pure-text-mrope-3-identical-rows", "pure-text-1d")
+                    for p, t in zip(position_events, turns)), "text position proof/turn coverage mismatch")
     return dict(status="pass", mode=manifest["mode"], ranks=4, layers=len(LAYERS), requests=len(ids),
                 anchors=len(manifest["anchors"]), output_parity="all token IDs bitwise same-eager",
                 scope="smoke-hook-not-calibration" if manifest["mode"] == "smoke" else "FP32-reference-calibration-only",
-                not_proven=["compressed recurrence", "NPU graph", "end-to-end speedup", "task accuracy"])
+                not_proven=["compressed recurrence", "NPU graph", "end-to-end speedup", "task accuracy"],
+                request_identity=identity)
 
 
 def main():

@@ -27,3 +27,18 @@ claim of uninterrupted 24/7 hardware occupation.
   peer_direct target, hostname, architecture, canonical Git HEAD and NPU/UDA.
   An unavailable ma observation is not a hardware blocker and not permission to
   relaunch a possibly running job.
+
+## Human-imposed portfolio cutoff (2026-10-06)
+
+All existing papers, including added still-unresolved candidates, enter the
+72-hour evidence closeout ending2026-10-09T11:17:31Z. The earlier per-paper
+24-hour cap remains. Prior HYPIC success is a reference, never a new deliverable.
+Reserve final day capacity for repeated matched timing and final2048 task
+accuracy of the strongest numerical-pass candidate. Do not spend the entire
+budget preparing operators without reaching a service measurement.
+Prepare next candidate packets in parallel while the current native capture
+runs, but never overlap competing NPU loads with TP4 correctness/performance.
+Audit stale opportunity-only portfolio labels against later actual branches;
+keep missing evidence and implementation failures distinct from paper rejection.
+At cutoff report accepted usable artifacts or the unmet objective explicitly;
+do not promote toy/sample/microbenchmark passes or lower gates to force success.

@@ -35,7 +35,7 @@ def main():
         for i, record in enumerate(records[:args.limit]):
             text = record["text"]
             ids = tokenizer.apply_chat_template([{"role": "user", "content": text}],
-                                                tokenize=True, add_generation_prompt=True,
+                                                tokenize=True, return_dict=False, add_generation_prompt=True,
                                                 enable_thinking=False)
             m["rows"].append(dict(id=f"smoke-{i:02d}", input_ids=ids,
                                   input_ids_sha256=token_digest(ids),

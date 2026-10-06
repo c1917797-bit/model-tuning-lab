@@ -1,4 +1,5 @@
 """Parent-owned, one-shot DAMP collector smoke; never a performance test."""
+import argparse
 import hashlib
 import json
 import os
@@ -69,10 +70,19 @@ def logged(label, argv, timeout):
     print("PASS " + label, flush=True)
 
 def main():
+    global NAME, AUDIT, MANIFEST
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run-id", required=True, help="new v<number> identity; no overwrite/retry")
+    args = parser.parse_args()
+    require(re.fullmatch(r"v[1-9][0-9]*", args.run_id), "invalid run identity")
+    NAME = "qwen36_damp_collector_tp4_20261006_" + args.run_id
+    AUDIT = RESULT / ("smoke-hook-" + args.run_id + "-launch")
+    MANIFEST = RESULT / ("calibration-inputs/smoke-hook-" + args.run_id + ".json")
+    arm_root = "smoke-hook-" + args.run_id
     require(Path.cwd().resolve() == REPO and REPO.is_dir(), "canonical cwd required")
     require(not AUDIT.exists() and not MANIFEST.exists()
-            and all(not (RESULT / ("smoke-hook-v1-" + arm)).exists() for arm in ("off", "on")),
-            "v1 output already exists; never overwrite")
+            and all(not (RESULT / (arm_root + "-" + arm)).exists() for arm in ("off", "on")),
+            "requested output identity already exists; never overwrite")
     require(hashlib.sha256(Path(SOURCE).read_bytes()).hexdigest() == EXPECTED_SOURCE,
             "smoke source changed")
     collision = subprocess.run(["docker", "container", "inspect", NAME], capture_output=True)
@@ -123,7 +133,8 @@ def main():
                   devices=inspect["HostConfig"]["Devices"], mounts=inspect["Mounts"],
                   privileged=False, network=inspect["HostConfig"]["NetworkMode"]))
         output(["docker", "start", NAME])
-        # Import/schema inspection is no-device; a separate canary initializes only mapped cards.
+        # SoC/schema imports may probe a device. Only inspected mapped4..7 are
+        # exposed; a separate canary verifies all four logical devices.
         logged("import", python_in_container("-c",
               "import acl, torch, torch_npu, importlib.metadata as m; "
               "import vllm_ascend.ops; import vllm_ascend.ops.gdn as g; "
@@ -146,11 +157,11 @@ def main():
             require("python" not in top, "unexpected model process before paired arm")
             idle_snapshot()
             logged(arm, python_in_container("-m", "damp_capture.run", "--manifest", str(MANIFEST),
-                   "--output-dir", str(RESULT / ("smoke-hook-v1-" + arm)), "--capture", arm,
+                   "--output-dir", str(RESULT / (arm_root + "-" + arm)), "--capture", arm,
                    "--batch-size", "2", "--memory-utilization", "0.80"), 900)
         logged("validate", python_in_container("-m", "damp_capture.validate", "--manifest", str(MANIFEST),
-              "--output-dir", str(RESULT / "smoke-hook-v1-on"),
-              "--dense-output-dir", str(RESULT / "smoke-hook-v1-off")), 90)
+              "--output-dir", str(RESULT / (arm_root + "-on")),
+              "--dense-output-dir", str(RESULT / (arm_root + "-off"))), 90)
         write_new(AUDIT / "RESULT.json", dict(status="pass", scope="collector-smoke-only",
                   not_proven=["full calibration", "compressed recurrence", "graph", "E2E throughput", "task accuracy"]))
     except Exception as error:

@@ -1,0 +1,22 @@
+{
+  "schema": "damp-calibration-dependency/v1",
+  "scope": "Parquet TRAIN parsing only; isolated external target, no original runtime/image edits",
+  "python": "CPython3.12",
+  "architecture": "aarch64",
+  "package": "pyarrow",
+  "version": "22.0.0",
+  "wheel": "pyarrow-22.0.0-cp312-cp312-manylinux_2_28_aarch64.whl",
+  "size": 45021677,
+  "sha256": "334f900ff08ce0423407af97e6c26ad5d4e3b0763645559ece6fbf3747d6a8f5",
+  "url": "https://files.pythonhosted.org/packages/b4/a8/f910afcb14630e64d673f15904ec27dd31f1e009b77033c365c84e8c1e1d/pyarrow-22.0.0-cp312-cp312-manylinux_2_28_aarch64.whl",
+  "metadata_source": "https://pypi.org/pypi/pyarrow/22.0.0/json",
+  "mirror_discovery": "https://repo.huaweicloud.com/repository/pypi/simple/pyarrow/",
+  "mirror_url": "https://repo.huaweicloud.com/repository/pypi/packages/b4/a8/f910afcb14630e64d673f15904ec27dd31f1e009b77033c365c84e8c1e1d/pyarrow-22.0.0-cp312-cp312-manylinux_2_28_aarch64.whl",
+  "mirror_contract": "same exact upstream size and SHA256; strict TLS; no checksum substitution",
+  "install": "pip --no-index --no-deps --target <fresh-external-path>",
+  "not_proven": [
+    "NPU correctness",
+    "performance",
+    "task accuracy"
+  ]
+}

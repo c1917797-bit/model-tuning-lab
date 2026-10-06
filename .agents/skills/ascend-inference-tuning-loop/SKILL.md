@@ -80,3 +80,8 @@ next loop from evidence, not from an unrecorded intuition.
   container is insufficient when startup copies into a persistent directory:
   use a fresh container or a non-nesting replacement such as `cp -aT`, then
   re-record module paths and hashes before spending an NPU validation run.
+
+For packed recurrent-state ports, also apply the evidence-backed
+[DAMP migration gates](references/damp-migration-gates.md): native tokenizer
+and plugin registration, static versus device-dependent preflight, untouched
+slot preservation, and prepack-versus-quantization failure attribution.

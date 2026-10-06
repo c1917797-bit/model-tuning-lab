@@ -1,0 +1,15 @@
+{
+  "schema": "damp-trace-production-source-identity/v1",
+  "production_root": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator",
+  "production_library_sha256": "22f522cf5befcf6afa12560dd2624fd6ddb1c99cc8d9bf04a4b08502363b3937",
+  "source_hashes": {
+    "CMakeLists.txt": "f6fae737ea995b5276cc04892dc3934a073f1df51f68035ce658be091cc37134",
+    "op_extension/ops.h": "9266ad592d593ada188b74e84fde30955938b554298e9dee7b4e8a4768b3b0db",
+    "op_extension/qwen36_gdn_damp_decode_torch.cpp": "0329433adda1821600026df9b8449b64aa9b3d48c4bdcfec82ad07b8f3a94ed4",
+    "op_extension/register.cpp": "ac7b93bf6cab637e1e7eedb857c18bedb657184a4b2dd4766b1cd143b3c04f87",
+    "op_kernel/qwen36_gdn_damp_decode.h": "ecc24fada002dafbca962de5265f1bddc27a03d1e723070d9b317b415e3ca856",
+    "op_kernel/qwen36_gdn_damp_decode_kernel.asc": "75d245da0f490601dc0f807a3492e886535fe2d6c139a03d2a01df51f683e6d5",
+    "op_kernel/qwen36_gdn_damp_decode_tiling.h": "3dae709efa2bfdce83ca90dd21fd2013896307db677c7363a337316b3dca6257"
+  },
+  "warning": "Source/binary relationship from original v4 gate must be rechecked by parent; source parity alone does not prove actual arithmetic."
+}

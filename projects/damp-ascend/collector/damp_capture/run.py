@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 from .contract import RESULT_ROOT, canonical, digest, load_manifest, require, token_digest
+from .identity import install,source_identity
 
 
 def main():
@@ -29,12 +30,13 @@ def main():
                evidence_scope="smoke-hook-not-calibration" if m["mode"] == "smoke" else "FP32-reference-calibration-only",
                generation=m["generation"], batch_size=args.batch_size,
                physical_devices=[4, 5, 6, 7], logical_devices=[0, 1, 2, 3],
-               enforce_eager=True, prefix_cache=False, chunked_prefill=False)
+               enforce_eager=True, prefix_cache=False, chunked_prefill=False,
+               request_identity=source_identity())
     (root / "RUN.json").write_bytes(canonical(run) + b"\n")
     os.environ["DAMP_CAPTURE_ENABLE"] = "1" if args.capture == "on" else "0"
     os.environ["DAMP_CAPTURE_MANIFEST"] = str(Path(args.manifest).resolve())
     os.environ["DAMP_CAPTURE_OUTPUT"] = str(root)
-    os.environ["VLLM_PLUGINS"] = "damp_capture"
+    os.environ["VLLM_PLUGINS"] = "ascend,ascend_kv_connector,ascend_model,ascend_model_loader,damp_capture"
     os.environ["VLLM_USE_V1"] = "1"
     os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
     from vllm import LLM, SamplingParams
@@ -49,7 +51,13 @@ def main():
     params = SamplingParams(temperature=0, seed=0, top_p=1,
                             min_tokens=generation["min_tokens"],
                             max_tokens=generation["max_tokens"], ignore_eos=True)
-    with (root / "client.jsonl").open("x", encoding="utf-8") as audit:
+    with (root / "request-identities.jsonl").open("x", encoding="utf-8") as identities, \
+            (root / "client.jsonl").open("x", encoding="utf-8") as audit:
+        def emit_identity(record):
+            identities.write(canonical(record).decode()+"\n")
+            identities.flush()
+        observer,source = install(llm.llm_engine,m,emit_identity)
+        require(source == run["request_identity"], "identity source changed after model load")
         for start in range(0, len(m["rows"]), args.batch_size):
             batch = m["rows"][start:start + args.batch_size]
             results = llm.generate([{"prompt_token_ids": row["input_ids"]} for row in batch],
@@ -63,13 +71,18 @@ def main():
                 ids = list(sample.token_ids)
                 require(len(ids) == generation["max_tokens"] and output.finished,
                         "fixed-length generation incomplete")
-                record = dict(logical_id=row["id"], runtime_id=output.request_id,
+                identity = observer.output(output.request_id,row,list(output.prompt_token_ids))
+                record = dict(logical_id=row["id"], runtime_id=identity["runtime_id"],
+                              external_request_id=identity["external_request_id"],
                               prompt_token_sha256=row["input_ids_sha256"],
                               output_tokens=len(ids), output_token_ids=ids,
                               output_token_sha256=token_digest(ids),
                               finish_reason=sample.finish_reason, stop_reason=sample.stop_reason)
                 audit.write(canonical(record).decode() + "\n")
                 audit.flush()
+        observer.complete()
+        require(llm.llm_engine.add_request is observer, "instance observer replaced during collection")
+        del llm.llm_engine.add_request
     (root / "CLIENT_COMPLETE.json").write_bytes(canonical(dict(
         rows=len(m["rows"]), mode=m["mode"], manifest_sha256=digest(m))) + b"\n")
     print(json.dumps(dict(output_dir=str(root), scope=run["evidence_scope"]), sort_keys=True))

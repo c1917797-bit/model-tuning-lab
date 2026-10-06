@@ -48,6 +48,18 @@ class FakeWriter:
 
 
 class ContractTests(unittest.TestCase):
+    def test_plugin_allowlist_keeps_ascend_platform(self):
+        import ast
+        source = Path(__file__).parents[1] / "damp_capture" / "run.py"
+        tree = ast.parse(source.read_text())
+        assignments = [n for n in ast.walk(tree) if isinstance(n, ast.Assign)
+                       and any(isinstance(t, ast.Subscript) and
+                               isinstance(t.slice, ast.Constant) and t.slice.value == "VLLM_PLUGINS"
+                               for t in n.targets)]
+        self.assertEqual(len(assignments), 1)
+        self.assertEqual(ast.literal_eval(assignments[0].value),
+                         "ascend,ascend_kv_connector,ascend_model,ascend_model_loader,damp_capture")
+
     def test_nonchunked_launch_budget_covers_model_len(self):
         import ast
         from types import SimpleNamespace

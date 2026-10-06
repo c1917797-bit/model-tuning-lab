@@ -1,0 +1,439 @@
+{
+  "schema": "damp-migration-preparation/v1",
+  "observed_at": "2026-10-06T11:33:24Z",
+  "status": "progress_acceptance_not_met",
+  "delivery": "independent explicit-opt-in plugin/monkeypatch; no original runtime/image edits",
+  "collector": {
+    "checkpoint": "bb9a7580e9c9912b168d1dab5eaa6c3b8de427b4",
+    "v1": "failed before model/canary: Transformers5.5.4 BatchEncoding default",
+    "tokenizer": "same-image no-device passed; explicit return_dict=False; 85/72 tokens",
+    "platform_v1": "failed: importing gdn after NPUPlatform activation queries Triton SoC",
+    "platform_v2": "failed: custom-op loading without SoC; SIGTRAP, no NPU device mappings",
+    "platform_v3": {
+      "status": "pass_registration_and_frozen_source_only",
+      "log": "/cache/cch/qwen36-damp-20261006/platform-no-device-v3.log",
+      "sha256": "366b04a9140a8a1dd25f700780f9a029d4e70314d3970519e8e3edfb09b90343",
+      "not_proven": [
+        "native library load",
+        "operator ABI",
+        "NPU dispatch"
+      ]
+    },
+    "live_v2": {
+      "operation": "exec-00000000000000c5",
+      "peer": "chicaihong01/ma",
+      "state_at_observation": "terminal_failed",
+      "container": "qwen36_damp_collector_tp4_20261006_v2",
+      "root": "/cache/cch/qwen36-damp-20261006/smoke-hook-v2-launch",
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "logical": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scope": "nine-output-token native off/on collector hook only",
+      "result": "four-device canary and off/native outputs passed; on failed at first runner forward: collector rejected non-1D positions; no valid capture/pass-through comparison",
+      "container_stopped_retained": true
+    },
+    "live_v3": {
+      "operation": "exec-0000000000000100",
+      "peer": "chicaihong01/ma",
+      "state_at_observation": "terminal_failed",
+      "container": "qwen36_damp_collector_tp4_20261006_v3",
+      "root": "/cache/cch/qwen36-damp-20261006/smoke-hook-v3-launch",
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "logical": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scope": "nine-output-token native off/on hook smoke, not timing or calibration",
+      "fix": "source-proven pure-text MRoPE/zero-delta/CPU request-order admission; original native positions preserved",
+      "result": "pure-text MRoPE admission passed all ranks; zero actual GDN core hooks, exact48 coverage failed; later nested-turn error secondary",
+      "root_cause": "frozen platform patch copied donor methods to actual Qwen receiver; donor-only patch left receiver unchanged",
+      "container_stopped_retained": true
+    },
+    "live_v4": {
+      "operation": "exec-0000000000000128",
+      "peer": "chicaihong01/ma",
+      "state_at_observation": "terminal_failed_original_validator; recovered_by_separate_source_bound_audit",
+      "container": "qwen36_damp_collector_tp4_20261006_v4",
+      "root": "/cache/cch/qwen36-damp-20261006/smoke-hook-v4-launch",
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "logical": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scope": "nine-output hook pair, not timing or calibration",
+      "preparation": "four-device canary/import/prepare passed",
+      "fix": "source-bound actual-Qwen receiver plus donor binding; all48 actual instances owning functions verified before first real model call; no coverage relaxation",
+      "result": "Both native off/on generation succeeded; final old validator failed client external ID vs worker internal ID. No raw failure was rewritten.",
+      "container_stopped_retained": true,
+      "recovery": {
+        "status": "identity_and_capture_audit_pass",
+        "operation": "exec-0000000000000151",
+        "audit": "/cache/cch/qwen36-damp-20261006/legacy-v4-identity-audit-v1/AUDIT.json",
+        "sha256": "f51cd439a576f44159f2d849b812747838dddeaf445429751966b70d70c8000e",
+        "ranks": 4,
+        "layers": 48,
+        "requests": 2,
+        "anchors": 2,
+        "futures": 2,
+        "output_tokens": 9,
+        "output_parity": "all token IDs bitwise same-eager",
+        "scope": "original native collector smoke only",
+        "source_bound": "original stopped container ID/image/exact4-7 mapping + three native identity source byte hashes; explicit external+8hex relation and all TP ranks"
+      }
+    },
+    "identity_repair": {
+      "status": "source_review_and_12_parent_software_tests_pass; native off live first4 external/internal request identities observed; full validation pending",
+      "mechanism": "parent engine-instance add_request return observer; native args/return preserved",
+      "off_on_symmetric": true
+    },
+    "full_v1": {
+      "status": "running_native_off_reference_arm",
+      "operation": "exec-0000000000000161",
+      "container": "qwen36_damp_full_capture_tp4_20261006_v1",
+      "container_id": "4505fd9eb29e4079768a2b0ea49f2bacd198f77023672bbc297c3c2aa86dd8ff",
+      "root": "/cache/cch/qwen36-damp-20261006/full-capture-v1-launch",
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "logical": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "manifest_sha256": "f348e0b0404e2f3a619b986f5c1152427c52f1a3550386ee1f894eafa6986b33",
+      "scope": "36 TRAIN x1024 input x4096 fixed reference output; batch4; native off/on; no timing or quality claim",
+      "latest_live_proof": {
+        "operation": "exec-00000000000001c0",
+        "native_off": "model load+warmup complete; first4 TRAIN requests admitted; client rows pending; all4 TP workers survive narrow external physical4 release",
+        "host_worker_pids": [
+          744181,
+          744186,
+          744190,
+          744192
+        ]
+      },
+      "source_lock_issued": false,
+      "automatic_retry": false
+    }
+  },
+  "packed_cpu_v2": {
+    "status": "failed",
+    "batch1": "8 steps passed",
+    "batch16": "step2 state max-head relative7.879801577310659e-5 >1e-5; untouched exact; output gate passed",
+    "report_sha256": "44d6c55891c82cd31d8ec5956b5e30c6899a350e997b396e7e35ea3cb51be9b7",
+    "fixture_sha256": "e6f50b1245f88aa4802ec3dfb5c58159473dc3ac57cb8f490c563230c43dce2a",
+    "diagnostic_sha256": "da0724a1c9e4482c11349e5e07211f647fc2660aa265349d207f61c41cf4f61f",
+    "attribution": "same-before mv-vs-sum prepack max-head2.790e-8; two low codes cross half ties; corrected selected-only lifecycle reproduced actual; no threshold relaxation"
+  },
+  "operator": {
+    "status": "compile_load_meta_pass_restricted_npu_recurrence_failed",
+    "build_v1": "failed Torch metadata path polluted by import stdout warning",
+    "build_v2": "metadata fixed; ASC compile failed compound GM_ADDR fields and uint32 narrowing",
+    "native_reuse": "910B recurrent K128 reduction and queued ASC wrapper; new mixed-state ABI fills incompatible native cache gap",
+    "not_proven": [
+      "NPU compressed recurrence",
+      "graph",
+      "full-model integration",
+      "performance",
+      "task accuracy"
+    ],
+    "build_v3": {
+      "status": "compile_pass",
+      "operation": "exec-00000000000000dd",
+      "library": "/cache/cch/qwen36-damp-20261006/operator-build-v3/libqwen36_gdn_damp_decode_ops.so",
+      "sha256": "6550e522d3012a97bd7a114fe1a3d0d6b750dba049fcb162c76e39e166ce0a82"
+    },
+    "library_meta_v1": {
+      "status": "failed_before_meta",
+      "operation": "exec-00000000000000e3",
+      "error": "undefined symbol at_npu::native::FormatHelper::GetFormat(at::Tensor const&)",
+      "log": "/cache/cch/qwen36-damp-20261006/operator-library-meta-v1.log"
+    },
+    "build_v4": {
+      "status": "compile_pass",
+      "operation": "exec-00000000000000f6",
+      "library": "/cache/cch/qwen36-damp-20261006/operator-build-v4/libqwen36_gdn_damp_decode_ops.so",
+      "sha256": "22f522cf5befcf6afa12560dd2624fd6ddb1c99cc8d9bf04a4b08502363b3937",
+      "fix": "public deployed TORCH_NPU_API custom_ops::get_npu_format preserves ND validation; kernel unchanged"
+    },
+    "library_meta_v2": {
+      "status": "actual_load_schema_meta_pass_no_device",
+      "operation": "exec-00000000000000fa",
+      "log": "/cache/cch/qwen36-damp-20261006/operator-library-meta-v2.log",
+      "sha256": "09f218b27351ae1ad2c77d16785c8256818071205de4e63d8f915a40a08a0ef0"
+    }
+  },
+  "software": "Parent identity12 software PASS; same-image calibration19 PASS. Other child software totals remain separate receipts; no software test substitutes for NPU acceptance.",
+  "next": [
+    "poll existing full capture MA0161, do not duplicate; require new request observer and full TP4/all48 validation before source lock or fitting",
+    "repair same-input quantizer IEEE FP32 division/RNE seam using deployed 910B4 primitives without changing tolerance/oracle; retain original failures",
+    "anchor independent FP32 generalSR oracle on actual native path; changed-input graph gate before service",
+    "real mixed cache allocation/dispatch, matched fixed1024 E2E, then final task accuracy"
+  ],
+  "acceptance": {
+    "throughput": null,
+    "ttft": null,
+    "tpot": null,
+    "longbenchv2": null,
+    "gsm8k": null
+  },
+  "deadline": "2026-10-07T08:48:03Z",
+  "training": {
+    "source": "pinned publisher TRAIN only",
+    "download_v1": "failed host Python TLS trust before writing artifacts; no TLS verification bypass",
+    "download_v2": {
+      "status": "pass",
+      "transport": "curl strict TLS",
+      "files": 9,
+      "total_bytes": 110296287,
+      "index": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v2/SOURCE_INDEX.json"
+    },
+    "builder_v1": {
+      "status": "failed_before_prompts",
+      "error": "pyarrow not installed in immutable image",
+      "container": "qwen36_damp_training_builder_20261006_v1",
+      "log": "/cache/cch/qwen36-damp-20261006/training-builder-v1.log"
+    },
+    "pyarrow": {
+      "status": "isolated_pinned_install_pass",
+      "operation": "exec-00000000000000fb",
+      "version": "22.0.0",
+      "wheel_sha256": "334f900ff08ce0423407af97e6c26ad5d4e3b0763645559ece6fbf3747d6a8f5",
+      "target": "/cache/cch/qwen36-damp-20261006/prepare-deps-v2/site-packages",
+      "image_changed": false
+    },
+    "builder_v2": {
+      "status": "failed_exact_template_boundary",
+      "operation": "exec-00000000000000fe",
+      "log": "/cache/cch/qwen36-damp-20261006/training-builder-v2.log",
+      "error": "no exact1024 native-template boundary; no synthetic padding",
+      "manifest_created": false
+    },
+    "boundary_diagnostic_v1": {
+      "status": "old_builder_failure_reproduced_no_device",
+      "operation": "exec-0000000000000105",
+      "path": "/cache/cch/qwen36-damp-20261006/calibration-inputs/boundary-diagnostic-v1.json",
+      "sha256": "6bce1c6e39f20cc1025e528321715522479276ea94409bc931a869bb87be3a55",
+      "domain": "math",
+      "split": "fit",
+      "target_index": 3,
+      "token_roundtrip_exact": [],
+      "raw_character_exact": [],
+      "not_proven": "calibration manifest or model execution"
+    },
+    "builder_v3": {
+      "status": "manifest_pass_no_device",
+      "operation": "exec-0000000000000127",
+      "manifest": "/cache/cch/qwen36-damp-20261006/calibration-inputs/full-training-36x1024-v3.json",
+      "file_sha256": "f348e0b0404e2f3a619b986f5c1152427c52f1a3550386ee1f894eafa6986b33",
+      "semantic_sha256": "6791283f69290789555d4391312e8d8511fee7787d2ea4257599302486f34bb7",
+      "log_sha256": "f8ded15b91c7d1be0e7363d3096eea9cfa0f316063395523293e861537c26737",
+      "rows": 36,
+      "input_tokens": 1024,
+      "output_tokens": 4096,
+      "source_artifacts": 9,
+      "disjoint_target_context_records": 398,
+      "context_attempt_counts": {
+        "0": 31,
+        "1": 5
+      },
+      "scope": "prepared TRAIN manifest only, not full-model calibration",
+      "prelaunch_failure": "exec0123 used wrong isolated dependency path, no container/output created; exact path verified and corrected before0127"
+    }
+  },
+  "restricted_native_v1": {
+    "status": "failed_harness_before_recurrence",
+    "operation": "exec-00000000000000fd",
+    "report": "/cache/cch/qwen36-damp-20261006/restricted-native-golden-v1/report.json",
+    "sha256": "2b91b754950366541905b3cfe3efcccee068fa25398fe946e482226f9466c499",
+    "error": "native accepts 4 positional args; helper supplied 11 rather than 4 plus 7 keyword-only",
+    "container_stopped_retained": true,
+    "fix": "explicit keyword-only call plus actual schema guard; corrected v2 ran and failed numeric step45, see restricted_native_v2"
+  },
+  "integration_cpu": {
+    "status": "same_image_cpu_15_tests_pass",
+    "operation": "exec-00000000000000f3",
+    "log": "/cache/cch/qwen36-damp-20261006/integration-cpu-tests-v1.log",
+    "sha256": "3ad8ea3d7e397fa10d1db2cc8329e48065a264c7701a3c4909fccfd07ae46975",
+    "not_proven": [
+      "NPU allocation",
+      "serving",
+      "performance",
+      "accuracy"
+    ]
+  },
+  "restricted_native_v2": {
+    "status": "failed_numeric",
+    "operation": "exec-000000000000011a",
+    "report": "/cache/cch/qwen36-damp-20261006/restricted-native-golden-v2/report.json",
+    "sha256": "b9cc99b0d655ad054fe4575b18ef78215a974f8e62abf5c6ed1308c3e3cbc68f",
+    "fixture_sha256": "59795deab9d00328df79dfeeefa08ff6d917f455bfe9d7565d0fd9c3cbf70598",
+    "scope": "identity/power2 SR eager only; not arbitrary SR, graph or service",
+    "hq12_dyadic_b1_b16": "native and production exact pass",
+    "closed_loop": "B1 identity steps1-44 packed bitwise exact; step45 one low code differs by1; output/high/scales exact, untouched/storage/input guards passed",
+    "failed_state_max_head_relative_l2": 0.00013174993668816764,
+    "limit": 0.00001,
+    "container_stopped_retained": true
+  },
+  "native_failure_diagnostic_v1": {
+    "status": "diagnostic_complete_no_device",
+    "operation": "exec-0000000000000129",
+    "report": "/cache/cch/qwen36-damp-20261006/restricted-native-cpu-diagnostic-v1/report.json",
+    "sha256": "64fb22daef1b3569e944e3d985946f237764ab0dc984642de7c3a0416709f239",
+    "facts": "same-before complete packed arena exact; saved native FP32 update independently repacks saved golden exactly; one quotient IEEE-RNE rounds to -117.5/-118 while candidate code -117; one x ULP crosses boundary",
+    "not_proven": "Historical CPU FMA update-rounding hypothesis superseded for the saved step45 fixture by actual trace v2: updated FP32 is bitwise native; quotient arithmetic is the observed seam. CPU diagnostics do not prove general device behavior."
+  },
+  "calibration_software": {
+    "status": "same-image_CPU_19_tests_pass",
+    "operation": "exec-0000000000000149",
+    "log": "/cache/cch/qwen36-damp-20261006/calibration-software-v1/tests.log",
+    "sha256": "a665522ee850e2d5721f8f530f5dd7f8d561cd0d77f445b7d9c6e4c05bf78d10",
+    "not_proven": [
+      "full TRAIN capture",
+      "fitted plan",
+      "NPU arithmetic",
+      "E2E performance",
+      "task accuracy"
+    ]
+  },
+  "native_failure_trace": {
+    "build": {
+      "status": "compile_pass_no_device",
+      "operation": "exec-0000000000000148",
+      "library": "/cache/cch/qwen36-damp-20261006/trace-build-v1/libqwen36_gdn_damp_trace_ops.so",
+      "sha256": "12650e11a666d01889b1e54cd4956793409429a61d86fc6e43aad3b1aadf90ca"
+    },
+    "v1": {
+      "status": "failed_before_trace_kernel_launch",
+      "operation": "exec-000000000000014f",
+      "root": "/cache/cch/qwen36-damp-20261006/saved-step45-trace-v1",
+      "error": "updated_trace default 4D FP32 allocation is not physical ACL_FORMAT_ND",
+      "production_unchanged": true,
+      "container_stopped_retained": true,
+      "attribution_ready": false
+    },
+    "repair_preparation": {
+      "status": "public same-image npu_format_cast ABI verified; diagnostic-only allocation repair built and ran successfully; production binary unchanged",
+      "evidence": [
+        "/cache/cch/qwen36-damp-20261006/trace-nd-abi-v1/abi.log",
+        "/cache/cch/qwen36-damp-20261006/trace-nd-abi-v2/abi.log"
+      ],
+      "rule": "retain physical-format guard; explicit public npu_format_cast only for diagnostic outputs"
+    },
+    "build_v2": {
+      "status": "compile_pass_no_device",
+      "operation": "exec-0000000000000154",
+      "library": "/cache/cch/qwen36-damp-20261006/trace-build-v2/libqwen36_gdn_damp_trace_ops.so",
+      "sha256": "a148e259482febf614f56fcf982a18e4d98c3bdf7c6e8ce573239a5ef39b1b2f"
+    },
+    "v2": {
+      "status": "pass_saved_fixture_attribution_only",
+      "operation": "exec-000000000000015d",
+      "report": "/cache/cch/qwen36-damp-20261006/saved-step45-trace-v2/report.json",
+      "sha256": "685e6cf1011d29a4c31f70b254c5192252e1a296717994246a1f5291093ad0b4",
+      "trace_evidence": {
+        "path": "/cache/cch/qwen36-damp-20261006/saved-step45-trace-v2/trace_evidence.pt",
+        "sha256": "86c511186bd641f7e5772b02f499706c921fe7a53742786f8b91a21d46b1079c"
+      },
+      "physical": 4,
+      "logical": 0,
+      "production_unchanged": true,
+      "container_stopped_retained": true,
+      "updated_fp32_vs_native": "complete bitwise identical",
+      "trace_vs_production": "complete packed arena and output bitwise identical",
+      "observed_quantizer_seam": {
+        "indices": [
+          0,
+          6,
+          77,
+          40
+        ],
+        "original_V": 41,
+        "original_K": 126,
+        "trace_updated": {
+          "x": -0.032624296844005585,
+          "x_bits": "0xbd05a10e",
+          "scale": 0.0002776535984594375,
+          "scale_bits": "0x39919209",
+          "ieee_rne_fp32_quotient": -117.5,
+          "quotient_bits": "0xc2eb0000",
+          "rne_clipped_code": -118
+        },
+        "native_updated": {
+          "x": -0.032624296844005585,
+          "x_bits": "0xbd05a10e",
+          "scale": 0.0002776535984594375,
+          "scale_bits": "0x39919209",
+          "ieee_rne_fp32_quotient": -117.5,
+          "quotient_bits": "0xc2eb0000",
+          "rne_clipped_code": -118
+        },
+        "actual_npu_quotient": -117.49999237060547,
+        "actual_npu_quotient_bits": "0xc2eaffff",
+        "trace_code": -117,
+        "native_golden_code": -118,
+        "quotient_matches_ieee_on_trace_updated": false
+      },
+      "original_numerical_gate": "still failed; one low code; no tolerance relaxation",
+      "reporting_defect": "source_gate_status scalar remained its initialization value failed; source parity command exit0 and all13 explicit checks pass. Raw report unchanged.",
+      "not_proven": [
+        "closed-loop correctness",
+        "batch16",
+        "arbitrary SR",
+        "graph",
+        "cache manager",
+        "serving",
+        "E2E performance",
+        "task accuracy"
+      ]
+    }
+  },
+  "portfolio_deadline": "2026-10-09T11:17:31Z",
+  "usable_non_hypic_required": true,
+  "paper_inventory": {
+    "path": "PAPER_EVIDENCE_INVENTORY_20261006.md",
+    "current_ids": 25,
+    "historical_ids": 3,
+    "mentioned_without_archived_conclusion": 8,
+    "completed_migrations": "not implied by inventory counts",
+    "accepted_non_hypic_final": 0,
+    "corrected_claims": "stale DeltaLog/KVBuffer opportunity labels; old MXR/GoodEnough Qwen3.8 profile cannot establish Qwen3.6 E2E rejection"
+  },
+  "resource_interference": {
+    "status": "exact_external_physical4_task_subtree_released; owned_TP4_continues",
+    "operation": "exec-00000000000001c0",
+    "receipt": "/cache/cch/qwen36-damp-20261006/external-npu4-release-v1/receipt.json",
+    "sha256": "9605aeca18e89063c03dbaba13feb46d168a88eb159a4c4f633acd0babc2dbc6",
+    "container_retained": true,
+    "protected_0_3_untouched": true,
+    "first_precondition": "MA01b5 failed before signals: process-table NPU/Chip share one column; corrected parser checked on actual snapshot before MA01c0",
+    "formal_timing": false
+  }
+}
