@@ -1,0 +1,437 @@
+{
+  "schema": "damp.capture-parity-source-audit/v1",
+  "date": "2026-10-06",
+  "status": "source_audit_complete_cause_not_proven",
+  "scope": "Read-only audit of the failed full native capture; not DAMP compression, task accuracy, performance or paper-wide no-go.",
+  "repo": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab",
+    "observed_head": "f63aebbb10666c312845b2fb2b58e5bea045c8ac"
+  },
+  "target": {
+    "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+    "logical_gateway": "tpc",
+    "mode": "force_direct",
+    "route_decision": "peer_direct"
+  },
+  "operations": [
+    {
+      "id": "exec-00000000000003cd",
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "terminal": "completed",
+      "exit_code": 0,
+      "scope": "Read collector writer/timeline/bindings, frozen native GDN source and existing parity diagnostic."
+    },
+    {
+      "id": "exec-00000000000003ce",
+      "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+      "terminal": "completed",
+      "exit_code": 0,
+      "scope": "Read source line seams, original client/identity rows and rank0 native turn events; counts only, not artifact admission."
+    }
+  ],
+  "original_failure": {
+    "operation": "exec-0000000000000455",
+    "controller_peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "parent_reported_terminal_exit": 1,
+    "requests_generated": 36,
+    "output_tokens_each": 4096,
+    "validation": "capture changed output token IDs",
+    "source_lock_admitted": false,
+    "final192_plans_admitted": false
+  },
+  "evidence": [
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/capture-parity-failure-analysis-v1/RESULT.json",
+      "sha256": "be0721d46f5ed9e5a8bcc6574bc104bde5308f452870640663dd92f6e72c9bc4",
+      "scope": "MAIN read-only existing-array diagnostic; not another NPU experiment."
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/full-capture-v1-off/client.jsonl",
+      "sha256": "27752f7f5bc4f381a85f43d4a6e0279aeebdf60e2bda5d588277cc806f5483e9"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-on/client.jsonl",
+      "sha256": "a5990cda2a70b70cf8c1259eb4f3a920329551329a7d66717f2816e7c32591ba"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/full-capture-v1-off/request-identities.jsonl",
+      "sha256": "379853a54ef910d197c7bb1c6b6d23162da736f01927284884cb4a8be87fd02b"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-on/request-identities.jsonl",
+      "sha256": "914291f54d920391b650e57b8053e884fffd1a952febe761de7243a0356e3790"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-on/rank-0/events.jsonl",
+      "sha256": "92b8b36c83d8d5393bf8982d7d925a7b27ce1a257a16d6e668ae8287ec27c206",
+      "scope": "Rank0 event-content observation only. Artifact byte checks/full four-rank validation are not asserted."
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/calibration-inputs/full-training-36x1024-v3.json",
+      "sha256": "f348e0b0404e2f3a619b986f5c1152427c52f1a3550386ee1f894eafa6986b33",
+      "semantic_sha256": "6791283f69290789555d4391312e8d8511fee7787d2ea4257599302486f34bb7"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/patch.py",
+      "sha256": "3b1791ec12d072ce03c07a952984308b34adf1c3a64020d69cf2384c93e4ea78",
+      "seams": {
+        "native_model_call": [
+          87,
+          147
+        ],
+        "native_gate_call": [
+          157
+        ],
+        "gate_d2h": [
+          166
+        ],
+        "metadata_d2h": [
+          181,
+          182,
+          183,
+          184,
+          190
+        ],
+        "native_core_call": [
+          172,
+          196
+        ],
+        "anchor_d2h": [
+          206
+        ],
+        "positions_d2h": [
+          136
+        ]
+      }
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/run.py",
+      "sha256": "aaaad91454cf45ebfab27223e823d2d12b9dc5dd8197a3f060982e1be1c916f5",
+      "seams": {
+        "client_batch_loop": [
+          61,
+          63
+        ]
+      }
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/session.py",
+      "sha256": "38275fe7d529bdee4498182f88a374a2b5639889609d09bc3b6cca32bc257b4c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/writer.py",
+      "sha256": "a0016c6b3e0c5e84ccd74a109d482c10b2acb4fb2442a90c510081f3dff5b9e8"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/timeline.py",
+      "sha256": "1217d2edf4ea5f6b192ae689d7687d7f8c80e9f5646e82252d27e38e1bb7cb1c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/bindings.py",
+      "sha256": "137c71b0a3f2b4dac5d82be53a25d01de39b78a77b14db4d8b9e470181003525"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/validate.py",
+      "sha256": "2daf0cefe7311431baf9bb0a2aa1dbebe62543598ddcec0bada55796d4be4b8c",
+      "seams": {
+        "output_gate_before_rank_artifacts": [
+          40,
+          53
+        ]
+      }
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/identity.py",
+      "sha256": "8873f833c6dab835af5079ec269e82efa100b1695bef707a78f1cb82210a37db"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/collector/damp_capture/contract.py",
+      "sha256": "e56b6b47e66b3bec946eda96a51205a779c506edcb8b713730d42c03237e2a57"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-source-snapshot-v1/gdn.py",
+      "original_image_path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py",
+      "sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+      "seams": {
+        "gate": [
+          313
+        ],
+        "prefill_state": [
+          400,
+          415
+        ],
+        "decode_normalization": [
+          423,
+          424
+        ],
+        "decode_recurrence": [
+          427
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "native_calls_source_preserved",
+      "evidence_kind": "source",
+      "conclusion": "Wrappers call the saved native model/core/gating functions once with unchanged original argument objects and return the original result. No collector recurrence/gating recomputation or direct native-state write was found. This is not a runtime numerical equivalence proof."
+    },
+    {
+      "id": "synchronization_changed",
+      "evidence_kind": "source",
+      "conclusion": "ON inserts blocking D2H for positions, layer metadata, actual gate output and anchors. Gate D2H occurs before native normalization/recurrence resumes; host/device overlap differs from OFF."
+    },
+    {
+      "id": "native_admission_shape_not_fixed",
+      "evidence_kind": "actual_rank0_events",
+      "conclusion": "The client batch_size=4 does not freeze native prefill/mixed batches. OFF has no matching native turn log, so its shape/order cannot be inferred from ON."
+    },
+    {
+      "id": "output_identity_not_zip_mismatch",
+      "evidence_kind": "existing_client_identity_rows",
+      "conclusion": "OFF/ON logical IDs, external-ID order0..35 and prompt fingerprints agree. Internal randomized IDs legitimately differ; no blind suffix stripping or alternate identity recovery was used."
+    },
+    {
+      "id": "pre_anchor_drift",
+      "evidence_kind": "existing_outputs_and_actual_rank0_events",
+      "conclusion": "Earliest first differing output is token index11, whereas the first full-mode state anchor is update256. Anchor/RMS serialization alone cannot explain every early difference."
+    },
+    {
+      "id": "failed_gate_scope",
+      "evidence_kind": "validator_source",
+      "conclusion": "Output parity is rejected before rank artifact validation. Completed outputs and plausible counts do not admit the full calibration/source-lock/192-plan pipeline."
+    }
+  ],
+  "actual_on_rank0": {
+    "counts": {
+      "worker_started": 1,
+      "worker_dispatch_verified": 1,
+      "text_positions_verified": 36882,
+      "request_bound": 36,
+      "turn_complete": 36882,
+      "anchor": 10368,
+      "fit_rms_snapshot": 3456,
+      "future": 10368,
+      "layer_complete": 1728
+    },
+    "first_anchor": {
+      "logical_id": "math-fit-00",
+      "layer": 0,
+      "update": 256
+    },
+    "examples": [
+      {
+        "group": "math-fit",
+        "admission_counts": [
+          1,
+          4
+        ],
+        "turns": [
+          {
+            "external_ids": [
+              "0"
+            ],
+            "tokens": 1024,
+            "computed": [
+              0
+            ],
+            "query_starts": [
+              0,
+              1024
+            ]
+          },
+          {
+            "external_ids": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "tokens": 3073,
+            "computed": [
+              1025,
+              0,
+              0,
+              0
+            ],
+            "query_starts": [
+              0,
+              1,
+              1025,
+              2049,
+              3073
+            ]
+          }
+        ]
+      },
+      {
+        "group": "math-tune",
+        "admission_counts": [
+          1,
+          2,
+          4
+        ],
+        "turns": [
+          {
+            "external_ids": [
+              "4"
+            ],
+            "tokens": 1024,
+            "computed": [
+              0
+            ],
+            "query_starts": [
+              0,
+              1024
+            ]
+          },
+          {
+            "external_ids": [
+              "4",
+              "5"
+            ],
+            "tokens": 1025,
+            "computed": [
+              1024,
+              0
+            ],
+            "query_starts": [
+              0,
+              1,
+              1025
+            ]
+          },
+          {
+            "external_ids": [
+              "4",
+              "5",
+              "6",
+              "7"
+            ],
+            "tokens": 2050,
+            "computed": [
+              1025,
+              1024,
+              0,
+              0
+            ],
+            "query_starts": [
+              0,
+              1,
+              2,
+              1026,
+              2050
+            ]
+          }
+        ]
+      },
+      {
+        "group": "general-tune",
+        "admission_counts": [
+          1,
+          2,
+          4
+        ],
+        "same_pattern_as": "math-tune"
+      }
+    ],
+    "off_native_shape": "unobserved; not inferred",
+    "full_artifact_admission": false
+  },
+  "diagnostic_proposal": {
+    "status": "design_only_main_review_required",
+    "new_sources_written": false,
+    "npu_launched": false,
+    "proposed_scope": "NEW tools/fixed_admission_capture_v1 only after MAIN review; frozen collector/shared lifecycle files remain unchanged.",
+    "source_manifest_ref": {
+      "path": "/cache/cch/qwen36-damp-20261006/calibration-inputs/full-training-36x1024-v3.json",
+      "sha256": "f348e0b0404e2f3a619b986f5c1152427c52f1a3550386ee1f894eafa6986b33"
+    },
+    "input": {
+      "logical_source_id": "math-fit-02",
+      "token_sha256": "3221d44cf06bc8c752a03a0c895d5a5fb82ef73ab7fe714efd67b29fe427522d",
+      "input_tokens": 1024,
+      "origin": "existing immutable TRAIN record; not final task evaluation",
+      "new_manifest_mode": "smoke",
+      "new_manifest_provenance": "project-smoke-not-calibration",
+      "new_manifest_anchors": [
+        24
+      ],
+      "horizon": 2
+    },
+    "arms": [
+      "off-a",
+      "off-b",
+      "on"
+    ],
+    "output_tokens_each": 33,
+    "concurrency": 1,
+    "tp_size": 4,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "eager": true,
+    "prefix_cache": false,
+    "chunked_prefill": false,
+    "temperature": 0,
+    "seed": 0,
+    "thinking": false,
+    "ignore_eos": true,
+    "fixed_admission": "One pre-admitted request only; no second request, queued/paused owner or speculative path. Require actual four-rank native request-count1 and prefill1024 followed by32 one-token turns. This avoids using an unproven multi-request barrier.",
+    "common_observer": "Proposed default-OFF native Python code-object profile observer in every arm, not yet implemented or admitted. No replacement of core function bindings, arithmetic, original arguments or return values. Actual callback/frame ABI, exception behavior, source closure and no-device tests require review.",
+    "numerical_scope": "Record all four ranks x48 actual GDN native core calls, source identities, actual CPU request/query starts/slot identity, original mixed_qkv/a/b inputs, gate values, selected native FP32 state and BF16 output. Compare corresponding same-step inputs/before-state first, then after-state/output, retaining the earliest available GDN numeric mismatch. No independent FA/logit mathematics claim.",
+    "bounded_raw": "At most33 model turns/arm. Initial and after-state frames only once, with before-state hash checked against the preceding after frame for the same retained slot. Save raw-before on mismatch or missing prior frame. Preserve raw state/input/return files before assertions; total hard cap20GiB across3arms, not a target to fill.",
+    "budgets": {
+      "wall_clock_minutes_including_startup": 45,
+      "ordinary_ram_floor_bytes": 68719476736,
+      "host_reserve_bytes": 8589934592,
+      "min_free_disk_bytes": 42949672960,
+      "raw_total_cap_bytes": 21474836480,
+      "automatic_retry": false
+    },
+    "failure_policy": "First source/device/metadata/fixture/numerical failure retains raw/log/terminal and stops the arm; only exact owned container is stopped and retained. If OFF/OFF drift, do not continue ON or diagnose collector causality. Unknown/nonterminal authority cannot admit another job.",
+    "existing_executable_argv_template": {
+      "status": "Existing source-verified CLI only; the new exact smoke manifest and COMMON observer are not implemented. This is not a ready NPU packet.",
+      "executable": "/usr/local/python3.12.13/bin/python3",
+      "args": [
+        "-B",
+        "-m",
+        "damp_capture.run",
+        "--manifest",
+        "/cache/cch/qwen36-damp-20261006/calibration-inputs/fixed-admission-source-diag-v1.json",
+        "--output-dir",
+        "/cache/cch/qwen36-damp-20261006/fixed-admission-source-diag-v1/off-a",
+        "--capture",
+        "off",
+        "--batch-size",
+        "1",
+        "--memory-utilization",
+        "0.80"
+      ],
+      "substitutions": "Only arm basename off-a/off-b/on and capture off/off/on differ. MAIN owns fresh inspected nonprivileged container/runtime source closure/environment and final command. Hash the actual new manifest and observer before launch; never insert an invented expected hash."
+    },
+    "decision_boundary": "B1/33 success is not full36/4096 noninterference or task accuracy; short failure is not paper-wide no-go. If short pair succeeds, review a source-proven C4 pause/queue barrier separately before any long capture. No original gate or source-lock requirement is relaxed.",
+    "missing_before_execute": [
+      "MAIN approval of NEW source scope",
+      "exact runtime native code-object/frame/source proof",
+      "reviewed observer and exception-retention code",
+      "same-image no-device fixture/import/CLI tests",
+      "new manifest file/semantic fingerprints",
+      "fresh physical4-7/RAM/disk/cgroup/source/mount/owned-port admission"
+    ]
+  },
+  "prohibited_upgrades": [
+    "No SOURCE_LOCK from failed capture",
+    "No offline fitting of these failed arrays as admitted final plans",
+    "No change to frozen collector or shared lifecycle13",
+    "No threshold relaxation",
+    "No claim of DAMP accuracy loss or paper no-go",
+    "No diagnostic throughput as E2E gain"
+  ],
+  "next_action": "MAIN reviews this source audit and the narrow short-diagnostic scope; preparation remains distinct from implementation/device evidence."
+}

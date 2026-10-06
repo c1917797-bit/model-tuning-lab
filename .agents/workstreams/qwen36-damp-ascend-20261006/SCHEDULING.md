@@ -1,5 +1,20 @@
 # Continuous preparation and NPU execution queue
 
+## Current ready queue — 2026-10-06 18:38Z
+
+MA0690 actual35 software checks and MA0695 exact-image full-mount allT
+source-only admission passed. NEW independent_allT_dispatch_v1 is the next
+restricted numerical packet: four disjoint trueT shards, fresh aggregate40GiB
+ordinary RAM/CPU/mount/ownership admission, real canaries and native whole-vs-
+row anchors; no calibration SOURCE_LOCK shortcut or artificial PAD16.
+Its actual numerical run is not launched/PASS at this preparation checkpoint.
+MAIN owns dispatch and retains all live dependencies. Sourcepreflight's CPU
+fixture/Torch wrapper passed; native GDN alias is still device-dependent and
+failed get_arch with no devices. That failure is not waived for selected-prefill.
+The other lanes prepare evidence-supported selectedP2/native callable fixes
+and a small C1 OFF/OFF/ON capture diagnosis, not an unchanged36x4096 rerun.
+Keep formal TP4 timing exclusive and never count these checks as performance.
+
 User explicitly authorized parallel agents for one or multiple papers and continuous
 resource scheduling on 2026-10-06. Product heartbeat ascend is ACTIVE, every 30
 minutes, created anew after the old id was confirmed absent. Actual work remains

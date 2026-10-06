@@ -4,6 +4,35 @@ Evidence date: 2026-10-06. Workstream:
 `.agents/workstreams/qwen36-damp-ascend-20261006/`.
 These are engineering lessons, not evidence of DAMP throughput or quality gain.
 
+## Complete entrypoint preflight, not helper-only readiness — 2026-10-06 18:38Z
+
+Derive the NO-device source preflight from the intended immutable-image launch
+argv and complete RO mounts, removing devices explicitly. MAIN's MA0691/0693
+auxiliary preflights caught missing required parser slots/modelconfig mount;
+MA0695 corrected the full mount contract before scarce-card use. Preserve
+both failures, not a rewritten PASS. Placeholder parser fields in audit-only
+must never create or authorize a device-proof artifact. Actual fixture/Torch
+CodeType proof can pass without cards while canonical FLA import requires
+real SoC discovery; record get_arch as pending, never mock it or claim native
+alias PASS. Keep such source-only results distinct from numerical/graph/cache
+admission. Inspect outer raw-save paths too: frozen Gate.retain had exists/
+snapshot before its try; a NEW guard and actual-except behavior regression
+preserve the original failure when secondary retention itself fails.
+
+## Target-image framework semantics and callable proof — 2026-10-06 18:20Z
+
+MA0674 stopped before native math because getsourcefile on a decorated
+chunk callable observes a wrapper rather than the expected algorithm file.
+Prepare exact target-image alias/wrapper/unwrap/closure source evidence before
+long NPU matrices, still call the original decorated function, and never
+replace a failed source check with an arbitrary matching hash. Read-only
+stopped-image snapshots are preparation, not loaded-callable proof. Together
+with MA0670's singleton noncontiguous fixture, this shows stdlib fixtures alone
+do not cover target Torch semantics. Both failures and exact releases are
+retained; no paper-wide no-go or task-accuracy loss is inferred. Resolve actual
+diagnostic executable paths (rg/npu-smi) before use, with read-only fallback.
+See workstream NATIVE_SOURCE_GATE_FAILURE_20261006.md/json.
+
 ## Fixture semantics before scarce-card dispatch — 2026-10-06 18:14Z
 
 MA0670 actually reached NPU4 and loaded selected SO, then a supposed

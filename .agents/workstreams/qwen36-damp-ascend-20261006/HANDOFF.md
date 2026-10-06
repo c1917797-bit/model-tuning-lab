@@ -1,5 +1,51 @@
 # DAMP Ascend — current workstream
 
+## Executable pre-card readiness — 2026-10-06 18:38Z
+
+MAIN fully reviewed NEW independent_allT_dispatch_v1 seven files and selected
+source_preflight_v1 four files. MA0690 actual20+15 software tests/defaultOFF
+passed; RESULT SHA15405843826671168920be93568eadefdb056e6de039740ed2829cb214440856.
+MA0695 derived its NO-device container from the real planned mount/argv set,
+passed exact-image9compiled/20runtime/allT source-only admission and stopped
+retained exact437969517fce1b2401c2b42daaab71fbcc1fe7b2d7f797fceefef3954cffbdb5.
+RESULT SHA88918204c656cbdf7a4ddd4c304654bec52b86aef5c3bb078937ecc1a761a4e1.
+The NEW allT PACKET SHA is f182a72c5cea43bc5e12b48751d6d8c51c96050145d349c3e0b90ee0d0b6d89a.
+It admits a forthcoming independent restricted trueT1-16 shared-arena/graph
+matrix only after fresh MAIN resources/canaries and six actual native B16-vs-
+16xB1 anchors per shard. No calibration SOURCE_LOCK is needed for synthetic
+identity/power2 correctness. No NPU shard has launched at this checkpoint.
+
+Exact-image CPU fixture and Torch wrapper proof passed MA0691. Actual canonical
+GDN import without driver failed missinglibHAL; driverRO successor MA0695
+reached Triton get_arch and failed without devices. Dynamic native alias remains
+PENDING real device proof; no mocked SoC, relaxed source SHA or unwrapped call.
+Preserve both failures. MAIN's auxiliary source-audit v1/v2 also failed missing
+parser slots/config mount; v3 retained them and derived the complete filesystem
+contract from the actual intended launch, not another partial hand-built list.
+Native-only import failure does not block this separate allT torch.ops matrix.
+
+CAPTURE_PARITY_SOURCE_AUDIT_20261006.md/json is reviewed: original ON native
+admission1->4/1->2->4 is observed; OFF shapes unknown. C1/1024/33 OFF/OFF/ON
+with a common observer is NEW preparation, NOT implemented/launchable yet,
+not fullcalibration. FullMA0455 remains failed; no final192/service/E2E/task
+acceptance. Physical0-3 now run external quality container eeb65fd2..., never
+touch; re-prove identities. Current4-7 are idle in MA0687, not a future lease.
+Fixed DAMP/portfolio deadlines remain unchanged. MAIN next admits useful
+allT4shards; preparers keep published live dependencies frozen and prepare
+fixture/callable successors and fixed-admission diagnostics in distinct scopes.
+
+## Latest terminal/resource state — 2026-10-06 18:20Z
+
+Read NATIVE_SOURCE_GATE_FAILURE_20261006.md/json first. MA0674 is now completed
+exit1 before native math (decorated-callable source hash, zero cases/checks);
+MA0670 failed the P1 noncontiguous fixture. Both exact owned containers are
+stopped retained, protected0–3 unchanged; NO own NPU load. Do not treat older
+live notes as current or replay unchanged failed commands. MAIN retained both
+original operation JSON and reports. Source/fixture successors and independent
+trueT/allP dispatchers are being prepared; no component/service/E2E/task PASS.
+Preparation/earlier failure checkpoint f63aebbb was normal pushed and remote
+verified. Its then-live native note is historical, superseded by this section.
+
 ## Latest actual NPU attempt — 2026-10-06 18:14Z
 
 Read SELECTED_PREFILL_NPU_FIRST_ATTEMPT_20261006.md/json before old live-capture

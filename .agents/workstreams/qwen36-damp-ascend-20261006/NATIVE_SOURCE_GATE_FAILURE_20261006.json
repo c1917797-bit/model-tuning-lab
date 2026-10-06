@@ -1,0 +1,43 @@
+{
+  "schema": "damp-native-feedback-source-gate-failure/v1",
+  "operation": "MA exec-0000000000000674",
+  "terminal": true,
+  "exit_code": 1,
+  "original_terminal": {
+    "path": "/cache/cch/qwen36-damp-20261006/selected-prefill-native-repair-v2-terminal-original.json",
+    "sha256": "d7fad3019e481e7b5e8d6f71d8afa8efa191c21de4c96de2a1a6ec2e37f55e55"
+  },
+  "physical_card": 7,
+  "logical_card": 0,
+  "report": {
+    "path": "/cache/cch/qwen36-damp-20261006/selected-prefill-dispatch-native-repair-v2-native_feedback/stage-output/native_feedback/report.json",
+    "sha256": "2c4e94e4df8517a21521ad1d9dc060b3964cdf9f813389b2f174eff30eab533a"
+  },
+  "error": "RuntimeError('native chunk callable actual-image source')",
+  "failure_sha256": "807a7b0a371a58b90a2cc15f6f0d7dccd624cb45cb0c9620af5a89749085925f",
+  "actual_runtime_sources": 23,
+  "loaded_selected_decode_reference_libraries": 3,
+  "native_case_count": 0,
+  "numeric_check_count": 0,
+  "root_cause_scope": "raw getsourcefile observes decorated callable wrapper; original chunk.py @torch.compiler.disable is confirmed; actual chain still needs exact Torch proof",
+  "container_id": "418ab815ae933a3625c106d0f1fce44199b5915134f34a4b121e4b6c3c733ca9",
+  "stopped_retained": true,
+  "deleted": false,
+  "oom_killed": false,
+  "stop_sha256": "6bdc39359e8ec6c7b8248b503731dab23954abc5fd8540612c34cde6da2cece2",
+  "release_sha256": "5501493fbd0863d3b123b75e1777646dc1424689d856050f1ffbe919f6e37232",
+  "torch_source_snapshot": {
+    "path": "/cache/cch/qwen36-damp-20261006/torch-callable-source-snapshot-v1/MANIFEST.json",
+    "sha256": "0fe4512563aada54fd07f71eb6dd074060e9b524c511e5bf99f51b1b5cf06b7a",
+    "operation": "MA0683",
+    "container_started": false,
+    "npu_executed": false,
+    "loaded_callable_proof": false
+  },
+  "current_own_npu_load": false,
+  "completed_isolated_packing": false,
+  "completed_native_feedback": false,
+  "performance_measurement_admitted": false,
+  "final_task_accuracy_result": false,
+  "deadline_utc": "2026-10-07T08:48:03Z"
+}

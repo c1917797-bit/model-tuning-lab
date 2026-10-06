@@ -1,0 +1,39 @@
+{
+  "schema": "damp-selected-prefill-source-preflight-packet/v1",
+  "status": "source_preparation_only",
+  "default_enabled": false,
+  "npu_executed": false,
+  "operator_executed": false,
+  "serving_ready": false,
+  "performance_measurement_admitted": false,
+  "graph_supported": false,
+  "source_files": {
+    "projects/damp-ascend/tools/selected_prefill_source_preflight_v1/preflight.py": "30372f6bfefb05021068d7d7497d4a5c042f6e2f742e444c8772b2562e081b76",
+    "projects/damp-ascend/tools/selected_prefill_source_preflight_v1/test_preflight.py": "8eaeaf9064d806d348edf726e419882a8ac4c2c2cfeef2790cdd7ffca4550fc4",
+    "projects/damp-ascend/tools/selected_prefill_source_preflight_v1/READY.md": "0ee202c5669e78a3767e838e333c24e55588f636c8a0709d3b1e4ed751a03e95"
+  },
+  "expected_image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "actual_image_sources": {
+    "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/compiler/__init__.py": "84613b1321b2e416bd113fbe898e8d65c9fba71a05c6ace755b7812e98ed9f5d",
+    "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/_dynamo/decorators.py": "9662eb8521ba76e358289eaf81aaad6e4930f1b241f17273c79e8ad5a1220cc1",
+    "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py": "8f49ecb842a4d50281695e5b8d015fd9afd2a202b0f6c9f3f94c91415ba0d5a4",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/triton/fla/chunk.py": "6f93b9face32999c93976fccaeb2d6a9d8dc85c8c41d3d26d92e1820f62d7ca5",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
+  },
+  "compiled_wrapper": {
+    "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/op_extension/selected_prefill_torch.cpp",
+    "sha256": "dd03d2c2b56397566507952fc962b3336ac054ebd85b803eb6cd892c0b0e2236"
+  },
+  "software": {
+    "initial_operation": "exec-0000000000000689",
+    "initial_tests": 15,
+    "initial_errors": 3,
+    "repair_operation": "exec-000000000000068a",
+    "tests": 15,
+    "passed": 15,
+    "scope": "SYNTHETIC_stdlib_only_no_Torch",
+    "default_off_operation": "exec-000000000000068c"
+  },
+  "no_device_native_import_may_be_deferred": true,
+  "requires_main_execution": true
+}
