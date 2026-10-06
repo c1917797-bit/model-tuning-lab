@@ -206,7 +206,8 @@ def main() -> int:
         check(
             "rollback_resource_release",
             rollback.get("owned_npus_released") is True
-            and rollback.get("port_released") is True,
+            and rollback.get("port_released") is True
+            and rollback.get("owned_containers_removed") is True,
         )
         required_rollback_files = {
             "rollback/disabled-canary.json",

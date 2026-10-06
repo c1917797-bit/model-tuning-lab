@@ -80,6 +80,14 @@ After the controller finishes, run the historical 18-unit audit produced by
 the wrapper, then record the measured optimization iteration and execute the
 post-treatment disabled-control rollback. Store optimization-iteration.json
 and rollback-evidence.json plus their raw files under the artifact root.
+Use verify_hypic_rollback.py from this workstream with --root pointing at the
+artifact root and --canary-script pointing at the historical workstream's
+hypic_semantic_canary.py. Run it only after the controller operation is
+terminal. The script refuses to proceed while controller.lock is held, checks
+the exact two owned container identities and one-switch equivalence, executes
+a real disabled request, stops the baseline, and records NPU/port release.
+Pass --remove-owned-containers only after all experiment arms are terminal
+and their evidence is preserved; it removes only those two named containers.
 Finally run audit_e2e_closure.py from this workstream with root
 /cache/cch/hypic-qwen36-e2e-2048-20261006 and output
 /cache/cch/hypic-qwen36-e2e-2048-20261006/e2e-closure-audit.json.
