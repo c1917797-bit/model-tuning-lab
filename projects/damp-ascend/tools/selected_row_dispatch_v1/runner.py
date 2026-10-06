@@ -100,18 +100,30 @@ def rebuild_journal(path):
     return report
 
 def meta_only(args,bindings):
-    """Actual same-image load/schema/Meta only; MAIN invokes, no set_device."""
+    """Candidate-only same-image Meta; native bootstrap stays in numerical path."""
+    require(not any(Path("/dev").glob("davinci*")),"Meta requires actual no-device container")
     import torch
     import torch_npu
-    from vllm_ascend.utils import enable_custom_op
-    require(enable_custom_op(),"native import bootstrap")
+    require(torch.__version__=="2.10.0+cpu" and torch_npu.__version__=="2.10.0.post4",
+            "pinned no-device Meta runtime")
+    import arena_adapter
+    import candidate_adapter
+    require(Path(arena_adapter.__file__).resolve()==(BASE/"arena_adapter.py").resolve() and
+            Path(candidate_adapter.__file__).resolve()==(OLD/"tests/candidate_adapter.py").resolve(),
+            "actual frozen Candidate/Meta module paths")
     from arena_adapter import Candidate
     handle=ctypes.CDLL(str(args.library.resolve()),mode=ctypes.RTLD_GLOBAL)
     require(getattr(handle,KERNEL,None) is not None,"defined actual arena launcher")
     torch.ops.load_library(str(args.library.resolve()))
     candidate=Candidate()
     result={"schema":"damp-selected-row-meta/v1","schemas":candidate.schemas(),
-        "meta":candidate.meta_gate(),"bindings":bindings,"npu_executed":False,"serving_ready":False}
+        "meta":candidate.meta_gate(),"bindings":bindings,"npu_executed":False,"serving_ready":False,
+        "native_bootstrap_verified":False,"scope":"candidate schema/shape/dtype/Meta only; not native/NPU proof",
+        "versions":{"torch":torch.__version__,"torch_npu":torch_npu.__version__},
+        "loaded_libraries":candidate_adapter.loaded_libraries()}
+    require(result["loaded_libraries"].get(str(args.library.resolve()))==args.library_sha256,
+            "actual mapped candidate library identity")
+    require(source_bindings(args)==bindings,"source drift during no-device Meta")
     print(json.dumps(result,allow_nan=False));return 0
 
 def main():

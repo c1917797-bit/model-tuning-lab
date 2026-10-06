@@ -1,5 +1,6 @@
 """SYNTHETIC stdlib tests; no Docker/Torch/NPU or original operation authority."""
 import contextlib
+import ast
 import copy
 import hashlib
 import io
@@ -137,6 +138,18 @@ class DispatchTests(unittest.TestCase):
         self.assertEqual(groups,c.OLD.LEGACY.BATCH_GROUPS)
         self.assertEqual(c.OLD.BASE_NEW,c.OLD_DIR)
         self.assertNotIn("torch",sys.modules)
+    def test_15_meta_does_not_bootstrap_native_numerical_still_does(self):
+        tree=ast.parse((c.HERE/"runner.py").read_text())
+        functions={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef)}
+        def calls(node,name):
+            return [n for n in ast.walk(node) if isinstance(n,ast.Call) and
+                    isinstance(n.func,ast.Name) and n.func.id==name]
+        self.assertFalse(calls(functions["meta_only"],"enable_custom_op"))
+        self.assertTrue(calls(functions["main"],"enable_custom_op"))
+        self.assertFalse(any(isinstance(n,ast.ImportFrom) and
+            (n.module or "").startswith("vllm") for n in ast.walk(functions["meta_only"])))
+        self.assertIn("native_bootstrap_verified",ast.get_source_segment(
+            (c.HERE/"runner.py").read_text(),functions["meta_only"]))
     def prior_fixture(self,exit_code=0,prefix="prior"):
         argv=["-B",str(c.OLD_DIR/"controller.py"),"--execute","--packet-sha256",c.OLD_PACKET_SHA]
         error=None if exit_code==0 else "exit code"

@@ -1,5 +1,40 @@
 # Continuous preparation and NPU execution queue
 
+## Latest authoritative readiness — 2026-10-06 20:15Z
+
+MA06a0 is completed exit1: single3600s phase timeout, not cancelled/tool-timeout
+or a valid paper numerical no-go. Exact four owned containers are stopped/Pid0
+and retained; no live DAMP NPU load at this checkpoint. Partial21 cases/3544
+steps and24 native anchors do not accept the full64-case matrix. Original
+receipt cf6f4c48...9d73 and report hashes are in SELECTED_ROW_DISPATCH_PREP.md.
+
+NEW selected-row balanced dispatcher source was committed/pushed265ebad.
+MA06fd no-device fresh-Git-export preflight caught three missing host-planner
+META mounts before NPU. MA06ff added the exact RO historical report;14+19
+software checks and four real audit-only CLI groups passed, then its NEW Meta
+entry aborted134 with npu-smi warning/C++ basic_string. Both actual failed
+receipts and no-device containers are stopped/retained, not rewritten.
+Original receipts under /cache/cch/qwen36-damp-20261006:
+selected-row-no-device-preflight-v1-terminal-original.json SHA
+a287c555720e2d5df368ab72841966498a93ebb54cbb1c76f5df1366dd751bd3;
+selected-row-no-device-preflight-v2-terminal-original.json SHA
+bf11b9fa010d0d2d27ed4f3f55b0d8dac8709aa09f2fc75e035382d2800a2899.
+
+Evidence-supported correction removes unnecessary vLLM/native bootstrap ONLY
+from NEW Meta, matching the actual old successful candidate-only command.
+It requires no davinci nodes, pinned versions/module paths/mapped SO and
+source-after. Actual NPU execution retains native bootstrap/schema/SoC/maps.
+The exact C++ internal abort point is not proven; do not claim numeric failure,
+native availability or corrected Meta PASS until actual run. Frozen numerical
+dependencies/SO/oracle/limits and fullcoverage remain unchanged.
+
+Next: software/refreeze/MST checkpoint, corrected fresh-export no-device
+preflight, then fresh aggregate resources/canary/physical4–7 authority and ONE
+bounded balanced fullmatrix. Do not occupy cards while the packet is incomplete
+or retry prior attempts unchanged. Full model C1 still needs72GiB ordinaryRAM;
+fresh~60GiB does not admit it. No attributable model peak justifies lowering
+that gate. DAMP deadline2026-10-07T08:48:03Z is unchanged.
+
 ## Current readiness update — 2026-10-06 19:30Z
 
 MAIN MA06d1 actual same-image no-device preflight passed48 target software/API/
