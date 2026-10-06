@@ -2,7 +2,7 @@
   "schema": "paper-to-ascend-task/v1",
   "task_id": "hypic-qwen36-e2e-2048-20261006",
   "objective": "Validate the maintained Paper-to-Ascend skill chain with a fresh HYPIC Qwen3.6-27B TP4 experiment on physical NPU0-3 within 24 hours.",
-  "state": "planned",
+  "state": "running",
   "branch": "work/hypic-qwen36-e2e-2048-20261006",
   "base_commit": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
   "resource_claim": {
@@ -15,9 +15,10 @@
   },
   "deadline_policy": {
     "wall_clock_limit_hours": 24,
+    "deadline_utc": "2026-10-07T11:39:37Z",
     "fail_fast": true,
     "stop_new_long_units_before_deadline": true,
     "release_resources_before_terminal_handoff": true
   },
-  "next_action": "Validate static inputs and claim NPU0-3 with a real-weight disabled/enabled canary."
+  "next_action": "Poll AWMCP exec-0000000000000277 and verify the first 40-request baseline performance run; do not launch a duplicate controller."
 }

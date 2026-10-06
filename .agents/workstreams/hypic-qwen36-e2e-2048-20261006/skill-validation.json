@@ -1,0 +1,66 @@
+{
+  "schema": "paper-to-ascend-skill-validation/v1",
+  "experiment_id": "hypic-qwen36-e2e-2048-20261006",
+  "status": "running",
+  "as_of_utc": "2026-10-06T12:37:00Z",
+  "checks": [
+    {
+      "skill": "chicaihong01-host-maintenance",
+      "state": "passed",
+      "evidence": ["AWMCP peer-direct target lgw_a6109c51076a4a2c9d2674ca5a8704a0", "HANDOFF.md"]
+    },
+    {
+      "skill": "ascend-npu-environment-orientation",
+      "state": "passed",
+      "evidence": ["environment-and-container-snapshot.txt", "baseline-contract.json"]
+    },
+    {
+      "skill": "ascend-canary-implementation",
+      "state": "passed",
+      "evidence": ["canary-gate.json", "no-cache/semantic-canary.json", "hypic-only/semantic-canary.json", "hypic-only/canary.hypic-evidence.jsonl"]
+    },
+    {
+      "skill": "runtime-monkeypatch-delivery",
+      "state": "partial",
+      "evidence": ["DELIVERY.md", "environment-and-container-snapshot.txt"],
+      "remaining": ["post-treatment disabled control", "uninstall", "resource-release receipt"]
+    },
+    {
+      "skill": "ascend-benchmark-evidence",
+      "state": "running",
+      "evidence": ["baseline-contract.json"],
+      "remaining": ["six complete 40-request performance runs", "performance-gate.json"]
+    },
+    {
+      "skill": "paper-to-ascend-reproduction",
+      "state": "running",
+      "remaining": ["paper capability scope", "performance and 2048-token quality", "18-unit independent audit"]
+    },
+    {
+      "skill": "ascend-performance-optimization",
+      "state": "pending",
+      "remaining": ["evidence-driven candidate change", "measured iteration"]
+    },
+    {
+      "skill": "ascend-cannbot-profiler",
+      "state": "pending",
+      "remaining": ["profile only if first comparison identifies a bottleneck requiring profiler attribution"]
+    },
+    {
+      "skill": "ascend-model-quality-evaluation",
+      "state": "pending",
+      "remaining": ["paired LongBench-v2 and GSM8K with 2048 cap, three repetitions each"]
+    },
+    {
+      "skill": "paper-to-ascend-reporting",
+      "state": "pending",
+      "remaining": ["auditable final report and claim boundaries"]
+    },
+    {
+      "skill": "mst-maintainer-handoff",
+      "state": "partial",
+      "evidence": ["HANDOFF.md"],
+      "remaining": ["terminal decision and final raw artifact hashes"]
+    }
+  ]
+}
