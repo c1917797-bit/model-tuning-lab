@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+"""Stdlib-only source/receipt/evidence tests; NO Torch import or device."""
+import ast
+import copy
+import dataclasses
+import json
+from pathlib import Path
+import types
+from gate_contract import (BASE, PROJECT, PROTOCOL_HASHES, NAMESPACE, KERNEL_SYMBOL,
+    IMAGE_ID, LIMITS, STEPS, validate_protocols, validate_build, require, sha)
+
+def run():
+    checks = []
+    def test(name, value):
+        require(bool(value),name); checks.append(name)
+    validate_protocols()
+    test("seven frozen original protocol/helper files unchanged",len(PROTOCOL_HASHES)==7)
+    sources = {n:(BASE/n).read_text() for n in
+        ("gate_contract.py","candidate_adapter.py","protocols.py","run_meta_gate.py","run_npu_gate.py")}
+    trees = {n:ast.parse(s,filename=n) for n,s in sources.items()}
+    test("five entry/support files parse",len(trees)==5)
+    test("frozen limits unchanged",LIMITS=={"state":1e-5,"output":0.00303} and STEPS==160)
+    test("explicit new namespace",NAMESPACE=="qwen36_damp_integer_compaction_v1")
+    for name,tree in trees.items():
+        for node in ast.walk(tree):
+            if isinstance(node,(ast.Assign,ast.AnnAssign,ast.AugAssign)):
+                targets = node.targets if isinstance(node,ast.Assign) else [node.target]
+                test("no torch.ops assignment "+name+":"+str(node.lineno),
+                     all("torch.ops" not in ast.unparse(t) for t in targets))
+    joined = "\n".join(sources.values())
+    test("no original compressed namespace dispatch","torch.ops.qwen36_damp." not in joined)
+    test("no Docker/build/Git commands","subprocess.run" not in joined and
+         "os.system" not in joined and "Popen" not in joined)
+    test("restricted helper actual signature + device",
+         'ids,native,"npu:0"),[])' in sources["protocols.py"] and
+         'evidence["value_cast_exact"]' in sources["protocols.py"] and
+         'evidence["restored_cast_exact"]' in sources["protocols.py"])
+    test("no candidate quantizer/oracle import",
+         "exact_quantizer_bits" not in sources["protocols.py"] and
+         "integer_certificate" not in sources["protocols.py"])
+    test("general reference own state","unpack_value_major(golden, layout)" in sources["protocols.py"])
+    test("complete-state metric gates both modes",sources["protocols.py"].count('LIMITS["state"]')==4)
+    test("saved step45 exact identity pinned",
+         "SAVED_STEP45_SHA" in sources["run_npu_gate.py"] and
+         'native_step(before,layout' in sources["run_npu_gate.py"] and
+         '"all_three_complete_packed_regions_bitwise"' in sources["run_npu_gate.py"])
+    # Compare source AST for all unchanged numerical statements in copied
+    # anchor/general protocols; evidence seams may differ, arithmetic may not.
+    original = ast.parse((PROJECT/"tests/general_sr_native_gate.py").read_text())
+    new = trees["protocols.py"]
+    def function(tree,name):
+        return next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name==name)
+    def assignments(fn):
+        result = {}
+        for n in ast.walk(fn):
+            if isinstance(n,ast.Assign):
+                for target in n.targets:
+                    result[ast.unparse(target)] = ast.dump(n.value,include_attributes=False)
+        return result
+    preserved = {
+        "anchor_case":("expanded_q","expanded_k","inv","restored_native","restored_exact",
+                       "untouched","state_metric","output_metric","guards"),
+        "general_case":("selected","updated, output_fp32, expected_output","selected_packed",
+                        "boundary","actual_dense","expected_dense","selected_state_metric",
+                        "complete_state_metric","output_metric","guards","passed")}
+    for name,targets in preserved.items():
+        a,b = assignments(function(original,name)),assignments(function(new,name))
+        for target in targets:
+            test("unchanged arithmetic/guards "+name+"/"+target,target in a and a[target]==b.get(target))
+    for name in ("anchor_case","general_case"):
+        a,b = function(original,name),function(new,name)
+        # Independent selected-state feedback update must be textually same AST.
+        def feedback(fn):
+            return [ast.dump(n,include_attributes=False) for n in ast.walk(fn)
+                    if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="index_copy_"]
+        test("unchanged independent feedback "+name,feedback(a)==feedback(b))
+    runner = sources["run_npu_gate.py"]
+    test("anchors precede general dispatch",runner.index("anchor_case(gate")<runner.index("general_case(gate"))
+    test("matrix-order guard remains","assert_matrix_order(anchored,require_complete_anchor=True)" in runner)
+    test("no source-contract or restricted pass as general receipt",
+         'choices=("restricted","anchors","general","step45","all")' in runner and
+         '"calibrated_plan_count":0' in runner)
+    # Valid receipt and independent negative contract matrix, without pretending
+    # these synthetic receipts are actual build evidence.
+    compiled = {f"repo/path/{i}":str(i)*64 for i in range(9)}
+    receipt = {"schema":"damp_production_integer_compaction_build_v1",
+        "status":"compiled_no_device","npu_executed":False,"physical_soc_runtime_observed":False,
+        "sources":compiled,"library_sha256":"a"*64,"image_id":IMAGE_ID,"npu_arch":"dav-2201",
+        "commands":[{"exit_code":0,"command":"configure","log_sha256":"b"*64},
+                    {"exit_code":0,"command":"build","log_sha256":"c"*64}],
+        "exported_kernel":{"name":KERNEL_SYMBOL,"defined":True,"type":"T","audit_sha256":"d"*64},
+        "cann_identity":{"component":"opp","version":"9.1.0",
+            "version_info_path":"/usr/local/Ascend/cann-9.1.0/opp/version.info",
+            "version_info_sha256":"841279757459d4eabc1c8cfea69d3e1dc0fc9db3eb0c18100294cd5c1301b9e6"}}
+    test("synthetic valid build contract",validate_build(receipt,compiled,"a"*64) is receipt)
+    bad = []
+    for field,value in (("schema","unknown"),("status","failed"),("npu_executed",True),
+                        ("physical_soc_runtime_observed",True),("image_id","other"),
+                        ("npu_arch","dav-3510"),("library_sha256","f"*64),("sources",{}),
+                        ("commands",[]),("exported_kernel",{"name":KERNEL_SYMBOL,"defined":False,"type":"U"}),
+                        ("cann_identity",{"component":"sdk","version":"9.1.0"})):
+        item = copy.deepcopy(receipt); item[field]=value; bad.append((field,item))
+    item=copy.deepcopy(receipt); item["commands"][1]["exit_code"]=2; bad.append(("compile-exit",item))
+    for field,item in bad:
+        try: validate_build(item,compiled,"a"*64)
+        except ValueError: checks.append("reject synthetic receipt "+field); continue
+        raise AssertionError("admitted bad receipt "+field)
+    # Test actual snapshot/observe function bodies with stand-in tensors. No
+    # imported Torch/device and no filesystem write; poisoned after-copy must
+    # not replace the original dispatch exception.
+    adapter = trees["candidate_adapter.py"]
+    class FakeTensor:
+        def __init__(self, name, poison=False): self.name=name;self.poison=poison
+        def detach(self): return self
+        def cpu(self):
+            if self.poison: raise RuntimeError("secondary poisoned D2H "+self.name)
+            return self
+        def contiguous(self): return self
+        def clone(self): return FakeTensor(self.name,self.poison)
+        def data_ptr(self): return id(self)
+    fake_torch=types.SimpleNamespace(Tensor=FakeTensor,npu=types.SimpleNamespace(synchronize=lambda:None))
+    env={"torch":fake_torch,"dataclasses":dataclasses,"require":require,"traceback":__import__("traceback")}
+    for name in ("snapshot","observe"):
+        node=function(adapter,name)
+        exec(compile(ast.Module(body=[node],type_ignores=[]),"<actual-source:"+name+">","exec"),env)
+    errors=[]
+    snap=env["snapshot"]({"good":FakeTensor("good"),"bad":FakeTensor("bad",True)},errors)
+    test("nullable copy keeps good before field",snap["good"].name=="good" and snap["bad"] is None and len(errors)==1)
+    class FakeGate:
+        def __init__(self): self.fixture={"golden_cpu":"retained"};self.retained=False
+        def retain(self): self.retained=True
+    gate=FakeGate();root=FakeTensor("root")
+    def fail():
+        root.poison=True
+        raise RuntimeError("ORIGINAL_DISPATCH_ERROR")
+    try: env["observe"](gate,"call",fail,[root])
+    except RuntimeError: pass
+    else: raise AssertionError("dispatch failure did not reject")
+    record=gate.fixture["call"]
+    test("original dispatch exception preserved","ORIGINAL_DISPATCH_ERROR" in record["dispatch_error"]["error"])
+    test("poisoned input nullable with separate copy error",record["after"]==[None] and len(record["input_copy_errors"])==1)
+    test("CPU before/golden retained",record["before"][0].name=="root" and gate.fixture["golden_cpu"]=="retained" and gate.retained)
+    gate=FakeGate();root=FakeTensor("root");output=FakeTensor("out",True)
+    try: env["observe"](gate,"copy",lambda:output,[root])
+    except RuntimeError: pass
+    else: raise AssertionError("copy failure did not reject")
+    record=gate.fixture["copy"]
+    test("output-copy error independently retained",record["dispatch_error"] is None and
+         record["returns"] is None and len(record["output_copy_errors"])==1 and gate.retained)
+    return {"schema":"damp_integer_compaction_software_contract_v1","status":"pass",
+            "checks":checks,"check_count":len(checks),"npu_executed":False,"torch_imported":False,
+            "scope":"AST/provenance/receipt/error-retention only; not compiler/Meta/NPU/API safety"}
+
+if __name__=="__main__":
+    print(json.dumps(run(),indent=2))

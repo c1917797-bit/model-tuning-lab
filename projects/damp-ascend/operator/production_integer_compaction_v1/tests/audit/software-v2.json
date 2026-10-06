@@ -1,0 +1,50 @@
+{
+  "schema": "damp_integer_compaction_software_v2",
+  "status": "pass",
+  "npu_executed": false,
+  "torch_imported": false,
+  "source_paths_and_hashes": {
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/gate_contract.py": "dfc151fda1f98c5e86d5de027a9764b55e0a2b9dba7511ae459c04b66e3a34b8",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/candidate_adapter.py": "43d4639d1ac0d737392fab8526aba14af0b1e50161a1940855b71822b18e6a7c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/protocols.py": "7a0747c8c1a1f246f32ec3ad32ab53cd7a5027339a5c8584d5552ae1508f7340",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_meta_gate.py": "f80486e71851951b7b56bdf0f14bda6168942a6687186ca8b29eae11e784f519",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_npu_gate.py": "9d2ff5e8eed33c5ec3719dcee2748908924c8ce7151a2e3d2b4d582d285c1c1c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py": "d14a6820d2b6c669c0abbc029cf15bfc15b77fec36f134da2b3e17a72bcab1e9"
+  },
+  "assertion_summary": {
+    "status": "pass",
+    "check_count": 321,
+    "assignment_nodes": 267,
+    "arithmetic_ast_checks": 20,
+    "feedback_ast_checks": 2,
+    "bad_receipt_checks": 12,
+    "npu_executed": false,
+    "torch_imported": false
+  },
+  "execution": {
+    "args": [
+      "-B",
+      "-c",
+      "import sys,json; sys.path.insert(0,'projects/damp-ascend/operator/production_integer_compaction_v1/tests'); import test_software_contract as t; r=t.run(); print(json.dumps({'status':r['status'],'check_count':r['check_count'],'assignment_nodes':sum(x.startswith('no torch.ops assignment ') for x in r['checks']),'arithmetic_ast_checks':sum(x.startswith('unchanged arithmetic/guards ') for x in r['checks']),'feedback_ast_checks':sum(x.startswith('unchanged independent feedback ') for x in r['checks']),'bad_receipt_checks':sum(x.startswith('reject synthetic receipt ') for x in r['checks']),'npu_executed':r['npu_executed'],'torch_imported':r['torch_imported']}))"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "durationMs": 186,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-00000000000003b1",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"status\": \"pass\", \"check_count\": 321, \"assignment_nodes\": 267, \"arithmetic_ast_checks\": 20, \"feedback_ast_checks\": 2, \"bad_receipt_checks\": 12, \"npu_executed\": false, \"torch_imported\": false}\n",
+    "timedOut": false
+  },
+  "scope": "AST/provenance/receipt/error-retention only, NOT compiler/load/Meta/NPU/API proof",
+  "v1_failure": "software-v1-failure.json and source-test-v1.py.txt preserve actual test-only tuple key failure",
+  "full_stdout_primary_execution": {
+    "operation_id": "exec-00000000000003a7",
+    "exit_code": 0,
+    "note": "stdout capture was truncated; complete compact classification captured by MA03b1"
+  }
+}

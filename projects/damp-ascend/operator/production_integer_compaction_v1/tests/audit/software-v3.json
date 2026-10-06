@@ -1,0 +1,36 @@
+{
+  "schema": "damp_integer_compaction_software_v3",
+  "status": "pass",
+  "npu_executed": false,
+  "torch_imported": false,
+  "source_paths_and_hashes": {
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/gate_contract.py": "b49b8113b77f2318d434fbca5beedbcc23b5a186b291e479c2cf1bd428b217a0",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/candidate_adapter.py": "43d4639d1ac0d737392fab8526aba14af0b1e50161a1940855b71822b18e6a7c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/protocols.py": "7a0747c8c1a1f246f32ec3ad32ab53cd7a5027339a5c8584d5552ae1508f7340",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_meta_gate.py": "f80486e71851951b7b56bdf0f14bda6168942a6687186ca8b29eae11e784f519",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_npu_gate.py": "9d2ff5e8eed33c5ec3719dcee2748908924c8ce7151a2e3d2b4d582d285c1c1c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py": "5bef0ae5470f6ee9f1001c1de3975a10603a472840207190cf7c9531dd0fd2bc"
+  },
+  "execution": {
+    "args": [
+      "-B",
+      "-c",
+      "import sys,json; sys.path.insert(0,'projects/damp-ascend/operator/production_integer_compaction_v1/tests'); import test_software_contract as t; r=t.run(); print(json.dumps({k:v for k,v in r.items() if k!='checks'})); print(json.dumps({'assertion_counts':{'assignment_nodes':sum(x.startswith('no torch.ops assignment ') for x in r['checks']),'arithmetic_ast':sum(x.startswith('unchanged arithmetic/guards ') for x in r['checks']),'feedback_ast':sum(x.startswith('unchanged independent feedback ') for x in r['checks']),'bad_receipts':sum(x.startswith('reject synthetic receipt ') for x in r['checks'])}}))"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "durationMs": 183,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-00000000000003bc",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"schema\": \"damp_integer_compaction_software_contract_v1\", \"status\": \"pass\", \"check_count\": 321, \"npu_executed\": false, \"torch_imported\": false, \"scope\": \"AST/provenance/receipt/error-retention only; not compiler/Meta/NPU/API safety\"}\n{\"assertion_counts\": {\"assignment_nodes\": 267, \"arithmetic_ast\": 20, \"feedback_ast\": 2, \"bad_receipts\": 12}}\n",
+    "timedOut": false
+  },
+  "receipt_adaptation": "Confirmed MAIN actual production build-v3 cann_identity root/opp_version_info_sha256/version_info + flat SHA; actual runtime file SHA and full text required, no whole-SDK/physical-SoC inference",
+  "scope": "321 software assertions (267 assignment nodes,20 original arithmetic/guard AST,2 feedback AST,12 bad receipts); NOT build/load/Meta/NPU",
+  "prior_receipts": "software-v1-failure,software-v2,archived gate-contract-v1/source-test-v2/runtime-manifest-v1 retained unchanged"
+}

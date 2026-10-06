@@ -1,0 +1,40 @@
+{
+  "schema": "damp_production_integer_compaction_v1_source_preparation",
+  "status": "source_revised_after_build_v1_compile_failure",
+  "default_enabled": false,
+  "npu_executed": false,
+  "production_integrated": false,
+  "graph_supported": false,
+  "base_head": "86c078fe1140027c39b31cb8801c9b892f99be1b",
+  "compiled_sources": {
+    "projects/damp-ascend/operator/quantizer/exact_quantizer_bits.h": "f5d380534d34d6e4148d94fcfec35b294ca8ca38d09316d98b11e7f645ff6169",
+    "projects/damp-ascend/operator/quantizer/fast_integer_certificate/integer_certificate_ascendc.h": "e96cbd0565cdb879016e1970753342151936e3d45bafd375530d1d27cfd7b9cb",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode.h": "15142a8360043e30cafbaebd19e2f528573819dcfdb519580867732e69340ff1",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_tiling.h": "ac40d62d8a37f8825ffb085beeb133a8b04f359e0e3a34bf4bca6ebf854224cc",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_kernel/qwen36_gdn_damp_integer_compaction_v1_decode_kernel.asc": "0946304dad2a02164fb22746b692484bf821998518d3b28cfebedbc9b8e4ce3e",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_extension/qwen36_gdn_damp_integer_compaction_v1_decode_torch.cpp": "cabd38f90352e47a5038464851129c5e4440f0a1c3594048b64ea5280618617f",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_extension/ops.h": "eca45b923e4c7ebc166693feb982a880bd73704aef1d19e76d334f45d375c9b2",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/op_extension/register.cpp": "fd558319cbb707ee651513c1bc1f51ffd48edd851966189ed381bb0f4185f879",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/CMakeLists.txt": "5770eaf43c46e2a4201cc0a647cd2bea87e0bc4968febcf8a995624548da8c18"
+  },
+  "original_sources": {
+    "projects/damp-ascend/operator/op_kernel/qwen36_gdn_damp_decode.h": "ecc24fada002dafbca962de5265f1bddc27a03d1e723070d9b317b415e3ca856",
+    "projects/damp-ascend/operator/op_kernel/qwen36_gdn_damp_decode_tiling.h": "3dae709efa2bfdce83ca90dd21fd2013896307db677c7363a337316b3dca6257",
+    "projects/damp-ascend/operator/op_kernel/qwen36_gdn_damp_decode_kernel.asc": "75d245da0f490601dc0f807a3492e886535fe2d6c139a03d2a01df51f683e6d5",
+    "projects/damp-ascend/operator/op_extension/qwen36_gdn_damp_decode_torch.cpp": "0329433adda1821600026df9b8449b64aa9b3d48c4bdcfec82ad07b8f3a94ed4",
+    "projects/damp-ascend/operator/op_extension/ops.h": "9266ad592d593ada188b74e84fde30955938b554298e9dee7b4e8a4768b3b0db",
+    "projects/damp-ascend/operator/op_extension/register.cpp": "ac7b93bf6cab637e1e7eedb857c18bedb657184a4b2dd4766b1cd143b3c04f87",
+    "projects/damp-ascend/operator/CMakeLists.txt": "f6fae737ea995b5276cc04892dc3934a073f1df51f68035ce658be091cc37134"
+  },
+  "namespace": "qwen36_damp_integer_compaction_v1",
+  "kernel_symbol": "qwen36_gdn_damp_integer_compaction_v1_decode_kernel",
+  "external_abi": "same prepare6/decode14 typed-state shapes; independently named",
+  "internal_tiling_bytes": 1056,
+  "internal_abi": 2,
+  "declared_ub_bytes": 141312,
+  "hidden_broadcast_lcm_proven": false,
+  "broadcast_workspace_mode": "public_fifth_argument_existing_scratchB",
+  "broadcast_explicit_existing_scratch_bytes": 8192,
+  "compiled_stack_proven": false,
+  "previous_failed_build": "/cache/cch/qwen36-damp-20261006/production-integer-compaction-build-v1/build-receipt.json"
+}

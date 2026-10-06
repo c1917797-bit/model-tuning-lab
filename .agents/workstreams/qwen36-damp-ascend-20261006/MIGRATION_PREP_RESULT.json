@@ -2,6 +2,62 @@
   "schema": "damp-migration-preparation/v1",
   "observed_at": "2026-10-06T12:08:00Z",
   "status": "progress_acceptance_not_met",
+  "current_stage": {
+    "observed_at": "2026-10-06T14:28:00Z",
+    "status": "restricted_and_synthetic_general_npu_pass_graph_service_pending",
+    "accepted_non_hypic_final": 0,
+    "original_v4_failure_unchanged": true,
+    "production_library_sha256": "ad6d01068d8cb122abc58da874dad5c4bd0dbd90402d30b5feb0155a86c92c8b",
+    "saved_step45": {
+      "operation": "exec-00000000000003c7",
+      "status": "saved_step45_bitwise_repair_pass",
+      "report_sha256": "69d85a5bd55ad9b5401afaba90351b63f2f825a06b1c605bbcd39ddf19f2cb35"
+    },
+    "restricted": {
+      "operation": "exec-00000000000003c8",
+      "status": "restricted_numerical_pass",
+      "cases": 4,
+      "steps_per_case": 160,
+      "all_state_and_output_error": 0,
+      "report": "/cache/cch/qwen36-damp-20261006/production-integer-compaction-restricted-v1/gate/report.json",
+      "report_sha256": "47c6120134ba788ff3e4a40f949aba1de9ae052726745437482a0bcbc3a71444"
+    },
+    "independent_seams": {
+      "compaction_cases": 49,
+      "certificate_cases": 721,
+      "certificate_admission_negatives": 37,
+      "scope": "isolated NPU components, not production performance"
+    },
+    "general": {
+      "operation": "exec-00000000000003e5",
+      "status": "general_numerical_pass",
+      "report": "/cache/cch/qwen36-damp-20261006/production-integer-compaction-general-v1/gate/report.json",
+      "report_sha256": "d4d71a45ae75c36a6ed9f5dc02c23272a1fef44e18f0a62226b4fcb3b35423d8",
+      "native_reference_anchor_cases": 6,
+      "general_candidate_cases": 4,
+      "steps_per_case": 160,
+      "all_reported_state_and_output_error": 0,
+      "scope": "synthetic positive FP32 SR/random and near-half stress; not final192 calibrated plans"
+    },
+    "not_proven": [
+      "final192calibrated_plans",
+      "graph",
+      "typed_cache_lifecycle",
+      "TP4_model_service",
+      "E2E_throughput",
+      "TTFT",
+      "TPOT",
+      "final_GSM8K",
+      "final_LongBench-v2",
+      "cross_environment_performance"
+    ],
+    "graph": {
+      "operation": "exec-000000000000040d",
+      "status": "running_not_accepted",
+      "root": "/cache/cch/qwen36-damp-20261006/production-integer-compaction-graph-v1",
+      "scope": "only frozen restricted B1/B16 SR1/power2"
+    }
+  },
   "delivery": "independent explicit-opt-in plugin/monkeypatch; no original runtime/image edits",
   "collector": {
     "checkpoint": "bb9a7580e9c9912b168d1dab5eaa6c3b8de427b4",
@@ -110,7 +166,17 @@
       "off_on_symmetric": true
     },
     "full_v1": {
-      "status": "running_native_off_reference_arm",
+      "status": "terminal_failed_before_on_ordinary_RAM64GiB_admission",
+      "latest_terminal": {
+        "off_requests": 36,
+        "off_output_tokens_per_request": 4096,
+        "on_requests": 0,
+        "container_stopped_retained": true,
+        "actual_OOM": false,
+        "source_lock_issued": false,
+        "automatic_retry": false,
+        "next": "source-bound on-only recovery; preserve off and original failure"
+      },
       "operation": "exec-0000000000000161",
       "container": "qwen36_damp_full_capture_tp4_20261006_v1",
       "container_id": "4505fd9eb29e4079768a2b0ea49f2bacd198f77023672bbc297c3c2aa86dd8ff",
@@ -192,9 +258,9 @@
   },
   "software": "Parent identity12 software PASS; same-image calibration19 PASS. Other child software totals remain separate receipts; no software test substitutes for NPU acceptance.",
   "next": [
-    "poll full capture MA0161 without duplicate; complete same-eager native off/on TP4/all48 source lock before fitting",
-    "after capture, fresh NPU4-7 preflight then isolated exact-bits and independent native-reference anchor gates in new directories",
-    "integrate only numerically proven quantizer, run restricted/general-SR multi-step and graph/cache gates with unchanged limits",
+    "poll existing restricted graph/metadata NPU MA040d; prior MA03e5 passed six anchors and four synthetic general-SR cases; never duplicate a live experiment",
+    "preserve native off36 and original RAM refusal; source-reviewed on-only recovery with justified ordinary-memory admission before fitting",
+    "restricted640 and synthetic general640 production steps passed; complete finalplans/changed-input graph/real shared-arena typed-cache gates with unchanged limits",
     "matched fixed1024 service screen; only valid high-potential candidate advances to three paired repetitions and final2048 EOS tasks",
     "continue KVBuffer distinct parallel-fold preparation without competing NPU job; actual UB temporary/API synchronization review remains pending"
   ],

@@ -1,0 +1,20 @@
+{
+  "schema": "damp_integer_compaction_runtime_sources_v1",
+  "npu_executed": false,
+  "scope": "six NEW executable/support/test files + seven pinned original protocols/helpers; separate from compiled9",
+  "sources": {
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/gate_contract.py": "b49b8113b77f2318d434fbca5beedbcc23b5a186b291e479c2cf1bd428b217a0",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/candidate_adapter.py": "43d4639d1ac0d737392fab8526aba14af0b1e50161a1940855b71822b18e6a7c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/protocols.py": "7a0747c8c1a1f246f32ec3ad32ab53cd7a5027339a5c8584d5552ae1508f7340",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_meta_gate.py": "f80486e71851951b7b56bdf0f14bda6168942a6687186ca8b29eae11e784f519",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_npu_gate.py": "9d2ff5e8eed33c5ec3719dcee2748908924c8ce7151a2e3d2b4d582d285c1c1c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py": "5bef0ae5470f6ee9f1001c1de3975a10603a472840207190cf7c9531dd0fd2bc",
+    "projects/damp-ascend/tests/restricted_native_golden_gate.py": "f8b04cc7650cf2cc330a526cb261ffd85062454e56e1a9692b5913c18445a6b4",
+    "projects/damp-ascend/tests/general_sr_native_gate.py": "7eed726fd46e2e39c6bdd560fb769742d32d68861efb075fbca9647f976b4155",
+    "projects/damp-ascend/tests/general_sr_contract.py": "6606bd18e1c29d50a063ba0742b8fb7b8b8d5a8f6e12a6f4a755004d74bfc2ad",
+    "projects/damp-ascend/tests/native_compressed_golden.py": "95d11c42bea88daa14dbb2ce462e16a7d1864b3f2169faf360942fb0c16bea19",
+    "projects/damp-ascend/tests/native_call_contract.py": "162dba2a653b7c1fabd20eb24bc75d99225584ca48c4bd10c89eece5bc2fc1d5",
+    "projects/damp-ascend/tests/independent_oracle.py": "fc92395d65db63810ff70341dca255f7f4455d80f0fccbe80f48ff3bb679625a",
+    "projects/damp-ascend/operator/diagnostic/run_saved_step45_trace.py": "64cc9ee98a6354d16a49fa90f9c16170d9852c080cf576fad03e3183b4eb0b9a"
+  }
+}

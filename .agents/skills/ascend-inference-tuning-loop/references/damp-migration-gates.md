@@ -252,3 +252,61 @@ passing this chain. Preserve the current paper's 24-hour decision deadline.
   separately recorded Meta negatives were rejected. None exercises NPU
   GatherMask count/order, exact fallback/scatter, guards or changed buffers.
   Device arithmetic, production feedback, graph, E2E and tasks remain pending.
+
+## Actual NPU seam repair and missing-arm recovery, 14:06Z
+
+- Separate source correctness, successful build/export, actual load/Meta,
+  isolated NPU components and combined production feedback. Here49NPU
+  compaction cases and721integer-certificate cases passed, then the new full
+  production operator repaired the exact saved-step45 bitwise. That is real
+  device progress, not yet160step/general-SR/graph/cache/E2E/task acceptance.
+  Stress-fixture accepted-lane counts must not be presented as real fallback
+  frequency or speed. Detailed receipts are in the candidate ACTUAL_GATES.md.
+- Reuse public APIs and actual same-image implementation/lifetime evidence.
+  The five-argument Broadcast reused dead existing scratch with unchanged
+  arithmetic and removed a particular hidden-LCM assumption; it did not prove
+  compiler stack or universal UB capacity. Keep unchanged helper/golden bytes
+  and record the narrow source-contract exception instead of broadening it.
+- A compile const-pointer error and missing snapshot mount are implementation
+  or harness failures, not algorithm no-go. Preserve each failed build and use
+  a fresh output for the evidence-supported repair; don't rewrite an incomplete
+  receipt into success or rebuild merely to satisfy an invented receipt schema.
+- Full native capture completed its off36 reference outputs, then failed the
+  fresh ordinary-RAM admission before on. Preserve and source-bind that valid
+  arm; prepare an on-only recovery rather than rerun hours of unchanged off.
+  Admission estimates, model CPU private peak, shared/reclaimable cache,
+  Python collector residency and disk anchors are different quantities.
+  Do not reclaim shared HugeTLB, interfere with protected workloads or lower
+  memory/numerical gates merely to meet a deadline. An unavailable full pair
+  remains missing evidence, not paper-wide impossibility.
+- Keep small isolated probes distinct from full-model admission. The8GiB
+  diagnostic containers could run safely while the full capture's64GiB gate
+  was unmet; their actual scopes exclude model/performance claims. Use such
+  tests only when they directly eliminate the latest paper-specific blocker,
+  then return immediately to the service evidence chain.
+
+## 14:28Z production feedback passes, not task acceptance
+
+The repaired independent production namespace passed four restricted640steps
+and four synthetic general-positive-FP32640steps on real physical NPU4;
+six independent native/reference160step anchors additionally matched bitwise.
+Detailed reports/hashes live in production_integer_compaction_v1/ACTUAL_GATES.md.
+The state/output error0 in these scoped gates is NOT zero GSM8K/LongBench loss
+or a performance result. Final calibrated plans, prefill import, changing graph,
+typed-cache lifecycle and actual scheduler B2..15 remain separate obligations.
+Do not use max_num_seqs16 when only B1/B16 have been admitted, or relabel a
+max_num_seqs1 eager service screen as the formal concurrency16 result.
+Transport route/target success does not prove a remote mutation succeeded:
+inspect the action result.ok/applied too. A malformed JSON patch was refused,
+fresh readbacks proved no edit, and only corrected plus-prefixed lines applied.
+
+## Shared-arena cache ABI is a separate real gate
+
+Do not infer serving ABI from separately allocated operator fixtures.
+Here the real Mamba allocator creates disjoint typed contiguous SoA views
+of one raw backing allocation, but the conservative production wrapper
+rejects shared whole storage. Source-correct operator and scoped eager passes
+can coexist with this real integration blocker. Target an independently
+named wrapper byte-interval adaptation, with ND/contiguous/alignment/bounds,
+shared-arena sentinels and lifecycle gates; do not bypass the actual allocator
+with hidden state copies or mutate frozen binaries/receipts.

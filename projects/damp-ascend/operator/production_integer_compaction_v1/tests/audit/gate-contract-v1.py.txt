@@ -1,0 +1,145 @@
+"""Stdlib-only identity and admission contract; no device/build actions."""
+import hashlib
+import json
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent
+CANDIDATE = BASE.parent
+PROJECT = CANDIDATE.parents[1]
+REPO = PROJECT.parents[1]
+NAMESPACE = "qwen36_damp_integer_compaction_v1"
+LIBRARY_NAME = "libqwen36_gdn_damp_integer_compaction_v1_decode_ops.so"
+KERNEL_SYMBOL = "qwen36_gdn_damp_integer_compaction_v1_decode_kernel"
+STEPS = 160
+LIMITS = {"state": 1e-5, "output": 0.00303}
+IMAGE_ID = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+NATIVE_COMMIT = "5cb98caaadeff42b5b62b996e34bb2aaa29d20fd"
+NATIVE_HEADER_SHA = "96e6d9667af1e3457316ffce92a8a983fcb90096df08e3efd13ec0b35b8b1c5b"
+GDN_SHA = "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
+SAVED_STEP45_SHA = "59795deab9d00328df79dfeeefa08ff6d917f455bfe9d7565d0fd9c3cbf70598"
+PROTOCOL_HASHES = {
+    "tests/restricted_native_golden_gate.py": "f8b04cc7650cf2cc330a526cb261ffd85062454e56e1a9692b5913c18445a6b4",
+    "tests/general_sr_native_gate.py": "7eed726fd46e2e39c6bdd560fb769742d32d68861efb075fbca9647f976b4155",
+    "tests/general_sr_contract.py": "6606bd18e1c29d50a063ba0742b8fb7b8b8d5a8f6e12a6f4a755004d74bfc2ad",
+    "tests/native_compressed_golden.py": "95d11c42bea88daa14dbb2ce462e16a7d1864b3f2169faf360942fb0c16bea19",
+    "tests/native_call_contract.py": "162dba2a653b7c1fabd20eb24bc75d99225584ca48c4bd10c89eece5bc2fc1d5",
+    "tests/independent_oracle.py": "fc92395d65db63810ff70341dca255f7f4455d80f0fccbe80f48ff3bb679625a",
+    "operator/diagnostic/run_saved_step45_trace.py": "64cc9ee98a6354d16a49fa90f9c16170d9852c080cf576fad03e3183b4eb0b9a",
+}
+OWN_NAMES = ("gate_contract.py", "candidate_adapter.py", "protocols.py",
+             "run_meta_gate.py", "run_npu_gate.py", "test_software_contract.py")
+
+def require(value, detail):
+    if not value:
+        raise ValueError(detail)
+
+def sha(path):
+    h = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(1024*1024), b""):
+            h.update(block)
+    return h.hexdigest()
+
+def read_json(path):
+    return json.loads(Path(path).read_text())
+
+def checked_file(path, expected):
+    path = Path(path)
+    require(path.is_absolute() and path.is_file(), "absolute existing file required: " + str(path))
+    require(isinstance(expected, str) and len(expected) == 64 and
+            all(c in "0123456789abcdef" for c in expected), "lowercase SHA256 required")
+    require(sha(path) == expected, "file identity mismatch: " + str(path))
+    return path.resolve()
+
+def validate_protocols():
+    for name, expected in PROTOCOL_HASHES.items():
+        require(sha(PROJECT/name) == expected, "frozen protocol source mismatch: " + name)
+    return dict(PROTOCOL_HASHES)
+
+def validate_build(receipt, compiled, library_sha):
+    require(receipt.get("schema") == "damp_production_integer_compaction_build_v1" and
+            receipt.get("status") == "compiled_no_device" and
+            receipt.get("npu_executed") is False and
+            receipt.get("physical_soc_runtime_observed") is False,
+            "actual successful no-device candidate build receipt required")
+    require(receipt.get("sources") == compiled and len(compiled) == 9,
+            "build must bind exact nine repo-relative compilation sources")
+    require(receipt.get("library_sha256") == library_sha and
+            receipt.get("image_id") == IMAGE_ID and receipt.get("npu_arch") == "dav-2201",
+            "build library/image/architecture mismatch")
+    commands = receipt.get("commands")
+    require(isinstance(commands, list) and len(commands) >= 2 and
+            all(c.get("exit_code") == 0 and c.get("command") and
+                isinstance(c.get("log_sha256"), str) and len(c["log_sha256"]) == 64
+                for c in commands), "actual configure/build command success required")
+    # MAIN must record its actual nm/readelf audit, not merely successful link.
+    symbol = receipt.get("exported_kernel")
+    require(isinstance(symbol, dict) and symbol.get("name") == KERNEL_SYMBOL and
+            symbol.get("defined") is True and symbol.get("type") in ("T", "W") and
+            isinstance(symbol.get("audit_sha256"), str) and len(symbol["audit_sha256"]) == 64,
+            "defined host-launcher symbol audit required; UND/link-only is insufficient")
+    cann = receipt.get("cann_identity")
+    require(isinstance(cann, dict) and cann.get("component") == "opp" and
+            cann.get("version") == "9.1.0" and
+            cann.get("version_info_path") == "/usr/local/Ascend/cann-9.1.0/opp/version.info" and
+            cann.get("version_info_sha256") ==
+            "841279757459d4eabc1c8cfea69d3e1dc0fc9db3eb0c18100294cd5c1301b9e6",
+            "actual OPP9.1 component identity required, not whole SDK/SoC proof")
+    return receipt
+
+def source_bindings(args):
+    validate_protocols()
+    source = checked_file(args.source_manifest, args.source_manifest_sha256)
+    require(source == (CANDIDATE/"source_manifest.json").resolve(), "wrong candidate manifest")
+    manifest = read_json(source)
+    require(manifest.get("namespace") == NAMESPACE and
+            manifest.get("kernel_symbol") == KERNEL_SYMBOL, "candidate namespace/symbol mismatch")
+    compiled = manifest.get("compiled_sources")
+    require(isinstance(compiled, dict) and len(compiled) == 9, "exact compiled9 required")
+    for name, expected in compiled.items():
+        path = (REPO/name).resolve()
+        require(REPO in path.parents and sha(path) == expected, "compiled source mismatch " + name)
+    runtime_file = checked_file(args.runtime_manifest, args.runtime_manifest_sha256)
+    runtime = read_json(runtime_file)
+    expected_names = {str((BASE/n).relative_to(REPO)) for n in OWN_NAMES}
+    expected_names.update(str((PROJECT/n).relative_to(REPO)) for n in PROTOCOL_HASHES)
+    require(runtime.get("schema") == "damp_integer_compaction_runtime_sources_v1" and
+            isinstance(runtime.get("sources"), dict) and
+            set(runtime["sources"]) == expected_names, "exact separate runtime source set required")
+    for name, expected in runtime["sources"].items():
+        require(sha(REPO/name) == expected, "runtime dependency changed " + name)
+    library = checked_file(args.library, args.library_sha256)
+    require(library.name == LIBRARY_NAME, "wrong registration library basename")
+    receipt_file = checked_file(args.build_receipt, args.build_receipt_sha256)
+    receipt = validate_build(read_json(receipt_file), compiled, args.library_sha256)
+    return {"compiled_sources": compiled, "runtime_sources": runtime["sources"],
+            "source_manifest_sha256": sha(source), "runtime_manifest_sha256": sha(runtime_file),
+            "build_receipt_path": str(receipt_file), "build_receipt_sha256": sha(receipt_file),
+            "build_receipt": receipt, "library": str(library), "library_sha256": sha(library)}
+
+def cann_environment_checks(bindings):
+    import os
+    home = os.environ.get("ASCEND_HOME_PATH")
+    require(home is not None and Path(home).resolve() == Path("/usr/local/Ascend/cann-9.1.0"),
+            "actual configured CANN9.1 home required")
+    identity = bindings["build_receipt"]["cann_identity"]
+    cfg = checked_file(identity["version_info_path"], identity["version_info_sha256"])
+    text = cfg.read_text()
+    require("Version=9.1.0" in text.splitlines(), "runtime OPP identity is not9.1.0")
+    return {"component": "opp", "scope": "not all SDK components or runtime SoC proof",
+            "path": str(cfg), "sha256": sha(cfg), "text": text}
+
+def new_output(path):
+    path = Path(path)
+    require(path.is_absolute(), "absolute output root required")
+    path = path.resolve()
+    require(not path.exists() and path != REPO and REPO not in path.parents,
+            "new nonoverwriting output root outside repository required")
+    path.mkdir(parents=False, exist_ok=False)
+    return path
+
+def add_identity_arguments(parser):
+    for name in ("library", "source-manifest", "runtime-manifest", "build-receipt"):
+        parser.add_argument("--"+name, type=Path, required=True)
+        parser.add_argument("--"+name+"-sha256", required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)

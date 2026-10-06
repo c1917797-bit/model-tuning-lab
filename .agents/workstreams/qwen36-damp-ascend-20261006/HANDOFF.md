@@ -3,6 +3,36 @@
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
+Latest14:28Z stage overrides older live-status paragraphs below:
+native full capture MA0161 is terminal FAILED/stopped/retained. Its off36/36
+x4096 outputs completed; ordinary-RAM64GiB admission blocked on before start.
+No actual OOM, fitted plans or full source-lock. Preserve off and only resume
+missing on under source/config proof; do not repeat off. Protected0-3 now run
+external HYPIC workers2058953/2058954/2058955/2058956; never touch them.
+
+Actual NPU4 integer-certificate721cases/37negative and compaction49cases/
+5negative passed. New production integer-compaction v3 compiled/exported,
+load/Meta passed4positive/44negative calls, and saved-step45 full packed state/
+BF16 output repaired bitwise with complete-state error0. Original v4 failure
+unchanged; no numerical gate relaxed. Read
+projects/damp-ascend/operator/production_integer_compaction_v1/ACTUAL_GATES.md.
+The B1/B16 x two restricted variants x160steps matrix MA03c8 ended terminal0:
+all640steps, all state/output errors0, full packed bitwise and guards passed.
+Report47c6120134ba788ff3e4a40f949aba1de9ae052726745437482a0bcbc3a71444.
+Independent reference actual no-device load/schema passed MA03da. General
+NPU MA03e5 ended terminal0: six native/reference bitwise anchors and four
+synthetic general-positive-FP32 candidate cases,160steps each, all passed;
+reported complete/selected state/output errors0. ReportSHA
+d4d71a45ae75c36a6ed9f5dc02c23272a1fef44e18f0a62226b4fcb3b35423d8.
+NEW restricted graph/metadata MA040d started; poll it rather than relaunch.
+Final192 calibrated plans, graph/cache/
+service/paired timing/final quality remain missing. Zero new non-HYPIC final
+joint-accepted candidates; DAMP and72h deadlines above remain unchanged.
+
+Parallel NEW on-only recovery, KVBuffer service and AdaKV grouped service
+drafts remain excluded from this checkpoint until MAIN full review and their
+actual prerequisites. Source preparation/software tests are not device success.
+
 Latest 11:17Z checkpoint: read MIGRATION_PREP_RESULT.json. Actual operator v4
 compiled/load/schema/Meta PASS is preserved, but restricted native NPU v2 is
 FAILED: B1 identity closed-loop packed state was bitwise exact for44 steps;

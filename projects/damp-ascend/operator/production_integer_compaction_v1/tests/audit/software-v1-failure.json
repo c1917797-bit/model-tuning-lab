@@ -1,0 +1,24 @@
+{
+  "schema": "damp_integer_compaction_software_failure_v1",
+  "npu_executed": false,
+  "torch_imported": false,
+  "meaning": "test AST tuple target key omitted Python tuple parentheses; no arithmetic/threshold/NPU result",
+  "execution": {
+    "args": [
+      "-B",
+      "projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "durationMs": 173,
+    "error": "exit code",
+    "exitCode": 1,
+    "id": "exec-00000000000003a4",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py\", line 155, in <module>\n    print(json.dumps(run(),indent=2))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py\", line 69, in run\n    test(\"unchanged arithmetic/guards \"+name+\"/\"+target,target in a and a[target]==b.get(target))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/tests/test_software_contract.py\", line 15, in test\n    require(bool(value),name); checks.append(name)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/tests/gate_contract.py\", line 34, in require\n    raise ValueError(detail)\nValueError: unchanged arithmetic/guards general_case/updated, output_fp32, expected_output\n",
+    "stdout": "",
+    "timedOut": false
+  }
+}

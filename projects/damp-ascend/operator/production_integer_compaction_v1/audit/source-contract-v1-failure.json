@@ -1,0 +1,70 @@
+{
+  "cancelTool": "operation_cancel",
+  "channel": "control",
+  "fallbackUsed": false,
+  "gatewayInstanceId": "tpc-rgw-01",
+  "idempotencyKey": "awmcp-exec-v1-93afec48947759f6a228c9f4b3520674",
+  "logicalGatewayId": "tpc",
+  "ok": true,
+  "operationId": "exec-000000000000035d",
+  "operationKind": "exec",
+  "pollTool": "operation_get",
+  "requestDeadlineMs": 10000,
+  "result": {
+    "execId": "exec-000000000000035d",
+    "lane": "process",
+    "ok": false,
+    "record": {
+      "args": [
+        "-B",
+        "projects/damp-ascend/operator/production_integer_compaction_v1/check_source_contract.py"
+      ],
+      "cancelled": false,
+      "command": "/usr/bin/python3",
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "durationMs": 58,
+      "error": "exit code",
+      "exitCode": 1,
+      "id": "exec-000000000000035d",
+      "lane": "process",
+      "state": "completed",
+      "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/check_source_contract.py\", line 158, in <module>\n    print(json.dumps(check(),sort_keys=True,indent=2))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/check_source_contract.py\", line 55, in check\n    assert body(candidate, name) == body(old, name), name\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/production_integer_compaction_v1/check_source_contract.py\", line 28, in body\n    raise AssertionError(\"method definition missing: \" + name)\nAssertionError: method definition missing: MatVecK128\n",
+      "stdout": "",
+      "timedOut": false
+    },
+    "running": false,
+    "state": "completed"
+  },
+  "rgwHttp": "http://agentweb:17888",
+  "rgwRouting": {
+    "attemptErrors": [],
+    "strategy": "peer-hot3-with-command-retry"
+  },
+  "routeDecision": "peer_direct",
+  "routeSelectionMode": "client-force-direct",
+  "selectedLogicalGatewayId": "tpc",
+  "selectedRgw": "http://agentweb:17888",
+  "sessionId": null,
+  "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "targetRole": "upstream",
+  "timings": {
+    "awmcp": {
+      "attemptCount": 1,
+      "rgwRequestMs": 457,
+      "rgwResponseDecodeMs": 0,
+      "rgwResponseHeadersMs": 457,
+      "routeCacheHit": false,
+      "routeLookupMode": "client-force-direct",
+      "routeLookupMs": 1427,
+      "totalMs": 1884
+    },
+    "rgw": {
+      "dispatchMs": 0,
+      "journalMs": 0,
+      "peerRoundTripMs": 457,
+      "routeLookupMs": 0,
+      "totalMs": 457
+    }
+  },
+  "traceId": "12fcbe1d-162d-43d7-976f-5812fa49699c"
+}
