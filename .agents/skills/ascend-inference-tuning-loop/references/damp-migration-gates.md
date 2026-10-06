@@ -401,3 +401,26 @@ with hidden state copies or mutate frozen binaries/receipts.
   overlap only independent disjoint correctness jobs after joint CPU/RAM and
   owner checks. TP4 calibration/formal comparison owns the whole authorized
   set. Measure evidence progress/idle reasons, not dummy utilization.
+
+## Resource-complete successor preparation, 17:47Z
+
+- Run the actual successor CLI, source/build/Meta admission and producer-to-
+  validator bridge before cards release; label software original-terminal/
+  report fixtures SYNTHETIC. Actual binary snapshot bytes are not mapped
+  execution. Keep parent, child and original tool receipts independently bound.
+- Budget the correctness oracle before scheduling NPU occupancy. Here actual
+ 10k cold divisions cost~1.014s; a2.64CPUh scalar extrapolation does not include
+ NPU/copy/quantization work. Explicit NEW phase budgets, joint ordinaryRAM/CPU
+ and unchanged cutoff/cleanup reserve are required; never shrink gates or call
+ CPU diagnostic time a performance result.
+- Parallel resource admission must be symmetric. One dispatcher recognizing
+ another owner does not make the other monitor recognize it. Prove exact
+ disjoint devices, real IDs/image/cgroups/quotas and both monitors; do not forge
+ owner labels, silently patch frozen guards or add dummy loads to occupy cards.
+- A retired/stale dlopen mapping is not the current pathname even if a replacement
+ file has the expected hash. Reject deleted mappings and bind actual inode/device;
+ state that this still is not proof of every loaded memory byte. Native failure
+ must remain primary even when abort/log/stdout/retirement also fails.
+- Exact native method AST behavior with stdlib stand-ins checks source seams,
+ not real framework lifecycle. HTTP request counts do not prove native P/T,
+ pause-cache retention, reset/ABA or whole-model48-layer commit coverage.

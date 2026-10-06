@@ -1,0 +1,69 @@
+{
+  "schema": "damp-native-prefill-intermediate-packet/v1",
+  "status": "source_preparation_only",
+  "default_enabled": false,
+  "npu_executed": false,
+  "graph_supported": false,
+  "serving_ready": false,
+  "performance_measurement_admitted": false,
+  "deadline_utc": "2026-10-07T08:48:03Z",
+  "sources": {
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/contract.py": "3f3bd2d4b095d2cdbf1979328bd114582c87920508ab665e089a0838c7124b76",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/runner.py": "bf21593e60505a82742d739e89434849cdbe9414b0142fd1cb4d85d16cabc0c0",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/test_runner.py": "f498c9031b0b18f81faef778935fabad94a5b38d5e5a64c44fa4775be11d471b",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/READY.md": "cf500c35091e5449113d7824bc1c42a43b47d043198b2292ef3ac34792ffd71a"
+  },
+  "legacy_runtime": {
+    "path": "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/RUNTIME_MANIFEST.json",
+    "sha256": "7ea60a45ea46f28811c16455885eab46dbd78bce5586a8914f06a701dbcd4ed1"
+  },
+  "builder": {
+    "actual_path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn_attn_builder.py",
+    "snapshot_path": "/cache/cch/qwen36-damp-20261006/runtime-native-builder-snapshot-v1/gdn_attn_builder.py",
+    "sha256": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16",
+    "snapshot_manifest_sha256": "b05d03335c10dfb3b0e7ed5f8b691ac0e95529d424cac39f85c1d31b1d710b46"
+  },
+  "matrix": {
+    "shards": {
+      "P2-8": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "P9-15": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "arena": [
+      "adjacent",
+      "guard_gaps"
+    ],
+    "native_initial": [
+      "fresh",
+      "all_continuing"
+    ],
+    "steps": 160,
+    "anchor": "actual B16 whole-reference vs16 actual B1 references, all three outputs bitwise before any candidate"
+  },
+  "scope": "PCP1 standalone eager operation; immutable legacy oracle/reference ABI. Explicit rowwise golden only; true P candidate. Not prebuilt metadata/mixed-initial/model cache/graph/serving/E2E.",
+  "requires_main_execution": true,
+  "allP_assembly_ready": false,
+  "final_authority": {
+    "status": "not_connected",
+    "requires": "NEW source-bound all-P validator with original terminal records/streams, exact shard reports/hashes, preserved B1/B16 evidence, and actual B16-split anchors",
+    "actual_validator_execution": null,
+    "actual_validator_output_path": null,
+    "actual_validator_sha256": null,
+    "per_shard_pass_is_service_admission": false
+  }
+}

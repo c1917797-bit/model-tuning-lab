@@ -1,0 +1,36 @@
+{
+  "schema": "damp-main-prelaunch-successor-source-scope/v1",
+  "review_base_head": "9200d7ff3c691508e59854ac3f3805095a5ad0c7",
+  "reviewed_sources": {
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/contract.py": "3f3bd2d4b095d2cdbf1979328bd114582c87920508ab665e089a0838c7124b76",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/runner.py": "bf21593e60505a82742d739e89434849cdbe9414b0142fd1cb4d85d16cabc0c0",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/test_runner.py": "f498c9031b0b18f81faef778935fabad94a5b38d5e5a64c44fa4775be11d471b",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/READY.md": "cf500c35091e5449113d7824bc1c42a43b47d043198b2292ef3ac34792ffd71a",
+    "projects/damp-ascend/tools/native_prefill_intermediate_v1/PACKET.json": "4f8ddbd8ec50b4b60a2d18b80c353f764074da91262301262aee3bf933f53537",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/READY.md": "44f47140cc4258502efc66367bf66ac24675286b69c984d7ae7833f4530a8195",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/child_shim.py": "fedb6cbbea961c4e4f76ae3cde167130407bf0bf09e6f059c351ac3b8c2434ab",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/controller.py": "e4a7ccb5bb07d52b7dd12671502accc2390266e56c81416fc369e1d2f3a47cc2",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/test_dispatch.py": "da7fc80b6517f9d0be6aabc69dff85df67454c2624ef4a1532d8b1e6c7b2d7f4",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/PACKET.json": "a608e17f6208d07d843f65cbaf4e70bfdf7e55ee721a9a45f0d9c34533746cb1"
+  },
+  "main_software_receipts": [
+    {
+      "operationId": "exec-000000000000061a",
+      "path": "/cache/cch/qwen36-damp-20261006/intermediate-prefill-main-software-v1/RESULT.json",
+      "sha256": "7253acce43007ee76e8c156acd94c104013613421860a8c038894798ab78c038",
+      "tests": 16
+    },
+    {
+      "operationId": "exec-0000000000000636",
+      "path": "/cache/cch/qwen36-damp-20261006/selected-dispatch-main-software-v1/RESULT.json",
+      "sha256": "adf3dd5a423c4600996c388f9e2c096145f3f5867c9a9165d7f1ad728f542b5a",
+      "tests": 39
+    }
+  ],
+  "scope": "complete source/software preparation only; no new NPU or end-to-end result",
+  "npu_executed": false,
+  "serving_ready": false,
+  "performance_measurement_admitted": false,
+  "allP_assembly_ready": false,
+  "excluded": "evolving intermediate producer/allP validator; service assembly and unpublished old dependency closure; final/calibrated drafts; unrelated files"
+}

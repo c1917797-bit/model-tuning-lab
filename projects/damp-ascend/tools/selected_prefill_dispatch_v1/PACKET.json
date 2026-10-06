@@ -1,0 +1,33 @@
+{
+  "schema": "damp-selected-prefill-dispatch-source/v1",
+  "sources": {
+    "READY.md": "44f47140cc4258502efc66367bf66ac24675286b69c984d7ae7833f4530a8195",
+    "child_shim.py": "fedb6cbbea961c4e4f76ae3cde167130407bf0bf09e6f059c351ac3b8c2434ab",
+    "controller.py": "e4a7ccb5bb07d52b7dd12671502accc2390266e56c81416fc369e1d2f3a47cc2",
+    "test_dispatch.py": "da7fc80b6517f9d0be6aabc69dff85df67454c2624ef4a1532d8b1e6c7b2d7f4"
+  },
+  "reused_sources": {
+    "projects/damp-ascend/tools/prefill_float_dispatch_v1/dispatch.py": "094defb90bfc6d748d13069a48bd24297d01caaab1720ef5b8a3bc32ecf87c9e",
+    "projects/damp-ascend/tools/allT_dispatch_controller_v1/controller.py": "c44412ffbfffa5b8e1630694343044d874c87ab72e3ad76875c2e69bc6c6e1ff",
+    "projects/damp-ascend/tools/run_full_capture.py": "9ad5e359766578a24f06e127a990ab93d1e86555baa15d1abb7bb2b3ffc51122",
+    "projects/damp-ascend/tools/run_collector_smoke.py": "da541917ebd8764a81624a215a157b6d4e18fbaaa53d9310be54a104d2fbbf92"
+  },
+  "default_enabled": false,
+  "npu_executed": false,
+  "serving_ready": false,
+  "performance_measurement_admitted": false,
+  "deadline_utc": "2026-10-07T08:48:03Z",
+  "gate_runtime_sha256": "7ea60a45ea46f28811c16455885eab46dbd78bce5586a8914f06a701dbcd4ed1",
+  "component_admission_manifest_sha256": "3c47ea050cb519b3e4ced87bd13f32b817a8cd74e9305502b429eab871b93db8",
+  "stages": [
+    "isolated",
+    "native_feedback"
+  ],
+  "batches": [
+    1,
+    16
+  ],
+  "steps": 160,
+  "child_schema": "damp-selected-prefill-child/v1",
+  "scope": "source preparation only; MAIN-owned actual one-stage single-card exec; no forged original tool receipt"
+}

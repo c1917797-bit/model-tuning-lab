@@ -1,5 +1,17 @@
 # DAMP Ascend — current workstream
 
+## Prelaunch successor checkpoint — 2026-10-06 17:47Z
+
+Read PRELAUNCH_SUCCESSOR_CHECKPOINT_20261006.md and its SOURCE_SCOPE JSON.
+MAIN MA061a16 and MA063639 software/default CLI/source checks passed; no NPU
+or service/E2E acceptance. Original tool authority/allP parent+validator and
+coherent assembly transitive publication remain pending. MA0455 still live;
+MA063a17:45:07Z observed32/36 x4096 with all ranks advancing, no finalized
+SOURCE_LOCK/RESULT. No competing NPU load. CPU oracle cost and symmetric
+monitor compatibility now explicitly budget successor scheduling. Cutoffs
+and physical0–3 protection unchanged; existing OFF36 is reused.
+
+
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
