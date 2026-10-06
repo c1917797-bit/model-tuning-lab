@@ -75,3 +75,15 @@ The supported vLLM general-plugin entry point is the removable runtime
 delivery path; see DELIVERY.md. Final independent audit, rollback exercise,
 resource-release proof, optimization iteration, terminal classification and
 report are still pending.
+
+After the controller finishes, run the historical 18-unit audit produced by
+the wrapper, then record the measured optimization iteration and execute the
+post-treatment disabled-control rollback. Store optimization-iteration.json
+and rollback-evidence.json plus their raw files under the artifact root.
+Finally run audit_e2e_closure.py from this workstream with root
+/cache/cch/hypic-qwen36-e2e-2048-20261006 and output
+/cache/cch/hypic-qwen36-e2e-2048-20261006/e2e-closure-audit.json.
+
+The closure audit currently reports missing performance, quality, iteration,
+and rollback evidence, as expected while the first performance run is live.
+Do not treat this partial audit as a failure of the paper technique.
