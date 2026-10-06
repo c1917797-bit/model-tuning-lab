@@ -2,7 +2,7 @@
   "schema": "paper-to-ascend-skill-validation/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
   "status": "paper-only-performance-rejected; one-switch-iteration-rejected; paired-2048-quality-running",
-  "as_of_utc": "2026-10-06T17:57:00Z",
+  "as_of_utc": "2026-10-06T20:38:18Z",
   "checks": [
     {
       "skill": "chicaihong01-host-maintenance",
@@ -53,9 +53,9 @@
     },
     {
       "skill": "ascend-model-quality-evaluation",
-      "state": "separate-context-paired-ruler-running-baseline-startup",
-      "evidence": ["quality-context-41984/quality-context-contract.json", "quality_context_service.py", "quality_context_controller.py"],
-      "result": "historical complete LongBench maximum prompt 39642 plus 2048 cap requires 41690; independent 41984-context quality identity started at 17:56 UTC only after candidate release, without changing the original 40960-context performance denominator; physical worker PID-to-container proof is required at health",
+      "state": "separate-context-paired-ruler-running-baseline-longbench-run3",
+      "evidence": ["quality-context-41984/quality-context-contract.json", "quality-context-41984/quality/no-cache/longbenchv2.run1.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run1.jsonl", "quality-context-41984/quality/no-cache/longbenchv2.run2.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run2.jsonl", "quality_context_service.py", "quality_context_controller.py", "HANDOFF.md"],
+      "result": "The separate 41984-context baseline served the full 39642-token LongBench sample 48 without truncation. Runs 1 and 2 each completed 127/127 with zero failures and independent raw-hash, response-hash, index, output/context and summary checks; run 3 is live. The original 40960-context performance denominator remains unchanged. This is not yet a frozen three-run quality baseline or paired verdict.",
       "remaining": ["complete and freeze six baseline and six treatment quality suites", "classify accuracy, categories and length-limit rate", "independent raw audit and resource release"]
     },
     {
