@@ -1,5 +1,31 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Live checkpoint — 2026-10-06 17:40 UTC
+
+The only candidate controller remains AWMCP operation
+`exec-0000000000000590`, confirmed live on `chicaihong01/ma`; do not launch a
+duplicate. Candidate run 2 finished at 17:31:59 UTC with 40/40 fixed-output
+requests, TTFT P95 46,189.74 ms, TPOT P95 418.61 ms, throughput 31.76
+tokens/s, and duration 1,289.66 s. Run 3 is active. Because runs 1 and 2
+both miss the throughput, TPOT, and duration thresholds, no possible run 3
+can make the predeclared three-run median pass those metrics. Preserve the
+third run and exact automatic cleanup; do not relabel the candidate as a
+paper-only improvement.
+
+Before 2048-token quality traffic, the paired quality decision rule was
+committed as `673d016`, the missing Docker image/command in the unrun quality
+container create path was repaired as `7ea33bf`, and closure plus independent
+quality-decision auditing were committed as `79f8ae7` and `9c6d604`.
+Syntax, `git diff --check`, and `./scripts/validate-mst.sh` passed. The
+independent decision check passed a synthetic normal case and rejected a
+tampered reported classification. The separate quality-context contract still
+matches SHA256 `fa7915cdab4c836869f867184de563dd407c237979a48b691098518aacc9373d`.
+Quality NPU traffic has **not** started. Once the candidate handle is terminal,
+verify its exact container removal, physical NPU0-3 process release, and port
+8223 release; run `record_optimization_iteration.py`, then start the single
+paired quality controller described below. Host HTTPS Git authentication is
+still unavailable; preserve local commits without exposing credentials.
+
 ## Objective
 
 Complete a fresh HYPIC Paper-to-Ascend validation on physical NPU0-3 within
