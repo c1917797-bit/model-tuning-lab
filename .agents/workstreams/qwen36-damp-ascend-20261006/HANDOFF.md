@@ -164,3 +164,43 @@ trailing/extra-EOF whitespace in copied licenses and frozen source files;
 retain this negative check and exact source bytes rather than silently changing
 the sources bound to existing binaries. See SOURCE_CHECKPOINT.md. This is an
 attempt/evidence checkpoint, not correctness, performance or quality acceptance.
+
+## 12:08Z reviewed build and live checkpoint
+
+MA027a freshly verified NPU4-7 contain only owned TP4 workers744181/744186/
+744190/744192; protected0-3 have no compute PID. Native off client capture has
+8/36 completed rows; on has not started. MA0161 remains RUNNING. This is TRAIN
+trajectory collection, not a formal timing or task-accuracy result.
+
+MAIN fully reviewed the frozen16-file isolated quantizer and independent
+reference/gate. Quantizer NO-device ASC build actually exited0; library SHA
+6819530a2ca5c9e11fef283e36090224170c3ac9566b15bd527a73c21dfee9d8.
+Its C++ host test116015 pairs had0 mismatch; MA0267 actual load/schema/Meta
+also exited0 with npu_executed=false. Never promote these to NPU correctness.
+The first build-launch response had no structured route proof; MAIN did not
+duplicate it. Later exact-container inspection and terminal receipt confirmed
+the owned no-device build outcome. Production v4 remains unchanged/FAILED.
+
+General-SR independent reference now uses public ND conversion for its4D FP32
+eager allocation; native copied arithmetic remains source-bound and unchanged.
+Raw after-state/output is retained before shape/format/finite/alias assertions,
+with complete byte-interval and stable-pointer guards. An anchor-only mode
+allows six native-reference cases without rerunning unchanged failed compression.
+Initial software MA024a misplaced-test-loop NameError was repaired; the original
+failure is not erased. Actual MA0262 native source contract,15 software tests and
+ASC build all passed. Library SHA
+853f655c45c11cb5de5a1b0810c9a8850c0b66aea4c9aa049e01ac89f1aeccc8.
+Independent native NPU anchors are still pending, not yet general-SR acceptance.
+
+Next: preserve live collector bytes, finish full source validation; only then
+use newly inspected4-7 mapping for exact-bit quantizer and independent native
+anchors. No parallel NPU microtest during TP4 capture. fast_integer_certificate
+is a new uncompiled draft, excluded from this reviewed checkpoint, as is the
+unreviewed KVBuffer parallel project. Its real CANN Broadcast temporary UB and
+producer/consumer synchronization require review before device deployment.
+
+Read SOURCE_GAP_AUDIT_20261006.md: seven ofeight previously unarchived source
+titles were verified; OpenReview title remains unresolved. Applicability/source
+screens are not eight completed migrations or eight negative service results.
+No new non-HYPIC final performance/task acceptance exists. Portfolio cutoff
+2026-10-09T11:17:31Z and DAMP cutoff2026-10-07T08:48:03Z remain fixed.

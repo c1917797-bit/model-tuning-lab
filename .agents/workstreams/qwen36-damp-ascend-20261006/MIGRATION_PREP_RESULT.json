@@ -1,6 +1,6 @@
 {
   "schema": "damp-migration-preparation/v1",
-  "observed_at": "2026-10-06T11:33:24Z",
+  "observed_at": "2026-10-06T12:08:00Z",
   "status": "progress_acceptance_not_met",
   "delivery": "independent explicit-opt-in plugin/monkeypatch; no original runtime/image edits",
   "collector": {
@@ -130,8 +130,8 @@
       "manifest_sha256": "f348e0b0404e2f3a619b986f5c1152427c52f1a3550386ee1f894eafa6986b33",
       "scope": "36 TRAIN x1024 input x4096 fixed reference output; batch4; native off/on; no timing or quality claim",
       "latest_live_proof": {
-        "operation": "exec-00000000000001c0",
-        "native_off": "model load+warmup complete; first4 TRAIN requests admitted; client rows pending; all4 TP workers survive narrow external physical4 release",
+        "operation": "exec-000000000000027a",
+        "native_off": "8 of36 client rows completed; native on not started; full validation/source lock pending",
         "host_worker_pids": [
           744181,
           744186,
@@ -192,10 +192,11 @@
   },
   "software": "Parent identity12 software PASS; same-image calibration19 PASS. Other child software totals remain separate receipts; no software test substitutes for NPU acceptance.",
   "next": [
-    "poll existing full capture MA0161, do not duplicate; require new request observer and full TP4/all48 validation before source lock or fitting",
-    "repair same-input quantizer IEEE FP32 division/RNE seam using deployed 910B4 primitives without changing tolerance/oracle; retain original failures",
-    "anchor independent FP32 generalSR oracle on actual native path; changed-input graph gate before service",
-    "real mixed cache allocation/dispatch, matched fixed1024 E2E, then final task accuracy"
+    "poll full capture MA0161 without duplicate; complete same-eager native off/on TP4/all48 source lock before fitting",
+    "after capture, fresh NPU4-7 preflight then isolated exact-bits and independent native-reference anchor gates in new directories",
+    "integrate only numerically proven quantizer, run restricted/general-SR multi-step and graph/cache gates with unchanged limits",
+    "matched fixed1024 service screen; only valid high-potential candidate advances to three paired repetitions and final2048 EOS tasks",
+    "continue KVBuffer distinct parallel-fold preparation without competing NPU job; actual UB temporary/API synchronization review remains pending"
   ],
   "acceptance": {
     "throughput": null,
@@ -435,5 +436,53 @@
     "protected_0_3_untouched": true,
     "first_precondition": "MA01b5 failed before signals: process-table NPU/Chip share one column; corrected parser checked on actual snapshot before MA01c0",
     "formal_timing": false
+  },
+  "isolated_quantizer": {
+    "status": "actual_ASC_compile_and_load_schema_Meta_pass; NPU_pending",
+    "build_root": "/cache/cch/qwen36-damp-20261006/quantizer-build-v1",
+    "library_sha256": "6819530a2ca5c9e11fef283e36090224170c3ac9566b15bd527a73c21dfee9d8",
+    "build_receipt_sha256": "59e20820a397748614fc04f8e8f52de469706f52149f5c35225abf8f494d07fa",
+    "meta_operation": "exec-0000000000000267",
+    "meta_report": "/cache/cch/qwen36-damp-20261006/quantizer-meta-v1-launch/result/report.json",
+    "meta_report_sha256": "09d6487db56911724e381f639fec78e6ad54b1661bff01cf7d376b9cc01a6a20",
+    "host_cpp_pairs": 116015,
+    "host_cpp_mismatches": 0,
+    "npu_executed": false,
+    "production_integrated": false,
+    "fast_enabled": false,
+    "not_proven": [
+      "physical SoC/ND/alias correctness",
+      "NPU exact arithmetic",
+      "graph replay",
+      "production recurrence",
+      "service performance",
+      "task accuracy"
+    ],
+    "transport_note": "initial build launch response lacked structured route proof; no duplicate launch; later exact owned-container inspect/terminal receipt established successful no-device build"
+  },
+  "native_general_sr_reference": {
+    "status": "independent_source_contract_15_tests_ASC_compile_pass; NPU_anchors_pending",
+    "operation": "exec-0000000000000262",
+    "build_root": "/cache/cch/qwen36-damp-20261006/native-sr-reference-build-v1",
+    "library_sha256": "853f655c45c11cb5de5a1b0810c9a8850c0b66aea4c9aa049e01ac89f1aeccc8",
+    "build_receipt_sha256": "8ef4c9a51c51b082695cfe130bf5263257f0b5aedc6a360fa9cb0520e9658e28",
+    "wrapper_sha256": "71c69bae01a6e15e3f4b9f9cac80bcab08916acf83ec08412eb06653b8f4b9ba",
+    "repairs": [
+      "public physical ND conversion for4D FP32 eager result outside capture",
+      "complete byte-interval nonalias checks",
+      "raw native/reference/candidate outputs and input-after retained before rejection",
+      "pointer stability on all inputs/results",
+      "anchor-only mode does not dispatch unchanged failed compressed candidate"
+    ],
+    "initial_software_failure": "MA024a NameError pins: misplaced test loop; repaired placement, original failure retained; MA024e14 then MA0255/MA0262 15 tests pass",
+    "compressed_candidate_unchanged": true,
+    "npu_executed": false
+  },
+  "supplemental_source_audit": {
+    "path": "SOURCE_GAP_AUDIT_20261006.md",
+    "sha256": "eb0e4297fdd478f95bbb4c3ff5fb8dc725d1a690abd1731104e8e7fb9a77f81c",
+    "verified_titles": 7,
+    "unresolved_openreview": 1,
+    "not_completed_migrations": true
   }
 }

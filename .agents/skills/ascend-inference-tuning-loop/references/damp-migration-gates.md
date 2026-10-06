@@ -173,3 +173,33 @@ The required next evidence remains actual mixed-state NPU correctness,
 changed-input graph replay, real cache-manager allocation, matched E2E timing,
 and task accuracy. Passing preparation, a collector hook or build is not
 passing this chain. Preserve the current paper's 24-hour decision deadline.
+
+## Additional scoped preparation lessons
+
+- Retain raw outputs, full state and every input-after snapshot before an
+  assertion can reject physical format, finite values, aliasing or corrupted
+  payloads. Otherwise the first useful device failure can destroy its own
+  attribution evidence. Nonalias checks use complete live byte intervals,
+  not merely different data_ptr values; require stable pointers as well.
+- Validate an independent reference before the candidate. An explicit
+  anchor-only mode can exercise native/FP32 reference parity without rerunning
+  a known-failed compressed implementation. Candidate traces are not its oracle.
+- A no-device ASC compile and successful load/Meta proves only that scoped
+  build/registration path. The quantizer passes these actual checks here, but
+  physical SoC, ND allocation, synchronization, multi-step and graph correctness
+  remain separate NPU gates. CPU exact-bit counts never substitute for them.
+- A static early-return warning needs paired-event control-flow inspection:
+  skipping both SetFlag and WaitFlag differs from returning after SetFlag and
+  leaving an orphan wait. Preserve original findings and the manual rationale;
+  neither a quiet regex scan nor this rationale proves real device ordering.
+- For DAMP RN32 division followed by integer RNE, an integer-only endpoint
+  certificate can avoid assuming a FP32 vector Mul rounding/FTZ contract.
+  Strict interior acceptance, safe0/127 clamps, valid normal endpoint domain
+  and exact fallback are mandatory. Twelve-bit product-limb carries must stay
+  integer because intermediate values can exceed2^24. Independent software
+  checks found no unsafe acceptance; actual SIMD source/ASC/NPU gates and
+  end-to-end cost still remain. Keep this draft disabled in production.
+- Budget real CANN implementation temporaries as well as explicit queues.
+  Four-argument Broadcast on this dav-c220 path pops a shared LCM stack buffer;
+  a sum of authored UB allocations alone is not a complete kernel UB proof.
+  Audit that hidden path and actual producer/consumer barriers before deployment.

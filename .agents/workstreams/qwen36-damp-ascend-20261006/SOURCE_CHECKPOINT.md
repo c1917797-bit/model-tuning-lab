@@ -40,3 +40,26 @@ checkpoint must publish them after MAIN review and scoped verification.
 Original restricted compressed recurrence is still FAILED. No current DAMP
 throughput/TTFT/TPOT, LongBench-v2 or GSM8K result exists. The 72h deadline and
 one genuinely usable non-HYPIC requirement are unchanged.
+
+## Reviewed preparation checkpoint after7d60821
+
+The earlier pending list is historical. MAIN now fully reviewed the frozen
+16 quantizer files,10 independent reference files and four general-SR gate/
+contract documents/scripts, plus the eight-source audit. Actual CANN9.1
+NO-device quantizer compile/load/Meta and independent-reference compile/source
+contract/15 software checks passed with receipt identities in
+MIGRATION_PREP_RESULT.json. No NPU arithmetic, production recurrence, graph,
+full service, E2E performance or task-quality pass is inferred.
+
+The new fast_integer_certificate subdirectory and
+projects/kvbuffer-parallel-ascend remain explicitly excluded: mathematical/
+software preparation is not actual source/ASC/NPU integration approval.
+Old production/trace/collector bytes and failed reports are untouched.
+All binary artifacts, tensors and raw build logs stay outside Git.
+
+MA028a staged exactly35 reviewed files and verified their staged SHA bytes.
+Maintainer Skill Tree20 skills PASS. Full staged whitespace check exited2,
+not PASS: copied native/license trailing whitespace and extra EOF blanks in
+frozen quantizer sources/docs. Keep these exact built-source bytes and the
+negative check; do not silently reidentify sources to make a style scan green.
+KVBuffer and fast-integer-certificate drafts are absent from this stage.
