@@ -71,6 +71,16 @@ Run1 TTFT P95 was 92,633.55 ms; TPOT P95 457.29 ms; output throughput
 repetition, not the three-run baseline denominator. Controller moved to
 baseline performance run2 immediately afterward.
 
+At 2026-10-06 13:01 UTC, commit `4387542` was pushed on the workstream
+branch. The E2E performance gate now validates all 40 measured request rows,
+both warmups, the exact protocol, fixed output lengths, and summary arithmetic
+before accepting raw JSON or reusing a run on a future resume. The real run1
+passed this validator; a deliberately corrupted in-memory request was rejected.
+The running shell controller was not restarted for this code change, so its
+already-loaded per-run function is the earlier version; its later on-disk
+performance gate will execute the strengthened validator before quality work.
+Future controller starts use the strengthened per-run reuse check as well.
+
 An initial controller operation, exec-0000000000000263, was stopped before
 service readiness after an escaped E2E_GATES variable entered the historical
 sequence. It produced no performance or quality result. Its exit code was
