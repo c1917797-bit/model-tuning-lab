@@ -1,8 +1,8 @@
 {
   "schema": "paper-to-ascend-skill-validation/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
-  "status": "paper-only-performance-rejected; one-switch-iteration-rejected; paired-2048-quality-running",
-  "as_of_utc": "2026-10-06T21:45:03Z",
+  "status": "terminal-negative: paper-performance-rejected; optimization-rejected; paired-2048-quality-incomplete; fail-fast-evidence-audited-and-resources-released",
+  "as_of_utc": "2026-10-06T22:06:00Z",
   "checks": [
     {
       "skill": "chicaihong01-host-maintenance",
@@ -35,7 +35,7 @@
       "skill": "paper-to-ascend-reproduction",
       "state": "partial-component",
       "evidence": ["canary-gate.json", "performance-gate.json"],
-      "remaining": ["separate 41984-context paired 2048-token quality is running; no quality conclusion yet", "independent 18-unit audit awaits all quality runs", "C3 paper-complete stages remain absent"]
+      "remaining": ["paired 2048-token quality was stopped fail-fast after 80/1319 GSM8K baseline rows; no quality conclusion", "full 18-unit paired audit cannot run without matching treatment", "C3 paper-complete stages remain absent"]
     },
     {
       "skill": "ascend-performance-optimization",
@@ -53,21 +53,22 @@
     },
     {
       "skill": "ascend-model-quality-evaluation",
-      "state": "separate-context-paired-ruler-running-baseline-gsm8k-run1",
-      "evidence": ["quality-context-41984/quality-context-contract.json", "quality-context-41984/quality/no-cache/longbenchv2.run1.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run1.jsonl", "quality-context-41984/quality/no-cache/longbenchv2.run2.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run2.jsonl", "quality-context-41984/quality/no-cache/longbenchv2.run3.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run3.jsonl", "quality_context_service.py", "quality_context_controller.py", "HANDOFF.md"],
-      "result": "The separate 41984-context baseline served the full 39642-token LongBench sample 48 without truncation in all three completed 127/127 runs. Each run passed independent raw-hash, response-hash, index, output/context and summary checks. GSM8K baseline run 1 is live; the full six-run baseline registry and paired quality verdict remain pending. The original 40960-context performance denominator remains unchanged.",
-      "remaining": ["complete and freeze six baseline and six treatment quality suites", "classify accuracy, categories and length-limit rate", "independent raw audit and resource release"]
+      "state": "incomplete-fail-fast-not-a-quality-verdict",
+      "evidence": ["quality-context-41984/quality-context-contract.json", "quality-context-41984/quality/no-cache/longbenchv2.run1.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run1.jsonl", "quality-context-41984/quality/no-cache/longbenchv2.run2.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run2.jsonl", "quality-context-41984/quality/no-cache/longbenchv2.run3.summary.json", "quality-context-41984/quality/no-cache/longbenchv2.run3.jsonl", "quality-context-41984/quality/no-cache/gsm8k.run1.jsonl", "quality-context-41984/no-cache/service-stop.json", "fail-fast-independent-audit.json"],
+      "result": "Three complete 127/127 baseline LongBench runs independently verified the full 39642-token sample 48 under the separate 41984-context ruler. GSM8K run 1 retained 80/1319 valid partial rows before deliberate fail-fast; no GSM8K accuracy or HYPIC-vs-baseline quality conclusion is valid. The full six-run baseline registry was not frozen. The original 40960-context performance denominator remains unchanged and rejected.",
+      "remaining": ["a future newly planned full paired quality campaign is needed before any no-regression claim"]
     },
     {
       "skill": "paper-to-ascend-reporting",
-      "state": "pending",
-      "remaining": ["auditable final report and claim boundaries"]
+      "state": "completed-negative",
+      "evidence": ["REPORT.md", "fail-fast-independent-audit.json", "e2e-closure-audit.json"],
+      "result": "Final report distinguishes verified negative performance result, rejected optimization, partial 2048-token quality, independent negative-evidence integrity, and released resources."
     },
     {
       "skill": "mst-maintainer-handoff",
-      "state": "partial",
-      "evidence": ["HANDOFF.md"],
-      "remaining": ["terminal decision and final raw artifact hashes"]
+      "state": "completed-negative",
+      "evidence": ["HANDOFF.md", "fail-fast-independent-audit.json"],
+      "result": "Terminal classification, raw hashes, exact resource release, and future rerun boundary recorded."
     }
   ]
 }

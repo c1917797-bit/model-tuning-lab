@@ -1,6 +1,6 @@
-# HYPIC Qwen3.6-27B TP4 · Paper-to-Ascend 穿刺进度报告
+# HYPIC Qwen3.6-27B TP4 · Paper-to-Ascend 穿刺终态报告
 
-> 状态：progress，非终版；截至 2026-10-06 21:56 UTC。
+> 状态：rejected / fail-fast，终态；截至 2026-10-06 22:06 UTC。
 > 实验 ID：hypic-qwen36-e2e-2048-20261006。
 > 当前证据来自本次实验；历史 HYPIC 标签 paper-result/hypic-qwen36-tp4-adopted 仅作历史参考，不进入本次结果列。
 > 本轮只支持“方向及部分组件机制复现”的讨论，不支持“论文完整性能复现”或“可采用”结论。
@@ -25,7 +25,7 @@
 
 原始性能协议：32,768 输入 token，16,384 共享前缀，固定 1,024 输出 token，40 请求、并发 16、每组 2 个预热请求、3 轮；ignore_eos=true。每一轮均为 40/40 成功且固定输出长度得到原始行校验。规范入口和实际环境变量在本工作流 run_hypic_e2e_2048.sh；相同配置服务的真实容器记录与命令在证据根目录的环境快照和各组 service-start/service-stop 文件。
 
-质量协议与性能协议分离：LongBench-v2 127 条、GSM8K 1,319 条；每组每数据集 3 轮、并发 32、最大输出 2,048、自然 EOS、温度 0、seed 0、关闭 thinking。LongBench 原始数据 SHA256 cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a；GSM8K SHA256 3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14；评测器 SHA256 9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0。质量契约 SHA256 fa7915cdab4c836869f867184de563dd407c237979a48b691098518aacc9373d，位于 quality-context-41984/quality-context-contract.json。单个 LongBench 长提示为 39,642 token，连同 2,048 上限共需 41,690；因此两组质量服务都使用 41,984 上下文，并与 40,960 性能服务分开比较。当前唯一运行控制器为 AWMCP exec-000000000000064a；严禁再启动第二个服务。
+质量协议与性能协议分离：LongBench-v2 127 条、GSM8K 1,319 条；计划每组每数据集 3 轮、并发 32、最大输出 2,048、自然 EOS、温度 0、seed 0、关闭 thinking。LongBench 原始数据 SHA256 cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a；GSM8K SHA256 3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14；评测器 SHA256 9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0。质量契约 SHA256 fa7915cdab4c836869f867184de563dd407c237979a48b691098518aacc9373d，位于 quality-context-41984/quality-context-contract.json。单个 LongBench 长提示为 39,642 token，连同 2,048 上限共需 41,690；因此质量服务采用独立的 41,984 上下文身份，绝不冒充 40,960 性能分母。唯一控制器 AWMCP exec-000000000000064a 已于 22:00 UTC 以退出码 2 结束；不得重复启动或把部分质量数据称为配对结论。
 
 ## 实测性能：三轮原始值与冻结门禁
 
@@ -53,7 +53,9 @@
 
 ## 精度与机制证据边界
 
-无缓存 LongBench-v2 基线 run1、run2、run3 分别为 71/127（55.9055%）、77/127（60.6299%）、74/127（58.2677%）；三轮均 127/127 成功，独立核验了完整索引、原始文件与逐行响应哈希、2,048 输出上限、41,984 上下文上限及汇总算术。三轮 JSONL SHA256 依次为 670832c4e063724bd08e1aab282a819a66dbfaa6f0e094b60f8d6850fa3183fa、e7ded491a9b7f995ca035c9c0d10011002eaf48e4a9aa84bed963b5160650031、a0391b097ca8734042d7855b629191fde68e5fe377b14c0056622a4fc57b4982。LongBench 三轮准确率均值 58.2677%，样本标准差 2.3622 个百分点；这是单组描述，不是配对质量结论。GSM8K 基线 run1 正在运行，约 13 分钟仅完成 60/1,319 条，服务生成速率约 35–43 token/s；按当前速率估算，单轮可能超过控制器的 2 小时上限。这个估算不是终态，运行中的 60 条也不是准确率结论。完整六轮基线注册表尚未冻结，G2 配对质量与安全门禁均未判定。
+无缓存 LongBench-v2 基线 run1、run2、run3 分别为 71/127（55.9055%）、77/127（60.6299%）、74/127（58.2677%）；三轮均 127/127 成功，独立核验了完整索引、原始文件与逐行响应哈希、2,048 输出上限、41,984 上下文上限及汇总算术。三轮 JSONL SHA256 依次为 670832c4e063724bd08e1aab282a819a66dbfaa6f0e094b60f8d6850fa3183fa、e7ded491a9b7f995ca035c9c0d10011002eaf48e4a9aa84bed963b5160650031、a0391b097ca8734042d7855b629191fde68e5fe377b14c0056622a4fc57b4982。LongBench 三轮准确率均值 58.2677%，样本标准差 2.3622 个百分点；这是单组描述，不是配对质量结论。
+
+GSM8K 基线 run1 于 21:43:15 UTC 启动，到约 22:00 UTC 仅完成 80/1,319 条。服务持续约 35–43 token/s；按观测速率，完整单轮会明显超过预设 2 小时上限。由于论文性能门禁已失败，执行 fail-fast：只向该轮评测子进程发送 TERM，让控制器的失败处理与 `finally` 释放自有容器。80 条部分 JSONL 完整保留，SHA256 4732761d2a59a95fb10051cb7783fd5f393730bad0bc5d92019d3529edc5d215；独立审计检查唯一索引、逐响应哈希、成功状态、2,048 输出上限和 41,984 上下文上限均通过。部分正确数不作为准确率报告。完整六轮基线注册表未冻结，HYPIC 治疗组未运行，因而不能判定质量无损、回归或通过。
 
 原生设备 Profiling 在四个 TP rank 都捕获了 Prefill 与 Decode 原始数据；Prefill 完整导出，Decode 离线分析只覆盖 rank 0/1/3，rank 2 原始数据保存但离线导出不完整。匹配 rank 上 Prefill AllReduce 数量从 774 降到 387，但 Decode 增量数量两组均为 16,383。profile-diagnostic.json 是诊断证据，不是性能门禁；CANN 多流任务耗时不可相加推断可节约的端到端墙钟时间。
 
@@ -65,11 +67,12 @@
 | 论文组件激活 | 部分验证 | Prefill 机制与 TTFT 方向成立，C3 完整机制未证实 |
 | 论文端到端性能收益 | rejected | 四项门禁仅一项通过 |
 | 追加优化迭代 | rejected | 已完成一次真实测量迭代，但未达到采纳门槛 |
-| 2048 配对质量 | pending | 不允许称无精度损失 |
-| 全部证据独立审计 | pending | 不能声称实验闭环完成 |
-| 最终资源释放与交接 | pending | 当前质量基线服务仍占 NPU0–3 |
+| 2048 配对质量 | incomplete-fail-fast | 仅完成三轮 LongBench 基线和 80 条 GSM8K 部分行；不能称无精度损失或回归 |
+| 独立负向证据审计 | passed | 六轮性能、三轮完整 LongBench、部分 GSM8K 和当前资源释放证据一致；这不等于算法通过 |
+| 完整 18 单元配对/采纳审计 | not-evaluable | 缺完整基线与治疗组；正式闭环检查保持失败 |
+| 最终资源释放与交接 | passed | 精确质量容器已移除，8223 无监听，NPU0–3 无进程，早于截止时间 |
 
-已完成的回滚演练见 rollback-evidence.json：禁用请求通过、treatment marker 缺席、当时的两个自有容器与端口/NPU 均已释放。这不等于当前质量服务已释放。候选 G3 也已在质量开始前单独释放。当前真实质量基线容器中的四个 TP worker PID 与物理 NPU0–3 的 PID 对应；不得触碰 NPU4–7 的其他进程。
+已完成的回滚演练见 rollback-evidence.json：禁用请求通过、treatment marker 缺席、当时的两个自有容器与端口/NPU 均已释放。候选 G3 也已在质量开始前单独释放。本轮质量容器的 service-start/service-stop 收据与独立实时检查进一步证明其四个 TP worker 曾对应物理 NPU0–3，且现在精确容器被移除、端口及 NPU0–3 已释放；未触碰 NPU4–7。
 
 ## 证据索引与恢复边界
 
@@ -78,7 +81,8 @@
 - 原始 Canary 与回滚：canary-gate.json、rollback-evidence.json。
 - 优化尝试：optimization-iteration.json；所有 G3 原始哈希记录在其 raw_sha256 字段。
 - 设备诊断：profiles/profile-diagnostic.json；缺失的 rank 2 Decode 离线导出必须显式保留为限制。
-- 当前精度：quality-context-41984/controller-status.json 与 quality/no-cache 下各轮 JSONL、summary、log。只在整轮完成后核验；不得从运行中样本推导终态。
-- 实时恢复入口：先查 AWMCP exec-000000000000064a 是否仍在运行。活着时只轮询，绝不重复启动。若终止，则核验精确容器、NPU0–3 与端口 8223，再根据保留的 JSONL、registry 和 HANDOFF.md 分类或恢复。控制器自身的安全截止是 2026-10-07 11:24:37 UTC；实验目标截止是 11:39:37 UTC。
+- 已完成与部分精度：quality-context-41984/controller-status.json、no-cache/service-start.json、no-cache/service-stop.json、quality/no-cache 下三轮 LongBench 的 JSONL/summary 和 GSM8K run1 的 80 条部分 JSONL。只对整轮 LongBench 计算描述值；不得从部分 GSM8K 推导准确率。
+- 独立负向审计：fail-fast-independent-audit.json，SHA256 93fdb954f186cfd2ec3d892c0f445b57b8c2f045c033366e5f44b47c09261bf4，`evidence_integrity_ok=true` 且零错误；`paper_algorithm_accepted=false`、`quality_classification=incomplete-fail-fast`。正式 e2e-closure-audit.json 的 `ok=false`，缺项为 baseline_registry_quality、performance_gate_pass、independent_18_unit_audit_present、quality_context_audit_present。这些是诚实的负向闭环边界。
+- 控制器与资源：AWMCP exec-000000000000064a 已终止，退出码 2；质量容器 ID eeb65fd29e054783ce8ba6f9165ea54d38a2575f170225ddf11b3e7584b9f12a 的 stop 收据时间为 2026-10-06 22:00:04 UTC。独立实时核对确认精确容器不存在、8223 无监听、NPU0–3 无进程，早于 2026-10-07 11:39:37 UTC 截止。
 
-最终报告须在控制器终止并完成独立审计后重新核对所有结果、补齐质量配对表和终态分类，并证明当前质量容器及 NPU0–3 已释放。此进度报告不可作为采用或论文完整复现证明。
+结论：本次端到端穿刺以 **论文性能门禁未通过** 收束。真实权重、可回滚交付、性能负向证据、一次测量优化迭代、部分 2048-token 质量基线、独立负向审计和资源回收均有证据；但完整 HYPIC 论文性能目标及配对质量安全未被证明。不可将本轮标为 adopted；未来若要完成完整配对质量，应另行规划足够时长并冻结新的匹配实验身份，不能复用本轮未完成基线充当通过证明。

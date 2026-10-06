@@ -1,5 +1,49 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Terminal fail-fast handoff — 2026-10-06 22:06 UTC
+
+This workstream is **rejected**, not adopted. The paper-only predeclared
+performance gate failed three of four metrics; the separate, measured
+HYPIC+MatMulAllReduce iteration was also rejected. Real-weight Canaries,
+rollback, and three no-cache LongBench-v2 baseline runs passed their own
+evidence checks, but **paired 2048-token quality is incomplete**: GSM8K run 1
+retains 80/1,319 partial rows (SHA256
+`4732761d2a59a95fb10051cb7783fd5f393730bad0bc5d92019d3529edc5d215`),
+and there is no frozen six-run quality baseline or HYPIC treatment quality.
+Do not report partial-row accuracy or claim quality pass/regression.
+
+The only controller, AWMCP `exec-000000000000064a`, ended with exit code 2.
+The exact GSM8K evaluator child PID 2395028 was stopped with TERM after its
+observed throughput made the 2-hour per-run limit infeasible and the paper
+gate was already negative. The controller's own exception/finally path
+recorded `quality-arm-failed`, then `quality-arm-released` at 22:00:04 UTC.
+The quality container ID
+`eeb65fd29e054783ce8ba6f9165ea54d38a2575f170225ddf11b3e7584b9f12a`
+was removed. Independent post-stop checks found NPU0–3 process-free, port
+8223 without a listener, and the exact owned containers absent. NPU4–7 were
+not altered. This all preceded the 2026-10-07 11:39:37 UTC deadline.
+
+The new `audit_fail_fast_closure.py` independently recomputed the six raw
+performance units and rejected gate, checked all three completed LongBench
+baselines and 80 partial GSM8K rows, verified frozen contracts, Canary,
+optimization raw hashes, rollback, exact worker/container identity, and live
+release. Its artifact `fail-fast-independent-audit.json` has
+`evidence_integrity_ok=true`, zero errors, SHA256
+`93fdb954f186cfd2ec3d892c0f445b57b8c2f045c033366e5f44b47c09261bf4`.
+This is **negative-evidence integrity**, not algorithm acceptance. The original
+`audit_e2e_closure.py` remains `ok=false` with four explicit failed checks:
+`baseline_registry_quality`, `performance_gate_pass`,
+`independent_18_unit_audit_present`, and `quality_context_audit_present`.
+`REPORT.md`, `task.json`, `experiment.json`, and `skill-validation.json`
+carry the same terminal classification. The local branch preserves the
+source/report history; host HTTPS Git credentials remain unavailable, so do
+not claim these latest commits are on the remote.
+
+Do not restart this frozen run or rebrand the historical 1024-token evidence
+as the requested 2048-token result. A future full paired quality campaign
+would require a new, explicitly budgeted experiment identity and matching
+baseline/treatment, with no NPU4–7 access assumed.
+
 ## Live checkpoint — 2026-10-06 21:56 UTC
 
 The same AWMCP controller `exec-000000000000064a` is confirmed live on the

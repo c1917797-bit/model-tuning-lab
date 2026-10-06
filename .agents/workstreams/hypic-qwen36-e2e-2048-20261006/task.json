@@ -2,7 +2,7 @@
   "schema": "paper-to-ascend-task/v1",
   "task_id": "hypic-qwen36-e2e-2048-20261006",
   "objective": "Validate the maintained Paper-to-Ascend skill chain with a fresh HYPIC Qwen3.6-27B TP4 experiment on physical NPU0-3 within 24 hours.",
-  "state": "running",
+  "state": "rejected",
   "branch": "work/hypic-qwen36-e2e-2048-20261006",
   "base_commit": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
   "resource_claim": {
@@ -20,5 +20,5 @@
     "stop_new_long_units_before_deadline": true,
     "release_resources_before_terminal_handoff": true
   },
-  "next_action": "Poll the confirmed-live AWMCP exec-000000000000064a for the separate 41984-context paired 2048-token quality controller. All three no-cache LongBench-v2 runs completed 127/127 and passed independent raw SHA256, index, response-hash, output/context, category and summary checks. GSM8K baseline run 1 started at 21:43:15 UTC and remains active. Do not launch a duplicate or another NPU0-3 service. Follow controller-status.json and each run log, validate each complete raw run, preserve partial JSONL on failure, freeze the full six-run baseline only after GSM8K runs 1-3 complete, then run the independent 18-unit audit after terminal release. The original paper-only performance gate and separate MatMulAllReduce iteration remain rejected."
+  "next_action": "Terminal fail-fast handoff: paper-only performance and the separate MatMulAllReduce optimization iteration are rejected. The paired 2048-token quality suite is incomplete, not a quality regression or pass: three baseline LongBench-v2 runs completed and GSM8K run 1 preserved 80/1319 partial rows. Controller exec-000000000000064a exited 2 after the exact GSM8K evaluator was stopped; its own cleanup removed the exact quality container and released NPU0-3/port 8223. fail-fast-independent-audit.json verifies negative evidence integrity with zero errors. Do not resume or relabel this frozen experiment. Any later full paired quality campaign needs an explicit new time/resource plan and its own matched identity."
 }
