@@ -81,6 +81,16 @@ already-loaded per-run function is the earlier version; its later on-disk
 performance gate will execute the strengthened validator before quality work.
 Future controller starts use the strengthened per-run reuse check as well.
 
+At 2026-10-06 13:14 UTC, baseline performance run2 completed and passed the
+strengthened validator: 40/40 successful, no failures, every measured request
+finished at exactly 1024 output tokens, and the two warmups and protocol matched.
+Raw JSON SHA256:
+`67bd0b74ee8605e4f5502498ab385d55009cd9581b115bef25f3b700b9120493`.
+Run2 TTFT P95 was 81,137.27 ms; TPOT P95 447.08 ms; output throughput
+29.74 token/s; benchmark duration 1,377.15 s. These remain individual
+repetitions, not the formal three-run denominator. The controller advanced to
+baseline performance run3 without restarting the service.
+
 An initial controller operation, exec-0000000000000263, was stopped before
 service readiness after an escaped E2E_GATES variable entered the historical
 sequence. It produced no performance or quality result. Its exit code was
