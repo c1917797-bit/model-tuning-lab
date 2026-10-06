@@ -1,0 +1,17 @@
+{
+  "default_enabled": false,
+  "gate_runtime": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/RUNTIME_MANIFEST.json",
+    "sha256": "7ea60a45ea46f28811c16455885eab46dbd78bce5586a8914f06a701dbcd4ed1"
+  },
+  "graph_supported": false,
+  "npu_executed": false,
+  "performance_measurement_admitted": false,
+  "schema": "damp-selected-prefill-component-admission-sources/v1",
+  "serving_ready": false,
+  "sources": {
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/READY.md": "44f33f4faa712ebb75fd8a69000ac88f80cab08990f1927d4e430a9bc91eb4f6",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/contract.py": "3f70975c0eb2e3c08f334e68d3f227f9c08f8c0bf1d2e204f6c4b4d00b087d75",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/tests/test_admission.py": "6ece437f0c3469178bd135ec84d2b4ef2b8be7ce60f1d0222642ba6ee1cf3a2a"
+  }
+}

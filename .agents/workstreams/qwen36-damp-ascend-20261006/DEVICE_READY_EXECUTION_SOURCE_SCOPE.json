@@ -1,0 +1,54 @@
+{
+  "schema": "damp-device-ready-execution-source-scope/v1",
+  "created_utc": "2026-10-06T17:20:00Z",
+  "reviewed_source_count": 8,
+  "sources": {
+    "projects/damp-ascend/tools/prefill_float_dispatch_v1/dispatch.py": "094defb90bfc6d748d13069a48bd24297d01caaab1720ef5b8a3bc32ecf87c9e",
+    "projects/damp-ascend/tools/prefill_float_dispatch_v1/test_dispatch.py": "be5b8dd71baea02b36a00608d84687a03da6e8f2aeb88794b102ff3fd34c40bb",
+    "projects/damp-ascend/tools/prefill_float_dispatch_v1/READY.md": "5b195facb2972730a3bdfee607629136b99a2b90feeb6da3140a56608fefff4a",
+    "projects/damp-ascend/tools/prefill_float_dispatch_v1/PACKET.json": "56e56ca61e4fe9169adb3da175f9b976097e4809fd4832b0108759630d3382f4",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/contract.py": "3f70975c0eb2e3c08f334e68d3f227f9c08f8c0bf1d2e204f6c4b4d00b087d75",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/tests/test_admission.py": "6ece437f0c3469178bd135ec84d2b4ef2b8be7ce60f1d0222642ba6ee1cf3a2a",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/READY.md": "44f33f4faa712ebb75fd8a69000ac88f80cab08990f1927d4e430a9bc91eb4f6",
+    "projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_v1/SOURCE_MANIFEST.json": "3c47ea050cb519b3e4ced87bd13f32b817a8cd74e9305502b429eab871b93db8"
+  },
+  "independent_evidence": [
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/prefill-float-dispatch-main-software-v1/RESULT.json",
+      "sha256": "ede436d1bffabd934112691202ff5e5b74fdbdc2ed7f490e362146d60848220e",
+      "operation": "exec-00000000000005e5",
+      "scope": "16 stdlib tests/default CLI/source-only; no Docker/Torch/NPU"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/selected-prefill-admission-main-software-v1/RESULT.json",
+      "sha256": "1ddb52d7580eff5407730654d138de45b5fd4bcf1e8a0570cfc226f4fd16d4cb",
+      "operation": "exec-00000000000005df",
+      "scope": "24 stdlib tests; no NPU"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-native-library-snapshot-v1/MANIFEST.json",
+      "sha256": "7a6675fc13ad41dab32acbbdb40d78adb8345b43e0aaa61b8cdb0e804ff18c0b",
+      "operation": "exec-00000000000005e6",
+      "scope": "readonly copy from exact stopped immutable no-device container; not loaded maps"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/runtime-native-library-snapshot-v1/SOFTWARE_RESULT.json",
+      "sha256": "b31a0719dc1c45e47b97e0348e0cde9b6acff30ec5d1a78abe87a69fe690f453",
+      "operation": "exec-00000000000005e6",
+      "scope": "complete validator SYNTHETIC in-memory fixture using real native binary bytes; not actual NPU authority"
+    }
+  ],
+  "default_off": true,
+  "npu_executed_by_new_packets": false,
+  "serving_ready": false,
+  "performance_claim": false,
+  "task_accuracy_claim": false,
+  "previous_checkpoint": "d7e7d8c50f6d11ec573e6165a441e645ae87aeb0",
+  "excluded_unreviewed_drafts": [
+    "integration/service_assembly_v1",
+    "tools/selected_prefill_dispatch_v1",
+    "older integration/integer_compaction_v1 and service_all_batch_v2",
+    "final_plan_gate_v1/calibrated_plan_admission_v2 coherent publication"
+  ],
+  "unchanged_deadline": "2026-10-07T08:48:03Z"
+}

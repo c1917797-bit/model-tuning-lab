@@ -374,3 +374,30 @@ with hidden state copies or mutate frozen binaries/receipts.
   no-hot-D2H policy or throughput result. A B1/B16 native-prefill packet cannot
   authorize intermediate P2–15, mixed48-layer service, graph or final192 plans.
   Keep those obligations explicit instead of upgrading status-only reports.
+
+## Pre-mkdir failures and exact execution readiness, 17:20Z
+
+- A failure-evidence writer can itself replace the original error. Inspect the
+  actual mkdir/source-admission order, not a presumed order. The frozen float
+  gate binds sources before creating output; the NEW wrapper catches only its
+  own loaded-map evidence write, records it separately and rethrows the same
+  primary exception. Test a truly absent directory, injected IO failure, no
+  primary plus failed evidence, and early parse/source-check boundaries.
+  Never create a fake report, retry numerical work, or claim durable evidence
+  where only raw process stderr/exit exists.
+- Source hashing is not a loaded-process observation. A readonly copy from a
+  stopped immutable/no-device container can supply real original native SO
+  bytes for offline validators. Record its source image/path/inspect/copy
+  receipt and explicit reader alias; do not claim the image path exists on
+  the host or that this proves actual NPU maps. In-memory software terminal/
+  report fixtures remain SYNTHETIC even when real binary bytes are checked.
+- Freeze exact expected execution authority before acquiring cards: MAIN's
+  original terminal/argv/peer/source identities plus real same-process runtime,
+  loaded maps, stage report and raw artifacts. A status-only PASS or JSON
+  supplied by a mock cannot substitute actual execution. Component admission
+  is not serving/graph/E2E permission; B1/B16 is not all intermediate batches.
+- Ready-before-resource covers a complete, runnable and resource-admitted
+  matrix, not guaranteed experimental success. Keep a ranked ready queue;
+  overlap only independent disjoint correctness jobs after joint CPU/RAM and
+  owner checks. TP4 calibration/formal comparison owns the whole authorized
+  set. Measure evidence progress/idle reasons, not dummy utilization.

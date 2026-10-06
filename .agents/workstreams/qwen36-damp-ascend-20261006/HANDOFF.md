@@ -3,6 +3,21 @@
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
 
+## Device-ready execution packet checkpoint — 2026-10-06 17:20Z
+
+Read DEVICE_READY_EXECUTION_CHECKPOINT_20261006.md and
+DEVICE_READY_EXECUTION_SOURCE_SCOPE.json for MAIN-reviewed8-source publication.
+Float dispatcher MA05e5 independently16 stdlib/default-dry/actual closure PASS;
+selected admission MA05df independently24 stdlib PASS. MA05e6 readonly stopped
+image-native binary copy and full SYNTHETIC validator fixture PASS are offline
+proof only, not NPU authority or loaded maps. Pre-mkdir primary-error masking
+was repaired in NEW wrapper only; frozen gates/math/thresholds remain unchanged.
+MA0455 still owns exclusive TP4. MA05cf17:06:23Z observes24/36 x4096 completed,
+four ranks advancing, no final source-lock/result then. No new E2E/task result.
+New assembly/selected dispatcher/final integration drafts are excluded pending
+coherent full review. Actual termination/owned stop + new joint admission are
+required before any new NPU matrix; original cutoffs/0–3 protection unchanged.
+
 ## Native-seam preparation checkpoint — 2026-10-06 16:56Z
 
 Read NATIVE_SEAM_READINESS_CHECKPOINT_20261006.md and
