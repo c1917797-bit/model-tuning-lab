@@ -271,8 +271,10 @@ def audit(parent: dict, quality_contract: dict) -> dict:
         for index in (1, 2, 3):
             paths = [QROOT / "quality" / arm / f"{dataset}.run{index}.jsonl"
                      for arm in ("no-cache", "hypic-only")]
-            paired = [[json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
-                      for path in paths]
+            paired = [sorted(
+                (json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line),
+                key=lambda row: row["index"],
+            ) for path in paths]
             for baseline, treatment in zip(*paired):
                 if (baseline.get("index") != treatment.get("index")
                         or baseline.get("sample_id") != treatment.get("sample_id")

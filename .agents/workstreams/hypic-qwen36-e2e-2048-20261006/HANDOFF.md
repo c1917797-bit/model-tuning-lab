@@ -1,5 +1,21 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Audit-order repair — 2026-10-06 18:50 UTC
+
+Quality JSONL rows are emitted in completion order, not sample-index order;
+the first 60 current rows already include index 66. The on-disk paired
+controller and independent audit source now align rows by `index`, rather than
+zipping completion order. The independent audit also checks every prompt plus
+completion against the 41,984-token context and requires LongBench sample 48
+to retain its frozen 39,642 prompt tokens in both arms. Syntax, diff checks,
+and all 29 maintainer Skill structural checks passed. This source repair does
+not change the live controller process, which loaded its previous Python code
+at 17:56 UTC; do not restart it solely for this repair. If its final in-memory
+pairing step fails after all twelve quality runs and both services have been
+released, use the repaired `quality_context_controller.py audit-only` against
+the preserved raw files, then run `audit_split_context_e2e.py` and the closure
+audit. Classify an ordering-only failure as auditor error, not model failure.
+
 ## Live checkpoint — 2026-10-06 18:45 UTC
 
 AWMCP operation `exec-000000000000064a` is still running on the direct

@@ -306,7 +306,24 @@ def main() -> int:
                 if len(paired[0]) != len(paired[1]):
                     errors.append(f"{dataset}/run{index}: paired row count drift")
                     continue
-                for baseline, treatment in zip(*paired):
+                by_index = [{row["index"]: row for row in rows} for rows in paired]
+                if (any(len(mapping) != len(rows) for mapping, rows in zip(by_index, paired))
+                        or set(by_index[0]) != set(by_index[1])):
+                    errors.append(f"{dataset}/run{index}: duplicate or unmatched sample indexes")
+                    continue
+                for sample_index in sorted(by_index[0]):
+                    baseline, treatment = (mapping[sample_index] for mapping in by_index)
+                    for arm, row in zip(ARMS, (baseline, treatment)):
+                        usage = row.get("usage") or {}
+                        prompt = usage.get("prompt_tokens")
+                        completion = usage.get("completion_tokens")
+                        if (not isinstance(prompt, int) or prompt <= 0
+                                or not isinstance(completion, int) or not 0 <= completion <= 2048
+                                or prompt + completion > 41984):
+                            errors.append(f"{arm}/{dataset}/run{index}/{sample_index}: context or output limit violation")
+                        if (dataset == "longbenchv2" and sample_index == 48
+                                and prompt != fp["longbench_historical_max_prompt_tokens"]):
+                            errors.append(f"{arm}/LongBench/run{index}: longest prompt was truncated or retokenized")
                     if (
                         baseline.get("index") != treatment.get("index")
                         or baseline.get("sample_id") != treatment.get("sample_id")
