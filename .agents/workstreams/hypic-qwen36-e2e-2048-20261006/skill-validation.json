@@ -1,8 +1,8 @@
 {
   "schema": "paper-to-ascend-skill-validation/v1",
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
-  "status": "initial-candidate-rejected; optimization-iteration-in-progress",
-  "as_of_utc": "2026-10-06T14:59:17Z",
+  "status": "paper-only-performance-rejected; one-switch-iteration-running; paired-2048-quality-prepared",
+  "as_of_utc": "2026-10-06T17:18:00Z",
   "checks": [
     {
       "skill": "chicaihong01-host-maintenance",
@@ -39,19 +39,24 @@
     },
     {
       "skill": "ascend-performance-optimization",
-      "state": "in-progress",
-      "remaining": ["decode/service critical-path attribution", "one bounded successor candidate", "measured iteration"]
+      "state": "one-switch-measurement-in-progress",
+      "evidence": ["profiles/profile-diagnostic.json", "candidate-matmul-allreduce/canary-gate.json", "candidate-matmul-allreduce/performance.run1.json", "candidate-matmul-allreduce-ledger.json"],
+      "result": "matched profile supports unchanged Decode AllReduce count in the original HYPIC-only arm; HYPIC plus MatMulAllReduce canary passed and run1 completed 40/40",
+      "remaining": ["candidate performance runs 2 and 3", "three-run threshold decision", "optimization-iteration.json and exact resource release"]
     },
     {
       "skill": "ascend-cannbot-profiler",
-      "state": "in-progress",
-      "evidence": ["decode-opportunity-diagnostic.json", "profile_service.py", "capture_hypic_profile.py"],
-      "remaining": ["complete and validate matched all-rank Prefill and Decode captures", "attribute failed TPOT and service metrics before low-level changes"]
+      "state": "diagnostic-complete-with-rank2-offline-export-limitation",
+      "evidence": ["profiles/profile-diagnostic.json", "profiles/no-cache/prefill/profile-finalized.json", "profiles/hypic-only/prefill/profile-manifest.json", "analyze_hypic_profiles.py"],
+      "result": "both arms captured raw Prefill and Decode on all four TP ranks; Prefill exports complete on all ranks, Decode exports complete on matched ranks 0,1,3 with more than 60 inferred steady Decode steps each; rank2 raw preserved but offline export incomplete",
+      "remaining": ["do not infer a full four-rank Decode export or wall-time critical-path saving from overlapping CANN task durations"]
     },
     {
       "skill": "ascend-model-quality-evaluation",
-      "state": "not-run-fail-fast",
-      "remaining": ["paired LongBench-v2 and GSM8K with 2048 cap, three repetitions each", "context capacity at least 41690 and fresh matching baseline if user approves"]
+      "state": "separate-context-paired-ruler-prepared-not-run",
+      "evidence": ["quality-context-41984/quality-context-contract.json", "quality_context_service.py", "quality_context_controller.py"],
+      "result": "historical complete LongBench maximum prompt 39642 plus 2048 cap requires 41690; independent 41984-context quality identity and paired six-run-per-arm controller are prepared without changing the original 40960-context performance denominator",
+      "remaining": ["wait for candidate resource release", "run and freeze six baseline and six treatment quality suites", "independent raw audit"]
     },
     {
       "skill": "paper-to-ascend-reporting",

@@ -20,5 +20,5 @@
     "stop_new_long_units_before_deadline": true,
     "release_resources_before_terminal_handoff": true
   },
-  "next_action": "Poll AWMCP exec-0000000000000277 and verify the first 40-request baseline performance run; do not launch a duplicate controller."
+  "next_action": "Poll live AWMCP exec-0000000000000590 for the HYPIC plus MatMulAllReduce three-run candidate. Run1 passed 40/40 and run2 is active; do not launch a duplicate. After terminal status, verify exact container removal and NPU0-3/port 8223 release, record optimization-iteration.json, then start the separately identified 41984-context paired 2048-token quality controller once."
 }
