@@ -1,5 +1,21 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Live checkpoint — 2026-10-06 20:33 UTC
+
+The same quality controller, AWMCP `exec-000000000000064a`, remains live and
+entered `no-cache` LongBench-v2 run 3 at 20:31:08 UTC. Run 2 completed 127/127
+with zero failed requests and 77/127 correct (60.6299%) in this **single run**.
+The raw JSONL SHA256 is
+`e7ded491a9b7f995ca035c9c0d10011002eaf48e4a9aa84bed963b5160650031`.
+An independent read-only check matched that hash and all 127 lines; it found
+exactly indexes 0-126, valid per-response SHA256 values, no context total over
+41,984 tokens, no completion over 2,048 tokens, and agreement with the summary
+on 133,264 completion tokens, 77 correct, and finish reasons (12 length,
+115 stop). Sample 48 retained its full 39,642-token prompt and completed
+1,006 tokens with `finish_reason=stop`. The three-run baseline and paired
+quality verdict remain pending. Do not restart or duplicate the controller;
+the original paper-only performance rejection is unchanged.
+
 ## Live checkpoint — 2026-10-06 19:26 UTC
 
 The only quality controller, AWMCP `exec-000000000000064a`, remains live and
