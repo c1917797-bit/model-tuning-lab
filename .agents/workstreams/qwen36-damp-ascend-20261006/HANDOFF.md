@@ -1,5 +1,27 @@
 # DAMP Ascend — current workstream
 
+## Active four-card correctness dispatch — 2026-10-06 18:49Z
+
+MAIN MA069f committed the reviewed18-file pre-card package as
+3d072488eaa80e038961db4d32a126bfc5908e3f; MST20 and exact staged whitespace
+passed. MA06a1 normal-pushed this branch and fresh ls-remote verified that HEAD.
+Push RESULT SHA5b4c2a42d9d435a326ffcee3a49ba6e35f5803c951a93adfe8c6958c8eecf847.
+MA06a0 is the single live independent_v1 dispatch, original peer MA/direct.
+Use operation_get for this handle; do not start the command again. Root:
+/cache/cch/qwen36-damp-20261006/allT-dispatch-independent_v1.
+MA06a2 actually observed all four gate reports RUNNING, native split-anchor
+artifacts/checks underway, fresh live admission and all four canaries retained.
+Exact-owned nonprivileged single-card IDs: physical4=644e483333a636130b1310c15f8f694187331391a3d8df0f40ab36051b9a21db;
+physical5=d4abaa82dea94ba3132faf33e355de88157787d57d61611e6a28be335b1f30b4;
+physical6=305f493062816e210a135c509b5cdebf7571074c898b18db319e2de99c6ff24f;
+physical7=5deeeaa5aa9e78ba165ecf5250b8ee8b85b1feb4f30c58eb392e8c5758db7517.
+Each maps its physical card to logical0,1CPU/8GiB, no network/no privileged.
+AllT new7/reused34/selected5/sourcepreflight4 remain frozen until actual
+terminal and exact-owned release proof. No other NPU launch during this run.
+Preparers continue NEW fixed-admission diagnosis and downstream evidence DAG.
+No numerical aggregate PASS, SOURCE_LOCK, final192, service, E2E throughput or
+task accuracy has been established by this running stage. Deadlines unchanged.
+
 ## Executable pre-card readiness — 2026-10-06 18:38Z
 
 MAIN fully reviewed NEW independent_allT_dispatch_v1 seven files and selected

@@ -1,5 +1,17 @@
 # Continuous preparation and NPU execution queue
 
+## Active queue — 2026-10-06 18:49Z
+
+MA06a0 is the only live NPU dispatcher: physical4 T1-4,5 T5-8,6 T9-12,
+7 T13-16, each with fresh same-image native split anchors before candidate
+checks. MA06a2 confirms four RUNNING gate reports and canary/live admission.
+Numerical PASS is pending; formal performance/accuracy claims remain false.
+Observe this existing handle, never duplicate launch or alter its frozen
+sources. After terminal, verify exact-owned stop/retain and target-card release
+before admitting the next ready packet. CPU agent preparation continues in
+distinct NEW scopes while these four disjoint correctness shards run.
+Prepared package3d07248 was normal-pushed and verified by MA06a1.
+
 ## Current ready queue — 2026-10-06 18:38Z
 
 MA0690 actual35 software checks and MA0695 exact-image full-mount allT
