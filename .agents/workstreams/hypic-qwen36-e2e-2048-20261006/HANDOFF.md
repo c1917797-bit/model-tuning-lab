@@ -1,5 +1,30 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Live checkpoint — 2026-10-06 21:56 UTC
+
+The same AWMCP controller `exec-000000000000064a` is confirmed live on the
+direct `chicaihong01/ma` peer. It remains in no-cache GSM8K run 1. The run log
+reached 60/1,319 completed requests at about 21:56 UTC, approximately 13
+minutes after its 21:43:15 start. These are partial rows, **not** a valid GSM8K
+accuracy estimate or a frozen baseline. The service reports sustained roughly
+35–43 generation tokens/s with 16 running requests and 15–16 waiting; NPU0–3
+are healthy and mapped to the four exact container worker PIDs, with AICore
+utilization around 3–5% and no process on NPU4–7. Docker shows CPU set
+112–191 and no CPU quota. The current low rate is consistent with this
+experiment's approximately 30 token/s fixed-output performance baseline, but
+its cause relative to faster historical service logs is not established.
+
+At the observed sample rate, even this first 1,319-sample GSM8K run would
+take several hours, exceeding the controller's 7,200-second per-run timeout.
+This is a time-risk projection, not a terminal result; do not alter the frozen
+dataset, 2,048-token cap, concurrency, or paired identity to make it pass.
+On timeout, the controller's exception/finally path is intended to preserve
+partial JSONL and release its exact container. Verify the operation is
+terminal, the stop receipt, NPU0–3, and port 8223 before claiming cleanup or
+running any audit. The formal paper-only performance rejection and rejected
+optimization iteration are unchanged. Reserve time for independent negative
+closure, report, and resource-release proof before 11:39:37 UTC.
+
 ## Live checkpoint — 2026-10-06 21:45 UTC
 
 The same AWMCP quality controller exec-000000000000064a remains live and
