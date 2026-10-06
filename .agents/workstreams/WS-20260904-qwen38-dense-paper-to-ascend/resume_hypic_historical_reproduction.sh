@@ -486,19 +486,41 @@ run_performance() {
 
 verify_quality_run() {
   local path=$1 expected=$2 expected_max_out_len=$3
-  python3 - "$path" "$expected" "$expected_max_out_len" <<'PY'
+  python3 - "$path" "$expected" "$expected_max_out_len" "$MODEL_NAME" "$QUALITY" "$OUTPUT_ROOT" <<'PY'
+import hashlib
 import json
+from pathlib import Path
 import sys
 
 data = json.load(open(sys.argv[1]))
 expected = int(sys.argv[2])
 expected_max_out_len = int(sys.argv[3])
+model_name = sys.argv[4]
+evaluator = Path(sys.argv[5])
+root = Path(sys.argv[6]).resolve()
+expected_dataset_hash = {
+    "longbenchv2": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+    "gsm8k": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+}
+details = Path(data.get("details_path", "")).resolve()
 if not (
-    data.get("requests") == expected
+    data.get("schema") == "hypic-quality-eval/v1"
+    and data.get("requests") == expected
     and data.get("successful") == expected
     and data.get("failed") == 0
     and data.get("max_out_len") == expected_max_out_len
     and data.get("ignore_eos") is False
+    and data.get("model") == model_name
+    and data.get("concurrency") == 32
+    and data.get("seed") == 0
+    and data.get("temperature") == 0
+    and data.get("enable_thinking") is False
+    and data.get("data_sha256") == expected_dataset_hash.get(data.get("dataset"))
+    and data.get("evaluator_script_sha256")
+        == hashlib.sha256(evaluator.read_bytes()).hexdigest()
+    and details.is_file()
+    and details.is_relative_to(root)
+    and data.get("details_sha256") == hashlib.sha256(details.read_bytes()).hexdigest()
 ):
     raise SystemExit(f"{sys.argv[1]}: incomplete quality run")
 PY
