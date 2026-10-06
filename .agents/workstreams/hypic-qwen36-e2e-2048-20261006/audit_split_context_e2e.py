@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import statistics
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -70,6 +71,70 @@ def inspect_service_receipts(contract: dict, errors: list[str]) -> None:
             errors.append(f"{arm}: service receipt unreadable: {exc}")
 
 
+def inspect_quality_decision(quality_root: Path, errors: list[str]) -> str | None:
+    """Recompute the predeclared classification without importing its controller."""
+    try:
+        reported = load_object(quality_root / "quality-context-audit.json")
+        summaries = {
+            arm: {
+                dataset: [load_object(quality_root / "quality" / arm /
+                                      f"{dataset}.run{index}.summary.json")
+                          for index in (1, 2, 3)]
+                for dataset in DATASETS
+            }
+            for arm in ARMS
+        }
+        signals: list[tuple[str, str]] = []
+
+        def classify(scope: str, baseline: list[float], treatment: list[float],
+                     higher_is_better: bool = True) -> None:
+            change = statistics.mean(treatment) - statistics.mean(baseline)
+            if not higher_is_better:
+                change = -change
+            if change < 0:
+                variation = max(baseline) - min(baseline)
+                signals.append((scope, "regression" if -change > variation else "inconclusive"))
+
+        for dataset in DATASETS:
+            baseline = summaries["no-cache"][dataset]
+            treatment = summaries["hypic-only"][dataset]
+            classify(f"{dataset}:accuracy", [row["accuracy_pct"] for row in baseline],
+                     [row["accuracy_pct"] for row in treatment])
+            expected = 127 if dataset == "longbenchv2" else 1319
+            classify(f"{dataset}:length-limit-rate",
+                     [100 * row["finish_reasons"].get("length", 0) / expected for row in baseline],
+                     [100 * row["finish_reasons"].get("length", 0) / expected for row in treatment],
+                     higher_is_better=False)
+        for field in ("difficulty", "length"):
+            categories = set(summaries["no-cache"]["longbenchv2"][0]
+                             ["category_accuracy_pct"][field])
+            for arm in ARMS:
+                for row in summaries[arm]["longbenchv2"]:
+                    if set(row["category_accuracy_pct"][field]) != categories:
+                        errors.append(f"LongBench {field} category key drift")
+            for category in sorted(categories):
+                classify(f"longbenchv2:{field}:{category}",
+                         [row["category_accuracy_pct"][field][category]
+                          for row in summaries["no-cache"]["longbenchv2"]],
+                         [row["category_accuracy_pct"][field][category]
+                          for row in summaries["hypic-only"]["longbenchv2"]])
+        expected_classification = ("regression" if any(level == "regression" for _, level in signals)
+                                   else "inconclusive" if signals else "pass")
+        observed_signals = sorted((item["scope"], item["classification"])
+                                  for item in reported["negative_or_uncertain_signals"])
+        if not (
+            reported.get("schema") == "hypic-paired-2048-quality-context-audit/v1"
+            and reported.get("quality_evidence_complete") is True
+            and reported.get("quality_classification") == expected_classification
+            and observed_signals == sorted(signals)
+        ):
+            errors.append("paired quality classification differs from independent recomputation")
+        return expected_classification
+    except Exception as exc:
+        errors.append(f"paired quality decision unreadable: {type(exc).__name__}: {exc}")
+        return None
+
+
 def inspect_live_release(errors: list[str]) -> dict:
     evidence = {}
     try:
@@ -107,6 +172,7 @@ def main() -> int:
     errors: list[str] = []
     performance: list[dict] = []
     quality: list[dict] = []
+    quality_classification: str | None = None
     release: dict = {}
     data_hashes: set[str] = set()
     evaluator_hashes: set[str] = set()
@@ -178,6 +244,7 @@ def main() -> int:
         quality, data_hashes, evaluator_hashes = audit_quality(
             quality_root, aggregate, errors, 2048
         )
+        quality_classification = inspect_quality_decision(quality_root, errors)
         if data_hashes != {fp["longbench_sha256"], fp["gsm8k_sha256"]}:
             errors.append("quality dataset hashes differ from frozen contract")
         if evaluator_hashes != {fp["quality_evaluator_sha256"]}:
@@ -214,6 +281,7 @@ def main() -> int:
         "performance_context": 40960,
         "quality_context": 41984,
         "quality_max_output_tokens": 2048,
+        "quality_classification": quality_classification,
         "paper_only_performance_accepted": False,
         "evidence_integrity_not_algorithm_acceptance": True,
         "performance": performance,

@@ -281,6 +281,11 @@ def main() -> int:
             and quality_context.get("negative_or_uncertain_signals") == [],
             str(quality_context.get("quality_classification")),
         )
+        if independent is not None and independent.get("schema") == "hypic-split-context-independent-evidence-audit/v1":
+            check(
+                "independent_quality_classification_agrees",
+                independent.get("quality_classification") == quality_context.get("quality_classification"),
+            )
 
     iteration = read("optimization_iteration_present", "optimization-iteration.json")
     if iteration is not None:
