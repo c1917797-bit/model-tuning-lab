@@ -312,3 +312,39 @@ Python AST/JSON files, and validate-mst.sh passed20 skills. The full staged
 whitespace check exited2 solely for13 extra-EOF blank-line notices in frozen
 source/helper/template/archive files. Preserve bytes bound to prior runs;
 this is a recorded negative style check, not a whitespace PASS or device gate.
+
+## 13:30Z compaction readiness and live capture
+
+Normal checkpoint86c078fe1140027c39b31cb8801c9b892f99be1b was pushed and its
+exact remote ref verified. It contains the reviewed30-file certificate, not a
+usable performance/quality result.
+
+Full-capture MA0161 is freshly RUNNING at13:30Z. Last completed-row observation
+MA0361 at13:26:05Z: native-off28/36, all4096 outputs, native-on0. Full validator,
+source lock and fitted192 plans are pending. The fresh resource snapshot
+MA0336 at13:12Z had only owned workers744181/744186/744190/744192 on4-7 and an
+external HYPIC service on protected0-3. No new NPU load during this TP4 capture.
+
+MAIN fully reviewed the separate compaction probe and its minimal v2 fixes.
+V1 MA0335 failed compilation on device std::array indexing and uint8 Duplicate;
+original logs and byte-exact source archives are preserved. V2 MA0346 actually
+compiled/linked and defined its launcher symbol; MA0358 actually loaded both
+schemas and passed Meta plus18 separately recorded negative rejections.
+Read projects/damp-ascend/operator/quantizer/compaction_probe/ACTUAL_BUILD_META.md.
+SO080075a52c8a9b3736e9077149268bb48481b15a8e855e3dca82617bf8489b9c;
+build receiptb874ed8b88d2343e3f4457a6090b34f386b4a891ef047695cb02c8306f53b98d;
+parent Meta report5f87f31d1b70a7c481787e6a39a53a740b71c8d4a37642701276b1c8def40bfa.
+Compiler8/runtime13 were unchanged. These no-device checks are NOT actual
+NPU compaction, production, recurrence, graph, timing or task-quality proof.
+
+Only this reviewed16-file compaction subtree, scoped maintainer lesson and
+handoff are included in this checkpoint. New production_integer_compaction_v1
+and KVBuffer tools/service drafts are excluded pending MAIN full review.
+Production v4 remains FAILED at step45; no threshold changed. After capture
+releases, fresh serial device seam/native-anchor gates must precede a new
+production run, then full feedback/generalSR/graph/cache and matched service.
+
+Portfolio cutoff2026-10-09T11:17:31Z and DAMP individual cutoff
+2026-10-07T08:48:03Z are unchanged. Zero new non-HYPIC techniques have final
+performance plus LongBench-v2/GSM8K acceptance. Compilation/sample/shadow or
+same-eager screening success must not become the required usable conclusion.

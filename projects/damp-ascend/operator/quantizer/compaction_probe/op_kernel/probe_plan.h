@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: Apache-2.0
+#pragma once
+#include <cstdint>
+namespace DampCompactionProbe {
+constexpr uint32_t ABI_VERSION=1, MAX_COUNT=896, OUTPUTS=4, GUARD_INTS=8;
+constexpr int32_t INDEX_FILL=-777777, COUNT_FILL=-888888;
+constexpr int32_t GUARDS[OUTPUTS]={0x13579bdf,0x2468ace0,0x31415926,0x12345678};
+struct Tiling { uint32_t count,abiVersion,reserved[6]; };
+static_assert(sizeof(Tiling)==32,"tiling is one32B block");
+// Actual persistent UB reservation at MAX_COUNT, not just live lanes:
+// packed input:4*896*4=14336; work6*896*4+packedmask256=21760;
+// packed guarded output:4*(896+16)*4=14592. Total50688B, single buffers.
+constexpr uint32_t INPUT_BYTES=4*MAX_COUNT*4;
+constexpr uint32_t WORK_BYTES=6*MAX_COUNT*4+256;
+constexpr uint32_t OUTPUT_STRIDE=MAX_COUNT+2*GUARD_INTS;
+constexpr uint32_t OUTPUT_BYTES=OUTPUTS*OUTPUT_STRIDE*4;
+static_assert(INPUT_BYTES+WORK_BYTES+OUTPUT_BYTES==50688,"UB accounting");
+static_assert(INPUT_BYTES%256==0 && OUTPUT_BYTES%256==0 &&
+              (6*MAX_COUNT*4)%256==0,"CompareScalar relative256B alignment");
+}

@@ -234,3 +234,21 @@ passing this chain. Preserve the current paper's 24-hour decision deadline.
   real UB safety, numerical recurrence, graph replay or serving benefit.
   Candidate auxiliary storage must reduce its KV budget rather than receive
   extra memory unavailable to the same dense control.
+
+## Actual compaction compiler compatibility, 13:23Z
+
+- On this pinned CANN9.1.0/dav-2201 toolchain, constexpr std::array storage
+  still invokes a host-only operator[] from device code. Compaction build-v1
+  failed before deployment. A plain constexpr C array preserved all guard
+  values while avoiding that unsupported method; do not remove sentinel gates.
+- This device Duplicate implementation rejected uint8_t. The packed-mask
+  buffer is32B-aligned and256 bytes: clearing64 uint32_t entries preserves the
+  exact byte domain. Do not assume that all other SoC/type combinations share
+  this restriction or replace mask semantics without equivalent byte proof.
+  Preserve both first-failure logs and byte-exact source archives.
+- Actual compaction v2 CXX/ASC/link/exported-symbol and no-device load/schema/
+  Meta checks passed MA0346/0358. Compiler8 and runtime13 identities match
+  their real receipts, including external frozen helper/oracle. Eighteen
+  separately recorded Meta negatives were rejected. None exercises NPU
+  GatherMask count/order, exact fallback/scatter, guards or changed buffers.
+  Device arithmetic, production feedback, graph, E2E and tasks remain pending.

@@ -1,0 +1,123 @@
+// SPDX-License-Identifier: Apache-2.0
+#pragma once
+#include "kernel_operator.h"
+#include "probe_plan.h"
+#if defined(__NPU_ARCH__) && __NPU_ARCH__ != 2201
+#error "This isolated compaction probe is bound to actual dav-2201"
+#endif
+#define DAMP_QUANTIZER_ASCENDC
+#include "../../exact_quantizer_bits.h"
+namespace DampCompactionProbe {
+using namespace AscendC;
+class Kernel {
+public:
+    __aicore__ inline void Init(GM_ADDR accepted,GM_ADDR x,GM_ADDR scale,GM_ADDR magnitude,
+        GM_ADDR code,GM_ADDR indices,GM_ADDR retained,GM_ADDR valid,
+        const __gm__ Tiling* tiling,TPipe* pipe) {
+        count_=tiling->count;
+        validTiling_=tiling->abiVersion==ABI_VERSION &&
+                     (count_==64 || count_==448 || count_==896);
+        inputGm_[0].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(accepted));
+        inputGm_[1].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(x));
+        inputGm_[2].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(scale));
+        inputGm_[3].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(magnitude));
+        outputGm_[0].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(code));
+        outputGm_[1].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(indices));
+        outputGm_[2].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(retained));
+        outputGm_[3].SetGlobalBuffer(reinterpret_cast<__gm__ int32_t*>(valid));
+        // Only2queues: one packed VECIN and one packed VECOUT, depth/num1.
+        // No static naked UB and no unbudgeted per-lane temporary tensors.
+        pipe->InitBuffer(input_,1,INPUT_BYTES);
+        pipe->InitBuffer(output_,1,OUTPUT_BYTES);
+        pipe->InitBuffer(work_,WORK_BYTES);
+    }
+    __aicore__ inline void Process() {
+        if (!validTiling_) { return; } // no acquired tensor/event; no output write
+        if(count_==64) Run<64>();
+        else if(count_==448) Run<448>();
+        else Run<896>();
+    }
+private:
+    template<int32_t N> __aicore__ inline void Run() {
+        auto packedIn=input_.AllocTensor<int32_t>();
+        LocalTensor<int32_t> in[4];
+        for(uint32_t i=0;i<4;++i) {
+            in[i]=packedIn[i*MAX_COUNT];
+            DataCopy(in[i],inputGm_[i],N); // count and bases strictly32B aligned
+        }
+        input_.EnQue(packedIn); packedIn=input_.DeQue<int32_t>();
+        auto packedOut=output_.AllocTensor<int32_t>();
+        LocalTensor<int32_t> out[4];
+        for(uint32_t i=0;i<4;++i) {
+            out[i]=packedOut[i*OUTPUT_STRIDE];
+            Duplicate(out[i],GUARDS[i],N+2*GUARD_INTS);
+        }
+        auto scratch=work_.Get<int32_t>();
+        LocalTensor<int32_t> w[6];
+        for(uint32_t i=0;i<6;++i) w[i]=scratch[i*MAX_COUNT];
+        auto packedMask=scratch[6*MAX_COUNT].ReinterpretCast<uint8_t>();
+        Duplicate(packedMask.ReinterpretCast<uint32_t>(),uint32_t(0),64);
+        Duplicate(w[1],INDEX_FILL,N);
+        Duplicate(w[4],int32_t(1),N);
+        Duplicate(out[2][GUARD_INTS],COUNT_FILL,N);
+        PipeBarrier<PIPE_V>();
+        // Actual packed comparison: 0/1 integers -> exact FP32 bit patterns
+        // (INT32 multiplication only) -> CompareScalar emits one bit per lane.
+        // Never pass an INT32 accepted0/1 vector directly as GatherMask pattern.
+        Muls(w[2],in[0],int32_t(0x3f800000),N); PipeBarrier<PIPE_V>();
+        CompareScalar(packedMask,w[2].ReinterpretCast<float>(),float(0),CMPMODE::EQ,N);
+        PipeBarrier<PIPE_V>();
+        CreateVecIndex(w[0],int32_t(0),N); PipeBarrier<PIPE_V>();
+        // Restore ORIGINAL x sign vectorially, including signedzero/code0.
+        ShiftRight(w[5].ReinterpretCast<uint32_t>(),in[1].ReinterpretCast<uint32_t>(),
+                   uint32_t(31),N); PipeBarrier<PIPE_V>();
+        Muls(w[5],w[5],int32_t(-2),N); PipeBarrier<PIPE_V>();
+        Adds(w[5],w[5],int32_t(1),N); PipeBarrier<PIPE_V>();
+        Mul(w[3],w[5],in[3],N); PipeBarrier<PIPE_V>();
+        uint64_t retained=0;
+        GatherMask(w[1],w[0],packedMask.ReinterpretCast<uint32_t>(),true,
+                   uint32_t(N),GatherMaskParams(1,1,8,1),retained);
+        PipeBarrier<PIPE_V>();
+        // Gather/Compare are V producers; compaction count/index/raw consumers S.
+        const event_t vToS=static_cast<event_t>(
+            GetTPipePtr()->FetchEventID(HardEvent::V_S));
+        SetFlag<HardEvent::V_S>(vToS); WaitFlag<HardEvent::V_S>(vToS);
+        const bool countSafe=retained<=uint64_t(N);
+        out[2].SetValue(GUARD_INTS,countSafe ? int32_t(retained) : int32_t(-1));
+        // Critical seam: scalar work ONLY over rejected compact lanes, not allN.
+        // Bad retained/index cannot dereference outside scratch/input regions.
+        if(countSafe) {
+            for(uint32_t rank=0;rank<static_cast<uint32_t>(retained);++rank) {
+                const int32_t lane=w[1].GetValue(rank);
+                if(lane>=0 && lane<N) {
+                    const auto result=Qwen36DampQuantizer::ExactCode(
+                        static_cast<uint32_t>(in[1].GetValue(lane)),
+                        static_cast<uint32_t>(in[2].GetValue(lane)));
+                    w[3].SetValue(lane,result.code);
+                    w[4].SetValue(lane,result.valid ? 1 : 0);
+                }
+            }
+        }
+        const event_t sToV=static_cast<event_t>(
+            GetTPipePtr()->FetchEventID(HardEvent::S_V));
+        SetFlag<HardEvent::S_V>(sToV); WaitFlag<HardEvent::S_V>(sToV);
+        Adds(out[0][GUARD_INTS],w[3],int32_t(0),N);
+        Adds(out[1][GUARD_INTS],w[1],int32_t(0),N);
+        Adds(out[3][GUARD_INTS],w[4],int32_t(0),N);
+        PipeBarrier<PIPE_V>();
+        output_.EnQue(packedOut); packedOut=output_.DeQue<int32_t>();
+        for(uint32_t i=0;i<4;++i) {
+            // Complete output roots were host-initialized to sentinels. Kernel
+            // writes ONLY middleN; guards are independent overrun evidence.
+            DataCopy(outputGm_[i][GUARD_INTS],packedOut[i*OUTPUT_STRIDE+GUARD_INTS],N);
+        }
+        output_.FreeTensor(packedOut);
+        input_.FreeTensor(packedIn);
+    }
+    uint32_t count_=0; bool validTiling_=false;
+    GlobalTensor<int32_t> inputGm_[4],outputGm_[4];
+    TQue<QuePosition::VECIN,1> input_;
+    TQue<QuePosition::VECOUT,1> output_;
+    TBuf<QuePosition::VECCALC> work_;
+};
+}
