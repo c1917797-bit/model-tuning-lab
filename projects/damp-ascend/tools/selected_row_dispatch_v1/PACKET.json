@@ -1,0 +1,87 @@
+{
+  "schema": "damp-selected-row-dispatch-source/v1",
+  "default_enabled": false,
+  "npu_executed": false,
+  "deadline_utc": "2026-10-07T08:48:03Z",
+  "balanced_groups": {
+    "4": [
+      1,
+      8,
+      9,
+      16
+    ],
+    "5": [
+      2,
+      7,
+      10,
+      15
+    ],
+    "6": [
+      3,
+      6,
+      11,
+      14
+    ],
+    "7": [
+      4,
+      5,
+      12,
+      13
+    ]
+  },
+  "sources": {
+    "controller.py": "961ce290ea7afdcecfad0c524b4a28262425d4b0109994d0c45f35358b2c79b5",
+    "runner.py": "548ef24f7786420098f8d2a8fe1b90e381151a51ef59c9555ff88235cb76f541",
+    "selected_contract.py": "2bc3af1575f945add19f268b279e520857378e732a3b4e4cdaa927b44ace4d69",
+    "test_dispatch.py": "e9510d9ac3ec065973ec115a3761761b16e5a1babc7e2d30e248d450aaf75a8c",
+    "READY.md": "3d1c5908faa6260ad63ae6c4de73e166817600fc7a057240c8fabd47df7ba189"
+  },
+  "dependencies": {
+    "projects/damp-ascend/tools/selected_row_reference_v1/seam.py": "f2dae561339184fbf15c885bbd014e07f71f491d46369e94c6863d3b6b4d15cf",
+    "projects/damp-ascend/tools/selected_row_reference_v1/test_seam.py": "cb2aa6d008ee7ad8f80dcbcce97f412fed6a31d20829c52d884237b57c922b8f",
+    "projects/damp-ascend/tools/selected_row_reference_v1/READY.md": "1cb01ca0b6c184984e2772aa9e29ddac298da65890b791243a3bd1dc95a44f86",
+    "projects/damp-ascend/operator/diagnostic/run_saved_step45_trace.py": "64cc9ee98a6354d16a49fa90f9c16170d9852c080cf576fad03e3183b4eb0b9a",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/graph_contract.py": "b31984a9c0a074812bd859b75316188475c445848832478974c543aa733727f6",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/graph_gate_v1/graph_protocol.py": "35df04f1f8453a9c68f728cce65d4d4821906204fd74502a0cf900bab4e8b4ca",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/candidate_adapter.py": "43d4639d1ac0d737392fab8526aba14af0b1e50161a1940855b71822b18e6a7c",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/gate_contract.py": "b49b8113b77f2318d434fbca5beedbcc23b5a186b291e479c2cf1bd428b217a0",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/protocols.py": "7a0747c8c1a1f246f32ec3ad32ab53cd7a5027339a5c8584d5552ae1508f7340",
+    "projects/damp-ascend/operator/production_integer_compaction_v1/tests/run_npu_gate.py": "9d2ff5e8eed33c5ec3719dcee2748908924c8ce7151a2e3d2b4d582d285c1c1c",
+    "projects/damp-ascend/tests/all_batch_gate_v1/README.md": "1637e687a31462ff2f1ecf09b0d9201f67e22be9f740dff2edc100f22d0385df",
+    "projects/damp-ascend/tests/all_batch_gate_v1/arena_adapter.py": "4da0c821392541cd881b8fa6614f126d063a882add5bd280993cced65a9ea7b5",
+    "projects/damp-ascend/tests/all_batch_gate_v1/contract.py": "f42a42ce36dc18cb65381f00ac3a4737cb8b50dbf50b22bf90a719dd800d87fd",
+    "projects/damp-ascend/tests/all_batch_gate_v1/metadata_contract.py": "2803105bad54bbcd0cc67e2035ea31cfd5fb8116adad278a94e62ae72271bee4",
+    "projects/damp-ascend/tests/all_batch_gate_v1/run_all_batch_gate.py": "fb0fde9ec2b257692cb6e8d9e473cbbaa42e5a2804416944edcc065d2a0a3b12",
+    "projects/damp-ascend/tests/all_batch_gate_v1/test_software_contract.py": "9399cd82d0b7010e72522692a3cb3969dcc07b80ab4a33cb763ffff3142096e2",
+    "projects/damp-ascend/tests/general_sr_contract.py": "6606bd18e1c29d50a063ba0742b8fb7b8b8d5a8f6e12a6f4a755004d74bfc2ad",
+    "projects/damp-ascend/tests/general_sr_native_gate.py": "7eed726fd46e2e39c6bdd560fb769742d32d68861efb075fbca9647f976b4155",
+    "projects/damp-ascend/tests/independent_oracle.py": "fc92395d65db63810ff70341dca255f7f4455d80f0fccbe80f48ff3bb679625a",
+    "projects/damp-ascend/tests/native_call_contract.py": "162dba2a653b7c1fabd20eb24bc75d99225584ca48c4bd10c89eece5bc2fc1d5",
+    "projects/damp-ascend/tests/native_compressed_golden.py": "95d11c42bea88daa14dbb2ce462e16a7d1864b3f2169faf360942fb0c16bea19",
+    "projects/damp-ascend/tests/restricted_native_golden_gate.py": "f8b04cc7650cf2cc330a526cb261ffd85062454e56e1a9692b5913c18445a6b4",
+    "projects/damp-ascend/tests/shared_arena_gate_v1/arena_adapter.py": "bef38eaa944a2c62bc765f56df6529e9a13fbbec5b4bf803916c624baa736dd7",
+    "projects/damp-ascend/tools/allT_dispatch_controller_v1/controller.py": "c44412ffbfffa5b8e1630694343044d874c87ab72e3ad76875c2e69bc6c6e1ff",
+    "projects/damp-ascend/tools/allT_dispatch_controller_v1/test_controller.py": "b066be3196df909d1fd48573c40adaa8bc0a9f7e129c26478739284e36bdeb72",
+    "projects/damp-ascend/tools/allT_dispatch_controller_v1/READY.md": "799509c6a6982a98b9e560772e491874db9da2261e674c2f93333f5ef7be2af6",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/READY.md": "bf01ebf5403d78becc049e213a59e60d2f0a261760c5f1f9da3ace4ca1e8b3a9",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/child_shim.py": "fedb6cbbea961c4e4f76ae3cde167130407bf0bf09e6f059c351ac3b8c2434ab",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/controller.py": "97fd9034a820102a6ad3d728ea3785776e03406f74d4e2299a5eba6223d84ac6",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/test_dispatch.py": "f1ee37a11ee5005f08ab6e027f610b4d7e8efe2c2820cce0833097d087488a27",
+    "projects/damp-ascend/tools/allT_dispatch_plan_v1/plan.py": "b2facaebbdef3fcc8636af4fc0b2b8a230947e9d31e734f4769f3b75b7410179",
+    "projects/damp-ascend/tools/allT_dispatch_plan_v1/test_plan_contract.py": "92489e9331cc5d69a34344caccece1633f21c17893a0c516d1e9eb8bef651983",
+    "projects/damp-ascend/tools/allT_dispatch_plan_v1/READY.md": "33de6895aca9c6c7cb429ff211d49a17ee7af1efd3a83ce5707e90a97d621403",
+    "projects/damp-ascend/tools/run_full_capture.py": "9ad5e359766578a24f06e127a990ab93d1e86555baa15d1abb7bb2b3ffc51122",
+    "projects/damp-ascend/tools/run_collector_smoke.py": "da541917ebd8764a81624a215a157b6d4e18fbaaa53d9310be54a104d2fbbf92",
+    "projects/damp-ascend/tests/all_batch_gate_v1/runtime_manifest.json": "1755f39069b18b10aaabfb7ff341e6879ba741af3cbb72703b64ffe1070f38d5",
+    "projects/damp-ascend/tools/selected_prefill_dispatch_v1/PACKET.json": "06457ede58af57875ca36db08462cc67a59a75c35616b474eda784a7e776991c",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/controller.py": "2fc5e46758e3fd68ab79a5092f80e5b92fe7eadddbe32898621978380691cdd0",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/runner.py": "cedaa1f8aea6de829af1f203a0a014859a99525d1c22b4530c8082d99d18293d",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/reference_seam.py": "f8c680b27d533e6dd32cbf52e9c5e13e46f4e7dcd32dde574ef4d1c6257e3742",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/independent_contract.py": "cd37e68500ba73d4a2bc7f1ab0b3c1392648f2592b93f373a402ab78eebdb272",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/test_contract.py": "d843b35682306473335fee73e0f7fb1a5ad455e7fd0c235aee73800521d835ae",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/READY.md": "2fdb9f833dceba9f3fdef11d9fe8431c64f95857601a8f3a9b3ee455efec1180",
+    "projects/damp-ascend/tools/independent_allT_dispatch_v1/PACKET.json": "f182a72c5cea43bc5e12b48751d6d8c51c96050145d349c3e0b90ee0d0b6d89a",
+    "projects/damp-ascend/tools/selected_row_reference_v1/SOURCE_MANIFEST.json": "85aba91c7941e9258eeea8c8f5d7f4f6550beca414e6fc78b2f90f4959754341"
+  },
+  "scope": "NEW actual balanced selected-row correctness runner; software preparation only, no authority/result; kernel/SO/math/oracle/thresholds unchanged"
+}
