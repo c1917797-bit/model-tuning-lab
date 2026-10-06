@@ -1,0 +1,28 @@
+{
+  "schema": "ascend-performance-candidate/v1",
+  "candidate_id": "hypic-v085-qwen36-tp4-npu03",
+  "measured_symptom": "Long shared prefixes dominate prefill and TTFT when native prefix caching is disabled.",
+  "attributed_cause": "Repeated public prefix computation can be materialized and replayed through the HYPIC planner, cache, worker and repair path.",
+  "changed_seam": "VLLM_ASCEND_HYPIC_ENABLE=0 to 1 on the same pinned vLLM-Ascend HYPIC source tree.",
+  "live_path": {
+    "architecture": "Qwen3.6 hybrid attention/GDN",
+    "dense_only_assumed": false,
+    "mtp_enabled": false,
+    "native_prefix_cache_enabled": false
+  },
+  "opportunity_bound": {
+    "historical_current-topology_ttft_reduction_pct": 43.6345,
+    "historical_current-topology_tpot_reduction_pct": 18.9911,
+    "historical_evidence_only": true,
+    "fresh_baseline_required": true
+  },
+  "disproof_signals": [
+    "required HYPIC hot-path event missing",
+    "real-weight semantic canary differs between baseline and treatment",
+    "performance direction does not reproduce",
+    "2048-token paired quality gate shows a material regression",
+    "rollback does not release NPU0-3 or port 8223"
+  ],
+  "delivery": "removable source overlay against an unchanged official image, hash-bound and disabled by default",
+  "decision": "pending"
+}

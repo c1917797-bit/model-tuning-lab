@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WORKTREE=/cache/cch/.worktrees/WS-20260904-qwen38-dense-paper-to-ascend
+WORKTREE=${HYPIC_WORKTREE:-/cache/cch/.worktrees/WS-20260904-qwen38-dense-paper-to-ascend}
 RECORDS=$WORKTREE/.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend
 OUTPUT_ROOT=${HYPIC_OUTPUT_ROOT:-/cache/cch/hypic-qwen36-historical-reproduction-20260905}
 MODEL_PATH=/cache/efim/Qwen3.6-27B
@@ -20,6 +20,7 @@ CONTAINER_DEVICE_FIRST=${HYPIC_CONTAINER_DEVICE_FIRST:-0}
 TP_SIZE=${HYPIC_TP_SIZE:-4}
 HCCL_PORT_RANGE=${HYPIC_HCCL_PORT_RANGE:-26400-26500}
 MAX_NUM_BATCHED_TOKENS=${HYPIC_MAX_NUM_BATCHED_TOKENS:-40960}
+QUALITY_MAX_OUT_LEN=${HYPIC_QUALITY_MAX_OUT_LEN:-1024}
 MEMORY_LIMIT=${HYPIC_MEMORY_LIMIT:-}
 REFERENCE_SHA256=${HYPIC_REFERENCE_SHA256:-204b01d76eff8a0fd69a4a048de44da8385c6bfdc250c1efb8af542b63fb438c}
 OWNED_LANE=NPU${HOST_NPU_FIRST}-${HOST_NPU_LAST}
@@ -428,7 +429,11 @@ archive_invalid() {
 }
 
 render_progress() {
-  python3 "$ANALYZER" --root "$OUTPUT_ROOT" --reference "$REFERENCE" --allow-incomplete
+  python3 "$ANALYZER" \
+    --root "$OUTPUT_ROOT" \
+    --reference "$REFERENCE" \
+    --quality-max-out-len "$QUALITY_MAX_OUT_LEN" \
+    --allow-incomplete
 }
 
 run_performance() {
@@ -469,17 +474,20 @@ run_performance() {
 }
 
 verify_quality_run() {
-  local path=$1 expected=$2
-  python3 - "$path" "$expected" <<'PY'
+  local path=$1 expected=$2 expected_max_out_len=$3
+  python3 - "$path" "$expected" "$expected_max_out_len" <<'PY'
 import json
 import sys
 
 data = json.load(open(sys.argv[1]))
 expected = int(sys.argv[2])
+expected_max_out_len = int(sys.argv[3])
 if not (
     data.get("requests") == expected
     and data.get("successful") == expected
     and data.get("failed") == 0
+    and data.get("max_out_len") == expected_max_out_len
+    and data.get("ignore_eos") is False
 ):
     raise SystemExit(f"{sys.argv[1]}: incomplete quality run")
 PY
@@ -510,6 +518,7 @@ quality_complete() {
       verify_quality_run \
         "$OUTPUT_ROOT/quality/$arm/$dataset.run$run_index.summary.json" \
         "$expected" \
+        "$QUALITY_MAX_OUT_LEN" \
         >/dev/null 2>&1 || return 1
     done
   done
@@ -530,7 +539,7 @@ run_quality() {
     fi
     for run_index in 1 2 3; do
       local summary="$output_dir/$dataset.run$run_index.summary.json"
-      if verify_quality_run "$summary" "$expected" 2>/dev/null; then
+      if verify_quality_run "$summary" "$expected" "$QUALITY_MAX_OUT_LEN" 2>/dev/null; then
         printf '%s verified existing %s\n' "$(date -Is)" "$summary"
         continue
       fi
@@ -544,11 +553,11 @@ run_quality() {
         --output-dir "$output_dir" \
         --run-id "run$run_index" \
         --concurrency 32 \
-        --max-out-len 1024 \
+        --max-out-len "$QUALITY_MAX_OUT_LEN" \
         --seed 0 \
         --timeout 2400 \
         --retries 2
-      verify_quality_run "$summary" "$expected"
+      verify_quality_run "$summary" "$expected" "$QUALITY_MAX_OUT_LEN"
       render_progress
     done
   done
@@ -639,7 +648,10 @@ run_quality hypic-only
 cp -- "$OUTPUT_ROOT/hypic-only/hypic-evidence.jsonl" "$OUTPUT_ROOT/hypic-only/quality.hypic-evidence.jsonl"
 stop_arm hypic-only "$TREATMENT_CONTAINER" quality 1
 
-python3 "$ANALYZER" --root "$OUTPUT_ROOT" --reference "$REFERENCE"
+python3 "$ANALYZER" \
+  --root "$OUTPUT_ROOT" \
+  --reference "$REFERENCE" \
+  --quality-max-out-len "$QUALITY_MAX_OUT_LEN"
 sha256sum \
   "$OUTPUT_ROOT/historical-reproduction-summary.json" \
   "$OUTPUT_ROOT/HISTORICAL_REPRODUCTION_REPORT.md" \

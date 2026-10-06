@@ -88,13 +88,19 @@ def perf_run(path: Path, arm: str, run_index: int) -> dict[str, Any]:
     }
 
 
-def quality_run(path: Path, dataset: str) -> dict[str, Any]:
+def quality_run(
+    path: Path,
+    dataset: str,
+    quality_max_out_len: int,
+) -> dict[str, Any]:
     data = load_json(path)
     samples = QUALITY[dataset]
     if (
         data.get("successful") != samples
         or data.get("failed") != 0
         or data.get("requests") != samples
+        or data.get("max_out_len") != quality_max_out_len
+        or data.get("ignore_eos") is not False
     ):
         raise ValueError(f"{path}: incomplete quality run")
     accuracy = require_finite(data.get("accuracy_pct"), f"{path}:accuracy_pct")
@@ -108,6 +114,8 @@ def quality_run(path: Path, dataset: str) -> dict[str, Any]:
         "details_sha256": data.get("details_sha256"),
         "data_sha256": data.get("data_sha256"),
         "evaluator_script_sha256": data.get("evaluator_script_sha256"),
+        "max_out_len": int(data["max_out_len"]),
+        "finish_reasons": data.get("finish_reasons", {}),
     }
 
 
@@ -126,6 +134,7 @@ def main() -> int:
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--reference", type=Path, required=True)
     parser.add_argument("--allow-incomplete", action="store_true")
+    parser.add_argument("--quality-max-out-len", type=int, default=1024)
     args = parser.parse_args()
     tensor_parallel = int(os.environ.get("HYPIC_TP_SIZE", "4"))
     host_npu_first = int(os.environ.get("HYPIC_HOST_NPU_FIRST", "0"))
@@ -162,7 +171,9 @@ def main() -> int:
                     errors.append(f"missing {path}")
                     continue
                 try:
-                    quality[arm][dataset].append(quality_run(path, dataset))
+                    quality[arm][dataset].append(
+                        quality_run(path, dataset, args.quality_max_out_len)
+                    )
                 except Exception as exc:
                     errors.append(str(exc))
 
@@ -237,6 +248,7 @@ def main() -> int:
             "treatment": "no prefix cache, HYPIC on",
             "performance_shape": "32768 input / 16384 shared / 1024 output / 40 requests / concurrency 16",
             "quality_datasets": ["LongBench-v2", "GSM8K"],
+            "quality_max_output_tokens": args.quality_max_out_len,
             "ceval": "operator-excluded",
             "niah_plus": "authoritative files absent",
         },

@@ -1,0 +1,23 @@
+{
+  "schema": "paper-to-ascend-task/v1",
+  "task_id": "hypic-qwen36-e2e-2048-20261006",
+  "objective": "Validate the maintained Paper-to-Ascend skill chain with a fresh HYPIC Qwen3.6-27B TP4 experiment on physical NPU0-3 within 24 hours.",
+  "state": "planned",
+  "branch": "work/hypic-qwen36-e2e-2048-20261006",
+  "base_commit": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "resource_claim": {
+    "physical_npus": [0, 1, 2, 3],
+    "container_visible_npus": [0, 1, 2, 3],
+    "cpu_set": "112-191",
+    "service_port": 8223,
+    "hccl_port_range": "27000-27100",
+    "neighboring_npus": "NPU4-7 are protected and must not be altered"
+  },
+  "deadline_policy": {
+    "wall_clock_limit_hours": 24,
+    "fail_fast": true,
+    "stop_new_long_units_before_deadline": true,
+    "release_resources_before_terminal_handoff": true
+  },
+  "next_action": "Validate static inputs and claim NPU0-3 with a real-weight disabled/enabled canary."
+}

@@ -130,6 +130,7 @@ def audit_quality(
     root: Path,
     aggregate: dict[str, Any],
     errors: list[str],
+    quality_max_out_len: int,
 ) -> tuple[list[dict[str, Any]], set[str], set[str]]:
     checked: list[dict[str, Any]] = []
     data_hashes: set[str] = set()
@@ -153,6 +154,8 @@ def audit_quality(
                         "successful": expected_count,
                         "failed": 0,
                         "unique_response_sha256": expected_count,
+                        "max_out_len": quality_max_out_len,
+                        "ignore_eos": False,
                     }
                     for key, expected in required.items():
                         if summary.get(key) != expected:
@@ -226,6 +229,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--quality-max-out-len", type=int, default=1024)
     args = parser.parse_args()
     root = args.root.resolve()
     aggregate_path = root / "historical-reproduction-summary.json"
@@ -239,7 +243,9 @@ def main() -> int:
     if aggregate.get("historical_direction_reproduced") is not True:
         errors.append("historical performance direction is not reproduced")
     performance = audit_performance(root, aggregate, errors)
-    quality, data_hashes, evaluator_hashes = audit_quality(root, aggregate, errors)
+    quality, data_hashes, evaluator_hashes = audit_quality(
+        root, aggregate, errors, args.quality_max_out_len
+    )
     payload = {
         "schema": "hypic-historical-reproduction-audit/v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -254,6 +260,7 @@ def main() -> int:
         "quality": quality,
         "dataset_sha256": sorted(data_hashes),
         "evaluator_sha256": sorted(evaluator_hashes),
+        "quality_max_output_tokens": args.quality_max_out_len,
         "errors": errors,
     }
     atomic_json(args.output.resolve(), payload)
