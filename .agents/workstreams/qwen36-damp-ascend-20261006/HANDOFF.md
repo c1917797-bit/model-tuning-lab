@@ -1,5 +1,36 @@
 # DAMP Ascend — current workstream
 
+## Ready-before-resource actual image checkpoint — 2026-10-06 19:30Z
+
+Current branch work/qwen36-damp-ascend-20261006 HEAD5291d1c22dde59826cba64a562fc7e9586f216b5
+was normally pushed and exact remote-verified by MAIN MA06dd. It contains the
+reviewed fixed_admission_capture_v1 14-file packet and two prelaunch evidence
+documents; other assembly/KVBuffer/new-reference drafts are not included.
+Read FIXED_ADMISSION_SAME_IMAGE_PREFLIGHT_20261006.md and the committed
+KVBUFFER_PRELAUNCH_AUDIT_20261006.md before treating an old ready label as final.
+
+MA06d1 actual same-image NO-device preflight ended0; MA06d5 independently read
+48/48 target CPython3.12 checks, unique plugin entrypoint/source hashes and
+exact owned344b2ed169cfeb7b93c00fe6750bbf4e1aa64878fdda1f43b398c9aa4abaec89
+stopped/retained/PID0/noOOM/no devices. Original terminal SHA5be667ac33269604bfeaae93e5dd7197cd6dc68445f3aeb1b26abbaae906edb4;
+packet manifest SHAa685970e567b629016470f9a821e97ceb9007404f9a3065615715ce1c0f51aae.
+This is source/preparation evidence only: no native frame, model parity,
+SOURCE_LOCK, final192, service, throughput or task quality PASS.
+
+MA06a0 remains the existing allT handle, not a command to relaunch. The19:23
+actual preflight resource snapshot still saw all four exact owned shards.
+At19:19:11Z MA06cc observed800/640/513/399 feedback rows of2560 per card,
+six native split anchors each and no failed reported checks. Full aggregate is
+pending. Whole-state row transfers and repeated cumulative JSON writes create
+budget risk; approximately19:47:27Z is the frozen global3600sec phase limit,
+not a promise of completion. Do not change live sources, timeout or matrix.
+Prepared NEW local-slot reference has no NPU equivalence yet. On real terminal
+retain original tool bytes, verify exact stopped cards, then freshly admit the
+smallest evidence-backed successor. Protected0–3 are never stopped or reclaimed.
+The model diagnostic still requires actual prior terminal/release and72GiB
+ordinary RAM, not just idle cards; MA06d1 only met the separate42GiB preflight
+budget. Original DAMP/portfolio deadlines and defaultOFF remain unchanged.
+
 ## Active four-card correctness dispatch — 2026-10-06 18:49Z
 
 MAIN MA069f committed the reviewed18-file pre-card package as

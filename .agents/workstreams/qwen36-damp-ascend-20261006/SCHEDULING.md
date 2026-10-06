@@ -1,5 +1,25 @@
 # Continuous preparation and NPU execution queue
 
+## Current readiness update — 2026-10-06 19:30Z
+
+MAIN MA06d1 actual same-image no-device preflight passed48 target software/API/
+entrypoint/source checks while MA06a0 still owned4–7. Exact preflight container
+was stopped retained, with no devices. Packet14 and scoped result/KVBuffer audit
+were normally pushed as5291d1c22dde59826cba64a562fc7e9586f216b5, verified MA06dd.
+This is preparation, not numerical/model/service/performance/task acceptance.
+Formal C1 OFF/OFF/ON waits for real MA06a0 terminal/exact release and unchanged
+72GiB ordinary RAM; NO-device preflight used its separate42GiB combined budget.
+
+Source/cost audit now prepares NEW selected-slot-local native reference to
+remove redundant whole-state transfers, plus an explicit raw split-report
+consumer bridge for next KVBuffer. These are not ready NPU receipts. Do not
+edit/restart live allT, shorten its64-case/160-step matrix or count diagnostics
+as E2E. Next grouping must balance oracle/transfers/CPU work, not only case count.
+Keep original full-state/untouched/alias/state/output and actual equivalence
+gates; native localS1 empty untouched set is not full-pool device evidence.
+At the existing phase limit record scoped budget/implementation evidence,
+never a paper-wide no-gain conclusion from an incomplete run.
+
 ## Active queue — 2026-10-06 18:49Z
 
 MA06a0 is the only live NPU dispatcher: physical4 T1-4,5 T5-8,6 T9-12,
