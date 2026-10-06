@@ -1,5 +1,24 @@
 # Continuous preparation and NPU execution queue
 
+## Preparation and live progress — 2026-10-06 20:50Z
+
+MA070e remains the only live numerical handle. OriginalMA0749 at20:46:19Z
+proves24/64 completed cases,3840 feedback steps,24 native anchors and zero
+failed recorded checks; full aggregate/source-after/cleanup remain pending.
+Protected0–3 PIDs unchanged, MemAvailable57166256KiB below72GiB model floor.
+Do not relaunch or change frozen liveDAMP52 sources.
+
+Read KVBUFFER_IMAGE_AND_SERVICE_PREPARATION_20261006.md. MA0729 actual image
+child69 tests/sixCLI/13API flags/49source checks passed, but parentexit1 from
+incorrect plugin grouping is retained. MA0734 narrow real grouped inventory
+and original-stream verification exited0 without rerunning valid work.
+NEW split service consumer/launcher MAIN11 software checks passed/defaultOFF.
+TrueT2–15 driver is added/reviewed; its real identity producer/image Meta/mount
+packet remains pending. No KVBuffer numerical/model/E2E/task PASS or formal
+timer start. Queue remains DAMP -> KVBuffer parallelfold -> groupedAdaKV.
+The preparation rule is implemented; do not describe a partial packet as ready.
+Individual/portfolio cutoffs unchanged; no usable accepted non-HYPIC result.
+
 ## Actual current state — 2026-10-06 20:30Z
 
 MA070e selected_row_bal_v1 is the ONLY live numerical operation; poll that

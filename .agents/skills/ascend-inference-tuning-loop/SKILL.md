@@ -78,6 +78,9 @@ load. This rule does not guarantee the first real-device attempt will pass.
 - Test real CLI/aggregate entry points and the fresh-clone transitive source
   closure, not only helper mocks. Old failed/software snapshots are historical
   evidence, not current source manifests; retain them without rewriting pins.
+  Check required plugin names in their actual platform/general entrypoint groups,
+  not one invented group. Reuse SHA-verified valid child results when a parent
+  predicate fails; correct only that predicate without relabelling the old exit.
 - Before scarce-card reservation, check the actual cross-stage handoffs:
   numerical producer -> model launcher -> paired comparator. A new report
   schema or host absolute Ref needs an explicit consumer and inspected mounts,
