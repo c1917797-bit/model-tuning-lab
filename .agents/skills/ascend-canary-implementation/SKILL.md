@@ -34,6 +34,9 @@ Ascend path.
 9. If correctness passes but performance is unclear, route to profiler or formal
    benchmark rather than expanding the change blindly.
 10. Record the canary result, limitations, artifact paths/hashes, and next step.
+11. When a local runtime change survives the canary, use
+    `runtime-monkeypatch-delivery` to package it as a removable candidate
+    before formal service benchmarking or PR preparation.
 
 ## Acceptance to scale
 

@@ -172,6 +172,26 @@ skills:
       - tests/**
       - .agents/experiments/**
       - .agents/workstreams/**
+  - id: runtime-monkeypatch-delivery
+    path: .agents/skills/runtime-monkeypatch-delivery
+    status: experimental
+    purpose: Package local inference-runtime changes as removable, hash-bound monkeypatches with per-worker activation, rollback, and promotion evidence.
+    triggers:
+      - deliver a new inference runtime technique
+      - package an Ascend monkeypatch or runtime plugin
+      - validate monkeypatch activation rollback or promotion
+      - runtime monkeypatch delivery
+      - 新技术 monkeypatch 交付
+      - 可移除运行时补丁
+    scope:
+      - AGENTS.md
+      - configs/**
+      - scripts/**
+      - src/**
+      - tests/**
+      - projects/**
+      - .agents/experiments/**
+      - .agents/workstreams/**
   - id: paper-to-ascend-reproduction
     path: .agents/skills/paper-to-ascend-reproduction
     status: experimental

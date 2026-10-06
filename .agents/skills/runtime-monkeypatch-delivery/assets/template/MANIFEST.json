@@ -1,0 +1,34 @@
+{
+  "schema": "runtime-monkeypatch-delivery/v1",
+  "name": "runtime-monkeypatch-template",
+  "status": "draft",
+  "source_contract": {
+    "image_digest": "sha256:replace-with-official-image-digest",
+    "framework_version": "replace-with-pinned-version",
+    "live_module": "replace.with.live.module",
+    "live_object": "replace_with_live_object",
+    "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "treatment": {
+    "switch": "MODEL_TUNING_RUNTIME_PATCH_ENABLE",
+    "enabled_value": "1",
+    "patch_file": "patch.py",
+    "entrypoint": "patch:activate",
+    "patch_sha256": "09bb058fbf1950f59d3d30beda01caff8e71358b95d4c0e8380a8fbf8a0b8dc2",
+    "single_primary_variable": true
+  },
+  "activation": {
+    "marker_prefix": "MODEL_TUNING_PATCH_ACTIVE",
+    "required_roles": ["engine", "worker"],
+    "disabled_control_required": true
+  },
+  "rollback": {
+    "disable_command": "MODEL_TUNING_RUNTIME_PATCH_ENABLE=0",
+    "uninstall_command": "remove the copied package and restart the service"
+  },
+  "evidence": {
+    "experiment_id": "example-contract",
+    "branch": "work/example-runtime-monkeypatch",
+    "commit": "0000000000000000000000000000000000000000"
+  }
+}
