@@ -246,6 +246,15 @@ def audit(parent: dict, quality_contract: dict) -> dict:
             and started.get("max_num_batched_tokens") == CONTEXT
             and started.get("physical_npus") == [0, 1, 2, 3]
             and started.get("health_passed") is True
+            and isinstance(started.get("worker_pid_by_physical_npu"), dict)
+            and set(started["worker_pid_by_physical_npu"]) == {"0", "1", "2", "3"}
+            and len(set(started["worker_pid_by_physical_npu"].values())) == 4
+            and all(isinstance(pid, int) and pid > 0
+                    for pid in started["worker_pid_by_physical_npu"].values())
+            and started.get("npu_smi_at_health_sha256")
+            == sha256(QROOT / arm / "npu-smi-at-health.txt")
+            and started.get("docker_top_at_health_sha256")
+            == sha256(QROOT / arm / "docker-top-at-health.txt")
             and stopped.get("schema") == "hypic-quality-context-service-stop/v1"
             and stopped.get("arm") == arm
             and stopped.get("container") == NAMES[arm]

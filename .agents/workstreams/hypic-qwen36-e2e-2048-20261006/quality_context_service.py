@@ -112,6 +112,36 @@ def receipt(arm: str, name: str, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def physical_worker_proof(name: str, arm: str) -> dict:
+    """Bind physical NPU0-3 worker PIDs to this exact running container."""
+    directory = QROOT / arm
+    directory.mkdir(parents=True, exist_ok=True)
+    npu_path = directory / "npu-smi-at-health.txt"
+    top_path = directory / "docker-top-at-health.txt"
+    npu_path.write_text(run("npu-smi", "info").stdout, encoding="utf-8")
+    top_path.write_text(run("docker", "top", name, "-eo", "pid,comm").stdout, encoding="utf-8")
+    docker_pids = {
+        int(parts[0]) for line in top_path.read_text(encoding="utf-8").splitlines()[1:]
+        if (parts := line.split()) and parts[0].isdigit()
+    }
+    workers = {
+        match.group(1): int(match.group(2))
+        for match in re.finditer(
+            r"^\|\s*([0-3])\s+0\s*\|\s*(\d+)\s*\|\s*VLLMWorker_TP\b",
+            npu_path.read_text(encoding="utf-8"), re.M,
+        )
+    }
+    if (set(workers) != {"0", "1", "2", "3"}
+            or len(set(workers.values())) != 4
+            or not set(workers.values()).issubset(docker_pids)):
+        raise RuntimeError("quality workers are not proven on physical NPU0-3 in the exact container")
+    return {
+        "worker_pid_by_physical_npu": workers,
+        "npu_smi_at_health_sha256": sha256(npu_path),
+        "docker_top_at_health_sha256": sha256(top_path),
+    }
+
+
 def start(arm: str) -> None:
     name = NAMES[arm]
     existing = inspect(name)
@@ -153,19 +183,22 @@ def start(arm: str) -> None:
                 raise RuntimeError("quality container exited before health")
             try:
                 with urlopen("http://127.0.0.1:8223/health", timeout=5) as response:
-                    if response.status == 200:
-                        receipt(arm, "service-start.json", {
-                            "schema": "hypic-quality-context-service-start/v1",
-                            "started_at": datetime.now(timezone.utc).isoformat(),
-                            "arm": arm, "container": name, "container_id": item["Id"],
-                            "image": IMAGE, "source_snapshot_sha256": snapshot_sha,
-                            "max_model_len": CONTEXT, "max_num_batched_tokens": CONTEXT,
-                            "physical_npus": [0, 1, 2, 3], "health_passed": True,
-                        })
-                        print(json.dumps({"arm": arm, "container": name, "health_passed": True}), flush=True)
-                        return
+                    healthy = response.status == 200
             except Exception:
-                pass
+                healthy = False
+            if healthy:
+                worker_proof = physical_worker_proof(name, arm)
+                receipt(arm, "service-start.json", {
+                    "schema": "hypic-quality-context-service-start/v1",
+                    "started_at": datetime.now(timezone.utc).isoformat(),
+                    "arm": arm, "container": name, "container_id": item["Id"],
+                    "image": IMAGE, "source_snapshot_sha256": snapshot_sha,
+                    "max_model_len": CONTEXT, "max_num_batched_tokens": CONTEXT,
+                    "physical_npus": [0, 1, 2, 3], "health_passed": True,
+                    **worker_proof,
+                })
+                print(json.dumps({"arm": arm, "container": name, "health_passed": True}), flush=True)
+                return
             time.sleep(10)
         raise RuntimeError("quality service health timeout")
     except Exception:

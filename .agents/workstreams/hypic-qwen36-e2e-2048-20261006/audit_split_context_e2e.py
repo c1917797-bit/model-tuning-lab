@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import statistics
 import subprocess
 import sys
@@ -68,6 +69,30 @@ def inspect_service_receipts(contract: dict, errors: list[str]) -> None:
                 and datetime.fromisoformat(stopped["stopped_at"]) <= DEADLINE
             ):
                 errors.append(f"{arm}: paired-context service or release receipt mismatch")
+            npu_path = QROOT / arm / "npu-smi-at-health.txt"
+            top_path = QROOT / arm / "docker-top-at-health.txt"
+            npu_text = npu_path.read_text(encoding="utf-8")
+            top_text = top_path.read_text(encoding="utf-8")
+            observed = {
+                match.group(1): int(match.group(2))
+                for match in re.finditer(
+                    r"^\|\s*([0-3])\s+0\s*\|\s*(\d+)\s*\|\s*VLLMWorker_TP\b",
+                    npu_text, re.M,
+                )
+            }
+            container_pids = {
+                int(parts[0]) for line in top_text.splitlines()[1:]
+                if (parts := line.split()) and parts[0].isdigit()
+            }
+            if not (
+                started.get("npu_smi_at_health_sha256") == sha256(npu_path)
+                and started.get("docker_top_at_health_sha256") == sha256(top_path)
+                and started.get("worker_pid_by_physical_npu") == observed
+                and set(observed) == {"0", "1", "2", "3"}
+                and len(set(observed.values())) == 4
+                and set(observed.values()).issubset(container_pids)
+            ):
+                errors.append(f"{arm}: physical worker PID/container proof mismatch")
         except Exception as exc:
             errors.append(f"{arm}: service receipt unreadable: {exc}")
 
