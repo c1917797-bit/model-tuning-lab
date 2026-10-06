@@ -4,6 +4,39 @@ Evidence date: 2026-10-06. Workstream:
 `.agents/workstreams/qwen36-damp-ascend-20261006/`.
 These are engineering lessons, not evidence of DAMP throughput or quality gain.
 
+## Fixture semantics before scarce-card dispatch — 2026-10-06 18:14Z
+
+MA0670 actually reached NPU4 and loaded selected SO, then a supposed
+noncontiguous indices negative failed at P1, before any packing cases.
+A stride2 slice with one element can be contiguous under Torch semantics.
+Assert fixture semantic preconditions in the exact runtime, not just an
+operation name. Preserve actual failed bytes; fix a proved fixture defect in
+a source-bound successor, never lower rejection/numeric gates. Software
+43PASS MA066f and tiny canary do not imply full component PASS. MA0674 is the
+separate native chunk/feedback stage on NPU7, still live, not an unchanged retry.
+See workstream SELECTED_PREFILL_NPU_FIRST_ATTEMPT_20261006.md/json.
+
+## Actual completed-failure ABI and capture closure — 2026-10-06 18:03Z
+
+- MAIN MA0455 ON36x4096 completed its child0 but whole operation exit1 on
+  OFF/ON output-ID validation. Existing arrays show29 differences/7 identical,
+  all prompt hashes equal; this is capture noninterference failure, not a
+  compressed-model task-accuracy result or paper-wide no-benefit verdict.
+  Preserve original terminal/source/arrays and exact owned stop proof; no
+  SOURCE_LOCK/final192 admission may be manufactured from completed requests.
+- A normal AWMCP completed nonzero record has error="exit code". MA0658
+  exposed a NEW-wrapper reuse bug requiring error=None while claiming nonzero
+  completion releases scheduling. Test ACTUAL saved tool bytes before cards,
+  not just a synthetic completed fixture populated with success defaults.
+  Admission must distinguish completed0, completed-nonzero, timeout,
+  cancellation and unknown/nonterminal; scheduling release is not acceptance.
+- Before another expensive full capture, inspect actual native call/ordering
+  and first differing positions. Import/Meta/tiny-mul or a different old smoke
+  cannot prove full-mode noninterference. Repair only a separately frozen NEW
+  wrapper/protocol, keep original failures, never relax mathematics/identity
+  solely to make a downstream plan fit run.
+
+
 ## Preserve the real runtime before testing the algorithm
 
 - Same-image tests must use the actual tokenizer/API version. Transformers

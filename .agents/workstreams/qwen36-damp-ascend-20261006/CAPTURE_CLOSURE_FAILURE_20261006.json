@@ -1,0 +1,36 @@
+{
+  "schema": "damp-capture-closure-failure-checkpoint/v1",
+  "original_operation": {
+    "id": "exec-0000000000000455",
+    "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-terminal-original.json",
+    "sha256": "aff014c739ba203210fdeea80d151353fc4edc0b3a9ffd6ca35292bb8a7bf38a",
+    "exit_code": 1,
+    "timeout": false,
+    "cancelled": false
+  },
+  "failure": {
+    "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-launch/FAILURE.json",
+    "sha256": "ed19a1ff37c1ac229e7ff92f57bfed5c2138d9a3d45fc94a120c0faaaee6e50e"
+  },
+  "diagnostic": {
+    "id": "exec-000000000000065a",
+    "path": "/cache/cch/qwen36-damp-20261006/capture-parity-failure-analysis-v1/RESULT.json",
+    "sha256": "be0721d46f5ed9e5a8bcc6574bc104bde5308f452870640663dd92f6e72c9bc4"
+  },
+  "stop": {
+    "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-launch/stopped.json",
+    "sha256": "d713fa1a7825da466706ffc07bba46cb8214343ff7914eff86fbe35afafcc876",
+    "fresh_inspect_operation": "exec-0000000000000656"
+  },
+  "source_lock_accepted": false,
+  "calibration_admitted": false,
+  "operator_failure_claimed": false,
+  "prelaunch_failure": {
+    "id": "exec-0000000000000658",
+    "scope": "actual completed-failure ABI rejected before mkdir/Docker/NPU",
+    "npu_executed": false
+  },
+  "latest_verified_remote_head": "db4c99979e85b82a3ff137b25adf698a82628730",
+  "remote_read_only_verification_operation": "exec-000000000000064c",
+  "formal_performance_or_accuracy_result": false
+}

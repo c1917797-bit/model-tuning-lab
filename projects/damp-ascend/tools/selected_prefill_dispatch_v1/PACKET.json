@@ -1,10 +1,10 @@
 {
   "schema": "damp-selected-prefill-dispatch-source/v1",
   "sources": {
-    "READY.md": "44f47140cc4258502efc66367bf66ac24675286b69c984d7ae7833f4530a8195",
+    "READY.md": "bf01ebf5403d78becc049e213a59e60d2f0a261760c5f1f9da3ace4ca1e8b3a9",
     "child_shim.py": "fedb6cbbea961c4e4f76ae3cde167130407bf0bf09e6f059c351ac3b8c2434ab",
-    "controller.py": "e4a7ccb5bb07d52b7dd12671502accc2390266e56c81416fc369e1d2f3a47cc2",
-    "test_dispatch.py": "da7fc80b6517f9d0be6aabc69dff85df67454c2624ef4a1532d8b1e6c7b2d7f4"
+    "controller.py": "97fd9034a820102a6ad3d728ea3785776e03406f74d4e2299a5eba6223d84ac6",
+    "test_dispatch.py": "f1ee37a11ee5005f08ab6e027f610b4d7e8efe2c2820cce0833097d087488a27"
   },
   "reused_sources": {
     "projects/damp-ascend/tools/prefill_float_dispatch_v1/dispatch.py": "094defb90bfc6d748d13069a48bd24297d01caaab1720ef5b8a3bc32ecf87c9e",
@@ -29,5 +29,15 @@
   ],
   "steps": 160,
   "child_schema": "damp-selected-prefill-child/v1",
-  "scope": "source preparation only; MAIN-owned actual one-stage single-card exec; no forged original tool receipt"
+  "scope": "source preparation only; MAIN-owned actual one-stage single-card exec; no forged original tool receipt",
+  "parent_terminal_repair": {
+    "actual_original_terminal": {
+      "path": "/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-terminal-original.json",
+      "sha256": "aff014c739ba203210fdeea80d151353fc4edc0b3a9ffd6ca35292bb8a7bf38a"
+    },
+    "calibration_success_inferred": false,
+    "completed_nonzero_allows_scheduling_only": true,
+    "frozen_float_source_unchanged": true,
+    "original_launcher_args_sha256": "3cb6c6d779695480acea0478ee054e4b94cc0d47893b102daaa028abf7135c0a"
+  }
 }

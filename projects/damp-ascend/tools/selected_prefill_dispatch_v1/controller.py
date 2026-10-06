@@ -54,6 +54,55 @@ REUSED = {
  "da541917ebd8764a81624a215a157b6d4e18fbaaa53d9310be54a104d2fbbf92"}
 ADMISSION = GATE / "admission_v1"
 ADMISSION_SHA = "3c47ea050cb519b3e4ced87bd13f32b817a8cd74e9305502b429eab871b93db8"
+# Exact original MA0455 launcher argv, canonical JSON array bytes.
+PARENT_ARGS_SHA256 = "3cb6c6d779695480acea0478ee054e4b94cc0d47893b102daaa028abf7135c0a"
+
+def parent_terminal(raw, helper):
+    """Completed capture releases scheduling, never implies calibration admission."""
+    d = raw.get("structuredContent", raw)
+    require(d.get("schema") == "agentweb.operation/v1" and d.get("kind") == "exec" and
+            d.get("operationId") == helper.PARENT_OPERATION and d.get("terminal") is True and
+            d.get("status") == "completed", "actual original MA0455 completed terminal")
+    op = d.get("operation", {})
+    require(op.get("routeDecision") == "peer_direct" and op.get("targetPeerId") == helper.PARENT_PEER,
+            "original MA peer/direct route")
+    result = op.get("result", {})
+    record = result.get("record", {})
+    require(result.get("found") is True and result.get("ok") is True and result.get("lane") == "job" and
+            result.get("state") == "completed" and record.get("id") == helper.PARENT_OPERATION and
+            record.get("lane") == "job" and record.get("state") == "completed" and
+            type(record.get("exitCode")) is int and record.get("cancelled") is False and
+            record.get("timedOut") is False and record.get("command") == "/usr/bin/python3" and
+            record.get("cwd") == str(REPO) and type(record.get("args")) is list and
+            all(type(x) is str for x in record["args"]) and
+            hashlib.sha256(json.dumps(record["args"], separators=(",",":")).encode()).hexdigest() == PARENT_ARGS_SHA256 and
+            type(record.get("stdout")) is str and type(record.get("stderr")) is str,
+            "authoritative completed parent record/exact original launcher; not cancel/timeout")
+    success = record["exitCode"] == 0
+    require((success and record.get("error") is None and d.get("error") is None and d.get("succeeded") is True) or
+            (not success and record.get("error") == "exit code" and d.get("error") == "exit code" and
+             d.get("succeeded") is False), "consistent actual successful0 or completed nonzero exit-code terminal")
+    return dict(operation_id=helper.PARENT_OPERATION, exit_code=record["exitCode"],
+        capture_success=success, raw_terminal_preserved=True,
+        scope="terminal releases scheduling only; a nonzero capture remains failed")
+
+def parent_stopped(cmd, helper, full, args):
+    """Reuse original cold owner/inspect proof with only the NEW terminal guard."""
+    raw = read(checked(args.parent_operation_receipt, args.parent_operation_sha256))
+    record = parent_terminal(raw, helper)
+    create = read(helper.PARENT_AUDIT / "create-command.json")["argv"]
+    require(create[create.index("--name")+1] == helper.PARENT_NAME, "actual parent create name")
+    label = next(x for x in create if x.startswith(full.LABEL + "="))
+    owner = label.split("=", 1)[1]
+    require(owner, "actual parent ownership nonce")
+    full.NAME = helper.PARENT_NAME
+    actual = helper.inspect(cmd, helper.PARENT_ID, "parent-stopped-inspect")
+    full.container_proof(actual, helper.PARENT_ID, owner)
+    require(actual["State"].get("Running") is False and actual["State"].get("Status") == "exited",
+            "TP4 parent must already be stopped")
+    return dict(terminal=record, raw_operation=raw, operation_sha256=args.parent_operation_sha256,
+        stopped_inspect=actual, create_command_sha256=sha(helper.PARENT_AUDIT / "create-command.json"),
+        source_lock_required=False)
 
 def require(ok, message):
     if not ok: raise RuntimeError(message)
@@ -427,14 +476,14 @@ def execute(args, prepared, packet_row):
     root,audit,output = (Path(entry[k]) for k in ("root","audit","stage_output"))
     require(not root.exists() and not root.is_symlink(), "new non-overwriting root")
     checked(args.parent_operation_receipt,args.parent_operation_sha256)
-    f.terminal(read(args.parent_operation_receipt),h) # completion may nonzero, not calibration success
+    parent_terminal(read(args.parent_operation_receipt),h) # completion may nonzero, not calibration success
     root.mkdir(exist_ok=False);audit.mkdir();output.mkdir()
     cmd=h.Commands(audit);cid=None;protected=None;failed=None;secondary=[];execution=None
     proof_path=None;observation={};report=None;child=None;cleanup=[]
     try:
         write(audit/"SOURCE.json",{"packet_sha256":args.packet_sha256,"packet":packet_row,"files":files,
                                 "runtime_manifest":ref(GATE/"RUNTIME_MANIFEST.json"),"plan":entry})
-        write(audit/"PARENT_TERMINAL.json",f.parent_stopped(cmd,h,full,args))
+        write(audit/"PARENT_TERMINAL.json",parent_stopped(cmd,h,full,args))
         image=cmd.json("immutable-image",["docker","image","inspect",IMAGE])
         require(len(image)==1 and image[0]["Id"]==IMAGE and image[0]["Architecture"]=="arm64", "actual immutable image")
         before=f.resources(cmd,h,entry["physical_card"]);protected=before["protected"]

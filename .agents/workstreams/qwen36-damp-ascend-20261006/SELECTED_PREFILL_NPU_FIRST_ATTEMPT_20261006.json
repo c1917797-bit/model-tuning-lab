@@ -1,0 +1,55 @@
+{
+  "schema": "damp-selected-prefill-first-npu-attempt/v1",
+  "evidence_date": "2026-10-06",
+  "scope": "preparation and component evidence; not model accuracy, performance or paper-wide no-go",
+  "software_review": {
+    "operation": "MA exec-000000000000066f",
+    "tests": 43,
+    "exit_code": 0,
+    "receipt": {
+      "path": "/cache/cch/qwen36-damp-20261006/selected-prefill-parent-repair-main-software-v1/RESULT.json",
+      "sha256": "b9c1d9eed138d38909473593fd4fe06dfb38dfc8078bcc3d4f7d55d5cf919d02"
+    }
+  },
+  "isolated": {
+    "operation": "MA exec-0000000000000670",
+    "terminal": true,
+    "exit_code": 1,
+    "original_terminal": {
+      "path": "/cache/cch/qwen36-damp-20261006/selected-prefill-isolated-repair-v2-terminal-original.json",
+      "sha256": "3bc755ca553976567cc276fa664b817f46555764344b660219fbf73179703925"
+    },
+    "report": {
+      "path": "/cache/cch/qwen36-damp-20261006/selected-prefill-dispatch-isolated-repair-v2-isolated/stage-output/isolated/report.json",
+      "sha256": "56b398f8e961813d3976885b777d3a245fc7884707fc62a12aa440f4ddb4cb9e"
+    },
+    "failure_sha256": "4490fc8b1f6ea1f3b6e52c8819a4302cbf4fab4eae5b150ef18adcbc649db7b7",
+    "actual_npu": true,
+    "physical_card": 4,
+    "logical_card": 0,
+    "runtime_soc": "Ascend910B4",
+    "check_count": 47,
+    "completed_host_negative_count": 44,
+    "completed_packing_case_count": 0,
+    "error": "AssertionError('host_noncontiguous7_prepare_rejected_all_inputs_raw_unchanged')",
+    "dispatch_error": null,
+    "fixture_hypothesis": "P1 indices shape[1] stride2 may still be logically contiguous; not a valid negative merely by slicing",
+    "root_cause_confirmed": false,
+    "container_id": "0547097529ea4a36d21f6eafd3a76fbaf96c6c8122626419cc61066a4af02bd4",
+    "stopped_retained": true,
+    "deleted": false,
+    "oom_killed": false,
+    "post_release_sha256": "41029fd366ec86354d8e893d05308a5722a47f58c462348b65cbd78777c9f22d"
+  },
+  "native_feedback": {
+    "operation": "MA exec-0000000000000674",
+    "latest_status": "running",
+    "physical_card": 7,
+    "run_id": "native-repair-v2",
+    "scope": "independent native chunk/pack/160-step feedback; not rerunning isolated failure",
+    "result": null
+  },
+  "no_e2e_result": true,
+  "no_task_accuracy_result": true,
+  "deadline_utc": "2026-10-07T08:48:03Z"
+}

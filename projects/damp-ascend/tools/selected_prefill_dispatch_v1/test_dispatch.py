@@ -176,15 +176,21 @@ class Contracts(unittest.TestCase):
         row=self.run_phase(p)
         self.assertEqual(row["state"],"completed");self.assertEqual(row["returncode"],9)
         self.assertIsNone(row["error"])
-    def test_17_parent_failed_capture_still_terminal_not_promoted(self):
+    def actual_parent(self):
+        p=c.ROOT/"full-reference-resume-v1-terminal-original.json"
+        c.checked(p,"aff014c739ba203210fdeea80d151353fc4edc0b3a9ffd6ca35292bb8a7bf38a")
+        return c.read(p),SimpleNamespace(PARENT_OPERATION="exec-0000000000000455",
+          PARENT_PEER="lgw_a6109c51076a4a2c9d2674ca5a8704a0")
+
+    def test_17_actual_completed_exit1_preserved_not_promoted(self):
+        raw,h=self.actual_parent();before=copy.deepcopy(raw)
+        row=c.parent_terminal(raw,h)
+        self.assertEqual(raw,before);self.assertEqual(row["exit_code"],1)
+        self.assertFalse(row["capture_success"]);self.assertTrue(row["raw_terminal_preserved"])
+        self.assertEqual(raw["error"],"exit code")
+        self.assertEqual(raw["operation"]["result"]["record"]["error"],"exit code")
+        # Actual regression: the untouched frozen helper rejects this real record.
         f=c.load("_selected_test_float",c.REPO/next(iter(c.REUSED)))
-        h=SimpleNamespace(PARENT_OPERATION="exec-0000000000000455",PARENT_PEER="peer")
-        r={"id":h.PARENT_OPERATION,"lane":"job","state":"completed","exitCode":7,"cancelled":False,
-           "timedOut":False,"error":None,"command":"/usr/bin/python3","cwd":str(c.REPO)}
-        raw={"operationId":h.PARENT_OPERATION,"terminal":True,"operation":{"routeDecision":"peer_direct",
-             "targetPeerId":"peer","result":{"found":True,"ok":True,"lane":"job","state":"completed","record":r}}}
-        row=f.terminal(raw,h);self.assertFalse(row["capture_success"]);self.assertEqual(row["exit_code"],7)
-        raw["terminal"]=False
         with self.assertRaises(RuntimeError):f.terminal(raw,h)
     def test_18_maps_are_same_process_not_file_presence(self):
         with tempfile.TemporaryDirectory() as d:
@@ -450,6 +456,8 @@ class Contracts(unittest.TestCase):
             execution={"state":"failed","returncode":7,"error":"ORIGINAL DISPATCH FAILURE","stdout":"software",
                        "stderr":"software","cancelled":False,"timed_out":False}
             with patch.object(c,"closure"),patch.object(c,"packet",return_value={}),\
+                 patch.object(c,"parent_terminal",return_value=None),\
+                 patch.object(c,"parent_stopped",return_value={"SOFTWARE_ONLY":True}),\
                  patch.object(c,"canary",side_effect=canary),patch.object(c,"phase",return_value=execution):
                 captured=io.StringIO()
                 with redirect_stdout(captured),self.assertRaises(RuntimeError):
@@ -483,5 +491,102 @@ class Contracts(unittest.TestCase):
             self.assertIsNone(row["runtime"])
             self.assertFalse((out/"isolated").exists())
             self.assertNotIn("MAIN_SELECTED_PREFILL_CHILD",captured.getvalue())
+
+    def test_40_consistent_completed_zero_shape_is_separate_synthetic_branch(self):
+        raw,h=self.actual_parent()
+        raw["error"]=None;raw["succeeded"]=True;raw["ok"]=True
+        r=raw["operation"]["result"]["record"];r["exitCode"]=0;r["error"]=None
+        row=c.parent_terminal(raw,h)
+        self.assertEqual(row["exit_code"],0);self.assertTrue(row["capture_success"])
+        self.assertIn("scheduling only",row["scope"])
+
+    def test_41_real_parent_mutations_fail_closed(self):
+        raw,h=self.actual_parent()
+        edits=[
+          lambda x:x.update(terminal=False),lambda x:x.update(status="running"),
+          lambda x:x.update(kind="storage"),lambda x:x.update(succeeded=True),
+          lambda x:x.update(error=None),lambda x:x.update(operationId="exec-other"),
+          lambda x:x["operation"].update(targetPeerId="other"),
+          lambda x:x["operation"].update(routeDecision="gateway_fallback"),
+          lambda x:x["operation"]["result"].update(found=False),
+          lambda x:x["operation"]["result"].update(ok=False),
+          lambda x:x["operation"]["result"].update(lane="quick"),
+          lambda x:x["operation"]["result"].update(state="running"),
+          lambda x:x["operation"]["result"]["record"].update(id="exec-other"),
+          lambda x:x["operation"]["result"]["record"].update(lane="quick"),
+          lambda x:x["operation"]["result"]["record"].update(state="running"),
+          lambda x:x["operation"]["result"]["record"].update(cancelled=True),
+          lambda x:x["operation"]["result"]["record"].update(timedOut=True),
+          lambda x:x["operation"]["result"]["record"].update(exitCode=True),
+          lambda x:x["operation"]["result"]["record"].update(exitCode=None),
+          lambda x:x["operation"]["result"]["record"].update(exitCode=0),
+          lambda x:x["operation"]["result"]["record"].update(error=None),
+          lambda x:x["operation"]["result"]["record"].update(error="cancelled"),
+          lambda x:x["operation"]["result"]["record"].update(command="/bin/sh"),
+          lambda x:x["operation"]["result"]["record"].update(cwd="/tmp"),
+          lambda x:x["operation"]["result"]["record"].update(args=["-B","different.py"]),
+          lambda x:x["operation"]["result"]["record"].update(stdout=None),
+          lambda x:x["operation"]["result"]["record"].update(stderr=None)]
+        for i,edit in enumerate(edits):
+            changed=copy.deepcopy(raw);edit(changed)
+            with self.subTest(edit=i),self.assertRaises(RuntimeError):c.parent_terminal(changed,h)
+
+    def test_42_parent_stop_reuses_nonce_proof_and_requires_already_exited(self):
+        raw,h=self.actual_parent()
+        p=c.ROOT/"full-reference-resume-v1-terminal-original.json"
+        args=SimpleNamespace(parent_operation_receipt=p,parent_operation_sha256=c.sha(p))
+        with tempfile.TemporaryDirectory() as d:
+            calls=[];parent_audit=Path(d);name="SYNTHETIC-parent-proof"
+            c.write(parent_audit/"create-command.json",{"argv":["docker","create","--name",name,
+                "--label","SYNTHETIC-owner=actual-nonce"]})
+            h.PARENT_AUDIT=parent_audit;h.PARENT_NAME=name;h.PARENT_ID="a"*64
+            full=SimpleNamespace(NAME="before",LABEL="SYNTHETIC-owner",
+              container_proof=lambda actual,cid,owner:calls.append((actual,cid,owner)))
+            for stopped in (True,False):
+                observed={"State":{"Running":not stopped,"Status":"exited" if stopped else "running"}}
+                h.inspect=lambda *a:observed
+                if stopped:
+                    row=c.parent_stopped(None,h,full,args)
+                    self.assertFalse(row["terminal"]["capture_success"])
+                    self.assertFalse(row["source_lock_required"])
+                    self.assertEqual(row["raw_operation"],raw)
+                    self.assertEqual(calls[-1],(observed,"a"*64,"actual-nonce"))
+                else:
+                    with self.assertRaises(RuntimeError):c.parent_stopped(None,h,full,args)
+            self.assertEqual(full.NAME,name)
+
+    def test_43_same_owner_disjoint_siblings_joint_source_flow_only(self):
+        # Simulated host facts exercise the unchanged source; no real resource or device admission.
+        f=c.load("_selected_same_owner_resource_source",c.REPO/next(iter(c.REUSED)))
+        f.OWNER=c.OWNER
+        real_read_text=Path.read_text
+        def proc_read(path,*a,**k):
+            if str(path)=="/proc/uda/namespace_node":return "SYNTHETIC idle declarations\n"
+            if str(path)=="/proc/meminfo":return "MemAvailable: %d kB\n"%((2*c.MEMORY+f.RESERVE)//1024)
+            return real_read_text(path,*a,**k)
+        for local,peer_card in ((4,7),(7,4)):
+            own,peer=fixture_entry("isolated",local),fixture_entry("native_feedback",peer_card)
+            self.assertEqual(actual(own)["Config"]["Labels"]["model-tuning-lab.owner"],c.OWNER)
+            other=actual(peer);other["Id"]="b"*64;c.inspect_owned(other,peer,"b"*64)
+            class Commands:
+                def run(self,label,args,**kwargs):
+                    self_calls.append((label,args))
+                    return ("b"*64 if label=="running-IDs" else "SYNTHETIC no command execution","")
+                def json(self,label,args):return {"NCPU":2}
+            self_calls=[];rows={i:[] for i in range(8)}
+            h=SimpleNamespace(parse_processes=lambda raw:rows,protected_fingerprint=lambda rows:{},
+              inspect=lambda *a:other,mount_budget=lambda cmd:{"SYNTHETIC":True},
+              cgroup_record=lambda actual,cid,cap,quota:{"cpu_quota":quota,"memory_limit_bytes":cap})
+            with patch.object(Path,"read_text",proc_read),\
+                 patch.object(f,"telemetry",return_value={i:{"aicore":0,"hbm_mib":3165} for i in range(8)}),\
+                 patch.object(f.shutil,"disk_usage",return_value=SimpleNamespace(free=20*1024**3)):
+                lease=f.resources(Commands(),h,local)
+                self.assertEqual(lease["joint_cpu_quota"],2)
+                self.assertEqual(lease["ram_admission_bytes"],2*c.MEMORY+f.RESERVE)
+                self.assertEqual(lease["joint_correctness_leases"][0]["container_id"],"b"*64)
+                self.assertEqual(lease["joint_correctness_leases"][0]["memory_limit_bytes"],c.MEMORY)
+                # The same source rejects overlap; no owner-name shortcut bypasses mapping.
+                other["HostConfig"]["Devices"][0]["PathOnHost"]="/dev/davinci"+str(local)
+                with self.assertRaises(RuntimeError):f.resources(Commands(),h,local)
 
 if __name__=="__main__":unittest.main()

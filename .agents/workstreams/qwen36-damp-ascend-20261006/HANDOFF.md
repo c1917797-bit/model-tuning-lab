@@ -1,5 +1,17 @@
 # DAMP Ascend — current workstream
 
+## Latest actual NPU attempt — 2026-10-06 18:14Z
+
+Read SELECTED_PREFILL_NPU_FIRST_ATTEMPT_20261006.md/json before old live-capture
+or prelaunch notes. MA0670 now actual terminal exit1 on host_noncontiguous7
+negative; actual card4/runtime/SO/canary were established but zero packing cases
+completed. Suspected P1 singleton fixture semantics need proof, not gate waiver.
+Owned05470975 container stopped retained; original terminal/report preserved.
+Distinct native_feedback MA0674 is live on physical7, run native-repair-v2,
+packet06457ede immutable; no PASS/E2E/accuracy claim. Calibration remains FAILED.
+MAIN independently reviewed selected terminal repair and43 tests MA066f.
+NEW allT/reference seam and allP/shared packets remain preparation only.
+
 ## Prelaunch successor checkpoint — 2026-10-06 17:47Z
 
 Read PRELAUNCH_SUCCESSOR_CHECKPOINT_20261006.md and its SOURCE_SCOPE JSON.
@@ -14,6 +26,23 @@ and physical0–3 protection unchanged; existing OFF36 is reused.
 
 Activated 2026-10-06T08:48:03Z; hard deadline 2026-10-07T08:48:03Z.
 Status: active DAMP plugin migration; no performance/accuracy result.
+
+## Capture closed FAILED and successor guard repair — 2026-10-06 18:03Z
+
+Read CAPTURE_CLOSURE_FAILURE_20261006.md/json before older active-capture notes.
+MA0455 now terminal exit1: ON36x4096 child completed0 but OFF/ON token identity
+failed (29 divergent,7 identical; prompts all equal). No legal SOURCE_LOCK;
+full192 fitting/allT calibration-dependent dispatch remains pending.
+MA0656 freshly proves exact owned b6e exited/Pid0, stopped and retained.
+MA0658 successor failed before mkdir/Docker/NPU: real nonzero AWMCP error
+was incorrectly rejected by reused terminal helper. Repair NEW selected wrapper,
+direct-replay ORIGINAL terminal JSON, retest/freeze/MAIN-review, then fresh run.
+Do not change old helpers/oracles or repeat unchanged failures. Independent
+selected/native components do not require capture success; joint admission
+still needs symmetric monitors and fresh disjoint resource bounds.
+db4c999 was normal-pushed and exact remote hash read-verified by MA064c.
+No compressed-candidate E2E/task result or final acceptance is claimed.
+
 
 ## Device-ready execution packet checkpoint — 2026-10-06 17:20Z
 

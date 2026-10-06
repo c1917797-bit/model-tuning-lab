@@ -190,3 +190,38 @@ Final expanded behavior suite: actual direct exec062d completed exit0,
 39/39 tests in3.898s, including exact native authority flags and an original
 runner exception BEFORE its output mkdir. Nullable runtime/absent report and
 no success marker were verified. This remains SOFTWARE ONLY, no real stage.
+
+## Actual MA0455 completed-failure repair (NEW selected controller only)
+
+MAIN isolated-v1 operation MA0658 was rejected before mkdir, Docker or NPU:
+the reused float helper required record.error=None even for nonzero completed
+parent exit. The genuine preserved original MA0455 JSON is
+/cache/cch/qwen36-damp-20261006/full-reference-resume-v1-terminal-original.json,
+SHA aff014c739ba203210fdeea80d151353fc4edc0b3a9ffd6ca35292bb8a7bf38a.
+It is completed exit1, error="exit code", succeeded=false, not cancelled/timed
+out. Capture finalize rejected changed output token IDs; no valid SOURCE_LOCK,
+calibration success or final-plan admission is inferred.
+
+NEW parent_terminal accepts ONLY consistent completed exit0/errorNone/
+succeededTrue or completed nonzero/error"exit code"/succeededFalse. It verifies
+exact original MA0455/direct peer/job/command/cwd and launcher argv SHA
+3cb6c6d779695480acea0478ee054e4b94cc0d47893b102daaa028abf7135c0a.
+NEW parent_stopped reuses the same original create-name/nonce/container_proof
+and actual already-exited inspect checks, changing only the terminal guard.
+Both execute call sites use these NEW functions; frozen f.terminal and
+f.parent_stopped, old float/allT sources, raw terminal, oracles and libraries
+are not modified. A completed parent does not by itself prove cards released.
+
+The software regression directly replays all 3508 genuine JSON bytes (not a
+synthetic errorNone substitute), separately tests a clearly synthetic consistent
+zero-exit shape, 27 terminal mutations, and nonce/already-exited proof paths.
+Old published source packet a608e17f6208d07d843f65cbaf4e70bfdf7e55ee721a9a45f0d9c34533746cb1
+and original source hashes remain recoverable in MAIN's db4c999 Git checkpoint.
+A new reviewed packet/run ID is required; historical failures/receipts are not
+rewritten. These are resource-admission software tests, not NPU algorithm PASS.
+
+A simulated-host source-flow regression also calls the unchanged f.resources in
+both card4/card7 directions with same-owner selected siblings. It requires the
+two full1CPU/8GiB caps plus8GiB ordinary reserve and rejects card overlap.
+This is not an actual parallel lease/card PASS. NEW allP/old float owner mixing
+still remains unsupported; MAIN must use fresh real joint admission.
