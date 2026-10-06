@@ -423,6 +423,17 @@ not require retraining unless retraining is explicitly in scope.
   common stack improvement, give it to the dense control too; attribute only
   the paper-specific increment. See
   `projects/qwen36-paper-portfolio/KV_QUANT_REUSE_GATE.md`.
+- For grouped low-bit KV-cache papers, do not relabel a native static-scale
+  INT4 attention mode as the paper's dynamic groupwise algorithm. KIVI's
+  32-token Key groups, 32-channel Value groups and full-precision residual
+  tail are not expressed by the deployed FIA mode-0/mode-1 scales. Compare an
+  unpacked equation probe and the native-mode derivative on identical live
+  Q/K/V, with an uncompressed native oracle, but keep their single-layer
+  errors separate from task accuracy or service throughput. At the declared
+  one-day deadline, an output-preserving probe without packed-cache lifecycle
+  and matched E2E evidence closes only the current implementation as
+  inconclusive; preserve its artifacts and move on instead of declaring the
+  paper disproved. See `projects/qwen36-paper-portfolio/KIVI_ASCEND_GATE.md`.
 - For a low-bit native matmul graph mismatch, first measure identical-input
   eager repeats, graph repeats, and graph-versus-eager against an unmodified
   dense control at the same shape. A failed bitwise graph/eager assertion alone
