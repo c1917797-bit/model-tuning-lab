@@ -1,5 +1,24 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Live checkpoint — 2026-10-06 21:45 UTC
+
+The same AWMCP quality controller exec-000000000000064a remains live and
+automatically entered no-cache GSM8K run 1 at 21:43:15 UTC. All three
+no-cache LongBench-v2 runs are complete, but the six-run baseline registry
+is **not frozen** until three GSM8K runs also finish. Run 3 completed
+127/127 with zero failures and 74/127 correct (58.2677%); raw JSONL SHA256
+a0391b097ca8734042d7855b629191fde68e5fe377b14c0056622a4fc57b4982.
+An independent check found indexes 0-126 exactly once, valid per-response
+hashes, no 2,048-token output or 41,984-token context violation, and exact
+agreement with summary accuracy, 140,732 completion tokens, finish reasons
+(18 length, 109 stop), difficulty/length category scores, and raw hash.
+Sample 48 retained the full 39,642-token prompt and completed 1,006 tokens,
+finish_reason stop. Across the three baseline LongBench runs the accuracy
+point estimates are 71/127, 77/127, and 74/127: mean 58.2677% with sample
+SD 2.3622 percentage points. This is a baseline-only descriptive statistic,
+not a paired HYPIC quality verdict. Preserve the original paper-only
+performance rejection; do not duplicate the live controller.
+
 ## Live checkpoint — 2026-10-06 20:33 UTC
 
 The same quality controller, AWMCP `exec-000000000000064a`, remains live and

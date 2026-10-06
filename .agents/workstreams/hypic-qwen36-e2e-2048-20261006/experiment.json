@@ -3,7 +3,7 @@
   "experiment_id": "hypic-qwen36-e2e-2048-20261006",
   "status": "paired-quality-baseline-in-progress",
   "stage": "separate-41984-context-quality-validation",
-  "as_of_utc": "2026-10-06T20:36:25Z",
+  "as_of_utc": "2026-10-06T21:45:03Z",
   "historical_reference": {
     "tag": "paper-result/hypic-qwen36-tp4-adopted",
     "commit": "fcaed3caf4a61a79bc191d7d074bb031b5206e9a",
@@ -68,7 +68,7 @@
     "contract_path": "/cache/cch/hypic-qwen36-e2e-2048-20261006/quality-context-41984/quality-context-contract.json",
     "fingerprint_sha256": "fa7915cdab4c836869f867184de563dd407c237979a48b691098518aacc9373d",
     "max_model_len": 41984,
-    "baseline_longbenchv2_complete_runs": 2,
+    "baseline_longbenchv2_complete_runs": 3,
     "baseline_quality_registry_frozen": false,
     "paired_quality_verdict": "pending",
     "controller_operation_id": "exec-000000000000064a"
