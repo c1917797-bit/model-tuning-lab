@@ -4,6 +4,21 @@
   "measured_symptom": "Long shared prefixes dominate prefill and TTFT when native prefix caching is disabled.",
   "attributed_cause": "Repeated public prefix computation can be materialized and replayed through the HYPIC planner, cache, worker and repair path.",
   "changed_seam": "VLLM_ASCEND_HYPIC_ENABLE=0 to 1 on the same pinned vLLM-Ascend HYPIC source tree.",
+  "paper_method_scope": {
+    "source_audit": "hypic_vllm_ascend v0.8.5 docs/HYPIC_CORE_CAPABILITY_AUDIT.md at 3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "implemented_scope": "single-instance C0/C1/C2 position-independent hot-segment reuse, materialization, repair, scheduler admission and worker dispatch",
+    "current_npu_validation": "real-weight canary passed; three-run performance and 2048-token paired quality pending",
+    "omitted_paper_stages": [
+      "C3.1 global directory/router",
+      "C3.2 cross-replica cold-segment scatter",
+      "C3.3 combine gating",
+      "C3.4 inter-instance state/KV transfer",
+      "C3.5 load balancing",
+      "C3.6 transfer/compute overlap"
+    ],
+    "algorithm_identity": "faithful-port of bounded C1/C2 hot-reuse path; not paper-complete HYPIC",
+    "allowed_decision_scope": "Qwen3.6-27B TP4, physical NPU0-3, cache-disabled shared-prefix service workload only"
+  },
   "live_path": {
     "architecture": "Qwen3.6 hybrid attention/GDN",
     "dense_only_assumed": false,
