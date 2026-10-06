@@ -91,11 +91,34 @@ Run2 TTFT P95 was 81,137.27 ms; TPOT P95 447.08 ms; output throughput
 repetitions, not the formal three-run denominator. The controller advanced to
 baseline performance run3 without restarting the service.
 
+At 2026-10-06 13:37 UTC, baseline performance run3 completed and passed the
+strengthened 40-request validator. Its raw JSON SHA256 is
+`46e63bc7c3e4b156483a86eedfb0a42a05f606c120ade1516cf91dfd40e1c3a8`.
+All three baseline runs were frozen in `baseline-registry.json` under the
+experiment artifact root; registry SHA256 at first freeze was
+`898f50322900fd24cd0010408824b5f7e6d3ba925eebf4402d7f039105672cd0`.
+A second registry invocation returned `MATCH`. Median-of-three baseline values:
+TTFT P95 81,137.27 ms, TPOT P95 447.08 ms, output throughput 29.74 token/s,
+benchmark duration 1,377.15 s. This is now the formal same-environment
+performance denominator for treatment and later candidate iterations; do not
+repeat it without fingerprint, raw hash, or live comparability drift.
+The controller then stopped the baseline and began starting the treatment
+container on the same physical NPU0-3 lane. At 13:40 UTC Docker reported the
+expected image, CPU set 112-191, and `/dev/davinci0`–`3` mappings; NPU workers
+had not yet appeared, so service readiness remained unproven at that instant.
+
+Git checkpoint `949fa6a` is local only: one attempted HTTPS push failed with
+`could not read Username for 'https://github.com'`. The branch was one commit
+ahead of origin and no credential helper or SSH agent was available. Do not
+put tokens in Git or chat; keep device work and local evidence safe, then push
+the accumulated commits once secure host authentication is restored.
+
 Baseline artifact registry was added while this controller was already live.
 Its running shell will not execute the newly inserted registry commands. After
 baseline performance run3 completes, run
 `python3 .agents/workstreams/hypic-qwen36-e2e-2048-20261006/baseline_registry.py performance --root /cache/cch/hypic-qwen36-e2e-2048-20261006`
-to freeze all three validated raw performance hashes. Once all six baseline
+to freeze all three validated raw performance hashes; this performance step
+has now been done and independently matched. Once all six baseline
 quality summaries and JSONL files complete, run the same command with `quality`
 instead of `performance`. Both commands fail closed on missing, invalid, or
 changed raw evidence. Future controller starts perform these steps automatically,
