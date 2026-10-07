@@ -1,0 +1,44 @@
+schema: ascend-inference-diagnostic/v1
+id: exp-20261007-hypic-npu03-comm-root
+status: planned
+owner_branch: work/hypic-npu03-comm-root-20261007
+predecessor: hypic-qwen36-e2e-2048-20261006
+objective: Explain the persistent approximately 339 ms/token Decode baseline gap on physical NPU0-3 without using NPU4-7.
+observations:
+  - The three-round no-cache TPOT weighted mean is 413.10 ms on NPU0-3 versus 74.51 ms in the historical NPU4-7 lane.
+  - HYPIC saves 13.69 and 14.15 ms/token respectively; this is not a disappearance of the technique effect.
+  - Diagnostic rank-0 Decode steps have median wall 387.89 ms and communication timeline union 356.10 ms.
+  - About sixteen approximately 22 ms AIV AllReduce tasks recur per Decode step; three exported ranks start within approximately 14 us.
+  - The model has sixteen full-attention layers. Layer attribution is a hypothesis, not yet source-proven.
+  - HCCS static link health is OK with speed 224 and zero retries/errors; this is not a loaded-bandwidth test.
+hypotheses:
+  - H1: The same TP4 AIV AllReduce is intrinsically slow on physical NPU0-3, independent of the vLLM graph.
+  - H2: The collective is fast standalone and the 22 ms service trace reflects graph, synchronization, or workload context.
+  - H3: AIV expansion mode is the controlled factor; an otherwise identical default-mode run changes latency.
+scope:
+  physical_npus: [0, 1, 2, 3]
+  forbidden_npus: [4, 5, 6, 7]
+  coexistence: Do not stop or modify the existing sleep-infinity agentgpu container.
+  image_digest: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+  model: /cache/efim/Qwen3.6-27B
+  source_commit: 3ad0967589304cd8fc4e7cff02f48ecc6125c89f
+  runtime_config: TP4, HCCL_OP_EXPANSION_MODE=AIV, FULL_DECODE_ONLY
+  artifact_root: /cache/cch/hypic-npu03-comm-root-20261007
+preflight:
+  - Recheck live physical NPU0-3 processes, Docker device mappings, ports, and peer route immediately before allocation.
+  - Abort if any foreign process occupies NPU0-3 or the named diagnostic container already exists.
+  - Never inspect NPU4-7 as allocatable or run a workload on them.
+tests:
+  - Read-only per-rank trace analysis of long AIV AllReduce intervals and overlapping tasks.
+  - Fresh-process TP4 BF16 AllReduce microbenchmark on only NPU0-3, warm then measure at representative activation sizes.
+  - If necessary, one otherwise identical fresh-process run with HCCL_OP_EXPANSION_MODE unset; no driver, firmware, clock, or shared-service change.
+  - If standalone and service results disagree, classify H2 and inspect service graph dependencies before any tuning claim.
+limits:
+  one_process_group_at_a_time: true
+  per_run_timeout_seconds: 180
+  one_active_diagnostic_container: true
+  no_system_setting_mutation: true
+decision:
+  accepted_root: Repeated controlled measurement changes the suspected bottleneck and matches service-scale opportunity.
+  inconclusive: Standalone evidence alone cannot establish the service root; record and stop without claiming a fix.
+  cleanup: Docker --rm for only the uniquely named diagnostic container; verify no owned process remains on NPU0-3.
