@@ -1,6 +1,9 @@
 schema: ascend-inference-experiment/v1
 id: exp-20261006-qwen36-damp
-stage: attempted
+stage: decided
+decision: inconclusive
+decision_scope: 'Current deployment no-go at fixed24h gate; paper not disproved;37/64 restricted cases, missing full matrix/model/E2E/task evidence'
+closed_at: '2026-10-07T08:48:03Z'
 started_at: '2026-10-06T08:48:03Z'
 deadline: '2026-10-07T08:48:03Z'
 objective: 'Training-free DAMP recurrent-state compression with plugin delivery and >=10% matched E2E throughput'

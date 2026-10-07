@@ -1,5 +1,21 @@
 # DAMP Ascend — current workstream
 
+## Current terminal checkpoint — 2026-10-07 08:52Z
+
+Read KVBUFFER_FIRST_FAILURES_AND_DAMP_CLOSEOUT_20261007.md before older live
+notes. DAMP's fixed08:48:03Z clock has ended: current deployment is no-go/
+inconclusive at the time gate,37/64 complete, not paper-wide rejection.
+KVBuffer MA0924/0925 are actual completed exit1, both owned containers stopped
+and retained. B1 active output exceeds0.00303; B16 finite failure is attributed
+to three NaNs only in undefined native inactive padding, NOT candidate/state.
+NEW oracle/readout repair is pending; old failure is never relabelled PASS.
+NEW6 middle-service bridge is applied and MAIN MA0933 software14/source60/
+default-OFF checks passed, but full middle/service/E2E/task is NOT admitted.
+KIVI NEW7 software draft delivered for review; Ada-KV preparation continues.
+Three agents plus MAIN are the actual four slots; not all papers are ready.
+Cross-paper cards4–7 remain serial. KV cutoffOct8 08:29:54Z and portfolio
+Oct9 11:17:31Z unchanged; protect0–3 and full-model72GiB admission.
+
 ## Actual successor dispatch — 2026-10-07 08:33Z
 
 MA0921 actually completed exit0: prepared JOINT SHA
