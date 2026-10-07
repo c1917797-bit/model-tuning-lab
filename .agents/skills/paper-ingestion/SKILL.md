@@ -25,6 +25,12 @@ an Ascend implementation is worth attempting.
 5. Separate portable ideas from paper-specific assumptions such as GPU-only
    kernels, unavailable training data, custom checkpoints, or benchmark-only
    shortcuts.
+   For a derivative that implements only a paper subset, run its bounded-scope
+   and full-scope capability/source audits when available. Record both the
+   supported mechanism IDs and the full-scope missing IDs; an expected
+   full-scope failure is evidence of a boundary, not a failed bounded result.
+   Do not promote a passing C1/C2 hot-reuse audit to a paper-complete claim
+   when distributed C3 or another required mechanism remains absent.
 6. Translate the paper into one or more candidate hypotheses, each with one
    primary variable and an expected bottleneck it should improve.
 7. Record uncertainty explicitly. Unknown architecture or runtime prerequisites
@@ -72,6 +78,10 @@ workstream handoff:
 - whether retraining is required;
 - candidate first hypothesis;
 - evidence gaps and next checks.
+
+For a retrospective ingestion after implementation has already begun, label
+the sequence honestly: the note may validate current fit, but it cannot turn
+an omitted pre-implementation applicability gate into a historical pass.
 
 ## Boundaries
 
