@@ -1,0 +1,99 @@
+{
+  "schema": "kvbp.candidate-ub-trace-source/v1",
+  "namespace": "qwen36_kvbuffer_native_order_trace_v2",
+  "status": "source-prepared-not-built-not-verified",
+  "default_enabled": false,
+  "npu_verified": false,
+  "trace_bytes": 49344,
+  "trace_scope": {
+    "token": 6,
+    "head": 5,
+    "slot": 4,
+    "v_start": 0,
+    "rows": 32,
+    "old_length": 15
+  },
+  "source64": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/split_gate_v2/SOURCE_MANIFEST.json",
+    "sha256": "508ff442ede945b8fb5930f79ee597ec1dba07e5d4e778d9abc85aafda6ce9c9"
+  },
+  "files": {
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/CMakeLists.txt": {
+      "bytes": 4920,
+      "sha256": "fc8b93d327fe7a42f734881e16e2dddb8c45e1e6f8f1e6f985af0e5879663174"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/op_extension/ops.h": {
+      "bytes": 980,
+      "sha256": "4bf9b70db5c690de7aae749e82f2b6d8125cc82d27de5c068c17f851f25d337c"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/op_extension/qwen36_gdn_kvbuffer_native_order_trace_v2_torch.cpp": {
+      "bytes": 7252,
+      "sha256": "9e6f2783a6a61db8bb9051f62c1e063f85470e4835dd317738c6fea7dde78cfb"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/op_extension/register.cpp": {
+      "bytes": 3753,
+      "sha256": "78dd16f0edb52042f32417338a37274f1fdf0ae0d22f85dd21437b0edd28c24e"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/op_kernel/qwen36_gdn_kvbuffer_native_order_trace_v2_kernel.asc": {
+      "bytes": 1158,
+      "sha256": "d3d054ca73d24ed6f3b588ed3fe8e0f6503c1eb9dcfbb36c8061d343be9a47cf"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/op_kernel/qwen36_gdn_kvbuffer_native_order_trace_v2_tiling.h": {
+      "bytes": 384,
+      "sha256": "b084ac96aba22e4563e67d358f39ce8e4755a19176769d7bc92dc21bc5582d68"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/candidate_ub_trace_v2/op_kernel/qwen36_gdn_kvbuffer_native_order_trace_v2.h": {
+      "bytes": 29219,
+      "sha256": "f9766f8ab6dd7815aa90ece0337ee5aea51fef3bdaed36ea45ee32db0ee69a51"
+    },
+    "projects/kvbuffer-parallel-ascend/tools/candidate_ub_trace_v2/protocol.py": {
+      "bytes": 14232,
+      "sha256": "97329f9f7ae09cf00122f7b77c7281bd89b0a99ec3ecb10bf376259fd9359369"
+    },
+    "projects/kvbuffer-parallel-ascend/tools/candidate_ub_trace_v2/test_trace.py": {
+      "bytes": 7365,
+      "sha256": "9b586e591553d699834e104488ba5ee980db1ee024439f34734ed2dc44478496"
+    },
+    "projects/kvbuffer-parallel-ascend/tools/candidate_ub_trace_v2/README.md": {
+      "bytes": 9455,
+      "sha256": "ac3e4f1003757e5ef5ed733d119fd87f5849deb817588efde4435baaf1e35b06"
+    }
+  },
+  "upstream_files": {
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/CMakeLists.txt": {
+      "bytes": 4866,
+      "sha256": "1fc230c86103de01c56631007291c04d22b6a572f1f6a26f829683f7513c0b5b"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/op_extension/ops.h": {
+      "bytes": 847,
+      "sha256": "bb8ba537f8a538011ca7dc1c4508994466f10e6113d7427cd4a4833da81b050a"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/op_extension/qwen36_gdn_kvbuffer_native_order_v2_torch.cpp": {
+      "bytes": 6480,
+      "sha256": "8b3dbb0e5008a2a228e5827f6335bec406a1a5ae9613025a42bc50298a1d55e0"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/op_extension/register.cpp": {
+      "bytes": 1470,
+      "sha256": "418f3dfb5dd06eb854d90afc5b2750061e3091cb08a297f2acfba9c9a9993c7f"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/op_kernel/qwen36_gdn_kvbuffer_native_order_v2_kernel.asc": {
+      "bytes": 1017,
+      "sha256": "11666f5377a8290d2ee59e85522d805a2ee0230213d41e5e03212eee1e1c9710"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/op_kernel/qwen36_gdn_kvbuffer_native_order_v2_tiling.h": {
+      "bytes": 362,
+      "sha256": "8c07c59742fd28eaeac5c8549ecff10d97c5718e786bccb5569dcc0b716c9f92"
+    },
+    "projects/kvbuffer-parallel-ascend/operator/native_order_v2/op_kernel/qwen36_gdn_kvbuffer_native_order_v2.h": {
+      "bytes": 26338,
+      "sha256": "f04e12bb449cbe380e7454653fb29863604a68d6c8c9544042348fbc332941ce"
+    }
+  },
+  "source_reads": [
+    "MBexec0577",
+    "MBexec0579",
+    "MBexec057e"
+  ],
+  "serving_ready": false,
+  "native_precast_observed": false
+}
