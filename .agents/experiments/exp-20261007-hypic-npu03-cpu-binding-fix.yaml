@@ -1,6 +1,6 @@
 schema: ascend-inference-treatment/v1
 id: exp-20261007-hypic-npu03-cpu-binding-fix
-status: repeat2_passed
+status: partial_component
 branch: work/hypic-npu03-cpu-binding-fix-20261007
 parent_diagnosis: exp-20261007-hypic-npu03-comm-root
 objective: Remove the NPU0-3 Decode latency floor caused by the enabled automatic CPU-binding path without modifying the official image or other card lanes.
@@ -83,3 +83,26 @@ repeat2_20261007:
     activation_log_sha256: 79294ac348be5eea55bd168461d7d7112d43890c93fcdffe42816a4d497795aa
     cleanup_sha256: 7b4b74a8be45bc69d43e6f63fe114904577bdfa65de289382fa23bce4c13058f
   next_gate: Run repeat3 with no serving/workload changes, then aggregate all three candidate runs against the frozen three-run baseline.
+repeat3_20261007:
+  operation_id: exec-0000000000000b0f
+  protocol: Same frozen no-cache 40 x 1024 c16 protocol, third fresh container and service lifecycle, no profiler.
+  validity: 40/40 exact-length outputs, zero failed, parsed binding-off activation, exact container cleanup.
+  candidate: Weighted TPOT 77.0052 ms/token; TPOT P95 117.8840 ms; TTFT P95 78932.28 ms; output throughput 117.3246 token/s; duration 349.1168 s.
+  artifacts:
+    performance_sha256: 228a03404eb04a1677c7393980dd0011028cb8063ac5cc13aed978922a75cb9b
+    contract_sha256: b836877b72c371f18655bc69f38b2b035bcf3e9659f07c5d783eb8624f4296a6
+    activation_log_sha256: 9c973b022a67d4916ef9cd3f1b74968e9e47ab712c2df39c4631fd0e3ef9e48b
+    cleanup_sha256: b5e7a24d3634f4a50f5039ae2cd39a4930fedd5c13151b233cb235707f51683f
+three_run_decision_20261007:
+  comparability: All three candidate contracts have byte-identical serving commands, image digest, source commit, benchmark SHA256, cpuset, and physical NPU0-3 mapping; only the artifact root/container lifecycle differs from the frozen baseline besides the declared binding-off switch.
+  validity: Each candidate run completed 40/40 exact 1024-token outputs, zero failures, fresh service lifecycle, no profiler, and exact container rollback.
+  baseline_median: Weighted TPOT 410.8960 ms/token, per-run TPOT P95 median 447.0755 ms, TTFT P95 median 81137.27 ms, output throughput median 29.7427 token/s, duration median 1377.1458 s.
+  candidate_median: Weighted TPOT 77.5641 ms/token, per-run TPOT P95 median 117.8840 ms, TTFT P95 median 80775.49 ms, output throughput median 117.2930 token/s, duration median 349.2109 s.
+  effect: Median weighted TPOT 81.12 percent lower, median TPOT P95 73.63 percent lower, median throughput 3.94x, median duration 74.64 percent lower; no TTFT P95 regression.
+  dispersion: Candidate weighted TPOT range 77.0052-77.8308 ms/token across three runs.
+  performance_gate: pass for the tested no-cache physical NPU0-3 service and frozen 40 x 1024 c16 protocol.
+  quality_gate: Only the deterministic 32768-token canary matched exact frozen tokens; the complete paired 2048-token LongBench-v2/GSM8K quality ruler has not been run for this candidate.
+  hypic_gate: HYPIC-enabled arm has not been retested with binding disabled; no claim of repaired HYPIC gain or full paper reproduction.
+  lifecycle_gate: Each exact candidate container was removed; last independent check found no NPU0-3 processes and port 8223 free. NPU4-7 and pre-existing sleep container were untouched.
+  classification: partial-component. Runtime configuration repairs the measured no-cache Decode floor on this lane, but production adoption and HYPIC-enabled claims remain pending their own quality and activation gates. The underlying upstream CPU-pool allocation algorithm is not modified.
+  next_action: Keep the opt-in repair disabled by default. If full adoption is required, predeclare feasible matched 2048-token quality plan and HYPIC-enabled formal A/B on only NPU0-3; do not change shared services or main yet.

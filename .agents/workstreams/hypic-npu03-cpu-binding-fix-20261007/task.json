@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Apply and verify an opt-in supported vLLM-Ascend CPU-binding-off repair for the HYPIC NPU0-3 Decode floor.",
-  "state": "repeat2_passed",
+  "state": "partial_component",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -12,5 +12,5 @@
     "service_port": 8223,
     "preexisting_sleep_container": "agentgpu-910b4-qwen35-4b-v0; do not modify"
   },
-  "next_action": "Run repeat3 on the same frozen 40 x 1024 c16 protocol, then aggregate all three candidate runs; full paired quality is still required before production adoption."
+  "next_action": "No-cache Decode performance gate passed across three fresh NPU0-3 service runs. Keep the repair opt-in and isolated; HYPIC-enabled formal A/B and the complete paired 2048-token quality gate remain before production adoption."
 }
