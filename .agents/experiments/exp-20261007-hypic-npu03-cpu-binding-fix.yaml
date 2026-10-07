@@ -224,8 +224,19 @@ quality_campaign_20261007:
   evidence: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/QUALITY_RESOURCE_CONFLICT.md
   decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
 quality_campaign_clean2_20261007:
-  status: preflight-passed, planned new full 12-unit paired attempt after attempt-1 isolation failure.
+  operation_id: exec-0000000000000e15
+  status: Running since 2026-10-07 17:10 UTC; no-cache LongBench-v2 run1 independently audited, GSM8K run1 running. This is not a quality verdict.
   artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
   only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
   orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
+  no_cache_service_start:
+    at_utc: 2026-10-07T17:16:51Z
+    container_id: f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b
+    worker_pid_by_physical_npu: {0: 585850, 1: 585851, 2: 585852, 3: 585853}
+  no_cache_longbenchv2_run1:
+    validity: Independently audited 127/127 rows, zero failures, exact sample order/reference/response hash, pinned scorer, prompt template, token accounting, summary arithmetic and receipt hash; whole-arm isolation/release still pending.
+    result: 78/127 correct, 61.41732283464567 percent; 10 outputs reached the 2048-token length limit; 135143 completion tokens.
+    summary_sha256: 7423c40c22515084967cd38eb9579a9b675097d80499d274f10aa6a0d0077e2e
+    details_sha256: 812a4281c167327ae69b96766e550f58ffb905c889c60bc0a649850ec5cc5810
+    receipt_sha256: f8859e0cc004052252c010fb72917b1f61f2440545785f49d3dcadb84f90696e
   decision: pending fresh baseline and treatment results, both release receipts and independent full audit.
