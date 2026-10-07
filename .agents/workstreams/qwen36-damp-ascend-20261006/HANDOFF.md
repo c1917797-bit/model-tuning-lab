@@ -1,5 +1,19 @@
 # DAMP Ascend — current workstream
 
+## Actual saved-step native-order checkpoint — 2026-10-07 10:00Z
+
+Read KVBUFFER_SAVED_STEP_NATIVE_ORDER_RESULT_20261007.md before older notes.
+MA09d4 actual NPU terminal0/102.664s; MA09fb independent immutable readback0.
+Old saved B1 failure byte-reproduced and remains failed. NEW same-input output
+error0/state1.145579e-7, original gates unchanged. This is SINGLE eager step,
+not fullmatrix/graph/serving/E2E/task PASS. Owna869... stopped/retained/Pid0/
+noExec/noOOM confirmed MA09ee. Next NEW retention-safe summed-budget full
+B1/5+B16/6 producer and actual complete gate, then middle/service consumers.
+Outside HYPIC0–3 restarted (~18GiB); ordinaryRAM~63.7GiB. Keep it/protected0–3/
+HugeTLB untouched, unchanged72GiB full-model floor; small numeric budget24GiB
+may proceed after freshcheck. KV/portfolio cutoffs unchanged; no new speedup.
+MA09eb missing ss inventory and MA09fc fetch timeout remain historical errors.
+
 ## Current pre-device source checkpoint — 2026-10-07 09:45Z
 
 Read the current-source-binding section of KVBUFFER_NATIVE_ORDER_NO_DEVICE_20261007.md.
