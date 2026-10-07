@@ -54,7 +54,6 @@ measured_20261007:
     profile_limit: Four raw ranks captured. Graph-on rank-2 full export incomplete, eager oversized JSON whole-file parse skipped by bounded guard; manifests remain conservative and are not a correctness failure.
     cleanup: Both exact-name diagnostic containers removed, NPU0-3 free, port 8223 free, NPU4-7 untouched.
     classification: Global eager is rejected as a performance fix. NPU2-only static card setting not found. Source-level cause of rank skew remains inconclusive.
-  next_test: Trace delayed graph-on host aclrtValueWrite submission and calibrate cross-rank clocks; predeclare one-variable rank mapping within 0-3 or isolated CPU-affinity test, requiring wait and request TPOT to change together.
   cpuset_probe_plan:
     hypothesis: The frozen 112-191 cpuset deprives NPU2/3-side worker threads of part of their recommended local CPUs and causes the graph-on rank-2 FIA task-update stall.
     primary_variable: Isolated container cpuset 112-191 to 96-175, preserving 80 CPUs, exact image/source/model/TP4/visible physical NPU0-3/graph-on command/stimulus.
@@ -83,6 +82,19 @@ measured_20261007:
     binding_plan: Rank 2 main 98-133, ACL 134, release 135, no longer overlapping rank-0 main 146-157; rank 0/1/3 plans also changed and may now be limiting.
     classification: Cpuset swap rejected as service optimization but supports CPU-placement involvement in rank-2 symptom. Overall source-level root still inconclusive pending direct binding-off control and new critical-rank attribution.
     cleanup: Exact named diagnostic container removed; NPU0-3 and port 8223 released; NPU4-7 workload not modified.
+  binding_off_probe_result:
+    operation_id: exec-0000000000000a1c
+    artifact_root: /cache/cch/hypic-npu03-comm-root-20261007/binding-off
+    sole_serving_variable: '--additional-config ''{"enable_cpu_binding":false}'''
+    fixed_controls: Original cpuset 112-191, pinned image/source/model, TP4 AIV graph-on, physical NPU0-3, same short profiler workload.
+    validity: 4/4 requests completed with exactly 128 output tokens and zero failures; output length does not establish semantic accuracy.
+    service: Profiled weighted TPOT 140.9520 versus 499.0045 ms/token control, a 71.75 percent reduction; output throughput 15.0669 versus 6.2670 token/s.
+    rank0_task_update: Trailing-30-second matched Begin/End median 0.2066 ms over 2032 pairs versus 3.1726 ms over 1232 control pairs.
+    rank2_task_update: Trailing-30-second matched Begin/End median 0.1988 ms over 2032 pairs, zero over 10 ms; control 12.0890 ms over 1215 pairs, 1206 over 10 ms.
+    profile_limit: All four ranks captured raw; only ranks 0 and 2 were exported and parsed, both complete. Overall profile_complete false due intentionally omitted ranks 1 and 3.
+    classification: Strong path-level causal diagnosis that enabled automatic CPU binding causes the major NPU0-3 Decode floor. Partially overlapping rank CPU pools are observed but not separately proven from other binding actions. Diagnostic only, not a formally accepted optimization or accuracy result.
+    cleanup: Exact named binding-off container removed; owned NPU0-3 allocation and port 8223 released; NPU4-7 and existing sleep container untouched.
+  next_test: If a production fix is pursued, separate non-overlapping CPU allocation with binding enabled from binding disabled, then run frozen formal performance and accuracy gates.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]

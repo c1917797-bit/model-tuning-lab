@@ -2,7 +2,7 @@
 
 ## Verdict boundary
 
-The apparent 0–3 Decode "slow communication" is principally a downstream synchronization wait, not demonstrated HCCS bandwidth saturation. In a sampled graph-on full-service step, rank 2 waits before its attention kernel and reaches the small AllReduce about 22.7 ms after the other ranks on raw profiler clocks. A fresh eager-service control changes which rank waits, yet makes request TPOT worse. The producer/condition of the graph-on pre-attention notification and the source-level cause of cross-rank skew are **not yet proven**; this workstream is diagnostic-inconclusive rather than an accepted optimization. No NPU2-only static card configuration or fault was found.
+The apparent 0–3 Decode "slow communication" is principally a downstream synchronization wait, not demonstrated HCCS bandwidth saturation. A controlled full-service intervention now identifies the **enabled vLLM-Ascend automatic CPU-binding path** as the principal cause of the excess Decode floor on this lane: with the original `112–191` cpuset and all other serving inputs held fixed, disabling only `enable_cpu_binding` cut profiled weighted TPOT from **499.0045 to 140.9520 ms/token (−71.75%)**. Rank-0/2 graph task-update stalls collapsed at the same time. Historical 4–7 service logs show that binding was skipped there, while the slow 0–3 service successfully bound partially overlapping per-rank pools. The source shows that partially overlapping pools are not deconflicted, but this one switch disables the binding path as a whole; **the relative contributions of overlapping CPU assignments, NUMA placement, thread pinning, and other binding side effects are not isolated**. This is a strong path-level causal diagnosis, not an accepted production optimization or a formal HYPIC performance/accuracy result. No NPU2-only static card fault was found.
 
 The three-round frozen 0–3 no-cache TPOT weighted mean was 413.10 ms/token and HYPIC-only 399.41 ms/token. The corresponding historical 4–7 numbers were 74.51 and 60.36 ms/token. HYPIC absolute savings were 13.69 and 14.15 ms/token respectively. Do not conflate this near-equal method effect with the common 0–3 Decode floor.
 
@@ -22,7 +22,7 @@ Raw source: `/cache/cch/hypic-qwen36-e2e-2048-20261006/profiles/no-cache/decode`
 
 Read-only per-card checks found the same Ascend 910B4 V1, BoardID `0x34`, BOM `1`, firmware `7.7.0.3.220`, HCCS lane mode `4`/lanes `1111`/speed `224`, and zero HCCS retries/errors, PCIe TX/RX/LCRC/ECRC/retry errors, and HBM ECC errors on physical NPU0–3. Their mutual topology is HCCS. This is evidence against an NPU2-only static hardware or link setting, not a loaded-link stress test or proof of perfect hardware.
 
-The frozen service container has CPU cpuset `112–191`, while the topology's recommended CPU affinity is `144–191` for NPU0/1 and `96–143` for NPU2/3. Consequently NPU2/3 get only `112–143` of their local recommended range, unlike NPU0/1. This is a **pairwise host-CPU affinity asymmetry**, not a unique NPU2 card configuration; NPU3 shares it without the same graph-on pre-attention wait. All four worker processes were allowed CPUs `112–191` with no rank-2-only pin. CPU-affinity causality remains untested; no CPU setting was changed.
+The frozen service container has CPU cpuset `112–191`, while the topology's recommended CPU affinity is `144–191` for NPU0/1 and `96–143` for NPU2/3. Consequently NPU2/3 get only `112–143` of their local recommended range, unlike NPU0/1. This is a **pairwise host-CPU affinity asymmetry**, not a unique NPU2 card configuration; NPU3 shares it without the same graph-on pre-attention wait. All four worker processes were allowed CPUs `112–191` at the container level; the enabled binding path subsequently pinned their threads to per-rank roles. The cpuset itself was not changed in the decisive binding-off test.
 
 ### Newly isolated CPU-binding-path divergence
 
@@ -32,7 +32,21 @@ Frozen 2026-10-06 no-cache service logs show binding **succeeded** on physical N
 
 The graph-on control SQLite provides a quantitative host-path marker: in the trailing 30 seconds, paired `aclmdlRICaptureTaskUpdateBegin`/`End` durations have rank-0 median **3.1726 ms** (1232 pairs) versus rank-2 median **12.0890 ms** (1215 pairs; 1206 over 10 ms). The captured rank-2 interval has a roughly 12 ms gap between FIA workspace query and task-update end, followed later by `aclrtValueWrite`; the individual CANN API executions are short, so this is not FIA device-kernel time.
 
-An isolated cpuset swap `112–191` → `96–175`, preserving 80 allowed CPUs and physical NPU0–3, changed the vLLM-Ascend binding plan: rank 2 main `98–133`, ACL `134`, release `135` no longer overlap rank 0 main `146–157`. In the valid 4/4 × 128-output profiled diagnostic, rank-2 task-update median fell to **0.2094 ms** (1184 pairs; none over 10 ms), but weighted TPOT **worsened** from 499.0045 to 515.5523 ms/token (+3.32%). This rejects that cpuset swap as a service fix. It supports CPU-placement involvement in the rank-2 stall while leaving the new critical rank/source to establish; rank-0 raw capture was too large for the bounded in-service export, and CPU-only offline parsing is pending. Do not call a root cause proven until the direct binding-off control is measured.
+An isolated cpuset swap `112–191` → `96–175`, preserving 80 allowed CPUs and physical NPU0–3, changed the vLLM-Ascend binding plan: rank 2 main `98–133`, ACL `134`, release `135` no longer overlap rank 0 main `146–157`. In the valid 4/4 × 128-output profiled diagnostic, rank-2 task-update median fell to **0.2094 ms** (1184 pairs; none over 10 ms), but weighted TPOT **worsened** from 499.0045 to 515.5523 ms/token (+3.32%). This rejects that cpuset swap as a service fix. It shows that curing a single rank's stall is insufficient when another rank may become critical; rank-0 raw capture was too large for the bounded in-service export. The direct binding-off test below provides the path-level discriminator.
+
+### Direct binding-off discriminator
+
+The isolated `probe_binding_off.py` arm retained the exact image digest, source snapshot, model, TP4 AIV, graph-on, physical NPU0–3, container cpuset `112–191`, `32768` input/`16384` prefix, and 2 warmups + 4 concurrent requests × 128 output. Its **only serving CLI change** was `--additional-config '{"enable_cpu_binding":false}'`. The source's default is true and the requested false value was present in the launch configuration. All 4/4 measured requests finished by length with exactly 128 output tokens; zero failed.
+
+| Profiled short diagnostic | Graph-on, binding enabled | Same, binding disabled | Change |
+| --- | ---: | ---: | ---: |
+| Weighted TPOT | 499.0045 ms/token | 140.9520 ms/token | −358.0525 ms/token (−71.75%) |
+| Output throughput | 6.2670 token/s | 15.0669 token/s | +140.42% |
+| Four-request duration | 81.6975 s | 33.9817 s | −58.41% |
+| Rank-0 task-update median, trailing 30 s | 3.1726 ms (1232 pairs) | 0.2066 ms (2032 pairs) | −93.49% |
+| Rank-2 task-update median, trailing 30 s | 12.0890 ms (1215 pairs; 1206 >10 ms) | 0.1988 ms (2032 pairs; 0 >10 ms) | −98.36% |
+
+The two exported ranks' task-update intervals and service TPOT improved together, unlike the cpuset-only arm. All four ranks produced raw profiling captures; rank 0 and rank 2 were fully exported and parsed, while rank 1 and rank 3 were deliberately omitted from offline export, so the whole-run `profile_complete` flag is false. That flag does not invalidate the 4/4 request result or the rank-0/2 comparison. The result establishes the **binding path** as a major cause, but does not isolate which operation inside `bind_cpus()` dominates. Output length/completion is verified, not a semantic accuracy verdict. Profiled four-request traffic is not the frozen formal benchmark. Evidence: `/cache/cch/hypic-npu03-comm-root-20261007/binding-off` (`probe-contract.json`, `profile-workload.json`, `profile-manifest.json`, rank-0/2 SQLite). Operation `exec-0000000000000a1c` exited 0 and its exact-name container, NPU allocation, and port were released.
 
 ## Controlled NPU0–3 probes
 
@@ -59,6 +73,6 @@ The eager rank-0/2 task tables have no `MEM_WAIT_VALUE`, `MEM_WRITE_VALUE`, or `
 
 Evidence root: `/cache/cch/hypic-npu03-comm-root-20261007/{graph-on,eager}`. Both named diagnostic containers were removed, NPU0–3 had no remaining process, port `8223` was free, and no NPU4–7 workload or setting was touched.
 
-## Next discriminating experiment
+## Next engineering decision
 
-On NPU0–3 only, first trace the host call site and scheduling dependency that submits graph-on rank 2's delayed `aclrtValueWrite`, and align per-rank profiler clocks before declaring entry order. A follow-up one-variable test could alter rank-to-physical mapping **within 0–3** or test CPU-affinity symmetry in an isolated container, preserving the pinned service and diagnostic stimulus. Predeclare the mapping/affinity and safety checks; capture all four raw timelines and request-level TPOT. Require the suspected wait and E2E TPOT to change together before claiming a cause or fix. Do not change drivers, firmware, clocks, shared HCCS settings, or the frozen formal benchmark. Do not repeat global `--enforce-eager` as an optimization candidate: it already worsened TPOT here.
+Do not change the shared service or call the short binding-off arm a production win. If a minimal fix is desired, first split the binding path into predeclared isolated 0–3 controls (for example non-overlapping per-rank allocations with binding kept enabled, versus binding disabled), and measure all critical ranks. Then run the frozen formal performance and accuracy gates before adoption. Retain `--enforce-eager` and the `96–175` cpuset as rejected diagnostic controls, not fixes. NPU4–7 remain out of scope.
