@@ -1,5 +1,21 @@
 # DAMP Ascend — current workstream
 
+## Selected-card B16 diagnostic — 2026-10-07 11:29Z
+
+Read KVBUFFER_B16_LEASE6_DIAGNOSTIC_20261007.md first. MA0a8a actual v1
+canary-resource abort is retained; candidate never started. MA0aa0 failed
+BEFORE staging because physical4 attribution was wrong. Actual MA0ab3 original
+SHA-verified SMI rows show outside1155242 on physical5 and own1150426 on6.
+No outside task stopped. NEW lease6 host804ec... changes only non-timing lease,
+not original gates/source64/77b4/replay86cd69; MA0a9c same-image7tests/defaultCLI
+and source checks passed. MAIN source review/once-only NPU dispatch is next;
+no B16 diagnostic result yet. 600s/8GiB1CPU+8GiB reserve/fixedKV cutoff retained.
+Latest memory~79.9GiB ordinary, HugeTLB1916GiB reserved/1892GiB pool-free;
+135 related containers stopped. OVS/HugeTLB/protected0–3 untouched.
+Formal TP4/timing still requires4–7 exclusive; fullmodel72GiB gate unchanged.
+No new E2E/task result or usable non-HYPIC acceptance. Git local stages remain
+publication-pending (missing auth), not remotely pushed.
+
 ## B16 saved-failure diagnostic preparation — 2026-10-07 11:03Z
 
 Read KVBUFFER_B16_SAVED_FAILURE_DIAGNOSTIC_20261007.md first.
