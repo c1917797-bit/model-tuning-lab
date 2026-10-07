@@ -1188,3 +1188,26 @@ Protected0–3 HYPIC585850–53 unchanged; ordinary available RAM ~84GiB during
 MA0e7f, not an additional release. OVS and memory32GiB authority remain closed.
 Clocks unchanged. Git stage local only; known HTTPS credential-helper blocker
 is not resolved or bypassed. Goal active, no new accepted non-HYPIC technique.
+
+## Latest real H8 matrix failure and queue correction — 2026-10-07 18:17Z
+
+MA0e6e is TERMINAL exit1, not running. Read H8_FULL_V2_RUNTIME_FAILURE_20261007.md,
+original operation and independent receipts before resuming. Physical6 B6 eager
+trial0 synchronize507035;5125 prior passing recorded steps across4cards but no
+full11520/lifecycle PASS. Native/H8 share the failing fence, cause not yet
+isolated; no first-failed CPU snapshot. No unchanged retry or relaxed threshold.
+
+Independent MA0e9c proves all4owned CIDs stopped/retained/Pid0/noExec/noOOM.
+MA0e9f at18:17:24Z proves physical4–7 idle/healthOK and protected0–3 original
+workers585850–53 identity unchanged. RAM~89.98GiB; memory32GiB authority spent,
+OVS/fullNUMA3 intact. Current idle dependency is source diagnosis/preparation,
+not an external occupancy claim. First raw-pre/separate-fence B6 diagnostic
+is recurrent owner's priority; mixed/model remains separate and pending.
+
+Prior queued FlashInferv5 numerical-ready label is withdrawn for an actual
+original-envelope consumer gap (MA0e8a, no device dispatch). Its68 software
+tests remain valid, not NPU evidence. Independent FIv6 follows. SparQv4 software
+packet delivered; MAIN review/CPUsmoke/ABI/NPU/model pending. Three preparers
+continue rolling private work. No new pairedE2E/tasks/non-HYPIC acceptance.
+Fixed paper/portfolio clocks unchanged; original defaults OFF. Git local-only
+publication blocker retained; no main/force push or credential bypass.

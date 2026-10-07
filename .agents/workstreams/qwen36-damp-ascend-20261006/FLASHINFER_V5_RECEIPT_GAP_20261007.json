@@ -1,0 +1,99 @@
+{
+  "schema": "model-tuning-lab.flashinfer-v5-actual-receipt-boundary/v1",
+  "decision": "actual_whole_operation_get_consumer_incompatible_pre_card_gap",
+  "numerical_dispatch": false,
+  "source_manifest_sha256": "c8e99ac8fab8198dc9c6b6a3dfa744348ac9e5bf75c92980eb0af8f5a3d55953",
+  "raw_input": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/MAIN_SOFTWARE_RECEIPT.json",
+    "sha256": "0077c7ae43db8d71add14bff351afba52301dc4bdc5af0649b2c46d49aef8b3b"
+  },
+  "original_operation": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=268435456:unlimited",
+            "--cpu=15",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "-c",
+            "import json,pathlib,sys,traceback,hashlib,os\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nbase=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5\")\nraw_path=base/\"MAIN_SOFTWARE_RECEIPT.json\";raw=json.loads(raw_path.read_bytes())\nsys.path.insert(0,str(base));import consumer\nouter=raw.get(\"structuredContent\",raw)\nassert outer.get(\"operationId\")==\"exec-0000000000000e54\"\nactual=outer[\"operation\"]\nassert actual[\"targetPeerId\"]==\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\" and actual[\"routeDecision\"]==\"peer_direct\"\nrecord=actual[\"result\"][\"record\"];assert record[\"exitCode\"]==0 and record[\"state\"]==\"completed\"\nfailure=None\ntry:consumer.terminal_record(raw,actual[\"targetPeerId\"])\nexcept Exception as error:failure={\"type\":type(error).__name__,\"message\":str(error),\"traceback\":traceback.format_exc()}\nprint(json.dumps({\"schema\":\"MAIN.actual-original-envelope-reader-check/v1\",\"source_consumer_sha256\":hashlib.sha256((base/\"consumer.py\").read_bytes()).hexdigest(),\"original_receipt_path\":str(raw_path),\"original_receipt_sha256\":hashlib.sha256(raw_path.read_bytes()).hexdigest(),\"original_operationId\":outer[\"operationId\"],\"raw_keys\":list(raw),\"structured_keys\":list(outer),\"exact_inner_route\":actual[\"routeDecision\"],\"exact_inner_peer\":actual[\"targetPeerId\"],\"original_completed_record_exit\":record[\"exitCode\"],\"whole_raw_reader_error\":failure,\"npu_executed\":False,\"algorithm_numerical_result\":False,\"inner_operation_contract_not_relabelled_failure\":True}))\nassert failure is not None,\"unexpected raw format support; re-audit premise\"\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 79,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000e8a",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"schema\": \"MAIN.actual-original-envelope-reader-check/v1\", \"source_consumer_sha256\": \"d158afdc6f6a575b2d7390a61400ee4310e7c685bb223df944847eb54d3da7f3\", \"original_receipt_path\": \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/MAIN_SOFTWARE_RECEIPT.json\", \"original_receipt_sha256\": \"0077c7ae43db8d71add14bff351afba52301dc4bdc5af0649b2c46d49aef8b3b\", \"original_operationId\": \"exec-0000000000000e54\", \"raw_keys\": [\"action\", \"canonicalDownloadUrl\", \"canonicalUrl\", \"dataPlane\", \"downloadUrls\", \"error\", \"found\", \"kind\", \"ok\", \"operation\", \"operationId\", \"phase\", \"previewUrls\", \"progress\", \"publicUrl\", \"publicationId\", \"result\", \"retryable\", \"schema\", \"status\", \"succeeded\", \"terminal\"], \"structured_keys\": [\"action\", \"canonicalDownloadUrl\", \"canonicalUrl\", \"dataPlane\", \"downloadUrls\", \"error\", \"found\", \"kind\", \"ok\", \"operation\", \"operationId\", \"phase\", \"previewUrls\", \"progress\", \"publicUrl\", \"publicationId\", \"result\", \"retryable\", \"schema\", \"status\", \"succeeded\", \"terminal\"], \"exact_inner_route\": \"peer_direct\", \"exact_inner_peer\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\", \"original_completed_record_exit\": 0, \"whole_raw_reader_error\": {\"type\": \"ValueError\", \"message\": \"actual original intended peer route\", \"traceback\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 12, in <module>\\n  File \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/consumer.py\\\", line 7, in terminal_record\\n    require(envelope.get(\\\"targetPeerId\\\")==expected_peer and envelope.get(\\\"routeDecision\\\") in (\\\"peer_direct\\\",\\\"upstream_local_peer\\\"),\\\"actual original intended peer route\\\")\\n  File \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/contract.py\\\", line 14, in require\\n    if not ok:raise ValueError(msg)\\nValueError: actual original intended peer route\\n\"}, \"npu_executed\": false, \"algorithm_numerical_result\": false, \"inner_operation_contract_not_relabelled_failure\": true}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 380,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 380,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 380
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 379,
+          "routeLookupMs": 0,
+          "totalMs": 379
+        }
+      },
+      "traceId": "ff117973-6565-4ca6-8c58-7b25cfb01044"
+    },
+    "operationId": "exec-0000000000000e8a",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "software_source_result_retained": true
+}

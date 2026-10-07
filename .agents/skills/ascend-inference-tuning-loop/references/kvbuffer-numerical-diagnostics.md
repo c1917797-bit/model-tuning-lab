@@ -89,3 +89,13 @@ system pool changes, outside workload termination or a relaxed acceptance gate.
 None of these lessons establishes an end-to-end speedup. Once the relevant
 NPU gates pass, continue the actual lifecycle/mixed/capture integration, paired
 dense performance, and final task tests under the unchanged experiment contract.
+
+- An asynchronous native/candidate pair followed by one failing synchronization
+  cannot identify the faulting operator. In H8 fullv2, physical6 B6 returned
+  vector-core507035 after both dispatches; earlier B16 PASS does not exclude a
+  shape/lifetime bug. Preserve the first exception, persist actual CPU raw pre
+  before dispatch, and isolate native/candidate fences or processes in a new
+  diagnostic. A runtime exception is not a tensor/task tolerance failure.
+  Aborted sibling reports may retain running flags after exact owned stop:
+  verify actual CID/process cleanup instead of treating stale report status as
+  a live lease. See H8_FULL_V2_RUNTIME_FAILURE_20261007.md.

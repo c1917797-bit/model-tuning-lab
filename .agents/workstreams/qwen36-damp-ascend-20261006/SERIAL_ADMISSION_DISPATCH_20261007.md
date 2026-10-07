@@ -223,3 +223,22 @@ release, then prioritize the actual H8 model successor if complete and numeric
 PASS; otherwise admit the highest-value complete native gate. Do not wait for
 report prose and do not borrow partial B16/full running evidence as model ready.
 Protected0–3, OVS and memory32GiB boundary remain intact. Fixed clocks unchanged.
+
+## Latest terminal/idle reconciliation — 2026-10-07 18:17Z
+
+This supersedes17:55 running/queued-readiness claims, not the original evidence.
+MA0e6e H8 fullv2 failed device exception507035 at B6 eagertrial0/physical6.
+Independent MA0e9c/0e9f proves exact fourCID release/retention and4–7 idle/OK;
+protected0–3 identity unchanged. No fullmatrix/model/E2E/task acceptance.
+Read H8_FULL_V2_RUNTIME_FAILURE_20261007.md. Native/H8 fault attribution and
+actual CPU raw-before diagnostic is pending; no original full-matrix rerun.
+
+FlashInferv5 whole-original-envelope reader gap was demonstrated MA0e8a before
+NPU reservation; withdraw NUMERICAL_READY until source-bound FIv6 closure.
+SparQv4 delivered48softwaretests, but MAIN review/actual CPUsmoke/nativeABI
+pending. W4v004 and mixed/native64/48layer packets remain preparation work.
+Admitted successors currently0; idle now is diagnosis/review/prerequisites,
+not an assertion of outside occupation or healthy continuous utilization.
+Three actual preparers continue; MAIN owns admission and same-paper diagnostics.
+Memory32GiB release complete, no further release. Fixed clocks/protected leases
+and original algorithm numerical gates remain unchanged.
