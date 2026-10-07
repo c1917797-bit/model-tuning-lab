@@ -96,6 +96,40 @@ def main() -> int:
     service.NAMES["no-cache"] = NAMES[arm]
     capture.ROOT = run_root
     capture.NAMES["no-cache"] = NAMES[arm]
+    original_export = capture.offline_export
+    original_summarize = capture.summarize_rank
+
+    def bounded_export(name: str, profile_arm: str, phase: str, rank: int):
+        path = run_root / "profiles" / profile_arm / phase / f"rank{rank}" / "msprof"
+        raw_bytes = sum(item.stat().st_size for item in path.rglob("*") if item.is_file())
+        if raw_bytes > 1_500_000_000:
+            return {
+                "passed": False,
+                "skipped": "raw rank exceeds 1.5 GB; preserve raw data without full export",
+                "raw_bytes": raw_bytes,
+            }
+        return original_export(name, profile_arm, phase, rank)
+
+    def bounded_summarize(path: Path):
+        files = [item for item in path.rglob("*") if item.is_file()]
+        large_traces = [
+            item for item in files
+            if item.name.startswith("msprof_") and item.suffix == ".json"
+            and item.stat().st_size > 500_000_000
+        ]
+        if large_traces:
+            return {
+                "complete": False,
+                "file_count": len(files),
+                "msprof_trace_count": len(large_traces),
+                "valid_msprof_trace_count": 0,
+                "bounded_skip": "timeline JSON exceeds 500 MB; no whole-file parse",
+                "large_trace_paths": [str(item.relative_to(run_root)) for item in large_traces],
+            }
+        return original_summarize(path)
+
+    capture.offline_export = bounded_export
+    capture.summarize_rank = bounded_summarize
 
     manifest = {
         "schema": "hypic-npu03-graph-mode-probe/v1",
@@ -107,6 +141,8 @@ def main() -> int:
         "image": IMAGE,
         "source_snapshot_sha256": sha256(snapshot_path),
         "benchmark_sha256": sha256(BENCHMARK),
+        "raw_export_guard_bytes": 1_500_000_000,
+        "timeline_json_guard_bytes": 500_000_000,
         "service_command": command[2],
         "profile_root": str(run_root / "profiles" / "no-cache" / "decode"),
     }

@@ -34,6 +34,12 @@ measured_20261007:
     cleanup: docker --rm completed and no owned NPU process remains.
   decision: H1 is not supported at tested sizes and H2 is favored. Neither standalone test reproduces the full-service stall. The first observed divergence is rank 2's pre-attention MEM_WAIT_VALUE; its notification producer and source-level trigger remain unproven.
   next_test: Run the frozen no-cache full service twice on physical NPU0-3 with --enforce-eager as the sole serving variable. Use the same 2 warmup requests and 4-request/128-output diagnostic stimulus, capture all four raw ranks, export ranks 0 and 2, compare steady Decode wait and request TPOT. This is a diagnostic comparison, not formal HYPIC performance evidence. Abort on occupied NPU0-3, occupied port 8223, source/image/device drift, missing correctness, or owned-service cleanup failure.
+  graph_on_20261007:
+    operation_id: exec-00000000000008f7
+    result: 4/4 requests completed exactly 128 output tokens; profiled diagnostic TPOT weighted 499.00 ms/token.
+    profile: All four ranks captured raw. Rank 0 exported completely; rank 2 raw capture was about 2.1 GB and timeline export exceeded the bounded parser window, so the full profile manifest is incomplete.
+    cleanup: Exact graph-control container removed; physical NPU0-3 and port 8223 released.
+    classification: Diagnostic request valid, complete four-rank CSV export inconclusive; do not call this formal service performance.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
