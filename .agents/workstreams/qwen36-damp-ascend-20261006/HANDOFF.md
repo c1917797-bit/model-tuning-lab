@@ -1,24 +1,31 @@
 # DAMP Ascend — current workstream
 
-## Current execution / source-review checkpoint — 2026-10-07 20:05Z
+## Current terminal / canonical-source checkpoint — 2026-10-07 20:27Z
 
 Memory request completed:32GiB released, OVS intact, no additional release.
-KVBuffer warm MA0f29 is RUNNING, physical6 only, one2700s joint lease including
-cleanup. Original launch/admission records are H8_WARM_LAUNCH_20261007.json,
-H8_WARM_FRESH_ADMISSION_20261007.json and the retained original observer failure.
-Poll this handle; never duplicate it. Latest observed progress is B14 four
-cases/640steps plus33 B11 eager steps; B6/full11520/mixed/model/E2E/tasks pending.
-Warm raw metadata stores integer ND format. Old retained CPU reanalysis failed
-after partial parity due torch_npu Format enum deserialization, not proven
-oracle top-level import. Preserve its actual failed parent.
+KVBuffer warm MA0f29 is TERMINAL exit0, physical6 only:1280 prelude steps plus
+B6 first step. Read H8_WARM_SCOPED_RESULT_20261007.md and both whole original
+envelopes. Independent consumer MA0f5b passed; original fullv2 failure retained.
+Do not poll/restart warm; full11520/lifecycle/mixed/model/E2E/tasks remain pending.
+Recurrent owner prepares full-v3 with first-raw/fences/lifecycle/guard closure.
 
-SparQv5 is NOT admitted: MAIN caught real owner and CPU argv/proof mismatches
-before device creation. Read SPARQ_V5_PRE_CARD_REVIEW_20261007.md. Sparse owner
-builds a new independent successor; old packet/service frozen. Recurrent owner
-prioritizes full-runtime successor before48-layer service. Lowbit preparation
-continues under the shared2GiB lightweight budget. Different papers remain
-NPU-serialized. No new accepted non-HYPIC throughput/quality result.
-Known Git publication authentication blocker remains; local commits are not pushes.
+SparQv5 pre-card owner/argv conflicts remain frozen failures. New v6-001 was
+source-reviewed and integrated independently; MAIN canonical MA0f62 actual
+48+21 software tests pass, but cross-module fixtures fail5 cases because their
+temporary output followed canonical source under /opt instead of required
+/cache/cch. Runtime identity guards are not relaxed; independent test-only002
+repair is pending. No v6 Torch/Docker/NPU/model dispatch or PASS is authorized.
+Read SPARQ_V6_CANONICAL_TEST_FAILURE_20261007.json. Source integration and private
+tests are not canonical execution evidence. Lowbit W4 preparation remains pending.
+
+Fresh MA0f6b observed physical4–7 idle/no compute PID and ordinaryRAM~90GiB;
+its last optional import failed at missing receipt search path, so it is not
+a complete resource admission. Preserve this observer failure; next actual
+controller must fresh-check effective cgroup CPU, mounts, devices and canary.
+Outside HYPIC workers1965788–91 remain on0–3; never touch them.
+Different papers remain NPU-serialized. No accepted new non-HYPIC E2E/task result.
+Fixed KV Oct8 08:29:54Z/portfolioOct9 11:17:31Z unchanged.
+Known Git authentication blocker remains; local commits are not remote pushes.
 
 ## Actual parallel refill and RAM audit — 2026-10-07 12:50Z
 

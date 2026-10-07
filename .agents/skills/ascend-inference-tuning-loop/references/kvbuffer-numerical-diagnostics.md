@@ -129,3 +129,18 @@ dense performance, and final task tests under the unchanged experiment contract.
   successor; do not union old/new identities or call this an algorithm failure.
   See SPARQ_V5_PRE_CARD_REVIEW_20261007.md. Fixture tests and immutable hashes
   remain useful, but neither establishes deployed cross-stage closure.
+
+- A bounded warm prelude with separately fenced operators can verify a specific
+  history transition without proving a full runtime matrix. H8's1280+1 actual
+  steps and independent whole-original consumer passed; full11520/lifecycle and
+  model remain pending. Preserve the older asynchronous failure and avoid naming
+  its root cause from a successful configuration with several changed controls.
+  Save original operation terminals immediately; an expired observer handle is
+  not a failed NPU computation. Replay only a read-only immutable-result consumer,
+  never blindly restart the device workload.
+- Preparation tests must execute from the canonical delivery path as well as a
+  cache-private packet. In SparQv6-001, a fixture derived its output from source
+  parent; private-cache tests passed while canonical /opt execution correctly
+  rejected five fixtures against the unchanged /cache output rule. Fix test
+  placement independently and retain the failure. Do not relax runtime ownership,
+  canonical roots or source/argv checks to make a fixture pass.

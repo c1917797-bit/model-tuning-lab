@@ -1,0 +1,97 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=268435456:unlimited\",\n          \"--cpu=90:90\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-B\",\n          \"-c\",\n          \"import pathlib,hashlib,subprocess; p=pathlib.Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json\\\"); print('ORIGINAL_TERMINAL_SHA256 '+hashlib.sha256(p.read_bytes()).hexdigest(),flush=True); subprocess.run(['/usr/bin/python3','-B','/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/consume.py','--result','/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json','--result-sha256','9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e','--original-operation',str(p),'--original-operation-sha256',hashlib.sha256(p.read_bytes()).hexdigest()],check=True);\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 5966,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000f5b\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"ORIGINAL_TERMINAL_SHA256 2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5\\n{\\\"schema\\\": \\\"kvbp.h8-warm-independent-consumer/v1\\\", \\\"result\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json\\\", \\\"sha256\\\": \\\"9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e\\\"}, \\\"original_operation\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json\\\", \\\"sha256\\\": \\\"2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5\\\"}, \\\"original_operation_id\\\": \\\"exec-0000000000000f29\\\", \\\"whole_original_envelope_preserved\\\": true, \\\"warm_diagnostic_success\\\": true, \\\"checks\\\": {\\\"warm_prelude_steps_verified\\\": 1280, \\\"first_B6_step_checked\\\": 1, \\\"distinct_operator_fences_checked\\\": true, \\\"original_full_matrix_verified\\\": false, \\\"lifecycle_verified\\\": false, \\\"model_ready\\\": false, \\\"root_cause_proved\\\": false}, \\\"last_phase\\\": {\\\"schema\\\": \\\"kvbp.h8-warm-phase/v1\\\", \\\"sequence\\\": 9086, \\\"phase\\\": \\\"checkpoint.after-h8\\\", \\\"batch\\\": 6, \\\"mode\\\": \\\"eager\\\", \\\"trial\\\": 0, \\\"step\\\": 1, \\\"pid\\\": 102, \\\"source_manifest\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json\\\", \\\"sha256\\\": \\\"687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c\\\"}, \\\"script_sha256\\\": \\\"caaa8f89c56bfdb87309ba0b84b67fc40e0410e1c8002975be43e3f418c5439a\\\", \\\"monotonic_ns\\\": 329154865949000, \\\"checkpoints_durable\\\": 12}, \\\"error\\\": null, \\\"original_failed_full_matrix_preserved\\\": true, \\\"full11520_verified\\\": false, \\\"lifecycle_verified\\\": false, \\\"mixed64_verified\\\": false, \\\"model_ready\\\": false, \\\"matched_e2e_verified\\\": false, \\\"task_accuracy_verified\\\": false, \\\"root_cause_proved\\\": false}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 345,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 345,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 345\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 344,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 344\n      }\n    },\n    \"traceId\": \"71402dc4-d85a-41ac-9946-1c8f2be2f92a\"\n  },\n  \"operationId\": \"exec-0000000000000f5b\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=268435456:unlimited",
+            "--cpu=90:90",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "-c",
+            "import pathlib,hashlib,subprocess; p=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json\"); print('ORIGINAL_TERMINAL_SHA256 '+hashlib.sha256(p.read_bytes()).hexdigest(),flush=True); subprocess.run(['/usr/bin/python3','-B','/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/consume.py','--result','/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json','--result-sha256','9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e','--original-operation',str(p),'--original-operation-sha256',hashlib.sha256(p.read_bytes()).hexdigest()],check=True);"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 5966,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000f5b",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "ORIGINAL_TERMINAL_SHA256 2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5\n{\"schema\": \"kvbp.h8-warm-independent-consumer/v1\", \"result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json\", \"sha256\": \"9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e\"}, \"original_operation\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json\", \"sha256\": \"2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5\"}, \"original_operation_id\": \"exec-0000000000000f29\", \"whole_original_envelope_preserved\": true, \"warm_diagnostic_success\": true, \"checks\": {\"warm_prelude_steps_verified\": 1280, \"first_B6_step_checked\": 1, \"distinct_operator_fences_checked\": true, \"original_full_matrix_verified\": false, \"lifecycle_verified\": false, \"model_ready\": false, \"root_cause_proved\": false}, \"last_phase\": {\"schema\": \"kvbp.h8-warm-phase/v1\", \"sequence\": 9086, \"phase\": \"checkpoint.after-h8\", \"batch\": 6, \"mode\": \"eager\", \"trial\": 0, \"step\": 1, \"pid\": 102, \"source_manifest\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json\", \"sha256\": \"687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c\"}, \"script_sha256\": \"caaa8f89c56bfdb87309ba0b84b67fc40e0410e1c8002975be43e3f418c5439a\", \"monotonic_ns\": 329154865949000, \"checkpoints_durable\": 12}, \"error\": null, \"original_failed_full_matrix_preserved\": true, \"full11520_verified\": false, \"lifecycle_verified\": false, \"mixed64_verified\": false, \"model_ready\": false, \"matched_e2e_verified\": false, \"task_accuracy_verified\": false, \"root_cause_proved\": false}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 345,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 345,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 345
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 344,
+          "routeLookupMs": 0,
+          "totalMs": 344
+        }
+      },
+      "traceId": "71402dc4-d85a-41ac-9946-1c8f2be2f92a"
+    },
+    "operationId": "exec-0000000000000f5b",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

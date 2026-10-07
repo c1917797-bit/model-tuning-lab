@@ -1,0 +1,115 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=268435456:unlimited\",\n          \"--cpu=2700:2700\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/host.py\",\n          \"--execute\",\n          \"--source-manifest\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json\",\n          \"--source-manifest-sha256\",\n          \"687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c\",\n          \"--library\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\",\n          \"--library-sha256\",\n          \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\",\n          \"--build-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\",\n          \"--build-receipt-sha256\",\n          \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\",\n          \"--meta-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\",\n          \"--meta-receipt-sha256\",\n          \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\",\n          \"--output-dir\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 1373049,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000f29\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"MAIN_H8_WARM {\\\"result\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json\\\", \\\"sha256\\\": \\\"9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e\\\"}, \\\"status\\\": \\\"warm_prelude_and_B6_attributed_checked\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 335,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 335,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 335\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 334,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 334\n      }\n    },\n    \"traceId\": \"ea9fe49f-bc6a-4848-b250-8e76d4b26849\"\n  },\n  \"operationId\": \"exec-0000000000000f29\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=268435456:unlimited",
+            "--cpu=2700:2700",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/host.py",
+            "--execute",
+            "--source-manifest",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json",
+            "--source-manifest-sha256",
+            "687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c",
+            "--library",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+            "--library-sha256",
+            "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+            "--build-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+            "--build-receipt-sha256",
+            "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+            "--meta-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+            "--meta-receipt-sha256",
+            "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+            "--output-dir",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 1373049,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000f29",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "MAIN_H8_WARM {\"result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json\", \"sha256\": \"9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e\"}, \"status\": \"warm_prelude_and_B6_attributed_checked\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 335,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 335,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 335
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 334,
+          "routeLookupMs": 0,
+          "totalMs": 334
+        }
+      },
+      "traceId": "ea9fe49f-bc6a-4848-b250-8e76d4b26849"
+    },
+    "operationId": "exec-0000000000000f29",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}
