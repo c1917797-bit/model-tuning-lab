@@ -133,3 +133,16 @@ hypic_smoke_20261007:
     cleanup_sha256: 22fc5fa4d50aeb315a6478bf89897c8d8f3d3165ad85b56ed2aa152311553b25
   cleanup: Exact candidate container removed and NPU0-3/port 8223 released; NPU4-7 and pre-existing sleep container untouched.
   next_gate: Run fresh formal HYPIC-only binding-off screen with full hot-path requirement, then repeat only if valid and preregistered thresholds pass.
+hypic_screen_20261007:
+  operation_id: exec-0000000000000bc2
+  validity: 40/40 exact 1024-token outputs, zero failures, HYPIC full hot_path_verified true with no missing events, pinned image/source/benchmark and physical NPU0-3/cpuset unchanged.
+  candidate: Weighted TPOT 60.2596 ms/token; TPOT P95 81.8090 ms; TTFT P95 43279.89 ms; output throughput 166.6444 token/s; fixed-batch duration 245.7928 s.
+  screen_vs_historical_hypic_binding_on: Weighted TPOT 84.92 percent lower than frozen 399.4520 ms/token median; TTFT P95 11.98 percent lower than frozen 49169.50 ms median. Passes preregistered CPU-repair screen.
+  preliminary_paper_effect: Compared with the three-run no-cache binding-off median 77.5641 ms/token, this single HYPIC run saves 17.3045 ms/token, or 22.31 percent. TTFT P95 saves 37.496 s versus no-cache median 80.775 s. Do not call a three-run effect yet.
+  artifacts:
+    performance_sha256: 09c132096d3a0f6db96b7d0089068eeec2c94bd5ec4c9f8dd2d13f2cc8bac8e4
+    contract_sha256: 8c20411868c39e4b42ba9542df084e18f4fb24a26c42ab9b2726766590106332
+    activation_log_sha256: 719044eebe280f1972b90388e1f3149338fffa901538dc094f7e7048cdc9fc3a
+    cleanup_sha256: d46f71eb879b84ea535a0d8f4d441658babb5606cd4460ab4e540bca7bb9654d
+  cleanup: Exact screen container removed, NPU0-3 and port 8223 released; NPU4-7 untouched.
+  next_gate: Run repeat2 and repeat3 with fresh lifecycles and the same full hot-path requirement, then compute medians and dispersion before a paper-effect verdict.
