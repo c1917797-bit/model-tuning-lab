@@ -99,6 +99,17 @@ samples and matched arms complete, preserve raw partial rows and their hashes,
 record the exact stopping cause, and verify live release. Do not freeze the
 incomplete arm as a reusable baseline or calculate a paired quality verdict.
 
+On a shared NPU host, a start/end ownership snapshot cannot establish
+uninterrupted isolation for a multi-hour paired suite. Monitor the physical
+devices during each arm at a declared interval, identifying the expected worker
+PIDs and failing closed on an unrelated PID or an unobservable interval. If an
+external process appears, preserve that attempt and its otherwise valid rows as
+isolation-failed evidence; do not pair its control arm with a clean treatment.
+Prove release of the exact owned container, PIDs, and port separately from
+whether the whole lane is available again. Never stop the unrelated workload
+without its owner's authorization. A new clean attempt requires a fresh
+matching control and treatment under the original ruler.
+
 Do not reuse profiler, compilation-capture, RRQR-capture, or diagnostic state
 as ordinary quality evidence unless the contract explicitly includes and
 matches that state in both arms.
