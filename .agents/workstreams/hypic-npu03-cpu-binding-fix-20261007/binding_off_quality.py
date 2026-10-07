@@ -310,8 +310,18 @@ def cleanup(arm: str, container_id: str) -> None:
     if item is None or item["Id"] != container_id:
         raise RuntimeError("owned quality container disappeared or changed identity")
     owned(item, arm, container_id)
-    logs = run("docker", "logs", name, check=False)
-    (QROOT / arm / f"service.full.{container_id[:12]}.log").write_text(logs.stdout + logs.stderr)
+    log_path = QROOT / arm / f"service.full.{container_id[:12]}.log"
+    log_error = None
+    try:
+        # A full 12-unit quality campaign can produce a very large service log.
+        # Stream it to disk instead of retaining it in controller RAM.
+        with log_path.open("wb") as log:
+            capture = subprocess.run(["docker", "logs", name], stdout=log,
+                                     stderr=subprocess.STDOUT, timeout=300, check=False)
+        if capture.returncode:
+            log_error = f"docker logs exited {capture.returncode}"
+    except Exception as exc:
+        log_error = f"{type(exc).__name__}: {exc}"
     if item["State"]["Status"] == "running":
         run("docker", "stop", "--time", "60", name)
     run("docker", "rm", name)
@@ -320,10 +330,14 @@ def cleanup(arm: str, container_id: str) -> None:
         "schema": "hypic-bindingoff-quality-service-stop/v1", "arm": arm,
         "container": name, "container_id": container_id,
         "container_removed": True, "owned_npus_released": True, "port_released": True,
-        "at_utc": datetime.now(timezone.utc).isoformat()}
+        "at_utc": datetime.now(timezone.utc).isoformat(),
+        "service_log_sha256": sha256(log_path) if log_path.exists() else None,
+        "service_log_error": log_error}
     write_json(QROOT / arm / f"service-stop.{container_id[:12]}.json", receipt)
     write_json(QROOT / arm / "service-stop.json", receipt)
     status(arm, "service-released", container_id=container_id)
+    if log_error:
+        raise RuntimeError(f"service released, but log capture failed: {log_error}")
 
 
 def interrupt(_number: int, _frame: object) -> None:

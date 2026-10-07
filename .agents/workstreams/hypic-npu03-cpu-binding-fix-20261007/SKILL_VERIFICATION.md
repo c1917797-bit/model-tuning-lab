@@ -1,6 +1,6 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
-Current campaign note: HYPIC-only binding-off smoke `exec-0000000000000b82` passed deterministic canary and core hot-path offline audit. The original process exit 1 from an overbroad formal-only event requirement is retained as a negative tooling lesson. Formal activation, paired quality, and independent final audit remain pending; no whole-skill completion is added from this partial smoke.
+Current campaign note: HYPIC-only binding-off smoke `exec-0000000000000b82` passed deterministic canary and core hot-path offline audit. The original process exit 1 from an overbroad formal-only event requirement is retained as a negative tooling lesson. Three HYPIC-only binding-off formal runs passed 40/40 each with full activation, and the independent six-unit performance audit passed; matched paired quality and whole-paper audit remain pending. Performance-component validation must not be counted as full-paper or all-29-skill validation.
 
 Scope: origin/main at f1f37a39bd86f7db5fd3ee3dea358ae6868275c6 has 29 registered Skills and 29 SKILL.md files. This is a behavioral evidence ledger, not a claim that all 29 should be exercised by one paper. The old 2026-10-06 skill-validation.json is historical evidence and must be independently rechecked before promotion.
 
@@ -38,4 +38,4 @@ Status vocabulary: completed = a defined workflow produced a traceable positive 
 | mst-tool-adapter-boundary | unassessed | Confirm AWMCP connection specifics stay in host-maintenance and not in runtime code. |
 | mst-transformation-verification | unassessed | Run structural validator plus behavioral checks; do not equate them. |
 
-Count from the old ledger, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. The current NPU0-3 binding-off campaign has passed only the no-cache performance component; no whole-paper or whole-tree completion claim is made. Update this file against raw artifacts after HYPIC-on and quality gates.
+Count from the old ledger, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. The current NPU0-3 binding-off campaign has passed paired no-cache/HYPIC performance and independent artifact audit, but paired quality has not run. No whole-paper or whole-tree completion claim is made. Update this file against raw quality artifacts before any new skill-completion count.

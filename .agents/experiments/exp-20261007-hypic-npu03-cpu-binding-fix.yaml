@@ -157,3 +157,26 @@ hypic_repeat2_20261007:
     activation_log_sha256: 013beee4cd1e6f656cc7e36763670d098f79af23e3a7273f980fa4607cc1c9e2
     cleanup_sha256: 381b5b746eeaeaeef06f74e64faffcbfaecc09d185096e046e3c0769b1e916a7
   next_gate: Run repeat3 unchanged, then independently recompute paired performance from all six binding-off runs.
+hypic_repeat3_20261007:
+  operation_id: exec-0000000000000c37
+  protocol: Third fresh HYPIC-only binding-off lifecycle; same frozen 40 x 1024 c16 protocol, no profiler.
+  validity: 40/40 exact 1024-token outputs, zero failures, complete HYPIC hot path and exact owned container cleanup.
+  candidate: Weighted TPOT 60.2237 ms/token; TPOT P95 81.7488 ms; TTFT P95 43176.41 ms; output throughput 166.8247 token/s; fixed-batch duration 245.5271 s.
+  artifacts:
+    performance_sha256: d4102dffac788e7692560f322e7556242c3fe6db4fa046cfb9029ae13e131d50
+    contract_sha256: 16140ac560e020fdaec8cab1a2c38553f2514d406fa4503dd6d43ddfc38da0ea
+    activation_log_sha256: 8cc7f29da913959f76e8bb03dab8fc77fa9d2246ad3eaa018a8adef7cfc4205f
+    cleanup_sha256: 684216f623bc9e5f47d9813469e8854ee68a385b74cf59c31713d57b42601aef
+  next_gate: Independently audit all six binding-off performance runs before paired quality.
+hypic_three_run_decision_20261007:
+  validity: Three fresh HYPIC-only binding-off lifecycles each passed 40/40 exact outputs, zero failures, complete HYPIC hot path, parsed binding-off activation and exact cleanup.
+  candidate_tpot_weighted_ms: [60.25959809262029, 60.16579932478411, 60.22372631329548]
+  candidate_median_tpot_weighted_ms: 60.22372631329548
+  no_cache_bindingoff_median_tpot_weighted_ms: 77.5640789833808
+  paper_effect: Median weighted TPOT saves 17.3404 ms/token or 22.36 percent; TTFT P95 median saves 37.566 s; output throughput median rises 1.42x. These exceed the predeclared 10 ms/token and 10 s within-lane thresholds.
+  historical_bindingon_context: Frozen HYPIC binding-on median weighted TPOT 399.4520 ms/token; the repaired HYPIC median is 84.92 percent lower. This is a CPU-path repair comparison, separate from the 22.36 percent HYPIC paper effect on the repaired lane.
+  performance_gate: pass for this NPU0-3 model, image, source and 40 x 1024 c16 protocol after independent six-unit artifact audit.
+  independent_audit: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-independent-audit.json
+  independent_audit_sha256: de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1
+  quality_gate: The complete matched 41984-context, 2048-token natural-EOS LongBench-v2/GSM8K paired quality campaign has not yet run.
+  classification: partial-component pending paired quality; do not promote to main or production yet.
