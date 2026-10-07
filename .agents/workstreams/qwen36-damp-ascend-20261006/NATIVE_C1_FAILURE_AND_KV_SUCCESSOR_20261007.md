@@ -109,7 +109,7 @@ remains no-device positive schema/Meta prerequisite, NOT device correctness.
 Prepared disjoint physical groups:
 4=[2,14,15],5=[7,11,13],6=[3,4,9,12],7=[5,6,8,10].
 Protocol56 cases/8960feedback steps plus8 repeated reads, eager/NPUGraph,
-wholestate/untouched/guard/alias and unchanged1e-5/.00303 gates.
+wholestate/untouched/guard/alias and unchanged2e-6/.00303 gates.
 Four nonprivileged1CPU/8GiB jobs+8GiBreserve require one summed40GiB/
 CPU/disk fresh admission. MAIN actual identity/start/launch/ref inputs remain
 pending; source-only/defaultOFF do not authorize Docker or timer start.

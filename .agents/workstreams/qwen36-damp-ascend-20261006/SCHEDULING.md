@@ -1,5 +1,26 @@
 # Continuous preparation and NPU execution queue
 
+## NEW pre-guard packet actually preflighted — 2026-10-07 07:56Z
+
+MAIN applied/reviewed fixed_admission_capture_v3 NEW7 files, revision2.
+It adds independent exclusive/fsync pre-guard evidence, not a guard/math
+change. TP rank/world is resolved at actual forward like frozen v2, not
+premature plugin startup. MAIN MA08b2 actual landed13 software tests,
+lazy-rank source check, real defaultCLI and immutable-image no-device13 tests
+all passed. MA08b9 verifies actual source-bound preflight and exact no-device
+41fdb10a...9d4acf stopped/Pid0/noOOM/nodevices/retained. No new NPU pass yet.
+Original8b2 terminal is saved outside Git; read V3_PRE_GUARD_PREFLIGHT_20261007.md.
+
+The prior OFF-A failure and unknown field remain unresolved until actual v3
+values exist. No unchanged v2 retry or SOURCE_LOCK/final192/service/E2E/task
+claim. Next MAIN normal checkpoint, fresh exclusive4–7 admission and one
+bounded v3 actual native diagnostic before unchanged08:48:03Z cutoff.
+KVBuffer actual state limit is2e-6/output.00303, not copied DAMP1e-5;
+the old doc error is corrected from MAIN actual frozen-source grep.
+Parallel successor prep also audits trueT report→B1/B16 consumer→service
+interfaces and optional equivalent CPU metric caching; these are pending,
+not device/performance proofs. Queue and protected0–3 remain unchanged.
+
 ## Actual first native failure and executable successor — 2026-10-07 07:45Z
 
 Read NATIVE_C1_FAILURE_AND_KV_SUCCESSOR_20261007.md before earlier ready/live

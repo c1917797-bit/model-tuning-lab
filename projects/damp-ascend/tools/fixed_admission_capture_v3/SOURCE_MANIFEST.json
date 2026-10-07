@@ -1,0 +1,39 @@
+{
+  "schema": "damp-fixed-admission-sources/v3",
+  "files": {
+    "v3_contract.py": "4f4f7d5af7175f6cd3709fb704de34faf5cdc0dfbf8fd7d05f49dd53897f7b65",
+    "damp_fixed_v3.py": "e4dac4f7e79748c663d69123d3f05513ff064b2685d92e338f6776ac7c23b0d8",
+    "v3_before.py": "d6ccdeb3c51289e46677f640a974be90b686ab71a062413d7c3a996907ac78dc",
+    "run.py": "dcc4b9ec2ab6b9c65f96a0277fb4a6c8113ab57bed31001dafa77fc42d93c221",
+    "tests/test_before.py": "a56f0e08874f58ca1560b28559da4de16358723d86292df5e1aaff646a75ed2c",
+    "READY.md": "cb9af2ab05d47a70de6dc9bf16d10e61aedc53fc5f6a6b17f5ac1d707bc84e03"
+  },
+  "frozen_v2": {
+    "path": "projects/damp-ascend/tools/fixed_admission_capture_v2/SOURCE_MANIFEST.json",
+    "sha256": "b7a067ff84174f9ccdb5d1f87662aca78aa19bbea4ac62d1a1aff6829c681af0"
+  },
+  "scope": "independent-before-unchanged-time-axis-guard-only",
+  "actual_source_reads": {
+    "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+    "route": "force_direct/tpc",
+    "operations": [
+      "exec-0000000000000494",
+      "exec-0000000000000496",
+      "exec-0000000000000497",
+      "exec-0000000000000498",
+      "exec-0000000000000499",
+      "exec-000000000000049a",
+      "exec-000000000000049b",
+      "exec-000000000000049c",
+      "exec-000000000000049d",
+      "exec-000000000000049e",
+      "exec-000000000000049f"
+    ]
+  },
+  "guard_changed": false,
+  "source_lock_issued": false,
+  "npu_executed": false,
+  "prepared_only": true,
+  "revision": 2,
+  "revision_reason": "TP rank/world checked lazily at the actual native forward, not general-plugin startup; no guard/resource/math changes"
+}

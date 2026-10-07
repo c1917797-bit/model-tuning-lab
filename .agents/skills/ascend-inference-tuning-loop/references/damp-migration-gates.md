@@ -1,5 +1,20 @@
 # Packed recurrent-state migration: DAMP lessons
 
+## Source-derived gates and lifecycle-timed observation — 2026-10-07 07:56Z
+
+Keep protocol constants source-derived per paper. MAIN actual frozen-source
+grep confirms KVBuffer state/per-head2e-6 and output.00303; a document had
+copied DAMP1e-5 and was corrected without changing any source threshold.
+Inherited constant RESULT hashes cannot prove a new packet: v3 must bind
+actual preflight's v3 manifest and target entrypoint/tests, not v2 status alone.
+
+A diagnostic seam must not introduce earlier lifecycle requirements. MAIN
+review moved new TP rank/world queries from plugin startup to actual forward,
+matching original begin, with identical TP4/rank gates. Actual13 landed and
+13 target no-device tests pass; that does not prove real native time-axis or
+algorithm correctness. One enhanced failure-observation experiment is not
+an unchanged deterministic retry; still require actual admission and deadline.
+
 ## Pre-guard observation and real terminal authority — 2026-10-07 07:45Z
 
 Actual C1 v2 OFF-A reached real model forward but failed its fixed CPU
