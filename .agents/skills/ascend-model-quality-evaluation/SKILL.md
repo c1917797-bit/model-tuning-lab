@@ -49,6 +49,15 @@ are not a frozen reusable baseline or evidence of quality pass/regression;
 changing the ruler to fit the budget requires a new matched baseline, and
 extra time or devices require their own authorization.
 
+For an optimization that acts only on a specific runtime path, check the
+*actual frozen candidate configuration and scored request payload* before a
+long suite: can representative requests reach that path, and what evidence
+would prove they did? Plugin load or scheduler registration is not proof of
+work performed. If the natural quality ruler does not exercise the treatment,
+it may still measure runtime-enabled safety, but cannot establish hot-path
+quality. Declare a separate matched in-path ruler prospectively rather than
+changing requests or relaxing activation after seeing candidate scores.
+
 ## Protocol
 
 1. Establish an environment fingerprint with
@@ -62,7 +71,9 @@ extra time or devices require their own authorization.
    evaluator revision.
 4. Run a deterministic short canary before the full suite. For outputs of at
    most 512 tokens where deterministic execution is expected, require zero
-   within-arm variance and exact baseline/candidate token equality.
+   within-arm variance and exact baseline/candidate token equality. If the
+   quality claim concerns a conditional hot path, also prove a representative
+   request activates that path under the frozen candidate contract.
 5. Measure the baseline three times once, or reuse three completed runs whose
    environment, generation, dataset, evaluator, and service fingerprints match
    exactly and whose raw/detail hashes still verify. Record the original run

@@ -55,6 +55,7 @@ skills:
       - 精度测试
       - 质量回归测试
       - audit shared-NPU isolation during a paired quality suite
+      - verify conditional treatment hot-path coverage before a quality suite
     scope:
       - AGENTS.md
       - configs/**

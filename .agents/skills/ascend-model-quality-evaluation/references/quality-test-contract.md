@@ -37,6 +37,28 @@ Use this reference when creating or reviewing a concrete quality experiment.
 Record any additional sampling and stopping parameters. A changed field creates
 a new ruler and requires a fresh baseline.
 
+## Treatment-path coverage preflight
+
+When the optimization acts only on eligible requests, record its source-level
+trigger and the actual candidate-service values controlling eligibility.
+Inspect the frozen scored payload and tokenized sample distribution for any
+required metadata, boundaries, length, repetition, or traffic shape. Run a
+small, declared candidate-side canary on the target NPU and require evidence
+from the work-performing path (for example, verified skipped tokens or worker
+events), not merely plugin import, scheduler registration, or a configuration
+flag. Keep the canary distinct from scored rows unless it is part of the
+frozen protocol.
+
+If the scored suite cannot trigger the treatment, classify its possible result
+as runtime-enabled/off-path safety evidence, not in-path quality preservation.
+Before spending a long NPU window under an in-path claim, define a separate
+prospective matched ruler whose requests actually exercise the treatment.
+Never retrofit segment metadata, traffic, or activation thresholds into an
+ongoing arm, and never pool the new ruler with its predecessor. If the mismatch
+is discovered mid-run, preserve the original rows and contract, finish or
+stop only under its existing authorization/stop rules, and report the coverage
+gap explicitly.
+
 Before committing to the full suite, record the authorized per-run and total
 time limits, a target-NPU throughput or sample-rate estimate, the projected
 time for every dataset/repetition/arm, and a margin for service transitions,

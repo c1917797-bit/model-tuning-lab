@@ -1,6 +1,8 @@
-# HYPIC C1/C2 NPU0–3 算法特性穿刺 · 进行中报告（2026-10-07 18:24 UTC 更新）
+# HYPIC C1/C2 NPU0–3 算法特性穿刺 · 进行中报告（2026-10-07 20:17 UTC 检查点）
 
 报告状态：**progress**。当前证据支持同环境 HYPIC 热复用路径的性能收益，尚不支持配对质量通过、生产采用或整篇论文复现。本文只列本次主机实测；同事历史 TP2 和论文 SGLang 数字不与本次 TP4 绝对值合并。CPU-binding 原因与修复的独立阶段结果见 `REPORT.md`。
+
+最新检查点：clean2 的 G1 六单元已全部独立审计，752 次连续隔离采样和精确资源释放通过，因此是可用的自然质量对照。G2 已启动并独立审计 LongBench-v2 run1：74/127 正确，对照同轮 78/127，逐样本输入相同；GSM8K run1 自 20:04:36 UTC 运行中。该单轮差异不构成最终质量结论。另查明冻结评测请求无显式 segment 边界，服务设 `AUTO_CHUNK_TEXT=0` 且无 separator token IDs；本轮自然质量协议无法验证 HYPIC 真正复用 token 时的精度，原四-worker 热路径门槛不得事后放宽。证据与后续分流见 `QUALITY_ACTIVATION_SCOPE.md`。下文 18:24 UTC 的逐单元段落保留为历史进度快照，以本段和 `HANDOFF.md` 的较新状态为准。
 
 质量尝试 1 在 16:52:55 UTC 因外部 NPU3 占用使隔离门槛失败；尽管六个 no-cache 单元均完成并通过逐行审计，**它们不是正式质量对照分母**，HYPIC 质量臂没有启动。原始数据保留于 `quality-context-41984`；新一轮完整 12 单元配对已在 `quality-context-41984-clean2` 启动，不混合两个尝试。归因、进程和清理证据见 `QUALITY_RESOURCE_CONFLICT.md`。
 
@@ -48,7 +50,7 @@ G2 相对 G1 的 weighted TPOT 中位数低 `17.3404 ms/token`，即下降 `22.3
 
 上述六单元逐行重算了索引、样本/答案、响应哈希、原始评测器计分、token 用量及摘要算术；同数据集重复间逐样本 prompt-token 数一致。各 JSONL、摘要、receipt 的路径与 SHA256 在 `HANDOFF.md`，原始数据在 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984/quality/no-cache/`，不入 Git。最后一轮的尾部可能与外部 NPU3 算子任务重叠，且清理时整条卡道不空闲；不能把这六轮当作隔离合格的正式对照。G2 质量尚未开始，因此没有配对精度差、质量通过或退化结论。
 
-### 质量尝试 2（clean2，尚未形成完整对照）
+### 质量尝试 2（clean2，以下为 18:24 UTC 历史快照；G1 现已完整审计）
 
 截至 18:24 UTC，G1 LongBench-v2 run1 已完成独立逐行审计：127/127、78 正确、准确率 61.4173%、10 条达到 2048 上限，0 缺失/失败。摘要 SHA256 `7423c40c22515084967cd38eb9579a9b675097d80499d274f10aa6a0d0077e2e`，JSONL SHA256 `812a4281c167327ae69b96766e550f58ffb905c889c60bc0a649850ec5cc5810`，回执 SHA256 `f8859e0cc004052252c010fb72917b1f61f2440545785f49d3dcadb84f90696e`。G1 GSM8K run1 也通过独立审计：1319/1319、1278 正确、准确率 96.8916%、10 条达到上限，0 缺失/失败；摘要/JSONL/回执 SHA256 依次为 `edc09f01f8c5a5a13b064d2c277b653d26562194eaa9cadb4f3801102efdef32`、`1d2e7710a0371a0b77c6c12dabfe7d375c859b9d8e699b0f4971f3f81efb16db`、`260b551915267f9669c3e8d62f9efa6ec1c1339230b138f084cbe8e9edf7b9a1`。G1 LongBench-v2 run2 也通过独立审计：127/127、72 正确、准确率 56.6929%、18 条达到上限，且逐样本输入 token 与 run1 相同；摘要/JSONL/回执 SHA256 依次为 `f9b2f3a12b1a4007c6cedac88a673e11413c2bb68e951a72109517448a61e0f2`、`58d00793efa782b88ad878ef48623f93ad013a175df785ae978cfaec3c4b024d`、`62a2a61ce7bfd663115da8922c906b0e32125201bffea17d041c3a060c6c0771`。G1 GSM8K run2 正在运行。这三个单元的行/评分有效，但本次 G1 的运行期隔离与停服释放仍未结束，故不能据此冻结正式对照或计算 G1/G2 差值。
 
@@ -60,8 +62,8 @@ G2 的三轮正式性能日志满足插件构建、scheduler 与 worker 热路�
 | --- | --- | --- |
 | 可运行性与性能六轮 | 通过 | 修复后 NPU0–3 同槽位 C1/C2 热复用性能收益成立 |
 | 性能热路径激活 | 通过（仅正式性能臂） | 不是仅靠容器名推断激活 |
-| 12 单元配对质量 | 尝试 1 隔离失败；clean2 需重新完成 12/12 | 不宣称精度无损/回归 |
-| 质量服务激活与两组释放 | 未完成 | 不宣称最终资源门槛通过 |
+| 12 单元配对质量 | clean2 G1 6/6 有效；G2 1/6 已逐行审计，其余运行中 | 不宣称精度无损/回归 |
+| 质量服务激活与两组释放 | G1 752 次隔离及释放通过；G2 worker 已绑定但热复用条件不满足，整组释放待证 | 不宣称热路径质量或最终资源门槛通过 |
 | 论文 C3 与原版系统广度 | 未实现/未测试 | 不宣称整篇 HYPIC 复现 |
 | 生产采用/泛化 | 未审定 | 不宣称发布就绪 |
 
@@ -69,4 +71,4 @@ G2 的三轮正式性能日志满足插件构建、scheduler 与 worker 热路�
 
 先前 one-wave HYPIC smoke 的外层进程曾因把正式 40 请求才需满足的 `native_decode_scheduler_passthrough` 事件门槛错误套到四请求窗口而退出 1；保留原失败记录，语义 canary/核心事件另行审计，正式三轮继续严格要求完整热路径。另一项已确认问题是 NPU0–3 的共享 Decode CPU-binding floor；用官方支持的禁绑开关同时修复两组后再测 HYPIC 差值，而不是把 CPU 影响归给算法。P95 审计必须按基准程序的 nearest-rank 定义复算。这些已沉淀到对应现有 Skill 与 registry，新的外部 NPU3 冲突证明仅启动前验槽不足；尝试 2 添加运行期 PID 守卫并重新做完整配对，不能挑选尝试 1 已通过算术校验的分数来规避隔离失败。详细证据在实验 YAML、`QUALITY_RESOURCE_CONFLICT.md` 和 `HANDOFF.md`。
 
-证据根：`/cache/cch/hypic-npu03-cpu-binding-fix-20261007`；主账本：`.agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml`；逐项 Skill 状态：`SKILL_VERIFICATION.md`。下一步持续观察同一 clean2 作业 `exec-0000000000000e15`，逐单元审计余下 11 个结果、双组运行期隔离/激活与释放，再把本报告升级为 final 或有证据的 negative/inconclusive。不得把尝试 1 的基线与 clean2 治疗臂混算。
+证据根：`/cache/cch/hypic-npu03-cpu-binding-fix-20261007`；主账本：`.agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml`；逐项 Skill 状态：`SKILL_VERIFICATION.md`。下一步持续观察同一 clean2 作业 `exec-0000000000000e15`，逐单元审计余下 5 个 G2 结果、双组运行期隔离/激活与释放，再把本报告升级为 final 或有证据的 negative/inconclusive。不得把尝试 1 的基线与 clean2 治疗臂混算。
