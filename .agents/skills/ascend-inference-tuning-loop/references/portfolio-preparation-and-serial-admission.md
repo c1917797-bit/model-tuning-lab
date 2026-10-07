@@ -116,3 +116,9 @@ FDs and is_initialized=False establish no-init, not absent devices. For staged
 ABI then NPU work, bind both owned CIDs, sequential aggregate resources, one
 unchanged phase deadline and each exact stop-retain/terminal receipt. Never
 promote the CPU schema phase, exposed-device declaration or canary to numerics.
+
+In this host's bounded Python controller, Docker's Go CLI needs its own
+address-space wrapper even for read-only ps/inspect diagnostics. MA0e65 failed
+Go reservation under the inherited256MiB soft AS limit; the changed Docker-only
+AS restoration passed MA0e69. Keep the parent plus CLI RSS and cgroup budget;
+do not make the whole controller unbounded or count that diagnostic as numerics.

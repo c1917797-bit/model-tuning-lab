@@ -1,0 +1,442 @@
+{
+  "schema": "main.h8-full-v2-launch-checkpoint/v1",
+  "checkpoint_recorded_utc_from_clock": "2026-10-07T17:50:48Z",
+  "scope": "launch confirmation only; no numerical pass",
+  "exact_input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=268435456:unlimited",
+      "--cpu=5500",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/host.py",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-v2-20261007-001",
+      "--execute"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout": 5500,
+    "maxOutputBytes": 65536,
+    "sync": false,
+    "idempotencyKey": "main-h8-full-v2-oct7-1747-single-11520-001"
+  },
+  "actual_launch_ack": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-h8-full-v2-oct7-1747-single-11520-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000e6e",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000000e6e",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 368,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 368,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1423,
+        "totalMs": 1791
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 367,
+        "routeLookupMs": 0,
+        "totalMs": 367
+      }
+    },
+    "traceId": "18453e09-e4e3-4c61-a4b5-6ae55b4a15a7"
+  },
+  "actual_corrected_preflight": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "from pathlib import Path\nimport json,hashlib,os,resource,subprocess,sys,shutil\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\np=Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2');r=Path('/opt/host/vnf/austinov/model-tuning-lab')\nassert hashlib.sha256((p/'MAIN_EXECUTE.json').read_bytes()).hexdigest()=='d807a04979ab56985b662c24492833244ffa0b39b1d6bd02cea086f69a048e11'\nspec=json.loads((p/'MAIN_EXECUTE.json').read_bytes());assert not Path(spec['required_fresh_output_leaf']).exists()\nresults=[]\nfor tail in ([],['--wrong-plugin-path']):\n a=[sys.executable,'-I','-B',str(p/'source_import_probe.py'),*tail];q=subprocess.run(a,cwd=r,env=dict(os.environ,PYTHONPATH='',PYTHONDONTWRITEBYTECODE='1',QWEN36_KVBP_ENABLE='0',QWEN36_KVBP_H8_ENABLE='0'),capture_output=True,text=True,timeout=10);results.append({'argv':a,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr});assert q.returncode==0,q.stderr\nsource_argv=json.loads(sys.argv[1]);q=subprocess.run(source_argv,cwd=r,capture_output=True,text=True,timeout=15);results.append({'argv':source_argv,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr});assert q.returncode==0,q.stderr\nfor a in (['/usr/local/sbin/npu-smi','info'],['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','ps','--no-trunc','--format','{{.ID}} {{.Names}} {{.Status}}']):\n q=subprocess.run(a,capture_output=True,text=True,timeout=10);results.append({'argv':a,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr});assert q.returncode==0,q.stderr\nmem={l.split(':')[0]:int(l.split()[1])*1024 for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith(('MemAvailable:','MemFree:'))}\nassert mem['MemAvailable']>=int(40.25*2**30);assert shutil.disk_usage(p.parent).free>=28*2**30\nprint(json.dumps({'results':results,'fresh_output_absent':True,'ordinary_memory':mem,'disk_free_GiB':shutil.disk_usage(p.parent).free/2**30,'npu_algorithm_executed':False,'Torch_imported':False}))",
+            "[\"/usr/bin/python3\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/host.py\",\"--source-manifest\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json\",\"--source-manifest-sha256\",\"0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d\",\"--library\",\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\",\"--library-sha256\",\"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\",\"--build-receipt\",\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\",\"--build-receipt-sha256\",\"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\",\"--meta-receipt\",\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\",\"--meta-receipt-sha256\",\"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\",\"--source-audit-only\"]"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 1531,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000e69",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"results\": [{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/source_import_probe.py\"], \"exit_code\": 0, \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-real-oracle-import/v2\\\", \\\"cwd\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab\\\", \\\"PYTHONPATH\\\": \\\"\\\", \\\"initial_sys_path\\\": [\\\"/usr/lib64/python39.zip\\\", \\\"/usr/lib64/python3.9\\\", \\\"/usr/lib64/python3.9/lib-dynload\\\", \\\"/usr/lib64/python3.9/site-packages\\\", \\\"/usr/lib/python3.9/site-packages\\\", \\\"/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages\\\"], \\\"entry_path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2\\\", \\\"oracle_sha256\\\": \\\"16f8801ef66ed8e8a44fbbcf67ef343b6846df57d48eb075cca2221fa0d2a7d9\\\", \\\"resolved_modules\\\": {\\\"kvbuffer_parallel\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/__init__.py\\\", \\\"sha256\\\": \\\"81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721\\\"}, \\\"kvbuffer_parallel.contract\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/contract.py\\\", \\\"sha256\\\": \\\"db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38\\\"}, \\\"kvbuffer_parallel.patch\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/patch.py\\\", \\\"sha256\\\": \\\"71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d\\\"}}, \\\"finite_path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/finite_contract.py\\\", \\\"finite_sha256\\\": \\\"6118daadc5491880df7fe1badbb875df6cd38ee04e99dc601684dc8c354572b8\\\", \\\"wrong_path_rejected\\\": false, \\\"negative_error\\\": null, \\\"torch_imported\\\": false, \\\"torch_npu_imported\\\": false, \\\"npu_executed\\\": false, \\\"numeric_executed\\\": false}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/source_import_probe.py\", \"--wrong-plugin-path\"], \"exit_code\": 0, \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-real-oracle-import/v2\\\", \\\"cwd\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab\\\", \\\"PYTHONPATH\\\": \\\"\\\", \\\"initial_sys_path\\\": [\\\"/usr/lib64/python39.zip\\\", \\\"/usr/lib64/python3.9\\\", \\\"/usr/lib64/python3.9/lib-dynload\\\", \\\"/usr/lib64/python3.9/site-packages\\\", \\\"/usr/lib/python3.9/site-packages\\\", \\\"/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages\\\"], \\\"entry_path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2\\\", \\\"oracle_sha256\\\": \\\"16f8801ef66ed8e8a44fbbcf67ef343b6846df57d48eb075cca2221fa0d2a7d9\\\", \\\"resolved_modules\\\": {\\\"kvbuffer_parallel\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/__init__.py\\\", \\\"sha256\\\": \\\"81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721\\\"}, \\\"kvbuffer_parallel.contract\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/contract.py\\\", \\\"sha256\\\": \\\"db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38\\\"}, \\\"kvbuffer_parallel.patch\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin/kvbuffer_parallel/patch.py\\\", \\\"sha256\\\": \\\"71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d\\\"}}, \\\"finite_path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/finite_contract.py\\\", \\\"finite_sha256\\\": \\\"6118daadc5491880df7fe1badbb875df6cd38ee04e99dc601684dc8c354572b8\\\", \\\"wrong_path_rejected\\\": true, \\\"negative_error\\\": \\\"hash-bound canonical dependency path differs\\\", \\\"torch_imported\\\": false, \\\"torch_npu_imported\\\": false, \\\"npu_executed\\\": false, \\\"numeric_executed\\\": false}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/host.py\", \"--source-manifest\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json\", \"--source-manifest-sha256\", \"0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d\", \"--library\", \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\", \"--library-sha256\", \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\", \"--build-receipt\", \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\", \"--build-receipt-sha256\", \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\", \"--meta-receipt\", \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\", \"--meta-receipt-sha256\", \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\", \"--source-audit-only\"], \"exit_code\": 0, \"stdout\": \"{\\\"source_audit_passed\\\": true, \\\"source_count\\\": 109, \\\"source_manifest\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json\\\", \\\"sha256\\\": \\\"0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d\\\"}, \\\"artifact_refs\\\": {\\\"library\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\\\", \\\"sha256\\\": \\\"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\\\"}, \\\"build\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\\\", \\\"sha256\\\": \\\"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\\\"}, \\\"meta\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\\\", \\\"sha256\\\": \\\"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\\\"}}, \\\"artifact_admission\\\": {\\\"artifacts\\\": {\\\"library\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\\\", \\\"sha256\\\": \\\"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\\\"}, \\\"build\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\\\", \\\"sha256\\\": \\\"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\\\"}, \\\"meta\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\\\", \\\"sha256\\\": \\\"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\\\"}}, \\\"meta_schema\\\": \\\"qwen36_kvbuffer_short_horizon_v3::decode(Tensor query, Tensor key, Tensor value, Tensor g, Tensor beta, Tensor(a!) base_state, Tensor(b!) k_log, Tensor(c!) u_log, Tensor(d!) lambda_log, Tensor(e!) cumulative_decay, Tensor(f!) log_length, Tensor actual_seq_lengths, Tensor state_indices) -> Tensor\\\", \\\"meta_is_not_npu_proof\\\": true}, \\\"npu_executed\\\": false, \\\"serving_ready\\\": false}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/local/sbin/npu-smi\", \"info\"], \"exit_code\": 0, \"stdout\": \"+------------------------------------------------------------------------------------------------+\\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\\n+===========================+===============+====================================================+\\n| 0     910B4               | OK            | 152.3       53                0    / 0             |\\n| 0                         | 0000:C1:00.0  | 55          0    / 0          31671/ 32768         |\\n+===========================+===============+====================================================+\\n| 1     910B4               | OK            | 142.6       52                0    / 0             |\\n| 0                         | 0000:C2:00.0  | 54          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 2     910B4               | OK            | 124.5       45                0    / 0             |\\n| 0                         | 0000:81:00.0  | 5           0    / 0          31671/ 32768         |\\n+===========================+===============+====================================================+\\n| 3     910B4               | OK            | 112.1       44                0    / 0             |\\n| 0                         | 0000:82:00.0  | 5           0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 4     910B4               | OK            | 95.3        45                0    / 0             |\\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\\n+===========================+===============+====================================================+\\n| 5     910B4               | OK            | 96.6        43                0    / 0             |\\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 6     910B4               | OK            | 95.4        44                0    / 0             |\\n| 0                         | 0000:41:00.0  | 0           0    / 0          2864 / 32768         |\\n+===========================+===============+====================================================+\\n| 7     910B4               | OK            | 86.7        45                0    / 0             |\\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\\n+===========================+===============+====================================================+\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\\n+===========================+===============+====================================================+\\n| 0       0                 | 585850        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 1       0                 | 585851        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 2       0                 | 585852        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 3       0                 | 585853        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 4                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 5                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 6                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 7                                                            |\\n+===========================+===============+====================================================+\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"ps\", \"--no-trunc\", \"--format\", \"{{.ID}} {{.Names}} {{.Status}}\"], \"exit_code\": 0, \"stdout\": \"f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b hypic_npu03_bindingfix_quality_no_cache_20261007_clean2 Up 37 minutes\\nefc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6 cannbench_ds Up 32 hours\\ne93f8e1ca42b64baf2bfa4ae59289f10dbaabc6069f70e7aa44e7956a9b0f54b agentgpu-910b4-qwen35-4b-v0 Up 3 days\\n\", \"stderr\": \"\"}], \"fresh_output_absent\": true, \"ordinary_memory\": {\"MemFree\": 28195184640, \"MemAvailable\": 97016545280}, \"disk_free_GiB\": 612.7402191162109, \"npu_algorithm_executed\": false, \"Torch_imported\": false}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 769,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 769,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 769
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 768,
+          "routeLookupMs": 0,
+          "totalMs": 768
+        }
+      },
+      "traceId": "6595afaa-b94c-4ad6-bb0a-7277494e44be"
+    },
+    "operationId": "exec-0000000000000e69",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "original_failed_read_only_preflight": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "from pathlib import Path\nimport json,hashlib,os,resource,subprocess,sys,shutil\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\np=Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2');r=Path('/opt/host/vnf/austinov/model-tuning-lab')\nassert hashlib.sha256((p/'MAIN_EXECUTE.json').read_bytes()).hexdigest()=='d807a04979ab56985b662c24492833244ffa0b39b1d6bd02cea086f69a048e11'\nspec=json.loads((p/'MAIN_EXECUTE.json').read_bytes());assert not Path(spec['required_fresh_output_leaf']).exists()\nresults=[]\nfor tail in ([],['--wrong-plugin-path']):\n a=[sys.executable,'-I','-B',str(p/'source_import_probe.py'),*tail];q=subprocess.run(a,cwd=r,env=dict(os.environ,PYTHONPATH='',PYTHONDONTWRITEBYTECODE='1',QWEN36_KVBP_ENABLE='0',QWEN36_KVBP_H8_ENABLE='0'),capture_output=True,text=True,timeout=10);results.append({'argv':a,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr});assert q.returncode==0,q.stderr\nsource_argv=json.loads(sys.argv[1]);q=subprocess.run(source_argv,cwd=r,capture_output=True,text=True,timeout=15);results.append({'argv':source_argv,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr});assert q.returncode==0,q.stderr\nfor a in (['/usr/local/sbin/npu-smi','info'],['/usr/bin/docker','ps','--no-trunc','--format','{{.ID}} {{.Names}} {{.Status}}']):\n q=subprocess.run(a,capture_output=True,text=True,timeout=10);results.append({'argv':a,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr});assert q.returncode==0,q.stderr\nmem={l.split(':')[0]:int(l.split()[1])*1024 for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith(('MemAvailable:','MemFree:'))}\nassert mem['MemAvailable']>=int(40.25*2**30);assert shutil.disk_usage(p.parent).free>=28*2**30\nprint(json.dumps({'results':results,'fresh_output_absent':True,'ordinary_memory':mem,'disk_free_GiB':shutil.disk_usage(p.parent).free/2**30,'npu_algorithm_executed':False,'Torch_imported':False}))",
+            "[\"/usr/bin/python3\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/host.py\",\"--source-manifest\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json\",\"--source-manifest-sha256\",\"0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d\",\"--library\",\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\",\"--library-sha256\",\"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\",\"--build-receipt\",\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\",\"--build-receipt-sha256\",\"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\",\"--meta-receipt\",\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\",\"--meta-receipt-sha256\",\"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\",\"--source-audit-only\"]"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 1494,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000e65",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 12, in <module>\nAssertionError: fatal error: failed to reserve page summary memory\n\nruntime stack:\nruntime.throw({0x23e6cb?, 0x4fb4ac?})\n\t/usr/local/go/src/runtime/panic.go:1047 +0x40 fp=0xffffedaacc90 sp=0xffffedaacc60 pc=0x502260\nruntime.(*pageAlloc).sysInit(0x27a0170)\n\t/usr/local/go/src/runtime/mpagealloc_64bit.go:82 +0x188 fp=0xffffedaacd20 sp=0xffffedaacc90 pc=0x4f80c8\nruntime.(*pageAlloc).init(0x27a0170, 0x27a0160, 0x0?)\n\t/usr/local/go/src/runtime/mpagealloc.go:324 +0x88 fp=0xffffedaacd50 sp=0xffffedaacd20 pc=0x4f6338\nruntime.(*mheap).init(0x27a0160)\n\t/usr/local/go/src/runtime/mheap.go:729 +0x140 fp=0xffffedaacd90 sp=0xffffedaacd50 pc=0x4f3450\nruntime.mallocinit()\n\t/usr/local/go/src/runtime/malloc.go:407 +0x90 fp=0xffffedaacdc0 sp=0xffffedaacd90 pc=0x4d7930\nruntime.schedinit()\n\t/usr/local/go/src/runtime/proc.go:693 +0xa0 fp=0xffffedaace20 sp=0xffffedaacdc0 pc=0x5059f0\nruntime.rt0_go()\n\t/usr/local/go/src/runtime/asm_arm64.s:86 +0xa8 fp=0xffffedaace50 sp=0xffffedaace20 pc=0x530698\n\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 397,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 397,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 397
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 396,
+          "routeLookupMs": 0,
+          "totalMs": 396
+        }
+      },
+      "traceId": "d0951d6b-1248-4748-82b1-b21ec6234b63"
+    },
+    "operationId": "exec-0000000000000e65",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "source_diff": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import hashlib,json,difflib,sys\nfrom pathlib import Path\np=Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2');o=p.with_name('h8-full-gate-v1');m=json.loads((p/'SOURCE_MANIFEST.json').read_text());assert hashlib.sha256((p/'SOURCE_MANIFEST.json').read_bytes()).hexdigest()=='0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d'\nfor n,h in m['files'].items():\n a=p/n;assert hashlib.sha256(a.read_bytes()).hexdigest()==h,n\n b=o/n\n if not b.exists():print('NEW '+n+' bytes='+str(a.stat().st_size))\n elif a.read_bytes()!=b.read_bytes():\n  print('CHANGED '+n+' bytes='+str(a.stat().st_size))\n  if n.endswith('.py'):print(''.join(difflib.unified_diff(b.read_text().splitlines(True),a.read_text().splitlines(True),fromfile=str(b),tofile=str(a))))\n else:print('EXACT_INHERITED '+n)"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 52,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000e5d",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "CHANGED FILE_LIST.json bytes=584\nCHANGED MAIN_COMMAND.md bytes=6081\nCHANGED STAGES_PENDING.json bytes=585\nEXACT_INHERITED auxiliary.py\nCHANGED bindings.py bytes=8745\n--- /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v1/bindings.py\n+++ /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/bindings.py\n@@ -69,7 +69,7 @@\n   layers=[x for x in context.no_compile_layers.values() if type(x) is target]\n   rows=[]\n   for layer in layers:\n-   match=re.search(r\"(?:^|\\\\.)layers\\\\.(\\\\d+)\\\\.\",layer.prefix)\n+   match=re.search(r\"(?:^|\\.)layers\\.(\\d+)\\.\",layer.prefix)\n    require(match and layer._forward_core.__func__ is core,\"actual patched receiver instance\")\n    rows.append((int(match.group(1)),layer))\n   require(len(rows)==48 and {i for i,_ in rows}=={i for i in range(64) if i%4!=3},\"all actual48 global GDN IDs\")\n\nEXACT_INHERITED consume.py\nCHANGED contract.py bytes=12962\n--- /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v1/contract.py\n+++ /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/contract.py\n@@ -33,7 +33,7 @@\n  scope=\"native-kernel-full-matrix-not-model-E2E-or-task-accuracy\")\n def source_admission(source_ref):\n  m=json.loads(read_ref(source_ref))\n- require(m.get(\"schema\")==\"kvbp.h8-full-source/v1\" and m.get(\"default_enabled\") is False and\n+ require(m.get(\"schema\")==\"kvbp.h8-full-source/v2\" and m.get(\"default_enabled\") is False and\n   m.get(\"npu_executed\") is False and m.get(\"inherited_manifest\")==V4_REF and\n   m.get(\"materialization_interval\")==8 and m.get(\"storage_log_capacity\")==16 and\n   m.get(\"shards\")=={str(k):list(v) for k,v in SHARDS.items()},\"new frozen whole-matrix source\")\n\nCHANGED host.py bytes=28348\n--- /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v1/host.py\n+++ /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/host.py\n@@ -16,7 +16,7 @@\n F=h.frozen()\n ROOT=c.ROOT;DOCKER=h.DOCKER;PY=h.PY;SMI=h.SMI;IMAGE=c.IMAGE\n MEM=8*1024**3;HOST_MEM=256*1024**2;RESERVE=8*1024**3;WORKSPACE=5*1024**3\n-LEASE=5400;CLEANUP=180;OWNER=\"kvbuffer-h8-full-v1\"\n+LEASE=5400;CLEANUP=180;OWNER=\"kvbuffer-h8-full-v2\"\n CUTOFF=datetime.fromisoformat(\"2026-10-08T08:29:54+00:00\")\n NATIVE=h.NATIVE;NATIVE_SHA=h.NATIVE_SHA\n def utc():return datetime.now(timezone.utc)\n\nEXACT_INHERITED kvbuffer_h8_adapter-1.0.0.dist-info/METADATA\nEXACT_INHERITED kvbuffer_h8_adapter-1.0.0.dist-info/entry_points.txt\nEXACT_INHERITED kvbuffer_h8_adapter-1.0.0.dist-info/top_level.txt\nEXACT_INHERITED kvbuffer_h8_adapter/__init__.py\nEXACT_INHERITED lifecycle.py\nCHANGED oracle.py bytes=17527\n--- /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v1/oracle.py\n+++ /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/oracle.py\n@@ -10,9 +10,46 @@\n import sys\n import time\n \n-sys.path.insert(0,str(Path(__file__).resolve().parents[2]/\"plugin\"))\n-from kvbuffer_parallel.contract import (IMAGE,SOURCES,admit_lengths,source_identity,aux_bytes,require,sha)\n-from kvbuffer_parallel.patch import EXPECTED_SCHEMA as ORIGINAL_SCHEMA\n+# Do not infer canonical plugin paths from this independently mounted packet.\n+# Hash-check all real dependency bytes before executing their top-level code.\n+import importlib\n+import importlib.util\n+FROZEN_PLUGIN = Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/plugin\")\n+FROZEN_FINITE = Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/finite_contract.py\")\n+FROZEN_IMPORTS = {\n+ \"__init__.py\": \"81cc63411a8b6647ed45a5a50d39e6f4f2889a39f1fb083d8ab7debcd339a721\",\n+ \"contract.py\": \"db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38\",\n+ \"patch.py\": \"71be0c99af19d66bc5f44ebb983b748cd56e2e776d567b0b4df0789ca0d89e2d\"}\n+FINITE_SHA = \"6118daadc5491880df7fe1badbb875df6cd38ee04e99dc601684dc8c354572b8\"\n+def load_frozen_dependencies(plugin_root=FROZEN_PLUGIN, finite_path=FROZEN_FINITE):\n+    plugin_root, finite_path = Path(plugin_root), Path(finite_path)\n+    if plugin_root.resolve()!=FROZEN_PLUGIN or finite_path.resolve()!=FROZEN_FINITE:\n+        raise ValueError(\"hash-bound canonical dependency path differs\")\n+    for name,digest in FROZEN_IMPORTS.items():\n+        path=plugin_root/\"kvbuffer_parallel\"/name\n+        if hashlib.sha256(path.read_bytes()).hexdigest()!=digest:\n+            raise ValueError(\"hash-bound plugin dependency differs: \"+name)\n+    if hashlib.sha256(finite_path.read_bytes()).hexdigest()!=FINITE_SHA:\n+        raise ValueError(\"hash-bound finite dependency differs\")\n+    for name in (\"kvbuffer_parallel\",\"kvbuffer_parallel.contract\",\"kvbuffer_parallel.patch\"):\n+        if name in sys.modules:\n+            expected=plugin_root/\"kvbuffer_parallel\"/(\"__init__.py\" if name==\"kvbuffer_parallel\" else name.rsplit(\".\",1)[1]+\".py\")\n+            if Path(sys.modules[name].__file__).resolve()!=expected:\n+                raise ValueError(\"preloaded dependency outside canonical SHA-bound source: \"+name)\n+    sys.path.insert(0,str(plugin_root))\n+    contract=importlib.import_module(\"kvbuffer_parallel.contract\")\n+    patch=importlib.import_module(\"kvbuffer_parallel.patch\")\n+    for module,name in ((contract,\"contract.py\"),(patch,\"patch.py\")):\n+        if Path(module.__file__).resolve()!=plugin_root/\"kvbuffer_parallel\"/name:\n+            raise ValueError(\"resolved dependency outside SHA-bound source\")\n+    sp=importlib.util.spec_from_file_location(\"_h8_sha_bound_finite\",finite_path)\n+    finite=importlib.util.module_from_spec(sp);sp.loader.exec_module(finite)\n+    return contract,patch,finite\n+_frozen_contract,_frozen_patch,_frozen_finite=load_frozen_dependencies()\n+IMAGE,SOURCES,admit_lengths,source_identity,aux_bytes,require,sha=(\n+    _frozen_contract.IMAGE,_frozen_contract.SOURCES,_frozen_contract.admit_lengths,\n+    _frozen_contract.source_identity,_frozen_contract.aux_bytes,_frozen_contract.require,_frozen_contract.sha)\n+ORIGINAL_SCHEMA = _frozen_patch.EXPECTED_SCHEMA\n CANDIDATE_NAMESPACE = \"qwen36_kvbuffer_short_horizon_v3\"\n EXPECTED_SCHEMA = ORIGINAL_SCHEMA.replace(\"qwen36_kvbuffer_parallel_fp32\", CANDIDATE_NAMESPACE)\n candidate_ops = None\n@@ -23,7 +60,7 @@\n     require(str(ops.decode.default._schema) == EXPECTED_SCHEMA, \"new candidate schema differs\")\n     candidate_ops = ops\n \n-from finite_contract import finite_receipt, FINITE_SCOPE\n+finite_receipt, FINITE_SCOPE = _frozen_finite.finite_receipt, _frozen_finite.FINITE_SCOPE\n \n FLUSH_INTERVAL, LOG_CAPACITY = 8, 16\n OUT_LIMIT, STATE_LIMIT = .00303, 2e-6\n\nEXACT_INHERITED run.py\nEXACT_INHERITED runtime.py\nCHANGED software_runner.py bytes=1333\n--- /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v1/software_runner.py\n+++ /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/software_runner.py\n@@ -8,7 +8,7 @@\n for p in root.rglob(\"*.py\"):ast.parse(p.read_text(),filename=str(p))\n result=subprocess.run([sys.executable,\"-B\",str(root/\"test_packet.py\")],capture_output=True,text=True,timeout=12)\n own=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss;child=resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss\n-receipt=dict(schema=\"kvbp.h8-full-actual-software/v1\",command=[sys.executable,\"-B\",str(root/\"test_packet.py\")],\n+receipt=dict(schema=\"kvbp.h8-full-actual-software/v2\",command=[sys.executable,\"-B\",str(root/\"test_packet.py\")],\n  exit_code=result.returncode,stdout=result.stdout,stderr=result.stderr,elapsed_seconds=time.monotonic()-started,\n  host_peak_rss_kib=own,child_peak_rss_kib=child,aggregate_peak_rss_kib=own+child,\n  affinity=list(os.sched_getaffinity(0)),torch_imported=\"torch\" in sys.modules,npu_executed=False,\n\nEXACT_INHERITED source_blobs/gdn.py\nEXACT_INHERITED source_blobs/mamba_utils.py\nNEW source_import_probe.py bytes=2090\nCHANGED source_origins.json bytes=47752\nCHANGED test_packet.py bytes=8255\n--- /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v1/test_packet.py\n+++ /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/test_packet.py\n@@ -1,5 +1,5 @@\n \"\"\"Synthetic SOFTWARE contracts never count as device rows.\"\"\"\n-import ast,copy,importlib.util,json,subprocess,sys,unittest\n+import ast,copy,importlib.util,json,os,re,subprocess,sys,unittest\n from pathlib import Path\n HERE=Path(__file__).resolve().parent\n sp=importlib.util.spec_from_file_location(\"_test_actual_h8_contract\",HERE/\"contract.py\")\n@@ -100,6 +100,31 @@\n   p=subprocess.run(args,capture_output=True,text=True)\n   self.assertNotEqual(p.returncode,0)\n   self.assertIn(\"exact aggregate MAIN execution command\",p.stderr)\n+ def test_real_oracle_import_empty_pythonpath_container_cwd(self):\n+  env=dict(os.environ,PYTHONPATH=\"\",PYTHONDONTWRITEBYTECODE=\"1\",QWEN36_KVBP_ENABLE=\"0\",QWEN36_KVBP_H8_ENABLE=\"0\")\n+  p=subprocess.run([sys.executable,\"-I\",\"-B\",str(HERE/\"source_import_probe.py\")],\n+   cwd=c.ROOT,env=env,capture_output=True,text=True,timeout=8)\n+  self.assertEqual(p.returncode,0,p.stderr);r=json.loads(p.stdout)\n+  self.assertEqual(r[\"PYTHONPATH\"],\"\");self.assertFalse(r[\"torch_imported\"]);self.assertFalse(r[\"torch_npu_imported\"])\n+  self.assertEqual(r[\"resolved_modules\"][\"kvbuffer_parallel.contract\"][\"sha256\"],\n+   \"db673ba157e951c7e93031a215a32d17e6a0def5fdc3a5c601030f867b8b7e38\")\n+ def test_wrong_plugin_path_real_import_rejected(self):\n+  env=dict(os.environ,PYTHONPATH=\"\",PYTHONDONTWRITEBYTECODE=\"1\")\n+  p=subprocess.run([sys.executable,\"-I\",\"-B\",str(HERE/\"source_import_probe.py\"),\"--wrong-plugin-path\"],\n+   cwd=c.ROOT,env=env,capture_output=True,text=True,timeout=8)\n+  self.assertEqual(p.returncode,0,p.stderr);r=json.loads(p.stdout)\n+  self.assertTrue(r[\"wrong_path_rejected\"]);self.assertFalse(r[\"torch_imported\"])\n+ def test_real48_global_layer_prefix_regex(self):\n+  source=(HERE/\"bindings.py\").read_text();tree=ast.parse(source)\n+  regexes=[n.args[0].value for n in ast.walk(tree) if isinstance(n,ast.Call) and\n+   isinstance(n.func,ast.Attribute) and n.func.attr==\"search\" and n.args and\n+   isinstance(n.args[0],ast.Constant) and isinstance(n.args[0].value,str)]\n+  pattern=next(v for v in regexes if \"layers\" in v)\n+  ids=[i for i in range(64) if i%4!=3]\n+  self.assertEqual(len(ids),48)\n+  parsed=[int(re.search(pattern,\"model.layers.%d.linear_attn\"%i).group(1)) for i in ids]\n+  self.assertEqual(parsed,ids)\n+  self.assertIsNone(re.search(pattern,\"model.layers.3linear_attn\"))\n  def test_syntax_all_saved_sources(self):\n   for p in HERE.rglob(\"*.py\"):ast.parse(p.read_text(),filename=str(p))\n if __name__==\"__main__\":unittest.main()\n\nEXACT_INHERITED transform.py\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 777,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 777,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 777
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 776,
+          "routeLookupMs": 0,
+          "totalMs": 776
+        }
+      },
+      "traceId": "83feb0e7-d53e-4d7a-b09e-7155127281b7"
+    },
+    "operationId": "exec-0000000000000e5d",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "main_command": {
+    "schema": "kvbp.h8-full-MAIN-command/v2",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "argv": [
+      "/usr/bin/prlimit",
+      "--as=268435456:unlimited",
+      "--cpu=5500",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/host.py",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-v2-20261007-001",
+      "--execute"
+    ],
+    "MAIN_only_dispatch": true,
+    "default_enabled": false,
+    "prep_npu_executed": false,
+    "source_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/SOURCE_MANIFEST.json",
+      "sha256": "0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d",
+      "bytes": 20653
+    },
+    "actual_software": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/software_receipt.json",
+      "sha256": "655e5aad56a56d98b0e019117a69533cadf208c3997716c40cf49d13ef81ebac",
+      "bytes": 5795
+    },
+    "actual_real_import": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-gate-v2/real_import_receipt.json",
+      "sha256": "dcb951084a795ccac79270718aceff86ed7305c7928b2158e2495142d01b5c59",
+      "bytes": 22389
+    },
+    "required_fresh_output_leaf": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-v2-20261007-001",
+    "resources": {
+      "guest_memory_bytes": 34359738368,
+      "host_and_cli_rss_bytes": 268435456,
+      "ordinary_reserve_bytes": 8589934592,
+      "total_ordinary_admission_GiB": 40.25,
+      "effective_cpu_minimum": 7,
+      "host_cpu": 1,
+      "guest_cpu": 4,
+      "reserve_cpu": 2,
+      "disk_output_GiB": 20,
+      "disk_reserve_GiB": 8,
+      "physical_devices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "lease_seconds": 5400,
+      "cleanup_seconds": 180,
+      "cutoff_utc": "2026-10-08T08:29:54Z"
+    },
+    "operator_steps": 10240,
+    "lifecycle_steps": 1280,
+    "total_steps": 11520,
+    "changes": [
+      "hash-bound actual canonical oracle imports",
+      "wrong dependency path rejection",
+      "layer-prefix regex only; actual48 model remains pending"
+    ],
+    "algorithm_changed": false,
+    "model_ready": false,
+    "e2e_ready": false,
+    "finaltasks2048_ready": false,
+    "MAIN_remaining_action": "Independent source/actual import review; fresh joint admission; execute this one aggregate entry; consume original terminal+result with consume.py."
+  },
+  "terminal_pending": true,
+  "full_numeric_pending": true,
+  "model_pending": true,
+  "e2e_pending": true,
+  "tasks2048_pending": true
+}

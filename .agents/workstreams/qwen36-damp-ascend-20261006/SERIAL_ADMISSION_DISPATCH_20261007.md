@@ -198,3 +198,28 @@ same tested H8 library and unchanged original matrix/limits/budgets/deadline.
 Sparse continues SparQ and true CPU-only ABI successor, lowbit W4 readiness;
 no preparer independently uses cards. Current idle reason is preparation repair.
 Protected outside HYPIC0–3 PID585850–53 is never reclaimed for this queue.
+
+## Latest admitted running stage — 2026-10-07 17:55Z
+
+MA0e6e H8 full v2 is RUNNING after MAIN source/import review and fresh joint
+admission. Four preregistered disjoint physical4–7 shards share one40.25GiB
+ordinary admission,7CPU capacity,20GiB output+8GiB disk reserve and one5400s
+lease including180s cleanup. Source manifest0dd9db4d..., native SO3f7cc32e...
+and full11520-step gates are unchanged. MA0e7f proves real matrix Python PIDs
+on each card and partial graph progress; it is not complete numerical PASS.
+Original launch/preflight diagnostic evidence is H8_FULL_V2_LAUNCH_20261007.json.
+
+MAIN-reviewed numerical-ready queued packet: default-OFF FlashInfer v5
+c8e99ac8...; actual68 software/default-OFF/12-source checks MA0e54 passed,
+CPU-only ABI and actual NPU matrix unrun. It is exact native partial-attention
+composition, not a proven FlashInfer scheduler/tiling/model benefit.
+SparQ v3 source delivery is awaiting MAIN full review; W4 dependency and H8
+real48-layer/mixed service bridge are still PREPARING. All actual model/perf/
+final-task acceptance remains pending. Keep three preparers running while
+MA0e6e owns the lane; no parallel paper device launch or unchanged v1 rerun.
+
+Next terminal action: consume original MA0e6e/RESULT and verify exact owned
+release, then prioritize the actual H8 model successor if complete and numeric
+PASS; otherwise admit the highest-value complete native gate. Do not wait for
+report prose and do not borrow partial B16/full running evidence as model ready.
+Protected0–3, OVS and memory32GiB boundary remain intact. Fixed clocks unchanged.

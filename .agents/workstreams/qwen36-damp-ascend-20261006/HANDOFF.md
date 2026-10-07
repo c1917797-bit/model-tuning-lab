@@ -1149,3 +1149,42 @@ only emptyFD/initializedFalse is proved, not physical no-device isolation.
 v4 dispatch paused for independent CPU-only then NPU-owned v5 preparation.
 MAIN continues actual readiness repair, not generic operator tuning/prose.
 Memory32GiB task complete, no extra release. Clocks and goals unchanged.
+
+## Latest admitted H8 full v2 — 2026-10-07 17:55Z
+
+H8 full v2 is now actually RUNNING as MA0e6e, not another CPU feasibility
+report or old-v1 retry. MAIN independently reviewed the source delta MA0e5d,
+actual clean-entry positive/wrong-path negative imports and109-source/library/
+build/Meta closure MA0e69. Manifest0dd9db4df1cd0140b7c55201379fdf275d69115f3f7c27216d08615d7ffaac5d;
+same frozen H8 native SO3f7cc32e... and unchanged original numerical gates.
+Exact launch input, actual ack, successful preflight and failed diagnostic
+MA0e65 are in H8_FULL_V2_LAUNCH_20261007.json. Poll MA0e6e, never restart it
+from an absent/stale operation handle or reuse its output leaf.
+
+Fresh MAIN MA0e7f at17:55Z found all four gate reports RUNNING, initial
+B16/15/14/13 graph trial1 underway, and actual native matrix Python PIDs
+982571/982588/982636/982673 on physical4/5/6/7, distinct from their canaries.
+This is partial progress, not completed11520 steps or numerical PASS.
+Output /cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-v2-20261007-001.
+On terminal preserve original operation/RESULT, independently consume all
+reports and exact4CID cleanup. Only then promote numerical/lifecycle evidence
+or dispatch a successor. Actual48-layer, mixed/chunk64, paired1024 E2E and
+final2048 LongBench-v2/GSM8K remain pending.
+
+MAIN integrated default-OFF FlashInfer native-state v5, sourcec8e99ac8...;
+independent MA0e54 actual68 stdlib tests/default-OFF/all12-source audit PASS.
+Read tools/flashinfer_native_state_gate_v5/MAIN_REVIEW.md within the portfolio.
+Its physically CPU-only ABI then distinct NPU6 two-CID stage is queued,
+not dispatched. Native attention composition is not a new scheduler/tiling
+benefit. SparQ v3 delivered but remains MAIN source-review pending.
+Three live rolling preparers continue H8 model bridge, SparQ/Quest actual
+service, and W4A16 dependency/model preparation. No concurrent cross-paper NPU.
+
+MA0e65 was MAIN's read-only diagnostic mistake: Docker inherited the Python
+soft256MiB AS cap and its Go runtime failed reservation. No algorithm child
+started in that diagnostic. Preserve exit1; changed Docker-only AS restoration
+passed MA0e69. Do not remove the parent RSS/cgroup budget or relabel it numerics.
+Protected0–3 HYPIC585850–53 unchanged; ordinary available RAM ~84GiB during
+MA0e7f, not an additional release. OVS and memory32GiB authority remain closed.
+Clocks unchanged. Git stage local only; known HTTPS credential-helper blocker
+is not resolved or bypassed. Goal active, no new accepted non-HYPIC technique.

@@ -1,0 +1,86 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "from pathlib import Path\nimport resource,os,json,subprocess,hashlib,sys\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2));resource.setrlimit(resource.RLIMIT_CPU,(15,15));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\np=Path(sys.argv[1]);d=sys.argv[2]\nmanifest=json.loads((p/'SOURCE_MANIFEST.json').read_bytes());assert hashlib.sha256((p/'SOURCE_MANIFEST.json').read_bytes()).hexdigest()==d\nfor n,s in manifest['files'].items():assert hashlib.sha256((p/n).read_bytes()).hexdigest()==s,n\ncommands=[]\nfor a in ([sys.executable,'-B',str(p/'test_software.py')],[sys.executable,'-B',str(p/'main.py')],[sys.executable,'-B',str(p/'main.py'),'--source-audit-only','--source-manifest',str(p/'SOURCE_MANIFEST.json'),'--source-manifest-sha256',d]):\n q=subprocess.run(a,cwd=p,capture_output=True,text=True,timeout=15);commands.append({'argv':a,'exit_code':q.returncode,'stdout':q.stdout,'stderr':q.stderr})\nprint(json.dumps({'source_identity_verified':True,'commands':commands,'npu_executed':False,'docker_executed':False,'numerical_ready':False}))\nassert all(x['exit_code']==0 for x in commands)",
+          "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5",
+          "c8e99ac8fab8198dc9c6b6a3dfa744348ac9e5bf75c92980eb0af8f5a3d55953"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1397,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000e54",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"source_identity_verified\": true, \"commands\": [{\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/test_software.py\"], \"exit_code\": 0, \"stdout\": \"\", \"stderr\": \"test_actual_cann_version_metadata_not_path_inference (__main__.HostClosureSoftwareTests) ... ok\\ntest_actual_launch_bytes_ref_expands_single_sha (__main__.HostClosureSoftwareTests) ... ok\\ntest_actual_wrong_cli_sha_rejected_before_device_evidence (__main__.HostClosureSoftwareTests) ... ok\\ntest_cleanup_cannot_extend_fixed_phase (__main__.HostClosureSoftwareTests) ... ok\\ntest_create_resource_args_no_rm_protected_device (__main__.HostClosureSoftwareTests) ... ok\\ntest_exact_four_devices_and_new_owner (__main__.HostClosureSoftwareTests) ... ok\\ntest_exact_host_cli_no_wrapper_substring (__main__.HostClosureSoftwareTests) ... ok\\ntest_frozen_h8_globals_unmodified (__main__.HostClosureSoftwareTests) ... ok\\ntest_full_inspect_identity_budget_mutations_rejected (__main__.HostClosureSoftwareTests) ... ok\\ntest_host_modes_remain_default_off_no_device_import (__main__.HostClosureSoftwareTests) ... ok\\ntest_loaded_mutation_cannot_expand_original_bytes (__main__.HostClosureSoftwareTests) ... ok\\ntest_noncanonical_bytes_cannot_promote (__main__.HostClosureSoftwareTests) ... ok\\ntest_placeholder_only_at_exact_flag (__main__.HostClosureSoftwareTests) ... ok\\ntest_protected_device_extra_or_changed_rejected (__main__.HostClosureSoftwareTests) ... ok\\ntest_pure_inspect_fixture_contract_only (__main__.HostClosureSoftwareTests) ... ok\\ntest_sha_ref_is_never_optional (__main__.HostClosureSoftwareTests) ... ok\\ntest_wrong_launch_digest_rejected_actual_file (__main__.HostClosureSoftwareTests) ... ok\\ntest_actual_launch_refs_required (__main__.SoftwareTests) ... ok\\ntest_all_empty_nan_identity (__main__.SoftwareTests) ... ok\\ntest_all_schedules_replay_full (__main__.SoftwareTests) ... ok\\ntest_composition_independent_direct (__main__.SoftwareTests) ... ok\\ntest_declared_metric_pass_not_sufficient (__main__.SoftwareTests) ... ok\\ntest_default_off_imports_no_torch_or_device (__main__.SoftwareTests) ... ok\\ntest_defined_infinite_lse_fail_closed (__main__.SoftwareTests) ... ok\\ntest_defined_nan_fail_closed (__main__.SoftwareTests) ... ok\\ntest_direct_empty (__main__.SoftwareTests) ... ok\\ntest_direct_scalar_known (__main__.SoftwareTests) ... ok\\ntest_empty_and_mixed_query_rows (__main__.SoftwareTests) ... ok\\ntest_explicit_reset_generation (__main__.SoftwareTests) ... ok\\ntest_explicit_source_ref_required (__main__.SoftwareTests) ... ok\\ntest_failed_running_timeout_cancel_never_promote (__main__.SoftwareTests) ... ok\\ntest_finite_metric (__main__.SoftwareTests) ... ok\\ntest_fixed_full_matrix (__main__.SoftwareTests) ... ok\\ntest_fixed_original_limits (__main__.SoftwareTests) ... ok\\ntest_gateway_route_cannot_promote (__main__.SoftwareTests) ... ok\\ntest_inactive_nan_infinite_output_ignored_before_product (__main__.SoftwareTests) ... ok\\ntest_large_lse_stable (__main__.SoftwareTests) ... ok\\ntest_marker_exact_payload (__main__.SoftwareTests) ... ok\\ntest_marker_missing_duplicate (__main__.SoftwareTests) ... ok\\ntest_old_launch_schema_cannot_borrow (__main__.SoftwareTests) ... ok\\ntest_original_terminal_exact (__main__.SoftwareTests) ... ok\\ntest_partial_matrix_cannot_promote (__main__.SoftwareTests) ... ok\\ntest_per_head_metric_not_mean_cancellation (__main__.SoftwareTests) ... ok\\ntest_scalar_metric_binds_thresholds (__main__.SoftwareTests) ... ok\\ntest_single_entry_modes_exclusive (__main__.SoftwareTests) ... ok\\ntest_wrong_peer_cannot_promote (__main__.SoftwareTests) ... ok\\ntest_zero_reference_exact (__main__.SoftwareTests) ... ok\\ntest_actual_saved_four_schemas_support_new_required_args_not_named_outputs (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_both_canary_and_matrix_schema_precheck_before_device_init (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_host_no_device_stage_precedes_actual_observed_canary (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_interface_checker_accepts_actual_tensor_list_form_unit_only (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_named_output_legacy_schema_rejected_unit_only (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_native_ast_uses_exact_output_list_and_no_legacy_kwargs (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_no_device_initialized_api_missing_true_rejects_unit_only (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_no_device_mode_is_exclusive_default_off (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_no_device_producer_contains_no_device_init_or_tensor_kernel (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_nonlist_out_rejected_unit_only (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_original_failed_cpu_report_is_not_numerical_pass (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_pending_v5_schema_is_not_v3_success (__main__.V5ActualAbiSoftwareTests) ... ok\\ntest_actual_node_inventory_required_not_only_initialized_flag (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_both_guests_share_original_deadline_without_reset (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_create_has_no_device_declarations_and_unique_phase_label (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_failure_cleanup_is_independently_retained_no_rm (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_inspect_any_physical_or_control_node_rejected (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_inspect_privileged_or_device_rules_rejected (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_phase_unknown_rejected (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_stop_retention_is_required_before_distinct_npu_creation (__main__.V5CPUIsolationSoftwareTests) ... ok\\ntest_cpu_wrong_phase_label_rejected (__main__.V5CPUIsolationSoftwareTests) ... ok\\n\\n----------------------------------------------------------------------\\nRan 68 tests in 0.971s\\n\\nOK\\n\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/main.py\"], \"exit_code\": 0, \"stdout\": \"{\\\"default_enabled\\\": false, \\\"npu_executed\\\": false, \\\"serving_ready\\\": false, \\\"actual_deployment_ABI_source_host_producer_and_numerics_pending\\\": true}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/main.py\", \"--source-audit-only\", \"--source-manifest\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/SOURCE_MANIFEST.json\", \"--source-manifest-sha256\", \"c8e99ac8fab8198dc9c6b6a3dfa744348ac9e5bf75c92980eb0af8f5a3d55953\"], \"exit_code\": 0, \"stdout\": \"{\\\"source_audit_passed\\\": true, \\\"source_manifest\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v5/SOURCE_MANIFEST.json\\\", \\\"sha256\\\": \\\"c8e99ac8fab8198dc9c6b6a3dfa744348ac9e5bf75c92980eb0af8f5a3d55953\\\"}, \\\"files\\\": {\\\"contract.py\\\": \\\"589e73a686ad716ba18aa4208dbcc3f5a709b33223c79a741589508351fdd3b1\\\", \\\"oracle.py\\\": \\\"b36eafaa346b308530f8747ca20be2b4b2e9879588f1cc5d5c0a414ccd7ef546\\\", \\\"native.py\\\": \\\"5f80e3a64aeecbe4a0251cda2b68a4e13a21043910da711415e5f2c3815c76a4\\\", \\\"numerics.py\\\": \\\"45f25e08aefb9572b5eb011aa4bc890a0c70dd25a702ff07c930b241a649b73b\\\", \\\"main.py\\\": \\\"2fc86921f15badb199019d0113b351d2c786b4bc58f9731a4e40cce9c8be434c\\\", \\\"consumer.py\\\": \\\"d158afdc6f6a575b2d7390a61400ee4310e7c685bb223df944847eb54d3da7f3\\\", \\\"test_software.py\\\": \\\"a0eccc09f3b6a1131f9aa7cc046dbfa057b1409e452ac165761941c749864b50\\\", \\\"host.py\\\": \\\"76f551bc151ef76aff477580ec128492dd27f8cd05eeed70eb56c88f3a603f58\\\", \\\"READY.md\\\": \\\"6d8305d55f148a5fae10740b93e7941822a1498d8c17564d0af41a88d7822e78\\\"}, \\\"npu_executed\\\": false, \\\"serving_ready\\\": false}\\n\", \"stderr\": \"\"}], \"npu_executed\": false, \"docker_executed\": false, \"numerical_ready\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 380,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 380,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 380
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 380,
+        "routeLookupMs": 0,
+        "totalMs": 380
+      }
+    },
+    "traceId": "9060237a-da3d-4a4d-ace4-08c0b24cc006"
+  },
+  "operationId": "exec-0000000000000e54",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}
