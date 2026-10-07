@@ -1,5 +1,25 @@
 # DAMP Ascend — current workstream
 
+## Current execution / source-review checkpoint — 2026-10-07 20:05Z
+
+Memory request completed:32GiB released, OVS intact, no additional release.
+KVBuffer warm MA0f29 is RUNNING, physical6 only, one2700s joint lease including
+cleanup. Original launch/admission records are H8_WARM_LAUNCH_20261007.json,
+H8_WARM_FRESH_ADMISSION_20261007.json and the retained original observer failure.
+Poll this handle; never duplicate it. Latest observed progress is B14 four
+cases/640steps plus33 B11 eager steps; B6/full11520/mixed/model/E2E/tasks pending.
+Warm raw metadata stores integer ND format. Old retained CPU reanalysis failed
+after partial parity due torch_npu Format enum deserialization, not proven
+oracle top-level import. Preserve its actual failed parent.
+
+SparQv5 is NOT admitted: MAIN caught real owner and CPU argv/proof mismatches
+before device creation. Read SPARQ_V5_PRE_CARD_REVIEW_20261007.md. Sparse owner
+builds a new independent successor; old packet/service frozen. Recurrent owner
+prioritizes full-runtime successor before48-layer service. Lowbit preparation
+continues under the shared2GiB lightweight budget. Different papers remain
+NPU-serialized. No new accepted non-HYPIC throughput/quality result.
+Known Git publication authentication blocker remains; local commits are not pushes.
+
 ## Actual parallel refill and RAM audit — 2026-10-07 12:50Z
 
 Read PRE_CARD_PORTFOLIO_QUEUE_20261007.md actual-redispatch section. Initially

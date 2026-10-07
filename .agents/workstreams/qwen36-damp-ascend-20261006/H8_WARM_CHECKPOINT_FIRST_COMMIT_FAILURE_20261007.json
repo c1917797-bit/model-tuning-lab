@@ -1,0 +1,84 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-warm-reviewed-checkpoint-commit-20261007-2007-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-0000000000000f3d\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 10000,\n  \"result\": {\n    \"execId\": \"exec-0000000000000f3d\",\n    \"lane\": \"process\",\n    \"ok\": false,\n    \"record\": {\n      \"args\": [\n        \"--as=268435456:unlimited\",\n        \"--cpu=15:15\",\n        \"--\",\n        \"/usr/bin/python3\",\n        \"-B\",\n        \"-c\",\n        \"import pathlib,subprocess,json; r=pathlib.Path(\\\"/opt/host/vnf/austinov/model-tuning-lab\\\"); g=['/usr/local/bin/git']; ps=[\\\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ_V5_PRE_CARD_REVIEW_20261007.md\\\",\\\".agents/skills/ascend-inference-tuning-loop/references/kvbuffer-numerical-diagnostics.md\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ADMISSION_OBSERVER_FAILURE_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_FRESH_ADMISSION_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_LAUNCH_20261007.json\\\"]; assert subprocess.check_output(g+['rev-parse','HEAD'],cwd=r,text=True).strip()=='61805bca1cf8c41f1bebe62ea08aeec4417d608f'; assert not subprocess.check_output(g+['diff','--cached','--name-only'],cwd=r,text=True).strip();\\nfor n in ps:\\n p=r/n\\n if p.suffix=='.json':\\n  x=json.loads(p.read_bytes())\\n  def scan(v):\\n   if isinstance(v,dict):\\n    assert not any(k.lower() in ['verify','authorization','password','token'] for k in v)\\n    for a in v.values(): scan(a)\\n   elif isinstance(v,list):\\n    for a in v: scan(a)\\n  scan(x)\\nsubprocess.run(g+['add','--',*ps],cwd=r,check=True); actual=subprocess.check_output(g+['diff','--cached','--name-only'],cwd=r,text=True).splitlines(); assert set(actual)==set(ps); subprocess.run(g+['diff','--cached','--check'],cwd=r,check=True); subprocess.run(g+['commit','-m','research: retain live H8 warm launch and reject pre-card SparQ proof gaps'],cwd=r,check=True); print(json.dumps({'HEAD':subprocess.check_output(g+['rev-parse','HEAD'],cwd=r,text=True).strip(),'status':subprocess.check_output(g+['status','--porcelain'],cwd=r,text=True),'push':'not attempted: unchanged known credential-helper blocker'}));\"\n      ],\n      \"cancelled\": false,\n      \"command\": \"/usr/bin/prlimit\",\n      \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n      \"durationMs\": 79,\n      \"error\": \"exit code\",\n      \"exitCode\": 1,\n      \"id\": \"exec-0000000000000f3d\",\n      \"lane\": \"process\",\n      \"state\": \"completed\",\n      \"stderr\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 13, in <module>\\n  File \\\"/usr/lib64/python3.9/subprocess.py\\\", line 528, in run\\n    raise CalledProcessError(retcode, process.args,\\nsubprocess.CalledProcessError: Command '['/usr/local/bin/git', 'diff', '--cached', '--check']' returned non-zero exit status 2.\\n\",\n      \"stdout\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ_V5_PRE_CARD_REVIEW_20261007.md:50: new blank line at EOF.\\n\",\n      \"timedOut\": false\n    },\n    \"running\": false,\n    \"state\": \"completed\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 500,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 500,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1434,\n      \"totalMs\": 1934\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 499,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 499\n    }\n  },\n  \"traceId\": \"650a0531-7ff9-4577-85e2-26b02f322189\"\n}"
+    }
+  ],
+  "structuredContent": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-warm-reviewed-checkpoint-commit-20261007-2007-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000f3d",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 10000,
+    "result": {
+      "execId": "exec-0000000000000f3d",
+      "lane": "process",
+      "ok": false,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=15:15",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import pathlib,subprocess,json; r=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\"); g=['/usr/local/bin/git']; ps=[\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ_V5_PRE_CARD_REVIEW_20261007.md\",\".agents/skills/ascend-inference-tuning-loop/references/kvbuffer-numerical-diagnostics.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ADMISSION_OBSERVER_FAILURE_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_FRESH_ADMISSION_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_LAUNCH_20261007.json\"]; assert subprocess.check_output(g+['rev-parse','HEAD'],cwd=r,text=True).strip()=='61805bca1cf8c41f1bebe62ea08aeec4417d608f'; assert not subprocess.check_output(g+['diff','--cached','--name-only'],cwd=r,text=True).strip();\nfor n in ps:\n p=r/n\n if p.suffix=='.json':\n  x=json.loads(p.read_bytes())\n  def scan(v):\n   if isinstance(v,dict):\n    assert not any(k.lower() in ['verify','authorization','password','token'] for k in v)\n    for a in v.values(): scan(a)\n   elif isinstance(v,list):\n    for a in v: scan(a)\n  scan(x)\nsubprocess.run(g+['add','--',*ps],cwd=r,check=True); actual=subprocess.check_output(g+['diff','--cached','--name-only'],cwd=r,text=True).splitlines(); assert set(actual)==set(ps); subprocess.run(g+['diff','--cached','--check'],cwd=r,check=True); subprocess.run(g+['commit','-m','research: retain live H8 warm launch and reject pre-card SparQ proof gaps'],cwd=r,check=True); print(json.dumps({'HEAD':subprocess.check_output(g+['rev-parse','HEAD'],cwd=r,text=True).strip(),'status':subprocess.check_output(g+['status','--porcelain'],cwd=r,text=True),'push':'not attempted: unchanged known credential-helper blocker'}));"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 79,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000f3d",
+        "lane": "process",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 13, in <module>\n  File \"/usr/lib64/python3.9/subprocess.py\", line 528, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/usr/local/bin/git', 'diff', '--cached', '--check']' returned non-zero exit status 2.\n",
+        "stdout": ".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ_V5_PRE_CARD_REVIEW_20261007.md:50: new blank line at EOF.\n",
+        "timedOut": false
+      },
+      "running": false,
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 500,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 500,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1434,
+        "totalMs": 1934
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 499,
+        "routeLookupMs": 0,
+        "totalMs": 499
+      }
+    },
+    "traceId": "650a0531-7ff9-4577-85e2-26b02f322189"
+  },
+  "isError": false
+}

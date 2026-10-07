@@ -1,0 +1,200 @@
+{
+  "exact_input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=268435456:unlimited",
+      "--cpu=2700:2700",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/host.py",
+      "--execute",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout": 2800,
+    "maxOutputBytes": 20000,
+    "sync": false,
+    "idempotencyKey": "main-h8-warm-prelude-b6-20261007-1952-001"
+  },
+  "original_ack": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-h8-warm-prelude-b6-20261007-1952-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000f29",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000000f29",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 349,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 349,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1476,
+        "totalMs": 1825
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 348,
+        "routeLookupMs": 0,
+        "totalMs": 348
+      }
+    },
+    "traceId": "b7e6c2a4-4635-461c-a33a-2fe6672199b9"
+  },
+  "packet_command": {
+    "schema": "kvbp.h8-warm-main-command/v1",
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=268435456:unlimited",
+      "--cpu=2700:2700",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/host.py",
+      "--execute",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout_seconds": 2800,
+    "max_output_bytes": 20000,
+    "source_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/SOURCE_MANIFEST.json",
+      "sha256": "687fa2c5778792e32eb42e09a46f229e4d51b2222508e66b7a4eb6d52c9cb45c"
+    },
+    "software_receipt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/software_receipt.json",
+      "sha256": "75241177131a44e0beecf796957e79dbd69c8bd8f991bad558d33919e90d1c94"
+    },
+    "source_read_receipt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/source_read_receipt.json",
+      "sha256": "3f6d2b3a34e15690a210f9427d8eedcab32ebf124a36b08a30ba110273d1a329"
+    },
+    "physical_devices": [
+      6
+    ],
+    "ordinary_floor_bytes": 17448304640,
+    "effective_CPU": 4,
+    "guest_memory_bytes": 8589934592,
+    "host_and_live_CLI_rss_bytes": 268435456,
+    "ordinary_reserve_bytes": 8589934592,
+    "output_disk_bytes": 5368709120,
+    "disk_reserve_bytes": 8589934592,
+    "lease_seconds": 2700,
+    "cleanup_seconds": 180,
+    "cutoff": "2026-10-08T08:29:54Z",
+    "estimated_wall_seconds": [
+      1200,
+      2400
+    ],
+    "estimate_is_not_measured": true,
+    "executed_by_preparer": false,
+    "source_count": 144,
+    "minimal_prior_physical6_cases": 1280,
+    "B6_target_steps": 1,
+    "no_retry": true,
+    "ownership": "One MAIN owner, new exact CID, native+H8 segmented fences in same warm process; canary separate process; only STOP+RETAIN own CID, never rm/foreign/protected0–3 actions.",
+    "scope": "Distinct diagnostic not old full matrix retry; no 4device historical contention, original unfenced overlap or hardware cause proof",
+    "consumer": {
+      "command": "/usr/bin/python3",
+      "args_template": [
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1/consume.py",
+        "--result",
+        "<exact-result-path>",
+        "--result-sha256",
+        "<actual-SHA>",
+        "--original-operation",
+        "<whole-original-operation-envelope-path>",
+        "--original-operation-sha256",
+        "<actual-whole-envelope-SHA>"
+      ]
+    },
+    "remaining_MAIN": "independent exact source/actual software review -> fresh physical6/protected0–3/noFD/ordinaryCPUdisk admission -> one new lease/execute -> persist whole original operation -> independent consumer",
+    "not_ready": [
+      "full11520",
+      "native_copy_lifecycle",
+      "mixed64",
+      "48-layer",
+      "paired1024",
+      "finaltasks2048"
+    ]
+  },
+  "admission_stdout_truncated": true,
+  "no_numeric_success_claim": true,
+  "unrun_acceptance": [
+    "full11520",
+    "lifecycle",
+    "mixed64",
+    "48-layer",
+    "paired1024",
+    "finaltasks2048"
+  ]
+}

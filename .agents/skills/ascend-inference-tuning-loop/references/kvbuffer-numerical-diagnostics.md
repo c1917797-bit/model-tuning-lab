@@ -119,3 +119,13 @@ dense performance, and final task tests under the unchanged experiment contract.
   unioning incompatible overloads. Same-image CPU software/source checks do not
   replace the actual CPU ABI or later NPU numerical/model/performance gates.
   See SPARQ_V4_CPU_ABI_FAILURE_20261007.md.
+
+- Byte-exact reuse of a historical proof module does not prove compatibility
+  with a renamed successor controller. Before reserving cards, pass the actual
+  host-generated owner/inspect and complete CPU child argv through the real
+  cross-module validator. SparQ v5-002 retained a v4 owner predicate and omitted
+  the new host-output-root argv despite69 stdlib tests. MAIN caught both before
+  device admission. Correct the new source-bound protocol in an independent
+  successor; do not union old/new identities or call this an algorithm failure.
+  See SPARQ_V5_PRE_CARD_REVIEW_20261007.md. Fixture tests and immutable hashes
+  remain useful, but neither establishes deployed cross-stage closure.

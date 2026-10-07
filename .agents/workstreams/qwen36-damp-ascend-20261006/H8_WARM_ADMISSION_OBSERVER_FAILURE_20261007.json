@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=90:90",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import importlib.util,json,os,subprocess,sys,shutil\nfrom pathlib import Path\nb=Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-warm-prelude-b6-v1\");root=Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\nassert root.resolve()==root\nsp=importlib.util.spec_from_file_location(\"main_warm_review\",b/\"host.py\");h=importlib.util.module_from_spec(sp);sp.loader.exec_module(h)\ncommand=json.loads((b/\"MAIN_EXECUTE.json\").read_text())\nargs=command[\"args\"];cli=args[args.index(\"--\")+4:];a=h.parser().parse_args(cli)\nassert a.execute and not a.output_dir.exists(),\"one fresh exact new output\"\nsr,m,s,ar,check=h.source_inputs(a);assert len(s)==144\nsm=json.loads((b/\"software_receipt.json\").read_text());assert sm[\"exit_code\"]==0 and \"Ran 16 tests\" in sm[\"stderr\"] and \"torch_imported\" in sm and sm[\"torch_imported\"] is False\ndef run(argv,cap=20):\n if argv[0]==\"/usr/bin/docker\":argv=[\"/usr/bin/prlimit\",\"--as=unlimited\",\"--\",*argv]\n p=subprocess.run(argv,cwd=str(root),text=True,capture_output=True,timeout=cap);assert p.returncode==0,(argv,p.stderr);return p.stdout\nbranch=run([\"/usr/local/bin/git\",\"branch\",\"--show-current\"]).strip();head=run([\"/usr/local/bin/git\",\"rev-parse\",\"HEAD\"]).strip()\nassert branch==\"work/qwen36-damp-ascend-20261006\" and head==\"61805bca1cf8c41f1bebe62ea08aeec4417d608f\"\nsmi=run([h.SMI,\"info\"]);protected=h.F.protected(smi)\nfor card in (4,5,6,7):h.F.idle_one(smi,card)\nholders=h.fd_holders((6,));assert holders==[]\nhostcpu=h.h.cpu_view(os.getpid());daemon=h.h.daemon_view();cpu=h.cpu_plan(hostcpu,daemon)\nmem={l.split(\":\")[0]:int(l.split()[1])*1024 for l in Path(\"/proc/meminfo\").read_text().splitlines() if l.startswith((\"MemAvailable:\",\"SwapFree:\",\"SwapTotal:\"))}\nassert mem[\"MemAvailable\"]>=h.MEM+h.HOST_MEM+h.RESERVE and mem[\"SwapFree\"]==mem[\"SwapTotal\"]\nfree=shutil.disk_usage(a.output_dir.parent).free;assert free>=h.WORKSPACE+h.RESERVE\nassert all(Path(p).exists() for p in h.device_map(6))\nengine=json.loads(run([h.DOCKER,\"info\",\"--format\",\"{{json .}}\"]));assert engine[\"NCPU\"]>=4\nimage=json.loads(run([h.DOCKER,\"image\",\"inspect\",h.IMAGE]));assert len(image)==1 and image[0][\"Id\"]==h.IMAGE\nlisteners=run([\"/usr/sbin/ss\",\"-lntp\"]);containers=run([h.DOCKER,\"ps\",\"--no-trunc\"])\nprint(json.dumps({\"source_ref\":sr,\"source_count\":len(s),\"source_and_artifact_admission\":check,\"software_receipt\":sm,\"fresh_output\":str(a.output_dir),\"CPU\":cpu,\"memory\":mem,\"disk_free_bytes\":free,\"physical6_fd_holders\":holders,\"protected0_3\":protected,\"smi\":smi,\"containers\":containers,\"listeners\":listeners,\"git_status\":run([\"/usr/local/bin/git\",\"status\",\"--short\",\"--branch\"]),\"worktrees\":run([\"/usr/local/bin/git\",\"worktree\",\"list\",\"--porcelain\"]),\"HEAD\":head,\"branch\":branch,\"native_executed\":False,\"read_only_admission\":True},allow_nan=False))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 727,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000f23",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\nKeyError: 'exit_code'\n",
+        "stdout": "",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 349,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 349,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 349
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 348,
+        "routeLookupMs": 0,
+        "totalMs": 348
+      }
+    },
+    "traceId": "5b4f0002-8377-4c70-8376-9cabf7ea53e5"
+  },
+  "operationId": "exec-0000000000000f23",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}
