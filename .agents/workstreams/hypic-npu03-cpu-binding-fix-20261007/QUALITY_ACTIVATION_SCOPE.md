@@ -78,3 +78,14 @@ protocol would need to be declared and run separately, with its own paired
 denominator, exact input/output identity, NPU0-3 ownership, isolation and
 release evidence. Never pool it into clean2 or relabel clean2 as hot-path
 quality validation.
+
+Before the final two treatment units finish, a separate reproducibility path
+was added as `audit_binding_off_quality_natural_scope.py`. Run the **original**
+`audit_binding_off_quality.py` first, unchanged. Its strict service check is
+expected to reject absent worker-hot coverage before it can emit scores.
+Only then run the scoped script with `HYPIC_QUALITY_ATTEMPT=clean2`: it invokes
+the original preflight, frozen scorer, 12 per-unit row/hash auditors and
+service-release/guard checks, catches only the explicit final activation
+failure, and writes a separate `quality-natural-scope-audit.json` outside Git.
+Its `formal_acceptance_claim` is always false. This preserves verifiable
+natural-task deltas without changing the originally declared hot-path gate.
