@@ -64,6 +64,28 @@ system pool changes, outside workload termination or a relaxed acceptance gate.
   a graph-only hypothesis at that point; use an independently anchored native
   observation to distinguish history/state drift from readout-order effects.
 
+- Evidence from a native incoming-state intervention can justify a new bounded
+  materialization-horizon experiment instead of a readout bias or tolerance
+  increase. H8 retained storage16 and native current-step order; its B16
+  eager+three graph trials passed640 steps under the original limits. This
+  verifies only that candidate/geometry; full batches, cache lifecycle, model
+  integration and paired task/performance gates remain separate. See the
+  workstream H8_MATERIALIZATION_ATTEMPT_20261007.md and MA0db7/0dd3.
+- A materialization-boundary consumer must derive flush replay from the actual
+  horizon, not storage capacity: length7 for H8 versus15 for H16. A source-only
+  observer error should be repaired in a new frozen observer without rewriting
+  old results or spending a device run on a known incompatible predicate.
+- Compare original protected identities, not mutable RSS/HBM. Here a true new
+  physical1 foreign Python process caused the first H8 canary abort, while the
+  four original workers remained unchanged. Re-admit only after an independently
+  observed external-state change; do not relax the watcher or stop outside jobs.
+- For a claimed CPU-FP64 oracle on a device without native double support, move
+  tensors to CPU before converting and verify the actual dtype/backend. A
+  double-before-CPU expression plus a device cast warning is an oracle-boundary
+  concern, not evidence of FP64 arithmetic. DeltaLog v6's B1 step69 state failure
+  needs attribution; the warning alone does not prove its cause. Retain first
+  raw pre/post state and inputs so a numerical failure is not only a summary row.
+
 None of these lessons establishes an end-to-end speedup. Once the relevant
 NPU gates pass, continue the actual lifecycle/mixed/capture integration, paired
 dense performance, and final task tests under the unchanged experiment contract.

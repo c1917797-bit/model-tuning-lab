@@ -1,0 +1,84 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "import pathlib,json,hashlib,sys,subprocess\nbase=pathlib.Path('/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4');sys.path.insert(0,str(base));import contract as c\nroot=pathlib.Path('/cache/cch/qwen36-kvbuffer-parallel-20261006/h8-b16-20261007-after-external-exit-v2')\ndef read(n,expected=None):\n p=root/n;b=p.read_bytes();h=hashlib.sha256(b).hexdigest()\n if expected:assert h==expected,(n,'hash changed')\n return json.loads(b),h\nr,rsha=read('RESULT.json','cdf279bbe540261b132a8289c81ab0810e85d804cc9a99cf7188c0bff9dd9808');report,h=read('gate/report.json','4abc87d561d2aabf41c5acec6af4948c6b860b64da6fcfd838dab379378d374d')\nassert r['status']=='kernel_numerics_checked' and r['primary_error'] is None and r['secondary_errors']==[]\nassert r['MAIN_original_operation_authority_verified'] is False\nm,s=c.source_admission(r['source_manifest']);assert len(s)==84 and r['sources_before']==s==r['sources_after']==report['sources_before']==report['sources_after']\nassert r['actual_report']=={'path':str(root/'gate/report.json'),'sha256':h}\nchecked=c.validate_cases(report,16);assert checked==r['report_completeness']\nc.artifacts(r['artifact_refs'],m)\nidentity,isha=read('identity.json');assert identity==report['launch_identity'] and isha==report['launch_identity_sha256']\nc.validate_identity(identity,16,6,r['source_manifest'],m,s,r['artifact_refs'],now=__import__('datetime').datetime.fromisoformat(identity['preflight_utc']))\nassert report['script_sha256']==s[str(base/'run.py')]\nassert report['loaded_libraries'][r['artifact_refs']['library']['path']]==r['artifact_refs']['library']['sha256']\nassert report['loaded_libraries']['/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so']=='eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a'\ncleanup,csha=read('cleanup.json','cc4ad1840163ff691b73917186e4a7134f38ee1bf7a5cb1ee3b1e809f0624221');assert cleanup['stopped'] and cleanup['retained'] and not cleanup['deleted'] and cleanup['errors']==[]\nproofs=r['numerical_process_proofs'];assert proofs\nassert all(p['physical']==6 and p['chip']==0 and p['stage']=='matrix' and r['exact_container'] in p['cgroup'] for p in proofs)\nchild,chsha=read('matrix-child.json','44f4ebc3a23270d083b90929a0b0298ac818c5090070e3da7d3acbcaa8a15f70');assert child['exit_code']==0 and child['primary_error'] is None\nassert all(p['argv'][0:2]==['/usr/local/python3.12.13/bin/python3','-B'] and p['argv'][2]==str(base/'run.py') for p in proofs)\nfor p in proofs:\n c.read_ref(p['smi']);c.read_ref(p['raw_observation']);c.read_ref(p['complete_observation'])\ncmd=['/usr/bin/docker','inspect',r['exact_container']];d=subprocess.run(cmd,capture_output=True,text=True,timeout=30);assert d.returncode==0,d.stderr\nx=json.loads(d.stdout)[0];assert x['Id']==r['exact_container'] and x['Image']==c.IMAGE and not x['State']['Running'] and x['State']['Pid']==0 and not x.get('ExecIDs') and not x['State']['OOMKilled']\nexpected={'/dev/davinci6':'/dev/davinci0','/dev/davinci_manager':'/dev/davinci_manager','/dev/devmm_svm':'/dev/devmm_svm','/dev/hisi_hdc':'/dev/hisi_hdc'}\nassert {z['PathOnHost']:z['PathInContainer'] for z in x['HostConfig']['Devices']}==expected\nassert x['HostConfig']['Privileged'] is False and x['HostConfig']['Memory']==8*1024**3\nsmi=subprocess.run(['/usr/local/sbin/npu-smi','info'],capture_output=True,text=True,timeout=30);assert smi.returncode==0\nhh=__import__('importlib.util').util.spec_from_file_location('h8_independent_controller',str(base/'host_run.py'));host=__import__('importlib.util').util.module_from_spec(hh);hh.loader.exec_module(host)\nassert host.protected_map(host.frozen().protected(smi.stdout))==r['protected0_3']\nfor n in (4,5,6,7):host.frozen().idle_one(smi.stdout,n)\nmem=int(next(l.split()[1] for l in pathlib.Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:')))*1024\nprint(json.dumps({'status':'independent-current-source-child-proof-numerical-cleanup-consumed','original_AWMCP_operation_joined_by_MAIN_separately':'exec-0000000000000db7','result_sha256':rsha,'report_sha256':h,'cleanup_sha256':csha,'matrix_child_sha256':chsha,'source_count':len(s),'complete_steps':640,'proof_count':len(proofs),'actual_numeric_pid_start':list({(p['pid'],p['start_ticks']) for p in proofs}),'stopped_retained_CID':x['Id'],'physical4_7_idle':True,'protected0_3_unchanged':True,'ordinary_mem_available_GiB':mem/1024**3,'max_output_error':max(z['max_output_error'] for z in report['cases']),'max_state_l2':max(z['max_state_l2'] for z in report['cases']),'max_head_l2':max(z['max_head_l2'] for z in report['cases']),'other_batches':False,'serving_ready':False,'e2e':False,'task_accuracy':False}))"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1495,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000dd3",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"independent-current-source-child-proof-numerical-cleanup-consumed\", \"original_AWMCP_operation_joined_by_MAIN_separately\": \"exec-0000000000000db7\", \"result_sha256\": \"cdf279bbe540261b132a8289c81ab0810e85d804cc9a99cf7188c0bff9dd9808\", \"report_sha256\": \"4abc87d561d2aabf41c5acec6af4948c6b860b64da6fcfd838dab379378d374d\", \"cleanup_sha256\": \"cc4ad1840163ff691b73917186e4a7134f38ee1bf7a5cb1ee3b1e809f0624221\", \"matrix_child_sha256\": \"44f4ebc3a23270d083b90929a0b0298ac818c5090070e3da7d3acbcaa8a15f70\", \"source_count\": 84, \"complete_steps\": 640, \"proof_count\": 197, \"actual_numeric_pid_start\": [[138761, 31575074]], \"stopped_retained_CID\": \"fcc6335f2aa216f6e07663798f1c33b29514505e62fcba0f592193f806d15107\", \"physical4_7_idle\": true, \"protected0_3_unchanged\": true, \"ordinary_mem_available_GiB\": 90.13729476928711, \"max_output_error\": 0.0029411764705882353, \"max_state_l2\": 1.2599801348389918e-07, \"max_head_l2\": 2.5892022770307797e-07, \"other_batches\": false, \"serving_ready\": false, \"e2e\": false, \"task_accuracy\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 413,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 413,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 413
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 412,
+        "routeLookupMs": 0,
+        "totalMs": 412
+      }
+    },
+    "traceId": "e7a00150-74f7-4e5c-a6a5-e08ae2d038aa"
+  },
+  "operationId": "exec-0000000000000dd3",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

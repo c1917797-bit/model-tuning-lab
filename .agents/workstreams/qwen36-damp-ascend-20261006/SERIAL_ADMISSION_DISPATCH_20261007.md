@@ -94,6 +94,16 @@ horizon candidate motivated by the actual native incoming-state intervention.
 Its source/build/NPU results remain pending, and the original numerical gates
 and fixed deadline are unchanged.
 
+At ~14:41Z sparse_attention_ready_queue reported two explicit auto-review
+denials of the new AdaKV source payload transmission/software-check request,
+including after destination verification. The new seam is an in-memory draft,
+not persisted and has no actual software receipt or admissible source SHA.
+Do not retry the denied request, switch routes or have MAIN relay it to bypass
+review. Ask the human for destination-specific authorization before that
+transmission; preserve prior eight delivered packets. The other two preparers
+continue unaffected. This is an authority blocker for that preparation action,
+not an algorithm failure, external NPU occupancy or reason to stop the queue.
+
 Native-copy diagnostic v1 MA0c20 really dispatched its algorithm child on
 physical6 (PID2920937, start30736925, exact CID b043d1ba...); this is distinct
 from its canary PID2910970. It exited1 after actual native/trace execution
@@ -133,3 +143,46 @@ Original candidate B16 step37 gate remains FAIL; no E2E or final task result.
 Next MAIN action is targeted reconstruction/lifetime numerical adaptation;
 successors continue their real preparation. MA0c58 showed physical4-7 idle
 after owned release; protected0-3 now has external VLLM workers, not ours.
+
+## Latest dispatch reconciliation — 2026-10-07 16:43Z
+
+Earlier queue counts and owner priorities above are historical checkpoints.
+H8 MA0db7 actual B16/640-step eager+graph PASS was independently consumed
+MA0dd3 including current84 sources, exact algorithm PID and owned release.
+It is numerical-single-batch only; see H8_MATERIALIZATION_ATTEMPT_20261007.md.
+H8 full B1..16/model integration preparation is now recurrent owner's priority.
+
+MAIN promptly admitted frozen DeltaLog v6 after H8 owned release: MA0dd7,
+root /cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-deltalog-v6-numeric-20261007-1638-001,
+source digest863e4496cd7e63edcdee5f76ce56fd7fb124acf8efba9de3a849fb74e3a95249,
+physical4-only numeric,8GiB+host256MiB+reserve8GiB, stop-after-numerics.
+Actual original exit1/112.354s. Native no-device load/Meta and actual same-image
+CLI help passed; this was not an import, memory, help-timeout or external-card
+blocker. True native recurrence executed: B1 eager append-merge160 passed,
+then B1 eager slot-reorder step69 failed state L2=0.27304594114441105 versus
+7.92e-7; output max0.0007668711656441718, all recorded guards true. Remaining
+158 cases were not run and no complete numerical/model/performance claim exists.
+
+Actual numeric report SHA42d516ffd34676e0155d9f1384b4ff5f05bf83e292a9b89a40f803c593bf59da;
+verdict032810d3164ab4c1ea93aa0739d3190aec133acfe27458c5e6584cc925a026d3;
+logs2acbeccb0ebb8c630ad25dd0b1ad613fe80897d9d16bce70b36a0578294cee11;
+cleanup2dd23fce733fd7402fcf68eb5931a4922ccad628165089fa0ac5ea83899cf1f5.
+MAIN raw consumer MA0de1 exit0 found exact own CID
+065c3a4422459770945ec9fc8e6068e9edbb7a6fd6a110ad85248df34b0902f0
+stopped/retained/Pid0/noExec/noOOM, no unresolved active CID,4–7 idle. No retry.
+
+B1 append versus B1 slot-reorder has nominally identical schedules, and actual
+logs warn NPU double is cast to float. Current source casts double before CPU
+transfer, so its claimed independent CPU-FP64 boundary needs checking; this is
+a diagnosis lead, not a proven cause or permission to relabel the fail. First
+failure row is retained, but full pre/post tensors are missing: a future
+instrumented successor must close that reproducibility gap before retry.
+
+Three preparers continue: recurrent H8 complete matrix/bridge; sparse delivered
+FlashInfer v3 full host/consumer software packet (47 tests, no NPU) and rolls
+SparQ; lowbit delivered KIVI readout-address and SKVQ global-TP exporter software
+components and rolls QQQ. No new successor is model-ready/accepted. MAIN must
+review a complete next entry or diagnose a source-supported adaptation, not
+claim continuous utilization while the current lane is idle. Neither paper
+clock nor fixed portfolio cutoff reset. Ordinary RAM admission is repaired by
+completed user-authorized32GiB release; no additional reclaim is authorized.

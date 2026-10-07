@@ -1081,3 +1081,33 @@ Portfolio cutoff2026-10-09T11:17:31Z and DAMP individual cutoff
 2026-10-07T08:48:03Z are unchanged. Zero new non-HYPIC techniques have final
 performance plus LongBench-v2/GSM8K acceptance. Compilation/sample/shadow or
 same-eager screening success must not become the required usable conclusion.
+
+## Latest MAIN continuation — 2026-10-07 16:43Z
+
+This supersedes the older live-DAMP/collector status above: DAMP closed at its
+original cutoff with scoped37/64 evidence, no further DAMP device dispatch.
+Current branch remains work/qwen36-damp-ascend-20261006; canonical workdir is
+/opt/host/vnf/austinov/model-tuning-lab on chicaihong01/ma, physical4–7 only.
+Read SERIAL_ADMISSION_DISPATCH_20261007.md and H8_MATERIALIZATION_ATTEMPT_20261007.md
+before resuming; they bind actual operations, raw hashes and current owners.
+
+Completed authorized memory task: exactly32GiB released, OVS and full NUMA3
+capacity retained, ordinary available RAM restored near90GiB; MA0d8d/0d8f.
+Memory checkpoint commit1a8f640257063f1e993b9216711321b0fa73bf1d was local,
+not pushed; HTTPS credential-helper blocker unchanged. Authority spent; no
+more hugepage release. No protected0–3/foreign service/container deletion.
+
+H8 B16 eager1+graph3/640 steps actual MA0db7 exit0, independent MA0dd3 accepted;
+original H16 and H8 v1 external-event abort preserved. Only B16 numerical
+correctness verified, not a successful deployable technique/performance/task.
+DeltaLog v6 complete entry MA0dd7 actually failed B1 eager slot-reorder step69
+state0.27304594; first append160 passed, no full matrix. Owned exact CID is
+released and retained; MAIN raw consumer MA0de1 observed4–7 idle. No NPU task
+is running at that observation; do not say cards are externally busy.
+
+Next: MAIN source-review/diagnose the first failed DeltaLog evidence or admit a
+fully reviewed next native packet; recurrent owner prepares H8 full batches
+and model bridge, sparse owner FlashInfer v3 then SparQ, lowbit owner KIVI/SKVQ
+handoff then QQQ. All default-OFF. New native/model/matched fixed1024/final2048
+results are pending; HYPIC stays historical exemplar. KVBuffer Oct8 08:29:54Z
+and portfolio Oct9 11:17:31Z cutoffs unchanged. Goal active, not complete.
