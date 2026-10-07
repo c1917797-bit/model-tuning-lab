@@ -4,12 +4,13 @@ Proposed publication location: `projects/kvbuffer-parallel-ascend/tools/middle_b
 Do not add files under middle_batch_gate_v1: its reviewed runtime identity is exactly run.py SHA16ed62857871e4576694802bd45afb2a3ec70d726f90f2687860689b92ef3a10.
 
 No actual formal start, MAIN input receipt, container, device proof or NPU result is issued by this preparation.
-Original 49 sources, candidate SO, old receipts and the live MA070e sources remain frozen.
+Original 49 sources, candidate SO, old receipts and the now-failed/stopped MA070e sources remain frozen.
 
 ## Reviewed program and real prerequisites
 
-Latest exact in-memory program is MA0775 original record.args[3], SHA12b63553f190b5eefe8f0205a21d23f765929091b09fa551dc8a03ee376552a4 (339 lines/29782 bytes).
-Original d45d/MA0768 and 3139/MA076d drafts, README/MA0770, and actual software failures MA0764/0767 remain unchanged. Latest MA0775 is 170 stdlib contract checks, not runtime/NPU permission.
+Published prior program remains SHA12b63553f190b5eefe8f0205a21d23f765929091b09fa551dc8a03ee376552a4 (339 lines/29782 bytes), unchanged.
+NEW proposed program is MA0832 original record.args[4] (also MA0847 record.args[3]), SHA9c2ea05ff8e7910d84fc0ebb7e3d409118c30bf45d1971b00f11acb7ad641923 (363 lines/31404 bytes). Only shared release source closure and explicit host-job cleanup admission differ; every other original function, including Meta14/resource/clock/main/cleanup, remains byte-exact.
+Original d45d/MA0768 and 3139/MA076d drafts, README/MA0770, published MA0775 (170 stdlib checks), and actual software failures MA0764/0767 remain unchanged. MA0844 software-negative harness omitted the real frozen host inspector's RuntimeError from its expected rejection catch; its exit1 is retained. MA0847 fixes only that software catch and actually passes57 read-only stdlib consumer checks. The test imports the exact shared source from the reviewed external patch into private software modules and uses immutable historical inspect receipts, not new Docker observations. Its fresh /proc exact original-CID exec scan is real. It proves neither helper publication/import from the future repository path nor future fresh stopped/resource/NPU permission. Earlier /api/cmd timeout errors remain retained; retry with the explicit same idempotency key recovered the original MA0847 exit0, not a fabricated terminal.
 
 MA075b actual same-image consumer/middle source preparation and MA0762 actual no-device 14-positive Meta are prerequisites, not numerical PASS.
 Meta14 report:
@@ -18,8 +19,13 @@ Meta14 report:
 Its schema field is the actual Torch decode schema (not a kvbp label), status actual_14_positive_Meta_pass, meta T2..15, source49 before/after equal, mapped SO0e7c64…, npu/graph/physical-ND/service false. MAIN must retain its actual original terminal and inspected no-device lease. The new program also requires an explicit middle_meta14 Ref from MAIN and uses the original c.read_ref byte/SHA guard to actually read this report before creating output or invoking Docker. It checks all14 ordered T/slots/shape/BF16 rows and the producer's whole-matrix output_alias_checks field (not invented per-row fields), both exact49 source maps, actual canonical candidate loaded SO/build digests, original Torch decode/prepare schemas, real image versions, ordered completion, original scope/false flags and unimplemented-negative limitation. This is not device authority. The checked Ref is recorded in PROGRAM.json, per-worker identity evidence and CHILD.json. Default OFF and --source-audit do not consume/authorize it.
 Worker deliberately keeps the old immutable Meta receipt (SHA2765f4…) for its unchanged schema binding; do not overwrite/relabel it.
 
-Actual MA070e original terminal + source-bound release inputs MUST exist before launch. Completed nonzero is release-only, never numerical PASS; running/cancelled/timed-out is refused.
-The four original owned containers must already have actual Running=false/Pid0. No old/unrelated container is stopped.
+The MA070e RPC original terminal has aged/not_found; this must not be reconstructed or accepted as a terminal.
+NEW route requires explicit MAIN release_authority_kind=host_job_cleanup_observed, not automatic fallback after a failed RPC lookup.
+It reuses the exact calibration v2_release.py helper SHAe60e399cc2710796d8e9c2b6c418bbf2063ba05f9a93e1b87d4a47e55844fb0b, v2_contract.py SHA666b0e8956cb371b8c03bcba8fa51dd4d4eec207108366e06590fe7a763e3815 and original diag_contract.py SHAb1d6096bb5852a8de3c500e0519c1f95e78e6ea078e279c3f1c5a49929860c11.
+Reviewed calibration patch /cache/cch/qwen36-damp-20261006/fixed-admission-c1-v2-reviewed-draft-20261007.patch SHA6705b0b89ea0920abb5f0433d77472fb195d95f03d9988bc7f50d53aa5337906 preserves the exact proposed shared source bytes. MAIN must publish/review these real files before the NEW launcher source audit/import can succeed; this preparation never invents that publication.
+The helper checks all15 actual original host-job Ref bytes, original launch argv/source closure and output hashes, failure original_error single bounded phase timeout/no automatic retry, four actual docker-exec exit-15 receipts, exact stop commands and original stopped inspect outputs. This is host-job cleanup authority only: operation_id_context_only=070e, awmcp_terminal_reconstructed=false and numerical_pass_claimed=false.
+Then original host.inspect_proof still validates fresh actual Docker inspect against each full frozen CPU/RAM/security/mount/argv lease. Shared stopped() additionally validates all four exact proof identities/mapping/Running=false/Pid0, and /proc exact-CID exec scans occur before and after those inspections. Historical POST_RELEASE is never treated as new NPU idle telemetry; the unchanged resource/canary/actual-PID gates still run freshly before any numerical release.
+The four original owned containers must already be actually stopped/Pid0. No old/unrelated container is stopped, and no historical host-client PID is invented.
 Producer source paths:
  independent_allT_dispatch_v1/controller.py:196–217 writes root/admission.json;
  :220 writes launch/EXECUTION_PLAN.json;
@@ -33,8 +39,12 @@ MAIN supplies one immutable, hash-bound JSON with:
  main_approved=true, run_slug, main_program_sha256;
  formal_start_utc, deadline_utc;
  phase_seconds keys "4","5","6","7" (each preregistered 1800..10800);
- release_terminal, release_plan, release_admission, release_stops (each exact {path,sha256});
- release_expected={command,args,cwd} from the original MA070e execution;
+ release_authority_kind="host_job_cleanup_observed";
+ release_helper_sources=the exact three path/SHA pins above;
+ release_host_job_refs=ordered15 actual original launch file Refs pinned by shared HOST_REFS;
+ release_device_proofs=ordered4 original physical4..7 device-proof Refs pinned by shared SHAS;
+ release_plan, release_admission, release_stops (each exact {path,sha256}, pinned by PLAN_SHA/ADMISSION_SHA/HOST_REFS);
+ no release_terminal/release_expected/RPC success is issued or substituted;
  middle_meta14={path:"/cache/cch/qwen36-kvbuffer-parallel-20261006/preflight-middle-meta14-v1/results/report.json",sha256:"1c417ac0cae44e11842bd2a9434acd1cf537568f2bf19878ebb19dca64c65e75"}.
 Missing/other-path/other-SHA/old B1B16 Meta refuses launch before mkdir or Docker.
 
@@ -43,12 +53,12 @@ KVBuffer has its own MAIN-recorded actual formal-start clock, deadline-start<=24
 DAMP's original 2026-10-07T08:48:03Z clock is not extended or reset.
 Remaining time must cover setup600 + max registered single phase + cleanup180. Each worker phase is one attempt, no timeout extension/retry/shrinking.
 
-MAIN source-only argv (no Torch/Docker/NPU or files):
- /usr/bin/python3 -B -c EXACT_MA0775_record_args3 --source-audit
+MAIN source-only argv (no Torch/Docker/NPU or files; requires real published three shared source files, without issuing cleanup authority):
+ /usr/bin/python3 -B -c EXACT_MA0832_record_args4 --source-audit
 
 Actual MAIN a_exec (only after review/release/fresh-resource admission):
  command=/usr/bin/python3
- args=["-B","-c",EXACT_MA0775_record_args3,"--execute","--inputs",ACTUAL_INPUT_PATH,"--inputs-sha256",ACTUAL_INPUT_SHA]
+ args=["-B","-c",EXACT_MA0832_record_args4,"--execute","--inputs",ACTUAL_INPUT_PATH,"--inputs-sha256",ACTUAL_INPUT_SHA]
  cwd=/opt/host/vnf/austinov/model-tuning-lab
  explicit environment KVBUFFER_MIDDLE_MAIN_EXECUTE=1, PYTHONDONTWRITEBYTECODE=1.
 Outer operation timeout must cover the actual setup/phase/cleanup budget; no guessed parent operation success/ref may be substituted.

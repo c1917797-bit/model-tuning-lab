@@ -1,5 +1,30 @@
 # Packed recurrent-state migration: DAMP lessons
 
+## Pre-guard observation and real terminal authority — 2026-10-07 07:45Z
+
+Actual C1 v2 OFF-A reached real model forward but failed its fixed CPU
+shape/time predicate before recurrence/binding capture; all4 events files were
+empty. Native source audit does not recover missing runtime values. Retain
+this as observer/protocol failure, not compressed math or paper no-go. A NEW
+independent exclusive/fsync pre-guard record may add evidence while leaving
+the frozen predicate, model, algorithm and original exception unchanged.
+Validate the actual failed boundary, not only helpers or a no-device plugin.
+
+operation_get terminal=true can mean aged/not_found. Persistence requires
+found, real record/state/exit and route/target identity. A later query must
+never be named/consumed as original terminal. Here the misleading saved
+MA0862 filename is explicitly demoted in the stage report, with its literal
+NOT_FOUND bytes preserved; child/log/fresh inspect are separately valid
+native-failure/release evidence. Do not silently rewrite missing authority.
+
+Source-bound current host-job cleanup is a distinct legitimate consumer seam,
+not reconstruction of missing oldRPC. KVBuffer NEW2 adapter reuses reviewed
+v2 release and real Meta14; MAIN actual source54/defaultOFF passed. That does
+not supply NPU numerical/model/E2E permission or formal24h start. Pin all
+transitive helper imports and check the actual aggregate CLI and receipt
+schemas before acquiring devices. Keep parallel prep and summed resource
+admission, but exclusive TP4 comparisons and full unchanged numerical gates.
+
 ## Machine-derived completion and model-entry repair — 2026-10-07 07:27Z
 
 MAIN MA083c actually evaluates valid_case over the retained reports:9+9+10+9

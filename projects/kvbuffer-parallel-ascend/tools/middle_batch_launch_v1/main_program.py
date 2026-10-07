@@ -14,6 +14,11 @@ GROUPS={4:(2,14,15),5:(7,11,13),6:(3,4,9,12),7:(5,6,8,10)}
 RELEASE_GROUPS={4:(1,8,9,16),5:(2,7,10,15),6:(3,6,11,14),7:(4,5,12,13)}
 OWNER="kvbuffer-middle-main-v1"; PORTFOLIO_DEADLINE="2026-10-09T11:17:31Z"; GIB=1024**3
 MEMORY=8*GIB; RESERVE=8*GIB
+RELEASE_DIR=ROOT/"projects/damp-ascend/tools/fixed_admission_capture_v2"
+RELEASE_PINS={
+ str(RELEASE_DIR/"v2_release.py"):"e60e399cc2710796d8e9c2b6c418bbf2063ba05f9a93e1b87d4a47e55844fb0b",
+ str(RELEASE_DIR/"v2_contract.py"):"666b0e8956cb371b8c03bcba8fa51dd4d4eec207108366e06590fe7a763e3815",
+ str(ROOT/"projects/damp-ascend/tools/fixed_admission_capture_v1/diag_contract.py"):"b1d6096bb5852a8de3c500e0519c1f95e78e6ea078e279c3f1c5a49929860c11"}
 META14_REF=dict(path=str(RESULT/"preflight-middle-meta14-v1/results/report.json"),sha256="1c417ac0cae44e11842bd2a9434acd1cf537568f2bf19878ebb19dca64c65e75")
 def require(ok,why):
  if not ok:raise ValueError(why)
@@ -31,7 +36,8 @@ def closure():
  drivers={str(p.relative_to(here)):original.c.sha(p) for p in sorted(here.rglob("*"))
           if p.is_file() and "__pycache__" not in p.parts}
  require(drivers=={"run.py":RUNNER_SHA},"review NEW runtime closure again if directory grows")
- return original,original.c,packet,{**pins,str(BASE/"PACKET.json"):SPLIT_PACKET_SHA,str(RUNNER):RUNNER_SHA},bridge,split,host,fh,middle,drivers
+ require(all(original.c.sha(p)==h for p,h in RELEASE_PINS.items()),"shared release source closure drift/missing")
+ return original,original.c,packet,{**pins,str(BASE/"PACKET.json"):SPLIT_PACKET_SHA,str(RUNNER):RUNNER_SHA,**RELEASE_PINS},bridge,split,host,fh,middle,drivers
 def spec(card,slug):
  name="kvbuffer_middle_c%d_%s"%(card,slug.replace("-","_")); root=RESULT/("middle-main-"+slug)/("card%d"%card)
  mounts=[(str(ROOT),str(ROOT),True),(str(RESULT/"build-p1-v1"),"/kvbuffer-results/build-p1-v1",True),
@@ -84,24 +90,39 @@ def checked_spec(entry,job,cid,c,owner=OWNER):
   if x=="-e":
    k,v=argv[i+1].split("=",1);require(env.get(k)==v,"source-bound explicit environment drift")
  return entry
+def release_helper(c):
+ # Shared reviewed calibration helper, not a second release protocol or RPC reconstruction.
+ require(all(c.sha(p)==h for p,h in RELEASE_PINS.items()),"reviewed shared release source drift/missing")
+ path=RELEASE_DIR/"v2_contract.py";existing=sys.modules.get("v2_contract")
+ require(existing is None or Path(existing.__file__).resolve()==path,"unrelated v2_contract already loaded")
+ if str(RELEASE_DIR) not in sys.path:sys.path.insert(0,str(RELEASE_DIR))
+ contract=importlib.import_module("v2_contract")
+ require(Path(contract.__file__).resolve()==path and c.sha(path)==RELEASE_PINS[str(path)],"actual shared contract module identity")
+ helper=load(RELEASE_DIR/"v2_release.py","_main_kvbuffer_shared_release")
+ require(helper.v1() is contract.v1(),"shared original frozen diag module identity")
+ return helper
 def release_guard(config,cmd,c,host):
- raw=c.clean(c.read_ref(config["release_terminal"]));d=raw.get("structuredContent",raw);op=d.get("operation",{});res=op.get("result",{});r=res.get("record",{})
- require(d.get("schema")=="agentweb.operation/v1" and d.get("kind")=="exec" and d.get("operationId")=="exec-000000000000070e" and
-  d.get("terminal") is True and d.get("status")=="completed" and op.get("targetPeerId")==c.PARENT_PEER and
-  op.get("routeDecision")=="peer_direct" and res.get("found") is True and res.get("ok") is True and
-  res.get("state")=="completed" and res.get("lane")=="job" and r.get("state")=="completed" and r.get("lane")=="job" and
-  r.get("id")==d["operationId"] and r.get("cancelled") is False and r.get("timedOut") is False,"actual MA070e original terminal required")
- require(config["release_expected"]["command"]=="/usr/bin/python3" and config["release_expected"]["cwd"]==str(ROOT) and
-  all(r.get(k)==config["release_expected"][k] for k in ("command","args","cwd")),"MAIN exact raw parent command/argv")
- parent_argv=r.get("args");release_dir=ROOT/"projects/damp-ascend/tools/selected_row_dispatch_v1"
- require(type(parent_argv) is list and parent_argv[:2]==["-B",str(release_dir/"controller.py")] and parent_argv.count("--packet-sha256")==1 and
-  c.sha(release_dir/"PACKET.json")==parent_argv[parent_argv.index("--packet-sha256")+1],"actual MA070e original source packet")
- code=r.get("exitCode");ok=type(code) is int and code==0
- require((ok and r.get("error") is None and d.get("error") is None and d.get("succeeded") is True) or
-  (type(code) is int and code!=0 and r.get("error")=="exit code" and d.get("error")=="exit code" and d.get("succeeded") is False),"consistent completed parent; no promotion to numerical PASS")
+ require(config.get("release_authority_kind")=="host_job_cleanup_observed",
+         "MAIN explicit host-job cleanup authority required; aged RPC is not an automatic fallback")
+ h=release_helper(c)
+ require(config.get("release_helper_sources")==RELEASE_PINS,"MAIN exact reviewed shared release source authority")
+ expected_refs=[dict(path=str(h.ROOT/"launch"/name),sha256=digest) for name,digest in h.HOST_REFS.items()]
+ require(config.get("release_host_job_refs")==expected_refs,"MAIN explicit actual host-job immutable Ref set")
+ require(config.get("release_plan")==dict(path=str(h.ROOT/"launch/EXECUTION_PLAN.json"),sha256=h.PLAN_SHA) and
+         config.get("release_admission")==dict(path=str(h.ROOT/"admission.json"),sha256=h.ADMISSION_SHA) and
+         config.get("release_stops")==dict(path=str(h.ROOT/"launch/STOP_RETAIN.json"),sha256=h.HOST_REFS["STOP_RETAIN.json"]),
+         "exact original plan/admission/stop Refs; never a substitute terminal")
+ authority=h.host_job()
+ require(authority["authority_kind"]=="host_job_cleanup_observed" and
+         authority["references"]==expected_refs and authority["awmcp_terminal_reconstructed"] is False and
+         authority["numerical_pass_claimed"] is False,"shared host-job release-only scope")
+ expected_proofs=[dict(path=str(h.ROOT/("physical%d"%card)/"device-proof.json"),sha256=h.SHAS[card]) for card in GROUPS]
+ require(config.get("release_device_proofs")==expected_proofs,"MAIN explicit four actual producer device proofs")
+ refs,proofs=h.references([r["path"] for r in expected_proofs],[r["sha256"] for r in expected_proofs])
+ proc_before=h.no_exec_clients() # Fresh exact original-CID host-client scan, not historical PID invention.
  plan=c.clean(c.read_ref(config["release_plan"]));admission=c.clean(c.read_ref(config["release_admission"]));stops=c.clean(c.read_ref(config["release_stops"]))
  require(len(plan["shards"])==len(stops)==4 and set(admission["cards"])==set(map(str,GROUPS)),"actual four source-bound prior leases")
- byid={v["id"]:v for v in stops};ids=set();observed=[]
+ byid={v["id"]:v for v in stops};ids=set();observed=[];inspects={}
  for e in plan["shards"]:
   card=e["physical_card"];require(e["batches"]==list(RELEASE_GROUPS[card]),"actual MA070e balanced groups, not another prior job")
   a=admission["cards"][str(card)];cid=a["container_id"];ids.add(cid)
@@ -109,11 +130,14 @@ def release_guard(config,cmd,c,host):
           c.digest(c.canonical(e["docker_create_argv"]))==e["create_argv_sha256"],"prior actual create lease identity")
   stop=byid.get(cid,{});require(stop.get("name")==e["container_name"] and stop.get("status") in ("exited","created") and stop.get("deleted") is False,"actual retained prior stop record")
   actual=cmd.json("prior-stopped-inspect",["/usr/bin/docker","inspect",cid])[0]
-  host.inspect_proof(actual,e,cid) # Exact frozen DAMP lease inspector; prior startup may differ from our sleep starter.
+  host.inspect_proof(actual,e,cid) # Exact frozen full CPU/RAM/mount/argv lease inspector remains required.
   require(actual["State"].get("Running") is False and actual["State"].get("Pid")==0,"prior must actually be stopped; never stop unrelated/live parent")
-  observed.append(dict(id=cid,actual_state=actual["State"]))
+  inspects[cid]=actual;observed.append(dict(id=cid,actual_state=actual["State"]))
  require(len(ids)==4,"four unique prior leases")
- return dict(original_terminal=config["release_terminal"],exit_code=code,stopped=observed,scope="release only, not numerical PASS")
+ stopped=h.stopped(proofs,inspects.get);proc_after=h.no_exec_clients()
+ return dict(authority=authority,source_helpers=RELEASE_PINS,device_proofs=refs,stopped=stopped,
+             full_lease_inspects=observed,fresh_host_exec_scans=[proc_before,proc_after],
+             rpc_terminal_reconstructed=False,scope="release only, not numerical PASS")
 def gate_argv(job,cid,c):
  return ["/usr/bin/docker","exec",cid,"/bin/bash","-c",c.WAIT,"kvbuffer-middle-await-c"+str(job["physical_card"]),
          "/kvbuffer-launch/RELEASE",c.PYTHON,"-B",str(RUNNER),"--execute","--batches",*map(str,job["batches"]),

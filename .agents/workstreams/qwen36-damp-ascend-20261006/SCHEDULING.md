@@ -1,5 +1,28 @@
 # Continuous preparation and NPU execution queue
 
+## Actual first native failure and executable successor — 2026-10-07 07:45Z
+
+Read NATIVE_C1_FAILURE_AND_KV_SUCCESSOR_20261007.md before earlier ready/live
+notes. C1 v2 ran real TP4 native model OFF-A, then child exit1 at
+v2_observer.py:169 fixed shape/time admission guard. OFF-B/ON did not run.
+All four events files are0B; actual mismatching field is unknown. This is an
+observer/protocol failure before native-binding/recurrence evidence, not
+compressed-state numeric failure, paper no-go or performance/accuracy result.
+Do not replay v2 unchanged or relax its guard. Prepare NEW pre-guard raw
+evidence only, retaining frozen v2 bytes and original native exception.
+
+MAIN MA0874 actually inspected owned2e3f31a6...33f0c stopped/Pid0/noOOM and
+physical4–7 released. That07:34Z snapshot is not future admission. Later
+MA0862 RPC poll is aged/not_found, NOT an original terminal; real child receipt,
+original stderr and exact release prove the scoped model failure.
+
+NEW KVBuffer host-job-cleanup adapter2 files are applied; MAIN MA0876 actual
+source54/defaultOFF pass, old Meta14 reused by immutable Ref. MAIN signed
+formal start/resources/identity and actual NPU56cases/8960steps remain pending.
+Queue DAMP -> KVBuffer FP32parallelfold -> groupedAdaKV; no usable new
+non-HYPIC technique yet. DefaultOFF, tensor gates, protected0–3, DAMP
+08:48:03Z and portfolioOct9 11:17:31Z cutoffs remain unchanged.
+
 ## NEW model-entry repair applied — 2026-10-07 07:27Z
 
 fixed_admission_capture_v2 NEW10 files applied; MAIN MA083c8 regressions,
