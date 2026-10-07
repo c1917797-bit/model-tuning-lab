@@ -1134,3 +1134,18 @@ complete native entry; no dummy utilization or unchanged failed retries.
 Recurrent H8 full gate, sparse v4/SparQ, lowbit W4 continue rolling preparation.
 KVBuffer and portfolio cutoffs are unchanged; shared sources/defaults remain
 OFF. No main/force/ref-runtime mutation or credential bypass is authorized.
+
+## Latest actual full-gate entry failure — 2026-10-07 17:27Z
+
+Read H8_FULL_IMPORT_FAILURE_20261007.md and its two original/independent receipts.
+MA0e31 ended exit1/155.790s: four canaries passed, four matrix reports failed
+real plugin import before any numerical case. Full11520 remains pending;
+do not invalidate the earlier actual B16 PASS or claim paper no-go. MA0e3e
+fresh exact4CID inspection proved stopped/retained/Pid0/noExec/noOOM.
+Recurrent owner prepares independent source-bound import-fix v2; no old retry.
+Physical0–3 has protected external HYPIC585850–53; do not touch it.4–7 idle.
+Sparse v4 no-device-phase container actually exposes6 plus control nodes;
+only emptyFD/initializedFalse is proved, not physical no-device isolation.
+v4 dispatch paused for independent CPU-only then NPU-owned v5 preparation.
+MAIN continues actual readiness repair, not generic operator tuning/prose.
+Memory32GiB task complete, no extra release. Clocks and goals unchanged.

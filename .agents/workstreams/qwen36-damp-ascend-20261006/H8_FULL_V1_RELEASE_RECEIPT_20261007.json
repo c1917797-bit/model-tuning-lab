@@ -1,0 +1,84 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "import pathlib,json,hashlib,subprocess,os,resource\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))});resource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.getrlimit(resource.RLIMIT_AS)[1]))\nout=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-20261007-1723-001');v=json.loads((out/'RESULT.json').read_text());assert hashlib.sha256((out/'RESULT.json').read_bytes()).hexdigest()=='7992495d0065a0d91b6485dcaebdb47363b4d4679326dddb315e7ea5d1ad299f'\nclean=json.loads(pathlib.Path(v['cleanup']['path']).read_text());assert not clean['errors'];rows=[]\nfor card,cid in v['exact_owned_cids'].items():\n p=subprocess.run(['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','inspect',cid],capture_output=True,text=True,timeout=25);assert p.returncode==0\n x=json.loads(p.stdout)[0];assert x['Id']==cid and not x['State']['Running'] and x['State']['Pid']==0 and not x.get('ExecIDs') and not x['State']['OOMKilled'];assert x['HostConfig']['Devices'][0]['PathOnHost']=='/dev/davinci'+card\n rr=json.loads(pathlib.Path(v['actual_reports'][card]['path']).read_text());rows.append({'physical':card,'cid':cid,'status':rr['status'],'error':rr.get('error'),'cases':len(rr.get('cases',[])),'source_equal':rr['sources_before']==rr['sources_after'],'stopped_retained':True,'inspect_sha256':hashlib.sha256(p.stdout.encode()).hexdigest()})\nprint(json.dumps({'primary':v['primary_error'],'secondary':v['secondary_errors'],'cleanup':v['cleanup'],'reports':rows,'h8_numeric_steps':0,'canary_proof_counts':{k:len(x) for k,x in v['physical_pid_proofs'].items()}}))"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 155,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000e3e",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"primary\": \"ValueError('first real matrix child failure on physical5')\", \"secondary\": [], \"cleanup\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-20261007-1723-001/cleanup.json\", \"sha256\": \"731f157b773da75f20b1cab4404c83f49cdee5d974143d4faac2bf87363c28bd\"}, \"reports\": [{\"physical\": \"4\", \"cid\": \"489eab8bdab70c912a39c86301216ab18848350b888262d3a971803d1710c76d\", \"status\": \"failed\", \"error\": \"ModuleNotFoundError(\\\"No module named 'kvbuffer_parallel'\\\")\", \"cases\": 0, \"source_equal\": true, \"stopped_retained\": true, \"inspect_sha256\": \"92329729a60ff82763b29a97a629d90ffe908d44fc641504b1f43659a6bcbd46\"}, {\"physical\": \"5\", \"cid\": \"9748519cc3558ab733ddd346eed061d278cfdcf656a9e23c0e48f8b655b35a32\", \"status\": \"failed\", \"error\": \"ModuleNotFoundError(\\\"No module named 'kvbuffer_parallel'\\\")\", \"cases\": 0, \"source_equal\": true, \"stopped_retained\": true, \"inspect_sha256\": \"6abffa67c7f1e974134a3ef6767bbdc2a93ec1089ad44004fc987df5b83a49d5\"}, {\"physical\": \"6\", \"cid\": \"a29f183552ec3d33219d757f2846de56b02c9d059375f589756524fba5656877\", \"status\": \"failed\", \"error\": \"ModuleNotFoundError(\\\"No module named 'kvbuffer_parallel'\\\")\", \"cases\": 0, \"source_equal\": true, \"stopped_retained\": true, \"inspect_sha256\": \"4b02985dd75007e7e1b4c0670a84ca78728204c9b284e476454dcfd0df35efa0\"}, {\"physical\": \"7\", \"cid\": \"2d854141d32905bc04d93a3ca16b430cfab26f5b7811f67839bd97379ffed94b\", \"status\": \"failed\", \"error\": \"ModuleNotFoundError(\\\"No module named 'kvbuffer_parallel'\\\")\", \"cases\": 0, \"source_equal\": true, \"stopped_retained\": true, \"inspect_sha256\": \"709e4775c3ae63b58205b0fefe5e72363587556edeb8f527a6c08b1441905101\"}], \"h8_numeric_steps\": 0, \"canary_proof_counts\": {\"4:canary\": 19, \"5:canary\": 19, \"6:canary\": 19, \"7:canary\": 21}}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 348,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 348,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 348
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 348,
+        "routeLookupMs": 0,
+        "totalMs": 348
+      }
+    },
+    "traceId": "63071357-7377-4689-a2bf-feee876139b1"
+  },
+  "operationId": "exec-0000000000000e3e",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

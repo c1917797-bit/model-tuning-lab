@@ -186,3 +186,15 @@ review a complete next entry or diagnose a source-supported adaptation, not
 claim continuous utilization while the current lane is idle. Neither paper
 clock nor fixed portfolio cutoff reset. Ordinary RAM admission is repaired by
 completed user-authorized32GiB release; no additional reclaim is authorized.
+
+## Latest full gate — 2026-10-07 17:27Z
+
+H8 full v1 actually dispatched once (MA0e31), four canaries passed, then
+four plugin-import failures/cases=[] before algorithm execution. Source/library
+closure unchanged. Independent MA0e3e confirms exact own4CID release/retention.
+See H8_FULL_IMPORT_FAILURE_20261007.md. No full-matrix no-go or numerical PASS.
+Next recurrent packet is independent v2 real clean-entry dependency import;
+same tested H8 library and unchanged original matrix/limits/budgets/deadline.
+Sparse continues SparQ and true CPU-only ABI successor, lowbit W4 readiness;
+no preparer independently uses cards. Current idle reason is preparation repair.
+Protected outside HYPIC0–3 PID585850–53 is never reclaimed for this queue.

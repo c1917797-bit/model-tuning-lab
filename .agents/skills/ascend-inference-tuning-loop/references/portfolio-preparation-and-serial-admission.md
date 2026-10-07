@@ -101,3 +101,18 @@ or a paper-wide conclusion. Byte-exact installed model-source snapshots remain
 usable source evidence when an unrelated later schema assertion fails, while
 still providing no NPU/model/performance authority. See current workstream
 FLASHINFER_ABI_PREFLIGHT_20261007.md.
+
+For relocated preparation packets, execute the REAL dependency import under
+the exact entry cwd and clean PYTHONPATH before device reservation. AST parse,
+default-OFF help, SHA closure and mocked imports do not exercise package search
+paths. Resolve canonical plugin dependencies explicitly and hash-bind them;
+never assume an inherited helper's sys.path side effect. Preserve an actual
+entry/import failure separately from a numerical no-go, even after canary PASS.
+See H8_FULL_IMPORT_FAILURE_20261007.md for a four-shard, zero-numeric-case miss.
+
+Call a phase physically no-device only when actual owned inspect/namespace
+proves Devices=[] and no exposed compute/control device nodes. Empty process
+FDs and is_initialized=False establish no-init, not absent devices. For staged
+ABI then NPU work, bind both owned CIDs, sequential aggregate resources, one
+unchanged phase deadline and each exact stop-retain/terminal receipt. Never
+promote the CPU schema phase, exposed-device declaration or canary to numerics.
