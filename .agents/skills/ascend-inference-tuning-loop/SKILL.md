@@ -153,3 +153,8 @@ For packed recurrent-state ports, also apply the evidence-backed
 [DAMP migration gates](references/damp-migration-gates.md): native tokenizer
 and plugin registration, static versus device-dependent preflight, untouched
 slot preservation, and prepack-versus-quantization failure attribution.
+
+For deferred-state GDN failures or copy-only observation kernels, read
+[KVBuffer numerical diagnostics](references/kvbuffer-numerical-diagnostics.md):
+native ABI versus FP32 proxies, production anchors, failed-build retention,
+actual receipt consumers, card attribution, and ordinary/HugeTLB memory ledgers.

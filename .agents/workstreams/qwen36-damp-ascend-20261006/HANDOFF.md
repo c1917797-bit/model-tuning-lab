@@ -1,5 +1,20 @@
 # DAMP Ascend — current workstream
 
+## Copy-only trace v2 — 2026-10-07 12:05Z
+
+Read KVBUFFER_COPY_ONLY_TRACE_20261007.md first. MA0ad4 v1 real compile
+narrowing failure retained. NEW v2 source82adc9f/manifest176e585c has37software
+checks and actual MA0ae9 no-device compile/load/Meta2+12; MA0af9 independent
+receipt/source80/release checks passed. This is not NPU/matrix/service PASS.
+MA0afa is LIVE once-only physical6 eager+graph copy-only diagnostic; POLL its
+handle, never duplicate launch. SO76ed09c7/builddd10951c/meta4271324b exact.
+8GiB1CPU+8GiB reserve/600s+cleanup/fixed KV cutoff preserved.
+MA0abb canary abort was outside0–3 HYPIC startup; candidate never dispatched.
+Original B16 graph37 failure/64sources/77b4 gates remain unchanged.
+RAM actual~59.7GiB at11:56 during outside model; pool1916/1892free is not RAM.
+No outside stop, HugeTLB resize or material deletion. No new E2E/task result.
+Git local source stages remain publication-pending; no new usable acceptance.
+
 ## Selected-card B16 diagnostic — 2026-10-07 11:29Z
 
 Read KVBUFFER_B16_LEASE6_DIAGNOSTIC_20261007.md first. MA0a8a actual v1
