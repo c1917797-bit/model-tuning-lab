@@ -97,10 +97,11 @@ load. This rule does not guarantee the first real-device attempt will pass.
   actual process/HBM usage, aggregate host-RAM/disk/cgroup limits and source
   identities. Device declarations do not prove occupation; idle accelerators
   do not authorize lowering resource gates or reclaiming protected workloads.
-- Independent correctness-only jobs may use disjoint authorized cards in
-  parallel when project safety contracts allow; all TP4 model/calibration and
-  formal performance/profiling measurements remain exclusive. Never publish
-  timing collected with overlapping experiments as a comparable speedup.
+- Respect the current project's cross-paper concurrency choice. In this
+  portfolio, papers use the NPU lane serially; preregistered numerical shards
+  within one paper may use disjoint authorized cards under one summed budget.
+  All TP4/model/calibration and formal performance/profiling remain exclusive;
+  overlapping timing cannot establish a comparable speedup.
 - Parallel agents prepare the next gates/adapters during a running job, with
   frozen live sources and distinct edit scopes. Observe terminal exit, retain
   evidence/release only owned resources, then dispatch the admitted successor
@@ -142,6 +143,11 @@ load. This rule does not guarantee the first real-device attempt will pass.
   container is insufficient when startup copies into a persistent directory:
   use a fresh container or a non-nesting replacement such as `cp -aT`, then
   re-record module paths and hashes before spending an NPU validation run.
+
+For a multi-paper queue with parallel preparers, apply
+[portfolio preparation and serialized admission](references/portfolio-preparation-and-serial-admission.md).
+It distinguishes executable readiness from source screens and prevents a
+single active paper from consuming every preparation slot.
 
 For packed recurrent-state ports, also apply the evidence-backed
 [DAMP migration gates](references/damp-migration-gates.md): native tokenizer

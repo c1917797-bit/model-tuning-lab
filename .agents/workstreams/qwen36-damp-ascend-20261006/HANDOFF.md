@@ -1,5 +1,62 @@
 # DAMP Ascend — current workstream
 
+## Actual successor dispatch — 2026-10-07 08:33Z
+
+MA0921 actually completed exit0: prepared JOINT SHA
+716dbfd26f417e3d0b7958d3c85ea69b38e1f8a17348745868579ab8d8b59744
+at /cache/cch/qwen36-kvbuffer-parallel-20261006/split-dispatch-native-20261007-0830/JOINT.json.
+Two distinct actual MAIN operations now exist: MA0924 B1 physical5,
+MA0925 B16 physical6. Each phase5400s; outer6200s includes setup/cleanup.
+Latest bounded operation_get at08:34:28Z showed both running. Do not
+restart, invent terminal authority or call early report existence PASS.
+Actual gate PID bindings were observed (B1 3914016, B16 3915626); current
+status must be re-read. Only one paper uses the lane; physical4/7 are not
+filled with dummy work. After both valid original arm terminals, consume
+actual receipts, then admit that paper's full four-card T2..15 matrix.
+Middle/service/E2E/task acceptance remains pending; draft is not applied.
+
+## Serial paper admission and actual environmental abort — 2026-10-07 08:34Z
+
+User now explicitly chooses parallel preparation for the existing four cards,
+with cross-paper NPU validation serialized by MAIN. This overrides older
+cross-paper disjoint-card suggestions in this workstream. Within one paper,
+its preregistered disjoint numerical shards may still run together; TP4 and
+formal paired performance always remain exclusive. No dummy occupancy.
+
+Actual HOST-v4 MA08ed completed exit1 after183.041s: external identity changed.
+Frozen monitor compares ONLY sorted external(container-ID,image) tuples, not
+transient command names. A new protected0–3 HYPIC container started08:17:04Z;
+it is not this workstream's HYPIC rerun. The failed-time snapshot was not
+written by the old monitor, so keep the original exception and post-event
+facts separate rather than inventing complete failed-time telemetry.
+Only own2107504ac3db...94b2c81 was stopped/retained. MAIN MA090e actual inspect
+confirms stopped/Pid0/noOOM/noExec, and4–7 no native processes/idle HBM.
+Its exit137 is retained controller stop, not an OOM or numeric result.
+MA090e ordinary MemAvailable63,802,364KiB (~60.85GiB) is below unchanged
+72GiB full-model admission; idle NPU cards do not imply sufficient host RAM.
+Protected0–3 and HugeTLB are untouched. No new pre-guard raw/native numeric,
+SOURCE_LOCK, service/E2E/quality PASS. DAMP37/64, deadline08:48:03Z unchanged.
+
+Nearest concrete successor is NEW KVBuffer parallel-fold, not an unchanged
+negative serial implementation. MAIN MA0918 independently reused actual
+MA06a0 original terminal/argv ONLY for release and actual49 source/artifact
+closure; MA091e exact signed-input readback/default plan passed. NEW route
+formal start08:29:54Z, fixed24h deadlineOct8 08:29:54Z; phase5400s/arm is a
+conservative cap, NOT a measured completion estimate. Inputs are external
+/cache/cch/qwen36-kvbuffer-parallel-20261006/kvbuffer-parallel-MAIN-inputs-20261007-0830.json
+SHA d6da7990bb983c40859754836f14078ae43ce228dde0079367aaa135d8a9e29e.
+MA0921 fresh prepare-joint was dispatched; this note is not its terminal,
+canary/numeric PASS or a fabricated future run-arm authority.
+
+Three actual preparers now cover rolling paper groups, not fifteen concurrent
+agents or fifteen ready packets: KVBuffer bridge delivered NEW6 Git-external
+draft (MA0917 software-only tests; MAIN review/application pending), then
+DeltaLog/SparsePrefix/DASC; Ada-KV then Quest/SparQ/Self-Indexing/Kascade; KIVI
+then SKVQ/KVarN/FFD/QQQ-W4A16. Safe unimplemented/source-only ideas remain
+preparing. Final2048 task-runner source identity is an explicit remaining
+closure item, not a newly invented scorer. Read current per-paper queue and
+maintainer portfolio-preparation-and-serial-admission reference.
+
 ## HOST-only repair and broader preparation — 2026-10-07 08:11Z
 
 Actual MA08be stopped PRE-NPU at previous C1 mounts differ; no model log or

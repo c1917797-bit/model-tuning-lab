@@ -1,5 +1,18 @@
 # Pre-card portfolio queue — 2026-10-07 08:11Z
 
+Latest user rule: preparation is parallel; cross-paper NPU validation is
+serialized on physical4–7 by MAIN. Within-paper preregistered numerical shards
+are allowed under one joint resource budget; paired performance is exclusive.
+NEW6 KVBuffer middle-service draft was delivered (software-only MA0917),
+not yet MAIN-applied/native validated; its preparer has rotated to DeltaLog.
+Ada-KV and KIVI preparation are running. Follow-up groups are respectively
+Quest/SparQ/Self-Indexing/Kascade and SKVQ/KVarN/FFD/QQQ-W4A16, while the
+recurrent group continues DeltaLog/SparsePrefix/DASC with distinct hypotheses.
+The remaining packets are not all ready. DAMP native attempt MA08ed aborted
+on external identity change and released own cards; no algorithm PASS/failure.
+KVBuffer NEW parallel-fold actual source49/default plan is checked and fresh
+prepare-joint MA0921 dispatched; numerical/service/E2E/quality remain pending.
+
 This is a preparation/scheduling correction, not a new paper result.
 Source: PAPER_EVIDENCE_INVENTORY_20261006.md and original project gates.
 Canonical root /opt/host/vnf/austinov/model-tuning-lab. MAIN alone writes shared
@@ -19,10 +32,11 @@ or unsupported terminal conclusion may hide the gap.
 
 ## Actual parallel ownership now
 
-- MAIN: bounded DAMP HOST-v4 native diagnosis, exact resource/source admission,
-  then nearest ready successor; shared edits/Git/NPU serialization.
-- damp_operator_reuse: KVBuffer true B1/B16 -> T2..15 -> NEW explicit report
-  consumer -> original service bridge. Implementation still pending.
+- MAIN: nearest ready KVBuffer numerical gate after scoped DAMP abort;
+  shared edits/Git/resource admission and cross-paper NPU serialization.
+- damp_operator_reuse: KVBuffer NEW6 consumer/service draft delivered, MAIN
+  review/application pending; now equation-derived DeltaLog mixed adapter,
+  then SparsePrefix/DASC only under new concrete hypotheses.
 - damp_calibration_inputs: Ada-KV grouped reduced-allocation/service packet;
   inspect existing code and official selectors before implementing the gap.
 - damp_math_prepare: faithful KIVI packed asymmetric groups/residual-tail packet
