@@ -33,6 +33,37 @@ Reuse open-source operators and infrastructure, not another algorithm's PASS.
 
 ## Execute the correct queue
 
+### Rolling slot refill and one-entrypoint handoff
+
+For the explicitly authorized parallel portfolio, reconcile actual live agent
+handles with the indexed backlog at each delivery or terminal event. A source
+group name in a handoff is not proof that its agent is still running. Refill a
+finished slot with the next actionable preparation gap; do not wait for that
+packet's NPU result or let all preparers drift back onto the active paper.
+An active preparer hands off a completed packet by message and continues its
+assigned successor. If it has already terminated, MAIN uses a follow-up or a
+replacement agent within the currently available concurrency limit. More Git
+branches do not create more agent slots; use distinct draft scopes and respect
+the repository worktree budget. No idle loops or dummy jobs count as progress.
+
+Each delivery includes the complete patch, immutable source identities, actual
+device-independent tests, one aggregate validation entrypoint, fresh-resource
+discovery requirements, complete case coverage, downstream model/performance
+consumers and pending prerequisites. MAIN reviews and integrates the packet,
+then queues its highest-value unrun device gate. Discover known source/schema/
+CLI/mount/resource-report mismatches before device reservation. Prepared
+commands do not make archived resource facts fresh or guarantee numerical PASS.
+At device admission, bind the actual physical mapping, host/cgroup budgets and
+ownership once for the bounded matrix, monitor changes, preserve first failure
+and already-valid child evidence, and release only the owned lease. Device
+jobs remain serialized across papers; no preparer independently starts a
+container or reserves cards just because it finishes a packet.
+
+When a gap is genuinely blocked or out of scope, record its concrete dependency
+and continue another actionable paper. Missing draft inheritance is a source
+gap, not grounds to repeat broad directory searches or declare algorithm no-go.
+Do not hold a preparation slot awaiting MAIN when other assigned work remains.
+
 MAIN selects the highest-value ready successor using remaining time and
 current evidence, rather than waiting for every paper to be ready. Cross-paper
 NPU work is serialized for this portfolio. Within-paper preregistered disjoint

@@ -1,5 +1,25 @@
 # DAMP Ascend — current workstream
 
+## Actual parallel refill and RAM audit — 2026-10-07 12:50Z
+
+Read PRE_CARD_PORTFOLIO_QUEUE_20261007.md actual-redispatch section. Initially
+no child agents were live. MAIN actually spawned lowbit_ready_queue,
+sparse_attention_ready_queue and recurrent_lifecycle_ready_queue; each began
+actual source reads and rolls to assigned successors on packet delivery, without
+waiting for NPU results. MAIN remains on KVBuffer native-copy observation and
+alone reviews/applies/admits device jobs. Old named agents are not live handles.
+Update skills' portfolio reference enforces this event-driven refill and one
+complete source/CLI/matrix/downstream handoff, not an idle report-only backlog.
+
+MA0b20/0b24 fresh RAM/container/OVS evidence: ordinary available~79.1GiB;
+HugeTLB1916GiB reserved/1892GiB pool-free with OVS24GiB actual. No running
+task-name-matched container, no material owned RSS to clean. Outside cannbench
+and system pool/OVS untouched; stopped containers retained. MA0b26 current4–7
+has no compute PIDs; fresh canary/UDA/joint resources still required to dispatch.
+No new algorithm numerical PASS/E2E/task result. Fixed KV/portfolio cutoffs,
+full-model72GiB gate and protected0–3 remain unchanged. Local Git publication
+is still authentication-pending; no unauthenticated push retry is implied.
+
 ## Actual trace child recovered — 2026-10-07 12:21Z
 
 MA0afa is TERMINAL exit1, not live; do not poll/relaunch it. Preserve primary

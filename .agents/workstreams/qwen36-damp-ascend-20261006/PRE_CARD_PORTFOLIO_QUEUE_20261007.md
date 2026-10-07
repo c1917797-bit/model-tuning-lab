@@ -1,5 +1,47 @@
 # Pre-card portfolio queue — 2026-10-07 08:11Z
 
+## Actual redispatch — 2026-10-07 12:50Z
+
+The live collaboration inventory initially contained MAIN only: earlier named
+agents were not live. This was a real rolling-refill scheduling gap, not proof
+that the remaining papers were prepared. MAIN launched three fresh preparers;
+all confirmed actual repository/source reads. MAIN keeps the current KVBuffer
+native-copy diagnostic, shared application/Git and serialized device admission.
+
+- `lowbit_ready_queue`: KIVI writer/packed groups/residual/allocator/COW first,
+  then SKVQ, FFD, KVarN and distinct QQQ/W4A16 loader gaps. The old KIVI NEW7
+  draft cannot currently be independently recovered; do not invent its handle
+  or stall all successors while searching for it. Current code/probe is source
+  evidence only, not a replacement writer or new NPU proof.
+- `sparse_attention_ready_queue`: Ada-KV true reduced-allocation/paged-lifecycle
+  first, then Quest, SparQ, Self-Indexing, Kascade and distinct FlashInfer/
+  narrow-matmul applicability. Actual reusable draft discovered at
+  `/cache/cch/qwen36-adakv-prep-20261007/adakv-paged-v2-reviewed-draft-20261007.patch`;
+  audit its implementation instead of rebuilding the older C2 extra-arena path.
+- `recurrent_lifecycle_ready_queue`: DeltaLog decode-only mixed-subset bounded
+  logs first, then new SparsePrefix/DASC lifecycle hypotheses, current MXR/
+  GoodEnough/SSM-TP gaps. EPD/DUET/ENEC keep their scoped applicability records;
+  do not spend cards repeating an absent text/fixed-silicon transfer mechanism.
+
+Every packet delivery triggers immediate successor preparation; MAIN follows
+up/replaces terminal agents without waiting for NPU outcomes. Preparers only
+read/source-design/light stdlib checks, use disjoint private draft scopes and
+do not start Docker/compile/model/NPU workloads or write shared Git. Aggregate
+preparation budget is at most2GiB; each has one lightweight command at a time.
+Known source, CLI, actual receipt and downstream-consumer gaps must close before
+scarce-card reservation. All unrun compile/numerical/model gates stay pending.
+No new accepted non-HYPIC technique, throughput or task-quality result exists.
+
+MA0b20 at12:43Z: MemAvailable82,966,232KiB (~79.1GiB), HugeTLB1916GiB pool,
+1892GiB pool-free, zero reserved pages. MA0b24 at12:46Z independently found no
+running name-matched task containers; stopped history does not hold process
+RAM. OVS actual private HugeTLB24GiB and ordinary RSS~1.83GiB are protected.
+Running cannbench_ds belongs to `/cache/evmenoff`, not this task; not stopped.
+MA0b26 SMI shows physical4–7 no compute PID and baseline HBM; this is not a
+canary/UDA admission or permission to weaken the unchanged full-model72GiB
+resource floor. No container, history, pool or external workload was deleted.
+KV Oct8 08:29:54Z and portfolioOct9 11:17:31Z cutoffs remain unchanged.
+
 ## Current terminal checkpoint — 2026-10-07 08:52Z
 
 Read KVBUFFER_FIRST_FAILURES_AND_DAMP_CLOSEOUT_20261007.md before older live
