@@ -1,5 +1,24 @@
 # DAMP Ascend — current workstream
 
+## B16 saved-failure diagnostic preparation — 2026-10-07 11:03Z
+
+Read KVBUFFER_B16_SAVED_FAILURE_DIAGNOSTIC_20261007.md first.
+B1 actual child640 steps/74 PID proofs independently checked (MA0a79/MA0a7e),
+old MA0a5f parent remains failed. B16 MA0a60 graph0step37 actual output
+.00304878>.00303; full raw/original operation and release preserved externally.
+NEW4 diagnostic is source-reviewed/applied; MA0a83 actual17stdlib and MA0a85
+actual image660 no-device CLI/raw-format pass. Saved BF16 active output has3
+bit differences, maximumoneULP; that is not tensor/E2E/task acceptance.
+Next fresh physical6->logical0 single saved-step eager+graph reproduction/history
+branch,8GiB1CPU+8GiB reserve,600s bound; no unchanged full-matrix retry.
+No NPU diagnostic launched yet. Source64/SO/numerical gates untouched.
+Transient physical4 PIDs disappeared before attribution; no outside job stopped.
+HugeTLB/OVS/protected0–3 untouched; ordinary RAM still~77.5GiB last sample.
+Current c388 local checkpoint push remains GitHub-auth blocked (normal128);
+no fake remote publication. KV/portfolio fixed deadlines/fullmodel72GiB unchanged.
+No new formal performance/task result or usable non-HYPIC acceptance.
+
+
 ## Complete-matrix source preflight — 2026-10-07 10:27Z
 
 Read KVBUFFER_FULL_MATRIX_PREFLIGHT_20261007.md first. MAIN MA0a29 actual17
