@@ -146,3 +146,14 @@ hypic_screen_20261007:
     cleanup_sha256: d46f71eb879b84ea535a0d8f4d441658babb5606cd4460ab4e540bca7bb9654d
   cleanup: Exact screen container removed, NPU0-3 and port 8223 released; NPU4-7 untouched.
   next_gate: Run repeat2 and repeat3 with fresh lifecycles and the same full hot-path requirement, then compute medians and dispersion before a paper-effect verdict.
+hypic_repeat2_20261007:
+  operation_id: exec-0000000000000c04
+  validity: Second fresh lifecycle; 40/40 exact 1024-token outputs, zero failures, complete HYPIC hot path and exact owned container cleanup.
+  candidate: Weighted TPOT 60.1658 ms/token; TPOT P95 81.7203 ms; TTFT P95 43209.90 ms; output throughput 166.9332 token/s; fixed-batch duration 245.3677 s.
+  comparison: Weighted TPOT differs from the screen by 0.16 percent; do not claim a three-run effect until repeat3 is valid.
+  artifacts:
+    performance_sha256: 3ca694e3a2efc4f0568b09edbc15fc6c777b1e27711711a7839ca802dec92570
+    contract_sha256: b29dfe27b8221f5a0a7ce7b8fdec07e5c3623079cf8ad3a73ef7be182fb50ad3
+    activation_log_sha256: 013beee4cd1e6f656cc7e36763670d098f79af23e3a7273f980fa4607cc1c9e2
+    cleanup_sha256: 381b5b746eeaeaeef06f74e64faffcbfaecc09d185096e046e3c0769b1e916a7
+  next_gate: Run repeat3 unchanged, then independently recompute paired performance from all six binding-off runs.
