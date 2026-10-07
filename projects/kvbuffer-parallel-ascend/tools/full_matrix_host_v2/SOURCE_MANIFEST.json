@@ -1,0 +1,60 @@
+{
+  "schema": "kvbp.full-matrix-host-sources/v2",
+  "default_enabled": false,
+  "npu_executed": false,
+  "source64": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/split_gate_v2/SOURCE_MANIFEST.json",
+    "sha256": "508ff442ede945b8fb5930f79ee597ec1dba07e5d4e778d9abc85aafda6ce9c9"
+  },
+  "artifact_refs": {
+    "library": {
+      "path": "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-native-order-v2-20261007-0924/build/libqwen36_gdn_kvbuffer_native_order_v2_ops.so",
+      "sha256": "77b4d61f94b4a8747bd08d2223b11d87702b43186acfd2f1b2e220f7b64a065c"
+    },
+    "build": {
+      "path": "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-native-order-v2-20261007-0924/build-receipt.json",
+      "sha256": "ff4c4a22ccf3e03d57baf08d59d6494e0f1435c74fbd132bbba1e98850e30dd8"
+    },
+    "meta": {
+      "path": "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-native-order-v2-20261007-0924/meta-report-format-v2.json",
+      "sha256": "fb765a5389ad97464597f16a43915440a46b654b3419d86a9894692d487592ee"
+    }
+  },
+  "frozen_host": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+    "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+  },
+  "files": {
+    "host.py": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
+    "test_host.py": "487d9d266619f5348111628dec9ef46c31850f873579b848a16e179b889ed6c2",
+    "READY.md": "4f0caf31a9e84b134b5ff7867a8439ae05ff8d7d00bdb32f5f149cc6f3aacdd8"
+  },
+  "consumer_contract": {
+    "patch_path": "/cache/cch/qwen36-kvbuffer-parallel-20261006/kvbuffer-native-order-followup-v2-reviewed-draft-20261007.patch",
+    "patch_sha256": "c680bb8836e705fdef53d7430a26ece14092db2740843b094f888578ea9305bf",
+    "consumer_sha256": "a264001bbd2f73ee9fdd7a0f0552835d77d02f3150f68ec3df9572e4ea2a8b2b",
+    "actual_outer_terminal_authority_pending": true
+  },
+  "software_original": {
+    "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+    "route": "force_direct/tpc",
+    "operation_id": "exec-0000000000000544",
+    "tests": 23,
+    "scope": "in-memory stdlib plus actual read-only source64/artifact contracts; no Docker/Torch/NPU/file write",
+    "original_first_21_test_operation": "exec-0000000000000541"
+  },
+  "claims": {
+    "numerical": false,
+    "graph": false,
+    "service_ready": false,
+    "performance": false,
+    "accuracy": false
+  },
+  "pending": [
+    "MAIN full source review/apply/checkpoint",
+    "actual landed producer closure/CLI",
+    "actual two-arm canary/NPU matrix",
+    "MAIN original operation/child consumer replay",
+    "allT/model lifecycle/E2E/task accuracy"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "kvbp.native-order-followup-sources/v2",
+  "default_enabled": false,
+  "files": {
+    "binding.py": "f50a051343cd1828a2ca513e76ecbe372c761f97a5c8086cf24081406b93e7f2",
+    "middle_meta.py": "efc8d749bfb28dab48d17ed9f2e4bfe978eb9ec19304b584af7fe881f413239f",
+    "middle_run.py": "10044b02963e4f5db37f7e0cba9bbe8e3926a81dc449116204b819341f7cbab3",
+    "consumer.py": "a264001bbd2f73ee9fdd7a0f0552835d77d02f3150f68ec3df9572e4ea2a8b2b",
+    "test_followup.py": "09eaf063a60af3df52cd043a197fefd38e76c44f553e6c428293bc95e63db398",
+    "READY.md": "fa29294e6248c19e5ffae51e79de43efa7f08805133942df95b486acf7b9f9e5"
+  },
+  "v2_gate_manifest": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/split_gate_v2/SOURCE_MANIFEST.json",
+    "sha256": "508ff442ede945b8fb5930f79ee597ec1dba07e5d4e778d9abc85aafda6ce9c9"
+  },
+  "old_consumer_packet": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/middle_service_bridge_v1/PACKET.json",
+    "sha256": "3b985866bec8a4deaf30899ac8b4df0cf8c5bbf7943b67f97897eede056c2755"
+  }
+}

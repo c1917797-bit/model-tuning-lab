@@ -1,5 +1,19 @@
 # DAMP Ascend — current workstream
 
+## Complete-matrix source preflight — 2026-10-07 10:27Z
+
+Read KVBUFFER_FULL_MATRIX_PREFLIGHT_20261007.md first. MAIN MA0a29 actual17
+software/default-OFF/source checks and MA0a38 actual23 producer checks passed.
+MA0a33 actual immutable-image NO-device Meta14 passed/source70 unchanged;
+this is NOT numerical/graph/model/E2E/task proof. NEW7+NEW4 sources are applied
+and reviewed; originalsource64/SO/numerical gates remain frozen.
+Next fresh summed24GiB/4CPU/18GiB JOINT and actual B1 physical5/B16 physical6
+full160eager+3graph640steps each, then actualmiddle/service consumers.
+MA0a44 all identified own124 containers stopped/Pid0/noExec; RAM~80.1GiB.
+HugeTLB/OVS/protected0–3 untouched. DAMP is closed37/64 at its timegate;
+KV Oct8 08:29:54Z/portfolio Oct9 11:17:31Z and fullmodel72GiB remain fixed.
+No new throughput/task result or usable non-HYPIC acceptance is claimed.
+
 ## Actual saved-step native-order checkpoint — 2026-10-07 10:00Z
 
 Read KVBUFFER_SAVED_STEP_NATIVE_ORDER_RESULT_20261007.md before older notes.
