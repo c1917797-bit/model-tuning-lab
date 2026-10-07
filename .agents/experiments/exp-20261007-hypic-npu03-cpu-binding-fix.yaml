@@ -183,12 +183,13 @@ hypic_three_run_decision_20261007:
 quality_campaign_20261007:
   operation_id: exec-0000000000000c6d
   protocol: Same binding-off repair in no-cache and HYPIC-only arms, each with three complete LongBench-v2 and GSM8K runs, 41984 context, 2048 maximum natural-EOS output, c32, seed 0, thinking off.
-  current_stage: no-cache GSM8K run2 in progress; 3 of 12 quality units complete, no paired quality decision.
+  current_stage: no-cache LongBench-v2 run3 in progress; 4 of 12 quality units complete, no paired quality decision.
   no_cache_longbenchv2_run1:
     validity: Independently audited 127/127 rows, zero failures, exact indexes/sample references/response hashes, scorer and summary arithmetic.
     result: 76/127 correct, 59.84251968503937 percent; 15 outputs reached the 2048-token length limit; unit duration 1431.5986 s.
     summary_sha256: 13f2e115d02fd65453e8e2ed7a96a488c8772301fd624ba2d40d92de69825032
     details_sha256: aef4967608e97f11515ddc45ed543d3ca70eb591d5ab4d6216b59a2f0be99391
+    receipt_sha256: 393b1147e140afa5cfda642c9f6d1db01ae77597c19433d8215a5b9f20a89b89
   no_cache_gsm8k_run1:
     validity: Independently audited 1319/1319 rows, zero failures, exact indexes/sample references/response hashes, supplied scorer and summary arithmetic.
     result: 1276/1319 correct, 96.73995451099317 percent; 10 outputs reached the 2048-token length limit; unit duration 1714.6695 s.
@@ -201,4 +202,10 @@ quality_campaign_20261007:
     summary_sha256: 0733143fdf28ba7f47ae43c55d28bcaae550d7753bdbf061a9dde512061b5192
     details_sha256: 553275e5d955f9380fead3c8e4c46ac4d07f738b31361ee3238bcdfeba2c1a0f
     receipt_sha256: 15959b772a862a0f95f50467490f64fb3e0fbc4c929f77e10dc7bbd9cac3153c
-  decision: pending; three completed units are unpaired baseline repetitions, not the quality gate.
+  no_cache_gsm8k_run2:
+    validity: Independently audited 1319/1319 rows, zero failures, exact indexes/sample references/response hashes, pinned prompt template, token accounting and scorer; per-sample prompt token counts matched run1.
+    result: 1275/1319 correct, 96.66413949962093 percent; 11 outputs reached the 2048-token length limit; unit duration 1717.1877 s.
+    summary_sha256: 3f993023c36b58624dd182d03a914d481085f249d05839e99795eb6ecda59d6f
+    details_sha256: bf294e1e3621a42ebd62ba574b28efdef1e61e4b1d0300ddd0910be74981f470
+    receipt_sha256: c59a49821f21445a151c5a6250d9c0fd8235b11f9f8b9498ec8786bbd268367a
+  decision: pending; four completed units are unpaired baseline repetitions, not the quality gate.
