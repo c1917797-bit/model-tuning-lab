@@ -225,7 +225,7 @@ quality_campaign_20261007:
   decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
 quality_campaign_clean2_20261007:
   operation_id: exec-0000000000000e15
-  status: Running since 2026-10-07 17:10 UTC; no-cache LongBench-v2 run1 and GSM8K run1 independently audited, LongBench-v2 run2 running since 18:09:56 UTC. This is not a quality verdict.
+  status: Running since 2026-10-07 17:10 UTC; no-cache LongBench-v2 run1, GSM8K run1 and LongBench-v2 run2 independently audited, GSM8K run2 running since 18:23:54 UTC. This is not a quality verdict.
   artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
   only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
   orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
@@ -245,4 +245,10 @@ quality_campaign_clean2_20261007:
     summary_sha256: edc09f01f8c5a5a13b064d2c277b653d26562194eaa9cadb4f3801102efdef32
     details_sha256: 1d2e7710a0371a0b77c6c12dabfe7d375c859b9d8e699b0f4971f3f81efb16db
     receipt_sha256: 260b551915267f9669c3e8d62f9efa6ec1c1339230b138f084cbe8e9edf7b9a1
+  no_cache_longbenchv2_run2:
+    validity: Independently audited 127/127 rows, zero failures, exact sample order/reference/response hash, pinned scorer, prompt template, token accounting, summary arithmetic, receipt hash and per-sample prompt-token identity with run1; whole-arm isolation/release still pending.
+    result: 72/127 correct, 56.69291338582677 percent; 18 outputs reached the 2048-token length limit; 140153 completion tokens.
+    summary_sha256: f9b2f3a12b1a4007c6cedac88a673e11413c2bb68e951a72109517448a61e0f2
+    details_sha256: 58d00793efa782b88ad878ef48623f93ad013a175df785ae978cfaec3c4b024d
+    receipt_sha256: 62a2a61ce7bfd663115da8922c906b0e32125201bffea17d041c3a060c6c0771
   decision: pending fresh baseline and treatment results, both release receipts and independent full audit.
