@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import sys,pathlib,json,subprocess,os,hashlib\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\");base=root/\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4\"\nsys.path.insert(0,str(base));import receipt as c,host as h\nout=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-token-native-v4-20261007-1910-001\")\nrr=c.bound(out/\"RESULT.json\",\"b78a761ef82e8d941efa297c83fdaebf897efa4c36be07cd54804b9accf0d618\");v=c.load(rr)\nassert v[\"status\"]==\"failed\" and v[\"container_id\"] is None and v[\"secondary_errors\"]==[]\ncid=v[\"cpu_container_id\"];owned=c.load(c.bound(out/\"cpu-preflight/OWNED.json\",c.sha(out/\"cpu-preflight/OWNED.json\")))\ncleanup=c.load(v[\"cpu_only_cleanup\"]);st=c.inspect_row(v[\"cpu_stopped_inspect\"])\nh.validate_inspect(st,owned);assert st[\"Id\"]==cid and not st[\"State\"][\"Running\"] and st[\"State\"][\"Pid\"]==0 and not st.get(\"ExecIDs\") and not st[\"State\"].get(\"OOMKilled\",False)\nassert cleanup[\"stopped\"] and cleanup[\"retained\"] and not cleanup[\"deleted\"] and cleanup[\"errors\"]==[]\ndef run(a):\n q=subprocess.run(a,capture_output=True,text=True,timeout=15);assert q.returncode==0,(a,q.stderr);return q.stdout\nactual=json.loads(run([h.H.PRLIMIT,\"--as=unlimited\",\"--\",h.DOCKER,\"inspect\",cid]))[0];h.validate_inspect(actual,owned)\nassert actual[\"State\"][\"Pid\"]==0 and not actual[\"State\"][\"Running\"] and not actual.get(\"ExecIDs\")\nhw=run([h.H.SMI,\"info\"]);F=h.H.frozen()\nfor n in (4,5,6,7):F.idle_one(hw,n)\nprotected=F.protected(hw);assert protected==c.load(v[\"protected_before\"])[\"processes\"] if False else True\nbefore=c.load(v[\"protected_before\"]);assert h.H.protected_map(protected)==before[\"processes\"]\nassert not h.H.device_fd_holders()\nmem={x.split(\":\")[0]:int(x.split()[1])*1024 for x in pathlib.Path(\"/proc/meminfo\").read_text().splitlines() if x.startswith((\"MemAvailable:\",\"SwapTotal:\",\"SwapFree:\"))}\nprint(json.dumps({\"result_ref\":rr,\"actual_failed_cpu_abi\":True,\"npu_owner_created\":False,\"exact_cpu_CID\":cid,\"stopped\":True,\"retained\":True,\"not_deleted\":True,\"no_OOM\":True,\"npu4_7_idle\":True,\"protected0_3_unchanged\":True,\"protected0_3_PIDs\":[p[\"pid\"] for p in protected],\"memory\":mem,\"npu_smi\":hw,\"torch_imported\":\"torch\" in sys.modules}))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1358,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000efd",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"result_ref\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-token-native-v4-20261007-1910-001/RESULT.json\", \"sha256\": \"b78a761ef82e8d941efa297c83fdaebf897efa4c36be07cd54804b9accf0d618\"}, \"actual_failed_cpu_abi\": true, \"npu_owner_created\": false, \"exact_cpu_CID\": \"63d09431f20cb84ad557746fcc3bebdefca500370fcb735abdd0c3ecb875e431\", \"stopped\": true, \"retained\": true, \"not_deleted\": true, \"no_OOM\": true, \"npu4_7_idle\": true, \"protected0_3_unchanged\": true, \"protected0_3_PIDs\": [585850, 585851, 585852, 585853], \"memory\": {\"MemAvailable\": 96493445120, \"SwapTotal\": 0, \"SwapFree\": 0}, \"npu_smi\": \"+------------------------------------------------------------------------------------------------+\\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\\n+===========================+===============+====================================================+\\n| 0     910B4               | OK            | 135.3       50                0    / 0             |\\n| 0                         | 0000:C1:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 1     910B4               | OK            | 136.0       50                0    / 0             |\\n| 0                         | 0000:C2:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 2     910B4               | OK            | 141.1       52                0    / 0             |\\n| 0                         | 0000:81:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 3     910B4               | OK            | 144.3       53                0    / 0             |\\n| 0                         | 0000:82:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 4     910B4               | OK            | 94.1        45                0    / 0             |\\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\\n+===========================+===============+====================================================+\\n| 5     910B4               | OK            | 97.1        43                0    / 0             |\\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 6     910B4               | OK            | 95.5        44                0    / 0             |\\n| 0                         | 0000:41:00.0  | 0           0    / 0          2864 / 32768         |\\n+===========================+===============+====================================================+\\n| 7     910B4               | OK            | 87.3        45                0    / 0             |\\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\\n+===========================+===============+====================================================+\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\\n+===========================+===============+====================================================+\\n| 0       0                 | 585850        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 1       0                 | 585851        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 2       0                 | 585852        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 3       0                 | 585853        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 4                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 5                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 6                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 7                                                            |\\n+===========================+===============+====================================================+\\n\", \"torch_imported\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 350,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 350,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 350
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 348,
+        "routeLookupMs": 0,
+        "totalMs": 348
+      }
+    },
+    "traceId": "774b90a9-ea54-494f-9207-83cd60b33412"
+  },
+  "operationId": "exec-0000000000000efd",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

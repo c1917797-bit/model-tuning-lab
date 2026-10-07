@@ -1,0 +1,83 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json",
+          "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-token-native-v4-002/SOURCE_MANIFEST.json"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/sha256sum",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 2,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000ef5",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59  /opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\na1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59  /cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-token-native-v4-002/SOURCE_MANIFEST.json\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 348,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 348,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 348
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 348,
+        "routeLookupMs": 0,
+        "totalMs": 348
+      }
+    },
+    "traceId": "bc497ea6-092d-4390-aac6-99b7fb9ba19f"
+  },
+  "operationId": "exec-0000000000000ef5",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

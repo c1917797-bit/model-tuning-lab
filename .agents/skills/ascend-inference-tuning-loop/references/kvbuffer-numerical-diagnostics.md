@@ -109,3 +109,13 @@ dense performance, and final task tests under the unchanged experiment contract.
   before spending another device run. A corrected one-step reader is not a
   full-matrix or historical warm-transition PASS. Numerical limits stay fixed.
   See H8_B6_COMPARATOR_FAILURE_20261007.md.
+- Distinguish framework wrapper keywords from lower native binding keywords.
+  The pinned Ascend BaseDeviceAdaptor accepts slot_mapping but explicitly calls
+  _npu_reshape_and_cache with slot_indices. SparQ v4's actual no-device preflight
+  rejected its own incorrectly expected name, not the paper/native capability.
+  Bind both signatures and the exact source-proven mapping; preserve actual
+  dispatcher/signature/doc evidence before rejecting. Fix a new frozen adapter
+  observer with positive and negative source tests, not by deleting a gate or
+  unioning incompatible overloads. Same-image CPU software/source checks do not
+  replace the actual CPU ABI or later NPU numerical/model/performance gates.
+  See SPARQ_V4_CPU_ABI_FAILURE_20261007.md.

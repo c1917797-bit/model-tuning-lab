@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import os,json,pathlib,subprocess,sys,hashlib,shutil\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\nbase=root/\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4\"\nsys.path.insert(0,str(base));import host as h,receipt as c\nmanifest=base/\"SOURCE_MANIFEST.json\";expected=\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"\nassert c.sha(manifest)==expected\nsr,files=c.source_identity(base,manifest,expected,\"host\");assert len(files)==17 and len(files)+len(c.DEPENDENCIES)+len(c.MODEL_SOURCES)+1==23\noutput=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-token-native-v4-20261007-1910-001\");assert output.is_absolute() and output.parent.is_dir() and not output.exists()\nhw=subprocess.run([h.H.SMI,\"info\"],capture_output=True,text=True,timeout=15);assert hw.returncode==0\nfor n in (4,5,6,7):h.H.frozen().idle_one(hw.stdout,n)\nprotected=h.H.frozen().protected(hw.stdout)\nholders=h.H.device_fd_holders();assert not holders,holders\nmem={x.split(\":\")[0]:int(x.split()[1])*1024 for x in pathlib.Path(\"/proc/meminfo\").read_text().splitlines() if x.startswith((\"MemAvailable:\",\"SwapTotal:\",\"SwapFree:\"))}\nassert mem[\"MemAvailable\"]>=h.MEM+h.HOST_MEM+h.RESERVE and mem[\"SwapTotal\"]==mem[\"SwapFree\"],mem\nassert shutil.disk_usage(output.parent).free>=h.WORKSPACE+8*1024**3\ncpu=h.H.cpu_admission(h.H.cpu_view(os.getpid()),h.H.daemon_view())\nps=subprocess.run([h.H.PRLIMIT,\"--as=unlimited\",\"--\",h.DOCKER,\"ps\",\"--no-trunc\",\"--format\",\"{{.ID}} {{.Names}}\"],capture_output=True,text=True,timeout=15);assert ps.returncode==0\nprint(json.dumps({\"own_source_count\":len(files),\"total_source_count\":23,\"source_manifest\":sr,\"sources\":files,\"new_output_absent\":True,\"npu4_7_idle\":True,\"npu6_fd_holders\":holders,\"memory\":mem,\"cpu\":cpu,\"protected0_3\":protected,\"docker_ps\":ps.stdout,\"npu_smi\":hw.stdout,\"torch_imported\":\"torch\" in sys.modules}))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1330,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000ef7",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"own_source_count\": 17, \"total_source_count\": 23, \"source_manifest\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\", \"sha256\": \"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"}, \"sources\": {\"README.md\": \"8d50f73562169644bea56f826f7ebb1d723d4768e240f29c8b08dc31ecd57355\", \"READY.md\": \"54de93f54f2e8f18bddc1bf91e28906a13d8ceba9436647cc2c2cd9d7a4c0108\", \"consume_numeric.py\": \"4d139cf05351a6af7512b2a1a2b3010922770e2f0d2dc27fc870610a89f8b802\", \"host.py\": \"f8114a243f5c74ba92d17b1fa219c6798a2b0c738bb3aa7e29194b3545c0f25d\", \"model_bridge.py\": \"a85dd04893ad74feaaf1f2bf85e807e387b2957ce6db6a6034bf098bb951e81d\", \"numeric_gate.py\": \"bfccb5afe907a6475b8168e0706ba92321adeab21281060369f4039b29fc8be5\", \"original_operation_get_ma0e7f_not_found.json\": \"59d954ea2e39533ed91ca2390baa1e25702634f6edb9997072b0190c0d6d9363\", \"original_operation_get_ma0e85.json\": \"ec6ae5ebcec57d7226b97460ec182920b0817eb96a5da6afaf716af1c86a3eb6\", \"original_terminal.py\": \"ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1\", \"preflight.py\": \"78a62c66be330a4a9ddd196cdba8799afdae17f96b9a07aae777ff354e6b67cb\", \"receipt.py\": \"04d1aafad0c80da9d36bb14d04a0ca567dea9665ce6949b38f2c536afe14f467\", \"sitecustomize.py\": \"e8f641a7a5fd1e77e150cfecd0d4ce233236725c1908ad457c258496e0263aed\", \"sparq_token_v4/__init__.py\": \"c2f1c112852a028e489a70f2773e0533561babd72736226be6f2c70e4c4e58a7\", \"sparq_token_v4/core.py\": \"fc7068c8c48473c23137c273603fec3a13d52760d5dfc89d1ae37a5ba2c8717c\", \"sparq_token_v4/oracle.py\": \"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f\", \"sparq_token_v4/proof.py\": \"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c\", \"test_contract.py\": \"14e116b6721c070a1cff124dfc199c541dca3fc9c52164b20b4b3ff9e215990f\"}, \"new_output_absent\": true, \"npu4_7_idle\": true, \"npu6_fd_holders\": [], \"memory\": {\"MemAvailable\": 96530501632, \"SwapTotal\": 0, \"SwapFree\": 0}, \"cpu\": {\"host_cpu\": 0, \"guest_cpu\": 1, \"reserve_cpus\": [2, 3], \"host_cpu_budget\": 1, \"guest_cpu_budget\": 1, \"reserve_cpu_budget\": 2, \"common_finite_capacity\": null, \"future_external_guarantee\": false}, \"protected0_3\": [{\"physical\": 0, \"chip\": 0, \"pid\": 585850, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"4ab797aa4bdf20a5162e225af1132f82c5d2016050443b104e113dd92bb3d4da\"}, {\"physical\": 1, \"chip\": 0, \"pid\": 585851, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"c761267794c08eb089833aa4503a40206f8141c5484c98d2922411969c358eb6\"}, {\"physical\": 2, \"chip\": 0, \"pid\": 585852, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"27441ee7bcd76f177bb83d81630db5152f2a8a0129e1c66e0510425852fdadc3\"}, {\"physical\": 3, \"chip\": 0, \"pid\": 585853, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"84c8eea000a1436223d027d47ce7ba4f0676a0fd6f7167b75a2d874562f56d0f\"}], \"docker_ps\": \"f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b hypic_npu03_bindingfix_quality_no_cache_20261007_clean2\\nefc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6 cannbench_ds\\ne93f8e1ca42b64baf2bfa4ae59289f10dbaabc6069f70e7aa44e7956a9b0f54b agentgpu-910b4-qwen35-4b-v0\\n\", \"npu_smi\": \"+------------------------------------------------------------------------------------------------+\\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\\n+===========================+===============+====================================================+\\n| 0     910B4               | OK            | 152.7       53                0    / 0             |\\n| 0                         | 0000:C1:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 1     910B4               | OK            | 141.3       51                0    / 0             |\\n| 0                         | 0000:C2:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 2     910B4               | OK            | 144.5       52                0    / 0             |\\n| 0                         | 0000:81:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 3     910B4               | OK            | 143.7       53                0    / 0             |\\n| 0                         | 0000:82:00.0  | 54          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 4     910B4               | OK            | 94.7        45                0    / 0             |\\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\\n+===========================+===============+====================================================+\\n| 5     910B4               | OK            | 98.0        44                0    / 0             |\\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 6     910B4               | OK            | 95.4        44                0    / 0             |\\n| 0                         | 0000:41:00.0  | 0           0    / 0          2864 / 32768         |\\n+===========================+===============+====================================================+\\n| 7     910B4               | OK            | 87.1        45                0    / 0             |\\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\\n+===========================+===============+====================================================+\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\\n+===========================+===============+====================================================+\\n| 0       0                 | 585850        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 1       0                 | 585851        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 2       0                 | 585852        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 3       0                 | 585853        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 4                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 5                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 6                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 7                                                            |\\n+===========================+===============+====================================================+\\n\", \"torch_imported\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 683,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 683,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 683
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 682,
+        "routeLookupMs": 0,
+        "totalMs": 682
+      }
+    },
+    "traceId": "349b3fe8-a402-40bd-82bb-2cffccd1f32a"
+  },
+  "operationId": "exec-0000000000000ef7",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

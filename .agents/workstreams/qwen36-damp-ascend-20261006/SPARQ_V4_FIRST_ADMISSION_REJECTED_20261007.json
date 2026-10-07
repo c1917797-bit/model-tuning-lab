@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import os,json,pathlib,subprocess,sys,hashlib,shutil\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\nbase=root/\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4\"\nsys.path.insert(0,str(base));import host as h,receipt as c\nmanifest=base/\"SOURCE_MANIFEST.json\";expected=\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"\nassert c.sha(manifest)==expected\nsr,files=c.source_identity(base,manifest,expected,\"host\");assert len(files)==23\noutput=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-token-native-v4-20261007-1910-001\");assert output.is_absolute() and output.parent.is_dir() and not output.exists()\nhw=subprocess.run([h.H.SMI,\"info\"],capture_output=True,text=True,timeout=15);assert hw.returncode==0\nfor n in (4,5,6,7):h.H.idle_one(hw.stdout,n)\nprotected=h.H.protected(hw.stdout)\nholders=h.H.fd_holders((6,));assert not holders,holders\nmem={x.split(\":\")[0]:int(x.split()[1])*1024 for x in pathlib.Path(\"/proc/meminfo\").read_text().splitlines() if x.startswith((\"MemAvailable:\",\"SwapTotal:\",\"SwapFree:\"))}\nassert mem[\"MemAvailable\"]>=h.MEM+h.HOST_MEM+h.RESERVE and mem[\"SwapTotal\"]==mem[\"SwapFree\"],mem\nassert shutil.disk_usage(output.parent).free>=h.WORKSPACE+8*1024**3\ncpu=h.H.cpu_plan(h.H.h.cpu_view(os.getpid()),h.H.h.daemon_view())\nps=subprocess.run([h.H.h.PRLIMIT,\"--as=unlimited\",\"--\",h.DOCKER,\"ps\",\"--no-trunc\",\"--format\",\"{{.ID}} {{.Names}}\"],capture_output=True,text=True,timeout=15);assert ps.returncode==0\nprint(json.dumps({\"source_count\":len(files),\"source_manifest\":sr,\"sources\":files,\"new_output_absent\":True,\"npu4_7_idle\":True,\"npu6_fd_holders\":holders,\"memory\":mem,\"cpu\":cpu,\"protected0_3\":protected,\"docker_ps\":ps.stdout,\"npu_smi\":hw.stdout,\"torch_imported\":\"torch\" in sys.modules}))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 124,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000ef3",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 8, in <module>\nAssertionError\n",
+        "stdout": "",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 366,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 366,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 366
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 364,
+        "routeLookupMs": 0,
+        "totalMs": 364
+      }
+    },
+    "traceId": "63da2138-098a-4b91-818e-5fbd55d834a5"
+  },
+  "operationId": "exec-0000000000000ef3",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}

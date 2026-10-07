@@ -271,3 +271,41 @@ Authorized32GiB free HugeTLB release is complete, OVS and24GiB NUMA3 intact;
 do not release more. Fixed paper/portfolio deadlines remain unchanged.
 Git commits remain local; known HTTPS credential-helper publication blocker
 is retained, not bypassed. No main or force push.
+
+## Latest SparQ actual ABI failure — 2026-10-07 19:17Z
+
+MA0ef8 terminal exit1/49.658s before NPU creation: actual CPU-only ABI observer
+expected lower-native slot_mapping, but pinned BaseDeviceAdaptor translates
+wrapper slot_mapping into native slot_indices. This is a source-proven API
+observer/adapter defect, not a paper no-go. Actual CPU golden/NPU/matrix/model/
+E2E/tasks are pending; source48-test preparation is not native correctness.
+Read SPARQ_V4_CPU_ABI_FAILURE_20261007.md and whole original operations.
+
+MA0efd independently verifies exact CPU-only CID63d09431... stopped/retained,
+no device owner created,4–7 idle, protected0–3 unchanged and ordinary RAM
+96493445120bytes. No new release or external-stop action. Source-supported
+independentv5 parameter/observability repair is sparse owner's immediate
+priority; no unchanged v4 retry. H8 retained-raw CPU reanalysis packet is
+being finalized by recurrent owner; warm/full/model pending. W4 preparation
+continues in the third actual agent. Fixed deadlines and original gates unchanged.
+
+## Latest retained-raw CPU partial / memory readback — 2026-10-07 19:35Z
+
+MA0f05 terminal exit1: actual old raw reanalysis reports unchanged numeric and
+12x5 guards true, then fails explicit no-torch_npu-import predicate. Preserve
+parentfailed; no NPU rerun/fullmatrix/model/pairedE2E/task promotion. Read
+H8_B6_CPU_REANALYSIS_PARTIAL_20261007.md and whole original receipts. Independent
+MA0f14 consumes failed authority and proves sole CPU CID stopped/retained/Pid0/
+noOOM/noDevices. Historical H8 fullv2 warm507035 remains unresolved; source-bound
+1280-prelude->B6 diagnosis is being prepared, not yet admitted.
+
+SparQv5 independently delivered25files/26source and69actualstdlibtests; actual
+CPUABI/golden/NPU/service remain pending MAIN review+fresh admission. Its
+source-supported wrapper slot_mapping->native slot_indices correction does
+not change SparQ math or original numeric thresholds. W4 preparation continues.
+
+Memory request is complete: exact32GiB already released, latest ordinary
+MemAvailable100953868KiB. NUMA1/2/3 pools unchanged, OVS samePID27118/start11471
+and24GiB actual hugepage backing intact. No further release or service stop.
+Fixed cutoffs unchanged; goal active, no accepted non-HYPIC E2E+task method.
+Git is local-only under the known credential-helper publication blocker.

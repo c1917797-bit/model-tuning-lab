@@ -1,0 +1,82 @@
+{
+  "schema": "MAIN.sparq-v4-launch/v1",
+  "input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/python3",
+    "args": [
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/numeric_gate.py",
+      "--host-execute",
+      "--source-manifest",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-token-native-v4-20261007-1910-001"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout": 5500,
+    "maxOutputBytes": 50000,
+    "sync": false,
+    "idempotencyKey": "main-sparq-token-native-v4-20261007-1915-001"
+  },
+  "original_ack": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-sparq-token-native-v4-20261007-1915-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000ef8",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000000ef8",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 345,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 345,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1722,
+        "totalMs": 2067
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 344,
+        "routeLookupMs": 0,
+        "totalMs": 344
+      }
+    },
+    "traceId": "c3e03710-c3a1-4f67-8e83-ab8baa8473d0"
+  },
+  "status": "launched_terminal_pending",
+  "note": "Actual CPU-only scalar/ABI prerequisite precedes new physical6 owner; no NPU or matrix PASS yet. First extra MAIN readonly assertion confused17 own with23 closure; original rejection preserved, actual manifests match."
+}

@@ -1,0 +1,83 @@
+{
+  "input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=268435456:unlimited",
+      "--cpu=600:600",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-cpu-reanalysis-v1/host.py",
+      "--execute",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-cpu-reanalysis-v1/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "121168e9f88cbcbc4fccc551c1c8f9a194637b427c02f6fb991fe7d13010f1c9",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-cpu-reanalysis-20261007-001"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout": 650,
+    "maxOutputBytes": 16000,
+    "sync": false,
+    "idempotencyKey": "main-h8-b6-cpu-reanalysis-20261007-1925-001"
+  },
+  "originalAck": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-h8-b6-cpu-reanalysis-20261007-1925-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000f05",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000000f05",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 344,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 344,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1457,
+        "totalMs": 1802
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 343,
+        "routeLookupMs": 0,
+        "totalMs": 343
+      }
+    },
+    "traceId": "449b8995-1a48-480e-84b2-6f3f199bc290"
+  }
+}

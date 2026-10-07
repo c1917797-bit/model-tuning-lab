@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import os,json,pathlib,importlib.util,sys,shutil,subprocess\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nbase=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-cpu-reanalysis-v1\")\nspec=importlib.util.spec_from_file_location(\"_MAIN_cpu_reanalysis_admission\",base/\"host.py\")\nh=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)\nassert h.c.sha(base/\"SOURCE_MANIFEST.json\")==\"121168e9f88cbcbc4fccc551c1c8f9a194637b427c02f6fb991fe7d13010f1c9\"\nassert h.c.sha(base/\"MAIN_EXECUTE.json\")==\"e474cbb9cd86adc2296be23359702377dae13d49433397d46e9ef1bbef61f0ea\"\ne=json.loads((base/\"MAIN_EXECUTE.json\").read_bytes());pos=e[\"args\"].index(str(base/\"host.py\"));a=h.parser().parse_args(e[\"args\"][pos+1:])\nassert a.execute and not a.output_dir.exists() and a.output_dir.parent.is_dir()\nsr,m,s=h.source_inputs(a);assert len(s)==133\nfor key in (\"software_receipt\",\"source_read_receipt\"):h.c.read_ref(e[key])\nmem={x.split(\":\")[0]:int(x.split()[1])*1024 for x in pathlib.Path(\"/proc/meminfo\").read_text().splitlines() if x.startswith((\"MemAvailable:\",\"SwapTotal:\",\"SwapFree:\"))}\nassert mem[\"MemAvailable\"]>=h.D.MEM+h.D.HOST_MEM+h.D.RESERVE and mem[\"SwapTotal\"]==mem[\"SwapFree\"],mem\nassert shutil.disk_usage(a.output_dir.parent).free>=h.D.WORKSPACE+h.D.RESERVE\ncpu=h.D.cpu_plan(h.D.h.cpu_view(os.getpid()),h.D.h.daemon_view())\nq=subprocess.run([h.D.SMI,\"info\"],capture_output=True,text=True,timeout=15);assert q.returncode==0\nprotected=h.D.F.protected(q.stdout)\nprior=json.loads(h.c.read_ref(h.c.INPUT_REFS[\"result\"]))\nassert h.D.h.protected_map(protected)==prior[\"protected0_3\"]\nassert h.D.device_map(\"cpu\")=={} and h.environment()[\"TORCH_DEVICE_BACKEND_AUTOLOAD\"]==\"0\"\nprint(json.dumps({\"source_manifest\":sr,\"source_count\":len(s),\"new_output_absent\":True,\"memory\":mem,\"CPU\":cpu,\"no_device_map\":True,\"protected0_3_unchanged\":True,\"protected_PIDs\":[p[\"pid\"] for p in protected],\"original_failed_diagnostic_preserved\":True,\"npu_dispatch\":False,\"Torch_imported\":\"torch\" in sys.modules}))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1765,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000f03",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"source_manifest\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-cpu-reanalysis-v1/SOURCE_MANIFEST.json\", \"sha256\": \"121168e9f88cbcbc4fccc551c1c8f9a194637b427c02f6fb991fe7d13010f1c9\"}, \"source_count\": 133, \"new_output_absent\": true, \"memory\": {\"MemAvailable\": 96442331136, \"SwapTotal\": 0, \"SwapFree\": 0}, \"CPU\": {\"host_cpu\": 0, \"guest_cpus\": {\"cpu\": 1}, \"reserve_cpus\": [2, 3], \"total_budget\": 4, \"external_future_guarantee\": false}, \"no_device_map\": true, \"protected0_3_unchanged\": true, \"protected_PIDs\": [585850, 585851, 585852, 585853], \"original_failed_diagnostic_preserved\": true, \"npu_dispatch\": false, \"Torch_imported\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 344,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 344,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 344
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 343,
+        "routeLookupMs": 0,
+        "totalMs": 343
+      }
+    },
+    "traceId": "55df928e-70e8-4aef-beb6-3bbaf1eb55f2"
+  },
+  "operationId": "exec-0000000000000f03",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}
