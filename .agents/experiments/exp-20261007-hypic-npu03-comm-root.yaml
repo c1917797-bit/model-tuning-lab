@@ -1,6 +1,6 @@
 schema: ascend-inference-diagnostic/v1
 id: exp-20261007-hypic-npu03-comm-root
-status: planned
+status: inconclusive
 owner_branch: work/hypic-npu03-comm-root-20261007
 predecessor: hypic-qwen36-e2e-2048-20261006
 objective: Explain the persistent approximately 339 ms/token Decode baseline gap on physical NPU0-3 without using NPU4-7.
@@ -15,6 +15,22 @@ hypotheses:
   - H1: The same TP4 AIV AllReduce is intrinsically slow on physical NPU0-3, independent of the vLLM graph.
   - H2: The collective is fast standalone and the 22 ms service trace reflects graph, synchronization, or workload context.
   - H3: AIV expansion mode is the controlled factor; an otherwise identical default-mode run changes latency.
+measured_20261007:
+  trace:
+    - In steady baseline Decode rank 0, approximately 16 small 40 KB AIV AllReduce tasks per step last approximately 22 ms while most other collectives last approximately 10 us.
+    - Rank 0, 1, and 3 slow-call starts differ by approximately 7-14 us and have nearly equal approximately 22 ms durations.
+    - Rank 2 raw profiling DB reveals the matching 40 KB collective starts approximately 22.67 ms later and itself lasts approximately 0.009 ms in a sampled step.
+    - During that sampled delay rank 2 stream 45 repeatedly executes MEM_WAIT_VALUE while stream 46 waits; this is a graph or cross-stream synchronization symptom, not a proven hardware-link failure.
+  standalone_aiv:
+    operation_id: exec-0000000000000892
+    result: TP4 40 KB AllReduce median 0.260-0.262 ms across four ranks; 160 KB median 0.246-0.247 ms.
+    cleanup: docker --rm completed and no owned NPU process remains.
+  graph_replay_aiv:
+    operation_id: exec-00000000000008b8
+    result: Graph replay with sixteen 40 KB AllReduce calls median 0.216-0.218 ms for the whole replay across four ranks.
+    cleanup: docker --rm completed and no owned NPU process remains.
+  decision: H1 is not supported at tested sizes and H2 is favored. Neither standalone test reproduces the full-service stall. The exact source-level synchronization trigger is still unproven.
+  next_test: Fresh full-service NPU0-3 control with graph mode or rank mapping as the sole variable, identical short Decode workload and four-rank timeline; no claim of a fix until service latency changes.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
