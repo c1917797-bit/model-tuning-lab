@@ -23,6 +23,7 @@ measured_20261007:
     - During that sampled delay rank 2 stream 45 repeatedly executes MEM_WAIT_VALUE while stream 46 waits; this is a graph or cross-stream synchronization symptom, not a proven hardware-link failure.
     - The earliest observed divergence precedes attention and collective entry: after reshape_and_cache, ranks 0/1/3 spend about 1-2 us in MEM_WAIT_VALUE, whereas rank 2 polls it about 7665 times over 22.4 ms; rank 2's subsequent FusedInferAttentionScore takes about 0.216 ms and its AllReduce about 0.009 ms.
     - The notification producer/condition for rank 2's wait is not identified; do not infer a faulty NPU2 or a source-level fix from temporal ordering alone.
+    - Follow-up raw SQLite correlation identifies rank 2 stream 5 MEM_WRITE_VALUE at about 22.414 ms after the sampled rank-0 collective start, immediately before stream 45's MEM_WAIT_VALUE releases. CANN_API maps its connection to host-thread aclrtValueWrite starting at about 22.152 ms. This identifies the release action, but not why the host submitted it late.
   standalone_aiv:
     operation_id: exec-0000000000000892
     result: TP4 40 KB AllReduce median 0.260-0.262 ms across four ranks; 160 KB median 0.246-0.247 ms.
@@ -32,7 +33,7 @@ measured_20261007:
     result: Graph replay with sixteen 40 KB AllReduce calls median 0.216-0.218 ms for the whole replay across four ranks.
     cleanup: docker --rm completed and no owned NPU process remains.
   decision: H1 is not supported at tested sizes and H2 is favored. Neither standalone test reproduces the full-service stall. The first observed divergence is rank 2's pre-attention MEM_WAIT_VALUE; its notification producer and source-level trigger remain unproven.
-  next_test: Identify the pre-attention MEM_WAIT_VALUE notification, then use fresh full-service NPU0-3 control with graph mode or rank mapping as the sole variable, identical short Decode workload and four-rank timeline; no claim of a fix until the wait and service latency change together.
+  next_test: Run the frozen no-cache full service twice on physical NPU0-3 with --enforce-eager as the sole serving variable. Use the same 2 warmup requests and 4-request/128-output diagnostic stimulus, capture all four raw ranks, export ranks 0 and 2, compare steady Decode wait and request TPOT. This is a diagnostic comparison, not formal HYPIC performance evidence. Abort on occupied NPU0-3, occupied port 8223, source/image/device drift, missing correctness, or owned-service cleanup failure.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
