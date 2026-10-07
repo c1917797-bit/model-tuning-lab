@@ -135,6 +135,20 @@ Report every repetition, mean, and dispersion. Compare treatment quality deltas
 with measured baseline repeat variability or a predeclared task-specific
 threshold.
 
+When explaining a prior success versus a fresh run on a different physical
+device lane or topology, report **both** the within-lane absolute treatment
+effect (baseline minus treatment in ms/s) and its relative percentage. A
+common additive slowdown in both arms can leave the absolute technique effect
+nearly unchanged while shrinking percentage latency and reciprocal-throughput
+gains. Decompose baseline drift, treatment drift, and the difference of their
+within-lane effects before calling the technique itself a regression. Keep
+these three decisions separate: mechanism/effect reproduction, the frozen
+same-lane service-performance gate, and full adoption including paired quality.
+Retrospective cross-lane decomposition is diagnostic, not a replacement for a
+preregistered gate or a license to pool baselines. If equivalence of effect
+size matters, preregister its tolerance and repeat contract in the successor
+experiment rather than declaring retrospective equivalence proven.
+
 Use these claim levels:
 
 - `regression-observed`: treatment crosses the rejection boundary;

@@ -1,5 +1,23 @@
 # Maintainer Handoff
 
+## HYPIC cross-lane attribution correction — 2026-10-07
+
+The 2026-10-06 NPU0–3 experiment **did measure** three no-cache and three
+HYPIC fixed-output performance runs. A read-only retrospective found nearly
+the same within-lane absolute HYPIC effect as the successful 2026-09-06
+NPU4–7 run: mean TTFT savings 17.83 versus 17.61 seconds, weighted TPOT
+savings 13.69 versus 14.15 ms/token, and fixed-batch duration savings 91.02
+versus 88.17 seconds. The NPU0–3 no-cache Decode baseline was roughly
+412–413 ms/token on both 2026-09-05 and 2026-10-06, versus 74.51 ms/token
+on NPU4–7. A common slowdown reduces relative-percentage and
+reciprocal-throughput gains without erasing the absolute technique effect.
+The frozen same-lane service gate still failed and paired 2048-token quality
+is still incomplete; no full adoption or statistical equivalence is claimed.
+See the branch-local report's attribution correction and the read-only
+`analyze_cross_lane_effect.py`. The underlying common slowdown remains
+unattributed; do not label it HCCL, NUMA, or card failure without further
+controlled evidence.
+
 ## Fresh HYPIC 2048-token fail-fast result — 2026-10-06
 
 The branch-local `hypic-qwen36-e2e-2048-20261006` workstream on

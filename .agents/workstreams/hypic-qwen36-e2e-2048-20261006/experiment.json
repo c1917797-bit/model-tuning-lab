@@ -59,6 +59,22 @@
     "duration_improvement_percent": 5.856731572629741,
     "decision": "rejected as a full-service candidate; bounded C1/C2 mechanism and TTFT direction reproduced"
   },
+  "retrospective_cross_lane_attribution": {
+    "as_of_date": "2026-10-07",
+    "status": "descriptive; not a preregistered acceptance gate",
+    "read_only_recompute": ".agents/workstreams/hypic-qwen36-e2e-2048-20261006/analyze_cross_lane_effect.py",
+    "successful_npu4_7_absolute_savings": {
+      "ttft_mean_ms": 17609.822980178677,
+      "tpot_weighted_ms": 14.149774030457806,
+      "benchmark_duration_s": 88.1670042964785
+    },
+    "current_npu0_3_absolute_savings": {
+      "ttft_mean_ms": 17830.564981915086,
+      "tpot_weighted_ms": 13.685597403631505,
+      "benchmark_duration_s": 91.02085109998006
+    },
+    "interpretation": "The observed absolute technique effect is similar across lanes; the current same-lane relative service gate still fails. Do not infer full adoption, paired 2048 quality, statistical equivalence, or the physical root of the common Decode slowdown."
+  },
   "optimization_iteration": {
     "path": "/cache/cch/hypic-qwen36-e2e-2048-20261006/optimization-iteration.json",
     "status": "rejected",

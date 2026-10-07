@@ -1,5 +1,23 @@
 # HYPIC Qwen3.6 TP4 2048-token E2E validation
 
+## Cross-lane attribution correction — 2026-10-07
+
+The terminal **service gate remains rejected** and paired 2048 quality remains
+incomplete. A read-only retrospective of the raw three-run pairs shows that
+the HYPIC absolute benefit was nearly unchanged across the successful NPU4–7
+lane and this NPU0–3 lane: TTFT mean saved 17.61 versus 17.83 seconds,
+weighted TPOT saved 14.15 versus 13.69 ms/token, and the fixed 40-request
+batch saved 88.17 versus 91.02 seconds. NPU0–3 had a stable roughly
+412–413 ms/token no-cache Decode baseline on both 2026-09-05 and 2026-10-06;
+NPU4–7 measured 74.51 ms/token on 2026-09-06. The common slowdown dilutes
+percentage and reciprocal-throughput gains; it does not erase the within-lane
+absolute treatment effect. Do not interpret `paper_algorithm_accepted=false`
+as evidence that HYPIC did not act. Do not claim full paper adoption, paired
+quality, statistical equivalence, or a proven HCCL/hardware root cause.
+See the top of `REPORT.md` and run the read-only
+`analyze_cross_lane_effect.py` command recorded there. Neither the frozen
+performance gate nor the prior audit artifact was overwritten.
+
 ## Terminal fail-fast handoff — 2026-10-06 22:06 UTC
 
 This workstream is **rejected**, not adopted. The paper-only predeclared

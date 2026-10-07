@@ -5,6 +5,45 @@
 > 当前证据来自本次实验；历史 HYPIC 标签 paper-result/hypic-qwen36-tp4-adopted 仅作历史参考，不进入本次结果列。
 > 本轮只支持“方向及部分组件机制复现”的讨论，不支持“论文完整性能复现”或“可采用”结论。
 
+## 追溯归因修正（2026-10-07；不改冻结门禁）
+
+本轮确实在物理 NPU0–3 测了无缓存性能基线三轮，也测了同卡同协议
+HYPIC 三轮；不存在“漏测 0–3 性能基线”。但原终态报告把服务百分比
+门禁的拒绝放在最显眼的位置，没有量化技术本身的同卡绝对效应，
+容易被误读为 HYPIC 的作用没有复现。以下从六轮原始 JSON 重新计算，
+是**事后诊断**，不追改预注册 performance-gate.json 或 2048 精度状态。
+
+| 三轮均值；同卡无缓存减 HYPIC | 2026-09-06 成功：NPU4–7 | 本轮：NPU0–3 |
+|---|---:|---:|
+| TTFT mean 绝对节省 | 17,609.82 ms | 17,830.56 ms |
+| TPOT weighted 绝对节省 | 14.15 ms/token | 13.69 ms/token |
+| 40 请求批耗时绝对节省 | 88.17 s | 91.02 s |
+| 无缓存 TPOT weighted | 74.51 ms/token | 413.10 ms/token |
+| TPOT weighted 相对改善 | 18.99% | 3.31% |
+| 无缓存输出吞吐 | 123.77 tok/s | 29.48 tok/s |
+| HYPIC 输出吞吐 | 168.40 tok/s | 31.54 tok/s |
+
+9 月 5 日另一次 NPU0–3 的同形状无缓存三轮均值为 TPOT weighted
+411.91 ms/token、输出吞吐 29.54 tok/s；和本轮的 413.10/29.48
+高度接近。该早期服务的 max-num-seqs 为 32，本轮为 16，故它只用于
+诊断稳定的慢底座，不并入任一正式 A/B 分母。两次正式 A/B 的镜像 digest、
+HYPIC 源码 commit、压测脚本 SHA256、模型路径和性能流量形状一致；
+物理卡组、CPU 绑定和时间不同，不能直接池化原始性能。
+
+技术归因应改述为：**在已测延迟和批耗时指标上，HYPIC 的同卡绝对
+效应在两组卡上近似重现；本轮没有通过预注册的相对服务门槛。**
+公共慢项使百分比缩小，并因吞吐是固定 40,960 输出 token 除以批耗时，
+使吞吐百分比也缩小。这不是“未测基线”，也不是 HYPIC 效应消失。
+尚未证实公共慢项的底层来源；不能仅凭此表指认 HCCL、NUMA 或坏卡。
+三轮样本不足以事后证明统计等效，未来若以“绝对效应等效”为正式
+成功标准，必须预注册容差与重复次数。2048-token 配对质量仍不完整，
+所以完整论文采纳结论仍为否。独立负向审计中的
+`paper_algorithm_accepted=false` 仅指**完整采纳未通过**，不等于
+“技术作用未发生”。
+
+可复核命令（只读）：
+`python3 .agents/workstreams/hypic-qwen36-e2e-2048-20261006/analyze_cross_lane_effect.py --successful-root /cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906 --current-root /cache/cch/hypic-qwen36-e2e-2048-20261006 --earlier-baseline-root /cache/cch/hypic-qwen36-historical-reproduction-20260905`。
+
 ## Step 0. 环境准备
 
 - 目标主机：chicaihong01，物理 Ascend 910B4 NPU 0–3，TP4；NPU 4–7 为受保护邻居资源。
