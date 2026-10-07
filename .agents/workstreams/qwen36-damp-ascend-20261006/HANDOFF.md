@@ -1,5 +1,32 @@
 # DAMP Ascend — current workstream
 
+## Current pre-device source checkpoint — 2026-10-07 09:45Z
+
+Read the current-source-binding section of KVBUFFER_NATIVE_ORDER_NO_DEVICE_20261007.md.
+MA099c original cached whitespace failure is preserved, not a committed stage.
+NEW oracle EOF-only fix/current manifest508ff.../replaybf83... leaves all old49
+and seven compiled sources unchanged. Reuse MA0993 real build77b4.../ff4c...;
+MA09c0 actual refreshed Meta fb765... and MA09c1 software31/default-OFF pass.
+NEW source-bound host_run.py only prepares physical5 saved-step admission;
+no new numerical/graph/service/E2E/task PASS. Source/Git stage must be validated.
+Ordinary RAM~80GiB; own no-device worker stopped; HugeTLB/protected0–3 untouched.
+KV cutoffOct8 08:29:54Z and portfolioOct9 11:17:31Z remain fixed.
+
+## Current native-order checkpoint — 2026-10-07 09:29Z
+
+Read KVBUFFER_NATIVE_ORDER_NO_DEVICE_20261007.md first. MAIN applied NEW
+native_order_v2+split_gate_v2 without changing old49/bridge60/raw failures.
+MA0993 actual no-device build/export and MA0997 actual load/schema/Meta passed;
+owned no-device container stopped/Pid0/noExec/noOOM. No new numerical PASS.
+NEW saved-step diagnostic landed/defaultOFF; old production must byte-reproduce
+the retained B1 failure before any new candidate call. Original gates unchanged.
+Ordinary RAM recovered to~80GiB; the prior outside0–3 job is no longer running.
+Who stopped it was not checked. MAIN did not resize HugeTLB or stop that job.
+The earlier HugeTLB1892GiB pool-free observation is not ordinary freeRAM.
+Next fresh physical5/source/canary admission and one saved-step NPU diagnostic.
+KV cutoffOct8 08:29:54Z/portfolioOct9 11:17:31Z/fullmodel72GiB unchanged.
+No accepted non-HYPIC result; DAMP37/64 time-gated inconclusive remains closed.
+
 ## Current terminal checkpoint — 2026-10-07 08:52Z
 
 Read KVBUFFER_FIRST_FAILURES_AND_DAMP_CLOSEOUT_20261007.md before older live
