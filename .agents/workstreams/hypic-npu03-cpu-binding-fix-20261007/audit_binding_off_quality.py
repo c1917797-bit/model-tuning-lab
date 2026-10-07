@@ -46,6 +46,13 @@ def frozen_evaluator():
     return module
 
 
+def expected_prompt_hash(dataset: str) -> str:
+    evaluator = frozen_evaluator()
+    template = (evaluator.LONGBENCH_PROMPT if dataset == "longbenchv2"
+                else evaluator.GSM8K_PROMPT)
+    return hashlib.sha256(template.encode("utf-8")).hexdigest()
+
+
 def samples_for(dataset: str) -> list[dict]:
     path = DATASETS[dataset][0]
     if dataset == "longbenchv2":
@@ -116,6 +123,8 @@ def expected_reference(dataset: str, sample: dict) -> str:
 def audit_unit(arm: str, dataset: str, repeat: int, samples: list[dict],
                scorer) -> tuple[dict, list[dict]]:
     summary = validate_unit(arm, dataset, repeat)
+    if summary.get("prompt_template_sha256") != expected_prompt_hash(dataset):
+        raise RuntimeError(f"{arm}/{dataset}.run{repeat}: frozen prompt template hash mismatch")
     stem = f"{dataset}.run{repeat}"
     directory = QROOT / "quality" / arm
     details_path = directory / f"{stem}.jsonl"
@@ -136,10 +145,15 @@ def audit_unit(arm: str, dataset: str, repeat: int, samples: list[dict],
     for row, sample in zip(rows, samples):
         reference = expected_reference(dataset, sample)
         prediction, rescored = scorer(dataset, row["response_text"], reference)
+        usage = row["usage"]
         if (row.get("reference") != reference or row.get("sample_id") != sample.get("_id")
                 or row.get("prediction") != prediction or row.get("correct") is not rescored
                 or row.get("difficulty") != sample.get("difficulty")
                 or row.get("length") != sample.get("length")
+                or usage.get("total_tokens") != usage["prompt_tokens"] + usage["completion_tokens"]
+                or row.get("finish_reason") not in {"stop", "length"}
+                or (row.get("finish_reason") == "length"
+                    and usage["completion_tokens"] != 2048)
                 or row.get("response_sha256") != hashlib.sha256(
                     row["response_text"].encode("utf-8")).hexdigest()):
             raise RuntimeError(f"{arm}/{stem}: sample/scorer mismatch at index {row['index']}")
@@ -152,6 +166,8 @@ def audit_unit(arm: str, dataset: str, repeat: int, samples: list[dict],
     if (summary["correct"] != correct
             or summary["completion_tokens"] != completion_tokens
             or summary["finish_reasons"] != finish
+            or summary.get("unique_response_sha256") != len({
+                row["response_sha256"] for row in rows})
             or not math.isclose(summary["accuracy_pct"], 100 * correct / len(samples),
                                 abs_tol=1e-9, rel_tol=1e-9)):
         raise RuntimeError(f"{arm}/{stem}: summary arithmetic mismatch")
@@ -202,6 +218,15 @@ def main() -> int:
                            f"{dataset}.run{repeat}.receipt.json").read_text())[
                                "container_id"] != service[arm]["container_id"]:
                 raise RuntimeError(f"{arm}/{dataset}.run{repeat}: wrong service container")
+    for dataset in DATASETS:
+        frozen_prompt_tokens = [row["usage"]["prompt_tokens"] for row in
+                                raw["no-cache"][dataset][1]]
+        for arm in ARMS:
+            for repeat in (1, 2, 3):
+                if ([row["usage"]["prompt_tokens"] for row in raw[arm][dataset][repeat]]
+                        != frozen_prompt_tokens):
+                    raise RuntimeError(
+                        f"{arm}/{dataset}.run{repeat}: prompt-token identity changed across repeats")
     pairwise = {}
     for dataset in DATASETS:
         pairwise[dataset] = []
@@ -246,6 +271,9 @@ def main() -> int:
     report = {
         "schema": "hypic-bindingoff-quality-independent-audit/v1",
         "all_twelve_units_valid": True, "paired_input_identity_valid": True,
+        "prompt_token_identity_across_repeats_valid": True,
+        "prompt_template_sha256": {
+            dataset: expected_prompt_hash(dataset) for dataset in DATASETS},
         "frozen_fingerprint": fingerprint, "only_arm_variable": arm_variable,
         "service": service,
         "per_unit": units, "pairwise": pairwise, "deltas": deltas,
