@@ -65,6 +65,24 @@ measured_20261007:
     abort: Occupied NPU0-3 or port 8223, source/image/device drift, failed 4/4 exact-output guard, foreign process, or owned-container cleanup failure.
     artifacts: /cache/cch/hypic-npu03-comm-root-20261007/cpuset96-175
     safety: Only physical NPU0-3 mapped. No host cpuset, driver, firmware, clock, HCCS, existing container, or NPU4-7 change.
+  binding_off_probe_plan:
+    evidence: Historical NPU4-7 cpuset 0-95 logs show all four ranks skipped CPU binding due NUMA conflict, while current NPU0-3 cpuset 112-191 logs show binding succeeded with overlapping per-rank CPU pools. Pinned cpu_binding.py extend_numa can add an adjacent NUMA pool; grouping deconflicts identical lists only, not partially overlapping lists.
+    hypothesis: Successful topo_affinity CPU binding, including overlapping main/ACL/release core assignments, causes the 0-3 rank skew and Decode floor.
+    primary_variable: Add only --additional-config '{"enable_cpu_binding":false}' to the pinned graph-on service command. Retain cpuset 112-191, image/source/model/TP4/physical 0-3 and the exact short profile stimulus.
+    diagnostic_metric: Correct 4/4 fixed 128 output requests; weighted TPOT versus 499.0045 ms/token graph-on control; matched rank-0/2 FIA task-update intervals, aclrtValueWrite cadence, and collective wait.
+    root_support_gate: Binding-off activation proven in all four worker logs; rank-2 median task-update falls below 6 ms and TPOT falls at least 20 percent, with no new critical rank.
+    disproof: Binding-off verified yet rank-2 task-update/wait and TPOT remain slow; do not infer hardware fault from rejection.
+    artifacts: /cache/cch/hypic-npu03-comm-root-20261007/binding-off
+    abort: Occupied NPU0-3 or port 8223, source/image/device drift, invalid output, any foreign process, or owned cleanup failure.
+    safety: Physical NPU0-3 only. No system CPU, driver, firmware, clock, HCCS, existing container, or NPU4-7 change.
+  cpuset_probe_result:
+    artifact_root: /cache/cch/hypic-npu03-comm-root-20261007/cpuset96-175
+    validity: 4/4 requests completed with exactly 128 output tokens and zero failures; full profile manifest is conservative/incomplete because rank-0 raw exceeds the 1.5 GB in-service parser bound.
+    service: Profiled weighted TPOT 515.5523 ms/token versus 499.0045 ms/token control, a 3.32 percent regression. Throughput 5.7405 versus 6.2670 tokens/s.
+    rank2_fia_update: Trailing-30-second matched Begin/End median 0.2094 ms over 1184 pairs, none over 10 ms; control median 12.0890 ms over 1215 pairs, 1206 over 10 ms.
+    binding_plan: Rank 2 main 98-133, ACL 134, release 135, no longer overlapping rank-0 main 146-157; rank 0/1/3 plans also changed and may now be limiting.
+    classification: Cpuset swap rejected as service optimization but supports CPU-placement involvement in rank-2 symptom. Overall source-level root still inconclusive pending direct binding-off control and new critical-rank attribution.
+    cleanup: Exact named diagnostic container removed; NPU0-3 and port 8223 released; NPU4-7 workload not modified.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
