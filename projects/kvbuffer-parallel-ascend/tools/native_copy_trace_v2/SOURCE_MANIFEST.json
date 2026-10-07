@@ -1,0 +1,21 @@
+{
+  "schema": "kvbp.native-recurrent-copy-trace-manifest/v2",
+  "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "platform_header_sha256": "ef3feae278fd9da3da76dda85f5277b847f302122b728889e6c6a438bef3f271",
+  "files": {
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_kernel/recurrent_gated_delta_rule_copy_trace.h": "f46eb778f52f2f15a15203e5a607c77fe8b4aecb0407d4b582ed5ad3b245e1a2",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_kernel/native_trace_tiling_data.h": "ac03cf10dc495a9bf1a58fa2d0473b966a984956875bb53d771a3bc32dff90e5",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_extension/native_tiling.h": "31a657c06469ae3047d891dffeaa17087a6281d3a63611f3a230562ab13a87fd",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_kernel/qwen36_native_recurrent_copy_trace_v2_kernel.asc": "cce51db94891c459bfaf1bc1a681d71765ff4dcbea11971dc9c60d3f74a2b53f",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/CMakeLists.txt": "a88e0739f8db7ba906803ceb1837a958afb055e2878f7c986a7a503ccf7434a0",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_extension/ops.h": "67302c08e9f6b05f160451cc25881154cee92e8b5a938736cb17fd9e3ae151f4",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_extension/qwen36_native_recurrent_copy_trace_v2_torch.cpp": "5e8994d228fdb92499168a7ede56ba7a1ceb80eed0405376f4dfdec5f4f3ea71",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/op_extension/register.cpp": "60029a6c67beb324448094df7928886759b64ee4c1bb21540a71c19019d25014",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/SOURCE_TRANSFORMS.json": "9f13723dc4fb214164b6279e3fd002c9285f0c51cb32d01b0d81e000108fd35f",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/README.md": "a1cc53d9357e9214c423f952ab637c6ca318d2a9a6f580e114873a8a8cb2f513",
+    "projects/kvbuffer-parallel-ascend/operator/native_copy_trace_v2/LICENSE.cann": "cb282ac2b66d7d6734c3fb354db792b28cf23ab29fbc16d5cfd8bd542bedeb1e",
+    "projects/kvbuffer-parallel-ascend/tools/native_copy_trace_v2/audit_sources.py": "3a77678eecdf19f241c009883a8b8350ce20f27aaf019a8c6ea571b647464c46",
+    "projects/kvbuffer-parallel-ascend/tools/native_copy_trace_v2/meta_probe.py": "ec026d42225ffc1f24cde74b689fecf97bdd0bf554fa5645168620169eed1f76",
+    "projects/kvbuffer-parallel-ascend/tools/native_copy_trace_v2/build_no_device.py": "75c39c7ddfbad6f7343fc36b2dbb34651e6880c56e5f3bfca04399aae9be9f64"
+  }
+}
