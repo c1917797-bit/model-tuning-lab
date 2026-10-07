@@ -180,3 +180,13 @@ hypic_three_run_decision_20261007:
   independent_audit_sha256: de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1
   quality_gate: The complete matched 41984-context, 2048-token natural-EOS LongBench-v2/GSM8K paired quality campaign has not yet run.
   classification: partial-component pending paired quality; do not promote to main or production yet.
+quality_campaign_20261007:
+  operation_id: exec-0000000000000c6d
+  protocol: Same binding-off repair in no-cache and HYPIC-only arms, each with three complete LongBench-v2 and GSM8K runs, 41984 context, 2048 maximum natural-EOS output, c32, seed 0, thinking off.
+  current_stage: no-cache GSM8K run1 in progress; 1 of 12 quality units complete, no paired quality decision.
+  no_cache_longbenchv2_run1:
+    validity: Independently audited 127/127 rows, zero failures, exact indexes/sample references/response hashes, scorer and summary arithmetic.
+    result: 76/127 correct, 59.84251968503937 percent; 15 outputs reached the 2048-token length limit; unit duration 1431.5986 s.
+    summary_sha256: 13f2e115d02fd65453e8e2ed7a96a488c8772301fd624ba2d40d92de69825032
+    details_sha256: aef4967608e97f11515ddc45ed543d3ca70eb591d5ab4d6216b59a2f0be99391
+  decision: pending; this is one unpaired baseline repetition, not the quality gate.
