@@ -47,7 +47,7 @@ Actual MA07ec readonly failure audit:
  original_error=ValueError('single bounded phase timeout; no automatic retry').
 Failure is NOT a paper-wide no-go. Correct terminal files are under launch/,
 not the run root. Reports kept running/partial; no aggregate PASS.
-Actual final case status gives9/9/10/9 complete cases on4/5/6/7 (39/64).
+Actual final case status gives9/9/10/9 complete cases on4/5/6/7 (37/64).
 Failure-time and after-stop card6 report hashes differ; preserve both, don't
 assert they are the same checkpoint or silently replace failure-time bytes.
 

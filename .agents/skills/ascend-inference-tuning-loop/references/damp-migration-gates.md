@@ -1,5 +1,20 @@
 # Packed recurrent-state migration: DAMP lessons
 
+## Machine-derived completion and model-entry repair — 2026-10-07 07:27Z
+
+MAIN MA083c actually evaluates valid_case over the retained reports:9+9+10+9
+=37/64 complete,27 missing. The earlier39 claim was arithmetic error, not new
+experimental evidence; correct current summaries without rewriting old records.
+Generate totals from the complete predicate, not manual sums or partial rows.
+
+NEW fixed_admission_capture_v2 repairs nativeOFF attribute access, audits
+actual host-job cleanup without inventing RPC terminal, and records owned
+kernel cgroup peak before/through/after model execution. MAIN landed-source
+8 regressions/defaultCLI/MST20 pass. Actual same-image no-device RESULT is
+no_device_preflight_pass, not native-forward/compression/performance/quality.
+Unknown launch RPC was followed by actual PID/output readback, not relaunch.
+Exact owned release and fresh resource admission precede any device load.
+
 ## Full-mode readiness and partial-case reuse — 2026-10-07 07:05Z
 
 MAIN applied and actually checked NEW DAMP completion4 + KVBuffer middle
@@ -11,7 +26,7 @@ the old report is not relabelled into an invented prerequisite schema.
 Completed-case counts must use the producer's real final status, full160/8,
 dynamic negatives and final15-overlap/shared-arena audit, not list length or
 step count alone. MA070e reached its fixed phase timeout; the actual failure,
-child streams,39 fully completed cases and stopped/retained leases remain
+child streams,37 fully completed cases and stopped/retained leases remain
 separate from full64 acceptance. A new union must preserve the original failure.
 Balance measured native-reference/transfer/CPU costs, not sum-T/case count.
 

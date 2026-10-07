@@ -1,10 +1,23 @@
 # Continuous preparation and NPU execution queue
 
+## NEW model-entry repair applied — 2026-10-07 07:27Z
+
+fixed_admission_capture_v2 NEW10 files applied; MAIN MA083c8 regressions,
+real defaultCLI and MST20 pass. Original52/frozen v1 unchanged. Correct count
+is machine-checked37/64 complete and27 missing; no aggregate acceptance.
+Real immutable-image no-device RESULT is no_device_preflight_pass at
+/cache/cch/qwen36-damp-20261006/fixed-admission-no-device-v2/RESULT.json.
+Launch RPC timed out without handle; actual PID/output checked, never restarted.
+Next exact owned release/fresh admission then exclusiveTP4 OFF-A/OFF-B/ON
+short native forward. No new throughput/task results. V2 retains2700s phase,
+72GiB admission/all numerical gates; absolute DAMP08:48:03Z and portfolio
+Oct9 11:17:31Z remain unchanged; do not launch past cutoff.
+
 ## Actual release and prepared successor state — 2026-10-07 07:05Z
 
 Read PREPARED_SUCCESSORS_20261007.md before older live notes.
 MA070e reached the unchanged phase timeout. Actual four owned containers are
-stopped/retained/Pid0; final reports contain39/64 genuinely complete cases,
+stopped/retained/Pid0; final reports contain37/64 genuinely complete cases,
 not fullmatrix PASS. Correct FAILURE/STOP/POST paths are run-root/launch/.
 Its old AWMCP handle is not_found/aged; never fabricate original parent terminal.
 Current6 source tools were applied and MAIN MA077b183 stdlib+MST20 passed;

@@ -1,0 +1,111 @@
+{
+  "schema": "damp-fixed-admission-sources/v2",
+  "status": "in_memory_prepared_not_applied",
+  "default_enabled": false,
+  "files": {
+    "v2_contract.py": "666b0e8956cb371b8c03bcba8fa51dd4d4eec207108366e06590fe7a763e3815",
+    "v2_bindings.py": "bfa3122dbed83574e05ee11e1e0ef963d90a59eae65f30d3f25ed6d5feef6ce3",
+    "v2_release.py": "e60e399cc2710796d8e9c2b6c418bbf2063ba05f9a93e1b87d4a47e55844fb0b",
+    "v2_peak.py": "f37b7da803511a790a87fa9d1d1c4a083db2c6530a7dfce566948cc456de9d72",
+    "damp_fixed_v2.py": "e87498eea785b75dbcd857cbcc3b6f6e4b4d3fc27298640100302ab3d4e5d7b5",
+    "v2_observer.py": "5d9f3f55a00ed4ffc9884fbeeaccf9167f5f632d12f9dd049ba76e662cdcb4aa",
+    "run.py": "34149654e56a2e5da25c0a527f8126dc4ec280e6908ea2812aeac0fe3dfd18b7",
+    "tests/test_repair.py": "fd267ed6d053cc9d37f1a036b984498325f7c0b47faefc9ba2c56a94fdfcca08",
+    "READY.md": "87f47f49f2c11867fb19552a1cc93c273dee8dcddb4aaef6cfbaba96426e2189"
+  },
+  "frozen_lineage": {
+    "manifest": {
+      "path": "projects/damp-ascend/tools/fixed_admission_capture_v1/SOURCE_MANIFEST.json",
+      "sha256": "a685970e567b629016470f9a821e97ceb9007404f9a3065615715ce1c0f51aae"
+    },
+    "reuse": "source_contract checks original13+external28 exact bytes; private Controller import only",
+    "observer_original": {
+      "path": "projects/damp-ascend/tools/fixed_admission_capture_v1/damp_admission_diagnostic/observer.py",
+      "sha256": "1e325b09615a96d874529a155be601bb2ca4e280c44edbef23ad2a2f1ee6b7ce"
+    },
+    "observer_changes": [
+      "two NEW imports",
+      "packet frozen-v1 plus NEW-v2 source refs",
+      "OFF native-only binding; ON original helper"
+    ],
+    "controller_changes": [
+      "private current070e identity classifier",
+      "owned cgroup-v1 sticky peak subclass",
+      "explicit current070e actual host-job cleanup admission",
+      "NEW entrypoint/source preflight driver"
+    ]
+  },
+  "unchanged": {
+    "physical_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protect_physical0_3": true,
+    "cgroup_memory_gib": 64,
+    "ordinary_fresh_floor_gib": 72,
+    "host_reserve_gib": 8,
+    "formal_cpu": 6,
+    "preflight_cpu": 1,
+    "preflight_memory_gib": 2,
+    "seconds_including_cold_start": 2700,
+    "raw_limit_gib": 20,
+    "input_tokens": 1024,
+    "output_tokens": 33,
+    "batch": 1,
+    "arms": [
+      "off-a",
+      "off-b",
+      "on"
+    ],
+    "original_native_arguments": true,
+    "original_native_return": true,
+    "original_numeric_gates": true
+  },
+  "actual_source_behavior_record": {
+    "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+    "route": "peer_direct",
+    "operation": "exec-000000000000045a",
+    "exit_code": 0,
+    "canonical_result_sha256": "8c9df12b7ce2eee836e20fc52590f6d70691516e418bdb6082d613f8ac478a66",
+    "scope": "actual frozen AST/CodeType source body, synthetic48 instances, no native model"
+  },
+  "focused_software_record": {
+    "peer": "lgw_53d59c2f73ef4b81ba3cc0e00c2f8d35",
+    "route": "peer_direct",
+    "operation": "exec-0000000000000469",
+    "exit_code": 0,
+    "compiled_sources": 8,
+    "tests": 8,
+    "errors": 0,
+    "failures": 0,
+    "stdout_sha256": "c420d6dffb1552df888e90e86036518ee76f61855259c374fa00e276e0b592f4",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scope": "in-memory synthetic fixtures; actual current070e original cleanup bytes/argv/source closure verified; no writes/Docker/Torch/NPU",
+    "final_delta_after_record": "observer redundant trailing blank line removed; READY adds truthful record; runtime logic unchanged"
+  },
+  "current070e": {
+    "operation_context": "exec-000000000000070e",
+    "authority_kind": "host_job_cleanup_observed",
+    "awmcp_terminal_reconstructed": false,
+    "source_packet": {
+      "path": "projects/damp-ascend/tools/selected_row_dispatch_v1/PACKET.json",
+      "sha256": "61cec4646d5721c7c793aa85e842c507edc34c0d8566abc72bf5f789c476844d"
+    },
+    "source_files": 5,
+    "dependencies": 45,
+    "launch_admission_sha256": "5733e97b13d9def37625d5b7dffbb624e9cc4e92245ced626ad67b06813f1ab0",
+    "execution_plan_sha256": "26bf109d7f6b680b7111c1c02fbe130c91a25d240d799a48a9a712c407067838",
+    "historical_host_client_pid_claimed": false,
+    "numerical_pass_claimed": false
+  },
+  "actual_target312_preflight": false,
+  "actual_native_model_forward_verified": false,
+  "npu_executed": false,
+  "source_lock_issued": false,
+  "full_calibration_admitted": false,
+  "performance_measurement": false,
+  "task_accuracy_measurement": false,
+  "preparing_agent_file_docker_npu_git_mutation": false
+}
