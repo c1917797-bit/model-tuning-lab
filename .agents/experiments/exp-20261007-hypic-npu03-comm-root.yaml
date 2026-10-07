@@ -33,13 +33,28 @@ measured_20261007:
     result: Graph replay with sixteen 40 KB AllReduce calls median 0.216-0.218 ms for the whole replay across four ranks.
     cleanup: docker --rm completed and no owned NPU process remains.
   decision: H1 is not supported at tested sizes and H2 is favored. Neither standalone test reproduces the full-service stall. The first observed divergence is rank 2's pre-attention MEM_WAIT_VALUE; its notification producer and source-level trigger remain unproven.
-  next_test: Run the frozen no-cache full service twice on physical NPU0-3 with --enforce-eager as the sole serving variable. Use the same 2 warmup requests and 4-request/128-output diagnostic stimulus, capture all four raw ranks, export ranks 0 and 2, compare steady Decode wait and request TPOT. This is a diagnostic comparison, not formal HYPIC performance evidence. Abort on occupied NPU0-3, occupied port 8223, source/image/device drift, missing correctness, or owned-service cleanup failure.
   graph_on_20261007:
     operation_id: exec-00000000000008f7
     result: 4/4 requests completed exactly 128 output tokens; profiled diagnostic TPOT weighted 499.00 ms/token.
     profile: All four ranks captured raw. Rank 0 exported completely; rank 2 raw capture was about 2.1 GB and timeline export exceeded the bounded parser window, so the full profile manifest is incomplete.
     cleanup: Exact graph-control container removed; physical NPU0-3 and port 8223 released.
     classification: Diagnostic request valid, complete four-rank CSV export inconclusive; do not call this formal service performance.
+  static_card_and_host_config:
+    card: NPU0-3 are all Ascend910B4 V1, BoardID 0x34, BOM 1, firmware 7.7.0.3.220; HCCS mode 4, lanes 1111, speed 224, zero link retries/errors, PCIe errors, and HBM ECC errors.
+    topology: All mutual NPU links are HCCS; no NPU2-only static card setting found.
+    cpu_affinity: Service cpuset 112-191 versus recommended 144-191 for NPU0/1 and 96-143 for NPU2/3. Pairwise asymmetry only; causal role untested and NPU3 shares it.
+  eager_20261007:
+    change: Sole serving CLI change --enforce-eager; this disables both compilation and graph capture in the pinned runtime, not graph alone.
+    correctness: Both graph-on and eager completed 4/4 requests with exactly 128 output tokens.
+    graph_on_metrics: Weighted TPOT 499.0045 ms/token, TPOT P95 593.2337 ms, TTFT P95 32638.87 ms, throughput 6.2670 tokens/s.
+    eager_metrics: Weighted TPOT 616.4391 ms/token, TPOT P95 707.2005 ms, TTFT P95 31880.53 ms, throughput 5.3120 tokens/s.
+    delta: Eager weighted TPOT is 117.43 ms/token or 23.53 percent worse than graph-on. This is a profiled four-request diagnostic, not formal performance evidence.
+    eager_trace: Rank 0/2 SQLite exports usable; no MEM_WAIT_VALUE, MEM_WRITE_VALUE, or aclrtValueWrite tasks. In trailing 30 seconds, rank 0 40 KB AllReduce median 0.0083 ms, rank 2 median 2.4658 ms.
+    matched_collectives: For 654 same-sequence rank-2 long calls, rank-2 median 12.4182 ms and matching rank-0 median 0.0077 ms. A stable 1.5165 ms profiler clock offset means rank-2 long calls finish as rank 0 enters; rank 2 waits rank 0 in eager.
+    profile_limit: Four raw ranks captured. Graph-on rank-2 full export incomplete, eager oversized JSON whole-file parse skipped by bounded guard; manifests remain conservative and are not a correctness failure.
+    cleanup: Both exact-name diagnostic containers removed, NPU0-3 free, port 8223 free, NPU4-7 untouched.
+    classification: Global eager is rejected as a performance fix. NPU2-only static card setting not found. Source-level cause of rank skew remains inconclusive.
+  next_test: Trace delayed graph-on host aclrtValueWrite submission and calibrate cross-rank clocks; predeclare one-variable rank mapping within 0-3 or isolated CPU-affinity test, requiring wait and request TPOT to change together.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
