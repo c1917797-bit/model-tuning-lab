@@ -15,11 +15,12 @@ DAMP remains closed. HYPIC is historical reference, not a new acceptance.
 ## Actual owner reconciliation
 MAIN owns device/Git/shared integration. The actual collaboration inventory
 at this checkpoint is MAIN plus three running rolling preparers:
-- lowbit_ready_queue: six mechanisms; correct W4A16 v002 actual opt-in
-  admission-order bug in v003; finish the distinct per-channel W4A16 native
-  input/packing/loader matrix, strict consumer, model/dense paired service CLI.
-  v002 cannot be admitted. FFD/KVarN inherited undefined k_pre_rope repair is
-  still pending; prior software tests did not cover that live bridge.
+- lowbit_ready_queue: six mechanisms; W4A16 v003 corrects the actual v002
+  opt-in admission-order bug (16 actual software tests, MA0c42), but native
+  input/packing/loader, strict consumer and model/dense paired CLI still need
+  closure. v002 cannot be admitted. FFD v002 and KVarN v003 now repair the
+  inherited undefined k_pre_rope live-bridge bug (MA0c54/0c56, 16 tests each);
+  this software repair is not NPU numerical or model evidence.
 - recurrent_lifecycle_ready_queue: seven mechanisms; prioritize a new frozen
   DeltaLog v4 one-entrypoint native mixed producer, strict consumer and actual
   opt-in service bridge/paired runner from v3. Continue D3 only after the
@@ -55,6 +56,44 @@ Never fill idle cards with dummy loops or unchanged deterministic failures.
 Fresh hardware/resource checks remain at actual admission, not copied from prep.
 
 ## Current execution and idle accountability
+### User scheduling update at 2026-10-07 14:39Z
+The three preparers were all observed running and explicitly assigned their
+closest executable successor: DeltaLog v4, AdaKV full selected-output seam,
+and distinct per-channel W4A16. Do not expand paper breadth until the closest
+packet's real aggregate CLI and consumers are closed. After delivering one,
+immediately roll to the next private preparation task; do not wait for NPU.
+
+Use stage-specific readiness, not one ambiguous ready flag:
+- PREPARING: missing code, no-device prerequisite, actual CLI or consumer.
+- NUMERICAL_READY: source-frozen executable native matrix, independent oracle,
+  original gates, real negative/opt-in software receipts, exact new output,
+  bounded resource/device/mount/owned-stop contract; MAIN reviewed. Numeric
+  execution has not happened and remains pending.
+- MODEL_READY: consume an actual passing numerical receipt into the real
+  default-OFF model bridge, workload and same-stack paired fixed1024 entrypoint.
+- ACCEPTED: actual paired E2E plus final task gates pass. No sample/build/Meta
+  or readiness status may become an accepted paper claim.
+
+Final official task runner/dataset identities are currently pending. Preserve
+this final acceptance gap, but do not invent a scorer or make it an artificial
+blocker to a legitimately complete earlier numerical stage.
+
+Each handoff supplies immutable paths/SHA, actual software receipt, one exact
+MAIN CLI, producer-to-consumer dependencies, CPU/ordinary-RAM/disk budgets,
+maximum lease and failure policy. MAIN audits arrivals during a device job;
+target a buffer of two MAIN-reviewed numerical-ready successors, not two
+unreviewed drafts. This target is not yet met: admitted successor count is0.
+
+On terminal/release, MAIN performs the fresh fail-closed resource check and
+launches the highest-priority admitted stage without waiting for prose or all
+agents. If no successor is complete, record the idle interval, missing artifact
+and owner immediately. Do not claim continuous NPU utilization; all4-7 were
+idle at MA0c6e and the current gap is preparation, not proven external usage.
+MAIN's current dependency is a new source-bound KVBuffer shorter materialization
+horizon candidate motivated by the actual native incoming-state intervention.
+Its source/build/NPU results remain pending, and the original numerical gates
+and fixed deadline are unchanged.
+
 Native-copy diagnostic v1 MA0c20 really dispatched its algorithm child on
 physical6 (PID2920937, start30736925, exact CID b043d1ba...); this is distinct
 from its canary PID2910970. It exited1 after actual native/trace execution
