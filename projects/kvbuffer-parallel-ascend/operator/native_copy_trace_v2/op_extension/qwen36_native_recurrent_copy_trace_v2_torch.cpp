@@ -71,7 +71,7 @@ void qwen36_native_recurrent_copy_trace_v2_prepare(const at::Tensor& q,const at:
  uint32_t cores=platform->GetCoreNumAiv();int64_t actualCores=0;
  TORCH_CHECK(aclrtGetDeviceInfo(dev,ACL_DEV_ATTR_VECTOR_CORE_NUM,&actualCores)==ACL_SUCCESS &&
              actualCores==cores && cores>0 && ub>0 && ub<=UINT32_MAX,"actual UB/core identity");
- Data data=NativeRecurrentCopyTraceV2::make_tiling(ub,cores,1.0f/std::sqrt(128.0f));
+ Data data=NativeTraceHost::make_tiling(ub,cores,1.0f/std::sqrt(128.0f));
  static_assert(offsetof(Data,hasAcceptedTokens)+sizeof(uint32_t)==68,"native field layout");
  std::array<uint8_t,72> bytes{};std::memcpy(bytes.data(),&data,68); // deterministic tail padding
  auto tiling=at::empty({72},q.options().dtype(at::kByte));check(tiling,q,at::kByte,"tiling");

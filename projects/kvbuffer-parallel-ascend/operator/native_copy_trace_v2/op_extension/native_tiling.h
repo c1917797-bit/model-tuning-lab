@@ -18,7 +18,8 @@
 #include <algorithm>
 #include "../op_kernel/native_trace_tiling_data.h"
 #define NATIVE_TRACE_LOG(...) do {} while(false)
-namespace NativeRecurrentCopyTraceV2 {
+namespace NativeTraceHost {
+using NativeRecurrentCopyTraceV2::NativeRecurrentCopyTraceV2TilingData;
 constexpr size_t MAX_MTP = 16;
 template<class A,class B> static A CeilDiv(A a,B b){return b==0?0:(a+b-1)/b;}
 template<class T> static T CeilAlign(T x,T a){return CeilDiv(x,a)*a;}
