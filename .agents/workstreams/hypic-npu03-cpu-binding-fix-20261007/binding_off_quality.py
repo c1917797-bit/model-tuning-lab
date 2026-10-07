@@ -1,0 +1,380 @@
+#!/usr/bin/env python3
+"""Run one matched, resumable 2048-token quality arm on physical NPU0-3."""
+
+from __future__ import annotations
+
+import argparse
+import fcntl
+import hashlib
+import json
+import math
+import re
+import signal
+import subprocess
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from urllib.request import urlopen
+
+from binding_off_service import (
+    FLAG, IMAGE, PORT, ROOT, SOURCE_COMMIT, SOURCE_ROOT, ARMS,
+    assert_lane_available, frozen_source, inspect, run, sha256,
+)
+
+QROOT = ROOT / "quality-context-41984"
+CONTEXT = 41984
+EVALUATOR = Path(__file__).resolve().parents[1] / "WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py"
+DATASETS = {
+    "longbenchv2": (Path("/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json"), 127, "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a"),
+    "gsm8k": (Path("/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl"), 1319, "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14"),
+}
+EVALUATOR_SHA = "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0"
+MODEL_INDEX_SHA = "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b"
+MODEL_NAME = "qwen36-hypic-e2e-2048"
+MODEL_DIR = Path("/cache/efim/Qwen3.6-27B")
+BASE_URL = f"http://127.0.0.1:{PORT}"
+EXPERIMENT = "hypic-npu03-bindingoff-quality41984-20261007"
+UNIT_ORDER = (("longbenchv2", 1), ("gsm8k", 1), ("longbenchv2", 2),
+              ("gsm8k", 2), ("longbenchv2", 3), ("gsm8k", 3))
+
+
+def name_for(arm: str) -> str:
+    return f"hypic_npu03_bindingfix_quality_{arm.replace('-', '_')}_20261007"
+
+
+def write_json(path: Path, value: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def status(arm: str, stage: str, **details: object) -> None:
+    value = {"schema": "hypic-bindingoff-quality-status/v1", "arm": arm,
+             "stage": stage, "at_utc": datetime.now(timezone.utc).isoformat(), **details}
+    write_json(QROOT / arm / "status.json", value)
+    print(json.dumps(value, sort_keys=True), flush=True)
+
+
+def preflight() -> dict:
+    parent = json.loads((SOURCE_ROOT / "baseline-contract.json").read_text())
+    fp = parent["fingerprint"]
+    for arm in ARMS:
+        frozen_source(arm)
+    if sha256(EVALUATOR) != EVALUATOR_SHA:
+        raise RuntimeError("quality evaluator source hash drift")
+    if sha256(MODEL_DIR / "model.safetensors.index.json") != MODEL_INDEX_SHA:
+        raise RuntimeError("model index hash drift")
+    for shard in fp["model_shards"]:
+        info = (MODEL_DIR / shard["name"]).stat()
+        if info.st_size != shard["size"] or info.st_mtime_ns != shard["mtime_ns"]:
+            raise RuntimeError(f"model shard metadata drift: {shard['name']}")
+    for dataset, (path, expected, digest) in DATASETS.items():
+        if sha256(path) != digest:
+            raise RuntimeError(f"{dataset} dataset hash drift")
+        if dataset == "longbenchv2" and expected != 127:
+            raise RuntimeError("LongBench expected count drift")
+    if 39642 + 2048 > CONTEXT:
+        raise RuntimeError("longest prompt exceeds quality context")
+    return {"image": IMAGE, "source_commit": SOURCE_COMMIT, "model_index_sha256": MODEL_INDEX_SHA,
+            "evaluator_sha256": EVALUATOR_SHA, "datasets": {key: {"count": value[1],
+            "sha256": value[2]} for key, value in DATASETS.items()},
+            "max_model_len": CONTEXT, "max_output_tokens": 2048,
+            "physical_npus": [0, 1, 2, 3], "cpuset": "112-191",
+            "common_serving_change": FLAG.strip(), "unit_order": list(UNIT_ORDER)}
+
+
+def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
+    source = frozen_source(arm)
+    old_path = f"/results/{arm}"
+    new_path = f"/results/quality-context-41984/{arm}"
+    command = source["Config"]["Cmd"][2]
+    if (command.count(old_path) != 2 or command.count("--max-model-len 40960") != 1
+            or command.count("--max-num-batched-tokens 40960") != 1):
+        raise RuntimeError("frozen quality command seam drift")
+    command = command.replace(old_path, new_path)
+    command = command.replace("--max-model-len 40960", f"--max-model-len {CONTEXT}")
+    command = command.replace("--max-num-batched-tokens 40960", f"--max-num-batched-tokens {CONTEXT}")
+    command += FLAG
+    old_mount = f"{SOURCE_ROOT}:/results"
+    binds = source["HostConfig"]["Binds"]
+    if binds.count(old_mount) != 1:
+        raise RuntimeError("frozen artifact mount seam drift")
+    binds = [f"{ROOT}:/results" if value == old_mount else value for value in binds]
+    old_env = f"VLLM_ASCEND_HYPIC_EVIDENCE_FILE={old_path}/hypic-evidence.jsonl"
+    env = source["Config"]["Env"]
+    if env.count(old_env) != 1:
+        raise RuntimeError("frozen HYPIC evidence env seam drift")
+    env = [f"VLLM_ASCEND_HYPIC_EVIDENCE_FILE={new_path}/hypic-evidence.jsonl"
+           if value == old_env else value for value in env]
+    return source, binds, env, command
+
+
+def owned(item: dict, arm: str, container_id: str) -> None:
+    source, binds, env, command = spec(arm)
+    mapped = [entry["PathOnHost"] for entry in item["HostConfig"]["Devices"]
+              if re.fullmatch(r"/dev/davinci\d+", entry["PathOnHost"])]
+    labels = item["Config"]["Labels"]
+    if not (item["Id"] == container_id and item["Name"] == f"/{name_for(arm)}"
+            and item["Image"] == IMAGE and item["HostConfig"]["CpusetCpus"] == "112-191"
+            and item["HostConfig"]["NetworkMode"] == "host"
+            and mapped == [f"/dev/davinci{i}" for i in range(4)]
+            and sorted(item["HostConfig"]["Binds"]) == sorted(binds)
+            and sorted(item["Config"]["Env"]) == sorted(env)
+            and item["Config"]["Cmd"] == ["bash", "-lc", command]
+            and labels.get("hypic.experiment") == EXPERIMENT
+            and labels.get("hypic.arm") == arm):
+        raise RuntimeError("exact quality container identity mismatch")
+
+
+def create(arm: str) -> str:
+    assert_lane_available()
+    name = name_for(arm)
+    if inspect(name) is not None:
+        raise RuntimeError(f"{name} already exists; inspect before any resume")
+    source, binds, env, command = spec(arm)
+    args = ["docker", "create", "--name", name, "--label", f"hypic.experiment={EXPERIMENT}",
+            "--label", f"hypic.arm={arm}", "--network", "host",
+            "--shm-size", str(source["HostConfig"]["ShmSize"]), "--cpuset-cpus", "112-191"]
+    for entry in source["HostConfig"]["Devices"]:
+        args += ["--device", f"{entry['PathOnHost']}:{entry['PathInContainer']}:{entry['CgroupPermissions']}"]
+    for bind in binds:
+        args += ["-v", bind]
+    for entry in env:
+        args += ["-e", entry]
+    args += [IMAGE, "bash", "-lc", command]
+    run(*args)
+    item = inspect(name)
+    if item is None:
+        raise RuntimeError("quality container absent after create")
+    try:
+        owned(item, arm, item["Id"])
+    except Exception:
+        current = inspect(name)
+        if current and current["Id"] == item["Id"] and current["State"]["Status"] == "created":
+            run("docker", "rm", name)
+        raise
+    return item["Id"]
+
+
+def worker_proof(name: str, arm: str) -> dict:
+    directory = QROOT / arm
+    npu_path = directory / "npu-smi-at-health.txt"
+    top_path = directory / "docker-top-at-health.txt"
+    npu_path.write_text(run("npu-smi", "info").stdout)
+    top_path.write_text(run("docker", "top", name, "-eo", "pid,comm").stdout)
+    docker_pids = {int(parts[0]) for line in top_path.read_text().splitlines()[1:]
+                   if (parts := line.split()) and parts[0].isdigit()}
+    workers = {match.group(1): int(match.group(2)) for match in re.finditer(
+        r"^\|\s*([0-3])\s+0\s*\|\s*(\d+)\s*\|\s*VLLMWorker_TP\b",
+        npu_path.read_text(), re.M)}
+    if (set(workers) != {"0", "1", "2", "3"} or len(set(workers.values())) != 4
+            or not set(workers.values()).issubset(docker_pids)):
+        raise RuntimeError("quality workers not proven on physical NPU0-3 in exact container")
+    return {"worker_pid_by_physical_npu": workers, "npu_smi_sha256": sha256(npu_path),
+            "docker_top_sha256": sha256(top_path)}
+
+
+def start(arm: str, container_id: str, fingerprint: dict) -> None:
+    name = name_for(arm)
+    run("docker", "start", name)
+    deadline = time.monotonic() + 2400
+    while time.monotonic() < deadline:
+        item = inspect(name)
+        if item is None or item["State"]["Status"] != "running":
+            raise RuntimeError("quality container exited before health")
+        try:
+            with urlopen(f"{BASE_URL}/health", timeout=5) as response:
+                healthy = response.status == 200
+        except Exception:
+            healthy = False
+        if healthy:
+            proof = worker_proof(name, arm)
+            logs = run("docker", "logs", name)
+            if ("'enable_cpu_binding': False" not in logs.stdout + logs.stderr
+                    or "The CPU allocation plan is as follows:" in logs.stdout + logs.stderr):
+                raise RuntimeError("quality service binding-off activation missing")
+            receipt = {"schema": "hypic-bindingoff-quality-service/v1", "arm": arm,
+                       "container": name, "container_id": container_id,
+                       "at_utc": datetime.now(timezone.utc).isoformat(),
+                       "fingerprint": fingerprint, **proof}
+            write_json(QROOT / arm / f"service-start.{container_id[:12]}.json", receipt)
+            write_json(QROOT / arm / "service-start.json", receipt)
+            status(arm, "service-ready", container_id=container_id)
+            return
+        time.sleep(10)
+    raise RuntimeError("quality service health timeout")
+
+
+def validate_unit(arm: str, dataset: str, index: int) -> dict:
+    path, expected, digest = DATASETS[dataset]
+    directory = QROOT / "quality" / arm
+    stem = f"{dataset}.run{index}"
+    summary_path = directory / f"{stem}.summary.json"
+    details_path = directory / f"{stem}.jsonl"
+    summary = json.loads(summary_path.read_text())
+    scorer = ("supplied_ais_bench_first_option_postprocess" if dataset == "longbenchv2"
+              else "supplied_ais_bench_gsm8k_numeric_postprocess")
+    fields = {"schema": "hypic-quality-eval/v1", "dataset": dataset,
+              "run_id": f"run{index}", "data_sha256": digest,
+              "evaluator_script_sha256": EVALUATOR_SHA, "scorer": scorer,
+              "model": MODEL_NAME, "base_url": BASE_URL, "concurrency": 32,
+              "max_out_len": 2048, "temperature": 0, "seed": 0,
+              "ignore_eos": False, "enable_thinking": False, "requests": expected,
+              "successful": expected, "failed": 0}
+    if any(summary.get(key) != value for key, value in fields.items()):
+        raise RuntimeError(f"{stem}: evaluator summary contract drift")
+    if (Path(summary.get("details_path", "")).resolve() != details_path.resolve()
+            or summary.get("details_sha256") != sha256(details_path)):
+        raise RuntimeError(f"{stem}: raw/detail hash mismatch")
+    rows = [json.loads(line) for line in details_path.read_text().splitlines() if line]
+    if len(rows) != expected or sorted(row.get("index") for row in rows) != list(range(expected)):
+        raise RuntimeError(f"{stem}: missing/duplicate sample indexes")
+    for row in rows:
+        response = row.get("response_text")
+        usage = row.get("usage") or {}
+        if (row.get("ok") is not True or row.get("error") is not None
+                or not isinstance(response, str)
+                or row.get("response_sha256") != hashlib.sha256(response.encode()).hexdigest()
+                or not isinstance(usage.get("prompt_tokens"), int)
+                or usage["prompt_tokens"] <= 0
+                or not isinstance(usage.get("completion_tokens"), int)
+                or not 0 <= usage["completion_tokens"] <= 2048):
+            raise RuntimeError(f"{stem}: invalid row {row.get('index')}")
+    correct = sum(row.get("correct") is True for row in rows)
+    completion = sum(row["usage"]["completion_tokens"] for row in rows)
+    if (summary.get("correct") != correct or summary.get("completion_tokens") != completion
+            or not math.isclose(summary.get("accuracy_pct", -1), 100 * correct / expected,
+                                abs_tol=1e-9, rel_tol=1e-9)
+            or sum(summary.get("finish_reasons", {}).values()) != expected):
+        raise RuntimeError(f"{stem}: summary arithmetic mismatch")
+    return summary
+
+
+def check_partial(arm: str, dataset: str, index: int) -> None:
+    details = QROOT / "quality" / arm / f"{dataset}.run{index}.jsonl"
+    if not details.exists():
+        return
+    expected = DATASETS[dataset][1]
+    rows = [json.loads(line) for line in details.read_text().splitlines() if line]
+    indexes = [row.get("index") for row in rows]
+    if len(indexes) != len(set(indexes)) or any(not isinstance(i, int) or i < 0 or i >= expected for i in indexes):
+        raise RuntimeError("partial quality rows have invalid indexes")
+    for row in rows:
+        response = row.get("response_text")
+        if (row.get("ok") is not True or not isinstance(response, str)
+                or row.get("response_sha256") != hashlib.sha256(response.encode()).hexdigest()):
+            raise RuntimeError("partial quality row hash/state invalid")
+
+
+def run_unit(arm: str, dataset: str, index: int, container_id: str) -> None:
+    directory = QROOT / "quality" / arm
+    directory.mkdir(parents=True, exist_ok=True)
+    stem = f"{dataset}.run{index}"
+    summary_path = directory / f"{stem}.summary.json"
+    if summary_path.exists():
+        validate_unit(arm, dataset, index)
+        receipt_path = directory / f"{stem}.receipt.json"
+        receipt = json.loads(receipt_path.read_text())
+        if (receipt.get("summary_sha256") != sha256(summary_path)
+                or receipt.get("details_sha256") != sha256(directory / f"{stem}.jsonl")):
+            raise RuntimeError(f"{stem}: previous unit receipt drift")
+        status(arm, "unit-reused", dataset=dataset, run=index)
+        return
+    check_partial(arm, dataset, index)
+    status(arm, "unit-running", dataset=dataset, run=index)
+    command = ["python3", str(EVALUATOR), "--dataset", dataset, "--data", str(DATASETS[dataset][0]),
+               "--base-url", BASE_URL, "--model", MODEL_NAME, "--output-dir", str(directory),
+               "--run-id", f"run{index}", "--concurrency", "32", "--max-out-len", "2048",
+               "--seed", "0", "--timeout", "2400", "--retries", "2"]
+    started = time.monotonic()
+    with (directory / f"{stem}.log").open("a", encoding="utf-8") as log:
+        result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT,
+                                timeout=21600, check=False)
+    if result.returncode:
+        raise RuntimeError(f"{stem}: evaluator exit {result.returncode}")
+    summary = validate_unit(arm, dataset, index)
+    write_json(directory / f"{stem}.receipt.json", {
+        "schema": "hypic-bindingoff-quality-unit/v1", "arm": arm, "dataset": dataset,
+        "run": index, "container_id": container_id, "duration_s": time.monotonic() - started,
+        "summary_sha256": sha256(summary_path),
+        "details_sha256": sha256(directory / f"{stem}.jsonl"),
+        "correct": summary["correct"], "requests": summary["requests"]})
+    status(arm, "unit-verified", dataset=dataset, run=index,
+           accuracy_pct=summary["accuracy_pct"])
+
+
+def cleanup(arm: str, container_id: str) -> None:
+    name = name_for(arm)
+    item = inspect(name)
+    if item is None or item["Id"] != container_id:
+        raise RuntimeError("owned quality container disappeared or changed identity")
+    owned(item, arm, container_id)
+    logs = run("docker", "logs", name, check=False)
+    (QROOT / arm / f"service.full.{container_id[:12]}.log").write_text(logs.stdout + logs.stderr)
+    if item["State"]["Status"] == "running":
+        run("docker", "stop", "--time", "60", name)
+    run("docker", "rm", name)
+    assert_lane_available()
+    receipt = {
+        "schema": "hypic-bindingoff-quality-service-stop/v1", "arm": arm,
+        "container": name, "container_id": container_id,
+        "container_removed": True, "owned_npus_released": True, "port_released": True,
+        "at_utc": datetime.now(timezone.utc).isoformat()}
+    write_json(QROOT / arm / f"service-stop.{container_id[:12]}.json", receipt)
+    write_json(QROOT / arm / "service-stop.json", receipt)
+    status(arm, "service-released", container_id=container_id)
+
+
+def interrupt(_number: int, _frame: object) -> None:
+    raise RuntimeError("quality controller interrupted; cleaning exact owned container")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--arm", choices=tuple(ARMS), required=True)
+    parser.add_argument("--run", action="store_true")
+    args = parser.parse_args()
+    fingerprint = preflight()
+    if not args.run:
+        print(json.dumps(fingerprint, sort_keys=True))
+        return 0
+    signal.signal(signal.SIGTERM, interrupt)
+    signal.signal(signal.SIGINT, interrupt)
+    QROOT.mkdir(parents=True, exist_ok=True)
+    with (QROOT / "controller.lock").open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        completed = [QROOT / "quality" / args.arm / f"{dataset}.run{index}.summary.json"
+                     for dataset, index in UNIT_ORDER]
+        if all(path.exists() for path in completed):
+            if inspect(name_for(args.arm)) is not None:
+                raise RuntimeError("all quality summaries exist but exact service still exists; audit ownership before completion")
+            for dataset, index in UNIT_ORDER:
+                validate_unit(args.arm, dataset, index)
+            if not (QROOT / args.arm / "service-stop.json").exists():
+                raise RuntimeError("all quality summaries exist without service release receipt")
+            print(json.dumps({"arm": args.arm, "status": "already-complete-and-verified"}))
+            return 0
+        status(args.arm, "preflight-passed", fingerprint=fingerprint)
+        container_id = ""
+        error = None
+        try:
+            container_id = create(args.arm)
+            start(args.arm, container_id, fingerprint)
+            for dataset, index in UNIT_ORDER:
+                run_unit(args.arm, dataset, index, container_id)
+            status(args.arm, "all-units-verified")
+        except Exception as exc:
+            error = f"{type(exc).__name__}: {exc}"
+            status(args.arm, "failed-or-incomplete", error=error)
+            raise
+        finally:
+            if container_id:
+                cleanup(args.arm, container_id)
+                status(args.arm, "incomplete-released" if error else "arm-complete-and-released",
+                       container_id=container_id, prior_error=error)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
