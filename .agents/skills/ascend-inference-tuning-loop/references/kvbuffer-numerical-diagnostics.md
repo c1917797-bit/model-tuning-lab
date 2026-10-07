@@ -50,6 +50,20 @@ system pool changes, outside workload termination or a relaxed acceptance gate.
   usage and ordinary MemAvailable before each launch; do not recycle an old
   ~80GiB snapshot after an outside model starts.
 
+- A parent monitor abort can race an already completed device child. Inspect
+  original child exit/argv/PID proofs, stdout-bound final Ref and raw tensors
+  before rerunning. Here both eager and graph copy-only traces completed and
+  independently anchored the production bytes despite parent protection failure.
+  Preserve parent1 and child0 separately. Revalidate an archived identity at its
+  actual original observation time; it is never fresh launch authorization.
+  An independent no-device CPU reader may audit retained real-NPU tensors, but
+  cannot replace device computation or establish a full numerical matrix.
+- An observed candidate precast exactly at a BF16 midpoint, with the native
+  output one ULP away, is a concrete arithmetic diagnostic—not proof of the
+  native precast or a universal rounding-bias fix. Both modes agreeing weakens
+  a graph-only hypothesis at that point; use an independently anchored native
+  observation to distinguish history/state drift from readout-order effects.
+
 None of these lessons establishes an end-to-end speedup. Once the relevant
 NPU gates pass, continue the actual lifecycle/mixed/capture integration, paired
 dense performance, and final task tests under the unchanged experiment contract.

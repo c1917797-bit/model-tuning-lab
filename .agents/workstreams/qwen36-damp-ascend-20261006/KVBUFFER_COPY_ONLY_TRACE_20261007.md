@@ -1,5 +1,61 @@
 # KVBuffer copy-only trace checkpoint — 2026-10-07 12:05Z
 
+## Terminal and independent retained-child verification — 2026-10-07 12:21Z
+
+MA0afa (exec-0000000000000afa) completed exit1 after110680ms. Its original
+protected0–3 PID/starttime primary and secondary cleanup predicate remain failed.
+Do not repeat this diagnostic or call the parent PASS. Initial protected list
+was empty; failed-time SMI contained0–3 workers1743773–76 and own6PID1741912.
+The12:12 readonly memory snapshot attributed these same0–3 workers to external
+hypic_npu03_bindingfix_no_cache_repeat2_20261007/CIDb167a412...; this is
+post-event attribution, not an invented failed-time cgroup capture.
+No outside stop or device/environment change was performed.
+
+The child actually finished before the observer's stop completed. Original
+canary-child.json: exit0,20 actual physical6 CID/argv/starttime proofs.
+Original diagnostic-child.json: exit0,8 actual physical6 CID/argv/starttime
+proofs, parent protection error still recorded. Its original stdout binds:
+- diagnostic/report-006.json SHA c29dea1650bde04d5300c78f8a86fea51064d9cefb434e1d391f00aeb493ead9
+- diagnostic-entry-evidence/entry-004.json SHA8ae3185a999cd4352f7a0fb4e6f32a518cf02be583a438cea726605f459e9865
+
+All files are under the original candidate-ub-trace-diagnostic-v2-20261007 root;
+container /kvbuffer-results references map there via the original inspected RW
+mount. Actual production-eager/graph and trace-eager/graph PTs were retained.
+MA0b03 compact original evidence validates their SHA refs. MA0b02 was completed0
+but captured stdout was truncated; do not use it as a complete JSON receipt.
+
+MA0b08 actual completed0 independently validated source80, actual producer
+commands/export/Meta, final source identities, original child proofs/raw refs,
+stopped/Pid0/noExec/noOOM own693400041cd13d82c80a9aa3b0b4c0a8bd743422e70af20ecedac2ec3a3f3f6a
+and fresh physical6 release. Historical launch identity was checked using the
+original diagnostic probe observed_utc=2026-10-07T12:05:34.233000+00:00, not
+current fresh-launch authority. Earlier MA0b05 failure applied the fresh600s
+predicate to an archived identity; preserve that audit failure.
+
+MA0b0e actual completed0 used an independent no-device immutable-image CPU
+reader (8GiB/1CPU) to hash/weights-only load all four actual NPU PTs and original
+saved failure. Both modes independently passed complete candidate after state,
+all candidate outputs, full native state, defined native active12 outputs,
+input bytes, original/trace guards, trace metadata/pointers/finite values,
+candidate inactive zeros, and copied updatedUB==actual flushbase. All three
+trace tensors are byte-identical between eager and graph. This is independent
+verification of retained NPU evidence, not a new CPU algorithm PASS.
+Owned69d4126b... audit container stopped/retained, noDevices/noExec/noOOM.
+
+The recovered observation is anchored-copy-only-trace-diagnostic, not
+candidate_numeric_pass/matrix_verified/serving_ready/cause_proved. Actual
+candidate precast[6,5,6]=0.0039825439453125, exactly midpoint between
+0.00396728515625 (bits15234) and0.003997802734375 (15235), in both modes.
+Actual candidate rounds15234; actual native output15235. Native true precast
+remains unobserved. The state-readout error mechanism is not fully attributed,
+and the original .003048780487804878>.00303 gate is not relaxed.
+
+Next: independently named source-faithful native copy-only observation,
+requiring full deployed-native output/state eager+graph anchors before treating
+its FP32 precast as meaningful. Then change only the demonstrated arithmetic/
+state seam and run a new relevant full numerical matrix. No unchanged trace
+rerun or performance/accuracy authority from this single step.
+
 ## Decision and original failure
 
 native_order_v2 production77b4 remains NOT numerical-matrix accepted.
@@ -53,7 +109,7 @@ all sources and owned0118... stopped/Pid0/noExec/noOOM/noDevices.
 MA0af7 also exited0 but full-source stdout was truncated; use compact MA0af9.
 Retryable MA0add pre-handle timeout recovered idempotently, not duplicate work.
 
-## Currently live operation — poll, do not relaunch
+## Historical launch note — superseded by terminal verification above
 
 MA0afa (exec-0000000000000afa) is the once-only MAIN NPU diagnostic.
 Output:

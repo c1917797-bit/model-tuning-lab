@@ -1,5 +1,37 @@
 # DAMP Ascend — current workstream
 
+## Actual trace child recovered — 2026-10-07 12:21Z
+
+MA0afa is TERMINAL exit1, not live; do not poll/relaunch it. Preserve primary
+protected0–3 PID/starttime change and secondary cleanup-protection failure.
+MA0b03 original canary child0/20 actual physical6 proofs; diagnostic child0/
+8 proofs and complete production/trace eager+graph PT existed despite parent1.
+Own693400... stopped/retained/Pid0/noExec/noOOM; release SMI only0–3.
+
+MA0b08 independently rechecked source80/current actual build+Meta, original
+child/raw refs and historical launch identity at original12:05:34 probe time.
+MA0b05 failed by treating an old identity as fresh; retained, no device retry.
+MA0b0e no-device8GiB CPU read independently validated all four real NPU PTs
+against original failure, full state/output/inputs/guards/meta/redzones and
+actual trace update/flush anchor; eager+graph traces themselves bitwise equal.
+CPU reading validates existing NPU evidence, not a new NPU kernel result.
+Final actual report006 SHA c29dea1650bde04d5300c78f8a86fea51064d9cefb434e1d391f00aeb493ead9;
+entry004 SHA8ae3185a999cd4352f7a0fb4e6f32a518cf02be583a438cea726605f459e9865.
+Candidate precast[6,5,6]=.0039825439453125 exactly BF16 midpoint in both modes;
+candidate15234/native15235. Native true precast still UNOBSERVED, cause not
+proved and B16 .00304878>.00303 original failure/matrix/service remain OFF.
+Next independent exact native-source copy trace with deployed-native complete
+anchors, then only evidence-supported algorithm repair; no trace rerun.
+
+RAM MA0b00 ~61.2GiB during outside HYPIC0–3; MA0b08 ~79.8GiB after it was no
+longer active. MAIN did not stop it; who stopped it remains unverified.
+HugeTLB1916/1892free untouched; all own numeric/compile/audit containers stopped.
+No new E2E/task result, unchanged KV Oct8 08:29:54Z/portfolioOct9 11:17:31Z.
+NEW23 prefix draft bc229... external/review pending; agent MA0aff in-memory
+103 software tests only, no canonical/bootstrap/NPU/serving authority.
+KIVI writer/allocator/COW preparation and a non-timing protected-churn monitor
+continue in parallel; only MAIN admits devices. Push still auth-pending.
+
 ## Copy-only trace v2 — 2026-10-07 12:05Z
 
 Read KVBUFFER_COPY_ONLY_TRACE_20261007.md first. MA0ad4 v1 real compile
