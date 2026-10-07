@@ -1,0 +1,22 @@
+{
+  "schema": "flashinfer.native-state-sources/v3",
+  "default_enabled": false,
+  "npu_executed": false,
+  "source_count": 12,
+  "files": {
+    "contract.py": "27da312f0a3d4d2729d8b33144c15f0f58e89f71ee80dc4fd5ff9f74f66b3a95",
+    "oracle.py": "b36eafaa346b308530f8747ca20be2b4b2e9879588f1cc5d5c0a414ccd7ef546",
+    "native.py": "2e85ab6c1e19834f65098e39c1a99d672fe594d4aa1163da42a7362722b83664",
+    "numerics.py": "45f25e08aefb9572b5eb011aa4bc890a0c70dd25a702ff07c930b241a649b73b",
+    "main.py": "5f9eb3637a4863086bdd1c7fcac82a98fbb2707a893a6e916bd60238272e6535",
+    "consumer.py": "51e1ff516d07ee33d40d1f08ca03bd3ffef46a0f08d2adaedfcbf48811cd06d1",
+    "test_software.py": "a2aca5dcf3f74e17a1b40936717d1cb4a0ff7742c6d84f9760637800c1882d94",
+    "READY.md": "258a686606b153a6e8bc74fee560660743d7b9c1858fcd4e3ea2bd58e4e49acf",
+    "host.py": "8c59e8cb815e068ed59d5da2b7b268dcf7319b7e8947326a6a2cff87a65b8257"
+  },
+  "dependencies": {
+    "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20",
+    "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
+    "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+  }
+}

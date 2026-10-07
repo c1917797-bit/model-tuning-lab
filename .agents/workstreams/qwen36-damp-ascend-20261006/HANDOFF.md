@@ -1111,3 +1111,26 @@ and model bridge, sparse owner FlashInfer v3 then SparQ, lowbit owner KIVI/SKVQ
 handoff then QQQ. All default-OFF. New native/model/matched fixed1024/final2048
 results are pending; HYPIC stays historical exemplar. KVBuffer Oct8 08:29:54Z
 and portfolio Oct9 11:17:31Z cutoffs unchanged. Goal active, not complete.
+
+## Latest prerequisite checkpoint — 2026-10-07 17:08Z
+
+Memory task remains complete: at most32GiB authorization was fully spent,
+OVS and NUMA3 unchanged. Do not release additional pages. No new task accuracy
+or formal throughput result exists. H8 B16 remains the current native numerical
+positive; full all-batch/lifecycle/model evidence is being prepared.
+
+Read FLASHINFER_ABI_PREFLIGHT_20261007.md. MAIN integrated reviewed default-OFF
+v3; actual47 source/software tests MA0e00 pass. Actual no-device MA0e01 exit1
+and independent raw MA0e03 exit0 prove old-FIA.out uses Tensor[] out, not the
+prepared separate output keywords. v3 NPU dispatch is forbidden in this stack;
+independent v4 ABI repair is underway. Exact no-device CID is stopped/retained,
+Pid0/noExec/noOOM, Devices[]. Actual installed attention/runner snapshots were
+provided for SparQ model preparation. This is useful source/interface evidence,
+not a numerical, model, speed or task acceptance.
+
+MA0df8 shows4–7 idle and ~111.75GiB ordinary available RAM. Idle time now is
+preparation/readiness, not outside occupation. MAIN next admits the highest-value
+complete native entry; no dummy utilization or unchanged failed retries.
+Recurrent H8 full gate, sparse v4/SparQ, lowbit W4 continue rolling preparation.
+KVBuffer and portfolio cutoffs are unchanged; shared sources/defaults remain
+OFF. No main/force/ref-runtime mutation or credential bypass is authorized.

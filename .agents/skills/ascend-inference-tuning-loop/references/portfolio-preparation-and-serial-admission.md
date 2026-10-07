@@ -89,3 +89,15 @@ not reset a running clock. At each terminal/checkpoint, reconcile short work
 with mechanism -> native correctness -> paired E2E -> final task quality,
 release/retain owned resources, then admit the next ready gate promptly.
 Do not hold idle cards for report prose or pursue unrelated operator tuning.
+
+For native interfaces with a no-device dispatcher/schema path, use that real
+installed path before allocating the long device matrix. Public API families
+and mocked helper tests do not establish the deployed output/workspace
+signature. In the pinned0.23/TorchNPU2.10 FlashInfer preparation,47 software
+tests passed but an actual no-device probe showed old-FIA.out uses Tensor[]
+out, not separate attention_out/softmax_lse keywords. Preserve the failed
+version and actual schema; repair a source-supported successor, not thresholds
+or a paper-wide conclusion. Byte-exact installed model-source snapshots remain
+usable source evidence when an unrelated later schema assertion fails, while
+still providing no NPU/model/performance authority. See current workstream
+FLASHINFER_ABI_PREFLIGHT_20261007.md.

@@ -1,0 +1,86 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_abi_preflight_v1/host_preflight.py",
+          "--execute",
+          "--output-dir",
+          "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 35177,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000e01",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_abi_preflight_v1/host_preflight.py\", line 132, in <module>\n    if __name__==\"__main__\":main()\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_abi_preflight_v1/host_preflight.py\", line 130, in main\n    if primary:raise primary\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_abi_preflight_v1/host_preflight.py\", line 102, in main\n    c.require(x[\"State\"][\"ExitCode\"]==0 and not x[\"State\"][\"OOMKilled\"],\"actual CPU schema producer exit\")\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/flashinfer_native_state_gate_v3/contract.py\", line 14, in require\n    if not ok:raise ValueError(msg)\nValueError: actual CPU schema producer exit\n",
+        "stdout": "MAIN_FLASHINFER_NO_DEVICE_HOST_V1 {\"result\": {\"path\": \"/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/RESULT.json\", \"sha256\": \"c77364426aee22007a330ab2017b79f935e669483dadaf9cfb7998611a724cb7\"}, \"passed\": false, \"npu_executed\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 361,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 361,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 361
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 361,
+        "routeLookupMs": 0,
+        "totalMs": 361
+      }
+    },
+    "traceId": "a4aa9414-6b91-4830-bb8b-b48ee85ab224"
+  },
+  "operationId": "exec-0000000000000e01",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}
