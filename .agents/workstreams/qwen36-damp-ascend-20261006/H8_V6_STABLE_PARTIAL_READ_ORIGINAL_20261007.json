@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import hashlib,json\\nfrom pathlib import Path\\nroot=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab\\\")\\np=root/\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\\\";print(\\\"WHOLE_ORIGINAL\\\",hashlib.sha256(p.read_bytes()).hexdigest(),p.stat().st_size)\\nr=Path(\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger\\\")\\nfor p in [r/\\\"source_blobs/block_table.py\\\",r/\\\"source_receipts/MAIN_block_table_original_operation.json\\\"]:\\n print(\\\"SOURCE_READBACK\\\",str(p),hashlib.sha256(p.read_bytes()).hexdigest(),p.stat().st_size)\\np=Path(\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001/RESULT.json\\\");v=json.loads(p.read_bytes());total=0;complete=0;failed=0\\nfor c,ref in v[\\\"actual_reports\\\"].items():\\n b=Path(ref[\\\"path\\\"]).read_bytes();q=json.loads(b);rows=[]\\n for z in q[\\\"cases\\\"]:\\n  steps=z[\\\"steps\\\"]; n=len(steps);total+=n;complete+=z[\\\"status\\\"]==\\\"passed\\\";failed+=sum(not x[\\\"passed\\\"] for x in steps)\\n  rows.append(dict(batch=z[\\\"batch\\\"],mode=z[\\\"mode\\\"],trial=z[\\\"trial\\\"],status=z[\\\"status\\\"],checked=n,max_out=z[\\\"max_output_error\\\"],state=z[\\\"max_state_l2\\\"],head=z[\\\"max_head_l2\\\"]))\\n print(\\\"PARTIAL\\\",c,hashlib.sha256(b).hexdigest(),json.dumps(rows,separators=(\\\",\\\",\\\":\\\")))\\nprint(\\\"CHECKED_TOTAL_PARTIAL_ONLY\\\",total,\\\"complete_cases\\\",complete,\\\"failed_steps\\\",failed,\\\"full_required\\\",11520)\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 207,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010c4\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"WHOLE_ORIGINAL aaa41d47bdf65c3c2b7dd20dc5f59c0afb7ac452f28c2c05279c9e2333e9f630 13948\\nSOURCE_READBACK /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger/source_blobs/block_table.py b79a46abf8feb0e2ad9e9de64b55e6fc6d3597eadbd903993cbf4e3e74f1f324 14149\\nSOURCE_READBACK /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger/source_receipts/MAIN_block_table_original_operation.json fadc17a444dbd459bba0335fbd57c600a1b3cce275de4eac3fa1fa669c795676 38793\\nPARTIAL 4 57fbb157e1aaf2690afb8ca105d980b73d16b7a7aa43e958d765aa6383e1ed28 [{\\\"batch\\\":16,\\\"mode\\\":\\\"eager\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0025,\\\"state\\\":1.2599801348389918e-07,\\\"head\\\":2.3022250004169135e-07},{\\\"batch\\\":16,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0029411764705882353,\\\"state\\\":1.2410163961339876e-07,\\\"head\\\":2.5794293575151463e-07},{\\\"batch\\\":16,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":1,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.002793296089385475,\\\"state\\\":1.2377947201945667e-07,\\\"head\\\":2.5892022770307797e-07},{\\\"batch\\\":16,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":2,\\\"status\\\":\\\"running\\\",\\\"checked\\\":50,\\\"max_out\\\":0.0015527950310559005,\\\"state\\\":1.1841634261011205e-07,\\\"head\\\":1.9805280158767752e-07}]\\nPARTIAL 5 d333b61ce6a75bbeba57cb2378ff9334b1f2a871f3eea69b5e66fdd129cdc9c9 [{\\\"batch\\\":15,\\\"mode\\\":\\\"eager\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0028089887640449437,\\\"state\\\":1.2383591784916137e-07,\\\"head\\\":2.3881397619388423e-07},{\\\"batch\\\":15,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.002631578947368421,\\\"state\\\":1.2236860325396863e-07,\\\"head\\\":2.1564675199128713e-07},{\\\"batch\\\":15,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":1,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0026455026455026454,\\\"state\\\":1.2409585689933968e-07,\\\"head\\\":2.0591242082202193e-07},{\\\"batch\\\":15,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":2,\\\"status\\\":\\\"running\\\",\\\"checked\\\":64,\\\"max_out\\\":0.0014705882352941176,\\\"state\\\":1.2060113438477167e-07,\\\"head\\\":2.0746558847427204e-07}]\\nPARTIAL 6 4f515003e654f6416874cb1271fa5cfd4ce73c1419876751862d98ae922b7e6f [{\\\"batch\\\":14,\\\"mode\\\":\\\"eager\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0028735632183908046,\\\"state\\\":1.2474213427470165e-07,\\\"head\\\":2.2390595990288e-07},{\\\"batch\\\":14,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0014285714285714286,\\\"state\\\":1.2482843479475444e-07,\\\"head\\\":2.0530934756866162e-07},{\\\"batch\\\":14,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":1,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0022624434389140274,\\\"state\\\":1.2301003552328706e-07,\\\"head\\\":2.141642998249725e-07},{\\\"batch\\\":14,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":2,\\\"status\\\":\\\"running\\\",\\\"checked\\\":92,\\\"max_out\\\":0.0013297872340425532,\\\"state\\\":1.2092221657332703e-07,\\\"head\\\":2.1452418719105811e-07}]\\nPARTIAL 7 a894b4b6b806a45ba67aa350d30785e99725a290d1d6f23b21105eb5fc39b89f [{\\\"batch\\\":13,\\\"mode\\\":\\\"eager\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0029940119760479044,\\\"state\\\":1.255394646180594e-07,\\\"head\\\":2.3298142804182106e-07},{\\\"batch\\\":13,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":0,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.002564102564102564,\\\"state\\\":1.2358832332327636e-07,\\\"head\\\":2.3290681228251266e-07},{\\\"batch\\\":13,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":1,\\\"status\\\":\\\"passed\\\",\\\"checked\\\":160,\\\"max_out\\\":0.0023923444976076554,\\\"state\\\":1.2340346633382048e-07,\\\"head\\\":2.0495645103144257e-07},{\\\"batch\\\":13,\\\"mode\\\":\\\"graph\\\",\\\"trial\\\":2,\\\"status\\\":\\\"running\\\",\\\"checked\\\":63,\\\"max_out\\\":0.0014204545454545455,\\\"state\\\":1.2197104427915578e-07,\\\"head\\\":1.934487357613394e-07}]\\nCHECKED_TOTAL_PARTIAL_ONLY 2189 complete_cases 12 failed_steps 0 full_required 11520\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 612,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 612,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 613\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 612,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 612\n      }\n    },\n    \"traceId\": \"0c017ad7-b108-43dc-8bf0-5705d4e38557\"\n  },\n  \"operationId\": \"exec-00000000000010c4\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import hashlib,json\nfrom pathlib import Path\nroot=Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\np=root/\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\";print(\"WHOLE_ORIGINAL\",hashlib.sha256(p.read_bytes()).hexdigest(),p.stat().st_size)\nr=Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger\")\nfor p in [r/\"source_blobs/block_table.py\",r/\"source_receipts/MAIN_block_table_original_operation.json\"]:\n print(\"SOURCE_READBACK\",str(p),hashlib.sha256(p.read_bytes()).hexdigest(),p.stat().st_size)\np=Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001/RESULT.json\");v=json.loads(p.read_bytes());total=0;complete=0;failed=0\nfor c,ref in v[\"actual_reports\"].items():\n b=Path(ref[\"path\"]).read_bytes();q=json.loads(b);rows=[]\n for z in q[\"cases\"]:\n  steps=z[\"steps\"]; n=len(steps);total+=n;complete+=z[\"status\"]==\"passed\";failed+=sum(not x[\"passed\"] for x in steps)\n  rows.append(dict(batch=z[\"batch\"],mode=z[\"mode\"],trial=z[\"trial\"],status=z[\"status\"],checked=n,max_out=z[\"max_output_error\"],state=z[\"max_state_l2\"],head=z[\"max_head_l2\"]))\n print(\"PARTIAL\",c,hashlib.sha256(b).hexdigest(),json.dumps(rows,separators=(\",\",\":\")))\nprint(\"CHECKED_TOTAL_PARTIAL_ONLY\",total,\"complete_cases\",complete,\"failed_steps\",failed,\"full_required\",11520)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 207,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010c4",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "WHOLE_ORIGINAL aaa41d47bdf65c3c2b7dd20dc5f59c0afb7ac452f28c2c05279c9e2333e9f630 13948\nSOURCE_READBACK /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger/source_blobs/block_table.py b79a46abf8feb0e2ad9e9de64b55e6fc6d3597eadbd903993cbf4e3e74f1f324 14149\nSOURCE_READBACK /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger/source_receipts/MAIN_block_table_original_operation.json fadc17a444dbd459bba0335fbd57c600a1b3cce275de4eac3fa1fa669c795676 38793\nPARTIAL 4 57fbb157e1aaf2690afb8ca105d980b73d16b7a7aa43e958d765aa6383e1ed28 [{\"batch\":16,\"mode\":\"eager\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0025,\"state\":1.2599801348389918e-07,\"head\":2.3022250004169135e-07},{\"batch\":16,\"mode\":\"graph\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0029411764705882353,\"state\":1.2410163961339876e-07,\"head\":2.5794293575151463e-07},{\"batch\":16,\"mode\":\"graph\",\"trial\":1,\"status\":\"passed\",\"checked\":160,\"max_out\":0.002793296089385475,\"state\":1.2377947201945667e-07,\"head\":2.5892022770307797e-07},{\"batch\":16,\"mode\":\"graph\",\"trial\":2,\"status\":\"running\",\"checked\":50,\"max_out\":0.0015527950310559005,\"state\":1.1841634261011205e-07,\"head\":1.9805280158767752e-07}]\nPARTIAL 5 d333b61ce6a75bbeba57cb2378ff9334b1f2a871f3eea69b5e66fdd129cdc9c9 [{\"batch\":15,\"mode\":\"eager\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0028089887640449437,\"state\":1.2383591784916137e-07,\"head\":2.3881397619388423e-07},{\"batch\":15,\"mode\":\"graph\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.002631578947368421,\"state\":1.2236860325396863e-07,\"head\":2.1564675199128713e-07},{\"batch\":15,\"mode\":\"graph\",\"trial\":1,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0026455026455026454,\"state\":1.2409585689933968e-07,\"head\":2.0591242082202193e-07},{\"batch\":15,\"mode\":\"graph\",\"trial\":2,\"status\":\"running\",\"checked\":64,\"max_out\":0.0014705882352941176,\"state\":1.2060113438477167e-07,\"head\":2.0746558847427204e-07}]\nPARTIAL 6 4f515003e654f6416874cb1271fa5cfd4ce73c1419876751862d98ae922b7e6f [{\"batch\":14,\"mode\":\"eager\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0028735632183908046,\"state\":1.2474213427470165e-07,\"head\":2.2390595990288e-07},{\"batch\":14,\"mode\":\"graph\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0014285714285714286,\"state\":1.2482843479475444e-07,\"head\":2.0530934756866162e-07},{\"batch\":14,\"mode\":\"graph\",\"trial\":1,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0022624434389140274,\"state\":1.2301003552328706e-07,\"head\":2.141642998249725e-07},{\"batch\":14,\"mode\":\"graph\",\"trial\":2,\"status\":\"running\",\"checked\":92,\"max_out\":0.0013297872340425532,\"state\":1.2092221657332703e-07,\"head\":2.1452418719105811e-07}]\nPARTIAL 7 a894b4b6b806a45ba67aa350d30785e99725a290d1d6f23b21105eb5fc39b89f [{\"batch\":13,\"mode\":\"eager\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0029940119760479044,\"state\":1.255394646180594e-07,\"head\":2.3298142804182106e-07},{\"batch\":13,\"mode\":\"graph\",\"trial\":0,\"status\":\"passed\",\"checked\":160,\"max_out\":0.002564102564102564,\"state\":1.2358832332327636e-07,\"head\":2.3290681228251266e-07},{\"batch\":13,\"mode\":\"graph\",\"trial\":1,\"status\":\"passed\",\"checked\":160,\"max_out\":0.0023923444976076554,\"state\":1.2340346633382048e-07,\"head\":2.0495645103144257e-07},{\"batch\":13,\"mode\":\"graph\",\"trial\":2,\"status\":\"running\",\"checked\":63,\"max_out\":0.0014204545454545455,\"state\":1.2197104427915578e-07,\"head\":1.934487357613394e-07}]\nCHECKED_TOTAL_PARTIAL_ONLY 2189 complete_cases 12 failed_steps 0 full_required 11520\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 612,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 612,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 613
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 612,
+          "routeLookupMs": 0,
+          "totalMs": 612
+        }
+      },
+      "traceId": "0c017ad7-b108-43dc-8bf0-5705d4e38557"
+    },
+    "operationId": "exec-00000000000010c4",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

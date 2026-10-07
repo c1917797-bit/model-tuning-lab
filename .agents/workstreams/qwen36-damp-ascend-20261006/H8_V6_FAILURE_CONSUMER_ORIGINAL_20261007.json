@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import hashlib,subprocess\\nfrom pathlib import Path\\np=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\\\");sha=hashlib.sha256(p.read_bytes()).hexdigest();print(\\\"WHOLE_ORIGINAL_SHA256\\\",sha,p.stat().st_size,flush=True)\\na=subprocess.run([\\\"/usr/bin/python3\\\",\\\"-B\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\\\",\\\"--result\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001/RESULT.json\\\",\\\"--result-sha256\\\",\\\"4bbfb7f7eb931bf37b7a42eac24bd495570dc9f3c1a90efa9b7bea60ab2a9af1\\\",\\\"--original-operation\\\",str(p),\\\"--original-operation-sha256\\\",sha],capture_output=True,text=True,timeout=60)\\nprint(\\\"ORIGINAL_CONSUMER_EXIT\\\",a.returncode);print(a.stdout);print(a.stderr)\\nraise SystemExit(a.returncode)\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 19428,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-00000000000010c2\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"WHOLE_ORIGINAL_SHA256 aaa41d47bdf65c3c2b7dd20dc5f59c0afb7ac452f28c2c05279c9e2333e9f630 13948\\nORIGINAL_CONSUMER_EXIT 1\\n\\nTraceback (most recent call last):\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\\\", line 208, in <module>\\n    if __name__==\\\"__main__\\\":main()\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\\\", line 206, in main\\n    a=p.parse_args();print(json.dumps(consume({\\\"path\\\":str(a.result),\\\"sha256\\\":a.result_sha256},\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\\\", line 156, in consume\\n    r=read(result[\\\"actual_reports\\\"][cardkey]);reports[card]=r\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\\\", line 7, in read\\n    def read(r):return json.loads(c.read_ref(r))\\n  File \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/contract.py\\\", line 48, in read_ref\\n    value=ref(value);require(sha(value[\\\"path\\\"])==value[\\\"sha256\\\"],\\\"Ref bytes drift\\\")\\n  File \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/contract.py\\\", line 33, in require\\n    if not ok: raise ValueError(why)\\nValueError: Ref bytes drift\\n\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 389,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 389,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 389\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 388,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 388\n      }\n    },\n    \"traceId\": \"84de7f85-df1a-4358-b4c9-a6ff5cc03aef\"\n  },\n  \"operationId\": \"exec-00000000000010c2\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import hashlib,subprocess\nfrom pathlib import Path\np=Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\");sha=hashlib.sha256(p.read_bytes()).hexdigest();print(\"WHOLE_ORIGINAL_SHA256\",sha,p.stat().st_size,flush=True)\na=subprocess.run([\"/usr/bin/python3\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\",\"--result\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001/RESULT.json\",\"--result-sha256\",\"4bbfb7f7eb931bf37b7a42eac24bd495570dc9f3c1a90efa9b7bea60ab2a9af1\",\"--original-operation\",str(p),\"--original-operation-sha256\",sha],capture_output=True,text=True,timeout=60)\nprint(\"ORIGINAL_CONSUMER_EXIT\",a.returncode);print(a.stdout);print(a.stderr)\nraise SystemExit(a.returncode)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 19428,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-00000000000010c2",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "WHOLE_ORIGINAL_SHA256 aaa41d47bdf65c3c2b7dd20dc5f59c0afb7ac452f28c2c05279c9e2333e9f630 13948\nORIGINAL_CONSUMER_EXIT 1\n\nTraceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\", line 208, in <module>\n    if __name__==\"__main__\":main()\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\", line 206, in main\n    a=p.parse_args();print(json.dumps(consume({\"path\":str(a.result),\"sha256\":a.result_sha256},\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\", line 156, in consume\n    r=read(result[\"actual_reports\"][cardkey]);reports[card]=r\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/consume.py\", line 7, in read\n    def read(r):return json.loads(c.read_ref(r))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/contract.py\", line 48, in read_ref\n    value=ref(value);require(sha(value[\"path\"])==value[\"sha256\"],\"Ref bytes drift\")\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/contract.py\", line 33, in require\n    if not ok: raise ValueError(why)\nValueError: Ref bytes drift\n\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 389,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 389,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 389
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 388,
+          "routeLookupMs": 0,
+          "totalMs": 388
+        }
+      },
+      "traceId": "84de7f85-df1a-4358-b4c9-a6ff5cc03aef"
+    },
+    "operationId": "exec-00000000000010c2",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}

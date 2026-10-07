@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import pathlib,json,subprocess\\nroot=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001')\\nout={}\\nfor card in range(4,8):\\n p=root/('physical-'+str(card))/'gate/report.json'\\n if p.is_file():\\n  r=json.loads(p.read_text())\\n  out[str(card)]={'status':r.get('status'),'cases':[{'batch':v.get('batch'),'mode':v.get('mode'),'trial':v.get('trial'),'status':v.get('status'),'checked_steps':len(v.get('steps',[])),'all_checked_steps_passed':all(s.get('passed') is True for s in v.get('steps',[]))} for v in r.get('cases',[])],'error':r.get('error'),'last_phase':r.get('last_phase')}\\nq=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v1')\\ninv=[{'path':str(p.relative_to(q)),'bytes':p.stat().st_size} for p in q.rglob('*') if p.is_file()][:30] if q.is_dir() else None\\ng=subprocess.run(['/usr/local/bin/git','rev-parse','HEAD'],capture_output=True,text=True,timeout=10)\\nprint(json.dumps({'schema':'MAIN-H8-v6-selected-partial-no-acceptance/v1','partial_reports':out,'model_source_inventory':inv,'head_exit':g.returncode,'head':g.stdout.strip()}))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 143,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010ad\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"schema\\\": \\\"MAIN-H8-v6-selected-partial-no-acceptance/v1\\\", \\\"partial_reports\\\": {\\\"4\\\": {\\\"status\\\": \\\"running\\\", \\\"cases\\\": [{\\\"batch\\\": 16, \\\"mode\\\": \\\"eager\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"passed\\\", \\\"checked_steps\\\": 160, \\\"all_checked_steps_passed\\\": true}, {\\\"batch\\\": 16, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"running\\\", \\\"checked_steps\\\": 92, \\\"all_checked_steps_passed\\\": true}], \\\"error\\\": null, \\\"last_phase\\\": {\\\"schema\\\": \\\"kvbp.h8-full-phase/v1\\\", \\\"sequence\\\": 2792, \\\"kind\\\": \\\"matrix\\\", \\\"phase\\\": \\\"h8-fenced\\\", \\\"batch\\\": 16, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"step\\\": 92, \\\"pid\\\": 103, \\\"monotonic_ns\\\": 339754933883850}}, \\\"5\\\": {\\\"status\\\": \\\"running\\\", \\\"cases\\\": [{\\\"batch\\\": 15, \\\"mode\\\": \\\"eager\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"passed\\\", \\\"checked_steps\\\": 160, \\\"all_checked_steps_passed\\\": true}, {\\\"batch\\\": 15, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"running\\\", \\\"checked_steps\\\": 96, \\\"all_checked_steps_passed\\\": true}], \\\"error\\\": null, \\\"last_phase\\\": {\\\"schema\\\": \\\"kvbp.h8-full-phase/v1\\\", \\\"sequence\\\": 2844, \\\"kind\\\": \\\"matrix\\\", \\\"phase\\\": \\\"checkpoint.after-native-before-h8\\\", \\\"batch\\\": 15, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"step\\\": 97, \\\"pid\\\": 102, \\\"monotonic_ns\\\": 339755329965620}}, \\\"6\\\": {\\\"status\\\": \\\"running\\\", \\\"cases\\\": [{\\\"batch\\\": 14, \\\"mode\\\": \\\"eager\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"passed\\\", \\\"checked_steps\\\": 160, \\\"all_checked_steps_passed\\\": true}, {\\\"batch\\\": 14, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"running\\\", \\\"checked_steps\\\": 105, \\\"all_checked_steps_passed\\\": true}], \\\"error\\\": null, \\\"last_phase\\\": {\\\"schema\\\": \\\"kvbp.h8-full-phase/v1\\\", \\\"sequence\\\": 2935, \\\"kind\\\": \\\"matrix\\\", \\\"phase\\\": \\\"h8-fenced\\\", \\\"batch\\\": 14, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"step\\\": 105, \\\"pid\\\": 102, \\\"monotonic_ns\\\": 339754933883290}}, \\\"7\\\": {\\\"status\\\": \\\"running\\\", \\\"cases\\\": [{\\\"batch\\\": 13, \\\"mode\\\": \\\"eager\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"passed\\\", \\\"checked_steps\\\": 160, \\\"all_checked_steps_passed\\\": true}, {\\\"batch\\\": 13, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"status\\\": \\\"running\\\", \\\"checked_steps\\\": 90, \\\"all_checked_steps_passed\\\": true}], \\\"error\\\": null, \\\"last_phase\\\": {\\\"schema\\\": \\\"kvbp.h8-full-phase/v1\\\", \\\"sequence\\\": 2774, \\\"kind\\\": \\\"matrix\\\", \\\"phase\\\": \\\"checkpoint.before-native\\\", \\\"batch\\\": 13, \\\"mode\\\": \\\"graph\\\", \\\"trial\\\": 0, \\\"step\\\": 91, \\\"pid\\\": 102, \\\"monotonic_ns\\\": 339755541742380}}}, \\\"model_source_inventory\\\": [{\\\"path\\\": \\\"source_receipts/utils_owner_inspect.json\\\", \\\"bytes\\\": 9013}, {\\\"path\\\": \\\"source_receipts/utils_archive_receipt.json\\\", \\\"bytes\\\": 44205}, {\\\"path\\\": \\\"source_blobs/attention_backend_utils.py\\\", \\\"bytes\\\": 36063}], \\\"head_exit\\\": 0, \\\"head\\\": \\\"6094fce6c628471594e7bd03870c3c5e0e9e367f\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 368,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 368,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 368\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 367,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 368\n      }\n    },\n    \"traceId\": \"3c93f74a-0bf6-467b-8fd7-05203ab98ca4\"\n  },\n  \"operationId\": \"exec-00000000000010ad\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import pathlib,json,subprocess\nroot=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001')\nout={}\nfor card in range(4,8):\n p=root/('physical-'+str(card))/'gate/report.json'\n if p.is_file():\n  r=json.loads(p.read_text())\n  out[str(card)]={'status':r.get('status'),'cases':[{'batch':v.get('batch'),'mode':v.get('mode'),'trial':v.get('trial'),'status':v.get('status'),'checked_steps':len(v.get('steps',[])),'all_checked_steps_passed':all(s.get('passed') is True for s in v.get('steps',[]))} for v in r.get('cases',[])],'error':r.get('error'),'last_phase':r.get('last_phase')}\nq=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v1')\ninv=[{'path':str(p.relative_to(q)),'bytes':p.stat().st_size} for p in q.rglob('*') if p.is_file()][:30] if q.is_dir() else None\ng=subprocess.run(['/usr/local/bin/git','rev-parse','HEAD'],capture_output=True,text=True,timeout=10)\nprint(json.dumps({'schema':'MAIN-H8-v6-selected-partial-no-acceptance/v1','partial_reports':out,'model_source_inventory':inv,'head_exit':g.returncode,'head':g.stdout.strip()}))\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 143,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010ad",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"schema\": \"MAIN-H8-v6-selected-partial-no-acceptance/v1\", \"partial_reports\": {\"4\": {\"status\": \"running\", \"cases\": [{\"batch\": 16, \"mode\": \"eager\", \"trial\": 0, \"status\": \"passed\", \"checked_steps\": 160, \"all_checked_steps_passed\": true}, {\"batch\": 16, \"mode\": \"graph\", \"trial\": 0, \"status\": \"running\", \"checked_steps\": 92, \"all_checked_steps_passed\": true}], \"error\": null, \"last_phase\": {\"schema\": \"kvbp.h8-full-phase/v1\", \"sequence\": 2792, \"kind\": \"matrix\", \"phase\": \"h8-fenced\", \"batch\": 16, \"mode\": \"graph\", \"trial\": 0, \"step\": 92, \"pid\": 103, \"monotonic_ns\": 339754933883850}}, \"5\": {\"status\": \"running\", \"cases\": [{\"batch\": 15, \"mode\": \"eager\", \"trial\": 0, \"status\": \"passed\", \"checked_steps\": 160, \"all_checked_steps_passed\": true}, {\"batch\": 15, \"mode\": \"graph\", \"trial\": 0, \"status\": \"running\", \"checked_steps\": 96, \"all_checked_steps_passed\": true}], \"error\": null, \"last_phase\": {\"schema\": \"kvbp.h8-full-phase/v1\", \"sequence\": 2844, \"kind\": \"matrix\", \"phase\": \"checkpoint.after-native-before-h8\", \"batch\": 15, \"mode\": \"graph\", \"trial\": 0, \"step\": 97, \"pid\": 102, \"monotonic_ns\": 339755329965620}}, \"6\": {\"status\": \"running\", \"cases\": [{\"batch\": 14, \"mode\": \"eager\", \"trial\": 0, \"status\": \"passed\", \"checked_steps\": 160, \"all_checked_steps_passed\": true}, {\"batch\": 14, \"mode\": \"graph\", \"trial\": 0, \"status\": \"running\", \"checked_steps\": 105, \"all_checked_steps_passed\": true}], \"error\": null, \"last_phase\": {\"schema\": \"kvbp.h8-full-phase/v1\", \"sequence\": 2935, \"kind\": \"matrix\", \"phase\": \"h8-fenced\", \"batch\": 14, \"mode\": \"graph\", \"trial\": 0, \"step\": 105, \"pid\": 102, \"monotonic_ns\": 339754933883290}}, \"7\": {\"status\": \"running\", \"cases\": [{\"batch\": 13, \"mode\": \"eager\", \"trial\": 0, \"status\": \"passed\", \"checked_steps\": 160, \"all_checked_steps_passed\": true}, {\"batch\": 13, \"mode\": \"graph\", \"trial\": 0, \"status\": \"running\", \"checked_steps\": 90, \"all_checked_steps_passed\": true}], \"error\": null, \"last_phase\": {\"schema\": \"kvbp.h8-full-phase/v1\", \"sequence\": 2774, \"kind\": \"matrix\", \"phase\": \"checkpoint.before-native\", \"batch\": 13, \"mode\": \"graph\", \"trial\": 0, \"step\": 91, \"pid\": 102, \"monotonic_ns\": 339755541742380}}}, \"model_source_inventory\": [{\"path\": \"source_receipts/utils_owner_inspect.json\", \"bytes\": 9013}, {\"path\": \"source_receipts/utils_archive_receipt.json\", \"bytes\": 44205}, {\"path\": \"source_blobs/attention_backend_utils.py\", \"bytes\": 36063}], \"head_exit\": 0, \"head\": \"6094fce6c628471594e7bd03870c3c5e0e9e367f\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 368,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 368,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 368
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 367,
+          "routeLookupMs": 0,
+          "totalMs": 368
+        }
+      },
+      "traceId": "3c93f74a-0bf6-467b-8fd7-05203ab98ca4"
+    },
+    "operationId": "exec-00000000000010ad",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

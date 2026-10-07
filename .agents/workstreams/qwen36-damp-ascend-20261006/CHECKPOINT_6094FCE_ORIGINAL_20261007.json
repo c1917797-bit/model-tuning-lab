@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"commit\",\n          \"-m\",\n          \"research: preserve SparQ ATB ABI failure and admit H8 full runtime\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/local/bin/git\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 82,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010a6\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"[work/qwen36-damp-ascend-20261006 6094fce] research: preserve SparQ ATB ABI failure and admit H8 full runtime\\n 18 files changed, 1315 insertions(+), 3 deletions(-)\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/CONTINUATION_FRESH_ORIENTATION_20261007_2233.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FIRST_LIVE_ORIGINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ACTUAL_DISPATCH_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SOURCE_ACTUAL_DISPATCH_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SOURCE_CONSUMER_ORIGINAL_TERMINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SOURCE_ORIGINAL_TERMINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ACTUAL_DISPATCH_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ACTUAL_ENTRY_FAILURE_20261007.md\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ACTUAL_SOFTWARE_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_FIRST_SOFTWARE_FAILURE_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ORIGINAL_TERMINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_RELEASE_OBSERVER_FAILURE_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_RELEASE_ORIGINAL_TERMINAL_20261007.json\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 367,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 367,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 367\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 367,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 367\n      }\n    },\n    \"traceId\": \"b1459a81-df04-422d-91f4-29d2deaeaf22\"\n  },\n  \"operationId\": \"exec-00000000000010a6\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "commit",
+            "-m",
+            "research: preserve SparQ ATB ABI failure and admit H8 full runtime"
+          ],
+          "cancelled": false,
+          "command": "/usr/local/bin/git",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 82,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010a6",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "[work/qwen36-damp-ascend-20261006 6094fce] research: preserve SparQ ATB ABI failure and admit H8 full runtime\n 18 files changed, 1315 insertions(+), 3 deletions(-)\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/CONTINUATION_FRESH_ORIENTATION_20261007_2233.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FIRST_LIVE_ORIGINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ACTUAL_DISPATCH_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SOURCE_ACTUAL_DISPATCH_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SOURCE_CONSUMER_ORIGINAL_TERMINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SOURCE_ORIGINAL_TERMINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ACTUAL_DISPATCH_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ACTUAL_ENTRY_FAILURE_20261007.md\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ACTUAL_SOFTWARE_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_FIRST_SOFTWARE_FAILURE_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_ORIGINAL_TERMINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_RELEASE_OBSERVER_FAILURE_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ005_RELEASE_ORIGINAL_TERMINAL_20261007.json\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 367,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 367,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 367
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 367,
+          "routeLookupMs": 0,
+          "totalMs": 367
+        }
+      },
+      "traceId": "b1459a81-df04-422d-91f4-29d2deaeaf22"
+    },
+    "operationId": "exec-00000000000010a6",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

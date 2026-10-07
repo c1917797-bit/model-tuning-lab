@@ -1,5 +1,35 @@
 # DAMP Ascend — current workstream
 
+## Current terminal H8 v6 failure — 2026-10-07 23:28Z
+
+Read H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md first. MA109c FAILED1 after
+22.05min on RSS observer ProcessLookupError, not observed memory overrun.
+Original RESULT/whole109c preserved; strict consumer10c2 failed Ref bytes drift
+because reports advanced during cleanup. Independent10c4 found2189 partial
+checked steps/12 completed cases/zero failures, not full11520/lifecycle PASS.
+Independent10c5 proved all four exact own CIDs stopped/retained/Pid0/noExec/noOOM,
+SMI4–7 idle and OVS/NUMA3 protection unchanged;32GiB authority remains SPENT.
+New v7 minimal observer/quiescent snapshot source preparation, no frozenv6
+retry/no numerical relaxation. SparQ006/W4native002 prepare in parallel.
+Actual block_table source delivered to thin model-v2; no model/E2E/task yet.
+Deadlines unchanged; goal active. Earlier RUNNING entries below are historical.
+
+
+## Current actual H8 numerical progress — 2026-10-07 23:10Z
+
+Read H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md first. Full11520 MA109c remains
+RUNNING; actual four separate matrix PIDs on physical4–7, B13–16 eager160
+passed and first graph trials partial. No full/mixed/model/E2E/task PASS yet.
+MA10ad whole bounded partial observer is retained; do not treat mutable shard
+reports as successful original authority. Old P1 wrapper is H16/eager-only,
+not H8 integrated; actual model-v1 directory has reference receipts only.
+Recurrent owner completes mixed64 source then actual48-layer thin adapter;
+SparQ strict ATB successor and W4native002 remain source preparation.
+Local exact18 checkpoint6094fce passed MST20/diff and actual commit10a6;
+known authentication blocker unchanged, not pushed. Three preparers active.
+Memory32GiB complete/SPENT/OVS intact; no extra release or0–3 action.
+KV/portfolio cutoffs unchanged, no accepted non-HYPIC E2E/task method.
+
 ## Current actual serial admission status — 2026-10-07 22:52:51 UTC
 
 SparQ005 actual MA108f FAILED1/63.893s before NPU. Read
