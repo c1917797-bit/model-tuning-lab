@@ -1,5 +1,20 @@
 # Continuous preparation and NPU execution queue
 
+## Actual release and prepared successor state — 2026-10-07 07:05Z
+
+Read PREPARED_SUCCESSORS_20261007.md before older live notes.
+MA070e reached the unchanged phase timeout. Actual four owned containers are
+stopped/retained/Pid0; final reports contain39/64 genuinely complete cases,
+not fullmatrix PASS. Correct FAILURE/STOP/POST paths are run-root/launch/.
+Its old AWMCP handle is not_found/aged; never fabricate original parent terminal.
+Current6 source tools were applied and MAIN MA077b183 stdlib+MST20 passed;
+original52 unchanged and retained-source SHA/actual stops verified MA07f3.
+NEW completion and KVBuffer launchers are defaultOFF/preparation, not admitted.
+Full-model v1 has a proved OFF binding seam and stale release/peak gaps; NEWv2
+repair is being prepared, don't run v1 unchanged. Fresh06:55Z cards4–7 idle and
+ordinaryRAM~80GiB; recheck before new load. Protect0–3 despite their currentidle.
+DAMP08:48:03Z and portfolioOct9 11:17:31Z cutoffs/queue/quality goals unchanged.
+
 ## Verified device-independent preparation — 2026-10-06 20:57Z
 
 Checkpoint291dbeb is normally pushed/exact-remote-verified. Read the newest

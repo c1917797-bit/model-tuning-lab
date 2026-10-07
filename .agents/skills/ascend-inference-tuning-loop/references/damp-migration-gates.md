@@ -1,5 +1,38 @@
 # Packed recurrent-state migration: DAMP lessons
 
+## Full-mode readiness and partial-case reuse — 2026-10-07 07:05Z
+
+MAIN applied and actually checked NEW DAMP completion4 + KVBuffer middle
+launcher2:183 stdlib checks, exact six hashes and MST20 (MA077b). These are
+preparation, NOT numerical/service/E2E acceptance. KVBuffer launcher consumes
+the real14-positive Meta report by Ref and its actual Torch schema/source/maps;
+the old report is not relabelled into an invented prerequisite schema.
+
+Completed-case counts must use the producer's real final status, full160/8,
+dynamic negatives and final15-overlap/shared-arena audit, not list length or
+step count alone. MA070e reached its fixed phase timeout; the actual failure,
+child streams,39 fully completed cases and stopped/retained leases remain
+separate from full64 acceptance. A new union must preserve the original failure.
+Balance measured native-reference/transfer/CPU costs, not sum-T/case count.
+
+An AWMCP unknown mutation outcome requires an actual target readback before
+repeating writes. An aged operation handle is not a terminal receipt. Distinct
+source-bound host-job/cleanup evidence may be audited as a NEW authority seam,
+but must never be fabricated into the missing original AWMCP record. Retain
+both identities/scopes, actual raw argv/streams/exit and exact owned release.
+
+No-device helper tests alone do not cover complete OFF/ON native execution
+branches. Actual frozen live_bindings reads _damp_original_core even when
+OFF registration installs no such attribute; the NEW source-body regression
+reproduces that seam with synthetic48 instances. Real first-forward remains
+pending. Repair only the verified seam without adding fake capture attributes
+to OFF or mutating frozen math. Record a container's kernel cgroup peak, not
+Docker instantaneous stats, before considering a model-budget revision.
+
+Evidence: workstream PREPARED_SUCCESSORS_20261007.md. Fixed individual and
+portfolio cutoffs, numerical thresholds,72GiB model gate and protected0–3
+remain unchanged. Default-OFF drafts/preparation are never ready-device labels.
+
 Evidence date: 2026-10-06. Workstream:
 `.agents/workstreams/qwen36-damp-ascend-20261006/`.
 These are engineering lessons, not evidence of DAMP throughput or quality gain.
