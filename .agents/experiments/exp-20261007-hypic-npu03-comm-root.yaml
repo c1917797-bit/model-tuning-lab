@@ -55,6 +55,16 @@ measured_20261007:
     cleanup: Both exact-name diagnostic containers removed, NPU0-3 free, port 8223 free, NPU4-7 untouched.
     classification: Global eager is rejected as a performance fix. NPU2-only static card setting not found. Source-level cause of rank skew remains inconclusive.
   next_test: Trace delayed graph-on host aclrtValueWrite submission and calibrate cross-rank clocks; predeclare one-variable rank mapping within 0-3 or isolated CPU-affinity test, requiring wait and request TPOT to change together.
+  cpuset_probe_plan:
+    hypothesis: The frozen 112-191 cpuset deprives NPU2/3-side worker threads of part of their recommended local CPUs and causes the graph-on rank-2 FIA task-update stall.
+    primary_variable: Isolated container cpuset 112-191 to 96-175, preserving 80 CPUs, exact image/source/model/TP4/visible physical NPU0-3/graph-on command/stimulus.
+    diagnostic_metric: Per-rank graph FIA update interval and aclrtValueWrite cadence plus four-request 128-output weighted TPOT; compare to 2026-10-07 profiled graph-on control.
+    control_fia_update: In the trailing 30 seconds, matched CANN graph task-update Begin/End median is 3.1726 ms on rank 0 (1232 pairs) and 12.0890 ms on rank 2 (1215 pairs); 1206 rank-2 pairs exceed 10 ms.
+    root_support_gate: Rank-2 median FIA task-update falls below 6 ms and weighted TPOT improves by at least 20 percent versus 499.0045 ms/token, with 4/4 valid exact-length outputs; inspect whether another rank becomes critical.
+    disproof: Rank-2 graph update/write cadence and TPOT remain slow, or the bottleneck changes without correlated service improvement.
+    abort: Occupied NPU0-3 or port 8223, source/image/device drift, failed 4/4 exact-output guard, foreign process, or owned-container cleanup failure.
+    artifacts: /cache/cch/hypic-npu03-comm-root-20261007/cpuset96-175
+    safety: Only physical NPU0-3 mapped. No host cpuset, driver, firmware, clock, HCCS, existing container, or NPU4-7 change.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
