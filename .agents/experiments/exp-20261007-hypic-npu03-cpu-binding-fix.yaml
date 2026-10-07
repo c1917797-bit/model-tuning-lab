@@ -1,6 +1,6 @@
 schema: ascend-inference-treatment/v1
 id: exp-20261007-hypic-npu03-cpu-binding-fix
-status: screen_passed
+status: repeat2_passed
 branch: work/hypic-npu03-cpu-binding-fix-20261007
 parent_diagnosis: exp-20261007-hypic-npu03-comm-root
 objective: Remove the NPU0-3 Decode latency floor caused by the enabled automatic CPU-binding path without modifying the official image or other card lanes.
@@ -71,3 +71,15 @@ screen_20261007:
     cleanup_sha256: 779b3e6e1d854ac16911c16465adf1a22a97d674593ded61ea7953c6bd0d388a
   cleanup: Exact screen container removed, NPU0-3 and port 8223 released; no NPU4-7 access.
   decision: Passes predeclared fail-fast screen. Proceed to two additional fresh candidate repetitions and judge dispersion; complete full quality before production adoption.
+repeat2_20261007:
+  operation_id: exec-0000000000000af8
+  protocol: Same frozen no-cache 40 x 1024 c16 protocol, new container and service lifecycle, no profiler.
+  validity: 40/40 exact-length outputs, zero failed, parsed binding-off activation, exact container cleanup.
+  candidate: Weighted TPOT 77.8308 ms/token; TPOT P95 118.6511 ms; TTFT P95 81806.77 ms; output throughput 115.3961 token/s; duration 354.9513 s.
+  comparison: Weighted TPOT differs from screen by 0.34 percent; two candidate runs do not satisfy the three-repeat decision gate.
+  artifacts:
+    performance_sha256: 5b6917278b9adc61c18a548c60de441246972385190d10fd65545046dc0b059e
+    contract_sha256: 3af18ae429b2f0f8af9e6a1ba8548c7799bfe0f506104bea1767405e03012f75
+    activation_log_sha256: 79294ac348be5eea55bd168461d7d7112d43890c93fcdffe42816a4d497795aa
+    cleanup_sha256: 7b4b74a8be45bc69d43e6f63fe114904577bdfa65de289382fa23bce4c13058f
+  next_gate: Run repeat3 with no serving/workload changes, then aggregate all three candidate runs against the frozen three-run baseline.
