@@ -225,7 +225,7 @@ quality_campaign_20261007:
   decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
 quality_campaign_clean2_20261007:
   operation_id: exec-0000000000000e15
-  status: Running since 2026-10-07 17:10 UTC; all six no-cache units independently audited and arm-level lane-guard/release passed at 19:33:48 UTC; HYPIC-only service started at 19:40:13 UTC with four NPU0-3 workers; LongBench-v2 run1 running. No paired quality verdict yet.
+  status: Running since 2026-10-07 17:10 UTC; all six no-cache units independently audited and arm-level lane-guard/release passed at 19:33:48 UTC; HYPIC-only service started at 19:40:13 UTC with four NPU0-3 workers; LongBench-v2 run1 independently audited, GSM8K run1 running since 20:04:36 UTC. No paired quality verdict yet.
   artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
   only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
   orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
@@ -279,4 +279,11 @@ quality_campaign_clean2_20261007:
     container_id: b57f81573534e119c375cbbeb300ca81918f378cf718120ab6bd4e47a56036da
     worker_pid_by_physical_npu: {0: 1965788, 1: 1965789, 2: 1965790, 3: 1965791}
     stage: LongBench-v2 run1 began 2026-10-07T19:40:15Z; treatment output and full hot-path activation pending.
+  hypic_longbenchv2_run1:
+    validity: Independently audited 127/127 rows, zero failures, exact sample/reference/response hashes, pinned scorer, prompt template, token accounting, receipt and paired prompt-token identity with no-cache run1; treatment whole-arm guard/release pending.
+    result: 74/127 correct, 58.267716535433074 percent; 15 outputs reached the 2048-token length limit; 136242 completion tokens.
+    pairwise_vs_no_cache_run1: {win: 2, loss: 6, both_correct: 72, both_wrong: 47}
+    summary_sha256: 04b7ee273207ff7ddc4edc130a760206093356f55b4a2b783b7e748b28ce41eb
+    details_sha256: 3d9b43ec967b4571f6566e7aeebb229922ed93aba9a84f75c458fc5b67d56592
+    receipt_sha256: 68a531ef463fd7c614dbbb6af1c24f5fd5101fb1ef0f4f626522a9fe77484061
   decision: clean2 no-cache denominator valid after independent unit/guard/release audits; treatment six units, its release receipt and full paired audit pending.
