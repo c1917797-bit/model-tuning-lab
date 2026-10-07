@@ -8,7 +8,7 @@ Current branch has ingested three verified performance/tooling lessons into two 
 
 Historical vocabulary: completed = a defined workflow produced a traceable positive or negative result; partial = the workflow has a documented evidence gap; unassessed = no behavioral acceptance recorded in the old HYPIC ledger. A structural validator pass is not behavioral validation.
 
-Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bounded workflow with direct evidence; **P** = some steps/evidence exist but its relevant acceptance is open; **N** = not exercised here or not applicable. V is not a universal guarantee for every future use of that Skill. The five V entries are environment orientation and canary (frozen token-ID/hot-path plus six-run audit), experience ingestion and skill governance (three reusable edits plus registry/validator), and Git checkpoint policy (confirmed policy, validated clean branch and pushed commits). The quality campaign remains live; no complete-paper verdict is counted. Run `python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_matrix.py` to check that all 29 pinned main IDs occur exactly once and that the declared V/P/N counts match the table.
+Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bounded workflow with direct evidence; **P** = some steps/evidence exist but its relevant acceptance is open; **N** = not exercised here or not applicable. V is not a universal guarantee for every future use of that Skill. The five V entries are environment orientation and canary (frozen token-ID/hot-path plus six-run audit), experience ingestion and skill governance (three reusable edits plus registry/validator), and Git checkpoint policy (confirmed policy, validated clean branch and pushed commits). `PAPER_ARCHITECTURE_FIT.md` now records a retrospective paper/target applicability check, so paper-ingestion and architecture-fit move from N to P; neither is V because its pre-implementation timing gate cannot be retroactively satisfied and the broader method/quality boundary remains open. The quality campaign remains live; no complete-paper verdict is counted. Run `python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_matrix.py` to check that all 29 pinned main IDs occur exactly once and that the declared V/P/N counts match the table.
 
 | Skill | 2026-10-06 historical ledger | Current | This campaign's remaining acceptance |
 | --- | --- | --- | --- |
@@ -23,10 +23,10 @@ Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bound
 | ascend-cannbot-profiler | partial | P | Existing Decode profile informed diagnosis; rank-2 offline-export limitation remains. |
 | paper-to-ascend-reproduction | partial | P | One-switch performance proven; full quality and paper-level audit pending. |
 | ascend-model-quality-evaluation | partial | P | Matched 41984-context, 2048-token 12-unit campaign running; no final score. |
-| ascend-architecture-fit | unassessed | N | Independently verify mechanism fit against frozen Qwen3.6 checkpoint and live source. |
+| ascend-architecture-fit | unassessed | P | Retrospective C1/C2 text fit recorded from checkpoint/tokenizer/runtime; prospective timing, C3 and final quality remain open. |
 | ascend-inference-tuning-loop | unassessed | P | Planned/baselined/attempted/verified/measured checkpoints exist; final decision pending. |
 | ascend-source-map | unassessed | P | Runtime seam and activation pinned; method-chain source map not independently closed. |
-| paper-ingestion | unassessed | N | Recheck HYPIC paper method-chain parity against derivative runtime. |
+| paper-ingestion | unassessed | P | ArXiv v2 mechanism/C1-C3 map and source audits recorded retrospectively; upstream exact commit and pre-implementation gate remain open. |
 | paper-to-ascend | unassessed | P | Performance portion passed; quality and complete method-chain decision pending. |
 | mst-agentsmd-authoring | unassessed | N | No new AGENTS.md authoring workflow executed. |
 | mst-experience-ingestion | unassessed | V | Three trigger/action/destination/verification lessons ingested in existing Skills. |
@@ -42,4 +42,4 @@ Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bound
 | mst-tool-adapter-boundary | unassessed | P | AWMCP route kept outside runtime code; full adapter-boundary audit pending. |
 | mst-transformation-verification | unassessed | P | Structural 29-Skill validator and performance behavior passed; full boundary audit pending. |
 
-Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 5 V, 18 P, 6 N = 29. The NPU0-3 campaign has passed paired performance and independent artifact audit; paired quality is running, not complete. No whole-paper or whole-tree completion claim is made. Reconcile each row against raw quality artifacts before the final count.
+Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 5 V, 20 P, 4 N = 29. The NPU0-3 campaign has passed paired performance and independent artifact audit; paired quality is running, not complete. No whole-paper or whole-tree completion claim is made. Reconcile each row against raw quality artifacts before the final count.

@@ -1,5 +1,7 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+Paper/architecture boundary: `PAPER_ARCHITECTURE_FIT.md` retrospectively verifies this Qwen3.5-hybrid checkpoint and the plugin's C1/C2 text hot-reuse fit. Read-only source audits pass the bounded hot-reuse and Qwen3.5 single-instance scopes, while paper-complete and upstream-complete intentionally fail on missing distributed C3 and other breadth. Even if paired quality passes, report a bounded C1/C2 piercing, never all-paper implementation. The 29-Skill ledger now has 5 V, 20 P and 4 N; retrospective fit/ingestion are partial, not prospective successes.
+
 Current authoritative checkpoint: no-cache LongBench-v2 runs1-2 and GSM8K run1 are complete and independently audited; the controller is running no-cache GSM8K run2. That is 3 of 12 quality units, with no paired quality verdict. Historical progress entries below preserve earlier next steps but are superseded by this checkpoint and the live controller/status files.
 
 The user authorized continued use of physical NPU0-3 until the full quality campaign finishes, beyond the earlier one-day target. GitHub HTTPS push was intermittent (one remote HTTP 500, then one username challenge), but a later retry successfully advanced the remote independent branch through `b303d44`. Verify the remote ref before any retry after an ambiguous transport result; do not alter the dirty canonical checkout or request/print a token in chat.
