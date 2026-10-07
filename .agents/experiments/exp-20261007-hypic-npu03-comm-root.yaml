@@ -21,6 +21,8 @@ measured_20261007:
     - Rank 0, 1, and 3 slow-call starts differ by approximately 7-14 us and have nearly equal approximately 22 ms durations.
     - Rank 2 raw profiling DB reveals the matching 40 KB collective starts approximately 22.67 ms later and itself lasts approximately 0.009 ms in a sampled step.
     - During that sampled delay rank 2 stream 45 repeatedly executes MEM_WAIT_VALUE while stream 46 waits; this is a graph or cross-stream synchronization symptom, not a proven hardware-link failure.
+    - The earliest observed divergence precedes attention and collective entry: after reshape_and_cache, ranks 0/1/3 spend about 1-2 us in MEM_WAIT_VALUE, whereas rank 2 polls it about 7665 times over 22.4 ms; rank 2's subsequent FusedInferAttentionScore takes about 0.216 ms and its AllReduce about 0.009 ms.
+    - The notification producer/condition for rank 2's wait is not identified; do not infer a faulty NPU2 or a source-level fix from temporal ordering alone.
   standalone_aiv:
     operation_id: exec-0000000000000892
     result: TP4 40 KB AllReduce median 0.260-0.262 ms across four ranks; 160 KB median 0.246-0.247 ms.
@@ -29,8 +31,8 @@ measured_20261007:
     operation_id: exec-00000000000008b8
     result: Graph replay with sixteen 40 KB AllReduce calls median 0.216-0.218 ms for the whole replay across four ranks.
     cleanup: docker --rm completed and no owned NPU process remains.
-  decision: H1 is not supported at tested sizes and H2 is favored. Neither standalone test reproduces the full-service stall. The exact source-level synchronization trigger is still unproven.
-  next_test: Fresh full-service NPU0-3 control with graph mode or rank mapping as the sole variable, identical short Decode workload and four-rank timeline; no claim of a fix until service latency changes.
+  decision: H1 is not supported at tested sizes and H2 is favored. Neither standalone test reproduces the full-service stall. The first observed divergence is rank 2's pre-attention MEM_WAIT_VALUE; its notification producer and source-level trigger remain unproven.
+  next_test: Identify the pre-attention MEM_WAIT_VALUE notification, then use fresh full-service NPU0-3 control with graph mode or rank mapping as the sole variable, identical short Decode workload and four-rank timeline; no claim of a fix until the wait and service latency change together.
 scope:
   physical_npus: [0, 1, 2, 3]
   forbidden_npus: [4, 5, 6, 7]
