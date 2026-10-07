@@ -64,6 +64,35 @@ def samples_for(dataset: str) -> list[dict]:
     return rows
 
 
+def audit_activation_events(evidence: Path) -> dict:
+    events = Counter()
+    hot_pids: set[int] = set()
+    with evidence.open(encoding="utf-8") as stream:
+        for line in stream:
+            if not line.strip():
+                continue
+            event = json.loads(line)
+            name = event["event"]
+            events[name] += 1
+            if name == "worker_hot_path":
+                pid = event.get("pid")
+                if isinstance(pid, int) and pid > 0:
+                    hot_pids.add(pid)
+    if (events["plugin_build_active"] < 1
+            or events["worker_hot_path"] < 4
+            or len(hot_pids) < 4
+            or events["runtime_scheduler_active"] < 1):
+        raise RuntimeError(
+            "HYPIC quality runtime activation insufficient: "
+            f"events={dict(events)}, distinct_worker_hot_pids={sorted(hot_pids)}")
+    return {
+        "plugin_build_active": events["plugin_build_active"],
+        "worker_hot_path": events["worker_hot_path"],
+        "distinct_worker_hot_pids": sorted(hot_pids),
+        "runtime_scheduler_active": events["runtime_scheduler_active"],
+    }
+
+
 def service_receipt(arm: str, fingerprint: dict) -> dict:
     directory = QROOT / arm
     start = json.loads((directory / "service-start.json").read_text())
@@ -108,20 +137,10 @@ def service_receipt(arm: str, fingerprint: dict) -> dict:
         evidence = directory / "hypic-evidence.jsonl"
         if not evidence.exists() or evidence.stat().st_size == 0:
             raise RuntimeError("HYPIC quality activation evidence is absent")
-        events = Counter()
-        with evidence.open(encoding="utf-8") as stream:
-            for line in stream:
-                if line.strip():
-                    events[json.loads(line)["event"]] += 1
-        if (events["plugin_build_active"] < 1
-                or events["worker_hot_path"] < 4
-                or events["runtime_scheduler_active"] < 1):
-            raise RuntimeError(f"HYPIC quality runtime activation insufficient: {dict(events)}")
+        activation = audit_activation_events(evidence)
         result["hypic_evidence_sha256"] = sha256(evidence)
         result["hypic_evidence_bytes"] = evidence.stat().st_size
-        result["hypic_activation_counts"] = {
-            key: events[key] for key in
-            ("plugin_build_active", "worker_hot_path", "runtime_scheduler_active")}
+        result["hypic_activation_counts"] = activation
     return result
 
 
