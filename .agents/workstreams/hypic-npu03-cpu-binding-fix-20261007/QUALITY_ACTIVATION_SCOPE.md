@@ -46,6 +46,19 @@ treatment arm is still running**. The predeclared four-worker hot-path gate
 must remain strict; source and frozen configuration now predict it will
 not pass for this natural quality workload.
 
+An additional source/configuration constraint matters for any prospective
+in-path supplement: the frozen HYPIC service explicitly sets
+`VLLM_ASCEND_HYPIC_MIN_REWRITE_TOKENS=4096` (verified from the pinned Docker
+snapshot by `binding_off_service.frozen_source`), and
+`hypic_vllm_ascend/hotpath.py` rejects a hit that skips fewer than this many
+tokens. The public exact-token boundary transport is
+`vllm_xargs.hypic_segment_ends`; `ingress.py:parse_segment_ends` requires at
+least two strictly increasing ends with the last equal to the actual prompt
+token count. Merely adding a boundary hint to the unchanged natural prompts
+does not prove a 4096-token reusable hit. Any supplement must preflight its
+actual scored requests for sufficient shared token-ID material, explicit
+boundaries, context/output headroom, and four distinct worker-hot PIDs.
+
 ## Decision boundary
 
 Keep the 12-unit natural quality protocol unchanged. If row, scorer,
