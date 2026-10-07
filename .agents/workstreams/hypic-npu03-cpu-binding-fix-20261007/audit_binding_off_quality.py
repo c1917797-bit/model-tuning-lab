@@ -15,8 +15,26 @@ from binding_off_quality import (
     ARMS, DATASETS, EVALUATOR, QROOT, UNIT_ORDER, preflight, sha256,
     validate_unit, write_json,
 )
+from binding_off_service import frozen_source
 
 AUDIT_PATH = QROOT / "quality-independent-audit.json"
+
+
+def frozen_pair_seam() -> dict:
+    environments = {}
+    for arm in ARMS:
+        items = frozen_source(arm)["Config"]["Env"]
+        environments[arm] = {key: value for key, value in
+                             (item.split("=", 1) for item in items)}
+    baseline = environments["no-cache"]
+    treatment = environments["hypic-only"]
+    differences = {key: [baseline.get(key), treatment.get(key)]
+                   for key in baseline.keys() | treatment.keys()
+                   if baseline.get(key) != treatment.get(key)
+                   and key != "VLLM_ASCEND_HYPIC_EVIDENCE_FILE"}
+    if differences != {"VLLM_ASCEND_HYPIC_ENABLE": ["0", "1"]}:
+        raise RuntimeError(f"frozen quality arms differ beyond HYPIC enable: {differences}")
+    return differences
 
 
 def frozen_evaluator():
@@ -72,8 +90,20 @@ def service_receipt(arm: str, fingerprint: dict) -> dict:
         evidence = directory / "hypic-evidence.jsonl"
         if not evidence.exists() or evidence.stat().st_size == 0:
             raise RuntimeError("HYPIC quality activation evidence is absent")
+        events = Counter()
+        with evidence.open(encoding="utf-8") as stream:
+            for line in stream:
+                if line.strip():
+                    events[json.loads(line)["event"]] += 1
+        if (events["plugin_build_active"] < 1
+                or events["worker_hot_path"] < 4
+                or events["runtime_scheduler_active"] < 1):
+            raise RuntimeError(f"HYPIC quality runtime activation insufficient: {dict(events)}")
         result["hypic_evidence_sha256"] = sha256(evidence)
         result["hypic_evidence_bytes"] = evidence.stat().st_size
+        result["hypic_activation_counts"] = {
+            key: events[key] for key in
+            ("plugin_build_active", "worker_hot_path", "runtime_scheduler_active")}
     return result
 
 
@@ -154,6 +184,7 @@ def describe_delta(label: str, baseline: list[float], treatment: list[float]) ->
 
 def main() -> int:
     fingerprint = preflight()
+    arm_variable = frozen_pair_seam()
     evaluator = frozen_evaluator()
     sample_map = {dataset: samples_for(dataset) for dataset in DATASETS}
     service = {arm: service_receipt(arm, fingerprint) for arm in ARMS}
@@ -215,7 +246,8 @@ def main() -> int:
     report = {
         "schema": "hypic-bindingoff-quality-independent-audit/v1",
         "all_twelve_units_valid": True, "paired_input_identity_valid": True,
-        "frozen_fingerprint": fingerprint, "service": service,
+        "frozen_fingerprint": fingerprint, "only_arm_variable": arm_variable,
+        "service": service,
         "per_unit": units, "pairwise": pairwise, "deltas": deltas,
         "adverse_metrics": [item["metric"] for item in adverse],
         "beyond_baseline_range": beyond_range,
