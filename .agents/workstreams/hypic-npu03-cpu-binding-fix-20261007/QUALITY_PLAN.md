@@ -1,6 +1,6 @@
 # HYPIC binding-off paired 2048-token quality plan
 
-Status: attempt 1 (`exec-0000000000000c6d`) ended with an environment-isolation failure after all six no-cache units; no HYPIC quality arm ran. A new full paired attempt (`clean2`) is prepared under a separate artifact root; neither attempt supplies a quality verdict yet. User authorized continued use of physical NPU0-3 until the complete quality campaign finishes; NPU4-7 and other containers remain out of scope. This quality campaign is separate from the fixed-output 40960-context performance runs. See `QUALITY_RESOURCE_CONFLICT.md` before resuming.
+Status: attempt 1 (`exec-0000000000000c6d`) ended with an environment-isolation failure after all six no-cache units; no HYPIC quality arm ran. A new full paired attempt (`clean2`, active AWMCP operation `exec-0000000000000e15`) started at 2026-10-07 17:10 UTC under a separate artifact root and had reached no-cache startup/preflight-passed by 17:11 UTC; neither attempt supplies a quality verdict yet. User authorized continued use of physical NPU0-3 until the complete quality campaign finishes; NPU4-7 and other containers remain out of scope. This quality campaign is separate from the fixed-output 40960-context performance runs. See `QUALITY_RESOURCE_CONFLICT.md` before resuming.
 
 ## Frozen scientific question
 
