@@ -31,6 +31,7 @@ preflight:
 tests:
   - Read-only per-rank trace analysis of long AIV AllReduce intervals and overlapping tasks.
   - Fresh-process TP4 BF16 AllReduce microbenchmark on only NPU0-3, warm then measure at representative activation sizes.
+  - Fresh-process graph-capture/replay of sixteen 40 KB BF16 AllReduce calls on only NPU0-3, if supported by the pinned runtime.
   - If necessary, one otherwise identical fresh-process run with HCCL_OP_EXPANSION_MODE unset; no driver, firmware, clock, or shared-service change.
   - If standalone and service results disagree, classify H2 and inspect service graph dependencies before any tuning claim.
 limits:
