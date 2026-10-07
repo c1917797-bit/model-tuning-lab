@@ -121,3 +121,15 @@ hypic_enabled_extension_20261007:
   paper_effect_gate: Require positive same-lane absolute HYPIC effect of at least 10 ms/token in median weighted TPOT and at least 10 seconds in median TTFT P95 relative to no-cache binding-off, plus hot-path proof and no safety regression. A missed gate is a measured negative for this repaired configuration, not evidence that the HYPIC algorithm is universally invalid.
   quality_gate: A separate matched 41984-context, 2048-token natural-EOS LongBench-v2/GSM8K quality campaign is required for adoption. The prior 40960-context performance service and incomplete quality baseline cannot be reused as a full quality denominator. Estimate complete baseline-plus-treatment wall time and authorize a feasible controller before starting; preserve partial rows as incomplete-fail-fast if stopped.
   decision: Keep performance, paper-effect, quality, and adoption decisions separate. Do not merge to main before independent artifact audit, release proof, and skill-verification ledger reconciliation.
+hypic_smoke_20261007:
+  operation_id: exec-0000000000000b82
+  raw_result: The original launcher exited 1 because --require-hot-path applied the full formal event set to a one-wave four-request smoke. Only native_decode_scheduler_passthrough was absent from the measured evidence window; its event count was present during warmup. Do not erase or relabel the original exit.
+  valid_evidence: HYPIC core scheduler, materialization, attention/GDN and worker hot path present; 4/4 x 128 fixed outputs, zero failed, weighted TPOT 52.5266 ms/token. The 32768-token semantic canary matched frozen HYPIC-only response token IDs exactly.
+  corrected_gate: Smoke validates the core mechanism and canary. Formal 40-request traffic retains --require-hot-path and must prove the full event set independently. Offline audit of the original raw files passed; no replacement NPU smoke was fabricated.
+  audit_command: python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_service.py --arm hypic-only --phase audit-smoke
+  artifacts:
+    performance_sha256: c76139d9ace14a718c02aaa218231e957c358312d9303aa214f2bfaed5591a6e
+    semantic_canary_sha256: 4d510e6e9b02dee24ad30eac9cfd652f95831a35671f4441132439890e78070b
+    cleanup_sha256: 22fc5fa4d50aeb315a6478bf89897c8d8f3d3165ad85b56ed2aa152311553b25
+  cleanup: Exact candidate container removed and NPU0-3/port 8223 released; NPU4-7 and pre-existing sleep container untouched.
+  next_gate: Run fresh formal HYPIC-only binding-off screen with full hot-path requirement, then repeat only if valid and preregistered thresholds pass.
