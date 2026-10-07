@@ -6,7 +6,21 @@ from unittest import mock
 import host,receipt,preflight,consume_numeric
 from sparq_token_v4 import proof as gate
 OLD=Path("/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-token-native-v5-002")
+# Test output ownership is independent of canonical or private source placement.
+TEST_TMP_PARENT=Path("/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-token-native-v6-002")
 class CrossModule(unittest.TestCase):
+ def test_explicit_owned_temporary_parent_independent_of_source_placement(self):
+  self.assertEqual(TEST_TMP_PARENT,Path("/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-token-native-v6-002"))
+  self.assertTrue(TEST_TMP_PARENT.is_dir());self.assertFalse(TEST_TMP_PARENT.is_symlink())
+  self.assertEqual(TEST_TMP_PARENT.resolve(),TEST_TMP_PARENT)
+  self.assertIn(Path("/cache/cch"),TEST_TMP_PARENT.parents)
+  tree=ast.parse(Path(receipt.ROOT/"test_launch_linkage.py").read_text())
+  dirs=[k.value for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and
+   n.func.attr=="TemporaryDirectory" for k in n.keywords if k.arg=="dir"]
+  self.assertEqual(len(dirs),5)
+  self.assertTrue(all(isinstance(n,ast.Name) and n.id=="TEST_TMP_PARENT" for n in dirs))
+  if Path("/cache/cch") not in Path(__file__).parents:
+   self.assertNotEqual(TEST_TMP_PARENT,Path(__file__).parent)
  def fixture(self,root):
   source=dict(path=str(receipt.ROOT/"SOURCE_MANIFEST.json"),sha256="1"*64)
   files={n:receipt.sha(receipt.ROOT/n) for n in receipt.OWN}
@@ -83,7 +97,7 @@ class CrossModule(unittest.TestCase):
    any(isinstance(t,ast.Name) and t.id=="expected" for t in n.targets))
   self.assertNotIn("--host-output-root",ast.unparse(expected_node))
  def test_actual_host_generated_proof_and_complete_CPU_argv_validate(self):
-  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as td:
+  with tempfile.TemporaryDirectory(dir=TEST_TMP_PARENT,prefix="sparq-v6-002-linkage-") as td:
    root=Path(td);f=self.fixture(root)
    got=self.validate(f,root)
    self.assertEqual(got["container_inspect"]["Config"]["Labels"]["model-tuning-lab.owner"],receipt.OWNER)
@@ -91,7 +105,7 @@ class CrossModule(unittest.TestCase):
    self.assertEqual(receipt.load(got["native_no_device_abi"])["actual_argv"],f["args"])
    self.assertNotIn("torch",sys.modules)
  def test_old_owner_source_rejected_without_union(self):
-  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as td:
+  with tempfile.TemporaryDirectory(dir=TEST_TMP_PARENT,prefix="sparq-v6-002-linkage-") as td:
    root=Path(td);f=self.fixture(root)
    for owner in ("sparq-token-v4","sparq-token-v5","other"):
     value=copy.deepcopy(f["proof"]);value["container_inspect"]["Config"]["Labels"]["model-tuning-lab.owner"]=owner
@@ -100,7 +114,7 @@ class CrossModule(unittest.TestCase):
  def test_actual_predecessor_two_rejections_reproduced_without_device(self):
   module=types.ModuleType("sparq_token_v4._original_frozen_proof");module.__package__="sparq_token_v4"
   exec(compile((OLD/"sparq_token_v4/proof.py").read_bytes(),str(OLD/"sparq_token_v4/proof.py"),"exec"),module.__dict__)
-  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as td:
+  with tempfile.TemporaryDirectory(dir=TEST_TMP_PARENT,prefix="sparq-v6-002-linkage-") as td:
    root=Path(td);f=self.fixture(root)
    with self.assertRaisesRegex(ValueError,"owned numeric container"):
     self.validate(f,root,validator=module.validate_proof)
@@ -108,7 +122,7 @@ class CrossModule(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,"original Docker child"):
     self.validate(f,root,value,validator=module.validate_proof)
  def test_complete_ABI_command_negatives_before_NPU_and_again_in_proof(self):
-  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as td:
+  with tempfile.TemporaryDirectory(dir=TEST_TMP_PARENT,prefix="sparq-v6-002-linkage-") as td:
    root=Path(td);f=self.fixture(root);abi=receipt.load(f["abi_ref"]);child=receipt.load(f["child_ref"])
    receipt.validate_cpu_abi_child("c"*64,f["cpu_root"],f["source"],child,abi)
    for mode in ("omit-root","duplicate-root","wrong-root","reorder-root","wrong-source","wrong-CID","no-prlimit","failed","observer-argv","observer-root"):
@@ -142,7 +156,7 @@ class CrossModule(unittest.TestCase):
      with self.subTest(proof=mode),self.assertRaises(ValueError):self.validate(f,root,value)
     finally:Path(f["abi_ref"]["path"]).write_bytes(original)
  def test_CPU_root_comes_only_from_owned_mount_not_argv(self):
-  with tempfile.TemporaryDirectory(dir=Path(__file__).parent) as td:
+  with tempfile.TemporaryDirectory(dir=TEST_TMP_PARENT,prefix="sparq-v6-002-linkage-") as td:
    root=Path(td);f=self.fixture(root);value=copy.deepcopy(f["proof"])
    value["cpu_host_output_root"]=str(root/"different")
    with self.assertRaisesRegex(ValueError,"CPU output mount"):

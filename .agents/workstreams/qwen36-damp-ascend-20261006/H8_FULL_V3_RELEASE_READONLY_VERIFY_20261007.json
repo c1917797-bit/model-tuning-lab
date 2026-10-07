@@ -1,0 +1,87 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "import hashlib,importlib.util,json,os,resource,subprocess,sys\nfrom pathlib import Path\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY))\nresource.setrlimit(resource.RLIMIT_CPU,(20,20))\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nbase=Path(sys.argv[1]);out=Path(sys.argv[2]);root=Path(sys.argv[3])\nassert hashlib.sha256((base/'host.py').read_bytes()).hexdigest()=='2720a6ef30e108d0a75dc6595a13aa02606383134f5c65332521a0ed959aec53'\nsp=importlib.util.spec_from_file_location('_readonly_full3_owner_validation',base/'host.py');h=importlib.util.module_from_spec(sp);sp.loader.exec_module(h)\nrp=root/'.agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_RELEASE_RECOVERY_ORIGINAL_20261007.json'\nraw=rp.read_bytes();orig=json.loads(raw)\nassert orig['operationId']=='exec-0000000000000fad' and orig['terminal']\nop=orig['operation'];assert op['routeDecision']=='peer_direct' and op['targetPeerId']=='lgw_a6109c51076a4a2c9d2674ca5a8704a0'\nrecord=op['result']['record'];assert record['exitCode']==1 and 'AttributeError' in record['stderr'] and 'compute' in record['stderr']\nlines=[json.loads(x) for x in record['stdout'].splitlines() if x.startswith('{')]\nstops=[x for x in lines if x.get('stopped')]\nassert len(stops)==4 and {x['physical'] for x in stops}=={4,5,6,7}\nassert all(x['retained'] and not x['deleted'] and not x['oom_killed'] for x in stops)\nsmis=[x for x in lines if x.get('argv')==['/usr/local/sbin/npu-smi','info']]\nassert len(smis)==2 and all(x['exit_code']==0 for x in smis)\nprotected=h.F.protected(smis[0]['stdout'])\nassert h.F.protected(smis[1]['stdout'])==protected\np=out/'RESULT.json';b=p.read_bytes()\nassert hashlib.sha256(b).hexdigest()=='c7ab728b20fd09d646fca07ff7352350c7a997fdfb7133bdefa3f04288abf7a7'\nj=json.loads(b);assert j['status']=='failed'\nfor card,cid in sorted(j['exact_owned_cids'].items()):\n e=json.loads((out/('physical-'+card)/'OWNED.json').read_bytes())\n assert e['cid']==cid and e['physical']==int(card) and int(card) in (4,5,6,7) and e['source']==j['source_manifest']\n e['mounts']={k:tuple(v) for k,v in e['mounts'].items()}\n argv=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','inspect',cid]\n cp=subprocess.run(argv,capture_output=True,text=True,timeout=15)\n assert cp.returncode==0,cp.stderr\n xs=json.loads(cp.stdout);assert len(xs)==1;h.validate_inspect(xs[0],e)\n x=xs[0];assert not x['State']['Running'] and x['State']['Pid']==0 and not x.get('ExecIDs') and not x['State']['OOMKilled']\n print(json.dumps(dict(argv=argv,exit_code=cp.returncode,physical=int(card),cid=cid,stopped=True,retained=True,pid=0,execIDs=x.get('ExecIDs'),oomKilled=False,actual_inspect_sha256=hashlib.sha256(cp.stdout.encode()).hexdigest())),flush=True)\ncp=subprocess.run(['/usr/local/sbin/npu-smi','info'],capture_output=True,text=True,timeout=15)\nprint(json.dumps(dict(argv=['/usr/local/sbin/npu-smi','info'],exit_code=cp.returncode,stdout=cp.stdout,stderr=cp.stderr)),flush=True)\nassert cp.returncode==0 and h.F.protected(cp.stdout)==protected\nrows=h.F.legacy().process_rows(cp.stdout)\nassert not [v for v in rows if v[0] in (4,5,6,7)]\nfor card in (4,5,6,7):h.F.idle_one(cp.stdout,card)\nassert hashlib.sha256(p.read_bytes()).hexdigest()=='c7ab728b20fd09d646fca07ff7352350c7a997fdfb7133bdefa3f04288abf7a7'\nprint(json.dumps(dict(readonly_release_verification_passed=True,original_recovery_parent_exit_code=1,original_optional_observer_error_preserved=True,own_four_containers_stopped_and_retained=True,physical4_7_idle_now=True,protected0_3_unchanged=True,failed_RESULT_unmodified=True,recovery_original_ref=dict(path=str(rp),sha256=hashlib.sha256(raw).hexdigest()),host_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,child_peak_rss_kib=resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss)),flush=True)\n",
+          "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v3-fenced",
+          "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v3-fenced-20261007-001",
+          "/opt/host/vnf/austinov/model-tuning-lab"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1387,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000fbd",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"argv\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"inspect\", \"eaa8c7c80331755818abe75ad71824e069bb1384862ca855b687f33700cf47ac\"], \"exit_code\": 0, \"physical\": 4, \"cid\": \"eaa8c7c80331755818abe75ad71824e069bb1384862ca855b687f33700cf47ac\", \"stopped\": true, \"retained\": true, \"pid\": 0, \"execIDs\": null, \"oomKilled\": false, \"actual_inspect_sha256\": \"3fe57158a2172f26e2c97fadae4b3a3755bbf001a3770372700acc171cbf02e5\"}\n{\"argv\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"inspect\", \"9b92824bf0c2a2c22689fbc48b5aa1c7ce9fc2f2f179bf94d8764791e1d3c503\"], \"exit_code\": 0, \"physical\": 5, \"cid\": \"9b92824bf0c2a2c22689fbc48b5aa1c7ce9fc2f2f179bf94d8764791e1d3c503\", \"stopped\": true, \"retained\": true, \"pid\": 0, \"execIDs\": null, \"oomKilled\": false, \"actual_inspect_sha256\": \"e7f13cb0b2ac1ba8fbf430202caf07036e92feb73bf226b077c9d3050219ce39\"}\n{\"argv\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"inspect\", \"a095f987e5e1de212e54f8e592d1a0e36dc2ef61da9645772b2989bb1f727a05\"], \"exit_code\": 0, \"physical\": 6, \"cid\": \"a095f987e5e1de212e54f8e592d1a0e36dc2ef61da9645772b2989bb1f727a05\", \"stopped\": true, \"retained\": true, \"pid\": 0, \"execIDs\": null, \"oomKilled\": false, \"actual_inspect_sha256\": \"779f80cae87c96667f4fdeedbcdb63d83ec7aedfe1871463cc357c56453da948\"}\n{\"argv\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"inspect\", \"35ced55290fec4d9cf87db67c5f086eb7b41f94e28e2d3ec940449e165e75f27\"], \"exit_code\": 0, \"physical\": 7, \"cid\": \"35ced55290fec4d9cf87db67c5f086eb7b41f94e28e2d3ec940449e165e75f27\", \"stopped\": true, \"retained\": true, \"pid\": 0, \"execIDs\": null, \"oomKilled\": false, \"actual_inspect_sha256\": \"adf86ec955c0a2b8a77975520e7744143a08a4a91952dfd0af0e079e495c90ad\"}\n{\"argv\": [\"/usr/local/sbin/npu-smi\", \"info\"], \"exit_code\": 0, \"stdout\": \"+------------------------------------------------------------------------------------------------+\\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\\n+===========================+===============+====================================================+\\n| 0     910B4               | OK            | 140.2       51                0    / 0             |\\n| 0                         | 0000:C1:00.0  | 55          0    / 0          31671/ 32768         |\\n+===========================+===============+====================================================+\\n| 1     910B4               | OK            | 133.6       50                0    / 0             |\\n| 0                         | 0000:C2:00.0  | 54          0    / 0          31671/ 32768         |\\n+===========================+===============+====================================================+\\n| 2     910B4               | OK            | 143.4       52                0    / 0             |\\n| 0                         | 0000:81:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 3     910B4               | OK            | 142.5       52                0    / 0             |\\n| 0                         | 0000:82:00.0  | 54          0    / 0          31671/ 32768         |\\n+===========================+===============+====================================================+\\n| 4     910B4               | OK            | 93.5        46                0    / 0             |\\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\\n+===========================+===============+====================================================+\\n| 5     910B4               | OK            | 97.7        44                0    / 0             |\\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 6     910B4               | OK            | 95.0        44                0    / 0             |\\n| 0                         | 0000:41:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 7     910B4               | OK            | 87.4        45                0    / 0             |\\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\\n+===========================+===============+====================================================+\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\\n+===========================+===============+====================================================+\\n| 0       0                 | 1965788       | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 1       0                 | 1965789       | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 2       0                 | 1965790       | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 3       0                 | 1965791       | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 4                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 5                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 6                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 7                                                            |\\n+===========================+===============+====================================================+\\n\", \"stderr\": \"\"}\n{\"readonly_release_verification_passed\": true, \"original_recovery_parent_exit_code\": 1, \"original_optional_observer_error_preserved\": true, \"own_four_containers_stopped_and_retained\": true, \"physical4_7_idle_now\": true, \"protected0_3_unchanged\": true, \"failed_RESULT_unmodified\": true, \"recovery_original_ref\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_RELEASE_RECOVERY_ORIGINAL_20261007.json\", \"sha256\": \"8a2710ac91bddadc1557afb7634875118453e05c69f7a11f30460ed78e787a82\"}, \"host_rss_kib\": 56336, \"child_peak_rss_kib\": 31048}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 404,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 404,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 404
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 404,
+        "routeLookupMs": 0,
+        "totalMs": 404
+      }
+    },
+    "traceId": "2a2f67b3-cca8-4385-809b-7724f901314c"
+  },
+  "operationId": "exec-0000000000000fbd",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

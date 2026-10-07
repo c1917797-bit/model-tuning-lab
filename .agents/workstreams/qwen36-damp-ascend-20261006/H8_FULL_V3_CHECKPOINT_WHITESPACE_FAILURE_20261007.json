@@ -1,0 +1,90 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=15:15",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import pathlib,subprocess,json,sys\nr=pathlib.Path(sys.argv[1]);g=['/usr/local/bin/git'];ps=json.loads(sys.argv[2])\nassert subprocess.check_output(g+['rev-parse','HEAD'],cwd=r,text=True).strip()=='6a3e42af27d60192dbede8ce3ab7dbbcc15bedac'\nassert not subprocess.check_output(g+['diff','--cached','--name-only'],cwd=r,text=True).strip()\nfor n in ps:\n if n.endswith('.json'):json.loads((r/n).read_bytes())\nsubprocess.run(['/bin/bash',str(r/'scripts/validate-mst.sh')],cwd=r,check=True)\nsubprocess.run(g+['add','--',*ps],cwd=r,check=True)\nassert set(subprocess.check_output(g+['diff','--cached','--name-only'],cwd=r,text=True).splitlines())==set(ps)\nsubprocess.run(g+['diff','--cached','--check'],cwd=r,check=True)\nsubprocess.run(g+['commit','-m','research: retain four-card resource abort and exact-owned release evidence'],cwd=r,check=True)\nprint(json.dumps(dict(HEAD=subprocess.check_output(g+['rev-parse','HEAD'],cwd=r,text=True).strip(),status=subprocess.check_output(g+['status','--porcelain'],cwd=r,text=True),push='not attempted: unchanged authentication blocker')),flush=True)\n",
+          "/opt/host/vnf/austinov/model-tuning-lab",
+          "[\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_MAIN_STATIC_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_MAIN_LAUNCH_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_MAIN_PROGRESS_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ_V6_002_CANONICAL_SOFTWARE_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_ORIGINAL_TERMINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_RELEASE_RECOVERY_ORIGINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_RELEASE_READONLY_VERIFY_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_CONTROLLER_FAILURE_20261007.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\",\".agents/skills/ascend-inference-tuning-loop/references/kvbuffer-numerical-diagnostics.md\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\"]"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 189,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000fc3",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n  File \"/usr/lib64/python3.9/subprocess.py\", line 528, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/usr/local/bin/git', 'diff', '--cached', '--check']' returned non-zero exit status 2.\n",
+        "stdout": "PASS: Maintainer Skill Tree structure is valid (20 skills)\n.agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_CONTROLLER_FAILURE_20261007.md:45: new blank line at EOF.\n.agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V3_RELEASE_READONLY_VERIFY_20261007.json:88: new blank line at EOF.\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 345,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 345,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 345
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 343,
+        "routeLookupMs": 0,
+        "totalMs": 343
+      }
+    },
+    "traceId": "ae24f30e-6c74-445d-8755-5688997d9dfc"
+  },
+  "operationId": "exec-0000000000000fc3",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}

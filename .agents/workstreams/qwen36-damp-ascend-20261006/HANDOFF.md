@@ -1,5 +1,54 @@
 # DAMP Ascend — current workstream
 
+## Current terminal and released-device checkpoint — 2026-10-07 21:00Z
+
+The prior20:48 RUNNING entry is superseded: KVBuffer full-v3 MA0f9d is
+TERMINAL exit1. Do not poll/restart it. Actual host+four concurrent Docker CLI
+RSS reached262624KiB against262144KiB (480KiB over); the latched guard also
+blocked cleanup inspect/stop. Original RESULT c7ab728b20fd09d646fca07ff7352350c7a997fdfb7133bdefa3f04288abf7a7
+and cleanup b4512de41e33e6992dfa49759827623b8455ed540dbbbf73bbe6260ef2448717
+remain unchanged. This is an infrastructure/control failure before full11520,
+not numerical PASS or algorithm no-go. Four actual matrix processes and earlier
+partial outputs do not substitute for full batch/graph/lifecycle coverage.
+
+MAIN recovery MA0fad exactly stopped/retained the four original owned fullCIDs,
+after source/image/labels/device/mount inspection. All four stopped actions
+succeeded. Its final optional observer erroneously called nonexistent F.compute:
+parent exit1 is preserved, not relabelled. Separate READ-ONLY MA0fbd exit0
+revalidated all four fullCIDs stopped/Pid0/noExec/noOOM, physical4–7 idle,
+and protected0–3 identities unchanged. It used actual process_rows/idle_one
+helpers; it did NOT repeat stops or overwrite original failure evidence.
+See H8_FULL_V3_ORIGINAL_TERMINAL_20261007.json,
+H8_FULL_V3_RELEASE_RECOVERY_ORIGINAL_20261007.json,
+H8_FULL_V3_RELEASE_READONLY_VERIFY_20261007.json and
+H8_FULL_V3_CONTROLLER_FAILURE_20261007.md. Recovery-original SHA
+8a2710ac91bddadc1557afb7634875118453e05c69f7a11f30460ed78e787a82.
+Original partial result refs may be stale if children wrote after parent abort;
+never edit old refs to manufacture a successful independent consumer.
+
+Next device admission requires a NEW frozen source/unique output and original
+failure retention. Recurrent preparer is making full-v4 controller-only repair:
+Python VAS stays256MiB; aggregate concurrent host/CLI RSS separately512MiB and
+ordinary floor40.5GiB; cleanup records resource errors without blocking exact
+owned stop. Original11520, tensor tolerances, guards, SO, fences and lifecycle
+remain unchanged. MAIN must read whole changed source and actual regressions
+before one fresh admission. KV cutoff Oct8 08:29:54Z is NOT extended.
+No live MAIN device job at this checkpoint. Different papers remain serialized.
+
+Memory authority is COMPLETED/SPENT: exact32GiB idle1GiB pages released,
+OVS samePID/capacity retained. No further hugepage or outside0–3 action.
+
+SparQ002 canonical test+manifest-only repair is SOFTWARE passed:
+MA0fa3 actual48+21+10=79 tests/source27, bff8f80c3b5ded4c82feb7bb970cac0d1376ef09adcee12af0a1c1d289789c84.
+Old canonical001 MA0f62 failure retained; no actual native CPUABI/NPU/model/perf/
+task PASS. Sparse owner audits the same cleanup problem before next admission.
+Lowbit W4CPU004 has analogous resource-gated finally and needs independent005
+repair; its actual import was NOT run. Lowbit rolling packets are source-only.
+Three preparers continue; no accepted new non-HYPIC matched E2E/quality result.
+Portfolio cutoff Oct9 11:17:31Z unchanged. Git authentication blocker remains:
+local checkpoints are not pushes; no failed authentication retry is implied.
+
+
 ## Current terminal / canonical-source checkpoint — 2026-10-07 20:27Z
 
 Memory request completed:32GiB released, OVS intact, no additional release.

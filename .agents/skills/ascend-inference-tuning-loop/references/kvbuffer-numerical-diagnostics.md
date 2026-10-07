@@ -144,3 +144,25 @@ dense performance, and final task tests under the unchanged experiment contract.
   rejected five fixtures against the unchanged /cache output rule. Fix test
   placement independently and retain the failure. Do not relax runtime ownership,
   canonical roots or source/argv checks to make a fixture pass.
+
+- Separate per-Python virtual-address limits from the summed concurrent host/CLI
+  memory ledger. H8 full-v3 actually reached262624KiB with four live Docker CLI
+  clients; a256MiB aggregate limit aborted a validly dispatched experiment.
+  Single-child/mocked software PASS cannot prove four-child resource capacity.
+  Pre-register the whole parallel budget, validate actual child RSS and ordinary
+  RAM together, and preserve the resource abort as infrastructure evidence—not
+  a numerical failure or paper-wide no-go.
+- Safety aborts must leave a bounded, exact-owner cleanup lane available.
+  A latched RSS peak must not reject inspect/stop results before ownership can
+  be validated. Retain the primary resource error and all secondary errors,
+  revalidate full CID/source/labels/image/devices/mounts, then stop/retain only
+  exact owned jobs within the original cleanup/lease limits. This is not
+  permission for foreign stops or relaxed algorithm gates. Persist a successful
+  create CID before any later resource rejection.
+- Recovery actions and final observer checks are separate evidence. MAIN's
+  four exact H8 stops succeeded, but its final optional call to nonexistent
+  F.compute made the recovery parent exit1. Preserve that original; use actual
+  source-defined helpers in a separate read-only verification. Do not repeat
+  mutation, rewrite old cleanup, or relabel the failed parent. Later child writes
+  may stale earlier partial refs; record that fact rather than updating old
+  refs to manufacture PASS. See H8_FULL_V3_CONTROLLER_FAILURE_20261007.md.
