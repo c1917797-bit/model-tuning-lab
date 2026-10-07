@@ -286,4 +286,9 @@ quality_campaign_clean2_20261007:
     summary_sha256: 04b7ee273207ff7ddc4edc130a760206093356f55b4a2b783b7e748b28ce41eb
     details_sha256: 3d9b43ec967b4571f6566e7aeebb229922ed93aba9a84f75c458fc5b67d56592
     receipt_sha256: 68a531ef463fd7c614dbbb6af1c24f5fd5101fb1ef0f4f626522a9fe77484061
+  activation_scope_diagnostic:
+    evidence: Frozen evaluator sends ordinary chat-completion payloads without explicit HYPIC segment metadata; frozen HYPIC service has AUTO_CHUNK_TEXT=0 and no separator token IDs. Source infer_segments_with_source therefore has no usable segment partition for these requests.
+    prompt_tokens: "LongBench-v2 min/median/max 10352/22924/39642; GSM8K 77/111/242 from clean2 no-cache run1 raw usage."
+    implication: A natural-task score may describe runtime-on safety but cannot establish reused-token quality; the predeclared four-worker hot-path gate remains strict and is predicted not to pass.
+    evidence_note: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/QUALITY_ACTIVATION_SCOPE.md
   decision: clean2 no-cache denominator valid after independent unit/guard/release audits; treatment six units, its release receipt and full paired audit pending.

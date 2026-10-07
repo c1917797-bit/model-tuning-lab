@@ -22,30 +22,38 @@ The clean2 no-cache raw `prompt_tokens` from the frozen first repeat show:
 
 These are measured token counts, not estimates from text length. The HYPIC
 source commit is `3ad0967589304cd8fc4e7cff02f48ecc6125c89f` in
-`/cache/cch/hypic_vllm_ascend-v0.8.5`. Its `envs.py` default
-`auto_chunk_min_tokens` is 4096; `request.py` first accepts explicit
-segments, then separator-token/text segmentation, then auto-chunking.
-With this evaluator and no explicit segment metadata, GSM8K cannot exercise
-the default long-text auto-chunk path. LongBench-v2 meets the length threshold,
-but that alone does not prove that the same eligible segment was observed,
-materialized and reused.
+`/cache/cch/hypic_vllm_ascend-v0.8.5`. The frozen HYPIC service environment
+actually sets `VLLM_ASCEND_HYPIC_AUTO_CHUNK_TEXT=0`,
+`VLLM_ASCEND_HYPIC_AUTO_CHUNK_MIN_TOKENS=4096` and
+`VLLM_ASCEND_HYPIC_TRUE_POSITION_INDEPENDENT=1`; it does not set
+`VLLM_ASCEND_HYPIC_SEPARATOR_TOKEN_IDS`. The source's
+`request.py:infer_segments_with_source` accepts explicit segments, separator
+token IDs or auto chunks. Its text-separator hint returns an empty segment
+tuple rather than a usable partition. The pinned evaluator supplies no
+explicit boundaries. Consequently the frozen quality requests have no
+usable segment source in this actual configuration: GSM8K is also far below
+the 4096-token auto-chunk threshold, and even the longer LongBench-v2
+requests cannot auto-chunk because that switch is disabled. This is a
+protocol/configuration coverage mismatch, not evidence of an NPU failure.
 
 `patches/runner.py` emits `worker_hot_path` only after an actual batch plan
 has passed worker-side prefix-layout verification and
 `verified_reqs > 0`; plugin-build and scheduler-active events alone are
-weaker evidence. At treatment LongBench-v2 run1 startup, plugin-build and
+weaker evidence. At treatment LongBench-v2 run1, plugin-build and
 scheduler-active events were present but no worker-hot event was observed.
 The first run's complete rows were independently audited, but the **whole
-treatment arm is still running**, so final hot-path coverage and quality
-acceptance are open.
+treatment arm is still running**. The predeclared four-worker hot-path gate
+must remain strict; source and frozen configuration now predict it will
+not pass for this natural quality workload.
 
 ## Decision boundary
 
-Keep the 12-unit natural quality protocol unchanged. Its paired scores answer
-whether enabling the runtime regresses these natural tasks, subject to the
-predeclared row, scorer, input-identity, isolation, activation and release
-gates. They do not by themselves prove output quality *while HYPIC actually
-skips reusable tokens*. The separate frozen 40 x 1024 shared-prefix
+Keep the 12-unit natural quality protocol unchanged. If row, scorer,
+input-identity, isolation and release gates pass, its paired scores
+descriptively answer whether enabling the runtime regresses these natural
+tasks. Without hot-path activation they cannot satisfy the original formal
+quality gate or prove output quality *while HYPIC actually skips reusable
+tokens*. The separate frozen 40 x 1024 shared-prefix
 performance run already proves a bounded hot path, but fixed-output
 performance is not a 2048-token natural-EOS quality substitute.
 
