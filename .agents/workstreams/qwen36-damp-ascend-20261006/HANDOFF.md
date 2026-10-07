@@ -1,5 +1,29 @@
 # DAMP Ascend — current workstream
 
+## Current actual serial admission status — 2026-10-07 22:21Z
+
+Read SPARQ004_ACTUAL_ENTRY_FAILURE_20261007.md first. MA107a terminal exit1:
+actual Devices[] ABI import has pinned-v0.23 DeviceOperator circular dependency;
+NPU CID=null/npu_executed=false. Original failure/raw preserved, no old retry.
+Exact CPU CID3fa392c7... stopped/retained/noOOM, independent readonly MA107c0
+verified OWNED/inspect/source/device identity; fresh SMI all NPUs idle/healthOK.
+MA107b wrong-helper observer1 is preserved; it stopped nothing and is superseded
+only for release evidence by corrected readonly107c, not relabelled successful.
+
+H8 proposed v6 cgroup-root mounts PAUSED by safety review. Actual full v6 root
+does not exist despite33 internal-copy ACKs; no source package/admission exists.
+MAIN failed exact no-clobber copy1070 is retained. No equivalent rejected write.
+Recurrent owner prepares truly least-privilege host-full-ancestry/guest-leaf
+proof successor, without changing namespace/caps/PID/network/controller binds
+or cancelling full ancestor/resource gates. SparQ minimal actual import-order
+successor and W4native002 three-control-fault repair continue in other preparers.
+No current MAIN NPU job; idle reason is real preparation, not foreign occupancy.
+
+Memory32GiB authority completed/spent, OVS/full NUMA3 preserved. No extra release.
+KV Oct8 08:29:54Z/portfolio Oct9 11:17:31Z unchanged. Local36f958e checkpoint
+passed MST20 and exact16-file diff; auth blocker unchanged, not pushed. No new
+non-HYPIC matchedE2E/task acceptance; goal active and all old entries historical.
+
 ## Current actual no-device failure / next narrow repair — 2026-10-07 22:03Z
 
 H8 full-v5 MA104b is TERMINAL exit1/42.334s, BEFORE Torch/NPU.

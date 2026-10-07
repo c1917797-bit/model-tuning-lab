@@ -1,0 +1,365 @@
+{
+  "schema": "main-exact-mechanical-copy-observation/v1",
+  "note": "v5 is frozen. Exact candidate destination parent was absent to a_exec; failed mechanical copy and absent-file hash are preserved. Wait for authoritative preparer actual destination rather than repeat copies or fabricate completion.",
+  "stat": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--printf=%n %F %s bytes\\\\n\",\n          \"--\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/stat\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 1,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-000000000000106f\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"/usr/bin/stat: cannot statx '/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py': No such file or directory\\n\",\n        \"stdout\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py regular file 9206 bytes\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 356,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 356,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 356\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 355,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 355\n      }\n    },\n    \"traceId\": \"1cd5f40d-0cc8-4f22-a343-6a308b45186d\"\n  },\n  \"operationId\": \"exec-000000000000106f\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": "exit code",
+      "found": true,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "--printf=%n %F %s bytes\\n",
+              "--",
+              "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py",
+              "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/stat",
+            "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+            "durationMs": 1,
+            "error": "exit code",
+            "exitCode": 1,
+            "id": "exec-000000000000106f",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "/usr/bin/stat: cannot statx '/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py': No such file or directory\n",
+            "stdout": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py regular file 9206 bytes\n",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 356,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 356,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 356
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 355,
+            "routeLookupMs": 0,
+            "totalMs": 355
+          }
+        },
+        "traceId": "1cd5f40d-0cc8-4f22-a343-6a308b45186d"
+      },
+      "operationId": "exec-000000000000106f",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": false,
+      "terminal": true
+    },
+    "isError": false
+  },
+  "copy_input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/cp",
+    "args": [
+      "--no-clobber",
+      "--",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "sync": false,
+    "timeout": 30,
+    "maxOutputBytes": 4096,
+    "idempotencyKey": "main-v6-exact-missing-run-mechanical-copy-20261007-001"
+  },
+  "copy_ack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-v6-exact-missing-run-mechanical-copy-20261007-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-0000000000001070\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 5000,\n  \"result\": {\n    \"execId\": \"exec-0000000000001070\",\n    \"lane\": \"job\",\n    \"ok\": true,\n    \"pollAfterMs\": 250,\n    \"running\": true,\n    \"state\": \"running\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 353,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 353,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1478,\n      \"totalMs\": 1832\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 353,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 353\n    }\n  },\n  \"traceId\": \"06eaa6c0-ec7b-4610-b5f2-b99db230cee4\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "cancelTool": "operation_cancel",
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "idempotencyKey": "main-v6-exact-missing-run-mechanical-copy-20261007-001",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "operationId": "exec-0000000000001070",
+      "operationKind": "exec",
+      "pollTool": "operation_get",
+      "requestDeadlineMs": 5000,
+      "result": {
+        "execId": "exec-0000000000001070",
+        "lane": "job",
+        "ok": true,
+        "pollAfterMs": 250,
+        "running": true,
+        "state": "running"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 353,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 353,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 1478,
+          "totalMs": 1832
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 353,
+          "routeLookupMs": 0,
+          "totalMs": 353
+        }
+      },
+      "traceId": "06eaa6c0-ec7b-4610-b5f2-b99db230cee4"
+    },
+    "isError": false
+  },
+  "copy_terminal": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--no-clobber\",\n          \"--\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/cp\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 1,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000001070\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"/usr/bin/cp: cannot create regular file '/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py': No such file or directory\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 359,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 359,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 359\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 359,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 359\n      }\n    },\n    \"traceId\": \"dc956d05-002b-4848-a898-2c40a4842c97\"\n  },\n  \"operationId\": \"exec-0000000000001070\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": "exit code",
+      "found": true,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "--no-clobber",
+              "--",
+              "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/run.py",
+              "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/cp",
+            "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+            "durationMs": 1,
+            "error": "exit code",
+            "exitCode": 1,
+            "id": "exec-0000000000001070",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "/usr/bin/cp: cannot create regular file '/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py': No such file or directory\n",
+            "stdout": "",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 359,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 359,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 359
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 359,
+            "routeLookupMs": 0,
+            "totalMs": 359
+          }
+        },
+        "traceId": "dc956d05-002b-4848-a898-2c40a4842c97"
+      },
+      "operationId": "exec-0000000000001070",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": false,
+      "terminal": true
+    },
+    "isError": false
+  },
+  "hash_terminal": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/sha256sum\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 2,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000001071\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"/usr/bin/sha256sum: /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py: No such file or directory\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 363,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 363,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 363\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 362,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 362\n      }\n    },\n    \"traceId\": \"b79bc21d-25a9-44de-a999-88076fa12d91\"\n  },\n  \"operationId\": \"exec-0000000000001071\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": "exit code",
+      "found": true,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "--",
+              "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/sha256sum",
+            "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+            "durationMs": 2,
+            "error": "exit code",
+            "exitCode": 1,
+            "id": "exec-0000000000001071",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "/usr/bin/sha256sum: /cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-cgroup-ro/run.py: No such file or directory\n",
+            "stdout": "",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 363,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 363,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 363
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 362,
+            "routeLookupMs": 0,
+            "totalMs": 362
+          }
+        },
+        "traceId": "b79bc21d-25a9-44de-a999-88076fa12d91"
+      },
+      "operationId": "exec-0000000000001071",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": false,
+      "terminal": true
+    },
+    "isError": false
+  }
+}

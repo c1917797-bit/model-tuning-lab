@@ -1,0 +1,94 @@
+{
+  "schema": "main-sparq004-actual-dispatch/v1",
+  "input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=unlimited",
+      "--nofile=1024:1024",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py",
+      "--host-execute",
+      "--source-manifest",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "1e4673b2dd300d4fa1b5c1ee9513355e28983b49b028b6afd00890894e9932cd",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-004-native-20261007-001"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "sync": false,
+    "timeout": 5500,
+    "maxOutputBytes": 32768,
+    "idempotencyKey": "main-sparq004-actual-cpu-then-native-20261007-001"
+  },
+  "actual_ack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-sparq004-actual-cpu-then-native-20261007-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-000000000000107a\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 5000,\n  \"result\": {\n    \"execId\": \"exec-000000000000107a\",\n    \"lane\": \"job\",\n    \"ok\": true,\n    \"pollAfterMs\": 250,\n    \"running\": true,\n    \"state\": \"running\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 348,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 348,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 2381,\n      \"totalMs\": 2729\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 348,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 348\n    }\n  },\n  \"traceId\": \"adc6b05a-e13b-497c-a5e0-8afe422248c9\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "cancelTool": "operation_cancel",
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "idempotencyKey": "main-sparq004-actual-cpu-then-native-20261007-001",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "operationId": "exec-000000000000107a",
+      "operationKind": "exec",
+      "pollTool": "operation_get",
+      "requestDeadlineMs": 5000,
+      "result": {
+        "execId": "exec-000000000000107a",
+        "lane": "job",
+        "ok": true,
+        "pollAfterMs": 250,
+        "running": true,
+        "state": "running"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 348,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 348,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 2381,
+          "totalMs": 2729
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 348,
+          "routeLookupMs": 0,
+          "totalMs": 348
+        }
+      },
+      "traceId": "adc6b05a-e13b-497c-a5e0-8afe422248c9"
+    },
+    "isError": false
+  },
+  "note": "Only one real new source-bound no-device ABI+golden first; exact stop-retain before physical6-only native numeric matrix. Not a result or performance/task acceptance. Existing original limits/cutoff unchanged; no extra hugepage release."
+}

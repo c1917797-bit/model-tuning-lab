@@ -1,0 +1,96 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=unlimited\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-B\",\n          \"-c\",\n          \"import hashlib,importlib.util,json,pathlib,subprocess,sys\\nbase=pathlib.Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6\\\")\\nsys.path.insert(0,str(base))\\nimport receipt as c,host as h\\nout=pathlib.Path(\\\"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-004-native-20261007-001\\\")\\ndef ref(p):\\n return {\\\"path\\\":str(p),\\\"sha256\\\":hashlib.sha256(p.read_bytes()).hexdigest()}\\nresult=c.load(ref(out/\\\"RESULT.json\\\"))\\nassert result[\\\"status\\\"]==\\\"failed\\\" and result[\\\"npu_executed\\\"] is False and result[\\\"container_id\\\"] is None\\nassert result[\\\"cpu_container_id\\\"]==\\\"3fa392c7db126e7552d5fa5fdfe7893a5363f125eb3a748db6a0a4d55cb49143\\\"\\nowned=c.load(ref(out/\\\"cpu-preflight/OWNED.json\\\"));cleanup=c.load(result[\\\"cpu_only_cleanup\\\"])\\nassert cleanup[\\\"stopped\\\"] and cleanup[\\\"retained\\\"] and not cleanup[\\\"deleted\\\"] and cleanup[\\\"errors\\\"]==[]\\ncmd=[\\\"/usr/bin/prlimit\\\",\\\"--as=unlimited\\\",\\\"--\\\",\\\"/usr/bin/docker\\\",\\\"inspect\\\",result[\\\"cpu_container_id\\\"]]\\nr=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=30)\\nassert r.returncode==0\\nx=json.loads(r.stdout)[0];h.validate_inspect(x,owned)\\nassert not x[\\\"State\\\"][\\\"Running\\\"] and x[\\\"State\\\"][\\\"Pid\\\"]==0 and not x.get(\\\"ExecIDs\\\") and not x[\\\"State\\\"][\\\"OOMKilled\\\"]\\nassert x[\\\"HostConfig\\\"][\\\"Devices\\\"]==[] and x[\\\"HostConfig\\\"][\\\"Privileged\\\"] is False\\nsmi=subprocess.run([\\\"/usr/local/sbin/npu-smi\\\",\\\"info\\\"],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=30)\\nassert smi.returncode==0\\nprotected_before=c.load(result[\\\"protected_before\\\"])[\\\"processes\\\"]\\nrows=h.H.process_rows(smi.stdout)\\nphysical={str(n):[v for v in rows if v.get(\\\"physical\\\",v.get(\\\"npu\\\",None))==n] for n in range(4,8)}\\nprint(json.dumps({\\\"schema\\\":\\\"sparq004-main-independent-failed-authority-release/v1\\\",\\\"result\\\":ref(out/\\\"RESULT.json\\\"),\\\"actual_owned_inspect\\\":x,\\\"smi\\\":{\\\"stdout\\\":smi.stdout,\\\"stderr\\\":smi.stderr},\\\"protected_before\\\":protected_before,\\\"actual_process_rows\\\":rows,\\\"no_repeat_stop\\\":True,\\\"npu_executed\\\":False,\\\"not_algorithm_no_go\\\":True},sort_keys=True))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 1293,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-000000000000107b\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 22, in <module>\\nAttributeError: module '_sparq_frozen_h8_host' has no attribute 'process_rows'\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 483,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 483,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 483\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 482,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 482\n      }\n    },\n    \"traceId\": \"b670468c-92f0-4ce8-ad34-eff8a7b76ff1\"\n  },\n  \"operationId\": \"exec-000000000000107b\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=unlimited",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "-c",
+            "import hashlib,importlib.util,json,pathlib,subprocess,sys\nbase=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6\")\nsys.path.insert(0,str(base))\nimport receipt as c,host as h\nout=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-004-native-20261007-001\")\ndef ref(p):\n return {\"path\":str(p),\"sha256\":hashlib.sha256(p.read_bytes()).hexdigest()}\nresult=c.load(ref(out/\"RESULT.json\"))\nassert result[\"status\"]==\"failed\" and result[\"npu_executed\"] is False and result[\"container_id\"] is None\nassert result[\"cpu_container_id\"]==\"3fa392c7db126e7552d5fa5fdfe7893a5363f125eb3a748db6a0a4d55cb49143\"\nowned=c.load(ref(out/\"cpu-preflight/OWNED.json\"));cleanup=c.load(result[\"cpu_only_cleanup\"])\nassert cleanup[\"stopped\"] and cleanup[\"retained\"] and not cleanup[\"deleted\"] and cleanup[\"errors\"]==[]\ncmd=[\"/usr/bin/prlimit\",\"--as=unlimited\",\"--\",\"/usr/bin/docker\",\"inspect\",result[\"cpu_container_id\"]]\nr=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=30)\nassert r.returncode==0\nx=json.loads(r.stdout)[0];h.validate_inspect(x,owned)\nassert not x[\"State\"][\"Running\"] and x[\"State\"][\"Pid\"]==0 and not x.get(\"ExecIDs\") and not x[\"State\"][\"OOMKilled\"]\nassert x[\"HostConfig\"][\"Devices\"]==[] and x[\"HostConfig\"][\"Privileged\"] is False\nsmi=subprocess.run([\"/usr/local/sbin/npu-smi\",\"info\"],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=30)\nassert smi.returncode==0\nprotected_before=c.load(result[\"protected_before\"])[\"processes\"]\nrows=h.H.process_rows(smi.stdout)\nphysical={str(n):[v for v in rows if v.get(\"physical\",v.get(\"npu\",None))==n] for n in range(4,8)}\nprint(json.dumps({\"schema\":\"sparq004-main-independent-failed-authority-release/v1\",\"result\":ref(out/\"RESULT.json\"),\"actual_owned_inspect\":x,\"smi\":{\"stdout\":smi.stdout,\"stderr\":smi.stderr},\"protected_before\":protected_before,\"actual_process_rows\":rows,\"no_repeat_stop\":True,\"npu_executed\":False,\"not_algorithm_no_go\":True},sort_keys=True))\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 1293,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-000000000000107b",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 22, in <module>\nAttributeError: module '_sparq_frozen_h8_host' has no attribute 'process_rows'\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 483,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 483,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 483
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 482,
+          "routeLookupMs": 0,
+          "totalMs": 482
+        }
+      },
+      "traceId": "b670468c-92f0-4ce8-ad34-eff8a7b76ff1"
+    },
+    "operationId": "exec-000000000000107b",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}
