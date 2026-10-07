@@ -99,6 +99,16 @@ Report each run and:
 - confidence interval or paired bootstrap when the scorer supports it;
 - deterministic-canary equality and within-arm variance.
 
+Keep integer correct/total counts as the primary score evidence. When a
+three-run mean is compared with a baseline-run endpoint, use exact rational
+counts where possible or the same declared numerical tolerance for both
+adverse-delta and outside-range checks. Floating-point rounding at an equal
+endpoint must not manufacture an out-of-range regression. Conversely, an
+adverse mean inside baseline variability is not an all-nonnegative pass when
+that stricter gate was predeclared. Report data validity, score-rule outcome,
+and treatment-path activation as separate decisions so a clean off-path suite
+cannot be relabeled as in-path quality acceptance.
+
 Do not use an arbitrary universal “one percentage point is noise” rule.
 Interpret the predeclared tolerance together with the measured baseline
 variability, paired samples, dataset size, and critical-category gates.

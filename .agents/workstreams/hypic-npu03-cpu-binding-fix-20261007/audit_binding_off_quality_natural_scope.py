@@ -136,10 +136,13 @@ def main() -> int:
     adverse = [item for item in deltas if
                (item["delta"] > 1e-9 if item["metric"].endswith("length_limit_rate_pct")
                 else item["delta"] < -1e-9)]
+    # A three-run mean can differ from an identical observed endpoint only by
+    # floating-point roundoff (e.g. 96.89158453373767 vs 96.89158453373769).
+    # Use the same percentage-point tolerance as the adverse test above.
     beyond_range = [item["metric"] for item in adverse if
-                    (item["treatment_mean"] > item["baseline_range"][1]
+                    (item["treatment_mean"] > item["baseline_range"][1] + 1e-9
                      if item["metric"].endswith("length_limit_rate_pct")
-                     else item["treatment_mean"] < item["baseline_range"][0])]
+                     else item["treatment_mean"] < item["baseline_range"][0] - 1e-9)]
     score_pattern = "nonadverse" if not adverse else (
         "beyond_baseline_range" if beyond_range else "within_baseline_range")
     report = {

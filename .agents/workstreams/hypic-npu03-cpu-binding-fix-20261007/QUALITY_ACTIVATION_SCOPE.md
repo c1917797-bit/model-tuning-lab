@@ -1,5 +1,7 @@
 # Natural quality workload versus HYPIC hot-path coverage
 
+**Final observation, 2026-10-07 21:58 UTC:** completed clean2 produced zero `worker_hot_path` PIDs despite plugin-build and scheduler events. The unchanged strict auditor failed this predeclared gate. A separate scoped audit verified all 12 units, paired inputs, 752/754 clean guard samples and both releases, but set `formal_acceptance_claim=false`. Its initial baseline-range classifier misread a floating-point-equal endpoint as below range; a 1e-9 percentage-point tolerance fixed that without altering any raw score or formal gate. Read `FINAL_EVIDENCE_DECISION.md`; running-state references below are historical.
+
 This is a source-grounded scope note for the frozen clean2 41984-context,
 2048-token paired LongBench-v2/GSM8K run. It does not amend the predeclared
 quality acceptance gate or turn incomplete treatment units into a verdict.

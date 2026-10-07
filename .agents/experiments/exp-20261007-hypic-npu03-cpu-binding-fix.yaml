@@ -225,7 +225,7 @@ quality_campaign_20261007:
   decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
 quality_campaign_clean2_20261007:
   operation_id: exec-0000000000000e15
-  status: Running since 2026-10-07 17:10 UTC; all six no-cache units independently audited and arm-level lane-guard/release passed at 19:33:48 UTC; HYPIC-only service started at 19:40:13 UTC with four NPU0-3 workers; LongBench-v2 run1 independently audited, GSM8K run1 running since 20:04:36 UTC. No paired quality verdict yet.
+  status: Completed 2026-10-07 21:57:32 UTC with exit 0; 12/12 units passed scoped row/scorer/hash/input-identity audit and both arms passed continuous physical NPU0-3 guard and exact release. Original formal quality auditor failed the worker-hot activation gate; this is not quality acceptance.
   artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
   only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
   orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
@@ -278,7 +278,7 @@ quality_campaign_clean2_20261007:
     at_utc: 2026-10-07T19:40:13Z
     container_id: b57f81573534e119c375cbbeb300ca81918f378cf718120ab6bd4e47a56036da
     worker_pid_by_physical_npu: {0: 1965788, 1: 1965789, 2: 1965790, 3: 1965791}
-    stage: LongBench-v2 run1 began 2026-10-07T19:40:15Z; treatment output and full hot-path activation pending.
+    stage: Historical start record; six treatment units finished, but frozen natural requests produced zero worker-hot PIDs.
   hypic_longbenchv2_run1:
     validity: Independently audited 127/127 rows, zero failures, exact sample/reference/response hashes, pinned scorer, prompt template, token accounting, receipt and paired prompt-token identity with no-cache run1; treatment whole-arm guard/release pending.
     result: 74/127 correct, 58.267716535433074 percent; 15 outputs reached the 2048-token length limit; 136242 completion tokens.
@@ -289,6 +289,26 @@ quality_campaign_clean2_20261007:
   activation_scope_diagnostic:
     evidence: Frozen evaluator sends ordinary chat-completion payloads without explicit HYPIC segment metadata; frozen HYPIC service has AUTO_CHUNK_TEXT=0 and no separator token IDs. Source infer_segments_with_source therefore has no usable segment partition for these requests.
     prompt_tokens: "LongBench-v2 min/median/max 10352/22924/39642; GSM8K 77/111/242 from clean2 no-cache run1 raw usage."
-    implication: A natural-task score may describe runtime-on safety but cannot establish reused-token quality; the predeclared four-worker hot-path gate remains strict and is predicted not to pass.
+    implication: Frozen natural requests did not establish reused-token quality; unchanged strict audit observed zero worker-hot PIDs versus four required and exited 1.
     evidence_note: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/QUALITY_ACTIVATION_SCOPE.md
-  decision: clean2 no-cache denominator valid after independent unit/guard/release audits; treatment six units, its release receipt and full paired audit pending.
+  final_scoped_audit:
+    path: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2/quality-natural-scope-audit.json
+    sha256: 61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0
+    all_twelve_rows_and_receipts_valid: true
+    paired_and_repeated_input_identity_valid: true
+    formal_acceptance_claim: false
+    original_strict_auditor_exit: 1
+    original_strict_failure: zero distinct worker_hot_path PIDs
+    no_cache_guard_samples: 752
+    hypic_guard_samples: 754
+    hypic_guard_sha256: 838562b72f87aa7ba397ef2169f2b0fa6aec99a78932844e497006bc79a22a3a
+    hypic_service_stop_sha256: 0d2c44bf5a3da1e64adba919824a299cc3a1472ebb165289e18f8095a9ef4b77
+    no_cache_longbench_correct_by_run: [78, 72, 74]
+    hypic_longbench_correct_by_run: [74, 75, 75]
+    no_cache_gsm8k_correct_by_run: [1278, 1279, 1279]
+    hypic_gsm8k_correct_by_run: [1276, 1276, 1282]
+    longbench_mean_delta_pp: 0.0
+    gsm8k_mean_delta_pp: -0.05054334091484236
+    natural_score_pattern: within_baseline_range
+    natural_score_decision: inconclusive; original all-nonnegative score gate not met.
+  decision: C1/C2 same-lane hot-reuse performance passed; clean2 natural-score rows are valid and descriptively inconclusive; formal hot-path quality failed activation coverage. Full-paper/C3 and production adoption not established. See FINAL_EVIDENCE_DECISION.md; a separately predeclared in-path quality supplement is open.
