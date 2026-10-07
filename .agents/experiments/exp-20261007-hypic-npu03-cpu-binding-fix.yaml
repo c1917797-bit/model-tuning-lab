@@ -1,0 +1,44 @@
+schema: ascend-inference-treatment/v1
+id: exp-20261007-hypic-npu03-cpu-binding-fix
+status: planned
+branch: work/hypic-npu03-cpu-binding-fix-20261007
+parent_diagnosis: exp-20261007-hypic-npu03-comm-root
+objective: Remove the NPU0-3 Decode latency floor caused by the enabled automatic CPU-binding path without modifying the official image or other card lanes.
+scope:
+  physical_npus: [0, 1, 2, 3]
+  forbidden_npus: [4, 5, 6, 7]
+  model: /cache/efim/Qwen3.6-27B
+  model_alias: qwen36-hypic-e2e-2048
+  image_digest: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+  source_commit: 3ad0967589304cd8fc4e7cff02f48ecc6125c89f
+  source_snapshot_sha256: c88cd60f6929d1596f3553b68f31de506f5d60c2401429aa5cd819418ac40ad4
+  benchmark_sha256: cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822
+  cpuset: 112-191
+  runtime: TP4, HCCL_OP_EXPANSION_MODE=AIV, FULL_DECODE_ONLY, no prefix caching, HYPIC disabled in first arm
+  port: 8223
+  artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007
+symptom:
+  frozen_formal_baseline: Three NPU0-3 no-cache 40-request x 1024-output runs gave weighted TPOT 417.5428, 410.8568, and 410.8960 ms/token; all 40/40 fixed-output valid.
+  profiler_diagnostic: Binding-off-only short profiled run improved weighted TPOT 499.0045 to 140.9520 ms/token with 4/4 x 128 outputs and rank-0/2 graph task-update waits collapsing.
+  cause_confidence: Strong path-level causal attribution to enabled automatic CPU binding; overlap versus other binding sub-operations remains unisolated.
+candidate:
+  class: supported_upstream_configuration
+  primary_variable: Add only --additional-config '{"enable_cpu_binding":false}' to the frozen serving command.
+  attribution: This is an upstream vLLM-Ascend switch, not a novel local monkeypatch.
+  activation: Exact container command and parsed service additional_config must show false; worker.py live source hash/conditional must match pinned image; disabled control retains original command.
+  delivery: Explicit opt-in isolated launcher; no shared image, canonical checkout, existing container, driver, firmware, IRQ, or NPU4-7 change.
+  opportunity_bound: The profiled short diagnostic suggests up to approximately 358 ms/token of removable common floor at that concurrency; the unprofiled formal 40x1024 gain is unknown until measured.
+baseline_reuse:
+  root: /cache/cch/hypic-qwen36-e2e-2048-20261006/no-cache
+  run1_sha256: 0a3c1740902d769de0240b909423c3b4655b8e334499bfd08d70b49c8c5d5bac
+  run2_sha256: 67bd0b74ee8605e4f5502498ab385d55009cd9581b115bef25f3b700b9120493
+  run3_sha256: 46e63bc7c3e4b156483a86eedfb0a42a05f606c120ade1516cf91dfd40e1c3a8
+  reuse_gate: Recheck hashes and exact image/source/model/physical devices/cpuset/workload identity plus live host health before comparison; re-baseline if drift or contention is found.
+progression:
+  canary: One non-profiled no-cache service lifecycle; run the existing 32768-token semantic canary and a four-concurrent 128-output smoke before formal traffic.
+  fail_fast: One 40-request x 1024-output c16 run after two warmups; require 40/40 exact-length, zero errors, weighted TPOT at least 20 percent below frozen baseline mean, no TTFT P95 regression above 10 percent, and no neighboring-resource disturbance.
+  full_performance: If fail-fast passes, three candidate repetitions of the exact frozen 32768-input/16384-prefix/1024-output/40-request/c16 protocol, without profiler; report each run and dispersion.
+  full_quality: The prior 2048-token paired ruler was incomplete. A complete matched baseline and candidate LongBench-v2/GSM8K suite is still required before production or HYPIC adoption claims; do not relabel a semantic canary as that gate.
+  abort: Any foreign NPU0-3 process, port contention, source/image/model drift, invalid output, failed rollback, or NPU4-7 access.
+rollback: Stop and remove only the uniquely named candidate container after identity verification; prove NPU0-3 and port 8223 released. Removing the opt-in launcher flag restores the official binding path.
+decision_rule: Accept only with comparable repeated performance, required quality, activation, and rollback; otherwise classify partial-component, rejected, failed, or inconclusive without modifying shared service.

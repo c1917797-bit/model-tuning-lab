@@ -1,0 +1,16 @@
+{
+  "schema": "ascend-runtime-repair-task/v1",
+  "task_id": "hypic-npu03-cpu-binding-fix-20261007",
+  "objective": "Apply and verify an opt-in supported vLLM-Ascend CPU-binding-off repair for the HYPIC NPU0-3 Decode floor.",
+  "state": "planned",
+  "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
+  "base_commit": "87647ac",
+  "resource_claim": {
+    "physical_npus": [0, 1, 2, 3],
+    "forbidden_npus": [4, 5, 6, 7],
+    "cpu_set": "112-191",
+    "service_port": 8223,
+    "preexisting_sleep_container": "agentgpu-910b4-qwen35-4b-v0; do not modify"
+  },
+  "next_action": "Implement a guarded isolated non-profiled launcher with an explicit opt-in switch; validate identity and rollback before NPU execution."
+}
