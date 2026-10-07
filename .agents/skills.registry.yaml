@@ -36,6 +36,7 @@ skills:
       - compare an optimization with its baseline
       - accept or reject a performance claim
       - translate an operator microbenchmark to service impact
+      - audit percentile definitions or smoke versus formal activation gates
     scope:
       - configs/**
       - scripts/**
@@ -183,6 +184,7 @@ skills:
       - Dense MoE or MTP performance optimization
       - Ascend 性能优化
       - 根据瓶颈实施优化
+      - isolate a common CPU-binding Decode floor from the paper technique effect
     scope:
       - AGENTS.md
       - docs/**

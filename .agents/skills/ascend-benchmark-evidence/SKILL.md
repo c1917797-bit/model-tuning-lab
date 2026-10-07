@@ -55,6 +55,14 @@ every primary metric passes its progression threshold and no safety, quality,
 or tail-risk gate fails. Preserve the stopped result; do not consume a full
 matrix to reconfirm a clearly missed gate.
 
+Make activation requirements stage-specific. A short one-wave smoke must prove
+the core mechanism and its correctness oracle, but must not demand an event
+that only later formal traffic can schedule. Keep the full declared hot-path
+event set mandatory for the formal screen and repeats. If a smoke exits because
+its gate was scoped too broadly, retain that exit and audit the original raw
+events offline; do not invent a replacement successful run or weaken the
+formal gate.
+
 ## Comparability Gate
 
 Do not compare results when material source, model, hardware, driver, firmware,
@@ -85,6 +93,12 @@ cache/compilation regime, date/run ID, units, samples, repetitions, and the
 aggregation actually used. Do not label a P50 summary as P95. For median of
 per-run P95, calculate per-run P95 first; do not pool requests or average P95
 values under a median label. Link the original paired artifacts and hashes.
+
+Before independently recomputing a stored percentile, identify the benchmark's
+exact estimator (for example nearest-rank versus linear interpolation), sample
+set, and unit. A different estimator can create a false audit mismatch even
+when every raw row is valid. Match the original definition and recompute from
+rows before widening numerical tolerances or changing the benchmark result.
 
 A compile-specialization treatment may improve first-unseen-shape TTFT without
 improving warmed arithmetic. Separate first-shape, warmed, startup/warmup and

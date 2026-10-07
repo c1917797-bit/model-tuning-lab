@@ -4,6 +4,8 @@ Current campaign note: HYPIC-only binding-off smoke `exec-0000000000000b82` pass
 
 Scope: origin/main at f1f37a39bd86f7db5fd3ee3dea358ae6868275c6 has 29 registered Skills and 29 SKILL.md files. This is a behavioral evidence ledger, not a claim that all 29 should be exercised by one paper. The old 2026-10-06 skill-validation.json is historical evidence and must be independently rechecked before promotion.
 
+Current branch has ingested three verified performance/tooling lessons into two existing Skills and registry triggers, not added new Skills. A 29-Skill structural validator pass and the six-unit performance artifact audit confirm those edits did not break the tree or the measured effect; they do not validate the unfinished quality workflow or the other unassessed Skills.
+
 Status vocabulary: completed = a defined workflow produced a traceable positive or negative result; partial = the workflow has a documented evidence gap; unassessed = no behavioral acceptance recorded in the old HYPIC ledger. A structural validator pass is not behavioral validation.
 
 | Skill | 2026-10-06 historical ledger | This campaign's remaining acceptance |

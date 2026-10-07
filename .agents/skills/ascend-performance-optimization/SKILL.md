@@ -77,6 +77,14 @@ One candidate changes one primary mechanism. Diagnostic instrumentation is not
 part of the treatment unless its overhead is isolated. Do not combine local
 wins whose denominators, model paths, or baselines differ.
 
+When a common runtime setting (such as automatic CPU binding) dominates Decode
+latency, test its supported switch as a separate opt-in repair, not as the paper
+algorithm. Re-establish both the disabled/control and technique-enabled arms
+with the same repaired setting on the same physical lane, then compute the
+technique's within-lane gap. A large common-floor improvement in both arms
+does not itself prove the technique's effect; comparing different cards or one
+repaired arm against an unrepaired denominator cannot isolate it.
+
 ## Workflow
 
 1. Freeze the entry-gate evidence in the experiment record.
