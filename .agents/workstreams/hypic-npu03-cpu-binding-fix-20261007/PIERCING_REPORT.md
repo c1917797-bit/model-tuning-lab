@@ -1,6 +1,8 @@
-# HYPIC C1/C2 NPU0–3 算法特性穿刺 · 进行中报告（2026-10-07 16:38 UTC）
+# HYPIC C1/C2 NPU0–3 算法特性穿刺 · 进行中报告（2026-10-07 17:00 UTC 更新）
 
 报告状态：**progress**。当前证据支持同环境 HYPIC 热复用路径的性能收益，尚不支持配对质量通过、生产采用或整篇论文复现。本文只列本次主机实测；同事历史 TP2 和论文 SGLang 数字不与本次 TP4 绝对值合并。CPU-binding 原因与修复的独立阶段结果见 `REPORT.md`。
+
+质量尝试 1 在 16:52:55 UTC 因外部 NPU3 占用使隔离门槛失败；尽管六个 no-cache 单元均完成并通过逐行审计，**它们不是正式质量对照分母**，HYPIC 质量臂没有启动。原始数据保留于 `quality-context-41984`；新一轮完整 12 单元配对将写入 `quality-context-41984-clean2`，不混合两个尝试。归因、进程和清理证据见 `QUALITY_RESOURCE_CONFLICT.md`。
 
 ## Step 0. 环境与算法边界
 
@@ -18,7 +20,7 @@
 
 正式性能测试由 `binding_off_service.py` 的 `screen`、`repeat2`、`repeat3` 三个独立服务生命周期执行，每组各三轮；固定 32768 输入、16384 共享前缀、1024 固定输出、c16、40 请求、2 次预热、忽略 EOS。全部六轮 40/40、0 失败、精确 1024 输出。`audit_binding_off_performance.py` 从逐请求原始行重算 weighted TPOT、nearest-rank P95、TTFT、吞吐和哈希，并核对跨组命令、镜像、源码、设备、清理凭据。性能比较不混入先前 CPU-binding-on 组或 NPU4–7 历史组。
 
-质量测试采用独立的 natural-EOS 协议：41984 上下文、2048 最大输出、c32、seed 0、temperature 0、thinking off、每组每数据集三轮。LongBench-v2 127 条（数据 SHA256 `cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a`）；GSM8K 1319 条（`3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14`）；评测器 SHA256 `9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0`。质量控制器的已执行入口是 `python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_campaign.py --run`，当前 AWMCP 作业 `exec-0000000000000c6d` 仍在运行；**运行期间不要再启动该命令或任何 NPU0–3 作业**。测试契约和恢复前提见 `QUALITY_PLAN.md` 与 `HANDOFF.md`。
+质量测试采用独立的 natural-EOS 协议：41984 上下文、2048 最大输出、c32、seed 0、temperature 0、thinking off、每组每数据集三轮。LongBench-v2 127 条（数据 SHA256 `cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a`）；GSM8K 1319 条（`3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14`）；评测器 SHA256 `9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0`。质量尝试 1 的已执行入口是 `python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_campaign.py --run`，AWMCP 作业 `exec-0000000000000c6d` 已以 exit 1 结束。尝试 2 使用同一脚本及 `HYPIC_QUALITY_ATTEMPT=clean2` 环境变量，增加物理 NPU0–3 外来 PID 监测；任何冲突或探测错误均使尝试无效。测试契约和恢复前提见 `QUALITY_PLAN.md` 与 `HANDOFF.md`。
 
 ## 本次实测结果
 
@@ -33,7 +35,7 @@
 
 G2 相对 G1 的 weighted TPOT 中位数低 `17.3404 ms/token`，即下降 `22.3562%`；TTFT P95 中位数低 `37.5656 s`；输出吞吐中位数从 `117.2930` 升至 `166.8247 token/s`，比值 `1.4223×`。这些数字和公式来自 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-independent-audit.json`，SHA256 `de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1`。这是预登记性能门槛通过，不是质量或整篇论文门槛通过。
 
-### 质量（仅 G1 基线已完成的五个单元）
+### 质量尝试 1（G1 六单元原始结果；隔离失败，不进入正式对照）
 
 | 数据集/轮次 | 有效/应有 | 正确 | 准确率 | 达 2048 上限 |
 | --- | ---: | ---: | ---: | ---: |
@@ -42,8 +44,9 @@ G2 相对 G1 的 weighted TPOT 中位数低 `17.3404 ms/token`，即下降 `22.3
 | LongBench-v2 2 | 127/127 | 75 | 59.0551% | 15 |
 | GSM8K 2 | 1319/1319 | 1275 | 96.6641% | 11 |
 | LongBench-v2 3 | 127/127 | 73 | 57.4803% | 18 |
+| GSM8K 3 | 1319/1319 | 1277 | 96.8158% | 9 |
 
-上述五单元逐行重算了索引、样本/答案、响应哈希、原始评测器计分、token 用量及摘要算术；同数据集重复间逐样本 prompt-token 数一致。各 JSONL、摘要、receipt 的路径与 SHA256 在 `HANDOFF.md`，原始数据在 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984/quality/no-cache/`，不入 Git。当前 G1 GSM8K 第三轮运行中；G2 质量尚未开始，因此没有配对精度差、质量通过或退化结论。
+上述六单元逐行重算了索引、样本/答案、响应哈希、原始评测器计分、token 用量及摘要算术；同数据集重复间逐样本 prompt-token 数一致。各 JSONL、摘要、receipt 的路径与 SHA256 在 `HANDOFF.md`，原始数据在 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984/quality/no-cache/`，不入 Git。最后一轮的尾部可能与外部 NPU3 算子任务重叠，且清理时整条卡道不空闲；不能把这六轮当作隔离合格的正式对照。G2 质量尚未开始，因此没有配对精度差、质量通过或退化结论。
 
 ### 激活、归因与未完成门槛
 
@@ -53,13 +56,13 @@ G2 的三轮正式性能日志满足插件构建、scheduler 与 worker 热路�
 | --- | --- | --- |
 | 可运行性与性能六轮 | 通过 | 修复后 NPU0–3 同槽位 C1/C2 热复用性能收益成立 |
 | 性能热路径激活 | 通过（仅正式性能臂） | 不是仅靠容器名推断激活 |
-| 12 单元配对质量 | 未完成（5/12，仅 G1） | 不宣称精度无损/回归 |
+| 12 单元配对质量 | 尝试 1 隔离失败；clean2 需重新完成 12/12 | 不宣称精度无损/回归 |
 | 质量服务激活与两组释放 | 未完成 | 不宣称最终资源门槛通过 |
 | 论文 C3 与原版系统广度 | 未实现/未测试 | 不宣称整篇 HYPIC 复现 |
 | 生产采用/泛化 | 未审定 | 不宣称发布就绪 |
 
 ## 失败经验与证据索引
 
-先前 one-wave HYPIC smoke 的外层进程曾因把正式 40 请求才需满足的 `native_decode_scheduler_passthrough` 事件门槛错误套到四请求窗口而退出 1；保留原失败记录，语义 canary/核心事件另行审计，正式三轮继续严格要求完整热路径。另一项已确认问题是 NPU0–3 的共享 Decode CPU-binding floor；用官方支持的禁绑开关同时修复两组后再测 HYPIC 差值，而不是把 CPU 影响归给算法。P95 审计必须按基准程序的 nearest-rank 定义复算。这些已沉淀到对应现有 Skill 与 registry，详细证据在实验 YAML 和 `HANDOFF.md`。
+先前 one-wave HYPIC smoke 的外层进程曾因把正式 40 请求才需满足的 `native_decode_scheduler_passthrough` 事件门槛错误套到四请求窗口而退出 1；保留原失败记录，语义 canary/核心事件另行审计，正式三轮继续严格要求完整热路径。另一项已确认问题是 NPU0–3 的共享 Decode CPU-binding floor；用官方支持的禁绑开关同时修复两组后再测 HYPIC 差值，而不是把 CPU 影响归给算法。P95 审计必须按基准程序的 nearest-rank 定义复算。这些已沉淀到对应现有 Skill 与 registry，新的外部 NPU3 冲突证明仅启动前验槽不足；尝试 2 添加运行期 PID 守卫并重新做完整配对，不能挑选尝试 1 已通过算术校验的分数来规避隔离失败。详细证据在实验 YAML、`QUALITY_RESOURCE_CONFLICT.md` 和 `HANDOFF.md`。
 
-证据根：`/cache/cch/hypic-npu03-cpu-binding-fix-20261007`；主账本：`.agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml`；逐项 Skill 状态：`SKILL_VERIFICATION.md`。下一步只观察当前句柄并审计 G1 GSM8K 第三轮；确认 G1 精确服务释放后观察自动启动的 G2，完成六个 G2 单元、双组释放和 `audit_binding_off_quality.py` 的全量配对审计，再把本报告升级为 final 或有证据的 negative/inconclusive。不得用正在写入的局部 JSONL 充当完整一轮。
+证据根：`/cache/cch/hypic-npu03-cpu-binding-fix-20261007`；主账本：`.agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml`；逐项 Skill 状态：`SKILL_VERIFICATION.md`。下一步在 0–3 卡与端口预检空闲后启动 clean2 完整配对，审计其全部 12 单元、双组激活与释放，再把本报告升级为 final 或有证据的 negative/inconclusive。不得把尝试 1 的基线与 clean2 治疗臂混算。

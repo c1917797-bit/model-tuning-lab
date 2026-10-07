@@ -8,9 +8,11 @@ import fcntl
 import hashlib
 import json
 import math
+import os
 import re
 import signal
 import subprocess
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,7 +23,11 @@ from binding_off_service import (
     assert_lane_available, frozen_source, inspect, run, sha256,
 )
 
-QROOT = ROOT / "quality-context-41984"
+ATTEMPT = os.environ.get("HYPIC_QUALITY_ATTEMPT", "original")
+if ATTEMPT not in {"original", "clean2"}:
+    raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
+QROOT = ROOT / ("quality-context-41984" if ATTEMPT == "original"
+                else "quality-context-41984-clean2")
 CONTEXT = 41984
 EVALUATOR = Path(__file__).resolve().parents[1] / "WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py"
 DATASETS = {
@@ -33,13 +39,14 @@ MODEL_INDEX_SHA = "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4
 MODEL_NAME = "qwen36-hypic-e2e-2048"
 MODEL_DIR = Path("/cache/efim/Qwen3.6-27B")
 BASE_URL = f"http://127.0.0.1:{PORT}"
-EXPERIMENT = "hypic-npu03-bindingoff-quality41984-20261007"
+EXPERIMENT = f"hypic-npu03-bindingoff-quality41984-20261007-{ATTEMPT}"
 UNIT_ORDER = (("longbenchv2", 1), ("gsm8k", 1), ("longbenchv2", 2),
               ("gsm8k", 2), ("longbenchv2", 3), ("gsm8k", 3))
 
 
 def name_for(arm: str) -> str:
-    return f"hypic_npu03_bindingfix_quality_{arm.replace('-', '_')}_20261007"
+    suffix = "" if ATTEMPT == "original" else f"_{ATTEMPT}"
+    return f"hypic_npu03_bindingfix_quality_{arm.replace('-', '_')}_20261007{suffix}"
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -54,6 +61,85 @@ def status(arm: str, stage: str, **details: object) -> None:
              "stage": stage, "at_utc": datetime.now(timezone.utc).isoformat(), **details}
     write_json(QROOT / arm / "status.json", value)
     print(json.dumps(value, sort_keys=True), flush=True)
+
+
+def npu_processes(snapshot: str) -> list[dict[str, int]]:
+    """Return host PIDs actually using physical NPU0-3, not Docker claims."""
+    return [{"physical_npu": int(card), "pid": int(pid)} for card, pid in
+            re.findall(r"^\|\s*([0-3])\s+0\s*\|\s*(\d+)\s*\|", snapshot, re.M)]
+
+
+class ForeignProcessGuard:
+    """Record any competing 0-3 NPU process throughout a quality service."""
+
+    def __init__(self, arm: str, worker_pids: dict[str, int]) -> None:
+        self.arm = arm
+        self.expected = set(worker_pids.values())
+        self.stop_event = threading.Event()
+        self.lock = threading.Lock()
+        self.samples = 0
+        self.foreign: list[dict] = []
+        self.errors: list[dict] = []
+        self.thread = threading.Thread(target=self._loop, daemon=True)
+        self.started = False
+
+    def _record(self, foreign: list[dict[str, int]], error: str | None) -> None:
+        with self.lock:
+            self.samples += 1
+            event = {"at_utc": datetime.now(timezone.utc).isoformat()}
+            if foreign:
+                self.foreign.append({**event, "processes": foreign})
+            if error:
+                self.errors.append({**event, "error": error})
+            if foreign or error:
+                self._write()
+
+    def _write(self) -> None:
+        write_json(QROOT / self.arm / "lane-guard.json", {
+            "schema": "hypic-bindingoff-quality-lane-guard/v1", "arm": self.arm,
+            "attempt": ATTEMPT, "expected_worker_pids": sorted(self.expected),
+            "samples": self.samples, "foreign": self.foreign, "probe_errors": self.errors})
+
+    def sample(self) -> None:
+        try:
+            result = subprocess.run(["npu-smi", "info"], text=True,
+                                    capture_output=True, timeout=30, check=False)
+            if result.returncode:
+                raise RuntimeError(f"npu-smi exited {result.returncode}")
+            observed = npu_processes(result.stdout)
+            if not all((f"No running processes found in NPU {card}" in result.stdout
+                        or any(item["physical_npu"] == card for item in observed))
+                       for card in range(4)):
+                raise RuntimeError("npu-smi process section incomplete")
+            foreign = [item for item in observed if item["pid"] not in self.expected]
+            self._record(foreign, None)
+        except Exception as exc:
+            self._record([], f"{type(exc).__name__}: {exc}")
+
+    def assert_clean(self) -> None:
+        self.sample()
+        with self.lock:
+            if self.foreign or self.errors:
+                raise RuntimeError("quality lane guard detected foreign NPU0-3 process or probe error")
+
+    def _loop(self) -> None:
+        while not self.stop_event.wait(10):
+            self.sample()
+
+    def start(self) -> None:
+        self.assert_clean()
+        self.thread.start()
+        self.started = True
+
+    def close(self) -> None:
+        self.stop_event.set()
+        if self.started:
+            self.thread.join(timeout=35)
+        with self.lock:
+            if self.started and self.thread.is_alive():
+                self.errors.append({"at_utc": datetime.now(timezone.utc).isoformat(),
+                                    "error": "lane guard did not stop cleanly"})
+            self._write()
 
 
 def preflight() -> dict:
@@ -87,7 +173,7 @@ def preflight() -> dict:
 def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
     source = frozen_source(arm)
     old_path = f"/results/{arm}"
-    new_path = f"/results/quality-context-41984/{arm}"
+    new_path = f"/results/{QROOT.name}/{arm}"
     command = source["Config"]["Cmd"][2]
     if (command.count(old_path) != 2 or command.count("--max-model-len 40960") != 1
             or command.count("--max-num-batched-tokens 40960") != 1):
@@ -267,7 +353,9 @@ def check_partial(arm: str, dataset: str, index: int) -> None:
             raise RuntimeError("partial quality row hash/state invalid")
 
 
-def run_unit(arm: str, dataset: str, index: int, container_id: str) -> None:
+def run_unit(arm: str, dataset: str, index: int, container_id: str,
+             guard: ForeignProcessGuard) -> None:
+    guard.assert_clean()
     directory = QROOT / "quality" / arm
     directory.mkdir(parents=True, exist_ok=True)
     stem = f"{dataset}.run{index}"
@@ -293,6 +381,7 @@ def run_unit(arm: str, dataset: str, index: int, container_id: str) -> None:
                                 timeout=21600, check=False)
     if result.returncode:
         raise RuntimeError(f"{stem}: evaluator exit {result.returncode}")
+    guard.assert_clean()
     summary = validate_unit(arm, dataset, index)
     write_json(directory / f"{stem}.receipt.json", {
         "schema": "hypic-bindingoff-quality-unit/v1", "arm": arm, "dataset": dataset,
@@ -325,19 +414,40 @@ def cleanup(arm: str, container_id: str) -> None:
     if item["State"]["Status"] == "running":
         run("docker", "stop", "--time", "60", name)
     run("docker", "rm", name)
-    assert_lane_available()
+    start_receipt = json.loads((QROOT / arm / "service-start.json").read_text())
+    if start_receipt.get("container_id") != container_id or inspect(name) is not None:
+        raise RuntimeError("owned quality service removal cannot be proven")
+    snapshot = run("npu-smi", "info").stdout
+    observed = npu_processes(snapshot)
+    old_worker_pids = set(start_receipt["worker_pid_by_physical_npu"].values())
+    if any(entry["pid"] in old_worker_pids for entry in observed):
+        raise RuntimeError("owned quality worker remains on NPU after container removal")
+    listeners = run("ss", "-ltn", "sport", f":{PORT}").stdout
+    if re.search(rf":{PORT}(?:\s|$)", listeners, re.M):
+        raise RuntimeError("quality service port remains occupied after container removal")
+    lane_error = None
+    try:
+        assert_lane_available()
+    except RuntimeError as exc:
+        lane_error = str(exc)
     receipt = {
         "schema": "hypic-bindingoff-quality-service-stop/v1", "arm": arm,
         "container": name, "container_id": container_id,
         "container_removed": True, "owned_npus_released": True, "port_released": True,
+        "lane_available": lane_error is None, "lane_error": lane_error,
+        "foreign_npu_processes": [entry for entry in observed
+                                  if entry["pid"] not in old_worker_pids],
         "at_utc": datetime.now(timezone.utc).isoformat(),
         "service_log_sha256": sha256(log_path) if log_path.exists() else None,
         "service_log_error": log_error}
     write_json(QROOT / arm / f"service-stop.{container_id[:12]}.json", receipt)
     write_json(QROOT / arm / "service-stop.json", receipt)
-    status(arm, "service-released", container_id=container_id)
+    status(arm, "service-released" if lane_error is None else "release-with-lane-conflict",
+           container_id=container_id)
     if log_error:
         raise RuntimeError(f"service released, but log capture failed: {log_error}")
+    if lane_error:
+        raise RuntimeError(f"owned service released, but shared lane unavailable: {lane_error}")
 
 
 def interrupt(_number: int, _frame: object) -> None:
@@ -365,28 +475,38 @@ def main() -> int:
                 raise RuntimeError("all quality summaries exist but exact service still exists; audit ownership before completion")
             for dataset, index in UNIT_ORDER:
                 validate_unit(args.arm, dataset, index)
-            if not (QROOT / args.arm / "service-stop.json").exists():
+            stop_path = QROOT / args.arm / "service-stop.json"
+            if not stop_path.exists() or json.loads(stop_path.read_text()).get("lane_available") is not True:
                 raise RuntimeError("all quality summaries exist without service release receipt")
             print(json.dumps({"arm": args.arm, "status": "already-complete-and-verified"}))
             return 0
         status(args.arm, "preflight-passed", fingerprint=fingerprint)
         container_id = ""
         error = None
+        guard = None
         try:
             container_id = create(args.arm)
             start(args.arm, container_id, fingerprint)
+            start_receipt = json.loads((QROOT / args.arm / "service-start.json").read_text())
+            guard = ForeignProcessGuard(args.arm, start_receipt["worker_pid_by_physical_npu"])
+            guard.start()
             for dataset, index in UNIT_ORDER:
-                run_unit(args.arm, dataset, index, container_id)
+                run_unit(args.arm, dataset, index, container_id, guard)
+            guard.assert_clean()
             status(args.arm, "all-units-verified")
         except Exception as exc:
             error = f"{type(exc).__name__}: {exc}"
             status(args.arm, "failed-or-incomplete", error=error)
             raise
         finally:
-            if container_id:
-                cleanup(args.arm, container_id)
-                status(args.arm, "incomplete-released" if error else "arm-complete-and-released",
-                       container_id=container_id, prior_error=error)
+            try:
+                if guard is not None:
+                    guard.close()
+            finally:
+                if container_id:
+                    cleanup(args.arm, container_id)
+                    status(args.arm, "incomplete-released" if error else "arm-complete-and-released",
+                           container_id=container_id, prior_error=error)
     return 0
 
 

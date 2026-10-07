@@ -178,12 +178,12 @@ hypic_three_run_decision_20261007:
   performance_gate: pass for this NPU0-3 model, image, source and 40 x 1024 c16 protocol after independent six-unit artifact audit.
   independent_audit: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-independent-audit.json
   independent_audit_sha256: de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1
-  quality_gate: The complete matched 41984-context, 2048-token natural-EOS LongBench-v2/GSM8K paired quality campaign has not yet run.
+  quality_gate: First 41984-context, 2048-token quality attempt failed the NPU0-3 isolation gate before HYPIC quality; a new full paired attempt is required.
   classification: partial-component pending paired quality; do not promote to main or production yet.
 quality_campaign_20261007:
   operation_id: exec-0000000000000c6d
   protocol: Same binding-off repair in no-cache and HYPIC-only arms, each with three complete LongBench-v2 and GSM8K runs, 41984 context, 2048 maximum natural-EOS output, c32, seed 0, thinking off.
-  current_stage: no-cache GSM8K run3 in progress; 5 of 12 quality units complete, no paired quality decision.
+  current_stage: terminal environment-isolation failure at 2026-10-07 16:52:55 UTC; six no-cache units completed but HYPIC-only not launched; attempt-1 results are not the formal paired denominator.
   no_cache_longbenchv2_run1:
     validity: Independently audited 127/127 rows, zero failures, exact indexes/sample references/response hashes, scorer and summary arithmetic.
     result: 76/127 correct, 59.84251968503937 percent; 15 outputs reached the 2048-token length limit; unit duration 1431.5986 s.
@@ -214,4 +214,18 @@ quality_campaign_20261007:
     summary_sha256: 7da1743b8ff7b3e132135579822b6f42ee24d8916db60d9a3aff1f5f0ea2e248
     details_sha256: 5fd114b635e74e3e223180d2ec7d0bb0384960578f6c76bc2da1c03e7e885a45
     receipt_sha256: b77bf09cb7dbd03f62f9487c46de15d06d7060b55f457b08756cd965badf33e3
-  decision: pending; five completed units are unpaired baseline repetitions, not the quality gate.
+  no_cache_gsm8k_run3:
+    validity: Independently audited 1319/1319 rows, zero failed requests, exact sample/scorer/hash accounting and matching per-sample prompt tokens; resource isolation for the tail is unproven because an unrelated NPU3 process started before this unit ended.
+    result: 1277/1319 correct, 96.81576952236543 percent; 9 outputs reached the 2048-token length limit; unit duration 1687.1266 s.
+    summary_sha256: c8f2a7225212bd7d1d76fe1cc4819ca3e1d9f838e2bd51955ef99960ef21be98
+    details_sha256: c1c938b804a23d92bef3eb8ec33a333a13d6f4e1b703803a25018ab99b7adace
+    receipt_sha256: 20720702374428bcbde0d310e298f16fe41f3389d7e4e59408025a2054d50ef9
+  cleanup_failure: The exact no-cache container was removed and its worker PIDs/port disappeared, but controller exit 1 resulted from unrelated cannbench_ds PIDs on physical NPU3; no service-stop receipt was written.
+  evidence: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/QUALITY_RESOURCE_CONFLICT.md
+  decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
+quality_campaign_clean2_20261007:
+  status: preflight-passed, planned new full 12-unit paired attempt after attempt-1 isolation failure.
+  artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
+  only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
+  orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
+  decision: pending fresh baseline and treatment results, both release receipts and independent full audit.

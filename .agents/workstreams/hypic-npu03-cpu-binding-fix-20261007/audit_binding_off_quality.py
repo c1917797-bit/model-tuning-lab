@@ -74,8 +74,17 @@ def service_receipt(arm: str, fingerprint: dict) -> dict:
             or set(start.get("worker_pid_by_physical_npu", {})) != {"0", "1", "2", "3"}
             or len(set(start["worker_pid_by_physical_npu"].values())) != 4
             or not all(stop.get(key) is True for key in
-                       ("container_removed", "owned_npus_released", "port_released"))):
+                       ("container_removed", "owned_npus_released", "port_released", "lane_available"))):
         raise RuntimeError(f"{arm}: service identity, worker proof or release receipt invalid")
+    guard_path = directory / "lane-guard.json"
+    guard = json.loads(guard_path.read_text())
+    if (guard.get("schema") != "hypic-bindingoff-quality-lane-guard/v1"
+            or guard.get("arm") != arm or guard.get("attempt") != "clean2"
+            or sorted(guard.get("expected_worker_pids", []))
+            != sorted(start["worker_pid_by_physical_npu"].values())
+            or guard.get("samples", 0) < 2
+            or guard.get("foreign") != [] or guard.get("probe_errors") != []):
+        raise RuntimeError(f"{arm}: uninterrupted NPU0-3 lane-guard evidence invalid")
     log_path = directory / f"service.full.{start['container_id'][:12]}.log"
     if (stop.get("service_log_error") is not None
             or stop.get("service_log_sha256") != sha256(log_path)):
@@ -91,6 +100,8 @@ def service_receipt(arm: str, fingerprint: dict) -> dict:
     result = {"container_id": start["container_id"],
               "service_start_sha256": sha256(directory / "service-start.json"),
               "service_stop_sha256": sha256(directory / "service-stop.json"),
+              "lane_guard_sha256": sha256(guard_path),
+              "lane_guard_samples": guard["samples"],
               "service_log_sha256": sha256(log_path),
               "physical_worker_pids": start["worker_pid_by_physical_npu"]}
     if arm == "hypic-only":
