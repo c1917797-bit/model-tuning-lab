@@ -183,7 +183,7 @@ class CrossModule(unittest.TestCase):
    "sparq_token_v4/oracle.py":"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f",
    "model_bridge.py":"a85dd04893ad74feaaf1f2bf85e807e387b2957ce6db6a6034bf098bb951e81d",
    "numeric_gate.py":"35d09584475510c034643f01d9b83d9c24ea9840a8d5238dcd736e98b4c202e8",
-   "preflight.py":"85e2b0aa2632cfc36df378aaa53f50dbcf06bc4ffbe176b0bbe14115c30b1463"}.items():
+   "preflight.py":"f55a9ce4d0576a26cfffb76372fabc4fec9ec950eb5bd66a8ee79e4663a65c38"}.items():
    self.assertEqual(receipt.sha(receipt.ROOT/n),s)
   self.assertNotEqual(receipt.sha(Path(gate.__file__)),"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c")
   self.assertEqual(receipt.OWNER,"sparq-token-v6");self.assertNotIn("torch",sys.modules)

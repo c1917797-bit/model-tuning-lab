@@ -13,6 +13,12 @@ def error_record(error):
 def safe_observe(fn):
  try:return {"ok":True,"value":fn(),"error":None}
  except BaseException as error:return {"ok":False,"value":None,"error":error_record(error)}
+def import_device_operator():
+ # Pinned v0.23 has an early device_op/fused_moe import cycle. Initialize the
+ # Ascend ops package first, as in the existing source-proven plugin bootstrap.
+ # This changes import order only; no upstream source or numerical gate changes.
+ __import__("vllm_ascend.ops",fromlist=["__name__"])
+ return __import__("vllm_ascend.device.device_op",fromlist=["DeviceOperator"])
 def callable_observation(fn):
  result={"callable":callable(fn),"kind":type(fn).__name__,"module":getattr(fn,"__module__",None),
   "qualname":getattr(fn,"__qualname__",None),"name":getattr(fn,"__name__",None),
@@ -279,7 +285,7 @@ def probe(a):
    "torch_npu":{"file":torch_npu.__file__,"version":torch_npu.__version__}}
   observation["flags"]["after_torch_import"]=flags(torch_npu)
   observation["exports_before_source_import"]=collect_exports(torch,torch_npu)
-  module_observation=safe_observe(lambda:__import__("vllm_ascend.device.device_op",fromlist=["DeviceOperator"]))
+  module_observation=safe_observe(import_device_operator)
   module=module_observation["value"];observation["source_import"]={"ok":module_observation["ok"],"error":module_observation["error"]}
   observation["wrapper"]=collect_wrapper(module) if module is not None else None
   observation["exports_after_source_import"]=collect_exports(torch,torch_npu)

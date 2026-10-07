@@ -1,5 +1,32 @@
 # DAMP Ascend — current workstream
 
+## Current actual serial admission status — 2026-10-07 22:52:51 UTC
+
+SparQ005 actual MA108f FAILED1/63.893s before NPU. Read
+SPARQ005_ACTUAL_ENTRY_FAILURE_20261007.md and original terminal first.
+Ops-before-device_op resolved the circular import. The actual native exports
+are torch_npu ATB wrappers with complete atb schemas, rejected by the erroneous
+npu-only proof predicate; isolated exact-source successor preparing, no old retry.
+CPU79dff6e6... stopped/retained/noOOM; independent readonly1094 verified exact
+ownership/release and all NPUs idle. Readonly1093 import-path failure retained.
+86 software checks/source27 passed108e but do not authorize native success.
+
+H8 frozen v6 host-ancestor-proof is ACTUALLY present:274 sources, manifest
+cbe3902c540f0851590336d1b3fa72a83cee06955b801a7e89b030f01b8ec0dc.
+MAIN reviewed resource-attestation/control/consumer deltas; same-image Devices[]
+source-admission MA1095 PASSED0/46.078s; independent109b PASSED0/10.426s.
+Original SOURCE_RESULTa830f84f... and whole authorityd4f9ae2a... are retained.
+It preserves complete host ancestors/default guest leaf, with no new controller
+binds/namespace/caps/PID/network. Full four-card11520 MA109c is now RUNNING
+(not a numerical result); fresh admission again precedes NPU. Proposed
+cgroup-root bind v6 remains paused, missing copy ACKs never constitute delivery.
+
+Only MAIN launches actual Docker/NPU. Three rolling source preparers remain;
+lowbit native002 delivery still pending, no native or paper-performance claim.
+Memory32GiB authority completed/SPENT; OVS/wholeNUMA3 unchanged, no extra release.
+KV Oct8 08:29:54Z / portfolio Oct9 11:17:31Z unchanged. No newly accepted
+non-HYPIC matched E2E/task candidate. Prior entries below are historical.
+
 ## Current actual serial admission status — 2026-10-07 22:21Z
 
 Read SPARQ004_ACTUAL_ENTRY_FAILURE_20261007.md first. MA107a terminal exit1:

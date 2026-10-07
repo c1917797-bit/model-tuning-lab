@@ -1,0 +1,125 @@
+{
+  "schema": "main-h8-v6-full-actual-dispatch/v1",
+  "input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=unlimited",
+      "--nofile=1024:1024",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/host.py",
+      "--execute",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v6-host-ancestor-proof/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "cbe3902c540f0851590336d1b3fa72a83cee06955b801a7e89b030f01b8ec0dc",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--warm-result",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json",
+      "--warm-result-sha256",
+      "9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e",
+      "--warm-original-operation",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json",
+      "--warm-original-operation-sha256",
+      "2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v6-20261007-001"
+    ],
+    "env": {
+      "PYTHONPATH": "",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "sync": false,
+    "timeout": 5460,
+    "maxOutputBytes": 32768,
+    "idempotencyKey": "main-h8-full-v6-actual-11520-physical4-7-20261007-001"
+  },
+  "actual_ack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-h8-full-v6-actual-11520-physical4-7-20261007-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-000000000000109c\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 5000,\n  \"result\": {\n    \"execId\": \"exec-000000000000109c\",\n    \"lane\": \"job\",\n    \"ok\": true,\n    \"pollAfterMs\": 250,\n    \"running\": true,\n    \"state\": \"running\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 355,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 355,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1492,\n      \"totalMs\": 1848\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 354,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 354\n    }\n  },\n  \"traceId\": \"8dfcf52c-b638-4dfb-85cb-996441c15fc1\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "cancelTool": "operation_cancel",
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "idempotencyKey": "main-h8-full-v6-actual-11520-physical4-7-20261007-001",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "operationId": "exec-000000000000109c",
+      "operationKind": "exec",
+      "pollTool": "operation_get",
+      "requestDeadlineMs": 5000,
+      "result": {
+        "execId": "exec-000000000000109c",
+        "lane": "job",
+        "ok": true,
+        "pollAfterMs": 250,
+        "running": true,
+        "state": "running"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 355,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 355,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 1492,
+          "totalMs": 1848
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 354,
+          "routeLookupMs": 0,
+          "totalMs": 354
+        }
+      },
+      "traceId": "8dfcf52c-b638-4dfb-85cb-996441c15fc1"
+    },
+    "isError": false
+  },
+  "admission_prerequisite": {
+    "original_operation": "exec-0000000000001095",
+    "source_result_sha256": "a830f84f45d685f997918a4e06ec0f7529eec4a7e1cb56a44b51dd97822a50e7",
+    "independent_consumer_operation": "exec-000000000000109b",
+    "source_namespace_success": true,
+    "npu_executed": false
+  },
+  "note": "Single actual four-card original11520 numerical matrix. Fresh source/resource/device gate again before NPU. No model/E2E/task/result yet, no clock reset or resource relaxation."
+}

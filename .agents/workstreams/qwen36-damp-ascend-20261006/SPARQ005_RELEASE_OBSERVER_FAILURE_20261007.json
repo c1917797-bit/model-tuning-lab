@@ -1,0 +1,97 @@
+{
+  "schema": "main-sparq005-readonly-release-observer-failed/v1",
+  "original": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import hashlib,importlib.util,json,subprocess\\nfrom pathlib import Path\\nr=Path('/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-005-native-20261007-001')\\np=r/'RESULT.json';assert hashlib.sha256(p.read_bytes()).hexdigest()=='a0cfa0708b60676f30e70be6523acf74fcc78d6b628c655260d5372298d8e701'\\nv=json.loads(p.read_text());assert v['status']=='failed' and v['npu_executed'] is False and v['container_id'] is None and v['secondary_errors']==[]\\ne=json.loads((r/'cpu-preflight/OWNED.json').read_text());assert e['cid']==v['cpu_container_id']\\nh=Path('/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py');assert hashlib.sha256(h.read_bytes()).hexdigest()==e['host_sha256']\\nspec=importlib.util.spec_from_file_location('_exact_sparq005_cleanup',h);mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)\\nargv=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','inspect',e['cid']];x=subprocess.run(argv,capture_output=True,text=True,timeout=15);assert x.returncode==0,x.stderr;xs=json.loads(x.stdout);assert len(xs)==1\\nmod.validate_inspect(xs[0],e);s=xs[0]['State'];assert not s['Running'] and s['Pid']==0 and not xs[0].get('ExecIDs') and not s.get('OOMKilled')\\nsm=subprocess.run(['/usr/local/sbin/npu-smi','info'],capture_output=True,text=True,timeout=15);assert sm.returncode==0\\nprint(json.dumps({'schema':'sparq005.MAIN-independent-exact-release/v1','result_sha':hashlib.sha256(p.read_bytes()).hexdigest(),'actual_inspect':{'argv':argv,'exit_code':x.returncode,'stdout':x.stdout,'stderr':x.stderr},'actual_smi':{'exit_code':sm.returncode,'stdout':sm.stdout,'stderr':sm.stderr},'source_bound_owner_checked':True,'stopped_retained':True,'NPU_executed':False,'mutations':False}))\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 90,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000001093\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 8, in <module>\\n  File \\\"<frozen importlib._bootstrap_external>\\\", line 850, in exec_module\\n  File \\\"<frozen importlib._bootstrap>\\\", line 228, in _call_with_frames_removed\\n  File \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py\\\", line 8, in <module>\\n    import receipt as c\\nModuleNotFoundError: No module named 'receipt'\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 352,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 352,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 352\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 351,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 351\n      }\n    },\n    \"traceId\": \"67f9aef1-394a-4386-80a8-64a78ebccd3e\"\n  },\n  \"operationId\": \"exec-0000000000001093\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": "exit code",
+      "found": true,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "-B",
+              "-c",
+              "import hashlib,importlib.util,json,subprocess\nfrom pathlib import Path\nr=Path('/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-005-native-20261007-001')\np=r/'RESULT.json';assert hashlib.sha256(p.read_bytes()).hexdigest()=='a0cfa0708b60676f30e70be6523acf74fcc78d6b628c655260d5372298d8e701'\nv=json.loads(p.read_text());assert v['status']=='failed' and v['npu_executed'] is False and v['container_id'] is None and v['secondary_errors']==[]\ne=json.loads((r/'cpu-preflight/OWNED.json').read_text());assert e['cid']==v['cpu_container_id']\nh=Path('/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py');assert hashlib.sha256(h.read_bytes()).hexdigest()==e['host_sha256']\nspec=importlib.util.spec_from_file_location('_exact_sparq005_cleanup',h);mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)\nargv=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','inspect',e['cid']];x=subprocess.run(argv,capture_output=True,text=True,timeout=15);assert x.returncode==0,x.stderr;xs=json.loads(x.stdout);assert len(xs)==1\nmod.validate_inspect(xs[0],e);s=xs[0]['State'];assert not s['Running'] and s['Pid']==0 and not xs[0].get('ExecIDs') and not s.get('OOMKilled')\nsm=subprocess.run(['/usr/local/sbin/npu-smi','info'],capture_output=True,text=True,timeout=15);assert sm.returncode==0\nprint(json.dumps({'schema':'sparq005.MAIN-independent-exact-release/v1','result_sha':hashlib.sha256(p.read_bytes()).hexdigest(),'actual_inspect':{'argv':argv,'exit_code':x.returncode,'stdout':x.stdout,'stderr':x.stderr},'actual_smi':{'exit_code':sm.returncode,'stdout':sm.stdout,'stderr':sm.stderr},'source_bound_owner_checked':True,'stopped_retained':True,'NPU_executed':False,'mutations':False}))"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/python3",
+            "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+            "durationMs": 90,
+            "error": "exit code",
+            "exitCode": 1,
+            "id": "exec-0000000000001093",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 8, in <module>\n  File \"<frozen importlib._bootstrap_external>\", line 850, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 228, in _call_with_frames_removed\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py\", line 8, in <module>\n    import receipt as c\nModuleNotFoundError: No module named 'receipt'\n",
+            "stdout": "",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 352,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 352,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 352
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 351,
+            "routeLookupMs": 0,
+            "totalMs": 351
+          }
+        },
+        "traceId": "67f9aef1-394a-4386-80a8-64a78ebccd3e"
+      },
+      "operationId": "exec-0000000000001093",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": false,
+      "terminal": true
+    },
+    "isError": false
+  },
+  "scope": "Read-only helper import omitted exact source parent; failed before inspect. No Docker stop/NPU. Successor only inserts exact source path, keeps all checks."
+}

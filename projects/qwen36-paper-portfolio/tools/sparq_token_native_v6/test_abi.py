@@ -5,6 +5,26 @@ from types import SimpleNamespace
 from unittest import mock
 import preflight as p,receipt
 class NativeAPI(unittest.TestCase):
+ def test_ops_bootstrap_precedes_device_operator_import(self):
+  calls=[];expected=object()
+  def importer(name,*args,**kwargs):
+   calls.append((name,kwargs.get("fromlist")))
+   return expected
+  with mock.patch("builtins.__import__",side_effect=importer):
+   self.assertIs(p.import_device_operator(),expected)
+  self.assertEqual(calls,[("vllm_ascend.ops",["__name__"]),("vllm_ascend.device.device_op",["DeviceOperator"])])
+  self.assertNotIn("torch",sys.modules)
+ def test_bootstrap_failure_preserved_without_early_device_operator_import(self):
+  calls=[]
+  def importer(name,*args,**kwargs):
+   calls.append(name)
+   raise RuntimeError("actual bootstrap failure fixture")
+  with mock.patch("builtins.__import__",side_effect=importer):
+   observed=p.safe_observe(p.import_device_operator)
+  self.assertEqual(calls,["vllm_ascend.ops"])
+  self.assertFalse(observed["ok"])
+  self.assertEqual(observed["error"]["text"],"actual bootstrap failure fixture")
+  self.assertNotIn("torch",sys.modules)
  def source(self):
   return Path("/cache/cch/qwen36-adakv-prep-20261007/immutable-source-660/device_op.py").read_text()
  def record(self,name,args):
