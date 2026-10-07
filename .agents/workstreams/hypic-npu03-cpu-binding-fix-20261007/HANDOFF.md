@@ -2,7 +2,7 @@
 
 Current authoritative checkpoint: no-cache LongBench-v2 run1 and GSM8K run1 are complete and independently audited; the controller is running no-cache LongBench-v2 run2. That is 2 of 12 quality units, with no paired quality verdict. Historical progress entries below preserve earlier next steps but are superseded by this checkpoint and the live controller/status files.
 
-The user authorized continued use of physical NPU0-3 until the full quality campaign finishes, beyond the earlier one-day target. GitHub HTTPS push from this host currently lacks credentials after one remote HTTP 500 and a retry that could not read a username. Keep local commits on this independent branch, do not alter the dirty canonical checkout, and retry the branch push only after a valid host credential is available; never request or print a token in chat.
+The user authorized continued use of physical NPU0-3 until the full quality campaign finishes, beyond the earlier one-day target. GitHub HTTPS push was intermittent (one remote HTTP 500, then one username challenge), but a later retry successfully advanced the remote independent branch through `b303d44`. Verify the remote ref before any retry after an ambiguous transport result; do not alter the dirty canonical checkout or request/print a token in chat.
 
 Quality audit hardening: `audit_binding_off_quality.py` now verifies that the frozen no-cache/HYPIC service environments differ only in `VLLM_ASCEND_HYPIC_ENABLE=0/1` (apart from evidence output path), and requires HYPIC plugin build, four worker-hot-path events and scheduler activation in the treatment evidence. The frozen-pair seam preflight passed; treatment evidence cannot be checked until that arm actually runs. Do not infer activation from the container name alone.
 
