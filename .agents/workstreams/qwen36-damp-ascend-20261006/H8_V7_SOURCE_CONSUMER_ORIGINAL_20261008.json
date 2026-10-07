@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import pathlib,hashlib,subprocess,json\\nr=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json')\\no=pathlib.Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json')\\nrs=hashlib.sha256(r.read_bytes()).hexdigest();os=hashlib.sha256(o.read_bytes()).hexdigest()\\nassert rs=='0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e'\\na=['/usr/bin/python3','-B','/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/consume.py','--result',str(r),'--result-sha256',rs,'--original-operation',str(o),'--original-operation-sha256',os]\\np=subprocess.run(a,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=60)\\nprint(json.dumps({'original_sha256':os,'result_sha256':rs,'argv':a,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr},ensure_ascii=False))\\nraise SystemExit(p.returncode)\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 11331,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010de\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"original_sha256\\\": \\\"19fbdca70c5c5df0930e315a79ca0d1ff8ddaa57a74a31c36f6ad2f0b54f6ef6\\\", \\\"result_sha256\\\": \\\"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\\\", \\\"argv\\\": [\\\"/usr/bin/python3\\\", \\\"-B\\\", \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/consume.py\\\", \\\"--result\\\", \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json\\\", \\\"--result-sha256\\\", \\\"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\\\", \\\"--original-operation\\\", \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json\\\", \\\"--original-operation-sha256\\\", \\\"19fbdca70c5c5df0930e315a79ca0d1ff8ddaa57a74a31c36f6ad2f0b54f6ef6\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"{\\\\\\\"schema\\\\\\\": \\\\\\\"kvbp.h8-namespace-independent-consumer/v6\\\\\\\", \\\\\\\"result\\\\\\\": {\\\\\\\"path\\\\\\\": \\\\\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json\\\\\\\", \\\\\\\"sha256\\\\\\\": \\\\\\\"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\\\\\\\"}, \\\\\\\"original_operation\\\\\\\": {\\\\\\\"path\\\\\\\": \\\\\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json\\\\\\\", \\\\\\\"sha256\\\\\\\": \\\\\\\"19fbdca70c5c5df0930e315a79ca0d1ff8ddaa57a74a31c36f6ad2f0b54f6ef6\\\\\\\"}, \\\\\\\"original_operation_id\\\\\\\": \\\\\\\"exec-00000000000010db\\\\\\\", \\\\\\\"whole_original_envelope_preserved\\\\\\\": true, \\\\\\\"source_namespace_success\\\\\\\": true, \\\\\\\"npu_executed\\\\\\\": false, \\\\\\\"full11520_success\\\\\\\": false, \\\\\\\"model_ready\\\\\\\": false}\\\\n\\\", \\\"stderr\\\": \\\"\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 392,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 392,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 392\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 390,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 390\n      }\n    },\n    \"traceId\": \"5bdb4c26-f3e2-4f4e-be2b-6859dda1fdbb\"\n  },\n  \"operationId\": \"exec-00000000000010de\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import pathlib,hashlib,subprocess,json\nr=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json')\no=pathlib.Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json')\nrs=hashlib.sha256(r.read_bytes()).hexdigest();os=hashlib.sha256(o.read_bytes()).hexdigest()\nassert rs=='0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e'\na=['/usr/bin/python3','-B','/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/consume.py','--result',str(r),'--result-sha256',rs,'--original-operation',str(o),'--original-operation-sha256',os]\np=subprocess.run(a,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=60)\nprint(json.dumps({'original_sha256':os,'result_sha256':rs,'argv':a,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr},ensure_ascii=False))\nraise SystemExit(p.returncode)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 11331,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010de",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"original_sha256\": \"19fbdca70c5c5df0930e315a79ca0d1ff8ddaa57a74a31c36f6ad2f0b54f6ef6\", \"result_sha256\": \"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\", \"argv\": [\"/usr/bin/python3\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/consume.py\", \"--result\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json\", \"--result-sha256\", \"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\", \"--original-operation\", \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json\", \"--original-operation-sha256\", \"19fbdca70c5c5df0930e315a79ca0d1ff8ddaa57a74a31c36f6ad2f0b54f6ef6\"], \"exit_code\": 0, \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-namespace-independent-consumer/v6\\\", \\\"result\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json\\\", \\\"sha256\\\": \\\"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\\\"}, \\\"original_operation\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json\\\", \\\"sha256\\\": \\\"19fbdca70c5c5df0930e315a79ca0d1ff8ddaa57a74a31c36f6ad2f0b54f6ef6\\\"}, \\\"original_operation_id\\\": \\\"exec-00000000000010db\\\", \\\"whole_original_envelope_preserved\\\": true, \\\"source_namespace_success\\\": true, \\\"npu_executed\\\": false, \\\"full11520_success\\\": false, \\\"model_ready\\\": false}\\n\", \"stderr\": \"\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 392,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 392,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 392
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 390,
+          "routeLookupMs": 0,
+          "totalMs": 390
+        }
+      },
+      "traceId": "5bdb4c26-f3e2-4f4e-be2b-6859dda1fdbb"
+    },
+    "operationId": "exec-00000000000010de",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

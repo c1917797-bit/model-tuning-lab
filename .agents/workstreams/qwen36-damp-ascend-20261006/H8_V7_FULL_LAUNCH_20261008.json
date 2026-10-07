@@ -1,0 +1,126 @@
+{
+  "schema": "main.h8-v7-launch/v1",
+  "execute_input": {
+    "schema": "kvbp.h8-v7-main-full-command/v1",
+    "argv": [
+      "/usr/bin/prlimit",
+      "--as=unlimited",
+      "--nofile=1024:1024",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/host.py",
+      "--execute",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "5d2857d49cf81fdc0cd2e053c6785f7b9baaccd6cfcfe10cfe56a69e2fad75ea",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--warm-result",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json",
+      "--warm-result-sha256",
+      "9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e",
+      "--warm-original-operation",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json",
+      "--warm-original-operation-sha256",
+      "2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "actual_dispatch_executed": false,
+    "source_only_stage_first": true,
+    "Devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "requires_MAIN_fresh_joint_admission": true,
+    "ordinary_ram_floor_gib": 40.5,
+    "cpu_minimum": 7,
+    "lease_max_seconds": 5400,
+    "cleanup_max_seconds": 180,
+    "disk_output_gib": 20,
+    "disk_reserve_gib": 8,
+    "cutoff_utc": "2026-10-08T08:29:54Z",
+    "full11520_verified": false
+  },
+  "actual_ack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-h8-full-runtime-v7-20261008-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-00000000000010e2\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 5000,\n  \"result\": {\n    \"execId\": \"exec-00000000000010e2\",\n    \"lane\": \"job\",\n    \"ok\": true,\n    \"pollAfterMs\": 250,\n    \"running\": true,\n    \"state\": \"running\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 841,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 841,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1738,\n      \"totalMs\": 2579\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 840,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 840\n    }\n  },\n  \"traceId\": \"05a39ab7-32c9-4601-97f9-c26a08d87bc4\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "cancelTool": "operation_cancel",
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "idempotencyKey": "main-h8-full-runtime-v7-20261008-001",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "operationId": "exec-00000000000010e2",
+      "operationKind": "exec",
+      "pollTool": "operation_get",
+      "requestDeadlineMs": 5000,
+      "result": {
+        "execId": "exec-00000000000010e2",
+        "lane": "job",
+        "ok": true,
+        "pollAfterMs": 250,
+        "running": true,
+        "state": "running"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 841,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 841,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 1738,
+          "totalMs": 2579
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 840,
+          "routeLookupMs": 0,
+          "totalMs": 840
+        }
+      },
+      "traceId": "05a39ab7-32c9-4601-97f9-c26a08d87bc4"
+    },
+    "isError": false
+  },
+  "source_gate_original": "H8_V7_SOURCE_ORIGINAL_TERMINAL_20261008.json",
+  "source_gate_consumer_original": "H8_V7_SOURCE_CONSUMER_ORIGINAL_20261008.json",
+  "full11520_verified": false,
+  "npu_process_verified": false
+}

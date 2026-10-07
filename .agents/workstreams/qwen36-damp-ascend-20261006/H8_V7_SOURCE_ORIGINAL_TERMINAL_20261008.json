@@ -1,0 +1,124 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=unlimited\",\n          \"--nofile=1024:1024\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/host.py\",\n          \"--execute\",\n          \"--source-manifest\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/SOURCE_MANIFEST.json\",\n          \"--source-manifest-sha256\",\n          \"5d2857d49cf81fdc0cd2e053c6785f7b9baaccd6cfcfe10cfe56a69e2fad75ea\",\n          \"--library\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\",\n          \"--library-sha256\",\n          \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\",\n          \"--build-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\",\n          \"--build-receipt-sha256\",\n          \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\",\n          \"--meta-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\",\n          \"--meta-receipt-sha256\",\n          \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\",\n          \"--warm-result\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json\",\n          \"--warm-result-sha256\",\n          \"9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e\",\n          \"--warm-original-operation\",\n          \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json\",\n          \"--warm-original-operation-sha256\",\n          \"2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5\",\n          \"--output-dir\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001\",\n          \"--stop-after-source-admission\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 50170,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010db\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"MAIN_H8_NAMESPACE {\\\"result\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json\\\", \\\"sha256\\\": \\\"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\\\"}, \\\"status\\\": \\\"source_namespace_checked\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 514,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 514,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 514\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 513,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 513\n      }\n    },\n    \"traceId\": \"4cb0941e-b618-4f53-a586-93a554f1eeff\"\n  },\n  \"operationId\": \"exec-00000000000010db\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=unlimited",
+            "--nofile=1024:1024",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/host.py",
+            "--execute",
+            "--source-manifest",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v7-rss-retirement/SOURCE_MANIFEST.json",
+            "--source-manifest-sha256",
+            "5d2857d49cf81fdc0cd2e053c6785f7b9baaccd6cfcfe10cfe56a69e2fad75ea",
+            "--library",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+            "--library-sha256",
+            "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+            "--build-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+            "--build-receipt-sha256",
+            "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+            "--meta-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+            "--meta-receipt-sha256",
+            "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+            "--warm-result",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json",
+            "--warm-result-sha256",
+            "9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e",
+            "--warm-original-operation",
+            "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json",
+            "--warm-original-operation-sha256",
+            "2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5",
+            "--output-dir",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001",
+            "--stop-after-source-admission"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 50170,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010db",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "MAIN_H8_NAMESPACE {\"result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-v7-source-20261008-001/SOURCE_ADMISSION_RESULT.json\", \"sha256\": \"0d96efc2101d888622b1d5365de3fa388c6a8f39b4bb4e240bb7a3d541845e4e\"}, \"status\": \"source_namespace_checked\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 514,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 514,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 514
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 513,
+          "routeLookupMs": 0,
+          "totalMs": 513
+        }
+      },
+      "traceId": "4cb0941e-b618-4f53-a586-93a554f1eeff"
+    },
+    "operationId": "exec-00000000000010db",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

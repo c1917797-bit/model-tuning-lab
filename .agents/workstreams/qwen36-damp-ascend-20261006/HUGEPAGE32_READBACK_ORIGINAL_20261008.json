@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import pathlib,json,subprocess,datetime,hashlib\\nrepo=pathlib.Path('/opt/host/vnf/austinov/model-tuning-lab')\\ndef cmd(a):\\n r=subprocess.run(a,cwd=str(repo),stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=15)\\n return {'argv':a,'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr}\\nm={}\\nfor l in pathlib.Path('/proc/meminfo').read_text().splitlines():\\n if l.startswith(('MemTotal:','MemAvailable:','Hugetlb:','HugePages_Total:','HugePages_Free:','HugePages_Rsvd:','Hugepagesize:')):m[l.split(':')[0]]=l.split(':',1)[1].strip()\\nnodes={}\\nfor i in range(4):\\n p=pathlib.Path('/sys/devices/system/node/node%d/hugepages/hugepages-1048576kB'%i)\\n nodes[str(i)]={n:int((p/n).read_text()) for n in ['nr_hugepages','free_hugepages','surplus_hugepages']}\\np=pathlib.Path('/proc/27118')\\nstat=p.joinpath('stat').read_text();start=stat[stat.rfind(')')+2:].split()[19]\\nstatus=p.joinpath('status').read_text().splitlines()\\novs={'pid':27118,'start_ticks':start,'comm':p.joinpath('comm').read_text().strip(),'fields':[l for l in status if l.startswith(('Name:','State:','HugetlbPages:','VmRSS:'))]}\\nroot=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/hugepage32-release-20261007-1605-v1')\\nfiles=[{'name':f.name,'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest()} for f in sorted(root.iterdir()) if f.is_file()]\\nprint(json.dumps({'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'memory':m,'numa_1GiB_pages':nodes,'ovs':ovs,'release_artifacts':files,'git':cmd(['/usr/local/bin/git','status','--short','--branch']),'head':cmd(['/usr/local/bin/git','rev-parse','HEAD'])},ensure_ascii=False))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 71,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010d9\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"utc\\\": \\\"2026-10-07T23:46:52.533989+00:00\\\", \\\"memory\\\": {\\\"MemTotal\\\": \\\"2113084888 kB\\\", \\\"MemAvailable\\\": \\\"116850292 kB\\\", \\\"HugePages_Total\\\": \\\"0\\\", \\\"HugePages_Free\\\": \\\"0\\\", \\\"HugePages_Rsvd\\\": \\\"0\\\", \\\"Hugepagesize\\\": \\\"2048 kB\\\", \\\"Hugetlb\\\": \\\"1975517184 kB\\\"}, \\\"numa_1GiB_pages\\\": {\\\"0\\\": {\\\"nr_hugepages\\\": 439, \\\"free_hugepages\\\": 439, \\\"surplus_hugepages\\\": 0}, \\\"1\\\": {\\\"nr_hugepages\\\": 485, \\\"free_hugepages\\\": 485, \\\"surplus_hugepages\\\": 0}, \\\"2\\\": {\\\"nr_hugepages\\\": 486, \\\"free_hugepages\\\": 486, \\\"surplus_hugepages\\\": 0}, \\\"3\\\": {\\\"nr_hugepages\\\": 474, \\\"free_hugepages\\\": 450, \\\"surplus_hugepages\\\": 0}}, \\\"ovs\\\": {\\\"pid\\\": 27118, \\\"start_ticks\\\": \\\"11471\\\", \\\"comm\\\": \\\"ovs-vswitchd\\\", \\\"fields\\\": [\\\"Name:\\\\tovs-vswitchd\\\", \\\"State:\\\\tS (sleeping)\\\", \\\"VmRSS:\\\\t 1916948 kB\\\", \\\"HugetlbPages:\\\\t25165824 kB\\\"]}, \\\"release_artifacts\\\": [{\\\"name\\\": \\\"RESULT.json\\\", \\\"bytes\\\": 754, \\\"sha256\\\": \\\"069cae7b82a614fd377dea7498c084286db1bd80425cb32efb3e9d98382bac58\\\"}, {\\\"name\\\": \\\"after.json\\\", \\\"bytes\\\": 9425, \\\"sha256\\\": \\\"0e2b59e7203d068f97ce2d8ad700999ed290cd406d7c8901a53c716a0bf66819\\\"}, {\\\"name\\\": \\\"before.json\\\", \\\"bytes\\\": 9426, \\\"sha256\\\": \\\"bc38600c4d3327c4b9f4b554bae104c62d364319c4cffb20527869cdb2be1a9e\\\"}, {\\\"name\\\": \\\"prewrite.json\\\", \\\"bytes\\\": 9425, \\\"sha256\\\": \\\"a192ae2471d21354fcbd16b596a7be7d0661daf1a5ef6d0856ee4399ea2c3b51\\\"}, {\\\"name\\\": \\\"source-executed-v1.py\\\", \\\"bytes\\\": 13548, \\\"sha256\\\": \\\"e274b196e7ec6150864728d59c9650e1ffc600aeb7e7546834922bf1a9139d6e\\\"}, {\\\"name\\\": \\\"write-intent.json\\\", \\\"bytes\\\": 221, \\\"sha256\\\": \\\"80d121045005cf3f6dd7923e12bf90d1e93cacfc58da1dddb42a7a14de0df7a2\\\"}], \\\"git\\\": {\\\"argv\\\": [\\\"/usr/local/bin/git\\\", \\\"status\\\", \\\"--short\\\", \\\"--branch\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"## work/qwen36-damp-ascend-20261006...origin/work/qwen36-damp-ascend-20261006 [ahead 29]\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_667F605_ORIGINAL_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\\\\n?? projects/damp-ascend/integration/integer_compaction_v1/\\\\n?? projects/damp-ascend/integration/service_all_batch_v2/\\\\n?? projects/damp-ascend/integration/service_assembly_v1/\\\\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\\\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\\\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\\\\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\\\\n?? projects/damp-ascend/tools/final_plan_gate_v1/\\\\n?? projects/damp-ascend/tools/host_memory_audit_v1/\\\\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\\\\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\\\\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\\\\n\\\", \\\"stderr\\\": \\\"\\\"}, \\\"head\\\": {\\\"argv\\\": [\\\"/usr/local/bin/git\\\", \\\"rev-parse\\\", \\\"HEAD\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"667f6052c6c603cee0887f26f703297e317b5760\\\\n\\\", \\\"stderr\\\": \\\"\\\"}}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 394,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 394,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 394\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 393,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 393\n      }\n    },\n    \"traceId\": \"01ce7c8b-ef81-4f4c-861b-0c3ebf37494b\"\n  },\n  \"operationId\": \"exec-00000000000010d9\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import pathlib,json,subprocess,datetime,hashlib\nrepo=pathlib.Path('/opt/host/vnf/austinov/model-tuning-lab')\ndef cmd(a):\n r=subprocess.run(a,cwd=str(repo),stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,timeout=15)\n return {'argv':a,'exit_code':r.returncode,'stdout':r.stdout,'stderr':r.stderr}\nm={}\nfor l in pathlib.Path('/proc/meminfo').read_text().splitlines():\n if l.startswith(('MemTotal:','MemAvailable:','Hugetlb:','HugePages_Total:','HugePages_Free:','HugePages_Rsvd:','Hugepagesize:')):m[l.split(':')[0]]=l.split(':',1)[1].strip()\nnodes={}\nfor i in range(4):\n p=pathlib.Path('/sys/devices/system/node/node%d/hugepages/hugepages-1048576kB'%i)\n nodes[str(i)]={n:int((p/n).read_text()) for n in ['nr_hugepages','free_hugepages','surplus_hugepages']}\np=pathlib.Path('/proc/27118')\nstat=p.joinpath('stat').read_text();start=stat[stat.rfind(')')+2:].split()[19]\nstatus=p.joinpath('status').read_text().splitlines()\novs={'pid':27118,'start_ticks':start,'comm':p.joinpath('comm').read_text().strip(),'fields':[l for l in status if l.startswith(('Name:','State:','HugetlbPages:','VmRSS:'))]}\nroot=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/hugepage32-release-20261007-1605-v1')\nfiles=[{'name':f.name,'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest()} for f in sorted(root.iterdir()) if f.is_file()]\nprint(json.dumps({'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'memory':m,'numa_1GiB_pages':nodes,'ovs':ovs,'release_artifacts':files,'git':cmd(['/usr/local/bin/git','status','--short','--branch']),'head':cmd(['/usr/local/bin/git','rev-parse','HEAD'])},ensure_ascii=False))\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 71,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010d9",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"utc\": \"2026-10-07T23:46:52.533989+00:00\", \"memory\": {\"MemTotal\": \"2113084888 kB\", \"MemAvailable\": \"116850292 kB\", \"HugePages_Total\": \"0\", \"HugePages_Free\": \"0\", \"HugePages_Rsvd\": \"0\", \"Hugepagesize\": \"2048 kB\", \"Hugetlb\": \"1975517184 kB\"}, \"numa_1GiB_pages\": {\"0\": {\"nr_hugepages\": 439, \"free_hugepages\": 439, \"surplus_hugepages\": 0}, \"1\": {\"nr_hugepages\": 485, \"free_hugepages\": 485, \"surplus_hugepages\": 0}, \"2\": {\"nr_hugepages\": 486, \"free_hugepages\": 486, \"surplus_hugepages\": 0}, \"3\": {\"nr_hugepages\": 474, \"free_hugepages\": 450, \"surplus_hugepages\": 0}}, \"ovs\": {\"pid\": 27118, \"start_ticks\": \"11471\", \"comm\": \"ovs-vswitchd\", \"fields\": [\"Name:\\tovs-vswitchd\", \"State:\\tS (sleeping)\", \"VmRSS:\\t 1916948 kB\", \"HugetlbPages:\\t25165824 kB\"]}, \"release_artifacts\": [{\"name\": \"RESULT.json\", \"bytes\": 754, \"sha256\": \"069cae7b82a614fd377dea7498c084286db1bd80425cb32efb3e9d98382bac58\"}, {\"name\": \"after.json\", \"bytes\": 9425, \"sha256\": \"0e2b59e7203d068f97ce2d8ad700999ed290cd406d7c8901a53c716a0bf66819\"}, {\"name\": \"before.json\", \"bytes\": 9426, \"sha256\": \"bc38600c4d3327c4b9f4b554bae104c62d364319c4cffb20527869cdb2be1a9e\"}, {\"name\": \"prewrite.json\", \"bytes\": 9425, \"sha256\": \"a192ae2471d21354fcbd16b596a7be7d0661daf1a5ef6d0856ee4399ea2c3b51\"}, {\"name\": \"source-executed-v1.py\", \"bytes\": 13548, \"sha256\": \"e274b196e7ec6150864728d59c9650e1ffc600aeb7e7546834922bf1a9139d6e\"}, {\"name\": \"write-intent.json\", \"bytes\": 221, \"sha256\": \"80d121045005cf3f6dd7923e12bf90d1e93cacfc58da1dddb42a7a14de0df7a2\"}], \"git\": {\"argv\": [\"/usr/local/bin/git\", \"status\", \"--short\", \"--branch\"], \"exit_code\": 0, \"stdout\": \"## work/qwen36-damp-ascend-20261006...origin/work/qwen36-damp-ascend-20261006 [ahead 29]\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_667F605_ORIGINAL_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\\n?? projects/damp-ascend/integration/integer_compaction_v1/\\n?? projects/damp-ascend/integration/service_all_batch_v2/\\n?? projects/damp-ascend/integration/service_assembly_v1/\\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\\n?? projects/damp-ascend/tools/final_plan_gate_v1/\\n?? projects/damp-ascend/tools/host_memory_audit_v1/\\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\\n\", \"stderr\": \"\"}, \"head\": {\"argv\": [\"/usr/local/bin/git\", \"rev-parse\", \"HEAD\"], \"exit_code\": 0, \"stdout\": \"667f6052c6c603cee0887f26f703297e317b5760\\n\", \"stderr\": \"\"}}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 394,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 394,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 394
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 393,
+          "routeLookupMs": 0,
+          "totalMs": 393
+        }
+      },
+      "traceId": "01ce7c8b-ef81-4f4c-861b-0c3ebf37494b"
+    },
+    "operationId": "exec-00000000000010d9",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

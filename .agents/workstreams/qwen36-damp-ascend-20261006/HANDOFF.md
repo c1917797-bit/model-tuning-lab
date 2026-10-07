@@ -1,5 +1,32 @@
 # DAMP Ascend — current workstream
 
+## Current actual four-card H8 v7 matrix — 2026-10-07 23:58Z
+
+Full11520 MA10e2 remains RUNNING, not completed or serving-ready. Actual readonly
+MA10e8 proves run.py matrix PIDs204962/204981/205017/205146 on physical4/5/6/7,
+startticks/cgroup/guest/source bound; firstB16/15/14/13 eager90/91/95/90,
+reports running/noerror. Read H8_V7_SOURCE_ADMISSION_20261008.md and original
+matrix identity receipt. Do not borrow canary PIDs or restart this operation.
+Source95tests/313closure and actual same-image Devices[]+independentconsumer
+passed; full/mixed/model/matchedE2E/tasks remain pending. Cutoffs unchanged.
+Memory release exactly32GiB remains completed/SPENT; OVS24GiB/NUMA3 retained.
+Three rolling preparers continue independent queues; MAIN alone devices/Git.
+Git normal local checkpoint only under unchanged authentication blocker.
+
+## Current H8 v7 admission — 2026-10-07 23:54Z
+
+Read H8_V7_SOURCE_ADMISSION_20261008.md and original receipts first.
+Hugepage32GiB task is completed/SPENT, OVS24GiB and wholeNUMA3 retained.
+Frozen controller-only v7 actual95 tests, same-image Devices[] MA10db0 and
+independent original consumer MA10de0 passed. Full11520 MA10e2 is RUNNING;
+poll this exact existing operation, never duplicate its output or restart it.
+Independent MA10e3 proves four own physical4–7 containers/canary PIDs, no
+matrix report yet at23:54:11Z. Full/mixed/model/E2E/task remain pending.
+Actual Ascend NPUInputBatch+BlockTable source delivered to thin bridge.
+Three rolling preparers continue; MAIN alone Docker/NPU/Git. Cutoffs and
+numerical/resource limits unchanged, no further pool release or0–3 action.
+Oldv6 failure/staleRef negative is preserved; earlier RUNNING entries are historical.
+
 ## Current terminal H8 v6 failure — 2026-10-07 23:28Z
 
 Read H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md first. MA109c FAILED1 after

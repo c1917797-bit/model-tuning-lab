@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import subprocess,json\\nfrom pathlib import Path\\nroot=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab\\\");paths=[\\\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_6094FCE_ORIGINAL_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_RELEASE_OVS_ORIGINAL_20261007.json\\\",\\\".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md\\\",\\\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\\\",\\\".agents/skills/ascend-inference-tuning-loop/SKILL.md\\\"]\\ndef git(*a):\\n r=subprocess.run([\\\"/usr/local/bin/git\\\",*a],cwd=str(root),capture_output=True,text=True,timeout=60)\\n if r.returncode:raise RuntimeError(json.dumps(dict(argv=list(a),exit=r.returncode,stdout=r.stdout,stderr=r.stderr)))\\n return r.stdout\\nassert git(\\\"rev-parse\\\",\\\"HEAD\\\").strip()==\\\"6094fce6c628471594e7bd03870c3c5e0e9e367f\\\"\\nassert git(\\\"branch\\\",\\\"--show-current\\\").strip()==\\\"work/qwen36-damp-ascend-20261006\\\"\\nassert set(git(\\\"diff\\\",\\\"--cached\\\",\\\"--name-only\\\").splitlines())==set(paths),\\\"foreign staging\\\"\\ngit(\\\"add\\\",\\\"--\\\",*paths);assert set(git(\\\"diff\\\",\\\"--cached\\\",\\\"--name-only\\\").splitlines())==set(paths)\\ngit(\\\"diff\\\",\\\"--cached\\\",\\\"--check\\\");print(\\\"EXACT_STAGED\\\",json.dumps(paths),flush=True);print(git(\\\"diff\\\",\\\"--cached\\\",\\\"--stat\\\"),flush=True)\\nprint(git(\\\"commit\\\",\\\"-m\\\",\\\"research: retain H8 observer failure and quiescent-result lessons\\\"),flush=True)\\nprint(\\\"NEW_HEAD\\\",git(\\\"rev-parse\\\",\\\"HEAD\\\").strip());print(\\\"TRACKED_STATUS\\\",git(\\\"status\\\",\\\"--short\\\",\\\"--branch\\\",\\\"--untracked-files=no\\\"))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 109,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010d1\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"EXACT_STAGED [\\\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_6094FCE_ORIGINAL_20261007.json\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_RELEASE_OVS_ORIGINAL_20261007.json\\\", \\\".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md\\\", \\\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\\\", \\\".agents/skills/ascend-inference-tuning-loop/SKILL.md\\\"]\\n .../skills/ascend-inference-tuning-loop/SKILL.md   |   4 +\\n ...controller-observation-and-quiescent-results.md |  48 ++++++++\\n .../CHECKPOINT_6094FCE_ORIGINAL_20261007.json      |  93 ++++++++++++++++\\n .../H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md       |  21 ++++\\n .../H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md    |  72 ++++++++++++\\n .../H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json  |  93 ++++++++++++++++\\n .../H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json     | 123 +++++++++++++++++++++\\n .../H8_V6_RELEASE_OVS_ORIGINAL_20261007.json       |  93 ++++++++++++++++\\n .../H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json  |  93 ++++++++++++++++\\n ...8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json |  93 ++++++++++++++++\\n .../qwen36-damp-ascend-20261006/HANDOFF.md         |  30 +++++\\n 11 files changed, 763 insertions(+)\\n\\n[work/qwen36-damp-ascend-20261006 667f605] research: retain H8 observer failure and quiescent-result lessons\\n 11 files changed, 763 insertions(+)\\n create mode 100644 .agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_6094FCE_ORIGINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_RELEASE_OVS_ORIGINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json\\n\\nNEW_HEAD 667f6052c6c603cee0887f26f703297e317b5760\\nTRACKED_STATUS ## work/qwen36-damp-ascend-20261006...origin/work/qwen36-damp-ascend-20261006 [ahead 29]\\n\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 586,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 586,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 586\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 585,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 585\n      }\n    },\n    \"traceId\": \"129de088-30e2-4456-9c54-1de8e70b7240\"\n  },\n  \"operationId\": \"exec-00000000000010d1\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import subprocess,json\nfrom pathlib import Path\nroot=Path(\"/opt/host/vnf/austinov/model-tuning-lab\");paths=[\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_6094FCE_ORIGINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_RELEASE_OVS_ORIGINAL_20261007.json\",\".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\",\".agents/skills/ascend-inference-tuning-loop/SKILL.md\"]\ndef git(*a):\n r=subprocess.run([\"/usr/local/bin/git\",*a],cwd=str(root),capture_output=True,text=True,timeout=60)\n if r.returncode:raise RuntimeError(json.dumps(dict(argv=list(a),exit=r.returncode,stdout=r.stdout,stderr=r.stderr)))\n return r.stdout\nassert git(\"rev-parse\",\"HEAD\").strip()==\"6094fce6c628471594e7bd03870c3c5e0e9e367f\"\nassert git(\"branch\",\"--show-current\").strip()==\"work/qwen36-damp-ascend-20261006\"\nassert set(git(\"diff\",\"--cached\",\"--name-only\").splitlines())==set(paths),\"foreign staging\"\ngit(\"add\",\"--\",*paths);assert set(git(\"diff\",\"--cached\",\"--name-only\").splitlines())==set(paths)\ngit(\"diff\",\"--cached\",\"--check\");print(\"EXACT_STAGED\",json.dumps(paths),flush=True);print(git(\"diff\",\"--cached\",\"--stat\"),flush=True)\nprint(git(\"commit\",\"-m\",\"research: retain H8 observer failure and quiescent-result lessons\"),flush=True)\nprint(\"NEW_HEAD\",git(\"rev-parse\",\"HEAD\").strip());print(\"TRACKED_STATUS\",git(\"status\",\"--short\",\"--branch\",\"--untracked-files=no\"))\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 109,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010d1",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "EXACT_STAGED [\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_6094FCE_ORIGINAL_20261007.json\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json\", \".agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_RELEASE_OVS_ORIGINAL_20261007.json\", \".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md\", \".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\", \".agents/skills/ascend-inference-tuning-loop/SKILL.md\"]\n .../skills/ascend-inference-tuning-loop/SKILL.md   |   4 +\n ...controller-observation-and-quiescent-results.md |  48 ++++++++\n .../CHECKPOINT_6094FCE_ORIGINAL_20261007.json      |  93 ++++++++++++++++\n .../H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md       |  21 ++++\n .../H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md    |  72 ++++++++++++\n .../H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json  |  93 ++++++++++++++++\n .../H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json     | 123 +++++++++++++++++++++\n .../H8_V6_RELEASE_OVS_ORIGINAL_20261007.json       |  93 ++++++++++++++++\n .../H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json  |  93 ++++++++++++++++\n ...8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json |  93 ++++++++++++++++\n .../qwen36-damp-ascend-20261006/HANDOFF.md         |  30 +++++\n 11 files changed, 763 insertions(+)\n\n[work/qwen36-damp-ascend-20261006 667f605] research: retain H8 observer failure and quiescent-result lessons\n 11 files changed, 763 insertions(+)\n create mode 100644 .agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_6094FCE_ORIGINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_MODEL_BRIDGE_SOURCE_AUDIT_20261007.md\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FAILURE_CONSUMER_ORIGINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_FULL_ORIGINAL_TERMINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_RELEASE_OVS_ORIGINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_SELECTED_PARTIAL_ORIGINAL_20261007.json\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/H8_V6_STABLE_PARTIAL_READ_ORIGINAL_20261007.json\n\nNEW_HEAD 667f6052c6c603cee0887f26f703297e317b5760\nTRACKED_STATUS ## work/qwen36-damp-ascend-20261006...origin/work/qwen36-damp-ascend-20261006 [ahead 29]\n\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 586,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 586,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 586
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 585,
+          "routeLookupMs": 0,
+          "totalMs": 585
+        }
+      },
+      "traceId": "129de088-30e2-4456-9c54-1de8e70b7240"
+    },
+    "operationId": "exec-00000000000010d1",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}
