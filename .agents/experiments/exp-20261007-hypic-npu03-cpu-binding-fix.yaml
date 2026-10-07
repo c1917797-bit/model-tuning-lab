@@ -225,7 +225,7 @@ quality_campaign_20261007:
   decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
 quality_campaign_clean2_20261007:
   operation_id: exec-0000000000000e15
-  status: Running since 2026-10-07 17:10 UTC; no-cache LongBench-v2 runs1-3 and GSM8K runs1-2 independently audited, GSM8K run3 running since 19:05:35 UTC. This is not a quality verdict.
+  status: Running since 2026-10-07 17:10 UTC; all six no-cache units independently audited and arm-level lane-guard/release passed at 19:33:48 UTC; HYPIC-only arm starting. No paired quality verdict yet.
   artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
   only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
   orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
@@ -263,4 +263,15 @@ quality_campaign_clean2_20261007:
     summary_sha256: cce1c44e3395905e7b47304a0d7ca9e107e17ead01c1c6c56071d20f84df9c31
     details_sha256: b8b86ec783181c89ab9bd0e5d7a44e66298eeec4719a4b79153058098bbc9e8e
     receipt_sha256: 3d64849836ea4026e37be53145147781eacf38bef9a6402e61a2bfee471c05c1
-  decision: pending fresh baseline and treatment results, both release receipts and independent full audit.
+  no_cache_gsm8k_run3:
+    validity: Independently audited 1319/1319 rows, zero failures, exact sample order/reference/response hash, pinned scorer, prompt template, token accounting, summary arithmetic, receipt hash and per-sample prompt-token identity with runs1-2.
+    result: 1279/1319 correct, 96.96739954510993 percent; 10 outputs reached the 2048-token length limit; 493388 completion tokens.
+    summary_sha256: 6248a1b4307533cbb4acc1db684ecb5dbdb845cc13163b82d53135b287ebf227
+    details_sha256: 6be5b2ee16ba239bd6c226e35b3fd007512b0dd5c6ca658e5279b7d5251d4c58
+    receipt_sha256: 3edb033c7d9c90f5b10df37369a0b9821a95c6c5f00c47c1f7d02361985a55bd
+  no_cache_service_release:
+    at_utc: 2026-10-07T19:33:48Z
+    validity: Independent service-receipt audit passed exact container identity, four physical NPU0-3 workers, 752 uninterrupted guard samples with no foreign PID/probe error, binding-off activation, exact-owned container/PID/port release and whole-lane availability.
+    lane_guard_sha256: b27c447b408e0a40f896712bc60134b4cc622a06ec4bd3db21476826d3cbd912
+    service_stop_sha256: 375189bd0014739e7c2b4cc8cbb7b0906e4c8faf001b56eb0631d8ddf6128fe9
+  decision: clean2 no-cache denominator valid after independent unit/guard/release audits; treatment six units, its release receipt and full paired audit pending.
