@@ -1,8 +1,8 @@
-# HYPIC C1/C2 NPU0–3 算法特性穿刺 · 进行中报告（2026-10-07 20:17 UTC 检查点）
+# HYPIC C1/C2 NPU0–3 算法特性穿刺 · 进行中报告（2026-10-07 20:34 UTC 检查点）
 
 报告状态：**progress**。当前证据支持同环境 HYPIC 热复用路径的性能收益，尚不支持配对质量通过、生产采用或整篇论文复现。本文只列本次主机实测；同事历史 TP2 和论文 SGLang 数字不与本次 TP4 绝对值合并。CPU-binding 原因与修复的独立阶段结果见 `REPORT.md`。
 
-最新检查点：clean2 的 G1 六单元已全部独立审计，752 次连续隔离采样和精确资源释放通过，因此是可用的自然质量对照。G2 已启动并独立审计 LongBench-v2 run1：74/127 正确，对照同轮 78/127，逐样本输入相同；GSM8K run1 自 20:04:36 UTC 运行中。该单轮差异不构成最终质量结论。另查明冻结评测请求无显式 segment 边界，服务设 `AUTO_CHUNK_TEXT=0` 且无 separator token IDs；本轮自然质量协议无法验证 HYPIC 真正复用 token 时的精度，原四-worker 热路径门槛不得事后放宽。证据与后续分流见 `QUALITY_ACTIVATION_SCOPE.md`。下文 18:24 UTC 的逐单元段落保留为历史进度快照，以本段和 `HANDOFF.md` 的较新状态为准。
+最新检查点：clean2 的 G1 六单元已全部独立审计，752 次连续隔离采样和精确资源释放通过，因此是可用的自然质量对照。G2 已独立审计 LongBench-v2 run1（74/127 对照 78/127）和 GSM8K run1（1276/1319 对照 1278/1319）；两个单元逐样本输入，包括实测 `usage.prompt_tokens`，均一致。GSM8K 的配对样本为 3 转对、5 转错。这些单轮差异不构成最终质量结论，G2 仍有四个单元和整臂隔离/释放未完成。另查明冻结评测请求无显式 segment 边界，服务设 `AUTO_CHUNK_TEXT=0` 且无 separator token IDs；本轮自然质量协议无法验证 HYPIC 真正复用 token 时的精度，原四-worker 热路径门槛不得事后放宽。证据与后续分流见 `QUALITY_ACTIVATION_SCOPE.md`。下文 18:24 UTC 的逐单元段落保留为历史进度快照，以本段和 `HANDOFF.md` 的较新状态为准。
 
 质量尝试 1 在 16:52:55 UTC 因外部 NPU3 占用使隔离门槛失败；尽管六个 no-cache 单元均完成并通过逐行审计，**它们不是正式质量对照分母**，HYPIC 质量臂没有启动。原始数据保留于 `quality-context-41984`；新一轮完整 12 单元配对已在 `quality-context-41984-clean2` 启动，不混合两个尝试。归因、进程和清理证据见 `QUALITY_RESOURCE_CONFLICT.md`。
 
