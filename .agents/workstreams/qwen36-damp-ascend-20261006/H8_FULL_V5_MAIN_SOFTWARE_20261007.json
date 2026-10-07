@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import hashlib,json,os,resource,subprocess,sys\\nfrom pathlib import Path\\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY));resource.setrlimit(resource.RLIMIT_CPU,(20,20));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\\nbase=Path(\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission\\\")\\nexpected={\\\"host.py\\\":\\\"29b0e15315ce5cb7b0d93c7811ae7bfe008822628f2029f55b475b72d6215af8\\\",\\\"contract.py\\\":\\\"fa488627f5e89bfec07e81e8801155416fb9e20ed2ae350414dd657089eb2a40\\\",\\\"consume.py\\\":\\\"93b4cdd20ef9d8aff6a27d8cde8c3f0d850a4833b40f191267d57ddb76f97515\\\",\\\"mount_closure.py\\\":\\\"2856372cc63731e2990606196db20059e97772ea9bcf495c5276ac6904909b57\\\",\\\"namespace_admission.py\\\":\\\"0add9763fff1186948c74574b39c35e2369ab6e3134b579e2404e9a9e39da77d\\\",\\\"test_namespace.py\\\":\\\"96849b845aa69ced1df0d7b94d26e4897a631dc260eed6634549d5f595440846\\\"}\\nfor name,want in expected.items():assert hashlib.sha256((base/name).read_bytes()).hexdigest()==want,name\\ncp=subprocess.run([\\\"/usr/bin/python3\\\",\\\"-B\\\",str(base/\\\"software_runner.py\\\")],cwd=str(base),capture_output=True,text=True,timeout=25)\\nprint(json.dumps(dict(argv=cp.args,exit_code=cp.returncode,stdout=cp.stdout,stderr=cp.stderr)),flush=True)\\nassert cp.returncode==0\\nproof=json.loads(cp.stdout);assert proof[\\\"npu_executed\\\"] is False and proof[\\\"torch_imported\\\"] is False\\nprint(json.dumps(dict(MAIN_changed_source_sha_review_passed=True,npu_executed=False,docker_executed=False,actual_namespace_pending=True)),flush=True)\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 3543,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001026\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"argv\\\": [\\\"/usr/bin/python3\\\", \\\"-B\\\", \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/software_runner.py\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"{\\\\\\\"schema\\\\\\\": \\\\\\\"kvbp.h8-full-actual-software/v5\\\\\\\", \\\\\\\"command\\\\\\\": [\\\\\\\"/usr/bin/python3\\\\\\\", \\\\\\\"-B\\\\\\\", \\\\\\\"-m\\\\\\\", \\\\\\\"unittest\\\\\\\", \\\\\\\"discover\\\\\\\", \\\\\\\"-s\\\\\\\", \\\\\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission\\\\\\\", \\\\\\\"-p\\\\\\\", \\\\\\\"test_*.py\\\\\\\"], \\\\\\\"exit_code\\\\\\\": 0, \\\\\\\"stdout\\\\\\\": \\\\\\\"\\\\\\\", \\\\\\\"stderr\\\\\\\": \\\\\\\"..........................................................\\\\\\\\n----------------------------------------------------------------------\\\\\\\\nRan 58 tests in 3.184s\\\\\\\\n\\\\\\\\nOK\\\\\\\\n\\\\\\\", \\\\\\\"elapsed_seconds\\\\\\\": 3.4247446699882858, \\\\\\\"host_peak_rss_kib\\\\\\\": 16816, \\\\\\\"child_peak_rss_kib\\\\\\\": 28680, \\\\\\\"aggregate_peak_rss_kib\\\\\\\": 45496, \\\\\\\"affinity\\\\\\\": [0], \\\\\\\"torch_imported\\\\\\\": false, \\\\\\\"npu_executed\\\\\\\": false, \\\\\\\"native_compile_executed\\\\\\\": false, \\\\\\\"numeric_executed\\\\\\\": false, \\\\\\\"model_executed\\\\\\\": false, \\\\\\\"e2e_executed\\\\\\\": false}\\\\n\\\", \\\"stderr\\\": \\\"\\\"}\\n{\\\"MAIN_changed_source_sha_review_passed\\\": true, \\\"npu_executed\\\": false, \\\"docker_executed\\\": false, \\\"actual_namespace_pending\\\": true}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 337,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 337,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 337\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 336,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 336\n      }\n    },\n    \"traceId\": \"3b22e6e8-68a7-46fb-b50a-f55c3127cf65\"\n  },\n  \"operationId\": \"exec-0000000000001026\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import hashlib,json,os,resource,subprocess,sys\nfrom pathlib import Path\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY));resource.setrlimit(resource.RLIMIT_CPU,(20,20));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nbase=Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission\")\nexpected={\"host.py\":\"29b0e15315ce5cb7b0d93c7811ae7bfe008822628f2029f55b475b72d6215af8\",\"contract.py\":\"fa488627f5e89bfec07e81e8801155416fb9e20ed2ae350414dd657089eb2a40\",\"consume.py\":\"93b4cdd20ef9d8aff6a27d8cde8c3f0d850a4833b40f191267d57ddb76f97515\",\"mount_closure.py\":\"2856372cc63731e2990606196db20059e97772ea9bcf495c5276ac6904909b57\",\"namespace_admission.py\":\"0add9763fff1186948c74574b39c35e2369ab6e3134b579e2404e9a9e39da77d\",\"test_namespace.py\":\"96849b845aa69ced1df0d7b94d26e4897a631dc260eed6634549d5f595440846\"}\nfor name,want in expected.items():assert hashlib.sha256((base/name).read_bytes()).hexdigest()==want,name\ncp=subprocess.run([\"/usr/bin/python3\",\"-B\",str(base/\"software_runner.py\")],cwd=str(base),capture_output=True,text=True,timeout=25)\nprint(json.dumps(dict(argv=cp.args,exit_code=cp.returncode,stdout=cp.stdout,stderr=cp.stderr)),flush=True)\nassert cp.returncode==0\nproof=json.loads(cp.stdout);assert proof[\"npu_executed\"] is False and proof[\"torch_imported\"] is False\nprint(json.dumps(dict(MAIN_changed_source_sha_review_passed=True,npu_executed=False,docker_executed=False,actual_namespace_pending=True)),flush=True)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 3543,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000001026",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"argv\": [\"/usr/bin/python3\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission/software_runner.py\"], \"exit_code\": 0, \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-full-actual-software/v5\\\", \\\"command\\\": [\\\"/usr/bin/python3\\\", \\\"-B\\\", \\\"-m\\\", \\\"unittest\\\", \\\"discover\\\", \\\"-s\\\", \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v5-mount-admission\\\", \\\"-p\\\", \\\"test_*.py\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"\\\", \\\"stderr\\\": \\\"..........................................................\\\\n----------------------------------------------------------------------\\\\nRan 58 tests in 3.184s\\\\n\\\\nOK\\\\n\\\", \\\"elapsed_seconds\\\": 3.4247446699882858, \\\"host_peak_rss_kib\\\": 16816, \\\"child_peak_rss_kib\\\": 28680, \\\"aggregate_peak_rss_kib\\\": 45496, \\\"affinity\\\": [0], \\\"torch_imported\\\": false, \\\"npu_executed\\\": false, \\\"native_compile_executed\\\": false, \\\"numeric_executed\\\": false, \\\"model_executed\\\": false, \\\"e2e_executed\\\": false}\\n\", \"stderr\": \"\"}\n{\"MAIN_changed_source_sha_review_passed\": true, \"npu_executed\": false, \"docker_executed\": false, \"actual_namespace_pending\": true}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 337,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 337,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 337
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 336,
+          "routeLookupMs": 0,
+          "totalMs": 336
+        }
+      },
+      "traceId": "3b22e6e8-68a7-46fb-b50a-f55c3127cf65"
+    },
+    "operationId": "exec-0000000000001026",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

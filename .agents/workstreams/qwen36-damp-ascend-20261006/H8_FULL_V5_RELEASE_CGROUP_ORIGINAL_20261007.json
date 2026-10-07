@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import json,os,resource,subprocess\\nfrom pathlib import Path\\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\\ncid='4df8090b9612c5b04d8aefbe2ef748613875e426ca8157fedbf86603002c1515';a=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','inspect',cid];r=subprocess.run(a,capture_output=True,text=True,timeout=15);assert r.returncode==0;x=json.loads(r.stdout)[0]\\nassert x['Id']==cid and not x['State']['Running'] and x['State']['Pid']==0 and not x.get('ExecIDs')\\nh=x['HostConfig'];assert h['Privileged'] is False and not h.get('Devices')\\nprint(json.dumps({'schema':'h8.v5-actual-no-device-failure-release-diagnostic/v1','kernel':os.uname().release,'inspect_argv':a,'CID':cid,'State':x['State'],'Devices':h.get('Devices'),'CgroupnsMode':h.get('CgroupnsMode'),'CapDrop':h.get('CapDrop'),'SecurityOpt':h.get('SecurityOpt'),'source_labels':x['Config'].get('Labels'),'host_cgroup_mounts':[l for l in Path('/proc/self/mountinfo').read_text().splitlines() if ' - cgroup' in l],'host_cgroup':Path('/proc/self/cgroup').read_text(),'cgroup_symlinks':{str(p):str(p.resolve()) for p in Path('/sys/fs/cgroup').iterdir() if p.is_symlink()},'no_new_stop':True,'no_Torch_NPU':True}))\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 77,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001053\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"schema\\\": \\\"h8.v5-actual-no-device-failure-release-diagnostic/v1\\\", \\\"kernel\\\": \\\"5.10.0-182.0.0.95.h3184.eulerosv2r13.aarch64\\\", \\\"inspect_argv\\\": [\\\"/usr/bin/prlimit\\\", \\\"--as=unlimited\\\", \\\"--\\\", \\\"/usr/bin/docker\\\", \\\"inspect\\\", \\\"4df8090b9612c5b04d8aefbe2ef748613875e426ca8157fedbf86603002c1515\\\"], \\\"CID\\\": \\\"4df8090b9612c5b04d8aefbe2ef748613875e426ca8157fedbf86603002c1515\\\", \\\"State\\\": {\\\"Status\\\": \\\"exited\\\", \\\"Running\\\": false, \\\"Paused\\\": false, \\\"Restarting\\\": false, \\\"OOMKilled\\\": false, \\\"Dead\\\": false, \\\"Pid\\\": 0, \\\"ExitCode\\\": 137, \\\"Error\\\": \\\"\\\", \\\"StartedAt\\\": \\\"2026-10-07T21:56:14.86025975Z\\\", \\\"FinishedAt\\\": \\\"2026-10-07T21:56:42.30012955Z\\\"}, \\\"Devices\\\": [], \\\"CgroupnsMode\\\": \\\"host\\\", \\\"CapDrop\\\": [\\\"ALL\\\"], \\\"SecurityOpt\\\": [\\\"no-new-privileges\\\"], \\\"source_labels\\\": {\\\"model-tuning-lab.controller-sha256\\\": \\\"29b0e15315ce5cb7b0d93c7811ae7bfe008822628f2029f55b475b72d6215af8\\\", \\\"model-tuning-lab.owner\\\": \\\"kvbuffer-h8-full-v5-mount-admission\\\", \\\"model-tuning-lab.physical\\\": \\\"none\\\", \\\"model-tuning-lab.run\\\": \\\"h8-source-MAIN-h8-v5-source-20261007-001\\\", \\\"model-tuning-lab.source-manifest-sha256\\\": \\\"86094070a68f37c8fe3453f8a7a87c5869db387605ad04911cf4020281a3b12c\\\", \\\"org.opencontainers.image.version\\\": \\\"22.04\\\"}, \\\"host_cgroup_mounts\\\": [\\\"33 32 0:29 / /sys/fs/cgroup/systemd rw,nosuid,nodev,noexec,relatime shared:6 - cgroup cgroup rw,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd\\\", \\\"36 32 0:32 / /sys/fs/cgroup/files rw,nosuid,nodev,noexec,relatime shared:7 - cgroup cgroup rw,files\\\", \\\"37 32 0:33 / /sys/fs/cgroup/freezer rw,nosuid,nodev,noexec,relatime shared:8 - cgroup cgroup rw,freezer\\\", \\\"38 32 0:34 / /sys/fs/cgroup/blkio rw,nosuid,nodev,noexec,relatime shared:9 - cgroup cgroup rw,blkio\\\", \\\"39 32 0:35 / /sys/fs/cgroup/net_cls,net_prio rw,nosuid,nodev,noexec,relatime shared:10 - cgroup cgroup rw,net_cls,net_prio\\\", \\\"40 32 0:36 / /sys/fs/cgroup/cpuset rw,nosuid,nodev,noexec,relatime shared:11 - cgroup cgroup rw,cpuset\\\", \\\"41 32 0:37 / /sys/fs/cgroup/memory rw,nosuid,nodev,noexec,relatime shared:12 - cgroup cgroup rw,memory\\\", \\\"42 32 0:38 / /sys/fs/cgroup/hugetlb rw,nosuid,nodev,noexec,relatime shared:13 - cgroup cgroup rw,hugetlb\\\", \\\"43 32 0:39 / /sys/fs/cgroup/rdma rw,nosuid,nodev,noexec,relatime shared:14 - cgroup cgroup rw,rdma\\\", \\\"44 32 0:40 / /sys/fs/cgroup/perf_event rw,nosuid,nodev,noexec,relatime shared:15 - cgroup cgroup rw,perf_event\\\", \\\"45 32 0:41 / /sys/fs/cgroup/devices rw,nosuid,nodev,noexec,relatime shared:16 - cgroup cgroup rw,devices\\\", \\\"46 32 0:42 / /sys/fs/cgroup/cpu,cpuacct rw,nosuid,nodev,noexec,relatime shared:17 - cgroup cgroup rw,cpu,cpuacct\\\", \\\"47 32 0:43 / /sys/fs/cgroup/pids rw,nosuid,nodev,noexec,relatime shared:18 - cgroup cgroup rw,pids\\\"], \\\"host_cgroup\\\": \\\"13:pids:/system.slice/agentweb-chicaihong01-ma.service\\\\n12:cpu,cpuacct:/system.slice/agentweb-chicaihong01-ma.service\\\\n11:devices:/system.slice/agentweb-chicaihong01-ma.service\\\\n10:perf_event:/\\\\n9:rdma:/\\\\n8:hugetlb:/\\\\n7:memory:/system.slice/agentweb-chicaihong01-ma.service\\\\n6:cpuset:/system.slice/agentweb-chicaihong01-ma.service\\\\n5:net_cls,net_prio:/\\\\n4:blkio:/system.slice/agentweb-chicaihong01-ma.service\\\\n3:freezer:/system.slice/agentweb-chicaihong01-ma.service\\\\n2:files:/\\\\n1:name=systemd:/system.slice/agentweb-chicaihong01-ma.service\\\\n\\\", \\\"cgroup_symlinks\\\": {\\\"/sys/fs/cgroup/cpu\\\": \\\"/sys/fs/cgroup/cpu,cpuacct\\\", \\\"/sys/fs/cgroup/cpuacct\\\": \\\"/sys/fs/cgroup/cpu,cpuacct\\\", \\\"/sys/fs/cgroup/net_cls\\\": \\\"/sys/fs/cgroup/net_cls,net_prio\\\", \\\"/sys/fs/cgroup/net_prio\\\": \\\"/sys/fs/cgroup/net_cls,net_prio\\\"}, \\\"no_new_stop\\\": true, \\\"no_Torch_NPU\\\": true}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 340,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 340,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 340\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 340,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 340\n      }\n    },\n    \"traceId\": \"88e4ed85-2ca9-44ef-b51b-ca867fdf0103\"\n  },\n  \"operationId\": \"exec-0000000000001053\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import json,os,resource,subprocess\nfrom pathlib import Path\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\ncid='4df8090b9612c5b04d8aefbe2ef748613875e426ca8157fedbf86603002c1515';a=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker','inspect',cid];r=subprocess.run(a,capture_output=True,text=True,timeout=15);assert r.returncode==0;x=json.loads(r.stdout)[0]\nassert x['Id']==cid and not x['State']['Running'] and x['State']['Pid']==0 and not x.get('ExecIDs')\nh=x['HostConfig'];assert h['Privileged'] is False and not h.get('Devices')\nprint(json.dumps({'schema':'h8.v5-actual-no-device-failure-release-diagnostic/v1','kernel':os.uname().release,'inspect_argv':a,'CID':cid,'State':x['State'],'Devices':h.get('Devices'),'CgroupnsMode':h.get('CgroupnsMode'),'CapDrop':h.get('CapDrop'),'SecurityOpt':h.get('SecurityOpt'),'source_labels':x['Config'].get('Labels'),'host_cgroup_mounts':[l for l in Path('/proc/self/mountinfo').read_text().splitlines() if ' - cgroup' in l],'host_cgroup':Path('/proc/self/cgroup').read_text(),'cgroup_symlinks':{str(p):str(p.resolve()) for p in Path('/sys/fs/cgroup').iterdir() if p.is_symlink()},'no_new_stop':True,'no_Torch_NPU':True}))"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 77,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000001053",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"schema\": \"h8.v5-actual-no-device-failure-release-diagnostic/v1\", \"kernel\": \"5.10.0-182.0.0.95.h3184.eulerosv2r13.aarch64\", \"inspect_argv\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"inspect\", \"4df8090b9612c5b04d8aefbe2ef748613875e426ca8157fedbf86603002c1515\"], \"CID\": \"4df8090b9612c5b04d8aefbe2ef748613875e426ca8157fedbf86603002c1515\", \"State\": {\"Status\": \"exited\", \"Running\": false, \"Paused\": false, \"Restarting\": false, \"OOMKilled\": false, \"Dead\": false, \"Pid\": 0, \"ExitCode\": 137, \"Error\": \"\", \"StartedAt\": \"2026-10-07T21:56:14.86025975Z\", \"FinishedAt\": \"2026-10-07T21:56:42.30012955Z\"}, \"Devices\": [], \"CgroupnsMode\": \"host\", \"CapDrop\": [\"ALL\"], \"SecurityOpt\": [\"no-new-privileges\"], \"source_labels\": {\"model-tuning-lab.controller-sha256\": \"29b0e15315ce5cb7b0d93c7811ae7bfe008822628f2029f55b475b72d6215af8\", \"model-tuning-lab.owner\": \"kvbuffer-h8-full-v5-mount-admission\", \"model-tuning-lab.physical\": \"none\", \"model-tuning-lab.run\": \"h8-source-MAIN-h8-v5-source-20261007-001\", \"model-tuning-lab.source-manifest-sha256\": \"86094070a68f37c8fe3453f8a7a87c5869db387605ad04911cf4020281a3b12c\", \"org.opencontainers.image.version\": \"22.04\"}, \"host_cgroup_mounts\": [\"33 32 0:29 / /sys/fs/cgroup/systemd rw,nosuid,nodev,noexec,relatime shared:6 - cgroup cgroup rw,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd\", \"36 32 0:32 / /sys/fs/cgroup/files rw,nosuid,nodev,noexec,relatime shared:7 - cgroup cgroup rw,files\", \"37 32 0:33 / /sys/fs/cgroup/freezer rw,nosuid,nodev,noexec,relatime shared:8 - cgroup cgroup rw,freezer\", \"38 32 0:34 / /sys/fs/cgroup/blkio rw,nosuid,nodev,noexec,relatime shared:9 - cgroup cgroup rw,blkio\", \"39 32 0:35 / /sys/fs/cgroup/net_cls,net_prio rw,nosuid,nodev,noexec,relatime shared:10 - cgroup cgroup rw,net_cls,net_prio\", \"40 32 0:36 / /sys/fs/cgroup/cpuset rw,nosuid,nodev,noexec,relatime shared:11 - cgroup cgroup rw,cpuset\", \"41 32 0:37 / /sys/fs/cgroup/memory rw,nosuid,nodev,noexec,relatime shared:12 - cgroup cgroup rw,memory\", \"42 32 0:38 / /sys/fs/cgroup/hugetlb rw,nosuid,nodev,noexec,relatime shared:13 - cgroup cgroup rw,hugetlb\", \"43 32 0:39 / /sys/fs/cgroup/rdma rw,nosuid,nodev,noexec,relatime shared:14 - cgroup cgroup rw,rdma\", \"44 32 0:40 / /sys/fs/cgroup/perf_event rw,nosuid,nodev,noexec,relatime shared:15 - cgroup cgroup rw,perf_event\", \"45 32 0:41 / /sys/fs/cgroup/devices rw,nosuid,nodev,noexec,relatime shared:16 - cgroup cgroup rw,devices\", \"46 32 0:42 / /sys/fs/cgroup/cpu,cpuacct rw,nosuid,nodev,noexec,relatime shared:17 - cgroup cgroup rw,cpu,cpuacct\", \"47 32 0:43 / /sys/fs/cgroup/pids rw,nosuid,nodev,noexec,relatime shared:18 - cgroup cgroup rw,pids\"], \"host_cgroup\": \"13:pids:/system.slice/agentweb-chicaihong01-ma.service\\n12:cpu,cpuacct:/system.slice/agentweb-chicaihong01-ma.service\\n11:devices:/system.slice/agentweb-chicaihong01-ma.service\\n10:perf_event:/\\n9:rdma:/\\n8:hugetlb:/\\n7:memory:/system.slice/agentweb-chicaihong01-ma.service\\n6:cpuset:/system.slice/agentweb-chicaihong01-ma.service\\n5:net_cls,net_prio:/\\n4:blkio:/system.slice/agentweb-chicaihong01-ma.service\\n3:freezer:/system.slice/agentweb-chicaihong01-ma.service\\n2:files:/\\n1:name=systemd:/system.slice/agentweb-chicaihong01-ma.service\\n\", \"cgroup_symlinks\": {\"/sys/fs/cgroup/cpu\": \"/sys/fs/cgroup/cpu,cpuacct\", \"/sys/fs/cgroup/cpuacct\": \"/sys/fs/cgroup/cpu,cpuacct\", \"/sys/fs/cgroup/net_cls\": \"/sys/fs/cgroup/net_cls,net_prio\", \"/sys/fs/cgroup/net_prio\": \"/sys/fs/cgroup/net_cls,net_prio\"}, \"no_new_stop\": true, \"no_Torch_NPU\": true}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 340,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 340,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 340
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 340,
+          "routeLookupMs": 0,
+          "totalMs": 340
+        }
+      },
+      "traceId": "88e4ed85-2ca9-44ef-b51b-ca867fdf0103"
+    },
+    "operationId": "exec-0000000000001053",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

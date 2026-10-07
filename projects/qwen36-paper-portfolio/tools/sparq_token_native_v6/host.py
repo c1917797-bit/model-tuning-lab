@@ -17,6 +17,11 @@ MEM=8*1024**3;HOST_MEM=256*1024**2;RESERVE=8*1024**3;WORKSPACE=5*1024**3
 PHASE_SECONDS=5400;CLEANUP_SECONDS=90
 CUTOFF=datetime.fromisoformat(c.CUT)
 def utc():return datetime.now(timezone.utc)
+def formal_time_failures(deadline):
+ errors=[]
+ if time.monotonic()>deadline:errors.append("formal whole phase5400 exhausted; safety-only recovery")
+ if utc()>=CUTOFF:errors.append("fixed portfolio cutoff exhausted; safety-only recovery")
+ return errors
 def helpers():
  require(sha(H8)==H8_SHA,"actual reviewed generic H8 helper changed")
  spec=importlib.util.spec_from_file_location("_sparq_frozen_h8_host",H8)
@@ -86,13 +91,54 @@ class Controller(H.Controller):
   super().__init__(a)
   self.name="sparq-token-"+self.out.name
  def remaining(self,cleanup=False,cap=30):
-  now=time.monotonic();cut=(CUTOFF-utc()).total_seconds()
+  now=time.monotonic()
   if cleanup:
+   # No new work/lease renewal: an already owned CID gets at most 90s safety
+   # recovery even after the formal lease/cutoff failed. Failure remains latched.
    if self.cleanup_deadline is None:self.cleanup_deadline=now+CLEANUP_SECONDS
-   value=min(self.cleanup_deadline-now,self.deadline-now,cut)
-  else:value=min(self.deadline-now,cut)-CLEANUP_SECONDS
+   value=self.cleanup_deadline-now
+  else:value=min(self.deadline-now,(CUTOFF-utc()).total_seconds())-CLEANUP_SECONDS
   require(value>0,"fixed SparQ phase/cutoff and cleanup reserve exhausted")
   return min(cap,value)
+ def call(self,label,argv,cap=30,cleanup=False):
+  if not cleanup:return super().call(label,argv,cap=cap,cleanup=False)
+  requested=list(argv)
+  require(re.fullmatch("[0-9a-f]{64}",self.cid or "") and self.expected is not None and
+   self.expected["cid"]==self.cid,"cleanup requires complete exact owned CID")
+  identity=(self.cid,c.canonical(self.expected))
+  permitted=(label=="inspect" and requested==[DOCKER,"inspect",self.cid])
+  if label=="stop-retain":
+   permitted=(requested==[DOCKER,"stop","--time","15",self.cid] and
+    getattr(self,"_cleanup_owned_identity",None)==identity)
+  if label=="release-smi":
+   permitted=(requested==[H.SMI,"info"] and getattr(self,"_cleanup_owned_identity",None)==identity and
+    getattr(self,"_cleanup_stopped",False))
+  require(permitted,"cleanup-only inspect/exact validated stop-retain/release; no work or foreign stop")
+  wrapped=self.wrapper(requested)
+  try:result=self.h.run(wrapped,self.remaining(cleanup=True,cap=cap))
+  except BaseException as error:
+   result=dict(argv=wrapped,requested_argv=requested,exit_code=None,
+    error=repr(error),observed_utc=utc().isoformat(),cleanup_safety_only=True)
+   retained=H.write(self.out/(label+"-"+str(time.time_ns())+".json"),result)
+   raise RuntimeError("command failure retained: "+str(retained)) from error
+  own=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+  child=resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss
+  violations=[]
+  if own+child>HOST_MEM//1024:violations.append("actual host+CLI cumulative peak RSS exceeds256MiB")
+  violations.extend(formal_time_failures(self.deadline))
+  # Preserve the original resource/time failure as secondary, never hide it
+  # behind successful stop. Do not rerun normal ordinary-RAM/CPU admission.
+  for error in violations:
+   if error not in self.secondary:self.secondary.append(error)
+  result.update(requested_argv=requested,cleanup_safety_only=True,
+   original_admission_failures=violations,
+   cleanup_resource_snapshot=dict(host_peak_rss_kib=own,child_peak_rss_kib=child,
+    aggregate_peak_rss_kib=own+child,formal_limit_bytes=HOST_MEM),
+   cleanup_remaining_seconds=max(0,self.cleanup_deadline-time.monotonic()),
+   formal_deadline_monotonic=self.deadline,formal_cutoff=CUTOFF.isoformat())
+  retained=H.write(self.out/(label+"-"+str(time.time_ns())+".json"),result)
+  require(result["exit_code"]==0,"actual command failed; retained "+str(retained))
+  return result,retained
  def mounts(self,artifacts=None):
   # Same absolute source/evidence paths are readable in image and host.
   # Only the distinct owned /sparq-results alias is writable.
@@ -104,7 +150,37 @@ class Controller(H.Controller):
   raw,r=self.call("inspect",[DOCKER,"inspect",self.cid],cleanup=cleanup)
   rows=json.loads(raw["stdout"]);require(len(rows)==1,"single complete exact owned CID")
   validate_inspect(rows[0],self.expected)
+  if cleanup:
+   self._cleanup_owned_identity=(self.cid,c.canonical(self.expected))
+   self._cleanup_stopped=(not rows[0]["State"]["Running"] and rows[0]["State"]["Pid"]==0 and not rows[0].get("ExecIDs"))
   return rows[0],r
+ def create_owned(self,source):
+  # Creation is NOT cleanup admission. Existing fresh observe/resources and
+  # name/mount/device checks remain in create(); normal time/RSS gates stay.
+  require(self.cid is None and self.expected is not None and self.expected["cid"] is None and
+   source["host.py"]==sha(__file__) and self.expected["host_sha256"]==source["host.py"] and
+   self.expected["numeric_sha256"]==source["numeric_gate.py"],"one fresh source-bound create only")
+  requested=create_argv(self.expected);wrapped=self.wrapper(requested)
+  self.rss()
+  try:result=self.h.run(wrapped,self.remaining(cleanup=False,cap=60))
+  except BaseException as error:
+   result=dict(argv=wrapped,requested_argv=requested,exit_code=None,error=repr(error),observed_utc=utc().isoformat())
+   retained=write_new(self.out/("create-"+str(time.time_ns())+".json"),result)
+   raise RuntimeError("create command failure retained: "+str(retained)) from error
+  result.update(requested_argv=requested)
+  cid=result["stdout"].strip() if isinstance(result.get("stdout"),str) else None
+  valid=(result.get("exit_code")==0 and re.fullmatch("[0-9a-f]{64}",cid or "") is not None)
+  # Capture completed CLI's exact success CID BEFORE persistence/post-admission
+  # can fail. Cleanup still requires full inspect/source ownership, not this CID alone.
+  if valid:self.cid=cid;self.expected["cid"]=cid
+  retained=write_new(self.out/("create-"+str(time.time_ns())+".json"),result)
+  require(result.get("exit_code")==0,"actual create failed; retained "+str(retained))
+  require(valid,"complete actual created CID; retained "+str(retained))
+  write_new(self.out/"OWNED.json",dict(schema="sparq.token-owned/v4",**self.expected,create_receipt=retained,sources=source))
+  # A successful create never bypasses resource/time admission or authorizes
+  # start on failure; only exact validated safety stop remains available.
+  self.rss();self.remaining(cleanup=False,cap=60)
+  return result,retained
  def create(self,artifacts,source_ref,source):
   self.expected=dict(cid=None,name=self.name,image=IMAGE,owner=OWNER,source=source_ref,
     host_sha256=sha(__file__),numeric_sha256=source["numeric_gate.py"],guest_cpu=self.cpu["guest_cpu"],mounts=self.mounts(),mode=getattr(self,"device_phase","npu"))
@@ -113,10 +189,8 @@ class Controller(H.Controller):
   require(not old["stdout"].strip(),"exact name exists; never reuse or retry")
   for src,rw in self.expected["mounts"].values():require(Path(src).exists(),"actual exact mount source absent")
   for path in expected_devices(self.expected["mode"]):require(Path(path).exists(),"actual authorized device absent")
-  created,cr=self.call("create",create_argv(self.expected),cap=60)
-  cid=created["stdout"].strip();require(re.fullmatch("[0-9a-f]{64}",cid),"complete actual created CID")
-  self.cid=cid;self.expected["cid"]=cid
-  write_new(self.out/"OWNED.json",dict(schema="sparq.token-owned/v4",**self.expected,create_receipt=cr,sources=source))
+  created,cr=self.create_owned(source)
+  cid=self.cid
   x,ir=self.inspect();require(not x["State"]["Running"] and x["State"]["Pid"]==0 and not x.get("ExecIDs"),"fresh owned CID unexpectedly live")
   self.call("start",[DOCKER,"start",cid],cap=60)
   x,ir=self.inspect();require(x["State"]["Running"] and x["State"]["Pid"]>0,"fresh exact owned init not live")
@@ -308,6 +382,10 @@ def execute(a,source,files):
     done=ctl.child.poll() is not None
     write_new(ctl.out/"foreground-final.json",{"stage":ctl.child_label,"requested_argv":ctl.child_request,"host_pid":ctl.child.pid,"terminated":done,"exit_code":ctl.child.returncode if done else None})
   except BaseException as error:ctl.secondary.append(repr(error))
+  # Final source/protected/foreground checks are part of the same whole5400.
+  # Safety-only release never grants a new numerical lease or successful result.
+  for error in formal_time_failures(ctl.deadline):
+   if error not in ctl.secondary:ctl.secondary.append(error)
   success=primary is None and not ctl.secondary and all((numeric,complete,child_ref,cleanup,protected_after,stopped,proof_ref,abi_ref,cpu_cleanup,cpu_inspect,cpu_stopped,abi_child,probe_idle))
   result={"schema":"sparq.token-host-result/v4","status":"kernel_numerics_checked" if success else "failed","source_manifest":source,
     "sources_before":files,"sources_after":after,"dependencies":c.DEPENDENCIES,"container_id":ctl.cid,"source_device_proof":proof_ref,

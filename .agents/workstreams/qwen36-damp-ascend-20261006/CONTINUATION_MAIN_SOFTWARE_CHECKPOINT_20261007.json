@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import json,os,resource,subprocess\\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\\nr='/opt/host/vnf/austinov/model-tuning-lab';g='/usr/local/bin/git'\\ndef run(a):\\n x=subprocess.run(a,cwd=r,capture_output=True,text=True,timeout=45);print(json.dumps({'argv':a,'exit_code':x.returncode,'stdout':x.stdout,'stderr':x.stderr}));assert x.returncode==0;return x.stdout\\nassert run([g,'rev-parse','HEAD']).strip()=='c7f017301273aa6fa59ac41fb61264d473c65e2c'\\nassert not run([g,'diff','--cached','--name-only']).strip()\\nrun([g,'diff','--check'])\\nrun(['/bin/sh','./scripts/validate-mst.sh'])\\nrun([g,'status','--porcelain=v1'])\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 188,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001057\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"argv\\\": [\\\"/usr/local/bin/git\\\", \\\"rev-parse\\\", \\\"HEAD\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"c7f017301273aa6fa59ac41fb61264d473c65e2c\\\\n\\\", \\\"stderr\\\": \\\"\\\"}\\n{\\\"argv\\\": [\\\"/usr/local/bin/git\\\", \\\"diff\\\", \\\"--cached\\\", \\\"--name-only\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"\\\", \\\"stderr\\\": \\\"\\\"}\\n{\\\"argv\\\": [\\\"/usr/local/bin/git\\\", \\\"diff\\\", \\\"--check\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"\\\", \\\"stderr\\\": \\\"\\\"}\\n{\\\"argv\\\": [\\\"/bin/sh\\\", \\\"./scripts/validate-mst.sh\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"PASS: Maintainer Skill Tree structure is valid (20 skills)\\\\n\\\", \\\"stderr\\\": \\\"\\\"}\\n{\\\"argv\\\": [\\\"/usr/local/bin/git\\\", \\\"status\\\", \\\"--porcelain=v1\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\" M .agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\\\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\\\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py\\\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/CONTINUATION_ORIENTATION_OBSERVER_EXPIRED_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_MAIN_RESOLVER_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_MAIN_SOFTWARE_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_RELEASE_CGROUP_ORIGINAL_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_CHILD_FAILURE_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_DISPATCH_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_FAILURE_20261007.md\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_ORIGINAL_TERMINAL_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ004_CANONICAL_BASELINE_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ004_MAIN_SOFTWARE_20261007.json\\\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ004_PRIVATE_DELIVERY_20261007.json\\\\n?? projects/damp-ascend/integration/integer_compaction_v1/\\\\n?? projects/damp-ascend/integration/service_all_batch_v2/\\\\n?? projects/damp-ascend/integration/service_assembly_v1/\\\\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\\\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\\\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\\\\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\\\\n?? projects/damp-ascend/tools/final_plan_gate_v1/\\\\n?? projects/damp-ascend/tools/host_memory_audit_v1/\\\\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\\\\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\\\\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\\\\n\\\", \\\"stderr\\\": \\\"\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 351,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 351,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 351\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 350,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 350\n      }\n    },\n    \"traceId\": \"f032197e-dcb6-487f-aa9a-877052577793\"\n  },\n  \"operationId\": \"exec-0000000000001057\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import json,os,resource,subprocess\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nr='/opt/host/vnf/austinov/model-tuning-lab';g='/usr/local/bin/git'\ndef run(a):\n x=subprocess.run(a,cwd=r,capture_output=True,text=True,timeout=45);print(json.dumps({'argv':a,'exit_code':x.returncode,'stdout':x.stdout,'stderr':x.stderr}));assert x.returncode==0;return x.stdout\nassert run([g,'rev-parse','HEAD']).strip()=='c7f017301273aa6fa59ac41fb61264d473c65e2c'\nassert not run([g,'diff','--cached','--name-only']).strip()\nrun([g,'diff','--check'])\nrun(['/bin/sh','./scripts/validate-mst.sh'])\nrun([g,'status','--porcelain=v1'])"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 188,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000001057",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"argv\": [\"/usr/local/bin/git\", \"rev-parse\", \"HEAD\"], \"exit_code\": 0, \"stdout\": \"c7f017301273aa6fa59ac41fb61264d473c65e2c\\n\", \"stderr\": \"\"}\n{\"argv\": [\"/usr/local/bin/git\", \"diff\", \"--cached\", \"--name-only\"], \"exit_code\": 0, \"stdout\": \"\", \"stderr\": \"\"}\n{\"argv\": [\"/usr/local/bin/git\", \"diff\", \"--check\"], \"exit_code\": 0, \"stdout\": \"\", \"stderr\": \"\"}\n{\"argv\": [\"/bin/sh\", \"./scripts/validate-mst.sh\"], \"exit_code\": 0, \"stdout\": \"PASS: Maintainer Skill Tree structure is valid (20 skills)\\n\", \"stderr\": \"\"}\n{\"argv\": [\"/usr/local/bin/git\", \"status\", \"--porcelain=v1\"], \"exit_code\": 0, \"stdout\": \" M .agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/CONTINUATION_ORIENTATION_OBSERVER_EXPIRED_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_MAIN_RESOLVER_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_MAIN_SOFTWARE_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_RELEASE_CGROUP_ORIGINAL_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_CHILD_FAILURE_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_DISPATCH_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_FAILURE_20261007.md\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/H8_FULL_V5_SOURCE_ORIGINAL_TERMINAL_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ004_CANONICAL_BASELINE_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ004_MAIN_SOFTWARE_20261007.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ004_PRIVATE_DELIVERY_20261007.json\\n?? projects/damp-ascend/integration/integer_compaction_v1/\\n?? projects/damp-ascend/integration/service_all_batch_v2/\\n?? projects/damp-ascend/integration/service_assembly_v1/\\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\\n?? projects/damp-ascend/tools/final_plan_gate_v1/\\n?? projects/damp-ascend/tools/host_memory_audit_v1/\\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\\n\", \"stderr\": \"\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 351,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 351,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 351
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 350,
+          "routeLookupMs": 0,
+          "totalMs": 350
+        }
+      },
+      "traceId": "f032197e-dcb6-487f-aa9a-877052577793"
+    },
+    "operationId": "exec-0000000000001057",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

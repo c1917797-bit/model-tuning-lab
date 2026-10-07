@@ -1,5 +1,58 @@
 # DAMP Ascend — current workstream
 
+## Current actual no-device failure / next narrow repair — 2026-10-07 22:03Z
+
+H8 full-v5 MA104b is TERMINAL exit1/42.334s, BEFORE Torch/NPU.
+Read H8_FULL_V5_SOURCE_FAILURE_20261007.md and whole original terminal.
+Actual source/artifact/warm closure was reached; inside cpu_view rejects hidden
+cgroup ancestors. Independent MA1053 proves CgroupnsMode already host: default
+cgroupv1 filesystem exposes leaf roots, not private-namespace flag error.
+Original Devices[] CID4df8090b... is stopped/retained, noOOM; no repeat stop.
+Independent v6 is preparing only three exact readonly controller-root binds
+and real mountinfo verification; math/11520/tolerances/SO/clocks unchanged.
+
+No MAIN NPU job yet. SparQ004 is now canonical software passed:84 tests/source27
+MA1047; three-file cleanup/create safety repair, no native/model admission.
+W4native001 not admitted; MAIN caught command-hash NUL separator, create CID
+persistence and cleanup release-RSS problems; lowbit prepares isolated002.
+Three rolling preparers remain active; MAIN alone devices/Docker/canonical/Git.
+
+Memory32GiB release authority COMPLETED/SPENT; OVS/NUMA3 unchanged, no further
+release. KV cutoff Oct8 08:29:54Z/portfolio Oct9 11:17:31Z unchanged. No accepted
+non-HYPIC matched E2E/task result. Git auth blocker unchanged; local not pushed.
+Earlier21:43 and older entries below are historical checkpoints.
+
+## Current MAIN source review / fresh orientation — 2026-10-07 21:43Z
+
+Memory request remains COMPLETED/SPENT:32GiB released, OVS/NUMA3 preserved;
+no further release. Actual MA1018 terminal0 was observed in the native tool
+output: canonical HEADc7f0173/ahead25/eight worktrees, physical4–7 idle and
+ordinary MemAvailable94150020KiB. Protected0–3 workers1965788–91 external;
+no outside stop. MAIN first checked poll route at the wrong top-level schema,
+then correctly consumed its nested native terminal without command rerun.
+Before durable save, a shared code-host generation reset cleared ephemeral
+stores and the historical handle later returned actual nonretryable not_found.
+Retain CONTINUATION_ORIENTATION_OBSERVER_EXPIRED_20261007.json. Do not claim a
+frozen whole original MA1018 envelope or repeat its expired handle. The prior
+observation is not a fresh NPU admission; the actual next controller rechecks.
+
+MAIN fully reviewed full-v5 changed host/contract/consumer/mount/namespace/
+test/CLI source. Independent MA1026 terminal0 verified six reviewed hashes
+and58 stdlib tests (3.184s), without Docker/Torch/NPU. Whole original is saved
+in H8_FULL_V5_MAIN_SOFTWARE_20261007.json. This is NOT actual container source
+closure or11520 numerical authority. Recurrent owner freezes final238-source
+manifest/CLI; MAIN must execute and independently consume same-image Devices[]
+source/admission+stop before the once-only four-card full gate. Original math,
+11520,512MiB controller/256MiB PythonVAS and fixed KV cutoff stay unchanged.
+
+No MAIN NPU job at this checkpoint. W4CPU005 actual dependency evidence stays
+valid; lowbit owner closes native first-raw/controller/mount admission, without
+model or performance claims. SparQ003 is NOT admitted: successful create could
+throw its RSS guard before saving OWNED; minimal independent004 is preparing.
+Three actual rolling preparers continue. No new non-HYPIC matched E2E/task
+acceptance. KV Oct8 08:29:54Z and portfolio Oct9 11:17:31Z unchanged. Known
+Git publication blocker is unchanged; local is not pushed.
+
 ## Latest source-closure failure / corrected release — 2026-10-07 21:33Z
 
 The21:00 checkpoint below is historical. H8 full-v4 MA0fda is TERMINAL exit1:

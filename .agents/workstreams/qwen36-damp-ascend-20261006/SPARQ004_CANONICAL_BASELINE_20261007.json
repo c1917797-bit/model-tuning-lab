@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import hashlib,json,resource,os\\nfrom pathlib import Path\\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\\nr=Path('/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6');m=json.loads((r/'SOURCE_MANIFEST.json').read_text());bad=[]\\nfor n,s in m['files'].items():\\n a=hashlib.sha256((r/n).read_bytes()).hexdigest()\\n if a!=s:bad.append([n,s,a])\\nprint(json.dumps({'manifest_sha256':hashlib.sha256((r/'SOURCE_MANIFEST.json').read_bytes()).hexdigest(),'files':len(m['files']),'mismatches':bad,'host_sha256':hashlib.sha256((r/'host.py').read_bytes()).hexdigest(),'test_sha256':hashlib.sha256((r/'test_launch_linkage.py').read_bytes()).hexdigest(),'Torch':False,'Docker':False,'NPU':False}))\\nassert not bad\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 46,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001044\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"manifest_sha256\\\": \\\"bff8f80c3b5ded4c82feb7bb970cac0d1376ef09adcee12af0a1c1d289789c84\\\", \\\"files\\\": 21, \\\"mismatches\\\": [], \\\"host_sha256\\\": \\\"921b33e7aab03145f7ef9bb2e95ef2a4afda01c315edc3515388900bcf36987d\\\", \\\"test_sha256\\\": \\\"1f7c852523211e8c85c84bf78168fdba466829cccb2becb40dcebb680dfc3bcd\\\", \\\"Torch\\\": false, \\\"Docker\\\": false, \\\"NPU\\\": false}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 336,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 336,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 336\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 335,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 335\n      }\n    },\n    \"traceId\": \"132d0569-2051-47c0-ae03-6a339e1a16d1\"\n  },\n  \"operationId\": \"exec-0000000000001044\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import hashlib,json,resource,os\nfrom pathlib import Path\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,resource.RLIM_INFINITY));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nr=Path('/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6');m=json.loads((r/'SOURCE_MANIFEST.json').read_text());bad=[]\nfor n,s in m['files'].items():\n a=hashlib.sha256((r/n).read_bytes()).hexdigest()\n if a!=s:bad.append([n,s,a])\nprint(json.dumps({'manifest_sha256':hashlib.sha256((r/'SOURCE_MANIFEST.json').read_bytes()).hexdigest(),'files':len(m['files']),'mismatches':bad,'host_sha256':hashlib.sha256((r/'host.py').read_bytes()).hexdigest(),'test_sha256':hashlib.sha256((r/'test_launch_linkage.py').read_bytes()).hexdigest(),'Torch':False,'Docker':False,'NPU':False}))\nassert not bad"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 46,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000001044",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"manifest_sha256\": \"bff8f80c3b5ded4c82feb7bb970cac0d1376ef09adcee12af0a1c1d289789c84\", \"files\": 21, \"mismatches\": [], \"host_sha256\": \"921b33e7aab03145f7ef9bb2e95ef2a4afda01c315edc3515388900bcf36987d\", \"test_sha256\": \"1f7c852523211e8c85c84bf78168fdba466829cccb2becb40dcebb680dfc3bcd\", \"Torch\": false, \"Docker\": false, \"NPU\": false}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 336,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 336,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 336
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 335,
+          "routeLookupMs": 0,
+          "totalMs": 335
+        }
+      },
+      "traceId": "132d0569-2051-47c0-ae03-6a339e1a16d1"
+    },
+    "operationId": "exec-0000000000001044",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}
