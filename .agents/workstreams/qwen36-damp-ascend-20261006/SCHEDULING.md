@@ -1,5 +1,25 @@
 # Continuous preparation and NPU execution queue
 
+## HOST-only repair and broader preparation — 2026-10-07 08:11Z
+
+Actual MA08be stopped PRE-NPU at previous C1 mounts differ; no model log or
+before-guard raw exists. MAIN08c6 later allfields ordered+multiset matched,
+so the original failed-time cause is unknown, not proved ordering. Retain
+the original failure, not paper no-go. MAIN reviewed/applied NEW HOST-v4
+four files: exact duplicate-preserving allfields multiset and raw arrays
+before predicates; frozen v3 runtime/guards/math unchanged. MAIN MA08db
+actual8 landed stdlib guards/defaultCLI/source chain/MST20 PASS and real
+v3 preflight SHA checked. This is preparation, NOT new numerical acceptance.
+
+HOST-v4 caps the same OFF-A/OFF-B/ON33 full protocol at20min including90s
+cleanup, bounded further by unchanged08:48:03Z. Fresh actual admission still
+required; no SOURCE_LOCK/calibrated192/service/performance/task proof.
+Read PRE_CARD_PORTFOLIO_QUEUE_20261007.md: user's breadth correction rotates
+two preparers to Ada-KV and KIVI while KVBuffer exact consumer/service code is
+prepared. Earlier queue labels are not proof fifteen packets were ready.
+No HYPIC rerun, original runtime edits, threshold change or deadline reset.
+
+
 ## NEW pre-guard packet actually preflighted — 2026-10-07 07:56Z
 
 MAIN applied/reviewed fixed_admission_capture_v3 NEW7 files, revision2.
