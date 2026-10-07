@@ -1,6 +1,6 @@
 # HYPIC binding-off paired 2048-token quality plan
 
-Status: planned, not a quality verdict. User authorized continued use of physical NPU0-3 until the complete quality campaign finishes; NPU4-7 and the pre-existing sleep container remain out of scope. This quality campaign is separate from the fixed-output 40960-context performance runs.
+Status: in progress, not a quality verdict. Operation `exec-0000000000000c6d` runs the paired controller; no-cache LongBench-v2 run1 started at 2026-10-07 14:36 UTC with physical worker PID proof on NPU0-3. User authorized continued use of physical NPU0-3 until the complete quality campaign finishes; NPU4-7 and the pre-existing sleep container remain out of scope. This quality campaign is separate from the fixed-output 40960-context performance runs.
 
 ## Frozen scientific question
 
