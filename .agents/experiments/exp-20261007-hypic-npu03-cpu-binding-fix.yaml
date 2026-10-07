@@ -1,6 +1,6 @@
 schema: ascend-inference-treatment/v1
 id: exp-20261007-hypic-npu03-cpu-binding-fix
-status: verified_smoke
+status: screen_passed
 branch: work/hypic-npu03-cpu-binding-fix-20261007
 parent_diagnosis: exp-20261007-hypic-npu03-comm-root
 objective: Remove the NPU0-3 Decode latency floor caused by the enabled automatic CPU-binding path without modifying the official image or other card lanes.
@@ -56,3 +56,18 @@ smoke_20261007:
     cleanup_sha256: 24d831eccc4b36f3bf40ab16957f62dbf6c955303e9b0afe01818ce056e4bc5b
   cleanup: Exact candidate container removed; NPU0-3 and port 8223 released, NPU4-7 and pre-existing sleep container untouched.
   next_gate: Fresh isolated non-profiled 40 x 1024 c16 screen with the exact same candidate bytes and benchmark SHA.
+screen_20261007:
+  operation_id: exec-0000000000000ad7
+  protocol: Frozen no-cache 32768 input, 16384 prefix, 1024 output, 40 requests, c16, two warmups, ignore EOS, no profiler.
+  validity: 40/40 requests completed with exactly 1024 output tokens, zero failed.
+  candidate: Weighted TPOT 77.5641 ms/token; TPOT P95 117.4999 ms; TTFT P95 80775.49 ms; output throughput 117.2930 token/s; duration 349.2109 s.
+  denominator: Frozen NPU0-3 no-cache three-run weighted TPOT mean 413.0985 ms/token, throughput mean 29.4753 token/s, duration mean 1389.8696 s.
+  comparison: Weighted TPOT 81.22 percent lower; throughput 3.98x; duration 74.87 percent lower. Single candidate run only; no dispersion or final acceptance yet.
+  activation: Parsed enable_cpu_binding False and no allocation plan; pinned image/source/model/TP4/AIV/graph-on/physical NPU0-3/cpuset matched.
+  artifacts:
+    performance_sha256: 6379ca6dba915c0e87c1dc6f54fc8f451054fd237dd8ba1c855609da61f9f4b7
+    contract_sha256: 0e7474ddb336f315044ef87a33cf5031f3806861912031eb3ace65584e7e5d99
+    activation_log_sha256: 3006148c23014ca00fc299fad7a12c139a6b9fbb5a180f34e85d0450718b93a9
+    cleanup_sha256: 779b3e6e1d854ac16911c16465adf1a22a97d674593ded61ea7953c6bd0d388a
+  cleanup: Exact screen container removed, NPU0-3 and port 8223 released; no NPU4-7 access.
+  decision: Passes predeclared fail-fast screen. Proceed to two additional fresh candidate repetitions and judge dispersion; complete full quality before production adoption.

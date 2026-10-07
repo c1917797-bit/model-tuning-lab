@@ -279,7 +279,7 @@ def cleanup(name: str, container_id: str, arm: str, phase: str, out: Path) -> No
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=tuple(ARMS), default="no-cache")
-    parser.add_argument("--phase", choices=("inspect", "smoke", "screen"), required=True)
+    parser.add_argument("--phase", choices=("inspect", "smoke", "screen", "repeat2", "repeat3"), required=True)
     parser.add_argument("--enable-binding-off", action="store_true")
     args = parser.parse_args()
     source = frozen_source(args.arm)
