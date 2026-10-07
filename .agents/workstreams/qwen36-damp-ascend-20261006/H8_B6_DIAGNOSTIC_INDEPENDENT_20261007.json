@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import pathlib,json,hashlib,subprocess,os,importlib.util\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\np=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001\");b=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1\")\nfor f,w in ((\"RESULT.json\",\"d1303a5263764912256c8482cdc68a5c65f90246053e5bd6282256a9e9bf9b5b\"),(\"cpu-parity-1791398866640313920.json\",\"e1896f5c15dceb8adaa6dc7846868e12cae1bc2f262bafbd15daa4180312ce82\")):\n data=(p/f).read_bytes();assert hashlib.sha256(data).hexdigest()==w; q=json.loads(data)\n if f==\"RESULT.json\":result=q\n print(json.dumps({\"path\":str(p/f),\"sha256\":w,\"bytes\":len(data),\"status\":q.get(\"status\"),\"primary\":q.get(\"primary_error\"),\"secondary\":q.get(\"secondary_errors\")}))\ns=importlib.util.spec_from_file_location(\"_MAIN_b6_independent\",b/\"host.py\");h=importlib.util.module_from_spec(s);s.loader.exec_module(h)\nraw=subprocess.run([h.h.PRLIMIT,\"--as=unlimited\",\"--\",h.DOCKER,\"inspect\",\"c6409c857ce80ab21c0e34d832bc5e0f00a1f69bff47c448a541c4c7f7ad2da3\"],capture_output=True,text=True,timeout=15);assert raw.returncode==0;x=json.loads(raw.stdout)[0];owned=json.loads((p/\"physical-6/OWNED.json\").read_bytes());owned[\"mounts\"]={k:tuple(v) for k,v in owned[\"mounts\"].items()};h.validate_inspect(x,owned)\nassert not x[\"State\"][\"Running\"] and x[\"State\"][\"Pid\"]==0 and not x.get(\"ExecIDs\") and not x[\"State\"].get(\"OOMKilled\")\nsm=subprocess.run([h.SMI,\"info\"],capture_output=True,text=True,timeout=15);assert sm.returncode==0\nfor n in (4,5,6,7):h.F.idle_one(sm.stdout,n)\nprotected=h.F.protected(sm.stdout);assert h.h.protected_map(protected)==result[\"protected0_3\"]\nrr={}\nfor t in (\"native\",\"h8\"):\n q=json.loads((p/\"physical-6\"/t/\"report.json\").read_bytes())\n rr[t]={k:q.get(k) for k in (\"pid\",\"status\",\"phase\",\"target_dispatch_count\",\"pre_checkpoint\",\"post_checkpoint\",\"target_fence_passed\",\"prepare_fence_passed\",\"error\")}\n for key in (\"pre_checkpoint\",\"post_checkpoint\"):\n  ref=q[key];f=pathlib.Path(ref[\"path\"]);assert f.is_file() and hashlib.sha256(f.read_bytes()).hexdigest()==ref[\"sha256\"]\nprint(json.dumps({\"exact_owned_CID\":x[\"Id\"],\"stopped\":True,\"retained\":True,\"OOM\":False,\"NPU4_7_idle\":True,\"protected0_3_unchanged\":True,\"protected_processes\":[{\"physical\":z[\"physical\"],\"pid\":z[\"pid\"],\"start_ticks\":z[\"start_ticks\"]} for z in protected],\"reports\":rr,\"npu_smi\":sm.stdout}))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1352,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000ece",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/RESULT.json\", \"sha256\": \"d1303a5263764912256c8482cdc68a5c65f90246053e5bd6282256a9e9bf9b5b\", \"bytes\": 293724, \"status\": \"diagnostic_failed\", \"primary\": \"ValueError(\\\"actual command exit; retained {'path': '/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/cpu-parity-1791398866640313920.json', 'sha256': 'e1896f5c15dceb8adaa6dc7846868e12cae1bc2f262bafbd15daa4180312ce82'}\\\")\", \"secondary\": []}\n{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/cpu-parity-1791398866640313920.json\", \"sha256\": \"e1896f5c15dceb8adaa6dc7846868e12cae1bc2f262bafbd15daa4180312ce82\", \"bytes\": 4438, \"status\": null, \"primary\": null, \"secondary\": null}\n{\"exact_owned_CID\": \"c6409c857ce80ab21c0e34d832bc5e0f00a1f69bff47c448a541c4c7f7ad2da3\", \"stopped\": true, \"retained\": true, \"OOM\": false, \"NPU4_7_idle\": true, \"protected0_3_unchanged\": true, \"protected_processes\": [{\"physical\": 0, \"pid\": 585850, \"start_ticks\": 31858811}, {\"physical\": 1, \"pid\": 585851, \"start_ticks\": 31858811}, {\"physical\": 2, \"pid\": 585852, \"start_ticks\": 31858811}, {\"physical\": 3, \"pid\": 585853, \"start_ticks\": 31858811}], \"reports\": {\"native\": {\"pid\": 103, \"status\": \"fenced\", \"phase\": \"target-fenced\", \"target_dispatch_count\": 1, \"pre_checkpoint\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/physical-6/native/pre-target.pt\", \"sha256\": \"f4801eb52ba937141ce5b303917693a4525910f22deedec6e9938d001ed82b5b\"}, \"post_checkpoint\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/physical-6/native/post-target.pt\", \"sha256\": \"6437904b184b545bcb80983e83d7a0ff9c002bbc7de6c9a7b8a96a208da1f556\"}, \"target_fence_passed\": true, \"prepare_fence_passed\": null, \"error\": null}, \"h8\": {\"pid\": 196, \"status\": \"fenced\", \"phase\": \"target-fenced\", \"target_dispatch_count\": 1, \"pre_checkpoint\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/physical-6/h8/pre-target.pt\", \"sha256\": \"f4801eb52ba937141ce5b303917693a4525910f22deedec6e9938d001ed82b5b\"}, \"post_checkpoint\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/physical-6/h8/post-target.pt\", \"sha256\": \"b708a839d0e87dead9e87a764a60226309781e9eef26c026202a319e079afbe5\"}, \"target_fence_passed\": true, \"prepare_fence_passed\": true, \"error\": null}}, \"npu_smi\": \"+------------------------------------------------------------------------------------------------+\\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\\n+===========================+===============+====================================================+\\n| 0     910B4               | OK            | 153.4       55                0    / 0             |\\n| 0                         | 0000:C1:00.0  | 59          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 1     910B4               | OK            | 142.5       53                0    / 0             |\\n| 0                         | 0000:C2:00.0  | 59          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 2     910B4               | OK            | 145.2       55                0    / 0             |\\n| 0                         | 0000:81:00.0  | 59          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 3     910B4               | OK            | 143.9       55                0    / 0             |\\n| 0                         | 0000:82:00.0  | 59          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 4     910B4               | OK            | 94.9        45                0    / 0             |\\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\\n+===========================+===============+====================================================+\\n| 5     910B4               | OK            | 97.1        44                0    / 0             |\\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 6     910B4               | OK            | 95.1        44                0    / 0             |\\n| 0                         | 0000:41:00.0  | 0           0    / 0          2864 / 32768         |\\n+===========================+===============+====================================================+\\n| 7     910B4               | OK            | 86.9        45                0    / 0             |\\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\\n+===========================+===============+====================================================+\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\\n+===========================+===============+====================================================+\\n| 0       0                 | 585850        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 1       0                 | 585851        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 2       0                 | 585852        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 3       0                 | 585853        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 4                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 5                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 6                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 7                                                            |\\n+===========================+===============+====================================================+\\n\"}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 386,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 386,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 386
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 385,
+        "routeLookupMs": 0,
+        "totalMs": 385
+      }
+    },
+    "traceId": "eec0872f-5eb1-48b7-b2b6-3f3754ebe23f"
+  },
+  "operationId": "exec-0000000000000ece",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

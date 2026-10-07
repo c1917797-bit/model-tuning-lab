@@ -99,3 +99,13 @@ dense performance, and final task tests under the unchanged experiment contract.
   Aborted sibling reports may retain running flags after exact owned stop:
   verify actual CID/process cleanup instead of treating stale report status as
   a live lease. See H8_FULL_V2_RUNTIME_FAILURE_20261007.md.
+- A guarded view's backing tensor may contain both sentinels and the writable
+  state payload. Compare only the source-defined redzones for unchanged guard
+  bytes, and separately prove payload/view alignment, storage offsets, pointer
+  relations and state parity. Test legal payload mutations plus corruption of
+  either redzone. H8 B6 diagnostic v1 compared the entire backing tensor and
+  falsely rejected legitimate writes. Retain that actual failed operation;
+  reanalyze its immutable real-NPU snapshots with a source-bound CPU-only reader
+  before spending another device run. A corrected one-step reader is not a
+  full-matrix or historical warm-transition PASS. Numerical limits stay fixed.
+  See H8_B6_COMPARATOR_FAILURE_20261007.md.

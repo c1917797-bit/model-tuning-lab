@@ -1,0 +1,102 @@
+{
+  "schema": "main.original-diagnostic-launch/v1",
+  "input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=268435456:unlimited",
+      "--cpu=1000",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1/host.py",
+      "--source-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1/SOURCE_MANIFEST.json",
+      "--source-manifest-sha256",
+      "79a8f436e361265753efb80046cd19aeadaf485106b58bfbff47f721bb3fbb27",
+      "--library",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+      "--library-sha256",
+      "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+      "--build-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+      "--build-receipt-sha256",
+      "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+      "--meta-receipt",
+      "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+      "--meta-receipt-sha256",
+      "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+      "--output-dir",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001",
+      "--execute"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout": 940,
+    "maxOutputBytes": 10000,
+    "sync": false,
+    "idempotencyKey": "MAIN-h8-b6-fenced-native-h8-one-diagnostic-20261007-1850-001"
+  },
+  "original_ack": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "MAIN-h8-b6-fenced-native-h8-one-diagnostic-20261007-1850-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000ec6",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000000ec6",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 379,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 379,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1472,
+        "totalMs": 1851
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 379,
+        "routeLookupMs": 0,
+        "totalMs": 379
+      }
+    },
+    "traceId": "54ba6186-c7b2-4c2f-bc33-214311a1c463"
+  },
+  "source_manifest_sha256": "79a8f436e361265753efb80046cd19aeadaf485106b58bfbff47f721bb3fbb27",
+  "MAIN_execute_sha256": "0fa34276453497d906fbdeef1e464769dafcb31ce2aee72a5286e8365c331da9",
+  "status": "launched_terminal_pending",
+  "numerical_matrix_pass": false,
+  "model_ready": false,
+  "e2e_verified": false
+}

@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import pathlib,hashlib,json,subprocess,os\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\nop=root/\".agents/workstreams/qwen36-damp-ascend-20261006/H8_B6_DIAGNOSTIC_OPERATION_20261007.json\"\nargv=[\"/usr/bin/python3\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1/consume.py\",\"--result\",\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/RESULT.json\",\"--result-sha256\",\"d1303a5263764912256c8482cdc68a5c65f90246053e5bd6282256a9e9bf9b5b\",\"--original-operation\",str(op),\"--original-operation-sha256\",hashlib.sha256(op.read_bytes()).hexdigest()]\nq=subprocess.run(argv,cwd=root,capture_output=True,text=True,timeout=20)\nprint(json.dumps({\"argv\":argv,\"exit_code\":q.returncode,\"stdout\":q.stdout,\"stderr\":q.stderr,\"original_failed_operation_not_relabelled\":True}))\nassert q.returncode==0\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 342,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000ed1",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"argv\": [\"/usr/bin/python3\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1/consume.py\", \"--result\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/RESULT.json\", \"--result-sha256\", \"d1303a5263764912256c8482cdc68a5c65f90246053e5bd6282256a9e9bf9b5b\", \"--original-operation\", \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_B6_DIAGNOSTIC_OPERATION_20261007.json\", \"--original-operation-sha256\", \"13d938d74b1fdc8480c95d7c1192c3a5965ba4a1eee7ad6374219cb3856a86d2\"], \"exit_code\": 0, \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-b6-independent-consumer/v1\\\", \\\"result\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/RESULT.json\\\", \\\"sha256\\\": \\\"d1303a5263764912256c8482cdc68a5c65f90246053e5bd6282256a9e9bf9b5b\\\"}, \\\"original_operation\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_B6_DIAGNOSTIC_OPERATION_20261007.json\\\", \\\"sha256\\\": \\\"13d938d74b1fdc8480c95d7c1192c3a5965ba4a1eee7ad6374219cb3856a86d2\\\"}, \\\"original_operation_id\\\": \\\"exec-0000000000000ec6\\\", \\\"whole_original_envelope_preserved\\\": true, \\\"original_authority_verified\\\": true, \\\"diagnostic_success\\\": false, \\\"targets\\\": {\\\"native\\\": {\\\"status\\\": \\\"fenced\\\", \\\"phase\\\": \\\"target-fenced\\\", \\\"error\\\": null, \\\"pre_checkpoint\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/physical-6/native/pre-target.pt\\\", \\\"sha256\\\": \\\"f4801eb52ba937141ce5b303917693a4525910f22deedec6e9938d001ed82b5b\\\"}, \\\"target_dispatch_count\\\": 1}, \\\"h8\\\": {\\\"status\\\": \\\"fenced\\\", \\\"phase\\\": \\\"target-fenced\\\", \\\"error\\\": null, \\\"pre_checkpoint\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-b6-fenced-diagnostic-20261007-001/physical-6/h8/pre-target.pt\\\", \\\"sha256\\\": \\\"f4801eb52ba937141ce5b303917693a4525910f22deedec6e9938d001ed82b5b\\\"}, \\\"target_dispatch_count\\\": 1}}, \\\"complete_matrix_steps_verified\\\": 0, \\\"model_ready\\\": false, \\\"matched_e2e_verified\\\": false, \\\"task_accuracy_verified\\\": false}\\n\", \"stderr\": \"\", \"original_failed_operation_not_relabelled\": true}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 385,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 385,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 385
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 384,
+        "routeLookupMs": 0,
+        "totalMs": 384
+      }
+    },
+    "traceId": "a8728595-4bd1-4c33-970f-a0bbb91ff912"
+  },
+  "operationId": "exec-0000000000000ed1",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

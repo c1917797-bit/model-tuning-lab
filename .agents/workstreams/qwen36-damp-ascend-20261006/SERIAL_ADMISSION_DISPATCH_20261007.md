@@ -242,3 +242,32 @@ not an assertion of outside occupation or healthy continuous utilization.
 Three actual preparers continue; MAIN owns admission and same-paper diagnostics.
 Memory32GiB release complete, no further release. Fixed clocks/protected leases
 and original algorithm numerical gates remain unchanged.
+
+## Latest separate-fence diagnostic and source correction — 2026-10-07 19:02Z
+
+MA0ec6 H8 B6 diagnostic is terminal exit1, not a full gate PASS. Both native
+and H8 separate target fences completed and actual pre-target snapshots match.
+Original CPU numeric metrics meet limits, but whole-backing guard equality
+failed. Source review proves the observer incorrectly treats writable payload
+as a sentinel; actual redzone correctness is still pending CPU-only retained-raw
+reanalysis. Preserve original fail and unchanged thresholds; no NPU rerun or
+old CID restart. Read H8_B6_COMPARATOR_FAILURE_20261007.md and original envelopes.
+
+MA0ece/0ed1 independently verify original authority and exact owned stopped/
+retained CID,4–7 idle/OK and protected0–3 unchanged. Historical fullv2 B6
+warm-transition507035 remains unresolved; fullmatrix/lifecycle/mixed/model and
+pairedE2E/tasks remain pending. Current idle dependency is CPU evidence review/
+successor preparation, not proven external occupation or continuous utilization.
+
+SparQ native-statev4 MAIN review and actual48 stdlib/default-OFF/source checks
+passed; exact preparation integrated in local commit604537116d2f3fdaa85b894148cd59bfa4751667.
+Actual CPU Torch/nativeABI/NPU matrix and model/service/task gates are unrun.
+FIv6 is privately delivered but MAIN review/admission incomplete; FIv5 readiness
+withdrawal remains. W4v004 is still preparation. Three actual rolling preparers,
+not eight active agents. No non-HYPIC final accepted technique and no fake
+readiness inherited from a partial or failed predecessor.
+
+Authorized32GiB free HugeTLB release is complete, OVS and24GiB NUMA3 intact;
+do not release more. Fixed paper/portfolio deadlines remain unchanged.
+Git commits remain local; known HTTPS credential-helper publication blocker
+is retained, not bypassed. No main or force push.

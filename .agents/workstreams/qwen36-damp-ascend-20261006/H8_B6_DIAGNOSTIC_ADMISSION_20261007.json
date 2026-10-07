@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import os,json,pathlib,importlib.util,subprocess,hashlib\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nb=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1\")\nassert hashlib.sha256((b/\"MAIN_EXECUTE.json\").read_bytes()).hexdigest()==\"0fa34276453497d906fbdeef1e464769dafcb31ce2aee72a5286e8365c331da9\"\nsp=importlib.util.spec_from_file_location(\"_MAIN_b6_source_admission\",b/\"host.py\");h=importlib.util.module_from_spec(sp);sp.loader.exec_module(h)\ne=json.loads((b/\"MAIN_EXECUTE.json\").read_bytes());a=h.parser().parse_args(e[\"argv\"][7:]);assert a.execute and not a.output_dir.exists()\nsr,m,s,ar,checked=h.source_inputs(a);assert len(s)==121\nhw=subprocess.run([h.SMI,\"info\"],capture_output=True,text=True,timeout=15);assert hw.returncode==0\nfor n in (4,5,6,7):h.F.idle_one(hw.stdout,n)\nprotected=h.F.protected(hw.stdout)\nholders=h.fd_holders((6,));assert not holders,holders\nmem={x.split(\":\")[0]:int(x.split()[1])*1024 for x in pathlib.Path(\"/proc/meminfo\").read_text().splitlines() if x.startswith((\"MemAvailable:\",\"SwapTotal:\",\"SwapFree:\"))}\nassert mem[\"MemAvailable\"]>=17448304640 and mem[\"SwapTotal\"]==mem[\"SwapFree\"],mem\nassert h.shutil.disk_usage(a.output_dir.parent).free>=13*1024**3\ncpu=h.cpu_plan(h.h.cpu_view(os.getpid()),h.h.daemon_view())\nps=subprocess.run([h.h.PRLIMIT,\"--as=unlimited\",\"--\",h.DOCKER,\"ps\",\"--no-trunc\",\"--format\",\"{{.ID}} {{.Names}}\"],capture_output=True,text=True,timeout=15);assert ps.returncode==0\nprint(json.dumps({\"source_count\":len(s),\"source_manifest\":sr,\"artifacts\":ar,\"new_output_absent\":True,\"npu4_7_idle\":True,\"npu6_fd_holders\":holders,\"memory\":mem,\"cpu\":cpu,\"protected0_3\":protected,\"docker_ps\":ps.stdout,\"npu_smi\":hw.stdout,\"torch_imported\":\"torch\" in __import__(\"sys\").modules}))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1383,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000ec5",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"source_count\": 121, \"source_manifest\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-b6-fenced-diagnostic-v1/SOURCE_MANIFEST.json\", \"sha256\": \"79a8f436e361265753efb80046cd19aeadaf485106b58bfbff47f721bb3fbb27\"}, \"artifacts\": {\"library\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\", \"sha256\": \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\"}, \"build\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\", \"sha256\": \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\"}, \"meta\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\", \"sha256\": \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\"}}, \"new_output_absent\": true, \"npu4_7_idle\": true, \"npu6_fd_holders\": [], \"memory\": {\"MemAvailable\": 96637865984, \"SwapTotal\": 0, \"SwapFree\": 0}, \"cpu\": {\"host_cpu\": 0, \"guest_cpus\": {\"6\": 1}, \"reserve_cpus\": [2, 3], \"total_budget\": 4, \"external_future_guarantee\": false}, \"protected0_3\": [{\"physical\": 0, \"chip\": 0, \"pid\": 585850, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"4ab797aa4bdf20a5162e225af1132f82c5d2016050443b104e113dd92bb3d4da\"}, {\"physical\": 1, \"chip\": 0, \"pid\": 585851, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"c761267794c08eb089833aa4503a40206f8141c5484c98d2922411969c358eb6\"}, {\"physical\": 2, \"chip\": 0, \"pid\": 585852, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"27441ee7bcd76f177bb83d81630db5152f2a8a0129e1c66e0510425852fdadc3\"}, {\"physical\": 3, \"chip\": 0, \"pid\": 585853, \"start_ticks\": 31858811, \"cgroup\": \"13:pids:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n12:cpu,cpuacct:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n11:devices:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n10:perf_event:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n9:rdma:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n8:hugetlb:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n7:memory:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n6:cpuset:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n5:net_cls,net_prio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n4:blkio:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n3:freezer:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n2:files:/\\n1:name=systemd:/docker/f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b\\n\", \"cmdline_sha256\": \"84c8eea000a1436223d027d47ce7ba4f0676a0fd6f7167b75a2d874562f56d0f\"}], \"docker_ps\": \"f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b hypic_npu03_bindingfix_quality_no_cache_20261007_clean2\\nefc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6 cannbench_ds\\ne93f8e1ca42b64baf2bfa4ae59289f10dbaabc6069f70e7aa44e7956a9b0f54b agentgpu-910b4-qwen35-4b-v0\\n\", \"npu_smi\": \"+------------------------------------------------------------------------------------------------+\\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\\n+===========================+===============+====================================================+\\n| 0     910B4               | OK            | 152.4       52                0    / 0             |\\n| 0                         | 0000:C1:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 1     910B4               | OK            | 143.1       52                0    / 0             |\\n| 0                         | 0000:C2:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 2     910B4               | OK            | 146.5       53                0    / 0             |\\n| 0                         | 0000:81:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 3     910B4               | OK            | 142.3       53                0    / 0             |\\n| 0                         | 0000:82:00.0  | 55          0    / 0          31672/ 32768         |\\n+===========================+===============+====================================================+\\n| 4     910B4               | OK            | 92.9        45                0    / 0             |\\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\\n+===========================+===============+====================================================+\\n| 5     910B4               | OK            | 96.8        43                0    / 0             |\\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\\n+===========================+===============+====================================================+\\n| 6     910B4               | OK            | 95.5        44                0    / 0             |\\n| 0                         | 0000:41:00.0  | 0           0    / 0          2864 / 32768         |\\n+===========================+===============+====================================================+\\n| 7     910B4               | OK            | 86.2        45                0    / 0             |\\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\\n+===========================+===============+====================================================+\\n+---------------------------+---------------+----------------------------------------------------+\\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\\n+===========================+===============+====================================================+\\n| 0       0                 | 585850        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 1       0                 | 585851        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 2       0                 | 585852        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| 3       0                 | 585853        | VLLMWorker_TP            | 28858                   |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 4                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 5                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 6                                                            |\\n+===========================+===============+====================================================+\\n| No running processes found in NPU 7                                                            |\\n+===========================+===============+====================================================+\\n\", \"torch_imported\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 709,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 709,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 709
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 708,
+        "routeLookupMs": 0,
+        "totalMs": 708
+      }
+    },
+    "traceId": "2dbb93d6-cf78-42fa-ba4a-30b3023021af"
+  },
+  "operationId": "exec-0000000000000ec5",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

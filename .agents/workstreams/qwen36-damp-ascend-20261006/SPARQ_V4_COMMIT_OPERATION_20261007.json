@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import pathlib,subprocess,hashlib,json,os\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\ng=\"/usr/local/bin/git\";p=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\");paths=[\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/README.md\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/READY.md\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/consume_numeric.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/numeric_gate.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/preflight.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/__init__.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/core.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/oracle.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/proof.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/test_contract.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/receipt.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/host.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sitecustomize.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/model_bridge.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_terminal.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_operation_get_ma0e85.json\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_operation_get_ma0e7f_not_found.json\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/MAIN_REVIEW.md\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/MAIN_SOFTWARE_RECEIPT.json\"]\ndef run(args):\n q=subprocess.run([g]+args,cwd=p,capture_output=True,text=True,timeout=30);print(q.stdout);print(q.stderr);assert q.returncode==0,(args,q.returncode);return q.stdout\nassert run([\"rev-parse\",\"HEAD\"]).strip()==\"90a19853f546fbd71a1c4b892ae57740649ee3a6\"\nassert not run([\"diff\",\"--cached\",\"--name-only\"]).strip()\nr=p/\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v4\";m=json.loads((r/\"SOURCE_MANIFEST.json\").read_bytes())\nassert hashlib.sha256((r/\"SOURCE_MANIFEST.json\").read_bytes()).hexdigest()==\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"\nfor f,d in m[\"files\"].items():assert hashlib.sha256((r/f).read_bytes()).hexdigest()==d,f\nrun([\"add\",\"--\"]+paths);assert set(run([\"diff\",\"--cached\",\"--name-only\"]).splitlines())==set(paths)\nrun([\"diff\",\"--cached\",\"--check\"])\nrun([\"commit\",\"-m\",\"research: integrate reviewed default-off SparQ native-state v4 preparation\"])\nprint(\"NEW_HEAD\",run([\"rev-parse\",\"HEAD\"]).strip());run([\"status\",\"--short\",\"--branch\"])\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 115,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000ebe",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "90a19853f546fbd71a1c4b892ae57740649ee3a6\n\n\n\n\n\n\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/MAIN_REVIEW.md\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/MAIN_SOFTWARE_RECEIPT.json\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/README.md\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/READY.md\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/consume_numeric.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/host.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/model_bridge.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/numeric_gate.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_operation_get_ma0e7f_not_found.json\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_operation_get_ma0e85.json\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_terminal.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/preflight.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/receipt.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sitecustomize.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/__init__.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/core.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/oracle.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/proof.py\nprojects/qwen36-paper-portfolio/tools/sparq_token_native_v4/test_contract.py\n\n\n\n\n[work/qwen36-damp-ascend-20261006 6045371] research: integrate reviewed default-off SparQ native-state v4 preparation\n 20 files changed, 2140 insertions(+)\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/MAIN_REVIEW.md\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/MAIN_SOFTWARE_RECEIPT.json\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/README.md\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/READY.md\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/consume_numeric.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/host.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/model_bridge.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/numeric_gate.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_operation_get_ma0e7f_not_found.json\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_operation_get_ma0e85.json\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/original_terminal.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/preflight.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/receipt.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sitecustomize.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/__init__.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/core.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/oracle.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/sparq_token_v4/proof.py\n create mode 100644 projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/test_contract.py\n\n\n604537116d2f3fdaa85b894148cd59bfa4751667\n\n\nNEW_HEAD 604537116d2f3fdaa85b894148cd59bfa4751667\n## work/qwen36-damp-ascend-20261006...origin/work/qwen36-damp-ascend-20261006 [ahead 19]\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\n?? projects/damp-ascend/integration/integer_compaction_v1/\n?? projects/damp-ascend/integration/service_all_batch_v2/\n?? projects/damp-ascend/integration/service_assembly_v1/\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\n?? projects/damp-ascend/tools/final_plan_gate_v1/\n?? projects/damp-ascend/tools/host_memory_audit_v1/\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\n\n\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 374,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 374,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 374
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 373,
+        "routeLookupMs": 0,
+        "totalMs": 373
+      }
+    },
+    "traceId": "2687bd4a-10bc-4577-9a16-0bf5d62ff055"
+  },
+  "operationId": "exec-0000000000000ebe",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}
