@@ -106,3 +106,18 @@ three_run_decision_20261007:
   lifecycle_gate: Each exact candidate container was removed; last independent check found no NPU0-3 processes and port 8223 free. NPU4-7 and pre-existing sleep container were untouched.
   classification: partial-component. Runtime configuration repairs the measured no-cache Decode floor on this lane, but production adoption and HYPIC-enabled claims remain pending their own quality and activation gates. The underlying upstream CPU-pool allocation algorithm is not modified.
   next_action: Keep the opt-in repair disabled by default. If full adoption is required, predeclare feasible matched 2048-token quality plan and HYPIC-enabled formal A/B on only NPU0-3; do not change shared services or main yet.
+hypic_enabled_extension_20261007:
+  question: With the same supported CPU-binding-off repair on physical NPU0-3, does HYPIC retain its activation and its within-lane performance effect relative to no-cache?
+  arms: Reuse the three completed no-cache binding-off runs as the new paper-effect denominator; test HYPIC-only binding-off with identical image, model, source, TP4/AIV/graph, cpuset, benchmark bytes, 32768 input, 16384 shared prefix, 40 x 1024 fixed output, c16, two warmups, and three fresh service lifecycles.
+  historical_hypic_binding_on:
+    root: /cache/cch/hypic-qwen36-e2e-2048-20261006/hypic-only
+    run_sha256: [942dc0acf3c83787bc70394c98cd607deb0213412083c798e7bd2f1aafdbb678, f2c9df36f23708984645187ea3d354fe2f8c15075dec2ac0d0a43d567e1d8c6e, e6b77fa97960230ef6bb823ff9a1b2766289cbe45e7df125afe621667cf4bc10]
+    median_tpot_weighted_ms: 399.4520
+    median_ttft_p95_ms: 49169.5032
+  preflight: Recheck live physical NPU0-3 processes, running container device claims, port 8223, frozen source/image/model/benchmark and artifact hashes; never touch NPU4-7 or the pre-existing sleep container.
+  smoke: HYPIC-only binding-off 32768-token deterministic canary must exactly match the frozen HYPIC-only token IDs; 4 x 128 fixed outputs must all succeed; parsed CPU binding false and required HYPIC worker hot-path evidence must be present.
+  screen: After smoke, run one unprofiled 40 x 1024 c16 unit. Require 40/40 exact output, zero errors, HYPIC hot path verified, weighted TPOT at least 20 percent lower than the frozen HYPIC binding-on median, TTFT P95 no more than 10 percent above that median, and clean resource isolation/rollback.
+  repeats: If screen passes, run repeat2 and repeat3 with the identical contract and fresh lifecycles. Compare medians with both historical HYPIC binding-on (CPU-repair question) and current no-cache binding-off (paper-effect question).
+  paper_effect_gate: Require positive same-lane absolute HYPIC effect of at least 10 ms/token in median weighted TPOT and at least 10 seconds in median TTFT P95 relative to no-cache binding-off, plus hot-path proof and no safety regression. A missed gate is a measured negative for this repaired configuration, not evidence that the HYPIC algorithm is universally invalid.
+  quality_gate: A separate matched 41984-context, 2048-token natural-EOS LongBench-v2/GSM8K quality campaign is required for adoption. The prior 40960-context performance service and incomplete quality baseline cannot be reused as a full quality denominator. Estimate complete baseline-plus-treatment wall time and authorize a feasible controller before starting; preserve partial rows as incomplete-fail-fast if stopped.
+  decision: Keep performance, paper-effect, quality, and adoption decisions separate. Do not merge to main before independent artifact audit, release proof, and skill-verification ledger reconciliation.
