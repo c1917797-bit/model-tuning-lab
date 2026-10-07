@@ -2,6 +2,23 @@
 
 ## Actual redispatch — 2026-10-07 12:50Z
 
+### Count reconciliation — 2026-10-07
+
+After checking SOURCE_GAP_AUDIT_20261006.md, the active KVBuffer is separate
+from21 assigned successor candidates: lowbit6 (KIVI, SKVQ, FFD, KVarN, QQQ,
+W4A16); sparse8 (Ada-KV, Quest, SparQ, Self-Indexing, Kascade, FlashInfer,
+Narrow MatMul, Asymmetric Virtual Memory Paging/CachePawl2605.22416);
+recurrent7 (DeltaLog, SparsePrefix, DASC, MXR, GoodEnough, SSM-TP,
+D3/Position-Aware Depth Decay2503.08524v2). MAIN explicitly assigned the two
+previously unassigned source-audit candidates to their corresponding live
+groups. They do not change the current first-packet priorities or start formal
+24-hour device clocks. This count means preparation/evidence backlog, NOT21
+NPU-ready packets. No new successor has a completed MAIN numerical-ready
+admission; source, compile, NPU, serving, E2E and quality stages stay distinct.
+HYPIC historical success, closed DAMP, out-of-scope mechanisms and unresolved
+OpenReview metadata are not included. Source/applicability screens remain
+scoped, not new numerical rejection or accepted migration claims.
+
 The live collaboration inventory initially contained MAIN only: earlier named
 agents were not live. This was a real rolling-refill scheduling gap, not proof
 that the remaining papers were prepared. MAIN launched three fresh preparers;
