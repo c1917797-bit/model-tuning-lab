@@ -166,3 +166,19 @@ dense performance, and final task tests under the unchanged experiment contract.
   mutation, rewrite old cleanup, or relabel the failed parent. Later child writes
   may stale earlier partial refs; record that fact rather than updating old
   refs to manufacture PASS. See H8_FULL_V3_CONTROLLER_FAILURE_20261007.md.
+
+- Host source closure does not establish the container filesystem closure.
+  H8 full-v4 verified204 host sources and46 software checks, yet all four real
+  canaries failed before Torch/NPU because the readonly mount list omitted an
+  imported full-v3 packet and immutable failure-result ancestors. Derive all
+  actual source/artifact/evidence dependencies, validate exact RO destination
+  coverage, symlinks and writable overlap, then run the REAL source/admission
+  path in the same immutable image with Devices[] before reserving scarce cards.
+  This is not a numeric/performance gate. Preserve old failure and repair a new
+  packet; never blame the algorithm or repeat an unchanged device run.
+- A stored protected identity map and a live source helper's flat list are
+  distinct schemas. Use the source-defined protected_map conversion and compare
+  PID/start/cgroup/argv, not mutable RSS/HBM. MAIN's full-v4 readonly observer
+  failed at that mismatch after all four exact release checks; preserve its
+  exit1 and use a new READ-ONLY schema-corrected audit. No stop should be repeated.
+  See H8_FULL_V4_MOUNT_FAILURE_20261007.md.

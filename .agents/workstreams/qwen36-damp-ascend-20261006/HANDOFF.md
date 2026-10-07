@@ -1,5 +1,41 @@
 # DAMP Ascend — current workstream
 
+## Latest source-closure failure / corrected release — 2026-10-07 21:33Z
+
+The21:00 checkpoint below is historical. H8 full-v4 MA0fda is TERMINAL exit1:
+all four actual canaries fail at a missing read-only full-v3 ancestor contract
+before Torch/NPU; npu_executed=false, no matrix result. Source204/host software
+checks passed but did not prove the container filesystem. This was MAIN/preparer
+review failure, not paper no-go. Read H8_FULL_V4_MOUNT_FAILURE_20261007.md.
+
+Original RESULT4ee146... and cleanup4d200... are frozen; whole native terminal
+saved. The revised512MiB controller ledger stayed196096KiB; all four exact CIDs
+were stopped/retained. MAIN MA0ff1 observer's list/map mismatch is preserved.
+Separate source-corrected READ-ONLY MA0ff6 exit0 consumes original failed
+authority, verifies all four stopped/Pid0/noExec/noOOM, physical4–7 idle,
+protected0–3 unchanged and original RESULT unchanged. Never repeat stops.
+
+Recurrent preparer now freezes full-v5 with transitive source/evidence RO mount
+coverage and an ACTUAL same-image no-device source/admission stage BEFORE NPU.
+MAIN must review/run/consume that stage, not substitute host software tests.
+Original11520/tensor gates/SO/storage16/horizon8/clocks stay fixed.
+No current MAIN NPU job. While it is prepared, MAIN unique W4CPU005 MA0ffa
+is running no-device/no-model real imports,2GiB guest+.5GiB host+8GiB reserve/
+4CPU/760s bound; wait terminal/exact release before overlapping another CPUguest.
+MA0ffa is now TERMINAL exit0/68.048s; no-device real imports/schema/CPU packing
+and internal strict release consumer passed. Independent MAIN MA0fff exit0
+revalidated these actual receipts and stopped retained CPU guest. Read
+W4CPU005_SCOPED_RESULT_20261007.md; do not poll/restart imports. No new NPU,
+full240 matrix, model, PERF or task authority is implied.
+
+SparQv6-003 minimal cleanup/cutoff-source repair is PRIVATE software-only;
+MAIN canonical review/admission pending. Service successor also needs exact
+cleanup repair. Three actual rolling preparers continue. No newly accepted
+non-HYPIC matched E2E/quality result. KV Oct8 08:29:54Z and portfolio
+Oct9 11:17:31Z unchanged. Memory release32GiB authority COMPLETED/SPENT,
+OVS and its24GiB preserved; no extra release or outside0–3 action.
+Git known authentication blocker remains; local commits are not remote pushes.
+
 ## Current terminal and released-device checkpoint — 2026-10-07 21:00Z
 
 The prior20:48 RUNNING entry is superseded: KVBuffer full-v3 MA0f9d is

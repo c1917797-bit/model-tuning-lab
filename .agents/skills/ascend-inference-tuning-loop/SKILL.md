@@ -76,7 +76,12 @@ load. This rule does not guarantee the first real-device attempt will pass.
   for the first time after reserving scarce cards. Unrun prerequisites remain
   explicitly pending, never fabricated to mark a packet ready.
 - Test real CLI/aggregate entry points and the fresh-clone transitive source
-  closure, not only helper mocks. Old failed/software snapshots are historical
+  closure, not only helper mocks.
+  Before device reservation, execute the real source/admission path in a
+  same-image no-device container with exact read-only transitive source and
+  immutable-evidence mounts. Host imports alone do not prove container path
+  visibility; validate destination coverage and reject writable overlap.
+  Old failed/software snapshots are historical
   evidence, not current source manifests; retain them without rewriting pins.
   Check required plugin names in their actual platform/general entrypoint groups,
   not one invented group. Reuse SHA-verified valid child results when a parent

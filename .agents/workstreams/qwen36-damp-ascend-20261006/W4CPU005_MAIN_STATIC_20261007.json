@@ -1,0 +1,95 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import ast,difflib,hashlib,importlib.util,json,resource,subprocess,sys\\nfrom pathlib import Path\\nbase=Path(sys.argv[1]);out=Path(sys.argv[2]);old=base.with_name('w4a16-native-budget-review-v1-004')\\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY));resource.setrlimit(resource.RLIMIT_CPU,(15,15))\\nmanifest=json.loads((base/'SOURCE_HASHES.json').read_bytes())\\nfor n,expected in manifest['file_sha256'].items():assert hashlib.sha256((base/n).read_bytes()).hexdigest()==expected,n\\nbefore=(old/'MAIN_CPU_DEPENDENCY_PROBE.py').read_text();after=(base/'MAIN_CPU_DEPENDENCY_PROBE.py').read_text()\\nactual=''.join(difflib.unified_diff(before.splitlines(True),after.splitlines(True),fromfile=str(old/'MAIN_CPU_DEPENDENCY_PROBE.py'),tofile=str(base/'MAIN_CPU_DEPENDENCY_PROBE.py')))\\nassert actual==(base/'V004_TO_V005_EXACT.diff').read_text()\\nassert not out.exists() and not out.is_symlink()\\nast.parse(after);sp=importlib.util.spec_from_file_location('_main_w4cpu005',base/'MAIN_CPU_DEPENDENCY_PROBE.py');m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m)\\nfiles,hashes=m.sources(m.DRAFT);assert len(files)==26\\nh,pins=m.cpu_helper();before=m.observed_cpu(h,__import__('os').getpid());daemon=h.daemon_view();d=m.observed_cpu(h,daemon['process']['pid'])\\nallocation=h.cpu_admission(before,d)\\ncp=subprocess.run(['/usr/bin/python3','-B',str(base/'MAIN_CPU_DEPENDENCY_PROBE.py')],capture_output=True,text=True,timeout=10);assert cp.returncode==0,cp.stderr\\nassert json.loads(cp.stdout)['default_enabled'] is False\\nmem={l.split(':')[0]:int(l.split()[1])*1024 for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith(('MemAvailable:','SwapTotal:','SwapFree:'))}\\nassert mem['SwapTotal']==mem['SwapFree'] and mem['MemAvailable']>=m.MEM+m.WATCHDOG+m.RESERVE\\nprint(json.dumps(dict(source9_actual_hashes=True,exact_diff_to004_verified=True,frozen_algorithm26_verified=True,default_off_actual=cp.stdout,helper_sources=pins,actual_summed_cpu=allocation,mem=mem,output_must_not_exist=str(out),noDockerNoTorchNoNPU=True)),flush=True)\\n\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/w4a16-native-budget-review-v1-005\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 320,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000ff7\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"source9_actual_hashes\\\": true, \\\"exact_diff_to004_verified\\\": true, \\\"frozen_algorithm26_verified\\\": true, \\\"default_off_actual\\\": \\\"{\\\\\\\"default_enabled\\\\\\\": false, \\\\\\\"native_ready\\\\\\\": false, \\\\\\\"npu_executed\\\\\\\": false, \\\\\\\"numeric_admission\\\\\\\": false, \\\\\\\"original_matrix_cases\\\\\\\": 240, \\\\\\\"original_matrix_steps\\\\\\\": 19560, \\\\\\\"pending\\\\\\\": \\\\\\\"MAIN actual execution; no Torch imported by default\\\\\\\", \\\\\\\"phase\\\\\\\": \\\\\\\"MAIN CPU-only compiled import/schema proof\\\\\\\", \\\\\\\"summed_ordinary_floor\\\\\\\": 11274289152}\\\\n\\\", \\\"helper_sources\\\": {\\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py\\\": \\\"4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20\\\", \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py\\\": \\\"ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86\\\", \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py\\\": \\\"86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc\\\"}, \\\"actual_summed_cpu\\\": {\\\"host_cpu\\\": 0, \\\"guest_cpu\\\": 1, \\\"reserve_cpus\\\": [2, 3], \\\"host_cpu_budget\\\": 1, \\\"guest_cpu_budget\\\": 1, \\\"reserve_cpu_budget\\\": 2, \\\"common_finite_capacity\\\": null, \\\"future_external_guarantee\\\": false}, \\\"mem\\\": {\\\"MemAvailable\\\": 96298184704, \\\"SwapTotal\\\": 0, \\\"SwapFree\\\": 0}, \\\"output_must_not_exist\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005\\\", \\\"noDockerNoTorchNoNPU\\\": true}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 619,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 619,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 619\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 619,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 619\n      }\n    },\n    \"traceId\": \"911e9992-1001-4d83-aa2c-81705ee66391\"\n  },\n  \"operationId\": \"exec-0000000000000ff7\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import ast,difflib,hashlib,importlib.util,json,resource,subprocess,sys\nfrom pathlib import Path\nbase=Path(sys.argv[1]);out=Path(sys.argv[2]);old=base.with_name('w4a16-native-budget-review-v1-004')\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY));resource.setrlimit(resource.RLIMIT_CPU,(15,15))\nmanifest=json.loads((base/'SOURCE_HASHES.json').read_bytes())\nfor n,expected in manifest['file_sha256'].items():assert hashlib.sha256((base/n).read_bytes()).hexdigest()==expected,n\nbefore=(old/'MAIN_CPU_DEPENDENCY_PROBE.py').read_text();after=(base/'MAIN_CPU_DEPENDENCY_PROBE.py').read_text()\nactual=''.join(difflib.unified_diff(before.splitlines(True),after.splitlines(True),fromfile=str(old/'MAIN_CPU_DEPENDENCY_PROBE.py'),tofile=str(base/'MAIN_CPU_DEPENDENCY_PROBE.py')))\nassert actual==(base/'V004_TO_V005_EXACT.diff').read_text()\nassert not out.exists() and not out.is_symlink()\nast.parse(after);sp=importlib.util.spec_from_file_location('_main_w4cpu005',base/'MAIN_CPU_DEPENDENCY_PROBE.py');m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m)\nfiles,hashes=m.sources(m.DRAFT);assert len(files)==26\nh,pins=m.cpu_helper();before=m.observed_cpu(h,__import__('os').getpid());daemon=h.daemon_view();d=m.observed_cpu(h,daemon['process']['pid'])\nallocation=h.cpu_admission(before,d)\ncp=subprocess.run(['/usr/bin/python3','-B',str(base/'MAIN_CPU_DEPENDENCY_PROBE.py')],capture_output=True,text=True,timeout=10);assert cp.returncode==0,cp.stderr\nassert json.loads(cp.stdout)['default_enabled'] is False\nmem={l.split(':')[0]:int(l.split()[1])*1024 for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith(('MemAvailable:','SwapTotal:','SwapFree:'))}\nassert mem['SwapTotal']==mem['SwapFree'] and mem['MemAvailable']>=m.MEM+m.WATCHDOG+m.RESERVE\nprint(json.dumps(dict(source9_actual_hashes=True,exact_diff_to004_verified=True,frozen_algorithm26_verified=True,default_off_actual=cp.stdout,helper_sources=pins,actual_summed_cpu=allocation,mem=mem,output_must_not_exist=str(out),noDockerNoTorchNoNPU=True)),flush=True)\n",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/w4a16-native-budget-review-v1-005",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 320,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000ff7",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"source9_actual_hashes\": true, \"exact_diff_to004_verified\": true, \"frozen_algorithm26_verified\": true, \"default_off_actual\": \"{\\\"default_enabled\\\": false, \\\"native_ready\\\": false, \\\"npu_executed\\\": false, \\\"numeric_admission\\\": false, \\\"original_matrix_cases\\\": 240, \\\"original_matrix_steps\\\": 19560, \\\"pending\\\": \\\"MAIN actual execution; no Torch imported by default\\\", \\\"phase\\\": \\\"MAIN CPU-only compiled import/schema proof\\\", \\\"summed_ordinary_floor\\\": 11274289152}\\n\", \"helper_sources\": {\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py\": \"4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py\": \"ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py\": \"86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc\"}, \"actual_summed_cpu\": {\"host_cpu\": 0, \"guest_cpu\": 1, \"reserve_cpus\": [2, 3], \"host_cpu_budget\": 1, \"guest_cpu_budget\": 1, \"reserve_cpu_budget\": 2, \"common_finite_capacity\": null, \"future_external_guarantee\": false}, \"mem\": {\"MemAvailable\": 96298184704, \"SwapTotal\": 0, \"SwapFree\": 0}, \"output_must_not_exist\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005\", \"noDockerNoTorchNoNPU\": true}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 619,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 619,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 619
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 619,
+          "routeLookupMs": 0,
+          "totalMs": 619
+        }
+      },
+      "traceId": "911e9992-1001-4d83-aa2c-81705ee66391"
+    },
+    "operationId": "exec-0000000000000ff7",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

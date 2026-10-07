@@ -1,0 +1,84 @@
+{
+  "input": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route": {
+      "mode": "force_direct",
+      "logicalGatewayId": "tpc"
+    },
+    "command": "/usr/bin/python3",
+    "args": [
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/w4a16-native-budget-review-v1-005/MAIN_CPU_DEPENDENCY_PROBE.py",
+      "--execute-imports",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005"
+    ],
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "timeout": 760,
+    "maxOutputBytes": 24000,
+    "sync": false,
+    "idempotencyKey": "main-w4cpu005-actual-no-device-imports-20261007-2133-001"
+  },
+  "ack": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-w4cpu005-actual-no-device-imports-20261007-2133-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-0000000000000ffa\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 5000,\n  \"result\": {\n    \"execId\": \"exec-0000000000000ffa\",\n    \"lane\": \"job\",\n    \"ok\": true,\n    \"pollAfterMs\": 250,\n    \"running\": true,\n    \"state\": \"running\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 345,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 345,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1419,\n      \"totalMs\": 1764\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 344,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 344\n    }\n  },\n  \"traceId\": \"3b2e05de-379d-452b-9739-73da6e7220f5\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "cancelTool": "operation_cancel",
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "idempotencyKey": "main-w4cpu005-actual-no-device-imports-20261007-2133-001",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "operationId": "exec-0000000000000ffa",
+      "operationKind": "exec",
+      "pollTool": "operation_get",
+      "requestDeadlineMs": 5000,
+      "result": {
+        "execId": "exec-0000000000000ffa",
+        "lane": "job",
+        "ok": true,
+        "pollAfterMs": 250,
+        "running": true,
+        "state": "running"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 345,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 345,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 1419,
+          "totalMs": 1764
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 344,
+          "routeLookupMs": 0,
+          "totalMs": 344
+        }
+      },
+      "traceId": "3b2e05de-379d-452b-9739-73da6e7220f5"
+    },
+    "isError": false
+  }
+}

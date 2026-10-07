@@ -1,0 +1,94 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import hashlib,importlib.util,json,os,resource,subprocess,sys\\nfrom pathlib import Path\\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY));resource.setrlimit(resource.RLIMIT_CPU,(20,20));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\\nbase=Path(sys.argv[1])\\nfor n,want in [('SOURCE_MANIFEST.json','5c62c669d167bb4582eb5ba914f133ab6eac6c45f24cef6829bc534255ee47af'),('MAIN_EXECUTE.json','32f6205c690823b12eaaa682729a5c01a689c3ccfccd0bc8ee0a4468911082b4')]:\\n assert hashlib.sha256((base/n).read_bytes()).hexdigest()==want\\nmanifest=json.loads((base/'SOURCE_MANIFEST.json').read_bytes())\\nassert len(manifest['files'])==31 and len(manifest['controller_ancestor_sources'])==173\\nfor n,want in manifest['files'].items():assert hashlib.sha256((base/n).read_bytes()).hexdigest()==want,n\\nfor n,want in manifest['controller_ancestor_sources'].items():assert hashlib.sha256(Path(n).read_bytes()).hexdigest()==want,n\\nsys.path.insert(0,str(base));import host\\ncli=json.loads((base/'MAIN_EXECUTE.json').read_bytes())\\nassert cli['argv'][:6]==['/usr/bin/prlimit','--as=unlimited','--nofile=1024:1024','--','/usr/bin/python3','-B']\\nargv=cli['argv'][7:];a=host.parser().parse_args(argv)\\nassert a.execute and not a.inside_canary and not a.source_audit_only\\nsr,m,s,ar,art=host.source_inputs(a);assert len(s)==204\\nwarm=host.c.validate_warm({'path':str(a.warm_result),'sha256':a.warm_result_sha256},{'path':str(a.warm_original_operation),'sha256':a.warm_original_operation_sha256})\\nassert warm['warm_diagnostic_success'] and not warm['full11520_verified']\\nassert not a.output_dir.exists() and not a.output_dir.is_symlink() and a.output_dir.parent==base.parent\\nassert host.HOST_MEM==536870912 and host.HOST_VAS==268435456 and host.LEASE==5400 and host.CLEANUP==180\\ncp=subprocess.run(['/usr/bin/python3','-B',str(base/'software_runner.py')],capture_output=True,text=True,timeout=25)\\nprint(json.dumps(dict(argv=cp.args,exit_code=cp.returncode,stdout=cp.stdout,stderr=cp.stderr)),flush=True);assert cp.returncode==0\\nassert 'torch' not in sys.modules and 'torch_npu' not in sys.modules\\nprint(json.dumps(dict(MAIN_static_source_and_protocol_passed=True,source_count=204,own_sources=31,old173_unmodified=True,software_tests=46,npu_executed=False,docker_executed=False,actual_native_cpu_ABI_executed=False,whole512MiB_sampled_budget=True,python_VAS256MiB=True,ordinary_floor_gib=40.5,host_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,child_peak_rss_kib=resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss,new_output_absent=True)),flush=True)\\n\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 10436,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000fd6\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"argv\\\": [\\\"/usr/bin/python3\\\", \\\"-B\\\", \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/software_runner.py\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"{\\\\\\\"schema\\\\\\\": \\\\\\\"kvbp.h8-full-actual-software/v4\\\\\\\", \\\\\\\"command\\\\\\\": [\\\\\\\"/usr/bin/python3\\\\\\\", \\\\\\\"-B\\\\\\\", \\\\\\\"-m\\\\\\\", \\\\\\\"unittest\\\\\\\", \\\\\\\"discover\\\\\\\", \\\\\\\"-s\\\\\\\", \\\\\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller\\\\\\\", \\\\\\\"-p\\\\\\\", \\\\\\\"test_*.py\\\\\\\"], \\\\\\\"exit_code\\\\\\\": 0, \\\\\\\"stdout\\\\\\\": \\\\\\\"\\\\\\\", \\\\\\\"stderr\\\\\\\": \\\\\\\"..............................................\\\\\\\\n----------------------------------------------------------------------\\\\\\\\nRan 46 tests in 2.894s\\\\\\\\n\\\\\\\\nOK\\\\\\\\n\\\\\\\", \\\\\\\"elapsed_seconds\\\\\\\": 3.111232769966591, \\\\\\\"host_peak_rss_kib\\\\\\\": 137876, \\\\\\\"child_peak_rss_kib\\\\\\\": 28592, \\\\\\\"aggregate_peak_rss_kib\\\\\\\": 166468, \\\\\\\"affinity\\\\\\\": [0], \\\\\\\"torch_imported\\\\\\\": false, \\\\\\\"npu_executed\\\\\\\": false, \\\\\\\"native_compile_executed\\\\\\\": false, \\\\\\\"numeric_executed\\\\\\\": false, \\\\\\\"model_executed\\\\\\\": false, \\\\\\\"e2e_executed\\\\\\\": false}\\\\n\\\", \\\"stderr\\\": \\\"\\\"}\\n{\\\"MAIN_static_source_and_protocol_passed\\\": true, \\\"source_count\\\": 204, \\\"own_sources\\\": 31, \\\"old173_unmodified\\\": true, \\\"software_tests\\\": 46, \\\"npu_executed\\\": false, \\\"docker_executed\\\": false, \\\"actual_native_cpu_ABI_executed\\\": false, \\\"whole512MiB_sampled_budget\\\": true, \\\"python_VAS256MiB\\\": true, \\\"ordinary_floor_gib\\\": 40.5, \\\"host_rss_kib\\\": 137876, \\\"child_peak_rss_kib\\\": 137876, \\\"new_output_absent\\\": true}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 350,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 350,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 350\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 349,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 349\n      }\n    },\n    \"traceId\": \"cf732b5a-b723-48c3-b663-5967879b8cb7\"\n  },\n  \"operationId\": \"exec-0000000000000fd6\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import hashlib,importlib.util,json,os,resource,subprocess,sys\nfrom pathlib import Path\nresource.setrlimit(resource.RLIMIT_AS,(268435456,resource.RLIM_INFINITY));resource.setrlimit(resource.RLIMIT_CPU,(20,20));os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nbase=Path(sys.argv[1])\nfor n,want in [('SOURCE_MANIFEST.json','5c62c669d167bb4582eb5ba914f133ab6eac6c45f24cef6829bc534255ee47af'),('MAIN_EXECUTE.json','32f6205c690823b12eaaa682729a5c01a689c3ccfccd0bc8ee0a4468911082b4')]:\n assert hashlib.sha256((base/n).read_bytes()).hexdigest()==want\nmanifest=json.loads((base/'SOURCE_MANIFEST.json').read_bytes())\nassert len(manifest['files'])==31 and len(manifest['controller_ancestor_sources'])==173\nfor n,want in manifest['files'].items():assert hashlib.sha256((base/n).read_bytes()).hexdigest()==want,n\nfor n,want in manifest['controller_ancestor_sources'].items():assert hashlib.sha256(Path(n).read_bytes()).hexdigest()==want,n\nsys.path.insert(0,str(base));import host\ncli=json.loads((base/'MAIN_EXECUTE.json').read_bytes())\nassert cli['argv'][:6]==['/usr/bin/prlimit','--as=unlimited','--nofile=1024:1024','--','/usr/bin/python3','-B']\nargv=cli['argv'][7:];a=host.parser().parse_args(argv)\nassert a.execute and not a.inside_canary and not a.source_audit_only\nsr,m,s,ar,art=host.source_inputs(a);assert len(s)==204\nwarm=host.c.validate_warm({'path':str(a.warm_result),'sha256':a.warm_result_sha256},{'path':str(a.warm_original_operation),'sha256':a.warm_original_operation_sha256})\nassert warm['warm_diagnostic_success'] and not warm['full11520_verified']\nassert not a.output_dir.exists() and not a.output_dir.is_symlink() and a.output_dir.parent==base.parent\nassert host.HOST_MEM==536870912 and host.HOST_VAS==268435456 and host.LEASE==5400 and host.CLEANUP==180\ncp=subprocess.run(['/usr/bin/python3','-B',str(base/'software_runner.py')],capture_output=True,text=True,timeout=25)\nprint(json.dumps(dict(argv=cp.args,exit_code=cp.returncode,stdout=cp.stdout,stderr=cp.stderr)),flush=True);assert cp.returncode==0\nassert 'torch' not in sys.modules and 'torch_npu' not in sys.modules\nprint(json.dumps(dict(MAIN_static_source_and_protocol_passed=True,source_count=204,own_sources=31,old173_unmodified=True,software_tests=46,npu_executed=False,docker_executed=False,actual_native_cpu_ABI_executed=False,whole512MiB_sampled_budget=True,python_VAS256MiB=True,ordinary_floor_gib=40.5,host_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,child_peak_rss_kib=resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss,new_output_absent=True)),flush=True)\n",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 10436,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000fd6",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"argv\": [\"/usr/bin/python3\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/software_runner.py\"], \"exit_code\": 0, \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-full-actual-software/v4\\\", \\\"command\\\": [\\\"/usr/bin/python3\\\", \\\"-B\\\", \\\"-m\\\", \\\"unittest\\\", \\\"discover\\\", \\\"-s\\\", \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller\\\", \\\"-p\\\", \\\"test_*.py\\\"], \\\"exit_code\\\": 0, \\\"stdout\\\": \\\"\\\", \\\"stderr\\\": \\\"..............................................\\\\n----------------------------------------------------------------------\\\\nRan 46 tests in 2.894s\\\\n\\\\nOK\\\\n\\\", \\\"elapsed_seconds\\\": 3.111232769966591, \\\"host_peak_rss_kib\\\": 137876, \\\"child_peak_rss_kib\\\": 28592, \\\"aggregate_peak_rss_kib\\\": 166468, \\\"affinity\\\": [0], \\\"torch_imported\\\": false, \\\"npu_executed\\\": false, \\\"native_compile_executed\\\": false, \\\"numeric_executed\\\": false, \\\"model_executed\\\": false, \\\"e2e_executed\\\": false}\\n\", \"stderr\": \"\"}\n{\"MAIN_static_source_and_protocol_passed\": true, \"source_count\": 204, \"own_sources\": 31, \"old173_unmodified\": true, \"software_tests\": 46, \"npu_executed\": false, \"docker_executed\": false, \"actual_native_cpu_ABI_executed\": false, \"whole512MiB_sampled_budget\": true, \"python_VAS256MiB\": true, \"ordinary_floor_gib\": 40.5, \"host_rss_kib\": 137876, \"child_peak_rss_kib\": 137876, \"new_output_absent\": true}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 350,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 350,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 350
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 349,
+          "routeLookupMs": 0,
+          "totalMs": 349
+        }
+      },
+      "traceId": "cf732b5a-b723-48c3-b663-5967879b8cb7"
+    },
+    "operationId": "exec-0000000000000fd6",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

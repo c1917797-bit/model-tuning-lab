@@ -1,0 +1,94 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/w4a16-native-budget-review-v1-005/MAIN_CPU_DEPENDENCY_PROBE.py\",\n          \"--consume-only\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 300,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000fff\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"CPU_packing_only\\\": true, \\\"actual_summed_cpu_admission\\\": true, \\\"compiled_schema_import_observed\\\": true, \\\"cpu_admission_sha256\\\": \\\"98aec7e2d0ceb119b57000b5097b06593b99e8875cf03c73bafce420c08ebdae\\\", \\\"dependency_sha256\\\": \\\"4ac0e1b059ef96e0ac240e61e9f49eba1d03af46996506fed9e0d3cc68df2da3\\\", \\\"host_receipt_sha256\\\": \\\"e389a5a458d66be71d11e829712cd24bf51d9bd37fcc2515871520be0fa37322\\\", \\\"identity_sha256\\\": \\\"dfc2aed1698c11bba08f776d9c96e1f5c5dbf78e5f74541868d1aba0d63f0770\\\", \\\"native_ready\\\": false, \\\"npu_executed\\\": false, \\\"numeric_admission\\\": false, \\\"original_matrix_cases\\\": 240, \\\"original_matrix_steps\\\": 19560, \\\"pending\\\": [\\\"actual NPU packing equality\\\", \\\"opaque CANN/workspace and NPUGraph actual peak\\\", \\\"full original240 numerical/guard/changedgraph160\\\", \\\"model payload provenance/service\\\"], \\\"release_sha256\\\": \\\"3554bbd24afdd83423b147036a7fc0942e82f6ae6c71b5390cd11c6a9df2a712\\\", \\\"schema\\\": \\\"w4a16-CPU-dependency-consumed/v5\\\", \\\"status\\\": \\\"CPU_import_schema_only_consumed\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 335,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 335,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 335\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 335,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 335\n      }\n    },\n    \"traceId\": \"427549cf-39d7-4518-a5b4-6f03269bf16e\"\n  },\n  \"operationId\": \"exec-0000000000000fff\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/w4a16-native-budget-review-v1-005/MAIN_CPU_DEPENDENCY_PROBE.py",
+            "--consume-only",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-w4-import-dependency-20261008-005"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 300,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000fff",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"CPU_packing_only\": true, \"actual_summed_cpu_admission\": true, \"compiled_schema_import_observed\": true, \"cpu_admission_sha256\": \"98aec7e2d0ceb119b57000b5097b06593b99e8875cf03c73bafce420c08ebdae\", \"dependency_sha256\": \"4ac0e1b059ef96e0ac240e61e9f49eba1d03af46996506fed9e0d3cc68df2da3\", \"host_receipt_sha256\": \"e389a5a458d66be71d11e829712cd24bf51d9bd37fcc2515871520be0fa37322\", \"identity_sha256\": \"dfc2aed1698c11bba08f776d9c96e1f5c5dbf78e5f74541868d1aba0d63f0770\", \"native_ready\": false, \"npu_executed\": false, \"numeric_admission\": false, \"original_matrix_cases\": 240, \"original_matrix_steps\": 19560, \"pending\": [\"actual NPU packing equality\", \"opaque CANN/workspace and NPUGraph actual peak\", \"full original240 numerical/guard/changedgraph160\", \"model payload provenance/service\"], \"release_sha256\": \"3554bbd24afdd83423b147036a7fc0942e82f6ae6c71b5390cd11c6a9df2a712\", \"schema\": \"w4a16-CPU-dependency-consumed/v5\", \"status\": \"CPU_import_schema_only_consumed\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 335,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 335,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 335
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 335,
+          "routeLookupMs": 0,
+          "totalMs": 335
+        }
+      },
+      "traceId": "427549cf-39d7-4518-a5b4-6f03269bf16e"
+    },
+    "operationId": "exec-0000000000000fff",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

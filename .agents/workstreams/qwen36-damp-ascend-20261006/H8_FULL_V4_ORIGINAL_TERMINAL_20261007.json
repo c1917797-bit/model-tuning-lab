@@ -1,0 +1,123 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=unlimited\",\n          \"--nofile=1024:1024\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\",\n          \"--execute\",\n          \"--source-manifest\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/SOURCE_MANIFEST.json\",\n          \"--source-manifest-sha256\",\n          \"5c62c669d167bb4582eb5ba914f133ab6eac6c45f24cef6829bc534255ee47af\",\n          \"--library\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\",\n          \"--library-sha256\",\n          \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\",\n          \"--build-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\",\n          \"--build-receipt-sha256\",\n          \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\",\n          \"--meta-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\",\n          \"--meta-receipt-sha256\",\n          \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\",\n          \"--warm-result\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json\",\n          \"--warm-result-sha256\",\n          \"9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e\",\n          \"--warm-original-operation\",\n          \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json\",\n          \"--warm-original-operation-sha256\",\n          \"2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5\",\n          \"--output-dir\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v4-controller-20261007-001\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 74341,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000000fda\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\\\", line 454, in <module>\\n    if __name__==\\\"__main__\\\":sys.exit(main())\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\\\", line 452, in main\\n    execute(a)\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\\\", line 429, in execute\\n    if j.primary is not None:raise j.primary\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\\\", line 362, in execute\\n    canary_children=j.wait(\\\"canary\\\")\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\\\", line 273, in wait\\n    require(p.returncode==0,\\\"first real \\\"+stage+\\\" child failure on physical\\\"+str(card))\\n  File \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/contract.py\\\", line 33, in require\\n    if not ok: raise ValueError(why)\\nValueError: first real canary child failure on physical4\\n\",\n        \"stdout\": \"MAIN_H8_FULL {\\\"result\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v4-controller-20261007-001/RESULT.json\\\", \\\"sha256\\\": \\\"4ee146f4435045b79b7f3a06333fddb987e4ae1567c025d68a9b1117e3c8cafc\\\"}, \\\"status\\\": \\\"failed\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 355,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 355,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 355\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 355,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 355\n      }\n    },\n    \"traceId\": \"caceef68-69fe-413b-9c77-0ba632c31726\"\n  },\n  \"operationId\": \"exec-0000000000000fda\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=unlimited",
+            "--nofile=1024:1024",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py",
+            "--execute",
+            "--source-manifest",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/SOURCE_MANIFEST.json",
+            "--source-manifest-sha256",
+            "5c62c669d167bb4582eb5ba914f133ab6eac6c45f24cef6829bc534255ee47af",
+            "--library",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+            "--library-sha256",
+            "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+            "--build-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+            "--build-receipt-sha256",
+            "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+            "--meta-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+            "--meta-receipt-sha256",
+            "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03",
+            "--warm-result",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-warm-prelude-b6-20261007-001/RESULT.json",
+            "--warm-result-sha256",
+            "9e97bc1d251a15ebb27ca32bbba4962c6a735ed9c329c8b5f03c0767f716b26e",
+            "--warm-original-operation",
+            "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/H8_WARM_ORIGINAL_TERMINAL_20261007.json",
+            "--warm-original-operation-sha256",
+            "2faf8bd403fcc8564e570c7fa07e711da833ef1fa92cad761754e2ea4d4116c5",
+            "--output-dir",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v4-controller-20261007-001"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 74341,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000fda",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\", line 454, in <module>\n    if __name__==\"__main__\":sys.exit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\", line 452, in main\n    execute(a)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\", line 429, in execute\n    if j.primary is not None:raise j.primary\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\", line 362, in execute\n    canary_children=j.wait(\"canary\")\n  File \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-full-runtime-v4-controller/host.py\", line 273, in wait\n    require(p.returncode==0,\"first real \"+stage+\" child failure on physical\"+str(card))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_v3/contract.py\", line 33, in require\n    if not ok: raise ValueError(why)\nValueError: first real canary child failure on physical4\n",
+          "stdout": "MAIN_H8_FULL {\"result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v4-controller-20261007-001/RESULT.json\", \"sha256\": \"4ee146f4435045b79b7f3a06333fddb987e4ae1567c025d68a9b1117e3c8cafc\"}, \"status\": \"failed\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 355,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 355,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 355
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 355,
+          "routeLookupMs": 0,
+          "totalMs": 355
+        }
+      },
+      "traceId": "caceef68-69fe-413b-9c77-0ba632c31726"
+    },
+    "operationId": "exec-0000000000000fda",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}
