@@ -1,0 +1,88 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=268435456:unlimited",
+          "--cpu=30",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "-c",
+          "import ast,hashlib,json,os,pathlib,subprocess,sys\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\np=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4\");m=json.loads((p/\"SOURCE_MANIFEST.json\").read_bytes())\nassert hashlib.sha256((p/\"SOURCE_MANIFEST.json\").read_bytes()).hexdigest()==\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"\nfor f,d in m[\"files\"].items():\n b=(p/f).read_bytes();assert hashlib.sha256(b).hexdigest()==d,f\n if f.endswith(\".py\"):ast.parse(b,filename=str(p/f))\nfor f,d in m[\"dependencies\"].items():assert hashlib.sha256(pathlib.Path(f).read_bytes()).hexdigest()==d,f\nenv=dict(os.environ);env[\"PYTHONDONTWRITEBYTECODE\"]=\"1\";env[\"TORCH_DEVICE_BACKEND_AUTOLOAD\"]=\"0\";env[\"PYTHONPATH\"]=\"\"\ncommands=[]\nfor args in ([\"test_contract.py\"],[\"numeric_gate.py\"],[\"consume_numeric.py\"],[\"model_bridge.py\"],[\"numeric_gate.py\",\"--source-audit-only\",\"--source-manifest\",str(p/\"SOURCE_MANIFEST.json\"),\"--source-manifest-sha256\",\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"]):\n argv=[\"/usr/bin/python3\",\"-B\",str(p/args[0]),*args[1:]]\n q=subprocess.run(argv,cwd=p,capture_output=True,text=True,timeout=15,env=env)\n commands.append({\"argv\":argv,\"exit\":q.returncode,\"stdout\":q.stdout,\"stderr\":q.stderr})\nprint(json.dumps({\"schema\":\"MAIN.sparq-v4-actual-entry-software/v1\",\"commands\":commands,\"source_sha\":\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\",\"source_count\":23,\"npu_executed\":False,\"Docker_executed\":False,\"actual_cpu_torch_golden_pending\":True,\"ready\":False,\"actual_affinity\":sorted(os.sched_getaffinity(0))}))\nassert all(c[\"exit\"]==0 for c in commands)\nq=subprocess.run([\"/bin/bash\",\"scripts/validate-mst.sh\"],cwd=\"/opt/host/vnf/austinov/model-tuning-lab\",capture_output=True,text=True,timeout=30);print(q.stdout);print(q.stderr);assert q.returncode==0\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 1097,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000eb2",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"schema\": \"MAIN.sparq-v4-actual-entry-software/v1\", \"commands\": [{\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/test_contract.py\"], \"exit\": 0, \"stdout\": \"\", \"stderr\": \"test_full_support_is_exact_and_mean_toggle_not_invented_gain (__main__.Equation) ... ok\\ntest_gqa_common_support_and_head_specific_mass (__main__.Equation) ... ok\\ntest_local_forced_and_token_not_page (__main__.Equation) ... ok\\ntest_mean_correction_scalar_identity (__main__.Equation) ... ok\\ntest_zero_query_defined_stable_tie_adaptation (__main__.Equation) ... ok\\ntest_duplicate_append_is_rejected (__main__.Mean) ... ok\\ntest_finished_slot_aba (__main__.Mean) ... ok\\ntest_native_lease_and_paused_requests (__main__.Mean) ... ok\\ntest_slot_alias_or_bool_rejected (__main__.Mean) ... ok\\ntest_actual_attention_writer_precedes_forward_impl (__main__.PreNpuActualSourceRegression) ... ok\\ntest_actual_envelope_negative_variants (__main__.PreNpuActualSourceRegression) ... ok\\ntest_actual_original_not_found_rejected (__main__.PreNpuActualSourceRegression) ... ok\\ntest_actual_original_operation_get_not_flattened (__main__.PreNpuActualSourceRegression) ... ok\\ntest_cpu_fp64_actual_runtime_guard_positive_negative (__main__.PreNpuActualSourceRegression) ... ok\\ntest_cpu_golden_smoke_is_in_predevice_actual_producer (__main__.PreNpuActualSourceRegression) ... ok\\ntest_formal_event_is_debug_off (__main__.PreNpuActualSourceRegression) ... ok\\ntest_golden_original_V_selected_V_mean_are_cpu_fp64 (__main__.PreNpuActualSourceRegression) ... ok\\ntest_support_queries_keep_independent_feedback (__main__.PreNpuActualSourceRegression) ... ok\\ntest_all_cases_hardware_scope_stays_pending_in_consumer (__main__.Receipts) ... ok\\ntest_cpu_double_oracle_not_native_candidate (__main__.Receipts) ... ok\\ntest_default_cli_no_torch (__main__.Receipts) ... ok\\ntest_every_static_topology_and_guards_in_source (__main__.Receipts) ... ok\\ntest_full_cli_marker_pure_contract_not_NPU_PASS (__main__.Receipts) ... ok\\ntest_missing_duplicate_marker_rejected (__main__.Receipts) ... ok\\ntest_original_typed_terminal_failures_actual_file_ref (__main__.Receipts) ... ok\\ntest_per_head_no_old_batch_mean_in_gate (__main__.Receipts) ... ok\\ntest_report_hash_marker_source_proof_changes_fail_closed (__main__.Receipts) ... ok\\ntest_same_flag_substring_different_actual_cli_rejected (__main__.Receipts) ... ok\\ntest_twelve_source_count_graph3_scope (__main__.Receipts) ... ok\\ntest_wrong_peer_and_original_marker_missing_not_pass (__main__.Receipts) ... ok\\ntest_graph_path_has_no_known_host_tensor_copy (__main__.Source) ... ok\\ntest_native_writer_source_pin_is_actual (__main__.Source) ... ok\\ntest_actual_deployed_model_sources_and_real_interface (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_eager_bridge_not_full_graph_and_not_double_KV_writer (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_finished_reuse_new_generation_no_stale_alias (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_full_native_consumer_pending_service_requires_real_host (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_model_bridge_default_off_without_source_or_Torch (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_model_toggle_never_consumes_mock_or_incomplete_authority (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_new_no_device_guest_args_have_no_devices (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_no_implicit_live_request_object_ABA_or_rewind (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_optin_sitecustom_failure_cannot_silently_run_dense (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_partial_preflight_never_promotes (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_paused_slot_never_stolen_to_admit_overcapacity (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_preflight_actual_no_node_and_single_signature_not_union (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_real_request_ledger_paused_and_reordered_native_lengths (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_same5400_lease_and_CPU_stop_before_NPU_creation (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_schema_before_init_for_canary_and_matrix (__main__.V3HostAndActualModelSoftware) ... ok\\ntest_true_native_length_mismatch_or_multitoken_decode_rejected (__main__.V3HostAndActualModelSoftware) ... ok\\n\\n----------------------------------------------------------------------\\nRan 48 tests in 0.292s\\n\\nOK\\n\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/numeric_gate.py\"], \"exit\": 0, \"stdout\": \"{\\\"status\\\": \\\"disabled\\\", \\\"ready\\\": false, \\\"npu_executed\\\": false}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/consume_numeric.py\"], \"exit\": 0, \"stdout\": \"{\\\"status\\\": \\\"disabled\\\", \\\"ready\\\": false, \\\"npu_executed\\\": false}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/model_bridge.py\"], \"exit\": 0, \"stdout\": \"{\\\"default_enabled\\\": false, \\\"model_executed\\\": false, \\\"model_ready\\\": false, \\\"graph_model_verified\\\": false}\\n\", \"stderr\": \"\"}, {\"argv\": [\"/usr/bin/python3\", \"-B\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/numeric_gate.py\", \"--source-audit-only\", \"--source-manifest\", \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\", \"--source-manifest-sha256\", \"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\"], \"exit\": 0, \"stdout\": \"{\\\"source_audit_passed\\\": true, \\\"source_manifest\\\": {\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v4/SOURCE_MANIFEST.json\\\", \\\"sha256\\\": \\\"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\\\"}, \\\"files\\\": {\\\"README.md\\\": \\\"8d50f73562169644bea56f826f7ebb1d723d4768e240f29c8b08dc31ecd57355\\\", \\\"READY.md\\\": \\\"54de93f54f2e8f18bddc1bf91e28906a13d8ceba9436647cc2c2cd9d7a4c0108\\\", \\\"consume_numeric.py\\\": \\\"4d139cf05351a6af7512b2a1a2b3010922770e2f0d2dc27fc870610a89f8b802\\\", \\\"host.py\\\": \\\"f8114a243f5c74ba92d17b1fa219c6798a2b0c738bb3aa7e29194b3545c0f25d\\\", \\\"model_bridge.py\\\": \\\"a85dd04893ad74feaaf1f2bf85e807e387b2957ce6db6a6034bf098bb951e81d\\\", \\\"numeric_gate.py\\\": \\\"bfccb5afe907a6475b8168e0706ba92321adeab21281060369f4039b29fc8be5\\\", \\\"original_operation_get_ma0e7f_not_found.json\\\": \\\"59d954ea2e39533ed91ca2390baa1e25702634f6edb9997072b0190c0d6d9363\\\", \\\"original_operation_get_ma0e85.json\\\": \\\"ec6ae5ebcec57d7226b97460ec182920b0817eb96a5da6afaf716af1c86a3eb6\\\", \\\"original_terminal.py\\\": \\\"ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1\\\", \\\"preflight.py\\\": \\\"78a62c66be330a4a9ddd196cdba8799afdae17f96b9a07aae777ff354e6b67cb\\\", \\\"receipt.py\\\": \\\"04d1aafad0c80da9d36bb14d04a0ca567dea9665ce6949b38f2c536afe14f467\\\", \\\"sitecustomize.py\\\": \\\"e8f641a7a5fd1e77e150cfecd0d4ce233236725c1908ad457c258496e0263aed\\\", \\\"sparq_token_v4/__init__.py\\\": \\\"c2f1c112852a028e489a70f2773e0533561babd72736226be6f2c70e4c4e58a7\\\", \\\"sparq_token_v4/core.py\\\": \\\"fc7068c8c48473c23137c273603fec3a13d52760d5dfc89d1ae37a5ba2c8717c\\\", \\\"sparq_token_v4/oracle.py\\\": \\\"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f\\\", \\\"sparq_token_v4/proof.py\\\": \\\"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c\\\", \\\"test_contract.py\\\": \\\"14e116b6721c070a1cff124dfc199c541dca3fc9c52164b20b4b3ff9e215990f\\\"}, \\\"npu_executed\\\": false, \\\"ready\\\": false}\\n\", \"stderr\": \"\"}], \"source_sha\": \"a1c05808230cc4a5802b9058e979ccf903a7cee57b5023a45d7d4375d0866e59\", \"source_count\": 23, \"npu_executed\": false, \"Docker_executed\": false, \"actual_cpu_torch_golden_pending\": true, \"ready\": false, \"actual_affinity\": [0]}\nPASS: Maintainer Skill Tree structure is valid (20 skills)\n\n\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 366,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 366,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 366
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 365,
+        "routeLookupMs": 0,
+        "totalMs": 365
+      }
+    },
+    "traceId": "3d860eef-d6b3-4fea-bce2-565ec281a726"
+  },
+  "operationId": "exec-0000000000000eb2",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}
