@@ -6,38 +6,40 @@ Scope: origin/main at f1f37a39bd86f7db5fd3ee3dea358ae6868275c6 has 29 registered
 
 Current branch has ingested three verified performance/tooling lessons into two existing Skills and registry triggers, not added new Skills. A 29-Skill structural validator pass and the six-unit performance artifact audit confirm those edits did not break the tree or the measured effect; they do not validate the unfinished quality workflow or the other unassessed Skills.
 
-Status vocabulary: completed = a defined workflow produced a traceable positive or negative result; partial = the workflow has a documented evidence gap; unassessed = no behavioral acceptance recorded in the old HYPIC ledger. A structural validator pass is not behavioral validation.
+Historical vocabulary: completed = a defined workflow produced a traceable positive or negative result; partial = the workflow has a documented evidence gap; unassessed = no behavioral acceptance recorded in the old HYPIC ledger. A structural validator pass is not behavioral validation.
 
-| Skill | 2026-10-06 historical ledger | This campaign's remaining acceptance |
-| --- | --- | --- |
-| chicaihong01-host-maintenance | completed | Fresh direct peer, exact physical lane, container and port ownership, release proof. |
-| ascend-npu-environment-orientation | completed | Fresh image/source/model/TP/device/cpuset comparison and target-device canary. |
-| ascend-canary-implementation | completed | HYPIC-on with binding off: deterministic output and actual hot-path proof. |
-| runtime-monkeypatch-delivery | completed for rejected candidate | Confirm supported switch is not mislabeled a monkeypatch; preserve opt-in and disabled-control rollback. |
-| ascend-benchmark-evidence | completed negative | Three same-lane, same-protocol HYPIC-on binding-off runs, raw hashes and dispersion. |
-| ascend-performance-optimization | completed negative | Classify CPU-binding treatment separately from HYPIC algorithm effect and gate both. |
-| paper-to-ascend-reporting | completed negative | Recompute all result deltas from raw artifacts and distinguish performance from quality. |
-| mst-maintainer-handoff | completed negative | Branch-local exact resume, failure and release state after each stage. |
-| ascend-cannbot-profiler | partial | Rank-2 Decode offline-export limitation remains; profile only if attribution or decision requires it. |
-| paper-to-ascend-reproduction | partial | Complete one-switch HYPIC effect, quality, independent audit and release. |
-| ascend-model-quality-evaluation | partial | Full matched 41984-context 2048-token LongBench-v2/GSM8K baseline and candidate; old 80/1319 GSM rows are not a completed baseline. |
-| ascend-architecture-fit | unassessed | Independently verify HYPIC mechanism fit against frozen Qwen3.6 checkpoint and live source. |
-| ascend-inference-tuning-loop | unassessed | Confirm planned/baselined/attempted/verified/measured/decided Git checkpoints and negative-result retention. |
-| ascend-source-map | unassessed | Resolve exact pinned runtime seam and activation path. |
-| paper-ingestion | unassessed | Recheck method-chain parity from HYPIC paper versus this derivative runtime. |
-| paper-to-ascend | unassessed | Review complete method chain, identity label, bottleneck and constrained objective. |
-| mst-agentsmd-authoring | unassessed | Check AGENTS.md routing and skill boundaries against current task. |
-| mst-experience-ingestion | unassessed | Ingest only reusable lessons with trigger, action, destination and verification. |
-| mst-git-checkpoint-policy | unassessed | Audit coherent commits pushed and negative-result history retained. |
-| mst-loop-engineering-framework | unassessed | Audit orient-to-decide loop transitions and evidence. |
-| mst-parallel-workstreams | unassessed | Check ownership separation from canonical dirty DAMP checkout and other card lanes. |
-| mst-practice-iteration-planning | unassessed | Check predeclared one-variable gates, resource and time budgets. |
-| mst-repo-onboarding | unassessed | Test fresh-clone entry to current handoff and live target without hidden chat context. |
-| mst-repo-transformation | unassessed | Structural applicability review; no repository transformation is claimed by this HYPIC run. |
-| mst-runtime-skill-boundary | unassessed | Confirm maintainer instructions do not become runtime assets. |
-| mst-skill-governor | unassessed | Audit narrow skill selection and status/registry consistency. |
-| mst-skill-tree-design | unassessed | Check trigger and scope overlap after any durable skill update. |
-| mst-tool-adapter-boundary | unassessed | Confirm AWMCP connection specifics stay in host-maintenance and not in runtime code. |
-| mst-transformation-verification | unassessed | Run structural validator plus behavioral checks; do not equate them. |
+Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bounded workflow with direct evidence; **P** = some steps/evidence exist but its relevant acceptance is open; **N** = not exercised here or not applicable. V is not a universal guarantee for every future use of that Skill. The five V entries are environment orientation and canary (frozen token-ID/hot-path plus six-run audit), experience ingestion and skill governance (three reusable edits plus registry/validator), and Git checkpoint policy (confirmed policy, validated clean branch and pushed commits). The quality campaign remains live; no complete-paper verdict is counted. Run `python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_matrix.py` to check that all 29 pinned main IDs occur exactly once and that the declared V/P/N counts match the table.
 
-Count from the old ledger, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. The current NPU0-3 binding-off campaign has passed paired no-cache/HYPIC performance and independent artifact audit, but paired quality has not run. No whole-paper or whole-tree completion claim is made. Update this file against raw quality artifacts before any new skill-completion count.
+| Skill | 2026-10-06 historical ledger | Current | This campaign's remaining acceptance |
+| --- | --- | --- | --- |
+| chicaihong01-host-maintenance | completed | P | Direct peer, lane and worker proof passed; final quality-container release pending. |
+| ascend-npu-environment-orientation | completed | V | Pinned image/source/model/TP/device/cpuset and target-worker proof passed. |
+| ascend-canary-implementation | completed | V | Binding-off HYPIC deterministic canary and formal hot path passed. |
+| runtime-monkeypatch-delivery | completed for rejected candidate | N | Supported upstream switch is not a monkeypatch; no new monkeypatch delivered. |
+| ascend-benchmark-evidence | completed negative | P | Six paired performance units audited; 12 quality units still running. |
+| ascend-performance-optimization | completed negative | P | CPU repair and HYPIC within-lane performance effect pass; quality acceptance pending. |
+| paper-to-ascend-reporting | completed negative | P | Performance deltas independently recomputed; final quality-integrated report pending. |
+| mst-maintainer-handoff | completed negative | P | Live branch handoff records exist; final quality outcome/release pending. |
+| ascend-cannbot-profiler | partial | P | Existing Decode profile informed diagnosis; rank-2 offline-export limitation remains. |
+| paper-to-ascend-reproduction | partial | P | One-switch performance proven; full quality and paper-level audit pending. |
+| ascend-model-quality-evaluation | partial | P | Matched 41984-context, 2048-token 12-unit campaign running; no final score. |
+| ascend-architecture-fit | unassessed | N | Independently verify mechanism fit against frozen Qwen3.6 checkpoint and live source. |
+| ascend-inference-tuning-loop | unassessed | P | Planned/baselined/attempted/verified/measured checkpoints exist; final decision pending. |
+| ascend-source-map | unassessed | P | Runtime seam and activation pinned; method-chain source map not independently closed. |
+| paper-ingestion | unassessed | N | Recheck HYPIC paper method-chain parity against derivative runtime. |
+| paper-to-ascend | unassessed | P | Performance portion passed; quality and complete method-chain decision pending. |
+| mst-agentsmd-authoring | unassessed | N | No new AGENTS.md authoring workflow executed. |
+| mst-experience-ingestion | unassessed | V | Three trigger/action/destination/verification lessons ingested in existing Skills. |
+| mst-git-checkpoint-policy | unassessed | V | Confirmed commit-implies-push policy followed on clean tracked work branch. |
+| mst-loop-engineering-framework | unassessed | P | Orient-to-measure sequence recorded; final decide/close transition pending. |
+| mst-parallel-workstreams | unassessed | P | Independent clone/lane separation proven; full workstream lifecycle pending. |
+| mst-practice-iteration-planning | unassessed | P | One-variable gates and resource limits predeclared; complete iteration pending. |
+| mst-repo-onboarding | unassessed | N | Fresh-clone entry from handoff not tested independently. |
+| mst-repo-transformation | unassessed | N | No repository transformation is claimed by this HYPIC run. |
+| mst-runtime-skill-boundary | unassessed | P | Maintainer edits remain under .agents; runtime exposure audit not completed. |
+| mst-skill-governor | unassessed | V | Existing narrow Skills and registry updated, with reason and validator evidence. |
+| mst-skill-tree-design | unassessed | P | No new Skill added; trigger overlap review remains open. |
+| mst-tool-adapter-boundary | unassessed | P | AWMCP route kept outside runtime code; full adapter-boundary audit pending. |
+| mst-transformation-verification | unassessed | P | Structural 29-Skill validator and performance behavior passed; full boundary audit pending. |
+
+Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 5 V, 18 P, 6 N = 29. The NPU0-3 campaign has passed paired performance and independent artifact audit; paired quality is running, not complete. No whole-paper or whole-tree completion claim is made. Reconcile each row against raw quality artifacts before the final count.
