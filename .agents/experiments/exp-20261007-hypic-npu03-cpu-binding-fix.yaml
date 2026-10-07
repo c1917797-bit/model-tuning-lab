@@ -225,7 +225,7 @@ quality_campaign_20261007:
   decision: invalid for final paired quality due potential concurrent NPU3 interference; preserve all raw attempt-1 evidence without pooling it with clean2.
 quality_campaign_clean2_20261007:
   operation_id: exec-0000000000000e15
-  status: Running since 2026-10-07 17:10 UTC; all six no-cache units independently audited and arm-level lane-guard/release passed at 19:33:48 UTC; HYPIC-only arm starting. No paired quality verdict yet.
+  status: Running since 2026-10-07 17:10 UTC; all six no-cache units independently audited and arm-level lane-guard/release passed at 19:33:48 UTC; HYPIC-only service started at 19:40:13 UTC with four NPU0-3 workers; LongBench-v2 run1 running. No paired quality verdict yet.
   artifact_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2
   only_change_to_scientific_protocol: none; model, image, source, evaluator, datasets, sample order, generation settings, NPU0-3 and one-switch A/B identity remain frozen.
   orchestration_repair: Unique attempt root/container labels; sample physical NPU0-3 process table every 10 seconds and fail closed on foreign PID/probe error; distinguish exact-owned release from whole-lane availability.
@@ -274,4 +274,9 @@ quality_campaign_clean2_20261007:
     validity: Independent service-receipt audit passed exact container identity, four physical NPU0-3 workers, 752 uninterrupted guard samples with no foreign PID/probe error, binding-off activation, exact-owned container/PID/port release and whole-lane availability.
     lane_guard_sha256: b27c447b408e0a40f896712bc60134b4cc622a06ec4bd3db21476826d3cbd912
     service_stop_sha256: 375189bd0014739e7c2b4cc8cbb7b0906e4c8faf001b56eb0631d8ddf6128fe9
+  hypic_service_start:
+    at_utc: 2026-10-07T19:40:13Z
+    container_id: b57f81573534e119c375cbbeb300ca81918f378cf718120ab6bd4e47a56036da
+    worker_pid_by_physical_npu: {0: 1965788, 1: 1965789, 2: 1965790, 3: 1965791}
+    stage: LongBench-v2 run1 began 2026-10-07T19:40:15Z; treatment output and full hot-path activation pending.
   decision: clean2 no-cache denominator valid after independent unit/guard/release audits; treatment six units, its release receipt and full paired audit pending.
