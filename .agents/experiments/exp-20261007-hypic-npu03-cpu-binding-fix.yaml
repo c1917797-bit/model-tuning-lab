@@ -1,6 +1,6 @@
 schema: ascend-inference-treatment/v1
 id: exp-20261007-hypic-npu03-cpu-binding-fix
-status: planned
+status: verified_smoke
 branch: work/hypic-npu03-cpu-binding-fix-20261007
 parent_diagnosis: exp-20261007-hypic-npu03-comm-root
 objective: Remove the NPU0-3 Decode latency floor caused by the enabled automatic CPU-binding path without modifying the official image or other card lanes.
@@ -42,3 +42,17 @@ progression:
   abort: Any foreign NPU0-3 process, port contention, source/image/model drift, invalid output, failed rollback, or NPU4-7 access.
 rollback: Stop and remove only the uniquely named candidate container after identity verification; prove NPU0-3 and port 8223 released. Removing the opt-in launcher flag restores the official binding path.
 decision_rule: Accept only with comparable repeated performance, required quality, activation, and rollback; otherwise classify partial-component, rejected, failed, or inconclusive without modifying shared service.
+smoke_20261007:
+  operation_id: exec-0000000000000ab7
+  container: hypic_npu03_bindingfix_no_cache_smoke_20261007
+  activation: Parsed enable_cpu_binding False in service log; no CPU allocation plan was emitted.
+  semantic_canary: Frozen no-cache 32768-token deterministic canary matched all response token IDs and response text SHA256 0fa5e875f58b181ddb6ac6890d15b5e4b6c1b29c58f6d8034e981b988f8d0498; answer key present.
+  short_request: No profiler; 4/4 x 128 fixed-output requests, zero failures, weighted TPOT 141.0485 ms/token and output throughput 14.2993 token/s.
+  scope: Smoke and mechanism validation only; not the frozen 40 x 1024 formal protocol or full 2048-token quality gate.
+  artifacts:
+    performance_sha256: f12d1eb068c6196759e0aac9d605fd1fdc308339ddd206d6b7fd67ef4866bd7f
+    semantic_canary_sha256: b5d6d22b3ff33bc1b83921682d835797134bfc76e89b31d27c6336a6b638ba1b
+    activation_log_sha256: 8930f4d288bfb5095d2a4110a1e784cb0744a99abb9c40ffd31141583993efce
+    cleanup_sha256: 24d831eccc4b36f3bf40ab16957f62dbf6c955303e9b0afe01818ce056e4bc5b
+  cleanup: Exact candidate container removed; NPU0-3 and port 8223 released, NPU4-7 and pre-existing sleep container untouched.
+  next_gate: Fresh isolated non-profiled 40 x 1024 c16 screen with the exact same candidate bytes and benchmark SHA.
