@@ -183,10 +183,16 @@ hypic_three_run_decision_20261007:
 quality_campaign_20261007:
   operation_id: exec-0000000000000c6d
   protocol: Same binding-off repair in no-cache and HYPIC-only arms, each with three complete LongBench-v2 and GSM8K runs, 41984 context, 2048 maximum natural-EOS output, c32, seed 0, thinking off.
-  current_stage: no-cache GSM8K run1 in progress; 1 of 12 quality units complete, no paired quality decision.
+  current_stage: no-cache LongBench-v2 run2 in progress; 2 of 12 quality units complete, no paired quality decision.
   no_cache_longbenchv2_run1:
     validity: Independently audited 127/127 rows, zero failures, exact indexes/sample references/response hashes, scorer and summary arithmetic.
     result: 76/127 correct, 59.84251968503937 percent; 15 outputs reached the 2048-token length limit; unit duration 1431.5986 s.
     summary_sha256: 13f2e115d02fd65453e8e2ed7a96a488c8772301fd624ba2d40d92de69825032
     details_sha256: aef4967608e97f11515ddc45ed543d3ca70eb591d5ab4d6216b59a2f0be99391
-  decision: pending; this is one unpaired baseline repetition, not the quality gate.
+  no_cache_gsm8k_run1:
+    validity: Independently audited 1319/1319 rows, zero failures, exact indexes/sample references/response hashes, supplied scorer and summary arithmetic.
+    result: 1276/1319 correct, 96.73995451099317 percent; 10 outputs reached the 2048-token length limit; unit duration 1714.6695 s.
+    summary_sha256: 527deb4f759ca99b152df261f8e4dd12f7308a9ff16677a2b001d766127048fb
+    details_sha256: abd2056eccc4fb3e9cdbfde6ddadcfdb7edbc3405965c6b368d3208194c96614
+    receipt_sha256: 0fa4bc2a88e0456d21fb70ae76fce1e91b150b28edbc12b588b9e9e7638b0610
+  decision: pending; both completed units are unpaired baseline repetitions, not the quality gate.
