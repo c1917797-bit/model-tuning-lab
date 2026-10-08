@@ -131,3 +131,19 @@ external `hotpath-quality-reserve-full-audit.json`. The partial auditor can
 inspect persisted full-arm rows with
 `HYPIC_HOTPATH_AUDIT_CAMPAIGN=reserve` and `--arm no-cache` or
 `--arm hypic-only`; a partial pass is never a final score.
+
+## Hot-path evidence granularity discovered before reserve2
+
+Read-only inspection of the retained pilot-2 and failed full-candidate event
+streams on 2026-10-08 found that `explicit_segment_boundary_active` has a
+request ID, while `complete_hybrid_repair` and `worker_hot_path` carry only
+batch-level counts/PIDs. The current independent auditor joins every scored
+request to its explicit-boundary event, proves the serialized sentinel reached
+all four workers, and checks aggregate verified-hot counts. Those checks do
+not, by themselves, prove that each concurrent scored request individually
+completed a hot repair: a warm request could contribute to the aggregate.
+Preserve the predeclared per-scored-request hot-coverage requirement as open
+until request-correlated runtime evidence or an equivalently discriminating
+independent check exists. A completed reserve2 stress or full pair can still
+establish capacity, paired scores, isolation and release at their actual
+scope; do not relabel aggregate coverage as per-request proof.
