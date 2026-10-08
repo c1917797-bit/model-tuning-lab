@@ -14,7 +14,7 @@
     ".agents/skills.registry.yaml": "3ec2078193d38667b29fe8cb5989d45faae9c2295527661a25e9884f590b9c0c",
     ".agents/HANDOFF.md": "0122402a792c783b639c5f458d4318162bfcab798ceaa301805ba1373cd218d9"
   },
-  "execution_state": "started",
+  "execution_state": "in-progress",
   "integration_state": "not-ready",
   "dependencies": [],
   "claims": {
@@ -85,5 +85,6 @@
     "Parse branch-local JSON state",
     "Verify exact integration parents, source ancestry and remote equality"
   ],
-  "resume_point": "Push the validated start checkpoint before any README edit."
+  "resume_point": "Apply reviewed README and run documentation-only audits before the content checkpoint.",
+  "start_checkpoint": "21ac496b89baaa84e37073bc0c42d8d341ebcf69"
 }
