@@ -1,5 +1,37 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Active 2026-10-08 hot-path quality checkpoint (read this first):** User's
+short/mid/long goal is active: finish explicit-boundary HYPIC quality on only
+physical NPU0-3, then map/retest the HYPIC Skill chain, then validate every
+archived main Skill with real-task evidence. Never touch NPU4-7 or unrelated
+containers. The remote independent branch
+`work/hypic-npu03-cpu-binding-fix-20261007` was pushed through `f4b4937`;
+main and the canonical dirty checkout were not changed. Read
+`SKILL_VALIDATION_GOALS.md`, `HOTPATH_FULL_QUALITY_PLAN.md`,
+`HOTPATH_PILOT2_RESULT.md`, and `hotpath_quality_full.py` before acting.
+
+Pilot-1 `exec-000000000000127c` exited 1 solely at the controller's
+over-strict API/scheduler request-ID equality join; its raw 3/3 hot evidence
+and failure are preserved, not promoted to a pass. The new-root pilot-2
+`exec-000000000000128b` exited 0: 3/3 scored explicit-boundary/hot
+requests, four distinct worker-hot PIDs on the sentinel, no warm hot reuse,
+27 clean NPU0-3 guard samples, exact release. This is protocol activation,
+not a quality verdict. The prospective full **no-cache baseline** operation
+`exec-0000000000001293` started at 2026-10-08 08:05:59 UTC in
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-full-baseline`.
+It is the only known active NPU0-3 quality controller. Poll this stable
+AWMCP operation and read its `progress.json`; never restart a live
+controller. It runs 127 LongBench-v2 samples, two one-token observations
+and three max-2048 natural-EOS scored answers per sample, concurrency 8
+after the serialized sentinel. The candidate uses a separate fresh service
+and root `quality-context-41984-hotpath-full-hypic`, **only after** baseline
+exit, clean guard, exact release, and available lane. Run the pinned
+`hotpath_quality_audit.py` after both full arms; do not infer quality from
+controller exit alone. Keep raw outputs outside Git; commit concise audit
+and Skill status only after independent evidence. Prior clean2 12-unit
+natural-task quality remains off-path safety evidence, never a matched
+denominator for this new ruler.
+
 **Final clean2 checkpoint (2026-10-07 21:58 UTC; supersedes all progress checkpoints below):** Sole quality job `exec-0000000000000e15` exited 0 after all 12 units and both exact service releases. The unchanged strict quality auditor exited 1 at the four-worker hot-path gate: zero worker-hot PIDs, because the frozen natural evaluator supplies no usable segments under the frozen service configuration. The separate scoped auditor independently verified all 12 row/scorer/hash/identity units, 752/754 clean guard samples, both releases and paired natural scores while setting `formal_acceptance_claim=false`. Its SHA256 is `61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0`; read `FINAL_EVIDENCE_DECISION.md` first. LongBench-v2 totals are 224/381 in both arms; GSM8K totals are 3836/3957 no-cache and 3834/3957 HYPIC. The all-nonnegative score gate also fails, but adverse means stay within baseline three-run ranges. Physical NPU0–3 and port 8223 were released; NPU4–7 and unrelated containers were untouched. Do not restart clean2, pool attempt-1 rows, claim full-paper reproduction or merge main. A separately authorized prospective in-path quality supplement is the meaningful open experiment.
 
 **Git checkpoint:** the remote independent branch was verified at `ab89641d632aeee9a91e942d5325ee4a7dd373dd` before these final edits. Older text below describing unavailable credentials/network and older remote pointers is historical, not current. Commit, push and verify final edits only on `work/hypic-npu03-cpu-binding-fix-20261007`; the canonical checkout stays untouched.
