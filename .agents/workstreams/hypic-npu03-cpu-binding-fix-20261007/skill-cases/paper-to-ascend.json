@@ -1,0 +1,71 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "paper-to-ascend",
+  "campaign_code": "N",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Retrospectively apply exact-main Paper-to-Ascend gates to the ongoing HYPIC C1/C2 Qwen hybrid-attention NPU0-3 piercing and independently replay bounded performance/activation evidence",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "ad455c2d22d64eaff61384c23c39bd4693d15636",
+  "tested_reference_git_blob_oid": "744b6daa280b14a90930b7be0c7a1055e9170935",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma; Qwen3.6-named Qwen3_5ForConditionalGeneration hybrid text checkpoint, BF16 TP4, official pinned vLLM-Ascend image, physical NPU0-3 only; historical c16/1024 paired performance and later c8/max2048 explicit-boundary r12 stress are separate identities",
+  "observed": {
+    "bounded_single_instance_c1_c2_architecture_fit": true,
+    "architecture_review_was_retrospective_not_prospective": true,
+    "upstream_exact_git_commit_pinned": false,
+    "algorithm_identity": "derivative",
+    "paper_c3_multi_replica_complete": false,
+    "historical_six_unit_performance_audit_passed": true,
+    "historical_tpot_reduction_percent": 22.35616395806199,
+    "historical_output_throughput_ratio": 1.4222905939342232,
+    "historical_clean2_quality_2048_rows_paired": true,
+    "historical_clean2_quality_four_worker_hot_pids": 0,
+    "r12_explicit_scored_responses": 57,
+    "r12_four_worker_hot_proofs": 52,
+    "r12_clean_foreign_process_guard_samples": 279,
+    "r12_all_hot_gate_passed": false,
+    "current_same_identity_085_control_complete": false,
+    "full_explicit_2048_quality_pair_complete": false,
+    "current_three_round_matched_performance_complete": false,
+    "whole_paper_reproduction_accepted": false,
+    "case_integrated_in_main": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_REAL_TASK_CASE_20261008.md",
+      "sha256": "e0d3e0036961c13557f82087bd3f29f7e36d7db7def0e9addd74dea075bb2f80"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_case.py",
+      "sha256": "82b1c6c330d14807717d80aa4a9528fa68283a0124b145933833e83fc2a2052e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_ARCHITECTURE_FIT.md",
+      "sha256": "d93107c4f69c1a30511183acb0dde1e31f3e9bcf41b2721d983e2e8daf6c6f31"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/FINAL_EVIDENCE_DECISION.md",
+      "sha256": "29d6f4467720fd70e9e0b003c5ab17be27054485a3c17d8fbc6de6c61b4afc2f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
+      "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_COLD_FALLBACK_ANALYSIS.md",
+      "sha256": "47c55771de921893417ec3d999b1bf3b959d13225b20201aae75bffa80a02cb9"
+    }
+  ],
+  "external_raw_receipts": {
+    "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1",
+    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "A real target-specific C1/C2 derivative and bounded c16/1024 paired performance are evidenced, but the applicability/method-parity audit was retrospective, exact upstream commit and C3 are missing, historical 2048 natural quality never activated the worker hot path, and r12 explicit-boundary stress lacks five scored hot proofs and a matched 0.85 control. No complete in-path paired quality, current performance, paper-exact or whole-paper claim follows.",
+  "next_gate": "Freeze the prospective deployed-effect-versus-all-hot rule; on actually idle physical NPU0-3 run a fresh same-identity 0.85 control and explicit-boundary candidate, independent full 2048-token quality and repeated performance/isolation audits. Recheck method-chain source identity and only upgrade main Skill acceptance after all scoped gates pass.",
+  "drift_trigger": "Revalidate after main Skill/reference/registry blob changes, paper or upstream-source identity, model/image/plugin commit, physical lane, cache denominator, dataset/evaluator/ruler, or raw artifact hashes change."
+}

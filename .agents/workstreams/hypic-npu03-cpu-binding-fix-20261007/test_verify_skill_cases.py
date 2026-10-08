@@ -26,10 +26,22 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 12)
-        self.assertEqual(report["skills_without_case"], 17)
+        self.assertEqual(report["cases_with_verified_provenance"], 13)
+        self.assertEqual(report["skills_without_case"], 16)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 10, "verified": 2})
+                         {"partial-evidence": 11, "verified": 2})
+
+    def test_paper_to_ascend_real_task_is_partial_not_paper_success(self) -> None:
+        path = cases.CASES / "paper-to-ascend.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"paper-to-ascend"})
+        self.assertEqual(skill, "paper-to-ascend")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["historical_six_unit_performance_audit_passed"])
+        self.assertFalse(item["observed"]["paper_c3_multi_replica_complete"])
+        self.assertFalse(item["observed"]["full_explicit_2048_quality_pair_complete"])
+        self.assertFalse(item["observed"]["whole_paper_reproduction_accepted"])
 
     def test_runtime_delivery_case_is_not_promotion(self) -> None:
         path = cases.CASES / "runtime-monkeypatch-delivery.json"
