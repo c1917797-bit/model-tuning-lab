@@ -1,0 +1,13 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "task_id": "readme-refresh-20261008",
+  "integration_state": "not-ready",
+  "original_base": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "target_parent": null,
+  "source_commit": null,
+  "validated_readme_sha256": null,
+  "validation_results": [],
+  "integration_owner": "codex",
+  "serialization": "One integrator owns the temporary checkout of main; exact-parent checks and normal non-force push reject remote drift.",
+  "reclamation": "Pending clean merged/pushed state and no mount/process/lease/dependency use."
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "mst-workstream/v1",
+  "task_id": "readme-refresh-20261008",
+  "objective": "Refresh README from verified main capabilities and bounded historical evidence, integrate into main, push, and reclaim only the authorized temporary worktree.",
+  "owner": "codex",
+  "created_at": "2026-10-08T13:02:00Z",
+  "target_branch": "main",
+  "work_branch": "work/readme-refresh-20261008",
+  "remote": "origin",
+  "original_base": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "constraining_sha256": {
+    "AGENTS.md": "a904211035ad5498b5392a38bfaf4c3dba28a0d6b024f63b5fb2476f8b29f9e8",
+    ".agents/git-policy.yaml": "0d160291a1e02b75d9aa1157ddc800b2ea5e4c6a49734d0479fca39d0b6b5a43",
+    ".agents/skills.registry.yaml": "3ec2078193d38667b29fe8cb5989d45faae9c2295527661a25e9884f590b9c0c",
+    ".agents/HANDOFF.md": "0122402a792c783b639c5f458d4318162bfcab798ceaa301805ba1373cd218d9"
+  },
+  "execution_state": "started",
+  "integration_state": "not-ready",
+  "dependencies": [],
+  "claims": {
+    "file": {
+      "exclusive": [
+        "README.md",
+        ".agents/workstreams/readme-refresh-20261008"
+      ],
+      "read": [
+        "AGENTS.md",
+        ".agents/skills.registry.yaml",
+        ".agents/skills/**",
+        ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/**"
+      ],
+      "integration_only_exclusive": [
+        ".agents/HANDOFF.md"
+      ]
+    },
+    "semantic": {
+      "exclusive": [
+        "README capability and historical-result wording"
+      ]
+    },
+    "resource": {
+      "exclusive": [],
+      "read": []
+    },
+    "strategy": {
+      "read": [
+        ".agents/git-policy.yaml",
+        "AGENTS.md"
+      ]
+    },
+    "knowledge": {
+      "shared": [
+        "repository capability documentation"
+      ],
+      "integration_only_exclusive": [
+        ".agents/HANDOFF.md"
+      ]
+    }
+  },
+  "resource_leases": [],
+  "boundaries": [
+    "Documentation only; no runtime, NPU, model, container, service, dependency or skill-behavior changes.",
+    "Preserve the original eight worktrees and their uncommitted work.",
+    "Credentials stay in the connector envelope and never enter repository files.",
+    "Do not import branch-local experiment implementation into main."
+  ],
+  "worktree": "/opt/host/vnf/austinov/worktrees/readme-refresh-20261008",
+  "capacity_authorization": {
+    "existing_budget": 8,
+    "temporary_limit": 9,
+    "scope": "One README-only temporary worktree",
+    "approved_by": "maintainer",
+    "approval": "User confirmed temporary ninth worktree for integration and cleanup on 2026-10-08"
+  },
+  "retention_decision": {
+    "worktree": "Remove after clean, validated, pushed main integration and no active users or mounts",
+    "local_branch": "Delete only after merged",
+    "remote_branch": "Retain for provenance and recovery",
+    "other_worktrees": "Retain all original eight"
+  },
+  "validation_commands": [
+    "./scripts/validate-mst.sh",
+    "git diff --check",
+    "README relative-link, registered-Skill, formatting and SHA256 audit",
+    "Parse branch-local JSON state",
+    "Verify exact integration parents, source ancestry and remote equality"
+  ],
+  "resume_point": "Push the validated start checkpoint before any README edit."
+}
