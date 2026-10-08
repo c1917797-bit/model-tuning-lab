@@ -29,6 +29,9 @@ ATTEMPT_ROOTS = {
     "clean2": "quality-context-41984-clean2",
     "hotpath-canary": "quality-context-41984-hotpath-canary",
     "hotpath-baseline": "quality-context-41984-hotpath-baseline",
+    "hotpath-pilot-hypic": "quality-context-41984-hotpath-pilot-hypic",
+    "hotpath-full-baseline": "quality-context-41984-hotpath-full-baseline",
+    "hotpath-full-hypic": "quality-context-41984-hotpath-full-hypic",
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
@@ -460,8 +463,8 @@ def interrupt(_number: int, _frame: object) -> None:
 
 
 def main() -> int:
-    if ATTEMPT in {"hotpath-canary", "hotpath-baseline"}:
-        raise RuntimeError("hotpath pair preflight is separate from the frozen 12-unit campaign")
+    if ATTEMPT.startswith("hotpath-"):
+        raise RuntimeError("hotpath quality is separate from the frozen 12-unit campaign")
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=tuple(ARMS), required=True)
     parser.add_argument("--run", action="store_true")
