@@ -2,14 +2,14 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:26 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 16:29 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
   push succeeded without changing persistent Git settings.
 - Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
-  acceptance remain incomplete. cache10r3, cache10r4, cache10r5 and cache10r6 are
+  acceptance remain incomplete. cache10r3 through cache10r7 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
   verified, 3 partial, 24 missing. V11/P14/N4 is a separate campaign matrix.
@@ -66,15 +66,19 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r7-full-hypic.
   The first r7 launch was rejected by its allowlist before root creation;
   both campaign and artifact mapping were repaired, then 35 offline tests
-  passed. The second launch is the only live r7 controller.
+  passed. The second launch caught a real foreign PID 1482057 on physical
+  NPU3 during startup at 16:28:11 UTC. It stopped at 0/127 and removed
+  only its owned container; see HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md.
 
 ## 4. Current Action
 
-cache10r6 is terminal and environment-invalid. The single r7 controller
-exec-0000000000001523 is live; do not start a duplicate. Inspect its
-progress/guard before any new device action. Passive Docker mappings alone
-remain irrelevant. Remote branch was verified through 1a3a518 earlier;
-later commits/working changes require separate live verification.
+cache10r6/r7 are terminal and environment-invalid; no quality controller is
+live. Both started after actual NPU0–3 idleness, but a real foreign process
+entered during startup. Do not blindly reattempt under the same shared
+scheduling conditions. Continue non-device Skill acceptance and obtain a
+durable exclusive NPU0–3 window before a new unique full arm. Passive Docker
+mappings alone remain irrelevant. The branch remote was independently
+verified at dcf1c27227e4f908d22d2233c87bbabc43d07bbd before this update.
 
 ## 5. Next Actions
 
@@ -84,11 +88,10 @@ later commits/working changes require separate live verification.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Poll r7 controller exec-0000000000001523 before any device action. If
-   terminal, inspect whether it created
-   /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r7-full-hypic.
-   Audit cache10r5/r6 separately against their result reports.
-   Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6 or silently switch
+3. Inspect cache10r7 terminal op exec-0000000000001523 and its immutable
+   root under `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/` if needed.
+   Audit cache10r5/r6/r7 separately against their result reports.
+   Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7 or silently switch
    to cache10split.
 4. Complete HYPIC 127×3 scored quality and independent guard/release
    audit, then same-identity no-cache arm and pair audit. Only after
@@ -141,5 +144,5 @@ After a validated commit, push the current HEAD with
 `git push origin HEAD:work/hypic-npu03-cpu-binding-fix-20261007` and
 check the live remote ref before claiming it is synchronized.
 
-cache10r3/r4/r5/r6 terminal operations and immutable raw roots are recorded
+cache10r3/r4/r5/r6/r7 terminal operations and immutable raw roots are recorded
 in their conflict/result reports; none is a valid baseline/treatment arm.
