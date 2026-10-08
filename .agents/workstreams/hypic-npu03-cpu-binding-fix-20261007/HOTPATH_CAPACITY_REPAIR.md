@@ -98,6 +98,14 @@ GPU KV cache, and a logged 12.68x maximum concurrency for a 41,984-token
 request. That validates the projected KV allocation and nominal c8 admission,
 not the dynamic HYPIC replay reserve under nine completed stress samples.
 The sentinel began but no sample completed before the external-PID abort.
+The two physical `npu-smi` snapshots at service health show HBM usage on
+NPU0-3 of [28536, 28535, 28537, 28536] MiB for the original 0.9 candidate
+versus [27036, 27036, 27038, 27036] MiB for the 0.85 attempt. Thus the
+observed startup reservation fell by approximately 1,500 MiB per card,
+consistent with the one-variable change. Snapshot SHA256 values are
+`7cc59a110f64112ccd0a02a15a96416a645d050c85c184f1a1b85797ed243faa`
+and `17d1de12d9cdece0efa1c45cc4a40c3c0bbb8cad52e7e699d1f927ad3d67a636`,
+respectively. Health-time HBM is not peak c8 free memory or a replay pass.
 
 The only authorized next stress root is `reserve2/stress` below. Before
 launch, inspect physical 0-3 use and active job configuration over a quiet
