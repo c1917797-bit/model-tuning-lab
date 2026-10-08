@@ -64,6 +64,8 @@ ATTEMPT_ROOTS = {
     "hotpath-cache10r8-full-hypic": "quality-context-41984-hotpath-cache10r8-full-hypic",
     "hotpath-cache10r9-full-baseline": "quality-context-41984-hotpath-cache10r9-full-baseline",
     "hotpath-cache10r9-full-hypic": "quality-context-41984-hotpath-cache10r9-full-hypic",
+    "hotpath-cache10r10-full-baseline": "quality-context-41984-hotpath-cache10r10-full-baseline",
+    "hotpath-cache10r10-full-hypic": "quality-context-41984-hotpath-cache10r10-full-hypic",
     "hotpath-cache10split-baseline-shard0": "quality-context-41984-hotpath-cache10split-baseline-shard0",
     "hotpath-cache10split-baseline-shard1": "quality-context-41984-hotpath-cache10split-baseline-shard1",
     "hotpath-cache10split-hypic-shard1": "quality-context-41984-hotpath-cache10split-hypic-shard1",
@@ -97,6 +99,8 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-cache10r8-full-hypic",
     "hotpath-cache10r9-full-baseline",
     "hotpath-cache10r9-full-hypic",
+    "hotpath-cache10r10-full-baseline",
+    "hotpath-cache10r10-full-hypic",
     "hotpath-cache10split-baseline-shard0",
     "hotpath-cache10split-baseline-shard1",
     "hotpath-cache10split-hypic-shard1",
@@ -117,6 +121,23 @@ PROC_ROOT = Path("/proc")
 EXPERIMENT = f"hypic-npu03-bindingoff-quality41984-20261007-{ATTEMPT}"
 UNIT_ORDER = (("longbenchv2", 1), ("gsm8k", 1), ("longbenchv2", 2),
               ("gsm8k", 2), ("longbenchv2", 3), ("gsm8k", 3))
+
+
+def selected_plugin_source() -> tuple[Path, str] | None:
+    """Opt into one clean, pinned diagnostic plugin checkout for a new arm."""
+
+    requested = os.environ.get("HYPIC_QUALITY_PLUGIN_REPO", "").strip()
+    commit = os.environ.get("HYPIC_QUALITY_PLUGIN_COMMIT", "").strip()
+    if bool(requested) != bool(commit):
+        raise RuntimeError("plugin source override requires both path and commit")
+    if not requested:
+        return None
+    root = Path(requested).resolve()
+    if not root.is_dir() or run("git", "-C", str(root), "rev-parse", "HEAD").stdout.strip() != commit:
+        raise RuntimeError("diagnostic plugin source commit drifted")
+    if run("git", "-C", str(root), "status", "--porcelain").stdout.strip():
+        raise RuntimeError("diagnostic plugin source is dirty")
+    return root, commit
 
 
 def name_for(arm: str) -> str:
@@ -243,6 +264,7 @@ class ForeignProcessGuard:
 
 
 def preflight() -> dict:
+    plugin_source = selected_plugin_source()
     parent = json.loads((SOURCE_ROOT / "baseline-contract.json").read_text())
     fp = parent["fingerprint"]
     for arm in ARMS:
@@ -262,7 +284,10 @@ def preflight() -> dict:
             raise RuntimeError("LongBench expected count drift")
     if 39642 + 2048 > CONTEXT:
         raise RuntimeError("longest prompt exceeds quality context")
-    fingerprint = {"image": IMAGE, "source_commit": SOURCE_COMMIT, "model_index_sha256": MODEL_INDEX_SHA,
+    fingerprint = {"image": IMAGE, "source_commit": (
+            plugin_source[1] if plugin_source else SOURCE_COMMIT),
+            "plugin_source_root": str(plugin_source[0]) if plugin_source else None,
+            "model_index_sha256": MODEL_INDEX_SHA,
             "evaluator_sha256": EVALUATOR_SHA, "datasets": {key: {"count": value[1],
             "sha256": value[2]} for key, value in DATASETS.items()},
             "max_model_len": CONTEXT, "max_output_tokens": 2048,
@@ -278,6 +303,7 @@ def preflight() -> dict:
 
 def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
     source = frozen_source(arm)
+    plugin_source = selected_plugin_source()
     old_path = f"/results/{arm}"
     new_path = f"/results/{QROOT.name}/{arm}"
     command = source["Config"]["Cmd"][2]
@@ -298,6 +324,12 @@ def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
     if binds.count(old_mount) != 1:
         raise RuntimeError("frozen artifact mount seam drift")
     binds = [f"{ROOT}:/results" if value == old_mount else value for value in binds]
+    if plugin_source is not None:
+        frozen_plugin_mount = "/cache/cch/hypic_vllm_ascend-v0.8.5:/source-hypic:ro"
+        if binds.count(frozen_plugin_mount) != 1:
+            raise RuntimeError("frozen plugin mount seam drift")
+        binds = [f"{plugin_source[0]}:/source-hypic:ro"
+                 if value == frozen_plugin_mount else value for value in binds]
     old_env = f"VLLM_ASCEND_HYPIC_EVIDENCE_FILE={old_path}/hypic-evidence.jsonl"
     env = source["Config"]["Env"]
     if env.count(old_env) != 1:

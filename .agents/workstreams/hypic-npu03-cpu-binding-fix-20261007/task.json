@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_quality_r9_running_and_skill_acceptance",
+  "state": "active_r9_eviction_race_repaired_locally_r10_pending",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -14,30 +14,29 @@
     "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
   "latest_attempt": {
-    "campaign": "cache10r8",
-    "arm": "hypic-only",
-    "controller_operation": "exec-000000000000157a",
-    "result": "environment_isolation_failure",
-    "scored_rows": 0,
-    "foreign_pid": 1762714,
-    "foreign_physical_npu": 3,
-    "foreign_container": "cannbench_ds",
-    "evidence": "HOTPATH_CACHE10R8_RESOURCE_CONFLICT.md"
-  },
-  "pending_attempt": {
     "campaign": "cache10r9",
     "arm": "hypic-only",
     "controller_operation": "exec-000000000000158e",
-    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r9-full-hypic",
-    "state": "running; do not duplicate",
-    "request_hot_path_gate": "unverified pending terminal independent audit"
+    "result": "worker_local_gdn_material_missing_after_pending_eviction_race",
+    "complete_samples": 93,
+    "failed_sample": 98,
+    "service_released_utc": "2026-10-08T18:14:21Z",
+    "evidence": "HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md"
+  },
+  "pending_attempt": {
+    "campaign": "cache10r10",
+    "arm": "hypic-only",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic",
+    "state": "not_started; start only after actual-idle guard",
+    "plugin_local_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "request_hot_path_gate": "new per-request worker event; NPU validation pending"
   },
   "git_push_state": {
     "status": "check_live_remote_on_resume; prior checkpoint independently verified",
-    "last_verified_remote_commit": "06279f67865b59aede6edcdea0b78da21429e720",
+    "last_verified_remote_commit": "0d00bab0ad63c5bdad39f2f7887577d188194485",
     "push_operation": "exec-0000000000001555",
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After later validated commits, push the named workstream branch without force and independently verify live remote/upstream equality. The successful recovery used per-command git -c http.version=HTTP/1.1, not a persistent config edit."
   },
-  "next_action": "Poll live r9 controller exec-000000000000158e and its unique root; do not duplicate or change its live protocol. Preserve its rows, guard and release evidence. Audit per-scored-request worker hot-path coverage separately; aggregate repair counts are insufficient. A future arm may start only when physical NPU0-3 and port 8223 are actually idle, ignoring passive mappings but stopping on real foreign PIDs. Never touch foreign containers or NPU4-7. HYPIC full paired quality, performance, and all-Skill acceptance remain incomplete."
+  "next_action": "Preserve terminal r9 root unchanged. Validate the clean pinned plugin override and start exactly one r10 full HYPIC arm only when physical NPU0-3 and port 8223 are actually idle. Audit pending-eviction gate, all scored request IDs on four workers, 127x3 quality, guard and release; a matching 0.85 no-cache baseline follows only after candidate acceptance. Ignore passive mappings, stop on real foreign PIDs, and never touch foreign containers or NPU4-7. Full paired quality, performance, and all-Skill acceptance remain incomplete."
 }

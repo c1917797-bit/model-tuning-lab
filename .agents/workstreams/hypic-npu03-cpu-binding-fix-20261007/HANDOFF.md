@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 18:00 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 18:25 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
@@ -14,8 +14,8 @@
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
   verified, 7 partial, 20 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
-- Live r9 request-level traceability is not yet proven despite aggregate
-  hot-path activity; see HOTPATH_CACHE10R9_REQUEST_TRACEABILITY_AUDIT.md.
+- r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
+  See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
 - Quality and benchmark Skill cases eight/nine remain partial; see their
   request-coverage and baseline-reuse acceptance reports.
 
@@ -64,22 +64,17 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-cache10r9 full HYPIC controller `exec-000000000000158e` is **live** on physical
-NPU0–3 in the unique root `quality-context-41984-hotpath-cache10r9-full-hypic`.
-Service became healthy at 17:06:55 UTC; the first scored sentinel passed its
-four-worker hot-path gate at 17:09:43. Poll this exact operation/root and
-never launch a duplicate while it runs.
-At the 17:36 read-only checkpoint, 38/127 sample files existed and their
-114 scored IDs each matched a boundary event. Worker hot-path and hybrid
-repair events lacked request IDs, so per-scored-request hot-path coverage
-remains unverified under the quality Skill. Preserve r9 unchanged and do
-not interpret a green aggregate controller result as this stricter gate.
-The old completed no-cache arm used GPU utilization 0.9 versus r9's 0.85:
-HOTPATH_CACHE10R9_BASELINE_REUSE_AUDIT.md proves it is not reusable. After a
-valid candidate, run only the fresh r9 0.85 no-cache arm on an actually idle
-lane. cache10r8 is isolation-invalid; on collision preserve evidence, touch
-only owned resources, and retry a new root only when physical 0–3 are idle.
-Passive mappings do not veto; foreign workloads stay untouched.
+r9 operation `exec-000000000000158e` ended at 18:14:21 UTC after 93/127
+complete samples; exact owned service released. Its EngineCore failure is
+consistent with the observed pending-materialization eviction race, not a
+quality score. Preserve its raw root unchanged. Separate plugin worktree
+`/cache/cch/hypic_vllm_ascend-hotproof-20261008` has local pinned commit
+`4429e35177979c874bf053ab29789e4773f39b22` for a scheduler gate and
+per-request worker evidence. Six focused CPU tests pass; full suite is
+environment-limited, and no repaired NPU verdict exists. The quality launch
+controller now permits a clean pinned plugin override for fresh cache10r10.
+Only start on actually idle physical0–3; passive mappings do not veto and
+foreign tasks stay untouched. Old 0.9 baseline is not pairable with 0.85.
 
 ## 5. Next Actions
 
@@ -94,12 +89,10 @@ Passive mappings do not veto; foreign workloads stay untouched.
    Audit cache10r5/r6/r7 separately against their result reports.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. Complete r9's 127×3 scored rows and independent guard/release audit.
-   Audit request-level work-performing coverage separately from boundary
-   admission and aggregate repair counts. If it remains unverified, repair
-   telemetry only after r9 releases its service and use a fresh candidate
-   identity/root; pair only with a matching no-cache arm. Only after all
-   quality gates pass, run matched performance.
+4. Start only one fresh cache10r10 candidate from the pinned plugin override
+   after the lane guard passes. Audit the pending-eviction gate, request-level
+   four-worker coverage, 127×3 quality, and isolation. Pair with a new 0.85
+   no-cache arm only if valid; then run matched performance.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 
