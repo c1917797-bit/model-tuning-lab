@@ -1,14 +1,22 @@
 # HYPIC NPU0-3 CPU-binding repair
 
-**Read-only lane monitor (started 2026-10-08 13:09 UTC):** AWMCP operation
-`exec-00000000000013de` observes physical NPU0-3 and whether
-`cannbench_ds` has a live `kernel_eval.staged_eval` process every ~15
-seconds, seeking 40 consecutive clean observations (about 10 minutes),
-with a one-hour ceiling. It does not start experiments or alter containers.
-Poll this exact live operation; an observation timeout is not a reason to
-restart it. Even a quiet-window result requires a fresh ownership/port/root
-check and cannot guarantee later exclusivity. User coordination of an
-exclusive NPU0-3 window was requested but has not yet been confirmed.
+**Read-only lane monitor (completed 2026-10-08 13:19:45 UTC):** AWMCP
+operation `exec-00000000000013de` exited 0 after 40 consecutive clean
+observations from 13:09:15–13:19:45 UTC: no physical NPU0-3 process, no
+`cannbench_ds` `kernel_eval.staged_eval`, and no probe error or conflict.
+It did not start an experiment or alter containers. This is stronger than
+one empty snapshot but not an exclusive lease; a fresh ownership/port/root
+check is still required immediately before a new run. User coordination of
+an exclusive NPU0-3 window was requested but has not yet been confirmed.
+
+**Next declared candidate:** `cache10r2` uses a new full-HYPIC root and the
+same frozen 127-sample/381-row, c8/2048-token quality ruler, 0.85 service
+utilization and 3584-MiB/10-segment cache. The new guard additionally
+captures Docker cgroup identity at first foreign-PID observation. CPU tests,
+29-Skill structure validation and frozen-input preflight passed. Commit/push
+the preparation before launch; if the live lane check is clean, run only
+physical NPU0-3 and preserve a new root on any failure. No `cache10r2`
+device run has begun at this checkpoint.
 
 **Latest checkpoint (2026-10-08 13:06 UTC):** AWMCP operation
 `exec-00000000000013cc` is terminal exit 1. The fresh `cache10r1` full

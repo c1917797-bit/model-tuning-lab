@@ -42,6 +42,8 @@ ATTEMPT_ROOTS = {
     "hotpath-cache10-full-hypic": "quality-context-41984-hotpath-cache10-full-hypic",
     "hotpath-cache10r1-full-baseline": "quality-context-41984-hotpath-cache10r1-full-baseline",
     "hotpath-cache10r1-full-hypic": "quality-context-41984-hotpath-cache10r1-full-hypic",
+    "hotpath-cache10r2-full-baseline": "quality-context-41984-hotpath-cache10r2-full-baseline",
+    "hotpath-cache10r2-full-hypic": "quality-context-41984-hotpath-cache10r2-full-hypic",
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
@@ -55,6 +57,8 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-cache10-full-hypic",
     "hotpath-cache10r1-full-baseline",
     "hotpath-cache10r1-full-hypic",
+    "hotpath-cache10r2-full-baseline",
+    "hotpath-cache10r2-full-hypic",
 })
 QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984

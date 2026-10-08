@@ -134,6 +134,15 @@ pooled with it because both had foreign-lane observations. A new candidate
 root must be declared only after an uncontended NPU0-3 window is arranged;
 the matched 0.85 baseline and performance comparison remain open.
 
+After this second isolation failure, a read-only monitor
+`exec-00000000000013de` observed 40 consecutive clean physical NPU0-3 and
+`cannbench_ds` process samples from 13:09:15 to 13:19:45 UTC. No foreign
+observation or probe error occurred during that bounded window. This is a
+prospective gate for a new `cache10r2` root, not proof of exclusive ownership
+for a multi-hour arm. The cache10r2 controller preserves the frozen quality
+ruler and adds same-observation Docker cgroup capture for transient foreign
+PIDs. The old 9-sample cache10 stress remains valid and is not rerun.
+
 The next attempt identity is `cache10r1`, with new full-candidate root
 `quality-context-41984-hotpath-cache10r1-full-hypic` and a separate matching
 control root `quality-context-41984-hotpath-cache10r1-full-baseline` if a
