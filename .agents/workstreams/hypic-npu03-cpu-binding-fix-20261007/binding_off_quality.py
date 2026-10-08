@@ -68,6 +68,7 @@ MODEL_INDEX_SHA = "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4
 MODEL_NAME = "qwen36-hypic-e2e-2048"
 MODEL_DIR = Path("/cache/efim/Qwen3.6-27B")
 BASE_URL = f"http://127.0.0.1:{PORT}"
+PROC_ROOT = Path("/proc")
 EXPERIMENT = f"hypic-npu03-bindingoff-quality41984-20261007-{ATTEMPT}"
 UNIT_ORDER = (("longbenchv2", 1), ("gsm8k", 1), ("longbenchv2", 2),
               ("gsm8k", 2), ("longbenchv2", 3), ("gsm8k", 3))
@@ -96,6 +97,16 @@ def npu_processes(snapshot: str) -> list[dict[str, int]]:
     """Return host PIDs actually using physical NPU0-3, not Docker claims."""
     return [{"physical_npu": int(card), "pid": int(pid)} for card, pid in
             re.findall(r"^\|\s*([0-3])\s+0\s*\|\s*(\d+)\s*\|", snapshot, re.M)]
+
+
+def foreign_container_id(pid: int) -> str | None:
+    """Capture transient Docker ownership during the same NPU observation."""
+    try:
+        cgroup = (PROC_ROOT / str(pid) / "cgroup").read_text(errors="replace")
+    except OSError:
+        return None
+    match = re.search(r"(?:/docker/|docker-)([a-f0-9]{64})", cgroup)
+    return match.group(1) if match else None
 
 
 class ForeignProcessGuard:
@@ -140,7 +151,13 @@ class ForeignProcessGuard:
                         or any(item["physical_npu"] == card for item in observed))
                        for card in range(4)):
                 raise RuntimeError("npu-smi process section incomplete")
-            foreign = [item for item in observed if item["pid"] not in self.expected]
+            foreign = []
+            for item in observed:
+                if item["pid"] in self.expected:
+                    continue
+                container_id = foreign_container_id(item["pid"])
+                foreign.append({**item, **({"container_id": container_id}
+                                         if container_id else {})})
             self._record(foreign, None)
         except Exception as exc:
             self._record([], f"{type(exc).__name__}: {exc}")

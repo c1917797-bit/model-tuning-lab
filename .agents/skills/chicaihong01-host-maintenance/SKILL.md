@@ -124,9 +124,11 @@ download.
   intermittently enter the target physical cards; one empty `npu-smi` snapshot
   does not establish an interference-free window. Keep a continuous
   physical-device process guard during the run. If an unexpected PID appears,
-  invalidate that arm, preserve the PID/time and raw artifacts, release only
-  owned resources, and re-establish isolation before any new-root retry.
-  A vanished PID without retained cgroup evidence does not prove its owner.
+  invalidate that arm, capture its cgroup/container identity at detection time
+  before a short-lived PID exits, preserve the PID/time and raw artifacts,
+  release only owned resources, and re-establish isolation before any new-root
+  retry. Container identity is not proof of the human launcher; a vanished PID
+  without retained cgroup evidence does not prove its owner.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.

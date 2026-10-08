@@ -29,9 +29,11 @@ class QualityLaneGuardTests(unittest.TestCase):
     def check(self, content: str, code: int = 0) -> quality.ForeignProcessGuard:
         guard = quality.ForeignProcessGuard("no-cache", self.workers)
         result = subprocess.CompletedProcess(["npu-smi", "info"], code, content, "")
-        with patch.object(quality.subprocess, "run", return_value=result), \
-                patch.object(quality, "write_json"):
-            guard.sample()
+        with tempfile.TemporaryDirectory() as temporary:
+            with patch.object(quality.subprocess, "run", return_value=result), \
+                    patch.object(quality, "PROC_ROOT", Path(temporary)), \
+                    patch.object(quality, "write_json"):
+                guard.sample()
         return guard
 
     def test_owned_workers_are_clean(self) -> None:
@@ -44,6 +46,26 @@ class QualityLaneGuardTests(unittest.TestCase):
         guard = self.check(snapshot("| 3       0                 | 356193        | python | 2704 |\n"))
         self.assertEqual(guard.foreign[0]["processes"],
                          [{"physical_npu": 3, "pid": 356193}])
+
+    def test_foreign_pid_captures_docker_cgroup_before_exit(self) -> None:
+        container_id = "a" * 64
+        with tempfile.TemporaryDirectory() as temporary:
+            cgroup = Path(temporary) / "356193" / "cgroup"
+            cgroup.parent.mkdir()
+            cgroup.write_text(f"13:pids:/docker/{container_id}\n")
+            result = subprocess.CompletedProcess(
+                ["npu-smi", "info"], 0,
+                snapshot("| 3       0                 | 356193        | python | 2704 |\n"), "")
+            guard = quality.ForeignProcessGuard("no-cache", self.workers)
+            with patch.object(quality, "PROC_ROOT", Path(temporary)), \
+                    patch.object(quality.subprocess, "run", return_value=result), \
+                    patch.object(quality, "write_json"):
+                self.assertEqual(quality.foreign_container_id(356193), container_id)
+                self.assertIsNone(quality.foreign_container_id(356194))
+                guard.sample()
+            self.assertEqual(guard.foreign[0]["processes"],
+                             [{"physical_npu": 3, "pid": 356193,
+                               "container_id": container_id}])
 
     def test_incomplete_or_failed_probe_is_not_clean(self) -> None:
         self.assertTrue(self.check("| NPU | Process id |\n").errors)
