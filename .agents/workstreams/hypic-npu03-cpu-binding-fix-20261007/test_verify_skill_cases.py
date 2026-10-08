@@ -88,6 +88,9 @@ class SkillCaseTests(unittest.TestCase):
         self.assertFalse(item["observed"]["terminal_quality_pair_complete"])
         self.assertFalse(item["observed"]["main_skill_integrated"])
         self.assertEqual(item["observed"]["r12_four_worker_verified_scored_requests"], 52)
+        self.assertEqual(item["observed"]["r12_cold_ready_cache_partial_chunk"], 1)
+        self.assertEqual(item["observed"]["r12_cold_scored_producer_rematerialization"], 4)
+        self.assertFalse(item["observed"]["r12_exact_cache_eviction_causality_proven"])
 
     def test_practice_iteration_main_contract_defect_stays_partial(self) -> None:
         path = cases.CASES / "mst-practice-iteration-planning.json"

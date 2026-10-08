@@ -37,6 +37,10 @@
     "r12_stress_samples_and_scored_responses": [19, 57],
     "r12_four_worker_verified_scored_requests": 52,
     "r12_missing_scored_pairs": ["77:1", "77:3", "81:3", "85:2", "88:2"],
+    "r12_cold_ready_cache_partial_chunk": 1,
+    "r12_cold_scored_producer_rematerialization": 4,
+    "r12_producer_attempts_unique_segments_repeated_segments": [23, 19, 4],
+    "r12_exact_cache_eviction_causality_proven": false,
     "r12_single_arm_correct_not_paired": 22,
     "r11_r12_within_arm_exact_long_response_pairs": [0, 1],
     "r11_r12_cross_source_one_token_observations_equal": 38,
@@ -80,10 +84,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/compare_cache10r11r12_stress.py",
       "sha256": "e833d0e81d29a86e9a580e1f282e1c82076bfc5e2f6bd784db44163e9fce7bd8"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_COLD_FALLBACK_ANALYSIS.md",
+      "sha256": "47c55771de921893417ec3d999b1bf3b959d13225b20201aae75bffa80a02cb9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/analyze_cache10r12_fallbacks.py",
+      "sha256": "fd77c60fbfed2631718239cb428ab281ba08f7293e7080a7319bada939df6573"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The r9 snapshot exposed an activation evidence gap; terminal r10 lacked proof for 15/381 scored requests, r11 for 4/57 and r12 for 5/57. The branch verifier correctly rejects each strict all-hot claim. The directory-rebuild source ran on NPU in r12, but its causal effect is not isolated and no same-identity no-cache control exists. Current main requires activation but lacks the per-scored-request join; branch repair is unintegrated. No paired HYPIC quality or performance verdict follows.",
+  "boundary": "The r9 snapshot exposed an activation evidence gap; terminal r10 lacked proof for 15/381 scored requests, r11 for 4/57 and r12 for 5/57. Independent r12 replay attributes one miss to a ready-cache segment longer than the first scheduled prefill chunk and four to scored producer/rematerialization paths; exact eviction causality remains unproven. The branch verifier rejects each strict all-hot claim. The directory-rebuild source ran on NPU in r12, but its causal effect is not isolated and no same-identity no-cache control exists. Current main requires activation but lacks the per-scored-request join; branch repair is unintegrated. No paired HYPIC quality or performance verdict follows.",
   "next_gate": "Prospectively choose whether the next original-protocol full pair claims every scored request is hot or evaluates deployed treatment with request-level hot/cold stratification. Preserve r11/r12 as strict stress fails. On actually idle physical NPU0-3, run a matching 0.85 control, full 2048-token paired quality, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; never reuse the 0.9 baseline.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
