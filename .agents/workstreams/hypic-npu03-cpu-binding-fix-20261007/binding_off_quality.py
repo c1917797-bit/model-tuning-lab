@@ -496,6 +496,17 @@ def cleanup(arm: str, container_id: str) -> None:
         raise RuntimeError(f"owned service released, but shared lane unavailable: {lane_error}")
 
 
+def stop_owned_for_abort(arm: str, container_id: str) -> None:
+    """Break in-flight requests after an invalid arm; final cleanup keeps the receipt."""
+    name = name_for(arm)
+    item = inspect(name)
+    if item is None:
+        raise RuntimeError("owned quality container absent during abort")
+    owned(item, arm, container_id)
+    if item["State"]["Status"] == "running":
+        run("docker", "stop", "--time", "30", container_id)
+
+
 def interrupt(_number: int, _frame: object) -> None:
     raise RuntimeError("quality controller interrupted; cleaning exact owned container")
 

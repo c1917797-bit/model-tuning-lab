@@ -235,6 +235,32 @@ def run_sample(item: dict, evaluator: object) -> dict:
     }
 
 
+def monitored_samples(items: list[dict], evaluator: object,
+                      guard: quality.ForeignProcessGuard, container_id: str,
+                      accept: object) -> None:
+    """Check isolation while requests are in flight, not only after a sample."""
+    with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as pool:
+        futures = {pool.submit(run_sample, item, evaluator) for item in items}
+        pending = set(futures)
+        try:
+            while pending:
+                done, pending = concurrent.futures.wait(
+                    pending, timeout=10, return_when=concurrent.futures.FIRST_COMPLETED)
+                guard.assert_clean()
+                for future in done:
+                    accept(future.result())
+        except Exception as exc:
+            for future in futures:
+                future.cancel()
+            try:
+                # The executor joins active HTTP requests on exit. Stop only
+                # this exact owned service so those requests can unblock.
+                quality.stop_owned_for_abort(ARM, container_id)
+            except Exception as stop_exc:
+                raise RuntimeError(f"{exc}; exact owned abort stop failed: {stop_exc}") from exc
+            raise
+
+
 def progress(stage: str, **details: object) -> None:
     record = {"stage": stage, "at_utc": datetime.now(timezone.utc).isoformat(),
               "arm": ARM, "mode": MODE, **details}
@@ -289,8 +315,9 @@ def main() -> int:
             # The first sample is serialized so its scored hot-path events
             # cannot be mistaken for another request's events.
             first = items[0]
-            first_row = run_sample(first, evaluator)
-            guard.assert_clean()
+            first_rows = []
+            monitored_samples([first], evaluator, guard, container_id, first_rows.append)
+            first_row = first_rows[0]
             result["first_sample_warm_events"] = first_row["warm_events"]
             result["first_sample_scored_events"] = first_row["first_scored_events"]
             if ARM == "hypic-only":
@@ -306,26 +333,18 @@ def main() -> int:
             progress("sentinel-complete", index=first["index"],
                      correct=sum(row["correct"] for row in first_row["scores"]))
 
-            with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as pool:
-                futures = {pool.submit(run_sample, item, evaluator): item["index"]
-                           for item in items[1:]}
-                for future in concurrent.futures.as_completed(futures):
-                    try:
-                        row = future.result()
-                    except Exception:
-                        for pending in futures:
-                            pending.cancel()
-                        raise
-                    guard.assert_clean()
-                    quality.write_json(sample_dir / f"{row['index']:03d}.json", row)
-                    if (MODE.startswith("pilot") and ARM == "hypic-only"
-                            and row["first_scored_events"]["verified_hot_requests"] < 1):
-                        raise RuntimeError(f"pilot sample {row['index']} did not hit scored hot path")
-                    result["completed_samples"] += 1
-                    result["scored_rows"] += REPETITIONS
-                    if result["completed_samples"] % 5 == 0 or result["completed_samples"] == len(items):
-                        progress("samples-running", completed=result["completed_samples"],
-                                 expected=len(items))
+            def accept_row(row: dict) -> None:
+                quality.write_json(sample_dir / f"{row['index']:03d}.json", row)
+                if (MODE.startswith("pilot") and ARM == "hypic-only"
+                        and row["first_scored_events"]["verified_hot_requests"] < 1):
+                    raise RuntimeError(f"pilot sample {row['index']} did not hit scored hot path")
+                result["completed_samples"] += 1
+                result["scored_rows"] += REPETITIONS
+                if result["completed_samples"] % 5 == 0 or result["completed_samples"] == len(items):
+                    progress("samples-running", completed=result["completed_samples"],
+                             expected=len(items))
+
+            monitored_samples(items[1:], evaluator, guard, container_id, accept_row)
             guard.assert_clean()
             all_events = events(evidence)
             result["events"] = event_summary(all_events)

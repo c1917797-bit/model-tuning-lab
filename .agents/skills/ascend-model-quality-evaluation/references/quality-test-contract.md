@@ -157,6 +157,11 @@ devices during each arm at a declared interval, identifying the expected worker
 PIDs and failing closed on an unrelated PID or an unobservable interval. If an
 external process appears, preserve that attempt and its otherwise valid rows as
 isolation-failed evidence; do not pair its control arm with a clean treatment.
+Consume the guard signal while long requests are still in flight, not only
+after a whole sample returns. On violation, cancel queued work and stop only
+the identity-verified owned service to unblock active requests, then write
+the normal exact-release receipt. Test this path offline with a blocked
+request and a simulated foreign-process observation before another long run.
 Prove release of the exact owned container, PIDs, and port separately from
 whether the whole lane is available again. Never stop the unrelated workload
 without its owner's authorization. A new clean attempt requires a fresh

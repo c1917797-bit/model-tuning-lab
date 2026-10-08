@@ -81,3 +81,29 @@ per-request worker-hot attribution, or establish full 127-sample quality.
 Next run only the missing full candidate and determine whether the previous
 0.9 control is sufficiently comparable for a descriptive reference or a
 fresh matched 0.85 control is required for a formal paired verdict.
+
+## First full candidate invalidated by lane interference (2026-10-08)
+
+Operation `exec-000000000000137a` started from source commit `a4d05be` on
+physical NPU0-3. The sentinel completed, but only 1/127 samples and 3/381
+scored rows were persisted. The guard made 199 observations, recorded 31
+foreign-process observations (12 distinct PIDs on physical NPU1 or NPU3),
+with no probe errors. The first foreign observation was at 12:07:41 UTC.
+This invalidates isolation and any quality comparison; it does not diagnose
+the HYPIC cache or score. Exact owned container/worker/port release passed
+at 12:38 UTC after stopping only the owned service. Preserve raw root
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10-full-hypic`.
+Contract, arm-result, lane-guard and service-stop SHA256 respectively:
+`9106bfb4a27e6dbd85d88fde76f126a1a9807a889d600e212cb6f9c4705e74c3`,
+`aea7b09e7f87a63ecd7612b8ea1840f72026288380265c445f3850a4f667771c`,
+`7fec65e7007e03c12620fc453e3dfe13aceaba9aa8fee228f4a4c7547dc17956`,
+`3a3a94b70f97d84be01728cb6c8483f977446d20db83c1dcbdf749be5f62720d`.
+
+The guard observed the conflict but the controller checked it only when a
+whole sample returned; long in-flight requests delayed termination by over
+30 minutes. The prospective repair polls the guard during requests, cancels
+queued work and stops only an identity-verified owned container to unblock
+the active requests. This is an execution-control repair, not a frozen
+algorithm/quality-ruler change. Verify it offline and use a new evidence root
+only after a fresh lane check; do not claim full quality from the earlier
+stress pass or this invalid arm.

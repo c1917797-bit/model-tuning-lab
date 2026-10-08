@@ -1,12 +1,15 @@
 # HYPIC NPU0-3 CPU-binding repair
 
-**Active full candidate (2026-10-08):** AWMCP operation
-`exec-000000000000137a` is running the frozen cache10 127-sample HYPIC
-candidate from source commit `a4d05be` on physical NPU0-3. Poll that exact
-operation and read
-`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10-full-hypic/progress.json`;
-do not restart on observation timeout or reuse the root. The independent
-9-sample stress gate below passed before launch. A 12-hour validation
+**Latest checkpoint (2026-10-08 12:44 UTC):** The frozen cache10 full HYPIC
+candidate operation `exec-000000000000137a` ended `arm-failed`, 1/127
+samples and 3/381 scored rows. The physical NPU0-3 guard recorded 31 foreign
+observations among 199 samples, first at 12:07:41 UTC, with zero probe errors;
+the arm is isolation-invalid, not a technical HYPIC or quality verdict.
+Only the exact owned container was stopped and removed, with worker/port
+release receipt; unrelated workloads and NPU4-7 were untouched. Preserve the
+failed raw root; never restart into it. The guard controller's delayed
+response while requests were in flight is being repaired and CPU-regression
+tested. Read `HOTPATH_CACHE10_REPAIR.md` for raw hashes. The 12-hour validation
 deadline began approximately 2026-10-08 11:33 UTC. The short/medium/long
 drift check is in `SKILL_VALIDATION_GOALS.md`.
 

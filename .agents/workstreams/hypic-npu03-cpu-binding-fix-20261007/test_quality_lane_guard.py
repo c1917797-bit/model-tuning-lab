@@ -49,6 +49,24 @@ class QualityLaneGuardTests(unittest.TestCase):
         self.assertTrue(self.check("| NPU | Process id |\n").errors)
         self.assertTrue(self.check(snapshot(), code=1).errors)
 
+    def test_abort_stop_requires_exact_owned_identity(self) -> None:
+        item = {"Id": "different-id", "State": {"Status": "running"}}
+        with patch.object(quality, "inspect", return_value=item), \
+                patch.object(quality, "owned", side_effect=RuntimeError("identity mismatch")), \
+                patch.object(quality, "run") as execute:
+            with self.assertRaisesRegex(RuntimeError, "identity mismatch"):
+                quality.stop_owned_for_abort("no-cache", "exact-owned-id")
+        execute.assert_not_called()
+
+    def test_abort_stop_uses_verified_container_id(self) -> None:
+        item = {"Id": "exact-owned-id", "State": {"Status": "running"}}
+        with patch.object(quality, "inspect", return_value=item), \
+                patch.object(quality, "owned") as owned, \
+                patch.object(quality, "run") as execute:
+            quality.stop_owned_for_abort("no-cache", "exact-owned-id")
+        owned.assert_called_once_with(item, "no-cache", "exact-owned-id")
+        execute.assert_called_once_with("docker", "stop", "--time", "30", "exact-owned-id")
+
     def test_cleanup_preserves_owned_release_when_foreign_lane_is_busy(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
