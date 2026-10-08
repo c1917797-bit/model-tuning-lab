@@ -14,9 +14,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 AUDIT_CAMPAIGN = os.environ.get("HYPIC_HOTPATH_AUDIT_CAMPAIGN", "original")
-if AUDIT_CAMPAIGN not in {"original", "reserve", "cache10", "cache10r1", "cache10r2", "cache10r3"}:
+if AUDIT_CAMPAIGN not in {"original", "reserve", "cache10", "cache10r1", "cache10r2", "cache10r3", "cache10r13"}:
     raise RuntimeError("unrecognized hot-path audit campaign")
-if AUDIT_CAMPAIGN in {"reserve", "cache10", "cache10r1", "cache10r2", "cache10r3"}:
+if AUDIT_CAMPAIGN in {"reserve", "cache10", "cache10r1", "cache10r2", "cache10r3", "cache10r13"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         "hotpath-reserve-full-baseline" if AUDIT_CAMPAIGN == "reserve" else
         f"hotpath-{AUDIT_CAMPAIGN}-full-baseline"
@@ -114,7 +114,9 @@ def frozen_pair_seam() -> dict:
 
 
 def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
-              *, expected: int = EXPECTED, mode: str = "full") -> dict:
+              *, expected: int = EXPECTED, mode: str = "full",
+              allow_hot_shortfall: bool = False,
+              require_source_attestation: bool = False) -> dict:
     require(root.is_dir(), f"{arm}: root absent")
     require(len(cases) == expected, f"{arm}: auditor case count drift")
     contract = load_json(root / "contract.json")
@@ -136,7 +138,10 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
             and contract["dataset_sha256"] == quality.DATASETS["longbenchv2"][2]
             and contract["baseline_row_sha256"] == FROZEN_SHA,
             f"{arm}: frozen inputs drift")
-    require(result["error"] is None and result["completed_samples"] == expected
+    allowed_errors = {None}
+    if allow_hot_shortfall and arm == "hypic-only":
+        allowed_errors.add("RuntimeError: candidate scored boundary/hot coverage incomplete")
+    require(result["error"] in allowed_errors and result["completed_samples"] == expected
             and result["scored_rows"] == expected * REPEATS, f"{arm}: incomplete controller")
     require(start["fingerprint"] == contract["fingerprint"],
             f"{arm}: service fingerprint drift")
@@ -155,6 +160,27 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
     require(result["service_stop_sha256"] == quality.sha256(root / arm / "service-stop.json")
             and result["lane_guard_sha256"] == quality.sha256(root / arm / "lane-guard.json"),
             f"{arm}: guard/release hash drift")
+    if require_source_attestation:
+        attestation_path = root / arm / f"source-attestation.{start['container_id'][:12]}.json"
+        attestation = load_json(attestation_path)
+        source_root = Path(contract["fingerprint"]["plugin_source_root"])
+        source = quality.python_source_digest(source_root / "hypic_vllm_ascend")
+        require(start.get("source_attestation_sha256") == quality.sha256(attestation_path)
+                and load_json(root / arm / "source-attestation.json") == attestation
+                and attestation.get("schema") == "hypic-serving-source-attestation/v1"
+                and attestation.get("container_id") == start["container_id"]
+                and attestation.get("image") == contract["fingerprint"]["image"]
+                and attestation.get("selected_source_commit")
+                    == contract["fingerprint"]["source_commit"]
+                and attestation.get("selected_source_root") == str(source_root)
+                and attestation.get("container_import_file")
+                    == "/opt/hypic/hypic_vllm_ascend/__init__.py"
+                and attestation.get("python_files") == source["python_files"]
+                and attestation.get("python_tree_sha256") == source["python_tree_sha256"]
+                and f"{source_root}:/source-hypic:ro" in attestation.get("actual_binds", [])
+                and f"{quality.ROOT}:/results" in attestation.get("actual_binds", [])
+                and isinstance(attestation.get("actual_command"), list),
+                f"{arm}: live source attestation drift")
     rows = []
     ids = set()
     for item in cases:
@@ -218,7 +244,8 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
             require(len(matches) == 1, f"{arm}: scored boundary join failed at {scored['index']}")
         verified = sum(int(event.get("verified_hot_requests", 0)) for event in events
                        if event.get("event") == "complete_hybrid_repair")
-        require(verified >= len(rows), f"{arm}: verified hot coverage {verified}/{len(rows)}")
+        if not allow_hot_shortfall:
+            require(verified >= len(rows), f"{arm}: verified hot coverage {verified}/{len(rows)}")
         first = load_json(root / "samples" / f"{cases[0]['index']:03d}.json")
         require(not first["warm_events"]["hot_worker_pids"]
                 and len(first["first_scored_events"]["hot_worker_pids"]) == 4
@@ -233,6 +260,8 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
         "container_id": start["container_id"], "guard_samples": guard["samples"],
         "scored_rows": len(rows), "verified_hot_requests": verified,
         "worker_hot_event_count": len(hot),
+        "controller_error": result["error"],
+        "source_attestation_sha256": start.get("source_attestation_sha256"),
         "correct": sum(row["correct"] for row in rows),
         "length_limit": sum(row["finish_reason"] == "length" for row in rows),
         "rows": rows, "fingerprint": contract["fingerprint"],

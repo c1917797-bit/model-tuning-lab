@@ -71,8 +71,8 @@ cache10split remains unapproved and must not run.
 
 ## 4. Current Action
 
-No HYPIC controller is active. r11 and r12 are both immutable strict
-activation negatives, not paired quality/performance verdicts. r12's
+r13 no-cache full controller handle `exec-0000000000001a76` launched and
+must be polled, not restarted. r11/r12 remain immutable strict negatives. r12's
 corrected plugin source executed on physical NPU0–3, but five scored
 requests still fell back cold; source-fix causality is not isolated.
 The r13 plan prospectively reports all-request deployed effect and separately
@@ -82,8 +82,8 @@ containers. C3 remains missing.
 
 ## 5. Next Actions
 
-1. Preserve r12 negative evidence; do not rerun unchanged bytes. Freeze the
-   next full-pair decision rule before a new same-identity 0.85 control.
+1. Preserve r12 negative evidence; do not rerun unchanged bytes. Audit r13
+   baseline terminal receipts before any actual-idle candidate launch.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
 3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
