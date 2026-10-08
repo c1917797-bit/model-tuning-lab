@@ -77,8 +77,8 @@ entered during startup. Do not blindly reattempt under the same shared
 scheduling conditions. Continue non-device Skill acceptance and obtain a
 durable exclusive NPU0–3 window before a new unique full arm. Passive Docker
 mappings alone remain irrelevant. The branch remote was independently
-verified at dcf1c27227e4f908d22d2233c87bbabc43d07bbd before this update;
-newer local commits are not yet confirmed on the remote.
+verified at 06279f67865b59aede6edcdea0b78da21429e720 before this
+handoff update; recheck latest HEAD and remote on resume.
 
 ## 5. Next Actions
 

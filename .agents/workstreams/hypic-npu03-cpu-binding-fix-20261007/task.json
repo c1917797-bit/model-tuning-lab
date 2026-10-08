@@ -26,10 +26,10 @@
   },
   "pending_attempt": null,
   "git_push_state": {
-    "status": "remote_verified_at_dcf1c27; later_local_commit_pending_push",
-    "last_verified_remote_commit": "dcf1c27227e4f908d22d2233c87bbabc43d07bbd",
-    "push_operation": "exec-000000000000152a",
-    "live_remote_read_operation": "exec-0000000000001537",
+    "status": "check_live_remote_on_resume; prior checkpoint independently verified",
+    "last_verified_remote_commit": "06279f67865b59aede6edcdea0b78da21429e720",
+    "push_operation": "exec-0000000000001555",
+    "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After later validated commits, push the named workstream branch without force and independently verify live remote/upstream equality. The successful recovery used per-command git -c http.version=HTTP/1.1, not a persistent config edit."
   },
   "next_action": "Do not reuse r3-r7 or launch a duplicate under the same intermittently shared scheduling conditions. Continue non-device per-Skill acceptance; seek a durable exclusive physical NPU0-3 window before a new unique original-protocol arm. Ignore passive mappings but stop on actual foreign PIDs. Never touch foreign containers or NPU4-7. Verify and push local named-branch commits without reset/force. HYPIC full paired quality, performance, and all-Skill acceptance remain incomplete."
