@@ -44,7 +44,7 @@ RESERVE_PAIRS = {("hypic-only", "stress"), ("no-cache", "full"),
 if not ((CAMPAIGN == "original" and (ARM, MODE) in ORIGINAL_PAIRS)
         or (CAMPAIGN == "reserve" and (ARM, MODE) in RESERVE_PAIRS)
         or (CAMPAIGN == "cache10" and (ARM, MODE) in RESERVE_PAIRS)
-        or (CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5", "cache10r6", "cache10r7", "cache10r8", "cache10r9", "cache10r10"}
+        or (CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5", "cache10r6", "cache10r7", "cache10r8", "cache10r9", "cache10r10", "cache10r13"}
             and (ARM, MODE) in {("no-cache", "full"), ("hypic-only", "full")})
         or (CAMPAIGN in {"cache10r11", "cache10r12"}
             and (ARM, MODE) == ("hypic-only", "stress"))
@@ -61,7 +61,7 @@ elif CAMPAIGN == "cache10r11":
     os.environ["HYPIC_QUALITY_ATTEMPT"] = "hotpath-cache10r11-stress-hypic"
 elif CAMPAIGN == "cache10r12":
     os.environ["HYPIC_QUALITY_ATTEMPT"] = "hotpath-cache10r12-stress-hypic"
-elif CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5", "cache10r6", "cache10r7", "cache10r8", "cache10r9", "cache10r10"}:
+elif CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5", "cache10r6", "cache10r7", "cache10r8", "cache10r9", "cache10r10", "cache10r13"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         f"hotpath-{CAMPAIGN}-full-baseline" if ARM == "no-cache" else
         f"hotpath-{CAMPAIGN}-full-hypic"

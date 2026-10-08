@@ -77,7 +77,7 @@ def main() -> int:
             and "paper_missing=C3.1,C3.2,C3.3,C3.4,C3.5,C3.6" in log,
             "runtime import or C3 boundary drift")
     controller = checked(HERE / "binding_off_quality.py",
-        "e55fd301a888b0f4966d915714e3c3bac48463d68958f22226f3bd38e8a9157e").decode()
+        "1b3a71f2583c2ba61b2219acfc8b89839744d93af6b66c20e67a99a1bec3c2f7").decode()
     require("frozen_plugin_mount" in controller
             and 'sorted(item["HostConfig"]["Binds"]) == sorted(binds)' in controller
             and "selected_plugin_source()" in controller

@@ -49,7 +49,8 @@ performance, isolation and independent audits before a final conclusion.
 Short term: original full single-service HYPIC quality then performance on
 physical NPU0–3 only. Medium term: map HYPIC outcomes to relevant Skills
 and focused regressions. Long term: exact-main per-Skill real-task cases.
-Optional cache10split is an unapproved revised protocol: do not run it.
+Prospective cache10r13 full 127x3 pair freezes dual deployed/strict conclusions;
+cache10split remains unapproved and must not run.
 
 ## 3. Recent Progress
 
@@ -74,8 +75,8 @@ No HYPIC controller is active. r11 and r12 are both immutable strict
 activation negatives, not paired quality/performance verdicts. r12's
 corrected plugin source executed on physical NPU0–3, but five scored
 requests still fell back cold; source-fix causality is not isolated.
-The user has been asked to choose the prospective full-pair rule:
-deployed effect with request-level hot/cold stratification or 100% hot.
+The r13 plan prospectively reports all-request deployed effect and separately
+gates a strict 381/381 hot-path conclusion; neither can substitute for the other.
 Do not post-hoc pass either root, use NPU4–7, or modify foreign
 containers. C3 remains missing.
 
