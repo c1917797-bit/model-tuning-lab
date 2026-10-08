@@ -26,9 +26,19 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 2)
-        self.assertEqual(report["skills_without_case"], 27)
-        self.assertEqual(report["case_acceptance"], {"partial-evidence": 2})
+        self.assertEqual(report["cases_with_verified_provenance"], 3)
+        self.assertEqual(report["skills_without_case"], 26)
+        self.assertEqual(report["case_acceptance"],
+                         {"partial-evidence": 2, "verified": 1})
+
+    def test_git_checkpoint_case_is_bounded_verified(self) -> None:
+        path = cases.CASES / "mst-git-checkpoint-policy.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"mst-git-checkpoint-policy"})
+        self.assertEqual(skill, "mst-git-checkpoint-policy")
+        self.assertEqual(state, "verified")
+        self.assertIn("named-workstream checkpoint",
+                      json.loads(path.read_text())["boundary"])
 
     def test_host_isolation_case_is_bounded_not_algorithm_success(self) -> None:
         path = cases.CASES / "chicaihong01-host-maintenance.json"

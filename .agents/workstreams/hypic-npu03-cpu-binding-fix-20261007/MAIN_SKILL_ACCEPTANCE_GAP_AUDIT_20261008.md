@@ -25,6 +25,15 @@ differences and incomplete canonical-main workflow preclude full acceptance.
 The case inventory is now 2 provenance-checked partial cases, 27 missing,
 and 0 long-term verified. No quality score or Skill-wide pass is inferred.
 
+At 15:15 UTC, a separate real Git checkpoint exercised the confirmed
+`commit_implies_push` named-workstream path: validation exited 0 before
+the coherent commit, immediate push reached the named remote branch, and
+a subsequent live remote check matched HEAD/upstream with a clean worktree.
+The new `mst-git-checkpoint-policy` case and focused replay script limit
+acceptance to that representative path. The inventory is now **3 cases:
+1 long-term verified in bounded scope, 2 partial, 26 missing**. This does
+not upgrade the other policy options or HYPIC quality.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

@@ -1,0 +1,41 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-git-checkpoint-policy",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
+  "behavioral_evidence_verified": true,
+  "task": "After validation, commit one coherent host-isolation case checkpoint and push it immediately to the named remote workstream branch",
+  "executed_at_utc": "2026-10-08T15:15:26Z",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "10da1ba69cb54c46dc6bdbdbbe7c434bc1b423f8",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma, named Git worktree on branch work/hypic-npu03-cpu-binding-fix-20261007; CPU/Git only",
+  "observed": {
+    "confirmed_policy": "commit_implies_push",
+    "validation_operation": "exec-0000000000001497",
+    "validation_exit_code": 0,
+    "validation_tree": "PASS: Maintainer Skill Tree structure is valid (29 skills)",
+    "offline_tests_passed": 27,
+    "commit_push_operation": "exec-0000000000001498",
+    "commit_push_exit_code": 0,
+    "checkpoint_commit": "57771f36d194098883119aeb28692017399cac15",
+    "remote_work_branch": "origin/work/hypic-npu03-cpu-binding-fix-20261007",
+    "remote_equality_check_operation": "exec-000000000000149d",
+    "worktree_clean_after_push": true
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/GIT_CHECKPOINT_ACCEPTANCE_20261008.md",
+      "sha256": "66517a07c409bf5b768273c84f67b7de543d682204c50a9e3a17feab5ffb11ca"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_git_checkpoint_case.py",
+      "sha256": "e88933cc82dc2f02ec3c580f81f6a2f1c0dadff0df683bd85b61d8ce3af3ab44"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Verified only for the representative maintainer-confirmed commit_implies_push named-workstream checkpoint: validation, coherent commit, immediate branch push and clean upstream equality. No direct-primary exception, manual policy, PR path, force-push rejection, future agent behavior or worktree reclamation was tested.",
+  "drift_trigger": "Revalidate if main Skill blob, git policy, branch routing, checkpoint ancestry or remote/upstream state changes."
+}
