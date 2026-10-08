@@ -1,0 +1,63 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "paper-ingestion",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Ingest versioned HYPIC paper into bounded C1/C2/C3 target hypotheses for the actual Qwen3.5-architecture hybrid checkpoint, separating author SGLang claims, vLLM-Ascend derivative and incomplete local evidence",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "69edbce77685c9ae4cc20a22bbca403bbbd4e390",
+  "tested_reference_git_blob_oid": "1bd43ec9c2bf50882a8b16a0835d3102ba01f848",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "Read-only paper and target-model ingestion for chicaihong01 Qwen3.6-named but Qwen3_5ForConditionalGeneration BF16 checkpoint; no NPU use or benchmark repeat",
+  "observed": {
+    "paper_version": "arxiv:2607.01299v2",
+    "paper_source_rechecked": true,
+    "old_author_repo_namespace_redirects_to_current": true,
+    "exact_author_git_commit_pinned": false,
+    "branch_skill_differs_from_exact_main": true,
+    "branch_skill_git_blob_oid": "beeb050718caa697097e254a7d3fafb3e557c473",
+    "retrospective_review_not_claimed_as_historical_preimplementation_gate": true,
+    "target_model_type": "qwen3_5",
+    "target_text_layers": 64,
+    "target_linear_layers": 48,
+    "target_full_layers": 16,
+    "bounded_c1_c2_single_instance_hypothesis_fit_for_testing": true,
+    "paper_c3_multi_replica_present": false,
+    "complete_paper_to_code_mapping_proven": false,
+    "full_explicit_max2048_quality_pair_complete": false,
+    "paper_ingestion_final_acceptance": false,
+    "case_integrated_in_main": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_INGESTION_CASE_20261009.md",
+      "sha256": "71b43dedf0a1705f0da910ed93d9fdfa87ee52330a5a142ff8ce3327a05a9bca"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_ingestion_case.py",
+      "sha256": "8fd3317725cded5494bdb9f084c316beeda9a53c1808477030627d8b8a4f1e36"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_ARCHITECTURE_FIT.md",
+      "sha256": "d93107c4f69c1a30511183acb0dde1e31f3e9bcf41b2721d983e2e8daf6c6f31"
+    }
+  ],
+  "external_sources": {
+    "versioned_paper": "https://arxiv.org/html/2607.01299v2",
+    "author_project_current": "https://github.com/redai-studio/HYPIC",
+    "author_project_old_redirect": "https://github.com/redai-infra/HYPIC"
+  },
+  "external_raw_receipts": {
+    "target_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "target_model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+    "derivative_plugin_head": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "A versioned paper, existing source/architecture audit and current model config support a bounded C1/C2 text-only test hypothesis. This retrospective case is not a pre-implementation gate, exact upstream code revision, full C3 implementation, matched quality result, author-claim reproduction or main integration. Branch-only bounded/full-scope guidance is not credited to exact main.",
+  "next_gate": "Pin author Git revision and source/license mapping; freeze the current paired claim rule; on actually idle physical NPU0-3 run same-identity explicit-boundary max2048 quality and repeated performance with continuous isolation; assess C3 separately only with authorized multi-replica resources.",
+  "drift_trigger": "Revalidate on paper version, author-code commit/license, main or branch Skill/reference/registry blob, target config/index, derivative source, or workload/quality contract change."
+}

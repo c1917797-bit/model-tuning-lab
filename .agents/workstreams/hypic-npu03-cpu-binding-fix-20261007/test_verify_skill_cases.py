@@ -26,10 +26,22 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 15)
-        self.assertEqual(report["skills_without_case"], 14)
+        self.assertEqual(report["cases_with_verified_provenance"], 16)
+        self.assertEqual(report["skills_without_case"], 13)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 13, "verified": 2})
+                         {"partial-evidence": 14, "verified": 2})
+
+    def test_paper_ingestion_preserves_source_and_c3_boundary(self) -> None:
+        path = cases.CASES / "paper-ingestion.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"paper-ingestion"})
+        self.assertEqual(skill, "paper-ingestion")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["branch_skill_differs_from_exact_main"])
+        self.assertFalse(item["observed"]["exact_author_git_commit_pinned"])
+        self.assertFalse(item["observed"]["paper_c3_multi_replica_present"])
+        self.assertFalse(item["observed"]["paper_ingestion_final_acceptance"])
 
     def test_reporting_case_does_not_promote_progress_to_final(self) -> None:
         path = cases.CASES / "paper-to-ascend-reporting.json"
