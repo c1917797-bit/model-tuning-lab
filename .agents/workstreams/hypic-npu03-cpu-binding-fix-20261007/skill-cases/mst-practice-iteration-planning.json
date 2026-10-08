@@ -1,0 +1,49 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-practice-iteration-planning",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Use current-main practice-iteration guidance to make a verifiable HYPIC NPU0-3 quality-preflight stage plan and test the plan against the repository validator",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "171e1f401b18dc6aaa4d38a2c3b6b260fca46123",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 named worktree, CPU-only repository planning and validation; no new NPU experiment",
+  "observed": {
+    "main_example_schema": "practice-iteration/v1",
+    "validator_required_schema": "mst-practice-iteration/v1",
+    "main_example_missing_validated_commit": true,
+    "first_validator_exit": 1,
+    "first_validator_error": "missing practice iteration schema",
+    "branch_repair_commit": "4a95c87b8bf6a59557ad0e45c42e7b0616593caa",
+    "repaired_validator_exit": 0,
+    "plan_status": "in_progress",
+    "future_iterations_with_pass_criteria": 2,
+    "quality_pair_complete": false,
+    "main_skill_integrated": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md",
+      "sha256": "f267a9dca346ffa6d770d328d19c30e78ed9c244230fb7ece6269ce2f708f11a"
+    },
+    {
+      "path": ".agents/evals/practice-iterations/hypic-npu03-quality-preflight-20261008.yaml",
+      "sha256": "ea78b10f9703ef3ab3fd454224d56f9bf195de17b378150a4038ac856338a827"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_practice_iteration_case.py",
+      "sha256": "1f39d3af38f7ab5e36d6cc9b6c741491c009c6ab66f9a089d429a1c3404e7502"
+    },
+    {
+      "path": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "sha256": "cfce04ecad0310a2d291f57ffd8453b121671c75ee29c662d0a93f0c759dbcfd"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Current main Skill's exact output example fails the current repository validator, so main long-term acceptance is partial. The named branch repair passes on a real HYPIC stage plan, but it has not been integrated and replayed from a fresh main clone. This case does not establish an uninterrupted NPU window or HYPIC quality/performance.",
+  "drift_trigger": "Revalidate after the practice-iteration Skill or validate-mst.sh schema changes, main integration, or a change to the HYPIC stage ruler."
+}

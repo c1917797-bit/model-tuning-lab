@@ -12,7 +12,7 @@
   acceptance remain incomplete. cache10r3 through cache10r7 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 4 partial, 23 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 5 partial, 22 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 
 ## 1. North Star
@@ -46,9 +46,9 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   `cannbench_ds` on physical NPU2 and releases only the exact owned
   container within about 135 seconds, at 0/127 scored samples. See
   HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md and immutable hashes.
-- A fifth provenance-checked Skill case now records the bounded
-  `ascend-npu-environment-orientation` behavior as partial, not verified;
-  see NPU_ENVIRONMENT_ORIENTATION_ACCEPTANCE_20261008.md and the gap audit.
+- The seventh case caught `mst-practice-iteration-planning`'s main YAML
+  schema mismatch; the branch Skill repair and bounded HYPIC plan pass.
+  Main remains partial; see PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md.
 - cache10r6 launched after ten actual-idle checks, ignoring passive
   mappings. Startup guard caught foreign PID 1426552 on physical NPU2
   at 16:21:22 UTC, stopped at 0/127 and released only owned resources;

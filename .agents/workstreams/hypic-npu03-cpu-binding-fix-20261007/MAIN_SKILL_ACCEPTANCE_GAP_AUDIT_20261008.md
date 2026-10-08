@@ -63,6 +63,16 @@ does not yet contain the continuous guard, so the long-term state remains
 **partial-evidence**. Inventory: **6 cases, 2 bounded verified, 4 partial,
 23 missing**. This does not validate HYPIC algorithm quality or performance.
 
+At 16:50 UTC, a seventh real-task case followed the exact current-main
+`mst-practice-iteration-planning` output example to create a HYPIC quality
+preflight YAML. `validate-mst.sh` rejected it: the Skill prescribed
+`practice-iteration/v1` while the validator requires
+`mst-practice-iteration/v1` and `validated_commit`. A minimal branch Skill
+repair, an in-progress plan with two bounded next iterations, and a focused
+replay now pass. Main remains defective and unintegrated, so this is another
+**partial-evidence** case, not a main-Skill pass. Inventory: **7 cases,
+2 bounded verified, 5 partial, 22 missing**.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

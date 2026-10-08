@@ -26,10 +26,20 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 6)
-        self.assertEqual(report["skills_without_case"], 23)
+        self.assertEqual(report["cases_with_verified_provenance"], 7)
+        self.assertEqual(report["skills_without_case"], 22)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 4, "verified": 2})
+                         {"partial-evidence": 5, "verified": 2})
+
+    def test_practice_iteration_main_contract_defect_stays_partial(self) -> None:
+        path = cases.CASES / "mst-practice-iteration-planning.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"mst-practice-iteration-planning"})
+        self.assertEqual(skill, "mst-practice-iteration-planning")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["first_validator_exit"], 1)
+        self.assertFalse(item["observed"]["main_skill_integrated"])
 
     def test_experience_ingestion_case_keeps_main_gap_partial(self) -> None:
         path = cases.CASES / "mst-experience-ingestion.json"
