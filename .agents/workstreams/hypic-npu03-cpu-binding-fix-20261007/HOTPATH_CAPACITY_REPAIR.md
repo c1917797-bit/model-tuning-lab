@@ -90,6 +90,15 @@ lane-guard SHA256:
 service-stop SHA256:
 `ec0c2a9eaf32e70bfcd3628cb0921113ffec312cff1f21e3b093b9fed178f7fe`.
 
+The same failed attempt nevertheless supplied a bounded startup-capacity
+observation: its retained service log (SHA256
+`f702b845bffd5dce6e30dec1232b6df52589931cf3a279858899cec427e10587`)
+records the actual 0.85 launch, 9.31 GiB available KV memory, a 532,248-token
+GPU KV cache, and a logged 12.68x maximum concurrency for a 41,984-token
+request. That validates the projected KV allocation and nominal c8 admission,
+not the dynamic HYPIC replay reserve under nine completed stress samples.
+The sentinel began but no sample completed before the external-PID abort.
+
 The only authorized next stress root is `reserve2/stress` below. Before
 launch, inspect physical 0-3 use and active job configuration over a quiet
 window; an instantaneous empty snapshot is insufficient. Abort on any new
