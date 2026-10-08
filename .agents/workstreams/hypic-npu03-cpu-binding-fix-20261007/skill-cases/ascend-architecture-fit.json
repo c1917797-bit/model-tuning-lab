@@ -1,0 +1,61 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-architecture-fit",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Evaluate exact-main architecture-fit Skill on actual HYPIC Qwen3.5-architecture checkpoint and vLLM-Ascend derivative, with separate C1/C2 single-instance and C3 multi-replica decisions plus the required pre-implementation chronology gate",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "c8da4422b492bb6ca1ae6b40bb2563bd412dde79",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "Read-only retrospective architecture/runtime audit of chicaihong01 physical NPU0-3 TP4 hybrid BF16 text path; no NPU use and no unchanged benchmark repeat",
+  "observed": {
+    "main_and_branch_skill_same_blob": true,
+    "target_model_type": "qwen3_5",
+    "target_text_layers": 64,
+    "target_linear_layers": 48,
+    "target_full_layers": 16,
+    "retrospective_hot_reuse_source_audit_pass": true,
+    "retrospective_paper_complete_source_audit_pass": false,
+    "historical_six_performance_units_valid": true,
+    "c1_c2_single_instance_configured_fit": "fits-now",
+    "c3_current_single_replica_fit": "does-not-fit",
+    "historical_preimplementation_git_decision_gate_met": false,
+    "full_explicit_max2048_quality_pair_complete": false,
+    "full_paper_reproduction_accepted": false,
+    "case_integrated_in_main": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_ARCHITECTURE_FIT_CASE_20261009.md",
+      "sha256": "f09747e395f716db99cc1d8586b6142385bc22253a962ca2072e7dbfb60b559f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_architecture_fit_case.py",
+      "sha256": "a6bde2a6defbce2dd34887c075bdba33fa0eb0aa6ddd9c5468fc649debc579ce"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_ARCHITECTURE_FIT.md",
+      "sha256": "d93107c4f69c1a30511183acb0dde1e31f3e9bcf41b2721d983e2e8daf6c6f31"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
+      "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    }
+  ],
+  "external_raw_receipts": {
+    "target_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "target_tokenizer_config_sha256": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+    "target_tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "target_model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+    "derivative_plugin_head": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "The current model and configured derivative support a bounded C1/C2 text hot-reuse fit decision; C3 does not fit the one-TP4-replica service. Existing source audit is explicitly retrospective, so exact-main Skill's pre-implementation Git evidence gate was not historically met. Performance evidence does not substitute for complete hot-path quality, paper C3, adoption, or all-model generalization.",
+  "next_gate": "For the next architecture-changing implementation, record exact target/config/tokenizer/runtime/operator/topology and fit verdict in Git before editing code. Finish this HYPIC campaign's prospectively frozen paired explicit-boundary max2048 quality and performance only on actually idle physical NPU0-3; treat C3 as a separate authorized multi-replica scope.",
+  "drift_trigger": "Revalidate when exact-main Skill/registry, model config/tokenizer/index, derivative source, serving image/runtime/topology, paper mechanism, source-audit or raw performance receipt changes."
+}

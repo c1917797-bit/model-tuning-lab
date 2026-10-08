@@ -26,10 +26,23 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 16)
-        self.assertEqual(report["skills_without_case"], 13)
+        self.assertEqual(report["cases_with_verified_provenance"], 17)
+        self.assertEqual(report["skills_without_case"], 12)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 14, "verified": 2})
+                         {"partial-evidence": 15, "verified": 2})
+
+    def test_architecture_fit_retrospective_is_not_prospective_pass(self) -> None:
+        path = cases.CASES / "ascend-architecture-fit.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-architecture-fit"})
+        self.assertEqual(skill, "ascend-architecture-fit")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["c1_c2_single_instance_configured_fit"],
+                         "fits-now")
+        self.assertEqual(item["observed"]["c3_current_single_replica_fit"],
+                         "does-not-fit")
+        self.assertFalse(item["observed"]["historical_preimplementation_git_decision_gate_met"])
 
     def test_paper_ingestion_preserves_source_and_c3_boundary(self) -> None:
         path = cases.CASES / "paper-ingestion.json"
