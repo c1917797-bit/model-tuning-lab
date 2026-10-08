@@ -26,10 +26,21 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 17)
-        self.assertEqual(report["skills_without_case"], 12)
+        self.assertEqual(report["cases_with_verified_provenance"], 18)
+        self.assertEqual(report["skills_without_case"], 11)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 15, "verified": 2})
+                         {"partial-evidence": 16, "verified": 2})
+
+    def test_source_map_preserves_serving_provenance_limits(self) -> None:
+        path = cases.CASES / "ascend-source-map.json"
+        skill, state = cases.check_case(path, self.main_commit, {"ascend-source-map"})
+        self.assertEqual(skill, "ascend-source-map")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["r12_controller_bind_identity_enforced"])
+        self.assertFalse(item["observed"]["r12_independent_raw_docker_bind_receipt_retained"])
+        self.assertFalse(item["observed"]["c3_cross_replica_implemented"])
+        self.assertFalse(item["observed"]["full_2048_token_paired_quality_complete"])
 
     def test_architecture_fit_retrospective_is_not_prospective_pass(self) -> None:
         path = cases.CASES / "ascend-architecture-fit.json"
