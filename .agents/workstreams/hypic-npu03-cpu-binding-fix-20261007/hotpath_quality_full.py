@@ -27,11 +27,13 @@ ARM = os.environ.get("HYPIC_HOTPATH_QUALITY_ARM", "")
 MODE = os.environ.get("HYPIC_HOTPATH_QUALITY_MODE", "")
 if (ARM, MODE) not in {
     ("hypic-only", "pilot"),
+    ("hypic-only", "pilot2"),
     ("no-cache", "full"),
     ("hypic-only", "full"),
 }:
-    raise RuntimeError("allowed arm/mode pairs: hypic-only/pilot, no-cache/full, hypic-only/full")
+    raise RuntimeError("allowed arm/mode pairs: hypic-only/pilot[2], no-cache/full, hypic-only/full")
 os.environ["HYPIC_QUALITY_ATTEMPT"] = (
+    "hotpath-pilot2-hypic" if MODE == "pilot2" else
     "hotpath-pilot-hypic" if MODE == "pilot" else
     "hotpath-full-baseline" if ARM == "no-cache" else
     "hotpath-full-hypic"
@@ -45,8 +47,8 @@ BASELINE_SHA256 = "812a4281c167327ae69b96766e550f58ffb905c889c60bc0a649850ec5cc5
 DATASET = "longbenchv2"
 MAX_OUTPUT = 2048
 WARM_COUNT = 2
-REPETITIONS = 1 if MODE == "pilot" else 3
-CONCURRENCY = 1 if MODE == "pilot" else 8
+REPETITIONS = 1 if MODE.startswith("pilot") else 3
+CONCURRENCY = 1 if MODE.startswith("pilot") else 8
 REQUEST_TIMEOUT = 900
 
 
@@ -87,7 +89,7 @@ def cases() -> tuple[list[dict], object]:
             "boundary": boundary, "difficulty": sample.get("difficulty"),
             "length": sample.get("length"),
         })
-    if MODE == "pilot":
+    if MODE.startswith("pilot"):
         shortest = min(items, key=lambda item: item["prompt_tokens"])["index"]
         longest = max(items, key=lambda item: item["prompt_tokens"])["index"]
         selected = [0, shortest, longest]
@@ -165,6 +167,15 @@ def event_summary(rows: list[dict]) -> dict:
         "verified_skipped_tokens": sum(int(row.get("verified_skipped_tokens", 0))
                                        for row in rows if row.get("event") == "complete_hybrid_repair"),
     }
+
+
+def scored_boundary_match(scored_id: str, boundary_ids: set[str]) -> bool:
+    """API ID is the scheduler ID prefix before its internal request suffix."""
+    if not isinstance(scored_id, str) or not scored_id.startswith("chatcmpl-"):
+        return False
+    matches = [item for item in boundary_ids
+               if item == scored_id or item.startswith(scored_id + "-")]
+    return len(matches) == 1
 
 
 def run_sample(item: dict, evaluator: object) -> dict:
@@ -281,7 +292,7 @@ def main() -> int:
                         raise
                     guard.assert_clean()
                     quality.write_json(sample_dir / f"{row['index']:03d}.json", row)
-                    if (MODE == "pilot" and ARM == "hypic-only"
+                    if (MODE.startswith("pilot") and ARM == "hypic-only"
                             and row["first_scored_events"]["verified_hot_requests"] < 1):
                         raise RuntimeError(f"pilot sample {row['index']} did not hit scored hot path")
                     result["completed_samples"] += 1
@@ -297,7 +308,8 @@ def main() -> int:
                               for score in json.loads(path.read_text())["scores"]}
                 boundary_ids = {row.get("request_id") for row in all_events
                                 if row.get("event") == "explicit_segment_boundary_active"}
-                if (not scored_ids.issubset(boundary_ids)
+                if (not all(scored_boundary_match(value, boundary_ids)
+                            for value in scored_ids)
                         or result["events"]["verified_hot_requests"] < result["scored_rows"]):
                     raise RuntimeError("candidate scored boundary/hot coverage incomplete")
             elif result["events"]["hot_worker_pids"]:

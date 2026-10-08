@@ -57,7 +57,22 @@ canaries took roughly 9 minutes per service including about 7 minutes to load;
 project approximately 2-4 hours per full arm plus service transitions and
 independent audit, with a conservative 10-hour overall monitoring window.
 Persist one sample at a time outside Git and keep exact operation IDs for
-resume. Never restart a live controller. On timeout or lane intrusion,
+recovery. A terminated partial attempt is not resumed in place: preserve its
+rows and use a new root after auditing the stop cause. Never restart a live
+controller. On timeout or lane intrusion,
 preserve partial rows and release only the exact-owned container; do not pair
 an invalid control arm with a clean treatment. Commit only concise contracts,
 scripts, hashes, and decisions, then push the work branch.
+
+## Pilot-1 tooling failure retained
+
+`hotpath-pilot-hypic` operation `exec-000000000000127c` completed all three
+requests and released its exact container, but controller exit 1 occurred at
+the final request-ID join. The OpenAI response exposes a shorter `chatcmpl-`
+ID; scheduler evidence appends an internal suffix. Exact string equality was
+therefore an invalid audit rule. Offline inspection found 3/3 unique prefix
+matches, 3/3 scored `complete_hybrid_repair` events, 4 distinct worker-hot
+PIDs on the first scored request, and no foreign NPU0-3 process. This is a
+tooling/audit failure, not an algorithm failure or a controller pass. The
+successor `pilot2` uses unique-root replay with a one-to-one prefix join;
+pilot-1 raw artifacts and its nonzero exit remain unchanged.

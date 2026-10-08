@@ -30,6 +30,7 @@ ATTEMPT_ROOTS = {
     "hotpath-canary": "quality-context-41984-hotpath-canary",
     "hotpath-baseline": "quality-context-41984-hotpath-baseline",
     "hotpath-pilot-hypic": "quality-context-41984-hotpath-pilot-hypic",
+    "hotpath-pilot2-hypic": "quality-context-41984-hotpath-pilot2-hypic",
     "hotpath-full-baseline": "quality-context-41984-hotpath-full-baseline",
     "hotpath-full-hypic": "quality-context-41984-hotpath-full-hypic",
 }
