@@ -12,5 +12,5 @@
     "service_port": 8223,
     "preexisting_sleep_container": "agentgpu-910b4-qwen35-4b-v0; do not modify"
   },
-  "next_action": "No-cache Decode performance gate passed across three fresh NPU0-3 service runs. Keep the repair opt-in and isolated; HYPIC-enabled formal A/B and the complete paired 2048-token quality gate remain before production adoption."
+  "next_action": "Wait for an interference-free physical NPU0-3 window; active external jobs may intermittently enter 0/1. Run fresh reserve2 c8 stress including sample 7, audit it, then rerun both full 2048-token quality arms at common 0.85 and independent performance before any adoption claim. Preserve failed roots and do not touch NPU4-7."
 }

@@ -13,11 +13,14 @@ allocation would cross the preserved 1024 MiB NPU safety watermark.
 Only 1/127 candidate samples was persisted; the lane guard and exact release
 passed. This is `incomplete-fail-fast`, not a paired accuracy verdict.
 `HOTPATH_CAPACITY_REPAIR.md` predeclares a 0.85 common-service reserve
-stress gate and a fresh matched pair; neither has NPU acceptance yet.
-Skill status reclassification remains pending. A separate resume-session onboarding check
-now moves only `mst-repo-onboarding` from N to P; fresh-clone acceptance
-remains open. Thus bounded V10/P15/N4 is the current classification, not a
-completed long-term goal.
+stress gate and a fresh matched pair. Its first stress run was invalidated
+by an unexpected PID on physical NPU0 before the sentinel completed; no
+capacity or quality acceptance follows. HYPIC Skill reclassification
+remains pending. A separate fresh GitHub/main clone completed the full
+`mst-repo-onboarding` workflow; see
+`ONBOARDING_FRESH_CLONE_ACCEPTANCE_20261008.md`. This moves only that
+Skill from P to V. Bounded V11/P14/N4 is the current classification, not
+a completed long-term goal.
 
 Final clean2 note (2026-10-07 21:58 UTC): three formal 40/40 paired performance runs passed the bounded hot-path gate. The first 41984-context quality attempt (`exec-0000000000000c6d`) failed shared-host isolation and is not pooled. Fresh `clean2` (`exec-0000000000000e15`) completed all 12 paired quality units, exact input/row/scorer/hash audit, 752/754 clean guard samples and both releases. The original strict quality auditor failed because no natural request activated any worker hot path; the separate scoped audit preserved valid but inconclusive natural-task scores without formal acceptance. See `FINAL_EVIDENCE_DECISION.md`. A completed negative protocol verdict validates some bounded evidence/maintenance/reporting workflows, but not the hot-path quality workflow, whole-paper reproduction, or all 29 Skills.
 
@@ -53,7 +56,7 @@ Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bound
 | mst-loop-engineering-framework | unassessed | P | Orient-to-measure sequence recorded; final decide/close transition pending. |
 | mst-parallel-workstreams | unassessed | P | Independent clone/lane separation proven; full workstream lifecycle pending. |
 | mst-practice-iteration-planning | unassessed | P | One-variable gates and resource limits predeclared; complete iteration pending. |
-| mst-repo-onboarding | unassessed | P | `ONBOARDING_RESUME_CHECK_20261008.md` exercised the resume route: 29/29 registry-directory match, no orphan, validator PASS and structured report; fresh-clone entry from handoff remains untested independently. |
+| mst-repo-onboarding | unassessed | V | Resume and independent fresh GitHub/main clone routes both produced structured reports; fresh clone proved 29/29 registry-directory and entrypoint match, no orphan, validator PASS. Does not prove host/NPU entry. |
 | mst-repo-transformation | unassessed | N | No repository transformation is claimed by this HYPIC run. |
 | mst-runtime-skill-boundary | unassessed | N | Repository-source audit found no runtime/product Skill or publication tree; external deployment is out of scope. |
 | mst-skill-governor | unassessed | V | Existing narrow Skills and registry updated, with reason and validator evidence. |
@@ -61,4 +64,4 @@ Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bound
 | mst-tool-adapter-boundary | unassessed | V | Only tracked tool adapter is one-line `CLAUDE.md` → `AGENTS.md`; canonical policy remains in AGENTS/registry. |
 | mst-transformation-verification | unassessed | P | Main structural 29-Skill validator passes; branch validator now enforces routing metadata. Main metadata/length gaps, semantic heading and runtime boundary review remain open. |
 
-Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 10 V, 15 P, 4 N = 29. The NPU0–3 campaign passed paired performance and independent row/release audit; its frozen natural-request formal worker-hot quality gate failed and natural scores are inconclusive. The explicit-boundary 0.9 baseline passed, but its candidate was capacity-failed after one sample; a 0.85 matched replacement is planned, not yet validated. No whole-paper or whole-tree completion claim is made.
+Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 11 V, 14 P, 4 N = 29. The NPU0–3 campaign passed paired performance and independent row/release audit; its frozen natural-request formal worker-hot quality gate failed and natural scores are inconclusive. The explicit-boundary 0.9 baseline passed, but its candidate was capacity-failed after one sample; the first 0.85 stress gate was invalidated by a foreign PID before completing a sample. A fresh 0.85 matched replacement is still unverified. No whole-paper or whole-tree completion claim is made.

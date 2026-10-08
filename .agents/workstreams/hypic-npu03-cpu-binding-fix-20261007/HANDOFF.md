@@ -12,7 +12,9 @@ main and the canonical dirty checkout were not changed. Read
 The branch has static routing metadata for all 29 Skills and a POSIX
 regression check in `scripts/validate-mst.sh`; this is branch-only and does
 not count as behavioral acceptance or main promotion. The current ledger is
-V10/P15/N4 against pinned main `f1f37a39`.
+V11/P14/N4 against pinned main `f1f37a39`; the added V is the independently
+tested fresh-clone `mst-repo-onboarding` route documented in
+`ONBOARDING_FRESH_CLONE_ACCEPTANCE_20261008.md`, not a HYPIC quality pass.
 
 Pilot-1 `exec-000000000000127c` retained its tooling failure; pilot-2
 `exec-000000000000128b` passed 3/3 scored explicit-boundary hot requests,
