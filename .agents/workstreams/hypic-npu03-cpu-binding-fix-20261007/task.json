@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_offline_pending_actual_clean_npu03_window",
+  "state": "active_cache10r6_waiting_for_sustained_actual_idle",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -24,12 +24,21 @@
     "foreign_container": "cannbench_ds",
     "evidence": "HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md"
   },
-  "git_push_state": {
-    "status": "synchronized_as_of_5e3b774_before_this_update",
-    "verified_commit": "5e3b774d4bebccc56f69a3ca1e2bf399008d7b58",
-    "push_operation": "exec-00000000000014ea",
-    "live_remote_equality_operation": "exec-00000000000014eb",
-    "recovery": "After any later validated commit, push HEAD to the named workstream branch without force and independently verify live remote, upstream and clean local HEAD equality."
+  "pending_attempt": {
+    "campaign": "cache10r6",
+    "arm": "hypic-only",
+    "watch_and_controller_operation": "exec-000000000000150a",
+    "gate": "10 consecutive 30-second checks of actual physical NPU0-3 processes and port 8223; passive Docker mappings ignored",
+    "max_wait_seconds": 7200,
+    "root_if_launched": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r6-full-hypic",
+    "do_not_duplicate": true
   },
-  "next_action": "Preserve and independently audit cache10r5's environment-invalid 0/127 root; do not pair or reuse it. Continue productive offline Skill acceptance while actual foreign NPU0-3 processes run. A momentary idle snapshot is not an uninterrupted lease after three real collisions. Start a fresh original-protocol full HYPIC arm only when physical0-3 actual use is sustainably clear, irrespective of passive Docker mappings; retain startup/scoring guards and exact-owned cleanup. Do not touch foreign containers or NPU4-7. Push later validated workstream checkpoints and verify live equality. Do not promote a HYPIC or all-Skill conclusion before their gates pass."
+  "git_push_state": {
+    "status": "local_r6_identity_commit_ahead_after_two_push_timeouts",
+    "first_unpushed_commit": "a55cc1d5f6b4293d8a951cdf12b7dafd3e539fb4",
+    "last_verified_remote_commit": "deab436431337bf73705c60d7ef0da19d681e803",
+    "live_remote_read_operation": "exec-0000000000001508",
+    "recovery": "Do not repeat or reset the local commit. When target-host HTTPS is responsive, push existing HEAD to the named workstream branch without force and independently verify live remote/upstream equality."
+  },
+  "next_action": "Poll the sole r6 watch/controller operation and do not launch a duplicate. It will start one fresh original-protocol candidate only after sustained actual physical0-3 idleness, regardless of passive Docker mappings. If it starts, independently audit quality/isolation and exact-owned release before any matched baseline; if it times out or collides, preserve its truthful result. Continue offline per-Skill acceptance while waiting. Do not touch foreign containers or NPU4-7. Push the existing local r6 code commit once Git HTTPS responds, without reset or force. Do not promote HYPIC or all-Skill conclusions before their gates pass."
 }

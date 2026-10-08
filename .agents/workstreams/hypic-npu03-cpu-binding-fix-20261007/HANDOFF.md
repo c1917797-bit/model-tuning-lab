@@ -2,11 +2,12 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:08 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- The branch is pushed and verified through 1fec73f; `exec-00000000000014cf`
-  confirmed live remote, upstream and clean local HEAD equality after the
-  target-host Git HTTPS authentication recovered. Integrated main has not
-  accepted this campaign.
+- Updated: 2026-10-08 16:14 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- The last independently verified live remote HEAD was deab436. The later
+  r6 identity commit a55cc1d is local-only as of this update: two bounded
+  Git pushes timed out, and a live remote read still showed deab436. Do
+  not claim r6 code was pushed. Do not repeat the commit or force-push.
+- Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3, cache10r4 and cache10r5 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
@@ -33,26 +34,12 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 - User clarified that foreign container device mapping alone is not use.
   The branch controller now gates on actual NPU0–3 processes and port 8223
   and continuously fails closed on foreign processes while scoring.
-- cache10r3 started with idle 0–3; after service readiness, cannbench_ds
-  actually used physical NPU3. The guard aborted at 0/127 completed
-  samples, released the exact owned service and port, and preserved
-  HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md with raw receipt hashes.
-- User clarified that idle physical NPU0–3 are sufficient to start; do not
-  wait merely because another container has mapped devices. A fresh
-  original-protocol cache10r4 candidate arm started under AWMCP operation
-  exec-00000000000014c4 after all 127 sample identities, source fingerprints,
-  actual NPU processes and port 8223 passed preflight. Its guard found an
-  actual foreign NPU0 PID before any scored sample; it exited 1, recorded
-  0/127, released its exact owned service and port, and retained
-  HOTPATH_CACHE10R4_RESOURCE_CONFLICT.md with raw hashes.
+- cache10r3/r4 began on idle physical0–3, then real foreign processes
+  intruded before scoring. Both aborted at 0/127 and released exact owned
+  services; see their separate RESOURCE_CONFLICT reports and raw hashes.
 - The Git checkpoint and maintainer-handoff Skills have bounded verified
   real-task cases locally; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
-- During cache10r4 service loading, a read-only host snapshot at 15:44 UTC
-  caught transient foreign `cannbench_ds` NPU0/1 PIDs. The arm's continuous
-  scoring guard starts after service readiness; preserve this startup
-  overlap as a caveat and rely on the later guard/evidence for the score
-  decision. No foreign container was modified.
 - The startup guard repair is in HOTPATH_STARTUP_GUARD_REPAIR.md and was
   pushed at 5e3b774 after 34 offline tests. cache10r5 live operation
   exec-00000000000014ee proved that its new pre-health guard catches
@@ -62,29 +49,38 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 - A fifth provenance-checked Skill case now records the bounded
   `ascend-npu-environment-orientation` behavior as partial, not verified;
   see NPU_ENVIRONMENT_ORIENTATION_ACCEPTANCE_20261008.md and the gap audit.
+- A unique original-protocol cache10r6 identity was preflighted: 127
+  samples, physical0–3, 0.85 utilization, 3584 MiB/10 segments. AWMCP
+  operation exec-000000000000150a is a *single* pending controller: it
+  samples actual NPU0–3/port every 30 seconds, requires 10 consecutive
+  clean checks, then launches exactly one candidate arm. If no such window
+  occurs within two hours, it exits without creating a root. It ignores
+  passive Docker mappings and does not use NPU4–7. Poll this operation;
+  never launch a parallel r6 controller.
 
 ## 4. Current Action
 
-cache10r5 is terminal and environment-invalid. At 16:01 UTC, physical
-NPU1 again had actual foreign processes; do not launch another full arm
-during real use. A momentary idle snapshot is not an uninterrupted lease.
-Continue other Skill acceptance until NPU0–3 use is sustainably clear;
-passive Docker mappings alone remain irrelevant. The branch was
-synchronized at 5e3b774 before this status update; check again before
-claiming new changes are remote.
+cache10r5 is terminal and environment-invalid. The single r6 watcher
+exec-000000000000150a is live; do not start a duplicate. Continue other
+Skill acceptance while it waits for actual NPU0–3 idleness. Passive
+Docker mappings alone remain irrelevant. Push the pending local r6
+checkpoint when target-host Git HTTPS becomes responsive, then verify
+remote/upstream equality.
 
 ## 5. Next Actions
 
-1. Preserve the successful push and live equality receipt for 1fec73f.
-   Validate, then push each later coherent checkpoint to the named
-   workstream branch; never amend, reset, force-push, or expose credentials.
+1. Retry only the pending push when Git HTTPS responds, then verify live
+   equality; never amend, reset, force-push, or expose credentials.
 2. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Audit cache10r5's immutable root and terminal exec-00000000000014ee
-   against HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md. Do not reuse
-   cache10r2/cache10r3/cache10r4/cache10r5 or silently switch to cache10split.
+3. Poll r6 watcher exec-000000000000150a before any device action. If
+   terminal, inspect whether it created
+   /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r6-full-hypic.
+   Audit cache10r5 separately against HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md.
+   Do not reuse cache10r2/cache10r3/cache10r4/cache10r5 or silently switch
+   to cache10split.
 4. Complete HYPIC 127×3 scored quality and independent guard/release
    audit, then same-identity no-cache arm and pair audit. Only after
    quality gates pass, run matched performance.
@@ -132,17 +128,9 @@ npu-smi info
 ss -lntp
 ```
 
-The pending commits were pushed through 1fec73f. After any later commit,
-push the current HEAD with
+After a validated commit, push the current HEAD with
 `git push origin HEAD:work/hypic-npu03-cpu-binding-fix-20261007` and
 check the live remote ref before claiming it is synchronized.
 
-cache10r3 controller exec-000000000000147b, cache10r4 controller
-exec-00000000000014c4, and cache10r5 controller exec-00000000000014ee
-are terminal exit 1, all environment-invalid. Their immutable raw roots are
-respectively
-/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r3-full-hypic
-and
-/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r4-full-hypic
-and
-/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r5-full-hypic.
+cache10r3/r4/r5 terminal operations and immutable raw roots are recorded
+in their conflict/result reports; none is a valid baseline/treatment arm.
