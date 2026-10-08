@@ -1,0 +1,84 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "import subprocess,pathlib,json,hashlib,resource\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\nfiles=[\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\",\".agents/skills/ascend-inference-tuning-loop/references/portfolio-preparation-and-serial-admission.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_TERMINAL_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_RELEASE_AUDIT_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_FIRST_OBSERVER_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDERR_ORIGINAL_20261008.txt\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDOUT_ORIGINAL_20261008.txt\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ACTUAL_RUNTIME_FAILURE_20261008.md\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/sparq_token_v4/proof.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\",\"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_FAILURE_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_LAUNCH_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/MODEL_CANDIDATE_INVENTORY_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_99223BF_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ATB_LOG_ORIGINAL_20261008.json\"]\ndef run(args):\n cp=subprocess.run(args,cwd=root,capture_output=True,text=True,timeout=30)\n assert cp.returncode==0,(args,cp.stdout,cp.stderr)\n return cp.stdout\nassert run([\"/usr/local/bin/git\",\"rev-parse\",\"HEAD\"]).strip()==\"99223bfb2d3be67e507b9efcbfcedc39473cf4d9\"\nassert run([\"/usr/local/bin/git\",\"branch\",\"--show-current\"]).strip()==\"work/qwen36-damp-ascend-20261006\"\nassert run([\"/usr/local/bin/git\",\"diff\",\"--cached\",\"--name-only\"]).strip()==\"\",\"foreign staged changes; do not mix\"\nbefore=run([\"/usr/local/bin/git\",\"status\",\"--short\"])\nreadback=[]\nfor rel in files:\n p=root/rel\n assert p.is_file(),rel\n b=p.read_bytes()\n if p.suffix==\".json\":json.loads(b)\n readback.append({\"path\":rel,\"bytes\":len(b),\"sha256\":hashlib.sha256(b).hexdigest()})\ndiff=run([\"/usr/local/bin/git\",\"diff\",\"--check\"])\nmst=run([\"/bin/sh\",\"scripts/validate-mst.sh\"])\nrun([\"/usr/local/bin/git\",\"add\",\"--\",*files])\nstaged=run([\"/usr/local/bin/git\",\"diff\",\"--cached\",\"--name-only\"]).splitlines()\nassert set(staged)==set(files),(staged,files)\ncommit=run([\"/usr/local/bin/git\",\"commit\",\"-m\",\"research: preserve SparQ native failure and memory completion\"])\nhead=run([\"/usr/local/bin/git\",\"rev-parse\",\"HEAD\"]).strip()\nafter=run([\"/usr/local/bin/git\",\"status\",\"--short\"])\nahead=run([\"/usr/local/bin/git\",\"rev-list\",\"--left-right\",\"--count\",\"@{upstream}...HEAD\"])\nprint(json.dumps({\"head\":head,\"branch\":\"work/qwen36-damp-ascend-20261006\",\"readback\":readback,\"diff_check\":diff,\"mst\":mst,\"commit\":commit,\"status_before\":before,\"status_after\":after,\"upstream_left_right\":ahead,\"remote_push\":\"not attempted: previously verified unchanged credential-helper blocker; do not bypass/retry unchanged\"},sort_keys=True))"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 242,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000001150",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"branch\": \"work/qwen36-damp-ascend-20261006\", \"commit\": \"[work/qwen36-damp-ascend-20261006 a628f70] research: preserve SparQ native failure and memory completion\\n 17 files changed, 1029 insertions(+), 3 deletions(-)\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_99223BF_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/MODEL_CANDIDATE_INVENTORY_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ACTUAL_RUNTIME_FAILURE_20261008.md\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ATB_LOG_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_FAILURE_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_FIRST_OBSERVER_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_LAUNCH_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDERR_ORIGINAL_20261008.txt\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDOUT_ORIGINAL_20261008.txt\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_RELEASE_AUDIT_ORIGINAL_20261008.json\\n create mode 100644 .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_TERMINAL_ORIGINAL_20261008.json\\n\", \"diff_check\": \"\", \"head\": \"a628f70de0854137314120fd3f11e7b904803a26\", \"mst\": \"PASS: Maintainer Skill Tree structure is valid (20 skills)\\n\", \"readback\": [{\"bytes\": 110577, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\", \"sha256\": \"0e06b680929a9c25101afcfcd57e4fc5f7086d6e4fff76d075ff4b04805ab839\"}, {\"bytes\": 13210, \"path\": \".agents/skills/ascend-inference-tuning-loop/references/portfolio-preparation-and-serial-admission.md\", \"sha256\": \"58cfcc4afc502519be6999d5dff84f24a617bf597ada9acbeac36656dd00c23d\"}, {\"bytes\": 10269, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_TERMINAL_ORIGINAL_20261008.json\", \"sha256\": \"05319160bbecacedc2ca2904b5b2a1c9d8b9c323eb87b6f6fa2e739d67d2af28\"}, {\"bytes\": 118816, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_RELEASE_AUDIT_ORIGINAL_20261008.json\", \"sha256\": \"886202671b21a3ecb6cf8bb93e1dd37452e148b82f0aec9df627bb31c7862f7b\"}, {\"bytes\": 25501, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_FIRST_OBSERVER_ORIGINAL_20261008.json\", \"sha256\": \"5dbed598973c1a9088ed3732b8a41a9bda93b241785ad08ab6076eeb1cdf22c6\"}, {\"bytes\": 4320, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDERR_ORIGINAL_20261008.txt\", \"sha256\": \"9835c2d9d93f5e941b1ad46d6f7fcca64050a30a70441210e66c545267eb0dc9\"}, {\"bytes\": 1251, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDOUT_ORIGINAL_20261008.txt\", \"sha256\": \"67cf5e2e375d6d5f34605abecadd98e7fe1c51126934dbd9489b87eb612a411b\"}, {\"bytes\": 3134, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ACTUAL_RUNTIME_FAILURE_20261008.md\", \"sha256\": \"ddf23ac6e5777fd59fbf9a0d729a815ff8dae0a465b9e515e64e21fd424fc1d9\"}, {\"bytes\": 6777, \"path\": \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/sparq_token_v4/proof.py\", \"sha256\": \"f06b88e53c2961ab1b4066a939405fda9ac65d09e67df80ccb04cf036df6c006\"}, {\"bytes\": 41273, \"path\": \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\", \"sha256\": \"73fab6630bb2840e6d7e7fff38fdee4b7f3d325c07f270d54cfec5f5bb7d4df5\"}, {\"bytes\": 14682, \"path\": \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\", \"sha256\": \"40875a65f5a493a1b1c0da94bc3ef2802b4b84d1e6d5dbd6e5bd40e16bed506b\"}, {\"bytes\": 21240, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_FAILURE_ORIGINAL_20261008.json\", \"sha256\": \"3607f5df135627b5b69f9108f9ffc05eabc99a160f404d6bb9188c0da5ea1fc3\"}, {\"bytes\": 21116, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_ORIGINAL_20261008.json\", \"sha256\": \"82f8073869713f531ce834a66182fc44794c8b46adb6a550de23d6174d847513\"}, {\"bytes\": 1423, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_LAUNCH_ORIGINAL_20261008.json\", \"sha256\": \"25dde8b71a5dd4d3dacbad0c2b389b8b789a79abe1a79ba51f07430df145ba64\"}, {\"bytes\": 19005, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/MODEL_CANDIDATE_INVENTORY_ORIGINAL_20261008.json\", \"sha256\": \"afaa4b99e287d1ceb2e5e5628006d5d71864c338cd3cf301d8198640a2bc5952\"}, {\"bytes\": 9206, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_99223BF_ORIGINAL_20261008.json\", \"sha256\": \"9d0317bee1a792ef9f33d4f5c53fba17354e9160f6fba110dc5aad69bb279f8c\"}, {\"bytes\": 10866, \"path\": \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ATB_LOG_ORIGINAL_20261008.json\", \"sha256\": \"566be2b17921a3f468b2f37f2225f07f3ab15e771970f4899c8ea8f3eb655e7a\"}], \"remote_push\": \"not attempted: previously verified unchanged credential-helper blocker; do not bypass/retry unchanged\", \"status_after\": \"?? .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_D72F1BA_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\\n?? projects/damp-ascend/integration/integer_compaction_v1/\\n?? projects/damp-ascend/integration/service_all_batch_v2/\\n?? projects/damp-ascend/integration/service_assembly_v1/\\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\\n?? projects/damp-ascend/tools/final_plan_gate_v1/\\n?? projects/damp-ascend/tools/host_memory_audit_v1/\\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\\n\", \"status_before\": \" M .agents/skills/ascend-inference-tuning-loop/references/portfolio-preparation-and-serial-admission.md\\n M .agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/sparq_token_v4/proof.py\\n M projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_99223BF_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_D72F1BA_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/MODEL_CANDIDATE_INVENTORY_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SHARED_ARENA_ABI_AUDIT_20261006.md\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ACTUAL_RUNTIME_FAILURE_20261008.md\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_ATB_LOG_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_FAILURE_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_CANONICAL_SOFTWARE_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_FIRST_OBSERVER_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_LAUNCH_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDERR_ORIGINAL_20261008.txt\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_MATRIX_STDOUT_ORIGINAL_20261008.txt\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_RELEASE_AUDIT_ORIGINAL_20261008.json\\n?? .agents/workstreams/qwen36-damp-ascend-20261006/SPARQ007_TERMINAL_ORIGINAL_20261008.json\\n?? projects/damp-ascend/integration/integer_compaction_v1/\\n?? projects/damp-ascend/integration/service_all_batch_v2/\\n?? projects/damp-ascend/integration/service_assembly_v1/\\n?? projects/damp-ascend/operator/prefill_pack_v1/probe/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/audit/\\n?? projects/damp-ascend/operator/prefill_pack_v1/selected_slot_v1/gate_v1/admission_all_p_v1/\\n?? projects/damp-ascend/tools/calibrated_plan_admission_v2/\\n?? projects/damp-ascend/tools/final_plan_gate_v1/\\n?? projects/damp-ascend/tools/host_memory_audit_v1/\\n?? projects/damp-ascend/tools/native_prefill_intermediate_dispatch_v1/\\n?? projects/damp-ascend/tools/shared_lifecycle_gate_v1/\\n?? projects/qwen36-paper-portfolio/tools/adakv_grouped_service_v1/\\n\", \"upstream_left_right\": \"0\\t35\\n\"}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 804,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 804,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 804
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 803,
+        "routeLookupMs": 0,
+        "totalMs": 803
+      }
+    },
+    "traceId": "96abd44d-4629-4d5e-b6af-50cb674963f9"
+  },
+  "operationId": "exec-0000000000001150",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

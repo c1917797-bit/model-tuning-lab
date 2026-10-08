@@ -320,4 +320,73 @@ class PreNpuActualSourceRegression(unittest.TestCase):
   invoke=[n.lineno for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="forward_impl"]
   self.assertTrue(writer and invoke);self.assertLess(max(writer),min(invoke))
 
+
+class NativeSlotInt32Boundary(unittest.TestCase):
+ def tensor(self,dtype="int32",shape=(3,),device="npu",contiguous=True,format=2):
+  from types import SimpleNamespace
+  return SimpleNamespace(dtype=dtype,shape=shape,ndim=len(shape),
+   device=SimpleNamespace(type=device),is_contiguous=lambda:contiguous,format=format)
+ def fixture(self):
+  torch=__import__("types").SimpleNamespace(int32="int32",bfloat16="bf16")
+  npu=__import__("types").SimpleNamespace(get_npu_format=lambda x:x.format)
+  cache=self.tensor("bf16",(325,128,1,256));indices=self.tensor();indices.device=cache.device
+  return torch,npu,indices,cache
+ def test_actual_ATB_int32_ND_source_contract_positive_not_native_PASS(self):
+  torch,npu,indices,cache=self.fixture()
+  numeric_gate.native_slot_layout(torch,npu,indices,3,cache)
+  self.assertEqual(numeric_gate.native_slot_capacity(18,18,2048,160),41472)
+  self.assertNotIn("torch",sys.modules)
+ def test_int64_wrong_device_rank_stride_format_and_KVdtype_rejected(self):
+  for mutation in ("int64","cpu","shape","stride","format","cache-rank","cache-dtype","cache-format"):
+   torch,npu,indices,cache=self.fixture()
+   if mutation=="int64":indices.dtype="int64"
+   elif mutation=="cpu":indices.device=__import__("types").SimpleNamespace(type="cpu")
+   elif mutation=="shape":indices.shape=(3,1)
+   elif mutation=="stride":indices.is_contiguous=lambda:False
+   elif mutation=="format":indices.format=29
+   elif mutation=="cache-rank":cache.ndim=3
+   elif mutation=="cache-dtype":cache.dtype="fp32"
+   else:cache.format=29
+   with self.subTest(mutation=mutation),self.assertRaises(ValueError):
+    numeric_gate.native_slot_layout(torch,npu,indices,3,cache)
+ def test_static_int32_range_and_full160_capacity_negative(self):
+  for args in ((18,18,2200,160),(2**31,18,2048,160),(True,18,2048,160),(18,0,2048,160),(18,18,2048,0)):
+   with self.subTest(args=args),self.assertRaises(ValueError):numeric_gate.native_slot_capacity(*args)
+ def test_actual_prefill_decode_reuse_boundaries_int32_internal_leases_int64(self):
+  text=Path(numeric_gate.__file__).read_text();tree=ast.parse(text)
+  fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
+  assigns={t.id:n.value for n in ast.walk(fn) if isinstance(n,ast.Assign) for t in n.targets if isinstance(t,ast.Name)}
+  for name in ("indices","idx"):
+   dtype=next(k.value for k in assigns[name].keywords if k.arg=="dtype")
+   self.assertIsInstance(dtype,ast.Attribute);self.assertEqual(dtype.attr,"int32")
+  self.assertEqual(assigns["mapping"].args[-1].attr,"int32")
+  self.assertEqual(assigns["leases"].args[-1].attr,"int64")
+  calls=[n for n in ast.walk(fn) if isinstance(n,ast.Call)]
+  checks=[n for n in calls if isinstance(n.func,ast.Name) and n.func.id=="native_slot_layout"]
+  self.assertEqual({n.args[2].id for n in checks},{"mapping","indices","idx"})
+  first=next(n.lineno for n in checks if n.args[2].id=="indices")
+  writer=min(n.lineno for n in calls if isinstance(n.func,ast.Attribute) and n.func.attr=="reshape_and_cache")
+  self.assertLess(first,writer)
+  topology=next(n for n in ast.walk(fn) if isinstance(n,ast.FunctionDef) and n.name=="topology")
+  native=next(n for n in ast.walk(topology) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and
+   n.func.attr=="tensor" and any(k.arg=="dtype" and isinstance(k.value,ast.Attribute) and k.value.attr=="int32" for k in n.keywords) and
+   n.args and isinstance(n.args[0],ast.Name) and n.args[0].id=="positions")
+  self.assertTrue(native);self.assertIn("len(set(positions))==b",ast.get_source_segment(text,topology))
+ def test_no_graph_capture_conversion_or_changed_writer_keyword_API(self):
+  text=Path(numeric_gate.__file__).read_text();tree=ast.parse(text)
+  fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
+  run=next(n for n in ast.walk(fn) if isinstance(n,ast.FunctionDef) and n.name=="run")
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in ("to","tensor","item","cpu") for n in ast.walk(run)))
+  writer=next(n for n in ast.walk(run) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="reshape_and_cache")
+  self.assertEqual({k.arg for k in writer.keywords},{"key","value","key_cache","value_cache","slot_mapping"})
+  self.assertEqual(next(k.value.id for k in writer.keywords if k.arg=="slot_mapping"),"mapping")
+ def test_independent_golden_oracle_support_guard_matrix_and_limits_unchanged(self):
+  text=Path(numeric_gate.__file__).read_text()
+  self.assertEqual(numeric_gate.LIMITS,{"relative_rms":.005,"cosine":.99998})
+  self.assertEqual(receipt.BATCHES,"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16")
+  self.assertEqual(16*4*2*160,20480)
+  self.assertIn("query.detach().cpu().double()",text)
+  self.assertIn("candidate_supports",text);self.assertIn("reference_feedback_independent",text)
+  self.assertIn("kguard.intact() and vguard.intact()",text);self.assertIn("range(160)",text)
+
 if __name__=="__main__":unittest.main(verbosity=2)

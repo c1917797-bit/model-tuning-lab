@@ -1,0 +1,359 @@
+{
+  "native_poll_transport_timeout": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"error\": {\n    \"action\": \"retry\",\n    \"code\": \"transport_unavailable\",\n    \"message\": \"/api/cmd failed on all candidate RGWs for lgw_a6109c51076a4a2c9d2674ca5a8704a0: http://agentweb:17888: /api/cmd returned error: {\\\"channel\\\":\\\"control\\\",\\\"error\\\":\\\"timeout\\\",\\\"fallbackUsed\\\":false,\\\"gatewayInstanceId\\\":\\\"tpc-rgw-01\\\",\\\"logicalGatewayId\\\":\\\"tpc\\\",\\\"ok\\\":false,\\\"routeDecision\\\":\\\"peer_direct\\\",\\\"sessionId\\\":null,\\\"targetPeerId\\\":\\\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\\\",\\\"targetRole\\\":\\\"upstream\\\",\\\"timings\\\":{\\\"rgw\\\":{\\\"dispatchMs\\\":0,\\\"journalMs\\\":0,\\\"peerRoundTripMs\\\":30001,\\\"routeLookupMs\\\":0,\\\"totalMs\\\":30001}},\\\"traceId\\\":\\\"56520cd0-2caf-47b2-b2bd-8ea28455f5f8\\\"}\",\n    \"retryable\": true\n  },\n  \"ok\": false\n}"
+      }
+    ],
+    "structuredContent": {
+      "error": {
+        "action": "retry",
+        "code": "transport_unavailable",
+        "message": "/api/cmd failed on all candidate RGWs for lgw_a6109c51076a4a2c9d2674ca5a8704a0: http://agentweb:17888: /api/cmd returned error: {\"channel\":\"control\",\"error\":\"timeout\",\"fallbackUsed\":false,\"gatewayInstanceId\":\"tpc-rgw-01\",\"logicalGatewayId\":\"tpc\",\"ok\":false,\"routeDecision\":\"peer_direct\",\"sessionId\":null,\"targetPeerId\":\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\"targetRole\":\"upstream\",\"timings\":{\"rgw\":{\"dispatchMs\":0,\"journalMs\":0,\"peerRoundTripMs\":30001,\"routeLookupMs\":0,\"totalMs\":30001}},\"traceId\":\"56520cd0-2caf-47b2-b2bd-8ea28455f5f8\"}",
+        "retryable": true
+      },
+      "ok": false,
+      "error_code": "INVALID_ARGUMENT"
+    },
+    "isError": true
+  },
+  "native_poll_not_found": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": \"verify_operation_id\",\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": {\n    \"action\": \"verify_operation_id\",\n    \"code\": \"operation_not_found\",\n    \"message\": \"operation id was not found on the selected peer or storage backend\",\n    \"retryable\": false\n  },\n  \"found\": false,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": false,\n      \"ok\": true\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 399,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 399,\n        \"routeCacheHit\": false,\n        \"routeLookupMode\": \"topology-direct-hot3\",\n        \"routeLookupMs\": 2995,\n        \"totalMs\": 3395\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 399,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 399\n      }\n    },\n    \"traceId\": \"870e7e5a-4237-43c8-aa63-31c1aabf319f\"\n  },\n  \"operationId\": \"exec-0000000000001158\",\n  \"phase\": \"not_found\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"not_found\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": "verify_operation_id",
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": {
+        "action": "verify_operation_id",
+        "code": "operation_not_found",
+        "message": "operation id was not found on the selected peer or storage backend",
+        "retryable": false
+      },
+      "found": false,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": false,
+          "ok": true
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 399,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 399,
+            "routeCacheHit": false,
+            "routeLookupMode": "topology-direct-hot3",
+            "routeLookupMs": 2995,
+            "totalMs": 3395
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 399,
+            "routeLookupMs": 0,
+            "totalMs": 399
+          }
+        },
+        "traceId": "870e7e5a-4237-43c8-aa63-31c1aabf319f"
+      },
+      "operationId": "exec-0000000000001158",
+      "phase": "not_found",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "not_found",
+      "succeeded": false,
+      "terminal": true
+    },
+    "isError": false
+  },
+  "model_poll_transport_timeout": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"error\": {\n    \"action\": \"retry\",\n    \"code\": \"transport_unavailable\",\n    \"message\": \"/api/cmd failed on all candidate RGWs for lgw_a6109c51076a4a2c9d2674ca5a8704a0: http://agentweb:17888: /api/cmd returned error: {\\\"channel\\\":\\\"control\\\",\\\"error\\\":\\\"timeout\\\",\\\"fallbackUsed\\\":false,\\\"gatewayInstanceId\\\":\\\"tpc-rgw-01\\\",\\\"logicalGatewayId\\\":\\\"tpc\\\",\\\"ok\\\":false,\\\"routeDecision\\\":\\\"peer_direct\\\",\\\"sessionId\\\":null,\\\"targetPeerId\\\":\\\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\\\",\\\"targetRole\\\":\\\"upstream\\\",\\\"timings\\\":{\\\"rgw\\\":{\\\"dispatchMs\\\":0,\\\"journalMs\\\":0,\\\"peerRoundTripMs\\\":30000,\\\"routeLookupMs\\\":0,\\\"totalMs\\\":30000}},\\\"traceId\\\":\\\"a0c7a500-300d-4f31-9d60-d752c6b0c941\\\"}\",\n    \"retryable\": true\n  },\n  \"ok\": false\n}"
+      }
+    ],
+    "structuredContent": {
+      "error": {
+        "action": "retry",
+        "code": "transport_unavailable",
+        "message": "/api/cmd failed on all candidate RGWs for lgw_a6109c51076a4a2c9d2674ca5a8704a0: http://agentweb:17888: /api/cmd returned error: {\"channel\":\"control\",\"error\":\"timeout\",\"fallbackUsed\":false,\"gatewayInstanceId\":\"tpc-rgw-01\",\"logicalGatewayId\":\"tpc\",\"ok\":false,\"routeDecision\":\"peer_direct\",\"sessionId\":null,\"targetPeerId\":\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\"targetRole\":\"upstream\",\"timings\":{\"rgw\":{\"dispatchMs\":0,\"journalMs\":0,\"peerRoundTripMs\":30000,\"routeLookupMs\":0,\"totalMs\":30000}},\"traceId\":\"a0c7a500-300d-4f31-9d60-d752c6b0c941\"}",
+        "retryable": true
+      },
+      "ok": false,
+      "error_code": "INVALID_ARGUMENT"
+    },
+    "isError": true
+  },
+  "model_poll_not_found": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": \"verify_operation_id\",\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": {\n    \"action\": \"verify_operation_id\",\n    \"code\": \"operation_not_found\",\n    \"message\": \"operation id was not found on the selected peer or storage backend\",\n    \"retryable\": false\n  },\n  \"found\": false,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": false,\n      \"ok\": true\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 1054,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 1054,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 1054\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 1053,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 1053\n      }\n    },\n    \"traceId\": \"9ff1442f-d294-4132-8d14-81a1c725a1ca\"\n  },\n  \"operationId\": \"exec-0000000000001156\",\n  \"phase\": \"not_found\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"not_found\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": "verify_operation_id",
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": {
+        "action": "verify_operation_id",
+        "code": "operation_not_found",
+        "message": "operation id was not found on the selected peer or storage backend",
+        "retryable": false
+      },
+      "found": false,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": false,
+          "ok": true
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 1054,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 1054,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 1054
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 1053,
+            "routeLookupMs": 0,
+            "totalMs": 1053
+          }
+        },
+        "traceId": "9ff1442f-d294-4132-8d14-81a1c725a1ca"
+      },
+      "operationId": "exec-0000000000001156",
+      "phase": "not_found",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "not_found",
+      "succeeded": false,
+      "terminal": true
+    },
+    "isError": false
+  },
+  "handoff_mutation_unknown": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"error\": {\n    \"action\": \"retry\",\n    \"code\": \"transport_unavailable\",\n    \"message\": \"command outcome is unknown for lgw_a6109c51076a4a2c9d2674ca5a8704a0; AWMCP did not retry a possibly committed mutation. Inspect target state or retry with the same operation id/idempotency key: http://agentweb:17888: /api/cmd returned error: {\\\"channel\\\":\\\"file\\\",\\\"error\\\":\\\"timeout\\\",\\\"fallbackUsed\\\":false,\\\"gatewayInstanceId\\\":\\\"tpc-rgw-01\\\",\\\"logicalGatewayId\\\":\\\"tpc\\\",\\\"ok\\\":false,\\\"routeDecision\\\":\\\"peer_direct\\\",\\\"sessionId\\\":null,\\\"targetPeerId\\\":\\\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\\\",\\\"targetRole\\\":\\\"upstream\\\",\\\"timings\\\":{\\\"rgw\\\":{\\\"dispatchMs\\\":0,\\\"journalMs\\\":0,\\\"peerRoundTripMs\\\":30000,\\\"routeLookupMs\\\":0,\\\"totalMs\\\":30001}},\\\"traceId\\\":\\\"03f797f3-9ab7-4c56-9776-859393e8d117\\\"}\",\n    \"retryable\": true\n  },\n  \"ok\": false\n}"
+      }
+    ],
+    "structuredContent": {
+      "error": {
+        "action": "retry",
+        "code": "transport_unavailable",
+        "message": "command outcome is unknown for lgw_a6109c51076a4a2c9d2674ca5a8704a0; AWMCP did not retry a possibly committed mutation. Inspect target state or retry with the same operation id/idempotency key: http://agentweb:17888: /api/cmd returned error: {\"channel\":\"file\",\"error\":\"timeout\",\"fallbackUsed\":false,\"gatewayInstanceId\":\"tpc-rgw-01\",\"logicalGatewayId\":\"tpc\",\"ok\":false,\"routeDecision\":\"peer_direct\",\"sessionId\":null,\"targetPeerId\":\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\"targetRole\":\"upstream\",\"timings\":{\"rgw\":{\"dispatchMs\":0,\"journalMs\":0,\"peerRoundTripMs\":30000,\"routeLookupMs\":0,\"totalMs\":30001}},\"traceId\":\"03f797f3-9ab7-4c56-9776-859393e8d117\"}",
+        "retryable": true
+      },
+      "ok": false,
+      "error_code": "INVALID_ARGUMENT"
+    },
+    "isError": true
+  },
+  "handoff_unknown_exact_readback": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import pathlib,json,hashlib,resource\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab\")\npaths=[\".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ008_CANONICAL_SOFTWARE_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ008_LAUNCH_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/ORIGINAL_MODEL_INPUT_INVENTORY_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/ORIGINAL_MODEL_HASH_ADMISSION_ORIGINAL_20261008.json\",\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_A628F70_ORIGINAL_20261008.json\"]\nout={}\nfor rel in paths:\n p=root/rel\n if p.is_file():\n  b=p.read_bytes();out[rel]={\"bytes\":len(b),\"sha256\":hashlib.sha256(b).hexdigest()}\n  if rel.endswith(\"HANDOFF.md\"):out[rel][\"begins_current008\"]=b.startswith(b\"# DAMP Ascend \\xe2\\x80\\x94 current workstream\\n\\n## Current actual SparQ008 admission\")\n else:out[rel]={\"exists\":False}\nprint(json.dumps(out,sort_keys=True))"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 47,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-000000000000115a",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\".agents/workstreams/qwen36-damp-ascend-20261006/CHECKPOINT_A628F70_ORIGINAL_20261008.json\": {\"exists\": false}, \".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\": {\"begins_current008\": false, \"bytes\": 110577, \"sha256\": \"0e06b680929a9c25101afcfcd57e4fc5f7086d6e4fff76d075ff4b04805ab839\"}, \".agents/workstreams/qwen36-damp-ascend-20261006/ORIGINAL_MODEL_HASH_ADMISSION_ORIGINAL_20261008.json\": {\"exists\": false}, \".agents/workstreams/qwen36-damp-ascend-20261006/ORIGINAL_MODEL_INPUT_INVENTORY_ORIGINAL_20261008.json\": {\"exists\": false}, \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ008_CANONICAL_SOFTWARE_ORIGINAL_20261008.json\": {\"exists\": false}, \".agents/workstreams/qwen36-damp-ascend-20261006/SPARQ008_LAUNCH_ORIGINAL_20261008.json\": {\"exists\": false}}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 629,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 629,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 630
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 629,
+          "routeLookupMs": 0,
+          "totalMs": 629
+        }
+      },
+      "traceId": "1b8f32fb-26cf-45ac-b130-08b4d5471348"
+    },
+    "operationId": "exec-000000000000115a",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "read_only_initial_approval_timeout": {
+    "content": [
+      {
+        "type": "text",
+        "text": "The automatic permission approval review did not finish before its deadline. Do not assume the action is unsafe based on the timeout alone. You may retry once, or ask the user for guidance or explicit approval."
+      }
+    ],
+    "isError": true
+  },
+  "read_only_single_explicitly_permitted_retry": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-final-hugepage32-spent-readonly-and-owned008-atblog-20261008-0253-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000001167",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000001167",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 1888,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 1888,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1713,
+        "totalMs": 3602
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 1888,
+        "routeLookupMs": 0,
+        "totalMs": 1888
+      }
+    },
+    "traceId": "15431aef-9b9a-4740-a500-1863610a796e"
+  }
+}

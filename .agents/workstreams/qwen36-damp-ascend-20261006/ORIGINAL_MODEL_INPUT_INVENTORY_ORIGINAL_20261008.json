@@ -1,0 +1,84 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "import resource,os,sys,runpy,pathlib\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\nresource.setrlimit(resource.RLIMIT_CPU,(20,20))\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nsys.argv=[\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/input_inventory.py\",\"--execute\",\"--mode\",\"inventory\",\"--checkpoint-root\",\"/cache/efim/Qwen3.6-27B\",\"--display-label\",\"Qwen3.6-27B\",\"--expected-config-sha256\",\"69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c\",\"--source-manifest\",\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/SOURCE_MANIFEST.json\",\"--source-manifest-sha256\",\"86d8d9a2934f9cee1cf07638e03a5a9e67844e7d2576004e6e21ccaa66802941\",\"--output\",\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-inventory-20261008-001\"]\nrunpy.run_path(sys.argv[0],run_name=\"__main__\")"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 86,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000001152",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "QWEN36_READONLY_INPUT_INVENTORY {\"report\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-inventory-20261008-001/REPORT.json\", \"sha256\": \"8e63a9f05f31092d9f051e91c878fbcd5b0b761bc98d347fd3b20f3f1c40e3e4\"}, \"ready\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 785,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 785,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 785
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 783,
+        "routeLookupMs": 0,
+        "totalMs": 783
+      }
+    },
+    "traceId": "8b8db8f2-1eba-45d4-8b15-9c459bcf0f2b"
+  },
+  "operationId": "exec-0000000000001152",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

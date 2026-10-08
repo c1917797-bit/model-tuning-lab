@@ -46,9 +46,22 @@ def golden(torch,query,kc,vc,rows,lengths,rank,budget,local,reallocation):
 def pointers(tensors):
     return {k:(t.data_ptr(),t.untyped_storage().data_ptr(),t.storage_offset(),t.untyped_storage().nbytes(),list(t.shape),list(t.stride()),str(t.dtype))
             for k,t in tensors.items()}
+def native_slot_capacity(slots,pages,initial_max,steps):
+    require(all(type(v) is int and v>0 for v in (slots,pages,initial_max,steps)) and
+            initial_max+steps<=pages*BLOCK and slots*pages*BLOCK<=2**31-1,
+            "static exact native slot index range fits int32; full160 sequence capacity")
+    return slots*pages*BLOCK
+def native_slot_layout(torch,npu,indices,tokens,cache):
+    require(type(tokens) is int and tokens>0 and indices.shape==(tokens,) and
+            indices.dtype==torch.int32 and indices.device==cache.device and indices.device.type=="npu" and
+            indices.is_contiguous() and npu.get_npu_format(indices)==2 and
+            cache.ndim==4 and cache.shape[1:]==(BLOCK,1,DIM) and cache.dtype==torch.bfloat16 and
+            cache.is_contiguous() and npu.get_npu_format(cache)==2,
+            "actual ATB native slot int32/ND/contiguous/on-cache-device and BF16 native cache layout")
 def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
     from sparq_token_v4.core import GraphTokenWorkspace,MeanPool,MeanBook,Guarded
     case="b%d-%s-mean%d-t%d"%(b,mode,correction,trial);pages=18;capacity=pages*BLOCK;slots_total=18
+    native_slot_capacity(slots_total,pages,2048,160)
     torch.manual_seed(49585+b+100*trial)
     kguard=Guarded(torch,(slots_total*pages+1,BLOCK,1,DIM),torch.bfloat16,"npu:0")
     vguard=Guarded(torch,(slots_total*pages+1,BLOCK,1,DIM),torch.bfloat16,"npu:0")
@@ -60,12 +73,14 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
         g=Guarded(torch,shape,dtype,kc.device);inputs_guard[name]=g;g.value.zero_();return g.value
     q=allocate_input("q",(b,HEADS,DIM),torch.bfloat16)
     nk=allocate_input("nk",(b,1,DIM),torch.bfloat16);nv=allocate_input("nv",(b,1,DIM),torch.bfloat16)
-    mapping=allocate_input("mapping",(b,),torch.int64)
+    mapping=allocate_input("mapping",(b,),torch.int32)
+    native_slot_layout(torch,npu,mapping,b,kc)
     leases=allocate_input("leases",(b,),torch.int64);leases.copy_(torch.tensor(slots,dtype=torch.int64,device=kc.device))
     previous=torch.zeros_like(q);reference_previous=torch.zeros_like(q)
     for s in slots+[16,17]:
         n=lengths[s];k=torch.randn((n,1,DIM),device=kc.device,dtype=torch.bfloat16)*.05;v=torch.randn_like(k)*.05
-        indices=torch.arange(s*capacity,s*capacity+n,device=kc.device,dtype=torch.int64)
+        indices=torch.arange(s*capacity,s*capacity+n,device=kc.device,dtype=torch.int32)
+        native_slot_layout(torch,npu,indices,n,kc)
         writer.reshape_and_cache(key=k,value=v,key_cache=kc,value_cache=vc,slot_mapping=indices)
         refk.view(-1,1,DIM)[s*capacity:s*capacity+n].copy_(k)
         refv.view(-1,1,DIM)[s*capacity:s*capacity+n].copy_(v)
@@ -88,7 +103,10 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
         rows=[[s*pages+j for j in range(pages)] for s in slots]
         workspace.rows.copy_(torch.tensor(rows,dtype=torch.int64,device=kc.device))
         workspace.lengths.copy_(torch.tensor([lengths[s]+1 for s in slots],dtype=torch.int32,device=kc.device))
-        mapping.copy_(torch.tensor([s*capacity+lengths[s] for s in slots],dtype=torch.int64,device=kc.device))
+        positions=[s*capacity+lengths[s] for s in slots]
+        require(len(set(positions))==b and all(0<=p<slots_total*capacity for p in positions),
+                "exact unique native host slot positions within int32-admitted backing")
+        mapping.copy_(torch.tensor(positions,dtype=torch.int32,device=kc.device))
         leases.copy_(torch.tensor(slots,dtype=torch.int64,device=kc.device));return rows
     try:
         rows=topology();q.fill_(.05)
@@ -111,7 +129,8 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
                 kc[s*pages:(s+1)*pages].zero_();vc[s*pages:(s+1)*pages].zero_()
                 refk[s*pages:(s+1)*pages].zero_();refv[s*pages:(s+1)*pages].zero_()
                 ik=torch.randn((1,1,DIM),device=kc.device,dtype=torch.bfloat16)*.05;iv=torch.randn_like(ik)*.05
-                idx=torch.tensor([start],device=kc.device,dtype=torch.int64)
+                idx=torch.tensor([start],device=kc.device,dtype=torch.int32)
+                native_slot_layout(torch,npu,idx,1,kc)
                 writer.reshape_and_cache(key=ik,value=iv,key_cache=kc,value_cache=vc,slot_mapping=idx)
                 refk.view(-1,1,DIM)[start:start+1].copy_(ik);refv.view(-1,1,DIM)[start:start+1].copy_(iv)
                 mean.reset(s);mean.prefill(s,iv);lengths[s]=1;previous[0].zero_();reference_previous[0].zero_()

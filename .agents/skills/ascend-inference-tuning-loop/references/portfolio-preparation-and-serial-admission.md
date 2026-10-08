@@ -207,3 +207,33 @@ for all supported combinations; payload/cache BF16,ND already matched.
 Repair only the native boundary metadata, preserving64bit indexing elsewhere
 and static graph buffers. This is stronger than guessing from a warning,
 operator-name traceback or an example written for another deployed version.
+
+## Lost operation registry versus actual producer recovery, Oct8 02:53Z
+
+A genuine launch ACK followed by transport timeout and operation_get not_found
+does not prove a command never ran, terminated or is safe to launch again.
+SparQ008 and original-checkpoint fullhash lost their MA1158/1156 registry entries.
+MAIN1161 inspected their exact output roots and source-owned processes/CIDs:
+real SparQ CPU ABI/canary reached PA setup then failed with0cases/0steps;
+full29file model hashing really completed. Exact both CIDs were stopped-retained
+and no matching host/NPU process remained. Preserve launch, failed polls and fresh
+direct recovery independently. Never invent the lost terminal/duration, rerun an
+unknown load, discard successful hash bytes or promote a producer output beyond
+its actual stage.
+
+The exact stopped-owned ATB log read (MAIN1167) says tensor.hostData is null,
+build param from host tensor fail; it does not support query-rank/dtype speculation.
+Trace the deployed host seq_lens producer and actual graph task update consumer
+before a new native-boundary fix. A CPU schema probe cannot validate hostData
+residency, and simply supplying CPU lengths to eager does not establish that
+replayed graph contexts update at request-slot reuse. No in-graph D2H/item,
+threshold relaxation, unchanged rerun or algorithm-wide negative verdict.
+
+Completed/SPENT bounded resource permissions persist across compactions and
+lost tool handles. The prior32GiB HugeTLB release is not a renewed permission
+for another32GiB: verify the unchanged pools, OVS PID/start/24GiB and protected
+NUMA3 reserve read-only. Preserve original immediate ordinary-memory delta;
+later MemAvailable drift has other contributors. Current workstream originals:
+MEMORY_COMPLETION_AND_SPARQ008_RECOVERY_20261008.md,
+SPARQ008_AND_MODEL_LOST_OPERATION_RECOVERY_ORIGINAL_20261008.json and
+SPARQ008_ATB_AND_MEMORY_READONLY_ORIGINAL_20261008.json.
