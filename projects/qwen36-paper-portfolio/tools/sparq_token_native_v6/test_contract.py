@@ -88,7 +88,7 @@ class Receipts(unittest.TestCase):
         for text in ("","MAIN_SPARQ_TOKEN_V5_REPORT {}\nMAIN_SPARQ_TOKEN_V5_REPORT {}"):
             with self.subTest(text=text),self.assertRaises(ValueError):receipt.marker(text)
     def test_twelve_source_count_graph3_scope(self):
-        self.assertEqual(len(receipt.OWN),21);self.assertEqual(receipt.MODES,(("eager",0),("graph",0),("graph",1),("graph",2)))
+        self.assertEqual(len(receipt.OWN),23);self.assertEqual(receipt.MODES,(("eager",0),("graph",0),("graph",1),("graph",2)))
         self.assertEqual(16*4*2*160,20480)
     def test_original_typed_terminal_failures_actual_file_ref(self):
         for key,value in (("exitCode",1),("timedOut",True),("cancelled",True),("state","running")):
@@ -287,7 +287,7 @@ class PreNpuActualSourceRegression(unittest.TestCase):
   text=Path(numeric_gate.__file__).read_text();tree=ast.parse(text)
   calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="golden"]
   self.assertEqual({n.args[1].id for n in calls if isinstance(n.args[1],ast.Name)},{"q","rq"})
-  self.assertIn('enumerate(candidate_supports)',text)
+  self.assertIn('enumerate(finite_precision["supports"])',text)
   self.assertIn('"reference_feedback_support_equal":not any(support_divergence)',text)
   self.assertIn("reference_previous.copy_(expected",text)
   self.assertIn("previous.copy_(out)",text)

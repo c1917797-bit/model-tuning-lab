@@ -17,7 +17,7 @@ DEPENDENCIES={
  "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
 }
 OWN=("README.md","READY.md","consume_numeric.py","numeric_gate.py","preflight.py","sparq_token_v4/__init__.py",
- "sparq_token_v4/core.py","sparq_token_v4/oracle.py","sparq_token_v4/proof.py","test_contract.py","receipt.py","host.py","model_bridge.py","sitecustomize.py","original_terminal.py","original_operation_get_ma0e85.json","original_operation_get_ma0e7f_not_found.json","test_abi.py","original_v4_failed_ABI.json","original_v4_failed_child.json","test_launch_linkage.py")
+ "sparq_token_v4/core.py","sparq_token_v4/oracle.py","sparq_token_v4/proof.py","test_contract.py","receipt.py","host.py","model_bridge.py","sitecustomize.py","original_terminal.py","original_operation_get_ma0e85.json","original_operation_get_ma0e7f_not_found.json","test_abi.py","original_v4_failed_ABI.json","original_v4_failed_child.json","test_launch_linkage.py","precision_oracle.py","test_precision.py")
 def sha(path):
  p=Path(path);require(p.is_absolute() and p.is_file() and not p.is_symlink(),"exact absolute ordinary evidence")
  h=hashlib.sha256()
@@ -37,8 +37,8 @@ MODEL_SOURCES={"attention_v1":{"runtime_ref":{"path":"/vllm-workspace/vllm-ascen
 def source_identity(root,path,digest,context="host"):
  require(context in ("host","runtime") and path==root/"SOURCE_MANIFEST.json","exact current source manifest/context")
  sr=bound(path,digest);m=load(sr)
- require(m["schema"]=="sparq.token-preparation/v6" and m["ready"] is False and m["source_count"]==27 and
-   set(m["files"])==set(OWN),"full21 own +1 native +3 generic +2 actual model-source closure")
+ require(m["schema"]=="sparq.token-preparation/v6" and m["ready"] is False and m["source_count"]==29 and
+   set(m["files"])==set(OWN),"full23 own +1 native +3 generic +2 actual model-source closure")
  for name,s in m["files"].items():bound(root/name,s)
  require(m.get("dependencies")==DEPENDENCIES,"fixed generic host source closure")
  for path,d in DEPENDENCIES.items():bound(path,d)
@@ -87,10 +87,11 @@ def host_marker(text):
  return json.loads(rows[0].split(" ",1)[1])
 
 def validate_matrix(report,root):
+ from precision_oracle import PROTOCOL,validate_witness
  from numeric_gate import LIMITS
  from sparq_token_v4.core import HEADS
  import math
- require(report.get("schema")=="sparq.token-numeric/v4" and report.get("status")=="passed" and report.get("limits")==LIMITS,
+ require(report.get("schema")=="sparq.token-numeric/v4" and report.get("status")=="passed" and report.get("limits")==LIMITS and report.get("precision_contract")==PROTOCOL and report.get("original009_numeric_status")=="failed-not-promoted",
   "actual complete original SparQ kernel report")
  output=Path("/sparq-results/gate")
  require(root.is_absolute() and root.is_dir() and root.resolve()==root,"exact owned numerical gate root")
@@ -117,6 +118,16 @@ def validate_matrix(report,root):
     len(row["cross_feedback_support_divergence"])==b and all(type(v) is bool for v in row["cross_feedback_support_divergence"]) and
     row["reference_feedback_support_equal"]==(not any(row["cross_feedback_support_divergence"])),
     "actual approximate-support divergence classification; q/rq feedback never shared")
+   require(row.get("precision_contract")==PROTOCOL and row.get("oracle_cpu32_support") is True and
+    row.get("strict_stable_cpu32_support") is True and row.get("nonzero_score_tolerance") is False and
+    type(row.get("precision_witnesses")) is list and len(row["precision_witnesses"])==b,
+    "registered independent CPU32 support plus unchanged FP64 output/feedback contract")
+   for witness in row["precision_witnesses"]:validate_witness(witness)
+   for metric_name in ("native_pa_conditional_metric","selected_conditional_metric","fp32_tie_fp64_output_impact"):
+    metric=row[metric_name];require(metric.get("finite") is True and metric.get("passed") is True,"actual independent selected PA/mix and tie output impact")
+    for name,lo,hi in (("relative_rms",0,.005),("cosine",.99998,1.000001)):
+     values=metric[name];require(len(values)==b and all(len(v)==HEADS for v in values) and
+       all(type(v) in (int,float) and math.isfinite(v) and lo<=v<=hi for heads in values for v in heads),"every conditional/tie-impact request/head original thresholds")
    if s%11==0:pa_slots=pa_slots[1:]+pa_slots[:1]
    if s==80:pa_live[pa_slots[0]]=1
    expected_host_context=[min(pa_live[slot]+1,128) for slot in pa_slots]
@@ -129,7 +140,7 @@ def validate_matrix(report,root):
       all(type(v) in (int,float) and math.isfinite(v) and lo<=v<=hi for heads in values for v in heads),"actual EVERY request/head gate; no mean")
    count+=1
  require(keys=={(b,m,c,t) for b in range(1,17) for m,t in MODES for c in (False,True)} and count==20480,"full128cases/20480 numerical steps; no shard PASS")
- return {"cases":128,"changing_feedback_steps":count,"numerical_component_checked":True,
+ return {"cases":128,"changing_feedback_steps":count,"numerical_component_checked":True,"precision_contract":PROTOCOL,
   "ready":False,"service_ready":False,"model_executed":False,"matched1024_e2e_verified":False,"final2048_task_verified":False}
 
 def inspect_row(ref):

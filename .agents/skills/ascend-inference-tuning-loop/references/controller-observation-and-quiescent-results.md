@@ -69,3 +69,22 @@ by unique destination rather than list position. Do not ignore RW/source/type/
 propagation differences. Retain the original failed controller terminal;
 independently rehash valid copied child sources without repeating Docker work.
 Actual evidence: [Oct8 selector and CPU stages](../../../workstreams/qwen36-damp-ascend-20261006/SELECTOR_OBSERVATION_AND_KIVI_CPU_20261008.md).
+
+## Protected accelerator boundaries are not immutable external PID sets
+
+On a shared host, "do not interfere with protected cards" does not mean
+independent users cannot start, stop or restart their own workloads. Record
+original snapshots and external churn; reject our exact PID/CID on protected
+cards and actual conflicting use of authorized cards. Keep process identity,
+raw SMI, mapping/FD, resource and own-only cleanup checks. Do not fabricate
+unchanged snapshots or suppress genuine overlap. Shared CPU/RAM/IO changes
+remain resource and formal performance-comparability considerations.
+
+KIVI1271 was interrupted by external0–3 additions despite a physical5-only
+owned guest. Actual read-only recovery proved it stopped and4–7 released;
+the same equality also caused a secondary cleanup report error. Preserve the
+failed controller/partial matrix, not a paper-wide negative result.
+The source-bound SparQ successor and complete consumer implement the real
+boundary; all145 canonical tests passed after two obsolete fixture assertions
+were correctly replaced. This software result is not a numerical PASS.
+See [actual correction and next gate](../../../workstreams/qwen36-damp-ascend-20261006/PROTECTED_CARD_OBSERVER_CORRECTION_20261008.md).

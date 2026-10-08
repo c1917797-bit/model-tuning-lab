@@ -15,7 +15,7 @@ def terminal(path,digest,peer,container,expected=None,report_ref=None,source=Non
  return {"operation":parsed["operation_id"],"original_terminal_shape":parsed["origin_shape"],"receipt_sha256":digest,"container":container}
 def consume(root,terminal_path,terminal_sha,proof_path,peer,source,files,host_result,host_result_sha):
  from receipt import host_marker,validate_matrix,validate_cpu_phase,canonical
- from host import host_argv,translate
+ from host import host_argv,translate,protected_boundary,H
  from preflight import validate_abi
  authority_ref=bound(host_result,host_result_sha);authority=load(authority_ref)
  report_ref=authority["producer_report"];report=load(report_ref)
@@ -91,7 +91,29 @@ def consume(root,terminal_path,terminal_sha,proof_path,peer,source,files,host_re
  require([{k:v for k,v in p.items() if k!="borrowed_from_canary"} for p in proofs]==child["physical_pid_proofs"],"original numerical child -> actual hardware proof list linkage")
  require(len(identities)==1 and not identities & {(p["pid"],p["start_ticks"]) for p in authority["canary_process_proofs"]},"actual numerical identity remains exact and distinct from canary")
  before=load(authority["protected_before"]);after=load(authority["protected_after"])
- require(before["processes"]==after["processes"] and set(before["processes"])=={"0","1","2","3"},"actual protected0..3 PID/start/cgroup/hash unchanged")
+ boundary=after["protected_boundary"]
+ checked=protected_boundary(boundary["baseline"],boundary["observed"],
+  [proof["container_id"],proof["cpu_container_id"]],[hp["pid"]])
+ require(checked==boundary and before["processes"]==H.protected_map(boundary["baseline"]) and
+  after["processes"]==H.protected_map(boundary["observed"]),"original protected snapshots/deltas, not immutable external population")
+ def observation_boundary(observation,smi_ref):
+  raw=load(smi_ref);rows=H.frozen().legacy().process_rows(raw["stdout"])
+  observed=observation["protected0_3"]
+  require(sorted((v["physical"],v["chip"],v["pid"]) for v in observed)==
+   sorted(v for v in rows if v[0] in (0,1,2,3)),"original raw SMI binds protected process population")
+  recomputed=protected_boundary(observation["protected_boundary"]["baseline"],observed,
+   [proof["container_id"],proof["cpu_container_id"]],[hp["pid"]])
+  require(recomputed==observation["protected_boundary"] and recomputed["baseline"]==boundary["baseline"],
+   "all original observations reject owned protected processes and retain external churn")
+ for p in [*proofs,*authority["canary_process_proofs"]]:
+  observation_boundary(load(p["complete_observation"]),p["smi"])
+ for ref in (authority["preflight"],proof["probe_idle"]):
+  observation=load(ref);observation_boundary(observation,observation["smi"])
+ release_raw=load(after["release_smi"])
+ require(after["release_smi"]==load(authority["cleanup"])["release_smi"] and
+  sorted((v["physical"],v["chip"],v["pid"]) for v in boundary["observed"])==
+  sorted(v for v in H.frozen().legacy().process_rows(release_raw["stdout"]) if v[0] in (0,1,2,3)),
+  "same original release SMI; no retrospective snapshot substitution")
  stopped=load(authority["stopped_owned_inspect"])
  if "stdout" in stopped:stopped=json.loads(stopped["stdout"])
  require(len(stopped)==1 and stopped[0]["Id"]==proof["container_id"] and stopped[0]["Image"]==IMAGE and
@@ -101,8 +123,9 @@ def consume(root,terminal_path,terminal_sha,proof_path,peer,source,files,host_re
  cleanup=load(authority["cleanup"])
  require(cleanup.get("container")==proof["container_id"] and cleanup.get("stopped") is True and cleanup.get("retained") is True and
     cleanup.get("deleted") is False and cleanup.get("errors")==[] and cleanup.get("primary_error") is None,"actual exact release and original/secondary cleanup closure")
- return {"schema":"sparq.complete-token-component/v4","component_report_checked":True,
+ return {"schema":"sparq.complete-token-component/v7-fp32-support","component_report_checked":True,
   "MAIN_original_operation_authority_verified":True,"actual_numerical_steps":full["changing_feedback_steps"],"cases":128,
+  "precision_contract":full["precision_contract"],"original009_numeric_status":"failed-not-promoted",
   "original_terminal":original_ref,"original_operation_id":parsed["operation_id"],"original_terminal_shape":parsed["origin_shape"],
   "original_record_origin":parsed["record_origin"],"actual_report":report_ref,"host_result":authority_ref,"native_no_device_abi":ndref,
   "source_manifest":source,"source_files":files,"ready":False,"service_ready":False,"model_executed":False,

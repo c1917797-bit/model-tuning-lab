@@ -86,6 +86,32 @@ def validate_inspect(x,e):
         "complete exact immutable inputs/new output mounts")
 
 
+def protected_boundary(before,after,owned_cids=(),owned_host_pids=()):
+ """Retain external 0--3 churn; reject only owned processes on protected cards."""
+ require(type(owned_cids) in (tuple,list) and all(re.fullmatch("[0-9a-f]{64}",v or "") for v in owned_cids),"complete own CIDs")
+ require(type(owned_host_pids) in (tuple,list) and all(type(v) is int and v>1 for v in owned_host_pids),"exact own host PIDs")
+ def indexed(rows):
+  require(type(rows) is list and len(rows)<=4096,"bounded protected process rows")
+  result={}
+  for row in rows:
+   require(type(row) is dict and set(row)=={"physical","chip","pid","start_ticks","cgroup","cmdline_sha256"} and
+    type(row["physical"]) is int and row["physical"] in (0,1,2,3) and row["chip"]==0 and
+    type(row["pid"]) is int and row["pid"]>1 and type(row["start_ticks"]) is int and row["start_ticks"]>0 and
+    type(row["cgroup"]) is str and row["cgroup"] and re.fullmatch("[0-9a-f]{64}",row["cmdline_sha256"] or ""),
+    "complete protected PID/start/cgroup/argv hash")
+   key=(row["physical"],row["chip"],row["pid"])
+   require(key not in result,"duplicate protected identity")
+   require(row["pid"] not in owned_host_pids and not any(cid in row["cgroup"] for cid in owned_cids),
+    "owned process on protected physical NPU0-3")
+   result[key]=row
+  return result
+ old=indexed(before);new=indexed(after)
+ return dict(schema="sparq.protected-boundary/v1",baseline=before,observed=after,
+  external_added=[new[k] for k in sorted(new.keys()-old.keys())],
+  external_removed=[old[k] for k in sorted(old.keys()-new.keys())],
+  external_changed=[dict(before=old[k],after=new[k]) for k in sorted(old.keys()&new.keys()) if old[k]!=new[k]],
+  own_on_protected=False,external_unchanged_claimed=False)
+
 class Controller(H.Controller):
  def __init__(self,a):
   super().__init__(a)
@@ -139,6 +165,83 @@ class Controller(H.Controller):
   retained=H.write(self.out/(label+"-"+str(time.time_ns())+".json"),result)
   require(result["exit_code"]==0,"actual command failed; retained "+str(retained))
   return result,retained
+ def check_protected(self,observed):
+  if self.protected is None:self.protected=observed
+  return protected_boundary(self.protected,observed,
+   [self.cid] if self.cid is not None else [],[os.getpid()])
+
+ def observe(self,label,expected_argv=None,initial=False,cleanup=False):
+     raw,sr=self.call("smi",[H.SMI,"info"],cleanup=cleanup)
+     text=raw["stdout"];protected=self.h.protected(text)
+     if self.protected is None:self.protected=protected
+     record=dict(label=label,observed_utc=raw["observed_utc"],smi=sr,
+         npu_smi=text,protected0_3=protected,declared_only_containers=[],actual_compute=[],
+         actual_physical6_fd_holders=[])
+     # Save raw state before any protection/ownership assertion.
+     initial_ref=write_new(self.out/("observation-raw-"+str(time.time_ns())+".json"),record)
+     record["protected_boundary"]=self.check_protected(protected)
+     process_rows=self.h.legacy().process_rows(text)
+     proofs=[]
+     for card in (4,5,6,7):
+         rows=[(n,ch,pid) for n,ch,pid in process_rows if n==card]
+         if card!=6 or self.cid is None:
+             self.h.idle_one(text,card);continue
+         if not rows:self.h.idle_one(text,card)
+         for physical,chip,pid in rows:
+             proof=H.started(self.h.gate_process(pid))
+             record["actual_compute"].append(dict(physical=physical,chip=chip,**proof))
+             write_new(self.out/("actual-compute-"+str(time.time_ns())+".json"),
+                 dict(physical=physical,chip=chip,stage=label,**proof,smi=sr))
+             require(chip==0 and self.cid in proof["cgroup"],"actual foreign physical6 process/UDA conflict")
+             require(expected_argv is not None and proof["argv"]==expected_argv,
+                 "actual NPU Python PID/argv is not this canary/numerical child")
+             require(datetime.fromisoformat(proof["started_utc"])>=self.child_started-H.timedelta(seconds=1),
+                 "actual child kernel start-time predates this dispatch")
+             proofs.append(dict(physical=physical,chip=chip,stage=label,**proof,
+                 smi=sr,raw_observation=initial_ref,observed_utc=raw["observed_utc"]))
+     holders=H.device_fd_holders();record["actual_physical6_fd_holders"]=holders
+     write_new(self.out/("actual-device-fd-"+str(time.time_ns())+".json"),dict(holders=holders,smi=sr))
+     for holder in holders:
+         require(self.cid is not None and self.cid in holder["cgroup"],
+                 "actual physical6 device FD/UDA ownership conflict")
+     running,psr=self.call("running",[DOCKER,"ps","-q","--no-trunc"],cleanup=cleanup)
+     for cid in running["stdout"].split():
+         r,ir=self.call("declared-container",[DOCKER,"inspect",cid],cleanup=cleanup)
+         x=json.loads(r["stdout"])[0]
+         declared={d["PathOnHost"] for d in (x["HostConfig"].get("Devices") or [])}
+         if declared&{"/dev/davinci"+str(n) for n in (4,5,6,7)}:
+             # Declarations alone are recorded, never blocking or stop authority.
+             record["declared_only_containers"].append(dict(cid=cid,inspect=ir,devices=sorted(declared)))
+     record["resources"]=self.resources(initial)
+     record["actual_compute_proofs"]=proofs
+     completed=write_new(self.out/("observation-"+str(time.time_ns())+".json"),record)
+     for proof in proofs:proof["complete_observation"]=completed
+     return proofs,completed
+ def cleanup(self):
+     result=dict(container=self.cid,stopped=False,retained=False,deleted=False,
+         errors=[],primary_error=repr(self.primary) if self.primary else None)
+     if self.cid is None:return write_new(self.out/"cleanup.json",result)
+     try:
+         _,before=self.inspect(cleanup=True);result["before_inspect"]=before
+         stopped,sr=self.call("stop-retain",[DOCKER,"stop","--time","15",self.cid],cap=40,cleanup=True)
+         result["stop_receipt"]=sr
+         x,after=self.inspect(cleanup=True);result["after_inspect"]=after
+         require(not x["State"]["Running"] and x["State"]["Pid"]==0 and not x.get("ExecIDs"),
+             "exact owned container/process still live")
+         result.update(stopped=True,retained=True)
+         require(not x["State"].get("OOMKilled",False),"OOM invalidates numerical stage")
+         if self.child is not None and self.child.poll() is None:
+             self.child.wait(timeout=self.remaining(cleanup=True,cap=20))
+         require(self.child is None or self.child.poll() is not None,"foreground Docker CLI termination pending")
+         raw,sr=self.call("release-smi",[H.SMI,"info"],cleanup=True)
+         result["release_smi"]=sr
+         result["protected_boundary"]=self.check_protected(self.h.protected(raw["stdout"]))
+         self.h.idle_one(raw["stdout"],6)
+     except BaseException as error:
+         result["errors"].append(repr(error));self.secondary.append(repr(error))
+         # Never discard unresolved exact CID or claim successful retain/release.
+     return write_new(self.out/"cleanup.json",result)
+
  def mounts(self,artifacts=None):
   # Same absolute source/evidence paths are readable in image and host.
   # Only the distinct owned /sparq-results alias is writable.
@@ -377,7 +480,9 @@ def execute(a,source,files):
     cr=c.load(cleanup);stopped=cr.get("after_inspect")
     if cr.get("release_smi"):
      release=c.load(cr["release_smi"])
-     protected_after=write_new(ctl.out/"protected-after.json",{"processes":H.protected_map(ctl.h.protected(release["stdout"])),"release_smi":cr["release_smi"]})
+     protected_rows=ctl.h.protected(release["stdout"])
+     protected_after=write_new(ctl.out/"protected-after.json",{"processes":H.protected_map(protected_rows),
+      "protected_boundary":ctl.check_protected(protected_rows),"release_smi":cr["release_smi"]})
    if ctl.child is not None:
     done=ctl.child.poll() is not None
     write_new(ctl.out/"foreground-final.json",{"stage":ctl.child_label,"requested_argv":ctl.child_request,"host_pid":ctl.child.pid,"terminated":done,"exit_code":ctl.child.returncode if done else None})

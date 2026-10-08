@@ -8,6 +8,7 @@ from sparq_token_v4.core import HEADS,DIM,BLOCK,SLOTS,require
 from sparq_token_v4.proof import validate_proof
 from receipt import sha,bound,source_identity,canonical,write_new,MODES,BATCHES,image_argv
 LIMITS={"relative_rms":.005,"cosine":.99998}
+from precision_oracle import PROTOCOL as PRECISION_CONTRACT,independent,metrics
 def raw_cpu(torch,v):
     if isinstance(v,torch.Tensor):return v.detach().cpu()
     if isinstance(v,dict):return {k:raw_cpu(torch,x) for k,x in v.items()}
@@ -165,7 +166,7 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
                 workspace.native_pa.update_graph();workspace.native_pa.check_replay()
                 graph.replay()
             torch.npu.synchronize()
-            out,selected,alpha,_=result;current=[lengths[s]+1 for s in slots]
+            out,selected,alpha,channels=result;current=[lengths[s]+1 for s in slots]
             require(torch.equal(workspace.native_pa.context.value,pa_context_before) and workspace.native_pa.guards(),
                     "actual persistent CPU PA context/prefix/suffix untouched by native replay")
             require(torch.equal(kc,refk) and torch.equal(vc,refv),"complete native KV including all paused/guards")
@@ -187,8 +188,19 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
             # Compare maintained sums with direct full history, never call candidate to get golden.
             actual_mean=mean.means(leases)
             require(bool(torch.allclose(actual_mean.detach().cpu().double(),means,rtol=1e-5,atol=1e-7)),"per-lease cumulative V mean versus direct historical golden")
-            require(all(torch.equal(selected[i,:min(current[i],128)].detach().cpu(),support) for i,support in enumerate(candidate_supports)),
-                    "same-candidate-query token support equals independent GQA formula; not reference feedback equality")
+            finite_precision=independent(torch,q,refk,refv,rows,current,candidate_supports,capacity=capacity)
+            raw.update(independent_cpu32_support=finite_precision["supports"],precision_witnesses=finite_precision["witnesses"],
+                       conditional_cpu64_pa=finite_precision["conditional_pa"],conditional_cpu64_mixed=finite_precision["conditional_mixed"])
+            require(all(torch.equal(selected[i,:min(current[i],128)].detach().cpu(),support) for i,support in enumerate(finite_precision["supports"])) and
+                    all(torch.equal(channels[i].detach().cpu(),dims) for i,dims in enumerate(finite_precision["channels"])),
+                    "same-candidate-query strict independent CPU32 stable support and channels; no non-tie FP64 exception")
+            conditional=finite_precision["conditional_mixed"] if correction else finite_precision["conditional_pa"]
+            native_pa_metric=metrics(torch,workspace.output,finite_precision["conditional_pa"],out.dtype)
+            conditional_metric=metrics(torch,out,conditional,out.dtype)
+            tie_impact_metric=metrics(torch,conditional,candidate_math,out.dtype)
+            raw.update(native_pa_metric=native_pa_metric,conditional_metric=conditional_metric,tie_impact_metric=tie_impact_metric)
+            require(native_pa_metric["passed"] and conditional_metric["passed"] and tie_impact_metric["passed"],
+                    "independent conditional native PA/mixed output and FP32-tie versus FP64 output impact retain original per-head thresholds")
             fp64=expected;expected=expected.to(out.dtype).double();actual=out.detach().cpu().double()
             er=expected.square().mean(-1).sqrt();rel=(actual-expected).square().mean(-1).sqrt()/er
             cos=torch.nn.functional.cosine_similarity(actual,expected,dim=-1)
@@ -202,6 +214,10 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
                  "mean_request_lease_checked":True,"support_independent":True,"support_independent_query":"candidate-feedback-q",
                  "reference_feedback_independent":True,"reference_feedback_support_equal":not any(support_divergence),
                  "cross_feedback_support_divergence":support_divergence,"dense_attention_equivalence_claimed":False,"pointer_identity":True,"workspace_mean_guards":True,"all_topology_immutable":True,"oracle_cpu_fp64":True,"per_head_metric":True,"native_cache_input_outer_guards":True}
+            row.update(precision_contract=PRECISION_CONTRACT,precision_witnesses=finite_precision["witnesses"],
+                       oracle_cpu32_support=True,strict_stable_cpu32_support=True,nonzero_score_tolerance=False,
+                       native_pa_conditional_metric=native_pa_metric,selected_conditional_metric=conditional_metric,
+                       fp32_tie_fp64_output_impact=tie_impact_metric)
             row.update(native_pa_context_cpu_int32=workspace.native_pa.context.value.tolist(),
                        native_pa_context_epoch=workspace.native_pa.epoch,native_pa_graph_update_epoch=workspace.native_pa.updated_epoch,
                        native_pa_host_guard=True)
@@ -253,6 +269,7 @@ def main():
     write_new(a.output/"START.json",{"source_manifest":source,"sources":files,"limits":LIMITS,"batches":list(range(1,17)),"modes":[list(x) for x in MODES],"npu_executed":False})
     process={"pid":os.getpid(),"argv":argv,"cgroup":Path("/proc/self/cgroup").read_text(),"stat":Path("/proc/self/stat").read_text(),"cmdline_sha256":hashlib.sha256(Path("/proc/self/cmdline").read_bytes()).hexdigest()}
     cases=[];primary=None;report={"schema":"sparq.token-numeric/v4","status":"running","source_manifest":source,"sources_before":files,"limits":LIMITS,"cases":cases,
+      "precision_contract":PRECISION_CONTRACT,"original009_numeric_status":"failed-not-promoted",
       "device_proof":proof_ref,"native_no_device_abi":proof["native_no_device_abi"],"started_ns":time.time_ns(),"script_sha256":files["numeric_gate.py"],"actual_container_process":process,
       "npu_executed":None,"service_ready":False,"model_executed":False,"performance_evaluated":False,"accuracy_evaluated":False}
     try:

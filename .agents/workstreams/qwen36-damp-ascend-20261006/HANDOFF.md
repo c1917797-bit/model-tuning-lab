@@ -1,5 +1,152 @@
 # DAMP Ascend — current workstream
 
+## Current SparQ011 failure / released devices — 2026-10-08 08:47Z
+
+MAIN12a2 is TERMINAL FAILED, not running. Same-image Devices[] ABI and actual
+physical6 canary passed; one b1-eager-mean0-t0 case completed160steps. The next
+b1-eager-mean1-t0 failed atstep061 on strict same-query CPU32 support/channels.
+Do NOT run the full128 matrix unchanged or call this a paper-wide no-go.
+Actual terminal completed1/198717ms, primary actual matrix child exit1,
+secondary errors empty. Whole128/20480, model/E2E/tasks are absent.
+Read the retained native failure, not an invented external0–3 interference.
+
+Original root:
+`/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-011-native-20261008-001`.
+RESULT SHA97f56172f9c8cc6e5e71b66aa80693a38d55bf71d9cb2e25b9d75f9e95c7c930;
+gate REPORT SHA6f8aabee8426f2e8560e6dccc59b362d77768bd553906acffab841936f5d7546.
+Failure checkpoint gate/failure-b1-eager-mean1-t0-061.pt (171491473B),
+SHAb9e546d69e8e5a948d628698215dac8d94306731c0de9c9e386601d36d8e6875.
+Original MAIN12A2 launch/terminal envelopes remain in that root.
+
+MAIN12b1 fresh read-only release completed0/1364ms. Exact NPU CID
+f39defe854f6391a0e745a85c3704ed992909eb480dff4eb3940e19e04b23038 and CPU CID
+7a7dff809cb5766046833acee1633bc010a805cafeb62d5d0776ac6bde4bf48d are
+stopped-retained/Pid0/noExec/OOMfalse; original host absent,4–7 no compute.
+External0–3 PIDs580648–580651 remained active. Permission to continue numeric
+work is not formal performance comparability. MemAvailable was94596748KiB.
+No MAIN exec is live at this checkpoint. Reprove resources before next create.
+
+Source manifestda8a7ab4... and original failures stay frozen. Saved raw omits
+selected/channels/alpha/native logits before the failed combined assertion:
+workspace.tensors does not include these locals. CPU raw diagnosis must recover
+token IDs from unique exact BF16 K+V if possible and explicitly mark missing
+channels/scores/precision settings. Do not infer HF32, graph defects, or soften
+the numerical contract from missing fields. A newly supported fix/observation
+precedes any new full NPU gate.
+
+MAIN12bc completed0/1815ms, read-only copies from the exact stopped CPU CID:
+six deployed GDN files and torch_npu/npu Python source, no runtime/import/NPU.
+Root `/cache/cch/qwen36-paper-preparation-20261007/sparse/source-gdn-and-torchnpu-660-20261008-0854-002`,
+manifest2287ff93333612616c3f552e9137693c4995ea27d206f82dac5a45009bf6c502.
+Initial12bb failed a wrong owner-label expectation BEFORE output/copy; correct
+actual receipt.OWNER=sparq-token-v6 was used in separate12bc. Retain both.
+SparQ FULLv3 preparer now has actual state/metadata sources; lowbit preparer
+is preparing the independent011 raw consumer; SparsePrefix preparer is fixing
+its independent protected-boundary successor. All API-only, no remote CPU.
+KIVI fixedOct8 08:29:54Z is EXPIRED: no restart/reset or more KIVI work.
+PortfolioOct9 11:17:31Z unchanged. Hugepage32GiB remainsSPENT; preserve OVS.
+No accepted new non-HYPIC throughput or final task result. Normal Git push
+authentication remains blocked; do not claim pushed, bypass or force.
+
+
+
+## Current protected-card correction / SparQ011 — 2026-10-08 08:27Z
+
+Read PROTECTED_CARD_OBSERVER_CORRECTION_20261008.md first.
+KIVI1271 is FAILED and STOPPED, not running: overstrict external0–3 population
+equality, four partial cases only; whole176/independent consumers absent.
+Actual1291/1297 proved own exact CID stopped/Pid0/noExec/noOOM, original host
+absent and4–7 compute empty. Old registry not_found is not a fabricated terminal.
+Preserve all raw data; no unchanged rerun. A new3600s KIVI attempt cannot fit
+its fixed08:29:54Z cutoff. Do not reset it or label observer failure paper no-go.
+
+Canonical SparQ host/independent consumer now retain external0–3 churn and
+reject ownPID/CID crossing. Actual145 software:129b had2 old fixture failures;
+corrected129f completed0/6391ms, full29 closure/default-OFF passed.
+MAIN12a2 was RUNNING at that historical poll; the current section above records
+its actual terminal failure/release. Whole128/20480 NPU matrix never completed.
+Poll only exec-00000000000012a2, direct currentma; no second MAIN exec while live.
+New output /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-011-native-20261008-001
+contains original launch and real resource PLAN. Source frozen:
+da8a7ab465412789d51ee44b1b460f5325e89509b3e700592dd0cfb97c044cfe.
+host3cabf289... /consumer96746088... /test68d17b56...; mathematical/PA/oracle/
+limits unchanged. Same660image Devices[] ABI then physical6->logical0,
+guest8GiB/CPU1, MAIN256MiB/CPU0, reserve8GiB/CPU2,3, whole5400 incl90cleanup.
+Numerical, complete authority, actual TP4/lifecycle, matched1024 and2048 tasks
+are separate gates. No performance/task success claimed.
+
+Three parallel API-only preparers continue owned eager lowbit, SparsePrefix
+namespace-corrected TP4 and SparQ FULLv3 source/model consumers; no preparer
+remote CPU/Docker/NPU/Git admission. v2/old manifests stay immutable.
+32GiB authorization remains SPENT; OVS24GiB/pools unchanged.
+PortfolioOct9 11:17:31Z unchanged. Git8576cf4 remains local-only before checkpoint;
+authentication unchanged blocked, no repeated push/force/main mutation.
+
+## Current actual KIVI full176 diagnostic — 2026-10-08 07:36Z
+
+MAIN1271 is RUNNING, not full numerical/model/E2E/task PASS.
+Poll only exec-0000000000001271 on current ma a6109/direct/tpc;
+do not launch another MAIN exec or repeat this output while it is live.
+Actual host started07:28:24.191747Z with the original3600s total including90s
+cleanup; fixed KV08:29:54Z and portfolioOct9 11:17:31Z remain unchanged.
+Actual reviewed12-source manifest9b2c5190fa7dad4f0ea0d06fc196bb113b42bd961aebb4d5bfc00a36d4663255;
+host5a73b519b735b65d665c02e41417f18e6ec50c0c16bb61dc694954bec992a976.
+Original16stdlib1269 and actual source-closure126b passed; not NPU readiness.
+New output /cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-native176-host-001-main-20261008-01
+contains ORIGINAL_MAIN_1271_LAUNCH.json and MAIN_LAUNCH_SOURCE.json.
+Exact own CIDe28c08b4cdca9d30d4fedaf0a33ee10a071838151a1394fc73819087012a5173
+maps physical5->guest0 only+control nodes, image660, nonprivileged/private,
+guest8GiB/oneCPU1, MAIN.5GiB/CPU0, reserve8GiB/twoCPU2,3.
+Actual precreate ordinaryMemAvailable119122141184B; no HugeTLB write.
+Static arithmetic canary and8 new vector/scalar CPU byte checks passed.
+First b2/FP16/B1/L1/eager case has160 steps/packing/reader/guard/parent/reuse
+checks complete. This is ONE partial case, not original176/28160/239360 pass.
+Full changed-NPUGraph/independent raw and host consumers are still pending.
+After actual terminal, preserve whole operation/first raw/error and verify
+exact stopped-retained/Pid0/noExec/noOOM release before admitting a successor.
+If whole producer and CPU raw consumer succeeded, execute the separate
+consume_host.py once with exact manifest/new INDEPENDENT output; no promotion
+to serving/model/author-CUDA parity or matched performance/quality.
+
+OVS PID27118/start11471/24GiB and NUMA pools439/485/486/474 were rechecked
+read-only immediately before1271. The original32GiB authorization is SPENT;
+no second release, service stop or permanent configuration change.
+SparsePrefix1268 remains failed import namespace, not algorithm no-go.
+Existing DeltaLog source_origins/actual126c proves the real builder namespace
+is vllm_ascend.ops.gdn_attn_builder (not attention.gdn_attn_builder).
+New plugin-only compat-v6 is source-only; keep original14 checks and byte/class
+identity, old v3/v4/v5 unchanged. Preparers remain API-only/no remoteCPU.
+SparQ010 canonical139/Torch/full128 numerical remains pending and unchanged.
+No accepted new non-HYPIC E2E/task technique exists. Git8576cf4 local-only;
+this handoff and canonicalSparQ9 edits are uncommitted, auth block unchanged.
+
+## Latest actual TP4 device/source attempt — 2026-10-08 07:16Z
+
+MAIN1268 completed1/90298ms; exact source af32b155..., host4abe34f....
+Real physical4–7 canary passed (guest0–3, nonprivileged same660image).
+Real device source gate then failed ModuleNotFoundError for
+vllm_ascend.attention.gdn_attn_builder BEFORE EngineArgs/stock4worker/corpus.
+Classify as namespace/import ABI failure, not a paper no-go or model result.
+Exact CID1e1081801ced74f3ca755044121ad9f475d9cdf343cd9d1ab4fedfcdfd0ddd66
+was stopped and retained; all owned CLI children reaped, noOOM, no cleanup
+errors, physical4–7 compute empty at release. No MAIN NPU runtime remains.
+Whole original and stage summary are durable in
+/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp5-tp4-cpu7-20261008-001/
+(ORIGINAL_MAIN_1268_OPERATION.json, MAIN_STAGE_SUMMARY.json, RESULT.json,
+cleanup.json and raw tp4 stderr/stdout). Preserve the failure; no unchanged retry.
+Next: verify actual same-image GDN module namespace/class bytes and adapt
+only a new plugin successor; do not remove imports, fake a module or edit upstream.
+KIVI176 full producer/consumer/once-host is still preparing; fixed08:29:54Z
+cutoff and whole3600 including90cleanup must not reset or shrink coverage.
+SparQ010 prospective CPU32-support/FP64-output gate's three reviewed patches
+are now applied to canonical plugin files, uncommitted; canonical139 and
+actual Torch/NPU128case20480step remain PENDING. Private139 is software only.
+Variant is probability-GQA-SUM (not mean, not author ANN logit-GQA recipe).
+The current model bridge is reallocation-OFF; numeric meanON coverage would
+not prove a model meanON implementation. Original009 FAILED/005 observation unchanged.
+Hugepage32 authorization is SPENT (Oct7 16:04Z, OVS24GiB/health preserved);
+no second release. Git8576cf4 remains local-only; unchanged auth block not retried.
+
 ## Latest actual selector observation / full KIVI CPU gate — 2026-10-08 06:31Z
 
 Read SELECTOR_OBSERVATION_AND_KIVI_CPU_20261008.md first.

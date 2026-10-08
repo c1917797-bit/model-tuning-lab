@@ -327,6 +327,19 @@ def validate_observation(observation,source,files):
  exports=validate_exports(observation["exports_after_source_import"])
  validate_pa_graph_api(observation["pa_graph_after_source_import"])
  return wrapper,exports
+def validate_precision_smoke(report):
+ import math
+ from precision_oracle import PROTOCOL
+ require(type(report) is dict and report.get("protocol")==PROTOCOL and
+  report.get("oracle_sha256")==sha(Path(__file__).parent/"precision_oracle.py") and
+  report.get("torch_npu_initialized_after") is False,"actual this-source no-device CPU32 oracle")
+ cases=report.get("cases",[])
+ require(len(cases)==2 and {x.get("batch") for x in cases}=={1,2} and
+  all(x.get("strict_support32") is True and x.get("conditional_cpu64_equal") is True and
+      x.get("full_support_domain")==3 and type(x.get("maximum_error")) in (int,float) and
+      math.isfinite(x["maximum_error"]) and x["maximum_error"]<=1e-10 for x in cases),
+      "actual CPU32 selection and CPU64 conditional math smoke before any device")
+ return report
 def validate_cpu_golden(report):
  require(type(report) is dict and report.get("schema")=="sparq.actual-cpu-golden-smoke/v4" and report.get("device")=="cpu" and
   report.get("source_sha256")==sha(Path(__file__).parent/"numeric_gate.py") and report.get("torch_npu_initialized_after") is False and
@@ -337,11 +350,13 @@ def validate_cpu_golden(report):
    x.get("finite") is True and x.get("independent_scalar_support_equal") is True and
    type(x.get("maximum_scalar_error")) in (int,float) and x["maximum_scalar_error"]<=1e-10 for x in cases),
   "actual four CPU golden/meanOFFON/scalar-oracle cases, not NPU admission")
+ validate_precision_smoke(report.get("registered_precision_smoke"))
  return report
 def cpu_golden_smoke(torch,torch_npu):
  from numeric_gate import golden,HEADS,DIM,BLOCK
  from sparq_token_v4.oracle import reference
- cases=[]
+ from precision_oracle import PROTOCOL,independent
+ cases=[];precision_cases=[]
  for batch in (1,2):
   rows=[[2*i,2*i+1] for i in range(batch)];lengths=[33,129][:batch]
   query=((torch.arange(batch*HEADS*DIM,dtype=torch.float32).reshape(batch,HEADS,DIM)%7-3)/64).to(torch.bfloat16)
@@ -364,7 +379,16 @@ def cpu_golden_smoke(torch,torch_npu):
     all_outputs_cpu=all(x.device.type=="cpu" for x in (out,means,alpha)),
     finite=bool(torch.isfinite(out).all() and torch.isfinite(means).all() and torch.isfinite(alpha).all()),
     independent_scalar_support_equal=True,maximum_scalar_error=maximum))
- report=dict(schema="sparq.actual-cpu-golden-smoke/v4",device="cpu",source_sha256=sha(Path(__file__).parent/"numeric_gate.py"),
+  short_lengths=[3]*batch
+  short_out,short_support,_,_=golden(torch,query,kc,vc,rows,short_lengths,32,128,1,False)
+  checked=independent(torch,query,kc,vc,rows,short_lengths,short_support,capacity=256)
+  error=float((checked["conditional_pa"]-short_out).abs().max())
+  precision_cases.append(dict(batch=batch,strict_support32=all(x.tolist()==[0,1,2] for x in checked["supports"]),
+    conditional_cpu64_equal=bool(torch.allclose(checked["conditional_pa"],short_out,rtol=1e-10,atol=1e-12)),
+    full_support_domain=3,maximum_error=error))
+ precision_smoke=dict(protocol=PROTOCOL,oracle_sha256=sha(Path(__file__).parent/"precision_oracle.py"),
+  torch_npu_initialized_after=torch_npu.npu.is_initialized(),cases=precision_cases)
+ report=dict(registered_precision_smoke=precision_smoke,schema="sparq.actual-cpu-golden-smoke/v4",device="cpu",source_sha256=sha(Path(__file__).parent/"numeric_gate.py"),
   torch_npu_initialized_after=torch_npu.npu.is_initialized(),npu_executed=False,cases=cases)
  return validate_cpu_golden(report)
 

@@ -4,6 +4,14 @@ Read for token-selector support failures, typed packed-cache persistence failure
 or resource-template admission that does not match the actual workload.
 These are scoped diagnostics, not replacement NPU/model/E2E acceptance rules.
 
+SparQ011 failed a combined support/channels assertion before publishing those
+locals. Its checkpoint cannot identify which side failed merely from that
+message. Recover selected tokens from unique exact K AND V matches when possible,
+and mark absent channels/native scores/precision settings unavailable. Keep
+the original failed result; a later source-only or fixed-input observation is
+not original graph or full-matrix authority. Publish algorithm-specific raw
+intermediates before their first assertion in a separately registered successor.
+
 ## Near-tied support failures
 
 Retain the original failed gate and inputs. Reconstruct the actual selected tokens

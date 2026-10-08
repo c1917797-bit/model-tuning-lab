@@ -182,8 +182,8 @@ class CrossModule(unittest.TestCase):
   for n,s in {"sparq_token_v4/core.py":"c5ef88f12828597469f7f3ce32a78ca4b4bb31d66c38beba102420d11bb21393",
    "sparq_token_v4/oracle.py":"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f",
    "model_bridge.py":"74400ac82b9f28ce4cbed21faf00f2201307eb43c31b76f8a2851e1eb97bffb9",
-   "numeric_gate.py":"d6d6088dcc140fd9f23c3fb189dc03a0467120159c07b65560f99184973aaaea",
-   "preflight.py":"87aaaff5481c81ebdcec2c9dee2943f85f67f1b99aa38f04676bc14cb044678a"}.items():
+   "numeric_gate.py":"d35c9a1aae8f7c7e650d98cbcf17cbf8412ef6b40e1385795103d4c39c56bf63",
+   "preflight.py":"ae4d94c5f46a3a6159e657f3208ad636f7153d8c1db87990c903c6caa94ab682"}.items():
    self.assertEqual(receipt.sha(receipt.ROOT/n),s)
   self.assertNotEqual(receipt.sha(Path(gate.__file__)),"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c")
   self.assertEqual(receipt.OWNER,"sparq-token-v6");self.assertNotIn("torch",sys.modules)
@@ -274,7 +274,7 @@ def fixture_controller(cls,root,live,expected,primary=None):
  ctl.cid=expected["cid"];ctl.expected=copy.deepcopy(expected);ctl.name=expected["name"]
  ctl.primary=primary;ctl.secondary=[];ctl.child=None;ctl.cleanup_deadline=None
  ctl.created_monotonic=time.monotonic();ctl.deadline=ctl.created_monotonic+600
- ctl.protected="fixture-protected";ctl.cpu=None
+ ctl.protected=[];ctl.cpu=None
  state=root/"fixture-cli-state.json"
  state.write_text(json.dumps(dict(inspect=live,commands=[])))
  def run(wrapped,limit):
@@ -287,7 +287,7 @@ def fixture_controller(cls,root,live,expected,primary=None):
   child=subprocess.run(actual,stdin=subprocess.DEVNULL,capture_output=True,text=True,timeout=limit,check=False)
   return dict(argv=list(wrapped),exit_code=child.returncode,stdout=child.stdout,stderr=child.stderr,
    observed_utc=host.utc().isoformat(),fixture_only=True,actual_test_subprocess_argv=actual)
- ctl.h=SimpleNamespace(run=run,protected=lambda text:"fixture-protected",idle_one=lambda text,card:None)
+ ctl.h=SimpleNamespace(run=run,protected=lambda text:[],idle_one=lambda text,card:None)
  def refuse_admission(*args,**kwargs):raise RuntimeError("ordinary RAM/CPU admission must not block exact owned cleanup")
  ctl.resources=refuse_admission
  return ctl,state
@@ -380,9 +380,17 @@ def cleanup_regression():
   result=receipt.load(invalid.cleanup())
   assert result["stopped"] and result["retained"] and result["errors"] and any("OOM" in e for e in result["errors"])
   protected,state=fixture_controller(host.Controller,root/"protected-changed",live,expected)
-  protected.h.protected=lambda text:"changed-protected"
+  protected.h.protected=lambda text:[dict(physical=0,chip=0,pid=101,start_ticks=200,
+   cgroup="0::/docker/"+expected["cid"],cmdline_sha256="a"*64)]
   result=receipt.load(protected.cleanup())
-  assert result["stopped"] and result["retained"] and result["errors"] and any("protected0..3" in e for e in result["errors"])
+  assert result["stopped"] and result["retained"] and result["errors"] and any("owned process on protected" in e for e in result["errors"])
+  external,state=fixture_controller(host.Controller,root/"external-changed",live,expected)
+  row=dict(physical=0,chip=0,pid=101,start_ticks=200,cgroup="0::/foreign",cmdline_sha256="a"*64)
+  external.h.protected=lambda text:[row]
+  result=receipt.load(external.cleanup())
+  assert result["stopped"] and result["retained"] and result["errors"]==[]
+  assert result["protected_boundary"]["external_added"]==[row]
+  assert json.loads(state.read_text())["commands"]==["inspect","stop","inspect","release"]
   summary=dict(actual_stdlib_subprocess=True,parent_peak_kib=parent_peak,parent_current_after_free_kib=parent_current,
    child_peak_kib=child_peak,latched_aggregate_kib=aggregate,unchanged_formal_limit_bytes=host.HOST_MEM,
    instantaneous_parent_current_plus_child_peak_kib=parent_current+child_peak,
@@ -414,7 +422,8 @@ class CleanupLinkage(unittest.TestCase):
   with mock.patch.object(host,"CUTOFF",host.datetime(1999,1,1,tzinfo=host.timezone.utc)):
    ctl.deadline=time.monotonic()+600
    with self.assertRaises(ValueError):ctl.remaining()
-  self.assertEqual(host.Controller.cleanup,host.H.Controller.cleanup)
+  self.assertNotEqual(host.Controller.cleanup,host.H.Controller.cleanup)
+  self.assertEqual(receipt.sha(host.H8),host.H8_SHA)
 
  def test_final_time_failure_is_latched_before_success_not_a_new_lease(self):
   with mock.patch.object(host,"CUTOFF",host.datetime(2099,1,1,tzinfo=host.timezone.utc)):
@@ -471,7 +480,7 @@ def create_regression(mode):
   root=Path(td);f=CrossModule().fixture(root)
   ctl=object.__new__(cls);ctl.out=root/"owned";ctl.out.mkdir();ctl.cid=None;ctl.expected=None
   ctl.name="create-fixture-only";ctl.device_phase="cpu";ctl.cpu=dict(guest_cpu=1)
-  ctl.primary=None;ctl.secondary=[];ctl.child=None;ctl.protected="fixture-protected"
+  ctl.primary=None;ctl.secondary=[];ctl.child=None;ctl.protected=[]
   ctl.cleanup_deadline=None;ctl.created_monotonic=time.monotonic();ctl.deadline=ctl.created_monotonic+600
   ctl.mounts=lambda artifacts=None:{str(root):(str(root),False),"/sparq-results":(str(ctl.out),True)}
   state=ctl.out/"fixture-cli-state.json";cid="d"*64
@@ -501,7 +510,7 @@ def create_regression(mode):
     if mode=="new-expiry":ctl.deadline=time.monotonic()-1
    return dict(argv=list(wrapped),exit_code=child.returncode,stdout=child.stdout,stderr=child.stderr,
     observed_utc=host.utc().isoformat(),fixture_only=True,actual_test_subprocess_argv=actual)
-  ctl.h=SimpleNamespace(run=run,protected=lambda text:"fixture-protected",idle_one=lambda text,card:None)
+  ctl.h=SimpleNamespace(run=run,protected=lambda text:[],idle_one=lambda text,card:None)
   if mode=="new-preexpiry":ctl.deadline=time.monotonic()-1
   if mode=="new-preRSS":actual_peak.update(raise_actual_peak())
   error=None
@@ -568,6 +577,41 @@ class CreateLinkage(unittest.TestCase):
   self.assertTrue(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="create_owned" for n in ast.walk(create)))
   self.assertNotIn('self.call("create"',ast.unparse(create))
   self.assertEqual(receipt.OWNER,"sparq-token-v6")
+
+class ProtectedBoundary(unittest.TestCase):
+ def row(self,physical=0,pid=101,start=200,cgroup="0::/foreign",digest="a"*64):
+  return dict(physical=physical,chip=0,pid=pid,start_ticks=start,cgroup=cgroup,cmdline_sha256=digest)
+ def test_external_new_task_is_recorded_not_blocking(self):
+  row=self.row();checked=host.protected_boundary([], [row], ["6"*64],[999])
+  self.assertEqual(checked["external_added"],[row]);self.assertFalse(checked["own_on_protected"])
+  self.assertFalse(checked["external_unchanged_claimed"])
+ def test_external_departure_restart_and_argv_changes_are_explicit(self):
+  old=self.row();new=self.row(start=201,cgroup="0::/new",digest="b"*64)
+  checked=host.protected_boundary([old],[new],["6"*64],[999])
+  self.assertEqual(checked["external_changed"],[dict(before=old,after=new)])
+  self.assertEqual(host.protected_boundary([old],[])["external_removed"],[old])
+ def test_owned_CID_on_each_protected_card_fails(self):
+  for card in range(4):
+   with self.subTest(card=card),self.assertRaisesRegex(ValueError,"owned process"):
+    host.protected_boundary([], [self.row(card,cgroup="0::/docker/"+ "6"*64)],["6"*64],[999])
+ def test_owned_host_PID_cannot_be_hidden_as_external(self):
+  with self.assertRaisesRegex(ValueError,"owned process"):
+   host.protected_boundary([], [self.row(pid=999)],[],[999])
+ def test_malformed_duplicate_and_wrong_card_fail_closed(self):
+  row=self.row()
+  for rows in ([row,row],[dict(row,physical=4)],[dict(row,start_ticks=0)],"fixture",[dict(row,cmdline_sha256="bad")]):
+   with self.subTest(rows=rows),self.assertRaises(ValueError):host.protected_boundary([],rows)
+  with self.assertRaises(ValueError):host.protected_boundary([],[],["short"],[])
+ def test_actual_controller_and_independent_consumer_both_apply_boundary(self):
+  tree=ast.parse(Path(host.__file__).read_text())
+  cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=="Controller")
+  for name in ("observe","cleanup"):
+   method=next(n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name==name)
+   self.assertTrue(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="check_protected" for n in ast.walk(method)))
+  text=Path(consume_numeric.__file__).read_text()
+  self.assertIn("observation_boundary(load(p",text)
+  self.assertNotIn('before["processes"]==after["processes"]',text)
+  self.assertIn("self.resources(initial)",Path(host.__file__).read_text())
 
 if __name__=="__main__":
  if sys.argv[1:]==["--cleanup-regression"]:print(json.dumps(cleanup_regression(),sort_keys=True),flush=True)
