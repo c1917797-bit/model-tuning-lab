@@ -1988,3 +1988,26 @@ MemAvailable100953868KiB. NUMA1/2/3 pools unchanged, OVS samePID27118/start11471
 and24GiB actual hugepage backing intact. No further release or service stop.
 Fixed cutoffs unchanged; goal active, no accepted non-HYPIC E2E+task method.
 Git is local-only under the known credential-helper publication blocker.
+
+## Latest actual selector evidence — 2026-10-08 09:36Z
+
+Read SPARQ011_FIXED_SELECTOR_EVIDENCE_20261008.md before further dispatch.
+MAIN12d7 actual same-image Devices[] CPU diagnosis recovered all128 original
+selected tokens. MAIN12de is TERMINAL exit0/66.487s: eight source-bound physical6
+eager-prefix observations agree with FP64 and original recovered support, while
+CPU32 ties425/801. Channels agree; original runtime flags/full graph remain
+unproved. Original native011 FAILED is preserved, not promoted by diagnosis.
+No full128/20480 numerical, TP4 model, paired1024 E2E or final2048 task PASS.
+
+MAIN12e0 independently proves exact bf17a4... stopped/retained/Pid0/noExec/noOOM,
+4–7 idle and no protected0–3 mutation. Ordinary MemAvailable93872260KiB,
+not a renewed hugepage release.32GiB authority remains SPENT. It also copied
+exact stopped-image api_server.py for the real HTTP receipt consumer audit.
+Three rolling preparers remain API/source-only; MAIN serially admits next
+fully reviewed SparsePrefix TP4/lifecycle gate after CPU and resource checks.
+Explicit SparQ first-start fields are missing; known attempt Oct7 19:12:54Z
+is not proof of earliest start. New observation used conservative Oct8 19:00Z
+cap without reset. Portfolio Oct9 11:17:31Z unchanged; KIVI/DAMP remain closed.
+No new accepted non-HYPIC performance/task method. Goal active, no push claim
+under unchanged verified HTTPS authentication block. Do not resume old live
+statuses above, relax numerical gates or restart a finished/unknown operation.

@@ -12,6 +12,16 @@ the original failed result; a later source-only or fixed-input observation is
 not original graph or full-matrix authority. Publish algorithm-specific raw
 intermediates before their first assertion in a separately registered successor.
 
+Actual SparQ011 follow-up recovered all128 tokens by complete BF16 K AND V.
+CPU32 tied425/801 exactly; eight fresh physical6 native eager-prefix observations
+consistently picked801, matched FP64/original recovered support and separated
+the scores by2 FP32 ULP. New HF32=false/highest controls were observed, not set;
+original flags remain absent. This identifies a cross-backend ranking boundary,
+not original full-graph equivalence or a retrospective numerical PASS. Audit
+author dtype/GQA/tie semantics and preregister an independently justified oracle
+before a successor; preserve non-tie, output and feedback checks.
+See [actual CPU and fixed native evidence](../../../workstreams/qwen36-damp-ascend-20261006/SPARQ011_FIXED_SELECTOR_EVIDENCE_20261008.md).
+
 ## Near-tied support failures
 
 Retain the original failed gate and inputs. Reconstruct the actual selected tokens
