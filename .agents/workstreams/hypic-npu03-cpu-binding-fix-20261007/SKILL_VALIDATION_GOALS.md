@@ -13,20 +13,25 @@ full in-path quality decision and matching performance identity. The cache10
 1/127 samples; its prior 9-sample/27-row stress remains valid for that
 narrower gate. A fresh cache10r1 candidate was also invalidated at 0/127
 by a `cannbench_ds` process on physical NPU3. Its prompt guard abort and
-exact owned release passed the execution-control repair gate. The active
-short gate is now an uncontended NPU0-3 allocation before declaring another
-fresh-root candidate and matching control decision. Reuse the audited 0.9 no-cache
-baseline only as historical reference because this candidate's 0.85 serving
-identity differs; do not repeat it merely for a newer timestamp. Keep
-per-request worker-hot attribution open until evidence can join workers to
-scored request IDs. Reconcile these horizons before any new baseline,
-performance run, or retry.
+exact owned release passed the execution-control repair gate. After a bounded
+quiet-lane check, cache10r2 candidate operation `exec-00000000000013ec`
+started on physical NPU0-3; at 2026-10-08 13:48 UTC it was live with 20/127
+samples persisted. This is progress, not a quality verdict. Keep the exact
+operation alive; do not restart or reuse a partial root. If its independent
+audit passes and the lane is available, run only the matched 0.85/cache10
+control arm. The audited 0.9 no-cache baseline is historical reference, not
+that control. A fresh matched performance comparison must likewise use the
+0.85/cache10 identity and the prospective ruler in
+`HOTPATH_CACHE10_MATCHED_PERFORMANCE_PLAN.md`. Keep per-request worker-hot
+attribution open until evidence can join workers to scored request IDs.
 
 ## Short term — current HYPIC in-path quality gate
 
 - Frozen context: physical chicaihong01 NPU0-3 only; NPU4-7 and unrelated
   containers untouched. Existing three-repeat C1/C2 performance result and
   clean2 off-path quality evidence remain separate.
+- This ruler's 127-sample candidate is active on a single operation handle;
+  complete it and independently audit it before starting the matching control.
 - Run the 3-sample explicit-boundary pilot, then the new matched 127-sample,
   three-repeat, 2048-max-output LongBench ruler described in
   `HOTPATH_FULL_QUALITY_PLAN.md`.
