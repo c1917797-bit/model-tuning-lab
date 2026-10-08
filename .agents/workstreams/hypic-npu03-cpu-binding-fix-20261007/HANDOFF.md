@@ -11,7 +11,10 @@ matching baseline for this invalid arm, or affect the foreign container.
 Read `HOTPATH_CACHE10_REPAIR.md` for exact times/hashes and the pending
 method choice: explicitly revised 56/71 multi-service pairing versus a
 fresh full single-service run after exclusive NPU0-3 allocation. No new
-NPU experiment has been launched. The work branch remains independent of
+NPU experiment has been launched. The 56 completed sample IDs are exactly
+`0–52, 54–56`, not a contiguous 0–55 set. The read-only
+`audit_cache10r2_clean_set.py` emitted a reproducible bounded-evidence
+receipt outside the original root. The work branch remains independent of
 main; remote main advanced to `ead8081` with README workstream changes
 but the 29-Skill tree itself is unchanged from pinned `f1f37a3`.
 

@@ -48,6 +48,12 @@ explicit methodological labeling and a matching control that uses the
 same ID partition; otherwise a fresh
 single-service attempt needs an actual exclusive NPU0-3 window. The user
 has been asked which protocol to accept; no new NPU run follows implicitly.
+Re-run the read-only `audit_cache10r2_clean_set.py` to check this bounded
+set and emit the external receipt
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hotpath-cache10r2-clean-set-audit.json`
+(SHA256 `99f2578adddd041f7a84fe441a1ac02b754b2c1a8217054e80e855b67e7f55bd`).
+It explicitly marks the original arm invalid and the full paired decision
+unavailable; it does not turn a partial score into a quality pass.
 
 Decision recorded 2026-10-08 after reserve2 failed and before any cache10 NPU run.
 Read HOTPATH_CAPACITY_REPAIR.md for the earlier 0.9 watermark and 0.85
