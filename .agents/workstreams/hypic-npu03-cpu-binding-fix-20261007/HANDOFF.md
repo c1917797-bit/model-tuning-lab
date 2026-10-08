@@ -1,5 +1,20 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Active fresh candidate (2026-10-08 12:56 UTC):** AWMCP operation
+`exec-00000000000013cc` is running `cache10r1` full HYPIC from work-branch
+commit `ad5eab3` on physical NPU0-3. Its new immutable evidence root is
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r1-full-hypic`.
+The start-time preflight verified 127 samples, three repeats, c8, 2048-token
+cap, 0.85 GPU utilization, 3584-MiB/10-segment material cache, absent new
+root, free port 8223 and no NPU0-3 process at that instant. This is only a
+start gate, not isolation proof. Poll the **same** operation and its
+`progress.json`; never restart on a polling timeout or reuse a partial root.
+The controller now checks the guard during in-flight requests and aborts only
+its identity-verified owned service on violation. If the arm completes, run
+the independent audit before claiming any result. Do not use NPU4-7, stop
+unrelated containers, or treat a passed candidate alone as a paired quality
+decision. The prior invalid run is documented immediately below.
+
 **Latest checkpoint (2026-10-08 12:44 UTC):** The frozen cache10 full HYPIC
 candidate operation `exec-000000000000137a` ended `arm-failed`, 1/127
 samples and 3/381 scored rows. The physical NPU0-3 guard recorded 31 foreign
