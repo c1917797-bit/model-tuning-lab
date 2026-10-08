@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 20:25 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 21:10 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Live remote workstream tip was 0d00bab at last read. Local 2f22127 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
@@ -19,6 +19,16 @@
   but only 366/381 scored requests had four-worker proof; 15 failed the
   strict activation gate. Exact owned service released, 1,077 clean guard
   probes. See HOTPATH_CACHE10R10_TERMINAL_AUDIT.md; no paired verdict.
+- r11 targeted c8 stress ended at 20:49 UTC, exit 1: all 19 samples and 57
+  responses persisted, but only 53/57 scored requests had four-worker proof.
+  Gaps were 77:2, 79:2, 79:3 and 85:2. Its 283 guard probes were clean;
+  exact owned service and port released. See
+  HOTPATH_CACHE10R11_TERMINAL_AUDIT.md; no paired verdict.
+- Plugin source c12060c repairs a scheduler-directory rebuild defect seen
+  in the 79:2-to-79:3 eviction chain. Red/green focused regression, 13
+  focused tests, compile and single-instance source/topology audits passed.
+  It is not NPU-validated; r11 mounted earlier 62b0d4a. Broad
+  test_pure.py collection is blocked by host Python 3.9 lacking pairwise.
 - Quality, benchmark, tuning and optimization Skill cases remain partial;
   see their bounded raw-replay reports and acceptance boundaries.
 - The inference-tuning-loop case replays six raw performance runs and three
@@ -44,43 +54,30 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 - User clarified that foreign container device mapping alone is not use.
   The branch controller now gates on actual NPU0–3 processes and port 8223
   and continuously fails closed on foreign processes while scoring.
-- cache10r3/r4 began on idle physical0–3, then real foreign processes
-  intruded before scoring. Both aborted at 0/127 and released exact owned
-  services; see their separate RESOURCE_CONFLICT reports and raw hashes.
+- Earlier r3–r8 foreign-process conflicts, startup-guard fixes and exact
+  releases are indexed in HANDOFF_HISTORY.md and separate raw-hash reports;
+  none is an algorithm verdict.
 - The Git checkpoint and maintainer-handoff Skills have bounded verified
   real-task cases locally; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
-- The startup guard repair passed 34 offline tests and caught the
-  r5 foreign NPU2 process before scoring; see
-  HOTPATH_STARTUP_GUARD_REPAIR.md and HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md.
 - The seventh case caught `mst-practice-iteration-planning`'s main YAML
   schema mismatch; the branch Skill repair and bounded HYPIC plan pass.
   Main remains partial; see PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md.
-- r6/r7 both stopped before scoring on real foreign NPU2/NPU3
-  processes and released only owned resources. See their separate
-  RESOURCE_CONFLICT reports for PIDs, roots and hashes.
-- The user chose actual-idle attempts. r8 caught foreign
-  `cannbench_ds` on physical NPU3 before scoring and released only
-  owned resources; see HOTPATH_CACHE10R8_RESOURCE_CONFLICT.md.
-- The real r6/r7 practice was ingested via the existing branch-local
-  host-maintenance guard, a registry trigger, and a structured eval with
-  raw-artifact replay. The sixth Skill case covers `mst-experience-ingestion`
-  as partial: main still lacks that continuous guard. See
-  hypic-shared-npu-reentry-ingestion.yaml and verify_experience_ingestion_case.py.
+- The user chose actual-idle attempts; passive mapping alone does not block
+  use, while real foreign NPU processes do.
 
 ## 4. Current Action
 
-r11 c8 stress `exec-0000000000001830` is the sole active controller.
-Do not restart or mix roots. It uses plugin `62b0d4a` read-only, 19 frozen
-LongBench prompts (75–91, 107, 111), three 2048-cap scored repetitions,
-TP4 on physical NPU0–3, 0.85/cache10. First poll the authoritative handle,
-then read its progress.json. At last check it was service-starting; no
-stress verdict yet. HOTPATH_CACHE10R11_STRESS_PLAN.md and
-audit_cache10r11_stress.py freeze its method and independent terminal gate.
-The stress is diagnostic, not a quality/performance comparison. r10 remains
-terminal activation-failed 15/381; preserve its root and terminal audit.
-The new plugin has twelve focused CPU passes but no r11 NPU verdict yet;
-C3/paper-complete audits still fail. Never use NPU4–7 or foreign containers.
+No HYPIC controller is active. r11 is terminal strict-activation failed;
+its original root and 62b0d4a source remain immutable. The independent
+auditor verified all rows, scorer, hashes, physical PID mapping, isolation
+and release before reporting four missing scored hot proofs. c12060c fixes
+one proven scheduler-directory defect offline, but does not guarantee that
+bounded cache retains every scored request. A prospective full-pair analysis
+choice has been requested from the user: preserve c8/2048/127 and report
+deployed effect with per-request hot/cold stratification, or retain the
+all-hot decision gate. Never post-hoc pass r11, start without a declared
+plan, use NPU4–7, or modify foreign containers. C3 remains missing.
 
 ## 5. Next Actions
 
@@ -90,15 +87,15 @@ C3/paper-complete audits still fail. Never use NPU4–7 or foreign containers.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Poll only r11 operation exec-0000000000001830 and its progress file.
-   Preserve r9/r10 terminal roots and never pair an invalid treatment arm.
+3. Preserve r9/r10/r11 terminal roots and never relabel or pair the strict
+   r11 activation failure with a control.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. At r11 terminal run audit_cache10r11_stress.py, inspect request-local
-   reasons, isolation and release. A pass admits a new original full ruler;
-   a failure needs a changed premise, not a retry of the same bytes. Only a
-   valid full candidate may receive a same-source 0.85 no-cache baseline
-   and subsequent matched performance/quality audits.
+4. Use HOTPATH_CACHE10R11_TERMINAL_AUDIT.md and plugin c12060c to declare
+   the next original-protocol full test. Freeze whether the claim is all-hot
+   or deployed effect with hot/cold stratification. A new source requires
+   its own NPU canary and a same-identity 0.85 no-cache control before any
+   paired quality/performance claim; audit isolation and release separately.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 

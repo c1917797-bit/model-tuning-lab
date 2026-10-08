@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_r11_frozen_c8_stress_running_after_r10_terminal_failure",
+  "state": "r11_terminal_strict_activation_failed_directory_fix_offline_unpaired",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -14,40 +14,30 @@
     "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
   "previous_attempt": {
-    "campaign": "cache10r9",
-    "arm": "hypic-only",
-    "controller_operation": "exec-000000000000158e",
-    "result": "worker_local_gdn_material_missing_after_pending_eviction_race",
-    "complete_samples": 93,
-    "failed_sample": 98,
-    "service_released_utc": "2026-10-08T18:14:21Z",
-    "evidence": "HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md"
-  },
-  "latest_attempt": {
     "campaign": "cache10r10",
     "arm": "hypic-only",
-    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic",
-    "state": "terminal exit 1 at 2026-10-08T20:04:15Z; 127/127 samples and 381/381 responses persisted; strict request activation failed 15/381; exact owned service released",
     "controller_operation": "exec-00000000000016af",
-    "plugin_local_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "request_hot_path_gate": "366/381 passed four-worker post-repair proof; 15/381 failed; no paired quality/performance verdict",
-    "coverage_report": "HOTPATH_CACHE10R10_TERMINAL_AUDIT.md"
+    "result": "isolated negative strict activation: 366/381 scored requests with four-worker proof",
+    "complete_samples": 127,
+    "service_released_utc": "2026-10-08T20:04:15Z",
+    "evidence": "HOTPATH_CACHE10R10_TERMINAL_AUDIT.md"
   },
-  "active_attempt": {
+  "latest_attempt": {
     "campaign": "cache10r11",
     "arm": "hypic-only",
     "mode": "stress",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r11-stress-hypic",
-    "state": "running; poll controller_operation, then read progress.json; no stress verdict yet",
+    "state": "terminal exit 1 at 2026-10-08T20:49:45Z; 19/19 samples and 57/57 scored responses persisted; strict activation failed 4/57; exact owned service released",
     "controller_operation": "exec-0000000000001830",
     "plugin_local_commit": "62b0d4a89234ffaa69855427e0c0dad0ba3e9e41",
-    "frozen_plan": "HOTPATH_CACHE10R11_STRESS_PLAN.md",
-    "terminal_auditor": "audit_cache10r11_stress.py"
+    "request_hot_path_gate": "53/57 passed four-worker post-repair proof; gaps 77:2, 79:2, 79:3, 85:2; no paired quality/performance verdict",
+    "coverage_report": "HOTPATH_CACHE10R11_TERMINAL_AUDIT.md"
   },
+  "active_attempt": null,
   "diagnostic_plugin": {
     "worktree": "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008",
-    "local_commit": "62b0d4a",
-    "status": "fallback telemetry plus materialization retry-reset candidate; twelve focused CPU tests passed; NPU unvalidated; not mounted by r10; no causal/fix claim for r10"
+    "local_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "status": "scheduler-directory rebuild after worker eviction; red/green focused regression and 13 focused CPU tests passed; NPU unvalidated; r11 mounted earlier 62b0d4a source"
   },
   "git_push_state": {
     "status": "local workstream ahead of remote; HTTPS credentials absent; SSH timed out; inspect live branch HEAD and upstream before any push claim",
@@ -56,5 +46,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Poll only live r11 operation exec-0000000000001830 and its progress; do not restart, duplicate, or mix roots. After terminal, run audit_cache10r11_stress.py and inspect request-local fallback reasons, isolation and exact release. Preserve r10 strict 15/381 failure. A passing stress admits a new original full candidate; a failure requires a materially changed hypothesis. Matching 0.85 no-cache baseline and performance follow only after valid full activation. Push only when user-provisioned GitHub auth works; all-Skill acceptance remains incomplete."
+  "next_action": "Preserve r10 and r11 terminal negative strict-activation roots. Resolve the prospective full-pair analysis criterion with the user: all-hot claim or deployed-effect pair with request-level hot/cold stratification; do not post-hoc pass r11. The new plugin commit c12060c fixes one directory race offline but needs NPU0-3 canary and matching 0.85 control before any quality/performance claim. Start only when actual NPU0-3 and port are idle, never use NPU4-7 or modify foreign containers. Push only after user-provisioned GitHub auth works; all-Skill acceptance remains incomplete."
 }

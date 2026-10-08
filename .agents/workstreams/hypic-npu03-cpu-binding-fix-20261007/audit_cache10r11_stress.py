@@ -84,11 +84,15 @@ def main() -> int:
                 and fp.get("max_materialized_segments") == 10
                 and fp.get("max_model_len") == 41984,
                 "r11 source/device/cache fingerprint drift")
-        require(result.get("error") is None
+        controller_error = result.get("error")
+        require(controller_error in {
+                    None,
+                    "RuntimeError: candidate scored boundary/hot coverage incomplete",
+                }
                 and result.get("completed_samples") == len(INDEXES)
                 and result.get("scored_rows") == len(INDEXES) * 3
                 and start.get("fingerprint") == fp,
-                "r11 controller or service did not complete the frozen stress")
+                "r11 controller did not complete the frozen stress or has an unexpected error")
         require(start.get("container_id") == stop.get("container_id")
                 == guard.get("owned_container_id")
                 and stop.get("container_removed") is True
@@ -169,9 +173,28 @@ def main() -> int:
                   if line.strip()]
         workers = load_worker_namespace_pids(ROOT, start)
         diagnostic = diagnose(rows, events, workers)
+        manifest = hashlib.sha256()
+        for path in sample_paths:
+            manifest.update(path.name.encode() + b"\0"
+                            + sha256(path).encode() + b"\n")
+        identity = {
+            "schema": "hypic-r11-stress-audit/v1",
+            "not_quality_verdict": True,
+            "samples": len(rows),
+            "scored_rows": len(scored_ids),
+            "correct": correct,
+            "finish_reasons": dict(finishes),
+            "guard_samples": guard["samples"],
+            "controller_error": controller_error,
+            "contract_sha256": sha256(ROOT / "contract.json"),
+            "arm_result_sha256": sha256(ROOT / "arm-result.json"),
+            "evidence_sha256": sha256(evidence),
+            "sample_manifest_sha256": manifest.hexdigest(),
+            "service_stop_sha256": sha256(ROOT / "hypic-only/service-stop.json"),
+            "lane_guard_sha256": sha256(ROOT / "hypic-only/lane-guard.json"),
+        }
         if diagnostic["issue_count"]:
-            print(json.dumps({"schema": "hypic-r11-stress-audit/v1",
-                              "stress_pass": False, "not_quality_verdict": True,
+            print(json.dumps({**identity, "stress_pass": False,
                               "reason": "scored-request-hot-path-proof-missing",
                               "diagnostic": diagnostic}, sort_keys=True))
             return 2
@@ -185,23 +208,11 @@ def main() -> int:
                       and event.get("request_id") in internal_ids]
         require(not unexpected,
                 "r11 scored request emitted a Prefill filter or plan-unavailable event")
-        manifest = hashlib.sha256()
-        for path in sample_paths:
-            manifest.update(path.name.encode() + b"\0"
-                            + sha256(path).encode() + b"\n")
-        print(json.dumps({
-            "schema": "hypic-r11-stress-audit/v1", "stress_pass": True,
-            "not_quality_verdict": True, "samples": len(rows),
-            "scored_rows": len(scored_ids), "correct": correct,
-            "finish_reasons": dict(finishes),
+        require(controller_error is None,
+                "r11 controller reported failure despite positive request coverage")
+        print(json.dumps({**identity,
+            "stress_pass": True,
             "four_worker_verified_requests": coverage["four_worker_post_repair_verified_requests"],
-            "guard_samples": guard["samples"],
-            "contract_sha256": sha256(ROOT / "contract.json"),
-            "arm_result_sha256": sha256(ROOT / "arm-result.json"),
-            "evidence_sha256": sha256(evidence),
-            "sample_manifest_sha256": manifest.hexdigest(),
-            "service_stop_sha256": sha256(ROOT / "hypic-only/service-stop.json"),
-            "lane_guard_sha256": sha256(ROOT / "hypic-only/lane-guard.json"),
         }, sort_keys=True))
         return 0
     except (CoverageError, OSError, ValueError, KeyError, TypeError,

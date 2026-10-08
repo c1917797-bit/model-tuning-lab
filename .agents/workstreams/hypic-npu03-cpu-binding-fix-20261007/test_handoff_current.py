@@ -34,16 +34,14 @@ class HandoffTests(unittest.TestCase):
 
     def test_task_and_global_boundary(self) -> None:
         task = json.loads((HERE / "task.json").read_text(encoding="utf-8"))
-        self.assertEqual(task["previous_attempt"]["campaign"], "cache10r9")
-        self.assertEqual(task["previous_attempt"]["result"],
-                         "worker_local_gdn_material_missing_after_pending_eviction_race")
-        self.assertEqual(task["latest_attempt"]["campaign"], "cache10r10")
+        self.assertEqual(task["previous_attempt"]["campaign"], "cache10r10")
+        self.assertIn("366/381", task["previous_attempt"]["result"])
+        self.assertEqual(task["latest_attempt"]["campaign"], "cache10r11")
         self.assertEqual(task["latest_attempt"]["controller_operation"],
-                         "exec-00000000000016af")
-        self.assertEqual(task["active_attempt"]["campaign"], "cache10r11")
-        self.assertEqual(task["active_attempt"]["controller_operation"],
                          "exec-0000000000001830")
-        self.assertTrue((HERE / task["active_attempt"]["frozen_plan"]).is_file())
+        self.assertIsNone(task["active_attempt"])
+        self.assertIn("53/57", task["latest_attempt"]["request_hot_path_gate"])
+        self.assertIn("c12060c", task["diagnostic_plugin"]["local_commit"])
         self.assertTrue((HERE / task["previous_attempt"]["evidence"]).is_file())
         self.assertTrue((HERE / task["latest_attempt"]["coverage_report"]).is_file())
         self.assertEqual(task["resource_claim"]["forbidden_npus"],

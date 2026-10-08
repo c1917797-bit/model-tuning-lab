@@ -12,7 +12,7 @@
   "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; cache10r9 checkpoint and terminal cache10r10 original-protocol LongBench-v2 candidate; Qwen3.6-27B BF16 TP4 physical NPU0-3, c8, 2048 output cap; no valid terminal pair",
+  "environment_scope": "chicaihong01/ma; cache10r9 checkpoint, terminal cache10r10 full candidate and cache10r11 19-sample c8 stress; Qwen3.6-27B BF16 TP4 physical NPU0-3, 2048 output cap; no valid terminal pair",
   "observed": {
     "completed_scored_ids_in_read_only_snapshot": 162,
     "request_boundary_events_joinable": true,
@@ -28,6 +28,12 @@
     "r10_scored_requests_without_four_worker_hot_proof": 15,
     "r10_single_arm_correct_not_paired": 214,
     "r10_terminal_decision": "isolated negative activation for frozen source; no paired quality verdict",
+    "r11_stress_samples_and_scored_responses": [19, 57],
+    "r11_four_worker_verified_scored_requests": 53,
+    "r11_missing_scored_pairs": ["77:2", "79:2", "79:3", "85:2"],
+    "r11_single_arm_correct_not_paired": 27,
+    "r11_terminal_decision": "strict activation stress failed; eviction and scheduler-directory inconsistency bounded by raw evidence",
+    "directory_rebuild_source_commit_unverified_on_npu": "c12060cd47e7575ead059983d7a8bb4704165c98",
     "terminal_quality_pair_complete": false,
     "main_skill_integrated": false
   },
@@ -55,10 +61,14 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R10_TERMINAL_AUDIT.md",
       "sha256": "ce19e5ab1b186e1785aaa2a3da3fa550e97ea2a4384a8eb72adb415df40855cd"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R11_TERMINAL_AUDIT.md",
+      "sha256": "ade10050ba75d7ce71ef60e9424b08658a1e324c4f968650ffa72cf21b2992b4"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The r9 snapshot exposed an activation evidence gap and the complete isolated r10 arm has 15/381 scored requests without four-worker request-local proof. The branch verifier correctly rejects it. Current main requires activation but does not specify the per-scored-request join; the branch repair is unintegrated. This is a bounded negative activation/repair case, not full main Skill acceptance or a terminal paired HYPIC quality result.",
-  "next_gate": "Audit predeclared r11 c8 stress on actually idle physical NPU0-3, including request-local fallback reasons and every scored worker join. Only if it passes, run a fresh original-protocol full candidate, then a same-identity control, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; do not rerun r10 or pair its invalid activation arm.",
+  "boundary": "The r9 snapshot exposed an activation evidence gap; terminal r10 lacked proof for 15/381 scored requests and terminal r11 stress lacked proof for 4/57. The branch verifier correctly rejects each strict all-hot claim. A later directory-rebuild source fix has only focused offline tests, not NPU validation. Current main requires activation but lacks the per-scored-request join; branch repair is unintegrated. No paired HYPIC quality or performance verdict follows.",
+  "next_gate": "Prospectively choose whether the next original-protocol full pair claims every scored request is hot or evaluates deployed treatment with request-level hot/cold stratification. Preserve r11 as a strict stress fail. On actually idle physical NPU0-3, validate the new source and run a matching 0.85 control, full 2048-token paired quality, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; never reuse the 0.9 baseline.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
