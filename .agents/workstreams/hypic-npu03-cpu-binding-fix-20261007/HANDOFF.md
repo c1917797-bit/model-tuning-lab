@@ -1,5 +1,15 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Read-only lane monitor (started 2026-10-08 13:09 UTC):** AWMCP operation
+`exec-00000000000013de` observes physical NPU0-3 and whether
+`cannbench_ds` has a live `kernel_eval.staged_eval` process every ~15
+seconds, seeking 40 consecutive clean observations (about 10 minutes),
+with a one-hour ceiling. It does not start experiments or alter containers.
+Poll this exact live operation; an observation timeout is not a reason to
+restart it. Even a quiet-window result requires a fresh ownership/port/root
+check and cannot guarantee later exclusivity. User coordination of an
+exclusive NPU0-3 window was requested but has not yet been confirmed.
+
 **Latest checkpoint (2026-10-08 13:06 UTC):** AWMCP operation
 `exec-00000000000013cc` is terminal exit 1. The fresh `cache10r1` full
 HYPIC attempt from work-branch commit `ad5eab3` on physical NPU0-3 was
