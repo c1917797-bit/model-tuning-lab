@@ -49,6 +49,16 @@ events), not merely plugin import, scheduler registration, or a configuration
 flag. Keep the canary distinct from scored rows unless it is part of the
 frozen protocol.
 
+Match the granularity of the activation proof to the claim. If the decision
+requires *each scored request* to take the optimized path, join completion or
+worker evidence to each scored request ID (or use an equivalently isolating
+observation). A request-ID admission/boundary event plus a batch-level hot
+counter proves only admission and aggregate activity: concurrent warm or
+other requests can contribute to that counter. Retain the per-request gate as
+unverified when runtime telemetry cannot distinguish those requests, even
+if a serialized canary and aggregate counts pass. Report those narrower
+facts separately rather than weakening the frozen quality gate.
+
 If the scored suite cannot trigger the treatment, classify its possible result
 as runtime-enabled/off-path safety evidence, not in-path quality preservation.
 Before spending a long NPU window under an in-path claim, define a separate
