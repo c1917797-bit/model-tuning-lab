@@ -1,5 +1,26 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 15:01 UTC active original-protocol retry:** The user clarified
+that idle physical NPU0–3 may be used even when other containers map them.
+Device mapping alone is no longer the lane gate; actual NPU processes and
+port 8223 are checked before launch, and the continuous foreign-process
+guard remains fail-closed during scored work. Other containers and NPU4–7
+must remain untouched. The mapping-only gate fix and a unique full
+single-service retry, cache10r3, were tested (26 offline tests) and
+pushed as work-branch commit 1b6dd816c138b6f61b8de0926e65ddaecb6e3fc7.
+The full HYPIC-only arm is live under AWMCP operation
+exec-000000000000147b on peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0. Its immutable result root is
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r3-full-hypic.
+At this checkpoint it is still starting the service; no scored sample or
+quality conclusion exists. Poll the operation and progress.json; do not
+launch a duplicate controller. A transient NPU2 process was observed during
+service setup before any scored request and disappeared on recheck; retain
+that observation, and rely on the guard/release receipt for scored-run
+validity. If this arm completes and independently audits cleanly, run the
+matching cache10r3 no-cache arm at the same service fingerprint. The
+optional cache10split method remains unapproved and must not be run.
+
 **2026-10-08 14:56 UTC main-version boundary:** A new read-only Git
 comparison found seven branch Skill bodies and the branch registry differ
 from current main. Two V11 rows (`chicaihong01-host-maintenance`,
