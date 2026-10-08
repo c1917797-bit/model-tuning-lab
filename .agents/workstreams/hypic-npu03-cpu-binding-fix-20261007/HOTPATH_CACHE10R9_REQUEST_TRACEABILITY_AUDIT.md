@@ -53,3 +53,21 @@ matching control under the same 0.85 GPU-memory budget; the old 0.9
 no-cache arm is not reusable. Attempt new device arms only when physical
 0–3 have no foreign processes and port 8223 is free; passive container
 mapping alone is not a veto. Never touch NPU4–7 or foreign workloads.
+
+The branch-local `verify_hotpath_request_coverage.py` specifies a narrow
+future event contract: `worker_hot_request_verified` must carry the
+scheduler-internal `request_id`, one of the four expected worker PIDs,
+positive `skipped_prefix_tokens`, and
+`complete_hybrid_repair_validated=true`. It fails closed unless all
+381 scored API IDs join uniquely to boundary IDs and then to post-repair
+events from all four workers. This script is an independent activation
+gate, not a quality-score or isolation audit; its offline unit tests
+explicitly reject boundary-plus-batch-counter evidence.
+
+At 17:48 UTC, a read-only replay of the live r9 snapshot through
+`audit_coverage` found 162 completed scored IDs and the expected four
+worker PIDs. It returned `UNVERIFIED`: 162/162 scored IDs lacked a
+four-worker post-repair request-level event. Six focused counterexample
+tests and all 43 workstream offline tests passed. This snapshot is
+intentionally not a terminal arm audit; final raw hashes and the 127×3
+cardinality gate must wait for the controller to finish.
