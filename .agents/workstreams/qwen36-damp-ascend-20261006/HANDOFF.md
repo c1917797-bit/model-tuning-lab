@@ -12,6 +12,10 @@ Secondary snapshot MemoryError and MCP8MiB body limits are separate failures.
 No unchanged rerun, tolerance relaxation, mixed-v3 launch or model/perf claims.
 Mixed389 source audit and new client16 software tests remain source-only.
 Next: hash-bound CPU raw diagnosis; serial admission of frozen SparQ006/W4native002.
+Actual CPU-only MA110a/110b reproduced original metric and8/18432 adjacent1-ULP
+BF16 differences. Worst retained native/H8-before single-step FP64 outputs
+straddle a rounding midpoint; not an isolated cast bug or new numerical PASS.
+Read whole failed-raw stdlib/point-FP64 receipts. Local a3283c01 checkpoint, not pushed.
 Exactly32GiB release completed/SPENT, OVS24GiB/NUMA3 retained; no extra memory write.
 Cutoffs unchanged; goal active/no accepted non-HYPIC E2E/task method.
 Known auth blocker persists, normal local stage only. Earlier RUNNING entries historical.

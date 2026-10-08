@@ -81,6 +81,34 @@ No new full/mixed/model/matched-E2E/task-accuracy accepted result.
 
 ## Next admissible work and general lessons
 
+### Independent failed-raw diagnosis, 2026-10-08
+
+Whole MA110a exit0/330ms and MA110b exit0/537ms preserved in
+H8_FAILED_RAW_STDLIB_ORIGINAL_20261008.json and
+H8_FAILED_RAW_POINT_FP64_ORIGINAL_20261008.json. Both host stdlib only, no
+Torch/Docker/NPU; streamed exact raw SHA then restricted pickle metadata and
+little-endian FP32/BF16 storage reads. Original output metric reproduced exactly.
+Eight of18432 BF16 elements differ; all eight are adjacent1-ULP outputs.
+Worst[4,9,54]: candidate -0.006622314453125, native -0.00665283203125,
+absDiff3.0517578125e-5, maxExpected0.0096435546875.
+
+At that row(slot0, before log length7), FP64 single-step recurrence reconstructed
+from actual native-before FP32 state gives -0.0066375734687490594;
+from actual H8 logical-before gives -0.006637572787259737.
+They straddle the BF16 midpoint -0.0066375732421875 by
+-2.265615594437831e-10 and +4.5492776299532744e-10.
+Post-native stored-state projection and H8 logical-post projection straddle it
+as well. This supports investigation of accumulated FP32 state/reduction
+rounding, not an established isolated BF16 cast defect. Some other differing
+rows also show native output versus native-state FP64 projection rounding
+differences. These are local reconstructions of retained states, not an
+all-history FP64 golden or new NPU validation.
+
+Original0.00303 gate remains FAILED. Do not promote a closer-to-oracle output,
+relax its threshold, or repeat the full matrix without a source-supported repair.
+Canonical local checkpoint a3283c01ae4cd17ab3163b662e6f9c4173e46932
+contains the original failure/release and source-only16-test client; not pushed.
+
 1. CPU-only, hash-bound read of failed raw; recompute original metrics, inspect
    worst output/rounding and independent FP64 single-step equations. Do not
    claim a BF16 rounding cause until evidence supports it.

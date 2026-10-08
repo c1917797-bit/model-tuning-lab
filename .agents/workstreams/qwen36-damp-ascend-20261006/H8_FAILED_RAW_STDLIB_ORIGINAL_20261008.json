@@ -1,0 +1,98 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=268435456\",\n          \"--cpu=30\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import pathlib,hashlib,zipfile,pickle,io,struct,math,json,itertools\\np=pathlib.Path(\\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-7/gate/raw-step-b12-graph-t2-step102.pt\\\")\\nh=hashlib.sha256()\\nwith p.open(\\\"rb\\\") as f:\\n for b in iter(lambda:f.read(65536),b\\\"\\\"):h.update(b)\\nassert p.stat().st_size==78155077 and h.hexdigest()==\\\"aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12\\\"\\nclass Storage:\\n def __init__(self,dtype,key,location,numel):\\n  assert location==\\\"cpu\\\"\\n  self.dtype,self.key,self.location,self.numel=dtype,key,location,numel\\nclass Tensor:\\n def __init__(self,storage,offset,shape,stride,*rest):\\n  self.storage,self.offset,self.shape,self.stride=storage,offset,tuple(shape),tuple(stride)\\ndef rebuild(storage,offset,shape,stride,*rest):return Tensor(storage,offset,shape,stride)\\nclass Safe(pickle.Unpickler):\\n def find_class(self,module,name):\\n  if module==\\\"torch\\\" and name in (\\\"BFloat16Storage\\\",\\\"FloatStorage\\\",\\\"IntStorage\\\"):return name\\n  if module==\\\"torch._utils\\\" and name==\\\"_rebuild_tensor_v2\\\":return rebuild\\n  if module==\\\"collections\\\" and name==\\\"OrderedDict\\\":\\n   from collections import OrderedDict\\n   return OrderedDict\\n  raise ValueError(\\\"unapproved metadata global \\\"+module+\\\".\\\"+name)\\n def persistent_load(self,v):\\n  assert isinstance(v,tuple) and len(v)==5 and v[0]==\\\"storage\\\"\\n  return Storage(v[1],v[2],v[3],v[4])\\nwith zipfile.ZipFile(p) as z:\\n names=z.namelist();meta=[n for n in names if n.endswith(\\\"/data.pkl\\\")]\\n assert len(meta)==1\\n assert z.getinfo(meta[0]).file_size<100000\\n prefix=meta[0][:-len(\\\"data.pkl\\\")]\\n d=Safe(io.BytesIO(z.read(meta[0]))).load()\\n assert (d[\\\"schema\\\"],d[\\\"batch\\\"],d[\\\"mode\\\"],d[\\\"trial\\\"],d[\\\"step\\\"],d[\\\"active\\\"])==(\\\"kvbp.raw-step/v1\\\",12,\\\"graph\\\",2,102,12)\\n def vals(t):\\n  assert t.storage.dtype==\\\"BFloat16Storage\\\" and math.prod(t.shape)<100000\\n  b=z.read(prefix+\\\"data/\\\"+t.storage.key)\\n  assert len(b)==t.storage.numel*2\\n  out=[];bits=[]\\n  for idx in itertools.product(*(range(s) for s in t.shape)):\\n   off=t.offset+sum(a*s for a,s in zip(idx,t.stride))\\n   q=struct.unpack_from(\\\"<H\\\",b,off*2)[0]\\n   x=struct.unpack(\\\"<f\\\",struct.pack(\\\"<I\\\",q<<16))[0]\\n   assert math.isfinite(x)\\n   out.append((idx,x));bits.append(q)\\n  return out,bits\\n a,ab=vals(d[\\\"actual\\\"]);e,eb=vals(d[\\\"expected\\\"])\\n assert d[\\\"actual\\\"].shape==d[\\\"expected\\\"].shape and len(a)==len(e)\\n differences=[(abs(x-y),idx,x,y,i) for i,((idx,x),(idx2,y)) in enumerate(zip(a,e)) if idx[0]<d[\\\"active\\\"]]\\n assert all(x[0]==y[0] for x,y in zip(a,e))\\n worst=max(differences)\\n denom=max(abs(y) for idx,y in e if idx[0]<d[\\\"active\\\"])\\n metric=worst[0]/max(denom,1e-30)\\n assert metric==0.0031645569620253164\\n def ordered(bits):return 0x8000-bits if bits&0x8000 else bits+0x8000\\n out={\\\"schema\\\":\\\"kvbp.h8-retained-raw-output-stdlib/v1\\\",\\\"cpu_only\\\":True,\\\"Torch_imported\\\":False,\\\"Docker_executed\\\":False,\\\"NPU_executed\\\":False,\\\"raw_sha256\\\":h.hexdigest(),\\\"raw_bytes\\\":p.stat().st_size,\\\"metadata_keys\\\":list(d),\\\"shape\\\":d[\\\"actual\\\"].shape,\\\"dtype\\\":d[\\\"actual\\\"].storage.dtype,\\\"active\\\":d[\\\"active\\\"],\\\"original_output_metric\\\":metric,\\\"original_gate\\\":0.00303,\\\"original_gate_passed\\\":False,\\\"max_abs_difference\\\":worst[0],\\\"max_abs_expected\\\":denom,\\\"worst_coordinate\\\":worst[1],\\\"actual_at_worst\\\":worst[2],\\\"expected_at_worst\\\":worst[3],\\\"bf16_integer_ulp_distance_at_worst\\\":abs(ordered(ab[worst[4]])-ordered(eb[worst[4]])),\\\"differing_output_elements\\\":sum(x!=y for x,y in zip(ab,eb)),\\\"active_elements\\\":len(differences),\\\"no_causal_claim\\\":True}\\n print(json.dumps(out,allow_nan=False))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 330,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-000000000000110a\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-retained-raw-output-stdlib/v1\\\", \\\"cpu_only\\\": true, \\\"Torch_imported\\\": false, \\\"Docker_executed\\\": false, \\\"NPU_executed\\\": false, \\\"raw_sha256\\\": \\\"aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12\\\", \\\"raw_bytes\\\": 78155077, \\\"metadata_keys\\\": [\\\"schema\\\", \\\"batch\\\", \\\"mode\\\", \\\"trial\\\", \\\"step\\\", \\\"active\\\", \\\"reset_slot\\\", \\\"before\\\", \\\"after\\\", \\\"native_before\\\", \\\"native\\\", \\\"inputs\\\", \\\"input_before\\\", \\\"actual\\\", \\\"expected\\\", \\\"guards_before\\\", \\\"guards\\\", \\\"pointers\\\"], \\\"shape\\\": [12, 12, 128], \\\"dtype\\\": \\\"BFloat16Storage\\\", \\\"active\\\": 12, \\\"original_output_metric\\\": 0.0031645569620253164, \\\"original_gate\\\": 0.00303, \\\"original_gate_passed\\\": false, \\\"max_abs_difference\\\": 3.0517578125e-05, \\\"max_abs_expected\\\": 0.0096435546875, \\\"worst_coordinate\\\": [4, 9, 54], \\\"actual_at_worst\\\": -0.006622314453125, \\\"expected_at_worst\\\": -0.00665283203125, \\\"bf16_integer_ulp_distance_at_worst\\\": 1, \\\"differing_output_elements\\\": 8, \\\"active_elements\\\": 18432, \\\"no_causal_claim\\\": true}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 734,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 734,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 734\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 734,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 734\n      }\n    },\n    \"traceId\": \"b0a22928-19a6-4ba6-91e3-e305204aabbd\"\n  },\n  \"operationId\": \"exec-000000000000110a\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=268435456",
+            "--cpu=30",
+            "--",
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "-c",
+            "import pathlib,hashlib,zipfile,pickle,io,struct,math,json,itertools\np=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-7/gate/raw-step-b12-graph-t2-step102.pt\")\nh=hashlib.sha256()\nwith p.open(\"rb\") as f:\n for b in iter(lambda:f.read(65536),b\"\"):h.update(b)\nassert p.stat().st_size==78155077 and h.hexdigest()==\"aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12\"\nclass Storage:\n def __init__(self,dtype,key,location,numel):\n  assert location==\"cpu\"\n  self.dtype,self.key,self.location,self.numel=dtype,key,location,numel\nclass Tensor:\n def __init__(self,storage,offset,shape,stride,*rest):\n  self.storage,self.offset,self.shape,self.stride=storage,offset,tuple(shape),tuple(stride)\ndef rebuild(storage,offset,shape,stride,*rest):return Tensor(storage,offset,shape,stride)\nclass Safe(pickle.Unpickler):\n def find_class(self,module,name):\n  if module==\"torch\" and name in (\"BFloat16Storage\",\"FloatStorage\",\"IntStorage\"):return name\n  if module==\"torch._utils\" and name==\"_rebuild_tensor_v2\":return rebuild\n  if module==\"collections\" and name==\"OrderedDict\":\n   from collections import OrderedDict\n   return OrderedDict\n  raise ValueError(\"unapproved metadata global \"+module+\".\"+name)\n def persistent_load(self,v):\n  assert isinstance(v,tuple) and len(v)==5 and v[0]==\"storage\"\n  return Storage(v[1],v[2],v[3],v[4])\nwith zipfile.ZipFile(p) as z:\n names=z.namelist();meta=[n for n in names if n.endswith(\"/data.pkl\")]\n assert len(meta)==1\n assert z.getinfo(meta[0]).file_size<100000\n prefix=meta[0][:-len(\"data.pkl\")]\n d=Safe(io.BytesIO(z.read(meta[0]))).load()\n assert (d[\"schema\"],d[\"batch\"],d[\"mode\"],d[\"trial\"],d[\"step\"],d[\"active\"])==(\"kvbp.raw-step/v1\",12,\"graph\",2,102,12)\n def vals(t):\n  assert t.storage.dtype==\"BFloat16Storage\" and math.prod(t.shape)<100000\n  b=z.read(prefix+\"data/\"+t.storage.key)\n  assert len(b)==t.storage.numel*2\n  out=[];bits=[]\n  for idx in itertools.product(*(range(s) for s in t.shape)):\n   off=t.offset+sum(a*s for a,s in zip(idx,t.stride))\n   q=struct.unpack_from(\"<H\",b,off*2)[0]\n   x=struct.unpack(\"<f\",struct.pack(\"<I\",q<<16))[0]\n   assert math.isfinite(x)\n   out.append((idx,x));bits.append(q)\n  return out,bits\n a,ab=vals(d[\"actual\"]);e,eb=vals(d[\"expected\"])\n assert d[\"actual\"].shape==d[\"expected\"].shape and len(a)==len(e)\n differences=[(abs(x-y),idx,x,y,i) for i,((idx,x),(idx2,y)) in enumerate(zip(a,e)) if idx[0]<d[\"active\"]]\n assert all(x[0]==y[0] for x,y in zip(a,e))\n worst=max(differences)\n denom=max(abs(y) for idx,y in e if idx[0]<d[\"active\"])\n metric=worst[0]/max(denom,1e-30)\n assert metric==0.0031645569620253164\n def ordered(bits):return 0x8000-bits if bits&0x8000 else bits+0x8000\n out={\"schema\":\"kvbp.h8-retained-raw-output-stdlib/v1\",\"cpu_only\":True,\"Torch_imported\":False,\"Docker_executed\":False,\"NPU_executed\":False,\"raw_sha256\":h.hexdigest(),\"raw_bytes\":p.stat().st_size,\"metadata_keys\":list(d),\"shape\":d[\"actual\"].shape,\"dtype\":d[\"actual\"].storage.dtype,\"active\":d[\"active\"],\"original_output_metric\":metric,\"original_gate\":0.00303,\"original_gate_passed\":False,\"max_abs_difference\":worst[0],\"max_abs_expected\":denom,\"worst_coordinate\":worst[1],\"actual_at_worst\":worst[2],\"expected_at_worst\":worst[3],\"bf16_integer_ulp_distance_at_worst\":abs(ordered(ab[worst[4]])-ordered(eb[worst[4]])),\"differing_output_elements\":sum(x!=y for x,y in zip(ab,eb)),\"active_elements\":len(differences),\"no_causal_claim\":True}\n print(json.dumps(out,allow_nan=False))\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 330,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-000000000000110a",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"schema\": \"kvbp.h8-retained-raw-output-stdlib/v1\", \"cpu_only\": true, \"Torch_imported\": false, \"Docker_executed\": false, \"NPU_executed\": false, \"raw_sha256\": \"aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12\", \"raw_bytes\": 78155077, \"metadata_keys\": [\"schema\", \"batch\", \"mode\", \"trial\", \"step\", \"active\", \"reset_slot\", \"before\", \"after\", \"native_before\", \"native\", \"inputs\", \"input_before\", \"actual\", \"expected\", \"guards_before\", \"guards\", \"pointers\"], \"shape\": [12, 12, 128], \"dtype\": \"BFloat16Storage\", \"active\": 12, \"original_output_metric\": 0.0031645569620253164, \"original_gate\": 0.00303, \"original_gate_passed\": false, \"max_abs_difference\": 3.0517578125e-05, \"max_abs_expected\": 0.0096435546875, \"worst_coordinate\": [4, 9, 54], \"actual_at_worst\": -0.006622314453125, \"expected_at_worst\": -0.00665283203125, \"bf16_integer_ulp_distance_at_worst\": 1, \"differing_output_elements\": 8, \"active_elements\": 18432, \"no_causal_claim\": true}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 734,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 734,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 734
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 734,
+          "routeLookupMs": 0,
+          "totalMs": 734
+        }
+      },
+      "traceId": "b0a22928-19a6-4ba6-91e3-e305204aabbd"
+    },
+    "operationId": "exec-000000000000110a",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}
