@@ -2,8 +2,8 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 19:55 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- Live remote workstream tip was 0d00bab at last read. Local 4073829 and
+- Updated: 2026-10-08 20:08 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Live remote workstream tip was 0d00bab at last read. Local 1cf43c3 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
 - Integrated main has not accepted this campaign.
@@ -15,10 +15,10 @@
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
-- r10 full HYPIC is running as operation exec-00000000000016af at the root
-  in task.json. At 19:54 UTC, 105 samples were complete; 303/315 scored
-  requests had four-worker proof; twelve requests lack that proof.
-  See HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md; no final verdict.
+- r10 ended at 20:04 UTC, exit 1: all 127 samples and 381 responses persisted,
+  but only 366/381 scored requests had four-worker proof; 15 failed the
+  strict activation gate. Exact owned service released, 1,077 clean guard
+  probes. See HOTPATH_CACHE10R10_TERMINAL_AUDIT.md; no paired verdict.
 - Quality, benchmark, tuning and optimization Skill cases remain partial;
   see their bounded raw-replay reports and acceptance boundaries.
 - The inference-tuning-loop case replays six raw performance runs and three
@@ -70,17 +70,17 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-r10 operation `exec-00000000000016af` is the sole active controller.
-Do not restart or mix roots. It pins plugin `4429e351`; its PID namespace
-map is under `hypic-only/worker-namespace-map.json`. The read-only
-`diagnose_partial_hotpath_coverage.py` reports twelve scored proof gaps
-as of 19:54 UTC; full quality and isolation remain pending. A separate
+r10 operation `exec-00000000000016af` is terminal; never restart or mix roots.
+Its pinned plugin `4429e351` gave 366/381 four-worker proofs. Independent
+row/hash/scorer replay found 214/381 correct but no baseline pair, so no
+quality pass. The 15 gaps have boundary/observation only; sample 86 missed
+all three. No foreign NPU0–3 task was observed; owned workers/port released.
+Preserve r10 raw root and HOTPATH_CACHE10R10_TERMINAL_AUDIT.md. A separate
 plugin worktree `/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008`
 at local commit `62b0d4a` adds fallback telemetry and a retry-reset fix,
 passes twelve focused CPU tests, and is NOT NPU-validated or mounted by r10.
 Its C3/paper-complete audits still fail; r10 causality is unproven. Preserve r9;
-its 93/127 GDN miss is not a quality verdict. Old 0.9 is not pairable
-with 0.85; source fingerprint must match; r10 native prefix cache is off.
+its 93/127 GDN miss is not a quality verdict. Old 0.9 cannot pair with 0.85.
 
 ## 5. Next Actions
 
@@ -90,15 +90,15 @@ with 0.85; source fingerprint must match; r10 native prefix cache is off.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Poll only r10 operation exec-00000000000016af and its progress file.
-   Preserve prior roots and audit r9 against its failure report.
+3. Preserve r10 terminal root, hash receipts and strict 15/381 failure.
+   Do not rerun or reclassify r9/r10 or pair an invalid treatment arm.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. Continue r10; audit eviction gate, all request-level four-worker
-   coverage, 127×3 quality, and isolation. Diagnostics cannot retroactively
-   explain legacy r10 gaps. After release, consider telemetry only with fresh identity and actual-idle
-   guard; do not claim it fixes fallback. Pair with same-source 0.85
-   no-cache baseline only for a valid candidate, then matched performance.
+4. Investigate r10 gaps with prospective request-local telemetry under a
+   new frozen source/root and actual-idle guard; no causal or fix claim yet.
+   A diagnostic c8 test should exercise failing cases before the original
+   full ruler. Only a valid candidate may receive a same-source 0.85
+   no-cache baseline and subsequent matched performance/quality audits.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 
@@ -112,7 +112,7 @@ python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_git_checkpoint_case.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_inference_tuning_loop_case.py
-python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/diagnose_partial_hotpath_coverage.py /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_partial_audit.py --arm hypic-only --root /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic
 git diff --check
 ```
 

@@ -34,13 +34,15 @@ class HandoffTests(unittest.TestCase):
 
     def test_task_and_global_boundary(self) -> None:
         task = json.loads((HERE / "task.json").read_text(encoding="utf-8"))
-        self.assertEqual(task["latest_attempt"]["campaign"], "cache10r9")
-        self.assertEqual(task["latest_attempt"]["result"],
+        self.assertEqual(task["previous_attempt"]["campaign"], "cache10r9")
+        self.assertEqual(task["previous_attempt"]["result"],
                          "worker_local_gdn_material_missing_after_pending_eviction_race")
-        self.assertEqual(task["active_attempt"]["campaign"], "cache10r10")
-        self.assertEqual(task["active_attempt"]["controller_operation"],
+        self.assertEqual(task["latest_attempt"]["campaign"], "cache10r10")
+        self.assertEqual(task["latest_attempt"]["controller_operation"],
                          "exec-00000000000016af")
-        self.assertTrue((HERE / task["latest_attempt"]["evidence"]).is_file())
+        self.assertIsNone(task["active_attempt"])
+        self.assertTrue((HERE / task["previous_attempt"]["evidence"]).is_file())
+        self.assertTrue((HERE / task["latest_attempt"]["coverage_report"]).is_file())
         self.assertEqual(task["resource_claim"]["forbidden_npus"],
                          [4, 5, 6, 7])
         subprocess.run(("git", "diff", "--quiet", "HEAD", "--",

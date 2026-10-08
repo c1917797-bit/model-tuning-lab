@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only audit of already persisted hot-path quality rows; never a final verdict."""
+"""Read-only audit of persisted hot-path rows, even for failed arms; not a verdict."""
 
 from __future__ import annotations
 
@@ -14,12 +14,20 @@ from hotpath_quality_audit import BASE, CAND, frozen_cases, payload_hash, requir
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=("no-cache", "hypic-only"), required=True)
+    parser.add_argument("--root", type=Path,
+                        help="Explicit immutable attempt root; defaults to the historical arm root")
     args = parser.parse_args()
-    root = BASE if args.arm == "no-cache" else CAND
+    root = args.root if args.root is not None else (
+        BASE if args.arm == "no-cache" else CAND
+    )
     contract = json.loads((root / "contract.json").read_text())
     require(contract["arm"] == args.arm and contract["mode"] == "full",
             "partial audit arm/contract mismatch")
     cases, evaluator = frozen_cases()
+    require(contract.get("sample_indexes") == list(range(len(cases)))
+            and contract.get("repetitions") == 3
+            and contract.get("max_output_tokens") == 2048,
+            "partial audit frozen full ruler mismatch")
     paths = sorted((root / "samples").glob("*.json"))
     seen_ids: set[str] = set()
     correct = 0

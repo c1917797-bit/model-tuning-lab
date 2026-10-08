@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_r10_full_hypic_running_one_scored_native_fallback_observed",
+  "state": "r10_terminal_failed_strict_request_activation_full_responses_preserved",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -13,7 +13,7 @@
     "preexisting_sleep_container": "agentgpu-910b4-qwen35-4b-v0; do not modify",
     "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
-  "latest_attempt": {
+  "previous_attempt": {
     "campaign": "cache10r9",
     "arm": "hypic-only",
     "controller_operation": "exec-000000000000158e",
@@ -23,27 +23,28 @@
     "service_released_utc": "2026-10-08T18:14:21Z",
     "evidence": "HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md"
   },
-  "active_attempt": {
+  "latest_attempt": {
     "campaign": "cache10r10",
     "arm": "hypic-only",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic",
-    "state": "running; 43 complete samples and 124/129 four-worker proofs at 2026-10-08T19:11Z; no final verdict",
+    "state": "terminal exit 1 at 2026-10-08T20:04:15Z; 127/127 samples and 381/381 responses persisted; strict request activation failed 15/381; exact owned service released",
     "controller_operation": "exec-00000000000016af",
     "plugin_local_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "request_hot_path_gate": "124/129 scored requests passed; five native fallbacks; strict all-scored gate fails; full 381-request evidence pending",
-    "coverage_report": "HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md"
+    "request_hot_path_gate": "366/381 passed four-worker post-repair proof; 15/381 failed; no paired quality/performance verdict",
+    "coverage_report": "HOTPATH_CACHE10R10_TERMINAL_AUDIT.md"
   },
+  "active_attempt": null,
   "diagnostic_plugin": {
     "worktree": "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008",
-    "local_commit": "925aa16f4509a753d4ae035fcf33d2941c276165",
-    "status": "telemetry_only; eight focused CPU tests passed; NPU unvalidated; not mounted by r10; no fallback fix claim"
+    "local_commit": "62b0d4a",
+    "status": "fallback telemetry plus materialization retry-reset candidate; twelve focused CPU tests passed; NPU unvalidated; not mounted by r10; no causal/fix claim for r10"
   },
   "git_push_state": {
-    "status": "local_4073829_and_later_unpushed; HTTPS credentials absent; SSH timed out",
+    "status": "local workstream ahead of remote; HTTPS credentials absent; SSH timed out; inspect live branch HEAD and upstream before any push claim",
     "last_verified_remote_commit": "0d00bab0ad63c5bdad39f2f7887577d188194485",
     "push_operation": "exec-0000000000001555",
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Poll only running r10 operation and progress; audit pending-eviction gate and all 381 scored request IDs on four namespace PIDs. Preserve raw roots and release only owned service on real foreign NPU0-3 intrusion. Matching 0.85 no-cache baseline and performance follow only after valid 127x3 candidate. Push local commits only when user-provisioned GitHub auth works. Full paired quality, performance and all-Skill acceptance remain incomplete."
+  "next_action": "Preserve r10 terminal root and strict 15/381 activation failure. Use request-local diagnostics in a separately frozen source to investigate a prospective c8 candidate under actual-idle physical NPU0-3 guard; never reclassify r10 or rerun its root. Original full candidate, matching 0.85 no-cache baseline and performance follow only after a valid activation path. Push local commits only when user-provisioned GitHub auth works. Full paired quality, performance and all-Skill acceptance remain incomplete."
 }
