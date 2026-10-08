@@ -1,0 +1,49 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-experience-ingestion",
+  "campaign_code": "V",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Classify two real HYPIC startup intrusions into the existing host-maintenance Skill, registry discovery and a replayable eval without mistaking passive Docker mappings for occupation or 0/127 aborts for algorithm failure",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "19c77677ea4024e9e15e7538e569772d029dafb0",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 target-host artifacts and named branch worktree; physical NPU0-3; no new device work in this ingestion case",
+  "observed": {
+    "classification": "1-existing-skill-update",
+    "main_host_skill_lacks_continuous_reentry_guard": true,
+    "branch_host_skill_contains_guard": true,
+    "branch_registry_discovery_trigger_added": true,
+    "attempts_checked": 2,
+    "physical_npus_with_foreign_processes": [2, 3],
+    "scored_samples_per_attempt": 0,
+    "owned_containers_removed": true,
+    "immutable_raw_hashes_checked": true,
+    "structured_eval_added": true,
+    "validator": "PASS: Maintainer Skill Tree structure is valid (29 skills)"
+  },
+  "evidence": [
+    {
+      "path": ".agents/evals/transformation-cases/hypic-shared-npu-reentry-ingestion.yaml",
+      "sha256": "6cf89abe5d7513ffc0e6308707710f24e905f3b7db67cf0bf3efd9a48cf3166e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_experience_ingestion_case.py",
+      "sha256": "fc6760fe353e0d098d80e7aee1c777da94e819d8dfcc9108374164ddb013dc9c"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R6_RESOURCE_CONFLICT.md",
+      "sha256": "5f148e42113271a49b0051133c24e82b5e2dfff558906fdf446ea1f66f5fce7b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md",
+      "sha256": "c276c442c07527b8016641f3865cc726c690f8c4610075a0077e32adbc0a6f55"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "This real session validates bounded experience classification and the branch-local guard/eval against two raw startup aborts. The current main host-maintenance Skill lacks the continuous re-entry rule, so long-term acceptance remains partial until integrated and tested from a fresh main checkout. It does not establish HYPIC quality or performance.",
+  "drift_trigger": "Revalidate when main integrates the host-maintenance guard or registry, raw artifact roots change, or the shared-NPU isolation protocol changes."
+}

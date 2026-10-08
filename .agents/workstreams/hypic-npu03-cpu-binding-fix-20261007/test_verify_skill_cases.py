@@ -26,10 +26,20 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 5)
-        self.assertEqual(report["skills_without_case"], 24)
+        self.assertEqual(report["cases_with_verified_provenance"], 6)
+        self.assertEqual(report["skills_without_case"], 23)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 3, "verified": 2})
+                         {"partial-evidence": 4, "verified": 2})
+
+    def test_experience_ingestion_case_keeps_main_gap_partial(self) -> None:
+        path = cases.CASES / "mst-experience-ingestion.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"mst-experience-ingestion"})
+        self.assertEqual(skill, "mst-experience-ingestion")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["main_host_skill_lacks_continuous_reentry_guard"])
+        self.assertEqual(item["observed"]["scored_samples_per_attempt"], 0)
 
     def test_environment_orientation_case_is_partial_not_quality_success(self) -> None:
         path = cases.CASES / "ascend-npu-environment-orientation.json"

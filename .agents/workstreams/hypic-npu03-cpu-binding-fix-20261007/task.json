@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_cache10r6_waiting_for_sustained_actual_idle",
+  "state": "active_quality_isolation_wait_and_skill_acceptance",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -14,31 +14,23 @@
     "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
   "latest_attempt": {
-    "campaign": "cache10r5",
+    "campaign": "cache10r7",
     "arm": "hypic-only",
-    "controller_operation": "exec-00000000000014ee",
+    "controller_operation": "exec-0000000000001523",
     "result": "environment_isolation_failure",
     "scored_rows": 0,
-    "foreign_pid": 1206204,
-    "foreign_physical_npu": 2,
+    "foreign_pid": 1482057,
+    "foreign_physical_npu": 3,
     "foreign_container": "cannbench_ds",
-    "evidence": "HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md"
+    "evidence": "HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md"
   },
-  "pending_attempt": {
-    "campaign": "cache10r6",
-    "arm": "hypic-only",
-    "watch_and_controller_operation": "exec-000000000000150a",
-    "gate": "10 consecutive 30-second checks of actual physical NPU0-3 processes and port 8223; passive Docker mappings ignored",
-    "max_wait_seconds": 7200,
-    "root_if_launched": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r6-full-hypic",
-    "do_not_duplicate": true
-  },
+  "pending_attempt": null,
   "git_push_state": {
-    "status": "synchronized_as_of_1a3a518_before_this_update",
-    "last_verified_remote_commit": "1a3a518fe90f2c0e7d4da4051b15c6683ce59622",
-    "push_operation": "exec-0000000000001513",
-    "live_remote_read_operation": "exec-0000000000001514",
+    "status": "remote_verified_at_dcf1c27; later_local_commit_pending_push",
+    "last_verified_remote_commit": "dcf1c27227e4f908d22d2233c87bbabc43d07bbd",
+    "push_operation": "exec-000000000000152a",
+    "live_remote_read_operation": "exec-0000000000001537",
     "recovery": "After later validated commits, push the named workstream branch without force and independently verify live remote/upstream equality. The successful recovery used per-command git -c http.version=HTTP/1.1, not a persistent config edit."
   },
-  "next_action": "Poll the sole r6 watch/controller operation and do not launch a duplicate. It will start one fresh original-protocol candidate only after sustained actual physical0-3 idleness, regardless of passive Docker mappings. If it starts, independently audit quality/isolation and exact-owned release before any matched baseline; if it times out or collides, preserve its truthful result. Continue offline per-Skill acceptance while waiting. Do not touch foreign containers or NPU4-7. Push the existing local r6 code commit once Git HTTPS responds, without reset or force. Do not promote HYPIC or all-Skill conclusions before their gates pass."
+  "next_action": "Do not reuse r3-r7 or launch a duplicate under the same intermittently shared scheduling conditions. Continue non-device per-Skill acceptance; seek a durable exclusive physical NPU0-3 window before a new unique original-protocol arm. Ignore passive mappings but stop on actual foreign PIDs. Never touch foreign containers or NPU4-7. Verify and push local named-branch commits without reset/force. HYPIC full paired quality, performance, and all-Skill acceptance remain incomplete."
 }

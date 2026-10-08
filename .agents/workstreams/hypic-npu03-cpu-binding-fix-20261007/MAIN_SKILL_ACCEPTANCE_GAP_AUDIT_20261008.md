@@ -53,6 +53,16 @@ The verifier now reports **5 provenance-checked cases: 2 bounded verified,
 3 partial, 24 missing**. The historical V campaign row is not upgraded
 to a portable full-Skill pass by this case.
 
+At 16:39 UTC, the sixth case exercised `mst-experience-ingestion` on the
+real cache10r6/r7 shared-NPU startup intrusions. The lesson was classified
+as an existing host-maintenance Skill update, with a branch registry trigger
+and a structured eval. A focused replay rehashed the raw lane-guard and
+cleanup receipts, verified physical NPU2/NPU3 foreign PIDs and 0/127
+pre-health aborts, and passed the 29-Skill structure check. Main's host Skill
+does not yet contain the continuous guard, so the long-term state remains
+**partial-evidence**. Inventory: **6 cases, 2 bounded verified, 4 partial,
+23 missing**. This does not validate HYPIC algorithm quality or performance.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

@@ -20,6 +20,7 @@ skills:
       - connect a fresh clone to the target host
       - verify the canonical remote repository and Ascend machine state
       - distinguish active and historical container device claims
+      - audit intermittent physical NPU re-entry during a long experiment
     scope:
       - AGENTS.md
       - .agents/**

@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:29 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 16:39 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
@@ -12,7 +12,7 @@
   acceptance remain incomplete. cache10r3 through cache10r7 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 3 partial, 24 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 4 partial, 23 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 
 ## 1. North Star
@@ -49,15 +49,9 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 - A fifth provenance-checked Skill case now records the bounded
   `ascend-npu-environment-orientation` behavior as partial, not verified;
   see NPU_ENVIRONMENT_ORIENTATION_ACCEPTANCE_20261008.md and the gap audit.
-- A unique original-protocol cache10r6 identity was preflighted: 127
-  samples, physical0–3, 0.85 utilization, 3584 MiB/10 segments. AWMCP
-  operation exec-000000000000150a is a *single* pending controller: it
-  samples actual NPU0–3/port every 30 seconds, requires 10 consecutive
-  clean checks, then launches exactly one candidate arm. If no such window
-  occurs within two hours, it exits without creating a root. It ignored
-  passive Docker mappings and did not use NPU4–7. It launched on actual
-  idle, then the startup guard caught foreign PID 1426552 on physical NPU2
-  at 16:21:22 UTC. It stopped at 0/127 and released exact owned resources;
+- cache10r6 launched after ten actual-idle checks, ignoring passive
+  mappings. Startup guard caught foreign PID 1426552 on physical NPU2
+  at 16:21:22 UTC, stopped at 0/127 and released only owned resources;
   see HOTPATH_CACHE10R6_RESOURCE_CONFLICT.md and raw SHA-256 receipts.
 - The user explicitly confirmed actual physical NPU0–3 idleness permits
   running regardless of others' passive mappings. After a clean live probe,
@@ -69,6 +63,11 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   passed. The second launch caught a real foreign PID 1482057 on physical
   NPU3 during startup at 16:28:11 UTC. It stopped at 0/127 and removed
   only its owned container; see HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md.
+- The real r6/r7 practice was ingested via the existing branch-local
+  host-maintenance guard, a registry trigger, and a structured eval with
+  raw-artifact replay. The sixth Skill case covers `mst-experience-ingestion`
+  as partial: main still lacks that continuous guard. See
+  hypic-shared-npu-reentry-ingestion.yaml and verify_experience_ingestion_case.py.
 
 ## 4. Current Action
 
@@ -78,7 +77,8 @@ entered during startup. Do not blindly reattempt under the same shared
 scheduling conditions. Continue non-device Skill acceptance and obtain a
 durable exclusive NPU0–3 window before a new unique full arm. Passive Docker
 mappings alone remain irrelevant. The branch remote was independently
-verified at dcf1c27227e4f908d22d2233c87bbabc43d07bbd before this update.
+verified at dcf1c27227e4f908d22d2233c87bbabc43d07bbd before this update;
+newer local commits are not yet confirmed on the remote.
 
 ## 5. Next Actions
 

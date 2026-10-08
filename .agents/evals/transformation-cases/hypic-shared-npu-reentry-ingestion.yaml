@@ -1,0 +1,49 @@
+schema: mst-transformation-case/v1
+id: hypic-shared-npu-reentry-ingestion
+source: chicaihong01 HYPIC cache10r6/r7 full-quality attempts on 2026-10-08
+task_goal: Preserve a reusable maintenance lesson without calling an isolation-invalid arm a paper-technique failure.
+selected_skills:
+  - chicaihong01-host-maintenance
+  - mst-experience-ingestion
+  - mst-transformation-verification
+facts:
+  - Both attempts were launched after physical NPU0-3 had no actual foreign process; passive Docker mappings were not a veto.
+  - During startup, the continuous guard captured a foreign PID on physical NPU2 in r6 and NPU3 in r7, with container identity and timestamps.
+  - Both arms stopped before service health and scoring at 0/127; no paired HYPIC quality or performance conclusion follows.
+  - Only the exact owned containers were removed; experiment port 8223 was released and the foreign container was untouched.
+  - A later empty NPU snapshot would not prove the entire long test window is isolated.
+lesson:
+  trigger: A shared physical NPU lane looks idle before a long or repeated inference test, while another job can enter it later.
+  different_action: Gate on actual physical PIDs and the experiment port, keep a continuous cgroup-aware guard, invalidate the affected arm on foreign entry, retain raw evidence, and release only owned resources before considering a new unique attempt.
+  classification: 1
+  destination: .agents/skills/chicaihong01-host-maintenance/SKILL.md
+  reason: The current main Skill distinguishes passive mappings from physical occupation, but lacks the work-branch continuous guard for later foreign re-entry. The narrow existing-Skill update and this eval cover different roles; neither is a new broad Skill.
+  verification: python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_experience_ingestion_case.py
+expected_behavior:
+  - Accept physical NPU0-3 idleness as a launch condition regardless of passive foreign container mappings.
+  - Record real foreign physical PIDs, container identity, time and probe status during service startup.
+  - Abort both contaminated arms at 0/127, not as HYPIC algorithm failures.
+  - Prove exact-owned cleanup and preserve immutable raw hashes.
+  - Require a new isolated root and a complete uninterrupted window for any later full comparison.
+lessons_ingested:
+  - Passive Docker device mappings are not the same as actual physical NPU occupation.
+  - An initially idle lane can be invalidated by a later foreign process; continuous isolation proof is necessary for a long arm.
+  - A foreign-PID abort before scoring is an environment-invalid result, not a paper-technique failure.
+raw_evidence:
+  - attempt: cache10r6
+    root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r6-full-hypic
+    physical_npu: 2
+    foreign_pid: 1426552
+    lane_guard_sha256: 86641f18d3647d1f015167395657e0c9100b3c70f49a10283cae7a937d392565
+    service_stop_sha256: df9c7619ccd28a7b251ac7be55ba846a3589df1530dd6b3ddebe16e2edc8382b
+  - attempt: cache10r7
+    root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r7-full-hypic
+    physical_npu: 3
+    foreign_pid: 1482057
+    lane_guard_sha256: d0edf3ed3216b43819c5b1215e6005ebb687b9e2ea2b151d1cbcb6411cbe2952
+    service_stop_sha256: 9ea958e1656b6be13bb63aa485adaf558a94c1d85c6afbca740bc6b5f2972a94
+validation_commands:
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_experience_ingestion_case.py
+  - ./scripts/validate-mst.sh
+  - git diff --check
+boundary: Validates safe classification and cleanup for these two interrupted startup attempts only; does not validate full HYPIC quality, performance or all maintainer Skills.
