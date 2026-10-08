@@ -39,3 +39,14 @@ strict hot-path acceptance for r10 is already false unless the frozen gate
 is changed prospectively for a new attempt. Baseline/performance work must
 not treat r10 as an accepted treatment arm merely because aggregate hot
 event counters exceed scored-row counts.
+
+At 19:01 UTC, sample 18 provided a second independent counterexample:
+its repetition 1 had four-worker proof, but repetitions 2 and 3 (API IDs
+`chatcmpl-9042a6e198dfa80a` and `chatcmpl-b0b94139d9729751`)
+had boundary observations and no worker proof. Its first scored response
+lasted 243 seconds while c8 sample threads interleaved; later repetitions
+lasted 139 and 194 seconds. Cache evictions occurred during this interval,
+but victim hashes and ordinary plan rejection reasons were not emitted,
+so the exact reason remains open. The branch-local read-only diagnostic
+`diagnose_partial_hotpath_coverage.py` reports these per-request gaps
+without labeling partial samples as accepted.

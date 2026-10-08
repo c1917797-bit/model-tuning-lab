@@ -27,10 +27,10 @@
     "campaign": "cache10r10",
     "arm": "hypic-only",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic",
-    "state": "running; 19 complete samples and 56/57 four-worker proofs at 2026-10-08T18:54Z; no final verdict",
+    "state": "running; 28 complete samples and 81/84 four-worker proofs at 2026-10-08T19:01Z; no final verdict",
     "controller_operation": "exec-00000000000016af",
     "plugin_local_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "request_hot_path_gate": "56/57 scored requests passed; sample 6 repetition 3 native fallback means strict all-scored gate already fails; full 381-request evidence pending",
+    "request_hot_path_gate": "81/84 scored requests passed; sample 6 repetition 3 and sample 18 repetitions 2-3 were native fallback; strict all-scored gate fails; full 381-request evidence pending",
     "coverage_report": "HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md"
   },
   "git_push_state": {

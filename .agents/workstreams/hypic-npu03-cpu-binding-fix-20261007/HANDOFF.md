@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 18:47 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 19:02 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Live remote workstream tip was 0d00bab at last read. Local 4073829 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
@@ -16,8 +16,9 @@
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
 - r10 full HYPIC is running as operation exec-00000000000016af at the root
-  in task.json. At 18:54 UTC, 19 samples were complete; 56/57 scored
-  requests had four-worker proof. Sample 6 repetition 3 fell back natively.
+  in task.json. At 19:01 UTC, 28 samples were complete; 81/84 scored
+  requests had four-worker proof. Sample 6 rep 3 and sample 18 reps 2–3
+  fell back natively.
   See HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md; no final verdict.
 - Quality and benchmark Skill cases eight/nine remain partial; see their
   request-coverage and baseline-reuse acceptance reports.
@@ -106,6 +107,7 @@ From this branch worktree:
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_git_checkpoint_case.py
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/diagnose_partial_hotpath_coverage.py /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic
 git diff --check
 ```
 
