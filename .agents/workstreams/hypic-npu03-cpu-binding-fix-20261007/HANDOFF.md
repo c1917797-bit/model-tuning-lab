@@ -1,5 +1,16 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 14:51 UTC per-Skill case index:** The first durable case
+`skill-cases/mst-repo-onboarding.json` and read-only
+`verify_skill_cases.py` now bind the historical fresh-clone report hash
+to the tested/current main Skill and registry blobs. The original clone is
+absent, so the case is deliberately `partial-evidence` for long-term
+portable acceptance; it does not downgrade the bounded HYPIC-campaign V
+or count as a new verified Skill. The verifier reports 1 provenance-checked
+case and 28 missing cases, with no long-term verified claim. Read
+`MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md` before generalizing V11/P14/N4.
+No onboarding rerun, NPU job, main edit or unrelated container change occurred.
+
 **2026-10-08 14:46 UTC long-goal audit:** A fresh fetch confirmed main is
 still `ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2` with 29 Skill
 entrypoints. `MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md` now separates

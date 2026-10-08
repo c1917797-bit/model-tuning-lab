@@ -7,6 +7,14 @@ This is a scope check, **not** a new Skill acceptance result. Fresh
 exactly once against `SKILL_VERIFICATION.md` and reports bounded campaign
 codes V11/P14/N4. Those codes do not mean 29 universally verified Skills.
 
+At 14:51 UTC, `verify_skill_cases.py` independently checked the first
+per-Skill case receipt, `skill-cases/mst-repo-onboarding.json`: its report
+SHA256 and tested/current Skill and registry Git blobs match. The original
+fresh clone is absent, so that case correctly says `partial-evidence` for
+long-term portable acceptance. The verifier reports **1 case with verified
+provenance, 28 Skills without a case, 0 cases claimed long-term verified**.
+It does not replace the bounded V11/P14/N4 campaign ledger or rerun onboarding.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's
