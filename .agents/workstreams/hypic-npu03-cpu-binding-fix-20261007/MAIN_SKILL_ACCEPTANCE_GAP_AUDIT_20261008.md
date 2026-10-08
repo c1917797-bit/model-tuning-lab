@@ -15,6 +15,16 @@ long-term portable acceptance. The verifier reports **1 case with verified
 provenance, 28 Skills without a case, 0 cases claimed long-term verified**.
 It does not replace the bounded V11/P14/N4 campaign ledger or rerun onboarding.
 
+At 15:09 UTC, the cache10r3 HYPIC service's continuous guard caught an
+actual foreign physical NPU3 process and released only the owned container
+before any scored request. A second per-Skill case now binds this bounded
+host-maintenance safety observation to the exact main Skill blob and the
+retained conflict report hash. Its long-term state is also
+`partial-evidence`: user-specific mapping override, work-branch script
+differences and incomplete canonical-main workflow preclude full acceptance.
+The case inventory is now 2 provenance-checked partial cases, 27 missing,
+and 0 long-term verified. No quality score or Skill-wide pass is inferred.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

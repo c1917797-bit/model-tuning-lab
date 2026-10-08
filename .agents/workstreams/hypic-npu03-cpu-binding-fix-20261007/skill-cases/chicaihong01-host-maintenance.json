@@ -1,0 +1,39 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "chicaihong01-host-maintenance",
+  "campaign_code": "V",
+  "long_term_acceptance": "partial-evidence",
+  "task": "Enter chicaihong01 through verified direct AWMCP routing, apply the user's mapping-only occupancy exception, and fail closed on a real foreign NPU process during HYPIC quality work",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "4f226c75f5cf92c16b02524e7666c941dd147afb",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma via direct AWMCP; named independent worktree; physical Ascend 910B4 NPU0-3 only; foreign cannbench_ds container left untouched",
+  "observed": {
+    "topology_peer_reproved": true,
+    "direct_target_route_proved": true,
+    "mapping_only_not_used_as_lane_blocker_under_user_instruction": true,
+    "real_foreign_npu_process_detected": true,
+    "foreign_physical_npu": 3,
+    "foreign_pid": 672924,
+    "scored_requests_before_abort": 0,
+    "exact_owned_service_released": true,
+    "foreign_container_preserved": true
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md",
+      "sha256": "b64d38f78bf9cf2d2feaebb2d368165392f8a6a39de4c07c68ee4ae2e454b81f"
+    }
+  ],
+  "external_raw_receipts": {
+    "lane_guard_sha256": "4ee35d98eadbeda8344d8b14f747865a9f2e3587606f48243b1559dc9740d6db",
+    "arm_result_sha256": "75fa7b0586cd6af3633e591d6c51c5f4786910bce7c31d53e4207a872f267b34",
+    "service_stop_sha256": "a264fd7c7e13cdc4c56ecc72ad4c7f3cb9cf0b0573c7405fd223abd8368629d1"
+  },
+  "replayable_regression_recorded": false,
+  "boundary": "This is a bounded real-host safety case under a task-specific user override, not a successful HYPIC experiment. The main Skill's default running-container occupancy claim, complete canonical-checkout onboarding flow, long clean NPU window, and all other host-maintenance actions were not independently re-executed. The branch script and Skill body also differ from current main. Do not promote to long-term verified.",
+  "next_gate": "On a later real host-maintenance task, exercise the exact current main Skill end to end, retain sanitized raw AWMCP and process receipts plus a repeatable regression, then review every default/override boundary. Do not rerun this failed HYPIC root."
+}

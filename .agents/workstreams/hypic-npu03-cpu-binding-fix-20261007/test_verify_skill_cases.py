@@ -26,9 +26,19 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 1)
-        self.assertEqual(report["skills_without_case"], 28)
-        self.assertEqual(report["case_acceptance"], {"partial-evidence": 1})
+        self.assertEqual(report["cases_with_verified_provenance"], 2)
+        self.assertEqual(report["skills_without_case"], 27)
+        self.assertEqual(report["case_acceptance"], {"partial-evidence": 2})
+
+    def test_host_isolation_case_is_bounded_not_algorithm_success(self) -> None:
+        path = cases.CASES / "chicaihong01-host-maintenance.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"chicaihong01-host-maintenance"})
+        self.assertEqual(skill, "chicaihong01-host-maintenance")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["scored_requests_before_abort"], 0)
+        self.assertFalse(item["replayable_regression_recorded"])
 
     def test_wrong_evidence_bytes_fail_closed(self) -> None:
         with patch.object(cases, "evidence_path", return_value=Path(__file__)):
