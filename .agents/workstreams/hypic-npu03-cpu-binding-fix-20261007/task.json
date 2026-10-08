@@ -32,10 +32,11 @@
     "decision": "pending; actual foreign NPU0-3 PIDs invalidate the arm, passive mappings do not"
   },
   "git_push_state": {
-    "status": "local_commit_ahead_of_upstream_auth_missing",
-    "first_unpushed_commit": "b09706746c7e6eab611bac4344e699daf4629fce",
-    "remote_at_failed_push": "622d68af221d76cf9098db8ef4ce9141da2cf047",
-    "recovery": "After safe host Git authentication is restored, inspect local HEAD and remote ref; push existing HEAD to work/hypic-npu03-cpu-binding-fix-20261007 without force and verify equality."
+    "status": "synchronized_as_of_1fec73f",
+    "verified_commit": "1fec73f6c2d286d583d05c81a945f8d306b3d1fc",
+    "push_operation": "exec-00000000000014ce",
+    "live_remote_equality_operation": "exec-00000000000014cf",
+    "recovery": "After any later validated commit, push HEAD to the named workstream branch without force and independently verify live remote, upstream and clean local HEAD equality."
   },
-  "next_action": "Monitor active cache10r4 candidate without a duplicate controller; independently audit its guard, rows, hot path and owned-service release. If valid, run the same-identity full no-cache arm and matched performance; if a real foreign NPU0-3 process intrudes, preserve the invalid raw root and start a distinct attempt only when the cards are actually idle. Do not block on passive Docker mappings or touch foreign containers/NPU4-7. Restore safe target-host Git HTTPS authentication and push existing local workstream commits without resetting or repeating them. Do not promote a conclusion before all gates pass."
+  "next_action": "Monitor active cache10r4 candidate without a duplicate controller; independently audit its guard, rows, hot path and owned-service release, including the observed startup NPU0/1 foreign PIDs. If valid, run the same-identity full no-cache arm and matched performance; if a real foreign NPU0-3 process intrudes during scoring, preserve the invalid raw root and start a distinct attempt only when the cards are actually idle. Do not block on passive Docker mappings or touch foreign containers/NPU4-7. Push later validated workstream checkpoints and verify live equality. Do not promote a conclusion before all gates pass."
 }

@@ -2,11 +2,11 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 15:41 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- Earlier branch checkpoints were pushed through 622d68a. The validated
-  maintainer-handoff Skill case commit b097067 is local-only because Git
-  HTTPS authentication disappeared during its push; do not claim it is remote.
-  Integrated main has not accepted this campaign.
+- Updated: 2026-10-08 15:46 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- The branch is pushed and verified through 1fec73f; `exec-00000000000014cf`
+  confirmed live remote, upstream and clean local HEAD equality after the
+  target-host Git HTTPS authentication recovered. Integrated main has not
+  accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3 is environment/isolation invalid,
   not an HYPIC algorithm or quality verdict.
@@ -46,21 +46,25 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 - The Git checkpoint and maintainer-handoff Skills have bounded verified
   real-task cases locally; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
+- During cache10r4 service loading, a read-only host snapshot at 15:44 UTC
+  caught transient foreign `cannbench_ds` NPU0/1 PIDs. The arm's continuous
+  scoring guard starts after service readiness; preserve this startup
+  overlap as a caveat and rely on the later guard/evidence for the score
+  decision. No foreign container was modified.
 
 ## 4. Current Action
 
 Monitor the running cache10r4 operation and exact raw root; do not launch
 another controller while it lives. An idle-at-launch snapshot does not
-guarantee uninterrupted isolation, so classify any real foreign PID as
-environment-invalid through the guard. Target-host Git HTTPS authentication
-remains absent; do not repeat local commits merely because push failed.
+guarantee uninterrupted isolation, so classify any real foreign PID in
+the scoring guard as environment-invalid. The branch was synchronized at
+1fec73f, before this status update; check status again before claiming sync.
 
 ## 5. Next Actions
 
-1. After host Git authentication is restored, inspect the exact branch
-   HEAD and remote ref, then push existing local commits once to the named
-   workstream branch and verify upstream equality. Do not amend, reset,
-   force-push, or embed credentials in Git files or command output.
+1. Preserve the successful push and live equality receipt for 1fec73f.
+   Validate, then push each later coherent checkpoint to the named
+   workstream branch; never amend, reset, force-push, or expose credentials.
 2. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
@@ -115,9 +119,10 @@ npu-smi info
 ss -lntp
 ```
 
-Once safe Git authentication is restored, push the existing HEAD with
+The pending commits were pushed through 1fec73f. After any later commit,
+push the current HEAD with
 `git push origin HEAD:work/hypic-npu03-cpu-binding-fix-20261007` and
-check the live remote ref. This is pending, not completed.
+check the live remote ref before claiming it is synchronized.
 
 cache10r3 controller exec-000000000000147b is terminal exit 1. Its raw root:
 /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r3-full-hypic.

@@ -46,9 +46,12 @@ The default `current_branch_synced` field means equality with the cached
 tracking ref only and is not proof of live remote equality. Run with
 `--require-current-sync` to check current HEAD against the **live** remote;
 that mode uses a bounded 15-second network call and fails on authentication,
-network uncertainty, dirty worktree, or unpushed commits. It now correctly
-fails while the branch is ahead and target-host HTTPS auth is missing. The
-later authentication failure does not erase the earlier successful
-checkpoint. Re-run the ordered AWMCP operation queries while retained
+network uncertainty, dirty worktree, or unpushed commits. It failed while
+target-host HTTPS auth was missing and the branch was ahead; after the
+credentials became available again, operation `exec-00000000000014ce`
+pushed all three pending commits and `exec-00000000000014cf` independently
+verified live remote, upstream and clean local HEAD equality at
+`1fec73f6c2d286d583d05c81a945f8d306b3d1fc`. Re-run the ordered AWMCP
+operation queries while retained
 to review validation-before-commit proof. Neither check proves that all
 future agents will obey this policy.
