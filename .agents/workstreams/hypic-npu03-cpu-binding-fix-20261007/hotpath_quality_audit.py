@@ -14,9 +14,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 AUDIT_CAMPAIGN = os.environ.get("HYPIC_HOTPATH_AUDIT_CAMPAIGN", "original")
-if AUDIT_CAMPAIGN not in {"original", "reserve", "cache10", "cache10r1", "cache10r2"}:
+if AUDIT_CAMPAIGN not in {"original", "reserve", "cache10", "cache10r1", "cache10r2", "cache10r3"}:
     raise RuntimeError("unrecognized hot-path audit campaign")
-if AUDIT_CAMPAIGN in {"reserve", "cache10", "cache10r1", "cache10r2"}:
+if AUDIT_CAMPAIGN in {"reserve", "cache10", "cache10r1", "cache10r2", "cache10r3"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         "hotpath-reserve-full-baseline" if AUDIT_CAMPAIGN == "reserve" else
         f"hotpath-{AUDIT_CAMPAIGN}-full-baseline"

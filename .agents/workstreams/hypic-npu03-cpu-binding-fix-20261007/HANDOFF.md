@@ -1,5 +1,14 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 14:56 UTC main-version boundary:** A new read-only Git
+comparison found seven branch Skill bodies and the branch registry differ
+from current main. Two V11 rows (`chicaihong01-host-maintenance`,
+`ascend-benchmark-evidence`) are among those changed identities.
+`verify_skill_matrix.py` now emits this mismatch, and
+`MAIN_SKILL_VERSION_BOUNDARY.md` corrects its stale five-Skill/fresh-clone
+claims. V11/P14/N4 remain bounded branch-campaign statuses, not
+long-term exact-main acceptance. No NPU run or Skill/main promotion occurred.
+
 **2026-10-08 14:51 UTC per-Skill case index:** The first durable case
 `skill-cases/mst-repo-onboarding.json` and read-only
 `verify_skill_cases.py` now bind the historical fresh-clone report hash

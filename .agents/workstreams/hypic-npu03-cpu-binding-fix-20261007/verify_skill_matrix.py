@@ -51,8 +51,22 @@ def main() -> int:
     actual = (counts["V"], counts["P"], counts["N"], len(rows))
     if actual != declared:
         raise RuntimeError(f"declared current status count {declared} != actual {actual}")
+    changed_bodies = sorted(
+        name for name in ids
+        if git("rev-parse", f"{args.registry_ref}:.agents/skills/{name}/SKILL.md")
+        != git("rev-parse", f"HEAD:.agents/skills/{name}/SKILL.md")
+    )
+    current_v = {name for name, code in rows if code == "V"}
+    changed_v = sorted(current_v.intersection(changed_bodies))
+    main_registry_blob = git("rev-parse", f"{args.registry_ref}:{REGISTRY_PATH}")
+    branch_registry_blob = git("rev-parse", f"HEAD:{REGISTRY_PATH}")
     print(json.dumps({"main_commit": pinned.group(1), "skills": len(ids),
-                      "current_status": dict(counts), "names_match": True}, sort_keys=True))
+                      "current_status": dict(counts), "names_match": True,
+                      "branch_modified_main_skill_bodies": changed_bodies,
+                      "branch_modified_bounded_v": changed_v,
+                      "branch_registry_differs_from_main":
+                          branch_registry_blob != main_registry_blob},
+                     sort_keys=True))
     return 0
 
 

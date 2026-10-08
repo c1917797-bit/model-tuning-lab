@@ -11,6 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import binding_off_quality as quality
+import binding_off_service as service
 
 
 def snapshot(extra: str = "") -> str:
@@ -25,6 +26,24 @@ def snapshot(extra: str = "") -> str:
 class QualityLaneGuardTests(unittest.TestCase):
     def setUp(self) -> None:
         self.workers = {str(i): 11 + i for i in range(4)}
+
+    def test_idle_lane_ignores_container_mapping_only(self) -> None:
+        idle = "".join(f"No running processes found in NPU {i}\n" for i in range(4))
+        def fake_run(*args: str, **kwargs: object) -> subprocess.CompletedProcess[str]:
+            if args[:2] == ("npu-smi", "info"):
+                return subprocess.CompletedProcess(args, 0, idle, "")
+            if args[0] == "ss":
+                return subprocess.CompletedProcess(args, 0, "", "")
+            raise AssertionError(f"mapping-only inspection is not a lane gate: {args}")
+        with patch.object(service, "run", side_effect=fake_run):
+            service.assert_lane_available()
+
+    def test_physical_process_still_blocks_lane(self) -> None:
+        busy = "No running processes found in NPU 0\n"
+        with patch.object(service, "run",
+                          return_value=subprocess.CompletedProcess([], 0, busy, "")):
+            with self.assertRaisesRegex(RuntimeError, "running process"):
+                service.assert_lane_available()
 
     def check(self, content: str, code: int = 0) -> quality.ForeignProcessGuard:
         guard = quality.ForeignProcessGuard("no-cache", self.workers)

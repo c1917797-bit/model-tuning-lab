@@ -1,5 +1,16 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
+2026-10-08 14:56 UTC version attribution audit: V11/P14/N4 are bounded
+**work-branch campaign** codes, not proof that exact `origin/main` Skill
+bytes passed. Seven branch `SKILL.md` bodies differ from current main;
+two are V rows: `chicaihong01-host-maintenance` and
+`ascend-benchmark-evidence`. Branch registry routing also differs.
+`verify_skill_matrix.py` now reports these mismatches automatically.
+Read `MAIN_SKILL_VERSION_BOUNDARY.md` before promoting or citing a
+main-version behavior claim. No existing HYPIC result was discarded and
+no V/P/N row was silently changed; exact-version attribution remains
+an explicit long-term acceptance gate.
+
 2026-10-08 14:38 UTC: independently inspected the preserved cache10r2
 candidate event schema against
 `.agents/skills/ascend-model-quality-evaluation/references/quality-test-contract.md`.
