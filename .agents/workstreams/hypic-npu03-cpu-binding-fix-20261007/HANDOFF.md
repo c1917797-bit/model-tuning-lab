@@ -1,5 +1,13 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Latest 2026-10-08 checkpoint:** reserve2 stress failed technically under
+c8 after the sentinel passed: sample 4 HTTP 500, four TP workers lacked GDN
+material, 27/27 lane samples clean, exact release passed. Read
+`HOTPATH_CACHE10_REPAIR.md` for the preserved hashes, leading cache-residency
+hypothesis, and prospectively frozen new-root test. No cache10 NPU run has
+started; neither failed stress root may be reused. This supersedes the
+reserve2-next instruction below.
+
 **Active 2026-10-08 hot-path quality checkpoint (read this first):** User's
 short/mid/long goal is active: finish explicit-boundary HYPIC quality on only
 physical NPU0-3, then map/retest the HYPIC Skill chain, then validate every

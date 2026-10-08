@@ -37,6 +37,9 @@ ATTEMPT_ROOTS = {
     "hotpath-reserve-stress2-hypic": "quality-context-41984-hotpath-reserve-stress2-hypic",
     "hotpath-reserve-full-baseline": "quality-context-41984-hotpath-reserve-full-baseline",
     "hotpath-reserve-full-hypic": "quality-context-41984-hotpath-reserve-full-hypic",
+    "hotpath-cache10-stress-hypic": "quality-context-41984-hotpath-cache10-stress-hypic",
+    "hotpath-cache10-full-baseline": "quality-context-41984-hotpath-cache10-full-baseline",
+    "hotpath-cache10-full-hypic": "quality-context-41984-hotpath-cache10-full-hypic",
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
@@ -45,6 +48,9 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-reserve-stress2-hypic",
     "hotpath-reserve-full-baseline",
     "hotpath-reserve-full-hypic",
+    "hotpath-cache10-stress-hypic",
+    "hotpath-cache10-full-baseline",
+    "hotpath-cache10-full-hypic",
 })
 QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984
@@ -189,6 +195,9 @@ def preflight() -> dict:
             "common_serving_change": FLAG.strip(), "unit_order": list(UNIT_ORDER)}
     if ATTEMPT in RESERVE_ATTEMPTS:
         fingerprint["gpu_memory_utilization"] = 0.85
+    if ATTEMPT.startswith("hotpath-cache10-"):
+        fingerprint["material_cache_max_mb"] = 3584
+        fingerprint["max_materialized_segments"] = 10
     return fingerprint
 
 
@@ -220,6 +229,16 @@ def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
         raise RuntimeError("frozen HYPIC evidence env seam drift")
     env = [f"VLLM_ASCEND_HYPIC_EVIDENCE_FILE={new_path}/hypic-evidence.jsonl"
            if value == old_env else value for value in env]
+    if ATTEMPT.startswith("hotpath-cache10-"):
+        for key, old_value, new_value in (
+            ("VLLM_ASCEND_HYPIC_MATERIAL_CACHE_MAX_MB", "1536", "3584"),
+            ("VLLM_ASCEND_HYPIC_MAX_MATERIALIZED_SEGMENTS", "4", "10"),
+        ):
+            old_entry = f"{key}={old_value}"
+            if env.count(old_entry) != 1:
+                raise RuntimeError(f"frozen HYPIC material cache environment seam drift: {key}")
+            env = [f"{key}={new_value}" if entry == old_entry else entry
+                   for entry in env]
     return source, binds, env, command
 
 

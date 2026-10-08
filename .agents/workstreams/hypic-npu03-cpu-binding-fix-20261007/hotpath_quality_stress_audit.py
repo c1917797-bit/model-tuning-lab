@@ -6,15 +6,19 @@ from __future__ import annotations
 import json
 import os
 
-os.environ["HYPIC_HOTPATH_AUDIT_CAMPAIGN"] = "reserve"
 STRESS_CAMPAIGN = os.environ.get("HYPIC_HOTPATH_QUALITY_CAMPAIGN", "reserve")
-if STRESS_CAMPAIGN not in {"reserve", "reserve2"}:
+if STRESS_CAMPAIGN not in {"reserve", "reserve2", "cache10"}:
     raise RuntimeError("unrecognized reserve stress campaign")
+os.environ["HYPIC_HOTPATH_AUDIT_CAMPAIGN"] = (
+    "cache10" if STRESS_CAMPAIGN == "cache10" else "reserve"
+)
 
 from hotpath_quality_audit import audit_arm, frozen_cases, quality, require
 
 
-ROOT = quality.ROOT / ("quality-context-41984-hotpath-reserve-stress2-hypic"
+ROOT = quality.ROOT / ("quality-context-41984-hotpath-cache10-stress-hypic"
+                       if STRESS_CAMPAIGN == "cache10" else
+                       "quality-context-41984-hotpath-reserve-stress2-hypic"
                        if STRESS_CAMPAIGN == "reserve2" else
                        "quality-context-41984-hotpath-reserve-stress-hypic")
 
@@ -25,8 +29,13 @@ def main() -> int:
                        expected=9, mode="stress")
     require(result["fingerprint"].get("gpu_memory_utilization") == 0.85,
             "stress did not use the reserved common service setting")
+    if STRESS_CAMPAIGN == "cache10":
+        require(result["fingerprint"].get("material_cache_max_mb") == 3584
+                and result["fingerprint"].get("max_materialized_segments") == 10,
+                "stress did not use the declared material cache capacity")
     print(json.dumps({
         "schema": "hypic-hotpath-reserve-stress-audit/v1",
+        "campaign": STRESS_CAMPAIGN,
         "stress_pass": True,
         "not_quality_verdict": True,
         "scored_rows": result["scored_rows"],
