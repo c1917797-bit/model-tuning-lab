@@ -34,6 +34,14 @@ acceptance to that representative path. The inventory is now **3 cases:
 1 long-term verified in bounded scope, 2 partial, 26 missing**. This does
 not upgrade the other policy options or HYPIC quality.
 
+The branch-local maintainer handoff was then condensed to a 102-line
+current state, preserving 387 historical lines separately. A pinned Git
+snapshot replay verifies the 0–8 section order, critical resume facts and
+unchanged integrated global handoff. This supplies a second bounded
+long-term verified representative case. Current inventory: **4 cases:
+2 verified, 2 partial, 25 missing**. No global handoff or HYPIC acceptance
+is inferred.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

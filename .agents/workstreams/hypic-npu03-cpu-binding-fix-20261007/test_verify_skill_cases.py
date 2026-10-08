@@ -26,10 +26,19 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 3)
-        self.assertEqual(report["skills_without_case"], 26)
+        self.assertEqual(report["cases_with_verified_provenance"], 4)
+        self.assertEqual(report["skills_without_case"], 25)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 2, "verified": 1})
+                         {"partial-evidence": 2, "verified": 2})
+
+    def test_handoff_case_is_bounded_verified(self) -> None:
+        path = cases.CASES / "mst-maintainer-handoff.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"mst-maintainer-handoff"})
+        self.assertEqual(skill, "mst-maintainer-handoff")
+        self.assertEqual(state, "verified")
+        self.assertIn("branch-local",
+                      json.loads(path.read_text())["boundary"])
 
     def test_git_checkpoint_case_is_bounded_verified(self) -> None:
         path = cases.CASES / "mst-git-checkpoint-policy.json"

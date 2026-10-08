@@ -1,0 +1,39 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-maintainer-handoff",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
+  "behavioral_evidence_verified": true,
+  "task": "Convert a long-running HYPIC workstream diary into a concise current handoff while retaining its history and avoiding false global-main claims",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "f9eba56e3048643163342b1bab024632929b382c",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 named workstream branch; repository documentation and CPU-only validation; no NPU work",
+  "observed": {
+    "checkpoint_commit": "622d68af221d76cf9098db8ef4ce9141da2cf047",
+    "current_handoff_lines": 102,
+    "history_lines_retained": 387,
+    "required_ordered_sections": 9,
+    "global_handoff_untouched": true,
+    "offline_tests_before_commit": 30,
+    "validator_before_commit": "PASS: Maintainer Skill Tree structure is valid (29 skills)",
+    "pushed_to_named_workstream_branch": true,
+    "historical_snapshot_replay_passed": true
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MAINTAINER_HANDOFF_ACCEPTANCE_20261008.md",
+      "sha256": "f086d0cb96b1227738901569ea8a3fd4f43aeaeeda63598475dbc9ba9a1c8468"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_handoff_case.py",
+      "sha256": "a6a3bc72cff3be3a4a0159a2df378566d5345c5d8e2875206e3596d839e19e12"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Verified only for this branch-local current/historical handoff and recovery snapshot. It does not certify the integrated global handoff, future live host state, HYPIC quality/performance, or another agent's actual execution of the next actions.",
+  "drift_trigger": "Revalidate when the main Skill blob or branch handoff format/ownership boundary changes; keep the current handoff updated as new evidence arrives."
+}

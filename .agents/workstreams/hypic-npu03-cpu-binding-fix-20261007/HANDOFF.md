@@ -2,13 +2,13 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 15:20 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 15:25 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Branch checkpoints are pushed; integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3 is environment/isolation invalid,
   not an HYPIC algorithm or quality verdict.
-- Main has 29 Skills; long-term per-Skill cases on this branch: 1 bounded
-  verified, 2 partial, 26 missing. V11/P14/N4 is a separate campaign matrix.
+- Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
+  verified, 2 partial, 25 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 
 ## 1. North Star
@@ -34,8 +34,8 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   actually used physical NPU3. The guard aborted at 0/127 completed
   samples, released the exact owned service and port, and preserved
   HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md with raw receipt hashes.
-- The Git checkpoint Skill has one bounded verified real-task case;
-  host-maintenance and onboarding have partial cases. See
+- The Git checkpoint and maintainer-handoff Skills have bounded verified
+  real-task cases; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
 
 ## 4. Current Action
