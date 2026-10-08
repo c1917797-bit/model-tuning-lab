@@ -1,5 +1,23 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 14:43 UTC draft-audit checkpoint:** The optional, still
+unapproved split protocol is now documented in
+`HOTPATH_CACHE10_SPLIT_DRAFT.md`. The runner has an explicit
+`HYPIC_HOTPATH_SPLIT_USER_APPROVED=yes` main-entry gate; without it, the
+offline regression proves that no root/service is created. Independent
+`audit_hotpath_cache10split_quality.py` reuses only the independently
+verified 56 pre-intrusion candidate IDs and requires three new clean
+exact-ID roots, four matching service fingerprints, 381 scored rows per
+arm, unique request IDs, guard and exact release. It reports a *revised*
+method, not original single-service equivalence or per-request worker-hot
+coverage. Its current dry invocation fails closed at the absent first
+baseline shard root, as expected; the unchanged 127-sample old baseline
+audit still returns 381 rows / 226 correct. No NPU run has started.
+The performance controller still requires the original cache10r2 full
+quality audit; do not run performance from this draft. Await the user's
+method choice and an uncontended 0–3 window. Only the named workstream
+branch is in scope; main and unrelated containers remain untouched.
+
 **2026-10-08 14:35 UTC offline continuation:** No replacement NPU run has
 started. The proposed `cache10split` 56/71 exact-ID controller remains
 unapproved and uncommitted; do not run it until the user chooses the

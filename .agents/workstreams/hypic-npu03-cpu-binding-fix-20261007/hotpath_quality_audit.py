@@ -123,7 +123,8 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
     stop = load_json(root / arm / "service-stop.json")
     guard = load_json(root / arm / "lane-guard.json")
     require(contract["arm"] == arm and contract["mode"] == mode, f"{arm}: mode drift")
-    require(contract["sample_indexes"] == list(range(expected)), f"{arm}: sample set drift")
+    require(contract["sample_indexes"] == [item["index"] for item in cases],
+            f"{arm}: sample set drift")
     require(contract["repetitions"] == REPEATS and contract["concurrency"] == 8,
             f"{arm}: concurrency/repeat drift")
     require(contract["warm_requests_per_sample"] == 2
@@ -218,7 +219,7 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
         verified = sum(int(event.get("verified_hot_requests", 0)) for event in events
                        if event.get("event") == "complete_hybrid_repair")
         require(verified >= len(rows), f"{arm}: verified hot coverage {verified}/{len(rows)}")
-        first = load_json(root / "samples/000.json")
+        first = load_json(root / "samples" / f"{cases[0]['index']:03d}.json")
         require(not first["warm_events"]["hot_worker_pids"]
                 and len(first["first_scored_events"]["hot_worker_pids"]) == 4
                 and first["first_scored_events"]["verified_hot_requests"] >= 1,

@@ -304,6 +304,12 @@ def progress(stage: str, **details: object) -> None:
 
 
 def main() -> int:
+    if (CAMPAIGN == "cache10split"
+            and os.environ.get("HYPIC_HOTPATH_SPLIT_USER_APPROVED") != "yes"):
+        raise RuntimeError(
+            "cache10split is a revised protocol; require explicit user method "
+            "approval before setting HYPIC_HOTPATH_SPLIT_USER_APPROVED=yes"
+        )
     if quality.QROOT.exists():
         raise RuntimeError(f"attempt root already exists: {quality.QROOT}; never overwrite")
     fingerprint = quality.preflight()

@@ -85,6 +85,26 @@ class SplitSelectionTests(unittest.TestCase):
         self.assertIn("unrecognized hot-path quality campaign/arm/mode",
                       result.stderr)
 
+    def test_unapproved_run_fails_before_service_or_root_creation(self) -> None:
+        env = os.environ.copy()
+        env.update({
+            "HYPIC_HOTPATH_QUALITY_CAMPAIGN": "cache10split",
+            "HYPIC_HOTPATH_QUALITY_ARM": "no-cache",
+            "HYPIC_HOTPATH_QUALITY_MODE": "full",
+            "HYPIC_HOTPATH_QUALITY_SHARD": "0",
+        })
+        env.pop("HYPIC_HOTPATH_SPLIT_USER_APPROVED", None)
+        result = subprocess.run(
+            [sys.executable, "-B", str(HERE / "hotpath_quality_full.py")],
+            cwd=HERE, env=env, text=True, capture_output=True, check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("require explicit user method approval", result.stderr)
+        self.assertFalse(
+            (HERE.parents[3] / "hypic-npu03-cpu-binding-fix-20261007" /
+             "quality-context-41984-hotpath-cache10split-baseline-shard0").exists()
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
