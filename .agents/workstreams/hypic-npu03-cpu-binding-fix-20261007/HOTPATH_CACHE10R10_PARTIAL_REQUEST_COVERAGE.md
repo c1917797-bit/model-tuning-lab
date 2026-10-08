@@ -50,3 +50,14 @@ but victim hashes and ordinary plan rejection reasons were not emitted,
 so the exact reason remains open. The branch-local read-only diagnostic
 `diagnose_partial_hotpath_coverage.py` reports these per-request gaps
 without labeling partial samples as accepted.
+
+At 19:54 UTC, 105/127 samples were complete. The read-only partial
+diagnostic joined 315 scored request IDs to the frozen event stream:
+303 had four-worker post-repair proof, while twelve did not. The gaps are
+request-level, not a verdict on whether the complete response text is
+correct. The new diagnostic includes a `request_local_diagnostics` field
+that can correlate future per-request Prefill filter misses and planner
+unavailability. It reports no such event for r10's legacy pinned source,
+and deliberately leaves the cause `unresolved_without_matched_state_audit`.
+The separate source at `62b0d4a` is a candidate for a prospective test,
+not a retrospective explanation of these twelve gaps.

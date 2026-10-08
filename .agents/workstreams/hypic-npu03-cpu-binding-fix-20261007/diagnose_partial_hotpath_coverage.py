@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from verify_hotpath_request_coverage import (
@@ -25,7 +25,15 @@ def diagnose(rows: list[dict], events: list[dict], workers: set[int]) -> dict:
         and isinstance(event.get("request_id"), str)
     }
     proof: dict[str, set[int]] = defaultdict(set)
+    local_diagnostics: dict[str, list[dict]] = defaultdict(list)
+    diagnostic_types = {
+        "position_independent_prefill_filter_miss",
+        "position_independent_prefill_plan_unavailable",
+    }
     for event in events:
+        if (event.get("event") in diagnostic_types
+                and isinstance(event.get("request_id"), str)):
+            local_diagnostics[event["request_id"]].append(event)
         if (
             event.get("event") == "worker_hot_request_verified"
             and type(event.get("pid")) is int
@@ -66,6 +74,26 @@ def diagnose(rows: list[dict], events: list[dict], workers: set[int]) -> dict:
                 item["reason"] = "four_worker_post_repair_proof_missing"
                 item["internal_request_id"] = internal_id
                 item["observed_worker_pids"] = sorted(observed)
+                local = local_diagnostics.get(internal_id, [])
+                item["request_local_diagnostics"] = {
+                    "event_counts": dict(Counter(
+                        event["event"] for event in local
+                    )),
+                    "observed_reasons": sorted({
+                        str(event["reason"]) for event in local
+                        if event.get("reason") is not None
+                    }),
+                    "first_event": {
+                        key: local[0][key] for key in (
+                            "event", "reason", "computed_tokens",
+                            "host_computed_tokens", "output_computed_tokens",
+                            "request_in_pre_schedule_snapshot",
+                            "native_prefix_cache_enabled", "candidate_hashes",
+                            "ready_hashes",
+                        ) if key in local[0]
+                    } if local else None,
+                    "causal_status": "unresolved_without_matched_state_audit",
+                }
                 issues.append(item)
                 continue
             verified += 1

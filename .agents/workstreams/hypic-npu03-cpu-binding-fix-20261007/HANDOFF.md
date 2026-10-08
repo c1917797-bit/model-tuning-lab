@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 19:48 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 19:55 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Live remote workstream tip was 0d00bab at last read. Local 4073829 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
@@ -16,8 +16,8 @@
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
 - r10 full HYPIC is running as operation exec-00000000000016af at the root
-  in task.json. At 19:48 UTC, 96 samples were complete; 277/288 scored
-  requests had four-worker proof; eleven requests lack that proof.
+  in task.json. At 19:54 UTC, 105 samples were complete; 303/315 scored
+  requests had four-worker proof; twelve requests lack that proof.
   See HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md; no final verdict.
 - Quality, benchmark, tuning and optimization Skill cases remain partial;
   see their bounded raw-replay reports and acceptance boundaries.
@@ -73,11 +73,11 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 r10 operation `exec-00000000000016af` is the sole active controller.
 Do not restart or mix roots. It pins plugin `4429e351`; its PID namespace
 map is under `hypic-only/worker-namespace-map.json`. The read-only
-`diagnose_partial_hotpath_coverage.py` reports eleven scored proof gaps
-as of 19:48 UTC; full quality and isolation remain pending. A separate
+`diagnose_partial_hotpath_coverage.py` reports twelve scored proof gaps
+as of 19:54 UTC; full quality and isolation remain pending. A separate
 plugin worktree `/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008`
-at local commit `b4a68dc` adds fallback telemetry and a retry-reset fix,
-passes eleven focused CPU tests, and is NOT NPU-validated or mounted by r10.
+at local commit `62b0d4a` adds fallback telemetry and a retry-reset fix,
+passes twelve focused CPU tests, and is NOT NPU-validated or mounted by r10.
 Its C3/paper-complete audits still fail; r10 causality is unproven. Preserve r9;
 its 93/127 GDN miss is not a quality verdict. Old 0.9 is not pairable
 with 0.85; source fingerprint must match; r10 native prefix cache is off.
@@ -95,8 +95,8 @@ with 0.85; source fingerprint must match; r10 native prefix cache is off.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
 4. Continue r10; audit eviction gate, all request-level four-worker
-   coverage, 127×3 quality, and isolation. After terminal release, consider
-   the separate telemetry source only with fresh identity and actual-idle
+   coverage, 127×3 quality, and isolation. Diagnostics cannot retroactively
+   explain legacy r10 gaps. After release, consider telemetry only with fresh identity and actual-idle
    guard; do not claim it fixes fallback. Pair with same-source 0.85
    no-cache baseline only for a valid candidate, then matched performance.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
