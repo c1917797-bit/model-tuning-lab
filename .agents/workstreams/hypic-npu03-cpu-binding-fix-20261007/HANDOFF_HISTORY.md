@@ -1,0 +1,387 @@
+# HYPIC NPU0-3 CPU-binding repair — historical checkpoints
+
+**2026-10-08 15:09 UTC cache10r3 terminal decision:** AWMCP operation
+exec-000000000000147b exited 1 with zero completed samples and zero scored
+rows. The exact owned service became healthy at 15:09:28; the first lane
+guard sample at 15:09:30 found foreign PID 672924 on physical NPU3, with
+cgroup container ID efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6
+(cannbench_ds). It had a real NPU process, not merely a device mapping.
+The controller removed only its own service; its stop receipt proves owned
+NPU and port release. Classification is environment/isolation failure, not
+an algorithm or quality verdict. Do not resume cache10r3, pair it with a
+baseline, or count it as another quality trial. Full raw paths and SHA256
+are in HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md. The user has been asked
+about a continuous clean 0–3 window. Continue offline Skill evidence work
+without repeating completed runs; leave other containers and NPU4–7 alone.
+
+**2026-10-08 15:01 UTC active original-protocol retry:** The user clarified
+that idle physical NPU0–3 may be used even when other containers map them.
+Device mapping alone is no longer the lane gate; actual NPU processes and
+port 8223 are checked before launch, and the continuous foreign-process
+guard remains fail-closed during scored work. Other containers and NPU4–7
+must remain untouched. The mapping-only gate fix and a unique full
+single-service retry, cache10r3, were tested (26 offline tests) and
+pushed as work-branch commit 1b6dd816c138b6f61b8de0926e65ddaecb6e3fc7.
+The full HYPIC-only arm is live under AWMCP operation
+exec-000000000000147b on peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0. Its immutable result root is
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r3-full-hypic.
+At this checkpoint it is still starting the service; no scored sample or
+quality conclusion exists. Poll the operation and progress.json; do not
+launch a duplicate controller. A transient NPU2 process was observed during
+service setup before any scored request and disappeared on recheck; retain
+that observation, and rely on the guard/release receipt for scored-run
+validity. If this arm completes and independently audits cleanly, run the
+matching cache10r3 no-cache arm at the same service fingerprint. The
+optional cache10split method remains unapproved and must not be run.
+
+**2026-10-08 14:56 UTC main-version boundary:** A new read-only Git
+comparison found seven branch Skill bodies and the branch registry differ
+from current main. Two V11 rows (`chicaihong01-host-maintenance`,
+`ascend-benchmark-evidence`) are among those changed identities.
+`verify_skill_matrix.py` now emits this mismatch, and
+`MAIN_SKILL_VERSION_BOUNDARY.md` corrects its stale five-Skill/fresh-clone
+claims. V11/P14/N4 remain bounded branch-campaign statuses, not
+long-term exact-main acceptance. No NPU run or Skill/main promotion occurred.
+
+**2026-10-08 14:51 UTC per-Skill case index:** The first durable case
+`skill-cases/mst-repo-onboarding.json` and read-only
+`verify_skill_cases.py` now bind the historical fresh-clone report hash
+to the tested/current main Skill and registry blobs. The original clone is
+absent, so the case is deliberately `partial-evidence` for long-term
+portable acceptance; it does not downgrade the bounded HYPIC-campaign V
+or count as a new verified Skill. The verifier reports 1 provenance-checked
+case and 28 missing cases, with no long-term verified claim. Read
+`MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md` before generalizing V11/P14/N4.
+No onboarding rerun, NPU job, main edit or unrelated container change occurred.
+
+**2026-10-08 14:46 UTC long-goal audit:** A fresh fetch confirmed main is
+still `ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2` with 29 Skill
+entrypoints. `MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md` now separates
+the existing bounded V11/P14/N4 inventory from the still-missing per-Skill
+real-task, raw-hash, environment and regression evidence needed for the
+long-term goal. The old 11-item 2026-10-06 JSON must not be generalized to
+all 29. No status was raised, no main change or NPU run occurred. Resume
+short-term work only after the user's quality-method choice; continue
+independent per-Skill cases without redoing completed evidence.
+
+**2026-10-08 14:43 UTC draft-audit checkpoint:** The optional, still
+unapproved split protocol is now documented in
+`HOTPATH_CACHE10_SPLIT_DRAFT.md`. The runner has an explicit
+`HYPIC_HOTPATH_SPLIT_USER_APPROVED=yes` main-entry gate; without it, the
+offline regression proves that no root/service is created. Independent
+`audit_hotpath_cache10split_quality.py` reuses only the independently
+verified 56 pre-intrusion candidate IDs and requires three new clean
+exact-ID roots, four matching service fingerprints, 381 scored rows per
+arm, unique request IDs, guard and exact release. It reports a *revised*
+method, not original single-service equivalence or per-request worker-hot
+coverage. Its current dry invocation fails closed at the absent first
+baseline shard root, as expected; the unchanged 127-sample old baseline
+audit still returns 381 rows / 226 correct. No NPU run has started.
+The performance controller still requires the original cache10r2 full
+quality audit; do not run performance from this draft. Await the user's
+method choice and an uncontended 0–3 window. Only the named workstream
+branch is in scope; main and unrelated containers remain untouched.
+
+**2026-10-08 14:35 UTC offline continuation:** No replacement NPU run has
+started. The proposed `cache10split` 56/71 exact-ID controller remains
+unapproved and uncommitted; do not run it until the user chooses the
+explicitly revised multi-service protocol or the original full single-service
+protocol. A new offline regression
+`test_hotpath_cache10split_selection.py` passed 2 tests: shard0 is exactly
+IDs `0–52,54–56`, shard1 is its 71-ID complement, only the missing HYPIC
+shard may be run, and all three planned services retain physical 0–3,
+0.85/3584 MiB/10-segment identity. The existing in-flight isolation tests
+also passed 2/2; the 29-Skill structural validator and `git diff --check`
+passed. These tests are preparation, not NPU quality evidence.
+Read-only inspection of the preserved candidate event JSONL confirmed
+`explicit_segment_boundary_active` carries request IDs, whereas
+`worker_hot_path` and `complete_hybrid_repair` lack request IDs. The
+168 scored rows therefore have request-level boundary joins, but worker
+hot-path proof remains aggregate except for the serialized sentinel. Do not
+upgrade this to per-scored-request hot-path coverage. The worktree currently
+has the proposed split edits plus this test and handoff; no main Skill was
+changed and no result was promoted.
+
+**Latest 2026-10-08 14:16 UTC decision:** cache10r2 candidate operation
+`exec-00000000000013ec` is terminal exit 1 after foreign `cannbench_ds`
+processes entered physical NPU0. It preserved 56 sample files / 168 scored
+rows, all written before the first observed intrusion and passing read-only
+row/scorer/explicit-boundary audit. The whole arm is isolation-invalid;
+there is no paired quality result, no matching baseline, and no new-identity
+performance. Exact owned release passed; do not resume its root, start a
+matching baseline for this invalid arm, or affect the foreign container.
+Read `HOTPATH_CACHE10_REPAIR.md` for exact times/hashes and the pending
+method choice: explicitly revised 56/71 multi-service pairing versus a
+fresh full single-service run after exclusive NPU0-3 allocation. No new
+NPU experiment has been launched. The 56 completed sample IDs are exactly
+`0–52, 54–56`, not a contiguous 0–55 set. The read-only
+`audit_cache10r2_clean_set.py` emitted a reproducible bounded-evidence
+receipt outside the original root. The work branch remains independent of
+main; remote main advanced to `ead8081` with README workstream changes
+but the 29-Skill tree itself is unchanged from pinned `f1f37a3`.
+
+**Current 2026-10-08 14:03 UTC checkpoint:** The exact cache10r2 candidate
+operation `exec-00000000000013ec` is still running; progress persisted
+40/127 full samples at 14:02 UTC. This is not a score decision. An
+independent read-only partial audit passed 29 persisted samples / 87 scored
+rows at 13:56 UTC; do not extrapolate that fraction to 127. The same owned
+service remains on physical NPU0-3, with no matching baseline started. The
+prospective same-identity performance plan is
+`HOTPATH_CACHE10_MATCHED_PERFORMANCE_PLAN.md`; the offline-only default
+controller, six-phase entry gate, and independent audit scripts are on this
+work branch. Their offline tests do not count as live performance evidence.
+After the candidate finishes, independently audit that arm, prove exact
+release and a clean shared lane, then run only the matching cache10r2
+baseline. Full paired quality audit precedes any performance `--run`.
+
+**Active cache10r2 candidate (2026-10-08 13:22 UTC):** AWMCP operation
+`exec-00000000000013ec` passed an immediately adjacent fresh gate (no
+physical NPU0-3 process, no `cannbench_ds` staged evaluator, free port 8223,
+absent new root) and entered `service-starting`. Poll this exact operation
+and `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r2-full-hypic/progress.json`.
+Source branch commit is `2d7139e`; the only device allocation is physical
+NPU0-3. Do not restart on observation timeout or reuse this root if it
+becomes partial. This is still a shared host, not an exclusive lease; guard
+and exact-release evidence decide whether the arm is valid. No score claim
+exists before 127 samples, independent audit and a matching control.
+
+**Read-only lane monitor (completed 2026-10-08 13:19:45 UTC):** AWMCP
+operation `exec-00000000000013de` exited 0 after 40 consecutive clean
+observations from 13:09:15–13:19:45 UTC: no physical NPU0-3 process, no
+`cannbench_ds` `kernel_eval.staged_eval`, and no probe error or conflict.
+It did not start an experiment or alter containers. This is stronger than
+one empty snapshot but not an exclusive lease; a fresh ownership/port/root
+check is still required immediately before a new run. User coordination of
+an exclusive NPU0-3 window was requested but has not yet been confirmed.
+
+**Declared candidate:** `cache10r2` uses a new full-HYPIC root and the
+same frozen 127-sample/381-row, c8/2048-token quality ruler, 0.85 service
+utilization and 3584-MiB/10-segment cache. The new guard additionally
+captures Docker cgroup identity at first foreign-PID observation. CPU tests,
+29-Skill structure validation and frozen-input preflight passed. Commit/push
+the preparation before launch; if the live lane check is clean, run only
+physical NPU0-3 and preserve a new root on any failure. The active operation
+above supersedes this pre-launch checkpoint.
+
+**Latest checkpoint (2026-10-08 13:06 UTC):** AWMCP operation
+`exec-00000000000013cc` is terminal exit 1. The fresh `cache10r1` full
+HYPIC attempt from work-branch commit `ad5eab3` on physical NPU0-3 was
+isolation-invalid before its first sample: 0/127 samples and 0/381 scored
+rows. Its preserved evidence root is
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r1-full-hypic`.
+The guard observed external physical NPU3 PID 3551181 at 13:04:47 UTC; it
+made 9 observations, 4 foreign, 0 probe errors. The arm failed by 13:05:21
+UTC, about 34 seconds later, proving the new in-flight fail-fast path avoided
+the prior 30-minute wait. `/proc/3551181/cgroup` at 13:06 UTC mapped it to
+the still-running privileged `cannbench_ds` container
+`efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6`;
+its command was `python -m kernel_eval.staged_eval ... --bench-name cann ...`.
+This proves workload/container attribution, not the human who started it.
+The exact owned HYPIC container was removed and port/owned workers released;
+the shared lane remained occupied by foreign PIDs, so `lane_available=false`
+is not an owned-release failure. No NPU4-7 or unrelated container was changed.
+Do not reuse either invalid full-candidate root or infer a paper/quality
+failure. See `HOTPATH_CACHE10_REPAIR.md` for hashes. A formal matched quality
+decision still needs a clean candidate and matching 0.85 control; the old
+0.9 baseline is historical only. Coordinate an uncontended physical NPU0-3
+window before another multi-hour run. The 12-hour deadline began about
+11:33 UTC; the three-horizon drift check is in `SKILL_VALIDATION_GOALS.md`.
+
+**Latest checkpoint (2026-10-08 12:44 UTC):** The frozen cache10 full HYPIC
+candidate operation `exec-000000000000137a` ended `arm-failed`, 1/127
+samples and 3/381 scored rows. The physical NPU0-3 guard recorded 31 foreign
+observations among 199 samples, first at 12:07:41 UTC, with zero probe errors;
+the arm is isolation-invalid, not a technical HYPIC or quality verdict.
+Only the exact owned container was stopped and removed, with worker/port
+release receipt; unrelated workloads and NPU4-7 were untouched. Preserve the
+failed raw root; never restart into it. The guard controller's delayed
+response while requests were in flight was repaired on work-branch commit
+`36e2efc`; eight focused offline tests and the 29-Skill structural validator
+passed. The next `cache10r1` attempt is now terminal and described above.
+Read `HOTPATH_CACHE10_REPAIR.md` for raw hashes. The 12-hour validation
+deadline began approximately 2026-10-08 11:33 UTC. The short/medium/long
+drift check is in `SKILL_VALIDATION_GOALS.md`.
+
+**Latest 2026-10-08 11:51 UTC checkpoint:** cache10 HYPIC c8 stress
+completed 9/9 samples and 27/27 scored rows. Independent audit
+`exec-0000000000001375` passed with 58 clean lane observations and exact
+release; see `HOTPATH_CACHE10_REPAIR.md` for hashes and limits. This passes
+the changed-capacity stress gate, not full quality or a proven old-failure
+root cause. Run the missing full candidate next; reuse the old 0.9 baseline
+only as historical reference unless a matched-service comparability audit
+supports a formal pair. The Skill ledger remains V11/P14/N4.
+
+**Latest 2026-10-08 checkpoint:** reserve2 stress failed technically under
+c8 after the sentinel passed: sample 4 HTTP 500, four TP workers lacked GDN
+material, 27/27 lane samples clean, exact release passed. Read
+`HOTPATH_CACHE10_REPAIR.md` for the preserved hashes, leading cache-residency
+hypothesis, and prospectively frozen new-root test. No cache10 NPU run has
+started; neither failed stress root may be reused. This supersedes the
+reserve2-next instruction below.
+
+**Active 2026-10-08 hot-path quality checkpoint (read this first):** User's
+short/mid/long goal is active: finish explicit-boundary HYPIC quality on only
+physical NPU0-3, then map/retest the HYPIC Skill chain, then validate every
+archived main Skill with real-task evidence. Never touch NPU4-7 or unrelated
+containers. The remote independent branch
+`work/hypic-npu03-cpu-binding-fix-20261007` is the pushed work branch;
+main and the canonical dirty checkout were not changed. Read
+`SKILL_VALIDATION_GOALS.md`, `HOTPATH_FULL_QUALITY_PLAN.md`,
+`HOTPATH_PILOT2_RESULT.md`, and `hotpath_quality_full.py` before acting.
+The branch has static routing metadata for all 29 Skills and a POSIX
+regression check in `scripts/validate-mst.sh`; this is branch-only and does
+not count as behavioral acceptance or main promotion. The current ledger is
+V11/P14/N4 against pinned main `f1f37a39`; the added V is the independently
+tested fresh-clone `mst-repo-onboarding` route documented in
+`ONBOARDING_FRESH_CLONE_ACCEPTANCE_20261008.md`, not a HYPIC quality pass.
+
+Pilot-1 `exec-000000000000127c` retained its tooling failure; pilot-2
+`exec-000000000000128b` passed 3/3 scored explicit-boundary hot requests,
+four worker-hot PIDs on the sentinel, and exact release. This was protocol
+activation only, not a quality verdict. The prospective full **no-cache
+baseline** operation `exec-0000000000001293` exited 0 at 2026-10-08
+09:32:46 UTC. Independent `hotpath_quality_audit.audit_arm` rechecked all
+127 LongBench-v2 samples and 381 scored rows: 226 correct, 54 length-limit,
+zero worker-hot events, 561 clean physical NPU0-3 guard samples, and exact
+container/worker/port/lane release. Baseline contract SHA256 is
+`73e2f5ae76e5fcaf7b623791e68d5b0e62030ac6fa828534b72ae227bc542336`;
+arm-result SHA256 is
+`856b33bf897187bdc5351d63b165cb7067fca794b65eea99bf501c6411f9c898`.
+The source root is
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-full-baseline`.
+
+The original full **HYPIC-only candidate** operation
+`exec-00000000000012e3` exited 1 at 2026-10-08 09:45:30 UTC: sentinel
+hot-path activation passed, then sample 7 in the first c8 wave received
+EngineCore HTTP 500 because TP2's 1.5 MiB GDN replay would cross the 1024
+MiB free-memory watermark (1016.3 MiB observed). Only 1/127 samples and
+3/381 scored rows were persisted. Guard was 25/25 clean; exact owned
+container/worker/port/lane release passed. This is a **capacity-failed,
+incomplete-fail-fast** candidate, not a quality comparison or a negative
+paper verdict. Raw root is
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-full-hypic`.
+Read `HOTPATH_CAPACITY_REPAIR.md` for exact hashes and the frozen recovery
+gate. First 0.85 stress preflight `exec-00000000000012f9` was invalidated
+before the sentinel completed: guard saw transient foreign PID 1762147 on
+physical NPU0 at 10:06:29 UTC; 0/9 samples, 0/27 scored rows. The probe had
+no error and exact owned release passed. PID ended before attribution; other
+active jobs on this host explicitly target 0/1, so do not assume exclusive
+lane from an instantaneously empty NPU. Preserve the failed root. Next:
+establish an interference-free window and use only the new `reserve2/stress`
+root, then independently audit. If it passes, re-run both full arms at
+0.85; never reuse the valid but different 0.9 baseline. Do not lower the
+HYPIC watermark, reduce concurrency/output, restart the failed root, use
+NPU4-7, or infer whole-paper/all-Skill acceptance. Raw outputs stay outside
+Git; main and the canonical dirty checkout remain untouched.
+
+**Read-only lane wait (started 2026-10-08 10:28 UTC):** AWMCP operation
+`exec-000000000000131e` is a live host-side monitor, not an experiment or
+auto-launcher. Poll that exact handle. It waits for the known external
+CANNBench job PIDs 1382336/1382337/1382427/1382428 to exit and then for
+ten 30-second physical NPU0-3 no-process observations. At 10:25 UTC,
+NPU3 had external Python PID 1931175 whose cgroup belonged to
+`cannbench_ds`; this confirms the shared lane was actually occupied even
+though other snapshots were empty. A terminal quiet-window report is only
+permission to perform a **fresh** topology/ownership/root check, not proof
+that `reserve2` may start without rechecking. Do not restart this monitor
+on an observation timeout or stop/modify the external jobs. The monitor
+times out after two hours without mutating containers or devices.
+The invalidated first 0.85 service did log a 532,248-token KV cache and
+12.68x capacity for 41,984-token requests; this is startup capacity evidence,
+not a passed c8 replay-stress gate. See `HOTPATH_CAPACITY_REPAIR.md`.
+
+**Final clean2 checkpoint (2026-10-07 21:58 UTC; supersedes all progress checkpoints below):** Sole quality job `exec-0000000000000e15` exited 0 after all 12 units and both exact service releases. The unchanged strict quality auditor exited 1 at the four-worker hot-path gate: zero worker-hot PIDs, because the frozen natural evaluator supplies no usable segments under the frozen service configuration. The separate scoped auditor independently verified all 12 row/scorer/hash/identity units, 752/754 clean guard samples, both releases and paired natural scores while setting `formal_acceptance_claim=false`. Its SHA256 is `61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0`; read `FINAL_EVIDENCE_DECISION.md` first. LongBench-v2 totals are 224/381 in both arms; GSM8K totals are 3836/3957 no-cache and 3834/3957 HYPIC. The all-nonnegative score gate also fails, but adverse means stay within baseline three-run ranges. Physical NPU0–3 and port 8223 were released; NPU4–7 and unrelated containers were untouched. Do not restart clean2, pool attempt-1 rows, claim full-paper reproduction or merge main. A separately authorized prospective in-path quality supplement is the meaningful open experiment.
+
+**Git checkpoint:** the remote independent branch was verified at `ab89641d632aeee9a91e942d5325ee4a7dd373dd` before these final edits. Older text below describing unavailable credentials/network and older remote pointers is historical, not current. Commit, push and verify final edits only on `work/hypic-npu03-cpu-binding-fix-20261007`; the canonical checkout stays untouched.
+
+Quality activation scope: `QUALITY_ACTIVATION_SCOPE.md` records the source/configuration mismatch: the frozen evaluator supplies no explicit segment boundaries, while the HYPIC service sets `AUTO_CHUNK_TEXT=0` and has no separator token IDs. Therefore even long LongBench-v2 prompts cannot form a usable segment partition under this frozen natural-task protocol; short GSM8K prompts are additionally below the 4096-token threshold. Preserve paired natural-task scores as descriptive safety data, separate from verified worker-hot quality coverage; do not relax the original activation gate after seeing scores.
+
+Quality-coverage preflight lesson: this clean2 investigation found a frozen evaluator without explicit segment metadata paired with a service that sets `AUTO_CHUNK_TEXT=0` and no separator token IDs, making the prescribed worker-hot quality gate unreachable for the natural suite. `ascend-model-quality-evaluation` now requires source/config/request trigger proof before a long in-path quality claim; its reference and registry trigger are updated. Preserve the 12-unit natural suite as scoped safety evidence and retain its original activation failure if confirmed. This is a verified protocol-design lesson, not a final quality or full-paper pass.
+
+Final-audit split (pre-registered while clean2 G2 was 4/6, before seeing run3 scores): execute the unchanged `audit_binding_off_quality.py` first after all 12 units and both release receipts. If it rejects only the four-worker hot-path gate, execute `HYPIC_QUALITY_ATTEMPT=clean2 python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_binding_off_quality_natural_scope.py` to independently preserve descriptive natural-task scores in a separate out-of-Git JSON. This scoped script reuses frozen row/scorer and release/guard checks, catches only the explicit activation failure, and always records `formal_acceptance_claim=false`; it cannot turn the formal gate green. Script syntax/import/event-count smoke and the 29-Skill structural validator passed before the final treatment scores were available.
+
+2026-10-07 20:34 UTC checkpoint (supersedes older progress text below): clean2 HYPIC-only LongBench-v2 run1 and GSM8K run1 are independently audited, 2/6 treatment units complete. GSM8K run1 scored 1276/1319 versus paired no-cache 1278/1319; measured `usage.prompt_tokens`, sample IDs and references matched all 1319 pairs, with 3 treatment wins and 5 losses. LongBench-v2 run1 input identity was rechecked using the nested `usage.prompt_tokens` field and passed. The independent full-campaign auditor already uses that correct nested field; a preliminary manual check using a nonexistent top-level field was discarded. Remaining four treatment units, uninterrupted guard, exact release and the four-worker hot-path gate are open. This is a provisional natural-task result, not quality acceptance.
+
+2026-10-07 20:49 UTC checkpoint: HYPIC-only LongBench-v2 run2 is independently audited, bringing treatment to 3/6 units. It scored 75/127 versus paired no-cache 72/127; all 127 sample IDs, references and measured `usage.prompt_tokens` match both no-cache run2 and HYPIC run1. Pairwise: 5 treatment wins, 2 losses, 70 both correct, 50 both wrong. This reverses the run1 LongBench direction; neither single run establishes the three-repeat result. GSM8K run2 is now running in the same clean2 job. Remaining three treatment units, continuous guard, exact release and actual worker-hot quality coverage are still open.
+
+2026-10-07 21:17 UTC checkpoint: HYPIC-only GSM8K run2 is independently audited, bringing treatment to 4/6 units. It scored 1276/1319 versus paired no-cache 1279/1319; all 1319 sample IDs, references and measured `usage.prompt_tokens` match no-cache run2 and HYPIC run1. Pairwise: 2 treatment wins, 5 losses, 1274 both correct, 38 both wrong. Both GSM8K repeats so far have a small negative natural-task delta; do not finalize mean accuracy, length-limit or hot-path verdict before run3, full guard/release and activation audit. LongBench-v2 run3 is next in the unchanged order. Remaining two treatment units are open.
+
+2026-10-07 21:31 UTC checkpoint: HYPIC-only LongBench-v2 run3 is independently audited, bringing treatment to 5/6 units; GSM8K run3 is running. It scored 75/127 versus paired no-cache 74/127, 6 sample wins and 5 losses, with exact six-unit repeated/paired input identity. Across three LongBench repeats both arms total 224/381 correct, so mean accuracy is tied at 58.792650918635% (floating-point delta ~0). The easy-category mean is -0.775194 percentage points and the hard-category mean +0.396825; the 2048-length-limit rate is -0.787402 points. The easy adverse mean remains inside the baseline three-run range; under the predeclared score ruler the LongBench portion is not an all-nonnegative pass. These are descriptive natural-task results pending GSM8K run3, uninterrupted treatment guard, release and formal hot-path gate.
+
+Paper/architecture boundary: `PAPER_ARCHITECTURE_FIT.md` retrospectively verifies this Qwen3.5-hybrid checkpoint and the plugin's C1/C2 text hot-reuse fit. Read-only source audits pass the bounded hot-reuse and Qwen3.5 single-instance scopes, while paper-complete and upstream-complete intentionally fail on missing distributed C3 and other breadth. Even if paired quality passes, report a bounded C1/C2 piercing, never all-paper implementation. The 29-Skill ledger now has 6 V, 18 P and 5 N; retrospective fit/ingestion are partial, not prospective successes. `BOUNDARY_AUDIT.md` records the one-adapter repository audit and why runtime-skill separation is not applicable here; it does not audit external product deployments.
+
+Experience ingestion: the verified dual-audit failure mode (bounded C1/C2 PASS, paper-complete FAIL for C3.1-C3.6) now adds a scoped derivative-coverage rule to `paper-ingestion` and matching registry triggers. Future paper migrations must preserve both positive subset evidence and explicit full-scope missing IDs, and must label retrospective fit checks honestly. This is a source-scope lesson, not a quality verdict.
+
+Shared-host quality isolation lesson: the observed attempt-1 external NPU3 collision is now reflected narrowly in `ascend-model-quality-evaluation/references/quality-test-contract.md` and its registry trigger. A multi-hour paired suite needs in-run physical-PID ownership checks; any foreign PID/probe gap invalidates isolation even if start/end snapshots are clean. Keep exact-owned release separate from whole-lane availability, preserve contaminated rows, and never stop an unrelated workload without owner authorization. This is a verified failure-handling lesson, not evidence that clean2 quality has passed. `scripts/validate-mst.sh` passed all 29 skills after the edit.
+
+Current authoritative checkpoint: quality attempt 1 ended at 2026-10-07 16:52:55 UTC with an environment-isolation failure after six independently audited no-cache units; HYPIC-only quality never started. An unrelated `cannbench_ds` process appeared on physical NPU3 before the final GSM8K unit ended. `QUALITY_RESOURCE_CONFLICT.md` preserves the evidence and the potential-contamination boundary. A new full 12-unit attempt started at 2026-10-07 17:10 UTC in `quality-context-41984-clean2` using the same scientific protocol; AWMCP operation `exec-0000000000000e15` is the active handle. The clean2 no-cache arm completed and released at 19:33:48 UTC: all six units passed independent row/scorer/hash audits, and per-sample prompt-token counts match across all three repeats of each dataset. Its exact container `f7ab9fba3f5260d7a6a824a91da8efbf5e0f9767bd17ff4d598ff6336807ce6b` had worker PIDs 585850/585851/585852/585853 on physical NPU0/1/2/3; 752 uninterrupted lane-guard samples had no foreign PID or probe error. Independent service-receipt audit passed exact-owned container/PID/port release and whole-lane availability. This is a valid clean2 no-cache quality denominator, not yet a paired quality verdict. The controller launched HYPIC-only container `b57f81573534e119c375cbbeb300ca81918f378cf718120ab6bd4e47a56036da` with physical NPU0/1/2/3 worker PIDs 1965788/1965789/1965790/1965791 at 19:40:13 UTC and completed an independently audited LongBench-v2 run1 (74/127 correct versus 78/127 no-cache, paired inputs identical, 2 sample wins and 6 losses). GSM8K run1 started at 20:04:36 UTC. Plugin-build and scheduler events are present; four distinct worker hot-path events, remaining five treatment units, uninterrupted guard and release remain to be proven. The single LongBench run is not the three-repeat quality verdict. Do not manually launch a second workload. Attempt-1 data remains historical and is not pooled. Historical progress entries below are superseded by this checkpoint.
+
+Clean2 audited no-cache unit (whole-arm guard and release later passed): LongBench-v2 run1 127/127, 78 correct (61.41732283464567%), 10 length-limit responses, 135143 completion tokens. Independent summary SHA256 `7423c40c22515084967cd38eb9579a9b675097d80499d274f10aa6a0d0077e2e`, details SHA256 `812a4281c167327ae69b96766e550f58ffb905c889c60bc0a649850ec5cc5810`, receipt SHA256 `f8859e0cc004052252c010fb72917b1f61f2440545785f49d3dcadb84f90696e`. Source root `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2` remains outside Git.
+
+Clean2 audited unit (same verified no-cache arm): GSM8K run1 1319/1319, 1278 correct (96.89158453373769%), 10 length-limit responses, 495257 completion tokens. Independent summary SHA256 `edc09f01f8c5a5a13b064d2c277b653d26562194eaa9cadb4f3801102efdef32`, details SHA256 `1d2e7710a0371a0b77c6c12dabfe7d375c859b9d8e699b0f4971f3f81efb16db`, receipt SHA256 `260b551915267f9669c3e8d62f9efa6ec1c1339230b138f084cbe8e9edf7b9a1`.
+
+Clean2 audited unit (same verified no-cache arm): LongBench-v2 run2 127/127, 72 correct (56.69291338582677%), 18 length-limit responses, 140153 completion tokens; per-sample prompt-token identity matched run1. Independent summary SHA256 `f9b2f3a12b1a4007c6cedac88a673e11413c2bb68e951a72109517448a61e0f2`, details SHA256 `58d00793efa782b88ad878ef48623f93ad013a175df785ae978cfaec3c4b024d`, receipt SHA256 `62a2a61ce7bfd663115da8922c906b0e32125201bffea17d041c3a060c6c0771`.
+
+Clean2 audited unit (same verified no-cache arm): GSM8K run2 1319/1319, 1279 correct (96.96739954510993%), 7 length-limit responses, 488504 completion tokens; per-sample prompt-token identity matched run1. Independent summary SHA256 `8747c3f2d404a50c7d11619225ef2cc704d9b77a8dadd5a4ca57ddb0d2b25f67`, details SHA256 `8e2fbb8b51470a5fc4da15c468ba534b3099d2f9b18f8872a7fc1b8e9be9295d`, receipt SHA256 `e1cd524ebf5ce970064f2a5d1f4763e96c8e2af618f6501409b7e80ec87d796c`.
+
+Clean2 audited unit (same verified no-cache arm): LongBench-v2 run3 127/127, 74 correct (58.267716535433074%), 21 length-limit responses, 141100 completion tokens; per-sample prompt-token identity matched runs1-2. Independent summary SHA256 `cce1c44e3395905e7b47304a0d7ca9e107e17ead01c1c6c56071d20f84df9c31`, details SHA256 `b8b86ec783181c89ab9bd0e5d7a44e66298eeec4719a4b79153058098bbc9e8e`, receipt SHA256 `3d64849836ea4026e37be53145147781eacf38bef9a6402e61a2bfee471c05c1`.
+
+Clean2 audited unit: GSM8K run3 1319/1319, 1279 correct (96.96739954510993%), 10 length-limit responses, 493388 completion tokens; per-sample prompt-token identity matched runs1-2. Independent summary SHA256 `6248a1b4307533cbb4acc1db684ecb5dbdb845cc13163b82d53135b287ebf227`, details SHA256 `6be5b2ee16ba239bd6c226e35b3fd007512b0dd5c6ca658e5279b7d5251d4c58`, receipt SHA256 `3edb033c7d9c90f5b10df37369a0b9821a95c6c5f00c47c1f7d02361985a55bd`. No-cache arm guard SHA256 `b27c447b408e0a40f896712bc60134b4cc622a06ec4bd3db21476826d3cbd912` (752 clean samples), service-stop SHA256 `375189bd0014739e7c2b4cc8cbb7b0906e4c8faf001b56eb0631d8ddf6128fe9`; independent service receipt audit passed.
+
+Clean2 HYPIC-only audited unit (provisional until treatment lane guard/release and all repeats pass): LongBench-v2 run1 127/127, 74 correct (58.267716535433074%), 15 length-limit responses, 136242 completion tokens. Exact paired prompt-token/sample/reference identity and frozen one-switch environment passed; versus no-cache run1, 2 sample wins and 6 losses. Independent summary SHA256 `04b7ee273207ff7ddc4edc130a760206093356f55b4a2b783b7e748b28ce41eb`, details SHA256 `3d9b43ec967b4571f6566e7aeebb229922ed93aba9a84f75c458fc5b67d56592`, receipt SHA256 `68a531ef463fd7c614dbbb6af1c24f5fd5101fb1ef0f4f626522a9fe77484061`. This one-run difference lies within the no-cache three-repeat LongBench range; no final quality verdict.
+
+Clean2 HYPIC-only audited unit (provisional until treatment lane guard/release and all repeats pass): GSM8K run1 1319/1319, 1276 correct (96.73995451099317%), 10 length-limit responses, 491820 completion tokens. Exact paired sample/reference/measured prompt-token identity passed; versus no-cache run1 1278 correct (96.89158453373769%), 3 sample wins, 5 losses, 1273 both correct and 38 both wrong. Independent summary SHA256 `a985b1155def61b18d9c88860a211d033cfd482c40be69f3c7900ebd68b06683`, details SHA256 `db73e330a01545103328f76bb4c5808cec0ef549c267968fe4d8fc5aa90af4e4`, receipt SHA256 `6f9bc52195fa674b6e13d62a4f62542c17ef6c98f8fbbc2849ca08774fe5f767`. The one-run -0.151630 percentage-point delta is descriptive only; no three-repeat verdict or hot-path coverage claim.
+
+Clean2 HYPIC-only audited unit (provisional until treatment lane guard/release and all repeats pass): LongBench-v2 run2 127/127, 75 correct (59.05511811023622%), 16 length-limit responses, 137918 completion tokens. Exact paired and repeated measured prompt-token/sample/reference identity passed; versus no-cache run2 72 correct (56.69291338582677%), 5 sample wins, 2 losses. Independent summary SHA256 `7c9bd2fabaeddcb54c2446e1d9049bef1cd317118e7d1622d1544bab25a375c6`, details SHA256 `bf8c46f7a32c9a6e36edda137f015f66ff1fafb38a971e9ea34e83c12243b199`, receipt SHA256 `3bdb5299c0d59e870df20ec131b73a038afb7be0de3bee39814766f41277f0a3`. The one-run +2.362205 percentage-point delta is descriptive only.
+
+Clean2 HYPIC-only audited unit (provisional until treatment lane guard/release and all repeats pass): GSM8K run2 1319/1319, 1276 correct (96.73995451099317%), 10 length-limit responses, 494004 completion tokens. Exact paired and repeated measured prompt-token/sample/reference identity passed; versus no-cache run2 1279 correct (96.96739954510993%), 2 sample wins, 5 losses, 1274 both correct and 38 both wrong. Independent summary SHA256 `4620444e092ef587dd9c2c405eddc07bf9452005663e4e77a592a8552f4d275e`, details SHA256 `9b751b524f43d4059c60e216577167667a67da8170d6d826b6a8db5ea488c6a1`, receipt SHA256 `527ed2ae8ce42f46de3d877766b3661b74acff882daa47e3e0e49194c9c901c3`. The one-run -0.227445 percentage-point delta is descriptive only.
+
+Clean2 HYPIC-only audited unit (provisional until treatment lane guard/release and all repeats pass): LongBench-v2 run3 127/127, 75 correct (59.05511811023622%), 15 length-limit responses, 137327 completion tokens. Exact input identity across all six LongBench units passed; versus no-cache run3 74 correct (58.267716535433074%), 6 sample wins and 5 losses. Independent summary SHA256 `c082222058fac9e902cf7cec2913df755440fc576e6db1dd60a0d418a371581c`, details SHA256 `f65aa2b1131615fb684a53b3909dca4419f83a4ab0da2384a292da8ae35f629d`, receipt SHA256 `e2d7710e53806407163fea24d1184cfb005df205a7e387f3df42f87294b549a9`. The one-run +0.787402 percentage-point delta is descriptive only.
+
+The evidence-classified `PIERCING_REPORT.md` is a **progress** report, not a final one. It incorporates all six audited performance units and labels the first quality attempt as failed-isolation evidence rather than a control arm. Upgrade it only after clean2 paired quality, activation, exact release and full audit have been verified.
+
+The user authorized continued use of physical NPU0-3 until the full quality campaign finishes, beyond the earlier one-day target. The independent branch was last **confirmed** pushed through `2fe944d`; local HEAD contains later clean2 evidence and is not confirmed remote. HTTPS push operation `exec-0000000000000e6d` exited 128 for unavailable noninteractive credentials; a second bounded push and read-only `ls-remote` both timed out, so their remote outcome is unknown. A root-owned `.netrc` exists with mode 0600 and a GitHub entry, but a status-only authenticated `https://api.github.com/user` check returned HTTP 401; its credential is invalid. No credential content was read or printed. There is no Git credential helper; `gh` is absent, and a bounded read-only SSH probe timed out. The user has been asked asynchronously to restore GitHub write access through a secure channel, not chat. Keep local commits and NPU evidence collection, then recheck the remote ref before any later push; never print or embed a credential in chat, shell arguments, or Git.
+
+Quality audit hardening: `audit_binding_off_quality.py` verifies that the frozen no-cache/HYPIC service environments differ only in `VLLM_ASCEND_HYPIC_ENABLE=0/1` (apart from evidence output path), checks pinned prompt-template SHA, cross-repeat per-sample prompt-token identity, token accounting and 2048-token truncation semantics, and requires HYPIC plugin build, four **distinct worker PIDs** with hot-path events, and scheduler activation in the treatment evidence. A four-event/single-worker false positive is rejected by `test_quality_activation_audit.py`; all seven activation/lane-guard offline tests passed, and the helper recognized four distinct PIDs in the existing real performance evidence. The frozen-pair seam and completed-unit preflight passed; treatment quality evidence cannot be checked until that arm actually runs. Do not infer activation from the container name alone. The first two complete binding-off no-cache quality units took 23.86 and 28.58 minutes; the revised 6-10 hour whole-campaign estimate is a planning range, not a deadline or validity gate.
+
+Attempt-1 quality milestones (all six units independently audited for row integrity, but the arm is **invalid as a clean paired denominator**):
+
+| No-cache unit | Valid | Correct | Length-limit | Wall s | Summary SHA256 | Details SHA256 | Receipt SHA256 |
+| --- | ---: | ---: | ---: | ---: | --- | --- | --- |
+| LongBench-v2 run1 | 127/127 | 76 | 15 | 1431.60 | `13f2e115d02fd65453e8e2ed7a96a488c8772301fd624ba2d40d92de69825032` | `aef4967608e97f11515ddc45ed543d3ca70eb591d5ab4d6216b59a2f0be99391` | `393b1147e140afa5cfda642c9f6d1db01ae77597c19433d8215a5b9f20a89b89` |
+| GSM8K run1 | 1319/1319 | 1276 | 10 | 1714.67 | `527deb4f759ca99b152df261f8e4dd12f7308a9ff16677a2b001d766127048fb` | `abd2056eccc4fb3e9cdbfde6ddadcfdb7edbc3405965c6b368d3208194c96614` | `0fa4bc2a88e0456d21fb70ae76fce1e91b150b28edbc12b588b9e9e7638b0610` |
+| LongBench-v2 run2 | 127/127 | 75 | 15 | 811.11 | `0733143fdf28ba7f47ae43c55d28bcaae550d7753bdbf061a9dde512061b5192` | `553275e5d955f9380fead3c8e4c46ac4d07f738b31361ee3238bcdfeba2c1a0f` | `15959b772a862a0f95f50467490f64fb3e0fbc4c929f77e10dc7bbd9cac3153c` |
+| GSM8K run2 | 1319/1319 | 1275 | 11 | 1717.19 | `3f993023c36b58624dd182d03a914d481085f249d05839e99795eb6ecda59d6f` | `bf294e1e3621a42ebd62ba574b28efdef1e61e4b1d0300ddd0910be74981f470` | `c59a49821f21445a151c5a6250d9c0fd8235b11f9f8b9498ec8786bbd268367a` |
+| LongBench-v2 run3 | 127/127 | 73 | 18 | 836.25 | `7da1743b8ff7b3e132135579822b6f42ee24d8916db60d9a3aff1f5f0ea2e248` | `5fd114b635e74e3e223180d2ec7d0bb0384960578f6c76bc2da1c03e7e885a45` | `b77bf09cb7dbd03f62f9487c46de15d06d7060b55f457b08756cd965badf33e3` |
+| GSM8K run3 | 1319/1319 | 1277 | 9 | 1687.13 | `c8f2a7225212bd7d1d76fe1cc4819ca3e1d9f838e2bd51955ef99960ef21be98` | `c1c938b804a23d92bef3eb8ec33a333a13d6f4e1b703803a25018ab99b7adace` | `20720702374428bcbde0d310e298f16fe41f3389d7e4e59408025a2054d50ef9` |
+
+Across all three LongBench-v2 and GSM8K attempt-1 repeats, per-sample prompt-token counts match. Operation `exec-0000000000000c6d` is terminal exit 1, not active. The external NPU3 process invalidates the uninterrupted-isolation gate despite valid row/scorer arithmetic. Do not infer a HYPIC quality delta or final acceptance from this attempt. The recovery controller requires `HYPIC_QUALITY_ATTEMPT=clean2`; its unique root/container names and 10-second lane guard are in `binding_off_quality.py`. Offline guard tests and preflight passed; recheck live 0-3/port ownership before starting.
+
+Experience ingestion from the verified performance phase: (1) when a shared Decode floor appears, test a supported runtime switch in both same-lane control and HYPIC arms before attributing the gap to the paper technique; destination `ascend-performance-optimization`; (2) when auditing P95, first match the benchmark's nearest-rank estimator rather than widening tolerance for a linear-interpolation false mismatch; destination `ascend-benchmark-evidence`; (3) when a one-wave smoke lacks a formal-only hot-path event, preserve its original failure and scope the smoke to core mechanism while keeping formal gates strict; destination `ascend-benchmark-evidence`. `.agents/skills.registry.yaml` has matching triggers. Verification: `scripts/validate-mst.sh` passed 29 skills, `git diff --check` passed, and the six-unit raw performance auditor passed. These are performance/tooling lessons; quality outcomes are still pending.
+
+Superseded campaign handle: AWMCP operation `exec-0000000000000c6d` is terminal exit 1 from the attempt-1 external NPU3 collision. Do not poll it as an active campaign or reuse its control arm. The active clean2 handle is `exec-0000000000000e15`; watch `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-clean2/campaign-status.json`, `no-cache/status.json`, then `hypic-only/status.json` and the operation state. Controller runs six LongBench/GSM8K units per arm, verifies each unit, samples physical NPU0-3 every 10 seconds for foreign PIDs, releases exact owned resources between arms, then requires whole-lane availability. If it fails, inspect the first error, lane guard and release receipt; preserve raw rows and do not silently mix attempts. The independent quality auditor `audit_binding_off_quality.py` must run after all 12 units and both release receipts; no quality verdict yet. A thread-scoped continuing Goal is active, so resume against this evidence rather than declaring completion early.
+
+Independent six-unit performance audit passed. The auditor recomputed all 240 raw-request weighted TPOT and nearest-rank P95 values, verified frozen benchmark/service identity, SHA256 records, complete HYPIC hot-path activation, and exact container cleanup. Report `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-independent-audit.json` SHA256 `de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1` reports the preregistered within-lane paper-effect performance gate passed. It explicitly says quality not measured. Next start `binding_off_campaign.py --run` only after a fresh free-lane check; it will run no-cache then HYPIC-only quality, six 2048-token units per arm, and stop/release the exact arm container between arms. Use physical NPU0-3 only.
+
+Latest repeat 3: operation `exec-0000000000000c37` passed 40/40 x 1024, zero failures, full HYPIC hot path, weighted TPOT 60.2237 ms/token, TPOT P95 81.7488 ms, TTFT P95 43.176 s, throughput 166.8247 token/s. Exact container was removed and NPU0-3/port released. Across three fresh HYPIC binding-off lifecycles, weighted TPOT is 60.2596/60.1658/60.2237 ms/token; median 60.2237 versus three-run no-cache binding-off median 77.5641, a within-lane HYPIC saving of 17.3404 ms/token (22.36%). TTFT P95 median saves 37.566 s. This passes the preregistered performance paper-effect thresholds but is not yet a full-paper/adoption conclusion. Next: run independent six-unit performance audit, then start the authorized matched 2048-token paired quality campaign on physical NPU0-3 only. The quality campaign launcher is `binding_off_campaign.py`; it runs complete no-cache then complete HYPIC-only arms and halts on any invalid unit. No quality service has started yet.
+
+Latest repeat 2: operation `exec-0000000000000c04` passed 40/40 x 1024, zero failures, full HYPIC activation, weighted TPOT 60.1658 ms/token, TPOT P95 81.7203 ms, TTFT P95 43.210 s, throughput 166.9332 token/s. This differs from the first formal screen by 0.16% TPOT. The exact container was removed and NPU0-3/port released. Next: one more fresh unchanged repeat, then independent performance audit. The matched 2048-token quality plan and controller are in `QUALITY_PLAN.md` and `binding_off_quality.py`; only CPU-side preflight has run, no quality service yet.
+
+Latest: HYPIC-only binding-off formal screen `exec-0000000000000bc2` passed 40/40 x 1024, zero failures, complete hot-path evidence, weighted TPOT 60.2596 ms/token, TPOT P95 81.8090 ms, TTFT P95 43.280 s, throughput 166.6444 token/s. Exact owned container was removed and NPU0-3/port released. Against the already completed three-run no-cache binding-off median, this one screen saves 17.3045 ms/token and 37.496 s TTFT P95; it is not yet a repeated paper-effect result. Next run repeat2 and repeat3 unchanged, then independently audit all six binding-off performance artifacts. The complete matched 41984-context/2048-token quality gate remains pending.
+
+Current continuation (2026-10-07): HYPIC-only binding-off smoke operation `exec-0000000000000b82` produced an exact frozen 32768-token semantic-canary token-ID match and 4/4 x 128 valid outputs. Core scheduler, materialization, attention/GDN, and worker hot-path events were present. The original launcher exited 1 only because the full 40-request `--require-hot-path` gate demanded `native_decode_scheduler_passthrough` inside a one-wave measured window; that event occurred during warmup. This is a retained tooling/gate-scope failure, not an algorithm verdict. Offline `audit-smoke` of original raw files passed; exact container and port were released. The launcher now keeps full hot-path strictness for formal traffic while checking the smoke's core events. Next: HYPIC-only 40 x 1024 c16 screen, then two fresh repeats only if it passes. The separate complete 41984-context/2048-token paired quality gate is still pending.
+
+Branch `work/hypic-npu03-cpu-binding-fix-20261007` starts from diagnostic commit `87647ac`. The diagnosis in `../hypic-npu03-comm-root-20261007/REPORT.md` identified enabled automatic CPU binding as the major Decode floor cause, but did not isolate the binding sub-operation. This successor tests the exact supported `enable_cpu_binding=false` configuration as an opt-in repair, without editing the official image.
+
+Only physical NPU0-3 may be used. NPU4-7 are reserved; do not touch the existing `agentgpu-910b4-qwen35-4b-v0` sleep container. The canonical checkout is dirty with unrelated DAMP work, so this independent clone is the repair checkout. The frozen no-cache 40 x 1024 baseline is at `/cache/cch/hypic-qwen36-e2e-2048-20261006/no-cache`; hashes and thresholds are in `../../experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml`.
+
+Current stage: opt-in launcher committed and pushed; the first real NPU0-3 smoke passed. Operation `exec-0000000000000ab7` used the same image/source/model/TP4/AIV/graph-on/cpuset as the frozen no-cache arm with only `enable_cpu_binding=false`. Parsed activation appeared; no binding plan appeared. The 32768-token deterministic semantic canary exactly matched frozen response token IDs and text SHA. Unprofiled 4/4 x 128 fixed-output requests completed with weighted TPOT 141.0485 ms/token. Exact test container was removed and NPU0-3/port 8223 released. Artifacts and SHA256 are in the experiment YAML. This is smoke/mechanism evidence, **not** the frozen 40 x 1024 service gate or complete 2048-token paired quality verdict. No production configuration was changed.
+
+Next: run the predeclared 40 x 1024 c16 no-cache screen only after live ownership recheck. If it passes, repeat the formal candidate matrix and then complete the paired quality contract before any production adoption. The existing sleep container and NPU4-7 remain untouched.
+
+Screen update: operation `exec-0000000000000ad7` passed on physical NPU0-3 with the same pinned service and only the binding-off switch. All 40/40 requests produced exactly 1024 tokens, zero errors. Unprofiled weighted TPOT was 77.5641 ms/token versus the frozen three-run no-cache mean 413.0985 ms/token (81.22% lower); throughput 117.2930 versus 29.4753 token/s mean (3.98x), duration 349.2109 versus 1389.8696 s mean (74.87% lower), TTFT P95 80.775 s. The exact container was removed and NPU0-3/port 8223 released. Hashes are in the experiment YAML. This is a **single formal-protocol candidate screen**, not a three-repeat acceptance or quality verdict. The runner now supports `repeat2` and `repeat3` with the identical serving command and benchmark protocol. Next: execute those two fresh lifecycles, then assess dispersion and quality feasibility.
+
+Repeat 2: operation `exec-0000000000000af8` completed 40/40 exact 1024-token outputs, zero failed, weighted TPOT 77.8308 ms/token, TPOT P95 118.6511 ms, TTFT P95 81.807 s, throughput 115.3961 token/s, duration 354.9513 s. This is within 0.34% TPOT of the screen. Exact container was removed and owned NPU0-3/port released. Artifact hashes are in the experiment YAML. Next: repeat3; no acceptance before the third comparable run and the independent quality gate.
+
+Repeat 3 and decision: operation `exec-0000000000000b0f` completed 40/40 exact 1024-token outputs with zero failures; weighted TPOT 77.0052 ms/token, TPOT P95 117.8840 ms, TTFT P95 78.932 s, throughput 117.3246 token/s, duration 349.1168 s. Three fresh candidate runs have weighted TPOT 77.5641/77.8308/77.0052 ms/token, median 77.5641 versus frozen NPU0-3 no-cache median 410.8960 ms/token (81.12% lower). Median of per-run TPOT P95 fell 447.0755 to 117.8840 ms (73.63% lower); throughput median rose 29.7427 to 117.2930 token/s (3.94x); TTFT P95 median did not regress. All three run contracts have identical serving command/image/source/benchmark/cpuset/device mapping, and every exact test container was removed. The independent final check found no NPU0-3 process and port 8223 free. This is a passed **no-cache Decode performance repair** for the tested lane and protocol, classified `partial-component`, not production adoption. The full paired 2048-token quality ruler and HYPIC-enabled formal run are not complete, and the upstream CPU-pool algorithm remains unchanged. Keep the launcher opt-in; do not change the canonical shared service or main on this evidence alone.
