@@ -26,10 +26,21 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 14)
-        self.assertEqual(report["skills_without_case"], 15)
+        self.assertEqual(report["cases_with_verified_provenance"], 15)
+        self.assertEqual(report["skills_without_case"], 14)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 12, "verified": 2})
+                         {"partial-evidence": 13, "verified": 2})
+
+    def test_reporting_case_does_not_promote_progress_to_final(self) -> None:
+        path = cases.CASES / "paper-to-ascend-reporting.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"paper-to-ascend-reporting"})
+        self.assertEqual(skill, "paper-to-ascend-reporting")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["r12_four_worker_hot_responses"], 52)
+        self.assertFalse(item["observed"]["current_same_identity_no_cache_control_complete"])
+        self.assertFalse(item["observed"]["final_colleague_style_report_ready"])
 
     def test_reproduction_case_preserves_failed_hotpath_gate(self) -> None:
         path = cases.CASES / "paper-to-ascend-reproduction.json"

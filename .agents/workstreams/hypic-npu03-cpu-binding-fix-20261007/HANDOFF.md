@@ -2,16 +2,16 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 21:47 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- Live remote workstream tip was 0d00bab at last read. Local 2f22127 and
-  later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
+- Updated: 2026-10-09. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Remote workstream tip last observed as 0d00bab; local work through 17aa9fc
+  and later is NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
 - Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 12 partial, 15 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 13 partial, 14 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
@@ -32,7 +32,7 @@
 - r12 stress: 19/19 samples, 57/57 responses, 52/57 four-worker proof;
   279 clean guard probes and exact release. r11's 79:2/79:3 gaps are hot
   here, but five others missed; HOTPATH_CACHE10R12_TERMINAL_AUDIT.md has no paired verdict.
-- Quality, benchmark, tuning and optimization Skill cases remain partial;
+- Quality, benchmark, tuning, optimization and reporting cases remain partial;
   see their bounded raw-replay reports and acceptance boundaries.
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median

@@ -1,0 +1,62 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "paper-to-ascend-reporting",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Audit the actual HYPIC progress and terminal reports against exact-main evidence-bound reporting rules; distinguish current r12, historical same-lane performance, historical natural quality and unmeasured final pair",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "7902b3f9c96ebd6b77a35b328333ad3834fe4a9f",
+  "tested_reference_git_blob_oid": "40582e499b5589893524df3b74aabfeebe040f8c",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "Read-only reporting audit on chicaihong01; historical c16/1024 performance, clean2 max2048 natural quality and current r12 c8/max2048 explicit-boundary stress are separate experiment identities; no NPU used by this case",
+  "observed": {
+    "historical_six_performance_units_valid": true,
+    "historical_weighted_tpot_saved_percent": 22.35616395806199,
+    "natural_quality_units_valid": 12,
+    "natural_distinct_worker_hot_pids": 0,
+    "r12_scored_responses": 57,
+    "r12_four_worker_hot_responses": 52,
+    "r12_guard_samples_clean": 279,
+    "existing_piercing_report_contains_superseded_progress_snapshots": true,
+    "current_same_identity_no_cache_control_complete": false,
+    "current_full_paired_max2048_quality_complete": false,
+    "current_matched_performance_and_profile_complete": false,
+    "final_colleague_style_report_ready": false,
+    "case_integrated_in_main": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_REPORTING_CASE_20261009.md",
+      "sha256": "6dcfc46ce6fbfd34b7f573b121c37665e24302f9339a5b01cb7ff6a98cd5c360"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reporting_case.py",
+      "sha256": "9140684a5c2eaa1703871512ba8f646149da4995b6e195e87c147dea3883363f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PIERCING_REPORT.md",
+      "sha256": "5f5729cfd4a56001453449147f486a55431293bf6c36af71d8e3f66545b081d4"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/FINAL_EVIDENCE_DECISION.md",
+      "sha256": "29d6f4467720fd70e9e0b003c5ab17be27054485a3c17d8fbc6de6c61b4afc2f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
+      "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    }
+  ],
+  "external_raw_receipts": {
+    "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1",
+    "natural_quality_audit_sha256": "61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0",
+    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "The case demonstrates evidence classification and fail-closed progress reporting on a real HYPIC experiment. It does not verify the Skill's final-report completion gate, because r12 lacks its matched no-cache arm, full paired quality and repeated matched performance/profile. The older piercing report is retained as a superseded progress snapshot, not current terminal truth.",
+  "next_gate": "After prospective claim-rule freeze and a complete actually-idle NPU0-3 pair, write one final report with exact executed/recovery commands, repeated performance, paired quality, activation/profile, raw hashes and release receipts, then rerun independent reporting audit.",
+  "drift_trigger": "Revalidate when main Skill/template/registry or report/evidence hashes change, or when a new same-identity pair provides final quality/performance evidence."
+}
