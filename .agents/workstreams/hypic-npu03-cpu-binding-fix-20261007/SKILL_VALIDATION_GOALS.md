@@ -11,9 +11,11 @@ favorable HYPIC score. The medium HYPIC Skill-chain milestone still needs a
 full in-path quality decision and matching performance identity. The cache10
 127-sample candidate was invalidated by shared-lane interference after only
 1/127 samples; its prior 9-sample/27-row stress remains valid for that
-narrower gate. The active short gate is to regression-test in-flight guard
-fail-fast, obtain an uncontended NPU0-3 window, and declare a fresh-root
-candidate and matching control decision. Reuse the audited 0.9 no-cache
+narrower gate. A fresh cache10r1 candidate was also invalidated at 0/127
+by a `cannbench_ds` process on physical NPU3. Its prompt guard abort and
+exact owned release passed the execution-control repair gate. The active
+short gate is now an uncontended NPU0-3 allocation before declaring another
+fresh-root candidate and matching control decision. Reuse the audited 0.9 no-cache
 baseline only as historical reference because this candidate's 0.85 serving
 identity differs; do not repeat it merely for a newer timestamp. Keep
 per-request worker-hot attribution open until evidence can join workers to

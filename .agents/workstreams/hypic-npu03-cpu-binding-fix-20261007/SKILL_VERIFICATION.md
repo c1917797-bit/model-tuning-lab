@@ -1,5 +1,14 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
+2026-10-08 13:06 UTC: fresh cache10r1 full candidate
+`exec-00000000000013cc` was isolation-invalid at 0/127 samples. The guard
+detected physical NPU3 PID 3551181 from `cannbench_ds`; the new in-flight
+fail-fast path stopped only the identity-proven owned service about 34
+seconds after first detection. Owned container, workers and port were
+released; the foreign lane remained busy. This verifies the bounded guard
+repair but supplies no quality score or whole-paper acceptance. The ledger
+remains V11/P14/N4; do not count this as a new model-quality verification.
+
 2026-10-08 11:51 UTC: the prospectively declared cache10 stress completed
 9/9 samples, 27/27 scored rows, 58 clean physical-lane observations, and
 exact release; independent audit `exec-0000000000001375` passed. See

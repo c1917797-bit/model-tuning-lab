@@ -1,19 +1,28 @@
 # HYPIC NPU0-3 CPU-binding repair
 
-**Active fresh candidate (2026-10-08 12:56 UTC):** AWMCP operation
-`exec-00000000000013cc` is running `cache10r1` full HYPIC from work-branch
-commit `ad5eab3` on physical NPU0-3. Its new immutable evidence root is
+**Latest checkpoint (2026-10-08 13:06 UTC):** AWMCP operation
+`exec-00000000000013cc` is terminal exit 1. The fresh `cache10r1` full
+HYPIC attempt from work-branch commit `ad5eab3` on physical NPU0-3 was
+isolation-invalid before its first sample: 0/127 samples and 0/381 scored
+rows. Its preserved evidence root is
 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r1-full-hypic`.
-The start-time preflight verified 127 samples, three repeats, c8, 2048-token
-cap, 0.85 GPU utilization, 3584-MiB/10-segment material cache, absent new
-root, free port 8223 and no NPU0-3 process at that instant. This is only a
-start gate, not isolation proof. Poll the **same** operation and its
-`progress.json`; never restart on a polling timeout or reuse a partial root.
-The controller now checks the guard during in-flight requests and aborts only
-its identity-verified owned service on violation. If the arm completes, run
-the independent audit before claiming any result. Do not use NPU4-7, stop
-unrelated containers, or treat a passed candidate alone as a paired quality
-decision. The prior invalid run is documented immediately below.
+The guard observed external physical NPU3 PID 3551181 at 13:04:47 UTC; it
+made 9 observations, 4 foreign, 0 probe errors. The arm failed by 13:05:21
+UTC, about 34 seconds later, proving the new in-flight fail-fast path avoided
+the prior 30-minute wait. `/proc/3551181/cgroup` at 13:06 UTC mapped it to
+the still-running privileged `cannbench_ds` container
+`efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6`;
+its command was `python -m kernel_eval.staged_eval ... --bench-name cann ...`.
+This proves workload/container attribution, not the human who started it.
+The exact owned HYPIC container was removed and port/owned workers released;
+the shared lane remained occupied by foreign PIDs, so `lane_available=false`
+is not an owned-release failure. No NPU4-7 or unrelated container was changed.
+Do not reuse either invalid full-candidate root or infer a paper/quality
+failure. See `HOTPATH_CACHE10_REPAIR.md` for hashes. A formal matched quality
+decision still needs a clean candidate and matching 0.85 control; the old
+0.9 baseline is historical only. Coordinate an uncontended physical NPU0-3
+window before another multi-hour run. The 12-hour deadline began about
+11:33 UTC; the three-horizon drift check is in `SKILL_VALIDATION_GOALS.md`.
 
 **Latest checkpoint (2026-10-08 12:44 UTC):** The frozen cache10 full HYPIC
 candidate operation `exec-000000000000137a` ended `arm-failed`, 1/127
@@ -25,8 +34,8 @@ release receipt; unrelated workloads and NPU4-7 were untouched. Preserve the
 failed raw root; never restart into it. The guard controller's delayed
 response while requests were in flight was repaired on work-branch commit
 `36e2efc`; eight focused offline tests and the 29-Skill structural validator
-passed. A new `cache10r1` attempt identity is prepared but no NPU retry has
-been launched. Read `HOTPATH_CACHE10_REPAIR.md` for raw hashes. The 12-hour validation
+passed. The next `cache10r1` attempt is now terminal and described above.
+Read `HOTPATH_CACHE10_REPAIR.md` for raw hashes. The 12-hour validation
 deadline began approximately 2026-10-08 11:33 UTC. The short/medium/long
 drift check is in `SKILL_VALIDATION_GOALS.md`.
 

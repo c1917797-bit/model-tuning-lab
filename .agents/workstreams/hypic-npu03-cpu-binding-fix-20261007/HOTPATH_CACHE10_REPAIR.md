@@ -108,6 +108,32 @@ algorithm/quality-ruler change. Verify it offline and use a new evidence root
 only after a fresh lane check; do not claim full quality from the earlier
 stress pass or this invalid arm.
 
+## Fresh cache10r1 attempt: fail-fast verified, quality still open
+
+Operation `exec-00000000000013cc` exited 1 at 13:05:21 UTC after the
+service-ready gate but before a complete sample: 0/127 samples, 0/381
+scored rows, no quality claim. The start-time physical NPU0-3 snapshot was
+empty. The continuous guard made 9 observations and recorded four foreign
+observations, first at 13:04:47 UTC: physical NPU3 PID 3551181. At 13:06
+UTC that live PID's cgroup mapped to `cannbench_ds` container
+`efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6`,
+running `kernel_eval.staged_eval`; the human launcher is not proven. There
+were zero guard probe errors. The arm stopped about 34 seconds after the
+first foreign observation, versus over 30 minutes for the old controller.
+The exact owned container, workers and port were released; `lane_available`
+was false because the foreign workload still occupied physical NPU3. No
+unrelated process/container was stopped. Raw root:
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r1-full-hypic`.
+Contract, arm-result, guard and stop SHA256 respectively:
+`9106bfb4a27e6dbd85d88fde76f126a1a9807a889d600e212cb6f9c4705e74c3`,
+`1d6a87d8657ca582585769e96de0c5f8a2769a87b9d5ef0ac0b8af1292d4fe22`,
+`dc1d0391f8979c0fc4859dc63ef6c5d75ada4321212a50081a869b7f6eacdee7`,
+`f973b0292c64641ceeb5e41d4d3065bb45c8c296f9f1a6c1fd9cbf4d56383b4b`.
+This matched the previous candidate's frozen contract hash but cannot be
+pooled with it because both had foreign-lane observations. A new candidate
+root must be declared only after an uncontended NPU0-3 window is arranged;
+the matched 0.85 baseline and performance comparison remain open.
+
 The next attempt identity is `cache10r1`, with new full-candidate root
 `quality-context-41984-hotpath-cache10r1-full-hypic` and a separate matching
 control root `quality-context-41984-hotpath-cache10r1-full-baseline` if a
