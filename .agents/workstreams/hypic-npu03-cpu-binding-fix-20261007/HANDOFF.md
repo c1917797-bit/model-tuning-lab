@@ -1,5 +1,16 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Active cache10r2 candidate (2026-10-08 13:22 UTC):** AWMCP operation
+`exec-00000000000013ec` passed an immediately adjacent fresh gate (no
+physical NPU0-3 process, no `cannbench_ds` staged evaluator, free port 8223,
+absent new root) and entered `service-starting`. Poll this exact operation
+and `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r2-full-hypic/progress.json`.
+Source branch commit is `2d7139e`; the only device allocation is physical
+NPU0-3. Do not restart on observation timeout or reuse this root if it
+becomes partial. This is still a shared host, not an exclusive lease; guard
+and exact-release evidence decide whether the arm is valid. No score claim
+exists before 127 samples, independent audit and a matching control.
+
 **Read-only lane monitor (completed 2026-10-08 13:19:45 UTC):** AWMCP
 operation `exec-00000000000013de` exited 0 after 40 consecutive clean
 observations from 13:09:15–13:19:45 UTC: no physical NPU0-3 process, no
@@ -9,14 +20,14 @@ one empty snapshot but not an exclusive lease; a fresh ownership/port/root
 check is still required immediately before a new run. User coordination of
 an exclusive NPU0-3 window was requested but has not yet been confirmed.
 
-**Next declared candidate:** `cache10r2` uses a new full-HYPIC root and the
+**Declared candidate:** `cache10r2` uses a new full-HYPIC root and the
 same frozen 127-sample/381-row, c8/2048-token quality ruler, 0.85 service
 utilization and 3584-MiB/10-segment cache. The new guard additionally
 captures Docker cgroup identity at first foreign-PID observation. CPU tests,
 29-Skill structure validation and frozen-input preflight passed. Commit/push
 the preparation before launch; if the live lane check is clean, run only
-physical NPU0-3 and preserve a new root on any failure. No `cache10r2`
-device run has begun at this checkpoint.
+physical NPU0-3 and preserve a new root on any failure. The active operation
+above supersedes this pre-launch checkpoint.
 
 **Latest checkpoint (2026-10-08 13:06 UTC):** AWMCP operation
 `exec-00000000000013cc` is terminal exit 1. The fresh `cache10r1` full
