@@ -25,19 +25,31 @@ from urllib.request import Request, urlopen
 
 ARM = os.environ.get("HYPIC_HOTPATH_QUALITY_ARM", "")
 MODE = os.environ.get("HYPIC_HOTPATH_QUALITY_MODE", "")
-if (ARM, MODE) not in {
+CAMPAIGN = os.environ.get("HYPIC_HOTPATH_QUALITY_CAMPAIGN", "original")
+ORIGINAL_PAIRS = {
     ("hypic-only", "pilot"),
     ("hypic-only", "pilot2"),
     ("no-cache", "full"),
     ("hypic-only", "full"),
-}:
-    raise RuntimeError("allowed arm/mode pairs: hypic-only/pilot[2], no-cache/full, hypic-only/full")
-os.environ["HYPIC_QUALITY_ATTEMPT"] = (
-    "hotpath-pilot2-hypic" if MODE == "pilot2" else
-    "hotpath-pilot-hypic" if MODE == "pilot" else
-    "hotpath-full-baseline" if ARM == "no-cache" else
-    "hotpath-full-hypic"
-)
+}
+RESERVE_PAIRS = {("hypic-only", "stress"), ("no-cache", "full"),
+                 ("hypic-only", "full")}
+if not ((CAMPAIGN == "original" and (ARM, MODE) in ORIGINAL_PAIRS)
+        or (CAMPAIGN == "reserve" and (ARM, MODE) in RESERVE_PAIRS)):
+    raise RuntimeError("unrecognized hot-path quality campaign/arm/mode")
+if CAMPAIGN == "reserve":
+    os.environ["HYPIC_QUALITY_ATTEMPT"] = (
+        "hotpath-reserve-stress-hypic" if MODE == "stress" else
+        "hotpath-reserve-full-baseline" if ARM == "no-cache" else
+        "hotpath-reserve-full-hypic"
+    )
+else:
+    os.environ["HYPIC_QUALITY_ATTEMPT"] = (
+        "hotpath-pilot2-hypic" if MODE == "pilot2" else
+        "hotpath-pilot-hypic" if MODE == "pilot" else
+        "hotpath-full-baseline" if ARM == "no-cache" else
+        "hotpath-full-hypic"
+    )
 import binding_off_quality as quality
 
 
@@ -96,6 +108,10 @@ def cases() -> tuple[list[dict], object]:
         if len(set(selected)) != 3:
             raise RuntimeError("pilot sample selection not unique")
         items = [items[index] for index in selected]
+    elif MODE == "stress":
+        # Recreate the first c8 wave that failed at sample 7, without
+        # shortening or changing the subsequent full matched ruler.
+        items = [items[index] for index in range(9)]
     return items, evaluator
 
 

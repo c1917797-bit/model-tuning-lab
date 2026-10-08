@@ -5,9 +5,16 @@ failure below remains unchanged. A separate explicit-boundary pilot-2
 (`HOTPATH_PILOT2_RESULT.md`) passed three scored hot-path requests and
 exact NPU0–3 release after repairing an audit ID join; this verifies a
 limited protocol/activation step, not 127-sample quality or all-Skill
-behavior. Full matched no-cache baseline `exec-0000000000001293` is now
-running; HYPIC treatment, independent paired audit, and Skill status
-reclassification are pending. A separate resume-session onboarding check
+behavior. The prospective 0.9 no-cache arm `exec-0000000000001293`
+completed 127/127 and passed independent row, guard and release audit
+(226/381 correct). Its HYPIC counterpart `exec-00000000000012e3`
+passed the hot-path sentinel but failed at sample 7: a GDN replay temporary
+allocation would cross the preserved 1024 MiB NPU safety watermark.
+Only 1/127 candidate samples was persisted; the lane guard and exact release
+passed. This is `incomplete-fail-fast`, not a paired accuracy verdict.
+`HOTPATH_CAPACITY_REPAIR.md` predeclares a 0.85 common-service reserve
+stress gate and a fresh matched pair; neither has NPU acceptance yet.
+Skill status reclassification remains pending. A separate resume-session onboarding check
 now moves only `mst-repo-onboarding` from N to P; fresh-clone acceptance
 remains open. Thus bounded V10/P15/N4 is the current classification, not a
 completed long-term goal.
@@ -54,4 +61,4 @@ Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bound
 | mst-tool-adapter-boundary | unassessed | V | Only tracked tool adapter is one-line `CLAUDE.md` → `AGENTS.md`; canonical policy remains in AGENTS/registry. |
 | mst-transformation-verification | unassessed | P | Main structural 29-Skill validator passes; branch validator now enforces routing metadata. Main metadata/length gaps, semantic heading and runtime boundary review remain open. |
 
-Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 10 V, 15 P, 4 N = 29. The NPU0–3 campaign passed paired performance and independent row/release audit; its frozen natural-request formal worker-hot quality gate failed and natural scores are inconclusive. The new explicit-boundary full quality pair is still running. No whole-paper or whole-tree completion claim is made.
+Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 10 V, 15 P, 4 N = 29. The NPU0–3 campaign passed paired performance and independent row/release audit; its frozen natural-request formal worker-hot quality gate failed and natural scores are inconclusive. The explicit-boundary 0.9 baseline passed, but its candidate was capacity-failed after one sample; a 0.85 matched replacement is planned, not yet validated. No whole-paper or whole-tree completion claim is made.

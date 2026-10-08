@@ -6,17 +6,25 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
+AUDIT_CAMPAIGN = os.environ.get("HYPIC_HOTPATH_AUDIT_CAMPAIGN", "original")
+if AUDIT_CAMPAIGN not in {"original", "reserve"}:
+    raise RuntimeError("unrecognized hot-path audit campaign")
+if AUDIT_CAMPAIGN == "reserve":
+    os.environ["HYPIC_QUALITY_ATTEMPT"] = "hotpath-reserve-full-baseline"
 import binding_off_quality as quality
 
-BASE = quality.ROOT / "quality-context-41984-hotpath-full-baseline"
-CAND = quality.ROOT / "quality-context-41984-hotpath-full-hypic"
-OUT = quality.ROOT / "hotpath-quality-full-audit.json"
+ROOT_SUFFIX = "hotpath-reserve-full" if AUDIT_CAMPAIGN == "reserve" else "hotpath-full"
+BASE = quality.ROOT / f"quality-context-41984-{ROOT_SUFFIX}-baseline"
+CAND = quality.ROOT / f"quality-context-41984-{ROOT_SUFFIX}-hypic"
+OUT = quality.ROOT / ("hotpath-quality-reserve-full-audit.json" if AUDIT_CAMPAIGN == "reserve"
+                      else "hotpath-quality-full-audit.json")
 FROZEN = quality.ROOT / "quality-context-41984-clean2/quality/no-cache/longbenchv2.run1.jsonl"
 FROZEN_SHA = "812a4281c167327ae69b96766e550f58ffb905c889c60bc0a649850ec5cc5810"
 EXPECTED = 127
@@ -98,15 +106,17 @@ def frozen_pair_seam() -> dict:
             "binds_equal": True, "normalized_commands_equal": True}
 
 
-def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object) -> dict:
+def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
+              *, expected: int = EXPECTED, mode: str = "full") -> dict:
     require(root.is_dir(), f"{arm}: root absent")
+    require(len(cases) == expected, f"{arm}: auditor case count drift")
     contract = load_json(root / "contract.json")
     result = load_json(root / "arm-result.json")
     start = load_json(root / arm / "service-start.json")
     stop = load_json(root / arm / "service-stop.json")
     guard = load_json(root / arm / "lane-guard.json")
-    require(contract["arm"] == arm and contract["mode"] == "full", f"{arm}: mode drift")
-    require(contract["sample_indexes"] == list(range(EXPECTED)), f"{arm}: sample set drift")
+    require(contract["arm"] == arm and contract["mode"] == mode, f"{arm}: mode drift")
+    require(contract["sample_indexes"] == list(range(expected)), f"{arm}: sample set drift")
     require(contract["repetitions"] == REPEATS and contract["concurrency"] == 8,
             f"{arm}: concurrency/repeat drift")
     require(contract["warm_requests_per_sample"] == 2
@@ -118,8 +128,8 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object) -> dic
             and contract["dataset_sha256"] == quality.DATASETS["longbenchv2"][2]
             and contract["baseline_row_sha256"] == FROZEN_SHA,
             f"{arm}: frozen inputs drift")
-    require(result["error"] is None and result["completed_samples"] == EXPECTED
-            and result["scored_rows"] == EXPECTED * REPEATS, f"{arm}: incomplete controller")
+    require(result["error"] is None and result["completed_samples"] == expected
+            and result["scored_rows"] == expected * REPEATS, f"{arm}: incomplete controller")
     require(start["fingerprint"] == contract["fingerprint"],
             f"{arm}: service fingerprint drift")
     workers = start["worker_pid_by_physical_npu"]
@@ -146,7 +156,7 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object) -> dic
         for key in ("index", "sample_id", "reference", "prompt_sha256",
                     "prompt_tokens", "difficulty", "length"):
             require(row[key] == item[key], f"{arm}: sample {item['index']} {key} drift")
-        require(row["arm"] == arm and row["mode"] == "full"
+        require(row["arm"] == arm and row["mode"] == mode
                 and row["segment_ends"] == [item["boundary"], item["prompt_tokens"]],
                 f"{arm}: sample {item['index']} segment drift")
         require(len(row["warm"]) == 2 and len(row["scores"]) == REPEATS,
@@ -180,9 +190,9 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object) -> dic
                 "completion_tokens": scored["usage"]["completion_tokens"],
                 "difficulty": item["difficulty"], "length": item["length"],
             })
-    require(len(list((root / "samples").glob("*.json"))) == EXPECTED,
+    require(len(list((root / "samples").glob("*.json"))) == expected,
             f"{arm}: extra sample artifact")
-    require(len(rows) == EXPECTED * REPEATS and len(ids) == EXPECTED * (2 + REPEATS),
+    require(len(rows) == expected * REPEATS and len(ids) == expected * (2 + REPEATS),
             f"{arm}: request cardinality drift")
     evidence = root / arm / "hypic-evidence.jsonl"
     events = [json.loads(line) for line in evidence.read_text().splitlines() if line] if evidence.exists() else []

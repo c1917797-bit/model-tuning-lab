@@ -33,9 +33,17 @@ ATTEMPT_ROOTS = {
     "hotpath-pilot2-hypic": "quality-context-41984-hotpath-pilot2-hypic",
     "hotpath-full-baseline": "quality-context-41984-hotpath-full-baseline",
     "hotpath-full-hypic": "quality-context-41984-hotpath-full-hypic",
+    "hotpath-reserve-stress-hypic": "quality-context-41984-hotpath-reserve-stress-hypic",
+    "hotpath-reserve-full-baseline": "quality-context-41984-hotpath-reserve-full-baseline",
+    "hotpath-reserve-full-hypic": "quality-context-41984-hotpath-reserve-full-hypic",
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
+RESERVE_ATTEMPTS = frozenset({
+    "hotpath-reserve-stress-hypic",
+    "hotpath-reserve-full-baseline",
+    "hotpath-reserve-full-hypic",
+})
 QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984
 EVALUATOR = Path(__file__).resolve().parents[1] / "WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py"
@@ -171,12 +179,15 @@ def preflight() -> dict:
             raise RuntimeError("LongBench expected count drift")
     if 39642 + 2048 > CONTEXT:
         raise RuntimeError("longest prompt exceeds quality context")
-    return {"image": IMAGE, "source_commit": SOURCE_COMMIT, "model_index_sha256": MODEL_INDEX_SHA,
+    fingerprint = {"image": IMAGE, "source_commit": SOURCE_COMMIT, "model_index_sha256": MODEL_INDEX_SHA,
             "evaluator_sha256": EVALUATOR_SHA, "datasets": {key: {"count": value[1],
             "sha256": value[2]} for key, value in DATASETS.items()},
             "max_model_len": CONTEXT, "max_output_tokens": 2048,
             "physical_npus": [0, 1, 2, 3], "cpuset": "112-191",
             "common_serving_change": FLAG.strip(), "unit_order": list(UNIT_ORDER)}
+    if ATTEMPT in RESERVE_ATTEMPTS:
+        fingerprint["gpu_memory_utilization"] = 0.85
+    return fingerprint
 
 
 def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
@@ -190,6 +201,11 @@ def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
     command = command.replace(old_path, new_path)
     command = command.replace("--max-model-len 40960", f"--max-model-len {CONTEXT}")
     command = command.replace("--max-num-batched-tokens 40960", f"--max-num-batched-tokens {CONTEXT}")
+    if ATTEMPT in RESERVE_ATTEMPTS:
+        old_util = "--gpu-memory-utilization 0.9"
+        if command.count(old_util) != 1:
+            raise RuntimeError("frozen GPU memory utilization seam drift")
+        command = command.replace(old_util, "--gpu-memory-utilization 0.85")
     command += FLAG
     old_mount = f"{SOURCE_ROOT}:/results"
     binds = source["HostConfig"]["Binds"]

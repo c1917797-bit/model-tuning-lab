@@ -29,18 +29,24 @@ arm-result SHA256 is
 The source root is
 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-full-baseline`.
 
-After a fresh 0-3 lane-available and candidate-root-absent check, the full
-**HYPIC-only candidate** started as AWMCP operation
-`exec-00000000000012e3` at 2026-10-08 09:34 UTC. Its separate raw root is
+The original full **HYPIC-only candidate** operation
+`exec-00000000000012e3` exited 1 at 2026-10-08 09:45:30 UTC: sentinel
+hot-path activation passed, then sample 7 in the first c8 wave received
+EngineCore HTTP 500 because TP2's 1.5 MiB GDN replay would cross the 1024
+MiB free-memory watermark (1016.3 MiB observed). Only 1/127 samples and
+3/381 scored rows were persisted. Guard was 25/25 clean; exact owned
+container/worker/port/lane release passed. This is a **capacity-failed,
+incomplete-fail-fast** candidate, not a quality comparison or a negative
+paper verdict. Raw root is
 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-full-hypic`.
-Poll that exact operation and its `progress.json`; never restart it on an
-observation timeout. It must finish 127 samples/381 scored 2048-max-output
-answers, prove explicit boundaries and verified hot coverage, show a clean
-physical 0-3 guard, and release exact owned resources. Only then run the
-pinned independent `hotpath_quality_audit.py` for the paired score verdict.
-Keep raw outputs outside Git. Prior clean2 natural-task quality is off-path
-safety evidence, never part of this new matched denominator. Do not infer
-whole-paper C3 or all-29-Skill acceptance from a bounded quality result.
+Read `HOTPATH_CAPACITY_REPAIR.md` for exact hashes and the frozen recovery
+gate. Next: validate the branch-only 0.85 common-service reserve seam on CPU,
+then prove a fresh physical NPU0-3 lane and run the new-root candidate c8
+stress preflight including sample 7. If it passes, re-run both full arms at
+0.85; never reuse the valid but different 0.9 baseline. Do not lower the
+HYPIC watermark, reduce concurrency/output, restart the failed root, use
+NPU4-7, or infer whole-paper/all-Skill acceptance. Raw outputs stay outside
+Git; main and the canonical dirty checkout remain untouched.
 
 **Final clean2 checkpoint (2026-10-07 21:58 UTC; supersedes all progress checkpoints below):** Sole quality job `exec-0000000000000e15` exited 0 after all 12 units and both exact service releases. The unchanged strict quality auditor exited 1 at the four-worker hot-path gate: zero worker-hot PIDs, because the frozen natural evaluator supplies no usable segments under the frozen service configuration. The separate scoped auditor independently verified all 12 row/scorer/hash/identity units, 752/754 clean guard samples, both releases and paired natural scores while setting `formal_acceptance_claim=false`. Its SHA256 is `61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0`; read `FINAL_EVIDENCE_DECISION.md` first. LongBench-v2 totals are 224/381 in both arms; GSM8K totals are 3836/3957 no-cache and 3834/3957 HYPIC. The all-nonnegative score gate also fails, but adverse means stay within baseline three-run ranges. Physical NPU0–3 and port 8223 were released; NPU4–7 and unrelated containers were untouched. Do not restart clean2, pool attempt-1 rows, claim full-paper reproduction or merge main. A separately authorized prospective in-path quality supplement is the meaningful open experiment.
 
