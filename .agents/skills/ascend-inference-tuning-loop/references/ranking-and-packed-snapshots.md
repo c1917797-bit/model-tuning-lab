@@ -58,3 +58,16 @@ commands are paused; preparer agents may remain active on source/API work.
 This is not proof that four cores support formal timing or that a service has
 a performance gain. Sum simultaneously admitted work at every common CPU/RAM
 ancestor, not independent per-job checks.
+
+
+## Fixed NPU observations are not original graph authority
+
+SparQ005 completed8 eager and8 GLOBAL graph observations with raw FP32 cutoff
+361/1157 exactly tied (0ULP); live/static/workspace support and pointers matched.
+Its independent consumer retained observed-not-a-pass and original009 FAILED.
+A NoPA observation graph can change allocation/lifetimes and does not establish
+original PA graph equivalence or causal proof. Audit the author's actual dtype,
+GQA reduction and tie semantics before preregistering a new oracle; retain
+FP64 error/feedback checks and reject non-tie discrepancies. Label adapted
+probability-GQA versus official logit-GQA honestly.
+Actual evidence: [Oct8 selector and CPU stages](../../../workstreams/qwen36-damp-ascend-20261006/SELECTOR_OBSERVATION_AND_KIVI_CPU_20261008.md).

@@ -1,5 +1,23 @@
 # DAMP Ascend — current workstream
 
+## Latest actual selector observation / full KIVI CPU gate — 2026-10-08 06:31Z
+
+Read SELECTOR_OBSERVATION_AND_KIVI_CPU_20261008.md first.
+SparQ005 MAIN121f completed0 with8eager+8graph, observed paths/guards/pointers
+consistent and raw FP32 cutoff361/1157 exactly tied. MAIN1228 independent0
+retains observed-not-a-pass:009 stillFAILED, native PA/full matrix/model/E2E
+NOT executed; no causal graph proof or retroactive gate change.
+KIVI fullCPU004 MAIN122e completed0/37820ms, all4 packing/readout cases;
+MAIN1232 independent0. Sourcec625ba8..., HOST_RESULT c0059109....
+Not NPU/model-ready.003 stale-output predicate was caught before launch.
+Next short goals: completeKIVI176native host; prospectively justifySparQ oracle;
+finishSparsePrefix actual TP4 aggregate controller (child/software alone notready).
+Three authorized preparers remain; MAIN sole device/Git actor.7CPU diagnostic
+TP4 requires pausing preparer remote CPU jobs, not shutting their source/API work.
+32GiB authority remainsSPENT/OVS preserved; original failures/cutoffs unchanged.
+Normal push auth unchanged-blocked, no redundant retry. No new non-HYPIC
+accepted result and no new paired throughput or final task-accuracy result.
+
 ## Latest actual CPU diagnosis / KIVI persistence failure — 2026-10-08 04:25Z
 
 Read SPARQ009_CPU_DIAG_AND_KIVI_CPU_FAILURE_20261008.md before selecting a retry.

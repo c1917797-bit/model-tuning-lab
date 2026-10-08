@@ -83,6 +83,11 @@ load. This rule does not guarantee the first real-device attempt will pass.
   visibility; validate destination coverage and reject writable overlap.
   Old failed/software snapshots are historical
   evidence, not current source manifests; retain them without rewriting pins.
+  Distinguish static prerequisites from genuine hardware-dependent imports.
+  In this pinned stack a full runner import may query HAL/Triton architecture:
+  do not fabricate CPU architecture stubs or call that a paper no-go. Move only
+  that evidenced dependency into the first admitted real-device source/ABI
+  stage before model allocation, preserving all static/source checks.
   Check required plugin names in their actual platform/general entrypoint groups,
   not one invented group. Reuse SHA-verified valid child results when a parent
   predicate fails; correct only that predicate without relabelling the old exit.

@@ -46,3 +46,26 @@ cutoffs, and prepare independent next paper gates while the controller is fixed.
 
 Case authority:
 [H8 v6 actual failure](../../../workstreams/qwen36-damp-ascend-20261006/H8_V6_ACTUAL_CONTROLLER_FAILURE_20261007.md).
+
+
+## Complete publication before cross-process consumption
+
+KIVI's exists-only consumer observed a partially streamed final JSON and failed;
+a later complete producer file did not repair the original failed run.
+For such shared completion artifacts, publish a fully written, flushed/fsynced
+exclusive staging file with an atomic no-overwrite final link and directory
+fsync, or an equivalent explicitly tested mechanism. The final pathname must
+not signal completion while bytes are still being written. Preserve staging/
+primary errors and charge retained artifacts to the disk budget. Real paused
+writer tests and the full same-image CPU packing/readout proved this repair;
+the repair does not grant NPU/model acceptance.
+
+## Validate unordered inspect collections semantically
+
+Docker inspect Mounts order changed between two observations of the same
+stopped owned guest, while every mapping and all other ownership/state fields
+were identical. Reject duplicate destinations, then compare all mount fields
+by unique destination rather than list position. Do not ignore RW/source/type/
+propagation differences. Retain the original failed controller terminal;
+independently rehash valid copied child sources without repeating Docker work.
+Actual evidence: [Oct8 selector and CPU stages](../../../workstreams/qwen36-damp-ascend-20261006/SELECTOR_OBSERVATION_AND_KIVI_CPU_20261008.md).
