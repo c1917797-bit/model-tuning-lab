@@ -26,10 +26,21 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 11)
-        self.assertEqual(report["skills_without_case"], 18)
+        self.assertEqual(report["cases_with_verified_provenance"], 12)
+        self.assertEqual(report["skills_without_case"], 17)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 9, "verified": 2})
+                         {"partial-evidence": 10, "verified": 2})
+
+    def test_runtime_delivery_case_is_not_promotion(self) -> None:
+        path = cases.CASES / "runtime-monkeypatch-delivery.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"runtime-monkeypatch-delivery"})
+        self.assertEqual(skill, "runtime-monkeypatch-delivery")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["main_documented_validator_absent"])
+        self.assertFalse(item["observed"]["plugin_manifest_package_present"])
+        self.assertFalse(item["observed"]["package_promotion_ready"])
 
     def test_performance_optimization_case_stays_partial(self) -> None:
         path = cases.CASES / "ascend-performance-optimization.json"
@@ -76,6 +87,7 @@ class SkillCaseTests(unittest.TestCase):
                          "UNVERIFIED 162/162")
         self.assertFalse(item["observed"]["terminal_quality_pair_complete"])
         self.assertFalse(item["observed"]["main_skill_integrated"])
+        self.assertEqual(item["observed"]["r12_four_worker_verified_scored_requests"], 52)
 
     def test_practice_iteration_main_contract_defect_stays_partial(self) -> None:
         path = cases.CASES / "mst-practice-iteration-planning.json"

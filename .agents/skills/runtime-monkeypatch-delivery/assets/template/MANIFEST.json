@@ -5,6 +5,7 @@
   "source_contract": {
     "image_digest": "sha256:replace-with-official-image-digest",
     "framework_version": "replace-with-pinned-version",
+    "cann_version": "replace-with-pinned-cann-version",
     "live_module": "replace.with.live.module",
     "live_object": "replace_with_live_object",
     "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
@@ -15,6 +16,10 @@
     "patch_file": "patch.py",
     "entrypoint": "patch:activate",
     "patch_sha256": "09bb058fbf1950f59d3d30beda01caff8e71358b95d4c0e8380a8fbf8a0b8dc2",
+    "loader_file": "sitecustomize.py",
+    "loader_sha256": "6d9260279f3e5550896e1f7fdd46f7adf7594e26b0767c58c1d7e12db0747a4f",
+    "launcher_file": "run_with_patch.sh",
+    "launcher_sha256": "04ec8f4ea39c02cd4f31670bc1564eefc2cf4c7dcb57a91cbff960b85e8e6d0b",
     "single_primary_variable": true
   },
   "activation": {

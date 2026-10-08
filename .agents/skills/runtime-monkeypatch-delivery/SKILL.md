@@ -45,7 +45,8 @@ inapplicable; they are not silently exempt.
    rank, and engine process. Run the disabled control and prove the treatment
    marker disappears while requests still succeed.
 6. Validate the package with
-   `scripts/validate_monkeypatch_package.py <package-dir>`.
+   `python3 scripts/validate_monkeypatch_package.py <package-dir>`.
+   This static identity check is not activation or delivery acceptance.
 7. Run exact-shape numerical or task oracles and sensitive semantic tests before
    performance work.
 8. Run the preregistered c1 fail-fast, then the complete repeated performance

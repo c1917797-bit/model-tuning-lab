@@ -24,13 +24,15 @@ build source, and SHA256. Never overwrite files in the official image.
 - official image digest, framework/CANN versions, live module/object, and live
   source SHA256;
 - one environment switch, enabled value, patch file, entrypoint, patch SHA256,
-  and the one primary variable;
+  loader file/SHA256, launch wrapper file/SHA256, and the one primary variable;
 - required worker/rank/engine roles, marker prefix, and disabled-control rule;
 - disable and uninstall commands;
 - experiment ID, work branch, and exact Git commit.
 
 Run the validator after any patch-byte or manifest change. A stale hash makes
 the package invalid, not approximately equivalent.
+The validator checks static package identity only; it cannot prove the live
+module, per-worker activation, output quality, or rollback execution.
 
 ## Activation ledger
 

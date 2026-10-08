@@ -1,0 +1,66 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "runtime-monkeypatch-delivery",
+  "campaign_code": "N",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Use the exact-main runtime delivery Skill on the r12 HYPIC plugin run, test the documented package-validator command, and bound actual NPU activation and rollback evidence",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "5ac9f8b07d8e092dcba7e1b0cfd5423469534666",
+  "tested_reference_git_blob_oid": "302cf8cde20e7fda93b2972bbf1e5bab9fd81dde",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma, Qwen3.6-27B BF16 TP4, physical NPU0-3; r12 19-prompt c8 2048-token HYPIC stress with clean read-only plugin c12060c against pinned official image; branch-only static validator repair",
+  "observed": {
+    "main_documented_validator_absent": true,
+    "branch_static_validator_tests_passed": 6,
+    "branch_static_validator_only": true,
+    "plugin_source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "r12_scored_responses": 57,
+    "r12_four_worker_hot_proofs": 52,
+    "r12_foreign_process_guard_samples": 279,
+    "r12_exact_owned_resource_release": true,
+    "plugin_manifest_package_present": false,
+    "same_identity_disabled_control_complete": false,
+    "source_fix_npu_causal_effect_isolated": false,
+    "full_repeated_performance_complete": false,
+    "full_2048_token_paired_quality_complete": false,
+    "disable_uninstall_restart_rollback_complete": false,
+    "abc_local_increment_attribution_complete": false,
+    "package_promotion_ready": false,
+    "main_skill_repair_integrated": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_MONKEYPATCH_DELIVERY_CASE_20261008.md",
+      "sha256": "a7296e39a05bbb3ea829baedb4f527591ffd971a758fd1ac0803de49b9b60198"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_monkeypatch_delivery_case.py",
+      "sha256": "cbf2ab4e8228f5c08f5323b9a137b5293d978642b8a5ed31b47874239df055b5"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
+      "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": "scripts/validate_monkeypatch_package.py",
+      "sha256": "f9c6fde7afd51dc8af10f137f0a893dd2c203bcb5b00e08b902031091ecb24cd"
+    },
+    {
+      "path": "tests/test_validate_monkeypatch_package.py",
+      "sha256": "ae09db8d9258d412e3e38e11459ffb94f7053f0bd2082793367e7e2624cf6722"
+    }
+  ],
+  "external_raw_receipts": {
+    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60",
+    "r12_lane_guard_sha256": "da309b4ff0d23cabd198606d2855dbc5949c34013426bfbccb54af1d2872b9dd",
+    "r12_service_stop_sha256": "fc3682c4e0a1c766827e5c486b3a317b67055d7690dd8b3f5533c8ce3b6cee57"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "The exact main Skill's named validator path is absent. The branch fix passes only static package identity tests; the actual r12 source was not delivered as a hash-bound MANIFEST package. Enabled r12 had 52/57 request-level four-worker proofs and exact cleanup, but no same-identity disabled control, full performance/quality, disable-uninstall-restart rollback or A/B/C attribution. This is not delivery acceptance, paper success, or a main-integrated repair.",
+  "next_gate": "Integrate and rerun the branch static-validator repair, package the exact HYPIC plugin source, prove enabled/disabled control and every required worker, then run the frozen matched 0.85 performance/2048-token quality and rollback gates only on actually idle physical NPU0-3.",
+  "drift_trigger": "Revalidate after main Skill/reference/registry, package schema or bytes, plugin source/test commit, image/model/physical lane, dataset/evaluator, raw r12 artifact, or any delivery acceptance rule changes."
+}

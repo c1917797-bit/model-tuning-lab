@@ -12,7 +12,7 @@
   "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; cache10r9 checkpoint, terminal cache10r10 full candidate and cache10r11 19-sample c8 stress; Qwen3.6-27B BF16 TP4 physical NPU0-3, 2048 output cap; no valid terminal pair",
+  "environment_scope": "chicaihong01/ma; cache10r9 checkpoint, terminal cache10r10 full candidate and cache10r11/r12 19-sample c8 stresses; Qwen3.6-27B BF16 TP4 physical NPU0-3, 2048 output cap; no valid terminal pair",
   "observed": {
     "completed_scored_ids_in_read_only_snapshot": 162,
     "request_boundary_events_joinable": true,
@@ -21,7 +21,7 @@
     "main_reference_explicit_per_request_worker_join": false,
     "branch_reference_explicit_per_request_worker_join": true,
     "offline_counterexample_tests": 7,
-    "all_workstream_tests_passed": 46,
+    "all_workstream_tests_passed": 55,
     "post_snapshot_pid_namespace_join_repaired": true,
     "r10_scored_responses_persisted": 381,
     "r10_scored_requests_with_four_worker_hot_proof": 366,
@@ -33,7 +33,14 @@
     "r11_missing_scored_pairs": ["77:2", "79:2", "79:3", "85:2"],
     "r11_single_arm_correct_not_paired": 27,
     "r11_terminal_decision": "strict activation stress failed; eviction and scheduler-directory inconsistency bounded by raw evidence",
-    "directory_rebuild_source_commit_unverified_on_npu": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "directory_rebuild_source_commit_npu_executed_but_causal_effect_unisolated": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "r12_stress_samples_and_scored_responses": [19, 57],
+    "r12_four_worker_verified_scored_requests": 52,
+    "r12_missing_scored_pairs": ["77:1", "77:3", "81:3", "85:2", "88:2"],
+    "r12_single_arm_correct_not_paired": 22,
+    "r11_r12_within_arm_exact_long_response_pairs": [0, 1],
+    "r11_r12_cross_source_one_token_observations_equal": 38,
+    "r12_terminal_decision": "strict activation stress failed; source ran on NPU but no paired quality verdict",
     "terminal_quality_pair_complete": false,
     "main_skill_integrated": false
   },
@@ -65,10 +72,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R11_TERMINAL_AUDIT.md",
       "sha256": "ade10050ba75d7ce71ef60e9424b08658a1e324c4f968650ffa72cf21b2992b4"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
+      "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/compare_cache10r11r12_stress.py",
+      "sha256": "e833d0e81d29a86e9a580e1f282e1c82076bfc5e2f6bd784db44163e9fce7bd8"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The r9 snapshot exposed an activation evidence gap; terminal r10 lacked proof for 15/381 scored requests and terminal r11 stress lacked proof for 4/57. The branch verifier correctly rejects each strict all-hot claim. A later directory-rebuild source fix has only focused offline tests, not NPU validation. Current main requires activation but lacks the per-scored-request join; branch repair is unintegrated. No paired HYPIC quality or performance verdict follows.",
-  "next_gate": "Prospectively choose whether the next original-protocol full pair claims every scored request is hot or evaluates deployed treatment with request-level hot/cold stratification. Preserve r11 as a strict stress fail. On actually idle physical NPU0-3, validate the new source and run a matching 0.85 control, full 2048-token paired quality, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; never reuse the 0.9 baseline.",
+  "boundary": "The r9 snapshot exposed an activation evidence gap; terminal r10 lacked proof for 15/381 scored requests, r11 for 4/57 and r12 for 5/57. The branch verifier correctly rejects each strict all-hot claim. The directory-rebuild source ran on NPU in r12, but its causal effect is not isolated and no same-identity no-cache control exists. Current main requires activation but lacks the per-scored-request join; branch repair is unintegrated. No paired HYPIC quality or performance verdict follows.",
+  "next_gate": "Prospectively choose whether the next original-protocol full pair claims every scored request is hot or evaluates deployed treatment with request-level hot/cold stratification. Preserve r11/r12 as strict stress fails. On actually idle physical NPU0-3, run a matching 0.85 control, full 2048-token paired quality, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; never reuse the 0.9 baseline.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
