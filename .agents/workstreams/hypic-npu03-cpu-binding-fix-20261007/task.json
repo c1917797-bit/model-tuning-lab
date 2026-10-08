@@ -14,21 +14,22 @@
     "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
   "latest_attempt": {
-    "campaign": "cache10r4",
+    "campaign": "cache10r5",
     "arm": "hypic-only",
-    "controller_operation": "exec-00000000000014c4",
+    "controller_operation": "exec-00000000000014ee",
     "result": "environment_isolation_failure",
     "scored_rows": 0,
-    "foreign_pid": 1072000,
-    "foreign_physical_npu": 0,
-    "evidence": "HOTPATH_CACHE10R4_RESOURCE_CONFLICT.md"
+    "foreign_pid": 1206204,
+    "foreign_physical_npu": 2,
+    "foreign_container": "cannbench_ds",
+    "evidence": "HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md"
   },
   "git_push_state": {
-    "status": "synchronized_as_of_1fec73f",
-    "verified_commit": "1fec73f6c2d286d583d05c81a945f8d306b3d1fc",
-    "push_operation": "exec-00000000000014ce",
-    "live_remote_equality_operation": "exec-00000000000014cf",
+    "status": "synchronized_as_of_5e3b774_before_this_update",
+    "verified_commit": "5e3b774d4bebccc56f69a3ca1e2bf399008d7b58",
+    "push_operation": "exec-00000000000014ea",
+    "live_remote_equality_operation": "exec-00000000000014eb",
     "recovery": "After any later validated commit, push HEAD to the named workstream branch without force and independently verify live remote, upstream and clean local HEAD equality."
   },
-  "next_action": "Preserve and independently audit cache10r4's environment-invalid 0/127 root; do not pair or reuse it. Continue productive offline Skill acceptance while actual foreign NPU0-3 processes run. Start a fresh original-protocol full HYPIC arm only when physical0-3 are actually idle, irrespective of passive Docker mappings; keep continuous isolation and exact-owned cleanup. Do not touch foreign containers or NPU4-7. Push later validated workstream checkpoints and verify live equality. Do not promote a HYPIC or all-Skill conclusion before their gates pass."
+  "next_action": "Preserve and independently audit cache10r5's environment-invalid 0/127 root; do not pair or reuse it. Continue productive offline Skill acceptance while actual foreign NPU0-3 processes run. A momentary idle snapshot is not an uninterrupted lease after three real collisions. Start a fresh original-protocol full HYPIC arm only when physical0-3 actual use is sustainably clear, irrespective of passive Docker mappings; retain startup/scoring guards and exact-owned cleanup. Do not touch foreign containers or NPU4-7. Push later validated workstream checkpoints and verify live equality. Do not promote a HYPIC or all-Skill conclusion before their gates pass."
 }

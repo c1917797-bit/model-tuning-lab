@@ -2,13 +2,13 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 15:50 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 16:02 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The branch is pushed and verified through 1fec73f; `exec-00000000000014cf`
   confirmed live remote, upstream and clean local HEAD equality after the
   target-host Git HTTPS authentication recovered. Integrated main has not
   accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
-  acceptance remain incomplete. cache10r3 and cache10r4 are both
+  acceptance remain incomplete. cache10r3, cache10r4 and cache10r5 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
   verified, 2 partial, 25 missing. V11/P14/N4 is a separate campaign matrix.
@@ -53,15 +53,21 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   scoring guard starts after service readiness; preserve this startup
   overlap as a caveat and rely on the later guard/evidence for the score
   decision. No foreign container was modified.
+- The startup guard repair is in HOTPATH_STARTUP_GUARD_REPAIR.md and was
+  pushed at 5e3b774 after 34 offline tests. cache10r5 live operation
+  exec-00000000000014ee proved that its new pre-health guard catches
+  `cannbench_ds` on physical NPU2 and releases only the exact owned
+  container within about 135 seconds, at 0/127 scored samples. See
+  HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md and immutable hashes.
 
 ## 4. Current Action
 
-cache10r4 is terminal and environment-invalid. At 15:50 UTC, physical
-NPU1 had actual foreign processes; do not launch another full arm during
-real use. An idle-at-launch snapshot is not a guarantee of uninterrupted
-isolation. Continue other Skill acceptance and wait for actual NPU0–3
-idleness; passive Docker mappings alone remain irrelevant. The branch was
-synchronized at c30c76a before this status update; check again before
+cache10r5 is terminal and environment-invalid. At 16:01 UTC, physical
+NPU1 again had actual foreign processes; do not launch another full arm
+during real use. A momentary idle snapshot is not an uninterrupted lease.
+Continue other Skill acceptance until NPU0–3 use is sustainably clear;
+passive Docker mappings alone remain irrelevant. The branch was
+synchronized at 5e3b774 before this status update; check again before
 claiming new changes are remote.
 
 ## 5. Next Actions
@@ -73,9 +79,9 @@ claiming new changes are remote.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Audit cache10r4's immutable root and terminal exec-00000000000014c4
-   against HOTPATH_CACHE10R4_RESOURCE_CONFLICT.md. Do not reuse
-   cache10r2/cache10r3/cache10r4 or silently switch to cache10split.
+3. Audit cache10r5's immutable root and terminal exec-00000000000014ee
+   against HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md. Do not reuse
+   cache10r2/cache10r3/cache10r4/cache10r5 or silently switch to cache10split.
 4. Complete HYPIC 127×3 scored quality and independent guard/release
    audit, then same-identity no-cache arm and pair audit. Only after
    quality gates pass, run matched performance.
@@ -128,9 +134,12 @@ push the current HEAD with
 `git push origin HEAD:work/hypic-npu03-cpu-binding-fix-20261007` and
 check the live remote ref before claiming it is synchronized.
 
-cache10r3 controller exec-000000000000147b and cache10r4 controller
-exec-00000000000014c4 are terminal exit 1, both environment-invalid.
-Their immutable raw roots are respectively
+cache10r3 controller exec-000000000000147b, cache10r4 controller
+exec-00000000000014c4, and cache10r5 controller exec-00000000000014ee
+are terminal exit 1, all environment-invalid. Their immutable raw roots are
+respectively
 /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r3-full-hypic
 and
-/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r4-full-hypic.
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r4-full-hypic
+and
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r5-full-hypic.
