@@ -7,11 +7,16 @@ import json
 import os
 
 os.environ["HYPIC_HOTPATH_AUDIT_CAMPAIGN"] = "reserve"
+STRESS_CAMPAIGN = os.environ.get("HYPIC_HOTPATH_QUALITY_CAMPAIGN", "reserve")
+if STRESS_CAMPAIGN not in {"reserve", "reserve2"}:
+    raise RuntimeError("unrecognized reserve stress campaign")
 
 from hotpath_quality_audit import audit_arm, frozen_cases, quality, require
 
 
-ROOT = quality.ROOT / "quality-context-41984-hotpath-reserve-stress-hypic"
+ROOT = quality.ROOT / ("quality-context-41984-hotpath-reserve-stress2-hypic"
+                       if STRESS_CAMPAIGN == "reserve2" else
+                       "quality-context-41984-hotpath-reserve-stress-hypic")
 
 
 def main() -> int:

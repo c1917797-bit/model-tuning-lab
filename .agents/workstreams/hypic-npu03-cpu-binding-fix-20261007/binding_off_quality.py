@@ -34,6 +34,7 @@ ATTEMPT_ROOTS = {
     "hotpath-full-baseline": "quality-context-41984-hotpath-full-baseline",
     "hotpath-full-hypic": "quality-context-41984-hotpath-full-hypic",
     "hotpath-reserve-stress-hypic": "quality-context-41984-hotpath-reserve-stress-hypic",
+    "hotpath-reserve-stress2-hypic": "quality-context-41984-hotpath-reserve-stress2-hypic",
     "hotpath-reserve-full-baseline": "quality-context-41984-hotpath-reserve-full-baseline",
     "hotpath-reserve-full-hypic": "quality-context-41984-hotpath-reserve-full-hypic",
 }
@@ -41,6 +42,7 @@ if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
 RESERVE_ATTEMPTS = frozenset({
     "hotpath-reserve-stress-hypic",
+    "hotpath-reserve-stress2-hypic",
     "hotpath-reserve-full-baseline",
     "hotpath-reserve-full-hypic",
 })

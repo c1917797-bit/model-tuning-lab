@@ -40,9 +40,14 @@ incomplete-fail-fast** candidate, not a quality comparison or a negative
 paper verdict. Raw root is
 `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-full-hypic`.
 Read `HOTPATH_CAPACITY_REPAIR.md` for exact hashes and the frozen recovery
-gate. Next: validate the branch-only 0.85 common-service reserve seam on CPU,
-then prove a fresh physical NPU0-3 lane and run the new-root candidate c8
-stress preflight including sample 7. If it passes, re-run both full arms at
+gate. First 0.85 stress preflight `exec-00000000000012f9` was invalidated
+before the sentinel completed: guard saw transient foreign PID 1762147 on
+physical NPU0 at 10:06:29 UTC; 0/9 samples, 0/27 scored rows. The probe had
+no error and exact owned release passed. PID ended before attribution; other
+active jobs on this host explicitly target 0/1, so do not assume exclusive
+lane from an instantaneously empty NPU. Preserve the failed root. Next:
+establish an interference-free window and use only the new `reserve2/stress`
+root, then independently audit. If it passes, re-run both full arms at
 0.85; never reuse the valid but different 0.9 baseline. Do not lower the
 HYPIC watermark, reduce concurrency/output, restart the failed root, use
 NPU4-7, or infer whole-paper/all-Skill acceptance. Raw outputs stay outside

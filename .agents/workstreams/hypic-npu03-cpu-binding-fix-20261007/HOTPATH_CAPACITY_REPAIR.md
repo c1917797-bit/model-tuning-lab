@@ -68,6 +68,33 @@ coverage, intrudes on another process, or fails to release. Preserve its raw
 root and diagnose the new first failure; do not silently step down the
 watermark, mark incomplete rows correct, or retry in the same root.
 
+## First reserve stress attempt: external interference, not capacity evidence
+
+`exec-00000000000012f9` exited 1 at 2026-10-08 10:07:06 UTC. It started the
+0.85 HYPIC service, but before the serialized sentinel completed the guard
+detected PID 1762147 on physical NPU0 at 10:06:29 UTC. This PID was not one
+of the four expected workers [1684018, 1684019, 1684020, 1684021]. The guard
+recorded 18 samples, one foreign event and zero probe errors; controller
+persisted 0/9 samples and 0/27 scored rows. Exact owned container, worker,
+port and NPU release passed. No quality or capacity pass/fail can be inferred
+from this interrupted attempt. The transient PID had exited before a process
+tree/cgroup lookup, so its owner is unproven. Separately observed active
+operator tasks on this shared host explicitly target NPU0/1; this is a
+collision risk, not proof of this PID's origin. Do not stop those tasks.
+
+Raw root: `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-reserve-stress-hypic`.
+arm-result SHA256:
+`6c71de2f884646cf469d6f55e4561af3fdc028be3acc4b43690030dfc9bf62e7`;
+lane-guard SHA256:
+`0379426f27fce670bd24a83f1c00e33eee16898584979f67f00028a3888ac82f`;
+service-stop SHA256:
+`ec0c2a9eaf32e70bfcd3628cb0921113ffec312cff1f21e3b093b9fed178f7fe`.
+
+The only authorized next stress root is `reserve2/stress` below. Before
+launch, inspect physical 0-3 use and active job configuration over a quiet
+window; an instantaneous empty snapshot is insufficient. Abort on any new
+foreign process without deleting its container or retrying the same root.
+
 ## Exact new-root entry points
 
 Run only after fresh AWMCP target/physical-lane ownership checks. Each
@@ -75,8 +102,8 @@ controller refuses an existing attempt root and runs one arm at a time.
 Use a persistent AWMCP operation handle; do not background a second copy.
 
 ```sh
-HYPIC_HOTPATH_QUALITY_CAMPAIGN=reserve HYPIC_HOTPATH_QUALITY_ARM=hypic-only HYPIC_HOTPATH_QUALITY_MODE=stress python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py
-python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_stress_audit.py
+HYPIC_HOTPATH_QUALITY_CAMPAIGN=reserve2 HYPIC_HOTPATH_QUALITY_ARM=hypic-only HYPIC_HOTPATH_QUALITY_MODE=stress python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py
+HYPIC_HOTPATH_QUALITY_CAMPAIGN=reserve2 python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_stress_audit.py
 HYPIC_HOTPATH_QUALITY_CAMPAIGN=reserve HYPIC_HOTPATH_QUALITY_ARM=no-cache HYPIC_HOTPATH_QUALITY_MODE=full python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py
 HYPIC_HOTPATH_QUALITY_CAMPAIGN=reserve HYPIC_HOTPATH_QUALITY_ARM=hypic-only HYPIC_HOTPATH_QUALITY_MODE=full python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py
 HYPIC_HOTPATH_AUDIT_CAMPAIGN=reserve python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_audit.py
