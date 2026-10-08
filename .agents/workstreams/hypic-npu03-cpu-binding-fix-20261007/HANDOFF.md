@@ -1,5 +1,15 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 14:46 UTC long-goal audit:** A fresh fetch confirmed main is
+still `ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2` with 29 Skill
+entrypoints. `MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md` now separates
+the existing bounded V11/P14/N4 inventory from the still-missing per-Skill
+real-task, raw-hash, environment and regression evidence needed for the
+long-term goal. The old 11-item 2026-10-06 JSON must not be generalized to
+all 29. No status was raised, no main change or NPU run occurred. Resume
+short-term work only after the user's quality-method choice; continue
+independent per-Skill cases without redoing completed evidence.
+
 **2026-10-08 14:43 UTC draft-audit checkpoint:** The optional, still
 unapproved split protocol is now documented in
 `HOTPATH_CACHE10_SPLIT_DRAFT.md`. The runner has an explicit
