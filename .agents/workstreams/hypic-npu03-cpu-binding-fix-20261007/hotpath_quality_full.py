@@ -46,7 +46,8 @@ if not ((CAMPAIGN == "original" and (ARM, MODE) in ORIGINAL_PAIRS)
         or (CAMPAIGN == "cache10" and (ARM, MODE) in RESERVE_PAIRS)
         or (CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5", "cache10r6", "cache10r7", "cache10r8", "cache10r9", "cache10r10"}
             and (ARM, MODE) in {("no-cache", "full"), ("hypic-only", "full")})
-        or (CAMPAIGN == "cache10r11" and (ARM, MODE) == ("hypic-only", "stress"))
+        or (CAMPAIGN in {"cache10r11", "cache10r12"}
+            and (ARM, MODE) == ("hypic-only", "stress"))
         or (CAMPAIGN == "cache10split" and (ARM, MODE, SHARD) in {
             ("no-cache", "full", "0"), ("no-cache", "full", "1"),
             ("hypic-only", "full", "1")})
@@ -58,6 +59,8 @@ if CAMPAIGN == "cache10split":
     )
 elif CAMPAIGN == "cache10r11":
     os.environ["HYPIC_QUALITY_ATTEMPT"] = "hotpath-cache10r11-stress-hypic"
+elif CAMPAIGN == "cache10r12":
+    os.environ["HYPIC_QUALITY_ATTEMPT"] = "hotpath-cache10r12-stress-hypic"
 elif CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5", "cache10r6", "cache10r7", "cache10r8", "cache10r9", "cache10r10"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         f"hotpath-{CAMPAIGN}-full-baseline" if ARM == "no-cache" else
@@ -143,7 +146,7 @@ def cases() -> tuple[list[dict], object]:
             raise RuntimeError("pilot sample selection not unique")
         items = [items[index] for index in selected]
     elif MODE == "stress":
-        if CAMPAIGN == "cache10r11":
+        if CAMPAIGN in {"cache10r11", "cache10r12"}:
             # Frozen post-r10 diagnostic: >10 distinct eligible prompts,
             # including every late failed sample and neighboring controls.
             selected = (*range(75, 92), 107, 111)
