@@ -89,3 +89,22 @@ GQA reduction and tie semantics before preregistering a new oracle; retain
 FP64 error/feedback checks and reject non-tie discrepancies. Label adapted
 probability-GQA versus official logit-GQA honestly.
 Actual evidence: [Oct8 selector and CPU stages](../../../workstreams/qwen36-damp-ascend-20261006/SELECTOR_OBSERVATION_AND_KIVI_CPU_20261008.md).
+
+## Separate the author's discrete selector from a high-precision output oracle
+
+When the actual author uses BF16 selection arithmetic, FP64 discrete
+reselection need not select the same channels/tokens. Freeze original dtype,
+division/matmul/GQA reduction order and legal exact ties before the new run.
+For the independently justified ANN successor, each q/rq invokes its own
+byte-bound author selector outside capture; then recompute complete output,
+softmax/alpha/mean from that query's original full K/V in CPU-FP64. Candidate
+support/channels/alpha cannot supply this independent feedback oracle.
+FP64 reselection stays a labelled diagnostic, not the BF16 author's support
+contract. Keep non-tie, full-output, per-head and multi-step gates; preserve
+every previous failure rather than retrospectively rewriting it.
+
+The module-loader repair and1373's25 source tests establish software evidence
+only. They do not establish the new128/20480 NPU matrix, model replay, task
+quality or speed. The unchanged original score/ranking equality predicates
+remain to be tested on the actual backend.
+[Pre-run source justification and evidence limits](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).

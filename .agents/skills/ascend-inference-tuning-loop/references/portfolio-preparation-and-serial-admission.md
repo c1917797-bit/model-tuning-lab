@@ -237,3 +237,25 @@ later MemAvailable drift has other contributors. Current workstream originals:
 MEMORY_COMPLETION_AND_SPARQ008_RECOVERY_20261008.md,
 SPARQ008_AND_MODEL_LOST_OPERATION_RECOVERY_ORIGINAL_20261008.json and
 SPARQ008_ATB_AND_MEMORY_READONLY_ORIGINAL_20261008.json.
+
+## Validate the reference loader and keep a real successor queue
+
+ANN1367's15-test stdlib entry really failed the original author's dataclass
+lookup before any NPU execution. A common globals dictionary overwrote a
+ModuleType's `__name__`; reading `module.__name__` afterwards returned the
+overwritten value, not its registered `sys.modules` key. Audit this actual
+namespace/interpreter boundary while retaining the exact author AST body.
+Do not remove dataclasses or replace the author model to make a mock pass.
+MAIN1373's corrected private v2 really passed25 tests,43-source closure and
+both default-OFF CLIs. Canonical integration, same-image arithmetic and the
+full native/model consumers remain separate and pending.
+
+Three active preparers or three authored packets do not establish three
+executable successors. Record the unrun source/CLI/mount/consumer blockers per
+packet and prioritize the highest-value fully reviewed unrun gate. During a
+device job, close the successor's aggregate entry and handoffs rather than
+holding every preparer for its result. Unexpected real-device failure remains
+possible; prolonged preparation idle time is not made acceptable by dummy
+load or a source-only readiness label.
+
+[Actual successes, failures and queue gaps](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).

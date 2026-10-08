@@ -1,5 +1,45 @@
 # DAMP Ascend — current workstream
 
+## Current executable-readiness learning checkpoint — 2026-10-08
+
+Latest user request: ingest verified successes/failures into maintainer skills
+and normally push the current work branch. Read
+EXECUTABLE_READINESS_LEARNING_20261008.md and its structured Ref/coverage JSON.
+This is incremental knowledge/checkpoint work, not an accepted paper result.
+
+MAIN134d is actually failed/stopped, not live. Four canaries preceded a RSS
+observer error; original rejected PID/syscall is unavailable. Actual cleanup
+and1352 independently prove exact CIDcdcb5013... stopped-retained/all owned
+host children reaped; original operation registry not_found is preserved.
+Source/math/thresholds and old failed outputs remain immutable.
+MAIN136f completed0:14 real-process core tests; MAIN1373 completed0:25 ANN
+private software/source43/default-OFF checks. Neither ran NPU tensors/models.
+Do not promote them to the complete v9 host167, same-image or full-native gates.
+
+Three rolling preparers delivered/refine distinct private packets:
+v9 owned-tree TP4 controller; ANNv2 official selector plus long-context service;
+SKVQ loader/capture/controller then actual-author calibration gap.
+All remain default-OFF pending MAIN aggregate/source review and real admission.
+v9 full167/same-image/TP4-all48/conv/six-family lifecycle, ANN canonical/native
+128/20480/all16FA/full-model, paired1024 performance and final2048 tasks remain
+pending. There is no new accepted non-HYPIC performance/task method.
+The last independent4–7 observations were idle; this does not prove fresh
+resources for the next load. Idle time is a preparation/control gap, not
+established outside occupation. No dummy utilization.
+
+Use physical4–7 only; do not interfere0–3.32GiB HugeTLB authority remainsSPENT.
+PortfolioOct9 11:17:31Z, SparsePrefix lineageOct9 07:09Z and SparQ conservative
+Oct8 19:00Z cap are not reset; closed DAMP/KIVI/H8 scopes stay closed.
+Canonical root/branch remain /opt/host/vnf/austinov/model-tuning-lab,
+work/qwen36-damp-ascend-20261006. Git basef815419f..., upstream40 ahead before
+this checkpoint; unknown untracked files must remain excluded/preserved.
+Normal publication must be proved by actual push+remote ref; prior Git HTTPS
+authentication blocker is not bypassed, and no main/force update is allowed.
+Next goal action after the requested checkpoint: source-review/run the complete
+v9 aggregate prerequisites, then one fresh-admitted TP4 successor; keep ANN
+and SKVQ independent successors preparing, not all agents on one controller.
+Older sections below are history, not live execution authority.
+
 ## Current SparQ011 failure / released devices — 2026-10-08 08:47Z
 
 MAIN12a2 is TERMINAL FAILED, not running. Same-image Devices[] ABI and actual

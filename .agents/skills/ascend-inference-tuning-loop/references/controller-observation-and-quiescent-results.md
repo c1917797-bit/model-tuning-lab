@@ -88,3 +88,24 @@ The source-bound SparQ successor and complete consumer implement the real
 boundary; all145 canonical tests passed after two obsolete fixture assertions
 were correctly replaced. This software result is not a numerical PASS.
 See [actual correction and next gate](../../../workstreams/qwen36-damp-ascend-20261006/PROTECTED_CARD_OBSERVER_CORRECTION_20261008.md).
+
+## Bind identity before the first RSS sample
+
+Actual SparsePrefix134d failed with `unknown vanished process is not zero RSS`
+after the four canaries, while its sampled peak was about124MiB under512MiB.
+The specific rejected PID/syscall was not retained: do not claim that a named
+Docker or SMI process caused it, or infer an unobserved peak bound. Its actual
+stopped/retained cleanup and missing registry are distinct authorities.
+
+For this bounded observer, capture actual Popen PID/start and descendant
+parent/start before entering the RSS scope. A candidate disappearing between
+enumeration and its first identity is not an already-known departed sample.
+Keep unknown/live-unreadable/permission/PID-reuse failures hard. If a pending
+candidate is retired, retain independent actual parent/thread/children and
+strict absence fences; do not publish invented RSS=0. Record the first rejected
+PID, syscall, errno and identity evidence before own-only cleanup.
+
+MAIN136f really passed14 root/grandchild/lifetime/negative source tests.
+It does not prove the v9 host integration, full167 suite, same-image software,
+or NPU/model correctness. Preserve the134d failure.
+[Actual evidence and remaining gates](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).

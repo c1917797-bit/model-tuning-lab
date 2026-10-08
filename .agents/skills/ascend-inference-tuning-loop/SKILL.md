@@ -169,7 +169,7 @@ For deferred-state GDN failures or copy-only observation kernels, read
 native ABI versus FP32 proxies, production anchors, failed-build retention,
 actual receipt consumers, card attribution, and ordinary/HugeTLB memory ledgers.
 
-For RSS observer process-exit errors or child reports that change during cleanup,
+For RSS observer first-identity/exit races or child reports that change during cleanup,
 read [controller observation and quiescent results](references/controller-observation-and-quiescent-results.md).
 Keep controller failure distinct from algorithm failure; freeze Refs after writers stop.
 

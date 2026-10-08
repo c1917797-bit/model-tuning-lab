@@ -70,6 +70,7 @@ skills:
       - record a successful failed rejected or inconclusive attempt
       - close a tuning experiment
       - restart a reusable experiment container after mounted source changes
+      - audit executable readiness or a process-observer failure in an Ascend preparation queue
     scope:
       - configs/**
       - scripts/**

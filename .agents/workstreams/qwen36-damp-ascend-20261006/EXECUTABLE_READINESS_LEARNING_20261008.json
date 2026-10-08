@@ -1,0 +1,162 @@
+{
+  "schema": "mst.ascend-experience-ingestion/v1",
+  "id": "exp-20261008-executable-readiness-and-controller-evidence",
+  "source": "chicaihong01 actual SparsePrefix134d, ANN1367/1373 and owned-tree136f",
+  "validated_base_commit": "f815419f910b41dba45a37fe1d721e359f2759cd",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "scope": "incremental experience only; historical lessons and negative history remain intact; no new NPU numerical/E2E/task acceptance",
+  "facts": [
+    "v8 same-image software succeeded, but actual134d failed before complete model/lifecycle evidence; four canaries are not that evidence.",
+    "134d primary was unknown vanished process is not zero RSS; the rejected PID/syscall was not retained, so the exact root/descendant cause remains unproven.",
+    "Actual cleanup and1352 independently establish the exact owned CID stopped-retained/all owned host children reaped; registry not_found is preserved, not replaced by an invented terminal.",
+    "1367 actual original-author AST software test failed dataclass module lookup; source-level namespace correction does not modify original author AST.",
+    "136f actual14 new real-process tests pass;1373 actual25 ANN source tests/default-OFF/source43 closure pass; no NPU execution in either.",
+    "Three rolling preparers do not imply three executable successors; v9 full167/same-image and ANN canonical/native/model/performance/task gates remain pending."
+  ],
+  "software_results": [
+    {
+      "operation_id": "exec-0000000000001367",
+      "exit_code": 1,
+      "tests_run": 15,
+      "errors": 1,
+      "scope": "private v1 stdlib only",
+      "npu_executed": false
+    },
+    {
+      "operation_id": "exec-000000000000136f",
+      "exit_code": 0,
+      "tests_run": 14,
+      "errors": 0,
+      "scope": "frozen v9 tree core, real owned roots/grandchildren and negatives",
+      "npu_executed": false
+    },
+    {
+      "operation_id": "exec-0000000000001373",
+      "exit_code": 0,
+      "tests_run": 25,
+      "errors": 0,
+      "scope": "private ANN v2, 43 source closure and default-OFF entries; not canonical integration or same-image arithmetic",
+      "npu_executed": false
+    }
+  ],
+  "original_134d": {
+    "status": "failed",
+    "primary": "ValueError('unknown vanished process is not zero RSS')",
+    "sampled_host_cli_rss_peak_bytes": 130076672,
+    "rss_limit_bytes": 536870912,
+    "unobserved_peak_bounded": false,
+    "numerical_success": false,
+    "model_success": false,
+    "paired_e2e_success": false,
+    "formal_timing": false,
+    "own_cid": "cdcb5013d07db2be7eec5219ac1189a26f8fca7be956a2ab5069972a71fdf0a4",
+    "stopped_retained": true,
+    "exact_rejected_pid_or_syscall_available": false
+  },
+  "lessons": [
+    {
+      "id": "ready-is-executable-not-authored",
+      "trigger": "multi-paper queue or scarce NPU admission",
+      "different_action": "Require actual CLI/mount/schema/source-handoff evidence before ready labels; track the ready successor, not active-agent count.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/portfolio-preparation-and-serial-admission.md",
+      "classification": "existing_skill_update",
+      "verification": "actual source-stage receipts and Maintainer Skill Tree validation"
+    },
+    {
+      "id": "first-identity-process-lifetime",
+      "trigger": "RSS sample after /proc enumeration and a short-lived owned child",
+      "different_action": "Pin actual Popen/PID/start/parent identity before sampling; preserve exact syscall/errno/failed PID, and keep unknown/live/reused identities fail-closed.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md",
+      "classification": "existing_skill_update",
+      "verification": "136f actual14 real-process positive/negative tests; full167 host integration still pending"
+    },
+    {
+      "id": "literal-reference-runtime-namespace",
+      "trigger": "AST-extracted original author code with dataclasses or annotations",
+      "different_action": "Exercise the actual interpreter/module namespace; do not let common globals overwrite the sys.modules registration key; keep the author AST body unchanged.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/portfolio-preparation-and-serial-admission.md",
+      "classification": "existing_skill_update",
+      "verification": "1367 retained failure; 1373 actual25 tests and source/default-OFF entries"
+    },
+    {
+      "id": "author-discrete-selector-versus-fp64",
+      "trigger": "BF16 discrete top-k author selector plus high-precision output/feedback oracle",
+      "different_action": "Freeze author dtype and operation order; independently obtain the author's discrete selector per q/rq, then recompute complete output/alpha/mean from original q/K/V in FP64. Do not substitute candidate support or claim a new full matrix.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/ranking-and-packed-snapshots.md",
+      "classification": "existing_skill_update",
+      "verification": "source-bound official AST plus1373 software; actual full native128/20480 remains pending"
+    }
+  ],
+  "raw_refs": {
+    "RESULT.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/RESULT.json",
+      "bytes": 5567,
+      "sha256": "acefd5bcd7ecc1b46568e7857432a2606d3ed70c04ec0e1ddd6e6671ab4e1019"
+    },
+    "STABLE_COMMAND_RECORDS.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/STABLE_COMMAND_RECORDS.json",
+      "bytes": 119507,
+      "sha256": "f3ef29b4db196d8e6df46250ab19d7e41a08a50e80e240dd23db05dd8b982405"
+    },
+    "MAIN_134D_LAUNCH_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/MAIN_134D_LAUNCH_ORIGINAL.json",
+      "bytes": 3255,
+      "sha256": "14216b673a5eef5e3cea4d908a7db6ceb55a870c871846a4a146053e109ca25f"
+    },
+    "MAIN_134D_REGISTRY_MISSING_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/MAIN_134D_REGISTRY_MISSING_ORIGINAL.json",
+      "bytes": 3902,
+      "sha256": "0401c74e780aa2c7ccf0005cfd6c483028a0cf37d2171f38478baca3ea273856"
+    },
+    "MAIN_1352_RELEASE_ORIENTATION_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/MAIN_1352_RELEASE_ORIENTATION_ORIGINAL.json",
+      "bytes": 34694,
+      "sha256": "496b235c08f516869a6d059d0db4b908826bd052350d656af8d88e786bcb7317"
+    },
+    "MAIN_1367_ANN_SOFTWARE_FAILURE_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/MAIN_1367_ANN_SOFTWARE_FAILURE_ORIGINAL.json",
+      "bytes": 19352,
+      "sha256": "c20de8a46a2d2c2f7cce8754d9e45e7a7681a0b7c3b86f841034417b88fe14fb"
+    },
+    "MAIN_136F_TREE_SOFTWARE_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/MAIN_136F_TREE_SOFTWARE_ORIGINAL.json",
+      "bytes": 9296,
+      "sha256": "c23cdc759b71f7f008681351a7875fec080017e3a04520d2dbf32e96d5300be4"
+    },
+    "cleanup": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp8-tp4-cpu7-20261008-001/cleanup.json",
+      "bytes": 1581,
+      "sha256": "c04db56bf768f0ad6b8dbac0ed85b6e92416ec2210489bf8860bb201bff91a4c"
+    },
+    "ANN_v2_1373": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-ann-v2-software-20261008-001/MAIN_1373_WHOLE_ORIGINAL.json",
+      "bytes": 19239,
+      "sha256": "3d36835792ecf57f6f37dbf74d99360086338c824b4d807e9b7d4803563627f8"
+    }
+  },
+  "limits": {
+    "physical_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_cards": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugepage_release_32GiB": "SPENT; no new permission",
+    "portfolio_cutoff_epoch": 1791544651,
+    "sparseprefix_lineage_cutoff_epoch": 1791529740,
+    "sparq_conservative_cap_epoch": 1791486000
+  },
+  "pending": {
+    "native_full_matrix": true,
+    "full_model_lifecycle": true,
+    "paired_fixed1024_repeated_performance": true,
+    "final2048_LongBenchV2_GSM8K": true,
+    "git_publication": "must be proved by actual push and remote ref; prior auth blocker not bypassed"
+  }
+}
