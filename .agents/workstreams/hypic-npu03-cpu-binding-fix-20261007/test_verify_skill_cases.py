@@ -26,10 +26,22 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 10)
-        self.assertEqual(report["skills_without_case"], 19)
+        self.assertEqual(report["cases_with_verified_provenance"], 11)
+        self.assertEqual(report["skills_without_case"], 18)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 8, "verified": 2})
+                         {"partial-evidence": 9, "verified": 2})
+
+    def test_performance_optimization_case_stays_partial(self) -> None:
+        path = cases.CASES / "ascend-performance-optimization.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-performance-optimization"})
+        self.assertEqual(skill, "ascend-performance-optimization")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["candidate_class"],
+                         "supported_upstream_configuration")
+        self.assertFalse(item["observed"]["optimization_accepted"])
+        self.assertFalse(item["observed"]["full_2048_token_paired_quality_complete"])
 
     def test_inference_tuning_loop_replay_stays_bounded(self) -> None:
         path = cases.CASES / "ascend-inference-tuning-loop.json"

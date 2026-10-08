@@ -11,7 +11,7 @@
   acceptance remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 8 partial, 19 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 9 partial, 18 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
@@ -19,8 +19,8 @@
   in task.json. At 19:30 UTC, 68 samples were complete; 199/204 scored
   requests had four-worker proof; five requests lack that proof.
   See HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md; no final verdict.
-- Quality and benchmark Skill cases eight/nine remain partial; see their
-  request-coverage and baseline-reuse acceptance reports.
+- Quality, benchmark, tuning and optimization Skill cases remain partial;
+  see their bounded raw-replay reports and acceptance boundaries.
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median
   fell 81.12%, but full HYPIC and 2048-token quality remain open.

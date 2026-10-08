@@ -1,0 +1,58 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-performance-optimization",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Choose and test one official CPU-binding-off treatment after attributing a physical NPU0-3 Decode floor",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "50acfe94893847ffdf13cceabd0b294e52cb2e36",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma; Qwen3.6-27B BF16 TP4 physical NPU0-3; matched official-image no-cache CPU-binding-on/off short profiled probe and three-round unprofiled 40x1024 c16 performance comparison",
+  "observed": {
+    "primary_bottleneck_class": "scheduler/CPU launch and graph task-update synchronization",
+    "candidate_class": "supported_upstream_configuration",
+    "primary_variable": "enable_cpu_binding=false",
+    "profiled_probe_control_tpot_ms": 499.0045189763297,
+    "profiled_probe_candidate_tpot_ms": 140.95204994087035,
+    "profiled_probe_tpot_reduction_percent": 71.7533520077087,
+    "formal_median_tpot_reduction_percent": 81.12318290741513,
+    "raw_probe_json_hashes_verified": 4,
+    "formal_performance_runs_hash_verified": 6,
+    "underlying_cpu_pool_subcause_proven": false,
+    "full_2048_token_paired_quality_complete": false,
+    "optimization_accepted": false,
+    "main_and_remote_integration_complete": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_PERFORMANCE_OPTIMIZATION_CASE_20261008.md",
+      "sha256": "b0ad2e2f952caec19ed9a2ed649e44dd5776d7d2900666437df47bb481302a9b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_performance_optimization_case.py",
+      "sha256": "acddc9941e6bbb1b8fdcc99badc27f8d032af977ee1b58191638493637bd88fc"
+    },
+    {
+      "path": ".agents/experiments/exp-20261007-hypic-npu03-comm-root.yaml",
+      "sha256": "4d040d4f0567a13eb0bd3f7ed72d869d15572667c9461068782349f8299c86c5"
+    },
+    {
+      "path": ".agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml",
+      "sha256": "9c06af152f902684d10251724d01bf3c86c18edc4c4e02c839ba53ccac69a9ad"
+    }
+  ],
+  "external_raw_receipts": {
+    "profiled_control_contract_sha256": "dcdd79886b4b004def99ef3e21bb03a93d4ad8bd5df326dc67872b73ebee8a71",
+    "profiled_candidate_contract_sha256": "d52fd46e6ba0c7b74798b69ad1929db7c59119cfb2b1b26b4461807bf60212e1",
+    "profiled_control_workload_sha256": "84c9a9cafe0f5d0754805d68a8e25e55741416d8a4cead5fa462a32b6ede2ced",
+    "profiled_candidate_workload_sha256": "46a60423e2d42512d799494222611421e9568890cabb9649dfb983f033a2fa7f"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "The diagnostic and formal raw runs support one bounded official-configuration candidate on physical NPU0-3. They do not prove the internal CPU-pool subcause, a full enabled-path feature matrix, paired 2048-token quality, memory/stability/tail and neighboring-resource acceptance, or transfer to the later HYPIC source/0.85 configuration. No production or complete Skill acceptance is claimed.",
+  "next_gate": "Complete the active r10 quality and hot-path audit without rerun. For any future matching CPU-binding source/setting adoption, verify full paired 2048-token quality and resource guardrails on actually idle physical NPU0-3, then revisit this Skill against the current main blob.",
+  "drift_trigger": "Revalidate when main Skill/registry, CPU-binding source/configuration, model/image/TP or physical lane, cpuset, benchmark/scorer, or any raw receipt changes."
+}
