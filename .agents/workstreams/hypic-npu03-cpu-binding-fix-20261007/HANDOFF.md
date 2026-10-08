@@ -1,5 +1,19 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 15:09 UTC cache10r3 terminal decision:** AWMCP operation
+exec-000000000000147b exited 1 with zero completed samples and zero scored
+rows. The exact owned service became healthy at 15:09:28; the first lane
+guard sample at 15:09:30 found foreign PID 672924 on physical NPU3, with
+cgroup container ID efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6
+(cannbench_ds). It had a real NPU process, not merely a device mapping.
+The controller removed only its own service; its stop receipt proves owned
+NPU and port release. Classification is environment/isolation failure, not
+an algorithm or quality verdict. Do not resume cache10r3, pair it with a
+baseline, or count it as another quality trial. Full raw paths and SHA256
+are in HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md. The user has been asked
+about a continuous clean 0–3 window. Continue offline Skill evidence work
+without repeating completed runs; leave other containers and NPU4–7 alone.
+
 **2026-10-08 15:01 UTC active original-protocol retry:** The user clarified
 that idle physical NPU0–3 may be used even when other containers map them.
 Device mapping alone is no longer the lane gate; actual NPU processes and

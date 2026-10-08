@@ -1,8 +1,8 @@
 {
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
-  "objective": "Apply and verify an opt-in supported vLLM-Ascend CPU-binding-off repair for the HYPIC NPU0-3 Decode floor.",
-  "state": "partial_component",
+  "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
+  "state": "active_offline_pending_clean_npu03_window",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -10,7 +10,18 @@
     "forbidden_npus": [4, 5, 6, 7],
     "cpu_set": "112-191",
     "service_port": 8223,
-    "preexisting_sleep_container": "agentgpu-910b4-qwen35-4b-v0; do not modify"
+    "preexisting_sleep_container": "agentgpu-910b4-qwen35-4b-v0; do not modify",
+    "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
-  "next_action": "Wait for an interference-free physical NPU0-3 window; active external jobs may intermittently enter 0/1. Run fresh reserve2 c8 stress including sample 7, audit it, then rerun both full 2048-token quality arms at common 0.85 and independent performance before any adoption claim. Preserve failed roots and do not touch NPU4-7."
+  "latest_attempt": {
+    "campaign": "cache10r3",
+    "arm": "hypic-only",
+    "controller_operation": "exec-000000000000147b",
+    "result": "environment_isolation_failure",
+    "scored_rows": 0,
+    "foreign_container": "cannbench_ds",
+    "foreign_physical_npu": 3,
+    "evidence": "HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md"
+  },
+  "next_action": "Continue non-NPU Skill evidence work without repeating completed tests. Coordinate an uninterrupted physical NPU0-3 window while cannbench_ds runs intermittent real kernels. Do not reuse cache10r3, do not launch a matching baseline for it, and do not touch the foreign container. In a clean window, declare a new original-protocol full HYPIC arm, independently audit it, then run a same-identity full no-cache arm and paired performance; do not promote a conclusion before all gates pass."
 }
