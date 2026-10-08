@@ -2,14 +2,14 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:39 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 16:58 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
   push succeeded without changing persistent Git settings.
 - Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
-  acceptance remain incomplete. cache10r3 through cache10r7 are
+  acceptance remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
   verified, 5 partial, 22 missing. V11/P14/N4 is a separate campaign matrix.
@@ -63,6 +63,11 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   passed. The second launch caught a real foreign PID 1482057 on physical
   NPU3 during startup at 16:28:11 UTC. It stopped at 0/127 and removed
   only its owned container; see HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md.
+- The user chose opportunistic actual-idle attempts over requiring an exclusive
+  reservation. cache10r8 launched on actual-idle physical NPU0–3, then its
+  startup guard caught a real foreign `cannbench_ds` PID 1762714 on physical
+  NPU3 at 16:54:46 UTC. It stopped before health at 0/127 and released only
+  its owned container/port. See HOTPATH_CACHE10R8_RESOURCE_CONFLICT.md.
 - The real r6/r7 practice was ingested via the existing branch-local
   host-maintenance guard, a registry trigger, and a structured eval with
   raw-artifact replay. The sixth Skill case covers `mst-experience-ingestion`
@@ -71,14 +76,14 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-cache10r6/r7 are terminal and environment-invalid; no quality controller is
-live. Both started after actual NPU0–3 idleness, but a real foreign process
-entered during startup. Do not blindly reattempt under the same shared
-scheduling conditions. Continue non-device Skill acceptance and obtain a
-durable exclusive NPU0–3 window before a new unique full arm. Passive Docker
-mappings alone remain irrelevant. The branch remote was independently
-verified at 06279f67865b59aede6edcdea0b78da21429e720 before this
-handoff update; recheck latest HEAD and remote on resume.
+cache10r8 is terminal and environment-invalid; no quality controller is live.
+It began after actual NPU0–3 idleness, but a real foreign process entered NPU3
+during startup. Per user choice, continue with a fresh unique full arm only
+when physical NPU0–3 and port 8223 are actually idle; keep the continuous
+guard and do not modify foreign workloads. Do not require an exclusive window
+or block on passive mappings. The branch remote was independently verified at
+51d403fea571e153453b35eb7e7a266a1ebe0b08 before this handoff update;
+recheck latest HEAD and remote on resume.
 
 ## 5. Next Actions
 
@@ -88,10 +93,10 @@ handoff update; recheck latest HEAD and remote on resume.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Inspect cache10r7 terminal op exec-0000000000001523 and its immutable
+3. Inspect cache10r8 terminal op exec-000000000000157a and its immutable
    root under `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/` if needed.
    Audit cache10r5/r6/r7 separately against their result reports.
-   Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7 or silently switch
+   Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
 4. Complete HYPIC 127×3 scored quality and independent guard/release
    audit, then same-identity no-cache arm and pair audit. Only after
