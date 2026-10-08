@@ -26,10 +26,21 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 8)
-        self.assertEqual(report["skills_without_case"], 21)
+        self.assertEqual(report["cases_with_verified_provenance"], 9)
+        self.assertEqual(report["skills_without_case"], 20)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 6, "verified": 2})
+                         {"partial-evidence": 7, "verified": 2})
+
+    def test_benchmark_baseline_reuse_case_stays_partial(self) -> None:
+        path = cases.CASES / "ascend-benchmark-evidence.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-benchmark-evidence"})
+        self.assertEqual(skill, "ascend-benchmark-evidence")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["old_control_complete"])
+        self.assertFalse(item["observed"]["old_control_reusable_for_r9"])
+        self.assertFalse(item["observed"]["new_control_run_authorized_by_this_case"])
 
     def test_quality_request_coverage_case_stays_partial(self) -> None:
         path = cases.CASES / "ascend-model-quality-evaluation.json"

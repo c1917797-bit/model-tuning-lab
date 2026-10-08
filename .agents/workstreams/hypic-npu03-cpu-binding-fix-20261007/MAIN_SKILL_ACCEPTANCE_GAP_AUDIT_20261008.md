@@ -84,6 +84,17 @@ The long-term case is **partial-evidence**: 8 provenance-checked cases,
 2 bounded verified, 6 partial, 21 missing. It is not a terminal HYPIC
 quality or main-Skill pass.
 
+At 18:00 UTC, a ninth case exercised the current-main
+`ascend-benchmark-evidence` comparability gate on a completed 127×3
+old control. Independent raw-hash replay proved that its common
+GPU-memory-utilization was 0.9 while both planned r9 arms use 0.85.
+The old control is complete but cannot be reused; no new control is
+authorized until a candidate passes the stricter request-level gate.
+This bounded denominator decision is real, but the Skill's other
+benchmark evidence classes remain untested for long-term acceptance.
+Inventory: **9 provenance-checked cases, 2 bounded verified, 7 partial,
+20 missing**; campaign codes remain V11/P14/N4.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's
