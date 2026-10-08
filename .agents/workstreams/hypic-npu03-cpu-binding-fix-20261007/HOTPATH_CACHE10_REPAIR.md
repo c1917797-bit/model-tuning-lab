@@ -3,7 +3,7 @@
 ## cache10r2 full candidate: external NPU0 intrusion after 56 clean samples
 
 Operation `exec-00000000000013ec` is terminal exit 1 at 2026-10-08
-14:13:59 UTC. The first 56/127 samples and 168/381 scored rows were
+14:13:59 UTC. Fifty-six of 127 samples and 168/381 scored rows were
 persisted by 14:13:04 UTC, before the guard's first foreign observation at
 14:13:17 UTC. An independent read-only partial audit checked all 56 sample
 identities, request/response hashes, scorer outputs and 280 distinct
@@ -11,7 +11,12 @@ warm/scored request IDs. All 168 scored IDs had a unique explicit-boundary
 event before the foreign observation; the pre-intrusion event slice contained
 177 aggregate verified-hot requests and the four expected worker-hot PIDs.
 That aggregate is **not** proof that each scored request hit the hot path.
-The clean prefix is bounded evidence, not a full-arm or paired quality verdict.
+The completed ID set is `0–52, 54–56`; ID 53 is still missing. This
+pre-intrusion temporal set is bounded evidence, not a contiguous index
+prefix, full-arm result, or paired quality verdict. The service log was
+checked for GDN, OOM and traceback errors before this failure; none was
+found. This does not prove the algorithm would have completed the remaining
+71 samples.
 
 The guard made 507 observations, with no probe errors and two foreign
 observations: NPU0 PID 97921 at 14:13:17 and PID 101428 at 14:13:39. Their
@@ -38,8 +43,9 @@ The sorted 56-file `sha256sum` manifest digest is
 The pre-intrusion evidence-line slice SHA256 is
 `0d47c50d2a63c06ae9f4d0ed10ad0a4340899a412982b91eb03c9bb27fc34923`
 (1,007,153 bytes). Do not modify or resume this root. A revised
-multi-service shard protocol could retain the clean 56 only with explicit
-methodological labeling and a matching control; otherwise a fresh
+multi-service shard protocol could retain those exact 56 IDs only with
+explicit methodological labeling and a matching control that uses the
+same ID partition; otherwise a fresh
 single-service attempt needs an actual exclusive NPU0-3 window. The user
 has been asked which protocol to accept; no new NPU run follows implicitly.
 
