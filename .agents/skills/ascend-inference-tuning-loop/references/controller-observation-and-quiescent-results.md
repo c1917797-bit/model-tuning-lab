@@ -109,3 +109,34 @@ MAIN136f really passed14 root/grandchild/lifetime/negative source tests.
 It does not prove the v9 host integration, full167 suite, same-image software,
 or NPU/model correctness. Preserve the134d failure.
 [Actual evidence and remaining gates](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).
+
+
+## Thread enumeration needs its own lifetime proof
+
+A process being pinned does not pin every TID enumerated from its task list.
+SparsePrefix1397 recorded thread.first-stat/PID3121095/TID3121130/ENOENT after
+four arithmetic canaries and before model startup. Its first-refusal record
+does not contain a parent-after fence: thread exit versus parent exit is not
+yet proved. Preserve that uncertainty and the failed terminal.
+
+For an observer successor, retain the same parent PID/start and task-set
+before/after evidence, prove the vanished thread is absent rather than
+unreadable or reused, and rescan all remaining parent thread children so a
+departing thread cannot hide adopted live descendants. A genuine retirement
+is recorded as such, not fabricated zero RSS. Permission, live unreadability,
+identity drift/reuse and unknown absence remain hard failures. Real short-lived
+thread/process competition and the complete aggregate/same-image paths are
+required before a new source identity can admit NPU work; authored tests are
+not their execution. Do not add these mechanics to unrelated non-thread
+observers without a corresponding need.
+
+## Generate short-lived admission evidence near dispatch
+
+When a source-reviewed controller requires a60-second quiescence Ref, finish
+slow static review/patch/hash work first, then capture actual host-time evidence
+near dispatch. Retain an expired refusal and distinguish a new fresh-input
+attempt from an unchanged retry. Do not set the clock, extend the window or
+reuse a stale Ref to increase apparent utilization. Such a no-create refusal
+does not prove a runtime or paper failure.
+
+[Actual167/same-image successes,1397 first refusal and evidence limits](../../../workstreams/qwen36-damp-ascend-20261006/THREAD_ENUMERATION_AND_REGRESSION_LEARNING_20261008.md).

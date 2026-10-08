@@ -108,3 +108,25 @@ only. They do not establish the new128/20480 NPU matrix, model replay, task
 quality or speed. The unchanged original score/ranking equality predicates
 remain to be tested on the actual backend.
 [Pre-run source justification and evidence limits](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).
+
+
+## Migrate regression contracts with the authoritative implementation
+
+A source/reference relocation or justified protocol change can make a test
+inspect an obsolete function body or schema. Preserve its actual failure,
+then map every check to the current execution path, independent oracle and
+native ABI. Verify behavior and source ownership, not just replacement string
+literals. Do not blanket-label failures as false positives, skip negative
+tests, loosen numerical thresholds or change a correct runtime to satisfy
+an unrelated generic harness. Historical protocol tests remain history;
+new authority requires complete current-source tests and real CLI execution.
+
+ANN canonical13a7 compiled/identified41sources but failed11 assertions plus3
+errors in170 tests. Several checks still read numeric_gate bodies moved into
+matrix.py or old PA/FP32 contracts; individual review and replacement validation
+are pending. Its documented default-OFF exit0 is correct, while MAIN's generic
+expected exit1 was wrong. Private25-source tests do not establish canonical
+readiness. Retain original failures and test the successor's whole source-bound
+entry before scarce-card reservation.
+
+[Original170 failures and the next verification boundary](../../../workstreams/qwen36-damp-ascend-20261006/THREAD_ENUMERATION_AND_REGRESSION_LEARNING_20261008.md).

@@ -1,5 +1,39 @@
 # DAMP Ascend — current workstream
 
+## Latest thread-enumeration / regression learning checkpoint — 2026-10-08
+
+Read THREAD_ENUMERATION_AND_REGRESSION_LEARNING_20261008.md and its structured
+Ref JSON first. Earlier sections below are preserved history, not current
+readiness authority. User-requested experience ingestion is knowledge-only;
+current canonical ANN implementation remains unvalidated/uncommitted.
+
+Actual1387 full167/source219 and138f same-image Devices[]167+7CLIs passed;
+1393 independent CPU consumer passed. Actual1397 completed1/44.260s after all4
+physical4–7 arithmetic canaries, before model startup: thread.first-stat
+PID3121095/TID3121130/errno2. Parent-after fences were not retained, so genuine
+thread exit versus parent exit remains unproven. Sampled124MiB is not a peak
+bound.1399 independently consumed failure/cleanup; exact owned CID42830e...
+is stopped-retained and all owned host children reaped. Preserve1397 FAILED.
+
+ANN canonical source41/OWN31 passed compile/identity but13a7 full170 FAILED:
+11failures+3errors. Map each legacy-source/protocol regression to the current
+matrix/consumer and verify invariants; do not skip checks or lower thresholds.
+MAIN harness default-OFF expectation1 was incorrect; SparQ disabled exit0 is
+valid. Full ANN NPU128/20480, model/E2E/tasks remain absent.
+
+Next: MAIN fully review frozen SparsePrefix v10 thread-enumeration delta,
+execute real12/full179 then exact same-image prerequisites before any fresh
+TP4 admission. No unchanged v9 rerun. Independently repair ANN current-source
+regressions/consumer before native admission; SKVQ capture/calibration/packed
+service remain pending. Preparer authored packets are not executable PASS.
+No new accepted non-HYPIC technique, throughput or task-accuracy result.
+
+Use physical4–7 only, protect0–3, HugeTLB32GiB authoritySPENT; retain fixed
+portfolio1791544651/SparsePrefix1791529740/SparQ1791486000 cutoffs.
+HEAD before this checkpoint a92ede5e..., already pushed and independently
+remote-confirmed. New commit must stage only declared knowledge paths;
+preserve unrelated/unvalidated changes and verify normal work-branch push.
+
 ## Current executable-readiness learning checkpoint — 2026-10-08
 
 Latest user request: ingest verified successes/failures into maintainer skills

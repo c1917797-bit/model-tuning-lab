@@ -1,0 +1,185 @@
+{
+  "schema": "mst.ascend-experience-ingestion/v1",
+  "id": "exp-20261008-thread-enumeration-and-regression-readiness",
+  "validated_base_commit": "a92ede5e8290232002b2552ce1c463789fae5e42",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "scope": "incremental maintenance evidence; original failures preserved; not paper numerical/E2E/task acceptance",
+  "facts": [
+    "1387: frozen SparsePrefix v9 full167 host software and219-source closure passed; no NPU tensors/models.",
+    "138f/1393: same-image Devices[] full167 and7 real CLI paths passed and independently consumed; exact CPU guest stopped-retained.",
+    "1397: actual physical4-7 arithmetic canaries passed, then owned-tree observer failed thread.first-stat before model startup; full lifecycle/numerical/E2E remain absent.",
+    "1399: independent failure consumption and exact owned cleanup/release passed; this does not change1397 exit1 or infer the root cause of the older134d.",
+    "13a7: canonical ANN source41/OWN31 compile/identity passed but full170 software failed11 assertions and3 errors. Several refer to relocated source or old PA/FP32 protocol; all need individual review before any revised authority.",
+    "MAIN's generic default-OFF harness wrongly expected exit1 for SparQ; its actual documented disabled exit0 is correct. Correct harness expectations, not runtime semantics."
+  ],
+  "software_results": [
+    {
+      "operation_id": "exec-0000000000001387",
+      "exit_code": 0,
+      "tests_run": 167,
+      "source_count": 219,
+      "npu_executed": false
+    },
+    {
+      "operation_id": "exec-000000000000138f",
+      "exit_code": 0,
+      "tests_run": 167,
+      "real_cli_paths": 7,
+      "devices": [],
+      "npu_executed": false
+    },
+    {
+      "operation_id": "exec-0000000000001393",
+      "exit_code": 0,
+      "scope": "independent v9 same-image CPU consumer",
+      "numerical_success": false
+    },
+    {
+      "operation_id": "exec-00000000000013a7",
+      "exit_code": 1,
+      "tests_run": 170,
+      "failures": 11,
+      "errors": 3,
+      "source_count": 41,
+      "own_count": 31,
+      "npu_executed": false,
+      "gate": "FAILED; no native admission"
+    }
+  ],
+  "original_1397": {
+    "operation_id": "exec-0000000000001397",
+    "exit_code": 1,
+    "duration_ms": 44260,
+    "all4_arithmetic_canaries": true,
+    "model_started": false,
+    "primary": "TreeError('unknown tree identity not established; fail closed')",
+    "syscall": "thread.first-stat",
+    "pid": 3121095,
+    "tid": 3121130,
+    "errno": 2,
+    "sampled_host_cli_rss_peak_bytes": 130088960,
+    "rss_limit_bytes": 536870912,
+    "unobserved_peak_bounded": false,
+    "parent_after_fence_available": false,
+    "thread_exit_vs_parent_exit_proven": false,
+    "own_cid": "42830e46909396b1f85a953e87c81eec95463444f1f5c45db64adcf6af93b710",
+    "stopped_retained": true,
+    "owned_host_children_reaped": true,
+    "numerical_success": false,
+    "model_success": false,
+    "paired_e2e_success": false,
+    "formal_timing": false
+  },
+  "lessons": [
+    {
+      "id": "thread-lifetime-is-not-process-lifetime",
+      "classification": "existing_skill_update",
+      "trigger": "owned-tree /proc thread enumeration ENOENT",
+      "different_action": "Retain parent PID/start and thread-list fences; prove genuine disappearance and rescan all remaining parent thread children before retirement. Do not infer zero RSS or swallow live/permission/reuse errors. Validate a source-bound successor with real short-lived threads and complete aggregate/same-image paths.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md",
+      "verification": "1397 first-refusal and1399 cleanup evidence; proposed v10 real12/full179 tests remain UNRUN"
+    },
+    {
+      "id": "freshness-near-dispatch",
+      "classification": "existing_skill_update",
+      "trigger": "short-lived admission Ref after slow source/API work",
+      "different_action": "Finish static review and mounts first, capture fresh quiescence close to actual dispatch, measure age on host, preserve expired refusal; retry only with genuinely new admission input and no gate relaxation.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md",
+      "verification": "138b pre-create age rejection retained;138f accepted fresh input and completed actual CPU stage"
+    },
+    {
+      "id": "regressions-follow-authoritative-mechanism",
+      "classification": "existing_skill_update",
+      "trigger": "algorithm/reference source moves or protocol changes",
+      "different_action": "Retain old failures, map each old check to the actual current producer/consumer and ABI; test invariants and real CLI behavior rather than patching runtime to fit generic assumptions. No skip, threshold relaxation or blanket false-positive declaration.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/references/ranking-and-packed-snapshots.md",
+      "verification": "13a7 original170/14 failures retained; new current-source regressions pending"
+    },
+    {
+      "id": "phase-scoped-readiness",
+      "classification": "existing_skill_update",
+      "trigger": "software PASS then actual device/controller failure",
+      "different_action": "Advance only the passed source-bound stage; new observer source needs its own software/same-image authority. Do not promote canary, authored packets or cleaned failures to model correctness, E2E or paper-wide decisions.",
+      "destination": ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+      "verification": "independent138f/1393 versus1397/1399 authorities; no new NPU/model/performance/task PASS"
+    }
+  ],
+  "raw_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN_13A7_CANONICAL170_FAILED_ORIGINAL.json",
+      "bytes": 231564,
+      "sha256": "d9f47d3ecd401213b1654b0e82775ab6f74ea979ab1bd7c812b3f7174790c423"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN_1387_FULL167_HOST_SOFTWARE_ORIGINAL.json",
+      "bytes": 24571,
+      "sha256": "920aa680acdb20e59e1b7b15c0cdc580b2bed748232b376825c12449eab849f3"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-cpu-software-20261008-001/CPU_SOFTWARE_RESULT.json",
+      "bytes": 6796,
+      "sha256": "ad837782d24b5b5b7bc862b032b9f52e7d24f584e7f9aa3432c2a1f036506edb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-cpu-software-20261008-001/MAIN_138F_SAME_IMAGE_CPU_WHOLE_ORIGINAL.json",
+      "bytes": 6669,
+      "sha256": "b4c4a3dfc09955cf6287a689f5e058f17b55f0cc8b666e33be3124553e36ee3d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-tp4-cpu7-20261008-001/MAIN_1397_TP4_WHOLE_ORIGINAL.json",
+      "bytes": 16664,
+      "sha256": "8125f4e5ab4d933b985d6bb96f191ebc97bb4ff6d17615fa6e77ff1dde44f6e8"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-tp4-cpu7-20261008-001/RESULT.json",
+      "bytes": 10952,
+      "sha256": "a87e96d898d55e62151a185f7966fe9c2b04d3934f5d4004807cd14b122ff9aa"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-tp4-cpu7-20261008-001/RSS_FIRST_REFUSAL.json",
+      "bytes": 7088,
+      "sha256": "e4b49d825300d8eb6bd9a340b7616303627b340d35fd5dbb92b8ec8301e4f12b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-tp4-cpu7-20261008-001/cleanup.json",
+      "bytes": 7621,
+      "sha256": "b0c5ac6ee2b8014beb23e6a7a29cea2a1e704680c585c84d419f09477e83d436"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp9-tp4-cpu7-20261008-001/MAIN_1399_INDEPENDENT_FAILURE_AND_RELEASE_ORIGINAL.json",
+      "bytes": 25239,
+      "sha256": "634d6449f20e740d911e583200465eb53a444a78f19fc9aced3b1300a95c8bba"
+    }
+  ],
+  "limits": {
+    "physical_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_cards": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugepage_release_32GiB": "SPENT; no new release",
+    "portfolio_cutoff_epoch": 1791544651,
+    "sparseprefix_lineage_cutoff_epoch": 1791529740,
+    "sparq_conservative_cap_epoch": 1791486000
+  },
+  "pending": {
+    "v10_full179_software": true,
+    "v10_same_image_software": true,
+    "ann_canonical_full_software": true,
+    "full_native": true,
+    "model_lifecycle": true,
+    "paired_fixed1024_performance": true,
+    "final2048_LongBenchV2_GSM8K": true
+  },
+  "publication": {
+    "method": "normal work-branch push only; independent remote-ref verification required",
+    "implementation_excluded": "current canonical ANN changes and unrelated untracked files are unvalidated and are not part of this knowledge-only commit"
+  }
+}

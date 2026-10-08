@@ -172,6 +172,9 @@ actual receipt consumers, card attribution, and ordinary/HugeTLB memory ledgers.
 For RSS observer first-identity/exit races or child reports that change during cleanup,
 read [controller observation and quiescent results](references/controller-observation-and-quiescent-results.md).
 Keep controller failure distinct from algorithm failure; freeze Refs after writers stop.
+The same reference covers thread-list lifetime fences and short-lived admission
+evidence. For relocated selector/oracle regression contracts, use the ranking
+reference below before any new native admission; preserve original failures.
 
 For almost-tied token support, mixed-dtype packed-view persistence, or an
 unjustified CPU template, read [ranking and packed snapshots](references/ranking-and-packed-snapshots.md).
