@@ -120,6 +120,13 @@ download.
   apply that stricter gate without reinterpretation.
 - Treat NPU0-3, NPU4-7, ports, and running services as leased resources, not
   permanent assignments.
+- For a long or repeated device experiment, check active jobs that can
+  intermittently enter the target physical cards; one empty `npu-smi` snapshot
+  does not establish an interference-free window. Keep a continuous
+  physical-device process guard during the run. If an unexpected PID appears,
+  invalidate that arm, preserve the PID/time and raw artifacts, release only
+  owned resources, and re-establish isolation before any new-root retry.
+  A vanished PID without retained cgroup evidence does not prove its owner.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.
