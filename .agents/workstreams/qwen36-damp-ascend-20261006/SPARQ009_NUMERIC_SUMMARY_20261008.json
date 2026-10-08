@@ -1,0 +1,150 @@
+{
+  "schema": "sparq009-main-native-failure-evidence/v1",
+  "observed_utc": "2026-10-08T03:47:19.544514+00:00",
+  "source_manifest": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json",
+    "sha256": "2af9e35649d8e1b8b8220968bedd819a5fc6c2afa5c1abfb77ebf768dd4b49af"
+  },
+  "original_operation": {
+    "id": "exec-000000000000118f",
+    "terminal": true,
+    "exit_code": 1,
+    "duration_ms": 212281
+  },
+  "status": "failed",
+  "first_failure_assertion": "ValueError('same-candidate-query token support equals independent GQA formula; not reference feedback equality')",
+  "root_cause": "not established; independent original checkpoint analysis pending",
+  "coverage": {
+    "target_cases": 128,
+    "target_steps": 20480,
+    "completed_cases": 4,
+    "written_step_records": 689,
+    "unrun_batches": "2..16",
+    "failed_case": "B1/graph/mean0/trial1/step049"
+  },
+  "artifacts": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-009-002-native-20261008-001/RESULT.json",
+      "sha256": "4a2e2ef353601c1f4116c8cc4009b14f6676614ec31b3accb43160fb57d2abcb",
+      "bytes": 108270
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-009-002-native-20261008-001/gate/REPORT.json",
+      "sha256": "f3bf94122b432a15e138ab7c595d66e4d8f0aa79264d2f9bf83b28a725f5907d",
+      "bytes": 25434
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-009-002-native-20261008-001/gate/failure-b1-graph-mean0-t1-049.pt",
+      "sha256": "3815632ca4a920e4a1cf52e823c4b099cb4c612eb2fe9254048ed5655d7448da",
+      "bytes": 171463194
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-009-002-native-20261008-001/matrix.stderr",
+      "sha256": "e602bd4e862176de0ae4497500542b7dd3808b73fa006774ec2a6adb5733efe4",
+      "bytes": 1850
+    }
+  ],
+  "owned_containers": [
+    {
+      "Devices": [
+        {
+          "CgroupPermissions": "rwm",
+          "PathInContainer": "/dev/davinci0",
+          "PathOnHost": "/dev/davinci6"
+        },
+        {
+          "CgroupPermissions": "rwm",
+          "PathInContainer": "/dev/davinci_manager",
+          "PathOnHost": "/dev/davinci_manager"
+        },
+        {
+          "CgroupPermissions": "rwm",
+          "PathInContainer": "/dev/devmm_svm",
+          "PathOnHost": "/dev/devmm_svm"
+        },
+        {
+          "CgroupPermissions": "rwm",
+          "PathInContainer": "/dev/hisi_hdc",
+          "PathOnHost": "/dev/hisi_hdc"
+        }
+      ],
+      "ExecIDs": null,
+      "Id": "4ba3a153dfa84d7f2803c3f34bfa382d74115fb9068b73531b99bf6fc0733433",
+      "Name": "/sparq-token-MAIN-sparq-v6-009-002-native-20261008-001",
+      "State": {
+        "Dead": false,
+        "Error": "",
+        "ExitCode": 137,
+        "FinishedAt": "2026-10-08T03:42:47.83189207Z",
+        "OOMKilled": false,
+        "Paused": false,
+        "Pid": 0,
+        "Restarting": false,
+        "Running": false,
+        "StartedAt": "2026-10-08T03:40:23.20421499Z",
+        "Status": "exited"
+      }
+    },
+    {
+      "Devices": [],
+      "ExecIDs": null,
+      "Id": "777c66150fee5cc749a0123e2d55b0981472dc9ed3a22894ae6fc7be2577cf90",
+      "Name": "/sparq-cpu-MAIN-sparq-v6-009-002-native-20261008-001",
+      "State": {
+        "Dead": false,
+        "Error": "",
+        "ExitCode": 137,
+        "FinishedAt": "2026-10-08T03:40:20.25959715Z",
+        "OOMKilled": false,
+        "Paused": false,
+        "Pid": 0,
+        "Restarting": false,
+        "Running": false,
+        "StartedAt": "2026-10-08T03:39:18.66441676Z",
+        "Status": "exited"
+      }
+    }
+  ],
+  "read_only_memory": {
+    "numa_1GiB_pools": {
+      "0": {
+        "free_hugepages": 439,
+        "nr_hugepages": 439,
+        "surplus_hugepages": 0
+      },
+      "1": {
+        "free_hugepages": 485,
+        "nr_hugepages": 485,
+        "surplus_hugepages": 0
+      },
+      "2": {
+        "free_hugepages": 486,
+        "nr_hugepages": 486,
+        "surplus_hugepages": 0
+      },
+      "3": {
+        "free_hugepages": 450,
+        "nr_hugepages": 474,
+        "surplus_hugepages": 0
+      }
+    },
+    "ordinary_available_gib": 111.22509384155273,
+    "ovs": {
+      "comm": "ovs-vswitchd",
+      "hugetlb_gib": 24,
+      "pid": 27118,
+      "startticks": 11471
+    }
+  },
+  "software_original_operation": "exec-0000000000001188",
+  "software_tests": 116,
+  "cpu_abi_passed": true,
+  "canary_physical": 6,
+  "canary_guest": 0,
+  "full_numeric_pass": false,
+  "model_executed": false,
+  "paired1024_e2e_verified": false,
+  "final2048_tasks_verified": false,
+  "memory_release_authority": "completed/SPENT; no new HugeTLB write",
+  "push": "unchanged previously verified credential-helper block; no retry"
+}

@@ -1,5 +1,43 @@
 # DAMP Ascend — current workstream
 
+## Latest actual CPU diagnosis / KIVI persistence failure — 2026-10-08 04:25Z
+
+Read SPARQ009_CPU_DIAG_AND_KIVI_CPU_FAILURE_20261008.md before selecting a retry.
+SparQ MAIN11b1 actual Devices[] CPU diagnosis completed0: all128 exact recovered
+scratch tokens match independent FP32; FP64 swaps361/1157 at0.018457124 FP32ULP.
+Fifteen snapshot lifecycle checks pass but graph lifetime/native intermediate
+cause unproven. Original009 FAILED; no threshold change or unchanged rerun.
+Whole11b1/11b4 originals and actual reports saved outsideGit; a new fixed-checkpoint
+source-bound NPU ranking observation is next, not a full-matrix repeat.
+KIVI MAIN11b9 actual CPU run completed1: firstcase torch.save rejects shared
+mixed-dtype views; checks=[]; not a numerical no-go. Exact ownCPU CID
+cdd4a68f2049edc2382992893dbad45503015647afb2e5e1aeea1c51a1882abb
+stopped-retained/Pid0/noExec/OOMfalse. Prepare snapshot-only003 plus tiny
+same-image serialization prerequisite; never rerun002 unchanged.
+Fresh04:24Z ordinary~111.2GiB, OVS24GiB/samePID and pools439/485/486/474 unchanged;
+the one-time32GiB authority is SPENT. Source, E2E/tasks and fixed cutoffs unchanged.
+Parallel preparers continue; SparsePrefix19CPU template corrected as a new
+proposal, not by bypassing frozen gates. No accepted new non-HYPIC method.
+Normal remote push remains blocked by previously verified unchanged auth.
+
+## Latest SparQ009 real numerical failure — 2026-10-08 03:47Z
+
+Read SPARQ009_NPU_FAILURE_20261008.md and its original terminal/summary.
+MAIN118f completed1/212281ms after actual Devices[] ABI and physical6 canary.
+Four B1 cases and689 steps completed; graph mean0 trial1 step049 selected-token
+support differs from the independent same-query oracle. Full128case PASS,
+model, E2E and final task evidence are absent. Cause not yet established;
+retained CPU checkpoint diagnosis precedes any minimal source-supported repair.
+No unchanged rerun or relaxed gate. MAIN1196 independently proved both exact
+owned CIDs stopped-retained/Pid0/noExec/OOMfalse and all4–7 idle.
+OVS PID27118/start11471/24GiB and pools439/485/486/474 are unchanged;
+32GiB authority remains completed/SPENT. Canonical116 software checks passed,
+source manifest2af9e35649d8e1b8b8220968bedd819a5fc6c2afa5c1abfb77ebf768dd4b49af.
+Parallel preparers continue distinct model graph/KIVI/SparsePrefix seams.
+Old global MTP and opportunity-only no-go entries do not select current work.
+Branch and fixed deadlines unchanged; push authentication still unconfirmed.
+
+
 ## Latest memory completion / SparQ008 direct recovery — 2026-10-08 02:53Z
 
 ## User-authorized memory release: completed/SPENT, do not repeat

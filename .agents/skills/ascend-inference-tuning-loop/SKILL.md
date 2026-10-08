@@ -167,3 +167,7 @@ actual receipt consumers, card attribution, and ordinary/HugeTLB memory ledgers.
 For RSS observer process-exit errors or child reports that change during cleanup,
 read [controller observation and quiescent results](references/controller-observation-and-quiescent-results.md).
 Keep controller failure distinct from algorithm failure; freeze Refs after writers stop.
+
+For almost-tied token support, mixed-dtype packed-view persistence, or an
+unjustified CPU template, read [ranking and packed snapshots](references/ranking-and-packed-snapshots.md).
+Keep the failed run intact; a diagnostic hypothesis is not a revised acceptance gate.

@@ -1,0 +1,90 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py",
+          "--host-execute",
+          "--source-manifest",
+          "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json",
+          "--source-manifest-sha256",
+          "2af9e35649d8e1b8b8220968bedd819a5fc6c2afa5c1abfb77ebf768dd4b49af",
+          "--output",
+          "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-009-002-native-20261008-001"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 212281,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-000000000000118f",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py\", line 305, in <module>\n    if __name__==\"__main__\":main()\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py\", line 239, in main\n    if a.host_execute:execute(a,source,files)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py\", line 408, in execute\n    if primary is not None:raise primary\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/host.py\", line 354, in execute\n    child_ref=ctl.observed_child(\"matrix\",args,ctl.remaining(cap=5280))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py\", line 374, in observed_child\n    if failure is not None:raise failure\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py\", line 352, in observed_child\n    require(self.child.returncode==0,\"actual \"+label+\" child exit \"+str(self.child.returncode))\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py\", line 27, in require\n    if not ok:raise ValueError(why)\nValueError: actual matrix child exit 1\n",
+        "stdout": "MAIN_SPARQ_TOKEN_V5_HOST {\"result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-009-002-native-20261008-001/RESULT.json\", \"sha256\": \"4a2e2ef353601c1f4116c8cc4009b14f6676614ec31b3accb43160fb57d2abcb\"}, \"status\": \"failed\", \"source_manifest\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\", \"sha256\": \"2af9e35649d8e1b8b8220968bedd819a5fc6c2afa5c1abfb77ebf768dd4b49af\"}, \"host_script_sha256\": \"c4bcc756b87013b304d4593128352609376ba56064f25d27faa7157885dd63a2\", \"entry_script_sha256\": \"d6d6088dcc140fd9f23c3fb189dc03a0467120159c07b65560f99184973aaaea\"}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 795,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 795,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 795
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 795,
+        "routeLookupMs": 0,
+        "totalMs": 795
+      }
+    },
+    "traceId": "91fc4313-e110-49e1-9237-82a3788a4695"
+  },
+  "operationId": "exec-000000000000118f",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}

@@ -91,7 +91,8 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
              "rows":workspace.rows,"lengths":workspace.lengths,"sum":mean.sums,"counts":mean.counts,
              "selected_k":workspace.key,"selected_v":workspace.value,"native_out":workspace.output}
     tensors.update({"workspace_"+name:t for name,t in workspace.tensors().items()})
-    require(all(t.device.type=="npu" and t.is_contiguous() and npu.get_npu_format(t)==2 for t in tensors.values()),
+    tensors["pa_context_host"]=workspace.native_pa.context.value
+    require(all(t.device.type=="npu" and t.is_contiguous() and npu.get_npu_format(t)==2 for name,t in tensors.items() if name!="pa_context_host"),
             "actual contiguous ND buffers")
     paused_sums=mean.sums[16:].clone();paused_counts=mean.counts[16:].clone()
     identity=pointers(tensors);graph=None;result=None;raw={};step=-1;step_refs=[]
@@ -102,7 +103,9 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
     def topology():
         rows=[[s*pages+j for j in range(pages)] for s in slots]
         workspace.rows.copy_(torch.tensor(rows,dtype=torch.int64,device=kc.device))
-        workspace.lengths.copy_(torch.tensor([lengths[s]+1 for s in slots],dtype=torch.int32,device=kc.device))
+        live_lengths=[lengths[s]+1 for s in slots]
+        workspace.lengths.copy_(torch.tensor(live_lengths,dtype=torch.int32,device=kc.device))
+        workspace.native_pa.set_lengths(live_lengths)
         positions=[s*capacity+lengths[s] for s in slots]
         require(len(set(positions))==b and all(0<=p<slots_total*capacity for p in positions),
                 "exact unique native host slot positions within int32-admitted backing")
@@ -115,7 +118,9 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
             run();torch.npu.synchronize()
             for k,t in tensors.items():t.copy_(snapshots[k])
             graph=torch.npu.NPUGraph()
+            workspace.native_pa.prepare_capture()
             with torch.npu.graph(graph):result=run()
+            workspace.native_pa.finish_capture()
             torch.npu.synchronize()
             for k,t in tensors.items():t.copy_(snapshots[k])
         worst=0.;min_cos=1.
@@ -142,20 +147,27 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
             inputs={k:t.clone() for k,t in (("q",q),("nk",nk),("nv",nv),("mapping",mapping),("leases",leases))}
             immutable_workspace=("rows","lengths","logical","logical_page","offset","batch_index","pa_table","budget_tensor")
             workspace_before={k:getattr(workspace,k).clone() for k in immutable_workspace}
+            pa_context_before=workspace.native_pa.context.value.clone()
             raw={"kc_before":kc.clone(),"vc_before":vc.clone(),"kc":kc,"vc":vc,"refk":refk,"refv":refv,
                  "q":q,"rq":rq,"nk":nk,"nv":nv,"mapping":mapping,"mean":mean.sums,"counts":mean.counts,
                  "scratch_k":workspace.key,"scratch_v":workspace.value,"input_before":inputs,"workspace_before":workspace_before,
                  "workspace_tensors":workspace.tensors(),"workspace_guards":[g.backing for g in workspace._guards],"mean_guards":[g.backing for g in mean._guards],
                  "native_output":workspace.output,"corrected_output":workspace.corrected,"native_cache_outer_guards":(kguard.backing,vguard.backing),
-                 "native_input_guards":{k:g.backing for k,g in inputs_guard.items()},"slot_generations":dict(versions),"slot_lengths":dict(lengths)}
+                 "native_input_guards":{k:g.backing for k,g in inputs_guard.items()},
+                 "native_pa_context_cpu":workspace.native_pa.context.value,"native_pa_host_guard":workspace.native_pa.context.backing,
+                 "slot_generations":dict(versions),"slot_lengths":dict(lengths)}
             for i,s in enumerate(slots):
                 pos=s*capacity+lengths[s]
                 refk.view(-1,1,DIM)[pos:pos+1].copy_(nk[i:i+1]);refv.view(-1,1,DIM)[pos:pos+1].copy_(nv[i:i+1])
                 book.append("native-slot-%d"%s,versions[s],s,lengths[s])
             if graph is None:result=run()
-            else:graph.replay()
+            else:
+                workspace.native_pa.update_graph();workspace.native_pa.check_replay()
+                graph.replay()
             torch.npu.synchronize()
             out,selected,alpha,_=result;current=[lengths[s]+1 for s in slots]
+            require(torch.equal(workspace.native_pa.context.value,pa_context_before) and workspace.native_pa.guards(),
+                    "actual persistent CPU PA context/prefix/suffix untouched by native replay")
             require(torch.equal(kc,refk) and torch.equal(vc,refv),"complete native KV including all paused/guards")
             require(all(torch.equal(t,inputs[k]) for k,t in (("q",q),("nk",nk),("nv",nv),("mapping",mapping),("leases",leases))) and all(torch.equal(getattr(workspace,k),v) for k,v in workspace_before.items()),"all original inputs/static and per-step topology untouched")
             require(workspace.guards() and mean.guards() and kguard.intact() and vguard.intact() and all(g.intact() for g in inputs_guard.values()),"all actual full-cache/input/workspace/mean prefix-suffix guards and pointer offsets")
@@ -190,6 +202,9 @@ def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
                  "mean_request_lease_checked":True,"support_independent":True,"support_independent_query":"candidate-feedback-q",
                  "reference_feedback_independent":True,"reference_feedback_support_equal":not any(support_divergence),
                  "cross_feedback_support_divergence":support_divergence,"dense_attention_equivalence_claimed":False,"pointer_identity":True,"workspace_mean_guards":True,"all_topology_immutable":True,"oracle_cpu_fp64":True,"per_head_metric":True,"native_cache_input_outer_guards":True}
+            row.update(native_pa_context_cpu_int32=workspace.native_pa.context.value.tolist(),
+                       native_pa_context_epoch=workspace.native_pa.epoch,native_pa_graph_update_epoch=workspace.native_pa.updated_epoch,
+                       native_pa_host_guard=True)
             step_refs.append(write_new(root/("step-"+case+"-%03d.json"%step),row));require(good,"own-query-feedback SparQ token selected/mixed golden")
             worst=max(worst,max(x for heads in row["relative_rms"] for x in heads));min_cos=min(min_cos,min(x for heads in row["cosine"] for x in heads))
             previous.copy_(out);reference_previous.copy_(expected.to(device=out.device,dtype=out.dtype))

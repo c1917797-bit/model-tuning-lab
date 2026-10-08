@@ -108,6 +108,7 @@ def validate_matrix(report,root):
   require(case["status"]=="passed" and case["steps"]==160 and case["service_ready"] is False and case["model_graph_supported"] is False and
     case["worst_relative_rms"]<=.005 and case["minimum_cosine"]>=.99998 and case["actual_mean_bytes"]==18*(256*4+8)+128*(4+8) and
     case["mean_payload_bytes"]==18*(256*4+8) and case["actual_workspace_bytes"]>0 and len(case["actual_step_refs"])==160,"original complete guarded case")
+  pa_slots=list(range(b));pa_live={slot:2048-3*slot for slot in pa_slots}
   for s,sr in enumerate(case["actual_step_refs"]):
    row=load(translated(sr));require((row["batch"],row["mode"],row["reallocation"],row["trial"],row["step"])==(b,m,c,t,s),"all160 actual ordered steps")
    require(all(row[k] is True for k in ("finite","full_native_cache_bitwise","selected_scratch_guard","input_untouched","mean_request_lease_checked","support_independent","pointer_identity","workspace_mean_guards","all_topology_immutable","reference_feedback_independent","oracle_cpu_fp64","per_head_metric","native_cache_input_outer_guards")),"complete original per-step full guards/slot/oracle checks")
@@ -116,6 +117,13 @@ def validate_matrix(report,root):
     len(row["cross_feedback_support_divergence"])==b and all(type(v) is bool for v in row["cross_feedback_support_divergence"]) and
     row["reference_feedback_support_equal"]==(not any(row["cross_feedback_support_divergence"])),
     "actual approximate-support divergence classification; q/rq feedback never shared")
+   if s%11==0:pa_slots=pa_slots[1:]+pa_slots[:1]
+   if s==80:pa_live[pa_slots[0]]=1
+   expected_host_context=[min(pa_live[slot]+1,128) for slot in pa_slots]
+   require(row.get("native_pa_context_cpu_int32")==expected_host_context and row.get("native_pa_host_guard") is True and
+    row.get("native_pa_context_epoch")==s+2 and row.get("native_pa_graph_update_epoch")==(s+2 if m=="graph" else None),
+    "independent actual160-step host PA context/slot rotation/step80 shortened reuse/task-update epoch")
+   for slot in pa_slots:pa_live[slot]+=1
    for name,lo,hi in (("relative_rms",0,.005),("cosine",.99998,1.000001)):
     values=row[name];require(len(values)==b and all(len(v)==HEADS for v in values) and
       all(type(v) in (int,float) and math.isfinite(v) and lo<=v<=hi for heads in values for v in heads),"actual EVERY request/head gate; no mean")

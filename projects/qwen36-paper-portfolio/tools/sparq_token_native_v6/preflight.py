@@ -151,7 +151,7 @@ def collect_atb_provenance(fn):
    "module_source":source.decode("utf-8"),"chain":chain}
  return safe_observe(collect)
 def atb_provenance_contract(name,binding):
- require(name in REQUIRED and binding.get("module")==ATB_MODULE and
+ require(name in (*REQUIRED,"_npu_paged_attention_get_workspace") and binding.get("module")==ATB_MODULE and
   binding.get("name")==name and binding.get("qualname")=="create_lazy_atb_function.<locals>.generated_function",
   "exact two installed TorchNPU ATB lazy wrappers, no foreign namespace impersonation")
  source_file=binding["source_file"];source=binding["source"]
@@ -239,6 +239,56 @@ def export_contract_identity(records):
    "dispatcher":record["dispatcher"],"required_arguments":record["required_arguments"],
    "atb_provenance":binding.get("atb_provenance"),"matched_single_signatures":record["matched_single_signatures"],"single_signature_matched":record["single_signature_matched"]}
  return result
+PA_WORKSPACE_NAME="_npu_paged_attention_get_workspace"
+PA_GRAPH_NAMES=("ExternalEvent","Stream","stream","current_stream","graph_task_group_begin","graph_task_group_end","graph_task_update_begin","graph_task_update_end")
+PA_SOURCE_SHA="80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"
+def collect_pa_graph_api(torch,torch_npu):
+ scan=safe_observe(lambda:[schema_observation(s) for s in torch._C._jit_get_all_schemas()])
+ export=safe_observe(lambda:getattr(torch_npu,PA_WORKSPACE_NAME))
+ name=PA_WORKSPACE_NAME
+ workspace={"export_lookup_error":export["error"],"binding":callable_observation(export["value"] if export["ok"] else None),
+  "dispatcher":[s for s in (scan["value"] or []) if s["name"].split("::")[-1]==name],"dispatcher_scan_error":scan["error"]}
+ graph={}
+ for name in PA_GRAPH_NAMES:
+  actual=safe_observe(lambda:getattr(torch.npu,name))
+  graph[name]={"lookup_error":actual["error"],"binding":callable_observation(actual["value"] if actual["ok"] else None)}
+ return {"workspace":workspace,"graph":graph,"source_callsite_sha256":PA_SOURCE_SHA}
+def validate_pa_graph_api(record):
+ require(type(record) is dict and record.get("source_callsite_sha256")==PA_SOURCE_SHA and
+  set(record.get("graph",{}))==set(PA_GRAPH_NAMES),"complete source-bound deployed PA graph API observation")
+ workspace=record["workspace"]
+ require(workspace["export_lookup_error"] is None and workspace["dispatcher_scan_error"] is None and
+  workspace["binding"]["callable"] is True,"complete actual PA workspace callable/schema")
+ atb_provenance_contract(PA_WORKSPACE_NAME,workspace["binding"])
+ schemas=workspace["dispatcher"];require(len(schemas)==1,"one actual complete workspace schema, no overload union")
+ schema=schemas[0]
+ required=REQUIRED["_npu_paged_attention"]
+ types={name:"Tensor" for name in required};types.update(num_kv_heads="int",num_heads="int",scale_value="float")
+ args=schema["arguments"]
+ require(schema["name"]=="atb::"+PA_WORKSPACE_NAME and schema["overload_name"]=="" and
+  keyword_contract(args,required,"dispatcher") and
+  all(a["type"]==types[a["name"]] and a.get("has_default") is False for a in args if a["name"] in required) and
+  len(schema["returns"])==1 and schema["returns"][0]["type"]=="Tensor",
+  "exact source-bound PA workspace kwargs/types/Tensor return, no foreign or partial signature")
+ for name,item in record["graph"].items():
+  binding=item["binding"];module=binding.get("module") or ""
+  require(item["lookup_error"] is None and binding["callable"] is True and
+   (module=="torch_npu._C" or module.startswith("torch_npu.npu.")) and
+   binding.get("name") in (name,"_npu_"+name),
+   "actual installed TorchNPU graph export identity, never foreign callable: "+name)
+ return record
+def pa_graph_identity(record):
+ validate_pa_graph_api(record)
+ def stable(binding):
+  value={k:binding.get(k) for k in ("callable","kind","module","qualname","name","doc","text_signature")}
+  for key in ("signature","source_file","source"):
+   observed=binding[key];value[key]=dict(ok=observed["ok"],value=observed["value"] if observed["ok"] else None,
+    error_type=None if observed["ok"] else observed["error"]["type"])
+  if "atb_provenance" in binding:value["atb_provenance"]=binding["atb_provenance"]
+  return value
+ return {"workspace":{"binding":stable(record["workspace"]["binding"]),"dispatcher":record["workspace"]["dispatcher"]},
+  "graph":{k:stable(v["binding"]) for k,v in record["graph"].items()},"source_callsite_sha256":record["source_callsite_sha256"]}
+
 def collect_wrapper(module):
  file=getattr(module,"__file__",None)
  source=safe_observe(lambda:Path(file).read_text())
@@ -275,6 +325,7 @@ def validate_observation(observation,source,files):
  wrapper=wrapper_source_contract(w["module_source"]["value"])
  require(observation["source_import"]["ok"],"actual original source import failed")
  exports=validate_exports(observation["exports_after_source_import"])
+ validate_pa_graph_api(observation["pa_graph_after_source_import"])
  return wrapper,exports
 def validate_cpu_golden(report):
  require(type(report) is dict and report.get("schema")=="sparq.actual-cpu-golden-smoke/v4" and report.get("device")=="cpu" and
@@ -325,7 +376,8 @@ def validate_abi(report,source,files):
  observation=load(report["original_observations"])
  require(observation==report["actual_observations"],"original pre-assertion observer Ref/inline bytes disagree")
  wrapper,actual=validate_observation(observation,source,files)
- require(report.get("actual_wrapper_native_contract")==wrapper and report.get("actual_exports")==actual,
+ require(report.get("actual_wrapper_native_contract")==wrapper and report.get("actual_exports")==actual and
+  report.get("actual_pa_graph_api")==observation["pa_graph_after_source_import"],
   "actual wrapper/native signature and exact keyword mapping; no incompatible union")
  require(report.get("actual_device_initialized_before") is False and report.get("actual_device_initialized_after") is False and
   report.get("actual_guest_device_nodes_before")==[] and report.get("actual_guest_device_nodes_after")==[] and
@@ -341,6 +393,8 @@ def recheck_preinit(torch,torch_npu,report,source,files):
  initialized=getattr(torch_npu.npu,"is_initialized",None)
  require(callable(initialized) and initialized() is False,"same-process no device context before native schema")
  require(export_contract_identity(exports(torch,torch_npu))==export_contract_identity(report["actual_exports"]),"actual same-process schemas/exports drift before set_device")
+ require(pa_graph_identity(collect_pa_graph_api(torch,torch_npu))==pa_graph_identity(report["actual_pa_graph_api"]),
+  "actual same-process source-bound PA workspace/graph exports drift before set_device")
  require(initialized() is False,"same-process schema check unexpectedly initialized device")
  return report
 def mapped_libraries():
@@ -376,6 +430,7 @@ def probe(a):
   module=module_observation["value"];observation["source_import"]={"ok":module_observation["ok"],"error":module_observation["error"]}
   observation["wrapper"]=collect_wrapper(module) if module is not None else None
   observation["exports_after_source_import"]=collect_exports(torch,torch_npu)
+  observation["pa_graph_after_source_import"]=collect_pa_graph_api(torch,torch_npu)
   observation["flags"]["after_source_import"]=flags(torch_npu)
   observation["actually_mapped_libraries"]=safe_observe(mapped_libraries)
   observation["actual_stack"]=safe_observe(lambda:{"vllm_ascend":importlib.metadata.version("vllm-ascend"),
@@ -397,7 +452,7 @@ def probe(a):
  _,after=source_identity(root,a.source_manifest,a.source_manifest_sha256,"runtime");require(after==files,"actual source closure before/after")
  report={"schema":"sparq.actual-no-device-abi/v5","status":"actual-schema-checked","source_manifest":source,"sources_before":files,"sources_after":after,
   "original_observations":a.observation_ref,"actual_observations":observation,"actual_wrapper_native_contract":wrapper,
-  "actual_exports":actual,"actual_cpu_golden":cpu_smoke,"actually_mapped_libraries":mapped,"stack":stack,
+  "actual_exports":actual,"actual_pa_graph_api":observation["pa_graph_after_source_import"],"actual_cpu_golden":cpu_smoke,"actually_mapped_libraries":mapped,"stack":stack,
   "actual_argv":[sys.executable,"-B",*sys.argv],
   "actual_guest_device_nodes_before":observation["device_nodes_before"],"actual_guest_device_nodes_after":device_nodes(),
   "actual_Ascend_fds_before":observation["Ascend_fds_before"],"actual_Ascend_fds_after":device_fds(),

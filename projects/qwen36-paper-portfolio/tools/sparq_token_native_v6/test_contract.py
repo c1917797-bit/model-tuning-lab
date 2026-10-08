@@ -389,4 +389,122 @@ class NativeSlotInt32Boundary(unittest.TestCase):
   self.assertIn("candidate_supports",text);self.assertIn("reference_feedback_independent",text)
   self.assertIn("kguard.intact() and vguard.intact()",text);self.assertIn("range(160)",text)
 
+
+class NativePAHostContext(unittest.TestCase):
+ def test_host_clamp_CPU_int32_metadata_geometry_negative(self):
+  from sparq_token_v4.core import host_pa_lengths,host_pa_layout
+  from types import SimpleNamespace as S
+  self.assertEqual(host_pa_lengths([2,2049],2,128,2304),[2,128])
+  for lengths,budget,capacity in (([0],128,2304),([True],128,2304),([2305],128,2304),([1],True,2304),([1],1,True)):
+   with self.assertRaises(ValueError):host_pa_lengths(lengths,1,budget,capacity)
+  torch=S(int32="int32");good=S(shape=(2,),dtype="int32",device=S(type="cpu"),is_contiguous=lambda:True)
+  host_pa_layout(torch,good,2)
+  for key,value in (("shape",(2,1)),("dtype","int64"),("device",S(type="npu")),("is_contiguous",lambda:False)):
+   bad=S(**vars(good));setattr(bad,key,value)
+   with self.assertRaises(ValueError):host_pa_layout(torch,bad,2)
+  self.assertNotIn("torch",sys.modules)
+ def fake_protocol(self):
+  import contextlib
+  from types import SimpleNamespace as S
+  from sparq_token_v4.core import NativePAHost
+  calls=[]
+  class Tensor:
+   dtype="int32";shape=(2,);device=S(type="cpu")
+   def is_contiguous(self):return True
+   def copy_(self,value):self.values=list(value);return self
+  tensor=Tensor();tensor.values=[0,0]
+  class Event:
+   def wait(self,stream):calls.append(("wait",stream))
+   def reset(self,stream):calls.append(("reset",stream))
+   def record(self,stream):calls.append(("record",stream))
+  def workspace(**args):
+   calls.append(("workspace",tuple(args["context_lens"].values)));return "software-workspace-only"
+  def pa(**args):calls.append(("pa",tuple(args["context_lens"].values),"workspace" in args))
+  npu=S(ExternalEvent=Event,Stream=lambda:"update-stream",current_stream=lambda:"capture-stream",stream=lambda _:contextlib.nullcontext(),
+   graph_task_group_begin=lambda stream:calls.append(("group-begin",stream)),
+   graph_task_group_end=lambda stream:calls.append(("group-end",stream)) or "software-handle-only",
+   graph_task_update_begin=lambda stream,handle:calls.append(("update-begin",stream,handle)),
+   graph_task_update_end=lambda stream:calls.append(("update-end",stream)))
+  torch=S(int32="int32",tensor=lambda vals,**kw:list(vals),npu=npu)
+  atb=S(_npu_paged_attention_get_workspace=workspace,_npu_paged_attention=pa)
+  helper=object.__new__(NativePAHost)
+  helper.batch=2;helper.budget=128;helper.capacity=2304;helper.context=S(value=tensor)
+  helper.epoch=0;helper.updated_epoch=None;helper.capturing=False;helper.params=None;helper.handle=None;helper.event=None;helper.update_stream=None
+  return helper,torch,atb,calls
+ def test_source_protocol_actual_python_capture_update_epoch_not_NPU_PASS(self):
+  helper,torch,atb,calls=self.fake_protocol()
+  with mock.patch.dict(sys.modules,{"torch":torch,"torch_npu":atb}):
+   helper.set_lengths([2049,100]);helper.prepare_capture()
+   output=object();self.assertIs(helper.execute("q","k","v","table",output),output);helper.finish_capture()
+   self.assertEqual([x[0] for x in calls],["workspace","wait","reset","group-begin","pa","group-end"])
+   calls.clear();helper.set_lengths([2,2049])
+   with self.assertRaises(ValueError):helper.check_replay()
+   helper.update_graph();helper.check_replay()
+   self.assertEqual([x[0] for x in calls],["workspace","update-begin","pa","update-end","record"])
+   self.assertEqual(calls[0][1],(2,128));self.assertEqual(calls[2][1],(2,128))
+   with self.assertRaises(ValueError):helper.update_graph()
+   helper.set_lengths([3,2049])
+   with self.assertRaises(ValueError):helper.check_replay()
+  self.assertNotIn("torch",sys.modules);self.assertNotIn("torch_npu",sys.modules)
+ def test_known_host_topology_B1_to16_full160_step80_shortened_reuse(self):
+  from sparq_token_v4.core import host_pa_lengths
+  for b in range(1,17):
+   slots=list(range(b));lengths={s:2048-3*s for s in slots};observed_short=False
+   for step in range(160):
+    if step%11==0:slots=slots[1:]+slots[:1]
+    if step==80:lengths[slots[0]]=1
+    actual=host_pa_lengths([lengths[s]+1 for s in slots],b,128,2304)
+    expected=[lengths[s]+1 if lengths[s]+1<128 else 128 for s in slots]
+    self.assertEqual(actual,expected)
+    if step==80:self.assertEqual(actual[0],2);observed_short=True
+    for s in slots:lengths[s]+=1
+   self.assertTrue(observed_short)
+ def test_capture_run_and_update_never_convert_device_context_to_host(self):
+  core=ast.parse((Path(receipt.ROOT)/"sparq_token_v4/core.py").read_text())
+  helper=next(n for n in core.body if isinstance(n,ast.ClassDef) and n.name=="NativePAHost")
+  for name in ("execute","update_graph","check_replay"):
+   fn=next(n for n in helper.body if isinstance(n,ast.FunctionDef) and n.name==name)
+   self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in
+    ("cpu","to","item","tolist","tensor","arange") for n in ast.walk(fn)),name)
+  graph=next(n for n in core.body if isinstance(n,ast.ClassDef) and n.name=="GraphTokenWorkspace")
+  run=next(n for n in graph.body if isinstance(n,ast.FunctionDef) and n.name=="run")
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in ("cpu","item","tolist","tensor","arange") for n in ast.walk(run)))
+  conversions=[n for n in ast.walk(run) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="to"]
+  self.assertEqual(len(conversions),1)
+  self.assertEqual(ast.unparse(conversions[0].args[0]),"self.output.dtype")
+  self.assertEqual(conversions[0].keywords,[])
+ def test_actual_pinned_deployed_CPU_metadata_and_task_update_protocol(self):
+  ref=receipt.MODEL_SOURCES["attention_v1"]["captured_source_ref"];raw=Path(ref["path"]).read_bytes()
+  self.assertEqual(hashlib.sha256(raw).hexdigest(),ref["sha256"]);tree=ast.parse(raw)
+  cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=="AscendAttentionBackendImpl")
+  for name,expected in (("full_graph_pa",["_npu_paged_attention_get_workspace","wait","reset","graph_task_group_begin","_npu_paged_attention","graph_task_group_end"]),
+   ("update_graph_params",["_npu_paged_attention_get_workspace","graph_task_update_begin","_npu_paged_attention","graph_task_update_end","record"])):
+   fn=next(n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name==name)
+   calls=sorted([n for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in expected],key=lambda n:n.lineno)
+   self.assertEqual([n.func.attr for n in calls[:len(expected)]],expected)
+  text=raw.decode()
+  self.assertIn("seq_lens = common_attn_metadata._seq_lens_cpu[:num_reqs]",text)
+  self.assertIn("seq_lens = common_attn_metadata.seq_lens_cpu[:num_reqs]",text)
+  self.assertIn('seq_lens = common_attn_metadata.seq_lens[:num_reqs].to("cpu")',text)
+  self.assertIn("context_lens=attn_metadata.seq_lens",text)
+ def test_driver_host_update_every_replay_and_model_eager_same_host_lengths(self):
+  tree=ast.parse(Path(numeric_gate.__file__).read_text());fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
+  topology=next(n for n in ast.walk(fn) if isinstance(n,ast.FunctionDef) and n.name=="topology")
+  host=next(n for n in ast.walk(topology) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="set_lengths")
+  self.assertEqual(host.args[0].id,"live_lengths")
+  update=next(n.lineno for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="update_graph")
+  replay=next(n.lineno for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="replay")
+  self.assertLess(update,replay);self.assertIn('if step==80:',ast.get_source_segment(Path(numeric_gate.__file__).read_text(),fn))
+  import model_bridge
+  self.assertIn("workspace.native_pa.set_lengths(lengths)",Path(model_bridge.__file__).read_text())
+  self.assertIn("metadata.seq_lens_list",Path(model_bridge.__file__).read_text())
+  self.assertIn("FULL attention task-group/replay is unsupported",Path(model_bridge.__file__).read_text())
+ def test_independent_receipt_reconstructs_context_shortening_not_boolean_only(self):
+  text=Path(receipt.__file__).read_text()
+  self.assertIn('if s==80:pa_live[pa_slots[0]]=1',text)
+  self.assertIn('expected_host_context=[min(pa_live[slot]+1,128) for slot in pa_slots]',text)
+  self.assertIn('row.get("native_pa_graph_update_epoch")==(s+2 if m=="graph" else None)',text)
+  self.assertEqual(numeric_gate.LIMITS,{"relative_rms":.005,"cosine":.99998})
+  self.assertEqual(receipt.MODES,(("eager",0),("graph",0),("graph",1),("graph",2)))
+
 if __name__=="__main__":unittest.main(verbosity=2)

@@ -101,6 +101,85 @@ class MeanPool:
     def means(self,slots):return self.sums.index_select(0,slots)/self.counts.index_select(0,slots)[:,None]
     def reset(self,slot):self.sums[slot].zero_();self.counts[slot]=0
 
+def host_pa_lengths(lengths,batch,budget,capacity):
+    require(type(lengths) is list and type(batch) is int and batch in range(1,SLOTS+1) and
+            len(lengths)==batch and type(budget) is int and type(capacity) is int and 0<budget<=capacity<=2**31-1 and
+            all(type(n) is int and 0<n<=capacity for n in lengths),
+            "exact known host topology/live domain for CPU int32 PA metadata")
+    return [min(n,budget) for n in lengths]
+
+def host_pa_layout(torch,context,batch):
+    require(context.device.type=="cpu" and context.dtype==torch.int32 and
+            context.shape==(batch,) and context.is_contiguous(),
+            "PA context_lens must be actual persistent contiguous CPU int32 hostData")
+
+class NativePAHost:
+    """Only native PA host metadata/task-update adapter; no selector math.
+    Source protocol: pinned deployed AscendAttentionBackendImpl.full_graph_pa
+    and update_graph_params. Host lengths are supplied BEFORE capture/replay.
+    """
+    def __init__(self,batch,budget,capacity):
+        import torch
+        host_pa_lengths([1]*batch,batch,budget,capacity)
+        self.batch=batch;self.budget=budget;self.capacity=capacity
+        self.context=Guarded(torch,(batch,),torch.int32,"cpu")
+        self.context.value.zero_();self.host_bytes=self.context.bytes()
+        self.epoch=0;self.updated_epoch=None;self.capturing=False
+        self.params=None;self.handle=None;self.event=None;self.update_stream=None
+    def set_lengths(self,lengths):
+        import torch
+        require(not self.capturing,"host topology may not be mutated within capture")
+        values=host_pa_lengths(lengths,self.batch,self.budget,self.capacity)
+        self.context.value.copy_(torch.tensor(values,dtype=torch.int32,device="cpu"))
+        host_pa_layout(torch,self.context.value,self.batch)
+        self.values=tuple(values);self.epoch+=1
+        return values
+    def prepare_capture(self):
+        import torch
+        require(self.epoch>0 and self.handle is None and not self.capturing,"one PA graph capture after host topology")
+        self.event=torch.npu.ExternalEvent();self.update_stream=torch.npu.Stream()
+        self.capturing=True
+    def finish_capture(self):
+        require(self.capturing and self.handle is not None and self.params is not None,"complete source-protocol PA capture")
+        self.capturing=False
+    def execute(self,query,key,value,table,output):
+        import torch,torch_npu
+        require(self.epoch>0,"actual host PA context must be initialized before call")
+        host_pa_layout(torch,self.context.value,self.batch)
+        args=dict(query=query,key_cache=key,value_cache=value,num_kv_heads=1,num_heads=HEADS,
+                  scale_value=1/math.sqrt(DIM),block_table=table,context_lens=self.context.value,out=output)
+        if self.capturing:
+            require(self.handle is None and self.params is None,"single PA group in original candidate graph")
+            workspace=torch_npu._npu_paged_attention_get_workspace(**args)
+            stream=torch.npu.current_stream()
+            self.event.wait(stream);self.event.reset(stream)
+            torch.npu.graph_task_group_begin(stream)
+            torch_npu._npu_paged_attention(**args,workspace=workspace)
+            self.handle=torch.npu.graph_task_group_end(stream)
+            self.params=args
+            self.workspace={"value":workspace}
+        else:
+            require(self.handle is None,"captured PA may only execute through updated original graph replay")
+            torch_npu._npu_paged_attention(**args)
+        return output
+    def update_graph(self):
+        import torch,torch_npu
+        require(not self.capturing and self.handle is not None and self.params is not None and
+                self.epoch>0 and self.updated_epoch!=self.epoch,"one fresh CPU context update per original replay")
+        host_pa_layout(torch,self.context.value,self.batch)
+        require(self.params["context_lens"] is self.context.value,"original persistent CPU context identity")
+        with torch.npu.stream(self.update_stream):
+            workspace=torch_npu._npu_paged_attention_get_workspace(**self.params)
+            torch.npu.graph_task_update_begin(self.update_stream,self.handle)
+            torch_npu._npu_paged_attention(**self.params,workspace=workspace)
+            torch.npu.graph_task_update_end(self.update_stream)
+            self.event.record(self.update_stream)
+        self.workspace={"value":workspace};self.updated_epoch=self.epoch
+    def check_replay(self):
+        require(not self.capturing and self.handle is not None and self.updated_epoch==self.epoch,
+                "graph replay forbidden with stale/frozen PA host context")
+    def guards(self):return self.context.intact()
+
 class TokenWorkspace:
     """Static selected-token scratch, no eviction/repeated full KV.
     scratch bytes, approximate logits and means must be budgeted together.
@@ -125,7 +204,8 @@ class TokenWorkspace:
         other=[];gather_selected(vc,rows,selected,packed_v,other)
         require(counts==other,"K/V same selected real token support")
         table=torch.arange(b*self.pages,device=query.device,dtype=torch.int32).view(b,self.pages)
-        lens=torch.tensor(counts,device=query.device,dtype=torch.int32)
+        lens=torch.tensor(counts,device="cpu",dtype=torch.int32)
+        host_pa_layout(torch,lens,b)
         out=torch.empty_like(query)
         # Native PA reads exactly the gathered token sequence; no whole-page surrogate.
         torch_npu._npu_paged_attention(query=query,key_cache=self.key,value_cache=self.value,
@@ -167,7 +247,8 @@ class GraphTokenWorkspace:
         self.output=alloc((batch,HEADS,DIM),torch.bfloat16)
         self.corrected=alloc((batch,HEADS,DIM),torch.bfloat16)
         self.bytes=sum(g.bytes() for g in self._guards)
-    def guards(self):return all(g.intact() for g in self._guards)
+        self.native_pa=NativePAHost(batch,budget,self.capacity)
+    def guards(self):return all(g.intact() for g in self._guards) and self.native_pa.guards()
     def tensors(self):
         import torch
         return {n:t for n,t in vars(self).items() if isinstance(t,torch.Tensor)}
@@ -197,10 +278,7 @@ class GraphTokenWorkspace:
         sk=self.key[:self.batch*self.scratch_pages].view(self.batch,-1,DIM)
         sv=self.value[:self.batch*self.scratch_pages].view(self.batch,-1,DIM)
         sk[:,:self.budget].copy_(nk);sv[:,:self.budget].copy_(nv)
-        context=torch.minimum(self.lengths,self.budget_tensor)
-        torch_npu._npu_paged_attention(query=query,key_cache=self.key,value_cache=self.value,
-            num_heads=HEADS,num_kv_heads=1,scale_value=1/math.sqrt(DIM),
-            block_table=self.pa_table,context_lens=context,out=self.output)
+        self.native_pa.execute(query,self.key,self.value,self.pa_table,self.output)
         alpha=approximate.gather(2,selected[:,None,:].expand(-1,HEADS,-1)).sum(-1)
         if reallocation:
             require(mean.shape==(self.batch,DIM),"per-native-lease means")

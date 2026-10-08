@@ -179,11 +179,11 @@ class CrossModule(unittest.TestCase):
   for text in (host_text,gate_text,consumer_text):self.assertIn("validate_cpu_abi_child(",text)
   self.assertNotIn('=="sparq-token-v4"',gate_text);self.assertNotIn('=="sparq-token-v5"',gate_text)
  def test_source_changed_proof_not_claimed_byte_exact_math_unchanged(self):
-  for n,s in {"sparq_token_v4/core.py":"fc7068c8c48473c23137c273603fec3a13d52760d5dfc89d1ae37a5ba2c8717c",
+  for n,s in {"sparq_token_v4/core.py":"c5ef88f12828597469f7f3ce32a78ca4b4bb31d66c38beba102420d11bb21393",
    "sparq_token_v4/oracle.py":"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f",
-   "model_bridge.py":"a85dd04893ad74feaaf1f2bf85e807e387b2957ce6db6a6034bf098bb951e81d",
-   "numeric_gate.py":"8dc7434630403be60330fa618967c5ca5a9cae4fa1367c455dc915854bcb3ab0",
-   "preflight.py":"3f1d51d767da1b762cbde06f54080f3e7e2aed253709a22c98af43e98978cbc0"}.items():
+   "model_bridge.py":"74400ac82b9f28ce4cbed21faf00f2201307eb43c31b76f8a2851e1eb97bffb9",
+   "numeric_gate.py":"d6d6088dcc140fd9f23c3fb189dc03a0467120159c07b65560f99184973aaaea",
+   "preflight.py":"87aaaff5481c81ebdcec2c9dee2943f85f67f1b99aa38f04676bc14cb044678a"}.items():
    self.assertEqual(receipt.sha(receipt.ROOT/n),s)
   self.assertNotEqual(receipt.sha(Path(gate.__file__)),"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c")
   self.assertEqual(receipt.OWNER,"sparq-token-v6");self.assertNotIn("torch",sys.modules)

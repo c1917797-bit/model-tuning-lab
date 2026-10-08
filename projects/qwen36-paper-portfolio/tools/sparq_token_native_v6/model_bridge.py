@@ -147,6 +147,7 @@ def install_from_env():
   safe_rows=[row+[row[0]]*(max_pages-len(row)) for row in rows]
   workspace.rows.copy_(torch.tensor(safe_rows,dtype=torch.int64,device=kc.device))
   workspace.lengths.copy_(torch.tensor(lengths,dtype=torch.int32,device=kc.device))
+  workspace.native_pa.set_lengths(lengths)  # CPU metadata from the same known host topology; no D2H.
   # Original forward already performed exactly one native writer/notify. Do not write KV again.
   attention.record_attention_compute_start()
   got,selected,alpha,channels=workspace.run(query,kc,vc,None,reallocation=False,variant="paper-gqa-probability")

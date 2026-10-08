@@ -94,6 +94,11 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.
   Free pages inside the pool are not ordinary free RAM or permission to release
   them.
+- For a capped one-time release, consult its original durable completion ledger
+  before a repeated message or continuation. Completed GiB consume that cap;
+  do not release it again. Recheck the exact consumer PID/start and NUMA pools,
+  preserve its required capacity and distinguish later memory drift from the
+  immediate release delta. The October7 release of32GiB is already SPENT.
 - Keep datasets, weights, checkpoints, credentials, raw profiles, and large
   generated artifacts outside Git.
 

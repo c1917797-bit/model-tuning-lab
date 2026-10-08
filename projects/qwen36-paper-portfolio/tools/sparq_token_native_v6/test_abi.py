@@ -68,10 +68,16 @@ class NativeAPI(unittest.TestCase):
   for call in calls:self.assertEqual({k.arg for k in call.keywords},{"key","value","key_cache","value_cache","slot_mapping"})
  def test_actual_paged_attention_keywords_match_unchanged_core(self):
   source=(Path(__file__).parent/"sparq_token_v4/core.py").read_bytes()
-  self.assertEqual(hashlib.sha256(source).hexdigest(),"fc7068c8c48473c23137c273603fec3a13d52760d5dfc89d1ae37a5ba2c8717c")
-  calls=[n for n in ast.walk(ast.parse(source)) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="_npu_paged_attention"]
-  self.assertEqual(len(calls),2)
-  for call in calls:self.assertEqual({k.arg for k in call.keywords},p.REQUIRED["_npu_paged_attention"])
+  manifest=json.loads((receipt.ROOT/"SOURCE_MANIFEST.json").read_bytes())
+  self.assertEqual(hashlib.sha256(source).hexdigest(),manifest["files"]["sparq_token_v4/core.py"])
+  tree=ast.parse(source);helper=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=="NativePAHost")
+  execute=next(n for n in helper.body if isinstance(n,ast.FunctionDef) and n.name=="execute")
+  args=next(n for n in ast.walk(execute) if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=="args" for t in n.targets))
+  self.assertEqual({k.arg for k in args.value.keywords},p.REQUIRED["_npu_paged_attention"])
+  self.assertEqual(ast.unparse(next(k.value for k in args.value.keywords if k.arg=="context_lens")),"self.context.value")
+  calls=[n for n in ast.walk(helper) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="_npu_paged_attention"]
+  self.assertEqual(len(calls),3)
+  for call in calls:self.assertEqual({k.arg for k in call.keywords},({None,"workspace"} if len(call.keywords)==2 else {None}))
  def test_native_slot_indices_complete_signature_positive(self):
   got=p.validate_exports(self.records())
   self.assertEqual(got["_npu_reshape_and_cache"]["required_arguments"],sorted(p.WRAPPER_MAP))
@@ -302,5 +308,56 @@ class ActualATBBinding(unittest.TestCase):
   other["_npu_paged_attention"]["binding"]["atb_provenance"]["value"]["chain"][-1]["closure_scalars"]["api_name"]="foreign"
   self.assertNotEqual(p.export_contract_identity(original),p.export_contract_identity(other))
 
+
+class PAHostGraphABI(unittest.TestCase):
+ def fixture(self):
+  # Explicit SOFTWARE contract fixtures from actual lazy wrapper source; NOT actual graph ABI.
+  rows=ActualATBBinding().fixture()
+  name=p.PA_WORKSPACE_NAME;row=copy.deepcopy(rows["_npu_paged_attention"])
+  binding=row["binding"];binding["name"]=name
+  chain=binding["atb_provenance"]["value"]["chain"]
+  chain[0]["name"]=name;chain[-1]["closure_scalars"]["api_name"]=name
+  args=[dict(name=n,type={"num_kv_heads":"int","num_heads":"int","scale_value":"float"}.get(n,"Tensor"),
+   has_default=False,default=None,kwarg_only=False) for n in sorted(p.REQUIRED["_npu_paged_attention"])]
+  row["dispatcher"]=[dict(name="atb::"+name,overload_name="",text="SOFTWARE-CONTRACT-ONLY",arguments=args,returns=[dict(name="",type="Tensor")])]
+  graph={}
+  for name in p.PA_GRAPH_NAMES:
+   item=copy.deepcopy(binding);item.update(module="torch_npu.npu.graphs",name=name,qualname=name)
+   item.pop("atb_provenance",None)
+   graph[name]=dict(lookup_error=None,binding=item)
+  return dict(workspace=row,graph=graph,source_callsite_sha256=p.PA_SOURCE_SHA)
+ def test_exact_workspace_lazy_source_and_graph_software_positive_not_native_authority(self):
+  fixture=self.fixture();self.assertIs(p.validate_pa_graph_api(fixture),fixture)
+  self.assertEqual(p.pa_graph_identity(fixture)["source_callsite_sha256"],p.PA_SOURCE_SHA)
+  self.assertNotIn("torch",sys.modules);self.assertNotIn("torch_npu",sys.modules)
+ def test_partial_foreign_layout_schema_and_graph_bindings_failclosed(self):
+  for mode in ("foreign-namespace","wrong-type","missing","overload","union","return","closure","graph-missing","graph-foreign","graph-name","graph-error"):
+   item=self.fixture();schema=item["workspace"]["dispatcher"][0]
+   if mode=="foreign-namespace":schema["name"]=schema["name"].replace("atb::","npu::")
+   elif mode=="wrong-type":schema["arguments"][0]["type"]="int"
+   elif mode=="missing":schema["arguments"].pop()
+   elif mode=="overload":schema["overload_name"]="out"
+   elif mode=="union":item["workspace"]["dispatcher"].append(copy.deepcopy(schema))
+   elif mode=="return":schema["returns"]=[]
+   elif mode=="closure":item["workspace"]["binding"]["atb_provenance"]["value"]["chain"][-1]["closure_scalars"]["api_name"]="_npu_paged_attention"
+   elif mode=="graph-missing":item["graph"].pop("graph_task_update_begin")
+   elif mode=="graph-foreign":item["graph"]["graph_task_update_begin"]["binding"]["module"]="foreign.graphs"
+   elif mode=="graph-name":item["graph"]["graph_task_update_begin"]["binding"]["name"]="other"
+   elif mode=="graph-error":item["graph"]["graph_task_update_begin"]["lookup_error"]={"type":"AttributeError","text":"raw"}
+   with self.subTest(mode=mode),self.assertRaises(ValueError):p.validate_pa_graph_api(item)
+ def test_actual_raw_collection_preserves_missing_graph_before_assertion(self):
+  torch=SimpleNamespace(_C=SimpleNamespace(_jit_get_all_schemas=lambda:[]),npu=SimpleNamespace())
+  observed=p.collect_pa_graph_api(torch,SimpleNamespace())
+  self.assertEqual(set(observed["graph"]),set(p.PA_GRAPH_NAMES))
+  self.assertTrue(all(x["lookup_error"]["type"]=="AttributeError" for x in observed["graph"].values()))
+  self.assertEqual(observed["workspace"]["export_lookup_error"]["type"],"AttributeError")
+  with self.assertRaises(ValueError):p.validate_pa_graph_api(observed)
+  tree=ast.parse(Path(p.__file__).read_text());probe=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="probe")
+  def line(name):
+   return next(n.lineno for n in ast.walk(probe) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id==name)
+  self.assertLess(line("collect_pa_graph_api"),line("save_observations"));self.assertLess(line("save_observations"),line("validate_observation"))
+  recheck=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="recheck_preinit")
+  self.assertIn("collect_pa_graph_api",ast.unparse(recheck))
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="set_device" for n in ast.walk(recheck)))
 
 if __name__=="__main__":unittest.main(verbosity=2)
