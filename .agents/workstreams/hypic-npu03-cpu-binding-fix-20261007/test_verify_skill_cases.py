@@ -26,10 +26,22 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 18)
-        self.assertEqual(report["skills_without_case"], 11)
+        self.assertEqual(report["cases_with_verified_provenance"], 19)
+        self.assertEqual(report["skills_without_case"], 10)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 16, "verified": 2})
+                         {"partial-evidence": 17, "verified": 2})
+
+    def test_canary_does_not_promote_one_wrong_sample(self) -> None:
+        path = cases.CASES / "ascend-canary-implementation.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-canary-implementation"})
+        self.assertEqual(skill, "ascend-canary-implementation")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["enabled_scored_worker_hot_pids"], 4)
+        self.assertEqual(item["observed"]["disabled_scored_worker_hot_pids"], 0)
+        self.assertFalse(item["observed"]["full_2048_token_quality_pair_complete"])
+        self.assertFalse(item["observed"]["current_candidate_c12060c_disabled_pair_proven"])
 
     def test_source_map_preserves_serving_provenance_limits(self) -> None:
         path = cases.CASES / "ascend-source-map.json"

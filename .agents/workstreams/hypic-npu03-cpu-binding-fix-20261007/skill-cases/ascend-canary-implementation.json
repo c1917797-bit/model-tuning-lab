@@ -1,0 +1,60 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-canary-implementation",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Replay exact-main canary Skill against a genuine 2048-cap paired HYPIC disabled/enabled explicit-boundary LongBench-v2 request on physical NPU0-3",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "07dceac8c65c9d1696d8e2fa5543d9b8784a7628",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "Read-only retrospective of historical real-weight canary pair; no new NPU use or unchanged rerun",
+  "observed": {
+    "canary_checkpoint_source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "same_sample_and_explicit_boundaries": true,
+    "physical_npu_0_3_host_worker_pids_proven": true,
+    "disabled_scored_worker_hot_pids": 0,
+    "enabled_scored_worker_hot_pids": 4,
+    "enabled_skipped_prefix_tokens_per_worker": 16376,
+    "disabled_prediction": "A",
+    "enabled_prediction": "A",
+    "reference": "B",
+    "single_sample_accuracy_delta": 0,
+    "historical_preimplementation_git_gates_proven": false,
+    "current_candidate_c12060c_disabled_pair_proven": false,
+    "full_2048_token_quality_pair_complete": false,
+    "case_integrated_in_main": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_CANARY_IMPLEMENTATION_CASE_20261009.md",
+      "sha256": "eeed4c8325efb19ab3f55ef76669867d4595585f74d2e05a16926b3d7975a945"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_canary_implementation_case.py",
+      "sha256": "8400078dcc9ef5519c22c8d3280d6093486d386636a78959dc5f2b30ddc44e70"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CANARY_RESULT.md",
+      "sha256": "08b1e48457c59016c844e9009c3a1e140c89818adffbbd0a10e942efbf24fed2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_canary.py",
+      "sha256": "1c431dddfaaa434d375155739b666f97bd092fa84d1d9a3a673f45705fce59e4"
+    }
+  ],
+  "external_raw_receipts": {
+    "disabled_canary_result_sha256": "6093ae3468e06ba47e125ee28838911d33846c655b49bfdf64bfd9023f748912",
+    "enabled_canary_result_sha256": "f206085cbfb41f6a5446eb92a8963df3b30dbab6d8a8cbb0c872488bbd11b2e1",
+    "enabled_service_start_sha256": "c1a3fcda6be4789efa37071da897e6dc4131496b90fbd04b5db7dfdcfffd2be9",
+    "enabled_service_log_sha256": "f1478862efca1cf9973877e62d45b73a410bf3d5d0b3f0635ef5ab4988be6c9b",
+    "enabled_npu_health_sha256": "b95949f8f10dc682cb517423d4622a300fe9cffc57e74907e22be019b1c9dab3"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "One paired request proves request-protocol activation, four-worker path and no same-sample accuracy delta; both predictions are incorrect. It does not prove aggregate quality, final c12060c candidate, prospectively satisfied preimplementation gates, a full scoring rule, or paper C3.",
+  "next_gate": "Freeze the full-pair scoring rule; for final candidate c12060c preserve in-container source digest and Docker bind inspect, then a same-identity disabled/enabled canary and complete 2048-token quality/performance pair only when physical NPU0-3 are actually idle.",
+  "drift_trigger": "Revalidate if exact-main Skill/registry, paired raw canary receipts, serving image, source commit, model/evaluator, or explicit-boundary request protocol changes."
+}
