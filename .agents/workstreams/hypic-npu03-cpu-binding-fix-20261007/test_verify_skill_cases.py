@@ -26,10 +26,22 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 13)
-        self.assertEqual(report["skills_without_case"], 16)
+        self.assertEqual(report["cases_with_verified_provenance"], 14)
+        self.assertEqual(report["skills_without_case"], 15)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 11, "verified": 2})
+                         {"partial-evidence": 12, "verified": 2})
+
+    def test_reproduction_case_preserves_failed_hotpath_gate(self) -> None:
+        path = cases.CASES / "paper-to-ascend-reproduction.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"paper-to-ascend-reproduction"})
+        self.assertEqual(skill, "paper-to-ascend-reproduction")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["branch_skill_differs_from_exact_main"])
+        self.assertEqual(item["observed"]["clean2_distinct_worker_hot_pids"], 0)
+        self.assertFalse(item["observed"]["clean2_formal_hotpath_gate_passed"])
+        self.assertFalse(item["observed"]["reproduction_skill_completion_gate_passed"])
 
     def test_paper_to_ascend_real_task_is_partial_not_paper_success(self) -> None:
         path = cases.CASES / "paper-to-ascend.json"

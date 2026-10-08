@@ -1,0 +1,66 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "paper-to-ascend-reproduction",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Apply exact-main historical-reproduction gates to HYPIC's same-lane performance pair, clean2 natural 2048-token quality negative, and distinct explicit-segment r12 stress without pooling denominators",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "d0298d9fdf1ce7ba27f1bd711d26834b6bd7b6aa",
+  "tested_reference_git_blob_oid": "582852d43b5550594da257b1a274a84103542411",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma, physical NPU0-3 TP4, Qwen3.6-named hybrid text checkpoint and pinned official vLLM-Ascend image; historical c16/1024 performance, clean2 natural max2048 quality, and r12 c8/max2048 explicit-boundary stress are separate frozen identities",
+  "observed": {
+    "branch_skill_differs_from_exact_main": true,
+    "branch_skill_git_blob_oid": "90fd7d45e7b0630c81c2a0c3694c46e4995131dc",
+    "branch_only_cross_lane_absolute_percentage_guidance_in_main": false,
+    "historical_same_lane_performance_units_valid": 6,
+    "historical_tpot_reduction_percent": 22.35616395806199,
+    "clean2_natural_quality_units_valid": 12,
+    "clean2_paired_repeated_input_identity_valid": true,
+    "clean2_only_arm_variable": "VLLM_ASCEND_HYPIC_ENABLE",
+    "clean2_formal_hotpath_gate_passed": false,
+    "clean2_distinct_worker_hot_pids": 0,
+    "clean2_formal_acceptance_claim": false,
+    "clean2_owned_treatment_resource_release_proven": true,
+    "r12_explicit_scored": 57,
+    "r12_four_worker_hot_proofs": 52,
+    "r12_guard_samples_clean": 279,
+    "r12_all_hot_gate_passed": false,
+    "r12_matched_no_cache_control_complete": false,
+    "full_explicit_2048_quality_pair_complete": false,
+    "current_three_round_matched_performance_complete": false,
+    "reproduction_skill_completion_gate_passed": false,
+    "case_integrated_in_main": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_REPRODUCTION_CASE_20261008.md",
+      "sha256": "8a8b8dc40052a778d11790bfc1e4f3b50c9086f611259c33a3a91a0fb5f8d886"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reproduction_case.py",
+      "sha256": "ac4f5185d007f1a0c57302b505603d927f60efa1513ca410043540542473855b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/FINAL_EVIDENCE_DECISION.md",
+      "sha256": "29d6f4467720fd70e9e0b003c5ab17be27054485a3c17d8fbc6de6c61b4afc2f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
+      "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    }
+  ],
+  "external_raw_receipts": {
+    "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1",
+    "clean2_natural_quality_audit_sha256": "61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0",
+    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60"
+  },
+  "replayable_regression_recorded": true,
+  "boundary": "The historical six-unit same-lane performance effect is valid only for c16/1024. Clean2's twelve natural max2048 quality units have valid rows/identity/isolation but no worker-hot activation, so their scores cannot prove hot-path quality. The successor r12 explicit-boundary stress has 52/57 hot proofs and no matched control. The branch's cross-lane decomposition text is not in main. Exact-main reproduction completion, losslessness, full-paper and adoption claims remain unsupported.",
+  "next_gate": "Freeze the new deployed-effect-versus-all-hot rule and run a fresh same-identity 0.85 control and candidate, full explicit-boundary max2048 quality, repeated matched performance, continuous isolation and independent release audits only on actually idle physical NPU0-3. Review and integrate the branch cross-lane lesson separately before attributing it to main.",
+  "drift_trigger": "Revalidate after main Skill/reference/registry or branch Skill blob changes, experiment identity, dataset/evaluator, model/image/source, physical lane, cache budget, or raw audit hashes change."
+}
