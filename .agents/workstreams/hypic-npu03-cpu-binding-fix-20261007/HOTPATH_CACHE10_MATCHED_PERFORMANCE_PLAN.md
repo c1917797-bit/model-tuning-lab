@@ -54,3 +54,23 @@ the declared gates. A valid but unfavorable effect is a negative result, not
 a reason to change the ruler. Even a favorable result is limited to this
 model/workload/service identity; it does not prove full-paper C3 or validate
 all archived Skills.
+
+## Execution handoff
+
+The work-branch controller is
+`hotpath_cache10_matched_performance.py`; its default invocation is an
+offline frozen-spec/pair-seam inspection. The `--run` entry requires the
+independent `hotpath-quality-cache10r2-full-audit.json` receipt, refuses an
+existing attempt root, enforces the preceding phase's clean result, and then
+checks physical NPU0-3 before creating its exact-owned service. Invoke each
+phase in the order listed above with `--arm`, `--phase`, and `--run` in
+separate bounded operations. Do not invoke any `--run` while the current
+quality candidate/control is live. On interruption, inspect its operation
+handle and preserved root; never resume a partial phase in place.
+
+After all six phases, run
+`audit_hotpath_cache10_matched_performance.py`. It independently checks
+raw rows, recomputes metrics, reconciles contracts/hashes, guard/worker/
+release receipts, normalized service specifications, and the declared
+effects. The executable and audit were checked offline against the frozen
+0.9 performance data format; that check is not a cache10 NPU result.

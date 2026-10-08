@@ -24,6 +24,12 @@ from binding_off_service import (
 )
 
 ATTEMPT = os.environ.get("HYPIC_QUALITY_ATTEMPT", "original")
+PERFORMANCE_ATTEMPTS = {
+    f"hotpath-cache10perf-{arm}-{phase}":
+        f"performance-context-41984-hotpath-cache10perf-{arm}-{phase}"
+    for arm in ("no-cache", "hypic-only")
+    for phase in ("screen", "repeat2", "repeat3")
+}
 ATTEMPT_ROOTS = {
     "original": "quality-context-41984",
     "clean2": "quality-context-41984-clean2",
@@ -44,6 +50,7 @@ ATTEMPT_ROOTS = {
     "hotpath-cache10r1-full-hypic": "quality-context-41984-hotpath-cache10r1-full-hypic",
     "hotpath-cache10r2-full-baseline": "quality-context-41984-hotpath-cache10r2-full-baseline",
     "hotpath-cache10r2-full-hypic": "quality-context-41984-hotpath-cache10r2-full-hypic",
+    **PERFORMANCE_ATTEMPTS,
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
@@ -59,7 +66,7 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-cache10r1-full-hypic",
     "hotpath-cache10r2-full-baseline",
     "hotpath-cache10r2-full-hypic",
-})
+} | set(PERFORMANCE_ATTEMPTS))
 QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984
 EVALUATOR = Path(__file__).resolve().parents[1] / "WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py"

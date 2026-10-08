@@ -1,5 +1,19 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Current 2026-10-08 14:03 UTC checkpoint:** The exact cache10r2 candidate
+operation `exec-00000000000013ec` is still running; progress persisted
+40/127 full samples at 14:02 UTC. This is not a score decision. An
+independent read-only partial audit passed 29 persisted samples / 87 scored
+rows at 13:56 UTC; do not extrapolate that fraction to 127. The same owned
+service remains on physical NPU0-3, with no matching baseline started. The
+prospective same-identity performance plan is
+`HOTPATH_CACHE10_MATCHED_PERFORMANCE_PLAN.md`; the offline-only default
+controller, six-phase entry gate, and independent audit scripts are on this
+work branch. Their offline tests do not count as live performance evidence.
+After the candidate finishes, independently audit that arm, prove exact
+release and a clean shared lane, then run only the matching cache10r2
+baseline. Full paired quality audit precedes any performance `--run`.
+
 **Active cache10r2 candidate (2026-10-08 13:22 UTC):** AWMCP operation
 `exec-00000000000013ec` passed an immediately adjacent fresh gate (no
 physical NPU0-3 process, no `cannbench_ds` staged evaluator, free port 8223,
