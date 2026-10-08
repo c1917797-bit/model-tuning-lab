@@ -19,8 +19,13 @@ A read-only `git diff --name-only origin/main -- .agents/skills` check on
 The other 24 Skill identities have no file diff against pinned main in this
 worktree. In particular, `mst-repo-onboarding` is unchanged, so the
 resume-session check in `ONBOARDING_RESUME_CHECK_20261008.md` is evidence
-about the main text for that bounded route. Its fresh-clone route remains
-unverified.
+about the main `SKILL.md` text for that bounded route. Its fresh-clone
+route remains unverified. After that check, this branch also added
+purpose/trigger/scope metadata to the registry entries for
+`mst-repo-onboarding`, `mst-skill-tree-design`, and
+`mst-transformation-verification`. Those routing edits are branch-only:
+the resume check does **not** prove that pinned main automatically selects
+the updated metadata.
 
 Before changing a main-Skill status to `verified`, record the exact Skill
 blob/ref tested, the real task and acceptance gate, raw-evidence hash,
