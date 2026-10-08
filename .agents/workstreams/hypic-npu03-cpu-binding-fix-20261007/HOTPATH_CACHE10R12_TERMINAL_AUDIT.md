@@ -34,8 +34,12 @@
   two wrong→correct; 0/57 full response hashes match across r11/r12.
   In contrast, 38/38 one-token observations match across sources and
   19/19 observation pairs match within each arm. This proves only the
-  short deterministic canary; long-output variability needs a paired
-  quality investigation, with source/schedule effects not yet separated.
+  short deterministic canary. The long outputs already vary within arm:
+  among 57 within-arm scored-output pairs, exact SHA agrees 0 times in
+  r11 and once in r12. Per-repetition correct counts are 8/9/10 in r11
+  and 6/9/7 in r12. Hence the 0/57 cross-source long-output match is
+  not by itself evidence of a source regression; source and scheduling
+  effects still require a paired quality investigation.
   No same-identity no-cache control or full LongBench/GSM8K paired suite
   exists for this source, so these are not quality or performance verdicts.
   Replay these bounded comparisons with

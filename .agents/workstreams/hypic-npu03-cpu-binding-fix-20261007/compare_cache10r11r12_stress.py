@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+from itertools import combinations
 from pathlib import Path
 
 
@@ -66,6 +67,25 @@ def main() -> int:
         sum(row["warm"][0]["response_sha256"] == row["warm"][1]["response_sha256"]
             for row in arm["rows"].values()) for arm in (old, new)
     ]
+    scored_within_pairs = [
+        [(left, right) for row in arm["rows"].values()
+         for left, right in combinations(row["scores"], 2)]
+        for arm in (old, new)
+    ]
+    same_scored_within = [
+        sum(left["response_sha256"] == right["response_sha256"]
+            for left, right in pairs)
+        for pairs in scored_within_pairs
+    ]
+    same_prediction_within = [
+        sum(left["prediction"] == right["prediction"] for left, right in pairs)
+        for pairs in scored_within_pairs
+    ]
+    correct_by_repetition = [
+        [sum(row["scores"][rep]["correct"] for row in arm["rows"].values())
+         for rep in range(3)]
+        for arm in (old, new)
+    ]
     report = {
         "schema": "hypic-r11-r12-stress-comparison/v1",
         "not_paired_quality_or_causal_verdict": True,
@@ -77,13 +97,19 @@ def main() -> int:
         "same_scored_response_sha": same_scored,
         "cross_source_same_one_token_observations": warm_cross,
         "within_source_same_one_token_pairs": warm_within,
+        "within_source_same_long_response_pairs": same_scored_within,
+        "within_source_same_prediction_pairs": same_prediction_within,
+        "correct_by_repetition": correct_by_repetition,
         "gained_correct": gained,
         "lost_correct": lost,
     }
-    expected = (27, 22, 53, 52, 0, 38, [19, 19], 2, 7)
+    expected = (27, 22, 53, 52, 0, 38, [19, 19],
+                [0, 1], [41, 47], [[8, 9, 10], [6, 9, 7]], 2, 7)
     observed = (report["r11_correct"], report["r12_correct"],
                 report["r11_four_worker_hot"], report["r12_four_worker_hot"],
-                same_scored, warm_cross, warm_within, len(gained), len(lost))
+                same_scored, warm_cross, warm_within, same_scored_within,
+                same_prediction_within, correct_by_repetition,
+                len(gained), len(lost))
     if observed != expected:
         raise RuntimeError(f"frozen r11/r12 comparison drift: {observed!r}")
     print(json.dumps(report, sort_keys=True))

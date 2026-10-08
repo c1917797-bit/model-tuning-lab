@@ -47,7 +47,7 @@
   "diagnostic_plugin": {
     "worktree": "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008",
     "local_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
-    "status": "scheduler-directory rebuild after worker eviction; red/green focused regression and 13 focused CPU tests passed; NPU unvalidated; r11 mounted earlier 62b0d4a source"
+    "status": "scheduler-directory rebuild after worker eviction; red/green focused regression and 13 focused CPU tests passed; r12 ran this source on physical NPU0-3 but strict hot coverage was 52/57 and the repair's causal effect remains unisolated"
   },
   "git_push_state": {
     "status": "local workstream ahead of remote; HTTPS credentials absent; SSH timed out; inspect live branch HEAD and upstream before any push claim",
