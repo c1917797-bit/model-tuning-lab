@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 17:14 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 17:24 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
@@ -72,12 +72,14 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 cache10r9 full HYPIC controller `exec-000000000000158e` is **live** on physical
 NPU0–3 in the unique root `quality-context-41984-hotpath-cache10r9-full-hypic`.
 Service became healthy at 17:06:55 UTC; the first scored sentinel passed its
-four-worker hot-path gate at 17:09:43. It is processing the remaining 126
-samples. Poll this exact operation and root; never launch a duplicate while it
-runs. cache10r8 is terminal and isolation-invalid. The r9 preparation branch
-commit `54c092b210a8c3791496a124b8439deba26a6369` was live-remote verified.
-On collision, preserve evidence and only retry a fresh root when actual 0–3
-and port 8223 are idle; passive mappings do not veto and foreign jobs stay.
+four-worker hot-path gate at 17:09:43. At 17:21 it had 15/127 completed;
+poll this exact operation/root and never launch a duplicate while it runs.
+The old completed no-cache arm used GPU utilization 0.9 versus r9's 0.85:
+HOTPATH_CACHE10R9_BASELINE_REUSE_AUDIT.md proves it is not reusable. After a
+valid candidate, run only the fresh r9 0.85 no-cache arm on an actually idle
+lane. cache10r8 is isolation-invalid; on collision preserve evidence, touch
+only owned resources, and retry a new root only when physical 0–3 are idle.
+Passive mappings do not veto; foreign workloads stay untouched.
 
 ## 5. Next Actions
 
