@@ -14,6 +14,8 @@
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
   verified, 5 partial, 22 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
+- Live r9 request-level traceability is not yet proven despite aggregate
+  hot-path activity; see HOTPATH_CACHE10R9_REQUEST_TRACEABILITY_AUDIT.md.
 
 ## 1. North Star
 
@@ -40,27 +42,18 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 - The Git checkpoint and maintainer-handoff Skills have bounded verified
   real-task cases locally; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
-- The startup guard repair is in HOTPATH_STARTUP_GUARD_REPAIR.md and was
-  pushed at 5e3b774 after 34 offline tests. cache10r5 live operation
-  exec-00000000000014ee proved that its new pre-health guard catches
-  `cannbench_ds` on physical NPU2 and releases only the exact owned
-  container within about 135 seconds, at 0/127 scored samples. See
-  HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md and immutable hashes.
+- The startup guard repair passed 34 offline tests and caught the
+  r5 foreign NPU2 process before scoring; see
+  HOTPATH_STARTUP_GUARD_REPAIR.md and HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md.
 - The seventh case caught `mst-practice-iteration-planning`'s main YAML
   schema mismatch; the branch Skill repair and bounded HYPIC plan pass.
   Main remains partial; see PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md.
-- cache10r6 launched after ten actual-idle checks, ignoring passive
-  mappings. Startup guard caught foreign PID 1426552 on physical NPU2
-  at 16:21:22 UTC, stopped at 0/127 and released only owned resources;
-  see HOTPATH_CACHE10R6_RESOURCE_CONFLICT.md and raw SHA-256 receipts.
-- cache10r7 reached 0/127 after a real foreign NPU3 PID entered during startup;
-  its owned service was released. See HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md
-  for the immutable operation, root, allowlist repair and raw hashes.
-- The user chose opportunistic actual-idle attempts over requiring an exclusive
-  reservation. cache10r8 launched on actual-idle physical NPU0–3, then its
-  startup guard caught a real foreign `cannbench_ds` PID 1762714 on physical
-  NPU3 at 16:54:46 UTC. It stopped before health at 0/127 and released only
-  its owned container/port. See HOTPATH_CACHE10R8_RESOURCE_CONFLICT.md.
+- r6/r7 both stopped before scoring on real foreign NPU2/NPU3
+  processes and released only owned resources. See their separate
+  RESOURCE_CONFLICT reports for PIDs, roots and hashes.
+- The user chose actual-idle attempts. r8 caught foreign
+  `cannbench_ds` on physical NPU3 before scoring and released only
+  owned resources; see HOTPATH_CACHE10R8_RESOURCE_CONFLICT.md.
 - The real r6/r7 practice was ingested via the existing branch-local
   host-maintenance guard, a registry trigger, and a structured eval with
   raw-artifact replay. The sixth Skill case covers `mst-experience-ingestion`
@@ -72,8 +65,13 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 cache10r9 full HYPIC controller `exec-000000000000158e` is **live** on physical
 NPU0–3 in the unique root `quality-context-41984-hotpath-cache10r9-full-hypic`.
 Service became healthy at 17:06:55 UTC; the first scored sentinel passed its
-four-worker hot-path gate at 17:09:43. At 17:21 it had 15/127 completed;
-poll this exact operation/root and never launch a duplicate while it runs.
+four-worker hot-path gate at 17:09:43. Poll this exact operation/root and
+never launch a duplicate while it runs.
+At the 17:36 read-only checkpoint, 38/127 sample files existed and their
+114 scored IDs each matched a boundary event. Worker hot-path and hybrid
+repair events lacked request IDs, so per-scored-request hot-path coverage
+remains unverified under the quality Skill. Preserve r9 unchanged and do
+not interpret a green aggregate controller result as this stricter gate.
 The old completed no-cache arm used GPU utilization 0.9 versus r9's 0.85:
 HOTPATH_CACHE10R9_BASELINE_REUSE_AUDIT.md proves it is not reusable. After a
 valid candidate, run only the fresh r9 0.85 no-cache arm on an actually idle
@@ -94,8 +92,11 @@ Passive mappings do not veto; foreign workloads stay untouched.
    Audit cache10r5/r6/r7 separately against their result reports.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. Complete HYPIC 127×3 scored quality and independent guard/release
-   audit, then same-identity no-cache arm and pair audit. Only after
+4. Complete r9's 127×3 scored rows and independent guard/release audit.
+   Audit request-level work-performing coverage separately from boundary
+   admission and aggregate repair counts. If it remains unverified, repair
+   telemetry only after r9 releases its service and use a fresh candidate
+   identity/root; pair only with a matching no-cache arm. Only after all
    quality gates pass, run matched performance.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
