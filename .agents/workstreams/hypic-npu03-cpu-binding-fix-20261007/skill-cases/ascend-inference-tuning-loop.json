@@ -1,0 +1,43 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-inference-tuning-loop",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Replay a three-round physical NPU0-3 CPU-binding-off no-cache performance intervention within the HYPIC puncture workflow",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "010d1a8bd5ab21fcdff6c50e3bad74f974ccae8d",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma; physical NPU0-3, Qwen3.6-27B BF16 TP4; 32768 input/16384 prefix/1024 fixed output/c16, 40 requests and two warmups per round; frozen no-cache baseline against enable_cpu_binding=false only",
+  "observed": {
+    "baseline_weighted_tpot_ms": [417.5428316505381, 410.85679129178993, 410.8959609183756],
+    "candidate_weighted_tpot_ms": [77.5640789833808, 77.8307910200318, 77.00516113049729],
+    "median_tpot_reduction_percent": 81.12318290741513,
+    "raw_performance_runs_hash_verified": 6,
+    "candidate_contracts_and_exact_cleanup_verified": 3,
+    "full_2048_token_paired_quality_complete": false,
+    "hypic_paper_effect_verified": false,
+    "main_and_remote_integration_complete": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_INFERENCE_TUNING_LOOP_CASE_20261008.md",
+      "sha256": "4203bdf070b6f0ee34ea51514ae1e1679021f145bb897c133771a3f7f20dad8f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_inference_tuning_loop_case.py",
+      "sha256": "ba02eef46a715c3317cfbc2a3df313067eed0f33789e75a367818daa12b1e242"
+    },
+    {
+      "path": ".agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml",
+      "sha256": "9c06af152f902684d10251724d01bf3c86c18edc4c4e02c839ba53ccac69a9ad"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "This is a validated bounded CPU-binding-off performance comparison and retained experiment decision, not full HYPIC activation, quality, matched paper-effect performance, or remote integration. The main Skill's full continuous workflow remains partial.",
+  "next_gate": "Finish and audit the already-running r10 quality attempt without rerun. After terminal release and only on actually idle physical NPU0-3, require a request-level-valid HYPIC candidate, matching source/flags 0.85 control, full 2048-token paired quality, three-round performance, and independent isolation audit before full Skill acceptance.",
+  "drift_trigger": "Revalidate when the main Skill or registry blob, source/image/model/physical lane, workload, serving flags, benchmark/scorer, or any raw artifact hash changes."
+}

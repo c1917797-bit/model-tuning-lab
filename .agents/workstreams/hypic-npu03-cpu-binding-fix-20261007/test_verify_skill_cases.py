@@ -26,10 +26,21 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 9)
-        self.assertEqual(report["skills_without_case"], 20)
+        self.assertEqual(report["cases_with_verified_provenance"], 10)
+        self.assertEqual(report["skills_without_case"], 19)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 7, "verified": 2})
+                         {"partial-evidence": 8, "verified": 2})
+
+    def test_inference_tuning_loop_replay_stays_bounded(self) -> None:
+        path = cases.CASES / "ascend-inference-tuning-loop.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-inference-tuning-loop"})
+        self.assertEqual(skill, "ascend-inference-tuning-loop")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["raw_performance_runs_hash_verified"], 6)
+        self.assertFalse(item["observed"]["full_2048_token_paired_quality_complete"])
+        self.assertFalse(item["observed"]["hypic_paper_effect_verified"])
 
     def test_benchmark_baseline_reuse_case_stays_partial(self) -> None:
         path = cases.CASES / "ascend-benchmark-evidence.json"
