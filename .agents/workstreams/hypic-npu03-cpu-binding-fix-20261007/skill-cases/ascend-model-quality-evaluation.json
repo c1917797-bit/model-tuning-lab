@@ -12,7 +12,7 @@
   "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; live cache10r9 original-protocol LongBench-v2 candidate; Qwen3.6-27B BF16 TP4 physical NPU0-3, c8, 2048 output cap; snapshot only, no terminal pair",
+  "environment_scope": "chicaihong01/ma; cache10r9 checkpoint and terminal cache10r10 original-protocol LongBench-v2 candidate; Qwen3.6-27B BF16 TP4 physical NPU0-3, c8, 2048 output cap; no valid terminal pair",
   "observed": {
     "completed_scored_ids_in_read_only_snapshot": 162,
     "request_boundary_events_joinable": true,
@@ -23,6 +23,11 @@
     "offline_counterexample_tests": 7,
     "all_workstream_tests_passed": 46,
     "post_snapshot_pid_namespace_join_repaired": true,
+    "r10_scored_responses_persisted": 381,
+    "r10_scored_requests_with_four_worker_hot_proof": 366,
+    "r10_scored_requests_without_four_worker_hot_proof": 15,
+    "r10_single_arm_correct_not_paired": 214,
+    "r10_terminal_decision": "isolated negative activation for frozen source; no paired quality verdict",
     "terminal_quality_pair_complete": false,
     "main_skill_integrated": false
   },
@@ -42,10 +47,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hotpath_request_coverage.py",
       "sha256": "c8c99c5df634c0ef20992e745ee4273ec212fa923f6986ea9085b755e851c3a8"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_R10_TERMINAL_SKILL_CASE_20261008.md",
+      "sha256": "76bc747e3df5b23daec2cad8cae9e36704db0943dcc097a3ff62288154b287b2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R10_TERMINAL_AUDIT.md",
+      "sha256": "ce19e5ab1b186e1785aaa2a3da3fa550e97ea2a4384a8eb72adb415df40855cd"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The real live candidate exposed a request-level activation evidence gap; the branch verifier correctly rejects batch-only evidence. Current main says treatment activation must be proven but does not specify this per-scored-request join, while the branch repair is unintegrated. This is a bounded defect/repair case, not full main Skill acceptance, not a terminal HYPIC quality result, and not proof that main guidance always yields an incorrect decision.",
-  "next_gate": "r9 terminated after a worker material-cache miss and remains an invalid partial arm. For the fresh r10 candidate, join each scored API ID to an internal request ID and four namespace-mapped worker PIDs, then audit all 127x3 rows, isolation and release. Only after valid candidate acceptance pair with a same-identity control on actually idle physical NPU0-3 and replay the integrated main Skill before upgrading acceptance.",
+  "boundary": "The r9 snapshot exposed an activation evidence gap and the complete isolated r10 arm has 15/381 scored requests without four-worker request-local proof. The branch verifier correctly rejects it. Current main requires activation but does not specify the per-scored-request join; the branch repair is unintegrated. This is a bounded negative activation/repair case, not full main Skill acceptance or a terminal paired HYPIC quality result.",
+  "next_gate": "Audit predeclared r11 c8 stress on actually idle physical NPU0-3, including request-local fallback reasons and every scored worker join. Only if it passes, run a fresh original-protocol full candidate, then a same-identity control, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; do not rerun r10 or pair its invalid activation arm.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }

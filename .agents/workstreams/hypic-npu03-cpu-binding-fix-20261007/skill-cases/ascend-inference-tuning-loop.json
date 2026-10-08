@@ -38,6 +38,6 @@
   ],
   "replayable_regression_recorded": true,
   "boundary": "This is a validated bounded CPU-binding-off performance comparison and retained experiment decision, not full HYPIC activation, quality, matched paper-effect performance, or remote integration. The main Skill's full continuous workflow remains partial.",
-  "next_gate": "Finish and audit the already-running r10 quality attempt without rerun. After terminal release and only on actually idle physical NPU0-3, require a request-level-valid HYPIC candidate, matching source/flags 0.85 control, full 2048-token paired quality, three-round performance, and independent isolation audit before full Skill acceptance.",
+  "next_gate": "The terminal r10 candidate failed request-level activation (15/381 scored requests lack four-worker proof), so do not reuse it as a paired comparator. Audit the predeclared r11 c8 stress on actually idle physical NPU0-3; only after a valid fresh full candidate require the same-identity 0.85 control, full 2048-token paired quality, three-round performance, and independent isolation audit before full Skill acceptance.",
   "drift_trigger": "Revalidate when the main Skill or registry blob, source/image/model/physical lane, workload, serving flags, benchmark/scorer, or any raw artifact hash changes."
 }
