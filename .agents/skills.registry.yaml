@@ -312,7 +312,18 @@ skills:
   - id: mst-repo-onboarding
     path: .agents/skills/mst-repo-onboarding
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Re-orient a maintainer to the repository structure, Skill Tree, task state, and validation before changes.
+    triggers:
+      - first enter this repository as a maintainer
+      - resume a maintainer session after a checkpoint
+      - reorient after Skill Tree structural changes
+    scope:
+      - AGENTS.md
+      - .agents/**
+      - docs/**
+      - agents/**
+      - CLAUDE.md
+      - scripts/validate-mst.sh
   - id: mst-repo-transformation
     path: .agents/skills/mst-repo-transformation
     status: stable
@@ -328,7 +339,15 @@ skills:
   - id: mst-skill-tree-design
     path: .agents/skills/mst-skill-tree-design
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Design a minimal Maintainer Skill Tree and justify any path-specific additions.
+    triggers:
+      - design the first Maintainer Skill Tree for a repository
+      - justify adding a path-specific maintainer Skill
+    scope:
+      - AGENTS.md
+      - .agents/skills.registry.yaml
+      - .agents/skills/**
+      - templates/skills/**
   - id: mst-tool-adapter-boundary
     path: .agents/skills/mst-tool-adapter-boundary
     status: stable
@@ -336,4 +355,13 @@ skills:
   - id: mst-transformation-verification
     path: .agents/skills/mst-transformation-verification
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Verify AGENTS, registry, Skill structure, and maintainer/runtime boundaries after transformation.
+    triggers:
+      - verify changed AGENTS.md or Maintainer Skill Tree
+      - audit multi-level registry and maintainer-runtime boundaries
+    scope:
+      - AGENTS.md
+      - .agents/**
+      - CLAUDE.md
+      - runtime-skills/**
+      - scripts/validate-mst.sh

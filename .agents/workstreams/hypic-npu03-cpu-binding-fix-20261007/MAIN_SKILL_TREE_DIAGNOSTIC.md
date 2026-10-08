@@ -49,3 +49,16 @@ future drift. Use an independent fixture or real fresh-clone task for
 behavioral acceptance. Until repaired and rechecked, keep
 `mst-skill-tree-design` and `mst-transformation-verification` partial;
 do not treat a passing `validate-mst.sh` as proof of their full contracts.
+
+## Branch repair checkpoint
+
+Following the diagnostic, the branch registry now gives
+`mst-repo-onboarding`, `mst-skill-tree-design`, and
+`mst-transformation-verification` discriminating purposes, triggers, and
+scopes derived from their unchanged `SKILL.md` instructions. YAML parsed
+successfully, the registry still has 29 unique IDs, and exact trigger
+duplicates remain zero. Eleven generic entries still lack this metadata.
+This is **branch-only static repair**; it has not changed pinned main or
+proven automatic selection behavior. Keep both Skills partial until the
+remaining metadata, line-length/semantic issues, and forward behavior are
+resolved.
