@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r10_terminal_failed_strict_request_activation_full_responses_preserved",
+  "state": "active_r11_frozen_c8_stress_running_after_r10_terminal_failure",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -33,7 +33,17 @@
     "request_hot_path_gate": "366/381 passed four-worker post-repair proof; 15/381 failed; no paired quality/performance verdict",
     "coverage_report": "HOTPATH_CACHE10R10_TERMINAL_AUDIT.md"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "campaign": "cache10r11",
+    "arm": "hypic-only",
+    "mode": "stress",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r11-stress-hypic",
+    "state": "running; poll controller_operation, then read progress.json; no stress verdict yet",
+    "controller_operation": "exec-0000000000001830",
+    "plugin_local_commit": "62b0d4a89234ffaa69855427e0c0dad0ba3e9e41",
+    "frozen_plan": "HOTPATH_CACHE10R11_STRESS_PLAN.md",
+    "terminal_auditor": "audit_cache10r11_stress.py"
+  },
   "diagnostic_plugin": {
     "worktree": "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008",
     "local_commit": "62b0d4a",
@@ -46,5 +56,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Preserve r10 terminal root and strict 15/381 activation failure. Use request-local diagnostics in a separately frozen source to investigate a prospective c8 candidate under actual-idle physical NPU0-3 guard; never reclassify r10 or rerun its root. Original full candidate, matching 0.85 no-cache baseline and performance follow only after a valid activation path. Push local commits only when user-provisioned GitHub auth works. Full paired quality, performance and all-Skill acceptance remain incomplete."
+  "next_action": "Poll only live r11 operation exec-0000000000001830 and its progress; do not restart, duplicate, or mix roots. After terminal, run audit_cache10r11_stress.py and inspect request-local fallback reasons, isolation and exact release. Preserve r10 strict 15/381 failure. A passing stress admits a new original full candidate; a failure requires a materially changed hypothesis. Matching 0.85 no-cache baseline and performance follow only after valid full activation. Push only when user-provisioned GitHub auth works; all-Skill acceptance remains incomplete."
 }

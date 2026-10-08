@@ -2,8 +2,8 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 20:08 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- Live remote workstream tip was 0d00bab at last read. Local 1cf43c3 and
+- Updated: 2026-10-08 20:25 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Live remote workstream tip was 0d00bab at last read. Local 2f22127 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
 - Integrated main has not accepted this campaign.
@@ -70,17 +70,17 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-r10 operation `exec-00000000000016af` is terminal; never restart or mix roots.
-Its pinned plugin `4429e351` gave 366/381 four-worker proofs. Independent
-row/hash/scorer replay found 214/381 correct but no baseline pair, so no
-quality pass. The 15 gaps have boundary/observation only; sample 86 missed
-all three. No foreign NPU0–3 task was observed; owned workers/port released.
-Preserve r10 raw root and HOTPATH_CACHE10R10_TERMINAL_AUDIT.md. A separate
-plugin worktree `/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008`
-at local commit `62b0d4a` adds fallback telemetry and a retry-reset fix,
-passes twelve focused CPU tests, and is NOT NPU-validated or mounted by r10.
-Its C3/paper-complete audits still fail; r10 causality is unproven. Preserve r9;
-its 93/127 GDN miss is not a quality verdict. Old 0.9 cannot pair with 0.85.
+r11 c8 stress `exec-0000000000001830` is the sole active controller.
+Do not restart or mix roots. It uses plugin `62b0d4a` read-only, 19 frozen
+LongBench prompts (75–91, 107, 111), three 2048-cap scored repetitions,
+TP4 on physical NPU0–3, 0.85/cache10. First poll the authoritative handle,
+then read its progress.json. At last check it was service-starting; no
+stress verdict yet. HOTPATH_CACHE10R11_STRESS_PLAN.md and
+audit_cache10r11_stress.py freeze its method and independent terminal gate.
+The stress is diagnostic, not a quality/performance comparison. r10 remains
+terminal activation-failed 15/381; preserve its root and terminal audit.
+The new plugin has twelve focused CPU passes but no r11 NPU verdict yet;
+C3/paper-complete audits still fail. Never use NPU4–7 or foreign containers.
 
 ## 5. Next Actions
 
@@ -90,15 +90,15 @@ its 93/127 GDN miss is not a quality verdict. Old 0.9 cannot pair with 0.85.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Preserve r10 terminal root, hash receipts and strict 15/381 failure.
-   Do not rerun or reclassify r9/r10 or pair an invalid treatment arm.
+3. Poll only r11 operation exec-0000000000001830 and its progress file.
+   Preserve r9/r10 terminal roots and never pair an invalid treatment arm.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. Investigate r10 gaps with prospective request-local telemetry under a
-   new frozen source/root and actual-idle guard; no causal or fix claim yet.
-   A diagnostic c8 test should exercise failing cases before the original
-   full ruler. Only a valid candidate may receive a same-source 0.85
-   no-cache baseline and subsequent matched performance/quality audits.
+4. At r11 terminal run audit_cache10r11_stress.py, inspect request-local
+   reasons, isolation and release. A pass admits a new original full ruler;
+   a failure needs a changed premise, not a retry of the same bytes. Only a
+   valid full candidate may receive a same-source 0.85 no-cache baseline
+   and subsequent matched performance/quality audits.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 
@@ -112,7 +112,7 @@ python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_git_checkpoint_case.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_inference_tuning_loop_case.py
-python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_partial_audit.py --arm hypic-only --root /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_cache10r11_stress.py
 git diff --check
 ```
 
