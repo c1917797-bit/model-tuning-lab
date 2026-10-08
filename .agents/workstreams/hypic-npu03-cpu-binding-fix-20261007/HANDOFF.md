@@ -32,7 +32,7 @@
 - r12 stress: 19/19 samples, 57/57 responses, 52/57 four-worker proof;
   279 clean guard probes and exact release. r11's 79:2/79:3 gaps are hot
   here, but five others missed; HOTPATH_CACHE10R12_TERMINAL_AUDIT.md has no paired verdict.
-- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves one four-worker activation, not paired quality. Future controller now attests binds/source bytes offline-tested but not NPU-tested; r12 lacks that receipt. C3 remains open.
+- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves one four-worker activation, not paired quality. r13 baseline service has a live bind/source-byte attestation; its terminal audit and treatment are pending. C3 remains open.
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median
   fell 81.12%, but full HYPIC and 2048-token quality remain open.
@@ -78,7 +78,9 @@ requests still fell back cold; source-fix causality is not isolated.
 The r13 plan prospectively reports all-request deployed effect and separately
 gates a strict 381/381 hot-path conclusion; neither can substitute for the other.
 Do not post-hoc pass either root, use NPU4–7, or modify foreign
-containers. C3 remains missing.
+containers. The r13 performance follow-on is prepared and offline-tested,
+but cannot run until both quality arms have an independent terminal audit.
+C3 remains missing.
 
 ## 5. Next Actions
 
@@ -90,15 +92,12 @@ containers. C3 remains missing.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-4. Preserve r9/r10/r11/r12 terminal roots; never relabel their strict
-   activation failures or pair them with a control.
-   Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
-   to cache10split.
-5. Use r11/r12 terminal audits and plugin c12060c to declare
-   the next original-protocol full test. Freeze whether the claim is all-hot
-   or deployed effect with hot/cold stratification. A new source requires
-   its own NPU canary and a same-identity 0.85 no-cache control before any
-   paired quality/performance claim; audit isolation and release separately.
+4. Preserve r9–r12 terminal roots; never relabel their strict failures,
+   pair them with a control, reuse r2–r8 roots, or switch to cache10split.
+5. After clean r13 baseline release, launch r13 candidate only on idle
+   NPU0–3, then dual audit. If complete, follow
+   HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; its six phases measure
+   deployed effect, not strict per-request proof. Audit source/isolation/release.
 6. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 

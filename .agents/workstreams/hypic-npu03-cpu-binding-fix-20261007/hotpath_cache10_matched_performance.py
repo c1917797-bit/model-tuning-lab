@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One exact-owned phase of the prospective cache10 matched performance pair.
+"""One exact-owned phase of the prospective r13 matched performance pair.
 
 Inspect is offline. Live phases require the independent full quality audit and
 run serially in the preregistered order; a partial phase is never resumed.
@@ -35,7 +35,9 @@ EXPECTED_CONFIG = {
     "segment_ends": [16384, 32768],
     "warmup_mode": "concurrent_materialization_gate", "warmup_requests": 2,
 }
-QUALITY_AUDIT = "hotpath-quality-cache10r2-full-audit.json"
+QUALITY_AUDIT = "hotpath-quality-cache10r13-dual-audit.json"
+SOURCE_ROOT = "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008"
+SOURCE_COMMIT = "c12060cd47e7575ead059983d7a8bb4704165c98"
 
 
 def require(value: bool, message: str) -> None:
@@ -71,20 +73,23 @@ def pair_seam(quality: object) -> dict:
 
 def entry_gate(quality: object) -> str:
     path = quality.ROOT / QUALITY_AUDIT
-    require(path.is_file(), "cache10r2 independent full quality audit absent")
+    require(path.is_file(), "cache10r13 independent full quality audit absent")
     audit = json_at(path)
     require(audit.get("evidence_valid") is True
-            and audit.get("frozen_pair_seam", {}).get("normalized_commands_equal") is True,
-            "cache10r2 paired quality evidence is not independently valid")
+            and audit.get("pair_seam", {}).get("normalized_commands_equal") is True
+            and audit.get("source_commit") == SOURCE_COMMIT
+            and audit.get("strict_c1_c2_hot_coverage", {}).get("expected_scored_requests") == 381,
+            "cache10r13 paired quality evidence is not independently valid")
     for arm, field, suffix in (
         ("no-cache", "baseline", "baseline"),
         ("hypic-only", "candidate", "hypic"),
     ):
-        root = quality.ROOT / f"quality-context-41984-hotpath-cache10r2-full-{suffix}"
+        root = quality.ROOT / f"quality-context-41984-hotpath-cache10r13-full-{suffix}"
         item = audit[field]
         require(item["scored_rows"] == 381
                 and item["contract_sha256"] == quality.sha256(root / "contract.json")
                 and item["arm_result_sha256"] == quality.sha256(root / "arm-result.json")
+                and item["fingerprint"].get("source_commit") == SOURCE_COMMIT
                 and item["fingerprint"].get("gpu_memory_utilization") == 0.85
                 and item["fingerprint"].get("material_cache_max_mb") == 3584
                 and item["fingerprint"].get("max_materialized_segments") == 10,
@@ -239,10 +244,13 @@ def run_phase(quality: object, service: object, arm: str, phase: str) -> int:
         problems: list[str] = []
         try:
             container_id = quality.create(arm)
-            quality.start(arm, container_id, fingerprint)
-            start = json_at(quality.QROOT / arm / "service-start.json")
-            guard = quality.ForeignProcessGuard(arm, start["worker_pid_by_physical_npu"])
+            guard = quality.ForeignProcessGuard(
+                arm, {}, owned_container_id=container_id)
             guard.start()
+            quality.start(arm, container_id, fingerprint, guard=guard)
+            start = json_at(quality.QROOT / arm / "service-start.json")
+            guard.set_expected_workers(start["worker_pid_by_physical_npu"])
+            guard.assert_clean()
             metrics = run_benchmark(quality, service, arm, guard, container_id)
             guard.assert_clean()
         except Exception as exc:
@@ -292,6 +300,8 @@ def main() -> int:
     args = parser.parse_args()
     attempt = f"hotpath-cache10perf-{args.arm}-{args.phase}"
     os.environ["HYPIC_QUALITY_ATTEMPT"] = attempt
+    os.environ["HYPIC_QUALITY_PLUGIN_REPO"] = SOURCE_ROOT
+    os.environ["HYPIC_QUALITY_PLUGIN_COMMIT"] = SOURCE_COMMIT
     import binding_off_quality as quality
     import binding_off_service as service
     require(quality.ATTEMPT == attempt, "quality helper attempt drift")

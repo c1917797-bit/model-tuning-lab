@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently audit all six cache10 matched performance phases from raw rows."""
+"""Independently audit all six r13 matched performance phases from raw rows."""
 
 from __future__ import annotations
 
@@ -9,11 +9,14 @@ import statistics
 from datetime import datetime
 from pathlib import Path
 
-from binding_off_service import BENCHMARK, BENCHMARK_SHA, IMAGE, ROOT, SOURCE_COMMIT, sha256
-from hotpath_cache10_matched_performance import EXPECTED_CONFIG, ORDER, QUALITY_AUDIT, require
+from binding_off_service import BENCHMARK, BENCHMARK_SHA, IMAGE, ROOT, sha256
+from binding_off_quality import python_source_digest
+from hotpath_cache10_matched_performance import (
+    EXPECTED_CONFIG, ORDER, QUALITY_AUDIT, SOURCE_COMMIT, SOURCE_ROOT, require,
+)
 
 
-OUT = ROOT / "hotpath-cache10-matched-performance-audit.json"
+OUT = ROOT / "hotpath-cache10r13-matched-performance-audit.json"
 METRICS = ("tpot_weighted_ms", "tpot_p95_ms", "ttft_p95_ms",
            "output_tokens_per_second", "benchmark_duration_s")
 
@@ -67,6 +70,9 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
     stop = load(root / arm / "service-stop.json")
     guard = load(root / arm / "lane-guard.json")
     command = load(root / "benchmark-command.json")
+    attestation_path = root / arm / f"source-attestation.{start['container_id'][:12]}.json"
+    attestation = load(attestation_path)
+    source = python_source_digest(Path(SOURCE_ROOT) / "hypic_vllm_ascend")
     require(contract["arm"] == arm and contract["phase"] == phase
             and contract["order_index"] == ORDER.index((arm, phase))
             and contract["quality_audit_sha256"] == quality_audit_sha
@@ -75,6 +81,7 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
             and contract["fingerprint"] == start["fingerprint"]
             and contract["fingerprint"]["image"] == IMAGE
             and contract["fingerprint"]["source_commit"] == SOURCE_COMMIT
+            and contract["fingerprint"]["plugin_source_root"] == SOURCE_ROOT
             and contract["fingerprint"]["physical_npus"] == [0, 1, 2, 3]
             and contract["fingerprint"]["gpu_memory_utilization"] == 0.85
             and contract["fingerprint"]["material_cache_max_mb"] == 3584
@@ -94,6 +101,20 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
     require(start["npu_smi_sha256"] == sha256(root / arm / "npu-smi-at-health.txt")
             and start["docker_top_sha256"] == sha256(root / arm / "docker-top-at-health.txt"),
             f"{arm}/{phase}: worker proof hashes drift")
+    require(start.get("source_attestation_sha256") == sha256(attestation_path)
+            and load(root / arm / "source-attestation.json") == attestation
+            and attestation.get("schema") == "hypic-serving-source-attestation/v1"
+            and attestation.get("container_id") == start["container_id"]
+            and attestation.get("selected_source_commit") == SOURCE_COMMIT
+            and attestation.get("selected_source_root") == SOURCE_ROOT
+            and attestation.get("image") == IMAGE
+            and attestation.get("container_import_file")
+                == "/opt/hypic/hypic_vllm_ascend/__init__.py"
+            and attestation.get("python_files") == source["python_files"]
+            and attestation.get("python_tree_sha256") == source["python_tree_sha256"]
+            and f"{SOURCE_ROOT}:/source-hypic:ro" in attestation.get("actual_binds", [])
+            and f"{ROOT}:/results" in attestation.get("actual_binds", []),
+            f"{arm}/{phase}: live source attestation drift")
     require(guard["samples"] > 0 and not guard["foreign"] and not guard["probe_errors"]
             and stop["container_removed"] is True
             and stop["owned_npus_released"] is True
@@ -164,10 +185,13 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
 
 
 def main() -> int:
+    require(not OUT.exists(), "r13 performance audit exists; do not overwrite")
     require(sha256(BENCHMARK) == BENCHMARK_SHA, "benchmark source changed")
     quality_path = ROOT / QUALITY_AUDIT
     quality = load(quality_path)
-    require(quality["evidence_valid"] is True, "paired quality evidence invalid")
+    require(quality["evidence_valid"] is True
+            and quality["source_commit"] == SOURCE_COMMIT,
+            "paired r13 quality evidence invalid")
     quality_sha = sha256(quality_path)
     phases = [audit_phase(arm, phase, quality_sha) for arm, phase in ORDER]
     require(len({item["container_id"] for item in phases}) == 6,
@@ -191,20 +215,24 @@ def main() -> int:
     paired = [{key: per_arm["no-cache"][index][key] - per_arm["hypic-only"][index][key]
                for key in METRICS} for index in range(3)]
     report = {
-        "schema": "hypic-cache10-matched-performance-independent-audit/v1",
-        "all_six_phases_valid": True, "quality_decision": quality["quality"]["decision"],
+        "schema": "hypic-cache10r13-matched-performance-independent-audit/v1",
+        "all_six_phases_valid": True,
+        "deployed_quality_decision": quality["deployed_quality_decision"],
+        "strict_quality_decision": quality["strict_quality_decision"],
+        "performance_estimand": "all-request-deployed",
+        "strict_c1_c2_performance_decision": "UNVERIFIED_REQUEST_JOIN",
         "quality_audit_sha256": quality_sha,
         "phases": [{key: value for key, value in item.items()
                     if key != "normalized_spec"} for item in phases],
         "normalized_spec_identical": True, "per_arm": per_arm,
         "paired_baseline_minus_candidate": paired, "medians": medians, "effect": effect,
-        "paper_effect_gate_pass": effect["weighted_tpot_saved_ms"] >= 10
+        "deployed_effect_screen_pass": effect["weighted_tpot_saved_ms"] >= 10
             and effect["ttft_p95_saved_s"] >= 10,
-        "scope": "physical NPU0-3, TP4, 0.85/cache10, input32768/output1024/c16",
+        "scope": "physical NPU0-3, TP4, source c12060c, 0.85/cache10, input32768/output1024/c16",
     }
     OUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     print(json.dumps({"audit": str(OUT), "all_six_phases_valid": True,
-                      "paper_effect_gate_pass": report["paper_effect_gate_pass"],
+                      "deployed_effect_screen_pass": report["deployed_effect_screen_pass"],
                       "effect": effect}, sort_keys=True))
     return 0
 
