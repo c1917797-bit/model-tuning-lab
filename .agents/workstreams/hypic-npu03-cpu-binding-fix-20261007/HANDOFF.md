@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 19:02 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 19:11 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Live remote workstream tip was 0d00bab at last read. Local 4073829 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
@@ -16,9 +16,8 @@
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
 - r10 full HYPIC is running as operation exec-00000000000016af at the root
-  in task.json. At 19:01 UTC, 28 samples were complete; 81/84 scored
-  requests had four-worker proof. Sample 6 rep 3 and sample 18 reps 2–3
-  fell back natively.
+  in task.json. At 19:11 UTC, 43 samples were complete; 124/129 scored
+  requests had four-worker proof; five requests fell back natively.
   See HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md; no final verdict.
 - Quality and benchmark Skill cases eight/nine remain partial; see their
   request-coverage and baseline-reuse acceptance reports.
@@ -69,16 +68,16 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 ## 4. Current Action
 
 r10 operation `exec-00000000000016af` is the sole active controller.
-Do not restart or mix another root. Its pinned clean plugin commit
-`4429e35177979c874bf053ab29789e4773f39b22` has the pending-eviction
-gate and per-request worker events. The strict verifier now joins host PIDs
-to container PID namespace using a validated sidecar. r10 has this map
-under `hypic-only/worker-namespace-map.json`; future launches write it
-automatically. At 18:46 UTC, 12/12 completed scored requests passed the
-four-worker audit. 46 offline tests and nine provenance checks pass, but
-full device acceptance remains pending. One scored r10 request lacks proof;
-see the partial-coverage report. Preserve r9 raw root; its 93/127
-GDN miss is not a quality verdict. Old 0.9 baseline is not pairable with 0.85.
+Do not restart or mix roots. It pins plugin `4429e351`; its PID namespace
+map is under `hypic-only/worker-namespace-map.json`. The read-only
+`diagnose_partial_hotpath_coverage.py` reports five scored native fallbacks
+as of 19:11 UTC; full quality and isolation remain pending. A separate
+plugin worktree `/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008`
+at local commit `925aa16` adds no-plan reasons and eviction hashes,
+passes eight focused CPU tests, and is NOT NPU-validated or mounted by r10.
+Its C3/paper-complete audits still fail as expected. Preserve r9 raw root;
+its 93/127 GDN miss is not a quality verdict. Old 0.9 baseline is not
+pairable with 0.85; baseline source fingerprint must match final candidate.
 
 ## 5. Next Actions
 
@@ -93,8 +92,10 @@ GDN miss is not a quality verdict. Old 0.9 baseline is not pairable with 0.85.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
 4. Continue r10; audit eviction gate, all request-level four-worker
-   coverage, 127×3 quality, and isolation. Pair with new 0.85 no-cache
-   arm only if valid; then run matched performance.
+   coverage, 127×3 quality, and isolation. After terminal release, consider
+   the separate telemetry source only with fresh identity and actual-idle
+   guard; do not claim it fixes fallback. Pair with same-source 0.85
+   no-cache baseline only for a valid candidate, then matched performance.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 

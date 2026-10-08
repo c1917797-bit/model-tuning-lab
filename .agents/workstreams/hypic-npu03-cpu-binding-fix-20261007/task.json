@@ -27,11 +27,16 @@
     "campaign": "cache10r10",
     "arm": "hypic-only",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic",
-    "state": "running; 28 complete samples and 81/84 four-worker proofs at 2026-10-08T19:01Z; no final verdict",
+    "state": "running; 43 complete samples and 124/129 four-worker proofs at 2026-10-08T19:11Z; no final verdict",
     "controller_operation": "exec-00000000000016af",
     "plugin_local_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "request_hot_path_gate": "81/84 scored requests passed; sample 6 repetition 3 and sample 18 repetitions 2-3 were native fallback; strict all-scored gate fails; full 381-request evidence pending",
+    "request_hot_path_gate": "124/129 scored requests passed; five native fallbacks; strict all-scored gate fails; full 381-request evidence pending",
     "coverage_report": "HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md"
+  },
+  "diagnostic_plugin": {
+    "worktree": "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008",
+    "local_commit": "925aa16f4509a753d4ae035fcf33d2941c276165",
+    "status": "telemetry_only; eight focused CPU tests passed; NPU unvalidated; not mounted by r10; no fallback fix claim"
   },
   "git_push_state": {
     "status": "local_4073829_and_later_unpushed; HTTPS credentials absent; SSH timed out",
