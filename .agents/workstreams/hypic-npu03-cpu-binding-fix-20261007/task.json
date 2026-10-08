@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_cache10r4_candidate_quality_running",
+  "state": "active_offline_pending_actual_clean_npu03_window",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -14,22 +14,14 @@
     "lane_rule": "Container mapping alone does not block use; actual physical NPU0-3 processes and port 8223 do. Do not modify foreign containers or use NPU4-7."
   },
   "latest_attempt": {
-    "campaign": "cache10r3",
-    "arm": "hypic-only",
-    "controller_operation": "exec-000000000000147b",
-    "result": "environment_isolation_failure",
-    "scored_rows": 0,
-    "foreign_container": "cannbench_ds",
-    "foreign_physical_npu": 3,
-    "evidence": "HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md"
-  },
-  "active_attempt": {
     "campaign": "cache10r4",
     "arm": "hypic-only",
     "controller_operation": "exec-00000000000014c4",
-    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r4-full-hypic",
-    "launched_at_utc": "2026-10-08T15:38:54Z",
-    "decision": "pending; actual foreign NPU0-3 PIDs invalidate the arm, passive mappings do not"
+    "result": "environment_isolation_failure",
+    "scored_rows": 0,
+    "foreign_pid": 1072000,
+    "foreign_physical_npu": 0,
+    "evidence": "HOTPATH_CACHE10R4_RESOURCE_CONFLICT.md"
   },
   "git_push_state": {
     "status": "synchronized_as_of_1fec73f",
@@ -38,5 +30,5 @@
     "live_remote_equality_operation": "exec-00000000000014cf",
     "recovery": "After any later validated commit, push HEAD to the named workstream branch without force and independently verify live remote, upstream and clean local HEAD equality."
   },
-  "next_action": "Monitor active cache10r4 candidate without a duplicate controller; independently audit its guard, rows, hot path and owned-service release, including the observed startup NPU0/1 foreign PIDs. If valid, run the same-identity full no-cache arm and matched performance; if a real foreign NPU0-3 process intrudes during scoring, preserve the invalid raw root and start a distinct attempt only when the cards are actually idle. Do not block on passive Docker mappings or touch foreign containers/NPU4-7. Push later validated workstream checkpoints and verify live equality. Do not promote a conclusion before all gates pass."
+  "next_action": "Preserve and independently audit cache10r4's environment-invalid 0/127 root; do not pair or reuse it. Continue productive offline Skill acceptance while actual foreign NPU0-3 processes run. Start a fresh original-protocol full HYPIC arm only when physical0-3 are actually idle, irrespective of passive Docker mappings; keep continuous isolation and exact-owned cleanup. Do not touch foreign containers or NPU4-7. Push later validated workstream checkpoints and verify live equality. Do not promote a HYPIC or all-Skill conclusion before their gates pass."
 }
