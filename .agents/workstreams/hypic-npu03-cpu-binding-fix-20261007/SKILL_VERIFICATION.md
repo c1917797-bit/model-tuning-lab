@@ -1,5 +1,15 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
+2026-10-08 prospective update: the frozen clean2 natural-task quality
+failure below remains unchanged. A separate explicit-boundary pilot-2
+(`HOTPATH_PILOT2_RESULT.md`) passed three scored hot-path requests and
+exact NPU0–3 release after repairing an audit ID join; this verifies a
+limited protocol/activation step, not 127-sample quality or all-Skill
+behavior. Full matched no-cache baseline `exec-0000000000001293` is now
+running; HYPIC treatment, independent paired audit, and Skill status
+reclassification are pending. Thus the bounded V10/P14/N5 counts below
+remain the current classification, not a completed long-term goal.
+
 Final clean2 note (2026-10-07 21:58 UTC): three formal 40/40 paired performance runs passed the bounded hot-path gate. The first 41984-context quality attempt (`exec-0000000000000c6d`) failed shared-host isolation and is not pooled. Fresh `clean2` (`exec-0000000000000e15`) completed all 12 paired quality units, exact input/row/scorer/hash audit, 752/754 clean guard samples and both releases. The original strict quality auditor failed because no natural request activated any worker hot path; the separate scoped audit preserved valid but inconclusive natural-task scores without formal acceptance. See `FINAL_EVIDENCE_DECISION.md`. A completed negative protocol verdict validates some bounded evidence/maintenance/reporting workflows, but not the hot-path quality workflow, whole-paper reproduction, or all 29 Skills.
 
 Scope: origin/main at f1f37a39bd86f7db5fd3ee3dea358ae6868275c6 has 29 registered Skills and 29 SKILL.md files. This is a behavioral evidence ledger, not a claim that all 29 should be exercised by one paper. The old 2026-10-06 skill-validation.json is historical evidence and must be independently rechecked before promotion.
