@@ -73,6 +73,31 @@ def payload_hash(item: dict, max_tokens: int) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def frozen_pair_seam() -> dict:
+    left = quality.spec("no-cache")
+    right = quality.spec("hypic-only")
+    require(sorted(left[1]) == sorted(right[1]), "arm bind mounts differ")
+    normalized_left = left[3].replace("/no-cache", "/ARM")
+    normalized_right = right[3].replace("/hypic-only", "/ARM")
+    require(normalized_left == normalized_right, "arm serving commands differ")
+    baseline_env = {key: value for key, value in
+                    (entry.split("=", 1) for entry in left[2])}
+    candidate_env = {key: value for key, value in
+                     (entry.split("=", 1) for entry in right[2])}
+    differences = {key: [baseline_env.get(key), candidate_env.get(key)]
+                   for key in baseline_env.keys() | candidate_env.keys()
+                   if baseline_env.get(key) != candidate_env.get(key)}
+    require(differences == {
+        "VLLM_ASCEND_HYPIC_ENABLE": ["0", "1"],
+        "VLLM_ASCEND_HYPIC_EVIDENCE_FILE": [
+            f"/results/{quality.QROOT.name}/no-cache/hypic-evidence.jsonl",
+            f"/results/{quality.QROOT.name}/hypic-only/hypic-evidence.jsonl",
+        ],
+    }, "frozen arm environment differs beyond HYPIC and evidence path")
+    return {"enable": differences["VLLM_ASCEND_HYPIC_ENABLE"],
+            "binds_equal": True, "normalized_commands_equal": True}
+
+
 def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object) -> dict:
     require(root.is_dir(), f"{arm}: root absent")
     contract = load_json(root / "contract.json")
@@ -95,6 +120,13 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object) -> dic
             f"{arm}: frozen inputs drift")
     require(result["error"] is None and result["completed_samples"] == EXPECTED
             and result["scored_rows"] == EXPECTED * REPEATS, f"{arm}: incomplete controller")
+    require(start["fingerprint"] == contract["fingerprint"],
+            f"{arm}: service fingerprint drift")
+    workers = start["worker_pid_by_physical_npu"]
+    require(set(workers) == {"0", "1", "2", "3"}
+            and len(set(workers.values())) == 4
+            and sorted(workers.values()) == guard["expected_worker_pids"],
+            f"{arm}: physical worker/guard identity drift")
     require(start["container_id"] == stop["container_id"]
             and stop["container_removed"] and stop["owned_npus_released"]
             and stop["port_released"] and stop["lane_available"]
@@ -237,6 +269,7 @@ def decide(base: dict, cand: dict) -> dict:
 
 
 def main() -> int:
+    pair_seam = frozen_pair_seam()
     cases, evaluator = frozen_cases()
     baseline = audit_arm(BASE, "no-cache", cases, evaluator)
     candidate = audit_arm(CAND, "hypic-only", cases, evaluator)
@@ -244,6 +277,7 @@ def main() -> int:
     report = {
         "schema": "hypic-hotpath-quality-audit/v1",
         "evidence_valid": True, "quality": decision,
+        "frozen_pair_seam": pair_seam,
         "baseline": {k: v for k, v in baseline.items() if k != "rows"},
         "candidate": {k: v for k, v in candidate.items() if k != "rows"},
         "scope": "LongBench-v2 explicit-boundary, c8, physical NPU0-3, 2048 output cap",
