@@ -1,5 +1,21 @@
 # DAMP Ascend — current workstream
 
+## Current actual H8 numerical failure — 2026-10-08 01:03Z
+
+Read H8_FULL_V7_NUMERICAL_FAILURE_20261008.md and whole10e2/1106 first.
+MA10e2 terminal FAILED1 after56.06min: physical7 B12 graph trial2 step102,
+output0.00316456 > original0.00303, while state/guards/pointers pass.
+Retained failed raw SHA aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12.
+Independent1106 proves four exact owned CIDs stopped/retained/Pid0/noExec/noOOM;
+SMI4–7 no compute PIDs.5252 partial steps/31 complete cases/1failure != full11520 PASS.
+Secondary snapshot MemoryError and MCP8MiB body limits are separate failures.
+No unchanged rerun, tolerance relaxation, mixed-v3 launch or model/perf claims.
+Mixed389 source audit and new client16 software tests remain source-only.
+Next: hash-bound CPU raw diagnosis; serial admission of frozen SparQ006/W4native002.
+Exactly32GiB release completed/SPENT, OVS24GiB/NUMA3 retained; no extra memory write.
+Cutoffs unchanged; goal active/no accepted non-HYPIC E2E/task method.
+Known auth blocker persists, normal local stage only. Earlier RUNNING entries historical.
+
 ## Current memory readback / model review — 2026-10-08 00:10Z
 
 Read HUGEPAGE32_H8_MODEL_PREPARATION_REVIEW_20261008.md and whole10ec first.

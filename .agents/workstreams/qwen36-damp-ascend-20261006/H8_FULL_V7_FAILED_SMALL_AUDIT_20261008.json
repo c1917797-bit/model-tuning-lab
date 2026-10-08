@@ -1,0 +1,247 @@
+{
+  "utc": "2026-10-08T00:54:23.665396+00:00",
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/RESULT.json",
+    "bytes": 13795969,
+    "sha256": "ee5418e8c9d07dd7d4b2b20e8ade132ed88ac308f704dcaf98065dfac4f896c8"
+  },
+  "whole_original": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/H8_FULL_V7_ORIGINAL_TERMINAL_20261008.json",
+    "bytes": 12232,
+    "sha256": "91587f13eb32c12a1c20e309995b96ac7e08d143b964dae6ef476a2cfd4ffb50"
+  },
+  "cleanup": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/cleanup.json",
+    "bytes": 5921,
+    "sha256": "b093b64696a11c9c2076edee4cfbe796d43b8f51032e62d808230b76fe63d67f"
+  },
+  "primary": "ValueError('first real matrix child failure on physical7')",
+  "secondary": [
+    "stable post-cleanup evidence: MemoryError()"
+  ],
+  "partial_reports": [
+    {
+      "physical": 4,
+      "report_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-4/gate/report.json",
+        "bytes": 5693593,
+        "sha256": "adae48cc53c0d3b4a8006ef7914bcc714e50fd0125ed4cf1fb64acb40da91408"
+      },
+      "status": "running",
+      "completed_cases": 8,
+      "checked_steps": 1343,
+      "failed_steps": 0
+    },
+    {
+      "physical": 5,
+      "report_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-5/gate/report.json",
+        "bytes": 5651563,
+        "sha256": "e235033b7faf02e85d95af68643f064ec7302695bd1a8909ade37df5069338e4"
+      },
+      "status": "running",
+      "completed_cases": 8,
+      "checked_steps": 1332,
+      "failed_steps": 0
+    },
+    {
+      "physical": 6,
+      "report_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-6/gate/report.json",
+        "bytes": 5746327,
+        "sha256": "3be7d2510de98943d8b5e42c30d27c4efe821e7971d96616adc929d79fd13581"
+      },
+      "status": "running",
+      "completed_cases": 8,
+      "checked_steps": 1355,
+      "failed_steps": 0
+    },
+    {
+      "physical": 7,
+      "report_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-7/gate/report.json",
+        "bytes": 5257143,
+        "sha256": "9359fc7a62910a1a1cf4ce3cb414f14a51b0e95155e434729a293a0abf4d72de"
+      },
+      "status": "failed",
+      "completed_cases": 7,
+      "checked_steps": 1222,
+      "failed_steps": 1,
+      "first_failed": {
+        "case": {
+          "batch": 12,
+          "mode": "graph",
+          "trial": 2
+        },
+        "step": {
+          "step": 102,
+          "active": 12,
+          "output_error": 0.0031645569620253164,
+          "complete_state_l2": 1.2153881810212567e-7,
+          "max_per_head_l2": 1.6407555190996168e-7,
+          "guards": true,
+          "pointers": true,
+          "finite": true,
+          "all_logs_bitwise_outside_new_U": {
+            "k_log": true,
+            "u_log": true,
+            "lambda_log": true,
+            "decay": true,
+            "length": true
+          },
+          "untouched_slots_bitwise": true,
+          "raw_step": {
+            "file": "raw-step-b12-graph-t2-step102.pt",
+            "step": 102,
+            "retained": true,
+            "sha256": "aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12",
+            "bytes": 78155077
+          }
+        }
+      }
+    }
+  ],
+  "owned_release": [
+    {
+      "physical": 4,
+      "cid": "fa1c3f5e6386e029a05982171a7763fb8eeb65958df40fb56ea44e66a8d1911c",
+      "Running": false,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "retained": true,
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci4",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ]
+    },
+    {
+      "physical": 5,
+      "cid": "c9192708e3499726711f8248aa05d02b6f2812fc53c25fd61f8ae0c2f0278a9d",
+      "Running": false,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "retained": true,
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci5",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ]
+    },
+    {
+      "physical": 6,
+      "cid": "908e79f6a3ec312554df96b0690007052b52b5e0e4b4785449a4835d244de0d6",
+      "Running": false,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "retained": true,
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci6",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ]
+    },
+    {
+      "physical": 7,
+      "cid": "b115c5b142335ef39d3eddd27d107ae3ba224c0bf6fb90f35d80989e266d4837",
+      "Running": false,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "retained": true,
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci7",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ]
+    }
+  ],
+  "raw": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-h8-full-runtime-v7-20261008-001/physical-7/gate/raw-step-b12-graph-t2-step102.pt",
+    "bytes": 78155077,
+    "sha256": "aef3c1127b29eb9b2be8a2d0b9548218e92723ac0389acdf0269d7b69924ec12"
+  },
+  "release_npu_smi": "+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 92.2        37                0    / 0             |\n| 0                         | 0000:C1:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 83.5        37                0    / 0             |\n| 0                         | 0000:C2:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 88.4        37                0    / 0             |\n| 0                         | 0000:81:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 86.8        38                0    / 0             |\n| 0                         | 0000:82:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.6        43                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.0        41                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 94.6        42                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 85.6        43                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2860 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| No running processes found in NPU 0                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 1                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 2                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 3                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n",
+  "rss": {
+    "samples": 97553,
+    "aggregate_peak_rss_kib": 242664,
+    "measurement_errors": [],
+    "resource_violation": false
+  },
+  "full11520_passed": false,
+  "mixed_passed": false,
+  "model_verified": false,
+  "matched_e2e_verified": false,
+  "task_accuracy_verified": false
+}

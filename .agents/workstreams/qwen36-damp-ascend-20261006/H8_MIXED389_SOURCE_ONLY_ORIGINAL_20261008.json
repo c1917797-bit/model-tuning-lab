@@ -1,0 +1,114 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=268435456\",\n          \"--cpu=30\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-I\",\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-native-mixed64-v3-full7/host.py\",\n          \"--source-audit-only\",\n          \"--source-manifest\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-native-mixed64-v3-full7/SOURCE_MANIFEST.json\",\n          \"--source-manifest-sha256\",\n          \"7d1976b8c3654a55ccf76cfb0a65719ba4320572db3cfa9b686f18e3b2369c9f\",\n          \"--library\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\",\n          \"--library-sha256\",\n          \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\",\n          \"--build-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\",\n          \"--build-receipt-sha256\",\n          \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\",\n          \"--meta-receipt\",\n          \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\",\n          \"--meta-receipt-sha256\",\n          \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 3886,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-00000000000010fe\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"source_audit_passed\\\": true, \\\"source_count\\\": 389, \\\"source_manifest\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-native-mixed64-v3-full7/SOURCE_MANIFEST.json\\\", \\\"sha256\\\": \\\"7d1976b8c3654a55ccf76cfb0a65719ba4320572db3cfa9b686f18e3b2369c9f\\\"}, \\\"artifact_refs\\\": {\\\"library\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\\\", \\\"sha256\\\": \\\"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\\\"}, \\\"build\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\\\", \\\"sha256\\\": \\\"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\\\"}, \\\"meta\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\\\", \\\"sha256\\\": \\\"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\\\"}}, \\\"artifact_admission\\\": {\\\"artifacts\\\": {\\\"library\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\\\", \\\"sha256\\\": \\\"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\\\"}, \\\"build\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\\\", \\\"sha256\\\": \\\"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\\\"}, \\\"meta\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\\\", \\\"sha256\\\": \\\"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\\\"}}, \\\"meta_schema\\\": \\\"qwen36_kvbuffer_short_horizon_v3::decode(Tensor query, Tensor key, Tensor value, Tensor g, Tensor beta, Tensor(a!) base_state, Tensor(b!) k_log, Tensor(c!) u_log, Tensor(d!) lambda_log, Tensor(e!) cumulative_decay, Tensor(f!) log_length, Tensor actual_seq_lengths, Tensor state_indices) -> Tensor\\\", \\\"meta_is_not_npu_proof\\\": true}, \\\"npu_executed\\\": false, \\\"serving_ready\\\": false}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 398,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 398,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 398\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 397,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 397\n      }\n    },\n    \"traceId\": \"99693f29-09c5-439e-a14f-906e8d06226d\"\n  },\n  \"operationId\": \"exec-00000000000010fe\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=268435456",
+            "--cpu=30",
+            "--",
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-native-mixed64-v3-full7/host.py",
+            "--source-audit-only",
+            "--source-manifest",
+            "/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-native-mixed64-v3-full7/SOURCE_MANIFEST.json",
+            "--source-manifest-sha256",
+            "7d1976b8c3654a55ccf76cfb0a65719ba4320572db3cfa9b686f18e3b2369c9f",
+            "--library",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so",
+            "--library-sha256",
+            "3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77",
+            "--build-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json",
+            "--build-receipt-sha256",
+            "926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239",
+            "--meta-receipt",
+            "/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json",
+            "--meta-receipt-sha256",
+            "9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 3886,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000010fe",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"source_audit_passed\": true, \"source_count\": 389, \"source_manifest\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-native-mixed64-v3-full7/SOURCE_MANIFEST.json\", \"sha256\": \"7d1976b8c3654a55ccf76cfb0a65719ba4320572db3cfa9b686f18e3b2369c9f\"}, \"artifact_refs\": {\"library\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\", \"sha256\": \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\"}, \"build\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\", \"sha256\": \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\"}, \"meta\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\", \"sha256\": \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\"}}, \"artifact_admission\": {\"artifacts\": {\"library\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build/libqwen36_gdn_kvbuffer_short_horizon_v3_ops.so\", \"sha256\": \"3f7cc32eda77c68ce306bf1bb952886a332683e74a860430d01a1ead68f98e77\"}, \"build\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/build-receipt.json\", \"sha256\": \"926cf3472116c4ddbf63c0d607b65a588bf1dd73121e3dbcd96107403a5c9239\"}, \"meta\": {\"path\": \"/cache/cch/qwen36-kvbuffer-parallel-20261006/build-short-horizon-v3-20261007-1500/meta.json\", \"sha256\": \"9c07aafc47a2ef865f21238cf9a0a1c25edb4b00bebfe548bfa1159cc9c94d03\"}}, \"meta_schema\": \"qwen36_kvbuffer_short_horizon_v3::decode(Tensor query, Tensor key, Tensor value, Tensor g, Tensor beta, Tensor(a!) base_state, Tensor(b!) k_log, Tensor(c!) u_log, Tensor(d!) lambda_log, Tensor(e!) cumulative_decay, Tensor(f!) log_length, Tensor actual_seq_lengths, Tensor state_indices) -> Tensor\", \"meta_is_not_npu_proof\": true}, \"npu_executed\": false, \"serving_ready\": false}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 398,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 398,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 398
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 397,
+          "routeLookupMs": 0,
+          "totalMs": 397
+        }
+      },
+      "traceId": "99693f29-09c5-439e-a14f-906e8d06226d"
+    },
+    "operationId": "exec-00000000000010fe",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

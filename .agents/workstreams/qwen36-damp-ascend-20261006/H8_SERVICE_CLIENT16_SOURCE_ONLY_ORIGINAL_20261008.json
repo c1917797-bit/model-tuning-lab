@@ -1,0 +1,98 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"--as=268435456\",\n          \"--cpu=30\",\n          \"--\",\n          \"/usr/bin/python3\",\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import os,sys,unittest,resource,json,ast,pathlib,hashlib\\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\\nroot=pathlib.Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/h8_service_client_v1\\\")\\nfiles={p.name:{\\\"bytes\\\":p.stat().st_size,\\\"sha256\\\":hashlib.sha256(p.read_bytes()).hexdigest()} for p in root.iterdir() if p.is_file()}\\nfor p in root.glob(\\\"*.py\\\"):ast.parse(p.read_text(),filename=str(p))\\nsuite=unittest.defaultTestLoader.discover(str(root),pattern=\\\"test_*.py\\\")\\nresult=unittest.TextTestRunner(verbosity=2).run(suite)\\nprint(json.dumps({\\\"schema\\\":\\\"kvbp.h8-service-client-software/v1\\\",\\\"tests\\\":result.testsRun,\\\"passed\\\":result.wasSuccessful(),\\\"files\\\":files,\\\"rss_kib\\\":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,\\\"Torch_imported\\\":\\\"torch\\\" in sys.modules,\\\"Torch_NPU_imported\\\":\\\"torch_npu\\\" in sys.modules,\\\"Docker_executed\\\":False,\\\"NPU_executed\\\":False,\\\"model_started\\\":False,\\\"matched_e2e_verified\\\":False,\\\"task_accuracy_verified\\\":False}))\\nraise SystemExit(0 if result.wasSuccessful() else 1)\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/prlimit\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 913,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001104\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"test_eager_arm_cannot_claim_formal_graph_pair (test_protocol.Tests) ... ok\\ntest_empty_first_prefill_echo_keeps_prompt_without_counting_ttft (test_protocol.Tests) ... ok\\ntest_exact_forty_distinct_prompts_shared_prefix (test_protocol.Tests) ... ok\\ntest_new_arm_schema_positive_is_only_input_validation (test_protocol.Tests) ... ok\\ntest_old_prefix_off_or_unsupported_receiver_rejected (test_protocol.Tests) ... ok\\ntest_queue_is_not_ttft_and_wall_includes_complete_done (test_protocol.Tests) ... ok\\ntest_real_default_off_cli_without_torch_or_network (test_protocol.Tests) ... ok\\ntest_reject_duplicate_done_and_usage (test_protocol.Tests) ... ok\\ntest_reject_legacy_p1_arm (test_protocol.Tests) ... ok\\ntest_reject_nonmonotonic_or_nonfinite_token_receipts (test_protocol.Tests) ... ok\\ntest_reject_overlong_cumulative_delta (test_protocol.Tests) ... ok\\ntest_reject_prompt_mutation (test_protocol.Tests) ... ok\\ntest_reject_text_instead_of_token_ids (test_protocol.Tests) ... ok\\ntest_stream_actual_delta_and_usage (test_protocol.Tests) ... ok\\ntest_unrun_or_prepare_only_prerequisites_rejected (test_protocol.Tests) ... ok\\ntest_wrong_runtime_source_protocol_endpoint_rejected (test_protocol.Tests) ... ok\\n\\n----------------------------------------------------------------------\\nRan 16 tests in 0.819s\\n\\nOK\\n\",\n        \"stdout\": \"{\\\"schema\\\": \\\"kvbp.h8-service-client-software/v1\\\", \\\"tests\\\": 16, \\\"passed\\\": true, \\\"files\\\": {\\\"protocol.py\\\": {\\\"bytes\\\": 8293, \\\"sha256\\\": \\\"026a7455e6a2a7d863ea6a17634af40814f930526e6a9fb86acf95a36534eefb\\\"}, \\\"test_protocol.py\\\": {\\\"bytes\\\": 7824, \\\"sha256\\\": \\\"ca0bc9201c67236062d78cb0531fa9972185f45abbdc975bcc4de571b3005d58\\\"}, \\\"bench.py\\\": {\\\"bytes\\\": 5859, \\\"sha256\\\": \\\"020cf0795faddec37d0cc678c7f7107ac76cdad594ce492d70991ea019b30aab\\\"}, \\\"README.md\\\": {\\\"bytes\\\": 2363, \\\"sha256\\\": \\\"42340de1d6626e4183dab110f8f0f7e0d6b6b2ca63b4a86a92c0aec6acfb9525\\\"}}, \\\"rss_kib\\\": 69116, \\\"Torch_imported\\\": false, \\\"Torch_NPU_imported\\\": false, \\\"Docker_executed\\\": false, \\\"NPU_executed\\\": false, \\\"model_started\\\": false, \\\"matched_e2e_verified\\\": false, \\\"task_accuracy_verified\\\": false}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 397,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 397,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 397\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 396,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 396\n      }\n    },\n    \"traceId\": \"c75c2ceb-a8fc-4ba7-9f50-0401ecca16ee\"\n  },\n  \"operationId\": \"exec-0000000000001104\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "--as=268435456",
+            "--cpu=30",
+            "--",
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "-c",
+            "import os,sys,unittest,resource,json,ast,pathlib,hashlib\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/h8_service_client_v1\")\nfiles={p.name:{\"bytes\":p.stat().st_size,\"sha256\":hashlib.sha256(p.read_bytes()).hexdigest()} for p in root.iterdir() if p.is_file()}\nfor p in root.glob(\"*.py\"):ast.parse(p.read_text(),filename=str(p))\nsuite=unittest.defaultTestLoader.discover(str(root),pattern=\"test_*.py\")\nresult=unittest.TextTestRunner(verbosity=2).run(suite)\nprint(json.dumps({\"schema\":\"kvbp.h8-service-client-software/v1\",\"tests\":result.testsRun,\"passed\":result.wasSuccessful(),\"files\":files,\"rss_kib\":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,\"Torch_imported\":\"torch\" in sys.modules,\"Torch_NPU_imported\":\"torch_npu\" in sys.modules,\"Docker_executed\":False,\"NPU_executed\":False,\"model_started\":False,\"matched_e2e_verified\":False,\"task_accuracy_verified\":False}))\nraise SystemExit(0 if result.wasSuccessful() else 1)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/prlimit",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 913,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000001104",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "test_eager_arm_cannot_claim_formal_graph_pair (test_protocol.Tests) ... ok\ntest_empty_first_prefill_echo_keeps_prompt_without_counting_ttft (test_protocol.Tests) ... ok\ntest_exact_forty_distinct_prompts_shared_prefix (test_protocol.Tests) ... ok\ntest_new_arm_schema_positive_is_only_input_validation (test_protocol.Tests) ... ok\ntest_old_prefix_off_or_unsupported_receiver_rejected (test_protocol.Tests) ... ok\ntest_queue_is_not_ttft_and_wall_includes_complete_done (test_protocol.Tests) ... ok\ntest_real_default_off_cli_without_torch_or_network (test_protocol.Tests) ... ok\ntest_reject_duplicate_done_and_usage (test_protocol.Tests) ... ok\ntest_reject_legacy_p1_arm (test_protocol.Tests) ... ok\ntest_reject_nonmonotonic_or_nonfinite_token_receipts (test_protocol.Tests) ... ok\ntest_reject_overlong_cumulative_delta (test_protocol.Tests) ... ok\ntest_reject_prompt_mutation (test_protocol.Tests) ... ok\ntest_reject_text_instead_of_token_ids (test_protocol.Tests) ... ok\ntest_stream_actual_delta_and_usage (test_protocol.Tests) ... ok\ntest_unrun_or_prepare_only_prerequisites_rejected (test_protocol.Tests) ... ok\ntest_wrong_runtime_source_protocol_endpoint_rejected (test_protocol.Tests) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.819s\n\nOK\n",
+          "stdout": "{\"schema\": \"kvbp.h8-service-client-software/v1\", \"tests\": 16, \"passed\": true, \"files\": {\"protocol.py\": {\"bytes\": 8293, \"sha256\": \"026a7455e6a2a7d863ea6a17634af40814f930526e6a9fb86acf95a36534eefb\"}, \"test_protocol.py\": {\"bytes\": 7824, \"sha256\": \"ca0bc9201c67236062d78cb0531fa9972185f45abbdc975bcc4de571b3005d58\"}, \"bench.py\": {\"bytes\": 5859, \"sha256\": \"020cf0795faddec37d0cc678c7f7107ac76cdad594ce492d70991ea019b30aab\"}, \"README.md\": {\"bytes\": 2363, \"sha256\": \"42340de1d6626e4183dab110f8f0f7e0d6b6b2ca63b4a86a92c0aec6acfb9525\"}}, \"rss_kib\": 69116, \"Torch_imported\": false, \"Torch_NPU_imported\": false, \"Docker_executed\": false, \"NPU_executed\": false, \"model_started\": false, \"matched_e2e_verified\": false, \"task_accuracy_verified\": false}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 397,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 397,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 397
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 396,
+          "routeLookupMs": 0,
+          "totalMs": 396
+        }
+      },
+      "traceId": "c75c2ceb-a8fc-4ba7-9f50-0401ecca16ee"
+    },
+    "operationId": "exec-0000000000001104",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}
