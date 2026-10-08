@@ -4,6 +4,21 @@ North star: establish which archived `main` Skills work in real, reproducible
 tasks. A structurally valid Skill is not a behaviorally verified Skill. This
 branch's HYPIC run is one case, not the entire validation campaign.
 
+## Run-time drift check (2026-10-08)
+
+The long goal is still real-task validation of all 29 main Skills, not a
+favorable HYPIC score. The medium HYPIC Skill-chain milestone still needs a
+full in-path quality decision and matching performance identity. The active
+short gate is the cache10 HYPIC 127-sample candidate on physical NPU0-3;
+its 9-sample/27-row stress and independent isolation/release audit already
+passed. Reuse the previously audited 0.9 no-cache baseline only as historical
+reference because the current candidate's 0.85 serving identity differs;
+do not repeat an identical baseline merely for a newer timestamp. The
+candidate operation and evidence root are recorded in the branch-local
+HANDOFF. Keep per-request worker-hot attribution open until evidence can
+join workers to scored request IDs. Reconcile these three horizons after the
+candidate result and before any new baseline, performance run, or retry.
+
 ## Short term — current HYPIC in-path quality gate
 
 - Frozen context: physical chicaihong01 NPU0-3 only; NPU4-7 and unrelated

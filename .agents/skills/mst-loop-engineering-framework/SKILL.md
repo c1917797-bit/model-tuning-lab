@@ -46,6 +46,10 @@ Git contains the checkpoint or the blocker is explicit
 
 If any item is false, the loop must stop, update state, ask for direction, or narrow the objective. It must not drift into adjacent work just because the agent can continue.
 
+For multi-stage tasks spanning sessions or long experiments, use the
+[three-horizon drift check](references/three-horizon-drift-check.md) to align
+long, medium, and short goals before another run, retry, or scope change.
+
 ## Architecture Orientation Gate
 
 A loop that touches architecture, topology, gateways, runtime ownership, or production paths must pass an orientation gate before proposing or editing. The gate is generic; each target repository should fill in the concrete files and commands.
