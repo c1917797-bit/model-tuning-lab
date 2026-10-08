@@ -1,5 +1,16 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
+2026-10-08 14:13 UTC: cache10r2 full candidate
+`exec-00000000000013ec` ended isolation-invalid at 56/127 samples after
+`cannbench_ds` entered physical NPU0. All 56 files predated the first
+observed intrusion and passed a bounded independent row/scorer/explicit-
+boundary audit; exact owned release and guard detection passed. This
+adds evidence for host-maintenance and benchmark-boundary behavior, but
+does not move the 29-Skill behavioral ledger beyond V11/P14/N4. It is not
+a full model-quality or paper reproduction pass. See
+`HOTPATH_CACHE10_REPAIR.md` for preserved hashes, the partial-evidence
+limit, and the pending explicitly revised protocol choice.
+
 2026-10-08 13:06 UTC: fresh cache10r1 full candidate
 `exec-00000000000013cc` was isolation-invalid at 0/127 samples. The guard
 detected physical NPU3 PID 3551181 from `cannbench_ds`; the new in-flight
@@ -40,7 +51,7 @@ a completed long-term goal.
 
 Final clean2 note (2026-10-07 21:58 UTC): three formal 40/40 paired performance runs passed the bounded hot-path gate. The first 41984-context quality attempt (`exec-0000000000000c6d`) failed shared-host isolation and is not pooled. Fresh `clean2` (`exec-0000000000000e15`) completed all 12 paired quality units, exact input/row/scorer/hash audit, 752/754 clean guard samples and both releases. The original strict quality auditor failed because no natural request activated any worker hot path; the separate scoped audit preserved valid but inconclusive natural-task scores without formal acceptance. See `FINAL_EVIDENCE_DECISION.md`. A completed negative protocol verdict validates some bounded evidence/maintenance/reporting workflows, but not the hot-path quality workflow, whole-paper reproduction, or all 29 Skills.
 
-Scope: origin/main at f1f37a39bd86f7db5fd3ee3dea358ae6868275c6 has 29 registered Skills and 29 SKILL.md files. This is a behavioral evidence ledger, not a claim that all 29 should be exercised by one paper. The old 2026-10-06 skill-validation.json is historical evidence and must be independently rechecked before promotion.
+Scope: origin/main at ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2 has 29 registered Skills and 29 SKILL.md files. The registry Git blob ID is unchanged from f1f37a39bd86f7db5fd3ee3dea358ae6868275c6 (both are `2611864bbcf719d57920aae03ff9eb85521526b4`), and the Skill tree plus AGENTS.md have no diff between those commits. This is a behavioral evidence ledger, not a claim that all 29 should be exercised by one paper. The old 2026-10-06 skill-validation.json is historical evidence and must be independently rechecked before promotion.
 
 Current branch has ingested three verified performance/tooling lessons, one paper-derivative coverage lesson, one shared-host quality-isolation failure lesson, one source-grounded quality hot-path coverage-preflight lesson, and one aggregate-score floating-point/classification lesson into existing Skills, without adding a new Skill. A 29-Skill structural validator pass, the six-unit performance artifact audit and 12-unit scoped quality audit confirm tree integrity and bounded evidence handling; they do not establish hot-path quality or validate unrelated Skills.
 

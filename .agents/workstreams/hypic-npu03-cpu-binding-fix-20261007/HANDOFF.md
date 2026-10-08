@@ -1,5 +1,20 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Latest 2026-10-08 14:16 UTC decision:** cache10r2 candidate operation
+`exec-00000000000013ec` is terminal exit 1 after foreign `cannbench_ds`
+processes entered physical NPU0. It preserved 56 sample files / 168 scored
+rows, all written before the first observed intrusion and passing read-only
+row/scorer/explicit-boundary audit. The whole arm is isolation-invalid;
+there is no paired quality result, no matching baseline, and no new-identity
+performance. Exact owned release passed; do not resume its root, start a
+matching baseline for this invalid arm, or affect the foreign container.
+Read `HOTPATH_CACHE10_REPAIR.md` for exact times/hashes and the pending
+method choice: explicitly revised 56/71 multi-service pairing versus a
+fresh full single-service run after exclusive NPU0-3 allocation. No new
+NPU experiment has been launched. The work branch remains independent of
+main; remote main advanced to `ead8081` with README workstream changes
+but the 29-Skill tree itself is unchanged from pinned `f1f37a3`.
+
 **Current 2026-10-08 14:03 UTC checkpoint:** The exact cache10r2 candidate
 operation `exec-00000000000013ec` is still running; progress persisted
 40/127 full samples at 14:02 UTC. This is not a score decision. An

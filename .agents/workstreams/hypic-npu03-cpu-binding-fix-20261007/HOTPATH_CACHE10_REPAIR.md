@@ -1,5 +1,48 @@
 # HYPIC c8 material-cache failure and prospective cache10 gate
 
+## cache10r2 full candidate: external NPU0 intrusion after 56 clean samples
+
+Operation `exec-00000000000013ec` is terminal exit 1 at 2026-10-08
+14:13:59 UTC. The first 56/127 samples and 168/381 scored rows were
+persisted by 14:13:04 UTC, before the guard's first foreign observation at
+14:13:17 UTC. An independent read-only partial audit checked all 56 sample
+identities, request/response hashes, scorer outputs and 280 distinct
+warm/scored request IDs. All 168 scored IDs had a unique explicit-boundary
+event before the foreign observation; the pre-intrusion event slice contained
+177 aggregate verified-hot requests and the four expected worker-hot PIDs.
+That aggregate is **not** proof that each scored request hit the hot path.
+The clean prefix is bounded evidence, not a full-arm or paired quality verdict.
+
+The guard made 507 observations, with no probe errors and two foreign
+observations: NPU0 PID 97921 at 14:13:17 and PID 101428 at 14:13:39. Their
+cgroups mapped to `cannbench_ds` container
+`efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6`;
+the human launcher is unproven. The controller stopped only the
+identity-proven owned HYPIC container. Its stop receipt proves container,
+worker and port release, and the lane happened to be available at that
+instant; a subsequent read-only probe found another foreign NPU0 process.
+Thus a ten-minute quiet monitor did not establish an exclusive multi-hour
+allocation. The arm is isolation-invalid, not a technical HYPIC or accuracy
+failure. The matching baseline and new-identity performance have not run.
+
+Preserved immutable raw root:
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r2-full-hypic`.
+Contract, arm-result, guard, stop and complete evidence SHA256:
+`9106bfb4a27e6dbd85d88fde76f126a1a9807a889d600e212cb6f9c4705e74c3`,
+`d4784bf4c195e05ff483c7e1d8b40e09b2f5894e0b333059b2f39953c79eb767`,
+`e695f7b3823e1d5dbaf87ce9a07b3d25db8b22dc9fc212219fb81f6489ce7975`,
+`d6ad6e3932d7e610d65b0571bbac97bb27fa511fec2d1015208f871adf3af3b6`,
+`7a577889eda32df5d2f5e33906bd8337d2b94126d31190a224a132dbb21cadf0`.
+The sorted 56-file `sha256sum` manifest digest is
+`b9a46e57c3da956f52779303553564036041f0e91f460875caf076ac9b51ca8e`.
+The pre-intrusion evidence-line slice SHA256 is
+`0d47c50d2a63c06ae9f4d0ed10ad0a4340899a412982b91eb03c9bb27fc34923`
+(1,007,153 bytes). Do not modify or resume this root. A revised
+multi-service shard protocol could retain the clean 56 only with explicit
+methodological labeling and a matching control; otherwise a fresh
+single-service attempt needs an actual exclusive NPU0-3 window. The user
+has been asked which protocol to accept; no new NPU run follows implicitly.
+
 Decision recorded 2026-10-08 after reserve2 failed and before any cache10 NPU run.
 Read HOTPATH_CAPACITY_REPAIR.md for the earlier 0.9 watermark and 0.85
 external-interference attempts. None of their partial rows form a quality
@@ -143,12 +186,7 @@ for a multi-hour arm. The cache10r2 controller preserves the frozen quality
 ruler and adds same-observation Docker cgroup capture for transient foreign
 PIDs. The old 9-sample cache10 stress remains valid and is not rerun.
 
-The next attempt identity is `cache10r1`, with new full-candidate root
-`quality-context-41984-hotpath-cache10r1-full-hypic` and a separate matching
-control root `quality-context-41984-hotpath-cache10r1-full-baseline` if a
-formal paired quality comparison is pursued. This changes only the attempt
-identity and the fail-fast controller, not the frozen model, serving flags,
-dataset, concurrency, repeats, output cap or score rule. The already passed
-cache10 stress is not rerun solely to rename the attempt. A quiet-window
-monitor is read-only; its result must be followed by a fresh ownership and
-physical NPU0-3 check before launching the new root.
+Historical note: the next-identity proposal after the first interference
+was cache10r1; it was itself invalidated at 0/127, and cache10r2 is now
+terminal as documented above. Neither root is reusable. The already passed
+cache10 stress is not rerun solely to rename an attempt.

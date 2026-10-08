@@ -15,13 +15,16 @@ narrower gate. A fresh cache10r1 candidate was also invalidated at 0/127
 by a `cannbench_ds` process on physical NPU3. Its prompt guard abort and
 exact owned release passed the execution-control repair gate. After a bounded
 quiet-lane check, cache10r2 candidate operation `exec-00000000000013ec`
-started on physical NPU0-3; at 2026-10-08 13:48 UTC it was live with 20/127
-samples persisted. This is progress, not a quality verdict. Keep the exact
-operation alive; do not restart or reuse a partial root. If its independent
-audit passes and the lane is available, run only the matched 0.85/cache10
-control arm. The audited 0.9 no-cache baseline is historical reference, not
-that control. A fresh matched performance comparison must likewise use the
-0.85/cache10 identity and the prospective ruler in
+started on physical NPU0-3 but was invalidated at 56/127 by an external
+`cannbench_ds` NPU0 process at 14:13 UTC. Its 56 pre-intrusion samples
+passed independent partial row/scorer/boundary checks, not a whole-arm
+quality gate. The owned service released exactly. Do not restart or reuse
+its root or pair an invalid arm with a baseline. Decide explicitly whether
+to adopt a labeled multi-service 56/71 shard protocol that preserves the
+clean prefix or obtain an actual exclusive NPU0-3 window for a new
+single-service pair. The audited 0.9 no-cache baseline is historical
+reference, not the missing control. A fresh matched performance comparison
+must use the 0.85/cache10 identity and the prospective ruler in
 `HOTPATH_CACHE10_MATCHED_PERFORMANCE_PLAN.md`. Keep per-request worker-hot
 attribution open until evidence can join workers to scored request IDs.
 
@@ -30,8 +33,8 @@ attribution open until evidence can join workers to scored request IDs.
 - Frozen context: physical chicaihong01 NPU0-3 only; NPU4-7 and unrelated
   containers untouched. Existing three-repeat C1/C2 performance result and
   clean2 off-path quality evidence remain separate.
-- This ruler's 127-sample candidate is active on a single operation handle;
-  complete it and independently audit it before starting the matching control.
+- The single-service cache10r2 candidate is terminal isolation-invalid;
+  preserve its bounded clean prefix separately from the full-arm verdict.
 - Run the 3-sample explicit-boundary pilot, then the new matched 127-sample,
   three-repeat, 2048-max-output LongBench ruler described in
   `HOTPATH_FULL_QUALITY_PLAN.md`.
