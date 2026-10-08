@@ -1,5 +1,24 @@
 # Maintainer Handoff
 
+## README capability refresh — 2026-10-08
+
+The README now reflects the actual 29-Skill main tree: Paper-to-Ascend,
+profiling-led diagnosis, runtime monkeypatch delivery, CPU test bootstrap,
+versioned evidence, and maintainer handoff. It distinguishes instructions and
+templates from future automation, and historical HYPIC mean results from current
+Qwen3.5 P95 acceptance. No runtime or device behavior changed.
+
+Validated content: `94cc6efef962729123ada82438a2a75ec77f0424`.
+Exact fetched integration source: `e600c2a66a5053e5bd27ebe7dc4cc14fd06cc11e`;
+target parent: `f1f37a39bd86f7db5fd3ee3dea358ae6868275c6`.
+Documentation checks passed: validate-mst (29 Skills), 31 relative links, exact
+Skill names, JSON state, original-base hashes, formatting and change scope.
+The final merge tree must pass these gates again before its normal main push.
+Task-owned evidence and guarded temporary-worktree retention are in
+`.agents/workstreams/readme-refresh-20261008/`. The maintainer approved a ninth
+tree only for this document task; reclaim it after confirmed integration and
+preserve the original eight. The remote work branch is retained for recovery.
+
 ## Ascend performance optimization skill update — 2026-10-06
 
 The maintainer tree now includes `ascend-performance-optimization`, which owns

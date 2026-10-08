@@ -1,0 +1,62 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "task_id": "readme-refresh-20261008",
+  "integration_state": "merged",
+  "original_base": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "target_parent": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "source_commit": "e600c2a66a5053e5bd27ebe7dc4cc14fd06cc11e",
+  "validated_readme_sha256": "4dffc4b1ee436edb5c782162308ac384ab68b6c45f4d7e2bd995351f9891c880",
+  "validation_results": [
+    {
+      "gate": "validate-mst",
+      "result": "PASS",
+      "skills": 29
+    },
+    {
+      "gate": "README documentation audit",
+      "result": "PASS",
+      "relative_links": 31,
+      "registered_skills": 29,
+      "device_access": false
+    },
+    {
+      "gate": "git diff --check",
+      "result": "PASS"
+    },
+    {
+      "gate": "change scope and Linux relative paths",
+      "result": "PASS"
+    },
+    {
+      "gate": "content checkpoint pushed and clean",
+      "result": "PASS",
+      "commit": "94cc6efef962729123ada82438a2a75ec77f0424"
+    },
+    {
+      "gate": "original target drift check",
+      "result": "PASS",
+      "target": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6"
+    }
+  ],
+  "integration_owner": "codex",
+  "serialization": "Codex is the sole integrator and owns the checked-out main; host mst-integration.lock serializes merge preparation and final validation/commit/push. Exact parent/source/ref/tree checks plus normal non-force push reject drift.",
+  "reclamation": "Authorized after clean primary push verification, merged state, no process/mount/lease/dependency use; remove only this temporary worktree and its merged local branch. Retain origin/work/readme-refresh-20261008 and all original eight worktrees.",
+  "validated_content_commit": "94cc6efef962729123ada82438a2a75ec77f0424",
+  "source_ref": "origin/work/readme-refresh-20261008",
+  "source_binding": "Exact fetched remote readiness commit, integrated with a deliberate no-ff merge.",
+  "claims_and_dependencies": "No task dependencies, no device leases, only README and own records; global HANDOFF is integration-only.",
+  "final_tree_gates": [
+    "validate-mst.sh",
+    "audit_readme.py (exact README hash, 31 links, 29 registered names, formatting, JSON, frozen hashes and scope)",
+    "git diff --cached --check",
+    "exact HEAD / MERGE_HEAD / fetched remote refs",
+    "validated index tree equals committed tree"
+  ],
+  "publication_guards": [
+    "origin/main must equal the target parent before commit/push",
+    "push main normally without force or blind retry",
+    "fetch after push; divergence 0 0",
+    "both merge parents exactly match target_parent and source_commit",
+    "source_commit reachable from main and README hash unchanged"
+  ]
+}
