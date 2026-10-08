@@ -59,6 +59,16 @@ unverified when runtime telemetry cannot distinguish those requests, even
 if a serialized canary and aggregate counts pass. Report those narrower
 facts separately rather than weakening the frozen quality gate.
 
+For a conditional path backed by reusable materialized state, a serialized
+canary is also not a concurrency/capacity gate. Before the full suite, stress
+distinct eligible prompts at the target concurrency and output cap; record
+per-worker segment-count and byte limits, projected live-state footprint,
+evictions, replay errors, scored rows, isolation, and exact release. A cache
+eviction near missing replay state is a bounded hypothesis, not root-cause
+proof without the evicted identity or a discriminating follow-up. Treat a
+capacity or scheduling change as a new service identity and compare only
+against a matching control when claiming paired quality or performance.
+
 If the scored suite cannot trigger the treatment, classify its possible result
 as runtime-enabled/off-path safety evidence, not in-path quality preservation.
 Before spending a long NPU window under an in-path claim, define a separate

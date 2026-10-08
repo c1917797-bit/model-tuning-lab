@@ -1,5 +1,12 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
+2026-10-08 11:51 UTC: the prospectively declared cache10 stress completed
+9/9 samples, 27/27 scored rows, 58 clean physical-lane observations, and
+exact release; independent audit `exec-0000000000001375` passed. See
+`HOTPATH_CACHE10_REPAIR.md`. This verifies a bounded concurrent replay gate,
+not the 127-sample paired quality or every scored request's worker-hot path.
+The 29-Skill ledger remains V11/P14/N4 pending full quality and performance.
+
 2026-10-08 prospective update: the frozen clean2 natural-task quality
 failure below remains unchanged. A separate explicit-boundary pilot-2
 (`HOTPATH_PILOT2_RESULT.md`) passed three scored hot-path requests and

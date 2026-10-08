@@ -56,6 +56,7 @@ skills:
       - 质量回归测试
       - audit shared-NPU isolation during a paired quality suite
       - verify conditional treatment hot-path coverage before a quality suite
+      - stress materialized hot-path replay at target concurrency before full quality evaluation
     scope:
       - AGENTS.md
       - configs/**

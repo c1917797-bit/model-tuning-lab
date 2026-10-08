@@ -1,5 +1,14 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**Latest 2026-10-08 11:51 UTC checkpoint:** cache10 HYPIC c8 stress
+completed 9/9 samples and 27/27 scored rows. Independent audit
+`exec-0000000000001375` passed with 58 clean lane observations and exact
+release; see `HOTPATH_CACHE10_REPAIR.md` for hashes and limits. This passes
+the changed-capacity stress gate, not full quality or a proven old-failure
+root cause. Run the missing full candidate next; reuse the old 0.9 baseline
+only as historical reference unless a matched-service comparability audit
+supports a formal pair. The Skill ledger remains V11/P14/N4.
+
 **Latest 2026-10-08 checkpoint:** reserve2 stress failed technically under
 c8 after the sentinel passed: sample 4 HTTP 500, four TP workers lacked GDN
 material, 27/27 lane samples clean, exact release passed. Read

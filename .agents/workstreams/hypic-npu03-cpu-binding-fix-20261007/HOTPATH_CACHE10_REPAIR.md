@@ -62,3 +62,22 @@ HYPIC_HOTPATH_QUALITY_CAMPAIGN=cache10 HYPIC_HOTPATH_QUALITY_ARM=no-cache HYPIC_
 HYPIC_HOTPATH_QUALITY_CAMPAIGN=cache10 HYPIC_HOTPATH_QUALITY_ARM=hypic-only HYPIC_HOTPATH_QUALITY_MODE=full python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py
 HYPIC_HOTPATH_AUDIT_CAMPAIGN=cache10 python3 .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_audit.py
 ```
+
+## First cache10 stress result (2026-10-08 11:51 UTC)
+
+Operation `exec-000000000000136c` exited 0 on physical NPU0-3: the
+serialized sentinel and all nine declared samples completed, yielding 27
+scored rows at c8/three repeats/2048-token cap. The service was released.
+Independent audit `exec-0000000000001375` exited 0 with `stress_pass=true`,
+9/9 samples, 27/27 rows, 58 clean lane-guard samples, and exact release.
+Contract SHA256 is
+`3fc03c4df091c030eddb1121c2f12052ac1e49caf71721680b1130654805f7a1`;
+arm-result SHA256 is
+`38cd5d5437a3f60a3a5151f6c347b10623572f64e0e16a7c8a4e993bc1fb3798`.
+This passes the predeclared concurrency/capacity stress gate and disproves
+reproduction of the earlier c8 crash under this changed capacity. It does
+not by itself identify which evicted segment caused the old failure, prove
+per-request worker-hot attribution, or establish full 127-sample quality.
+Next run only the missing full candidate and determine whether the previous
+0.9 control is sufficiently comparable for a descriptive reference or a
+fresh matched 0.85 control is required for a formal paired verdict.
