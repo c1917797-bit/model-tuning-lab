@@ -1,5 +1,43 @@
 # DAMP Ascend — current workstream
 
+## Latest DAG / matched-control checkpoint — 2026-10-08
+
+Read the tuning-loop reference paper-validation-dag-and-matched-controls.md
+first for the user's parallel-preparation/serial-NPU workflow and exact OFF/ON
+comparison contract. Earlier snapshots below remain history, not current
+readiness authority. This checkpoint publishes knowledge, not candidate code.
+
+Three independent preparation chains remain SparsePrefix, SparQ and SKVQ;
+none is yet admitted as a complete device-ready successor. MAIN has no live
+NPU/model job at this checkpoint. SP11 full186/same-image186+7CLIs passed and
+all four physical4-7 arithmetic canaries passed, but MAIN13fb failed before
+model execution with HYPIC actual runner not installed. Preserve its FAILED
+original, stopped-owned CID and all proved software/canary evidence. SP12 is a
+new source-supported dependency/worker-context repair, with full software and
+device gates still pending; source delivery is not PASS.
+
+SparQ observer MAIN1401 actually passed full174 and three real CLI checks.
+The preceding MAIN13e7 same-image arithmetic aggregate failed before any NPU
+create; at least one condition failed, not necessarily all four toy cases.
+Next is the source-reviewed CPU-only single-run raw-case observer, then causal
+repair if justified; full128/20480 NPU, model, E2E and tasks remain unrun.
+SKVQ still lacks complete legal teacher/capture inputs and official artifacts.
+
+MAIN140d copied only system_utils.py from the stopped-owned SP11 image660;
+10294B/SHA26127b114d896f776da2d5ba90eac5a023704150f07b1703eb66252bedf7eaa6.
+It did not start a container/model/NPU and is only installed-source evidence.
+The active original operation envelopes remain outside Git under
+/cache/cch/qwen36-paper-preparation-20261007; no new E2E or task score exists.
+
+Continue source review and complete actual prerequisites while preparers work
+in independent private scopes. When a real successor is ready, fresh-check
+resources and admit it without waiting for reports. Physical4-7 only;0-3
+protected; HugeTLB32GiB authoritySPENT. Keep fixed cutoffs portfolio1791544651,
+SparsePrefix1791529740/SparQ1791486000; do not reopen closed DAMP/KIVI/H8 scopes.
+Canonical work branch remains work/qwen36-damp-ascend-20261006, base6d83e14.
+Knowledge-only stage excludes unvalidated/unrelated dirty runtime sources.
+Validate MST and focused diff, then normal push and independent remote check.
+
 ## Latest thread-enumeration / regression learning checkpoint — 2026-10-08
 
 Read THREAD_ENUMERATION_AND_REGRESSION_LEARNING_20261008.md and its structured

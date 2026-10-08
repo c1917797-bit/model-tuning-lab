@@ -6,6 +6,10 @@ Latest user direction: preparation runs in parallel; papers use the four-card
 validation lane serially. Keep project-specific deadlines in workstream records,
 not a moving universal deadline in this skill.
 
+Use [the paper validation DAG and matched controls](paper-validation-dag-and-matched-controls.md)
+to define predecessor evidence, data-dependent capture/calibration branches,
+fair dense/candidate arms and the recovery edge for every gate.
+
 ## Prepare breadth without fabricating readiness
 
 Maintain one indexed backlog for every in-scope paper. Distinguish:
@@ -259,3 +263,43 @@ possible; prolonged preparation idle time is not made acceptable by dummy
 load or a source-only readiness label.
 
 [Actual successes, failures and queue gaps](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).
+
+## Terminal-triggered readiness, not source-count utilization
+
+For this explicitly parallel portfolio, keep three distinct lanes:
+CURRENT is one MAIN-owned actual live operation; NEXT is the highest-value
+source-frozen packet with complete canonical regression and real CLI PASS;
+BACKUP is a reviewed independent algorithm/controller path being closed
+concurrently. A source delivery or a preparer's ready boolean is not NEXT.
+Each lane records exact source/receipt identities, unrun same-image or native
+prerequisites, fixed cutoff, summed resources, and its actual owner.
+
+Complete device-independent work during the preceding device lease or resource
+wait. If preparation compute cannot fit the shared host budget, keep API-only
+source work and queue bounded CPU checks explicitly; CPU0 does not prove those
+checks passed. A packet without its full canonical suite is SOURCE-PENDING,
+never an executable successor.
+
+On an actual terminal event, consume the original and verify own-only cleanup;
+then admit the highest-value ready successor. Report prose, Git publication,
+and broad source audits must not hold the NPU lane when that successor exists.
+If none exists, record ready-count0 and the concrete preparation gap. Do not
+blame unproved external occupation, reset a paper clock, or run dummy loads.
+
+Reuse common controllers, but record shared failure dependencies. One observer
+or entrypoint defect must not silently block every alleged ready packet.
+Assign its minimal evidenced repair to one preparer; keep other preparers on
+an independent successor/mechanism. Physical usage follows the actual gate:
+single-card numerics do not occupy all four, and microgates are not TP4 E2E.
+
+Distinguish software-suite exit from the surrounding MAIN harness exit.
+Oct8 ANN170 really passed while an added isolated Python CLI removed the script
+import directory and failed help. Preserve that failed whole original; repair
+only the command to the documented real -B entry and run missing CLI checks,
+without repeating valid170. The later exact same-image Devices[] arithmetic
+preflight failed before any NPU create: no native or paper-wide verdict.
+
+Save actual per-case arithmetic metrics before an aggregate first-fault
+assert, not only a before-run marker. A diagnostic successor must retain the
+author body, input domain and numerical gates; never substitute a guessed
+tolerance or convenient toy for the unobserved cause.

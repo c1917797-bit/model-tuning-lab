@@ -71,6 +71,8 @@ skills:
       - close a tuning experiment
       - restart a reusable experiment container after mounted source changes
       - audit executable readiness or a process-observer failure in an Ascend preparation queue
+      - organize independent parallel paper preparation and a serialized NPU validation DAG
+      - define matched dense and candidate configurations for paper acceptance
     scope:
       - configs/**
       - scripts/**

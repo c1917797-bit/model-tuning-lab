@@ -159,6 +159,12 @@ For a multi-paper queue with parallel preparers, apply
 It distinguishes executable readiness from source screens and prevents a
 single active paper from consuming every preparation slot.
 
+Before scheduling a prepared paper or comparing its speedup, apply
+[the paper validation DAG and matched dense controls](references/paper-validation-dag-and-matched-controls.md).
+It defines actual predecessor/consumer edges, data-dependent capture branches,
+the only-paper-delta OFF/ON contract, and scoped failure/recovery paths.
+An authored packet, canary or software PASS does not satisfy later gates.
+
 For packed recurrent-state ports, also apply the evidence-backed
 [DAMP migration gates](references/damp-migration-gates.md): native tokenizer
 and plugin registration, static versus device-dependent preflight, untouched
