@@ -50,8 +50,8 @@ Current-campaign codes as of 2026-10-07: **V** = this campaign exercised a bound
 | mst-repo-transformation | unassessed | N | No repository transformation is claimed by this HYPIC run. |
 | mst-runtime-skill-boundary | unassessed | N | Repository-source audit found no runtime/product Skill or publication tree; external deployment is out of scope. |
 | mst-skill-governor | unassessed | V | Existing narrow Skills and registry updated, with reason and validator evidence. |
-| mst-skill-tree-design | unassessed | P | `MAIN_SKILL_TREE_DIAGNOSTIC.md` found 0 exact duplicate triggers but 8 main Skills over its 120-line design limit and 14 generic registry entries without trigger/scope; repair and behavioral selection review remain open. |
+| mst-skill-tree-design | unassessed | P | `MAIN_SKILL_TREE_DIAGNOSTIC.md` found 0 exact duplicate triggers but 8 main Skills over its 120-line design limit and 14 generic main-registry entries without trigger/scope. Branch-only metadata repair and static regression check pass; main promotion and behavioral selection remain open. |
 | mst-tool-adapter-boundary | unassessed | V | Only tracked tool adapter is one-line `CLAUDE.md` → `AGENTS.md`; canonical policy remains in AGENTS/registry. |
-| mst-transformation-verification | unassessed | P | Structural 29-Skill validator passes, but the independent main-tree design diagnostic finds metadata/length gaps; semantic heading and runtime boundary review remain open. |
+| mst-transformation-verification | unassessed | P | Main structural 29-Skill validator passes; branch validator now enforces routing metadata. Main metadata/length gaps, semantic heading and runtime boundary review remain open. |
 
 Historical count, with duplicate rows excluded: 8 completed, 3 partial, 18 unassessed = 29. Current bounded-workflow status: 10 V, 15 P, 4 N = 29. The NPU0–3 campaign passed paired performance and independent row/release audit; its frozen natural-request formal worker-hot quality gate failed and natural scores are inconclusive. The new explicit-boundary full quality pair is still running. No whole-paper or whole-tree completion claim is made.

@@ -13,9 +13,10 @@ a behavioral acceptance of all 29 Skills.
   policy. The 29 registry IDs, paths, directories and frontmatter names
   match; no orphan or missing Skill directory. Registered status values are
   stable/experimental. No exact duplicate trigger string was found.
-- PASS: `bash scripts/validate-mst.sh` reports a structurally valid
-  29-Skill tree. This validator does not currently enforce the design limits
-  below, so its green result is not a complete design or behavior verdict.
+- PASS: at pinned main, `bash scripts/validate-mst.sh` reports a structurally
+  valid 29-Skill tree. The branch validator additionally requires explicit
+  registry routing metadata; neither validator proves behavioral selection
+  or the design limits below.
 - FAIL against the design Skill's stated `SKILL.md <= 120 lines` rule:
   8 main files exceed it: `chicaihong01-host-maintenance` 167,
   `ascend-cannbot-profiler` 143, `ascend-performance-optimization` 126,
@@ -52,13 +53,13 @@ do not treat a passing `validate-mst.sh` as proof of their full contracts.
 
 ## Branch repair checkpoint
 
-Following the diagnostic, the branch registry now gives
-`mst-repo-onboarding`, `mst-skill-tree-design`, and
-`mst-transformation-verification` discriminating purposes, triggers, and
-scopes derived from their unchanged `SKILL.md` instructions. YAML parsed
-successfully, the registry still has 29 unique IDs, and exact trigger
-duplicates remain zero. Eleven generic entries still lack this metadata.
-This is **branch-only static repair**; it has not changed pinned main or
-proven automatic selection behavior. Keep both Skills partial until the
-remaining metadata, line-length/semantic issues, and forward behavior are
+Following the diagnostic, the branch registry gives all 14 formerly generic
+`mst-*` entries discriminating purposes, triggers, and scopes derived from
+their `SKILL.md` instructions. The new POSIX
+`scripts/check-skill-registry-routing.sh` rejects absent/generic routing
+metadata, duplicate IDs and exact duplicate triggers; branch
+`scripts/validate-mst.sh` runs it. This is **branch-only static repair**:
+the pinned main registry still has the 14 gaps, and no automatic selection
+behavior has been proven. Keep both Skills partial until the line-length and
+semantic issues, fresh-clone/selection behavior, and version boundary are
 resolved.

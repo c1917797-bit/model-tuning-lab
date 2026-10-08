@@ -284,31 +284,101 @@ skills:
   - id: mst-agentsmd-authoring
     path: .agents/skills/mst-agentsmd-authoring
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Write or revise a short AGENTS.md bootstrap for a target repository without duplicating Skill content.
+    triggers:
+      - create AGENTS.md for a target repository
+      - revise a target repository AGENTS.md bootstrap
+    scope:
+      - AGENTS.md
+      - .agents/skills.registry.yaml
+      - .agents/skills/**
+      - CLAUDE.md
+      - .opencode/**
+      - .codex/**
+      - .cursor/**
   - id: mst-experience-ingestion
     path: .agents/skills/mst-experience-ingestion
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Turn verified maintenance experience into the smallest reusable Skill, registry, eval, or adapter change.
+    triggers:
+      - ingest lessons after a real repository maintenance session
+      - classify a repeated maintainer failure into durable guidance
+      - preserve a verified audit correction for future iterations
+    scope:
+      - .agents/skills.registry.yaml
+      - .agents/skills/**
+      - .agents/evals/**
+      - examples/**
+      - AGENTS.md
+      - CLAUDE.md
   - id: mst-git-checkpoint-policy
     path: .agents/skills/mst-git-checkpoint-policy
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Apply the confirmed repository commit-and-push policy to coherent validated checkpoints.
+    triggers:
+      - choose or codify a repository Git checkpoint policy
+      - decide whether validated work may commit or push
+      - checkpoint a named workstream branch after validation
+    scope:
+      - AGENTS.md
+      - .agents/git-policy.yaml
+      - .agents/workstreams/**
+      - scripts/validate-mst.sh
   - id: mst-loop-engineering-framework
     path: .agents/skills/mst-loop-engineering-framework
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Design or maintain a Git-backed, non-drifting agent loop with durable state and independent verification.
+    triggers:
+      - design a Git-backed maintainer loop across sessions
+      - repair a loop that drifts from its bounded objective
+      - add maker-checker validation and handoff to an autonomous loop
+    scope:
+      - AGENTS.md
+      - .agents/**
+      - agents/**
+      - scripts/**
   - id: mst-maintainer-handoff
     path: .agents/skills/mst-maintainer-handoff
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Keep integrated and branch-local maintainer handoffs current, concise, and evidence-bound.
+    triggers:
+      - update or validate the maintainer HANDOFF
+      - prepare a branch-local task for agent takeover
+      - close a non-trivial maintainer turn with a resume point
+    scope:
+      - AGENTS.md
+      - .agents/HANDOFF.md
+      - .agents/workstreams/**
   - id: mst-parallel-workstreams
     path: .agents/skills/mst-parallel-workstreams
     status: experimental
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Route non-trivial work to named remote branches and serialize evidence-bound integration and safe reclamation.
+    triggers:
+      - start or resume a non-trivial named workstream
+      - integrate a workstream with drift or resource claims
+      - reclaim a completed or superseded worktree
+      - decide whether a change qualifies for direct-primary work
+    scope:
+      - AGENTS.md
+      - .agents/**
+      - configs/**
+      - docs/**
+      - projects/**
+      - scripts/**
+      - src/**
+      - tests/**
   - id: mst-practice-iteration-planning
     path: .agents/skills/mst-practice-iteration-planning
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Decompose a validation stage into small iterations with machine-checkable pass criteria and lesson destinations.
+    triggers:
+      - plan a validation stage for a target repository
+      - decompose a practice goal into verifiable iterations
+      - decide the next practice validation step
+    scope:
+      - .agents/evals/practice-iterations/**
+      - .agents/workstreams/**
+      - docs/**
   - id: mst-repo-onboarding
     path: .agents/skills/mst-repo-onboarding
     status: stable
@@ -327,15 +397,44 @@ skills:
   - id: mst-repo-transformation
     path: .agents/skills/mst-repo-transformation
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Convert an ordinary repository into an AGENTS.md and Maintainer Skill Tree system.
+    triggers:
+      - transform a repository into an agent-maintained repository
+      - migrate tool-specific rules into AGENTS.md and maintainer Skills
+    scope:
+      - AGENTS.md
+      - .agents/skills.registry.yaml
+      - .agents/skills/**
+      - CLAUDE.md
+      - .opencode/**
+      - .codex/**
+      - .cursor/**
+      - scripts/validate-mst.sh
   - id: mst-runtime-skill-boundary
     path: .agents/skills/mst-runtime-skill-boundary
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Keep product runtime Skills separate from maintainer Skills and verify publication and permission boundaries.
+    triggers:
+      - separate runtime product Skills from maintainer Skills
+      - audit tenant-facing Skill visibility or publication policy
+    scope:
+      - AGENTS.md
+      - .agents/skills.registry.yaml
+      - .agents/skills/**
+      - runtime-skills/**
   - id: mst-skill-governor
     path: .agents/skills/mst-skill-governor
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Govern evidence-based updates, additions, deprecations, and restructuring of maintainer Skills.
+    triggers:
+      - add or revise a Maintainer Skill from verified experience
+      - deprecate or retire an obsolete Maintainer Skill
+      - update Skill registry metadata after a Skill change
+    scope:
+      - .agents/skills.registry.yaml
+      - .agents/skills/**
+      - .agents/evals/**
+      - templates/skills/**
   - id: mst-skill-tree-design
     path: .agents/skills/mst-skill-tree-design
     status: stable
@@ -351,7 +450,18 @@ skills:
   - id: mst-tool-adapter-boundary
     path: .agents/skills/mst-tool-adapter-boundary
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Keep coding-tool adapters thin and subordinate to AGENTS.md and the Maintainer Skill Tree.
+    triggers:
+      - add or update a coding-tool adapter
+      - resolve an adapter conflict with canonical maintainer instructions
+    scope:
+      - AGENTS.md
+      - .agents/skills.registry.yaml
+      - CLAUDE.md
+      - .cursorrules
+      - .cursor/**
+      - .opencode/**
+      - .codex/**
   - id: mst-transformation-verification
     path: .agents/skills/mst-transformation-verification
     status: stable

@@ -107,6 +107,10 @@ if [ -x ./scripts/check-registry-consistency.sh ]; then
   ./scripts/check-registry-consistency.sh >/dev/null
 fi
 
+# Every registry entry needs discriminating routing data. This check uses
+# POSIX awk so fresh clones do not need a YAML package just to validate.
+sh ./scripts/check-skill-registry-routing.sh >/dev/null
+
 # Continuity trailer contract on HEAD (skillsgit v2 standard; non-blocking
 # warning because historical commits predate the trailer baseline).
 if [ -x ./scripts/validate-commit-continuity.sh ]; then
