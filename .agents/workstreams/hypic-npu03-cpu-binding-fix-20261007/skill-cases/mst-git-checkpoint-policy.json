@@ -28,14 +28,14 @@
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/GIT_CHECKPOINT_ACCEPTANCE_20261008.md",
-      "sha256": "66517a07c409bf5b768273c84f67b7de543d682204c50a9e3a17feab5ffb11ca"
+      "sha256": "30cdd5132bf1b1cb5a0b96037ac816786abb6c8ad8b3c4bae06a21399ae95a89"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_git_checkpoint_case.py",
-      "sha256": "e88933cc82dc2f02ec3c580f81f6a2f1c0dadff0df683bd85b61d8ce3af3ab44"
+      "sha256": "ccecca6265e4f523282aa128892c2fe455fbe2f7d2a5acc466e5baf5eedee13a"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "Verified only for the representative maintainer-confirmed commit_implies_push named-workstream checkpoint: validation, coherent commit, immediate branch push and clean upstream equality. No direct-primary exception, manual policy, PR path, force-push rejection, future agent behavior or worktree reclamation was tested.",
-  "drift_trigger": "Revalidate if main Skill blob, git policy, branch routing, checkpoint ancestry or remote/upstream state changes."
+  "drift_trigger": "Revalidate the historical case if main Skill blob, git policy, branch routing or checkpoint ancestry changes; use --require-current-sync for a fresh remote-equality check, which is presently pending."
 }

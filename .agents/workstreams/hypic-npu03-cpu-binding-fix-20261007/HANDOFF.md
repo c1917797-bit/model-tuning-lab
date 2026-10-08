@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 15:29 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 15:41 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Earlier branch checkpoints were pushed through 622d68a. The validated
   maintainer-handoff Skill case commit b097067 is local-only because Git
   HTTPS authentication disappeared during its push; do not claim it is remote.
@@ -37,17 +37,23 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   actually used physical NPU3. The guard aborted at 0/127 completed
   samples, released the exact owned service and port, and preserved
   HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md with raw receipt hashes.
+- User clarified that idle physical NPU0–3 are sufficient to start; do not
+  wait merely because another container has mapped devices. A fresh
+  original-protocol cache10r4 candidate arm started under AWMCP operation
+  exec-00000000000014c4 after all 127 sample identities, source fingerprints,
+  actual NPU processes and port 8223 passed preflight. It remains in flight;
+  its continuous guard will reject real foreign use, not passive mappings.
 - The Git checkpoint and maintainer-handoff Skills have bounded verified
   real-task cases locally; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
 
 ## 4. Current Action
 
-Await an uninterrupted NPU0–3 window and restoration of target-host Git
-HTTPS authentication. cannbench_ds remains running and intermittently
-executes real kernels; an idle snapshot is not a full-run lease. User
-coordination was requested for both. Do not restart terminal cache10r3,
-reuse its root, or repeat the local commit just because its push failed.
+Monitor the running cache10r4 operation and exact raw root; do not launch
+another controller while it lives. An idle-at-launch snapshot does not
+guarantee uninterrupted isolation, so classify any real foreign PID as
+environment-invalid through the guard. Target-host Git HTTPS authentication
+remains absent; do not repeat local commits merely because push failed.
 
 ## 5. Next Actions
 
@@ -59,9 +65,9 @@ reuse its root, or repeat the local commit just because its push failed.
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. In a sustained clean window, declare a new unique original-protocol
-   HYPIC campaign/root. Do not reuse cache10r2 or cache10r3 and do not
-   silently switch to cache10split.
+3. Poll cache10r4 exec-00000000000014c4 and
+   /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r4-full-hypic.
+   Do not reuse cache10r2/cache10r3 or silently switch to cache10split.
 4. Complete HYPIC 127×3 scored quality and independent guard/release
    audit, then same-identity no-cache arm and pair audit. Only after
    quality gates pass, run matched performance.

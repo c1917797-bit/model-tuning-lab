@@ -37,9 +37,18 @@ Replay from the named worktree after this case is pushed:
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_git_checkpoint_case.py
 ```
 
-The script fails closed if the confirmed policy, exact main Skill blob,
-branch/upstream, checkpoint parent/files, clean worktree, live remote
-equality or checkpoint ancestry drifts. Re-run the ordered AWMCP operation
-queries while those control-plane records are retained to review the
-historical validation-before-commit proof. The repository checks are
-repeatable; they do not prove that all future agents will obey this policy.
+The default script replays the **historical** checkpoint offline: it
+fails closed if the confirmed policy, exact main Skill blob, branch/upstream
+identity, checkpoint parent/files, or ancestry in the local HEAD and cached
+remote-tracking ref drifts. The cached ref is not a fresh GitHub read; the
+separate live `exec-000000000000149d` receipt proves the historical push.
+The default `current_branch_synced` field means equality with the cached
+tracking ref only and is not proof of live remote equality. Run with
+`--require-current-sync` to check current HEAD against the **live** remote;
+that mode uses a bounded 15-second network call and fails on authentication,
+network uncertainty, dirty worktree, or unpushed commits. It now correctly
+fails while the branch is ahead and target-host HTTPS auth is missing. The
+later authentication failure does not erase the earlier successful
+checkpoint. Re-run the ordered AWMCP operation queries while retained
+to review validation-before-commit proof. Neither check proves that all
+future agents will obey this policy.
