@@ -1,21 +1,17 @@
 # README refresh handoff
 
-## State
+## Ready for integration
 
-- Execution: in-progress; integration: not-ready.
-- Original base: `f1f37a39bd86f7db5fd3ee3dea358ae6868275c6` (`origin/main`).
-- Named branch: `work/readme-refresh-20261008`; target: `main`.
-- Target host: verified `chicaihong01/mb`; canonical repository is on chicaihong01.
-- Scope: README plus this task's records; global HANDOFF changes only during integration.
-- Existing eight worktrees are preserved. The maintainer approved one temporary ninth tree.
-- No NPU or runtime resources are leased or changed.
+- Execution: completed; integration: ready (not yet integrated truth).
+- Validated content/source checkpoint: `94cc6efef962729123ada82438a2a75ec77f0424`, pushed to `origin/work/readme-refresh-20261008`.
+- Original base and current target parent: `f1f37a39bd86f7db5fd3ee3dea358ae6868275c6`.
+- The subsequent readiness checkpoint changes only handoff metadata; the integrator must bind its exact fetched SHA in target-owned evidence.
+- README SHA256: `4dffc4b1ee436edb5c782162308ac384ab68b6c45f4d7e2bd995351f9891c880`.
+- Passed: validate-mst (29 Skills), 31 relative links on Linux, exact Skill registry/list/directory equality, JSON state, original-base constraint hashes, formatting, change scope and git diff --check.
+- Independent review checked capability and evidence boundaries. Historical HYPIC means are not current Qwen3.5 P95 acceptance.
+- Documentation only. No NPU, model, container, service or dependency changes; no resource leases.
+- Target host: verified chicaihong01/mb. The maintainer approved one temporary ninth document worktree; all original eight remain intact.
 
-## Reviewed input
+## Next action
 
-The README draft describes the actual 29 registered Skills, distinguishes instructions and templates from future automation, and qualifies historical HYPIC mean results by their original configuration. It does not claim current Qwen3.5 P95 acceptance or universal lossless performance.
-
-Draft SHA256: `4dffc4b1ee436edb5c782162308ac384ab68b6c45f4d7e2bd995351f9891c880`.
-
-## Resume
-
-Remote start checkpoint: `21ac496b89baaa84e37073bc0c42d8d341ebcf69` (pushed and clean). Reviewed README applied. Preliminary audits passed: validate-mst (29 Skills), 31 relative links, exact registered names, JSON state, frozen hashes, formatting and git diff --check. The read-only audit script will be rerun on the staged content before commit. Then commit and push the work branch. A single integrator merges only its fetched remote ref, records exact source and target parent, validates the final tree, then pushes main. Reclaim only this clean merged temporary worktree and its local branch; retain the remote branch.
+One integrator must fetch again, verify target-parent stability and clean synchronized main, and merge only the fetched remote workstream with no-ff. Record exact source and target parent, reconcile global HANDOFF, and validate the complete final merge tree before commit/push. After confirming main remote equality and source reachability, check for worktree users/mounts, remove only this temporary clean tree and its merged local branch, and retain the remote branch for recovery.

@@ -14,8 +14,8 @@
     ".agents/skills.registry.yaml": "3ec2078193d38667b29fe8cb5989d45faae9c2295527661a25e9884f590b9c0c",
     ".agents/HANDOFF.md": "0122402a792c783b639c5f458d4318162bfcab798ceaa301805ba1373cd218d9"
   },
-  "execution_state": "in-progress",
-  "integration_state": "not-ready",
+  "execution_state": "completed",
+  "integration_state": "ready",
   "dependencies": [],
   "claims": {
     "file": {
@@ -85,6 +85,41 @@
     "Parse branch-local JSON state",
     "Verify exact integration parents, source ancestry and remote equality"
   ],
-  "resume_point": "Apply reviewed README and run documentation-only audits before the content checkpoint.",
-  "start_checkpoint": "21ac496b89baaa84e37073bc0c42d8d341ebcf69"
+  "resume_point": "Single integrator: merge fetched remote readiness checkpoint into synchronized main, update target-owned merged evidence, validate final tree, push and reclaim only this temporary worktree.",
+  "start_checkpoint": "21ac496b89baaa84e37073bc0c42d8d341ebcf69",
+  "validated_content_commit": "94cc6efef962729123ada82438a2a75ec77f0424",
+  "original_worktrees": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab",
+      "branch": "work/qwen36-damp-ascend-20261006"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-gdn-native-state-layout",
+      "branch": "paper-to-ascend/drrqr-qwen38-result-not-met"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/qwen35-experience-ingestion-20260909",
+      "branch": "work/qwen35-experience-ingestion-20260909"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/qwen35-performance-delivery",
+      "branch": "work/qwen35-performance-delivery"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/qwen35-sparse-prefix-reproduction",
+      "branch": "paper-to-ascend/sparse-prefix-caching-qwen38-result-mixed-not-promoted"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4",
+      "branch": "work/qwen38-nvfp4-ascend-910b4-20260910"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/sliminfer-qwen36-ascend-piercing",
+      "branch": "paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/worktrees/tail-replay-qwen36-ascend-piercing",
+      "branch": "work/tail-replay-qwen36-ascend-piercing-20260914"
+    }
+  ]
 }

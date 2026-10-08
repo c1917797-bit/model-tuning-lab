@@ -1,10 +1,10 @@
 {
   "schema": "mst-integration-evidence/v1",
   "task_id": "readme-refresh-20261008",
-  "integration_state": "not-ready",
+  "integration_state": "ready",
   "original_base": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
-  "target_parent": null,
-  "source_commit": null,
+  "target_parent": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "source_commit": "94cc6efef962729123ada82438a2a75ec77f0424",
   "validated_readme_sha256": "4dffc4b1ee436edb5c782162308ac384ab68b6c45f4d7e2bd995351f9891c880",
   "validation_results": [
     {
@@ -22,9 +22,27 @@
     {
       "gate": "git diff --check",
       "result": "PASS"
+    },
+    {
+      "gate": "change scope and Linux relative paths",
+      "result": "PASS"
+    },
+    {
+      "gate": "content checkpoint pushed and clean",
+      "result": "PASS",
+      "commit": "94cc6efef962729123ada82438a2a75ec77f0424"
+    },
+    {
+      "gate": "original target drift check",
+      "result": "PASS",
+      "target": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6"
     }
   ],
   "integration_owner": "codex",
   "serialization": "One integrator owns the temporary checkout of main; exact-parent checks and normal non-force push reject remote drift.",
-  "reclamation": "Pending clean merged/pushed state and no mount/process/lease/dependency use."
+  "reclamation": "Pending clean merged/pushed state and no mount/process/lease/dependency use.",
+  "validated_content_commit": "94cc6efef962729123ada82438a2a75ec77f0424",
+  "source_ref": "origin/work/readme-refresh-20261008",
+  "source_binding": "This readiness attestation names the validated content checkpoint. The integrator records the exact fetched readiness commit in target-owned evidence before final-tree validation.",
+  "claims_and_dependencies": "No task dependencies, no device leases, only README and own records; global HANDOFF is integration-only."
 }
