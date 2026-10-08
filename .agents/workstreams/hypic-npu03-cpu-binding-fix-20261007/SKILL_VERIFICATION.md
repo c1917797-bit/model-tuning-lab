@@ -1,5 +1,22 @@
 # HYPIC 穿刺中的 Maintainer Skill 验证账本
 
+2026-10-08 14:38 UTC: independently inspected the preserved cache10r2
+candidate event schema against
+`.agents/skills/ascend-model-quality-evaluation/references/quality-test-contract.md`.
+The clean-set audit receipt SHA256 is
+`99f2578adddd041f7a84fe441a1ac02b754b2c1a8217054e80e855b67e7f55bd`;
+the original event JSONL SHA256 is
+`7a577889eda32df5d2f5e33906bd8337d2b94126d31190a224a132dbb21cadf0`.
+All 168 scored request IDs join a pre-intrusion
+`explicit_segment_boundary_active` event, but the
+`worker_hot_path` and `complete_hybrid_repair` events lack request IDs.
+Thus the existing Skill contract correctly restricts this evidence to
+request-level admission plus aggregate worker activity, with a separately
+serialized sentinel. Per-scored-request worker coverage is not proven.
+This is a successful application of one existing evidence-boundary rule,
+not a full quality evaluation, a new Skill edit, or a V reclassification;
+`ascend-model-quality-evaluation` remains P and totals stay V11/P14/N4.
+
 2026-10-08 14:13 UTC: cache10r2 full candidate
 `exec-00000000000013ec` ended isolation-invalid at 56/127 samples after
 `cannbench_ds` entered physical NPU0. All 56 files predated the first
