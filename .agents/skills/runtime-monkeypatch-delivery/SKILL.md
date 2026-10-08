@@ -40,7 +40,8 @@ inapplicable; they are not silently exempt.
 3. Copy the template under [assets/template](assets/template) into the owning
    workstream and implement only the declared treatment.
 4. Use one explicit environment switch. Disabled mode must leave official
-   behavior intact; uninstall must require no image or framework repair.
+   behavior intact; run both arms through the same wrapper with only that
+   switch changed. Uninstall must require no image or framework repair.
 5. Emit bounded structured activation evidence from every relevant worker,
    rank, and engine process. Run the disabled control and prove the treatment
    marker disappears while requests still succeed.

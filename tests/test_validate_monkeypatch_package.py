@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -45,7 +46,7 @@ class PackageValidatorTests(unittest.TestCase):
             "source_sha256": "b" * 64,
         })
         (self.package / "patch.py").write_text(
-            "def activate():\n    return None\n", encoding="utf-8")
+            "def activate():\n    print('PATCH_CALLED')\n", encoding="utf-8")
         manifest["treatment"]["patch_sha256"] = hashlib.sha256(
             (self.package / "patch.py").read_bytes()).hexdigest()
         manifest["evidence"].update({
@@ -105,6 +106,28 @@ class PackageValidatorTests(unittest.TestCase):
         result = self.run_validator()
         self.assertEqual(result.returncode, 2)
         self.assertIn("disabled_control_required", result.stderr)
+
+    def test_same_wrapper_switches_treatment_without_changing_command(self) -> None:
+        self.valid_fixture()
+        command = ("bash", str(self.package / "run_with_patch.sh"),
+                   sys.executable, "-c", "print('request-ok')")
+        for switch in (None, "0", "1"):
+            env = os.environ.copy()
+            if switch is None:
+                env.pop("MODEL_TUNING_RUNTIME_PATCH_ENABLE", None)
+            else:
+                env["MODEL_TUNING_RUNTIME_PATCH_ENABLE"] = switch
+            result = subprocess.run(command, cwd=REPO, env=env,
+                                    capture_output=True, text=True, check=False)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("request-ok", result.stdout)
+            if switch == "1":
+                self.assertGreaterEqual(result.stdout.count("PATCH_CALLED"), 2)
+                self.assertGreaterEqual(result.stderr.count(
+                    "MODEL_TUNING_PATCH_ACTIVE"), 2)
+            else:
+                self.assertNotIn("PATCH_CALLED", result.stdout)
+                self.assertNotIn("MODEL_TUNING_PATCH_ACTIVE", result.stderr)
 
 
 if __name__ == "__main__":

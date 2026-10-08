@@ -47,7 +47,8 @@ For enabled and disabled arms record:
 
 Launcher-only output is insufficient. Every process that can execute the
 treatment must prove activation. Disabled control must complete a real request
-without treatment markers.
+without treatment markers. Use the same wrapper and command for both arms;
+unset or `0` is disabled and `1` is enabled in the provided template.
 
 ## Attribution
 

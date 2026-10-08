@@ -55,12 +55,17 @@ def main() -> int:
         "ls-tree", "-r", "--name-only", MAIN,
         "scripts/validate_monkeypatch_package.py")
     expect(missing_main_validator, "main now has validator; update case")
+    main_wrapper = git(
+        "show", f"{MAIN}:.agents/skills/runtime-monkeypatch-delivery/"
+                "assets/template/run_with_patch.sh")
+    expect("export MODEL_TUNING_RUNTIME_PATCH_ENABLE=1" in main_wrapper,
+           "main wrapper no longer forces treatment on; update case")
     expect((REPO / "scripts/validate_monkeypatch_package.py").is_file(),
            "branch validator absent")
     tests = command(
         sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests",
         "-p", "test_validate_monkeypatch_package.py")
-    expect(tests.returncode == 0 and "Ran 6 tests" in tests.stderr,
+    expect(tests.returncode == 0 and "Ran 7 tests" in tests.stderr,
            f"static validator regression failed: {tests.stderr}")
 
     expect(git("rev-parse", "HEAD", cwd=PLUGIN) == PLUGIN_COMMIT,
@@ -95,7 +100,8 @@ def main() -> int:
         "schema": "runtime-monkeypatch-delivery-real-task-case/v1",
         "main": MAIN,
         "main_validator_missing": True,
-        "branch_static_validator_tests": 6,
+        "main_wrapper_forces_treatment": True,
+        "branch_static_validator_tests": 7,
         "plugin_source": PLUGIN_COMMIT,
         "r12_four_worker_hot": 52,
         "r12_scored": 57,

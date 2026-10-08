@@ -9,8 +9,10 @@ registry blob `2611864bbcf719d57920aae03ff9eb85521526b4`.
 The main Skill instructs
 `scripts/validate_monkeypatch_package.py <package-dir>`, but
 `git cat-file -e origin/main:scripts/validate_monkeypatch_package.py`
-returned exit 128: no such path in that main tree. This is a reproducible
-workflow defect, not a failed HYPIC runtime result.
+returned exit 128: no such path in that main tree. The main template also
+forced its enable switch to `1` in the launcher, preventing a disabled arm
+through the same command. These are reproducible workflow defects, not
+failed HYPIC runtime results.
 
 The real task was the r12 HYPIC Qwen3.6-27B BF16 TP4 plugin source
 `c12060cd47e7575ead059983d7a8bb4704165c98` mounted read-only into
@@ -25,9 +27,9 @@ causal effect. See HOTPATH_CACHE10R12_TERMINAL_AUDIT.md.
 
 | Main delivery gate | Observation and boundary |
 | --- | --- |
-| Static package identity | Main lacks the named validator. This branch adds a standard-library static validator, binds patch/loader/launcher SHA256 in the template and passes six positive/negative tests. The r12 plugin was not packaged in that manifest shape; this repair is not retroactive package acceptance. |
+| Static package identity | Main lacks the named validator. This branch adds a standard-library static validator, binds patch/loader/launcher SHA256 in the template and passes seven positive/negative tests. The r12 plugin was not packaged in that manifest shape; this repair is not retroactive package acceptance. |
 | Official image and live source | Image digest, read-only source commit, worker PID map and physical cards were captured. No completed manifest binds the imported live object/source SHA and package bytes. |
-| Enabled and disabled control | Enabled r12 emitted request-local four-worker proof on 52/57 scored requests. No same-identity disabled control proves marker absence while requests succeed. |
+| Enabled and disabled control | Main's wrapper forced the switch on. The branch template now defaults off, and a CPU fixture proves the same command succeeds with switch unset, `0` and `1`, emitting treatment markers only for `1`. This does not substitute for a live NPU disabled control; enabled r12 had four-worker proof on 52/57 scored requests. |
 | Exact-shape, stress and semantic gates | One 19-sample c8 stress finished, but the strict activation gate failed. A one-token canary matched; full semantic/quality gates remain absent. |
 | Performance and paired quality | No same-identity 0.85 no-cache control, complete repeated TTFT/TPOT/throughput matrix or paired 2048-token LongBench-v2/GSM8K quality for this plugin source. |
 | Rollback and attribution | Exact owned service/container/port release passed. Disable, uninstall, restart and A/B/C local-increment attribution were not exercised. |
