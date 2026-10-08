@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 21:10 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 21:20 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Live remote workstream tip was 0d00bab at last read. Local 2f22127 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
@@ -68,7 +68,7 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-No HYPIC controller is active. r11 is terminal strict-activation failed;
+r12 HYPIC controller is active at exec-00000000000018b4. r11 is terminal strict-activation failed;
 its original root and 62b0d4a source remain immutable. The independent
 auditor verified all rows, scorer, hashes, physical PID mapping, isolation
 and release before reporting four missing scored hot proofs. c12060c fixes
@@ -81,22 +81,24 @@ plan, use NPU4–7, or modify foreign containers. C3 remains missing.
 
 ## 5. Next Actions
 
-1. Preserve local commits while GitHub auth is unavailable. After user
+1. Poll the same r12 operation to terminal; independently audit raw artifacts,
+   physical lane guard and exact owned cleanup. No duplicate launch.
+2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
-2. For any device action, freshly resolve chicaihong01/ma through AWMCP,
+3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Preserve r9/r10/r11 terminal roots and never relabel or pair the strict
+4. Preserve r9/r10/r11 terminal roots and never relabel or pair the strict
    r11 activation failure with a control.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. Use HOTPATH_CACHE10R11_TERMINAL_AUDIT.md and plugin c12060c to declare
+5. Use HOTPATH_CACHE10R11_TERMINAL_AUDIT.md and plugin c12060c to declare
    the next original-protocol full test. Freeze whether the claim is all-hot
    or deployed effect with hot/cold stratification. A new source requires
    its own NPU canary and a same-identity 0.85 no-cache control before any
    paired quality/performance claim; audit isolation and release separately.
-5. For each main Skill, retain exact main blob, real task, evidence hash,
+6. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 
 ## 6. Validation Commands

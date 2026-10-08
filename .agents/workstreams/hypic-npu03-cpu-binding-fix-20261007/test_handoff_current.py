@@ -39,7 +39,9 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(task["latest_attempt"]["campaign"], "cache10r11")
         self.assertEqual(task["latest_attempt"]["controller_operation"],
                          "exec-0000000000001830")
-        self.assertIsNone(task["active_attempt"])
+        self.assertEqual(task["active_attempt"]["campaign"], "cache10r12")
+        self.assertEqual(task["active_attempt"]["controller_operation"],
+                         "exec-00000000000018b4")
         self.assertIn("53/57", task["latest_attempt"]["request_hot_path_gate"])
         self.assertIn("c12060c", task["diagnostic_plugin"]["local_commit"])
         self.assertTrue((HERE / task["previous_attempt"]["evidence"]).is_file())

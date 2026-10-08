@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Independent, read-only terminal r11 stress gate; never a paired quality verdict."""
+"""Independent read-only terminal r11/r12 stress gate; never a paired verdict."""
 
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sys
 from collections import Counter
 from pathlib import Path
@@ -19,12 +20,18 @@ from verify_hotpath_request_coverage import (
     require,
 )
 
+CAMPAIGN = os.environ.get("HYPIC_STRESS_AUDIT_CAMPAIGN", "cache10r11")
+if CAMPAIGN not in {"cache10r11", "cache10r12"}:
+    raise RuntimeError("unsupported immutable stress campaign")
 ROOT = Path(
     "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/"
-    "quality-context-41984-hotpath-cache10r11-stress-hypic"
+    f"quality-context-41984-hotpath-{CAMPAIGN}-stress-hypic"
 )
 PLUGIN_ROOT = "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008"
-PLUGIN_COMMIT = "62b0d4a89234ffaa69855427e0c0dad0ba3e9e41"
+PLUGIN_COMMIT = {
+    "cache10r11": "62b0d4a89234ffaa69855427e0c0dad0ba3e9e41",
+    "cache10r12": "c12060cd47e7575ead059983d7a8bb4704165c98",
+}[CAMPAIGN]
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 MODEL_INDEX_SHA = "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b"
 EVALUATOR_SHA = "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0"
@@ -178,7 +185,7 @@ def main() -> int:
             manifest.update(path.name.encode() + b"\0"
                             + sha256(path).encode() + b"\n")
         identity = {
-            "schema": "hypic-r11-stress-audit/v1",
+            "schema": f"hypic-{CAMPAIGN.removeprefix('cache10')}-stress-audit/v1",
             "not_quality_verdict": True,
             "samples": len(rows),
             "scored_rows": len(scored_ids),
@@ -217,7 +224,7 @@ def main() -> int:
         return 0
     except (CoverageError, OSError, ValueError, KeyError, TypeError,
             RuntimeError) as exc:
-        print(json.dumps({"schema": "hypic-r11-stress-audit/v1",
+        print(json.dumps({"schema": f"hypic-{CAMPAIGN.removeprefix('cache10')}-stress-audit/v1",
                           "stress_pass": False, "not_quality_verdict": True,
                           "error": str(exc)}, sort_keys=True), file=sys.stderr)
         return 2

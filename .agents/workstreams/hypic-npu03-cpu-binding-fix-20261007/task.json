@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r11_terminal_strict_activation_failed_directory_fix_offline_unpaired",
+  "state": "r12_running_new_plugin_source_diagnostic_unpaired",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -33,7 +33,15 @@
     "request_hot_path_gate": "53/57 passed four-worker post-repair proof; gaps 77:2, 79:2, 79:3, 85:2; no paired quality/performance verdict",
     "coverage_report": "HOTPATH_CACHE10R11_TERMINAL_AUDIT.md"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "campaign": "cache10r12",
+    "arm": "hypic-only",
+    "mode": "stress",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r12-stress-hypic",
+    "controller_operation": "exec-00000000000018b4",
+    "plugin_local_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "status": "running; poll the same AWMCP exec operation, never restart from progress.json; only physical NPU0-3"
+  },
   "diagnostic_plugin": {
     "worktree": "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008",
     "local_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
@@ -46,5 +54,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Preserve r10 and r11 terminal negative strict-activation roots. Resolve the prospective full-pair analysis criterion with the user: all-hot claim or deployed-effect pair with request-level hot/cold stratification; do not post-hoc pass r11. The new plugin commit c12060c fixes one directory race offline but needs NPU0-3 canary and matching 0.85 control before any quality/performance claim. Start only when actual NPU0-3 and port are idle, never use NPU4-7 or modify foreign containers. Push only after user-provisioned GitHub auth works; all-Skill acceptance remains incomplete."
+  "next_action": "Poll active r12 controller exec-00000000000018b4 until terminal; never start a second copy. Independently audit exact raw artifacts, four-worker request coverage, foreign-process guard and owned cleanup. Resolve the prospective full-pair analysis criterion with the user; do not post-hoc pass r11/r12. Only use actual-idle physical NPU0-3, never NPU4-7 or foreign containers. Push only after user-provisioned GitHub auth works; all-Skill acceptance remains incomplete."
 }
