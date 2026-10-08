@@ -2,11 +2,11 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:14 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- The last independently verified live remote HEAD was deab436. The later
-  r6 identity commit a55cc1d is local-only as of this update: two bounded
-  Git pushes timed out, and a live remote read still showed deab436. Do
-  not claim r6 code was pushed. Do not repeat the commit or force-push.
+- Updated: 2026-10-08 16:19 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- The r6 code and watcher handoff are pushed through 1a3a518. Operation
+  exec-0000000000001514 verified clean local HEAD, upstream and live remote
+  equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
+  push succeeded without changing persistent Git settings.
 - Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3, cache10r4 and cache10r5 are
@@ -63,13 +63,12 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 cache10r5 is terminal and environment-invalid. The single r6 watcher
 exec-000000000000150a is live; do not start a duplicate. Continue other
 Skill acceptance while it waits for actual NPU0–3 idleness. Passive
-Docker mappings alone remain irrelevant. Push the pending local r6
-checkpoint when target-host Git HTTPS becomes responsive, then verify
-remote/upstream equality.
+Docker mappings alone remain irrelevant. Branch remote was verified at
+1a3a518 before this status update.
 
 ## 5. Next Actions
 
-1. Retry only the pending push when Git HTTPS responds, then verify live
+1. For later validated changes, push the named branch and verify live
    equality; never amend, reset, force-push, or expose credentials.
 2. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
@@ -109,8 +108,8 @@ These are offline/structural gates, not live HYPIC acceptance.
   0/127 samples an algorithm failure.
 - Do not extrapolate the bounded Git case to all 29 Skills or edit the
   integrated global .agents/HANDOFF.md from this work branch.
-- Do not claim the pending local commit was pushed; do not print secrets
-  or install an unreviewed credential helper to force it.
+- Do not claim later local commits are remote without a live read; do not
+  print secrets or install an unreviewed credential helper.
 - Keep credentials, weights, datasets and raw profiles out of Git.
 
 ## 8. Recovery / Resume Commands
