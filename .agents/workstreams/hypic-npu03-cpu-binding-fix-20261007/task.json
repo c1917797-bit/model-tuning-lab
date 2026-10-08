@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "active_r9_eviction_race_repaired_locally_r10_pending",
+  "state": "active_r10_full_hypic_running_request_proof_partial",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -23,20 +23,21 @@
     "service_released_utc": "2026-10-08T18:14:21Z",
     "evidence": "HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md"
   },
-  "pending_attempt": {
+  "active_attempt": {
     "campaign": "cache10r10",
     "arm": "hypic-only",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r10-full-hypic",
-    "state": "not_started; start only after actual-idle guard",
+    "state": "running; 4 complete samples and 12/12 four-worker proofs at 2026-10-08T18:46Z; no verdict",
+    "controller_operation": "exec-00000000000016af",
     "plugin_local_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "request_hot_path_gate": "new per-request worker event; NPU validation pending"
+    "request_hot_path_gate": "12 scored requests passed four-worker post-repair audit; full 381-request gate pending"
   },
   "git_push_state": {
-    "status": "check_live_remote_on_resume; prior checkpoint independently verified",
+    "status": "local_4073829_and_later_unpushed; HTTPS credentials absent; SSH timed out",
     "last_verified_remote_commit": "0d00bab0ad63c5bdad39f2f7887577d188194485",
     "push_operation": "exec-0000000000001555",
     "live_remote_read_operation": "exec-0000000000001556",
-    "recovery": "After later validated commits, push the named workstream branch without force and independently verify live remote/upstream equality. The successful recovery used per-command git -c http.version=HTTP/1.1, not a persistent config edit."
+    "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Preserve terminal r9 root unchanged. Validate the clean pinned plugin override and start exactly one r10 full HYPIC arm only when physical NPU0-3 and port 8223 are actually idle. Audit pending-eviction gate, all scored request IDs on four workers, 127x3 quality, guard and release; a matching 0.85 no-cache baseline follows only after candidate acceptance. Ignore passive mappings, stop on real foreign PIDs, and never touch foreign containers or NPU4-7. Full paired quality, performance, and all-Skill acceptance remain incomplete."
+  "next_action": "Poll only running r10 operation and progress; audit pending-eviction gate and all 381 scored request IDs on four namespace PIDs. Preserve raw roots and release only owned service on real foreign NPU0-3 intrusion. Matching 0.85 no-cache baseline and performance follow only after valid 127x3 candidate. Push local commits only when user-provisioned GitHub auth works. Full paired quality, performance and all-Skill acceptance remain incomplete."
 }

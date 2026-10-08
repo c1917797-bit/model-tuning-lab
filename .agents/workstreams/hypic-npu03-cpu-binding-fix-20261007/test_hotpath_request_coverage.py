@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
-from verify_hotpath_request_coverage import CoverageError, audit_coverage
+from verify_hotpath_request_coverage import (
+    CoverageError, audit_coverage, load_worker_namespace_pids,
+)
 
 
 API_ID = "chatcmpl-one"
@@ -32,6 +38,48 @@ def verified(pid: int, **changes: object) -> dict:
 
 
 class RequestCoverageTests(unittest.TestCase):
+    def test_host_pid_is_joined_to_container_pid_before_event_audit(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            directory = root / "hypic-only"
+            directory.mkdir()
+            host = {str(i): 100 + i for i in range(4)}
+            inside = {str(i): 200 + i for i in range(4)}
+            mapping = {
+                "schema": "hypic-worker-pid-namespace-map/v1",
+                "container_id": "owned-container",
+                "physical_npu_to_host_pid": host,
+                "physical_npu_to_namespace_pid": inside,
+                "nspid_lines": {
+                    str(i): f"NSpid:\t{100+i}\t{200+i}"
+                    for i in range(4)
+                },
+            }
+            path = directory / "worker-namespace-map.json"
+            path.write_text(json.dumps(mapping), encoding="utf-8")
+            start = {
+                "container_id": "owned-container",
+                "worker_pid_by_physical_npu": host,
+                "worker_namespace_map_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+            pids = load_worker_namespace_pids(root, start)
+            self.assertEqual(pids, {200, 201, 202, 203})
+            report = audit_coverage(
+                [API_ID], [boundary(), *(verified(pid) for pid in pids)], pids
+            )
+            self.assertEqual(report["four_worker_post_repair_verified_requests"], 1)
+            with self.assertRaisesRegex(CoverageError, "four-worker"):
+                audit_coverage(
+                    [API_ID], [boundary(), *(verified(pid) for pid in host.values())], pids
+                )
+            mapping["nspid_lines"]["0"] = "NSpid:\t999\t200"
+            path.write_text(json.dumps(mapping), encoding="utf-8")
+            with self.assertRaisesRegex(CoverageError, "namespace line"):
+                load_worker_namespace_pids(root, {
+                    **start,
+                    "worker_namespace_map_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                })
+
     def test_four_worker_post_repair_evidence_passes(self) -> None:
         report = audit_coverage(
             [API_ID], [boundary(), *(verified(pid) for pid in WORKERS)], WORKERS

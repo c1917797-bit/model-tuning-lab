@@ -37,7 +37,9 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(task["latest_attempt"]["campaign"], "cache10r9")
         self.assertEqual(task["latest_attempt"]["result"],
                          "worker_local_gdn_material_missing_after_pending_eviction_race")
-        self.assertEqual(task["pending_attempt"]["campaign"], "cache10r10")
+        self.assertEqual(task["active_attempt"]["campaign"], "cache10r10")
+        self.assertEqual(task["active_attempt"]["controller_operation"],
+                         "exec-00000000000016af")
         self.assertTrue((HERE / task["latest_attempt"]["evidence"]).is_file())
         self.assertEqual(task["resource_claim"]["forbidden_npus"],
                          [4, 5, 6, 7])

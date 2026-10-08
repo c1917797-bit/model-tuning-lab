@@ -410,8 +410,36 @@ def worker_proof(name: str, arm: str) -> dict:
     if (set(workers) != {"0", "1", "2", "3"} or len(set(workers.values())) != 4
             or not set(workers.values()).issubset(docker_pids)):
         raise RuntimeError("quality workers not proven on physical NPU0-3 in exact container")
+    namespace_workers = {}
+    nspid_lines = {}
+    for card, host_pid in workers.items():
+        status_lines = (PROC_ROOT / str(host_pid) / "status").read_text().splitlines()
+        matches = [line for line in status_lines if line.startswith("NSpid:")]
+        if len(matches) != 1:
+            raise RuntimeError("quality worker PID namespace identity absent")
+        parts = matches[0].split()
+        if len(parts) < 3 or int(parts[1]) != host_pid:
+            raise RuntimeError("quality worker host/container PID mapping drifted")
+        namespace_workers[card] = int(parts[-1])
+        nspid_lines[card] = matches[0]
+    if len(set(namespace_workers.values())) != 4:
+        raise RuntimeError("quality worker container PID identity is not unique")
+    item = inspect(name)
+    if item is None:
+        raise RuntimeError("quality container vanished during PID namespace proof")
+    namespace_path = directory / "worker-namespace-map.json"
+    write_json(namespace_path, {
+        "schema": "hypic-worker-pid-namespace-map/v1",
+        "container_id": item["Id"],
+        "source": "service-start.json worker_pid_by_physical_npu plus live host /proc/<pid>/status NSpid",
+        "physical_npu_to_host_pid": workers,
+        "physical_npu_to_namespace_pid": namespace_workers,
+        "nspid_lines": nspid_lines,
+    })
     return {"worker_pid_by_physical_npu": workers, "npu_smi_sha256": sha256(npu_path),
-            "docker_top_sha256": sha256(top_path)}
+            "docker_top_sha256": sha256(top_path),
+            "worker_namespace_pid_by_physical_npu": namespace_workers,
+            "worker_namespace_map_sha256": sha256(namespace_path)}
 
 
 def start(arm: str, container_id: str, fingerprint: dict,

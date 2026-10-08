@@ -20,8 +20,9 @@
     "strict_request_level_gate": "UNVERIFIED 162/162",
     "main_reference_explicit_per_request_worker_join": false,
     "branch_reference_explicit_per_request_worker_join": true,
-    "offline_counterexample_tests": 6,
-    "all_workstream_tests_passed": 43,
+    "offline_counterexample_tests": 7,
+    "all_workstream_tests_passed": 46,
+    "post_snapshot_pid_namespace_join_repaired": true,
     "terminal_quality_pair_complete": false,
     "main_skill_integrated": false
   },
@@ -36,15 +37,15 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hotpath_request_coverage.py",
-      "sha256": "01d27e047b4ac7f8ab944db7da0dd67bc0eca0d5f38655a388c4d9f51f2429f6"
+      "sha256": "2e6493234c4e5dc3912df16d9e4f6153069396ff5e59ba5808dd91330aa3afaa"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hotpath_request_coverage.py",
-      "sha256": "5053f93da66651db00ca2fdd9a58f0f0bdef2cc09a850d392bf4a9ec779755db"
+      "sha256": "c8c99c5df634c0ef20992e745ee4273ec212fa923f6986ea9085b755e851c3a8"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "The real live candidate exposed a request-level activation evidence gap; the branch verifier correctly rejects batch-only evidence. Current main says treatment activation must be proven but does not specify this per-scored-request join, while the branch repair is unintegrated. This is a bounded defect/repair case, not full main Skill acceptance, not a terminal HYPIC quality result, and not proof that main guidance always yields an incorrect decision.",
-  "next_gate": "After r9 terminates, hash and audit all 127x3 rows, isolation and exact release; instrument request-ID worker proof in a fresh candidate after live service release, pair with a same-identity control on actually idle physical NPU0-3, and replay the integrated main Skill before upgrading acceptance.",
+  "next_gate": "r9 terminated after a worker material-cache miss and remains an invalid partial arm. For the fresh r10 candidate, join each scored API ID to an internal request ID and four namespace-mapped worker PIDs, then audit all 127x3 rows, isolation and release. Only after valid candidate acceptance pair with a same-identity control on actually idle physical NPU0-3 and replay the integrated main Skill before upgrading acceptance.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }

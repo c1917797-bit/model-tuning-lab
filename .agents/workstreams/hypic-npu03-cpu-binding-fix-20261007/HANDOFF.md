@@ -2,11 +2,10 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 18:25 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- The r6 code and watcher handoff are pushed through 1a3a518. Operation
-  exec-0000000000001514 verified clean local HEAD, upstream and live remote
-  equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
-  push succeeded without changing persistent Git settings.
+- Updated: 2026-10-08 18:47 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Live remote workstream tip was 0d00bab at last read. Local 4073829 and
+  later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
+  timed out. Await user-provisioned auth; do not expose credentials.
 - Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3 through cache10r8 are
@@ -16,6 +15,9 @@
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
+- r10 full HYPIC is running as operation exec-00000000000016af at the root
+  in task.json. At 18:46 UTC, four samples (12 scored requests) each had
+  all four worker request-proof events. This is provisional, not a verdict.
 - Quality and benchmark Skill cases eight/nine remain partial; see their
   request-coverage and baseline-reuse acceptance reports.
 
@@ -64,35 +66,32 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-r9 operation `exec-000000000000158e` ended at 18:14:21 UTC after 93/127
-complete samples; exact owned service released. Its EngineCore failure is
-consistent with the observed pending-materialization eviction race, not a
-quality score. Preserve its raw root unchanged. Separate plugin worktree
-`/cache/cch/hypic_vllm_ascend-hotproof-20261008` has local pinned commit
-`4429e35177979c874bf053ab29789e4773f39b22` for a scheduler gate and
-per-request worker evidence. Six focused CPU tests pass; full suite is
-environment-limited, and no repaired NPU verdict exists. The quality launch
-controller now permits a clean pinned plugin override for fresh cache10r10.
-Only start on actually idle physical0–3; passive mappings do not veto and
-foreign tasks stay untouched. Old 0.9 baseline is not pairable with 0.85.
+r10 operation `exec-00000000000016af` is the sole active controller.
+Do not restart or mix another root. Its pinned clean plugin commit
+`4429e35177979c874bf053ab29789e4773f39b22` has the pending-eviction
+gate and per-request worker events. The strict verifier now joins host PIDs
+to container PID namespace using a validated sidecar. r10 has this map
+under `hypic-only/worker-namespace-map.json`; future launches write it
+automatically. At 18:46 UTC, 12/12 completed scored requests passed the
+four-worker audit. 46 offline tests and nine provenance checks pass, but
+full device acceptance remains pending. Preserve r9 raw root; its 93/127
+GDN miss is not a quality verdict. Old 0.9 baseline is not pairable with 0.85.
 
 ## 5. Next Actions
 
-1. For later validated changes, push the named branch and verify live
-   equality; never amend, reset, force-push, or expose credentials.
+1. Preserve local commits while GitHub auth is unavailable. After user
+   provisioning, push named branch and verify live equality; no force.
 2. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-3. Inspect cache10r8 terminal op exec-000000000000157a and its immutable
-   root under `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/` if needed.
-   Audit cache10r5/r6/r7 separately against their result reports.
+3. Poll only r10 operation exec-00000000000016af and its progress file.
+   Preserve prior roots and audit r9 against its failure report.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-4. Start only one fresh cache10r10 candidate from the pinned plugin override
-   after the lane guard passes. Audit the pending-eviction gate, request-level
-   four-worker coverage, 127×3 quality, and isolation. Pair with a new 0.85
-   no-cache arm only if valid; then run matched performance.
+4. Continue r10; audit eviction gate, all request-level four-worker
+   coverage, 127×3 quality, and isolation. Pair with new 0.85 no-cache
+   arm only if valid; then run matched performance.
 5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 

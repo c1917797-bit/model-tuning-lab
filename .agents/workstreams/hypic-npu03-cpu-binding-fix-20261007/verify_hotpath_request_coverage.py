@@ -8,6 +8,7 @@ service fingerprint, continuous isolation, raw-hash or exact-release audits.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections import defaultdict
@@ -88,6 +89,47 @@ def audit_coverage(
     }
 
 
+def load_worker_namespace_pids(root: Path, start: dict) -> set[int]:
+    """Join host NPU PIDs to the PIDs written inside the service container."""
+
+    path = root / "hypic-only" / "worker-namespace-map.json"
+    require(path.is_file(), "worker PID namespace map absent")
+    raw = path.read_bytes()
+    mapping = json.loads(raw)
+    require(
+        mapping.get("schema") == "hypic-worker-pid-namespace-map/v1"
+        and mapping.get("container_id") == start.get("container_id"),
+        "worker PID namespace map identity drift",
+    )
+    host = start.get("worker_pid_by_physical_npu")
+    inside = mapping.get("physical_npu_to_namespace_pid")
+    lines = mapping.get("nspid_lines")
+    require(
+        isinstance(host, dict) and set(host) == {"0", "1", "2", "3"}
+        and mapping.get("physical_npu_to_host_pid") == host
+        and isinstance(inside, dict) and set(inside) == set(host)
+        and isinstance(lines, dict) and set(lines) == set(host),
+        "worker PID namespace map does not match physical worker receipt",
+    )
+    for card, host_pid in host.items():
+        parts = str(lines[card]).split()
+        require(
+            len(parts) >= 3 and parts[0] == "NSpid:"
+            and int(parts[1]) == int(host_pid)
+            and type(inside[card]) is int and inside[card] > 0
+            and int(parts[-1]) == inside[card],
+            "worker PID namespace line does not prove the host/container join",
+        )
+    expected_hash = start.get("worker_namespace_map_sha256")
+    if expected_hash is not None:
+        require(
+            hashlib.sha256(raw).hexdigest() == expected_hash,
+            "worker PID namespace map hash drift",
+        )
+    require(len(set(inside.values())) == 4, "container worker PIDs are not unique")
+    return set(inside.values())
+
+
 def load_terminal_arm(root: Path) -> tuple[list[str], list[dict], set[int]]:
     require(root.is_dir(), "attempt root absent")
     contract = json.loads((root / "contract.json").read_text(encoding="utf-8"))
@@ -135,8 +177,9 @@ def load_terminal_arm(root: Path) -> tuple[list[str], list[dict], set[int]]:
         isinstance(workers, dict) and set(workers) == {"0", "1", "2", "3"},
         "service does not identify physical NPU0-3 workers",
     )
-    expected_worker_pids = {int(value) for value in workers.values()}
-    require(len(expected_worker_pids) == 4, "TP worker PID identity drift")
+    require(len({int(value) for value in workers.values()}) == 4,
+            "TP host worker PID identity drift")
+    expected_worker_pids = load_worker_namespace_pids(root, start)
     evidence = root / "hypic-only" / "hypic-evidence.jsonl"
     require(evidence.is_file(), "HYPIC evidence file absent")
     events = [
