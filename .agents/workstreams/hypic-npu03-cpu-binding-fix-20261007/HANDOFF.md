@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:58 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 17:14 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
@@ -69,14 +69,15 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-cache10r8 is terminal and environment-invalid; no quality controller is live.
-It began after actual NPU0–3 idleness, but a real foreign process entered NPU3
-during startup. Per user choice, continue with a fresh unique full arm only
-when physical NPU0–3 and port 8223 are actually idle; keep the continuous
-guard and do not modify foreign workloads. Do not require an exclusive window
-or block on passive mappings. The branch remote was independently verified at
-51d403fea571e153453b35eb7e7a266a1ebe0b08 before this handoff update;
-recheck latest HEAD and remote on resume.
+cache10r9 full HYPIC controller `exec-000000000000158e` is **live** on physical
+NPU0–3 in the unique root `quality-context-41984-hotpath-cache10r9-full-hypic`.
+Service became healthy at 17:06:55 UTC; the first scored sentinel passed its
+four-worker hot-path gate at 17:09:43. It is processing the remaining 126
+samples. Poll this exact operation and root; never launch a duplicate while it
+runs. cache10r8 is terminal and isolation-invalid. The r9 preparation branch
+commit `54c092b210a8c3791496a124b8439deba26a6369` was live-remote verified.
+On collision, preserve evidence and only retry a fresh root when actual 0–3
+and port 8223 are idle; passive mappings do not veto and foreign jobs stay.
 
 ## 5. Next Actions
 
