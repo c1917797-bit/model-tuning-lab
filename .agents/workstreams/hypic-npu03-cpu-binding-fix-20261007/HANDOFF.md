@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 21:20 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 21:47 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - Live remote workstream tip was 0d00bab at last read. Local 2f22127 and
   later work are NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
@@ -27,8 +27,11 @@
 - Plugin source c12060c repairs a scheduler-directory rebuild defect seen
   in the 79:2-to-79:3 eviction chain. Red/green focused regression, 13
   focused tests, compile and single-instance source/topology audits passed.
-  It is not NPU-validated; r11 mounted earlier 62b0d4a. Broad
+  r12 ran this source on NPU0–3 but strict hot coverage failed. Broad
   test_pure.py collection is blocked by host Python 3.9 lacking pairwise.
+- r12 stress: 19/19 samples, 57/57 responses, 52/57 four-worker proof;
+  279 clean guard probes and exact release. r11's 79:2/79:3 gaps are hot
+  here, but five others missed; HOTPATH_CACHE10R12_TERMINAL_AUDIT.md has no paired verdict.
 - Quality, benchmark, tuning and optimization Skill cases remain partial;
   see their bounded raw-replay reports and acceptance boundaries.
 - The inference-tuning-loop case replays six raw performance runs and three
@@ -68,32 +71,30 @@ Optional cache10split is an unapproved revised protocol: do not run it.
 
 ## 4. Current Action
 
-r12 HYPIC controller is active at exec-00000000000018b4. r11 is terminal strict-activation failed;
-its original root and 62b0d4a source remain immutable. The independent
-auditor verified all rows, scorer, hashes, physical PID mapping, isolation
-and release before reporting four missing scored hot proofs. c12060c fixes
-one proven scheduler-directory defect offline, but does not guarantee that
-bounded cache retains every scored request. A prospective full-pair analysis
-choice has been requested from the user: preserve c8/2048/127 and report
-deployed effect with per-request hot/cold stratification, or retain the
-all-hot decision gate. Never post-hoc pass r11, start without a declared
-plan, use NPU4–7, or modify foreign containers. C3 remains missing.
+No HYPIC controller is active. r11 and r12 are both immutable strict
+activation negatives, not paired quality/performance verdicts. r12's
+corrected plugin source executed on physical NPU0–3, but five scored
+requests still fell back cold; source-fix causality is not isolated.
+The user has been asked to choose the prospective full-pair rule:
+deployed effect with request-level hot/cold stratification or 100% hot.
+Do not post-hoc pass either root, use NPU4–7, or modify foreign
+containers. C3 remains missing.
 
 ## 5. Next Actions
 
-1. Poll the same r12 operation to terminal; independently audit raw artifacts,
-   physical lane guard and exact owned cleanup. No duplicate launch.
+1. Preserve r12 negative evidence; do not rerun unchanged bytes. Freeze the
+   next full-pair decision rule before a new same-identity 0.85 control.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
 3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-4. Preserve r9/r10/r11 terminal roots and never relabel or pair the strict
-   r11 activation failure with a control.
+4. Preserve r9/r10/r11/r12 terminal roots; never relabel their strict
+   activation failures or pair them with a control.
    Do not reuse cache10r2/cache10r3/cache10r4/cache10r5/cache10r6/cache10r7/cache10r8 or silently switch
    to cache10split.
-5. Use HOTPATH_CACHE10R11_TERMINAL_AUDIT.md and plugin c12060c to declare
+5. Use r11/r12 terminal audits and plugin c12060c to declare
    the next original-protocol full test. Freeze whether the claim is all-hot
    or deployed effect with hot/cold stratification. A new source requires
    its own NPU canary and a same-identity 0.85 no-cache control before any
