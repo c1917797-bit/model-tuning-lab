@@ -26,10 +26,20 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 4)
-        self.assertEqual(report["skills_without_case"], 25)
+        self.assertEqual(report["cases_with_verified_provenance"], 5)
+        self.assertEqual(report["skills_without_case"], 24)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 2, "verified": 2})
+                         {"partial-evidence": 3, "verified": 2})
+
+    def test_environment_orientation_case_is_partial_not_quality_success(self) -> None:
+        path = cases.CASES / "ascend-npu-environment-orientation.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-npu-environment-orientation"})
+        self.assertEqual(skill, "ascend-npu-environment-orientation")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["scored_rows"], 0)
+        self.assertFalse(item["observed"]["current_cache10r5_canary_completed"])
 
     def test_handoff_case_is_bounded_verified(self) -> None:
         path = cases.CASES / "mst-maintainer-handoff.json"

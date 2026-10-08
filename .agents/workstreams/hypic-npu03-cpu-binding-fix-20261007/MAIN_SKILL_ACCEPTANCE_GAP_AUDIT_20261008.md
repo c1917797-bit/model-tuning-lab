@@ -42,6 +42,17 @@ long-term verified representative case. Current inventory: **4 cases:
 2 verified, 2 partial, 25 missing**. No global handoff or HYPIC acceptance
 is inferred.
 
+At 16:08 UTC, the real cache10r5 host-orientation task supplied a fifth
+case tied to the exact current-main `ascend-npu-environment-orientation`
+blob. The frozen contract pins source/image/model/dataset/device fields,
+the older paired canary proves a related device-side path, and the new
+startup guard proves actual foreign process/cgroup isolation. Missing
+complete software/topology fields, a same-identity cache10r5 canary and
+baseline-drift decision keep its long-term state **partial-evidence**.
+The verifier now reports **5 provenance-checked cases: 2 bounded verified,
+3 partial, 24 missing**. The historical V campaign row is not upgraded
+to a portable full-Skill pass by this case.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

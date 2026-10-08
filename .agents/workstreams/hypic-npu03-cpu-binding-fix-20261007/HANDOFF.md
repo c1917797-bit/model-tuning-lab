@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 16:02 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 16:08 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The branch is pushed and verified through 1fec73f; `exec-00000000000014cf`
   confirmed live remote, upstream and clean local HEAD equality after the
   target-host Git HTTPS authentication recovered. Integrated main has not
@@ -11,7 +11,7 @@
   acceptance remain incomplete. cache10r3, cache10r4 and cache10r5 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 2 partial, 25 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 3 partial, 24 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 
 ## 1. North Star
@@ -59,6 +59,9 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   `cannbench_ds` on physical NPU2 and releases only the exact owned
   container within about 135 seconds, at 0/127 scored samples. See
   HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md and immutable hashes.
+- A fifth provenance-checked Skill case now records the bounded
+  `ascend-npu-environment-orientation` behavior as partial, not verified;
+  see NPU_ENVIRONMENT_ORIENTATION_ACCEPTANCE_20261008.md and the gap audit.
 
 ## 4. Current Action
 

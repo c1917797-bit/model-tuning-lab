@@ -1,0 +1,49 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-npu-environment-orientation",
+  "campaign_code": "V",
+  "long_term_acceptance": "partial-evidence",
+  "task": "Bind the HYPIC quality attempt to immutable model/source/image and physical NPU0-3 identity, then distinguish passive Docker mapping from competing actual NPU execution",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "f0c22149753c29765110eb1f0532c216220ef79c",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma, Qwen3.6-27B BF16, pinned image/source/model-index/dataset fingerprints, TP4 physical NPU0-3; cache10r5 invalid before model health",
+  "observed": {
+    "contract_sha256": "89490d2b45967cffe3296242e16292f61004a58005f50e6fab13e7893545fa48",
+    "image_digest_pinned": true,
+    "source_commit_pinned": true,
+    "model_index_and_dataset_hashes_pinned": true,
+    "historical_paired_canary_proved_four_physical_workers": true,
+    "current_cache10r5_canary_completed": false,
+    "actual_foreign_npu2_pid": 1206204,
+    "foreign_container": "cannbench_ds",
+    "passive_mapping_alone_not_blocking": true,
+    "exact_owned_prehealth_service_released": true,
+    "scored_rows": 0
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/NPU_ENVIRONMENT_ORIENTATION_ACCEPTANCE_20261008.md",
+      "sha256": "10d5d8c4f18b7aea6b93506cda10d4512f993d722365b46c1a73b67d6233e45c"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CANARY_RESULT.md",
+      "sha256": "08b1e48457c59016c844e9009c3a1e140c89818adffbbd0a10e942efbf24fed2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R5_STARTUP_GUARD_RESULT.md",
+      "sha256": "26a3881feb785c723b34a59407743d678f6fe65fa7c53fdb77c42524b71faec6"
+    }
+  ],
+  "external_raw_receipts": {
+    "contract_sha256": "89490d2b45967cffe3296242e16292f61004a58005f50e6fab13e7893545fa48",
+    "lane_guard_sha256": "e38d1e80b0e20ab85fe8d856030392896401122fcfa187dda0f31282f1b89d35",
+    "service_stop_sha256": "3497295f411bfdda92c7450fed0c1bbb9a80e6bdb52a47158effd9fcf3c91372"
+  },
+  "replayable_regression_recorded": false,
+  "boundary": "The HYPIC campaign row is V for its bounded pinned-worker evidence, but long-term full current-main Skill acceptance is partial: no unified experiment YAML with all software/topology fields and explicit unavailability markers, no same-identity cache10r5 inference canary or baseline-drift decision, and no complete orientation-stage behavioral replay. The cache10r5 candidate was environment-invalid before health, not a quality result.",
+  "next_gate": "On a fresh, actually clean physical NPU0-3 window, complete the Skill's full environment record and same-identity canary, compare material drift, commit/push a clean orientation checkpoint, and retain a focused replayable check. Do not rerun the invalid cache10r5 root."
+}
