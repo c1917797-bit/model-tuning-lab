@@ -78,9 +78,8 @@ requests still fell back cold; source-fix causality is not isolated.
 The r13 plan prospectively reports all-request deployed effect and separately
 gates a strict 381/381 hot-path conclusion; neither can substitute for the other.
 Do not post-hoc pass either root, use NPU4–7, or modify foreign
-containers. The r13 performance follow-on is prepared and offline-tested,
-but cannot run until both quality arms have an independent terminal audit.
-C3 remains missing.
+containers. r13 performance awaits both quality audits; its offline-tested
+ID adapter gates 120/120 hot requests. No performance phase ran; C3 is open.
 
 ## 5. Next Actions
 
@@ -96,8 +95,8 @@ C3 remains missing.
    pair them with a control, reuse r2–r8 roots, or switch to cache10split.
 5. After clean r13 baseline release, launch r13 candidate only on idle
    NPU0–3, then dual audit. If complete, follow
-   HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; its six phases measure
-   deployed effect, not strict per-request proof. Audit source/isolation/release.
+   HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; its six phases separately
+   audit deployed effect and strict per-request proof, plus isolation/release.
 6. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 

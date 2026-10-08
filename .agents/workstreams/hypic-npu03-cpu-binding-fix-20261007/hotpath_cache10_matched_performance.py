@@ -38,6 +38,8 @@ EXPECTED_CONFIG = {
 QUALITY_AUDIT = "hotpath-quality-cache10r13-dual-audit.json"
 SOURCE_ROOT = "/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008"
 SOURCE_COMMIT = "c12060cd47e7575ead059983d7a8bb4704165c98"
+REQUEST_ID_BENCHMARK = Path(__file__).with_name("hotpath_request_id_benchmark.py")
+REQUEST_ID_BENCHMARK_SHA = "0d88b054a91e4985f131187d84899d76d57a1da1d97f842c2f51052534abc6ac"
 
 
 def require(value: bool, message: str) -> None:
@@ -113,7 +115,8 @@ def earlier_phases(quality: object, arm: str, phase: str) -> None:
                 f"earlier performance phase {previous_arm}/{previous_phase} invalid")
 
 
-def validate_report(path: Path, arm: str) -> dict:
+def validate_report(path: Path, arm: str, *,
+                    require_request_ids: bool = True) -> dict:
     report = json_at(path)
     require(report.get("config") == EXPECTED_CONFIG, "benchmark config drift")
     rows = report.get("results", [])
@@ -133,6 +136,13 @@ def validate_report(path: Path, arm: str) -> dict:
             and summary.get("fixed_output_verified") is True
             and len(report.get("warmup_results", [])) == 2,
             "benchmark summary/warmup invalid")
+    if require_request_ids:
+        ids = [row.get("request_id") for row in rows]
+        warm_ids = [row.get("request_id") for row in report["warmup_results"]]
+        require(all(isinstance(value, str) and value.startswith("cmpl-")
+                    for value in ids + warm_ids)
+                and len(set(ids + warm_ids)) == 42,
+                "measured/warmup request IDs missing or duplicated")
     if arm == "hypic-only":
         require(summary.get("hot_path_verified") is True
                 and not summary.get("hot_path_missing")
@@ -151,7 +161,7 @@ def run_benchmark(quality: object, service: object, arm: str,
     root = quality.QROOT
     output = root / "performance.json"
     command = [
-        "python3", str(service.BENCHMARK),
+        "python3", str(REQUEST_ID_BENCHMARK),
         "--base-url", quality.BASE_URL, "--model", quality.MODEL_NAME,
         "--input-tokens", "32768", "--prefix-tokens", "16384",
         "--output-tokens", "1024", "--requests", "40", "--concurrency", "16",
@@ -163,6 +173,7 @@ def run_benchmark(quality: object, service: object, arm: str,
         command.append("--require-hot-path")
     quality.write_json(root / "benchmark-command.json", {
         "argv": command, "benchmark_sha256": service.BENCHMARK_SHA,
+        "request_id_adapter_sha256": quality.sha256(REQUEST_ID_BENCHMARK),
         "at_utc": datetime.now(timezone.utc).isoformat()})
     with (root / "benchmark.stdout.log").open("w", encoding="utf-8") as log:
         process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT)
@@ -227,11 +238,12 @@ def run_phase(quality: object, service: object, arm: str, phase: str) -> int:
         signal.signal(signal.SIGINT, quality.interrupt)
         _, binds, env, command = quality.spec(arm)
         contract = {
-            "schema": "hypic-cache10-matched-performance-contract/v1",
+            "schema": "hypic-cache10r13-matched-performance-contract/v1",
             "arm": arm, "phase": phase, "order_index": ORDER.index((arm, phase)),
             "fingerprint": fingerprint, "pair_seam": seam,
             "quality_audit_sha256": quality_audit_sha256,
             "benchmark_sha256": service.BENCHMARK_SHA,
+            "request_id_adapter_sha256": quality.sha256(REQUEST_ID_BENCHMARK),
             "benchmark_config": EXPECTED_CONFIG,
             "serving_binds": binds, "serving_env": env,
             "serving_command": command,
@@ -274,13 +286,16 @@ def run_phase(quality: object, service: object, arm: str, phase: str) -> int:
                 except Exception as exc:
                     problems.append(f"cleanup: {type(exc).__name__}: {exc}")
             result = {
-                "schema": "hypic-cache10-matched-performance-arm/v1",
+                "schema": "hypic-cache10r13-matched-performance-arm/v1",
                 "arm": arm, "phase": phase, "valid": not problems,
                 "error": "; ".join(problems) if problems else None,
                 "metrics": metrics,
                 "container_id": container_id or None,
                 "performance_sha256": quality.sha256(quality.QROOT / "performance.json")
                     if (quality.QROOT / "performance.json").is_file() else None,
+                "hypic_evidence_sha256": quality.sha256(
+                    quality.QROOT / arm / "hypic-evidence.jsonl")
+                    if (quality.QROOT / arm / "hypic-evidence.jsonl").is_file() else None,
                 "contract_sha256": quality.sha256(quality.QROOT / "contract.json"),
                 "at_utc": datetime.now(timezone.utc).isoformat(),
             }
@@ -307,6 +322,8 @@ def main() -> int:
     require(quality.ATTEMPT == attempt, "quality helper attempt drift")
     require(service.sha256(service.BENCHMARK) == service.BENCHMARK_SHA,
             "frozen benchmark source drift")
+    require(quality.sha256(REQUEST_ID_BENCHMARK) == REQUEST_ID_BENCHMARK_SHA,
+            "frozen request-ID benchmark adapter drift")
     if not args.run:
         fingerprint = quality.preflight()
         print(json.dumps({"arm": args.arm, "phase": args.phase,

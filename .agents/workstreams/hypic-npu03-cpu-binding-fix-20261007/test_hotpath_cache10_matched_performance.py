@@ -124,7 +124,8 @@ class Cache10PerformanceTests(unittest.TestCase):
         for arm in ("no-cache", "hypic-only"):
             with self.subTest(arm=arm):
                 values = performance.validate_report(
-                    archived / arm / "screen/performance.json", arm)
+                    archived / arm / "screen/performance.json", arm,
+                    require_request_ids=False)
                 self.assertGreater(values["tpot_weighted_ms"], 0)
 
     def test_corrupt_fixed_output_row_is_rejected(self) -> None:
@@ -136,6 +137,21 @@ class Cache10PerformanceTests(unittest.TestCase):
             path = Path(directory) / "performance.json"
             path.write_text(json.dumps(data))
             with self.assertRaisesRegex(RuntimeError, "fixed-output rows invalid"):
+                performance.validate_report(path, "no-cache")
+
+    def test_request_id_ruler_rejects_duplicate_measured_id(self) -> None:
+        source = (Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") /
+                  "no-cache/screen/performance.json")
+        data = json.loads(source.read_text())
+        for index, row in enumerate(data["warmup_results"] + data["results"]):
+            row["request_id"] = f"cmpl-{index:03d}"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "performance.json"
+            path.write_text(json.dumps(data))
+            performance.validate_report(path, "no-cache")
+            data["results"][1]["request_id"] = data["results"][0]["request_id"]
+            path.write_text(json.dumps(data))
+            with self.assertRaisesRegex(RuntimeError, "request IDs missing or duplicated"):
                 performance.validate_report(path, "no-cache")
 
     def test_missing_full_quality_audit_prevents_live_phase(self) -> None:

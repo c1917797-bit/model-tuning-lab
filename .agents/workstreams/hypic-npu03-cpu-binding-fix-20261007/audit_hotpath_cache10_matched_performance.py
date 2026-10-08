@@ -11,8 +11,11 @@ from pathlib import Path
 
 from binding_off_service import BENCHMARK, BENCHMARK_SHA, IMAGE, ROOT, sha256
 from binding_off_quality import python_source_digest
+from performance_request_coverage import diagnose_request_coverage
+from verify_hotpath_request_coverage import load_worker_namespace_pids
 from hotpath_cache10_matched_performance import (
-    EXPECTED_CONFIG, ORDER, QUALITY_AUDIT, SOURCE_COMMIT, SOURCE_ROOT, require,
+    EXPECTED_CONFIG, ORDER, QUALITY_AUDIT, REQUEST_ID_BENCHMARK,
+    REQUEST_ID_BENCHMARK_SHA, SOURCE_COMMIT, SOURCE_ROOT, require,
 )
 
 
@@ -73,10 +76,13 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
     attestation_path = root / arm / f"source-attestation.{start['container_id'][:12]}.json"
     attestation = load(attestation_path)
     source = python_source_digest(Path(SOURCE_ROOT) / "hypic_vllm_ascend")
-    require(contract["arm"] == arm and contract["phase"] == phase
+    require(contract["schema"] == "hypic-cache10r13-matched-performance-contract/v1"
+            and result["schema"] == "hypic-cache10r13-matched-performance-arm/v1"
+            and contract["arm"] == arm and contract["phase"] == phase
             and contract["order_index"] == ORDER.index((arm, phase))
             and contract["quality_audit_sha256"] == quality_audit_sha
             and contract["benchmark_sha256"] == BENCHMARK_SHA
+            and contract["request_id_adapter_sha256"] == REQUEST_ID_BENCHMARK_SHA
             and contract["benchmark_config"] == EXPECTED_CONFIG
             and contract["fingerprint"] == start["fingerprint"]
             and contract["fingerprint"]["image"] == IMAGE
@@ -91,6 +97,8 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
             and result["arm"] == arm and result["phase"] == phase
             and result["container_id"] == start["container_id"] == stop["container_id"]
             and result["performance_sha256"] == sha256(root / "performance.json")
+            and result["hypic_evidence_sha256"]
+                == sha256(root / arm / "hypic-evidence.jsonl")
             and result["contract_sha256"] == sha256(root / "contract.json"),
             f"{arm}/{phase}: controller/hash drift")
     workers = start["worker_pid_by_physical_npu"]
@@ -131,7 +139,8 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
             and "The CPU allocation plan is as follows:" not in log,
             f"{arm}/{phase}: CPU binding-off activation drift")
     require(command["benchmark_sha256"] == BENCHMARK_SHA
-            and command["argv"][1] == str(BENCHMARK)
+            and command["request_id_adapter_sha256"] == REQUEST_ID_BENCHMARK_SHA
+            and command["argv"][1] == str(REQUEST_ID_BENCHMARK)
             and command["argv"][0] == "python3"
             and ("--require-hot-path" in command["argv"]) == (arm == "hypic-only"),
             f"{arm}/{phase}: benchmark command drift")
@@ -150,6 +159,10 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
                 and len(row["output_sha256"]) == 64
                 and isinstance(row["ttft_ms"], (int, float)) for row in rows),
             f"{arm}/{phase}: fixed-output raw row invalid")
+    ids = [row.get("request_id") for row in rows + warm]
+    require(all(isinstance(value, str) and value.startswith("cmpl-")
+                for value in ids) and len(set(ids)) == 42,
+            f"{arm}/{phase}: measured/warmup request IDs invalid")
     require(summary["successful"] == 40 and summary["failed"] == 0
             and summary["fixed_output_verified"] is True
             and summary["output_tokens"] == 40960
@@ -165,11 +178,17 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
           summary["output_tokens_per_second"], "throughput")
     require(result["metrics"] == {key: summary[key] for key in METRICS},
             f"{arm}/{phase}: controller summary mismatch")
+    coverage = None
     if arm == "hypic-only":
         require(summary["hot_path_verified"] is True
                 and not summary["hot_path_missing"]
                 and summary["run_evidence_event_counts"].get("worker_hot_path", 0) >= 4,
                 f"{arm}/{phase}: measured hot path absent")
+        workers = load_worker_namespace_pids(root, start)
+        evidence = root / arm / "hypic-evidence.jsonl"
+        events = [json.loads(line) for line in evidence.read_text(encoding="utf-8").splitlines()
+                  if line.strip()]
+        coverage = diagnose_request_coverage(rows, events, workers)
     else:
         require(summary["run_evidence_event_counts"].get("worker_hot_path", 0) == 0,
                 f"{arm}/{phase}: baseline worker hot event")
@@ -179,6 +198,8 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
         "contract_sha256": sha256(root / "contract.json"),
         "performance_sha256": sha256(root / "performance.json"),
         "result_sha256": sha256(root / "arm-result.json"),
+        "hypic_evidence_sha256": sha256(root / arm / "hypic-evidence.jsonl"),
+        "request_coverage": coverage,
         "metrics": result["metrics"], "normalized_spec": normalized_spec(contract, root, arm),
         "created_at_utc": contract["created_at_utc"],
     }
@@ -187,6 +208,8 @@ def audit_phase(arm: str, phase: str, quality_audit_sha: str) -> dict:
 def main() -> int:
     require(not OUT.exists(), "r13 performance audit exists; do not overwrite")
     require(sha256(BENCHMARK) == BENCHMARK_SHA, "benchmark source changed")
+    require(sha256(REQUEST_ID_BENCHMARK) == REQUEST_ID_BENCHMARK_SHA,
+            "request-ID adapter source changed")
     quality_path = ROOT / QUALITY_AUDIT
     quality = load(quality_path)
     require(quality["evidence_valid"] is True
@@ -214,20 +237,33 @@ def main() -> int:
     }
     paired = [{key: per_arm["no-cache"][index][key] - per_arm["hypic-only"][index][key]
                for key in METRICS} for index in range(3)]
+    hot_requests = sum(item["request_coverage"]["four_worker_verified_requests"]
+                       for item in phases if item["arm"] == "hypic-only")
+    require(0 <= hot_requests <= 120, "candidate measured hot count drift")
+    all_hot = hot_requests == 120
+    effect_screen = (effect["weighted_tpot_saved_ms"] >= 10
+                     and effect["ttft_p95_saved_s"] >= 10)
     report = {
         "schema": "hypic-cache10r13-matched-performance-independent-audit/v1",
         "all_six_phases_valid": True,
         "deployed_quality_decision": quality["deployed_quality_decision"],
         "strict_quality_decision": quality["strict_quality_decision"],
         "performance_estimand": "all-request-deployed",
-        "strict_c1_c2_performance_decision": "UNVERIFIED_REQUEST_JOIN",
+        "strict_c1_c2_hot_coverage": {
+            "decision": "PASS" if all_hot else "FAIL",
+            "four_worker_verified_measured_requests": hot_requests,
+            "expected_measured_requests": 120,
+        },
+        "strict_c1_c2_performance_decision": (
+            "EFFECT_SCREEN_PASS" if all_hot and effect_screen else
+            "EFFECT_SCREEN_FAIL" if all_hot else "NOT_ACCEPTED_HOT_COVERAGE"
+        ),
         "quality_audit_sha256": quality_sha,
         "phases": [{key: value for key, value in item.items()
                     if key != "normalized_spec"} for item in phases],
         "normalized_spec_identical": True, "per_arm": per_arm,
         "paired_baseline_minus_candidate": paired, "medians": medians, "effect": effect,
-        "deployed_effect_screen_pass": effect["weighted_tpot_saved_ms"] >= 10
-            and effect["ttft_p95_saved_s"] >= 10,
+        "deployed_effect_screen_pass": effect_screen,
         "scope": "physical NPU0-3, TP4, source c12060c, 0.85/cache10, input32768/output1024/c16",
     }
     OUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")

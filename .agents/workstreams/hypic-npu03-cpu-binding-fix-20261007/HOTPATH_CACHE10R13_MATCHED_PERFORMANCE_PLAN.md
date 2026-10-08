@@ -37,13 +37,18 @@ reports every phase, three paired differences, medians, weighted TPOT,
 P95 TTFT/TPOT, throughput and duration. Its predeclared effect screen is
 at least 10 ms/token weighted-TPOT savings and 10 s TTFT-P95 savings.
 
-The original shared-prefix benchmark does not retain per-row OpenAI request
-IDs. Consequently these six phases can establish an *all-request deployed
-performance effect* with coarse HYPIC activation, not 40/40 request-level
-four-worker hot-path coverage. Report strict C1/C2 performance as
-`UNVERIFIED_REQUEST_JOIN` until a separately frozen benchmark records
-joinable IDs and validates every measured request. Favorable deployed
-performance alone is not paper-complete C3 or production adoption.
+The pinned original shared-prefix benchmark does not retain per-row OpenAI
+request IDs. The frozen observational adapter
+`hotpath_request_id_benchmark.py` retains the first SSE ID for each warm
+and measured request without changing prompts, request parameters, barrier
+or original metrics. Require all 42 unique IDs per phase. The independent
+auditor joins each of the 40 measured candidate IDs to exactly one
+scheduler boundary and four worker-namespace post-repair receipts. It reports
+all-request deployed performance whether or not every candidate request is
+hot; strict C1/C2 effect is accepted only with 120/120 hot measured requests
+across the three candidate phases. A cold request remains a negative
+strict-coverage result, not a reason to discard the deployed metric.
+Favorable performance alone is not paper-complete C3 or production adoption.
 
 The six predeclared `hotpath-cache10perf-*` attempt names were never
 executed; their roots were checked absent before retargeting their entry
