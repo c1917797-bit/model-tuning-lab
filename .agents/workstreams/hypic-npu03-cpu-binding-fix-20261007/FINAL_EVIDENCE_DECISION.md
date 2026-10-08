@@ -24,3 +24,15 @@ The unchanged strict `audit_binding_off_quality.py` was run first and exited 1 a
 The pinned natural evaluator sends ordinary chat requests without `vllm_xargs.hypic_segment_ends`; the frozen HYPIC service disables text auto-chunking and has no separator token IDs. Thus its requests cannot form usable segments. GSM8K prompts also measure only 77–242 tokens, below the 4096-token minimum rewrite. This is a protocol/configuration coverage mismatch, not evidence of intrinsic HYPIC quality failure on NPU0–3. The formal performance workload did activate the worker hot path. A separate, prospectively declared 2048-token paired quality supplement would need explicit exact-token boundaries, sufficiently repeated prefix, four-worker scored hot-event preflight, a separate denominator and release audit. Do not retrofit these into clean2 or pool scores.
 
 The source/architecture audit confirms bounded text C1/C2 fit for this Qwen3.5-style hybrid checkpoint, not the paper's distributed C3 or exact upstream SGLang implementation; see `PAPER_ARCHITECTURE_FIT.md`. All 29 archived Skills are classified in `SKILL_VERIFICATION.md`; 29/29 structural validation does not mean 29 behavioral passes. Main and the dirty canonical checkout were not modified.
+
+## Post-freeze repair (2026-10-08; separate evidence)
+
+The frozen verdict above is unchanged. A new explicit-boundary, 2048-max-output
+paired single-sample canary used physical NPU0-3 and confirmed four distinct
+worker-hot PIDs on the scored HYPIC request (16,376 verified skipped prefix
+tokens per worker) against zero baseline worker-hot PIDs. Both arms answered
+`A` while the sample reference was `B`, so this one item showed no accuracy
+delta but cannot establish aggregate quality. Both services passed clean lane
+guards and exact release audits. See `HOTPATH_QUALITY_REPAIR.md` and
+`HOTPATH_CANARY_RESULT.md` for the new protocol, receipt hashes, and remaining
+full matched-quality acceptance work. Do not pool the canary with clean2.

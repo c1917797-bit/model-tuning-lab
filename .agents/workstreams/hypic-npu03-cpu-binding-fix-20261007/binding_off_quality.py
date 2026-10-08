@@ -24,10 +24,15 @@ from binding_off_service import (
 )
 
 ATTEMPT = os.environ.get("HYPIC_QUALITY_ATTEMPT", "original")
-if ATTEMPT not in {"original", "clean2"}:
+ATTEMPT_ROOTS = {
+    "original": "quality-context-41984",
+    "clean2": "quality-context-41984-clean2",
+    "hotpath-canary": "quality-context-41984-hotpath-canary",
+    "hotpath-baseline": "quality-context-41984-hotpath-baseline",
+}
+if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
-QROOT = ROOT / ("quality-context-41984" if ATTEMPT == "original"
-                else "quality-context-41984-clean2")
+QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984
 EVALUATOR = Path(__file__).resolve().parents[1] / "WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py"
 DATASETS = {
@@ -455,6 +460,8 @@ def interrupt(_number: int, _frame: object) -> None:
 
 
 def main() -> int:
+    if ATTEMPT in {"hotpath-canary", "hotpath-baseline"}:
+        raise RuntimeError("hotpath pair preflight is separate from the frozen 12-unit campaign")
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=tuple(ARMS), required=True)
     parser.add_argument("--run", action="store_true")
