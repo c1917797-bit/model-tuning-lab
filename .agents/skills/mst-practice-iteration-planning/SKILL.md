@@ -33,11 +33,12 @@ Turn a stage goal into a concrete, verifiable iteration plan with machine-checka
 Each iteration is recorded in `.agents/evals/practice-iterations/<id>.yaml`:
 
 ```yaml
-schema: practice-iteration/v1
+schema: mst-practice-iteration/v1
 id: <descriptive-slug>
 repository: <target-repo-name>
 status: done | in_progress | blocked
 date: YYYY-MM-DD
+validated_commit: <last validated Git checkpoint for this iteration>
 
 stage_goal: <one sentence>
 
@@ -56,6 +57,11 @@ lessons_ingested:
     severity: high | medium | low
 ```
 
+For `in_progress`, `validated_commit` names the last validated input
+checkpoint, not an anticipated future result. For `done`, advance it to the
+commit whose changes passed the listed validation. This field and the
+`mst-practice-iteration/v1` schema are required by `scripts/validate-mst.sh`.
+
 ## Sizing guide
 
 A well-sized iteration:
@@ -73,6 +79,8 @@ If an iteration requires more than 5 file changes or 2 structural changes, split
 - Every `lessons_ingested` entry has a `destination` and `severity`.
 - The `stage_goal` is a single sentence.
 - The iteration YAML parses without errors.
+- `validated_commit` resolves to the checkpoint it claims; do not label an
+  unrun or uncommitted future change as validated.
 
 ## Anti-patterns
 

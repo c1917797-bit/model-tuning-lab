@@ -1,0 +1,30 @@
+schema: mst-practice-iteration/v1
+id: hypic-npu03-quality-preflight-20261008
+repository: model-tuning-lab
+status: in_progress
+date: 2026-10-08
+validated_commit: 29d5d5dd8834dcf739937b1a7abc2f411f28a09e
+stage_goal: Establish a collision-free physical NPU0-3 window for the original full HYPIC quality pair without touching foreign workloads.
+changes:
+  - type: validation
+    description: Preserve r6/r7 physical process re-entry as environment-invalid evidence before considering a new unique arm.
+    files:
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R6_RESOURCE_CONFLICT.md
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md
+next_iterations:
+  - id: observe_actual_lane
+    pass_criteria:
+      - Physical NPU0-3 process and port probes, not passive Docker mappings, show an uninterrupted observation window long enough to justify another unique startup.
+      - Any foreign PID is captured with physical NPU, timestamp and cgroup identity; no foreign workload is changed.
+  - id: full_original_quality_pair
+    pass_criteria:
+      - A new unique original-protocol HYPIC arm completes all 127 samples and three repeats under a continuous clean isolation guard.
+      - Only after independent treatment audit, a same-identity no-cache arm completes and both arms pass paired 2048-token quality and cleanup gates.
+      - Matched performance remains a separate later gate; a startup abort is not a paper-algorithm result.
+validation_commands:
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_experience_ingestion_case.py
+  - ./scripts/validate-mst.sh
+lessons_ingested:
+  - lesson: Passive mappings do not block use, but real later physical NPU processes invalidate the affected arm.
+    destination: .agents/evals/transformation-cases/hypic-shared-npu-reentry-ingestion.yaml
+    severity: high
