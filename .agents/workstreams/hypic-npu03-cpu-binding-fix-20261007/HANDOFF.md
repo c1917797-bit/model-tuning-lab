@@ -16,8 +16,9 @@
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
 - r10 full HYPIC is running as operation exec-00000000000016af at the root
-  in task.json. At 18:46 UTC, four samples (12 scored requests) each had
-  all four worker request-proof events. This is provisional, not a verdict.
+  in task.json. At 18:54 UTC, 19 samples were complete; 56/57 scored
+  requests had four-worker proof. Sample 6 repetition 3 fell back natively.
+  See HOTPATH_CACHE10R10_PARTIAL_REQUEST_COVERAGE.md; no final verdict.
 - Quality and benchmark Skill cases eight/nine remain partial; see their
   request-coverage and baseline-reuse acceptance reports.
 
@@ -74,7 +75,8 @@ to container PID namespace using a validated sidecar. r10 has this map
 under `hypic-only/worker-namespace-map.json`; future launches write it
 automatically. At 18:46 UTC, 12/12 completed scored requests passed the
 four-worker audit. 46 offline tests and nine provenance checks pass, but
-full device acceptance remains pending. Preserve r9 raw root; its 93/127
+full device acceptance remains pending. One scored r10 request lacks proof;
+see the partial-coverage report. Preserve r9 raw root; its 93/127
 GDN miss is not a quality verdict. Old 0.9 baseline is not pairable with 0.85.
 
 ## 5. Next Actions
