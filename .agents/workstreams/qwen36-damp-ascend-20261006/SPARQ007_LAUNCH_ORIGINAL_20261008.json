@@ -1,0 +1,53 @@
+{
+  "cancelTool": "operation_cancel",
+  "channel": "control",
+  "fallbackUsed": false,
+  "gatewayInstanceId": "tpc-rgw-01",
+  "idempotencyKey": "main-sparq007b-whole-cpuABI-before-NPU6-20261008-0208-001",
+  "logicalGatewayId": "tpc",
+  "ok": true,
+  "operationId": "exec-0000000000001139",
+  "operationKind": "exec",
+  "pollTool": "operation_get",
+  "requestDeadlineMs": 5000,
+  "result": {
+    "execId": "exec-0000000000001139",
+    "lane": "job",
+    "ok": true,
+    "pollAfterMs": 250,
+    "running": true,
+    "state": "running"
+  },
+  "rgwHttp": "http://agentweb:17888",
+  "rgwRouting": {
+    "attemptErrors": [],
+    "strategy": "peer-hot3-with-command-retry"
+  },
+  "routeDecision": "peer_direct",
+  "routeSelectionMode": "client-force-direct",
+  "selectedLogicalGatewayId": "tpc",
+  "selectedRgw": "http://agentweb:17888",
+  "sessionId": null,
+  "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "targetRole": "upstream",
+  "timings": {
+    "awmcp": {
+      "attemptCount": 1,
+      "rgwRequestMs": 844,
+      "rgwResponseDecodeMs": 0,
+      "rgwResponseHeadersMs": 844,
+      "routeCacheHit": false,
+      "routeLookupMode": "client-force-direct",
+      "routeLookupMs": 1781,
+      "totalMs": 2625
+    },
+    "rgw": {
+      "dispatchMs": 0,
+      "journalMs": 0,
+      "peerRoundTripMs": 843,
+      "routeLookupMs": 0,
+      "totalMs": 843
+    }
+  },
+  "traceId": "0bf8f681-2264-4f4e-be77-0cbecda929ec"
+}

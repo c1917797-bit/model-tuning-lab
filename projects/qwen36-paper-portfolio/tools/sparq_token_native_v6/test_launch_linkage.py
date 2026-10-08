@@ -17,7 +17,7 @@ class CrossModule(unittest.TestCase):
   tree=ast.parse(Path(receipt.ROOT/"test_launch_linkage.py").read_text())
   dirs=[k.value for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and
    n.func.attr=="TemporaryDirectory" for k in n.keywords if k.arg=="dir"]
-  self.assertEqual(len(dirs),7)
+  self.assertEqual(len(dirs),8)
   self.assertTrue(all(isinstance(n,ast.Name) and n.id=="TEST_TMP_PARENT" for n in dirs))
   if Path("/cache/cch") not in Path(__file__).parents:
    self.assertNotEqual(TEST_TMP_PARENT,Path(__file__).parent)
@@ -187,6 +187,66 @@ class CrossModule(unittest.TestCase):
    self.assertEqual(receipt.sha(receipt.ROOT/n),s)
   self.assertNotEqual(receipt.sha(Path(gate.__file__)),"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c")
   self.assertEqual(receipt.OWNER,"sparq-token-v6");self.assertNotIn("torch",sys.modules)
+
+
+class RFC3339NanosecondProof(unittest.TestCase):
+ def test_actual_Docker_eight_digit_fraction_and_equivalent_UTC_encodings(self):
+  import calendar
+  base=calendar.timegm((2026,10,8,1,41,9))*1_000_000_000
+  for value in ("2026-10-08T01:41:09.22167182Z","2026-10-08T01:41:09.22167182+00:00",
+   "2026-10-08T01:41:09.221671820Z"):
+   self.assertEqual(gate.utc_rfc3339_ns(value),base+221671820)
+  self.assertEqual(gate.utc_rfc3339_ns("1970-01-01T00:00:00Z"),0)
+  self.assertEqual(gate.utc_rfc3339_ns("1969-12-31T23:59:59.999999999Z"),-1)
+ def test_all_one_to_nine_fraction_digits_exact_no_float_or_microsecond(self):
+  import calendar
+  base=calendar.timegm((2026,10,8,1,41,9))*1_000_000_000
+  for size in range(1,10):
+   fraction="123456789"[:size]
+   self.assertEqual(gate.utc_rfc3339_ns("2026-10-08T01:41:09."+fraction+"Z"),
+    base+int(fraction)*10**(9-size))
+  self.assertEqual(gate.utc_rfc3339_ns("2026-10-08T01:41:09.000000001Z"),
+   gate.utc_rfc3339_ns("2026-10-08T01:41:09Z")+1)
+ def test_strict_UTC_calendar_fraction_and_type_negatives(self):
+  values=[None,True,1,"2026-10-08T01:41:09.1234567890Z","2026-10-08T01:41:09.Z",
+   "2026-10-08T01:41:09,1Z","2026-10-08T01:41:09","2026-10-08T01:41:09-00:00",
+   "2026-10-08T01:41:09+00:01","2026-10-08T01:41:09+0000","2026-10-08t01:41:09Z",
+   "2026-10-08T01:41:09z","2026-10-08 01:41:09Z","2026-10-08T24:00:00Z",
+   "2026-10-08T01:60:00Z","2026-10-08T01:41:60Z","2026-02-29T01:41:09Z",
+   "2024-02-30T01:41:09Z","0000-01-01T00:00:00Z","2026-13-01T00:00:00Z",
+   "2026-10-08T01:41:09.١Z","2026-10-08T01:41:09Z\n"," 2026-10-08T01:41:09Z"]
+  for value in values:
+   with self.subTest(value=value),self.assertRaises(ValueError):gate.utc_rfc3339_ns(value)
+  self.assertIsInstance(gate.utc_rfc3339_ns("2024-02-29T00:00:00.000000001Z"),int)
+ def test_one_nanosecond_reverse_order_never_truncates_to_equal_PASS(self):
+  earlier="2026-10-08T01:41:09.221671820Z";later="2026-10-08T01:41:09.221671821+00:00"
+  self.assertTrue(gate.cpu_stopped_before_npu_started(earlier,later))
+  self.assertFalse(gate.cpu_stopped_before_npu_started(later,earlier))
+  self.assertTrue(gate.cpu_stopped_before_npu_started(earlier,earlier))
+  self.assertEqual(gate.utc_rfc3339_ns(later)-gate.utc_rfc3339_ns(earlier),1)
+ def test_real_proof_order_guard_eight_digit_positive_and_one_ns_late_negative(self):
+  link=CrossModule()
+  for finish,start,accepted in (
+   ("2026-10-08T01:41:09.22167182Z","2026-10-08T01:41:09.221671821Z",True),
+   ("2026-10-08T01:41:09.221671821Z","2026-10-08T01:41:09.221671820Z",False)):
+   with tempfile.TemporaryDirectory(dir=TEST_TMP_PARENT,prefix="sparq-v7-ns-proof-") as td:
+    root=Path(td);f=link.fixture(root);value=copy.deepcopy(f["proof"])
+    rows=receipt.load(value["cpu_stopped_inspect"]);rows[0]["State"]["FinishedAt"]=finish
+    value["cpu_stopped_inspect"]=receipt.write_new(root/"ns-stopped.json",rows)
+    cleanup=receipt.load(value["cpu_only_cleanup"]);cleanup["after_inspect"]=value["cpu_stopped_inspect"]
+    value["cpu_only_cleanup"]=receipt.write_new(root/"ns-cleanup.json",cleanup)
+    value["container_inspect"]["State"]["StartedAt"]=start
+    if accepted:self.assertEqual(link.validate(f,root,value)["container_inspect"]["State"]["StartedAt"],start)
+    else:
+     with self.assertRaisesRegex(ValueError,"actual CPU-only stop before distinct NPU start"):
+      link.validate(f,root,value)
+ def test_native_timestamp_guard_calls_exact_ns_parser_no_float_datetime_ISO(self):
+  source=getattr(gate,"_proposed_source_text",Path(gate.__file__).read_text())
+  tree=ast.parse(source);fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="validate_proof")
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="fromisoformat" for n in ast.walk(fn)))
+  self.assertTrue(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="cpu_stopped_before_npu_started" for n in ast.walk(fn)))
+  helper=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="utc_rfc3339_ns")
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="float" for n in ast.walk(helper)))
 
 # A real stdlib subprocess produces inspection fixtures; it never invokes Docker,
 # devices, Torch, or native code. These are cleanup control-flow tests only.

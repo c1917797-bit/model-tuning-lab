@@ -1,0 +1,35 @@
+can not use command: npu-smi info
+[W1008 02:09:03.412786670 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/sparq_token_v4/core.py:161: UserWarning: Cannot create tensor with interal format while allow_internel_format=False, tensor will be created with base format. (Triggered internally at ../torch_npu/csrc/aten/common/TensorFactories.cpp:423.)
+  self.offset=alloc((self.capacity,),torch.int64);self.offset.copy_(self.logical.remainder(BLOCK))
+[E1008 02:09:04.975160120 OpParamMaker.cpp:453] ReshapeAndCacheOperation setup failed!
+Exception raised from OperationSetup at ../third_party/op-plugin/op_plugin/utils/custom_functions/atb/AtbCommon.cpp:203 (most recent call first):
+frame #0: c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) + 0xc8 (0xffff8d115978 in /usr/local/python3.12.13/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) + 0xc4 (0xffff8d0b9adc in /usr/local/python3.12.13/lib/python3.12/site-packages/torch/lib/libc10.so)
+frame #2: atb::OperationSetup(atb::VariantPack, atb::Operation*, atb::Context*) + 0x278 (0xffff40a9f398 in /usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so)
+frame #3: <unknown function> + 0xe09f4 (0xffff40aa09f4 in /usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libop_plugin_atb.so)
+frame #4: <unknown function> + 0x4b10768 (0xffff83310768 in /usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libtorch_npu.so)
+frame #5: <unknown function> + 0x1927070 (0xffff80127070 in /usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libtorch_npu.so)
+frame #6: <unknown function> + 0x192810c (0xffff8012810c in /usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libtorch_npu.so)
+frame #7: <unknown function> + 0x1925b38 (0xffff80125b38 in /usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libtorch_npu.so)
+frame #8: <unknown function> + 0x7dcd24 (0xffff7e62cd24 in /usr/local/Ascend/cann-9.1.0/lib64/libhccl.so)
+frame #9: <unknown function> + 0x803c8 (0xffff99fe03c8 in /lib/aarch64-linux-gnu/libc.so.6)
+frame #10: <unknown function> + 0xe9edc (0xffff9a049edc in /lib/aarch64-linux-gnu/libc.so.6)
+
+Traceback (most recent call last):
+  File "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py", line 271, in <module>
+    if __name__=="__main__":main()
+                            ^^^^^^
+  File "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py", line 246, in main
+    case=run_case(torch,torch_npu,DeviceOperator,a.output,b,m,correction,t,deadline)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/numeric_gate.py", line 72, in run_case
+    mean.prefill(s,v);book.begin("native-slot-%d"%s,versions[s],s,n)
+    ^^^^^^^^^^^^^^^^^
+  File "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/sparq_token_v4/core.py", line 95, in prefill
+    self.sums[slot].copy_(values[:,0,:].float().sum(0));self.counts[slot]=values.shape[0]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: The Inner error is reported as above. The process exits for this inner error, and the current working operator name is ReshapeCacheOperation.
+Since the operator is called asynchronously, the stacktrace may be inaccurate. If you want to get the accurate stacktrace, please set the environment variable ASCEND_LAUNCH_BLOCKING=1.
+Note: ASCEND_LAUNCH_BLOCKING=1 will force ops to run in synchronous mode, resulting in performance degradation. Please unset ASCEND_LAUNCH_BLOCKING in time after debugging.
+[ERROR] 2026-10-08-02:09:04 (PID:103, Device:0, RankID:-1) ERR00100 PTA call acl api failed.

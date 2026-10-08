@@ -1,0 +1,7 @@
+INFO 10-08 02:08:52 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 10-08 02:08:52 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 10-08 02:08:52 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 10-08 02:08:52 [__init__.py:238] Platform plugin ascend is activated
+INFO 10-08 02:08:52 [platform.py:62] Breakable cudagraph is force disabled on Ascend because DeepSeek V4 PIECEWISE cudagraph is not supported yet.
+mki_log mkdir /root/ascend/log/atb
+MAIN_SPARQ_TOKEN_V5_REPORT {"report": {"path": "/sparq-results/gate/REPORT.json", "sha256": "b8d534d3f921a3ad73df2ea8be1721413f3d9d99bcfe8b633ee3717cbc2255c8"}, "status": "failed", "source_manifest": {"path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json", "sha256": "40875a65f5a493a1b1c0da94bc3ef2802b4b84d1e6d5dbd6e5bd40e16bed506b"}, "script_sha256": "35d09584475510c034643f01d9b83d9c24ea9840a8d5238dcd736e98b4c202e8", "device_proof": {"path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-007-native-20261008-001/proof.json", "sha256": "1453ed1550f19664c57c1e5db1db107e2df59a766fa654aa58ff713062588485"}}

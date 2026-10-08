@@ -177,3 +177,33 @@ claims, and update handoff RUNNING authority immediately on a terminal failure.
 Original structured tool envelopes are retained as
 SPARQ006_TERMINAL_ORIGINAL_20261008.json and
 SPARQ006_RELEASE_AUDIT_ORIGINAL_20261008.json in the current workstream.
+
+## Canonical regression and native parameter validation, Oct8 02:15Z
+
+SparQ007's exact UTC nanosecond repair was sound, but the complete canonical
+test suite first failed an old fixture-count assertion (7 versus new8 temporary
+outputs). Private16 tests imported an old canonical AST fixture and missed it.
+Preserve that failure, repair only the fixture expectation, then rerun the
+actual canonical100 tests/source27/true default-OFF CLI before device admission.
+A private source/helper subset is not evidence that the shared entry is ready.
+
+The corrected MAIN1139 actually passed CPU ABI and NPU6 canary, then failed
+ATB ReshapeAndCacheOperation setup before any numerical case. Dispatcher schema
+matching proves callable signature, not legal tensor layout, strides, dtypes,
+format or device placement. With asynchronous launch, a later mean.prefill
+traceback must not be treated as the cause. Inspect original native error and
+actual deployed cache writer/source first; do not change algorithms, tolerances
+or repeat a matrix without a source-supported parameter repair. Keep failed
+raw stdout/stderr and independently inspect stopped owned CIDs/resources.
+This is a real NPU runtime-parameter failure, not a valid algorithm comparison.
+
+Original MAIN1139/1145 receipts, canonical1131 failure/1138 success and raw
+matrix streams are retained in the current workstream. All0cases means no
+numerical/E2E/task verdict; report readiness layers and the next concrete seam.
+
+Actual stopped-owned ATB log extraction (MAIN1149) subsequently identified
+the parameter difference exactly: int64 slot_indices versus required int32
+for all supported combinations; payload/cache BF16,ND already matched.
+Repair only the native boundary metadata, preserving64bit indexing elsewhere
+and static graph buffers. This is stronger than guessing from a warning,
+operator-name traceback or an example written for another deployed version.

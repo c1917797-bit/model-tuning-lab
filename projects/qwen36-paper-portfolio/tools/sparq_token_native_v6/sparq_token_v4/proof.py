@@ -6,6 +6,24 @@ IMAGE="sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 def bound(path,digest):
     p=Path(path);require(p.is_absolute() and ".." not in p.parts and p.is_file() and not p.is_symlink() and re.fullmatch("[a-f0-9]{64}",digest or ""),"actual exact absolute ordinary proof SHA Ref")
     raw=p.read_bytes();require(hashlib.sha256(raw).hexdigest()==digest,"source/proof bytes changed");return raw
+def utc_rfc3339_ns(value):
+    """Strict UTC RFC3339, optional 1..9 fractional digits, exact integer nanoseconds.
+    No datetime.fromisoformat fraction limit and no float/microsecond truncation.
+    """
+    require(type(value) is str,"actual UTC RFC3339 timestamp string")
+    m=re.fullmatch(r"([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:\.([0-9]{1,9}))?(?:Z|\+00:00)",value)
+    require(m is not None,"strict UTC RFC3339 timestamp with optional1..9 fractional digits")
+    year,month,day,hour,minute,second=(int(v) for v in m.groups()[:6])
+    require(0<=hour<24 and 0<=minute<60 and 0<=second<60,"actual valid UTC clock; no unknown leap-second normalization")
+    from datetime import date
+    try:days=date(year,month,day).toordinal()-date(1970,1,1).toordinal()
+    except ValueError as error:raise ValueError("actual valid UTC calendar date") from error
+    fraction=m.group(7) or ""
+    ns=int(fraction.ljust(9,"0")) if fraction else 0
+    return ((days*24+hour)*3600+minute*60+second)*1_000_000_000+ns
+def cpu_stopped_before_npu_started(finished,started):
+    return utc_rfc3339_ns(finished)<=utc_rfc3339_ns(started)
+
 def validate_proof(path,digest,source,files,argv,now_ns=None):
     import time
     raw=bound(path,digest);proof=json.loads(raw)
@@ -42,7 +60,7 @@ def validate_proof(path,digest,source,files,argv,now_ns=None):
     from preflight import validate_abi
     nd=validate_abi(load(proof["native_no_device_abi"]),source,files);child=load(proof["native_no_device_child"])
     _,stopped=validate_cpu_phase(proof,proof["cpu_container_id"],source,files)
-    require(proof["cpu_container_id"]!=proof["container_id"] and __import__("datetime").datetime.fromisoformat(stopped["State"]["FinishedAt"].replace("Z","+00:00"))<=__import__("datetime").datetime.fromisoformat(inspect["State"]["StartedAt"].replace("Z","+00:00")),"actual CPU-only stop before distinct NPU start")
+    require(proof["cpu_container_id"]!=proof["container_id"] and cpu_stopped_before_npu_started(stopped["State"]["FinishedAt"],inspect["State"]["StartedAt"]),"actual CPU-only stop before distinct NPU start")
     owned=load(proof["cpu_only_owned"]);cpu_out=Path(owned["mounts"]["/sparq-results"][0])
     require(owned["mode"]=="cpu" and owned["mounts"]["/sparq-results"][1] is True and
      proof["cpu_host_output_root"]==str(cpu_out) and proof["native_no_device_abi"]["path"]==str(cpu_out/"ABI.json"),

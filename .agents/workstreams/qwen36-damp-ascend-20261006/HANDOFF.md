@@ -1,5 +1,57 @@
 # DAMP Ascend — current workstream
 
+## Latest terminal SparQ007 result / memory completion — 2026-10-08 02:15Z
+
+MAIN1139 completed1 in188456ms with source manifest
+40875a65f5a493a1b1c0da94bc3ef2802b4b84d1e6d5dbd6e5bd40e16bed506b.
+Actual canonical1138 passed all100 tests/source27/true default-OFF numeric CLI.
+The original1131 fixture-count failure remains preserved; private16 helper tests
+were not a substitute for full canonical execution. Exact UTC nanosecond order
+repair passed actual CPU stop-before-NPU-start in this run.
+
+CPU Devices[] actual ABI and physical6->guest0 canary passed. The matrix really
+started, then ATB ReshapeAndCacheOperation setup failed at initial cache writing.
+Gate REPORT has0cases and0step files, not a numerical PASS or paper-wide no-go.
+Async traceback points to mean.prefill, which is not evidence that mean is the
+causal failure. Preserve matrix.stderr4321B, REPORT25086B SHA
+b8d534d3f921a3ad73df2ea8be1721413f3d9d99bcfe8b633ee3717cbc2255c8
+and RESULT81961B SHA1046e29049865199671f83b2d04d3126ce156cd95bb2e9d3d80bfd6548e3affa.
+Do not repeat unchanged1139 or relax any original tensor/resource gate.
+Next short task: compare actual native cache writer layout/format/strides/dtypes
+and owned ATB error logs, then review a single evidence-supported successor.
+
+Actual MAIN1149 readonly Docker cp from the same stopped owned NPU CID
+read all6 lines of atb_103_20261008020904.log (907B). CheckIniMatch:
+actual inTensor4(int64,nd), while ALL supported combinations require
+inTensor4(int32,nd); actual fourbf16,nd payload/cache arguments match comb2.
+This identifies slot_indices dtype as the native setup blocker, not a mean
+or SparQ accuracy failure. Prepare only int32 native boundary buffers, retain
+internal int64 indexing/mean lease semantics and every preregistered gate.
+No NPU rerun until minimal successor source/tests/manifest review.
+
+MAIN1145 independent readonly release audit at02:15:33Z proved exact CPU CID
+65a4c21fea6728320e3fa6d28b4660c0a691a50519cae264f179cbfa8157b74c
+and physical6 CID3f9ed75cc9c66a7cb65cc6de0c2d5c4c72224ed02041b2d834dcee4345635d91
+stopped/retained/Pid0/ExecIDsnull/OOMfalse; both cleanup errors=[].
+All8 NPU cards have no processes; protected0–3 before/after=[].
+MemAvailable116680776KiB (~111.28GiB); OVSsamePID27118/start11471,
+HugetlbPages25165824KiB=24GiB. Node pools439/485/486/474, node3free450.
+Exactly32GiB release remains completed/SPENT; no second32GiB release is allowed.
+
+Original checkpoint path is now source-confirmed /cache/efim/Qwen3.6-27B:
+config4308B SHA69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c.
+Other /cache/austinov/Qwen3.8-27B config differs only transformers_version,
+but neither semantic equality nor18 filenames proves weight/tokenizer identity.
+Use the original path; complete model/task hashes remain pending.
+Sparse preparer closes this failure and thin TP4/task entries; lowbit closes
+KIVI true compact allocator+reader; recurrent closes SparsePrefix real provider.
+None is model/E2E/task-ready. H8 full numericalFAIL and 3-file source-export
+denial remain unchanged; no equivalent read/bypass or unapproved replay.
+Fixed KV08:29:54Z/portfolioOct9 11:17:31Z deadlines and active goal unchanged.
+Known push authentication blocker persists; local commit is not remote push.
+Earlier006/007 RUNNING entries are historical.
+
+
 ## Latest terminal SparQ006 result — 2026-10-08 01:48Z
 
 Actual exec-0000000000001121 completed1 in158785ms; no running model or

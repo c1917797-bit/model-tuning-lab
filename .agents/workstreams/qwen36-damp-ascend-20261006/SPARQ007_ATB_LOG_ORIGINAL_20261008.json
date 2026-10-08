@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"-c\",\n          \"import subprocess,pathlib,json,io,tarfile,resource\\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\\ncid=\\\"3f9ed75cc9c66a7cb65cc6de0c2d5c4c72224ed02041b2d834dcee4345635d91\\\"\\nbase=[\\\"/usr/bin/prlimit\\\",\\\"--as=unlimited\\\",\\\"--\\\",\\\"/usr/bin/docker\\\"]\\np=subprocess.run(base+[\\\"inspect\\\",cid],capture_output=True,text=True,timeout=12)\\nassert p.returncode==0,p.stderr\\nv=json.loads(p.stdout)[0]\\nassert v[\\\"Id\\\"]==cid and v[\\\"Image\\\"]==\\\"sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1\\\"\\nassert not v[\\\"State\\\"][\\\"Running\\\"] and v[\\\"State\\\"][\\\"Pid\\\"]==0 and not v.get(\\\"ExecIDs\\\")\\ncp=subprocess.run(base+[\\\"cp\\\",cid+\\\":/root/ascend/log/atb\\\",\\\"-\\\"],capture_output=True,timeout=12)\\nout={\\\"read_only\\\":True,\\\"stopped_owned_cid\\\":cid,\\\"source\\\":\\\"/root/ascend/log/atb\\\",\\\"exit\\\":cp.returncode,\\\"stderr\\\":cp.stderr.decode(\\\"utf-8\\\",\\\"replace\\\"),\\\"tar_bytes\\\":len(cp.stdout),\\\"files\\\":[]}\\nassert len(cp.stdout)<=4*1024**2,\\\"bounded small ATB log snapshot exceeded; do not export\\\"\\nif cp.returncode==0:\\n with tarfile.open(fileobj=io.BytesIO(cp.stdout),mode=\\\"r:*\\\") as tar:\\n  for m in tar:\\n   if m.isfile():\\n    assert m.size<=2*1024**2\\n    text=tar.extractfile(m).read().decode(\\\"utf-8\\\",\\\"replace\\\")\\n    lines=text.splitlines()\\n    hits=[i for i,line in enumerate(lines) if any(q in line for q in (\\\"Reshape\\\",\\\"ERROR\\\",\\\"[E\\\",\\\"param\\\",\\\"Param\\\",\\\"dtype\\\",\\\"dim\\\"))]\\n    indices=sorted({j for i in hits for j in range(max(0,i-2),min(len(lines),i+3))})\\n    excerpt=\\\"\\\\n\\\".join(lines[i] for i in indices)\\n    out[\\\"files\\\"].append({\\\"name\\\":m.name,\\\"bytes\\\":m.size,\\\"lines\\\":len(lines),\\\"matched_lines\\\":len(indices),\\\"excerpt\\\":excerpt[:32000]})\\nprint(json.dumps(out,sort_keys=True))\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 155,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001149\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"exit\\\": 0, \\\"files\\\": [{\\\"bytes\\\": 907, \\\"excerpt\\\": \\\"[2026-10-08 02:09:04.382439] [error] [188] [operation_base.cpp:408] ReshapeAndCacheOperation_0 CheckIniMatch Failed! Actual Inputs: inTensor0(bf16, nd), inTensor1(bf16, nd), inTensor2(bf16, nd), inTensor3(bf16, nd), inTensor4(int64, nd), outTensor0(bf16, nd), outTensor1(bf16, nd)\\\\nSupported Combs: \\\\n[comb0]:inTensor0(float16,nd), inTensor1(float16,nd), inTensor2(float16,nd), inTensor3(float16,nd), inTensor4(int32,nd),outTensor0(float16,nd), outTensor1(float16,nd)\\\\n[comb1]:inTensor0(int8,nd), inTensor1(int8,nd), inTensor2(int8,nd), inTensor3(int8,nd), inTensor4(int32,nd),outTensor0(int8,nd), outTensor1(int8,nd)\\\\n[comb2]:inTensor0(bf16,nd), inTensor1(bf16,nd), inTensor2(bf16,nd), inTensor3(bf16,nd), inTensor4(int32,nd),outTensor0(bf16,nd), outTensor1(bf16,nd)\\\\n[2026-10-08 02:09:04.382876] [error] [188] [operation_base.cpp:648] ReshapeAndCacheOperation_0 invalid param, setup check fail, error code: 13\\\", \\\"lines\\\": 6, \\\"matched_lines\\\": 6, \\\"name\\\": \\\"atb/atb_103_20261008020904.log\\\"}], \\\"read_only\\\": true, \\\"source\\\": \\\"/root/ascend/log/atb\\\", \\\"stderr\\\": \\\"\\\", \\\"stopped_owned_cid\\\": \\\"3f9ed75cc9c66a7cb65cc6de0c2d5c4c72224ed02041b2d834dcee4345635d91\\\", \\\"tar_bytes\\\": 3072}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 405,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 404,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 405\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 402,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 402\n      }\n    },\n    \"traceId\": \"3fbba043-b7c3-4597-a0c6-ad2cf3547cd6\"\n  },\n  \"operationId\": \"exec-0000000000001149\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "-c",
+            "import subprocess,pathlib,json,io,tarfile,resource\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\ncid=\"3f9ed75cc9c66a7cb65cc6de0c2d5c4c72224ed02041b2d834dcee4345635d91\"\nbase=[\"/usr/bin/prlimit\",\"--as=unlimited\",\"--\",\"/usr/bin/docker\"]\np=subprocess.run(base+[\"inspect\",cid],capture_output=True,text=True,timeout=12)\nassert p.returncode==0,p.stderr\nv=json.loads(p.stdout)[0]\nassert v[\"Id\"]==cid and v[\"Image\"]==\"sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1\"\nassert not v[\"State\"][\"Running\"] and v[\"State\"][\"Pid\"]==0 and not v.get(\"ExecIDs\")\ncp=subprocess.run(base+[\"cp\",cid+\":/root/ascend/log/atb\",\"-\"],capture_output=True,timeout=12)\nout={\"read_only\":True,\"stopped_owned_cid\":cid,\"source\":\"/root/ascend/log/atb\",\"exit\":cp.returncode,\"stderr\":cp.stderr.decode(\"utf-8\",\"replace\"),\"tar_bytes\":len(cp.stdout),\"files\":[]}\nassert len(cp.stdout)<=4*1024**2,\"bounded small ATB log snapshot exceeded; do not export\"\nif cp.returncode==0:\n with tarfile.open(fileobj=io.BytesIO(cp.stdout),mode=\"r:*\") as tar:\n  for m in tar:\n   if m.isfile():\n    assert m.size<=2*1024**2\n    text=tar.extractfile(m).read().decode(\"utf-8\",\"replace\")\n    lines=text.splitlines()\n    hits=[i for i,line in enumerate(lines) if any(q in line for q in (\"Reshape\",\"ERROR\",\"[E\",\"param\",\"Param\",\"dtype\",\"dim\"))]\n    indices=sorted({j for i in hits for j in range(max(0,i-2),min(len(lines),i+3))})\n    excerpt=\"\\n\".join(lines[i] for i in indices)\n    out[\"files\"].append({\"name\":m.name,\"bytes\":m.size,\"lines\":len(lines),\"matched_lines\":len(indices),\"excerpt\":excerpt[:32000]})\nprint(json.dumps(out,sort_keys=True))"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 155,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000001149",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"exit\": 0, \"files\": [{\"bytes\": 907, \"excerpt\": \"[2026-10-08 02:09:04.382439] [error] [188] [operation_base.cpp:408] ReshapeAndCacheOperation_0 CheckIniMatch Failed! Actual Inputs: inTensor0(bf16, nd), inTensor1(bf16, nd), inTensor2(bf16, nd), inTensor3(bf16, nd), inTensor4(int64, nd), outTensor0(bf16, nd), outTensor1(bf16, nd)\\nSupported Combs: \\n[comb0]:inTensor0(float16,nd), inTensor1(float16,nd), inTensor2(float16,nd), inTensor3(float16,nd), inTensor4(int32,nd),outTensor0(float16,nd), outTensor1(float16,nd)\\n[comb1]:inTensor0(int8,nd), inTensor1(int8,nd), inTensor2(int8,nd), inTensor3(int8,nd), inTensor4(int32,nd),outTensor0(int8,nd), outTensor1(int8,nd)\\n[comb2]:inTensor0(bf16,nd), inTensor1(bf16,nd), inTensor2(bf16,nd), inTensor3(bf16,nd), inTensor4(int32,nd),outTensor0(bf16,nd), outTensor1(bf16,nd)\\n[2026-10-08 02:09:04.382876] [error] [188] [operation_base.cpp:648] ReshapeAndCacheOperation_0 invalid param, setup check fail, error code: 13\", \"lines\": 6, \"matched_lines\": 6, \"name\": \"atb/atb_103_20261008020904.log\"}], \"read_only\": true, \"source\": \"/root/ascend/log/atb\", \"stderr\": \"\", \"stopped_owned_cid\": \"3f9ed75cc9c66a7cb65cc6de0c2d5c4c72224ed02041b2d834dcee4345635d91\", \"tar_bytes\": 3072}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 405,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 404,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 405
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 402,
+          "routeLookupMs": 0,
+          "totalMs": 402
+        }
+      },
+      "traceId": "3fbba043-b7c3-4597-a0c6-ad2cf3547cd6"
+    },
+    "operationId": "exec-0000000000001149",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}
