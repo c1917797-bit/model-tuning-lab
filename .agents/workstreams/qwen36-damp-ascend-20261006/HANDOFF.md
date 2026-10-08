@@ -1,5 +1,18 @@
 # DAMP Ascend — current workstream
 
+## Current memory readback / model review — 2026-10-08 00:10Z
+
+Read HUGEPAGE32_H8_MODEL_PREPARATION_REVIEW_20261008.md and whole10ec first.
+Exactly32GiB authority remains completed/SPENT; no additional pool release.
+OVS samePID/start/24GiB and full NUMA3 pool retained, fresh ordinaryRAM~105.5GiB.
+Exact full11520 MA10e2 is RUNNING; four owned CIDs noOOM, firstB13–16 graph
+trial1 in progress. Cases arrays include running cases, not full PASS.
+Actual model-v2 core/CPU ownership source reviewed; incremental prefix identity,
+actual slab budget and TP4/model graph/formal pairing still pending.
+Source-bound GPUModelRunner copied from freshly inspected stopped retained own
+CID only (10ed0); no exec/start. Three preparers continue, MAIN alone devices/Git.
+No new full/mixed/model/E2E/task acceptance. Cutoffs unchanged. Previous entries historical.
+
 ## Current actual four-card H8 v7 matrix — 2026-10-07 23:58Z
 
 Full11520 MA10e2 remains RUNNING, not completed or serving-ready. Actual readonly
