@@ -55,6 +55,19 @@ HYPIC watermark, reduce concurrency/output, restart the failed root, use
 NPU4-7, or infer whole-paper/all-Skill acceptance. Raw outputs stay outside
 Git; main and the canonical dirty checkout remain untouched.
 
+**Read-only lane wait (started 2026-10-08 10:28 UTC):** AWMCP operation
+`exec-000000000000131e` is a live host-side monitor, not an experiment or
+auto-launcher. Poll that exact handle. It waits for the known external
+CANNBench job PIDs 1382336/1382337/1382427/1382428 to exit and then for
+ten 30-second physical NPU0-3 no-process observations. At 10:25 UTC,
+NPU3 had external Python PID 1931175 whose cgroup belonged to
+`cannbench_ds`; this confirms the shared lane was actually occupied even
+though other snapshots were empty. A terminal quiet-window report is only
+permission to perform a **fresh** topology/ownership/root check, not proof
+that `reserve2` may start without rechecking. Do not restart this monitor
+on an observation timeout or stop/modify the external jobs. The monitor
+times out after two hours without mutating containers or devices.
+
 **Final clean2 checkpoint (2026-10-07 21:58 UTC; supersedes all progress checkpoints below):** Sole quality job `exec-0000000000000e15` exited 0 after all 12 units and both exact service releases. The unchanged strict quality auditor exited 1 at the four-worker hot-path gate: zero worker-hot PIDs, because the frozen natural evaluator supplies no usable segments under the frozen service configuration. The separate scoped auditor independently verified all 12 row/scorer/hash/identity units, 752/754 clean guard samples, both releases and paired natural scores while setting `formal_acceptance_claim=false`. Its SHA256 is `61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0`; read `FINAL_EVIDENCE_DECISION.md` first. LongBench-v2 totals are 224/381 in both arms; GSM8K totals are 3836/3957 no-cache and 3834/3957 HYPIC. The all-nonnegative score gate also fails, but adverse means stay within baseline three-run ranges. Physical NPU0–3 and port 8223 were released; NPU4–7 and unrelated containers were untouched. Do not restart clean2, pool attempt-1 rows, claim full-paper reproduction or merge main. A separately authorized prospective in-path quality supplement is the meaningful open experiment.
 
 **Git checkpoint:** the remote independent branch was verified at `ab89641d632aeee9a91e942d5325ee4a7dd373dd` before these final edits. Older text below describing unavailable credentials/network and older remote pointers is historical, not current. Commit, push and verify final edits only on `work/hypic-npu03-cpu-binding-fix-20261007`; the canonical checkout stays untouched.
