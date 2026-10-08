@@ -53,16 +53,9 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   mappings. Startup guard caught foreign PID 1426552 on physical NPU2
   at 16:21:22 UTC, stopped at 0/127 and released only owned resources;
   see HOTPATH_CACHE10R6_RESOURCE_CONFLICT.md and raw SHA-256 receipts.
-- The user explicitly confirmed actual physical NPU0–3 idleness permits
-  running regardless of others' passive mappings. After a clean live probe,
-  a new unique cache10r7 attempt was launched. Its controller operation is
-  exec-0000000000001523, root
-  /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r7-full-hypic.
-  The first r7 launch was rejected by its allowlist before root creation;
-  both campaign and artifact mapping were repaired, then 35 offline tests
-  passed. The second launch caught a real foreign PID 1482057 on physical
-  NPU3 during startup at 16:28:11 UTC. It stopped at 0/127 and removed
-  only its owned container; see HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md.
+- cache10r7 reached 0/127 after a real foreign NPU3 PID entered during startup;
+  its owned service was released. See HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md
+  for the immutable operation, root, allowlist repair and raw hashes.
 - The user chose opportunistic actual-idle attempts over requiring an exclusive
   reservation. cache10r8 launched on actual-idle physical NPU0–3, then its
   startup guard caught a real foreign `cannbench_ds` PID 1762714 on physical
