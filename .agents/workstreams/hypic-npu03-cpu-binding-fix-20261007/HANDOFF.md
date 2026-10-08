@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 17:24 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Updated: 2026-10-08 17:53 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
 - The r6 code and watcher handoff are pushed through 1a3a518. Operation
   exec-0000000000001514 verified clean local HEAD, upstream and live remote
   equality. Plain HTTPS briefly timed out/errored; a per-command HTTP/1.1
@@ -12,10 +12,12 @@
   acceptance remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 5 partial, 22 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 6 partial, 21 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - Live r9 request-level traceability is not yet proven despite aggregate
   hot-path activity; see HOTPATH_CACHE10R9_REQUEST_TRACEABILITY_AUDIT.md.
+- The quality Skill's eighth real-task case remains partial; see
+  MODEL_QUALITY_SKILL_REQUEST_COVERAGE_ACCEPTANCE_20261008.md.
 
 ## 1. North Star
 
@@ -145,6 +147,3 @@ ss -lntp
 After a validated commit, push the current HEAD with
 `git push origin HEAD:work/hypic-npu03-cpu-binding-fix-20261007` and
 check the live remote ref before claiming it is synchronized.
-
-cache10r3/r4/r5/r6/r7 terminal operations and immutable raw roots are recorded
-in their conflict/result reports; none is a valid baseline/treatment arm.

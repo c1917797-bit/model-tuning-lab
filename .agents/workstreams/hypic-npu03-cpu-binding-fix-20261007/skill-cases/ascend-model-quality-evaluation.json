@@ -1,0 +1,50 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-model-quality-evaluation",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Review whether every scored HYPIC 2048-token explicit-boundary request on physical NPU0-3 TP4 actually traversed the worker hot path under concurrency 8",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "303658f0a652ed392c875e58941c6b1d246552f7",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01/ma; live cache10r9 original-protocol LongBench-v2 candidate; Qwen3.6-27B BF16 TP4 physical NPU0-3, c8, 2048 output cap; snapshot only, no terminal pair",
+  "observed": {
+    "completed_scored_ids_in_read_only_snapshot": 162,
+    "request_boundary_events_joinable": true,
+    "existing_worker_and_repair_events_have_request_ids": false,
+    "strict_request_level_gate": "UNVERIFIED 162/162",
+    "main_reference_explicit_per_request_worker_join": false,
+    "branch_reference_explicit_per_request_worker_join": true,
+    "offline_counterexample_tests": 6,
+    "all_workstream_tests_passed": 43,
+    "terminal_quality_pair_complete": false,
+    "main_skill_integrated": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_SKILL_REQUEST_COVERAGE_ACCEPTANCE_20261008.md",
+      "sha256": "08d881c3e66d0f72bfbff48c75ca9ac58aa44ebb409230e8020f73e0f88dea53"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R9_REQUEST_TRACEABILITY_AUDIT.md",
+      "sha256": "22d3f5c978268985ffeb773cc68a3e843b15c507c0e64a33179381caef7db7c2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hotpath_request_coverage.py",
+      "sha256": "01d27e047b4ac7f8ab944db7da0dd67bc0eca0d5f38655a388c4d9f51f2429f6"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hotpath_request_coverage.py",
+      "sha256": "5053f93da66651db00ca2fdd9a58f0f0bdef2cc09a850d392bf4a9ec779755db"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "The real live candidate exposed a request-level activation evidence gap; the branch verifier correctly rejects batch-only evidence. Current main says treatment activation must be proven but does not specify this per-scored-request join, while the branch repair is unintegrated. This is a bounded defect/repair case, not full main Skill acceptance, not a terminal HYPIC quality result, and not proof that main guidance always yields an incorrect decision.",
+  "next_gate": "After r9 terminates, hash and audit all 127x3 rows, isolation and exact release; instrument request-ID worker proof in a fresh candidate after live service release, pair with a same-identity control on actually idle physical NPU0-3, and replay the integrated main Skill before upgrading acceptance.",
+  "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
+}

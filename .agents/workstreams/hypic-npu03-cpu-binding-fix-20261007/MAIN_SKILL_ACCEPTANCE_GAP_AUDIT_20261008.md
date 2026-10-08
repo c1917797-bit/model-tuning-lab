@@ -73,6 +73,17 @@ replay now pass. Main remains defective and unintegrated, so this is another
 **partial-evidence** case, not a main-Skill pass. Inventory: **7 cases,
 2 bounded verified, 5 partial, 22 missing**.
 
+At 17:48 UTC, an eighth case tested the exact current-main
+`ascend-model-quality-evaluation` instruction boundary against the live
+cache10r9 explicit-boundary task. A read-only replay of 162 scored IDs
+found joinable scheduler boundaries but no request-ID worker repair
+evidence. The branch's strict checker and six counterexample tests
+correctly retained `UNVERIFIED`; current main leaves this activation
+granularity unspecified and the branch clarification is unintegrated.
+The long-term case is **partial-evidence**: 8 provenance-checked cases,
+2 bounded verified, 6 partial, 21 missing. It is not a terminal HYPIC
+quality or main-Skill pass.
+
 ## What the current records prove
 
 - The branch has a human-readable 29-row inventory with each Skill's

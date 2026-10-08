@@ -26,10 +26,22 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 7)
-        self.assertEqual(report["skills_without_case"], 22)
+        self.assertEqual(report["cases_with_verified_provenance"], 8)
+        self.assertEqual(report["skills_without_case"], 21)
         self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 5, "verified": 2})
+                         {"partial-evidence": 6, "verified": 2})
+
+    def test_quality_request_coverage_case_stays_partial(self) -> None:
+        path = cases.CASES / "ascend-model-quality-evaluation.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-model-quality-evaluation"})
+        self.assertEqual(skill, "ascend-model-quality-evaluation")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["strict_request_level_gate"],
+                         "UNVERIFIED 162/162")
+        self.assertFalse(item["observed"]["terminal_quality_pair_complete"])
+        self.assertFalse(item["observed"]["main_skill_integrated"])
 
     def test_practice_iteration_main_contract_defect_stays_partial(self) -> None:
         path = cases.CASES / "mst-practice-iteration-planning.json"
