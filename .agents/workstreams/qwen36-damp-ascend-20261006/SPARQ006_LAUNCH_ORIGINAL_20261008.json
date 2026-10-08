@@ -1,0 +1,62 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"main-sparq006-whole-cpuABI-before-NPU6-20261008-0142-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-0000000000001121\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 5000,\n  \"result\": {\n    \"execId\": \"exec-0000000000001121\",\n    \"lane\": \"job\",\n    \"ok\": true,\n    \"pollAfterMs\": 250,\n    \"running\": true,\n    \"state\": \"running\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 408,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 408,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1455,\n      \"totalMs\": 1864\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 407,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 407\n    }\n  },\n  \"traceId\": \"28cb917a-69c7-4d18-a3bd-74879a4c5c8b\"\n}"
+    }
+  ],
+  "structuredContent": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "main-sparq006-whole-cpuABI-before-NPU6-20261008-0142-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000001121",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000001121",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 408,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 408,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1455,
+        "totalMs": 1864
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 407,
+        "routeLookupMs": 0,
+        "totalMs": 407
+      }
+    },
+    "traceId": "28cb917a-69c7-4d18-a3bd-74879a4c5c8b"
+  },
+  "isError": false
+}

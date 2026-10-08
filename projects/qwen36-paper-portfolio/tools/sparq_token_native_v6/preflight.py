@@ -32,6 +32,7 @@ def callable_observation(fn):
  result["signature"]=safe_observe(signature)
  result["source_file"]=safe_observe(lambda:inspect.getsourcefile(fn))
  result["source"]=safe_observe(lambda:inspect.getsource(fn))
+ if getattr(fn,"__module__",None)==ATB_MODULE:result["atb_provenance"]=collect_atb_provenance(fn)
  return result
 def schema_observation(schema):
  return {"name":str(schema.name),"overload_name":str(schema.overload_name),"text":str(schema),
@@ -90,7 +91,7 @@ def keyword_contract(arguments,needed,kind):
  # An extra required argument cannot be supplied by this exact frozen keyword call.
  return all(a["name"] in needed or a.get("has_default") is True or a.get("kind") in ("VAR_KEYWORD","VAR_POSITIONAL")
   for a in arguments)
-def validate_exports(records):
+def validate_signature_contracts(records):
  require(type(records) is dict and set(records)==set(REQUIRED),"complete two actual native export observations")
  validated={}
  for name,needed in REQUIRED.items():
@@ -112,6 +113,92 @@ def validate_exports(records):
   require(witnesses,"one complete native signature with actual keyword names BEFORE device initialization: "+name)
   r.update(required_arguments=sorted(needed),single_signature_matched=True,matched_single_signatures=witnesses,
    numerical_support_verified=False)
+  validated[name]=r
+ return validated
+
+ATB_MODULE="torch_npu.op_plugin.atb._atb_ops"
+ATB_SOURCE="/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/op_plugin/atb/_atb_ops.py"
+ATB_SOURCE_SHA="b9f3b41645faecb9bc8c9a48cb90edb9274b040470a50c3d97bc3283b3ba8c00"
+ATB_LAZY_SHA="b0a2c36dcd61fdacb0871745574c5f76c795225af4c79d2fc4f2dafb11bb40ff"
+ATB_GENERATED_SHA="c4eb95a77e89caef0aaa7e42129776a76daa0d1e0e4d87056586f78b8b4ff757"
+ATB_SCHEMAS={
+ "_npu_paged_attention":"atb::_npu_paged_attention(Tensor query, Tensor key_cache, Tensor value_cache, int num_kv_heads, int num_heads, float scale_value, Tensor block_table, Tensor context_lens, Tensor(a!) out, *, Tensor? workspace=None) -> ()",
+ "_npu_reshape_and_cache":"atb::_npu_reshape_and_cache(Tensor key, Tensor value, Tensor(a!) key_cache, Tensor(b!) value_cache, Tensor slot_indices) -> ()"}
+def collect_atb_provenance(fn):
+ # Observation-only, never initialize/call the lazy ATB callable.
+ def collect():
+  module=sys.modules.get(ATB_MODULE);path=getattr(module,"__file__",None)
+  source=Path(path).read_bytes()
+  chain=[];target=fn;seen=set()
+  for depth in range(8):
+   if id(target) in seen:raise ValueError("cyclic actual wrapper chain")
+   seen.add(id(target));cv=inspect.getclosurevars(target)
+   scalars={k:v for k,v in cv.nonlocals.items() if type(v) in (str,int,float,bool) or v is None}
+   functions={k:{"module":v.__module__,"qualname":v.__qualname__,"source_file":v.__code__.co_filename}
+    for k,v in cv.nonlocals.items() if inspect.isfunction(v)}
+   next_target=getattr(target,"__wrapped__",None)
+   if next_target is not None and (not inspect.isfunction(next_target) or
+    not any(v is next_target for v in cv.nonlocals.values())):
+    raise ValueError("actual __wrapped__ is not closure callee")
+   chain.append({"module":target.__module__,"name":target.__name__,"qualname":target.__qualname__,
+    "source_file":target.__code__.co_filename,"source":inspect.getsource(target.__code__),
+    "closure_scalars":scalars,"closure_functions":functions,
+    "wrapped_is_closure_callee":next_target is not None})
+   if next_target is None:break
+   target=next_target
+  else:raise ValueError("actual wrapper chain exceeds bounded observer")
+  return {"module_file":path,"module_source_sha256":hashlib.sha256(source).hexdigest(),
+   "module_source":source.decode("utf-8"),"chain":chain}
+ return safe_observe(collect)
+def atb_provenance_contract(name,binding):
+ require(name in REQUIRED and binding.get("module")==ATB_MODULE and
+  binding.get("name")==name and binding.get("qualname")=="create_lazy_atb_function.<locals>.generated_function",
+  "exact two installed TorchNPU ATB lazy wrappers, no foreign namespace impersonation")
+ source_file=binding["source_file"];source=binding["source"]
+ require(source_file["ok"] and source_file["value"]==ATB_SOURCE and source["ok"] and
+  hashlib.sha256(source["value"].encode()).hexdigest()==ATB_GENERATED_SHA,
+  "actual source-bound ATB generated callable")
+ provenance=binding.get("atb_provenance",{})
+ require(provenance.get("ok") is True and provenance.get("error") is None,"complete actual ATB source/closure observation")
+ v=provenance["value"]
+ require(v["module_file"]==ATB_SOURCE and v["module_source_sha256"]==ATB_SOURCE_SHA and
+  hashlib.sha256(v["module_source"].encode()).hexdigest()==ATB_SOURCE_SHA,
+  "actual unchanged installed ATB module bytes, not module-name only")
+ chain=v["chain"];require(type(chain) is list and len(chain)==2,"complete bounded actual lazy wrapper chain")
+ for i,row in enumerate(chain):
+  require(row["module"]==ATB_MODULE and row["source_file"]==ATB_SOURCE and
+   row["wrapped_is_closure_callee"]==(i<len(chain)-1),"actual lazy decorator/closure provenance")
+ outer=chain[0]
+ require(outer["closure_scalars"]=={} and outer["closure_functions"]=={"api_func":{
+  "module":ATB_MODULE,"qualname":"create_lazy_atb_function.<locals>.generated_function","source_file":ATB_SOURCE}} and
+  hashlib.sha256(outer["source"].encode()).hexdigest()==ATB_LAZY_SHA,
+  "actual unchanged lazy_load_atb_so -> wrapped api_func closure")
+ final=chain[-1]
+ require(final["qualname"]=="create_lazy_atb_function.<locals>.generated_function" and
+  final["closure_scalars"]=={"api_name":name} and final["closure_functions"]=={} and
+  hashlib.sha256(final["source"].encode()).hexdigest()==ATB_GENERATED_SHA,
+  "actual captured api_name closes over only the exact observed dispatcher target")
+ return {"module":ATB_MODULE,"module_source_sha256":ATB_SOURCE_SHA,"api_name":name,
+  "dispatcher":"atb::"+name,"native_algorithm_verified":False}
+ATB_SCHEMA_RECORDS={"_npu_paged_attention":{"arguments":[{"default":None,"has_default":False,"kwarg_only":False,"name":"query","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"key_cache","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"value_cache","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"num_kv_heads","type":"int"},{"default":None,"has_default":False,"kwarg_only":False,"name":"num_heads","type":"int"},{"default":None,"has_default":False,"kwarg_only":False,"name":"scale_value","type":"float"},{"default":None,"has_default":False,"kwarg_only":False,"name":"block_table","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"context_lens","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"out","type":"Tensor"},{"default":"None","has_default":True,"kwarg_only":True,"name":"workspace","type":"Optional[Tensor]"}],"name":"atb::_npu_paged_attention","overload_name":"","returns":[],"text":"atb::_npu_paged_attention(Tensor query, Tensor key_cache, Tensor value_cache, int num_kv_heads, int num_heads, float scale_value, Tensor block_table, Tensor context_lens, Tensor(a!) out, *, Tensor? workspace=None) -> ()"},"_npu_reshape_and_cache":{"arguments":[{"default":None,"has_default":False,"kwarg_only":False,"name":"key","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"value","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"key_cache","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"value_cache","type":"Tensor"},{"default":None,"has_default":False,"kwarg_only":False,"name":"slot_indices","type":"Tensor"}],"name":"atb::_npu_reshape_and_cache","overload_name":"","returns":[],"text":"atb::_npu_reshape_and_cache(Tensor key, Tensor value, Tensor(a!) key_cache, Tensor(b!) value_cache, Tensor slot_indices) -> ()"}}
+def atb_dispatcher_contract(name,schemas):
+ require(name in REQUIRED and schemas==[ATB_SCHEMA_RECORDS[name]],
+  "one byte-bound complete installed ATB default schema; no foreign namespace/type/overload union")
+ require(keyword_contract(schemas[0]["arguments"],REQUIRED[name],"dispatcher"),
+  "exact observed schema accepts unchanged frozen native keyword call")
+ return copy.deepcopy(schemas[0])
+def validate_exports(records):
+ require(type(records) is dict and set(records)==set(REQUIRED),"complete two actual native export observations")
+ validated={}
+ for name,needed in REQUIRED.items():
+  r=copy.deepcopy(records[name]);binding=r["binding"]
+  require(binding.get("callable") is True and r["export_lookup_error"] is None and
+   r["dispatcher_scan_error"] is None,"complete actual callable/dispatcher scan: "+name)
+  provenance=atb_provenance_contract(name,binding)
+  schema=atb_dispatcher_contract(name,r["dispatcher"])
+  r.update(required_arguments=sorted(needed),single_signature_matched=True,
+   matched_single_signatures=[{"kind":"actual_source_bound_atb_dispatcher","text":schema["text"],
+    "arguments":schema["arguments"],"provenance":provenance}],numerical_support_verified=False)
   validated[name]=r
  return validated
 def exports(torch,torch_npu):
@@ -150,7 +237,7 @@ def export_contract_identity(records):
   result[name]={"binding":{k:binding[k] for k in ("callable","kind","module","qualname","name","doc","text_signature")},
    "signature":outcome(binding["signature"]),"source_file":outcome(binding["source_file"]),"source":outcome(binding["source"]),
    "dispatcher":record["dispatcher"],"required_arguments":record["required_arguments"],
-   "matched_single_signatures":record["matched_single_signatures"],"single_signature_matched":record["single_signature_matched"]}
+   "atb_provenance":binding.get("atb_provenance"),"matched_single_signatures":record["matched_single_signatures"],"single_signature_matched":record["single_signature_matched"]}
  return result
 def collect_wrapper(module):
  file=getattr(module,"__file__",None)

@@ -122,3 +122,58 @@ address-space wrapper even for read-only ps/inspect diagnostics. MA0e65 failed
 Go reservation under the inherited256MiB soft AS limit; the changed Docker-only
 AS restoration passed MA0e69. Keep the parent plus CLI RSS and cgroup budget;
 do not make the whole controller unbounded or count that diagnostic as numerics.
+
+## Exact preparation recovery and algorithm-consumer admission, Oct8 01:42Z
+
+In this continuation, preparer turns appeared running while their remote patch
+calls had no ACK for approximately1–3hours. Interrupting a turn did not cancel
+or establish the remote action. Exact reads found the unknown Sparse service005
+manifest, W4native002 controller and six H8 delivery files absent. Only those
+resolved source gaps were repaired; no device experiment was counted or retried.
+
+SparQ006's substring-delta software checks passed but its real apply_patch
+failed: the abbreviated old line omitted the existing single_signature_matched
+field. MAIN preserved the rejection and unchanged readback, used the entire
+observed line, then real dryRun/application and94 canonical tests/source27
+passed. A software string replacement is not a runnable whole-line patch.
+The automatic approval timeout explicitly allowed one retry; that retry passed.
+Keep the original non-JSON tool body before decoding it, not a JSON exception
+as the sole explanation. This was preparation recovery, not numerical PASS.
+
+Do not occupy scarce cards with a generic native ABI matrix lacking a faithful
+algorithm consumer. W4native002 preserves the original A16/per-channel/lowfirst
+packing gate, but QQQ's author W4A8/Marlin-Split-K packing/scale chain differs,
+and actual target export/calibration/loader binding is still absent. MAIN
+deferred that four-hour matrix, preserving its source readiness without calling
+the paper unsuccessful; rolling preparation returned to KIVI's actual
+asymmetric writer/residual-tail/lifecycle. A relevant ABI gate remains useful
+when it directly closes a named algorithm's real producer-to-service seam.
+
+Original MAIN receipts: SPARQ006_PREPARATION_RECOVERY_20261008.json,
+SPARQ006_CANONICAL_SOFTWARE_ORIGINAL_20261008.json and
+SPARQ006_LAUNCH_ORIGINAL_20261008.json in the current DAMP workstream.
+The launch is running authority only; full numerical, model, E2E and tasks
+remain separate. Hugepage32GiB authority is already completed/SPENT.
+
+## Docker timestamp precision at a source-to-device seam, Oct8 01:48Z
+
+Actual SparQ006 exec1121 CPU ABI and physical6 canary passed, then the
+Python3.9 host controller rejected Docker's8-digit fractional timestamp while
+checking CPU stop-before-NPU-start. Numeric child was never launched: no
+numerical128-case PASS, E2E or task conclusion exists. Actual1126 independently
+verified both exact owned CIDs stopped/Pid0/noExec/OOMfalse, cleanup errors
+empty, and no process on0–7; keep this original failure instead of rerunning it.
+
+Source-only tests of path/schema linkage did not exercise Docker timestamp
+precision. A targeted successor must strictly validate UTC RFC3339 timestamps
+and preserve1–9 fractional digits in exact nanosecond ordering. Truncating to
+microseconds can falsely admit a CPU stop occurring nanoseconds after an NPU
+start. Add real observed timestamp fixtures plus same-microsecond reversed
+ordering and invalid-date/zone/fraction negatives before a new once-only run.
+This is a controller compatibility repair, not relaxed numerical or isolation
+gates, and not evidence against the paper. Record only currently verified phase
+claims, and update handoff RUNNING authority immediately on a terminal failure.
+
+Original structured tool envelopes are retained as
+SPARQ006_TERMINAL_ORIGINAL_20261008.json and
+SPARQ006_RELEASE_AUDIT_ORIGINAL_20261008.json in the current workstream.

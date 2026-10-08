@@ -5,6 +5,11 @@ from types import SimpleNamespace
 from unittest import mock
 import preflight as p,receipt
 class NativeAPI(unittest.TestCase):
+ # These legacy synthetic callable fixtures test the keyword matcher only.
+ # Runtime exports() exclusively uses the new source-bound ATB validator.
+ def setUp(self):
+  self.generic=mock.patch.object(p,"validate_exports",side_effect=p.validate_signature_contracts);self.generic.start()
+ def tearDown(self):self.generic.stop()
  def test_ops_bootstrap_precedes_device_operator_import(self):
   calls=[];expected=object()
   def importer(name,*args,**kwargs):
@@ -192,4 +197,110 @@ class NativeAPI(unittest.TestCase):
   handler=blocks[0].handlers[0]
   self.assertIsInstance(handler.body[-1],ast.Raise)
   self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="save_observations" for n in ast.walk(handler)))
+class ActualATBBinding(unittest.TestCase):
+ RAW=Path("/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-005-native-20261007-001/cpu-preflight/ABI_OBSERVATIONS.json")
+ ABI=RAW.with_name("ABI.json")
+ SNAPSHOT=Path("/cache/cch/qwen36-paper-preparation-20261007/sparse/atb-source-image-v1-20261008-0126/_atb_ops.py")
+ def raw(self):
+  self.assertEqual(receipt.sha(self.RAW),"6276dd65241ff82e2860725a0e9fb1b831d407bc1bfc1fbf24bfd05f471b9247")
+  return json.loads(self.RAW.read_bytes())
+ def fixture(self):
+  # Additional closure fields are explicit software fixtures, NEVER original actual ABI evidence.
+  rows=copy.deepcopy(self.raw()["exports_after_source_import"]);source=self.SNAPSHOT.read_text()
+  self.assertEqual(receipt.sha(self.SNAPSHOT),p.ATB_SOURCE_SHA)
+  for name,row in rows.items():
+   binding=row["binding"]
+   binding["atb_provenance"]={"ok":True,"error":None,"value":{
+    "module_file":p.ATB_SOURCE,"module_source":source,"module_source_sha256":p.ATB_SOURCE_SHA,
+    "chain":[{"module":p.ATB_MODULE,"name":name,"qualname":"create_lazy_atb_function.<locals>.generated_function",
+     "source_file":p.ATB_SOURCE,"source":"    @wraps(api_func)\n    def wrapper(*args, **kwargs):\n        _register_atb_extensions()\n        return api_func(*args, **kwargs)\n",
+     "closure_scalars":{},"closure_functions":{"api_func":{"module":p.ATB_MODULE,
+      "qualname":"create_lazy_atb_function.<locals>.generated_function","source_file":p.ATB_SOURCE}},
+     "wrapped_is_closure_callee":True},{"module":p.ATB_MODULE,"name":"generated_function",
+     "qualname":"create_lazy_atb_function.<locals>.generated_function","source_file":p.ATB_SOURCE,
+     "source":binding["source"]["value"],"closure_scalars":{"api_name":name},
+     "closure_functions":{},"wrapped_is_closure_callee":False}]}}
+  return rows
+ def test_original_failed_005_exact_ATB_schema_positive_not_receipt_promotion(self):
+  original=json.loads(self.ABI.read_bytes())
+  self.assertEqual(receipt.sha(self.ABI),"e18737761ed8c6fa3d3cff650323a6ce2403491d745fed3939d32edef7348df9")
+  self.assertEqual(original["status"],"failed");self.assertFalse(original["npu_executed"])
+  self.assertIn("one complete native signature",original["primary_error"]["text"])
+  for name,row in self.raw()["exports_after_source_import"].items():
+   self.assertEqual(p.atb_dispatcher_contract(name,row["dispatcher"]),row["dispatcher"][0])
+  with self.assertRaises(ValueError):p.validate_abi(original,{}, {})
+  # Prior observer lacks actual module hash/closure, so strict006 never promotes it.
+  with self.assertRaisesRegex(ValueError,"source/closure observation"):
+   p.validate_exports(self.raw()["exports_after_source_import"])
+ def test_source_bound_ATB_software_fixture_positive(self):
+  result=p.validate_exports(self.fixture())
+  for name,row in result.items():
+   witness=row["matched_single_signatures"]
+   self.assertEqual(len(witness),1);self.assertEqual(witness[0]["provenance"]["dispatcher"],"atb::"+name)
+   self.assertFalse(row["numerical_support_verified"]);self.assertNotIn("torch",sys.modules)
+ def test_complete_original_schema_namespace_and_metadata_negatives(self):
+  raw=self.raw()["exports_after_source_import"]
+  for name,row in raw.items():
+   for mode in ("npu","_C_ascend","other-atb","overload","missing","union","slot_mapping","type","default","extra","return"):
+    schemas=copy.deepcopy(row["dispatcher"]);s=schemas[0]
+    if mode in ("npu","_C_ascend"):s["name"]=mode+"::"+name;s["text"]=s["text"].replace("atb::",mode+"::")
+    if mode=="other-atb":s["name"]="atb::other_operator"
+    if mode=="overload":s["overload_name"]="out"
+    if mode=="missing":s["arguments"].pop()
+    if mode=="union":schemas.append(copy.deepcopy(s))
+    if mode=="slot_mapping":s["arguments"][-1]["name"]="slot_mapping"
+    if mode=="type":s["arguments"][0]["type"]="int"
+    if mode=="default":s["arguments"][0]["has_default"]=True
+    if mode=="extra":s["arguments"].append(dict(name="foreign",type="Tensor",has_default=False,default=None,kwarg_only=False))
+    if mode=="return":s["returns"]=[dict(name="",type="Tensor")]
+    with self.subTest(name=name,mode=mode),self.assertRaises(ValueError):p.atb_dispatcher_contract(name,schemas)
+ def test_exact_wrapper_module_source_and_closure_negatives(self):
+  for mode in ("module","name","qualname","source-file","generated-source","module-hash","module-bytes","closure-target",
+   "closure-function","chain-missing","cycle-marker","chain-source","missing"):
+   rows=self.fixture();b=rows["_npu_reshape_and_cache"]["binding"];v=b["atb_provenance"]["value"]
+   if mode=="module":b["module"]="foreign.atb"
+   if mode=="name":b["name"]="_npu_paged_attention"
+   if mode=="qualname":b["qualname"]="foreign_function"
+   if mode=="source-file":b["source_file"]["value"]="/foreign/_atb_ops.py"
+   if mode=="generated-source":b["source"]["value"]=b["source"]["value"].replace("torch.ops.atb","torch.ops.npu")
+   if mode=="module-hash":v["module_source_sha256"]="0"*64
+   if mode=="module-bytes":v["module_source"]+="\n# changed\n"
+   if mode=="closure-target":v["chain"][-1]["closure_scalars"]["api_name"]="_npu_paged_attention"
+   if mode=="closure-function":v["chain"][-1]["closure_functions"]["extra"]={"module":"foreign"}
+   if mode=="chain-missing":v["chain"]=[]
+   if mode=="cycle-marker":v["chain"][-1]["wrapped_is_closure_callee"]=True
+   if mode=="chain-source":v["chain"][-1]["source"]=v["chain"][-1]["source"].replace("torch.ops.atb","torch.ops.npu")
+   if mode=="missing":del b["atb_provenance"]
+   with self.subTest(mode=mode),self.assertRaises(ValueError):p.validate_exports(rows)
+ def test_generic_python_or_doc_witness_cannot_override_foreign_runtime_export(self):
+  rows=self.fixture();b=rows["_npu_reshape_and_cache"]["binding"];b["module"]="foreign"
+  b["signature"]={"ok":True,"error":None,"value":{"text":"fixture-complete","arguments":[
+   dict(name=n,kind="POSITIONAL_OR_KEYWORD",has_default=False) for n in p.REQUIRED["_npu_reshape_and_cache"]]}}
+  b["doc"]="_npu_reshape_and_cache(Tensor key, Tensor value, Tensor key_cache, Tensor value_cache, Tensor slot_indices)"
+  with self.assertRaises(ValueError):p.validate_exports(rows)
+ def test_incomplete_original_module_or_dispatcher_observation_rejected(self):
+  for name in p.REQUIRED:
+   rows=self.fixture();rows[name]["dispatcher_scan_error"]={"type":"RuntimeError","text":"actual scan failed"}
+   with self.assertRaises(ValueError):p.validate_exports(rows)
+   rows=self.fixture();rows[name]["binding"]["atb_provenance"]={"ok":False,"value":None,"error":{"type":"OSError","text":"read failure"}}
+   with self.assertRaises(ValueError):p.validate_exports(rows)
+ def test_actual_installed_source_fragment_and_lazy_dispatch_in_source(self):
+  source=self.SNAPSHOT.read_text();self.assertEqual(receipt.sha(self.SNAPSHOT),p.ATB_SOURCE_SHA)
+  tree=ast.parse(source)
+  functions=[n for n in ast.walk(tree) if isinstance(n,ast.FunctionDef) and n.name=="generated_function"]
+  self.assertEqual(len(functions),1)
+  fn=functions[0]
+  calls=[n for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="getattr"]
+  self.assertEqual(len(calls),1)
+  self.assertEqual(ast.unparse(calls[0]),"getattr(torch.ops.atb, api_name)")
+  self.assertIn("lazy_load_atb_so",ast.unparse(fn.decorator_list[0]))
+ def test_deployed_exports_path_always_strict_and_identity_binds_actual_provenance(self):
+  rows=self.fixture()
+  with mock.patch.object(p,"collect_exports",return_value=rows):
+   self.assertTrue(p.exports(None,None)["_npu_paged_attention"]["single_signature_matched"])
+  original=p.validate_exports(rows);other=copy.deepcopy(original)
+  other["_npu_paged_attention"]["binding"]["atb_provenance"]["value"]["chain"][-1]["closure_scalars"]["api_name"]="foreign"
+  self.assertNotEqual(p.export_contract_identity(original),p.export_contract_identity(other))
+
+
 if __name__=="__main__":unittest.main(verbosity=2)

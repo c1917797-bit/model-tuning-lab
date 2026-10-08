@@ -1,0 +1,82 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "scripts/validate-mst.sh"
+        ],
+        "cancelled": false,
+        "command": "/bin/sh",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 93,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000001129",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "PASS: Maintainer Skill Tree structure is valid (20 skills)\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 406,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 406,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 406
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 406,
+        "routeLookupMs": 0,
+        "totalMs": 406
+      }
+    },
+    "traceId": "3584eef3-48a4-4c80-97c1-66e782c2b883"
+  },
+  "operationId": "exec-0000000000001129",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

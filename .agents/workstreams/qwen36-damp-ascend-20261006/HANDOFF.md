@@ -1,5 +1,69 @@
 # DAMP Ascend — current workstream
 
+## Latest terminal SparQ006 result — 2026-10-08 01:48Z
+
+Actual exec-0000000000001121 completed1 in158785ms; no running model or
+numeric child remains. Result status failed, SHA
+9274a8b001b2ecb7a30a9f8a9a3ac01ef1333dc991ad06d5a204acabdedc0667.
+CPU no-device ABI passed and physical6 canary passed, but BEFORE the128-case
+matrix Python3.9 datetime.fromisoformat rejected Docker's8-digit nanoseconds
+at proof.py45. This is a controller timestamp-compatibility failure, not a
+SparQ numerical/E2E/task verdict. numerical_child=null and component=false.
+Preserve the original006 result, terminal and output; never relabel it PASS.
+
+Actual MAIN1126 readonly1.154s independent release audit:
+CPU fb6ebbabee553f139c7c27e98b360a4377b650df2b98245ad0a4744c45371294
+and physical6 e3960eabea41e8231c586aa67a3d43277807216835430d6a2e9021abc5eccf5b
+are stopped/retained/Pid0/ExecIDsnull/OOMfalse. Both cleanup errors=[].
+All8 cards have no NPU processes;0–3 protected before/after=[].
+Ordinary MemAvailable116704116KiB (~111.30GiB), OVSsamePID27118/start11471
+and HugetlbPages25165824KiB=24GiB; pools439/485/486/474, node3free450.
+Exactly32GiB release authority remains completed/SPENT; no further release.
+
+Sparse preparer now prepares006→007 exact UTC nanosecond-order parser/tests/
+manifest repair only; source algorithm/tensor gates/budgets stay unchanged.
+No rerun until MAIN reviews the actual minimal repair and fresh resource proof.
+Full-model manifest/final frozen datasets/scorer Refs still missing for TP4;
+kernel/canary evidence cannot authorize or stand in for model/E2E/tasks.
+W4native002 deferred for missing faithful paper consumer; KIVI preparation and
+SparsePrefix immutable byte-commit hypothesis continue source-only in parallel.
+H8 original numericalFAIL and source-export security denial remain unchanged.
+Fixed deadlines, active goal and known remote-push authentication blocker stay.
+The previous01:42 RUNNING entry below is now historical.
+
+## Current actual SparQ006 continuation — 2026-10-08 01:42Z
+
+SparQ006 is actually applied, unchanged algorithm/tensor/resource gates.
+MAIN111f completed0:94 canonical stdlib tests/source27/OFF CLI/diff passed;
+manifest3705f7970deb2ee6a2997b1cda57aa6c4a61ae42a3141deb568024caeb6eb1d2.
+Actual1121 is RUNNING, not yet numerical PASS: same-image Devices[] ABI
+must pass and be stopped before the single physical6 guest/canary/matrix.
+Poll exactly exec-0000000000001121 on current MA peer a6109/direct/tpc;
+never repeat its new output /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-v6-006-native-20261008-001.
+Whole original launch/source software/rejected patch and unchanged readback
+are retained here. An actual whole-line context failure and one explicitly
+permitted automatic-approval-timeout retry were repaired, not hidden.
+
+H8 full-v7 original numerical FAIL is unchanged. New3-file source export was
+auto-review denied without execution/operationId; paused, no equivalent read.
+The exact denial below is an agent-reported original text, not a fabricated
+MAIN native envelope. Existing110b diagnosis supports a common-state/readout
+control proposal only; no isolated-cast fix, mixed/model permission or NPU PASS.
+Recurrent preparer rolls to a distinct SparsePrefix immutable-commit/restore
+hypothesis; HYPIC is historical implementation reference, not a new success.
+W4native002 source readiness remains; its A16 native gate does not faithfully
+consume QQQ's W4A8/Split-K mechanism, so MAIN deferred4h generic matrix and
+rotated lowbit preparation to a faithful KIVI writer/lifecycle consumer.
+
+Memory authority remains completed/SPENT exactly32GiB. Actual111a01:30:45Z
+readback: node pools439/485/486/474GiB, OVSsamePID27118/start11471/24GiB,
+wholeNUMA3 retained, ordinary MemAvailable116715888KiB (~111.31GiB).
+No further pool write/service stop/permanent config/0–3 action.
+Three preparers only source/stdlib, MAIN alone device/Git. Known authentication
+blocker unchanged; local stage is not a push. Fixed cutoffs unchanged:
+KV Oct8 08:29:54Z / portfolio Oct9 11:17:31Z. Goal active, no accepted new
+non-HYPIC matched E2E/task method. Earlier running entries are historical.
+
 ## Current actual H8 numerical failure — 2026-10-08 01:03Z
 
 Read H8_FULL_V7_NUMERICAL_FAILURE_20261008.md and whole10e2/1106 first.

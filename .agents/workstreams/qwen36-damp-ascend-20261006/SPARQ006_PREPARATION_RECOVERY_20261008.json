@@ -1,0 +1,418 @@
+{
+  "schema": "main-sparq006-preparation-recovery/v1",
+  "scope": "original raw patch/tool records; no numerical authority",
+  "rejectedFirstPatch": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"channel\": \"file\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"result\": {\n    \"error\": \"Failed to find expected lines in projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py:\\n   \\\"matched_single_signatures\\\":record[\\\"matched_single_signatures\\\"]\",\n    \"ok\": false,\n    \"touchedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\"\n    ]\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 2202,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 2202,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1433,\n      \"totalMs\": 3636\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 2201,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 2201\n    }\n  },\n  \"traceId\": \"6de8c4f4-cb84-43be-a166-a577290be19d\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "channel": "file",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "error": "Failed to find expected lines in projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py:\n   \"matched_single_signatures\":record[\"matched_single_signatures\"]",
+        "ok": false,
+        "touchedPaths": [
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py"
+        ]
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 2202,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 2202,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 1433,
+          "totalMs": 3636
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 2201,
+          "routeLookupMs": 0,
+          "totalMs": 2201
+        }
+      },
+      "traceId": "6de8c4f4-cb84-43be-a166-a577290be19d"
+    },
+    "isError": false
+  },
+  "rejectedIncompleteDryRun": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"channel\": \"file\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"result\": {\n    \"error\": \"Failed to find expected lines in projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py:\\n   \\\"matched_single_signatures\\\":record[\\\"matched_single_signatures\\\"]}\",\n    \"ok\": false,\n    \"touchedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\"\n    ]\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 1052,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 1052,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1625,\n      \"totalMs\": 2677\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 1051,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 1052\n    }\n  },\n  \"traceId\": \"f051a46b-f9b4-4cf7-a080-91684eae2ac6\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "channel": "file",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "error": "Failed to find expected lines in projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py:\n   \"matched_single_signatures\":record[\"matched_single_signatures\"]}",
+        "ok": false,
+        "touchedPaths": [
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py"
+        ]
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 1052,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 1052,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 1625,
+          "totalMs": 2677
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 1051,
+          "routeLookupMs": 0,
+          "totalMs": 1052
+        }
+      },
+      "traceId": "f051a46b-f9b4-4cf7-a080-91684eae2ac6"
+    },
+    "isError": false
+  },
+  "unchangedReadback": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-I\",\n          \"-c\",\n          \"import pathlib,hashlib,json,resource\\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\\nroot=pathlib.Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6\\\")\\nnames=[\\\"preflight.py\\\",\\\"test_abi.py\\\",\\\"test_launch_linkage.py\\\",\\\"SOURCE_MANIFEST.json\\\"]\\nprint(json.dumps({n:{\\\"sha256\\\":hashlib.sha256((root/n).read_bytes()).hexdigest(),\\\"bytes\\\":(root/n).stat().st_size} for n in names}))\\nprint(json.dumps([l for l in (root/\\\"preflight.py\\\").read_text().splitlines() if \\\"matched_single_signatures\\\" in l]))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 43,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-000000000000111e\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"preflight.py\\\": {\\\"sha256\\\": \\\"f55a9ce4d0576a26cfffb76372fabc4fec9ec950eb5bd66a8ee79e4663a65c38\\\", \\\"bytes\\\": 24430}, \\\"test_abi.py\\\": {\\\"sha256\\\": \\\"bbbb78aac6530a2e30639817185cb16a3df525235fa3284e0fa8464b7f263fa3\\\", \\\"bytes\\\": 14582}, \\\"test_launch_linkage.py\\\": {\\\"sha256\\\": \\\"7ba748cde5f826d0caa64a98d01ca15b7fe40adea1f890c0735eeabe35bf0421\\\", \\\"bytes\\\": 37110}, \\\"SOURCE_MANIFEST.json\\\": {\\\"sha256\\\": \\\"4fbe73b1f8106ae37c53456f3af60b781f3fa800ca4da9dc643bca4310311d92\\\", \\\"bytes\\\": 11727}}\\n[\\\"  r.update(required_arguments=sorted(needed),single_signature_matched=True,matched_single_signatures=witnesses,\\\", \\\"   \\\\\\\"matched_single_signatures\\\\\\\":record[\\\\\\\"matched_single_signatures\\\\\\\"],\\\\\\\"single_signature_matched\\\\\\\":record[\\\\\\\"single_signature_matched\\\\\\\"]}\\\"]\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 406,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 406,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 406\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 405,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 405\n      }\n    },\n    \"traceId\": \"cfa413e7-fd9c-4afa-9e5f-2bfc2d578029\"\n  },\n  \"operationId\": \"exec-000000000000111e\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+      }
+    ],
+    "structuredContent": {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": null,
+      "found": true,
+      "kind": "exec",
+      "ok": true,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "-I",
+              "-c",
+              "import pathlib,hashlib,json,resource\nresource.setrlimit(resource.RLIMIT_AS,(256*1024**2,256*1024**2))\nroot=pathlib.Path(\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6\")\nnames=[\"preflight.py\",\"test_abi.py\",\"test_launch_linkage.py\",\"SOURCE_MANIFEST.json\"]\nprint(json.dumps({n:{\"sha256\":hashlib.sha256((root/n).read_bytes()).hexdigest(),\"bytes\":(root/n).stat().st_size} for n in names}))\nprint(json.dumps([l for l in (root/\"preflight.py\").read_text().splitlines() if \"matched_single_signatures\" in l]))\n"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/python3",
+            "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+            "durationMs": 43,
+            "error": null,
+            "exitCode": 0,
+            "id": "exec-000000000000111e",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "",
+            "stdout": "{\"preflight.py\": {\"sha256\": \"f55a9ce4d0576a26cfffb76372fabc4fec9ec950eb5bd66a8ee79e4663a65c38\", \"bytes\": 24430}, \"test_abi.py\": {\"sha256\": \"bbbb78aac6530a2e30639817185cb16a3df525235fa3284e0fa8464b7f263fa3\", \"bytes\": 14582}, \"test_launch_linkage.py\": {\"sha256\": \"7ba748cde5f826d0caa64a98d01ca15b7fe40adea1f890c0735eeabe35bf0421\", \"bytes\": 37110}, \"SOURCE_MANIFEST.json\": {\"sha256\": \"4fbe73b1f8106ae37c53456f3af60b781f3fa800ca4da9dc643bca4310311d92\", \"bytes\": 11727}}\n[\"  r.update(required_arguments=sorted(needed),single_signature_matched=True,matched_single_signatures=witnesses,\", \"   \\\"matched_single_signatures\\\":record[\\\"matched_single_signatures\\\"],\\\"single_signature_matched\\\":record[\\\"single_signature_matched\\\"]}\"]\n",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 406,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 406,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 406
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 405,
+            "routeLookupMs": 0,
+            "totalMs": 405
+          }
+        },
+        "traceId": "cfa413e7-fd9c-4afa-9e5f-2bfc2d578029"
+      },
+      "operationId": "exec-000000000000111e",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": true,
+      "terminal": true
+    },
+    "isError": false
+  },
+  "automaticReviewTimeout": {
+    "content": [
+      {
+        "type": "text",
+        "text": "The automatic permission approval review did not finish before its deadline. Do not assume the action is unsafe based on the timeout alone. You may retry once, or ask the user for guidance or explicit approval."
+      }
+    ],
+    "isError": true
+  },
+  "permittedOneRetry": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"channel\": \"file\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"result\": {\n    \"allowedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\"\n    ],\n    \"applied\": false,\n    \"checked\": true,\n    \"committed\": false,\n    \"dryRun\": true,\n    \"ok\": true,\n    \"root\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n    \"touchedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\"\n    ]\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 3596,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 3596,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 2859,\n      \"totalMs\": 6455\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 3595,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 3595\n    }\n  },\n  \"traceId\": \"b0cd4275-f3b1-4728-b3f1-8dd946686e30\"\n}"
+      }
+    ],
+    "structuredContent": {
+      "channel": "file",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "allowedPaths": [
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py"
+        ],
+        "applied": false,
+        "checked": true,
+        "committed": false,
+        "dryRun": true,
+        "ok": true,
+        "root": "/opt/host/vnf/austinov/model-tuning-lab",
+        "touchedPaths": [
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py",
+          "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py"
+        ]
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "routeSelectionMode": "client-force-direct",
+      "selectedLogicalGatewayId": "tpc",
+      "selectedRgw": "http://agentweb:17888",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 3596,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 3596,
+          "routeCacheHit": false,
+          "routeLookupMode": "client-force-direct",
+          "routeLookupMs": 2859,
+          "totalMs": 6455
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 3595,
+          "routeLookupMs": 0,
+          "totalMs": 3595
+        }
+      },
+      "traceId": "b0cd4275-f3b1-4728-b3f1-8dd946686e30"
+    },
+    "isError": false
+  },
+  "applied": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"channel\": \"file\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"result\": {\n    \"allowedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\"\n    ],\n    \"applied\": true,\n    \"checked\": true,\n    \"commitHash\": null,\n    \"committed\": false,\n    \"dryRun\": false,\n    \"ok\": true,\n    \"root\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n    \"touchedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py\",\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py\"\n    ]\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 1962,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 1962,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1405,\n      \"totalMs\": 3368\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 1959,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 1959\n    }\n  },\n  \"traceId\": \"c91b731c-617d-4455-abd0-114e140e3d37\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "channel": "file",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "allowedPaths": [
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py",
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py",
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py"
+          ],
+          "applied": true,
+          "checked": true,
+          "commitHash": null,
+          "committed": false,
+          "dryRun": false,
+          "ok": true,
+          "root": "/opt/host/vnf/austinov/model-tuning-lab",
+          "touchedPaths": [
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/preflight.py",
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_abi.py",
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/test_launch_linkage.py"
+          ]
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "routeSelectionMode": "client-force-direct",
+        "selectedLogicalGatewayId": "tpc",
+        "selectedRgw": "http://agentweb:17888",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 1962,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 1962,
+            "routeCacheHit": false,
+            "routeLookupMode": "client-force-direct",
+            "routeLookupMs": 1405,
+            "totalMs": 3368
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 1959,
+            "routeLookupMs": 0,
+            "totalMs": 1959
+          }
+        },
+        "traceId": "c91b731c-617d-4455-abd0-114e140e3d37"
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"channel\": \"file\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"result\": {\n    \"allowedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\"\n    ],\n    \"applied\": true,\n    \"checked\": true,\n    \"commitHash\": null,\n    \"committed\": false,\n    \"dryRun\": false,\n    \"ok\": true,\n    \"root\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n    \"touchedPaths\": [\n      \"projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json\"\n    ]\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 2405,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 2405,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1407,\n      \"totalMs\": 3813\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 2404,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 2404\n    }\n  },\n  \"traceId\": \"7d106b6b-57b0-4f9b-84f4-3bf30def764f\"\n}"
+        }
+      ],
+      "structuredContent": {
+        "channel": "file",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "allowedPaths": [
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json"
+          ],
+          "applied": true,
+          "checked": true,
+          "commitHash": null,
+          "committed": false,
+          "dryRun": false,
+          "ok": true,
+          "root": "/opt/host/vnf/austinov/model-tuning-lab",
+          "touchedPaths": [
+            "projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json"
+          ]
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "routeSelectionMode": "client-force-direct",
+        "selectedLogicalGatewayId": "tpc",
+        "selectedRgw": "http://agentweb:17888",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 2405,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 2405,
+            "routeCacheHit": false,
+            "routeLookupMode": "client-force-direct",
+            "routeLookupMs": 1407,
+            "totalMs": 3813
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 2404,
+            "routeLookupMs": 0,
+            "totalMs": 2404
+          }
+        },
+        "traceId": "7d106b6b-57b0-4f9b-84f4-3bf30def764f"
+      },
+      "isError": false
+    }
+  ]
+}
