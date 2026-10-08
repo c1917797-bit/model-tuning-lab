@@ -22,7 +22,7 @@ The smallest prior change `c12060c` rebuilt an evicted scheduler-directory entry
 
 The r12 start receipt names the clean host plugin root, `c12060c`, image digest and NPU0–3. The frozen controller `binding_off_quality.py` requires that selected plugin root be a clean checkout at the requested commit, replaces the exact `/source-hypic:ro` bind, and compares actual Docker-inspected binds/environment/command during ownership checks. The service log shows API process, engine and all four workers importing `/opt/hypic/hypic_vllm_ascend/__init__.py`, and reports C3.1–C3.6 missing. These are stronger than merely finding an upstream checkout.
 
-However, the removed r12 container did **not** retain a separate raw `docker inspect` bind receipt or an in-container source-tree hash. The controller's checks and runtime import path support the source selection, but the original bind bytes cannot be independently reconstructed now. A future full pair should persist Docker inspect binds plus an in-container tree/commit digest at start. The r12 startup log itself is not a complete source-to-binary attestation.
+However, the removed r12 container did **not** retain a separate raw `docker inspect` bind receipt or an in-container source-tree hash. The controller's checks and runtime import path support the source selection, but the original bind bytes cannot be independently reconstructed now. A later controller change now records actual binds and compares host/container Python source-tree digests at service health; its offline tests pass, but no live NPU run has exercised it yet. The r12 startup log itself is not a complete source-to-binary attestation.
 
 ## Next bounded implementation and rollback
 

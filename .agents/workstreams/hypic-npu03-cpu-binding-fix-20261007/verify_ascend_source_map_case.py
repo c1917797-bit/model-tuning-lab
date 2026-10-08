@@ -77,10 +77,11 @@ def main() -> int:
             and "paper_missing=C3.1,C3.2,C3.3,C3.4,C3.5,C3.6" in log,
             "runtime import or C3 boundary drift")
     controller = checked(HERE / "binding_off_quality.py",
-        "b533ca4513d9b80e53ac3e2def8667f1aec01f86f73c1ffa7bf38755e2b8276f").decode()
+        "e55fd301a888b0f4966d915714e3c3bac48463d68958f22226f3bd38e8a9157e").decode()
     require("frozen_plugin_mount" in controller
             and 'sorted(item["HostConfig"]["Binds"]) == sorted(binds)' in controller
-            and "selected_plugin_source()" in controller,
+            and "selected_plugin_source()" in controller
+            and "source_attestation_sha256" in controller,
             "controller source-bind enforcement drift")
     case = (HERE / "ASCEND_SOURCE_MAP_CASE_20261009.md").read_text()
     for boundary in ("Status: **partial-evidence**", "No implemented serving seam",

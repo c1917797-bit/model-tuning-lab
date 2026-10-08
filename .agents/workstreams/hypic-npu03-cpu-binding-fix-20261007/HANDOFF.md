@@ -32,7 +32,7 @@
 - r12 stress: 19/19 samples, 57/57 responses, 52/57 four-worker proof;
   279 clean guard probes and exact release. r11's 79:2/79:3 gaps are hot
   here, but five others missed; HOTPATH_CACHE10R12_TERMINAL_AUDIT.md has no paired verdict.
-- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves four-worker activation for one wrong-in-both-arms sample, not paired quality. Source-map lacks raw bind receipt; C3 remains open.
+- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves one four-worker activation, not paired quality. Future controller now attests binds/source bytes offline-tested but not NPU-tested; r12 lacks that receipt. C3 remains open.
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median
   fell 81.12%, but full HYPIC and 2048-token quality remain open.

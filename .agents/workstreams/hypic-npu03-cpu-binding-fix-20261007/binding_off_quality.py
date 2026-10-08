@@ -19,7 +19,7 @@ from pathlib import Path
 from urllib.request import urlopen
 
 from binding_off_service import (
-    FLAG, IMAGE, PORT, ROOT, SOURCE_COMMIT, SOURCE_ROOT, ARMS,
+    FLAG, IMAGE, PORT, ROOT, SOURCE_COMMIT, SOURCE_REPO, SOURCE_ROOT, ARMS,
     assert_lane_available, frozen_source, inspect, run, sha256,
 )
 
@@ -446,6 +446,78 @@ def worker_proof(name: str, arm: str) -> dict:
             "worker_namespace_map_sha256": sha256(namespace_path)}
 
 
+def python_source_digest(root: Path) -> dict:
+    """Hash package-relative Python source bytes, excluding generated metadata."""
+    files = sorted(path for path in root.rglob("*.py") if path.is_file())
+    if not files:
+        raise RuntimeError("HYPIC package Python source absent")
+    digest = hashlib.sha256()
+    for path in files:
+        digest.update(path.relative_to(root).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return {"python_files": len(files), "python_tree_sha256": digest.hexdigest()}
+
+
+CONTAINER_SOURCE_PROBE = """
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+spec = importlib.util.find_spec("hypic_vllm_ascend")
+if spec is None or spec.origin is None:
+    raise RuntimeError("HYPIC runtime package cannot be resolved")
+root = Path(spec.origin).resolve().parent
+files = sorted(path for path in root.rglob("*.py") if path.is_file())
+if not files:
+    raise RuntimeError("HYPIC runtime Python source absent")
+digest = hashlib.sha256()
+for path in files:
+    digest.update(path.relative_to(root).as_posix().encode("utf-8"))
+    digest.update(b"\\0")
+    digest.update(path.read_bytes())
+    digest.update(b"\\0")
+print(json.dumps({"import_file": str(Path(spec.origin).resolve()),
+                  "python_files": len(files),
+                  "python_tree_sha256": digest.hexdigest()}, sort_keys=True))
+"""
+
+
+def attest_serving_source(name: str, arm: str, container_id: str,
+                          fingerprint: dict) -> str:
+    """Persist actual Docker binds and hash the package inside the live container."""
+    item = inspect(name)
+    if item is None:
+        raise RuntimeError("quality container absent during source attestation")
+    owned(item, arm, container_id)
+    selected = selected_plugin_source()
+    source_root = selected[0] if selected else SOURCE_REPO
+    expected = python_source_digest(source_root / "hypic_vllm_ascend")
+    observed = json.loads(run("docker", "exec", name, "python3", "-c",
+                              CONTAINER_SOURCE_PROBE).stdout)
+    if (observed.get("import_file") !=
+            "/opt/hypic/hypic_vllm_ascend/__init__.py"
+            or observed.get("python_files") != expected["python_files"]
+            or observed.get("python_tree_sha256") != expected["python_tree_sha256"]):
+        raise RuntimeError("live HYPIC package bytes differ from selected host source")
+    receipt = {
+        "schema": "hypic-serving-source-attestation/v1",
+        "container_id": container_id,
+        "image": item["Image"],
+        "actual_binds": sorted(item["HostConfig"]["Binds"]),
+        "actual_command": item["Config"]["Cmd"],
+        "selected_source_root": str(source_root),
+        "selected_source_commit": fingerprint["source_commit"],
+        "container_import_file": observed["import_file"],
+        **expected,
+    }
+    path = QROOT / arm / f"source-attestation.{container_id[:12]}.json"
+    write_json(path, receipt)
+    write_json(QROOT / arm / "source-attestation.json", receipt)
+    return sha256(path)
+
+
 def start(arm: str, container_id: str, fingerprint: dict,
           guard: ForeignProcessGuard | None = None) -> None:
     name = name_for(arm)
@@ -466,6 +538,8 @@ def start(arm: str, container_id: str, fingerprint: dict,
             if guard is not None:
                 guard.assert_clean()
             proof = worker_proof(name, arm)
+            source_attestation_sha256 = attest_serving_source(
+                name, arm, container_id, fingerprint)
             logs = run("docker", "logs", name)
             if ("'enable_cpu_binding': False" not in logs.stdout + logs.stderr
                     or "The CPU allocation plan is as follows:" in logs.stdout + logs.stderr):
@@ -473,7 +547,9 @@ def start(arm: str, container_id: str, fingerprint: dict,
             receipt = {"schema": "hypic-bindingoff-quality-service/v1", "arm": arm,
                        "container": name, "container_id": container_id,
                        "at_utc": datetime.now(timezone.utc).isoformat(),
-                       "fingerprint": fingerprint, **proof}
+                       "fingerprint": fingerprint,
+                       "source_attestation_sha256": source_attestation_sha256,
+                       **proof}
             write_json(QROOT / arm / f"service-start.{container_id[:12]}.json", receipt)
             write_json(QROOT / arm / "service-start.json", receipt)
             status(arm, "service-ready", container_id=container_id)
