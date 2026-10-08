@@ -23,5 +23,11 @@
     "foreign_physical_npu": 3,
     "evidence": "HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md"
   },
-  "next_action": "Continue non-NPU Skill evidence work without repeating completed tests. Coordinate an uninterrupted physical NPU0-3 window while cannbench_ds runs intermittent real kernels. Do not reuse cache10r3, do not launch a matching baseline for it, and do not touch the foreign container. In a clean window, declare a new original-protocol full HYPIC arm, independently audit it, then run a same-identity full no-cache arm and paired performance; do not promote a conclusion before all gates pass."
+  "git_push_state": {
+    "status": "local_commit_ahead_of_upstream_auth_missing",
+    "first_unpushed_commit": "b09706746c7e6eab611bac4344e699daf4629fce",
+    "remote_at_failed_push": "622d68af221d76cf9098db8ef4ce9141da2cf047",
+    "recovery": "After safe host Git authentication is restored, inspect local HEAD and remote ref; push existing HEAD to work/hypic-npu03-cpu-binding-fix-20261007 without force and verify equality."
+  },
+  "next_action": "Restore safe target-host Git HTTPS authentication and push existing local workstream commits without resetting or repeating them. Coordinate an uninterrupted physical NPU0-3 window while cannbench_ds runs intermittent real kernels. Do not reuse cache10r3, do not launch a matching baseline for it, and do not touch the foreign container. In a clean window, declare a new original-protocol full HYPIC arm, independently audit it, then run a same-identity full no-cache arm and paired performance; do not promote a conclusion before all gates pass."
 }

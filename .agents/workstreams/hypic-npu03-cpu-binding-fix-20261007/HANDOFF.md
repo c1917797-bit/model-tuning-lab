@@ -2,8 +2,11 @@
 
 ## 0. Status
 
-- Updated: 2026-10-08 15:25 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
-- Branch checkpoints are pushed; integrated main has not accepted this campaign.
+- Updated: 2026-10-08 15:29 UTC. Branch: work/hypic-npu03-cpu-binding-fix-20261007.
+- Earlier branch checkpoints were pushed through 622d68a. The validated
+  maintainer-handoff Skill case commit b097067 is local-only because Git
+  HTTPS authentication disappeared during its push; do not claim it is remote.
+  Integrated main has not accepted this campaign.
 - HYPIC full paired 2048-token quality, matched performance and Skill-wide
   acceptance remain incomplete. cache10r3 is environment/isolation invalid,
   not an HYPIC algorithm or quality verdict.
@@ -35,29 +38,34 @@ Optional cache10split is an unapproved revised protocol: do not run it.
   samples, released the exact owned service and port, and preserved
   HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md with raw receipt hashes.
 - The Git checkpoint and maintainer-handoff Skills have bounded verified
-  real-task cases; host-maintenance and onboarding have partial cases. See
+  real-task cases locally; host-maintenance and onboarding have partial cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
 
 ## 4. Current Action
 
-Continue non-NPU Skill acceptance while awaiting an uninterrupted NPU0–3
-window. cannbench_ds remains running and intermittently executes real
-kernels; an idle snapshot is not a full-run lease. User coordination was
-requested. Do not restart terminal cache10r3 or reuse its root.
+Await an uninterrupted NPU0–3 window and restoration of target-host Git
+HTTPS authentication. cannbench_ds remains running and intermittently
+executes real kernels; an idle snapshot is not a full-run lease. User
+coordination was requested for both. Do not restart terminal cache10r3,
+reuse its root, or repeat the local commit just because its push failed.
 
 ## 5. Next Actions
 
-1. For any device action, freshly resolve chicaihong01/ma through AWMCP,
+1. After host Git authentication is restored, inspect the exact branch
+   HEAD and remote ref, then push existing local commits once to the named
+   workstream branch and verify upstream equality. Do not amend, reset,
+   force-push, or embed credentials in Git files or command output.
+2. For any device action, freshly resolve chicaihong01/ma through AWMCP,
    load host-development, prove the direct peer, and inspect physical
    NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
    real foreign PIDs do.
-2. In a sustained clean window, declare a new unique original-protocol
+3. In a sustained clean window, declare a new unique original-protocol
    HYPIC campaign/root. Do not reuse cache10r2 or cache10r3 and do not
    silently switch to cache10split.
-3. Complete HYPIC 127×3 scored quality and independent guard/release
+4. Complete HYPIC 127×3 scored quality and independent guard/release
    audit, then same-identity no-cache arm and pair audit. Only after
    quality gates pass, run matched performance.
-4. For each main Skill, retain exact main blob, real task, evidence hash,
+5. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
 
 ## 6. Validation Commands
@@ -82,6 +90,8 @@ These are offline/structural gates, not live HYPIC acceptance.
   0/127 samples an algorithm failure.
 - Do not extrapolate the bounded Git case to all 29 Skills or edit the
   integrated global .agents/HANDOFF.md from this work branch.
+- Do not claim the pending local commit was pushed; do not print secrets
+  or install an unreviewed credential helper to force it.
 - Keep credentials, weights, datasets and raw profiles out of Git.
 
 ## 8. Recovery / Resume Commands
@@ -93,10 +103,15 @@ resources before any new launch:
 ```sh
 git status --short --branch
 git log -8 --decorate --oneline
+git rev-parse HEAD '@{upstream}'
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
 npu-smi info
 ss -lntp
 ```
+
+Once safe Git authentication is restored, push the existing HEAD with
+`git push origin HEAD:work/hypic-npu03-cpu-binding-fix-20261007` and
+check the live remote ref. This is pending, not completed.
 
 cache10r3 controller exec-000000000000147b is terminal exit 1. Its raw root:
 /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r3-full-hypic.
