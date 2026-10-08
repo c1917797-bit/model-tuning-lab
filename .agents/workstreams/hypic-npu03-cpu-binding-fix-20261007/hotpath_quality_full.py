@@ -44,7 +44,7 @@ RESERVE_PAIRS = {("hypic-only", "stress"), ("no-cache", "full"),
 if not ((CAMPAIGN == "original" and (ARM, MODE) in ORIGINAL_PAIRS)
         or (CAMPAIGN == "reserve" and (ARM, MODE) in RESERVE_PAIRS)
         or (CAMPAIGN == "cache10" and (ARM, MODE) in RESERVE_PAIRS)
-        or (CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4"}
+        or (CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5"}
             and (ARM, MODE) in {("no-cache", "full"), ("hypic-only", "full")})
         or (CAMPAIGN == "cache10split" and (ARM, MODE, SHARD) in {
             ("no-cache", "full", "0"), ("no-cache", "full", "1"),
@@ -55,7 +55,7 @@ if CAMPAIGN == "cache10split":
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         f"hotpath-cache10split-{'baseline' if ARM == 'no-cache' else 'hypic'}-shard{SHARD}"
     )
-elif CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4"}:
+elif CAMPAIGN in {"cache10r1", "cache10r2", "cache10r3", "cache10r4", "cache10r5"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         f"hotpath-{CAMPAIGN}-full-baseline" if ARM == "no-cache" else
         f"hotpath-{CAMPAIGN}-full-hypic"
@@ -348,10 +348,12 @@ def main() -> int:
         try:
             progress("service-starting")
             container_id = quality.create(ARM)
-            quality.start(ARM, container_id, fingerprint)
-            start = json.loads((quality.QROOT / ARM / "service-start.json").read_text())
-            guard = quality.ForeignProcessGuard(ARM, start["worker_pid_by_physical_npu"])
+            guard = quality.ForeignProcessGuard(ARM, {}, owned_container_id=container_id)
             guard.start()
+            quality.start(ARM, container_id, fingerprint, guard=guard)
+            start = json.loads((quality.QROOT / ARM / "service-start.json").read_text())
+            guard.set_expected_workers(start["worker_pid_by_physical_npu"])
+            guard.assert_clean()
             progress("service-ready", container_id=container_id)
             sample_dir = quality.QROOT / "samples"
             sample_dir.mkdir()

@@ -54,6 +54,8 @@ ATTEMPT_ROOTS = {
     "hotpath-cache10r3-full-hypic": "quality-context-41984-hotpath-cache10r3-full-hypic",
     "hotpath-cache10r4-full-baseline": "quality-context-41984-hotpath-cache10r4-full-baseline",
     "hotpath-cache10r4-full-hypic": "quality-context-41984-hotpath-cache10r4-full-hypic",
+    "hotpath-cache10r5-full-baseline": "quality-context-41984-hotpath-cache10r5-full-baseline",
+    "hotpath-cache10r5-full-hypic": "quality-context-41984-hotpath-cache10r5-full-hypic",
     "hotpath-cache10split-baseline-shard0": "quality-context-41984-hotpath-cache10split-baseline-shard0",
     "hotpath-cache10split-baseline-shard1": "quality-context-41984-hotpath-cache10split-baseline-shard1",
     "hotpath-cache10split-hypic-shard1": "quality-context-41984-hotpath-cache10split-hypic-shard1",
@@ -77,6 +79,8 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-cache10r3-full-hypic",
     "hotpath-cache10r4-full-baseline",
     "hotpath-cache10r4-full-hypic",
+    "hotpath-cache10r5-full-baseline",
+    "hotpath-cache10r5-full-hypic",
     "hotpath-cache10split-baseline-shard0",
     "hotpath-cache10split-baseline-shard1",
     "hotpath-cache10split-hypic-shard1",
@@ -137,9 +141,11 @@ def foreign_container_id(pid: int) -> str | None:
 class ForeignProcessGuard:
     """Record any competing 0-3 NPU process throughout a quality service."""
 
-    def __init__(self, arm: str, worker_pids: dict[str, int]) -> None:
+    def __init__(self, arm: str, worker_pids: dict[str, int],
+                 owned_container_id: str | None = None) -> None:
         self.arm = arm
         self.expected = set(worker_pids.values())
+        self.owned_container_id = owned_container_id
         self.stop_event = threading.Event()
         self.lock = threading.Lock()
         self.samples = 0
@@ -163,6 +169,7 @@ class ForeignProcessGuard:
         write_json(QROOT / self.arm / "lane-guard.json", {
             "schema": "hypic-bindingoff-quality-lane-guard/v1", "arm": self.arm,
             "attempt": ATTEMPT, "expected_worker_pids": sorted(self.expected),
+            "owned_container_id": self.owned_container_id,
             "samples": self.samples, "foreign": self.foreign, "probe_errors": self.errors})
 
     def sample(self) -> None:
@@ -181,6 +188,8 @@ class ForeignProcessGuard:
                 if item["pid"] in self.expected:
                     continue
                 container_id = foreign_container_id(item["pid"])
+                if container_id and container_id == self.owned_container_id:
+                    continue
                 foreign.append({**item, **({"container_id": container_id}
                                          if container_id else {})})
             self._record(foreign, None)
@@ -201,6 +210,10 @@ class ForeignProcessGuard:
         self.assert_clean()
         self.thread.start()
         self.started = True
+
+    def set_expected_workers(self, worker_pids: dict[str, int]) -> None:
+        with self.lock:
+            self.expected = set(worker_pids.values())
 
     def close(self) -> None:
         self.stop_event.set()
@@ -353,11 +366,14 @@ def worker_proof(name: str, arm: str) -> dict:
             "docker_top_sha256": sha256(top_path)}
 
 
-def start(arm: str, container_id: str, fingerprint: dict) -> None:
+def start(arm: str, container_id: str, fingerprint: dict,
+          guard: ForeignProcessGuard | None = None) -> None:
     name = name_for(arm)
     run("docker", "start", name)
     deadline = time.monotonic() + 2400
     while time.monotonic() < deadline:
+        if guard is not None:
+            guard.assert_clean()
         item = inspect(name)
         if item is None or item["State"]["Status"] != "running":
             raise RuntimeError("quality container exited before health")
@@ -367,6 +383,8 @@ def start(arm: str, container_id: str, fingerprint: dict) -> None:
         except Exception:
             healthy = False
         if healthy:
+            if guard is not None:
+                guard.assert_clean()
             proof = worker_proof(name, arm)
             logs = run("docker", "logs", name)
             if ("'enable_cpu_binding': False" not in logs.stdout + logs.stderr
@@ -491,6 +509,19 @@ def cleanup(arm: str, container_id: str) -> None:
     if item is None or item["Id"] != container_id:
         raise RuntimeError("owned quality container disappeared or changed identity")
     owned(item, arm, container_id)
+    start_path = QROOT / arm / "service-start.json"
+    reached_health = start_path.exists()
+    prehealth_pids: set[int] = set()
+    top_error = None
+    if not reached_health and item["State"]["Status"] == "running":
+        top = run("docker", "top", name, "-eo", "pid,comm", check=False)
+        if top.returncode:
+            top_error = f"pre-health docker top exited {top.returncode}"
+        else:
+            prehealth_pids = {int(parts[0]) for line in top.stdout.splitlines()[1:]
+                              if (parts := line.split()) and parts[0].isdigit()}
+            if not prehealth_pids:
+                top_error = "pre-health docker top returned no host PIDs"
     log_path = QROOT / arm / f"service.full.{container_id[:12]}.log"
     log_error = None
     try:
@@ -506,12 +537,14 @@ def cleanup(arm: str, container_id: str) -> None:
     if item["State"]["Status"] == "running":
         run("docker", "stop", "--time", "60", name)
     run("docker", "rm", name)
-    start_receipt = json.loads((QROOT / arm / "service-start.json").read_text())
-    if start_receipt.get("container_id") != container_id or inspect(name) is not None:
+    start_receipt = json.loads(start_path.read_text()) if reached_health else None
+    if (start_receipt is not None and start_receipt.get("container_id") != container_id
+            or inspect(name) is not None):
         raise RuntimeError("owned quality service removal cannot be proven")
     snapshot = run("npu-smi", "info").stdout
     observed = npu_processes(snapshot)
-    old_worker_pids = set(start_receipt["worker_pid_by_physical_npu"].values())
+    old_worker_pids = (set(start_receipt["worker_pid_by_physical_npu"].values())
+                       if start_receipt is not None else prehealth_pids)
     if any(entry["pid"] in old_worker_pids for entry in observed):
         raise RuntimeError("owned quality worker remains on NPU after container removal")
     listeners = run("ss", "-ltn", "sport", f":{PORT}").stdout
@@ -525,7 +558,9 @@ def cleanup(arm: str, container_id: str) -> None:
     receipt = {
         "schema": "hypic-bindingoff-quality-service-stop/v1", "arm": arm,
         "container": name, "container_id": container_id,
-        "container_removed": True, "owned_npus_released": True, "port_released": True,
+        "container_removed": True, "owned_npus_released": top_error is None,
+        "port_released": True, "service_reached_health": reached_health,
+        "prehealth_top_error": top_error,
         "lane_available": lane_error is None, "lane_error": lane_error,
         "foreign_npu_processes": [entry for entry in observed
                                   if entry["pid"] not in old_worker_pids],
@@ -538,6 +573,8 @@ def cleanup(arm: str, container_id: str) -> None:
            container_id=container_id)
     if log_error:
         raise RuntimeError(f"service released, but log capture failed: {log_error}")
+    if top_error:
+        raise RuntimeError(f"service released, but pre-health process proof failed: {top_error}")
     if lane_error:
         raise RuntimeError(f"owned service released, but shared lane unavailable: {lane_error}")
 

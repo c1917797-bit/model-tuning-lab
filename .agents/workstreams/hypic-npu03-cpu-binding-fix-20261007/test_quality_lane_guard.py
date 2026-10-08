@@ -86,6 +86,39 @@ class QualityLaneGuardTests(unittest.TestCase):
                              [{"physical_npu": 3, "pid": 356193,
                                "container_id": container_id}])
 
+    def test_prehealth_guard_ignores_only_exact_owned_container(self) -> None:
+        owned_id, foreign_id = "b" * 64, "a" * 64
+        with tempfile.TemporaryDirectory() as temporary:
+            for pid, owner in ((11, owned_id), (12, owned_id),
+                               (13, owned_id), (14, owned_id),
+                               (356193, foreign_id)):
+                cgroup = Path(temporary) / str(pid) / "cgroup"
+                cgroup.parent.mkdir()
+                cgroup.write_text(f"13:pids:/docker/{owner}\n")
+            output = snapshot("| 3       0                 | 356193        | python | 2704 |\n")
+            result = subprocess.CompletedProcess(["npu-smi", "info"], 0, output, "")
+            guard = quality.ForeignProcessGuard("no-cache", {},
+                                                owned_container_id=owned_id)
+            with patch.object(quality, "PROC_ROOT", Path(temporary)), \
+                    patch.object(quality.subprocess, "run", return_value=result), \
+                    patch.object(quality, "write_json"):
+                guard.sample()
+            self.assertEqual(guard.foreign[0]["processes"],
+                             [{"physical_npu": 3, "pid": 356193,
+                               "container_id": foreign_id}])
+            guard.set_expected_workers(self.workers)
+            self.assertEqual(guard.expected, {11, 12, 13, 14})
+
+    def test_service_start_checks_guard_during_loading(self) -> None:
+        class Collision:
+            def assert_clean(self) -> None:
+                raise RuntimeError("foreign actual NPU process during startup")
+
+        with patch.object(quality, "run") as execute:
+            with self.assertRaisesRegex(RuntimeError, "during startup"):
+                quality.start("no-cache", "exact-owned-id", {}, guard=Collision())
+        execute.assert_called_once_with("docker", "start", quality.name_for("no-cache"))
+
     def test_incomplete_or_failed_probe_is_not_clean(self) -> None:
         self.assertTrue(self.check("| NPU | Process id |\n").errors)
         self.assertTrue(self.check(snapshot(), code=1).errors)
@@ -143,6 +176,41 @@ class QualityLaneGuardTests(unittest.TestCase):
             self.assertFalse(receipt["lane_available"])
             self.assertEqual(receipt["foreign_npu_processes"],
                              [{"physical_npu": 3, "pid": 356193}])
+
+    def test_prehealth_abort_still_releases_exact_owned_container(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "no-cache").mkdir()
+            item = {"Id": "owned-id", "State": {"Status": "running"}}
+
+            def fake_run(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+                if args[:2] == ("docker", "top"):
+                    return subprocess.CompletedProcess(args, 0, "PID COMMAND\n11 python\n12 python\n")
+                if args[0] == "npu-smi":
+                    output = ("No running processes found in NPU 0\n"
+                              "No running processes found in NPU 1\n"
+                              "No running processes found in NPU 2\n"
+                              "| 3       0                 | 356193        | python | 2704 |\n")
+                    return subprocess.CompletedProcess(args, 0, output)
+                return subprocess.CompletedProcess(args, 0, "")
+
+            with patch.object(quality, "QROOT", root), \
+                    patch.object(quality, "inspect", side_effect=[item, None]), \
+                    patch.object(quality, "owned"), \
+                    patch.object(quality, "run", side_effect=fake_run) as execute, \
+                    patch.object(quality.subprocess, "run",
+                                 return_value=subprocess.CompletedProcess([], 0)), \
+                    patch.object(quality, "assert_lane_available",
+                                 side_effect=RuntimeError("foreign NPU3 process")):
+                with self.assertRaisesRegex(RuntimeError, "shared lane unavailable"):
+                    quality.cleanup("no-cache", "owned-id")
+            receipt = json.loads((root / "no-cache" / "service-stop.json").read_text())
+            self.assertFalse(receipt["service_reached_health"])
+            self.assertTrue(receipt["container_removed"])
+            self.assertTrue(receipt["owned_npus_released"])
+            self.assertTrue(receipt["port_released"])
+            self.assertIn(("docker", "stop", "--time", "60", quality.name_for("no-cache")),
+                          [call.args for call in execute.call_args_list])
 
 
 if __name__ == "__main__":
