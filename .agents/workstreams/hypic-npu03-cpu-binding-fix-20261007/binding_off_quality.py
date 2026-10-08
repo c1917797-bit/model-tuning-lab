@@ -50,6 +50,9 @@ ATTEMPT_ROOTS = {
     "hotpath-cache10r1-full-hypic": "quality-context-41984-hotpath-cache10r1-full-hypic",
     "hotpath-cache10r2-full-baseline": "quality-context-41984-hotpath-cache10r2-full-baseline",
     "hotpath-cache10r2-full-hypic": "quality-context-41984-hotpath-cache10r2-full-hypic",
+    "hotpath-cache10split-baseline-shard0": "quality-context-41984-hotpath-cache10split-baseline-shard0",
+    "hotpath-cache10split-baseline-shard1": "quality-context-41984-hotpath-cache10split-baseline-shard1",
+    "hotpath-cache10split-hypic-shard1": "quality-context-41984-hotpath-cache10split-hypic-shard1",
     **PERFORMANCE_ATTEMPTS,
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
@@ -66,6 +69,9 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-cache10r1-full-hypic",
     "hotpath-cache10r2-full-baseline",
     "hotpath-cache10r2-full-hypic",
+    "hotpath-cache10split-baseline-shard0",
+    "hotpath-cache10split-baseline-shard1",
+    "hotpath-cache10split-hypic-shard1",
 } | set(PERFORMANCE_ATTEMPTS))
 QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984

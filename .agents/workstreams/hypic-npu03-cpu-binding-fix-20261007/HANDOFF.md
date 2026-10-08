@@ -1,5 +1,25 @@
 # HYPIC NPU0-3 CPU-binding repair
 
+**2026-10-08 14:35 UTC offline continuation:** No replacement NPU run has
+started. The proposed `cache10split` 56/71 exact-ID controller remains
+unapproved and uncommitted; do not run it until the user chooses the
+explicitly revised multi-service protocol or the original full single-service
+protocol. A new offline regression
+`test_hotpath_cache10split_selection.py` passed 2 tests: shard0 is exactly
+IDs `0–52,54–56`, shard1 is its 71-ID complement, only the missing HYPIC
+shard may be run, and all three planned services retain physical 0–3,
+0.85/3584 MiB/10-segment identity. The existing in-flight isolation tests
+also passed 2/2; the 29-Skill structural validator and `git diff --check`
+passed. These tests are preparation, not NPU quality evidence.
+Read-only inspection of the preserved candidate event JSONL confirmed
+`explicit_segment_boundary_active` carries request IDs, whereas
+`worker_hot_path` and `complete_hybrid_repair` lack request IDs. The
+168 scored rows therefore have request-level boundary joins, but worker
+hot-path proof remains aggregate except for the serialized sentinel. Do not
+upgrade this to per-scored-request hot-path coverage. The worktree currently
+has the proposed split edits plus this test and handoff; no main Skill was
+changed and no result was promoted.
+
 **Latest 2026-10-08 14:16 UTC decision:** cache10r2 candidate operation
 `exec-00000000000013ec` is terminal exit 1 after foreign `cannbench_ds`
 processes entered physical NPU0. It preserved 56 sample files / 168 scored

@@ -26,6 +26,13 @@ from urllib.request import Request, urlopen
 ARM = os.environ.get("HYPIC_HOTPATH_QUALITY_ARM", "")
 MODE = os.environ.get("HYPIC_HOTPATH_QUALITY_MODE", "")
 CAMPAIGN = os.environ.get("HYPIC_HOTPATH_QUALITY_CAMPAIGN", "original")
+SHARD = os.environ.get("HYPIC_HOTPATH_QUALITY_SHARD", "")
+SHARD0_IDS = tuple([*range(53), 54, 55, 56])
+CLEAN_SET_RECEIPT = (
+    "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/"
+    "hotpath-cache10r2-clean-set-audit.json"
+)
+CLEAN_SET_RECEIPT_SHA = "99f2578adddd041f7a84fe441a1ac02b754b2c1a8217054e80e855b67e7f55bd"
 ORIGINAL_PAIRS = {
     ("hypic-only", "pilot"),
     ("hypic-only", "pilot2"),
@@ -39,9 +46,16 @@ if not ((CAMPAIGN == "original" and (ARM, MODE) in ORIGINAL_PAIRS)
         or (CAMPAIGN == "cache10" and (ARM, MODE) in RESERVE_PAIRS)
         or (CAMPAIGN in {"cache10r1", "cache10r2"}
             and (ARM, MODE) in {("no-cache", "full"), ("hypic-only", "full")})
+        or (CAMPAIGN == "cache10split" and (ARM, MODE, SHARD) in {
+            ("no-cache", "full", "0"), ("no-cache", "full", "1"),
+            ("hypic-only", "full", "1")})
         or (CAMPAIGN == "reserve2" and (ARM, MODE) == ("hypic-only", "stress"))):
     raise RuntimeError("unrecognized hot-path quality campaign/arm/mode")
-if CAMPAIGN in {"cache10r1", "cache10r2"}:
+if CAMPAIGN == "cache10split":
+    os.environ["HYPIC_QUALITY_ATTEMPT"] = (
+        f"hotpath-cache10split-{'baseline' if ARM == 'no-cache' else 'hypic'}-shard{SHARD}"
+    )
+elif CAMPAIGN in {"cache10r1", "cache10r2"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         f"hotpath-{CAMPAIGN}-full-baseline" if ARM == "no-cache" else
         f"hotpath-{CAMPAIGN}-full-hypic"
@@ -129,6 +143,20 @@ def cases() -> tuple[list[dict], object]:
         # Recreate the first c8 wave that failed at sample 7, without
         # shortening or changing the subsequent full matched ruler.
         items = [items[index] for index in range(9)]
+    elif CAMPAIGN == "cache10split":
+        receipt_path = Path(CLEAN_SET_RECEIPT)
+        if quality.sha256(receipt_path) != CLEAN_SET_RECEIPT_SHA:
+            raise RuntimeError("clean-set audit receipt hash drift")
+        receipt = json.loads(receipt_path.read_text())
+        if (receipt.get("partial_rows_valid") is not True
+                or receipt.get("original_arm_valid") is not False
+                or tuple(receipt.get("sample_indices", [])) != SHARD0_IDS):
+            raise RuntimeError("clean-set audit receipt contents drift")
+        selected = set(SHARD0_IDS if SHARD == "0" else
+                       set(range(127)) - set(SHARD0_IDS))
+        items = [item for item in items if item["index"] in selected]
+        if len(items) != (56 if SHARD == "0" else 71):
+            raise RuntimeError("split quality sample count drift")
     return items, evaluator
 
 
@@ -293,6 +321,9 @@ def main() -> int:
             "evaluator_sha256": quality.EVALUATOR_SHA,
             "dataset_sha256": quality.DATASETS[DATASET][2],
             "sample_indexes": [item["index"] for item in items],
+            "split_shard": SHARD if CAMPAIGN == "cache10split" else None,
+            "clean_set_receipt_sha256": (CLEAN_SET_RECEIPT_SHA
+                                         if CAMPAIGN == "cache10split" else None),
             "sample_identity": [{key: item[key] for key in
                                  ("index", "sample_id", "prompt_sha256", "prompt_tokens", "boundary")}
                                 for item in items],
