@@ -37,9 +37,16 @@ RESERVE_PAIRS = {("hypic-only", "stress"), ("no-cache", "full"),
 if not ((CAMPAIGN == "original" and (ARM, MODE) in ORIGINAL_PAIRS)
         or (CAMPAIGN == "reserve" and (ARM, MODE) in RESERVE_PAIRS)
         or (CAMPAIGN == "cache10" and (ARM, MODE) in RESERVE_PAIRS)
+        or (CAMPAIGN == "cache10r1" and (ARM, MODE) in {("no-cache", "full"),
+                                                       ("hypic-only", "full")})
         or (CAMPAIGN == "reserve2" and (ARM, MODE) == ("hypic-only", "stress"))):
     raise RuntimeError("unrecognized hot-path quality campaign/arm/mode")
-if CAMPAIGN == "cache10":
+if CAMPAIGN == "cache10r1":
+    os.environ["HYPIC_QUALITY_ATTEMPT"] = (
+        "hotpath-cache10r1-full-baseline" if ARM == "no-cache" else
+        "hotpath-cache10r1-full-hypic"
+    )
+elif CAMPAIGN == "cache10":
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         "hotpath-cache10-stress-hypic" if MODE == "stress" else
         "hotpath-cache10-full-baseline" if ARM == "no-cache" else

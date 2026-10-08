@@ -107,3 +107,13 @@ the active requests. This is an execution-control repair, not a frozen
 algorithm/quality-ruler change. Verify it offline and use a new evidence root
 only after a fresh lane check; do not claim full quality from the earlier
 stress pass or this invalid arm.
+
+The next attempt identity is `cache10r1`, with new full-candidate root
+`quality-context-41984-hotpath-cache10r1-full-hypic` and a separate matching
+control root `quality-context-41984-hotpath-cache10r1-full-baseline` if a
+formal paired quality comparison is pursued. This changes only the attempt
+identity and the fail-fast controller, not the frozen model, serving flags,
+dataset, concurrency, repeats, output cap or score rule. The already passed
+cache10 stress is not rerun solely to rename the attempt. A quiet-window
+monitor is read-only; its result must be followed by a fresh ownership and
+physical NPU0-3 check before launching the new root.

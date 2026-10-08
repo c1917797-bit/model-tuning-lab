@@ -40,6 +40,8 @@ ATTEMPT_ROOTS = {
     "hotpath-cache10-stress-hypic": "quality-context-41984-hotpath-cache10-stress-hypic",
     "hotpath-cache10-full-baseline": "quality-context-41984-hotpath-cache10-full-baseline",
     "hotpath-cache10-full-hypic": "quality-context-41984-hotpath-cache10-full-hypic",
+    "hotpath-cache10r1-full-baseline": "quality-context-41984-hotpath-cache10r1-full-baseline",
+    "hotpath-cache10r1-full-hypic": "quality-context-41984-hotpath-cache10r1-full-hypic",
 }
 if ATTEMPT not in ATTEMPT_ROOTS:
     raise RuntimeError(f"unrecognized HYPIC quality attempt: {ATTEMPT}")
@@ -51,6 +53,8 @@ RESERVE_ATTEMPTS = frozenset({
     "hotpath-cache10-stress-hypic",
     "hotpath-cache10-full-baseline",
     "hotpath-cache10-full-hypic",
+    "hotpath-cache10r1-full-baseline",
+    "hotpath-cache10r1-full-hypic",
 })
 QROOT = ROOT / ATTEMPT_ROOTS[ATTEMPT]
 CONTEXT = 41984
@@ -195,7 +199,7 @@ def preflight() -> dict:
             "common_serving_change": FLAG.strip(), "unit_order": list(UNIT_ORDER)}
     if ATTEMPT in RESERVE_ATTEMPTS:
         fingerprint["gpu_memory_utilization"] = 0.85
-    if ATTEMPT.startswith("hotpath-cache10-"):
+    if ATTEMPT.startswith("hotpath-cache10"):
         fingerprint["material_cache_max_mb"] = 3584
         fingerprint["max_materialized_segments"] = 10
     return fingerprint
@@ -229,7 +233,7 @@ def spec(arm: str) -> tuple[dict, list[str], list[str], str]:
         raise RuntimeError("frozen HYPIC evidence env seam drift")
     env = [f"VLLM_ASCEND_HYPIC_EVIDENCE_FILE={new_path}/hypic-evidence.jsonl"
            if value == old_env else value for value in env]
-    if ATTEMPT.startswith("hotpath-cache10-"):
+    if ATTEMPT.startswith("hotpath-cache10"):
         for key, old_value, new_value in (
             ("VLLM_ASCEND_HYPIC_MATERIAL_CACHE_MAX_MB", "1536", "3584"),
             ("VLLM_ASCEND_HYPIC_MAX_MATERIALIZED_SEGMENTS", "4", "10"),

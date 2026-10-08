@@ -8,8 +8,10 @@ the arm is isolation-invalid, not a technical HYPIC or quality verdict.
 Only the exact owned container was stopped and removed, with worker/port
 release receipt; unrelated workloads and NPU4-7 were untouched. Preserve the
 failed raw root; never restart into it. The guard controller's delayed
-response while requests were in flight is being repaired and CPU-regression
-tested. Read `HOTPATH_CACHE10_REPAIR.md` for raw hashes. The 12-hour validation
+response while requests were in flight was repaired on work-branch commit
+`36e2efc`; eight focused offline tests and the 29-Skill structural validator
+passed. A new `cache10r1` attempt identity is prepared but no NPU retry has
+been launched. Read `HOTPATH_CACHE10_REPAIR.md` for raw hashes. The 12-hour validation
 deadline began approximately 2026-10-08 11:33 UTC. The short/medium/long
 drift check is in `SKILL_VALIDATION_GOALS.md`.
 

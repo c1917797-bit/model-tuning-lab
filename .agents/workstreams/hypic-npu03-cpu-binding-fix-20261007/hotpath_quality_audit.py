@@ -14,22 +14,23 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 AUDIT_CAMPAIGN = os.environ.get("HYPIC_HOTPATH_AUDIT_CAMPAIGN", "original")
-if AUDIT_CAMPAIGN not in {"original", "reserve", "cache10"}:
+if AUDIT_CAMPAIGN not in {"original", "reserve", "cache10", "cache10r1"}:
     raise RuntimeError("unrecognized hot-path audit campaign")
-if AUDIT_CAMPAIGN in {"reserve", "cache10"}:
+if AUDIT_CAMPAIGN in {"reserve", "cache10", "cache10r1"}:
     os.environ["HYPIC_QUALITY_ATTEMPT"] = (
         "hotpath-reserve-full-baseline" if AUDIT_CAMPAIGN == "reserve" else
-        "hotpath-cache10-full-baseline"
+        f"hotpath-{AUDIT_CAMPAIGN}-full-baseline"
     )
 import binding_off_quality as quality
 
 ROOT_SUFFIX = ("hotpath-reserve-full" if AUDIT_CAMPAIGN == "reserve" else
-               "hotpath-cache10-full" if AUDIT_CAMPAIGN == "cache10" else
+               f"hotpath-{AUDIT_CAMPAIGN}-full" if AUDIT_CAMPAIGN.startswith("cache10") else
                "hotpath-full")
 BASE = quality.ROOT / f"quality-context-41984-{ROOT_SUFFIX}-baseline"
 CAND = quality.ROOT / f"quality-context-41984-{ROOT_SUFFIX}-hypic"
 OUT = quality.ROOT / ("hotpath-quality-reserve-full-audit.json" if AUDIT_CAMPAIGN == "reserve"
-                      else "hotpath-quality-cache10-full-audit.json" if AUDIT_CAMPAIGN == "cache10"
+                      else f"hotpath-quality-{AUDIT_CAMPAIGN}-full-audit.json"
+                      if AUDIT_CAMPAIGN.startswith("cache10")
                       else "hotpath-quality-full-audit.json")
 FROZEN = quality.ROOT / "quality-context-41984-clean2/quality/no-cache/longbenchv2.run1.jsonl"
 FROZEN_SHA = "812a4281c167327ae69b96766e550f58ffb905c889c60bc0a649850ec5cc5810"
@@ -289,7 +290,7 @@ def main() -> int:
     cases, evaluator = frozen_cases()
     baseline = audit_arm(BASE, "no-cache", cases, evaluator)
     candidate = audit_arm(CAND, "hypic-only", cases, evaluator)
-    if AUDIT_CAMPAIGN == "cache10":
+    if AUDIT_CAMPAIGN.startswith("cache10"):
         for arm in (baseline, candidate):
             require(arm["fingerprint"].get("gpu_memory_utilization") == 0.85
                     and arm["fingerprint"].get("material_cache_max_mb") == 3584
