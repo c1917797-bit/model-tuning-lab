@@ -1,5 +1,10 @@
 # Prospective cache10r2 matched performance ruler (2026-10-08)
 
+Historical, unexecuted r2 preregistration. Its r2 quality entry gate never
+passed, and the named controller was retargeted before device execution to
+the separately frozen `HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md`.
+Do not run from the r2 instructions below or treat them as current.
+
 This ruler is for the HYPIC 0.85/cache10 serving identity. The completed
 0.9/4-segment binding-off performance pair is valid historical evidence but
 not a control for this identity. Do not pool or directly compare its raw
