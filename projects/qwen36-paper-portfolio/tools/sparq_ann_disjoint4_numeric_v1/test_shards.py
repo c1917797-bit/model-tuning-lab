@@ -371,7 +371,7 @@ class OwnedExitLifecycle(unittest.TestCase):
    ref=dict(path=str(path),sha256=host.hashlib.sha256(json.dumps(value,sort_keys=True).encode()).hexdigest())
    records[ref["path"]]=copy.deepcopy(value);return ref
   co=host.Joint.__new__(host.Joint);co.out=Path("/software-only");co.cards=[ctl];co.deadline=host.time.monotonic()+100
-  co.c=types.SimpleNamespace(write_new=write);co.nh=types.SimpleNamespace(H=types.SimpleNamespace(started=lambda value:value,timedelta=timedelta))
+  co.c=types.SimpleNamespace(write_new=write);co.nh=types.SimpleNamespace(H=types.SimpleNamespace(SMI='/software-only/npu-smi-IO-spy',started=lambda value:value,timedelta=timedelta))
   co.protected_check=lambda value:{"own_on_protected":False};co.resources=lambda initial=False:{}
   ctl.card=4;ctl.canary_proofs=[];ctl.gate_proofs=[]
   reader=lambda pid:dict(proof) if ctl.child.poll() is None else dict(proof,argv=[],cgroup="0::/")
