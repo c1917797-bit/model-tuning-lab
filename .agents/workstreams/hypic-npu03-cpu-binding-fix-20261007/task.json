@@ -869,5 +869,70 @@
     "strict_quality_decision": "NOT_ACCEPTED_HOT_COVERAGE",
     "verifier": "verify_hotpath_cache10_matched_performance.py"
   },
-  "next_action": "Do not rerun completed HYPIC phases. All 29 Skill cases now have provenance; run final offline regressions, refresh the local checkpoint without swallowing unrelated dirty state, and upgrade the 22 partial Skill cases only through their explicit missing behavioral gates. Push only after authentication is proven and then verify remote equality."
+  "profiler_diagnostic_partial": {
+    "deadline_utc": "2026-10-10T04:42:44Z",
+    "purpose": "Validate the ascend-cannbot-profiler Skill against the unresolved HYPIC quality symptom without rerunning frozen quality or performance phases",
+    "physical_npus": [0, 1, 2, 3],
+    "prefill": {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r2/prefill",
+      "controller_operation": "exec-0000000000000499",
+      "capture_valid": true,
+      "four_rank_raw_files": 281,
+      "guard_samples": 88,
+      "guard_foreign_or_probe_errors": 0,
+      "offline_parse_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r2-prefill",
+      "offline_parse_controller": "exec-00000000000004cc",
+      "offline_parse_complete": true,
+      "kernel_detail_columns_each_rank": 46,
+      "detailed_level1_pipe_fields_present": true,
+      "preregistered_minimum_47_columns_met": false,
+      "independent_replay": "verify_hypic_profiler_prefill.py",
+      "report": "HYPIC_PROFILER_PREFILL_AUDIT_20261009.md"
+    },
+    "decode_attempts": [
+      {
+        "root_suffix": "r2",
+        "controller_operation": "exec-00000000000004ac",
+        "classification": "environmental pre-capture isolation failure",
+        "foreign_physical_npu": 0,
+        "foreign_pid": 3418373,
+        "foreign_container": "Maxon4ick_vllm",
+        "guard_samples": 88,
+        "result_sha256": "d71f436bd8a75cd86b870fb10e808e440061d6c418c33e5f5ebf4685c38cfe30",
+        "guard_sha256": "e7cd2c09386ac7797ca26781b41bd60d23ab1a86bf18af60d3f574965ccb7061",
+        "exact_owned_resources_released": true
+      },
+      {
+        "root_suffix": "r3",
+        "controller_operation": "exec-00000000000004c3",
+        "classification": "preflight physical NPU0-3 occupancy; no container created",
+        "result_sha256": "47b255126deb855e6fa503798b23cfa19c0dc0ba4200b9ec7055bb6ff5b3e623"
+      },
+      {
+        "root_suffix": "r4",
+        "controller_operation": "exec-00000000000004d3",
+        "classification": "environmental pre-capture isolation failure",
+        "foreign_physical_npu": 0,
+        "foreign_pid": 3541845,
+        "foreign_container": "Maxon4ick_vllm",
+        "guard_samples": 4,
+        "result_sha256": "378ac76225caea71919ba071adc9fd378a9713b470d5600b6689cb7fbe42e1be",
+        "guard_sha256": "d8d14d331c1898ee578bf59f11b6605acee6519845d83682d4f762c6fe08b03d",
+        "exact_owned_resources_released": true
+      }
+    ],
+    "decode_capture_valid": false,
+    "passive_monitor": {
+      "controller_operation": "exec-00000000000004d7",
+      "terminal_exit_code": 0,
+      "idle_observed_from_utc": "2026-10-09T17:21:34.966701Z",
+      "first_npu0_burst_utc": "2026-10-09T17:26:12.350060Z",
+      "first_npu0_pid": 3618350,
+      "second_npu0_burst_utc": "2026-10-09T17:26:34.520780Z",
+      "second_npu0_pid": 3622213,
+      "burst_process_owners": "unverified"
+    },
+    "skill_case_acceptance": "partial-evidence"
+  },
+  "next_action": "Do not rerun completed HYPIC phases. Preserve the paired quality and six-phase performance evidence. The Prefill profiler is captured and independently parsed; Decode remains missing after external Maxon4ick_vllm repeatedly entered physical NPU0. A passive monitor also observed two short NPU0 bursts after only 4m37s idle, with owners unverified. Wait for a longer actual idle window, then freeze a new Decode-only root and launch only after fresh direct-route NPU0-3/port admission. Do not repeat Prefill or reinterpret quality. Keep the Skill cases honest and the profiler case partial until real Decode capture and parser audit; validate and push each coherent checkpoint."
 }

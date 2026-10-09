@@ -34,7 +34,7 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(report["cases_with_verified_provenance"]
                          + report["skills_without_case"], 29)
 
-    def test_cannbot_case_records_routing_but_not_capture(self) -> None:
+    def test_cannbot_case_records_prefill_and_missing_decode(self) -> None:
         path = cases.CASES / "ascend-cannbot-profiler.json"
         skill, state = cases.check_case(
             path, self.main_commit, {"ascend-cannbot-profiler"})
@@ -43,7 +43,10 @@ class SkillCaseTests(unittest.TestCase):
         item = json.loads(path.read_text())
         self.assertTrue(item["observed"]["expert_contract_consulted"])
         self.assertFalse(item["observed"]["low_level_widening_admitted"])
-        self.assertFalse(item["observed"]["npu_profiler_capture_completed"])
+        self.assertTrue(item["observed"]["prefill_npu_profiler_capture_completed"])
+        self.assertTrue(item["observed"]["prefill_offline_parse_complete"])
+        self.assertFalse(item["observed"]["decode_npu_profiler_capture_completed"])
+        self.assertFalse(item["observed"]["preregistered_minimum_47_columns_met"])
         self.assertFalse(item["observed"]["kernel_details_47_columns_verified"])
 
     def test_transformation_suite_cases_are_bounded_verified(self) -> None:

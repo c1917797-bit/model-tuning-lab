@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the bounded Cannbot routing/readiness case without inventing a capture."""
+"""Verify the Cannbot boundary and the later partial Prefill diagnostic."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ def require(value: bool, message: str) -> None:
 
 def main() -> int:
     report = (HERE / "ASCEND_CANNBOT_PROFILER_BOUNDARY_CASE_20261009.md").read_text()
+    prefill = (HERE / "HYPIC_PROFILER_PREFILL_AUDIT_20261009.md").read_text()
     source_map = (HERE / "ASCEND_SOURCE_MAP_CASE_20261009.md").read_text()
     final_report = (HERE / "REPORT.md").read_text()
     for value in (
@@ -29,7 +30,17 @@ def main() -> int:
         require(value in report, f"case report missing boundary or identity: {value}")
     require("does not validate" in report
             and "actual NPU profiler capture" in report,
-            "case report lost the no-capture boundary")
+            "case report lost its original no-capture boundary")
+    require("Subsequent HYPIC profiler diagnostic" in report and
+            "Decode remains unverified" in report and
+            "The preregistered exact `>=47` column check therefore missed" in report,
+            "later diagnostic boundary disappeared")
+    require("numeric gate did not pass" in prefill and
+            "46 columns" in prefill and
+            "281 nonempty raw files" in prefill,
+            "Prefill evidence or protocol deviation absent")
+    require((HERE / "verify_hypic_profiler_prefill.py").is_file(),
+            "raw Prefill replay verifier absent")
     require("not an HCCL or CANN kernel change" in source_map,
             "source-map routing boundary disappeared")
     require("without a profile showing that seam" in source_map,
@@ -42,7 +53,10 @@ def main() -> int:
         "historical_workspace_root_valid": False,
         "expert_contract_consulted": True,
         "low_level_widening_admitted": False,
-        "npu_profiler_capture_completed": False,
+        "prefill_npu_profiler_capture_completed": True,
+        "decode_npu_profiler_capture_completed": False,
+        "prefill_offline_parse_complete": True,
+        "preregistered_47_column_gate_met": False,
         "acceptance": "partial-evidence",
     }
     print(json.dumps(result, sort_keys=True))

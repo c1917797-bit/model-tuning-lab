@@ -4,14 +4,14 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Route the completed HYPIC investigation at the scheduler/cache boundary, re-prove Cannbot/CANN source locations, consult the actual profiling contract, and refuse an unsupported low-level attribution",
+  "task": "Route HYPIC to the correct profiler layer, run a bounded real Prefill capture on physical NPU0-3, parse all four ranks, preserve Decode environmental failures, and refuse unsupported low-level attribution",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "67b007c739fe8c306e8d9d7b1dde376598426912",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "fresh direct chicaihong01/ma read-only source orientation after the HYPIC six-phase campaign; no new container, NPU capture, system mutation, or low-level code change",
+  "environment_scope": "fresh direct chicaihong01/ma source orientation plus a real pinned-image HYPIC-only TP4 Prefill capture on physical NPU0-3; Decode remains unverified after foreign-process interference; raw profiles outside Git",
   "observed": {
     "historical_workspace_root": "/home/mtuser/cch",
     "historical_workspace_root_valid": false,
@@ -24,7 +24,12 @@
     "expert_contract_consulted": true,
     "source_map_layer": "vLLM-Ascend scheduler/cache materialization seam",
     "low_level_widening_admitted": false,
-    "npu_profiler_capture_completed": false,
+    "prefill_npu_profiler_capture_completed": true,
+    "decode_npu_profiler_capture_completed": false,
+    "prefill_offline_parse_complete": true,
+    "prefill_four_rank_level1_pipe_metrics_present": true,
+    "prefill_kernel_detail_columns_each_rank": 46,
+    "preregistered_minimum_47_columns_met": false,
     "prefill_decode_artifact_audit_completed": false,
     "kernel_details_47_columns_verified": false,
     "hccl_root_cause_verified": false
@@ -32,11 +37,19 @@
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_CANNBOT_PROFILER_BOUNDARY_CASE_20261009.md",
-      "sha256": "7e66598e34e472cd37687c4472c61271d5564ed864da4dbeebbd34e75e3fc3e3"
+      "sha256": "bf7fdc8957c8a702e88242d4ec0fa9fbffd90e57a67cee9d8b33940de2b13f63"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_cannbot_profiler_case.py",
-      "sha256": "3fd089690df777559a8a6e8fa79c593be7878e9d197b0c67cfb036f1675b2005"
+      "sha256": "11d6d46b15d95654c807cff22ad86e217b13b405a096f9fae3d09586b288a215"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_PREFILL_AUDIT_20261009.md",
+      "sha256": "9e5822afbdbc482a8a9deb3ca3fb96bc192ad4fcccb12f523491f104fcba6556"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py",
+      "sha256": "26f12cd311bd0c0fcc176458aba3f9803e0a7c5d3147d4bb744f9bfc6febab77"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_SOURCE_MAP_CASE_20261009.md",
@@ -48,6 +61,7 @@
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The routing, target re-orientation, expert-source consultation, and refusal to invent a low-level cause are behaviorally evidenced. No actual profiler capture or artifact completeness check occurred, so this is not full Skill acceptance.",
-  "drift_trigger": "Run a fresh bounded Prefill/Decode capture and artifact audit when a real unresolved low-level symptom appears, or re-review after the main Skill, source workspace commits, profiler stack, or HYPIC source-map conclusion changes."
+  "boundary": "Routing and a real four-rank Prefill capture with offline parser evidence are behaviorally verified. The preregistered >=47 column gate missed because CANN 9.1.0 emitted 46 detailed columns; the mismatch is retained. Decode was not captured, and no CANN/HCCL root cause was established. Full Skill acceptance is not claimed.",
+  "branch_local_skill_amendment_pending_integration": true,
+  "drift_trigger": "Complete a separately admitted Decode capture and offline audit; then review the prospective semantic-field Skill amendment and recheck main Skill/source/profiler-stack identities before promotion."
 }

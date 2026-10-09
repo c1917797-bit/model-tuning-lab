@@ -53,3 +53,31 @@ actual NPU profiler capture, Prefill/Decode artifact completeness, 47-column
 `kernel_details.csv`, HCCL attribution, or a profiler-driven code change.
 The Skill remains `partial-evidence` until a real low-level symptom triggers a
 fresh bounded capture and artifact audit.
+
+## Subsequent HYPIC profiler diagnostic
+
+The unresolved HYPIC quality regression supplied that concrete symptom later
+on 2026-10-09. `HYPIC_PROFILER_PREREGISTRATION_20261009.md` froze a separate
+Prefill/Decode diagnostic using the accepted retry21 HYPIC-only service
+identity. This does not change the earlier routing decision or the frozen
+quality/performance verdicts.
+
+The retry2 Prefill phase completed on physical NPU0-3 with four TP workers,
+two warmups outside the capture, 88 clean continuous guard samples, 281
+nonempty raw profiler files, and exact owned-resource release. A CPU-only
+offline parser in the same pinned image generated complete output for each
+rank. The independent replay in `verify_hypic_profiler_prefill.py` passed;
+see `HYPIC_PROFILER_PREFILL_AUDIT_20261009.md` for paths and hashes.
+
+The parsed `kernel_details.csv` is 46 columns in torch_npu 2.10.0.post4 /
+CANN 9.1.0, with Level1/PipeUtilization config and the detailed pipeline
+fields present. The preregistered exact `>=47` column check therefore missed
+by one. Its failure is retained. The branch-local maintainer Skill now uses
+semantic field checks for future cases, while this case remains partial.
+
+Decode remains unverified. Retry2 and retry4 guards caught the pre-existing
+`Maxon4ick_vllm` container briefly entering physical NPU0 before capture;
+retry3 failed its preflight before creating a container. None is a valid
+Decode profile or a technical failure of HYPIC. See the retry amendments and
+their immutable raw roots. The next profiling action is a new-root Decode
+attempt only after actual NPU0-3 and port 8223 idleness is proved.

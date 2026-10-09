@@ -74,6 +74,20 @@ Re-prove this in the actual container/session before a new claim.
 7. Validate profiler output completeness immediately. If raw collection looks
    valid but offline parsing fails, test filesystem/location issues before
    changing model code.
+   An integrated vLLM-Ascend `/stop_profile` can leave only the raw
+   `*_ascend_pt` tree. Parse a copy with the matching torch_npu/CANN image
+   before judging CSV or trace completeness; preserve the original raw tree.
+   Check every rank for a nonempty `kernel_details.csv`, `op_statistic.csv`,
+   `api_statistic.csv`, and valid `trace_view.json`. Record the header width,
+   rows, stack versions, and parser output. Use the presence of `Stream ID`,
+   input/output shape fields, `aic_mac_ratio`, `aic_mte2_ratio`, and
+   `aiv_vec_ratio` plus a recorded Level1/PipeUtilization config as the detailed
+   metric gate. Exact column counts can vary by CANN release: 46 detailed
+   columns were observed with torch_npu 2.10.0.post4/CANN 9.1.0, while the
+   external Cannbot example describes approximately 47. A shallow nine-column
+   file or missing statistics is still a failure. If a frozen experiment set
+   an exact numeric threshold, record any mismatch as a protocol deviation
+   instead of silently changing that experiment's verdict.
 8. Analyze in this order: timeline gaps and serialization; per-step latency;
    top operators; top kernels with call count and shapes; AIC/MTE/AIV pipeline
    ratios; HCCL communication and overlap; cross-rank start/end spread;
