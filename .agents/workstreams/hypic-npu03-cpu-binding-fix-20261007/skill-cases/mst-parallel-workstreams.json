@@ -31,10 +31,6 @@
       "sha256": "a9292e304a7f07c830cf06e363ee83bc2043d708aa65bef1fbd3de6c911f69bc"
     },
     {
-      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/task.json",
-      "sha256": "6094b2e8d88073bced570793bf013b6229e2268a96f145e071a39a40cd8e0e93"
-    },
-    {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
       "sha256": "59be1da1cea98f3fd51e46d43574513a6e73f5a37556084e846350804c091090"
     },
@@ -44,6 +40,6 @@
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The main Skill's separate state axes exposed and repaired one real handoff defect. The HYPIC six-phase performance milestone is complete, but the wider Skill-validation task is still in progress, 51 commits ahead of its upstream, and lacks end-to-end remote integration and reclamation proof; no full 29-Skill acceptance follows.",
+  "boundary": "The main Skill's separate state axes exposed and repaired one real handoff defect. At case execution, the HYPIC task was 51 commits ahead of upstream. Later workstream pushes do not prove main integration or reclamation; the wider Skill-validation task remains in progress. The mutable live task.json is checked by the focused regression, not pinned as immutable case evidence. No full 29-Skill acceptance follows.",
   "drift_trigger": "Re-run and update this case after task.json or handoff-test changes, r13 terminal transition, upstream/main movement, any new worktree claim, or eventual remote push/integration."
 }

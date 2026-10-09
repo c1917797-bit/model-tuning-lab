@@ -14,7 +14,9 @@ from pathlib import Path
 BASE = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007")
 RAW = BASE / "profiler-hypic-hotcold-20261009-r6"
 DECODE = RAW / "decode"
-PARSED = BASE / "profiler-offline-parse-20261009-r6-decode"
+# The first parse copy failed without the driver management node. This clean
+# second copy was parsed with no per-card NPU devices mapped.
+PARSED = BASE / "profiler-offline-parse-20261009-r6-decode-manager"
 COMPUTE_TYPES = {"AI_CORE", "AI_VECTOR_CORE", "MIX_AIC", "MIX_AIV"}
 REQUIRED_FIELDS = {
     "Stream ID", "Input Shapes", "Output Shapes", "aic_mac_ratio",

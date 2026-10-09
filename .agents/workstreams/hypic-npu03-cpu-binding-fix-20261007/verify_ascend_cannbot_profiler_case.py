@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the Cannbot boundary and the later partial Prefill diagnostic."""
+"""Verify the Cannbot routing boundary and real Prefill/Decode diagnostics."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ def require(value: bool, message: str) -> None:
 def main() -> int:
     report = (HERE / "ASCEND_CANNBOT_PROFILER_BOUNDARY_CASE_20261009.md").read_text()
     prefill = (HERE / "HYPIC_PROFILER_PREFILL_AUDIT_20261009.md").read_text()
+    decode = (HERE / "HYPIC_PROFILER_DECODE_AUDIT_20261009.md").read_text()
     source_map = (HERE / "ASCEND_SOURCE_MAP_CASE_20261009.md").read_text()
     final_report = (HERE / "REPORT.md").read_text()
     for value in (
@@ -41,6 +42,12 @@ def main() -> int:
             "Prefill evidence or protocol deviation absent")
     require((HERE / "verify_hypic_profiler_prefill.py").is_file(),
             "raw Prefill replay verifier absent")
+    require("83,223 actual NPU" in decode and
+            "Init platform by driver faild!" in decode and
+            "**not** retroactively passed" in decode,
+            "Decode evidence or preserved parser deviation absent")
+    require((HERE / "verify_hypic_profiler_decode.py").is_file(),
+            "raw Decode replay verifier absent")
     require("not an HCCL or CANN kernel change" in source_map,
             "source-map routing boundary disappeared")
     require("without a profile showing that seam" in source_map,
@@ -54,8 +61,10 @@ def main() -> int:
         "expert_contract_consulted": True,
         "low_level_widening_admitted": False,
         "prefill_npu_profiler_capture_completed": True,
-        "decode_npu_profiler_capture_completed": False,
+        "decode_npu_profiler_capture_completed": True,
         "prefill_offline_parse_complete": True,
+        "decode_offline_parse_complete": True,
+        "decode_four_rank_compute_kernel_proof": True,
         "preregistered_47_column_gate_met": False,
         "acceptance": "partial-evidence",
     }

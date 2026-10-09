@@ -77,6 +77,13 @@ Re-prove this in the actual container/session before a new claim.
    An integrated vLLM-Ascend `/stop_profile` can leave only the raw
    `*_ascend_pt` tree. Parse a copy with the matching torch_npu/CANN image
    before judging CSV or trace completeness; preserve the original raw tree.
+   If `msprof --export=on` reports `Init platform by driver faild!`, check
+   the offline parser's driver-library and `/dev/davinci_manager` access
+   before blaming the raw profile. A read-only library bind plus this
+   management node was sufficient on chicaihong01 for a no-network parser
+   container with no numbered `/dev/davinci0-7` compute device mapped.
+   Parse a fresh copy after a failed partial export; do not overwrite raw
+   evidence or accept the parser's exit code without checking every rank.
    Check every rank for a nonempty `kernel_details.csv`, `op_statistic.csv`,
    `api_statistic.csv`, and valid `trace_view.json`. Record the header width,
    rows, stack versions, and parser output. Use the presence of `Stream ID`,

@@ -34,7 +34,7 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(report["cases_with_verified_provenance"]
                          + report["skills_without_case"], 29)
 
-    def test_cannbot_case_records_prefill_and_missing_decode(self) -> None:
+    def test_cannbot_case_records_both_captures_without_promoting_root_cause(self) -> None:
         path = cases.CASES / "ascend-cannbot-profiler.json"
         skill, state = cases.check_case(
             path, self.main_commit, {"ascend-cannbot-profiler"})
@@ -45,7 +45,12 @@ class SkillCaseTests(unittest.TestCase):
         self.assertFalse(item["observed"]["low_level_widening_admitted"])
         self.assertTrue(item["observed"]["prefill_npu_profiler_capture_completed"])
         self.assertTrue(item["observed"]["prefill_offline_parse_complete"])
-        self.assertFalse(item["observed"]["decode_npu_profiler_capture_completed"])
+        self.assertTrue(item["observed"]["decode_npu_profiler_capture_completed"])
+        self.assertTrue(item["observed"]["decode_offline_parse_complete"])
+        self.assertEqual(item["observed"]["decode_compute_kernel_events_each_rank"],
+                         83223)
+        self.assertTrue(item["observed"]["first_decode_offline_parse_failed_without_driver_manager_node"])
+        self.assertFalse(item["observed"]["hccl_root_cause_verified"])
         self.assertFalse(item["observed"]["preregistered_minimum_47_columns_met"])
         self.assertFalse(item["observed"]["kernel_details_47_columns_verified"])
 

@@ -4,14 +4,14 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Route HYPIC to the correct profiler layer, run a bounded real Prefill capture on physical NPU0-3, parse all four ranks, preserve Decode environmental failures, and refuse unsupported low-level attribution",
+  "task": "Route HYPIC to the correct profiler layer, run bounded real Prefill and Decode captures on physical NPU0-3, parse all four ranks for both, preserve environmental and first offline-parser failures, and refuse unsupported low-level attribution",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "67b007c739fe8c306e8d9d7b1dde376598426912",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "fresh direct chicaihong01/ma source orientation plus a real pinned-image HYPIC-only TP4 Prefill capture on physical NPU0-3; Decode remains unverified after foreign-process interference; raw profiles outside Git",
+  "environment_scope": "fresh direct chicaihong01/ma source orientation plus pinned-image HYPIC-only TP4 Prefill and Decode captures on physical NPU0-3; four-rank offline parsing on copied raw trees, without numbered NPU compute devices; raw profiles outside Git",
   "observed": {
     "historical_workspace_root": "/home/mtuser/cch",
     "historical_workspace_root_valid": false,
@@ -25,12 +25,22 @@
     "source_map_layer": "vLLM-Ascend scheduler/cache materialization seam",
     "low_level_widening_admitted": false,
     "prefill_npu_profiler_capture_completed": true,
-    "decode_npu_profiler_capture_completed": false,
+    "decode_npu_profiler_capture_completed": true,
     "prefill_offline_parse_complete": true,
     "prefill_four_rank_level1_pipe_metrics_present": true,
     "prefill_kernel_detail_columns_each_rank": 46,
     "preregistered_minimum_47_columns_met": false,
-    "prefill_decode_artifact_audit_completed": false,
+    "prefill_decode_artifact_audit_completed": true,
+    "decode_offline_parse_complete": true,
+    "decode_four_rank_level1_pipe_metrics_present": true,
+    "decode_compute_kernel_events_each_rank": 83223,
+    "decode_compute_span_seconds_each_rank_min": 1.8106,
+    "decode_fixed_output_tokens": 512,
+    "decode_post_profile_start_chunks": 64,
+    "decode_raw_nonempty_files": 441,
+    "decode_clean_isolation_samples": 85,
+    "first_decode_offline_parse_failed_without_driver_manager_node": true,
+    "second_decode_offline_parse_succeeded_with_manager_only_no_numbered_npu_devices": true,
     "kernel_details_47_columns_verified": false,
     "decode_r5_foreign_npu0_guard_detected_and_owned_resources_released": true,
     "hccl_root_cause_verified": false
@@ -42,7 +52,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_cannbot_profiler_case.py",
-      "sha256": "11d6d46b15d95654c807cff22ad86e217b13b405a096f9fae3d09586b288a215"
+      "sha256": "e8abdf2572fb4b0246aacafd8a5cc95dfd6f2ac2fe895ca683642a8712d8d4e1"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_PREFILL_AUDIT_20261009.md",
@@ -61,6 +71,14 @@
       "sha256": "c19dc05739de49584a0f72dddf927ad208466b384f6f51c46f8e7c4160444c30"
     },
     {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_DECODE_AUDIT_20261009.md",
+      "sha256": "f7aefd73e9836f22ec34ebc7b2d5becbc1ed40c1d0b34d5a60b2baae66a538fd"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_decode.py",
+      "sha256": "b1a498f76a6e344ec942abd2f7ef533a381860bed7dd42357ad704ca32e02817"
+    },
+    {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_SOURCE_MAP_CASE_20261009.md",
       "sha256": "a0ae2c4a2d847186d876510c015f148b7e64e25786b183a15aaaedbe528cf8a2"
     },
@@ -70,7 +88,7 @@
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "Routing and a real four-rank Prefill capture with offline parser evidence are behaviorally verified. The preregistered >=47 column gate missed because CANN 9.1.0 emitted 46 detailed columns; the mismatch is retained. Decode was not captured, and no CANN/HCCL root cause was established. Full Skill acceptance is not claimed.",
+  "boundary": "Routing and real four-rank Prefill/Decode captures with offline parser evidence are behaviorally verified. The preregistered Prefill >=47 column gate missed because CANN 9.1.0 emitted 46 detailed columns; this mismatch is retained. The first Decode offline parse failed without the driver management node, and a clean copy parsed successfully with the management node but no numbered NPU devices. No CANN/HCCL or HYPIC quality-regression root cause was established, so full Skill acceptance is not claimed.",
   "branch_local_skill_amendment_pending_integration": true,
-  "drift_trigger": "Complete a separately admitted Decode capture and offline audit; then review the prospective semantic-field Skill amendment and recheck main Skill/source/profiler-stack identities before promotion."
+  "drift_trigger": "Use the valid Prefill/Decode traces for bounded attribution without confusing overlapping kernel sums with wall time; review the prospective semantic-field and offline-parser Skill amendments, then recheck main Skill/source/profiler-stack identities before promotion."
 }

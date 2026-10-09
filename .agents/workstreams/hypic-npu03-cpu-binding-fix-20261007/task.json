@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r13_quality_rejected_phase6_retry20_environmental_failure_waiting_for_idle_lane",
+  "state": "r13_quality_rejected_six_phase_performance_valid_prefill_decode_profiler_valid_attribution_pending",
   "execution_state": "in-progress",
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
@@ -935,14 +935,41 @@
         "exact_owned_resources_released": true
       }
     ],
-    "decode_capture_valid": false,
+    "decode_capture_valid": true,
     "next_decode_r6": {
       "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r6",
-      "status": "preregistered_not_started",
+      "status": "terminal_valid_independently_audited",
+      "controller_operation": "exec-000000000000059e",
       "output_tokens": 512,
       "minimum_post_start_chunks": 64,
       "required_independent_proof": "actual NPU Decode kernels in the profile interval, not only buffered HTTP chunks",
-      "amendment": "HYPIC_PROFILER_RETRY6_AMENDMENT_20261009.md"
+      "amendment": "HYPIC_PROFILER_RETRY6_AMENDMENT_20261009.md",
+      "capture_interval_utc": ["2026-10-09T18:44:39.499421+00:00", "2026-10-09T18:44:42.175946+00:00"],
+      "raw_nonempty_files": 441,
+      "guard_samples": 85,
+      "guard_foreign_or_probe_errors": 0,
+      "exact_owned_resources_released": true,
+      "first_offline_parse_controller": "exec-00000000000005b6",
+      "first_offline_parse_result": "exit0 but internal CANNExportParser failures; incomplete output; immutable raw unaffected",
+      "first_offline_parse_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r6-decode",
+      "offline_parse_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r6-decode-manager",
+      "offline_parse_controller": "exec-00000000000005cb",
+      "offline_parse_complete": true,
+      "offline_parser_device_boundary": "shared /dev/davinci_manager only; no numbered NPU compute devices; network none",
+      "kernel_detail_rows_each_rank": 99603,
+      "kernel_detail_columns_each_rank": 46,
+      "compute_kernel_events_each_rank_in_capture_window": 83223,
+      "minimum_compute_span_seconds_each_rank": 1.8106,
+      "independent_replay": "verify_hypic_profiler_decode.py",
+      "report": "HYPIC_PROFILER_DECODE_AUDIT_20261009.md"
+    },
+    "passive_monitor_r6_admission": {
+      "controller_operation": "exec-0000000000000543",
+      "terminal_exit_code": 0,
+      "physical_npu0_3_idle_from_utc": "2026-10-09T18:04:26.485794+00:00",
+      "monitor_completed_utc": "2026-10-09T18:34:35.668698+00:00",
+      "final_idle_seconds": 1808.1,
+      "probe_errors": 0
     },
     "passive_monitor": {
       "controller_operation": "exec-00000000000004d7",
@@ -956,5 +983,5 @@
     },
     "skill_case_acceptance": "partial-evidence"
   },
-  "next_action": "Do not rerun completed HYPIC phases. Preserve the paired quality and six-phase performance evidence. The Prefill profiler is captured and independently parsed; Decode remains missing after r5 was interrupted by external Maxon4ick_vllm on physical NPU0. r5 is terminal and immutable. The prospective r6 Decode-only 512-token/64-chunk protocol and unused root are frozen. Wait for a sufficiently long actual idle window or a user-coordinated window, then launch only after fresh direct-route NPU0-3/port admission. Independently require real NPU Decode kernel events in the captured interval; HTTP chunks alone are insufficient. Do not repeat Prefill or reinterpret quality. Keep Skill cases partial until real Decode capture and parser audit; validate and push each coherent checkpoint."
+  "next_action": "Do not rerun completed HYPIC phases or the now-valid Prefill/Decode profiler roots. Replay the independent r6 Decode audit, map its success and first offline-parser failure into the Cannbot Skill cases, and use the actual traces for bounded quality-regression attribution without claiming a CANN/HCCL root cause from kernel counts alone. Preserve the original Prefill >=47-column preregistration miss. Keep full Skill acceptance partial until its remaining attribution/integration gates pass. Skill cases must retain provenance; validate and push this coherent branch checkpoint, then review authorized main integration separately."
 }

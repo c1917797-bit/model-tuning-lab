@@ -2,6 +2,18 @@
 
 ## 0. Status
 
+- Latest 2026-10-09 r6 Decode profiler capture is terminal and independently
+  audited. Controller `exec-000000000000059e` completed 512 output tokens
+  with 64 post-start chunks; 441 raw files hash-check, 85 isolation samples
+  are clean, and exact owned resources were released. A clean offline copy
+  parsed in the pinned image under `exec-00000000000005cb` using only the
+  shared driver management node, no numbered NPU devices or network.
+  `verify_hypic_profiler_decode.py` proves 83,223 real NPU compute kernels
+  inside the capture window on each of four ranks, spanning about 1.81 s;
+  see `HYPIC_PROFILER_DECODE_AUDIT_20261009.md`. The first offline copy
+  failed CANN export without the management node despite parser exit 0;
+  retain it as a failure lesson. This does not repair the original Prefill
+  preregistered `>=47` column miss or the frozen HYPIC quality rejection.
 - New profiler diagnostic deadline: 2026-10-10 04:42:44 UTC. The frozen
   HYPIC six-phase performance and r13 max-2048 paired quality are complete;
   they are not to be repeated. The quality decision remains
@@ -18,19 +30,12 @@
   recorded as a protocol deviation. The branch-local maintainer Skill now
   specifies a version-aware semantic-field gate for future cases; it is not
   yet main/remote truth.
-- Decode is still missing: retry2 guard caught external `Maxon4ick_vllm`
-  PID 3418373 on NPU0 before capture; retry3 preflight found NPU0-3 occupied;
-  retry4 caught PID 3541845, and retry5 caught PID 3750311 from the same
-  external container on NPU0 before capture. All roots are terminal and
-  immutable, and the exact owned resources were released. Retry5 guard's
-  internal attempt label incorrectly says r4; root/contract/hashes prove r5,
-  and the label derivation is fixed prospectively. A
-  passive 0-3 process monitor `exec-00000000000004d7` finished without NPU
-  mapping. It observed an idle interval from 17:21:34 to 17:26:12 UTC, then
-  short NPU0 PIDs 3618350 and 3622213 at 17:26:12 and 17:26:34. Their
-  container identity was not retained by this passive monitor. The new r6
-  Decode root is prospectively frozen with 512 output tokens and a 64-chunk
-  window; launch only after sufficient real idle time. Do not touch external work.
+- Historical Decode gap before r6: r2/r4/r5 guards caught the external
+  `Maxon4ick_vllm` on NPU0; r3 failed occupied-lane preflight. All roots
+  are terminal, immutable, and documented in `task.json`; exact owned
+  resources were released. The r5 stale attempt label was fixed before r6.
+  A separate 30-minute clean idle monitor admitted r6. Do not touch
+  external work.
 - Updated 2026-10-09. Workstream: `work/hypic-npu03-cpu-binding-fix-20261007`; checkout: `/cache/cch/model-tuning-lab-hypic-e2e-20261006`.
 - Retry21 completed the missing HYPIC-only/repeat3 phase on physical NPU0-3.
   Independent replay verifies 40/40 fixed-output rows, 42 unique IDs, 40/40
@@ -45,20 +50,17 @@
 - All six matched performance phases have an independent valid audit, and all
   120 candidate scored requests have four-worker hot-path proof. Retries15-20
   remain immutable environmental isolation failures, not HYPIC performance
-  outcomes. Retry4's partial responses are contaminated and invalid.
-- Keep the original full single-service baseline and every phase root immutable.
-- Fresh direct-route snapshot at 2026-10-09 12:42 UTC found no running processes on physical NPU0–3 and no listener on port 8223; an unrelated PID existed on NPU6, outside scope. `/cache` had 504 GiB free and `/` was 100% full. This point-in-time observation is not a lease; refresh immediately before launch and use the continuous physical-PID/cgroup guard.
+  outcomes. Retry4's partial responses are contaminated and invalid; the original full single-service baseline and phase roots remain immutable.
 - Main Skill inventory is 29: all 29 now have provenance-checked cases, with
   7 bounded verified and 22 partial. Five previously missing maintainer-system
   Skills passed an isolated real Python-repository transformation fixture.
-  `ascend-cannbot-profiler` has a real, independently parsed Prefill capture
-  but remains partial because Decode is missing and the original numeric
-  column gate missed. This is not full Skill acceptance.
-- The preceding coherent profiler checkpoint was pushed to the workstream
-  branch and independently verified at `820ee0c2d6d67864073f80a140609d96664374f3`.
-  Retry5 follow-up is branch-local until a new reviewed checkpoint is pushed;
+  `ascend-cannbot-profiler` now has real Prefill and Decode captures but
+  remains partial: the original numeric column gate missed, and no
+  profiler-driven quality root cause or main integration is proven.
+- The previous coherent profiler checkpoint was pushed and independently
+  verified at `c22c81b5b3069636cbb8ee962917393c900b9cee`.
+  This new r6 audit/Skill case is branch-local until validated and pushed;
   do not claim main integration.
-- The five-hour delivery window and milestone gates are recorded in `task.json`; immutable detailed outcomes live in `task.json`, `HANDOFF_HISTORY.md`, and the per-attempt audit reports.
 
 ## 1. North Star
 
@@ -67,11 +69,11 @@ Finish the frozen HYPIC experiment without changing its technical question or ac
 ## 2. Current Focus
 
 The frozen six-phase HYPIC performance comparison is complete. Preserve its
-separate quality rejection. The immediate missing HYPIC-linked Skill gate is
-the `ascend-cannbot-profiler` Decode capture and independent parse. Use only a
-new immutable r6 root after a sustained actual 0-3 idle window; the Prefill
-pass is done.
-After that, map the evidence into the main-29 acceptance inventory.
+separate quality rejection. Both Prefill and Decode profiler captures and
+four-rank parses are now independently replayable. Map their successes and
+the failed first offline parse to the Cannbot case, then pursue bounded
+quality-regression attribution. The original Prefill numeric gate remains
+missed and the main-29 inventory is not fully accepted.
 
 ## 3. Recent Progress
 
@@ -92,14 +94,11 @@ After that, map the evidence into the main-29 acceptance inventory.
 
 ## 4. Current Action
 
-Do not launch another quality or matched-performance phase. Retry5 failed
-before capture because the external `Maxon4ick_vllm` container again entered
-NPU0. Continue watching for a longer idle interval or a coordinated window,
-then use the frozen Decode-only r6 profiler root. Before any device
-action, refresh direct `chicaihong01/ma`, check physical NPU0-3 processes and
-port 8223, and run only while actually idle. Keep the continuous guard.
-Meanwhile replay the completed Prefill audit and validate this branch-local
-checkpoint. NPU4-7 remain outside this task.
+Do not launch another quality, matched-performance, Prefill, or Decode phase.
+The r6 Decode root is terminal and immutable. Replay both profiler audits,
+record the parser-environment lesson, and analyze the trace without treating
+overlapping kernel sums as removable wall time. No CANN/HCCL root cause is
+yet proven. NPU4-7 remain outside this task.
 
 ## 5. Next Actions
 
@@ -107,11 +106,12 @@ checkpoint. NPU4-7 remain outside this task.
    case-registry replay checks.
 2. Map the final performance success and quality rejection to the exact Skills;
    do not convert performance success into an unconditional deployment claim.
-3. Complete the missing Decode profiler window with at least 16 observed
-   post-Prefill chunks and actual NPU kernel evidence, then parse a copy and
-   audit each rank. Keep the `ascend-cannbot-profiler` case partial until this
-   succeeds. Upgrade the other 21 partial cases only through their missing
-   real behavioral gates; all 29 have provenance, not full acceptance.
+3. Replay the completed r6 Decode audit and add its success and first
+   parser-environment failure to the `ascend-cannbot-profiler` case. Keep
+   full Skill acceptance partial until the remaining attribution and
+   integration gates are met. Upgrade the other partial cases only through
+   their missing real behavioral gates; all 29 have provenance, not full
+   acceptance.
 4. Commit only a reviewed coherent checkpoint. Push only when authentication
    works and then verify the live remote ref.
 
@@ -125,6 +125,7 @@ python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hotpa
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_cannbot_profiler_case.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_decode.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
