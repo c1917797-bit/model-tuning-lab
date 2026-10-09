@@ -1,0 +1,114 @@
+{
+  "schema": "sparq.actual-full-v14-software-and-next/v1",
+  "recorded_at_utc": "2026-10-09T19:46:30Z",
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "bytes": 46629,
+    "sha256": "3f7101329858c900efb3fd0a17be12a2a1358e37f4c5ed107092ccb0a84e1295"
+  },
+  "patch": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/sparq-full-v14-effective-ascend-common-delta-user72h-20261009/MATERIALIZE.patch",
+    "bytes": 28679,
+    "sha256": "5e91dfe1b65176f982dfb1630ec8e942714accbc740d140ded58faae58ae2a96",
+    "root": "/opt/host/vnf/austinov/model-tuning-lab",
+    "relative_targets": [
+      "projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/common.py",
+      "projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/source_contract.py",
+      "projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/test_fp32_model_adapter.py",
+      "projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json"
+    ],
+    "no_delete": true,
+    "canonical_application": "MAIN only"
+  },
+  "classification": "verified source/software repair; model unverified",
+  "software": {
+    "operation_id": "exec-0000000000000648",
+    "exit_code": 0,
+    "tests": 201,
+    "source_count": 132,
+    "duration_ms": 38871,
+    "default_OFF_actual": true,
+    "host_source_audit_actual": true,
+    "NPU_used": false,
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_0648_FULLV14_SOFTWARE201_ORIGINAL.json",
+      "sha256": "e19216a3d2ee7c19c5510f656b3490c0c0a04fa291cf6be9c59c8242e4497617"
+    }
+  },
+  "unchanged": {
+    "requested_warmups_both_arms": 2,
+    "math": true,
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "host_sha": "c0a85477ebf7439e7379a17ae935a4224fade83fa36eee434b7d38d19b5941ce"
+  },
+  "repair": {
+    "effective_warmups": 1,
+    "official_platform_sha": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8",
+    "named_fields": true,
+    "old_05d4_failed_preserved": true
+  },
+  "next": {
+    "stage": "fresh admission and unique004 CPU/N1/full-model diagnostic",
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/host_run.py",
+      "--execute",
+      "--source",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "3f7101329858c900efb3fd0a17be12a2a1358e37f4c5ed107092ccb0a84e1295",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-sparq005-consumer-mounts-whole-user72h-20261009-001.json",
+      "--component-sha256",
+      "5614469e833ada86ad9f2f5869d084752a7262d0ac1f3701b7246e9701df7a74",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--mode",
+      "diagnostic",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v14-diagnostic-user72h-20261009-004",
+      "--port",
+      "8241"
+    ],
+    "NPU_launch_started": false,
+    "authority_missing": true
+  },
+  "missing": [
+    "actual new same-image/N1",
+    "all4/all64 model numerical/lifecycle",
+    "paired1024 E1 and3formal",
+    "final2048 LongBench-v2/GSM8K",
+    "cross-environment evidence"
+  ],
+  "clock": {
+    "schema": "sparq.user72h-full-model-clock/v1",
+    "owner": "sparq-author-ann-fixed-capacity-full-model/v1",
+    "authorization": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+      "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+    },
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "total_cutoff_epoch": 1791788425,
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "first_repair_cutoff_epoch": 1791615625,
+    "old_ba508_status": "FAILED-not-promoted",
+    "whole_phase_seconds": 5400,
+    "cleanup_included_seconds": 90
+  },
+  "publication": "pending known unchanged HTTPS auth blocker; no blind retry",
+  "goal": "active unmet"
+}

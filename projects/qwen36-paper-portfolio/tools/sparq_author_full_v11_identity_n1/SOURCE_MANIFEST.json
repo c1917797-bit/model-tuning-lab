@@ -3,10 +3,10 @@
   "ready": false,
   "files": {
     "bridge.py": "11426b472bae7ee654545bb6572124ee35efeb7f3e015229879d686e64bc0dd2",
-    "common.py": "9eaaa6b8aa3eeb515a1779cd15bd095c784f29077f0aaeb97bf101914a071e99",
+    "common.py": "b7fbe8c143eae5db5663abb8a45cee479a3ca6936846c74962b80dc467e3b8b8",
     "lifecycle.py": "197ced9fdac7139b04a78cb6f54ea93bb168d0d58b8662a9fda64a565adb7ee2",
     "workspace_budget.py": "945b6408dd6ccbf541a24e24d5e934a2ea6fa802fd269df2406b5c556462b20c",
-    "source_contract.py": "273065acf4b12caaff7eb2ff5345c00785ad094b691ec36557f73277cc46ffd5",
+    "source_contract.py": "db3437cf90924b984fb2b49732b46f59e20372bf337f13aeda4f45968229f570",
     "full_graph_pa.py": "67ed22fc02ca80721f1fdd3577381a39629ce27aadd78b52fcfba558aafada24",
     "original_terminal.py": "ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1",
     "sitecustomize.py": "2ce9f1cd7d20a793f105fcaba8a1c7c0169de0963d912b41db569b3068b39705",
@@ -56,7 +56,7 @@
     "entry.py": "e8dfd9cf45a3405f28812b98484e4cb3342c979507d2b9b2c2f27c77e59c4a95",
     "component_handoff.py": "5b67da085a0b1ca950ef76eb5644668f6cd3999756aa57b1554e8272bc7dd04d",
     "test_component_handoff.py": "d97cacd37f0ee6e8ea4aa0c86bfc190b12b008ad1da9ee128eaede71899c3671",
-    "test_fp32_model_adapter.py": "932bc4757c91c1c24e6b9f136267766af8f19d683e609f44dcc079ecfc3e26dd",
+    "test_fp32_model_adapter.py": "6b4320d81c2b82c7c31711a2f9a5aeb2118b7e74d828bca2c2d5cef8fe3e6cf3",
     "long_independent_oracle.py": "21fe6d9e7c78acdecb23ffe42196e38c8cfd6d55c2c08bb45f2826bf40d74605",
     "gdn_stream.py": "41bfd90bb5df44c4950063bfd22330d42be7314c9c619713e72f949907945b9e",
     "identity_bridge.py": "7f156e5a10d61d11d253d11e7dfb3cf780bb5a11746e1ee99912ab209832160e",
@@ -130,7 +130,9 @@
     "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/SOURCE_MANIFEST.json": "77f7afd3eb5f84ea1e113230849a97a22b8d03fa37c82266da05d42b7c1bffae",
     "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/mounts.py": "a6069e289e01c8cad5ac457cc0b8fcf8bb9738e54f194d96cc9b55c22c6c4ade",
     "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/replay.py": "0f652aa5e01671684158a8f1b75fdfdfec4f2227485bcdeb1166cef4286e95cd",
-    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/test_mounts.py": "7b1fa4e932a7615b65ff71aefb94fe4ad471081f2402b82316adc254954d8919"
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/test_mounts.py": "7b1fa4e932a7615b65ff71aefb94fe4ad471081f2402b82316adc254954d8919",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/ascend_platform.py": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/COPY_IDENTITY.json": "8cfede7a3854fbc274f67bc5e5623a1735704d724c0bd26909deca6f03beed59"
   },
   "runtime_pins": {
     "/vllm-workspace/vllm/vllm/engine/arg_utils.py": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
@@ -162,14 +164,15 @@
     "/vllm-workspace/vllm/vllm/entrypoints/openai/engine/serving.py": "38b242a091b2b4502a58b7d9b8a274ac17611b383fecc30e9b714f5da9c8dc75",
     "/vllm-workspace/vllm-ascend/vllm_ascend/worker/npu_input_batch.py": "a4dc08a9918f07797622f8d0915785e8c7b6899e0d10d92603e1dddec218acc3",
     "/vllm-workspace/vllm-ascend/vllm_ascend/worker/block_table.py": "8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a",
-    "/vllm-workspace/vllm/vllm/v1/engine/input_processor.py": "c5673988c0f7cfec268220e3f044e718702c015a4f236c020937cfd40a793f15"
+    "/vllm-workspace/vllm/vllm/v1/engine/input_processor.py": "c5673988c0f7cfec268220e3f044e718702c015a4f236c020937cfd40a793f15",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/platform.py": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8"
   },
   "host_dependencies": {
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc",
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
   },
-  "source_count": 130,
+  "source_count": 132,
   "complete_native_component_required": "Exact producer2f/native42 eb7 with actual new reader77f7 explicit consume_successor replay; original c971 consumer FAILED stays immutable. Entire128/20480/four original children+whole0452+exact cleanup all original fields unchanged.",
   "tests": {
     "status": "UNRUN_API_ONLY",
@@ -188,15 +191,15 @@
       "test_identity_n1",
       "test_component_bootstrap"
     ],
-    "static_declared_tests": 189,
+    "static_declared_tests": 201,
     "actual_collected_test_count": null,
     "exit_code": null,
     "stdout": null,
     "stderr": null,
     "remote_exec_CPU": 0,
-    "method_declarations": 186,
+    "method_declarations": 198,
     "inherited_unittest_cases": 3,
-    "inherited_case_source": "Original177 preserved;12 new actual installed-SMI parser cases/subcase matrix. Actual189 execution pending."
+    "inherited_case_source": "Original189 preserved;12 additional real common callable/clean -I/installed Ascend normalization source contracts. Actual201 UNRUN."
   },
   "actual_model": "UNRUN; complete disjoint4 component plus initialized geometry/budget/all4all64 full lifecycle and oracle required",
   "performance": {
@@ -237,7 +240,7 @@
       "sha256": "808d47842a9d650e24bbf2cbd8bafcb39245de45fa6188a06bcd7361bba647fb"
     },
     "historical_source_is_not_current_runtime_authority": true,
-    "experimental_source_version": "FULLv12-component-bootstrap-same-canonical-path",
+    "experimental_source_version": "FULLv14-official-Ascend-effective-common-same-canonical-path",
     "predecessor_source_preserved": {
       "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/sparq-full-assignment-n1-seam-v2-source-recovery-user72h-20261009/SOURCE_MANIFEST.json",
       "sha256": "b0f642474118cbf6df7c8b325e6f2a167e74d6facc6c50031301ee5a0f1260fc"
@@ -525,5 +528,68 @@
     "N1": "UNRUN",
     "model": "UNRUN",
     "E1": "requires independent rebind to this final new source; frozen d18d not runnable against it"
+  },
+  "v14_ascend_effective_common_successor": {
+    "predecessor_source": "dc4ab14378cb198001a3c14a5f23fd804ba9354c0b632e3f05d3734dd1d17929",
+    "baseRef": "925bd8836f129b30499148e53ab411e25ee140bc",
+    "first_worker_failure": {
+      "operation": "exec-00000000000005d4",
+      "classification": "adapter requested/effective runtime config mismatch",
+      "actual_all4_weight_load": true,
+      "model_numeric_pass": false,
+      "worker_fault_before_host_idle_HBM": true,
+      "stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-003/round0-candidate/server.stdout",
+        "bytes": 41763,
+        "sha256": "35fdfee94c086d79840c4cbde52cadab26bc2cbe3f4525d0b3c2a41b1eab8513"
+      },
+      "stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-003/round0-candidate/server.stderr",
+        "bytes": 16551,
+        "sha256": "9cc5d7bc5174410b5f02b76718e59c7aacf8532f36c2ac2edec85fa4b2dee564"
+      },
+      "original_unchanged": true
+    },
+    "official_normalization": {
+      "captured_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/ascend_platform.py",
+        "bytes": 62514,
+        "sha256": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8"
+      },
+      "copy_identity": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/COPY_IDENTITY.json",
+        "bytes": 90043,
+        "sha256": "8cfede7a3854fbc274f67bc5e5623a1735704d724c0bd26909deca6f03beed59"
+      },
+      "runtime_source": "/vllm-workspace/vllm-ascend/vllm_ascend/platform.py",
+      "method": "AscendPlatform.check_and_update_config",
+      "line": 533,
+      "requested_both_arms": 2,
+      "effective_both_arms": 1,
+      "actual_N1_installed_runtime_pin_required": true
+    },
+    "change": "Only official warmup normalization interpretation; remaining original field predicates individually named with actual values. Missing facts fail closed. No other actual runtime values inferred from the old short-circuit error.",
+    "unchanged": {
+      "common_requested_dict": true,
+      "CLI_both_arms": true,
+      "host_run_sha": "c0a85477ebf7439e7379a17ae935a4224fade83fa36eee434b7d38d19b5941ce",
+      "source_gate_sha": "cc78016efaef49fa8a15a3f4f1aa81e1b75fdf1e2d2260d228fd9e183ff98024",
+      "all189_tests": true,
+      "numeric128_20480": true,
+      "TP4_FULL_all16": true,
+      "FA16_GDN48_all4": true,
+      "resources": true,
+      "clocks": true,
+      "math": true
+    },
+    "software": {
+      "new": 12,
+      "total": 201,
+      "status": "UNRUN_API_ONLY"
+    },
+    "same_image": "UNRUN",
+    "actual_N1": "UNRUN",
+    "model": "UNRUN",
+    "E1": "MISSING actual independent model authority and required new-source rebind"
   }
 }

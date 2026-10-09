@@ -12,15 +12,44 @@ def require(ok,why):
 def validate(actual,arm):
  require(arm in ("dense","candidate") and actual==COMMON,"both arms exact same stock FULL_DECODE_ONLY/PA config, not candidate eager")
  return dict(source_policy_checked=True,model_executed=False,model_ready=False)
+# Same installed image660 AscendPlatform.check_and_update_config, L533:
+# requests stay at2 on BOTH arms; stock platform overwrites effective count to1.
+ASCEND_PLATFORM_SOURCE="/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/ascend_platform.py"
+ASCEND_PLATFORM_RUNTIME="/vllm-workspace/vllm-ascend/vllm_ascend/platform.py"
+ASCEND_PLATFORM_SHA="30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8"
+ASCEND_EFFECTIVE_WARMUPS=1
+def _field(owner,name):
+ try:return getattr(owner,name)
+ except AttributeError as error:raise ValueError("actual common missing field "+name) from error
+def _equal(name,actual,expected):
+ require(actual==expected,"actual common "+name+": got "+repr(actual)+" expected "+repr(expected))
+def _sequence(name,actual):
+ try:return tuple(actual)
+ except TypeError as error:raise ValueError("actual common "+name+": invalid sequence "+repr(actual)) from error
 def validate_runner(runner,Mode,ascend_config):
- cc=runner.vllm_config.compilation_config;pc=runner.vllm_config.parallel_config
- require(runner.model_config.enforce_eager is False and cc.cudagraph_mode==Mode.FULL_DECODE_ONLY and
-  cc.cudagraph_mode.decode_mode()==Mode.FULL and cc.cudagraph_mode.mixed_mode()==Mode.NONE and
-  tuple(cc.cudagraph_capture_sizes)==BATCHES and cc.cudagraph_num_of_warmups==2 and
-  tuple(ascend_config.pa_shape_list)==BATCHES and pc.tensor_parallel_size==4 and pc.data_parallel_size==1 and
-  runner.max_num_reqs==16 and runner.speculative_config is None and runner.lora_config is None and
-  not runner.use_cp and not runner.use_async_scheduling and not runner.enable_enpu and
-  not runner.use_sparse and not runner.use_compress,"actual common TP4/nondraft/stock FULL native PA/all16/no async admission")
+ # Only warmup request/effective interpretation changes. All prior predicates
+ # remain independent hard requirements; missing runtime facts never pass.
+ cfg=_field(runner,"vllm_config");cc=_field(cfg,"compilation_config");pc=_field(cfg,"parallel_config")
+ eager=_field(_field(runner,"model_config"),"enforce_eager")
+ require(eager is False,"actual common enforce_eager: got "+repr(eager)+" expected identity False")
+ mode=_field(cc,"cudagraph_mode")
+ _equal("cudagraph_mode",mode,Mode.FULL_DECODE_ONLY)
+ _equal("cudagraph_mode.decode_mode",_field(mode,"decode_mode")(),Mode.FULL)
+ _equal("cudagraph_mode.mixed_mode",_field(mode,"mixed_mode")(),Mode.NONE)
+ _equal("cudagraph_capture_sizes",_sequence("cudagraph_capture_sizes",_field(cc,"cudagraph_capture_sizes")),BATCHES)
+ warmups=_field(cc,"cudagraph_num_of_warmups")
+ require(type(warmups) is int and warmups==ASCEND_EFFECTIVE_WARMUPS,
+  "actual common cudagraph_num_of_warmups: got "+repr(warmups)+" expected official effective integer1; requested2 unchanged")
+ _equal("pa_shape_list",_sequence("pa_shape_list",_field(ascend_config,"pa_shape_list")),BATCHES)
+ _equal("tensor_parallel_size",_field(pc,"tensor_parallel_size"),4)
+ _equal("data_parallel_size",_field(pc,"data_parallel_size"),1)
+ _equal("max_num_reqs",_field(runner,"max_num_reqs"),16)
+ for name in ("speculative_config","lora_config"):
+  actual=_field(runner,name)
+  require(actual is None,"actual common "+name+": got "+repr(actual)+" expected identity None")
+ for name in ("use_cp","use_async_scheduling","enable_enpu","use_sparse","use_compress"):
+  actual=_field(runner,name)
+  require(not actual,"actual common "+name+": got "+repr(actual)+" expected disabled")
  return True
 
 FA=tuple(range(3,64,4))
