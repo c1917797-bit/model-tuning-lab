@@ -93,8 +93,13 @@ class SkillCaseTests(unittest.TestCase):
         item = json.loads(path.read_text())
         self.assertEqual(item["observed"]["enabled_scored_worker_hot_pids"], 4)
         self.assertEqual(item["observed"]["disabled_scored_worker_hot_pids"], 0)
-        self.assertFalse(item["observed"]["full_2048_token_quality_pair_complete"])
-        self.assertFalse(item["observed"]["current_candidate_c12060c_disabled_pair_proven"])
+        self.assertFalse(item["observed"]["historical_canary_both_correct"])
+        self.assertTrue(item["observed"]["full_2048_token_quality_pair_complete"])
+        self.assertTrue(item["observed"]["current_candidate_c12060c_same_identity_full_pair_complete"])
+        self.assertFalse(item["observed"]["current_candidate_c12060c_small_deterministic_canary_pass"])
+        self.assertEqual(item["observed"]["r13_deployed_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertFalse(item["observed"]["canary_acceptance_to_scale"])
 
     def test_source_map_preserves_serving_provenance_limits(self) -> None:
         path = cases.CASES / "ascend-source-map.json"

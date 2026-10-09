@@ -4,14 +4,14 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Replay exact-main canary Skill against a genuine 2048-cap paired HYPIC disabled/enabled explicit-boundary LongBench-v2 request on physical NPU0-3",
+  "task": "Replay the historical 2048-cap disabled/enabled HYPIC canary separately from the later same-identity c12060c full quality and performance pair on physical NPU0-3",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "07dceac8c65c9d1696d8e2fa5543d9b8784a7628",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "Read-only retrospective of historical real-weight canary pair; no new NPU use or unchanged rerun",
+  "environment_scope": "Read-only retrospective of historical real-weight canary and separately audited r13 full pair; no new NPU use or unchanged rerun",
   "observed": {
     "canary_checkpoint_source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
     "same_sample_and_explicit_boundaries": true,
@@ -23,19 +23,28 @@
     "enabled_prediction": "A",
     "reference": "B",
     "single_sample_accuracy_delta": 0,
+    "historical_canary_both_correct": false,
     "historical_preimplementation_git_gates_proven": false,
-    "current_candidate_c12060c_disabled_pair_proven": false,
-    "full_2048_token_quality_pair_complete": false,
+    "current_candidate_c12060c_same_identity_full_pair_complete": true,
+    "current_candidate_c12060c_actual_bind_and_python_digest_verified": true,
+    "current_candidate_c12060c_small_deterministic_canary_pass": false,
+    "full_2048_token_quality_pair_complete": true,
+    "r13_quality_correct_baseline_candidate": [230, 219],
+    "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_strict_four_worker_hot_requests": [368, 381],
+    "r13_six_phase_performance_screen_pass": true,
+    "r13_performance_four_worker_hot_requests": [120, 120],
+    "canary_acceptance_to_scale": false,
     "case_integrated_in_main": false
   },
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_CANARY_IMPLEMENTATION_CASE_20261009.md",
-      "sha256": "eeed4c8325efb19ab3f55ef76669867d4595585f74d2e05a16926b3d7975a945"
+      "sha256": "025f673a8381100165193ed4e357bded10e114bebe8fc28e1d666dccc99cdfca"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_canary_implementation_case.py",
-      "sha256": "8400078dcc9ef5519c22c8d3280d6093486d386636a78959dc5f2b30ddc44e70"
+      "sha256": "c4a79fdd3f77bdc763b6881ecd85892e6266f48f103e05588880a619ad0e7cd7"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CANARY_RESULT.md",
@@ -44,6 +53,14 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_canary.py",
       "sha256": "1c431dddfaaa434d375155739b666f97bd092fa84d1d9a3a673f45705fce59e4"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_source_map_case.py",
+      "sha256": "90ce4f8dfc38a41631dfe6829a032765a6e3de3ccc652d04ee403c2c88f20818"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_benchmark_evidence_r13_case.py",
+      "sha256": "9f59a0e1587cb25d5a61e7245d91b577b2e9abd64834ee8edf5cba6b6212458b"
     }
   ],
   "external_raw_receipts": {
@@ -51,10 +68,12 @@
     "enabled_canary_result_sha256": "f206085cbfb41f6a5446eb92a8963df3b30dbab6d8a8cbb0c872488bbd11b2e1",
     "enabled_service_start_sha256": "c1a3fcda6be4789efa37071da897e6dc4131496b90fbd04b5db7dfdcfffd2be9",
     "enabled_service_log_sha256": "f1478862efca1cf9973877e62d45b73a410bf3d5d0b3f0635ef5ab4988be6c9b",
-    "enabled_npu_health_sha256": "b95949f8f10dc682cb517423d4622a300fe9cffc57e74907e22be019b1c9dab3"
+    "enabled_npu_health_sha256": "b95949f8f10dc682cb517423d4622a300fe9cffc57e74907e22be019b1c9dab3",
+    "r13_quality_audit_sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+    "r13_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062"
   },
   "replayable_regression_recorded": true,
-  "boundary": "One paired request proves request-protocol activation, four-worker path and no same-sample accuracy delta; both predictions are incorrect. It does not prove aggregate quality, final c12060c candidate, prospectively satisfied preimplementation gates, a full scoring rule, or paper C3.",
-  "next_gate": "Freeze the full-pair scoring rule; for final candidate c12060c preserve in-container source digest and Docker bind inspect, then a same-identity disabled/enabled canary and complete 2048-token quality/performance pair only when physical NPU0-3 are actually idle.",
+  "boundary": "Historical one-request activation pass has both predictions incorrect and cannot authorize scale. Separate r13 c12060c same-identity 127x3 quality and six-phase performance are complete, but quality is REJECT_OR_QUALIFY, strict quality hot proof is 368/381, no current small correctness canary passed, prospective preimplementation gates are missing, and paper C3 is not implemented; acceptance-to-scale and adoption remain false.",
+  "next_gate": "Keep r13 roots immutable. Isolate the quality/activation failure under a new pre-registered one-variable hypothesis; only after a changed candidate is justified, prove its exact-source short correctness canary and disabled control on actually idle physical NPU0-3 before any fresh full pair. Do not repeat the existing r13 pair.",
   "drift_trigger": "Revalidate if exact-main Skill/registry, paired raw canary receipts, serving image, source commit, model/evaluator, or explicit-boundary request protocol changes."
 }

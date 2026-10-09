@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -31,6 +32,14 @@ def checked(path: Path, digest: str) -> bytes:
     data = path.read_bytes()
     require(hashlib.sha256(data).hexdigest() == digest, f"SHA drift: {path}")
     return data
+
+
+def replay(script: str) -> dict:
+    result = subprocess.run((sys.executable, "-B", str(HERE / script)),
+                            cwd=REPO, text=True, capture_output=True,
+                            check=False)
+    require(result.returncode == 0, f"{script}: {result.stderr}")
+    return json.loads(result.stdout.strip().splitlines()[-1])
 
 
 def main() -> int:
@@ -100,11 +109,42 @@ def main() -> int:
     case = (HERE / "ASCEND_CANARY_IMPLEMENTATION_CASE_20261009.md").read_text()
     for phrase in ("Status: **partial-evidence**", "both incorrect",
                    "not aggregate correctness", "no independently retained",
-                   "current candidate/disabled canary"):
+                   "current-source small deterministic canary",
+                   "REJECT_OR_QUALIFY"):
         require(phrase in case, f"case boundary absent: {phrase}")
+    source = replay("verify_ascend_source_map_case.py")
+    benchmark = replay("verify_benchmark_evidence_r13_case.py")
+    require(source["r13_actual_bind_and_python_digest_verified"] is True
+            and source["r13_full_2048_pair_complete"] is True
+            and source["plugin_commit"] ==
+                "c12060cd47e7575ead059983d7a8bb4704165c98",
+            "current-source attestation or pair drift")
+    require(benchmark["quality_pair"] ==
+                "127x3 each arm, REJECT_OR_QUALIFY"
+            and benchmark["performance"] ==
+                "6/6 phases, EFFECT_SCREEN_PASS"
+            and benchmark["strict_quality_hot"] == "368/381 FAIL",
+            "bounded r13 mixed verdict drift")
+    record = json.loads((HERE / "skill-cases/ascend-canary-implementation.json")
+                        .read_text(encoding="utf-8"))
+    observed = record["observed"]
+    require(observed["historical_canary_both_correct"] is False
+            and observed["current_candidate_c12060c_same_identity_full_pair_complete"] is True
+            and observed["current_candidate_c12060c_small_deterministic_canary_pass"] is False
+            and observed["full_2048_token_quality_pair_complete"] is True
+            and observed["r13_quality_correct_baseline_candidate"] == [230, 219]
+            and observed["r13_deployed_quality_decision"] == "REJECT_OR_QUALIFY"
+            and observed["r13_strict_four_worker_hot_requests"] == [368, 381]
+            and observed["r13_six_phase_performance_screen_pass"] is True
+            and observed["canary_acceptance_to_scale"] is False
+            and record["long_term_acceptance"] == "partial-evidence",
+            "canary case conflates completed measurement with acceptance")
     print(json.dumps({"schema": "ascend-canary-implementation-real-task-case/v1",
         "historical_scored_worker_hot_pids": 4, "disabled_worker_hot_pids": 0,
-        "both_scored_correct": False, "full_quality_accepted": False,
+        "both_scored_correct": False, "r13_full_pair_complete": True,
+        "r13_quality_decision": "REJECT_OR_QUALIFY",
+        "r13_performance_screen": "EFFECT_SCREEN_PASS",
+        "current_small_canary_pass": False, "full_quality_accepted": False,
         "long_term_acceptance": "partial-evidence"}, sort_keys=True))
     return 0
 
