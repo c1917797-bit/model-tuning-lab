@@ -16,7 +16,7 @@
     "named_branch_attached": true,
     "task_clone_worktree_count": 1,
     "remote_upstream_commit": "0d00bab0ad63c5bdad39f2f7887577d188194485",
-    "local_ahead": 50,
+    "local_ahead": 51,
     "remote_ahead": 0,
     "original_missing_execution_and_integration_axes": true,
     "repaired_execution_state": "in-progress",
@@ -32,14 +32,18 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/task.json",
-      "sha256": "c2b36f7e37fc61f4aefa68bd43a6f756d0aa4211ecb1de792372bc22fc197e6c"
+      "sha256": "f5847af950806a068aad50cc075af2e6f4c97a62ba6b043819f83dbb09e2268f"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
-      "sha256": "26743052a82fbca09a28b374d9b75d2d61b4cb37968c3b731a1829a09f72c14d"
+      "sha256": "59be1da1cea98f3fd51e46d43574513a6e73f5a37556084e846350804c091090"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY19_PREREGISTRATION_20261009.md",
+      "sha256": "b1e1afeb63d0bad7d8b2d42bab434f6fe83ad4e9fc7f5ccf982fd189f3dd3b30"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The main Skill's separate state axes exposed and repaired one real handoff defect. The task is still in progress, 39 commits ahead of its upstream, and lacks end-to-end remote start, drift/revalidation, integration, and reclamation proof; no full Skill or HYPIC acceptance follows.",
+  "boundary": "The main Skill's separate state axes exposed and repaired one real handoff defect. The HYPIC six-phase performance milestone is complete, but the wider Skill-validation task is still in progress, 51 commits ahead of its upstream, and lacks end-to-end remote integration and reclamation proof; no full 29-Skill acceptance follows.",
   "drift_trigger": "Re-run and update this case after task.json or handoff-test changes, r13 terminal transition, upstream/main movement, any new worktree claim, or eventual remote push/integration."
 }

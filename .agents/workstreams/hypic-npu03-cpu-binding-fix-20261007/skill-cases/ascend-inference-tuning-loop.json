@@ -4,8 +4,8 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Replay a three-round physical NPU0-3 CPU-binding-off no-cache performance intervention within the HYPIC puncture workflow",
-  "executed_at_utc": "2026-10-08",
+  "task": "Replay a three-round physical NPU0-3 CPU-binding-off no-cache performance intervention and classify retry14 in the HYPIC puncture workflow",
+  "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "010d1a8bd5ab21fcdff6c50e3bad74f974ccae8d",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
@@ -19,6 +19,16 @@
     "raw_performance_runs_hash_verified": 6,
     "candidate_contracts_and_exact_cleanup_verified": 3,
     "full_2048_token_paired_quality_complete": false,
+    "hypic_phase6_retry5_terminal_environmental_failure": true,
+    "hypic_phase6_retry5_scored_requests": 0,
+    "hypic_phase6_retry5_performance_metrics_valid": false,
+    "hypic_phase6_retry14_terminal_environmental_failure": true,
+    "hypic_phase6_retry14_foreign_pid": 242978,
+    "hypic_phase6_retry14_foreign_physical_npu": 1,
+    "hypic_phase6_retry14_guard_samples": 18,
+    "hypic_phase6_retry14_scored_requests": 0,
+    "hypic_phase6_retry14_performance_metrics_valid": false,
+    "hypic_phase6_retry14_exact_owned_container_removed": true,
     "hypic_paper_effect_verified": false,
     "main_and_remote_integration_complete": false
   },
@@ -29,15 +39,64 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_inference_tuning_loop_case.py",
-      "sha256": "ba02eef46a715c3317cfbc2a3df313067eed0f33789e75a367818daa12b1e242"
+      "sha256": "1c36d74b0bc73de63e404849a343e0e9ea7a5caf9f477bf9dd723d9511c14200"
     },
     {
       "path": ".agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml",
       "sha256": "9c06af152f902684d10251724d01bf3c86c18edc4c4e02c839ba53ccac69a9ad"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY5_TERMINAL_AUDIT.md",
+      "sha256": "bd3fc49aae577fe724781f901e0183d5de86cac94d70ca142aabba504ab29f45"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY14_TERMINAL_AUDIT.md",
+      "sha256": "362a8c5708584bd726003aa0825190b4b9c69eb2879d9673baf90f176e3394af"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY18_TERMINAL_AUDIT_20261009.md",
+      "sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_retry18_environmental_failure.py",
+      "sha256": "b95604769283c5ddffb033da739293952c1eb1409c20a39756c188233cb41b8e"
     }
   ],
+  "external_raw_receipts": {
+    "retry14_contract_sha256": "b260e81ab4f766ee1b5ee3c485d5d3f993dfdbb4ba8733dff339700616dd2c2a",
+    "retry14_arm_result_sha256": "8438fbd58b4be0c06412667c57442e7340e5dc08d1d7889a059f736113eaae0a",
+    "retry14_hypic_evidence_sha256": "fb3f7f0f342b3738e637ecb517d90dc5b2f603ddc3ce0978dbb6a8cc6c9389be",
+    "retry14_lane_guard_sha256": "71f8ece8c31869544653661b26c9f520ed6a7a8210b93c2c4b79dfa8ad89b0ed",
+    "retry14_pre_health_release_sha256": "7afb397349d54ce1c19725bcd5e22523d84ac3e9d3d44cb8ed8222439e7ffc09",
+    "retry18_contract_sha256": "c03c8fdf79ffe02ed42ee2e80558479e372b2be0959128795e83c6dbe7dd322a",
+    "retry18_arm_result_sha256": "c0bd15e0a0a6340e338bcbf05a5f4791139d747589ad63b1351cb67f198bd4bc",
+    "retry18_lane_guard_sha256": "6ae72bebd66aba903dd9f8bfebf90561374bd2699363428268b97d4f498f553b",
+    "retry18_pre_health_release_sha256": "413c9d8d3b2af629b5c6732c0eeba857299ea28794d9245d8ae2b2a365a5048c",
+    "retry18_hypic_evidence_sha256": "26eaf6cda31342ba6742045a15ca34039c0d3598dad61a2508cbcdb8400e568c",
+    "retry18_audit_sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
+  },
   "replayable_regression_recorded": true,
-  "boundary": "This is a validated bounded CPU-binding-off performance comparison and retained experiment decision, not full HYPIC activation, quality, matched paper-effect performance, or remote integration. The main Skill's full continuous workflow remains partial.",
-  "next_gate": "r10 full and r11 targeted stress are both terminal negative strict-activation cases; do not reuse either as a paired comparator. After prospective treatment-path decision and new-source NPU canary on actually idle physical NPU0-3, require a same-identity 0.85 control, full 2048-token paired quality, three-round performance and independent isolation audit before full Skill acceptance.",
-  "drift_trigger": "Revalidate when the main Skill or registry blob, source/image/model/physical lane, workload, serving flags, benchmark/scorer, or any raw artifact hash changes."
+  "boundary": "This is a validated bounded CPU-binding-off comparison plus a series of HYPIC activation and environmental isolation negatives, not full HYPIC acceptance or remote integration. Retry14's continuous guard captured foreign physical NPU1 use before health/scoring; zero rows means no performance result. The exact owned retry14 service was removed, while foreign work was untouched. These repeated environmental outcomes improve scheduling knowledge but neither pass nor fail the HYPIC technique. The main Skill's full continuous workflow remains partial.",
+  "next_gate": "Preserve the r13 quality rejection and every phase root. The user authorized opportunistic monitoring and running only while physical NPU0-3 and port 8223 are actually unused; no coordinated window or fixed idle-duration threshold is required. Immediately re-prove direct routing and physical process/port state, use a distinct preregistered root and existing continuous guard, and never stop or modify foreign work.",
+  "drift_trigger": "Revalidate when the main Skill or registry blob, source/image/model/physical lane, workload, serving flags, benchmark/scorer, or any raw artifact hash changes.",
+  "retry18_followup": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
+    "controller_operation": "exec-0000000000000303",
+    "classification": "environmental-pre-health-failure",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 1,
+    "foreign_pid": 1420898,
+    "guard_samples": 80,
+    "probe_errors": 0,
+    "scored_requests": 0,
+    "performance_metric_valid": false,
+    "owned_container_id": "71ace370461d0090de57c1239f26015231e6252b0000ab3dc104ef27710b4f83",
+    "exact_owned_container_removed": true,
+    "worker_release_proven": false,
+    "post_cleanup_npu0_3_idle": true,
+    "post_cleanup_port8223_free": true,
+    "terminal_audit": "HOTPATH_CACHE10PERF_RETRY18_TERMINAL_AUDIT_20261009.md",
+    "replay_verifier": "verify_retry18_environmental_failure.py"
+  }
 }

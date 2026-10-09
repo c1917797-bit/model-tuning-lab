@@ -18,6 +18,139 @@ import hotpath_cache10_matched_performance as performance
 
 
 class Cache10PerformanceTests(unittest.TestCase):
+    def test_opportunistic_retry20_has_a_distinct_immutable_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry20"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry20",
+        )
+
+    def test_opportunistic_retry21_has_a_distinct_immutable_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry21"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry21",
+        )
+
+    def test_final_environmental_retry_has_its_own_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry3"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry3",
+        )
+
+    def test_amended_retry4_has_an_immutable_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry4"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry4",
+        )
+
+    def test_new_retry5_has_a_distinct_immutable_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry5"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry5",
+        )
+
+    def test_user_authorized_retry6_has_a_distinct_immutable_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry6"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry6",
+        )
+
+    def test_corrected_retry7_has_a_distinct_immutable_quality_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry7"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry7",
+        )
+
+    def test_retry8_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry8"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry8",
+        )
+
+    def test_retry9_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry9"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry9",
+        )
+
+    def test_retry10_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry10"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry10",
+        )
+
+    def test_retry11_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry11"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry11",
+        )
+
+    def test_retry12_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry12"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry12",
+        )
+
+    def test_retry13_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry13"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry13",
+        )
+
+    def test_retry14_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry14"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry14",
+        )
+
+    def test_retry15_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry15"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry15",
+        )
+
+    def test_retry16_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry16"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry16",
+        )
+
+    def test_retry17_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry17"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry17",
+        )
+
+    def test_retry18_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry18"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
+        )
+
+    def test_retry19_after_foreign_guard_failure_has_a_distinct_root(self) -> None:
+        attempt = "hotpath-cache10perf-hypic-only-repeat3-retry19"
+        self.assertEqual(
+            quality.ATTEMPT_ROOTS[attempt],
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry19",
+        )
+
     def test_r13_entry_gate_requires_current_dual_receipt(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

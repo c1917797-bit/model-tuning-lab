@@ -1,0 +1,9 @@
+{
+  "schema": "mst-governance-record/v1",
+  "problem": "A tenant runtime Skill was mixed into the maintainer Skill path.",
+  "reusable": true,
+  "classification_destination": "runtime product skill policy",
+  "decision": "Move the runtime Skill to runtime-skills and add the narrow runtime-boundary maintainer Skill.",
+  "registry_updated": true,
+  "replayable_verification_added": true
+}

@@ -4,8 +4,8 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Apply exact-main historical-reproduction gates to HYPIC's same-lane performance pair, clean2 natural 2048-token quality negative, and distinct explicit-segment r12 stress without pooling denominators",
-  "executed_at_utc": "2026-10-08",
+  "task": "Apply exact-main historical-reproduction gates to HYPIC's historical evidence, r13 explicit-segment 127x3 max2048 paired quality, and the frozen six-phase matched performance result without pooling denominators",
+  "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "d0298d9fdf1ce7ba27f1bd711d26834b6bd7b6aa",
   "tested_reference_git_blob_oid": "582852d43b5550594da257b1a274a84103542411",
@@ -31,19 +31,27 @@
     "r12_guard_samples_clean": 279,
     "r12_all_hot_gate_passed": false,
     "r12_matched_no_cache_control_complete": false,
-    "full_explicit_2048_quality_pair_complete": false,
-    "current_three_round_matched_performance_complete": false,
+    "full_explicit_2048_quality_pair_complete": true,
+    "current_three_round_matched_performance_complete": true,
     "reproduction_skill_completion_gate_passed": false,
     "case_integrated_in_main": false
   },
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_REPRODUCTION_CASE_20261008.md",
-      "sha256": "8a8b8dc40052a778d11790bfc1e4f3b50c9086f611259c33a3a91a0fb5f8d886"
+      "sha256": "4bd54f3a272227c47fa5ab87bf9ce7318079111c1df0235958216ca8cb8000ce"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reproduction_case.py",
-      "sha256": "ac4f5185d007f1a0c57302b505603d927f60efa1513ca410043540542473855b"
+      "sha256": "94f75bd45c25b35b99e3eac1035540af48e8b82e58c5638499a1b6390900e1d7"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_quality.py",
+      "sha256": "714012b683142201fc4cf40d734f4d48f53210d7ade93479bf550e27020db0c4"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hotpath_cache10_matched_performance.py",
+      "sha256": "939609b594aa30524b808d37807d94b6ca4de9a432f142fc4e1e896731c10270"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/FINAL_EVIDENCE_DECISION.md",
@@ -52,15 +60,287 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
       "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md",
+      "sha256": "4b5308c6049a8d0c8e12065e69677b27dd8af4c05494bf2cb71f550d393a1c76"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY4_TERMINAL_AUDIT.md",
+      "sha256": "89a6a47b9cabe5e6b41f48329c13df556d654ced8cf5663b446e7566453df391"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY5_TERMINAL_AUDIT.md",
+      "sha256": "bd3fc49aae577fe724781f901e0183d5de86cac94d70ca142aabba504ab29f45"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY14_TERMINAL_AUDIT.md",
+      "sha256": "362a8c5708584bd726003aa0825190b4b9c69eb2879d9673baf90f176e3394af"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY18_TERMINAL_AUDIT_20261009.md",
+      "sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_retry18_environmental_failure.py",
+      "sha256": "b95604769283c5ddffb033da739293952c1eb1409c20a39756c188233cb41b8e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY19_TERMINAL_AUDIT_20261009.md",
+      "sha256": "a6e72920a8c41942e1d5722f75493c210168e8d47e1af27b72d14b9d6c7654c1"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_retry19_environmental_failure.py",
+      "sha256": "615b18c5b9126f2a5b4797830fd4ca530dd2c845a57eb2f9c44987e1f0fdd874"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY20_TERMINAL_AUDIT_20261009.md",
+      "sha256": "b92da373c1cbf5cf26729d4923b97b99ec7c61da48f040482f97fc62730327d1"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_retry20_environmental_failure.py",
+      "sha256": "f893fbcd9a7f8268a46e930ca33f4cde9811c05fba6de2b3ec1055d66f5e7f43"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_cache10_matched_performance.py",
+      "sha256": "110d393e2236e593243e528d2620c5ab3803b87d822273c575ec9292e0a4efd3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_hotpath_cache10_matched_performance.py",
+      "sha256": "6ea2f64909c3601521f43cf40b2e9de14af9b72f8554fff9d90db15f0474aa6b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md",
+      "sha256": "d27f1abbf527669157bc4c7fad23d75f3da067b8f942c183c56bf4ace93fe719"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hotpath_cache10_matched_performance.py",
+      "sha256": "a6eaa634e46c228a47a76667292f188a627ba5b195b489e796dfc7a8be08cbf5"
     }
   ],
   "external_raw_receipts": {
     "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1",
     "clean2_natural_quality_audit_sha256": "61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0",
-    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60"
+    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60",
+    "r13_dual_quality_audit_sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+    "r13_performance_retry3_contract_sha256": "4b5f052f3d593ae3f18809cc4abc536e5a8010f8dd651e059427a9db17fa6430",
+    "r13_performance_retry3_arm_result_sha256": "b5dc3cbf3b5bdb2ef5339c38a176018e0f1c422b819c8ae96a96b3138a56e989",
+    "r13_performance_retry3_guard_sha256": "71ab16271c01749770fb34c4131b495a838dc24426d6bebb68db97d33e4909f2",
+    "r13_performance_retry3_release_sha256": "6243302a434aa93f614e977a539278d0a4782676c1c198d7a3ba36ffaf07664a",
+    "r13_performance_retry4_contract_sha256": "ea583f6e41ed38f76766def75d2592c1812e2220338115c89677211b6e3f22e9",
+    "r13_performance_retry4_arm_result_sha256": "5a93ce9402e9ae20c6370cae16f32c1674e57867bd477b33241f7190cd6bc88d",
+    "r13_performance_retry4_performance_sha256": "323ced3b25c2e0ac1bfaed2f69e3dbfe369a9617f0d0d6488b9fe5fb2a4e13a5",
+    "r13_performance_retry4_guard_sha256": "0551cda9bcdf0a9394a55ed777241610b75a0e89924fd2df26c818b9bb177480",
+    "r13_performance_retry4_release_sha256": "0d8c3b4bf4be2d3761df618e66fdc4edc3f291f58ef4d64f2748dd5a1b8bfec3",
+    "r13_performance_retry4_source_attestation_sha256": "6a1bd87df57ee2665f578a80291fd388232ef6cd1a5fa975295382474baba2a2",
+    "r13_performance_retry4_benchmark_command_sha256": "f0b54998e4077f3c7a56f90ffad629279d91ff74cd3d411e975a547cbbd2e8ae",
+    "r13_performance_retry4_hypic_evidence_sha256": "1bac011528b752a4d8a804caca20c9725c933827e68b857e5e0220dc39a70155",
+    "r13_performance_retry5_contract_sha256": "8a1020814dad5ea91520fb44c161137a2b7212d36e65a1c294f100c096a96057",
+    "r13_performance_retry5_guard_sha256": "24d9e1f91596214903a95d9fe8b7ff91562a8fc5411eedd63a3e7845c9e8ce87",
+    "r13_performance_retry5_hypic_evidence_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "r13_performance_retry14_contract_sha256": "b260e81ab4f766ee1b5ee3c485d5d3f993dfdbb4ba8733dff339700616dd2c2a",
+    "r13_performance_retry14_arm_result_sha256": "8438fbd58b4be0c06412667c57442e7340e5dc08d1d7889a059f736113eaae0a",
+    "r13_performance_retry14_guard_sha256": "71f8ece8c31869544653661b26c9f520ed6a7a8210b93c2c4b79dfa8ad89b0ed",
+    "r13_performance_retry14_release_sha256": "7afb397349d54ce1c19725bcd5e22523d84ac3e9d3d44cb8ed8222439e7ffc09",
+    "r13_performance_retry14_hypic_evidence_sha256": "fb3f7f0f342b3738e637ecb517d90dc5b2f603ddc3ce0978dbb6a8cc6c9389be",
+    "r13_performance_retry14_audit_sha256": "362a8c5708584bd726003aa0825190b4b9c69eb2879d9673baf90f176e3394af",
+    "retry18_contract_sha256": "c03c8fdf79ffe02ed42ee2e80558479e372b2be0959128795e83c6dbe7dd322a",
+    "retry18_arm_result_sha256": "c0bd15e0a0a6340e338bcbf05a5f4791139d747589ad63b1351cb67f198bd4bc",
+    "retry18_lane_guard_sha256": "6ae72bebd66aba903dd9f8bfebf90561374bd2699363428268b97d4f498f553b",
+    "retry18_pre_health_release_sha256": "413c9d8d3b2af629b5c6732c0eeba857299ea28794d9245d8ae2b2a365a5048c",
+    "retry18_hypic_evidence_sha256": "26eaf6cda31342ba6742045a15ca34039c0d3598dad61a2508cbcdb8400e568c",
+    "retry18_audit_sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf",
+    "retry19_contract_sha256": "fe59917a8ddf62cb538e7a5e9ef30d63d2eae8d14fd5f3798a495211d303b8f9",
+    "retry19_arm_result_sha256": "25cce108c805d785d4ac01b092990bafced2a3409667cdf1fa2813d572d78506",
+    "retry19_lane_guard_sha256": "f4d59b8e9553aa1b526af1e3d6b9e03d5e9a6b90cb9175c9f14f1958eeee91e5",
+    "retry19_pre_health_release_sha256": "e938b1a0e99c76d281bf781909bc4392b853f3af424c3a33f925f54125ae59e7",
+    "retry19_hypic_evidence_sha256": "9df31bb84fa849c581e7815390e9e120b8fcb2ff2152050463b1c9db9ad15ffd",
+    "retry19_audit_sha256": "a6e72920a8c41942e1d5722f75493c210168e8d47e1af27b72d14b9d6c7654c1",
+    "retry20_contract_sha256": "58ab99d5742582a6e66b256844324742480dc882bff77edf91910711796c750f",
+    "retry20_arm_result_sha256": "8a5c6cdbda2344615dae10f14e10bfcc36924c6b567004311aebcdb4a58f9046",
+    "retry20_lane_guard_sha256": "4efe09fe5750e112356e6029fad68e712358f993f9474bd58035720492b72690",
+    "retry20_pre_health_release_sha256": "c184f1d0af692b0b93b3deaef12cc4a49c3269f0dae66141d522ef11a6135576",
+    "retry20_hypic_evidence_sha256": "7c94c68175fa496a766ca9c5670787c0680a81bcc1798b29f0ed01ab9f51ba59",
+    "retry20_audit_sha256": "b92da373c1cbf5cf26729d4923b97b99ec7c61da48f040482f97fc62730327d1",
+    "retry21_arm_result_sha256": "a0c88a883dda5513c4fe579e70d5be0028bb338963bcd9ee1d7d5f6d1183e05e",
+    "retry21_lane_guard_sha256": "c7917f198b1c9f555c8caded4e62f5bb3542273b59b90bc951f7497de4b66295",
+    "retry21_service_stop_sha256": "6aa4c4dfc1ed9808bc46792f3b653ec84a96deb58cf934b428dce1dc827f7331",
+    "r13_matched_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062"
+  },
+  "latest_r13_followup_utc": "2026-10-09T09:51:26.138856Z",
+  "r13_dual_lens_result": {
+    "scope": "LongBench-v2 127x3 explicit-boundary natural-EOS max2048 c8 TP4 physical NPU0-3",
+    "paired_quality_evidence_valid": true,
+    "quality_pair_complete": true,
+    "deployed_quality_decision": "REJECT_OR_QUALIFY",
+    "baseline_correct": 230,
+    "candidate_correct": 219,
+    "delta_pp": -2.8871391076115485,
+    "strict_four_worker_hot": 368,
+    "strict_four_worker_expected": 381,
+    "strict_mechanism_decision": "NOT_ACCEPTED_HOT_COVERAGE",
+    "performance_decision": "EFFECT_SCREEN_PASS",
+    "performance_all_six_phases_valid": true,
+    "performance_strict_four_worker_hot": "120/120",
+    "performance_weighted_tpot_saved_pct": 21.524278158508903,
+    "performance_ttft_p95_saved_s": 40.86937530996511,
+    "performance_throughput_ratio": 1.2987354087170584,
+    "user_paused_card_operations": false,
+    "adoption": "not-accepted"
+  },
+  "r13_performance_retry3": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry3",
+    "classification": "environmental pre-health failure; not a HYPIC performance result",
+    "foreign_physical_npu": 3,
+    "foreign_pid": 2731002,
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_state_at_inspection": "running",
+    "foreign_container_started_at": "2026-10-06T10:02:22.09485025Z",
+    "foreign_container_command": ["sleep", "infinity"],
+    "foreign_container_declares_physical_0_3": false,
+    "foreign_human_owner_verified": false,
+    "guard_samples": 20,
+    "benchmark_rows": 0,
+    "exact_owned_container_removed": true,
+    "user_authorized_card_resume": true,
+    "preregistered_recovery_budget_exhausted": true
+  },
+  "r13_performance_retry4": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry4",
+    "classification": "environmental mid-run isolation failure; not a HYPIC performance result",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 1,
+    "foreign_pid": 3079008,
+    "guard_samples": 120,
+    "probe_errors": 0,
+    "benchmark_rows": 40,
+    "successful_responses": 16,
+    "complete_1024_token_responses": 15,
+    "connection_refusals": 24,
+    "performance_decision": "not-measured",
+    "exact_owned_container_removed": true,
+    "owned_npus_released": true,
+    "port_8223_released": true
+  },
+  "r13_performance_retry5": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry5",
+    "classification": "environmental pre-measurement isolation failure; not a HYPIC performance verdict",
+    "foreign_container_name": "Maxon4ick_vllm",
+    "foreign_container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+    "foreign_physical_npu": 0,
+    "foreign_pid": 3539167,
+    "guard_samples": 2,
+    "probe_errors": 0,
+    "benchmark_rows": 0,
+    "hypic_evidence_events": 4,
+    "performance_decision": "not-measured",
+    "owned_container_id": "eec7c5ef562cd446364c6b021c1e0c70f1988362c8d5c108db3c4dab5091ca5f",
+    "owned_container_exit": 137,
+    "exact_owned_container_removed": true,
+    "owned_npus_released": true,
+    "port_8223_released": true
+  },
+  "r13_performance_retry14": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry14",
+    "classification": "environmental pre-health isolation failure; not a HYPIC performance result",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 1,
+    "foreign_pid": 242978,
+    "guard_samples": 18,
+    "probe_errors": 0,
+    "benchmark_rows": 0,
+    "service_reached_health": false,
+    "owned_container_id": "2d85a0fbc2bc9841d3dbd21dc0009555308ae44fc73f4d0fadce9378b3161f8b",
+    "exact_owned_container_removed": true,
+    "post_cleanup_npu0_3_free": true,
+    "post_cleanup_port_8223_free": true,
+    "retry18_contract_sha256": "c03c8fdf79ffe02ed42ee2e80558479e372b2be0959128795e83c6dbe7dd322a",
+    "retry18_arm_result_sha256": "c0bd15e0a0a6340e338bcbf05a5f4791139d747589ad63b1351cb67f198bd4bc",
+    "retry18_lane_guard_sha256": "6ae72bebd66aba903dd9f8bfebf90561374bd2699363428268b97d4f498f553b",
+    "retry18_pre_health_release_sha256": "413c9d8d3b2af629b5c6732c0eeba857299ea28794d9245d8ae2b2a365a5048c",
+    "retry18_hypic_evidence_sha256": "26eaf6cda31342ba6742045a15ca34039c0d3598dad61a2508cbcdb8400e568c",
+    "retry18_audit_sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
   },
   "replayable_regression_recorded": true,
-  "boundary": "The historical six-unit same-lane performance effect is valid only for c16/1024. Clean2's twelve natural max2048 quality units have valid rows/identity/isolation but no worker-hot activation, so their scores cannot prove hot-path quality. The successor r12 explicit-boundary stress has 52/57 hot proofs and no matched control. The branch's cross-lane decomposition text is not in main. Exact-main reproduction completion, losslessness, full-paper and adoption claims remain unsupported.",
-  "next_gate": "Freeze the new deployed-effect-versus-all-hot rule and run a fresh same-identity 0.85 control and candidate, full explicit-boundary max2048 quality, repeated matched performance, continuous isolation and independent release audits only on actually idle physical NPU0-3. Review and integrate the branch cross-lane lesson separately before attributing it to main.",
-  "drift_trigger": "Revalidate after main Skill/reference/registry or branch Skill blob changes, experiment identity, dataset/evaluator, model/image/source, physical lane, cache budget, or raw audit hashes change."
+  "latest_r13_followup_utc": "2026-10-09T15:15:30Z",
+  "boundary": "The r13 explicit-boundary LongBench-v2 127x3 max2048 pair is complete and independently valid: deployed quality is negative (230/381 to 219/381, -2.8871 pp), while quality-path strict four-worker coverage is 368/381 and fails. The matching six-phase c16/input32768/output1024 performance campaign is independently valid: all 120 candidate scored requests have four-worker proof, median weighted TPOT improves 21.5243%, TTFT P95 saves 40.8694 seconds, and throughput is 1.298735x. Performance success does not override quality rejection. Retries15-20 remain environmental failures and are not pooled. The branch guidance is not yet in main, and all-Skill acceptance remains unsupported.",
+  "next_gate": "Do not rerun the completed HYPIC phases. Replay the immutable six-phase audit, preserve the separate REJECT_OR_QUALIFY quality conclusion, map this mixed verdict to the relevant Skill cases, and continue evidence-backed acceptance of the remaining main Skills.",
+  "drift_trigger": "Revalidate after main Skill/reference/registry or branch Skill blob changes, experiment identity, dataset/evaluator, model/image/source, physical lane, cache budget, or raw audit hashes change.",
+  "retry19_followup": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry19",
+    "controller_operation": "exec-0000000000000347",
+    "classification": "environmental-pre-health-failure",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 2,
+    "foreign_pid": 1731309,
+    "guard_samples": 46,
+    "probe_errors": 0,
+    "scored_requests": 0,
+    "performance_metric_valid": false,
+    "owned_container_id": "2e92362738a88715789c8bb291fbc0d162a8dde19576529a25668e6a62c23973",
+    "exact_owned_container_removed": true,
+    "worker_release_proven": false,
+    "terminal_audit": "HOTPATH_CACHE10PERF_RETRY19_TERMINAL_AUDIT_20261009.md",
+    "replay_verifier": "verify_retry19_environmental_failure.py"
+  },
+  "retry20_followup": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry20",
+    "controller_operation": "exec-0000000000000362",
+    "classification": "environmental-pre-health-failure",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 3,
+    "foreign_pid": 1890601,
+    "guard_samples": 36,
+    "probe_errors": 0,
+    "scored_requests": 0,
+    "performance_metric_valid": false,
+    "owned_container_id": "ea9357cfc3af46cc01a413bf9d0392e368b5381e9436899e3bcff2d7f7df74cc",
+    "exact_owned_container_removed": true,
+    "worker_release_proven": false,
+    "post_cleanup_foreign_npu3_pids": [1890601, 1920829],
+    "post_cleanup_port8223_free": true,
+    "terminal_audit": "HOTPATH_CACHE10PERF_RETRY20_TERMINAL_AUDIT_20261009.md",
+    "replay_verifier": "verify_retry20_environmental_failure.py"
+  },
+  "retry21_followup": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry21",
+    "controller_operation": "exec-00000000000003a4",
+    "classification": "valid HYPIC-only repeat3 performance measurement",
+    "scored_requests": 40,
+    "unique_request_ids_including_warmups": 42,
+    "four_worker_verified_scored_requests": 40,
+    "guard_samples": 164,
+    "probe_errors": 0,
+    "weighted_tpot_ms": 58.8966900747795,
+    "ttft_p95_ms": 45759.19617002364,
+    "exact_owned_container_removed": true,
+    "post_cleanup_npu0_3_free": true,
+    "post_cleanup_port8223_free": true,
+    "terminal_audit": "HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md",
+    "replay_verifier": "verify_hotpath_cache10_matched_performance.py"
+  },
+  "retry18_followup": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
+    "controller_operation": "exec-0000000000000303",
+    "classification": "environmental-pre-health-failure",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 1,
+    "foreign_pid": 1420898,
+    "guard_samples": 80,
+    "probe_errors": 0,
+    "scored_requests": 0,
+    "performance_metric_valid": false,
+    "owned_container_id": "71ace370461d0090de57c1239f26015231e6252b0000ab3dc104ef27710b4f83",
+    "exact_owned_container_removed": true,
+    "worker_release_proven": false,
+    "post_cleanup_npu0_3_idle": true,
+    "post_cleanup_port8223_free": true,
+    "terminal_audit": "HOTPATH_CACHE10PERF_RETRY18_TERMINAL_AUDIT_20261009.md",
+    "replay_verifier": "verify_retry18_environmental_failure.py"
+  }
 }

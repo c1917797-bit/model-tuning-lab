@@ -76,8 +76,13 @@ def main() -> int:
     require(log.count("module=/opt/hypic/hypic_vllm_ascend/__init__.py") >= 6
             and "paper_missing=C3.1,C3.2,C3.3,C3.4,C3.5,C3.6" in log,
             "runtime import or C3 boundary drift")
+    case_record = json.loads(
+        (HERE / "skill-cases/ascend-source-map.json").read_text(encoding="utf-8"))
+    controller_receipt = next(
+        item for item in case_record["evidence"]
+        if item["path"].endswith("/binding_off_quality.py"))
     controller = checked(HERE / "binding_off_quality.py",
-        "1b3a71f2583c2ba61b2219acfc8b89839744d93af6b66c20e67a99a1bec3c2f7").decode()
+                         controller_receipt["sha256"]).decode()
     require("frozen_plugin_mount" in controller
             and 'sorted(item["HostConfig"]["Binds"]) == sorted(binds)' in controller
             and "selected_plugin_source()" in controller

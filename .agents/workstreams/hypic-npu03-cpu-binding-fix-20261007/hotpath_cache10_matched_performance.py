@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import fcntl
+import hashlib
 import json
 import os
 import signal
@@ -312,11 +313,63 @@ def main() -> int:
     parser.add_argument("--phase", choices=("screen", "repeat2", "repeat3"), required=True)
     parser.add_argument("--environmental-retry1", action="store_true",
                         help="one immutable retry only for hypic-only/repeat3 when the original failed before health/benchmark")
+    parser.add_argument("--environmental-retry2", action="store_true",
+                        help="final immutable retry after retry1 also fails before health/benchmark from foreign lane use")
+    parser.add_argument("--environmental-retry3", action="store_true",
+                        help="third immutable retry after retry2 also fails before health/benchmark from foreign lane use")
+    parser.add_argument("--environmental-retry4", action="store_true",
+                        help="one amended immutable retry after retry3 also fails before health/benchmark from foreign lane use")
+    parser.add_argument("--environmental-retry5", action="store_true",
+                        help="one new immutable retry after retry4 is invalidated by verified foreign physical-NPU use")
+    parser.add_argument("--environmental-retry6", action="store_true",
+                        help="one user-authorized immutable retry after retry5 is invalidated by verified foreign physical-NPU use")
+    parser.add_argument("--environmental-retry7", action="store_true",
+                        help="one corrected launch after retry6's executor timeout before any scored request")
+    parser.add_argument("--environmental-retry8", action="store_true",
+                        help="new immutable launch after retry7's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry9", action="store_true",
+                        help="new immutable launch after retry8's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry10", action="store_true",
+                        help="new immutable launch after retry9's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry11", action="store_true",
+                        help="new immutable launch after retry10's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry12", action="store_true",
+                        help="new immutable launch after retry11's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry13", action="store_true",
+                        help="new immutable launch after retry12's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry14", action="store_true",
+                        help="new immutable launch after retry13's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry15", action="store_true",
+                        help="new immutable launch after retry14's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry16", action="store_true",
+                        help="new immutable launch after retry15's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry17", action="store_true",
+                        help="new immutable launch after retry16's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry18", action="store_true",
+                        help="new immutable launch after retry17's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry19", action="store_true",
+                        help="new immutable launch after retry18's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry20", action="store_true",
+                        help="one new immutable opportunistic launch after retry19's pre-health foreign-process guard failure")
+    parser.add_argument("--environmental-retry21", action="store_true",
+                        help="one new immutable opportunistic launch after retry20's pre-health foreign-process guard failure")
     parser.add_argument("--run", action="store_true",
                         help="start an owned NPU0-3 service; otherwise inspect offline")
     args = parser.parse_args()
     attempt = f"hotpath-cache10perf-{args.arm}-{args.phase}"
-    if args.environmental_retry1:
+    retry_flags = (args.environmental_retry1, args.environmental_retry2,
+                   args.environmental_retry3, args.environmental_retry4,
+                   args.environmental_retry5, args.environmental_retry6,
+                   args.environmental_retry7, args.environmental_retry8,
+                   args.environmental_retry9, args.environmental_retry10,
+                   args.environmental_retry11, args.environmental_retry12,
+                   args.environmental_retry13, args.environmental_retry14,
+                   args.environmental_retry15, args.environmental_retry16,
+                     args.environmental_retry17, args.environmental_retry18,
+                     args.environmental_retry19, args.environmental_retry20,
+                     args.environmental_retry21)
+    require(sum(retry_flags) <= 1, "select exactly one environmental retry amendment")
+    if any(retry_flags):
         require((args.arm, args.phase) == ("hypic-only", "repeat3"),
                 "environmental retry is authorized only for hypic-only/repeat3")
         failed_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
@@ -329,7 +382,595 @@ def main() -> int:
                 and not (failed_root / "hypic-only" / "service-start.json").exists()
                 and not (failed_root / "hypic-only" / "benchmark-command.json").exists(),
                 "original phase was not an environmental pre-measurement failure")
-        attempt += "-retry1"
+        if args.environmental_retry21:
+            retry20_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry20")
+            expected = {
+                "contract.json": "58ab99d5742582a6e66b256844324742480dc882bff77edf91910711796c750f",
+                "arm-result.json": "8a5c6cdbda2344615dae10f14e10bfcc36924c6b567004311aebcdb4a58f9046",
+                "hypic-only/lane-guard.json": "4efe09fe5750e112356e6029fad68e712358f993f9474bd58035720492b72690",
+                "hypic-only/pre-health-release.json": "c184f1d0af692b0b93b3deaef12cc4a49c3269f0dae66141d522ef11a6135576",
+                "hypic-only/hypic-evidence.jsonl": "7c94c68175fa496a766ca9c5670787c0680a81bcc1798b29f0ed01ab9f51ba59",
+            }
+            require(all(hashlib.sha256((retry20_root / rel).read_bytes()).hexdigest() == digest
+                        for rel, digest in expected.items()),
+                    "retry20 environmental receipts changed")
+            retry20_result = json_at(retry20_root / "arm-result.json")
+            retry20_guard = json_at(retry20_root / "hypic-only" / "lane-guard.json")
+            retry20_release = json_at(retry20_root / "hypic-only" / "pre-health-release.json")
+            foreign = [p for sample in retry20_guard.get("foreign", [])
+                       for p in sample.get("processes", [])]
+            require(retry20_result.get("valid") is False
+                    and retry20_result.get("metrics") is None
+                    and retry20_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry20_result.get("error", "")).lower()
+                    and retry20_guard.get("samples") == 36
+                    and not retry20_guard.get("probe_errors")
+                    and any(p.get("physical_npu") == 3 and p.get("pid") == 1890601
+                            and p.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for p in foreign)
+                    and retry20_release.get("container_removed") is True
+                    and retry20_release.get("container_id") ==
+                    "ea9357cfc3af46cc01a413bf9d0392e368b5381e9436899e3bcff2d7f7df74cc"
+                    and not (retry20_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry20_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry20_root / "performance.json").exists(),
+                    "retry20 was not an audited pre-health foreign-process failure")
+            attempt += "-retry21"
+        elif args.environmental_retry20:
+            retry19_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry19")
+            expected = {
+                "contract.json": "fe59917a8ddf62cb538e7a5e9ef30d63d2eae8d14fd5f3798a495211d303b8f9",
+                "arm-result.json": "25cce108c805d785d4ac01b092990bafced2a3409667cdf1fa2813d572d78506",
+                "hypic-only/lane-guard.json": "f4d59b8e9553aa1b526af1e3d6b9e03d5e9a6b90cb9175c9f14f1958eeee91e5",
+                "hypic-only/pre-health-release.json": "e938b1a0e99c76d281bf781909bc4392b853f3af424c3a33f925f54125ae59e7",
+                "hypic-only/hypic-evidence.jsonl": "9df31bb84fa849c581e7815390e9e120b8fcb2ff2152050463b1c9db9ad15ffd",
+            }
+            require(all(hashlib.sha256((retry19_root / rel).read_bytes()).hexdigest() == digest
+                        for rel, digest in expected.items()),
+                    "retry19 environmental receipts changed")
+            retry19_result = json_at(retry19_root / "arm-result.json")
+            retry19_guard = json_at(retry19_root / "hypic-only" / "lane-guard.json")
+            retry19_release = json_at(retry19_root / "hypic-only" / "pre-health-release.json")
+            foreign = [p for sample in retry19_guard.get("foreign", [])
+                       for p in sample.get("processes", [])]
+            require(retry19_result.get("valid") is False
+                    and retry19_result.get("metrics") is None
+                    and retry19_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry19_result.get("error", "")).lower()
+                    and retry19_guard.get("samples") == 46
+                    and not retry19_guard.get("probe_errors")
+                    and any(p.get("physical_npu") == 2 and p.get("pid") == 1731309
+                            and p.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for p in foreign)
+                    and retry19_release.get("container_removed") is True
+                    and retry19_release.get("container_id") ==
+                    "2e92362738a88715789c8bb291fbc0d162a8dde19576529a25668e6a62c23973"
+                    and not (retry19_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry19_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry19_root / "performance.json").exists(),
+                    "retry19 was not an audited pre-health foreign-process failure")
+            attempt += "-retry20"
+        elif args.environmental_retry19:
+            retry18_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18")
+            expected = {
+                "contract.json": "c03c8fdf79ffe02ed42ee2e80558479e372b2be0959128795e83c6dbe7dd322a",
+                "arm-result.json": "c0bd15e0a0a6340e338bcbf05a5f4791139d747589ad63b1351cb67f198bd4bc",
+                "hypic-only/lane-guard.json": "6ae72bebd66aba903dd9f8bfebf90561374bd2699363428268b97d4f498f553b",
+                "hypic-only/pre-health-release.json": "413c9d8d3b2af629b5c6732c0eeba857299ea28794d9245d8ae2b2a365a5048c",
+                "hypic-only/hypic-evidence.jsonl": "26eaf6cda31342ba6742045a15ca34039c0d3598dad61a2508cbcdb8400e568c",
+            }
+            require(all(hashlib.sha256((retry18_root / rel).read_bytes()).hexdigest() == digest
+                        for rel, digest in expected.items()),
+                    "retry18 environmental receipts changed")
+            retry18_result = json_at(retry18_root / "arm-result.json")
+            retry18_guard = json_at(retry18_root / "hypic-only" / "lane-guard.json")
+            retry18_release = json_at(retry18_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry18_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry18_result.get("valid") is False
+                    and retry18_result.get("metrics") is None
+                    and retry18_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry18_result.get("error", "")).lower()
+                    and retry18_guard.get("samples") == 80
+                    and not retry18_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 1420898
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry18_release.get("container_removed") is True
+                    and retry18_release.get("container_id") ==
+                    "71ace370461d0090de57c1239f26015231e6252b0000ab3dc104ef27710b4f83"
+                    and not (retry18_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry18_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry18_root / "performance.json").exists(),
+                    "retry18 was not an audited pre-health foreign-process failure")
+            attempt += "-retry19"
+        elif args.environmental_retry18:
+            retry17_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry17")
+            require(hashlib.sha256((retry17_root / "contract.json").read_bytes()).hexdigest() ==
+                    "78065f257df89c1eb032b22f4372d5a21793b97084657b8ea56324cca7cc7d22"
+                    and hashlib.sha256((retry17_root / "arm-result.json").read_bytes()).hexdigest() ==
+                    "04c59278c0720e531e88dc0936a4b4a04f991ed178bf9e06472045dd14b49e46"
+                    and hashlib.sha256((retry17_root / "hypic-only" / "lane-guard.json").read_bytes()).hexdigest() ==
+                    "f0276d28026a9b7da0218db46093521aa70be4077d2c77c9f0654f7011b168b6"
+                    and hashlib.sha256((retry17_root / "hypic-only" / "pre-health-release.json").read_bytes()).hexdigest() ==
+                    "bb665f2c1afa4db4f3eb5acd143c79fdf0cb44e16e646ccfdce6f6feeaf63898",
+                    "retry17 environmental receipts changed")
+            retry17_result = json_at(retry17_root / "arm-result.json")
+            retry17_guard = json_at(retry17_root / "hypic-only" / "lane-guard.json")
+            retry17_release = json_at(retry17_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry17_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry17_result.get("valid") is False
+                    and retry17_result.get("metrics") is None
+                    and retry17_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry17_result.get("error", "")).lower()
+                    and retry17_guard.get("samples") == 26
+                    and not retry17_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 0
+                            and item.get("pid") == 1198578
+                            and item.get("container_id") ==
+                            "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa"
+                            for item in foreign)
+                    and retry17_release.get("container_removed") is True
+                    and not (retry17_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry17_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry17_root / "performance.json").exists(),
+                    "retry17 was not an audited pre-health foreign-process failure")
+            attempt += "-retry18"
+        elif args.environmental_retry17:
+            retry16_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry16")
+            retry16_result = json_at(retry16_root / "arm-result.json")
+            retry16_guard = json_at(retry16_root / "hypic-only" / "lane-guard.json")
+            retry16_release = json_at(retry16_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry16_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry16_result.get("valid") is False
+                    and retry16_result.get("metrics") is None
+                    and retry16_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry16_result.get("error", "")).lower()
+                    and retry16_guard.get("samples") == 22
+                    and not retry16_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 2
+                            and item.get("pid") == 1032336
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry16_release.get("container_removed") is True
+                    and not (retry16_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry16_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry16_root / "performance.json").exists(),
+                    "retry16 was not an audited pre-health foreign-process failure")
+            attempt += "-retry17"
+        elif args.environmental_retry16:
+            retry15_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry15")
+            retry15_result = json_at(retry15_root / "arm-result.json")
+            retry15_guard = json_at(retry15_root / "hypic-only" / "lane-guard.json")
+            retry15_release = json_at(retry15_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry15_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry15_result.get("valid") is False
+                    and retry15_result.get("metrics") is None
+                    and retry15_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry15_result.get("error", "")).lower()
+                    and retry15_guard.get("samples") == 4
+                    and not retry15_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 2
+                            and item.get("pid") == 865188
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry15_release.get("container_removed") is True
+                    and not (retry15_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry15_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry15_root / "performance.json").exists(),
+                    "retry15 was not an audited pre-health foreign-process failure")
+            attempt += "-retry16"
+        elif args.environmental_retry15:
+            retry14_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry14")
+            retry14_result = json_at(retry14_root / "arm-result.json")
+            retry14_guard = json_at(retry14_root / "hypic-only" / "lane-guard.json")
+            retry14_release = json_at(retry14_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry14_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry14_result.get("valid") is False
+                    and retry14_result.get("metrics") is None
+                    and retry14_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry14_result.get("error", "")).lower()
+                    and retry14_guard.get("samples") == 18
+                    and not retry14_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 242978
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry14_release.get("container_removed") is True
+                    and not (retry14_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry14_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry14_root / "performance.json").exists(),
+                    "retry14 was not an audited pre-health foreign-process failure")
+            attempt += "-retry15"
+        elif args.environmental_retry14:
+            retry13_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry13")
+            retry13_result = json_at(retry13_root / "arm-result.json")
+            retry13_guard = json_at(retry13_root / "hypic-only" / "lane-guard.json")
+            retry13_release = json_at(retry13_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry13_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry13_result.get("valid") is False
+                    and retry13_result.get("metrics") is None
+                    and retry13_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry13_result.get("error", "")).lower()
+                    and retry13_guard.get("samples") == 2
+                    and not retry13_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 0
+                            and item.get("pid") == 202622
+                            and item.get("container_id") ==
+                            "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa"
+                            for item in foreign)
+                    and retry13_release.get("container_removed") is True
+                    and not (retry13_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry13_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry13_root / "performance.json").exists(),
+                    "retry13 was not an audited pre-health foreign-process failure")
+            attempt += "-retry14"
+        elif args.environmental_retry13:
+            retry12_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry12")
+            retry12_result = json_at(retry12_root / "arm-result.json")
+            retry12_guard = json_at(retry12_root / "hypic-only" / "lane-guard.json")
+            retry12_release = json_at(retry12_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry12_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry12_result.get("valid") is False
+                    and retry12_result.get("metrics") is None
+                    and retry12_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry12_result.get("error", "")).lower()
+                    and retry12_guard.get("samples") == 14
+                    and not retry12_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 91292
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry12_release.get("container_removed") is True
+                    and not (retry12_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry12_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry12_root / "performance.json").exists(),
+                    "retry12 was not an audited pre-health foreign-process failure")
+            attempt += "-retry13"
+        elif args.environmental_retry12:
+            retry12_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry12")
+            retry12_result = json_at(retry12_root / "arm-result.json")
+            retry12_guard = json_at(retry12_root / "hypic-only" / "lane-guard.json")
+            retry12_release = json_at(retry12_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry12_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry12_result.get("valid") is False
+                    and retry12_result.get("metrics") is None
+                    and retry12_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry12_result.get("error", "")).lower()
+                    and retry12_guard.get("samples") == 14
+                    and not retry12_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 91292
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry12_release.get("container_removed") is True
+                    and not (retry12_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry12_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry12_root / "performance.json").exists(),
+                    "retry12 was not an audited pre-health foreign-process failure")
+            attempt += "-retry13"
+        elif args.environmental_retry12:
+            retry11_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry11")
+            retry11_result = json_at(retry11_root / "arm-result.json")
+            retry11_guard = json_at(retry11_root / "hypic-only" / "lane-guard.json")
+            retry11_release = json_at(retry11_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry11_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry11_result.get("valid") is False
+                    and retry11_result.get("metrics") is None
+                    and retry11_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry11_result.get("error", "")).lower()
+                    and retry11_guard.get("samples") == 4
+                    and not retry11_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 2
+                            and item.get("pid") == 4177138
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry11_release.get("container_removed") is True
+                    and not (retry11_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry11_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry11_root / "performance.json").exists(),
+                    "retry11 was not an audited pre-health foreign-process failure")
+            attempt += "-retry12"
+        elif args.environmental_retry11:
+            retry10_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry10")
+            retry10_result = json_at(retry10_root / "arm-result.json")
+            retry10_guard = json_at(retry10_root / "hypic-only" / "lane-guard.json")
+            retry10_release = json_at(retry10_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry10_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry10_result.get("valid") is False
+                    and retry10_result.get("metrics") is None
+                    and retry10_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry10_result.get("error", "")).lower()
+                    and retry10_guard.get("samples") == 14
+                    and not retry10_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 4117079
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry10_release.get("container_removed") is True
+                    and not (retry10_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry10_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry10_root / "performance.json").exists(),
+                    "retry10 was not an audited pre-health foreign-process failure")
+            attempt += "-retry11"
+        elif args.environmental_retry10:
+            retry9_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry9")
+            retry9_result = json_at(retry9_root / "arm-result.json")
+            retry9_guard = json_at(retry9_root / "hypic-only" / "lane-guard.json")
+            retry9_release = json_at(retry9_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry9_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry9_result.get("valid") is False
+                    and retry9_result.get("metrics") is None
+                    and retry9_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry9_result.get("error", "")).lower()
+                    and retry9_guard.get("samples") == 12
+                    and not retry9_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 2
+                            and item.get("pid") == 4049211
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry9_release.get("container_removed") is True
+                    and not (retry9_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry9_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry9_root / "performance.json").exists(),
+                    "retry9 was not an audited pre-health foreign-process failure")
+            attempt += "-retry10"
+        elif args.environmental_retry9:
+            retry8_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry8")
+            retry8_result = json_at(retry8_root / "arm-result.json")
+            retry8_guard = json_at(retry8_root / "hypic-only" / "lane-guard.json")
+            retry8_release = json_at(retry8_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry8_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry8_result.get("valid") is False
+                    and retry8_result.get("metrics") is None
+                    and retry8_result.get("performance_sha256") is None
+                    and "lane guard" in str(retry8_result.get("error", "")).lower()
+                    and retry8_guard.get("samples") == 4
+                    and not retry8_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 0
+                            and item.get("pid") == 3967272
+                            and item.get("container_id") is None
+                            for item in foreign)
+                    and retry8_release.get("container_removed") is True
+                    and not (retry8_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry8_root / "hypic-only" / "benchmark-command.json").exists()
+                    and not (retry8_root / "performance.json").exists(),
+                    "retry8 was not an audited pre-health foreign-process failure")
+            attempt += "-retry9"
+        elif args.environmental_retry8:
+            retry7_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry7")
+            retry7_result = json_at(retry7_root / "arm-result.json")
+            retry7_guard = json_at(retry7_root / "hypic-only" / "lane-guard.json")
+            retry7_release = json_at(retry7_root / "hypic-only" / "pre-health-release.json")
+            foreign = [
+                process
+                for sample in retry7_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry7_result.get("valid") is False
+                    and retry7_result.get("metrics") is None
+                    and retry7_result.get("performance_sha256") is None
+                    and retry7_guard.get("samples") == 18
+                    and not retry7_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 3843558
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry7_release.get("container_removed") is True
+                    and not (retry7_root / "performance.json").exists()
+                    and not (retry7_root / "hypic-only" / "benchmark-command.json").exists(),
+                    "retry7 was not a pre-health foreign-process isolation failure")
+            attempt += "-retry8"
+        elif args.environmental_retry7:
+            retry6_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry6")
+            retry6_contract = json_at(retry6_root / "contract.json")
+            retry6_evidence = retry6_root / "hypic-only" / "hypic-evidence.jsonl"
+            startup_events = []
+            if retry6_evidence.is_file():
+                startup_events = [
+                    json.loads(line)
+                    for line in retry6_evidence.read_text().splitlines()
+                    if line.strip()
+                ]
+            allowed_events = {
+                "plugin_build_active", "hypic_capability_contract",
+                "hypic_upstream_parity_contract", "material_cache_configured",
+            }
+            require(retry6_contract.get("phase") == "repeat3"
+                    and retry6_contract.get("arm") == "hypic-only"
+                    and startup_events
+                    and all(row.get("event") in allowed_events for row in startup_events)
+                    and not (retry6_root / "performance.json").exists()
+                    and not (retry6_root / "arm-result.json").exists()
+                    and not (retry6_root / "hypic-only" / "benchmark-command.json").exists(),
+                    "retry6 was not a pre-measurement executor timeout")
+            attempt += "-retry7"
+        elif args.environmental_retry6:
+            retry5_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry5")
+            retry5_contract = json_at(retry5_root / "contract.json")
+            retry5_guard = json_at(retry5_root / "hypic-only" / "lane-guard.json")
+            retry5_evidence = retry5_root / "hypic-only" / "hypic-evidence.jsonl"
+            retry5_foreign = [
+                process
+                for sample in retry5_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            require(retry5_contract.get("phase") == "repeat3"
+                    and retry5_contract.get("arm") == "hypic-only"
+                    and retry5_guard.get("samples") == 2
+                    and not retry5_guard.get("probe_errors")
+                    and any(item.get("physical_npu") == 0
+                            and item.get("pid") == 3539167
+                            and item.get("container_id") ==
+                            "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa"
+                            for item in retry5_foreign)
+                    and retry5_evidence.is_file()
+                    and retry5_evidence.stat().st_size == 0
+                    and not (retry5_root / "performance.json").exists()
+                    and not (retry5_root / "arm-result.json").exists(),
+                    "retry5 was not an audited pre-measurement foreign-process failure")
+            attempt += "-retry6"
+        elif args.environmental_retry5:
+            retry4_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry4")
+            retry4_result = json_at(retry4_root / "arm-result.json")
+            retry4_guard = json_at(retry4_root / "hypic-only" / "lane-guard.json")
+            retry4_release = json_at(retry4_root / "hypic-only" / "service-stop.json")
+            retry4_report = json_at(retry4_root / "performance.json")
+            foreign = [
+                process
+                for sample in retry4_guard.get("foreign", [])
+                for process in sample.get("processes", [])
+            ]
+            rows = retry4_report.get("results", [])
+            require(retry4_result.get("valid") is False
+                    and retry4_result.get("metrics") is None
+                    and retry4_result.get("performance_sha256")
+                    and "lane guard" in str(retry4_result.get("error", "")).lower()
+                    and len(rows) == 40
+                    and sum(row.get("ok") is True for row in rows) == 16
+                    and sum(row.get("ok") is not True for row in rows) == 24
+                    and any(item.get("physical_npu") == 1
+                            and item.get("pid") == 3079008
+                            and item.get("container_id") ==
+                            "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+                            for item in foreign)
+                    and retry4_release.get("container_removed") is True
+                    and retry4_release.get("owned_npus_released") is True
+                    and retry4_release.get("port_released") is True
+                    and retry4_release.get("lane_available") is True,
+                    "retry4 was not independently invalidated by foreign NPU use with exact cleanup")
+            attempt += "-retry5"
+        elif args.environmental_retry4:
+            retry3_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry3")
+            retry3_result = json_at(retry3_root / "arm-result.json")
+            retry3_guard = json_at(retry3_root / "hypic-only" / "lane-guard.json")
+            retry3_release = json_at(retry3_root / "hypic-only" / "pre-health-release.json")
+            require(retry3_result.get("valid") is False
+                    and retry3_result.get("performance_sha256") is None
+                    and retry3_result.get("metrics") is None
+                    and "lane guard" in str(retry3_result.get("error", "")).lower()
+                    and not (retry3_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry3_root / "hypic-only" / "benchmark-command.json").exists()
+                    and retry3_release.get("container_removed") is True
+                    and retry3_guard.get("foreign")
+                    and not retry3_guard.get("probe_errors"),
+                    "retry3 was not an isolated pre-health environmental failure")
+            attempt += "-retry4"
+        elif args.environmental_retry3:
+            retry2_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry2")
+            retry2_result = json_at(retry2_root / "arm-result.json")
+            retry2_guard = json_at(retry2_root / "hypic-only" / "lane-guard.json")
+            retry2_release = json_at(retry2_root / "hypic-only" / "pre-health-release.json")
+            require(retry2_result.get("valid") is False
+                    and retry2_result.get("performance_sha256") is None
+                    and retry2_result.get("metrics") is None
+                    and "lane guard" in str(retry2_result.get("error", "")).lower()
+                    and not (retry2_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry2_root / "hypic-only" / "benchmark-command.json").exists()
+                    and retry2_release.get("container_removed") is True
+                    and retry2_guard.get("foreign")
+                    and not retry2_guard.get("probe_errors"),
+                    "retry2 was not an isolated pre-health environmental failure")
+            attempt += "-retry3"
+        elif args.environmental_retry2:
+            retry1_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+                "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry1")
+            retry1_result = json_at(retry1_root / "arm-result.json")
+            retry1_guard = json_at(retry1_root / "hypic-only" / "lane-guard.json")
+            retry1_release = json_at(retry1_root / "hypic-only" / "pre-health-release.json")
+            require(retry1_result.get("valid") is False
+                    and retry1_result.get("performance_sha256") is None
+                    and retry1_result.get("metrics") is None
+                    and "lane guard" in str(retry1_result.get("error", "")).lower()
+                    and not (retry1_root / "hypic-only" / "service-start.json").exists()
+                    and not (retry1_root / "hypic-only" / "benchmark-command.json").exists()
+                    and retry1_release.get("container_removed") is True
+                    and retry1_guard.get("foreign")
+                    and not retry1_guard.get("probe_errors"),
+                    "retry1 was not an isolated pre-health environmental failure")
+            attempt += "-retry2"
+        else:
+            attempt += "-retry1"
     os.environ["HYPIC_QUALITY_ATTEMPT"] = attempt
     os.environ["HYPIC_QUALITY_PLUGIN_REPO"] = SOURCE_ROOT
     os.environ["HYPIC_QUALITY_PLUGIN_COMMIT"] = SOURCE_COMMIT

@@ -129,6 +129,15 @@ download.
   release only owned resources, and re-establish isolation before any new-root
   retry. Container identity is not proof of the human launcher; a vanished PID
   without retained cgroup evidence does not prove its owner.
+
+For a multi-minute or multi-hour controller, do not set the remote executor's
+process timeout shorter than the campaign. Prefer asynchronous execution with
+a campaign-length timeout and poll the stable operation ID. If the connector
+or executor times out, treat that as control-plane ambiguity: inspect the same
+operation, exact container labels, device processes, port, and immutable root
+before retrying. A detached owned container can outlive its controller; never
+blindly relaunch, and release only the exact resources proven to belong to the
+failed attempt.
 - Do not stop, restart, or replace a workload until its owning workstream and
   rollback instructions are identified.
 - Inspect 1 GiB HugeTLB sysfs state and consumers before any memory-pool change.

@@ -19,6 +19,22 @@ PHASES = (
     ("repeat2_20261007", "repeat2"),
     ("repeat3_20261007", "repeat3"),
 )
+RETRY14_ROOT = Path(
+    "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/"
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry14"
+)
+RETRY14_REPORT = (
+    REPO / ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/"
+    "HOTPATH_CACHE10PERF_RETRY14_TERMINAL_AUDIT.md"
+)
+RETRY14_RECEIPTS = {
+    "contract.json": "b260e81ab4f766ee1b5ee3c485d5d3f993dfdbb4ba8733dff339700616dd2c2a",
+    "arm-result.json": "8438fbd58b4be0c06412667c57442e7340e5dc08d1d7889a059f736113eaae0a",
+    "hypic-only/hypic-evidence.jsonl": "fb3f7f0f342b3738e637ecb517d90dc5b2f603ddc3ce0978dbb6a8cc6c9389be",
+    "hypic-only/lane-guard.json": "71f8ece8c31869544653661b26c9f520ed6a7a8210b93c2c4b79dfa8ad89b0ed",
+    "hypic-only/pre-health-release.json": "7afb397349d54ce1c19725bcd5e22523d84ac3e9d3d44cb8ed8222439e7ffc09",
+}
+RETRY14_REPORT_SHA256 = "362a8c5708584bd726003aa0825190b4b9c69eb2879d9673baf90f176e3394af"
 
 
 def require(condition: bool, message: str) -> None:
@@ -97,6 +113,42 @@ def verify() -> dict:
     candidate_median = statistics.median(candidate_tpot)
     improvement = 100 * (baseline_median - candidate_median) / baseline_median
     require(improvement >= 20, "predeclared TPOT fail-fast gate not met")
+    for relative, expected in RETRY14_RECEIPTS.items():
+        verify_hash(RETRY14_ROOT / relative, expected)
+    verify_hash(RETRY14_REPORT, RETRY14_REPORT_SHA256)
+    retry14_contract = json.loads((RETRY14_ROOT / "contract.json").read_text())
+    retry14_arm = json.loads((RETRY14_ROOT / "arm-result.json").read_text())
+    retry14_guard = json.loads(
+        (RETRY14_ROOT / "hypic-only/lane-guard.json").read_text()
+    )
+    retry14_release = json.loads(
+        (RETRY14_ROOT / "hypic-only/pre-health-release.json").read_text()
+    )
+    foreign_seen = any(
+        process.get("pid") == 242978
+        and process.get("physical_npu") == 1
+        and process.get("container_id")
+        == "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+        for sample in retry14_guard["foreign"]
+        for process in sample["processes"]
+    )
+    require(retry14_contract["phase"] == "repeat3"
+            and retry14_contract["arm"] == "hypic-only"
+            and retry14_contract["fingerprint"]["physical_npus"] == [0, 1, 2, 3],
+            "retry14 frozen phase or physical lane drift")
+    require(retry14_arm["contract_sha256"] == RETRY14_RECEIPTS["contract.json"]
+            and retry14_arm["valid"] is False
+            and retry14_arm["metrics"] is None
+            and retry14_arm["performance_sha256"] is None
+            and "lane guard" in retry14_arm["error"],
+            "retry14 must remain an environmental zero-metric outcome")
+    require(retry14_guard["samples"] == 18
+            and retry14_guard["probe_errors"] == []
+            and foreign_seen,
+            "retry14 foreign physical process evidence drift")
+    require(retry14_release["container_id"] == retry14_arm["container_id"]
+            and retry14_release["container_removed"] is True,
+            "retry14 exact owned-service cleanup is not proven")
     return {
         "schema": "ascend-inference-tuning-loop-bounded-replay/v1",
         "baseline_weighted_tpot_ms": baseline_tpot,
@@ -109,6 +161,11 @@ def verify() -> dict:
         "case_scope": "CPU-binding-off no-cache performance only",
         "full_2048_quality_verified": False,
         "hypic_paper_effect_verified": False,
+        "retry14_classification": "environmental-pre-health-isolation-failure",
+        "retry14_scored_requests": 0,
+        "retry14_performance_metrics_valid": False,
+        "retry14_foreign_process": "PID 242978 on physical NPU1",
+        "retry14_owned_service_removed": True,
     }
 
 

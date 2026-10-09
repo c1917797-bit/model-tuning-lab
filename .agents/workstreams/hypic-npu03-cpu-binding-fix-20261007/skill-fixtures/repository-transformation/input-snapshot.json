@@ -1,0 +1,17 @@
+{
+  "schema": "mst-transformation-input/v1",
+  "repository_kind": "single-package-python-service",
+  "product_entrypoint": "src/app.py",
+  "existing_agent_files": ["CLAUDE.md"],
+  "legacy_claude_duplicated_governance": true,
+  "misplaced_runtime_skill": ".agents/skills/customer-helper/SKILL.md",
+  "runtime_skill_visibility": "tenant",
+  "required_outcome": [
+    "minimal AGENTS.md bootstrap",
+    "thin CLAUDE.md adapter",
+    "maintainer registry with the smallest justified tree",
+    "runtime skill outside .agents/skills",
+    "runtime registry and publish policy",
+    "replayable structural validation"
+  ]
+}

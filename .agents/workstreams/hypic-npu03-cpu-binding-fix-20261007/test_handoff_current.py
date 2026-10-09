@@ -41,9 +41,18 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(task["prior_stress_attempt"]["campaign"], "cache10r11")
         self.assertEqual(task["prior_stress_attempt"]["controller_operation"],
                          "exec-0000000000001830")
-        self.assertEqual(task["latest_attempt"]["campaign"], "cache10r12")
+        self.assertEqual(task["latest_attempt"]["campaign"], "cache10r13-performance")
+        self.assertEqual(task["latest_attempt"]["arm"], "hypic-only")
+        self.assertEqual(task["latest_attempt"]["mode"], "repeat3")
+        self.assertEqual(task["latest_attempt"]["attempt_number"], 21)
         self.assertEqual(task["latest_attempt"]["controller_operation"],
-                         "exec-00000000000018b4")
+                         "exec-00000000000003a4")
+        self.assertTrue(task["latest_attempt"]["root"].endswith("repeat3-retry21"))
+        self.assertIn("valid HYPIC-only repeat3",
+                      task["latest_attempt"]["classification"])
+        self.assertIn("40/40 four-worker hot proof",
+                      task["latest_attempt"]["status"])
+        self.assertTrue((HERE / task["latest_attempt"]["preregistration"]).is_file())
         self.assertEqual(task["r13_candidate_attempt"]["campaign"], "cache10r13")
         self.assertEqual(task["r13_candidate_attempt"]["controller_operation"],
                          "exec-0000000000001bb1")
@@ -74,13 +83,19 @@ class HandoffTests(unittest.TestCase):
         self.assertIn("before service health", failure["status"])
         self.assertIn("127x3", task["goal_horizons"]["short_term"])
         self.assertIn("all 29", task["goal_horizons"]["long_term"])
-        self.assertIn("exec-000000000000004b", task["next_action"])
+        self.assertIn("Do not rerun completed HYPIC phases",
+                      task["next_action"])
+        self.assertIn("Skill cases", task["next_action"])
+        self.assertEqual(task["timeboxed_milestone_plan"]["deadline_utc"],
+                         "2026-10-09T17:21:24Z")
+        self.assertEqual(len(task["timeboxed_milestone_plan"]["milestones"]), 6)
+        self.assertEqual(task["performance_candidate_repeat3_retry14_environmental_failure"]["scored_requests"], 0)
         self.assertIn("53/57", task["prior_stress_attempt"]["request_hot_path_gate"])
-        self.assertIn("52/57", task["latest_attempt"]["status"])
         self.assertIn("c12060c", task["diagnostic_plugin"]["local_commit"])
         self.assertTrue((HERE / task["previous_attempt"]["evidence"]).is_file())
         self.assertTrue((HERE / task["prior_stress_attempt"]["coverage_report"]).is_file())
         self.assertTrue((HERE / task["latest_attempt"]["coverage_report"]).is_file())
+        self.assertTrue((HERE / "HOTPATH_CACHE10PERF_RETRY19_PREREGISTRATION_20261009.md").is_file())
         self.assertEqual(task["resource_claim"]["forbidden_npus"],
                          [4, 5, 6, 7])
         subprocess.run(("git", "diff", "--quiet", "HEAD", "--",

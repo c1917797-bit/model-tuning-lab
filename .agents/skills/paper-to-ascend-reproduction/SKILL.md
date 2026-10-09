@@ -33,7 +33,9 @@ or starting a long run.
 - A changed identity requires a fresh baseline and artifact root.
 - Never pool evidence across different scientific questions, rulers, cache
   denominators, topologies, or invalid attempts.
-- Do not accept a favorable metric without mechanism activation evidence.
+- Do not attribute a favorable metric to the mechanism without activation
+  evidence. Report a valid all-request deployment result independently of
+  incomplete conditional-path coverage.
 - Do not claim losslessness from a point estimate or invented tolerance.
 - Never restart a controller that is authoritatively live.
 - Do not inspect, stop, or reconfigure workloads outside the declared resource
@@ -110,8 +112,26 @@ them.
 ### 6. Require mechanism evidence
 
 Define a strict activation gate before measurement. It should prove both the
-planner/scheduler decision and the worker/operator hot path, with no required
-event missing. Configuration flags or import logs alone do not prove activation.
+planner/scheduler decision and the worker/operator hot path. Configuration
+flags or import logs alone do not prove activation.
+
+When treatment activation is conditional (for example, a cache-dependent hot
+path), predeclare and report two lenses:
+
+- **Deployment effect:** score every preregistered request, including cold,
+  fallback, and non-activated requests. If the paired data and environment
+  audit are valid, incomplete hot-path coverage does not erase the all-request
+  quality or performance result.
+- **Mechanism attribution:** report the request IDs with the required events
+  and the exact coverage denominator. Complete per-request proof is required
+  only for a claim that every scored request exercised the mechanism. A failed
+  activation gate limits that attribution claim; it does not replace the
+  deployment result.
+
+Freeze any eligible-request denominator and activation threshold before
+candidate outcomes are observed. Never drop cold or non-activated requests
+post hoc, and never use a deployment-level pass to claim complete mechanism
+coverage.
 
 Use native profiling when the claim depends on kernel time, communication,
 memory traffic, or operator fusion. Profile baseline and the unique candidate
@@ -200,10 +220,14 @@ Reusable lessons:
 
 ## Completion gate
 
-Do not declare completion unless every planned unit is accepted, the one-switch
-difference is proven, mechanism activation passed, raw JSONL/summary counts and
-hashes agree, dataset/evaluator/prompt identities are stable, performance
-repetitions and dispersion are reported, profiling is present or explicitly not
-required, decision scope and forbidden claims are written, owned resources are
-released, independent audit exits zero, and handoff/recovery commands are
-current.
+Distinguish experiment completion from adoption. An experiment may be complete
+with an accepted, rejected, inconclusive, or failed outcome when every planned
+unit is terminally classified, the one-switch identity and raw JSONL/summary
+counts and hashes are audited, dataset/evaluator/prompt identities are stable,
+performance repetitions and dispersion are reported, profiling is present or
+explicitly not required, decision scope and forbidden claims are written,
+owned resources are released, the independent audit exits zero, and
+handoff/recovery commands are current. Accepting adoption additionally
+requires the predeclared performance, quality, and claim-scope activation gates
+to pass. A negative result must not be mislabeled as an incomplete experiment
+merely because the hypothesis was rejected.

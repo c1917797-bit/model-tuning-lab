@@ -40,9 +40,12 @@ def p95(values: list[float]) -> float:
 
 def root_for(arm: str, phase: str) -> Path:
     if arm == "hypic-only" and phase == "repeat3":
-        retry = ROOT / "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry1"
-        if retry.is_dir():
-            return retry
+        for retry_number in range(21, 0, -1):
+            attempt = f"retry{retry_number}"
+            retry = ROOT / f"performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-{attempt}"
+            result_path = retry / "arm-result.json"
+            if result_path.is_file() and load(result_path).get("valid") is True:
+                return retry
     return ROOT / f"performance-context-41984-hotpath-cache10perf-{arm}-{phase}"
 
 

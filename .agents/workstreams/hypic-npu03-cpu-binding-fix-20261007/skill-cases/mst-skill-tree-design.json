@@ -1,0 +1,42 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-skill-tree-design",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
+  "behavioral_evidence_verified": true,
+  "task": "Design the first Maintainer Skill Tree for a single-package Python service, adding only one path-specific Skill justified by an observed runtime boundary",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "8842a954a385c42f997d05383a6ee58c19447da7",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "isolated single-package Python service transformation fixture inside the named HYPIC workstream; CPU-only; no live NPU, container, remote, or canonical repository mutation",
+  "observed": {
+      "default_core_skills": 6,
+      "justified_additional_skills": 1,
+      "total_skills": 7,
+      "unique_ids": 7,
+      "all_paths_resolve": true,
+      "all_entries_have_trigger_purpose_scope": true,
+      "all_skill_files_under_120_lines": true,
+      "fixture_validator_exit_code": 0
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MST_TRANSFORMATION_SUITE_CASE_20261009.md",
+      "sha256": "2155699c4ad67e66b0bca71a208f4cc918ebf40b95800be06cc191b270bdea84"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py",
+      "sha256": "2237502131419e8457e1cf6805cd82ac94ee626d9d4175107968d1c208a90612"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/input-snapshot.json",
+      "sha256": "f3b77e82296593a4cb1bff4392c3ceaad60090c6fd38635ca1145ad7b53554af"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Verified for a bounded single-package tree: the six-Skill default core plus one justified runtime-boundary Skill. It does not validate monorepo or nested component registries.",
+  "drift_trigger": "Re-run after the main Skill blob, default tree, registry requirements, line limit, or fixture verifier changes."
+}

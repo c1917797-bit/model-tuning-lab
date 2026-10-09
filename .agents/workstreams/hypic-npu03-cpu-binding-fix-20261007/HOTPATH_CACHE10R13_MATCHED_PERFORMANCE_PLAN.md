@@ -62,15 +62,32 @@ reuse prior result roots. A narrowly scoped recovery amendment applies only
 if hypic-only/repeat3 fails before service health and before benchmark start
 because the physical-lane guard observes an actual foreign PID/probe error:
 preserve the failed original root and its exact receipts, wait for the lane
-to become idle, and permit one same-protocol `--environmental-retry1` in a
-new immutable root. It may not be used for workload, quality, hot-path, or
+to become idle, and permit up to three same-protocol immutable recovery roots
+(`--environmental-retry1`, `--environmental-retry2`, then
+`--environmental-retry3`) if each previous
+run terminated before service health with foreign-lane evidence and exact
+owned-container removal. They may not be used for workload, quality, hot-path, or
 performance failures, and it does not alter any denominator or acceptance
-rule. The independent six-phase audit uses the retry root only if it exists;
+rule. The user subsequently authorized one additional bounded recovery on
+2026-10-09 after retry3 also failed pre-health with no measured rows. This
+amendment permits exactly one fourth immutable recovery root (`retry4`) only
+when retry3 has audited pre-health foreign-lane evidence and exact owned
+resource release. It does not alter source, workload, denominators, measured
+repetitions, metrics, or acceptance rules. The independent six-phase audit
+uses the latest valid retry root only if one exists;
 the original pre-measurement invalid attempt remains reported as excluded.
 If the controller's immediate `assert_lane_available` detects a process before
 creating the retry root, that invocation has no root, container, or scored row;
 it is only a failed availability probe and does not consume the one new-root
 measurement attempt. Recheck the lane and reissue only while it is truly idle.
+
+Retry4 was run under that amendment and is terminally invalid: after service
+health, its 120-sample guard recorded foreign PID 3079008 on physical NPU1;
+only 16/40 responses completed before the owned service was released. The
+partial rows are not performance evidence, and phase 6 remains incomplete.
+See `HOTPATH_CACHE10PERF_RETRY4_TERMINAL_AUDIT.md`. Retry4 consumed the sole
+amended recovery root; no retry5 without a new explicit user authorization
+and preregistered amendment.
 
 The 120/120 per-request worker proof is the strict C1/C2 mechanism-attribution
 gate, not the all-request deployed performance result. Both are reported;

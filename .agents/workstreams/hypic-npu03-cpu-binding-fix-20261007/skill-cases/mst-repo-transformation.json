@@ -1,0 +1,40 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-repo-transformation",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
+  "behavioral_evidence_verified": true,
+  "task": "Transform an ordinary Python service with legacy tool instructions and a misplaced runtime Skill into an AGENTS.md plus Maintainer Skill Tree repository while preserving product behavior",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "dfaa3bdddac099bf598db82a63a056b70c2ccf48",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "isolated single-package Python service transformation fixture inside the named HYPIC workstream; CPU-only; no live NPU, container, remote, or canonical repository mutation",
+  "observed": {
+      "input_repository_kind": "single-package-python-service",
+      "product_entrypoint_preserved": true,
+      "product_health": "ok",
+      "maintainer_skills": 7,
+      "runtime_skill_separated": true,
+      "fixture_validator_exit_code": 0
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MST_TRANSFORMATION_SUITE_CASE_20261009.md",
+      "sha256": "2155699c4ad67e66b0bca71a208f4cc918ebf40b95800be06cc191b270bdea84"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py",
+      "sha256": "2237502131419e8457e1cf6805cd82ac94ee626d9d4175107968d1c208a90612"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/input-snapshot.json",
+      "sha256": "f3b77e82296593a4cb1bff4392c3ceaad60090c6fd38635ca1145ad7b53554af"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Verified for one full isolated single-package transformation including product preservation, maintainer scaffold, runtime separation, and replayable validation. It does not prove monorepo, infrastructure, or hosted deployment transformations.",
+  "drift_trigger": "Re-run after the main Skill blob, default transformation pack, registry schema, runtime layout, or fixture verifier changes."
+}

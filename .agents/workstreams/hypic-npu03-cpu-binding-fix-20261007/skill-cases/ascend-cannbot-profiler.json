@@ -1,0 +1,53 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "ascend-cannbot-profiler",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Route the completed HYPIC investigation at the scheduler/cache boundary, re-prove Cannbot/CANN source locations, consult the actual profiling contract, and refuse an unsupported low-level attribution",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "67b007c739fe8c306e8d9d7b1dde376598426912",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "fresh direct chicaihong01/ma read-only source orientation after the HYPIC six-phase campaign; no new container, NPU capture, system mutation, or low-level code change",
+  "observed": {
+    "historical_workspace_root": "/home/mtuser/cch",
+    "historical_workspace_root_valid": false,
+    "fresh_workspace_root": "/cache/cch",
+    "cannbot_skills_commit": "d5e0d44b7a1d2e90c5f0b9fb62970fb3bac89ec3",
+    "vllm_ascend_commit": "222677fc719c7014879b161ed1dd3ed3276d7a5d",
+    "ops_transformer_commit": "0684247214bae5abb5cb6dc7d90b34a6ad401cdd",
+    "cann_recipes_infer_commit": "3ed968171bd42d57874bd96bc242c5868b0e6d59",
+    "expert_contract": "model/model-infer-profiling/SKILL.md",
+    "expert_contract_consulted": true,
+    "source_map_layer": "vLLM-Ascend scheduler/cache materialization seam",
+    "low_level_widening_admitted": false,
+    "npu_profiler_capture_completed": false,
+    "prefill_decode_artifact_audit_completed": false,
+    "kernel_details_47_columns_verified": false,
+    "hccl_root_cause_verified": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_CANNBOT_PROFILER_BOUNDARY_CASE_20261009.md",
+      "sha256": "7e66598e34e472cd37687c4472c61271d5564ed864da4dbeebbd34e75e3fc3e3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_cannbot_profiler_case.py",
+      "sha256": "3fd089690df777559a8a6e8fa79c593be7878e9d197b0c67cfb036f1675b2005"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_SOURCE_MAP_CASE_20261009.md",
+      "sha256": "a0ae2c4a2d847186d876510c015f148b7e64e25786b183a15aaaedbe528cf8a2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/REPORT.md",
+      "sha256": "3752f2fc2bb87b5b1395536a9eb2cd7e1358ecb5a89897f892cb8737e22627de"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "The routing, target re-orientation, expert-source consultation, and refusal to invent a low-level cause are behaviorally evidenced. No actual profiler capture or artifact completeness check occurred, so this is not full Skill acceptance.",
+  "drift_trigger": "Run a fresh bounded Prefill/Decode capture and artifact audit when a real unresolved low-level symptom appears, or re-review after the main Skill, source workspace commits, profiler stack, or HYPIC source-map conclusion changes."
+}

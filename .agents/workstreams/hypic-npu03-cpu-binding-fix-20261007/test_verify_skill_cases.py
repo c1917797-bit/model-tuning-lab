@@ -26,12 +26,43 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertGreaterEqual(report["cases_with_verified_provenance"], 20)
-        self.assertLessEqual(report["skills_without_case"], 9)
-        self.assertGreaterEqual(report["case_acceptance"]["partial-evidence"], 18)
-        self.assertEqual(report["case_acceptance"]["verified"], 2)
+        self.assertEqual(report["cases_with_verified_provenance"], 29)
+        self.assertEqual(report["skills_without_case"], 0)
+        self.assertEqual(report["missing_skill_ids"], [])
+        self.assertEqual(report["case_acceptance"]["partial-evidence"], 22)
+        self.assertEqual(report["case_acceptance"]["verified"], 7)
         self.assertEqual(report["cases_with_verified_provenance"]
                          + report["skills_without_case"], 29)
+
+    def test_cannbot_case_records_routing_but_not_capture(self) -> None:
+        path = cases.CASES / "ascend-cannbot-profiler.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"ascend-cannbot-profiler"})
+        self.assertEqual(skill, "ascend-cannbot-profiler")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["expert_contract_consulted"])
+        self.assertFalse(item["observed"]["low_level_widening_admitted"])
+        self.assertFalse(item["observed"]["npu_profiler_capture_completed"])
+        self.assertFalse(item["observed"]["kernel_details_47_columns_verified"])
+
+    def test_transformation_suite_cases_are_bounded_verified(self) -> None:
+        expected = {
+            "mst-agentsmd-authoring",
+            "mst-repo-transformation",
+            "mst-runtime-skill-boundary",
+            "mst-skill-governor",
+            "mst-skill-tree-design",
+        }
+        for name in expected:
+            path = cases.CASES / f"{name}.json"
+            skill, state = cases.check_case(path, self.main_commit, {name})
+            self.assertEqual(skill, name)
+            self.assertEqual(state, "verified")
+            item = json.loads(path.read_text())
+            self.assertTrue(item["behavioral_evidence_verified"])
+            self.assertTrue(item["replayable_regression_recorded"])
+            self.assertIn("Verified for", item["boundary"])
 
     def test_loop_framework_repair_is_partial_until_fresh_resume(self) -> None:
         path = cases.CASES / "mst-loop-engineering-framework.json"

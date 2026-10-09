@@ -76,14 +76,20 @@ service health and benchmark start. Its 22 guard samples observed PID 1579551
 on physical NPU3 in foreign container
 `efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6`;
 its immutable `arm-result.json` has `valid=false` and no metrics. A later
-fresh check again found two foreign processes on NPU3. Invocation
-`exec-000000000000007c` then stopped at `assert_lane_available` before creating
-the retry root, service, or benchmark rows; the retry root remains absent, so
-this is not a second measured attempt. The other five performance roots passed
-their independent phase audits. Do not stop or modify the foreign task or use
-NPU4–7. When a fresh check shows physical NPU0–3 and port 8223 free, run only
-the newly enabled `--environmental-retry1` for this exact phase, preserve both
-roots, then run the independent six-phase audit.
+fresh check again found foreign work on NPU3. Invocation
+`exec-000000000000007c` stopped at `assert_lane_available` before creating a
+retry root or benchmark rows. The `retry1` run later reached a 64-sample guard
+but again observed PID 1940264 from the same foreign container before health;
+its exact owned container was removed, with no benchmark rows or performance
+hash. The second retry was launched after a fresh idle observation, then its
+continuous guard caught PID 2075054 on physical NPU1 from the same foreign
+container. It terminated at 08:20:44 UTC before health or measurement,
+removed only its exact owned container, and produced no performance hash.
+The other five roots passed their independent phase audits. Preserve all
+roots; do not stop the foreign task or use NPU4–7. Because both retries were
+environmental pre-health failures with zero measured rows, the four-hour user
+extension supports one final distinct retry root after fresh NPU0–3/8223 idle
+proof; this changes no measured denominator or acceptance threshold.
 
 ## Bottom line
 

@@ -1,0 +1,44 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-runtime-skill-boundary",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
+  "behavioral_evidence_verified": true,
+  "task": "Move a tenant runtime Skill out of the maintainer tree and add an explicit runtime registry plus deny-by-default publication policy",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "6a999cdfafbdc32325060d3955705167f2e125da",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "isolated single-package Python service transformation fixture inside the named HYPIC workstream; CPU-only; no live NPU, container, remote, or canonical repository mutation",
+  "observed": {
+      "original_misplaced_path": ".agents/skills/customer-helper/SKILL.md",
+      "final_runtime_path": "runtime-skills/customer-helper/SKILL.md",
+      "maintainer_path_absent": true,
+      "visibility": "tenant",
+      "permissions": [
+          "catalog.read"
+      ],
+      "publish_default": "deny",
+      "safety_review": "required",
+      "fixture_validator_exit_code": 0
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MST_TRANSFORMATION_SUITE_CASE_20261009.md",
+      "sha256": "2155699c4ad67e66b0bca71a208f4cc918ebf40b95800be06cc191b270bdea84"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py",
+      "sha256": "2237502131419e8457e1cf6805cd82ac94ee626d9d4175107968d1c208a90612"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/input-snapshot.json",
+      "sha256": "f3b77e82296593a4cb1bff4392c3ceaad60090c6fd38635ca1145ad7b53554af"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Verified for one tenant-visible read-only runtime Skill separation and publication-policy case. It does not exercise a live tenant publisher, write permissions, or multi-tenant isolation enforcement.",
+  "drift_trigger": "Re-run after the main Skill blob, runtime registry or publication-policy schema, tenant permission model, or fixture verifier changes."
+}

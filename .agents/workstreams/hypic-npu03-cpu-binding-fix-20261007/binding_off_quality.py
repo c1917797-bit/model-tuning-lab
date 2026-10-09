@@ -32,6 +32,46 @@ PERFORMANCE_ATTEMPTS = {
 }
 PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry1"] = (
     "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry1")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry2"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry2")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry3"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry3")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry4"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry4")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry5"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry5")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry6"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry6")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry7"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry7")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry8"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry8")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry9"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry9")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry10"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry10")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry11"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry11")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry12"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry12")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry13"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry13")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry14"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry14")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry15"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry15")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry16"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry16")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry17"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry17")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry18"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry19"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry19")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry20"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry20")
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry21"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry21")
 ATTEMPT_ROOTS = {
     "original": "quality-context-41984",
     "clean2": "quality-context-41984-clean2",

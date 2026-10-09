@@ -3,8 +3,8 @@
   "skill": "chicaihong01-host-maintenance",
   "campaign_code": "V",
   "long_term_acceptance": "partial-evidence",
-  "task": "Enter chicaihong01 through verified direct AWMCP routing, apply the user's mapping-only occupancy exception, and fail closed on a real foreign NPU process during HYPIC quality work",
-  "executed_at_utc": "2026-10-08",
+  "task": "Enter chicaihong01 through verified direct AWMCP routing, apply the user's mapping-only occupancy exception, and fail closed on real foreign NPU processes during HYPIC work",
+  "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "4f226c75f5cf92c16b02524e7666c941dd147afb",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
@@ -20,20 +20,84 @@
     "foreign_pid": 672924,
     "scored_requests_before_abort": 0,
     "exact_owned_service_released": true,
-    "foreign_container_preserved": true
+    "foreign_container_preserved": true,
+    "retry5_direct_route_reproved": true,
+    "retry5_foreign_physical_npu": 0,
+    "retry5_foreign_pid": 3539167,
+    "retry5_foreign_container_name": "Maxon4ick_vllm",
+    "retry5_scored_requests_before_abort": 0,
+    "retry5_exact_owned_container_removed": true,
+    "retry5_foreign_container_preserved": true,
+    "retry5_post_cleanup_npu0_3_and_port_free": true,
+    "retry14_foreign_physical_npu": 1,
+    "retry14_foreign_pid": 242978,
+    "retry14_foreign_container_name": "cannbench_ds",
+    "retry14_foreign_container_preserved": true,
+    "retry14_scored_requests_before_abort": 0,
+    "retry14_exact_owned_container_removed": true,
+    "retry14_post_cleanup_owned_lane_released": true
   },
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R3_RESOURCE_CONFLICT.md",
       "sha256": "b64d38f78bf9cf2d2feaebb2d368165392f8a6a39de4c07c68ee4ae2e454b81f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY5_TERMINAL_AUDIT.md",
+      "sha256": "bd3fc49aae577fe724781f901e0183d5de86cac94d70ca142aabba504ab29f45"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY14_TERMINAL_AUDIT.md",
+      "sha256": "362a8c5708584bd726003aa0825190b4b9c69eb2879d9673baf90f176e3394af"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY18_TERMINAL_AUDIT_20261009.md",
+      "sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_retry18_environmental_failure.py",
+      "sha256": "b95604769283c5ddffb033da739293952c1eb1409c20a39756c188233cb41b8e"
     }
   ],
   "external_raw_receipts": {
     "lane_guard_sha256": "4ee35d98eadbeda8344d8b14f747865a9f2e3587606f48243b1559dc9740d6db",
     "arm_result_sha256": "75fa7b0586cd6af3633e591d6c51c5f4786910bce7c31d53e4207a872f267b34",
-    "service_stop_sha256": "a264fd7c7e13cdc4c56ecc72ad4c7f3cb9cf0b0573c7405fd223abd8368629d1"
+    "service_stop_sha256": "a264fd7c7e13cdc4c56ecc72ad4c7f3cb9cf0b0573c7405fd223abd8368629d1",
+    "retry5_guard_sha256": "24d9e1f91596214903a95d9fe8b7ff91562a8fc5411eedd63a3e7845c9e8ce87",
+    "retry5_owned_container_id": "eec7c5ef562cd446364c6b021c1e0c70f1988362c8d5c108db3c4dab5091ca5f",
+    "retry5_foreign_container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+    "retry14_guard_sha256": "71f8ece8c31869544653661b26c9f520ed6a7a8210b93c2c4b79dfa8ad89b0ed",
+    "retry14_arm_result_sha256": "8438fbd58b4be0c06412667c57442e7340e5dc08d1d7889a059f736113eaae0a",
+    "retry14_foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "retry14_owned_container_id": "2d85a0fbc2bc9841d3dbd21dc0009555308ae44fc73f4d0fadce9378b3161f8b",
+    "retry18_contract_sha256": "c03c8fdf79ffe02ed42ee2e80558479e372b2be0959128795e83c6dbe7dd322a",
+    "retry18_arm_result_sha256": "c0bd15e0a0a6340e338bcbf05a5f4791139d747589ad63b1351cb67f198bd4bc",
+    "retry18_lane_guard_sha256": "6ae72bebd66aba903dd9f8bfebf90561374bd2699363428268b97d4f498f553b",
+    "retry18_pre_health_release_sha256": "413c9d8d3b2af629b5c6732c0eeba857299ea28794d9245d8ae2b2a365a5048c",
+    "retry18_hypic_evidence_sha256": "26eaf6cda31342ba6742045a15ca34039c0d3598dad61a2508cbcdb8400e568c",
+    "retry18_audit_sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
   },
   "replayable_regression_recorded": false,
-  "boundary": "This is a bounded real-host safety case under a task-specific user override, not a successful HYPIC experiment. The main Skill's default running-container occupancy claim, complete canonical-checkout onboarding flow, long clean NPU window, and all other host-maintenance actions were not independently re-executed. The branch script and Skill body also differ from current main. Do not promote to long-term verified.",
-  "next_gate": "On a later real host-maintenance task, exercise the exact current main Skill end to end, retain sanitized raw AWMCP and process receipts plus a repeatable regression, then review every default/override boundary. Do not rerun this failed HYPIC root."
+  "boundary": "These are bounded real-host safety cases under task-specific scope, not successful HYPIC experiments. Retry14's continuous guard captured foreign cannbench_ds PID 242978 on physical NPU1 before health/scoring, preserved the foreign container, and removed only its exact owned service. Combined with retry5, this confirms that device safety depends on physical process state, while container mappings alone are not proof of work. The main Skill's default running-container occupancy claim and complete onboarding flow remain untested; do not promote to long-term verified.",
+  "next_gate": "On a later host-maintenance task, exercise exact current main behavior and add a repeatable regression. For this HYPIC phase, the user authorized opportunistic monitoring and running only when physical NPU0-3 and port 8223 are actually unused; do not require a coordinated window or fixed idle duration. Re-resolve chicaihong01/ma and prove direct routing immediately before action, keep the continuous physical-process guard, and never stop or modify foreign work.",
+  "retry18_followup": {
+    "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
+    "controller_operation": "exec-0000000000000303",
+    "classification": "environmental-pre-health-failure",
+    "foreign_container_name": "cannbench_ds",
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "foreign_physical_npu": 1,
+    "foreign_pid": 1420898,
+    "guard_samples": 80,
+    "probe_errors": 0,
+    "scored_requests": 0,
+    "performance_metric_valid": false,
+    "owned_container_id": "71ace370461d0090de57c1239f26015231e6252b0000ab3dc104ef27710b4f83",
+    "exact_owned_container_removed": true,
+    "worker_release_proven": false,
+    "post_cleanup_npu0_3_idle": true,
+    "post_cleanup_port8223_free": true,
+    "terminal_audit": "HOTPATH_CACHE10PERF_RETRY18_TERMINAL_AUDIT_20261009.md",
+    "replay_verifier": "verify_retry18_environmental_failure.py"
+  }
 }
