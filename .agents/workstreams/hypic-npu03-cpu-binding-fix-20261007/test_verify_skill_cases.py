@@ -234,6 +234,17 @@ class SkillCaseTests(unittest.TestCase):
         self.assertTrue(item["observed"]["old_control_complete"])
         self.assertFalse(item["observed"]["old_control_reusable_for_r9"])
         self.assertFalse(item["observed"]["new_control_run_authorized_by_this_case"])
+        self.assertTrue(item["observed"]["r13_single_dataset_quality_pair_complete"])
+        self.assertTrue(item["observed"]["r13_fixed_output_six_phase_performance_complete"])
+        self.assertEqual(item["observed"]["r13_quality_correct_baseline_candidate"],
+                         [230, 219])
+        self.assertEqual(item["observed"]["r13_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertEqual(item["observed"]["r13_quality_strict_hot"], [368, 381])
+        self.assertEqual(item["observed"]["r13_performance_strict_hot"], [120, 120])
+        self.assertEqual(item["observed"]["r13_performance_screen_decision"],
+                         "EFFECT_SCREEN_PASS")
+        self.assertFalse(item["observed"]["full_default_skill_ruler_complete"])
 
     def test_quality_request_coverage_case_stays_partial(self) -> None:
         path = cases.CASES / "ascend-model-quality-evaluation.json"

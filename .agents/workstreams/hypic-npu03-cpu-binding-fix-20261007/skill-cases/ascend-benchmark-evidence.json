@@ -4,14 +4,14 @@
   "campaign_code": "V",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Decide whether historical HYPIC arms are comparable and classify retry14 as a terminal environmental pre-health failure without inventing benchmark evidence",
+  "task": "Reject a drifted historical HYPIC baseline, classify pre-health foreign-process retries as invalid evidence, and independently replay the bounded r13 quality rejection beside the valid six-phase performance gain without treating speed as quality acceptance",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "03ade79d697e974891410ea95f0ce54a8160b8c6",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; Qwen3.6-27B BF16 TP4 physical NPU0-3; complete historical 127x3 LongBench-v2 control versus live cache10r9 candidate contract; read-only raw-artifact replay",
+  "environment_scope": "chicaihong01/ma; Qwen3.6-27B BF16 TP4 physical NPU0-3; historical 0.9-vs-0.85 baseline-reuse rejection plus same-identity r13 c8 LongBench-v2 127x3 natural-EOS max2048 quality and separate c16 fixed-1024 six-phase performance; read-only raw-artifact replay",
   "observed": {
     "old_control_complete": true,
     "old_control_scored_rows": 381,
@@ -21,7 +21,14 @@
     "old_control_reusable_for_r9": false,
     "old_control_quality_pass_claim": false,
     "new_control_run_authorized_by_this_case": false,
-    "full_paired_quality_and_performance_complete": false,
+    "r13_single_dataset_quality_pair_complete": true,
+    "r13_fixed_output_six_phase_performance_complete": true,
+    "r13_quality_correct_baseline_candidate": [230, 219],
+    "r13_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_quality_strict_hot": [368, 381],
+    "r13_performance_strict_hot": [120, 120],
+    "r13_performance_screen_decision": "EFFECT_SCREEN_PASS",
+    "full_default_skill_ruler_complete": false,
     "retry5_foreign_process_captured_before_scoring": true,
     "retry5_scored_rows": 0,
     "retry5_performance_metric_claimed": false,
@@ -62,9 +69,23 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_retry18_environmental_failure.py",
       "sha256": "b95604769283c5ddffb033da739293952c1eb1409c20a39756c188233cb41b8e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md",
+      "sha256": "998240c3f2e5125d707b1df5d84ce8763da5bbbae8a4d49b885d367f752231e1"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_benchmark_evidence_r13_case.py",
+      "sha256": "9f59a0e1587cb25d5a61e7245d91b577b2e9abd64834ee8edf5cba6b6212458b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_benchmark_evidence_r13_case.py",
+      "sha256": "9976ccd2ea910d4bac06ea2b60954b7ce63e4e1c7cc727a8d0077433c240fe0a"
     }
   ],
   "external_raw_receipts": {
+    "r13_quality_audit_sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+    "r13_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062",
     "old_contract_sha256": "73e2f5ae76e5fcaf7b623791e68d5b0e62030ac6fa828534b72ae227bc542336",
     "old_arm_result_sha256": "856b33bf897187bdc5351d63b165cb7067fca794b65eea99bf501c6411f9c898",
     "old_127_sample_manifest_sha256": "d289db3f3e9ceb627d48ad2b01925d37a41954f915bdcdf6b7aaf8589fe29a6f",
@@ -87,8 +108,8 @@
     "retry18_audit_sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
   },
   "replayable_regression_recorded": true,
-  "boundary": "The main Skill's comparability rule supported rejecting a complete but materially nonmatching denominator. Retries 5 and 14 independently demonstrate the environmental evidence boundary: a foreign physical-NPU PID captured before health/scoring yields zero benchmark rows and no metric. This is an isolation failure, not a benchmark result; no HYPIC performance conclusion is inferable. The retry14 raw root, zero-row classification, and exact owned-service cleanup are replay-verified on this branch, while broader Skill evidence-class behavior remains partial.",
-  "next_gate": "Preserve all immutable retry roots. The user authorized opportunistic monitoring and running only when physical NPU0-3 and port 8223 are actually unused; no coordinated window or fixed idle-duration threshold is required. Immediately re-prove direct routing and physical process/port state, use a distinct preregistered root and continuous guard, and never stop or modify foreign work. Full long-term acceptance still requires replaying the remaining benchmark evidence classes.",
+  "boundary": "The main Skill's comparability rule rejected an old 0.9-utilization denominator against 0.85. Pre-health foreign-process retries have zero valid benchmark rows. Current r13 supplies a valid 127x3 LongBench-v2 quality pair (230/381 to 219/381, REJECT_OR_QUALIFY, strict four-worker quality hot 368/381 FAIL) and a distinct six-phase fixed-output performance pair (weighted TPOT -21.5243%, TTFT P95 -40.8694 s, candidate hot 120/120 PASS). These different workloads cannot be pooled, and a speed screen cannot override the failed quality gate. Startup/cold, broader boundary, lifecycle/soak, resource classes, GSM8K quality and main integration remain outside this bounded case; long-term acceptance stays partial.",
+  "next_gate": "Retain immutable r13 and retry roots. Replay missing cold/startup, boundary, lifecycle and resource evidence classes under a prospectively frozen matched protocol, and validate the default GSM8K quality ruler before upgrading this Skill. A new device experiment requires a distinct preregistered root, fresh direct routing, actually idle physical NPU0-3 and 8223, continuous guard, and no modification of foreign work. Push/integrate only with working authorized Git credentials; do not infer full Skill acceptance from the valid bounded r13 measurements.",
   "drift_trigger": "Revalidate after main Skill or registry blob changes, model/image/source/physical topology or common serving flags change, workload/scorer changes, or any raw receipt hash drift.",
   "retry18_followup": {
     "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
