@@ -58,6 +58,10 @@ active in the final tree merged to `main`.
 
 Never relabel an inconclusive run as a regression or improvement. Select the
 next loop from evidence, not from an unrecorded intuition.
+Before selecting a successor after any failure, apply
+[root-cause classification and next-action recovery](references/failure-root-cause-and-next-action.md).
+A proved adaptation defect requires repair and regression, not paper rejection;
+unknown causes require discriminating evidence and remain inconclusive.
 
 ## Ready-before-resource execution rule
 
@@ -107,9 +111,10 @@ load. This rule does not guarantee the first real-device attempt will pass.
   actual process/HBM usage, aggregate host-RAM/disk/cgroup limits and source
   identities. Device declarations do not prove occupation; idle accelerators
   do not authorize lowering resource gates or reclaiming protected workloads.
-- Respect the current project's cross-paper concurrency choice. In this
-  portfolio, papers use the NPU lane serially; preregistered numerical shards
-  within one paper may use disjoint authorized cards under one summed budget.
+- Respect the current explicit concurrency authority. In this portfolio,
+  MAIN may run independent numerical/preparation jobs across papers or within
+  a paper on disjoint physical4/5/6/7, after reviewing compatible controllers,
+  ownership and ONE summed budget. Preparers never self-admit devices.
   All TP4/model/calibration and formal performance/profiling remain exclusive;
   overlapping timing cannot establish a comparable speedup.
 - Parallel agents prepare the next gates/adapters during a running job, with

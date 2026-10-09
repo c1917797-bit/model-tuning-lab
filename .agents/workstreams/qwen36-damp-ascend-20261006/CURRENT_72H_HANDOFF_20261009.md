@@ -1,4 +1,26 @@
 # Current human-authorized 72h successor — 2026-10-09
+## Latest actual terminal and repaired preparation — 2026-10-09 13:45 UTC
+
+Original0227 is terminal FAILED exit1/bounded child timeout, not live:
+76/128 complete cases and12160/20480 complete steps; full gate remains failed.
+Both owned CIDs stopped-retained/noOOM. Whole8571ec... and RESULT2ccdd2... are
+bound in FAILURE_RECOVERY_AND_READINESS_LESSONS_20261009.md. Never restart0227.
+
+Actual MAIN02e9 passed FULLv9 140 tests/source107; MF37cf40d7... .
+Actual Ada004 MAIN02e1 passed16 source/software tests; native/model pending.
+The new separate four-card packet was byte-exact installed into canonical
+tools/sparq_ann_disjoint4_numeric_v1; MF563ccedd... unchanged from delivery.
+Actual MAIN02fc and MAIN0302 passed34 tests/compile/defaultOFF/source50.
+This is not same-image/NPU/model acceptance. One MAIN host reserves common5400s
+including90s cleanup,7CPU/40.25GiB initial ordinary floor/20GiB outputs+8GiB
+reserve, physical4/5/6/7 eachlogical0. New output001 absent at0302.
+Native dispatch and FULL aggregate consumer overlay remain pending here.
+
+Maintainer causal classification now requires repair for proved adaptation
+defects, reference/test repair for fixture errors, source-bound scheduling
+repair for timeout and unknown/inconclusive if cause lacks independent proof.
+No new non-HYPIC E2E/task success. Fixed human clocks and protected0–3 unchanged.
+All earlier RUNNING checkpoints below are historical and superseded.
 ## Latest actual live numeric / source materialization — 2026-10-09 12:00 UTC
 
 Read SPARQ_LIVE_ADAKV_MATERIALIZATION_20261009.json first. Original0227 is

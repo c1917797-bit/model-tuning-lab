@@ -2,9 +2,12 @@
 
 Use this for the user-authorized multi-paper Ascend portfolio, not unrelated
 single-change work. Current hardware is physical NPU4–7; NPU0–3 is protected.
-Latest user direction: preparation runs in parallel; papers use the four-card
-validation lane serially. Keep project-specific deadlines in workstream records,
-not a moving universal deadline in this skill.
+Latest explicit user direction: MAIN may coordinate independent numerical or
+preparation work on disjoint physical4/5/6/7, across papers as well as within one
+paper. TP4/model/profiling/formal timing retains exclusive four-card admission.
+Keep project-specific deadlines in workstream records, not a moving universal
+deadline in this skill. Frozen serial-only controllers need a reviewed successor,
+not a weakened live gate; see [causal failure recovery](failure-root-cause-and-next-action.md).
 
 Use [the paper validation DAG and matched controls](paper-validation-dag-and-matched-controls.md)
 to define predecessor evidence, data-dependent capture/calibration branches,
@@ -60,8 +63,9 @@ commands do not make archived resource facts fresh or guarantee numerical PASS.
 At device admission, bind the actual physical mapping, host/cgroup budgets and
 ownership once for the bounded matrix, monitor changes, preserve first failure
 and already-valid child evidence, and release only the owned lease. Device
-jobs remain serialized across papers; no preparer independently starts a
-container or reserves cards just because it finishes a packet.
+jobs use MAIN-coordinated disjoint admission only when the actual controller
+and aggregate budget support it; no preparer independently starts a container
+or reserves cards just because it finishes a packet.
 
 When a gap is genuinely blocked or out of scope, record its concrete dependency
 and continue another actionable paper. Missing draft inheritance is a source
@@ -69,11 +73,11 @@ gap, not grounds to repeat broad directory searches or declare algorithm no-go.
 Do not hold a preparation slot awaiting MAIN when other assigned work remains.
 
 MAIN selects the highest-value ready successor using remaining time and
-current evidence, rather than waiting for every paper to be ready. Cross-paper
-NPU work is serialized for this portfolio. Within-paper preregistered disjoint
-numerical shards may share the authorized four cards if their joint budget
-fits; TP4/full-model/profile/formal performance is exclusive. All papers keep
-a fair same-stack/common-optimization dense comparison.
+current evidence, rather than waiting for every paper to be ready. Independent
+cross-paper or within-paper numerical/preparation shards may share disjoint
+authorized cards only with compatible reviewed controllers and one joint budget.
+TP4/full-model/profile/formal performance is exclusive. All papers keep a fair
+same-stack/common-optimization dense comparison.
 
 Fresh process/HBM/AICore mapping and host/cgroup resources govern admission.
 An idle card does not imply sufficient ordinary host RAM; HugeTLB and protected

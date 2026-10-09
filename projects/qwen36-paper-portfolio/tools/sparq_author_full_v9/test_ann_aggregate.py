@@ -159,6 +159,7 @@ class ActualANNEndBatchBinding(unittest.TestCase):
   registry.active=dict(batch=2,epoch=73,frame=state.current["frame"],POST_original_returned=True)
   state.replay_calls=[dict(original_call_returned=True)];state.arm="candidate";state.core=object()
   state.gdn_observer=NS(end=lambda ctx:[]);state.pending_scheduler={};state.model_entries=0
+  state.mixed_fa={} # begin() owns this field in production; fixture bypasses begin.
   state.budget=lambda:{};state.emitted=[];state.emit=lambda kind,v:state.emitted.append((kind,v)) or {"kind":kind}
   ctx=NS(cudagraph_runtime_mode="FULL",attn_metadata={p:NS(block_tables=state.tables[(p,2)]) for p in names})
   return state,ctx,names
@@ -333,7 +334,7 @@ class ActualWrappedDummyProfile(unittest.TestCase):
    def view(self,b):return NS(before=lambda q:None,after=lambda *args:None)
   def math_spy(torch,arena,b,query,kc,vc,table,lens,out,zero,copied):
    copied();return out,arena.view(b),object(),object(),object()
-  runner.seq_lens=object()
+  runner.seq_lens=Tensor((16,),t.int32) # production selected_forward slices the real host lengths.
   original_budget=ann_model_state.ANNState.budget
   def tracked_budget(state):
    memory.budget_calls+=1;return original_budget(state) # real strong budget

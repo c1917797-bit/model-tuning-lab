@@ -3,7 +3,8 @@
 ## Trigger and ownership
 
 Use with the portfolio reference when multiple papers prepare independently
-but MAIN serializes the user's four-card Ascend validation lane. This is a
+with MAIN coordinating disjoint numerical/preparation admission and exclusive
+TP4/model/formal-timing use of the four-card Ascend lane. This is a
 reusable workflow, not permission to use protected cards or a claim that an
 authored packet is runnable. Keep live queue counts, owners, fixed cutoffs and
 actual operation handles in the active workstream, not this timeless reference.
@@ -211,6 +212,12 @@ incompatible fingerprint cannot serve as the other arm. Keep precision-loss
 units and the latest user-approved task threshold in the experiment contract.
 
 ## Failure edges and non-drift scheduling
+
+Before choosing the next action, apply
+[root-cause classification and repair decisions](failure-root-cause-and-next-action.md).
+Environment/scheduling, adaptation, reference/test, measured method/configuration
+limits and unknown causes require different next experiments. A proved code
+adaptation problem is repaired, not promoted to paper-wide no-go.
 
 - P0/P1 unknown: acquire specific source/path evidence. Unsupported means
   inconclusive for that scope, not "the paper has no benefit."

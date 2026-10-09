@@ -1,0 +1,43 @@
+schema: mst-transformation-case/v1
+id: ascend-failure-next-action-20261009
+practice_source: "Qwen3.6 paper portfolio: original0227 timeout, FULLv7/v9 fixture defects, disjoint readiness"
+scope: "Maintainer decisions only; no NPU/model/performance authority"
+lessons_ingested:
+  - destination: ".agents/skills/ascend-inference-tuning-loop/references/failure-root-cause-and-next-action.md"
+    trigger: "Any failed preparation, numerical, model, performance or task stage"
+    changed_action: "Classify causal proof before repair or successor selection; do not reject a paper from invalid verification"
+    verification: "Review the five decision fixtures below and actual entry regression evidence"
+  - destination: ".agents/skills/ascend-inference-tuning-loop/SKILL.md"
+    trigger: "Preparing or dispatching a multi-paper successor"
+    changed_action: "Distinguish authored, software-checked, same-image-checked, numerical-checked and matched-model-ready stages"
+    verification: "Actual producer/consumer CLI compatibility, source closure, budget and new output root"
+decision_fixtures:
+  - input: "Actual child timeout;76/128 cases passed; no final report"
+    expected_class: ENVIRONMENT_OR_SCHEDULING
+    next_action: "New source-bound cost-balanced schedule; preserve full failed original and strict complete128 gate"
+    forbidden: "Paper no-go or partial aggregate PASS"
+  - input: "Production duplicate model_ready keyword proved by actual suite"
+    expected_class: ADAPTATION_IMPLEMENTATION
+    next_action: "Repair the call; add reproducing/negative regression; actual entry rerun then NPU"
+    forbidden: "Abandon method without repairing proved seam"
+  - input: "Fixture bypasses begin and omits mixed_fa; seq_lens is unsliceable"
+    expected_class: REFERENCE_OR_TEST
+    next_action: "Repair against deployed semantics; retain first failure; rerun entire actual suite"
+    forbidden: "Loosen production correctness or claim first repair passed"
+  - input: "Mechanism/NPU validity proved; identical whole-model arms have no speedup"
+    expected_class: METHOD_CONFIGURATION_LIMIT
+    next_action: "Paper-specific redesign or close only the measured configuration"
+    forbidden: "All environments or paper-wide impossibility claim"
+  - input: "First fault saved; official/native/control evidence missing"
+    expected_class: UNKNOWN_CAUSE
+    next_action: "Smallest same-input discriminating diagnostic or acquire original artifact"
+    forbidden: "Forced implementation-versus-method verdict"
+validation_commands:
+  - "./scripts/validate-mst.sh"
+  - "git diff --check"
+  - "Manual decision-fixture review against failure-root-cause-and-next-action.md"
+actual_verification:
+  full_v9_main02e9: "140 tests passed; native/model/paired/task still pending"
+  disjoint_packet_main02fc: "34 tests, compile, three default-OFF CLIs, source50 audit passed"
+  canonical_main0302: "Exact unchanged source50 plus34 actual tests passed"
+  no_new_accepted_non_hypic_technique: true

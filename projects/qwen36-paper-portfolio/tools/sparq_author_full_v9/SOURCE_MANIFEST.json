@@ -52,7 +52,7 @@
     "ann_model_state.py": "d17177baeb86dae5b24e663bbe7a3ff628b0a3769000da57c528fbfe2acd3560",
     "ann_model_oracle.py": "1b8a84ca556db105ac3b35049deb7c97287797a53750ed9e0078a2e69e04f024",
     "ann_fa_consumer.py": "77650c542c10cc4049c4e4c7b26723c21c9e468077dd9ce2845f77391f3d6101",
-    "test_ann_aggregate.py": "35c12de1d57bece9320c2ea57b9bd982bd587642f5a262226a45cc70e7f42909",
+    "test_ann_aggregate.py": "2593c2d8c74e489f1bc9969762a9f5d1d40d2320fc5590060073866e5c37b710",
     "entry.py": "e8dfd9cf45a3405f28812b98484e4cb3342c979507d2b9b2c2f27c77e59c4a95",
     "component_handoff.py": "3cc6a3eac12b8f9f87d55246eb2f8db2b655e5d406623ab5404c12ba0018cf41",
     "test_component_handoff.py": "b360322bc1ebd6bc2aa2b698b8be4ffeadeed1912d2596edcca8c92ba030833a",
@@ -322,6 +322,10 @@
     "operation": "exec-00000000000002a9",
     "scope": "MAIN actual v7 119 software; 2FAIL/4ERROR; no model/NPU grant",
     "original_unchanged": true,
-    "v8_status": "UNRUN source-only; not corrected retroactively"
+    "v8_status": "UNRUN source-only; not corrected retroactively",
+    "v9_first_operation": "exec-00000000000002d7",
+    "v9_first_manifest_sha256": "cb475394c2c0fe5181e74789fdfdf739d73b4e70fc117224c3008e56277fc3ca",
+    "v9_first_scope": "140 software tests; 4 fixture errors; first failed source retained at ef3b1c075bc2b52b8fd2a2b3e116527a6faa5b53",
+    "v9_fixture_repair": "Initialize production begin-owned mixed_fa in bypass fixture; use slice-capable real-geometry host-length spy. Critical runtime math and gates unchanged. New source definition, never relabel first failure."
   }
 }

@@ -90,6 +90,10 @@ whole-model performance and final task accuracy. Keep failed, inconclusive,
 rejected and accepted scopes distinct and preserve an auditable handoff.
 At each stage, align the next short-term action with the fixed medium/long-term
 goal. This is mandatory for paper probes, not a substitute for actual tests.
+After a failed gate, also apply
+[root-cause classification and evidence-selected repair](../ascend-inference-tuning-loop/references/failure-root-cause-and-next-action.md).
+Repair proved adaptation/test defects before judging the paper. Record unknown
+causes explicitly; a timebox closes only the unverified implementation scope.
 
 ## Current repository guidance
 

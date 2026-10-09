@@ -1,0 +1,1176 @@
+{
+  "schema": "sparq.disjoint4-source/v1",
+  "ready": false,
+  "files": {
+    "shard_contract.py": "d9480f062eb404adba107f27ac1aae5484eed32c54d006d7fbf2d1a3d418c549",
+    "shard_rows.py": "ee64efa0fbd9cd654657200fb6671d9848ab8939a72b39f27fd0fbd9da04efc3",
+    "shard_proof.py": "dd505c08d3c4fa92275fc3b243931ad70995a64e5490132ee419fce195e93d43",
+    "shard_numeric.py": "d7a4212ad81c71710118196d5d8f24c915affbcbc061033666d955d63e9d8559",
+    "shard_host.py": "268c52c554ace4f2aa836da8e7364911535357bcf41d50755e19b66a5e698de2",
+    "shard_consume.py": "c9718eea84a71c665e47ca0046c961f441f290daf47d8dfb304092b1d795f527",
+    "test_shards.py": "0c6b256951134d3cbd00c7f423196cbf7ad02fed9797a61619335aad0a7869b1"
+  },
+  "native_source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json",
+    "sha256": "eb7ed908879c6bdea7fab670bcf83e570a7439045e2d8e5c4535c6a41611f528"
+  },
+  "native_files": {
+    "numeric_gate.py": "083613f52eb57013fa31801792c0871d89866dedf9c7801d3b79982b98a2c13d",
+    "receipt.py": "689f7c4fab787af26a09d75fb193bde952790ebfb6931c9aba52cb9a7f3be9e7",
+    "consume_numeric.py": "d670f4aabc53ac22d1a020501487e6274cc5d2ce7e2e01b65800250216a8cd13",
+    "preflight.py": "3a5497a8ec797f5b80caa98c17d80dc44116fafb14bbc031f428a1b5759c7512",
+    "test_contract.py": "fa4eb84da738502e32ca8926a9ddec885db38d96e9a72020f7d7a05346af39fd",
+    "test_launch_linkage.py": "8a52312b141a5fd01d7b5eb8c68271ba26f3e67f428a4f4403735c7f790ab3b4",
+    "sitecustomize.py": "e8f641a7a5fd1e77e150cfecd0d4ce233236725c1908ad457c258496e0263aed",
+    "original_v4_failed_child.json": "fbbc184b6e606080318dc982b30b86d510ca607bb1ef5f37b7f1421e8f2663c5",
+    "sparq_token_v4/__init__.py": "c2f1c112852a028e489a70f2773e0533561babd72736226be6f2c70e4c4e58a7",
+    "README.md": "178fec1352015f21efd361520dad815a369ba9089672e7faf6d0a13e6014b9e8",
+    "original_terminal.py": "ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1",
+    "READY.md": "4559c53722899f01023e77170671e9d6252424518693d7dfe5d7ae3e3cd6b355",
+    "original_operation_get_ma0e7f_not_found.json": "59d954ea2e39533ed91ca2390baa1e25702634f6edb9997072b0190c0d6d9363",
+    "sparq_token_v4/proof.py": "f06b88e53c2961ab1b4066a939405fda9ac65d09e67df80ccb04cf036df6c006",
+    "sparq_token_v4/oracle.py": "c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f",
+    "host.py": "7bb55de8fe25f07a401bf202b5d3e4517da8116fb02fafcf77acd999b4cebe59",
+    "original_v4_failed_ABI.json": "6831432f7cead82b13d1dffc6dbd2e2b5d714cf37ae7802d6611cf4c22214677",
+    "model_bridge.py": "74400ac82b9f28ce4cbed21faf00f2201307eb43c31b76f8a2851e1eb97bffb9",
+    "original_operation_get_ma0e85.json": "ec6ae5ebcec57d7226b97460ec182920b0817eb96a5da6afaf716af1c86a3eb6",
+    "sparq_token_v4/core.py": "c5ef88f12828597469f7f3ce32a78ca4b4bb31d66c38beba102420d11bb21393",
+    "test_abi.py": "e0dd5828ce08f82862897abc5e023ea19d50a3e6d430ddb1990668f513822637",
+    "precision_oracle.py": "95648bd0b504968349c353660261f70076ea64ad468311a7f9d4b89382ff20d2",
+    "test_precision.py": "087b4594bc6f842533c1d6111c741d98127077fe7d7e04539d7e4f49765aae3c",
+    "contract.py": "b1fdf5714e8a64c63208bb05d46f31fcae2eabf343df3dad7966626e9bd7572a",
+    "literal_author.py": "1468b55c25aa99132d3f7d7dcbd9ead7b0b88c4707d08d999a9754312eb21602",
+    "ann_workspace.py": "3393fbd9552a2ec7fb914b472cb5ec00aa95025de9051433e372fe0b2e92e46e",
+    "independent_oracle.py": "6ed5f73deffc1790f6c6c54806181956248a6042080ca10ead8116abb7e4e945",
+    "test_ann_contract.py": "9ee2c950f09bed9f006c33215653c87bba04568efb6a368d516cf4b6f03ac91e",
+    "matrix.py": "02484f6fecd08548f4eebac5eb39e6552affc4b0fc2c3a8591fff86eac3f56d4",
+    "ann_matrix_consumer.py": "e7e8a7c03992d26cbf9277d3515d570880ccd83e5246b84aa5e69ce3e34b1a87",
+    "cpu_smoke.py": "aefa644f72ec7db1bdd7550bc3d7941f9f092f587d4a2af000211014d292bfa6"
+  },
+  "native_external_pins": {
+    "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
+    "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc",
+    "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20",
+    "/cache/cch/qwen36-adakv-prep-20261007/immutable-source-660/device_op.py": "de6a8547df3ff92bf8666e475be56840005cccb3272452c2d6cac4c3f1ddff47",
+    "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
+    "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/model_runner_v1.py": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-ann-source-20261008-1040-001/ann_attention.py": "2b07afe06ff1dd6627f1a255be585c82a632f7bbdb7bf606f4ff2f8b260b6b74",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-causal-source-20261008-1045-001/sparse_attention.py": "dc24fa18ca67b58dc0b28e8a18deb4728c7d7fdac020a61dd1238d24b5c0e4b1",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-ann-source-20261008-1040-001/SOURCE_RESULT.json": "347852be4a9ef13bb928bc3882ab04d12c5ac7cd78587ee084f4d8f04e17e331",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-causal-source-20261008-1045-001/SOURCE_RESULT.json": "512ef331444a9cc561861edc08c7b9c169c8085d7369a223798e31651b14af27",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+  },
+  "source_count": 50,
+  "allocation": {
+    "schema": "sparq.author-ann-disjoint4-allocation/v1",
+    "cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "full_cases": 128,
+    "steps_per_case": 160,
+    "full_steps": 20480,
+    "original_matrix_sha256": "02484f6fecd08548f4eebac5eb39e6552affc4b0fc2c3a8591fff86eac3f56d4",
+    "cost_model": {
+      "kind": "source-derived-live-query-token-count",
+      "measured_elapsed": false,
+      "formula": "sum160(sum actual per-request length after rotation/step80 reset)",
+      "limitations": "constant capture/cache/serialization and CPU/NPU operation timing not measured; no duration guarantee"
+    },
+    "shards": [
+      {
+        "shard_id": 0,
+        "physical": 4,
+        "logical": 0,
+        "assigned_cases": [
+          {
+            "batch": 1,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b1-graph-mean1-t0",
+            "seed": 49586
+          },
+          {
+            "batch": 1,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b1-graph-mean1-t2",
+            "seed": 49786
+          },
+          {
+            "batch": 2,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b2-graph-mean0-t0",
+            "seed": 49587
+          },
+          {
+            "batch": 2,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b2-graph-mean0-t2",
+            "seed": 49787
+          },
+          {
+            "batch": 3,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b3-eager-mean1-t0",
+            "seed": 49588
+          },
+          {
+            "batch": 3,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b3-graph-mean1-t1",
+            "seed": 49688
+          },
+          {
+            "batch": 4,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b4-eager-mean0-t0",
+            "seed": 49589
+          },
+          {
+            "batch": 4,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b4-graph-mean0-t1",
+            "seed": 49689
+          },
+          {
+            "batch": 5,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b5-graph-mean1-t0",
+            "seed": 49590
+          },
+          {
+            "batch": 5,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b5-graph-mean1-t2",
+            "seed": 49790
+          },
+          {
+            "batch": 6,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b6-graph-mean0-t0",
+            "seed": 49591
+          },
+          {
+            "batch": 6,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b6-graph-mean0-t2",
+            "seed": 49791
+          },
+          {
+            "batch": 7,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b7-eager-mean1-t0",
+            "seed": 49592
+          },
+          {
+            "batch": 7,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b7-graph-mean1-t1",
+            "seed": 49692
+          },
+          {
+            "batch": 8,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b8-eager-mean0-t0",
+            "seed": 49593
+          },
+          {
+            "batch": 8,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b8-graph-mean0-t1",
+            "seed": 49693
+          },
+          {
+            "batch": 9,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b9-graph-mean1-t0",
+            "seed": 49594
+          },
+          {
+            "batch": 9,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b9-graph-mean1-t2",
+            "seed": 49794
+          },
+          {
+            "batch": 10,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b10-graph-mean0-t0",
+            "seed": 49595
+          },
+          {
+            "batch": 10,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b10-graph-mean0-t2",
+            "seed": 49795
+          },
+          {
+            "batch": 11,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b11-eager-mean1-t0",
+            "seed": 49596
+          },
+          {
+            "batch": 11,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b11-graph-mean1-t1",
+            "seed": 49696
+          },
+          {
+            "batch": 12,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b12-eager-mean0-t0",
+            "seed": 49597
+          },
+          {
+            "batch": 12,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b12-graph-mean0-t1",
+            "seed": 49697
+          },
+          {
+            "batch": 13,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b13-graph-mean1-t0",
+            "seed": 49598
+          },
+          {
+            "batch": 13,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b13-graph-mean1-t2",
+            "seed": 49798
+          },
+          {
+            "batch": 14,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b14-graph-mean0-t0",
+            "seed": 49599
+          },
+          {
+            "batch": 14,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b14-graph-mean0-t2",
+            "seed": 49799
+          },
+          {
+            "batch": 15,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b15-eager-mean1-t0",
+            "seed": 49600
+          },
+          {
+            "batch": 15,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b15-graph-mean1-t1",
+            "seed": 49700
+          },
+          {
+            "batch": 16,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b16-eager-mean0-t0",
+            "seed": 49601
+          },
+          {
+            "batch": 16,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b16-graph-mean0-t1",
+            "seed": 49701
+          }
+        ],
+        "assigned_count": 32,
+        "assigned_steps": 5120,
+        "estimated_token_work": 86568960
+      },
+      {
+        "shard_id": 1,
+        "physical": 5,
+        "logical": 0,
+        "assigned_cases": [
+          {
+            "batch": 1,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b1-eager-mean0-t0",
+            "seed": 49586
+          },
+          {
+            "batch": 1,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b1-graph-mean0-t1",
+            "seed": 49686
+          },
+          {
+            "batch": 2,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b2-graph-mean1-t0",
+            "seed": 49587
+          },
+          {
+            "batch": 2,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b2-graph-mean1-t2",
+            "seed": 49787
+          },
+          {
+            "batch": 3,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b3-graph-mean0-t0",
+            "seed": 49588
+          },
+          {
+            "batch": 3,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b3-graph-mean0-t2",
+            "seed": 49788
+          },
+          {
+            "batch": 4,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b4-eager-mean1-t0",
+            "seed": 49589
+          },
+          {
+            "batch": 4,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b4-graph-mean1-t1",
+            "seed": 49689
+          },
+          {
+            "batch": 5,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b5-eager-mean0-t0",
+            "seed": 49590
+          },
+          {
+            "batch": 5,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b5-graph-mean0-t1",
+            "seed": 49690
+          },
+          {
+            "batch": 6,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b6-graph-mean1-t0",
+            "seed": 49591
+          },
+          {
+            "batch": 6,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b6-graph-mean1-t2",
+            "seed": 49791
+          },
+          {
+            "batch": 7,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b7-graph-mean0-t0",
+            "seed": 49592
+          },
+          {
+            "batch": 7,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b7-graph-mean0-t2",
+            "seed": 49792
+          },
+          {
+            "batch": 8,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b8-eager-mean1-t0",
+            "seed": 49593
+          },
+          {
+            "batch": 8,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b8-graph-mean1-t1",
+            "seed": 49693
+          },
+          {
+            "batch": 9,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b9-eager-mean0-t0",
+            "seed": 49594
+          },
+          {
+            "batch": 9,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b9-graph-mean0-t1",
+            "seed": 49694
+          },
+          {
+            "batch": 10,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b10-graph-mean1-t0",
+            "seed": 49595
+          },
+          {
+            "batch": 10,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b10-graph-mean1-t2",
+            "seed": 49795
+          },
+          {
+            "batch": 11,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b11-graph-mean0-t0",
+            "seed": 49596
+          },
+          {
+            "batch": 11,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b11-graph-mean0-t2",
+            "seed": 49796
+          },
+          {
+            "batch": 12,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b12-eager-mean1-t0",
+            "seed": 49597
+          },
+          {
+            "batch": 12,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b12-graph-mean1-t1",
+            "seed": 49697
+          },
+          {
+            "batch": 13,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b13-eager-mean0-t0",
+            "seed": 49598
+          },
+          {
+            "batch": 13,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b13-graph-mean0-t1",
+            "seed": 49698
+          },
+          {
+            "batch": 14,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b14-graph-mean1-t0",
+            "seed": 49599
+          },
+          {
+            "batch": 14,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b14-graph-mean1-t2",
+            "seed": 49799
+          },
+          {
+            "batch": 15,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b15-graph-mean0-t0",
+            "seed": 49600
+          },
+          {
+            "batch": 15,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b15-graph-mean0-t2",
+            "seed": 49800
+          },
+          {
+            "batch": 16,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b16-eager-mean1-t0",
+            "seed": 49601
+          },
+          {
+            "batch": 16,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b16-graph-mean1-t1",
+            "seed": 49701
+          }
+        ],
+        "assigned_count": 32,
+        "assigned_steps": 5120,
+        "estimated_token_work": 86568960
+      },
+      {
+        "shard_id": 2,
+        "physical": 6,
+        "logical": 0,
+        "assigned_cases": [
+          {
+            "batch": 1,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b1-eager-mean1-t0",
+            "seed": 49586
+          },
+          {
+            "batch": 1,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b1-graph-mean1-t1",
+            "seed": 49686
+          },
+          {
+            "batch": 2,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b2-eager-mean0-t0",
+            "seed": 49587
+          },
+          {
+            "batch": 2,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b2-graph-mean0-t1",
+            "seed": 49687
+          },
+          {
+            "batch": 3,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b3-graph-mean1-t0",
+            "seed": 49588
+          },
+          {
+            "batch": 3,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b3-graph-mean1-t2",
+            "seed": 49788
+          },
+          {
+            "batch": 4,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b4-graph-mean0-t0",
+            "seed": 49589
+          },
+          {
+            "batch": 4,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b4-graph-mean0-t2",
+            "seed": 49789
+          },
+          {
+            "batch": 5,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b5-eager-mean1-t0",
+            "seed": 49590
+          },
+          {
+            "batch": 5,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b5-graph-mean1-t1",
+            "seed": 49690
+          },
+          {
+            "batch": 6,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b6-eager-mean0-t0",
+            "seed": 49591
+          },
+          {
+            "batch": 6,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b6-graph-mean0-t1",
+            "seed": 49691
+          },
+          {
+            "batch": 7,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b7-graph-mean1-t0",
+            "seed": 49592
+          },
+          {
+            "batch": 7,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b7-graph-mean1-t2",
+            "seed": 49792
+          },
+          {
+            "batch": 8,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b8-graph-mean0-t0",
+            "seed": 49593
+          },
+          {
+            "batch": 8,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b8-graph-mean0-t2",
+            "seed": 49793
+          },
+          {
+            "batch": 9,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b9-eager-mean1-t0",
+            "seed": 49594
+          },
+          {
+            "batch": 9,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b9-graph-mean1-t1",
+            "seed": 49694
+          },
+          {
+            "batch": 10,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b10-eager-mean0-t0",
+            "seed": 49595
+          },
+          {
+            "batch": 10,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b10-graph-mean0-t1",
+            "seed": 49695
+          },
+          {
+            "batch": 11,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b11-graph-mean1-t0",
+            "seed": 49596
+          },
+          {
+            "batch": 11,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b11-graph-mean1-t2",
+            "seed": 49796
+          },
+          {
+            "batch": 12,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b12-graph-mean0-t0",
+            "seed": 49597
+          },
+          {
+            "batch": 12,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b12-graph-mean0-t2",
+            "seed": 49797
+          },
+          {
+            "batch": 13,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b13-eager-mean1-t0",
+            "seed": 49598
+          },
+          {
+            "batch": 13,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b13-graph-mean1-t1",
+            "seed": 49698
+          },
+          {
+            "batch": 14,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b14-eager-mean0-t0",
+            "seed": 49599
+          },
+          {
+            "batch": 14,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b14-graph-mean0-t1",
+            "seed": 49699
+          },
+          {
+            "batch": 15,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b15-graph-mean1-t0",
+            "seed": 49600
+          },
+          {
+            "batch": 15,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b15-graph-mean1-t2",
+            "seed": 49800
+          },
+          {
+            "batch": 16,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b16-graph-mean0-t0",
+            "seed": 49601
+          },
+          {
+            "batch": 16,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b16-graph-mean0-t2",
+            "seed": 49801
+          }
+        ],
+        "assigned_count": 32,
+        "assigned_steps": 5120,
+        "estimated_token_work": 86568960
+      },
+      {
+        "shard_id": 3,
+        "physical": 7,
+        "logical": 0,
+        "assigned_cases": [
+          {
+            "batch": 1,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b1-graph-mean0-t0",
+            "seed": 49586
+          },
+          {
+            "batch": 1,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b1-graph-mean0-t2",
+            "seed": 49786
+          },
+          {
+            "batch": 2,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b2-eager-mean1-t0",
+            "seed": 49587
+          },
+          {
+            "batch": 2,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b2-graph-mean1-t1",
+            "seed": 49687
+          },
+          {
+            "batch": 3,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b3-eager-mean0-t0",
+            "seed": 49588
+          },
+          {
+            "batch": 3,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b3-graph-mean0-t1",
+            "seed": 49688
+          },
+          {
+            "batch": 4,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b4-graph-mean1-t0",
+            "seed": 49589
+          },
+          {
+            "batch": 4,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b4-graph-mean1-t2",
+            "seed": 49789
+          },
+          {
+            "batch": 5,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b5-graph-mean0-t0",
+            "seed": 49590
+          },
+          {
+            "batch": 5,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b5-graph-mean0-t2",
+            "seed": 49790
+          },
+          {
+            "batch": 6,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b6-eager-mean1-t0",
+            "seed": 49591
+          },
+          {
+            "batch": 6,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b6-graph-mean1-t1",
+            "seed": 49691
+          },
+          {
+            "batch": 7,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b7-eager-mean0-t0",
+            "seed": 49592
+          },
+          {
+            "batch": 7,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b7-graph-mean0-t1",
+            "seed": 49692
+          },
+          {
+            "batch": 8,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b8-graph-mean1-t0",
+            "seed": 49593
+          },
+          {
+            "batch": 8,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b8-graph-mean1-t2",
+            "seed": 49793
+          },
+          {
+            "batch": 9,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b9-graph-mean0-t0",
+            "seed": 49594
+          },
+          {
+            "batch": 9,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b9-graph-mean0-t2",
+            "seed": 49794
+          },
+          {
+            "batch": 10,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b10-eager-mean1-t0",
+            "seed": 49595
+          },
+          {
+            "batch": 10,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b10-graph-mean1-t1",
+            "seed": 49695
+          },
+          {
+            "batch": 11,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b11-eager-mean0-t0",
+            "seed": 49596
+          },
+          {
+            "batch": 11,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b11-graph-mean0-t1",
+            "seed": 49696
+          },
+          {
+            "batch": 12,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b12-graph-mean1-t0",
+            "seed": 49597
+          },
+          {
+            "batch": 12,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b12-graph-mean1-t2",
+            "seed": 49797
+          },
+          {
+            "batch": 13,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b13-graph-mean0-t0",
+            "seed": 49598
+          },
+          {
+            "batch": 13,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 2,
+            "case_id": "b13-graph-mean0-t2",
+            "seed": 49798
+          },
+          {
+            "batch": 14,
+            "mode": "eager",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b14-eager-mean1-t0",
+            "seed": 49599
+          },
+          {
+            "batch": 14,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 1,
+            "case_id": "b14-graph-mean1-t1",
+            "seed": 49699
+          },
+          {
+            "batch": 15,
+            "mode": "eager",
+            "reallocation": false,
+            "trial": 0,
+            "case_id": "b15-eager-mean0-t0",
+            "seed": 49600
+          },
+          {
+            "batch": 15,
+            "mode": "graph",
+            "reallocation": false,
+            "trial": 1,
+            "case_id": "b15-graph-mean0-t1",
+            "seed": 49700
+          },
+          {
+            "batch": 16,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 0,
+            "case_id": "b16-graph-mean1-t0",
+            "seed": 49601
+          },
+          {
+            "batch": 16,
+            "mode": "graph",
+            "reallocation": true,
+            "trial": 2,
+            "case_id": "b16-graph-mean1-t2",
+            "seed": 49801
+          }
+        ],
+        "assigned_count": 32,
+        "assigned_steps": 5120,
+        "estimated_token_work": 86568960
+      }
+    ]
+  },
+  "execution_clock": {
+    "schema": "sparq.user72h-execution-clock/v1",
+    "owner": "sparq-ann-disjoint4-v1",
+    "authorization": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+      "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+    },
+    "repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "repair_cutoff_epoch": 1791615625,
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "total_cutoff_epoch": 1791788425,
+    "original_ba508_status": "FAILED-not-promoted"
+  },
+  "software_test_count": 34,
+  "software_status": "UNRUN_API_ONLY",
+  "native_status": "UNRUN",
+  "model_status": "NOT_AUTHORIZED",
+  "precision_contract": "sparq.author-ann-original-dtype-selector/v4-FP32-compensation-fixed-capacity-per-request-SUM",
+  "original0227": {
+    "status": "FAILED-test-scheduling-budget-timeout",
+    "completed_cases": 76,
+    "completed_steps": 12160,
+    "partial_promoted": false
+  },
+  "critical_math_reused_from_candidate_as_oracle": false,
+  "oracle_source": "6ed5f73deffc1790f6c6c54806181956248a6042080ca10ead8116abb7e4e945",
+  "matrix_sha256": "02484f6fecd08548f4eebac5eb39e6552affc4b0fc2c3a8591fff86eac3f56d4"
+}
