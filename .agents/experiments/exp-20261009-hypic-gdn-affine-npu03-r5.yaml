@@ -1,6 +1,6 @@
 experiment_id: exp-20261009-hypic-gdn-affine-npu03-r5
 owner_workstream: hypic-npu03-cpu-binding-fix-20261007
-stage: planned
+stage: decided
 scope: diagnostic_only
 predecessor: exp-20261009-hypic-gdn-affine-npu03-r4
 predecessor_failure: device init passed; first GDN call lacked _C_ascend operator registration
@@ -28,3 +28,19 @@ owned_container: hypic_gdn_affine_npu03_20261009_r5
 run_command: python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_hypic_gdn_affine_npu_probe.py
 cleanup: stop and remove only exact identity-verified owned container; preserve raw root
 acceptance_boundary: no plugin change, no 127x3 rerun, no paper-level acceptance
+terminal:
+  at_utc: 2026-10-09T23:46:05Z
+  controller_exit_code: 0
+  valid: true
+  physical_npu0_process_seen: true
+  guard_samples: 18
+  guard_failures: 0
+  exact_owned_container_released: true
+  terminal_sha256: 70ad142e7d068aa6637b21022a6d870ebc725e873e3dc375b3a07c8369d669a6
+  result_sha256: 7dd8b6c7c403ccbdad5c93ce5f27d2d88682832462f02e9e9c0cd545476374e3
+  tensors_sha256: 1009faec9d74283d1a1fb28a1a1b97d07db84dae06658fd881f9c579f440264e
+decision: >-
+  Bounded synthetic GDN mechanism probe valid; left composition relative-L2
+  0.001797 versus reverse 0.066829 on one 64-token shape. This neither
+  repairs nor causally explains the frozen r13 quality rejection. Close the
+  isolated-operator route; resume only if a later E2E comparison requires it.

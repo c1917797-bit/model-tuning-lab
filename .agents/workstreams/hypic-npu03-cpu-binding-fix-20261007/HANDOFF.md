@@ -2,6 +2,7 @@
 
 ## 0. Status
 
+- 2026-10-10 verification-route correction: r13 is a completed negative-quality experiment, not an incomplete run. Compare the closer 2026-09-06 same-model TP4 success with the current r13 source/protocol differences; the current plugin differs semantically from the successful `3ad0967` source. The next device test, if admitted, is a small preregistered HYPIC-on source-lineage E2E diagnostic on physical NPU0–3, not another GDN unit probe or a rerun of r13. See `HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md`. r5 isolated GDN was terminal-valid but synthetic and non-causal; its container was released.
 - 2026-10-09 CPU BF16 RoPE screen: FP32-compute/BF16-store and one relative-position rotation both worsen all three sampled cross-anchor comparisons against direct native BF16 K; neither is an admitted repair. See `HYPIC_BF16_ROPE_NUMERICAL_SCREEN_20261009.md`. RoPE causality remains unproven.
 - 2026-10-09 offline reporting/source-map reconciliation: r13's actual
   container bind list, service import path and 32-file Python source digest
@@ -91,13 +92,13 @@ the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 4. Current Action
 
-Do not relaunch frozen r13/r14 quality, matched-performance, Prefill, or
-Decode phases. Replay the terminal r14 diagnostic without changing the r13
-quality rejection; no single variability root cause has been proven.
-The r6 Decode root is terminal and immutable. Replay both profiler audits,
-record the parser-environment lesson, and analyze the trace without treating
-overlapping kernel sums as removable wall time. No CANN/HCCL root cause is
-yet proven. NPU4-7 remain outside this task.
+Do not relaunch frozen r13/r14 quality, matched-performance, Prefill, Decode,
+or isolated GDN phases. Treat r13 as complete negative quality and positive
+performance evidence. First compare the old same-model TP4 success with r13's
+source, cap, concurrency, and cache identity; replay existing raw evidence
+offline. Only then admit a bounded, single-variable source-lineage E2E
+diagnostic under a new contract/root. No CANN/HCCL/GDN quality root cause is
+proven. NPU4–7 remain outside this task.
 
 ## 5. Next Actions
 
