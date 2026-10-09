@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r13_full_baseline_running_no_paired_verdict",
+  "state": "r13_full_candidate_running_no_paired_verdict",
   "execution_state": "in-progress",
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
@@ -35,12 +35,23 @@
     "request_hot_path_gate": "53/57 passed four-worker post-repair proof; gaps 77:2, 79:2, 79:3, 85:2; no paired quality/performance verdict",
     "coverage_report": "HOTPATH_CACHE10R11_TERMINAL_AUDIT.md"
   },
-  "active_attempt": {
+  "r13_baseline_attempt": {
     "campaign": "cache10r13",
     "arm": "no-cache",
     "mode": "full",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r13-full-baseline",
     "controller_operation": "exec-0000000000001a76",
+    "status": "terminal exit 0; independent frozen auditor passed 127 samples/381 scored responses, 230 correct, 48 length-limited, 998 clean guard samples, source attestation and exact owned release",
+    "contract_sha256": "79ef620ab90a1f5925e6155b03b30de3c396ba1cb2e379108ec593f3a4661d23",
+    "arm_result_sha256": "d348af20d07dab5d34dfa3b2fbf68d310f716f1a9e6aecf91e1d467ad63a5449",
+    "audit": "HOTPATH_CACHE10R13_BASELINE_TERMINAL_AUDIT.md"
+  },
+  "active_attempt": {
+    "campaign": "cache10r13",
+    "arm": "hypic-only",
+    "mode": "full",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r13-full-hypic",
+    "controller_operation": "exec-0000000000001bb1",
     "source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
     "contract": "127 LongBench-v2 samples x 3 scored natural-EOS answers, max output 2048, explicit segment boundaries, c8 TP4, physical NPU0-3, 0.85/cache10",
     "isolation_rule": "10-second actual physical NPU0-3 foreign-process guard; any foreign PID or probe error invalidates this arm and releases only the exact owned service",
@@ -49,7 +60,7 @@
   "goal_horizons": {
     "long_term": "Give all 29 exact-main Skills representative real-task acceptance, evidence provenance and replayable regressions; integrate reviewed results to main/remote when authorized.",
     "medium_term": "Close the HYPIC Skill-chain quality, performance and isolation evidence gaps without promoting branch-local or cold-request evidence to a paper-complete claim.",
-    "short_term": "Finish and independently audit the active r13 no-cache 127x3 max-2048 arm; only after clean exact release and actual idle physical NPU0-3 launch the frozen r13 hypic-only arm, then dual audit."
+    "short_term": "Finish and independently audit the active r13 hypic-only 127x3 max-2048 arm, then audit the prospectively frozen deployed and strict hot-path quality conclusions against the terminal no-cache baseline."
   },
   "latest_attempt": {
     "campaign": "cache10r12",
@@ -73,5 +84,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Poll r13 no-cache operation exec-0000000000001a76, not a replacement controller. On terminal, independently inspect all 127 samples/381 scored rows, source attestation, continuous guard and exact owned release. Only then, if physical NPU0-3 and port 8223 are actually idle, launch the frozen r13 hypic-only arm. Keep deployed and strict hot-path estimands separate. Never use NPU4-7 or foreign containers; no main/remote claim until reviewed integration and working authentication."
+  "next_action": "Poll r13 hypic-only operation exec-0000000000001bb1 and its immutable raw root; never restart for slow progress. On terminal, independently audit all 127 samples/381 scored rows, explicit-boundary and four-worker evidence, source attestation, continuous guard and exact owned release. Then run the frozen dual quality audit, keeping deployed and strict hot-path estimands separate. Only after quality gates, run the six serial matched performance phases on actually idle physical NPU0-3. Never use NPU4-7 or foreign containers; no main/remote claim until reviewed integration and working authentication."
 }

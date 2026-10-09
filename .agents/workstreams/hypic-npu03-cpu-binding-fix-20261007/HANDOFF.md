@@ -32,7 +32,7 @@
 - r12 stress: 19/19 samples, 57/57 responses, 52/57 four-worker proof;
   279 clean guard probes and exact release. r11's 79:2/79:3 gaps are hot
   here, but five others missed; HOTPATH_CACHE10R12_TERMINAL_AUDIT.md has no paired verdict.
-- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves one four-worker activation, not paired quality. r13 baseline service has a live bind/source-byte attestation; its terminal audit and treatment are pending. C3 remains open.
+- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves one four-worker activation, not paired quality. r13 baseline independently passed 127x3/source/isolation/release audit; candidate and C3 remain open.
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median
   fell 81.12%, but full HYPIC and 2048-token quality remain open.
@@ -73,8 +73,9 @@ cache10split remains unapproved and must not run.
 
 ## 4. Current Action
 
-r13 no-cache full controller handle `exec-0000000000001a76` launched and
-must be polled, not restarted. r11/r12 remain immutable strict negatives. r12's
+r13 no-cache `exec-0000000000001a76` ended cleanly, and its independent audit
+passed; see HOTPATH_CACHE10R13_BASELINE_TERMINAL_AUDIT.md. r13 hypic-only
+`exec-0000000000001bb1` is running; poll, never restart. r11/r12 remain immutable strict negatives. r12's
 corrected plugin source executed on physical NPU0–3, but five scored
 requests still fell back cold; source-fix causality is not isolated.
 The r13 plan prospectively reports all-request deployed effect and separately
@@ -85,8 +86,8 @@ ID adapter gates 120/120 hot requests. No performance phase ran; C3 is open.
 
 ## 5. Next Actions
 
-1. Preserve r12 negative evidence; do not rerun unchanged bytes. Audit r13
-   baseline terminal receipts before any actual-idle candidate launch.
+1. Preserve r12 negative evidence; do not rerun unchanged bytes. Poll r13
+   candidate; independently audit its terminal receipts, then dual quality.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
 3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
@@ -95,8 +96,7 @@ ID adapter gates 120/120 hot requests. No performance phase ran; C3 is open.
    real foreign PIDs do.
 4. Preserve r9–r12 terminal roots; never relabel their strict failures,
    pair them with a control, reuse r2–r8 roots, or switch to cache10split.
-5. After clean r13 baseline release, launch r13 candidate only on idle
-   NPU0–3, then dual audit. If complete, follow
+5. After r13 candidate terminal audit and dual quality, if gates pass follow
    HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; its six phases separately
    audit deployed effect and strict per-request proof, plus isolation/release.
 6. For each main Skill, retain exact main blob, real task, evidence hash,
