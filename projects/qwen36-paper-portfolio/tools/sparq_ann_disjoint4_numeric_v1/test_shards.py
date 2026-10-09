@@ -1,7 +1,7 @@
 """SOFTWARE only: real allocation/header/inspector/cleanup/create/source seams.
 No synthetic receipt grants numerical/model/throughput authority; no Torch.
 """
-import ast,copy,json,types,unittest
+import ast,copy,json,tempfile,types,unittest
 from pathlib import Path
 from unittest import mock
 import shard_contract as sc
@@ -232,4 +232,72 @@ class ArtifactMountClosure(unittest.TestCase):
   with mock.patch.object(Path,"read_text",return_value=row):
    with self.assertRaises(ValueError):host.artifact_audit(self.ROOT,[dict(self.ABI,sha256="0"*64)])
    with self.assertRaises(ValueError):host.artifact_audit(self.ROOT,[dict(self.ABI,path=str(self.ROOT/"NEVER_CREATED.json"))])
+class FirstFaultCapture(unittest.TestCase):
+ """Real canonical helper/receipt IO; metadata only, never NPU acceptance."""
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory(prefix="sparq-canonical-first-fault-")
+  self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
+  self.c,_=SourceSeams().native()
+  self.co=types.SimpleNamespace(out=self.root,packet_source={"path":"/fixture/packet.json","sha256":"a"*64},
+   source=sc.BASE_SOURCE,secondary=[])
+ def missing(self):
+  try:(self.root/"absent"/"actual-missing.txt").read_text()
+  except FileNotFoundError as error:return error
+  self.fail("actual missing file must fail")
+ def capture(self,error):
+  ref=host.record_first_fault(self.co,self.c,error)
+  return ref,self.c.load(ref)
+ def actual_handler(self,error):
+  outer=next(n for n in next(n for n in ast.parse((sc.ROOT/"shard_host.py").read_text()).body
+   if isinstance(n,ast.FunctionDef) and n.name=="execute").body if isinstance(n,ast.Try))
+  handler=next(n for n in outer.handlers if n.name=="error")
+  ns=dict(error=error,co=self.co,c=self.c,record_first_fault=host.record_first_fault)
+  exec(compile(ast.Module(body=handler.body,type_ignores=[]),"<actual-canonical-first-catch>","exec"),ns)
+  return outer,ns
+ def test_actual_missing_filename_errno_and_trace(self):
+  error=self.missing();ref,row=self.capture(error)
+  self.assertEqual((row["errno"],row["filename"],row["message"]),(2,error.filename,str(error)))
+  self.assertEqual(row["primary_error"],repr(error));self.assertIn("FileNotFoundError",row["traceback"])
+  self.assertIn("actual-missing.txt",row["traceback"]);self.assertFalse(row["traceback_truncated"])
+ def test_actual_atomic_receipt_and_source_pid_binding(self):
+  ref,row=self.capture(self.missing())
+  self.assertEqual(ref["sha256"],self.c.sha(self.root/"FIRST_FAULT.json"))
+  self.assertEqual(row["packet_source"],self.co.packet_source);self.assertEqual(row["native_source"],sc.BASE_SOURCE)
+  self.assertEqual(row["host_pid"],host.os.getpid());self.assertGreater(row["observed_unix_ns"],0)
+ def test_actual_catch_preserves_primary_before_cleanup(self):
+  error=self.missing();outer,ns=self.actual_handler(error)
+  self.assertIs(ns["primary"],error);self.assertIsNotNone(ns["first_fault"])
+  self.assertEqual([n.targets[0].id for n in next(n for n in outer.handlers if n.name=="error").body
+   if isinstance(n,ast.Assign)],["primary","first_fault"])
+  self.assertTrue(outer.finalbody)
+  self.assertIn("if primary is not None:raise primary",(sc.ROOT/"shard_host.py").read_text())
+ def test_real_existing_fault_write_fail_preserves_primary(self):
+  (self.root/"FIRST_FAULT.json").write_bytes(b"retain original fault")
+  error=self.missing();_,ns=self.actual_handler(error)
+  self.assertIs(ns["primary"],error);self.assertIsNone(ns["first_fault"])
+  self.assertEqual((self.root/"FIRST_FAULT.json").read_bytes(),b"retain original fault")
+  self.assertEqual(len(self.co.secondary),1);self.assertIn("FileExistsError",self.co.secondary[0])
+ def test_real_missing_parent_capture_failure_is_secondary(self):
+  self.co.out=self.root/"missing-parent";error=self.missing()
+  _,ns=self.actual_handler(error);self.assertIs(ns["primary"],error);self.assertIsNone(ns["first_fault"])
+  self.assertEqual(len(self.co.secondary),1);self.assertIn("first-fault capture:",self.co.secondary[0])
+ def test_generic_error_does_not_invent_filename(self):
+  _,row=self.capture(ValueError("explicit primary"))
+  self.assertIsNone(row["errno"]);self.assertIsNone(row["filename"]);self.assertIsNone(row["filename2"])
+  self.assertEqual(row["exception_type"],"builtins.ValueError")
+ def test_second_filename_and_bytes_roundtrip(self):
+  error=FileNotFoundError(2,"rename-shaped",b"/missing-\xff",None,b"/destination-\xfe")
+  _,row=self.capture(error)
+  self.assertEqual(host.os.fsencode(row["filename"]),error.filename)
+  self.assertEqual(host.os.fsencode(row["filename2"]),error.filename2)
+ def test_trace_bound_is_explicit(self):
+  _,row=self.capture(ValueError("z"*70000))
+  self.assertTrue(row["traceback_truncated"]);self.assertEqual(len(row["traceback"]),65536)
+ def test_exception_cause_chain_retained(self):
+  try:
+   try:raise ValueError("independent original cause")
+   except ValueError as cause:raise FileNotFoundError(2,"outer error","/missing-chain") from cause
+  except FileNotFoundError as error:
+   _,row=self.capture(error)
+   self.assertIn("independent original cause",row["traceback"]);self.assertIn("direct cause",row["traceback"])
 if __name__=="__main__":unittest.main()

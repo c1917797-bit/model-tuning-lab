@@ -2,7 +2,7 @@
 Frozen native matrix/oracle bodies are not patched/import-replaced. Default OFF.
 No predecessor partial results count toward new128; no cross-paper concurrency.
 """
-import argparse,hashlib,json,os,re,resource,shutil,stat,subprocess,sys,time
+import argparse,hashlib,json,os,re,resource,shutil,stat,subprocess,sys,time,traceback
 from datetime import datetime,timezone
 from pathlib import Path
 import shard_contract as sc
@@ -233,6 +233,21 @@ class Joint:
     proof["complete_observation"]=ref
     (ctl.canary_proofs if ctl.child_label=="canary" else ctl.gate_proofs).append(proof)
   return proofs_by.get(getattr(caller,"card",None),[]),ref
+def record_first_fault(co,c,error):
+ """Diagnostics only: preserve primary; capture failure never blocks cleanup."""
+ try:
+  trace="".join(traceback.format_exception(type(error),error,error.__traceback__))
+  row=dict(schema="sparq.disjoint4-first-fault/v1",observed_unix_ns=time.time_ns(),
+   host_pid=os.getpid(),packet_source=co.packet_source,native_source=co.source,
+   exception_type=type(error).__module__+"."+type(error).__qualname__,
+   primary_error=repr(error),message=str(error),errno=getattr(error,"errno",None),
+   filename=os.fsdecode(error.filename) if getattr(error,"filename",None) is not None else None,
+   filename2=os.fsdecode(error.filename2) if getattr(error,"filename2",None) is not None else None,
+   traceback=trace[:65536],traceback_truncated=len(trace)>65536)
+  return c.write_new(co.out/"FIRST_FAULT.json",row)
+ except BaseException as capture_error:
+  co.secondary.append("first-fault capture:"+repr(capture_error))
+  return None
 def controller_classes(co):
  nh=co.nh;c=co.c
  class CPU(nh.CPUController):
@@ -339,7 +354,7 @@ def execute(a,own,manifest):
  predecessor=previous_admission(dict(path=str(a.predecessor_result),sha256=a.predecessor_result_sha256),
   dict(path=str(a.predecessor_terminal),sha256=a.predecessor_terminal_sha256),c)
  nh.H.fresh_output(a.output);co=Joint(a,own,manifest,c,nh,source,files);CPU,Card=controller_classes(co)
- primary=None;after=None;cpu_fields=None;packet_cpu=None;initial=None;release=None;parts=[];cpu_cleanup=None
+ primary=None;first_fault=None;after=None;cpu_fields=None;packet_cpu=None;initial=None;release=None;parts=[];cpu_cleanup=None
  process=dict(pid=os.getpid(),argv=actual,stat=Path("/proc/self/stat").read_text(),cgroup=Path("/proc/self/cgroup").read_text(),
   cmdline_sha256=hashlib.sha256(Path("/proc/self/cmdline").read_bytes()).hexdigest())
  try:
@@ -437,6 +452,7 @@ def execute(a,own,manifest):
     actual_npu_python_process_proofs=[dict(p,borrowed_from_canary=False) for p in ctl.gate_proofs]))
  except BaseException as error:
   primary=error
+  first_fault=record_first_fault(co,c,error)
  finally:
   # One shared90-second safety cleanup lane, never four independent renewals.
   co.cleanup_deadline=time.monotonic()+sc.CLEANUP_SECONDS
@@ -476,7 +492,7 @@ def execute(a,own,manifest):
    output_dir=str(co.out),common_created_monotonic=co.created,common_deadline_monotonic=co.deadline,
    phase_seconds=5400,cleanup_seconds=90,phase_elapsed_seconds=elapsed,joint_resource_plan=co.resources_plan,preflight=initial,
    cpu_fields=cpu_fields,cpu_cleanup=cpu_cleanup,parts=parts,cleanup_records=cleanup_records,release=release,
-   primary_error=repr(primary) if primary else None,secondary_errors=co.secondary,numerical_component_checked=bool(success),
+   primary_error=repr(primary) if primary else None,first_fault=first_fault,secondary_errors=co.secondary,numerical_component_checked=bool(success),
    MAIN_original_operation_authority_verified=False,partial_cases_used=0,model_executed=False,
    matched1024_e2e_verified=False,final2048_task_verified=False,ready=False)
   rr=c.write_new(co.out/"RESULT.json",result)
