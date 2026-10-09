@@ -1,0 +1,46 @@
+{
+  "schema": "paper-portfolio.user-time-protocol/v1",
+  "authorization_text": "最多使用三天，完成穿刺",
+  "recorded_at_utc": "2026-10-09T07:00:25Z",
+  "recorded_at_epoch": 1791529225,
+  "total_cutoff_utc": "2026-10-12T07:00:25Z",
+  "total_cutoff_epoch": 1791788425,
+  "first_candidate_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+  "first_candidate_repair_cutoff_epoch": 1791615625,
+  "old_cutoffs_unchanged": true,
+  "old_failures_unchanged": true,
+  "reuse_valid_evidence_not_old_pass_for_new_source": true,
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "delivery": "plugin/monkeypatch",
+  "final_requirements": {
+    "e2e_output_throughput_improvement_percent": 10,
+    "performance_output_tokens": 1024,
+    "report_ttft_and_tpot": true,
+    "final_thinking": false,
+    "final_max_tokens": 2048,
+    "final_eos": "normal",
+    "final_tasks": [
+      "LongBench-v2",
+      "GSM8K"
+    ],
+    "task_loss_latest_user_allowance_percent": 1,
+    "compute_pp_and_relative_separately": true
+  },
+  "current_priorities": [
+    "SparsePrefix source-supported effective-geometry repair: full NPU lifecycle before paired HTTP",
+    "SparQ retained rank-failure CPU diagnosis before any numeric rerun",
+    "official final-task inputs and independent scoring"
+  ],
+  "no_new_accepted_technique": true
+}

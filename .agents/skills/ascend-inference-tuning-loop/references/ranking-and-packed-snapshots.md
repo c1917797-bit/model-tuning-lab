@@ -130,3 +130,32 @@ readiness. Retain original failures and test the successor's whole source-bound
 entry before scarce-card reservation.
 
 [Original170 failures and the next verification boundary](../../../workstreams/qwen36-damp-ascend-20261006/THREAD_ENUMERATION_AND_REGRESSION_LEARNING_20261008.md).
+
+## Scope checks to the real stage and bind actual entry bytes
+
+Trigger: snapshot serializers or cloned, source-pinned child entrypoints fail
+software regressions before device admission. Inspect the executed AST stage
+and every pin field before classifying a test as obsolete. A module-wide count
+may include initialization, payload serialization and independent immutability
+checks; scope it to the actual payload/input comprehension and retain missing,
+duplicate and wrong-scope negatives. Do not change correct runtime semantics
+to satisfy an ambiguous source count.
+
+Conversely, a correct SHA does not repair a stale byte count. SP19's actual318
+suite passed317 but its unchanged ingress regression caught child main bytes
+5391 versus actual5418 with the same correct SHA. That was a real runtime pin
+defect, not a false-positive test. Preserve the frozen failed packet and whole
+original; correct only the evidenced pin in a separately bound successor and
+run the complete entry/consumer checks before allocating devices.
+
+A saved snapshot can narrow a cause without proving it. The Oct9 ba508 CPU
+replay and independent consumer found all eight saved support sets legal,
+normal GQA reductions bitwise consistent, and only one of90702 recomputed live
+scores different by a BF16 rounding step. This does not prove GQA reduction as
+the original cause or original graph pointer lifetime. Next compare the exact
+B8/capacity2304 versus cropped2157 score paths on the same frozen NPU input;
+keep observed-not-a-pass, the original failure and unchanged acceptance gates.
+
+Verification: complete current-source regression and real CLI execution;
+source-bound independent raw/Ref consumption; validate-mst plus diff check.
+Case record: [Oct9 actual diagnostics and entry failure](../../../workstreams/qwen36-damp-ascend-20261006/ACTUAL_DIAGNOSTICS_AND_ENTRY_BINDING_20261009.md).
