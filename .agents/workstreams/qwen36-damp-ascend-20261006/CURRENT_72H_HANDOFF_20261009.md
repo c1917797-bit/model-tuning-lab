@@ -1,5 +1,54 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Latest terminal correction and short-domain evidence — 2026-10-09
+
+0172 is terminal FAILED exit1/69.371s, NOT running; no NPU was created.
+Same660 Devices[] actual ABI/source41 passed. Guest validate_payload rejected
+all n>128: actual017c saved row lengths are
+[2157,2154,2151,2148,2145,39,2163,2160]; row0==2157 is correct, row5==39
+is the actual unsupported probe domain. Independent017b failed-result audit
+completed0; exact CPU71080245 stopped-retained/Devices[]/Pid0/noExec/noOOM.
+Original ba508 native failed60/128 remains failed. Do not run v3 unchanged.
+
+SparQ v4 source-bound short-domain successor is being prepared; software,
+same-image and new NPU observations are UNRUN. MAIN has no current NPU load.
+Readonly0182 completed0 and bound actual660 NPUInputBatch/config snapshots;
+physical4-7 had no compute/AICore0/HBM2861-2866MiB.0-3 not operated.
+Read [actual failure and native-source evidence](SAVED_SHORT_ROW_AND_NATIVE_INPUT_ABI_20261009.md).
+Three preparers continue API-onlyCPU0: SparQ short-domain/FULL, SparsePrefix
+distinct DP/fair common OFFON, Ada-KV actual graph caller.
+SP21 rejected13 targets untouched; exact human permission remains pending.
+Fixed Oct10 first repair/Oct12 portfolio cutoffs unchanged. No accepted
+non-HYPIC E2E/task technique and no new performance/final precision result.
+
+## Latest source repair and actual dispatch — 2026-10-09 10:15 UTC
+
+MAIN fresh016e completed0: exact v2 manifest/9 own sources unchanged, new
+v3 target and output003 absent, current HEADc24d3ac/upstream, eight worktrees,
+physical4-7 no compute PID/AICore0/HBM2860-2866MiB; external declarations
+were not stopped. Ordinary MemAvailable116501728KiB; spent HugeTLB unchanged.
+Only transitive source mount closure changed in separate v3: host/test/software;
+math, numerical gates, original failures and fixed clocks remain unchanged.
+Actual016f completed0/source21 allPASS; actual0170 defaultOFF/help completed0.
+
+Current MAIN original exec-0000000000000172 ACK running, direct exact ma:
+ /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-ba508-fixed-score-shape-npu-20261009-003
+Source v3 MF6535B SHAcac83fd9a5aee56641d045b657f628f0d847658004bb686e75880220ab5eab0b.
+Poll only0172; do not restart from observation timeout or reuse terminal0144.
+This is combined Devices[] CPU prerequisite -> stop-retain -> fresh physical6
+canary -> B8/capacity2304 vs cropped2157 fixed score-prefix observation.
+Actual NPU execution/full diagnostic/cleanup/independent whole consumer are
+still pending at ACK, not NPU numerical/model/E2E/task acceptance.
+Whole900s including90cleanup, guest8GiB/MAIN256MiB/reserve8GiB/summed7CPU17GiB,
+output64MiB. All3 actual agents running API-onlyCPU0 on separate successor seams.
+No accepted non-HYPIC technique; no new performance or final task result.
+
+SP21 full integration retains the actual33 core software pass but is incomplete.
+Safety review rejected new entrypoint additions despite reported absence;
+13 files are not applied. Human exact new-file permission has been requested.
+Do not bypass rejection through exec/copy/another writing mechanism.
+SparQ/Ada preparation and this admitted score diagnostic are unaffected.
+
 ## Latest actual terminal and next preparation — 2026-10-09 09:59 UTC
 
 Original SparQ0144 is now terminal FAILED exit1/17.968s, not running.

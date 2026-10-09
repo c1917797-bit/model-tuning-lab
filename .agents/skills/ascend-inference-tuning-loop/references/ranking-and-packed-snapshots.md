@@ -159,3 +159,18 @@ keep observed-not-a-pass, the original failure and unchanged acceptance gates.
 Verification: complete current-source regression and real CLI execution;
 source-bound independent raw/Ref consumption; validate-mst plus diff check.
 Case record: [Oct9 actual diagnostics and entry failure](../../../workstreams/qwen36-damp-ascend-20261006/ACTUAL_DIAGNOSTICS_AND_ENTRY_BINDING_20261009.md).
+
+## Saved short rows must retain the source's valid-support domain
+
+When a saved full-batch probe fails a combined length predicate, inspect every
+actual row before assigning cause. SparQ0172 rejected all lengths>128 even
+though the captured mixed scene contained a real39-token request; its first
+2157-token row was correct. The native128-slot support already masks invalid
+tails and its matrix uses min(n,128). A separate diagnostic must preserve all
+eight rows, true short support, padding masks and sentinel semantics; do not
+drop the row, invent padded input or weaken tensor/output gates. Cover the
+actual producer and successor consumer in positive and wrong-domain negatives,
+then run the complete same-image prerequisite before taking cards. Original
+failure remains failed; software/ABI success is not NPU/model/E2E authority.
+
+Case: [saved short row and actual input ABI](../../../workstreams/qwen36-damp-ascend-20261006/SAVED_SHORT_ROW_AND_NATIVE_INPUT_ABI_20261009.md).
