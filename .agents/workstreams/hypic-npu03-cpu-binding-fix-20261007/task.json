@@ -919,6 +919,20 @@
         "result_sha256": "378ac76225caea71919ba071adc9fd378a9713b470d5600b6689cb7fbe42e1be",
         "guard_sha256": "d8d14d331c1898ee578bf59f11b6605acee6519845d83682d4f762c6fe08b03d",
         "exact_owned_resources_released": true
+      },
+      {
+        "root_suffix": "r5",
+        "controller_operation": "exec-0000000000000507",
+        "classification": "environmental pre-capture isolation failure",
+        "foreign_physical_npu": 0,
+        "foreign_pid": 3750311,
+        "foreign_container": "Maxon4ick_vllm",
+        "guard_samples": 4,
+        "probe_errors": 0,
+        "result_sha256": "b10005d2848cf4070761a38ebb9edf2b698fc8d1b2ab1fe1cd539f45d9fcc807",
+        "guard_sha256": "c70898e22e29eaf0e77c4a69a9a9ee74c02670738c1422c6d4bb3be3e05bfdf1",
+        "guard_attempt_label_mismatch": "r4 hard-coded label in r5 root; fixed prospectively",
+        "exact_owned_resources_released": true
       }
     ],
     "decode_capture_valid": false,
@@ -934,5 +948,5 @@
     },
     "skill_case_acceptance": "partial-evidence"
   },
-  "next_action": "Do not rerun completed HYPIC phases. Preserve the paired quality and six-phase performance evidence. The Prefill profiler is captured and independently parsed; Decode remains missing after external Maxon4ick_vllm repeatedly entered physical NPU0. A passive monitor also observed two short NPU0 bursts after only 4m37s idle, with owners unverified. Wait for a longer actual idle window, then freeze a new Decode-only root and launch only after fresh direct-route NPU0-3/port admission. Do not repeat Prefill or reinterpret quality. Keep the Skill cases honest and the profiler case partial until real Decode capture and parser audit; validate and push each coherent checkpoint."
+  "next_action": "Do not rerun completed HYPIC phases. Preserve the paired quality and six-phase performance evidence. The Prefill profiler is captured and independently parsed; Decode remains missing after r5 was interrupted by external Maxon4ick_vllm on physical NPU0. r5 is terminal and immutable. Wait for a sufficiently long actual idle window or a user-coordinated window, then preregister a new Decode-only r6 root and launch only after fresh direct-route NPU0-3/port admission. Do not repeat Prefill or reinterpret quality. Keep the Skill cases honest and the profiler case partial until real Decode capture and parser audit; validate and push each coherent checkpoint."
 }

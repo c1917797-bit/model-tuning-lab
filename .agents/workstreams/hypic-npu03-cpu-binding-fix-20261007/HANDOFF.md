@@ -19,15 +19,17 @@
   specifies a version-aware semantic-field gate for future cases; it is not
   yet main/remote truth.
 - Decode is still missing: retry2 guard caught external `Maxon4ick_vllm`
-  PID 3418373 on NPU0 before capture; retry3 preflight found NPU0-3 occupied
-  before container creation; retry4 guard caught the same external container
-  with PID 3541845 on NPU0 before capture. All roots are terminal and
-  immutable, and the exact retry2/retry4 owned resources were released. A
+  PID 3418373 on NPU0 before capture; retry3 preflight found NPU0-3 occupied;
+  retry4 caught PID 3541845, and retry5 caught PID 3750311 from the same
+  external container on NPU0 before capture. All roots are terminal and
+  immutable, and the exact owned resources were released. Retry5 guard's
+  internal attempt label incorrectly says r4; root/contract/hashes prove r5,
+  and the label derivation is fixed prospectively. A
   passive 0-3 process monitor `exec-00000000000004d7` finished without NPU
   mapping. It observed an idle interval from 17:21:34 to 17:26:12 UTC, then
   short NPU0 PIDs 3618350 and 3622213 at 17:26:12 and 17:26:34. Their
-  container identity was not retained by this passive monitor. Use a new root
-  for the next Decode-only attempt after a sufficiently long real idle
+  container identity was not retained by this passive monitor. Use a new r6
+  root for the next Decode-only attempt after a sufficiently long real idle
   interval; do not stop or modify external work.
 - Updated 2026-10-09. Workstream: `work/hypic-npu03-cpu-binding-fix-20261007`; checkout: `/cache/cch/model-tuning-lab-hypic-e2e-20261006`.
 - Retry21 completed the missing HYPIC-only/repeat3 phase on physical NPU0-3.
@@ -52,7 +54,10 @@
   `ascend-cannbot-profiler` has a real, independently parsed Prefill capture
   but remains partial because Decode is missing and the original numeric
   column gate missed. This is not full Skill acceptance.
-- Local branch was 51 commits ahead of upstream with dirty user changes at last check. Preserve them. Remote authentication has not been proven; do not claim push or main integration.
+- The preceding coherent profiler checkpoint was pushed to the workstream
+  branch and independently verified at `820ee0c2d6d67864073f80a140609d96664374f3`.
+  Retry5 follow-up is branch-local until a new reviewed checkpoint is pushed;
+  do not claim main integration.
 - The five-hour delivery window and milestone gates are recorded in `task.json`; immutable detailed outcomes live in `task.json`, `HANDOFF_HISTORY.md`, and the per-attempt audit reports.
 
 ## 1. North Star
@@ -64,7 +69,8 @@ Finish the frozen HYPIC experiment without changing its technical question or ac
 The frozen six-phase HYPIC performance comparison is complete. Preserve its
 separate quality rejection. The immediate missing HYPIC-linked Skill gate is
 the `ascend-cannbot-profiler` Decode capture and independent parse. Use only a
-new immutable root after an actual 0-3 idle window; the Prefill pass is done.
+new immutable r6 root after a sustained actual 0-3 idle window; the Prefill
+pass is done.
 After that, map the evidence into the main-29 acceptance inventory.
 
 ## 3. Recent Progress
@@ -86,10 +92,10 @@ After that, map the evidence into the main-29 acceptance inventory.
 
 ## 4. Current Action
 
-Do not launch another quality or matched-performance phase. The passive
-monitor showed a roughly 4m37s idle interval followed by two NPU0 bursts;
-continue watching for a longer interval, then freeze a new Decode-only
-profiler root. Before any device
+Do not launch another quality or matched-performance phase. Retry5 failed
+before capture because the external `Maxon4ick_vllm` container again entered
+NPU0. Continue watching for a longer idle interval or a coordinated window,
+then freeze a new Decode-only r6 profiler root. Before any device
 action, refresh direct `chicaihong01/ma`, check physical NPU0-3 processes and
 port 8223, and run only while actually idle. Keep the continuous guard.
 Meanwhile replay the completed Prefill audit and validate this branch-local
@@ -119,6 +125,7 @@ python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hotpa
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_cannbot_profiler_case.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
 git diff --check

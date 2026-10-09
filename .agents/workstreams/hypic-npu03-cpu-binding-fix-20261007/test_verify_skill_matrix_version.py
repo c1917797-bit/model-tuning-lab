@@ -26,7 +26,9 @@ class MainVersionBoundaryTests(unittest.TestCase):
         self.assertEqual(report["current_status"], {"V": 11, "P": 14, "N": 4})
         self.assertEqual(set(report["branch_modified_bounded_v"]),
                          EXPECTED_CHANGED_V)
-        self.assertEqual(len(report["branch_modified_main_skill_bodies"]), 9)
+        self.assertEqual(len(report["branch_modified_main_skill_bodies"]), 10)
+        self.assertIn("ascend-cannbot-profiler",
+                      report["branch_modified_main_skill_bodies"])
         self.assertIn("mst-practice-iteration-planning",
                       report["branch_modified_main_skill_bodies"])
         self.assertIn("runtime-monkeypatch-delivery",

@@ -27,7 +27,7 @@ import binding_off_quality as quality  # noqa: E402
 
 
 PINNED_BENCHMARK = Path("/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008/tools/benchmark_shared_prefix.py")
-RAW_ROOT = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r4")
+RAW_ROOT = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r5")
 ARM = "hypic-only"
 PORT = 8223
 MODEL = "qwen36-hypic-e2e-2048"
@@ -364,7 +364,7 @@ def run_phase(phase: str) -> int:
     try:
         name, container_id, _ = create(phase)
         quality.QROOT = RAW_ROOT
-        quality.ATTEMPT = "profiler-hypic-hotcold-20261009-r4"
+        quality.ATTEMPT = RAW_ROOT.name
         guard = quality.ForeignProcessGuard(f"{ARM}-{phase}", {}, owned_container_id=container_id)
         guard.start()
         workers = wait_health(name, guard, out)

@@ -32,6 +32,7 @@
     "preregistered_minimum_47_columns_met": false,
     "prefill_decode_artifact_audit_completed": false,
     "kernel_details_47_columns_verified": false,
+    "decode_r5_foreign_npu0_guard_detected_and_owned_resources_released": true,
     "hccl_root_cause_verified": false
   },
   "evidence": [
@@ -50,6 +51,14 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py",
       "sha256": "26f12cd311bd0c0fcc176458aba3f9803e0a7c5d3147d4bb744f9bfc6febab77"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_RETRY5_AMENDMENT_20261009.md",
+      "sha256": "971aa23588d5e0eceb9fb6c08d516e5d76d8fdffffa2a5b9155a1137f10aee46"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py",
+      "sha256": "c19dc05739de49584a0f72dddf927ad208466b384f6f51c46f8e7c4160444c30"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_SOURCE_MAP_CASE_20261009.md",

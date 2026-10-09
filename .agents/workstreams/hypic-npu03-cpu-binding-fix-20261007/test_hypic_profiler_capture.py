@@ -28,7 +28,7 @@ def test_transformed_spec_is_profiler_only_delta() -> None:
     assert command.count("--profiler-config") == 1
     assert '"profiler":"torch"' in command
     assert '"torch_profiler_with_stack":false' in command
-    assert "/profiler-hypic-hotcold-20261009-r4/decode/profiles" in command
+    assert "/profiler-hypic-hotcold-20261009-r5/decode/profiles" in command
     assert "--additional-config '{\"enable_cpu_binding\":false}'" in command
     assert "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3" in env
     assert any(item.startswith("ASCEND_PROFILER_OUTPUT=") for item in env)
