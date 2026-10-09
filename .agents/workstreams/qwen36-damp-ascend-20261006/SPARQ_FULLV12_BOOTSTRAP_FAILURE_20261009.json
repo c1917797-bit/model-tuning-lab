@@ -1,0 +1,55 @@
+{
+  "schema": "sparq.full-bootstrap-software-stage/v1",
+  "stage": "FAILED_SOFTWARE_NOT_PAPER_NO_GO",
+  "operation_id": "exec-000000000000059d",
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "sha256": "b9d1c8c0d423853e39de52e36a3a7030045745de75b15977693d422a6580307e"
+  },
+  "recoverable_previous_commit": "37b1fea49cec2fea7f61491b22c890d352cc5f28",
+  "actual_exit_code": 1,
+  "duration_ms": 38771,
+  "tests_run": 177,
+  "failures": 1,
+  "errors": 0,
+  "failed_test": "test_component_handoff.SourceInterfaces.test_component_refs_and_fourargument_dispatch_actual_SOURCE",
+  "failure": "Legacy structural test L49 still requires the flat shard import tuple in source_contract after actual bootstrap moved to component_bootstrap. Actual isolated whole128 replay test passed.",
+  "source130_verified": true,
+  "new_actual_entry_checks_passed": [
+    "test_actual_clean_I_whole_component_replay",
+    "test_actual_clean_I_default_OFF",
+    "test_real_complete_producer_to_consumer_workdir",
+    "test_wrong_workdir_hard_rejected",
+    "test_foreign_CID_hard_rejected"
+  ],
+  "npu_rerun": false,
+  "new_model_started": false,
+  "performance_result": null,
+  "task_accuracy_result": null,
+  "classification": "SOURCE_REGRESSION_FIXTURE_MISMATCH",
+  "next_action": "Keep original177 failure and b9 source. Update structural fixture to verify exact delegated bootstrap/order/path/SHA without deleting tests or inserting legacy text; rerun all177. Only then admit same-image/N1/model diagnostic.",
+  "metadata_patch_history": {
+    "original001": "failed backward hunk order; original unchanged by actual0594",
+    "incorrect_MAIN_reassembly": "failed merged newline/header; retained, not applied",
+    "corrected_ascending_patch": "applied after dry-run; actual130/61 SHA audit0599 passed",
+    "delete_manifest": "safety rejected; not bypassed",
+    "safer_manifest_Update": "in-place precise fields; exact final b9 bytes40766 verified; no deletion"
+  },
+  "backup": {
+    "paper": "AdaKV",
+    "operation": "exec-000000000000058d",
+    "tests": 19,
+    "status": "SOFTWARE_ONLY",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-software-main-20261009-015/RESULT.json",
+      "sha256": "da0127c32db5630df057a4b536b722a6faef3e0d76bbc99ca637d2bffcfae568"
+    },
+    "NPU": false
+  },
+  "goals": {
+    "goal": "ACTIVE unmet",
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "no_cutoff_reset": true
+  }
+}

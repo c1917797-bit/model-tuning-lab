@@ -6,12 +6,12 @@
     "common.py": "9eaaa6b8aa3eeb515a1779cd15bd095c784f29077f0aaeb97bf101914a071e99",
     "lifecycle.py": "197ced9fdac7139b04a78cb6f54ea93bb168d0d58b8662a9fda64a565adb7ee2",
     "workspace_budget.py": "945b6408dd6ccbf541a24e24d5e934a2ea6fa802fd269df2406b5c556462b20c",
-    "source_contract.py": "6eb3aad58567a82740d7dce615f0cdceca8bfe90d56cc54c976dfc31a08d9d3d",
+    "source_contract.py": "273065acf4b12caaff7eb2ff5345c00785ad094b691ec36557f73277cc46ffd5",
     "full_graph_pa.py": "67ed22fc02ca80721f1fdd3577381a39629ce27aadd78b52fcfba558aafada24",
     "original_terminal.py": "ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1",
     "sitecustomize.py": "2ce9f1cd7d20a793f105fcaba8a1c7c0169de0963d912b41db569b3068b39705",
     "test_bridge.py": "66962e9197d275e9355b34fc647091e32e16215f72dda04c74c76cfa71c0077d",
-    "source_gate.py": "16141a934330698e051d153e5436ebb52d6204ce2dc39fdaa2ff3476c8d1d84c",
+    "source_gate.py": "cc78016efaef49fa8a15a3f4f1aa81e1b75fdf1e2d2260d228fd9e183ff98024",
     "actual_replay.py": "7fbdf8004c1d55d12ce09bed1cb457b0796b71a8c159dafad2dcca543e053800",
     "full_entry.py": "ac4836af4085d1e8dd3140d7b0da7a59f73ba9f7d095b7b68c010e4dd09ca485",
     "consume_full.py": "299f9c708363abc230458477702ba487df317bfbf265dd79c87d42bb5f9c9e1e",
@@ -31,17 +31,17 @@
     "gdn_source.py": "4fd07e9ca0d76c99fc3fcede9d786a4a625e42819d0c02417aec37a23f77f3fc",
     "test_gdn_metadata.py": "6a7075998550b990c97d5cc827b5f3d6528aa1f17f78ab3a3d45a1c2fcad97ab",
     "fa_model_numeric.py": "f9a9b68c0fa1a84e3153b417106400bc425950fcce8de2cb9ce4edb975adb707",
-    "full_cpu_preflight.py": "8624d9bf74a41dfa3426f7f300b6681098e363d84268175bdef0d54db4942a6b",
+    "full_cpu_preflight.py": "a0986c74790da7d2bb87404c5edf034955a1353894a7523699df65b0e3ec1fdc",
     "gdn_model_observer.py": "80278d33a86bbbc4697ea81f49ff1fd904728e65b5ee64b8ccacad672c1fe0f0",
     "allocator_coverage.py": "48565cbc2a5710abad4263c00b2b7edf47bb3daa2da754f42762986ba7daea37",
-    "consume_model.py": "64d0cb400cf5058c74a3c287474036fd2b8ae682dabec76bc8adc490110a0319",
+    "consume_model.py": "d4c31bd69a71c0c66b301c06fdf81e17ff5c2689bdc3a376ab20163c10ef6064",
     "model_cpu_check.py": "3adb13754ee21e0a3441cefd9a4880ee4897bfad674297f441acc68092d0ad45",
     "model_workload.py": "d5b047b3510d0992869635dfcedeb089f691f92a39876bea982f33291c0d4d09",
     "test_model_workload.py": "afb5a81203bbc02d89b77a70137d32ea6ce4bbf5ffe38153c4cd8945954a7beb",
     "formal_stats.py": "61e8a431a4944fd0772a09494a8d21fc9ed6cfa6091b975d43454a02e927d035",
     "test_formal_stats.py": "9c2c52f99e4d957733d1e27e44915098f11f70c5d440787e092bf954e80f7998",
     "wire.py": "17915e7ac507e136ae65683a878cf9f66e6437ad1a99646135d1794061bd8846",
-    "consume_service.py": "fc7bf69aca93fa82665cebb18d0ac28fa0ecef915c4179907380556ba337f59b",
+    "consume_service.py": "c6514d44410be8e4dfa528fcf1c67cee7f33728eeab595465850ac0ff6f0df9a",
     "test_wire.py": "1f0b58ea690987135dccf0ad3e362cec5b6876240300ae0da2c394b6e4698582",
     "allocation_contract.py": "337f23efba8e0b1266bae97917a3674ebe6e9e084f4f40543085175da385b455",
     "long_workspace.py": "4a53f2e0dbc949f5ab1ad837ec1d2bafc7eedf8b3ea157e3d01030d0a5dc2ffd",
@@ -60,7 +60,9 @@
     "long_independent_oracle.py": "21fe6d9e7c78acdecb23ffe42196e38c8cfd6d55c2c08bb45f2826bf40d74605",
     "gdn_stream.py": "41bfd90bb5df44c4950063bfd22330d42be7314c9c619713e72f949907945b9e",
     "identity_bridge.py": "7f156e5a10d61d11d253d11e7dfb3cf780bb5a11746e1ee99912ab209832160e",
-    "test_identity_n1.py": "5b0a2c1805b045a72a862f94f1aa8db0b58ed4e4e9b4183ab5ca81832d045e4f"
+    "test_identity_n1.py": "5b0a2c1805b045a72a862f94f1aa8db0b58ed4e4e9b4183ab5ca81832d045e4f",
+    "component_bootstrap.py": "2437a856201fee78576dfde68218595a6f58fd4bfcf2f77e88dc7fa5bc20b7c4",
+    "test_component_bootstrap.py": "6e45f871543433eda1ef04b507a6e3eeaaf94be63290f1312830b273a4547dc7"
   },
   "source_pins": {
     "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
@@ -167,7 +169,7 @@
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc",
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
   },
-  "source_count": 128,
+  "source_count": 130,
   "complete_native_component_required": "Exact producer2f/native42 eb7 with actual new reader77f7 explicit consume_successor replay; original c971 consumer FAILED stays immutable. Entire128/20480/four original children+whole0452+exact cleanup all original fields unchanged.",
   "tests": {
     "status": "UNRUN_API_ONLY",
@@ -183,17 +185,18 @@
       "test_wire",
       "test_component_handoff",
       "test_fp32_model_adapter",
-      "test_identity_n1"
+      "test_identity_n1",
+      "test_component_bootstrap"
     ],
-    "static_declared_tests": 164,
+    "static_declared_tests": 177,
     "actual_collected_test_count": null,
     "exit_code": null,
     "stdout": null,
     "stderr": null,
     "remote_exec_CPU": 0,
-    "method_declarations": 161,
+    "method_declarations": 174,
     "inherited_unittest_cases": 3,
-    "inherited_case_source": "CurrentBatchGeometryBeforeOracle inherits all3 ActualANNEndBatchBinding cases; preserves original146 suite plus18 IdentityN1, actual collection UNRUN"
+    "inherited_case_source": "Original164 preserved; new13 source/bootstrap/exact inspect consumer differences. Actual collection pending."
   },
   "actual_model": "UNRUN; complete disjoint4 component plus initialized geometry/budget/all4all64 full lifecycle and oracle required",
   "performance": {
@@ -228,12 +231,17 @@
       "sha256": "355a83ce27d344ef2f596071cdce30bfd57bcbf512bd3e9f205d198f370dc798"
     },
     "frozen_predecessor_unchanged": true,
-    "source_scope": "Actual completion assignment tap/common randomization-OFF both arms plus CPU static closure -> true admitted N1 runtime imports before model allocation. Exact current numeric source only; no union, math/budget/coverage/clock change.",
+    "source_scope": "Actual completion assignment tap/common randomization-OFF both arms plus CPU static closure -> true admitted N1 runtime imports before model allocation. Exact current numeric source only; no union, math/budget/coverage/clock change. v12 initializes exact original sc.native before shard_rows; rejects foreign caches; actual HOST and Devices[] guest complete reader replay; consumer WorkingDir matches actual unchanged producer constant.",
     "actual_predecessor": {
       "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v10/SOURCE_MANIFEST.json",
       "sha256": "808d47842a9d650e24bbf2cbd8bafcb39245de45fa6188a06bcd7361bba647fb"
     },
-    "historical_source_is_not_current_runtime_authority": true
+    "historical_source_is_not_current_runtime_authority": true,
+    "experimental_source_version": "FULLv12-component-bootstrap-same-canonical-path",
+    "predecessor_source_preserved": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/sparq-full-assignment-n1-seam-v2-source-recovery-user72h-20261009/SOURCE_MANIFEST.json",
+      "sha256": "b0f642474118cbf6df7c8b325e6f2a167e74d6facc6c50031301ee5a0f1260fc"
+    }
   },
   "fp32_adapter": {
     "persistent_output_alpha_weights": "FP32",
@@ -430,5 +438,35 @@
     "source_fixture_adopted_only": true,
     "full146_PASS_not_inherited": true,
     "additional_successor_fixture_delta": "Only existing ActualWrappedDummyProfile configuration-observation flag spy; no extra runtime/algorithm stub or old test removal; actual frontend/N1/all4 flag always real"
+  },
+  "v12_component_bootstrap": {
+    "source_first_failure": {
+      "operation": "exec-0000000000000550",
+      "classification": "adapter dependency order",
+      "error": "ModuleNotFoundError: contract",
+      "model_or_container_created": false,
+      "original_unchanged": true
+    },
+    "source_next_edge": {
+      "classification": "producer/consumer WorkingDir mismatch",
+      "actual_producer": "service_contract.ROOT",
+      "old_consumer": "source_contract.ROOT",
+      "not_0550_first_failure": true
+    },
+    "new_source_files": 2,
+    "changed_source_files": 5,
+    "unchanged_source_files": 54,
+    "source_count": 130,
+    "import_order": "exact shard_contract.own_identity -> native()/receipt.source_identity -> shard_rows/shard_proof/shard_host -> unchanged77f7.consume_successor",
+    "cache_policy": "exact path+SHA, no module deletion/rebinding/stub. Identical full/native original_terminal bytes permit either owner.",
+    "same_image_gate": "existing full_cpu_preflight repeats complete original reader and records source-bound module origins. Existing consumer mandates this field.",
+    "runtime_gate_removed": false,
+    "all128_gate_unchanged": true,
+    "old_b0_PASS_not_claimed": true,
+    "software177": "UNRUN",
+    "same_image": "UNRUN",
+    "N1": "UNRUN",
+    "model": "UNRUN",
+    "paired": "UNRUN"
   }
 }

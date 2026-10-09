@@ -39,6 +39,9 @@ def cpu_stage(ref,source,files):
   identity_bridge.static_probe(probe,source,files),
   "actual CPU Devices[] startup/source import closure, not nominal name")
  gdn_stream.validate_probe(probe,files)
+ import component_bootstrap
+ actual=c.obj(source)["disjoint_component_handoff"]["actual_native_component_pass_evidence"]
+ component_bootstrap.verify_probe(c,probe,source,dict(path=actual["path"],sha256=actual["sha256"]))
  args=[str(c.ROOT/"full_cpu_preflight.py"),"--execute","--source-manifest-sha256",source["sha256"],"--output",stage["probe"]["path"]]
  child=command(stage["original_child"],service.docker_argv(stage["container_id"],args))
  marks=[l for l in child["stdout"].splitlines() if l.startswith("MAIN_SPARQ_FULL_CPU ")]

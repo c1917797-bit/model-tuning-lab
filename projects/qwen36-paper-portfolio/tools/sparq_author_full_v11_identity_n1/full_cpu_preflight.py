@@ -34,6 +34,11 @@ def main():
    numpy=dict(version=numpy.__version__,file=c.bound(Path(numpy.__file__).resolve(),c.sha(Path(numpy.__file__).resolve()))),
    state_arithmetic_executed=False,actual_initialized_shape_and_joint_budget_pending=True)
   observed["deployed_GDN_sources"]=gdn_source.sources()
+  import component_bootstrap
+  mf=c.obj(source);component_ref=mf["disjoint_component_handoff"]["actual_native_component_pass_evidence"]
+  component_ref=dict(path=component_ref["path"],sha256=component_ref["sha256"])
+  replayed=c.component(component_ref,replay=True)
+  observed["component_bootstrap"]=component_bootstrap.summary(c,source,component_ref,replayed)
   c.require(not any(k=="torch" or k.startswith(("torch.","torch_npu","vllm")) for k in sys.modules),
    "CPU static probe must not import hardware-dependent runtime")
   observed["status"]="source-static-checked"

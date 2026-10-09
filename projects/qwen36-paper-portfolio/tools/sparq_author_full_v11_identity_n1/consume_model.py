@@ -126,6 +126,7 @@ def consume_trace(index_ref,source,component):
   conditional_output_threshold=dict(relative_rms=.005,cosine=.99998),mean_configuration=False,online_independent_full_qKV_literal_FP64=True,postmortem_full_qKV_replay=False,passed=True,
   performance_passed=False,task_quality_passed=False,model_ready=False)
 def stopped(ref,cid,owned_ref,source,files,cpu,arm="candidate"):
+ from service_contract import ROOT as HOST_WORKDIR
  raw=c.obj(ref);rows=json.loads(raw["stdout"]);e=c.obj(owned_ref)
  c.require(raw["exit_code"]==0 and raw["requested_argv"]==["/usr/bin/docker","inspect",cid] and len(rows)==1,
   "actual original exact Docker inspect receipt")
@@ -139,7 +140,7 @@ def stopped(ref,cid,owned_ref,source,files,cpu,arm="candidate"):
   "model-tuning-lab.arm":e["arm"],"model-tuning-lab.source-manifest-sha256":source["sha256"],
   "model-tuning-lab.controller-sha256":files["host_run.py"]}
  c.require(all(cfg["Labels"].get(k)==v for k,v in expected_labels.items()) and cfg["Image"]==e["image"] and
-  cfg["Entrypoint"]==["/bin/bash"] and cfg["Cmd"]==["-c","exec /bin/sleep infinity"] and cfg["WorkingDir"]==str(c.ROOT),
+  cfg["Entrypoint"]==["/bin/bash"] and cfg["Cmd"]==["-c","exec /bin/sleep infinity"] and cfg["WorkingDir"]==str(HOST_WORKDIR),
   "actual original owned labels and init, never arbitrary matching CID")
  mem=(8 if cpu else 64)*1024**3;cores=1 if cpu else 4
  c.require(h["Privileged"] is False and h["Memory"]==h["MemorySwap"]==mem and h["NanoCpus"]==cores*10**9 and
@@ -192,6 +193,8 @@ def consume(host_ref,terminal_ref,source_ref,component_ref):
   cp["source"]==source and cp["files"]==files and identity_bridge.static_probe(cp,source,files),
   "actual Devices[] same-source FULL import closure stopped before TP4")
  gdn_stream.validate_probe(cp,files)
+ import component_bootstrap
+ component_bootstrap.verify_probe(c,cp,source,component_ref)
  prechild=c.obj(cpu["original_child"])
  import service_contract as service
  preargs=[str(c.ROOT/"full_cpu_preflight.py"),"--execute","--source-manifest-sha256",source["sha256"],"--output",cpu["probe"]["path"]]

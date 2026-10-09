@@ -2,7 +2,7 @@
 import argparse,json,os,sys,unittest
 from pathlib import Path
 import source_contract as c
-TESTS=("test_allocation","test_no_pa","test_ann_aggregate","test_replay","test_gdn_metadata","test_gdn_state","test_model_workload","test_formal_stats","test_wire","test_component_handoff","test_fp32_model_adapter","test_identity_n1")
+TESTS=("test_allocation","test_no_pa","test_ann_aggregate","test_replay","test_gdn_metadata","test_gdn_state","test_model_workload","test_formal_stats","test_wire","test_component_handoff","test_fp32_model_adapter","test_identity_n1","test_component_bootstrap")
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument("--source-audit-only",action="store_true")
  p.add_argument("--source-manifest-sha256");p.add_argument("--packet-audit-only",action="store_true");a=p.parse_args()
