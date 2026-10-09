@@ -1,6 +1,6 @@
 experiment_id: exp-20261009-hypic-gdn-affine-npu03-r4
 owner_workstream: hypic-npu03-cpu-binding-fix-20261007
-stage: planned
+stage: failed
 scope: diagnostic_only
 predecessor: exp-20261009-hypic-gdn-affine-npu03-r3
 predecessor_failure: device visibility matched successful service but ACL 507008 persisted
@@ -35,3 +35,18 @@ raw_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r4
 owned_container: hypic_gdn_affine_npu03_20261009_r4
 run_command: python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_hypic_gdn_affine_npu_probe.py
 cleanup: stop and remove only the exact identity-verified owned container; preserve raw root
+terminal_failure:
+  at_utc: 2026-10-09T23:38:08Z
+  phase: first GDN operator call after successful device init
+  classification: vLLM-Ascend C extension not registered in standalone probe process
+  observed_error: torch.ops._C_ascend has no chunk_gated_delta_rule_fwd_h
+  guard_samples: 16
+  foreign_processes: 0
+  owned_physical_npu0_process_observed: true
+  owned_container_released: true
+  raw_terminal_sha256: 6bd343d1bad0c5583cfed3f4c92221f3bb6f72c982d426bedcfeb8f3d42efe6d
+  raw_log_sha256: ce4f04769929db26aef5bef350d5409e7167665c6c6d215b941a24f7adc7f443
+  raw_container_inspect_sha256: 23a6b95c12922b06cee7eda2735cdc2f3b0dd1af4048928503cdac5cfb32a340
+  raw_lane_guard_sha256: 2646349668fb8227e4cc5230b5393c69bb321020991f8f79f3905785dca3f9bb
+  source_commit: 860b1d68
+  report: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_GDN_AFFINE_R4_FAILURE_20261009.md

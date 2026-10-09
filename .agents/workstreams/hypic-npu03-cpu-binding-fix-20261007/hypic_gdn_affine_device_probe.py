@@ -17,12 +17,17 @@ def main() -> None:
     import torch
     import torch_npu
     import vllm_ascend.ops  # noqa: F401 - registers the pinned Ascend operators
+    from vllm_ascend.utils import enable_custom_op
     from vllm_ascend.ops.triton.fla.utils import prepare_chunk_indices
     from hypic_vllm_ascend.patches.gdn import _ascendc_gdn_h
 
     torch.manual_seed(19)
     torch.npu.set_device(0)
     device = torch.device("npu:0")
+    if not enable_custom_op():
+        raise RuntimeError("pinned vLLM-Ascend custom-op bootstrap did not enable")
+    if not hasattr(torch.ops._C_ascend, "chunk_gated_delta_rule_fwd_h"):
+        raise RuntimeError("pinned AscendC GDN state operator absent after bootstrap")
     # The host guard must see the owned PID before the short kernel sequence.
     time.sleep(5)
 
@@ -106,6 +111,7 @@ def main() -> None:
         "device_name": torch.npu.get_device_name(0),
         "torch_version": torch.__version__,
         "torch_npu_version": torch_npu.__version__,
+        "custom_op_registered": True,
         "shape": {
             "key_heads": key_heads,
             "value_heads": value_heads,

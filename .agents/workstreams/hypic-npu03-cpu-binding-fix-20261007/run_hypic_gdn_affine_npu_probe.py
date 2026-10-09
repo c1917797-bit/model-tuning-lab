@@ -15,11 +15,11 @@ from pathlib import Path
 
 WORKTREE = Path("/cache/cch/model-tuning-lab-hypic-e2e-20261006")
 PLUGIN = Path("/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008")
-RAW = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r4")
+RAW = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r5")
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 SOURCE = "c12060cd47e7575ead059983d7a8bb4704165c98"
-NAME = "hypic_gdn_affine_npu03_20261009_r4"
-LABEL = "hypic.gdn.affine=gdn-affine-20261009-r4"
+NAME = "hypic_gdn_affine_npu03_20261009_r5"
+LABEL = "hypic.gdn.affine=gdn-affine-20261009-r5"
 NUMBERED_DEVICES = tuple(f"/dev/davinci{i}" for i in range(4))
 DRIVER_BINDS = (
     "/usr/local/Ascend/driver/tools/hccn_tool",
@@ -163,7 +163,7 @@ def main() -> None:
             and item["Image"] == IMAGE
             and item["Name"] == f"/{NAME}"
             and item["Config"]["Labels"].get("hypic.gdn.affine")
-            == "gdn-affine-20261009-r4"
+            == "gdn-affine-20261009-r5"
             and numbered == list(NUMBERED_DEVICES)
             and all(bind + ":" + bind + ":ro" in item["HostConfig"]["Binds"]
                     for bind in DRIVER_BINDS)
