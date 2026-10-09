@@ -1,0 +1,38 @@
+schema: mst-practice-iteration/v1
+id: hypic-npu03-profiler-20261009
+repository: model-tuning-lab
+status: in_progress
+date: 2026-10-09
+validated_commit: 788e2091158ca6135bb67f4bac16512e17b13c25
+stage_goal: Validate the HYPIC-linked Cannbot profiler Skill with separate real Prefill and Decode captures on physical NPU0-3 without changing the frozen paper verdict.
+changes:
+  - type: validation
+    description: Independently replay the real four-rank Prefill capture and CPU-only offline parse, retaining the missed preregistered numeric column gate.
+    files:
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_PREFILL_AUDIT_20261009.md
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py
+  - type: validation
+    description: Preserve r2-r5 Decode isolation failures as terminal evidence; do not mistake them for technical failure or repeat completed HYPIC phases.
+    files:
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_RETRY5_AMENDMENT_20261009.md
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py
+next_iterations:
+  - id: obtain_decode_window
+    pass_criteria:
+      - A fresh direct-route observation proves physical NPU0-3 and port 8223 actually idle before a new immutable Decode-only root is allocated.
+      - Continuous physical-process guarding finds no foreign NPU0-3 work from startup through release; only exact owned resources are cleaned.
+      - The streaming request records at least 16 post-Prefill chunks and real Decode NPU kernel events inside the profiling window.
+  - id: audit_decode_and_skill_case
+    pass_criteria:
+      - A copy of each raw rank is parsed with the pinned matching torch_npu/CANN image, leaving the original root unchanged.
+      - All four ranks have nonempty trace, kernel, operator, and API outputs; a timing audit proves genuine Decode rather than merely buffered HTTP chunks.
+      - The frozen 47-column Prefill deviation and quality REJECT_OR_QUALIFY decision remain explicit; Skill acceptance and HYPIC claim scopes are not inflated.
+validation_commands:
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
+  - ./scripts/validate-mst.sh
+lessons_ingested:
+  - lesson: In this CANN 9.1.0 stack the complete Level1 PipeUtilization parser output has 46 kernel-detail columns, so future Skill checks must inspect semantic fields and versions while preserving any frozen exact-number mismatch.
+    destination: .agents/skills/ascend-cannbot-profiler/SKILL.md
+    severity: high
