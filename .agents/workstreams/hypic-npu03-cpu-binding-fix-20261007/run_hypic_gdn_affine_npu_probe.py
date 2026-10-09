@@ -15,11 +15,12 @@ from pathlib import Path
 
 WORKTREE = Path("/cache/cch/model-tuning-lab-hypic-e2e-20261006")
 PLUGIN = Path("/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008")
-RAW = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r1")
+RAW = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r2")
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 SOURCE = "c12060cd47e7575ead059983d7a8bb4704165c98"
-NAME = "hypic_gdn_affine_npu0_20261009_r1"
-LABEL = "hypic.gdn.affine=gdn-affine-20261009-r1"
+NAME = "hypic_gdn_affine_npu03_20261009_r2"
+LABEL = "hypic.gdn.affine=gdn-affine-20261009-r2"
+NUMBERED_DEVICES = tuple(f"/dev/davinci{i}" for i in range(4))
 
 
 def utc() -> str:
@@ -111,7 +112,7 @@ def main() -> None:
     owned_id: str | None = None
     events: list[dict] = []
     failures: list[dict] = []
-    saw_owned_npu = False
+    saw_owned_npu0 = False
     exit_code: int | None = None
     released = False
     try:
@@ -119,10 +120,13 @@ def main() -> None:
             "docker", "create", "--name", NAME, "--label", LABEL,
             "--network", "none", "--shm-size", "1073741824",
             "--cpuset-cpus", "112-191",
-            "--device", "/dev/davinci0:/dev/davinci0:rwm",
             "--device", "/dev/davinci_manager:/dev/davinci_manager:rwm",
             "--device", "/dev/devmm_svm:/dev/devmm_svm:rwm",
             "--device", "/dev/hisi_hdc:/dev/hisi_hdc:rwm",
+        ]
+        for device in NUMBERED_DEVICES:
+            argv += ["--device", f"{device}:{device}:rwm"]
+        argv += [
             "-v", f"{WORKTREE}:/study:ro",
             "-v", f"{PLUGIN}:/plugin:ro",
             "-v", f"{RAW}:/results:rw",
@@ -146,8 +150,8 @@ def main() -> None:
             and item["Image"] == IMAGE
             and item["Name"] == f"/{NAME}"
             and item["Config"]["Labels"].get("hypic.gdn.affine")
-            == "gdn-affine-20261009-r1"
-            and numbered == ["/dev/davinci0"]
+            == "gdn-affine-20261009-r2"
+            and numbered == list(NUMBERED_DEVICES)
             and item["HostConfig"]["NetworkMode"] == "none"
             and "ASCEND_RT_VISIBLE_DEVICES=0" in item["Config"]["Env"]
         ):
@@ -178,15 +182,21 @@ def main() -> None:
                 except OSError:
                     cgroup = ""
                 is_owned = pid in owned_pids or owned_id in cgroup
-                saw_owned_npu = saw_owned_npu or is_owned
+                if is_owned and row["physical_npu"] == 0:
+                    saw_owned_npu0 = True
                 classified.append({
                     **row, "owned": is_owned,
                     "cgroup": cgroup[:1000] if not is_owned else "",
                 })
             events.append({"at_utc": utc(), "processes": classified})
             foreign = [row for row in classified if not row["owned"]]
+            unexpected_owned = [row for row in classified
+                                if row["owned"] and row["physical_npu"] != 0]
             if foreign:
                 failures.append({"at_utc": utc(), "foreign_processes": foreign})
+                break
+            if unexpected_owned:
+                failures.append({"at_utc": utc(), "unexpected_owned_processes": unexpected_owned})
                 break
             item = inspect(owned_id)
             if item is None:
@@ -217,14 +227,14 @@ def main() -> None:
             "owned_container_id": owned_id,
             "samples": events,
             "failures": failures,
-            "saw_owned_physical_npu0_process": saw_owned_npu,
+            "saw_owned_physical_npu0_process": saw_owned_npu0,
         })
         after = run("npu-smi", "info", timeout=20, check=False)
         (RAW / "npu-after.txt").write_text(after.stdout, encoding="utf-8")
         output = RAW / "result.json"
         tensors = RAW / "tensors.pt"
         valid = bool(
-            not failures and exit_code == 0 and saw_owned_npu and released
+            not failures and exit_code == 0 and saw_owned_npu0 and released
             and output.is_file() and tensors.is_file() and after.returncode == 0
         )
         terminal = {
@@ -236,7 +246,7 @@ def main() -> None:
             "owned_resource_released": released,
             "guard_sample_count": len(events),
             "guard_failures": failures,
-            "saw_owned_physical_npu0_process": saw_owned_npu,
+            "saw_owned_physical_npu0_process": saw_owned_npu0,
             "result_sha256": sha(output) if output.is_file() else None,
             "tensors_sha256": sha(tensors) if tensors.is_file() else None,
         }

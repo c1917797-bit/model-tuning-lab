@@ -1,6 +1,6 @@
 experiment_id: exp-20261009-hypic-gdn-affine-npu0
 owner_workstream: hypic-npu03-cpu-binding-fix-20261007
-stage: planned
+stage: failed
 scope: diagnostic_only
 objective: >-
   Test whether the pinned AscendC GDN state kernel's direct result with a
@@ -48,3 +48,19 @@ run_command: >-
   python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_hypic_gdn_affine_npu_probe.py
 cleanup: stop and remove only the exact identity-verified owned container; preserve raw root
 acceptance_boundary: no plugin change, no new 127x3 quality run, no NPU4-7, no paper-level acceptance
+terminal_failure:
+  at_utc: 2026-10-09T23:17:03Z
+  phase: torch.npu.set_device(0) before operator invocation
+  classification: container device-init failure; no GDN parity result
+  acl_error_code: 507008
+  observed_error: rtGetDevMsg chipType=0 feature not supported; SoC version unavailable
+  guard_samples: 12
+  foreign_processes: 0
+  owned_npu_process_observed: false
+  owned_container_released: true
+  raw_terminal_sha256: a97e7620097ca690f3a22c92b6b63336d8f621eb927193768489077af7494adc
+  raw_log_sha256: ebed2eac81df4ec93789a88b0cf137567ae18cdfe87090aaf2954781da28e073
+  raw_container_inspect_sha256: be4295225b448d10ffbec089720fb4f07ba59eade28c747efa714e8ee2a07788
+  raw_lane_guard_sha256: d6ea282f52fd0d77d959c31ad1ae6a22abfd4aba4e9fda1d9c130be36413b020
+  source_commit: 0b8ac14563edb468b7c1f4a2e4736672ad6e55ef
+  report: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_GDN_AFFINE_R1_FAILURE_20261009.md
