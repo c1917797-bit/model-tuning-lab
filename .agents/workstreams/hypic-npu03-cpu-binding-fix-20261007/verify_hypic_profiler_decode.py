@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -122,7 +123,8 @@ def main() -> int:
     require(len(rank_dirs) == 4, "parsed rank count invalid")
     ranks = []
     for rank, directory in enumerate(rank_dirs):
-        require(directory.name == f"rank{rank}_ascend_pt", "parsed rank identity drift")
+        require(re.fullmatch(rf"rank{rank}_\d+_\d+_ascend_pt", directory.name)
+                is not None, "parsed rank identity drift")
         info = read_json(directory / f"profiler_info_{rank}.json")
         config = info["config"]
         experiment = config["experimental_config"]
