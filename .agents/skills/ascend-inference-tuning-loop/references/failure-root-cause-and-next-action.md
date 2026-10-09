@@ -119,6 +119,15 @@ workstream. These examples explain the decision, not transferable PASS authority
 
 ## Verification
 
+Validate the actual immutable predecessor/producer/consumer chain as a no-load
+entry before reserving cards. A fixture based on a successful terminal can miss
+the real failed-terminal annotation: AWMCP exit1 may carry error='exit code'.
+Accept that exact annotation only with completed exit1, noncancelled/nontimedout,
+whole source-bound original proof; continue rejecting transport/unknown errors.
+The real0315 dry-entry and36 regressions verified this orchestration repair;
+no numerical or paper-performance conclusion follows from it.
+
+
 Check routing from paper-to-ascend and ascend-inference-tuning-loop plus registry
 triggers; run scripts/validate-mst.sh and skill structural validation. Explicitly
 review these decision cases: timeout -> scheduling repair; proved code defect ->

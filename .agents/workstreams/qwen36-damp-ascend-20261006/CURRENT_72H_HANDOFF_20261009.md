@@ -1,4 +1,20 @@
 # Current human-authorized 72h successor — 2026-10-09
+
+## Latest actual predecessor fix — MAIN0315
+
+Current canonical disjoint MF is9e520a9bcc5f48636291ef1d603a4fb9ba49c1081b92ce8cc6c1da3087463fa6.
+MAIN030f actual old0227 reader failed: normal terminal error='exit code' was
+misclassified as transport failure. Historical source cf173ab/563ccedd retained.
+Only exact failed-terminal annotation handling plus2 regressions changed;
+math/all128/20480/oracles/thresholds/clock unchanged. MAIN0315 actually passed
+36 tests/source50 AND the whole actual0227 RESULT/original/cleanup chain.
+Next new output is MAIN-sparq-ann-disjoint4-numeric-user72h-20261009-002.
+Same-image/native/fullmodel/performance/tasks remain pending until actual proof.
+MST20 and diff-check children of0306 passed; its optional missing continuity
+script read failed separately, so the outer0306 operation is not called PASS.
+Git cf173ab is local; initial push failed Empty reply; read-only0310 confirms
+remote stilld59ee39. Do not claim published until successful push/remote proof.
+
 ## Latest actual terminal and repaired preparation — 2026-10-09 13:45 UTC
 
 Original0227 is terminal FAILED exit1/bounded child timeout, not live:

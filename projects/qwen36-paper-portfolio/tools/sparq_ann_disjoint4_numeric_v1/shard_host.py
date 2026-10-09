@@ -24,7 +24,7 @@ def extract_original(envelope,peer):
   if key in out and op is not out:sc.need(out[key]==op.get(key),"original duplicate origin disagreement")
  rec=op.get("result",{}).get("record")
  sc.need(type(rec) is dict and rec.get("id")==oid and rec.get("exitCode")==1 and
-  rec.get("cancelled") is False and rec.get("timedOut") is False and rec.get("error") is None and
+  rec.get("cancelled") is False and rec.get("timedOut") is False and rec.get("error") in (None,"exit code") and
   type(rec.get("command")) is str and type(rec.get("args")) is list and
   type(rec.get("stdout")) is str and type(rec.get("stderr")) is str and
   rec.get("state")=="completed","actual prior host terminal1, not lost/running/cancelled/outer timeout")

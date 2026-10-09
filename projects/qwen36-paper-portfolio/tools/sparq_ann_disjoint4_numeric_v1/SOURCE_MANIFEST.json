@@ -6,9 +6,9 @@
     "shard_rows.py": "ee64efa0fbd9cd654657200fb6671d9848ab8939a72b39f27fd0fbd9da04efc3",
     "shard_proof.py": "dd505c08d3c4fa92275fc3b243931ad70995a64e5490132ee419fce195e93d43",
     "shard_numeric.py": "d7a4212ad81c71710118196d5d8f24c915affbcbc061033666d955d63e9d8559",
-    "shard_host.py": "268c52c554ace4f2aa836da8e7364911535357bcf41d50755e19b66a5e698de2",
+    "shard_host.py": "7015598efde3f12e13bfeac5fdd20ad82561074e4295a20f18047aab9d8d1077",
     "shard_consume.py": "c9718eea84a71c665e47ca0046c961f441f290daf47d8dfb304092b1d795f527",
-    "test_shards.py": "0c6b256951134d3cbd00c7f423196cbf7ad02fed9797a61619335aad0a7869b1"
+    "test_shards.py": "0670c88d08f5e6fe05ec0af27e05735b6d6eb812c11da9bdc409a8e2d08a0aab"
   },
   "native_source": {
     "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json",
@@ -1159,7 +1159,7 @@
     "total_cutoff_epoch": 1791788425,
     "original_ba508_status": "FAILED-not-promoted"
   },
-  "software_test_count": 34,
+  "software_test_count": 36,
   "software_status": "UNRUN_API_ONLY",
   "native_status": "UNRUN",
   "model_status": "NOT_AUTHORIZED",
@@ -1172,5 +1172,12 @@
   },
   "critical_math_reused_from_candidate_as_oracle": false,
   "oracle_source": "6ed5f73deffc1790f6c6c54806181956248a6042080ca10ead8116abb7e4e945",
-  "matrix_sha256": "02484f6fecd08548f4eebac5eb39e6552affc4b0fc2c3a8591fff86eac3f56d4"
+  "matrix_sha256": "02484f6fecd08548f4eebac5eb39e6552affc4b0fc2c3a8591fff86eac3f56d4",
+  "predecessor_reader_revision": {
+    "previous_manifest_sha256": "563ccedd21ee32e94d2b219498cb822145201d13c68bee0e3f5db01133c0a044",
+    "preserved_source_commit": "cf173ab",
+    "actual_MAIN030f": "failed real original0227 dry-entry: normal error annotation exit code misclassified",
+    "change": "accept only None or exact exit code for already strict exit1 completed noncancelled nontimedout whole original; reject transport errors; math unchanged",
+    "native_started": false
+  }
 }

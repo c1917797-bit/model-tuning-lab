@@ -181,6 +181,16 @@ class OriginalFailure(unittest.TestCase):
   return v
  def test_actual_whole_operation_shape_failure_reader(self):
   v=self.fixture();r=host.extract_original(v,"lgw_a6109c51076a4a2c9d2674ca5a8704a0");self.assertEqual(r["exitCode"],1)
+ def test_actual_failed_exit_code_annotation_is_not_transport_error(self):
+  v=self.fixture();out=v.get("structuredContent",v);out["operation"]["result"]["record"]["error"]="exit code"
+  for b in v.get("content",[]):
+   if b.get("type")=="text":b["text"]=json.dumps(out)
+  self.assertEqual(host.extract_original(v,"lgw_a6109c51076a4a2c9d2674ca5a8704a0")["exitCode"],1)
+ def test_transport_error_never_grants_predecessor_authority(self):
+  v=self.fixture();out=v.get("structuredContent",v);out["operation"]["result"]["record"]["error"]="transport closed"
+  for b in v.get("content",[]):
+   if b.get("type")=="text":b["text"]=json.dumps(out)
+  with self.assertRaises(ValueError):host.extract_original(v,"lgw_a6109c51076a4a2c9d2674ca5a8704a0")
  def test_unknown_or_notfound_rejected(self):
   v=self.fixture();out=v.get("structuredContent",v);out["operation"]["result"].pop("record")
   for b in v.get("content",[]):
