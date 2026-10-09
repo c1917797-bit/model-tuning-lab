@@ -1,0 +1,50 @@
+experiment_id: exp-20261009-hypic-gdn-affine-npu0
+owner_workstream: hypic-npu03-cpu-binding-fix-20261007
+stage: planned
+scope: diagnostic_only
+objective: >-
+  Test whether the pinned AscendC GDN state kernel's direct result with a
+  nonzero initial state matches the strict HYPIC zero-state plus transition
+  composition at actual TP-local head geometry. Do not relabel this as a
+  full-model, quality, performance, or HYPIC paper verdict.
+hypothesis: >-
+  For the same key, WY w/u, cumulative gate and one 64-token segment,
+  direct(initial) is closer to transition @ initial + zero_final than
+  initial @ transition + zero_final. A large left residual would flag
+  transition orientation or numerical equivalence for further isolation.
+single_variable: initial state representation; all other kernel tensors match
+source_identity:
+  plugin_commit: c12060cd47e7575ead059983d7a8bb4704165c98
+  image_digest: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+  model_config_sha256: 69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c
+geometry:
+  physical_npu: 0
+  forbidden_npus: [4, 5, 6, 7]
+  key_heads: 4
+  value_heads: 12
+  tokens: 64
+  key_dim: 128
+  value_dim: 128
+  seed: 19
+predeclared_checks:
+  - actual physical NPU0 process belongs to the exact owned container
+  - physical NPU1-3 remain free of foreign processes throughout
+  - one-second guard has no probe error or foreign PID
+  - direct/zero/transition use the same pinned operator, key, w, and gate
+  - compare left and right residuals and retain raw tensors for independent replay
+  - exact owned container is released; port 8223 is never bound
+decision_rule: >-
+  If isolation and source identity pass, report both absolute and relative
+  residuals. A left residual larger than the right residual or relative L2
+  above 1e-2 is a numerical/orientation risk, not automatic proof of the
+  r13 quality cause. A small left residual proves only this synthetic
+  one-segment shape, not all model layers or serving traffic.
+abort_rule: foreign physical NPU0-3 PID, incomplete probe, source drift, or control-plane error
+raw_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r1
+owned_container: hypic_gdn_affine_npu0_20261009_r1
+preflight_command: >-
+  python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_hypic_gdn_affine_npu_probe.py --preflight
+run_command: >-
+  python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_hypic_gdn_affine_npu_probe.py
+cleanup: stop and remove only the exact identity-verified owned container; preserve raw root
+acceptance_boundary: no plugin change, no new 127x3 quality run, no NPU4-7, no paper-level acceptance
