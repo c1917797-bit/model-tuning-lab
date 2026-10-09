@@ -5,14 +5,14 @@
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
   "task": "Retrospectively apply exact-main Paper-to-Ascend gates to the ongoing HYPIC C1/C2 Qwen hybrid-attention NPU0-3 piercing and independently replay bounded performance/activation evidence",
-  "executed_at_utc": "2026-10-08",
+  "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "ad455c2d22d64eaff61384c23c39bd4693d15636",
   "tested_reference_git_blob_oid": "744b6daa280b14a90930b7be0c7a1055e9170935",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; Qwen3.6-named Qwen3_5ForConditionalGeneration hybrid text checkpoint, BF16 TP4, official pinned vLLM-Ascend image, physical NPU0-3 only; historical c16/1024 paired performance and later c8/max2048 explicit-boundary r12 stress are separate identities",
+  "environment_scope": "chicaihong01/ma; Qwen3.6-named Qwen3_5ForConditionalGeneration hybrid text checkpoint, BF16 TP4, official pinned vLLM-Ascend image, physical NPU0-3 only; historical c16/1024, r12 c8/max2048 stress, and the terminal r13 c8/0.85/cache10 full-quality plus six-phase-performance pair are separate identities",
   "observed": {
     "bounded_single_instance_c1_c2_architecture_fit": true,
     "architecture_review_was_retrospective_not_prospective": true,
@@ -28,9 +28,16 @@
     "r12_four_worker_hot_proofs": 52,
     "r12_clean_foreign_process_guard_samples": 279,
     "r12_all_hot_gate_passed": false,
-    "current_same_identity_085_control_complete": false,
-    "full_explicit_2048_quality_pair_complete": false,
-    "current_three_round_matched_performance_complete": false,
+    "current_same_identity_085_control_complete": true,
+    "full_explicit_2048_quality_pair_complete": true,
+    "current_three_round_matched_performance_complete": true,
+    "r13_scored_responses_per_arm": 381,
+    "r13_correct_baseline_candidate": [230, 219],
+    "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_candidate_four_worker_hot_requests": [368, 381],
+    "r13_six_phase_weighted_tpot_saved_percent": 21.524278158508903,
+    "r13_performance_four_worker_hot_requests": [120, 120],
+    "r13_experiment_terminal_with_negative_adoption": true,
     "whole_paper_reproduction_accepted": false,
     "case_integrated_in_main": false
   },
@@ -41,7 +48,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_case.py",
-      "sha256": "82b1c6c330d14807717d80aa4a9528fa68283a0124b145933833e83fc2a2052e"
+      "sha256": "73f6cd9c933f66e262a782d8c276de1d3425e874d85a9555ff8d0c789530710d"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_ARCHITECTURE_FIT.md",
@@ -58,6 +65,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_COLD_FALLBACK_ANALYSIS.md",
       "sha256": "47c55771de921893417ec3d999b1bf3b959d13225b20201aae75bffa80a02cb9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_R13_TERMINAL_CASE_20261009.md",
+      "sha256": "779f2947b921abdd4a0326d86ceedf05303e110cec22f266ad0410963adba57c"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reproduction_case.py",
+      "sha256": "06b675e83b8e78dd59049b3c549818e7a2f427ede321c4973696e6b079a70d4a"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md",
+      "sha256": "4b5308c6049a8d0c8e12065e69677b27dd8af4c05494bf2cb71f550d393a1c76"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md",
+      "sha256": "d27f1abbf527669157bc4c7fad23d75f3da067b8f942c183c56bf4ace93fe719"
     }
   ],
   "external_raw_receipts": {
@@ -65,7 +88,7 @@
     "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60"
   },
   "replayable_regression_recorded": true,
-  "boundary": "A real target-specific C1/C2 derivative and bounded c16/1024 paired performance are evidenced, but the applicability/method-parity audit was retrospective, exact upstream commit and C3 are missing, historical 2048 natural quality never activated the worker hot path, and r12 explicit-boundary stress lacks five scored hot proofs and a matched 0.85 control. No complete in-path paired quality, current performance, paper-exact or whole-paper claim follows.",
-  "next_gate": "Freeze the prospective deployed-effect-versus-all-hot rule; on actually idle physical NPU0-3 run a fresh same-identity 0.85 control and explicit-boundary candidate, independent full 2048-token quality and repeated performance/isolation audits. Recheck method-chain source identity and only upgrade main Skill acceptance after all scoped gates pass.",
+  "boundary": "A target-specific C1/C2 derivative and bounded historical c16/1024 effect are evidenced. The current r13 same-identity 0.85/cache10 control and explicit-boundary candidate finished full 127x3/max2048 LongBench-v2 quality plus three matched performance repetitions: performance improved, but deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict quality hot coverage is only 368/381. This is a terminal mixed experiment with negative adoption, not a missing pair. The applicability/method-parity review was retrospective, exact upstream commit and C3 remain unproven, and the default GSM8K/c32 ruler and short deterministic canary are not covered. No paper-exact, whole-paper, production, or complete main Skill acceptance follows.",
+  "next_gate": "Do not rerun or reuse the immutable r13/r14 roots. Replay the completed r13 quality and six-phase performance audits, review branch-versus-main Skill guidance and method-chain source identity, and validate the missing default-ruler/canary and C3 or explicitly bounded C1/C2 adoption gates separately before any main Skill upgrade. A new causal device question needs its own prospective identity and matched control.",
   "drift_trigger": "Revalidate after main Skill/reference/registry blob changes, paper or upstream-source identity, model/image/plugin commit, physical lane, cache denominator, dataset/evaluator/ruler, or raw artifact hashes change."
 }

@@ -96,6 +96,26 @@ def main() -> int:
                "ready_cache_partial_chunk") == 1
            and cold["exact_cache_eviction_causality_proven"] is False,
            "cold-path cause boundary drifted")
+    terminal_run = command(
+        sys.executable, "-B",
+        str(HERE / "verify_paper_to_ascend_reproduction_case.py"),
+        cwd=HERE,
+    )
+    expect(terminal_run.returncode == 0 and bool(terminal_run.stdout.strip()),
+           f"r13 terminal cross-skill replay failed: {terminal_run.stderr}")
+    terminal = json.loads(terminal_run.stdout)
+    expect(
+        terminal["r13_quality_pair_complete"] is True
+        and terminal["r13_correct"] == [230, 219]
+        and terminal["r13_deployment_quality"] == "REJECT_OR_QUALIFY"
+        and terminal["r13_strict_hot"] == [368, 381]
+        and terminal["r13_performance_all_six_phases_valid"] is True
+        and terminal["r13_performance_strict_hot"] == [120, 120]
+        and abs(terminal["r13_performance_weighted_tpot_saved_pct"]
+                - 21.524278158508903) < 1e-12
+        and terminal["reproduction_skill_completion_gate_passed"] is False,
+        "r13 paired quality/performance or adoption boundary drifted",
+    )
     print(json.dumps({
         "schema": "paper-to-ascend-real-task-case/v1",
         "main": MAIN,
@@ -103,9 +123,17 @@ def main() -> int:
         "historical_tpot_reduction_percent": effect["tpot_saved_pct"],
         "r12_explicit_scored": 57,
         "r12_four_worker_hot": 52,
+        "full_explicit_2048_quality_pair_complete": True,
+        "current_matched_085_control_complete": True,
+        "current_three_round_matched_performance_complete": True,
+        "r13_deployment_quality": "REJECT_OR_QUALIFY",
+        "r13_strict_quality_hot": [368, 381],
+        "r13_performance_strict_hot": [120, 120],
+        "r13_weighted_tpot_saved_pct":
+            terminal["r13_performance_weighted_tpot_saved_pct"],
+        "r13_terminal_mixed_experiment": True,
         "paper_c3_complete": False,
-        "full_explicit_2048_quality_pair_complete": False,
-        "current_matched_085_control_complete": False,
+        "whole_paper_adoption_accepted": False,
         "long_term_acceptance": "partial-evidence",
     }, sort_keys=True))
     return 0

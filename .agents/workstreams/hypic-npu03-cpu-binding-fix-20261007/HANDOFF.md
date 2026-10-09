@@ -58,8 +58,8 @@
   `ascend-cannbot-profiler` now has real Prefill and Decode captures but
   remains partial: the original numeric column gate missed, and no
   profiler-driven quality root cause or main integration is proven.
-- The latest response-variability/Skill checkpoint was pushed and independently
-  verified at `73dfcb99921aab4fb90a4a91ca2bce4ae4c6eb7f`; do not claim main integration.
+- The r14 terminal diagnostic/Skill checkpoint was pushed and independently
+  verified at `74c9f9427ffbd5bd018754ab73e395e4deccff7b`; do not claim main integration.
 
 ## 1. North Star
 

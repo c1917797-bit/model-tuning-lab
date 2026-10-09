@@ -155,7 +155,7 @@ class SkillCaseTests(unittest.TestCase):
         self.assertFalse(item["observed"]["clean2_formal_hotpath_gate_passed"])
         self.assertFalse(item["observed"]["reproduction_skill_completion_gate_passed"])
 
-    def test_paper_to_ascend_real_task_is_partial_not_paper_success(self) -> None:
+    def test_paper_to_ascend_terminal_mixed_result_stays_partial(self) -> None:
         path = cases.CASES / "paper-to-ascend.json"
         skill, state = cases.check_case(
             path, self.main_commit, {"paper-to-ascend"})
@@ -164,7 +164,12 @@ class SkillCaseTests(unittest.TestCase):
         item = json.loads(path.read_text())
         self.assertTrue(item["observed"]["historical_six_unit_performance_audit_passed"])
         self.assertFalse(item["observed"]["paper_c3_multi_replica_complete"])
-        self.assertFalse(item["observed"]["full_explicit_2048_quality_pair_complete"])
+        self.assertTrue(item["observed"]["full_explicit_2048_quality_pair_complete"])
+        self.assertTrue(item["observed"]["current_three_round_matched_performance_complete"])
+        self.assertEqual(item["observed"]["r13_deployed_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertEqual(item["observed"]["r13_candidate_four_worker_hot_requests"],
+                         [368, 381])
         self.assertFalse(item["observed"]["whole_paper_reproduction_accepted"])
 
     def test_runtime_delivery_case_is_not_promotion(self) -> None:

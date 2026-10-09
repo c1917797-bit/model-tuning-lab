@@ -43,6 +43,14 @@
     {
       "path": ".agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml",
       "sha256": "9c06af152f902684d10251724d01bf3c86c18edc4c4e02c839ba53ccac69a9ad"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md",
+      "sha256": "4b5308c6049a8d0c8e12065e69677b27dd8af4c05494bf2cb71f550d393a1c76"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md",
+      "sha256": "d27f1abbf527669157bc4c7fad23d75f3da067b8f942c183c56bf4ace93fe719"
     }
   ],
   "external_raw_receipts": {
@@ -53,6 +61,6 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "The diagnostic and formal raw runs support one bounded official-configuration candidate on physical NPU0-3. They do not prove the internal CPU-pool subcause, a full enabled-path feature matrix, paired 2048-token quality, memory/stability/tail and neighboring-resource acceptance, or transfer to the later HYPIC source/0.85 configuration. No production or complete Skill acceptance is claimed.",
-  "next_gate": "Complete the active r10 quality and hot-path audit without rerun. For any future matching CPU-binding source/setting adoption, verify full paired 2048-token quality and resource guardrails on actually idle physical NPU0-3, then revisit this Skill against the current main blob.",
+  "next_gate": "The r10 audit and later r13 HYPIC 127x3/max2048 quality plus six-phase performance are terminal; do not rerun them. Both r13 arms shared CPU-binding-off, so that HYPIC pair cannot establish the isolated binding-on/off quality effect or adoption of this separate CPU-binding treatment. If adoption is pursued, preregister a same-identity binding-on/off quality and resource-guardrail pair; otherwise retain the bounded performance evidence and partial Skill acceptance. Revisit the exact main Skill blob before promotion.",
   "drift_trigger": "Revalidate when main Skill/registry, CPU-binding source/configuration, model/image/TP or physical lane, cpuset, benchmark/scorer, or any raw receipt changes."
 }

@@ -15,7 +15,7 @@
   "environment_scope": "chicaihong01/ma, physical NPU0-3 TP4, Qwen3.6-named hybrid text checkpoint and pinned official vLLM-Ascend image; historical c16/1024 performance, clean2 natural max2048 quality, and r12 c8/max2048 explicit-boundary stress are separate frozen identities",
   "observed": {
     "branch_skill_differs_from_exact_main": true,
-    "branch_skill_git_blob_oid": "90fd7d45e7b0630c81c2a0c3694c46e4995131dc",
+    "branch_skill_git_blob_oid": "167d4555bc1f8ffa650d3e8f846a197538ce4a59",
     "branch_only_cross_lane_absolute_percentage_guidance_in_main": false,
     "historical_same_lane_performance_units_valid": 6,
     "historical_tpot_reduction_percent": 22.35616395806199,
@@ -43,7 +43,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reproduction_case.py",
-      "sha256": "94f75bd45c25b35b99e3eac1035540af48e8b82e58c5638499a1b6390900e1d7"
+      "sha256": "06b675e83b8e78dd59049b3c549818e7a2f427ede321c4973696e6b079a70d4a"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_quality.py",
