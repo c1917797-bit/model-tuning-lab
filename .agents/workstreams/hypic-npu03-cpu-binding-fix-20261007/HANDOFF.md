@@ -67,8 +67,6 @@ cache10split remains unapproved and must not run.
 - The seventh case caught `mst-practice-iteration-planning`'s main YAML
   schema mismatch; the branch Skill repair and bounded HYPIC plan pass.
   Main remains partial; see PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md.
-- The user chose actual-idle attempts; passive mapping alone does not block
-  use, while real foreign NPU processes do.
 - Loop-framework case caught and repaired stale task.json active_attempt=null;
   its exact-main long-term status remains partial pending fresh-agent replay.
 
@@ -82,13 +80,15 @@ Hot-cohort quality also declined descriptively; cause remains unisolated.
 See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md. Both screen phases passed
 independent 40-row/42-ID/source/isolation/release audit; candidate 40/40
 measured IDs were four-worker hot. See HOTPATH_CACHE10PERF_SCREEN_PAIR_AUDIT.md.
-HYPIC-only/repeat2 `exec-0000000000001c3a` is running; poll, never restart.
+HYPIC-only/repeat2 terminal audit passed 40/40 hot IDs, 150 clean probes
+and exact release (HOTPATH_CACHE10PERF_CANDIDATE_REPEAT2_AUDIT.md); never rerun.
+No-cache/repeat2 `exec-000000000000000a` is running; poll, never restart.
 Do not post-hoc pass either root, use NPU4–7, or modify foreign containers.
 
 ## 5. Next Actions
 
-1. Preserve r10–r13 negatives; poll performance hypic-only/repeat2, independently
-   audit terminal receipts, then run remaining frozen phases serially.
+1. Preserve r10–r13 negatives; poll no-cache/repeat2, independently audit
+   terminal receipts, then run the last two frozen phases serially.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
 3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
