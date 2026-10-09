@@ -407,7 +407,7 @@ def _validated_fa_write_extents(identity,raw,info):
   raw["CP"] is False and raw["quantized"] is False,"actual unchanged ordinary native FA writer branch")
  impl=raw["actual_implementation"]
  c.require(impl["class"]=="vllm_ascend.attention.attention_v1.AscendAttentionBackendImpl" and
-  impl["attn_type"]==impl["decoder_value"]=="decoder" and type(impl["impl_id"]) is int and impl["impl_id"]>0 and
+  impl["attn_type"]==impl["decoder_value"]=="AttentionType.DECODER" and type(impl["impl_id"]) is int and impl["impl_id"]>0 and
   impl["enable_c8_quant"] is impl["enable_hamming_sparse"] is impl["is_kv_producer"] is False and
   impl["kv_sharing_target_layer_name"] is None,"actual captured ordinary decoder implementation fields")
  n=raw["num_actual_tokens"];slots=raw["slot_mapping"]

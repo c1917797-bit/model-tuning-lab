@@ -1,0 +1,106 @@
+{
+  "schema": "sparq.enum-reference-repair-verification/v1",
+  "recorded_at_utc": "2026-10-09T23:41:00Z",
+  "before_commit": "e31f973693bc6c018f613ec800b61ac24dc50646",
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "sha256": "7397ea5be5811805a8a032094fd0bd076fffd4c3464500965da472075f923f91"
+  },
+  "actual_software": {
+    "operation_id": "exec-000000000000092d",
+    "exit_code": 0,
+    "tests": 264,
+    "source_count": 140,
+    "source_only": true,
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_092D_ENUM264_ACTUAL007_REPLAY_ORIGINAL.json",
+      "sha256": "1de900da17a569d2cb44205b58def246284ce670ebdda06cc08ef44d4d82e4ae",
+      "bytes": 72059
+    }
+  },
+  "actual_historical_replay": {
+    "schema": "sparq.enum-repair-historical-raw-replay/v1",
+    "source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "sha256": "7397ea5be5811805a8a032094fd0bd076fffd4c3464500965da472075f923f91"
+    },
+    "rows": [
+      {
+        "rank": 0,
+        "actual_plan": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/service/trace/GDN-PLAN-e1-r0.json",
+          "sha256": "3f6b199f9dc2c6202fbdf151f06cbd8bbe160645c04eb12e3e7c51f92796a037"
+        },
+        "states": 96,
+        "FA_layers": 16,
+        "physical_owners": 16,
+        "before_copy_bytes": 10723688448,
+        "operations": 128
+      },
+      {
+        "rank": 1,
+        "actual_plan": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/service/trace/GDN-PLAN-e1-r1.json",
+          "sha256": "918d599913668b280c566e7e265daa824cce5c4c69ade1d501e89c5292486601"
+        },
+        "states": 96,
+        "FA_layers": 16,
+        "physical_owners": 16,
+        "before_copy_bytes": 10723688448,
+        "operations": 128
+      },
+      {
+        "rank": 2,
+        "actual_plan": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/service/trace/GDN-PLAN-e1-r2.json",
+          "sha256": "3db1e0d111b0dba04c7a05fc0929f73525f798c90bcd978f0ed91cdc18ea4f8a"
+        },
+        "states": 96,
+        "FA_layers": 16,
+        "physical_owners": 16,
+        "before_copy_bytes": 10723688448,
+        "operations": 128
+      },
+      {
+        "rank": 3,
+        "actual_plan": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/service/trace/GDN-PLAN-e1-r3.json",
+          "sha256": "2855ab4b1864d0edbe6f969d04193eb58e9b09af203e56a44a84cd5a2034801b"
+        },
+        "states": 96,
+        "FA_layers": 16,
+        "physical_owners": 16,
+        "before_copy_bytes": 10723688448,
+        "operations": 128
+      }
+    ],
+    "metadata_refs_verified": 260,
+    "default_OFF": true,
+    "elapsed_seconds": 82.04702349001309,
+    "historical_model007_stays_FAILED": true,
+    "new_model_executed": false,
+    "numeric_pass": false,
+    "E1_authority": false,
+    "task_authority": false,
+    "scope": "complete software plus actual original all4 preallocation reference replay, no device or bytes arithmetic"
+  },
+  "repair_state": "VERIFIED_HISTORICAL_REFERENCE_AND_SOFTWARE_ONLY",
+  "old_model007": "FAILED-not-promoted",
+  "next_model": "008-UNRUN",
+  "numerical_pass": false,
+  "model_pass": false,
+  "performance_pass": false,
+  "task_pass": false,
+  "unchanged_gates": [
+    "candidate math",
+    "tensor tolerances",
+    "untouched bytes and typed finite checks",
+    "full64/all4/lifecycle/graph coverage",
+    "64GiB host budget",
+    "5400 phase including90 cleanup",
+    "physical4-7 only",
+    "first cutoff2026-10-10T07:00:25Z",
+    "total cutoff2026-10-12T07:00:25Z"
+  ],
+  "push_state": "pending existing HTTPS authentication failure, no blind retry"
+}

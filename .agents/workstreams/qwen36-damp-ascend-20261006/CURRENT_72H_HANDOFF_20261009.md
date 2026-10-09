@@ -1,5 +1,17 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current verified state — 2026-10-09 23:41 UTC
+
+Read SPARQ_ENUM_REFERENCE_REPAIR_VERIFIED_20261010.json first.
+MAIN092d exit0: actual complete264 passed; source7397ea/140 closure readback.
+Historical007 all4 real64 FA +384 GDN states passed repaired preallocation
+reference;260 original metadata/plan Refs SHA verified. No device/reallocation,
+bytes arithmetic/model or E1 PASS follows. Original007 remains FAILED/c67.
+Source repair changes only exact enum string plus two fixtures/two regressions.
+Next new model008 is UNRUN; same-image CPU/N1/fresh admission remains required.
+Maintainer lesson distinguishes enum transport from semantic validation.
+Fixed cutoff/budgets/thresholds unchanged; publication authentication pending.
+
 ## Current verified state — 2026-10-09 23:36 UTC (supersedes RUNNING below)
 
 Read SPARQ_FULLV16_MODEL007_FAILED_ENUM_REFERENCE_20261010.json first.

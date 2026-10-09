@@ -52,7 +52,7 @@ def build(rank):
    cache_write_scope="original-reshape-and-cache-real-token-slice",is_encoder_decoder=False,
    cache_sharing_target=None,CP=False,quantized=False,allocator_source_pins=g.ALLOCATOR_PINS,
    actual_implementation={"class":"vllm_ascend.attention.attention_v1.AscendAttentionBackendImpl","impl_id":layer+1,
-    "attn_type":"decoder","decoder_value":"decoder","enable_c8_quant":False,"enable_hamming_sparse":False,
+    "attn_type":"AttentionType.DECODER","decoder_value":"AttentionType.DECODER","enable_c8_quant":False,"enable_hamming_sparse":False,
     "is_kv_producer":False,"kv_sharing_target_layer_name":None})
   fa.append(dict(rank=rank,epoch=1,layer=layer,prefix=value["prefix"],cache=caches,
    metadata=fixture_fa_ref(value)))
@@ -304,10 +304,25 @@ class ExactExtentGeometry(unittest.TestCase):
   raw=dict(schema="sparq.actual-native-FA-writer-metadata/v1",cache_write_scope="original-reshape-and-cache-real-token-slice",
    allocator_source_pins=g.ALLOCATOR_PINS,is_encoder_decoder=False,cache_sharing_target=None,CP=False,quantized=False,
    num_actual_tokens=len(slots),slot_mapping=slots,actual_implementation=dict(
-    **{"class":"vllm_ascend.attention.attention_v1.AscendAttentionBackendImpl"},impl_id=1,attn_type="decoder",
-    decoder_value="decoder",enable_c8_quant=False,enable_hamming_sparse=False,is_kv_producer=False,
+    **{"class":"vllm_ascend.attention.attention_v1.AscendAttentionBackendImpl"},impl_id=1,attn_type="AttentionType.DECODER",
+    decoder_value="AttentionType.DECODER",enable_c8_quant=False,enable_hamming_sparse=False,is_kv_producer=False,
     kv_sharing_target_layer_name=None))
   return x,raw
+ def test_native_decoder_enum_representation(self):
+  # Actual model007 r0/e1/l3 has this exact source-qualified enum representation.
+  # Original metadata SHA d4941298f2807463a2b5cde765e847093b3463b25bbd3a78a8372e41ffa881b6.
+  # This small fixture is software coverage, not a native/model acceptance claim.
+  x,value=self.fa([0,129])
+  self.assertEqual(value["actual_implementation"]["attn_type"],"AttentionType.DECODER")
+  self.assertEqual(value["actual_implementation"]["decoder_value"],"AttentionType.DECODER")
+  expected=[[(x["storage_offset"]+slot*256)*2,(x["storage_offset"]+slot*256)*2+512]
+   for slot in value["slot_mapping"]]
+  self.assertEqual(g.fa_write_extents(x,value),g.normalize_extents(expected,x["storage_bytes"]))
+ def test_legacy_decoder_literal_rejected(self):
+  x,value=self.fa([0])
+  value["actual_implementation"]["attn_type"]="decoder"
+  value["actual_implementation"]["decoder_value"]="decoder"
+  with self.assertRaisesRegex(ValueError,"implementation fields"):g.fa_write_extents(x,value)
  def test_all_small_contiguous_rows_equal_original_expression(self):
   from unittest.mock import patch
   original=g.physical_identity

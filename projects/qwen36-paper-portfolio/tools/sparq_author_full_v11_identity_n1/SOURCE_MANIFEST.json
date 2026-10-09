@@ -58,12 +58,12 @@
     "test_component_handoff.py": "d97cacd37f0ee6e8ea4aa0c86bfc190b12b008ad1da9ee128eaede71899c3671",
     "test_fp32_model_adapter.py": "1e8de6d6a796aac2ce90cf6078dae2dea2809b33dd97dac9f7d63b00d48c33c2",
     "long_independent_oracle.py": "21fe6d9e7c78acdecb23ffe42196e38c8cfd6d55c2c08bb45f2826bf40d74605",
-    "gdn_stream.py": "36b4b4dc9f0653ca4b04e0f4b48b74cd82037a117349a5fbfb62a6f45de9f02b",
+    "gdn_stream.py": "905606990e8c2678e0655fccde403184a76df8e50f337f06be7b6bab940b8487",
     "identity_bridge.py": "4a4a12875a306720642647bbae073a14cea78962251bb7333e63229ea942088e",
     "test_identity_n1.py": "cf8b20afb6fcc0d3283249275f278f8403c18b282c5a79d83dae4d6cbb1b2a52",
     "component_bootstrap.py": "2437a856201fee78576dfde68218595a6f58fd4bfcf2f77e88dc7fa5bc20b7c4",
     "test_component_bootstrap.py": "56e7251f0daa5cea376f96425de2ab49d1a47c3f519f31f823d3716d1db70870",
-    "test_physical_pool.py": "e20efe27044d495645d001d4a8df44299f02579f7c563303e377a718e8abdb37"
+    "test_physical_pool.py": "c8a7022eb72db434587f612fdc598aefe3490bb00494a8954fb28847a00f3349"
   },
   "source_pins": {
     "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
@@ -201,13 +201,13 @@
       "test_component_bootstrap",
       "test_physical_pool"
     ],
-    "static_declared_tests": 262,
+    "static_declared_tests": 264,
     "actual_collected_test_count": null,
     "exit_code": null,
     "stdout": null,
     "stderr": null,
     "remote_exec_CPU": 0,
-    "method_declarations": 259,
+    "method_declarations": 261,
     "inherited_unittest_cases": 3,
     "inherited_case_source": "Original213 plus original47 retained; two actual CPU producer/consumer protocol seam regressions. No old PASS inherited."
   },
@@ -728,5 +728,31 @@
       "coverage": "actual end layers/owners/ledger; conv BF16 and recurrent FP32 complete slab/active+retained typed rows/all inactive bytes/padding; real PhysicalChecker+summary consumer; real first_pool raw before/after+error retained",
       "scope": "tiny software collaborator fixture only, not actual all64/allocator/native/model permission"
     }
+  },
+  "v17_enum_reference_successor": {
+    "schema": "sparq.native-enum-reference-repair/v1",
+    "classification": "REFERENCE_OR_TEST",
+    "causal_confidence": "proved",
+    "before_source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "sha256": "c67efb3ddf971c772ebc0d8fa919702cd3436cb3ad7941c35e494ea752b5ad4c"
+    },
+    "before_git_commit": "e31f973693bc6c018f613ec800b61ac24dc50646",
+    "original_model007": "FAILED-not-promoted",
+    "original_terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08C0_MODEL007_TERMINAL_FAILED_ORIGINAL.json",
+      "sha256": "f064de06a78d60b71e646786c57da10af4c0d92f8de71a2293ef9c79f00935a9"
+    },
+    "observed_native_repr": "AttentionType.DECODER",
+    "old_incorrect_fixture_literal": "decoder",
+    "math_unchanged": true,
+    "all_original_tolerances_unchanged": true,
+    "resource_budgets_unchanged": true,
+    "clocks_unchanged": true,
+    "complete_264_tests": "UNRUN",
+    "actual_model007_metadata_replay": "UNRUN-historical-no-device-only",
+    "new_full_model": "UNRUN",
+    "performance_authority": false,
+    "task_authority": false
   }
 }

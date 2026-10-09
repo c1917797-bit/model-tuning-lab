@@ -1,5 +1,24 @@
 # Root-cause classification must select the next experiment
 
+## Native enum transport versus semantic identity
+
+A source-pinned producer can correctly verify an enum member and then serialize
+its str() representation. Its consumer must match the deployed representation,
+not an imagined literal. Before a costly model gate, exercise that actual
+producer/consumer boundary with original native metadata and a wrong-literal
+negative; synthetic fixtures that repeat the consumer's assumption cannot
+validate it.
+
+SparQ model007 completed TP4 load and graph capture, then its first warmup
+failed before candidate arithmetic: the native producer recorded both values
+as AttentionType.DECODER while the reference demanded decoder. Preserve the
+failed source/whole terminal and repair only that proved boundary. Replay
+all relevant actual records under a new source and run the complete affected
+suite. Such replay validates a historical reference seam, not new numerical,
+model, resource-admission or performance authority. Keep numerical, ownership,
+layout, allocation and deadline gates unchanged; unsupported branches still
+reject. Exact source/result identities belong in the workstream causal record.
+
 ## Preinitialization: common driver FD is not a compute-context proof
 
 For same-image ABI admission, keep the Devices[] CPU stage strict: no device
