@@ -135,3 +135,78 @@ adaptation repair; wrong fixture -> reference/test repair; valid comparable
 no-gain -> measured-configuration redesign; missing originals -> unknown/inconclusive.
 Check current concurrency text has no stale cross-paper serial-only restriction.
 Documentation validation never grants native/model/performance/task acceptance.
+
+## Cross-phase artifact visibility before NPU admission
+
+A host file's existence and a mocked mount dictionary are insufficient. When
+CPU preflight and NPU shards have distinct output aliases, mount the exact ONE
+owned experiment tree read-only at the same absolute path in every consumer;
+only each controller's own /results alias may be writable. Do not mount a broad
+cache root. Include ABI, CPU inspect/ownership/cleanup, allocation/plan, canary
+and fresh proof descendants, not just the first file that failed.
+
+Before creating a device-bearing container, run the actual same-image no-device
+entry that checks the common mount's read-only flag and SHA-bound existing
+cross-phase input paths. Derive future mounts from that same reviewed constructor.
+Keep software fixtures inside the frozen source closure: a host-only historical
+result dependency can itself fail in the image. This is storage/launch readiness,
+not numerical or model permission. MAIN031b exposed this defect before arithmetic;
+its failed source and original remain preserved and a new identity is required.
+
+## Smoke-first admission and evidence-driven route iteration
+
+Before a NEW experiment starts, preregister both smoke and full gates with
+frozen inputs, source/image/model identity, output roots, stage budgets and
+independent consumers. Smoke must activate the actual plugin/backend, not a
+standalone author sample: representative batch1 and multi-request cases,
+eager/graph as applicable, changed inputs, relevant reset/reuse/cache hit and
+independent reference. A short sequence that cannot exercise a reset must not
+claim reset coverage. Host/same-image CLI/ABI/mount checks precede device smoke.
+Each smoke stage has an explicit pass/fail consumer and escalation rule.
+
+Keep production-relevant tensor layouts, cache geometry, precision, ABI and
+request ownership in the smoke even when case/request counts are reduced.
+Exercise a previously failed seam early. A TP4-only mechanism needs actual
+four-worker smoke; a standalone single-card primitive cannot replace it.
+Declare unsupported or irrelevant smoke dimensions explicitly. Where failure
+depends on a long context, reuse or reset, retain the smallest input that really
+triggers it instead of shortening that condition away.
+
+Passing smoke permits only the next preregistered diagnostic/full gate; it never
+replaces full numerical/lifecycle coverage, three paired performance runs or
+complete task scoring. A short-output model smoke is correctness/activation
+only, never the fixed1024 throughput result. Full performance uses fixed1024;
+task evaluation uses normal EOS/no-thinking/max2048. Never retrofit smoke into
+a live frozen run, omit failed cases or restart a clock to improve coverage.
+
+At every terminal, create one bounded decision record:
+failed_stage, cause_class, causal_confidence, first_fault_refs,
+independent_control, alternative_explanations, changed_hypothesis,
+minimal_repair, regression, unchanged_gates, remaining_budget,
+next_exact_entry, decision (REPAIR / DIAGNOSE / ADVANCE / CLOSE_CONFIGURATION /
+INCONCLUSIVE). Proved adaptation or test defects select REPAIR; missing cause
+selects DIAGNOSE. Only mechanism-faithful, independently correct, valid paired
+whole-model evidence supports CLOSE_CONFIGURATION. None proves universal paper
+ineffectiveness. No new-evidence-free deterministic retry. Allocate another
+iteration only when a concrete change has testable prediction and fits the
+existing deadline; protect budget for matched E2E/task acceptance.
+
+The iteration record also states the predicted observable improvement and the
+result that would refute it. A valid performance miss needs a measured
+paper-linked cost or bottleneck hypothesis before another optimization round;
+correctness instrumentation and kernel sums alone are not a speedup forecast.
+Stop an unproductive route when the remaining budget cannot complete its next
+discriminating gate and downstream acceptance, or when the new result refutes
+the repair hypothesis. Preserve an implementation-inconclusive verdict when
+repair is unfinished; time spent does not become evidence against the paper.
+Reuse source-bound unaffected predecessor evidence, but rerun the complete
+affected gate after a repair and state why the other evidence remains valid.
+
+MAIN keeps an executable ready inventory, not an authored-source inventory.
+While CURRENT computes, close NEXT's exact launch and successor consumer.
+Split independent numeric smoke/full jobs across4–7 using the summed ledger;
+TP4/model/profile/formal paired timing remains exclusive. Measure useful stage
+completions per card-hour, launch failures, native compute ownership, terminal
+to release/next dispatch latency and idle causes. Queue target is at least one
+reviewed executable backup; explicitly report when it is not met. Use real
+input/initialization checks, never dummy load, to eliminate avoidable gaps.

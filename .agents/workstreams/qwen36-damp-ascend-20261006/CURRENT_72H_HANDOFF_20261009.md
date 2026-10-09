@@ -1,5 +1,80 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Latest verified state and four-question learning — 2026-10-09
+
+033b is no longer a live authority. Direct operation_get now returns not_found;
+do not reconstruct a missing terminal or repeat its launch. Its real003 RESULT
+exists,18713B SHA0d56a8af7518138c6c6b19357482086846511943f9aefa54dfbdd2ee0ea87afe,
+status failed, primary FileNotFoundError, phase662.795709s, parts[], secondary[].
+Read under /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-ann-disjoint4-numeric-user72h-20261009-003.
+No complete128/20480, model, matched E2E or task acceptance is established.
+All4 original matrix stderr files were actually read: warnings but no child
+traceback explaining the host missing-file cause. Cause remains UNKNOWN; do
+not infer numerical/paper failure or ignore a missing host first-fault trace.
+Actual cleanup records say stopped/retained/notdeleted/errors[]; fresh0366
+independently inspected all4 exact owned CIDs, Runningfalse/Pid0/noExec/noOOM.
+Fresh0359 SMI0–7 no compute; protected0–3 were not operated.0359 outerexit127
+was only missing host rg after the successful probes, not a paper failure.
+Next diagnostic must acquire the exact host missing-path/first-fault evidence
+and classify it before one source-supported repair; no unchanged915d retry.
+Frozen source915d and all original outputs remain untouched.
+
+Human four-question conclusions are now routed from the canonical loop skill:
+effective utilization/executable CURRENT-NEXT-BACKUP, full mechanism-to-task
+evidence, causal repair/route decisions and production-relevant smoke-first.
+Read .agents/skills/ascend-inference-tuning-loop/SKILL.md before the next launch,
+terminal handling or result promotion, then its relevant references.
+Independent6-case behavior review found two ambiguities: valid oracle must
+precede an implementation verdict, and each ready label must name next_gate
+and its actual prerequisites. MAIN corrected both;7 additional smoke/scheduling
+fixtures are preserved in ascend-failure-next-action-20261009.yaml.
+Actual0363 MST20/focused diff-check and post-correction0368 MST20/full diff-check
+passed. These documentation checks do not grant NPU/model acceptance.
+Checkpoint these coherent skill/handoff files on the current work branch;
+prior Git HTTPS authentication failure remains publication-pending, not a
+device blocker. Do not retry an unchanged authentication failure blindly.
+Both human cutoffs and all numerical/task gates remain unchanged. Earlier
+dispatch/status sections below are historical; do not poll them as live.
+
+## Historical dispatch — 033b successor; 031b/0337 FAILED
+
+Original exec-000000000000033b accepted on direct ma with NEW immutable
+MF915d30521ec5fcb48b0444a422d404c5175e7aff6787c5ff15b3923c4de12593.
+Output /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-ann-disjoint4-numeric-user72h-20261009-003.
+Poll only this existing handle; acceptance is not proof of NPU compute.
+0337 failed in27ms before controller execution: MAIN passed the executable
+again as args[0]. Corrected by separating command from args, not a source or
+algorithm change; original terminal preserved as MAIN_0337_ORIGINAL_TERMINAL_20261009_001.json.
+No003 output/device was created by0337. Do not conceal orchestration failure.
+It performs original42 no-device ABI, all41 packet regressions, and real
+guest absolute artifact SHA/RO-mount visibility BEFORE creating any NPU CID.
+Then each physical4/5/6/7 owns32 cases under one unchanged5400/90 lease;
+full128/20480, independent oracle, thresholds and human cutoffs unchanged.
+
+Actual031b terminated exit1 in91.642s after native42+packet36 same-image PASS.
+First physical4 canary could not read CPU ABI absolute Ref: cross-phase output
+tree omitted from its mounts. No matrix started. Cause ADAPTATION_IMPLEMENTATION,
+not paper/NPU numeric failure. Both exact owned CIDs are freshly stopped-retained,
+PID0/noExecIDs/noOOM; cleanup errors[], release4–7 confirmed, protected0–3 intact.
+Whole original saved outside Git at
+/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-original-operations-v10b-20261009-001/MAIN_031B_ORIGINAL_TERMINAL_20261009_001.json.
+Failed RESULT SHAaf575c87b33fce08ef6969af6b21b754ed80ae78ab1810a69fb6924eba385099.
+
+Narrow fix common ONE experiment root RO in CPU/card guests, own output alias
+only RW, no broad cache mount. Five regression additions pass actual MAIN0330,
+41 total. MAIN0335 source50 byte closure and new output absent PASS.
+Host2182f89ad5e2d54a1811a69c7394c1fa9acc12d7943574fa348401dc0836975e;
+test6eb3d4267c10e700098ece4448b7f65359a9353b1cc9a95495fb411957e40239.
+Native mathematical files remain untouched; failed source9e survives Git74f303f.
+No complete numerical/model/performance/tasks PASS is inferred from software.
+
+Three API-only preparers: complete FULL four-shard consumer bridge, AdaKV
+observer-OFF successor and final-task data/interface. They do not self-admit.
+Git pushes030c/0318 failed (transport then HTTPS Username); remote0310 d59.
+Publication remains pending. No force/main, no credential files in source.
+Earlier RUNNING/source/readiness checkpoints below are historical.
+
+
 ## Latest actual predecessor fix — MAIN0315
 
 Current canonical disjoint MF is9e520a9bcc5f48636291ef1d603a4fb9ba49c1081b92ce8cc6c1da3087463fa6.

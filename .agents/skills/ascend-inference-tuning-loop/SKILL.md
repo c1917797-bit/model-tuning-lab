@@ -18,6 +18,28 @@ orient -> hypothesize -> baseline -> change -> verify -> measure -> decide
 Success, regression, failure, and inconclusive evidence are all useful when
 their conditions and decisions are reproducible.
 
+## Four-question execution contract
+
+Before a new launch, after a terminal event, and before upgrading any result,
+read and apply the relevant rules below. Practice source: the user's Oct9
+request to make utilization, validity, attribution and smoke-first execution
+durable rather than dependent on chat memory.
+
+- Effective card use: [portfolio admission](references/portfolio-preparation-and-serial-admission.md),
+  especially CURRENT/NEXT/BACKUP; count executable successors and useful
+  evidence, not source deliveries or artificial occupancy.
+- Valid success: [the validation DAG and matched controls](references/paper-validation-dag-and-matched-controls.md);
+  no stage may borrow a later stage's PASS or another algorithm's evidence.
+- Failure and route selection: [causal recovery](references/failure-root-cause-and-next-action.md);
+  preserve first fault, classify with confidence, and choose a bounded repair,
+  diagnostic, measured-configuration closure or advance within the fixed clock.
+- Early feedback: the smoke-first section of causal recovery; preregister
+  production-relevant smoke before full gates, without weakening final coverage.
+
+Each stage decision must leave its successor entry, evidence prerequisites,
+owner, remaining budget and missing gates in the active workstream. Skill
+validation or a policy update is not an algorithm acceptance result.
+
 ## Experiment Contract
 
 Use one ID such as `exp-YYYYMMDD-short-name`, one `work/*` branch, and one

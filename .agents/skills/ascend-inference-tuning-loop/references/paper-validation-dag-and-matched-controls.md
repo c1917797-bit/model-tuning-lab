@@ -70,8 +70,11 @@ not silently inherited from stale automation text.
    each task. Zero baseline or uncertainty requires an explicit interpretation,
    not division by zero or a fabricated pass.
 5. **Scoped conclusions:** environment/integration failure means not yet
-   effectively validated; numerical failure means this implementation is
-   incorrect; valid paired no-gain means this measured configuration has no
+   effectively validated; failure against a validated independent numerical
+   reference means the current implementation does not meet that gate.
+   If input, oracle or backend-control validity is unresolved, the numerical
+   judgment is inconclusive and requires causal diagnosis, not an automatic
+   implementation or method verdict. Valid paired no-gain means this measured configuration has no
    benefit. Only complete declared acceptance supports deployed success.
    None of the first three proves the paper worthless or no benefit in all
    environments. Untested environments remain unverified. Distinguish

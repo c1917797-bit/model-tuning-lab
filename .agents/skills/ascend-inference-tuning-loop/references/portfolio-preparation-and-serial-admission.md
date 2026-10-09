@@ -53,6 +53,19 @@ replacement agent within the currently available concurrency limit. More Git
 branches do not create more agent slots; use distinct draft scopes and respect
 the repository worktree budget. No idle loops or dummy jobs count as progress.
 
+Prioritize ready stages by expected advancement toward acceptance per elapsed
+hour, not by paper count, novelty or occupancy. Include launch, warmup, oracle,
+transfer, cleanup and consumer costs when estimating that hour. Reserve time
+for matched E2E and final tasks inside the unchanged portfolio deadline.
+An estimate is a scheduling hypothesis; update it from actual completions.
+Track executable-ready count, per-card useful compute time, verified gate
+completions, terminal-to-dispatch delay, and idle intervals by cause (missing
+packet, host resource admission, diagnosis, transfer or safe handoff).
+At each terminal or delivery, reconcile these against the medium/long goal.
+The target is to remove avoidable gaps and sustain a ready successor, not an
+unmeasured promise of zero idle time or an accepted technique guaranteed by
+process discipline. Safety and comparable exclusive timing remain mandatory.
+
 Each delivery includes the complete patch, immutable source identities, actual
 device-independent tests, one aggregate validation entrypoint, fresh-resource
 discovery requirements, complete case coverage, downstream model/performance
@@ -277,6 +290,15 @@ BACKUP is a reviewed independent algorithm/controller path being closed
 concurrently. A source delivery or a preparer's ready boolean is not NEXT.
 Each lane records exact source/receipt identities, unrun same-image or native
 prerequisites, fixed cutoff, summed resources, and its actual owner.
+
+Always pair a lane label with next_gate, its actual prerequisite Refs and
+ready_for_that_gate. Report ready counts separately for software/image preflight,
+NPU numerics, model screen, formal timing and final tasks. NEXT may be an
+executable image-preflight entry while NPU prerequisites remain pending; label
+that NEXT_IMAGE_PREFLIGHT, not READY_FOR_NPU. SOURCE-PENDING is not executable
+for a gate whose prerequisites are missing. Promote only after that gate's
+real consumer accepts its predecessor. A count of preparers or ready CPU
+entries is never a count of ready NPU/model candidates.
 
 Complete device-independent work during the preceding device lease or resource
 wait. If preparation compute cannot fit the shared host budget, keep API-only
