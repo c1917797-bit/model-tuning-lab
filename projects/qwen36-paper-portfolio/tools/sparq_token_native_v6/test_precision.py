@@ -5,6 +5,7 @@ from precision_oracle import PROTOCOL,bits32,classify,validate_witness
 CHANNELS=list(range(32))
 def f32(x):return struct.unpack(">f",struct.pack(">f",x))[0]
 class ExactTie(unittest.TestCase):
+ """Historical stable-ID probability-CPU32 diagnostic; not author ANN tie policy."""
  def make(self,scores,a,b,budget=128,local=1):
   return classify(scores,a,b,CHANNELS,CHANNELS,budget,local)
  def fixture(self):
@@ -83,19 +84,40 @@ class SourceClosure(unittest.TestCase):
   s=self.src("precision_oracle.py")
   for text in ("dtype=torch.float32","t.dtype==torch.float32","val64=val.double()","t.dtype==torch.float64","weights@nv"):
    self.assertIn(text,s)
- def test_original_feedback_and_full_matrix_and_all_three_extra_output_gates_retained(self):
-  s=self.src("numeric_gate.py")
-  for text in ("golden(torch,rq","golden(torch,q","reference_previous.copy_(expected","previous.copy_(out)",
-   "for step in range(160)","for b in range(1,17)","native_pa_metric[\"passed\"] and conditional_metric[\"passed\"] and tie_impact_metric[\"passed\"]"):
+ def test_author_feedback_full_matrix_FP64_hard_literal_complete_diagnostic(self):
+  # Old probability-CPU32/PA gates above are diagnostic history, not author ANN authority.
+  s=self.src("matrix.py")
+  for text in ("author_feedback(torch,objects,rq,refk,refv","author_feedback(torch,objects,q,refk,refv",
+   "reference_previous.copy_(expected","previous.copy_(out)","for step in range(160)","for b in range(1,17)",
+   'conditional_metric["passed"] and literal_metric["finite"]',
+   "author_literal_output_hard_gate=False","literal_output_deviation_complete_every_head=True",
+   "FP64_reselect_formal=False","candidate_data_used_by_formal_reference=False",
+   "full_original_qKV_FP64_recomputed=True","native_PA_executed=False"):
    self.assertIn(text,s)
-  self.assertIn('LIMITS={"relative_rms":.005,"cosine":.99998}',s)
-  self.assertIn('same-candidate-query strict independent CPU32',s)
- def test_full_consumer_requires_every_precision_witness_and_three_metrics(self):
-  s=self.src("receipt.py")
-  for text in ("row.get(\"oracle_cpu32_support\") is True","validate_witness(witness)",
-   "native_pa_conditional_metric","selected_conditional_metric","fp32_tie_fp64_output_impact"):
+  self.assertIn('LIMITS={"relative_rms":.005,"cosine":.99998}',self.src("numeric_gate.py"))
+  oracle=self.src("independent_oracle.py")
+  self.assertIn('ref=literal_reference(torch,objects,q[None],key[None],value[None]',oracle)
+  self.assertIn('result=conditional(torch,q,k,v,dims,selected,reallocation)',oracle)
+  self.assertIn('require(torch.equal(score,witness_score[:,:n])',oracle)
+  self.assertIn('require(torch.equal(ranking,witness_ranking[:n])',oracle)
+  self.assertIn("no backend ULP relaxation",oracle)
+ def test_current_consumer_requires_every_author_witness_hardFP64_completeLiteral(self):
+  s=self.src("ann_matrix_consumer.py")
+  for text in ('row["CPU32_stable_ID_required"] is False',
+   'metrics(row["author_conditional_fp64_metric"],b)',
+   'diagnostic=row["author_literal_output_metric"]',
+   'diagnostic["passed"]==calculated',
+   'row["literal_output_deviation_complete_every_head"] is True',
+   'for name in ("author_reference_q_selector_witness","author_reference_rq_selector_witness")',
+   'row["full_original_qKV_FP64_recomputed"] is True',
+   'row["literal_selector_observation_restored"] is True',
+   'w["nonzero_score_tolerance"] is False',
+   'require(keys==expected and steps==20480',
+   'len(case["actual_step_refs"])==160'):
    self.assertIn(text,s)
-  self.assertIn('count==20480',s);self.assertIn('len(case["actual_step_refs"])==160',s)
+  self.assertIn('row["FP64_reselect_formal"] is False',s)
+  self.assertIn('lo<=x<=hi',s);self.assertIn('len(v)==6',s)
+  self.assertIn("from ann_matrix_consumer import validate_matrix as author_ann_validate",self.src("receipt.py"))
  def test_CPU_smoke_consumed_before_device_no_stub_success(self):
   s=self.src("preflight.py");tree=ast.parse(s)
   fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="cpu_golden_smoke")
@@ -106,9 +128,13 @@ class SourceClosure(unittest.TestCase):
   self.assertNotIn("set_device",text)
  def test_new_component_protocol_not_legacy_model_authority(self):
   s=self.src("consume_numeric.py")
-  self.assertIn('"schema":"sparq.complete-token-component/v7-fp32-support"',s)
+  self.assertIn('"schema":"sparq.complete-token-component/v9-author-ann-FP32-compensation"',s)
+  self.assertNotIn('"schema":"sparq.complete-token-component/v7-fp32-support"',s)
+  self.assertIn('"original011_numeric_status":"failed-not-promoted"',s)
   for field in ("model_executed","matched1024_e2e_verified","final2048_task_verified"):
    self.assertIn('"'+field+'":False',s)
+  self.assertIn('report.get("precision_contract")==PROTOCOL',self.src("ann_matrix_consumer.py"))
+  self.assertIn('original-dtype-selector/v4-FP32-compensation-fixed-capacity-per-request-SUM',self.src("contract.py"))
  def test_no_Torch_import_in_stdlib_helper(self):
   self.assertNotIn("torch",sys.modules);self.assertNotIn("torch_npu",sys.modules)
 if __name__=="__main__":unittest.main(verbosity=2)

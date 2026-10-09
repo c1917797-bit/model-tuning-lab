@@ -178,13 +178,15 @@ class CrossModule(unittest.TestCase):
   self.assertIn("probe_args=c.abi_image_argv(BASE,source,cpu_out)[2:]",host_text)
   for text in (host_text,gate_text,consumer_text):self.assertIn("validate_cpu_abi_child(",text)
   self.assertNotIn('=="sparq-token-v4"',gate_text);self.assertNotIn('=="sparq-token-v5"',gate_text)
- def test_source_changed_proof_not_claimed_byte_exact_math_unchanged(self):
-  for n,s in {"sparq_token_v4/core.py":"c5ef88f12828597469f7f3ce32a78ca4b4bb31d66c38beba102420d11bb21393",
-   "sparq_token_v4/oracle.py":"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f",
-   "model_bridge.py":"74400ac82b9f28ce4cbed21faf00f2201307eb43c31b76f8a2851e1eb97bffb9",
-   "numeric_gate.py":"d35c9a1aae8f7c7e650d98cbcf17cbf8412ef6b40e1385795103d4c39c56bf63",
-   "preflight.py":"ae4d94c5f46a3a6159e657f3208ad636f7153d8c1db87990c903c6caa94ab682"}.items():
+ def test_current_source_changed_proof_and_distinct_author_math_pins(self):
+  # Native/legacy core, independent FP64/literal sources and eager bridge are unchanged.
+  # Registered FP32 compensation is NOT old BF16 literal parity; actual final hashes remain hard pins.
+  for n,s in {"sparq_token_v4/core.py":"c5ef88f12828597469f7f3ce32a78ca4b4bb31d66c38beba102420d11bb21393","sparq_token_v4/oracle.py":"c6680b02473da9188d7ae1998769555b6fcea67b03c1284d3d590340e01a639f","model_bridge.py":"74400ac82b9f28ce4cbed21faf00f2201307eb43c31b76f8a2851e1eb97bffb9","numeric_gate.py":"083613f52eb57013fa31801792c0871d89866dedf9c7801d3b79982b98a2c13d","preflight.py":"3a5497a8ec797f5b80caa98c17d80dc44116fafb14bbc031f428a1b5759c7512","matrix.py":"02484f6fecd08548f4eebac5eb39e6552affc4b0fc2c3a8591fff86eac3f56d4","ann_workspace.py":"3393fbd9552a2ec7fb914b472cb5ec00aa95025de9051433e372fe0b2e92e46e","independent_oracle.py":"6ed5f73deffc1790f6c6c54806181956248a6042080ca10ead8116abb7e4e945","literal_author.py":"1468b55c25aa99132d3f7d7dcbd9ead7b0b88c4707d08d999a9754312eb21602"}.items():
    self.assertEqual(receipt.sha(receipt.ROOT/n),s)
+  manifest=json.loads((receipt.ROOT/"SOURCE_MANIFEST.json").read_bytes())
+  self.assertEqual(manifest["schema"],"sparq.token-preparation/v9-author-ann-FP32-compensation")
+  self.assertEqual(manifest["source_count"],42);self.assertEqual(len(manifest["files"]),31)
+  self.assertNotEqual(receipt.sha(receipt.ROOT/"numeric_gate.py"),"d35c9a1aae8f7c7e650d98cbcf17cbf8412ef6b40e1385795103d4c39c56bf63")
   self.assertNotEqual(receipt.sha(Path(gate.__file__)),"70eed04080d4a3e8c6a81871d3da81aa1bed6fcde3c06b32d0e04d37d89c539c")
   self.assertEqual(receipt.OWNER,"sparq-token-v6");self.assertNotIn("torch",sys.modules)
 
@@ -415,7 +417,12 @@ class CleanupLinkage(unittest.TestCase):
   self.assertEqual(host.H.HOST_MEM,256*1024**2)
   self.assertEqual(host.HOST_MEM,256*1024**2)
   self.assertEqual(host.PHASE_SECONDS,5400);self.assertEqual(host.CLEANUP_SECONDS,90)
-  self.assertEqual(host.CUTOFF.isoformat(),"2026-10-09T11:17:31+00:00")
+  self.assertEqual(host.CUTOFF.isoformat(),"2026-10-10T07:00:25+00:00")
+  self.assertEqual(receipt.PAPER_CUT,"2026-10-08T19:00:00+00:00")
+  self.assertEqual(receipt.PORTFOLIO_CUT,"2026-10-09T11:17:31+00:00")
+  self.assertLess(host.CUTOFF,host.datetime.fromisoformat(receipt.EXECUTION_CLOCK["total_cutoff_utc"].replace("Z","+00:00")))
+  self.assertEqual(receipt.EXECUTION_CLOCK["repair_cutoff_epoch"],1791615625)
+  self.assertEqual(receipt.USER_TIME_PROTOCOL["sha256"],"b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1")
   self.assertEqual(receipt.sha(host.H8),host.H8_SHA)
   ctl=object.__new__(host.Controller);ctl.deadline=time.monotonic()-1;ctl.cleanup_deadline=None
   with self.assertRaises(ValueError):ctl.remaining()

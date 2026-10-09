@@ -192,3 +192,19 @@ complete raw stages and independent whole-terminal consumption; any new
 algorithm/reference arithmetic contract is explicit, source-justified and
 preregistered, never a silent task-level tolerance applied to tensors.
 See [actual16 NPU observations](../../../workstreams/qwen36-damp-ascend-20261006/SCORE_SHAPE_NPU_OBSERVATIONS_20261009.md).
+
+## Check the full successor suite, not only new helper tests
+
+An AST walk over a whole `for` node includes its iterator `range(b)` call.
+To assert one captured reduction call, bind the static iterator separately,
+then validate the single loop-body expression and its actual `torch.sum`
+operands, dimension and persistent output. Retain all negatives and the
+original failed run; do not weaken runtime or numerical checks to fix a test.
+Protocol migrations must also include unchanged regression modules: SparQ's
+actual0221 ran196 tests with194PASS/2FAIL (loop scope and a stale v3 literal).
+The minimal test-only followup0225 passed all196 and real OFF/help/source-audit
+entrypoints with source eb7ed908, while the full NPU matrix remains separate.
+Software PASS, CPU ABI and tiny canary cannot grant model/E2E/task authority.
+Use the current whole operation and source identity at every consumer edge.
+
+Case: [fixed-capacity stage and preserved originals](../../../workstreams/qwen36-damp-ascend-20261006/SPARQ_FIXED_CAPACITY_STAGE_20261009.json).

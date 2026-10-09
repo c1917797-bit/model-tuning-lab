@@ -62,10 +62,13 @@ class NativeAPI(unittest.TestCase):
    with self.subTest(before=before,after=after),self.assertRaises(ValueError):p.wrapper_ast_contract(changed)
    with self.subTest(scope="fixed source SHA"),self.assertRaises(ValueError):p.wrapper_source_contract(changed,hashlib.sha256(changed.encode()).hexdigest())
  def test_real_golden_native_writer_calls_keep_wrapper_slot_mapping(self):
-  source=(Path(__file__).parent/"numeric_gate.py").read_text();tree=ast.parse(source)
+  source=(Path(__file__).parent/"matrix.py").read_text();tree=ast.parse(source)
   calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="reshape_and_cache"]
   self.assertEqual(len(calls),3)
   for call in calls:self.assertEqual({k.arg for k in call.keywords},{"key","value","key_cache","value_cache","slot_mapping"})
+  self.assertEqual({next(k.value.id for k in call.keywords if k.arg=="slot_mapping") for call in calls},{"indices","mapping","idx"})
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and
+   n.func.attr=="_npu_reshape_and_cache" for n in ast.walk(tree)))
  def test_actual_paged_attention_keywords_match_unchanged_core(self):
   source=(Path(__file__).parent/"sparq_token_v4/core.py").read_bytes()
   manifest=json.loads((receipt.ROOT/"SOURCE_MANIFEST.json").read_bytes())

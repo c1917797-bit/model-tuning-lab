@@ -10,14 +10,39 @@ OWNER="sparq-token-v6"
 BATCHES="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"
 MODES=(("eager",0),("graph",0),("graph",1),("graph",2))
 ROOT=Path(__file__).resolve().parent
-CUT="2026-10-09T11:17:31+00:00"
+PAPER_CUT="2026-10-08T19:00:00+00:00"
+PORTFOLIO_CUT="2026-10-09T11:17:31+00:00"
+USER_TIME_PROTOCOL={"path":"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json","sha256":"b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"}
+EXECUTION_CLOCK={"schema":"sparq.user72h-execution-clock/v1","owner":"sparq-author-ann-fixed-capacity-repair/v1","authorization":{"path":"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json","sha256":"b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"},"repair_cutoff_utc":"2026-10-10T07:00:25Z","repair_cutoff_epoch":1791615625,"total_cutoff_utc":"2026-10-12T07:00:25Z","total_cutoff_epoch":1791788425,"original_ba508_status":"FAILED-not-promoted"}
+REPAIR_CUT="2026-10-10T07:00:25+00:00"
+CUT=REPAIR_CUT
+def validate_cutoff_fields(record):
+ require(record.get("paper_cutoff")=="2026-10-08T19:00:00Z" and
+  record.get("portfolio_cutoff")=="2026-10-09T11:17:31Z",
+  "fixed paper19Z and separate global portfolio cutoff; no reset/extension")
+ require(record.get("execution_clock")==EXECUTION_CLOCK,
+  "NEW explicit immutable user72h repair clock; no old ba508 execution authority")
+ return {"paper_cutoff":record["paper_cutoff"],"portfolio_cutoff":record["portfolio_cutoff"],
+  "execution_clock":record["execution_clock"]}
+def execution_clock():
+ """Bind already-authorized protocol bytes, never derive a fresh start/cutoff."""
+ actual=load(USER_TIME_PROTOCOL)
+ require(actual["schema"]=="paper-portfolio.user-time-protocol/v1" and
+  actual["recorded_at_epoch"]==1791529225 and actual["recorded_at_utc"]=="2026-10-09T07:00:25Z" and
+  actual["first_candidate_repair_cutoff_epoch"]==1791615625 and
+  actual["first_candidate_repair_cutoff_utc"]=="2026-10-10T07:00:25Z" and
+  actual["total_cutoff_epoch"]==1791788425 and actual["total_cutoff_utc"]=="2026-10-12T07:00:25Z" and
+  actual["old_cutoffs_unchanged"] is True and actual["old_failures_unchanged"] is True and
+  actual["physical_npus"]==[4,5,6,7] and actual["protected_physical_npus"]==[0,1,2,3],
+  "actual human72h protocol repair/portfolio epochs; historical cutoffs stay frozen")
+ return EXECUTION_CLOCK
 DEPENDENCIES={
  "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20",
  "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
  "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
 }
 OWN=("README.md","READY.md","consume_numeric.py","numeric_gate.py","preflight.py","sparq_token_v4/__init__.py",
- "sparq_token_v4/core.py","sparq_token_v4/oracle.py","sparq_token_v4/proof.py","test_contract.py","receipt.py","host.py","model_bridge.py","sitecustomize.py","original_terminal.py","original_operation_get_ma0e85.json","original_operation_get_ma0e7f_not_found.json","test_abi.py","original_v4_failed_ABI.json","original_v4_failed_child.json","test_launch_linkage.py","precision_oracle.py","test_precision.py")
+ "sparq_token_v4/core.py","sparq_token_v4/oracle.py","sparq_token_v4/proof.py","test_contract.py","receipt.py","host.py","model_bridge.py","sitecustomize.py","original_terminal.py","original_operation_get_ma0e85.json","original_operation_get_ma0e7f_not_found.json","test_abi.py","original_v4_failed_ABI.json","original_v4_failed_child.json","test_launch_linkage.py","precision_oracle.py","test_precision.py","contract.py","literal_author.py","ann_workspace.py","independent_oracle.py","test_ann_contract.py","matrix.py","ann_matrix_consumer.py","cpu_smoke.py")
 def sha(path):
  p=Path(path);require(p.is_absolute() and p.is_file() and not p.is_symlink(),"exact absolute ordinary evidence")
  h=hashlib.sha256()
@@ -36,9 +61,9 @@ def load(r):
 MODEL_SOURCES={"attention_v1":{"runtime_ref":{"path":"/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_v1.py","sha256":"80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"},"captured_source_ref":{"path":"/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py","sha256":"80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"}},"model_runner_v1":{"runtime_ref":{"path":"/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py","sha256":"94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"},"captured_source_ref":{"path":"/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/model_runner_v1.py","sha256":"94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"}}}
 def source_identity(root,path,digest,context="host"):
  require(context in ("host","runtime") and path==root/"SOURCE_MANIFEST.json","exact current source manifest/context")
- sr=bound(path,digest);m=load(sr)
- require(m["schema"]=="sparq.token-preparation/v6" and m["ready"] is False and m["source_count"]==29 and
-   set(m["files"])==set(OWN),"full23 own +1 native +3 generic +2 actual model-source closure")
+ sr=bound(path,digest);m=load(sr);validate_cutoff_fields(m);execution_clock()
+ require(m["schema"]=="sparq.token-preparation/v9-author-ann-FP32-compensation" and m["ready"] is False and m["source_count"]==42 and
+   set(m["files"])==set(OWN),"full31 own +1 native +3 generic +2 model +4 official +1 user72h source closure")
  for name,s in m["files"].items():bound(root/name,s)
  require(m.get("dependencies")==DEPENDENCIES,"fixed generic host source closure")
  for path,d in DEPENDENCIES.items():bound(path,d)
@@ -47,6 +72,14 @@ def source_identity(root,path,digest,context="host"):
  require(m.get("model_sources")==MODEL_SOURCES,"actual deployed model seam source pins, never public tag guesses")
  for pair in MODEL_SOURCES.values():
   r=pair["runtime_ref"] if context=="runtime" else pair["captured_source_ref"];bound(r["path"],r["sha256"])
+ from contract import ANN,CAUSAL,IDENTITIES,COMMIT,TREE,read_ref
+ require(m.get("author_sources")=={"ann":ANN,"causal":CAUSAL,"identities":IDENTITIES,"commit":COMMIT,"tree":TREE},"actual official source closure")
+ for ref in (ANN,CAUSAL,*IDENTITIES):read_ref(ref)
+ for i,ref in enumerate(IDENTITIES):
+  actual=json.loads(read_ref(ref));official=(ANN,CAUSAL)[i]
+  require(actual["commit"]==COMMIT and actual["tree"]==TREE and actual["git_blob_sha1"]==official["git_blob"] and
+   actual["source"]=={key:official[key] for key in ("path","sha256","bytes")} and actual["algorithm_pass"] is False,
+   "actual official identity is not borrowed algorithm permission")
  return sr,m["files"]
 def abi_image_argv(root,source,host_output_root):
  root=Path(root);out=Path(host_output_root)
@@ -87,61 +120,8 @@ def host_marker(text):
  return json.loads(rows[0].split(" ",1)[1])
 
 def validate_matrix(report,root):
- from precision_oracle import PROTOCOL,validate_witness
- from numeric_gate import LIMITS
- from sparq_token_v4.core import HEADS
- import math
- require(report.get("schema")=="sparq.token-numeric/v4" and report.get("status")=="passed" and report.get("limits")==LIMITS and report.get("precision_contract")==PROTOCOL and report.get("original009_numeric_status")=="failed-not-promoted",
-  "actual complete original SparQ kernel report")
- output=Path("/sparq-results/gate")
- require(root.is_absolute() and root.is_dir() and root.resolve()==root,"exact owned numerical gate root")
- require(not (root/"FAILURE.json").exists() and not list(root.glob("failure-*.pt")) and not list(root.glob("raw-failure-*.json")) and
-  "secondary_source_error" not in report,"first numerical failure never relabelled")
- def translated(r):
-  p=Path(r["path"]);require(output in p.parents and ".." not in p.parts,"actual immutable original image-owned case/step path")
-  hp=root/p.relative_to(output);require(hp.resolve()==hp and hp.is_file() and not hp.is_symlink(),"actual owned case/step mapping")
-  return bound(hp,r["sha256"])
- keys=set();count=0
- for header in report["cases"]:
-  b,m,c,t=header["batch"],header["mode"],header["reallocation"],header["trial"];key=(b,m,c,t)
-  require(type(b) is int and b in range(1,17) and type(c) is bool and (m,t) in MODES and key not in keys,"unique exact128-case coordinates");keys.add(key)
-  case=load(translated(header["actual_case_ref"]));require(all(case[k]==header[k] for k in ("batch","mode","reallocation","trial")),"actual immutable case coordinates")
-  require(case["status"]=="passed" and case["steps"]==160 and case["service_ready"] is False and case["model_graph_supported"] is False and
-    case["worst_relative_rms"]<=.005 and case["minimum_cosine"]>=.99998 and case["actual_mean_bytes"]==18*(256*4+8)+128*(4+8) and
-    case["mean_payload_bytes"]==18*(256*4+8) and case["actual_workspace_bytes"]>0 and len(case["actual_step_refs"])==160,"original complete guarded case")
-  pa_slots=list(range(b));pa_live={slot:2048-3*slot for slot in pa_slots}
-  for s,sr in enumerate(case["actual_step_refs"]):
-   row=load(translated(sr));require((row["batch"],row["mode"],row["reallocation"],row["trial"],row["step"])==(b,m,c,t,s),"all160 actual ordered steps")
-   require(all(row[k] is True for k in ("finite","full_native_cache_bitwise","selected_scratch_guard","input_untouched","mean_request_lease_checked","support_independent","pointer_identity","workspace_mean_guards","all_topology_immutable","reference_feedback_independent","oracle_cpu_fp64","per_head_metric","native_cache_input_outer_guards")),"complete original per-step full guards/slot/oracle checks")
-   require(row.get("support_independent_query")=="candidate-feedback-q" and row.get("dense_attention_equivalence_claimed") is False and
-    type(row.get("reference_feedback_support_equal")) is bool and type(row.get("cross_feedback_support_divergence")) is list and
-    len(row["cross_feedback_support_divergence"])==b and all(type(v) is bool for v in row["cross_feedback_support_divergence"]) and
-    row["reference_feedback_support_equal"]==(not any(row["cross_feedback_support_divergence"])),
-    "actual approximate-support divergence classification; q/rq feedback never shared")
-   require(row.get("precision_contract")==PROTOCOL and row.get("oracle_cpu32_support") is True and
-    row.get("strict_stable_cpu32_support") is True and row.get("nonzero_score_tolerance") is False and
-    type(row.get("precision_witnesses")) is list and len(row["precision_witnesses"])==b,
-    "registered independent CPU32 support plus unchanged FP64 output/feedback contract")
-   for witness in row["precision_witnesses"]:validate_witness(witness)
-   for metric_name in ("native_pa_conditional_metric","selected_conditional_metric","fp32_tie_fp64_output_impact"):
-    metric=row[metric_name];require(metric.get("finite") is True and metric.get("passed") is True,"actual independent selected PA/mix and tie output impact")
-    for name,lo,hi in (("relative_rms",0,.005),("cosine",.99998,1.000001)):
-     values=metric[name];require(len(values)==b and all(len(v)==HEADS for v in values) and
-       all(type(v) in (int,float) and math.isfinite(v) and lo<=v<=hi for heads in values for v in heads),"every conditional/tie-impact request/head original thresholds")
-   if s%11==0:pa_slots=pa_slots[1:]+pa_slots[:1]
-   if s==80:pa_live[pa_slots[0]]=1
-   expected_host_context=[min(pa_live[slot]+1,128) for slot in pa_slots]
-   require(row.get("native_pa_context_cpu_int32")==expected_host_context and row.get("native_pa_host_guard") is True and
-    row.get("native_pa_context_epoch")==s+2 and row.get("native_pa_graph_update_epoch")==(s+2 if m=="graph" else None),
-    "independent actual160-step host PA context/slot rotation/step80 shortened reuse/task-update epoch")
-   for slot in pa_slots:pa_live[slot]+=1
-   for name,lo,hi in (("relative_rms",0,.005),("cosine",.99998,1.000001)):
-    values=row[name];require(len(values)==b and all(len(v)==HEADS for v in values) and
-      all(type(v) in (int,float) and math.isfinite(v) and lo<=v<=hi for heads in values for v in heads),"actual EVERY request/head gate; no mean")
-   count+=1
- require(keys=={(b,m,c,t) for b in range(1,17) for m,t in MODES for c in (False,True)} and count==20480,"full128cases/20480 numerical steps; no shard PASS")
- return {"cases":128,"changing_feedback_steps":count,"numerical_component_checked":True,"precision_contract":PROTOCOL,
-  "ready":False,"service_ready":False,"model_executed":False,"matched1024_e2e_verified":False,"final2048_task_verified":False}
+ from ann_matrix_consumer import validate_matrix as author_ann_validate
+ return author_ann_validate(report,root)
 
 def inspect_row(ref):
  rows=load(ref)

@@ -6,9 +6,9 @@ import argparse,json,hashlib,math,os,sys,time
 from pathlib import Path
 from sparq_token_v4.core import HEADS,DIM,BLOCK,SLOTS,require
 from sparq_token_v4.proof import validate_proof
-from receipt import sha,bound,source_identity,canonical,write_new,MODES,BATCHES,image_argv
+from receipt import sha,bound,source_identity,canonical,write_new,MODES,BATCHES,image_argv,CUT,PORTFOLIO_CUT,EXECUTION_CLOCK
 LIMITS={"relative_rms":.005,"cosine":.99998}
-from precision_oracle import PROTOCOL as PRECISION_CONTRACT,independent,metrics
+from contract import PROTOCOL as PRECISION_CONTRACT
 def raw_cpu(torch,v):
     if isinstance(v,torch.Tensor):return v.detach().cpu()
     if isinstance(v,dict):return {k:raw_cpu(torch,x) for k,x in v.items()}
@@ -60,182 +60,9 @@ def native_slot_layout(torch,npu,indices,tokens,cache):
             cache.is_contiguous() and npu.get_npu_format(cache)==2,
             "actual ATB native slot int32/ND/contiguous/on-cache-device and BF16 native cache layout")
 def run_case(torch,npu,writer,root,b,mode,correction,trial,deadline):
-    from sparq_token_v4.core import GraphTokenWorkspace,MeanPool,MeanBook,Guarded
-    case="b%d-%s-mean%d-t%d"%(b,mode,correction,trial);pages=18;capacity=pages*BLOCK;slots_total=18
-    native_slot_capacity(slots_total,pages,2048,160)
-    torch.manual_seed(49585+b+100*trial)
-    kguard=Guarded(torch,(slots_total*pages+1,BLOCK,1,DIM),torch.bfloat16,"npu:0")
-    vguard=Guarded(torch,(slots_total*pages+1,BLOCK,1,DIM),torch.bfloat16,"npu:0")
-    kc=kguard.value;vc=vguard.value;kc.zero_();vc.zero_();refk=kc.clone();refv=vc.clone()
-    workspace=GraphTokenWorkspace(kc.device,b,pages,128,32,1);mean=MeanPool(kc.device,slots=slots_total);book=MeanBook(slots_total)
-    slots=list(range(b));versions={s:1 for s in slots+[16,17]};lengths={s:2048-3*s for s in slots};lengths.update({16:33,17:65})
-    inputs_guard={}
-    def allocate_input(name,shape,dtype):
-        g=Guarded(torch,shape,dtype,kc.device);inputs_guard[name]=g;g.value.zero_();return g.value
-    q=allocate_input("q",(b,HEADS,DIM),torch.bfloat16)
-    nk=allocate_input("nk",(b,1,DIM),torch.bfloat16);nv=allocate_input("nv",(b,1,DIM),torch.bfloat16)
-    mapping=allocate_input("mapping",(b,),torch.int32)
-    native_slot_layout(torch,npu,mapping,b,kc)
-    leases=allocate_input("leases",(b,),torch.int64);leases.copy_(torch.tensor(slots,dtype=torch.int64,device=kc.device))
-    previous=torch.zeros_like(q);reference_previous=torch.zeros_like(q)
-    for s in slots+[16,17]:
-        n=lengths[s];k=torch.randn((n,1,DIM),device=kc.device,dtype=torch.bfloat16)*.05;v=torch.randn_like(k)*.05
-        indices=torch.arange(s*capacity,s*capacity+n,device=kc.device,dtype=torch.int32)
-        native_slot_layout(torch,npu,indices,n,kc)
-        writer.reshape_and_cache(key=k,value=v,key_cache=kc,value_cache=vc,slot_mapping=indices)
-        refk.view(-1,1,DIM)[s*capacity:s*capacity+n].copy_(k)
-        refv.view(-1,1,DIM)[s*capacity:s*capacity+n].copy_(v)
-        mean.prefill(s,v);book.begin("native-slot-%d"%s,versions[s],s,n)
-    torch.npu.synchronize()
-    require(torch.equal(kc,refk) and torch.equal(vc,refv),"complete original native cache prefill")
-    tensors={"kc":kc,"vc":vc,"q":q,"nk":nk,"nv":nv,"mapping":mapping,"leases":leases,
-             "rows":workspace.rows,"lengths":workspace.lengths,"sum":mean.sums,"counts":mean.counts,
-             "selected_k":workspace.key,"selected_v":workspace.value,"native_out":workspace.output}
-    tensors.update({"workspace_"+name:t for name,t in workspace.tensors().items()})
-    tensors["pa_context_host"]=workspace.native_pa.context.value
-    require(all(t.device.type=="npu" and t.is_contiguous() and npu.get_npu_format(t)==2 for name,t in tensors.items() if name!="pa_context_host"),
-            "actual contiguous ND buffers")
-    paused_sums=mean.sums[16:].clone();paused_counts=mean.counts[16:].clone()
-    identity=pointers(tensors);graph=None;result=None;raw={};step=-1;step_refs=[]
-    def run():
-        writer.reshape_and_cache(key=nk,value=nv,key_cache=kc,value_cache=vc,slot_mapping=mapping)
-        mean.append(leases,nv)
-        return workspace.run(q,kc,vc,mean.means(leases),reallocation=bool(correction))
-    def topology():
-        rows=[[s*pages+j for j in range(pages)] for s in slots]
-        workspace.rows.copy_(torch.tensor(rows,dtype=torch.int64,device=kc.device))
-        live_lengths=[lengths[s]+1 for s in slots]
-        workspace.lengths.copy_(torch.tensor(live_lengths,dtype=torch.int32,device=kc.device))
-        workspace.native_pa.set_lengths(live_lengths)
-        positions=[s*capacity+lengths[s] for s in slots]
-        require(len(set(positions))==b and all(0<=p<slots_total*capacity for p in positions),
-                "exact unique native host slot positions within int32-admitted backing")
-        mapping.copy_(torch.tensor(positions,dtype=torch.int32,device=kc.device))
-        leases.copy_(torch.tensor(slots,dtype=torch.int64,device=kc.device));return rows
-    try:
-        rows=topology();q.fill_(.05)
-        if mode=="graph":
-            snapshots={k:t.clone() for k,t in tensors.items()}
-            run();torch.npu.synchronize()
-            for k,t in tensors.items():t.copy_(snapshots[k])
-            graph=torch.npu.NPUGraph()
-            workspace.native_pa.prepare_capture()
-            with torch.npu.graph(graph):result=run()
-            workspace.native_pa.finish_capture()
-            torch.npu.synchronize()
-            for k,t in tensors.items():t.copy_(snapshots[k])
-        worst=0.;min_cos=1.
-        for step in range(160):
-            require(time.monotonic()<deadline,"fixed phase/cutoff no retry")
-            if step%11==0:
-                slots=slots[1:]+slots[:1];previous=previous.roll(-1,0);reference_previous=reference_previous.roll(-1,0)
-            if step==80:
-                s=slots[0];book.finish("native-slot-%d"%s,versions[s]);versions[s]+=1
-                start=s*capacity
-                kc[s*pages:(s+1)*pages].zero_();vc[s*pages:(s+1)*pages].zero_()
-                refk[s*pages:(s+1)*pages].zero_();refv[s*pages:(s+1)*pages].zero_()
-                ik=torch.randn((1,1,DIM),device=kc.device,dtype=torch.bfloat16)*.05;iv=torch.randn_like(ik)*.05
-                idx=torch.tensor([start],device=kc.device,dtype=torch.int32)
-                native_slot_layout(torch,npu,idx,1,kc)
-                writer.reshape_and_cache(key=ik,value=iv,key_cache=kc,value_cache=vc,slot_mapping=idx)
-                refk.view(-1,1,DIM)[start:start+1].copy_(ik);refv.view(-1,1,DIM)[start:start+1].copy_(iv)
-                mean.reset(s);mean.prefill(s,iv);lengths[s]=1;previous[0].zero_();reference_previous[0].zero_()
-                book.begin("native-slot-%d"%s,versions[s],s,1)
-            rows=topology();seed=torch.randn_like(q)*.1
-            q.copy_((seed.float()+.01*previous.float().tanh()).to(q.dtype))
-            rq=(seed.float()+.01*reference_previous.float().tanh()).to(q.dtype)
-            nk.copy_(torch.randn_like(nk)*.05);nv.copy_(torch.randn_like(nv)*.05)
-            inputs={k:t.clone() for k,t in (("q",q),("nk",nk),("nv",nv),("mapping",mapping),("leases",leases))}
-            immutable_workspace=("rows","lengths","logical","logical_page","offset","batch_index","pa_table","budget_tensor")
-            workspace_before={k:getattr(workspace,k).clone() for k in immutable_workspace}
-            pa_context_before=workspace.native_pa.context.value.clone()
-            raw={"kc_before":kc.clone(),"vc_before":vc.clone(),"kc":kc,"vc":vc,"refk":refk,"refv":refv,
-                 "q":q,"rq":rq,"nk":nk,"nv":nv,"mapping":mapping,"mean":mean.sums,"counts":mean.counts,
-                 "scratch_k":workspace.key,"scratch_v":workspace.value,"input_before":inputs,"workspace_before":workspace_before,
-                 "workspace_tensors":workspace.tensors(),"workspace_guards":[g.backing for g in workspace._guards],"mean_guards":[g.backing for g in mean._guards],
-                 "native_output":workspace.output,"corrected_output":workspace.corrected,"native_cache_outer_guards":(kguard.backing,vguard.backing),
-                 "native_input_guards":{k:g.backing for k,g in inputs_guard.items()},
-                 "native_pa_context_cpu":workspace.native_pa.context.value,"native_pa_host_guard":workspace.native_pa.context.backing,
-                 "slot_generations":dict(versions),"slot_lengths":dict(lengths)}
-            for i,s in enumerate(slots):
-                pos=s*capacity+lengths[s]
-                refk.view(-1,1,DIM)[pos:pos+1].copy_(nk[i:i+1]);refv.view(-1,1,DIM)[pos:pos+1].copy_(nv[i:i+1])
-                book.append("native-slot-%d"%s,versions[s],s,lengths[s])
-            if graph is None:result=run()
-            else:
-                workspace.native_pa.update_graph();workspace.native_pa.check_replay()
-                graph.replay()
-            torch.npu.synchronize()
-            out,selected,alpha,channels=result;current=[lengths[s]+1 for s in slots]
-            require(torch.equal(workspace.native_pa.context.value,pa_context_before) and workspace.native_pa.guards(),
-                    "actual persistent CPU PA context/prefix/suffix untouched by native replay")
-            require(torch.equal(kc,refk) and torch.equal(vc,refv),"complete native KV including all paused/guards")
-            require(all(torch.equal(t,inputs[k]) for k,t in (("q",q),("nk",nk),("nv",nv),("mapping",mapping),("leases",leases))) and all(torch.equal(getattr(workspace,k),v) for k,v in workspace_before.items()),"all original inputs/static and per-step topology untouched")
-            require(workspace.guards() and mean.guards() and kguard.intact() and vguard.intact() and all(g.intact() for g in inputs_guard.values()),"all actual full-cache/input/workspace/mean prefix-suffix guards and pointer offsets")
-            book.native_live(["native-slot-%d"%s for s in slots+[16,17]])
-            require(torch.equal(mean.sums[16:],paused_sums) and torch.equal(mean.counts[16:],paused_counts),
-                    "both genuine paused request mean states untouched")
-            require(workspace.key[-1].count_nonzero().item()==0 and workspace.value[-1].count_nonzero().item()==0,
-                    "selected scratch guard page untouched")
-            expected,reference_supports,means,refalpha=golden(torch,rq,refk,refv,rows,current,32,128,1,bool(correction))
-            candidate_math,candidate_supports,candidate_means,candidate_alpha=golden(torch,q,refk,refv,rows,current,32,128,1,bool(correction))
-            # q uses native prior output; rq retains its independent mathematical prior.
-            # Same-query support tests implementation. Cross-feedback divergence is diagnostic,
-            # never erased by sharing feedback or silently promoted to dense equivalence.
-            support_divergence=[not torch.equal(a,b) for a,b in zip(candidate_supports,reference_supports)]
-            raw.update(candidate_same_query_golden=candidate_math,candidate_independent_support=candidate_supports,
-                reference_feedback_support=reference_supports,cross_feedback_support_divergence=support_divergence)
-            # Compare maintained sums with direct full history, never call candidate to get golden.
-            actual_mean=mean.means(leases)
-            require(bool(torch.allclose(actual_mean.detach().cpu().double(),means,rtol=1e-5,atol=1e-7)),"per-lease cumulative V mean versus direct historical golden")
-            finite_precision=independent(torch,q,refk,refv,rows,current,candidate_supports,capacity=capacity)
-            raw.update(independent_cpu32_support=finite_precision["supports"],precision_witnesses=finite_precision["witnesses"],
-                       conditional_cpu64_pa=finite_precision["conditional_pa"],conditional_cpu64_mixed=finite_precision["conditional_mixed"])
-            require(all(torch.equal(selected[i,:min(current[i],128)].detach().cpu(),support) for i,support in enumerate(finite_precision["supports"])) and
-                    all(torch.equal(channels[i].detach().cpu(),dims) for i,dims in enumerate(finite_precision["channels"])),
-                    "same-candidate-query strict independent CPU32 stable support and channels; no non-tie FP64 exception")
-            conditional=finite_precision["conditional_mixed"] if correction else finite_precision["conditional_pa"]
-            native_pa_metric=metrics(torch,workspace.output,finite_precision["conditional_pa"],out.dtype)
-            conditional_metric=metrics(torch,out,conditional,out.dtype)
-            tie_impact_metric=metrics(torch,conditional,candidate_math,out.dtype)
-            raw.update(native_pa_metric=native_pa_metric,conditional_metric=conditional_metric,tie_impact_metric=tie_impact_metric)
-            require(native_pa_metric["passed"] and conditional_metric["passed"] and tie_impact_metric["passed"],
-                    "independent conditional native PA/mixed output and FP32-tie versus FP64 output impact retain original per-head thresholds")
-            fp64=expected;expected=expected.to(out.dtype).double();actual=out.detach().cpu().double()
-            er=expected.square().mean(-1).sqrt();rel=(actual-expected).square().mean(-1).sqrt()/er
-            cos=torch.nn.functional.cosine_similarity(actual,expected,dim=-1)
-            finite=bool(torch.isfinite(out).all().item() and torch.isfinite(fp64).all().item())
-            raw.update(output=out,expected_cpu_fp64=fp64,expected_bf16_rounded=expected,support=selected,alpha=alpha,reference_alpha=refalpha)
-            good=finite and bool((er>0).all().item()) and bool((rel<=.005).all().item()) and bool((cos>=.99998).all().item())
-            require(pointers(tensors)==identity,"captured real native/persistent state pointer drift")
-            row={"step":step,"batch":b,"mode":mode,"reallocation":bool(correction),"trial":trial,"finite":finite,
-                 "relative_rms":rel.detach().cpu().tolist() if finite else None,"cosine":cos.detach().cpu().tolist() if finite else None,
-                 "full_native_cache_bitwise":True,"selected_scratch_guard":True,"input_untouched":True,
-                 "mean_request_lease_checked":True,"support_independent":True,"support_independent_query":"candidate-feedback-q",
-                 "reference_feedback_independent":True,"reference_feedback_support_equal":not any(support_divergence),
-                 "cross_feedback_support_divergence":support_divergence,"dense_attention_equivalence_claimed":False,"pointer_identity":True,"workspace_mean_guards":True,"all_topology_immutable":True,"oracle_cpu_fp64":True,"per_head_metric":True,"native_cache_input_outer_guards":True}
-            row.update(precision_contract=PRECISION_CONTRACT,precision_witnesses=finite_precision["witnesses"],
-                       oracle_cpu32_support=True,strict_stable_cpu32_support=True,nonzero_score_tolerance=False,
-                       native_pa_conditional_metric=native_pa_metric,selected_conditional_metric=conditional_metric,
-                       fp32_tie_fp64_output_impact=tie_impact_metric)
-            row.update(native_pa_context_cpu_int32=workspace.native_pa.context.value.tolist(),
-                       native_pa_context_epoch=workspace.native_pa.epoch,native_pa_graph_update_epoch=workspace.native_pa.updated_epoch,
-                       native_pa_host_guard=True)
-            step_refs.append(write_new(root/("step-"+case+"-%03d.json"%step),row));require(good,"own-query-feedback SparQ token selected/mixed golden")
-            worst=max(worst,max(x for heads in row["relative_rms"] for x in heads));min_cos=min(min_cos,min(x for heads in row["cosine"] for x in heads))
-            previous.copy_(out);reference_previous.copy_(expected.to(device=out.device,dtype=out.dtype))
-            for s in slots:lengths[s]+=1
-        report={"batch":b,"mode":mode,"reallocation":bool(correction),"trial":trial,"steps":160,"status":"passed",
-                "worst_relative_rms":worst,"minimum_cosine":min_cos,"actual_workspace_bytes":workspace.bytes,
-                "actual_mean_bytes":mean.bytes,"mean_payload_bytes":mean.payload_bytes,"actual_native_cache_backing_bytes":kguard.bytes()+vguard.bytes(),"actual_native_input_backing_bytes":sum(g.bytes() for g in inputs_guard.values()),"actual_step_refs":step_refs,"model_graph_supported":False,"service_ready":False}
-        write_new(root/("case-"+case+".json"),report);return report
-    except BaseException as error:
-        try:
-            with (root/("failure-"+case+"-%03d.pt"%step)).open("xb") as stream:torch.save(raw_cpu(torch,raw),stream)
-        except BaseException as secondary:
-            try:write_new(root/("raw-failure-"+case+".json"),{"original":repr(error),"secondary":repr(secondary)})
-            except BaseException:pass
-        raise
+    from matrix import run_case as author_ann_run_case
+    return author_ann_run_case(torch,npu,writer,root,b,mode,correction,trial,deadline)
+
 def main():
     p=argparse.ArgumentParser(description=__doc__);g=p.add_mutually_exclusive_group()
     for name in ("execute","host-execute","inside-canary","source-audit-only"):g.add_argument("--"+name,action="store_true")
@@ -263,13 +90,13 @@ def main():
     require(argv==image_argv(root,a.output,proof_ref,source),"single exact frozen image CLI")
     require(os.environ.get("TORCH_DEVICE_BACKEND_AUTOLOAD")=="0" and os.environ.get("ASCEND_RT_VISIBLE_DEVICES")=="0" and os.environ.get("PYTHONDONTWRITEBYTECODE")=="1" and
       all(os.environ.get(k)=="1" for k in ("OMP_NUM_THREADS","MKL_NUM_THREADS","OPENBLAS_NUM_THREADS")) and len(os.sched_getaffinity(0))==1,"actual one logical0/CPU/thread environment")
-    a.output.mkdir(exist_ok=False);began=time.monotonic();cut=__import__("datetime").datetime.fromisoformat("2026-10-09T11:17:31+00:00")
+    a.output.mkdir(exist_ok=False);began=time.monotonic();cut=__import__("datetime").datetime.fromisoformat(CUT)
     deadline=min(began+5280,began+(cut-__import__("datetime").datetime.now(__import__("datetime").timezone.utc)).total_seconds()-120)
     require(deadline>began,"fixed cutoff and cleanup reserve")
-    write_new(a.output/"START.json",{"source_manifest":source,"sources":files,"limits":LIMITS,"batches":list(range(1,17)),"modes":[list(x) for x in MODES],"npu_executed":False})
+    write_new(a.output/"START.json",{"source_manifest":source,"sources":files,"limits":LIMITS,"batches":list(range(1,17)),"modes":[list(x) for x in MODES],"execution_clock":EXECUTION_CLOCK,"paper_cutoff":"2026-10-08T19:00:00Z","portfolio_cutoff":"2026-10-09T11:17:31Z","npu_executed":False})
     process={"pid":os.getpid(),"argv":argv,"cgroup":Path("/proc/self/cgroup").read_text(),"stat":Path("/proc/self/stat").read_text(),"cmdline_sha256":hashlib.sha256(Path("/proc/self/cmdline").read_bytes()).hexdigest()}
-    cases=[];primary=None;report={"schema":"sparq.token-numeric/v4","status":"running","source_manifest":source,"sources_before":files,"limits":LIMITS,"cases":cases,
-      "precision_contract":PRECISION_CONTRACT,"original009_numeric_status":"failed-not-promoted",
+    cases=[];primary=None;report={"schema":"sparq.token-numeric/v6-author-ann-FP32-compensation","status":"running","source_manifest":source,"sources_before":files,"limits":LIMITS,"cases":cases,
+      "paper_cutoff":"2026-10-08T19:00:00Z","portfolio_cutoff":"2026-10-09T11:17:31Z","precision_contract":PRECISION_CONTRACT,"execution_clock":EXECUTION_CLOCK,"original_ba508_numeric_status":"failed-not-promoted","original009_numeric_status":"failed-not-promoted","original011_numeric_status":"failed-not-promoted",
       "device_proof":proof_ref,"native_no_device_abi":proof["native_no_device_abi"],"started_ns":time.time_ns(),"script_sha256":files["numeric_gate.py"],"actual_container_process":process,
       "npu_executed":None,"service_ready":False,"model_executed":False,"performance_evaluated":False,"accuracy_evaluated":False}
     try:

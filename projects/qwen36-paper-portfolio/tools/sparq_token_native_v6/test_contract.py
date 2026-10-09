@@ -20,6 +20,7 @@ class Mean(unittest.TestCase):
         for slot in (True,2,16,-1):
             with self.subTest(slot=slot),self.assertRaises(ValueError):b.begin("b",2,slot,1)
 class Equation(unittest.TestCase):
+    """Historical probability-GQA adaptation, not author ANN reference authority."""
     def fixture(self):return [[1.,-2.,.2],[.3,1.,-3.]],[[0.,1.,2.],[2.,0.,1.],[-1.,2.,0.]],[[1.,2.,3.],[-1.,.5,2.],[2.,-2.,.1]]
     def test_full_support_is_exact_and_mean_toggle_not_invented_gain(self):
         q,k,v=self.fixture()
@@ -87,9 +88,13 @@ class Receipts(unittest.TestCase):
     def test_missing_duplicate_marker_rejected(self):
         for text in ("","MAIN_SPARQ_TOKEN_V5_REPORT {}\nMAIN_SPARQ_TOKEN_V5_REPORT {}"):
             with self.subTest(text=text),self.assertRaises(ValueError):receipt.marker(text)
-    def test_twelve_source_count_graph3_scope(self):
-        self.assertEqual(len(receipt.OWN),23);self.assertEqual(receipt.MODES,(("eager",0),("graph",0),("graph",1),("graph",2)))
-        self.assertEqual(16*4*2*160,20480)
+    def test_current_31own_42source_graph3_scope(self):
+     self.assertEqual(len(receipt.OWN),31)
+     manifest=json.loads((receipt.ROOT/"SOURCE_MANIFEST.json").read_bytes())
+     self.assertEqual(manifest["schema"],"sparq.token-preparation/v9-author-ann-FP32-compensation")
+     self.assertEqual(manifest["source_count"],42);self.assertEqual(set(manifest["files"]),set(receipt.OWN))
+     self.assertEqual(receipt.MODES,(("eager",0),("graph",0),("graph",1),("graph",2)))
+     self.assertEqual(16*4*2*160,20480)
     def test_original_typed_terminal_failures_actual_file_ref(self):
         for key,value in (("exitCode",1),("timedOut",True),("cancelled",True),("state","running")):
             r,cmd,rr,s,f,p=self.record();record={**r,"state":"completed","exitCode":0,"timedOut":False,"cancelled":False,"error":None};record[key]=value
@@ -115,15 +120,24 @@ class Receipts(unittest.TestCase):
         text=ast.get_source_segment(source,fn);self.assertIn("detach().cpu().double()",text);self.assertNotIn("workspace.run",text)
         self.assertNotIn("._npu_",text)
     def test_every_static_topology_and_guards_in_source(self):
-        source=(Path(__file__).parent/"sparq_token_v4/core.py").read_text()
-        for name in ("rows","lengths","logical","logical_page","offset","batch_index","pa_table","budget_tensor","key","value","output","corrected"):
-            self.assertIn("self."+name+"=alloc(",source)
-        self.assertIn("self.bytes=sum(g.bytes()",source)
-        numeric=(Path(__file__).parent/"numeric_gate.py").read_text();self.assertIn("kguard=Guarded",numeric);self.assertIn("vguard=Guarded",numeric)
-        self.assertIn("native_cache_input_outer_guards",numeric);self.assertIn("g.intact() for g in inputs_guard",numeric)
+     # Unchanged old core is substrate/history, not the current ANN arithmetic.
+     source=(Path(__file__).parent/"sparq_token_v4/core.py").read_text()
+     ann=(Path(__file__).parent/"ann_workspace.py").read_text()
+     for name in ("rows","lengths","logical","logical_page","offset","batch_index","pa_table","budget_tensor","key","value","output","corrected"):
+      self.assertIn("self."+name+"=alloc(",source);self.assertIn("self."+name+"=alloc(",ann)
+     self.assertIn("self.bytes=sum(g.bytes()",source);self.assertIn("self.bytes=sum(g.bytes()",ann)
+     numeric=(Path(__file__).parent/"matrix.py").read_text()
+     self.assertIn("kguard=Guarded",numeric);self.assertIn("vguard=Guarded",numeric)
+     self.assertIn("native_cache_input_outer_guards",numeric);self.assertIn("g.intact() for g in inputs_guard",numeric)
+     for name in ("score","ranking","channels","selected","selected_valid","alpha","weights"):
+      self.assertIn("self."+name+"=alloc(",ann)
     def test_per_head_no_old_batch_mean_in_gate(self):
-        source=(Path(__file__).parent/"numeric_gate.py").read_text();self.assertNotIn("mean((1,2))",source)
-        self.assertIn("mean(-1)",source);self.assertIn("actual_step_refs",source);self.assertIn("workspace_guards",source)
+     source=(Path(__file__).parent/"matrix.py").read_text();self.assertNotIn("mean((1,2))",source)
+     self.assertIn("mean(-1)",source);self.assertIn("actual_step_refs",source);self.assertIn("workspace_guards",source)
+     oracle=(Path(__file__).parent/"independent_oracle.py").read_text()
+     self.assertIn('denominator=rounded.square().mean(-1).sqrt()',oracle)
+     self.assertIn('rms=(actual-rounded).square().mean(-1).sqrt()/denominator',oracle)
+     self.assertIn('cosine_similarity(actual,rounded,dim=-1)',oracle)
     def test_all_cases_hardware_scope_stays_pending_in_consumer(self):
         source=(Path(__file__).parent/"consume_numeric.py").read_text()
         for field in ("model_executed","matched1024_e2e_verified","final2048_task_verified"):
@@ -283,15 +297,18 @@ class PreNpuActualSourceRegression(unittest.TestCase):
   self.assertTrue(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="assert_cpu_fp64" and
    {"exact","alpha","mean"}<={a.id for a in n.args if isinstance(a,ast.Name)} for n in ast.walk(fn)))
  def test_support_queries_keep_independent_feedback(self):
-  import numeric_gate
-  text=Path(numeric_gate.__file__).read_text();tree=ast.parse(text)
-  calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="golden"]
-  self.assertEqual({n.args[1].id for n in calls if isinstance(n.args[1],ast.Name)},{"q","rq"})
-  self.assertIn('enumerate(finite_precision["supports"])',text)
+  text=(Path(__file__).parent/"matrix.py").read_text();tree=ast.parse(text)
+  calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="author_feedback"]
+  self.assertEqual(len(calls),2)
+  self.assertEqual({n.args[2].id for n in calls if isinstance(n.args[2],ast.Name)},{"q","rq"})
+  for call in calls:
+   self.assertEqual([ast.unparse(a) for a in call.args[3:7]],["refk","refv","rows","current"])
   self.assertIn('"reference_feedback_support_equal":not any(support_divergence)',text)
-  self.assertIn("reference_previous.copy_(expected",text)
-  self.assertIn("previous.copy_(out)",text)
+  self.assertIn("reference_previous.copy_(expected",text);self.assertIn("previous.copy_(out)",text)
+  self.assertIn('expected=feedback["output"]',text);self.assertIn('conditional_output=same["output"]',text)
   self.assertNotIn("rq=q",text)
+  for witness in ("candidate_data_used_by_formal_reference=False","full_original_qKV_FP64_recomputed=True","FP64_reselect_formal=False"):
+   self.assertIn(witness,text)
  def test_formal_event_is_debug_off(self):
   before=model_bridge._MODE
   try:
@@ -353,7 +370,7 @@ class NativeSlotInt32Boundary(unittest.TestCase):
   for args in ((18,18,2200,160),(2**31,18,2048,160),(True,18,2048,160),(18,0,2048,160),(18,18,2048,0)):
    with self.subTest(args=args),self.assertRaises(ValueError):numeric_gate.native_slot_capacity(*args)
  def test_actual_prefill_decode_reuse_boundaries_int32_internal_leases_int64(self):
-  text=Path(numeric_gate.__file__).read_text();tree=ast.parse(text)
+  text=(Path(__file__).parent/"matrix.py").read_text();tree=ast.parse(text)
   fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
   assigns={t.id:n.value for n in ast.walk(fn) if isinstance(n,ast.Assign) for t in n.targets if isinstance(t,ast.Name)}
   for name in ("indices","idx"):
@@ -373,7 +390,7 @@ class NativeSlotInt32Boundary(unittest.TestCase):
    n.args and isinstance(n.args[0],ast.Name) and n.args[0].id=="positions")
   self.assertTrue(native);self.assertIn("len(set(positions))==b",ast.get_source_segment(text,topology))
  def test_no_graph_capture_conversion_or_changed_writer_keyword_API(self):
-  text=Path(numeric_gate.__file__).read_text();tree=ast.parse(text)
+  text=(Path(__file__).parent/"matrix.py").read_text();tree=ast.parse(text)
   fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
   run=next(n for n in ast.walk(fn) if isinstance(n,ast.FunctionDef) and n.name=="run")
   self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in ("to","tensor","item","cpu") for n in ast.walk(run)))
@@ -381,16 +398,24 @@ class NativeSlotInt32Boundary(unittest.TestCase):
   self.assertEqual({k.arg for k in writer.keywords},{"key","value","key_cache","value_cache","slot_mapping"})
   self.assertEqual(next(k.value.id for k in writer.keywords if k.arg=="slot_mapping"),"mapping")
  def test_independent_golden_oracle_support_guard_matrix_and_limits_unchanged(self):
-  text=Path(numeric_gate.__file__).read_text()
+  text=(Path(__file__).parent/"matrix.py").read_text()
   self.assertEqual(numeric_gate.LIMITS,{"relative_rms":.005,"cosine":.99998})
   self.assertEqual(receipt.BATCHES,"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16")
   self.assertEqual(16*4*2*160,20480)
-  self.assertIn("query.detach().cpu().double()",text)
-  self.assertIn("candidate_supports",text);self.assertIn("reference_feedback_independent",text)
-  self.assertIn("kguard.intact() and vguard.intact()",text);self.assertIn("range(160)",text)
+  for value in ("author_feedback(torch,objects,rq,refk,refv","author_feedback(torch,objects,q,refk,refv",
+   "reference_feedback_independent","kguard.intact() and vguard.intact()","range(160)",
+   "conditional_metric[\"passed\"] and literal_metric[\"finite\"]"):
+   self.assertIn(value,text)
+  self.assertIn("author_literal_output_hard_gate=False",text)
+  self.assertIn("literal_output_deviation_complete_every_head=True",text)
+  oracle=(Path(__file__).parent/"independent_oracle.py").read_text()
+  self.assertIn("query=query.detach().cpu().double()",oracle)
+  self.assertIn("key=key.detach().cpu().double();value=value.detach().cpu().double()",oracle)
+  self.assertIn("weights@selected_value",oracle);self.assertIn('FP64_reselect_formal=False',text)
 
 
 class NativePAHostContext(unittest.TestCase):
+ """Historical native PA substrate + explicit current ANN no-PA boundary tests."""
  def test_host_clamp_CPU_int32_metadata_geometry_negative(self):
   from sparq_token_v4.core import host_pa_lengths,host_pa_layout
   from types import SimpleNamespace as S
@@ -487,23 +512,34 @@ class NativePAHostContext(unittest.TestCase):
   self.assertIn("seq_lens = common_attn_metadata.seq_lens_cpu[:num_reqs]",text)
   self.assertIn('seq_lens = common_attn_metadata.seq_lens[:num_reqs].to("cpu")',text)
   self.assertIn("context_lens=attn_metadata.seq_lens",text)
- def test_driver_host_update_every_replay_and_model_eager_same_host_lengths(self):
-  tree=ast.parse(Path(numeric_gate.__file__).read_text());fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
+ def test_current_ANN_no_PA_tasks_and_historical_eager_bridge_scope(self):
+  # Historical PA helper tests above still run; new ANN final output has NO PA task to update.
+  text=(Path(__file__).parent/"matrix.py").read_text();tree=ast.parse(text)
+  fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="run_case")
   topology=next(n for n in ast.walk(fn) if isinstance(n,ast.FunctionDef) and n.name=="topology")
-  host=next(n for n in ast.walk(topology) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="set_lengths")
-  self.assertEqual(host.args[0].id,"live_lengths")
-  update=next(n.lineno for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="update_graph")
-  replay=next(n.lineno for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="replay")
-  self.assertLess(update,replay);self.assertIn('if step==80:',ast.get_source_segment(Path(numeric_gate.__file__).read_text(),fn))
+  self.assertIn("live_lengths=[lengths[s]+1 for s in slots]",ast.get_source_segment(text,topology))
+  self.assertIn("workspace.lengths.copy_(torch.tensor(live_lengths,dtype=torch.int32",ast.get_source_segment(text,topology))
+  self.assertIn("if step==80:",ast.get_source_segment(text,fn));self.assertIn("lengths[s]=1",text)
+  self.assertTrue(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="replay" for n in ast.walk(fn)))
+  self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in
+   ("set_lengths","update_graph","prepare_capture","finish_capture","_npu_paged_attention") for n in ast.walk(fn)))
+  self.assertIn("native_PA_executed=False",text)
   import model_bridge
-  self.assertIn("workspace.native_pa.set_lengths(lengths)",Path(model_bridge.__file__).read_text())
-  self.assertIn("metadata.seq_lens_list",Path(model_bridge.__file__).read_text())
-  self.assertIn("FULL attention task-group/replay is unsupported",Path(model_bridge.__file__).read_text())
+  legacy=Path(model_bridge.__file__).read_text()
+  self.assertIn("workspace.native_pa.set_lengths(lengths)",legacy);self.assertIn("metadata.seq_lens_list",legacy)
+  self.assertIn("FULL attention task-group/replay is unsupported",legacy)
  def test_independent_receipt_reconstructs_context_shortening_not_boolean_only(self):
-  text=Path(receipt.__file__).read_text()
-  self.assertIn('if s==80:pa_live[pa_slots[0]]=1',text)
-  self.assertIn('expected_host_context=[min(pa_live[slot]+1,128) for slot in pa_slots]',text)
-  self.assertIn('row.get("native_pa_graph_update_epoch")==(s+2 if m=="graph" else None)',text)
+  # The current ANN consumer reconstructs full topology independently; legacy PA metadata remains historical.
+  text=(Path(__file__).parent/"ann_matrix_consumer.py").read_text()
+  for value in ("if index%11==0:slots=slots[1:]+slots[:1]",
+   "if index==80:live[slots[0]]=1;generations[slots[0]]+=1",
+   "lengths=[live[s]+1 for s in slots]",
+   'row["actual_current_lengths"]==lengths',
+   'row["actual_slot_generations"]=={str(s):g for s,g in generations.items()}',
+   'row["native_PA_executed"] is False'):
+   self.assertIn(value,text)
+  delegation=Path(receipt.__file__).read_text()
+  self.assertIn("from ann_matrix_consumer import validate_matrix as author_ann_validate",delegation)
   self.assertEqual(numeric_gate.LIMITS,{"relative_rms":.005,"cosine":.99998})
   self.assertEqual(receipt.MODES,(("eager",0),("graph",0),("graph",1),("graph",2)))
 

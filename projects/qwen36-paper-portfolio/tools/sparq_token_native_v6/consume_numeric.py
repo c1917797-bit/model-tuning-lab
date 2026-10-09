@@ -18,10 +18,22 @@ def consume(root,terminal_path,terminal_sha,proof_path,peer,source,files,host_re
  from host import host_argv,translate,protected_boundary,H
  from preflight import validate_abi
  authority_ref=bound(host_result,host_result_sha);authority=load(authority_ref)
+ from receipt import execution_clock
+ require(authority["execution_clock"]==execution_clock() and
+  authority["original_ba508_numeric_status"]=="failed-not-promoted","NEW explicit repair clock; original failed ba508 not promoted")
  report_ref=authority["producer_report"];report=load(report_ref)
  require(Path(report_ref["path"])==root/"REPORT.json","original host -> exact numerical gate report")
  proof_ref=bound(proof_path,report["device_proof"]["sha256"]);proof=validate_proof(proof_path,proof_ref["sha256"],source,files,
   report["actual_container_process"]["argv"],now_ns=report["started_ns"])
+ plan=load(proof["plan"])
+ require(plan["execution_clock"]==execution_clock() and plan["cutoff"]==__import__("receipt").CUT and
+  plan["phase_seconds"]==5400 and plan["cleanup_seconds"]==90 and
+  plan["common_deadline_monotonic"]==authority["common_deadline_monotonic"] and
+  plan["common_created_monotonic"]==authority["common_created_monotonic"],
+  "same source-bound repair clock and original whole5400/90 lease")
+ require(type(report["started_ns"]) is int and report["started_ns"]>=1791529225*10**9 and
+  report["started_ns"]/10**9+report["elapsed_seconds"]<=execution_clock()["repair_cutoff_epoch"],
+  "actual NEW native stage starts after user authorization and finishes by immutable first-repair cutoff")
  x=proof["container_inspect"];output=Path(authority["output_dir"]);require(root==output/"gate" and output.resolve()==output,"original new host/gate leaf")
  require(authority["schema"]=="sparq.token-host-result/v4" and authority["status"]=="kernel_numerics_checked" and
   authority["source_manifest"]==source and authority["sources_before"]==authority["sources_after"]==files and
@@ -42,7 +54,7 @@ def consume(root,terminal_path,terminal_sha,proof_path,peer,source,files,host_re
   "original actual host stdout binds immutable RESULT bytes")
  hp=authority["actual_host_process"];require(hp["argv"]==requested and hp["pid"]>1 and
   hp["cmdline_sha256"]==__import__("hashlib").sha256(("\0".join(requested)+"\0").encode()).hexdigest(),"actual host argv/PID/hash")
- require(report["schema"]=="sparq.token-numeric/v4" and report["status"]=="passed" and report["source_manifest"]==source and
+ require(report["schema"]=="sparq.token-numeric/v6-author-ann-FP32-compensation" and report["status"]=="passed" and report["source_manifest"]==source and
   report["sources_before"]==report["sources_after"]==files and report["script_sha256"]==files["numeric_gate.py"] and
   report["npu_executed"] is True and report["service_ready"] is False and report["model_executed"] is False,
   "actual original producer scope/source/matrix")
@@ -123,9 +135,11 @@ def consume(root,terminal_path,terminal_sha,proof_path,peer,source,files,host_re
  cleanup=load(authority["cleanup"])
  require(cleanup.get("container")==proof["container_id"] and cleanup.get("stopped") is True and cleanup.get("retained") is True and
     cleanup.get("deleted") is False and cleanup.get("errors")==[] and cleanup.get("primary_error") is None,"actual exact release and original/secondary cleanup closure")
- return {"schema":"sparq.complete-token-component/v7-fp32-support","component_report_checked":True,
+ return {"schema":"sparq.complete-token-component/v9-author-ann-FP32-compensation","component_report_checked":True,
   "MAIN_original_operation_authority_verified":True,"actual_numerical_steps":full["changing_feedback_steps"],"cases":128,
-  "precision_contract":full["precision_contract"],"original009_numeric_status":"failed-not-promoted",
+  "precision_contract":full["precision_contract"],"execution_clock":execution_clock(),
+  "original_ba508_numeric_status":"failed-not-promoted","author_literal_output_hard_gate":False,
+  "original_BF16_dual_gate_status":"FAILED-not-promoted","original009_numeric_status":"failed-not-promoted","original011_numeric_status":"failed-not-promoted","author_commit":__import__("contract").COMMIT,
   "original_terminal":original_ref,"original_operation_id":parsed["operation_id"],"original_terminal_shape":parsed["origin_shape"],
   "original_record_origin":parsed["record_origin"],"actual_report":report_ref,"host_result":authority_ref,"native_no_device_abi":ndref,
   "source_manifest":source,"source_files":files,"ready":False,"service_ready":False,"model_executed":False,

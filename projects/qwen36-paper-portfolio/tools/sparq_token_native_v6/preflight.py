@@ -410,6 +410,8 @@ def validate_abi(report,source,files):
   report.get("actual_source_import_checked") is True and report.get("primary_error") is None and report.get("secondary_errors")==[],
   "no initialized/failed/partial original receipt promotion")
  validate_cpu_golden(report.get("actual_cpu_golden"))
+ from cpu_smoke import validate as validate_ann_cpu
+ validate_ann_cpu(report["actual_author_ann_cpu"])
  require(report.get("stack",{}).get("vllm_ascend")=="0.23.0" and report["stack"].get("torch") and report["stack"].get("torch_npu"),"actual original stack")
  return report
 def recheck_preinit(torch,torch_npu,report,source,files):
@@ -468,6 +470,8 @@ def probe(a):
  require(os.environ.get("TORCH_DEVICE_BACKEND_AUTOLOAD")=="0" and os.environ.get("PYTHONDONTWRITEBYTECODE")=="1","no backend autoload/bytecode")
  wrapper,actual=validate_observation(observation,source,files)
  cpu_smoke=cpu_golden_smoke(torch,torch_npu)
+ from cpu_smoke import smoke as author_ann_cpu_smoke
+ ann_cpu=author_ann_cpu_smoke(torch,torch_npu,a.output.parent,a.host_output_root)
  require(observation["actually_mapped_libraries"]["ok"] and observation["actual_stack"]["ok"],"complete native mapped libraries/stack evidence")
  mapped=observation["actually_mapped_libraries"]["value"];stack=observation["actual_stack"]["value"]
  require(str(Path(torch_npu._C.__file__)) in mapped,"actual mapped TorchNPU ABI library")
@@ -476,7 +480,7 @@ def probe(a):
  _,after=source_identity(root,a.source_manifest,a.source_manifest_sha256,"runtime");require(after==files,"actual source closure before/after")
  report={"schema":"sparq.actual-no-device-abi/v5","status":"actual-schema-checked","source_manifest":source,"sources_before":files,"sources_after":after,
   "original_observations":a.observation_ref,"actual_observations":observation,"actual_wrapper_native_contract":wrapper,
-  "actual_exports":actual,"actual_pa_graph_api":observation["pa_graph_after_source_import"],"actual_cpu_golden":cpu_smoke,"actually_mapped_libraries":mapped,"stack":stack,
+  "actual_exports":actual,"actual_pa_graph_api":observation["pa_graph_after_source_import"],"actual_cpu_golden":cpu_smoke,"actual_author_ann_cpu":ann_cpu,"actually_mapped_libraries":mapped,"stack":stack,
   "actual_argv":[sys.executable,"-B",*sys.argv],
   "actual_guest_device_nodes_before":observation["device_nodes_before"],"actual_guest_device_nodes_after":device_nodes(),
   "actual_Ascend_fds_before":observation["Ascend_fds_before"],"actual_Ascend_fds_after":device_fds(),

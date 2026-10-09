@@ -248,6 +248,8 @@ class Controller(H.Controller):
   mounts={str(ROOT):(str(ROOT),False),"/usr/local/Ascend/driver":("/usr/local/Ascend/driver",False),
     str(self.out):(str(self.out),False),"/sparq-results":(str(self.out),True)}
   require(BASE==INTEGRATED,"MAIN integrates complete reviewed independent packet before dispatch")
+  from contract import ANN,CAUSAL,IDENTITIES
+  for ref in (ANN,CAUSAL,*IDENTITIES):mounts[ref["path"]]=(ref["path"],False)
   return mounts
  def inspect(self,cleanup=False):
   raw,r=self.call("inspect",[DOCKER,"inspect",self.cid],cleanup=cleanup)
@@ -409,7 +411,7 @@ def execute(a,source,files):
   _,initial=ctl.observe("preflight",initial=True)
   protected_before=write_new(ctl.out/"protected-before.json",{"processes":H.protected_map(ctl.protected),"observation":initial})
   plan=write_new(ctl.out/"PLAN.json",{"schema":"sparq.token-host-plan/v4","source_manifest":source,"sources":files,"dependencies":c.DEPENDENCIES,
-    "default_enabled":False,"MAIN_only_dispatch":True,"cutoff":c.CUT,"phase_seconds":PHASE_SECONDS,"cleanup_seconds":CLEANUP_SECONDS,"common_created_monotonic":ctl.created_monotonic,"common_deadline_monotonic":ctl.deadline,
+    "default_enabled":False,"MAIN_only_dispatch":True,"execution_clock":c.execution_clock(),"cutoff":c.CUT,"phase_seconds":PHASE_SECONDS,"cleanup_seconds":CLEANUP_SECONDS,"common_created_monotonic":ctl.created_monotonic,"common_deadline_monotonic":ctl.deadline,
     "guest_memory_bytes":MEM,"host_memory_bytes":HOST_MEM,"reserve_memory_bytes":RESERVE,"ordinary_floor_bytes":MEM+HOST_MEM+RESERVE,
     "guest_cpu_budget":1,"host_cpu_budget":1,"reserve_cpu_budget":2,"actual_cpu_allocation":ctl.cpu,"preflight":initial})
   cpu_out=ctl.out/"cpu-preflight";cpu_out.mkdir(exist_ok=False)
@@ -493,6 +495,7 @@ def execute(a,source,files):
    if error not in ctl.secondary:ctl.secondary.append(error)
   success=primary is None and not ctl.secondary and all((numeric,complete,child_ref,cleanup,protected_after,stopped,proof_ref,abi_ref,cpu_cleanup,cpu_inspect,cpu_stopped,abi_child,probe_idle))
   result={"schema":"sparq.token-host-result/v4","status":"kernel_numerics_checked" if success else "failed","source_manifest":source,
+    "execution_clock":c.EXECUTION_CLOCK,"original_ba508_numeric_status":"failed-not-promoted",
     "sources_before":files,"sources_after":after,"dependencies":c.DEPENDENCIES,"container_id":ctl.cid,"source_device_proof":proof_ref,
     "native_no_device_abi":abi_ref,"native_no_device_child":abi_child,"cpu_container_id":cpu_ctl.cid if cpu_ctl else None,
     "cpu_only_inspect":cpu_inspect,"cpu_only_cleanup":cpu_cleanup,"cpu_stopped_inspect":cpu_stopped,
