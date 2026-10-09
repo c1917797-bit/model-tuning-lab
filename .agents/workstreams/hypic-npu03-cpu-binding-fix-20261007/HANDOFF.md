@@ -2,6 +2,7 @@
 
 ## 0. Status
 
+- 2026-10-09 CPU BF16 RoPE screen: actual c12060c `_anchor_rope` gives MAE 0.00058–0.00196 versus FP32-compute/BF16-store 0.00008–0.00028; see `HYPIC_BF16_ROPE_NUMERICAL_SCREEN_20261009.md`. Numerical risk only, not r13 causality or NPU proof.
 - 2026-10-09 offline reporting/source-map reconciliation: r13's actual
   container bind list, service import path and 32-file Python source digest
   now replay-pass `verify_ascend_source_map_case.py`; r12's missing raw
@@ -109,6 +110,7 @@ yet proven. NPU4-7 remain outside this task.
    materializations and no non-strict combined-Prefill. This rules out one
    hypothesis, not the quality regression. Keep full Skill acceptance partial
    until numerical cause, default-ruler and integration gates pass.
+   Before editing the plugin or repeating quality, test BF16 RoPE against actual pinned-runtime K/cache/logits and GDN parity under a new one-switch diagnostic contract; CPU screening alone cannot assign r13 causality.
 4. Commit only a reviewed coherent checkpoint. Push only when authentication
    works and then verify the live remote ref.
 
