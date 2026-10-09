@@ -44,17 +44,22 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(task["latest_attempt"]["campaign"], "cache10r12")
         self.assertEqual(task["latest_attempt"]["controller_operation"],
                          "exec-00000000000018b4")
-        self.assertEqual(task["active_attempt"]["campaign"], "cache10r13")
+        self.assertEqual(task["r13_candidate_attempt"]["campaign"], "cache10r13")
+        self.assertEqual(task["r13_candidate_attempt"]["controller_operation"],
+                         "exec-0000000000001bb1")
+        self.assertEqual(task["r13_quality_audit"]["sha256"],
+                         "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b")
+        self.assertEqual(task["active_attempt"]["campaign"], "cache10perf")
         self.assertEqual(task["r13_baseline_attempt"]["arm"], "no-cache")
         self.assertEqual(task["r13_baseline_attempt"]["controller_operation"],
                          "exec-0000000000001a76")
-        self.assertEqual(task["active_attempt"]["arm"], "hypic-only")
+        self.assertEqual(task["active_attempt"]["arm"], "no-cache")
         self.assertEqual(task["active_attempt"]["controller_operation"],
-                         "exec-0000000000001bb1")
+                         "exec-0000000000001c05")
         self.assertIn("poll", task["active_attempt"]["status"])
         self.assertIn("127x3", task["goal_horizons"]["short_term"])
         self.assertIn("all 29", task["goal_horizons"]["long_term"])
-        self.assertIn("exec-0000000000001bb1", task["next_action"])
+        self.assertIn("exec-0000000000001c05", task["next_action"])
         self.assertIn("53/57", task["prior_stress_attempt"]["request_hot_path_gate"])
         self.assertIn("52/57", task["latest_attempt"]["status"])
         self.assertIn("c12060c", task["diagnostic_plugin"]["local_commit"])

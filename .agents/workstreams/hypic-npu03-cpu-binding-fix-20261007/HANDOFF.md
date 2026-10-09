@@ -7,8 +7,9 @@
   and later is NOT pushed: HTTPS lacks noninteractive credentials and SSH
   timed out. Await user-provisioned auth; do not expose credentials.
 - Integrated main has not accepted this campaign.
-- HYPIC full paired 2048-token quality, matched performance and Skill-wide
-  acceptance remain incomplete. cache10r3 through cache10r8 are
+- HYPIC r13 full paired 2048-token quality is valid but REJECT_OR_QUALIFY;
+  strict hot coverage FAIL. Matched performance and Skill-wide acceptance
+  remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
   verified, 21 partial, 6 missing. V11/P14/N4 is a separate campaign matrix.
@@ -32,7 +33,7 @@
 - r12 stress: 19/19 samples, 57/57 responses, 52/57 four-worker proof;
   279 clean guard probes and exact release. r11's 79:2/79:3 gaps are hot
   here, but five others missed; HOTPATH_CACHE10R12_TERMINAL_AUDIT.md has no paired verdict.
-- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial; canary proves one four-worker activation, not paired quality. r13 baseline independently passed 127x3/source/isolation/release audit; candidate and C3 remain open.
+- Architecture fit, ingestion, quality, benchmark, tuning, optimization, reporting, source-map and canary cases remain partial. r13 paired quality is negative; C3 remains open. See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md.
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median
   fell 81.12%, but full HYPIC and 2048-token quality remain open.
@@ -73,21 +74,19 @@ cache10split remains unapproved and must not run.
 
 ## 4. Current Action
 
-r13 no-cache `exec-0000000000001a76` ended cleanly, and its independent audit
-passed; see HOTPATH_CACHE10R13_BASELINE_TERMINAL_AUDIT.md. r13 hypic-only
-`exec-0000000000001bb1` is running; poll, never restart. r11/r12 remain immutable strict negatives. r12's
-corrected plugin source executed on physical NPU0–3, but five scored
-requests still fell back cold; source-fix causality is not isolated.
-The r13 plan prospectively reports all-request deployed effect and separately
-gates a strict 381/381 hot-path conclusion; neither can substitute for the other.
-Do not post-hoc pass either root, use NPU4–7, or modify foreign
-containers. r13 performance awaits both quality audits; its offline-tested
-ID adapter gates 120/120 hot requests. No performance phase ran; C3 is open.
+r13 baseline and candidate each passed full 127x3/source/isolation/release
+audit. Frozen dual report `f66b976` says 230/381 to 219/381 (-2.887 pp),
+deployed quality REJECT_OR_QUALIFY; strict 368/381 hot FAIL. All 13 cold
+requests show material ready then evicted before partial-prefill rejection.
+Hot-cohort quality also declined descriptively; cause remains unisolated.
+See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md. Performance no-cache/screen
+controller `exec-0000000000001c05` is running; poll, never restart.
+Do not post-hoc pass either root, use NPU4–7, or modify foreign containers.
 
 ## 5. Next Actions
 
-1. Preserve r12 negative evidence; do not rerun unchanged bytes. Poll r13
-   candidate; independently audit its terminal receipts, then dual quality.
+1. Preserve r10–r13 negatives; poll performance no-cache/screen, independently
+   audit terminal receipts, then run remaining frozen phases serially.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
 3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
@@ -96,8 +95,7 @@ ID adapter gates 120/120 hot requests. No performance phase ran; C3 is open.
    real foreign PIDs do.
 4. Preserve r9–r12 terminal roots; never relabel their strict failures,
    pair them with a control, reuse r2–r8 roots, or switch to cache10split.
-5. After r13 candidate terminal audit and dual quality, if gates pass follow
-   HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; its six phases separately
+5. Follow HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; six phases separately
    audit deployed effect and strict per-request proof, plus isolation/release.
 6. For each main Skill, retain exact main blob, real task, evidence hash,
    boundary and replayable regression; leave unsupported cases partial/N.
