@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r12_terminal_strict_activation_failed_new_source_npu_validated_unpaired",
+  "state": "r13_full_baseline_running_no_paired_verdict",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",
   "resource_claim": {
@@ -33,7 +33,22 @@
     "request_hot_path_gate": "53/57 passed four-worker post-repair proof; gaps 77:2, 79:2, 79:3, 85:2; no paired quality/performance verdict",
     "coverage_report": "HOTPATH_CACHE10R11_TERMINAL_AUDIT.md"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "campaign": "cache10r13",
+    "arm": "no-cache",
+    "mode": "full",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r13-full-baseline",
+    "controller_operation": "exec-0000000000001a76",
+    "source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "contract": "127 LongBench-v2 samples x 3 scored natural-EOS answers, max output 2048, explicit segment boundaries, c8 TP4, physical NPU0-3, 0.85/cache10",
+    "isolation_rule": "10-second actual physical NPU0-3 foreign-process guard; any foreign PID or probe error invalidates this arm and releases only the exact owned service",
+    "status": "running; poll the operation handle and immutable attempt root, never restart in place"
+  },
+  "goal_horizons": {
+    "long_term": "Give all 29 exact-main Skills representative real-task acceptance, evidence provenance and replayable regressions; integrate reviewed results to main/remote when authorized.",
+    "medium_term": "Close the HYPIC Skill-chain quality, performance and isolation evidence gaps without promoting branch-local or cold-request evidence to a paper-complete claim.",
+    "short_term": "Finish and independently audit the active r13 no-cache 127x3 max-2048 arm; only after clean exact release and actual idle physical NPU0-3 launch the frozen r13 hypic-only arm, then dual audit."
+  },
   "latest_attempt": {
     "campaign": "cache10r12",
     "arm": "hypic-only",
@@ -56,5 +71,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Preserve r12 terminal negative result and do not repeat unchanged bytes. Resolve prospective full-pair all-hot versus deployed-effect stratified criterion with the user, then freeze a new same-identity 0.85 control/candidate plan. Only use actual-idle physical NPU0-3, never NPU4-7 or foreign containers. Push only after user-provisioned GitHub auth works; all-Skill acceptance remains incomplete."
+  "next_action": "Poll r13 no-cache operation exec-0000000000001a76, not a replacement controller. On terminal, independently inspect all 127 samples/381 scored rows, source attestation, continuous guard and exact owned release. Only then, if physical NPU0-3 and port 8223 are actually idle, launch the frozen r13 hypic-only arm. Keep deployed and strict hot-path estimands separate. Never use NPU4-7 or foreign containers; no main/remote claim until reviewed integration and working authentication."
 }
