@@ -63,6 +63,10 @@
     "r13_samples_with_longer_baseline_candidate_within_arm_prefix": [93, 24],
     "r13_response_variability_causality_proven": false,
     "r13_length_limit_causality_proven": false,
+    "r13_strict_position_independent_mode_in_both_arms": true,
+    "r13_candidate_zero_start_materialization_candidates": 140,
+    "r13_non_strict_combined_prefill_approximation_observed": false,
+    "r13_strict_zero_start_numerical_equivalence_proven": false,
     "r13_quality_repair_or_full_skill_acceptance_proven": false,
     "r14_c1_diagnostic_complete_and_independently_replay_valid": true,
     "r14_c1_selected_indexes": [0, 55, 48],
@@ -166,10 +170,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r14_variability_terminal.py",
       "sha256": "a4504fb35c326ca835087b85ff856c4d45834577caf1bd94d754061fc86f3606"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_STRICT_MODE_PATH_TRIAGE_20261009.md",
+      "sha256": "9bbf2a12155da87b76d54cfb9be12d40fcc68885435b06a120b667e15685cd3b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r13_strict_mode_path.py",
+      "sha256": "d1c773c8ad265f8892b0b558780db3543f1bcda600a9aa11112d0c6cec56a76e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r13_strict_mode_path.py",
+      "sha256": "38a89983a84a882e881025eb4605877d7d8c7298a1279f6b8b446b180fe1d21e"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, and selected candidate exact repetition pairs 3/9 versus 0/9 on the same r13 c8 indexes. Campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated and r13 is not reclassified. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
-  "next_gate": "Integrate and replay main request-level proof requirements, then validate missing default-ruler dataset/canary conditions before upgrading this Skill case. A further device test needs a prospective design that isolates concurrency from campaign size, ordering and cache residency; do not rerun r13/r14 roots or turn the selected r14 result into formal quality acceptance.",
+  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. A new read-only source/runtime replay proves strict position-independent mode and 140 zero-start candidate materializations, so the non-strict combined-Prefill approximation was not observed and is not a supported explanation for r13 quality loss; numerical equivalence of the strict path is still unproven. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, but campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
+  "next_gate": "Integrate and replay main request-level proof requirements, then validate missing default-ruler dataset/canary conditions before upgrading this Skill case. Any fresh device test must prospectively isolate one numerical or concurrency hypothesis with an exact-source short canary and matching control; do not rerun r13/r14 roots or turn the selected r14 result into formal quality acceptance.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }

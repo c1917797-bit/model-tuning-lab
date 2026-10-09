@@ -288,6 +288,11 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(item["observed"]["r13_matched_hot_within_arm_same_prediction_pairs_baseline_candidate"],
                          [322, 294])
         self.assertFalse(item["observed"]["r13_response_variability_causality_proven"])
+        self.assertTrue(item["observed"]["r13_strict_position_independent_mode_in_both_arms"])
+        self.assertEqual(item["observed"]["r13_candidate_zero_start_materialization_candidates"],
+                         140)
+        self.assertFalse(item["observed"]["r13_non_strict_combined_prefill_approximation_observed"])
+        self.assertFalse(item["observed"]["r13_strict_zero_start_numerical_equivalence_proven"])
         self.assertFalse(item["observed"]["r13_quality_repair_or_full_skill_acceptance_proven"])
         self.assertFalse(item["observed"]["main_skill_integrated"])
         self.assertEqual(item["observed"]["r12_four_worker_verified_scored_requests"], 52)

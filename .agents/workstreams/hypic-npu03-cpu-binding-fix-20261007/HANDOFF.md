@@ -13,7 +13,7 @@
   `verify_paper_to_ascend_reporting_case.py` checks its phase rows,
   formulas, receipts and profile boundaries. The reporting Skill remains
   partial pending exact historical command/failure-ledger completion review.
-  Benchmark and monkeypatch-delivery cases now replay-check bounded r13
+  Benchmark, canary and monkeypatch-delivery cases now replay-check bounded r13
   mixed verdicts without an NPU rerun; delivery promotion remains barred.
   All 29 main Skills have cases: 7 bounded verified, 22 partial.
 - The source-map checkpoint `a863fee7` is committed locally, but its
@@ -68,8 +68,8 @@ Finish the frozen HYPIC experiment without changing its technical question or ac
 
 The frozen performance and quality comparisons are complete; quality remains
 rejected. Four-rank Prefill/Decode profiler capture and parsing replay-pass,
-including the retained first-parser failure. The read-only response-variability
-replay narrows the next quality question but does not isolate cause. Preserve
+including the retained first-parser failure. Read-only variability and strict-
+mode replay rule out non-strict combined-Prefill, but do not isolate cause. Preserve
 the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 3. Recent Progress
@@ -104,12 +104,11 @@ yet proven. NPU4-7 remain outside this task.
    case-registry replay checks.
 2. Map the final performance success and quality rejection to the exact Skills;
    do not convert performance success into an unconditional deployment claim.
-3. Replay the completed r6 Decode audit and add its success and first
-   parser-environment failure to the `ascend-cannbot-profiler` case. Keep
-   full Skill acceptance partial until the remaining attribution and
-   integration gates are met. Upgrade the other partial cases only through
-   their missing real behavioral gates; all 29 have provenance, not full
-   acceptance.
+3. Preserve the completed profiler audit and parser-environment failure.
+   Recheck `verify_r13_strict_mode_path.py`: strict mode had 140 zero-start
+   materializations and no non-strict combined-Prefill. This rules out one
+   hypothesis, not the quality regression. Keep full Skill acceptance partial
+   until numerical cause, default-ruler and integration gates pass.
 4. Commit only a reviewed coherent checkpoint. Push only when authentication
    works and then verify the live remote ref.
 
