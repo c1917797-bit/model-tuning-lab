@@ -11,7 +11,7 @@
   acceptance remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 20 partial, 7 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 21 partial, 6 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
@@ -60,8 +60,8 @@ cache10split remains unapproved and must not run.
 - Earlier r3–r8 foreign-process conflicts, startup-guard fixes and exact
   releases are indexed in HANDOFF_HISTORY.md and separate raw-hash reports;
   none is an algorithm verdict.
-- The Git checkpoint and maintainer-handoff Skills have bounded verified
-  real-task cases locally; host-maintenance and onboarding have partial cases. See
+- Git checkpoint and maintainer-handoff have bounded verified cases; host,
+  onboarding and tool-adapter boundary have partial real-task cases. See
   MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
 - The seventh case caught `mst-practice-iteration-planning`'s main YAML
   schema mismatch; the branch Skill repair and bounded HYPIC plan pass.

@@ -1,0 +1,46 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-tool-adapter-boundary",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Audit the actual model-tuning-lab coding-agent adapter against canonical AGENTS.md and exact current-main maintainer Skill without disturbing the live HYPIC service",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "bf3b70bccafd5d264ed6ab767022eb96d450a4e6",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 named HYPIC task clone, branch-local read-only adapter audit while physical NPU0-3 candidate service runs independently",
+  "observed": {
+    "tracked_adapter_inventory": ["CLAUDE.md"],
+    "claude_is_exact_one_line_agents_shim": true,
+    "current_branch_matches_main_adapter": true,
+    "canonical_bootstrap_declares_role_registry_skill_tree_and_adapter_boundary": true,
+    "duplicate_governance_rules": false,
+    "adapter_repair_exercised": false,
+    "other_tool_adapters_exercised": false,
+    "live_claude_agent_interpretation_exercised": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TOOL_ADAPTER_BOUNDARY_CASE_20261009.md",
+      "sha256": "ae49fdde0c4b1736b157b7c771e5163916a446e57c705bece34f5869273f4fd3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_tool_adapter_boundary_case.py",
+      "sha256": "fba86f73d07ab0d1539f6d66a29f3235ea881ec03a995f4f905dd94ab237cd7a"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a904211035ad5498b5392a38bfaf4c3dba28a0d6b024f63b5fb2476f8b29f9e8"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "The existing single tracked Claude shim satisfies this Skill's thin-adapter boundary in one real repository. No adapter migration, tool-agent behavioral interpretation, other tool adapters, or full Skill-wide pass is claimed.",
+  "drift_trigger": "Re-run after main/AGENTS.md/CLAUDE.md changes, new tracked adapter files, or an actual cross-tool conflict."
+}
