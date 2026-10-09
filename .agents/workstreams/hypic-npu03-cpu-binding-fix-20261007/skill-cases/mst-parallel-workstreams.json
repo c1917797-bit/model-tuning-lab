@@ -16,7 +16,7 @@
     "named_branch_attached": true,
     "task_clone_worktree_count": 1,
     "remote_upstream_commit": "0d00bab0ad63c5bdad39f2f7887577d188194485",
-    "local_ahead": 39,
+    "local_ahead": 50,
     "remote_ahead": 0,
     "original_missing_execution_and_integration_axes": true,
     "repaired_execution_state": "in-progress",
@@ -32,11 +32,11 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/task.json",
-      "sha256": "0e95d9d9cd3d3f6172e9c3e65dc18eb9fc22ba019521068875578c93b886c8b1"
+      "sha256": "c2b36f7e37fc61f4aefa68bd43a6f756d0aa4211ecb1de792372bc22fc197e6c"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
-      "sha256": "f7202cece2007fb5fc97dc76bdebec222b22e12abdb3cd2c00edd183e5da8d28"
+      "sha256": "26743052a82fbca09a28b374d9b75d2d61b4cb37968c3b731a1829a09f72c14d"
     }
   ],
   "replayable_regression_recorded": true,

@@ -58,4 +58,20 @@ performance result is overwritten or reused.
 
 Controller: `hotpath_cache10_matched_performance.py --arm ... --phase ... --run`.
 Auditor: `audit_hotpath_cache10_matched_performance.py`. Both refuse to
-reuse prior result roots; inspect operation handles before any retry.
+reuse prior result roots. A narrowly scoped recovery amendment applies only
+if hypic-only/repeat3 fails before service health and before benchmark start
+because the physical-lane guard observes an actual foreign PID/probe error:
+preserve the failed original root and its exact receipts, wait for the lane
+to become idle, and permit one same-protocol `--environmental-retry1` in a
+new immutable root. It may not be used for workload, quality, hot-path, or
+performance failures, and it does not alter any denominator or acceptance
+rule. The independent six-phase audit uses the retry root only if it exists;
+the original pre-measurement invalid attempt remains reported as excluded.
+If the controller's immediate `assert_lane_available` detects a process before
+creating the retry root, that invocation has no root, container, or scored row;
+it is only a failed availability probe and does not consume the one new-root
+measurement attempt. Recheck the lane and reissue only while it is truly idle.
+
+The 120/120 per-request worker proof is the strict C1/C2 mechanism-attribution
+gate, not the all-request deployed performance result. Both are reported;
+failure of strict coverage must not erase or relabel the deployed result.

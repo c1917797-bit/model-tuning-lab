@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r13_quality_rejected_performance_baseline_repeat3_running",
+  "state": "r13_quality_rejected_performance_candidate_repeat3_running",
   "execution_state": "in-progress",
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
@@ -114,14 +114,37 @@
     "performance_sha256": "8d8b5dfbc665c6969a27705aadc49e4d8e4249e6a9363db5b24e4ab00d156c79",
     "audit": "HOTPATH_CACHE10PERF_BASELINE_REPEAT2_AUDIT.md"
   },
-  "active_attempt": {
+  "performance_baseline_repeat3": {
     "campaign": "cache10perf",
     "arm": "no-cache",
     "phase": "repeat3",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-no-cache-repeat3",
     "controller_operation": "exec-0000000000000024",
-    "status": "running; poll the same handle, do not restart or overlap phases"
+    "status": "terminal exit 0; independent audit passed 40 measured rows, 42 unique IDs, 164 clean isolation samples and exact release; never restart or reuse root",
+    "contract_sha256": "4a98f16ee4ba8fefefd9539aaf9f7ff919d9c50fb2de973a0d27a8ebbf9b89bb",
+    "arm_result_sha256": "00a6681e6adfd9c6b2916a1f0657204dc06eca975a382c1f2c702569c302075b",
+    "performance_sha256": "7aaf7c28999935a6217d46aa734289a6e3c90e4990af2996c8ac785c8ff797a9",
+    "audit": "HOTPATH_CACHE10PERF_BASELINE_REPEAT3_AUDIT.md"
   },
+  "performance_candidate_repeat3_environmental_failure": {
+    "campaign": "cache10perf",
+    "arm": "hypic-only",
+    "phase": "repeat3",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3",
+    "controller_operation": "exec-000000000000004b",
+    "status": "terminal before service health and before benchmark; foreign PID 1579551 observed on physical NPU3; environmental pre-measurement failure, not a HYPIC verdict",
+    "prelaunch_availability_abort": {
+      "controller_operation": "exec-000000000000007c",
+      "status": "terminal at assert_lane_available before creating retry root, service, or scored rows; NPU0-3 process appeared between separate idle observation and launch",
+      "retry_root_created": false,
+      "new_root_measurement_attempt_consumed": false
+    },
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "guard_samples": 22,
+    "arm_result_sha256": "905b7cc4b5a2967d59c38e533485ddedfd83f4f7e7d3d4fedc43f0c90ab8df38",
+    "retry_policy": "one same-protocol retry in a distinct immutable retry1 root after fresh NPU0-3 and port 8223 idle proof; never overwrite this root"
+  },
+  "active_attempt": null,
   "goal_horizons": {
     "long_term": "Give all 29 exact-main Skills representative real-task acceptance, evidence provenance and replayable regressions; integrate reviewed results to main/remote when authorized.",
     "medium_term": "Close the HYPIC Skill-chain quality, performance and isolation evidence gaps without promoting branch-local or cold-request evidence to a paper-complete claim.",
@@ -149,5 +172,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Preserve the four independently audited performance roots; speed does not override r13 quality rejection. Poll current no-cache/repeat3 operation exec-0000000000000024 and its immutable raw root; never restart on slow progress. On terminal, independently audit 40 requests, 42 unique IDs, source identity, continuous physical 0-3 isolation and exact owned release. Then run hypic-only/repeat3 only after actual idle physical NPU0-3 and port 8223; independently audit all six phases and strict request-ID coverage. Retain r13 quality REJECT_OR_QUALIFY and strict FAIL; diagnose the hot-path quality drop separately. Never use NPU4-7 or foreign containers; no main/remote claim until reviewed integration and working authentication."
+  "next_action": "Preserve the five independently audited performance roots and the immutable hypic-only/repeat3 environmental pre-measurement failure; speed does not override r13 quality rejection. The failed controller exec-000000000000004b saw foreign work on physical NPU3 and did not reach service health or benchmark. Do not overwrite or reclassify its root. When a fresh direct-routed check confirms physical NPU0-3 and port 8223 are actually idle, run at most one same-protocol hypic-only/repeat3 --environmental-retry1 in its new immutable root. Then independently audit 40 requests, 42 unique IDs, per-ID four-worker hot proof, source identity, continuous physical 0-3 isolation and exact owned release; run the six-phase audit with deployed and strict mechanism-coverage results reported separately. Retain r13 quality REJECT_OR_QUALIFY and strict hot coverage failure; the length-delta diagnosis is descriptive, not causal. Never use NPU4-7 or modify foreign containers; no main/remote claim until reviewed integration and working authentication."
 }

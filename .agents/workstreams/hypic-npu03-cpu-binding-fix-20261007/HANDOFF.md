@@ -37,13 +37,22 @@
 - The inference-tuning-loop case replays six raw performance runs and three
   candidate contracts/cleanup receipts; bounded CPU-binding-off TPOT median
   fell 81.12%, but full HYPIC and 2048-token quality remain open.
+- The final `hypic-only/repeat3` performance launch (`exec-000000000000004b`)
+  failed before service health or benchmark start when the physical-lane guard
+  saw foreign PID 1579551 on NPU3 (container
+  `efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6`). This
+  is an environmental pre-measurement failure, not a HYPIC result. Preserve
+  its immutable root; one same-protocol retry is permitted only in the
+  distinct retry1 root after NPU0–3 and port 8223 are truly idle. Current
+  observation again found foreign work on NPU3.
 
 ## 1. North Star
 
 Validate the main Skill tree on real tasks with repeatable evidence. HYPIC
-needs a fresh same-identity physical NPU0–3 baseline/treatment pair,
-explicit-boundary hot-path proof, full 2048-token quality, matched
-performance, isolation and independent audits before a final conclusion.
+needs same-identity physical NPU0–3 baseline/treatment evidence, explicit
+boundary and hot-path attribution, full 2048-token quality, matched
+performance, isolation and independent audits. Report deployed outcomes
+separately from strict per-request mechanism coverage; neither erases the other.
 
 ## 2. Current Focus
 
@@ -69,37 +78,25 @@ cache10split remains unapproved and must not run.
 
 ## 4. Current Action
 
-r13 baseline and candidate each passed full 127x3/source/isolation/release
-audit. Frozen dual report `f66b976` says 230/381 to 219/381 (-2.887 pp),
-deployed quality REJECT_OR_QUALIFY; strict 368/381 hot FAIL. All 13 cold
-requests show material ready then evicted before partial-prefill rejection.
-Hot-cohort quality also declined descriptively; cause remains unisolated.
-See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md. Both screen phases passed
-independent 40-row/42-ID/source/isolation/release audit; candidate 40/40
-measured IDs were four-worker hot. See HOTPATH_CACHE10PERF_SCREEN_PAIR_AUDIT.md.
-HYPIC-only/repeat2 terminal audit passed 40/40 hot IDs, 150 clean probes
-and exact release (HOTPATH_CACHE10PERF_CANDIDATE_REPEAT2_AUDIT.md); never rerun.
-No-cache/repeat2 terminal audit passed 40 rows, 42 IDs, 162 clean probes
-and exact release (HOTPATH_CACHE10PERF_BASELINE_REPEAT2_AUDIT.md).
-No-cache/repeat3 `exec-0000000000000024` is running; poll, never restart.
-Do not post-hoc pass either root, use NPU4–7, or modify foreign containers.
+r13 paired quality is valid but negative: 230/381 to 219/381 (-2.887 pp);
+strict hot coverage is 368/381. See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md.
+The first five performance roots passed independent audits (see their phase
+reports). Phase 6 stopped before measurement on foreign NPU3 work; this is
+environmental, not a HYPIC verdict. Preserve its root; one retry in a new
+root is allowed only after the lane becomes idle. Never use NPU4–7 or modify
+a foreign container.
 
 ## 5. Next Actions
 
-1. Preserve r10–r13 negatives; poll no-cache/repeat3, independently audit
-   terminal receipts, then run the final HYPIC-only phase.
+1. Preserve r10–r13 and the environmental phase-6 root; after fresh NPU0–3/
+   8223 idle proof, run one unique-root retry and audit both result lenses.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
-3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
-   load host-development, prove the direct peer, and inspect physical
-   NPU0–3 PIDs and port 8223. Mapping alone does not block this task;
-   real foreign PIDs do.
-4. Preserve r9–r12 terminal roots; never relabel their strict failures,
-   pair them with a control, reuse r2–r8 roots, or switch to cache10split.
-5. Follow HOTPATH_CACHE10R13_MATCHED_PERFORMANCE_PLAN.md; six phases separately
-   audit deployed effect and strict per-request proof, plus isolation/release.
-6. For each main Skill, retain exact main blob, real task, evidence hash,
-   boundary and replayable regression; leave unsupported cases partial/N.
+3. For device work, freshly resolve `chicaihong01/ma`; mapping alone is not
+   conflict, but real foreign PIDs are. Inspect NPU0–3 and port 8223.
+4. Preserve r9–r12 roots; never relabel, pair, reuse r2–r8, or run cache10split.
+5. Keep deployed effect, strict hot proof, isolation and release separate.
+6. Keep unsupported exact-main Skill cases partial/N; do not claim all 29.
 
 ## 6. Validation Commands
 

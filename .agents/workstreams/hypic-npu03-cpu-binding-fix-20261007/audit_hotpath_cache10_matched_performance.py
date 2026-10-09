@@ -39,6 +39,10 @@ def p95(values: list[float]) -> float:
 
 
 def root_for(arm: str, phase: str) -> Path:
+    if arm == "hypic-only" and phase == "repeat3":
+        retry = ROOT / "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry1"
+        if retry.is_dir():
+            return retry
     return ROOT / f"performance-context-41984-hotpath-cache10perf-{arm}-{phase}"
 
 

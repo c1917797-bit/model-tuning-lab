@@ -310,10 +310,26 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", choices=("no-cache", "hypic-only"), required=True)
     parser.add_argument("--phase", choices=("screen", "repeat2", "repeat3"), required=True)
+    parser.add_argument("--environmental-retry1", action="store_true",
+                        help="one immutable retry only for hypic-only/repeat3 when the original failed before health/benchmark")
     parser.add_argument("--run", action="store_true",
                         help="start an owned NPU0-3 service; otherwise inspect offline")
     args = parser.parse_args()
     attempt = f"hotpath-cache10perf-{args.arm}-{args.phase}"
+    if args.environmental_retry1:
+        require((args.arm, args.phase) == ("hypic-only", "repeat3"),
+                "environmental retry is authorized only for hypic-only/repeat3")
+        failed_root = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007") / (
+            "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3")
+        failed_result = json_at(failed_root / "arm-result.json")
+        require(failed_result.get("valid") is False
+                and failed_result.get("performance_sha256") is None
+                and failed_result.get("metrics") is None
+                and "lane guard" in str(failed_result.get("error", "")).lower()
+                and not (failed_root / "hypic-only" / "service-start.json").exists()
+                and not (failed_root / "hypic-only" / "benchmark-command.json").exists(),
+                "original phase was not an environmental pre-measurement failure")
+        attempt += "-retry1"
     os.environ["HYPIC_QUALITY_ATTEMPT"] = attempt
     os.environ["HYPIC_QUALITY_PLUGIN_REPO"] = SOURCE_ROOT
     os.environ["HYPIC_QUALITY_PLUGIN_COMMIT"] = SOURCE_COMMIT

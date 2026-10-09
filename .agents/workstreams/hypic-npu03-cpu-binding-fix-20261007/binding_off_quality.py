@@ -30,6 +30,8 @@ PERFORMANCE_ATTEMPTS = {
     for arm in ("no-cache", "hypic-only")
     for phase in ("screen", "repeat2", "repeat3")
 }
+PERFORMANCE_ATTEMPTS["hotpath-cache10perf-hypic-only-repeat3-retry1"] = (
+    "performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry1")
 ATTEMPT_ROOTS = {
     "original": "quality-context-41984",
     "clean2": "quality-context-41984-clean2",
