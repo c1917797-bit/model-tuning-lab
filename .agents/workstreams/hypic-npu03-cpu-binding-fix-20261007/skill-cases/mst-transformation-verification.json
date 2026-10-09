@@ -1,0 +1,41 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-transformation-verification",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": false,
+  "task": "Verify the existing 29-Skill maintainer tree in the HYPIC task clone and independently inspect exact-main structural and selection-boundary risks",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "549bc84019471e696af0dac5eb90f1664e19c2d8",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 named HYPIC task clone; CPU-only structural checks while the separate owned NPU0-3 quality service remained live; canonical dirty workstream untouched",
+  "observed": {
+    "branch_validator_exit_code": 0,
+    "registered_skills": 29,
+    "unique_ids": 29,
+    "missing_or_orphan_skills": 0,
+    "missing_frontmatter": 0,
+    "main_generic_mst_entries_missing_trigger_or_scope": 14,
+    "main_skills_over_separate_design_limit": 8,
+    "tracked_adapter": "CLAUDE.md -> @AGENTS.md",
+    "fresh_clone_transformation_verified": false,
+    "runtime_boundary_behavior_verified": false,
+    "all_skill_behavior_verified": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_VERIFICATION_REAL_TASK_20261009.md",
+      "sha256": "e90d5ecc11395e289180866f54df4ffd8c63dcf0d58adf1f16b830325b7ad43a"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MAIN_SKILL_TREE_DIAGNOSTIC.md",
+      "sha256": "1cdbb4673dc0c68d29d0fa24b457ddd246385d9cc11839eb2ac606aad0523818"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "The validator and exact-main inspection prove this existing tree's structural state and identify selection/design gaps. They do not validate a newly transformed repository, actual Skill selection, a runtime deployment, all 29 Skill behaviors, or main/remote integration of branch repair.",
+  "drift_trigger": "Repeat after main Skill/registry, AGENTS.md, adapter, validator, subcomponent layout, or task-clone provenance changes; exercise a fresh-clone transformation and ambiguous-selection fixture before full acceptance."
+}
