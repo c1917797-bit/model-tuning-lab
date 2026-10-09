@@ -1,0 +1,77 @@
+{
+  "schema": "ascend.actual-continuation/v1",
+  "observed_utc": "2026-10-09T12:00:35Z",
+  "goal_complete": false,
+  "accepted_new_technique": false,
+  "sparq": {
+    "operation": "exec-0000000000000227",
+    "state": "verified-running",
+    "source_manifest_sha256": "eb7ed908879c6bdea7fab670bcf83e570a7439045e2d8e5c4535c6a41611f528",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-author-ann-fixedcap-v10-native-user72h-20261009-001",
+    "owned_cid": "4f785ac05ae274038f1b8808ef840f1947c3940debe530adb2a4e25f6796c340",
+    "physical": 6,
+    "logical": 0,
+    "actual_numeric_pid": 50647,
+    "whole_cases_required": 128,
+    "whole_steps_required": 20480,
+    "full_numeric": "pending",
+    "model": "pending",
+    "matched_e2e": "pending",
+    "final_tasks": "pending",
+    "live_source_frozen": true
+  },
+  "adakv": {
+    "stage": "SOURCE_MATERIALIZED_ONLY",
+    "operation": "exec-000000000000023f",
+    "exit_code": 0,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-authority-003-materialize-main-20261009-001/RESULT.json",
+      "bytes": 10931,
+      "sha256": "fe3fbba3117e7197ed3a7a77860d87b1522ec5fb8bb33a65a1c2af47c6a0f4ec"
+    },
+    "source_manifest_sha256": "8d4b7dc38b2e9e8bbfd72c46cdd164645d505d18ab704b34834edc217163b179",
+    "prior_10_software": "actual-pass-MAIN0232",
+    "actual_import": false,
+    "NPU": false,
+    "ready": false,
+    "inherits_old_native": false
+  },
+  "remote_checkpoint": {
+    "commit": "2a5025715216cbd719354c188184a131d15acd8a",
+    "push_exit_code": 0,
+    "independent_remote_hash": "pending-two-readonly-timeouts",
+    "no_duplicate_push": true
+  },
+  "raw_root": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-original-operations-v10b-20261009-001",
+  "raw_hashes": {
+    "ORIGINAL_022e.json": "f04c5fae898725af62a2b87704e3030d52248885e574f631946a02b9edb02623",
+    "ORIGINAL_0232.json": "0bf67269c3a818ac314912d5782f6b6e8ff3aa303569f657c98547fa2dbc0812",
+    "ORIGINAL_0233.json": "62da8bc737e5c2dfc57e2b182bb1ca3ee096cf69488a031e0a1f51fa3d5a49fa",
+    "ORIGINAL_023b.json": "023ad2d961c92c9549d6c07340e81b4c74bf7c70680d16c14809030355cd61c4",
+    "ORIGINAL_023d.json": "359ffca9cdac9d6db39de2708787d88faeb4877efc924f0dcd74851a55840e09",
+    "ORIGINAL_023f.json": "821f6578a04d210b661bd19fd2d422f7ef7f9820de14dfd1495f80c066aeacde"
+  },
+  "next": [
+    "Poll original0227 only; after terminal archive original whole and consume complete128/20480 with unchanged gates and exact cleanup",
+    "Sparse owner develops long-domain FULL oracle/LongArena rank_input and actual active-GDN observer/resource gap privately",
+    "Lowbit owner develops algorithm-linked matched dense/candidate graph/measurement seam privately, not a new controller"
+  ],
+  "observation_error_scope": "MAIN023b read-only observer used nonexistent /usr/bin/npu-smi; no native job failure. Changed source discovery MAIN023d found /usr/local/sbin/npu-smi and verified actual owner. Both originals preserved.",
+  "resource": {
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "no_external_stop": true,
+    "HugeTLB32GiB": "SPENT",
+    "new_source_clone_combined_CPU": 5,
+    "new_source_clone_combined_ordinary_RAM_GiB": 17
+  },
+  "deadlines": {
+    "first_repair_epoch": 1791615625,
+    "portfolio_epoch": 1791788425,
+    "reset": false
+  }
+}

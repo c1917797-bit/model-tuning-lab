@@ -1,4 +1,25 @@
 # Current human-authorized 72h successor — 2026-10-09
+## Latest actual live numeric / source materialization — 2026-10-09 12:00 UTC
+
+Read SPARQ_LIVE_ADAKV_MATERIALIZATION_20261009.json first. Original0227 is
+freshly verified RUNNING; physical6->guest0, actual numericPID50647, source
+eb7ed908... frozen. Complete128/20480, model, matchedE2E and final tasks remain
+pending. Do not restart or edit live sources. The old no-live sections are history.
+
+Ada003 actual10 software passed MAIN0232; MAIN023f actually materialized its
+new immutable service/caller/diagnostic source copy, RESULT10931B/SHAfe3fbba3....
+This is source-only, not actual import/native/model readiness; no old numerical
+PASS inherited. Sparse and lowbit agents prepare separate private FULL/matched
+model seams while MAIN alone runs the native lane. No dummy utilization.
+
+Prior stage2a50257 normal push really exited0; subsequent independent remote
+hash reads timed out. Keep those failures, do not repeat that successful push.
+Six whole original envelopes were saved outside Git, exactly API-read back
+and hashed, including the scoped read-only wrong-npu-smi-path observer failure.
+Its successor resolved actual /usr/local/sbin/npu-smi; no native failure inferred.
+
+No new non-HYPIC throughput or task-accuracy result. Physical0-3 protected,
+32GiB HugeTLB authority SPENT, original Oct10/Oct12 deadlines unchanged.
 ## Latest actual fixed-input NPU stage — 2026-10-09
 
 Actual01bf completed0/229.281s: same660 CPU prerequisites, fresh physical6
