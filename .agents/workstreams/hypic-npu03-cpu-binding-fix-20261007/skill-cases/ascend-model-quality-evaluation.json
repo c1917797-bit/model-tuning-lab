@@ -54,6 +54,10 @@
     "r13_strict_hot_decision": "FAIL",
     "r13_cold_request_count_with_ready_evicted_partial_prefill_sequence": 13,
     "r13_hot_cohort_correct_baseline_candidate_descriptive": [226, 212],
+    "r13_regressions_newly_length_limited_descriptive": [20, 30],
+    "r13_hot_regressions_newly_length_limited_descriptive": [19, 29],
+    "r13_identical_response_hash_pairs": 2,
+    "r13_length_limit_causality_proven": false,
     "r13_quality_repair_or_full_skill_acceptance_proven": false,
     "main_skill_integrated": false
   },
@@ -117,10 +121,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_material_eviction_sequence.py",
       "sha256": "cb538b4edf1d235584a4c187c5c1161eaa44708bfb0719b5fcef680086411550"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/analyze_r13_quality_length_delta.py",
+      "sha256": "d53b7c3bfce1953c6d33474b910bd62a2d7ef1fc66daef2cc53a088cd38d4f29"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_LENGTH_DELTA_DIAGNOSIS.md",
+      "sha256": "8927bfbe8d17daf06cd9f0fac2fc3c2aeb50d55ae2443a07fd50bf67a57731bf"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. Hot-cohort quality also falls descriptively, so cold fallback is not a complete explanation. Current main lacks the branch's per-scored-request proof wording, and the c8 LongBench-v2-only task does not validate the default GSM8K/c32 ruler or deterministic canary. No full Skill, paper, or performance acceptance follows.",
+  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. Hot-cohort quality also falls descriptively; 19/29 hot regressions were newly length-limited, but this association proves neither truncation nor HYPIC as the cause. Current main lacks the branch's per-scored-request proof wording, and the c8 LongBench-v2-only task does not validate the default GSM8K/c32 ruler or deterministic canary. No full Skill, paper, or performance acceptance follows.",
   "next_gate": "Complete and independently audit frozen six-phase performance without overriding r13 quality rejection. Isolate hot-path answer divergence and test any repair with a fresh matched source/control identity; integrate and replay main request-level proof requirements. Validate missing default-ruler dataset/canary conditions before upgrading this Skill case; never reuse the 0.9 baseline or r13 negative roots as a repaired pair.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
