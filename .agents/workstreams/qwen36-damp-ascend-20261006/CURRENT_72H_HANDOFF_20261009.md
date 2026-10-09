@@ -1,6 +1,148 @@
 # Current human-authorized 72h successor — 2026-10-09
 
-## Current verified state — 2026-10-09 19:26 UTC
+## Current verified state — 2026-10-09 21:29 UTC
+
+Read SPARQ_FULLV15_MODEL005_FAILED_SHARED_POOL_20261009.json first.
+MAIN06de/model005 is TERMINAL FAILED, not running or model authority.
+
+- Actual same660 CPU8, N164, all four worker pre-weight64GiB proofs, all four
+  weights and all16 stock FULL graph captures passed their startup scope.
+  First32768 warmup then failed at GDN reference joint-budget guard before
+  observed candidate numerical validation. No full model/lifecycle PASS.
+- Original005, exact owned stop-retain/Pid0, release and raw first fault are
+  retained. The actual new cgroupv1/v2 reader crossed its earlier boundary;
+  do not reuse004's cgroup-only diagnosis for005.
+- Independently read all4 GDN plans:96 logical views/rank,32 exact typed views,
+ 16 entire shared slabs. Old triple snapshots alone plus temp/oracle/reserve
+  exceed64GiB even without baseline. The80.72GiB derivation uses an earlier
+  observed baseline, not an unrecorded exact first-fault memory sample.
+- Native allocator proves FA/GDN groups share slabs with different block
+  ownership. A dedup-only repair or union of three GDN writers is insufficient.
+  NEXT is minimal physical-slab reference repair, exact all64 writer intervals,
+  typed GDN ownership, fresh persisted budget and complete affected regression.
+  That repair is currently private preparation, not implemented/verified PASS.
+- E1v5 MAIN0730 actual24/default-OFF/fixture/compile6 PASSED under7e0a only.
+  Whole original50fc87f8... and result7c28d7de... readback. This is software-only;
+  failed005 gives no E1 permission. A future source needs explicit final rebind.
+- Final taskv3 source packet remains UNRUN and blocked by task ARM versus
+  startup gate schema. AdaKV018→019 row handoff and complete successor are
+  independent API-only preparation. No preparer executes Docker/NPU/Git.
+- MAIN075f fresh21:24:09 host snapshot: no NPU0–7 processes;4–7 core0 and
+  HBM2866/2867/2866/2860MiB. This is sampled idle due to reference repair, not
+  a continuous-utilization claim or fresh admission for a later launch.
+- No new legal throughput, TTFT/TPOT, LongBench-v2 or GSM8K result.
+  Goal ACTIVE/unmet. First repair Oct10 07:00:25Z/portfolio Oct12 07:00:25Z
+  unchanged; protect0–3/OVS, HugeTLB32GiB SPENT, publication auth pending.
+
+## Historical verified state — 2026-10-09 20:50 UTC
+
+Read SPARQ_FULLV15_MODEL005_RUNNING_20261009.json first. Current MAIN06de
+is actual-controller RUNNING; no current005 model/NPU numeric result exists.
+
+- The namespace-aware resource repair is applied/readback. Final MF7e0a03d5...
+  is50834B/61own/135closure/32installed-runtime pins. Production parser79b1...
+  supports actual v1 mount-root mapping and strict v2, no arbitrary root fallback.
+  CPU8/N164 and all4 startup64 before runner/weights are source-bound; every
+  later budget uses fresh real controls and original immutable namespace proof.
+- Actual213 software/default-OFF/host source audit PASSED MAIN06d1 exit0/
+ 39351ms, real213 OK38.448s. RESULT5a91f090... and entire original5c258bf5...
+  are archived/readback. This is software evidence, not actual image/model PASS.
+- MAIN06bd failed213 predecessor is retained, whole32d1c12c...; twelve new
+  memory regressions passed, but old software harness lacked new startup
+  collaborator and one old source_count132 assertion. Only these two tests
+  were corrected;213count/production/numerical thresholds/resources unchanged.
+- Unique model005 was actually launched20:49:52Z as exec06de, newoutput
+  sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005. Frozen controller
+  charges source/component/model replay to5400/90cleanup, then actual same660
+  CPU8, fresh admission, N164/worker64 and whole original correctness.
+  Poll only06de, never duplicate. New actual NPU allocation is not yet readback;
+  prior20:12 idle evidence must not be presented as current resource state.
+- Prior004 remains TERMINAL FAILED, not LIVE or model authority. Whole original,
+  all4 weights/graph load evidence and exact own cleanup are immutable. Root
+  was proved cgroupv2-only adaptation against actualv1, not paper no-go.
+- E1v4 actual24 PASSED MAIN06a5; raw a9a03550... preserved. It is boundold3f7
+  and cannot authorize current7e. E1v5 minimal exactsource rebind is parallel
+  API-only preparation; no paired/performance authority before full005 numeric.
+  Final tasks still pending. AdaKV018 repairs real preparation defects in
+  parallel;017/015 do not have full model or end-to-end acceptance.
+- No new legal throughput/TTFT/TPOT/LongBench-v2/GSM8K result. Current activity
+  is whole-model correctness, not successful technical landing. Protect0–3,
+  OVS, fixed repair Oct10 07:00:25Z and total Oct12 07:00:25Z. No additional
+  HugeTLB release, foreign stop, dummy utilization or push-auth blind retry.
+  Goal ACTIVE/unmet. Publication remains pending known unchanged auth failure.
+
+## Historical verified state — 2026-10-09 20:15 UTC
+
+Read SPARQ_FULLV14_MODEL004_FAILED_CGROUP_20261009.json first. MAIN0657 /004
+is TERMINAL FAILED, not LIVE. The previous19:52 RUNNING snapshot is history.
+
+- Actual004 passed same-image no-device CPU source checks and genuine N1.
+  All four real TP workers reported12.8735GB weights each; original profile
+  passed and all16 FULL decode graph shapes captured. First real warmup then
+  failed before candidate arithmetic. No complete client/model numeric authority,
+  legal E1 throughput, formal pair, LongBench-v2 or GSM8K result exists.
+- Earliest worker20:02:50 error is gdn_model_observer.memory():
+  actual model memory cgroup unavailable. Source80278... only reads cgroupv2,
+  but actual N1/all4 process controller is cgroupv1. This is a proved resource-
+  observer adaptation defect, not paper no-go or demonstrated tensor error.
+  Host client/stream/task producer failure is the secondary envelope.
+- Whole0657 original archived/readback SHA42cc4d64...;804693B arm result,
+  raw server/client and exact stop-retain are preserved. Own004 full CID1849e...
+  stopped-retained/Pid0/noExec/noOOM. No unchanged restart, no polling as LIVE.
+- MAIN0692 same660 Devices[]/8GiB/1CPU resource-view probe completed
+  exit0/23760ms; original whole d039c805... and REPORT d1725f... readback.
+  Actual v1 group equals mounted root /docker/CID, so memory leaf is directly
+  /sys/fs/cgroup/memory. Actual limit8589934592/current5656576/peak6516736.
+  Framework/model/NPU never executed; exact own cleanup stopped-retained.
+- Fresh20:12:52 release has no4–7 real processes; HBM2866/2868/2866/2862MiB.
+  Actual ordinary MemAvailable100753653760B at admission, CPU1+4+2 proven.
+  Protected0–3 external workers remain untouched. No HugeTLB release.
+- NEXT minimal v15 namespace-aware v1/v2 reader plus real-function positive/
+  negative regressions; actual8GiB CPU and64GiB N1 checks BEFORE weights.
+  Preserve64GiB/2GiB/all4 math/FULL/all16/host72.25GiB/7CPU/clock gates.
+  Source3f7 remains frozen pending MAIN application; new005 needs new source,
+  real regression, readback and fresh admission, never reused failed output.
+- E1v3 MAIN0695 actual24 software FAILED:23pass/1 source-fixture import error
+  under isolated-I; original112b269e... preserved, minimalv4 pendingv15 binding.
+  Final-task ownerv2 e6e8073b/50tests remain UNRUN/source-only; no authority
+  from004failure. AdaKV017 is parallel preparation,
+  not completed native/model. Fixed repair Oct10 07:00:25Z and total Oct12
+  07:00:25Z unchanged. Goal ACTIVE/unmet, push auth failure unchanged.
+
+## Historical verified state — 2026-10-09 19:52 UTC
+
+Read SPARQ_FULLV14_MODEL004_RUNNING_20261009.json first. Earlier sections below
+are preserved history, not current execution authority.
+
+- MAIN0648 actually passed whole201/source132, default-OFF and actual host
+  source-audit. V14MF3f7101329858c900efb3fd0a17be12a2a1358e37f4c5ed107092ccb0a84e1295
+  is applied/readback/frozen:61own,132closure. Only common.py/source_contract.py/
+  existing test changes. Native math128/20480 and requested COMMON2 unchanged.
+  Official effective warmup integer1 is source-bound; all other predicates
+  remain hard, now individually named. Installed pin is verified only at N1.
+- Coherent checkpoint eaafe453b476b291c9e4e603bff7b416def4d59b completed with
+  MST20/scoped diff PASS. Publication is pending unchanged HTTPS auth failure.
+- MAIN0655 fresh actual controller admission passed without create. MAIN0657
+  unique004 is confirmed RUNNING; poll that original handle, never duplicate.
+  Output sparse/MAIN-sparq-full-v14-diagnostic-user72h-20261009-004.
+  Stage is source/model identity -> same-image Devices[] CPU -> genuine N1 ->
+  exclusive physical4–7 model -> independent post-CPU. No all4 model output,
+  numerical/lifecycle authority, legal throughput or task result is yet proved.
+  Preparers remain API-only remoteCPU0; source stays frozen while live.
+- Prior05d4/003 remains TERMINAL FAILED, all4 weightsloaded only; original
+  failure and own stop-retain/release unchanged. Current repair is not a paper
+  success or a lowered numerical/resource gate.
+- NEXT E1v3 frozen d6df184e6775d6fab21952550a5729f9f7592503266a07cc61d3dbf5f2351ebd
+  has24 software UNRUN and charges source checks to original clock. Actual same
+  3f710 model authority is still MISSING, so E1 cannot launch.
+- BACKUP AdaKV017 audit_source is independently frozen62a59792a20b2c6013568e739a16a60fc72a3998082c9ede3d2548b16a00b614;
+ 27 software UNRUN.016/060c syntax failure is preserved.015 native5120/model
+  gates remain pending. Final-task owner source-only olddc4, new rebind pending.
+- Native005 is component-only. Fixed Oct10 07:00:25Z repair and Oct12 07:00:25Z
+  portfolio cutoffs unchanged; goal ACTIVE/unmet. Protect0–3 and OVS; HugeTLB
+ 32GiB cap SPENT. No foreign stop, dummy utilization or final acceptance claim.
+
+## Historical verified state — 2026-10-09 19:26 UTC
 
 - SparQ native005 whole128/20480 component authority is unchanged; it is not
   whole-model, throughput or task acceptance.

@@ -28,6 +28,7 @@ def main():
    if target.startswith(("/dev/davinci","/dev/devmm","/dev/hisi_hdc")):fds.append(target)
   observed["actual_device_nodes"]=nodes;observed["actual_device_fds"]=fds
   c.require(nodes==[] and fds==[],"actual Devices[] namespace and process no device exposure")
+  observed["owned_memory_cgroup"]=gdn_stream.memory(8*1024**3)
   import numpy
   c.require(all(callable(getattr(numpy,name,None)) for name in ("frombuffer","bitwise_and","equal")),"actual NumPy checker exports")
   observed["GDN_stream_checker"]=dict(protocol=gdn_stream.PROTOCOL,source=c.bound(gdn_stream.__file__,files["gdn_stream.py"]),

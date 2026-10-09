@@ -348,9 +348,15 @@ class ActualWrappedDummyProfile(unittest.TestCase):
   def tracked_budget(state):
    memory.budget_calls+=1;return original_budget(state) # real strong budget
   import identity_bridge
+  # Software-only startup collaborator: never a runtime/model memory proof.
+  # The real reader and consumer are exercised separately in test_gdn_state.
+  def startup_memory_spy(*args):
+   memory.startup_memory_calls=getattr(memory,"startup_memory_calls",0)+1
+   return dict(path="/software-fixture/not-runtime-memory.json",sha256="a"*64)
   # Configuration observation spy only in this existing software harness.
   # Never used by N1/frontend/actual TP workers; cannot grant runtime authority.
   for obj,name,value in (
+   (identity_bridge,"startup_memory_gate",startup_memory_spy),
    (identity_bridge,"flag",lambda:dict(disable_request_id_randomization=True,environment_value="1",processor_source_sha256=identity_bridge.ASSIGN_SHA)),
    (c,"source",lambda *args:({},{})),(c,"actual_component",lambda *args:{}),
    (c,"runtime_sources",lambda *args:None),(c,"event",lambda *args:{}),
@@ -365,6 +371,7 @@ class ActualWrappedDummyProfile(unittest.TestCase):
   stack.enter_context(patch.dict(os.environ,{"QWEN36_SPARQ_STOCK_FULL_ENABLED":"1",
    "QWEN36_SPARQ_MODEL_MODE":"diagnostic","QWEN36_SPARQ_MODEL_ARM":"candidate"}))
   got=bridge.install_from_env();self.assertTrue(got["installed"]);self.assertFalse(got["model_ready"])
+  self.assertEqual(memory.startup_memory_calls,1)
   return runner,memory
  def test_actual_profile_calls_all16_literal_None_forward_without_native_authority(self):
   runner,memory=self.harness()

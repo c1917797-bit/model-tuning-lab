@@ -17,7 +17,7 @@ def start(state,rank,source,files,component):
   signal.getsignal(signal.SIGUSR1)==signal.SIG_DFL,"owned formal finalizer requires main thread/default SIGUSR1; never replace handler")
  root=Path(os.environ["QWEN36_SPARQ_MODEL_TRACE_ROOT"])
  identity=dict(schema="sparq.formal-worker-start/v1",rank=rank,source=source,source_files=files,
-  component=component,mode="formal",arm=state.arm,process=proc(),created_ns=time.time_ns(),
+  component=component,mode="formal",arm=state.arm,process=proc(),pre_weight_memory=state.startup_memory_ref,created_ns=time.time_ns(),
   diagnostic_trace_enabled=False,common_identity_flag=__import__("identity_bridge").flag())
  c.write(root/("FORMAL_WORKER-r%d.json"%rank),identity)
  finalized=False

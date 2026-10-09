@@ -79,12 +79,41 @@ def validate_worker_flag(value):
  c.require(value==dict(disable_request_id_randomization=True,environment_value="1",processor_source_sha256=ASSIGN_SHA),
   "each actual worker must observe same source-bound common flag")
  return True
-def static_probe(probe,source,files):
+def static_probe(probe,source,files,container_id=None):
  c.require(probe["status"]=="source-static-checked" and probe["source"]==source and probe["files"]==files and
   probe["runtime_framework_imported"] is False and probe["device_query_called_by_probe"] is False and
   probe["runner_import_pending_admitted_N1"] is True and probe["actual_device_nodes"]==[] and probe["actual_device_fds"]==[] and
   probe["installed_runtime_sources"]==c.RUNTIME_PINS,"actual Devices[] static closure; no pretend runner import")
+ import gdn_stream
+ gdn_stream.consume_memory(probe["owned_memory_cgroup"],8*1024**3,container_id,probe["pid"])
  return True
+def startup_memory_gate(source,files):
+ # Existing per-process bridge bootstrap, before runner and weight allocation.
+ import gdn_stream
+ root=Path(os.environ["QWEN36_SPARQ_MODEL_SERVICE_ROOT"])
+ arm=c.obj(c.bound(root/"ARM.json",c.sha(root/"ARM.json")));ident=c.obj(arm["identity"])
+ c.require(arm["source"]==source and arm["source_files"]==files and arm["schema"]=="sparq.author-ann-stock-full-arm/v1",
+  "same actual admitted arm before plugin/worker model allocation")
+ process=raw_process();snapshot=gdn_stream.memory()
+ gdn_stream.consume_memory(snapshot,gdn_stream.GUEST,ident["container_id"],process["pid"])
+ c.require(snapshot["process"]["start_ticks"]==process["start_ticks"] and snapshot["proc_cgroup"]==process["cgroup"],
+  "same actual preweight bootstrap process memory extent")
+ return c.write(identity_root(root)/("memory-startup-%d.json"%process["pid"]),
+  dict(schema="sparq.actual-preweight-memory/v1",source=source,files=files,identity=arm["identity"],
+   process=process,memory=snapshot,stage="existing-plugin-bootstrap-before-runner-and-weight-allocation",
+   model_allocation_not_started=True,worker_rank_not_assumed=True,ready=False))
+def consume_startup_memory(ref,source,files,identity,process):
+ import gdn_stream
+ x=c.obj(ref);ident=c.obj(identity)
+ c.require(x["schema"]=="sparq.actual-preweight-memory/v1" and x["source"]==source and x["files"]==files and
+  x["identity"]==identity and x["stage"]=="existing-plugin-bootstrap-before-runner-and-weight-allocation" and
+  x["model_allocation_not_started"] is True and x["worker_rank_not_assumed"] is True and
+  all(x["process"][k]==process[k] for k in ("pid","start_ticks","cgroup")),
+  "actual same source/arm preweight evidence matched to this later worker, not frontend borrowed")
+ gdn_stream.consume_memory(x["memory"],gdn_stream.GUEST,ident["container_id"],process["pid"])
+ c.require(x["memory"]["process"]["start_ticks"]==process["start_ticks"] and
+  x["memory"]["proc_cgroup"]==process["cgroup"],"preweight raw memory binding equals actual worker")
+ return x
 def n1_dependency_gate(source,files,identity,service_root):
  ident=c.obj(identity);cid=ident["container_id"];inspect=c.obj(ident["actual_owned_inspect"])
  rows=json.loads(inspect["stdout"]);c.require(inspect["exit_code"]==0 and len(rows)==1 and rows[0]["Id"]==cid,
@@ -98,6 +127,9 @@ def n1_dependency_gate(source,files,identity,service_root):
   identity=identity,container_id=cid,process=raw_process(),installed_runtime_sources=c.RUNTIME_PINS,
   imports=[],first_exception=None,model_allocation_not_started=True,model_numeric_authorized=False)
  try:
+  import gdn_stream
+  report["owned_memory_cgroup"]=gdn_stream.memory()
+  gdn_stream.consume_memory(report["owned_memory_cgroup"],gdn_stream.GUEST,cid,report["process"]["pid"])
   import vllm_ascend.ops
   import torch,torch_npu
   import vllm_ascend.attention.attention_v1 as attention
@@ -137,4 +169,6 @@ def consume_n1(ref,source,files,identity,service_root):
   x["original_post_order"]==["original_run_model","original_POST_update"] and x["inherited_run_unchanged"] is True and
   x["long_reference_protocol"]=="sparq.long-native-per-request-FP32-SUM0/v1" and x["mean_configuration"] is False,
   "actual source/owned N1 hardware dependency closure before model construction; no fake HAL/arch")
+ import gdn_stream
+ gdn_stream.consume_memory(x["owned_memory_cgroup"],gdn_stream.GUEST,x["container_id"],x["process"]["pid"])
  validate_worker_flag(x["common_identity_flag"]);return x

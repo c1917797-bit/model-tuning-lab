@@ -433,7 +433,7 @@ def cpu_phase(a,refs,sources,model,start):
   raw,terminal=ctl.call("full-cpu-source",c.docker_argv(ctl.cid,args),cap=180)
   probe=c.bound(out/"REPORT.json",c.sha(out/"REPORT.json"));p=c.obj(probe)
   import identity_bridge
-  identity_bridge.static_probe(p,refs["source"],sources["files"])
+  identity_bridge.static_probe(p,refs["source"],sources["files"],ctl.cid)
   c.require(p["model_executed"] is False and p["npu_executed"] is False,"actual same-source FULL static no-device closure")
   lines=[l for l in raw["stdout"].splitlines() if l.startswith("MAIN_SPARQ_FULL_CPU ")]
   c.require(len(lines)==1 and json.loads(lines[0].split(" ",1)[1])==dict(result=probe,status="source-static-checked"),

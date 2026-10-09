@@ -192,7 +192,8 @@ class EffectiveAscendCommon(unittest.TestCase):
   mf=c.obj(dict(path=str(ROOT/"SOURCE_MANIFEST.json"),sha256=c.sha(ROOT/"SOURCE_MANIFEST.json")))
   self.assertEqual(mf["source_pins"],c.PINS);self.assertEqual(mf["runtime_pins"],c.RUNTIME_PINS)
   self.assertEqual(mf["source_count"],len(c.OWN)+len(c.PINS)+len(c.HOST_DEPENDENCIES))
-  self.assertEqual(mf["source_count"],132)
+  self.assertEqual(mf["source_count"],135)
+  self.assertEqual(len(mf["runtime_pins"]),32)
   # Real N1 still delegates installed-byte validation before model allocation.
   n1=ast.parse(source("identity_bridge.py"))
   gate=next(n for n in n1.body if isinstance(n,ast.FunctionDef) and n.name=="n1_dependency_gate")

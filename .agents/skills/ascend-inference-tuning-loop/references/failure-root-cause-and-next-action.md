@@ -210,3 +210,28 @@ completions per card-hour, launch failures, native compute ownership, terminal
 to release/next dispatch latency and idle causes. Queue target is at least one
 reviewed executable backup; explicitly report when it is not met. Use real
 input/initialization checks, never dummy load, to eliminate avoidable gaps.
+
+## Shared physical pools and reference ownership
+
+When several logical cache views share storage, distinguish exact typed-view
+aliases from partially overlapping views and from legitimate different native
+writers. Charge and actually create one before-copy per required physical owner;
+deduplicating only the budget does not fix duplicated allocations. Keep every
+logical layer's source-bound metadata/identity and coverage references. A storage
+pointer alone cannot prove identical views or semantic ownership.
+
+A whole-model untouched-state reference must account for ALL legitimate writers
+to the pool using their actual source-supported indices or slot mapping. Do not
+classify another layer's valid writes as corruption, exempt an entire partly
+written row, or drop padding/untouched bytes to make a gate pass. Mixed-dtype
+storage also needs typed ownership: bytes holding BF16 FA cache must not be
+reinterpreted as live FP32 recurrent state for a finite check. Keep all genuinely
+unwritten bytes bitwise and the registered live/retained typed-state checks.
+
+Preserve the original rejected budget and first fault. Persist the fresh actual
+memory sample and complete copy/temporary/oracle/reserve ledger before refusing
+allocation, so estimates are not later presented as first-fault RSS. Fix a
+proved observer/reference defect with independent deployed allocator evidence
+and complete real-entry regressions; require a new source/output identity and
+the affected NPU/model gate. This is adaptation/reference recovery, not evidence
+of a paper limitation or permission to raise the resource/numerical threshold.

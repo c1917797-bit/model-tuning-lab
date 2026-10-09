@@ -2,11 +2,11 @@
   "schema": "sparq.author-ann-fp32-stock-full-source/v3",
   "ready": false,
   "files": {
-    "bridge.py": "11426b472bae7ee654545bb6572124ee35efeb7f3e015229879d686e64bc0dd2",
+    "bridge.py": "653d25094e90a2fc4d2d1517160c7e8fd12ebf960dd89c3be620fc92398f25a8",
     "common.py": "b7fbe8c143eae5db5663abb8a45cee479a3ca6936846c74962b80dc467e3b8b8",
     "lifecycle.py": "197ced9fdac7139b04a78cb6f54ea93bb168d0d58b8662a9fda64a565adb7ee2",
     "workspace_budget.py": "945b6408dd6ccbf541a24e24d5e934a2ea6fa802fd269df2406b5c556462b20c",
-    "source_contract.py": "db3437cf90924b984fb2b49732b46f59e20372bf337f13aeda4f45968229f570",
+    "source_contract.py": "4831de4fc328b567dc4613b529da6638c4c2c1aa1365e584d36956726efafb87",
     "full_graph_pa.py": "67ed22fc02ca80721f1fdd3577381a39629ce27aadd78b52fcfba558aafada24",
     "original_terminal.py": "ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1",
     "sitecustomize.py": "2ce9f1cd7d20a793f105fcaba8a1c7c0169de0963d912b41db569b3068b39705",
@@ -22,26 +22,26 @@
     "model_matrix.py": "81b922d93b4c3c4860b2cd20afbc50c7846d7ef3439f6f96f10aa51933245c4c",
     "evidence.py": "01f741b9863a9a1d81762af9c370724f4206b352c996cc132c0bde436f5063e2",
     "gdn_state.py": "a0971d820566df66cf58de82c8c38476d41503997453f3a7c07b0b641e48a824",
-    "test_gdn_state.py": "92b1fb9e5e7a97892e7bb940b95da954d31a65c19f0708ee915a66de1bb14640",
+    "test_gdn_state.py": "995f96fb40d96d24563e5e2b2e80a19a6df0ae2ae22cbe808fe35f9c22f92402",
     "service_contract.py": "3264125a4f4e717baaab2852c711b6ffefd8670d96cc87e4c72f164fac035891",
     "bench.py": "71e53e668b69fc28141e954d3cf0111cf67850500a36160951849b6dbb7696aa",
-    "host_run.py": "c0a85477ebf7439e7379a17ae935a4224fade83fa36eee434b7d38d19b5941ce",
+    "host_run.py": "52d66e2fe9d7b654ea1d17075f720d106b10b966650c9bf8beb97d1f9c3e1c4b",
     "gdn_metadata.py": "292da75418bddb3f617eb4a9297eeef341a38832f1d7eb859e1e76fb92b2ed54",
     "gdn_observer.py": "270e774ef31fb2c9ca28a629b8ad8e75e2b23cde75dbf0c89c6d7c6511189393",
     "gdn_source.py": "4fd07e9ca0d76c99fc3fcede9d786a4a625e42819d0c02417aec37a23f77f3fc",
     "test_gdn_metadata.py": "6a7075998550b990c97d5cc827b5f3d6528aa1f17f78ab3a3d45a1c2fcad97ab",
     "fa_model_numeric.py": "f9a9b68c0fa1a84e3153b417106400bc425950fcce8de2cb9ce4edb975adb707",
-    "full_cpu_preflight.py": "a0986c74790da7d2bb87404c5edf034955a1353894a7523699df65b0e3ec1fdc",
-    "gdn_model_observer.py": "80278d33a86bbbc4697ea81f49ff1fd904728e65b5ee64b8ccacad672c1fe0f0",
+    "full_cpu_preflight.py": "0e79cded6cf7d7da3849440934595195a633895a16dc293a017efa4c7fbb5e7c",
+    "gdn_model_observer.py": "2e315bc88927cb469c2ee36e59d39a0e160e74b48dd4f1c77b55901b272fa65a",
     "allocator_coverage.py": "48565cbc2a5710abad4263c00b2b7edf47bb3daa2da754f42762986ba7daea37",
-    "consume_model.py": "d4c31bd69a71c0c66b301c06fdf81e17ff5c2689bdc3a376ab20163c10ef6064",
+    "consume_model.py": "f8363f66d05d4a37e5fca50fb108ce1f8664cdf3087cbf6fcf8ff5359937721c",
     "model_cpu_check.py": "3adb13754ee21e0a3441cefd9a4880ee4897bfad674297f441acc68092d0ad45",
     "model_workload.py": "d5b047b3510d0992869635dfcedeb089f691f92a39876bea982f33291c0d4d09",
     "test_model_workload.py": "afb5a81203bbc02d89b77a70137d32ea6ce4bbf5ffe38153c4cd8945954a7beb",
-    "formal_stats.py": "61e8a431a4944fd0772a09494a8d21fc9ed6cfa6091b975d43454a02e927d035",
+    "formal_stats.py": "2b0daf3ebdf2f4d4f873478f3c6374fdda050bdb3514b9782be41ac5b14ff059",
     "test_formal_stats.py": "9c2c52f99e4d957733d1e27e44915098f11f70c5d440787e092bf954e80f7998",
     "wire.py": "17915e7ac507e136ae65683a878cf9f66e6437ad1a99646135d1794061bd8846",
-    "consume_service.py": "c6514d44410be8e4dfa528fcf1c67cee7f33728eeab595465850ac0ff6f0df9a",
+    "consume_service.py": "eea10a851032666afafdc7c98edd4bf548dd26f6c97c1fe45ae193f6d4f46fc1",
     "test_wire.py": "1f0b58ea690987135dccf0ad3e362cec5b6876240300ae0da2c394b6e4698582",
     "allocation_contract.py": "337f23efba8e0b1266bae97917a3674ebe6e9e084f4f40543085175da385b455",
     "long_workspace.py": "4a53f2e0dbc949f5ab1ad837ec1d2bafc7eedf8b3ea157e3d01030d0a5dc2ffd",
@@ -52,15 +52,15 @@
     "ann_model_state.py": "d17177baeb86dae5b24e663bbe7a3ff628b0a3769000da57c528fbfe2acd3560",
     "ann_model_oracle.py": "1b8a84ca556db105ac3b35049deb7c97287797a53750ed9e0078a2e69e04f024",
     "ann_fa_consumer.py": "77650c542c10cc4049c4e4c7b26723c21c9e468077dd9ce2845f77391f3d6101",
-    "test_ann_aggregate.py": "d67128bed1c8242c4e70fa45e4df588cae4915fbe9d0bd08f0d80b63a31369c0",
+    "test_ann_aggregate.py": "888058805c3ecdd2248de3b750a346dafbe7de27eae00132cf0e155b00d270c7",
     "entry.py": "e8dfd9cf45a3405f28812b98484e4cb3342c979507d2b9b2c2f27c77e59c4a95",
     "component_handoff.py": "5b67da085a0b1ca950ef76eb5644668f6cd3999756aa57b1554e8272bc7dd04d",
     "test_component_handoff.py": "d97cacd37f0ee6e8ea4aa0c86bfc190b12b008ad1da9ee128eaede71899c3671",
-    "test_fp32_model_adapter.py": "6b4320d81c2b82c7c31711a2f9a5aeb2118b7e74d828bca2c2d5cef8fe3e6cf3",
+    "test_fp32_model_adapter.py": "422836de784e6c71816a62cada2fe0b1f46217145451c6af94cca4584d1f4da2",
     "long_independent_oracle.py": "21fe6d9e7c78acdecb23ffe42196e38c8cfd6d55c2c08bb45f2826bf40d74605",
-    "gdn_stream.py": "41bfd90bb5df44c4950063bfd22330d42be7314c9c619713e72f949907945b9e",
-    "identity_bridge.py": "7f156e5a10d61d11d253d11e7dfb3cf780bb5a11746e1ee99912ab209832160e",
-    "test_identity_n1.py": "5b0a2c1805b045a72a862f94f1aa8db0b58ed4e4e9b4183ab5ca81832d045e4f",
+    "gdn_stream.py": "79b1dcabe028a1e00dfb8ea6d34c2eca2247ac8235da93b29e9195ecff24617b",
+    "identity_bridge.py": "4a4a12875a306720642647bbae073a14cea78962251bb7333e63229ea942088e",
+    "test_identity_n1.py": "cf8b20afb6fcc0d3283249275f278f8403c18b282c5a79d83dae4d6cbb1b2a52",
     "component_bootstrap.py": "2437a856201fee78576dfde68218595a6f58fd4bfcf2f77e88dc7fa5bc20b7c4",
     "test_component_bootstrap.py": "56e7251f0daa5cea376f96425de2ab49d1a47c3f519f31f823d3716d1db70870"
   },
@@ -132,7 +132,10 @@
     "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/replay.py": "0f652aa5e01671684158a8f1b75fdfdfec4f2227485bcdeb1166cef4286e95cd",
     "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-disjoint4-consumer-mounts-v1-001/test_mounts.py": "7b1fa4e932a7615b65ff71aefb94fe4ad471081f2402b82316adc254954d8919",
     "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/ascend_platform.py": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8",
-    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/COPY_IDENTITY.json": "8cfede7a3854fbc274f67bc5e5623a1735704d724c0bd26909deca6f03beed59"
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/COPY_IDENTITY.json": "8cfede7a3854fbc274f67bc5e5623a1735704d724c0bd26909deca6f03beed59",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/REPORT.json": "d1725f159fa58fe9aa82d2d4cd2523ba62729b73db4b2ea6f8bb6ba2a58abc9f",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/RESULT.json": "523dc7d441ef1e800ed2dc77a6bc6e0f35916296bdaf5bebe86e3f195f2c59d7",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-public-actual-npu-worker-source-v1-001/npu_worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
   },
   "runtime_pins": {
     "/vllm-workspace/vllm/vllm/engine/arg_utils.py": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
@@ -165,14 +168,15 @@
     "/vllm-workspace/vllm-ascend/vllm_ascend/worker/npu_input_batch.py": "a4dc08a9918f07797622f8d0915785e8c7b6899e0d10d92603e1dddec218acc3",
     "/vllm-workspace/vllm-ascend/vllm_ascend/worker/block_table.py": "8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a",
     "/vllm-workspace/vllm/vllm/v1/engine/input_processor.py": "c5673988c0f7cfec268220e3f044e718702c015a4f236c020937cfd40a793f15",
-    "/vllm-workspace/vllm-ascend/vllm_ascend/platform.py": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8"
+    "/vllm-workspace/vllm-ascend/vllm_ascend/platform.py": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8",
+    "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
   },
   "host_dependencies": {
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc",
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
   },
-  "source_count": 132,
+  "source_count": 135,
   "complete_native_component_required": "Exact producer2f/native42 eb7 with actual new reader77f7 explicit consume_successor replay; original c971 consumer FAILED stays immutable. Entire128/20480/four original children+whole0452+exact cleanup all original fields unchanged.",
   "tests": {
     "status": "UNRUN_API_ONLY",
@@ -191,15 +195,15 @@
       "test_identity_n1",
       "test_component_bootstrap"
     ],
-    "static_declared_tests": 201,
+    "static_declared_tests": 213,
     "actual_collected_test_count": null,
     "exit_code": null,
     "stdout": null,
     "stderr": null,
     "remote_exec_CPU": 0,
-    "method_declarations": 198,
+    "method_declarations": 210,
     "inherited_unittest_cases": 3,
-    "inherited_case_source": "Original189 preserved;12 additional real common callable/clean -I/installed Ascend normalization source contracts. Actual201 UNRUN."
+    "inherited_case_source": "Original201 retained;12 additional namespace-memory leaf/actual0692/entry/negative tests. All213 UNRUN."
   },
   "actual_model": "UNRUN; complete disjoint4 component plus initialized geometry/budget/all4all64 full lifecycle and oracle required",
   "performance": {
@@ -591,5 +595,59 @@
     "actual_N1": "UNRUN",
     "model": "UNRUN",
     "E1": "MISSING actual independent model authority and required new-source rebind"
+  },
+  "v15_namespace_memory_successor": {
+    "schema": "sparq.namespace-leaf-memory-successor/v1",
+    "old_source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "sha256": "3f7101329858c900efb3fd0a17be12a2a1358e37f4c5ed107092ccb0a84e1295"
+    },
+    "failed_original_model": "0657 diagnostic004 FAILED; schema mismatch proved, no algorithm/numerical claim; oldsource/failedresult retained",
+    "actual_no_device_controller": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/RESULT.json",
+      "sha256": "523dc7d441ef1e800ed2dc77a6bc6e0f35916296bdaf5bebe86e3f195f2c59d7"
+    },
+    "actual_no_device_view": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/REPORT.json",
+      "sha256": "d1725f159fa58fe9aa82d2d4cd2523ba62729b73db4b2ea6f8bb6ba2a58abc9f"
+    },
+    "reader_module": "gdn_stream.py",
+    "model_default_bytes": 68719476736,
+    "cpu_probe_bytes": 8589934592,
+    "four_rank_joint_reserve_bytes": 2147483648,
+    "host_full_ancestor_gates_changed": false,
+    "new_privileges_or_namespaces_or_cgroup_mounts": false,
+    "profiles": "Actual CPU8 before device create; N164 before model allocate; every existing process bridge bootstrap64 before runner/weights, bound again to later actual4worker PID/start/CID; all4 same exact leaf in original joint plan.",
+    "validity": "Source repair and213 regressions UNRUN; original0692 proves namespace mapping only, not newreader/NPU/model/PASS.",
+    "mechanism_or_numeric_threshold_changed": false,
+    "deadline_reset": false,
+    "token_loop_namespace_raw": "Full proc_cgroup/mountinfo pair persisted once in same-process startup proof. Later joint plans use immutable namespace Ref plus fresh limit/current/actual peak and stable process/file identity fences. No repeated full mountinfo per token; original 10GiB workspace hard cap unchanged."
+  },
+  "v15_software_fixture_successor": {
+    "schema": "sparq.v15-preweight-software-fixture-successor/v1",
+    "failed_source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "sha256": "74dc0d1259e8a37895914d05cd87b5abba160c2908b8cb3baa1d0f758e80dd89"
+    },
+    "actual_failed_operation": "exec-00000000000006bd",
+    "actual_failed_213": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-sparq-v15-software213-20261009-001/STAGE-0.json",
+      "sha256": "307f1db321eea19774f3cc3a69bedcc39db464244ea5f17ebd52f6fe2bc1bd98"
+    },
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-sparq-v15-software213-20261009-001/RESULT.json",
+      "sha256": "ce031b3992fe5a85a3b8e018f6bdd6311e5e666d8be755dd0f999fd60920a713"
+    },
+    "classification": "software fixture omitted new actual preweight collaborator plus stale132 source-closure assertion; no NPU/model started",
+    "delta": "existing software harness explicitly spies startup collaborator once; real startup reader/consumer unchanged and independently tested; exact135/32 closure expected",
+    "unchanged": {
+      "production": true,
+      "source_count": 135,
+      "software_test_count": 213,
+      "numeric_thresholds": true,
+      "resources": true,
+      "deadlines": true
+    },
+    "actual213_successor": "UNRUN"
   }
 }

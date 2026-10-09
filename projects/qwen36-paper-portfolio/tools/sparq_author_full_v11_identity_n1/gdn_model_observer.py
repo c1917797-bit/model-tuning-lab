@@ -14,24 +14,12 @@ def identity(t,npu):
   storage_bytes=t.untyped_storage().nbytes(),native_format_value=int(fmt),
   native_format_type=type(fmt).__module__+"."+type(fmt).__qualname__)
 def memory():
- root=Path("/sys/fs/cgroup");raw=Path("/proc/self/cgroup").read_text()
- candidates=[]
- for line in raw.splitlines():
-  if line.startswith("0::"):
-   rel=line[3:].lstrip("/")
-   if ".." not in Path(rel).parts:candidates.append(root/rel)
- candidates.append(root)
- found=[]
- for p in candidates:
-  if p not in found:found.append(p)
- for p in found:
-  if (p/"memory.current").is_file() and (p/"memory.max").is_file():
-   maximum=(p/"memory.max").read_text().strip()
-   c.require(maximum.isdigit() and int(maximum)==gdn_stream.GUEST,
-    "actual owned model guest64GiB cgroup; no unlimited host fallback")
-   return dict(path=str(p),proc_cgroup=raw,memory_max=int(maximum),
-    memory_current=int((p/"memory.current").read_text()),memory_peak=int((p/"memory.peak").read_text()))
- raise ValueError("actual model memory cgroup unavailable")
+ snapshot=gdn_stream.memory() # Default64; host still proves complete ancestors.
+ root=Path(os.environ["QWEN36_SPARQ_MODEL_SERVICE_ROOT"])
+ arm=c.obj(c.bound(root/"ARM.json",c.sha(root/"ARM.json")));ident=c.obj(arm["identity"])
+ gdn_stream.consume_memory(snapshot,gdn_stream.GUEST,ident["container_id"])
+ proof=root/"identity"/("memory-startup-%d.json"%os.getpid())
+ return gdn_stream.memory_sample(snapshot,c.bound(proof,c.sha(proof)))
 def raw_publish(path,data):
  path=Path(path);view=gdn_stream.view(data)
  c.require(path.is_absolute() and path.parent.resolve()==path.parent and not path.exists(),"exact new first-fault binary")

@@ -251,6 +251,8 @@ def install_from_env():
   consume_authority(c.bound(os.environ.get("QWEN36_SPARQ_FULL_MODEL_AUTHORITY",""),
    os.environ.get("QWEN36_SPARQ_FULL_MODEL_AUTHORITY_SHA","")),source,
    c.bound(os.environ["QWEN36_SPARQ_NUMERIC_AUTHORITY"],os.environ["QWEN36_SPARQ_NUMERIC_AUTHORITY_SHA"]),replay=True)
+ import identity_bridge
+ startup_memory=identity_bridge.startup_memory_gate(source,files)
  import vllm_ascend.ops # actual v0.23 bootstrap before attention/device_op
  import torch,torch_npu
  import vllm_ascend.attention.attention_v1 as a
@@ -278,13 +280,14 @@ def install_from_env():
    State=StockState if os.environ["QWEN36_SPARQ_MODEL_ARM"]=="dense" else ANNState
    states[id(runner)]=State(runner,core,torch,torch_npu,a,acl,acl.weak_ref_tensors,Mode,get_ascend_config,mode=="diagnostic",emit)
    states[id(runner)].original_backend_update=original_backend_update
+   states[id(runner)].startup_memory_ref=startup_memory
    if mode=="formal":
     import formal_stats
     formal_stats.start(states[id(runner)],get_tensor_model_parallel_rank(),source,files,dict(path=os.environ["QWEN36_SPARQ_NUMERIC_AUTHORITY"],sha256=os.environ["QWEN36_SPARQ_NUMERIC_AUTHORITY_SHA"]))
    if mode=="diagnostic":
     import sys,hashlib
     emit("actual-rank-worker",dict(rank=get_tensor_model_parallel_rank(),world_size=get_tensor_model_parallel_world_size(),
-     namespace_pid=os.getpid(),logical_device=torch.npu.current_device(),common_identity_flag=__import__("identity_bridge").flag(),actual_proc_stat=Path("/proc/self/stat").read_text(),
+     pre_weight_memory=startup_memory,namespace_pid=os.getpid(),logical_device=torch.npu.current_device(),common_identity_flag=__import__("identity_bridge").flag(),actual_proc_stat=Path("/proc/self/stat").read_text(),
      actual_proc_cgroup=Path("/proc/self/cgroup").read_text(),actual_proc_cmdline_sha256=hashlib.sha256(Path("/proc/self/cmdline").read_bytes()).hexdigest(),
      actual_proc_argv=Path("/proc/self/cmdline").read_bytes().decode().rstrip("\0").split("\0"),
      model_core_algorithm_source_unchanged=True,original_GDN_donor_receiver_unchanged=True,ready=False))

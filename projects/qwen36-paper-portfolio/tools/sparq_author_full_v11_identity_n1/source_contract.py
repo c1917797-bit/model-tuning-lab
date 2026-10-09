@@ -6,6 +6,9 @@ ROOT=Path(__file__).resolve().parent
 KERNEL=Path("/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6")
 KERNEL_SHA="eb7ed908879c6bdea7fab670bcf83e570a7439045e2d8e5c4535c6a41611f528"
 PINS={
+ "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/REPORT.json": "d1725f159fa58fe9aa82d2d4cd2523ba62729b73db4b2ea6f8bb6ba2a58abc9f",
+ "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/RESULT.json": "523dc7d441ef1e800ed2dc77a6bc6e0f35916296bdaf5bebe86e3f195f2c59d7",
+ "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-public-actual-npu-worker-source-v1-001/npu_worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
  "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
  "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/model_runner_v1.py": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
  "/cache/cch/qwen36-paper-preparation-20261007/sparse/native009-public-aclgraph-input-source-v1-001/acl_graph.py": "27f3b838f223dec86113649625f65b158969a30ce0265271d6a3ce1403db2491",
@@ -41,6 +44,7 @@ PINS.update({
 PINS.update({"/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-ann-source-20261008-1040-001/ann_attention.py":"2b07afe06ff1dd6627f1a255be585c82a632f7bbdb7bf606f4ff2f8b260b6b74","/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-causal-source-20261008-1045-001/sparse_attention.py":"dc24fa18ca67b58dc0b28e8a18deb4728c7d7fdac020a61dd1238d24b5c0e4b1","/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-ann-source-20261008-1040-001/SOURCE_RESULT.json":"347852be4a9ef13bb928bc3882ab04d12c5ac7cd78587ee084f4d8f04e17e331","/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-causal-source-20261008-1045-001/SOURCE_RESULT.json":"512ef331444a9cc561861edc08c7b9c169c8085d7369a223798e31651b14af27"})
 PINS.update({"/cache/cch/qwen36-paper-preparation-20261007/MAIN-native-input-config-source-660-20261009-001/npu_input_batch.py":"a4dc08a9918f07797622f8d0915785e8c7b6899e0d10d92603e1dddec218acc3","/cache/cch/qwen36-paper-preparation-20261007/recurrent/h8-model-tp4-v2-cpu-ledger/source_blobs/ascend_block_table.py":"8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a"})
 RUNTIME_PINS={
+ "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
  "/vllm-workspace/vllm/vllm/engine/arg_utils.py": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
  "/vllm-workspace/vllm/vllm/v1/engine/llm_engine.py": "2900f6732a1e507f6ced6f75f05f1fcaf2cc2929df0f5066574e9077ad3fbde1",
  "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/npu/graphs.py": "eb11cac181087766e8489cf3a1da0c0fa150933b7e74454dba4a47db6114164e",

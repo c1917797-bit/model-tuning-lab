@@ -74,9 +74,11 @@ class IdentityN1(unittest.TestCase):
  def test_old_cpu_import_receipt_not_accepted(self):
   with self.assertRaises(ValueError):h.static_probe(dict(status="source-import-checked"),{}, {})
  def test_new_static_receipt_keeps_all_source_pins(self):
-  p=dict(status="source-static-checked",source={},files={},runtime_framework_imported=False,device_query_called_by_probe=False,
+  from test_gdn_state import memory_fixture
+  p=dict(pid=100,owned_memory_cgroup=memory_fixture(100,8*1024**3),
+   status="source-static-checked",source={},files={},runtime_framework_imported=False,device_query_called_by_probe=False,
    runner_import_pending_admitted_N1=True,actual_device_nodes=[],actual_device_fds=[],installed_runtime_sources=c.RUNTIME_PINS)
-  self.assertTrue(h.static_probe(p,{},{}))
+  self.assertTrue(h.static_probe(p,{},{}, "a"*64))
   p["installed_runtime_sources"]={}
   with self.assertRaises(ValueError):h.static_probe(p,{}, {})
  def test_model_trigger_requires_real_callback(self):

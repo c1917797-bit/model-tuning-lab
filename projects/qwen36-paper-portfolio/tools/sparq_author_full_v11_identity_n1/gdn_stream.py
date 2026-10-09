@@ -10,6 +10,171 @@ PROTOCOL="sparq.GDN-all-row-live-byte-finite/v2"
 BUDGET="sparq.GDN-four-rank-real-shape-budget/v1"
 GUEST=64*1024**3
 RESERVE=2*1024**3
+
+MEMORY="sparq.actual-owned-memory-leaf/v1"
+MEMORY_KEYS={1:("memory.limit_in_bytes","memory.usage_in_bytes","memory.max_usage_in_bytes"),
+ 2:("memory.max","memory.current","memory.peak")}
+def _memory_path(value):
+ from pathlib import PurePosixPath
+ c.require(type(value) is str and value.startswith("/") and "\\" not in value and
+  (value=="/" or all(p not in ("",".","..") for p in value[1:].split("/"))),
+  "absolute normalized memory namespace path")
+ return PurePosixPath(value)
+def _mount_field(value):
+ import re
+ c.require(re.search(r"\\(?!040|011|012|134)",value) is None,"valid mountinfo escaped field")
+ return re.sub(r"\\(040|011|012|134)",lambda m:chr(int(m[1],8)),value)
+def memory_layout(proc_cgroup,mountinfo):
+ """Guest leaf only. Host admission still proves every ancestor separately."""
+ c.require(type(proc_cgroup) is str and proc_cgroup and type(mountinfo) is str and mountinfo,
+  "actual complete process cgroup and mountinfo")
+ memory=[];unified=[]
+ for line in proc_cgroup.splitlines():
+  words=line.split(":",2)
+  c.require(len(words)==3 and words[0].isdigit(),"complete proc cgroup row")
+  controllers=words[1].split(",") if words[1] else []
+  c.require(len(set(controllers))==len(controllers),"unique cgroup controller row")
+  if "memory" in controllers:memory.append(words[2])
+  if words[:2]==["0",""]:unified.append(words[2])
+ c.require(len(memory)<=1 and len(unified)<=1,"unique actual memory hierarchy")
+ version=1 if memory else 2;groups=memory if memory else unified
+ c.require(len(groups)==1,"actual v1 memory or unified v2 controller present")
+ group=_memory_path(groups[0]);found=[]
+ for line in mountinfo.splitlines():
+  fields=line.split(" - ")
+  c.require(len(fields)==2,"complete mountinfo row")
+  left=fields[0].split();right=fields[1].split()
+  c.require(len(left)>=6 and len(right)==3,"complete mountinfo fields")
+  if (version==1 and right[0]=="cgroup" and "memory" in right[2].split(",")) or (version==2 and right[0]=="cgroup2"):
+   root=_memory_path(_mount_field(left[3]));point=_memory_path(_mount_field(left[4]))
+   c.require(point==_memory_path("/sys/fs/cgroup") or _memory_path("/sys/fs/cgroup") in point.parents,
+    "actual cgroup namespace mountpoint, not arbitrary file fallback")
+   c.require(group==root or root in group.parents,"process memory group lies inside actual mount root")
+   leaf=point/group.relative_to(root)
+   found.append(dict(version=version,cgroup=str(group),mount_root=str(root),mount_point=str(point),
+    path=str(leaf),mount_line=line,mount_options=left[5],super_options=right[2],
+    full_host_ancestors_observed=False))
+ c.require(len(found)==1,"exact one actual memory mount; no root fallback or ambiguous controller")
+ return found[0]
+def _memory_process(stat,pid):
+ c.require(type(stat) is str and stat.startswith(str(pid)+" (") and ")" in stat,"actual process stat")
+ tail=stat[stat.rfind(")")+2:].split()
+ c.require(len(tail)>=20 and tail[19].isdigit() and int(tail[19])>0 and tail[0] not in ("Z","X","x"),
+  "live self PID/start identity during memory read")
+ return dict(pid=pid,start_ticks=int(tail[19]))
+def _memory_identity(value,directory=False):
+ import stat
+ c.require(type(value) is dict and set(value)=={"device","inode","mode"} and
+  all(type(value[k]) is int for k in value) and value["device"]>=0 and value["inode"]>0 and
+  (stat.S_ISDIR(value["mode"]) if directory else stat.S_ISREG(value["mode"])),
+  "actual non-symlink cgroup leaf/control inode identity")
+ return value
+def _memory_number(raw):
+ import re
+ c.require(type(raw) is str and re.fullmatch("[0-9]+",raw.strip()) is not None,
+  "finite decimal memory controller value; missing/unlimited is not capacity")
+ return int(raw.strip())
+def consume_memory(value,expected_limit=GUEST,container_id=None,namespace_pid=None):
+ import re
+ c.require(type(value) is dict,"actual owned memory leaf must be a dictionary")
+ if value.get("schema")==MEMORY_SAMPLE:value=_expand_memory_sample(value)
+ c.require(type(expected_limit) is int and expected_limit in (8*1024**3,GUEST),
+  "only registered CPU8GiB or model64GiB profile; default model unchanged")
+ c.require(type(value) is dict and value["schema"]==MEMORY and type(value["process"]["pid"]) is int and
+  value["process"]["pid"]>0,"actual owned memory leaf schema/PID")
+ pid=value["process"]["pid"]
+ before=_memory_process(value["stat_before"],pid);after=_memory_process(value["stat_after"],pid)
+ c.require(before==after==value["process"] and value["proc_cgroup"]==value["proc_cgroup_after"] and
+  value["mountinfo_raw"]==value["mountinfo_after"],"stable actual PID/start/cgroup/mountinfo memory extent")
+ layout=memory_layout(value["proc_cgroup"],value["mountinfo_raw"])
+ c.require(type(value["version"]) is int and value["full_host_ancestors_observed"] is False and
+  all(value[k]==v for k,v in layout.items()) and value["expected_limit_bytes"]==expected_limit,
+  "independently resolved namespace leaf and unchanged registered cap")
+ names=MEMORY_KEYS[layout["version"]];wanted={str(__import__("pathlib").PurePosixPath(layout["path"])/n) for n in names}
+ c.require(set(value["control_raw"])==set(value["file_identities"])==set(value["file_identities_after"])==wanted,
+  "exact three original memory control files and inode identities")
+ c.require(value["leaf_identity"]==value["leaf_identity_after"],"actual memory leaf inode changed")
+ _memory_identity(value["leaf_identity"],True)
+ for path in wanted:
+  c.require(value["file_identities"][path]==value["file_identities_after"][path],"actual memory control inode changed")
+  _memory_identity(value["file_identities"][path])
+ numbers=[]
+ for n in names:
+  raw=value["control_raw"][str(__import__("pathlib").PurePosixPath(layout["path"])/n)]
+  numbers.append(_memory_number(raw))
+ c.require(value["limit_raw_after"]==value["control_raw"][str(__import__("pathlib").PurePosixPath(layout["path"])/names[0])],
+  "actual memory limit changed during sample")
+ maximum,current,peak=numbers
+ c.require(maximum==expected_limit and 0<=current<=maximum and peak>=current,
+  "actual exact owned memory cap and sane usage/peak; no unlimited host fallback")
+ c.require(all(type(value[k]) is int for k in ("memory_max","memory_current","memory_peak")) and
+  (value["memory_max"],value["memory_current"],value["memory_peak"])==tuple(numbers),
+  "claimed memory numbers must equal original control bytes")
+ if container_id is not None:
+  c.require(type(container_id) is str and re.fullmatch("[0-9a-f]{64}",container_id) is not None and
+   container_id in __import__("pathlib").PurePosixPath(layout["cgroup"]).parts,
+   "actual leaf belongs to exact owned full CID")
+ if namespace_pid is not None:c.require(pid==namespace_pid,"same actual CPU/N1 namespace process")
+ return value
+def _read_memory_text(path):
+ from pathlib import Path
+ return Path(path).read_text()
+def _read_memory_identity(path,directory=False):
+ import os
+ row=os.stat(path,follow_symlinks=False)
+ return _memory_identity(dict(device=row.st_dev,inode=row.st_ino,mode=row.st_mode),directory)
+def memory(expected_limit=GUEST):
+ """No framework/device import. Namespace leaf is NOT full-host ancestor proof."""
+ import os
+ from pathlib import PurePosixPath
+ pid=os.getpid();stat_before=_read_memory_text("/proc/self/stat")
+ raw=_read_memory_text("/proc/self/cgroup");mountinfo=_read_memory_text("/proc/self/mountinfo")
+ layout=memory_layout(raw,mountinfo);names=MEMORY_KEYS[layout["version"]];controls={};ids={}
+ leaf=_read_memory_identity(layout["path"],True)
+ for n in names:
+  path=str(PurePosixPath(layout["path"])/n);ids[path]=_read_memory_identity(path);controls[path]=_read_memory_text(path)
+ after_ids={path:_read_memory_identity(path) for path in ids}
+ limit_after=_read_memory_text(str(PurePosixPath(layout["path"])/names[0]))
+ result=dict(schema=MEMORY,**layout,process=_memory_process(stat_before,pid),
+  stat_before=stat_before,stat_after=_read_memory_text("/proc/self/stat"),
+  proc_cgroup=raw,proc_cgroup_after=_read_memory_text("/proc/self/cgroup"),
+  mountinfo_raw=mountinfo,mountinfo_after=_read_memory_text("/proc/self/mountinfo"),
+  control_raw=controls,file_identities=ids,file_identities_after=after_ids,
+  leaf_identity=leaf,leaf_identity_after=_read_memory_identity(layout["path"],True),
+  limit_raw_after=limit_after,expected_limit_bytes=expected_limit,
+  memory_max=_memory_number(controls[str(PurePosixPath(layout["path"])/names[0])]),
+  memory_current=_memory_number(controls[str(PurePosixPath(layout["path"])/names[1])]),
+  memory_peak=_memory_number(controls[str(PurePosixPath(layout["path"])/names[2])]))
+ return consume_memory(result,expected_limit)
+
+MEMORY_SAMPLE="sparq.actual-owned-memory-leaf-sample/v1"
+MEMORY_DYNAMIC=("process","stat_before","stat_after","control_raw","file_identities","file_identities_after",
+ "leaf_identity","leaf_identity_after","limit_raw_after","expected_limit_bytes","memory_max","memory_current","memory_peak")
+def _memory_digest(text):return hashlib.sha256(text.encode()).hexdigest()
+def _expand_memory_sample(value):
+ proof=c.obj(value["namespace_proof"])
+ c.require(proof["schema"]=="sparq.actual-preweight-memory/v1" and proof["model_allocation_not_started"] is True,
+  "actual immutable preweight namespace proof, not a per-token guessed mount")
+ base=proof["memory"];consume_memory(base)
+ for k in ("proc_cgroup","proc_cgroup_after","mountinfo_raw","mountinfo_after"):
+  c.require(value[k+"_sha256"]==_memory_digest(base[k]),"same namespace raw bytes at current sample; no hidden drift")
+ expanded=dict(base)
+ for k in MEMORY_DYNAMIC:expanded[k]=value[k]
+ c.require(value["process"]==base["process"],"sample stays in same actual preweight worker PID/start")
+ return expanded
+def memory_sample(value,namespace_ref):
+ # Keep raw mountinfo only in immutable per-process startup, not four new
+ # copies in every token/epoch budget record. Usage and peak are always fresh.
+ consume_memory(value);proof=c.obj(namespace_ref);base=proof["memory"];consume_memory(base)
+ c.require(all(value[k]==base[k] for k in memory_layout(value["proc_cgroup"],value["mountinfo_raw"])) and
+  value["process"]==base["process"] and value["leaf_identity"]==base["leaf_identity"] and
+  value["file_identities"]==base["file_identities"],"actual leaf must match source-bound startup before compact publication")
+ result=dict(schema=MEMORY_SAMPLE,namespace_proof=namespace_ref)
+ for k in MEMORY_DYNAMIC:result[k]=value[k]
+ for k in ("proc_cgroup","proc_cgroup_after","mountinfo_raw","mountinfo_after"):result[k+"_sha256"]=_memory_digest(value[k])
+ _expand_memory_sample(result)
+ return result
+
 CHUNK=1024**2
 FINITE_TEMP=CHUNK+CHUNK//2
 def natural(identity):
@@ -22,12 +187,19 @@ def plan(records,baseline,epoch,source,max_model_len):
   type(max_model_len) is int and max_model_len==40960,"actual shared guest baseline/epoch/current full-model logical bound")
  c.require(type(records) is list and len(records)==4 and {r["rank"] for r in records}==set(range(4)),
   "one actual pre-allocation plan from each of all4 ranks")
- before=0;rows=[];peak=[];states=0
+ before=0;rows=[];peak=[];states=0;leaf=None;pids=set()
  for r in sorted(records,key=lambda x:x["rank"]):
   c.require(type(r["rank"]) is int and type(r["epoch"]) is int and r["schema"]==BUDGET and r["epoch"]==epoch and r["source"]==source and
    type(r["cgroup"]["memory_current"]) is int and r["cgroup"]["memory_current"]>0 and
    type(r["cgroup"]["memory_max"]) is int and r["cgroup"]["memory_max"]==GUEST and r["max_model_len"]==max_model_len,
    "same actual source/epoch/shared64GiB guest, never separate stale rank budgets")
+  identity=consume_memory(r["cgroup"])
+  if r["cgroup"]["schema"]==MEMORY_SAMPLE:
+   c.require(c.obj(r["cgroup"]["namespace_proof"])["source"]==source,"same actual source preweight namespace proof")
+  key=tuple(identity[k] for k in ("version","cgroup","path","mount_root","mount_point"))+(tuple(sorted(identity["leaf_identity"].items())),)
+  if leaf is None:leaf=key
+  c.require(key==leaf and identity["process"]["pid"] not in pids,"all4 distinct actual workers share ONE exact memory leaf")
+  pids.add(identity["process"]["pid"])
   c.require(type(r["states"]) is list and len(r["states"])==96 and
    {(s["layer"],s["name"]) for s in r["states"]}==
     {(i,n) for i in range(64) if i%4!=3 for n in ("conv","recurrent")},

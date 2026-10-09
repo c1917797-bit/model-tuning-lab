@@ -190,7 +190,7 @@ def consume(host_ref,terminal_ref,source_ref,component_ref):
  cp=c.obj(cpu["probe"])
  c.require(cpu["status"]=="complete" and cpu["primary"] is None and cpu["secondary"]==[] and cx["HostConfig"]["Devices"]==[] and
   cx["HostConfig"]["Memory"]==cx["HostConfig"]["MemorySwap"]==8*1024**3 and cx["HostConfig"]["NanoCpus"]==10**9 and
-  cp["source"]==source and cp["files"]==files and identity_bridge.static_probe(cp,source,files),
+  cp["source"]==source and cp["files"]==files and identity_bridge.static_probe(cp,source,files,cpu["container_id"]),
   "actual Devices[] same-source FULL import closure stopped before TP4")
  gdn_stream.validate_probe(cp,files)
  import component_bootstrap
@@ -260,6 +260,8 @@ def consume(host_ref,terminal_ref,source_ref,component_ref):
  for serialized_rank,w in checked["workers"].items():
   c.require(type(serialized_rank) is str and serialized_rank in ("0","1","2","3"),"actual JSON rank keys")
   rank=int(serialized_rank)
+  worker_process=dict(pid=w["namespace_pid"],start_ticks=gdn_stream._memory_process(w["actual_proc_stat"],w["namespace_pid"])["start_ticks"],cgroup=w["actual_proc_cgroup"])
+  identity_bridge.consume_startup_memory(w["pre_weight_memory"],source,files,arm["identity"],worker_process)
   c.require(w["rank"]==rank,"rank worker whole JSON identity")
   proofs=[p for p in arm["process_proofs"] if p["physical"]==rank+4 and p.get("namespace_pids") and
    p["namespace_pids"][-1]==w["namespace_pid"] and p["cmdline_sha256"]==w["actual_proc_cmdline_sha256"] and

@@ -1,0 +1,190 @@
+{
+  "schema": "sparq.fullv15-model005-causal-decision/v1",
+  "updated_utc": "2026-10-09T21:29:10Z",
+  "decision": "REPAIR",
+  "goal": "ACTIVE_unmet",
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "sha256": "7e0a03d5b201fa0646d0cb2e1268bf4d2932a7cc4b4f6de077f92b223585d142"
+  },
+  "terminal": {
+    "operation_id": "exec-00000000000006de",
+    "state": "completed",
+    "exit_code": 1,
+    "duration_ms": 799765,
+    "cancelled": false,
+    "timed_out": false,
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_06DE_FULLV15_MODEL005_TERMINAL_ORIGINAL.json",
+      "sha256": "00431b58a81bbb2be0438892dd628bdfcb5768127fcebfe3115fb22131dd8ac5"
+    },
+    "parent": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/RESULT.json",
+      "sha256": "d89d0f0a3706e78829f2d8d42b3db1bc1c869400976247bd590c8a039f1e4f3d"
+    },
+    "arm": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/RESULT.json",
+      "sha256": "868dadc2c113d8b89a0a25b57a7e81aeff9fff4abcb134ede56d79c0b6b6c552"
+    }
+  },
+  "passed_scope": [
+    "Actual complete213 software and default-OFF under source7e",
+    "same660 Devices=[] CPU8 original source checks and own stop-retain",
+    "N1 genuine hardware imports at64GiB before model allocation",
+    "each actual TP0..3 pre-weight64GiB/CID/PID/start proof",
+    "all four actual TP workers loaded12.8735GB weights each",
+    "stock FULL graph capture all16 sizes; startup and HTTP health only"
+  ],
+  "failed_scope": {
+    "first_fault_utc": "2026-10-09T21:02:22Z",
+    "first_fault": "gdn_stream.plan joint baseline+ALL original-before+all4 row/finite temporaries+oracle+reserve <=64GiB",
+    "server_stdout": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/server.stdout",
+      "sha256": "8af6411f45b2f8a44d222027c9ce9d71667db8d7e0251f1742cb6dd00fc75c3a"
+    },
+    "secondary": "actual client/stream/task producer failed after HTTP500",
+    "algorithm_check_completed": false,
+    "full_model_numeric": false,
+    "performance": false,
+    "final_tasks": false
+  },
+  "cause": [
+    {
+      "class": "ADAPTATION_IMPLEMENTATION",
+      "confidence": "proved_source_and_original_geometry",
+      "description": "96 logical state views/rank but32 exact typed views/rank; old checker physically clones each logical view three times, making budget impossible under64GiB."
+    },
+    {
+      "class": "REFERENCE_OR_TEST",
+      "confidence": "proved_source_and_native_allocator_semantics",
+      "description": "FA and three GDN groups share each slab and have different actual writer blocks. Per-layer inactive predicate cannot treat other legitimate writers as corruption; finite checks must not reinterpret FA BF16 bytes as FP32 GDN state."
+    }
+  ],
+  "plans": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/service/trace/GDN-PLAN-e1-r0.json",
+      "sha256": "cb5e1aa7506d90bc4cd52c5126c579a6124ffda4c700aad35052cdb67b9ebac0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/service/trace/GDN-PLAN-e1-r1.json",
+      "sha256": "0ffecfb88c7b9956bc832a695e2db2d4e4256cf0143310a398667702e86dd82f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/service/trace/GDN-PLAN-e1-r2.json",
+      "sha256": "7b8df3a06a3db9ca2f5fcd5a881336544c87e870cfa9c44926fbb39f81062ae1"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/service/trace/GDN-PLAN-e1-r3.json",
+      "sha256": "cb0dd21bf64e6a45eaf4a765a909158fa160e1aa430e440e08ce01a67ac4c754"
+    }
+  ],
+  "geometry": {
+    "per_rank_logical_states": 96,
+    "per_rank_exact_typed_views": 32,
+    "per_rank_full_slabs": 16,
+    "logical_before_all4_bytes": 64964395008,
+    "exact_typed_before_all4_bytes": 21654798336,
+    "full_slab_before_all4_bytes": 42894753792,
+    "max_state_row_bytes": 786432
+  },
+  "budget": {
+    "limit_bytes": 68719476736,
+    "old_before_bytes": 64964395008,
+    "old_all4_row_and_finite_upper_bytes": 12582912,
+    "oracle_upper_bytes": 2877292544,
+    "reserve_bytes": 2147483648,
+    "old_upper_excluding_any_baseline_bytes": 70001754112,
+    "old_observed_plan_max_baseline_bytes": 16672604160,
+    "old_estimated_upper_using_that_observation_bytes": 86674358272,
+    "qualification": "The exact fresh memory() sample used inside rejecting plan() was not persisted.80.7218GiB is a derivation using the previously observed plan max, not the exact first-fault RSS. Even baseline0 yields65.1942GiB>64. New complete physical-slab budget requires actual fresh sample and all bounded temp/oracle/consumer allocations before allocation; estimate is not PASS."
+  },
+  "native_sources": [
+    {
+      "path": "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/model_runner_v1.py",
+      "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp14-effective-layout-source-660-20261008-001/kv_cache_utils.py",
+      "sha256": "b89f9afa7f95fcc30412ae2031d5370a23e95f35d068fa14e5824dce1c900ee5"
+    }
+  ],
+  "cleanup": {
+    "own_cid": "b0bb14153ba0415b6bce2b7e6bcd56a9b205944fbf2afc1c18cd442754223bcb",
+    "stopped_retained": true,
+    "deleted": false,
+    "errors": [],
+    "receipt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/cleanup.json",
+      "sha256": "5e8e957e3e7383f23562778fa4af51b5b9d7beec394b4c3e94ad53eb98de3051"
+    },
+    "inspect": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/inspect-1791579758801119650.json",
+      "sha256": "6f8185686b656748868e2e45d1fde0e8da2acb0efa304dba715b1028af733099"
+    },
+    "release": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005/round0-candidate/release-1791579759871366600.json",
+      "sha256": "71b8fd1f99112cd9e6898a63e5eab4170120fe7ade96cff9cf875bc155fbab2b"
+    },
+    "release_scope": "At21:02:39Z no NPU0..7 process. This is not fresh launch admission."
+  },
+  "next": {
+    "owner": "MAIN with API-only recurrent preparer",
+    "state": "implementation_pending_UNRUN",
+    "prediction": "One actual before per physical slab and exact all-writer byte ownership remove impossible duplicate copies and false inactive/typed-finite judgments without changing algorithm math or thresholds.",
+    "required": [
+      "source-bound all64 FA/GDN actual writer metadata",
+      "entire physical slab including padding preserved; unwritten bytes bitwise",
+      "typed finite only actual GDN live/retained owned rows",
+      "full logical metadata and identity coverage, not dedup of checks by pointer alone",
+      "fresh persisted budget before require",
+      "actual complete software/CLI/sameimage checks then new nonoverwrite whole-model run"
+    ],
+    "refutation": "Independent reference still disagrees, actual budget exceeds64GiB, or any complete numerical/lifecycle gate fails; retain original and classify first fault."
+  },
+  "e1_software": {
+    "operation": "exec-0000000000000730",
+    "tests": 24,
+    "status": "passed_software_only",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/sparq-full-e1-onepair-v5-v15bind-user72h-20261009/SOURCE_MANIFEST.json",
+      "sha256": "097df7a1db0a4976e96eb8f9f6188379421e02be789833bda950a5e73c2e7d2f"
+    },
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_0730_SPARQ_E1_V5_SOFTWARE24_ORIGINAL.json",
+      "sha256": "50fc87f89e71bd46f3a1723f45d401984e31482a89584ca5958ae562d08fa455"
+    },
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-sparq-e1-v5-software24-20261009-001/RESULT.json",
+      "sha256": "7c28d7deb9e6d31c399192f62cd00bcd7fe788b8972b34eb3b0a12934b242af3"
+    },
+    "model_authority": false
+  },
+  "unchanged": {
+    "physical_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protect": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "model": "Qwen3.6-27B",
+    "delivery": "explicit_opt_in_plugin_monkeypatch",
+    "model_memory64GiB": true,
+    "model_reserve2GiB": true,
+    "whole_phase_seconds": 5400,
+    "cleanup_included90": true,
+    "FULL16": true,
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "portfolio_cutoff_utc": "2026-10-12T07:00:25Z",
+    "performance": "same-controls fixed1024,profiling/observerOFF,C16,40requests;3formal pairs",
+    "tasks": "full503LBv2+1319GSM8K per arm,max2048,thinkingOFF,normalEOS;report pp and relative loss,each<=1",
+    "hugetlb32GiB": "SPENT"
+  },
+  "conclusion": "Current whole-model validation is failed because of proved adaptation/reference defects. No new legal throughput/TTFT/TPOT/task result or paper-wide no-go exists. Native component predecessors remain their original limited scope.",
+  "publication": "pending_known_unchanged_HTTPS_auth_failure_no_blind_retry"
+}

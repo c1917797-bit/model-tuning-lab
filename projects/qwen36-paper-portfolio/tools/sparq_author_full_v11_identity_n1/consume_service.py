@@ -100,6 +100,7 @@ def arm(ref,refs,files,previous_stopped):
  for rank,rr in enumerate(summary["workers"]):
   w=c.obj(rr);start=c.obj(w["worker_start"]);process=w["process"]
   identity_bridge.validate_worker_flag(w["common_identity_flag"]);identity_bridge.validate_worker_flag(start["common_identity_flag"])
+  identity_bridge.consume_startup_memory(start["pre_weight_memory"],refs["source"],files,x["identity"],process)
   c.require(w["schema"]=="sparq.formal-worker-final/v1" and w["rank"]==start["rank"]==rank and
    w["source"]==start["source"]==refs["source"] and w["source_files"]==start["source_files"]==files and
    w["component"]==start["component"]==refs["component"] and w["arm"]==start["arm"]==x["arm"] and
