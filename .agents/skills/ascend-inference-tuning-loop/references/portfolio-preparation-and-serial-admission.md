@@ -2,9 +2,12 @@
 
 Use this for the user-authorized multi-paper Ascend portfolio, not unrelated
 single-change work. Current hardware is physical NPU4–7; NPU0–3 is protected.
-Latest explicit user direction: MAIN may coordinate independent numerical or
-preparation work on disjoint physical4/5/6/7, across papers as well as within one
-paper. TP4/model/profiling/formal timing retains exclusive four-card admission.
+Use the latest workstream authority for concurrency, not an older allowance.
+Earlier authorization allowed MAIN-coordinated disjoint numerical preparation;
+the Oct9 phase-DAG request chooses parallel preparation but SERIAL device
+stages. Apply that stricter current mode. A four-card matrix/TP4 can be one
+frozen stage internally; never insert another paper's NPU job into its lease.
+TP4/model/profiling/formal timing retains exclusive four-card admission.
 Keep project-specific deadlines in workstream records, not a moving universal
 deadline in this skill. Frozen serial-only controllers need a reviewed successor,
 not a weakened live gate; see [causal failure recovery](failure-root-cause-and-next-action.md).
@@ -143,6 +146,90 @@ address-space wrapper even for read-only ps/inspect diagnostics. MA0e65 failed
 Go reservation under the inherited256MiB soft AS limit; the changed Docker-only
 AS restoration passed MA0e69. Keep the parent plus CLI RSS and cgroup budget;
 do not make the whole controller unbounded or count that diagnostic as numerics.
+
+## Phase-DAG continuation and the serial device lane
+
+Queue executable STAGES, not whole papers. Each paper keeps one owner and its
+own source-frozen DAG/first-fault artifacts; every node names predecessors with
+actual accepted Refs, entry/consumer, new output root, cost/budget, resources,
+deadline and next-action policy. Separate an implementation/source revision
+from an execution attempt. Pending, stage-ready, running, result-pending,
+passed, failed and blocked states must not borrow one another's authority.
+
+Device-free source/oracle/adapter work runs across papers in distinct edit
+scopes within agent and joint host budgets. MAIN is the only device dispatcher.
+For the current serial mode, admit one complete bounded device stage at a time;
+a numerical full matrix or a matched dense/candidate pair is an indivisible
+stage. Freeze its inputs and source until actual termination. A delivered patch
+is only preparation, not an NPU ticket.
+
+At the terminal event, preserve the actual outcome, validate the relevant
+consumer and verify own-only release. Unconfirmed termination/release blocks
+new device admission; retain UNKNOWN and recover exact ownership instead of
+relaunching. Once resource release is proved, a device-independent result
+adjudication may continue with its paper owner while MAIN dispatches another
+ready stage. PASS unlocks only the actual successors whose prerequisites it
+satisfies. A proved implementation defect opens a bounded repair -> regression
+-> relevant smoke -> requeue edge. Unknown causes open a discriminating
+diagnostic edge; valid no-gain closes only the measured configuration. Failure
+does not silently cancel the paper or grant its downstream performance gate.
+
+Give each completion an explicit continuation: paper owner, next node, evidence
+Refs, missing edges and unchanged remaining time. Idle/finished owners receive
+a follow-up task within available agent slots; running owners receive the
+result at their message boundary. Do not create a new user-owned chat per stage.
+Maintain a reviewed NEXT ticket and independent BACKUP during CURRENT, with
+ready counts by gate rather than paper count. Normal event-driven handoff is
+immediate when prerequisites/ownership permit; periodic audit is recovery
+fallback, not a15-minute dispatch delay by design.
+
+This graph maximizes useful gate progression, not artificial occupancy.
+Performance controls cannot interleave with other NPU activity. No automatic
+clock renewal, missing-ref promotion or unbounded repair cycle; use the same
+causal classification and fixed acceptance deadline.
+
+## Periodic resource feedback and corrective verification
+
+When the user authorizes periodic checks, use the product's recurring mechanism
+and update an existing matching monitor rather than adding a background shell
+loop or duplicate schedule. Store cadence in the active workstream. This
+portfolio's Oct9 authorization uses15-minute checks plus immediate
+terminal/delivery handling; fifteen minutes is not a universal skill requirement.
+A periodic wakeup checks evidence and continues authorized work, not a guarantee
+that sampling or scheduling occurs at an exact deadline.
+
+At each audit, record UTC time and the exact resource/operation evidence:
+per-card actual compute ownership and HBM/AICore; current phase and progress
+artifact; NEXT/BACKUP next_gate and their actual prerequisite Refs; release,
+dispatch and compute-start events when available. A single zero AICore sample
+can be loading, synchronization or between kernels. A device declaration is
+not compute ownership. Missing operation registry or control-plane access is
+UNKNOWN until exact PID/CID/artifacts establish state, not permission to relaunch.
+Snapshot inspection must not attach a profiler or change a frozen timed run.
+
+Keep measured event-bounded idle separate from sampled idle and unknown
+intervals. Do not extrapolate15-minute snapshots into continuous utilization,
+sum kernel times into wall-time occupation, or claim zero gaps without evidence.
+Judge efficiency by verified gate advancement per elapsed/card hour together
+with avoidable release-to-next-admission delay, not occupation alone.
+
+For each actionable gap, leave cause/evidence, corrective action, owner, bounded
+budget and a next-audit predicate in the workstream. Classify necessary
+handoff/loading, preparation missing-edge, scheduler delay, implementation or
+environment failure, host/resource admission, required result adjudication,
+or UNKNOWN. Use the causal recovery reference for failures rather than guessing
+method versus adaptation. Fix a proved preparation/implementation seam, run
+the relevant regression and preregistered smoke, or admit a genuinely ready
+independent successor; preserve safety, aggregate budgets and exclusive timing.
+An idle snapshot is not permission to stop an unrelated workload.
+
+The following audit must check whether the named missing edge closed, the ready
+count increased for that specific gate, or the release-to-effective-dispatch gap
+improved. Repeated same-cause gaps require a concrete changed strategy or bounded
+escalation, not another identical promise, unchecked restart or dummy load.
+Keep the paper/portfolio clocks fixed and reserve E2E/task time. Notify only
+meaningful scheduling failure, blocker change, stage result or required decision;
+unchanged healthy progress stays quiet.
 
 ## Exact preparation recovery and algorithm-consumer admission, Oct8 01:42Z
 

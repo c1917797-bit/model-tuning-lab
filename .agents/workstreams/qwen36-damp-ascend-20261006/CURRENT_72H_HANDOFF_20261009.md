@@ -1,5 +1,59 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Latest concurrency authority and requested scheduler — 2026-10-09
+
+User now requests parallel paper preparation and SERIAL device operations,
+with every paper continuing its own complete DAG after each stage. This
+overrides the older disjoint cross-paper allowance for future admission.
+MAIN alone runs one frozen NPU stage at a time on authorized4–7; a four-card
+numerical matrix or TP4 pair may be one internally parallel stage. No current
+NPU producer was verified at MAIN0377. Do not alter frozen033b or fabricate
+a new dispatch from this policy change.
+
+Apply the phase-DAG continuation section in the portfolio skill reference.
+After actual terminal + result preservation + verified own release, give the
+paper owner its explicit successor/evidence/remaining budget, and dispatch
+another genuinely ready stage while CPU adjudication or repair continues.
+Only a verified predecessor unlocks later performance/task nodes; failure
+enters an attributed repair/diagnostic/configuration-close branch, not automatic
+paper rejection. CURRENT/NEXT/BACKUP tickets are gate-specific, immutable and
+owned. Existing heartbeat was updated again to this serial mode;15min audit
+is a fallback, not the intended dispatch trigger. Concrete runnable controller
+integration has not been implemented or verified by this policy update.
+Keep Oct10/Oct12 clocks and all final gates unchanged.
+
+## Periodic resource feedback — 2026-10-09 14:46 UTC
+
+The existing ascend heartbeat was actually updated and its local product
+configuration read back: ACTIVE, every15 minutes, same thread. No duplicate
+monitor or shell background loop was created. Earlier DAMP Oct6 clock was
+removed from the scheduler prompt; current Oct10/Oct12 fixed cutoffs remain.
+This authorization supplements terminal/delivery handling, not a guaranteed
+continuous observation or accepted technique.
+
+Fresh direct ma MAIN0377 completed0/1.257s: canonical path and branch verified,
+HEAD6eb6e2e, ahead4; physical4–7 no compute PID/AICore0/HBM2862–2868MiB.
+MemAvailable115454736KiB. Only read-only hardware/ports/Git checks were done;
+no workload stopped, restarted or deleted, protected0–3 untouched.
+This is a sampled idle point, not proof of the total idle duration or UDA
+availability. Publication auth is unchanged/pending; no blind retry.
+
+CURRENT_NPU is none verified at this sample. Highest next native gate is still
+blocked by the actual033b missing-path first-fault evidence; no complete128
+numerical aggregate has passed. Source deliveries FULLv10/v11 and Ada007 are
+not model/task-ready. Specific corrective owner recurrent_lifecycle_ready_queue
+has an API-only/execCPU0 task: acquire exact003 host first-fault plus four child
+stdout through actual Refs, classify from proof, or define the smallest diagnostic.
+Next-audit predicate: missing filename/call site is acquired or its named
+observation gap is explicitly closed; no unchanged915d retry. Other preparers
+continue independent algorithm-consumer/source work, not self-admission.
+
+Use the periodic-feedback section in the portfolio skill reference:
+audit -> evidenced idle classification -> action/owner/budget -> next-audit
+verification. Repeated same-cause gaps must change a concrete strategy.
+Do not fill gaps with dummy computation or advertise15-minute samples as
+full-day zero-idle evidence. No new numerical/E2E/task acceptance is claimed.
+
 ## Latest verified state and four-question learning — 2026-10-09
 
 033b is no longer a live authority. Direct operation_get now returns not_found;

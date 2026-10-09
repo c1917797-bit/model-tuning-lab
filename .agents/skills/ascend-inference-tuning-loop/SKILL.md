@@ -20,8 +20,8 @@ their conditions and decisions are reproducible.
 
 ## Four-question execution contract
 
-Before a new launch, after a terminal event, and before upgrading any result,
-read and apply the relevant rules below. Practice source: the user's Oct9
+Before a new launch, after a terminal event, at an authorized periodic resource
+audit, and before upgrading any result, read and apply the relevant rules below. Practice source: the user's Oct9
 request to make utilization, validity, attribution and smoke-first execution
 durable rather than dependent on chat memory.
 
