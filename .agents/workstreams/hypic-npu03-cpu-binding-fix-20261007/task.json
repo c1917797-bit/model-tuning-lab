@@ -993,5 +993,17 @@
     "causal_root_proven": false,
     "skill_case_acceptance": "partial-evidence"
   },
-  "next_action": "Do not rerun completed HYPIC phases or the now-valid Prefill/Decode profiler roots. Skill cases must retain provenance and the frozen HYPIC quality rejection. The read-only r13 response comparison found more candidate within-arm variability even on 357 matched hot-only repetition pairs; this is not causal proof. Review a small prospectively matched on/off long-output canary only if fresh physical NPU0-3 ownership and authorization justify another device test; do not use NPU4-7 or stop external work. Keep full Skill acceptance partial until its remaining attribution/default-ruler/integration gates pass; validate and push this coherent branch checkpoint, then review main integration separately."
+  "r14_variability_diagnostic": {
+    "preregistration": "HYPIC_CACHE10R14_VARIABILITY_PREREGISTRATION_20261009.md",
+    "status": "preregistered; no device arm started",
+    "sample_indexes": [0, 55, 48],
+    "repetitions_per_arm": 3,
+    "client_concurrency": 1,
+    "max_output_tokens": 2048,
+    "arm_order": ["no-cache", "hypic-only"],
+    "baseline_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r14-variability-baseline",
+    "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r14-variability-hypic",
+    "scope": "diagnostic only; immutable r13 quality remains REJECT_OR_QUALIFY"
+  },
+  "next_action": "Do not rerun completed HYPIC phases or the now-valid Prefill/Decode profiler roots. Skill cases must retain provenance and the frozen HYPIC quality rejection. First run the r14 offline admission and regression checks, commit and push its prospective protocol; only then inspect exact source, absent roots, physical NPU0-3 processes and port 8223 through a fresh direct route. If actually idle, run the preregistered c1 no-cache arm first, then only after independent validity and fresh idle checks run the HYPIC-only arm; never use NPU4-7 or stop external work. Audit the pair without promoting the small diagnostic to formal quality acceptance, then continue main Skill integration review."
 }
