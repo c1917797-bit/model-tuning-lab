@@ -7,7 +7,9 @@ The candidate widens computation only; canonical storage remains BF16.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -18,6 +20,18 @@ def main() -> None:
     parser.add_argument("--model-config", type=Path, required=True)
     args = parser.parse_args()
 
+    assert hashlib.sha256(args.model_config.read_bytes()).hexdigest() == (
+        "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+    )
+    source_commit = subprocess.check_output(
+        ["git", "-C", str(args.plugin_root), "rev-parse", "HEAD"], text=True
+    ).strip()
+    assert source_commit == "c12060cd47e7575ead059983d7a8bb4704165c98"
+    source_status = subprocess.check_output(
+        ["git", "-C", str(args.plugin_root), "status", "--porcelain"],
+        text=True,
+    )
+    assert not source_status
     sys.path.insert(0, str(args.plugin_root))
     import torch
     from hypic_vllm_ascend.patches import attention
@@ -93,6 +107,59 @@ def main() -> None:
                 ),
             }
         )
+    relocation_rows = []
+    for source_anchor, target_anchor in ((1, 4096), (128, 4096), (4096, 16384)):
+        source_key = attention._anchor_rope(key, source_anchor, inverse=False)
+        direct_target = attention._anchor_rope(key, target_anchor, inverse=False)
+        canonical = attention._anchor_rope(
+            source_key, source_anchor, inverse=True
+        )
+        relocated = attention._anchor_rope(
+            canonical, target_anchor, inverse=False
+        )
+
+        source_cos_half, source_sin_half = cache[source_anchor].view(2, -1).unbind(0)
+        target_cos_half, target_sin_half = cache[target_anchor].view(2, -1).unbind(0)
+        source_cos = torch.cat((source_cos_half, source_cos_half)).view(1, 1, -1)
+        source_sin = torch.cat((source_sin_half, source_sin_half)).view(1, 1, -1)
+        target_cos = torch.cat((target_cos_half, target_cos_half)).view(1, 1, -1)
+        target_sin = torch.cat((target_sin_half, target_sin_half)).view(1, 1, -1)
+        widened_canonical = attention._apply_neox_rotary(
+            source_key.float(), source_cos, -source_sin
+        ).to(key.dtype)
+        widened_relocated = attention._apply_neox_rotary(
+            widened_canonical.float(), target_cos, target_sin
+        ).to(key.dtype)
+
+        assert torch.equal(relocated[..., rotary_dim:], direct_target[..., rotary_dim:])
+        assert torch.equal(
+            widened_relocated[..., rotary_dim:], direct_target[..., rotary_dim:]
+        )
+        current_error = (
+            relocated[..., :rotary_dim].float()
+            - direct_target[..., :rotary_dim].float()
+        ).abs()
+        widened_error = (
+            widened_relocated[..., :rotary_dim].float()
+            - direct_target[..., :rotary_dim].float()
+        ).abs()
+        current_mae = float(current_error.mean())
+        widened_mae = float(widened_error.mean())
+        assert current_mae < widened_mae
+        relocation_rows.append(
+            {
+                "source_anchor": source_anchor,
+                "target_anchor": target_anchor,
+                "current_mae_to_direct_target": current_mae,
+                "widened_mae_to_direct_target": widened_mae,
+                "current_changed_fraction": float(
+                    (current_error > 0).float().mean()
+                ),
+                "widened_changed_fraction": float(
+                    (widened_error > 0).float().mean()
+                ),
+            }
+        )
     print(
         json.dumps(
             {
@@ -102,6 +169,7 @@ def main() -> None:
                 "rope_theta": theta_base,
                 "key_dtype": str(key.dtype),
                 "rows": rows,
+                "relocation_rows": relocation_rows,
             },
             indent=2,
             sort_keys=True,

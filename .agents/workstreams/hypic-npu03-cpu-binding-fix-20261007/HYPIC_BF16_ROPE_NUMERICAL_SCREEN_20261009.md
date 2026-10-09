@@ -34,20 +34,35 @@ so it does not assume an unrealistic FP32 material cache.
 
 The current implementation has measurable BF16 round-trip loss that increases
 with these sampled anchors. A computation-only widening reduces this synthetic
-error while keeping BF16 storage. This **does not establish** that RoPE caused
-the frozen r13 LongBench-v2 quality change (230/381 to 219/381), nor that a
-widened path is safe or faster on NPU. The FP32 source-unit test had not
-covered this BF16 case. No r13 result, acceptance gate, plugin source, or
-immutable raw root was changed.
+same-position error while keeping BF16 storage. But same-position recovery is
+not the production oracle: the cached key is made at a source anchor and
+relocated to a different target anchor. The direct native BF16 target key is
+the relevant comparator. The verifier also exercises that path:
+
+| Source → target anchor | Current MAE vs direct target | Widened MAE vs direct target | Current changed elements | Widened changed elements |
+|---:|---:|---:|---:|---:|
+| 1 → 4096 | 0.00064516 | 0.00133205 | 12.06% | 31.81% |
+| 128 → 4096 | 0.00141168 | 0.00164524 | 26.44% | 37.00% |
+| 4096 → 16384 | 0.00178415 | 0.00195941 | 34.54% | 43.19% |
+
+Thus FP32-compute/BF16-store is **not admitted as a repair**: in all three
+sampled cross-anchor comparisons it is farther from the direct native BF16
+target. This does not establish that RoPE caused the frozen r13 LongBench-v2
+quality change (230/381 to 219/381), nor that the current path is acceptable
+on NPU. The original FP32-only source-unit test did not cover BF16 or
+cross-anchor relocation. No r13 result, acceptance gate, plugin source, or
+immutable raw root was changed. The lesson is to use the target runtime's
+native finite-precision output as the correctness oracle, not only
+mathematical round-trip identity.
 
 ## Next falsification gate
 
-Before any quality rerun or source fix, compare the exact pinned runtime's
-fused-MRoPE cache and actual NPU K tensors for a fixed full-attention segment.
-Measure original cache-write/read versus the current canonicalize/relocate
-path and a computation-only widened variant, with the same BF16 material
-storage and physical NPU0–3 isolation. Also test the independent GDN state
-transition path. Pre-register the first-divergence tensor/logit criterion and
-one-switch scope in a new immutable diagnostic root. If RoPE differences do
-not propagate materially to the relevant output/logits, reject this
-hypothesis; do not retroactively reclassify r13.
+Before any quality rerun or source fix, compare the pinned runtime's actual
+fused-MRoPE cache and NPU K tensors for a fixed full-attention segment.
+Measure direct native target K against current canonicalize/relocate, then
+trace whether the difference reaches attention output/logits. Do not promote
+the widened variant based on the same-position screen. Separately test GDN
+transition parity. Pre-register the first-divergence criterion and
+one-switch scope in a new immutable diagnostic root. Reject the RoPE
+hypothesis if its differences do not propagate materially; never
+retroactively reclassify r13.
