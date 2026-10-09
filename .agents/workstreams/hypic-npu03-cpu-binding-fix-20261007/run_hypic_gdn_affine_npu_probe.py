@@ -15,12 +15,20 @@ from pathlib import Path
 
 WORKTREE = Path("/cache/cch/model-tuning-lab-hypic-e2e-20261006")
 PLUGIN = Path("/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008")
-RAW = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r3")
+RAW = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r4")
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 SOURCE = "c12060cd47e7575ead059983d7a8bb4704165c98"
-NAME = "hypic_gdn_affine_npu03_20261009_r3"
-LABEL = "hypic.gdn.affine=gdn-affine-20261009-r3"
+NAME = "hypic_gdn_affine_npu03_20261009_r4"
+LABEL = "hypic.gdn.affine=gdn-affine-20261009-r4"
 NUMBERED_DEVICES = tuple(f"/dev/davinci{i}" for i in range(4))
+DRIVER_BINDS = (
+    "/usr/local/Ascend/driver/tools/hccn_tool",
+    "/etc/ascend_install.info",
+    "/usr/local/dcmi",
+    "/usr/local/bin/npu-smi",
+    "/usr/local/Ascend/driver/version.info",
+    "/usr/local/Ascend/driver/lib64",
+)
 
 
 def utc() -> str:
@@ -86,6 +94,9 @@ def main() -> None:
         raise RuntimeError("plugin source is dirty")
     if run("docker", "image", "inspect", IMAGE, "--format", "{{.Id}}").stdout.strip() != IMAGE:
         raise RuntimeError("pinned image digest unavailable")
+    for bind in DRIVER_BINDS:
+        if not Path(bind).exists():
+            raise RuntimeError(f"frozen driver source missing: {bind}")
     before = run("npu-smi", "info").stdout
     if npu_processes(before):
         raise RuntimeError("physical NPU0-3 not actually idle")
@@ -126,6 +137,8 @@ def main() -> None:
         ]
         for device in NUMBERED_DEVICES:
             argv += ["--device", f"{device}:{device}:rwm"]
+        for bind in DRIVER_BINDS:
+            argv += ["-v", f"{bind}:{bind}:ro"]
         argv += [
             "-v", f"{WORKTREE}:/study:ro",
             "-v", f"{PLUGIN}:/plugin:ro",
@@ -150,8 +163,10 @@ def main() -> None:
             and item["Image"] == IMAGE
             and item["Name"] == f"/{NAME}"
             and item["Config"]["Labels"].get("hypic.gdn.affine")
-            == "gdn-affine-20261009-r3"
+            == "gdn-affine-20261009-r4"
             and numbered == list(NUMBERED_DEVICES)
+            and all(bind + ":" + bind + ":ro" in item["HostConfig"]["Binds"]
+                    for bind in DRIVER_BINDS)
             and item["HostConfig"]["NetworkMode"] == "none"
             and "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3" in item["Config"]["Env"]
         ):
@@ -159,6 +174,8 @@ def main() -> None:
         save_json(RAW / "container-inspect.json", {
             "id": owned_id, "image": item["Image"], "name": item["Name"],
             "devices": item["HostConfig"]["Devices"],
+            "binds": item["HostConfig"]["Binds"],
+            "env": item["Config"]["Env"],
             "labels": item["Config"]["Labels"],
             "network_mode": item["HostConfig"]["NetworkMode"],
         })
