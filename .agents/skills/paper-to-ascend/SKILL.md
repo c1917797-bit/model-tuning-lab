@@ -80,6 +80,17 @@ make the experiment reproducible and evidence-bound.
 10. Preserve negative results as pushed history. Recover failed active code
     before integration, but do not erase the evidence.
 
+## Mandatory probe validity before advancement
+
+Before implementation, device admission, result promotion or handoff, read
+[the validity/non-drift contract and matched-control DAG](../ascend-inference-tuning-loop/references/paper-validation-dag-and-matched-controls.md).
+Freeze immutable experiment identities; prove formula-to-worker-to-NPU
+mechanism activation; require independent mathematical correctness, matched
+whole-model performance and final task accuracy. Keep failed, inconclusive,
+rejected and accepted scopes distinct and preserve an auditable handoff.
+At each stage, align the next short-term action with the fixed medium/long-term
+goal. This is mandatory for paper probes, not a substitute for actual tests.
+
 ## Current repository guidance
 
 The current installed target is dense. Do not treat the old Qwen3.5 MTP

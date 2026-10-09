@@ -106,6 +106,7 @@ skills:
       - debug AscendC state metadata corruption
       - reuse vllm-ascend or ops-transformer operators before custom Ascend kernels
       - close a time-boxed paper probe without promoting it to an end-to-end result
+      - freeze a paper experiment and audit mechanism correctness or scoped conclusions
     scope:
       - AGENTS.md
       - docs/**

@@ -13,6 +13,93 @@ SparsePrefix SP11's missing installed HYPIC runner, and SparQ's software PASS
 followed by a same-image arithmetic-preflight failure. These distinguish real
 prerequisites from prepared source. They do not establish a paper-wide no-go.
 
+## Mandatory validity and non-drift contract
+
+Use this contract before any paper implementation, device admission, result
+promotion, or handoff. Source: the user's explicit October9 validation rules.
+It complements the DAG below; it does not expand resource permissions.
+
+### Freeze before changing or running
+
+Freeze an experiment ID and an immutable definition containing paper ID/version,
+official repository and commit (or clearly named equation-derived adaptation),
+model/checkpoint and tokenizer content identity, image digest, plugin/source
+manifest, runtime/operator identity, physical-to-container device mapping,
+exact input identities, commands, generation settings, resource/time budgets,
+numerical gates, performance/task acceptance thresholds, and successor
+consumers. Bind every result to that definition.
+
+Any change to this definition starts a new experiment/output root with an
+explicit predecessor/delta; never overwrite the old source, raw result or
+failure. Reuse a valid predecessor artifact only when its identity and scope
+still match, recording that reuse rather than relabelling its origin.
+No retroactive tolerance, workload, exclusion or clock adjustment to make a
+failed experiment pass. Goal updates from the user are recorded explicitly,
+not silently inherited from stale automation text.
+
+### Six required evidence rules
+
+1. **Mechanism:** maintain an inspectable chain
+   `paper formula -> plugin implementation -> actual worker hook -> NPU execution`.
+   Every operator change must name its paper-specific semantic need and expected
+   speed path. Configuration/registration alone, a generic kernel optimization,
+   or an inactive plugin cannot establish a paper probe.
+2. **Independent correctness:** the reference must not call the candidate's
+   critical selector, reduction, state update or numerical decision routine.
+   Shared transport/serialization is allowed only when it does not share the
+   calculation being tested. Use original inputs, real NPU output, multi-step
+   states, graph replay, true batches, admission/exit, cache hits and slot reuse
+   as relevant to the mechanism; preregister justified not-applicable cases.
+   Finite tensors, a canary or one passing sample are insufficient.
+   A source/hash/coverage consumer is not an independent mathematical oracle;
+   report which of these it actually checks.
+3. **Paired full-model performance:** identical stack, exact input, concurrency,
+   common optimizations and measurement boundaries, with only the declared
+   paper delta. Force1024 output tokens in both arms. Profiling and correctness
+   observers are OFF for formal timing. Report throughput, TTFT and TPOT
+   separately; a promising screen requires three formal pairs before claiming
+   the >=10% target. A kernel ratio, incomplete requests or one unequal arm
+   cannot substitute for E2E.
+4. **Final task accuracy:** same frozen LongBench-v2/GSM8K inputs, prompts and
+   scorers; thinking OFF, max output2048, normal EOS. Apply the latest explicit
+   user-approved task limit recorded in the experiment, never a tensor limit.
+   For this current Qwen3.6 portfolio the latest allowance is loss <=1%;
+   separately report absolute percentage-point loss and relative-percent loss.
+   Until its unit is narrowed explicitly, require both <=1 conservatively for
+   each task. Zero baseline or uncertainty requires an explicit interpretation,
+   not division by zero or a fabricated pass.
+5. **Scoped conclusions:** environment/integration failure means not yet
+   effectively validated; numerical failure means this implementation is
+   incorrect; valid paired no-gain means this measured configuration has no
+   benefit. Only complete declared acceptance supports deployed success.
+   None of the first three proves the paper worthless or no benefit in all
+   environments. Untested environments remain unverified. Distinguish
+   `failed`, `inconclusive`, `rejected` and `accepted`; stop a scope without
+   fabricating broader evidence.
+6. **Auditable handoff:** preserve exact source/revisions and hashes, original
+   tool envelopes and producer logs, commands, inputs/output Refs, independent
+   judgments and their scope, failures, cleanup, missing gates and next action.
+   Keep bulky/private data outside Git with durable locations/hashes. A reader
+   must be able to audit the evidence or rerun one specified gate without
+   reconstructing the chat. Record reusable rules in maintainer skills and
+   actual experiment evidence in the workstream; commit/push coherent stages.
+
+### Review gate and correction handling
+
+At every stage boundary and before updating a short-term plan, explicitly check
+whether the next action advances paper mechanism -> Ascend correctness ->
+paired E2E -> task acceptance within the fixed medium/long-term objective.
+Unrelated operator work, dummy card utilization and report-only progress do not.
+Missing prerequisites remain pending; never promote an authored manifest or
+software PASS to a native/model/result PASS.
+
+A reviewer can be wrong too. Trace the exact imported definition and producer/
+consumer behavior before changing a suspected defect. Preserve the original
+finding and its source-level refutation; do not fix a correct implementation
+merely to match an audit hypothesis. This policy is a decision guard, not proof
+that future experiments or this documentation have passed their NPU gates.
+
+
 ## DAG: independent preparation, serialized device validation
 
 For every paper, prepare this independent chain:
