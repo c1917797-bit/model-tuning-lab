@@ -1,6 +1,70 @@
 # Current human-authorized 72h successor — 2026-10-09
 
-## Current verified state — 2026-10-09 16:43 UTC
+## Current verified state — 2026-10-09 18:12 UTC
+
+This turn made real source/integration progress; the immediately preceding
+status-only turn did not. Do not treat the historical 16:43 RUNNING0452 entry
+below as current.
+
+- SparQ005 original0452 completed; independent corrected-reader20 software
+  and MAIN04e8 whole128cases/20480steps replay PASS. This grants numerical
+  component authority only. Original04bf mount-order consumer failure remains
+  FAILED-not-promoted; no NPU rerun or mathematical gate weakening.
+- FULLv11 recovery MF b0f642474118cbf6df7c8b325e6f2a167e74d6facc6c50031301ee5a0f1260fc:
+  all27 MATERIALIZE parts applied in order to the new canonical
+  projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1.
+  MAIN054a independently verified59 own files/128 source closure and passed
+  the actual164-test aggregate (exit0,1434ms). Software is not runtime authority.
+  Its output field all_runtime_pins_verified refers to source/captured pins;
+  actual installed runtime bytes/imports still require same-image CPU/N1 stages.
+  Original0522 source diagnostic failed because MAIN omitted3 host dependencies
+  from its final count; original preserved, corrected052a passed128. Not a
+  candidate or paper correctness failure.
+- MAIN054d fresh admission/defaultOFF PASS: actual4–7 idle/no NPU PID,
+  HBM2867/2866/2866/2861MiB; ordinary MemAvailable118695841792B,
+  engine7CPU, output FS free537982111744B, output leaf absent and port8241 free.
+  DockerRoot=/cache/docker with ample space; root bavail0 does not by itself
+  prove Docker/NPU blocking. No cleanup, HugeTLB release or foreign stop.
+- MAIN0550 attempted the exact FULLv11 diagnostic entry once and FAILED before
+  model hash/container/output creation. Actual source_contract.component replay
+  imports shard_rows.py; its from contract import ... raised
+  ModuleNotFoundError: No module named 'contract'. This is an actual Python
+  integration/module-closure defect missed by164 software, not NPU numerical
+  failure, performance no-go or paper invalidity. No model service or new NPU
+  workload is running from0550. Do not repeat unchanged. API-only preparer is
+  comparing the actual successful MAIN04e8 reader bootstrap and host/guest
+  closure; next action is minimal source-qualified repair plus actual-entry
+  regression, then a new non-overwriting diagnostic experiment.
+- Whole original structured operation_get envelopes (no altered result fields)
+  are preserved outside Git:
+  /cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_054A_FULLV11_SOFTWARE164_ORIGINAL.json
+  /cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_0550_FULLV11_DIAGNOSTIC_FAILED_ORIGINAL.json
+- AdaKV012 actual22 software+materialization PASS remains SOURCE_ONLY.
+  AdaKV013 actual10 software PASS MAIN0515, report db4b4bbbba95d44c06f69cb6cc4d08847f66c2a74eed42f07a5cb7e98897ff06.
+  Frozen014 native serial once delivery is NOT ready: independent source audit
+  proved safety_lifecycle.protected_boundary calls re without import re. No
+ 014 NPU run; prepare015 narrow import/real-entry regression repair, retaining
+ 014 unchanged. No algorithm/threshold change and no paper no-go.
+- Shared official final-task input v4 actual41 software PASS MAIN050f/report
+ 311c2f537b0a67c1cec4f8c13fec583dabf6168db7d4e7b98f58eb13ef94be06.
+  Official GET/tokenizer/cohort generation still UNRUN. Thin final transport
+  is being prepared, not task permission. FULLv11 final tasks still lack
+  unique dataset/arm/run IDs and actual all-request/all4 finished authority.
+- Independent review permits diagnostic only; token-forward extent is not all
+  request retirement. Single1024 screening needs a distinct one-pair successor
+  (frozen host provides three-pair formal only), after actual diagnostic and
+  independent consume_model PASS. Final stability/task gaps remain explicit.
+- Three preparers remain API-only, remote-exec CPU=0; sole MAIN owns the device
+  lane. Existing worktree HEAD dd831cc89964909894249e503700062025386bfa;
+  this integration stage is not committed/pushed yet. Known HTTPS push auth
+  failure unchanged; no blind retries, credential search or TLS disable.
+
+Goal ACTIVE and unmet. Fixed first-repair cutoff2026-10-10T07:00:25Z and total
+cutoff2026-10-12T07:00:25Z unchanged. No new whole-model, matched1024 E2E,
+LongBench-v2 or GSM8K result. Repair actual adaptation defects; do not call them
+paper no-go, and never use software/128 component PASS as model/task permission.
+
+## Historical verified state — 2026-10-09 16:43 UTC
 
 The preceding goal turn was a verified wait: original0452 was polled live and
 actual four shard_numeric Python processes were independently matched to005.
