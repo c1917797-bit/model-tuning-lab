@@ -61,9 +61,6 @@ cache10split remains unapproved and must not run.
 - Earlier r3–r8 foreign-process conflicts, startup-guard fixes and exact
   releases are indexed in HANDOFF_HISTORY.md and separate raw-hash reports;
   none is an algorithm verdict.
-- Git checkpoint and maintainer-handoff have bounded verified cases; host,
-  onboarding and tool-adapter boundary have partial real-task cases. See
-  MAIN_SKILL_ACCEPTANCE_GAP_AUDIT_20261008.md and skill-cases/.
 - The seventh case caught `mst-practice-iteration-planning`'s main YAML
   schema mismatch; the branch Skill repair and bounded HYPIC plan pass.
   Main remains partial; see PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md.
@@ -82,13 +79,15 @@ independent 40-row/42-ID/source/isolation/release audit; candidate 40/40
 measured IDs were four-worker hot. See HOTPATH_CACHE10PERF_SCREEN_PAIR_AUDIT.md.
 HYPIC-only/repeat2 terminal audit passed 40/40 hot IDs, 150 clean probes
 and exact release (HOTPATH_CACHE10PERF_CANDIDATE_REPEAT2_AUDIT.md); never rerun.
-No-cache/repeat2 `exec-000000000000000a` is running; poll, never restart.
+No-cache/repeat2 terminal audit passed 40 rows, 42 IDs, 162 clean probes
+and exact release (HOTPATH_CACHE10PERF_BASELINE_REPEAT2_AUDIT.md).
+No-cache/repeat3 `exec-0000000000000024` is running; poll, never restart.
 Do not post-hoc pass either root, use NPU4–7, or modify foreign containers.
 
 ## 5. Next Actions
 
-1. Preserve r10–r13 negatives; poll no-cache/repeat2, independently audit
-   terminal receipts, then run the last two frozen phases serially.
+1. Preserve r10–r13 negatives; poll no-cache/repeat3, independently audit
+   terminal receipts, then run the final HYPIC-only phase.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.
 3. For any device action, freshly resolve chicaihong01/ma through AWMCP,
