@@ -1,5 +1,89 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Latest actual terminal and next preparation — 2026-10-09 09:59 UTC
+
+Original SparQ0144 is now terminal FAILED exit1/17.968s, not running.
+Same660 Devices[] source audit rejected a transitive source missing from its
+guest mount closure. NPU was never created or executed. Actual014e independently
+consumed whole original10679B/SHA647fc9b80449635d3c99e33bfcddbb9ecd4b764682d18c903089ec81b79ef8e3,
+RESULT9485B/SHA7f1fda1d130c85847702d7adb69b7053f2fd7c2c1e90cbb49afd3fe60c886295,
+exact CPU stopped-retained/Pid0/noExec/noOOM, no deletion and secondary[].
+Frozenv2 and failure retained; readonly closure v3 is being prepared, not run.
+
+Same actual014e completed0 and really ran33 native-free ledger/consumer
+regressions, allPASS0.541s. Complete SP21 aggregate/same-image/TP4 gates pending.
+No current MAIN NPU load. All three preparers are API-only remote CPU0:
+SparQ mount-closure/FULL seam, SparsePrefix full retirement integration,
+Ada-KV source graph seam. Source packet delivery is not executable/NPU acceptance.
+Read [scoped evidence and repair](NATIVE_FREE_RETIREMENT_AND_MOUNT_CLOSURE_20261009.md).
+Old RUNNING sections below are historical; do not poll terminal0144/0118.
+Fixed clocks, gates and goal unchanged; no accepted non-HYPIC technique.
+
+
+## Current actual dispatch and corrected SP20 failure — 2026-10-09 09:54 UTC
+
+The running SP20 statements below are historical. Original TP4 exec0118
+completed exit1 in651.118s. RESULT154157B SHA6806b2dd3ba5de34e08e5c910fc92a92870c68de37a88ff2483ff6a23fa6bd68;
+cleanup102105B SHA25f65ebd23598a66640f51c941a5ea63afaad66f5d8a04100b2a8e16bb34faf5.
+Exact own CID46982113345be30d8f8767c8f6c3f523a713b7165e62df1878da4f49fd8ee816
+is stopped-retained, noOOM, reaped; errors[] and release compute[].
+Independent failed-result consumer exec0135 completed0 and kept all N2/E2E/task
+acceptance false. Whole original outside Git:
+ /cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN_SP20_TP4_0118_FAILED_ORIGINAL_20261009.json
+15895B SHA8bc0f5536f22023fe45b955e3b04621e3ea63e8fc1d4e86e223d736cb93061f8.
+
+The host controller reported actual foreign NPU process, but its last raw SMI
+showed only our four worker PIDs on4–7. External occupancy is NOT proved.
+Actual child stderr66716B SHA716aec6dd036a46616513f81ff36ede2f8ffe400d1784f42e18a84d155bb1a6e
+ends in scheduler_owner.py admit: ValueError('duplicate admission ID').
+All4/all48 initialization and partial real replay occurred, not full six-family
+completion. The independently prepared repair targets abort/native-free/
+skipped-step/same-ID resubmit retirement; MAIN source review and tests pending.
+Do not swallow duplicates, rename corpus IDs, stop foreign containers or rerun
+unchanged SP20. This is a scoped integration failure, not paper no-go.
+
+CURRENT is original exec-0000000000000144, exact direct ma, ACK running:
+ SparQ v2 fixed-score-shape diagnostic, CPU prerequisite then physical6 only.
+ /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-ba508-fixed-score-shape-npu-20261009-002
+Source v2 manifest6535B SHA2880af5ac97004685a1a25579a310c83cfc61a6c3272ec011b91161806a53204.
+Only multiline-expression parentheses repaired; frozen v1 source-review failure
+retained. Actual software17/compile/41-source exec0139 completed0 was observed;
+later registry0139 no longer retained the operation, not a new software failure.
+Real default-OFF/help/fresh orientation exec0141 completed0. Initial4–7 had no
+compute PID, HBM2860–2867MiB; declaration-only containers were not stopped.
+Host144 performs fresh admission; CPU/canary/score graph are still pending at ACK.
+Poll only144, not0118. This observes exact B8/capacity2304 versus cropped2157
+author score paths; it cannot promote original ba508 failed60/128 or establish
+model/E2E/task acceptance. Budget900s including90cleanup, summedCPU7/RAM17GiB,
+guest8GiB, MAIN256MiB, reserve8GiB, output64MiB; old cutoffs unchanged.
+Three preparers remain API-only remote CPU0 on SparsePrefix retirement,
+SparQ FULL model/graph seam, and Ada-KV actual cache update respectively.
+No current accepted non-HYPIC performance/task technique.
+
+
+## Latest actual SP20 dispatch — 2026-10-09
+
+MAIN actual host318/literal dual CLI/current source audit exec010d completed0.
+SP19 exec00f6 remains FAILED317/318; only new SP20 child pin length5391 to5418
+changed, correct SHA retained. No numerical or resource threshold changed.
+Actual same660 Devices[] exec0113 completed0 in37.287s:318/seven clean CLI,
+exact CPU CID c3454613602ec61961c026e73e3a69998c8e5b64b657f2799f2112a16c4586d5
+stopped-retained/reaped/noOOM. CPU RESULT9341B SHA1777796f21ac1f2373c53cd90fbc761a65fd3056840f8a03ed007d5b46ad4761.
+Whole original9928B SHA1ce3d24ac34a01fbbb6faa733b101f163383307c09ea4b5735421c21bfca2f5f
+at /cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN_SP20_CPU_SOFTWARE_0113_ORIGINAL_20261009.json.
+Independent exact-whole consumer exec0117 completed0. CPU is NOT NPU evidence.
+
+Fresh readonly orientation exec0112 found physical4–7 no compute PID,
+AICore0/HBM2860–2866MiB; no external container was stopped for declarations.
+Current original TP4 controller exec-0000000000000118 ACK running on exact ma.
+Output /cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-sp19-tp4-cpu7-sp20-20261009-001.
+Poll only0118; current actual all4/all48/six-family numerical/lifecycle,
+E2E and tasks pending. Entry ACK does not prove model/NPU allocation.
+Unchanged budget CPU7/72.5GiB ordinary RAM/64GiB guest/512MiB host/8GiB reserve,
+80GiB disk,1800s including180s cleanup. Fixed Oct10 first repair and Oct12
+portfolio cutoffs unchanged. All3 preparers freshly confirmed API-only CPU0.
+No current accepted non-HYPIC performance/task technique.
+
 ## Latest authoritative checkpoint — 2026-10-09 09:14 UTC
 
 Earlier running/software statements below are historical. No current MAIN

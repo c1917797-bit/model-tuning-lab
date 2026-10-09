@@ -140,3 +140,24 @@ reuse a stale Ref to increase apparent utilization. Such a no-create refusal
 does not prove a runtime or paper failure.
 
 [Actual167/same-image successes,1397 first refusal and evidence limits](../../../workstreams/qwen36-damp-ascend-20261006/THREAD_ENUMERATION_AND_REGRESSION_LEARNING_20261008.md).
+
+## Preserve child errors when a post-exit observer refuses ownership
+
+When a device controller reports foreign occupancy, inspect its retained raw
+SMI and the original child stderr before attributing the failure externally.
+An exited owned worker can lose a live identity proof; a controller message
+alone does not establish an unrelated occupier. Preserve both errors and their
+ordering, rather than stopping external workloads or inventing the missing
+identity. The Oct9 SP20 raw snapshot showed only its four owned workers while
+the child actually rejected duplicate admission after abort/free and a skipped
+scheduler step. A source-supported retirement repair is separate from the
+still-failed TP4 result; complete lifecycle/NPU/E2E gates remain required.
+
+For source-bound packets invoking another packet's real ABI entry, mount
+coverage must include that entry's transitive source/identity reads, not only
+the caller's direct pins. Host SHA/compile PASS cannot prove guest visibility.
+Retain the no-device failure; qualify missing paths, immutable hashes and RO
+destination coverage in a separate successor before taking a device lease.
+Do not use the success consumer to relabel a failed prerequisite.
+
+[Actual errors, minimal repair and pending gates](../../../workstreams/qwen36-damp-ascend-20261006/NATIVE_FREE_RETIREMENT_AND_MOUNT_CLOSURE_20261009.md).
