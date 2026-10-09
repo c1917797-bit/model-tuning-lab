@@ -84,4 +84,73 @@ class ExactOwnedWorkdir(unittest.TestCase):
  def test_wrong_workdir_hard_rejected(self):self.check(lambda x:x["Config"].update(WorkingDir=str(c.ROOT)))
  def test_foreign_CID_hard_rejected(self):self.check(lambda x:x.update(Id="b"*64))
 
+# Actual05b5 raw capture, not a fabricated SMI layout. The full stdout is
+# immutable here so same-image tests need no extra evidence mount.
+HBM_RAW_REF=dict(path="/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-002/cpu-preflight/observation-raw-1791571902397561240.json",sha256="ab66a7d96c3dd1d10e86f6c9ce7cf3b6e0ef9a52a3dca9a22d5144505a9e7c68")
+HBM_RAW_SMI="+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 92.3        37                0    / 0             |\n| 0                         | 0000:C1:00.0  | 0           0    / 0          2870 / 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 83.6        36                0    / 0             |\n| 0                         | 0000:C2:00.0  | 0           0    / 0          2872 / 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 88.4        37                0    / 0             |\n| 0                         | 0000:81:00.0  | 0           0    / 0          2870 / 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 86.7        39                0    / 0             |\n| 0                         | 0000:82:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.9        43                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2867 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.3        41                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 94.8        42                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 85.7        43                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| No running processes found in NPU 0                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 1                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 2                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 3                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n"
+HBM_RAW_SMI_SHA="db267de32ce3b8d8f0c0eb028611011d254523e83bb380713b7487ae20db79cf"
+class ActualHbmColumns(unittest.TestCase):
+ @staticmethod
+ def parse(text,card=4):
+  # Actual production function/module, never an AST copy or stub controller.
+  import host_run as h
+  return h.actual_hbm(text,card)
+ @staticmethod
+ def metric(value):
+  old="0           0    / 0          2867 / 32768"
+  assert HBM_RAW_SMI.count(old)==1
+  return HBM_RAW_SMI.replace(old,value,1)
+ def reject(self,text,card=4):
+  with self.assertRaises(ValueError):self.parse(text,card)
+ def test_original_bytes_and_first_ratio_regression(self):
+  import re
+  self.assertEqual(hashlib.sha256(HBM_RAW_SMI.encode()).hexdigest(),HBM_RAW_SMI_SHA)
+  line=next(l for l in HBM_RAW_SMI.splitlines() if "0000:01:00.0" in l)
+  self.assertEqual(re.search(r"\b(\d+)\s*/\s*(\d+)\b",line.split("|")[3]).groups(),("0","0"))
+  self.assertEqual(self.parse(HBM_RAW_SMI)["used_mib"],2867)
+ def test_actual_all_four_owned_cards(self):
+  for card,used in ((4,2867),(5,2866),(6,2866),(7,2861)):
+   with self.subTest(card=card):
+    self.assertEqual(self.parse(HBM_RAW_SMI,card),dict(physical=card,used_mib=used,total_mib=32768,
+     reserve_mib=3072,full_actual_physical_hbm=True))
+ def test_memory_ratio_cannot_be_substituted_for_HBM(self):
+  self.assertEqual(self.parse(self.metric("99.5 30000 / 32768 2867 / 32768"))["used_mib"],2867)
+ def test_exact_original_reserve_boundary_passes(self):
+  self.assertEqual(self.parse(self.metric("0 0 / 0 29696 / 32768"))["used_mib"],29696)
+ def test_one_MiB_below_original_reserve_rejected(self):
+  self.reject(self.metric("0 0 / 0 29697 / 32768"))
+ def test_original_physical_capacity_stays_exact(self):
+  for total in ("0","32767","32769","65536"):
+   with self.subTest(total=total):self.reject(self.metric("0 0 / 0 2867 / "+total))
+ def test_header_missing_units_and_order_hard_rejected(self):
+  old="AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)"
+  for new in ("AICore(%) HBM-Usage(MB) Memory-Usage(MB)","AICore(%) Memory-Usage(MB) HBM-Usage(GB)",
+   "AICore(%) Memory-Usage(MB)","AICore(%) Memory-Usage(MB) HBM-Usage(MB) Extra"):
+   with self.subTest(header=new):self.reject(HBM_RAW_SMI.replace(old,new,1))
+ def test_duplicate_or_missing_header_hard_rejected(self):
+  header=next(l for l in HBM_RAW_SMI.splitlines() if "| Chip " in l)
+  self.reject(HBM_RAW_SMI.replace(header,header+"\n"+header,1))
+  self.reject(HBM_RAW_SMI.replace(header,"",1))
+ def test_unknown_metric_count_and_nonfinite_hard_rejected(self):
+  for value in ("0 2867 / 32768","0 0 / 0 2867 / 32768 1 / 2","nan 0 / 0 2867 / 32768",
+   "inf 0 / 0 2867 / 32768","101 0 / 0 2867 / 32768","-1 0 / 0 2867 / 32768",
+   "0 1 / 0 2867 / 32768","0 0 / 0 -1 / 32768","0 0 / 0 2867.0 / 32768"):
+   with self.subTest(value=value):self.reject(self.metric(value))
+ def test_unique_card_and_health_hard_rejected(self):
+  import re
+  row=next(l for l in HBM_RAW_SMI.splitlines() if re.match(r"\|\s*4\s+910B4\s*\|",l))
+  detail=next(l for l in HBM_RAW_SMI.splitlines() if "0000:01:00.0" in l)
+  self.reject(HBM_RAW_SMI.replace(row,"",1))
+  self.reject(HBM_RAW_SMI.replace(row,row+"\n"+detail+"\n"+row,1))
+  self.reject(HBM_RAW_SMI.replace(row,row.replace("OK","Warning"),1))
+ def test_chip_bus_and_pipe_schema_hard_rejected(self):
+  detail=next(l for l in HBM_RAW_SMI.splitlines() if "0000:01:00.0" in l)
+  self.reject(HBM_RAW_SMI.replace(detail,detail.replace("| 0 ","| 1 ",1),1))
+  self.reject(HBM_RAW_SMI.replace("0000:01:00.0","unknown",1))
+  self.reject(HBM_RAW_SMI.replace(detail,detail+" |",1))
+  self.reject(HBM_RAW_SMI.replace(detail,"",1))
+ def test_owned_cards_and_bool_identity_not_expanded(self):
+  for card in (0,1,2,3,8,True,"4"):
+   with self.subTest(card=card):self.reject(HBM_RAW_SMI,card)
+
 if __name__=="__main__":unittest.main()

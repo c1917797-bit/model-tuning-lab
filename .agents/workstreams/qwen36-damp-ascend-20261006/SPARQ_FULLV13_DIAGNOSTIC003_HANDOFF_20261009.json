@@ -1,0 +1,147 @@
+{
+  "schema": "sparq.full-model-diagnostic-handoff/v1",
+  "recorded_at_utc": "2026-10-09T19:26:28Z",
+  "stage": "FAILED_IMPLEMENTATION_COMMON_EFFECTIVE_CONFIG_REPAIR_REQUIRED",
+  "repository": "/opt/host/vnf/austinov/model-tuning-lab",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "previous_head": "0c33bca4116f623428fe3d701c75880dc84d7337",
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "sha256": "dc4ab14378cb198001a3c14a5f23fd804ba9354c0b632e3f05d3734dd1d17929",
+    "own_files": 61,
+    "closure_files": 130
+  },
+  "software": {
+    "operation_id": "exec-00000000000005d1",
+    "actual_exit_code": 0,
+    "tests": 189,
+    "failures": 0,
+    "errors": 0,
+    "NPU_used": false,
+    "authority": "source/software closure only",
+    "whole_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_05D1_FULLV13_SOFTWARE189_ORIGINAL.json",
+      "sha256": "193e39cd7c6d70e9d105b5d83452820a37bce1e43f48784558f703d563bc66e2"
+    }
+  },
+  "diagnostic": {
+    "operation_id": "exec-00000000000005d4",
+    "terminal": true,
+    "actual_exit_code": 1,
+    "duration_ms": 581282,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-003/RESULT.json",
+      "sha256": "7e2c28f8caf8f00017511c3caabec0de5fa99b781ba8a42c433d21ab385ab2fc"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-003",
+    "requests_completed": 0,
+    "model_correctness_verified": false,
+    "controller_primary": "AICore/HBM idle baseline unchanged",
+    "earlier_worker_failure": {
+      "time_utc": "2026-10-09T19:17:07Z",
+      "path": "common.py validate_runner, called by bridge.State.admit during original profile_run",
+      "error": "actual common TP4/nondraft/stock FULL native PA/all16/no async admission",
+      "classification": "ADAPTATION_IMPLEMENTATION",
+      "proven_incompatibility": "COMMON request warmups=2, actual official normalized effective warmups=1; old AND rejects before examining later fields",
+      "remaining_uncertainty": "all later runner fields are not yet individually observed; do not claim warmup is the only defect"
+    },
+    "actual_physical_worker_start": {
+      "cards": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "pids": [
+        482266,
+        482269,
+        482273,
+        482277
+      ],
+      "owned_cid": "dc5c6b603396dea4d1cd8c848cc9d685b5a78d37f3ebe0faba4ce0d535bc26a8",
+      "all_four_model_weights_loaded": true,
+      "reported_each_model_weight_GB": 12.8735,
+      "scope": "model load only, not native full64 output/state correctness or performance"
+    },
+    "N1": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-003/round0-candidate/service/N1_DEPENDENCIES.json",
+      "sha256": "88a0ceafa15a7f79d4be7ee07241f0a6d273acaafc2f6fbc1b4fe4c76767a32a",
+      "status": "runtime-dependencies-checked",
+      "scope": "original runtime source hashes/imports; not model numerical authority"
+    }
+  },
+  "official_normalization": {
+    "operation_id": "exec-0000000000000603",
+    "actual_exit_code": 0,
+    "copied_from_stopped_own_same660": true,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_05D4_PLATFORM660_SOURCE_20261009_001.py",
+      "sha256": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8",
+      "bytes": 62514
+    },
+    "line": 533,
+    "literal": "compilation_config.cudagraph_num_of_warmups = 1",
+    "runtime_not_modified": true
+  },
+  "release": {
+    "operation_id": "exec-0000000000000603",
+    "actual_own_cid_stopped_retained": true,
+    "Pid": 0,
+    "ExecIDs": null,
+    "OOMKilled": false,
+    "actual4_7_no_compute_pid": true,
+    "HBM_MiB": [
+      2867,
+      2866,
+      2865,
+      2861
+    ],
+    "ordinary_mem_available_bytes": 118652100608,
+    "protected0_3_untouched": true,
+    "foreign_containers_untouched": true
+  },
+  "original_archives": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_05D4_FULLV13_DIAGNOSTIC003_FAILED_ORIGINAL.json",
+      "bytes": 4473,
+      "sha256": "f0571f7378d378cb298579559ef4cf48beddad917718c65e1f3a78e88757f98b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_060C_ADAKV016_SOFTWARE_FAILED_ORIGINAL.json",
+      "bytes": 3712,
+      "sha256": "498af96a164bb6a805b7468512fce6adeff6f3c0a071766277778807635cd940"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_0603_PLATFORM660_SOURCE_AND_RELEASE_ORIGINAL.json",
+      "bytes": 16341,
+      "sha256": "ee755645da938d8d800b7ca540c75dede394e41ccb96c456a142c977b84a4721"
+    }
+  ],
+  "backup": {
+    "name": "AdaKV016",
+    "operation_id": "exec-000000000000060c",
+    "exit_code": 1,
+    "source_sha256": "43c2fde2d80c20f9a9dd4385ade6e5b1a30525d3897b21b5fa333b686a0b35f7",
+    "first_fault": "test_gate.py line74 SyntaxError: __name__for token concatenation",
+    "tests_started": false,
+    "NPU_used": false,
+    "classification": "ADAPTATION_PREPARATION_SYNTAX",
+    "next": "017 independent successor repairs syntax before any same-image/device admission; do not overwrite016 or reject paper"
+  },
+  "next": "Minimal official effective-runtime compatibility plus named-field diagnostics/positive-negative regressions; unchanged requested COMMON2 for both arms, exact effective1 bound to official source. Full software, fresh admission and unique004 only after success. No unchanged003 rerun.",
+  "missing": [
+    "full64/all4 model numerical and lifecycle authority",
+    "matched1024 onepair",
+    "three formal paired runs",
+    "final2048 LongBench-v2 and GSM8K",
+    "cross-environment evidence"
+  ],
+  "clock": {
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "reset": false
+  },
+  "preparers_remote_exec_CPU": 0,
+  "goal": "active_unmet",
+  "publication": "pending known unchanged HTTPS authentication failure; no blind retry"
+}

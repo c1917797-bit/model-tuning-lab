@@ -25,7 +25,7 @@
     "test_gdn_state.py": "92b1fb9e5e7a97892e7bb940b95da954d31a65c19f0708ee915a66de1bb14640",
     "service_contract.py": "3264125a4f4e717baaab2852c711b6ffefd8670d96cc87e4c72f164fac035891",
     "bench.py": "71e53e668b69fc28141e954d3cf0111cf67850500a36160951849b6dbb7696aa",
-    "host_run.py": "f82f6cdc6aa2284b80755a5007f649d4d4141a6b0f4e6443761f67f7475f69a8",
+    "host_run.py": "c0a85477ebf7439e7379a17ae935a4224fade83fa36eee434b7d38d19b5941ce",
     "gdn_metadata.py": "292da75418bddb3f617eb4a9297eeef341a38832f1d7eb859e1e76fb92b2ed54",
     "gdn_observer.py": "270e774ef31fb2c9ca28a629b8ad8e75e2b23cde75dbf0c89c6d7c6511189393",
     "gdn_source.py": "4fd07e9ca0d76c99fc3fcede9d786a4a625e42819d0c02417aec37a23f77f3fc",
@@ -62,7 +62,7 @@
     "identity_bridge.py": "7f156e5a10d61d11d253d11e7dfb3cf780bb5a11746e1ee99912ab209832160e",
     "test_identity_n1.py": "5b0a2c1805b045a72a862f94f1aa8db0b58ed4e4e9b4183ab5ca81832d045e4f",
     "component_bootstrap.py": "2437a856201fee78576dfde68218595a6f58fd4bfcf2f77e88dc7fa5bc20b7c4",
-    "test_component_bootstrap.py": "6e45f871543433eda1ef04b507a6e3eeaaf94be63290f1312830b273a4547dc7"
+    "test_component_bootstrap.py": "56e7251f0daa5cea376f96425de2ab49d1a47c3f519f31f823d3716d1db70870"
   },
   "source_pins": {
     "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
@@ -188,15 +188,15 @@
       "test_identity_n1",
       "test_component_bootstrap"
     ],
-    "static_declared_tests": 177,
+    "static_declared_tests": 189,
     "actual_collected_test_count": null,
     "exit_code": null,
     "stdout": null,
     "stderr": null,
     "remote_exec_CPU": 0,
-    "method_declarations": 174,
+    "method_declarations": 186,
     "inherited_unittest_cases": 3,
-    "inherited_case_source": "Original164 preserved; new13 source/bootstrap/exact inspect consumer differences. Actual collection pending."
+    "inherited_case_source": "Original177 preserved;12 new actual installed-SMI parser cases/subcase matrix. Actual189 execution pending."
   },
   "actual_model": "UNRUN; complete disjoint4 component plus initialized geometry/budget/all4all64 full lifecycle and oracle required",
   "performance": {
@@ -477,5 +477,53 @@
       "change": "existing structure assertion now checks actual bootstrap/source identities and native-before-flat-import order with AST nodes, not unparse formatting; no test deletion/count or runtime change",
       "new_full177": "UNRUN"
     }
+  },
+  "v12_hbm_column_successor": {
+    "predecessor_source": "c3b2ae199c98d017c03a4a613d4db788a7946ae7f4c24906ba0127bc872f202e",
+    "predecessor_software": {
+      "operation": "exec-00000000000005a8",
+      "tests": 177,
+      "status": "PASS-no-model-permission"
+    },
+    "first_failure": {
+      "operation": "exec-00000000000005b5",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_05B5_FULLV12_DIAGNOSTIC_FAILED_ORIGINAL.json",
+        "bytes": 5352,
+        "sha256": "e364d3600b4777d46b5f7ea7ea7dd7588aaf1cf8642af88a5629b3e199480985"
+      },
+      "classification": "controller HBM-column parser; no model or CPU container created"
+    },
+    "raw_observation": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-002/cpu-preflight/observation-raw-1791571902397561240.json",
+      "bytes": 5350,
+      "sha256": "ab66a7d96c3dd1d10e86f6c9ce7cf3b6e0ef9a52a3dca9a22d5144505a9e7c68"
+    },
+    "parser": "same third pipe segment: exact AICore/Memory/HBM header then fullmatch scalar + two ratios; second ratio is HBM; unknown format fails closed",
+    "unchanged": {
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "capacity_mib": 32768,
+      "reserve_mib": 3072,
+      "source_count": 130,
+      "own_files": 61,
+      "numeric_component_cases": 128,
+      "numeric_component_steps": 20480,
+      "phase_seconds": 5400,
+      "cleanup_seconds": 90,
+      "resources": true,
+      "math": true,
+      "all_original177": true,
+      "other_59_source_files": true
+    },
+    "actual_189": "UNRUN",
+    "same_image": "UNRUN",
+    "N1": "UNRUN",
+    "model": "UNRUN",
+    "E1": "requires independent rebind to this final new source; frozen d18d not runnable against it"
   }
 }

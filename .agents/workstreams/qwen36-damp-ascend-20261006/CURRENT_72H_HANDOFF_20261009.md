@@ -1,6 +1,51 @@
 # Current human-authorized 72h successor — 2026-10-09
 
-## Current verified state — 2026-10-09 18:12 UTC
+## Current verified state — 2026-10-09 19:26 UTC
+
+- SparQ native005 whole128/20480 component authority is unchanged; it is not
+  whole-model, throughput or task acceptance.
+- The source-proven HBM-column repair is actually applied: MF dc4ab14378cb198001a3c14a5f23fd804ba9354c0b632e3f05d3734dd1d17929,
+  61 own/130 closure. MAIN05d1 complete189 tests PASS, exit0/38910ms.
+  Whole original archived at lowbit/MAIN_05D1_FULLV13_SOFTWARE189_ORIGINAL.json
+  SHA193e39cd7c6d70e9d105b5d83452820a37bce1e43f48784558f703d563bc66e2.
+- MAIN05d3 fresh admission passed; MAIN05d4 unique diagnostic003 is now
+  TERMINAL FAILED (exit1,581282ms), not LIVE. Do not poll/start it as running.
+  Same-image Devices[] CPU preflight and genuine N1 original runtime imports
+  passed. All four actual owned TP workers on physical4–7 loaded the model
+  weights (reported12.8735GB each). This is load evidence, not full64 numerical
+  correctness; no request/client result exists.
+- Earliest retained worker error19:17:07 was bridge.State.admit ->
+  common.validate_runner at original profile_run. Original Ascend platform
+  unconditionally normalizes cudagraph_num_of_warmups to1 at line533, while
+  plugin runtime AND still required2. Actual engine logs also show effective1.
+  Later host idle-HBM refusal must not hide this earlier adaptation failure.
+  Other fields after the short-circuited check remain unproven.
+- MAIN0603 independently copied the unmodified platform from stopped own CID:
+  lowbit/MAIN_05D4_PLATFORM660_SOURCE_20261009_001.py,62514B,
+  SHA30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8.
+  It also freshly verified stopped-retained/Pid0/noExec/noOOM and4–7 released,
+  HBM2867/2866/2865/2861MiB,ordinary MemAvailable118652100608B; no foreign
+  stop,HugeTLB release or protected0–3 operation. Cards are currently idle
+  because the proved implementation gate is being repaired, not unavailable.
+- NEXT is the minimal official effective-config repair and named-field
+  diagnostics with actual aggregate regression, then fresh admission/new004.
+  Keep dense/candidate requested COMMON2 identical; require source-proven
+  effective1. Do not relax FULL/all16/TP4/math/resource/clock gates.
+  API-only E1 preparer also found its preflight start clock excluded source
+  checking; a separate successor must charge all actual work and test literal
+  --execute/authority refusal. Current E1 has no model authority.
+- BACKUP AdaKV016 MAIN060c source/software entry failed221ms at compile with
+  test_gate.pyL74 SyntaxError(__name__for). Zero software tests/noNPU/noRESULT.
+  Preserve43c2/016 failed;017 must repair before admission. A packet delivery
+  is not syntax/aggregate PASS. Final-task owner/provider remain SOURCE_ONLY.
+- Actual detailed references and original terminal envelopes are in
+  SPARQ_FULLV13_DIAGNOSTIC003_HANDOFF_20261009.json. Earlier002/05b5 and
+  prior source/test failures remain unchanged. No new E2E or task accuracy.
+  Fixed first-repair Oct10 07:00:25Z/portfolio Oct12 07:00:25Z unchanged.
+  Goal ACTIVE/unmet; ordinary branch publication still pending unchanged
+  HTTPS authentication failure, no secret search/TLS disable/blind retry.
+
+## Historical verified state — 2026-10-09 18:12 UTC
 
 This turn made real source/integration progress; the immediately preceding
 status-only turn did not. Do not treat the historical 16:43 RUNNING0452 entry
@@ -55,8 +100,11 @@ below as current.
   (frozen host provides three-pair formal only), after actual diagnostic and
   independent consume_model PASS. Final stability/task gaps remain explicit.
 - Three preparers remain API-only, remote-exec CPU=0; sole MAIN owns the device
-  lane. Existing worktree HEAD dd831cc89964909894249e503700062025386bfa;
-  this integration stage is not committed/pushed yet. Known HTTPS push auth
+  lane. Recoverable FULLv11 source/software/failure checkpoint is committed:
+  37b1fea49cec2fea7f61491b22c890d352cc5f28 (MST20/scoped diff-check PASS).
+  Original054a SHA3049fe1d8de7b7f34975fddd270aa8e2e5de9b3715a6fb00947cdaf413e925b9;
+  original0550 SHA4d3c226accc2a08ba8c33538729e30bddc648d592e16b90a1fc895c8fd1bed28.
+  This checkpoint is local, not pushed. Known HTTPS push auth
   failure unchanged; no blind retries, credential search or TLS disable.
 
 Goal ACTIVE and unmet. Fixed first-repair cutoff2026-10-10T07:00:25Z and total
