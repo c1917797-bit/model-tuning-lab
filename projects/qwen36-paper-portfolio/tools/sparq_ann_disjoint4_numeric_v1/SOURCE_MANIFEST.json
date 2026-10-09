@@ -6,9 +6,9 @@
     "shard_rows.py": "ee64efa0fbd9cd654657200fb6671d9848ab8939a72b39f27fd0fbd9da04efc3",
     "shard_proof.py": "dd505c08d3c4fa92275fc3b243931ad70995a64e5490132ee419fce195e93d43",
     "shard_numeric.py": "d7a4212ad81c71710118196d5d8f24c915affbcbc061033666d955d63e9d8559",
-    "shard_host.py": "7015598efde3f12e13bfeac5fdd20ad82561074e4295a20f18047aab9d8d1077",
+    "shard_host.py": "2182f89ad5e2d54a1811a69c7394c1fa9acc12d7943574fa348401dc0836975e",
     "shard_consume.py": "c9718eea84a71c665e47ca0046c961f441f290daf47d8dfb304092b1d795f527",
-    "test_shards.py": "0670c88d08f5e6fe05ec0af27e05735b6d6eb812c11da9bdc409a8e2d08a0aab"
+    "test_shards.py": "6eb3d4267c10e700098ece4448b7f65359a9353b1cc9a95495fb411957e40239"
   },
   "native_source": {
     "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_token_native_v6/SOURCE_MANIFEST.json",
@@ -1159,7 +1159,7 @@
     "total_cutoff_epoch": 1791788425,
     "original_ba508_status": "FAILED-not-promoted"
   },
-  "software_test_count": 36,
+  "software_test_count": 41,
   "software_status": "UNRUN_API_ONLY",
   "native_status": "UNRUN",
   "model_status": "NOT_AUTHORIZED",
@@ -1179,5 +1179,12 @@
     "actual_MAIN030f": "failed real original0227 dry-entry: normal error annotation exit code misclassified",
     "change": "accept only None or exact exit code for already strict exit1 completed noncancelled nontimedout whole original; reject transport errors; math unchanged",
     "native_started": false
+  },
+  "mount_closure_revision": {
+    "previous_manifest_sha256": "9e520a9bcc5f48636291ef1d603a4fb9ba49c1081b92ce8cc6c1da3087463fa6",
+    "preserved_source_commit": "74f303f",
+    "actual_MAIN031b": "failed before NPU arithmetic: CPU ABI absolute Ref absent from card guest",
+    "change": "common owned output tree readonly in all phases; exact own output alias only RW; real same-image artifact hash/mount reader before any NPU container; native math and full128 unchanged",
+    "native_matrix_started": false
   }
 }

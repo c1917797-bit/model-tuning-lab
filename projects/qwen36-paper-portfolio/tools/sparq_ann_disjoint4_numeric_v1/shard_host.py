@@ -103,6 +103,12 @@ def card_create_argv(e,nh):
  return argv
 def closure_mounts(ctl,co,nh):
  mounts=nh.Controller.mounts(ctl)
+ # All phases consume immutable evidence by its HOST absolute path. Mount the
+ # entire ONE owned experiment RO, not only this shard; writable alias stays
+ # isolated to this controller's output. This includes CPU ABI, cleanup,
+ # PLAN/ALLOCATION, subsequent canary and fresh device-proof descendants.
+ mounts.pop(str(ctl.out),None)
+ mounts[str(co.out)]=(str(co.out),False)
  for path in [str(sc.ROOT),co.allocation_ref["path"],co.packet_source["path"],*co.manifest["native_external_pins"]]:
   p=Path(path)
   # Do not duplicate covered RO tree or nest another RW mount.
@@ -112,6 +118,19 @@ def closure_mounts(ctl,co,nh):
   sc.need(Path(src).exists() and ".." not in Path(src).parts,"complete existing immutable source mount")
   if rw:sc.need(dst=="/sparq-results" and src==str(ctl.out),"only exact owned output writable")
  return mounts
+def artifact_audit(root,refs):
+ """Actual guest cross-phase input visibility only; never numerical authority."""
+ root=Path(root)
+ sc.need(root.is_absolute() and root.is_dir() and not root.is_symlink(),"owned artifact root")
+ rows=[line.split() for line in Path("/proc/self/mountinfo").read_text().splitlines()]
+ matches=[row for row in rows if row[4]==str(root)]
+ sc.need(len(matches)==1 and "ro" in matches[0][5].split(","),"actual common absolute evidence mount must be RO")
+ sc.need(type(refs) is list and 1<=len(refs)<=32 and len({r["path"] for r in refs})==len(refs),"bounded distinct actual artifact Refs")
+ for ref in refs:
+  sc.need(set(ref)=={"path","sha256"} and root in Path(ref["path"]).parents,"artifact belongs to ONE owned experiment")
+  sc.read_ref(ref)
+ return dict(status="artifact-visibility-checked",root=str(root),refs=refs,npu_executed=False)
+
 def holders(cards):
  targets={}
  for card in cards:
@@ -349,12 +368,23 @@ def execute(a,own,manifest):
    pr["argv"]==audit_argv and pr["npu_executed"] is False and pr["device_nodes"]==[],"actual no-device own packet + original42 prerequisites")
   am=[x for x in audit_raw["stdout"].splitlines() if x.startswith("MAIN_SPARQ_DISJOINT_CPU ")]
   sc.need(len(am)==1 and nh.translate(json.loads(am[0].split(" ",1)[1])["report"],cp)==packet_cpu,"original packet CPU stdout binds actual bytes")
+  # Run the real image consumer before creating ANY NPU container. CPU and
+  # all future cards use the same common-root RO mount constructor.
+  visibility_refs=[co.allocation_ref,plan,initial,abi_ref,abi_child,packet_cpu,audit_child,cpu_inspect,
+   c.bound(cp/"OWNED.json",c.sha(cp/"OWNED.json"))]
+  visibility_argv=[c.PY,"-B",str(INTEGRATED/"shard_host.py"),"--artifact-audit-only",
+   "--artifact-root",str(co.out),"--artifact-refs",json.dumps(visibility_refs,separators=(",",":")),
+   "--source-manifest",own["path"],"--source-manifest-sha256",own["sha256"]]
+  visibility_raw,visibility_child=co.cpu.call("artifact-visibility",c.docker_argv(co.cpu.cid,visibility_argv),cap=60)
+  vm=[x for x in visibility_raw["stdout"].splitlines() if x.startswith("MAIN_SPARQ_ARTIFACT_VISIBILITY ")]
+  sc.need(len(vm)==1 and json.loads(vm[0].split(" ",1)[1])==dict(status="artifact-visibility-checked",
+   root=str(co.out),refs=visibility_refs,npu_executed=False),"actual same-image cross-phase artifact reader")
   cpu_cleanup=co.cpu.cleanup();cc=c.load(cpu_cleanup)
   sc.need(cc["stopped"] and cc["retained"] and not cc["deleted"] and cc["errors"]==[] and not co.cpu.secondary,"Devices[] CPU stop before all NPU")
   cpu_fields=dict(cpu_container_id=co.cpu.cid,cpu_only_inspect=cpu_inspect,
    cpu_only_owned=c.bound(cp/"OWNED.json",c.sha(cp/"OWNED.json")),cpu_only_cleanup=cpu_cleanup,
    cpu_stopped_inspect=cc["after_inspect"],cpu_host_output_root=str(cp),
-   native_no_device_abi=abi_ref,native_no_device_child=abi_child,packet_cpu=packet_cpu,packet_cpu_child=audit_child)
+   native_no_device_abi=abi_ref,native_no_device_child=abi_child,packet_cpu=packet_cpu,packet_cpu_child=audit_child,artifact_visibility_child=visibility_child)
   # ALL four new CIDs share the same source/clock and are stopped-before-start
   # after the original CPU phase. Each physical mapping is explicitly validated.
   for part in sc.allocation()["shards"]:
@@ -455,13 +485,16 @@ def execute(a,own,manifest):
  sc.need(success,"all four independent reports/source/CID/release/time mandatory, no partial promotion")
 def main():
  p=argparse.ArgumentParser(description=__doc__)
- g=p.add_mutually_exclusive_group();g.add_argument("--execute",action="store_true");g.add_argument("--source-audit-only",action="store_true")
+ g=p.add_mutually_exclusive_group();g.add_argument("--execute",action="store_true");g.add_argument("--source-audit-only",action="store_true");g.add_argument("--artifact-audit-only",action="store_true")
  for key in ("source-manifest","predecessor-result","predecessor-terminal","output"):p.add_argument("--"+key,type=Path)
  for key in ("source-manifest","predecessor-result","predecessor-terminal"):p.add_argument("--"+key+"-sha256")
+ p.add_argument("--artifact-root",type=Path);p.add_argument("--artifact-refs")
  a=p.parse_args()
- if not (a.execute or a.source_audit_only):
+ if not (a.execute or a.source_audit_only or a.artifact_audit_only):
   print(json.dumps(dict(status="disabled",ready=False,torch_imported="torch" in sys.modules,npu_executed=False)));return
  own,m=sc.own_identity(a.source_manifest,a.source_manifest_sha256)
+ if a.artifact_audit_only:
+  print("MAIN_SPARQ_ARTIFACT_VISIBILITY "+json.dumps(artifact_audit(a.artifact_root,json.loads(a.artifact_refs))),flush=True);return
  if a.source_audit_only:
   print(json.dumps(dict(packet_source=own,native_source=sc.BASE_SOURCE,ready=False,source_count=50)));return
  execute(a,own,m)

@@ -199,4 +199,37 @@ class OriginalFailure(unittest.TestCase):
  def test_truncation_rejected(self):
   v=self.fixture();v["stdoutTruncated"]=True
   with self.assertRaises(ValueError):host.extract_original(v,"lgw_a6109c51076a4a2c9d2674ca5a8704a0")
+class ArtifactMountClosure(unittest.TestCase):
+ ROOT=Path(sc.BASE_SOURCE["path"]).parent
+ ABI={"path":str(ROOT/"receipt.py"),"sha256":"689f7c4fab787af26a09d75fb193bde952790ebfb6931c9aba52cb9a7f3be9e7"}
+ def mounts(self):
+  _,nh=SourceSeams().native()
+  ctl=types.SimpleNamespace(out=self.ROOT/"sparq_token_v4")
+  co=types.SimpleNamespace(out=self.ROOT,allocation_ref={"path":str(self.ROOT/"SOURCE_MANIFEST.json")},
+   packet_source={"path":str(sc.ROOT/"SOURCE_MANIFEST.json")},manifest={"native_external_pins":{}})
+  return host.closure_mounts(ctl,co,nh)
+ def test_common_tree_covers_other_phase_and_future_proofs(self):
+  mounts=self.mounts();self.assertEqual(mounts[str(self.ROOT)],(str(self.ROOT),False))
+  for rel in ("cpu-preflight/ABI.json","cpu-preflight/cleanup.json","PLAN.json","shard-3-physical7/proof.json"):
+   self.assertIn(self.ROOT,(self.ROOT/rel).parents)
+  self.assertNotIn(str(self.ROOT/"sparq_token_v4"),mounts)
+ def test_only_own_alias_writable_no_broad_cache_mount(self):
+  mounts=self.mounts()
+  self.assertEqual([(d,s) for d,(s,rw) in mounts.items() if rw],
+   [("/sparq-results",str(self.ROOT/"sparq_token_v4"))])
+  self.assertNotIn("/cache/cch",mounts)
+ def test_real_ref_hash_reader_with_mountinfo_io_spy_only(self):
+  row="123 1 0:1 / "+str(self.ROOT)+" ro,relatime - ext4 /exact ro\n"
+  with mock.patch.object(Path,"read_text",return_value=row):
+   result=host.artifact_audit(self.ROOT,[self.ABI])
+  self.assertEqual(result["refs"],[self.ABI]);self.assertFalse(result["npu_executed"])
+ def test_rw_common_root_rejected_before_file_read(self):
+  row="123 1 0:1 / "+str(self.ROOT)+" rw,relatime - ext4 /exact rw\n"
+  with mock.patch.object(Path,"read_text",return_value=row):
+   with self.assertRaises(ValueError):host.artifact_audit(self.ROOT,[self.ABI])
+ def test_actual_missing_ref_and_changed_hash_rejected(self):
+  row="123 1 0:1 / "+str(self.ROOT)+" ro,relatime - ext4 /exact ro\n"
+  with mock.patch.object(Path,"read_text",return_value=row):
+   with self.assertRaises(ValueError):host.artifact_audit(self.ROOT,[dict(self.ABI,sha256="0"*64)])
+   with self.assertRaises(ValueError):host.artifact_audit(self.ROOT,[dict(self.ABI,path=str(self.ROOT/"NEVER_CREATED.json"))])
 if __name__=="__main__":unittest.main()
