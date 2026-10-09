@@ -68,6 +68,10 @@
     "r13_non_strict_combined_prefill_approximation_observed": false,
     "r13_strict_zero_start_numerical_equivalence_proven": false,
     "r13_quality_repair_or_full_skill_acceptance_proven": false,
+    "bf16_rope_cpu_same_anchor_widening_reduces_roundtrip_error": true,
+    "bf16_rope_cpu_cross_anchor_widening_better_than_native_current": false,
+    "bf16_rope_cross_anchor_samples": 3,
+    "bf16_rope_npu_or_r13_quality_causality_proven": false,
     "r14_c1_diagnostic_complete_and_independently_replay_valid": true,
     "r14_c1_selected_indexes": [0, 55, 48],
     "r14_c1_scored_responses_per_arm": 9,
@@ -182,10 +186,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r13_strict_mode_path.py",
       "sha256": "38a89983a84a882e881025eb4605877d7d8c7298a1279f6b8b446b180fe1d21e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_BF16_ROPE_NUMERICAL_SCREEN_20261009.md",
+      "sha256": "13b9fa95128d38afcc64bafba8c450058e03383dcac4cb06fc3ee1b4699f3367"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_rope_bf16_screen.py",
+      "sha256": "6de7837b8f7d54518173734b7d0e851602c56035c7229d1d808530d600e10177"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. A new read-only source/runtime replay proves strict position-independent mode and 140 zero-start candidate materializations, so the non-strict combined-Prefill approximation was not observed and is not a supported explanation for r13 quality loss; numerical equivalence of the strict path is still unproven. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, but campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
-  "next_gate": "Integrate and replay main request-level proof requirements, then validate missing default-ruler dataset/canary conditions before upgrading this Skill case. Any fresh device test must prospectively isolate one numerical or concurrency hypothesis with an exact-source short canary and matching control; do not rerun r13/r14 roots or turn the selected r14 result into formal quality acceptance.",
+  "next_gate": "Integrate and replay main request-level proof requirements, then validate missing default-ruler dataset/canary conditions before upgrading this Skill case. Any fresh device test must prospectively isolate one numerical or concurrency hypothesis with an exact-source short canary and matching control; for RoPE use actual native BF16 target K/output as oracle, not only same-anchor mathematical identity. CPU cross-anchor evidence rejects FP32-compute/BF16-store as a repair candidate; do not rerun r13/r14 roots or turn the selected r14 result into formal quality acceptance.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
