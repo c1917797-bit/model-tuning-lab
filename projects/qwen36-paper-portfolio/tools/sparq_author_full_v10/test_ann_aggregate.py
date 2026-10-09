@@ -11,15 +11,24 @@ class Aggregate(unittest.TestCase):
   with patch.dict(os.environ,{"QWEN36_SPARQ_STOCK_FULL_ENABLED":"0"}):
    self.assertFalse(bridge.install_from_env()["model_ready"])
   self.assertNotIn("torch",sys.modules);self.assertNotIn("torch_npu",sys.modules)
- def test_current_v9_41source_not_old27_v4_v7_grant(self):
+ def test_current_four_shard50_and_original_native42_not_old_single_grant(self):
   s=text("source_contract.py")
-  self.assertIn("sparq.complete-token-component/v9-author-ann-FP32-compensation",s)
-  self.assertIn('km["source_count"]==42',s)
-  self.assertIn('x.get("precision_contract")==AUTHOR_PROTOCOL',s)
+  self.assertIn("sparq.author-ann-disjoint4-numeric/v1",s)
+  self.assertNotIn("sparq.complete-token-component/v9-author-ann-FP32-compensation",s)
+  self.assertEqual(h.source_interfaces()["source_count"],42)
+  self.assertEqual(h.shard_source_interfaces()["source_count"],50)
+  self.assertEqual(h.proposed_source_interfaces()["precision_contract"],c.AUTHOR_PROTOCOL)
+  for predicate in ('x.get("cases")==128','x.get("changing_feedback_steps")==20480','x.get("partial_cases_used")==0'):
+   self.assertIn(predicate,s)
   self.assertNotIn("sparq.complete-token-component/v7-fp32-support",s)
  def test_exact_author_source_pins(self):
-  self.assertIn("554ea6db219405becbdc0a126984a19f181bdc69",text("source_contract.py"))
-  self.assertIn("2b07afe06ff1dd6627f1a255be585c82a632f7bbdb7bf606f4ff2f8b260b6b74",text("source_contract.py"))
+  source_path="/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-official-ann-source-20261008-1040-001/ann_attention.py"
+  result_path=str(Path(source_path).parent/"SOURCE_RESULT.json")
+  self.assertEqual(c.PINS[source_path],"2b07afe06ff1dd6627f1a255be585c82a632f7bbdb7bf606f4ff2f8b260b6b74")
+  actual=c.obj(dict(path=result_path,sha256=c.PINS[result_path]))
+  self.assertEqual(actual["commit"],"554ea6db219405becbdc0a126984a19f181bdc69")
+  self.assertEqual(actual["source"],dict(path=source_path,sha256=c.PINS[source_path],bytes=14750))
+  self.assertFalse(actual["algorithm_pass"]);self.assertFalse(actual["npu_executed"])
  def test_worker_bootstrap_and_original_writer_before_forward(self):
   s=text("bridge.py")
   self.assertLess(s.index("import vllm_ascend.ops"),s.index("import vllm_ascend.attention.attention_v1"))

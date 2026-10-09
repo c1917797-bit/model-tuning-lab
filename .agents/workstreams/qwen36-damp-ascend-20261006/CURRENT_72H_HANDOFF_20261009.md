@@ -1,5 +1,96 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current verified state — 2026-10-09 16:43 UTC
+
+The preceding goal turn was a verified wait: original0452 was polled live and
+actual four shard_numeric Python processes were independently matched to005.
+Current original exec-0000000000000452 remains RUNNING, not completed.
+Output: /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-ann-disjoint4-numeric-user72h-20261009-005.
+Frozen numeric50 MF2f01233797f130c17f94bf4f0c6a631c9f0875b86ac073f2d4fc551eadd1a5ba;
+actual64 software PASS043b and source-audit PASS043a, committed53050887a4058e406a9c39ff9d09356df8b55ccb.
+Physical4/5/6/7 own numeric PIDs2732768/2733214/2734233/2734585 verified via
+actual cmdline/cgroup.16:43 progress has26/26/25/27 published case files
+(104 files toward128), latest batch13/14. No aggregate RESULT exists.
+These files are progress, not independently adjudicated complete numerical PASS.
+Latest sampled AICore0 with owned process memory596/685/706/720MiB does NOT
+prove sustained utilization or no NPU execution. No dummy load or live change.
+Poll ONLY0452; after terminal freeze whole originals, verify own-only release
+and run the exact independent complete consumer before unlocking model.
+
+Original004/03c1 FAILED: only canary before owned-process-exit identity refusal.
+Actual same PID/start changed to empty argv/root cgroup; original process state
+was not captured, so a historical zombie assertion is unproved. Known-owned
+exit compatibility repair retains unknown/live/permission/PID-reuse/nonzero
+fail-closed checks and unchanged native42 math/128cases/20480steps.
+Original042c failed3 mock-SMI fixture errors; corrected64 suite passed043b.
+Actual03e2 verifies both exact004 CIDs stopped-retained/Pid0/noExec/noOOM.
+Original003 missing-file cause remains UNKNOWN, never paper no-go.
+
+NEXT_SOURCE=FULLv11 real postassignment-ID plus genuine device-dependent N1
+import seam, API-only preparer final freeze pending. FULLv10 now actually
+passed146 tests/115 source closure in MAIN048d after two stale fixtures and
+three own-SHA metadata repairs; MF808d47842a9d650e24bbf2cbd8bafcb39245de45fa6188a06bcd7361bba647fb.
+Original03ff two failures,045d and0488 pre-test metadata failures are preserved.
+A minified one-line manifest needs one composed replacement; multiple hunks
+against the same old line cannot substitute for actual all-file SHA readback.
+146 PASS is software only; known ID/N1 seams prevent calling v10 model-ready.
+BACKUP_SOURCE=AdaKV complete010 actual14-file delivery,12 tests/materialization
+UNRUN; private MF36d8198dc346374efef0d6323fdca1b04e1c864f47a4724ac5dd63f479bcbbfd.
+FINAL_TASK_SOURCE=shared official-inputs v3 actual15-file delivery,36 tests,
+real GET/tokenizer/fullcount/scoring UNRUN; MFd9d23bfde69a8220fd118d2b8abf1716dca78f9e1f4bb23aa2dfcb6e3f17c31f.
+Neither a packet delivery nor first-request capture grants full40/mixed/reset,
+formal OFF/ON or task accuracy. Three preparation slots rotate independently;
+MAIN remains sole SERIAL device dispatcher. Numeric live sources stay frozen.
+
+No new non-HYPIC E2E throughput, TTFT/TPOT or LongBench-v2/GSM8K result.
+Fixed first-repair Oct10 07:00:25Z and portfolio Oct12 07:00:25Z unchanged.
+Protected0–3, spent32GiB HugeTLB/OVS boundary unchanged. Normal publication
+remains pending existing HTTPS authentication failure; no blind push retry.
+All older RUNNING/readiness sections below are superseded historical snapshots.
+
+## Historical source checkpoint — superseded 2026-10-09 15:19 UTC
+
+Previous turn was live status inspection only, not NPU acceptance progress.
+MAIN repaired the evidenced first-fault capture gap;25 exact-source diagnostics
+and50 real canonical stdlib tests passed (03a9/03b0), actual final source50/
+original0227 predecessor/count50/new-output check passed03b8;MST20 passed03b4.
+Consumer count41 was stale after9 added tests; MAIN verified the exact
+producer/consumer seam and corrected only manifest metadata to50 before cards.
+No selector, native42 mathematical source, oracle,128/20480 or deadline change.
+Failed915d is retained at Git83f0a7dbca01f3a74a03160bf68439312b841411.
+New source is committed88b9a77; publication remains pending existing HTTPS auth
+failure, not a device blocker. Do not blind-retry push or reconstruct credentials.
+
+Actual direct ma/a6109 original exec-00000000000003c1 accepted and latest poll
+still RUNNING. New output: /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-ann-disjoint4-numeric-user72h-20261009-004.
+MF b7df061e37e034aa987c028882bd5d25e011e9c6241b73c186d5fd36da6fe1e5;
+host90039c153a32023a1c03776640056597c36dbd60fee07a31d35f54af6b931bd7;
+test4004e0c89e4ab61d90a114765cf8918fe7c9e05e8c86ae79f4f489ca7919a627.
+Poll ONLY03c1; ACK/running is not physical compute or numeric PASS.
+It executes real same-image Devices[] ABI+50+artifact visibility, then exact
+four canaries and all128/20480 under one5400s/90s lease. Preserve FIRST_FAULT
+before cleanup if primary recurs; classify actual callsite, no unchanged rerun.
+All failed003 originals remain unchanged. Preregistered definition and actual
+software originals: /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-first-fault-source-evidence-20261009-001/.
+Cause of003 is still UNKNOWN, not paper failure.
+
+Fresh03b9 showed4–7 no compute/HBMbaseline and ordinary93857516KiB;
+0–3 external HYPIC TP workers were observed only, never operated.
+Outer03b9 exit127 was wrong /usr/bin/ss path; actual /usr/sbin/ss03bf then
+passed. Do not hide that diagnostic error or call03b9 whole PASS.
+Protected0–3/HugeTLB32GiBSPENT/Oct10/Oct12 fixed boundaries unchanged.
+
+CURRENT=03c1 numerical diagnostic, not E2E. NEXT_SOURCE=FULLv10 complete
+one-call materialization; preparer must bind finalb7df/7 exact pins in new
+immutable delivery, then MAIN complete software/image/model consumer. Old
+0ac323/4f85 package is historical SOURCE-PENDING, not current model readiness.
+BACKUP_SOURCE=AdaKV official-QK008+real1024 request capture009, tests unrun.
+Independent SparsePrefix lifecycle draft excludes13 rejected targets;
+no bypass or device permission follows. MAIN remains sole serial NPU admission.
+Full numerical replay, model, matched1024 three pairs,2048 tasks and portability
+are all pending. Do not count source deliveries, policies or HYPIC as success.
+
+
 ## Latest concurrency authority and requested scheduler — 2026-10-09
 
 User now requests parallel paper preparation and SERIAL device operations,

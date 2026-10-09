@@ -62,7 +62,7 @@ class DisjointHandoff(unittest.TestCase):
   x=h.shard_source_interfaces()
   self.assertEqual((x["source_count"],x["own_count"],x["cases"],x["steps"]),(50,7,128,20480))
   self.assertEqual(x["native_source"],h.CURRENT);self.assertFalse(x["ready"])
-  self.assertEqual(c.SHARD_SOURCE["sha256"],"b7df061e37e034aa987c028882bd5d25e011e9c6241b73c186d5fd36da6fe1e5")
+  self.assertEqual(c.SHARD_SOURCE["sha256"],"2f01233797f130c17f94bf4f0c6a631c9f0875b86ac073f2d4fc551eadd1a5ba")
   self.assertNotIn("torch",sys.modules)
  def test_real_fourarg_consumer_and_incompatible_signatures(self):
   raw=(c.SHARD_ROOT/"shard_consume.py").read_text()

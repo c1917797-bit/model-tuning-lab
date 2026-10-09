@@ -172,8 +172,8 @@ def validate_execution_clock(plan,host):
 
 
 SHARD_ROOT=Path("/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_ann_disjoint4_numeric_v1")
-SHARD_SOURCE={"path":str(SHARD_ROOT/"SOURCE_MANIFEST.json"),"sha256":"b7df061e37e034aa987c028882bd5d25e011e9c6241b73c186d5fd36da6fe1e5"}
-SHARD_FILES={"shard_contract.py":"d9480f062eb404adba107f27ac1aae5484eed32c54d006d7fbf2d1a3d418c549","shard_rows.py":"ee64efa0fbd9cd654657200fb6671d9848ab8939a72b39f27fd0fbd9da04efc3","shard_proof.py":"dd505c08d3c4fa92275fc3b243931ad70995a64e5490132ee419fce195e93d43","shard_numeric.py":"d7a4212ad81c71710118196d5d8f24c915affbcbc061033666d955d63e9d8559","shard_host.py":"90039c153a32023a1c03776640056597c36dbd60fee07a31d35f54af6b931bd7","shard_consume.py":"c9718eea84a71c665e47ca0046c961f441f290daf47d8dfb304092b1d795f527","test_shards.py":"4004e0c89e4ab61d90a114765cf8918fe7c9e05e8c86ae79f4f489ca7919a627"}
+SHARD_SOURCE={"path":str(SHARD_ROOT/"SOURCE_MANIFEST.json"),"sha256":"2f01233797f130c17f94bf4f0c6a631c9f0875b86ac073f2d4fc551eadd1a5ba"}
+SHARD_FILES={"shard_contract.py":"d9480f062eb404adba107f27ac1aae5484eed32c54d006d7fbf2d1a3d418c549","shard_rows.py":"ee64efa0fbd9cd654657200fb6671d9848ab8939a72b39f27fd0fbd9da04efc3","shard_proof.py":"dd505c08d3c4fa92275fc3b243931ad70995a64e5490132ee419fce195e93d43","shard_numeric.py":"d7a4212ad81c71710118196d5d8f24c915affbcbc061033666d955d63e9d8559","shard_host.py":"25bde2d2119d288f6bfc8e9c1fc276dc4ac1eafe08180865a15616be0cebb644","shard_consume.py":"c9718eea84a71c665e47ca0046c961f441f290daf47d8dfb304092b1d795f527","test_shards.py":"4a4757faebd0124eb9235110e5cfcaa018d70a6c8940671310ee83018ed61c67"}
 PINS.update({str(SHARD_ROOT/n):v for n,v in SHARD_FILES.items()})
 PINS[SHARD_SOURCE["path"]]=SHARD_SOURCE["sha256"]
 
