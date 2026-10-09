@@ -182,7 +182,14 @@ class SkillCaseTests(unittest.TestCase):
         item = json.loads(path.read_text())
         self.assertEqual(item["observed"]["strict_request_level_gate"],
                          "UNVERIFIED 162/162")
-        self.assertFalse(item["observed"]["terminal_quality_pair_complete"])
+        self.assertTrue(item["observed"]["terminal_quality_pair_complete"])
+        self.assertEqual(item["observed"]["r13_paired_correct_baseline_candidate"],
+                         [230, 219])
+        self.assertEqual(item["observed"]["r13_deployed_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertEqual(item["observed"]["r13_strict_hot_scored_requests"],
+                         [368, 381])
+        self.assertFalse(item["observed"]["r13_quality_repair_or_full_skill_acceptance_proven"])
         self.assertFalse(item["observed"]["main_skill_integrated"])
         self.assertEqual(item["observed"]["r12_four_worker_verified_scored_requests"], 52)
         self.assertEqual(item["observed"]["r12_cold_ready_cache_partial_chunk"], 1)

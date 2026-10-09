@@ -4,15 +4,15 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Review whether every scored HYPIC 2048-token explicit-boundary request on physical NPU0-3 TP4 actually traversed the worker hot path under concurrency 8",
-  "executed_at_utc": "2026-10-08",
+  "task": "Review every scored HYPIC 2048-token explicit-boundary request on physical NPU0-3 TP4, then independently decide full r13 paired quality and strict worker-hot coverage under concurrency 8",
+  "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "303658f0a652ed392c875e58941c6b1d246552f7",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; cache10r9 checkpoint, terminal cache10r10 full candidate and cache10r11/r12 19-sample c8 stresses; Qwen3.6-27B BF16 TP4 physical NPU0-3, 2048 output cap; no valid terminal pair",
+  "environment_scope": "chicaihong01/ma; r9-r12 historical failures and terminal r13 same-identity 127x3 LongBench-v2 pair; Qwen3.6-27B BF16 TP4 physical NPU0-3, c8, natural-EOS 2048 output cap; default GSM8K/c32 ruler and short deterministic canary remain outside this case",
   "observed": {
     "completed_scored_ids_in_read_only_snapshot": 162,
     "request_boundary_events_joinable": true,
@@ -45,7 +45,16 @@
     "r11_r12_within_arm_exact_long_response_pairs": [0, 1],
     "r11_r12_cross_source_one_token_observations_equal": 38,
     "r12_terminal_decision": "strict activation stress failed; source ran on NPU but no paired quality verdict",
-    "terminal_quality_pair_complete": false,
+    "terminal_quality_pair_complete": true,
+    "r13_pair_evidence_valid": true,
+    "r13_paired_correct_baseline_candidate": [230, 219],
+    "r13_paired_delta_percentage_points": -2.8871391076115485,
+    "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_strict_hot_scored_requests": [368, 381],
+    "r13_strict_hot_decision": "FAIL",
+    "r13_cold_request_count_with_ready_evicted_partial_prefill_sequence": 13,
+    "r13_hot_cohort_correct_baseline_candidate_descriptive": [226, 212],
+    "r13_quality_repair_or_full_skill_acceptance_proven": false,
     "main_skill_integrated": false
   },
   "evidence": [
@@ -92,10 +101,26 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/analyze_cache10r12_fallbacks.py",
       "sha256": "fd77c60fbfed2631718239cb428ab281ba08f7293e7080a7319bada939df6573"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_R13_TERMINAL_SKILL_CASE_20261009.md",
+      "sha256": "53e504f94745ff615de63ef775214485c610c42c5ffe5fd94f77fe44ebd4ebf5"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md",
+      "sha256": "4b5308c6049a8d0c8e12065e69677b27dd8af4c05494bf2cb71f550d393a1c76"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/diagnose_material_eviction_sequence.py",
+      "sha256": "bdae386187dfbb332c5dc1f9b5e8ee3b4afb5d16e7ab2dae512e0206df245682"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_material_eviction_sequence.py",
+      "sha256": "cb538b4edf1d235584a4c187c5c1161eaa44708bfb0719b5fcef680086411550"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The r9 snapshot exposed an activation evidence gap; terminal r10 lacked proof for 15/381 scored requests, r11 for 4/57 and r12 for 5/57. Independent r12 replay attributes one miss to a ready-cache segment longer than the first scheduled prefill chunk and four to scored producer/rematerialization paths; exact eviction causality remains unproven. The branch verifier rejects each strict all-hot claim. The directory-rebuild source ran on NPU in r12, but its causal effect is not isolated and no same-identity no-cache control exists. Current main requires activation but lacks the per-scored-request join; branch repair is unintegrated. No paired HYPIC quality or performance verdict follows.",
-  "next_gate": "Prospectively choose whether the next original-protocol full pair claims every scored request is hot or evaluates deployed treatment with request-level hot/cold stratification. Preserve r11/r12 as strict stress fails. On actually idle physical NPU0-3, run a matching 0.85 control, full 2048-token paired quality, three-round performance and isolation. Replay the integrated main Skill before upgrading acceptance; never reuse the 0.9 baseline.",
+  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. Hot-cohort quality also falls descriptively, so cold fallback is not a complete explanation. Current main lacks the branch's per-scored-request proof wording, and the c8 LongBench-v2-only task does not validate the default GSM8K/c32 ruler or deterministic canary. No full Skill, paper, or performance acceptance follows.",
+  "next_gate": "Complete and independently audit frozen six-phase performance without overriding r13 quality rejection. Isolate hot-path answer divergence and test any repair with a fresh matched source/control identity; integrate and replay main request-level proof requirements. Validate missing default-ruler dataset/canary conditions before upgrading this Skill case; never reuse the 0.9 baseline or r13 negative roots as a repaired pair.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
