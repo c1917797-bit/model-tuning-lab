@@ -300,4 +300,127 @@ class FirstFaultCapture(unittest.TestCase):
   except FileNotFoundError as error:
    _,row=self.capture(error)
    self.assertIn("independent original cause",row["traceback"]);self.assertIn("direct cause",row["traceback"])
+
+class OwnedExitLifecycle(unittest.TestCase):
+ """Real Linux short-lived Popen + raw /proc; Docker/SMI IO spies never grant NPU authority."""
+ BODY="import sys; print('ready',flush=True); sys.stdin.read(1)"
+ def spawn(self,body=None):
+  import subprocess,sys
+  argv=[sys.executable,"-B","-c",body or self.BODY]
+  child=subprocess.Popen(argv,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+  self.addCleanup(self.reap,child);self.assertEqual(child.stdout.readline().strip(),"ready")
+  ctl=types.SimpleNamespace(cid="/",child=child,child_label="canary",
+   child_started=host.utc(),expected_child_argv=argv,known_processes={},end=host.time.monotonic()+10)
+  # '/' is transparent container-IO fixture association only, never a Docker CID.
+  before=host.proc_snapshot(child.pid);frames=host.proc_frames(before)
+  proof=dict(pid=child.pid,start_ticks=frames[-1]["start_ticks"],argv=argv,
+   cgroup=before["reads"]["cgroup"]["text"],started_utc=ctl.child_started.isoformat())
+  host.remember_owned(ctl,proof,dict(path="/software-only/prior-live",sha256="a"*64))
+  return ctl,before,proof
+ def reap(self,child):
+  if child.poll() is None:child.terminate()
+  child.wait(timeout=3)
+  for value in (child.stdin,child.stdout,child.stderr):
+   if value is not None and not value.closed:value.close()
+ def release(self,ctl,reap=True):
+  ctl.child.stdin.write("x");ctl.child.stdin.flush()
+  if reap:ctl.child.wait(timeout=3)
+ def test_real_short_popen_observed_Z_with_exact_same_start(self):
+  ctl,before,_=self.spawn();self.release(ctl,False);end=host.time.monotonic()+3
+  while True:
+   after=host.proc_snapshot(ctl.child.pid);frames=host.proc_frames(after)
+   if frames and frames[-1]["state"]=="Z":break
+   self.assertLess(host.time.monotonic(),end);host.time.sleep(.005)
+  result=host.completed_owned_exit(ctl,ctl.child.pid,before,after)
+  self.assertEqual(result["terminal_state"],"Z");self.assertFalse(result["numerical_authority"])
+ def test_real_short_popen_absence_after_reap(self):
+  ctl,before,_=self.spawn();self.release(ctl)
+  result=host.completed_owned_exit(ctl,ctl.child.pid,before,host.proc_snapshot(ctl.child.pid))
+  self.assertEqual((result["terminal_state"],result["child_returncode"]),("absent",0))
+ def test_live_empty_argv_and_root_cgroup_never_qualifies(self):
+  ctl,before,_=self.spawn();after=host.proc_snapshot(ctl.child.pid)
+  after["reads"]["cmdline"]=dict(status="ok",hex="");after["reads"]["cgroup"]=dict(status="ok",text="0::/\n")
+  with self.assertRaises(ValueError):host.completed_owned_exit(ctl,ctl.child.pid,before,after)
+ def test_unknown_absent_pid_never_qualifies(self):
+  ctl,before,_=self.spawn();ctl.known_processes={};self.release(ctl)
+  with self.assertRaises(ValueError):host.completed_owned_exit(ctl,ctl.child.pid,before,host.proc_snapshot(ctl.child.pid))
+ def test_pid_reuse_start_mismatch_rejected(self):
+  ctl,before,_=self.spawn();self.release(ctl);altered=copy.deepcopy(before)
+  for key in ("stat_before","stat_after"):
+   row=altered["reads"][key];text=row["text"];end=text.rfind(")");fields=text[end+2:].split()
+   fields[19]=str(int(fields[19])+1);row["text"]=text[:end+2]+" ".join(fields)+"\n"
+  with self.assertRaises(ValueError):host.completed_owned_exit(ctl,ctl.child.pid,altered,host.proc_snapshot(ctl.child.pid))
+ def test_permission_error_not_disappearance(self):
+  ctl,before,_=self.spawn();self.release(ctl);after=host.proc_snapshot(ctl.child.pid)
+  after["reads"]["cmdline"]=dict(status="error",exception_type="PermissionError",errno=13,message="actual denial fixture")
+  with self.assertRaises(ValueError):host.completed_owned_exit(ctl,ctl.child.pid,before,after)
+ def test_phase_identity_cannot_borrow_canary(self):
+  ctl,before,_=self.spawn();self.release(ctl);ctl.child_label="matrix"
+  with self.assertRaises(ValueError):host.completed_owned_exit(ctl,ctl.child.pid,before,host.proc_snapshot(ctl.child.pid))
+ def test_different_popen_object_cannot_borrow_pid(self):
+  ctl,before,_=self.spawn();self.release(ctl);after=host.proc_snapshot(ctl.child.pid);pid=ctl.child.pid
+  ctl.child=types.SimpleNamespace(pid=pid,poll=lambda:0,returncode=0)
+  with self.assertRaises(ValueError):host.completed_owned_exit(ctl,pid,before,after)
+ def test_malformed_stat_fails_closed(self):
+  ctl,before,_=self.spawn();before["reads"]["stat_before"]=dict(status="ok",text="invalid original stat")
+  with self.assertRaises(ValueError):host.proc_frames(before)
+ def joint(self,ctl,proof):
+  from datetime import timedelta
+  records={}
+  def write(path,value):
+   ref=dict(path=str(path),sha256=host.hashlib.sha256(json.dumps(value,sort_keys=True).encode()).hexdigest())
+   records[ref["path"]]=copy.deepcopy(value);return ref
+  co=host.Joint.__new__(host.Joint);co.out=Path("/software-only");co.cards=[ctl];co.deadline=host.time.monotonic()+100
+  co.c=types.SimpleNamespace(write_new=write);co.nh=types.SimpleNamespace(H=types.SimpleNamespace(started=lambda value:value,timedelta=timedelta))
+  co.protected_check=lambda value:{"own_on_protected":False};co.resources=lambda initial=False:{}
+  ctl.card=4;ctl.canary_proofs=[];ctl.gate_proofs=[]
+  reader=lambda pid:dict(proof) if ctl.child.poll() is None else dict(proof,argv=[],cgroup="0::/")
+  ctl.h=types.SimpleNamespace(protected=lambda text:[],legacy=lambda:types.SimpleNamespace(process_rows=lambda text:[(4,0,ctl.child.pid)]),
+   idle_one=lambda text,card:None,gate_process=lambda pid:reader(pid))
+  def call(label,argv):
+   return dict(stdout="software-only SMI fixture" if label=="joint-smi" else "",observed_utc=host.utc().isoformat()),dict(path="/software-only/"+label,sha256="b"*64)
+  ctl.call=call
+  return co,records
+ def test_real_observe_keeps_prior_live_and_accepts_completed_exit_only(self):
+  ctl,before,proof=self.spawn();ctl.known_processes={};co,records=self.joint(ctl,proof)
+  with mock.patch.object(host,"holders",return_value=[]):
+   co.observe(ctl,"software-live");self.release(ctl);co.observe(ctl,"software-exit")
+  self.assertEqual(len(ctl.canary_proofs),1)
+  obs=[v for v in records.values() if "owned_exit_transitions" in v]
+  self.assertEqual(len(obs[-1]["owned_exit_transitions"]),1)
+  self.assertFalse(obs[-1]["owned_exit_transitions"][0]["numerical_authority"])
+  self.assertTrue(any("snapshot_after" in v for v in records.values()))
+ def test_real_observe_unknown_exit_still_refuses(self):
+  ctl,before,proof=self.spawn();ctl.known_processes={};co,records=self.joint(ctl,proof);self.release(ctl)
+  with mock.patch.object(host,"holders",return_value=[]):
+   with self.assertRaises(ValueError):co.observe(ctl,"unknown-exit")
+  self.assertEqual(ctl.canary_proofs,[]);self.assertTrue(any("snapshot_after" in v for v in records.values()))
+ def test_real_observe_foreign_live_still_refuses(self):
+  ctl,before,proof=self.spawn();ctl.known_processes={};co,records=self.joint(ctl,dict(proof,cgroup="FOREIGN"))
+  with mock.patch.object(host,"holders",return_value=[]):
+   with self.assertRaises(ValueError):co.observe(ctl,"foreign-live")
+  self.assertEqual(ctl.canary_proofs,[])
+ def test_actual_begin_resets_registry_before_new_popen(self):
+  tree=ast.parse((sc.ROOT/"shard_host.py").read_text())
+  begin=next(n for n in ast.walk(tree) if isinstance(n,ast.FunctionDef) and n.name=="begin")
+  reset=next(i for i,n in enumerate(begin.body) if isinstance(n,ast.Assign) and
+   isinstance(n.targets[0],ast.Attribute) and n.targets[0].attr=="known_processes")
+  creation=next(i for i,n in enumerate(begin.body) if isinstance(n,ast.Assign) and
+   isinstance(n.targets[0],ast.Attribute) and n.targets[0].attr=="child")
+  self.assertLess(reset,creation)
+ def test_completed_nonzero_child_not_promoted_by_transition(self):
+  import io
+  ctl,before,proof=self.spawn(self.BODY+"; sys.exit(1)");self.release(ctl)
+  exit_row=host.completed_owned_exit(ctl,ctl.child.pid,before,host.proc_snapshot(ctl.child.pid))
+  self.assertEqual(exit_row["child_returncode"],1);self.assertFalse(exit_row["numerical_authority"])
+  _,nh=SourceSeams().native();receipts=[]
+  c=types.SimpleNamespace(write_new=lambda p,v:receipts.append(v) or v,bound=lambda p,h:dict(path=str(p),sha256=h),sha=lambda p:"f"*64)
+  _,Card=host.controller_classes(types.SimpleNamespace(nh=nh,c=c))
+  obj=Card.__new__(Card);obj.child=ctl.child;obj.child_label="canary";obj.sf=io.StringIO();obj.ef=io.StringIO()
+  obj.canary_proofs=[proof];obj.gate_proofs=[];obj.out=Path("/software-only");obj.child_request=["software-only"]
+  obj.expected_child_argv=ctl.expected_child_argv;obj.child_started=ctl.child_started
+  obj.wrapper=lambda argv:argv;obj.so=Path("/software-only/stdout");obj.se=Path("/software-only/stderr")
+  with self.assertRaises(ValueError):obj.finish()
+  self.assertEqual(receipts[-1]["primary_error"],"actual child exit1")
+
 if __name__=="__main__":unittest.main()

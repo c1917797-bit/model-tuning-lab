@@ -153,6 +153,69 @@ def holders(cards):
    except (FileNotFoundError,ProcessLookupError):continue
    for card in sorted(hit):result.append(dict(physical=card,pid=int(p.name),cgroup=cg,stat=st,cmdline_sha256=hashlib.sha256(cmd).hexdigest()))
  return result
+def proc_snapshot(pid):
+ """Raw /proc evidence first; only disappearance is distinguishable from error."""
+ sc.need(type(pid) is int and pid>1,"actual positive observed PID")
+ root=Path("/proc")/str(pid);reads={}
+ for key,name in (("stat_before","stat"),("cmdline","cmdline"),("cgroup","cgroup"),("stat_after","stat")):
+  try:
+   value=(root/name).read_bytes()
+   reads[key]=dict(status="ok",hex=value.hex()) if key=="cmdline" else dict(status="ok",text=value.decode("utf-8"))
+  except (FileNotFoundError,ProcessLookupError) as error:
+   reads[key]=dict(status="missing",exception_type=type(error).__name__,errno=error.errno)
+  except OSError as error:
+   reads[key]=dict(status="error",exception_type=type(error).__name__,errno=error.errno,message=str(error))
+ return dict(pid=pid,observed_unix_ns=time.time_ns(),reads=reads)
+def proc_frames(snapshot):
+ sc.need(set(snapshot["reads"])=={"stat_before","cmdline","cgroup","stat_after"},"complete raw proc capture")
+ for row in snapshot["reads"].values():
+  sc.need(row["status"] in ("ok","missing"),"permission/unreadable actual process must fail closed")
+ frames=[]
+ for key in ("stat_before","stat_after"):
+  row=snapshot["reads"][key]
+  if row["status"]=="missing":continue
+  text=row["text"];end=text.rfind(")");fields=text[end+2:].split()
+  sc.need(end>text.find("(")>=1 and int(text[:text.find("(")].strip())==snapshot["pid"] and
+   len(fields)>=20 and len(fields[0])==1 and fields[0] in "RSDZTtWXxIKP" and
+   fields[19].isdigit() and int(fields[19])>0,"strict actual stat PID/state/start_ticks")
+  frames.append(dict(pid=snapshot["pid"],state=fields[0],start_ticks=int(fields[19]),raw_stat=text))
+ return frames
+def child_association(ctl):
+ if ctl is None or ctl.child is None:return None
+ return dict(cid=ctl.cid,stage=ctl.child_label,child_host_pid=ctl.child.pid,
+  child_started_utc=ctl.child_started.isoformat(),expected_argv=list(ctl.expected_child_argv))
+def remember_owned(ctl,proof,ref):
+ """Called ONLY after the original live ownership/argv/startedtime predicates."""
+ key=(proof["pid"],proof["start_ticks"])
+ ctl.known_processes[key]=dict(child=ctl.child,association=child_association(ctl),
+  live_proof=dict(proof),live_raw_ref=ref)
+def owned_exit_identity(ctl,pid,before,after):
+ """Not permission by itself: caller must also prove associated child completed."""
+ sc.need(ctl is not None and ctl.child is not None and ctl.child_label in ("canary","matrix"),
+  "unknown actual PID has no current owned child")
+ old=[v for (p,_),v in ctl.known_processes.items() if p==pid]
+ sc.need(len(old)==1,"exit transition requires one previously validated same-PID/start")
+ known=old[0];p=known["live_proof"];association=child_association(ctl)
+ sc.need(known["child"] is ctl.child and known["association"]==association and
+  p["argv"]==ctl.expected_child_argv and ctl.cid in p["cgroup"],
+  "exit transition cannot borrow another child/phase/CID/argv")
+ frames=proc_frames(before)+proc_frames(after)
+ sc.need(before["pid"]==after["pid"]==p["pid"] and
+  all(f["start_ticks"]==p["start_ticks"] for f in frames),"PID reuse or start identity drift")
+ last=after["reads"]["stat_after"]
+ sc.need(last["status"]=="missing" or (proc_frames(after) and proc_frames(after)[-1]["state"]=="Z"),
+  "live process, including live empty argv/cgroup, is not an exit transition")
+ return known
+def completed_owned_exit(ctl,pid,before,after):
+ known=owned_exit_identity(ctl,pid,before,after)
+ sc.need(ctl.child.poll() is not None,"owned exit transition requires exact associated child completion")
+ return dict(schema="sparq.owned-process-exit-transition/v1",pid=pid,
+  start_ticks=known["live_proof"]["start_ticks"],association=known["association"],
+  prior_live_raw=known["live_raw_ref"],prior_live_proof=known["live_proof"],
+  child_returncode=ctl.child.returncode,child_completed=True,
+  terminal_state="absent" if after["reads"]["stat_after"]["status"]=="missing" else "Z",
+  numerical_authority=False)
+
 class Joint:
  def __init__(self,a,own,manifest,c,nh,source,files):
   self.a=a;self.out=a.output;self.packet_source=own;self.manifest=manifest;self.c=c;self.nh=nh;self.source=source;self.files=files
@@ -200,7 +263,7 @@ class Joint:
  def observe(self,caller,label,expected=None,initial=False):
   raw,sr=caller.call("joint-smi",[self.nh.H.SMI,"info"])
   text=raw["stdout"];record=dict(label=label,observed_utc=raw["observed_utc"],smi=sr,npu_smi=text,
-   protected0_3=caller.h.protected(text),actual_compute=[],declared_only_containers=[])
+   protected0_3=caller.h.protected(text),actual_compute=[],owned_exit_transitions=[],declared_only_containers=[])
   before=self.c.write_new(self.out/("joint-raw-"+str(time.time_ns())+".json"),record)
   record["protected_boundary"]=self.protected_check(record["protected0_3"])
   rows=caller.h.legacy().process_rows(text);proofs_by={v.card:[] for v in self.cards}
@@ -209,13 +272,46 @@ class Joint:
    live=[r for r in rows if r[0]==card];ctl=bycard.get(card)
    if not live:caller.h.idle_one(text,card)
    for physical,chip,pid in live:
-    proof=self.nh.H.started(caller.h.gate_process(pid))
-    self.c.write_new(self.out/("joint-actual-process-"+str(time.time_ns())+".json"),dict(physical=card,chip=chip,**proof))
-    sc.need(ctl is not None and chip==0 and ctl.cid in proof["cgroup"] and ctl.child is not None and
-     ctl.child_label in ("canary","matrix") and proof["argv"]==ctl.expected_child_argv,
-     "actual foreign PID/UDA or non-matching this owned card child")
+    proc_before=proc_snapshot(pid)
+    before_ref=self.c.write_new(self.out/("joint-process-before-"+str(time.time_ns())+".json"),
+     dict(physical=card,chip=chip,association=child_association(ctl),snapshot=proc_before))
+    proof=None;proof_error=None
+    try:proof=self.nh.H.started(caller.h.gate_process(pid))
+    except (FileNotFoundError,ProcessLookupError) as error:proof_error=repr(error)
+    proc_after=proc_snapshot(pid)
+    process_ref=self.c.write_new(self.out/("joint-actual-process-"+str(time.time_ns())+".json"),
+     dict(physical=card,chip=chip,**(proof or {}),association=child_association(ctl),before=before_ref,
+      snapshot_after=proc_after,proof=proof,proof_error=proof_error))
+    frames=proc_frames(proc_before)+proc_frames(proc_after)
+    match=(ctl is not None and chip==0 and proof is not None and ctl.cid in proof["cgroup"] and
+     ctl.child is not None and ctl.child_label in ("canary","matrix") and proof["argv"]==ctl.expected_child_argv and
+     all(all(r["status"]=="ok" for r in snap["reads"].values()) and
+      proc_frames(snap)[-1]["state"]!="Z" and ctl.cid in snap["reads"]["cgroup"]["text"] and
+      [os.fsdecode(v) for v in bytes.fromhex(snap["reads"]["cmdline"]["hex"]).split(bytes([0])) if v]==ctl.expected_child_argv
+      for snap in (proc_before,proc_after)))
+    if not match:
+     # A stale SMI row is NOT ignored. Only prior exact current-child ownership,
+     # same start identity, observed absence/Z and actual child completion qualify.
+     sc.need(chip==0,"foreign actual chip/UDA")
+     owned_exit_identity(ctl,pid,proc_before,proc_after)
+     if ctl.child.poll() is None:
+      budget=min(1.0,ctl.end-time.monotonic(),self.deadline-sc.CLEANUP_SECONDS-time.monotonic())
+      sc.need(budget>0,"exit completion cannot renew lease/cleanup reserve")
+      ctl.child.wait(timeout=budget)
+     terminal=proc_snapshot(pid)
+     terminal_ref=self.c.write_new(self.out/("joint-process-exit-"+str(time.time_ns())+".json"),
+      dict(physical=card,chip=chip,association=child_association(ctl),before=before_ref,
+       observation=process_ref,snapshot_after=terminal,child_returncode=ctl.child.poll()))
+     transition=completed_owned_exit(ctl,pid,proc_before,terminal)
+     record["owned_exit_transitions"].append(dict(transition,physical=card,chip=chip,
+      raw_before=before_ref,raw_after=terminal_ref,process_observation=process_ref))
+     continue
+    sc.need(frames and all(f["start_ticks"]==proof["start_ticks"] for f in frames),
+     "actual live /proc start identity differs from original process proof")
     sc.need(datetime.fromisoformat(proof["started_utc"])>=ctl.child_started-self.nh.H.timedelta(seconds=1),"real startedtime not another dispatch")
-    item=dict(physical=physical,chip=chip,stage=ctl.child_label,**proof,smi=sr,raw_observation=before,observed_utc=raw["observed_utc"])
+    remember_owned(ctl,proof,process_ref)
+    item=dict(physical=physical,chip=chip,stage=ctl.child_label,**proof,smi=sr,raw_observation=before,
+     raw_process_before=before_ref,raw_process_after=process_ref,observed_utc=raw["observed_utc"])
     proofs_by[card].append(item);record["actual_compute"].append(item)
   fds=holders(sc.CARDS);record["actual_device_fd_holders"]=fds
   for fd in fds:
@@ -258,7 +354,7 @@ def controller_classes(co):
   def __init__(self,a,part):
    super().__init__(a);self.card=part["physical"];self.part=part;self.name="sparq-disjoint-%d-"%self.card+co.out.name
    self.created_monotonic=co.created;self.deadline=co.deadline;self.cpu=dict(guest_cpu=co.resources_plan["guest_cpus"][part["shard_id"]])
-   self.expected_child_argv=None;self.so=None;self.se=None;self.end=None;self.child_ref=None
+   self.expected_child_argv=None;self.so=None;self.se=None;self.end=None;self.child_ref=None;self.known_processes={}
   def mounts(self,artifacts=None):return closure_mounts(self,co,nh)
   def resources(self,initial=False):return co.resources(initial)
   def rss(self):return co.rss()
@@ -297,6 +393,7 @@ def controller_classes(co):
    c.write_new(self.out/"guest-cgroup-cpu.json",guest);return ir
   def begin(self,label,args,limit):
    sc.need(self.child is None or self.child.poll() is not None,"one active child per owned card")
+   self.known_processes={} # Never inherit canary or a prior matrix dispatch identity.
    self.child_started=utc();self.child_label=label;self.child_request=self.h.legacy().exec_argv(self.cid,args)
    self.expected_child_argv=[c.PY,"-B",*args];self.end=time.monotonic()+min(limit,self.remaining(cap=5280))
    self.so=self.out/(label+".stdout");self.se=self.out/(label+".stderr")
