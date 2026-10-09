@@ -104,8 +104,16 @@ class SkillCaseTests(unittest.TestCase):
         item = json.loads(path.read_text())
         self.assertTrue(item["observed"]["r12_controller_bind_identity_enforced"])
         self.assertFalse(item["observed"]["r12_independent_raw_docker_bind_receipt_retained"])
+        self.assertTrue(item["observed"]["r13_actual_container_bind_list_retained"])
+        self.assertTrue(item["observed"]["r13_in_container_python_digest_verified"])
+        self.assertTrue(item["observed"]["r13_same_identity_full_2048_quality_pair_complete"])
+        self.assertFalse(item["observed"]["prospective_source_map_frozen_before_c12060c_patch"])
         self.assertFalse(item["observed"]["c3_cross_replica_implemented"])
-        self.assertFalse(item["observed"]["full_2048_token_paired_quality_complete"])
+        self.assertTrue(item["observed"]["full_2048_token_paired_quality_complete"])
+        self.assertEqual(item["observed"]["r13_deployed_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertEqual(item["observed"]["r13_strict_four_worker_hot_requests"],
+                         [368, 381])
 
     def test_architecture_fit_retrospective_is_not_prospective_pass(self) -> None:
         path = cases.CASES / "ascend-architecture-fit.json"

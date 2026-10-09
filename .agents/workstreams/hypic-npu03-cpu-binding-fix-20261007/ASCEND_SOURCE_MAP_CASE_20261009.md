@@ -2,6 +2,12 @@
 
 Status: **partial-evidence**. This is an offline source-seam replay, not a new NPU run or a paper-complete verdict. Exact-main Skill is `7aac2fc220ef5191b0de224615fc2cb17de347ce` at `ead80810`; this branch has the same blob. The target is the 64-layer Qwen3.5-architecture BF16 checkpoint (48 linear/16 full-attention layers) served as one TP4 replica on physical NPU0–3.
 
+2026-10-09 addendum: the r12 limitations below are historical, not the latest
+serving-source state. The later r13 full pair has a replayable actual-container
+source attestation. This case stays partial because the mapping was reconstructed
+after implementation; it does not prove that the Skill's prospective
+source-map gate chose the seam before the patch.
+
 ## Mechanism, measured opportunity, and layer
 
 HYPIC C1 composes position-independent linear-attention segment states; C2 reuses and relocates full-attention KV with seam repair; C3 scatters cold segment computation across independent replicas and combines results. The historical same-lane six-unit performance audit shows a bounded C1/C2 opportunity (weighted TPOT median 77.5641 to 60.2237 ms/token, 22.356% lower), but its quality decision is `not-measured`. The later explicit-segment r12 diagnostic reached four-worker hot proof on 52/57 scored responses, not a full pair. Neither result proves C3 or adoption.
@@ -22,10 +28,36 @@ The smallest prior change `c12060c` rebuilt an evicted scheduler-directory entry
 
 The r12 start receipt names the clean host plugin root, `c12060c`, image digest and NPU0–3. The frozen controller `binding_off_quality.py` requires that selected plugin root be a clean checkout at the requested commit, replaces the exact `/source-hypic:ro` bind, and compares actual Docker-inspected binds/environment/command during ownership checks. The service log shows API process, engine and all four workers importing `/opt/hypic/hypic_vllm_ascend/__init__.py`, and reports C3.1–C3.6 missing. These are stronger than merely finding an upstream checkout.
 
-However, the removed r12 container did **not** retain a separate raw `docker inspect` bind receipt or an in-container source-tree hash. The controller's checks and runtime import path support the source selection, but the original bind bytes cannot be independently reconstructed now. A later controller change now records actual binds and compares host/container Python source-tree digests at service health; its offline tests pass, but no live NPU run has exercised it yet. The r12 startup log itself is not a complete source-to-binary attestation.
+However, the removed r12 container did **not** retain a separate raw `docker inspect` bind receipt or an in-container source-tree hash. The controller's checks and runtime import path support the source selection, but the original bind bytes cannot be independently reconstructed now. The r12 startup log itself is not a complete source-to-binary attestation.
+
+The later r13 serving-source attestation *was* exercised on physical NPU0–3.
+The HYPIC-only service-start receipt hashes the actual-container attestation
+(`d2169d9b…a92a687`). It records the selected `c12060c` source commit,
+image digest, actual read-only `/source-hypic` bind, copy/editable-install
+command, `/opt/hypic/hypic_vllm_ascend/__init__.py` import path, and a
+32-file container Python tree digest
+`0c6e64ac…37e3633` matching the clean host checkout. The independent r13
+auditor checks these against the source tree and start receipt. This retains
+the controller-captured actual bind list, not the complete raw `docker inspect`
+bytes. The same
+identity no-cache/HYPIC 127×3, max-2048 pair is complete and evidence-valid,
+but deployed quality is `REJECT_OR_QUALIFY` (230/381 versus 219/381);
+strict four-worker hot coverage is 368/381 and C3 remains unimplemented.
+Source identity proof is not proof of technical adoption, nor does a Python
+tree digest attest every compiled binary or transitive runtime dependency.
 
 ## Next bounded implementation and rollback
 
-Before a new test, freeze the decision rule and paired no-cache/HYPIC contract. The first candidate remains at the scheduler/cache materialization seam: explain and unit-test the five r12 cold requests, then change one admission/eviction rule with a failing-to-passing CPU regression. Keep `c12060c` as rollback and retain the disabled-control path; new source needs a real-weight canary and a same-identity 0.85 no-cache control before scored quality or performance. Run only when physical NPU0–3 have no real foreign processes; the active-idle guard must fail closed. Never use NPU4–7 or stop another workload. For a genuinely lower-level bottleneck, hand off to `ascend-cannbot-profiler` first.
+The missing **prospective source-map gate** is a new, independently scoped
+minimal change: freeze the measured bottleneck, exact source seam, one
+falsifiable implementation hypothesis, canary, and rollback *before* editing;
+then use a failing-to-passing focused regression and inspect the actual
+serving-source identity. The r13 raw source proof can be reused as historical
+evidence, but its quality pair is rejected and cannot certify any future
+changed source. Do not rerun the completed r13 pair merely to validate a
+source-map note. If a new candidate is eventually proposed, preregister its
+own quality/performance decision and use only actually idle physical NPU0–3;
+never use NPU4–7 or stop another workload. For a genuinely lower-level
+bottleneck, hand off to `ascend-cannbot-profiler` first.
 
-Replay: `python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_source_map_case.py`. It checks frozen source symbols, source identity, raw start/log hashes, C3 gap, case boundaries, and current main blobs; it does not prove a full-quality pair or independently replay a removed container.
+Replay: `python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_source_map_case.py`. It checks frozen source symbols, r12 historical receipts, r13 immutable attestation/start/audit hashes and host Python digest, C3 gap, case boundaries, and current main blobs. It does not recreate the removed container or verify compiled binary identity.

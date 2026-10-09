@@ -4,36 +4,42 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Map HYPIC C1/C2/C3 mechanisms and measured NPU0-3 opportunity to the actually selected vLLM-Ascend derivative seams and identify retained serving-source attestation gaps",
+  "task": "Map HYPIC C1/C2/C3 mechanisms and measured NPU0-3 opportunity to vLLM-Ascend seams; distinguish the historical r12 source-proof gap from the later r13 live source attestation",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "7aac2fc220ef5191b0de224615fc2cb17de347ce",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "Read-only retrospective source and r12 runtime-receipt audit of one Qwen3.5-architecture TP4 vLLM-Ascend service; no new NPU use",
+  "environment_scope": "Read-only retrospective source and r12/r13 immutable runtime-receipt audit of one Qwen3.5-architecture TP4 vLLM-Ascend service; no new NPU use",
   "observed": {
     "target_layer": "vllm_ascend_runtime_plugin_scheduler_cache_and_attention",
     "r12_plugin_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
     "r12_controller_bind_identity_enforced": true,
     "r12_runtime_module_import_logged": true,
     "r12_independent_raw_docker_bind_receipt_retained": false,
+    "r13_actual_container_bind_list_retained": true,
+    "r13_in_container_python_digest_verified": true,
+    "r13_same_identity_full_2048_quality_pair_complete": true,
+    "prospective_source_map_frozen_before_c12060c_patch": false,
     "upstream_author_git_commit_pinned": false,
     "c1_c2_single_instance_seams_mapped": true,
     "c3_cross_replica_implemented": false,
     "r12_four_worker_hot_scored_responses": 52,
     "r12_scored_responses": 57,
-    "full_2048_token_paired_quality_complete": false,
+    "full_2048_token_paired_quality_complete": true,
+    "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_strict_four_worker_hot_requests": [368, 381],
     "case_integrated_in_main": false
   },
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_SOURCE_MAP_CASE_20261009.md",
-      "sha256": "a0ae2c4a2d847186d876510c015f148b7e64e25786b183a15aaaedbe528cf8a2"
+      "sha256": "90949cc60c25d46488863b814622b31d646baf08e228364347f8b414da17da4b"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_source_map_case.py",
-      "sha256": "a7c2219e046a1f9f619059fc9c025c8073bc1563bb395e6d30af1d043973afef"
+      "sha256": "90ce4f8dfc38a41631dfe6829a032765a6e3de3ccc652d04ee403c2c88f20818"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_quality.py",
@@ -47,10 +53,14 @@
   "external_raw_receipts": {
     "service_start_sha256": "5cb01c734f77476b820e0484170c048ca1dcdd1917ec09abf04099be4bfda076",
     "service_log_sha256": "6d70834a456f91a4ae5b34577805c296f8500e11c2569302d321ccb88efe02a1",
-    "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1"
+    "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1",
+    "r13_candidate_service_start_sha256": "99249b282c99f33f2e224287cba9319695ede3233f2f396e9f335eefaf514201",
+    "r13_candidate_source_attestation_sha256": "d2169d9b36561aa59c1fdcded08df9c98f7fee6a145e7aca1290986c1a92a687",
+    "r13_candidate_arm_result_sha256": "f4ef1e4f3c2367b41121a6f49209d4d229adaa8eecdb52b050cfad1ebc97329a",
+    "r13_dual_quality_audit_sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b"
   },
   "replayable_regression_recorded": true,
-  "boundary": "Retrospective source mapping and controller/runtime-import receipts do not recover a separate raw Docker bind inspect or in-container source hash. C3 is absent, r12 has only 52/57 strict hot coverage and no matched same-identity no-cache control or full 2048-token quality pair. Do not claim paper-complete reproduction, causal benefit of c12060c, or main integration.",
-  "next_gate": "Persist raw Docker bind inspect and in-container source digest on the next actual-idle NPU0-3 full pair. Freeze prospective hot/cold decision rule, create a failing-to-passing scheduler/cache regression for r12 cold requests, then canary and pair with a same-identity 0.85 control.",
-  "drift_trigger": "Revalidate if main Skill or registry, plugin source, serving image/command/bind, model, r12 raw receipt or future experiment contract changes."
+  "boundary": "r12 independently retained neither actual Docker binds nor a source digest; r13 later retained the controller-captured actual bind list and in-container Python digest, which an independent auditor replay-verified. The complete raw docker inspect bytes were not retained. This retrospectively proves the C1/C2 source seam and serving identity, not that the source-map Skill prospectively selected the minimal patch before editing. C3 is absent and the r13 full pair is quality-rejected with 368/381 strict hot coverage. Do not claim paper-complete reproduction, causal benefit of c12060c, compiled binary attestation, or main integration.",
+  "next_gate": "For a new independently scoped change, freeze the measured bottleneck, exact seam, minimal falsifiable hypothesis, canary and rollback before editing; prove a focused failing-to-passing regression and actual serving-source identity. Do not rerun the completed r13 pair solely to close a source-map documentation gate.",
+  "drift_trigger": "Revalidate if main Skill or registry, plugin source, serving image/command/bind, model, r12/r13 raw receipts or future experiment contract changes."
 }
