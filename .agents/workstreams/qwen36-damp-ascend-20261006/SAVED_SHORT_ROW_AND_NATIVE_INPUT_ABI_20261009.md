@@ -66,6 +66,14 @@ No new NPU/E2E/task acceptance, no new performance/accuracy result.
 
 ## Reusable verification
 
+Independent0195 actually completed the source audit and12 regressions in
+9.067s under1CPU/256MiB; source21 hashes matched MF57630fec... . Uniform
+40x16384 plans were equivalent; native retry fixtures can reach the DP's lower
+point on multidepth inputs. All source-only runtime/timing authority remained
+false. This excludes an independent-placement claim for the current uniform
+control, not every workload or the paper. Do not run an equivalent E2E pair.
+
+
 Trigger: a source-bound saved-input probe rejects its input domain before
 device execution. Inspect all actual rows and the source's short path, rather
 than inferring the failing subpredicate from a combined error message. Bind

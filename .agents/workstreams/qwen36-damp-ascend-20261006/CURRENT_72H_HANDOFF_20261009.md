@@ -1,5 +1,21 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Latest distinct-control source decision — 2026-10-09
+
+Independent0195 actually completed0/9.067s: MF57630fec... full21 source refs,
+real source-audit entry and all12 software tests passed (6.965s). CPU1/256MiB;
+no Tensor/Docker/NPU actor. Raw whole original retained outside Git:
+ /cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN_DISTINCT_FAIR_SOURCE_0195_ORIGINAL_20261009.json
+Uniform forty16384-shared-prefix source fixture chooses identical placement
+in author-DP and common HYPIC; no independent algorithm delta for that arm.
+Different multidepth first-cold plans are source-only, dynamic native retries
+can choose lower checkpoints; actual work/performance remains unproved.
+Do not treat SparsePrefix as an independent-gain ready backup for the uniform
+formal protocol or claim this is a paper-wide/NPU performance no-go.
+Common OFF/ON coexistence and actual full device lifecycle remain pending.
+SparQ main short-domain successor and Ada-KV next independent candidate
+prepare API-onlyCPU0; MAIN has no live NPU job. Fixed clocks unchanged.
+
 ## Latest terminal correction and short-domain evidence — 2026-10-09
 
 0172 is terminal FAILED exit1/69.371s, NOT running; no NPU was created.
