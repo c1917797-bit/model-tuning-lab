@@ -34,6 +34,8 @@ class HandoffTests(unittest.TestCase):
 
     def test_task_and_global_boundary(self) -> None:
         task = json.loads((HERE / "task.json").read_text(encoding="utf-8"))
+        self.assertEqual(task["execution_state"], "in-progress")
+        self.assertEqual(task["integration_state"], "not-ready")
         self.assertEqual(task["previous_attempt"]["campaign"], "cache10r10")
         self.assertIn("366/381", task["previous_attempt"]["result"])
         self.assertEqual(task["prior_stress_attempt"]["campaign"], "cache10r11")
