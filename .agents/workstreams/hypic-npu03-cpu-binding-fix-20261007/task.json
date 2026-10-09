@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r13_quality_rejected_six_phase_performance_valid_prefill_decode_profiler_valid_attribution_pending",
+  "state": "r13_quality_rejected_six_phase_performance_valid_r14_c1_diagnostic_complete_attribution_pending",
   "execution_state": "in-progress",
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
@@ -995,7 +995,7 @@
   },
   "r14_variability_diagnostic": {
     "preregistration": "HYPIC_CACHE10R14_VARIABILITY_PREREGISTRATION_20261009.md",
-    "status": "preregistered; no device arm started",
+    "status": "both arms terminal exit 0, 3/3 samples and 9/9 scored each; independent paired and post-run read-only replay valid; exact owned resources released",
     "sample_indexes": [0, 55, 48],
     "repetitions_per_arm": 3,
     "client_concurrency": 1,
@@ -1003,7 +1003,20 @@
     "arm_order": ["no-cache", "hypic-only"],
     "baseline_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r14-variability-baseline",
     "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r14-variability-hypic",
+    "baseline_controller_operation": "exec-000000000000068d",
+    "candidate_controller_operation": "exec-000000000000069e",
+    "baseline_arm_result_sha256": "bfdb237a524a43b436b1b0584b04c4d76e0726eb72d3668e2b43f6ff70aa1c2f",
+    "candidate_arm_result_sha256": "f9ea52e709cf71a2d8a432aa61c49b876a74c146071786b54e3a021ae137c669",
+    "paired_audit_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hotpath-quality-cache10r14-variability-audit.json",
+    "paired_audit_sha256": "c69692be92d70168a58fd896828a1ecadbe9bd4e0177200b728e2f23871b4cf4",
+    "terminal_report": "HYPIC_CACHE10R14_VARIABILITY_TERMINAL_AUDIT_20261009.md",
+    "post_run_replay": "verify_r14_variability_terminal.py",
+    "correct_baseline_candidate": [3, 3],
+    "candidate_four_worker_hot_requests": [9, 9],
+    "r13_c8_selected_exact_text_pairs_baseline_candidate": [1, 0],
+    "r14_c1_exact_text_pairs_baseline_candidate": [1, 3],
+    "causal_root_proven": false,
     "scope": "diagnostic only; immutable r13 quality remains REJECT_OR_QUALIFY"
   },
-  "next_action": "Do not rerun completed HYPIC phases or the now-valid Prefill/Decode profiler roots. Skill cases must retain provenance and the frozen HYPIC quality rejection. First run the r14 offline admission and regression checks, commit and push its prospective protocol; only then inspect exact source, absent roots, physical NPU0-3 processes and port 8223 through a fresh direct route. If actually idle, run the preregistered c1 no-cache arm first, then only after independent validity and fresh idle checks run the HYPIC-only arm; never use NPU4-7 or stop external work. Audit the pair without promoting the small diagnostic to formal quality acceptance, then continue main Skill integration review."
+  "next_action": "Do not rerun completed HYPIC phases: immutable r13/r14 quality, six-phase performance, or Prefill/Decode profiler roots. Skill cases must retain provenance and the frozen r13 REJECT_OR_QUALIFY and strict hot FAIL. Replay the terminal r14 read-only verifier; review a prospective causal design that separately controls concurrency, campaign size/order and cache residence before any further device work. Continue main Skill integration and missing default-ruler acceptance gates; never use NPU4-7 or stop external work."
 }

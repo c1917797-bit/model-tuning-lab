@@ -47,7 +47,7 @@
 - Retry19 terminally failed before health/scoring: its continuous guard captured foreign PID 1731309 on physical NPU2 twice, with 46 total samples and zero probe errors. It produced zero scored requests; only retry19's exact owned service container was removed. The five receipts replay-pass `verify_retry19_environmental_failure.py`; see `HOTPATH_CACHE10PERF_RETRY19_TERMINAL_AUDIT_20261009.md`. This is environmental, not a HYPIC verdict.
 - Retry20 for the HYPIC-only/repeat3 sixth phase terminally failed before health/scoring: guard captured foreign PID 1890601 on physical NPU3 (container `efc5e45e…`), with 36 samples and zero probe errors. It produced zero scored requests/metrics; only the exact owned service was removed. Replay audit: `HOTPATH_CACHE10PERF_RETRY20_TERMINAL_AUDIT_20261009.md`; verifier `verify_retry20_environmental_failure.py`. A 14:38 UTC follow-up still saw external PIDs 1890601 and 1920829 on NPU3; port 8223 was free. Keep monitoring, do not stop or modify the external task, and do not launch until a new direct-route snapshot proves physical NPU0–3 and 8223 idle.
 - Paired LongBench-v2 explicit-boundary max-2048 quality is complete and valid: no-cache 230/381, HYPIC 219/381, delta -2.8871 percentage points (`REJECT_OR_QUALIFY`). Strict four-worker hot coverage is 368/381 and fails universal mechanism attribution. Read-only matched-hot repetition pairs show candidate answer variability exceeds baseline; see `HYPIC_R13_RESPONSE_VARIABILITY_DIAGNOSIS_20261009.md`. This is not causal proof or a reclassification.
-- r14 c1 three-length × three-repeat on/off variability diagnostic is preregistered in `HYPIC_CACHE10R14_VARIABILITY_PREREGISTRATION_20261009.md`; no device arm has started. It cannot replace r13 quality.
+- r14 c1 three-length × three-repeat on/off diagnostic is terminal and replay-valid: 9/9 responses per arm, 9/9 candidate four-worker hot, 3/9 correct in each arm. Selected candidate exact-text pairs are 0/9 at r13 c8 versus 3/9 at r14 c1; the bundled campaign/concurrency/cache-history change is not causal proof. See `HYPIC_CACHE10R14_VARIABILITY_TERMINAL_AUDIT_20261009.md`; r13 quality remains rejected.
 - All six matched performance phases have an independent valid audit, and all
   120 candidate scored requests have four-worker hot-path proof. Retries15-20
   remain immutable environmental isolation failures, not HYPIC performance
@@ -91,9 +91,9 @@ the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 4. Current Action
 
-Do not relaunch any frozen r13 quality, matched-performance, Prefill, or
-Decode phase. The separate preregistered r14 c1 variability diagnostic may
-run only after its source/tests are pushed and fresh NPU0–3 admission passes.
+Do not relaunch frozen r13/r14 quality, matched-performance, Prefill, or
+Decode phases. Replay the terminal r14 diagnostic without changing the r13
+quality rejection; no single variability root cause has been proven.
 The r6 Decode root is terminal and immutable. Replay both profiler audits,
 record the parser-environment lesson, and analyze the trace without treating
 overlapping kernel sums as removable wall time. No CANN/HCCL root cause is
@@ -126,6 +126,7 @@ python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascen
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_prefill.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_decode.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r14_variability_terminal.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
 git diff --check

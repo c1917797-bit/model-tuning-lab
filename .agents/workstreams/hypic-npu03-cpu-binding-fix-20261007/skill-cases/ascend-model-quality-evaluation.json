@@ -64,6 +64,18 @@
     "r13_response_variability_causality_proven": false,
     "r13_length_limit_causality_proven": false,
     "r13_quality_repair_or_full_skill_acceptance_proven": false,
+    "r14_c1_diagnostic_complete_and_independently_replay_valid": true,
+    "r14_c1_selected_indexes": [0, 55, 48],
+    "r14_c1_scored_responses_per_arm": 9,
+    "r14_c1_correct_baseline_candidate": [3, 3],
+    "r14_c1_candidate_four_worker_hot_requests": [9, 9],
+    "r13_c8_same_selected_candidate_four_worker_hot_requests": [9, 9],
+    "r13_c8_selected_exact_within_arm_pairs_baseline_candidate": [1, 0],
+    "r14_c1_selected_exact_within_arm_pairs_baseline_candidate": [1, 3],
+    "r13_c8_selected_median_common_prefix_chars_baseline_candidate": [416, 85],
+    "r14_c1_selected_median_common_prefix_chars_baseline_candidate": [1229, 1901],
+    "r14_c1_concurrency_or_cache_residency_causal_root_proven": false,
+    "r14_c1_changes_r13_full_quality_verdict": false,
     "main_skill_integrated": false
   },
   "evidence": [
@@ -146,10 +158,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r13_response_variability.py",
       "sha256": "d8abb3b7aba8bdfc0cfd0c0b10e48e0ae8a925bc740a5d2c902e3170f745c2b2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_CACHE10R14_VARIABILITY_TERMINAL_AUDIT_20261009.md",
+      "sha256": "e5df5800a565844cc66578f5d6ad4570a61f338c11b1feb868ed6f85c2b343aa"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r14_variability_terminal.py",
+      "sha256": "a4504fb35c326ca835087b85ff856c4d45834577caf1bd94d754061fc86f3606"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. Hot-cohort quality falls descriptively; the new read-only matched-hot within-arm comparison also finds more candidate answer variability, but proves no causal mechanism. Current main lacks the branch's per-scored-request proof wording, and the c8 LongBench-v2-only task does not validate the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
-  "next_gate": "Use a fresh prospectively matched on/off long-output canary, if device work is justified and authorized, to discriminate hot-path answer variability without changing the frozen r13 result. Integrate and replay main request-level proof requirements and validate missing default-ruler dataset/canary conditions before upgrading this Skill case. Never reuse the 0.9 baseline or r13 negative roots as a repaired pair.",
+  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, and selected candidate exact repetition pairs 3/9 versus 0/9 on the same r13 c8 indexes. Campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated and r13 is not reclassified. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
+  "next_gate": "Integrate and replay main request-level proof requirements, then validate missing default-ruler dataset/canary conditions before upgrading this Skill case. A further device test needs a prospective design that isolates concurrency from campaign size, ordering and cache residency; do not rerun r13/r14 roots or turn the selected r14 result into formal quality acceptance.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
