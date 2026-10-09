@@ -174,3 +174,21 @@ then run the complete same-image prerequisite before taking cards. Original
 failure remains failed; software/ABI success is not NPU/model/E2E authority.
 
 Case: [saved short row and actual input ABI](../../../workstreams/qwen36-damp-ascend-20261006/SAVED_SHORT_ROW_AND_NATIVE_INPUT_ABI_20261009.md).
+
+## Distinguish score arithmetic from reduction shape on the actual NPU
+
+Use the same source-bound saved full input for padded/batched and cropped
+per-request paths, preserving every short row and invalid scratch slot. A
+128-slot scratch with39live entries has89invalid entries; fixture/manifest
+arithmetic must agree with the actual masks. Freeze an erroneous fixture as
+failed and fix only that expectation in a separately bound successor.
+
+Actual Oct9 SparQ diagnostic completed8eager+8GLOBAL observations with all
+per-head scores bitwise equal, but one token's FP32 GQA SUM differed by2ULP
+in every run; supports remained legal. This narrows the reduction execution
+seam and does not support a graph-only explanation. It does not promote the
+old full-matrix failure or prove root cause for every original case. Keep
+complete raw stages and independent whole-terminal consumption; any new
+algorithm/reference arithmetic contract is explicit, source-justified and
+preregistered, never a silent task-level tolerance applied to tensors.
+See [actual16 NPU observations](../../../workstreams/qwen36-damp-ascend-20261006/SCORE_SHAPE_NPU_OBSERVATIONS_20261009.md).

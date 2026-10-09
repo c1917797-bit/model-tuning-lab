@@ -1,4 +1,27 @@
 # Current human-authorized 72h successor — 2026-10-09
+## Latest actual fixed-input NPU stage — 2026-10-09
+
+Actual01bf completed0/229.281s: same660 CPU prerequisites, fresh physical6
+canary,8eager+8GLOBAL score-prefix observations and own exact stop-retain.
+Whole original3075B SHAf509812781a49a40e22289a4960d69c0466eb9bda7de4d790721299cc41621a1
+at /cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN_SCORE_V5_01BF_NPU_OBSERVATION_ORIGINAL_20261009.json.
+Independent01cc completed0; all16x8 domains/proofs checked, observed-not-a-pass.
+Actual01d7 complete16-summary audit: scores allbitwiseequal; every eager/graph
+run one row3/n2148/token2140 rank discrepancy2ULP/4.6566e-10; allsaved supports
+legal; allfixedinputs/pointers unchanged. Originalba50860/128 remainsFAILED;
+no full matrix/model/performance/task gate has passed. This supports a narrowly
+targeted reduction-path adaptation, not graph-only corruption or paper no-go.
+Read [actual NPU observations and next algorithm seam](SCORE_SHAPE_NPU_OBSERVATIONS_20261009.md).
+
+V5 MF9c6bfa71... actual01bd complete28/compile/native41/defaultOFF/help passed;
+v4 arithmetic-fixture failure27/28 retained, correct short padding128-39=89.
+OwnCPU/NPU containers stopped-retained/Pid0/noExec/noOOM, physical4–7 no compute
+at01d7; no current MAIN NPU producer. Agents continue API-onlyCPU0 on reduction/
+FULL observer, Ada actual relocation/native graph, fair common prefix bootstrap.
+Do not bypass SP21 rejectedtargets. FixedOct10/Oct12 cutoffs unchanged; no new
+accepted non-HYPIC performance/final precision result.
+
+
 
 ## Latest distinct-control source decision — 2026-10-09
 
