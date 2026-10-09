@@ -2,6 +2,25 @@
 
 ## 0. Status
 
+- 2026-10-09 offline reporting/source-map reconciliation: r13's actual
+  container bind list, service import path and 32-file Python source digest
+  now replay-pass `verify_ascend_source_map_case.py`; r12's missing raw
+  bind/source receipt remains a historical fact. The source-map Skill case
+  stays partial because its map was retrospective rather than frozen before
+  the c12060c edit. A new
+  `HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md` states the bounded
+  final r13 rejection and six-phase performance benefit in separate tables;
+  `verify_paper_to_ascend_reporting_case.py` checks its phase rows,
+  formulas, receipts and profile boundaries. The reporting Skill remains
+  partial pending exact historical command/failure-ledger completion review.
+  No NPU run was repeated for either case. All 29 main Skills still have
+  cases; 7 are bounded verified and 22 partial.
+- The source-map checkpoint `a863fee7` is committed locally, but its
+  2026-10-09 GitHub HTTPS push failed with unavailable Username credentials.
+  Do not claim origin/main or the workstream remote contains this or later
+  reporting work. Do not retry identical authentication until credentials
+  actually change. The worktree's current `git log/status` is authoritative
+  for subsequent local commits.
 - Latest 2026-10-09 r6 Decode profiler capture is terminal and independently
   audited. Controller `exec-000000000000059e` completed 512 output tokens
   with 64 post-start chunks; 441 raw files hash-check, 85 isolation samples
@@ -30,12 +49,6 @@
   recorded as a protocol deviation. The branch-local maintainer Skill now
   specifies a version-aware semantic-field gate for future cases; it is not
   yet main/remote truth.
-- Historical Decode gap before r6: r2/r4/r5 guards caught the external
-  `Maxon4ick_vllm` on NPU0; r3 failed occupied-lane preflight. All roots
-  are terminal, immutable, and documented in `task.json`; exact owned
-  resources were released. The r5 stale attempt label was fixed before r6.
-  A separate 30-minute clean idle monitor admitted r6. Do not touch
-  external work.
 - Updated 2026-10-09. Workstream: `work/hypic-npu03-cpu-binding-fix-20261007`; checkout: `/cache/cch/model-tuning-lab-hypic-e2e-20261006`.
 - Retry21 completed the missing HYPIC-only/repeat3 phase on physical NPU0-3.
   Independent replay verifies 40/40 fixed-output rows, 42 unique IDs, 40/40
@@ -44,22 +57,7 @@
   weighted TPOT 74.727578 -> 58.643006 ms (21.5243% faster), TTFT P95
   86.628571 -> 45.759196 s, throughput 1.298735x. See
   `HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md`.
-- Retry19 terminally failed before health/scoring: its continuous guard captured foreign PID 1731309 on physical NPU2 twice, with 46 total samples and zero probe errors. It produced zero scored requests; only retry19's exact owned service container was removed. The five receipts replay-pass `verify_retry19_environmental_failure.py`; see `HOTPATH_CACHE10PERF_RETRY19_TERMINAL_AUDIT_20261009.md`. This is environmental, not a HYPIC verdict.
-- Retry20 for the HYPIC-only/repeat3 sixth phase terminally failed before health/scoring: guard captured foreign PID 1890601 on physical NPU3 (container `efc5e45e…`), with 36 samples and zero probe errors. It produced zero scored requests/metrics; only the exact owned service was removed. Replay audit: `HOTPATH_CACHE10PERF_RETRY20_TERMINAL_AUDIT_20261009.md`; verifier `verify_retry20_environmental_failure.py`. A 14:38 UTC follow-up still saw external PIDs 1890601 and 1920829 on NPU3; port 8223 was free. Keep monitoring, do not stop or modify the external task, and do not launch until a new direct-route snapshot proves physical NPU0–3 and 8223 idle.
 - Paired LongBench-v2 explicit-boundary max-2048 quality is complete and valid: no-cache 230/381, HYPIC 219/381, delta -2.8871 percentage points (`REJECT_OR_QUALIFY`). Strict four-worker hot coverage is 368/381 and fails universal mechanism attribution. Read-only matched-hot repetition pairs show candidate answer variability exceeds baseline; see `HYPIC_R13_RESPONSE_VARIABILITY_DIAGNOSIS_20261009.md`. This is not causal proof or a reclassification.
-- r14 c1 three-length × three-repeat on/off diagnostic is terminal and replay-valid: 9/9 responses per arm, 9/9 candidate four-worker hot, 3/9 correct in each arm. Selected candidate exact-text pairs are 0/9 at r13 c8 versus 3/9 at r14 c1; the bundled campaign/concurrency/cache-history change is not causal proof. See `HYPIC_CACHE10R14_VARIABILITY_TERMINAL_AUDIT_20261009.md`; r13 quality remains rejected.
-- All six matched performance phases have an independent valid audit, and all
-  120 candidate scored requests have four-worker hot-path proof. Retries15-20
-  remain immutable environmental isolation failures, not HYPIC performance
-  outcomes. Retry4's partial responses are contaminated and invalid; the original full single-service baseline and phase roots remain immutable.
-- Main Skill inventory is 29: all 29 now have provenance-checked cases, with
-  7 bounded verified and 22 partial. Five previously missing maintainer-system
-  Skills passed an isolated real Python-repository transformation fixture.
-  `ascend-cannbot-profiler` now has real Prefill and Decode captures but
-  remains partial: the original numeric column gate missed, and no
-  profiler-driven quality root cause or main integration is proven.
-- The r14 terminal diagnostic/Skill checkpoint was pushed and independently
-  verified at `74c9f9427ffbd5bd018754ab73e395e4deccff7b`; do not claim main integration.
 
 ## 1. North Star
 
@@ -79,7 +77,7 @@ the original Prefill numeric miss and the partial main-29 Skill inventory.
   `verify_hotpath_cache10_matched_performance.py`. Three-run median effects:
   weighted TPOT -16.084572 ms/token (-21.5243%), TTFT P95 -40.869375 s,
   throughput 1.298735x. Strict performance hot coverage is 120/120.
-- r13 quality audit is immutable and independently valid for 127 samples × 3 repetitions per arm, 381 scored responses per arm.
+- r13 quality audit is immutable and independently valid for 127 samples × 3 repetitions per arm, 381 scored responses per arm; retain the original full single-service baseline.
 - No-cache/screen, HYPIC/screen, HYPIC/repeat2, no-cache/repeat2, and no-cache/repeat3 have independent phase audits; see their audit paths in `task.json`.
 - Retry14 guard recorded foreign `cannbench_ds` PID 242978 on physical NPU1 in 18 clean-probe samples. The service did not reach health and produced zero scored requests. Only the exact retry14-owned container was removed. Audit: `HOTPATH_CACHE10PERF_RETRY14_TERMINAL_AUDIT.md`.
 - `verify_paper_to_ascend_reproduction_case.py` now verifies retry14 receipts and its four startup/capability events, without treating them as measured performance.

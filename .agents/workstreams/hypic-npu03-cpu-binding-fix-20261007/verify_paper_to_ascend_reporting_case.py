@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import statistics
 import subprocess
 import sys
 from pathlib import Path
@@ -34,6 +35,75 @@ def checked_bytes(path: Path, expected: str) -> bytes:
     require(hashlib.sha256(raw).hexdigest() == expected,
             f"SHA256 drift: {path}")
     return raw
+
+
+def audit_terminal_report(quality: dict, performance: dict) -> None:
+    report = (HERE / "HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md").read_text()
+    for required in (
+        "final negative result for the frozen r13 C1/C2 experiment",
+        "Step 0. 环境准备", "Step 1–3. 分组", "实测结果",
+        "与论文及同事历史结果分开比较", "Decision 与结论",
+        "报错、失败尝试与排除", "证据索引与精确交接",
+        "REJECT_OR_QUALIFY", "NOT_ACCEPTED_HOT_COVERAGE",
+        "EFFECT_SCREEN_PASS", "C3", "GSM8K",
+        "16/40", "46/47", "retry6", "逐字节可重建性仍有边界",
+        "不重新拉起服务",
+    ):
+        require(required in report, f"terminal report section/limit absent: {required}")
+    for placeholder in ("TBD", "TODO", "待补充", "<measured>", "<hash>"):
+        require(placeholder not in report, f"terminal report placeholder: {placeholder}")
+    require(quality["evidence_valid"] is True
+            and quality["deployed_quality_decision"] == "REJECT_OR_QUALIFY"
+            and quality["strict_c1_c2_hot_coverage"]["four_worker_verified_scored_requests"] == 368
+            and quality["strict_c1_c2_hot_coverage"]["expected_scored_requests"] == 381
+            and quality["all_request_quality"]["baseline_run_correct"] == [77, 74, 79]
+            and quality["all_request_quality"]["candidate_run_correct"] == [69, 73, 77],
+            "terminal report quality source drift")
+    q = quality["all_request_quality"]
+    require(f"G1 {q['baseline_correct']}/381" in report
+            and f"G2 {q['candidate_correct']}/381" in report
+            and f"{q['delta_pp']:.4f}" in report
+            and f"G1 `{','.join(map(str, q['baseline_run_correct']))}`" in report
+            and f"G2 `{','.join(map(str, q['candidate_run_correct']))}`" in report,
+            "terminal report quality arithmetic mismatch")
+    require(performance["all_six_phases_valid"] is True
+            and performance["strict_c1_c2_hot_coverage"]
+                ["four_worker_verified_measured_requests"] == 120
+            and performance["deployed_quality_decision"] == "REJECT_OR_QUALIFY",
+            "terminal report performance source drift")
+    phase_rows = [
+        ("screen", "G1", "no-cache", 0, 160),
+        ("screen", "G2", "hypic-only", 0, 150),
+        ("repeat2", "G2", "hypic-only", 1, 150),
+        ("repeat2", "G1", "no-cache", 1, 162),
+        ("repeat3", "G1", "no-cache", 2, 164),
+        ("repeat3/retry21", "G2", "hypic-only", 2, 164),
+    ]
+    for phase, group, arm, index, guard in phase_rows:
+        row = performance["per_arm"][arm][index]
+        expected = (
+            f"| {phase} | {group} | {row['tpot_weighted_ms']:.6f}"
+            f" | {row['tpot_p95_ms']:.6f} | {row['ttft_p95_ms']:.6f}"
+            f" | {row['output_tokens_per_second']:.6f}"
+            f" | {row['benchmark_duration_s']:.6f} | {guard} |"
+        )
+        require(expected in report, f"terminal report phase row mismatch: {arm}/{phase}")
+    for arm, group in (("no-cache", "G1"), ("hypic-only", "G2")):
+        tpot = [row["tpot_weighted_ms"] for row in performance["per_arm"][arm]]
+        require(f"{statistics.mean(tpot):.6f} ± {statistics.stdev(tpot):.6f}"
+                in report, f"terminal report {group} TPOT dispersion mismatch")
+    effect = performance["effect"]
+    require(f"{effect['weighted_tpot_saved_pct']:.4f}%" in report
+            and f"{effect['weighted_tpot_saved_ms']:.6f}" in report
+            and f"{effect['ttft_p95_saved_s']:.6f}" in report
+            and f"{effect['throughput_ratio']:.6f}" in report,
+            "terminal report effect arithmetic mismatch")
+    for digest in (
+        "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+        "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062",
+        "d2169d9b36561aa59c1fdcded08df9c98f7fee6a145e7aca1290986c1a92a687",
+    ):
+        require(digest in report, f"terminal report evidence index missing: {digest}")
 
 
 def main() -> int:
@@ -81,12 +151,45 @@ def main() -> int:
             and r12["guard_samples"] == 279,
             "r12 strict activation/isolation boundary drift")
 
+    terminal_run = subprocess.run(
+        (sys.executable, "-B", str(HERE / "verify_paper_to_ascend_reproduction_case.py")),
+        cwd=HERE, text=True, capture_output=True, check=False)
+    require(terminal_run.returncode == 0 and bool(terminal_run.stdout.strip()),
+            f"r13 terminal replay failed: {terminal_run.stderr}")
+    terminal = json.loads(terminal_run.stdout)
+    require(terminal["r13_quality_pair_complete"] is True
+            and terminal["r13_correct"] == [230, 219]
+            and terminal["r13_deployment_quality"] == "REJECT_OR_QUALIFY"
+            and terminal["r13_strict_hot"] == [368, 381]
+            and terminal["r13_performance_all_six_phases_valid"] is True
+            and terminal["r13_performance_strict_hot"] == [120, 120]
+            and abs(terminal["r13_performance_weighted_tpot_saved_pct"]
+                    - 21.524278158508903) < 1e-12
+            and terminal["reproduction_skill_completion_gate_passed"] is False,
+            "r13 quality/performance reporting boundary drift")
+    current_quality = json.loads(checked_bytes(
+        ROOT / "hotpath-quality-cache10r13-dual-audit.json",
+        "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b"))
+    current_performance = json.loads(checked_bytes(
+        ROOT / "hotpath-cache10r13-matched-performance-audit.json",
+        "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062"))
+    audit_terminal_report(current_quality, current_performance)
+    for name in ("verify_hypic_profiler_prefill.py",
+                 "verify_hypic_profiler_decode.py"):
+        profile = subprocess.run(
+            (sys.executable, "-B", str(HERE / name)), cwd=HERE,
+            text=True, capture_output=True, check=False)
+        require(profile.returncode == 0,
+                f"{name} independent replay failed: {profile.stderr}")
+
     report = (HERE / "PAPER_TO_ASCEND_REPORTING_CASE_20261009.md").read_text()
     for required in ("Status: **progress / partial-evidence**",
-                     "Current measured r12", "Historical same-lane reference",
+                     "Historical measured r12", "Current r13 addendum",
+                     "Historical same-lane reference",
                      "Historical natural-task reference", "Paper claim",
                      "not measured", "no no-cache arm",
-                     "final-report completion gate is", "Forbidden:"):
+                     "final-report completion gate", "REJECT_OR_QUALIFY",
+                     "120/120", "Forbidden:"):
         require(required in report, f"report boundary absent: {required}")
     print(json.dumps({
         "schema": "paper-to-ascend-reporting-real-task-case/v1",
@@ -94,7 +197,10 @@ def main() -> int:
         "historical_natural_quality_units": 12,
         "r12_scored": 57,
         "r12_four_worker_hot": 52,
-        "current_matched_quality_pair": False,
+        "current_matched_quality_pair": True,
+        "current_matched_performance_six_phases": True,
+        "current_matched_baseline_treatment_profile": False,
+        "bounded_terminal_negative_report_replay_valid": True,
         "final_report_ready": False,
         "long_term_acceptance": "partial-evidence",
     }, sort_keys=True))

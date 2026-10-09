@@ -4,7 +4,7 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Audit the actual HYPIC progress and terminal reports against exact-main evidence-bound reporting rules; distinguish current r12, historical same-lane performance, historical natural quality and unmeasured final pair",
+  "task": "Audit HYPIC progress and terminal reports against exact-main evidence-bound reporting rules; keep historical r12/clean2/c16 separate from the completed r13 quality pair, matched performance and diagnostic profiles",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "7902b3f9c96ebd6b77a35b328333ad3834fe4a9f",
@@ -12,7 +12,7 @@
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "Read-only reporting audit on chicaihong01; historical c16/1024 performance, clean2 max2048 natural quality and current r12 c8/max2048 explicit-boundary stress are separate experiment identities; no NPU used by this case",
+  "environment_scope": "Read-only reporting audit on chicaihong01; historical c16/1024 performance, clean2 natural quality and r12 stress remain separate from current r13 c8/max2048 quality, c16/1024 performance and candidate-only diagnostic profiles; no NPU used by this case",
   "observed": {
     "historical_six_performance_units_valid": true,
     "historical_weighted_tpot_saved_percent": 22.35616395806199,
@@ -22,20 +22,33 @@
     "r12_four_worker_hot_responses": 52,
     "r12_guard_samples_clean": 279,
     "existing_piercing_report_contains_superseded_progress_snapshots": true,
-    "current_same_identity_no_cache_control_complete": false,
-    "current_full_paired_max2048_quality_complete": false,
+    "current_same_identity_no_cache_control_complete": true,
+    "current_full_paired_max2048_quality_complete": true,
+    "r13_correct_baseline_candidate": [230, 219],
+    "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_strict_four_worker_hot_requests": [368, 381],
+    "current_six_phase_matched_performance_complete": true,
+    "r13_weighted_tpot_saved_percent": 21.524278158508903,
+    "r13_performance_four_worker_hot_requests": [120, 120],
+    "candidate_prefill_decode_profiles_replay_valid": true,
+    "matched_baseline_treatment_profile_complete": false,
     "current_matched_performance_and_profile_complete": false,
+    "bounded_terminal_negative_report_replay_valid": true,
     "final_colleague_style_report_ready": false,
     "case_integrated_in_main": false
   },
   "evidence": [
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_REPORTING_CASE_20261009.md",
-      "sha256": "6dcfc46ce6fbfd34b7f573b121c37665e24302f9339a5b01cb7ff6a98cd5c360"
+      "sha256": "1116f355879e5cddfe946c518faaae91e32528dd76a32a163bbe0c247c403b30"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reporting_case.py",
-      "sha256": "9140684a5c2eaa1703871512ba8f646149da4995b6e195e87c147dea3883363f"
+      "sha256": "3b497531423cb5c3f52408b496d508f3f0a0b26df4c5f8a94e459970fed83228"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md",
+      "sha256": "998240c3f2e5125d707b1df5d84ce8763da5bbbae8a4d49b885d367f752231e1"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PIERCING_REPORT.md",
@@ -48,15 +61,33 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
       "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md",
+      "sha256": "4b5308c6049a8d0c8e12065e69677b27dd8af4c05494bf2cb71f550d393a1c76"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md",
+      "sha256": "d27f1abbf527669157bc4c7fad23d75f3da067b8f942c183c56bf4ace93fe719"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_PREFILL_AUDIT_20261009.md",
+      "sha256": "9e5822afbdbc482a8a9deb3ca3fb96bc192ad4fcccb12f523491f104fcba6556"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_DECODE_AUDIT_20261009.md",
+      "sha256": "f7aefd73e9836f22ec34ebc7b2d5becbc1ed40c1d0b34d5a60b2baae66a538fd"
     }
   ],
   "external_raw_receipts": {
     "historical_performance_audit_sha256": "de2f8af4a12dad9331e675ca1587aed6720aa8adc8aab551f6cfb2065ca78ac1",
     "natural_quality_audit_sha256": "61bcccd926459b8ee57cfc3860a5b30c581c7e7b525fe3b746b52146c2c0dbf0",
-    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60"
+    "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60",
+    "r13_quality_audit_sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+    "r13_matched_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062"
   },
   "replayable_regression_recorded": true,
-  "boundary": "The case demonstrates evidence classification and fail-closed progress reporting on a real HYPIC experiment. It does not verify the Skill's final-report completion gate, because r12 lacks its matched no-cache arm, full paired quality and repeated matched performance/profile. The older piercing report is retained as a superseded progress snapshot, not current terminal truth.",
-  "next_gate": "After prospective claim-rule freeze and a complete actually-idle NPU0-3 pair, write one final report with exact executed/recovery commands, repeated performance, paired quality, activation/profile, raw hashes and release receipts, then rerun independent reporting audit.",
-  "drift_trigger": "Revalidate when main Skill/template/registry or report/evidence hashes change, or when a new same-identity pair provides final quality/performance evidence."
+  "boundary": "A scoped terminal negative-result report now exists and its phase rows, key formulas, source hashes, section/claim boundaries and Prefill/Decode receipts replay-pass. The r13 quality pair and separate six-phase performance pair are complete, but quality is rejected and 13/381 candidate quality requests lack four-worker hot proof; the candidate-only profiles are not a matched baseline/treatment profile or quality root cause. The report still needs a comprehensive line-by-line final-completion review of exact historical command/source and all failure-ledger entries before the full reporting Skill can be marked verified. Do not claim adoption or main integration.",
+  "next_gate": "Review the bounded terminal report against every executed controller command/contract and environmental failure receipt, especially the historical Prefill controller source and omitted zero-row retries; close any remaining exact-recovery and provenance gaps without rerunning old experiment roots, then independently certify the Skill's final report completion gate.",
+  "drift_trigger": "Revalidate when main Skill/template/registry or report/evidence hashes change, or when a new independently scoped experiment changes the conclusion."
 }

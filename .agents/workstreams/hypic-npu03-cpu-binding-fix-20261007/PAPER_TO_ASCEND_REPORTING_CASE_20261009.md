@@ -7,6 +7,34 @@ report. The exact-main `paper-to-ascend-reporting` Skill and its
 `references/report-template.md` were read before classification. No foreign
 container was touched and no NPU was used for this case.
 
+## Current r13 addendum and reporting status
+
+The r12 discussion below is retained as a historical progress-stage case,
+not current experiment status. The later frozen r13 LongBench-v2 c8,
+explicit-boundary max-2048 same-identity pair is **complete**: 127 samples
+times three scored responses per arm, no-cache 230/381 correct versus HYPIC
+219/381 (−2.8871 percentage points), independent audit SHA256
+`f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b`.
+Its all-request quality decision is `REJECT_OR_QUALIFY`; strict four-worker
+hot coverage is 368/381 and fails. The separate frozen c16, 32768-input,
+1024-fixed-output six-phase performance pair is valid: three runs per arm,
+120/120 candidate scored requests have four-worker hot proof, median weighted
+TPOT 74.727578→58.643006 ms/token (21.5243% lower), audit SHA256
+`d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062`.
+These are two different workloads and must remain separate result tables.
+Four-rank Prefill and Decode diagnostic captures are also independently
+replayable, but are not a matched baseline/treatment profile attribution and
+do not explain the quality regression. Paper C3 is not implemented.
+
+The final-report completion gate is **still not met**: the repository retains
+several terminal audits and progress snapshots, but not one audited
+colleague-style final negative-result report that reconstructs all executed
+and recovery commands, six performance repetitions and dispersion, r13
+quality/repetition/failure counts, source and isolation receipts, separate
+historical/paper columns, profile limits, release, and exact claim boundaries.
+This reporting gap needs document synthesis and an independent report audit,
+not another r13 NPU run.
+
 ## Step 0: identity and evidence categories
 
 - Subject: HYPIC v0.8.5-derived C1/C2 text path on Qwen3.6-named hybrid
@@ -15,7 +43,7 @@ container was touched and no NPU was used for this case.
   are pinned in `PIERCING_REPORT.md`, `FINAL_EVIDENCE_DECISION.md` and
   `HOTPATH_CACHE10R12_TERMINAL_AUDIT.md`; the three experimental identities
   below must not be pooled.
-- **Current measured r12:** 19 selected samples, three scored explicit-boundary
+- **Historical measured r12:** 19 selected samples, three scored explicit-boundary
   max-2048 responses each, 57/57 scored, 52/57 four-worker hot proofs, 279
   clean physical-lane guard samples, exact owned resource release. Raw
   `hypic-evidence.jsonl` SHA256
@@ -50,14 +78,14 @@ at the predeclared strict activation gate, not a successful quality verdict.
 The measured r12 terminal receipt and clean lane guard are indexed in
 `HOTPATH_CACHE10R12_TERMINAL_AUDIT.md`. Do not rerun unchanged r12.
 
-The complete same-identity c8/max-2048/127 baseline-plus-treatment launch,
-three-round performance, full paired quality, scorer reconciliation and final
-profile/recovery commands are **not yet available as executed evidence**.
-They cannot be invented from the older c16 performance or clean2 quality
-commands. Freeze the future deployed-effect versus all-hot decision rule
-before the next pair, then recover exact successful commands from its scripts
-and receipts. The main reporting Skill's final-report completion gate is
-therefore not met.
+At the r12 stage, a complete same-identity c8/max-2048/127 baseline-plus-
+treatment pair was not yet available as executed evidence. That historical
+absence must not be carried forward as the current state: r13 later supplied
+the full pair, with its negative decision, and the separate six-phase
+performance pair. The matched baseline/treatment *profile* remains
+`not measured`; the Prefill/Decode profiles are HYPIC-only diagnostics.
+The main reporting Skill's final-report completion gate remains unmet for
+document and audit completeness, not because r13 needs repeating.
 
 ## Measured result and decision ledger
 
@@ -67,8 +95,10 @@ therefore not met.
 | Clean2 natural quality | 12 valid units; 0 worker-hot PIDs | descriptive natural-task comparison, not hot-path pass |
 | r12 explicit mechanism | 57 scored; 52 four-worker hot; 5 cold | strict all-hot gate fails for r12 |
 | r12 physical isolation/release | 279 clean samples; owned resources released | r12 lane validity only |
-| Current same-identity quality A/B | no no-cache arm | not measured |
-| Current repeated performance/profile | no matched c8/2048/127 pair | not measured |
+| r12 same-identity quality A/B | no no-cache arm in that historical r12 identity | not measured at r12 |
+| r13 same-identity quality A/B | 127×3 per arm, 230/381→219/381 | `REJECT_OR_QUALIFY`; strict hot 368/381 FAIL |
+| r13 repeated performance | 3+3 valid c16/1024 phases; TPOT median −21.5243%; 120/120 hot | `EFFECT_SCREEN_PASS` only for this workload |
+| Matched baseline/treatment profiler | HYPIC-only Prefill/Decode diagnostics | not measured as a paired profile; no quality root cause |
 | Adoption/full-paper C3 | C3 not implemented in this path | not established |
 
 The five r12 cold scored requests are 77:1, 77:3, 81:3, 85:2 and 88:2.
@@ -77,7 +107,7 @@ reusable prefix and four scored producer/rematerialization cases; it does not
 prove each exact eviction transition. Do not promote the r11-to-r12 hot-count
 change (53/57 to 52/57) or the diagnostic score change (27/57 to 22/57) to a
 source-regression or aggregate quality claim: concurrent scheduling changed,
-long outputs vary within arms, and no matched no-cache control exists.
+long outputs vary within arms, and no matched no-cache control existed **in r12**.
 
 ## Reporting behavior and gaps
 
@@ -92,12 +122,12 @@ marks missing results as not measured, never zero. It does **not** certify a
 single final colleague-style report with all commands, repetitions, profile,
 quality and recovery evidence; no such final artifact is claimed.
 
-Allowed claim: the reporting Skill correctly forces an inconclusive/progress
-status and exposes non-poolable denominators and missing gates on this real
-HYPIC task. Forbidden: complete Paper-to-Ascend report, lossless quality,
-HYPIC source-regression, production readiness, whole-paper reproduction or
-29-Skill validation. Next reporting gate: after the prospectively frozen,
-actually-idle NPU0–3 full pair, produce one final report with exact measured
-commands and independent hash/row/formula/guard/release audit, then recheck
-the exact-main Skill/template and rerun this case verifier. No credential or
-AWMCP verification token belongs in a report.
+Allowed claim: the reporting Skill correctly separates historical and current
+denominators and retains the r13 negative quality outcome despite a valid
+performance gain. Forbidden: a certified final colleague-style report,
+lossless quality, HYPIC source-regression, production readiness, whole-paper
+reproduction or 29-Skill validation. Next reporting gate: synthesize and
+independently audit one final negative-result report from the existing r13,
+performance, profile and failure receipts, then recheck the exact-main
+Skill/template and rerun this case verifier. Do not rerun r13 to write a
+report. No credential or AWMCP verification token belongs in a report.

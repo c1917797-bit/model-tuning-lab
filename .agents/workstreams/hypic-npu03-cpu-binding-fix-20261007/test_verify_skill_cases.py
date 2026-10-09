@@ -148,7 +148,17 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(state, "partial-evidence")
         item = json.loads(path.read_text())
         self.assertEqual(item["observed"]["r12_four_worker_hot_responses"], 52)
-        self.assertFalse(item["observed"]["current_same_identity_no_cache_control_complete"])
+        self.assertTrue(item["observed"]["current_same_identity_no_cache_control_complete"])
+        self.assertTrue(item["observed"]["current_full_paired_max2048_quality_complete"])
+        self.assertEqual(item["observed"]["r13_correct_baseline_candidate"], [230, 219])
+        self.assertEqual(item["observed"]["r13_deployed_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertTrue(item["observed"]["current_six_phase_matched_performance_complete"])
+        self.assertEqual(item["observed"]["r13_performance_four_worker_hot_requests"],
+                         [120, 120])
+        self.assertTrue(item["observed"]["candidate_prefill_decode_profiles_replay_valid"])
+        self.assertFalse(item["observed"]["matched_baseline_treatment_profile_complete"])
+        self.assertTrue(item["observed"]["bounded_terminal_negative_report_replay_valid"])
         self.assertFalse(item["observed"]["final_colleague_style_report_ready"])
 
     def test_reproduction_case_preserves_failed_hotpath_gate(self) -> None:
