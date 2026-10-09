@@ -28,9 +28,9 @@
   passive 0-3 process monitor `exec-00000000000004d7` finished without NPU
   mapping. It observed an idle interval from 17:21:34 to 17:26:12 UTC, then
   short NPU0 PIDs 3618350 and 3622213 at 17:26:12 and 17:26:34. Their
-  container identity was not retained by this passive monitor. Use a new r6
-  root for the next Decode-only attempt after a sufficiently long real idle
-  interval; do not stop or modify external work.
+  container identity was not retained by this passive monitor. The new r6
+  Decode root is prospectively frozen with 512 output tokens and a 64-chunk
+  window; launch only after sufficient real idle time. Do not touch external work.
 - Updated 2026-10-09. Workstream: `work/hypic-npu03-cpu-binding-fix-20261007`; checkout: `/cache/cch/model-tuning-lab-hypic-e2e-20261006`.
 - Retry21 completed the missing HYPIC-only/repeat3 phase on physical NPU0-3.
   Independent replay verifies 40/40 fixed-output rows, 42 unique IDs, 40/40
@@ -95,7 +95,7 @@ After that, map the evidence into the main-29 acceptance inventory.
 Do not launch another quality or matched-performance phase. Retry5 failed
 before capture because the external `Maxon4ick_vllm` container again entered
 NPU0. Continue watching for a longer idle interval or a coordinated window,
-then freeze a new Decode-only r6 profiler root. Before any device
+then use the frozen Decode-only r6 profiler root. Before any device
 action, refresh direct `chicaihong01/ma`, check physical NPU0-3 processes and
 port 8223, and run only while actually idle. Keep the continuous guard.
 Meanwhile replay the completed Prefill audit and validate this branch-local

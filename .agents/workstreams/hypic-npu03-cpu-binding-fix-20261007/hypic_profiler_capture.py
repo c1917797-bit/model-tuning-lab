@@ -27,13 +27,14 @@ import binding_off_quality as quality  # noqa: E402
 
 
 PINNED_BENCHMARK = Path("/cache/cch/hypic_vllm_ascend-fallback-telemetry-20261008/tools/benchmark_shared_prefix.py")
-RAW_ROOT = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r5")
+RAW_ROOT = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r6")
 ARM = "hypic-only"
 PORT = 8223
 MODEL = "qwen36-hypic-e2e-2048"
 SOURCE_COMMIT = "c12060cd47e7575ead059983d7a8bb4704165c98"
 IMAGE = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
-MIN_DECODE_CHUNKS = 16
+MIN_DECODE_CHUNKS = 64
+DECODE_OUTPUT_TOKENS = 512
 
 
 def load_benchmark():
@@ -65,7 +66,7 @@ def post(url: str, payload: object | None = None, timeout: int = 2400):
 
 
 def phase_name(phase: str) -> str:
-    return f"hypic_npu03_profiler_{phase}_20261009_r4"
+    return f"hypic_npu03_profiler_{phase}_{RAW_ROOT.name}"
 
 
 def profiler_config(phase_dir: Path) -> dict:
@@ -109,7 +110,7 @@ def create(phase: str) -> tuple[str, str, dict]:
         raise RuntimeError("exact profiler container already exists")
     source, binds, env, command = transformed_spec(phase)
     args = ["docker", "create", "--name", name,
-            "--label", "hypic.profiler=20261009-r4", "--label", f"hypic.phase={phase}",
+            "--label", f"hypic.profiler={RAW_ROOT.name}", "--label", f"hypic.phase={phase}",
             "--network", "host", "--shm-size", str(source["HostConfig"]["ShmSize"]),
             "--cpuset-cpus", "112-191"]
     for item in source["HostConfig"]["Devices"]:
@@ -128,7 +129,7 @@ def create(phase: str) -> tuple[str, str, dict]:
     if not (item["Id"] and item["Name"] == f"/{name}" and item["Image"] == IMAGE
             and mapped == [f"/dev/davinci{i}" for i in range(4)]
             and item["HostConfig"]["CpusetCpus"] == "112-191"
-            and item["Config"]["Labels"].get("hypic.profiler") == "20261009-r4"
+            and item["Config"]["Labels"].get("hypic.profiler") == RAW_ROOT.name
             and item["Config"]["Labels"].get("hypic.phase") == phase
             and item["Config"]["Cmd"] == ["bash", "-lc", command]):
         raise RuntimeError("exact profiler container identity mismatch")
@@ -230,13 +231,14 @@ def capture_decode(prompt_tokens: list[int]) -> dict:
     enough = threading.Event()
     profile_stopped = threading.Event()
     state: dict[str, object] = {"chunks_after_start": 0, "error": None,
-                               "output_tokens": None}
+                               "output_tokens": None, "profile_start_utc": None,
+                               "profile_stop_utc": None}
 
     def stream() -> None:
         try:
             seen_first = False
             with post(f"http://127.0.0.1:{PORT}/v1/completions",
-                      completion_payload(prompt_tokens, 32)) as response:
+                      completion_payload(prompt_tokens, DECODE_OUTPUT_TOKENS)) as response:
                 for raw in response:
                     body = raw.strip()
                     if not body.startswith(b"data:"):
@@ -274,18 +276,20 @@ def capture_decode(prompt_tokens: list[int]) -> dict:
         raise RuntimeError(str(state["error"] or "first Decode token timeout"))
     with post(f"http://127.0.0.1:{PORT}/start_profile") as response:
         response.read()
+    state["profile_start_utc"] = datetime.now(timezone.utc).isoformat()
     profile_started.set()
     if not enough.wait(600) or state["error"]:
         profile_stopped.set()
         raise RuntimeError(str(state["error"] or "steady Decode window timeout"))
     with post(f"http://127.0.0.1:{PORT}/stop_profile") as response:
         response.read()
+    state["profile_stop_utc"] = datetime.now(timezone.utc).isoformat()
     profile_stopped.set()
     thread.join(timeout=2400)
-    if thread.is_alive() or state["error"] or state["output_tokens"] != 32:
+    if thread.is_alive() or state["error"] or state["output_tokens"] != DECODE_OUTPUT_TOKENS:
         raise RuntimeError(str(state["error"] or "Decode stream incomplete"))
     if int(state["chunks_after_start"]) < MIN_DECODE_CHUNKS:
-        raise RuntimeError("fewer than 16 steady Decode chunks captured")
+        raise RuntimeError("fewer than 64 steady Decode chunks captured")
     return {"prefill_outside_window": True, **state}
 
 
@@ -316,7 +320,7 @@ def audit_artifacts(out: Path) -> dict:
 
 def cleanup(name: str, container_id: str, out: Path, worker_pids: dict[str, int]) -> dict:
     item = inspect(name)
-    if item is None or item["Id"] != container_id or item["Config"]["Labels"].get("hypic.profiler") != "20261009-r4":
+    if item is None or item["Id"] != container_id or item["Config"]["Labels"].get("hypic.profiler") != RAW_ROOT.name:
         raise RuntimeError("exact profiler ownership changed; refusing cleanup")
     with (out / "service.log").open("w") as stream:
         subprocess.run(["docker", "logs", name], stdout=stream, stderr=subprocess.STDOUT,

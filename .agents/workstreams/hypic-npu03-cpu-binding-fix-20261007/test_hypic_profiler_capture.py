@@ -24,11 +24,14 @@ def load_module():
 def test_transformed_spec_is_profiler_only_delta() -> None:
     module = load_module()
     _, binds, env, command = module.transformed_spec("decode")
-    assert module.MIN_DECODE_CHUNKS >= 10
+    assert module.MIN_DECODE_CHUNKS == 64
+    assert module.DECODE_OUTPUT_TOKENS == 512
+    assert module.RAW_ROOT.name.endswith("-r6")
+    assert module.phase_name("decode").endswith(module.RAW_ROOT.name)
     assert command.count("--profiler-config") == 1
     assert '"profiler":"torch"' in command
     assert '"torch_profiler_with_stack":false' in command
-    assert "/profiler-hypic-hotcold-20261009-r5/decode/profiles" in command
+    assert "/profiler-hypic-hotcold-20261009-r6/decode/profiles" in command
     assert "--additional-config '{\"enable_cpu_binding\":false}'" in command
     assert "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3" in env
     assert any(item.startswith("ASCEND_PROFILER_OUTPUT=") for item in env)
@@ -39,3 +42,7 @@ def test_preregistered_phase_names_are_disjoint() -> None:
     module = load_module()
     assert module.phase_name("prefill") != module.phase_name("decode")
     assert module.profiler_config(Path("prefill"))["torch_profiler_dir"] != module.profiler_config(Path("decode"))["torch_profiler_dir"]
+    source = (HERE / "hypic_profiler_capture.py").read_text()
+    assert 'get("hypic.profiler") == RAW_ROOT.name' in source
+    assert 'get("hypic.profiler") != RAW_ROOT.name' in source
+    assert '"20261009-r4"' not in source

@@ -936,6 +936,14 @@
       }
     ],
     "decode_capture_valid": false,
+    "next_decode_r6": {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r6",
+      "status": "preregistered_not_started",
+      "output_tokens": 512,
+      "minimum_post_start_chunks": 64,
+      "required_independent_proof": "actual NPU Decode kernels in the profile interval, not only buffered HTTP chunks",
+      "amendment": "HYPIC_PROFILER_RETRY6_AMENDMENT_20261009.md"
+    },
     "passive_monitor": {
       "controller_operation": "exec-00000000000004d7",
       "terminal_exit_code": 0,
@@ -948,5 +956,5 @@
     },
     "skill_case_acceptance": "partial-evidence"
   },
-  "next_action": "Do not rerun completed HYPIC phases. Preserve the paired quality and six-phase performance evidence. The Prefill profiler is captured and independently parsed; Decode remains missing after r5 was interrupted by external Maxon4ick_vllm on physical NPU0. r5 is terminal and immutable. Wait for a sufficiently long actual idle window or a user-coordinated window, then preregister a new Decode-only r6 root and launch only after fresh direct-route NPU0-3/port admission. Do not repeat Prefill or reinterpret quality. Keep the Skill cases honest and the profiler case partial until real Decode capture and parser audit; validate and push each coherent checkpoint."
+  "next_action": "Do not rerun completed HYPIC phases. Preserve the paired quality and six-phase performance evidence. The Prefill profiler is captured and independently parsed; Decode remains missing after r5 was interrupted by external Maxon4ick_vllm on physical NPU0. r5 is terminal and immutable. The prospective r6 Decode-only 512-token/64-chunk protocol and unused root are frozen. Wait for a sufficiently long actual idle window or a user-coordinated window, then launch only after fresh direct-route NPU0-3/port admission. Independently require real NPU Decode kernel events in the captured interval; HTTP chunks alone are insufficient. Do not repeat Prefill or reinterpret quality. Keep Skill cases partial until real Decode capture and parser audit; validate and push each coherent checkpoint."
 }
