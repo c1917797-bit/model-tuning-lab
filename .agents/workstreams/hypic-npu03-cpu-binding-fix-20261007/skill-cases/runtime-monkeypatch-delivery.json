@@ -4,7 +4,7 @@
   "campaign_code": "N",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Use the exact-main runtime delivery Skill on the r12 HYPIC plugin run, test the documented package-validator command, and bound actual NPU activation and rollback evidence",
+  "task": "Use the exact-main runtime delivery Skill to distinguish the r12 activation failure, the complete r13 unpacked-plugin A/B quality/performance evidence, and the still-missing hash-bound MANIFEST delivery and rollback gates",
   "executed_at_utc": "2026-10-08",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "5ac9f8b07d8e092dcba7e1b0cfd5423469534666",
@@ -12,7 +12,7 @@
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma, Qwen3.6-27B BF16 TP4, physical NPU0-3; r12 19-prompt c8 2048-token HYPIC stress with clean read-only plugin c12060c against pinned official image; branch-only static validator repair",
+  "environment_scope": "chicaihong01/ma, Qwen3.6-27B BF16 TP4, physical NPU0-3; r12 19-prompt c8 2048-token stress and r13 same-identity 127x3 max2048 quality plus separate six-phase fixed-1024 performance, clean read-only plugin c12060c against pinned official image; branch-only static validator repair, no MANIFEST package",
   "observed": {
     "main_documented_validator_absent": true,
     "main_template_wrapper_forced_enabled": true,
@@ -25,10 +25,16 @@
     "r12_foreign_process_guard_samples": 279,
     "r12_exact_owned_resource_release": true,
     "plugin_manifest_package_present": false,
-    "same_identity_disabled_control_complete": false,
+    "manifest_package_same_wrapper_disabled_control_complete": false,
     "source_fix_npu_causal_effect_isolated": false,
-    "full_repeated_performance_complete": false,
-    "full_2048_token_paired_quality_complete": false,
+    "r13_unpacked_plugin_same_identity_pair_complete": true,
+    "r13_unpacked_plugin_performance_six_phases_complete": true,
+    "r13_unpacked_plugin_performance_strict_hot": [120, 120],
+    "r13_unpacked_plugin_quality_correct_baseline_candidate": [230, 219],
+    "r13_unpacked_plugin_quality_decision": "REJECT_OR_QUALIFY",
+    "r13_unpacked_plugin_quality_strict_hot": [368, 381],
+    "manifest_package_full_repeated_performance_complete": false,
+    "manifest_package_full_2048_token_paired_quality_complete": false,
     "disable_uninstall_restart_rollback_complete": false,
     "abc_local_increment_attribution_complete": false,
     "package_promotion_ready": false,
@@ -41,7 +47,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_monkeypatch_delivery_case.py",
-      "sha256": "30c558192224e815b5221384ae68d1b621c50f198a5ee70e3e7675ecbadce2bf"
+      "sha256": "3180677899ab44ed2e9ba9f3f42a13b03e05f0b04a2cdc1f22da005ef9a5ae64"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
@@ -58,15 +64,29 @@
     {
       "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
       "sha256": "b3c5547049d6f6a650d29e8265937cec351847fdd9b244fa3a07f431009a6c27"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md",
+      "sha256": "998240c3f2e5125d707b1df5d84ce8763da5bbbae8a4d49b885d367f752231e1"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_ascend_source_map_case.py",
+      "sha256": "90ce4f8dfc38a41631dfe6829a032765a6e3de3ccc652d04ee403c2c88f20818"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_benchmark_evidence_r13_case.py",
+      "sha256": "9f59a0e1587cb25d5a61e7245d91b577b2e9abd64834ee8edf5cba6b6212458b"
     }
   ],
   "external_raw_receipts": {
+    "r13_quality_audit_sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+    "r13_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062",
     "r12_hypic_evidence_sha256": "4a07d50497f730dcd8d3dadd9840ae3f9b47a5e48dbdf4cb96c02a2908adff60",
     "r12_lane_guard_sha256": "da309b4ff0d23cabd198606d2855dbc5949c34013426bfbccb54af1d2872b9dd",
     "r12_service_stop_sha256": "fc3682c4e0a1c766827e5c486b3a317b67055d7690dd8b3f5533c8ce3b6cee57"
   },
   "replayable_regression_recorded": true,
-  "boundary": "The exact main Skill's named validator path is absent and its template wrapper forces activation. The branch repair passes static identity and CPU same-wrapper switch tests only; the actual r12 source was not delivered as a hash-bound MANIFEST package. Enabled r12 had 52/57 request-level four-worker proofs and exact cleanup, but no live same-identity disabled control, full performance/quality, disable-uninstall-restart rollback or A/B/C attribution. This is not delivery acceptance, paper success, or a main-integrated repair.",
-  "next_gate": "Integrate and rerun the branch static-validator repair, package the exact HYPIC plugin source, prove enabled/disabled control and every required worker, then run the frozen matched 0.85 performance/2048-token quality and rollback gates only on actually idle physical NPU0-3.",
+  "boundary": "The exact main Skill's named validator path is absent and its template wrapper forces activation; the branch repair passes only static identity and CPU same-wrapper switch tests. r12 had 52/57 request-level four-worker proofs and no live control. Later r13 independently proved actual clean plugin source/import, a same-identity disabled/enabled 127x3 quality pair, and six matched performance phases with 120/120 candidate hot proof. The unpacked implementation was fast but quality regressed 230/381 to 219/381 and strict quality hot coverage missed 13/381. It was never a hash-bound MANIFEST package using the template wrapper; disable-uninstall-restart rollback and A/B/C attribution are unproven. No delivery or paper acceptance follows, and the branch repair is not main-integrated.",
+  "next_gate": "Do not rerun r13/r14 or package the unchanged quality-failing bytes as an accepted delivery. First isolate and repair the quality/activation defect under a new falsifiable hypothesis; then create a hash-bound MANIFEST package for the changed candidate, integrate and rerun the static-validator repair, prove same-wrapper disabled/enabled per-worker behavior, and run only the prospectively matched gates that the new package identity requires, including rollback and A/B/C attribution. Device use remains limited to actually idle physical NPU0-3 with continuous isolation and no external-work modification; push/integrate only after Git credentials work.",
   "drift_trigger": "Revalidate after main Skill/reference/registry, package schema or bytes, plugin source/test commit, image/model/physical lane, dataset/evaluator, raw r12 artifact, or any delivery acceptance rule changes."
 }

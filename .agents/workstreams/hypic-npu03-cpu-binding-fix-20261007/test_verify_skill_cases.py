@@ -115,6 +115,22 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(item["observed"]["r13_strict_four_worker_hot_requests"],
                          [368, 381])
 
+    def test_runtime_delivery_keeps_r13_measurement_separate_from_package(self) -> None:
+        path = cases.CASES / "runtime-monkeypatch-delivery.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"runtime-monkeypatch-delivery"})
+        self.assertEqual(skill, "runtime-monkeypatch-delivery")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertTrue(item["observed"]["r13_unpacked_plugin_same_identity_pair_complete"])
+        self.assertTrue(item["observed"]["r13_unpacked_plugin_performance_six_phases_complete"])
+        self.assertEqual(item["observed"]["r13_unpacked_plugin_quality_correct_baseline_candidate"],
+                         [230, 219])
+        self.assertEqual(item["observed"]["r13_unpacked_plugin_quality_decision"],
+                         "REJECT_OR_QUALIFY")
+        self.assertFalse(item["observed"]["plugin_manifest_package_present"])
+        self.assertFalse(item["observed"]["package_promotion_ready"])
+
     def test_architecture_fit_retrospective_is_not_prospective_pass(self) -> None:
         path = cases.CASES / "ascend-architecture-fit.json"
         skill, state = cases.check_case(

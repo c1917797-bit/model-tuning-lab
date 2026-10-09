@@ -13,9 +13,9 @@
   `verify_paper_to_ascend_reporting_case.py` checks its phase rows,
   formulas, receipts and profile boundaries. The reporting Skill remains
   partial pending exact historical command/failure-ledger completion review.
-  The benchmark-evidence case now separately replay-checks both bounded r13
-  verdicts without an NPU rerun. All 29 main Skills still have cases;
-  7 are bounded verified and 22 partial.
+  Benchmark and monkeypatch-delivery cases now replay-check bounded r13
+  mixed verdicts without an NPU rerun; delivery promotion remains barred.
+  All 29 main Skills have cases: 7 bounded verified, 22 partial.
 - The source-map checkpoint `a863fee7` is committed locally, but its
   2026-10-09 GitHub HTTPS push failed with unavailable Username credentials.
   Do not claim origin/main or the workstream remote contains this or later

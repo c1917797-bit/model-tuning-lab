@@ -96,6 +96,33 @@ def main() -> int:
            and result.get("guard_samples") == 279
            and result["diagnostic"]["four_worker_verified_requests"] == 52,
            "r12 bounded raw evidence drift")
+    mapped = command(sys.executable, "-B",
+                     str(HERE / "verify_ascend_source_map_case.py"))
+    expect(mapped.returncode == 0, f"r13 live-source replay failed: {mapped.stderr}")
+    source = json.loads(mapped.stdout.strip().splitlines()[-1])
+    expect(source["plugin_commit"] == PLUGIN_COMMIT
+           and source["r13_actual_bind_and_python_digest_verified"] is True,
+           "r13 unpacked plugin source was not proven live")
+    measured = command(sys.executable, "-B",
+                       str(HERE / "verify_benchmark_evidence_r13_case.py"))
+    expect(measured.returncode == 0,
+           f"r13 matched quality/performance replay failed: {measured.stderr}")
+    bounded = json.loads(measured.stdout.strip().splitlines()[-1])
+    expect(bounded["quality_pair"] == "127x3 each arm, REJECT_OR_QUALIFY"
+           and bounded["performance"] == "6/6 phases, EFFECT_SCREEN_PASS"
+           and bounded["strict_quality_hot"] == "368/381 FAIL"
+           and bounded["strict_performance_hot"] == "120/120 PASS"
+           and bounded["full_skill_acceptance"] is False,
+           "r13 unpacked A/B result or delivery boundary drift")
+    case = json.loads((HERE / "skill-cases/runtime-monkeypatch-delivery.json").read_text())
+    observed = case["observed"]
+    expect(observed["r13_unpacked_plugin_same_identity_pair_complete"] is True
+           and observed["r13_unpacked_plugin_performance_six_phases_complete"] is True
+           and observed["r13_unpacked_plugin_quality_correct_baseline_candidate"] == [230, 219]
+           and observed["r13_unpacked_plugin_quality_decision"] == "REJECT_OR_QUALIFY"
+           and observed["plugin_manifest_package_present"] is False
+           and observed["package_promotion_ready"] is False,
+           "r13 bounded result was incorrectly promoted as a package")
     print(json.dumps({
         "schema": "runtime-monkeypatch-delivery-real-task-case/v1",
         "main": MAIN,
@@ -108,7 +135,10 @@ def main() -> int:
         "guard_samples": 279,
         "long_term_acceptance": "partial-evidence",
         "package_promotion_ready": False,
-        "not_paired_quality_or_performance_verdict": True,
+        "r13_unpacked_plugin_pair_measured": True,
+        "r13_unpacked_plugin_quality": "REJECT_OR_QUALIFY",
+        "r13_unpacked_plugin_performance": "EFFECT_SCREEN_PASS",
+        "r13_not_hash_bound_manifest_package": True,
     }, sort_keys=True))
     return 0
 
