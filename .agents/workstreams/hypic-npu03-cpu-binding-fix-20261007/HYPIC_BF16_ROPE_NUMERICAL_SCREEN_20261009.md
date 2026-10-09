@@ -45,9 +45,19 @@ the relevant comparator. The verifier also exercises that path:
 | 128 → 4096 | 0.00141168 | 0.00164524 | 26.44% | 37.00% |
 | 4096 → 16384 | 0.00178415 | 0.00195941 | 34.54% | 43.19% |
 
-Thus FP32-compute/BF16-store is **not admitted as a repair**: in all three
-sampled cross-anchor comparisons it is farther from the direct native BF16
-target. This does not establish that RoPE caused the frozen r13 LongBench-v2
+The same-source/same-target test also screened one relative-position
+rotation of the source BF16 K, using the cache row at `target - source`:
+
+| Source → target anchor | Current MAE | Relative-rotation MAE | Relative changed elements |
+|---:|---:|---:|---:|
+| 1 → 4096 | 0.00064516 | 0.00107583 | 22.09% |
+| 128 → 4096 | 0.00141168 | 0.00186927 | 40.00% |
+| 4096 → 16384 | 0.00178415 | 0.00247490 | 50.25% |
+
+Thus neither FP32-compute/BF16-store nor one BF16 relative rotation is
+admitted as a repair: both are farther from the direct native BF16 target in
+all three sampled cross-anchor comparisons. These screens do not establish
+that RoPE caused the frozen r13 LongBench-v2
 quality change (230/381 to 219/381), nor that the current path is acceptable
 on NPU. The original FP32-only source-unit test did not cover BF16 or
 cross-anchor relocation. No r13 result, acceptance gate, plugin source, or
@@ -61,7 +71,7 @@ Before any quality rerun or source fix, compare the pinned runtime's actual
 fused-MRoPE cache and NPU K tensors for a fixed full-attention segment.
 Measure direct native target K against current canonicalize/relocate, then
 trace whether the difference reaches attention output/logits. Do not promote
-the widened variant based on the same-position screen. Separately test GDN
+either screened variant based on mathematical identity. Separately test GDN
 transition parity. Pre-register the first-divergence criterion and
 one-switch scope in a new immutable diagnostic root. Reject the RoPE
 hypothesis if its differences do not propagate materially; never

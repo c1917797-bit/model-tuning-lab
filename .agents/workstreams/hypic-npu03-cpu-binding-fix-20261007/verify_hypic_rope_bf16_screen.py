@@ -57,7 +57,8 @@ def main() -> None:
     )
     cache = torch.zeros(16385, rotary_dim, dtype=torch.float32)
     anchors = (1, 128, 4096, 16384)
-    for anchor in anchors:
+    relative_anchors = (4095, 3968, 12288)
+    for anchor in (*anchors, *relative_anchors):
         angle = anchor * inv_freq
         cache[anchor] = torch.cat((angle.cos(), angle.sin()))
     attention._ROPE_GEOMETRY = attention._RopeGeometry(
@@ -117,6 +118,9 @@ def main() -> None:
         relocated = attention._anchor_rope(
             canonical, target_anchor, inverse=False
         )
+        relative = attention._anchor_rope(
+            source_key, target_anchor - source_anchor, inverse=False
+        )
 
         source_cos_half, source_sin_half = cache[source_anchor].view(2, -1).unbind(0)
         target_cos_half, target_sin_half = cache[target_anchor].view(2, -1).unbind(0)
@@ -143,20 +147,31 @@ def main() -> None:
             widened_relocated[..., :rotary_dim].float()
             - direct_target[..., :rotary_dim].float()
         ).abs()
+        relative_error = (
+            relative[..., :rotary_dim].float()
+            - direct_target[..., :rotary_dim].float()
+        ).abs()
         current_mae = float(current_error.mean())
         widened_mae = float(widened_error.mean())
+        relative_mae = float(relative_error.mean())
         assert current_mae < widened_mae
+        assert current_mae < relative_mae
+        assert torch.equal(relative[..., rotary_dim:], direct_target[..., rotary_dim:])
         relocation_rows.append(
             {
                 "source_anchor": source_anchor,
                 "target_anchor": target_anchor,
                 "current_mae_to_direct_target": current_mae,
                 "widened_mae_to_direct_target": widened_mae,
+                "relative_mae_to_direct_target": relative_mae,
                 "current_changed_fraction": float(
                     (current_error > 0).float().mean()
                 ),
                 "widened_changed_fraction": float(
                     (widened_error > 0).float().mean()
+                ),
+                "relative_changed_fraction": float(
+                    (relative_error > 0).float().mean()
                 ),
             }
         )
