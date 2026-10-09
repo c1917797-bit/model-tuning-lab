@@ -1,0 +1,106 @@
+{
+  "schema": "sparq.full-model-admission-handoff/v1",
+  "recorded_at_utc": "2026-10-09T18:52:29.319Z",
+  "stage": "FULL_MODEL_ENTRY_FAILED_BEFORE_CONTAINER_ADAPTER_REPAIR_REQUIRED",
+  "repository": "/opt/host/vnf/austinov/model-tuning-lab",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "recoverable_failed_source_commit": "9c85d7adc7de3c898752ec5cbb9e2d0474f5c312",
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "sha256": "c3b2ae199c98d017c03a4a613d4db788a7946ae7f4c24906ba0127bc872f202e",
+    "own_files": 61,
+    "closure_files": 130
+  },
+  "software": {
+    "operation_id": "exec-00000000000005a8",
+    "actual_exit_code": 0,
+    "tests": 177,
+    "failures": 0,
+    "errors": 0,
+    "actual_clean_I_whole128_replay": true,
+    "physical_NPU_used": false,
+    "authority": "software closure only"
+  },
+  "previous_failure": {
+    "operation_id": "exec-000000000000059d",
+    "classification": "SOURCE_REGRESSION_FIXTURE_MISMATCH",
+    "original_archive_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_059D_FULLV12_SOFTWARE_FAILED_ORIGINAL",
+    "archive_whole_characters": 55532,
+    "archive_whole_sha256": "6b8a60219349fcf7161397a9004b803eb17214c420da5213dc564f6b420bf9b9",
+    "readback_reconstructed_and_JSON_parsed_operation": "exec-00000000000005b4",
+    "original_failed_source_stays_failed": true
+  },
+  "admission": {
+    "operation_id": "exec-00000000000005b4",
+    "actual_exit_code": 0,
+    "physical_NPU4_7_idle": true,
+    "ordinary_memory_bytes": 118686846976,
+    "output_absent": true,
+    "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "protected_NPU": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "foreign_containers_untouched": true
+  },
+  "live": {
+    "operation_id": "exec-00000000000005b5",
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/host_run.py",
+      "--execute",
+      "--source",
+      "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "c3b2ae199c98d017c03a4a613d4db788a7946ae7f4c24906ba0127bc872f202e",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-sparq005-consumer-mounts-whole-user72h-20261009-001.json",
+      "--component-sha256",
+      "5614469e833ada86ad9f2f5869d084752a7262d0ac1f3701b7246e9701df7a74",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--mode",
+      "diagnostic",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-002",
+      "--port",
+      "8241"
+    ],
+    "latest_observed_status": "failed",
+    "actual_NPU_model_execution": "not executed; CPU stage container_id=null",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-002",
+    "do_not_duplicate_start": true,
+    "poll_only_existing_operation": true,
+    "source_frozen_while_live": false,
+    "actual_exit_code": 1,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-002/RESULT.json",
+      "sha256": "2cf004a6484c0d6f28d04972a5deb80297aea3137f98963bb44ff10878a91056"
+    },
+    "first_fault": "actual_hbm selects first Memory-Usage ratio0/0 from combined AICore/Memory/HBM segment; actual HBM second ratio2867/32768. Reserve threshold unchanged.",
+    "raw_observation": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v12-diagnostic-user72h-20261009-002/cpu-preflight/observation-raw-1791571902397561240.json",
+      "sha256": "ab66a7d96c3dd1d10e86f6c9ce7cf3b6e0ef9a52a3dca9a22d5144505a9e7c68"
+    },
+    "original_operation_archive": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_05B5_FULLV12_DIAGNOSTIC_FAILED_ORIGINAL.json"
+  },
+  "next": "Preserve c3/177PASS and exact05b5 failure. Fix source-proven HBM parsing with raw real-format positive/negative tests, unchanged3GiB reserve/32768 capacity. Full software rerun, fresh admission then new diagnostic003; do not repeat002, do not reject paper.",
+  "goal": {
+    "status": "active_unmet",
+    "new_E2E_result": null,
+    "new_task_accuracy_result": null,
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "no_clock_reset": true
+  },
+  "preparers": {
+    "remote_exec_CPU": 0,
+    "main_is_only_device_admitter": true
+  },
+  "updated_at_utc": "2026-10-09T18:56:03.808Z"
+}

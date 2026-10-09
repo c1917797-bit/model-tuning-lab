@@ -55,7 +55,7 @@
     "test_ann_aggregate.py": "d67128bed1c8242c4e70fa45e4df588cae4915fbe9d0bd08f0d80b63a31369c0",
     "entry.py": "e8dfd9cf45a3405f28812b98484e4cb3342c979507d2b9b2c2f27c77e59c4a95",
     "component_handoff.py": "5b67da085a0b1ca950ef76eb5644668f6cd3999756aa57b1554e8272bc7dd04d",
-    "test_component_handoff.py": "2b53a3526f802ac863d3147dc54acdcefcfd4ee90aef5b70826f8d827fa3a8f9",
+    "test_component_handoff.py": "d97cacd37f0ee6e8ea4aa0c86bfc190b12b008ad1da9ee128eaede71899c3671",
     "test_fp32_model_adapter.py": "932bc4757c91c1c24e6b9f136267766af8f19d683e609f44dcc079ecfc3e26dd",
     "long_independent_oracle.py": "21fe6d9e7c78acdecb23ffe42196e38c8cfd6d55c2c08bb45f2826bf40d74605",
     "gdn_stream.py": "41bfd90bb5df44c4950063bfd22330d42be7314c9c619713e72f949907945b9e",
@@ -467,6 +467,15 @@
     "same_image": "UNRUN",
     "N1": "UNRUN",
     "model": "UNRUN",
-    "paired": "UNRUN"
+    "paired": "UNRUN",
+    "structure_fixture_repair": {
+      "original_source": "b9d1c8c0d423853e39de52e36a3a7030045745de75b15977693d422a6580307e",
+      "actual_failure_operation": "exec-000000000000059d",
+      "actual_tests": 177,
+      "actual_failures": 1,
+      "actual_clean_I_whole128_replay": "passed in059d; original failure preserved",
+      "change": "existing structure assertion now checks actual bootstrap/source identities and native-before-flat-import order with AST nodes, not unparse formatting; no test deletion/count or runtime change",
+      "new_full177": "UNRUN"
+    }
   }
 }

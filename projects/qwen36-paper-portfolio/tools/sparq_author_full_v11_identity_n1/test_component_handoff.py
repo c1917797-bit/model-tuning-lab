@@ -46,7 +46,28 @@ class SourceInterfaces(unittest.TestCase):
   s=(Path(__file__).parent/"source_contract.py").read_text()
   self.assertIn('h.source_interfaces()',s)
   self.assertIn('h.shard_source_interfaces()',s)
-  self.assertIn('("shard_contract","shard_contract.py"),("shard_rows","shard_rows.py"),("shard_proof","shard_proof.py"),("shard_host","shard_host.py")',s)
+  self.assertIn('bootstrap.dependencies(sys.modules[__name__])',s)
+  self.assertLess(s.index('bootstrap.dependencies(sys.modules[__name__])'),s.index('checked=reader.consume_successor(COMPONENT_READER_SOURCE)'))
+  import component_bootstrap as bootstrap
+  own=c.obj(dict(path=str(c.ROOT/"SOURCE_MANIFEST.json"),sha256=c.sha(c.ROOT/"SOURCE_MANIFEST.json")))
+  self.assertEqual(Path(bootstrap.__file__).resolve(),c.ROOT/"component_bootstrap.py")
+  self.assertEqual(c.sha(bootstrap.__file__),own["files"]["component_bootstrap.py"])
+  choices=bootstrap.expected(c)
+  for name in ("shard_contract","shard_rows","shard_proof","shard_host"):
+   self.assertEqual(choices[name],[(c.SHARD_ROOT/(name+".py"),c.SHARD_FILES[name+".py"])])
+  tree=ast.parse(Path(bootstrap.__file__).read_text())
+  fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="dependencies")
+  native=next(n for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=="native")
+  loop=next(n for n in fn.body if isinstance(n,ast.For))
+  self.assertEqual(ast.literal_eval(loop.iter),("shard_contract","shard_rows","shard_proof","shard_host"))
+  self.assertLess(native.lineno,loop.lineno)
+  cache_calls=[n for n in ast.walk(fn) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="verify_cached"]
+  self.assertTrue(cache_calls)
+  self.assertTrue(all([ast.dump(a,include_attributes=False) for a in n.args]==
+   [ast.dump(ast.Name(id=name,ctx=ast.Load()),include_attributes=False) for name in ("c","wants")] for n in cache_calls))
+  predicate=ast.parse("c.sha(mod.__file__) == c.SHARD_FILES[name + '.py']",mode="eval").body
+  self.assertTrue(any(isinstance(n,ast.Compare) and ast.dump(n,include_attributes=False)==ast.dump(predicate,include_attributes=False)
+   for n in ast.walk(fn)))
   self.assertIn('checked=reader.consume_successor(COMPONENT_READER_SOURCE)',s)
   self.assertIn('x.get("consumer_source")==COMPONENT_READER_SOURCE',s)
   self.assertIn('x.get("old_consumer_outcome")=="FAILED-not-promoted"',s)
