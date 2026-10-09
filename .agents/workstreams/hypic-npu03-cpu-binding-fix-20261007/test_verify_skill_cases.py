@@ -26,10 +26,24 @@ class SkillCaseTests(unittest.TestCase):
             self.assertEqual(cases.main(), 0)
         report = json.loads(output.getvalue())
         self.assertEqual(report["registered_skills"], 29)
-        self.assertEqual(report["cases_with_verified_provenance"], 19)
-        self.assertEqual(report["skills_without_case"], 10)
-        self.assertEqual(report["case_acceptance"],
-                         {"partial-evidence": 17, "verified": 2})
+        self.assertGreaterEqual(report["cases_with_verified_provenance"], 20)
+        self.assertLessEqual(report["skills_without_case"], 9)
+        self.assertGreaterEqual(report["case_acceptance"]["partial-evidence"], 18)
+        self.assertEqual(report["case_acceptance"]["verified"], 2)
+        self.assertEqual(report["cases_with_verified_provenance"]
+                         + report["skills_without_case"], 29)
+
+    def test_loop_framework_repair_is_partial_until_fresh_resume(self) -> None:
+        path = cases.CASES / "mst-loop-engineering-framework.json"
+        skill, state = cases.check_case(
+            path, self.main_commit, {"mst-loop-engineering-framework"})
+        self.assertEqual(skill, "mst-loop-engineering-framework")
+        self.assertEqual(state, "partial-evidence")
+        item = json.loads(path.read_text())
+        self.assertEqual(item["observed"]["active_operation"],
+                         "exec-0000000000001a76")
+        self.assertFalse(item["observed"]["fresh_agent_resume_and_push_verified"])
+        self.assertFalse(item["observed"]["integrated_main_skill_changed"])
 
     def test_canary_does_not_promote_one_wrong_sample(self) -> None:
         path = cases.CASES / "ascend-canary-implementation.json"

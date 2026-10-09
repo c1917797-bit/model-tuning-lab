@@ -11,7 +11,7 @@
   acceptance remain incomplete. cache10r3 through cache10r8 are
   environment/isolation invalid, not HYPIC algorithm or quality verdicts.
 - Main has 29 Skills; long-term per-Skill cases on this branch: 2 bounded
-  verified, 17 partial, 10 missing. V11/P14/N4 is a separate campaign matrix.
+  verified, 18 partial, 9 missing. V11/P14/N4 is a separate campaign matrix.
 - Full historical checkpoints are retained in HANDOFF_HISTORY.md.
 - r9 is terminal FAILED at 93/127 after a worker-local GDN material miss.
   See HOTPATH_CACHE10R9_EVICTION_RACE_ROOT_CAUSE.md; no quality verdict.
@@ -68,6 +68,8 @@ cache10split remains unapproved and must not run.
   Main remains partial; see PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md.
 - The user chose actual-idle attempts; passive mapping alone does not block
   use, while real foreign NPU processes do.
+- Loop-framework case caught and repaired stale task.json active_attempt=null;
+  its exact-main long-term status remains partial pending fresh-agent replay.
 
 ## 4. Current Action
 

@@ -1,0 +1,40 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-loop-engineering-framework",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Detect and repair a stale active-attempt manifest during the live r13 HYPIC full-pair loop while preserving the three-horizon objective and actual-idle NPU0-3 boundary",
+  "executed_at_utc": "2026-10-09",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "32ae84455395011aa83308e3cc05759aa2206441",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 named worktree; CPU-only task-state repair and Git-snapshot replay while an independently polled NPU0-3 quality service remained live",
+  "observed": {
+    "counterexample": "r12-terminal state, active_attempt null and obsolete user-choice next action while r13 no-cache operation exec-0000000000001a76 was running",
+    "repair_commit": "494771a8157624d659f562837f380f166f499d8d",
+    "pinned_task_json_sha256": "bda19ddd6de1545422f5b2ab60a58103c92d0aa30ae4fa1bdd186b1b287c91b6",
+    "pinned_handoff_test_sha256": "a64d39ed0cb631e45bc839d0124c9459035cfd9a755ebf624e6883c9e2e604ac",
+    "active_operation": "exec-0000000000001a76",
+    "goal_horizons": 3,
+    "offline_workstream_tests_passed": 79,
+    "maintainer_structure_skills": 29,
+    "fresh_agent_resume_and_push_verified": false,
+    "integrated_main_skill_changed": false
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/LOOP_FRAMEWORK_R13_HANDOFF_CASE_20261009.md",
+      "sha256": "e99c6dd3fbd4a4069b0e90185023744d255064ce1c672b4959801396b2f36991"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_loop_framework_case.py",
+      "sha256": "a85e39e7fabd2cd43afbf82042abd14992edee469e580a95d34559e7825d6c14"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "This case verifies one real non-drift counterexample and repaired branch-local resume state against the exact main Skill's generic contract. It does not prove a fresh agent can complete the full loop, push to GitHub, integrate main, obtain terminal HYPIC quality/performance, or validate the branch-only three-horizon reference as main text.",
+  "drift_trigger": "Re-run after the main Skill or registry changes, after task-manifest/handoff schema changes, and at r13 terminal/candidate handoff; perform a fresh-agent orient/validate/push trial when GitHub auth is available."
+}
