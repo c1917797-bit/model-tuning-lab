@@ -46,7 +46,7 @@
   `HOTPATH_CACHE10PERF_RETRY21_AND_SIX_PHASE_TERMINAL_AUDIT_20261009.md`.
 - Retry19 terminally failed before health/scoring: its continuous guard captured foreign PID 1731309 on physical NPU2 twice, with 46 total samples and zero probe errors. It produced zero scored requests; only retry19's exact owned service container was removed. The five receipts replay-pass `verify_retry19_environmental_failure.py`; see `HOTPATH_CACHE10PERF_RETRY19_TERMINAL_AUDIT_20261009.md`. This is environmental, not a HYPIC verdict.
 - Retry20 for the HYPIC-only/repeat3 sixth phase terminally failed before health/scoring: guard captured foreign PID 1890601 on physical NPU3 (container `efc5e45e…`), with 36 samples and zero probe errors. It produced zero scored requests/metrics; only the exact owned service was removed. Replay audit: `HOTPATH_CACHE10PERF_RETRY20_TERMINAL_AUDIT_20261009.md`; verifier `verify_retry20_environmental_failure.py`. A 14:38 UTC follow-up still saw external PIDs 1890601 and 1920829 on NPU3; port 8223 was free. Keep monitoring, do not stop or modify the external task, and do not launch until a new direct-route snapshot proves physical NPU0–3 and 8223 idle.
-- Paired LongBench-v2 explicit-boundary max-2048 quality is complete and valid: no-cache 230/381, HYPIC 219/381, delta -2.8871 percentage points (`REJECT_OR_QUALIFY`). Strict four-worker hot coverage is 368/381 and fails universal mechanism attribution. Do not reinterpret these results.
+- Paired LongBench-v2 explicit-boundary max-2048 quality is complete and valid: no-cache 230/381, HYPIC 219/381, delta -2.8871 percentage points (`REJECT_OR_QUALIFY`). Strict four-worker hot coverage is 368/381 and fails universal mechanism attribution. Read-only matched-hot repetition pairs show candidate answer variability exceeds baseline; see `HYPIC_R13_RESPONSE_VARIABILITY_DIAGNOSIS_20261009.md`. This is not causal proof or a reclassification.
 - All six matched performance phases have an independent valid audit, and all
   120 candidate scored requests have four-worker hot-path proof. Retries15-20
   remain immutable environmental isolation failures, not HYPIC performance
@@ -57,10 +57,8 @@
   `ascend-cannbot-profiler` now has real Prefill and Decode captures but
   remains partial: the original numeric column gate missed, and no
   profiler-driven quality root cause or main integration is proven.
-- The previous coherent profiler checkpoint was pushed and independently
-  verified at `c22c81b5b3069636cbb8ee962917393c900b9cee`.
-  This new r6 audit/Skill case is branch-local until validated and pushed;
-  do not claim main integration.
+- The r6 profiler/Skill checkpoint was pushed and independently verified at
+  `3b1b59e3c22b30a31c19c9fdb108cb786b60cc84`; do not claim main integration.
 
 ## 1. North Star
 
@@ -68,12 +66,11 @@ Finish the frozen HYPIC experiment without changing its technical question or ac
 
 ## 2. Current Focus
 
-The frozen six-phase HYPIC performance comparison is complete. Preserve its
-separate quality rejection. Both Prefill and Decode profiler captures and
-four-rank parses are now independently replayable. Map their successes and
-the failed first offline parse to the Cannbot case, then pursue bounded
-quality-regression attribution. The original Prefill numeric gate remains
-missed and the main-29 inventory is not fully accepted.
+The frozen performance and quality comparisons are complete; quality remains
+rejected. Four-rank Prefill/Decode profiler capture and parsing replay-pass,
+including the retained first-parser failure. The read-only response-variability
+replay narrows the next quality question but does not isolate cause. Preserve
+the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 3. Recent Progress
 
@@ -85,12 +82,11 @@ missed and the main-29 inventory is not fully accepted.
 - No-cache/screen, HYPIC/screen, HYPIC/repeat2, no-cache/repeat2, and no-cache/repeat3 have independent phase audits; see their audit paths in `task.json`.
 - Retry14 guard recorded foreign `cannbench_ds` PID 242978 on physical NPU1 in 18 clean-probe samples. The service did not reach health and produced zero scored requests. Only the exact retry14-owned container was removed. Audit: `HOTPATH_CACHE10PERF_RETRY14_TERMINAL_AUDIT.md`.
 - `verify_paper_to_ascend_reproduction_case.py` now verifies retry14 receipts and its four startup/capability events, without treating them as measured performance.
-- The Paper-to-Ascend case and five-hour milestone plan are updated locally on this branch; the current tree remains uncommitted and unsynchronized.
 - The isolated repository-transformation suite replay-passes and adds bounded
   verified cases for `mst-agentsmd-authoring`, `mst-repo-transformation`,
   `mst-runtime-skill-boundary`, `mst-skill-governor`, and
   `mst-skill-tree-design`. The Cannbot boundary case re-proves current
-  `/cache/cch` source locations and preserves its missing-capture boundary.
+  `/cache/cch` source locations; the later four-rank captures are separately audited.
 
 ## 4. Current Action
 

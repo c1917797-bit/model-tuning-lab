@@ -57,6 +57,11 @@
     "r13_regressions_newly_length_limited_descriptive": [20, 30],
     "r13_hot_regressions_newly_length_limited_descriptive": [19, 29],
     "r13_identical_response_hash_pairs": 2,
+    "r13_within_arm_exact_text_pairs_baseline_candidate": [37, 0],
+    "r13_matched_hot_within_arm_same_prediction_pairs_baseline_candidate": [322, 294],
+    "r13_matched_hot_within_arm_median_common_prefix_chars_baseline_candidate": [653, 207],
+    "r13_samples_with_longer_baseline_candidate_within_arm_prefix": [93, 24],
+    "r13_response_variability_causality_proven": false,
     "r13_length_limit_causality_proven": false,
     "r13_quality_repair_or_full_skill_acceptance_proven": false,
     "main_skill_integrated": false
@@ -129,10 +134,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R13_LENGTH_DELTA_DIAGNOSIS.md",
       "sha256": "8927bfbe8d17daf06cd9f0fac2fc3c2aeb50d55ae2443a07fd50bf67a57731bf"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_RESPONSE_VARIABILITY_DIAGNOSIS_20261009.md",
+      "sha256": "680895ef399f6e6ea116ef9def12e2fd445bd6cd3a92991bcd472b7ccc3a3f77"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/analyze_r13_response_variability.py",
+      "sha256": "a5d60b05514766adda0db26dd4963e3ef3099d81a6bbf787c0ba3d47e810c5b8"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r13_response_variability.py",
+      "sha256": "d8abb3b7aba8bdfc0cfd0c0b10e48e0ae8a925bc740a5d2c902e3170f745c2b2"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. Hot-cohort quality also falls descriptively; 19/29 hot regressions were newly length-limited, but this association proves neither truncation nor HYPIC as the cause. Current main lacks the branch's per-scored-request proof wording, and the c8 LongBench-v2-only task does not validate the default GSM8K/c32 ruler or deterministic canary. No full Skill, paper, or performance acceptance follows.",
-  "next_gate": "Complete and independently audit frozen six-phase performance without overriding r13 quality rejection. Isolate hot-path answer divergence and test any repair with a fresh matched source/control identity; integrate and replay main request-level proof requirements. Validate missing default-ruler dataset/canary conditions before upgrading this Skill case; never reuse the 0.9 baseline or r13 negative roots as a repaired pair.",
+  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. Hot-cohort quality falls descriptively; the new read-only matched-hot within-arm comparison also finds more candidate answer variability, but proves no causal mechanism. Current main lacks the branch's per-scored-request proof wording, and the c8 LongBench-v2-only task does not validate the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
+  "next_gate": "Use a fresh prospectively matched on/off long-output canary, if device work is justified and authorized, to discriminate hot-path answer variability without changing the frozen r13 result. Integrate and replay main request-level proof requirements and validate missing default-ruler dataset/canary conditions before upgrading this Skill case. Never reuse the 0.9 baseline or r13 negative roots as a repaired pair.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }

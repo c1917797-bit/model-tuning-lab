@@ -228,6 +228,11 @@ class SkillCaseTests(unittest.TestCase):
                          "REJECT_OR_QUALIFY")
         self.assertEqual(item["observed"]["r13_strict_hot_scored_requests"],
                          [368, 381])
+        self.assertEqual(item["observed"]["r13_within_arm_exact_text_pairs_baseline_candidate"],
+                         [37, 0])
+        self.assertEqual(item["observed"]["r13_matched_hot_within_arm_same_prediction_pairs_baseline_candidate"],
+                         [322, 294])
+        self.assertFalse(item["observed"]["r13_response_variability_causality_proven"])
         self.assertFalse(item["observed"]["r13_quality_repair_or_full_skill_acceptance_proven"])
         self.assertFalse(item["observed"]["main_skill_integrated"])
         self.assertEqual(item["observed"]["r12_four_worker_verified_scored_requests"], 52)

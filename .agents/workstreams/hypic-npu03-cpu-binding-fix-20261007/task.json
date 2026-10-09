@@ -983,5 +983,15 @@
     },
     "skill_case_acceptance": "partial-evidence"
   },
-  "next_action": "Do not rerun completed HYPIC phases or the now-valid Prefill/Decode profiler roots. Replay the independent r6 Decode audit, map its success and first offline-parser failure into the Cannbot Skill cases, and use the actual traces for bounded quality-regression attribution without claiming a CANN/HCCL root cause from kernel counts alone. Preserve the original Prefill >=47-column preregistration miss. Keep full Skill acceptance partial until its remaining attribution/integration gates pass. Skill cases must retain provenance; validate and push this coherent branch checkpoint, then review authorized main integration separately."
+  "r13_response_variability_diagnosis": {
+    "report": "HYPIC_R13_RESPONSE_VARIABILITY_DIAGNOSIS_20261009.md",
+    "scope": "read-only descriptive replay; no new device work or quality reclassification",
+    "baseline_candidate_exact_within_arm_text_pairs": [37, 0],
+    "matched_hot_within_arm_pairs": 357,
+    "baseline_candidate_matched_hot_same_prediction_pairs": [322, 294],
+    "baseline_candidate_matched_hot_median_common_prefix_chars": [653, 207],
+    "causal_root_proven": false,
+    "skill_case_acceptance": "partial-evidence"
+  },
+  "next_action": "Do not rerun completed HYPIC phases or the now-valid Prefill/Decode profiler roots. Skill cases must retain provenance and the frozen HYPIC quality rejection. The read-only r13 response comparison found more candidate within-arm variability even on 357 matched hot-only repetition pairs; this is not causal proof. Review a small prospectively matched on/off long-output canary only if fresh physical NPU0-3 ownership and authorization justify another device test; do not use NPU4-7 or stop external work. Keep full Skill acceptance partial until its remaining attribution/default-ruler/integration gates pass; validate and push this coherent branch checkpoint, then review main integration separately."
 }
