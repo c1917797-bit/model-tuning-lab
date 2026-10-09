@@ -1,6 +1,6 @@
 experiment_id: exp-20261009-hypic-gdn-affine-npu03-r2
 owner_workstream: hypic-npu03-cpu-binding-fix-20261007
-stage: planned
+stage: failed
 scope: diagnostic_only
 predecessor: exp-20261009-hypic-gdn-affine-npu0
 predecessor_failure: container init failed before GDN operator (ACL 507008)
@@ -38,3 +38,17 @@ raw_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/gdn-affine-20261009-r2
 owned_container: hypic_gdn_affine_npu03_20261009_r2
 run_command: python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_hypic_gdn_affine_npu_probe.py
 cleanup: stop and remove only the exact identity-verified owned container; preserve raw root
+terminal_failure:
+  at_utc: 2026-10-09T23:30:05Z
+  phase: torch.npu.set_device(0) before operator invocation
+  classification: same ACL 507008 as r1; four-device mapping alone did not fix it
+  guard_samples: 12
+  foreign_processes: 0
+  owned_npu_process_observed: false
+  owned_container_released: true
+  raw_terminal_sha256: 61a602ac1121ba58f5a6efd33cef85e784da1e1cc289a782b6af6970d2ba19ce
+  raw_log_sha256: 7e9908a0330597bdeaf915ea3e52cb42354c12c079ea985be1fd6d73bd6140c7
+  raw_container_inspect_sha256: 78c9c882eebac1cf6dc7d27c0eaa9581b13228ffb5d1a1acbb3ec5a0d189e6ab
+  raw_lane_guard_sha256: 1d4e5c74518a615250f118fe36661f5cf083d40381309624a200df53578459b4
+  source_commit: 7438e06b
+  report: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_GDN_AFFINE_R2_FAILURE_20261009.md

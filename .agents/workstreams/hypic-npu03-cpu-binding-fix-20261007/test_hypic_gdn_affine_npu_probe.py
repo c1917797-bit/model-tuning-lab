@@ -9,8 +9,8 @@ from run_hypic_gdn_affine_npu_probe import NAME, NUMBERED_DEVICES, RAW, npu_proc
 
 class NpuProcessParserTests(unittest.TestCase):
     def test_successor_has_distinct_identity_and_only_allowed_physical_devices(self) -> None:
-        self.assertEqual(NAME, "hypic_gdn_affine_npu03_20261009_r2")
-        self.assertEqual(RAW.name, "gdn-affine-20261009-r2")
+        self.assertEqual(NAME, "hypic_gdn_affine_npu03_20261009_r3")
+        self.assertEqual(RAW.name, "gdn-affine-20261009-r3")
         self.assertEqual(NUMBERED_DEVICES, tuple(f"/dev/davinci{i}" for i in range(4)))
 
     def test_all_four_cards_idle(self) -> None:
