@@ -31,7 +31,7 @@ def main():
   observed["owned_memory_cgroup"]=gdn_stream.memory(8*1024**3)
   import numpy
   c.require(all(callable(getattr(numpy,name,None)) for name in ("frombuffer","bitwise_and","equal")),"actual NumPy checker exports")
-  observed["GDN_stream_checker"]=dict(protocol=gdn_stream.PROTOCOL,source=c.bound(gdn_stream.__file__,files["gdn_stream.py"]),
+  observed["GDN_stream_checker"]=dict(protocol=gdn_stream.PHYSICAL_PROTOCOL,source=c.bound(gdn_stream.__file__,files["gdn_stream.py"]),
    numpy=dict(version=numpy.__version__,file=c.bound(Path(numpy.__file__).resolve(),c.sha(Path(numpy.__file__).resolve()))),
    state_arithmetic_executed=False,actual_initialized_shape_and_joint_budget_pending=True)
   observed["deployed_GDN_sources"]=gdn_source.sources()

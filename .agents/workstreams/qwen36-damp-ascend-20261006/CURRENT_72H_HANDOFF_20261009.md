@@ -1,5 +1,70 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current verified state — 2026-10-09 23:36 UTC (supersedes RUNNING below)
+
+Read SPARQ_FULLV16_MODEL007_FAILED_ENUM_REFERENCE_20261010.json first.
+MAIN08c0/model007 is TERMINAL FAILED, exact owned TP4 CID stopped-retained.
+Actual native FA metadata records both enum strings as AttentionType.DECODER;
+the consumer wrongly requires decoder. This is proved REFERENCE_OR_TEST,
+before candidate arithmetic, not a numerical/paper failure. Original c67efb
+source and whole terminal f064de remain immutable. Minimal repair is pending.
+Whole262 startup/software scope does not grant model, E1 or task PASS.
+NPU4-7 sampled idle at MAIN0919; executable device successor count0 due to
+reference/geometry/collector preparation gaps. No foreign-stop or dummy load.
+AdaKV component5120 PASS is not TP4 PASS. KIVI c8cc owned adapter is source-only.
+First Oct10 07:00:25Z and total Oct12 07:00:25Z clocks remain fixed;
+HugeTLB32GiB SPENT; normal Git publication authentication remains pending.
+
+
+
+## Current verified state — 2026-10-09 23:15 UTC (supersedes earlier state below)
+
+Read SPARQ_FULLV16_MODEL007_RUNNING_20261010.json first.
+- MAIN08b9 actually passed complete262/source140 after retaining088a's2errors.
+  Only two obsolete test fixtures changed; production math/tolerances unchanged.
+  MAIN08b8 two-case smoke and08bf true default-OFF/model source audit passed.
+- CURRENT MAIN08c0 is RUNNING with actual source-bound PLAN and host PID/start.
+  Whole-model diagnostic007 is not model/numerical/E1/performance/task PASS.
+  Do not infer current physical compute from launch; poll only this operation.
+  One whole5400 includes90cleanup; first Oct10 07:00:25Z cutoff unchanged.
+- AdaKV original0805 native32x160 and derived17 actual whole0887/5120 consume
+  PASS are component-only.023 actual52+27 software and08a7 materialization101
+  passed, but NO AdaKV TP4 launch: config.num_blocks full GDN before copies,
+  conditional66.77GiB lower bound and alias writer domains need thin adaptation.
+  Do not use C16-only estimate/shrink cache/raise budget or reject the paper.
+- NEXT E1v7 c447df is explicitly rebound to c67efb;24 software UNRUN and
+  actual007 independent model authority MISSING. BACKUP KIVI dfb0 is source-only,
+  tests12 and format/owned-capture entry pending. No fake ready/NPU promotion.
+- Three API-only preparers continue independently: final official task artifacts,
+  AdaKV exact geometry/physical observer, KIVI format/collector seam. CPU0.
+- All whole originals and first MAIN wrapper failure08b6 retained externally.
+  No new legal throughput/TTFT/TPOT/task accuracy. Goal ACTIVE/unmet;
+  protect0–3/OVS, HugeTLB32GiB SPENT, Git HTTPS auth failure unchanged.
+
+## Current verified state — 2026-10-09 22:06 UTC (supersedes earlier state below)
+
+Read ADAKV_NATIVE015_FAILED_PREINIT_FD_20261010.json first for this stage.
+- MAIN07ab task ARM actual software12 and compile3 PASSED under private002.
+  This is entry/fixture software only: model_authority=false, task_authority=false.
+- MAIN07c1 AdaKV015 real source audit passed; actual own19/current-row10 receipts
+  and source hashes match. MAIN07c5 full-stage command is TERMINAL FAILED (exit1).
+- Same660 Devices[] CPU ABI passed. Physical4 canary failed before explicit
+  arithmetic at guest preinit zero-FD guard: both observations initialized=false;
+  import opened only manager/hdc common handles. Native PA 32x160 is UNRUN, not failed.
+- CPU97ade8... and card4 28d5c7... stopped and retained, no OOM/cleanup errors;
+  exact RELEASE and original result retained. No numerical/model/E1/E3/task authority.
+- NEXT: private016 minimally separates CPU zero-FD from owned hardware bootstrap
+  checks, with actual raw positive/negative fixtures. Reuse original numeric math,
+  thresholds, budgets/90s cleanup/fixed72h; no unchanged015 rerun or foreign stop.
+- SparQv16 and AdaKV021 remain API-only private preparation, software/model UNRUN.
+  Four-card SparQ005 still lacks whole numerical PASS. No new valid E2E speed/quality.
+- Raw source/software/orientation records:
+  /cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c72-source-and-adakv015-stage-evidence-20261010-001/
+  Keep the original RUNNING ACK as historical; terminal07c5 supersedes it.
+- Existing HTTPS push authentication failure is unchanged; no blind retry,
+  no TLS disable, no credential search. Canonical branch stays off main.
+
+
 ## Current verified state — 2026-10-09 21:29 UTC
 
 Read SPARQ_FULLV15_MODEL005_FAILED_SHARED_POOL_20261009.json first.

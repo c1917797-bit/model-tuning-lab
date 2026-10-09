@@ -1,0 +1,115 @@
+{
+  "schema": "paper.causal-adakv015-canary-preinit/v1",
+  "created_utc": "2026-10-09T22:06:13Z",
+  "classification": "REFERENCE_OR_TEST",
+  "cause_state": "proved observed preinit predicate mismatch; successor still UNRUN",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/SOURCE_MANIFEST.json",
+    "sha256": "266560034eabe48fddaf4a966bda218462d341c5a78e79e244433323f247c690"
+  },
+  "operation": {
+    "id": "exec-00000000000007c5",
+    "terminal": true,
+    "exit_code": 1,
+    "cancelled": false,
+    "timedOut": false,
+    "duration_ms": 110893
+  },
+  "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001",
+  "original_result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/RESULT.json",
+    "sha256": "ff29ae0c86ddc25e717acfd0deb20e58c9f53e38c76a0897d87dd74065b95de2"
+  },
+  "cause": "guest_probe.py line24 requires Ascend_fds=[] in CPU and hardware canary; deployed torch/torch_npu import opens only manager and hdc handles on the single-card canary while initialized stays false in both collected phases. The later runtime-import zero-FD predicate has the same scope issue. No PA numerical execution occurred.",
+  "evidence": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/cpu-preflight/ABI_RAW_BEFORE_VALIDATE.json",
+      "sha256": "7134bba6081dfad7fc5cb15a72f46263210a3a1a511a031daf14df9127936500"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/physical4/ABI_RAW_BEFORE_VALIDATE.json",
+      "sha256": "5147b28974fedfbd4e2387e3633b83b26d33e6553949ccc01329f50af930cdf8"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/physical4/PROBE_FAILURE.json",
+      "sha256": "79deda54e5385477d6074ba6489bb2ad6ce84ffd5490a9b77a4da5983cef3df0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/physical4/canary-child.json",
+      "sha256": "32286dbc460fb7f4b34a34b6df082a1eb081510244e5c4b889142ce057bf3538"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/cpu-preflight/cleanup.json",
+      "sha256": "d54369a77f6e873a0a90fab6c2dc0f292f95417b027939b733c977ddbf502a19"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/physical4/cleanup.json",
+      "sha256": "66b30469a4a580d35896c1dfcd11db6b951ea49ca0634af003e3fc1b24d2b152"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-014-main-20261010-020-next-001/RELEASE.json",
+      "sha256": "261809a1143cf9735057cb3ea404cf944ef53b3aaff85cb14f181e18cd1e81c1"
+    }
+  ],
+  "observed": {
+    "cpu_nodes": [],
+    "cpu_fds": [],
+    "cpu_initialized": false,
+    "hardware_nodes": [
+      "/dev/davinci0",
+      "/dev/davinci_manager",
+      "/dev/devmm_svm",
+      "/dev/hisi_hdc"
+    ],
+    "hardware_fds": [
+      {
+        "fd": "3",
+        "target": "/dev/davinci_manager"
+      },
+      {
+        "fd": "4",
+        "target": "/dev/davinci_manager"
+      },
+      {
+        "fd": "5",
+        "target": "/dev/davinci_manager"
+      },
+      {
+        "fd": "6",
+        "target": "/dev/hisi_hdc"
+      }
+    ],
+    "hardware_initialized": false,
+    "observed_same_flags_after_source": true,
+    "cpu_abi_passed": true,
+    "canary_arithmetic_passed": false,
+    "native_cases": 0,
+    "native_steps": 0,
+    "selector_executed": false,
+    "model_executed": false
+  },
+  "cleanup": {
+    "cpu_cid": "97ade8f1142f64ed5f8622cc78017f4c48c1328b15368556c291d71320520871",
+    "physical4_cid": "28d5c754b927508684a1a6a57fa5f8538f8e01594f54940fcad3d65d285034a8",
+    "stopped_retained": true,
+    "deleted": false,
+    "errors": [],
+    "seconds": 32.72342648997437,
+    "protected0_3_own": false
+  },
+  "next": "Freeze private016 local preinit predicate repair: keep CPU zero nodes/FD/init; hardware only source-observed common bootstrap handles, exact owned singleton nodes and initialized false, reject compute/unknown FDs and extra nodes. Add actual raw positive/negative fixtures and run original software then a new bounded32x160 once. Keep native producer, independent math, .005/.99998, budgets, cleanup90 and fixed human cutoff unchanged.",
+  "conclusion_scope": "This015 run did not complete hardware validation. No claim against AdaKV method, no numerical/model/performance/quality authority.",
+  "goal_achieved": false,
+  "push": "pending known HTTPS authentication; no blind retry",
+  "task_arm_software": {
+    "operation": "exec-00000000000007ab",
+    "tests": 12,
+    "exit": 0,
+    "original_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-sparq-task-arm-startup-gate-software-main-20261010-002/RESULT.json",
+      "sha256": "4d480c6a66a0ef4a774157f5eeea96e2c4ef98b8ed4898f41a378e025f5c5987"
+    },
+    "model": false,
+    "task": false
+  }
+}

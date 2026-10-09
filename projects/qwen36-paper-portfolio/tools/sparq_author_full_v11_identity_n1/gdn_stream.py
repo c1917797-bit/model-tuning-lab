@@ -301,7 +301,7 @@ def consume_summary(summary,identity,written):
 
 def validate_probe(probe,files):
  g=probe["GDN_stream_checker"]
- c.require(g["protocol"]==PROTOCOL and g["source"]["sha256"]==files["gdn_stream.py"] and
+ c.require(g["protocol"]==PHYSICAL_PROTOCOL and g["source"]["sha256"]==files["gdn_stream.py"] and
   g["state_arithmetic_executed"] is False and g["actual_initialized_shape_and_joint_budget_pending"] is True,
   "actual same-image CPU new-checker source dependency; no synthetic state/model proof")
  c.bound(g["source"]["path"],g["source"]["sha256"])
@@ -311,3 +311,344 @@ def validate_probe(probe,files):
   __import__("re").fullmatch("[a-f0-9]{64}",np["file"]["sha256"] or "") is not None,
   "actual immutable660 image NumPy module observed in CPU source closure; no host nonexistent path dereference")
  return g
+# REFERENCE_OR_TEST successor: raw shared-pool ownership, not per-layer
+# inactive semantics. Historical v2 helpers above remain historical only.
+PHYSICAL_PROTOCOL="sparq.GDN-shared-physical-pool-byte-reference/v3"
+PHYSICAL_BUDGET="sparq.GDN-four-rank-physical-pool-budget/v2"
+ALLOCATOR_PINS={
+ "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py":"6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666",
+ "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py":"94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+ "/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_v1.py":"80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"}
+def writer_sources(raw):
+ c.require(raw.get("allocator_source_pins")==ALLOCATOR_PINS,
+  "same installed original allocator/request/cache writer source, not producer flags")
+IDENTITY_FIELDS=("shape","stride","dtype","device","pointer","storage_pointer",
+ "storage_offset","storage_bytes","native_format_value","native_format_type")
+def physical_identity(x):
+ c.require(type(x) is dict and all(k in x for k in IDENTITY_FIELDS),"complete actual byte-view identity")
+ shape=x["shape"];stride=x["stride"];width=2 if x["dtype"]=="torch.bfloat16" else 4
+ c.require(x["dtype"] in ("torch.bfloat16","torch.float32") and type(shape) is list and
+  len(shape)>=2 and type(stride) is list and len(stride)==len(shape) and
+  all(type(v) is int and v>0 for v in shape+stride),"original supported typed shape/stride")
+ product=1;inner=[]
+ for n in reversed(shape[1:]):inner.insert(0,product);product*=n
+ c.require(stride[1:]==inner and stride[0]>=product,"source original contiguous inner row with exact outer gap")
+ c.require(all(type(x[k]) is int for k in ("pointer","storage_pointer","storage_offset","storage_bytes","native_format_value")) and
+  x["pointer"]>0 and x["storage_pointer"]>0 and x["storage_offset"]>=0 and
+  x["storage_bytes"]>0 and x["storage_bytes"]%width==0 and
+  x["pointer"]==x["storage_pointer"]+x["storage_offset"]*width and
+  (x["storage_offset"]+(shape[0]-1)*stride[0]+product)*width<=x["storage_bytes"],
+  "actual pointer/offset/storage extent, never same-storage alias guess")
+ c.require(type(x["device"]) is str and __import__("re").fullmatch(r"npu:[0-9]+",x["device"]) is not None and
+  x["native_format_value"]==2 and x["native_format_type"]=="torch_npu.npu._format.Format",
+  "actual ND byte-addressable Ascend view; unsupported layout fails closed")
+ return dict(width=width,row_bytes=product*width,rows=shape[0])
+def _checked_identity(x,cache=None):
+ c.require(type(x) is dict and all(k in x for k in IDENTITY_FIELDS),"complete actual byte-view identity")
+ encoded=json.dumps({k:x[k] for k in IDENTITY_FIELDS},sort_keys=True,separators=(",",":"),allow_nan=False)
+ if cache is not None and encoded in cache:return cache[encoded]
+ result=(physical_identity(x),hashlib.sha256(encoded.encode()).hexdigest())
+ if cache is not None:cache[encoded]=result
+ return result
+def exact_view_key(x):return _checked_identity(x)[1]
+def slab_key(x):
+ physical_identity(x)
+ return (x["device"],x["storage_pointer"],x["storage_bytes"],x["native_format_value"],x["native_format_type"])
+def _validated_row_extent(x,info,slot):
+ c.require(type(slot) is int and 0<=slot<info["rows"],"actual typed state slot extent")
+ start=(x["storage_offset"]+slot*x["stride"][0])*info["width"]
+ return [start,start+info["row_bytes"]]
+def row_extent(x,slot):return _validated_row_extent(x,physical_identity(x),slot)
+def _validated_view_extents(x,info):
+ # Exact complete typed view only. Contiguous rows have no intervening bytes;
+ # padded outer strides retain EVERY gap, never a bounding-box exemption.
+ start=x["storage_offset"]*info["width"];step=x["stride"][0]*info["width"]
+ if step==info["row_bytes"]:return [[start,start+info["rows"]*step]]
+ return [[start+i*step,start+i*step+info["row_bytes"]] for i in range(info["rows"])]
+def full_view_extents(x):return _validated_view_extents(x,physical_identity(x))
+def normalize_extents(rows,size):
+ c.require(type(size) is int and size>0 and type(rows) is list,"finite complete physical slab")
+ rows=sorted(rows)
+ result=[]
+ for r in rows:
+  c.require(type(r) is list and len(r)==2 and all(type(v) is int for v in r) and
+   0<=r[0]<r[1]<=size,"source-derived physical byte interval inside owned slab")
+  if result and r[0]<=result[-1][1]:result[-1][1]=max(result[-1][1],r[1])
+  else:result.append(list(r))
+ return result
+def intersections(a,b):
+ out=[];i=j=0
+ while i<len(a) and j<len(b):
+  lo=max(a[i][0],b[j][0]);hi=min(a[i][1],b[j][1])
+  if lo<hi:out.append([lo,hi])
+  if a[i][1]<=b[j][1]:i+=1
+  else:j+=1
+ return out
+def complement(rows,size):
+ rows=normalize_extents(rows,size);out=[];start=0
+ for a,b in rows:
+  if start<a:out.append([start,a])
+  start=b
+ if start<size:out.append([start,size])
+ return out
+def fa_write_extents(identity,raw):return _validated_fa_write_extents(identity,raw,physical_identity(identity))
+def _validated_fa_write_extents(identity,raw,info):
+ """Original attention_v1.py1439-1453 real slot_mapping[:actual].
+ Exact ND stride proves byte-offset=storage_offset*2+slot*512.
+ EVERY actual slot is validated; sort only merges adjacent complete tokens.
+ """
+ writer_sources(raw)
+ c.require(identity["dtype"]=="torch.bfloat16" and len(identity["shape"])==4 and
+  identity["shape"][1:]==[128,1,256] and identity["stride"]==[32768,256,256,1],
+  "source-qualified ordinary BF16 CP1 kernel128 FA writer view")
+ c.require(type(raw) is dict and raw["schema"]=="sparq.actual-native-FA-writer-metadata/v1" and
+  raw["cache_write_scope"]=="original-reshape-and-cache-real-token-slice" and
+  raw["is_encoder_decoder"] is False and raw["cache_sharing_target"] is None and
+  raw["CP"] is False and raw["quantized"] is False,"actual unchanged ordinary native FA writer branch")
+ impl=raw["actual_implementation"]
+ c.require(impl["class"]=="vllm_ascend.attention.attention_v1.AscendAttentionBackendImpl" and
+  impl["attn_type"]==impl["decoder_value"]=="decoder" and type(impl["impl_id"]) is int and impl["impl_id"]>0 and
+  impl["enable_c8_quant"] is impl["enable_hamming_sparse"] is impl["is_kv_producer"] is False and
+  impl["kv_sharing_target_layer_name"] is None,"actual captured ordinary decoder implementation fields")
+ n=raw["num_actual_tokens"];slots=raw["slot_mapping"]
+ c.require(type(n) is int and n>0 and type(slots) is list and len(slots)==n and
+  all(type(v) is int and -1<=v<identity["shape"][0]*128 for v in slots),
+  "complete actual real-token native slot mapping, not lengths/table claims")
+ ordered=sorted(v for v in slots if v>=0)
+ c.require(all(ordered[i-1]!=ordered[i] for i in range(1,len(ordered))),"no actual native FA writer collision")
+ rows=[];base=identity["storage_offset"]*info["width"]
+ for slot in ordered:
+  start=base+slot*512
+  if rows and start==rows[-1][1]:rows[-1][1]=start+512
+  else:rows.append([start,start+512])
+ return rows
+
+def _minus(parts,cuts):
+ out=[]
+ for a,b in parts:
+  pos=a
+  for lo,hi in cuts:
+   if hi<=pos or lo>=b:continue
+   if pos<lo:out.append([pos,min(lo,b)])
+   pos=max(pos,hi)
+   if pos>=b:break
+  if pos<b:out.append([pos,b])
+ return out
+def physical_owners(states,fa,raw_loader=c.obj):
+ """All96 logical states and all16 FA writers; exact complete alias only."""
+ import gdn_metadata
+ c.require(type(states) is list and len(states)==96 and
+  {(s["layer"],s["name"]) for s in states}=={(i,n) for i in range(64) if i%4!=3 for n in ("conv","recurrent")} and
+  len({s["rank"] for s in states})==len({s["epoch"] for s in states})==1,
+  "all48 logical layers/both96 states in one real rank and epoch")
+ c.require(type(fa) is list and len(fa)==16 and {s["layer"] for s in fa}==set(range(3,64,4)),
+  "all16 actual FA metadata: no missing overlay writer")
+ pools={};pairs={};identity_cache={}
+ def checked(x):
+  info,vk=_checked_identity(x,identity_cache)
+  key=(x["device"],x["storage_pointer"],x["storage_bytes"],x["native_format_value"],x["native_format_type"])
+  return info,vk,key
+ for s in states:pairs.setdefault(s["layer"],{})[s["name"]]=s
+ for layer,pair in pairs.items():
+  a,b=pair["conv"],pair["recurrent"];raw=raw_loader(a["metadata"])
+  c.require(a["metadata"]==b["metadata"] and raw["prefix"]==a["prefix"]==b["prefix"] and
+   raw["epoch"]==a["epoch"]==b["epoch"] and raw["rank"]==a["rank"]==b["rank"],
+   "actual metadata belongs to each exact logical state")
+  domain=gdn_metadata.plan(raw,a["identity"]["shape"][0],b["identity"]["shape"][0])
+  for name,s in pair.items():
+   x=s["identity"];info,vk,key=checked(x)
+   c.require(x["device"]=="npu:"+str(s["rank"]),"no cross-rank pointer alias")
+   p=pools.setdefault(key,dict(identity={k:x[k] for k in ("device","storage_pointer","storage_bytes","native_format_value","native_format_type")},
+    members=[],views={},operations=[]))
+   if vk not in p["views"]:
+    extent=_validated_view_extents(x,info)
+    c.require(all(not intersections(extent,v["extents"]) for v in p["views"].values()),
+     "GDN views must be exact whole aliases or disjoint; partial overlap rejected")
+    p["views"][vk]=dict(identity=x,extents=extent,members=[])
+   member=dict(layer=layer,name=name,prefix=s["prefix"],metadata=s["metadata"],view=vk)
+   p["members"].append(member);p["views"][vk]["members"].append(member)
+   writes=domain["written_slots"][name]
+   p["operations"].append(dict(layer=layer,kind="GDN",dtype=x["dtype"],view=vk,
+    metadata=s["metadata"],name=name,slots=writes,extents=[_validated_row_extent(x,info,i) for i in writes]))
+ for row in fa:
+  c.require(row["rank"]==states[0]["rank"] and row["epoch"]==states[0]["epoch"],
+   "same actual FA/GDN turn and rank")
+  raw=raw_loader(row["metadata"]);writer_sources(raw)
+  c.require(raw["layer"]==row["layer"] and raw["prefix"]==row["prefix"] and raw["rank"]==row["rank"] and
+   raw["epoch"]==row["epoch"] and len(row["cache"])==2,"both actual original K/V identities and metadata")
+  k,v=row["cache"];ki,kv,kk=checked(k);vi,vv,vk=checked(v)
+  c.require(kk==vk and not intersections(_validated_view_extents(k,ki),_validated_view_extents(v,vi)),
+   "complete disjoint native K/V views in original shared slab")
+  for index,(x,info,key) in enumerate(((k,ki,kk),(v,vi,vk))):
+   c.require(x["device"]=="npu:"+str(row["rank"]) and key in pools,
+    "actual all64 initialized FA and GDN physical slab, not foreign cache")
+   pools[key]["operations"].append(dict(layer=row["layer"],kind="FA",dtype="torch.bfloat16",
+    metadata=row["metadata"],cache_index=index,extents=_validated_fa_write_extents(x,raw,info)))
+ for p in pools.values():
+  size=p["identity"]["storage_bytes"]
+  p["operations"].sort(key=lambda x:(x["layer"],x.get("name",""),x.get("cache_index",-1)))
+  p["allowed_write_extents"]=normalize_extents([r for op in p["operations"] for r in op["extents"]],size)
+  p["protected_extents"]=complement(p["allowed_write_extents"],size)
+  p["all_physical_bytes"]=size;p["protected_bytes"]=sum(b-a for a,b in p["protected_extents"])
+  p["before_owner"]=hashlib.sha256(json.dumps(p["identity"],sort_keys=True,separators=(",",":")).encode()).hexdigest()
+  p["exact_views"]=list(p["views"].values());del p["views"]
+ return sorted(pools.values(),key=lambda x:(x["identity"]["device"],x["identity"]["storage_pointer"]))
+def type_segments(pool,prior):
+ """Last observed native writer byte type, not cached-request ownership.
+ Original raw zeros initialize storage, but we never assign prehistory a
+ GDN type. Every real model turn is observed; dummy writes confer no request
+ ownership. FA writes remove ONLY their exact bytes, never a complete row.
+ """
+ size=pool["all_physical_bytes"];out=[]
+ for r in prior:
+  c.require(set(r)=={"start","stop","dtype","view","layer"} and
+   r["dtype"] in ("torch.bfloat16","torch.float32") and
+   any(exact_view_key(v["identity"])==r["view"] for v in pool["exact_views"]) and
+   r["layer"] in [m["layer"] for m in pool["members"]],"prior typed history same original exact pool/logical metadata")
+  width=2 if r["dtype"]=="torch.bfloat16" else 4
+  c.require(0<=r["start"]<r["stop"]<=size and r["start"]%width==r["stop"]%width==0,
+   "entire original typed element boundary; no FA reinterpret")
+  c.require(not intersections([[r["start"],r["stop"]]],[[t["start"],t["stop"]] for t in out]),
+   "nonoverlapping prior last-writer types")
+  out.append(dict(r))
+ for op in pool["operations"]:
+  cuts=normalize_extents(op["extents"],size);kept=[]
+  for old in out:
+   for a,b in _minus([[old["start"],old["stop"]]],cuts):kept.append(dict(old,start=a,stop=b))
+  c.require(all(r["start"]%(2 if r["dtype"]=="torch.bfloat16" else 4)==
+   r["stop"]%(2 if r["dtype"]=="torch.bfloat16" else 4)==0 for r in kept),
+   "unsupported FA/GDN overlap cuts a retained typed element")
+  out=kept
+  if op["kind"]=="GDN":
+   for a,b in cuts:out.append(dict(start=a,stop=b,dtype=op["dtype"],view=op["view"],layer=op["layer"]))
+ return sorted(out,key=lambda x:(x["start"],x["stop"]))
+def typed_ledger(pools,previous,rank,epoch,source):
+ c.require(type(previous) is dict and previous.get("schema")=="sparq.actual-pool-last-writer-types/v1" and
+  previous.get("rank")==rank and previous.get("epoch")==epoch-1 and previous.get("source")==source,
+  "exact prior real model epoch/source/rank; no unexplained typed prehistory")
+ old={p["before_owner"]:p for p in previous["pools"]}
+ if epoch==1:c.require(not old,"first observed real request has no guessed retained typed state")
+ else:c.require(set(old)=={p["before_owner"] for p in pools},"same immutable original physical owners across real epochs")
+ return dict(schema="sparq.actual-pool-last-writer-types/v1",rank=rank,epoch=epoch,source=source,
+  pools=[dict(before_owner=p["before_owner"],identity=p["identity"],segments=type_segments(p,old.get(p["before_owner"],{}).get("segments",[])))
+   for p in pools],allocator_retirement_not_claimed=True)
+def _object_bytes(value,seen=None):
+ # Actual CPython metadata heap, shared references counted once. The
+ # source-accounting multiplier covers concurrent original+derived trees,
+ # JSON publication/parse and current consumer history, NOT a kernel limit.
+ seen=set() if seen is None else seen
+ if id(value) in seen:return 0
+ seen.add(id(value));size=sys.getsizeof(value)
+ if type(value) is dict:return size+sum(_object_bytes(k,seen)+_object_bytes(v,seen) for k,v in value.items())
+ if type(value) in (list,tuple):return size+sum(_object_bytes(v,seen) for v in value)
+ return size
+METADATA_HEAP_BOUND="json-occurrence-conservative-heap-upper/v1"
+def _metadata_heap_upper(value,active=None):
+ # Fixed source accounting, deliberately NO alias credit/sys.getsizeof.
+ # Bounds JSON-built CPython3.10/3.12 containers and scalars conservatively;
+ # this is not a measured peak or an OS allocator/kernel hard bound.
+ # Every repeated occurrence is charged, independent of JSON key interning.
+ active=set() if active is None else active
+ kind=type(value)
+ if value is None or kind is bool:return 64
+ if kind is str:return 128+4*len(value)
+ if kind is int:return 128+8*((abs(value).bit_length()+29)//30)
+ if kind is float:
+  c.require(__import__("math").isfinite(value),"finite budget metadata scalar");return 128
+ c.require(kind in (dict,list,tuple),"budget metadata must be JSON-built")
+ token=id(value);c.require(token not in active,"cyclic budget metadata rejected")
+ active.add(token)
+ try:
+  if kind is dict:
+   c.require(all(type(k) is str for k in value),"JSON budget metadata string keys")
+   return 512+512*len(value)+sum(_metadata_heap_upper(k,active)+_metadata_heap_upper(v,active) for k,v in value.items())
+  return 256+32*len(value)+sum(_metadata_heap_upper(v,active) for v in value)
+ finally:active.remove(token)
+def physical_budget(records,baseline_refs,epoch,source,max_model_len=40960,raw_loader=c.obj):
+ c.require(type(records) is list and len(records)==4 and {r["rank"] for r in records}==set(range(4)) and
+  len(baseline_refs)==4 and max_model_len==40960,"all4 real plans/fresh baselines, original full model domain")
+ leaf=None;pids=set();allpools=[];baseline=[];largest=0
+ for r,br in zip(sorted(records,key=lambda x:x["rank"]),baseline_refs):
+  c.require(r["schema"]==PHYSICAL_BUDGET and r["epoch"]==epoch and r["source"]==source and
+   r["max_model_len"]==max_model_len and r["original_cpu_before_allocated"] is False,
+   "source-bound all4 before-allocation physical plans")
+  m=consume_memory(raw_loader(br));prior=consume_memory(r["cgroup"])
+  c.require(m["process"]==prior["process"] and m["memory_max"]==GUEST,
+   "fresh baseline same worker PID/start/exact64GiB")
+  k=tuple(m[v] for v in ("version","cgroup","path","mount_root","mount_point"))+(tuple(sorted(m["leaf_identity"].items())),)
+  if leaf is None:leaf=k
+  c.require(k==leaf and m["process"]["pid"] not in pids,"all4 distinct workers same actual64GiB leaf")
+  if r["cgroup"]["schema"]==MEMORY_SAMPLE:
+   c.require(raw_loader(r["cgroup"]["namespace_proof"])["source"]==source,"same actual preweight source")
+  pids.add(m["process"]["pid"]);baseline.append(m["memory_current"])
+  pools=physical_owners(r["states"],r["fa"],raw_loader)
+  largest=max(largest,max(natural(v["identity"]) for p in pools for v in p["exact_views"]))
+  allpools.append(dict(rank=r["rank"],pools=pools))
+ before=sum(p["all_physical_bytes"] for row in allpools for p in row["pools"])
+ # Cross-process deterministic conservative metadata accounting. Preserve
+ # ALL original8heap/4wire/all4 terms; no Python-object-alias savings.
+ # Source constructs fresh JSON-built records/views, never shrunk containers.
+ heap=_metadata_heap_upper(records)+_metadata_heap_upper(allpools)
+ wire=sum(len(json.dumps(v,sort_keys=True,separators=(",",":"),allow_nan=False).encode()) for v in (records,allpools))
+ metadata=8*heap+4*wire
+ temp=4*(metadata+4*CHUNK+4*largest+FINITE_TEMP)
+ oracle=4*(max_model_len*(8*256*8+16*6*8)+16*1024**2)
+ upper=max(baseline)+before+temp+oracle+RESERVE
+ return dict(schema=PHYSICAL_BUDGET,epoch=epoch,source=source,records=records,baseline_refs=baseline_refs,
+  pools=allpools,actual_baseline_bytes=max(baseline),all_physical_before_bytes=before,
+  physical_copy_count=sum(len(r["pools"]) for r in allpools),all_logical_state_count=384,
+  metadata_heap_bytes_per_worker=heap,metadata_wire_bytes_per_worker=wire,
+  metadata_heap_copy_multiplier=8,metadata_wire_buffer_multiplier=4,
+  metadata_heap_bound_formula=METADATA_HEAP_BOUND,metadata_heap_is_conservative_fixed_bound=True,
+  all4_metadata_transient_reserved_bytes=4*metadata,temporary_accounting_not_measured_peak=True,
+  after_chunk_and_typed_temp_bytes=temp,full_FA_oracle_reserved_bytes=oracle,reserve_bytes=RESERVE,
+  planned_upper_bytes=upper,guest_limit_bytes=GUEST,budget_fits=upper<=GUEST,ready=False)
+def consume_physical_budget(proof,raw_loader=c.obj):
+ got=physical_budget(proof["records"],proof["baseline_refs"],proof["epoch"],proof["source"],raw_loader=raw_loader)
+ c.require(got==proof,"independent complete raw metadata physical owners/budget replay")
+ c.require(proof["budget_fits"] is True and proof["planned_upper_bytes"]<=GUEST,
+  "same64GiB full physical before+oracle+all4 transients+2GiB reserve")
+ return proof
+class PhysicalChecker:
+ """One complete ordered before/after stream; no full-row write exemption."""
+ def __init__(self,pool,segments,np=None):
+  self.pool=pool;self.np=np;self.next=0;self.before=hashlib.sha256();self.after=hashlib.sha256()
+  self.segments=segments;self.typed_bytes=[0]*len(segments);self.protected_bytes=0
+ def chunk(self,offset,before,after):
+  a=view(before);b=view(after);size=self.pool["all_physical_bytes"]
+  c.require(type(offset) is int and offset==self.next and 0<len(a)==len(b)<=CHUNK and offset+len(a)<=size,
+   "entire original physical slab including padding exactly once in order")
+  end=offset+len(a)
+  for start,stop in self.pool["protected_extents"]:
+   lo=max(start,offset);hi=min(stop,end)
+   if lo<hi:
+    c.require(a[lo-offset:hi-offset]==b[lo-offset:hi-offset],
+     "actual unwritten byte changed; partial written row is not exempt")
+    self.protected_bytes+=hi-lo
+  for i,r in enumerate(self.segments):
+   lo=max(r["start"],offset);hi=min(r["stop"],end)
+   if lo<hi:
+    got=finite(b[lo-offset:hi-offset],r["dtype"],self.np)
+    c.require(got["finite"] is True,"actual last-GDN-writer typed bytes nonfinite, excluding exact FA writes only")
+    self.typed_bytes[i]+=hi-lo
+  self.before.update(a);self.after.update(b);self.next=end
+ def finish(self):
+  c.require(self.next==self.pool["all_physical_bytes"] and self.protected_bytes==self.pool["protected_bytes"] and
+   self.typed_bytes==[r["stop"]-r["start"] for r in self.segments],
+   "complete pool/padding protection and every source-derived typed segment")
+  return dict(schema=PHYSICAL_PROTOCOL,before_owner=self.pool["before_owner"],physical_bytes_checked=self.next,
+   protected_bytes_checked=self.protected_bytes,all_unwritten_bytes_exact=True,
+   typed_segments_sha256=hashlib.sha256(json.dumps(self.segments,sort_keys=True,separators=(",",":")).encode()).hexdigest(),typed_bytes_checked=sum(self.typed_bytes),
+   original_before_stream_sha256=self.before.hexdigest(),original_after_stream_sha256=self.after.hexdigest(),
+   FA_bytes_not_FP32_reinterpreted=True,old_per_layer_inactive_gate_not_claimed=True,
+   allocator_retirement_not_claimed=True,model_ready=False)
+def consume_physical_summary(s,pool,segments):
+ c.require(s["schema"]==PHYSICAL_PROTOCOL and s["before_owner"]==pool["before_owner"] and
+  s["physical_bytes_checked"]==pool["all_physical_bytes"] and s["protected_bytes_checked"]==pool["protected_bytes"] and
+  s["typed_segments_sha256"]==hashlib.sha256(json.dumps(segments,sort_keys=True,separators=(",",":")).encode()).hexdigest() and s["typed_bytes_checked"]==sum(r["stop"]-r["start"] for r in segments) and
+  all(s[k] is True for k in ("all_unwritten_bytes_exact","FA_bytes_not_FP32_reinterpreted",
+   "old_per_layer_inactive_gate_not_claimed","allocator_retirement_not_claimed")) and s["model_ready"] is False,
+  "new exact physical oracle scope; old per-layer inactive/allocator retirement never promoted")
+ for k in ("original_before_stream_sha256","original_after_stream_sha256"):
+  c.require(__import__("re").fullmatch("[a-f0-9]{64}",s[k] or "") is not None,"full ordered physical stream SHA")
+ return s

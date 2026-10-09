@@ -140,6 +140,11 @@ def own_mount_path(root,p):
 def required_source_mounts():
  km=obj(dict(path=str(KERNEL/"SOURCE_MANIFEST.json"),sha256=KERNEL_SHA))
  result=set(DEPS)|set(sc.PINS)
+ # Immutable005 all4/all48 regression evidence; actualRefs in the four
+ # source-pinned fixture inventories are rehashed by the software consumer.
+ fixture=Path("/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005")
+ require(fixture.is_dir() and fixture.resolve()==fixture and not fixture.is_symlink(),"exact original005 fixture read-only root")
+ result.add(str(fixture))
  result.update(km["dependencies"])
  result.update(v["captured_source_ref"]["path"] for v in [km["native_device_operator"],*km["model_sources"].values()])
  return sorted(result)

@@ -1,5 +1,23 @@
 # Root-cause classification must select the next experiment
 
+## Preinitialization: common driver FD is not a compute-context proof
+
+For same-image ABI admission, keep the Devices[] CPU stage strict: no device
+nodes, no Ascend FD and no initialized backend. Do not copy that zero-FD
+predicate blindly into an already owned hardware canary. A deployed framework
+import can open manager/hdc bootstrap handles while its initialization flag stays
+false. Preserve before/after flags, exact FD targets, source binding, singleton
+device mapping and host ownership. Only accept a source-observed common-handle
+case; compute-card/unknown FD, extra device visibility, failed observation or
+initialized backend still requires rejection before that explicit stage.
+A common FD alone grants no device permission and proves no numerical execution.
+Keep the prior CPU source/schema comparison and subsequent actual canary/numeric
+gates. Repair a proved wrong-phase predicate with real raw positive/negative
+fixtures and a new immutable run, never by skipping the check or raising a
+numerical threshold. AdaKV015/MAIN07c5 is this observed reference-test defect,
+not an algorithm-negative result; its original logs and exact stop-retain remain.
+
+
 ## Trigger, authority and scope
 
 Apply after any failed paper preparation, native numerical, model, performance

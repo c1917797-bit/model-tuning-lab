@@ -2,16 +2,16 @@
   "schema": "sparq.author-ann-fp32-stock-full-source/v3",
   "ready": false,
   "files": {
-    "bridge.py": "653d25094e90a2fc4d2d1517160c7e8fd12ebf960dd89c3be620fc92398f25a8",
+    "bridge.py": "737d5a8803d6077118991bfb509397695b18b751ba493599082a39ca0635697e",
     "common.py": "b7fbe8c143eae5db5663abb8a45cee479a3ca6936846c74962b80dc467e3b8b8",
     "lifecycle.py": "197ced9fdac7139b04a78cb6f54ea93bb168d0d58b8662a9fda64a565adb7ee2",
     "workspace_budget.py": "945b6408dd6ccbf541a24e24d5e934a2ea6fa802fd269df2406b5c556462b20c",
-    "source_contract.py": "4831de4fc328b567dc4613b529da6638c4c2c1aa1365e584d36956726efafb87",
+    "source_contract.py": "8862bc08f122d1919e601d4084abca8e86b1ae09d25b5990ea7263fd33ffb01e",
     "full_graph_pa.py": "67ed22fc02ca80721f1fdd3577381a39629ce27aadd78b52fcfba558aafada24",
     "original_terminal.py": "ed085d5c90aaceaa430a09211b1d85e2f5fc3d270e73319a11d3d04191378fb1",
     "sitecustomize.py": "2ce9f1cd7d20a793f105fcaba8a1c7c0169de0963d912b41db569b3068b39705",
     "test_bridge.py": "66962e9197d275e9355b34fc647091e32e16215f72dda04c74c76cfa71c0077d",
-    "source_gate.py": "cc78016efaef49fa8a15a3f4f1aa81e1b75fdf1e2d2260d228fd9e183ff98024",
+    "source_gate.py": "e8e01543467bd254877bee8564c50d5945ddf249dbf6f5534d84713472ddc357",
     "actual_replay.py": "7fbdf8004c1d55d12ce09bed1cb457b0796b71a8c159dafad2dcca543e053800",
     "full_entry.py": "ac4836af4085d1e8dd3140d7b0da7a59f73ba9f7d095b7b68c010e4dd09ca485",
     "consume_full.py": "299f9c708363abc230458477702ba487df317bfbf265dd79c87d42bb5f9c9e1e",
@@ -21,9 +21,9 @@
     "fa_numeric.py": "206d7411c5a1fd06c32aa9dd6f1e1d7adffc171e0f4746213b165aadd944147a",
     "model_matrix.py": "81b922d93b4c3c4860b2cd20afbc50c7846d7ef3439f6f96f10aa51933245c4c",
     "evidence.py": "01f741b9863a9a1d81762af9c370724f4206b352c996cc132c0bde436f5063e2",
-    "gdn_state.py": "a0971d820566df66cf58de82c8c38476d41503997453f3a7c07b0b641e48a824",
-    "test_gdn_state.py": "995f96fb40d96d24563e5e2b2e80a19a6df0ae2ae22cbe808fe35f9c22f92402",
-    "service_contract.py": "3264125a4f4e717baaab2852c711b6ffefd8670d96cc87e4c72f164fac035891",
+    "gdn_state.py": "c4f05f266399e85388d5a9e20fcc98ba89987dda28bf71ff3f38630da6e7fbc9",
+    "test_gdn_state.py": "ade316969ca56c4b73e5536993abff9dadee254f2bd922ed48fa1bb212bd3b94",
+    "service_contract.py": "617eb940f4f3752c9d7bb740ffa07f6cb9898ad563b65b136feece5f03a94a73",
     "bench.py": "71e53e668b69fc28141e954d3cf0111cf67850500a36160951849b6dbb7696aa",
     "host_run.py": "52d66e2fe9d7b654ea1d17075f720d106b10b966650c9bf8beb97d1f9c3e1c4b",
     "gdn_metadata.py": "292da75418bddb3f617eb4a9297eeef341a38832f1d7eb859e1e76fb92b2ed54",
@@ -31,10 +31,10 @@
     "gdn_source.py": "4fd07e9ca0d76c99fc3fcede9d786a4a625e42819d0c02417aec37a23f77f3fc",
     "test_gdn_metadata.py": "6a7075998550b990c97d5cc827b5f3d6528aa1f17f78ab3a3d45a1c2fcad97ab",
     "fa_model_numeric.py": "f9a9b68c0fa1a84e3153b417106400bc425950fcce8de2cb9ce4edb975adb707",
-    "full_cpu_preflight.py": "0e79cded6cf7d7da3849440934595195a633895a16dc293a017efa4c7fbb5e7c",
-    "gdn_model_observer.py": "2e315bc88927cb469c2ee36e59d39a0e160e74b48dd4f1c77b55901b272fa65a",
+    "full_cpu_preflight.py": "f5e2e4a06444507ffa6a5229593413bbe3b8a9b944cc40e7950ec2613814c7d3",
+    "gdn_model_observer.py": "272abdf814b4e7cbf7fdbfc5621fd7e162b6007a5d092ba2b3bc5194997fd87c",
     "allocator_coverage.py": "48565cbc2a5710abad4263c00b2b7edf47bb3daa2da754f42762986ba7daea37",
-    "consume_model.py": "f8363f66d05d4a37e5fca50fb108ce1f8664cdf3087cbf6fcf8ff5359937721c",
+    "consume_model.py": "9943b02ac4d51d8f20f11d7dff340524c452905fc49f1518121cc54b1a16bdd8",
     "model_cpu_check.py": "3adb13754ee21e0a3441cefd9a4880ee4897bfad674297f441acc68092d0ad45",
     "model_workload.py": "d5b047b3510d0992869635dfcedeb089f691f92a39876bea982f33291c0d4d09",
     "test_model_workload.py": "afb5a81203bbc02d89b77a70137d32ea6ce4bbf5ffe38153c4cd8945954a7beb",
@@ -49,20 +49,21 @@
     "test_allocation.py": "8dee4e274d05865f2617b778a1e269298c7005e93f205ac6bf93d372e76b318c",
     "test_no_pa.py": "c284d0868c60b93daca0c7dd028ed1aafd2e5c0a0ce58f54af72f976f555ebf0",
     "ann_snapshot.py": "f6b165dc0c7ea49a1f48c7a0ea0c069e0c42506b8d3ea0a037844ecd40b78679",
-    "ann_model_state.py": "d17177baeb86dae5b24e663bbe7a3ff628b0a3769000da57c528fbfe2acd3560",
+    "ann_model_state.py": "8606181100a255318162eb1307bbc8a475e64bbbcee2bcc57b3da23c78273b7d",
     "ann_model_oracle.py": "1b8a84ca556db105ac3b35049deb7c97287797a53750ed9e0078a2e69e04f024",
     "ann_fa_consumer.py": "77650c542c10cc4049c4e4c7b26723c21c9e468077dd9ce2845f77391f3d6101",
     "test_ann_aggregate.py": "888058805c3ecdd2248de3b750a346dafbe7de27eae00132cf0e155b00d270c7",
     "entry.py": "e8dfd9cf45a3405f28812b98484e4cb3342c979507d2b9b2c2f27c77e59c4a95",
     "component_handoff.py": "5b67da085a0b1ca950ef76eb5644668f6cd3999756aa57b1554e8272bc7dd04d",
     "test_component_handoff.py": "d97cacd37f0ee6e8ea4aa0c86bfc190b12b008ad1da9ee128eaede71899c3671",
-    "test_fp32_model_adapter.py": "422836de784e6c71816a62cada2fe0b1f46217145451c6af94cca4584d1f4da2",
+    "test_fp32_model_adapter.py": "1e8de6d6a796aac2ce90cf6078dae2dea2809b33dd97dac9f7d63b00d48c33c2",
     "long_independent_oracle.py": "21fe6d9e7c78acdecb23ffe42196e38c8cfd6d55c2c08bb45f2826bf40d74605",
-    "gdn_stream.py": "79b1dcabe028a1e00dfb8ea6d34c2eca2247ac8235da93b29e9195ecff24617b",
+    "gdn_stream.py": "36b4b4dc9f0653ca4b04e0f4b48b74cd82037a117349a5fbfb62a6f45de9f02b",
     "identity_bridge.py": "4a4a12875a306720642647bbae073a14cea78962251bb7333e63229ea942088e",
     "test_identity_n1.py": "cf8b20afb6fcc0d3283249275f278f8403c18b282c5a79d83dae4d6cbb1b2a52",
     "component_bootstrap.py": "2437a856201fee78576dfde68218595a6f58fd4bfcf2f77e88dc7fa5bc20b7c4",
-    "test_component_bootstrap.py": "56e7251f0daa5cea376f96425de2ab49d1a47c3f519f31f823d3716d1db70870"
+    "test_component_bootstrap.py": "56e7251f0daa5cea376f96425de2ab49d1a47c3f519f31f823d3716d1db70870",
+    "test_physical_pool.py": "e20efe27044d495645d001d4a8df44299f02579f7c563303e377a718e8abdb37"
   },
   "source_pins": {
     "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
@@ -135,7 +136,11 @@
     "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/COPY_IDENTITY.json": "8cfede7a3854fbc274f67bc5e5623a1735704d724c0bd26909deca6f03beed59",
     "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/REPORT.json": "d1725f159fa58fe9aa82d2d4cd2523ba62729b73db4b2ea6f8bb6ba2a58abc9f",
     "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq004-cgroup-view-no-device-user72h-20261009-001/RESULT.json": "523dc7d441ef1e800ed2dc77a6bc6e0f35916296bdaf5bebe86e3f195f2c59d7",
-    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-public-actual-npu-worker-source-v1-001/npu_worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-public-actual-npu-worker-source-v1-001/npu_worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-001/fixtures-r0.json": "41729ebfe9913c5d8d25ddece73b3c29ebc43d9e529cb433d17446d6868ca9ee",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-001/fixtures-r1.json": "8afe9daa5e9ef985d8df879dbf08009ad8a5010c9bcd887a5c02e54065fc0170",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-001/fixtures-r2.json": "e9fe02eb071a6f9e25a44edeaa8dd11f72167199f9b6db65cc269a447c37e2e9",
+    "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-001/fixtures-r3.json": "7272789c65afcd7590df9d86f7f931e90b85e8e5b565aaaa1507d1aeca8f13fc"
   },
   "runtime_pins": {
     "/vllm-workspace/vllm/vllm/engine/arg_utils.py": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
@@ -176,7 +181,7 @@
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc",
     "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
   },
-  "source_count": 135,
+  "source_count": 140,
   "complete_native_component_required": "Exact producer2f/native42 eb7 with actual new reader77f7 explicit consume_successor replay; original c971 consumer FAILED stays immutable. Entire128/20480/four original children+whole0452+exact cleanup all original fields unchanged.",
   "tests": {
     "status": "UNRUN_API_ONLY",
@@ -193,17 +198,18 @@
       "test_component_handoff",
       "test_fp32_model_adapter",
       "test_identity_n1",
-      "test_component_bootstrap"
+      "test_component_bootstrap",
+      "test_physical_pool"
     ],
-    "static_declared_tests": 213,
+    "static_declared_tests": 262,
     "actual_collected_test_count": null,
     "exit_code": null,
     "stdout": null,
     "stderr": null,
     "remote_exec_CPU": 0,
-    "method_declarations": 210,
+    "method_declarations": 259,
     "inherited_unittest_cases": 3,
-    "inherited_case_source": "Original201 retained;12 additional namespace-memory leaf/actual0692/entry/negative tests. All213 UNRUN."
+    "inherited_case_source": "Original213 plus original47 retained; two actual CPU producer/consumer protocol seam regressions. No old PASS inherited."
   },
   "actual_model": "UNRUN; complete disjoint4 component plus initialized geometry/budget/all4all64 full lifecycle and oracle required",
   "performance": {
@@ -295,18 +301,18 @@
     "tests": "4 actual wrapped dummy+ANNState stdlib tests UNRUN; pinned stock outer AST; transparent allocation/math/IO spies do not grant runtime/numerical PASS"
   },
   "observer_output_budget": {
-    "protocol": "sparq.GDN-all-row-live-byte-finite/v2",
+    "protocol": "sparq.GDN-shared-physical-pool-byte-reference/v3",
     "status": "source-prepared-UNRUN-not-model-ready",
     "old_protocol": "historical permanently retained rawdump v1 not admitted by this current whole-model consumer",
-    "original_before": "ALL actual initialized native logical rows of BOTH states/all48 layers/all4 ranks saved independent CPU before original model; no padded gap claim/no sampling",
-    "after": "every original native row copied once and independent byte/IEEE scan; exact entire inactive before/after; ALL active AND inactive after finite",
+    "original_before": "Once per exact physical ND original slab/all4, entire storage including padding. All48/96 logical identities retained, full-alias proven, FA overlap actual slot_mapping bytes.",
+    "after": "Every byte of every original physical slab streamed once. Independent all64 actual metadata union protects every unwritten byte incl partial rows. Finite only last actual GDN-writer typed intervals not subsequently overwritten by FA.",
     "active_dense_equivalence": "not asserted across free-running dense/candidate",
     "runtime_numpy": "same immutable image actual CPU source probe then all4/all48/epochs exact observed module-file identity; no guessed numpy source SHA",
     "success_persistence": "ordered SHA256 of complete original before/after streams/counts/full writer metadata and current cgroup all4 plan; no pretend postmortem success bytes replay",
-    "first_fault": "first actually observed row exception retains whole original before/actual after raw; original primary never masked; model exception without known after explicitly unavailable, not fabricated",
+    "first_fault": "first observed offending1MiB physical chunk plus actual before/after and all actual member/metadata references; after unavailable explicit",
     "ordinary_RAM": {
       "guest_limit_bytes": 68719476736,
-      "allocation": "actual shared cgroup baseline + sumall4 before logical bytes + sumall4 max single row copy/scan temp + source-bounded one-request FP64/literal oracle +2GiB reserve <=64GiB before any before allocation",
+      "allocation": "fresh actual all4 same-leaf baseline + complete distinct slab before + source-fixed occurrence conservative metadataheap/wire8/4 multipliers/all4 chunk/typed transients + original independent FAoracle +2GiB <=64GiB. Details persisted BEFORE refusal. No object-alias credit; no measured peak/hard kernel upper claimed.",
       "explicit_four_rank_rendezvous_seconds": 30,
       "all_native_initialized_shapes": true,
       "blind40GiB_allocation": false,
@@ -323,11 +329,13 @@
     "formal_timing": "observer never instantiated; all source diagnostic .cpu/NumPy/JSON off before fixed1024",
     "coverage": "unchanged all4/all64/allB1..16/mixed/reuse/FULL/all160 feedback/full independently checked FA",
     "software": {
-      "new_tests": 18,
-      "total_declared": 137,
+      "new_tests": 47,
+      "total_declared": 260,
       "status": "UNRUN_API_ONLY"
     },
-    "model_launch_ready": false
+    "model_launch_ready": false,
+    "old_per_layer_inactive_gate": "not claimed; REFERENCE_OR_TEST shared-pool semantics corrected",
+    "retirement_semantics": "not claimed; existing allocator_coverage/RequestLedger remain independent hard gates"
   },
   "execution_clock": {
     "schema": "sparq.user72h-full-model-clock/v1",
@@ -649,5 +657,76 @@
       "deadlines": true
     },
     "actual213_successor": "UNRUN"
+  },
+  "v16_reference_successor": {
+    "schema": "sparq.physicalpool-reference-successor/v1",
+    "base_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-001/SOURCE_MANIFEST.json",
+      "bytes": 8023,
+      "sha256": "de9a6c600635110c42556c16f02665ac717264368d7b721dd3e0123ebd8ab66f"
+    },
+    "fixed_core_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-004-exact-extents/SOURCE_MANIFEST.json",
+      "bytes": 5881,
+      "sha256": "c48c04c10834510448da44b7df84559284bc4bd87ec96ba9e7162feb78f8932f"
+    },
+    "original005_status": "FAILED-not-promoted",
+    "old_core39_status": "exec07d5 FAILED-not-promoted",
+    "all4_distinct_before_bytes005": 42894753792,
+    "actual_fixture_evidence_root": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v15-diagnostic-user72h-20261009-005",
+    "fixture_mount_readonly": true,
+    "math_unchanged": true,
+    "all_original_tolerances_unchanged": true,
+    "source_contract_identity_updated": true,
+    "deadlines_unchanged": true,
+    "actual_complete_model": "UNRUN_AFTER_FIXTURE_SUCCESSOR",
+    "NPU_ready": false,
+    "performance_authorized": false,
+    "namespace_owner_fix_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sparq-full-gdn-physicalpool-reference-v16-user72h-20261010-002/SOURCE_MANIFEST.json",
+      "bytes": 9015,
+      "sha256": "4dd5f1ae6c1f588c461e01ab45b5cd4c60fc9e86d3bdbe81dbc62958f76ee788"
+    },
+    "original_002_39_status": "exec07ef abnormal-exit-not-promoted",
+    "exact_extent_successor": "ND stride-derived complete view spans preserve padded gaps; every actual FA token slot checked and adjacent512B extents merged. Independent budget JSON roundtrip retained.",
+    "metadata_heap_bound": "json-occurrence-conservative-heap-upper/v1",
+    "cpu_protocol_seam": {
+      "classification": "IMPLEMENTATION_ADAPTATION",
+      "before_source": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+        "bytes": 54126,
+        "sha256": "afc8d89524d9d4de0a0d14303525750719f160c55bd96e54b93c994f7463f51a"
+      },
+      "old_predicate": "historical PROTOCOL/v2 while actual CPU producer already PHYSICAL_PROTOCOL/v3",
+      "algorithm_math_changed": false,
+      "producer_source": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/full_cpu_preflight.py",
+        "sha256": "f5e2e4a06444507ffa6a5229593413bbe3b8a9b944cc40e7950ec2613814c7d3"
+      },
+      "tests_UNRUN": 2,
+      "old_47_actual_MAIN": {
+        "operation_id": "exec-0000000000000847",
+        "tests": 47,
+        "exit_code": 0,
+        "scope": "source/software only"
+      }
+    },
+    "legacy_end_fixture_successor": {
+      "classification": "REFERENCE_OR_TEST",
+      "before_source": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+        "bytes": 55118,
+        "sha256": "139e5b84ab90b8cc140bfe3d9f3fa03c329bb5f0a659a1a2bd0d9aa6f8927b7b"
+      },
+      "MAIN_reported_original_operation": "exec-000000000000088a",
+      "original_outcome": "262 run / 260 pass / 2 errors; immutable",
+      "original_terminal_ref": null,
+      "changed_source_only": "test_gdn_state.py: existing two ActualObserverEndFlow methods plus their tiny physical fixture",
+      "production_core_unchanged": true,
+      "existing_test_methods_preserved": true,
+      "all_262_UNRUN": true,
+      "coverage": "actual end layers/owners/ledger; conv BF16 and recurrent FP32 complete slab/active+retained typed rows/all inactive bytes/padding; real PhysicalChecker+summary consumer; real first_pool raw before/after+error retained",
+      "scope": "tiny software collaborator fixture only, not actual all64/allocator/native/model permission"
+    }
   }
 }

@@ -32,7 +32,7 @@ class StockState:
   self.model_entries=0;self.post_updates=0;self.dummy_depth=0;self.dummy_batches=set();self.capture_batches=set()
   self.current=None;self.baseline_allocated=None;self.baseline_peak=None;self.capture_inputs={}
   self.gdn_observer=gdn_observer.Observer(runner,torch,npu,gdn_source.sources(),gdn_source.runtime()) if diagnostic else None
-  self.actual_epoch=0;self.mixed_fa={};self.pending_scheduler=None;self.native_caches={}
+  self.actual_epoch=0;self.mixed_fa={};self.pending_scheduler=None;self.native_caches={};self.native_impls={}
   self.last_ctx=None;self.formal_turns=0;self.formal_full_turns=0;self.formal_replays=0;self.formal_post_updates=0
   self.formal_batches={};self.formal_requests={};self.tensor_identity=tensor_identity
   self.gdn_runtime=gdn_source.runtime() if not diagnostic else None
@@ -42,7 +42,7 @@ class StockState:
   row=dict(layer=n,impl_id=id(impl))
   require(old is None or old==row,"same actual prefix/backend identity, no monkeypatch ABA")
   require(all(v["layer"]!=n or k==prefix for k,v in self.bindings.items()),"one actual prefix per FA")
-  self.bindings[prefix]=row
+  self.bindings[prefix]=row;self.native_impls[prefix]=impl
  def ensure_registry(self):
   if self.registry is None:
    require({r["layer"] for r in self.bindings.values()}==set(FA),"actual sixteen FA bindings before FULL capture")
@@ -102,7 +102,7 @@ class StockState:
    ids=list(self.runner.input_batch.req_ids[:self.runner.input_batch.num_reqs])
    self.current["actual_epoch"]=self.actual_epoch;self.current["request_ids"]=ids
    self.gdn_observer.begin(ctx,os.environ["QWEN36_SPARQ_MODEL_TRACE_ROOT"],
-    int(os.environ["QWEN36_SPARQ_ACTUAL_RANK"]),self.actual_epoch,ids)
+    int(os.environ["QWEN36_SPARQ_ACTUAL_RANK"]),self.actual_epoch,ids,self.native_caches,self.native_impls,self.a)
  def post(self,ctx,batch,stream):
   require(self.current is not None and self.current["batch"]==batch,"actual post-run_model callback within one current turn")
   if self.current["dummy"]:
@@ -206,6 +206,7 @@ class StockState:
    self.snapshots[key]=sample;self.budget()
   return sample
  def dense_forward(self,impl,prefix,query,key,value,cache,metadata,output,original_impl):
+  if self.diagnostic:self.native_caches[prefix]=(cache[0],cache[1],metadata.block_tables)
   batch=int(query.shape[0]);sample=self.snapshot(prefix,batch,query.device) if self.diagnostic else None
   capturing=self.a._EXTRA_CTX.capturing
   if capturing:

@@ -1,0 +1,80 @@
+{
+  "schema": "paper-portfolio.causal-recovery/v1",
+  "recorded_at_utc": "2026-10-09T23:36:00Z",
+  "experiment": "MAIN-sparq-full-v16-diagnostic-user72h-20261010-007",
+  "operation_id": "exec-00000000000008c0",
+  "original_outcome": "TERMINAL_FAILED-exit1-not-promoted",
+  "classification": "REFERENCE_OR_TEST",
+  "causal_confidence": "proved",
+  "failed_stage": "first 32768-token warmup, preallocation physical-writer reference",
+  "first_fault": "ValueError: actual captured ordinary decoder implementation fields",
+  "secondary_envelope_error": "ValueError('actual client/stream/task producer failed')",
+  "source_before": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+    "sha256": "c67efb3ddf971c772ebc0d8fa919702cd3436cb3ad7941c35e494ea752b5ad4c"
+  },
+  "original_terminal": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08C0_MODEL007_TERMINAL_FAILED_ORIGINAL.json",
+    "sha256": "f064de06a78d60b71e646786c57da10af4c0d92f8de71a2293ef9c79f00935a9"
+  },
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/RESULT.json",
+    "sha256": "58fa86cf39e5c4111a2addfba225fde4eadfbcfb307933a542363d7076fc43c4"
+  },
+  "actual_FA_metadata": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/service/trace/fa-writer-meta-r0-e1-l3.json",
+    "sha256": "d4941298f2807463a2b5cde765e847093b3463b25bbd3a78a8372e41ffa881b6"
+  },
+  "source_evidence": {
+    "producer": "gdn_model_observer.py checks native AttentionType.DECODER equality and records str(impl.attn_type) and str(backend.AttentionType.DECODER)",
+    "observed_both": "AttentionType.DECODER",
+    "consumer_wrong_literal": "decoder",
+    "fixture_gap": "Both synthetic FA builders used the wrong decoder string; full262 did not exercise deployed enum representation"
+  },
+  "independent_control": "Actual captured native implementation type and flags match the strict producer branch; consumer string alone contradicts that source-bound record",
+  "alternatives_excluded": [
+    "not a candidate numerical failure: guard rejects before before-copy or arithmetic",
+    "not driver/card occupation",
+    "no evidence against paper mechanism"
+  ],
+  "owned_cleanup": {
+    "cid": "afdf14d5a3bc6eb5267b5b27c8537d5c8527f8a936597bab9ee2d92fd42a5360",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "errors": [],
+    "receipt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/cleanup.json",
+      "sha256": "a9979c9f69777a70cdc1dd0a37e055493ad754eba36364ff02fd02f8d051fd85"
+    },
+    "release": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/round0-candidate/release-1791588376906394840.json",
+      "sha256": "c484ccc1dcef303d9aaf80d0c93dae6875adb5cb7cbdd15e9996410a28eeb6b2"
+    }
+  },
+  "decision": "REPAIR",
+  "owner": "MAIN",
+  "minimal_repair": "Exact source-qualified AttentionType.DECODER consumer literal, two fixture representations, positive enum and legacy-literal negative regressions; no general fallback",
+  "repair_state": "NOT_YET_APPLIED",
+  "prediction": "The actual model007 all4 FA metadata passes the implementation-field reference seam after the repair; an independent next guard may still fail",
+  "regression": "Whole affected software and actual historical metadata replay before new same-image/model admission",
+  "unchanged_gates": [
+    "candidate math",
+    "tensor tolerances",
+    "untouched bytes and typed finite checks",
+    "full64/all4/lifecycle/graph coverage",
+    "64GiB host budget",
+    "5400 phase including90 cleanup",
+    "physical4-7 only",
+    "first cutoff2026-10-10T07:00:25Z",
+    "total cutoff2026-10-12T07:00:25Z"
+  ],
+  "model_numeric_pass": false,
+  "E1_authority": false,
+  "performance_pass": false,
+  "task_accuracy_pass": false,
+  "ready_device_stage_count": 0,
+  "card_idle_cause": "proved reference repair and missing executable successor, not foreign occupancy",
+  "successor": "new immutable source -> actual complete regression and historical-raw replay -> new model008 once -> independent model consumer -> explicitly rebound E1",
+  "Git_publication": "pending existing HTTPS authentication failure; no blind retry"
+}

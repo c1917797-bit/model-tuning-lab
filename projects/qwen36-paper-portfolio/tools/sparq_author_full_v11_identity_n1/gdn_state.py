@@ -61,7 +61,9 @@ def consume_historical_raw(event,pinned_state_sources):
   rank=event["rank"],epoch=event["epoch"],states=checked,writer_domain=domain,passed=True,
   active_state_dense_equivalence_not_claimed=True,model_ready=False)
 
-def consume(event,pinned_state_sources,checker_ref=None,expected_source=None):
+def consume(event,pinned_state_sources,checker_ref=None,expected_source=None,physical_context=None):
+ if event.get("schema")==gdn_stream.PHYSICAL_PROTOCOL:
+  return consume_physical(event,pinned_state_sources,checker_ref,expected_source,physical_context)
  if event.get("schema")!=gdn_stream.PROTOCOL:
   c.require(checker_ref is None,"current whole-model rejects historical rawdump protocol authority")
   return consume_historical_raw(event,pinned_state_sources)
@@ -108,6 +110,103 @@ def consume(event,pinned_state_sources,checker_ref=None,expected_source=None):
   all_active_and_inactive_after_finite=True,postmortem_success_bytes_replay_claimed=False,
   active_state_dense_equivalence_not_claimed=True,model_ready=False)
 
+
+# v16 is explicitly a new physical shared-pool reference, not old v2 inactive
+# semantics. Each Observer and EACH whole-trace replay owns a separate
+# context. Only its current epoch is retained, never process-global state.
+class PhysicalContext:
+ def __init__(self):self.cache={}
+def physical_owner(record,root,source,checker_ref):
+ m=gdn_stream.consume_memory(record["cgroup"])
+ return dict(source=source,checker=checker_ref,rank=record["rank"],trace_root=str(root),
+  process=m["process"],version=m["version"],cgroup=m["cgroup"],path=m["path"],
+  mount_root=m["mount_root"],mount_point=m["mount_point"],leaf_identity=m["leaf_identity"])
+def consume_physical_epoch(ref,checker_ref,source,context):
+ c.require(isinstance(context,PhysicalContext),"explicit isolated physical consumer context required")
+ raw=c.obj(ref);rank=raw["rank"];epoch=raw["epoch"];root=Path(ref["path"]).parent
+ c.require(root.is_absolute() and root.resolve()==root and Path("/cache/cch") in root.parents,
+  "exact owned physical trace root for current consumption")
+ cachekey=(source["sha256"],checker_ref["sha256"],rank,str(root))
+ old=context.cache.get(cachekey)
+ if old is not None and old["ref"]==ref:return old
+ c.require(raw["schema"]==gdn_stream.PHYSICAL_PROTOCOL and raw["source"]==source and
+  raw["independent_checker"]==checker_ref and raw["all64_actual_writer_metadata"] is True and
+  raw["postmortem_success_bytes_replay_claimed"] is False,
+  "one source-bound real physical epoch, not postmortem raw success replay")
+ proof=gdn_stream.consume_physical_budget(c.obj(raw["joint_budget"]))
+ c.require(proof["epoch"]==epoch and proof["source"]==source,"same actual all4 byte-pool budget")
+ record=next(r for r in proof["records"] if r["rank"]==rank)
+ namespace_owner=physical_owner(record,root,source,checker_ref)
+ if old is not None:c.require(old["owner"]==namespace_owner,"same actual PID/start/CID/namespace leaf within physical history")
+ pools=next(r["pools"] for r in proof["pools"] if r["rank"]==rank)
+ ledger=c.obj(raw["ledger"])
+ if epoch==1:
+  c.require(old is None,"first actual epoch once; no reset of typed history")
+  previous=c.obj(ledger["previous"])
+  c.require(previous==dict(schema="sparq.actual-pool-last-writer-types/v1",rank=rank,epoch=0,source=source,
+   pools=[],allocator_retirement_not_claimed=True),"no invented GDN-type or allocator prehistory")
+ else:
+  c.require(old is not None and old["epoch"]==epoch-1 and old["ledger_ref"]==ledger["previous"],
+   "independent sequential all-real-epoch typed history; no skipped/deleted turn")
+  previous=old["ledger"]
+ rebuilt=gdn_stream.typed_ledger(pools,previous,rank,epoch,source)
+ rebuilt.update(previous=ledger["previous"],joint_budget=raw["joint_budget"])
+ c.require(rebuilt==ledger,"independent all64 metadata last-writer-type replay, never producer tags")
+ c.require(raw["original_full_before_copy_count"]==len(pools)==len(raw["pool_summaries"]),
+  "ONE complete physical before copy per initialized original slab")
+ summaries={};summary_refs={};segments={p["before_owner"]:p["segments"] for p in ledger["pools"]}
+ for r in raw["pool_summaries"]:
+  row=c.obj(r);owner=row["before_owner"]
+  c.require(owner not in summaries,"one complete ordered before/after stream per physical owner")
+  pool=next((p for p in pools if p["before_owner"]==owner),None)
+  c.require(pool is not None,"no unknown physical owner success")
+  summaries[owner]=gdn_stream.consume_physical_summary(row,pool,segments[owner]);summary_refs[owner]=r
+ c.require(set(summaries)=={p["before_owner"] for p in pools},"all complete original slabs including padding")
+ result=dict(ref=ref,epoch=epoch,rank=rank,record=record,pools=pools,summaries=summaries,
+  ledger=rebuilt,ledger_ref=raw["ledger"],summary_refs=summary_refs,numpy=record["numpy"],source=source,
+  joint_budget=raw["joint_budget"],owner=namespace_owner)
+ context.cache[cachekey]=result
+ return result
+def consume_physical(event,pinned_state_sources,checker_ref,source,context):
+ c.require(event["layer"] in GDN and event["prefix"] and event["rank"] in range(4) and
+  event["original_forward_core_unchanged"] is event["original_forward_unchanged"] is True and
+  event["deployed_state_sources"]==pinned_state_sources and checker_ref is not None and
+  event["independent_checker"]==checker_ref and source is not None,
+  "original actual all48 source/class identities, current independently bound physical checker")
+ c.bound(checker_ref["path"],checker_ref["sha256"])
+ got=consume_physical_epoch(event["physical_epoch"],checker_ref,source,context)
+ c.require(got["epoch"]==event["epoch"] and got["rank"]==event["rank"] and got["joint_budget"]==event["joint_budget"],
+  "logical layer references same actual rank/epoch/physical budget")
+ states=event["states"];c.require(len(states)==2 and [s["name"] for s in states]==["conv","recurrent"],
+  "both96 original native state identities still explicit")
+ raw=c.obj(event["actual_metadata_before"])
+ domain=gdn_metadata.plan(raw,*[s["identity_before"]["shape"][0] for s in states])
+ c.require(raw["rank"]==event["rank"] and raw["epoch"]==event["epoch"] and raw["prefix"]==event["prefix"],
+  "actual logical writer metadata retained, not union claims")
+ checked=[]
+ for s in states:
+  x=s["identity_before"];identity(x);gdn_stream.physical_identity(x)
+  c.require(x==s["identity_after"] and s["state_slot_axis"]==0,"all original logical before/after identities")
+  known=[r for r in got["record"]["states"] if r["layer"]==event["layer"] and r["name"]==s["name"]]
+  c.require(len(known)==1 and known[0]["prefix"]==event["prefix"] and known[0]["identity"]==x and
+   known[0]["metadata"]==event["actual_metadata_before"],"exact complete alias and own actual metadata")
+  vk=gdn_stream.exact_view_key(x)
+  owners=[p for p in got["pools"] if any(m["layer"]==event["layer"] and m["name"]==s["name"] and
+   m["prefix"]==event["prefix"] and m["view"]==vk for m in p["members"])]
+  c.require(len(owners)==1,"one complete physical before owner, not pointer-only merge")
+  p=owners[0];summary=got["summaries"][p["before_owner"]]
+  checked.append(dict(name=s["name"],identity=x,total_slots=x["shape"][0],
+   written_slots=domain["written_slots"][s["name"]],physical_before_owner=p["before_owner"],
+   physical_stream_summary_ref=got["summary_refs"][p["before_owner"]],physical_epoch=event["physical_epoch"],
+   all_unwritten_physical_bytes_exact=True,last_actual_GDN_typed_segments_finite=True,
+   old_per_layer_inactive_gate_not_claimed=True,allocator_retirement_not_claimed=True))
+ return dict(schema="sparq.actual-GDN-shared-physical-check/v3",protocol=gdn_stream.PHYSICAL_PROTOCOL,
+  layer=event["layer"],prefix=event["prefix"],rank=event["rank"],epoch=event["epoch"],states=checked,
+  writer_domain=domain,joint_budget=event["joint_budget"],independent_checker=checker_ref,numpy_dependency=got["numpy"],
+  all_unwritten_physical_bytes_exact=True,last_actual_GDN_typed_segments_finite=True,
+  old_per_layer_inactive_gate_not_claimed=True,allocator_retirement_not_claimed=True,
+  active_state_dense_equivalence_not_claimed=True,postmortem_success_bytes_replay_claimed=False,passed=True,model_ready=False)
+
 def main():
  import argparse,json
  import gdn_source
@@ -124,7 +223,7 @@ def main():
  if checker:
   import source_contract as full
   expected,_=full.source(str(full.ROOT/"SOURCE_MANIFEST.json"),a.source_manifest_sha256)
- result=consume(event,gdn_source.sources(),checker,expected)
+ result=consume(event,gdn_source.sources(),checker,expected,PhysicalContext())
  result.update(scope="all-row-live-byte-finite" if checker else "historical-inactive-rawdump-only",ready=False,model_ready=False)
  print(json.dumps(c.write(a.output,result),sort_keys=True))
 if __name__=="__main__":main()

@@ -106,52 +106,129 @@ class FourRankRealBudget(unittest.TestCase):
 
 
 class ActualObserverEndFlow(unittest.TestCase):
- def fixture(self,active_bad=False):
+ def fixture(self,active_bad=False,protected_bad=None):
+  # Tiny IEEE byte fixtures exercise REAL physical end/checker/retention.
+  # They isolate hardware identity/budget publication; they are NOT all64,
+  # allocator, native tensor, or model permission evidence.
+  import hashlib,tempfile
+  from pathlib import Path
   from types import SimpleNamespace as NS
   import gdn_model_observer as observer
+  folder=tempfile.TemporaryDirectory(prefix="gdn-physical-end-fixture-")
+  self.addCleanup(folder.cleanup);root=Path(folder.name)
   obj=observer.Observer.__new__(observer.Observer)
-  ident=dict(shape=[3,2,2],stride=[4,2,1],dtype="torch.bfloat16",device="npu:0",
-   pointer=1024,storage_pointer=1024,storage_offset=0,storage_bytes=24,native_format_value=0)
-  good=struct.pack("<4H",0x3f80,0x3f80,0x3f80,0x3f80)
-  bad=struct.pack("<4H",0x7f80,0x3f80,0x3f80,0x3f80)
   class CPU:
    def __init__(self,raw):self.raw=raw
    def view(self,*args):return self
    def numpy(self):return self.raw
-  arrays=[[CPU(good),CPU(bad if active_bad else good),CPU(good)] for _ in range(2)]
-  current=NS(kv_cache=arrays)
-  event=dict(layer=0,prefix="model.layers.0",rank=0,epoch=1,states=[
-   dict(name=n,identity_before=copy.deepcopy(ident)) for n in ("conv","recurrent")])
-  obj.pending={"model.layers.0":dict(obj=current,event=event,states=arrays,
-   domain={"written_slots":{"conv":[1],"recurrent":[1]}},before=[[CPU(good) for _ in range(3)] for _ in range(2)])}
+  class Slab(CPU):
+   def __init__(self,raw,ident,width):
+    super().__init__(raw);self.ident=ident;self.width=width;self.slices=[]
+   def element_size(self):return self.width
+   def __getitem__(self,part):
+    self.slices.append((part.start*self.width,part.stop*self.width))
+    return CPU(self.raw[part.start*self.width:part.stop*self.width])
+  owners=[];states=[];tensors=[];ledger=[];original={}
+  for index,(name,dtype,width) in enumerate((("conv","torch.bfloat16",2),("recurrent","torch.float32",4))):
+   word="H" if width==2 else "I";good=0x3f80 if width==2 else 0x3f800000
+   changed=0x4000 if width==2 else 0x40000000
+   row=struct.pack("<4"+word,*([good]*4));padding=b"\xff"*(4*width)
+   before=row*3+padding;after=bytearray(before)
+   after[4*width:8*width]=struct.pack("<4"+word,*([changed]*4))
+   if active_bad:after[4*width:5*width]=struct.pack("<"+word,0x7f80 if width==2 else 0x7f800000)
+   if protected_bad is not None and index==0:after[protected_bad]^=1
+   ident=dict(shape=[3,2,2],stride=[4,2,1],dtype=dtype,device="npu:0",
+    pointer=1024*(index+1),storage_pointer=1024*(index+1),storage_offset=0,
+    storage_bytes=len(before),native_format_value=2,native_format_type="torch_npu.npu._format.Format")
+   info=stream.physical_identity(ident);view=stream.exact_view_key(ident)
+   pool=dict(identity=copy.deepcopy(ident),before_owner=hashlib.sha256(name.encode()).hexdigest(),
+    members=[dict(layer=0,prefix="model.layers.0",name=name)],
+    all_physical_bytes=len(before),allowed_write_extents=[[4*width,8*width]],
+    protected_extents=[[0,4*width],[8*width,len(before)]],protected_bytes=len(before)-4*width)
+   # Retained typed inactive rows + current writer row. Padding deliberately
+   # contains nonfinite bit patterns but is raw bytes, NOT a typed GDN row.
+   segments=[dict(start=0,stop=12*width,dtype=dtype,view=view,layer=0)]
+   slab=Slab(bytes(after),ident,width);tensors.append(slab)
+   owners.append(dict(pool=pool,slab=slab,cpu=CPU(before)))
+   states.append(dict(name=name,state_slot_axis=0,identity_before=copy.deepcopy(ident)))
+   ledger.append(dict(before_owner=pool["before_owner"],identity=copy.deepcopy(ident),segments=segments))
+   original[pool["before_owner"]]=dict(pool=pool,segments=segments,before=before,after=bytes(after),info=info,slab=slab)
+  event=dict(schema=stream.PHYSICAL_PROTOCOL,layer=0,prefix="model.layers.0",rank=0,epoch=1,
+   states=states,deployed_state_sources={},original_forward_unchanged=True,original_forward_core_unchanged=True)
+  obj.pending=dict(layers={"model.layers.0":dict(obj=NS(kv_cache=tensors),event=event)},
+   owners=owners,ledger=dict(schema="sparq.actual-pool-last-writer-types/v1",rank=0,epoch=1,pools=ledger),
+   plans=[],fa=[])
   obj.t=NS(uint8="uint8",npu=NS(current_stream=lambda:NS(synchronize=lambda:None)))
-  obj.npu=NS();obj.np=None;obj.epochs=0;obj.pins={};obj.source={"path":"/unit/source","sha256":"a"*64};obj.checker={"path":"/unit/checker","sha256":"a"*64}
-  obj.validate_original=lambda unused:None # Isolate unchanged donor identity; byte checker is REAL.
+  obj.npu=NS();obj.np=None;obj.epochs=0;obj.epoch=1;obj.rank=0;obj.root=root
+  obj.pins={};obj.source={"path":"/unit/source","sha256":"a"*64}
+  obj.checker={"path":"/unit/checker","sha256":"a"*64};obj.budget_ref={"path":"/unit/budget","sha256":"b"*64}
+  obj.first_fault=None;obj.ledger_ref=None;obj.physical_context=g.PhysicalContext()
+  obj.validate_original=lambda unused:None # Donor identity has separate source tests.
   obj.space=lambda:None;obj.cpu=lambda t:(t,t.raw)
-  retained=[];obj.first=lambda e,s,i,b,a,err:retained.append((i,bytes(b),None if a is None else bytes(a),repr(err)))
-  return obj,ident,retained,observer
+  def fixture_write(path,value):
+   # Only software JSON publication is isolated from the /cache/cch owner
+   # constraint. Actual first_pool/raw_publish and exact bound SHA reads run.
+   data=json.dumps(value,sort_keys=True,separators=(",",":"),allow_nan=False).encode()+b"\n"
+   with Path(path).open("xb") as f:self.assertEqual(f.write(data),len(data))
+   return observer.c.bound(path,hashlib.sha256(data).hexdigest())
+  return obj,original,observer,fixture_write
  def test_real_end_streams_both_states_all_active_and_inactive_rows(self):
+  import hashlib
   from types import SimpleNamespace as NS
   from unittest.mock import patch
-  obj,ident,retained,observer=self.fixture()
-  checks=[]
-  def pure_consume(event,pins,ref,source):
-   for state in event["states"]:
-    checks.append(stream.consume_summary(state["live_check"],state["identity_before"],[1]))
-   return {"unit_contract_only":True}
-  with patch.object(observer,"identity",lambda *args:copy.deepcopy(ident)),patch.object(g,"consume",pure_consume):
+  obj,original,observer,publish=self.fixture();checks=[];identities=[]
+  def actual_identity(t,*unused):identities.append(t);return copy.deepcopy(t.ident)
+  def pure_consume(event,pins,ref,source,context):
+   self.assertIs(context,obj.physical_context);self.assertEqual(event["schema"],stream.PHYSICAL_PROTOCOL)
+   self.assertEqual([s["name"] for s in event["states"]],["conv","recurrent"])
+   self.assertTrue(all(s["identity_before"]==s["identity_after"] for s in event["states"]))
+   physical=observer.c.obj(event["physical_epoch"]);self.assertEqual(physical["original_full_before_copy_count"],2)
+   self.assertEqual(len(physical["pool_summaries"]),2)
+   for rawref in physical["pool_summaries"]:
+    summary=observer.c.obj(rawref);known=original[summary["before_owner"]]
+    got=stream.consume_physical_summary(summary,known["pool"],known["segments"])
+    self.assertEqual(got["original_before_stream_sha256"],hashlib.sha256(known["before"]).hexdigest())
+    self.assertEqual(got["original_after_stream_sha256"],hashlib.sha256(known["after"]).hexdigest())
+    checks.append(got)
+   return {"software_physical_contract_only":True,"model_ready":False}
+  with patch.object(observer,"identity",actual_identity),patch.object(observer.c,"write",publish),patch.object(g,"consume",pure_consume),patch.object(stream,"CHUNK",8):
    out=obj.end(NS(capturing=False))
-  self.assertEqual(len(out),1);self.assertEqual(len(checks),2)
-  self.assertEqual([x["all_rows"] for x in checks],[3,3]);self.assertEqual(retained,[])
-  self.assertIsNone(obj.pending);self.assertEqual(obj.epochs,1)
+  self.assertEqual(len(out),1);self.assertEqual(len(identities),2);self.assertEqual(len(checks),2)
+  self.assertEqual([x["physical_bytes_checked"] for x in checks],[32,64])
+  self.assertEqual([x["protected_bytes_checked"] for x in checks],[24,48])
+  self.assertEqual([x["typed_bytes_checked"] for x in checks],[24,48])
+  self.assertTrue(all(x["old_per_layer_inactive_gate_not_claimed"] for x in checks))
+  for known in original.values():
+   self.assertEqual(known["slab"].slices,[(i,i+8) for i in range(0,len(known["before"]),8)])
+  self.assertIsNone(obj.first_fault);self.assertIsNone(obj.pending);self.assertEqual(obj.epochs,1)
+  # Both inactive logical row and non-typed padding remain protected bytes.
+  for byte in (0,31):
+   with self.subTest(protected_byte=byte):
+    bad,known,obs,write=self.fixture(protected_bad=byte)
+    with patch.object(obs,"identity",lambda t,*a:copy.deepcopy(t.ident)),patch.object(obs.c,"write",write),patch.object(g,"consume",side_effect=AssertionError("consumer before byte check")),patch.object(stream,"CHUNK",8):
+     with self.assertRaisesRegex(ValueError,"unwritten byte changed"):bad.end(NS(capturing=False))
+    fault=obs.c.obj(bad.first_fault);self.assertEqual(fault["chunk_offset"],byte//8*8)
+    self.assertNotEqual(obs.c.sha(fault["before"]["path"]),obs.c.sha(fault["after"]["path"]))
+    self.assertEqual(bad.epochs,0);self.assertIsNotNone(bad.pending)
  def test_real_end_active_nonfinite_retains_first_original_row_before_raise(self):
+  from pathlib import Path
   from types import SimpleNamespace as NS
   from unittest.mock import patch
-  obj,ident,retained,observer=self.fixture(True)
-  with patch.object(observer,"identity",lambda *args:copy.deepcopy(ident)),patch.object(g,"consume",side_effect=AssertionError("consumer reached before finite")):
-   with self.assertRaises(stream.FirstRowError):obj.end(NS(capturing=False))
-  self.assertEqual(len(retained),1);self.assertEqual(retained[0][0],1)
-  self.assertNotEqual(retained[0][1],retained[0][2]);self.assertEqual(obj.epochs,0)
+  obj,original,observer,publish=self.fixture(True)
+  with patch.object(observer,"identity",lambda t,*a:copy.deepcopy(t.ident)),patch.object(observer.c,"write",publish),patch.object(g,"consume",side_effect=AssertionError("consumer reached before finite")),patch.object(stream,"CHUNK",8):
+   with self.assertRaisesRegex(ValueError,"last-GDN-writer typed bytes nonfinite"):obj.end(NS(capturing=False))
+  fault=observer.c.obj(obj.first_fault);self.assertEqual(fault["schema"],"sparq.GDN-first-physical-byte-fault/v1")
+  self.assertEqual(fault["chunk_offset"],8);self.assertFalse(fault["after_unavailable"])
+  self.assertEqual(fault["pool_members"][0]["name"],"conv")
+  known=next(v for v in original.values() if v["pool"]["members"][0]["name"]=="conv")
+  self.assertEqual(Path(fault["before"]["path"]).read_bytes(),known["before"][8:16])
+  self.assertEqual(Path(fault["after"]["path"]).read_bytes(),known["after"][8:16])
+  self.assertNotEqual(fault["before"]["sha256"],fault["after"]["sha256"])
+  self.assertEqual(len(list(obj.root.glob("GDN-FIRST-POOL-*.before.bin"))),1)
+  self.assertEqual(len(list(obj.root.glob("GDN-FIRST-POOL-*.after.bin"))),1)
+  self.assertEqual(len(list(obj.root.glob("GDN-FIRST-POOL-*.json"))),1)
+  self.assertEqual(list(obj.root.glob("GDN-POOL-*.json")),[]);self.assertEqual(obj.epochs,0)
+  self.assertIsNotNone(obj.pending);self.assertIsNone(obj.ledger_ref)
  def test_real_begin_joint_actualshape_admission_precedes_first_cpu_copy(self):
   import ast
   from pathlib import Path

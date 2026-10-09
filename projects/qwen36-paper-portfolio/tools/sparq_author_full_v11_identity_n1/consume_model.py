@@ -56,31 +56,35 @@ def consume_trace(index_ref,source,component):
  import hashlib
  evidence_digest=hashlib.sha256();checked_turn_count=0;active_observation_count=0
  coverage=allocator_coverage.Coverage();full_epochs={r:0 for r in range(4)};numpy_dependency=None
+ physical_context=gdn_state.PhysicalContext()
  for rank in range(4):
   for boundary_ref in sorted(boundaries[rank],key=lambda x:Path(x["path"]).name):
    b=read(boundary_ref,"actual-model-boundary",rank)
    c.require(set(b["gdn"])=={str(i) for i in gdn_state.GDN},"all actual48 native GDN layers for EVERY model boundary")
    states=[read(b["gdn"][str(i)],"actual-gdn-state",rank) for i in gdn_state.GDN]
    checker_ref=c.bound(c.ROOT/"gdn_stream.py",c.obj(source)["files"]["gdn_stream.py"])
-   c.require(all(x.get("schema")==gdn_stream.PROTOCOL for x in states),"current model authority requires NEW complete all-row live-byte/finite protocol")
-   checked=[gdn_state.consume(x,gdn_source.sources(),checker_ref,source) for x in states]
+   c.require(all(x.get("schema")==gdn_stream.PHYSICAL_PROTOCOL for x in states),"current model authority requires NEW complete all-row live-byte/finite protocol")
+   checked=[gdn_state.consume(x,gdn_source.sources(),checker_ref,source,physical_context) for x in states]
    for check in checked:
     if numpy_dependency is None:numpy_dependency=check["numpy_dependency"]
     c.require(check["numpy_dependency"]==numpy_dependency,"same actual observed NumPy source across all4/all48/all epochs")
    active=[]
-   for x in states:
-    for s in x["states"]:
-     domain=next(z for z in checked if z["layer"]==x["layer"])["writer_domain"]["written_slots"][s["name"]]
-     observations=s["active_slots"];record=s["live_check"]
-     c.require([z["slot"] for z in observations]==domain and s["active_state_dense_equivalence_not_asserted"] is True and
-      record["all_after_finite"] is True and record["all_inactive_exact"] is True,
-      "complete actual active AND inactive finite/full-byte coverage")
-     for z in observations:
-      active.append(dict(layer=x["layer"],state=s["name"],slot=z["slot"],
-       bitwise_changed=z["bitwise_changed"],after_finite=z["after_finite"],
-       changed_is_observation_not_extra_algorithm_gate=True,
-       exact_original_byte_streams={k:record[k] for k in ("original_before_stream_sha256","original_after_stream_sha256")},
-       postmortem_success_raw_replay_claimed=False))
+   # New REFERENCE_OR_TEST scope: ALL48 logical metadata + entire physical
+   # shared pools. No fake per-layer inactive/changed-row observations.
+   for x,check in zip(states,checked):
+    c.require(check["all_unwritten_physical_bytes_exact"] is True and
+     check["last_actual_GDN_typed_segments_finite"] is True and
+     check["old_per_layer_inactive_gate_not_claimed"] is True and
+     check["allocator_retirement_not_claimed"] is True,
+     "new exact byte/type reference, not old per-layer inactive PASS")
+    for s in check["states"]:
+     active.append(dict(layer=x["layer"],state=s["name"],
+      actual_writer_slots=check["writer_domain"]["written_slots"][s["name"]],
+      physical_before_owner=s["physical_before_owner"],physical_epoch=s["physical_epoch"],
+      physical_stream_summary_ref=s["physical_stream_summary_ref"],
+      all_unwritten_physical_bytes_exact=True,last_actual_GDN_typed_segments_finite=True,
+      old_per_layer_inactive_gate_not_claimed=True,allocator_retirement_not_claimed=True,
+      postmortem_success_raw_replay_claimed=False))
    if b["runtime"]=="FULL":
     c.require(set(b["fa"])=={str(i) for i in range(3,64,4)} and b["mixed_FA_records"]=={},
      "all actual16 FA conditional output rows, not capture-time Python calls")
@@ -120,7 +124,8 @@ def consume_trace(index_ref,source,component):
  return dict(schema="sparq.actual-full64-model-check/v3",source=source,index=index_ref,workers=workers,
   coverage=summary,actual_http=index["http"],actual_requests_per_rank=len(http["requests"]),all_actual_checks_rolling_sha256=evidence_digest.hexdigest(),checked_turn_count=checked_turn_count,
   active_observation_count=active_observation_count,FA=16,GDN=48,
-  GDN_protocol=gdn_stream.PROTOCOL,GDN_numpy_dependency=numpy_dependency,all_active_and_inactive_GDN_after_finite=True,
+  GDN_protocol=gdn_stream.PHYSICAL_PROTOCOL,GDN_numpy_dependency=numpy_dependency,all_unwritten_physical_GDN_FA_bytes_exact=True,last_actual_GDN_typed_segments_finite=True,
+  old_per_layer_inactive_gate_not_claimed=True,allocator_retirement_not_claimed=True,
   GDN_full_original_before_CPU_saved=True,GDN_complete_live_byte_consumer=True,GDN_permanent_success_raw_replay=False,active_GDN_diagnostic_not_dense_equality=True,
   mixed_FA_source_unchanged_not_new_independent_numeric_claim=True,
   conditional_output_threshold=dict(relative_rms=.005,cosine=.99998),mean_configuration=False,online_independent_full_qKV_literal_FP64=True,postmortem_full_qKV_replay=False,passed=True,
@@ -250,7 +255,8 @@ def consume(host_ref,terminal_ref,source_ref,component_ref):
  checked=gold["check"]
  c.require(checked["schema"]=="sparq.actual-full64-model-check/v3" and checked["passed"] is True and checked["source"]==source and
   checked["index"]==arm["actual_model_trace"] and checked["FA"]==16 and checked["GDN"]==48 and
-  checked["GDN_protocol"]==gdn_stream.PROTOCOL and checked["GDN_numpy_dependency"]==cp["GDN_stream_checker"]["numpy"] and checked["all_active_and_inactive_GDN_after_finite"] is True and
+  checked["GDN_protocol"]==gdn_stream.PHYSICAL_PROTOCOL and checked["GDN_numpy_dependency"]==cp["GDN_stream_checker"]["numpy"] and checked["all_unwritten_physical_GDN_FA_bytes_exact"] is True and checked["last_actual_GDN_typed_segments_finite"] is True and
+  checked["old_per_layer_inactive_gate_not_claimed"] is True and checked["allocator_retirement_not_claimed"] is True and
   checked["GDN_full_original_before_CPU_saved"] is True and checked["GDN_complete_live_byte_consumer"] is True and checked["GDN_permanent_success_raw_replay"] is False and
   checked["conditional_output_threshold"]==dict(relative_rms=.005,cosine=.99998) and checked["mean_configuration"] is False and checked["online_independent_full_qKV_literal_FP64"] is True and checked["postmortem_full_qKV_replay"] is False and checked["checked_turn_count"]>0 and
   re.fullmatch("[0-9a-f]{64}",checked["all_actual_checks_rolling_sha256"]) and

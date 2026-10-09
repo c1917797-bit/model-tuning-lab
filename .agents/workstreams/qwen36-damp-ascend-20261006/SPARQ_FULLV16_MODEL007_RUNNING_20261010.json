@@ -1,0 +1,211 @@
+{
+  "schema": "qwen36.paper-model-admission-stage/v1",
+  "observed_utc": "2026-10-09T23:15:04Z",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "head": "7a2784d5edcf046552fa75be26e004cde70664c2",
+  "goal_status": "ACTIVE_NOT_MET",
+  "device_lane": "SERIAL_MAIN_ONLY_PHYSICAL4_7",
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "hugetlb32GiB": "SPENT",
+  "publication": "existing HTTPS authentication failure unchanged; no blind retry",
+  "current": {
+    "paper": "SparQ",
+    "gate": "TP4_FULL16_all64_diagnostic_correctness",
+    "operation_id": "exec-00000000000008c0",
+    "status": "RUNNING_ACK_AND_ACTUAL_PLAN; NOT_MODEL_PASS",
+    "source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+      "sha256": "c67efb3ddf971c772ebc0d8fa919702cd3436cb3ad7941c35e494ea752b5ad4c"
+    },
+    "actual_software": {
+      "operation": "exec-00000000000008b9",
+      "exit_code": 0,
+      "tests": 262,
+      "duration_ms": 76317,
+      "source_count": 140
+    },
+    "actual_default_off_and_model_source_audit": {
+      "operation": "exec-00000000000008bf",
+      "exit_code": 0,
+      "duration_ms": 259
+    },
+    "whole_budget_seconds": 5400,
+    "cleanup_included_seconds": 90,
+    "cutoff_epoch": 1791615625,
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007",
+    "actual_plan": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007/PLAN.json",
+      "sha256": "96dfe3f67726962ffcd343574ee3a958b2d89011f2ed2a570b0f776dbab61f15"
+    },
+    "process": {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/host_run.py",
+        "--execute",
+        "--source",
+        "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v11_identity_n1/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "c67efb3ddf971c772ebc0d8fa919702cd3436cb3ad7941c35e494ea752b5ad4c",
+        "--component",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-sparq005-consumer-mounts-whole-user72h-20261009-001.json",
+        "--component-sha256",
+        "5614469e833ada86ad9f2f5869d084752a7262d0ac1f3701b7246e9701df7a74",
+        "--model-manifest",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "--model-manifest-sha256",
+        "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+        "--mode",
+        "diagnostic",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v16-diagnostic-user72h-20261010-007",
+        "--port",
+        "8241"
+      ],
+      "cgroup": "13:pids:/system.slice/agentweb-chicaihong01-ma.service\n12:cpu,cpuacct:/system.slice/agentweb-chicaihong01-ma.service\n11:devices:/system.slice/agentweb-chicaihong01-ma.service\n10:perf_event:/\n9:rdma:/\n8:hugetlb:/\n7:memory:/system.slice/agentweb-chicaihong01-ma.service\n6:cpuset:/system.slice/agentweb-chicaihong01-ma.service\n5:net_cls,net_prio:/\n4:blkio:/system.slice/agentweb-chicaihong01-ma.service\n3:freezer:/system.slice/agentweb-chicaihong01-ma.service\n2:files:/\n1:name=systemd:/system.slice/agentweb-chicaihong01-ma.service\n",
+      "cmdline_sha256": "9906c4e5e85bb2c60618463b0aeeb37c6b8bfc6b0cd3f901e12364d30e9e81f7",
+      "namespace_pids": [
+        2781479
+      ],
+      "pid": 2781479,
+      "start_ticks": 51302216
+    },
+    "physical_compute_not_inferred_from_launch": true,
+    "missing": [
+      "original terminal and own release",
+      "independent consume_model authority",
+      "matched E1",
+      "3 formal pairs",
+      "final task actual inputs/scorers and quality"
+    ]
+  },
+  "sparq_failure_recovery": {
+    "original_operation": "exec-000000000000088a",
+    "actual_tests": 262,
+    "passed": 260,
+    "errors": 2,
+    "classification": "REFERENCE_OR_TEST",
+    "root_cause": "old per-layer pending/first/4-argument fixture versus physical-pool pending.layers/owners/ledger/first_pool/5-argument consumer",
+    "changed": "existing two test methods and their fixture only; production core/math/numerical thresholds unchanged",
+    "retained_MAIN_wrapper_failure": {
+      "operation": "exec-00000000000008b6",
+      "duration_ms": 21,
+      "cause": "MAIN taskset inserted after Python; corrected only argv before test execution"
+    },
+    "corrected_smoke": {
+      "operation": "exec-00000000000008b8",
+      "exit_code": 0,
+      "tests": 2,
+      "duration_ms": 195
+    }
+  },
+  "adakv": {
+    "status": "MODEL_ADMISSION_PREPARATION_PENDING_NOT_EXECUTED",
+    "original_native_operation": "exec-0000000000000805",
+    "actual_native_component": {
+      "cases": 32,
+      "steps": 5120,
+      "selector_verified": false,
+      "model_verified": false
+    },
+    "derived17": {
+      "operation": "exec-0000000000000887",
+      "status": "NATIVE32X160_CONSUMED",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-consume-014-main-017-001/RESULT.json",
+        "sha256": "e971e21a11fd81d4bc775fa6746f618956a7df8758529cb5e1b1c0374d0f29fa"
+      }
+    },
+    "source23": {
+      "sha256": "b830da0f0aa478ee0ff6a64469384aa5c55cc0f77550c9faf6bcfddcc35d07df",
+      "actual_software": {
+        "operation": "exec-0000000000000895",
+        "exit_code": 0,
+        "tests": [
+          52,
+          27
+        ]
+      },
+      "actual_materialization": {
+        "operation": "exec-00000000000008a7",
+        "exit_code": 0,
+        "files": 101,
+        "result": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit023-materialize-main-20261010-001/RESULT.json",
+          "sha256": "f37d74f72b4f377725d923be2ba5102e22fe091e53b264d4262afd15af26b1dd"
+        }
+      }
+    },
+    "blocker": "full config.num_blocks GDN view copies are not C16 state count; conditional pool before+FAshadow lower bound66.77GiB exceeds64GiB; actual geometry not acquired; shared logical aliases need physical writer domains",
+    "next": "private exact describe-before-allocation raw geometry + independent consumer; reuse physical-pool byte checker and one full before per actual owner without weakening all48/all64 or gates",
+    "no_cache_shrink_no_budget_expansion": true
+  },
+  "next": {
+    "paper": "SparQ",
+    "gate": "E1_v7_single_pair",
+    "source_sha256": "c447df90cbb4096b70aa757e61c194b7af83fdc308492f74257df97282c5861a",
+    "tests24": "UNRUN",
+    "model_authority": "MISSING",
+    "ready_for_NPU": false
+  },
+  "backup": {
+    "paper": "KIVI",
+    "gate": "owned before-bind layout seam software",
+    "source_sha256": "dfb0ddb3fe1d332fb36bc09ce63dfada68877ba3253f670b4a8a56bc015d9f33",
+    "tests12": "UNRUN",
+    "oncard_entry": "MISSING",
+    "ready_for_NPU": false
+  },
+  "preparers": {
+    "recurrent_lifecycle_ready_queue": "final actual official task artifact handoff",
+    "sparse_attention_ready_queue": "AdaKV geometry and physical observer thin adaptation",
+    "lowbit_ready_queue": "KIVI actual format and owned collector seam",
+    "remote_exec_CPU": 0
+  },
+  "results": {
+    "new_matched_E2E": false,
+    "new_TTFT_TPOT": false,
+    "new_LongBench_v2": false,
+    "new_GSM8K": false,
+    "technology_accepted": false
+  },
+  "original_envelopes": {
+    "SPARQ_088A_SOFTWARE262_FAILED_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_088A_SOFTWARE262_FAILED_ORIGINAL.json",
+      "sha256": "6c8333436df0c606256c1911e966241dde24c86b9c74d78d3437823c4663061f"
+    },
+    "ADAKV_0895_SOFTWARE79_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/ADAKV_0895_SOFTWARE79_ORIGINAL.json",
+      "sha256": "4ef6261f73aa26edf861aca9eee70aed3524cd03585ab4961d8da8ce09780b75"
+    },
+    "ADAKV_08A7_MATERIALIZE023_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/ADAKV_08A7_MATERIALIZE023_ORIGINAL.json",
+      "sha256": "c72884f0fff33926f22b2193bd17c6ce29307f21285534031f75d201bc6a91fd"
+    },
+    "SPARQ_08B6_SMOKE_WRAPPER_FAILED_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08B6_SMOKE_WRAPPER_FAILED_ORIGINAL.json",
+      "sha256": "d6855c394ec7971e5dfb17849e8a94a0b76212d2d830cd59f1e4ce8baac02ea9"
+    },
+    "SPARQ_08B8_TWO_FIXTURE_SMOKE_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08B8_TWO_FIXTURE_SMOKE_ORIGINAL.json",
+      "sha256": "3146a66d2049a7554c244c6617fd94f253b39628838c912f68a1986f715c5f61"
+    },
+    "SPARQ_08B9_SOFTWARE262_PASS_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08B9_SOFTWARE262_PASS_ORIGINAL.json",
+      "sha256": "433eb93597de6309e16e84ca8460880f54db65d245992e9662e9354449c30f8d"
+    },
+    "SPARQ_08BF_DEFAULT_OFF_SOURCE_AUDIT_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08BF_DEFAULT_OFF_SOURCE_AUDIT_ORIGINAL.json",
+      "sha256": "30b26d251c0293be51636ff09b4e1dc77084af824a2cf4ba77c14f2cb09bbb38"
+    },
+    "SPARQ_08C0_MODEL007_LAUNCH_ORIGINAL.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/main-c74-regression-terminal-evidence-20261010-001/SPARQ_08C0_MODEL007_LAUNCH_ORIGINAL.json",
+      "sha256": "0c50378257b7b391cb8fe63afc67bf17a009c25bfd210aeb0ec4c1909933fd36"
+    }
+  }
+}

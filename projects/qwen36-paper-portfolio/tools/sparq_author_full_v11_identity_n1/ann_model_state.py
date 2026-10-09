@@ -66,7 +66,7 @@ class ANNState(StockState):
   else:c.require(ctx.cudagraph_runtime_mode==self.Mode.NONE,"same untouched original mixed NONE path as dense")
   if self.diagnostic:
    self.gdn_observer.begin(ctx,os.environ["QWEN36_SPARQ_MODEL_TRACE_ROOT"],
-    int(os.environ["QWEN36_SPARQ_ACTUAL_RANK"]),self.actual_epoch,ids)
+    int(os.environ["QWEN36_SPARQ_ACTUAL_RANK"]),self.actual_epoch,ids,self.native_caches,self.native_impls,self.a)
  def post(self,ctx,batch,stream):
   c.require(self.current is not None and self.current["batch"]==batch,"actual original runner POST scope")
   if self.current["dummy"]:return
