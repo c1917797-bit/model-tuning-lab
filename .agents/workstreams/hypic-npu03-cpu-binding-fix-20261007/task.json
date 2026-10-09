@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r13_quality_rejected_performance_screen_running",
+  "state": "r13_quality_rejected_candidate_performance_screen_running",
   "execution_state": "in-progress",
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
@@ -65,12 +65,24 @@
     "status": "evidence valid; deployed quality REJECT_OR_QUALIFY, 230/381 to 219/381 (-2.887 pp), strict four-worker hot FAIL 368/381; 13 cold requests all have ready-then-evicted-before-partial-prefill event order; no paper-complete conclusion",
     "report": "HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md"
   },
-  "active_attempt": {
+  "performance_baseline_screen": {
     "campaign": "cache10perf",
     "arm": "no-cache",
     "phase": "screen",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-no-cache-screen",
     "controller_operation": "exec-0000000000001c05",
+    "status": "terminal raw root independently audited; connector handle later not_found; never restart or reuse root",
+    "contract_sha256": "bf95c35e762f7cdc4901886b67ceb5bb881bc0beca1c89adbc3d12300cf52846",
+    "arm_result_sha256": "9b6fa4f7af6ac962d2d786b0b6b8beebbbf44c8ea7006d3564e3b514c883563c",
+    "performance_sha256": "07bef26011b84444244b92cbfc807325c27577aca6b9cc10906505278309aea0",
+    "audit": "HOTPATH_CACHE10PERF_SCREEN_BASELINE_AUDIT.md"
+  },
+  "active_attempt": {
+    "campaign": "cache10perf",
+    "arm": "hypic-only",
+    "phase": "screen",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-screen",
+    "controller_operation": "exec-0000000000001c22",
     "status": "running; poll the same handle, do not restart or overlap phases"
   },
   "goal_horizons": {
@@ -100,5 +112,5 @@
     "live_remote_read_operation": "exec-0000000000001556",
     "recovery": "After user provisions GitHub authentication, push named workstream branch without force and independently verify live remote/upstream equality. Do not expose credentials."
   },
-  "next_action": "Poll current performance no-cache/screen operation exec-0000000000001c05 and its immutable raw root; never restart on slow progress. On terminal, independently audit 40 requests, source identity, continuous physical 0-3 isolation and exact owned release. Then run the remaining five phases in frozen order, each only after actual idle physical NPU0-3 and port 8223; independently audit paired performance and strict request-ID coverage. Retain r13 quality REJECT_OR_QUALIFY and strict FAIL; diagnose the hot-path quality drop separately. Never use NPU4-7 or foreign containers; no main/remote claim until reviewed integration and working authentication."
+  "next_action": "Preserve the independently audited no-cache/screen terminal root; its connector handle later expired. Poll current hypic-only/screen operation exec-0000000000001c22 and immutable raw root; never restart on slow progress. On terminal, independently audit 40 requests, 42 unique IDs, four-worker request-ID hot proof, source identity, continuous physical 0-3 isolation and exact owned release. Then run the remaining four phases in frozen order, each only after actual idle physical NPU0-3 and port 8223; independently audit paired performance and strict request-ID coverage. Retain r13 quality REJECT_OR_QUALIFY and strict FAIL; diagnose the hot-path quality drop separately. Never use NPU4-7 or foreign containers; no main/remote claim until reviewed integration and working authentication."
 }

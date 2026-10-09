@@ -79,13 +79,15 @@ audit. Frozen dual report `f66b976` says 230/381 to 219/381 (-2.887 pp),
 deployed quality REJECT_OR_QUALIFY; strict 368/381 hot FAIL. All 13 cold
 requests show material ready then evicted before partial-prefill rejection.
 Hot-cohort quality also declined descriptively; cause remains unisolated.
-See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md. Performance no-cache/screen
-controller `exec-0000000000001c05` is running; poll, never restart.
+See HOTPATH_CACHE10R13_TERMINAL_QUALITY_AUDIT.md. No-cache/screen passed its
+40-row/42-ID/source/isolation/release audit; expired handle is not a rerun
+signal (HOTPATH_CACHE10PERF_SCREEN_BASELINE_AUDIT.md). HYPIC-only/screen
+controller `exec-0000000000001c22` is running; poll, never restart.
 Do not post-hoc pass either root, use NPU4–7, or modify foreign containers.
 
 ## 5. Next Actions
 
-1. Preserve r10–r13 negatives; poll performance no-cache/screen, independently
+1. Preserve r10–r13 negatives; poll performance hypic-only/screen, independently
    audit terminal receipts, then run remaining frozen phases serially.
 2. Preserve local commits while GitHub auth is unavailable. After user
    provisioning, push named branch and verify live equality; no force.

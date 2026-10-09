@@ -53,13 +53,17 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(task["r13_baseline_attempt"]["arm"], "no-cache")
         self.assertEqual(task["r13_baseline_attempt"]["controller_operation"],
                          "exec-0000000000001a76")
-        self.assertEqual(task["active_attempt"]["arm"], "no-cache")
-        self.assertEqual(task["active_attempt"]["controller_operation"],
+        self.assertEqual(task["performance_baseline_screen"]["arm"], "no-cache")
+        self.assertEqual(task["performance_baseline_screen"]["controller_operation"],
                          "exec-0000000000001c05")
+        self.assertTrue((HERE / task["performance_baseline_screen"]["audit"]).is_file())
+        self.assertEqual(task["active_attempt"]["arm"], "hypic-only")
+        self.assertEqual(task["active_attempt"]["controller_operation"],
+                         "exec-0000000000001c22")
         self.assertIn("poll", task["active_attempt"]["status"])
         self.assertIn("127x3", task["goal_horizons"]["short_term"])
         self.assertIn("all 29", task["goal_horizons"]["long_term"])
-        self.assertIn("exec-0000000000001c05", task["next_action"])
+        self.assertIn("exec-0000000000001c22", task["next_action"])
         self.assertIn("53/57", task["prior_stress_attempt"]["request_hot_path_gate"])
         self.assertIn("52/57", task["latest_attempt"]["status"])
         self.assertIn("c12060c", task["diagnostic_plugin"]["local_commit"])
