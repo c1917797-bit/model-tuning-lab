@@ -522,3 +522,26 @@ must also survive actual same-image import and reading a real input batch
 before reserving the NPU lane. A failed import is a preparation defect, not a
 paper verdict. Keep those prerequisites device-free and return only repaired,
 actually checked packets to the ready queue.
+
+
+## Runtime factory coverage and failure diagnostics before assertions
+
+A mock dictionary prefilled with keys does not validate a real module factory.
+Enumerate every bootstrap/worker consumer key and callable signature, compare
+with the actual source-qualified factory output, and run a producer-to-consumer
+integration test before the next NPU attempt. Repair common missing roles once,
+not one KeyError per device run. Keep compiler/HAL imports on the initialized
+NPU side when they cannot safely run in Devices[]; do not fake hardware access.
+
+Canaries must publish bounded actual arithmetic values, getter result type/name,
+raw representation and source identity before assertions. Separate arithmetic
+failure from ABI/format serialization failure; a combined assertion without raw
+values cannot establish which condition failed. Reuse the deployed version's
+verified enum adapter, never coerce an arbitrary object merely to pass.
+
+On such an implementation failure, stop-retain only the exact owned workload,
+verify Pid0/noExec/noOOM and device release, and return that paper to preparation.
+Run another actually ready paper immediately; if none is ready, report the real
+queue gap and fix preparation. Passed immutable prerequisites may be reused only
+with exact source/input/output bindings and independent consumption; a failed
+whole run must not be relabelled successful because its earlier CPU stage passed.

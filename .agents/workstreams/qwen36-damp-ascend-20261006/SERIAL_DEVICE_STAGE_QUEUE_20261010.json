@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T12:43:00Z",
+  "updated_at_utc": "2026-10-10T13:10:00Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -15,23 +15,23 @@
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "owner": "sparse_attention_ready_queue",
-      "paper": "SKVQ",
-      "stage": "SKVQ006 isolated verified PyArrow19 wheel ready; same660 Devices[] actual import/9TRAIN and original builder still pending",
-      "state": "PREPARING_OFF_DEVICE",
-      "ready": false
-    },
-    {
+      "paper": "KIVI",
       "owner": "kivi_model_successor",
-      "paper": "KIVI",
-      "stage": "KIVI013 frozen minimal publisher/journal fix; full91+whole013+fresh admission pending",
+      "stage": "014 shared compiler factory repair; actual factory-to-consumer regression for missing triton/tl; CPU HAL partition unchanged",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     },
     {
-      "owner": "recurrent_lifecycle_ready_queue",
       "paper": "KIVI",
-      "stage": "KIVI whole013 mechanical rebind; unchanged71 regression; rawCPU remains serial",
+      "owner": "recurrent_lifecycle_ready_queue",
+      "stage": "mechanically bind whole014 only after producer freeze; same71, no new gate layer",
+      "state": "WAITING_SOURCE_FREEZE_OFF_DEVICE",
+      "ready": false
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "sparse_attention_ready_queue",
+      "stage": "007 source-qualified getter/enum adaptation; capture values before each N1 assertion; exact reuse of actual006 CPU input chain if independently valid",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     }
@@ -41,33 +41,37 @@
   "previous": {
     "paper": "SKVQ",
     "owner": "MAIN",
-    "state": "FAILED_CPU_DEPENDENCY_RELEASED",
-    "operation": "exec-0000000000000396",
+    "state": "FAILED_N1_PRECHECK_RELEASED",
+    "operation": "exec-00000000000003d9",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-005/SOURCE_MANIFEST.json",
-      "bytes": 32635,
-      "sha256": "0c387c8eab843c7aa762275563eec4ddb42fd10fc67e57879a6bd2bd78cd8f6c"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-006/SOURCE_MANIFEST.json",
+      "bytes": 35970,
+      "sha256": "58cfa75ee7fe3c579a3c74b9a1d01f1bb311f6704f41a5986926604edd4758c7"
     },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-005-main-20261010-001",
-    "actual_software38_passed": true,
-    "actual_mount_TRAIN_passed": true,
-    "actual_sameimage23_passed": true,
-    "NPU_started": false,
-    "cause": "Original real TRAIN builder import pyarrow.parquet failed in same660 Python3.12; absence not discovered by source-only tests. Dependency adaptation failure, not algorithm verdict.",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-006-main-20261010-001",
+    "scope": "baseline calibration/preprojection capture only; not quantized SKVQ or E2E",
+    "software_operation": "exec-00000000000003d0",
+    "actual_software50_passed": true,
+    "mount_TRAIN_operation": "exec-00000000000003d4",
+    "actual_mount9TRAIN_passed": true,
+    "fresh_resources_operation": "exec-00000000000003d6",
+    "NPU_started_not_yet_verified": false,
+    "next_on_failure": "exact own cleanup -> PREPARING_OFF_DEVICE; KIVI014 only after actual source/full tests and fresh prerequisite gate",
+    "NPU_started": true,
+    "actual_sameimage_dependencies_and23_and_input_producer_passed": true,
+    "actual_input_consumer_scope": "raw bytes/metadata only; actual tokenizer reconstruction pending",
+    "cause": "all4 n1_check.py25 combined arithmetic/format-type/ND2 assertion failed; actual fmt/output not retained. Do not guess which clause, algorithm not reached.",
     "result": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-005-main-20261010-001/HOST_RESULT.json",
-      "bytes": 11808,
-      "sha256": "814f3c9f7fa3797388d700ad039ebced2c2809ebd76721b33dda630f2b19e106"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-006-main-20261010-001/HOST_RESULT.json",
+      "bytes": 32697,
+      "sha256": "81d9d22baabd75d0a78365a5c7eac060219ce5f44874a0d1c33cf0c2fa4537f3"
     },
-    "cpu_container": "d6be8fe967e48dac761b6746eda38d84dccb17abc9eccc9822fa51f52e3777af",
-    "cpu_stopped_utc": "2026-10-10T12:18:16.42923346Z",
-    "release": {
-      "bytes": 720,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-005-main-20261010-001/STOP_RETAIN-1791634696514712190.json",
-      "sha256": "e30fa5c23a1be3c924ca045856e618cf49ee2c53e4c1c2ea2575cc59482bfdd1"
-    }
+    "release_verified_operation": "exec-00000000000003db",
+    "device_stopped_utc": "2026-10-10T13:03:52.89551297Z",
+    "cpu_stopped_utc": "2026-10-10T13:02:20.17539587Z",
+    "exact_owned_stopped_retained": true
   },
-  "idle_cause": "No ready NPU successor: KIVI012 actual software75+whole71 pass was insufficient; actual PackedBatch callback bypassed journal, and tuple/list JSON seam blocks production. 013 repairs off-device. SKVQ006 isolated official-digest dependency acquired; actual same-image import/TRAIN preflight still pending.",
+  "idle_cause": "KIVI014 off-device actual compiler/role factory closure repair; SKVQ007 off-device format ABI observation repair. No ready device successor;006 CPU dependencies and real256 inputs succeeded but N1 combined assertion failed. Do not repeat unchanged006 or hold its lease.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -158,23 +162,22 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-0000000000000379",
+    "operation": "exec-00000000000003db",
+    "compute_processes": [],
     "physical_devices": [
       4,
       5,
       6,
       7
     ],
-    "compute_processes": [],
     "hbm_mib": [
       2869,
-      2867,
+      2866,
       2866,
       2860
     ],
-    "ordinary_mem_available_kib": 93894424,
-    "protected0to3": "external HYPIC untouched",
-    "scope": "prelaunch only"
+    "protected0to3": "actual external HYPIC unchanged by this task; not operated",
+    "scope": "after exact owned cleanup; fresh admission still required"
   },
   "history_terminals": [
     {
@@ -318,6 +321,67 @@
         "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-005-main-20261010-001/STOP_RETAIN-1791634696514712190.json",
         "sha256": "e30fa5c23a1be3c924ca045856e618cf49ee2c53e4c1c2ea2575cc59482bfdd1"
       }
+    },
+    {
+      "paper": "KIVI",
+      "owner": "MAIN",
+      "state": "FAILED_N1_ADAPTER_RELEASED",
+      "operation": "exec-00000000000003c6",
+      "operation_registry": "NOT_FOUND is not a whole terminal or numerical verdict",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/SOURCE_MANIFEST.json",
+        "bytes": 81553,
+        "sha256": "bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd"
+      },
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-013",
+      "actual_full91_passed": true,
+      "actual_whole71_software_passed": true,
+      "actual_sameimage_cpu_passed": true,
+      "NPU_started": true,
+      "model_firstdecode_passed": false,
+      "cause": "guest_probe.py41 missing mods['triton']; actual factory lacks triton/tl; three consumers affected. Actual N1 implementation defect, not KIVI paper/numeric no-go.",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-013/RESULT.json",
+        "bytes": 11150,
+        "sha256": "fae88e76e4dd68e8b1282e78448b1ab95bcb7cdb718866c79b5437d8e8326412"
+      },
+      "release_verified_operation": "exec-00000000000003d3",
+      "device_stopped_utc": "2026-10-10T12:51:25.70302914Z",
+      "cpu_stopped_utc": "2026-10-10T12:50:16.42494865Z",
+      "exact_owned_stopped_retained": true
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "MAIN",
+      "state": "FAILED_N1_PRECHECK_RELEASED",
+      "operation": "exec-00000000000003d9",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-006/SOURCE_MANIFEST.json",
+        "bytes": 35970,
+        "sha256": "58cfa75ee7fe3c579a3c74b9a1d01f1bb311f6704f41a5986926604edd4758c7"
+      },
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-006-main-20261010-001",
+      "scope": "baseline calibration/preprojection capture only; not quantized SKVQ or E2E",
+      "software_operation": "exec-00000000000003d0",
+      "actual_software50_passed": true,
+      "mount_TRAIN_operation": "exec-00000000000003d4",
+      "actual_mount9TRAIN_passed": true,
+      "fresh_resources_operation": "exec-00000000000003d6",
+      "NPU_started_not_yet_verified": false,
+      "next_on_failure": "exact own cleanup -> PREPARING_OFF_DEVICE; KIVI014 only after actual source/full tests and fresh prerequisite gate",
+      "NPU_started": true,
+      "actual_sameimage_dependencies_and23_and_input_producer_passed": true,
+      "actual_input_consumer_scope": "raw bytes/metadata only; actual tokenizer reconstruction pending",
+      "cause": "all4 n1_check.py25 combined arithmetic/format-type/ND2 assertion failed; actual fmt/output not retained. Do not guess which clause, algorithm not reached.",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-006-main-20261010-001/HOST_RESULT.json",
+        "bytes": 32697,
+        "sha256": "81d9d22baabd75d0a78365a5c7eac060219ce5f44874a0d1c33cf0c2fa4537f3"
+      },
+      "release_verified_operation": "exec-00000000000003db",
+      "device_stopped_utc": "2026-10-10T13:03:52.89551297Z",
+      "cpu_stopped_utc": "2026-10-10T13:02:20.17539587Z",
+      "exact_owned_stopped_retained": true
     }
   ]
 }

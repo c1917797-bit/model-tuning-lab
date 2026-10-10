@@ -1,0 +1,239 @@
+{
+  "schema": "kivi.firstdecode-v012-runtime-abi-entry/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/SOURCE_MANIFEST.json",
+    "bytes": 81553,
+    "sha256": "bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd"
+  },
+  "local_root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-raw-publish-v013-20261010/bootstrap",
+  "status": "PREPARED_UNRUN; local49 PASS; full91/CPU/N1/model/raw/whole UNRUN",
+  "source_count": 193,
+  "own_files": 30,
+  "dependencies": 163,
+  "software_tests": 91,
+  "local_actual": {
+    "publication16": {
+      "chunk_id": "f987a5",
+      "wall_time_seconds": 1.4695699,
+      "exit_code": 0,
+      "original_token_count": 381,
+      "output": "test_actual16_producer_collector_journal_finish_real_bytes (__main__.ActualPublication) ... ok\r\ntest_actual_worker_binding_precedes_real_installer_call (__main__.ActualPublication) ... ok\r\ntest_bad_actual_Ref_SHA_rejected (__main__.ActualPublication) ... ok\r\ntest_bind_partial_shared_used_or_rebound_producer_rejects (__main__.ActualPublication) ... ok\r\ntest_changed_actual_wire_cannot_enter_index (__main__.ActualPublication) ... ok\r\ntest_default_imports_no_framework_or_tensor_execution (__main__.ActualPublication) ... ok\r\ntest_duplicate_layer_rejects_after_preserving_original_publication (__main__.ActualPublication) ... ok\r\ntest_foreign_owner_rank_rejected (__main__.ActualPublication) ... ok\r\ntest_identity_change_rejects_before_actual_packed_write (__main__.ActualPublication) ... ok\r\ntest_missing_one_layer_cannot_finish (__main__.ActualPublication) ... ok\r\ntest_naive_scalar_reroute_retains_tuple_roundtrip_failure (__main__.ActualPublication) ... ok\r\ntest_nonframe_actual_packed_publication_once_not_scalar_event (__main__.ActualPublication) ... ok\r\ntest_original_scalar_path_still_publishes_and_chunks_once (__main__.ActualPublication) ... ok\r\ntest_original_tuple_roundtrip_without_inplace_rewrite (__main__.ActualPublication) ... ok\r\ntest_original_unbound_producer_bypass_reproduces_failure (__main__.ActualPublication) ... ok\r\ntest_wrong_first_decode_position_rejected (__main__.ActualPublication) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 16 tests in 1.180s\r\n\r\nOK\r\n"
+    },
+    "unchanged_runtime17": {
+      "chunk_id": "3f403e",
+      "wall_time_seconds": 0.6248271,
+      "exit_code": 0,
+      "original_token_count": 379,
+      "output": "test_N1_only_checks_after_actual_tensor_sync_and_before_full_config (__main__.Driver) ... ok\r\ntest_actual018c_API_exact_path_and_original_helper (__main__.Driver) ... ok\r\ntest_each_actual_current_rank_is_queried_without_Torch_property_object (__main__.Driver) ... ok\r\ntest_foreign_compiler_object_not_accepted (__main__.Driver) ... ok\r\ntest_missing_nonint_bool_zero_overflow_counts_no_fallback (__main__.Driver) ... ok\r\ntest_original_cached_helper_disagreement_is_rejected_not_reset (__main__.Driver) ... ok\r\ntest_source_SHA_checked_before_driver_and_helper_calls (__main__.Driver) ... ok\r\ntest_uninitialized_wrong_rank_bool_rank_or_current_device_rejected (__main__.Driver) ... ok\r\ntest_actual_host_checks_before_observe_health_and_preserves_cleanup_body (__main__.Fatal) ... ok\r\ntest_bad_recipe_source_or_helper_cannot_be_trusted_failure (__main__.Fatal) ... ok\r\ntest_exclusive_first_fatal_is_not_overwritten (__main__.Fatal) ... ok\r\ntest_existing_host_pure_read_gets_first_fault_separate_from_controller_error (__main__.Fatal) ... ok\r\ntest_no_failure_file_does_not_poll_devices_or_create_outputs (__main__.Fatal) ... ok\r\ntest_publication_failure_never_masks_primary (__main__.Fatal) ... ok\r\ntest_real_original_file_and_exception_preserved (__main__.Fatal) ... ok\r\ntest_success_returns_same_original_object_no_files (__main__.Fatal) ... ok\r\ntest_wrong_original_rank_identity_rejected (__main__.Fatal) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 17 tests in 0.308s\r\n\r\nOK\r\n"
+    },
+    "unchanged_config16": {
+      "chunk_id": "cb47ca",
+      "wall_time_seconds": 0.4895152,
+      "exit_code": 0,
+      "original_token_count": 388,
+      "output": "test_actual_full_prefill_trace_keeps_all_original_positions (__main__.NativeConfig) ... ok\r\ntest_actual_model_capability_generate_vs_encoder_decoder (__main__.NativeConfig) ... ok\r\ntest_actual_n1_full_engine_call_and_cpu_partial_scope (__main__.NativeConfig) ... ok\r\ntest_actual_probe_explicit_backend_import_before_namespace_check (__main__.NativeConfig) ... ok\r\ntest_chunk_ending_at32768_cannot_pass_single_prefill (__main__.NativeConfig) ... ok\r\ntest_cpu_decoder_assumption_is_named_and_actual_n1_encoder_rejected (__main__.NativeConfig) ... ok\r\ntest_cpu_helper_uses_original_factory_with_both_real_initvar_branches (__main__.NativeConfig) ... ok\r\ntest_duplicate_or_missing_original_action_rejected (__main__.NativeConfig) ... ok\r\ntest_exact_constructor_kwargs_match_native_engine_args (__main__.NativeConfig) ... ok\r\ntest_exact_required_initvars_and_native_default_factory_constructor (__main__.NativeConfig) ... ok\r\ntest_full_config_does_not_weaken_common_native_fields (__main__.NativeConfig) ... ok\r\ntest_full_length_bad_position_or_actual_identity_rejected (__main__.NativeConfig) ... ok\r\ntest_only_chunked_boolean_action_changed (__main__.NativeConfig) ... ok\r\ntest_original_actual_validator_accepts_corrected_not_increased_batch (__main__.NativeConfig) ... ok\r\ntest_original_actual_validator_rejects_old_configuration (__main__.NativeConfig) ... ok\r\ntest_policy_keeps_original_bounds_and_rejects_subchunk (__main__.NativeConfig) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 16 tests in 0.191s\r\n\r\nOK\r\n"
+    },
+    "source_and_registration": {
+      "chunk_id": "6f68ff",
+      "wall_time_seconds": 0.5218933,
+      "exit_code": 0,
+      "original_token_count": 77,
+      "output": "{\"path\":\"C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-raw-publish-v013-20261010/bootstrap/SOURCE_MANIFEST.json\",\"bytes\":81553,\"sha256\":\"bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd\"}\r\n{\"verified_files\": 30, \"registered_tests\": 91, \"executed_full91\": false, \"no_framework\": true}\r\n"
+    },
+    "full91_executed": false,
+    "no_remote_exec": true,
+    "no_NPU": true
+  },
+  "commands": {
+    "source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.util,sys;s=importlib.util.spec_from_file_location('_kivi013_source',\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/loader.py\");m=importlib.util.module_from_spec(s);sys.modules[s.name]=m;s.loader.exec_module(m);v,r=m.source('bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd');print(len(v['files']),len(v['dependencies']),v['source_count'])"
+    ],
+    "software": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/software_check.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/MAIN_SOFTWARE91_001.json"
+    ],
+    "default_OFF": [
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/software_check.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/guest_probe.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/server_entry.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/host_run.py"
+      ]
+    ],
+    "full_host": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/host_run.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "--component-sha256",
+      "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/MAIN_SOFTWARE91_001.json",
+      "--software-sha256",
+      "REQUIRED_ACTUAL_FULL91_SHA",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-013",
+      "--port",
+      "8250"
+    ]
+  },
+  "command_policy": "Only MAIN may run these after exact deployment readback and successful full software; replace REQUIRED_ACTUAL_FULL91_SHA with actual original report SHA, never a software claim. Full host never includes long raw CPU lease.",
+  "delta": {
+    "predecessor_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-012/SOURCE_MANIFEST.json",
+      "bytes": 78628,
+      "sha256": "2c2fedee340f9e1696513082973baf1f1826c87b7958eecd4e6d3ff6c1f66818"
+    },
+    "predecessor_status": "MAIN source192/full75/strictwhole71 software PASS; model run cancelled before NPU for source-proven publication wiring blocker",
+    "cause": "Fresh PackedBatch retained raw collector callback; only installer got FirstDecodeJournal, so raw frames bypassed frame_refs and all16 finish could not succeed. Naive scalar journal reroute also fails original JSON tuple/list equality.",
+    "repair": "Bind all16 fresh exact PackedBatch instances to a dedicated journal.publish_packed after actual journal construction and before installer.install. Publish each unchanged original value once through original collector, verify complete actual Ref and canonical JSON semantics, then index only full raw frame. Preserve original scalar JournalPublisher and its strict checks.",
+    "changed_files": [
+      "worker.py",
+      "raw_journal.py",
+      "software_check.py"
+    ],
+    "added_files": [
+      "test_raw_publication.py"
+    ],
+    "unchanged_original_python_files": 26,
+    "actual_local_tests": 49,
+    "full_registered_tests": 91,
+    "full91_actual": "UNRUN",
+    "local_scope": "16 actual PackedBatch-bound publication callbacks -> actual Collector -> original atomic files -> exact Ref readback -> actual all16 journal finish; synthetic nonnumerical payloads. Original append_read tensor/kernel computation not executed. Windows directory fsync only IO shim; real file/hardlink/stat/SHA/read paths.",
+    "bundle_schema_unchanged": true,
+    "consume_raw_API_unchanged": true,
+    "numerical_files_unchanged": true,
+    "math_threshold_budget_input_deadline_unchanged": true,
+    "scalar_journal_unchanged": true,
+    "all16_finish_unchanged": true,
+    "original_failure_cases_retained": true,
+    "native_ABI_review": "Actual initialize_from_config uses runner only (no invalid selected-class super call); actual Qwen3NextAttention forward patched in place; actual kernel.build signature matches PackedBatch. Ascend set_ascend_forward_context dynamically supplies all four direct context flags in runner v1; no context workaround.",
+    "mixed004_not_promoted": "Inherited staged Observer -> original scalar JournalPublisher retains same tuple/list problem for raw producer/progress; separate immutable mixed successor required."
+  },
+  "runtime_abi_original_refs": {
+    "numeric": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-numeric-v3-signed-20261010-001/numeric.py",
+      "bytes": 19612,
+      "sha256": "7853f967eb44f32da3de785111adcb23ff01fc7cbe95e50dfb78a2c6ff18979a"
+    },
+    "numeric_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-numeric-v3-signed-20261010-001/SOURCE_MANIFEST.json",
+      "bytes": 16678,
+      "sha256": "d6a151a13bd3b665eab14f25f5c1c45b1b6ab3b3b470014305977132d7643914"
+    },
+    "helper": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-deployed-api-source-660-20261010-001/triton_utils.py",
+      "bytes": 2090,
+      "sha256": "f94d81f163f0076e8243990dd687f7ec8d42ce1ed30d67eea3155bf1c3a073a4"
+    },
+    "prior_host": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/host_run.py",
+      "bytes": 15332,
+      "sha256": "30a58008f389ae96481fc1de868e9beb430a6123b39df85b103b64b017820d10"
+    },
+    "prior_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 73634,
+      "sha256": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22"
+    }
+  },
+  "required_new_success_fields": {
+    "canary": "each of4 rows actual_driver_properties, exact source API/helperSHA/int counts/current logicalrank",
+    "worker": "diagnostic_root/DRIVER-PROPERTIES-rN.json binds properties/source_ref/recipe_ref/identity",
+    "host": "worker_first_fault_refs=[] and worker_first_fault=null on success; any fatal excludes promotion"
+  },
+  "fatal_contract": {
+    "schema": "kivi.actual-worker-initialize-fatal/v1",
+    "path": "diagnostic_root/RANK-N-FATAL.json",
+    "consumer": "same source/recipe/helper and original rank-owner request identity; original complete exception; raises to existing finally",
+    "no_false_cleanup_or_permission": true,
+    "limited_to_initialize": true
+  },
+  "budgets": {
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "guest_limit_bytes": 68719476736,
+    "CPU_preflight_limit_bytes": 8589934592,
+    "host_limit_bytes": 536870912,
+    "reserve_bytes": 9126805504,
+    "ordinary_initial_floor_bytes": 78383153152,
+    "CPU_total": 7,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "physical_hbm_limit_mib_per_card": 29696,
+    "workspace_limit_bytes": 34359738368,
+    "raw_capture_expected_bytes": "source estimate 2GiB original KV plus6-10GiB packed snapshots; charged whole output32GiB, no unit256MiB reuse",
+    "raw_consumer": "independent CPU8 following exact owned device release; explicit separate actual entry; cost not yet whole64 measured",
+    "software": {
+      "CPU": 1,
+      "AS_RSS_bytes": 268435456,
+      "cpu_seconds": 120,
+      "wall_seconds": 150,
+      "output_bytes": 1048576
+    }
+  },
+  "deadline": {
+    "epoch": 1791788425,
+    "no_reset": true
+  },
+  "whole_consumer": {
+    "status": "independent whole013 successor being source-bound by recurrent; whole012 must not consume013",
+    "actual_model_evidence": "UNRUN; no copied prior admission"
+  },
+  "missing": [
+    "MAIN actual exact193-source closure plus full91 successful original receipt",
+    "fresh unchanged CPU8/all4 N1/actual driver/fullEngine/owner qualification",
+    "actual32768+2 eager TP4 execution with all64 raw frames and original32768 writer provenance",
+    "actual native retirement/stop-retain/release then separate Devices[] CPU whole64 independent raw consumer"
+  ],
+  "model_ready": false,
+  "performance_ready": false,
+  "run_authority": false,
+  "mixed": false,
+  "FULL": false,
+  "GDN_numeric": false
+}
