@@ -1,0 +1,113 @@
+{
+  "schema": "paper.causal-stage-record/v1",
+  "recorded_utc": "2026-10-10T02:16:00Z",
+  "goal_turn_classification": "progress_new_actual_terminal_changes_next_action",
+  "paper": "AdaKV",
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-padiag-026-002/RESULT.json",
+    "sha256": "2917c0c7ffe6959a22818e3a477f5fe9a54dd87f80d89050ac68e2cd743af75b"
+  },
+  "operation": {
+    "id": "exec-000000000000009e",
+    "state": "completed",
+    "exit_code": 1,
+    "duration_ms": 580816
+  },
+  "first_fault": {
+    "stage": "first actual 32768-token request, audit Session init",
+    "error": "ValueError: author method exact AST body",
+    "path": "adakv_model_gate/author_reference.py:24",
+    "classification": "REFERENCE_OR_TEST_SUSPECTED",
+    "confidence": "raw official bytes unchanged; cross-interpreter AST serialization hypothesis not yet validated",
+    "next_action": "DIAGNOSE_same-image_exact_raw_AST_then_minimal_strict_compatibility_repair",
+    "not_method_failure": true
+  },
+  "verified_scope": {
+    "model_weights_loaded_workers": 4,
+    "full_decode_capture_shapes": 16,
+    "cold_attention_complete_records": 1024,
+    "cold_PA_first_fault_files": 0,
+    "npu_model_numerical_pass": false,
+    "performance": false,
+    "task_accuracy": false,
+    "prior025_PA_fixed": false,
+    "reason_prior_PA_not_fixed_claim": "026 changes synchronization and D2H diagnostic timing; no unsynchronized control success"
+  },
+  "cleanup": {
+    "candidate_cid": "4c18f7982bac7c7d2bd10e95aa01d26e7101bea6b011a23eec7018cc79c6d6a5",
+    "stopped": true,
+    "pid": 0,
+    "OOMKilled": false,
+    "deleted": false,
+    "physical_4_7_processes_absent": true,
+    "foreign_0_3_protected": true
+  },
+  "current": {
+    "gate": "official full final-task input producer and independent consumer",
+    "operation": "exec-00000000000000a7",
+    "last_verified_state": "running",
+    "devices": [],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005",
+    "source_sha256": "97986967691018b00ca1d6a96296f9c461c7d3e6c69e4607be8ccba7bdabcdf8",
+    "actual_software_tests_passed": 74,
+    "model_or_scores": false,
+    "remote_preparer_cpu": 0
+  },
+  "next": {
+    "owner": "MAIN + recurrent_lifecycle_ready_queue API-only",
+    "action": "same-image AST precheck then affected full model gate after explicit cold-warm recipe review",
+    "ready_NPU_stages": 0
+  },
+  "backup": {
+    "owner": "lowbit_ready_queue",
+    "paper": "KIVI",
+    "scope": "actual compact FA/output integration source; still unverified, not model acceptance"
+  },
+  "e1_owner": "sparse_attention_ready_queue; actual model PASS still required",
+  "cutoffs": {
+    "repair": 1791615625,
+    "total": 1791788425,
+    "reset": false
+  },
+  "archives": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/c100DiagPoll.json",
+      "sha256": "9586cca41139e28fd819cf1e241681b913d307d021fdfebc410506a2f0791796",
+      "bytes": 13564
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/c100DiagResult.json",
+      "sha256": "6bf573d47593f0723cd98f250854629a52b94d49662c9c5f8394f4ed66301256",
+      "bytes": 33782
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/c100TerminalDetails.json",
+      "sha256": "28441010139d5eff4a1c283b4f1e2c858d441504170c7c54fad7296d48052c04",
+      "bytes": 18921
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/c101Orientation.json",
+      "sha256": "e3478b858370ab992331417d202537f81fbece9855e25f82e097f0370ebdd428",
+      "bytes": 40253
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/c101InputLaunchInput.json",
+      "sha256": "998ae734277578388578e36a215b5f176a9e8c8af9f60663fd9be7e14b3ccc80",
+      "bytes": 1457
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/c101InputLaunch.json",
+      "sha256": "8af3cf88ae571f5f56ad3a25d89c3158bbb2a6e217bf9b8cb1777f36feeee2a7",
+      "bytes": 3231
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c101-adakv026-terminal-inputv7-running-20261010-001/MANIFEST.json",
+      "sha256": "051e0a8e1bf05a760a0dccdf1b5aba09274824675e82db0bfcf3f87750b9e255",
+      "bytes": 1776
+    }
+  ],
+  "git": {
+    "push_authentication_unresolved": true,
+    "main_untouched": true
+  }
+}

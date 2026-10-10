@@ -1,5 +1,28 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 02:16 UTC
+
+Read ADAKV026_AST_FIRST_REQUEST_AND_INPUTV7_20261010.json first. AdaKV009e is now
+FAILED exit1, not RUNNING. All4 weights and16 FULL decode captures completed;
+1024 cold attention diagnostic records completed, but the first32768 request
+failed author_reference.py exact AST body identity before model audit arithmetic.
+Official raw bytes are unchanged; cross-Python AST schema is a hypothesis under
+same-image validation, NOT a proved algorithm failure. Original025 PA fault is
+NOT proved repaired because026 added synchronization and D2H observation.
+
+Exact026 candidate CID4c18f7982bac is stopped/retained, Pid0/OOMfalse. Fresh
+host evidence shows4–7 idle baseline/no process; foreign0–3 remains protected.
+CURRENT actual00a7 is official full task-input preparation in Devices=[] guest,
+not NPU/model/task scoring. Poll00a7; never relaunch merely on poll timeout.
+NEXT AST-source precheck/repair plus explicit cold-start recipe, then full model
+N2. E1 remains gated on genuine N2. Independent KIVI output path is source-only.
+All3 preparers API-only/remote CPU0; no ready NPU successor is claimed.
+
+Repair Oct10 07:00:25Z and total Oct12 07:00:25Z remain fixed. No new throughput,
+TTFT/TPOT or final scores. HugeTLB32GiB SPENT; do not touch0–3. Exact originals
+are externally archived and readback verified. Git push authentication remains
+unresolved; a local checkpoint must not be reported as remote publication.
+
 ## Current execution — 2026-10-10 01:57 UTC
 
 Read ADAKV026_DIAGNOSTIC_AND_INPUT_ABI_20261010.json first. MAIN009e was
