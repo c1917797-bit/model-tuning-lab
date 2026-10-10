@@ -545,3 +545,12 @@ Run another actually ready paper immediately; if none is ready, report the real
 queue gap and fix preparation. Passed immutable prerequisites may be reused only
 with exact source/input/output bindings and independent consumption; a failed
 whole run must not be relabelled successful because its earlier CPU stage passed.
+
+
+## Release the device lane at a stage boundary, including CPU-only follow-up
+
+Reserve physical NPUs for actual device stages, not an entire paper. A source-bound worker fatal must terminate the owned device stage, preserve the first cause, verify exact release, and return that paper to off-device repair. MAIN can then dispatch a different paper's ready stage without waiting for diagnosis, reports or Git publication. Preserve each paper's DAG predecessor so it resumes at the missing stage, not from scratch; a failed implementation is not an algorithm no-go.
+
+A pure CPU oracle must not inherit a device controller's idle-NPU requirement or full model RAM reservation. Introduce a small versioned CPU-only resource adapter when needed, preserving independent full numerical coverage and source identities. Its container must have Devices[], distinct bounded CPU allocation and a fresh summed common-cgroup memory/CPU budget including any active device job; never borrow reserves or silently remove safety gates from an old frozen run. If the joint budget cannot fit, queue CPU verification and allow an independent ready NPU stage first. Do not claim overlap before the new adapter and joint admission are actually verified.
+
+Measure scheduling using first-fault-to-release, release-to-next-device-work, actual per-stage readiness, and explicit idle reasons. A dispatched CPU preflight is not yet NPU work; model loading is not E2E PASS. Keep honest timestamps and optimize the observed gap rather than increasing test-count labels or generating dummy utilization.

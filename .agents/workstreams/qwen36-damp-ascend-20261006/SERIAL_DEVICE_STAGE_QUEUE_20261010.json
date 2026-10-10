@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T13:10:00Z",
+  "updated_at_utc": "2026-10-10T13:43:00Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -17,21 +17,21 @@
     {
       "paper": "KIVI",
       "owner": "kivi_model_successor",
-      "stage": "014 shared compiler factory repair; actual factory-to-consumer regression for missing triton/tl; CPU HAL partition unchanged",
+      "stage": "Explicit compact cache provider within same total10GiB; preserve native/GDN coverage; account actual hybrid scheduler residency; no hidden shadow pool",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     },
     {
       "paper": "KIVI",
       "owner": "recurrent_lifecycle_ready_queue",
-      "stage": "mechanically bind whole014 only after producer freeze; same71, no new gate layer",
-      "state": "WAITING_SOURCE_FREEZE_OFF_DEVICE",
+      "stage": "decouple pure CPU raw verification from device lease via minimal new resource adapter; full64 mathematics unchanged",
+      "state": "PREPARING_OFF_DEVICE",
       "ready": false
     },
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "007 source-qualified getter/enum adaptation; capture values before each N1 assertion; exact reuse of actual006 CPU input chain if independently valid",
+      "stage": "Minimal worker initialization/fork repair with actual spawn child plugin installation proof; default TP-local calibration remains downstream",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     }
@@ -41,37 +41,40 @@
   "previous": {
     "paper": "SKVQ",
     "owner": "MAIN",
-    "state": "FAILED_N1_PRECHECK_RELEASED",
-    "operation": "exec-00000000000003d9",
+    "state": "FAILED_WORKER_FORK_RELEASED",
+    "operation": "exec-00000000000003ed",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-006/SOURCE_MANIFEST.json",
-      "bytes": 35970,
-      "sha256": "58cfa75ee7fe3c579a3c74b9a1d01f1bb311f6704f41a5986926604edd4758c7"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-007/SOURCE_MANIFEST.json",
+      "bytes": 41933,
+      "sha256": "f0cb6a88c398db104f8aa5903471293145088407b598d765ff9d4c81fc6177f8"
     },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-006-main-20261010-001",
-    "scope": "baseline calibration/preprojection capture only; not quantized SKVQ or E2E",
-    "software_operation": "exec-00000000000003d0",
-    "actual_software50_passed": true,
-    "mount_TRAIN_operation": "exec-00000000000003d4",
-    "actual_mount9TRAIN_passed": true,
-    "fresh_resources_operation": "exec-00000000000003d6",
-    "NPU_started_not_yet_verified": false,
-    "next_on_failure": "exact own cleanup -> PREPARING_OFF_DEVICE; KIVI014 only after actual source/full tests and fresh prerequisite gate",
-    "NPU_started": true,
-    "actual_sameimage_dependencies_and23_and_input_producer_passed": true,
-    "actual_input_consumer_scope": "raw bytes/metadata only; actual tokenizer reconstruction pending",
-    "cause": "all4 n1_check.py25 combined arithmetic/format-type/ND2 assertion failed; actual fmt/output not retained. Do not guess which clause, algorithm not reached.",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-007-main-20261010-001",
+    "software58_operation": "exec-00000000000003e9",
+    "source_count": 98,
+    "mount9TRAIN_operation": "exec-00000000000003ea",
+    "fresh_operation": "exec-00000000000003ec",
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "scope": "baseline calibration capture only; not quantized candidate or E2E",
+    "next_on_failure": "exact own cleanup then off-device repair; admit actually ready independent successor",
+    "cause": "Actual all4 N1/Format.ND and full Engine config passed; native worker initialization aborted at ATen ParallelOpenMP.cpp:64 Invalid thread pool after multithreaded fork, before model weights. Runtime/process adaptation failure, not SKVQ numerical or performance verdict.",
+    "actual_all4_N1_passed": true,
+    "actual_full_engine_config_passed": true,
+    "model_weights_loaded": false,
     "result": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-006-main-20261010-001/HOST_RESULT.json",
-      "bytes": 32697,
-      "sha256": "81d9d22baabd75d0a78365a5c7eac060219ce5f44874a0d1c33cf0c2fa4537f3"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-007-main-20261010-001/HOST_RESULT.json",
+      "bytes": 40333,
+      "sha256": "349799af213985521fe16d61332f722165d5b002dce8caf9067a0989b28330fc"
     },
-    "release_verified_operation": "exec-00000000000003db",
-    "device_stopped_utc": "2026-10-10T13:03:52.89551297Z",
-    "cpu_stopped_utc": "2026-10-10T13:02:20.17539587Z",
+    "release_verified_operation": "exec-00000000000003f0",
+    "device_stopped_utc": "2026-10-10T13:35:27.96022329Z",
     "exact_owned_stopped_retained": true
   },
-  "idle_cause": "KIVI014 off-device actual compiler/role factory closure repair; SKVQ007 off-device format ABI observation repair. No ready device successor;006 CPU dependencies and real256 inputs succeeded but N1 combined assertion failed. Do not repeat unchanged006 or hold its lease.",
+  "idle_cause": "No actually ready successor: KIVI014 initialized cache capacity adaptation and SKVQ007 worker fork adaptation both failed; three off-device agents preparing fixes. Do not count idle as success or rerun frozen failures.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -162,7 +165,7 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000003db",
+    "operation": "exec-00000000000003f0",
     "compute_processes": [],
     "physical_devices": [
       4,
@@ -171,13 +174,13 @@
       7
     ],
     "hbm_mib": [
-      2869,
+      2868,
       2866,
-      2866,
-      2860
+      2865,
+      2861
     ],
-    "protected0to3": "actual external HYPIC unchanged by this task; not operated",
-    "scope": "after exact owned cleanup; fresh admission still required"
+    "protected0to3": "external HYPIC remains active and untouched",
+    "scope": "exact release independently inspected; fresh admission required"
   },
   "history_terminals": [
     {
@@ -381,6 +384,82 @@
       "release_verified_operation": "exec-00000000000003db",
       "device_stopped_utc": "2026-10-10T13:03:52.89551297Z",
       "cpu_stopped_utc": "2026-10-10T13:02:20.17539587Z",
+      "exact_owned_stopped_retained": true
+    },
+    {
+      "paper": "KIVI",
+      "owner": "MAIN",
+      "state": "FAILED_INITIALIZED_CAPACITY_RELEASED",
+      "operation": "exec-00000000000003e3",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/SOURCE_MANIFEST.json",
+        "bytes": 84644,
+        "sha256": "8549453b332327e4440de005dfccfecc3fcbd123702c7e98e323de59ff92803a"
+      },
+      "software": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/MAIN_SOFTWARE110_001.json",
+        "bytes": 529,
+        "sha256": "11af6fdcbcf46538c05edd4749780535375205b986706f01cc64347fd65c5318"
+      },
+      "source194_full110_operation": "exec-00000000000003de",
+      "whole71_operation": "exec-00000000000003e0",
+      "fresh_operation": "exec-00000000000003df",
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-014",
+      "physical_devices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "scope": "B1 eager32768+2 actual firstdecode/raw capture; not E2E or final task result",
+      "next_on_failure": "preserve original first failure; exact own stop-retain and independent release -> off-device repair; hand lane to actual ready SKVQ007",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-014/RESULT.json",
+        "bytes": 17377,
+        "sha256": "c10098747639dca6431def7c87975a99430c26f8c761ab2b529be03e300a7ad4"
+      },
+      "actual_all4_N1_passed": true,
+      "model_weights_loaded": true,
+      "model_firstdecode_passed": false,
+      "cause": "WorkerFatal('source-bound worker initialization fatal: rank1 ValueError: no disjoint initialized compact capacity for language_model.model.layers.11.self_attn.attn; do not allocate a hidden shadow pool or discard native/GDN/zeroer spans')",
+      "release_verified_operation": "exec-00000000000003eb",
+      "device_stopped_utc": "2026-10-10T13:24:44.95627534Z",
+      "first_fault_to_stop_seconds": 16.58967414
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "MAIN",
+      "state": "FAILED_WORKER_FORK_RELEASED",
+      "operation": "exec-00000000000003ed",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-007/SOURCE_MANIFEST.json",
+        "bytes": 41933,
+        "sha256": "f0cb6a88c398db104f8aa5903471293145088407b598d765ff9d4c81fc6177f8"
+      },
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-007-main-20261010-001",
+      "software58_operation": "exec-00000000000003e9",
+      "source_count": 98,
+      "mount9TRAIN_operation": "exec-00000000000003ea",
+      "fresh_operation": "exec-00000000000003ec",
+      "physical_devices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "scope": "baseline calibration capture only; not quantized candidate or E2E",
+      "next_on_failure": "exact own cleanup then off-device repair; admit actually ready independent successor",
+      "cause": "Actual all4 N1/Format.ND and full Engine config passed; native worker initialization aborted at ATen ParallelOpenMP.cpp:64 Invalid thread pool after multithreaded fork, before model weights. Runtime/process adaptation failure, not SKVQ numerical or performance verdict.",
+      "actual_all4_N1_passed": true,
+      "actual_full_engine_config_passed": true,
+      "model_weights_loaded": false,
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-007-main-20261010-001/HOST_RESULT.json",
+        "bytes": 40333,
+        "sha256": "349799af213985521fe16d61332f722165d5b002dce8caf9067a0989b28330fc"
+      },
+      "release_verified_operation": "exec-00000000000003f0",
+      "device_stopped_utc": "2026-10-10T13:35:27.96022329Z",
       "exact_owned_stopped_retained": true
     }
   ]

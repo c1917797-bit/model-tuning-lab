@@ -1,0 +1,289 @@
+{
+  "schema": "kivi.firstdecode-v014-framework-closure-entry/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/SOURCE_MANIFEST.json",
+    "bytes": 84644,
+    "sha256": "8549453b332327e4440de005dfccfecc3fcbd123702c7e98e323de59ff92803a"
+  },
+  "local_root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-framework-closure-v014-20261010/bootstrap",
+  "status": "PREPARED_UNRUN; local67 PASS; full110/CPU/N1/model/raw/whole UNRUN",
+  "source_count": 194,
+  "own_files": 31,
+  "dependencies": 163,
+  "software_tests": 110,
+  "local_actual": {
+    "regression67": {
+      "chunk_id": "5559ce",
+      "wall_time_seconds": 2.1863754,
+      "exit_code": 0,
+      "original_token_count": 1952,
+      "output": "test_actual16_producer_collector_journal_finish_real_bytes (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_actual_worker_binding_precedes_real_installer_call (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_bad_actual_Ref_SHA_rejected (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_bind_partial_shared_used_or_rebound_producer_rejects (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_changed_actual_wire_cannot_enter_index (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_default_imports_no_framework_or_tensor_execution (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_duplicate_layer_rejects_after_preserving_original_publication (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_foreign_owner_rank_rejected (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_identity_change_rejects_before_actual_packed_write (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_missing_one_layer_cannot_finish (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_naive_scalar_reroute_retains_tuple_roundtrip_failure (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_nonframe_actual_packed_publication_once_not_scalar_event (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_original_scalar_path_still_publishes_and_chunks_once (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_original_tuple_roundtrip_without_inplace_rewrite (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_original_unbound_producer_bypass_reproduces_failure (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_wrong_first_decode_position_rejected (_local014_test_raw_publication.ActualPublication) ... ok\r\ntest_N1_only_checks_after_actual_tensor_sync_and_before_full_config (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_actual018c_API_exact_path_and_original_helper (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_each_actual_current_rank_is_queried_without_Torch_property_object (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_foreign_compiler_object_not_accepted (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_missing_nonint_bool_zero_overflow_counts_no_fallback (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_original_cached_helper_disagreement_is_rejected_not_reset (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_source_SHA_checked_before_driver_and_helper_calls (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_uninitialized_wrong_rank_bool_rank_or_current_device_rejected (_local014_test_runtime_boundary.Driver) ... ok\r\ntest_actual_host_checks_before_observe_health_and_preserves_cleanup_body (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_bad_recipe_source_or_helper_cannot_be_trusted_failure (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_exclusive_first_fatal_is_not_overwritten (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_existing_host_pure_read_gets_first_fault_separate_from_controller_error (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_no_failure_file_does_not_poll_devices_or_create_outputs (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_publication_failure_never_masks_primary (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_real_original_file_and_exception_preserved (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_success_returns_same_original_object_no_files (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_wrong_original_rank_identity_rejected (_local014_test_runtime_boundary.Fatal) ... ok\r\ntest_actual_full_prefill_trace_keeps_all_original_positions (_local014_test_native_config.NativeConfig) ... ok\r\ntest_actual_model_capability_generate_vs_encoder_decoder (_local014_test_native_config.NativeConfig) ... ok\r\ntest_actual_n1_full_engine_call_and_cpu_partial_scope (_local014_test_native_config.NativeConfig) ... ok\r\ntest_actual_probe_explicit_backend_import_before_namespace_check (_local014_test_native_config.NativeConfig) ... ok\r\ntest_chunk_ending_at32768_cannot_pass_single_prefill (_local014_test_native_config.NativeConfig) ... ok\r\ntest_cpu_decoder_assumption_is_named_and_actual_n1_encoder_rejected (_local014_test_native_config.NativeConfig) ... ok\r\ntest_cpu_helper_uses_original_factory_with_both_real_initvar_branches (_local014_test_native_config.NativeConfig) ... ok\r\ntest_duplicate_or_missing_original_action_rejected (_local014_test_native_config.NativeConfig) ... ok\r\ntest_exact_constructor_kwargs_match_native_engine_args (_local014_test_native_config.NativeConfig) ... ok\r\ntest_exact_required_initvars_and_native_default_factory_constructor (_local014_test_native_config.NativeConfig) ... ok\r\ntest_full_config_does_not_weaken_common_native_fields (_local014_test_native_config.NativeConfig) ... ok\r\ntest_full_length_bad_position_or_actual_identity_rejected (_local014_test_native_config.NativeConfig) ... ok\r\ntest_only_chunked_boolean_action_changed (_local014_test_native_config.NativeConfig) ... ok\r\ntest_original_actual_validator_accepts_corrected_not_increased_batch (_local014_test_native_config.NativeConfig) ... ok\r\ntest_original_actual_validator_rejects_old_configuration (_local014_test_native_config.NativeConfig) ... ok\r\ntest_policy_keeps_original_bounds_and_rejects_subchunk (_local014_test_native_config.NativeConfig) ... ok\r\ntest_CPU_uninitialized_rejected_before_any_framework_import (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_actual_bootstrap_worker_call_consumes_loaded_context_and_framework (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_actual_helper_binds_both_compiler_objects_not_only_triton (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_actual_imported_torch_npu_must_be_same_handles (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_actual_own_loader_loads_exact_formal_metadata_without_framework (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_binding_reentrant_same_object_without_donor_mutation (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_complete_actual_guest_CPU_has_no_compiler_binding_or_native_import (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_complete_actual_guest_run_N1_to_original_boundary_and_real_report (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_every_bootstrap_worker_mods_key_has_real_factory_or_binding_origin (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_exact018c_import_API_and_both_calls_remain_NPU_only (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_existing_foreign_compiler_rejected_not_replaced (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_missing_or_false_actual_exports_cannot_be_fabricated (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_original_actual_reader_factory_has_no_four_missing_keys (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_original_v013_missing_key_reproduces_without_manual_compiler_keys (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_rank_device_boolean_guard_precedes_framework_import (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_real_framework_return_to_original_boundary_all_four_ranks (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_sourcequalified_metadata_constructor_and_cross_module_signatures (_local014_test_framework_closure.CompilerClosure) ... ok\r\ntest_wrong_helper_source_fails_before_driver_call (_local014_test_framework_closure.CompilerClosure) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 67 tests in 1.806s\r\n\r\nOK\r\n{\"local_tests\": 67, \"full_registered\": 110, \"full_executed\": false, \"actual_reader_factory_executed\": false, \"framework_imports\": \"fixture only; no HAL\", \"success\": true}\r\n"
+    },
+    "source_compile_registration_and_OFF": {
+      "chunk_id": "04dfa5",
+      "wall_time_seconds": 0.7269315,
+      "exit_code": 0,
+      "original_token_count": 175,
+      "output": "{\"own_verified\": 31, \"declared_dependencies\": 163, \"actual_remote_source_check\": false, \"registered\": 110, \"full_executed\": false, \"no_framework\": true, \"default_OFF\": [{\"file\": \"software_check.py\", \"stdout\": \"{\\\"enabled\\\": false, \\\"NPU\\\": false, \\\"model_ready\\\": false}\\n\", \"stderr\": \"\", \"exit_code\": 0}, {\"file\": \"guest_probe.py\", \"stdout\": \"{\\\"enabled\\\": false, \\\"model_ready\\\": false}\\n\", \"stderr\": \"\", \"exit_code\": 0}, {\"file\": \"server_entry.py\", \"stdout\": \"{\\\"default_enabled\\\": false, \\\"model_ready\\\": false, \\\"performance_ready\\\": false}\\n\", \"stderr\": \"\", \"exit_code\": 0}], \"host_default_OFF\": \"UNRUN Linux; direct Windows run failed missing stdlib resource before main; source unchanged\"}\r\n"
+    },
+    "local_new18": {
+      "chunk_id": "06ff0b",
+      "wall_time_seconds": 0.4195233,
+      "exit_code": 0,
+      "original_token_count": 466,
+      "output": "test_CPU_uninitialized_rejected_before_any_framework_import (__main__.CompilerClosure) ... ok\r\ntest_actual_bootstrap_worker_call_consumes_loaded_context_and_framework (__main__.CompilerClosure) ... ok\r\ntest_actual_helper_binds_both_compiler_objects_not_only_triton (__main__.CompilerClosure) ... ok\r\ntest_actual_imported_torch_npu_must_be_same_handles (__main__.CompilerClosure) ... ok\r\ntest_actual_own_loader_loads_exact_formal_metadata_without_framework (__main__.CompilerClosure) ... ok\r\ntest_binding_reentrant_same_object_without_donor_mutation (__main__.CompilerClosure) ... ok\r\ntest_complete_actual_guest_CPU_has_no_compiler_binding_or_native_import (__main__.CompilerClosure) ... ok\r\ntest_complete_actual_guest_run_N1_to_original_boundary_and_real_report (__main__.CompilerClosure) ... ok\r\ntest_every_bootstrap_worker_mods_key_has_real_factory_or_binding_origin (__main__.CompilerClosure) ... ok\r\ntest_exact018c_import_API_and_both_calls_remain_NPU_only (__main__.CompilerClosure) ... ok\r\ntest_existing_foreign_compiler_rejected_not_replaced (__main__.CompilerClosure) ... ok\r\ntest_missing_or_false_actual_exports_cannot_be_fabricated (__main__.CompilerClosure) ... ok\r\ntest_original_actual_reader_factory_has_no_four_missing_keys (__main__.CompilerClosure) ... ok\r\ntest_original_v013_missing_key_reproduces_without_manual_compiler_keys (__main__.CompilerClosure) ... ok\r\ntest_rank_device_boolean_guard_precedes_framework_import (__main__.CompilerClosure) ... ok\r\ntest_real_framework_return_to_original_boundary_all_four_ranks (__main__.CompilerClosure) ... ok\r\ntest_sourcequalified_metadata_constructor_and_cross_module_signatures (__main__.CompilerClosure) ... ok\r\ntest_wrong_helper_source_fails_before_driver_call (__main__.CompilerClosure) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 18 tests in 0.092s\r\n\r\nOK\r\n"
+    },
+    "failed_initial_order_fixture": {
+      "tests": 18,
+      "passed": 17,
+      "error": "test AST selected native-source for loop rather than device loop; guest full CPU/N1 dynamic tests already passed; retained original failure",
+      "chunk": "7aa570",
+      "status": "FAILED"
+    },
+    "full110_executed": false,
+    "actual_complete_reader_factory_executed": false,
+    "no_remote_exec": true,
+    "no_NPU": true
+  },
+  "commands": {
+    "source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.util,sys;s=importlib.util.spec_from_file_location('_kivi014_source',\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/loader.py\");m=importlib.util.module_from_spec(s);sys.modules[s.name]=m;s.loader.exec_module(m);v,r=m.source('8549453b332327e4440de005dfccfecc3fcbd123702c7e98e323de59ff92803a');print(len(v['files']),len(v['dependencies']),v['source_count'])"
+    ],
+    "software": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/software_check.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "8549453b332327e4440de005dfccfecc3fcbd123702c7e98e323de59ff92803a",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/MAIN_SOFTWARE110_001.json"
+    ],
+    "default_OFF": [
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/software_check.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/guest_probe.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/server_entry.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/host_run.py"
+      ]
+    ],
+    "full_host": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/host_run.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "8549453b332327e4440de005dfccfecc3fcbd123702c7e98e323de59ff92803a",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "--component-sha256",
+      "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/MAIN_SOFTWARE110_001.json",
+      "--software-sha256",
+      "REQUIRED_ACTUAL_FULL110_SHA",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-014",
+      "--port",
+      "8250"
+    ]
+  },
+  "command_policy": "Only MAIN may run these after exact deployment readback and successful full software; replace REQUIRED_ACTUAL_FULL110_SHA with actual original report SHA, never a software claim. Full host never includes long raw CPU lease.",
+  "delta": {
+    "predecessor_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-013/SOURCE_MANIFEST.json",
+      "bytes": 81553,
+      "sha256": "bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd"
+    },
+    "actual_prior_failure": "MAIN03c6 2026-10-10 12:51:03 N1 guest_probe.py41 KeyError triton after first tiny/sync; model never loaded; CPU preflight passed; automatic cleanup reported secondary[]; exact original Ref pending MAIN, not fabricated",
+    "actual_original_result_ref": null,
+    "cause": "Actual reader factory and donor dictionary never exported triton/tl/formal/metadata. All actual bootstrap/worker/guest/prebind lookup keys enumerated against exact factory return.",
+    "correction": "Own loader.framework called only after actual initialized TP4/current rank; reuse actual018c from vllm.triton_utils import HAS_TRITON,tl,triton, check exact2090/f94d Ascend helper objects, return new dictionary without mutating donor. Existing formal/metadata source roles now actually loaded by own module loader; bootstrap passes new roles explicitly.",
+    "changed_files": [
+      "loader.py",
+      "guest_probe.py",
+      "kivi_firstdecode_bootstrap.py",
+      "software_check.py"
+    ],
+    "added_files": [
+      "test_framework_closure.py"
+    ],
+    "unchanged_original_python_files": 26,
+    "dependencies_unchanged": true,
+    "full_tests": 110,
+    "added_tests": 19,
+    "local_actual_tests": 67,
+    "local_new18_actual": "PASS; complete own guest.run CPU/N1 control flow with explicit module/device fixtures -> original helper bodies -> real published JSON; exact checked formal/metadata modules. Local original reader return-expression projection only, not the complete transitive factory.",
+    "full110_actual": "UNRUN; includes additional MAIN-only actual complete reader.runtime_modules -> original worker.make_worker source guards -> transparent native-handoff spy; no fake compiler entries inserted into original factory result",
+    "actual_native_imports": "UNRUN014; only MAIN fresh N1 may qualify actual Torch/Triton objects; stdlib fixtures do not assert HAL or model permission",
+    "cpu_boundary_preserved": true,
+    "raw_bundle_schema_unchanged": true,
+    "consume_raw_API_unchanged": true,
+    "runtime_boundary_source_unchanged": true,
+    "host_controller_source_unchanged": true,
+    "math_threshold_budget_input_deadline_unchanged": true,
+    "original_failures_preserved": true,
+    "local_test_failure_retained": "Initial new18 run17 passed/1 source-order test selected wrong for-loop (not device loop); corrected test selector, no production change."
+  },
+  "runtime_abi_original_refs": {
+    "numeric": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-numeric-v3-signed-20261010-001/numeric.py",
+      "bytes": 19612,
+      "sha256": "7853f967eb44f32da3de785111adcb23ff01fc7cbe95e50dfb78a2c6ff18979a"
+    },
+    "numeric_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-numeric-v3-signed-20261010-001/SOURCE_MANIFEST.json",
+      "bytes": 16678,
+      "sha256": "d6a151a13bd3b665eab14f25f5c1c45b1b6ab3b3b470014305977132d7643914"
+    },
+    "helper": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-deployed-api-source-660-20261010-001/triton_utils.py",
+      "bytes": 2090,
+      "sha256": "f94d81f163f0076e8243990dd687f7ec8d42ce1ed30d67eea3155bf1c3a073a4"
+    },
+    "prior_host": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/host_run.py",
+      "bytes": 15332,
+      "sha256": "30a58008f389ae96481fc1de868e9beb430a6123b39df85b103b64b017820d10"
+    },
+    "prior_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 73634,
+      "sha256": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22"
+    }
+  },
+  "required_new_success_fields": {
+    "canary": "each of4 rows actual_driver_properties, exact source API/helperSHA/int counts/current logicalrank",
+    "worker": "diagnostic_root/DRIVER-PROPERTIES-rN.json binds properties/source_ref/recipe_ref/identity",
+    "host": "worker_first_fault_refs=[] and worker_first_fault=null on success; any fatal excludes promotion"
+  },
+  "fatal_contract": {
+    "schema": "kivi.actual-worker-initialize-fatal/v1",
+    "path": "diagnostic_root/RANK-N-FATAL.json",
+    "consumer": "same source/recipe/helper and original rank-owner request identity; original complete exception; raises to existing finally",
+    "no_false_cleanup_or_permission": true,
+    "limited_to_initialize": true
+  },
+  "budgets": {
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "guest_limit_bytes": 68719476736,
+    "CPU_preflight_limit_bytes": 8589934592,
+    "host_limit_bytes": 536870912,
+    "reserve_bytes": 9126805504,
+    "ordinary_initial_floor_bytes": 78383153152,
+    "CPU_total": 7,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "physical_hbm_limit_mib_per_card": 29696,
+    "workspace_limit_bytes": 34359738368,
+    "raw_capture_expected_bytes": "source estimate 2GiB original KV plus6-10GiB packed snapshots; charged whole output32GiB, no unit256MiB reuse",
+    "raw_consumer": "independent CPU8 following exact owned device release; explicit separate actual entry; cost not yet whole64 measured",
+    "software": {
+      "CPU": 1,
+      "AS_RSS_bytes": 268435456,
+      "cpu_seconds": 120,
+      "wall_seconds": 150,
+      "output_bytes": 1048576
+    }
+  },
+  "deadline": {
+    "epoch": 1791788425,
+    "no_reset": true
+  },
+  "whole_consumer": {
+    "status": "recurrent mechanical whole014 rebinding; old013 must not consume014",
+    "schema_or_predicate_change": false,
+    "actual_model_evidence": "UNRUN; no copied prior admission"
+  },
+  "missing": [
+    "MAIN actual exact194 source closure and full110 successful original report (includes real transitive reader factory -> actual worker factory source guards)",
+    "fresh unchanged CPU8/all4 N1 plus actual compiler objects and original driver/fullEngine/owner qualification",
+    "actual32768+2 eager TP4 with all64 raw frames and original32768 writer provenance",
+    "actual native retirement/stop-retain/release then independent Devices[] CPU whole64 raw consumer"
+  ],
+  "model_ready": false,
+  "performance_ready": false,
+  "run_authority": false,
+  "mixed": false,
+  "FULL": false,
+  "GDN_numeric": false,
+  "source_closure": {
+    "donor_return": [
+      "manifest",
+      "geometry_entry",
+      "base",
+      "layout",
+      "allocator",
+      "fields",
+      "codec",
+      "reader",
+      "writer",
+      "lifecycle",
+      "callback",
+      "consumer",
+      "tests"
+    ],
+    "donor_extensions": [
+      "reader_entry",
+      "format_tests",
+      "bootstrap",
+      "protocol",
+      "bootstrap_tests",
+      "format_policy"
+    ],
+    "compiler_added_only_after_initialization": [
+      "triton",
+      "tl"
+    ],
+    "new_already_declared_actual_roles": [
+      "formal",
+      "metadata"
+    ],
+    "all_direct_mods_reads": [
+      "base",
+      "layout",
+      "fields",
+      "lifecycle",
+      "callback",
+      "format_policy",
+      "triton",
+      "tl"
+    ],
+    "raw_and_whole_schema_unchanged": true
+  }
+}

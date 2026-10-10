@@ -1,0 +1,171 @@
+{
+  "schema": "kivi.actual-firstdecode-whole-consumer-source/v1",
+  "root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-consumer-20261010-014-reviewed",
+  "default_enabled": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "run_authority": false,
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-014/SOURCE_MANIFEST.json",
+    "bytes": 84644,
+    "sha256": "8549453b332327e4440de005dfccfecc3fcbd123702c7e98e323de59ff92803a"
+  },
+  "files": {
+    "consume_whole.py": {
+      "bytes": 40738,
+      "sha256": "189bf823e4f578156e569c2a05bd172d099ad5e935fb437e5d727f5445c9ef4d"
+    },
+    "main.py": {
+      "bytes": 5328,
+      "sha256": "c23badbfbcb299d3baaf967bdfae28cb3058c75843319988438b614681f9d9c9"
+    },
+    "raw_cpu8.py": {
+      "bytes": 5284,
+      "sha256": "51f8c80ba3ba0a02200b415cb8aabee6f33e331d9327b563f9f7cec36b5c2f73"
+    },
+    "test_whole.py": {
+      "bytes": 35520,
+      "sha256": "f7d282d0e05535f707c11eb4832d294656620de59ccb61f9480ccaff4eeb2fe1"
+    },
+    "test_driver_consumer.py": {
+      "bytes": 10118,
+      "sha256": "0e03212179f347fc6d34cae66b227e4151e6a4fbdfa29770bbfc22bf336dfd18"
+    }
+  },
+  "software_tests": 71,
+  "inherited_producer_own": 31,
+  "inherited_producer_dependencies": 163,
+  "source_gate": "Context exact014/854945/84644 loads all194 via original source(), full110 producer software. Original71 whole tests and all raw math/native finished/ownership/cgroup/cleanup budgets retained; no new gates. All4 N1+worker driver proofs and source-bound FATAL checking unchanged.",
+  "budgets": {
+    "local_software": {
+      "CPU": 1,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "memory_bytes": 268435456,
+      "execution": "single-thread stdlib local fixtures; no remote execution/Torch/Docker/NPU"
+    },
+    "whole_consumer": {
+      "CPU": 1,
+      "AS_RSS_bytes": 536870912,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "new_output_bytes": 1048576
+    },
+    "independent_raw_phase": {
+      "host_CPU": 1,
+      "guest_CPU": 1,
+      "host_AS_RSS_bytes": 536870912,
+      "guest_memory_bytes": 8589934592,
+      "Devices": [],
+      "phase_seconds_including_cleanup": 5400,
+      "cleanup_seconds": 90,
+      "original_child_limit_seconds": 5310,
+      "sourceCPUallocation_required": 7,
+      "ordinary_initial_floor_bytes": 78383153152,
+      "workspace_allowance_bytes": 34359738368,
+      "estimate": "19.758s measured for one long-context row;64*19.758=1264.512s is a projection, not measured all64 duration or permission to reduce coverage/timebox"
+    },
+    "producer_phase_seconds": 5400,
+    "producer_cleanup_seconds": 90,
+    "total_cutoff_epoch": 1791788425,
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "budget_reset": false
+  },
+  "scope": "Only B1 eager32768+2,firstdecode32769,all4xFA16 numerical integration plus original nativefinished and exact owned safety. Not FULL/mixed/whole176/GDNnumerical/model performance/final tasks.",
+  "reviewed_dependencies": [
+    {
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+      "local_file": "protected_contract.py",
+      "bytes": 9234,
+      "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+    },
+    {
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+      "local_file": "protected_lifecycle.py",
+      "bytes": 6865,
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+      "local_file": "output_budget.py",
+      "bytes": 16355,
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "original_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py",
+      "local_file": "h8_host_run.py",
+      "bytes": 40202,
+      "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+    },
+    {
+      "original_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "local_file": "full_matrix_host.py",
+      "bytes": 33743,
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    {
+      "original_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "local_file": "saved_step_host_run.py",
+      "bytes": 16517,
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    }
+  ],
+  "predecessor": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-consumer-20261010-013-reviewed/SOURCE_MANIFEST.json",
+    "bytes": 7676,
+    "sha256": "4595ecf528ec008cbf830cd8baf2cb4822f6b175c245cd49d9d23e270a93e320",
+    "actual_local_tests": 71,
+    "actual_MAIN_tests": "Not rebound as current producer permission; original MAIN receipts remain separate",
+    "modified": false
+  },
+  "changes": [
+    "Mechanical explicit producer014/194/110 rebind only: source identity/counts and corresponding original test expectations. No additional controller, consumer layer, gate, test count, arithmetic or raw coverage change.",
+    "Original71 suite preserved. main.py, raw_cpu8.py and test_driver_consumer.py byte-exact from whole013-reviewed; SERIAL rawCPU retained.",
+    "Producer014 binds exact formal/metadata modules plus compiler only at initialized NPU boundary. Raw bundle schema, consume_raw API and driver/FATAL proof schema unchanged. Software grants no model authority."
+  ],
+  "actual_model_terminal": null,
+  "actual_independent_raw_terminal": null,
+  "actual_independent_raw_result": null,
+  "state": "PREPARED_SOFTWARE_UNRUN",
+  "current_actual": {
+    "producer_source": "v014/854945",
+    "complete_producer110": "UNRUN in this local preparation; original MAIN software Ref required by actual producer RESULT",
+    "producer_local67": "Reported by source owner, not full110 or model permission",
+    "CPU8": null,
+    "N1": null,
+    "model_terminal": null,
+    "independent_raw_terminal": null,
+    "independent_raw_result": null,
+    "model_pass": false,
+    "not_authority": true,
+    "prior_actual_failures": "Original013 N1 missing triton and all earlier failures retained; no old source/result promotion."
+  },
+  "required_actual_config": {
+    "CPU": "original installed parser/default_factory/native scalar necessary constraints with explicit unverified decoderFalse assumption; no ModelConfig/fullEngine",
+    "N1": "real all4tiny then full real EngineArgs final config before weights",
+    "server": "same actual frontend process returns validated SAME real config object before engine creation"
+  },
+  "fixture_failure_preserved": {
+    "root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-consumer-20261010-012",
+    "source_manifest_sha256": "8517c63c3b77898c50a2e29037eaeda9b94a1f2532ed0c47a13a94cec81dddce",
+    "receipt_sha256": "6459cb51104b2ae4ea632d34795660aac0ec1a57a17acf6193a6c4bc62494a19",
+    "actual_tests_run": 71,
+    "errors": 10,
+    "causes": [
+      "AST fixture omitted PRODUCER_TESTS in extracted predicate environment",
+      "AST fixture omitted value in actual N1 append expression"
+    ],
+    "production_unchanged": true
+  }
+}
