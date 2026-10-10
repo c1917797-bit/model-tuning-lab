@@ -2,7 +2,8 @@
 
 ## 0. Status
 
-- Current running action (2026-10-10): frozen r19 repaired-source GSM8K no-cache off-path baseline controller exec-0000000000000433 started after fresh direct-route physical NPU0-3 and port 8223 idle proof. Immutable root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-gsm8k-baseline. At 14:06 UTC status was service-starting. Poll this exact controller and root, never restart for slow progress or an observation timeout. The HYPIC-only GSM8K arm has not started. Maintain continuous physical-process guard; do not modify external work or use NPU4-7.
+- Current running action (2026-10-10): frozen r19 repaired-source GSM8K HYPIC-only off-path candidate controller `exec-00000000000004a3` on physical NPU0–3; immutable root `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-gsm8k-hypic`. Direct-route, candidate-root-absent, physical NPU0–3 idle, and port 8223 idle admission passed. Poll the exact controller/root; never restart on slow progress or observation timeout. Continuous physical-process guard remains mandatory; do not modify external work or use NPU4–7.
+- The matching GSM8K no-cache controller `exec-0000000000000433` is terminal and independently audited by `exec-00000000000004a0`: 1319×3 complete rows, correct counts 1280/1274/1284, length-limit counts 10/11/7, 991 clean guard samples, source identity and exact release. Immutable arm-result SHA256 `03a2093873b2dbf3a0f675c7d0d47d83cadd0389192e10fb491ca03525ece897`; see `HYPIC_R19_GSM8K_BASELINE_TERMINAL_AUDIT_20261010.md`. Valid control only; no paired GSM8K or HYPIC hot-path verdict yet.
 - **Current terminal result (2026-10-10):** r19 repaired-source LongBench-v2 max-2048/c32 one-switch pair is complete and independently audited: no-cache 227/381 (74/77/76), HYPIC 219/381 (73/70/76), −2.0997 pp, `REJECT_OR_QUALIFY`. The HYPIC controller `exec-0000000000000392` exited 1 only after all rows because aggregate hot/boundary coverage was incomplete; the frozen paired auditor `exec-00000000000003f6` exited 0 and preserves that failure separately from valid all-request quality. Both arms have clean source/isolation/exact-release evidence; candidate guard had 997 clean samples. See `HYPIC_R19_REPAIRED_C32_LONGBENCH_TERMINAL_AUDIT_20261010.md` and immutable paired audit SHA256 `40ce887336be3446aa87a8e552fb50d366234fc10006ad5a3140f3dc0df16d9b`. Do not restart/reuse these roots. The GSM8K no-cache arm is now running; the HYPIC-only arm remains unrun; no full quality or repaired-source adoption claim is established.
 - Supplementary read-only r19 localization: across 381 within-arm repetition pairs, the median identical response-text prefix was 678 characters for control versus 186 for HYPIC, with each repetition pairing showing the same direction. This is a variability signal, not a causal diagnosis or frozen verdict change; see `HYPIC_R19_RESPONSE_PREFIX_VARIABILITY_DIAGNOSIS_20261010.md`.
 - Supplementary paired-cluster sensitivity check: the observed -2.0997 pp LongBench difference has a post-hoc 20,000-draw interval of [-5.2493, +1.0499] pp over 127 paired sample clusters. The frozen quality gate still rejects; causal harm and preservation are both unproved. See `HYPIC_R19_QUALITY_UNCERTAINTY_DIAGNOSIS_20261010.md`.
@@ -102,8 +103,9 @@ runtime, without a paired quality verdict. The r19 repaired-source LongBench
 pair is now terminal and independently audited as a valid all-request quality
 regression with separate hot-path shortfall. Read-only localization found
 length-limit and response-variability associations, not a proven root cause.
-The frozen GSM8K no-cache controller is running. Poll and independently audit
-its immutable root before admitting the HYPIC-only GSM8K arm. Admit later
+The frozen GSM8K baseline is terminal and independently audited. The
+HYPIC-only GSM8K controller `exec-00000000000004a3` is running; poll it and
+independently audit its immutable root after terminal. Admit later
 device phases only with fresh
 direct-route physical NPU0–3 and port 8223 idle proof and continuous
 isolation. GSM8K remains a separate required off-path safety phase.
@@ -112,8 +114,8 @@ repaired-source performance as distinct claims. NPU4–7 remain outside scope.
 
 ## 5. Next Actions
 
-1. Poll GSM8K no-cache controller exec-0000000000000433 and its immutable root until authoritative terminal state. Do not restart or overlap another arm. Independently audit 1319x3 rows, source identity, physical isolation, and exact owned release.
-2. Only after a valid baseline and fresh physical NPU0-3/8223 admission, run the frozen HYPIC-only GSM8K arm in its distinct root and audit the off-path pair. It cannot overturn the LongBench rejection or prove HYPIC hot-path quality.
+1. Poll GSM8K HYPIC-only controller `exec-00000000000004a3` and its immutable root until authoritative terminal state; do not restart or overlap another arm. Independently audit 1319×3 rows, source identity, physical isolation, and exact owned release.
+2. Run the frozen paired GSM8K auditor once only after candidate terminal and valid, report its off-path safety result separately. It cannot overturn the LongBench rejection or prove HYPIC hot-path quality.
 3. If discrepancy localization supports one bounded repair, freeze a new
    source-matched control/treatment contract and short canary before any
    further LongBench rerun; do not rewrite r19. Only after quality is
