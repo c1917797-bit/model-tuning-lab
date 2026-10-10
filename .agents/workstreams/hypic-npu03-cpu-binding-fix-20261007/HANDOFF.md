@@ -110,6 +110,12 @@ independently audit its immutable root after terminal. Admit later
 device phases only with fresh
 direct-route physical NPU0–3 and port 8223 idle proof and continuous
 isolation. GSM8K remains a separate required off-path safety phase.
+The r19 LongBench controller's post-row hot-coverage raise exceeded the
+Skill's two-lens deployment-quality rule; the independent audit preserved
+the valid negative all-request score and failed universal-hot attribution.
+See `HYPIC_R19_CONTROLLER_GATE_RETROSPECTIVE_20261010.md`. Do not edit the
+frozen controller; a successor must version its logic and test partial-hot
+receipts prospectively.
 Keep original-source performance, repaired-source quality, and any later
 repaired-source performance as distinct claims. NPU4–7 remain outside scope.
 
