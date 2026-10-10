@@ -58,7 +58,12 @@ class HandoffTests(unittest.TestCase):
                          "exec-0000000000001bb1")
         self.assertEqual(task["r13_quality_audit"]["sha256"],
                          "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b")
-        self.assertIsNone(task["active_attempt"])
+        active = task["active_attempt"]
+        if active is not None:
+            self.assertEqual(active["campaign"], "cache10r18-c32-longbench")
+            self.assertEqual(active["arm"], "no-cache")
+            self.assertEqual(active["controller_operation"], "exec-00000000000001d1")
+            self.assertTrue(active["root"].endswith("r18-c32-full-baseline"))
         self.assertEqual(task["r17_cap_isolation_design"]["quality_decision"],
                          "REJECT_OR_QUALIFY")
         self.assertEqual(task["r13_baseline_attempt"]["arm"], "no-cache")
