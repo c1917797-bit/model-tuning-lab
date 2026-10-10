@@ -2,6 +2,7 @@
 
 ## 0. Status
 
+- r15 source-lineage diagnostic is preregistered but has not touched devices: eight r13-selected max-2048/c8 samples, HYPIC-on old `3ad0967` versus current `c12060c`, physical NPU0–3 only, fresh roots and independent auditor. Two clean source checkouts and both offline source/model/dataset preflights passed. Read `HYPIC_R15_SOURCE_LINEAGE_PREREGISTRATION_20261010.md` before admission; do not use its selected subset as a full-quality verdict.
 - 2026-10-10 verification-route correction: r13 is a completed negative-quality experiment, not an incomplete run. Compare the closer 2026-09-06 same-model TP4 success with the current r13 source/protocol differences; the current plugin differs semantically from the successful `3ad0967` source. The next device test, if admitted, is a small preregistered HYPIC-on source-lineage E2E diagnostic on physical NPU0–3, not another GDN unit probe or a rerun of r13. See `HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md`. r5 isolated GDN was terminal-valid but synthetic and non-causal; its container was released.
 - 2026-10-09 CPU BF16 RoPE screen: FP32-compute/BF16-store and one relative-position rotation both worsen all three sampled cross-anchor comparisons against direct native BF16 K; neither is an admitted repair. See `HYPIC_BF16_ROPE_NUMERICAL_SCREEN_20261009.md`. RoPE causality remains unproven.
 - 2026-10-09 offline reporting/source-map reconciliation: r13's actual
