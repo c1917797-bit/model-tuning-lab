@@ -115,6 +115,7 @@ def frozen_pair_seam() -> dict:
 
 def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
               *, expected: int = EXPECTED, mode: str = "full",
+              scored_cap: int = 2048,
               allow_hot_shortfall: bool = False,
               require_source_attestation: bool = False) -> dict:
     require(root.is_dir(), f"{arm}: root absent")
@@ -130,7 +131,7 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
     require(contract["repetitions"] == REPEATS and contract["concurrency"] == 8,
             f"{arm}: concurrency/repeat drift")
     require(contract["warm_requests_per_sample"] == 2
-            and contract["max_output_tokens"] == 2048
+            and contract["max_output_tokens"] == scored_cap
             and contract["temperature"] == contract["seed"] == 0
             and contract["ignore_eos"] is False
             and contract["enable_thinking"] is False, f"{arm}: generation contract drift")
@@ -204,9 +205,9 @@ def audit_arm(root: Path, arm: str, cases: list[dict], evaluator: object,
             ids.add(warm["request_id"])
         for repeat, scored in enumerate(row["scores"], 1):
             require(scored["repetition"] == repeat
-                    and scored["request_sha256"] == payload_hash(item, 2048)
+                    and scored["request_sha256"] == payload_hash(item, scored_cap)
                     and scored["usage"]["prompt_tokens"] == item["prompt_tokens"]
-                    and 0 <= scored["usage"]["completion_tokens"] <= 2048,
+                    and 0 <= scored["usage"]["completion_tokens"] <= scored_cap,
                     f"{arm}: sample {item['index']} score request drift")
             require(scored["request_id"] not in ids, f"{arm}: duplicate request ID")
             ids.add(scored["request_id"])
