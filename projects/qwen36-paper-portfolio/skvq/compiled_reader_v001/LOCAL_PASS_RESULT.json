@@ -1,0 +1,126 @@
+{
+  "schema": "skvq.compiled-reader.local-source-regression/v1",
+  "source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 58779,
+    "sha256": "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1"
+  },
+  "scope": "local Windows stdlib21: compile/AST/defaultOFF CLI/independent scalar fulloutput math; not deployedsource29, not NumPy12, not JIT/NPU/model",
+  "all20_own_hashes": [
+    {
+      "name": "contract.py",
+      "bytes": 7951,
+      "sha256": "6c80e15783b57ceaeb8bcee15fcd4fa75292e529e9f0efac511722b3f31194d0"
+    },
+    {
+      "name": "kernel.py",
+      "bytes": 9149,
+      "sha256": "2b9116721f57abb432f01f3c36465fe7cb851f04c849b5b72b373b0ee80a9e0a"
+    },
+    {
+      "name": "layout.py",
+      "bytes": 1690,
+      "sha256": "d2d24ea2da611e49f069782af8f7b686be971cada26aefffc5fed81eaa737213"
+    },
+    {
+      "name": "model_consume.py",
+      "bytes": 8654,
+      "sha256": "c2c300db27d770778c498d41ed428f967e1bc332e21c11b96e63b633d28476c0"
+    },
+    {
+      "name": "model_raw.py",
+      "bytes": 2918,
+      "sha256": "291bd0e7cfdcb3df5f3aabba7d0e4a0fadd41ddeb0673c3775cc233af997b901"
+    },
+    {
+      "name": "model_runtime.py",
+      "bytes": 5848,
+      "sha256": "521f7b67577131f5913557620411659580d814ca38a3d032604ecc62750e1a18"
+    },
+    {
+      "name": "native_binding.py",
+      "bytes": 5748,
+      "sha256": "c4c41598b7188c33e39c4b153439e2d15205113b4080f0de1c51105d59e6e29c"
+    },
+    {
+      "name": "native_finish.py",
+      "bytes": 3496,
+      "sha256": "5eb489d79d68c8c763f5ffbc34ffcf547956148cfb1e4c5339f3fb050f7c6965"
+    },
+    {
+      "name": "numeric.py",
+      "bytes": 7450,
+      "sha256": "aa8926b729c810efd9145391897a433f0910bbf3285d51fe253b6dc255ff4b7e"
+    },
+    {
+      "name": "reader_canary.py",
+      "bytes": 2898,
+      "sha256": "c13bc0c0d8b4bd947be5ef1ac15d976e314bdb291e380f6d87e329c97100e234"
+    },
+    {
+      "name": "reader_consume.py",
+      "bytes": 5500,
+      "sha256": "375f5e0c0d208f0864a881692bff27e2e7384efce39942845b949e50fb7ee731"
+    },
+    {
+      "name": "reader_cpu.py",
+      "bytes": 3269,
+      "sha256": "9abb76dc36fb2e084bc6fa82f919174abb9da88fd87feea3da6cd40e3a01cf87"
+    },
+    {
+      "name": "reader_host.py",
+      "bytes": 15234,
+      "sha256": "f11d7cf06cde89a7a9fb04786488d77f2e78b9ab8468738ce4fe406f6f5ac32d"
+    },
+    {
+      "name": "reader_whole.py",
+      "bytes": 17120,
+      "sha256": "3d3be4f2649e2f10327131bd06346527fb497d21922b72945b3657e9c8b957e6"
+    },
+    {
+      "name": "reference.py",
+      "bytes": 6804,
+      "sha256": "1c1897ad6cf38807e1ac4dd85fca23ffd1031b385d89f0a8f9fc60394a26f465"
+    },
+    {
+      "name": "runtime_cache.py",
+      "bytes": 4232,
+      "sha256": "13ff05bc93699ba54ab712a5f04755a3a3260ff626dbe381990e8bacac642159"
+    },
+    {
+      "name": "software_check.py",
+      "bytes": 1053,
+      "sha256": "4b634ec24d954bca7fff8b0f49d0df337933c9d288d22e165d6988b7dc9805e2"
+    },
+    {
+      "name": "test_host.py",
+      "bytes": 5595,
+      "sha256": "e96dcee84cca3a0d3bd82fe0385ed5126703595f92ce4365726245efc35359cd"
+    },
+    {
+      "name": "test_reader.py",
+      "bytes": 8283,
+      "sha256": "39b0e4f596305f9c8b63ec87f4ed1749b9e616f3393f701d1482bc4594a3ca96"
+    },
+    {
+      "name": "worker_patch.py",
+      "bytes": 8418,
+      "sha256": "9d38bc31d3d33796ddafa4c271fde6f4596774c54c0482a8cc592013029c5fc8"
+    }
+  ],
+  "actual_tool_receipt": {
+    "chunk_id": "a6c467",
+    "wall_time_seconds": 5.1593087,
+    "exit_code": 0,
+    "original_token_count": 427,
+    "output": "test01_complete_source_compile (test_reader.ReaderTests) ... ok\r\ntest02_all_original_channel_addresses (test_reader.ReaderTests) ... ok\r\ntest03_group_padding_is_not_fixed32 (test_reader.ReaderTests) ... ok\r\ntest04_reject_arbitrary_permutation (test_reader.ReaderTests) ... ok\r\ntest05_reject_empty_group_or_smoothing (test_reader.ReaderTests) ... ok\r\ntest06_real_window_boundaries (test_reader.ReaderTests) ... ok\r\ntest07_reject_middle_edge_alias (test_reader.ReaderTests) ... ok\r\ntest08_complete_scalar_decode_inverse_and_edges (test_reader.ReaderTests) ... ok\r\ntest09_no_quant_short_rows (test_reader.ReaderTests) ... ok\r\ntest10_plane_extent_rejected (test_reader.ReaderTests) ... ok\r\ntest11_attention_all1536_reference (test_reader.ReaderTests) ... ok\r\ntest12_whole_output_nonfinite_and_threshold_reject (test_reader.ReaderTests) ... ok\r\ntest13_default_off_does_not_call_qualifier (test_reader.ReaderTests) ... ok\r\ntest14_actual_factory_global_binding_and_rebind_refusal (test_reader.ReaderTests) ... ok\r\ntest15_masked_signed_conversion_not_packed_word_cast (test_reader.ReaderTests) ... ok\r\ntest16_independent_reference_has_no_candidate_math_import (test_reader.ReaderTests) ... ok\r\ntest17_actual_default_off_cli_clean_I (test_reader.ReaderTests) ... ok\r\ntest18_metadata_ref_extra_and_bool_rejected (test_reader.ReaderTests) ... ok\r\ntest19_true_owner_proof_wrong_card_rejects_before_any_module (test_reader.ReaderTests) ... ok\r\ntest20_actual_old_writer_axis_not_sufficient_model_permission (test_reader.ReaderTests) ... ok\r\ntest21_source_scalar_name_concatenation (test_reader.ReaderTests) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 21 tests in 4.730s\r\n\r\nOK\r\n"
+  },
+  "status": "LOCAL_STDLIB21_PASS",
+  "initial_failed21_preserved": "LOCAL_FIRST_FAILURE.json",
+  "deployed29_status": "UNRUN",
+  "numerical_NPU_status": "UNRUN",
+  "native_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false
+}

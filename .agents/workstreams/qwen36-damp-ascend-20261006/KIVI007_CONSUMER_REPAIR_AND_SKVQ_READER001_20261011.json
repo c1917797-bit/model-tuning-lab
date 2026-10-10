@@ -1,0 +1,143 @@
+{
+  "schema": "paper-portfolio.stage-checkpoint/v1",
+  "time_utc": "2026-10-10T23:22:38Z",
+  "goal": "ACTIVE_UNMET",
+  "portfolio_cutoff_epoch": 1791788425,
+  "protected_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "no_new_npu_math_performance_or_task_pass": true,
+  "current": {
+    "operation": "exec-0000000000000581",
+    "state": "RUNNING_VERIFIED_23:21Z",
+    "stage": "Devices[] independent full64 raw scalar consumption of unchanged018 actual NPU capture",
+    "numerical_result": "PENDING"
+  },
+  "SKVQ_reader001": {
+    "software": {
+      "operation": "exec-0000000000000598",
+      "tests": 29,
+      "source_files": 204,
+      "exit": 0,
+      "seconds": 13.711,
+      "scope": "pure-stdlib actual-host source/software, not compiled or NPU"
+    },
+    "manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 58779,
+      "sha256": "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1"
+    },
+    "archive": "projects/qwen36-paper-portfolio/skvq/compiled_reader_v001",
+    "archive_files": 23,
+    "archive_exact_runtime_operation": "exec-000000000000059b",
+    "audit_note": "all23 runtime bytes and four original envelopes passed; later optional rg discovery failed because rg is absent. Do not label aggregate059b PASS.",
+    "pending": [
+      "actual014 calibration capture",
+      "actual006 fit",
+      "writer002 NPU/whole",
+      "reader001 compiled/NPU/whole",
+      "real named worker model bridge"
+    ]
+  },
+  "KIVI007": {
+    "source_assembly": {
+      "operation": "exec-0000000000000596",
+      "exact_files": 106,
+      "python_compile": 103,
+      "capture_closure": 308,
+      "paired_closure": 279
+    },
+    "capture_manifest_sha256": "f23aaf8eaf5d210d3b34356d007ac302cdd1b5a94b7891a8996b52e8541e86f3",
+    "paired_manifest_sha256": "5a405d7e64d78254f6d708214aa8f84da0e32e7703e432382ecf078e16dcb33c",
+    "status": "DO_NOT_RUN_007_CURRENT_CONSUMER_INTEGRATION_INCONCLUSIVE",
+    "classification": "REFERENCE_OR_TEST_AND_ADAPTATION_IMPLEMENTATION",
+    "defects": [
+      {
+        "kind": "consumer namespace lifetime",
+        "evidence": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI007_NAMESPACE2_ORIGINAL_20261011.json",
+          "bytes": 1537,
+          "sha256": "02846b0b53692dfa614f55a75c5b2df96629128889d8e3d42edcc67cef2e1d08"
+        },
+        "scope": "two actual original source-loader/guard reproductions on local host, not numerical replay",
+        "action": "008 explicit scoped predecessor namespace transaction; reject foreign ambient modules; preserve original safety and numeric gates"
+      },
+      {
+        "kind": "paired frontend source hash stale",
+        "evidence": "cross-agent exact actual paired007 bindings.py/class and ownership.install_frontend path inspection",
+        "actual_bindings_sha256": "a72c8ea47f6f04f661a9b8e6c159e02eb7f743aa3fe94a27c212e7a6cd7e8761",
+        "stale_pin_prefix": "71b5c365",
+        "action": "008 exact source-pin update and actual frontend positive/negative regressions; do not weaken pin or mutate007"
+      }
+    ],
+    "next": "008 off-device repair; full same-image and numerical gates remain pending"
+  },
+  "final_task_preparation": {
+    "existing_input_counts": {
+      "LongBench_v2": 503,
+      "GSM8K": 1319
+    },
+    "local_reported_tests": {
+      "transport": 62,
+      "capacity_native_retirement": 30
+    },
+    "scope": "local software, NOT task result",
+    "owner3_complete_source_mirror": "C:/Users/Huawei/AppData/Local/Temp/c180-owner3",
+    "next": "source-bound task-only owner/provider adapter; actual qualification before final tests"
+  },
+  "native_engine_source": {
+    "operation": "exec-0000000000000599",
+    "source_container": "c8459fcfa374681270a4d98f055bb291feceaab862acf8df6ccabdab54c1880c",
+    "container_stopped_proven_before_read": true,
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "files": [
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-engine660-sources-0599-20261011-001/offline_utils.py",
+        "bytes": 23674,
+        "sha256": "688fbad0af9c2180b83aa77dcd0dbda85ca076a6c72bffa61840896d950cf458"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-engine660-sources-0599-20261011-001/llm_engine.py",
+        "bytes": 16586,
+        "sha256": "2900f6732a1e507f6ced6f75f05f1fcaf2cc2929df0f5066574e9077ad3fbde1"
+      }
+    ]
+  },
+  "original_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI007_SOURCE_ASSEMBLY_0596_ORIGINAL_20261011.json",
+      "bytes": 29774,
+      "sha256": "f3a4fb56e339603a4e81e3a0b07ac44658cb0fbfcabe79dee358aef632f56e39"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_READER001_SOFTWARE29_0598_ORIGINAL_20261011.json",
+      "bytes": 8876,
+      "sha256": "890662a445573d86f139fe8d23f0d2db3592b78b6298b42af5faefc533ba7899"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_ORIENTATION_0594_ORIGINAL_20261011.json",
+      "bytes": 15696,
+      "sha256": "5e40411ae92f329b01ea62b3e21146debd9e28b9ab0fe0eb0a6eb67455518bf2"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_STAGE_CHECKPOINT_0593_ORIGINAL_20261011.json",
+      "bytes": 7294,
+      "sha256": "a9abcdd4089d8ad70943bc7b253fbf6fe651943b209ab7be5520d41819dc39c7"
+    }
+  ],
+  "scheduling": {
+    "device_owner": null,
+    "ready_device_successors": 0,
+    "zero_idle": false,
+    "reason": "live raw standalone CPU policy cannot accept new unlisted peer; raw CPU2 + SKVQ014 CPU7 exceeds observed7. Existing frozen raw untouched.",
+    "on_terminal": "exact own release and actual raw whole consumption; full64 PASS -> qualified B1 screen; otherwise reviewed SKVQ014 after fresh admission. No waiting for repair/report/Git."
+  },
+  "git": {
+    "pre_checkpoint_head": "a4b5db2db46df3aad8ed91b928e7eddd03ae6be7",
+    "pushed": false,
+    "auth_failure_unchanged": true
+  }
+}

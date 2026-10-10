@@ -1,0 +1,255 @@
+{
+  "schema": "skvq.compiled-reader.entry/v1",
+  "default_enabled": false,
+  "source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 58779,
+    "sha256": "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1"
+  },
+  "declared_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001",
+  "materialization": {
+    "mode": "one Add-only MATERIALIZE.patch applied under exact /cache/.../lowbit root; no overwrite",
+    "own_py": 20,
+    "source_closure": 204,
+    "hash_each_own_after_apply": true,
+    "source_manifest_canonical_LF": true
+  },
+  "frozen_prior_sources": {
+    "capture": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "calibration": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/SOURCE_MANIFEST.json",
+      "bytes": 52456,
+      "sha256": "07b526100b7184b4555138a7318c5f4a7c45ac451207ea96f656173cba1366c1"
+    },
+    "writer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 51408,
+      "sha256": "445b3f25bac488f1053b57e24c82177b833440b013faf6402b3153e4be73f433"
+    }
+  },
+  "prerequisite_actual": {
+    "capture014_whole256": "MISSING",
+    "calibration006128fit_64artifacts": "MISSING",
+    "writer002128cases256calls_owned_whole": "MISSING",
+    "writer002_actual_058e33_software": "Parent reported PASS/source181; software-only, not imported as native/model authority",
+    "actual_reader_aggregate29": "UNRUN"
+  },
+  "software": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/software_check.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1"
+    ],
+    "outer_wall_seconds": 110,
+    "host_cpu": 1,
+    "address_space_bytes": 268435456,
+    "cpu_seconds": 120,
+    "status": "UNRUN deployed29; local21 actualPASS"
+  },
+  "default_OFF": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/reader_host.py"
+    ],
+    "required": "prints false permissions and launches/imports no Torch/Docker/NPU"
+  },
+  "host": {
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_READER_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=3600:3600",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/reader_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--writer-whole-ref-json",
+      "<ACTUAL_WRITER_WHOLE_REF_DESCRIPTOR_ABSOLUTE>",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001"
+    ],
+    "parameter_required": "The supplied descriptor must contain actual current writer whole exact {path,bytes,sha256}; fresh replay consumes original successful terminal/cleanup/math. No source-ready/fixture/failed whole accepted.",
+    "resource_profile": {
+      "physical_cards": [
+        4
+      ],
+      "guest_logical_device": 0,
+      "host_cpu": 1,
+      "guest_cpu": 1,
+      "reserve_cpu": 2,
+      "joint_cpu": 4,
+      "guest_memory_bytes": 8589934592,
+      "host_memory_bytes": 536870912,
+      "ordinary_reserve_bytes": 8589934592,
+      "joint_ordinary_floor_bytes": 17716740096,
+      "device_block_seconds": 1800,
+      "cleanup_included_seconds": 90,
+      "after_release_independent_CPU_block_seconds": 1800,
+      "after_release_cleanup_included_seconds": 90,
+      "total_seconds": 3600,
+      "output_cap_bytes": 1073741824,
+      "jit_cache_cap_bytes": 536870912,
+      "compilecache_included_in_output_cap": true,
+      "disk_start_required_bytes": 9663676416,
+      "disk_runtime_reserve_bytes": 8589934592,
+      "cpu_queue_no_peer_admission": true,
+      "physical_HBM_reserve_MiB": 3072
+    },
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001",
+    "ownership": "one reviewed writer002/Control14 derivative, actual physical4/logical0 only; CPU->canary+numeric->exactstop/Pid0/noExec/noOOM->Devices[] independent reference",
+    "CPU_concurrency": "CPU_QUEUE; no registered peer/joint authorization. Devices[] stage does not run SMI idle gate, but this packet cannot self-grant cross-paper overlap.",
+    "CLI_intermediate_output": "four stage scripts print exactly one result3Ref; stdout/stderr and original child return/argv saved by inherited Control",
+    "status": "DATA_PENDING, not executable until actual software29 and writer whole passed"
+  },
+  "whole_consumer": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=536870912:536870912",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/reader_whole.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001",
+      "--original-ref-json",
+      "<ACTUAL_SUCCESSFUL_HOST_OPERATION_3REF_DESCRIPTOR>",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/READER_WHOLE.json"
+    ],
+    "budget": {
+      "CPU": 1,
+      "AS": 536870912,
+      "cpu_seconds": 120,
+      "outer_wall_seconds": 110
+    },
+    "required_original": "agentweb.operation/v1 completed+succeeded terminal exact command/args/target peer ma a6109; real exit0 noncancel nontimeout. No manufactured original or old KIVI/Ada authority",
+    "result_schema": "skvq.compiled-reader.whole/v1",
+    "result_status": "OWNED_SINGLE4_ALL64_Q2Q4_COMPILED_ATTENTION_CONSUMED",
+    "permission": "all native_ready/model_ready/performance_ready/task_ready/whole176/graph/lifecycle false"
+  },
+  "stage_argv_templates": {
+    "cpu": [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/reader_cpu.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--writer-whole-ref-json",
+      "<SAME_WRITER_DESCRIPTOR>",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/cpu/work/RESULT.json"
+    ],
+    "canary": [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/reader_canary.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--writer-whole-ref-json",
+      "<SAME_WRITER_DESCRIPTOR>",
+      "--cpu-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/CPU_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/candidate/work/CANARY.json"
+    ],
+    "numeric": [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/numeric.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--writer-whole-ref-json",
+      "<SAME_WRITER_DESCRIPTOR>",
+      "--device-proof-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/candidate/work/DEVICE_PROOF_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/candidate/work/numeric"
+    ],
+    "independent": [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/reader_consume.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--producer-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/NUMERIC_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-001-MAIN-user72h-20261011-001/candidate/work/numeric/INDEPENDENT.json"
+    ]
+  },
+  "compiled_numeric": {
+    "actual_context": 4096,
+    "all_rank_layer_cases": 64,
+    "bits": [
+      2,
+      4
+    ],
+    "actual_cases": 128,
+    "actual_kernel_calls": 384,
+    "full_outputs": 196608,
+    "full_QK_and_probabilities_each": 3145728,
+    "threshold_relative_rms": 0.005,
+    "all6_head_reference": true,
+    "actual_original_QKV": "source-pinned sample0 last causal query4095; not synthetic calibration tensors",
+    "actual_JIT": "UNRUN; local21 no compiled kernel executed"
+  },
+  "model_adapter_source": {
+    "factory": "model_runtime.Factory(actual_worker,reader_whole_ref,prompt_ref,owned_rank_root,sourceSHA)",
+    "install_hooks": "actual native FA forward_impl/reshape_and_cache per16 real instances, original dense prefill/cache write retained; compiled reader at two real decode calls",
+    "post_RoPE": "source-qualified original patch21fc receiver at line81, actual q/k/v GPU storage aliases; no candidate-reconstructed original",
+    "native_finished": "original runner._update_states actual finished set then requests/input_batch empty; exact instance restoration; no HTTP DONE/dummy/drain",
+    "numerical_consumer_argv": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/model_consume.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1",
+      "--cohort-ref-json",
+      "<ACTUAL_ALL4_RELEASED_MODEL_COHORT_DESCRIPTOR>",
+      "--output",
+      "<NEW_OWNED_CPU_RESULT>"
+    ],
+    "actual_scope": "32768 prompt/3 outputs =>2 native decode calls at32769 and32770/all4x16x2=128 frames/full1536 each",
+    "remaining_missing": [
+      "named worker-extension/launcher actual CLI and source-qualified owned model whole-operation consumer",
+      "all48 GDN content oracle",
+      "whole176/changed160/mixed/reset/fork/graph",
+      "matched formal40/C16/1024 E2E and official task precision"
+    ],
+    "model_launch_permitted": false
+  },
+  "failure_successor": "preserve source/current original first fault and own-stop retained evidence; no original unchanged replay or numerical verdict from transport/adapter failure",
+  "portfolio_cutoff_epoch": 1791788425,
+  "no_training": true,
+  "no_hidden_window_extension": true,
+  "run_authority": false,
+  "native_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false
+}

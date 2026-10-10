@@ -1,3 +1,12 @@
+## 2026-10-10T23:22:38Z — SKVQ reader001 software passed; KIVI007 integration failures caught before admission
+
+- Read KIVI007_CONSUMER_REPAIR_AND_SKVQ_READER001_20261011.json. Reader001 actual0598 passed29 software checks/source204; 23 canonical archive files are runtime-byte-exact (059b). No compiled/NPU/reader/model performance or accuracy PASS; it waits on actual014 capture ->006 fit ->002 writer. Actual model named-worker bridge continues off-device.
+- Mixed007/paired007 actual0596 assembled106 exact files,103 Python files, source closures308/279. DO NOT RUN007: actual original loader/guard reproductions prove two namespace conflicts, and cross-agent audit found stale frontend Bindings SHA. These are implementation/reference failures, not KIVI arithmetic or paper no-go. 008 repairs exact namespace lifetimes and pin with negative tests; do not mutate007 or weaken guards.
+- Original0581 still RUNNING at23:21Z, CPU-only Devices[] independent full64 of unchanged018 capture. No numerical whole yet. On terminal preserve original, prove exact own release, consume full64; admit qualified B1 screen on PASS or reviewed SKVQ014 otherwise, without waiting for reports/Git. No second raw launch.
+- Actual0599 read two native engine files from stopped owned018 image660 (never restarted). Source-bound synchronous finish/slot recycling review now feeds SKVQ model and task-only adapters. Final-task preparer reports local62 transport +30 native capacity/retirement tests, NOT1822 actual scored tasks; owner adapter remains in progress.
+- Latest0594 physical4–7 idle: no claim of zero-idle. Raw standalone peer guard and total CPU2+7>7 prevent unqualified overlap; protected0–3 untouched. Fixed cutoff1791788425 and spent32GiB authority unchanged. Git auth failure unchanged; local checkpoint is not a push.
+- 059b archive/four-original audits passed, then optional rg discovery failed because rg is unavailable. Do not mislabel aggregate059b PASS; subsequent validation uses known scripts/validate-mst.sh.
+
 ## 2026-10-10T22:54:44Z — SKVQ006/002 actual software closed; final-task seam being implemented
 
 - Read SKVQ006_002_SOFTWARE_AND_TASK_SUCCESSOR_20261011.json. Installed calibration006 actual43/source161 (058c) and writer002 actual33/source181 (058e) PASS. Neither has actual fitting/writer NPU authority: 014 capture ->006 calibration ->002 writer -> reader/model remain real dependencies.

@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T22:54:44Z",
+  "updated_at_utc": "2026-10-10T23:22:38Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -43,14 +43,14 @@
     {
       "paper": "KIVI",
       "owner": "kivi_model_successor",
-      "stage": "B1screen004 deployed/source281 PASS; same-image66 pending; full64 prerequisite pending; C16/40 mixed model successor preparing",
-      "state": "PREPARING_OFF_DEVICE",
+      "stage": "B1screen004 pending full64; mixed007 source assembled but actual consumer namespace conflict and stale paired frontend pin prove current007 inconclusive. New008 repairs off-device.",
+      "state": "ADAPTATION_REPAIR_OFF_DEVICE",
       "ready": false
     },
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "cal006 source frozen/local43 PASS; actual014 capture and fit missing; writer002 actual algorithm compression gate preparing",
+      "stage": "cal006 actual43/source161; writer002 actual33/source181; compiled reader001 actual29/source204. All still DATA_PENDING from actual014 capture; actual named worker/model bridge preparing.",
       "state": "DATA_PENDING_OFF_DEVICE",
       "ready": false
     }
@@ -192,13 +192,25 @@
       "classification": "REFERENCE_OR_TEST",
       "NPU_started": false,
       "repair": "whole021 actual original0548 producer replay passed0569; not math or performance"
+    },
+    {
+      "paper": "KIVI",
+      "version": "mixed007",
+      "classification": "REFERENCE_OR_TEST_AND_ADAPTATION_IMPLEMENTATION",
+      "NPU_started": false,
+      "evidence": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI007_NAMESPACE2_ORIGINAL_20261011.json",
+        "bytes": 1537,
+        "sha256": "02846b0b53692dfa614f55a75c5b2df96629128889d8e3d42edcc67cef2e1d08"
+      },
+      "cause": "Original predecessor replay namespaces leak into subsequent original guarded loaders; paired frontend pin is stale relative to actual bindings.py. Repair008, not paper no-go."
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-0000000000000586",
-    "time_utc": "2026-10-10T22:29:15Z",
-    "physical4_7": "no process/AICore0/HBM2868,2866,2866,2862MiB",
-    "ordinary_available_bytes": 118082424832,
+    "operation": "exec-0000000000000594",
+    "time_utc": "2026-10-10T23:00:51Z",
+    "physical4_7": "no PID/AICore0/HBM2869,2866,2866,2862MiB",
+    "ordinary_available_KiB": 115269108,
     "not_reusable_for_future_admission": true
   },
   "history_terminals": [
@@ -810,24 +822,16 @@
     "decision": "Retain raw0581. On its terminal, verify own release then admit reviewed full SKVQ014 if fresh resources pass. Prepare KIVI same-image66/actual raw consumption according to terminal. No new one-sided peer profile."
   },
   "current_preparation_checkpoint": {
-    "path": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ006_002_SOFTWARE_AND_TASK_SUCCESSOR_20261011.json",
-    "calibration006": {
-      "operation": "exec-000000000000058c",
-      "tests": 43,
-      "source_files": 161,
-      "exit": 0
-    },
-    "writer002": {
-      "operation": "exec-000000000000058e",
-      "tests": 33,
-      "source_files": 181,
+    "path": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI007_CONSUMER_REPAIR_AND_SKVQ_READER001_20261011.json",
+    "reader001": {
+      "operation": "exec-0000000000000598",
+      "tests": 29,
+      "source_files": 204,
       "exit": 0,
-      "wall_seconds": 4.123
+      "seconds": 13.711,
+      "scope": "pure-stdlib actual-host source/software, not compiled or NPU"
     },
-    "task_inputs": {
-      "LongBench_v2": 503,
-      "GSM8K": 1319
-    },
+    "mixed007_status": "DO_NOT_RUN_007_CURRENT_CONSUMER_INTEGRATION_INCONCLUSIVE",
     "task_model_successor": "OFF_DEVICE_IMPLEMENTATION_PENDING",
     "paired_e2e": "UNRUN"
   }
