@@ -1,5 +1,26 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 01:03 UTC (supersedes earlier RUNNING/idle)
+
+Read ADAKV025_REGISTRATION_REPAIR_RUNNING_20261010.json first. New025 source
+materialization0070, full55+50 software0071 and audit materialization0072 passed.
+Actual four-device canary and REAL plugin.register passed N1 with exit0; source
+qualification retains the original inference_mode wrapper. This repairs024's
+registration seam, not full-model acceptance. Original024 failure stays intact.
+CURRENT0076 was authoritatively polled RUNNING; fresh server has reached engine
+initialization. Poll that same handle only. Model/450/oracle/E1/tasks pending.
+
+During the live run MAIN found a downstream host-reader gap: actual N1 graph
+raw Ref uses /adakv-graph-diagnostics guest alias. Sparse owner prepares a
+separate source-bound mount-translating consumer; do not edit025 or rerun NPU
+for a reader-only defect. E1 source/consumer compatibility is also pending.
+KIVI top-level Format API/bootstrap is independent BACKUP. Official input-v5
+source is reviewed;60 software and actual data acquisition still pending.
+No concurrent data-host launch: its frozen CPU allocation overlaps model.
+Protected0-3 now has foreign HYPIC3757221-24; untouched. 4-7 lease only0076.
+First Oct10 07:00:25Z / total Oct12 07:00:25Z unchanged; HugeTLB32GiB SPENT.
+No new performance/task result. Goal ACTIVE/unmet; normal Git push auth pending.
+
 
 ## Current execution — 2026-10-10 00:31 UTC (supersedes RUNNING below)
 

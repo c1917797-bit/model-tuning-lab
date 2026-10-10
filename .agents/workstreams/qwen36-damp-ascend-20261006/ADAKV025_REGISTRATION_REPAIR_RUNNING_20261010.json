@@ -1,0 +1,154 @@
+{
+  "schema": "qwen36.causal-stage-checkpoint/v1",
+  "observed_utc": "2026-10-10T01:03:09Z",
+  "status": "N1_REGISTER_VERIFIED_MODEL_RUNNING",
+  "goal": "ACTIVE_NOT_MET",
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "cause": "024 treated real torch.inference_mode context_decorator owner as foreign runner source; original N1 imported but never called plugin.register.",
+  "repair": "025 qualifies the exact installed single context wrapper and clone closure, retains decorated original call; short real N1 invokes actual plugin.register before any model allocation.",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/SOURCE_MANIFEST.json",
+    "sha256": "012edb318fc7fe0b6154ff5253b4dcf705fd77c0fa65c8e4f4aef1b3da4a8b60"
+  },
+  "software": {
+    "original_operation": "exec-0000000000000071",
+    "tests": 105,
+    "own": 55,
+    "audit": 50,
+    "exit": 0,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-025-001/RESULT.json",
+      "sha256": "8d5f78427c012398e4d50d6a881f7e145f5c651b633f7071cca4a4bb74fe9f09"
+    },
+    "scope": "software only, not NPU/model authority"
+  },
+  "real_N1": {
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001/candidate/CANARY_N1.json",
+      "sha256": "a61a363c5d72c214cbf59869dce59577ff138d6f6bfd10468690566ee4890ee7"
+    },
+    "child": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001/candidate/canary-N1-CHILD.json",
+      "sha256": "bdaa02c662fb083fa4332684bf92fc7e0505b4402e1e4de8a9b85438c3edca3e"
+    },
+    "exit_code": 0,
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "status": "REGISTER_RETURNED_BEFORE_MODEL",
+    "model_allocated": false
+  },
+  "current": {
+    "operation": "exec-0000000000000076",
+    "command": "/usr/bin/python3",
+    "args": [
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/host_once.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "012edb318fc7fe0b6154ff5253b4dcf705fd77c0fa65c8e4f4aef1b3da4a8b60",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-025-001/RESULT.json",
+      "--software-sha256",
+      "8d5f78427c012398e4d50d6a881f7e145f5c651b633f7071cca4a4bb74fe9f09",
+      "--audit-software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-025-001/AUDIT_SOFTWARE.json",
+      "--audit-software-sha256",
+      "a3eeda023cb93b260b6cb4ac6721a1ea2b87f3dc1dcaeb4bebdac671e6fbb2e4",
+      "--materialization",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-materialize-main-20261010-001/RESULT.json",
+      "--materialization-sha256",
+      "05544cd4c879ab8ea17b6a7bf9919ddc62a6f8e97b61f55f4a3905c789d57372",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-consume-014-main-017-001/RESULT.json",
+      "--component-sha256",
+      "e971e21a11fd81d4bc775fa6746f618956a7df8758529cb5e1b1c0374d0f29fa",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--cache-bytes",
+      "10737418240",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001",
+      "--port",
+      "8236"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001",
+    "owned_candidate_cid": "c247f4c29792ca8b34d1e4396c0d87dfe9b28b23b4759942afd14c51e3041750",
+    "model_result": null,
+    "whole_seconds": 5400,
+    "cleanup_included_seconds": 90
+  },
+  "originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_SOURCE_0070_ORIGINAL.json",
+      "bytes": 6445,
+      "sha256": "3deb1bb6b3006218abeb3c08969816f487e55708c1aa048af9d617be42283a99"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_SOFTWARE105_0071_ORIGINAL.json",
+      "bytes": 16051,
+      "sha256": "ae9fb06f242ef549bf31ae8db1ed11b4c597bef6cd0d9f17c5947b000df50bc0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_MATERIALIZATION_0072_ORIGINAL.json",
+      "bytes": 23520,
+      "sha256": "3227ecd5967758d0caa49d50d3410f18d8000359763a88c64753d477b293291f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_PREFLIGHT_0074_ORIGINAL.json",
+      "bytes": 17234,
+      "sha256": "3eac54c6cd89ec60df2044795f6bab7783fee8deee362c44776f0c57a30d10b4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_LAUNCH_0076_ORIGINAL.json",
+      "bytes": 3211,
+      "sha256": "3dfb4622417578d0c520922b91b8f50a3c9f677aca0eff16373eab00ce59dea0"
+    }
+  ],
+  "materialization": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-materialize-main-20261010-001/RESULT.json",
+    "sha256": "05544cd4c879ab8ea17b6a7bf9919ddc62a6f8e97b61f55f4a3905c789d57372",
+    "note": "0072 captured stdout truncated by configured output bound; complete immutable RESULT was separately read and SHA verified. Never call stdout full."
+  },
+  "new_consumer_gap": {
+    "status": "SOURCE_PROVED_PENDING_DERIVED_CONSUMER",
+    "cause": "consume_once.registration_evidence passes actual guest alias /adakv-graph-diagnostics/n1-precheck/... to host c.obj without OWNED.mounts translation",
+    "owner": "sparse_attention_ready_queue",
+    "action": "Freeze a separate derived consumer with actual owned mount and SHA-bound alias translation; do not edit running025 or repeat successful NPU solely for reader defect."
+  },
+  "queue": {
+    "CURRENT": "AdaKV025 live0076; poll same handle",
+    "NEXT": "AdaKV derived consumer and observer-OFF matched E1, actual model pending",
+    "BACKUP": "KIVI exact top-level format API/worker bootstrap source repair; no device permission",
+    "official_inputs": "v5 a2af993 source-reviewed,60 software and actual acquisition pending; no datasets/counts/tasks claimed"
+  },
+  "unchanged": {
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "first_cutoff_utc": "2026-10-10T07:00:25Z",
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "hugetlb_32GiB": "SPENT",
+    "native_math": true,
+    "numerical_gates": true,
+    "resource_gates": true,
+    "formal_pairs": 3,
+    "formal_output_tokens": 1024,
+    "final_max_tokens": 2048
+  },
+  "result_scope": {
+    "new_e2e": false,
+    "new_accuracy": false,
+    "accepted_nonhypic": false
+  }
+}
