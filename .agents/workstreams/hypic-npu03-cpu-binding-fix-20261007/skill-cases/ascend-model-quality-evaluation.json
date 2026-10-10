@@ -4,7 +4,7 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Independently audit full r13 and original-source r16 HYPIC 2048-token explicit-boundary quality pairs on physical NPU0-3 TP4, separating all-request quality from treatment activation",
+  "task": "Independently audit r13, r16 and repaired-source r19 HYPIC max-2048 explicit-boundary LongBench quality pairs on physical NPU0-3 TP4, separating all-request quality, per-request hot proof and full-suite adoption.",
   "executed_at_utc": "2026-10-10",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "303658f0a652ed392c875e58941c6b1d246552f7",
@@ -12,7 +12,7 @@
   "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01/ma; r9-r12 historical failures and terminal r13 same-identity 127x3 LongBench-v2 pair; Qwen3.6-27B BF16 TP4 physical NPU0-3, c8, natural-EOS 2048 output cap; default GSM8K/c32 ruler and short deterministic canary remain outside this case",
+  "environment_scope": "chicaihong01/ma; r9-r12 immutable activation failures, r13/r16 c8 LongBench pairs, and repaired-source r19 c32 LongBench 127x3 pair; Qwen3.6-27B BF16 TP4 physical NPU0-3, natural-EOS max-2048. R19 GSM8K c32 off-path baseline is running and paired safety is incomplete; no full Skill acceptance.",
   "observed": {
     "completed_scored_ids_in_read_only_snapshot": 162,
     "request_boundary_events_joinable": true,
@@ -103,6 +103,19 @@
     "r16_simple_truncation_explains_all_score_flips": false,
     "r16_same_source_performance_admitted_after_quality_failure": false,
     "r16_repair_or_causal_root_proven": false,
+    "r19_repaired_source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "r19_longbench_pair_evidence_valid": true,
+    "r19_longbench_correct_baseline_candidate": [227, 219],
+    "r19_longbench_correct_by_run_baseline_candidate": [[74, 77, 76], [73, 70, 76]],
+    "r19_longbench_delta_percentage_points": -2.099737532808399,
+    "r19_longbench_length_limit_baseline_candidate": [49, 67],
+    "r19_candidate_controller_exit": "hot-coverage failure after all 381 scored responses",
+    "r19_four_worker_hot_proved_scored_requests": [134, 381],
+    "r19_unproved_scored_requests": 247,
+    "r19_regressions_newly_length_limited_descriptive": [15, 23],
+    "r19_quality_decision": "REJECT_OR_QUALIFY",
+    "r19_quality_root_cause_proven": false,
+    "r19_gsm8k_paired_safety_complete": false,
     "main_skill_integrated": false
   },
   "evidence": [
@@ -225,10 +238,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r16_original_source_full_terminal.py",
       "sha256": "c527bd4e7a8e9cb67ea26899703f08bfc434335639c99e9f12b3f1ba27864ca2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_REPAIRED_C32_2048_PREREGISTRATION_20261010.json",
+      "sha256": "0a949a279dc75cffd20f2143320a56022bd4707c3a7018e626dc4b54e0d87722"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/r19_repaired_c32_longbench_audit.py",
+      "sha256": "4bcb73eba4bb825d3f39cfa98875a631f7cf5dad6c590927ac127b88034e6832"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_REPAIRED_C32_LONGBENCH_TERMINAL_AUDIT_20261010.md",
+      "sha256": "1a556b306f1bf24fdaa664b9c9b6b62d4d5fb6c3ad15c4899b992fa5e44ebb99"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. A new read-only source/runtime replay proves strict position-independent mode and 140 zero-start candidate materializations, so the non-strict combined-Prefill approximation was not observed and is not a supported explanation for r13 quality loss; numerical equivalence of the strict path is still unproven. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, but campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
-  "next_gate": "r16 original-source full 127x3 max-2048/c8 quality is independently valid but REJECT_OR_QUALIFY at 224/381 to 210/381 under its frozen stricter gate; its 3.6745pp LongBench-only decline is also below the 5.5118pp baseline repeat range used descriptively by the historical criterion, which is not an overall pass because GSM8K is absent. Aggregate hot coverage 364/381 is incomplete and per-request four-worker proof is unavailable. Do not use historical 1024/c32 success, r15 selected examples or r13 speed to override this. Integrate and replay main request-level proof wording, then validate the missing default LongBench-v2+GSM8K/c32 and deterministic canary conditions before upgrading this Skill. A repair needs a new preregistered one-variable same-identity control; do not rerun r13-r16 roots or claim a RoPE/GDN/cache cause without direct NPU evidence.",
+  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. A new read-only source/runtime replay proves strict position-independent mode and 140 zero-start candidate materializations, so the non-strict combined-Prefill approximation was not observed and is not a supported explanation for r13 quality loss; numerical equivalence of the strict path is still unproven. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, but campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit. R19 adds a valid same-source max-2048/c32 LongBench pair and exact short canary but quality regresses 227/381 to 219/381 (-2.0997pp), candidate length-limit rises 49 to 67, and the controller separately fails aggregate hot coverage. A post-hoc unique API/internal-ID join proves four-worker events for 134/381 scored requests; the other 247 are unproved, not proven cold. No technical root or full Skill acceptance is established; GSM8K remains unpaired.",
+  "next_gate": "Preserve r13/r16/r19 immutable negative results and their distinct source/concurrency identities. Poll r19 GSM8K baseline controller exec-0000000000000433 without restart; independently audit its 1319x3 rows and exact release, then run the frozen HYPIC-only arm only after fresh NPU0-3/8223 admission. GSM8K safety cannot overturn the LongBench rejection. Integrate and replay request-level mechanism wording before promoting the Skill. Any quality repair requires a prospectively frozen one-variable same-source pair; no RoPE/GDN/cache cause is proven.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
