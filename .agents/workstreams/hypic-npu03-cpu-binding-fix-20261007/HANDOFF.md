@@ -103,8 +103,8 @@ outside this task.
 2. Keep r13 positive performance and r13/r16 negative quality in separate
    source/ruler identities. Preserve the completed profiler and parser
    failure; do not use them to assign RoPE/GDN/cache causality.
-3. A technical repair must start with a prospective one-variable E2E
-   comparison: isolate max-2048 versus 1024 at fixed c8/source first,
+3. Use `HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md` to prepare the
+   next prospective one-variable E2E comparison: max-2048 versus 1024 at fixed c8/source,
    then concurrency if needed; 16/30 r16 regressions became newly
    length-limited, 14 did not. Keep full Skill acceptance partial
    until the default-ruler GSM8K/c32, deterministic canary and integration
