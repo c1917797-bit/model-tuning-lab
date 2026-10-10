@@ -1,0 +1,319 @@
+{
+  "schema": "kivi.local-mixed-host-preparation/v1",
+  "root": "C:/Users/Huawei/AppData/Local/Temp/kivi-mixed-host-bootstrap-20261011-008",
+  "remote_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-mixed-capture-bootstrap-v1-008",
+  "files": {
+    "release_core.py": {
+      "sha256": "a5d27c8945e21c88f5ba82e5b6f1f8c05c7252b68b7ea237b67d7aef7cae31e1",
+      "bytes": 25006
+    },
+    "test_next.py": {
+      "sha256": "70ee2dfa8d3e948834388420d171dce4c67ac890fc53403011f04a25404de29f",
+      "bytes": 17623
+    },
+    "matched_prompts.py": {
+      "sha256": "5128357be1344e669d8b09a8cf16efd061c14adb446fcb03da3af678387ff39a",
+      "bytes": 5900
+    },
+    "test_explicit_handoff.py": {
+      "sha256": "22b869964945d5d82071a27ea7487d1d25fb3a786ac7289473a928bf27cd30ba",
+      "bytes": 10163
+    },
+    "loader.py": {
+      "sha256": "f148a8cc1147d9f9cc9ed2053959efb777c380e2adaa33ce23e946890b43ac09",
+      "bytes": 8676
+    },
+    "explicit_provider.py": {
+      "sha256": "6d9d441b65db8c36f6bd907e19d1822990a812a8ebb88221c87f46bd04bbda0c",
+      "bytes": 19007
+    },
+    "input_lifecycle.py": {
+      "sha256": "efd5c30941b978dad26f9ec2aa7b5e7eb66b308edef502712704bc19dc7cd867",
+      "bytes": 14993
+    },
+    "consumer_namespace.py": {
+      "bytes": 2222,
+      "sha256": "e09bd197a3510273889d6f35a8fff19570261a8f3d3337d7bd4b64b1134d6e6b"
+    },
+    "budget.py": {
+      "sha256": "6438618435f5fe850f5323b94f1e078bd26f3373ef8b96a87ab89e812124af7b",
+      "bytes": 1209
+    },
+    "test_capture_admission.py": {
+      "sha256": "fa592621e332b739b479bf892a09188946965a2bd76fa265d00f3247cb802d1d",
+      "bytes": 9011
+    },
+    "finish_after_native.py": {
+      "sha256": "5e01da5dd8947a1cb787d7d2c94f6f7949d9c7d54144ba84b3444712c5f38eb1",
+      "bytes": 2047
+    },
+    "peer_lease.py": {
+      "sha256": "164e327d6d7e5e127ad90722fb93b162b847bba0cbe2ed58582dc1809291149a",
+      "bytes": 3929
+    },
+    "output_budget.py": {
+      "sha256": "ca97e67d5f28f0270e8c22cd3781a12a1d1646e3da71a80a33a10c14c321dd0e",
+      "bytes": 16356
+    },
+    "guest_probe.py": {
+      "sha256": "7432311d78c07a7448c8ddb752b8d9459a2eeda4876108e48ab3d48316c61d69",
+      "bytes": 4410
+    },
+    "ownership.py": {
+      "sha256": "80e6d2a11237baceaef1831e6c38bfbf9fc25acca47b72247ced53f003fc6559",
+      "bytes": 8789
+    },
+    "client.py": {
+      "sha256": "5d0e60f06e45d5c1ef9ee2d84a95242af27e076d38c4ed2a00e86d0858d566a3",
+      "bytes": 4029
+    },
+    "capture_receipt.py": {
+      "sha256": "7048bfa09c5a8dcc156da3edf8fd9ace954cc10ebee7ff9ffa15ed74b128918d",
+      "bytes": 4797
+    },
+    "safety_host.py": {
+      "sha256": "5cb9b4af26b77d0b5005f97448b030e0470d91bbd84885741b9efefe042d254f",
+      "bytes": 23956
+    },
+    "test_host.py": {
+      "sha256": "514f2a25b114abc1039e9acb3f4817897370f55694f91349d4a60e578657861d",
+      "bytes": 9762
+    },
+    "installer.py": {
+      "sha256": "536131653087de8f2daab16a65c3d5ce863e4ff7d74a8cf0eabb03aec620cedc",
+      "bytes": 43014
+    },
+    "runtime_boundary.py": {
+      "sha256": "cdcace265814e0a888e4421aedabd5b1908cf5ad110ee81c21895e01bd17a96c",
+      "bytes": 5530
+    },
+    "offline_consume.py": {
+      "sha256": "a37b704c209bc97c9ac5631d4b402fc14eebf51ab79f3845d5627931ce6a7e17",
+      "bytes": 7802
+    },
+    "consume_original_writer.py": {
+      "sha256": "26d680f232f8cd5a0afde9b21ccb64f4955428052352c93901a80f4bfc2150da",
+      "bytes": 14941
+    },
+    "consume_whole_cpu.py": {
+      "sha256": "3535642efbf50039f35cf65c5a61b36350e141b9c0ab0f9c7261a25aab3be243",
+      "bytes": 29803
+    },
+    "input_recipe.py": {
+      "sha256": "b557b57ac6b665e0c3d981c6f0174f4191112a13ad8c1061a8fa240cd6eaeda6",
+      "bytes": 1285
+    },
+    "test_framework_closure.py": {
+      "sha256": "68c3b809f7493d723afe93fd36c1a8cd77cadbfbee0d2d72c859c3fa9a512220",
+      "bytes": 25499
+    },
+    "software_host.py": {
+      "sha256": "7c1926355880213abd7ab5fcdd1fc66562c8b5b6b84fd14c514b15ebdc079250",
+      "bytes": 6748
+    },
+    "test_consumer_namespace.py": {
+      "sha256": "5c6de734ad3bc637b19bf16b584464ff74013dbee7d0662ed7458b38df719fea",
+      "bytes": 11827
+    },
+    "assemble.py": {
+      "sha256": "a7e29643fcb3ce5b8c655821c8d139630f84e9e3f1417b10246c66fe3390c579",
+      "bytes": 11132
+    },
+    "server_entry.py": {
+      "sha256": "546e66434240f2b09b9784e9931a35bbdcd3d26166bb6642c1b4ef8985ac14cf",
+      "bytes": 4926
+    },
+    "firstdecode_precondition.py": {
+      "sha256": "b0f2753f114ad2baae249f524064f889b04dd370cbaf637a550d4ac58217a7bc",
+      "bytes": 3565
+    },
+    "explicit_geometry.py": {
+      "sha256": "77b678af5eea524c59405d98a3681415810e2e77b7f8cf9cde9fd241b28d4157",
+      "bytes": 8484
+    },
+    "test_mixed_abi_consumer.py": {
+      "sha256": "a9842c4c9466a93617d9bb0e7b923034b7a79140e9da40001d660c4132b8407e",
+      "bytes": 4636
+    },
+    "test_publication_wire.py": {
+      "sha256": "e7528305a3c5ea8c9aab3079a8a162fc3971aa00800d1c773c377bac00866fa8",
+      "bytes": 16938
+    },
+    "host003_reference.py": {
+      "sha256": "da37951739e4a675f35837f5ba764eb19f074d39b99384478e62c23063a4f7ef",
+      "bytes": 14214
+    },
+    "resource_ledger.py": {
+      "sha256": "3776c130d9d5b4efdad35c64a2fe289d24fcdf87940288d08f9eaa5327c95dbc",
+      "bytes": 7847
+    },
+    "kivi_mixed_bootstrap.py": {
+      "sha256": "48cb955ff2e035ad416ed4dd05947c85eb97d9eb3a9b44ac22c2f983cd2e87c8",
+      "bytes": 12703
+    },
+    "config_bridge.py": {
+      "sha256": "bc98825d91745fb7b1815f22e24627ea3566dbb0c4fc3ba4468affe0bef3a2c2",
+      "bytes": 1754
+    },
+    "host_common.py": {
+      "sha256": "72d9c8d1523e8998094eb4ca9e2047e11dfef1026751f3d737925d46bab37813",
+      "bytes": 3254
+    },
+    "cann_python.py": {
+      "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104",
+      "bytes": 4503
+    },
+    "cpu_phase.py": {
+      "sha256": "0769eea709001eb6a79ed11885aa51cda5015a9ed36dfd32469393086a941bae",
+      "bytes": 7221
+    },
+    "cpu_entry.py": {
+      "sha256": "38fb956ff4ca75910f9d80e0f048ab089216868673e6289c5b06ac70cf9341a9",
+      "bytes": 2112
+    },
+    "client_stage.py": {
+      "sha256": "3d570bd09afce0b4218e13d4f4ea788fcb9f1f98adce5deda7a62984ce7f6796",
+      "bytes": 5708
+    },
+    "worker.py": {
+      "sha256": "51f9934e88f2b868fe32effd541e19cf65edaa882dad5f49900bc6120ba6dbd1",
+      "bytes": 17189
+    },
+    "native_config_v008.py": {
+      "sha256": "431f29ca7c6b62e880e782a2afb8d36f2e1dfd10179fe9c0ca525f655815f2ae",
+      "bytes": 10752
+    },
+    "runtime_owner.py": {
+      "sha256": "7d6d946872d372eb0b25c81d749e84c755149980ff7987f20cb2b7911b26118d",
+      "bytes": 11865
+    },
+    "model_contract.py": {
+      "sha256": "144d33cc3dfa47084496f058fb81d5649a1251c5e87b6df8897b5fdf77ad8722",
+      "bytes": 7744
+    },
+    "host_run.py": {
+      "sha256": "6a90d060119ca9e6f70c1462803265ef8b70c5b5faf32b67458bd7fc1e75200e",
+      "bytes": 14779
+    },
+    "native_config_adapter.py": {
+      "sha256": "6e9ba3c3a77f9103783c3acb92132dcdecf9c1389719f0e6732ce604d3c75716",
+      "bytes": 8475
+    },
+    "peer_inspector.py": {
+      "sha256": "ef6d7b9f0391b559cb55d5adec6c0aaf1f92b987a3201f72f7ecab9a2102b960",
+      "bytes": 1482
+    },
+    "test_owner_ref3.py": {
+      "sha256": "9f7c31fe872d8c22358cd578ae80f3c793ab8c770ed569af81c761ccf12e8962",
+      "bytes": 10808
+    },
+    "test_runtime_boundary.py": {
+      "sha256": "c8bb4d0060b830963ce048af824e4369307fc061d45621656f3589365ae73600",
+      "bytes": 12360
+    },
+    "stage_observer.py": {
+      "sha256": "cd957ae3b6e2303a0890e00dd3be178e473a1488636d4cb141f15c6649d5189b",
+      "bytes": 12257
+    },
+    "software_check.py": {
+      "sha256": "8d36e41c5bd2bca843c134655b347f8e79d0ad1e005668f688e2d69533443f3c",
+      "bytes": 3433
+    },
+    "prebind.py": {
+      "sha256": "fb98cb828319eed75de3d7be0bfe82c04404d9f91eb355431dc23dd6492a94bf",
+      "bytes": 8121
+    },
+    "prerequisite.py": {
+      "sha256": "a91f82094f3b9270b01af87da983e6ccfe2f8bc391aef9e9b129504309fdfc3e",
+      "bytes": 3144
+    },
+    "provider_independent.py": {
+      "sha256": "332b222442ace7ba90a2ed41cae66f0806dec3639d8711cac86609955afe6f9c",
+      "bytes": 11557
+    }
+  },
+  "software_tests_declared": 191,
+  "python_files": 57,
+  "source_predecessors": {
+    "producer018": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+      "bytes": 110307,
+      "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+    },
+    "whole022": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011/SOURCE_MANIFEST.json",
+      "bytes": 15242,
+      "sha256": "ba21cb0c57429333fd883f32381c570f2f7f0239bcc1c7981dc0e39708053a50"
+    },
+    "raw023": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+      "bytes": 11123,
+      "sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a"
+    },
+    "core002": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-mixed-capture-offline-source-v2-001/SOURCE_MANIFEST.json",
+      "bytes": 33966,
+      "sha256": "75bc370029ad75e3302109d2124fe7e05c40e042a084b797f29634b060c8fca7"
+    }
+  },
+  "frozen_ancestors_unchanged": true,
+  "scope": {
+    "eager": true,
+    "requests": 64,
+    "stages": 16,
+    "FA_pairs": 64,
+    "raw_frames": 320,
+    "whole_output_rows": 576,
+    "elements_per_row": 1536,
+    "selected_numeric_only": true,
+    "matched_performance": false,
+    "graph": false,
+    "tasks": false,
+    "scheduler_preemption_supported": false
+  },
+  "budget": {
+    "cache_bytes": 6442450944,
+    "capture_seconds": 5400,
+    "cpu_seconds": 43200,
+    "cleanup_each_seconds": 90,
+    "workspace_bytes": 171798691840,
+    "software_seconds": 240,
+    "software_cleanup_seconds": 90,
+    "portfolio_cutoff_epoch": 1791788425,
+    "budget_unchanged": true,
+    "CPU_budget_measured": false
+  },
+  "tests": {
+    "local": 190,
+    "same_image": 191,
+    "local_framework": false,
+    "local_actual_factory_projection": true,
+    "missing_one": "MAIN exact transitive reader factory to actual worker source handoff",
+    "local_original_receipt": "CAPTURE_LOCAL190_ORIGINAL_001.json"
+  },
+  "states": {
+    "local_tests": "PASS",
+    "same_image": "UNRUN",
+    "runtime_source_manifest": "ABSENT_UNTIL_EXACT_ONCE_ASSEMBLY",
+    "actual_firstdecode_full64": "REQUIRED_NOT_ASSERTED",
+    "mixed_capture": "UNRUN",
+    "offline_CPU": "UNRUN",
+    "whole": "UNRUN",
+    "deadline_admission": "CURRENT_FULL48600_FIT_NOT_ASSERTED"
+  },
+  "model_ready": false,
+  "performance_ready": false,
+  "run_authority": false,
+  "namespace008": {
+    "frozen007_prepared": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-mixed-capture-bootstrap-v1-007/PREPARED_MANIFEST.json",
+      "bytes": 10449,
+      "sha256": "1cecd6b0ba6c3929bb06eb2ea5b524b596cad91747265f304110f41a1c51f458"
+    },
+    "scope": "only isolated pure predecessor source imports; no runtime/math/budget/coverage changes",
+    "full_software_tests": 191,
+    "local_complete_tests": 190,
+    "one_MAIN_original_reader_factory_missing": true,
+    "actual_numerical_prerequisite": null
+  }
+}

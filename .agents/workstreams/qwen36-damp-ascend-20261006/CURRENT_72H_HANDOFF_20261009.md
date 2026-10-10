@@ -1,3 +1,11 @@
+## 2026-10-10T23:48:29Z — raw023 independent reference timed out and released; SKVQ014 full pipeline started
+
+- Read KIVI_RAW023_TIMEOUT_SKVQ014_DISPATCH_20261011.json. Actual0581 terminated exit1/5327.241s at bounded child time gate; full64 numerical verdict remains INCOMPLETE, not an algorithm failure. Keep valid018 capture and every023 original; no unchanged repeat. Independent vector writer with original scalar cross-checks is prepared off-device, not yet actual same-image/raw64 PASS.
+- Independent05a6 proved exact raw CPU stopped-retained/Pid0/noExec/noOOM/Devices[], physical4–7 no process and aggregate RAM/disk adequate. MAIN launched reviewed SKVQ014 full host as exec-00000000000005a7. Poll only05a7. RUNNING does not yet prove NPU/sample capture; full256x4096 calibration remains actual prerequisite to006fit/002writer/001reader/model.
+- KIVI008 actual05a0 verifies110 files/107 Python, capture314 and paired286 source closures. Actual05a4 verifies113 canonical archive files plus MST20/diff-check. These are namespace/pin repairs with unchanged math; same-image191/48 and actual NPU/mixed gates remain UNRUN. Old007 failures preserved.
+- B1screen004 unchanged local66/actual loader-chain audit found no extra definite wiring defect; target same-image66/raw64 still missing. Final-task draft repairs3 actual imports and optional raw_journal path. SKVQ model001 found missing actual N1 metadata before admission; new002 repairs it off-device. None is model/E2E/task PASS.
+- Physical0–3/external jobs untouched;32GiB HugeTLB authoritySPENT; cutoff1791788425 unchanged. Git HTTPS failure unchanged; local commit/archive is not a push. Diagnostics05a1 failed only at absent /usr/bin/ss after Git/NPU reads;05a2 used actual /usr/sbin/ss and completed orientation. Do not erase that partial failure.
+
 ## 2026-10-10T23:22:38Z — SKVQ reader001 software passed; KIVI007 integration failures caught before admission
 
 - Read KIVI007_CONSUMER_REPAIR_AND_SKVQ_READER001_20261011.json. Reader001 actual0598 passed29 software checks/source204; 23 canonical archive files are runtime-byte-exact (059b). No compiled/NPU/reader/model performance or accuracy PASS; it waits on actual014 capture ->006 fit ->002 writer. Actual model named-worker bridge continues off-device.

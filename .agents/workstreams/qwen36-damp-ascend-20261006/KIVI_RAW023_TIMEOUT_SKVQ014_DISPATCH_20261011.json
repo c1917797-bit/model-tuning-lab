@@ -1,0 +1,157 @@
+{
+  "schema": "paper-portfolio.actual-stage-transition/v1",
+  "updated_at_utc": "2026-10-10T23:48:29Z",
+  "goal": "ACTIVE_UNMET",
+  "portfolio_cutoff_epoch": 1791788425,
+  "physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "previous_goal_turn": "progress: actual008 source assembly and live0581 verified; not end-to-end acceptance",
+  "raw023": {
+    "operation": "exec-0000000000000581",
+    "exit_code": 1,
+    "duration_ms": 5327241,
+    "classification": "REFERENCE_OR_TEST_BUDGET_FAILURE",
+    "first_fault": "ValueError: bounded original child; never retry",
+    "numerical_verdict": "INCOMPLETE; no full64 PASS or numeric mismatch established",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v023-provenance-standalone-001/RAW_ENTRY_RESULT.json",
+      "bytes": 2668,
+      "sha256": "97be2ad465605c33c7f3b3b1c7183f36e39acc5665cad0eb5b216421654fdfe5"
+    },
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW023_0581_TIMEOUT_ORIGINAL_20261011.json",
+      "bytes": 12262,
+      "sha256": "f3505412b794b159c182ef687b4bdd7d7a26e1add3e9c060472b461cf45f6c8c"
+    },
+    "release_operation": "exec-00000000000005a6",
+    "owned_cid": "da8c661e640c271643175efb22a29082b0510691e80543dbe55c34d2144eda0f",
+    "stopped_retained_utc": "2026-10-10T23:46:19.2224774Z",
+    "Pid": 0,
+    "ExecIDs": null,
+    "OOMKilled": false,
+    "Devices": [],
+    "preserve_original018_capture": true,
+    "no_repeat_023": true,
+    "next": "Independent vector reference and scalar byte-equivalence checks off-device; actual raw new source only after full review. No NPU recapture for reference budget failure.",
+    "release_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_RAW023_RELEASE_05A6_ORIGINAL_20261011.json",
+      "bytes": 29184,
+      "sha256": "ab647d288e28b991abad09bd11acb6f9ff83ea94d006fba6ee487ffabda97e38"
+    }
+  },
+  "skvq014": {
+    "operation": "exec-00000000000005a7",
+    "state": "RUNNING_VERIFIED_ORIGINAL_HANDLE",
+    "actual_NPU_or_samples_not_yet_verified": true,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=7200:7200",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/MAIN_HOST.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-014-main-20261010-001"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-014-main-20261010-001",
+    "fresh_admission_operation": "exec-00000000000005a6",
+    "source_software": "0582 actual155/source143",
+    "all9TRAIN_mounts": "0583 PASS",
+    "scope": "full256x4096 baseline calibration capture, not quantized numerical, E2E or task score",
+    "next": "Poll05a7; on terminal retain original and independently verify exact own release. Success feeds cal006; failure returns to source-supported repair. No duplicate fullhost."
+  },
+  "kivi008": {
+    "assembly_operation": "exec-00000000000005a0",
+    "runtime_files": 110,
+    "py_compile": 107,
+    "capture_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-mixed-capture-bootstrap-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 140929,
+      "sha256": "2dc38cc5b06674d0c8efb218363870244862bd963c2bf223a9b3ab57356fce0c"
+    },
+    "capture_sources": 314,
+    "paired_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-c16-mixed1024-bootstrap-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 145194,
+      "sha256": "a7c982d74d6aa8c6f9938fc3ad40750e260a4bfb733510f40ef030991d77a213"
+    },
+    "paired_sources": 286,
+    "archive_operation": "exec-00000000000005a4",
+    "archive_exact_files": 113,
+    "canonical_archives": [
+      "projects/qwen36-paper-portfolio/kivi/mixed_capture_bootstrap_v008",
+      "projects/qwen36-paper-portfolio/kivi/matched_c16_bootstrap_v008"
+    ],
+    "same_image191_and48": "UNRUN",
+    "NPU": false,
+    "role": "namespace/pin integration repair only; all math/thresholds unchanged; archives retain original runtime paths"
+  },
+  "preparation": {
+    "B1screen004": "Read-only actual source chain audit and local66 PASS; no additional identified wiring defect; same-image66/full64 predecessor still missing",
+    "SKVQ_model": "001 source-only packet found missing native_format_patch_chain before N1; never admitted. New002 off-device repair. Actual014/cal006/writer002/reader001 prerequisites missing.",
+    "final_task": "Task-only draft fixes actual3 import matches and absent raw_journal in capture_raw=False path; full2048 domain and actual task owner gates remain pending"
+  },
+  "lessons": {
+    "reference_timeout": "A source-correct independent oracle must also fit measured production-scale validation cost. CPU-only timeout is not candidate numeric failure; reuse immutable valid acquisition and repair the oracle implementation without relaxing coverage.",
+    "runtime_cost_boundary": "Single-layer synthetic/local timings are diagnostic estimates, not target full64 PASS. Preserve scalar cross-checks before replacing only independent reference work.",
+    "dispatch": "A failed numerical consumer yielded to another reviewed paper after exact owned release and fresh resource checks; Git/report did not gate new dispatch.",
+    "source_closure": "Check real aggregate consumers and metadata fields, not only file hashes/helper tests."
+  },
+  "orientation": {
+    "partial_05a1": "Git/NPU/container evidence obtained; aggregate exit1 because guessed /usr/bin/ss is absent. No NPU side effects.",
+    "rest_05a2": "Resolved /usr/sbin/ss; ports/memory/task/HANDOFF read completed0.",
+    "fresh_05a6": "Owned raw CPU released; physical4-7 no process; MemAvailable118108917760; cache free526724591616; no8250; next output absent.",
+    "HugeTLB32GiB": "SPENT; no new release",
+    "Git": "known previous HTTPS auth failure; no new push result claimed"
+  },
+  "originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI008_SOURCE_ASSEMBLY_05A0_ORIGINAL_20261011.json",
+      "bytes": 75959,
+      "sha256": "44771ac7cc3b0d2ec4277d9b9016498444f75e3983f639cd4e0b456e0286d16f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_ORIENTATION_PARTIAL_05A1_ORIGINAL_20261011.json",
+      "bytes": 35490,
+      "sha256": "6f62e3c5986c248889ed23ebf5ce23699165fcd516370ec5df2fe969c32fa356"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_ORIENTATION_REST_05A2_ORIGINAL_20261011.json",
+      "bytes": 19256,
+      "sha256": "8572b9a96b8f33bcfd04c1ffae295f61e4bc39e975cf5b33f7e114a014f49f1a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI008_ARCHIVE_05A4_ORIGINAL_20261011.json",
+      "bytes": 100181,
+      "sha256": "b27f5f22acaa749b06d4ab3b45c7b2b8fa72d75140f731cb8190972875acbfbd"
+    }
+  ],
+  "no_new_E2E_or_task_PASS": true,
+  "archive_formatting": {
+    "original_operation": "exec-00000000000005aa",
+    "default_cached_check": "FAILED:21 new blank-line-at-EOF warnings, all inside byte-exact frozen008 archives",
+    "decision": "Preserve exact source identities. Apply command-scoped blank-at-EOF exception only to these two archived-source pathspecs; ordinary checks remain unchanged for workstream files. No runtime, numerical, safety or performance threshold changed.",
+    "no_global_git_config_change": true,
+    "source_hashes_unchanged": true
+  }
+}
