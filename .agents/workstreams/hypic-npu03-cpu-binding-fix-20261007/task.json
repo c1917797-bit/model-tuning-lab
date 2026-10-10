@@ -227,15 +227,7 @@
     "resource_limit": "physical NPU0-3 and port 8223 only; never NPU4-7; do not stop or modify foreign work",
     "retry_budget": "one attempt; no retry6 without fresh explicit authorization"
   },
-  "active_attempt": {
-    "campaign": "cache10r19-c32-longbench",
-    "arm": "no-cache",
-    "controller_operation": "exec-000000000000032c",
-    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-full-baseline",
-    "state": "running after fresh physical NPU0-3 and port 8223 idle proof; 2026-10-10 11:00 UTC root stage service-starting; poll the same controller and immutable root",
-    "preregistration": "HYPIC_R19_REPAIRED_C32_2048_PREREGISTRATION_20261010.json",
-    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22"
-  },
+  "active_attempt": null,
   "r18_candidate_terminal": {
     "campaign": "cache10r18-c32-longbench",
     "arm": "hypic-only",
@@ -1150,12 +1142,24 @@
     "report": "HYPIC_R19_BASELINE_TERMINAL_AUDIT_20261010.md",
     "paired_quality_decision": "pending-candidate"
   },
-  "r19_repaired_longbench_candidate_running": {
+  "r19_repaired_longbench_candidate_terminal": {
     "controller_operation": "exec-0000000000000392",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-full-hypic",
     "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
     "preflight": "127x3 c32 max-2048 offline check and fresh physical NPU0-3/8223 idle admission passed",
-    "state": "running; service starting at 2026-10-10T12:17:10Z"
+    "state": "terminal at 2026-10-10T13:43:17Z after 127 samples/381 scored responses; controller exit 1 due scored boundary/hot coverage shortfall; independent paired audit valid; exact owned release",
+    "scored_responses": 381,
+    "correct": 219,
+    "correct_by_repeat": [73, 70, 76],
+    "length_limit": 67,
+    "aggregate_verified_hot_requests": 134,
+    "clean_guard_samples": 997,
+    "arm_result_sha256": "c1b7283c8d46ffb330af3be35232703d9b935819813a68288eb02b0608abdb74",
+    "paired_audit_operation": "exec-00000000000003f6",
+    "paired_audit": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r19-c32-2048-longbench-paired-audit.json",
+    "paired_audit_sha256": "40ce887336be3446aa87a8e552fb50d366234fc10006ad5a3140f3dc0df16d9b",
+    "quality_decision": "REJECT_OR_QUALIFY",
+    "report": "HYPIC_R19_REPAIRED_C32_LONGBENCH_TERMINAL_AUDIT_20261010.md"
   },
-  "next_action": "Poll r19 repaired-source 2048/c32 LongBench HYPIC-only controller exec-0000000000000392 and its immutable candidate root. Do not restart for slow progress or observation timeout. On terminal independently audit the full candidate and paired 127x3 quality against the already valid r19 no-cache root. Then run the frozen GSM8K off-path pair when freshly admitted on physical NPU0-3. Do not reuse r18 roots or repeat validated historical performance. Never use NPU4-7 or stop external work; GitHub/main are not synchronized."
+  "next_action": "R19 repaired-source LongBench pair is terminal and independently audited: 227/381 to 219/381 (-2.0997 pp), quality REJECT_OR_QUALIFY, separate aggregate hot shortfall. Do not rerun immutable roots. Localize differences read-only from paired rows; complete frozen GSM8K off-path safety pair only with fresh physical NPU0-3/8223 admission. A new bounded repair requires a prospectively frozen same-source pair. Do not repeat validated historical performance, use NPU4-7, stop external work, or claim GitHub/main sync."
 }
