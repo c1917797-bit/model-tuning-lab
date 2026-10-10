@@ -1132,13 +1132,26 @@
     "controller": "r19_c32_gsm8k_adapter.py",
     "independent_auditor": "r19_c32_gsm8k_audit.py",
     "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "state": "no-cache controller exec-0000000000000433 terminal and independently audited; HYPIC-only controller exec-00000000000004a3 running under the same frozen source and ruler",
+    "state": "both arms terminal; candidate-only and paired independent audits passed; off-path GSM8K quality PASS, in-path LongBench quality remains REJECT_OR_QUALIFY",
     "baseline_terminal_report": "HYPIC_R19_GSM8K_BASELINE_TERMINAL_AUDIT_20261010.md",
     "baseline_independent_audit_operation": "exec-00000000000004a0",
     "baseline_arm_result_sha256": "03a2093873b2dbf3a0f675c7d0d47d83cadd0389192e10fb491ca03525ece897",
     "baseline_correct_by_run": [1280, 1274, 1284],
     "baseline_length_limit_by_run": [10, 11, 7],
-    "baseline_clean_guard_samples": 991
+    "baseline_clean_guard_samples": 991,
+    "candidate_controller_operation": "exec-00000000000004a3",
+    "candidate_controller_exit_code": 0,
+    "candidate_independent_audit_operation": "exec-0000000000000510",
+    "paired_independent_audit_operation": "exec-0000000000000512",
+    "paired_audit": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r19-c32-2048-gsm8k-paired-audit.json",
+    "paired_audit_sha256": "496f1dfacb3c3a8dd03f8ee07368fb142b432498c0ee5dbb5722e1d4f85fd187",
+    "candidate_arm_result_sha256": "3814b62c948bdc275cc3ef221678191c1160b97dbe2f7907c545f89f108dfa9b",
+    "candidate_correct_by_run": [1281, 1279, 1280],
+    "candidate_length_limit_by_run": [6, 11, 10],
+    "candidate_clean_guard_samples": 990,
+    "off_path_quality_decision": "PASS",
+    "in_path_longbench_quality_decision": "REJECT_OR_QUALIFY",
+    "terminal_report": "HYPIC_R19_GSM8K_PAIR_TERMINAL_AUDIT_20261010.md"
   },
   "r19_repaired_longbench_baseline_terminal": {
     "controller_operation": "exec-000000000000032c",
@@ -1175,5 +1188,5 @@
     "quality_decision": "REJECT_OR_QUALIFY",
     "report": "HYPIC_R19_REPAIRED_C32_LONGBENCH_TERMINAL_AUDIT_20261010.md"
   },
-  "next_action": "Poll frozen r19 GSM8K HYPIC-only controller exec-00000000000004a3 and immutable root; never restart while live. On terminal, independently audit 1319x3, source, guard, exact owned release, then run the frozen paired GSM8K auditor once. R19 LongBench remains REJECT_OR_QUALIFY at 227/381 to 219/381; GSM8K cannot override it. Keep read-only discrepancy localization separate; any new repair requires a prospective same-source pair. Do not repeat validated historical performance, use NPU4-7, stop external work, or claim GitHub/main sync."
+  "next_action": "Both r19 GSM8K arms and the paired off-path audit are terminal and immutable: PASS at 3838/3957 to 3840/3957. R19 explicit-segment LongBench remains REJECT_OR_QUALIFY at 227/381 to 219/381; GSM8K cannot override it. Narrow the in-path early-response divergence and cache/scheduler hypotheses from existing evidence, then freeze one bounded prospective source-matched repair only if justified. Do not repeat validated historical performance, use NPU4-7, stop external work, or claim GitHub/main sync."
 }
