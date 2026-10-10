@@ -1098,7 +1098,7 @@
     "longbench_independent_auditor": "r18_c32_longbench_audit.py",
     "offline_checks": "both-arm no-device configuration checks and 127 workstream unit tests passed",
     "device_state": "LongBench no-cache baseline controller exec-00000000000001d1 running",
-    "gsm8k_controller_and_auditor": "frozen locally at c0117fc9; both-arm offline checks and one-switch/dataset checks passed; no device run yet",
+    "gsm8k_controller_and_auditor": "frozen locally at c0117fc9 with pre-device test-hash amendment d787abf5; 130 workstream tests, both-arm offline checks and one-switch/dataset checks passed; no device run yet",
     "full_quality_decision": "not-yet-measured"
   },
   "next_action": "Poll only the live original-source 2048/c32 LongBench no-cache controller exec-00000000000001d1 and its immutable baseline root; never restart on slow progress or observation timeout. At terminal state audit complete 127x3 rows, source identity, short canary, scored c32 wave, continuous physical NPU0-3 isolation and exact owned release. Only then admit the HYPIC-only arm on a new root after fresh physical NPU0-3 and port 8223 idle proof. GSM8K controller/auditor/preregistration are frozen locally at c0117fc9, but no device run has started; admit its baseline and candidate serially after LongBench pair audit. Keep deployment quality separate from per-request mechanism attribution. Do not rerun r13-r17 roots, splice later-source speed, run isolated GDN, use NPU4-7 or stop external work. Match original-source performance only if quality-admissible. GitHub HTTPS authentication is unavailable; do not claim remote/main sync or repeat unchanged failed push."
