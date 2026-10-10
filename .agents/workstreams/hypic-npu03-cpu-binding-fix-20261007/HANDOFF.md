@@ -2,7 +2,8 @@
 
 ## 0. Status
 
-- r17 cap-1024/c8 original-source diagnostic is preregistered in `HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json`; both-arm/auditor offline checks and 124 tests passed. Baseline controller `exec-000000000000012b` is live on its new immutable root; poll this handle, never restart on slow progress. At terminal state independently audit 127×3 and exact release before considering HYPIC-only 127×3. r17 is neither historical 1024/c32 nor current 2048 Skill acceptance; the prior 04:42:44Z target was missed.
+- r17 cap-1024/c8 original-source diagnostic is preregistered in `HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json`; both-arm/auditor offline checks and 124 tests passed. No-cache controller `exec-000000000000012b` exited 0 after 127/127 samples and 381/381 responses; independent `--baseline-only` audit `exec-0000000000000154` passed 179/381 correct, 912 clean guard samples, source/score/hash identity and exact owned release. Contract SHA256 `195f7b5f64ab99df4e5e748c57b653b9a942f4e738231a8f348c7d5b55c11df8`; arm-result SHA256 `72627b63788ff9397ba363e62370470aaa0c2a3a531bebca1c91ae3f2c4c64a5`. Do not rerun this baseline.
+- After fresh physical NPU0–3 and port 8223 idle proof, HYPIC-only controller `exec-0000000000000158` started on its own immutable root. Poll that exact handle; do not restart on slow progress or observation timeout. After terminal state run `python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_r17_cap1024_full.py` for the paired independent audit. r17 is neither historical 1024/c32 nor current 2048 Skill acceptance; the prior 04:42:44Z target was missed.
 - r16 original-source full 2048/c8 quality pair is terminal and
   independently audited on physical NPU0–3: 224/381 no-cache →
   210/381 HYPIC (−3.6745 pp), `REJECT_OR_QUALIFY`; aggregate hot

@@ -229,10 +229,25 @@
   },
   "active_attempt": {
     "campaign": "cache10r17-cap1024",
-    "arm": "no-cache",
+    "arm": "hypic-only",
+    "controller_operation": "exec-0000000000000158",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r17-cap1024-full-hypic",
+    "state": "running; launched after independently valid baseline and fresh physical NPU0-3 plus port 8223 idle proof"
+  },
+  "r17_baseline_terminal": {
     "controller_operation": "exec-000000000000012b",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r17-cap1024-full-baseline",
-    "state": "running; first immutable progress marker service-starting at 2026-10-10T05:00:42Z"
+    "controller_exit_code": 0,
+    "independent_audit_operation": "exec-0000000000000154",
+    "independent_audit_valid": true,
+    "completed_samples": 127,
+    "scored_rows": 381,
+    "correct": 179,
+    "clean_guard_samples": 912,
+    "contract_sha256": "195f7b5f64ab99df4e5e748c57b653b9a942f4e738231a8f348c7d5b55c11df8",
+    "arm_result_sha256": "72627b63788ff9397ba363e62370470aaa0c2a3a531bebca1c91ae3f2c4c64a5",
+    "exact_owned_release": true,
+    "scope": "1024-token/c8 LongBench-v2 diagnostic baseline only; no paired quality conclusion"
   },
   "goal_horizons": {
     "long_term": "Give all 29 exact-main Skills representative real-task acceptance, evidence provenance and replayable regressions; integrate reviewed results to main/remote when authorized.",
@@ -1046,7 +1061,7 @@
   },
   "r17_cap_isolation_design": {
     "document": "HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md",
-    "state": "baseline-controller-running",
+    "state": "candidate-controller-running",
     "controller_started": true,
     "scientific_scope": "diagnostic of 2048 versus 1024 output cap at fixed c8 and original source; not historical 1024/c32 reproduction or current 2048 Skill acceptance",
     "preregistration": "HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json",
@@ -1060,5 +1075,5 @@
     "device_run_admitted": true,
     "offline_controller_and_independent_auditor_validated": true
   },
-  "next_action": "Poll only r17 no-cache controller exec-000000000000012b and its immutable baseline root while it is live; never restart on slow progress or a gateway observation timeout. At terminal state independently audit 127 samples/381 scored responses, source identity, continuous physical NPU0-3 isolation and exact owned release using audit_r17_cap1024_full.py --baseline-only. Only after a valid baseline and fresh actual NPU0-3 plus port 8223 idle proof launch the frozen hypic-only root; then run the paired independent audit. r17 1024/c8 is cap-sensitivity diagnostic only, not historical 1024/c32 or current 2048 Skill acceptance. Preserve r13-r16 roots and decisions, do not splice r13 speed into r16 quality, do not run isolated GDN, never use NPU4-7 or stop external work. GitHub HTTPS authentication is unavailable; do not claim remote/main sync or repeat unchanged failed push."
+  "next_action": "Poll only r17 hypic-only controller exec-0000000000000158 and its immutable candidate root while it is live; never restart on slow progress or a gateway observation timeout. At terminal state independently audit both frozen 127-sample/381-response arms with audit_r17_cap1024_full.py, including source identity, all-request score, aggregate activation limitation, continuous physical NPU0-3 isolation and exact owned release. The no-cache baseline is terminal and independently valid; do not rerun it. r17 1024/c8 is cap-sensitivity diagnostic only, not historical 1024/c32 or current 2048 Skill acceptance. Preserve r13-r16 roots and decisions, do not splice r13 speed into r16 quality, do not run isolated GDN, never use NPU4-7 or stop external work. GitHub HTTPS authentication is unavailable; do not claim remote/main sync or repeat unchanged failed push."
 }
