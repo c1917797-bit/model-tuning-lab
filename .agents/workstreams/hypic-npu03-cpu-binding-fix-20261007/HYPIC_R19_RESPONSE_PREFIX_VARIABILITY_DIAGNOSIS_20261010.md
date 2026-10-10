@@ -31,6 +31,29 @@ all stopped naturally with the correct answer D and whose three HYPIC runs
 all hit the 2048-token cap and were scored A, the matched cross-arm prefixes
 were 339, 3, and 401 characters, respectively.
 
+An additional read-only cross-tab joins all 381 matched scored rows to
+`worker_hot_request_verified` by the scored API request ID plus the exact
+eight-hex internal suffix, requiring four distinct worker PIDs for the
+`proved-hot` label. It then intersects paired correctness with the
+candidate's recorded finish reason:
+
+| Paired outcome | Proved-hot: candidate length / stop | Unproved: candidate length / stop |
+| --- | ---: | ---: |
+| Both correct | 2 / 73 | 2 / 127 |
+| Control wrong, HYPIC correct | 0 / 4 | 3 / 8 |
+| Control correct, HYPIC wrong | 7 / 1 | 9 / 6 |
+| Both wrong | 13 / 34 | 31 / 61 |
+
+The rows sum to 134 proved-hot and 247 unproved requests, matching the frozen
+audit; 16/23 paired losses hit the candidate length cap, including 7/8
+proved-hot losses. Sample 059's first scored request had four-worker hot proof,
+while its other two scored requests were unproved; all three were wrong and
+length-limited. Thus the observed wrong-and-length-limited pattern is not
+confined to the unproved stratum. These post-hoc, outcome-selected groups
+cannot establish whether truncation caused the wrong answer, whether hot
+execution caused early response divergence, or whether unproved requests were
+actually cold.
+
 For a separate post-hoc stratum check, join each candidate scored API request
 ID to `worker_hot_request_verified` internal IDs by removing their eight-hex
 suffix and require four distinct worker PIDs. This reproduces 134/381
