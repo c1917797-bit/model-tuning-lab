@@ -2,8 +2,9 @@
 
 ## 0. Status
 
+- r17 original-source cap-1024/c8 diagnostic is terminal and independently audited. Baseline 179/381 versus HYPIC 174/381 (−1.3123 pp); 377/381 aggregate hot, candidate controller exit 1 on the frozen coverage gate, but complete all-request quality evidence, clean physical NPU0–3 isolation, and exact owned release. The diagnostic quality decision is `REJECT_OR_QUALIFY`; this neither changes r16 nor establishes historical 1024/c32 or current 2048/c32 acceptance. See `HYPIC_R17_CAP1024_TERMINAL_AUDIT_20261010.md`; immutable audit SHA256 `493f9773d31a49e4f0b7e9c7ba73ea12e9722b4a7409e95c5ea05965b12853b3`. Do not rerun either r17 root. Next freeze original-source 2048/c32 explicit-segment paired LongBench-v2 and GSM8K; do not splice later-source speed or off-path clean2 quality.
 - r17 cap-1024/c8 original-source diagnostic is preregistered in `HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json`; both-arm/auditor offline checks and 124 tests passed. No-cache controller `exec-000000000000012b` exited 0 after 127/127 samples and 381/381 responses; independent `--baseline-only` audit `exec-0000000000000154` passed 179/381 correct, 912 clean guard samples, source/score/hash identity and exact owned release. Contract SHA256 `195f7b5f64ab99df4e5e748c57b653b9a942f4e738231a8f348c7d5b55c11df8`; arm-result SHA256 `72627b63788ff9397ba363e62370470aaa0c2a3a531bebca1c91ae3f2c4c64a5`. Do not rerun this baseline.
-- After fresh physical NPU0–3 and port 8223 idle proof, HYPIC-only controller `exec-0000000000000158` started on its own immutable root. Poll that exact handle; do not restart on slow progress or observation timeout. After terminal state run `python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_r17_cap1024_full.py` for the paired independent audit. r17 is neither historical 1024/c32 nor current 2048 Skill acceptance; the prior 04:42:44Z target was missed.
+- After fresh physical NPU0–3 and port 8223 idle proof, HYPIC-only controller `exec-0000000000000158` ran on its own immutable root. It is terminal; independent paired audit `exec-0000000000000194` passed. r17 is neither historical 1024/c32 nor current 2048 Skill acceptance; the prior 04:42:44Z target was missed.
 - r16 original-source full 2048/c8 quality pair is terminal and
   independently audited on physical NPU0–3: 224/381 no-cache →
   210/381 HYPIC (−3.6745 pp), `REJECT_OR_QUALIFY`; aggregate hot
@@ -89,28 +90,27 @@ the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 4. Current Action
 
-Do not relaunch frozen r13–r16 quality, matched-performance, Prefill,
+Do not relaunch frozen r13–r17 quality, matched-performance, Prefill,
 Decode or isolated GDN phases. r13 is positive performance and
-negative quality under `c12060c`; r16 is negative quality under
-original `3ad0967`. Keep identities and decisions separate. Archive
-the r16 case, run repository/Skill regressions, and require a new
-single-variable same-identity control before any technical repair
-claim. No CANN/HCCL/GDN quality root cause is proven. NPU4–7 remain
-outside this task.
+negative quality under `c12060c`; r16 and r17 are negative quality
+under original `3ad0967` at distinct 2048/c8 and 1024/c8 rulers. Keep
+identities and decisions separate. Next freeze the missing original-source
+2048/c32 explicit-segment LongBench-v2 and GSM8K pair; do not add a new
+operator detour. No CANN/HCCL/GDN quality root cause is proven. NPU4–7
+remain outside this task.
 
 ## 5. Next Actions
 
-1. Replay the r16 independent audit, exact raw-hash checks, updated quality
-   Skill case, focused regressions and full Maintainer Skill Tree validator.
+1. Validate and checkpoint the r17 terminal audit, exact raw hashes, focused
+   regressions and full Maintainer Skill Tree validator.
 2. Keep r13 positive performance and r13/r16 negative quality in separate
    source/ruler identities. Preserve the completed profiler and parser
    failure; do not use them to assign RoPE/GDN/cache causality.
-3. Use `HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md` to prepare the
-   next prospective one-variable E2E comparison: max-2048 versus 1024 at fixed c8/source,
-   then concurrency if needed; 16/30 r16 regressions became newly
-   length-limited, 14 did not. Keep full Skill acceptance partial
-   until the default-ruler GSM8K/c32, deterministic canary and integration
-   gates are actually met; do not relaunch old roots.
+3. Prospectively freeze a new 2048/c32 original-monkeypatch identity with
+   explicit LongBench-v2 boundaries, matching GSM8K, deterministic canary,
+   c32 capacity proof, full paired quality, uninterrupted isolation and exact
+   release. Keep full Skill acceptance partial until those and same-source
+   performance/integration gates are actually met; do not relaunch old roots.
 4. Commit only a reviewed coherent checkpoint. Push only when authentication
    works and independently verify the live remote ref.
 
