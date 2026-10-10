@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 import os
@@ -134,6 +135,32 @@ def hashed_json(path: Path, sha256: str) -> dict:
     return json.loads(raw)
 
 
+def quality_request_payload_shape(path: Path) -> tuple[set[str], bool]:
+    """Inspect the actual request_one payload, not a historical decision label."""
+    module = ast.parse(path.read_text(encoding="utf-8"))
+    for function in module.body:
+        if isinstance(function, ast.FunctionDef) and function.name == "request_one":
+            for statement in function.body:
+                if not isinstance(statement, ast.Assign):
+                    continue
+                if not any(isinstance(target, ast.Name) and target.id == "payload"
+                           for target in statement.targets):
+                    continue
+                expect(isinstance(statement.value, ast.Dict),
+                       f"request payload is not a literal dict: {path}")
+                payload = statement.value
+                keys = {key.value for key in payload.keys
+                        if isinstance(key, ast.Constant)
+                        and isinstance(key.value, str)}
+                has_segment_ends = any(
+                    isinstance(node, ast.Constant)
+                    and node.value == "hypic_segment_ends"
+                    for node in ast.walk(payload)
+                )
+                return keys, has_segment_ends
+    raise RuntimeError(f"request_one payload not found: {path}")
+
+
 def classify_r13_quality(audit: dict) -> dict:
     baseline = audit["baseline"]
     candidate = audit["candidate"]
@@ -177,6 +204,18 @@ def main() -> int:
     expect(hashlib.sha256((REPO / SKILL_PATH).read_bytes()).hexdigest()
            == BRANCH_SKILL_WORKTREE_SHA256,
            "branch Skill follow-up worktree revision changed")
+
+    historical_keys, historical_segments = quality_request_payload_shape(
+        REPO / ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/"
+        "hypic_quality_eval.py"
+    )
+    explicit_keys, explicit_segments = quality_request_payload_shape(
+        HERE / "hotpath_quality_full.py"
+    )
+    expect("messages" in historical_keys and "vllm_xargs" not in historical_keys
+           and not historical_segments and "messages" in explicit_keys
+           and "vllm_xargs" in explicit_keys and explicit_segments,
+           "historical natural quality and current explicit-segment payloads drifted")
 
     perf = hashed_json(PERFORMANCE, PERFORMANCE_SHA)
     expect(perf["all_six_units_valid"] is True
@@ -500,6 +539,13 @@ def main() -> int:
                and not (attempt_root / "hypic-only/performance.json").exists(),
                "environmental retry unexpectedly contains scored performance artifacts")
     case = json.loads((HERE / "skill-cases/paper-to-ascend-reproduction.json").read_text())
+    expect(case["historical_quality_request_contract"]["explicit_segment_ends_sent"]
+           is False
+           and case["historical_quality_request_contract"]["quality_hotpath_proven"]
+           is False
+           and case["current_explicit_quality_request_contract"]
+           ["explicit_segment_ends_sent"] is True,
+           "Skill case overstates historical quality-path attribution")
     expect(case["r13_performance_retry4"]["classification"] ==
            "environmental mid-run isolation failure; not a HYPIC performance result"
            and case["r13_performance_retry4"]["successful_responses"] == 16
@@ -558,6 +604,8 @@ def main() -> int:
         "historical_performance_units": 6,
         "natural_quality_units": 12,
         "natural_quality_worker_hot_pids": 0,
+        "historical_quality_explicit_segment_ends_sent": historical_segments,
+        "current_quality_explicit_segment_ends_sent": explicit_segments,
         "r12_scored": 57,
         "r12_four_worker_hot": 52,
         "r13_quality_pair_complete": r13_result["quality_pair_complete"],

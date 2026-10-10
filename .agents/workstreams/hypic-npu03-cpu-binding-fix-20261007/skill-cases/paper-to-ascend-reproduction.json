@@ -43,7 +43,19 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reproduction_case.py",
-      "sha256": "06b675e83b8e78dd59049b3c549818e7a2f427ede321c4973696e6b079a70d4a"
+      "sha256": "115ad47e3ff13d037086932b544e50b3369930ed1819291c0d5d7e320fccde61"
+    },
+    {
+      "path": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py",
+      "sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py",
+      "sha256": "8ee34e61635731038df4312763ca2cac72b31578980a24539ca442fe7979c06d"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md",
+      "sha256": "1501390e23c5ae1f11ddbe064ce95a78d2d036e2377f2fe019e810ad6f3c5279"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/binding_off_quality.py",
@@ -168,6 +180,18 @@
     "r13_matched_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062"
   },
   "latest_r13_followup_utc": "2026-10-09T09:51:26.138856Z",
+  "historical_quality_request_contract": {
+    "scope": "2026-09-06 NPU4-7 Qwen3.6-27B TP4 max1024/c32 LongBench-v2 and GSM8K",
+    "source": ".agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/hypic_quality_eval.py request_one payload",
+    "explicit_segment_ends_sent": false,
+    "quality_hotpath_proven": false,
+    "interpretation": "Historical quality scores are a natural-request deployment comparison; the fixed-output performance run has separate hot-path proof, but quality requests lack explicit segment metadata and per-request hot proof."
+  },
+  "current_explicit_quality_request_contract": {
+    "source": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hotpath_quality_full.py request_one payload",
+    "explicit_segment_ends_sent": true,
+    "interpretation": "The current 2048-token quality ruler supplies vllm_xargs.hypic_segment_ends and audits boundary/worker events; it is a distinct path from historical natural quality."
+  },
   "r13_dual_lens_result": {
     "scope": "LongBench-v2 127x3 explicit-boundary natural-EOS max2048 c8 TP4 physical NPU0-3",
     "paired_quality_evidence_valid": true,
