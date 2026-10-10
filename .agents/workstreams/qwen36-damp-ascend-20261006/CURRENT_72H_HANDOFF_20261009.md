@@ -1,5 +1,35 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 08:16 UTC
+
+Read KIVI_PACKED3_SIGNED_PASS_20261010.json first. Original018c completed0:
+physical4 controlled eager packed2/4 numerical/lifecycle matrix,20frames,
+24full outputs,60kernel calls. Independent original/raw consumer0193
+completed0. Failed017c JIT tl binding and0185 unsigned conversion remain
+failed and retained. V3 changes only masked code int32-to-float lowering;
+it does not change packed unsigned shift/mask, rounding, thresholds or scope.
+
+This is component correctness only: actual read lengths128–257, not32768;
+model, graph,1024 performance and task accuracy remain unverified.
+Owned21b080 CID stopped-retained, no own live device job. Current08:16 snapshot
+01c8: physical4–7 idle baseline, all cards no compute, ordinary available
+about110GiB. This snapshot is not later admission.0–3 remain protected;
+HugeTLB32GiB authoritySPENT. No external workload was stopped by this stage.
+
+NEXT: finish source-bound actual TP4 worker/cache bootstrap, same-image
+no-device aggregate admission, then real32768-input/+2-token diagnostic.
+Do not repeat the passing short matrix without an affected source change.
+Parallel preparation: matched eager OFF/ON1024 successor, not a fake old
+SparQ/Ada model PASS. Local software progress is not NPU/model evidence.
+Ada compact FA Format0 does not prove KIVI native sharedraw FA is Format0;
+leave format policy unchanged and capture actual native format on first run.
+
+Portfolio cutoffOct12 07:00:25Z unchanged. Ada/SparQ first-repair cutoff
+Oct10 07:00:25Z closed; repaired-but-model-unverified is not paper rejection.
+No new throughput/TTFT/TPOT or final task score. Normal Git fetch01b0 timed
+out; publication remains unconfirmed until independent remote branch proof.
+Older snapshots below are history, never live-process authority.
+
 ## Current execution — 2026-10-10 06:00 UTC
 
 Read KIVI_SAME_IMAGE_INGRESS8_20261010.json first. Original014c actually

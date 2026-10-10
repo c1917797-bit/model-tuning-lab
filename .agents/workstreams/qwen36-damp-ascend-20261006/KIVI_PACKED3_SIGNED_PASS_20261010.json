@@ -1,0 +1,142 @@
+{
+  "schema": "kivi.packed3.ascend.repair-checkpoint/v1",
+  "observed_utc": "2026-10-10T07:50:40Z",
+  "decision": "ADVANCE_TO_REAL_MODEL_DIAGNOSTIC_PREPARATION",
+  "classification": "ADAPTATION_IMPLEMENTATION_REPAIRED_IN_CONTROLLED_NPU_SCOPE",
+  "repo": "/opt/host/vnf/austinov/model-tuning-lab",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "kernel": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/packed3_signed_cast_v3/kernel.py",
+    "bytes": 10288,
+    "sha256": "ecdae41fa1a3487beb872b01522bbb586f3546100f9fd22b9dd4159ca9c0ac2a"
+  },
+  "predecessors": [
+    {
+      "operation": "exec-000000000000017c",
+      "fault": "JIT tl absent from kernel function globals",
+      "completed_frames": 0
+    },
+    {
+      "operation": "exec-0000000000000185",
+      "fault": "unsupported uint32_t_to_float_rintmode",
+      "completed_frames": 0,
+      "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-packed3-signed-repair-20261010-001/FAILED_0185_ORIGINAL.json"
+    }
+  ],
+  "change": "Two masked code.to(int32).to(float32) expressions only; unsigned word/shift/mask, both A16 rounding points, forward and thresholds unchanged. Earlier global tl repair preserved.",
+  "proof": "After a 2/4-bit mask the integer is 0..3/0..15, exactly representable as signed int32 and float32. Original packed uint32 word is NOT cast before logical shift.",
+  "software": {
+    "signed20": "exec-000000000000018a exit0",
+    "source8": "exec-0000000000000189 exit0",
+    "host12": "exec-000000000000018b exit0"
+  },
+  "actual_npu": {
+    "operation": "exec-000000000000018c",
+    "exit_code": 0,
+    "duration_seconds": 427.598,
+    "physical_devices": [
+      4
+    ],
+    "logical_to_physical": {
+      "0": 4
+    },
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-signed-v3-20261010-001/RESULT.json",
+      "bytes": 351305,
+      "sha256": "89f7a7cc6acc3dafad59b2d3791dbf6c660a26a9d247ac6d22af953339ccf619"
+    },
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-numeric-v3-signed-20261010-001/SOURCE_MANIFEST.json",
+      "bytes": 16678,
+      "sha256": "d6a151a13bd3b665eab14f25f5c1c45b1b6ab3b3b470014305977132d7643914"
+    },
+    "host_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-v3-signed-20261010-001/SOURCE_MANIFEST.json",
+      "bytes": 9497,
+      "sha256": "49ad791275d5cc9eccdf6c239ab85bc18292d0e3d849052d893dc815c7ac708f"
+    },
+    "frames": 20,
+    "output_rows": 24,
+    "kernel_calls": 60,
+    "bits": [
+      2,
+      4
+    ],
+    "dtypes": [
+      "float16",
+      "bfloat16"
+    ],
+    "batch": [
+      1,
+      2
+    ],
+    "actual_read_lengths": [
+      128,
+      129,
+      130,
+      256,
+      257
+    ],
+    "metadata_capacity_not_read_length": 33792,
+    "scope": "controlled nontrivial synthetic Q6/KV1/D256 tensors; eager only; not model post-RoPE input"
+  },
+  "independent": {
+    "operation": "exec-0000000000000193",
+    "exit_code": 0,
+    "duration_seconds": 97.381,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "bytes": 2195,
+      "sha256": "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d"
+    },
+    "raw": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-signed-v3-20261010-001/INDEPENDENT_NEW.json",
+      "bytes": 23294,
+      "sha256": "9240e01a7d40a99493dfd5b3dbdc3f573c1693bcf0461fd3888764f89643a06e"
+    },
+    "checked": [
+      "all24 full outputs against independent scalar reference at named Ascend arithmetic boundary",
+      "original-input independent K/V axes and code/scale/min/residual bytes",
+      "all8 full pool fields read-only during read",
+      "untouched writer bytes",
+      "eager fork/refcounts/release/slot epoch reuse",
+      "actual host original/peer/device/owned-process/source/resource/cleanup"
+    ],
+    "max_abs_to_named_boundary": 0,
+    "max_relative_rms_to_named_boundary": 0,
+    "registered_relative_rms_threshold": 0.005,
+    "max_relative_rms_to_official_python_split_boundary": 0.003284108772782965,
+    "released_cuda_parity": false
+  },
+  "cleanup": {
+    "container": "21b080e6aa9c3bfd86f3b50c4991b3a16bcb7a090ae41d089d46f0c708f7b31e",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "errors": [],
+    "own_on_protected_0_3": false,
+    "ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-signed-v3-20261010-001/physical4/cleanup.json",
+      "bytes": 11789,
+      "sha256": "02093f27a5330191b69f09adbff7f65a6c1f284c271846ef2bd1a913e9a2c82f"
+    }
+  },
+  "gates": {
+    "controlled_component": true,
+    "model": false,
+    "performance": false,
+    "task_accuracy": false,
+    "graph": false,
+    "whole_176": false
+  },
+  "remaining": [
+    "actual source-derived native capacity/typed-field geometry and all4 worker owner binding",
+    "bootstrap calls packed worker rather than legacy diagnostic",
+    "real32768-token prefill and at least2 generated tokens, whole required rank/layer original-KV and output consumer",
+    "matched dense/candidate fixed1024 performance; three paired rounds if promising; final task accuracy",
+    "no blanket cross-environment speedup claim"
+  ],
+  "next_action": "Finish source-bound real-model bootstrap and consumer, then TP4 diagnostic on4–7; no repetition of successful tiny matrix without affected source change.",
+  "fixed_human72h_cutoff": "2026-10-12T07:00:25Z",
+  "goal_met": false
+}

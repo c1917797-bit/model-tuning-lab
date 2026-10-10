@@ -311,3 +311,22 @@ proved observer/reference defect with independent deployed allocator evidence
 and complete real-entry regressions; require a new source/output identity and
 the affected NPU/model gate. This is adaptation/reference recovery, not evidence
 of a paper limitation or permission to raise the resource/numerical threshold.
+
+## Triton JIT globals and masked low-bit conversions
+
+For a nested Triton kernel, Python factory-local names are not sufficient evidence
+that JIT can resolve them: inspect the real function globals and execute with the
+installed backend. Bind only the qualified language module, rejecting incompatible
+rebinding. In the observed Ascend backend, uint32-to-float lowering failed even
+though software integer tests passed. For an already-masked2/4-bit code, an
+explicit int32 then float32 conversion preserves values0..3/0..15 exactly; do not
+cast the packed word before its unsigned shift. Preserve the original rounding
+boundaries and validate the full affected NPU matrix on a new source identity.
+This is a version-observed repair, not a universal ban on unsigned conversion.
+
+KIVI evidence: `.agents/workstreams/qwen36-damp-ascend-20261006/KIVI_PACKED3_SIGNED_PASS_20261010.json`.
+Two compile failures preceded a20-frame/24-row realNPU pass independently consumed
+from original logs/raw bytes. That pass covers controlled eager tensors of actual
+read length at most257; capacity33792 is not a long-context test. The next useful
+step is actual model integration and real-context output validation, not more
+unchanged toy passes or a premature paper/performance success claim.
