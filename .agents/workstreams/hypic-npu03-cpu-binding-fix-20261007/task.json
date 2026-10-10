@@ -227,7 +227,15 @@
     "resource_limit": "physical NPU0-3 and port 8223 only; never NPU4-7; do not stop or modify foreign work",
     "retry_budget": "one attempt; no retry6 without fresh explicit authorization"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "campaign": "cache10r19-c32-gsm8k",
+    "arm": "no-cache",
+    "controller_operation": "exec-0000000000000433",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-gsm8k-baseline",
+    "state": "running; physical NPU0-3 and port 8223 idle admission passed, status service-starting at 2026-10-10T14:06:18Z; poll same controller and immutable root",
+    "preregistration": "HYPIC_R19_GSM8K_PHASE_PREREGISTRATION_20261010.json",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22"
+  },
   "r18_candidate_terminal": {
     "campaign": "cache10r18-c32-longbench",
     "arm": "hypic-only",
@@ -1119,12 +1127,12 @@
     "gsm8k_controller_and_auditor": "frozen locally at c0117fc9 with pre-device test-hash amendment d787abf5; 130 workstream tests, both-arm offline checks and one-switch/dataset checks passed; no device run yet",
     "full_quality_decision": "not-yet-measured"
   },
-  "r19_gsm8k_offline": {
+  "r19_gsm8k_phase": {
     "preregistration": "HYPIC_R19_GSM8K_PHASE_PREREGISTRATION_20261010.json",
     "controller": "r19_c32_gsm8k_adapter.py",
     "independent_auditor": "r19_c32_gsm8k_audit.py",
     "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
-    "state": "prospectively frozen; two arm checks and three focused tests passed; no GSM8K device run"
+    "state": "prospectively frozen; both-arm no-device checks passed; no-cache controller exec-0000000000000433 running after fresh physical NPU0-3/8223 idle proof; HYPIC-only arm unrun"
   },
   "r19_repaired_longbench_baseline_terminal": {
     "controller_operation": "exec-000000000000032c",
@@ -1161,5 +1169,5 @@
     "quality_decision": "REJECT_OR_QUALIFY",
     "report": "HYPIC_R19_REPAIRED_C32_LONGBENCH_TERMINAL_AUDIT_20261010.md"
   },
-  "next_action": "R19 repaired-source LongBench pair is terminal and independently audited: 227/381 to 219/381 (-2.0997 pp), quality REJECT_OR_QUALIFY, separate aggregate hot shortfall. Do not rerun immutable roots. Localize differences read-only from paired rows; complete frozen GSM8K off-path safety pair only with fresh physical NPU0-3/8223 admission. A new bounded repair requires a prospectively frozen same-source pair. Do not repeat validated historical performance, use NPU4-7, stop external work, or claim GitHub/main sync."
+  "next_action": "Poll frozen r19 GSM8K no-cache controller exec-0000000000000433 and immutable root; never restart while live. On terminal, independently audit 1319x3, source, guard, exact owned release. Then only with fresh physical NPU0-3 and port 8223 idle admission run frozen HYPIC-only GSM8K arm and paired audit. R19 LongBench remains REJECT_OR_QUALIFY at 227/381 to 219/381; GSM8K cannot override it. Keep read-only discrepancy localization separate; any new repair requires a prospective same-source pair. Do not repeat validated historical performance, use NPU4-7, stop external work, or claim GitHub/main sync."
 }
