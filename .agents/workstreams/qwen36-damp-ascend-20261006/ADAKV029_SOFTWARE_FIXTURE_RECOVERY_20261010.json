@@ -1,0 +1,89 @@
+{
+  "schema": "paper-portfolio.causal-recovery/v1",
+  "updated_utc": "2026-10-10T04:27:17Z",
+  "goal_complete": false,
+  "previous_turn": "status-only/no-progress; this continuation executed source-bound real regression and retained first faults",
+  "phase": "software_fixture_repair",
+  "prior_model": "00cd failed before output; no N2/performance/task success",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv028-format-output-observation-v3-user72h-20261010/SOURCE_MANIFEST.json",
+    "sha256": "5787dc8a3a53549c1011a9091b6098ea8ccd4cbb9bac1e7919c979dc12fba1c4"
+  },
+  "events": [
+    {
+      "operation": "exec-00000000000000f7",
+      "exit_code": 2,
+      "class": "MAIN_COMMAND_CONSTRUCTION",
+      "cause": "numeric argv index replaced --execute instead of main.py; parser rejected before test execution",
+      "recovery": "explicit argv constructor plus exact main/--execute assertions; unique002 output; no candidate change",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv-v3-software-recovery-20261010-001/CLI_00F7_ORIGINAL.json",
+        "sha256": "f3e0ad4dfd6cdc56f4f4a7c3012e13f5f7cfe9f88edc7cbc85fa623d435ae29f"
+      }
+    },
+    {
+      "operation": "exec-00000000000000fa",
+      "exit_code": 1,
+      "duration_ms": 3350,
+      "tests": {
+        "integration_pass": 17,
+        "child_pass": 10,
+        "output_format_pass": 21,
+        "output_format_fail": 1,
+        "output_format_error": 1,
+        "remaining_119": "not completed; 14 AST plus105 base not reached"
+      },
+      "class": "REFERENCE_OR_TEST",
+      "causal_confidence": "proved",
+      "cause": "output_budget.install copies S.__dict__ for compiled original resources before tests patch S.Path/cpu_admission; patched globals not visible to compiled resources",
+      "first_faults": [
+        "KeyError effective_capacity",
+        "expected ordinary RAM but actual disk reserve refusal"
+      ],
+      "minimal_repair": "test-only ExitStack enters input inventory mocks before install; production code/numerical/resource predicates unchanged",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv-v3-software-recovery-20261010-001/SOFTWARE_00FA_ORIGINAL.json",
+        "sha256": "24cd349ba4a7cb9c66f204b55b25cf4c06aab26908b2bf61fa20d6c6b953f987"
+      }
+    }
+  ],
+  "native_ready": false,
+  "model_ready": false,
+  "performance": false,
+  "tasks": false,
+  "paper_ineffective": false,
+  "next": {
+    "owner": "MAIN after recurrent source freeze",
+    "entry": "v4 main.py --execute --mode software",
+    "expected_tests": 169,
+    "missing": "new complete manifest/freeze and actual169; then new materialization, same-image, tiny4 and fullN2",
+    "hypothesis": "fixing the fixture binding order removes two software failures without runtime changes",
+    "refutation": "complete169 still fails; preserve original and do not grant NPU"
+  },
+  "deadlines": {
+    "repair_utc": "2026-10-10T07:00:25Z",
+    "portfolio_utc": "2026-10-12T07:00:25Z",
+    "clock_reset": false
+  },
+  "git": {
+    "pushed": false,
+    "prior_head": "29ab9b4f2d865b646657e9f02d032de087473084",
+    "publication": "normal HTTPS authentication unresolved"
+  },
+  "safety": {
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugetlb32GiB": "SPENT",
+    "stopped_containers": "retained; no new cleanup"
+  }
+}

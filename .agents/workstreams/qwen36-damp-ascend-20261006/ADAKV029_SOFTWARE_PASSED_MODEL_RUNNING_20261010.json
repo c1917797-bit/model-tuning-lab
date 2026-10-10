@@ -1,0 +1,165 @@
+{
+  "schema": "paper-portfolio.stage/v1",
+  "updated_utc": "2026-10-10T04:38:40Z",
+  "goal_complete": false,
+  "previous_turn_classification": "progress: actual169 terminal verified, changes next action to materialization/model admission",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv028-format-output-observation-v4-user72h-20261010/SOURCE_MANIFEST.json",
+    "sha256": "762e7c6c49629b41a8a826067caf12e1d2b2acbe49492b03f6028ae65b627547"
+  },
+  "software": {
+    "operation": "exec-0000000000000103",
+    "exit_code": 0,
+    "tests": 169,
+    "ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv028-format-output-observation-v4-user72h-20261010/MAIN-full169-20261010-001.json",
+      "sha256": "292ff6efa4e787409d407b421ab06f614379187f6d288a979c1af7bca8cdb418"
+    },
+    "scope": "software-only"
+  },
+  "materialization": {
+    "operation": "exec-000000000000010b",
+    "exit_code": 0,
+    "files": 104,
+    "ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-format-output-materialize-main-20261010-029-001/RESULT.json",
+      "sha256": "d3be52f97f72312fd5e5502ad7234696b82b339212e762cd670c4f26c92569f6"
+    },
+    "scope": "source-only"
+  },
+  "current": {
+    "operation": "exec-000000000000010d",
+    "state": "RUNNING actual operation poll",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001",
+    "actual_entry": {
+      "command": "/usr/bin/python3",
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv028-format-output-observation-v4-user72h-20261010/main.py",
+        "--execute",
+        "--mode",
+        "diagnostic",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv028-format-output-observation-v4-user72h-20261010/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "762e7c6c49629b41a8a826067caf12e1d2b2acbe49492b03f6028ae65b627547",
+        "--overlay-software",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv028-format-output-observation-v4-user72h-20261010/MAIN-full169-20261010-001.json",
+        "--overlay-software-sha256",
+        "292ff6efa4e787409d407b421ab06f614379187f6d288a979c1af7bca8cdb418",
+        "--materialization",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-format-output-materialize-main-20261010-029-001/RESULT.json",
+        "--materialization-sha256",
+        "d3be52f97f72312fd5e5502ad7234696b82b339212e762cd670c4f26c92569f6",
+        "--software",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-format-output-v4-001/RESULT.json",
+        "--software-sha256",
+        "31c84ecc30675b02b34b82984c971371cef0c6fa98671821ccb9c089016a6b89",
+        "--audit-software",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-format-output-v4-001/AUDIT_SOFTWARE.json",
+        "--audit-software-sha256",
+        "a3eeda023cb93b260b6cb4ac6721a1ea2b87f3dc1dcaeb4bebdac671e6fbb2e4",
+        "--component",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-consume-014-main-017-001/RESULT.json",
+        "--component-sha256",
+        "e971e21a11fd81d4bc775fa6746f618956a7df8758529cb5e1b1c0374d0f29fa",
+        "--model-manifest",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "--model-manifest-sha256",
+        "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+        "--cache-bytes",
+        "10737418240",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001",
+        "--port",
+        "8237"
+      ],
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "route": {
+        "mode": "force_direct",
+        "logicalGatewayId": "tpc"
+      },
+      "sync": false,
+      "timeout": 5460,
+      "maxOutputBytes": 65536,
+      "idempotencyKey": "MAIN116-adakv029-format-output-full-model-once-20261010-001"
+    },
+    "same_image_actual_top_format_api": true,
+    "same_image_client_prelude": true,
+    "N1": "not yet complete at snapshot",
+    "N2": false,
+    "E1": false,
+    "tasks": false
+  },
+  "evidence": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/SOFTWARE_0103_ORIGINAL.json",
+      "sha256": "0d176bb447ff15124ca631fb743733efc9046bf87ddcdd68397cf8d9c36d335a",
+      "readback_verified": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/ORIENTATION_0109_ORIGINAL.json",
+      "sha256": "2162c830d1b1d710075fefbd2b2e1740bef69dbe02297a3569b2eef7d4d78545",
+      "readback_verified": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/MATERIALIZATION_010B_ORIGINAL.json",
+      "sha256": "1e288c11be1fb9ba8c7c0cd74bfc84c7e8d793f888c689d403ca61b3e00ac6c2",
+      "readback_verified": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/MODEL_010D_LAUNCH_ORIGINAL.json",
+      "sha256": "2eb27c271a4a3c53e62366cdf1be1b323061a120dbdb9d9d7aed75114c855d37",
+      "readback_verified": true
+    }
+  ],
+  "prior_failed": {
+    "model": "00cd first request output0; original preserved",
+    "software": "00fa fixture order failed; original preserved; v4 test-only repair all169passed",
+    "archival": "four Add headers used absolute instead of relative paths; tool rejected before mutation; corrected relative guarded Adds ACK/readback, no experimental effect"
+  },
+  "next": {
+    "owner": "MAIN",
+    "entry": "poll010d; archive actual terminal and use current whole_reader if producer success",
+    "E1_owner": "sparse_attention_ready_queue source031; requires actual current N2",
+    "task_owner": "recurrent_lifecycle_ready_queue; final task provider/input authority still missing",
+    "backup_owner": "lowbit_ready_queue KIVI installer; source prep only"
+  },
+  "deadlines": {
+    "repair": "2026-10-10T07:00:25Z",
+    "portfolio": "2026-10-12T07:00:25Z",
+    "reset": false
+  },
+  "resources": {
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugetlb32GiB": "SPENT",
+    "sameimage_cpu_GiB": 8,
+    "model_GiB": 64,
+    "ordinary_reserve_GiB": 8.5,
+    "host_CPU": 1,
+    "host_MiB": 512,
+    "phase_seconds": 5400,
+    "cleanup_seconds": 90
+  },
+  "git": {
+    "pushed": false,
+    "reason": "normal HTTPS authentication unresolved; unchanged blind retries prohibited"
+  },
+  "conclusion": "Engineering regression/preflight progress only; algorithm NPU/full-model/performance/tasks not accepted"
+}

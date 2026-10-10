@@ -1,0 +1,114 @@
+{
+  "schema": "mst.paper-stage-causal-record/v1",
+  "recorded_utc": "2026-10-10T04:54:00Z",
+  "goal_alignment": {
+    "long": "Ascend plugin/monkeypatch >=10% matched E2E plus final tasks",
+    "medium": "faithful mechanism -> independent real NPU -> matched E2E -> final accuracy",
+    "short": "repair proved output-scanner socket classification, rerun complete affected prerequisites and model gate",
+    "previous_turn": "progress: actual terminal/N1/cleanup readback changes successor to controller repair"
+  },
+  "experiment": "AdaKV029-format-output-v4",
+  "operation": "exec-000000000000010d",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_ms": 261483,
+  "failed_stage": "model-startup resource observation",
+  "cause_class": "REFERENCE_OR_TEST",
+  "causal_confidence": "proved scanner rejects filesystem sockets; exact first socket path not captured",
+  "first_fault": "ValueError('output nonregular/nondirectory child unsupported') at output_budget.py:87",
+  "evidence": {
+    "original_terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/MODEL_010D_TERMINAL_ORIGINAL.json",
+      "sha256": "c36946dc13bc57358c076036b3470535506fbbdc5c69849d38e3ed47f487cf21"
+    },
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001/RESULT.json",
+      "sha256": "59f7f7b6767ef7b03dc72d099ea4e1d800ab9a742012713ead07d8560a0a7f5e"
+    },
+    "n1": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001/candidate/CANARY_N1.json",
+      "sha256": "665a73760d17787f6cfd2f1af9895af6390c8191a91f4d2c3ac713cb9e809ab8"
+    },
+    "cleanup": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001/candidate/cleanup.json",
+      "sha256": "9c40c1783a9da0a4801f82c937b6630bb98a3f2e791ba33c11d99e7e35702ac7"
+    },
+    "first_fault": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001/candidate/OUTPUT-BUDGET-FIRST-1791607122500633070.json",
+      "sha256": "038d14e41055614ec97407b4c0445bf58a6a11b5f8c53c69167ea8bab42ccb22"
+    },
+    "ipc_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/IPC_SOURCE_011E_ORIGINAL.json",
+      "sha256": "7ca87f70be47327f8d6dceb45134fa9e0dec406d7f3715c13a2c80d268d135b0"
+    },
+    "network_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/IPC_NETWORK_UTILS.py",
+      "sha256": "83b24f1e0026d1737e036a5abedc2f34ae234df5ccd7f1addab801c3cba55de9"
+    },
+    "release_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv029-format-output-v4-execution-20261010-001/RELEASE_AND_SOCKET_0118_ORIGINAL.json",
+      "sha256": "095d867d01095ee1d5fa5e932b0cfbbaf09f82f4d6134adfb761d6d023166075",
+      "readback": "pending after retryable file-read timeout"
+    }
+  },
+  "actual_passed_scope": {
+    "software_tests": 169,
+    "materialized_files": 104,
+    "no_device_preflight": true,
+    "n1_four_physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "native_format_query": "actual top-level getter/ND enum/source on all four",
+    "model": false,
+    "numerical": false,
+    "performance": false,
+    "task": false
+  },
+  "source_unchanged": "V4 and all original sources frozen; no corrected run has started",
+  "causal_evidence": [
+    "Quiescent owned output tree has exactly three nonregular entries, all Unix sockets, candidate/<UUID4>, actual st_size=0.",
+    "Deployed network_utils.get_open_zmq_ipc_path returns ipc://VLLM_RPC_BASE_PATH/uuid4().",
+    "Deployed envs uses getenv(VLLM_RPC_BASE_PATH,tempfile.gettempdir()); actual owned env TMPDIR=/adakv-results, no RPC override; actual bind maps owned candidate.",
+    "Original scanner unconditionally rejects S_IFSOCK. No output budget overflow or algorithm numerical error is established."
+  ],
+  "alternative_explanations": [
+    "First refusal did not save the exact path; no assertion which of the three was first.",
+    "Earlier native PA fault still unresolved; socket repair does not prove it fixed."
+  ],
+  "next_decision": "REPAIR",
+  "minimal_repair": "metadata-only Unix socket accounting with stable root/parent/object identity; no open/connect, no link following; actual filesystem positive/negative regressions, new frozen source/output",
+  "prediction": "model startup can pass the previously rejected IPC-output scan without changing resource or numerical limits",
+  "refutation": "new scanner cannot handle the real source-bound IPC tree, any negative check fails, or same first exception recurs",
+  "unchanged_gates": [
+    "32GiB output cap",
+    "RAM/CPU/physical4-7 ownership and protected0-3",
+    "independent numerical/graph/lifecycle matrix",
+    "same-stack40request fixed1024 E2E screen then3pairs",
+    "no-thinking max2048 normalEOS LBv2/GSM8K; latest user allowance both<=1pp and<=1%relative"
+  ],
+  "cleanup": {
+    "cid": "defb97d0662ad91ea49ebfe9e1c638aeb1cb24c377cbd905b6bd19868c0519f6",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "Pid": 0,
+    "OOMKilled": false,
+    "ExecIDs": null,
+    "release_snapshot": "0118 no processes physical4-7 HBM baseline; not future admission"
+  },
+  "queue": {
+    "CURRENT": "no NPU job; repair/regression",
+    "NEXT": "recurrent owner V5 then MAIN complete software/materialization/same-image/N1/model; E1 requires actual N2",
+    "BACKUP": "independent KIVI installer and SparQ first-prefill HBM root-cause preparation",
+    "ready_for_npu": 0
+  },
+  "deadlines": {
+    "repair": "2026-10-10T07:00:25Z",
+    "portfolio": "2026-10-12T07:00:25Z",
+    "reset": false
+  },
+  "publication": "normal HTTPS authentication unresolved; no new push claimed"
+}

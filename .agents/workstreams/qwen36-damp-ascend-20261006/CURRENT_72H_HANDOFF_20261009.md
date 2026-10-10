@@ -1,5 +1,49 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 05:01 UTC
+
+Read ADAKV029_SOCKET_CONTROLLER_FAILURE_20261010.json first.
+Original010d is TERMINAL FAILED exit1: output scanner rejects native Unix IPC
+sockets during model startup. Actual169 software and all4 N1 tensor/sync/format
+checks passed; no full N2/E1/task pass. Actual deployed network_utils/envs and
+TMPDIR mount prove controller classification defect, not a paper no-go.
+Exact owned CIDdefb97d0 is stopped and retained; fresh012a proves4–7 baseline
+and no processes at snapshot, not later admission.0–3 remain protected.
+
+CURRENT no NPU job; recurrent owner freezes minimal V5 scanner and14 added
+regressions (183 full, UNRUN). MAIN has read actual core/test source.
+NEXT complete regression/materialization/same-image/N1/model, then only valid
+N2 admits matched E1. Independent BACKUP KIVI actual-ID seam and SparQ HBM
+first-prefill attribution continue API-only/CPU0. No generic controller rewrite.
+
+Actual0126 readonly stopped-image scheduler output is10122B/SHA44230b9,
+identical to KIVI's previous native archive; this adds deployed-source evidence,
+not numerical/performance authority. Previous status-only report was not a new
+algorithm result. This continuation takes concrete repair/regression action.
+Repair Oct10 07:00:25Z / portfolio Oct12 07:00:25Z unchanged; no clock reset.
+HugeTLB32GiB SPENT. No new throughput/TTFT/TPOT/task scores or Git push.
+Historical RUNNING snapshots below are not current process authority.
+
+## Current execution — 2026-10-10 04:38 UTC
+
+Read ADAKV029_SOFTWARE_PASSED_MODEL_RUNNING_20261010.json first.
+Actual0103 complete169 passed (source762e); actual010b materialized104 files
+(d3be52f9...). Source and all live dependencies are frozen. Original00fa test
+fixture failures and00cd first-request output0 remain failed and preserved.
+
+CURRENT actual010d RUNNING, poll that original only. New output is
+/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-format-output-029-001.
+Same-image Devices[] actual top-level format callable/source and actual client
+prelude passed. All4 N1 not yet complete at snapshot; no N2/E1/task claim.
+NEXT is actual whole original consumption after successful terminal, then
+sparse owner031 matched E1. BACKUP lowbit KIVI installer; recurrent closes
+final-task provider/strict input authority (missing, not fabricated).
+
+Fresh0109 proved4–7 idle before admission;0–3 protected. HugeTLB32GiB SPENT.
+First repair Oct10 07:00:25Z / portfolio Oct12 07:00:25Z unchanged.
+No new throughput, TTFT/TPOT or final scores. Normal Git auth unresolved.
+Prior RUNNING records below are historical, not current process authority.
+
 ## Current execution — 2026-10-10 04:08 UTC
 
 Read ADAKV028_FIRST_REQUEST_FAILURE_AND_RECOVERY_20261010.json first.
