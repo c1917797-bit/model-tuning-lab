@@ -1,0 +1,124 @@
+{
+  "schema": "paper-portfolio.recovery-stage/v1",
+  "updated_utc": "2026-10-10T04:08:00Z",
+  "status": "implementation_failed_repair_preparation",
+  "goal_complete": false,
+  "no_progress_review": "The preceding user-status turn was a status restatement. Current continuation completed new deployed-source evidence and actual KIVI8 software, altering repair/backup readiness; no NPU success inferred.",
+  "source": {
+    "manifest_sha256": "8f9eccefefc48659cc5a007b1bbe2efd3c074711bd5e2dba8a71bc946beb932e",
+    "materialization_sha256": "24ec0e6c77bc862e7f465bfdc23f33bb472adf24a995ac2d75dc1f098ecd5665"
+  },
+  "failed_model": {
+    "operation_id": "exec-00000000000000cd",
+    "exit_code": 1,
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001",
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001/MAIN_ORIGINAL_00CD_TERMINAL_20261010.json",
+      "sha256": "fd1c4858e9ed44b0cb0144836946e1316383f0f9e120d0a8d15654b825ba4ca6"
+    },
+    "result_sha256": "872259b596804dc313538874da2f54ea070f4b4d5c9b6bf7b7251826ebe86cf6",
+    "actual_scope": "four TP workers loaded; FULL batch1..16 capture and HTTP health200; first32768 request failed output0",
+    "n2_pass": false,
+    "performance": false,
+    "task": false,
+    "defects": [
+      {
+        "class": "ADAPTATION_OR_TEST",
+        "proved": true,
+        "location": "audit.py Session passes torch_npu.npu to gdn_model_observer.identity; identity calls npu.get_npu_format",
+        "error": "AttributeError: module torch_npu.npu has no attribute get_npu_format",
+        "next": "source-qualified top-level torch_npu getter; same-image actual callable/schema and before-model all4 tiny tensor identity"
+      },
+      {
+        "class": "CONTROLLER_OBSERVATION",
+        "proved": true,
+        "location": "025 Controller.resources rglob/is_file/stat",
+        "error": "FileNotFoundError on a temporary output directory",
+        "next": "one expression replacement with stable-root/held-parent strict-ENOENT observation; permission/live replacement remain fail-closed"
+      }
+    ],
+    "paper_inefficacy_proved": false,
+    "prior_native_PA_root_cause": "not declared solved by startup synchronization"
+  },
+  "native_source_fact": {
+    "operation_id": "exec-00000000000000e2",
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-deployed-api-source-660-20261010-001/npu_format.py",
+    "sha256": "8abe7bea6817f25d2360aee783afae16fe7fe2aaa46a04e7b7b865e7f2039488",
+    "scope": "stopped own exact660 installed source only; Format(IntEnum)/ND2 and top-level wrapped getter exist; preserve original physical format/type gate; actual runtime probe pending"
+  },
+  "resource_snapshot": {
+    "operation_id": "exec-00000000000000dd",
+    "cards4_7": "no NPU process, AICore0, HBM2860..2868MiB",
+    "cards0_3": "also no compute at this snapshot; remain protected, no action taken",
+    "mem_available_kib": 116002312,
+    "hugetlb_32gib_release": "SPENT",
+    "owned_candidate": "stopped_retained_Pid0_noExec_noOOM"
+  },
+  "backup_software": [
+    {
+      "operation_id": "exec-00000000000000d4",
+      "tests": 14,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-packed-qkav-fusion-software14-backup-user72h-20261010-001.json",
+      "sha256": "de695823a93f6d1ccb79c5eff936d765c75c99dfcf99f88b4dfb6f6c8487e35b",
+      "native_ready": false
+    },
+    {
+      "operation_id": "exec-00000000000000e7",
+      "tests": 8,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-packed-qkav-owned-seam-software8-backup-user72h-20261010-001.json",
+      "sha256": "1478bd174362ed44709ae159fac93e57a3729573262a7e3c06b7a2255624b600",
+      "native_ready": false
+    }
+  ],
+  "actual_archives": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-recovery-evidence-20261010-0400-001/RELEASE_00DD.json",
+      "sha256": "78e217a018e056a23c4895b03b4b1467cb57ca761b95fade50b580f6e14f8270"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-recovery-evidence-20261010-0400-001/KIVI_SOFTWARE_00D4.json",
+      "sha256": "67389885cca1865d18bcecc24951e405d682d195a52bbf161a40bed522eda59f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-recovery-evidence-20261010-0400-001/WORKER_SOURCE_00DF.json",
+      "sha256": "89cb7430969c25b5112d3c5e3c4ceb74e32f1c93e9e002bfd8bb574d79fc0210"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-recovery-evidence-20261010-0400-001/FORMAT_SOURCE_00E2.json",
+      "sha256": "65a45dc4c7ed40dea4775eff542f83c8127dddceeb76767fe75508a1f005e290"
+    }
+  ],
+  "successor": {
+    "CURRENT": "recurrent owner minimal AdaKV format/output observer repair; no NPU job live",
+    "NEXT": "same-image then all4 before-model seam and full N2; actual N2 PASS is required for matched E1",
+    "E1": "sparse owner explicitly rebinds scanner and current N2/materialization;030 frozen and not permitted",
+    "BACKUP": "independent KIVI actual packed output installer;14+8 software do not grant native/model permission",
+    "ready_npu_successors": 0
+  },
+  "acceptance": {
+    "throughput_min_ratio": 1.1,
+    "fixed_output_tokens": 1024,
+    "formal_pairs": 3,
+    "metrics": [
+      "TTFT",
+      "TPOT"
+    ],
+    "final_tasks": [
+      "LongBench-v2",
+      "GSM8K"
+    ],
+    "thinking": false,
+    "max_tokens": 2048,
+    "normal_eos": true,
+    "latest_human_task_loss_rule": "report percentage points and relative percent, conservatively require both <=1; not intermediate tensor tolerance"
+  },
+  "deadlines": {
+    "repair": "2026-10-10T07:00:25Z",
+    "portfolio": "2026-10-12T07:00:25Z",
+    "unchanged": true
+  },
+  "publication": {
+    "pushed": false,
+    "reason": "normal HTTPS authentication remains unresolved; no push success inferred from local checkpoint"
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "schema": "paper-portfolio.causal-stage-record/v1",
+  "recorded_at_utc": "2026-10-10T03:39:00Z",
+  "paper": "AdaKV",
+  "previous_goal_turn_classification": "no_progress_status_only; this continuation executed new software/materialization/actual-child/model stages",
+  "status": "RUNNING_NOT_ACCEPTED",
+  "goal": "ACTIVE_UNMET",
+  "decision": "CONTINUE_CURRENT_HANDLE_ONLY",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/SOURCE_MANIFEST.json",
+    "sha256": "8f9eccefefc48659cc5a007b1bbe2efd3c074711bd5e2dba8a71bc946beb932e"
+  },
+  "source_metadata_caveat": "source_closure9/17/294 and missing136 are historical copied labels; current actual arrays11files/21direct dependencies and full146 are authoritative.",
+  "predecessor": {
+    "operation": "exec-00000000000000c6",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/RESULT.json",
+      "sha256": "10491ce1d208e87e0b1fb9a25f6a8b6abc05d9b553cd4edfd6760017ca766544"
+    },
+    "scope": "FAILED before first client request; preserved, not retrospectively passed"
+  },
+  "repaired_seam": "Fresh lifecycle child explicitly installs exact current facade before executing unchanged original client main; same-image pre-model actual original admission now passed.",
+  "software": {
+    "operation": "exec-00000000000000ca",
+    "exit_code": 0,
+    "duration_ms": 9520,
+    "tests": 146,
+    "ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN-full146-20261010-001.json",
+      "sha256": "fa195039e5a5aa3741bf6e34e037d7620174d2616b3559e4158c681e4c5e7b30"
+    },
+    "aggregate_peak_rss_bytes": 111230976,
+    "scope": "software not NPU"
+  },
+  "materialization": {
+    "operation": "exec-00000000000000cb",
+    "exit_code": 0,
+    "duration_ms": 424,
+    "files": 104,
+    "ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-clientfacade-materialize-main-20261010-028-001/RESULT.json",
+      "sha256": "24ec0e6c77bc862e7f465bfdc23f33bb472adf24a995ac2d75dc1f098ecd5665"
+    }
+  },
+  "current": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "operation": "exec-00000000000000cd",
+    "state": "last actual poll RUNNING",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001",
+    "owned_candidate_cid": "2ee6dabd9360561c18a13872c3a649b606502d26b4df591a651cb08ec70a66ac"
+  },
+  "actual_passed": {
+    "same_image_current_client": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001/cpu-preflight/CLIENT_PRECHECK.json",
+      "bytes": 796,
+      "sha256": "f5a087acb5b08dba0cc6ff58160aa387969575f29158e69bfb032d7d650747d0"
+    },
+    "same_image_child_terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001/cpu-preflight/CLIENT_PRECHECK_CHILD.json",
+      "bytes": 1884,
+      "sha256": "edc845f87c2e3fa5b7f015b2a9dc21b2c820a2c58e5c32e90344ef452bc16e18"
+    },
+    "same_image_client_exit0_reaped": true,
+    "old_client_sha256": "6149d47db78df05a146320cbc8076452e3fe784f613bf0de3eac80074db05e29",
+    "all4_N1": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001/candidate/CANARY_N1.json",
+      "bytes": 74662,
+      "sha256": "ff5b1aadbf292b14a9b066d3bb4ac7a6424483e51b2ccb6aa9325fc17d29ef10"
+    },
+    "physical_to_logical": {
+      "4": 0,
+      "5": 1,
+      "6": 2,
+      "7": 3
+    },
+    "four_worker_weight_loading_complete": true
+  },
+  "observed_model_workers": {
+    "guest_pids": [
+      450,
+      451,
+      452,
+      453
+    ],
+    "per_worker_weight_GB": 12.8735,
+    "weights_completed_at_utc": "2026-10-10T03:36:20Z",
+    "evidence_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-childfacade-028-001/candidate/server.stdout",
+    "mutable_log_not_terminal_authority": true
+  },
+  "scope": {
+    "full_model_numerical": false,
+    "complete_lifecycle": false,
+    "independent_whole_consumer": false,
+    "matched_E2E": false,
+    "formal_three_pairs": false,
+    "LongBench_v2_score": false,
+    "GSM8K_score": false,
+    "PA_unsynchronized_fixed": false
+  },
+  "archives": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109SoftwareInput.json",
+      "sha256": "3f9166b53deef1cee3708b376f8d06c0fd8ad2b4811d2786c6e52cf18f67d5fd",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109SoftwareLaunch.json",
+      "sha256": "fe0b0f44451a0058a83351ee79511e1872c4cf42ed7198ec7d5010095f4e0822",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109SoftwareTerminal.json",
+      "sha256": "ea5194508fabda00edd25ba315ce7d7ef25e9b474c6b4f663c7ccf4a4378ef15",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109MaterializeInput.json",
+      "sha256": "285d12ec6251dee5edead1ea0bf3a3119bd9e8257491c6fa13c8b2f0255cc428",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109MaterializeLaunch.json",
+      "sha256": "be5e93e95255ea161226cb56283e0c48c6ea89aa91ca1f5bb64b889c9cf2d406",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109MaterializeTerminal.json",
+      "sha256": "ac10c99c204e957000201dab5e1c882c1ba27f7c450a51c2c9dc340f6808a4ff",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109PreflightInput.json",
+      "sha256": "5f9db8da90e047a6d52f43a83af8ca47c784d2284aa95a41f13d872b22baa0c3",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109PreflightLaunch.json",
+      "sha256": "53054769182e4db969c9aef6ac042d1e23939fdc5c83d3113c22b57d2d0bcda2",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109PreflightTerminal.json",
+      "sha256": "d606e8fc1cd64d308cfa6373685fdf1e73f51ec3763e626a80b7622406f9aaa4",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109ModelInput.json",
+      "sha256": "90927aa3ce1b401c370583e0e738f89fe27ed565a600b6ad4d130a7128882fbc",
+      "actual_readback_match": true
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv027-lifecycle-child-facade-v2-user72h-20261010/MAIN_EXECUTION_20261010/c109ModelLaunch.json",
+      "sha256": "3cffa352ac4bdac8e3da3037a64d637e3ec7745cffd2ff2c6792897aaaa37f60",
+      "actual_readback_match": true
+    }
+  ],
+  "scheduling": {
+    "CURRENT": "00cd original live single TP4 model correctness run",
+    "NEXT": "sparse owner 030 matched E1 under actual current N2, not borrowed old PASS",
+    "BACKUP": "lowbit source-only KIVI packed fusion3845; stdlib14/compile/native all UNRUN",
+    "task_inputs": "actual official503+1319 prepared; final task adapter pending",
+    "preparers_remote_exec_CPU": 0,
+    "no_simultaneous_NPU_jobs": true
+  },
+  "resource": {
+    "last_prelaunch_operation": "exec-00000000000000cc",
+    "MemAvailable_KiB": 80543100,
+    "protected0_3_pids": [
+      498470,
+      498471,
+      498472,
+      498473
+    ],
+    "host_CPU": 1,
+    "host_MiB": 512,
+    "model_guest_CPU": 4,
+    "model_guest_GiB": 64,
+    "reserve_CPU": 2,
+    "reserve_GiB": 8.5,
+    "HugeTLB32GiB": "SPENT"
+  },
+  "next": "Poll00cd, retain first actual fault on failure; on terminal success archive whole original then run strict current whole consumer before E1. Never repeat on transient observation timeout.",
+  "clocks": {
+    "repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "portfolio_cutoff_utc": "2026-10-12T07:00:25Z",
+    "reset": false,
+    "phase_seconds": 5400,
+    "cleanup_seconds": 90
+  },
+  "publication": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "push": "known HTTPS authentication blocker; no unchanged retry or success claim"
+  }
+}

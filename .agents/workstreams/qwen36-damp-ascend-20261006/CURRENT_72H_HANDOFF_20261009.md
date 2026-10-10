@@ -1,32 +1,60 @@
 # Current human-authorized 72h successor — 2026-10-09
 
-## Current execution — 2026-10-10 03:20 UTC
+## Current execution — 2026-10-10 04:08 UTC
 
-Read ADAKV027_CLIENT_ADMISSION_FAILURE_20261010.json first. Original00c6 is
-TERMINAL FAILED exit1/579512ms, not live. Same-image real Torch author loader,
-physical4–7 canary/register, all4 model weights,16 FULL graph captures and
-health200 completed; the original025 client then rejected the new author guard
-at materialization admission BEFORE its first request. Parent facade was not
-installed in that fresh child. This is a proved integration/preflight defect,
-not numerical failure or evidence against AdaKV. Preserve027 bytes and failure.
+Read ADAKV028_FIRST_REQUEST_FAILURE_AND_RECOVERY_20261010.json first.
+Original00cd is TERMINAL FAILED exit1, not RUNNING. Four TP workers loaded,
+FULL batch1–16 capture and health200 completed, but the first32768 request
+produced0 tokens. The actual stack is audit.Session -> GDN Observer.identity:
+torch_npu.npu lacks get_npu_format. Separately, Controller.resources failed
+on a disappearing temporary directory. These are implementation/test defects,
+not paper no-go. Original whole terminal fd1c4858… is saved and API readback
+verified; exact own CPU and candidate containers are stopped and retained.
 
-Actual00c7 independently proves both owned CIDs stopped/retained,Pid0/noExec/
-noOOM;4–7 idle baseline/no process, protected0–3 workers498470–73 untouched.
-CURRENT no NPU job. NEXT recurrent owner prepares an explicit source-bound
-client child and real same-image pre-model admission, then affected full model
-N2. Sparse owner prepares matched E1; lowbit owner independent fused KIVI
-algorithm-specific source. No NPU-ready backup exists yet; idle cause is the
-client integration gap, not external occupation. Preparers remain API-only.
+Actual installed660 npu/_format.py8abe… confirms Format(IntEnum), ND2 and
+the top-level getter patch. Do not weaken the existing format/type gate based
+on an incomplete export-source inference. The new source must exercise the
+same actual identity path before model allocation. New scanner must also be
+installed explicitly in the matched E1 controller; old030 still inherits025.
 
-Original00a7 official input production/independent consumption has COMPLETED:
-503 LongBench-v2 +1319 GSM8K. LongBench-v2 uses explicit38912 prompt cap and
-376 head-tail truncations, not full2M context. No task scores. Full136 software
-00c3 and104-file materialization00c4 passed;11 original execution receipts
-and the00c6/00c7 originals were saved and hash-readback verified externally.
+CURRENT no NPU job; recurrent prepares only the two proved repairs.
+NEXT actual whole regression/same-image/all4 tiny identity -> full N2 -> E1.
+BACKUP KIVI now has actual14+8 stdlib PASS (00d4/00e7); native compile/model
+and performance remain pending. lowbit prepares actual output installer;
+sparse prepares the source-bound E1 successor. Preparers are API-only/CPU0.
+Fresh00dd4–7 idle is not later admission.0–3 are protected even when idle.
+No accepted throughput/TTFT/TPOT or task scores. Ready NPU successors0.
 
-Repair Oct10 07:00:25Z and total Oct12 07:00:25Z unchanged. No new matched
-throughput/TTFT/TPOT or accuracy acceptance. HugeTLB32GiB SPENT;0–3 protected.
-Normal Git authentication remains unresolved; local checkpoint is not a push.
+Repair Oct10 07:00:25Z and total Oct12 07:00:25Z unchanged; no clock reset.
+HugeTLB32GiB SPENT. Normal Git publication authentication still unresolved.
+Earlier RUNNING snapshots below are historical and must not be used as live state.
+
+## Current execution — 2026-10-10 03:39 UTC
+
+Read ADAKV028_CLIENT_PRECHECK_PASSED_RUNNING_20261010.json first. Original00cd
+is RUNNING (actual poll), not a result. Poll only that handle on current ma;
+never restart on observation timeout. Source8f9 is frozen. Its new explicit
+lifecycle child passed the real same660 Devices=[] parser/source/materialization
+prelude, exit0/reaped and bound to actual24ec materialization. Previous00c6
+remains failed-before-request. Full146 software00ca and104-file materialization
+00cb passed;11 original execution receipts were saved and readback verified.
+
+All4 physical4–7 N1 tensor/sync/register checks passed. Exact candidate CID
+2ee6dabd9360561c18a13872c3a649b606502d26b4df591a651cb08ec70a66ac owns the new run.
+Four TP workers450–453 completed weights at03:36:20; compilation is underway.
+This is startup evidence, not complete N2, graph/lifecycle acceptance or speed.
+After successful terminal, consume actual whole original with current-source
+reader before E1. Preserve first fault and own-only cleanup on failure.
+
+CURRENT00cd; NEXT sparse owner030 source-bound matched E1; BACKUP lowbit
+KIVI packed-fusion3845 source-only (14 tests/compile/native UNRUN). Recurrent
+owner prepares final-task actual Ref/CLI adaptation using completed503+1319
+inputs; LBv2 cap38912/376 truncations remain disclosed. Preparers API-only,
+remote CPU0. No accepted throughput/TTFT/TPOT or final task scores.
+
+Repair Oct10 07:00:25Z and total Oct12 07:00:25Z unchanged.0–3 protected,
+HugeTLB32GiB SPENT. Git publication still blocked by known HTTPS auth; local
+checkpoint is not a push. Existing unrelated dirty/untracked work preserved.
 
 ## Current execution — 2026-10-10 02:35 UTC
 
