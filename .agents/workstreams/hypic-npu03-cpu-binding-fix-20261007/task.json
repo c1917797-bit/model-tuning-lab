@@ -228,6 +228,15 @@
     "retry_budget": "one attempt; no retry6 without fresh explicit authorization"
   },
   "active_attempt": {
+    "campaign": "cache10r19-c32-longbench",
+    "arm": "no-cache",
+    "controller_operation": null,
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-full-baseline",
+    "state": "prospectively frozen; offline checks passed; fresh physical-lane admission pending",
+    "preregistration": "HYPIC_R19_REPAIRED_C32_2048_PREREGISTRATION_20261010.json",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22"
+  },
+  "r18_candidate_terminal": {
     "campaign": "cache10r18-c32-longbench",
     "arm": "hypic-only",
     "controller_operation": "exec-0000000000000247",
@@ -1118,5 +1127,5 @@
     "gsm8k_controller_and_auditor": "frozen locally at c0117fc9 with pre-device test-hash amendment d787abf5; 130 workstream tests, both-arm offline checks and one-switch/dataset checks passed; no device run yet",
     "full_quality_decision": "not-yet-measured"
   },
-  "next_action": "r18 original-source 2048/c32 LongBench baseline is terminal valid but the candidate failed after 33/127 samples from a missing GDN replay material runtime error. Do not poll/restart or reuse either root; see HYPIC_R18_C32_TERMINAL_FAILURE_AUDIT_20261010.md. Existing direct-descendant repair 4429e3 has six focused CPU tests passing; next verify its disabled-control seam, freeze a new source identity and immutable matched quality roots, then use only freshly admitted physical NPU0-3 and port 8223 for the complete LongBench pair. Reuse r18 baseline only if exact disabled-path/source equivalence is independently proven; otherwise rerun a matching control. GSM8K is an off-path safety phase after LongBench, not an operator detour. Keep deployment quality separate from mechanism attribution; preserve original-source performance without needless repetition. Never use NPU4-7 or stop external work. Do not claim remote/main sync while GitHub authentication is unavailable."
+  "next_action": "r19 repaired-source 2048/c32 LongBench pair is prospectively frozen with clean matched roots and passed offline arm checks. Re-prove direct chicaihong01/ma route, actual physical NPU0-3 and port 8223 idle state, then launch only the r19 no-cache arm under continuous isolation. Poll its exact operation and immutable root until terminal; independently audit before admitting the r19 HYPIC arm. Do not reuse r18 roots or repeat validated historical performance. GSM8K off-path safety remains required after LongBench. Never use NPU4-7 or stop external work; GitHub/main are not synchronized."
 }

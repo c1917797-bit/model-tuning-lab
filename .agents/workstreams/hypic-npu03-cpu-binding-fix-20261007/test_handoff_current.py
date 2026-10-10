@@ -60,12 +60,17 @@ class HandoffTests(unittest.TestCase):
                          "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b")
         active = task["active_attempt"]
         if active is not None:
-            self.assertEqual(active["campaign"], "cache10r18-c32-longbench")
-            self.assertEqual(active["arm"], "hypic-only")
-            self.assertEqual(active["controller_operation"], "exec-0000000000000247")
-            self.assertTrue(active["root"].endswith("r18-c32-full-hypic"))
-            self.assertIn("terminal runtime failure", active["state"])
-            self.assertTrue((HERE / active["terminal_audit"]).is_file())
+            self.assertEqual(active["campaign"], "cache10r19-c32-longbench")
+            self.assertIn(active["arm"], {"no-cache", "hypic-only"})
+            suffix = "baseline" if active["arm"] == "no-cache" else "hypic"
+            self.assertTrue(active["root"].endswith(f"r19-c32-full-{suffix}"))
+            self.assertEqual(active["source_commit"],
+                             "4429e35177979c874bf053ab29789e4773f39b22")
+            self.assertTrue((HERE / active["preregistration"]).is_file())
+        r18 = task["r18_candidate_terminal"]
+        self.assertEqual(r18["controller_operation"], "exec-0000000000000247")
+        self.assertIn("terminal runtime failure", r18["state"])
+        self.assertTrue((HERE / r18["terminal_audit"]).is_file())
         self.assertEqual(task["r17_cap_isolation_design"]["quality_decision"],
                          "REJECT_OR_QUALIFY")
         self.assertEqual(task["r13_baseline_attempt"]["arm"], "no-cache")
@@ -93,7 +98,7 @@ class HandoffTests(unittest.TestCase):
         self.assertIn("127x3", task["goal_horizons"]["short_term"])
         self.assertIn("all 29", task["goal_horizons"]["long_term"])
         self.assertIn("2048/c32", task["next_action"])
-        self.assertIn("4429e3", task["next_action"])
+        self.assertIn("r19 repaired-source", task["next_action"])
         self.assertIn("GSM8K", task["next_action"])
         self.assertEqual(task["timeboxed_milestone_plan"]["deadline_utc"],
                          "2026-10-09T17:21:24Z")

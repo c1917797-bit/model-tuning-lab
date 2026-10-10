@@ -2,6 +2,7 @@
 
 ## 0. Status
 
+- **Current prospective action (2026-10-10):** r19 is frozen on the existing direct-descendant repair source `4429e351` with a fresh, same-source no-cache/HYPIC LongBench-v2 pair (127 samples × 3 scored repeats, c32, max output 2048, physical NPU0–3 only). The new controller, independent auditor, preregistration, and three focused offline tests are in this worktree. Both-arm no-device checks, the 29-Skill structure validator, six repair-source CPU race tests and three r19 offline tests passed. The r19 roots were absent and the latest direct physical NPU0–3/port 8223 snapshot was idle; admission must be re-proven immediately before launch. This is not an r19 device result and does not revise the r18 failure or older quality rejection.
 - **Current terminal correction (2026-10-10):** r18 original-source c32/max-2048 HYPIC-only candidate failed after 33/127 complete samples (99/381 scored responses). Four TP workers hit missing GDN replay material; an async hot batch was planned before an eviction-bearing materialization report. The original `3ad0967` source lacks the known `4429e3` pending-materialization guard. Exact victim hash remains unproved. The 400 guard samples were clean and exact owned resources released. See `HYPIC_R18_C32_TERMINAL_FAILURE_AUDIT_20261010.md`. Never restart/reuse r18 candidate root. No r18 paired quality verdict.
 - r18 original-source max-2048/c32 LongBench no-cache arm is terminal (`exec-00000000000001d1`, exit 0). Independent audit passed 127 samples, 381 scored responses, 223 correct, 870 clean guard samples, source attestation and exact owned release; arm-result SHA256 `7d17df0e23319ff55f2a798e2cc2a1e63f99504b23ad6fe5fb75936c0a4a3464`. Do not rewrite this immutable root. The matching HYPIC-only arm failed as described above. GSM8K has not run; no full r18 quality decision exists.
 - r17 original-source cap-1024/c8 diagnostic is terminal and independently audited. Baseline 179/381 versus HYPIC 174/381 (−1.3123 pp); 377/381 aggregate hot, candidate controller exit 1 on the frozen coverage gate, but complete all-request quality evidence, clean physical NPU0–3 isolation, and exact owned release. The diagnostic quality decision is `REJECT_OR_QUALIFY`; this neither changes r16 nor establishes historical 1024/c32 or current 2048/c32 acceptance. See `HYPIC_R17_CAP1024_TERMINAL_AUDIT_20261010.md`; immutable audit SHA256 `493f9773d31a49e4f0b7e9c7ba73ea12e9722b4a7409e95c5ea05965b12853b3`. A separately labelled post-hoc repeat-variability diagnostic at `591ff7f4` found 28 candidate versus 10 baseline samples with variable correctness across three repeats; it does not alter the frozen decision or prove cause. Do not rerun either r17 root or splice later-source speed/off-path clean2 quality.
@@ -90,29 +91,32 @@ the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 4. Current Action
 
-Do not relaunch frozen r13–r17 quality, matched-performance, Prefill,
-Decode or isolated GDN phases. r13 is positive performance and
-negative quality under `c12060c`; r16 and r17 are negative quality
-under original `3ad0967` at distinct 2048/c8 and 1024/c8 rulers. Keep
-identities and decisions separate. Next freeze the missing original-source
-2048/c32 explicit-segment LongBench-v2 and GSM8K pair; do not add a new
-operator detour. No CANN/HCCL/GDN quality root cause is proven. NPU4–7
-remain outside this task.
+Do not relaunch frozen r13–r18 roots, matched-performance, Prefill, Decode,
+or isolated GDN phases. r18 original-source 2048/c32 baseline is valid but
+its candidate failed during runtime, without a paired quality verdict.
+The next device action is the prospectively frozen r19 repaired-source
+LongBench no-cache arm, followed only after terminal independent audit by
+its matching HYPIC arm. Admit each arm only with fresh direct-route physical
+NPU0–3 and port 8223 idle proof and continuous isolation. GSM8K remains a
+separate required off-path safety phase after its controller/auditor are frozen.
+Keep original-source performance, repaired-source quality, and any later
+repaired-source performance as distinct claims. NPU4–7 remain outside scope.
 
 ## 5. Next Actions
 
-1. Validate and checkpoint the r17 terminal audit, exact raw hashes, focused
-   regressions and full Maintainer Skill Tree validator.
-2. Keep r13 positive performance and r13/r16 negative quality in separate
-   source/ruler identities. Preserve the completed profiler and parser
-   failure; do not use them to assign RoPE/GDN/cache causality.
-3. Prospectively freeze a new 2048/c32 original-monkeypatch identity with
-   explicit LongBench-v2 boundaries, matching GSM8K, deterministic canary,
-   c32 capacity proof, full paired quality, uninterrupted isolation and exact
-   release. Keep full Skill acceptance partial until those and same-source
-   performance/integration gates are actually met; do not relaunch old roots.
-4. Commit only a reviewed coherent checkpoint. Push only when authentication
-   works and independently verify the live remote ref.
+1. Independently validate r19 preregistration, both-arm no-device preflight,
+   4429e3 race regressions, the Maintainer Skill Tree, and clean source tree.
+2. Re-prove current physical NPU0–3 processes and port 8223, then launch only
+   r19 no-cache LongBench. Poll the same operation and immutable root until
+   terminal; independently audit 127×3, source, guard, and exact own release.
+3. If valid and the lane is freshly idle, launch the frozen r19 HYPIC arm,
+   then run the independent paired quality audit. A runtime failure remains a
+   failure, not a score; hot coverage limits mechanism attribution separately.
+4. Freeze and run the required paired GSM8K off-path safety phase without
+   borrowing old roots. Only if quality is admissible consider the minimum
+   matched repaired-source performance regression needed for adoption.
+5. Map evidence to Skills, validate and commit coherent checkpoints. Push only
+   when authentication works and independently verify the live remote ref.
 
 ## 6. Validation Commands
 
