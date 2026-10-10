@@ -1,0 +1,75 @@
+{
+  "schema": "main.finite-serial-handoff-source/v1",
+  "default_enabled": false,
+  "version": "v1",
+  "files": [
+    {
+      "name": "serial_batch.py",
+      "bytes": 18451,
+      "sha256": "5db00aadd87482fde4647c7b04d34dea6922cc0178f719f146b64a2820b11a59"
+    },
+    {
+      "name": "skvq010_adapter.py",
+      "bytes": 16441,
+      "sha256": "a15cc63a2ef11d0b5ad0ce640f4e39cd9cbb82c9a8e35eacace1536b11cf250a"
+    },
+    {
+      "name": "test_serial_batch.py",
+      "bytes": 21129,
+      "sha256": "2df59790a588f7856c086a9da0f976f5faa29f433a78561d84c53524304a2d13"
+    }
+  ],
+  "runtime_profile": {
+    "name": "SKVQ010-only-release-adapter",
+    "producer_source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-010/SOURCE_MANIFEST.json",
+      "bytes": 63708,
+      "sha256": "524a370c0ab268147b85cefb7a34057036f58747a76eefc9eaae4db8f0184032"
+    },
+    "host_entry_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-010/MAIN_HOST.py",
+      "bytes": 25224,
+      "sha256": "1127d3cdb81768773f6f801d444b1bdf12bf24bcb06872ed556d2f229547789c"
+    },
+    "full_transitive_closure_replayed_by": "original current_contract.configure/source and resources.helper frozen three-pin loader"
+  },
+  "budgets": {
+    "max_stages": 8,
+    "batch_max_rss_bytes": 67108864,
+    "additional_ordinary_ram_bytes": 67108864,
+    "host_cpu_shared": 1,
+    "original_stage_cpu_ram_disk_cleanup_unchanged": true,
+    "adapter_wall_seconds": 120,
+    "software_cpu": 1,
+    "software_memory_bytes": 536870912,
+    "software_wall_seconds": 30
+  },
+  "scope": {
+    "finite_synchronous_only": true,
+    "daemon": false,
+    "automatic_retry": false,
+    "new_controller": false,
+    "source_profiles_needing_repair_not_requeued": true,
+    "external_stop_allowed": false,
+    "AW_terminal_manufactured": false,
+    "software_prepared_is_ready": false
+  },
+  "software": {
+    "discovered": 36,
+    "local_passed": 35,
+    "local_skipped": 1,
+    "local_scope": "stdlib fixtures, original pure Control.validate AST, real original052b envelope parsing, real local child wait",
+    "Linux_LocalBackend_launch": "UNRUN"
+  },
+  "pending": [
+    "MAIN deployment/source readback",
+    "MAIN Linux full36 without skip",
+    "MAIN actual052b original SHA and independent fresh read-only release",
+    "at least one future MAIN reviewed exact stage ticket and actual prerequisites",
+    "reviewed release/admission adapter for non-SKVQ010 sources",
+    "actual cross-paper terminal-to-dispatch timing"
+  ],
+  "ready_stage_count": 0,
+  "numerical_pass_claimed": false,
+  "actual_zero_idle_claimed": false
+}

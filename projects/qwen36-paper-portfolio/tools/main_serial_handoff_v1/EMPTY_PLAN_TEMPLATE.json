@@ -1,0 +1,12 @@
+{
+  "schema": "main.finite-serial-stage-plan/v1",
+  "reviewed_by": "MAIN",
+  "stages": [],
+  "empty_reason": "NO_REVIEWED_READY_SUCCESSOR: source preparation is not a stage ticket",
+  "batch_resources": {
+    "host_cpu_shared": 1,
+    "max_rss_bytes": 67108864,
+    "additional_ordinary_ram_bytes": 67108864,
+    "fresh_ancestor_admission_required": true
+  }
+}

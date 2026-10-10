@@ -1,3 +1,26 @@
+## 2026-10-10T20:36Z — finite handoff implementation verified; KIVI018 actual host running
+
+- Actual Linux0542:36/36 PASS, zero skips. Actual0543 consumed original SKVQ010052b and proved exact stopped-retained own containers plus fresh physical4–7 release. Canonical tool projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1 is deployed. No real automatic cross-paper finite batch or zero-idle result is claimed; current adapter is only frozen010 and cannot authorize retrying that failed version.
+- Actual KIVI0180548 is running at lowbit/run-kivi-model-firstdecode-main-20261010-018. Same-image190/source205 prerequisites passed. Only changes versus017: common cache10→6GiB and four source-bound allocator diagnostics; fixed32768+2, full64 coverage, unchanged3GiB physical reserve. This is numerical capture, not throughput or task acceptance. Do not duplicate0548. Three off-device successors: SKVQ011 actual projection repair, matching handoff profile, and KIVI paired E2E preparation conditional on full independent numeric PASS.
+- KIVI018 producer, whole018 and raw019 sources now archived byte-exact under projects/qwen36-paper-portfolio/kivi/{firstdecode_bootstrap_v018,firstdecode_whole_v018,raw_cpu_v019}. Runtime manifests intentionally retain original paths; archives do not invent relocated validation or imply a successful NPU result.
+- READY successor count remains0: preparation gap is real. Failure release must admit another actually ready paper without waiting for repair/report/Git. Current source-only tests do not establish continuous utilization. Goal UNMET, fixed cutoff1791788425 unchanged,0–3 untouched.
+
+## 2026-10-10T20:11Z — SKVQ010 actual terminal/release; no ready successor yet
+
+- Original052b completed exit1 after430.693s; complete original saved as lowbit/MAIN_SKVQ010_FAILED_052B_ORIGINAL_20261010.json. Primary actual worker install rejected 'exact actual TP-sharded QKV projection object'. Real model load/warmup is not plugin/capture PASS: sample_records[], no calibration data or quantized correctness/performance result.
+- Independent0535 verified own CPU5ac5749a12f3e87d29cc8744a30f8d196989b64d894914ad290727f3ec55ee8e and TP42e5f64cc9ef01345a478b1823da5fa607488b1ffd14e6d7ae8959961213b1be8 stopped/Pid0/noExec/noOOM, exact image/map; TP4 FinishedAt20:04:12.47593021Z. Physical4–7 idle/HBM2869/2866/2867/2861MiB. No external task stopped.
+- SKVQ011 repairs the actual deployed projection representation and adjacent installation path off-device. KIVI018 independently repairs measured physical-memory capacity while preserving3GiB reserve and32768+2 coverage. Neither is currently admitted. READY_NPU=0 is a real preparation gap, not effective zero-idle.
+- Finite, pre-reviewed batch handoff is being implemented and tested; source-only success will not be called observed handoff. Keep all old failed versions and fixed Oct12 cutoff. No unchanged010/017 retry and no invented whole/accuracy/PASS.
+
+## 2026-10-10T20:05Z — KIVI017 released to repair; SKVQ010 actually running
+
+- KIVI017 actual same-image179/source204 passed, then full model loaded and four explicit native/compact allocations published. Real HBM rose to30600/30599/30600/30595MiB at15:37:57Z, triggering the unchanged3GiB reserve. No full first-decode/numerical/performance/accuracy PASS. This is current implementation/configuration failure, not paper no-go. No unchanged017 retry.
+- Exact own candidate9d2a143545b1f078f18a43bc81d204672feeb47146166ff2d4d98caad44ea5f4 stopped-retained15:38:13.40103213Z; CPU1e1ce09a497b990c3dbb943fe575b8ea2c2d81b544f5c7ae4ba8882ce7f8b449 also stopped. Independent0529 verified Pid0/noExec/noOOM/exact image/maps. Original049e registry expired: NOT_FOUND is NOT terminal proof. Retained RESULT and independent release only are authoritative for their scopes.
+- Current052b is MAIN SKVQ010 at /cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001. Actual0528 source123/software96 and052a mount/all9TRAIN passed. 0530 observed real TP4 worker init/model weight loading. Only poll052b; never duplicate. This captures baseline calibration tensors, not quantized SKVQ correctness/E2E acceptance.
+- A real >4hour dispatch gap occurred before this launch. Zero-idle has NOT been achieved; root of delayed interaction is unproven, not assigned to network. A finite source-pinned, pre-reviewed batch handoff is being implemented/tested; no cron, new recurring service or speculative launch.
+- Parallel card-free preparation: KIVI018 memory repair; SKVQ writer bridge/003 calibration prerequisites; finite serial dispatcher. MAIN remains sole NPU4–7 owner. Independent next-device READY count0; prepared source is not executable admission. Failed-paper repair/report/Git must not hold card lease.
+- Fixed cutoff1791788425, protected0–3 and spentHugeTLB authorization unchanged. Goal UNMET/ACTIVE. Existing8f782ba canonical commit push remains unconfirmed.
+
 ## 2026-10-10T15:14Z — Both failed stages released; actual preparation gap remains
 
 - KIVI016 actual same-image full167 software048a PASS135.449s and independent048c PASS; this fixed015 software transport/import issues, not model acceptance.

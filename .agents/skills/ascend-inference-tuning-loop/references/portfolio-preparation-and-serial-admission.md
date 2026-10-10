@@ -247,6 +247,21 @@ ready counts by gate rather than paper count. Normal event-driven handoff is
 immediate when prerequisites/ownership permit; periodic audit is recovery
 fallback, not a15-minute dispatch delay by design.
 
+For an already authorized finite queue, prefer a bounded MAIN batch runner
+over waiting for the next chat poll between prepared stages. Freeze the reviewed
+ticket list, exact argv/source/input bindings, unique output roots and total
+cutoff before dispatch. It may advance only after its own real child exit and
+source-qualified exact release checks; do not manufacture an AWMCP terminal
+from a missing registry entry or a disk RESULT. An existing unknown operation
+requires explicit ownership recovery and remains distinct from observed exit.
+A failed paper returns to off-device repair while an independent READY ticket
+can run. Missing prerequisites are skipped with a reason, never polled forever
+or promoted from an agent's claim. If no ticket qualifies, record READY=0 and
+exit; no recurring daemon or dummy workload is implied by this batch authority.
+Measure first-fault-to-release and release-to-next-device-work separately.
+Passing batch unit tests or a release-reader test is not proof of a real
+cross-paper handoff; report that only after observing both stages.
+
 This graph maximizes useful gate progression, not artificial occupancy.
 Performance controls cannot interleave with other NPU activity. No automatic
 clock renewal, missing-ref promotion or unbounded repair cycle; use the same
@@ -565,3 +580,8 @@ For device-free consumers, device mappings describe visibility, cpusets describe
 ## Test deployed runtime representations before device admission
 
 A large fixture suite can still miss a framework boundary if it manufactures a plain dict or an unpatched class while the deployed backend returns a defaultdict or installs its own subclass. Validate the actual source-qualified producer body, container/value semantics, backend patch order and public consumer path. Accept only the proved representation while preserving layer coverage, source identity and numerical gates; do not replace a brittle type check with arbitrary acceptance. Audit adjacent consumers in the same repair so the next device run is not another one-assertion discovery. Keep this regression device-free when the genuine code permits it, and separately label any hardware-dependent remainder.
+
+
+## Executable finite handoff reference
+
+The bounded implementation is [MAIN serial handoff](../../../../projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1/README.md). Its Linux36 and real failed-SKVQ010 release checks passed on 2026-10-10; this is not an observed automatic cross-paper batch or a zero-idle claim. Use an exact matching producer profile and MAIN-reviewed finite tickets. Never treat the retained SKVQ010 failure as a ready retry. Measure actual handoff latency and replenish independent ready stages while the current device stage runs.

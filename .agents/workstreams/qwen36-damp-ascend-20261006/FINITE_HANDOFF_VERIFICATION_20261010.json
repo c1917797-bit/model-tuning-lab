@@ -1,0 +1,186 @@
+{
+  "schema": "main-scheduling-repair-evidence/v1",
+  "scope": "software and actual release evidence only, not automatic multi-paper dispatch or E2E gain",
+  "linux36": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-I",
+            "-B",
+            "-c",
+            "import os,sys,resource,runpy\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nresource.setrlimit(resource.RLIMIT_AS,(536870912,536870912));resource.setrlimit(resource.RLIMIT_CPU,(30,30))\nsys.path.insert(0,\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1\")\nimport serial_batch as B\nB.source_gate(\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1/SOURCE_MANIFEST.json\",'c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1')\nsys.argv=[\"/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1/test_serial_batch.py\"]\nrunpy.run_path(sys.argv[0],run_name='__main__')"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 950,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000542",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "test_actual_local_backend_launch_exit1_reaped_and_original_logs (__main__.BatchTests) ... ok\ntest_bool_bytes_not_a_valid_ref (__main__.BatchTests) ... ok\ntest_default_off_real_cli_no_ticket_reads (__main__.BatchTests) ... ok\ntest_duplicate_ticket_rejected_before_dispatch (__main__.BatchTests) ... ok\ntest_empty_queue_records_real_reason_no_load (__main__.BatchTests) ... ok\ntest_existing_output_never_retried (__main__.BatchTests) ... ok\ntest_failed_worker_repair_without_same_retry (__main__.BatchTests) ... ok\ntest_fixed_deadline_no_shorter_stage (__main__.BatchTests) ... ok\ntest_lost_handle_cannot_promote_disk_result (__main__.BatchTests) ... ok\ntest_missing_gate_dependency_blocked (__main__.BatchTests) ... ok\ntest_no_pending_alias_after_successful_publication (__main__.BatchTests) ... ok\ntest_optin_required_real_cli (__main__.BatchTests) ... ok\ntest_predecessor_hash_drift_blocked (__main__.BatchTests) ... ok\ntest_real_local_child_wait_not_aw_envelope (__main__.BatchTests) ... ok\ntest_release_owner_failure_blocks_next (__main__.BatchTests) ... ok\ntest_release_wrong_source_blocks (__main__.BatchTests) ... ok\ntest_reused_pid_stops_not_absence (__main__.BatchTests) ... ok\ntest_software_prepared_is_not_ready (__main__.BatchTests) ... ok\ntest_success_release_then_exact_next (__main__.BatchTests) ... ok\ntest_ticket_local_missing_does_not_starve_ready_successor (__main__.BatchTests) ... ok\ntest_time_spent_in_fresh_check_cannot_cross_fit (__main__.BatchTests) ... ok\ntest_unknown_global_fresh_resource_does_not_skip_to_next (__main__.BatchTests) ... ok\ntest_actual_052b_original_exact_failure_contract (__main__.OriginalAWTerminalTests) ... ok\ntest_not_found_cannot_be_terminal (__main__.OriginalAWTerminalTests) ... ok\ntest_original_cancelled_not_completed (__main__.OriginalAWTerminalTests) ... ok\ntest_original_exit0 (__main__.OriginalAWTerminalTests) ... ok\ntest_original_exit1_not_numerical_pass (__main__.OriginalAWTerminalTests) ... ok\ntest_original_foreign_argv_refused (__main__.OriginalAWTerminalTests) ... ok\ntest_original_transport_failure_not_exit1 (__main__.OriginalAWTerminalTests) ... ok\ntest_unknown_exit_code_refused (__main__.OriginalAWTerminalTests) ... ok\ntest_adapter_has_no_stop_create_exec (__main__.OriginalReleaseValidatorTests) ... ok\ntest_exact_original_method_positive (__main__.OriginalReleaseValidatorTests) ... ok\ntest_foreign_owner_negative (__main__.OriginalReleaseValidatorTests) ... ok\ntest_mount_or_memory_drift_negative (__main__.OriginalReleaseValidatorTests) ... ok\ntest_protected_device_negative (__main__.OriginalReleaseValidatorTests) ... ok\ntest_source_drift_negative (__main__.OriginalReleaseValidatorTests) ... ok\n\n----------------------------------------------------------------------\nRan 36 tests in 0.838s\n\nOK\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 344,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 344,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 344
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 343,
+          "routeLookupMs": 0,
+          "totalMs": 343
+        }
+      },
+      "traceId": "18cf6293-7fd8-47c5-a49c-92ff3ee26a01"
+    },
+    "operationId": "exec-0000000000000542",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "actualSkvq010Release": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-I",
+            "-B",
+            "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1/skvq010_adapter.py",
+            "--execute",
+            "--batch-source-manifest-sha256",
+            "c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1",
+            "--original-aw",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ010_FAILED_052B_ORIGINAL_20261010.json",
+            "--original-aw-sha256",
+            "814756c7fcf9a300ca0fc50ba218f1a0f2d298b8af55f9a37110ed25a65fbbd7",
+            "--existing-root",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001",
+            "--source-manifest-sha256",
+            "524a370c0ab268147b85cefb7a34057036f58747a76eefc9eaae4db8f0184032",
+            "--output",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ010-052B-READONLY-RELEASE-20261010-001.json"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 1343,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000543",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"AW_terminal_claimed\": false, \"exact_owned_release\": true, \"external_stopped\": false, \"first_fault\": \"ValueError('actual child nonzero; raw stdout/stderr retained')\", \"new_stage_admitted\": false, \"numeric_or_performance_pass_claimed\": false, \"original_aw_ref\": {\"bytes\": 4331, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ010_FAILED_052B_ORIGINAL_20261010.json\", \"sha256\": \"814756c7fcf9a300ca0fc50ba218f1a0f2d298b8af55f9a37110ed25a65fbbd7\"}, \"original_failed\": true, \"original_operation_verified\": true, \"original_result_ref\": {\"bytes\": 46689, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001/HOST_RESULT.json\", \"sha256\": \"3ff3f90f8717df1ed65828141af501cbf6f52fc233e335639af593f18390b718\"}, \"owned\": [{\"OOMKilled\": false, \"cid\": \"5ac5749a12f3e87d29cc8744a30f8d196989b64d894914ad290727f3ec55ee8e\", \"fresh_inspect_ref\": {\"bytes\": 73910, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ010-052B-READONLY-RELEASE-20261010-001.json.INSPECT-0.json\", \"sha256\": \"a88c1aa9eeabf3c08edfea6872f9e0d7627a4e99a3b6b04d5d415bfcfd47f35f\"}, \"original_release_ref\": {\"bytes\": 662, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001/STOP_RETAIN-1791662280204991000.json\", \"sha256\": \"636e71322ea6614983290f40665b96682a831e44c9dfde389dd9bf8af2e8eacc\"}}, {\"OOMKilled\": false, \"cid\": \"2e5f64cc9ef01345a478b1823da5fa607488b1ffd14e6d7ae8959961213b1be8\", \"fresh_inspect_ref\": {\"bytes\": 76964, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ010-052B-READONLY-RELEASE-20261010-001.json.INSPECT-1.json\", \"sha256\": \"707599cc06248f9b704ba0ff4a207dea57e2dc64cee8a2c59476b801b0ee4fdc\"}, \"original_release_ref\": {\"bytes\": 968, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001/STOP_RETAIN-1791662653771465450.json\", \"sha256\": \"47721da19db4dafdb4b7927eeaedfe2cea68513d09c637a2b84d3976239cc153\"}}], \"owner\": \"skvq-current72h-preprojection-v1-010\", \"physical_idle\": [4, 5, 6, 7], \"protected_boundary\": {\"baseline\": [], \"external_added\": [], \"external_changed\": [], \"external_removed\": [], \"external_unchanged_claimed\": false, \"observed\": [], \"own_on_protected\": false, \"schema\": \"sparq.protected-boundary/v1\"}, \"schema\": \"main.serial-exact-owned-release/v1\", \"secondary\": [], \"smi_ref\": {\"bytes\": 5074, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ010-052B-READONLY-RELEASE-20261010-001.json.SMI.json\", \"sha256\": \"3b38f893873182412f67d81bc0bad717b7812959ea00e248c18f075521b382f6\"}, \"source_ref\": {\"bytes\": 63708, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-010/SOURCE_MANIFEST.json\", \"sha256\": \"524a370c0ab268147b85cefb7a34057036f58747a76eefc9eaae4db8f0184032\"}}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 352,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 352,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 352
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 352,
+          "routeLookupMs": 0,
+          "totalMs": 352
+        }
+      },
+      "traceId": "c2576265-1315-42eb-aa2d-3c69e4b5c944"
+    },
+    "operationId": "exec-0000000000000543",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  }
+}

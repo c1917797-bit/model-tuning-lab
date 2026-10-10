@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T15:14:00Z",
+  "updated_at_utc": "2026-10-10 20:31:12 UTC",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -10,28 +10,71 @@
     2,
     3
   ],
-  "current": null,
+  "current": {
+    "paper": "KIVI",
+    "stage": "018 B1 eager32768+2 full64 numerical producer",
+    "state": "RUNNING_ACTUAL_HOST_NOT_ACCEPTED",
+    "operation": "exec-0000000000000548",
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+      "bytes": 110307,
+      "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+    },
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "--component-sha256",
+      "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json",
+      "--software-sha256",
+      "9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e",
+      "--software-stage",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json",
+      "--software-stage-sha256",
+      "efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018",
+      "--port",
+      "8250"
+    ],
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018",
+    "software_actual": "053d same660190 PASS; 0545 current205 closure PASS; MAIN local whole89/raw158 PASS",
+    "math_or_performance_pass": false
+  },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "paper": "KIVI",
-      "owner": "kivi_model_successor",
-      "stage": "017 evidenced defaultdict native-spec seam repair; whole provider interface source audit and real native-body CPU regression",
-      "state": "PREPARING_OFF_DEVICE",
-      "ready": false
-    },
-    {
-      "paper": "KIVI",
-      "owner": "recurrent_lifecycle_ready_queue",
-      "stage": "Independent actual native-spec/validator coverage audit; whole016/raw017 frozen but failed016 cannot authorize them",
-      "state": "PREPARING_OFF_DEVICE",
-      "ready": false
-    },
-    {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "010 source-pinned actual GroupCoordinatorPatch/int NPU device/communicator closure repair; no deleted source guard",
+      "stage": "011 actual Ascend QKV projection identity/install chain repair before model relaunch; then writer bridge and calibration consumer closure",
+      "state": "REPAIR_OFF_DEVICE",
+      "ready": false
+    },
+    {
+      "paper": "PORTFOLIO",
+      "owner": "recurrent_lifecycle_ready_queue",
+      "stage": "Linux36 PASS and actual052b release PASS; KIVI018 exact profile in preparation, not yet generic queue acceptance",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     }
@@ -39,35 +82,37 @@
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
   "no_new_model_performance_or_accuracy_pass": true,
   "previous": {
-    "paper": "KIVI",
+    "paper": "SKVQ",
+    "version": "010",
+    "operation": "exec-000000000000052b",
     "owner": "MAIN",
-    "state": "FAILED_SPEC_ADAPTER_RELEASED",
-    "operation": "exec-000000000000048d",
+    "stage": "actual same-image CPU input, all4 N1 and baseline TP4 full256x4096 calibration capture",
+    "state": "FAILED",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-016/SOURCE_MANIFEST.json",
-      "bytes": 98890,
-      "sha256": "79427342373ef63b11f5709d689c2ef6186afe09a94eaef53889b8f09cc3d0c7"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-010/SOURCE_MANIFEST.json",
+      "bytes": 63708,
+      "sha256": "524a370c0ab268147b85cefb7a34057036f58747a76eefc9eaae4db8f0184032"
     },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-016",
-    "software167_operation": "exec-000000000000048a",
-    "software_independent_consumer": "exec-000000000000048c",
-    "actual_all4_N1_passed": true,
-    "model_weights_loaded": true,
-    "model_firstdecode_completed": false,
-    "cause": "Real source returns collections.defaultdict(list); current plan exact type(specs)is dict rejects before cache initialization. Keep64 coverage; actual full numerical/E2E/task gates unrun.",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001",
+    "software_pass_operation": "exec-0000000000000528",
+    "mount_train_pass_operation": "exec-000000000000052a",
+    "latest_progress": "0530 readonly actual four worker initialization and weight loading; no full capture/NPU candidate numeric/performance/task PASS",
     "result": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-016/RESULT.json",
-      "bytes": 17583,
-      "sha256": "eab668349d9b23afca8e2c8daf0bfaf7fea8c109c4c66a681de3e8d1733bb9c9"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001/HOST_RESULT.json",
+      "bytes": 46689,
+      "sha256": "3ff3f90f8717df1ed65828141af501cbf6f52fc233e335639af593f18390b718"
     },
-    "release_verified_operation": "exec-0000000000000493",
-    "device_stopped_utc": "2026-10-10T15:08:10.50695636Z",
-    "first_fatal_epoch_ns": "1791644872479535400",
-    "first_fatal_to_stop_seconds": 18.02742096,
-    "exact_owned_stopped_retained": true,
-    "device_cid": "f82edd5f6fb791c7ed239382e4b71a81097545249d17bef4705fb737a01d52d6"
+    "original_terminal": {
+      "operation": "exec-000000000000052b",
+      "exit_code": 1,
+      "duration_ms": 430693,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ010_FAILED_052B_ORIGINAL_20261010.json"
+    },
+    "cause": "Actual named RPC install rejected exact TP-sharded QKV projection object before sample0; implementation/source representation seam, not numerical/paper verdict.",
+    "release_operation": "exec-0000000000000535",
+    "candidate_stopped_retained_utc": "2026-10-10T20:04:12.47593021Z"
   },
-  "idle_cause": "Both active paper prototypes require evidenced implementation repair; no real ready device successor. SKVQ009->KIVI016 handoff occurred, but KIVI016 then failed native cache spec type adaptation. Not foreign occupancy, algorithm no-go or zero idle.",
+  "idle_cause": null,
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -158,16 +203,11 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-0000000000000493",
-    "utc": "2026-10-10T15:10:43.291714Z",
-    "compute_processes_on4to7": [],
-    "hbm_mib": [
-      2868,
-      2866,
-      2866,
-      2861
-    ],
-    "protected0to3": "external HYPIC active untouched"
+    "operation": "0546 partial smi/docker success; missing /usr/bin/ss failed observer preserved; 0547 /proc/net completion",
+    "physical4_7": "no processes; HBM2869/2866/2867/2862MiB at prelaunch only",
+    "memory_available_kib": 115555128,
+    "port8250": "free",
+    "not_reusable_for_future_admission": true
   },
   "history_terminals": [
     {
@@ -578,6 +618,60 @@
       "release_verified_operation": "exec-0000000000000488",
       "device_stopped_utc": "2026-10-10T14:53:34.30589957Z",
       "exact_owned_stopped_retained": true
+    },
+    {
+      "paper": "KIVI",
+      "owner": "MAIN",
+      "state": "FAILED_SPEC_ADAPTER_RELEASED",
+      "operation": "exec-000000000000048d",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-016/SOURCE_MANIFEST.json",
+        "bytes": 98890,
+        "sha256": "79427342373ef63b11f5709d689c2ef6186afe09a94eaef53889b8f09cc3d0c7"
+      },
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-016",
+      "software167_operation": "exec-000000000000048a",
+      "software_independent_consumer": "exec-000000000000048c",
+      "actual_all4_N1_passed": true,
+      "model_weights_loaded": true,
+      "model_firstdecode_completed": false,
+      "cause": "Real source returns collections.defaultdict(list); current plan exact type(specs)is dict rejects before cache initialization. Keep64 coverage; actual full numerical/E2E/task gates unrun.",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-016/RESULT.json",
+        "bytes": 17583,
+        "sha256": "eab668349d9b23afca8e2c8daf0bfaf7fea8c109c4c66a681de3e8d1733bb9c9"
+      },
+      "release_verified_operation": "exec-0000000000000493",
+      "device_stopped_utc": "2026-10-10T15:08:10.50695636Z",
+      "first_fatal_epoch_ns": "1791644872479535400",
+      "first_fatal_to_stop_seconds": 18.02742096,
+      "exact_owned_stopped_retained": true,
+      "device_cid": "f82edd5f6fb791c7ed239382e4b71a81097545249d17bef4705fb737a01d52d6"
+    },
+    {
+      "paper": "KIVI",
+      "version": "017",
+      "operation": "exec-000000000000049e",
+      "original_operation_terminal_missing": true,
+      "registry_observation": "NOT_FOUND; not terminal proof",
+      "state": "FAILED_FROM_RETAINED_CONTROLLER_RESULT_RELEASE_INDEPENDENTLY_VERIFIED",
+      "cause": "Physical HBM rose to30600/30599/30600/30595MiB after native model/cache initialization;3GiB reserve gate stopped own stage. Current implementation/configuration failure, not paper no-go.",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-017/RESULT.json",
+        "sha256": "f75169df493d057cf36a6c997d622ff818508a6a88310a1f965f07d9b17e4f6b",
+        "bytes": 13039
+      },
+      "release_operation": "exec-0000000000000529",
+      "candidate_stopped_retained_utc": "2026-10-10T15:38:13.40103213Z",
+      "npu_correctness_pass": false
     }
-  ]
+  ],
+  "scheduler_repair": {
+    "source": "projects/qwen36-paper-portfolio/tools/main_serial_handoff_v1/SOURCE_MANIFEST.json",
+    "sha256": "c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1",
+    "Linux36": "0542 PASS0skip",
+    "actual_failed_release": "0543 PASS/source-bound052b independent observation",
+    "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
+    "zero_idle_claim": false
+  }
 }

@@ -1,0 +1,126 @@
+{
+  "schema": "main.finite-serial-handoff-entry/v1",
+  "frozen": true,
+  "source_ref": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/main-serial-handoff-v1-20261010/SOURCE_MANIFEST.json",
+    "bytes": 2693,
+    "sha256": "c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1"
+  },
+  "deployment": {
+    "remote_root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001",
+    "policy": "MAIN exact-byte Add to a new absent root, then readback every SHA; no remote deployment or stage execution by preparer",
+    "required_files": [
+      {"name":"serial_batch.py","bytes":18451,"sha256":"5db00aadd87482fde4647c7b04d34dea6922cc0178f719f146b64a2820b11a59"},
+      {"name":"skvq010_adapter.py","bytes":16441,"sha256":"a15cc63a2ef11d0b5ad0ce640f4e39cd9cbb82c9a8e35eacace1536b11cf250a"},
+      {"name":"test_serial_batch.py","bytes":21129,"sha256":"2df59790a588f7856c086a9da0f976f5faa29f433a78561d84c53524304a2d13"},
+      {"name":"SOURCE_MANIFEST.json","bytes":2693,"sha256":"c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1"},
+      {"name":"EMPTY_PLAN_TEMPLATE.json","bytes":361,"sha256":"101ffd3f79dd63ec72343d867c683ac4e6120595bfb8c9f41ec5b54659647bfc"}
+    ],
+    "optional_originals": [
+      {"name":"SOFTWARE36_FINAL_LOCAL_ORIGINAL.json","bytes":5387,"sha256":"9419c7fc05c351efb49eb218b7a7304971353d9d03ae8bff924c6ae9ecb6e97d"}
+    ]
+  },
+  "actual_local_software": {
+    "discovered": 36,
+    "passed": 35,
+    "skipped": 1,
+    "exit_code": 0,
+    "duration_seconds": 1.141,
+    "skipped_test": "Linux-only actual LocalBackend.launch /proc PID-start, child wait/reap and stdout/stderr source regression",
+    "scope": "stdlib control-flow fixtures, original pure Control.validate, actual052b original envelope parsing, bounded local child processes; no Docker, NPU, remote stage or actual release",
+    "original_ref": {
+      "path":"C:/Users/Huawei/AppData/Local/Temp/main-serial-handoff-v1-20261010/SOFTWARE36_FINAL_LOCAL_ORIGINAL.json",
+      "bytes":5387,
+      "sha256":"9419c7fc05c351efb49eb218b7a7304971353d9d03ae8bff924c6ae9ecb6e97d"
+    }
+  },
+  "commands": {
+    "Linux_full36": {
+      "argv": ["/usr/bin/env","TMPDIR=/cache/cch","/usr/bin/python3","-I","-B","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/test_serial_batch.py"],
+      "caps": {"cpus":1,"memory_bytes":536870912,"wall_seconds":30},
+      "preconditions": ["exact deployment readback", "SKVQ010 frozen source/dependencies are readable", "real original052b exists at its exact path and SHA"],
+      "expected": "36 discovered, 36 PASS, zero skips on Linux; retain actual whole command output, no fake result JSON"
+    },
+    "default_OFF_batch": ["/usr/bin/python3","-I","-B","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/serial_batch.py"],
+    "default_OFF_adapter": ["/usr/bin/python3","-I","-B","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/skvq010_adapter.py"],
+    "actual052b_readonly_release": {
+      "argv": [
+        "/usr/bin/python3","-I","-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/skvq010_adapter.py",
+        "--execute","--batch-source-manifest-sha256","c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1",
+        "--original-aw","/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ010_FAILED_052B_ORIGINAL_20261010.json",
+        "--original-aw-sha256","814756c7fcf9a300ca0fc50ba218f1a0f2d298b8af55f9a37110ed25a65fbbd7",
+        "--existing-root","/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-010-main-20261010-001",
+        "--source-manifest-sha256","524a370c0ab268147b85cefb7a34057036f58747a76eefc9eaae4db8f0184032",
+        "--output","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/MAIN-SKVQ010-052B-READONLY-RELEASE-20261010-001.json"
+      ],
+      "caps": {"cpus":1,"memory_bytes":536870912,"wall_seconds":120},
+      "preconditions": ["Linux_full36 actual PASS", "new output and sidecar paths absent", "MAIN supplied real052b SHA independently confirmed by053a", "immutable original HOST_RESULT and stop-retain receipts retained"],
+      "operations": "only source/artifact reads, exact own docker inspect and npu-smi info; no stop/create/container exec or stage retry",
+      "acceptance": "strict real AW completed original with exit1 plus exact source HOST_RESULT; fresh exact own stopped/Pid0/noExec; physical4-7 original idle reserve; protected boundary; no numerical/model/performance acceptance"
+    },
+    "empty_queue_behavior_only": {
+      "argv": [
+        "/usr/bin/env","MAIN_FINITE_SERIAL_HANDOFF_ENABLE=1","/usr/bin/python3","-I","-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/serial_batch.py",
+        "--execute","--source-manifest","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/SOURCE_MANIFEST.json",
+        "--source-manifest-sha256","c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1",
+        "--reviewed-plan","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/EMPTY_PLAN_TEMPLATE.json",
+        "--reviewed-plan-sha256","101ffd3f79dd63ec72343d867c683ac4e6120595bfb8c9f41ec5b54659647bfc",
+        "--output","/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-finite-serial-empty-behavior-20261010-001"
+      ],
+      "scope": "MAIN must review exact template; stages=[] exercises NO_READY_TICKET only, not actual ready/admission evidence. No adapter or device command is invoked."
+    },
+    "future_finite_batch_template": {
+      "argv": [
+        "/usr/bin/env","MAIN_FINITE_SERIAL_HANDOFF_ENABLE=1","/usr/bin/python3","-I","-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/serial_batch.py",
+        "--execute","--source-manifest","/cache/cch/qwen36-paper-preparation-20261007/recurrent/main-serial-handoff-v1-user72h-20261010-001/SOURCE_MANIFEST.json",
+        "--source-manifest-sha256","c842b1f9ee5581f9815a77c538d959a7d569e09bce6bb592fe33c7f2d78cbfc1",
+        "--reviewed-plan","@MAIN_ACTUAL_FROZEN_PLAN_PATH@","--reviewed-plan-sha256","@MAIN_ACTUAL_PLAN_SHA256@",
+        "--output","@NEW_ABSENT_BATCH_OUTPUT@"
+      ],
+      "not_executable_until": "placeholders replaced with MAIN-reviewed actual tickets, true consumed prerequisite Refs and reviewed matching profile; no such successor ticket is supplied"
+    }
+  },
+  "ticket_contract": {
+    "max_stages": 8,
+    "exact_keys": ["id","source_ref","entry_ref","argv","output_root","result_name","owner","image","physical","protected","wall_seconds","cutoff_epoch","review_ref","adapter_ref"],
+    "references": "strict {path,bytes,sha256}, no symlink ancestors, content/size/file identity checked, never guessed Ref or operation handle",
+    "review": "main.reviewed-stage-admission/v1, reviewed_by MAIN, state ACTUAL_PREREQUISITES_CONSUMED, ready_for_gate true, missing empty, exact ticket source/entry/adapter/argv/output/owner and stage_policy equality, actual artifact+consumer+acceptance Refs",
+    "stage_policy": "image, physical[4,5,6,7], protected[0,1,2,3], complete original wall_seconds, fixed cutoff_epoch and result_name must exactly equal ticket; full budget must fit again after fresh preparation",
+    "no_retry": "unique sourceSHA+entrySHA+owner per batch; code-repair failure is not queued unchanged"
+  },
+  "states": {
+    "PREPARATION_MISSING": "before launch only: ticket-local missing source/prerequisite/invalid absent output/full-time fit -> preserve SKIPPED_REPAIR, continue another independent reviewed ticket",
+    "REPAIR": "true completed failed stage and independently verified exact release -> preserve original first fault, no retry, continue next independent reviewed ticket",
+    "STAGE_TERMINAL_RELEASED": "true local child wait/reap and original stage result plus independent exact own release; does not assert numerical, graph, model or performance PASS",
+    "UNKNOWN_OR_BLOCKED": "global resource/unknown owner/failed fresh safety or launched child terminal/release unknown -> preserve first fault and stop batch; lost AW handle never means terminal",
+    "NO_READY_TICKET": "empty/all unprepared finite queue -> exact cause and end, no dummy load and no daemon",
+    "FINITE_QUEUE_EXHAUSTED": "all supplied finite tickets considered; actual terminal-to-next-dispatch timestamps retained, no zero-gap claim"
+  },
+  "evidence": {
+    "LocalBackend": "actual shell=False Popen, /proc PID+start ticks, stdout/stderr original Refs, actual wait and reaping; no fabricated AWMCP terminal",
+    "unknown_child": "wall expiry leaves unknown child evidence and stops; does not kill or dispatch next. Existing bounded controller remains own cleanup authority.",
+    "release": "original HOST_RESULT and release receipts retained before fresh observations; fresh exact CID owner/source/image/mount/resources validation and stopped/Pid0/noExec, then original physical idle/protected boundary",
+    "publication": "exclusive new paths; fsync+hardlink no overwrite; only this successful temporary alias is unlinked, failed temporary publication retained",
+    "batch_budget": "64MiB additional ordinary RAM with original common-ancestor admission; original one host CPU slot shared, no eighth CPU or reserve borrowing; all original controller/device/RAM/disk/time gates unchanged"
+  },
+  "current_profile_limit": "Only frozen SKVQ010 adapter exists. Actual010 is FAILED and must not be retried; it is used solely for read-only052b release verification. A new KIVI018 or SKVQ repaired source requires a separately reviewed exact source-bound profile and real prerequisite tickets, not a CLI-only SHA substitution.",
+  "KIVI_profile_next_minimum": "Reuse existing source-qualified whole Context inspect/cleanup evidence/raw_after_release pure readers, never its cleanup actions; pin exact new producer/whole source, preserve actual software-stage and raw/first-fault scope. No KIVI profile or ready ticket is implemented in this packet.",
+  "metadata_notes": [
+    "Frozen MF.pending describes the at-freeze pending validation; MAIN053a later confirmed actual052b original SHA. The actual readonly release and Linux launch regression remain UNRUN.",
+    "No frozen source/MF was changed while MAIN reviewed final code. Final policy binding covers exact stage_policy and post-prepare full-clock fit.",
+    "Serial-admission and controller-observation rules determined true-terminal, exact-own release and next-fresh ordering; they do not supply missing numeric readiness."
+  ],
+  "readiness": {
+    "source_frozen": true,
+    "MAIN_deployed": false,
+    "Linux_full36": "UNRUN",
+    "actual052b_fresh_readonly_release": "UNRUN",
+    "reviewed_future_ready_tickets": 0,
+    "actual_serial_handoff": "UNRUN",
+    "numerical_or_performance_pass": false,
+    "automatic_zero_idle_claimed": false
+  }
+}
