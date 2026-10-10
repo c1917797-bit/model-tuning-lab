@@ -41,6 +41,22 @@ GSM8K result.
   request exercised the four-worker hot path. It does **not** erase the valid
   all-request quality regression. The exact cause of the regression and hot
   shortfall is not yet isolated.
+
+Source-lineage check against the prior successful `3ad0967` monkeypatch:
+`git diff --stat 3ad0967..4429e3` in the mounted plugin checkout changes
+`context.py` (1 line), `patches/runner.py` (57 lines),
+`position_independent.py` (38 lines), and request-proof tests (141 lines).
+The candidate is therefore **not** the identical historical implementation.
+The production delta adds per-request worker-hot evidence with fail-closed
+consistency checks and a scheduler gate that holds new prefills while a
+materialization report is pending, preventing a known unreported LRU eviction
+race. Either change could affect runtime behavior; this diff is a source-drift
+candidate, not causal proof of the 8-response net loss, excess length caps, or
+134/381 hot coverage. The original `3ad0967` full 2048/c32 candidate was
+already attempted as r18 and failed at 33/127 samples from the missing
+pending-materialization guard; it cannot be substituted for this complete
+r19 arm or used as a valid quality comparison. A later test must freeze a
+new exact source/protocol identity and preserve both old decisions.
 - Frozen paired audit:
   `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r19-c32-2048-longbench-paired-audit.json`,
   SHA256 `40ce887336be3446aa87a8e552fb50d366234fc10006ad5a3140f3dc0df16d9b`.
