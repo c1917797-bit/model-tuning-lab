@@ -230,9 +230,9 @@
   "active_attempt": {
     "campaign": "cache10r19-c32-longbench",
     "arm": "no-cache",
-    "controller_operation": null,
+    "controller_operation": "exec-000000000000032c",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-full-baseline",
-    "state": "prospectively frozen; offline checks passed; fresh physical-lane admission pending",
+    "state": "running after fresh physical NPU0-3 and port 8223 idle proof; 2026-10-10 11:00 UTC root stage service-starting; poll the same controller and immutable root",
     "preregistration": "HYPIC_R19_REPAIRED_C32_2048_PREREGISTRATION_20261010.json",
     "source_commit": "4429e35177979c874bf053ab29789e4773f39b22"
   },
@@ -1127,5 +1127,12 @@
     "gsm8k_controller_and_auditor": "frozen locally at c0117fc9 with pre-device test-hash amendment d787abf5; 130 workstream tests, both-arm offline checks and one-switch/dataset checks passed; no device run yet",
     "full_quality_decision": "not-yet-measured"
   },
-  "next_action": "r19 repaired-source 2048/c32 LongBench pair is prospectively frozen with clean matched roots and passed offline arm checks. Re-prove direct chicaihong01/ma route, actual physical NPU0-3 and port 8223 idle state, then launch only the r19 no-cache arm under continuous isolation. Poll its exact operation and immutable root until terminal; independently audit before admitting the r19 HYPIC arm. Do not reuse r18 roots or repeat validated historical performance. GSM8K off-path safety remains required after LongBench. Never use NPU4-7 or stop external work; GitHub/main are not synchronized."
+  "r19_gsm8k_offline": {
+    "preregistration": "HYPIC_R19_GSM8K_PHASE_PREREGISTRATION_20261010.json",
+    "controller": "r19_c32_gsm8k_adapter.py",
+    "independent_auditor": "r19_c32_gsm8k_audit.py",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "state": "prospectively frozen; two arm checks and three focused tests passed; no GSM8K device run"
+  },
+  "next_action": "r19 repaired-source 2048/c32 LongBench no-cache controller exec-000000000000032c is running; service health and scored sentinel passed. Poll this exact handle and immutable root; do not restart for slow progress or an observation timeout. On terminal, independently audit 127x3, source, guard and exact own release. Only after a valid baseline and fresh physical NPU0-3/8223 admission launch the matching r19 HYPIC arm. Do not reuse r18 roots or repeat validated historical performance. The r19 GSM8K off-path safety pair is offline-frozen but unrun. Never use NPU4-7 or stop external work; GitHub/main are not synchronized."
 }
