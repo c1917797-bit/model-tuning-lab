@@ -1,0 +1,100 @@
+{
+  "schema": "kivi.sameimage-consumer-software-entry/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/SOURCE_MANIFEST.json",
+    "bytes": 3674,
+    "sha256": "2db42e6c309d1df14c955c13c28882c9b0e332db0d05656678453283b3bb8958"
+  },
+  "frozen": true,
+  "command": [
+    "/usr/bin/taskset",
+    "-c",
+    "@MAIN_FRESH_ADMITTED_HOST_CPU@",
+    "/usr/bin/prlimit",
+    "--cpu=180:180",
+    "--as=536870912:unlimited",
+    "--",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/software_cpu8.py",
+    "--execute",
+    "--source-sha256",
+    "2db42e6c309d1df14c955c13c28882c9b0e332db0d05656678453283b3bb8958",
+    "--host-cpu",
+    "@MAIN_FRESH_ADMITTED_HOST_CPU@",
+    "--output",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software192-main-same660-003"
+  ],
+  "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+  "wall_seconds": 270,
+  "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software192-main-same660-003",
+  "default_OFF": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/software_cpu8.py"
+  ],
+  "tests": 192,
+  "status": "UNRUN",
+  "resources": {
+    "Devices": [],
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "total_CPU": 2,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "total_RAM_bytes": 17716740096,
+    "new_disk_floor_bytes": 42949672960,
+    "whole_output_limit_bytes": 34359738368,
+    "phase_seconds_including_cleanup": 270,
+    "child_wall_seconds": 150,
+    "child_CPU_seconds": 120,
+    "child_AS_bytes": 536870912,
+    "cleanup_seconds": 90,
+    "standalone": true,
+    "NPU_idle_required": false,
+    "peer_lease": false,
+    "fixed_cutoff_epoch": 1791788425
+  },
+  "mounts": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/MOUNTS.json",
+      "bytes": 10519,
+      "sha256": "bf43ba0a23c568fcbe9f60ab9d788d06b6babe4c291bd9c363700ac42820f546"
+    },
+    "source_roots": [
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011"
+    ],
+    "exact_artifact_refs": 21,
+    "reviewed_aliases": 6,
+    "reviewed_peer_files": 3,
+    "Devices": [],
+    "readonly": true
+  },
+  "preconditions": [
+    "MAIN byte-exact Add-only install3newroots and verifyevery MF+source.",
+    "Fresh standalone CPU2/16.5GiB ordinary and allsharedancestors/disk40GiB; no concurrent7CPU paper lease; no NPUidle dependency.",
+    "Oldsameimage184 PASS cannot authorize new192. Current five actual originals bound byfullbytes/SHA and mountedactualremoteRefs; no Windowsfixturepaths insideguest."
+  ],
+  "permissions": {
+    "NPU": false,
+    "raw_math_checked": false,
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "next": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+      "bytes": 11123,
+      "sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a"
+    },
+    "ENTRY": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/ENTRY.json",
+    "mode": "raw standalone after actualsameimage192 success + original018producer replay and freshresources",
+    "numeric64": "UNRUN"
+  },
+  "fixed_cutoff_epoch": 1791788425,
+  "no_time_reset": true
+}

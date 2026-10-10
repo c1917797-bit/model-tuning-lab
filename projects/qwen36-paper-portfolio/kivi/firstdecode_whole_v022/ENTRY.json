@@ -1,0 +1,67 @@
+{
+  "schema": "kivi.explicit-provenance-whole-handoff/v1",
+  "source": {
+    "bytes": 15242,
+    "sha256": "ba21cb0c57429333fd883f32381c570f2f7f0239bcc1c7981dc0e39708053a50",
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011/SOURCE_MANIFEST.json"
+  },
+  "local_root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-provenance-v022-20261011",
+  "frozen": true,
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "adapted_raw_entry_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/consume_raw_cpu.py",
+    "bytes": 4377,
+    "sha256": "c7779d479ba82c4771d5e7a15a85a3ab3b1505fbde6fa875f9ea74e50e8487c1"
+  },
+  "software115": "unchanged; all115 executed as part192 local pass. five inherited files byteexact.",
+  "raw_successor": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+    "bytes": 11123,
+    "sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a"
+  },
+  "preconditions": [
+    "MAIN byte-readback all7raw+all7whole, same660 Devices[]192 software; old184 cannot authorize newsource.",
+    "Retained0180548 complete original/result unchanged; newwhole producer_only can replay without device recapture.",
+    "Fresh standalone CPUhost1+guest1, guest8GiB+host512MiB+reserve8GiB=16.5GiB ordinary, shared ancestors and disk40GiB; no NPUidle. No unreviewed SKVQ010/011/next peer lease.",
+    "Full5400 inclusive90cleanup must fit fixed1791788425 cutoff; child5310; all64 mathematical/reference unchanged.",
+    "MAIN archive WHOLE original structuredContent+newline after actual raw terminal, then fullconsume originalCPU8/child/cleanup; never fabricate receipt."
+  ],
+  "permissions": {
+    "remote_preparer_exec": 0,
+    "NPU": false,
+    "numeric64": "UNRUN",
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "scope": "Firstdecode only, not whole176/FULL/mixed/modelperf. No NPU recapture. Seven original source checks unchanged; explicit CPUcaller binding repairs one wrong parameter role.",
+  "commands": {
+    "default_OFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011/main.py"
+    ],
+    "actual_producer_only0548": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "command": "/usr/bin/prlimit",
+      "args": [
+        "--cpu=120:120",
+        "--as=536870912:536870912",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "-c",
+        "import argparse,hashlib,json,importlib.util,sys\nfrom pathlib import Path\nroot=Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011\")\nmf=root/\"SOURCE_MANIFEST.json\";wire=mf.read_bytes()\nassert len(wire)==15242 and hashlib.sha256(wire).hexdigest()==\"ba21cb0c57429333fd883f32381c570f2f7f0239bcc1c7981dc0e39708053a50\"\nm=json.loads(wire)\nfor name,row in m[\"files\"].items():\n b=(root/name).read_bytes()\n assert len(b)==row[\"bytes\"] and hashlib.sha256(b).hexdigest()==row[\"sha256\"]\n compile(b,str(root/name),\"exec\")\ndef load(path,name):\n spec=importlib.util.spec_from_file_location(name,path);mod=importlib.util.module_from_spec(spec);sys.modules[name]=mod;spec.loader.exec_module(mod);return mod\ncore=load(root/\"consume_whole.py\",\"_kivi_whole022_actual_producer\")\na=argparse.Namespace(result=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json\"),result_sha256=\"18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4\",terminal=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json\"),terminal_sha256=\"fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370\",peer=\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",operation=\"exec-0000000000000548\",expected_command=\"/usr/bin/python3\",expected_args=\"[\\\"-I\\\",\\\"-B\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py\\\",\\\"--execute\\\",\\\"--source\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json\\\",\\\"--source-sha256\\\",\\\"a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4\\\",\\\"--component\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json\\\",\\\"--component-sha256\\\",\\\"d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d\\\",\\\"--model-manifest\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json\\\",\\\"--model-manifest-sha256\\\",\\\"11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c\\\",\\\"--software\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json\\\",\\\"--software-sha256\\\",\\\"9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e\\\",\\\"--software-stage\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json\\\",\\\"--software-stage-sha256\\\",\\\"efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8\\\",\\\"--output\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018\\\",\\\"--port\\\",\\\"8250\\\"]\")\nctx=core.Context(m[\"producer_source\"]);p=core.producer_only(a,ctx)\nentry=load(root/\"main.py\",\"_kivi_whole022_entry\")\nvalue=dict(schema=\"kivi.actual-firstdecode-whole-entry/v1\",source=core.ref(mf),successful=True,producer_original_replay=dict(result=p[\"rr\"],terminal=p[\"tr\"],actual_original_cwd=None,all4_cleanup=p[\"npu\"][\"cleanup\"],actual_all4_namespace=p[\"npu\"][\"all4_namespace\"],software_stage=a.result and p[\"r\"][\"software_stage\"]),independent_raw_consumer_required=True,model_ready=False,performance_ready=False,run_authority=False,whole176=False,NPU=False)\nprint(json.dumps(entry.publish(root/\"MAIN_PRODUCER_ONLY0548_001.json\",value)))\n"
+      ],
+      "wall_seconds": 150,
+      "CPU": 1,
+      "NPU": false,
+      "no_create_stop_or_probe": true
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema": "kivi.sameimage-consumer-software-sources/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011",
+  "default_enabled": false,
+  "files": {
+    "software_cpu8.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/software_cpu8.py",
+      "bytes": 9284,
+      "sha256": "6cc0b331407ce0e1201925c204b456cf6ba09ae6a2b64adc79b10041c142181e"
+    },
+    "MOUNTS.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/MOUNTS.json",
+      "bytes": 10519,
+      "sha256": "bf43ba0a23c568fcbe9f60ab9d788d06b6babe4c291bd9c363700ac42820f546"
+    }
+  },
+  "mounts": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-provenance-software-v003-20261011/MOUNTS.json",
+    "bytes": 10519,
+    "sha256": "bf43ba0a23c568fcbe9f60ab9d788d06b6babe4c291bd9c363700ac42820f546"
+  },
+  "whole_source": {
+    "bytes": 15242,
+    "sha256": "ba21cb0c57429333fd883f32381c570f2f7f0239bcc1c7981dc0e39708053a50",
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011/SOURCE_MANIFEST.json"
+  },
+  "raw_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+    "bytes": 11123,
+    "sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a"
+  },
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "borrowed_implementation": "Exact current018 controller + raw23 CPU-only resource install, no copied controller/math; original producer190 unchanged.",
+  "resources": {
+    "Devices": [],
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "total_CPU": 2,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "total_RAM_bytes": 17716740096,
+    "new_disk_floor_bytes": 42949672960,
+    "whole_output_limit_bytes": 34359738368,
+    "phase_seconds_including_cleanup": 270,
+    "child_wall_seconds": 150,
+    "child_CPU_seconds": 120,
+    "child_AS_bytes": 536870912,
+    "cleanup_seconds": 90,
+    "standalone": true,
+    "NPU_idle_required": false,
+    "peer_lease": false,
+    "fixed_cutoff_epoch": 1791788425
+  },
+  "original_implementation_pins": {
+    "host_run": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py",
+      "bytes": 21215,
+      "sha256": "86747f9c5f5d24f2f6418ce0613dc95f625d4459cba948823133371eca8ba986"
+    },
+    "safety_host": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/safety_host.py",
+      "bytes": 21569,
+      "sha256": "2f6d876a3363840aabfa7ee09db1b2b01700ba8bce17fd3fab040464af2d6408"
+    }
+  },
+  "actual_state": "PREPARATION_ONLY_UNRUN",
+  "permissions": {
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "raw_mathematics_checked": false
+  },
+  "scope": "Same660 Devices[] full192 software/source/original seven-field regression. ChildAS512MiB unchangedv002. 21 exact original Refs RO. Not64 numerical PASS.",
+  "predecessor": {
+    "bytes": 3780,
+    "sha256": "b8402c6c120b44c26688730867be50437e837425b4c203a3607c4249b80a9776"
+  },
+  "software_tests": 192
+}

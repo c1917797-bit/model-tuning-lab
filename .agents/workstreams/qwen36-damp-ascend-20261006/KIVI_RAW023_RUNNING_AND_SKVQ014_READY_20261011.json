@@ -1,0 +1,152 @@
+{
+  "schema": "paper.actual-preparation-and-numerical-dispatch/v1",
+  "utc": "2026-10-10 22:35:16 UTC",
+  "goal": "ACTIVE_UNMET",
+  "portfolio_cutoff_epoch": 1791788425,
+  "previous_turn": "Verified wait: original0581 was polled live; no new mathematical/performance/task verdict.",
+  "kivi": {
+    "repaired_seam": "caller now passes original-prefill provenance SHA instead of unrelated native-layout collector SHA; retained018 producer/raw and numerical thresholds unchanged",
+    "same_image192": {
+      "operation": "exec-000000000000057e",
+      "exit_code": 0,
+      "seconds": 52.116,
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software192-main-same660-003/RESULT.json",
+        "bytes": 2842,
+        "sha256": "26df0b4956ddbd3da2f8d4fe898ad82dd588d11cfa8436f1a99233762e15c620"
+      },
+      "scope": "software and own CPU release only"
+    },
+    "producer_metadata": {
+      "operation": "exec-0000000000000580",
+      "exit_code": 0,
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-provenance-v022-20261011/MAIN_PRODUCER_ONLY0548_001.json",
+        "bytes": 1654,
+        "sha256": "33c546ee80d3a8111ae896d81b8ff4af626f61d1a1f4603814ed75c2cf61d222"
+      },
+      "scope": "original producer/ownership/source replay, not mathematical verdict"
+    },
+    "raw_current": {
+      "paper": "KIVI",
+      "stage": "full64 independent scalar consumption of unchanged actual018 NPU capture",
+      "operation": "exec-0000000000000581",
+      "state": "RUNNING_LAST_VERIFIED",
+      "source": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+      "source_sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a",
+      "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v023-provenance-standalone-001",
+      "physical_devices": [],
+      "host_cpu": 0,
+      "guest_cpu": 1,
+      "CPU_total": 2,
+      "ordinary_total_bytes": 17716740096,
+      "phase_seconds_including_cleanup": 5400,
+      "cleanup_seconds": 90,
+      "numerical_result": "PENDING",
+      "model_ready": false
+    },
+    "b1": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-004/SOURCE_MANIFEST.json",
+        "bytes": 140953,
+        "sha256": "afc2a8c69fd3f911ad7ebfc51e2c502ffbd951ba96efd6a937ebaa61f9d45eb3"
+      },
+      "source_audit_operation": "exec-0000000000000584",
+      "exit_code": 0,
+      "source_files": 281,
+      "source_only": true,
+      "same_image66": "PENDING",
+      "firstdecode_full64": "PENDING",
+      "scope": "B1 preliminary screen only: same660 TP4 BF16/EAGER/no-prefix/no-async/mamba-none, same6GiB, same32768 raw IDs, two2-output warmups then onefixed1024 request in each arm; dense first, candidate second. Not final C16/HTTP40 workload, mixed, FULL graph, task2048/normalEOS accuracy or full1024 numerical proof.",
+      "materializer_first_failure": "absolute Add headers rejected by actual dryRun; no source mutation",
+      "repair": "strip only exact reviewed lowbit root from Add headers; relative dryRun/apply passed; source281 byte audit passed; original retained",
+      "ENTRY_prose_erratum": "271/60 in two descriptions stale; actual manifest/loader/host use281/66; no actual code count change"
+    }
+  },
+  "skvq": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "repair": "runtime metadata lock used stale011 alias; 014 binds unchanged exact own lock and checks metadata closure/mounts before create",
+    "software": {
+      "operation": "exec-0000000000000582",
+      "exit_code": 0,
+      "tests": 155,
+      "source_files": 143,
+      "seconds": 24.769
+    },
+    "mount": {
+      "operation": "exec-0000000000000583",
+      "exit_code": 0,
+      "seconds": 1.835
+    },
+    "actual_same_image_input": "UNRUN",
+    "NPU_capture": "UNRUN",
+    "calibration": "DATA_PENDING",
+    "candidate_quantized_attention": "NOT_READY"
+  },
+  "original_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SAME192_057E_ORIGINAL_20261011.json",
+      "sha256": "ed2d2a182a4adb29f6720b81f15c556f50f1121d55a6bdc2f1c26226d08e30a2",
+      "bytes": 2881
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_WHOLE022_0580_ORIGINAL_20261011.json",
+      "sha256": "2e3db67619a4a14df79cbc4f0982aa23c974f67054804ebaa6cfaf632f611fa8",
+      "bytes": 6078
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_SOFTWARE155_0582_ORIGINAL_20261011.json",
+      "sha256": "944b55c224d14a077bd7aa7c568c8ae5edbbc557dc847dc652103fb6cf697e9d",
+      "bytes": 20267
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_MOUNT_0583_ORIGINAL_20261011.json",
+      "sha256": "eac09f07667e9c3fdd514035fe8221db14b5e8a1e2043d1bd83061f5b1d4bc47",
+      "bytes": 3363
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1SCREEN004_SOURCE_0584_ORIGINAL_20261011.json",
+      "sha256": "f5bc3732a3c45974a0124c84fd24ca5b910d2500cb0ac511cd8a163ddd76ffd8",
+      "bytes": 3419
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1SCREEN004_ABSOLUTE_PATCH_REJECTED_20261011.json",
+      "sha256": "e292179ddb1a1f1eb64fdf60f0ec8699e3d2b91b67c6ed581f78c2e076c9be8d",
+      "bytes": 1195
+    }
+  ],
+  "numerical_pass": false,
+  "paired_performance_pass": false,
+  "task_accuracy_pass": false,
+  "protected_NPU0_3_untouched": true,
+  "hugetlb32GiB_authority": "SPENT",
+  "git": {
+    "last_checkpoint": "d2a2c2c18da351dbc906836d4642bb999ac366f7",
+    "last_observed_upstream": "4db1c42b3d33f78cbb5c29f579e831c324e3d21d",
+    "push": "prior HTTPS authentication failure unresolved; no new push success claimed"
+  },
+  "next_action": "Poll original0581; retain original terminal and exact CPU8 release. If full64 passes consume exact raw23/whole22 with actual original. Admit first qualified independent stage after fresh joint budget and own release without waiting for archival/push. If raw fails preserve first fault and repair off-device; SKVQ014 may take lane once CPU admission permits. No unchanged retry.",
+  "scheduling_audit": {
+    "current_raw": "original0581 still running; Devices[]; do not duplicate or mutate frozen source",
+    "live_peer_guard": "raw023 inventory_admit rejects new skvq-/kivi- owner not covered by this standalone plan; lowering only SKVQ CPU cannot authorize overlap",
+    "SKVQ_cpu_phase": "actual cpu-inputs-only needs16.5GiB, not capture73GiB, but fixed CPU7 and no fullhost resume; running it separately would be repeated by FULL",
+    "ENTRY_erratum": "SKVQ014 cpu_input_preparation argv contains old hash; actual full host argv correctly pins9c7b1118. Do not execute stale auxiliary argv.",
+    "decision": "Retain raw0581. On its terminal, verify own release then admit reviewed full SKVQ014 if fresh resources pass. Prepare KIVI same-image66/actual raw consumption according to terminal. No new one-sided peer profile."
+  },
+  "archive": {
+    "files": 121,
+    "source_roots": [
+      "kivi/firstdecode_whole_v022",
+      "kivi/raw_cpu_v023",
+      "kivi/consumer_sameimage_software_v003",
+      "kivi/b1_matched1024_bootstrap_v004",
+      "skvq/preprojection_v014"
+    ],
+    "transport_failure": "Combined dryRun rejected413 before mutation; split into6 bounded explicit-path patches succeeded. Source hashes unchanged.",
+    "readback": "actual0587 BYTE_EXACT121 and MST20 PASS. Later staged diff0589 rejected13 original blank-at-EOF lines. Preserve original bytes and narrowly waive only blank-at-eof for those exact archive paths via .gitattributes; all other whitespace checks remain. Original /cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_ARCHIVE_STAGED_EOF_0589_FAILED_ORIGINAL_20261011.json SHA1fe17427709dc5eaec55b490997edf097ff517f7c768b073aff19c07d787df58."
+  }
+}

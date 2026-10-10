@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T22:03:00Z",
+  "updated_at_utc": "2026-10-10 22:35:16 UTC",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -17,94 +17,75 @@
     {
       "paper": "KIVI",
       "owner": "recurrent_lifecycle_ready_queue",
-      "stage": "raw022 actual0574 failed before arithmetic: original caller confuses layout capture and provenance capture source roles; new explicit-source caller/whole repair in progress",
-      "state": "REFERENCE_REPAIR_OFF_DEVICE",
+      "stage": "whole022/raw023 actual same-image192 and metadata replay PASS; full64 RAW0581 live, actual whole consumption pending",
+      "state": "RESULT_PENDING_OFF_DEVICE",
       "ready": false
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "MAIN",
+      "stage": "014 actual source143/software155 and full mount9TRAIN PASS; executable CPU->N1->TP4 calibration controller waiting for joint CPU admission",
+      "state": "READY_FOR_CPU_THEN_HARDWARE_GATED_PIPELINE",
+      "ready_for_entry": true,
+      "ready_for_unconditional_NPU": false,
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+        "bytes": 82562,
+        "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+      },
+      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/ENTRY.json",
+      "CPU_total": 7,
+      "ordinary_total_bytes": 77846282240,
+      "seconds_including_cleanup": 7200,
+      "raw_with_this_entry_requires_CPU": 9,
+      "shared_CPU_observed": 7
     },
     {
       "paper": "KIVI",
       "owner": "kivi_model_successor",
-      "stage": "B1 matched1024 source003 awaiting corrected full64 actual prerequisite; C16/40 explicit-provider integration preparing, no model authority",
+      "stage": "B1screen004 deployed/source281 PASS; same-image66 pending; full64 prerequisite pending; C16/40 mixed model successor preparing",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     },
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "013 actual0577 failed Devices[] input dependency lock path; source014 minimal metadata closure repair preparing, no NPU started",
-      "state": "REFERENCE_REPAIR_OFF_DEVICE",
+      "stage": "cal006 source frozen/local43 PASS; actual014 capture and fit missing; writer002 actual algorithm compression gate preparing",
+      "state": "DATA_PENDING_OFF_DEVICE",
       "ready": false
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
   "no_new_model_performance_or_accuracy_pass": true,
   "previous": {
-    "paper": "KIVI",
-    "stage": "018 B1 eager32768+2 full64 numerical producer",
-    "state": "RAW_CAPTURED_PENDING_INDEPENDENT_WHOLE_CONSUMPTION",
-    "operation": "exec-0000000000000548",
-    "physical": [
-      4,
-      5,
-      6,
-      7
-    ],
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
-      "bytes": 110307,
-      "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
-    },
-    "argv": [
-      "/usr/bin/python3",
-      "-I",
-      "-B",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py",
-      "--execute",
-      "--source",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
-      "--source-sha256",
-      "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4",
-      "--component",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
-      "--component-sha256",
-      "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
-      "--model-manifest",
-      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
-      "--model-manifest-sha256",
-      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
-      "--software",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json",
-      "--software-sha256",
-      "9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e",
-      "--software-stage",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json",
-      "--software-stage-sha256",
-      "efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8",
-      "--output",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018",
-      "--port",
-      "8250"
-    ],
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018",
-    "software_actual": "053d same660190 PASS; 0545 current205 closure PASS; MAIN local whole89/raw158 PASS",
-    "math_or_performance_pass": false,
-    "original_terminal": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
-      "sha256": "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370"
-    },
-    "result": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
-      "bytes": 1090213,
-      "sha256": "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4"
-    },
-    "exit_code": 0,
-    "duration_ms": 649615,
-    "release_operation": "exec-0000000000000555",
-    "candidate_stopped_retained_utc": "2026-10-10T20:40:04.68071977Z",
-    "independent_producer_consumer": "whole021 actual0569 source/ownership metadata PASS; raw022 actual0574 failed source-role check before complete arithmetic. Original018 capture remains valid scope.",
-    "full_raw_numerical_pass": false
+    "current": null,
+    "current_off_device": null,
+    "next_ready_device_stage": null,
+    "preparation": [
+      {
+        "paper": "KIVI",
+        "owner": "recurrent_lifecycle_ready_queue",
+        "stage": "raw022 actual0574 failed before arithmetic: original caller confuses layout capture and provenance capture source roles; new explicit-source caller/whole repair in progress",
+        "state": "REFERENCE_REPAIR_OFF_DEVICE",
+        "ready": false
+      },
+      {
+        "paper": "KIVI",
+        "owner": "kivi_model_successor",
+        "stage": "B1 matched1024 source003 awaiting corrected full64 actual prerequisite; C16/40 explicit-provider integration preparing, no model authority",
+        "state": "PREPARING_OFF_DEVICE",
+        "ready": false
+      },
+      {
+        "paper": "SKVQ",
+        "owner": "sparse_attention_ready_queue",
+        "stage": "013 actual0577 failed Devices[] input dependency lock path; source014 minimal metadata closure repair preparing, no NPU started",
+        "state": "REFERENCE_REPAIR_OFF_DEVICE",
+        "ready": false
+      }
+    ]
   },
-  "idle_cause": "Actual preparation defects, not external occupation: raw022 wrong source role; SKVQ013 CPU lock points to unmounted011. Both exact owned Devices[] containers stopped-retained and independently checked. No ready device successor; do not claim zero idle.",
+  "idle_cause": "KIVI independent CPU full64 still live. SKVQ014 fixed CPU7 plus raw2 exceeds observed7 capacity; additionally frozen standalone raw peer guard rejects a new unlisted SKVQ container. No unilateral profile change. Not foreign NPU occupation or zero-idle.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -214,8 +195,10 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-0000000000000579",
-    "physical4_7": "no processes; exact own SKVQ CPU release verified; resource admission must be refreshed",
+    "operation": "exec-0000000000000586",
+    "time_utc": "2026-10-10T22:29:15Z",
+    "physical4_7": "no process/AICore0/HBM2868,2866,2866,2862MiB",
+    "ordinary_available_bytes": 118082424832,
     "not_reusable_for_future_admission": true
   },
   "history_terminals": [
@@ -800,5 +783,30 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
-  "current_off_device": null
+  "current_off_device": {
+    "paper": "KIVI",
+    "stage": "full64 independent scalar consumption of unchanged actual018 NPU capture",
+    "operation": "exec-0000000000000581",
+    "state": "RUNNING_VERIFIED_ORIGINAL_HANDLE_0581",
+    "source": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+    "source_sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v023-provenance-standalone-001",
+    "physical_devices": [],
+    "host_cpu": 0,
+    "guest_cpu": 1,
+    "CPU_total": 2,
+    "ordinary_total_bytes": 17716740096,
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "numerical_result": "PENDING",
+    "model_ready": false
+  },
+  "current_successor_rule": "Poll original0581; retain original terminal and exact CPU8 release. If full64 passes consume exact raw23/whole22 with actual original. Admit first qualified independent stage after fresh joint budget and own release without waiting for archival/push. If raw fails preserve first fault and repair off-device; SKVQ014 may take lane once CPU admission permits. No unchanged retry.",
+  "scheduling_audit": {
+    "current_raw": "original0581 still running; Devices[]; do not duplicate or mutate frozen source",
+    "live_peer_guard": "raw023 inventory_admit rejects new skvq-/kivi- owner not covered by this standalone plan; lowering only SKVQ CPU cannot authorize overlap",
+    "SKVQ_cpu_phase": "actual cpu-inputs-only needs16.5GiB, not capture73GiB, but fixed CPU7 and no fullhost resume; running it separately would be repeated by FULL",
+    "ENTRY_erratum": "SKVQ014 cpu_input_preparation argv contains old hash; actual full host argv correctly pins9c7b1118. Do not execute stale auxiliary argv.",
+    "decision": "Retain raw0581. On its terminal, verify own release then admit reviewed full SKVQ014 if fresh resources pass. Prepare KIVI same-image66/actual raw consumption according to terminal. No new one-sided peer profile."
+  }
 }

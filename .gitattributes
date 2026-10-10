@@ -1,0 +1,15 @@
+# These exact archived experiment sources retain their original SHA-bound bytes.
+# Permit only their original extra EOF newline; keep all other whitespace checks.
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/consume_first_decode.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/explicit_provider.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/provider_independent.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/provider_projection.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/raw_journal.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/test_provider.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/b1_matched1024_bootstrap_v004/worker.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/firstdecode_whole_v022/main.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/firstdecode_whole_v022/raw_cpu8.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/firstdecode_whole_v022/test_driver_consumer.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/kivi/firstdecode_whole_v022/test_whole.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/skvq/preprojection_v014/post_rope_current.py whitespace=-blank-at-eof
+projects/qwen36-paper-portfolio/skvq/preprojection_v014/text_input_current.py whitespace=-blank-at-eof
