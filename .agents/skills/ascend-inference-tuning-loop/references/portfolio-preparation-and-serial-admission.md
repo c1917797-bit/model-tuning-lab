@@ -157,6 +157,22 @@ interactions, runtime role paths and mounted dependency imports. Keep a
 negative regression from the actual rejected configuration; mocked parsers
 and a large source-test count cannot promote the native gate.
 
+Cover the real constructor, including required InitVars and the installed
+default factory, not an extracted validator alone. A CPU decoder assumption
+must be labeled as an assumption and independently checked against the real
+ModelConfig at the hardware boundary; never turn a default into checkpoint
+evidence.
+
+Before declaring an executable image-preflight ticket, resolve every actual
+mount source, not just plugin source hashes. Check the frozen checkpoint,
+calibration input index and all input bytes, nested receipt dependencies,
+guest destinations and prospective output parent. If an unchanged input lives
+at a different verified host path, bind that exact host path read-only to the
+declared guest path in a new experiment; do not create a guessed host alias or
+change the input silently. Report the exact missing source/destination before
+Docker create. Retain and regression-test the real failed path. A source-closure
+PASS is not data/mount-closure PASS.
+
 If a constructor genuinely requires hardware, separate and report the exact
 CPU-validated subset. Run the remaining native configuration check after the
 bounded canary but before weights or the long matrix; do not stub the platform
@@ -171,6 +187,23 @@ and resource release, then adjudicate immutable raw in a separately budgeted
 CPU stage. Another ready paper can use the serial NPU lane meanwhile. Preserve
 all raw and check the larger retention budget before acquisition. A local
 release-order regression is not an observed cross-paper handoff.
+
+### Hardware boundary and CPU-only continuation
+
+Do not assume a class named ModelConfig is device-free. In the actual pinned
+Qwen stack, model-registry subprocess inspection imports GDN/FLA and queries
+Triton Ascend get_arch. Keep this original failed no-device trace; validate only
+genuinely device-free flags/source/SchedulerConfig predicates there, and check
+actual model/full engine configuration after device initialization, before
+weights. Never synthesize a ModelConfig, architecture or success receipt.
+
+A CPU-only continuation must not inherit the device controller's requirement
+that physical4-7 remain idle. Its observation/cleanup should validate its own
+Devices[] namespace, CID, process and summed host budget, without stopping or
+rejecting the next legitimate NPU paper. Keep original actual-device isolation
+checks unchanged. Regression-test the real controller branch and require one
+joint CPU/RAM/disk admission before concurrent CPU adjudication and TP4.
+Local branch tests alone are not an observed cross-paper handoff.
 
 ## Phase-DAG continuation and the serial device lane
 
@@ -447,3 +480,45 @@ Save actual per-case arithmetic metrics before an aggregate first-fault
 assert, not only a before-run marker. A diagnostic successor must retain the
 author body, input domain and numerical gates; never substitute a guessed
 tolerance or convenient toy for the unobserved cause.
+
+## Real preparation boundaries and byte-exact materialization
+
+Before promoting NEXT, run the actual input producer and complete aggregate
+entry, and pass actual producer artifacts into the real downstream reader.
+A fixed-seed positive fixture can contain duplicates even when its sampler is
+correct; repair the fixture separately, retain the original negative, and keep
+production sampling, input uniqueness and task data unchanged. A creator of a
+path/hash Ref must supply checked byte length before a strict path/bytes/hash
+consumer; do not weaken the reader or invent lengths to pass bootstrap.
+
+Preserve source bytes during deployment, including final blank lines. Never
+trimEnd() frozen code before creating a patch. Compare exact readback with the
+original manifest before running the expensive entry. If materialization is
+wrong, retain the failed original, restore only the proved transport defect,
+and rerun the affected source gate. This is not an algorithm failure and does
+not justify changing the original hash to match corrupted transport.
+
+Count this recovery as effective scheduling only after an actual terminal,
+verified own-only release and successor dispatch/compute observation. Keep
+device-free repair with its paper owner; the independent NEXT stage takes the
+serial device lane once its real prerequisites pass. Source delivery, report
+writing and Git publication are not reasons to retain a failed device lease.
+
+A live API parent does not prove its workers are healthy. An observed fatal
+worker bootstrap must preserve the first exception, rank and frozen-source
+identity and trigger the existing exact-owner cleanup immediately, not wait
+for the long readiness timeout. Keep worker first-fault evidence separate from
+later controller/cleanup errors. Test the actual fatal producer-to-host-reader
+path with real files and reject unrelated or stale receipts. Device-property
+APIs are not interchangeable: reuse an actual NPU-verified backend getter and
+check it at the small hardware boundary before loading weights.
+
+A complete test count still cannot substitute for the actual publisher wiring.
+Exercise producer -> real callback -> atomic artifact -> strict downstream
+reader -> final aggregation in the same fixture. JSON tuple-to-list changes
+belong in a documented transport adapter; do not relax numerical tolerances,
+raw-data checks or downstream identity verification. A dependency manifest
+must also survive actual same-image import and reading a real input batch
+before reserving the NPU lane. A failed import is a preparation defect, not a
+paper verdict. Keep those prerequisites device-free and return only repaired,
+actually checked packets to the ready queue.

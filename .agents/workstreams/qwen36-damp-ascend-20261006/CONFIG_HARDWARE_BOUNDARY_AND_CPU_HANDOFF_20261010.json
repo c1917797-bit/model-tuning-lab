@@ -1,0 +1,125 @@
+{
+  "schema": "paper-portfolio.config-hardware-boundary/v1",
+  "observed_utc": "2026-10-10T10:52:00Z",
+  "original_artifacts_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-config-hardware-boundary-20261010-001",
+  "cpu002_operation": "exec-00000000000002f0",
+  "release": {
+    "refs": {
+      "RESULT.json": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/RESULT.json",
+        "bytes": 1471,
+        "sha256": "07a2052bffd993875bfeb4e666d6d115c15f913deec3514159455ba190fbed0a",
+        "value": {
+          "NPU": false,
+          "child": null,
+          "cleanup": {
+            "bytes": 1689,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/cleanup.json",
+            "sha256": "8c9e49b586e59a4f685d0648f23eb3d77cfc8512efc0ad47935556b2028d0b7d"
+          },
+          "elapsed_seconds": 178.20521436003037,
+          "full_engine_config_verified": false,
+          "host_source": {
+            "bytes": 3745,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/config_precheck_v008_002/host_cpu.py",
+            "sha256": "bde70bfeddd0e842031f3332cc46e7afd2783c3fc2e099667bf0a88c33d14fce"
+          },
+          "model_ready": false,
+          "performance_ready": false,
+          "primary": "ValueError(\"actual original child failed {'path': '/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/actual-model-scheduler-config-CHILD.json', 'bytes': 2413, 'sha256': '746200c932383481c15d5b102c4024dfa28488121b3eea0732b068d1b59d4e4c'}\")",
+          "probe_source": {
+            "bytes": 10714,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/config_precheck_v008_002/config_cpu.py",
+            "sha256": "0568849347bc411d4d16e0235be54cf0f68151ef0b4e857e2d953fdb76f988df"
+          },
+          "report": null,
+          "schema": "kivi.standalone-cpu-config-original/v1",
+          "secondary": [],
+          "status": "failed",
+          "upstream_source": {
+            "bytes": 63991,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/SOURCE_MANIFEST.json",
+            "sha256": "e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581"
+          }
+        }
+      },
+      "cpu-preflight/cleanup.json": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/cleanup.json",
+        "bytes": 1689,
+        "sha256": "8c9e49b586e59a4f685d0648f23eb3d77cfc8512efc0ad47935556b2028d0b7d",
+        "value": {
+          "after_inspect": {
+            "bytes": 159400,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/inspect-1791629226952892600.json",
+            "sha256": "0b411d83b8849c65e3d8dbb09f5e802249997fc00f4a0d9987c27dd0f8608ada"
+          },
+          "before_inspect": {
+            "bytes": 159459,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/inspect-1791629211573388760.json",
+            "sha256": "bb122ebe0846fbf498d49487f9cb8436b320d1ec849df6d263c478acbf1ab25e"
+          },
+          "container": "12fa734827e031530d8835cfcced60bf137b36a7231a249403ae8fc8412fd84f",
+          "deleted": false,
+          "errors": [],
+          "primary_error": "ValueError(\"actual original child failed {'path': '/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/actual-model-scheduler-config-CHILD.json', 'bytes': 2413, 'sha256': '746200c932383481c15d5b102c4024dfa28488121b3eea0732b068d1b59d4e4c'}\")",
+          "protected_boundary": {
+            "baseline": [],
+            "external_added": [],
+            "external_changed": [],
+            "external_removed": [],
+            "external_unchanged_claimed": false,
+            "observed": [],
+            "own_on_protected": false,
+            "schema": "sparq.protected-boundary/v1"
+          },
+          "release_smi": {
+            "bytes": 5423,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/release-1791629228014547120.json",
+            "sha256": "c21d2db49d266b37094dc23ecf4f6da6f228f13076ab57b0b38069e72b006ced"
+          },
+          "retained": true,
+          "stop_receipt": {
+            "bytes": 775,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/stop-retain-1791629226916683050.json",
+            "sha256": "060950c3b5a35507af0c9217182222426b9ed44263da4d9880196b63004f64b1"
+          },
+          "stopped": true
+        }
+      },
+      "cpu-preflight/actual-model-scheduler-config.stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/actual-model-scheduler-config.stdout",
+        "bytes": 9099,
+        "sha256": "7953f2996c55b43fde5627feb15db36f88a2b39113d8da2e03c04edaa10503e0"
+      },
+      "cpu-preflight/actual-model-scheduler-config.stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-config-cpu8-main-20261010-002/cpu-preflight/actual-model-scheduler-config.stderr",
+        "bytes": 1696,
+        "sha256": "824b17d5ab385ac9fcf9319ac13a5c3aed085ba5043c8f005932e5349caf9f2c"
+      }
+    },
+    "cid": "12fa734827e031530d8835cfcced60bf137b36a7231a249403ae8fc8412fd84f",
+    "stopped_retained": true,
+    "Devices": []
+  },
+  "v008": {
+    "source_sha256": "f1588595a6a90d729028d9ea25fd641d4be4fed47601636166e8922bc60136f4",
+    "software_operation": "exec-00000000000002f9",
+    "tests": 47,
+    "passed": true,
+    "NPU_started": false,
+    "not_admitted_reason": "shares demonstrated hardware-dependent ModelConfig CPU path; source-frozen v009 required"
+  },
+  "scheduling_repair": {
+    "device_lane": "failed stage releases exact owned device lease before off-device repair",
+    "long_oracle": "collect and seal complete raw, release NPU, separately budget Devices[] adjudication",
+    "controller_defect": "Inherited observe/cleanup idle checks in an alleged CPU-only controller would reject another legitimate NPU paper. Narrow CPU branch repair required; do not remove NPU checks from actual device branch.",
+    "joint_admission": "CPU8 plus TP4 require one summed RAM/CPU/disk ledger and disjoint CPU sets. Neither separate per-job checks nor local tests grant concurrent admission.",
+    "status": "implementation preparation/local regressions; no observed cross-paper handoff yet"
+  },
+  "formal_results_changed": false,
+  "git": {
+    "local_commit": "553799914a5ea735bd291b7dac7c3ae6a4026142",
+    "last_confirmed_remote": "51099f5d4415dcc214d42e46ff8c10a412cd345f",
+    "latest_local_remote_state": "unconfirmed after bounded push and ls-remote timeouts; do not gate devices on publication"
+  }
+}

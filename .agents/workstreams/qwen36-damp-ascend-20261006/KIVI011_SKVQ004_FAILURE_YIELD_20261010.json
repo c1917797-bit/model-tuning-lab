@@ -1,0 +1,82 @@
+{
+  "schema": "paper-portfolio.failure-yield-evidence/v1",
+  "date_utc": "2026-10-10",
+  "decision": "implement_failure_yield_and_off_device_repair_not_paper_rejection",
+  "current_model_firstdecode": false,
+  "formal_performance": false,
+  "task_accuracy": false,
+  "source_archives_validated": {
+    "files": 58,
+    "operation": "exec-0000000000000385",
+    "hash_mismatches": 0,
+    "maintainer_structure": "PASS20"
+  },
+  "kivi011": {
+    "source_sha256": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22",
+    "operation": "exec-000000000000037a",
+    "passed": [
+      "actual software58",
+      "strict consumer59",
+      "all4 native N1",
+      "real TP4 weight/cache initialization reached"
+    ],
+    "first_worker_fault": "AttributeError torch_npu._C._NPUDeviceProperties lacks num_aicore in bootstrap line99",
+    "fault_utc": "2026-10-10T12:02:38Z",
+    "first_fault_bytes": 38425,
+    "first_fault_sha256": "39288876c5b5c3d3908cabb311b02b23e18078eb74e67a78e10e6e9244c3a172",
+    "controller_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-011/RESULT.json",
+      "bytes": 10315,
+      "sha256": "c16f5c39f1ffe7ba5a2e689f7df0b7cd421984f6c23f1ebfc0f1c5ee5ab0fe83"
+    },
+    "controller_primary": "ValueError('AICore/HBM idle baseline unchanged')",
+    "exact_stop": {
+      "operation": "exec-0000000000000382",
+      "container_id": "bfbdb06b93cefc6ef7bdf2683044d9980ec28e222f1b19b4401103492fe34601",
+      "stopped_utc": "2026-10-10T12:07:02.97949517Z",
+      "retained": true,
+      "physical_devices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "protected_devices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "post_smi_compute_processes": [],
+      "post_smi_hbm_mib": [
+        2870,
+        2869,
+        2868,
+        2862
+      ]
+    },
+    "next_action": "KIVI012 reuse actual NPU-proven Triton driver property API; source-bound worker first-fault receipt triggers exact own cleanup before parent/health timeout."
+  },
+  "skvq004": {
+    "source_sha256": "a634a59f98b4775344f99de9a172e6f5fb95f3cf4ed24c9c728dfc4c9576b86c",
+    "software_operation": "exec-000000000000037e",
+    "software_tests_passed": 35,
+    "mount_operation": "exec-000000000000037f",
+    "failure": "Actual mount CLI rejected output004 because production mount_preflight and MAIN_HOST.newroot retained003 predicates",
+    "NPU_started": false,
+    "next_action": "SKVQ005 repair both and execute complete actual ENTRY/newroot/mount regression before device admission"
+  },
+  "learning": [
+    "A live parent is not a healthy worker: worker fatal must abort early and release the exact own resource lease.",
+    "Tests of helpers do not replace producer/reader and complete real entry validation.",
+    "Reuse the already actual-NPU-proven device-property API, not a similarly named framework object.",
+    "A failed implementation stays inconclusive for paper value.",
+    "Release verification does not imply a ready successor or zero idle time."
+  ],
+  "original_envelope_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-serial-handoff-20261010-002",
+  "original_envelopes": [
+    "KIVI011_TERMINAL_037A_ORIGINAL.json",
+    "KIVI011_EXACT_STOP_0382_ORIGINAL.json",
+    "SKVQ004_MOUNT_FAILURE_037F_ORIGINAL.json"
+  ]
+}

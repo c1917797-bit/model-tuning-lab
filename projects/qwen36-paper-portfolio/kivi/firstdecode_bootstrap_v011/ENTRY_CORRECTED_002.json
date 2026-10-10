@@ -1,0 +1,323 @@
+{
+  "schema": "kivi.firstdecode-v011-owner-ref-corrected-entry/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json",
+    "bytes": 73634,
+    "sha256": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22"
+  },
+  "local_root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-owner-ref-v011-20261010/bootstrap",
+  "source_count": 186,
+  "own_files": 27,
+  "dependencies": 159,
+  "software_tests": 58,
+  "software_actual": {
+    "complete_58": "UNRUN; MAIN exact packed3 archive closure required",
+    "local_new7": "PASS 0.436s; real creator/contract/loader filesystem",
+    "local_all27_compile_and_58_registered": "PASS; collection only, not complete test execution"
+  },
+  "commands": {
+    "source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.util,sys;s=importlib.util.spec_from_file_location('_kivi008_source',\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/loader.py\");m=importlib.util.module_from_spec(s);sys.modules[s.name]=m;s.loader.exec_module(m);v,r=m.source('74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22');print(len(v['files']),len(v['dependencies']),v['source_count'])"
+    ],
+    "software": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/software_check.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/MAIN_SOFTWARE58_001.json"
+    ],
+    "default_OFF": [
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/software_check.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/guest_probe.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/server_entry.py"
+      ],
+      [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/host_run.py"
+      ]
+    ],
+    "full_host": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/host_run.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "--component-sha256",
+      "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/MAIN_SOFTWARE58_001.json",
+      "--software-sha256",
+      "REQUIRED_ACTUAL_FULL58_SHA",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-011",
+      "--port",
+      "8250"
+    ],
+    "owned_CPU8_guest_only": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/guest_probe.py",
+      "--execute",
+      "--mode",
+      "cpu",
+      "--source-manifest-sha256",
+      "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22",
+      "--output",
+      "ACTUAL_CPU_OWNED_LEAF/CPU_REPORT.json",
+      "--cache-bytes",
+      "10737418240",
+      "--port",
+      "8250"
+    ],
+    "owned_N1_guest_only": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/guest_probe.py",
+      "--execute",
+      "--mode",
+      "n1",
+      "--source-manifest-sha256",
+      "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22",
+      "--output",
+      "ACTUAL_N1_OWNED_LEAF/CANARY_N1.json",
+      "--cache-bytes",
+      "10737418240",
+      "--port",
+      "8250"
+    ]
+  },
+  "command_policy": {
+    "placeholders_are_missing_not_literals": true,
+    "guest_argv_only_via_original_controller_docker_argv": true,
+    "software_TMPDIR": "/cache/cch inside existing approved software lane only",
+    "never_duplicate_parent_probe002": true,
+    "source_nonoverwrite": true,
+    "old007_and_probe10620_retained": true,
+    "host_once_after_actual_full58_and_fresh_admission_only": true
+  },
+  "budgets": {
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "guest_limit_bytes": 68719476736,
+    "CPU_preflight_limit_bytes": 8589934592,
+    "host_limit_bytes": 536870912,
+    "reserve_bytes": 9126805504,
+    "ordinary_initial_floor_bytes": 78383153152,
+    "CPU_total": 7,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "physical_hbm_limit_mib_per_card": 29696,
+    "workspace_limit_bytes": 34359738368,
+    "raw_capture_expected_bytes": "source estimate 2GiB original KV plus6-10GiB packed snapshots; charged whole output32GiB, no unit256MiB reuse",
+    "raw_consumer": "independent CPU8 following exact owned device release; explicit separate actual entry; cost not yet whole64 measured",
+    "software": {
+      "CPU": 1,
+      "AS_RSS_bytes": 268435456,
+      "cpu_seconds": 120,
+      "wall_seconds": 150,
+      "output_bytes": 1048576
+    }
+  },
+  "deadline": {
+    "total_epoch": 1791788425,
+    "UTC": "2026-10-12T07:00:25Z",
+    "first_repair_window_closed": true,
+    "no_reset": true,
+    "full5400_fit_required": true
+  },
+  "config_scope": {
+    "CPU": "Actual installed parser and SchedulerConfig.default_factory decoder-branch necessary scalar constraints only; explicit is_encoder_decoder=False assumption, checkpoint_verified=False; no ModelConfig/registry/HAL override",
+    "N1": "After actual four tiny tensors, original ModelConfig/fullEngine exact architecture including is_encoder_decoder=False verified before weights",
+    "server": "Original create_engine_config object source/PID/recipe bound and independently read; math/resources unchanged"
+  },
+  "whole_consumer007_rebind": {
+    "status": "REQUIRED_EXPLICIT_NEW_SOURCE; frozen consumer010 cannot consume011",
+    "producer_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 73634,
+      "sha256": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22"
+    },
+    "core_constants": {
+      "PRODUCER_ROOT": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011",
+      "PRODUCER_SHA": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22",
+      "exact_manifest_bytes": 73634,
+      "own_files": 27,
+      "dependencies": 159,
+      "total_source_count": 186,
+      "software_tests": 58
+    },
+    "required_changes": [
+      "Exact producer MF/ref and all27 source pin table + actual software58; no numerical consumer/source alteration",
+      "Both owner.owned_inspect_ref and mapping.inspect now exact3Refs derived by c.checked; unchanged whole consumer obj/inspect accept either legacy2 or3 already",
+      "Actual configuration CPU necessary decoder assumption/N1 full actual/server PIDsource configuration evidence preserved",
+      "All64 independent numeric rows/all4 nativefinished/source/namespace/owner/cleanup/resource/raw CPU8 budgets unchanged"
+    ]
+  },
+  "missing": [
+    "MAIN actual full58/current186/defaultOFF4",
+    "New source CPU8/all4 N1 beforeweights; prior010 stage successes not011 permission",
+    "New actual firstdecode32768+2 all64 FA and nativefinished raw",
+    "Whole original terminal/releases and independently scheduled full64 rawCPU8"
+  ],
+  "scope": {
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "whole176": false,
+    "FULL": false,
+    "mixed": false,
+    "task_accuracy": false
+  },
+  "math_and_thresholds": "unchanged kernel/installer/provenance/producer/original independent numerical and writer oracle exactSHA",
+  "supersedes": {
+    "producer_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-010/SOURCE_MANIFEST.json",
+      "bytes": 71457,
+      "sha256": "31c805c2b1b8e6e410db6bf73b4258a0cf7ce52e55205913313f394f00575d0e"
+    },
+    "actual_failure": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-010/RESULT.json",
+      "bytes": 10327,
+      "sha256": "eb508e20d1128842bc1270270f1ee56767e97d607d9673688a55d77dcf79692a"
+    },
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-010/candidate/OWNER_PRECONDITION.json",
+      "bytes": 2253,
+      "sha256": "432efacb9a820f8fd6a68e52e08f4dea0cf9d696483f6cdb569723a798585df7"
+    },
+    "classification": "ADAPTATION_IMPLEMENTATION; exact referenced inspect lackedbytes before model candidate arithmetic",
+    "frozen010_and_failure_unchanged": true
+  },
+  "delta": {
+    "production": "Two owner_precondition c.checked wrappers only; source loader/prerequisite/other24 py exact unchanged",
+    "software": "Original50 retained+8 creator/reference regressions; actual original packed3 admission consumed by eighth test",
+    "local_windows_IO_spy": "Directory fsync only; complete regular JSON bytes/fsync/link/stat/SHA andstrictloader remain real; no POSIX durability claim",
+    "raw_parallel": "Paused; existing serializer kept. No source-qualified parallel admission available."
+  },
+  "deployment": {
+    "dir": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-owner-ref-v011-20261010/bootstrap/deployment",
+    "ordered_patches": [
+      "ADD-001.patch",
+      "ADD-002.patch",
+      "ADD-003.patch",
+      "ADD-004.patch",
+      "ADD-005.patch",
+      "ADD-006.patch",
+      "ADD-007.patch",
+      "ADD-008.patch",
+      "ADD-009.patch",
+      "ADD-010.patch",
+      "ADD-011.patch",
+      "ADD-012.patch",
+      "ADD-013.patch",
+      "ADD-014.patch",
+      "ADD-015.patch",
+      "ADD-016.patch",
+      "ADD-017.patch",
+      "ADD-018.patch",
+      "ADD-019.patch",
+      "ADD-020.patch",
+      "ADD-021.patch",
+      "ADD-022.patch",
+      "ADD-023.patch",
+      "ADD-024.patch",
+      "ADD-025.patch",
+      "ADD-026.patch",
+      "ADD-027.patch",
+      "ADD-028.patch",
+      "ADD-029.patch",
+      "ADD-030.patch",
+      "ADD-031.patch",
+      "ADD-032.patch",
+      "ADD-033.patch",
+      "ADD-034.patch"
+    ],
+    "allowed_paths": [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/ownership.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/prerequisite.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/loader.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/worker.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/finish_after_native.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/prebind.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/kivi_firstdecode_bootstrap.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/software_check.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/raw_journal.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/model_contract.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/consume_raw.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/safety_host.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/producer.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/installer.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/server_entry.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/guest_probe.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/prefill_provenance.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/input_recipe.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/runtime_owner.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/client.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/consume_first_decode.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/host_run.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/cann_python.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/test_firstdecode.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/consume_prefill.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/config_cpu.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/test_native_config.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json"
+    ],
+    "new_source_nonoverwrite": true,
+    "no_old010_target": true,
+    "every_a_apply_patch_bytes_less_than": 30000
+  },
+  "corrects_only_entry": {
+    "original_entry": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-owner-ref-v011-20261010/bootstrap/ENTRY.json",
+      "bytes": 14899,
+      "sha256": "473680b1e8a35a2fcfa8e37c05a82bd37b7da38e0dbc8598b8e2427c46855c01"
+    },
+    "cause": "command SHA and actual model output-root mechanically retained old010; original entry preserved",
+    "source_frozen_unchanged": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 73634,
+      "sha256": "74de72642a7e24aefd1031681beff9a5bc92736c139557703ee9bfe742e3ee22"
+    },
+    "corrected": "All executable commands source SHA74de; firstdecode output011 new path; no algorithm/runtime/sourceMF change"
+  }
+}

@@ -1,4 +1,97 @@
+## 2026-10-10 12:43 UTC — actual handoff gaps isolated; neither paper rejected
+
+- CURRENT/NEXT_NPU remain NONE. KIVI012 full75/source192 and strict whole01271 actually passed, but later actual-call audit proved the PackedBatch callback bypassed FirstDecodeJournal; tuple/list JSON publication also fails the original readback equality. DO NOT launch012. KIVI013 freezes a narrow producer/journal repair (MF81553B `bd6e2a5983f44e07c393ee5e99f008f1c14d9e6cf817a835ef91a908a589a6dd`,30own+163deps193,full91 pending). Whole owner rebinds once; mathematical/numerical gates unchanged. Mixed004 inherits the tuple defect and is NOT ready.
+- SKVQ005 missing PyArrow is a dependency/preparation failure, not an algorithm no-go. Actual003 isolated wheel now downloaded from Huawei mirror in5.2s and matched official PyPI size41144566 and SHA `4d5d1ec7ec5324b98887bdc006f4d2ce534e10e60f7ad995e7875ffa0ff9cb14`. Earlier official-CDN90s timeout/partial002 is preserved, not retried as if absent. Root lowbit/skvq-cpu-pyarrow19-cp312-v1-003 has770files/131309886B; actual-tree136179B `a156d2006a4e5c4b0ee332d9c23184e43118c3828ea4541fe2393af74470376f`. Original image unchanged. Same-image3.12 import/9TRAIN/original builder still UNRUN;006 explicit CPU-only preparation is next.
+- Source archives: prior58 plus current59 byte-readback PASS; maintainers20/diff-check PASS. Source tests are not NPU results. Original038e/038f/0393/0396/039e/03ac/03ae/03b9 envelopes saved in existing MAIN-serial-handoff-20261010-002. Preparation runs independently; neither logs nor Git publication may retain a device lease. Deadline/HugeTLB/protected0–3 unchanged. No new E2E or task result, no zero-idle claim.
+
+## 2026-10-10 12:24 UTC — SKVQ005 real CPU dependency failure, device lane yielded
+
+- KIVI011 own TP4 has stopped/retained as documented below; no0–3 action. SKVQ005 source38/84 and actual allmount/9TRAIN gates passed, then MAIN0396 executed the real same-image CPU23 + input builder. CPU23 PASSED, original builder failed at `import pyarrow.parquet` (missing dependency in Python3.12). No NPU container was created. This is an environment/dependency adaptation failure, not paper/numerical no-go.
+- CPU CID `d6be8fe967e48dac761b6746eda38d84dccb17abc9eccc9822fa51f52e3777af` auto-stopped12:18:16.42923346Z, Pid0/noExec/noOOM, retained. HOST_RESULT11808B SHA `814f3c9f7fa3797388d700ad039ebced2c2809ebd76721b33dda630f2b19e106`; exact raw/CLI in `/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-005-main-20261010-001`.
+- SKVQ006 is off-device isolated-dependency preparation; do not install into original image or change TRAIN/tokenizer/sampler to bypass missing dependency. KIVI012 is deployed and actual MAIN039e full75/source192 PASS; whole012 consumer preparation and fresh device admission still required. New source MF78628B SHA `2c2fedee340f9e1696513082973baf1f1826c87b7958eecd4e6d3ff6c1f66818`.
+- CURRENT device lease remains NONE; no zero-idle claim and no new formal performance/accuracy. Actual source-only/CPU checks are prerequisites, not NPU paper results. Deadline unchanged.
+
 # Current human-authorized 72h successor — 2026-10-09
+
+## Current execution — 2026-10-10 12:09 UTC
+
+KIVI011 exec037a terminal FAILED after actual CPU8/all4N1 and four worker
+weight/cache initialization. Earliest worker fault12:02:38 is nonexistent
+TorchNPU num_aicore attribute in bootstrap99, not algorithm numeric failure.
+The parent stayed alive and held ~18GiB/card after that fatal; MAIN0382 verified
+exact own CID bfbdb06b/source74de/mapping4-7 and stopped-retained it, without
+operating0-3. Finished12:07:02.97949517Z/Pid0/noExec/noOOM; SMI4-7 returned
+2870/2869/2868/2862MiB/noPID. Controller terminal later reports idle-baseline
+assertion during manual-stop memory reclaim; preserve BOTH primary records.
+RESULT10315B/c16f5c39f1ffe7ba5a2e689f7df0b7cd421984f6c23f1ebfc0f1c5ee5ab0fe83.
+No model-firstdecode, formal E2E or task PASS. Queue RUNNING is cleared.
+
+KIVI012 off-device: reuse real018c Triton-driver core-property API and installed
+helper identity, verify at N1 before weights; add actual worker-fatal receipt
+so MAIN's host immediately releases instead of waiting its1800s health limit.
+Mixed003 actual94 local tests passed but inherits the same ABI defect; not ready.
+NEXT SKVQ005:004 real35/84source passed, but mount37f and reviewedhost entry
+exposed two stale003 output-prefix predicates; no004 container started. Repair
+both and execute the actual entry before devices.003's duplicate-input positive
+test failure is separately preserved. Source delivery does not establish NEXT.
+Recurrent owner prepares rawCPU-only continuation with a strict joint resource
+ledger so later immutable adjudication need not wait for NPU idle.
+
+Original envelopes stay under lowbit/MAIN-serial-handoff-20261010-002.
+Physical4-7/0-3protected/HugeTLB32GiB SPENT/cutoffOct12 07:00:25Z unchanged.
+This is observed failure-yield recovery, not a zero-idle or success claim.
+
+
+## Current execution — 2026-10-10 11:39 UTC
+
+No own live NPU stage. KIVI010 exec0355 failed after actual same-image CPU8
+and all4 N1/full native EngineConfig PASSED. Actual worker bootstrap then
+rejected owned_inspect_ref Ref2 against its strict Ref3 reader; weights/model
+firstdecode were not reached. This is an evidenced producer/consumer adaptation
+defect, not algorithm failure. Original RESULT10327B SHA
+eb508e20d1128842bc1270270f1ee56767e97d607d9673688a55d77dcf79692a.
+Exact candidate5bb5a163 and CPU213effe9 stopped-retained/Pid0/noExec/noOOM were
+independently verified by0361. Device FinishedAt11:28:42.46777039Z. No0-3 action.
+
+KIVI011 is off-device repair with actual creator-to-strict-consumer regression;
+do not rerun frozen010. NEXT priority is SKVQ003: unchanged9 TRAIN bytes verified
+at actual source-v2; new explicit RO host binding to original source-v1 guest
+path. SKVQ002 exec034b had failed before any container because source-v1 host
+root is absent; checkpoint /cache/efim/Qwen3.6-27B is unchanged and valid.
+Final003 source/mount identity and canonical JSON replay regressions pending.
+Ready NPU successors0: this is a preparation gap, not external card occupation.
+Three active preparers: SKVQ003 closure; independent003 entry review; KIVI011.
+Do not keep devices for failed-paper repair, reports or Git publication.
+
+Original terminal, first worker fault and release envelopes are retained under
+/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-serial-handoff-20261010-002.
+Serial queue is current authority. PortfolioOct12 07:00:25Z/physical4-7/
+protected0-3/HugeTLB32GiB SPENT unchanged. No new E2E/task-accuracy result.
+
+
+## Current execution — 2026-10-10 10:52 UTC
+
+No live own NPU stage. Same-image CPU002 operation02f0 terminal failed:
+actual ModelConfig registry subprocess imports Qwen GDN FLA and invokes Triton
+Ascend get_arch; even this constructor is hardware-dependent on Devices[].
+This disproves the earlier CPU-only ModelConfig assumption. It is preparation
+partition failure, not an algorithm failure. Source v008/47 software PASS stays
+historical, NOT ready for NPU; v009 moves only evidenced HAL dependency to
+all4-N1/full native config BEFORE weights. No architecture stub/relaxed gate.
+
+0305 independently confirms exact own CPU12fa7348 stopped-retained/Pid0/noExec/
+noOOM/Devices[].02fe physical4-7 no processes/HBM2869/2866/2866/2860MiB.
+KIVI repair is off-device. SKVQ independent capture is prioritized next admission.
+Mixed host001 local32/seven-OFF PASS is preparation only; its source contract
+still has config/whole-consumer/peer-admission gaps. Ready NPU successors0.
+An alleged CPU-only inherited idle check would reject the next NPU paper:
+new CPU-only resource/ownership branch is being closed, not silently weakening
+actual device isolation. Cross-paper handoff has NOT yet been observed.
+
+See CONFIG_HARDWARE_BOUNDARY_AND_CPU_HANDOFF_20261010.json and serial queue.
+Local5537999 exists, remote unconfirmed; last independently confirmed51099f5.
+Git/report waiting must not hold devices. PortfolioOct12 07:00:25Z/physical4-7/
+protected0-3/HugeTLB32GiB SPENT unchanged. No new E2E/task-accuracy result.
 
 ## Current execution — 2026-10-10 10:19 UTC
 

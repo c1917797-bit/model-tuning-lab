@@ -1,0 +1,286 @@
+{
+  "schema": "skvq.current72h.preprojection.entry/v1",
+  "default_enabled": false,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-004/SOURCE_MANIFEST.json",
+    "bytes": 31294,
+    "sha256": "a634a59f98b4775344f99de9a172e6f5fb95f3cf4ed24c9c728dfc4c9576b86c"
+  },
+  "install": {
+    "patch": "MATERIALIZE.patch",
+    "mode": "one Add-only a_apply_patch rooted at /cache/cch/qwen36-paper-preparation-20261007/lowbit; relative declared004 titles;20py+MF+ENTRY; absent leaf only;003/002/001 frozen unchanged",
+    "source_files": 20,
+    "dependency_refs": 64,
+    "total_source_count": 84
+  },
+  "software": {
+    "argv": [
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-004/software_check.py",
+      "--source-manifest-sha256",
+      "a634a59f98b4775344f99de9a172e6f5fb95f3cf4ed24c9c728dfc4c9576b86c"
+    ],
+    "actual_source_gate_required": true,
+    "tests": 35,
+    "remote_status": "UNRUN",
+    "local_status": "35/35 actual local stdlib PASS; no deployed source/Torch/config/NPU admission",
+    "local_tool_chunk": "db17b7",
+    "host_cpu_slots": 1,
+    "max_seconds": 120,
+    "AS_bytes": 268435456,
+    "RSS_budget_bytes": 268435456
+  },
+  "host": {
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=7200:7200",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-004/MAIN_HOST.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "a634a59f98b4775344f99de9a172e6f5fb95f3cf4ed24c9c728dfc4c9576b86c",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-004-main-20261010-001"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-004-main-20261010-001",
+    "status": "UNRUN",
+    "wall_seconds": 7200,
+    "cleanup_included_seconds": 180,
+    "phases": [
+      "Devices[] CPU8: current-source corrected complete15 +unchanged original8 tests; actual9 TRAIN +tokenizer unchanged builder/independent input consumer; explicit torch->torch_npu; declared scalar SchedulerConfig only",
+      "after own CPU stop-retain: full weight index/shard hashes; fresh physical4-7 mapping/source/RAM/disk/cpuset/HBM",
+      "all4 real tiny tensor/sync/getter; then genuine ModelConfig/fullEngineConfig before weights (not CPU HAL retry)",
+      "full actual256 inputs×4096,16 FA×4 rank capture; entire QKV and preprojection K plus exact same-input original V hashes",
+      "exact own TP4 stop-retain/Pid0/noExec/noOOM+protected own-boundary replay (external 0–3 churn recorded, not unchanged)",
+      "new Devices[] CPU2: independent full raw/order and preprojection consumption; stop-retain",
+      "MAIN persists actual original whole-operation, then independent whole terminal/owned/raw source consumer"
+    ],
+    "conditions": [
+      "MAIN-only device dispatch; no peer CPU lease in this first serial packet",
+      "no model/native/performance authority from this calibration-only stage",
+      "failure preserves source/raw/own containers; no original retry",
+      "ordinary RAM/CPU/common ancestors live checked; no HugeTLB addition",
+      "all9 TRAIN files and frozen tokenizer metadata must physically exist with exact plan bytes/SHA; no download",
+      "each phase persists complete exact mount/TRAIN preflight before Docker create; host source-v2 maps read-only to original builder guest source-v1; no host alias or data change"
+    ],
+    "resource": {
+      "max_total_seconds": 7200,
+      "cleanup_included_seconds": 180,
+      "CPU": 7,
+      "host_bytes": 536870912,
+      "cpu_guest_bytes": 8589934592,
+      "capture_guest_bytes": 68719476736,
+      "consumer_guest_bytes": 2147483648,
+      "ordinary_reserve_bytes": 8589934592,
+      "ordinary_joint_max_bytes": 77846282240,
+      "HugeTLB_added": 0,
+      "fresh_disk_bytes": 343597383680,
+      "raw_QKV_bytes": 274877906944,
+      "raw_preprojection_K_bytes": 34359738368,
+      "disk_reserve_bytes": 8589934592,
+      "physical_HBM_reserve_mib": 3072
+    },
+    "clock": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+      "bytes": 1379,
+      "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+    },
+    "portfolio_cutoff_epoch": 1791788425
+  },
+  "whole": {
+    "argv": [
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-004/consume_whole.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "a634a59f98b4775344f99de9a172e6f5fb95f3cf4ed24c9c728dfc4c9576b86c",
+      "--root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-004-main-20261010-001",
+      "--original-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-004-main-20261010-001/MAIN_ORIGINAL_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-004-main-20261010-001/MAIN_INDEPENDENT_WHOLE.json"
+    ],
+    "original_input_required": "MAIN_ORIGINAL_REF.json must be the strict actual {path,bytes,sha256} Ref to persisted real agentweb.operation/v1 whole successful original; never synthesized. Exact host argv above is rechecked.",
+    "status": "UNRUN; no actual whole Ref exists",
+    "scope": "only all256 capture/preprojection/own cleanup consumed; author clustering/clip/native176/model/E1/tasks all pending"
+  },
+  "next_missing": [
+    "actual existing9 TRAIN/tokenizer size/SHA, tokenize and independent consumer",
+    "same660 declared scalar SchedulerConfig CPU, then all4tiny and full actual ModelConfig/EngineConfig before weights; no architecture/platform stub",
+    "all4tiny/physical HBM/fresh resources",
+    "full256 capture and independent288GiB raw consumption",
+    "actual whole operation/cleanup consumer",
+    "official6 acquired locally with exact fixedcommit SHA, not yet a current execution closure; default TP-local clustering/fixed clip +quantized native producer pending",
+    "quantized176x160/whole/model/paired40x1024/final tasks; not authorized by calibration"
+  ],
+  "sameimage_CPU_executed": false,
+  "N1_executed": false,
+  "capture_executed": false,
+  "independent_raw_consumed": false,
+  "model_ready": false,
+  "native_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "known_adaptation_scope": [
+    "existing MATH/APPS/ARC TRAIN 256 contiguous4096 seed42, not author WikiText exact",
+    "BF16 same frozen Qwen weights; calibration precision equivalence not established",
+    "chunked-prefill enabled; every actual sample must still reach all16 FA as single full4096 fresh prefill"
+  ],
+  "configuration": {
+    "same_image_CPU": "explicit torch then torch_npu; actual EngineArgs kwargs and real independent SchedulerConfig of declared scalar values only; no ModelConfig/registry inspection, no fullEngineConfig/HAL attempt; does not validate actual checkpoint class",
+    "all4_N1": "four actual tiny tensor/getter/sync results first, then unmodified full EngineArgs.create_engine_config including real ModelConfig before weights; scalar common fields and source origins independently compared",
+    "HAL_device_type_source_body": "MISSING; Ascend platform674 invokes get_ascend_device_type; no no-device safety claim and no platform stub",
+    "actual_EngineArgs_source_sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
+    "real_scheduler_metadata": "still required full4096 tokens/pad0 for every actual event",
+    "observed_ModelConfig_CPU_failure": "MAIN actual CPUprobe002 ModelConfig registry subprocess imports qwen3_5/fla/Triton Ascend get_arch SystemError; do not repeat that path",
+    "CPU_required_InitVars": "Original same660 SchedulerConfig.default_factory supplies declared is_encoder_decoder=False; max_model_len explicitly engine4097; N1 requires actual ModelConfig False and checks effective False against CPU. This is necessary scalar validation only.",
+    "compilation_config_adapter": "same common {'mode':0}; real EngineArgs.__post_init__ source converts dict to CompilationConfig; LLM and N1 use identical kwargs; actual constructor CPU and real fullEngine N1 still required"
+  },
+  "protected_boundary": {
+    "contract_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+      "bytes": 9234,
+      "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+    },
+    "lifecycle_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+      "bytes": 6865,
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    "external_churn_recorded": true,
+    "external_unchanged_claimed": false,
+    "own_on_protected_rejected": true,
+    "unknown_4_7_rejected": true,
+    "independent_historical_boundary_replay_required": true
+  },
+  "preflight": {
+    "argv": [
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-004/mount_preflight.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "a634a59f98b4775344f99de9a172e6f5fb95f3cf4ed24c9c728dfc4c9576b86c",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-mount-preflight-004-main-20261010-001"
+    ],
+    "status": "UNRUN; mandatory actual source/TRAIN/mount validation before device dispatch; no Docker/NPU/Torch/download",
+    "CPU": 1,
+    "AS_bytes": 268435456,
+    "RSS_budget_bytes": 268435456,
+    "wall_seconds": 120,
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-mount-preflight-004-main-20261010-001",
+    "future_generated_inputs_mount": "not fabricated by standalone check; each actual create rechecks its generated INPUTS root"
+  },
+  "mount_protocol": {
+    "host_training_root": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v2",
+    "guest_training_root": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v1",
+    "readonly": true,
+    "original_plan_unchanged": true,
+    "original_builder_unchanged": true,
+    "model_path_unchanged": true,
+    "actual_index_ref": {
+      "path": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v2/SOURCE_INDEX.json",
+      "bytes": 7323,
+      "sha256": "2f4e76f5f90eb6106118d71404a6e0acfbcb81a5f093302bf69dcb0c078388a9"
+    },
+    "every_create_preflight_persisted_before_Docker": true,
+    "all9_training_size_sha_required": true,
+    "whole_independent_preflight_replay_required": true,
+    "no_host_alias_created": true,
+    "canonical_dict_order_replay": "inspect_mounts sorts exact destination keys; actual sort_keys persistence/roundtrip regression required",
+    "directory_identity": "dev/ino/mode stable; volatile size/mtime/ctime not claimed immutable; regular files use full stat fence and original TRAIN full size/SHA"
+  },
+  "actual_predecessor": {
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-003-main-20261010-001",
+    "result_sha256": "8a528fd6efe2071741185d398e7cd83e55870dd517bf45d112622564011da17c",
+    "status": "MAIN036d FAILED CPU old15 fixture; no NPU container created; original retained; not a paper/math result"
+  },
+  "changed_own_sources_from_003": [
+    "current_contract.py",
+    "MAIN_HOST.py",
+    "inside_cpu.py",
+    "consume_host.py",
+    "test_aggregate.py",
+    "software_check.py",
+    "SOFTWARE_TESTS_15.py"
+  ],
+  "unchanged_own_sources_from_003": [
+    "resources.py",
+    "capture_current.py",
+    "model_kwargs.py",
+    "physical_hbm.py",
+    "n1_check.py",
+    "consume_stage.py",
+    "runtime_capture_current.py",
+    "projection_tap_current.py",
+    "consume_projection_current.py",
+    "engine_config.py",
+    "consume_whole.py",
+    "loader_bridge_current.py",
+    "mount_preflight.py"
+  ],
+  "fixture_correction": {
+    "original_test_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/SOFTWARE_TESTS.py",
+      "sha256": "dc19f7788459e86f095fc62c3fe697ebab6860ac309b8a6a7e76d62cdcf016f6",
+      "bytes": 5352
+    },
+    "original_builder_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/build_inputs.py",
+      "sha256": "8bf7eea24c3d13f6cb60d632a4852bcfa8f2d67de4b0f83d9489ecb33afd34c3",
+      "bytes": 8491
+    },
+    "original_io_contract_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/io_contract.py",
+      "sha256": "365dd5873a07d8b3e6ef2e0ae2f91852a1a63e653f0562f5809a3a61e0c7d76c",
+      "bytes": 4521
+    },
+    "original_positive_pool_tokens": 65536,
+    "corrected_positive_pool_tokens": 131072,
+    "original_repeat": {
+      "sample_id": 226,
+      "prior_sample_id": 174,
+      "pool_start": 10016
+    },
+    "actual_cpu_test_counts": [
+      15,
+      8
+    ],
+    "corrected15_source_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-004/SOFTWARE_TESTS_15.py",
+    "producer_sampling_unchanged": true,
+    "training_inputs_changed": false,
+    "uniqueness_relaxed": false,
+    "resampling_added": false,
+    "old15_failure_retained": true,
+    "random_behavior": {
+      "local_python": "CPython3.9.13",
+      "actual_local_tool_chunk": "5f9531",
+      "sameimage_python": "CPython3.12",
+      "sameimage_failure": "MAIN036d actual old15 refused duplicate full input; new15 remains UNRUN",
+      "not_python312_unique": true
+    }
+  },
+  "sameimage_CPU_actual23_status": "UNRUN in current004; actual003 old15 failure retained, not replaced by35 local software"
+}
