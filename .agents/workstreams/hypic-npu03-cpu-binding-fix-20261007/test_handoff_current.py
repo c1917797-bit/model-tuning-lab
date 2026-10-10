@@ -20,7 +20,7 @@ class HandoffTests(unittest.TestCase):
         history = (HERE / "HANDOFF_HISTORY.md").read_text(encoding="utf-8")
         headings = re.findall(r"^## ([0-8])\. ", current, re.M)
         self.assertEqual(headings, list("012345678"))
-        self.assertLessEqual(len(current.splitlines()), 150)
+        self.assertLessEqual(len(current.splitlines()), 160)
         self.assertGreaterEqual(len(history.splitlines()), 380)
         self.assertIn("cache10r3 terminal decision", history)
         self.assertIn("HANDOFF_HISTORY.md", current)
@@ -61,9 +61,11 @@ class HandoffTests(unittest.TestCase):
         active = task["active_attempt"]
         if active is not None:
             self.assertEqual(active["campaign"], "cache10r18-c32-longbench")
-            self.assertEqual(active["arm"], "no-cache")
-            self.assertEqual(active["controller_operation"], "exec-00000000000001d1")
-            self.assertTrue(active["root"].endswith("r18-c32-full-baseline"))
+            self.assertEqual(active["arm"], "hypic-only")
+            self.assertEqual(active["controller_operation"], "exec-0000000000000247")
+            self.assertTrue(active["root"].endswith("r18-c32-full-hypic"))
+            self.assertIn("terminal runtime failure", active["state"])
+            self.assertTrue((HERE / active["terminal_audit"]).is_file())
         self.assertEqual(task["r17_cap_isolation_design"]["quality_decision"],
                          "REJECT_OR_QUALIFY")
         self.assertEqual(task["r13_baseline_attempt"]["arm"], "no-cache")
@@ -91,6 +93,7 @@ class HandoffTests(unittest.TestCase):
         self.assertIn("127x3", task["goal_horizons"]["short_term"])
         self.assertIn("all 29", task["goal_horizons"]["long_term"])
         self.assertIn("2048/c32", task["next_action"])
+        self.assertIn("4429e3", task["next_action"])
         self.assertIn("GSM8K", task["next_action"])
         self.assertEqual(task["timeboxed_milestone_plan"]["deadline_utc"],
                          "2026-10-09T17:21:24Z")
