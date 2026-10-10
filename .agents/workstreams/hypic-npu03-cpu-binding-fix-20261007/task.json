@@ -229,10 +229,25 @@
   },
   "active_attempt": {
     "campaign": "cache10r18-c32-longbench",
-    "arm": "no-cache",
+    "arm": "hypic-only",
+    "controller_operation": "exec-0000000000000247",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r18-c32-full-hypic",
+    "state": "running; admitted after baseline terminal independent audit and fresh physical NPU0-3 plus port 8223 idle proof"
+  },
+  "r18_baseline_terminal": {
     "controller_operation": "exec-00000000000001d1",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r18-c32-full-baseline",
-    "state": "running; admitted after 127 offline tests and fresh physical NPU0-3 plus port 8223 idle proof"
+    "controller_exit_code": 0,
+    "independent_audit_valid": true,
+    "samples": 127,
+    "scored_rows": 381,
+    "correct": 223,
+    "length_limit": 55,
+    "clean_guard_samples": 870,
+    "source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "arm_result_sha256": "7d17df0e23319ff55f2a798e2cc2a1e63f99504b23ad6fe5fb75936c0a4a3464",
+    "exact_owned_release": true,
+    "scope": "original-source 2048/c32 explicit-segment LongBench baseline only; no paired verdict"
   },
   "r17_baseline_terminal": {
     "controller_operation": "exec-000000000000012b",
