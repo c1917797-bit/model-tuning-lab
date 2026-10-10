@@ -1,0 +1,181 @@
+{
+  "schema": "mst.stage-causal-and-successor/v1",
+  "observed_utc": "2026-10-10T00:21:48Z",
+  "goal": "ACTIVE_UNMET_nonHYPIC_Qwen36_Ascend_plugin_matchedE2E_and_tasks",
+  "preceding_turn": "status-only/no-progress; this continuation dispatched actual AdaKV024",
+  "sparq009": {
+    "status": "FAILED",
+    "operation": "exec-0000000000000004",
+    "source_sha256": "7397ea5be5811805a8a032094fd0bd076fffd4c3464500965da472075f923f91",
+    "original_terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/MODEL009_0004_FAILED_HBM_ORIGINAL.json",
+      "bytes": 11641,
+      "sha256": "3c81508f564f79deb91ef7377383eea0acba509036992af50f0d173c14b8d85b"
+    },
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v17-diagnostic-user72h-20261010-009/RESULT.json",
+      "sha256": "1b96fb3b980e62f7231a33f0e6d6018013a86b07efd2ad5e4b77bba036b76256"
+    },
+    "first_fault": {
+      "cause_class": "ENVIRONMENT_OR_SCHEDULING",
+      "confidence": "proved physical HBM reserve violation; peak contributor UNKNOWN",
+      "observed_utc": "2026-10-10T00:05:24.453522Z",
+      "hbm_mib": [
+        30734,
+        30790,
+        30745,
+        30715
+      ],
+      "limit_mib": 29696,
+      "raw": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/MAIN-sparq-full-v17-diagnostic-user72h-20261010-009/round0-candidate/observation-raw-1791590724455636460.json",
+        "sha256": "21ed90c4f38fa455c63473d914c88ed78d38f80a023d1e321db0af2af5b7b27f"
+      },
+      "scope": "first 32768-token native PrefillNoCache; four ranks layer63 trace; sparse_algorithm_active=false; ANN selector/oracle not reached",
+      "alternatives": [
+        "native prefill live peak",
+        "allocator reserved storage",
+        "preallocated graph/candidate residency"
+      ],
+      "numeric_failure_proved": false,
+      "paper_no_go": false
+    },
+    "cleanup": {
+      "stopped": true,
+      "retained": true,
+      "deleted": false,
+      "oom_killed": false,
+      "errors": [],
+      "exit137_scope": "controller stop, not OOM proof"
+    },
+    "decision": "DIAGNOSE; API-only minimal allocation/reserved/peak stage instrumentation; no unchanged retry or relaxed reserve"
+  },
+  "adakv024": {
+    "operation": "exec-0000000000000036",
+    "status": "RUNNING",
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_MODEL_0036_LAUNCH_ORIGINAL.json",
+      "sha256": "9226564c899ce15015ed931aa281a0e4d6772182e2230fcd11bfa04b92755cc3"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-024-001",
+    "refs": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-024/SOURCE_MANIFEST.json",
+        "sha256": "cd72558f26c33661859b8358bf2d17209f8f38982de38e84c1807f1f31f9a761"
+      },
+      "software": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-024-001/RESULT.json",
+        "sha256": "a0e7559b8814ebed252b8294d6a7449d5b05a95edc31ea57c83334e5a9b73339"
+      },
+      "audit-software": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-017-software-main-20261010-024-001/AUDIT_SOFTWARE.json",
+        "sha256": "5f80b161ea44900347dc12e9926650c01a58bb954591cbe7fd5fd62d6d8c9e74"
+      },
+      "materialization": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit024-materialize-main-20261010-001/RESULT.json",
+        "sha256": "babadb5e8e490466beb9fd30843ef299f032ecf8bef08e8abd2b76de146568bc"
+      },
+      "component": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-native-serial-consume-014-main-017-001/RESULT.json",
+        "sha256": "e971e21a11fd81d4bc775fa6746f618956a7df8758529cb5e1b1c0374d0f29fa"
+      },
+      "model-manifest": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "sha256": "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c"
+      }
+    },
+    "software": {
+      "own": 52,
+      "audit": 41,
+      "passed": true
+    },
+    "component": {
+      "cases": 32,
+      "steps": 5120,
+      "checked": true,
+      "selector_verified": false,
+      "model": false
+    },
+    "next_gate": "same-image Devices[] source check -> actual all4 canary/N1 -> real native allocator geometry -> full450 lifecycle/model -> original independent consumer",
+    "source_frozen": true,
+    "readiness": "running entry only; no full model/numerical/performance/task PASS"
+  },
+  "resources": {
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "logical_to_physical": {
+      "0": 4,
+      "1": 5,
+      "2": 6,
+      "3": 7
+    },
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "port": 8236,
+    "model_ram_bytes": 68719476736,
+    "host_ram_bytes": 536870912,
+    "reserve_ram_bytes": 9126805504,
+    "model_cpu": 4,
+    "host_cpu": 1,
+    "reserve_cpu": 2,
+    "preparer_remote_exec_cpu": 0,
+    "hugetlb_32gib_release": "SPENT",
+    "serial_device_dispatcher": "MAIN"
+  },
+  "deadlines": {
+    "first_repair": "2026-10-10T07:00:25Z",
+    "total": "2026-10-12T07:00:25Z",
+    "whole_phase_seconds": 5400,
+    "cleanup_included_seconds": 90,
+    "reset": false
+  },
+  "original_archives": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_SOURCE_MATERIALIZATION_002F_ORIGINAL.json",
+      "sha256": "1790a737c8cdf0a6031740e05da4be482e91de666803fcc2757426c9b957071c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_SOFTWARE93_0032_ORIGINAL.json",
+      "sha256": "ba66e9cd487849fcb4a1dd1b7c7e83bf8e43241be180bf0e0e0193443d430fdc"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_AUDIT_MATERIALIZATION_0033_ORIGINAL.json",
+      "sha256": "2be67ff111596ec1eeb70ad6d24757ea75db32442263487945f0a501c4e79423"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_PRELAUNCH_0035_ORIGINAL.json",
+      "sha256": "bcc76b52e20470f25a1709c3e649d3a36dd60b54bad9637ed3718de05dfefcdf"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_MODEL_0036_LAUNCH_ORIGINAL.json",
+      "sha256": "9226564c899ce15015ed931aa281a0e4d6772182e2230fcd11bfa04b92755cc3"
+    }
+  ],
+  "all_archive_readback_sha_verified": true,
+  "parallel_preparation": {
+    "sparse": "minimal SparQ009 peak attribution UNAPPLIED patch",
+    "recurrent": "actual official final-task inputs and bounded existing fetch entry",
+    "lowbit": "KIVI post-RoPE producer and actual getter/owner seam"
+  },
+  "queue": {
+    "current": "AdaKV024 actual0036",
+    "next": "SparQ bounded diagnostic source pending, no NPU ticket",
+    "backup": "KIVI source-only"
+  },
+  "publication": "pending known Git HTTPS authentication failure; no blind retry/no TLS bypass",
+  "remaining": [
+    "AdaKV full model correctness and selector/lifecycle",
+    "matched single screen",
+    "three formal fixed1024 pairs >=10%",
+    "paired final2048 LBv2/GSM8K latest task allowance",
+    "capability portability and final plugin delivery"
+  ]
+}

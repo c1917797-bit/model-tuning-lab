@@ -1,5 +1,70 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+
+## Current execution — 2026-10-10 00:31 UTC (supersedes RUNNING below)
+
+Read ADAKV024_REGISTRATION_FAILURE_20261010.json first. Original0036 is
+TERMINAL FAILED exit1/175063ms, not running. Actual CPU static and four-card
+canary/import N1 passed, but general plugin registration failed before model
+load: source guard mistakes the real torch.inference_mode wrapper for a foreign
+native dummy owner. N1 had not exercised this registration seam. This is an
+adaptation/preflight coverage defect, not paper/numerical/performance no-go.
+Exact two owned CIDs independently stopped-retained/Pid0/noExec/OOMfalse at003b.
+Actual source003c/003e and terminal/release originals saved with SHA readback.
+
+CURRENT no NPU job. NEXT sparse preparer owns minimal new025 chain-aware guard
+and real registration preflight; preserve inference_mode, reject foreign chains,
+keep all numerical/resource gates. No unchanged024 retry. BACKUP KIVI actual
+post-RoPE/slot owner preparation and SparQ009 peak attribution remain pending.
+Official data input-v4 exact entry ready for MAIN review; datasets still absent.
+Fresh003d shows physical4–7 idle; foreign0–3 now has workers3513737–3513740,
+untouched. Ordinary available96999512kB, not proof of future admission.
+First Oct10 07:00:25Z / total Oct12 07:00:25Z fixed; HugeTLB32GiB SPENT.
+No legal new E2E/task result. Goal ACTIVE/unmet. HTTPS publication still pending.
+
+## Current execution — 2026-10-10 00:21 UTC
+
+Read ADAKV024_RUNNING_AND_SPARQ009_HBM_20261010.json first.
+SparQ009 original0004 is TERMINAL FAILED, not running. First32768 native
+prefill raised actual per-card HBM30715–30790MiB beyond29696MiB reserve gate.
+All4 layer63 native-prefill traces exist; ANN selection was inactive. This is
+not a numerical/paper failure. Peak contributor remains unresolved. Exact owned
+CID stopped-retained/noOOM/noExec and host children reaped; no foreign stop.
+Do not repeat7397 unchanged or relax3GiB. Minimal stage-peak diagnostic is NEXT.
+
+AdaKV024 actual source materialization002f, complete52+41 software0032 and
+audit materialization0033 PASSED in their source/software scope. Actual new
+MAIN0036 is RUNNING under frozen sourcecd72558, whole5400 including90cleanup.
+Poll0036 only; do not infer model/device execution from ACK or repeat launch.
+Output: /cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-024-001
+Prerequisites and whole originals are in the record; archive SHA readback passed.
+The 32x160 native component is not selector/full-model acceptance. Same-image
+CPU/N1/geometry/full450 and independent original consumer still govern progress.
+
+Fresh0035 proved4–7 idle before dispatch, ~81GiB ordinary available, port8236
+free and output absent; protected0–3 foreign HYPIC remains untouched. Controller
+rechecks resources before create and throughout. All3 preparers remote CPU0,
+API-only; no additional device job. Source/command fixes use a new identity.
+First Oct10 07:00:25Z and total Oct12 07:00:25Z unchanged. HugeTLB32GiB SPENT.
+No new throughput/TTFT/TPOT/task result. Goal ACTIVE/unmet. Git publication
+pending known HTTPS authentication failure; this note is not final acceptance.
+
+## Current execution — 2026-10-09 23:53 UTC
+
+Read SPARQ_MODEL009_AFTER_EXECUTOR_RESTART_20261010.json first.
+Actual E1v8 complete24 software/default-OFF/entry checks passed MAIN094f.
+Source7397/264 repair remains frozen at050c7d5. Model008 exec0955 lost its
+registry during the actual ma service restart23:49:46Z; MAIN independently
+proved no old host/full_entry process, no008 output, and idle4–7. No model
+or numeric result exists for008. Original ACK/errors/probes are retained.
+Current unique model009 exec0004 was polled RUNNING. Source/model identity
+checks precede PLAN creation; no new NPU allocation is claimed yet. Poll0004
+only. Same5400/90 cleanup, first Oct10 07:00:25Z and total Oct12 clock.
+E1v8 remains gated on complete same7397 model/independent authority. AdaKV024
+source materialization plus93 software pending; native5120 alone is component
+proof. KIVI backup geometry/source is not model readiness. All preparers CPU0.
+HTTPS publication remains pending. Goal ACTIVE/unmet; no new performance/tasks.
+
 ## Current verified state — 2026-10-09 23:41 UTC
 
 Read SPARQ_ENUM_REFERENCE_REPAIR_VERIFIED_20261010.json first.

@@ -1,0 +1,104 @@
+{
+  "schema": "mst.causal-recovery/v1",
+  "observed_utc": "2026-10-10T00:31:00Z",
+  "goal": "ACTIVE_UNMET",
+  "previous_turn": "progress: original003c terminal actual Torch source obtained; no model PASS",
+  "operation": "exec-0000000000000036",
+  "status": "FAILED",
+  "exit_code": 1,
+  "duration_ms": 175063,
+  "timed_out": false,
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-024-001/RESULT.json",
+    "sha256": "c27028cf76ce6423c79044ec9ee4ef9033f8a9d9333b11ef3be29f182f9a6946"
+  },
+  "source_sha256": "cd72558f26c33661859b8358bf2d17209f8f38982de38e84c1807f1f31f9a761",
+  "failed_stage": "actual general plugin registration before model load",
+  "first_fault": "ValueError: original source-qualified native dummy/capture owner, graph/runtime_bridge.py:222",
+  "cause_class": "ADAPTATION_IMPLEMENTATION",
+  "confidence": "source-proved guard ignores deployed @torch.inference_mode decorator; runtime025 repair unverified",
+  "first_fault_raw": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-024-001/candidate/server.stderr",
+    "sha256": "e21328d313090a9d9405b0f4f867c60992e8df8a38d3c159f7b4354bf9d80b15"
+  },
+  "passed_scope": [
+    "same-image static CPU source check",
+    "native component replay (not selector or model)",
+    "all four actual canary/N1 imports"
+  ],
+  "preflight_gap": "N1 checked callable only; did not exercise actual graph.register/decorated ownership",
+  "model_loaded": false,
+  "model_numerical_pass": false,
+  "performance": null,
+  "task_accuracy": null,
+  "cleanup": {
+    "owned_cids": [
+      "c1775d7489362601b0af2a3a7fddfb1a664451cdc3a1ea2f0deba635c625c134",
+      "8ce329e8c644a4251d04b30ba21d808a313f7ed258f0f361510b28f6164a2224"
+    ],
+    "independently_checked_original": "exec-000000000000003b",
+    "stopped_retained": true,
+    "pid": 0,
+    "exec_ids": null,
+    "oom": false,
+    "deleted": false,
+    "errors": []
+  },
+  "decision": "REPAIR",
+  "repair": "minimal new025 explicit source-qualified Torch wrapper and original Ascend owner chain; preserve outer inference_mode call; reject foreign/extra/broken wrappers; real same-image registration in N1 before weights",
+  "refutation": "exact unmodified decorated chain fails repaired guard, bad wrapper accepted, or registration still raises",
+  "thresholds_changed": false,
+  "unchanged_failure_retry": false,
+  "owner": "MAIN serial physical4-7; sparse preparer API-only025",
+  "queue": {
+    "current": "no live NPU job",
+    "next": "AdaKV025 adaptation source pending",
+    "backup": "SparQ009 peak diagnostic pending; KIVI actual writer source pending",
+    "final_inputs": "official-data input-v4 launch prepared; actual dataset still missing"
+  },
+  "deadlines": {
+    "first_repair": "2026-10-10T07:00:25Z",
+    "total": "2026-10-12T07:00:25Z",
+    "reset": false
+  },
+  "original_archives": [
+    {
+      "name": "ADAKV024_MODEL_0036_TERMINAL_ORIGINAL.json",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_MODEL_0036_TERMINAL_ORIGINAL.json",
+      "bytes": 11295,
+      "sha256": "d91dca991dfe3ba93682059f185f0d4ccc7a129b9e3c067a21c76f0d40e315e9"
+    },
+    {
+      "name": "ADAKV024_RELEASE_003B_ORIGINAL.json",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_RELEASE_003B_ORIGINAL.json",
+      "bytes": 21932,
+      "sha256": "665d86ae82f7124aaa01ed166d167616260b5434f0add2a190e7aab0b24c36d6"
+    },
+    {
+      "name": "ADAKV024_TORCH_CONTEXTLIB_003C_ORIGINAL.json",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_TORCH_CONTEXTLIB_003C_ORIGINAL.json",
+      "bytes": 18494,
+      "sha256": "da30dc68b4404a62f1be1411ccc02f402bff254d10e957cf8afaf00a547631f9"
+    },
+    {
+      "name": "ADAKV024_TORCH_GRAD_MODE_003E_ORIGINAL.json",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV024_TORCH_GRAD_MODE_003E_ORIGINAL.json",
+      "bytes": 34950,
+      "sha256": "7ad6708d6e43968250dfbceb2a7432bacf2498b9ed1a8c8e0b1d7ae8eebde2bf"
+    },
+    {
+      "name": "torch_contextlib_660.py",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_contextlib_660.py",
+      "bytes": 6402,
+      "sha256": "f22c21a037c4b26a431112138fa66a5108c5e9cfe4c9169e732c1d15ea7a8406"
+    },
+    {
+      "name": "torch_grad_mode_660.py",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_grad_mode_660.py",
+      "bytes": 14193,
+      "sha256": "ac56e9849d2e8b996e9e8fb923e28d35f564b44063eaa5e88c46d47555209804"
+    }
+  ],
+  "archive_readback_sha_verified": true,
+  "publication": "pending known HTTPS auth failure; no retry without changed evidence"
+}
