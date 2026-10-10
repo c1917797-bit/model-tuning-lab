@@ -40,10 +40,12 @@ Independently audit 127×3 hashed and rescored responses per arm,
 request-ID/boundary coverage, source/service identity, guard samples
 and exact release. Report all-request correct counts, paired flips,
 three-run variation, difficulty/length strata, finish reasons and
-HYPIC activation evidence separately. Use the **same frozen r16
-floor/category/length-limit gate** for the primary r17 current-skill
-decision, and also show the historical baseline-range comparison as
-a clearly labeled descriptive lens; do not alter either old verdict.
+HYPIC activation evidence separately. Calculate the **same r16
+floor/category/length-limit metrics** and historical baseline-range
+comparison as two clearly labeled descriptive lenses; do not alter
+either old verdict. r17 is a cap-sensitivity *diagnostic*, not an
+acceptance run for the current max-2048 Skill or the historical
+max-1024/c32 protocol.
 The original source lacks per-scored-request four-worker proof, so
 aggregate hot coverage and serialized sentinel must not be promoted
 to universal in-path evidence. Do not borrow r13 performance.
@@ -52,10 +54,14 @@ If r17 is better than r16, that is a cap-sensitivity signal, not a
 causal estimate across different service lifecycles. A further
 prospective cap crossover or direct numerical-path proof is needed
 before assigning cause; c8→c32 and cache residency are separate
-variables. GSM8K, deterministic canary and matched performance remain
-separate gates before full Skill/paper acceptance. A rejected quality
-gate blocks performance *adoption* claims but does not erase valid
-mechanistic diagnostics.
+variables. For a historical-reproduction claim, a separate exact-ruler
+max-1024/c32 LongBench-v2 **and** GSM8K pair with matched three-round
+performance is required. For the current max-2048 Skill, a fresh
+max-2048 full-pair acceptance after a justified repair or explicitly
+agreed acceptance rule is still required. Neither can be inferred
+from r17. Deterministic canary and mechanism evidence remain separate
+Skill gates. A rejected quality gate blocks performance *adoption*
+claims but does not erase valid mechanistic diagnostics.
 
 Admission status: **design only**. No r17 controller, root or NPU job
 exists by virtue of this note. The r16 full pair took roughly three
