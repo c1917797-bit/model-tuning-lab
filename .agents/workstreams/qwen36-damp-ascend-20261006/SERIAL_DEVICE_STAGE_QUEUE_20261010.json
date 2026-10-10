@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10 22:35:16 UTC",
+  "updated_at_utc": "2026-10-10T22:54:44Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -801,12 +801,34 @@
     "numerical_result": "PENDING",
     "model_ready": false
   },
-  "current_successor_rule": "Poll original0581; retain original terminal and exact CPU8 release. If full64 passes consume exact raw23/whole22 with actual original. Admit first qualified independent stage after fresh joint budget and own release without waiting for archival/push. If raw fails preserve first fault and repair off-device; SKVQ014 may take lane once CPU admission permits. No unchanged retry.",
+  "current_successor_rule": "On actual0581 terminal preserve original and independently prove exact own release; consume actual raw023 through whole022. If valid, prioritize same-image66 then source-gated B1 screen; if failed, repair off-device and admit reviewed SKVQ014 full entry after fresh resources. No repeated calibration/preflight that cannot resume.",
   "scheduling_audit": {
     "current_raw": "original0581 still running; Devices[]; do not duplicate or mutate frozen source",
     "live_peer_guard": "raw023 inventory_admit rejects new skvq-/kivi- owner not covered by this standalone plan; lowering only SKVQ CPU cannot authorize overlap",
     "SKVQ_cpu_phase": "actual cpu-inputs-only needs16.5GiB, not capture73GiB, but fixed CPU7 and no fullhost resume; running it separately would be repeated by FULL",
     "ENTRY_erratum": "SKVQ014 cpu_input_preparation argv contains old hash; actual full host argv correctly pins9c7b1118. Do not execute stale auxiliary argv.",
     "decision": "Retain raw0581. On its terminal, verify own release then admit reviewed full SKVQ014 if fresh resources pass. Prepare KIVI same-image66/actual raw consumption according to terminal. No new one-sided peer profile."
+  },
+  "current_preparation_checkpoint": {
+    "path": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ006_002_SOFTWARE_AND_TASK_SUCCESSOR_20261011.json",
+    "calibration006": {
+      "operation": "exec-000000000000058c",
+      "tests": 43,
+      "source_files": 161,
+      "exit": 0
+    },
+    "writer002": {
+      "operation": "exec-000000000000058e",
+      "tests": 33,
+      "source_files": 181,
+      "exit": 0,
+      "wall_seconds": 4.123
+    },
+    "task_inputs": {
+      "LongBench_v2": 503,
+      "GSM8K": 1319
+    },
+    "task_model_successor": "OFF_DEVICE_IMPLEMENTATION_PENDING",
+    "paired_e2e": "UNRUN"
   }
 }

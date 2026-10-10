@@ -1,3 +1,10 @@
+## 2026-10-10T22:54:44Z — SKVQ006/002 actual software closed; final-task seam being implemented
+
+- Read SKVQ006_002_SOFTWARE_AND_TASK_SUCCESSOR_20261011.json. Installed calibration006 actual43/source161 (058c) and writer002 actual33/source181 (058e) PASS. Neither has actual fitting/writer NPU authority: 014 capture ->006 calibration ->002 writer -> reader/model remain real dependencies.
+- Original KIVI0581 remains RUNNING; 058f observed CPU Python42016 at99.8%, elapsed31:02, Devices[]. No new full64 mathematical/E2E/task result. Keep frozen raw source; do not start unlisted peer containers or duplicate the operation. On actual terminal, exact own release and first qualified successor take priority over reports/Git.
+- Existing full503 LongBench-v2 +1319 GSM8K input authority was freshly located and read; no new download needed. It preserves named LB head-tail38912 (376 truncated) and Qwen zero-shot GSM adaptations. Final-task transport/owner is not yet wired: old v2/provider bindings, KIVI1024 cap and wrapper/source-check order require a new task-only successor. Separate preparer implements that without altering live/raw/paired007 code.
+- 35 calibration/writer archive files exactly match runtime source; 0592 verified all35 plus4 original envelopes and MST20. They are recoverable source archives, not relocated ready runtimes. Latest NPU snapshot4–7 idle; zero-idle is NOT achieved. Fixed cutoff1791788425, protected0–3 and SPENT32GiB unchanged. Existing Git authentication failure remains unresolved.
+
 ## 2026-10-10 22:35:16 UTC — KIVI independent full64 live; SKVQ014 preparatory gates passed
 
 - Original0581 is RUNNING (actual operation_get), Devices[] CPU-only numerical consumption of unchanged018 real TP4 capture. No mathematical64/E2E/task PASS yet; poll only0581. Exact output /cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v023-provenance-standalone-001. Exact own CID da8c661e640c271643175efb22a29082b0510691e80543dbe55c34d2144eda0f. Whole022/raw023 repair only wrong capture/provenance role; actual same-image192057e and producer-only0580 passed. Neither is numerical authority.

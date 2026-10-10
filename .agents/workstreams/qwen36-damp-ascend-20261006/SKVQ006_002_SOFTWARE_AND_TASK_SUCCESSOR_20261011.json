@@ -1,0 +1,148 @@
+{
+  "schema": "paper.actual-preparation-and-downstream-gap/v1",
+  "utc": "2026-10-10T22:54:44Z",
+  "goal": "ACTIVE_UNMET",
+  "portfolio_cutoff_epoch": 1791788425,
+  "previous_turn_classification": "verified wait: original0581 confirmed live; this turn advances installed writer/source/software and final-task implementation readiness",
+  "current": {
+    "paper": "KIVI",
+    "operation": "exec-0000000000000581",
+    "state": "RUNNING_LAST_VERIFIED",
+    "scope": "independent full64 consumption of actual018 NPU capture; CPU-only; no completed mathematical verdict",
+    "observed_progress": {
+      "operation": "exec-000000000000058f",
+      "utc": "2026-10-10T22:49:32Z",
+      "python_pid": 42016,
+      "cpu_percent": 99.8,
+      "elapsed": "31:02",
+      "rss_kib": 51492
+    },
+    "npu_device_stage": null
+  },
+  "skvq": {
+    "calibration006": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/SOURCE_MANIFEST.json",
+        "sha256": "07b526100b7184b4555138a7318c5f4a7c45ac451207ea96f656173cba1366c1",
+        "bytes": 52456
+      },
+      "software": {
+        "operation": "exec-000000000000058c",
+        "tests": 43,
+        "source_files": 161,
+        "exit": 0
+      },
+      "actual_fitting": "DATA_PENDING"
+    },
+    "writer002": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-002/SOURCE_MANIFEST.json",
+        "bytes": 51408,
+        "sha256": "445b3f25bac488f1053b57e24c82177b833440b013faf6402b3153e4be73f433"
+      },
+      "software": {
+        "operation": "exec-000000000000058e",
+        "tests": 33,
+        "source_files": 181,
+        "exit": 0,
+        "wall_seconds": 4.123
+      },
+      "NPU": "DATA_PENDING",
+      "scope": "actual full64 Q2/Q4 cache-writer validation entry only; not reader/attention/model, not full176 or E2E"
+    },
+    "next_dependency": "014 actual baseline capture whole ->006 actual128fits/64artifacts whole ->002 actual NPU writer whole -> new algorithm-specific reader/model gate"
+  },
+  "task_inputs": {
+    "actual_refs": [
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/MAIN_INPUT_ADJUDICATION_20261010.json",
+        "bytes": 2388,
+        "sha256": "49ebf5f98179078864ad648b626a8d24d14e33f1433786016ba34eb9088dc416"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/INPUT_AUTHORITY.json",
+        "bytes": 2593,
+        "sha256": "99cb786502a09ecab1061b555d7425b74f15bd93cc90696c5f4bc2db24cb8fbc"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/inputs/PREPARED.json",
+        "bytes": 3294,
+        "sha256": "e11e0c4f6fab6df4fab872a4f57d7accc19aca6eb52b63c8485d943153a7193f"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/inputs/TASK_INPUTS.json",
+        "bytes": 10756,
+        "sha256": "de417eb611f7254d73313110f4a04f6262ad29e6ed21cc74a1b362cb4c22f3ca"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/MAIN_ORIGINAL_00A7_20261010.json",
+        "bytes": 3138,
+        "sha256": "359b0daf2a9b0c1b42373c1ce30a8b763cda8133d0743147c26629e7c9b82c94"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/HOST_RESULT.json",
+        "bytes": 8200,
+        "sha256": "e309472a53771feb269f5a5db42bfd9700ff97381a6fef7f16286d257cbc10e1"
+      }
+    ],
+    "counts": {
+      "LongBench_v2": 503,
+      "GSM8K": 1319
+    },
+    "scope": "Existing independently consumed full task inputs, not scored. LB2 head-tail38912 truncates376/503; GSM named Qwen zero-shot format. Reuse unchanged source-bound data, not old127 subset.",
+    "new_gap": "Legacy transport pins oldv2 input and SparQ/AdaKV providers; KIVI existing installer caps1024 and rejects prior class-wrapped update_states. Source-qualified task2048/40960 successor is being implemented off-device; not ready or granted by paired007."
+  },
+  "archive": {
+    "files": 35,
+    "verified_operation": "exec-0000000000000592",
+    "exact_runtime_source_bytes": true,
+    "paths": [
+      "projects/qwen36-paper-portfolio/skvq/default_tp_local_calibration_v006",
+      "projects/qwen36-paper-portfolio/skvq/actual_writer_bridge_v002"
+    ],
+    "relocated_runtime_ready": false
+  },
+  "original_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_CAL006_SOFTWARE43_058C_ORIGINAL_20261011.json",
+      "sha256": "061eaa7617f3ccda6eb056b2c5f6668844e31096d1b2876d3efe8d88020853bb",
+      "bytes": 10539
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_WRITER002_SOFTWARE33_058E_ORIGINAL_20261011.json",
+      "sha256": "490ffced26dec22df2675c59bfd481ddd4bb6389fd9d266da9c1c46e33e4d750",
+      "bytes": 9520
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_ORIENTATION_058D_TRUNCATED_ORIGINAL_20261011.json",
+      "sha256": "849020e8fa94b5ff30edf0246899494f0922561955c390cee40d3346a7e35394",
+      "bytes": 33557
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW_PROGRESS_058F_ORIGINAL_20261011.json",
+      "sha256": "e79c50c6a9bc7900fa845b7bd0c3a69374b8e274d9c7a6075ab5c4a18edc83f1",
+      "bytes": 8942
+    }
+  ],
+  "validation": {
+    "mst20": true,
+    "source_software_only": true,
+    "mathematical_full64": false,
+    "paired_E2E": false,
+    "task_accuracy": false
+  },
+  "scheduling": {
+    "device_ready_count": 0,
+    "cause": "Live raw023 standalone peer policy disallows unlisted new skvq/kivi containers; do not alter frozen live code or invent external occupation.",
+    "next": "On actual0581 terminal preserve original and independently prove exact own release; consume actual raw023 through whole022. If valid, prioritize same-image66 then source-gated B1 screen; if failed, repair off-device and admit reviewed SKVQ014 full entry after fresh resources. No repeated calibration/preflight that cannot resume."
+  },
+  "safety": {
+    "NPU0_3": "UNTOUCHED",
+    "HugeTLB_32GiB": "SPENT",
+    "current_live_source_mutated": false
+  },
+  "git": {
+    "base": "e7a6ab7875dd336188d1cdf8137bd7b10c3c0513",
+    "push": "previous HTTPS authentication failure unresolved; no remote push claimed"
+  }
+}
