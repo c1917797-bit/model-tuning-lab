@@ -1038,5 +1038,13 @@
     "original_source_per_request_four_worker_proof": false,
     "same_source_performance_admitted_after_quality_failure": false
   },
-  "next_action": "Do not rerun completed HYPIC phases. r16 original-source full 127x3 max-2048/c8 pair is terminal and independently audited: 224/381 no-cache to 210/381 HYPIC, REJECT_OR_QUALIFY; aggregate hot 364/381 is separate activation failure. Preserve r13/r15/r16 immutable roots and historical 1024/c32 result; do not launch original-source adoption performance after this quality rejection or splice r13 speed onto r16. Run focused Skill cases and repository regressions, commit the negative case and handoff locally, then pursue only a new preregistered single-variable technical repair with same-identity control on actual-idle physical NPU0-3. No causal RoPE/GDN/cache root is yet proven. GitHub HTTPS credentials remain unavailable; do not claim remote/main sync or repeat identical failed push. Never use NPU4-7 or stop external work."
+  "r17_cap_isolation_design": {
+    "document": "HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md",
+    "state": "design-only-not-device-admitted",
+    "controller_started": false,
+    "scientific_scope": "diagnostic of 2048 versus 1024 output cap at fixed c8 and original source; not historical 1024/c32 reproduction or current 2048 Skill acceptance",
+    "new_roots_frozen": false,
+    "offline_controller_and_independent_auditor_validated": false
+  },
+  "next_action": "Do not rerun completed HYPIC phases, including r13-r16, or the isolated GDN probe. r16 full original-source quality is independently valid but REJECT_OR_QUALIFY under its frozen stricter gate; the 3.6745pp LongBench decline is descriptively within the 5.5118pp baseline repeat range used by the older success criterion, and GSM8K is absent. The r16 negative case, Skill cases, and 120-test regression have been locally committed; do not repeat them as new work. Prepare r17 from HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md: complete and offline-validate a new-root 1024/c8 same-source paired controller plus independent auditor before any actual-idle physical NPU0-3 run. r17 is diagnostic only, not current 2048 Skill or historical 1024/c32 acceptance. Preserve r13-r16 roots; do not splice r13 speed into r16 quality or assign RoPE/GDN/cache causality without direct evidence. Never use NPU4-7 or stop external work. GitHub HTTPS authentication remains unavailable; do not claim remote/main sync or repeat an unchanged failed push."
 }
