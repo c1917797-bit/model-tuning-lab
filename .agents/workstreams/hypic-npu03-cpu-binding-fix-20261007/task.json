@@ -227,7 +227,13 @@
     "resource_limit": "physical NPU0-3 and port 8223 only; never NPU4-7; do not stop or modify foreign work",
     "retry_budget": "one attempt; no retry6 without fresh explicit authorization"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "campaign": "cache10r17-cap1024",
+    "arm": "no-cache",
+    "controller_operation": "exec-000000000000012b",
+    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r17-cap1024-full-baseline",
+    "state": "running; first immutable progress marker service-starting at 2026-10-10T05:00:42Z"
+  },
   "goal_horizons": {
     "long_term": "Give all 29 exact-main Skills representative real-task acceptance, evidence provenance and replayable regressions; integrate reviewed results to main/remote when authorized.",
     "medium_term": "Close the HYPIC Skill-chain quality, performance and isolation evidence gaps without promoting branch-local or cold-request evidence to a paper-complete claim.",
@@ -1040,8 +1046,8 @@
   },
   "r17_cap_isolation_design": {
     "document": "HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md",
-    "state": "preregistered-and-offline-validated-awaiting-live-lane-admission",
-    "controller_started": false,
+    "state": "baseline-controller-running",
+    "controller_started": true,
     "scientific_scope": "diagnostic of 2048 versus 1024 output cap at fixed c8 and original source; not historical 1024/c32 reproduction or current 2048 Skill acceptance",
     "preregistration": "HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json",
     "new_roots_frozen": true,
@@ -1051,8 +1057,8 @@
     "independent_auditor": "audit_r17_cap1024_full.py",
     "independent_auditor_sha256": "ddfe6f152f305fba7a1aa0f2bf47905384b85ee13c17cfc3fc6db49e3eb4dd29",
     "offline_regression": "120 existing tests plus 4 r17-specific tests passed; r16 immutable replay passed",
-    "device_run_admitted": false,
+    "device_run_admitted": true,
     "offline_controller_and_independent_auditor_validated": true
   },
-  "next_action": "Do not rerun completed HYPIC phases, including r13-r16, or the isolated GDN probe. r16 full original-source quality is independently valid but REJECT_OR_QUALIFY under its frozen stricter gate; the 3.6745pp LongBench decline is descriptively within the 5.5118pp baseline repeat range used by the older success criterion, and GSM8K is absent. The r16 negative case, Skill cases, and 120-test regression have been locally committed; do not repeat them as new work. Prepare r17 from HYPIC_R17_CAP_ISOLATION_DESIGN_20261010.md: complete and offline-validate a new-root 1024/c8 same-source paired controller plus independent auditor before any actual-idle physical NPU0-3 run. r17 is diagnostic only, not current 2048 Skill or historical 1024/c32 acceptance. Preserve r13-r16 roots; do not splice r13 speed into r16 quality or assign RoPE/GDN/cache causality without direct evidence. Never use NPU4-7 or stop external work. GitHub HTTPS authentication remains unavailable; do not claim remote/main sync or repeat an unchanged failed push."
+  "next_action": "Poll only r17 no-cache controller exec-000000000000012b and its immutable baseline root while it is live; never restart on slow progress or a gateway observation timeout. At terminal state independently audit 127 samples/381 scored responses, source identity, continuous physical NPU0-3 isolation and exact owned release using audit_r17_cap1024_full.py --baseline-only. Only after a valid baseline and fresh actual NPU0-3 plus port 8223 idle proof launch the frozen hypic-only root; then run the paired independent audit. r17 1024/c8 is cap-sensitivity diagnostic only, not historical 1024/c32 or current 2048 Skill acceptance. Preserve r13-r16 roots and decisions, do not splice r13 speed into r16 quality, do not run isolated GDN, never use NPU4-7 or stop external work. GitHub HTTPS authentication is unavailable; do not claim remote/main sync or repeat unchanged failed push."
 }

@@ -2,7 +2,7 @@
 
 ## 0. Status
 
-- r17 cap-1024/c8 original-source diagnostic is preregistered in `HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json`; roots are absent, dual-arm and auditor offline checks passed, but no device controller has started. The prior 04:42:44Z target was missed. After committing and proving physical NPU0–3/8223 idle, run no-cache 127×3 and independent arm audit before HYPIC-only 127×3. r17 is neither historical 1024/c32 nor current 2048 Skill acceptance.
+- r17 cap-1024/c8 original-source diagnostic is preregistered in `HYPIC_R17_CAP1024_PREREGISTRATION_20261010.json`; both-arm/auditor offline checks and 124 tests passed. Baseline controller `exec-000000000000012b` is live on its new immutable root; poll this handle, never restart on slow progress. At terminal state independently audit 127×3 and exact release before considering HYPIC-only 127×3. r17 is neither historical 1024/c32 nor current 2048 Skill acceptance; the prior 04:42:44Z target was missed.
 - r16 original-source full 2048/c8 quality pair is terminal and
   independently audited on physical NPU0–3: 224/381 no-cache →
   210/381 HYPIC (−3.6745 pp), `REJECT_OR_QUALIFY`; aggregate hot
