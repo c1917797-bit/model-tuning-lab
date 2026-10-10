@@ -61,6 +61,19 @@ output-length and concurrent decode investigation but do **not** prove
 whether truncation causes the wrong answer, is a symptom of altered generation,
 or is linked to HYPIC materialization. No frozen decision was changed.
 
+A second supplementary, post-hoc event join used the documented API-to-internal
+request-ID prefix relation in `hotpath_quality_full.py`: each internal ID
+has exactly one scored API ID prefix followed by an eight-hex suffix.
+All 536 `worker_hot_request_verified` events uniquely join to 134 scored
+requests, with exactly the same four container worker PIDs (265–268) for each.
+The other 247 scored requests have no such event proof; call them **unproved**,
+not proven cold. In the 134 proved-hot rows, control/candidate correctness was
+83→79 (8 regressed, 4 improved). In the 247 unproved rows it was 144→140
+(15 regressed, 11 improved). These groups were selected by observed runtime
+activation and are not randomized. They show the eight-net-response loss is
+not confined to one observed stratum, but do not identify its technical cause
+or turn 134/381 into universal hot-path coverage.
+
 Allowed claim: this repaired-source max-2048/c32 LongBench all-request pair
 shows a quality regression under a clean, matched, one-switch experiment.
 Forbidden claims: HYPIC quality preservation, full adoption, per-request
