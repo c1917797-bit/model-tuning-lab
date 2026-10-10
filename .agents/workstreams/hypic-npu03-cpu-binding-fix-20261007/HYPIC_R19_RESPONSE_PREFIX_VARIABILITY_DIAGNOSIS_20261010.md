@@ -31,6 +31,16 @@ all stopped naturally with the correct answer D and whose three HYPIC runs
 all hit the 2048-token cap and were scored A, the matched cross-arm prefixes
 were 339, 3, and 401 characters, respectively.
 
+For a separate post-hoc stratum check, join each candidate scored API request
+ID to `worker_hot_request_verified` internal IDs by removing their eight-hex
+suffix and require four distinct worker PIDs. This reproduces 134/381
+proved-hot scored requests. Across each within-sample repetition pair, the
+control/HYPIC median shared prefixes were 697/203 characters when both
+candidate requests were proved hot (89 pairs), 679/205 when neither had a
+four-worker event (202 pairs), and 678/168 for mixed pairs (90). The
+"unproved" stratum is **not** a proven cold path. Earlier divergence is
+visible in all three observed strata; this is not a causal activation test.
+
 Interpretation is limited: under this workload, HYPIC repetitions diverged
 earlier in text than control repetitions, consistent with the separately
 observed answer variability and increased length-cap rate. A character
