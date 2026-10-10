@@ -1,0 +1,106 @@
+{
+  "schema": "kivi.independent-long-reference-checkpoint/v1",
+  "scope": "Independent long-context numerical reference preparation, not NPU/model/performance acceptance",
+  "source_manifest": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1/SOURCE_MANIFEST.json",
+    "bytes": 1925,
+    "sha256": "20ef6a3fca8eaf534bd59cb2edfe7ddd6074e889ff2f1fd8925d9c7c03721450"
+  },
+  "original_evidence": {
+    "ORIGINAL_CPU_020D.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-independent-long-reference-c142-20261010-001/ORIGINAL_CPU_020D.json",
+      "bytes": 8545,
+      "sha256": "b5e8c8df0f20559112c205eec0c4c11a35d8599e85a162254f409d10f2219983"
+    },
+    "ORIGINAL_POST_0211.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-independent-long-reference-c142-20261010-001/ORIGINAL_POST_0211.json",
+      "bytes": 15360,
+      "sha256": "c9ff3bd34ef03a328bb6cdd92005fbf33581adc254560d462c208f21fa401fb4"
+    },
+    "ORIGINAL_LOCAL_NINE_FAILURE.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-independent-long-reference-c142-20261010-001/ORIGINAL_LOCAL_NINE_FAILURE.json",
+      "bytes": 2755,
+      "sha256": "3bd42cde62348deb5dbc5b96d209e92b3414cef2e406b35e91e7b3176e8af0c8"
+    }
+  },
+  "actual_same_image": {
+    "operation": "exec-000000000000020d",
+    "exit_code": 0,
+    "duration_ms": 67408,
+    "tests_passed": 9,
+    "tests_seconds": 46.326,
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "python": "3.12.13",
+    "numpy": "1.26.4",
+    "devices": [],
+    "NPU_executed": false
+  },
+  "long_cost": {
+    "length": 32769,
+    "output_elements": 1536,
+    "seconds": 19.758324239985086,
+    "output_sha256": "67aa1236dbc3ecb1e3bdbf199b103db93fedf2fccc53b819586eeb5d4ff8918c",
+    "sampled_independent_decode_cells": 90,
+    "full_long_scalar_equivalence": false
+  },
+  "arithmetic": {
+    "unchanged": [
+      "scalar math.fsum reductions",
+      "math.exp softmax",
+      "A16 rounding boundaries",
+      ".005 relative RMS gate"
+    ],
+    "changed": "Independent NumPy unsigned decode and elementwise float64 products only; no candidate Torch/Triton, BLAS dot, or NumPy reduction",
+    "short_full_attention_bitwise_legacy_configurations": 12
+  },
+  "historical_failure": {
+    "environment": "Windows sandbox",
+    "failed_test": "actual consumer temporary Path.resolve",
+    "exception": "WinError 5 permission denied",
+    "math_tests_passed": 8,
+    "consumer_errors": 2,
+    "retained": true,
+    "not_an_algorithm_failure": true,
+    "repair": "Run original strict filesystem consumer in pinned same-image no-device Linux container; no mocked Path or relaxed gate"
+  },
+  "cleanup": {
+    "container": "7daea0b1ef462e002fe538a0c3284b124accfc291d5f8cd43307d345fbb5d2bc",
+    "post_operation": "exec-0000000000000211",
+    "status": "exited",
+    "pid": 0,
+    "exit_code": 0,
+    "oom_killed": false,
+    "retained": true
+  },
+  "next": {
+    "owner": "MAIN + sparse_attention_ready_queue",
+    "gate": "actual TP4 eager 32768-input/+2-token first decode then all4/FA64 independent raw consumption",
+    "pending": [
+      "frozen aggregate entry plus actual software/source-closure check",
+      "same-image no-device bootstrap import/parser check",
+      "fresh owned physical4-7 admission and N1",
+      "actual model first-decode capture and whole-output consume",
+      "mixed/lifecycle correctness",
+      "matched1024 E2E",
+      "final2048 tasks"
+    ]
+  },
+  "model_ready": false,
+  "performance_ready": false,
+  "task_accuracy_measured": false,
+  "new_accepted_technique": false,
+  "portfolio_cutoff": "2026-10-12T07:00:25Z",
+  "physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "hugetlb_32gib_permission": "SPENT"
+}

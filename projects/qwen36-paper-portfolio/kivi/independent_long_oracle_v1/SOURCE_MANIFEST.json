@@ -1,0 +1,39 @@
+{
+  "schema": "kivi.independent-long-oracle-source/v1",
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1",
+  "files": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1/fast_oracle.py",
+      "bytes": 7717,
+      "sha256": "f57c2703e19b59c3cd6c6b0df52a21fdfc1c0a43ab6fe86d236b6e750e24d39c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1/fast_consume.py",
+      "bytes": 5593,
+      "sha256": "4dda2abbabc3a474d4ee09f462bb1ea9acbd4847cd3c49fe4f360efe4eef3bfa"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1/legacy_scalar_oracle.py",
+      "bytes": 5171,
+      "sha256": "ab03630d988a2f1fbda7f5f0d880d8eb09afd8451f986d5c3875d8f8422b2782"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1/test_fast_oracle.py",
+      "bytes": 7518,
+      "sha256": "5889f3364c0c1ed106872596f072bf6096ca2878a1b71d700b8ae57c1321d35b"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/independent_long_oracle_v1/test_fast_consume.py",
+      "bytes": 2777,
+      "sha256": "a122ab747d09ef807bde38bfa55a6cda9ea751dd060df2e05fdc170539d7666d"
+    }
+  ],
+  "legacy_scalar_sha256": "ab03630d988a2f1fbda7f5f0d880d8eb09afd8451f986d5c3875d8f8422b2782",
+  "independent_of_candidate": true,
+  "arithmetic": "NumPy unsigned unpack and elementwise float64 products; unchanged math.fsum, math.exp, A16 casts and .005 RMS; no BLAS reduction",
+  "scope": "reference acceleration, not model/NPU permission",
+  "default_enabled": false,
+  "NPU_executed": false,
+  "model_ready": false,
+  "performance_ready": false
+}

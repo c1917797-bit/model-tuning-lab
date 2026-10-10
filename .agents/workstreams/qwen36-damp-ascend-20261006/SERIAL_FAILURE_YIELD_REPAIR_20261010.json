@@ -1,0 +1,763 @@
+{
+  "schema": "paper-portfolio.failure-yield-repair/v1",
+  "as_of": "2026-10-10T10:10:53Z",
+  "scope": "Scheduling and implementation repair, not new paper performance",
+  "v004_result": {
+    "actual_host_argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/host_run.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "88a4067453589b8c0414363d3ecef465839cd54aeecfdb30909d713cd558de5e",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "--component-sha256",
+      "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_004.json",
+      "--software-sha256",
+      "834c0834cf1c67d6ef659c9f78fc4bec0073baca8bd4bf7c739026e78203cde5",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004",
+      "--port",
+      "8250"
+    ],
+    "actual_host_process": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/host_run.py",
+        "--execute",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "88a4067453589b8c0414363d3ecef465839cd54aeecfdb30909d713cd558de5e",
+        "--component",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+        "--component-sha256",
+        "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+        "--software",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_004.json",
+        "--software-sha256",
+        "834c0834cf1c67d6ef659c9f78fc4bec0073baca8bd4bf7c739026e78203cde5",
+        "--model-manifest",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "--model-manifest-sha256",
+        "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004",
+        "--port",
+        "8250"
+      ],
+      "cgroup": "13:pids:/system.slice/agentweb-chicaihong01-ma.service\n12:cpu,cpuacct:/system.slice/agentweb-chicaihong01-ma.service\n11:devices:/system.slice/agentweb-chicaihong01-ma.service\n10:perf_event:/\n9:rdma:/\n8:hugetlb:/\n7:memory:/system.slice/agentweb-chicaihong01-ma.service\n6:cpuset:/system.slice/agentweb-chicaihong01-ma.service\n5:net_cls,net_prio:/\n4:blkio:/system.slice/agentweb-chicaihong01-ma.service\n3:freezer:/system.slice/agentweb-chicaihong01-ma.service\n2:files:/\n1:name=systemd:/system.slice/agentweb-chicaihong01-ma.service\n",
+      "cmdline_sha256": "b4ca7bc37a768752108ea921210bab17c11954ddfcedd7726c0787dc91a88b9f",
+      "namespace_pids": [
+        1055047
+      ],
+      "pid": 1055047,
+      "start_ticks": 55106088
+    },
+    "cleanup_seconds": 90,
+    "component": {
+      "bytes": 2195,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+      "sha256": "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d"
+    },
+    "cpu": {
+      "child": {
+        "bytes": 2013,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004/cpu-preflight/cpu-import-parser-CHILD.json",
+        "sha256": "93d0262e8f1e3e0c9c7deb5dbbeeb80b81ede5841a872875c6a5092ecdcd6462"
+      },
+      "cleanup": {
+        "bytes": 10938,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004/cpu-preflight/cleanup.json",
+        "sha256": "617d5b61972f823e393c19635292e19b7d359bbe3cf2d40fbf6c5f790c347673"
+      },
+      "owned": {
+        "bytes": 41551,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004/cpu-preflight/OWNED.json",
+        "sha256": "700c70e13e248d7ff40eba2166e928cde08bf914212f51991d0ba859839f982b"
+      },
+      "report": {
+        "bytes": 111857,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004/cpu-preflight/REPORT.json",
+        "sha256": "635f10c302762ebd8e67d7c11b9439a16b8d906e3abfe16e29862c32afbc05f4"
+      }
+    },
+    "cumulative_cleanup_seconds": 32.82534516998567,
+    "elapsed_seconds": 191.69834811007604,
+    "full_model_correctness_verified": false,
+    "independent_raw_consumer_required": true,
+    "model_manifest": {
+      "bytes": 5813,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "sha256": "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c"
+    },
+    "model_ready": false,
+    "npu": null,
+    "performance_ready": false,
+    "phase_seconds": 5400,
+    "primary": "KeyError('vocab_size')",
+    "run_authority": false,
+    "schema": "kivi.actual-firstdecode-owned-host/v1",
+    "secondary": [],
+    "software": {
+      "bytes": 528,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_004.json",
+      "sha256": "834c0834cf1c67d6ef659c9f78fc4bec0073baca8bd4bf7c739026e78203cde5"
+    },
+    "source": {
+      "bytes": 61597,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/SOURCE_MANIFEST.json",
+      "sha256": "88a4067453589b8c0414363d3ecef465839cd54aeecfdb30909d713cd558de5e"
+    },
+    "status": "failed",
+    "unchanged_source_after": {
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/cann_python.py": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/client.py": "c0c89428c7a3b81077ef272d5f4085d9c82461f1a17628a5f06ee73fbb69d603",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/consume_first_decode.py": "b8a9efc954bb1008e867608925e21cfcb95bd8262ce98be3d947c54b9830bae7",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/consume_prefill.py": "a26d2747f0cdbf7754ecc74ee09968a58c124423ba9f33d9e83b6772c8a50413",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/consume_raw.py": "8af2d5d0365c466576d320636a38d6268f1631ccfe5dbb8e3099283186d846cf",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/finish_after_native.py": "5e01da5dd8947a1cb787d7d2c94f6f7949d9c7d54144ba84b3444712c5f38eb1",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/guest_probe.py": "5992741a9363def3dca2347c050db73bb1fc221ee23d6ab061e1aa7734cd7ad9",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/host_run.py": "66de2120a0c1dcf0bc49b3cb8cd700f3cf34bae8a4ac771e9f8a48005d6b38ac",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/input_recipe.py": "1b83c60d1852e2feb4687ab5356bbe1ea19093b218614b9e9442d83414927c88",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/installer.py": "9e41be3e47291ed6552b338934f6b6d804760949d84d8f9751ddde6290a3dc98",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/kivi_firstdecode_bootstrap.py": "49157bc6ea60d2023cba0ae671f82be6b9f633ed512aa2237610dca40d745c8a",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/loader.py": "bbda54aa5da1a95a529753a435961e241b34da23166a61cb5d773e0aa32f0dd0",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/model_contract.py": "d6bb6eebe0490187ddc63ea1a9ef246e82f140bd4cb59e54ce22eba7aba030b9",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/ownership.py": "5b5c8d35adfb5b1c087ef9f521d779a72141abf5142889a7839eef10dbc34112",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/prebind.py": "59040b315491b7a784ab9059deffb3c2a0937d11fdc7500e0f3dc756db21b60b",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/prefill_provenance.py": "a93894bbbd0d73b72c9bc43664a121106525fa5a27bca0d361aff9a2ba00def7",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/prerequisite.py": "4d896aa62ec49a316ee2a93e458c24ff5604a9d0c39c9bc0aeca94f78306c7d6",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/producer.py": "f7e392325cf3f83cd45d12c9269b6b4fa65914ff139b9f4cd60a68c4cef4aac5",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/raw_journal.py": "1140b946aee7b498b029b91aa3baf7d3293611cff811186e103925e14897ca79",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/runtime_owner.py": "0f6bb4c5bb6fc8981867762f7c88a9ffd43a1ffda8cf0a34599eb1fa14516cd1",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/safety_host.py": "0c35d88c4ebe3bf98fde9c3f7f95d8658a7f4c1e577688afa7b0127974426a16",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/server_entry.py": "4fa380be5a874e5a90aeef66855db74df4471f4353fe9a6e147a134e1cab1447",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/software_check.py": "9637ae475ffa27aa6dd720277240906cafad610efd63e829fbc3e3f3b472a488",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/test_firstdecode.py": "8b8e813d674e2aeed6a2a6a290f8fe189bad0feccd62a00888bb6798dc1f644c",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/worker.py": "07cc519db266aa9366e02549894eda36d707876e6defb3f67463ed345f2265d7"
+    },
+    "whole176": false
+  },
+  "v004_actual_canary": [
+    {
+      "format": {
+        "actual_type": "torch_npu.npu._format.Format",
+        "enum_member": "ND",
+        "native_value": 2,
+        "normalized_nd": 2,
+        "repr": "<Format.ND: 2>"
+      },
+      "logical": 0,
+      "output": [
+        4,
+        5
+      ],
+      "physical": 4
+    },
+    {
+      "format": {
+        "actual_type": "torch_npu.npu._format.Format",
+        "enum_member": "ND",
+        "native_value": 2,
+        "normalized_nd": 2,
+        "repr": "<Format.ND: 2>"
+      },
+      "logical": 1,
+      "output": [
+        4,
+        5
+      ],
+      "physical": 5
+    },
+    {
+      "format": {
+        "actual_type": "torch_npu.npu._format.Format",
+        "enum_member": "ND",
+        "native_value": 2,
+        "normalized_nd": 2,
+        "repr": "<Format.ND: 2>"
+      },
+      "logical": 2,
+      "output": [
+        4,
+        5
+      ],
+      "physical": 6
+    },
+    {
+      "format": {
+        "actual_type": "torch_npu.npu._format.Format",
+        "enum_member": "ND",
+        "native_value": 2,
+        "normalized_nd": 2,
+        "repr": "<Format.ND: 2>"
+      },
+      "logical": 3,
+      "output": [
+        4,
+        5
+      ],
+      "physical": 7
+    }
+  ],
+  "v004_release": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "inspect",
+            "--format",
+            "{{json .Id}} {{json .State}} {{json .ExecIDs}} {{json .HostConfig.Devices}}",
+            "4280d3a3338f378502088a7bd3b47efa8e0c2346f6c976131272df83d810e6e9",
+            "382965fb3ef9979a05f20be33af8847a5514e6e9c7ebc9e9de008e0deb67df02"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/docker",
+          "cwd": null,
+          "durationMs": 34,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000261",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "\"4280d3a3338f378502088a7bd3b47efa8e0c2346f6c976131272df83d810e6e9\" {\"Dead\":false,\"Error\":\"\",\"ExitCode\":137,\"FinishedAt\":\"2026-10-10T09:50:01.19186881Z\",\"OOMKilled\":false,\"Paused\":false,\"Pid\":0,\"Restarting\":false,\"Running\":false,\"StartedAt\":\"2026-10-10T09:48:54.45849933Z\",\"Status\":\"exited\"} null [{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci0\",\"PathOnHost\":\"/dev/davinci4\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci1\",\"PathOnHost\":\"/dev/davinci5\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci2\",\"PathOnHost\":\"/dev/davinci6\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci3\",\"PathOnHost\":\"/dev/davinci7\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci_manager\",\"PathOnHost\":\"/dev/davinci_manager\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/devmm_svm\",\"PathOnHost\":\"/dev/devmm_svm\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/hisi_hdc\",\"PathOnHost\":\"/dev/hisi_hdc\"}]\n\"382965fb3ef9979a05f20be33af8847a5514e6e9c7ebc9e9de008e0deb67df02\" {\"Dead\":false,\"Error\":\"\",\"ExitCode\":137,\"FinishedAt\":\"2026-10-10T09:48:49.06324818Z\",\"OOMKilled\":false,\"Paused\":false,\"Pid\":0,\"Restarting\":false,\"Running\":false,\"StartedAt\":\"2026-10-10T09:47:45.81750227Z\",\"Status\":\"exited\"} null []\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 366,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 366,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 366
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 365,
+          "routeLookupMs": 0,
+          "totalMs": 365
+        }
+      },
+      "traceId": "fdfcbb31-8514-4e9f-955c-680d68119614"
+    },
+    "operationId": "exec-0000000000000261",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "v005_failed_software": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-I",
+            "-B",
+            "-c",
+            "import hashlib,json,subprocess,resource,os\nfrom pathlib import Path\nroot=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-005\");p=root/\"SOURCE_MANIFEST.json\"\nb=p.read_bytes();assert hashlib.sha256(b).hexdigest()==\"f5709234b3b92f475500b511903985807c347e23d6c687f57bff83ca0e680df2\"\nm=json.loads(b)\nfor r in m[\"files\"]+m[\"dependencies\"]:\n q=Path(r[\"path\"]);wire=q.read_bytes();assert len(wire)==r[\"bytes\"]and hashlib.sha256(wire).hexdigest()==r[\"sha256\"],str(q)\n if q.suffix==\".py\":compile(wire,str(q),\"exec\")\nprint(json.dumps({\"closure\":len(m[\"files\"])+len(m[\"dependencies\"]),\"manifest_sha\":hashlib.sha256(b).hexdigest()}),flush=True)\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nresource.setrlimit(resource.RLIMIT_AS,(512*1024**2,resource.RLIM_INFINITY))\ncommands=[[\"/usr/bin/python3\",\"-I\",\"-B\",str(root/\"software_check.py\"),\"--execute\",\"--source-manifest-sha256\",\"f5709234b3b92f475500b511903985807c347e23d6c687f57bff83ca0e680df2\",\"--output\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_005.json\"]]\ncommands += [[\"/usr/bin/python3\",\"-I\",\"-B\",str(root/n)]for n in(\"host_run.py\",\"server_entry.py\",\"guest_probe.py\",\"software_check.py\")]\nfor argv in commands:\n r=subprocess.run(argv,capture_output=True,text=True,timeout=60);print(json.dumps({\"argv\":argv,\"exit\":r.returncode,\"stdout\":r.stdout,\"stderr\":r.stderr}),flush=True);assert r.returncode==0\np=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_005.json\");wire=p.read_bytes();print(json.dumps({\"report\":{\"path\":str(p),\"bytes\":len(wire),\"sha256\":hashlib.sha256(wire).hexdigest()},\"actual\":json.loads(wire)}),flush=True)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 640,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000263",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 15, in <module>\nAssertionError\n",
+          "stdout": "{\"closure\": 180, \"manifest_sha\": \"f5709234b3b92f475500b511903985807c347e23d6c687f57bff83ca0e680df2\"}\n{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-005/software_check.py\", \"--execute\", \"--source-manifest-sha256\", \"f5709234b3b92f475500b511903985807c347e23d6c687f57bff83ca0e680df2\", \"--output\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_005.json\"], \"exit\": 2, \"stdout\": \"\", \"stderr\": \"usage: software_check.py [-h] [--execute]\\n                         [--source-manifest-sha326 SOURCE_MANIFEST_SHA326]\\n                         [--output OUTPUT]\\nsoftware_check.py: error: unrecognized arguments: --source-manifest-sha256 f5709234b3b92f475500b511903985807c347e23d6c687f57bff83ca0e680df2\\n\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 709,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 709,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 709
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 708,
+          "routeLookupMs": 0,
+          "totalMs": 708
+        }
+      },
+      "traceId": "1dfbe6e4-ae70-461e-8f6e-a8a98f4fc9a2"
+    },
+    "operationId": "exec-0000000000000263",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "v006_failed_model": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-I",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/host_run.py",
+            "--execute",
+            "--source",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/SOURCE_MANIFEST.json",
+            "--source-sha256",
+            "7d25cbd11116f33f60b05a65669799a31bbd1a54b78a0289d3d961c8902728ad",
+            "--component",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+            "--component-sha256",
+            "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+            "--software",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_006.json",
+            "--software-sha256",
+            "b16de323045da63df67ae5eb3642fc424cde7ecb06d1d617d777bf696afbdc59",
+            "--model-manifest",
+            "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+            "--model-manifest-sha256",
+            "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+            "--output",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-006",
+            "--port",
+            "8250"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 73029,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000268",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/host_run.py\", line 224, in <module>\n    if __name__==\"__main__\":main()\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/host_run.py\", line 223, in main\n    a.output=fresh_leaf(a.output);run(a,refs,m,model,start)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/host_run.py\", line 201, in run\n    if primary:raise primary\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/host_run.py\", line 119, in run\n    ch=child(ctl,\"cpu-import-parser\",args,180,observe=False)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/host_run.py\", line 29, in child\n    c.require(p.returncode==0,\"actual original child failed \"+str(r));return r\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/model_contract.py\", line 20, in require\n    if not v:raise ValueError(why)\nValueError: actual original child failed {'path': '/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-006/cpu-preflight/cpu-import-parser-CHILD.json', 'bytes': 2012, 'sha256': '25a312b9d33e982c0c123e2c6221e65faac67806854547ebd31568067f7f10cd'}\n",
+          "stdout": "{\"result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-006/RESULT.json\", \"bytes\": 9205, \"sha256\": \"aa5fff161c7f688bd0a2b9e1307f0617a350763dafe3147ff3a456240270364f\"}, \"status\": \"failed\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 415,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 415,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 415
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 414,
+          "routeLookupMs": 0,
+          "totalMs": 414
+        }
+      },
+      "traceId": "608fac63-11a1-4b77-b10e-6d923829a799"
+    },
+    "operationId": "exec-0000000000000268",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "v006_original_stderr": {
+    "channel": "file",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "content": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/guest_probe.py\", line 59, in <module>\n    if __name__==\"__main__\":raise SystemExit(main())\n                                             ^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/guest_probe.py\", line 58, in main\n    run(a.mode,a.source_manifest_sha256,a.output,a.port,a.cache_bytes);return 0\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/guest_probe.py\", line 11, in run\n    m,source,mods,adapter,new,own=l.load(sha,memory_limit=limit)\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/loader.py\", line 77, in load\n    new={name:module(\"_kivi_firstdecode_runtime_\"+name,roles[name])\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/loader.py\", line 34, in module\n    wire=checked(r)\n         ^^^^^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/loader.py\", line 21, in checked\n    p=Path(r[\"path\"]);need(p.is_absolute() and p.resolve()==p and not p.is_symlink() and p.is_file(),\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-006/loader.py\", line 17, in need\n    if not v:raise ValueError(m)\n             ^^^^^^^^^^^^^^^^^^^\nValueError: actual ordinary source/input\n",
+      "ok": true,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-006/cpu-preflight/cpu-import-parser.stderr",
+      "size": 1834
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 363,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 363,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1472,
+        "totalMs": 1836
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 363,
+        "routeLookupMs": 0,
+        "totalMs": 363
+      }
+    },
+    "traceId": "608350ac-fdf4-43be-9b35-4c2f2f5a707c"
+  },
+  "v006_release": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "inspect",
+            "--format",
+            "{{json .Id}} {{json .State}} {{json .ExecIDs}} {{json .HostConfig.Devices}}",
+            "7b9dfe6a2cae1ff78cb8691a6220235312bf9352055c325f5d039c81d6027ded"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/docker",
+          "cwd": null,
+          "durationMs": 28,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-000000000000026f",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "\"7b9dfe6a2cae1ff78cb8691a6220235312bf9352055c325f5d039c81d6027ded\" {\"Dead\":false,\"Error\":\"\",\"ExitCode\":137,\"FinishedAt\":\"2026-10-10T10:04:44.32487002Z\",\"OOMKilled\":false,\"Paused\":false,\"Pid\":0,\"Restarting\":false,\"Running\":false,\"StartedAt\":\"2026-10-10T10:04:27.1499836Z\",\"Status\":\"exited\"} null []\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 366,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 366,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 366
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 365,
+          "routeLookupMs": 0,
+          "totalMs": 365
+        }
+      },
+      "traceId": "a13cff12-4eba-4256-991b-d182d13f6c88"
+    },
+    "operationId": "exec-000000000000026f",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "v007_software": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-I",
+            "-B",
+            "-c",
+            "import hashlib,json,subprocess,resource,os\nfrom pathlib import Path\nroot=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007\");p=root/\"SOURCE_MANIFEST.json\"\nb=p.read_bytes();assert hashlib.sha256(b).hexdigest()==\"e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581\"\nm=json.loads(b)\nfor r in m[\"files\"]+m[\"dependencies\"]:\n q=Path(r[\"path\"]);wire=q.read_bytes();assert len(wire)==r[\"bytes\"]and hashlib.sha256(wire).hexdigest()==r[\"sha256\"],str(q)\n if q.suffix==\".py\":compile(wire,str(q),\"exec\")\nprint(json.dumps({\"closure\":len(m[\"files\"])+len(m[\"dependencies\"]),\"manifest_sha\":hashlib.sha256(b).hexdigest()}),flush=True)\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nresource.setrlimit(resource.RLIMIT_AS,(512*1024**2,resource.RLIM_INFINITY))\ncommands=[[\"/usr/bin/python3\",\"-I\",\"-B\",str(root/\"software_check.py\"),\"--execute\",\"--source-manifest-sha256\",\"e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581\",\"--output\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json\"]]\ncommands += [[\"/usr/bin/python3\",\"-I\",\"-B\",str(root/n)]for n in(\"host_run.py\",\"server_entry.py\",\"guest_probe.py\",\"software_check.py\")]\nfor argv in commands:\n r=subprocess.run(argv,capture_output=True,text=True,timeout=60);print(json.dumps({\"argv\":argv,\"exit\":r.returncode,\"stdout\":r.stdout,\"stderr\":r.stderr}),flush=True);assert r.returncode==0\np=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json\");wire=p.read_bytes();print(json.dumps({\"report\":{\"path\":str(p),\"bytes\":len(wire),\"sha256\":hashlib.sha256(wire).hexdigest()},\"actual\":json.loads(wire)}),flush=True)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 2580,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-000000000000026d",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"closure\": 180, \"manifest_sha\": \"e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581\"}\n{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/software_check.py\", \"--execute\", \"--source-manifest-sha256\", \"e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581\", \"--output\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json\"], \"exit\": 0, \"stdout\": \"\", \"stderr\": \"test_actual_guest_binding_and_original_consumer_all_six_refs (_kivi_firstdecode_focused_tests.ActualFormatChain) ... ok\\ntest_binding_propagates_cpu_recipe_and_actual_worker_collector (_kivi_firstdecode_focused_tests.ActualFormatChain) ... ok\\ntest_closed_six_key_contract_rejects_missing_and_unknown (_kivi_firstdecode_focused_tests.ActualFormatChain) ... ok\\ntest_correct_labels_do_not_bypass_wrong_source_pin (_kivi_firstdecode_focused_tests.ActualFormatChain) ... ok\\ntest_original_consumer_verifies_actual_ref_size_not_only_labels (_kivi_firstdecode_focused_tests.ActualFormatChain) ... ok\\ntest_original_v002_key_failure_reproduced_before_any_byte_read (_kivi_firstdecode_focused_tests.ActualFormatChain) ... ok\\ntest_actual_checkpoint_nested_vocab_and_original_failure (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_actual_full_input_producer_and_refs_before_device (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_conflicting_vocab_and_token_domain_rejected (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_missing_nested_config_cannot_fall_back_to_root_vocab (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_noninteger_or_missing_vocab_rejected (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_real_host_input_producer_precedes_every_container_create (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_unknown_model_or_text_type_fails_closed (_kivi_firstdecode_focused_tests.ActualInputPreflight) ... ok\\ntest_actual_sameimage_resolution_ref_pinned_without_acl_import (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_actual_three_entries_share_binding_before_native_import (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_cann_config_unknown_root_or_bool_size_cannot_supply_namespace (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_explicit_path_install_metadata_only_and_failure_restores_namespace (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_foreign_cached_acl_not_deleted_or_replaced (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_missing_acl_cache_cannot_claim_native_import_or_memcpy (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_source_or_python_stub_loader_rejected_before_binary_read (_kivi_firstdecode_focused_tests.CannPythonBinding) ... ok\\ntest_actual_finish_zero_tick_preserves_original_deferred_and_restore (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_actual_finished_but_native_not_drained_rejected (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_actual_native_cli_boolean_actions_not_false_string (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_actual_packed3_whole_ref_is_not_model_permission (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_cli_bounds_remain_hard (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_complete_own_source_compiles_no_token_concatenation (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_cpu_native_worker_import_is_only_in_real_n1_branch (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_default_off_export_does_not_import_torch (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_foreign_finished_rejected_before_original_call (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_no_http_done_or_empty_schedule_can_make_final (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_prior_packed3_result_wrong_sha_rejected_without_read (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_wrong_original_source_guard_is_not_bypassed (_kivi_firstdecode_focused_tests.FirstDecode) ... ok\\ntest_actual_runtime_roles_in_mounted_file_closure (_kivi_firstdecode_focused_tests.RuntimeClosure) ... ok\\ntest_original_v006_stale_role_rejected_before_runtime_import (_kivi_firstdecode_focused_tests.RuntimeClosure) ... ok\\n\\n----------------------------------------------------------------------\\nRan 34 tests in 1.052s\\n\\nOK\\n\"}\n{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/host_run.py\"], \"exit\": 0, \"stdout\": \"{\\\"enabled\\\": false, \\\"model_ready\\\": false}\\n\", \"stderr\": \"\"}\n{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/server_entry.py\"], \"exit\": 0, \"stdout\": \"{\\\"default_enabled\\\": false, \\\"model_ready\\\": false, \\\"performance_ready\\\": false}\\n\", \"stderr\": \"\"}\n{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/guest_probe.py\"], \"exit\": 0, \"stdout\": \"{\\\"enabled\\\": false, \\\"model_ready\\\": false}\\n\", \"stderr\": \"\"}\n{\"argv\": [\"/usr/bin/python3\", \"-I\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/software_check.py\"], \"exit\": 0, \"stdout\": \"{\\\"enabled\\\": false, \\\"NPU\\\": false, \\\"model_ready\\\": false}\\n\", \"stderr\": \"\"}\n{\"report\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json\", \"bytes\": 528, \"sha256\": \"d94444c84f42d7cf71dc02f55c9bb7fd50e5583a71ce858fa58279864005f9fe\"}, \"actual\": {\"NPU\": false, \"elapsed_seconds\": 1.0719564399914816, \"model_ready\": false, \"no_framework_import\": true, \"performance_ready\": false, \"schema\": \"kivi.actual-firstdecode-software/v1\", \"scope\": \"source closure/compile + actual own finish-wrapper/CLI/source negatives; not initialized model\", \"source\": {\"bytes\": 63991, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/SOURCE_MANIFEST.json\", \"sha256\": \"e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581\"}, \"successful\": true, \"tests\": 34}}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 394,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 394,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 394
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 393,
+          "routeLookupMs": 0,
+          "totalMs": 393
+        }
+      },
+      "traceId": "5b7175fd-0e01-4cf9-b738-fe02a1cfffd9"
+    },
+    "operationId": "exec-000000000000026d",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "v007_launch": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "c151-v007-owned-tp4-firstdecode-once",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000270",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 5000,
+    "result": {
+      "execId": "exec-0000000000000270",
+      "lane": "job",
+      "ok": true,
+      "pollAfterMs": 250,
+      "running": true,
+      "state": "running"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 401,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 401,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1457,
+        "totalMs": 1858
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 400,
+        "routeLookupMs": 0,
+        "totalMs": 400
+      }
+    },
+    "traceId": "c7095ea9-cbbd-4158-89b1-7b4608200801"
+  },
+  "ready_independent_device_stages": 0,
+  "zero_gap_claim": false,
+  "new_E2E_or_task_PASS": false
+}

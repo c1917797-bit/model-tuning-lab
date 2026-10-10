@@ -1,5 +1,97 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 10:10 UTC
+
+MAIN0270 v007 is RUNNING; poll that exact operation, never duplicate.
+Actual026d passed source180,34 regressions and four default-OFF CLIs.
+Complete real input creation precedes container creation; actual composite
+text_config.vocab_size is validated. All runtime role Refs must belong to
+the mounted source closure. Kernel, thresholds, workload and cutoff unchanged.
+Native/model result remains pending; no new E2E or task PASS.
+
+025a v004 passed CPU8/all4 tiny canaries and native ACL import, then failed
+before model at top-level vocab_size.0263 v005 failed a MAIN test-count CLI edit.
+0268 v006 failed in Devices[] CPU because four roles pointed at unmountedv004.
+These are implementation/preparation defects, not paper no-go.0261/026f
+independently confirm exact own CIDs stopped-retained/Pid0/noExec/noOOM.
+Original sources/results remain immutable; no protected0-3 task was stopped.
+
+Failure-yield rule: remove pending repair from the device lane; paper owner
+continues preparation while MAIN admits another genuinely ready paper.
+Three independent preparation assignments continue: SKVQ preprojection capture,
+KIVI raw64/whole adjudication, mixed002 collect-release-off-device-oracle split.
+Ready independent NPU successor count remains0, not gap-free utilization.
+See SERIAL_DEVICE_STAGE_QUEUE_20261010.json and
+SERIAL_FAILURE_YIELD_REPAIR_20261010.json. PortfolioOct12 07:00:25Z,
+physical4-7 only and32GiB HugeTLB SPENT unchanged.
+
+## Current execution — 2026-10-10 09:35 UTC
+
+Actual023b is TERMINAL FAILED exit1/168.570s. v003 same-image CPU import/parser
+really passed; original manifest-key defect is resolved. N1 stopped at native
+worker import: camem.py imports acl.rt.memcpy, but isolated Python omitted CANN
+PYTHONPATH. No four-card tensor/model computation occurred. Exact own candidate
+a07687 is stopped-retained/Pid0/noExec/noOOM;0240 independently proves it.
+See KIVI_FIRSTDECODE_ACL_IMPORT_FAILURE_20261010.json and original envelopes.
+
+0242 Devices[] three-arm resolution diagnostic passed: -I finds no acl;
+normal and -I plus the one actual CANN root resolve the same original acl.so.
+This is module resolution only.0241 actual CPU import timed out at20s and remains
+failed/unknown, not proof of hardware dependence. Both diagnostic containers
+are stopped-retained. Preserve all original sources/results; do not rerun v003.
+CURRENT no live owned NPU job. NEXT sparse owner closes common-loader v004
+minimal path binding; MAIN validates real software/image and all4 N1 before
+TP4 EAGER32768+2. Independent raw/whole consumer and mixed1024 successor continue.
+No new NPU model, paired throughput, TTFT/TPOT or task-accuracy PASS.
+Physical0-3 protected;32GiB HugeTLB SPENT; portfolioOct12 07:00:25Z unchanged.
+Earlier snapshots below are history, not live-process/readiness authority.
+
+## Current execution — 2026-10-10 09:18 UTC
+
+Read KIVI_FIRSTDECODE_FORMAT_CHAIN_FAILURE_20261010.json first. Actual0226
+is terminal FAILED exit1/102.813s, not a running model. Same-image Devices[]
+CPU preflight rejected two manifest labels (manager/npu versus the pinned
+patch_manager/npu_patches); six source Refs match. No NPU/model arithmetic
+started. Prior12 software/defaultOFF passed but missed this real interface.
+Keep original failed source v002, stderr and whole terminal immutable.
+Exact own fddf67 CPU container is stopped-retained/Pid0/noExec/noOOM/Devices[];
+0232 independently confirms release. Physical4–7 idle baseline at that snapshot;
+protected0–3 external HYPIC runs were not touched. No competing card claim
+explains this preparation gap. Git fetch0231 timed out; no paper inference.
+
+CURRENT no live owned device producer. NEXT sparse owner prepares v003 only
+manifest-key repair plus actual boundary/negative regressions; MAIN runs real
+source/software then same-image CPU and source-qualified all4 N1 before model.
+Independent all4/FA64 raw consumer and mixed1024 successor continue preparation;
+source delivery is not model/PERF readiness. Source v002 is archived byte-exact
+under projects/qwen36-paper-portfolio/kivi/firstdecode_bootstrap_v2 for audit.
+No new throughput/TTFT/TPOT or final task score. PortfolioOct12 07:00:25Z,
+protected0–3 and SPENT32GiB HugeTLB unchanged. Previous RUNNING is superseded.
+
+
+## Current execution — 2026-10-10 08:53 UTC
+
+Read KIVI_LONG_REFERENCE_SAME_IMAGE_20261010.json. Actual020d same660
+Devices[] independent oracle/real-file consumer9 tests PASS, exit0;32769
+reference produced all1536 outputs in19.758s. This is CPU-reference evidence,
+not new NPU/model/performance success. Keep the original Windows Path.resolve
+failure; no filesystem mock or numerical tolerance was substituted.
+Exact owned7daea0b1 container exited0/Pid0/noOOM and is retained;0211 observed
+physical4–7 idle/no compute. This snapshot is not future admission.
+
+CURRENT no owned live device job. NEXT source-bound TP4 EAGER32768+2 model
+bootstrap and independent all4/FA64 first-decode consumer are being closed;
+actual source/software/image prerequisites remain pending. Do not repeat the
+passed20-frame short NPU matrix. Mixed/1024 successor prepares independently;
+its scalar lifecycle tests cannot replace mixed numerical evidence. SparsePrefix
+backup has no proved distinct runtime-work delta; do not claim a speedup.
+
+Earlier66ce298 checkpoint was successfully normally pushed and independently
+remote-confirmed; the old publication-unknown wording below is historical.
+No new throughput/TTFT/TPOT or final task score. PortfolioOct12 07:00:25Z,
+protected0–3 and spent32GiB HugeTLB remain unchanged. This checkpoint does not
+reopen closed repair scopes or declare final acceptance.
+
 ## Current execution — 2026-10-10 08:16 UTC
 
 Read KIVI_PACKED3_SIGNED_PASS_20261010.json first. Original018c completed0:

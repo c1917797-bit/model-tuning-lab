@@ -1,0 +1,100 @@
+{
+  "schema": "paper-portfolio.serial-stage-queue/v1",
+  "updated_at_utc": "2026-10-10T10:10:53Z",
+  "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
+  "portfolio_cutoff_epoch": 1791788425,
+  "device_stage_concurrency": 1,
+  "protected_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "current": {
+    "paper": "KIVI",
+    "stage": "input preflight, CPU8, all4N1, TP4 eager32768+2",
+    "state": "running",
+    "operation": "exec-0000000000000270",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/SOURCE_MANIFEST.json",
+      "bytes": 63991,
+      "sha256": "e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581"
+    },
+    "software": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json",
+      "bytes": 528,
+      "sha256": "d94444c84f42d7cf71dc02f55c9bb7fd50e5583a71ce858fa58279864005f9fe"
+    },
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-007",
+    "owner": "MAIN",
+    "result": "pending; operation running is not computation or PASS"
+  },
+  "next_ready_device_stage": null,
+  "ready_device_successor_count": 0,
+  "preparation": [
+    {
+      "owner": "recurrent_lifecycle_ready_queue",
+      "paper": "KIVI",
+      "stage": "v007-bound independent all4/raw64 and whole consumer",
+      "ready": false
+    },
+    {
+      "owner": "kivi_model_successor",
+      "paper": "KIVI",
+      "stage": "mixed002: complete raw collection then release, followed by off-device long oracle",
+      "ready": false
+    },
+    {
+      "owner": "sparse_attention_ready_queue",
+      "paper": "SKVQ",
+      "stage": "SKVQ current72h preprojection capture entry and dependency closure",
+      "ready": false,
+      "restriction": "do not repeat measured Quest25/50 per-head failure or reopen expired Ada/SparQ scope"
+    }
+  ],
+  "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
+  "no_new_model_performance_or_accuracy_pass": true,
+  "previous": {
+    "paper": "KIVI",
+    "stage": "same-image CPU -> all4 N1 -> TP4 eager32768+2 first-decode diagnostic",
+    "state": "failed_before_model",
+    "operation": "exec-000000000000025a",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-004/SOURCE_MANIFEST.json",
+      "bytes": 61597,
+      "sha256": "88a4067453589b8c0414363d3ecef465839cd54aeecfdb30909d713cd558de5e"
+    },
+    "software": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_004.json",
+      "bytes": 528,
+      "sha256": "834c0834cf1c67d6ef659c9f78fc4bec0073baca8bd4bf7c739026e78203cde5"
+    },
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004",
+    "known_progress": "CPU8 and four native tiny tensors passed; model never started",
+    "owner": "MAIN",
+    "terminal_consumer": "independent source-bound all4/FA64 raw + whole consumer in preparation",
+    "primary": "KeyError('vocab_size'): actual checkpoint uses text_config.vocab_size",
+    "actual_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-004/RESULT.json",
+      "bytes": 9883,
+      "sha256": "3040832527efee439f9c7177faa3df22b96a096577e38b4eff00c37d25dc9d3b"
+    },
+    "release_verified_operation": "exec-0000000000000261"
+  },
+  "idle_cause": null,
+  "new_failures": [
+    {
+      "operation": "exec-0000000000000263",
+      "scope": "v005 source-only CLI",
+      "cause": "MAIN broad test-count replacement changed sha256 spelling",
+      "NPU_started": false
+    },
+    {
+      "operation": "exec-0000000000000268",
+      "scope": "v006 Devices[] CPU preflight",
+      "cause": "MAIN relocation left four roles at unmounted v004 paths",
+      "NPU_started": false,
+      "release_operation": "exec-000000000000026f"
+    }
+  ]
+}

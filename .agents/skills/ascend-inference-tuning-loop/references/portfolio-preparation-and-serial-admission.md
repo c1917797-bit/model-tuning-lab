@@ -168,8 +168,14 @@ consumer and verify own-only release. Unconfirmed termination/release blocks
 new device admission; retain UNKNOWN and recover exact ownership instead of
 relaunching. Once resource release is proved, a device-independent result
 adjudication may continue with its paper owner while MAIN dispatches another
-ready stage. PASS unlocks only the actual successors whose prerequisites it
-satisfies. A proved implementation defect opens a bounded repair -> regression
+ready stage. If a failed paper needs device-free repair or preparation, remove
+it from CURRENT and the ready device lane; its owner continues the paper DAG
+off-device. Admit another paper whose actual prerequisites pass, without waiting
+for the failed paper's repair, report or Git publication. If none is ready,
+record ready-count zero and refill an independent preparation lane immediately.
+A written queue rule is not evidence of an actual handoff or gap-free usage.
+PASS unlocks only the actual successors whose prerequisites it satisfies.
+A proved implementation defect opens a bounded repair -> regression
 -> relevant smoke -> requeue edge. Unknown causes open a discriminating
 diagnostic edge; valid no-gain closes only the measured configuration. Failure
 does not silently cancel the paper or grant its downstream performance gate.

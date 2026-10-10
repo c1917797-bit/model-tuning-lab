@@ -1,0 +1,121 @@
+{
+  "schema": "kivi.firstdecode-format-chain-failure/v1",
+  "recorded_utc": "2026-10-10 09:18:36 UTC",
+  "originals": {
+    "ORIGINAL_TERMINAL_0226.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-firstdecode-c145-failure-20261010-001/ORIGINAL_TERMINAL_0226.json",
+      "bytes": 11024,
+      "sha256": "b82a1988ef1deb30bbbd2cda090c4643c8bfcb3f50a162615c1c5f50b7d727c3"
+    },
+    "ORIGINAL_SOFTWARE_021E.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-firstdecode-c145-failure-20261010-001/ORIGINAL_SOFTWARE_021E.json",
+      "bytes": 9012,
+      "sha256": "f0631d0323fd803d6bf88ad78a41c1e2f868ad984b881fa5b3b10cab2e4d849e"
+    },
+    "ORIGINAL_DEFAULT_OFF_0222.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-firstdecode-c145-failure-20261010-001/ORIGINAL_DEFAULT_OFF_0222.json",
+      "bytes": 4911,
+      "sha256": "c1e15033a03ad54d54123b90e8e49f2e8c587098e6bafd660f96ae449c9ed188"
+    },
+    "ORIGINAL_ORIENTATION_0232.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-firstdecode-c145-failure-20261010-001/ORIGINAL_ORIENTATION_0232.json",
+      "bytes": 50571,
+      "sha256": "3ffaea70622eb83a0d078546552579c892285825f12138ef4b7c82485f8d3741"
+    }
+  },
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-002/SOURCE_MANIFEST.json",
+    "bytes": 57362,
+    "sha256": "09e09f06f546becfe95aa08bdd61e0d6f0f9d21d8b7ea17bf71a7bebe8aa3321"
+  },
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-002/RESULT.json",
+    "bytes": 9028,
+    "sha256": "f84cb72c7c9375910096fcf9f12dbe1791baa9bdc442dd14a719a21468c3980c"
+  },
+  "first_child": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-002/cpu-preflight/cpu-import-parser-CHILD.json",
+    "bytes": 2013,
+    "sha256": "ef643fec4eab8a88deee61ce336abc25d7f5375e3b3ec90d6dedfba4a54fb790"
+  },
+  "first_stderr": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-002/cpu-preflight/cpu-import-parser.stderr",
+    "bytes": 1669,
+    "sha256": "a904bb461e0433cb5ab42a187cbeb25c618f344b5f649cacce98bcd33c62eb6a"
+  },
+  "operation": {
+    "id": "exec-0000000000000226",
+    "terminal": true,
+    "exit_code": 1,
+    "duration_ms": 102813,
+    "cancelled": false,
+    "timed_out": false
+  },
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "causal_confidence": "proved exact source-key mismatch before format/native/candidate execution",
+  "cause": {
+    "supplied": [
+      "root",
+      "loader",
+      "exports",
+      "manager",
+      "npu",
+      "format"
+    ],
+    "required": [
+      "root",
+      "loader",
+      "exports",
+      "patch_manager",
+      "npu_patches",
+      "format"
+    ],
+    "six_source_refs_unchanged": true,
+    "first_failure": "format_policy.validate_chain exact key set"
+  },
+  "valid_predecessors": {
+    "software_12_passed": true,
+    "default_off_passed": true,
+    "prior_component_only_20frames_60kernels": true
+  },
+  "cleanup": {
+    "cid": "fddf67afe277db1287c8967a210682e459cfcfe62efc9f950e3aeebe4212164c",
+    "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-002/cpu-preflight/cleanup.json",
+    "fresh_0232_status": "exited",
+    "pid": 0,
+    "exec_ids": null,
+    "oom_killed": false,
+    "devices": [],
+    "retained": true
+  },
+  "decision": "REPAIR",
+  "repair": "new v003 manifest maps the two known labels to unchanged exact policy keys; add actual producer/consumer regression; no numerical/ownership/budget relaxation",
+  "next_gate": "complete current software -> same-image CPU import/parser -> all4 N1 -> actual32768+2 -> independent full captured-output consume",
+  "predicted_observable": "same-image real format binding accepts same six source Refs, wrong labels/changed hashes remain rejected",
+  "not_proved": [
+    "NPU/model bootstrap",
+    "long-context numerical correctness",
+    "mixed/lifecycle/graph",
+    "matched1024 E2E",
+    "final task accuracy",
+    "new accepted technique"
+  ],
+  "new_npu_executed": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_accuracy_measured": false,
+  "physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "portfolio_cutoff": "2026-10-12T07:00:25Z",
+  "hugetlb_32gib_permission": "SPENT"
+}

@@ -1,0 +1,109 @@
+{
+  "schema": "mst.causal-recovery/v1",
+  "date": "2026-10-10",
+  "failed_stage": "N1 native worker import, before four-device tensor/model execution",
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "causal_confidence": "proved missing module search path; native extension import completion still unverified",
+  "decision": "REPAIR",
+  "original_operation": "exec-000000000000023b",
+  "original_envelopes": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-acl-c147-evidence-20261010-001/ORIGINAL_FIRSTDECODE_023B.json",
+      "sha256": "b7f8cd0ef0c1af9a83ff9d6a3b567b6712c1088b6fdc0c41840a8fe379d3e2f3",
+      "bytes": 11030
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-acl-c147-evidence-20261010-001/ORIGINAL_STOPPED_SOURCE_0240.json",
+      "sha256": "9c4f1fbac712d6ae975f456f7b3c8fb9bc2cd8787f15f583d14e7279d3da04e9",
+      "bytes": 56247
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-acl-c147-evidence-20261010-001/ORIGINAL_ACL_IMPORT_TIMEOUT_0241.json",
+      "sha256": "fc8993ad7c8287c334e4ecbfada33dfeb27583006d57989157b8cf1ae9565c66",
+      "bytes": 11385
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-acl-c147-evidence-20261010-001/ORIGINAL_ACL_RESOLUTION_0242.json",
+      "sha256": "b16ea08086878c2fa6e92f9f9af784627de8390ee035308941b8f1693451b265",
+      "bytes": 5257
+    }
+  ],
+  "source": {
+    "bytes": 58655,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-003/SOURCE_MANIFEST.json",
+    "sha256": "827e987e372957cd0dce3438b035dbe5aa752d7f695dfe78417d9b913dfa83d3"
+  },
+  "software": {
+    "bytes": 528,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_003.json",
+    "sha256": "6c40b6a13816dff59ce575d33ae782b226434518ff9ecc868d531a340e197037"
+  },
+  "whole_result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-003/RESULT.json",
+    "bytes": 9958,
+    "sha256": "0bab33ed7c455ae8a93151fb281c8751ade9bc0d511f1800209c0ed20b038d98"
+  },
+  "cpu": {
+    "child": {
+      "bytes": 2011,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-003/cpu-preflight/cpu-import-parser-CHILD.json",
+      "sha256": "0d6f34cd51047cb50b68f1b8a61c20bd7a85e97cc7dd51b8c4c96920cedffdcd"
+    },
+    "cleanup": {
+      "bytes": 10938,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-003/cpu-preflight/cleanup.json",
+      "sha256": "3073d11a6942db673ef13309f9c52508ef8009edab148e1360b24996098c8d4c"
+    },
+    "owned": {
+      "bytes": 41247,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-003/cpu-preflight/OWNED.json",
+      "sha256": "482b6aaa8a32b12ac8182bc08c348492f192060c1f7976724cebff07a9f1d2be"
+    },
+    "report": {
+      "bytes": 109178,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-003/cpu-preflight/REPORT.json",
+      "sha256": "9113824135bb764b0b3f53cc0c6df23757fcc2edcecb059f2e32719abfa723b4"
+    }
+  },
+  "first_fault": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-003/candidate/all4-N1.stderr",
+    "bytes": 1911,
+    "sha256": "9c42b7fc8c00cfc0d2d8ed10acaa904dcb4adc7658fbdc49ca4b261e42882d5e",
+    "summary": "guest_probe -> native NPUWorker -> camem.py from acl.rt import memcpy: ModuleNotFoundError"
+  },
+  "valid_predecessor_scope": "CPU_IMPORT_PARSER_CHECKED",
+  "cleanup": {
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "errors": [],
+    "own_on_protected": false,
+    "cid": "a07687cdb91ab8b98935b7646e80a27fea10841e8285411a3d94ec692889feb8",
+    "independent_inspect_operation": "exec-0000000000000240"
+  },
+  "diagnostic": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/acl-import-diagnostic-main-20261010-002/RESULT.json",
+    "bytes": 2435,
+    "sha256": "8bb531a2a6d033fbed14010a5acbd0f317717fc491825a09ea09175dd72eaec9",
+    "scope": "Devices[] module resolution only; isolated None, normal and isolated explicit root resolve identical acl.so"
+  },
+  "acl_identity": {
+    "path": "/usr/local/Ascend/cann-9.1.0/python/site-packages/acl.so",
+    "bytes": 1073832,
+    "sha256": "34303ba302bde3cd44dd5bd7bc01fb216cbc5123e7db797a9834c9fa58e3f185"
+  },
+  "unresolved_diagnostic": "Actual Devices[] extension import in0241 timed out at20s; retained failure, not claimed hardware dependence or successful import.",
+  "minimal_repair": "New v004 common source-bound CANN path helper, preserve -I and check exact origin. Covers guest, server and actual worker; no native runtime edits.",
+  "prediction": "Missing acl resolution fault disappears in N1; actual extension/native worker import and all4 tensor must still pass. New runtime failure refutes a complete fix.",
+  "unchanged_gates": [
+    "physical4-7 only; protect0-3",
+    "independent raw numerics and full relevant lifecycle",
+    "fixed1024 matched dense/candidate and3 formal pairs",
+    "final no-thinking max2048 normalEOS tasks",
+    "task loss <=1pp and <=1%relative per current protocol; not tensor tolerance"
+  ],
+  "portfolio_cutoff": "2026-10-12T07:00:25Z",
+  "model_ready": false,
+  "performance_ready": false,
+  "new_task_scores": false
+}
