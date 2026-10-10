@@ -1,0 +1,122 @@
+{
+  "schema": "paper-portfolio.causal-repair/v1",
+  "recorded_at_utc": "2026-10-10T05:46:00Z",
+  "paper": "AdaKV",
+  "classification": "REFERENCE_OR_TEST",
+  "causal_confidence": "proved for layout audit; new full model remains unverified",
+  "failed_gate": "first real 32768-token model warmup; zero generated tokens",
+  "original": {
+    "operation": "exec-0000000000000130",
+    "status": "failed",
+    "exit_code": 1,
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ipc-socket-030-001",
+    "result_sha256": "7f91fe5d132d6892994b456bd63eb92d06420c51ed776acfd7ee890235e338bd",
+    "whole_terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv030-ipc-V5-execution-20261010-001/MODEL_0130_TERMINAL_ORIGINAL.json",
+      "sha256": "6938d748816d41bc1ea0caf37656358faea3fd63636989af80e24fccabc70022"
+    },
+    "owned_candidate_stopped_retained": "0fdcf6bf94d5591eba66f3ff733b1c7da1a3d9e9bf45b15f39f62766b67f18b3"
+  },
+  "cause": "physical_owners applied the GDN-only ND=2 identity predicate to independently allocated BF16 full-attention cache planes whose actual native format is NCHW=0. All four real rank plans reproduce this false rejection before candidate model-output validation.",
+  "repair": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/SOURCE_MANIFEST.json",
+      "sha256": "5b17f8d9b6c7b54a0e5a1e5874eb77b9342728b022711087fcdd328aba5cee89"
+    },
+    "core_sha256": "888db7d33f932e0b53b108b82e5bc57df7d735449ab9d753572cdf69514533e5",
+    "delta": "Separate exact source-qualified compact FA view identity from strict GDN ND identity; retain native enum type, exact dtype/shape/stride/offset/storage/pointer, device/rank and interval-disjointness checks.",
+    "unchanged": [
+      "algorithm arithmetic",
+      "official author bodies",
+      "native operators",
+      "numerical thresholds",
+      "resource reserves",
+      "full model coverage",
+      "paper and portfolio clocks"
+    ]
+  },
+  "regression": {
+    "operation": "exec-000000000000013f",
+    "exit_code": 0,
+    "tests": 193,
+    "scope": "SOFTWARE_ONLY; includes all-four historical actual-plan replay and ten new layout/type/stride/storage/rank/overlap negatives",
+    "report": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/MAIN-full193-20261010-001.json",
+      "sha256": "e6da8f340f656cdb41b842ec81d22b07482844f28fb53b574f3b308483919377"
+    }
+  },
+  "materialization": {
+    "operation": "exec-0000000000000143",
+    "exit_code": 0,
+    "files": 104,
+    "scope": "SOURCE_MATERIALIZED_ONLY",
+    "report": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-fa-layout-materialize-main-20261010-031-001/RESULT.json",
+      "sha256": "20993d3ab9f0ea370d87f697c4ed338c644d241f207120def3e7ab16ce662f40"
+    }
+  },
+  "new_originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv031-fa-layout-execution-20261010-001/SOFTWARE_013F_ORIGINAL.json",
+      "bytes": 11872,
+      "sha256": "bccce87a906681c86c72fb78c7bff6ca0b34225496797d2be1a5e8a79d065534"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv031-fa-layout-execution-20261010-001/MATERIALIZE_0143_ORIGINAL.json",
+      "bytes": 2798,
+      "sha256": "d814aeefe1ee8bda3f2d969063c4ff26db53c4cd6abf704acdf1c27384f5acf0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-adakv031-fa-layout-execution-20261010-001/ORIENTATION_0144_ORIGINAL.json",
+      "bytes": 16067,
+      "sha256": "83c672b635d118988b4dafbb00b9fa13cfa82dfc32aff01d0dc095fed6c0b263"
+    }
+  ],
+  "prediction": "New source should pass this exact FA layout boundary on unchanged production geometry; only a new actual model run can verify that prediction.",
+  "not_proved": [
+    "earlier PA failure repaired",
+    "full new-source NPU/model lifecycle correctness",
+    "paired E2E performance",
+    "final task accuracy",
+    "portable speedup"
+  ],
+  "timebox": {
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "full_model_seconds": 5400,
+    "latest_fitting_start_utc": "2026-10-10T05:30:25Z",
+    "latest_fitting_start_missed": true,
+    "portfolio_cutoff_utc": "2026-10-12T07:00:25Z",
+    "decision": "Retain repaired implementation as inconclusive/time-limited; no shortened substitute or paper-wide no-go. Advance independent KIVI same-image prerequisite."
+  },
+  "queue": {
+    "current": "none: no active NPU operation at fresh0144",
+    "next": "KIVI actual scheduler/declared-owner eight-test entry in same660 Python3.12 Devices=[]; new controller packet pending",
+    "backup": "official final-input original consumption and SparQ original HBM attribution",
+    "ready_for_new_full_model": 0
+  },
+  "other_failures": {
+    "KIVI_0138": "Host Python3.9 cannot import unmodified deployed PEP604 scheduler annotations; eight tests did not start. Same-image successor, not algorithm rejection.",
+    "SparQ_009": "Original samples show +1402/1403MiB physical HBM per card and reserve-gate rejection; allocation/reservation contributor UNKNOWN, not a proved OOM or method limitation."
+  },
+  "safety": {
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugetlb_release_32gib": "COMPLETED_SPENT",
+    "external_workloads_modified": false
+  },
+  "acceptance": {
+    "new_accepted_technique": false,
+    "formal_performance": false,
+    "final_accuracy": false
+  }
+}

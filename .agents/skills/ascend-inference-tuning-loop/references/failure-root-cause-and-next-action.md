@@ -1,5 +1,24 @@
 # Root-cause classification must select the next experiment
 
+## Qualify physical layout by its actual consumer
+
+Do not reuse a recurrent-state-only format predicate for an independently
+allocated full-attention cache. First preserve native format/type, typed view,
+shape/stride/offset, full storage span, rank and allocator provenance for both.
+A numeric format label alone neither proves invalidity nor justifies acceptance.
+Separate their source-qualified identity checks and retain cross-owner physical
+overlap rejection; do not reinterpret BF16 cache bytes as FP32 recurrent state.
+
+AdaKV030's real four-rank plans exposed this reference defect before the first
+model output. A new FA-specific check passed193 software regressions including
+actual-plan replay and invalid-view negatives, while GDN stayed strict ND.
+That software result and a generated deployment tree do not prove new model
+numerics, graph/lifecycle correctness or speed. Preserve the failed original
+and require the affected real-device gate; if its full budget cannot fit the
+fixed paper window, retain an implementation-inconclusive result rather than
+shortening coverage or judging the paper. Exact evidence is in the active
+workstream's ADAKV030_FA_LAYOUT_AUDIT_FAILURE_20261010.json.
+
 ## Author AST fingerprints across interpreter versions
 
 When frozen official-source AST hashes fail, compare identical raw bytes under

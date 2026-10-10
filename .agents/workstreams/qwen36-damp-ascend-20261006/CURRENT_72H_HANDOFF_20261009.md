@@ -1,5 +1,38 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 05:46 UTC
+
+Read ADAKV030_FA_LAYOUT_AUDIT_FAILURE_20261010.json first.
+Original0130 FAILED after actual TP4 weights/graph/health startup; first32768
+request generated0 tokens. Real all-four plans prove our GDN-only ND2 check
+wrongly rejected independent native FA format0 planes. This is a reference/test
+defect, not paper-wide failure. Exact owned candidate is stopped and retained.
+
+New V6 source5b17 keeps GDN ND2 strict and validates FA's own exact typed view,
+native enum, rank, storage bounds and nonoverlap. Actual013f full193 software
+PASS and0143 materialized104 files; originals and reports are SHA-bound.
+This is repaired-but-NPU-unverified. Earlier PA fault is NOT declared fixed;
+no complete new-source N2, E1, formal performance or task pass exists.
+
+The fixed90min full-model stage no longer fits the first repair cutoff:
+last fitting start05:30:25Z, cutoff07:00:25Z. Do not shorten coverage or reset
+that clock. Preserve this implementation as inconclusive/time-limited and
+advance an independent packet; this does not reject AdaKV as a method.
+
+Fresh0144: physical4–7 idle/no compute at snapshot;0–3 external HYPIC protected.
+CURRENT no NPU operation. NEXT_IMAGE_PREFLIGHT is KIVI's actual eight-test
+scheduler ingress under same660 Python3.12; new thin controller still pending.
+0138 host3.9 PEP604 import failure occurred before tests, not algorithm numerics.
+Independent final-task input consumer and SparQ original HBM attribution remain
+preparation. SparQ009 per-card +1402/1403MiB is observed; exact contributor UNKNOWN.
+Ready full-model successor count0: current idle cause is preparation, not outside
+card occupation. Preparers are API-only; MAIN alone admits CPU/device execution.
+
+PortfolioOct12 07:00:25Z unchanged; no acceptance target reduced.
+HugeTLB32GiB SPENT. No new throughput/TTFT/TPOT/final task scores.
+Git normal push authentication unresolved; local checkpoints are not publication.
+Historical RUNNING entries below are not current process authority.
+
 ## Current execution — 2026-10-10 05:01 UTC
 
 Read ADAKV029_SOCKET_CONTROLLER_FAILURE_20261010.json first.
