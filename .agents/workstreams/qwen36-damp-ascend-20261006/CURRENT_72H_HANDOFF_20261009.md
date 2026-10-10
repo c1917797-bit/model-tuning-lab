@@ -1,5 +1,31 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 01:57 UTC
+
+Read ADAKV026_DIAGNOSTIC_AND_INPUT_ABI_20261010.json first. MAIN009e was
+actually polled RUNNING. It is the new cold-PA first-fault diagnostic, not a
+retry of unchanged025 or an N2/E1 acceptance run. Poll only009e; original025
+FAILED remains preserved. Actual125 software0099 and source materialization009a
+passed. Same-image/no-device and actual4-7 prerequisites run inside009e before
+TP4 load. Never infer device/model success from this launch or source snapshot.
+
+Actual0098 no-device same-image tokenizer diagnostic proved Transformers5.5.4
+returns BatchEncoding by default; explicit return_dict=False matches encode.
+Input-v7 producer+independent consumer fixed the API assumption, actual74 tests
+009b passed. Full official503 LBv2 +1319 GSM8K downloaded and byte-verified by
+0096 before its tokenization failure; reuse those frozen originals read-only.
+Full v7 input production/consumer and all task scores remain pending.
+
+CURRENT009e only; preparers API-only/remote CPU0. NEXT actual-fault-based
+repair then full N2; E1 owned entry pending with sparse owner. Independent
+BACKUP KIVI compact native FA/model output adaptation remains unverified.
+No new throughput/TTFT/TPOT/task result. First Oct10 07:00:25Z and total
+Oct12 07:00:25Z fixed,4-7 only,0-3 protected, HugeTLB32GiB SPENT.
+Source/results/whole originals are externally archived with12/12 API readback.
+Normal push authentication remains unresolved; no push success is claimed.
+
+
+
 ## Preparation successor update — 2026-10-10 after AdaKV025 failure
 
 Actual KIVI v2 fix4/source-only materialization/full20 completed0086/0087/0088;

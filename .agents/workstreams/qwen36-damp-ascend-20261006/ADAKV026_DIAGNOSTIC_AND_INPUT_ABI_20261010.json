@@ -1,0 +1,106 @@
+{
+  "schema": "qwen36.adakv026-diagnostic-and-input-tokenizer-recovery/v1",
+  "decision": "DIAGNOSE",
+  "cause_class": "UNKNOWN_CAUSE",
+  "causal_confidence": "first PA fault established; actual layout/writer-versus-PA cause pending",
+  "prior_goal_turn": "no_progress_status_only",
+  "objective_unchanged": "non-HYPIC paper mechanism, native correctness, matched full-model >=10% and final task gates; plugin/monkeypatch only",
+  "current": {
+    "operation_id": "exec-000000000000009e",
+    "state_at_latest_original": "running",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-padiag-026-002",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv025-warm-pa-firstfault-overlay-v2-user72h-20261010/SOURCE_MANIFEST.json",
+      "sha256": "fdb8fa318b4f5213aa8471c19db4b7d8d85a10f68bffda967188479cd35a18fa"
+    },
+    "scope": "cold eager pre-capture diagnostic only; no numerical/model/E1 authority"
+  },
+  "prerequisites": {
+    "software125": {
+      "actual_operation": "exec-0000000000000099",
+      "exit_code": 0,
+      "tests": {
+        "diagnostic": 20,
+        "base": 55,
+        "audit": 50
+      },
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv025-pa-diag-software125-20261010-002.json",
+      "sha256": "13a0cbb2836d24a5e6ebfdd58a5df6b6eddfe78138fda215738be6fbeedc9e3e"
+    },
+    "materialization": {
+      "actual_operation": "exec-000000000000009a",
+      "exit_code": 0,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-padiag-materialize-main-20261010-002/RESULT.json",
+      "sha256": "ac05506040742b54aada0151e056a12222212b23b31e8eb4788338a70ec5c065",
+      "source_only": true
+    }
+  },
+  "input_recovery": {
+    "prior_operation": "exec-0000000000000096",
+    "prior_exit_code": 1,
+    "classification": "REFERENCE_OR_TEST",
+    "cause": "actual Transformers5.5.4 apply_chat_template(tokenize=True) default BatchEncoding, not flat token list; token/template equality and empty overhead wrongly assumed list",
+    "proof_operation": "exec-0000000000000098",
+    "proof_exit_code": 0,
+    "same_image_no_devices": true,
+    "first_actual_official_row_explicit_return_dict_false_matches_encode": true,
+    "official_download": {
+      "longbench_rows": 503,
+      "gsm8k_rows": 1319,
+      "complete": true
+    },
+    "fix_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/shared-official-final-task-inputs-v7-tokenizer-001/SOURCE_MANIFEST.json",
+      "sha256": "97986967691018b00ca1d6a96296f9c461c7d3e6c69e4607be8ccba7bdabcdf8"
+    },
+    "software74": {
+      "operation": "exec-000000000000009b",
+      "exit_code": 0,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-input-v7-software74-user72h-20261010-001.json",
+      "sha256": "cf0880451b759aa2810452ea9a0711d53b5b9d42e2cef2b0f736fe42fd671eb5"
+    },
+    "full_prepared_input_consumption": "pending",
+    "model": false,
+    "task_score": false
+  },
+  "resources": {
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "serial_device_stages": true,
+    "all_preparers_remote_exec_cpu": 0,
+    "hugetlb_32gib_release": "SPENT",
+    "whole_phase_seconds": 5400,
+    "cleanup_included_seconds": 90
+  },
+  "time": {
+    "first_candidate_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "portfolio_cutoff_utc": "2026-10-12T07:00:25Z",
+    "reset": false
+  },
+  "queue": {
+    "CURRENT": "009e actual diagnostic",
+    "NEXT": "source-supported repair from actual first fault; E1 remains blocked on complete genuine N2",
+    "BACKUP": "KIVI compact real FA consumer and model output adaptation; pending actual software/native/full lifecycle"
+  },
+  "evidence_archive": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c99-verified-prerequisites-and-pa-diagnostic-20261010-001/MANIFEST.json",
+    "sha256": "e71a5f1c48c59988f242e8619c696fced649d70d9348be6c1fc02adcb83e1176",
+    "api_readback_verified_files": 12
+  },
+  "acceptance": {
+    "new_non_hypic_accepted": 0,
+    "new_valid_e2e": false,
+    "new_task_scores": false
+  },
+  "publication": "local coherent checkpoint pending; existing HTTPS authentication failure unresolved; no main/force or credential bypass"
+}
