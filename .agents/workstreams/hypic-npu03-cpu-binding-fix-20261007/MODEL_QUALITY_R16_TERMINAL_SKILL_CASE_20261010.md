@@ -17,6 +17,14 @@ the separate aggregate hot-coverage shortfall 364/381 *after*
 complete scoring; it neither erases the adverse quality observation
 nor proves per-request four-worker activation.
 
+The older 2026-09-06 successful TP4 decision compared mean
+LongBench-v2 delta with the baseline three-run range. On that
+descriptive lens, r16's 3.6745 pp fall is below its 5.5118 pp
+baseline range. The new frozen floor/category/length-limit criteria
+are stricter, so preserve `REJECT_OR_QUALIFY` without treating it
+as a demonstrated causal numerical defect. The older overall
+acceptance also required GSM8K, absent from r16.
+
 Reusable boundary: historical 1024/c32 success is not a matching
 baseline for 2048/c8; selected examples and r13 performance cannot
 promote this full negative pair. The Skill remains partial for its

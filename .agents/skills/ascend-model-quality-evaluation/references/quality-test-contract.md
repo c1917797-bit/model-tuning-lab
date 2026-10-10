@@ -67,6 +67,12 @@ exact owned release. Preserve the activation failure as a separate
 failed gate: it cannot erase an adverse quality result or be relabeled
 as an in-path pass. A historical successful source or output cap is
 context, not a matching baseline for a changed ruler.
+When a new gate is stricter than the historical success criterion,
+report both interpretations explicitly on the new data. Keep the
+prospectively frozen decision unchanged and do not call a difference
+causal merely because it fails the new gate; conversely a descriptive
+historical-range pass cannot replace missing historical datasets or
+mechanism evidence.
 
 For a conditional path backed by reusable materialized state, a serialized
 canary is also not a concurrency/capacity gate. Before the full suite, stress

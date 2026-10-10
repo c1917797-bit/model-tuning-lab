@@ -50,6 +50,19 @@ decision is `REJECT_OR_QUALIFY`. The original source has a serialized
 four-worker sentinel and aggregate hot activity, not per-scored-request
 four-worker telemetry; universal mechanism attribution is unproven.
 
+**Historical-rule cross-check (descriptive, not a r16 re-decision):**
+The accepted 2026-09-06 Qwen3.6 TP4 case called its LongBench-v2
+delta non-material when it was smaller than the baseline three-run
+range, while also checking GSM8K. Here the baseline range is
+`(78-71)/127 = 5.5118 pp`, larger than the r16 mean delta
+`3.6745 pp`; thus the r16 LongBench-v2 number alone would clear that
+older variability comparison. The new predeclared floor/category/
+length-limit gate is materially stricter and fails. Keep its frozen
+verdict, but do not describe this discrepancy as proof of a causal
+HYPIC numerical defect or as a complete historical-rule pass: GSM8K
+was not run under the r16 ruler. The r16 candidate also lacks full
+hot coverage, which independently limits in-path attribution.
+
 r13 on later `c12060c` was also negative (230/381→219/381), while
 its matched performance was positive. r15's eight selected cases
 (13/24 original versus 10/24 later source) were diagnostic, not a

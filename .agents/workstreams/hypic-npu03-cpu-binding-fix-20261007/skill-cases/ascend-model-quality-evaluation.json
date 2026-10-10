@@ -90,6 +90,9 @@
     "r16_scored_responses_per_arm": 381,
     "r16_correct_baseline_candidate": [224, 210],
     "r16_delta_percentage_points": -3.674540682414698,
+    "r16_baseline_repeat_range_percentage_points": 5.511811023622047,
+    "r16_longbench_only_within_historical_range_descriptive": true,
+    "r16_historical_overall_gate_pass_proven": false,
     "r16_quality_decision": "REJECT_OR_QUALIFY",
     "r16_aggregate_verified_hot_requests": [364, 381],
     "r16_per_request_four_worker_proof_available": false,
@@ -210,11 +213,11 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R16_ORIGINAL_SOURCE_FULL_TERMINAL_AUDIT_20261010.md",
-      "sha256": "834add73f023968796721ca387cf0fb678dc93674e6fa8d549da91842e52e5e8"
+      "sha256": "e699a07ae337f41bb970a90035e5336a81fdf5155c2ff3cae4b253705b34ed6f"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_R16_TERMINAL_SKILL_CASE_20261010.md",
-      "sha256": "64f9f7feec3728a576a19d42b59042264b8a492e284ad8f9d4a5c2a986c28565"
+      "sha256": "baced7e2fee65215bf5be38220f7c0b9c238e2213e72a9e4da719b9bec107b51"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r16_original_source_full_terminal.py",
@@ -223,6 +226,6 @@
   ],
   "replayable_regression_recorded": true,
   "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. A new read-only source/runtime replay proves strict position-independent mode and 140 zero-start candidate materializations, so the non-strict combined-Prefill approximation was not observed and is not a supported explanation for r13 quality loss; numerical equivalence of the strict path is still unproven. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, but campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
-  "next_gate": "r16 original-source full 127x3 max-2048/c8 quality is independently valid but REJECT_OR_QUALIFY at 224/381 to 210/381; aggregate hot coverage 364/381 is incomplete and per-request four-worker proof is unavailable. Do not use historical 1024/c32 success, r15 selected examples or r13 speed to override this. Integrate and replay main request-level proof wording, then validate the missing default LongBench-v2+GSM8K/c32 and deterministic canary conditions before upgrading this Skill. A repair needs a new preregistered one-variable same-identity control; do not rerun r13-r16 roots or claim a RoPE/GDN/cache cause without direct NPU evidence.",
+  "next_gate": "r16 original-source full 127x3 max-2048/c8 quality is independently valid but REJECT_OR_QUALIFY at 224/381 to 210/381 under its frozen stricter gate; its 3.6745pp LongBench-only decline is also below the 5.5118pp baseline repeat range used descriptively by the historical criterion, which is not an overall pass because GSM8K is absent. Aggregate hot coverage 364/381 is incomplete and per-request four-worker proof is unavailable. Do not use historical 1024/c32 success, r15 selected examples or r13 speed to override this. Integrate and replay main request-level proof wording, then validate the missing default LongBench-v2+GSM8K/c32 and deterministic canary conditions before upgrading this Skill. A repair needs a new preregistered one-variable same-identity control; do not rerun r13-r16 roots or claim a RoPE/GDN/cache cause without direct NPU evidence.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
