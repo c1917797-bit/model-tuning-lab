@@ -1,0 +1,131 @@
+{
+  "schema": "paper-portfolio.causal-recovery/v1",
+  "updated_utc": "2026-10-10T22:03:00Z",
+  "goal": "ACTIVE_UNMET; non-HYPIC matched E2E>=10%, fixed1024, TTFT/TPOT and final LBv2/GSM8K <=1% pp and relative separately",
+  "portfolio_cutoff_epoch": 1791788425,
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "hugetlb32GiB_authority": "SPENT",
+  "previous_turn_classification": "PROGRESS: actual0574 terminal and first-fault discovery changed next action; no mathematical/E2E result",
+  "outcomes": [
+    {
+      "paper": "KIVI",
+      "stage": "raw022 CPU independent full64",
+      "operation": "exec-0000000000000574",
+      "exit_code": 1,
+      "duration_ms": 75119,
+      "classification": "REFERENCE_OR_TEST",
+      "first_fault": "consume_prefill exact unchanged critical sources; original_prefill.capture_source=a93894... from provenance, caller passes layout capture398cd5...",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW022_0574_FAILED_ORIGINAL_20261010.json",
+        "bytes": 12276,
+        "sha256": "ecf0dbbd89bd6873809488e274260e884e455c0e25d3d28c92e9e4ccc4a22410"
+      },
+      "own_released_operation": "exec-0000000000000576",
+      "numerical_pass": false,
+      "NPU_started": false
+    },
+    {
+      "paper": "SKVQ",
+      "stage": "013 same-image CPU inputs",
+      "operation": "exec-0000000000000577",
+      "exit_code": 1,
+      "duration_ms": 26892,
+      "classification": "ADAPTATION_IMPLEMENTATION",
+      "first_fault": "cpu_input_dependency_lock_ref points at011 path not mounted in013; actual input_dependency.lock rejects missing file before NPU",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ013_0577_FAILED_ORIGINAL_20261010.json",
+        "bytes": 9384,
+        "sha256": "97cc041713b3579229da98e3bd00703c1b43645c4158f600d51ae63e67eac612"
+      },
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-013-main-20261010-001/HOST_RESULT.json",
+        "bytes": 20597,
+        "sha256": "5f9f006be05ae86e9445e6cc9123e693331af92c15cae62cbc4bfb475820511b"
+      },
+      "own_released_operation": "exec-0000000000000579",
+      "NPU_started": false
+    }
+  ],
+  "source_role_evidence": {
+    "original_prefill": {
+      "bytes": 175975,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/r0-p397-s58987110-PACKED-QWEN-r0-language_model.model.layers.11.self_attn.attn-e000001-s00-ORIGINAL-PREFILL.json",
+      "sha256": "301aea71ff6584a17913760c88eaf3ea83e22e31f9f32ce7e3dd6fa72bf4a4ac"
+    },
+    "actual_capture_source_sha256": "a93894bbbd0d73b72c9bc43664a121106525fa5a27bca0d361aff9a2ba00def7",
+    "diagnosis": "Original provenance producer hashes its own file; consumer caller binds layout collector under same semantic field. Confirm exact seven source roles and repair only caller/whole new identities."
+  },
+  "software_prerequisites": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SOFTWARE184_0570_PASS_ORIGINAL_20261010.json",
+      "sha256": "ff9b96d75322ed321711b2617bfe29000e0496d398f8d1799a20f151706a4ff2",
+      "bytes": 6341
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ013_SOFTWARE147_056D_ORIGINAL_20261010.json",
+      "sha256": "9c181b6e7a5cd862fa80011776cb349010c7f6dea82b9e22ab692e38dddf24e6",
+      "bytes": 37068
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ013_MOUNT_0572_ORIGINAL_20261010.json",
+      "sha256": "fdfc60aedb2c6d7cafd71695d425d70496f02bde3a91c9d879c7b7accaf2a326",
+      "bytes": 7418
+    }
+  ],
+  "release_and_source_originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ013_0577_FAILED_ORIGINAL_20261010.json",
+      "bytes": 9384,
+      "sha256": "97cc041713b3579229da98e3bd00703c1b43645c4158f600d51ae63e67eac612"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ013_0579_RELEASE_ORIGINAL_20261010.json",
+      "bytes": 17502,
+      "sha256": "6a685c8c41e8f473c1231cf36770ce9f671011abda5f4d8e297ba53d2485e38e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW022_0576_RELEASE_AND_NATIVE_SOURCE_ORIGINAL_20261010.json",
+      "bytes": 193092,
+      "sha256": "283b8c27215485fded80fea5df8e2793bd60b72ac1763c3fc285b94a5979f73c"
+    }
+  ],
+  "next": [
+    {
+      "paper": "KIVI",
+      "owner": "recurrent_lifecycle_ready_queue",
+      "stage": "raw022 actual0574 failed before arithmetic: original caller confuses layout capture and provenance capture source roles; new explicit-source caller/whole repair in progress",
+      "state": "REFERENCE_REPAIR_OFF_DEVICE",
+      "ready": false
+    },
+    {
+      "paper": "KIVI",
+      "owner": "kivi_model_successor",
+      "stage": "B1 matched1024 source003 awaiting corrected full64 actual prerequisite; C16/40 explicit-provider integration preparing, no model authority",
+      "state": "PREPARING_OFF_DEVICE",
+      "ready": false
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "sparse_attention_ready_queue",
+      "stage": "013 actual0577 failed Devices[] input dependency lock path; source014 minimal metadata closure repair preparing, no NPU started",
+      "state": "REFERENCE_REPAIR_OFF_DEVICE",
+      "ready": false
+    }
+  ],
+  "accepted_technique": false,
+  "new_E2E_result": false,
+  "new_task_result": false,
+  "git_push": "prior0562 authentication failure not resolved; no new push success claimed",
+  "local_copy_note": "During stopped-image source mirroring, basename utils.py collided; restored exact old core/sched/utils.py and saved v1/utils.py distinctly as v1_utils.py before delivery. No remote source changed."
+}

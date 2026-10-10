@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10 21:16:28 UTC",
+  "updated_at_utc": "2026-10-10T22:03:00Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -17,22 +17,22 @@
     {
       "paper": "KIVI",
       "owner": "recurrent_lifecycle_ready_queue",
-      "stage": "whole020/raw021 source-qualified phase/raw-cmdline consumer repair and actual same-image software; original full64 raw not yet run",
-      "state": "REPAIR_OFF_DEVICE",
+      "stage": "raw022 actual0574 failed before arithmetic: original caller confuses layout capture and provenance capture source roles; new explicit-source caller/whole repair in progress",
+      "state": "REFERENCE_REPAIR_OFF_DEVICE",
       "ready": false
     },
     {
       "paper": "KIVI",
       "owner": "kivi_model_successor",
-      "stage": "matched OFF/ON fixed1024 002 common model/bootstrap; observer-OFF integer-field adaptation plus local54 pass; full independent numerical predecessor pending",
+      "stage": "B1 matched1024 source003 awaiting corrected full64 actual prerequisite; C16/40 explicit-provider integration preparing, no model authority",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     },
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "012 original native embedding provenance repair; cal004/writer bridge pending actual capture",
-      "state": "REPAIR_OFF_DEVICE",
+      "stage": "013 actual0577 failed Devices[] input dependency lock path; source014 minimal metadata closure repair preparing, no NPU started",
+      "state": "REFERENCE_REPAIR_OFF_DEVICE",
       "ready": false
     }
   ],
@@ -101,10 +101,10 @@
     "duration_ms": 649615,
     "release_operation": "exec-0000000000000555",
     "candidate_stopped_retained_utc": "2026-10-10T20:40:04.68071977Z",
-    "independent_producer_consumer": "0552 failed cwd metadata; new source repair pending; no numerical acceptance",
+    "independent_producer_consumer": "whole021 actual0569 source/ownership metadata PASS; raw022 actual0574 failed source-role check before complete arithmetic. Original018 capture remains valid scope.",
     "full_raw_numerical_pass": false
   },
-  "idle_cause": "No READY_NPU successor: KIVI independent actual raw adjudication incomplete; SKVQ real input adapter under repair. Do not retain device lease for CPU repair/Git.",
+  "idle_cause": "Actual preparation defects, not external occupation: raw022 wrong source role; SKVQ013 CPU lock points to unmounted011. Both exact owned Devices[] containers stopped-retained and independently checked. No ready device successor; do not claim zero idle.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -203,12 +203,19 @@
         "bytes": 14864,
         "sha256": "f65b59a351470b243cdc27d18b17a25a25881d9099e0c0f71a2b356e8d8aef0b"
       }
+    },
+    {
+      "operation": "exec-0000000000000564",
+      "scope": "whole020 metadata consumer",
+      "cause": "host archive path used as installed helper origin; actual N1 and all four workers prove exact /vllm-workspace path",
+      "classification": "REFERENCE_OR_TEST",
+      "NPU_started": false,
+      "repair": "whole021 actual original0548 producer replay passed0569; not math or performance"
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-000000000000055e",
-    "physical4_7": "noPID/AICore0; HBM2869/2866/2866/2862MiB; observed only, not future admission",
-    "memavailable_kib": 115414948,
+    "operation": "exec-0000000000000579",
+    "physical4_7": "no processes; exact own SKVQ CPU release verified; resource admission must be refreshed",
     "not_reusable_for_future_admission": true
   },
   "history_terminals": [
@@ -745,6 +752,44 @@
       "cause": "Actual named RPC install rejected exact TP-sharded QKV projection object before sample0; implementation/source representation seam, not numerical/paper verdict.",
       "release_operation": "exec-0000000000000535",
       "candidate_stopped_retained_utc": "2026-10-10T20:04:12.47593021Z"
+    },
+    {
+      "paper": "KIVI",
+      "stage": "raw022 CPU independent full64",
+      "operation": "exec-0000000000000574",
+      "exit_code": 1,
+      "duration_ms": 75119,
+      "classification": "REFERENCE_OR_TEST",
+      "first_fault": "consume_prefill exact unchanged critical sources; original_prefill.capture_source=a93894... from provenance, caller passes layout capture398cd5...",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW022_0574_FAILED_ORIGINAL_20261010.json",
+        "bytes": 12276,
+        "sha256": "ecf0dbbd89bd6873809488e274260e884e455c0e25d3d28c92e9e4ccc4a22410"
+      },
+      "own_released_operation": "exec-0000000000000576",
+      "numerical_pass": false,
+      "NPU_started": false
+    },
+    {
+      "paper": "SKVQ",
+      "stage": "013 same-image CPU inputs",
+      "operation": "exec-0000000000000577",
+      "exit_code": 1,
+      "duration_ms": 26892,
+      "classification": "ADAPTATION_IMPLEMENTATION",
+      "first_fault": "cpu_input_dependency_lock_ref points at011 path not mounted in013; actual input_dependency.lock rejects missing file before NPU",
+      "original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ013_0577_FAILED_ORIGINAL_20261010.json",
+        "bytes": 9384,
+        "sha256": "97cc041713b3579229da98e3bd00703c1b43645c4158f600d51ae63e67eac612"
+      },
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-013-main-20261010-001/HOST_RESULT.json",
+        "bytes": 20597,
+        "sha256": "5f9f006be05ae86e9445e6cc9123e693331af92c15cae62cbc4bfb475820511b"
+      },
+      "own_released_operation": "exec-0000000000000579",
+      "NPU_started": false
     }
   ],
   "scheduler_repair": {
@@ -755,17 +800,5 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
-  "current_off_device": {
-    "paper": "KIVI",
-    "stage": "retained018 full64 independent consumer repair",
-    "state": "REFERENCE_OR_TEST_REPAIR_NOT_NUMERICAL_PASS",
-    "failed_operation": "exec-000000000000055c",
-    "original": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_WHOLE019_055C_FAILED_ORIGINAL_20261010.json",
-      "bytes": 14864,
-      "sha256": "f65b59a351470b243cdc27d18b17a25a25881d9099e0c0f71a2b356e8d8aef0b"
-    },
-    "confirmed_cause": "Initial model-preflight73GiB observation replayed as post-create9GiB stage. Actual floor remains unchanged.",
-    "followup_diagnostic": "055f source-qualified phase replay reached namespace raw-cmdline predicate: all four named workers have observed hashes matching141 trailingNUL, while argv drops empty splits; source audit/repair pending."
-  }
+  "current_off_device": null
 }

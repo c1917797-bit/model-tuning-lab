@@ -1,3 +1,10 @@
+## 2026-10-10T22:03Z — two CPU preparation failures isolated; no live NPU stage
+
+- Read KIVI_RAW022_AND_SKVQ013_PREPARATION_FAILURES_20261010.json and SERIAL_DEVICE_STAGE_QUEUE_20261010.json. Whole021 metadata0569 and same-image1840570 passed, but raw022 actual0574 failed source-role checking before complete independent arithmetic. Preserve original018 NPU capture; do not repeat acquisition or weaken hashes. New explicit-source caller/whole repair is off-device.
+- SKVQ013 actual147/source141 and mount9TRAIN passed, but real same-image input entry0577 failed because metadata cpu_input_dependency_lock_ref still points at an unmounted011 path. No NPU created or numerical verdict. Source014 must bind and test actual metadata-consumer closure, not just file-count checks.
+- Independent0576/0579 prove both exact owned CPU containers stopped-retained/Pid0/noExec/noOOM/Devices[]. Current device owner=null, READY_DEVICE=0: actual preparation gap, not outside occupation or zero-idle success. Three preparers continue distinct reference, full-model and SKVQ repairs; MAIN admits first actually qualified successor.
+- Goal ACTIVE/UNMET, fixed cutoff1791788425 unchanged; NPU0–3 and external tasks untouched; HugeTLB32GiB authority SPENT. No new mathematical full64/E2E/task PASS. Existing Git authentication failure remains uncorrected; this local checkpoint is not a push or deployment success.
+
 ## 2026-10-10 21:16:28 UTC — SKVQ011 failed/released; KIVI actual receipt repair, no new model PASS
 
 - Original SKVQ0110556 terminated exit1/430.846s; all4 worker plugins installed but zero sample records. First fault is the root-forward input predicate; actual pinned pure-text runner can pass native inputs_embeds. Scope: current adaptation failure, not SKVQ quantization/performance rejection. Independent0559 proves both exact own CPU/TP4 stopped-retained, Pid0/noExec/noOOM, physical4–7 released; no external task stopped.

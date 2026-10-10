@@ -1,0 +1,93 @@
+{
+  "schema": "kivi.sameimage-consumer-software-entry/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/SOURCE_MANIFEST.json",
+    "bytes": 3780,
+    "sha256": "b8402c6c120b44c26688730867be50437e837425b4c203a3607c4249b80a9776"
+  },
+  "status": "FROZEN_PREPARATION_ONLY_SAMEIMAGE_UNRUN",
+  "command": [
+    "/usr/bin/taskset",
+    "-c",
+    "@MAIN_FRESH_ADMITTED_HOST_CPU@",
+    "/usr/bin/prlimit",
+    "--cpu=180:180",
+    "--as=536870912:unlimited",
+    "--",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/software_cpu8.py",
+    "--execute",
+    "--source-sha256",
+    "b8402c6c120b44c26688730867be50437e837425b4c203a3607c4249b80a9776",
+    "--host-cpu",
+    "@MAIN_FRESH_ADMITTED_HOST_CPU@",
+    "--output",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software184-main-same660-002"
+  ],
+  "default_OFF": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/software_cpu8.py"
+  ],
+  "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software184-main-same660-002",
+  "execution": "MAIN only. Literal admitted CPU replaces both placeholders; AW whole timeout >=270 seconds, no remote execution by preparer.",
+  "preconditions": [
+    "Deploy the three source files byte-exact; whole021/raw022 already deployed are immutable. Exact MOUNTS.json verifies 16 retained0548 original artifacts, six reviewed-deps aliases and three SKVQ008 source fixtures.",
+    "Fresh common ancestor/daemon/host CPU and ordinary memory/disk admission: host1+guest1=2 distinct CPUs, guest8GiB+host512MiB+reserve8GiB=16.5GiB, new40GiB disk floor/output32GiB. No overlap with SKVQ CPU7. SKVQ008 is only a software fixture, not a peer lease.",
+    "Existing same660 image and actual readonly checkpoint mount metadata; the wrapper loads no weights, starts no model and creates only cpu-preflight Devices=[] through original018 controller.",
+    "New output must not exist. Existing retained018 output/original terminal are read-only; no artifact replacement or NPU recapture."
+  ],
+  "mounts": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/MOUNTS.json",
+    "bytes": 8775,
+    "sha256": "25f4842a5c4154304807ad83a77c41da07ee1ab36bbdc5b75966c41ae861ae3a"
+  },
+  "resources": {
+    "Devices": [],
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "total_CPU": 2,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "total_RAM_bytes": 17716740096,
+    "new_disk_floor_bytes": 42949672960,
+    "whole_output_limit_bytes": 34359738368,
+    "phase_seconds_including_cleanup": 270,
+    "child_wall_seconds": 150,
+    "child_CPU_seconds": 120,
+    "child_AS_bytes": 536870912,
+    "cleanup_seconds": 90,
+    "standalone": true,
+    "NPU_idle_required": false,
+    "peer_lease": false,
+    "fixed_cutoff_epoch": 1791788425
+  },
+  "result": "Read new RESULT.json and its exact software_report/actual_child/owned/cleanup/observations. Require SOFTWARE184_AND_EXACT_CPU8_RELEASED, successful184, child rc0 and retained exact own Devices[] stop/Pid0/noExec/noOOM/errors[]. Keep whole original AW terminal; no fixture grants numerical/model/performance permission.",
+  "next": "After actual sameimage184 plus independent exact CPU release and fresh standalone admission, execute frozen raw022 ENTRY.commands.raw_standalone with explicit cwd=/opt/host/vnf/austinov/model-tuning-lab. Preserve its original whole terminal; then ENTRY.commands.consume_full64. Unchanged full64 math5400 inclusive90cleanup; no software result substitutes.",
+  "actual_producer_only_0569": {
+    "status": "MAIN reported actual PASS; not executed by preparer",
+    "output_name": "MAIN_PRODUCER_ONLY0548_001.json",
+    "bytes": 1657,
+    "sha256": "1f328ea441f89e8617f7646c7f277ddd0955ca5f732c73653f1c780375e732b2"
+  },
+  "permissions": {
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "raw_mathematics_checked": false
+  },
+  "fixed_cutoff_epoch": 1791788425,
+  "source_frozen": true,
+  "retained_failure": {
+    "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SOFTWARE184_056B_FAILED_ORIGINAL_20261010.json",
+    "operation": "exec-000000000000056b",
+    "exit_code": 1,
+    "duration_seconds": 43.619,
+    "scope": "MAIN reported179 successful plus5 MemoryError inside original256MiB child address-space; guest8GiB noOOM and exact CPU stop-retain errors[]. Original immutable; not numeric/paper failure."
+  },
+  "source_delta": "Only wrapper root identity and literal guest child RLIMIT_AS256MiB→512MiB. MOUNTS byte exact v001. Whole021/raw022/all184/guest8GiB/host512MiB/phase270 including90cleanup/child150/CPU120 unchanged. No RSS/VMS hook added or test instrumentation."
+}

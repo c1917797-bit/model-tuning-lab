@@ -1,0 +1,44 @@
+{
+  "schema": "paper-portfolio.causal-repair/v1",
+  "time_utc": "2026-10-10 21:39:00 UTC",
+  "classification": "REFERENCE_OR_TEST",
+  "decision": "REPAIR",
+  "causal_confidence": "proved",
+  "failure": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_WHOLE020_0564_FAILED_ORIGINAL_20261010.json",
+    "bytes": 14886,
+    "sha256": "52d0beb734a179880c673abd2ffd28c731dfd241d7dac47c16b4ffa10c412576"
+  },
+  "recovery": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_WHOLE021_0569_ORIGINAL_20261010.json",
+    "bytes": 6084,
+    "sha256": "58c8e15e36dd7e5d0820da2b2fc2f7c09cfc962c6c8d1378b28bf7ccd429f75c"
+  },
+  "proof": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/MAIN_PRODUCER_ONLY0548_001.json",
+    "bytes": 1657,
+    "sha256": "1f328ea441f89e8617f7646c7f277ddd0955ca5f732c73653f1c780375e732b2"
+  },
+  "change": "Differentiate exact installed helper origin from byte-identical host archive; all source/rank/resource/cleanup checks retained.",
+  "unrun": [
+    "raw022 same-image184",
+    "full64 independent mathematical consumption",
+    "fixed1024 matched E2E",
+    "three formal pairs",
+    "LongBench-v2",
+    "GSM8K"
+  ],
+  "skvq": {
+    "original_observation": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-011-main-20261010-001/OWNED_NPU_OBSERVATION-1791665614952592140.json",
+      "bytes": 6896,
+      "sha256": "92c76325d28dfa8e51343c4f88f0053736a57b6ec3715cc19c6724adf1a11d47"
+    },
+    "finding": "single trailing NUL reconstruction refuted by all4 actual hashes matching138 trailingNUL; 013 preparing real raw-before/after identity, not fabricating old raw"
+  },
+  "NPU_started_this_stage": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "cutoff_epoch": 1791788425,
+  "push_status": "prior0562 authentication failure unresolved; new checkpoint not yet published"
+}

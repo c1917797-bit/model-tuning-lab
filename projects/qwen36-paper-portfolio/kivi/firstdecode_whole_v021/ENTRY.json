@@ -1,0 +1,351 @@
+{
+  "schema": "kivi.actual-firstdecode-whole-entry-contract/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/SOURCE_MANIFEST.json",
+    "sha256": "374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051",
+    "bytes": 13132
+  },
+  "local_source": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-driver-origin-v021-20261011/SOURCE_MANIFEST.json",
+    "sha256": "374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051",
+    "bytes": 13132
+  },
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "files": {
+    "test_driver_consumer.py": {
+      "bytes": 18464,
+      "sha256": "78f9e217daf645e2736f15d5c290141dc9da7835fc9be55f8c5ebdd842ed7d02"
+    },
+    "main.py": {
+      "bytes": 5770,
+      "sha256": "22a49fce13a0eae8d9fe7dd5c98b8586c9c3f2710fcffe8308a77103e28c85ab"
+    },
+    "test_explicit_consumer.py": {
+      "bytes": 12007,
+      "sha256": "42e3f90f178fe2f1bcef0f14b8d041910142e4583d158b95f8a75d4003cbf523"
+    },
+    "consume_whole.py": {
+      "bytes": 53872,
+      "sha256": "f1d812fa070707cf59422e80a97ec0184962d61a844ea0244881348522c610d2"
+    },
+    "test_whole.py": {
+      "bytes": 57505,
+      "sha256": "54078315dac7e74f69a6c9f562409396a2a4c3999851bfe0f86c70e4a0c72cc0"
+    },
+    "raw_cpu8.py": {
+      "bytes": 5284,
+      "sha256": "51f8c80ba3ba0a02200b415cb8aabee6f33e331d9327b563f9f7cec36b5c2f73"
+    }
+  },
+  "frozen": true,
+  "tests": 115,
+  "local_software": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-driver-origin-v021-20261011/SOFTWARE115_LOCAL_001.json",
+    "bytes": 591,
+    "sha256": "bf055acd7cb4e4a550956bcb7f3b0df8e331fa6fb7fc0c3856cc79a9cc4b59e1",
+    "tests": 115,
+    "elapsed_seconds": 13.652
+  },
+  "source_diff": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-driver-origin-v021-20261011/SOURCE_DIFF.patch",
+  "changes": [
+    "Only source-qualified installed helper origin separates actual same660 workspace origin from host dependency/archive paths. 2090/f94d, exactRef3, all4 rank/N1/worker/source/recipe/PID identity checks remain.",
+    "Original111 regressions retained;4new exact CANARY/RECIPE/namespace/all4 worker artifact regressions. Full115 localPASS only software.",
+    "No producer018/0548 originals/mathematical kernel/raw consume/CANN/budget/clock/source changed."
+  ],
+  "old_whole018_preserved": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-hbm-budget-v018-20261010/SOURCE_MANIFEST.json",
+    "bytes": 7324,
+    "sha256": "bfc8323b16a416709ec7082c9fe1c6c056b438595ddddfde91bb810aa3b4e779",
+    "modified": false
+  },
+  "old_0552": "Original failed exactcwd predicate receipt preserved by MAIN; this source does not change its bytes or outcome.",
+  "actual0548": {
+    "terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+      "bytes": 8686,
+      "sha256": "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370"
+    },
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+      "bytes": 1090213,
+      "sha256": "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4"
+    },
+    "record_cwd": null,
+    "status": "RAW_CAPTURED_PENDING_INDEPENDENT_WHOLE_CONSUMPTION",
+    "exit_code": 0,
+    "duration_ms": 649615,
+    "not_independent_math_pass": true
+  },
+  "commands": {
+    "default_OFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/main.py"
+    ],
+    "actual_producer_only0548": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "command": "/usr/bin/prlimit",
+      "args": [
+        "--cpu=120:120",
+        "--as=536870912:536870912",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "-c",
+        "import argparse,hashlib,json,importlib.util,sys\nfrom pathlib import Path\nroot=Path(\"/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011\")\nmf=root/\"SOURCE_MANIFEST.json\";wire=mf.read_bytes()\nassert len(wire)==13132 and hashlib.sha256(wire).hexdigest()==\"374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051\"\nm=json.loads(wire)\nfor name,row in m[\"files\"].items():\n b=(root/name).read_bytes()\n assert len(b)==row[\"bytes\"] and hashlib.sha256(b).hexdigest()==row[\"sha256\"]\n compile(b,str(root/name),\"exec\")\ndef load(path,name):\n spec=importlib.util.spec_from_file_location(name,path);mod=importlib.util.module_from_spec(spec);sys.modules[name]=mod;spec.loader.exec_module(mod);return mod\ncore=load(root/\"consume_whole.py\",\"_kivi_whole021_actual_producer\")\na=argparse.Namespace(result=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json\"),result_sha256=\"18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4\",terminal=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json\"),terminal_sha256=\"fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370\",peer=\"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",operation=\"exec-0000000000000548\",expected_command=\"/usr/bin/python3\",expected_args=\"[\\\"-I\\\",\\\"-B\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py\\\",\\\"--execute\\\",\\\"--source\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json\\\",\\\"--source-sha256\\\",\\\"a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4\\\",\\\"--component\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json\\\",\\\"--component-sha256\\\",\\\"d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d\\\",\\\"--model-manifest\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json\\\",\\\"--model-manifest-sha256\\\",\\\"11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c\\\",\\\"--software\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json\\\",\\\"--software-sha256\\\",\\\"9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e\\\",\\\"--software-stage\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json\\\",\\\"--software-stage-sha256\\\",\\\"efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8\\\",\\\"--output\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018\\\",\\\"--port\\\",\\\"8250\\\"]\")\nctx=core.Context(m[\"producer_source\"]);p=core.producer_only(a,ctx)\nentry=load(root/\"main.py\",\"_kivi_whole021_entry\")\nvalue=dict(schema=\"kivi.actual-firstdecode-whole-entry/v1\",source=core.ref(mf),successful=True,producer_original_replay=dict(result=p[\"rr\"],terminal=p[\"tr\"],actual_original_cwd=None,all4_cleanup=p[\"npu\"][\"cleanup\"],actual_all4_namespace=p[\"npu\"][\"all4_namespace\"],software_stage=a.result and p[\"r\"][\"software_stage\"]),independent_raw_consumer_required=True,model_ready=False,performance_ready=False,run_authority=False,whole176=False,NPU=False)\nprint(json.dumps(entry.publish(root/\"MAIN_PRODUCER_ONLY0548_001.json\",value)))\n"
+      ],
+      "wall_seconds": 150,
+      "CPU": 1,
+      "NPU": false,
+      "no_create_stop_or_probe": true
+    },
+    "software115": [
+      "@VERIFIED_PYTHON3_12_EXECUTABLE@",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/main.py",
+      "--execute",
+      "--mode",
+      "software",
+      "--source-manifest-sha256",
+      "374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051",
+      "--producer-archive",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018",
+      "--reviewed-deps",
+      "@EXACT_PREVIOUS_WHOLE018_REVIEWED_DEPS_DIRECTORY@",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/MAIN_SOFTWARE115_001.json"
+    ]
+  },
+  "cwd_evidence": {
+    "host_initial_module_path": "Path(__file__).resolve().parent",
+    "host_child_Popen": "3 actual Popen calls use cwd=c.ROOT explicitly",
+    "model_contract": "all bound input paths ordinary:absolute, full hash; ROOT explicit; BASE from absolute __file__",
+    "loader": "all own/dependency/role modules use source-qualified absolute paths",
+    "source_pins": "consume_whole.CWD_INDEPENDENT_PINS",
+    "allowed_null": "only explicit null, same current018 audited source, full literal direct absolute argv. Missing/foreign/relative/stale rejects.",
+    "future_raw": "Must explicitly set AW cwd=ROOT; raw command has no null waiver."
+  },
+  "raw_successor": {
+    "local_root": "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011",
+    "remote_root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/SOURCE_MANIFEST.json",
+      "bytes": 8543,
+      "sha256": "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376"
+    },
+    "math": "unchanged full64 originalconsume_raw",
+    "software": "184 local UNRUN at this ENTRY freeze; independent numericalraw MISSING"
+  },
+  "permissions": {
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "whole176": false,
+    "mixed": false,
+    "FULL": false,
+    "task": false
+  },
+  "preconditions": [
+    "Byte-exact deploy six ownpy/MF to newroot, never overwrite oldwhole020/raw021.",
+    "Actual retained018 original0548 and complete producer205/source190/CANN/N1/fullEngine/owner/release originals independently replayed with this currentsource; no NPU recapture.",
+    "CPU-only raw only after producer_only actualPASS and fresh commonresources/cutoff fit; no numerical/paper/model/performance authority from local115."
+  ],
+  "budgets": {
+    "local_software": {
+      "CPU": 1,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "memory_bytes": 268435456,
+      "execution": "single-thread stdlib local fixtures; no remote execution/Torch/Docker/NPU"
+    },
+    "whole_consumer": {
+      "CPU": 1,
+      "AS_RSS_bytes": 536870912,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "new_output_bytes": 1048576
+    },
+    "independent_raw_phase": {
+      "host_CPU": 1,
+      "guest_CPU": 1,
+      "host_AS_RSS_bytes": 536870912,
+      "guest_memory_bytes": 8589934592,
+      "Devices": [],
+      "phase_seconds_including_cleanup": 5400,
+      "cleanup_seconds": 90,
+      "original_child_limit_seconds": 5310,
+      "sourceCPUallocation_required": 7,
+      "ordinary_initial_floor_bytes": 78383153152,
+      "workspace_allowance_bytes": 34359738368,
+      "estimate": "19.758s measured for one long-context row;64*19.758=1264.512s is a projection, not measured all64 duration or permission to reduce coverage/timebox"
+    },
+    "producer_phase_seconds": 5400,
+    "producer_cleanup_seconds": 90,
+    "total_cutoff_epoch": 1791788425,
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "budget_reset": false
+  },
+  "deadline_reset": false,
+  "old_whole019_preserved": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-cwd-source-v019-20261010/SOURCE_MANIFEST.json",
+    "bytes": 8378,
+    "sha256": "9144dbc280797f1a9cae5452b369ebe841a489d35815db4e22b6e12951fe6ba7",
+    "modified": false
+  },
+  "phase_evidence": {
+    "source_pins": {
+      "host_run": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py",
+        "bytes": 21215,
+        "sha256": "86747f9c5f5d24f2f6418ce0613dc95f625d4459cba948823133371eca8ba986"
+      },
+      "ownership": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/ownership.py",
+        "bytes": 8789,
+        "sha256": "5b5c8d35adfb5b1c087ef9f521d779a72141abf5142889a7839eef10dbc34112"
+      }
+    },
+    "initial": "Only first exact OWNER.resource_ref and model-preflight =>73GiB; never arbitrary73-or9",
+    "live_labels": [
+      "all4-N1",
+      "all4-N1-finished",
+      "model-startup",
+      "kivi-real-all4-owner-bind",
+      "model-firstdecode",
+      "model-after-firstdecode"
+    ],
+    "live": "All these original default-initialFalse calls =>9GiB; CPU7/RSS/disk32/8.5/preserved same",
+    "fixtures": {
+      "FIRST_OBSERVATION": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/observation-1791664278790524020.json",
+        "bytes": 11530,
+        "sha256": "00f5041f558d4fe8dcb5ecf258bca8ef3f97b739dc1852d56c68c5978a59018b"
+      },
+      "engine": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/engine-1791664278788955340.json",
+        "bytes": 3140,
+        "sha256": "be1757c38ee007179517be04f10582b90c9924447e7734fd7c601fc9d4a05830"
+      },
+      "scan": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/OUTPUT-SCAN-1791664278748210610.json",
+        "bytes": 1275,
+        "sha256": "7d7689e6dc841eac5413eff903e903119d526ca150a80ceea835467a9306e6ca"
+      },
+      "namespace": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/KIVI_ALL4_NAMESPACE_RAW.json",
+        "bytes": 24074,
+        "sha256": "154a008968f09ecdadcf72aa1e74869c6236fd69d4cee28e3bac623a9eeb5c6e"
+      }
+    }
+  },
+  "title_representation": {
+    "source_gate_process": "full_matrix_host.py ab0296 original process_identity raw SHA + argv split(NUL)filter-empty",
+    "native_rename_sources": [
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/v1__executor__multiproc_executor.py",
+        "bytes": 42333,
+        "sha256": "a2837f18010a1f3539ea062b0824ae6dacaced0ec5813910a4b6edef7875af18"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/utils__system_utils.py",
+        "bytes": 10294,
+        "sha256": "26127b114d896f776da2d5ba90eac5a023704150f07b1703eb66252bedf7eaa6"
+      }
+    ],
+    "rule": "Exact rank native title only, trailing NUL2..4096 must reconstruct SHA equal both independent raw hashes. Ordinary/frontend remains singleNUL. Bound is supported representation notclaimed systemlimit.",
+    "actual": "all4 current0548 hashes equal title+141NUL; all PID/start/CID/NSpid/card/owner checks preserved"
+  },
+  "old_actual_failures": {
+    "whole019_055c": {
+      "primary": "incorrect initial=False on first model-preflight resource",
+      "original_preserved": true
+    },
+    "diagnostic_055d": {
+      "primary": "nonacceptance wrapper omitted actual delegated owner-bind label",
+      "original_preserved": true
+    },
+    "diagnostic_055f": {
+      "primary": "single-NUL reconstruction cannot represent actual native setproctitle trailing NUL padding",
+      "original_preserved": true
+    },
+    "local_draft_software107": {
+      "outputs": [
+        "SOFTWARE107_LOCAL_001.json",
+        "SOFTWARE107_LOCAL_002.json"
+      ],
+      "scope": "First sandbox permissions; second9Errors only Windows scanner Path fixture representation. Draft outputs preserved, not gates."
+    }
+  },
+  "preparer_remote_exec": 0,
+  "actual_deployed": false,
+  "actual_producer_replay": "UNRUN currentwhole021; oldwhole020 actual0564 failed and preserved",
+  "driver_origin": {
+    "path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/triton/triton_utils.py",
+    "bytes": 2090,
+    "sha256": "f94d81f163f0076e8243990dd687f7ec8d42ce1ed30d67eea3155bf1c3a073a4",
+    "schema": "Ref3 exact installed source origin, not host source alias",
+    "actual_canary": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/CANARY_N1.json",
+      "bytes": 127423,
+      "sha256": "0c2b63410a068f25ad92971aba5993421d26fcdb484b09145f7322325c6612f4"
+    },
+    "actual_worker_originals": {
+      "recipe": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/RECIPE.json",
+        "bytes": 5012,
+        "sha256": "9798f7557332382032756ad9001dfefea10292d088ab76533d504ba9fc614ed7"
+      },
+      "rows": [
+        {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r0.json",
+          "bytes": 2210,
+          "sha256": "2363cfd8aea8e4796c9edbd3e99402bd7f97c5fffaaee75f02573d9dfaae5b59"
+        },
+        {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r1.json",
+          "bytes": 2210,
+          "sha256": "cdd9bef6f46e8c963bf96bf2680e1aa25f09cc8415d74fc6f37099e069119fc8"
+        },
+        {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r2.json",
+          "bytes": 2210,
+          "sha256": "3b499aeed759d2d7c568f32467d5d266976b9b176ed632ca550aab47cb5a959c"
+        },
+        {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r3.json",
+          "bytes": 2210,
+          "sha256": "376b78a4f1b78081cfc1e373662a6cef0eb6bf21a8c4d33d5a673de1adbdd2df"
+        }
+      ]
+    },
+    "dependency_archive_still_required": true
+  },
+  "old_whole020_preserved": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-observation-phase-v020-20261011/SOURCE_MANIFEST.json",
+      "sha256": "fb0f3903483abecbafb5a71f00ec1d8910bc3462364a5fc5030bafc07122936d",
+      "bytes": 9840
+    },
+    "core_sha256": "caef68f74caa33ef023628212d410b22eaa665a1083a77fb24523619d5f826d7",
+    "actual0564": "FAILED helper path predicate,2.209s; no numerical pass",
+    "modified": false
+  }
+}

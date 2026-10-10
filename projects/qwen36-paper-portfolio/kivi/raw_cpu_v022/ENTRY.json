@@ -1,0 +1,527 @@
+{
+  "schema": "kivi.actual-firstdecode-raw-cpu-entry/v1",
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "actual_producer_model": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+    "bytes": 1090213,
+    "sha256": "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4"
+  },
+  "actual_raw64": null,
+  "permissions": {
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "mixed": false,
+    "FULL": false,
+    "whole176": false
+  },
+  "source_audit_counts": {
+    "producer_own": 37,
+    "producer_dependencies": 168,
+    "producer_total": 205,
+    "producer_software": 190
+  },
+  "software_runtime": "Full native-source-body fixtures require Python>=3.10; actual local3.12.14. Host control/default-OFF/consumer compile verified Python3.9. No Torch/NPU local execution.",
+  "pending": [
+    "Actual source-qualified whole021 replay of retained0548 is still UNRUN; prior whole0200564 FAILED and preserved. No current producer-only or numerical raw PASS.",
+    "Fresh standalone common2CPU/16.5GiB/disk40GiB lease plus full5400/5310+90 cutoff fit required; Devices=[] and no4-7 idle prerequisite.",
+    "Actual unchanged full64 mathematical raw/CPU8 original child/cleanup/whole-terminal are MISSING."
+  ],
+  "old_failures_retained": {
+    "root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-explicit-provider-v015-20261010",
+    "producer_source": "015/c02d954",
+    "actual_target_167": "FAILED26; no NPU",
+    "local83": "Python3.12 83PASS only fixtures; not015 admission",
+    "modified": false,
+    "producer016": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-016/SOURCE_MANIFEST.json",
+        "bytes": 98890,
+        "sha256": "79427342373ef63b11f5709d689c2ef6186afe09a94eaef53889b8f09cc3d0c7"
+      },
+      "actual_operation": "048d",
+      "outcome": "FAILED: exactdict guard rejects actual native defaultdict; not numerical failure; original preserved",
+      "modified": false
+    },
+    "producer017": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-017/SOURCE_MANIFEST.json",
+        "bytes": 102218,
+        "sha256": "17a1e214a80bea2dbe9e10fffdfe2b6fae81203c63b1c3410e6bf3f6b95bf19f"
+      },
+      "actual_operation": "049e",
+      "outcome": "FAILED HBM reserve; actual partial prefill/allocation only. No complete firstdecode/raw numeric.",
+      "modified": false
+    }
+  },
+  "default_OFF": {
+    "successful": true,
+    "python": "3.9",
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "local_environment_note": "Restricted-sandbox default-OFF Path.resolve returned WinError5 before entry; same frozen source rerun with authorized local access passed. No source guard weakened.",
+  "cutoff_epoch": 1791788425,
+  "budget_reset": false,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/SOURCE_MANIFEST.json",
+    "bytes": 8543,
+    "sha256": "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376"
+  },
+  "local_source": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/SOURCE_MANIFEST.json",
+    "bytes": 8543,
+    "sha256": "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376"
+  },
+  "base_whole": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/SOURCE_MANIFEST.json",
+    "bytes": 13132,
+    "sha256": "374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051"
+  },
+  "source_files": {
+    "raw_cpu8.py": {
+      "sha256": "c041a92ab20ff50db20d86b2c06ead93bceb774385c5023dbabf0ffa9dc78967",
+      "bytes": 5791
+    },
+    "delegate.py": {
+      "sha256": "878d5ff388760bb5f55ce403d93648a2b97423edcf774b9303a3fcc381322fc9",
+      "bytes": 1688
+    },
+    "cpu_raw_resources.py": {
+      "sha256": "caf97f968b00cf4ad6ea7db7726ddbb6c5773bf73770ef5e8d652e11c52fc11a",
+      "bytes": 28412
+    },
+    "main.py": {
+      "sha256": "f6cd90742a664c25ede4842a54544df35b1566d2ebbd5043a771bc35b2320b58",
+      "bytes": 8762
+    },
+    "test_cpu_raw.py": {
+      "sha256": "76e6cd162d82401944a7a1100d910c6f0485bcf7685f11935974bfe3ed76acd1",
+      "bytes": 35671
+    }
+  },
+  "commands": {
+    "default_OFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/main.py"
+    ],
+    "raw_standalone": [
+      "/usr/bin/taskset",
+      "-c",
+      "@ACTUAL_ADMITTED_HOST_CPU@",
+      "/usr/bin/prlimit",
+      "--cpu=5400:5400",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/main.py",
+      "--execute",
+      "--mode",
+      "raw",
+      "--source-manifest-sha256",
+      "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376",
+      "--result",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+      "--result-sha256",
+      "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4",
+      "--terminal",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+      "--terminal-sha256",
+      "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370",
+      "--peer",
+      "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "--operation",
+      "exec-0000000000000548",
+      "--expected-command",
+      "/usr/bin/python3",
+      "--expected-args",
+      "[\"-I\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py\",\"--execute\",\"--source\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json\",\"--source-sha256\",\"a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4\",\"--component\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json\",\"--component-sha256\",\"d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d\",\"--model-manifest\",\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json\",\"--model-manifest-sha256\",\"11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c\",\"--software\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json\",\"--software-sha256\",\"9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e\",\"--software-stage\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json\",\"--software-stage-sha256\",\"efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8\",\"--output\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018\",\"--port\",\"8250\"]",
+      "--raw-phase-output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v022-origin-standalone-001",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v022-origin-standalone-001/RAW_ENTRY_RESULT.json",
+      "--base-whole",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011",
+      "--cpu-only-raw",
+      "--joint-peer-plan",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/STANDALONE_PLAN.json",
+      "--raw-host-cpu",
+      "@ACTUAL_ADMITTED_HOST_CPU@"
+    ],
+    "consume_full64": [
+      "/usr/bin/taskset",
+      "-c",
+      "@ACTUAL_ADMITTED_HOST_CPU@",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=536870912:536870912",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/main.py",
+      "--execute",
+      "--mode",
+      "consume",
+      "--source-manifest-sha256",
+      "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376",
+      "--result",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+      "--result-sha256",
+      "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4",
+      "--terminal",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+      "--terminal-sha256",
+      "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370",
+      "--peer",
+      "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "--operation",
+      "exec-0000000000000548",
+      "--expected-command",
+      "/usr/bin/python3",
+      "--expected-args",
+      "[\"-I\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py\",\"--execute\",\"--source\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json\",\"--source-sha256\",\"a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4\",\"--component\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json\",\"--component-sha256\",\"d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d\",\"--model-manifest\",\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json\",\"--model-manifest-sha256\",\"11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c\",\"--software\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json\",\"--software-sha256\",\"9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e\",\"--software-stage\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json\",\"--software-stage-sha256\",\"efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8\",\"--output\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018\",\"--port\",\"8250\"]",
+      "--raw-result",
+      "@RAW_PACKET_CPU_PREFLIGHT_RAW_RESULT_PATH@",
+      "--raw-result-sha256",
+      "@ACTUAL_RAW_RESULT_SHA256@",
+      "--raw-terminal",
+      "@MAIN_ORIGINAL_RAW_WHOLE_TERMINAL_PATH@",
+      "--raw-terminal-sha256",
+      "@MAIN_ORIGINAL_RAW_WHOLE_TERMINAL_SHA256@",
+      "--raw-peer",
+      "@ACTUAL_RAW_DIRECT_PEER@",
+      "--raw-operation",
+      "@ACTUAL_RAW_MAIN_EXEC_HANDLE@",
+      "--raw-expected-command",
+      "@RAW_ORIGINAL_COMMAND@",
+      "--raw-expected-args",
+      "@RAW_ORIGINAL_LITERAL_JSON_ARGS@",
+      "--raw-wall-seconds",
+      "5400",
+      "--raw-owned",
+      "@RAW_PACKET_CPU_PREFLIGHT_OWNED_PATH@",
+      "--raw-child",
+      "@RAW_PACKET_CPU_PREFLIGHT_RAW_FULL64_CHILD_PATH@",
+      "--raw-cleanup",
+      "@RAW_PACKET_CPU_PREFLIGHT_CLEANUP_PATH@",
+      "--raw-owner-result",
+      "@RAW_PACKET_RAW_OWNER_RESULT_PATH@",
+      "--output",
+      "@NEW_NONOVERWRITING_EXISTING_PARENT_WHOLE_CONSUMER_RESULT_PATH@",
+      "--base-whole",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011"
+    ],
+    "original_raw_child": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/consume_raw.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4",
+      "--client-ref-json",
+      "@ACTUAL_SAME_CLIENT_REF3_DESCRIPTOR_JSON@",
+      "--output",
+      "@NEW_CPU_PREFLIGHT_RAW_RESULT_PATH@"
+    ],
+    "default_OFF_local": [
+      "C:/Users/Huawei/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+      "-I",
+      "-B",
+      "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/main.py"
+    ],
+    "software184": [
+      "/usr/bin/taskset",
+      "-c",
+      "@ACTUAL_ADMITTED_SOFTWARE_CPU@",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "@VERIFIED_PYTHON3_12_EXECUTABLE@",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/main.py",
+      "--execute",
+      "--mode",
+      "software",
+      "--source-manifest-sha256",
+      "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376",
+      "--base-whole",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011",
+      "--producer-archive",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018",
+      "--reviewed-deps",
+      "@ACTUAL_EXACT_REVIEWED_DEPS_DIRECTORY@",
+      "--peer-source-archive",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/MAIN_SOFTWARE184_001.json"
+    ],
+    "software184_local": [
+      "C:/Users/Huawei/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+      "-I",
+      "-B",
+      "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/main.py",
+      "--execute",
+      "--mode",
+      "software",
+      "--source-manifest-sha256",
+      "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376",
+      "--base-whole",
+      "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-driver-origin-v021-20261011",
+      "--producer-archive",
+      "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-hbm-budget-v018-20261010/bootstrap",
+      "--reviewed-deps",
+      "C:/Users/Huawei/AppData/Local/Temp/kivi-whole-consumer-reviewed-deps-20261010-001",
+      "--peer-source-archive",
+      "C:/Users/Huawei/AppData/Local/Temp/skvq-preprojection-current72h-20261010-008",
+      "--actual-archive",
+      "C:/Users/Huawei/AppData/Local/Temp/c162-kivi018-actual",
+      "--output",
+      "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/SOFTWARE184_LOCAL_NEXT_NONEXISTENT.json",
+      "--observation-archive",
+      "C:/Users/Huawei/AppData/Local/Temp/c164-kivi-producer-resource-fault"
+    ],
+    "sameimage_software184": [
+      "/usr/bin/taskset",
+      "-c",
+      "@ACTUAL_ADMITTED_SOFTWARE_CPU@",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/main.py",
+      "--execute",
+      "--mode",
+      "software",
+      "--source-manifest-sha256",
+      "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376",
+      "--base-whole",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011",
+      "--producer-archive",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018",
+      "--reviewed-deps",
+      "@ACTUAL_EXACT_REVIEWED_DEPS_DIRECTORY@",
+      "--peer-source-archive",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/MAIN_SOFTWARE184_001.json"
+    ]
+  },
+  "actual_local_software": {
+    "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/SOFTWARE184_LOCAL_001.json",
+    "bytes": 566,
+    "sha256": "716a20e906347590aa9211293aec413baf90bb6281d3390476c917df7ab7c551"
+  },
+  "actual_local_software_argv": [
+    "C:/Users/Huawei/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "-I",
+    "-B",
+    "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/main.py",
+    "--execute",
+    "--mode",
+    "software",
+    "--source-manifest-sha256",
+    "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376",
+    "--base-whole",
+    "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-driver-origin-v021-20261011",
+    "--producer-archive",
+    "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-hbm-budget-v018-20261010/bootstrap",
+    "--reviewed-deps",
+    "C:/Users/Huawei/AppData/Local/Temp/kivi-whole-consumer-reviewed-deps-20261010-001",
+    "--peer-source-archive",
+    "C:/Users/Huawei/AppData/Local/Temp/skvq-preprojection-current72h-20261010-008",
+    "--actual-archive",
+    "C:/Users/Huawei/AppData/Local/Temp/c162-kivi018-actual",
+    "--output",
+    "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-driver-origin-v022-20261011/SOFTWARE184_LOCAL_001.json",
+    "--observation-archive",
+    "C:/Users/Huawei/AppData/Local/Temp/c164-kivi-producer-resource-fault"
+  ],
+  "tests": 184,
+  "test_elapsed_seconds": 14.817,
+  "budgets": {
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "Devices": [],
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "child_seconds": 5310,
+    "workspace_bytes": 34359738368,
+    "standalone_CPU": 2,
+    "standalone_RAM_full_declared_bytes": 17716740096,
+    "standalone_new_disk_floor_bytes": 42949672960,
+    "running_peer_CPU": 7,
+    "running_joint_CPU": 9,
+    "running_joint_RAM_full_declared_bytes": 95563022336,
+    "running_new_disk_floor_bytes": 386547056640,
+    "stopped_peer_remaining_CPU": 3,
+    "stopped_joint_CPU": 5,
+    "stopped_joint_RAM_full_declared_bytes": 26843545600,
+    "software": {
+      "CPU": 1,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "memory_bytes": 268435456
+    },
+    "cutoff_epoch": 1791788425,
+    "clock_reset": false
+  },
+  "scope": "Unchanged full64 CPU raw after exact actual current018/0548 producer/source/release replay. Exact whole021 source helper-origin repair incorporated; oldwhole0200564 failure preserved. Source184 software is not model/raw/performance/concurrency PASS.",
+  "source_delta": [
+    "Only delegate and cleanup AST two core SHA pins changed from caef68 to f1d812; no math/oracle/coverage/resource implementation changes.",
+    "184=whole021115+unchanged69 resources. Both real original115 and69 full suites executed locally.",
+    "main.py, raw_cpu8.py, test_cpu_raw.py remain byte-exact raw021. Complete original consume_raw5310+90/5400 and8GiB namespace/cgroup checks unchanged.",
+    "whole021 current018 actual N1/worker installed-origin proof is exact /vllm-workspace path2090/f94d, not host snapshot/cache. All4 PID/source/recipe/N1/corecounts/ND layout gates preserved."
+  ],
+  "deployment": {
+    "proposed_new_root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011",
+    "actual_deployed": false,
+    "files_required": [
+      "delegate.py",
+      "test_cpu_raw.py",
+      "raw_cpu8.py",
+      "cpu_raw_resources.py",
+      "main.py",
+      "SOURCE_MANIFEST.json",
+      "STANDALONE_PLAN.json",
+      "ENTRY.json"
+    ],
+    "method": "Byte-exact Add newraw0225py+MF+plan+ENTRY, plus exactwhole0216py+MF; oldsource untouched."
+  },
+  "standalone_plan": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/STANDALONE_PLAN.json",
+    "content": {
+      "mode": "standalone"
+    }
+  },
+  "reviewed_peer_profile": {
+    "schema": "kivi.reviewed-skvq-peer-profile/v1",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 48234,
+      "sha256": "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c"
+    },
+    "resources_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/resources.py",
+      "bytes": 6404,
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c"
+    },
+    "host_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py",
+      "bytes": 25186,
+      "sha256": "6067bb0a327b1dded44efda7415429db98262668bfcf41b1cc37f41afc60542e"
+    },
+    "owner": "skvq-current72h-preprojection-v1-008",
+    "phase": "tp4-capture",
+    "guest_memory_bytes": 68719476736,
+    "guest_CPU": 4,
+    "total_CPU": 7,
+    "guest_future_workspace_bytes": 343597383680
+  },
+  "peer_coverage": {
+    "reviewed_source": "only SKVQ008",
+    "SKVQ010": "NOT COVERED; no auto rebind or peer lease permission",
+    "actual_parallel": "UNRUN",
+    "standalone": "legal with fresh own/common resource admission; never requires4-7 idle",
+    "SKVQ011": "NOT COVERED; actual0556 stopped/retained and released according to MAIN, not a concurrent lease."
+  },
+  "dependency_archive": [
+    {
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+      "local_file": "protected_contract.py",
+      "bytes": 9234,
+      "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+    },
+    {
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+      "local_file": "protected_lifecycle.py",
+      "bytes": 6865,
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+      "local_file": "output_budget.py",
+      "bytes": 16355,
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "original_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py",
+      "local_file": "h8_host_run.py",
+      "bytes": 40202,
+      "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+    },
+    {
+      "original_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "local_file": "full_matrix_host.py",
+      "bytes": 33743,
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    {
+      "original_path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "local_file": "saved_step_host_run.py",
+      "bytes": 16517,
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    }
+  ],
+  "requirements": [
+    "Actual018 full190 software stage/report plus complete0548 original capture/release replay through currentsource whole021; old0564 refusal preserved. Full64 math MISSING.",
+    "Actual fresh common resource/CPU leases must be held by MAIN across admission and stage execution. This is bounded initial/final safety evidence, not proof of global continuous resource availability.",
+    "For peer mode, actual SKVQ008 OWNED/FRESH_RESOURCES and current exact source owner/CID/isolation plus a newly authorized joint MAIN lease. Current008 serial packet has no peer CPU lease: this source cannot retroactively change its running definition. Source review is not a SKVQ capture PASS. All current full closure files must be accessible on host.",
+    "If common quota only7, running9 queues; exact peer container stop permits conservative5 re-evaluation, not arbitrary host/reserve credit. No NEXT reserve borrowing.",
+    "Original raw whole terminal must be archived byte-exact and independently consumed together with exact CPU8 raw cleanup/source/child/64 outputs. No model/performance/final-task promotion."
+  ],
+  "workflow": [
+    "MAIN strict currentwhole021 producer_only replay of retained0548 first; only actual success can admit raw. Do not rerun model.",
+    "After explicit new fresh standalone lease and fullcutoff fit, use commands.raw_standalone exact argv and new output.",
+    "Unchanged all64 original mathematical raw consumer, Devices=[] CPU8, host1+guest1 and reserve8GiB; no NPU idle dependency.",
+    "Archive original raw whole terminal byte-exact; execute current consume_full64 with its actual refs and exact original argv.",
+    "Never borrow SKVQ010/011 or unreviewed peer; only old reviewed008 profile exists and current use is standalone."
+  ],
+  "sameimage_software": {
+    "Devices": [],
+    "CPU": 1,
+    "memory_bytes": 268435456,
+    "CPU_seconds": 120,
+    "wall_seconds": 150,
+    "actual_run": "UNRUN",
+    "source_mounts": "Raw0225py+MF/whole0216py+MF,018 full closure,6reviewed-deps aliases,strictSKVQ0083file fixture pins,6actual0548/create originals plus firstobservation/engine/scan/namespace/CANARY/RECIPE/4worker proofs RO; new own output RW. No NPU/torch load.",
+    "expected": "184=115+69; actual retained original fixtures are read-only, not numerical admission."
+  },
+  "actual_producer_terminal": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+    "bytes": 8686,
+    "sha256": "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370"
+  },
+  "future_original_policy": {
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+    "raw_full5400_no_sampling": true,
+    "expected_args_full_literal_source": true,
+    "no_fabricated_terminal": true
+  },
+  "deadline_reset": false,
+  "frozen": true,
+  "original_failures": {
+    "whole019_055c": "wrong initial phase, preserved",
+    "whole020_0564": "actual installed helper origin predicate failed, preserved",
+    "NPU_recapture_authorized": false
+  }
+}

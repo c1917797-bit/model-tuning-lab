@@ -1,0 +1,183 @@
+{
+  "schema": "kivi.reviewed-consumer-software-mounts/v1",
+  "whole_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/SOURCE_MANIFEST.json",
+    "bytes": 13132,
+    "sha256": "374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051"
+  },
+  "raw_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/SOURCE_MANIFEST.json",
+    "bytes": 8543,
+    "sha256": "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376"
+  },
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "software_tests": 184,
+  "source_roots": [
+    "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011",
+    "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011"
+  ],
+  "reviewed_aliases": [
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+        "bytes": 9234,
+        "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+      },
+      "destination": "/kivi-reviewed-deps/protected_contract.py",
+      "RW": false
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+        "bytes": 6865,
+        "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+      },
+      "destination": "/kivi-reviewed-deps/protected_lifecycle.py",
+      "RW": false
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+        "bytes": 16355,
+        "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+      },
+      "destination": "/kivi-reviewed-deps/output_budget.py",
+      "RW": false
+    },
+    {
+      "source": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py",
+        "bytes": 40202,
+        "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+      },
+      "destination": "/kivi-reviewed-deps/h8_host_run.py",
+      "RW": false
+    },
+    {
+      "source": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+        "bytes": 33743,
+        "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+      },
+      "destination": "/kivi-reviewed-deps/full_matrix_host.py",
+      "RW": false
+    },
+    {
+      "source": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+        "bytes": 16517,
+        "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+      },
+      "destination": "/kivi-reviewed-deps/saved_step_host_run.py",
+      "RW": false
+    }
+  ],
+  "reviewed_peer": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 48234,
+      "sha256": "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/resources.py",
+      "bytes": 6404,
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py",
+      "bytes": 25186,
+      "sha256": "6067bb0a327b1dded44efda7415429db98262668bfcf41b1cc37f41afc60542e"
+    }
+  ],
+  "actual_artifacts": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+      "bytes": 8686,
+      "sha256": "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+      "bytes": 1090213,
+      "sha256": "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/cpu-preflight/OWNED.json",
+      "bytes": 45873,
+      "sha256": "4af89afb4125c56d08028e5b9f19cd2e36d47a5e9b80e6cd8d18f33ad121d6dc"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/cpu-preflight/create-1791664212372375240.json",
+      "bytes": 100269,
+      "sha256": "f8559fa15ac93d0d0f5f97d7c27fbc457a9ed7ea68b918e6855c1103418dc035"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/OWNED.json",
+      "bytes": 45857,
+      "sha256": "c2e67560bbd4d0ea89f29de50f8c2ea81df3ae2d5f9041c8b14e5bb32feca20d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/create-1791664281154148680.json",
+      "bytes": 100917,
+      "sha256": "2a9262bf9efc53e19002073e7034183e77e20fca2486394b0f3b1b576ed15ff5"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/observation-1791664278790524020.json",
+      "bytes": 11530,
+      "sha256": "00f5041f558d4fe8dcb5ecf258bca8ef3f97b739dc1852d56c68c5978a59018b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/engine-1791664278788955340.json",
+      "bytes": 3140,
+      "sha256": "be1757c38ee007179517be04f10582b90c9924447e7734fd7c601fc9d4a05830"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/OUTPUT-SCAN-1791664278748210610.json",
+      "bytes": 1275,
+      "sha256": "7d7689e6dc841eac5413eff903e903119d526ca150a80ceea835467a9306e6ca"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/KIVI_ALL4_NAMESPACE_RAW.json",
+      "bytes": 24074,
+      "sha256": "154a008968f09ecdadcf72aa1e74869c6236fd69d4cee28e3bac623a9eeb5c6e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/CANARY_N1.json",
+      "bytes": 127423,
+      "sha256": "0c2b63410a068f25ad92971aba5993421d26fcdb484b09145f7322325c6612f4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/RECIPE.json",
+      "bytes": 5012,
+      "sha256": "9798f7557332382032756ad9001dfefea10292d088ab76533d504ba9fc614ed7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r0.json",
+      "bytes": 2210,
+      "sha256": "2363cfd8aea8e4796c9edbd3e99402bd7f97c5fffaaee75f02573d9dfaae5b59"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r1.json",
+      "bytes": 2210,
+      "sha256": "cdd9bef6f46e8c963bf96bf2680e1aa25f09cc8415d74fc6f37099e069119fc8"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r2.json",
+      "bytes": 2210,
+      "sha256": "3b499aeed759d2d7c568f32467d5d266976b9b176ed632ca550aab47cb5a959c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/DRIVER-PROPERTIES-r3.json",
+      "bytes": 2210,
+      "sha256": "376b78a4f1b78081cfc1e373662a6cef0eb6bf21a8c4d33d5a673de1adbdd2df"
+    }
+  ],
+  "artifact_scope": "Exact readonly original0548/result/two OWNED/two create + initial/engine/scan/namespace + actualCANARY/recipe/all4 driver proofs. These are software fixtures, not current producer/raw acceptance.",
+  "Devices": [],
+  "default_enabled": false,
+  "NPU": false,
+  "math_unchanged": true
+}

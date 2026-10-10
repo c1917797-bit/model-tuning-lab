@@ -1,0 +1,80 @@
+{
+  "schema": "kivi.sameimage-consumer-software-sources/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011",
+  "default_enabled": false,
+  "files": {
+    "software_cpu8.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/software_cpu8.py",
+      "bytes": 9273,
+      "sha256": "0560c087374d9ff8250a8337fdff147501d45d3de06d684aed8a6c2cb8134cc6"
+    },
+    "MOUNTS.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/MOUNTS.json",
+      "bytes": 8775,
+      "sha256": "25f4842a5c4154304807ad83a77c41da07ee1ab36bbdc5b75966c41ae861ae3a"
+    }
+  },
+  "mounts": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-software-v002-20261011/MOUNTS.json",
+    "bytes": 8775,
+    "sha256": "25f4842a5c4154304807ad83a77c41da07ee1ab36bbdc5b75966c41ae861ae3a"
+  },
+  "whole_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-driver-origin-v021-20261011/SOURCE_MANIFEST.json",
+    "bytes": 13132,
+    "sha256": "374b70be5998007c85ddb5a838541f05464ea3155fa17472e0949e55faa17051"
+  },
+  "raw_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-driver-origin-v022-20261011/SOURCE_MANIFEST.json",
+    "bytes": 8543,
+    "sha256": "dd2640b6df666dae02ec7a6e1fd562ad285b52c1b61aeb40cd7db7366ace5376"
+  },
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "borrowed_implementation": "Exact source-qualified current018 model_contract/safety_host/host_run and raw022 CPU-only resource install; no Controller body copy, no mathematical reference implementation.",
+  "resources": {
+    "Devices": [],
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "total_CPU": 2,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "total_RAM_bytes": 17716740096,
+    "new_disk_floor_bytes": 42949672960,
+    "whole_output_limit_bytes": 34359738368,
+    "phase_seconds_including_cleanup": 270,
+    "child_wall_seconds": 150,
+    "child_CPU_seconds": 120,
+    "child_AS_bytes": 536870912,
+    "cleanup_seconds": 90,
+    "standalone": true,
+    "NPU_idle_required": false,
+    "peer_lease": false,
+    "fixed_cutoff_epoch": 1791788425
+  },
+  "original_implementation_pins": {
+    "host_run": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py",
+      "bytes": 21215,
+      "sha256": "86747f9c5f5d24f2f6418ce0613dc95f625d4459cba948823133371eca8ba986"
+    },
+    "safety_host": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/safety_host.py",
+      "bytes": 21569,
+      "sha256": "2f6d876a3363840aabfa7ee09db1b2b01700ba8bce17fd3fab040464af2d6408"
+    }
+  },
+  "actual_state": "PREPARATION_ONLY_UNRUN",
+  "permissions": {
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "raw_mathematics_checked": false
+  },
+  "scope": "Same-image Devices[] full184 software fixture/source/representation regression only. Exact retained018 origins are fixtures, no model or numeric/raw acceptance. Actual MAIN must fresh-admit standalone2CPU16.5GiB40GiB, no overlap assumed. Independent v002 only raises genuine software child address-space cap256MiB→512MiB inside unchanged8GiB guest budget; exact184/math/270 inclusive90 remain."
+}

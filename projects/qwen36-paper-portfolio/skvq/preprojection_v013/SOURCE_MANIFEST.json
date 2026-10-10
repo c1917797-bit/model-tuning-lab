@@ -1,0 +1,1715 @@
+{
+  "schema": "skvq.current72h.preprojection.sources/v1",
+  "default_enabled": false,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013",
+  "files": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/capture_current.py",
+      "bytes": 9450,
+      "sha256": "29502ea9be5e944fcc856152feda3a73aabb2f0a7bf0536ae26ca1a0449d2a69"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_capture_current.py",
+      "bytes": 10564,
+      "sha256": "1512fc520897cb30f2f8fc48f72d4e57ad8e21a77c6fcfa9e3cb7ce1eb4d0fa1"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_host.py",
+      "bytes": 15691,
+      "sha256": "6c53963900c7f313800484148ae0c50d8de824f11064b917970cdfd8c7152cf9"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_loader_current.py",
+      "bytes": 3824,
+      "sha256": "c261bd7254efd4cb6baee3816fd0cd96aedd908b06cce3f1fd1b13132b6f357a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_projection_current.py",
+      "bytes": 6870,
+      "sha256": "da586f9861dd0cbfed30a098ef334b3abec11c6c453606dfa811dd1bdf9d6a09"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_stage.py",
+      "bytes": 6267,
+      "sha256": "c9538d88c3347c6aafe28d07d1efbf15979b4e3bbf8d02d1db7a938e0a93d5b4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_text_input_current.py",
+      "bytes": 6180,
+      "sha256": "d45235a047e017196cfad9a8d15f2da82a549206987be32e8302dccd4d626307"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/consume_whole.py",
+      "bytes": 3029,
+      "sha256": "6784108006c973a394c1846e7d8d4dd59ebcb629a2e7b65101b4747216dfeea4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/current_contract.py",
+      "bytes": 4244,
+      "sha256": "a9c5c20793adecec26c0c74c8a2e6d454c4d719833318d52ad7dae729cf6d114"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/engine_config.py",
+      "bytes": 10233,
+      "sha256": "e7ba30adeef86ee0c7d748ac3d4f9cad4952405d9e6f2785a0fdb2c76d88be88"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/INPUT_DEPENDENCY_LOCK.json",
+      "bytes": 202291,
+      "sha256": "3b10e8e80338ec7ceaebe4a0dcf90f3b09e44f969e80840a602641e6c2bc79bb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/input_dependency.py",
+      "bytes": 13174,
+      "sha256": "0762495b6add820d03fe771a55fd6994e352ee253e6450e6a494e8cfa63b2abd"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/input_entry.py",
+      "bytes": 1296,
+      "sha256": "0834a70f5df452385ab99e7d44c8cdfb987a8e13c3567ebf0158c8e0a310e38b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/inside_cpu.py",
+      "bytes": 4765,
+      "sha256": "841543035cf26c1009dce24bbf8a27a71e258d5e15dfd3f313871eb74d703ba3"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/loader_bridge_current.py",
+      "bytes": 2537,
+      "sha256": "9c11826bac3fc77616a5505945af44b292f3699041d42ef82067be4d1fea5a48"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/loader_order_current.py",
+      "bytes": 5446,
+      "sha256": "9b9e0a2daab95b9e9112afc4e69e107fb252799b93596604ce660104f270e1fb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/MAIN_HOST.py",
+      "bytes": 25350,
+      "sha256": "02be07e99b3322ebd4e0214315e677c4d8c1cff4810d07266c026ebf9345e386"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/model_kwargs.py",
+      "bytes": 756,
+      "sha256": "dd798d5e20e8f11c42468c3d1a899d0059938d86b52b02a0511ead5bad37c91a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/mount_preflight.py",
+      "bytes": 9233,
+      "sha256": "ac9564793b895e9d371a4e8e88db85bc211e75c15646ea8bfcc24f1d9b1be87f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/n1_check.py",
+      "bytes": 5666,
+      "sha256": "b7feecf9d0ddc68b279cfadfa6618e2ef4584df96487ec650f7a805495c7c89b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/n1_format.py",
+      "bytes": 5581,
+      "sha256": "81281da0532d29ef0984ec2dea8e649e0e5c4e31220059fcab91fe11eb11582a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/order_oracle_current.py",
+      "bytes": 10644,
+      "sha256": "b080b09ce52a0fd51b3e99ed7eb40b201888c35d6c5d84b2950176151c789924"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/physical_hbm.py",
+      "bytes": 2357,
+      "sha256": "82499711a2111a7fbc0d466bffe3faadf92e88b9e0bf544d1611d33da7d3b314"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/post_rope_current.py",
+      "bytes": 7707,
+      "sha256": "96bb293132727ef1c8662bd00e2794af9df894a8d66432ff4d156fc41f369295"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/process_cmdline.py",
+      "bytes": 4083,
+      "sha256": "289d0e3b568c2f56b81e8cf585e1a1d84ce24a9672b7468e69db11b55bc5834b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/projection_tap_current.py",
+      "bytes": 8294,
+      "sha256": "7eae842fda175440b979d12f6c67738c924ce2dd7fe40501fb9b3748172368bb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/qkv_projection_current.py",
+      "bytes": 10802,
+      "sha256": "5c02c1c1a14bbf258e1a9886fbc545214b2e1c73a00ad54f2526c894853ca561"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/resources.py",
+      "bytes": 6404,
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/rpc_extension.py",
+      "bytes": 11596,
+      "sha256": "ac224a478a3dd93a9c629986e5c81425ace3914e6aedae4d4dd975f997d84c73"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/runtime_capture_current.py",
+      "bytes": 14762,
+      "sha256": "ea31f67ebbc19231c38cfff7a979c23d18872cc1b589646423110ba6556692e6"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/software_check.py",
+      "bytes": 3033,
+      "sha256": "7374aaa2f0c38ec442b851388aaf28d6bfbba1315128d97a7cbca43ef72ba4d1"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/SOFTWARE_TESTS_15.py",
+      "bytes": 5677,
+      "sha256": "4305257b942e8f82a32d800b1d5923c356f89a5572b5e125d80cf1129f3d9c4e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/spawn_startup.py",
+      "bytes": 7832,
+      "sha256": "e595db044177118f747762521067eb535d5e52f9f3e0647e4187f49be7ae4831"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_aggregate.py",
+      "bytes": 46674,
+      "sha256": "9f6537b7ac6df4d3aa108516ca2f98d51bfa199b0756243cfa488c9f170cb184"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_input_dependency.py",
+      "bytes": 13461,
+      "sha256": "0c791db7cd79c05f7fee3bebea3d607ee180459bdf4e814e9af3c4785e4bc725"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_n1_format.py",
+      "bytes": 7855,
+      "sha256": "38e29b4c7d4bb970f547661bf27c9c9c260f355ac208cee8bea1fb033b6a0a4d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_native_qkv.py",
+      "bytes": 16553,
+      "sha256": "eae6aa989c969c7859633a0dabfd6c922444bc691c447bf68550399a19574153"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_native_tp.py",
+      "bytes": 12201,
+      "sha256": "4bb90db95d379da6374c39a31a46d394d821151bd0b1fe44d7429b3fa2691a32"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_process_cmdline.py",
+      "bytes": 11066,
+      "sha256": "c4f861161e58e5c7be8007de163db375999735dae5d12f90301dcbc14c4c4ff0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_rpc_extension.py",
+      "bytes": 13496,
+      "sha256": "13f393f52c1bfcbf61e476cf48bfebb4447c32494dc74218b5c0bd2f87268dd3"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_spawn_startup.py",
+      "bytes": 13754,
+      "sha256": "5b1ca70d7996622b8af78998af8ab0d5d83aac227fc685ab94c1ba698be17546"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/test_text_input.py",
+      "bytes": 19644,
+      "sha256": "3694a64f52647613df5221dbac620fb46e6a758e3a97928b32e4ab609b7fc51b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/text_input_current.py",
+      "bytes": 12014,
+      "sha256": "25339144ef5dbdf7696e10a962c87ecd12b9e90f0def335e2f6d941e3e047209"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-013/tp_provider_current.py",
+      "bytes": 22792,
+      "sha256": "4102780d88444cd33d610df8a1410fa0b7a3a9667721c7dd6d474d50fafeccd7"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/attention_v1.py",
+      "sha256": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
+      "bytes": 88246
+    },
+    {
+      "path": "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/model_runner_v1.py",
+      "bytes": 258160,
+      "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+    },
+    {
+      "path": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v2/SOURCE_INDEX.json",
+      "bytes": 7323,
+      "sha256": "2f4e76f5f90eb6106118d71404a6e0acfbcb81a5f093302bf69dcb0c078388a9"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-public-model-runtime-source-v1-001/gpu_model_runner.py",
+      "bytes": 334736,
+      "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/ascend_linear.py",
+      "bytes": 21354,
+      "sha256": "3f14a92019a6612158ba41a26c358c8f164cbda66b743c518a5e4019694b5dc3"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/custom_op.py",
+      "bytes": 13924,
+      "sha256": "4b4ba01623005d6a93698eaec007a934dd512bf9ec7241090927de819621de2e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/linear_op.py",
+      "bytes": 30813,
+      "sha256": "0333d3229dbfed3010413510b76395a9ad89138dfd1d578caab057573b6cd0fb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/parameter.py",
+      "bytes": 21976,
+      "sha256": "ff6054fbd19ec932c548d562c6f4cc4506383b71cbe411fcfd554c8b1d87b510"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_core__exports.py",
+      "bytes": 4679,
+      "sha256": "1a9fdbdb0ed0b505ad7017b671d1886d1bde5521e30e32791ed5bd2c88ceb838"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_core_module_loader.py",
+      "bytes": 7088,
+      "sha256": "4ef503e59f2b7b8cf06412aff9d3e2b730c42bcfe8d7f72b0d90f36ba35b5b34"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_patches_npu_patches.py",
+      "bytes": 552,
+      "sha256": "6a73dc74b6d501b1cc319ce6d7033d0bfc5c0331e71103e4c7040f7244d569af"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_patches_patch_manager.py",
+      "bytes": 6563,
+      "sha256": "bda93a83de1ba6e950401f24d1240b8c15eed178bb89ada56de55222aa59ed34"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu_root_init_660.py",
+      "bytes": 2435,
+      "sha256": "a21f553fb9ac12f087cfdf0fb61a583be3c864d3785cff9920ec862f565d6072"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-packed3-software8-20261010-001/SOFTWARE_015E_ORIGINAL.json",
+      "bytes": 3043,
+      "sha256": "6c4937f00e4cc022ca9c2ea465db43011dc8c118b71d86880a019d7899ffeda6"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-bootstrap-off-materialize-v2-main-20261010-001/format_policy.py",
+      "bytes": 4178,
+      "sha256": "f3003c9c5eb67e7fd3cb10b9cefe0322431db21eae163ab0b2a13a02ab077b7a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-011-main-20261010-001/OWNED_NPU_OBSERVATION-1791665614952592140.json",
+      "bytes": 6896,
+      "sha256": "92c76325d28dfa8e51343c4f88f0053736a57b6ec3715cc19c6724adf1a11d47"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-boundary-v1-001/contracts.py",
+      "bytes": 6713,
+      "sha256": "3532b76c192f01d5f690414ddf5ff8bd213af02ca7fa1d0331e4b2247a32b98f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/build_inputs.py",
+      "sha256": "8bf7eea24c3d13f6cb60d632a4852bcfa8f2d67de4b0f83d9489ecb33afd34c3",
+      "bytes": 8491
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/capture_cli.py",
+      "sha256": "fd650943511abe114fc683f66976d43de11eca7487817b8b4ff71ee543823dc9",
+      "bytes": 8399
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/consume_capture.py",
+      "sha256": "074e1656bbce2c2b397e136ac84f56b3ad15c74ab6e9b2a8e3a5454ebab85e53",
+      "bytes": 9563
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/consume_inputs.py",
+      "sha256": "fad84201eeca078be0405560966134bb58726597a6a38bc7e41bb6a6b6b6b636",
+      "bytes": 3690
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/io_contract.py",
+      "sha256": "365dd5873a07d8b3e6ef2e0ae2f91852a1a63e653f0562f5809a3a61e0c7d76c",
+      "bytes": 4521
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/post_rope_live.py",
+      "sha256": "cdb7cf74ce4f0426ef88b95de77511e8c2d8f913adf15d830efa5fc562d58455",
+      "bytes": 7698
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/PREPARATION_RESULT.json",
+      "sha256": "55e02969aeaf2267d2244d721f28f505052a30161b62dc9732bce7af659a6325",
+      "bytes": 984
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/raw_sink.py",
+      "sha256": "89bf3512377b6c1c5621c46a8c7a174206e5ef3de99af722a8531922b4c1c576",
+      "bytes": 4973
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/README.md",
+      "sha256": "209027d1c64e59d912032f007a971691b9199d93006993b7d6f4c16f814dc848",
+      "bytes": 11105
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/runtime_capture.py",
+      "sha256": "c1133ea708b1345d61d6ee8e836fc44412cf9ebcc87573ca5baf14ce1ffde49c",
+      "bytes": 13756
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/SOFTWARE_TESTS.py",
+      "sha256": "dc19f7788459e86f095fc62c3fe697ebab6860ac309b8a6a7e76d62cdcf016f6",
+      "bytes": 5352
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/SOURCE_MANIFEST.sha256",
+      "sha256": "ecc5065c34b63029e44ba2be227d725c67f6437b2023aeb0e8a9916d3dbab711",
+      "bytes": 1328
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/source_pins.json",
+      "sha256": "4f97e03495040b140e4d09d5741d52aebe16d941e672f08e6095e97bf68be92c",
+      "bytes": 2983
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/tp_provider.py",
+      "sha256": "b91e0e673db50a8091dae52d992f02da7b5b2f0ed01c55eeabb6729abc43c9c7",
+      "bytes": 8118
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/training_plan.json",
+      "sha256": "572e1e328c1af4a56e884036cb3c76959f080d1b27de29cc2184bdbeb688f56f",
+      "bytes": 6683
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-001/consume_host.py",
+      "sha256": "c8fe3e48949d2a70781c6f73f94a1b9f284d74e36a6563886ad5b00988fd9385",
+      "bytes": 8662
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-001/MAIN_HOST.py",
+      "sha256": "8f85f55c69bcfa4cf94c130da006200d3d18bfc3ceeac31f7fb7b0befc2874d3",
+      "bytes": 21906
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-001/SOURCE_MANIFEST.sha256",
+      "sha256": "b6716aecbac76dcc3b192f39cc8f98127bc565d417c3a509ad6a463a77cdf6a4",
+      "bytes": 569
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-002/consume_host.py",
+      "sha256": "df6aceaa897999f93da5a0ad1f1a91fe392a63b6f6794e0ba27f3f3d0381f166",
+      "bytes": 9044
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-002/inside_cpu.py",
+      "sha256": "61eb1f4c63a79688992ab3021ec667009b22c56dc159a018da85478f1193abfe",
+      "bytes": 3452
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-002/MAIN_HOST.py",
+      "sha256": "5a5c2c2e1b183bfa4d96ae6baa111c1abcecd0c408f8d71d1627acd01b874981",
+      "bytes": 22356
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-002/resources.py",
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c",
+      "bytes": 6404
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-002/SOFTWARE_TESTS_HOST_MOUNTS.py",
+      "sha256": "8578d058fb9c8b6caa6e428b8f6966a3e044e90f7b20f0509f9c686b97423e7a",
+      "bytes": 1832
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture-host-dispatch-v1-002/SOURCE_LOCK.json",
+      "bytes": 15679,
+      "sha256": "c5af39f3c3fa0ecca939515eb4c8601afabc2ad2c96e1f94cfd6d38220f50297"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-cpu-pyarrow19-cp312-v1-003/ACTUAL_TREE.json",
+      "bytes": 136179,
+      "sha256": "a156d2006a4e5c4b0ee332d9c23184e43118c3828ea4541fe2393af74470376f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/capture_with_projection.py",
+      "sha256": "6d0537385f82aff9262fb6a63280ce4f4c20aeb5ec3402ff4d65514649579cd0",
+      "bytes": 8873
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/consume_projection.py",
+      "sha256": "e50ba1a7207f9bfc2726f6b1fda592acd62912c4af08e20e4b36c4841fc8fc8b",
+      "bytes": 7135
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/PREPARATION_RESULT.json",
+      "sha256": "2d79b9a33f71964dcf6905ecc9a1df78e42abcd06bdb3173658d0d7b032a9786",
+      "bytes": 634
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/projection_tap.py",
+      "sha256": "483278b4c469499a674e9a622b67f56dcece40c7248cccdafa45826f3b797fda",
+      "bytes": 8460
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/README.md",
+      "sha256": "a0f9a39d7a0469cff37ef4eb35e4ef648b16c6baabdf0689b9aa79888c1f0579",
+      "bytes": 4977
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/SOFTWARE_TESTS.py",
+      "sha256": "b40f5e836a140b75c91cf2f8be70b3e3b165056d3bbdaeb8799448432c66d5b5",
+      "bytes": 1327
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-capture-adapter-v1-001/SOURCE_LOCK.json",
+      "bytes": 9712,
+      "sha256": "d8eb0ca759c58a3dfbf901faf8436850b26cdfccaf2e3fee070c472f331a66ba"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-011/runtime_capture_current.py",
+      "bytes": 13900,
+      "sha256": "220773195ba1883622137ead5a5f32802bd100236c7bc393fe900b47643df699"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/capture_with_loader.py",
+      "sha256": "5ddbe68ca770f50e799701eb472c3bf94f4d8c5d66784ce67a4c11b41c7f6d82",
+      "bytes": 8784
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/consume_loader_order.py",
+      "sha256": "cd8e7a68afb493b8af683546a40a0414565729336e2ab4adfa8de7e9549f578e",
+      "bytes": 3379
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/loader_bridge.py",
+      "sha256": "7e6d322a8ebbc7d09f2b6126e68d6608beb7d7e8220326f9776bb9a2bf14895a",
+      "bytes": 2042
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/loader_order.py",
+      "sha256": "920fc67b57bbb8aa02c884ff182ddc1844fc17c23a546e04b158d1f6bec14d6a",
+      "bytes": 4881
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/order_oracle.py",
+      "sha256": "a8a85b440a39d44c42e0e57c1315bcb41f5ec2768a448343f68160a75bdcdad2",
+      "bytes": 1926
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/README.md",
+      "sha256": "8cc7852c39fa7dec81096f058c48903e3b0362a7cac67dde58913c378c56fe6c",
+      "bytes": 4352
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/SOFTWARE_TESTS.py",
+      "sha256": "65db42c90ed339be88d92a6d4c757cf8bd1ef53e7ed4f2aae030655810e22611",
+      "bytes": 2234
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-tp4-qkv-loader-order-v1-001/SOURCE_MANIFEST.sha256",
+      "sha256": "aa0c38e36bc217edfaeab4122064097b382d035ca398a931117758161ce0d9a6",
+      "bytes": 670
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/model.py",
+      "bytes": 91921,
+      "sha256": "cf5aeb9e16d6cac82426cf7e8d140741b35c503ae8b9e1fc9ba3dde53c585a62"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/qwen3_5.py",
+      "bytes": 29662,
+      "sha256": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/scheduler.py",
+      "bytes": 13052,
+      "sha256": "36bdfcf50a8f30d9f1c0dbdd3630a0075234f5c9e1a77943a934c45329f25c86"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/vllm.py",
+      "bytes": 99611,
+      "sha256": "ba062ec38d075937b73d953059cf1d0e1b96f1474990bc6d45ed45e20ba6a336"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-public-linear-660-20261008-1106-001/linear.py",
+      "sha256": "a5e099997f868a5ce670aa2afe94da90222fceace36aef4e1275f3830ee257ab",
+      "bytes": 63273
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-qwen-model-membership-660-20261008-1037-001/ascend_forward_context.py",
+      "sha256": "4e77f78996b95f36feba36af7ccd7c1ab4e73ac340d30731acb44c8b92c5ac22",
+      "bytes": 16616
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-qwen-model-membership-660-20261008-1037-001/forward_context.py",
+      "sha256": "1c6fa51e9a02a120fed5e7357afb1190516cbdfefd1c644dfcd860603f1527c5",
+      "bytes": 13434
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-qwen-model-membership-660-20261008-1037-001/qwen3_5.py",
+      "sha256": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc",
+      "bytes": 29662
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-qwen-model-membership-660-20261008-1037-001/qwen3_next.py",
+      "sha256": "8d614ce262ab9340585f9a2ad4ab117228f076e3672fcb5f04930ff0a38223ae",
+      "bytes": 30278
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-deployed-api-source-660-20261010-001/npu_format.py",
+      "bytes": 865,
+      "sha256": "8abe7bea6817f25d2360aee783afae16fe7fe2aaa46a04e7b7b865e7f2039488"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/distributed__device_communicators__npu_communicator.py",
+      "bytes": 2810,
+      "sha256": "7e84ea85f03729e62eb5a92760fe0b920654fda6059e370ae6fae80e70579a94"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/distributed__parallel_state.py",
+      "bytes": 15442,
+      "sha256": "96ba7d62ffec181f8881c82a5499a53085f9ce4fdd7087ca7ed5d738e1acfc83"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__platform__init__.py",
+      "bytes": 2785,
+      "sha256": "09a72414f791e8383692e87e50449feb66d63330ac428a14f9edd5afdcf9e627"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__platform__patch_distributed.py",
+      "bytes": 3341,
+      "sha256": "a37863ccf18652313a7defacc066202b2df6bcf3b1a2009f75dde2efc80e7815"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__worker___hccl_pg_registry.py",
+      "bytes": 9047,
+      "sha256": "a30ece7f18625c51b87a05e0c24a8ca416ebe421aaeee80f35424232e3df35ce"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__worker__init__.py",
+      "bytes": 3949,
+      "sha256": "11002e315e93b2534d1fa4e859cf5bdcfbb22caaae370a26f29fbf586144cfb6"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__worker__patch_distributed.py",
+      "bytes": 9834,
+      "sha256": "0fcc178ed9497705df47bdab59649ae59dc452f99121f95b43cd10cdc3efc411"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/utils.py",
+      "bytes": 67646,
+      "sha256": "575b45d684eabdb7ac3195d33de48bd5f3233081f78886c08be92a4a2fd2fc02"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/entrypoints__serve__utils__api_utils.py",
+      "bytes": 13348,
+      "sha256": "188370c7229b69f38a2efb2c2b40f5ac69a4b064befe7fd72c686454fe941144"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/envs.py",
+      "bytes": 101069,
+      "sha256": "b776fb6b1bae4a4f1d6c53792e65e15bd6cde7e70d5c17ef08dfeec54cd59603"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/utils__system_utils.py",
+      "bytes": 10294,
+      "sha256": "26127b114d896f776da2d5ba90eac5a023704150f07b1703eb66252bedf7eaa6"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/v1__executor__multiproc_executor.py",
+      "bytes": 42333,
+      "sha256": "a2837f18010a1f3539ea062b0824ae6dacaced0ec5813910a4b6edef7875af18"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/config__parallel.py",
+      "bytes": 41796,
+      "sha256": "0f507a228e67dcca2d9841f52ff5eb617342c4e1864af527b34c999f932f4d6a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/entrypoints__llm.py",
+      "bytes": 41059,
+      "sha256": "fd28c3f53740d196689ac97ca566bd23879d082b3e9c7eb9ca20f0a88caf6e7e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/v1__engine__core_client.py",
+      "bytes": 70555,
+      "sha256": "e41fe15caa59dfd289ae212b3eaefc20c34be87a72e779df03d970f9714b793d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/v1__serial_utils.py",
+      "bytes": 24124,
+      "sha256": "a87f4cc50114eef931834270242b94c2ed2fc7fb78e9bdb7636428d0a99bf998"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/v1__worker__worker_base.py",
+      "bytes": 12895,
+      "sha256": "a04f83667cf3a3cadbc438eed59c708af5be3409d3f98e54612bd78e2f97e631"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/deltalog-v3/source_blobs/parallel_state.py",
+      "sha256": "df02e5386bc83e6ac644ff46f0297fdd19003bd55584c629840348a5fda8473f",
+      "bytes": 83775
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+      "bytes": 6865,
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+      "bytes": 9234,
+      "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py",
+      "bytes": 22338,
+      "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/native009-public-graph-and-engine-source-v1-001/arg_utils.py",
+      "bytes": 111675,
+      "sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/source-gdn-and-torchnpu-660-20261008-0854-002/patch_qwen3_5.py",
+      "sha256": "21fc9a2064f9b490ffcf3d61bacc8ddb67806a4c7490895a33128e65438838d3",
+      "bytes": 8743
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/ascend_platform.py",
+      "bytes": 62514,
+      "sha256": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/sp4-kivi-public-worker-plugin-source-v1-001/attention.py",
+      "sha256": "06f49836a73d058c6d38f826bc6c794c3b7ae9751d12d71dfff9e5c2dbdbcd28",
+      "bytes": 31208
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+      "bytes": 1379,
+      "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
+      "bytes": 33743
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc",
+      "bytes": 16517
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py",
+      "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20",
+      "bytes": 40202
+    }
+  ],
+  "own_file_count": 44,
+  "source_count": 141,
+  "clock": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+    "bytes": 1379,
+    "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+  },
+  "portfolio_cutoff_epoch": 1791788425,
+  "original_envelope_regression_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-packed3-software8-20261010-001/SOFTWARE_015E_ORIGINAL.json",
+    "bytes": 3043,
+    "sha256": "6c4937f00e4cc022ca9c2ea465db43011dc8c118b71d86880a019d7899ffeda6"
+  },
+  "runtime_configuration_sources": [
+    {
+      "module": "vllm.config.scheduler",
+      "runtime_path": "/vllm-workspace/vllm/vllm/config/scheduler.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/scheduler.py",
+        "bytes": 13052,
+        "sha256": "36bdfcf50a8f30d9f1c0dbdd3630a0075234f5c9e1a77943a934c45329f25c86"
+      }
+    },
+    {
+      "module": "vllm.config.model",
+      "runtime_path": "/vllm-workspace/vllm/vllm/config/model.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/model.py",
+        "bytes": 91921,
+        "sha256": "cf5aeb9e16d6cac82426cf7e8d140741b35c503ae8b9e1fc9ba3dde53c585a62"
+      }
+    },
+    {
+      "module": "vllm.config.vllm",
+      "runtime_path": "/vllm-workspace/vllm/vllm/config/vllm.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-engine-config-660-20261010-001/vllm.py",
+        "bytes": 99611,
+        "sha256": "ba062ec38d075937b73d953059cf1d0e1b96f1474990bc6d45ed45e20ba6a336"
+      }
+    }
+  ],
+  "named_adaptations": [
+    "existing MATH/APPS/ARC TRAIN 256 contiguous4096 seed42, not author WikiText exact",
+    "BF16 same frozen Qwen weights; calibration precision equivalence not established",
+    "chunked-prefill enabled; every actual sample must still reach all16 FA as single full4096 fresh prefill"
+  ],
+  "resource_protocol": {
+    "max_total_seconds": 7200,
+    "cleanup_included_seconds": 180,
+    "CPU": 7,
+    "host_bytes": 536870912,
+    "cpu_guest_bytes": 8589934592,
+    "capture_guest_bytes": 68719476736,
+    "consumer_guest_bytes": 2147483648,
+    "ordinary_reserve_bytes": 8589934592,
+    "ordinary_joint_max_bytes": 77846282240,
+    "HugeTLB_added": 0,
+    "fresh_disk_bytes": 343597383680,
+    "raw_QKV_bytes": 274877906944,
+    "raw_preprojection_K_bytes": 34359738368,
+    "disk_reserve_bytes": 8589934592,
+    "physical_HBM_reserve_mib": 3072
+  },
+  "capture_scope": {
+    "samples": 256,
+    "tokens": 4096,
+    "FA_layers": 16,
+    "TP_ranks": 4,
+    "events": 16384,
+    "GDN_layers_untouched": 48
+  },
+  "software_test_count": 147,
+  "software_scope": "retained131 plus16 exact original gate AST/current host observe/raw publisher/independent consumer/actual011 counterexample/negative regressions; no native authority",
+  "software_executed": false,
+  "sameimage_CPU_executed": false,
+  "N1_executed": false,
+  "capture_executed": false,
+  "independent_raw_consumed": false,
+  "native_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "explicit_next_missing": [
+    "MAIN actual full131/source138",
+    "fresh all mounts/9 TRAIN",
+    "same660 Devices[] full inputs/23",
+    "all4 N1 + source-qualified text preprocessing beforeweights",
+    "all256 actual baseline capture",
+    "full16384 independent raw/order/projection/text-provenance consumer",
+    "actual whole-operation+stop-retain consumer",
+    "explicit calibration source rebind; no011 failed authority"
+  ],
+  "local_software_review": {
+    "status": "LOCAL_GROUPED_147_PASS",
+    "scope": "current013 source original methods and explicit software sources/tensors; actual native/sameimage/global aggregate entry not executed",
+    "group_counts": {
+      "retained": 38,
+      "dependency": 12,
+      "native_format": 8,
+      "spawn": 10,
+      "safe_named_RPC": 12,
+      "nativeTP": 16,
+      "nativeQKV": 18,
+      "nativeTextInputs": 17,
+      "exactProcBytes": 16
+    },
+    "actual_installed_software_check": "UNRUN current013 full147/source141"
+  },
+  "configuration_protocol": {
+    "same_image_CPU": "explicit torch then torch_npu; actual EngineArgs kwargs and real independent SchedulerConfig of declared scalar values only; no ModelConfig/registry inspection, no fullEngineConfig/HAL attempt; does not validate actual checkpoint class",
+    "all4_N1": "four actual tiny tensor/getter/sync results first, then unmodified full EngineArgs.create_engine_config including real ModelConfig before weights; scalar common fields and source origins independently compared",
+    "HAL_device_type_source_body": "MISSING; Ascend platform674 invokes get_ascend_device_type; no no-device safety claim and no platform stub",
+    "actual_EngineArgs_source_sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
+    "real_scheduler_metadata": "still required full4096 tokens/pad0 for every actual event",
+    "observed_ModelConfig_CPU_failure": "MAIN actual CPUprobe002 ModelConfig registry subprocess imports qwen3_5/fla/Triton Ascend get_arch SystemError; do not repeat that path",
+    "CPU_required_InitVars": "Original same660 SchedulerConfig.default_factory supplies declared is_encoder_decoder=False; max_model_len explicitly engine4097; N1 requires actual ModelConfig False and checks effective False against CPU. This is necessary scalar validation only.",
+    "compilation_config_adapter": "same common {'mode':0}; real EngineArgs.__post_init__ source converts dict to CompilationConfig; LLM and N1 use identical kwargs; actual constructor CPU and real fullEngine N1 still required"
+  },
+  "worker_source_protocol": "Explicit spawn environment before native imports/LLM constructor. Real child collective_rpc configures exact current source before original instance Session install; validates actual process start method and all34 installed hooks,48 untouched GDN. Actual native get_mp_context module/function origin pinned; no inherited parent-global patch assumption.",
+  "concurrent_CPU_peer_lease_supported": false,
+  "protected_boundary_protocol": {
+    "contract_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+      "bytes": 9234,
+      "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+    },
+    "lifecycle_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+      "bytes": 6865,
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    "external_churn_recorded": true,
+    "external_unchanged_claimed": false,
+    "own_on_protected_rejected": true,
+    "unknown_4_7_rejected": true,
+    "independent_historical_boundary_replay_required": true
+  },
+  "predecessor_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-012/SOURCE_MANIFEST.json",
+    "bytes": 75780,
+    "sha256": "ff197ec0e95b2b0489a2cb9767227c03b38d543d2460686af1aeb0fcd9f490de"
+  },
+  "mount_protocol": {
+    "host_training_root": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v2",
+    "guest_training_root": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v1",
+    "readonly": true,
+    "original_plan_unchanged": true,
+    "original_builder_unchanged": true,
+    "model_path_unchanged": true,
+    "actual_index_ref": {
+      "path": "/cache/cch/qwen36-damp-20261006/calibration-inputs/source-v2/SOURCE_INDEX.json",
+      "bytes": 7323,
+      "sha256": "2f4e76f5f90eb6106118d71404a6e0acfbcb81a5f093302bf69dcb0c078388a9"
+    },
+    "every_create_preflight_persisted_before_Docker": true,
+    "all9_training_size_sha_required": true,
+    "whole_independent_preflight_replay_required": true,
+    "no_host_alias_created": true,
+    "canonical_dict_order_replay": "inspect_mounts sorts exact destination keys; actual sort_keys persistence/roundtrip regression required",
+    "directory_identity": "dev/ino/mode stable; volatile size/mtime/ctime not claimed immutable; regular files use full stat fence and original TRAIN full size/SHA"
+  },
+  "fixture_correction": {
+    "original_test_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/SOFTWARE_TESTS.py",
+      "sha256": "dc19f7788459e86f095fc62c3fe697ebab6860ac309b8a6a7e76d62cdcf016f6",
+      "bytes": 5352
+    },
+    "original_builder_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/build_inputs.py",
+      "sha256": "8bf7eea24c3d13f6cb60d632a4852bcfa8f2d67de4b0f83d9489ecb33afd34c3",
+      "bytes": 8491
+    },
+    "original_io_contract_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/io_contract.py",
+      "sha256": "365dd5873a07d8b3e6ef2e0ae2f91852a1a63e653f0562f5809a3a61e0c7d76c",
+      "bytes": 4521
+    },
+    "original_positive_pool_tokens": 65536,
+    "corrected_positive_pool_tokens": 131072,
+    "original_repeat": {
+      "sample_id": 226,
+      "prior_sample_id": 174,
+      "pool_start": 10016
+    },
+    "actual_cpu_test_counts": [
+      15,
+      8
+    ],
+    "corrected15_source_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-005/SOFTWARE_TESTS_15.py",
+    "producer_sampling_unchanged": true,
+    "training_inputs_changed": false,
+    "uniqueness_relaxed": false,
+    "resampling_added": false,
+    "old15_failure_retained": true,
+    "random_behavior": {
+      "local_python": "CPython3.9.13",
+      "actual_local_tool_chunk": "5f9531",
+      "sameimage_python": "CPython3.12",
+      "sameimage_failure": "MAIN036d actual old15 refused duplicate full input; new15 remains UNRUN",
+      "not_python312_unique": true
+    }
+  },
+  "path_identity_correction": {
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-011",
+    "host_output_prefix": "run-skvq-current72h-projection-011-",
+    "preflight_output_prefix": "run-skvq-mount-preflight-011-",
+    "owner": "skvq-current72h-preprojection-v1-011",
+    "actual_local_entry_calls_required": true,
+    "original_003_004_negative_outputs_rejected": true,
+    "schemas_unchanged": true,
+    "literal_residue_categories": {
+      "runtime_active_old_003_004": [],
+      "test_only_old_output_negatives": [
+        "test_aggregate.py host003/004 and preflight003/004 rejected",
+        "SOFTWARE_TESTS_15.py unrelated KIVI004 wrong-output test"
+      ],
+      "historical_metadata": [
+        "predecessor_source004",
+        "original003 actual fixture failure"
+      ],
+      "old_calibration_protocol_names_preserved": [
+        "original donor001 input/producer/consumer roots and schemas",
+        "ORDER001/captureprojection001"
+      ],
+      "EXPECTS_binding": "current_contract.EXPECTED configured exactly once to new MF in every real entry; no frozen predecessor namespace mutation"
+    }
+  },
+  "cpu_input_dependency_lock_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-011/INPUT_DEPENDENCY_LOCK.json",
+    "bytes": 202291,
+    "sha256": "3b10e8e80338ec7ceaebe4a0dcf90f3b09e44f969e80840a602641e6c2bc79bb"
+  },
+  "cpu_input_dependency_inventory_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-cpu-pyarrow19-cp312-v1-003/ACTUAL_TREE.json",
+    "bytes": 136179,
+    "sha256": "a156d2006a4e5c4b0ee332d9c23184e43118c3828ea4541fe2393af74470376f"
+  },
+  "cpu_input_dependency_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-cpu-pyarrow19-cp312-v1-003/site",
+  "cpu_input_dependency_protocol": {
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-cpu-pyarrow19-cp312-v1-003/site",
+    "read_only_package_names": [
+      "pyarrow",
+      "pyarrow-19.0.1.dist-info"
+    ],
+    "actual_extracted_files": 770,
+    "actual_package_bytes": 131309886,
+    "compiled_file_ABI": "CPython3.12/aarch64 Linux",
+    "wheel_bytes": 41144566,
+    "wheel_sha256": "4d5d1ec7ec5324b98887bdc006f4d2ce534e10e60f7ad995e7875ffa0ff9cb14",
+    "installation": "two exact same-path readonly bind mounts; explicit source-pinned sys.path only; no image/PYTHONPATH change",
+    "package_import_executed": false,
+    "nine_actual_batches_executed": false,
+    "original_full_input_producer_executed": false,
+    "original_TRAIN_tokenizer_seed_sampler_and_unique_bytes_unchanged": true
+  },
+  "input_preparation_protocol": {
+    "same_controller_CPU_only_option": "--cpu-inputs-only",
+    "cpu_terminal_status": "REAL_CPU_INPUTS_CONSUMED_NO_NPU",
+    "full_capture_consumer_refuses_CPU_only": true,
+    "CPU_input_stage_does_not_launch_NPU": true,
+    "all_children_verify_same_dependency_before_original_builder_runpy": true,
+    "full_original_builder_body_byte_unchanged": true,
+    "original23_retained": true,
+    "cpu_only_total_seconds": 1200,
+    "cleanup_included_seconds": 180,
+    "007_replay": "Existing complete source-bound CPU preflight reruns under new identity before N1; no new reuse protocol or old FAILED whole authority."
+  },
+  "changed_own_sources_from_006": [
+    "current_contract.py",
+    "MAIN_HOST.py",
+    "n1_check.py",
+    "consume_host.py",
+    "test_aggregate.py",
+    "software_check.py",
+    "mount_preflight.py"
+  ],
+  "unchanged_own_sources_from_006": [
+    "resources.py",
+    "inside_cpu.py",
+    "capture_current.py",
+    "model_kwargs.py",
+    "physical_hbm.py",
+    "consume_stage.py",
+    "runtime_capture_current.py",
+    "projection_tap_current.py",
+    "consume_projection_current.py",
+    "engine_config.py",
+    "consume_whole.py",
+    "loader_bridge_current.py",
+    "SOFTWARE_TESTS_15.py",
+    "input_dependency.py",
+    "input_entry.py",
+    "test_input_dependency.py",
+    "INPUT_DEPENDENCY_LOCK.json"
+  ],
+  "added_own_sources_from_006": [
+    "n1_format.py",
+    "test_n1_format.py"
+  ],
+  "native_format_patch_chain": {
+    "root": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu_root_init_660.py",
+      "bytes": 2435,
+      "sha256": "a21f553fb9ac12f087cfdf0fb61a583be3c864d3785cff9920ec862f565d6072"
+    },
+    "loader": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_core_module_loader.py",
+      "bytes": 7088,
+      "sha256": "4ef503e59f2b7b8cf06412aff9d3e2b730c42bcfe8d7f72b0d90f36ba35b5b34"
+    },
+    "exports": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_core__exports.py",
+      "bytes": 4679,
+      "sha256": "1a9fdbdb0ed0b505ad7017b671d1886d1bde5521e30e32791ed5bd2c88ceb838"
+    },
+    "format": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-deployed-api-source-660-20261010-001/npu_format.py",
+      "bytes": 865,
+      "sha256": "8abe7bea6817f25d2360aee783afae16fe7fe2aaa46a04e7b7b865e7f2039488"
+    },
+    "patch_manager": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_patches_patch_manager.py",
+      "bytes": 6563,
+      "sha256": "bda93a83de1ba6e950401f24d1240b8c15eed178bb89ada56de55222aa59ed34"
+    },
+    "npu_patches": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/torch_npu__init_patches_npu_patches.py",
+      "bytes": 552,
+      "sha256": "6a73dc74b6d501b1cc319ce6d7033d0bfc5c0331e71103e4c7040f7244d569af"
+    }
+  },
+  "n1_format_protocol": {
+    "policy_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-bootstrap-off-materialize-v2-main-20261010-001/format_policy.py",
+      "bytes": 4178,
+      "sha256": "f3003c9c5eb67e7fd3cb10b9cefe0322431db21eae163ab0b2a13a02ab077b7a"
+    },
+    "actual_getter": "torch_npu.get_npu_format qualified against actual torch.ops.npu.get_npu_format plus all six source archives; retain exact Format.ND enum, never int/bool/foreign conversion",
+    "raw_first": "N1-rank-r-RAW_OBSERVATION.json persists actual output/repr/types, native format type/repr/name/value, getter/enum origin and whole qualification before separate arithmetic and ND semantic assertions",
+    "independent": "all4 parent and terminal whole consumer reload the exact raw3Ref and independently replay original serial/chain rules; container runtime origin descriptors compared to image archive, not opened on host",
+    "original_006_not_reinterpreted": true,
+    "algorithm_and_tolerance_unchanged": true
+  },
+  "actual_predecessor": {
+    "operation": "exec-0000000000000556",
+    "status": "FAILED",
+    "samples": 0,
+    "all4_install_passed": true,
+    "source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 70555,
+      "sha256": "9b28ccde647d5cdc702bac17af35a6723b30714956375ebd2f62244ad812af70"
+    },
+    "cause": "original pure-text embedding representation rejected by old combined root predicate; actual original argument values not saved",
+    "not_algorithm_numeric_failure": true,
+    "old_source_unchanged": true
+  },
+  "multiprocessing_runtime_sources": [
+    {
+      "module": "vllm.utils.system_utils",
+      "runtime_path": "/vllm-workspace/vllm/vllm/utils/system_utils.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/utils__system_utils.py",
+        "bytes": 10294,
+        "sha256": "26127b114d896f776da2d5ba90eac5a023704150f07b1703eb66252bedf7eaa6"
+      }
+    },
+    {
+      "module": "vllm.v1.executor.multiproc_executor",
+      "runtime_path": "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/v1__executor__multiproc_executor.py",
+        "bytes": 42333,
+        "sha256": "a2837f18010a1f3539ea062b0824ae6dacaced0ec5813910a4b6edef7875af18"
+      }
+    },
+    {
+      "module": "vllm.envs",
+      "runtime_path": "/vllm-workspace/vllm/vllm/envs.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/envs.py",
+        "bytes": 101069,
+        "sha256": "b776fb6b1bae4a4f1d6c53792e65e15bd6cde7e70d5c17ef08dfeec54cd59603"
+      }
+    },
+    {
+      "module": "vllm.entrypoints.serve.utils.api_utils",
+      "runtime_path": "/vllm-workspace/vllm/vllm/entrypoints/serve/utils/api_utils.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/entrypoints__serve__utils__api_utils.py",
+        "bytes": 13348,
+        "sha256": "188370c7229b69f38a2efb2c2b40f5ac69a4b064befe7fd72c686454fe941144"
+      }
+    }
+  ],
+  "spawn_protocol": {
+    "method": "spawn",
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "source_rows": [
+      {
+        "module": "vllm.utils.system_utils",
+        "runtime_path": "/vllm-workspace/vllm/vllm/utils/system_utils.py",
+        "snapshot": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/utils__system_utils.py",
+          "bytes": 10294,
+          "sha256": "26127b114d896f776da2d5ba90eac5a023704150f07b1703eb66252bedf7eaa6"
+        }
+      },
+      {
+        "module": "vllm.v1.executor.multiproc_executor",
+        "runtime_path": "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py",
+        "snapshot": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/v1__executor__multiproc_executor.py",
+          "bytes": 42333,
+          "sha256": "a2837f18010a1f3539ea062b0824ae6dacaced0ec5813910a4b6edef7875af18"
+        }
+      },
+      {
+        "module": "vllm.envs",
+        "runtime_path": "/vllm-workspace/vllm/vllm/envs.py",
+        "snapshot": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/envs.py",
+          "bytes": 101069,
+          "sha256": "b776fb6b1bae4a4f1d6c53792e65e15bd6cde7e70d5c17ef08dfeec54cd59603"
+        }
+      },
+      {
+        "module": "vllm.entrypoints.serve.utils.api_utils",
+        "runtime_path": "/vllm-workspace/vllm/vllm/entrypoints/serve/utils/api_utils.py",
+        "snapshot": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-and-cache-source-660-20261010-001/entrypoints__serve__utils__api_utils.py",
+          "bytes": 13348,
+          "sha256": "188370c7229b69f38a2efb2c2b40f5ac69a4b064befe7fd72c686454fe941144"
+        }
+      }
+    ],
+    "parent_raw": "SPAWN_PARENT.json; before actual LLM constructor; original native factory returns spawn",
+    "worker_raw": "each real rank/WORKER_SPAWN_INSTALL.json; actual child PID/start/public TP identity and exact source/34 instance hooks",
+    "producer_fields": [
+      "spawn_parent_ref",
+      "worker_install_results",
+      "worker_spawn_install_refs"
+    ],
+    "independent": "consume_stage.cohort reopens strict byte/SHA real parent/all4 worker receipts; old raw/order/projection oracle unchanged",
+    "original_007_failure_retained": true,
+    "resource_threshold_inputs_math_unchanged": true,
+    "guard_not_model_authority": true
+  },
+  "changed_own_sources_from_007": [
+    "current_contract.py",
+    "software_check.py",
+    "consume_host.py",
+    "consume_stage.py",
+    "test_aggregate.py",
+    "projection_tap_current.py",
+    "MAIN_HOST.py",
+    "mount_preflight.py",
+    "capture_current.py"
+  ],
+  "unchanged_own_sources_from_007": [
+    "INPUT_DEPENDENCY_LOCK.json",
+    "test_n1_format.py",
+    "runtime_capture_current.py",
+    "engine_config.py",
+    "input_dependency.py",
+    "resources.py",
+    "loader_bridge_current.py",
+    "n1_check.py",
+    "consume_projection_current.py",
+    "SOFTWARE_TESTS_15.py",
+    "n1_format.py",
+    "test_input_dependency.py",
+    "physical_hbm.py",
+    "model_kwargs.py",
+    "inside_cpu.py",
+    "input_entry.py",
+    "consume_whole.py"
+  ],
+  "added_own_sources_from_007": [
+    "spawn_startup.py",
+    "test_spawn_startup.py"
+  ],
+  "rpc_runtime_sources": [
+    {
+      "module": "vllm.v1.serial_utils",
+      "runtime_path": "/vllm-workspace/vllm/vllm/v1/serial_utils.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/v1__serial_utils.py",
+        "bytes": 24124,
+        "sha256": "a87f4cc50114eef931834270242b94c2ed2fc7fb78e9bdb7636428d0a99bf998"
+      }
+    },
+    {
+      "module": "vllm.v1.worker.worker_base",
+      "runtime_path": "/vllm-workspace/vllm/vllm/v1/worker/worker_base.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/v1__worker__worker_base.py",
+        "bytes": 12895,
+        "sha256": "a04f83667cf3a3cadbc438eed59c708af5be3409d3f98e54612bd78e2f97e631"
+      }
+    },
+    {
+      "module": "vllm.config.parallel",
+      "runtime_path": "/vllm-workspace/vllm/vllm/config/parallel.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/config__parallel.py",
+        "bytes": 41796,
+        "sha256": "0f507a228e67dcca2d9841f52ff5eb617342c4e1864af527b34c999f932f4d6a"
+      }
+    },
+    {
+      "module": "vllm.v1.engine.core_client",
+      "runtime_path": "/vllm-workspace/vllm/vllm/v1/engine/core_client.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/v1__engine__core_client.py",
+        "bytes": 70555,
+        "sha256": "e41fe15caa59dfd289ae212b3eaefc20c34be87a72e779df03d970f9714b793d"
+      }
+    },
+    {
+      "module": "vllm.entrypoints.llm",
+      "runtime_path": "/vllm-workspace/vllm/vllm/entrypoints/llm.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-worker-rpc-source-660-20261010-001/entrypoints__llm.py",
+        "bytes": 41059,
+        "sha256": "fd28c3f53740d196689ac97ca566bd23879d082b3e9c7eb9ca20f0a88caf6e7e"
+      }
+    }
+  ],
+  "rpc_protocol": {
+    "qualified_name": "rpc_extension.SKVQCaptureExtension",
+    "methods": [
+      "skvq_capture_install",
+      "skvq_capture_arm",
+      "skvq_capture_finish",
+      "skvq_capture_restore"
+    ],
+    "serialization": "native named strings only, VLLM_ALLOW_INSECURE_SERIALIZATION=0; old actual function refusal must remain",
+    "native_factory": "original WorkerWrapperBase.init_worker resolves source-defined extension and appends exact class to original NPUWorker.__bases__; original class/name/module/file/actual_worker guard unchanged",
+    "CPU": "real installed MsgpackEncoder/Decoder/core envelope + original run_method/WorkerWrapperBase getattr on explicit surrogate for all4 method signatures, replies and retained callable negative; no actual worker/hook authority",
+    "N1": "after all4 tiny, original fullEngineConfig then actual NPUWorker resolver/source/no-conflict before weights; no instance construction in qualification",
+    "worker": "real native original factory; each actual install validates direct current extension base/original NPUWorker methods, delegates old exact Session, all34 original hooks/48GDN unchanged",
+    "cleanup": "named restore delegates exact old restore even when install/source failed; MAIN exact-owned bounded stop-retain unchanged",
+    "independent": "CPU raw reconsumed by whole consumer; original spawn/hook4 receipts plus named native extension source consumed by stage; full raw/order/projection gates unchanged"
+  },
+  "changed_own_sources_from_008": [
+    "current_contract.py",
+    "engine_config.py",
+    "software_check.py",
+    "consume_host.py",
+    "consume_stage.py",
+    "test_aggregate.py",
+    "model_kwargs.py",
+    "MAIN_HOST.py",
+    "inside_cpu.py",
+    "mount_preflight.py",
+    "capture_current.py"
+  ],
+  "unchanged_own_sources_from_008": [
+    "INPUT_DEPENDENCY_LOCK.json",
+    "test_n1_format.py",
+    "runtime_capture_current.py",
+    "input_dependency.py",
+    "resources.py",
+    "loader_bridge_current.py",
+    "n1_check.py",
+    "consume_projection_current.py",
+    "SOFTWARE_TESTS_15.py",
+    "n1_format.py",
+    "test_input_dependency.py",
+    "projection_tap_current.py",
+    "physical_hbm.py",
+    "input_entry.py",
+    "consume_whole.py",
+    "spawn_startup.py",
+    "test_spawn_startup.py"
+  ],
+  "added_own_sources_from_008": [
+    "rpc_extension.py",
+    "test_rpc_extension.py"
+  ],
+  "native_tp_runtime_sources": [
+    {
+      "module": "vllm_ascend.utils",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/utils.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/utils.py",
+        "bytes": 67646,
+        "sha256": "575b45d684eabdb7ac3195d33de48bd5f3233081f78886c08be92a4a2fd2fc02"
+      }
+    },
+    {
+      "module": "vllm_ascend.distributed.parallel_state",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/distributed/parallel_state.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/distributed__parallel_state.py",
+        "bytes": 15442,
+        "sha256": "96ba7d62ffec181f8881c82a5499a53085f9ce4fdd7087ca7ed5d738e1acfc83"
+      }
+    },
+    {
+      "module": "vllm_ascend.patch.worker",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/__init__.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__worker__init__.py",
+        "bytes": 3949,
+        "sha256": "11002e315e93b2534d1fa4e859cf5bdcfbb22caaae370a26f29fbf586144cfb6"
+      }
+    },
+    {
+      "module": "vllm_ascend.patch.platform",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/platform/__init__.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__platform__init__.py",
+        "bytes": 2785,
+        "sha256": "09a72414f791e8383692e87e50449feb66d63330ac428a14f9edd5afdcf9e627"
+      }
+    },
+    {
+      "module": "vllm_ascend.patch.worker.patch_distributed",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/patch_distributed.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__worker__patch_distributed.py",
+        "bytes": 9834,
+        "sha256": "0fcc178ed9497705df47bdab59649ae59dc452f99121f95b43cd10cdc3efc411"
+      }
+    },
+    {
+      "module": "vllm_ascend.patch.platform.patch_distributed",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/platform/patch_distributed.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__platform__patch_distributed.py",
+        "bytes": 3341,
+        "sha256": "a37863ccf18652313a7defacc066202b2df6bcf3b1a2009f75dde2efc80e7815"
+      }
+    },
+    {
+      "module": "vllm_ascend.patch.worker._hccl_pg_registry",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/worker/_hccl_pg_registry.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/patch__worker___hccl_pg_registry.py",
+        "bytes": 9047,
+        "sha256": "a30ece7f18625c51b87a05e0c24a8ca416ebe421aaeee80f35424232e3df35ce"
+      }
+    },
+    {
+      "module": "vllm_ascend.distributed.device_communicators.npu_communicator",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/distributed/device_communicators/npu_communicator.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/distributed__device_communicators__npu_communicator.py",
+        "bytes": 2810,
+        "sha256": "7e84ea85f03729e62eb5a92760fe0b920654fda6059e370ae6fae80e70579a94"
+      }
+    }
+  ],
+  "native_tp_protocol": {
+    "exact_class": "vllm_ascend.patch.worker.patch_distributed.GroupCoordinatorPatch",
+    "direct_base": "original public GroupCoordinator",
+    "actual_assignment_source_sha256": "0fcc178ed9497705df47bdab59649ae59dc452f99121f95b43cd10cdc3efc411",
+    "native_device_representation": "true integer logical current NPU device, not Torch.device; bool/foreign/wrongindex rejected",
+    "before_weights": "after all4 tiny/full actual EngineConfig, original source-bound utils.adapt_patch(False), exact class/base/register/getters; actual original _init_device_communicator called on explicit use_device_communicator=False shell, no __init__/groups; actual integer representation raw persisted then gated; no liveTP/model authority",
+    "actual_worker": "already installed unique original Ascend class; real registration weakref, exact6 coordinator types/members/ranks, actual Gloo CPU/HCCL device PG, original8getters, stable PID/start/source and latched failure",
+    "independent_consumer": "derived consume_capture_current inserts strict per-rank and every-event native identity checks; tensor/stats/raw/QKV/FP64 math unchanged; original loader-order consumer imports explicitly source-bound derived consume_capture without cached foreign namespace or donor globals mutation",
+    "original_009_failure_retained": true,
+    "no_algorithm_math_or_threshold_change": true,
+    "no_collective_or_group_creation_in_observer": true
+  },
+  "changed_own_sources_from_009": [
+    "MAIN_HOST.py",
+    "capture_current.py",
+    "consume_host.py",
+    "consume_stage.py",
+    "current_contract.py",
+    "mount_preflight.py",
+    "n1_check.py",
+    "projection_tap_current.py",
+    "runtime_capture_current.py",
+    "software_check.py",
+    "test_aggregate.py",
+    "test_rpc_extension.py"
+  ],
+  "unchanged_own_sources_from_009": [
+    "INPUT_DEPENDENCY_LOCK.json",
+    "SOFTWARE_TESTS_15.py",
+    "consume_projection_current.py",
+    "consume_whole.py",
+    "engine_config.py",
+    "input_dependency.py",
+    "input_entry.py",
+    "inside_cpu.py",
+    "loader_bridge_current.py",
+    "model_kwargs.py",
+    "n1_format.py",
+    "physical_hbm.py",
+    "resources.py",
+    "rpc_extension.py",
+    "spawn_startup.py",
+    "test_input_dependency.py",
+    "test_n1_format.py",
+    "test_spawn_startup.py"
+  ],
+  "added_own_sources_from_009": [
+    "consume_capture_current.py",
+    "post_rope_current.py",
+    "test_native_tp.py",
+    "tp_provider_current.py"
+  ],
+  "native_qkv_runtime_sources": [
+    {
+      "module": "vllm.model_executor.layers.linear",
+      "runtime_path": "/vllm-workspace/vllm/vllm/model_executor/layers/linear.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-public-linear-660-20261008-1106-001/linear.py",
+        "sha256": "a5e099997f868a5ce670aa2afe94da90222fceace36aef4e1275f3830ee257ab",
+        "bytes": 63273
+      }
+    },
+    {
+      "module": "vllm_ascend.ops.linear",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/ascend_linear.py",
+        "bytes": 21354,
+        "sha256": "3f14a92019a6612158ba41a26c358c8f164cbda66b743c518a5e4019694b5dc3"
+      }
+    },
+    {
+      "module": "vllm.model_executor.custom_op",
+      "runtime_path": "/vllm-workspace/vllm/vllm/model_executor/custom_op.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/custom_op.py",
+        "bytes": 13924,
+        "sha256": "4b4ba01623005d6a93698eaec007a934dd512bf9ec7241090927de819621de2e"
+      }
+    },
+    {
+      "module": "vllm.model_executor.parameter",
+      "runtime_path": "/vllm-workspace/vllm/vllm/model_executor/parameter.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/parameter.py",
+        "bytes": 21976,
+        "sha256": "ff6054fbd19ec932c548d562c6f4cc4506383b71cbe411fcfd554c8b1d87b510"
+      }
+    },
+    {
+      "module": "vllm_ascend.ops.linear_op",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/linear_op.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-actual-linear-projection-source-660-20261010-001/linear_op.py",
+        "bytes": 30813,
+        "sha256": "0333d3229dbfed3010413510b76395a9ad89138dfd1d578caab057573b6cd0fb"
+      }
+    },
+    {
+      "module": "vllm_ascend.utils",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/utils.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/MAIN-tp-runtime-source-660-20261010-001/utils.py",
+        "bytes": 67646,
+        "sha256": "575b45d684eabdb7ac3195d33de48bd5f3233081f78886c08be92a4a2fd2fc02"
+      }
+    }
+  ],
+  "native_qkv_protocol": {
+    "exact_class": "vllm_ascend.ops.linear.AscendQKVParallelLinear",
+    "direct_base": "source-pinned public QKVParallelLinear",
+    "original_OOT_registry": "actual CustomOp/PluggableLayer op_registry_oot plus utils REGISTERED_ASCEND_OPS",
+    "constructor_loader_branch": "actual AscendUnquantizedLinearMethod is not V2_SUPPORTED; retain source public legacy QKV loader",
+    "forward": "actual own Ascend forward remains bound and invoked; initial qualification before own instance tap only",
+    "parameter": "actual unquantized ModelWeightParameter and complete typed shape/device/TP/source flags retained; no arbitrary subclasses/wrappers",
+    "raw_before_gate": "all16 actual projection class/MRO/fields/parameters per real rank, prior to first projection gate; no unobserved old failure reconstruction",
+    "N1": "actual original register_ascend_customop, exact six modules/classes/eight methods/original registry after all4 tiny/fullEngine and before weights; no model/parameter/group authority",
+    "independent": "new order oracle preserves full source-global head/channel math; new own consume_loader inserts raw/source replay and preserves all16384 event equality/full tensor/stats; explicit current module loading with cache origin/source membership guard",
+    "math_threshold_inputs_budget_clock_unchanged": true
+  },
+  "changed_own_sources_from_010": [
+    "MAIN_HOST.py",
+    "consume_host.py",
+    "consume_stage.py",
+    "current_contract.py",
+    "loader_bridge_current.py",
+    "mount_preflight.py",
+    "n1_check.py",
+    "projection_tap_current.py",
+    "software_check.py",
+    "test_aggregate.py"
+  ],
+  "unchanged_own_sources_from_010": [
+    "INPUT_DEPENDENCY_LOCK.json",
+    "SOFTWARE_TESTS_15.py",
+    "capture_current.py",
+    "consume_capture_current.py",
+    "consume_projection_current.py",
+    "consume_whole.py",
+    "engine_config.py",
+    "input_dependency.py",
+    "input_entry.py",
+    "inside_cpu.py",
+    "model_kwargs.py",
+    "n1_format.py",
+    "physical_hbm.py",
+    "post_rope_current.py",
+    "resources.py",
+    "rpc_extension.py",
+    "runtime_capture_current.py",
+    "spawn_startup.py",
+    "test_input_dependency.py",
+    "test_n1_format.py",
+    "test_native_tp.py",
+    "test_rpc_extension.py",
+    "test_spawn_startup.py",
+    "tp_provider_current.py"
+  ],
+  "added_own_sources_from_010": [
+    "consume_loader_current.py",
+    "loader_order_current.py",
+    "order_oracle_current.py",
+    "qkv_projection_current.py",
+    "test_native_qkv.py"
+  ],
+  "native_text_input_runtime_sources": [
+    {
+      "module": "vllm.v1.worker.gpu_model_runner",
+      "runtime_path": "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-public-model-runtime-source-v1-001/gpu_model_runner.py",
+        "bytes": 334736,
+        "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666"
+      }
+    },
+    {
+      "module": "vllm_ascend.worker.model_runner_v1",
+      "runtime_path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py",
+      "snapshot": {
+        "path": "/cache/cch/flashinfer-native-abi-v1-20261007-1716-001/source_snapshots/model_runner_v1.py",
+        "bytes": 258160,
+        "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+      }
+    },
+    {
+      "module": "vllm.model_executor.models.qwen3_5",
+      "runtime_path": "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py",
+      "snapshot": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/source-qwen-model-membership-660-20261008-1037-001/qwen3_5.py",
+        "sha256": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc",
+        "bytes": 29662
+      }
+    }
+  ],
+  "native_text_input_protocol": {
+    "primary_delta": "source-qualified original GPUModelRunner pure-text embed_input_ids return -> actual native root embeddings buffer",
+    "actual_native_embedding_compute_unchanged": true,
+    "original_root_call_unchanged": true,
+    "raw_before_representation_assert": true,
+    "token_ids": 4096,
+    "external_prompt_embeddings": false,
+    "media": false,
+    "pipeline": false,
+    "root_buffer_same_typed_alias": true,
+    "root_bitwise_equals_retained_original_return": true,
+    "extra_retained_original_embedding_tensor": true,
+    "no_tensor_clone_or_duplicate_embedding_compute": true,
+    "maximum_retained_A16_embedding_bytes_per_rank": 41943040,
+    "retained_memory_charge": "inside unchanged physical HBM3GiB and 64GiB cgroup; may fail closed, no budget enlargement",
+    "hooks": {
+      "cache": 16,
+      "projection": 16,
+      "model": 1,
+      "embed": 1,
+      "sink": 1,
+      "total": 35
+    },
+    "actual_stage_pending": true,
+    "independent_input_consumer": "all1024 actual rank/sample provenance, original source parsed once per whole consume;16FA exactlysameRef perrank/sample; all raw math/order checks unchanged"
+  },
+  "changed_own_sources_from_011": [
+    "runtime_capture_current.py",
+    "current_contract.py",
+    "n1_check.py",
+    "software_check.py",
+    "consume_host.py",
+    "test_aggregate.py",
+    "MAIN_HOST.py",
+    "mount_preflight.py",
+    "spawn_startup.py",
+    "test_spawn_startup.py",
+    "test_rpc_extension.py",
+    "consume_capture_current.py"
+  ],
+  "added_own_sources_from_011": [
+    "text_input_current.py",
+    "consume_text_input_current.py",
+    "test_text_input.py"
+  ],
+  "unchanged_own_sources_from_011": [
+    "INPUT_DEPENDENCY_LOCK.json",
+    "test_n1_format.py",
+    "engine_config.py",
+    "input_dependency.py",
+    "resources.py",
+    "loader_bridge_current.py",
+    "consume_projection_current.py",
+    "consume_stage.py",
+    "SOFTWARE_TESTS_15.py",
+    "n1_format.py",
+    "test_input_dependency.py",
+    "projection_tap_current.py",
+    "physical_hbm.py",
+    "model_kwargs.py",
+    "inside_cpu.py",
+    "input_entry.py",
+    "consume_whole.py",
+    "capture_current.py",
+    "rpc_extension.py",
+    "tp_provider_current.py",
+    "post_rope_current.py",
+    "test_native_tp.py",
+    "qkv_projection_current.py",
+    "loader_order_current.py",
+    "order_oracle_current.py",
+    "consume_loader_current.py",
+    "test_native_qkv.py"
+  ],
+  "source_only_readiness": "SOURCE_FROZEN_FOR_MAIN_REVIEW_ONLY; full current installed147/source141 and actual image/N1/capture/whole remain UNRUN",
+  "changed_own_sources_from_012": [
+    "current_contract.py",
+    "software_check.py",
+    "consume_host.py",
+    "test_aggregate.py",
+    "MAIN_HOST.py",
+    "mount_preflight.py"
+  ],
+  "added_own_sources_from_012": [
+    "process_cmdline.py",
+    "test_process_cmdline.py"
+  ],
+  "unchanged_own_sources_from_012": [
+    "INPUT_DEPENDENCY_LOCK.json",
+    "test_n1_format.py",
+    "runtime_capture_current.py",
+    "engine_config.py",
+    "input_dependency.py",
+    "resources.py",
+    "loader_bridge_current.py",
+    "n1_check.py",
+    "consume_projection_current.py",
+    "consume_stage.py",
+    "SOFTWARE_TESTS_15.py",
+    "n1_format.py",
+    "test_input_dependency.py",
+    "projection_tap_current.py",
+    "physical_hbm.py",
+    "model_kwargs.py",
+    "inside_cpu.py",
+    "input_entry.py",
+    "consume_whole.py",
+    "capture_current.py",
+    "spawn_startup.py",
+    "test_spawn_startup.py",
+    "rpc_extension.py",
+    "test_rpc_extension.py",
+    "tp_provider_current.py",
+    "post_rope_current.py",
+    "consume_capture_current.py",
+    "test_native_tp.py",
+    "qkv_projection_current.py",
+    "loader_order_current.py",
+    "order_oracle_current.py",
+    "consume_loader_current.py",
+    "test_native_qkv.py",
+    "text_input_current.py",
+    "consume_text_input_current.py",
+    "test_text_input.py"
+  ],
+  "process_cmdline_protocol": {
+    "schema": "skvq.actual-proc-cmdline-raw/v1",
+    "primitive_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86",
+      "bytes": 33743
+    },
+    "old_actual_observation_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-011-main-20261010-001/OWNED_NPU_OBSERVATION-1791665614952592140.json",
+      "bytes": 6896,
+      "sha256": "92c76325d28dfa8e51343c4f88f0053736a57b6ec3715cc19c6724adf1a11d47"
+    },
+    "old_observation_scope": "original filtered argv/hash counterexample only; no original cmdline bytes and no upgrade to raw PASS",
+    "capture": "original h.gate_process ownership gate retained; exact bounded /proc bytes, before/after original PID/start/cgroup/cmdline identity fence, all NUL segments retained as raw hex; persist before assertion",
+    "consumer": "strict new raw source/primitive/whole bytes/size/SHA and original filtered argv; not single-NUL reserialization, not hardcoded 138/141 padding",
+    "maximum_cmdline_bytes": 65536,
+    "permission_unreadable_PIDreuse_foreign_refused": true,
+    "adjacent_audit": "N1 and TP provider hash raw cmdline directly; only whole-host consumer reconstructed singleton NUL",
+    "actual_current_native_executed": false,
+    "original_gate_ownership_order": "Control first calls unchanged h.gate_process and exact chip/CID guard; helper source-qualifies primitive and fences that same original proof with before/raw/after",
+    "invalid_raw_before_assert": true
+  }
+}
