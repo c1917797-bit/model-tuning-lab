@@ -1,0 +1,73 @@
+{
+  "schema": "hypic-r18-c32-2048-preregistration/v1",
+  "question": "Does the original HYPIC monkeypatch retain quality at the default max-2048/c32 ruler on physical NPU0-3, with explicit LongBench-v2 segments?",
+  "source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+  "treatment_switch": "VLLM_ASCEND_HYPIC_ENABLE: 0 versus 1",
+  "model": "Qwen3.6-27B",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "evaluator_sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0",
+  "physical_npus": [0, 1, 2, 3],
+  "forbidden_npus": [4, 5, 6, 7],
+  "cpu_set": "112-191",
+  "service_port": 8223,
+  "tp": 4,
+  "max_model_len": 41984,
+  "gpu_memory_utilization": 0.85,
+  "material_cache_max_mb": 3584,
+  "max_materialized_segments": 10,
+  "max_output_tokens": 2048,
+  "natural_eos": true,
+  "temperature": 0,
+  "seed": 0,
+  "enable_thinking": false,
+  "longbench": {
+    "dataset": "LongBench-v2",
+    "dataset_sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+    "samples": 127,
+    "repetitions": 3,
+    "concurrency": 32,
+    "warm_requests_per_sample": 2,
+    "explicit_segment_ends": true,
+    "score_all_requests_including_cold_or_fallback": true
+  },
+  "gsm8k": {
+    "dataset_sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+    "samples": 1319,
+    "repetitions": 3,
+    "concurrency": 32,
+    "classification": "off-path model-quality safety unless a separately frozen payload proves HYPIC eligibility"
+  },
+  "arm_order": ["no-cache", "hypic-only"],
+  "phase_order": ["longbench-pair", "gsm8k-pair"],
+  "arm_roots": {
+    "no-cache": {
+      "longbench": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r18-c32-full-baseline",
+      "gsm8k": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r18-c32-gsm8k-baseline"
+    },
+    "hypic-only": {
+      "longbench": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r18-c32-full-hypic",
+      "gsm8k": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r18-c32-gsm8k-hypic"
+    }
+  },
+  "longbench_controller": "r18_c32_longbench_adapter.py",
+  "longbench_independent_auditor": "r18_c32_longbench_audit.py",
+  "quality_rule": "Report full integer correct/total and each repetition. Candidate mean must stay within the measured baseline-run range for each required dataset and prespecified LongBench difficulty/length category, and its length-limit rate must not exceed the baseline-run maximum. Preserve stricter all-nonnegative and historical lenses separately; do not change this rule after candidate results.",
+  "activation_rule": "A serialized four-worker scored sentinel and aggregate hot count are required observations; per-request four-worker proof is unavailable in the original source and must not be claimed. Score every request regardless of activation. An aggregate hot shortfall limits mechanism attribution, not the validity of a complete all-request quality pair.",
+  "canary_rule": "Before full scoring, use a <=512-token deterministic prompt with exact baseline/candidate text agreement and zero within-arm variance. Keep its requests out of the scored suite.",
+  "integrated_capacity_wave": "After one serialized scored LongBench sentinel, score 32 distinct eligible samples concurrently and check the physical guard before admitting the remaining scored samples. This first c32 wave is part of the frozen 127x3 suite, not a duplicated pilot. Record aggregate activation and do not post-hoc remove cold requests.",
+  "isolation_rule": "Fresh direct-route physical NPU0-3 and port 8223 admission; 10-second physical-process guard during each arm; stop and release only the identity-verified owned container on interference or error.",
+  "reuse_rule": "Do not reuse r13-r17 or clean2 as the r18 matched baseline: source, output cap, concurrency, explicit payload and cache material-capacity identities are not jointly identical.",
+  "performance_rule": "Do not splice later-source r13 performance into original-source r18 quality. After a quality-admissible r18 decision, collect fresh matching original-source repeated performance and isolation evidence.",
+  "time_feasibility": "Historical clean2 c32 both-dataset services each took about 2h17; allow at least 6h for four r18 service phases plus admission, audit and cleanup, subject to actual physical-lane availability. Do not shrink samples/repetitions/cap to fit a deadline.",
+  "file_sha256": {
+    "r18_c32_longbench_adapter.py": "3dd6472a9785c105339ed077322d2ab1909d830a4ddcf23b06f7cd6345615f38",
+    "r18_c32_longbench_audit.py": "27d1df78ea8c73edd44896fe091c500d5772fd8fb14f9c141d879ad575a40406",
+    "test_r18_c32_longbench.py": "1f4a6a0d129aedb8b54f1776a73f24a1eb574edf99e66b65b3ebad04c6d933e2",
+    "r16_original_source_full_adapter.py": "78f1043df97936c4862593ec268ace9b13af0b929c5fefa47c3cfaccedfb8600",
+    "hotpath_quality_full.py": "8ee34e61635731038df4312763ca2cac72b31578980a24539ca442fe7979c06d",
+    "binding_off_quality.py": "714012b683142201fc4cf40d734f4d48f53210d7ade93479bf550e27020db0c4"
+  },
+  "phase_admission": "LongBench may start after its own controller, canary, integrated c32 wave, independent auditor and focused regressions are validated offline, with fresh physical-lane/port admission. GSM8K may start only after its own controller and independent auditor are likewise frozen and tested. Neither phase alone establishes full quality acceptance.",
+  "state": "LongBench offline checks and 127 workstream regressions passed; physical NPU0-3 and port admission pending; GSM8K controller/auditor pending"
+}

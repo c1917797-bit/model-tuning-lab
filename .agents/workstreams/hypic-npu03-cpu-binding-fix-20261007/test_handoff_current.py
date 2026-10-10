@@ -59,6 +59,8 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(task["r13_quality_audit"]["sha256"],
                          "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b")
         self.assertIsNone(task["active_attempt"])
+        self.assertEqual(task["r17_cap_isolation_design"]["quality_decision"],
+                         "REJECT_OR_QUALIFY")
         self.assertEqual(task["r13_baseline_attempt"]["arm"], "no-cache")
         self.assertEqual(task["r13_baseline_attempt"]["controller_operation"],
                          "exec-0000000000001a76")
@@ -83,9 +85,8 @@ class HandoffTests(unittest.TestCase):
         self.assertIn("before service health", failure["status"])
         self.assertIn("127x3", task["goal_horizons"]["short_term"])
         self.assertIn("all 29", task["goal_horizons"]["long_term"])
-        self.assertIn("Do not rerun completed HYPIC phases",
-                      task["next_action"])
-        self.assertIn("Skill cases", task["next_action"])
+        self.assertIn("2048/c32", task["next_action"])
+        self.assertIn("GSM8K", task["next_action"])
         self.assertEqual(task["timeboxed_milestone_plan"]["deadline_utc"],
                          "2026-10-09T17:21:24Z")
         self.assertEqual(len(task["timeboxed_milestone_plan"]["milestones"]), 6)

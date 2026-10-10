@@ -227,13 +227,7 @@
     "resource_limit": "physical NPU0-3 and port 8223 only; never NPU4-7; do not stop or modify foreign work",
     "retry_budget": "one attempt; no retry6 without fresh explicit authorization"
   },
-  "active_attempt": {
-    "campaign": "cache10r17-cap1024",
-    "arm": "hypic-only",
-    "controller_operation": "exec-0000000000000158",
-    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r17-cap1024-full-hypic",
-    "state": "running; launched after independently valid baseline and fresh physical NPU0-3 plus port 8223 idle proof"
-  },
+  "active_attempt": null,
   "r17_baseline_terminal": {
     "controller_operation": "exec-000000000000012b",
     "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r17-cap1024-full-baseline",
@@ -1088,6 +1082,18 @@
     "quality_decision": "REJECT_OR_QUALIFY",
     "source_identity_isolation_and_exact_release_valid": true,
     "terminal_report": "HYPIC_R17_CAP1024_TERMINAL_AUDIT_20261010.md"
+  },
+  "r18_default_quality": {
+    "preregistration": "HYPIC_R18_C32_2048_PREREGISTRATION_20261010.json",
+    "source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "max_output_tokens": 2048,
+    "concurrency": 32,
+    "longbench_controller": "r18_c32_longbench_adapter.py",
+    "longbench_independent_auditor": "r18_c32_longbench_audit.py",
+    "offline_checks": "both-arm no-device configuration checks and 127 workstream unit tests passed",
+    "device_state": "not-started",
+    "gsm8k_controller_and_auditor": "pending",
+    "full_quality_decision": "not-yet-measured"
   },
   "next_action": "Freeze and run the missing original-source 2048/c32 explicit-segment paired LongBench-v2 plus matched GSM8K quality ruler and deterministic canary, with fresh baseline unless complete service/payload/evaluator/raw identity proves reuse. First run offline controller/auditor tests and c32 capacity admission; before any device action re-resolve chicaihong01/ma and prove physical NPU0-3 and port 8223 idle. Keep deployment quality separate from per-request mechanism attribution, continuous isolation and exact release. Do not rerun r13-r17 roots, splice later-source speed into original-source quality, run isolated GDN, use NPU4-7 or stop external work. Match original-source performance only if quality-admissible. GitHub HTTPS authentication is unavailable; do not claim remote/main sync or repeat unchanged failed push."
 }

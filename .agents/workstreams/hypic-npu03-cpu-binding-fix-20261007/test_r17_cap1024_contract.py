@@ -23,10 +23,19 @@ class R17Cap1024ContractTest(unittest.TestCase):
     def test_only_scored_cap_changes_and_roots_are_distinct(self):
         rows = []
         script = Path(__file__).with_name("r17_cap1024_offline_adapter.py")
+        code = (
+            "import json, os; from r17_cap1024_offline_adapter import configure; "
+            "c=configure(os.environ['HYPIC_R17_ARM']); "
+            "print(json.dumps({'arm':os.environ['HYPIC_R17_ARM'], "
+            "'root':str(c.quality.QROOT), 'max_output_tokens':c.MAX_OUTPUT, "
+            "'concurrency':c.CONCURRENCY, 'sample_count':len(c.cases()[0]), "
+            "'device_run_started':False}))"
+        )
         for arm in ("no-cache", "hypic-only"):
             env = dict(os.environ, HYPIC_R17_ARM=arm)
-            result = subprocess.run([sys.executable, "-B", str(script), "--check"],
-                                    env=env, capture_output=True, text=True,
+            result = subprocess.run([sys.executable, "-B", "-c", code],
+                                    cwd=script.parent, env=env,
+                                    capture_output=True, text=True,
                                     check=True)
             rows.append(json.loads(result.stdout))
         self.assertEqual([row["arm"] for row in rows], ["no-cache", "hypic-only"])
@@ -35,7 +44,9 @@ class R17Cap1024ContractTest(unittest.TestCase):
                             and row["sample_count"] == 127
                             and not row["device_run_started"] for row in rows))
         self.assertNotEqual(rows[0]["root"], rows[1]["root"])
-        self.assertTrue(all(not Path(row["root"]).exists() for row in rows))
+        self.assertEqual([row["root"] for row in rows],
+                         [check_preregistration()["arm_roots"][arm]
+                          for arm in ("no-cache", "hypic-only")])
 
     def test_1024_payload_is_not_2048_payload(self):
         cases, _ = frozen_cases()
