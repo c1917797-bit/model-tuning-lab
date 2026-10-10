@@ -1,0 +1,88 @@
+{
+  "schema": "qwen36.kivi.same-image-ingress-stage/v1",
+  "observed_utc": "2026-10-10T06:00:00Z",
+  "scope": "Same660 Python3.12 original scheduler literal import and eight stdlib software fixtures, not NPU or model acceptance.",
+  "source_manifest": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-actual-ingress8-same660-cpu-v1-backup-user72h-20261010-001/SOURCE_MANIFEST.json",
+    "sha256": "e5291d9b622908203ffdab9c21d26660fd1d1c8994cf80db94aab9060ebe7ad4"
+  },
+  "operations": [
+    {
+      "id": "exec-000000000000014a",
+      "exit": 0,
+      "kind": "static compile4/source178/defaultOFF/help"
+    },
+    {
+      "id": "exec-000000000000014c",
+      "exit": 0,
+      "seconds": 18.489,
+      "kind": "actual same-image original8"
+    },
+    {
+      "id": "exec-000000000000014d",
+      "exit": 0,
+      "seconds": 0.472,
+      "kind": "independent resource/source/cleanup/raw-result consumption"
+    }
+  ],
+  "originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-same660-ingress-execution-20261010-001/STATIC_014A_ORIGINAL.json",
+      "sha256": "67c7efbbd79404e75866baadae2e9e379f367a1df70a0d982d0b6198b0a4f4dc"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-same660-ingress-execution-20261010-001/ORIENTATION_014B_ORIGINAL.json",
+      "sha256": "7e150901cbee9e546247564fb1b299b31441302f9b28270849274b272bc9eed8"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-same660-ingress-execution-20261010-001/CPU_014C_ORIGINAL.json",
+      "sha256": "370cacb49ff0a90f9b6940acfe6abf8403d47a8e1e5a1109a11c41f35ad1fb15"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-same660-ingress-execution-20261010-001/CONSUMER_014D_ORIGINAL.json",
+      "sha256": "28fbd3e429ed082465dc4a44c9e6626399df59ff433a9fe1cbb2b82cbcf8a529"
+    }
+  ],
+  "host_result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-ingress8-same660-001-main-20261010-001/HOST_RESULT.json",
+    "bytes": 311171,
+    "sha256": "97f0aacda0add1fbaff587afb34784fa9c594a11c7568cece589e45174a67508"
+  },
+  "independent_consumer": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-kivi-ingress8-same660-001-whole-main-20261010-001.json",
+    "bytes": 967,
+    "sha256": "c4ca70e47ce1e688012bfda354918ee44c8ca59ac1a96fb9f97b63155e11d28a"
+  },
+  "owned_container": {
+    "cid": "91ec1f1b0ef22c5af018068a8d5c4d5f13d3397db6ae566593016da494b8d50c",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "pid": 0,
+    "oom": false,
+    "devices": []
+  },
+  "first_failure_preserved": {
+    "id": "exec-0000000000000138",
+    "cause": "host Python3.9 cannot import original PEP604 annotations; failed before eight tests",
+    "decision": "Run unchanged source in actual matching Python3.12 image, no AST/source projection or gate relaxation."
+  },
+  "acceptance": {
+    "software8": true,
+    "npu": false,
+    "model": false,
+    "e2e": false,
+    "task_accuracy": false
+  },
+  "next": "Actual packed2/4 three-kernel native numerical/lifecycle with original unquantized K/V and independent bit/scale/minimum + attention oracle; prior native176 clock remains closed.",
+  "adakv": "V6 software193/materialization104 only; first-repair full-model90min no longer fits. Inconclusive implementation, not paper rejection.",
+  "clocks": {
+    "first_repair_cutoff": "2026-10-10T07:00:25Z",
+    "portfolio_cutoff": "2026-10-12T07:00:25Z",
+    "kivi_new_formal_start": null
+  },
+  "git": {
+    "prior_local_commit": "b151b1a550af5faaa545e317d4eb0ca68cba62d6",
+    "push": "0148 timed out;0149 proved local commit but did not prove remote publication"
+  }
+}

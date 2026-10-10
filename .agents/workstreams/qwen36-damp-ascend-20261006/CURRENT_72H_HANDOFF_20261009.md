@@ -1,5 +1,32 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 06:00 UTC
+
+Read KIVI_SAME_IMAGE_INGRESS8_20261010.json first. Original014c actually
+completed0 in18.489s: unchanged scheduler literal import and original8 stdlib
+tests ran under same660 Python3.12. Independent014d raw/source/resource/cleanup
+consumption completed0. Exact owned91ec1f1 CID is stopped-retained/Pid0/noOOM,
+Devices[]. Four original operation envelopes saved outside Git and API verified.
+This resolves host3.9 import failure0138; it is CPU-only, not numeric/model gain.
+
+CURRENT no live NPU or CPU producer from this stage. NEXT lowbit prepares
+actual packed2/4 three-kernel numerical/lifecycle producer and independent raw
+K/V bit/scale/minimum plus readout oracle; sparse owner reuses a reviewed
+single-card host adapter. MAIN admits all execution, preparers API-onlyCPU0.
+No ready complete model successor. Fresh014b4–7 idle snapshot is NOT later
+admission;0–3 external HYPIC remains protected. Cards are idle due to missing
+executable native successor, not falsely blamed on external occupation.
+
+AdaKV V6 remains repaired-but-NPU-unverified; fixed first-repair90min full model
+no longer fits. No clock/coverage reset. Input00a7 original terminal remains
+missing: existing artifact recovery may prove data integrity but must retain
+original_operation_verified:false, not forge a whole receipt or re-download.
+SparQ HBM contributor remains UNKNOWN, not paper-wide failure/OOM proof.
+
+Prior local commit b151b1a is real;0148 push timed out and is not confirmed.
+No new throughput, TTFT/TPOT or task scores. First repairOct10 07:00:25Z and
+portfolioOct12 07:00:25Z unchanged. HugeTLB32GiB SPENT. Older entries historical.
+
 ## Current execution — 2026-10-10 05:46 UTC
 
 Read ADAKV030_FA_LAYOUT_AUDIT_FAILURE_20261010.json first.
